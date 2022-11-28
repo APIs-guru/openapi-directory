@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import enterprisecrmeventbusprotovaluetype
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class EnterpriseCrmEventbusProtoPropertyEntry:
-    key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
-    value: Optional[enterprisecrmeventbusprotovaluetype.EnterpriseCrmEventbusProtoValueType] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'value' }})
+    r"""EnterpriseCrmEventbusProtoPropertyEntry
+    Key-value pair of EventBus property.
+    """
+    
+    key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('key') }})
+    value: Optional[EnterpriseCrmEventbusProtoValueType] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('value') }})
     

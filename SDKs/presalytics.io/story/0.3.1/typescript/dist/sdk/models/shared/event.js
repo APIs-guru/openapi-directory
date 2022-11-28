@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // Event
 /**
  * An Story Event object
@@ -33,51 +33,51 @@ var Event = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=attributes" }),
+        SpeakeasyMetadata({ data: "json, name=attributes" }),
         __metadata("design:type", String)
     ], Event.prototype, "attributes", void 0);
     __decorate([
-        Metadata({ data: "json, name=chat_prompt" }),
+        SpeakeasyMetadata({ data: "json, name=chat_prompt" }),
         __metadata("design:type", String)
     ], Event.prototype, "chatPrompt", void 0);
     __decorate([
-        Metadata({ data: "json, name=conversation_id" }),
+        SpeakeasyMetadata({ data: "json, name=conversation_id" }),
         __metadata("design:type", String)
     ], Event.prototype, "conversationId", void 0);
     __decorate([
-        Metadata({ data: "json, name=created_at" }),
+        SpeakeasyMetadata({ data: "json, name=created_at" }),
         __metadata("design:type", Date)
     ], Event.prototype, "createdAt", void 0);
     __decorate([
-        Metadata({ data: "json, name=created_by" }),
+        SpeakeasyMetadata({ data: "json, name=created_by" }),
         __metadata("design:type", String)
     ], Event.prototype, "createdBy", void 0);
     __decorate([
-        Metadata({ data: "json, name=dom_selectors" }),
+        SpeakeasyMetadata({ data: "json, name=dom_selectors" }),
         __metadata("design:type", String)
     ], Event.prototype, "domSelectors", void 0);
     __decorate([
-        Metadata({ data: "json, name=id" }),
+        SpeakeasyMetadata({ data: "json, name=id" }),
         __metadata("design:type", String)
     ], Event.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "json, name=is_chat_hidden" }),
+        SpeakeasyMetadata({ data: "json, name=is_chat_hidden" }),
         __metadata("design:type", Boolean)
     ], Event.prototype, "isChatHidden", void 0);
     __decorate([
-        Metadata({ data: "json, name=is_notify_enabled" }),
+        SpeakeasyMetadata({ data: "json, name=is_notify_enabled" }),
         __metadata("design:type", Boolean)
     ], Event.prototype, "isNotifyEnabled", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], Event.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=updated_at" }),
+        SpeakeasyMetadata({ data: "json, name=updated_at" }),
         __metadata("design:type", Date)
     ], Event.prototype, "updatedAt", void 0);
     __decorate([
-        Metadata({ data: "json, name=updated_by" }),
+        SpeakeasyMetadata({ data: "json, name=updated_by" }),
         __metadata("design:type", String)
     ], Event.prototype, "updatedBy", void 0);
     return Event;

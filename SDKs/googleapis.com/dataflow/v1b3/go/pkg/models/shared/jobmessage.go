@@ -11,6 +11,8 @@ const (
 	JobMessageMessageImportanceEnumJobMessageError             JobMessageMessageImportanceEnum = "JOB_MESSAGE_ERROR"
 )
 
+// JobMessage
+// A particular message pertaining to a Dataflow job.
 type JobMessage struct {
 	ID                *string                          `json:"id,omitempty"`
 	MessageImportance *JobMessageMessageImportanceEnum `json:"messageImportance,omitempty"`

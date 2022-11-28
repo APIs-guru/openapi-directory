@@ -1,6 +1,10 @@
 from dataclasses import dataclass, field
-from typing import Any,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -24,24 +28,24 @@ class ListStreamKeysHeaders:
 @dataclass_json
 @dataclass
 class ListStreamKeysRequestBody:
-    channel_arn: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'channelArn' }})
-    max_results: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'maxResults' }})
-    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'nextToken' }})
+    channel_arn: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('channelArn') }})
+    max_results: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('maxResults') }})
+    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('nextToken') }})
     
 
 @dataclass
 class ListStreamKeysRequest:
-    query_params: ListStreamKeysQueryParams = field(default=None)
-    headers: ListStreamKeysHeaders = field(default=None)
-    request: ListStreamKeysRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: ListStreamKeysHeaders = field()
+    query_params: ListStreamKeysQueryParams = field()
+    request: ListStreamKeysRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class ListStreamKeysResponse:
+    content_type: str = field()
+    status_code: int = field()
     access_denied_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     list_stream_keys_response: Optional[shared.ListStreamKeysResponse] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     validation_exception: Optional[Any] = field(default=None)
     

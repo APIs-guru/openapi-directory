@@ -1,8 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { HrefType } from "./hreftype";
 import { MessageCode401AisEnum } from "./messagecode401aisenum";
-import { MessageCode401AisEnum } from "./messagecode401aisenum";
+
 
 
 // Error401AisAdditionalErrors
@@ -10,13 +9,13 @@ import { MessageCode401AisEnum } from "./messagecode401aisenum";
  * This is a data element to support the declaration of additional errors in the context of [RFC7807].
 **/
 export class Error401AisAdditionalErrors extends SpeakeasyBase {
-  @Metadata({ data: "json, name=code" })
+  @SpeakeasyMetadata({ data: "json, name=code" })
   code: MessageCode401AisEnum;
 
-  @Metadata({ data: "json, name=detail" })
+  @SpeakeasyMetadata({ data: "json, name=detail" })
   detail?: string;
 
-  @Metadata({ data: "json, name=title" })
+  @SpeakeasyMetadata({ data: "json, name=title" })
   title?: string;
 }
 
@@ -28,21 +27,21 @@ export class Error401AisAdditionalErrors extends SpeakeasyBase {
  * 
 **/
 export class Error401Ais extends SpeakeasyBase {
-  @Metadata({ data: "json, name=_links", elemType: shared.HrefType })
+  @SpeakeasyMetadata({ data: "json, name=_links", elemType: HrefType })
   links?: Map<string, HrefType>;
 
-  @Metadata({ data: "json, name=additionalErrors", elemType: shared.Error401AisAdditionalErrors })
+  @SpeakeasyMetadata({ data: "json, name=additionalErrors", elemType: Error401AisAdditionalErrors })
   additionalErrors?: Error401AisAdditionalErrors[];
 
-  @Metadata({ data: "json, name=code" })
+  @SpeakeasyMetadata({ data: "json, name=code" })
   code: MessageCode401AisEnum;
 
-  @Metadata({ data: "json, name=detail" })
+  @SpeakeasyMetadata({ data: "json, name=detail" })
   detail?: string;
 
-  @Metadata({ data: "json, name=title" })
+  @SpeakeasyMetadata({ data: "json, name=title" })
   title?: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type: string;
 }

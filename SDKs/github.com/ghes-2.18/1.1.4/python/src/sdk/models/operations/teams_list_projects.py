@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class TeamsListProjectsPathParams:
-    team_id: int = field(default=None, metadata={'path_param': { 'field_name': 'team_id', 'style': 'simple', 'explode': False }})
+    team_id: int = field(metadata={'path_param': { 'field_name': 'team_id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -16,20 +16,20 @@ class TeamsListProjectsQueryParams:
 
 @dataclass
 class TeamsListProjectsHeaders:
-    accept: str = field(default=None, metadata={'header': { 'field_name': 'accept', 'style': 'simple', 'explode': False }})
+    accept: str = field(metadata={'header': { 'field_name': 'accept', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class TeamsListProjectsRequest:
-    path_params: TeamsListProjectsPathParams = field(default=None)
-    query_params: TeamsListProjectsQueryParams = field(default=None)
-    headers: TeamsListProjectsHeaders = field(default=None)
+    headers: TeamsListProjectsHeaders = field()
+    path_params: TeamsListProjectsPathParams = field()
+    query_params: TeamsListProjectsQueryParams = field()
     
 
 @dataclass
 class TeamsListProjectsResponse:
-    content_type: str = field(default=None)
-    headers: dict[str, List[str]] = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    headers: dict[str, List[str]] = field()
+    status_code: int = field()
     team_projects: Optional[List[shared.TeamProject]] = field(default=None)
     

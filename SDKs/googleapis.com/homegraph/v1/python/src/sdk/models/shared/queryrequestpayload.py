@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import agentdeviceid
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class QueryRequestPayload:
-    devices: Optional[List[agentdeviceid.AgentDeviceID]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'devices' }})
+    r"""QueryRequestPayload
+    Payload containing device IDs.
+    """
+    
+    devices: Optional[List[AgentDeviceID]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('devices') }})
     

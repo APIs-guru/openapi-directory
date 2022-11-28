@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Alarm } from "./alarm";
+
 
 
 // AlarmConfiguration
@@ -8,12 +8,12 @@ import { Alarm } from "./alarm";
  * Information about alarms associated with the deployment group.
 **/
 export class AlarmConfiguration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=alarms", elemType: shared.Alarm })
+  @SpeakeasyMetadata({ data: "json, name=alarms", elemType: Alarm })
   alarms?: Alarm[];
 
-  @Metadata({ data: "json, name=enabled" })
+  @SpeakeasyMetadata({ data: "json, name=enabled" })
   enabled?: boolean;
 
-  @Metadata({ data: "json, name=ignorePollAlarmFailure" })
+  @SpeakeasyMetadata({ data: "json, name=ignorePollAlarmFailure" })
   ignorePollAlarmFailure?: boolean;
 }

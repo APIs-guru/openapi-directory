@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // MultiClusterIngressFeatureSpec
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * **Multi-cluster Ingress**: The configuration for the MultiClusterIngress feature.
 **/
 export class MultiClusterIngressFeatureSpec extends SpeakeasyBase {
-  @Metadata({ data: "json, name=configMembership" })
+  @SpeakeasyMetadata({ data: "json, name=configMembership" })
   configMembership?: string;
 }

@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetListDashboardsActionEnum(str, Enum):
     LIST_DASHBOARDS = "ListDashboards"
@@ -10,10 +14,10 @@ class GetListDashboardsVersionEnum(str, Enum):
 
 @dataclass
 class GetListDashboardsQueryParams:
-    action: GetListDashboardsActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetListDashboardsActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: GetListDashboardsVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     dashboard_name_prefix: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'DashboardNamePrefix', 'style': 'form', 'explode': True }})
     next_token: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'NextToken', 'style': 'form', 'explode': True }})
-    version: GetListDashboardsVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -29,13 +33,13 @@ class GetListDashboardsHeaders:
 
 @dataclass
 class GetListDashboardsRequest:
-    query_params: GetListDashboardsQueryParams = field(default=None)
-    headers: GetListDashboardsHeaders = field(default=None)
+    headers: GetListDashboardsHeaders = field()
+    query_params: GetListDashboardsQueryParams = field()
     
 
 @dataclass
 class GetListDashboardsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

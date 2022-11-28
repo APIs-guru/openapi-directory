@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class CreateCliTokenPathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'Name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'Name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -21,14 +24,14 @@ class CreateCliTokenHeaders:
 
 @dataclass
 class CreateCliTokenRequest:
-    path_params: CreateCliTokenPathParams = field(default=None)
-    headers: CreateCliTokenHeaders = field(default=None)
+    headers: CreateCliTokenHeaders = field()
+    path_params: CreateCliTokenPathParams = field()
     
 
 @dataclass
 class CreateCliTokenResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     create_cli_token_response: Optional[shared.CreateCliTokenResponse] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

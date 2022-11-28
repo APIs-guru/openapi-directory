@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class ServicecontrolServicesAllocateQuotaPathParams:
-    service_name: str = field(default=None, metadata={'path_param': { 'field_name': 'serviceName', 'style': 'simple', 'explode': False }})
+    service_name: str = field(metadata={'path_param': { 'field_name': 'serviceName', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,14 +26,14 @@ class ServicecontrolServicesAllocateQuotaQueryParams:
 
 @dataclass
 class ServicecontrolServicesAllocateQuotaSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class ServicecontrolServicesAllocateQuotaSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -43,15 +44,15 @@ class ServicecontrolServicesAllocateQuotaSecurity:
 
 @dataclass
 class ServicecontrolServicesAllocateQuotaRequest:
-    path_params: ServicecontrolServicesAllocateQuotaPathParams = field(default=None)
-    query_params: ServicecontrolServicesAllocateQuotaQueryParams = field(default=None)
+    path_params: ServicecontrolServicesAllocateQuotaPathParams = field()
+    query_params: ServicecontrolServicesAllocateQuotaQueryParams = field()
+    security: ServicecontrolServicesAllocateQuotaSecurity = field()
     request: Optional[shared.AllocateQuotaRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: ServicecontrolServicesAllocateQuotaSecurity = field(default=None)
     
 
 @dataclass
 class ServicecontrolServicesAllocateQuotaResponse:
+    content_type: str = field()
+    status_code: int = field()
     allocate_quota_response: Optional[shared.AllocateQuotaResponse] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

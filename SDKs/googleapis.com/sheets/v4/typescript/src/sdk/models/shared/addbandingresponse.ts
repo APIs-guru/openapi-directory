@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BandedRange } from "./bandedrange";
+
 
 
 // AddBandingResponse
@@ -7,6 +8,6 @@ import { BandedRange } from "./bandedrange";
  * The result of adding a banded range.
 **/
 export class AddBandingResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=bandedRange" })
+  @SpeakeasyMetadata({ data: "json, name=bandedRange" })
   bandedRange?: BandedRange;
 }

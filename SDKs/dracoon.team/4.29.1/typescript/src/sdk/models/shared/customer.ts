@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CustomerAttributes } from "./customerattributes";
 
+
 export enum CustomerCustomerContractTypeEnum {
-    Demo = "demo"
-,    Free = "free"
-,    Pay = "pay"
+    Demo = "demo",
+    Free = "free",
+    Pay = "pay"
 }
 
 
@@ -13,57 +14,57 @@ export enum CustomerCustomerContractTypeEnum {
  * Customer information
 **/
 export class Customer extends SpeakeasyBase {
-  @Metadata({ data: "json, name=activationCode" })
+  @SpeakeasyMetadata({ data: "json, name=activationCode" })
   activationCode?: string;
 
-  @Metadata({ data: "json, name=companyName" })
+  @SpeakeasyMetadata({ data: "json, name=companyName" })
   companyName: string;
 
-  @Metadata({ data: "json, name=createdAt" })
+  @SpeakeasyMetadata({ data: "json, name=createdAt" })
   createdAt: Date;
 
-  @Metadata({ data: "json, name=customerAttributes" })
+  @SpeakeasyMetadata({ data: "json, name=customerAttributes" })
   customerAttributes?: CustomerAttributes;
 
-  @Metadata({ data: "json, name=customerContractType" })
+  @SpeakeasyMetadata({ data: "json, name=customerContractType" })
   customerContractType: CustomerCustomerContractTypeEnum;
 
-  @Metadata({ data: "json, name=customerUuid" })
+  @SpeakeasyMetadata({ data: "json, name=customerUuid" })
   customerUuid: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: number;
 
-  @Metadata({ data: "json, name=isLocked" })
+  @SpeakeasyMetadata({ data: "json, name=isLocked" })
   isLocked?: boolean;
 
-  @Metadata({ data: "json, name=lastLoginAt" })
+  @SpeakeasyMetadata({ data: "json, name=lastLoginAt" })
   lastLoginAt?: Date;
 
-  @Metadata({ data: "json, name=lockStatus" })
+  @SpeakeasyMetadata({ data: "json, name=lockStatus" })
   lockStatus: boolean;
 
-  @Metadata({ data: "json, name=providerCustomerId" })
+  @SpeakeasyMetadata({ data: "json, name=providerCustomerId" })
   providerCustomerId?: string;
 
-  @Metadata({ data: "json, name=quotaMax" })
+  @SpeakeasyMetadata({ data: "json, name=quotaMax" })
   quotaMax: number;
 
-  @Metadata({ data: "json, name=quotaUsed" })
+  @SpeakeasyMetadata({ data: "json, name=quotaUsed" })
   quotaUsed: number;
 
-  @Metadata({ data: "json, name=trialDaysLeft" })
+  @SpeakeasyMetadata({ data: "json, name=trialDaysLeft" })
   trialDaysLeft?: number;
 
-  @Metadata({ data: "json, name=updatedAt" })
+  @SpeakeasyMetadata({ data: "json, name=updatedAt" })
   updatedAt?: Date;
 
-  @Metadata({ data: "json, name=userMax" })
+  @SpeakeasyMetadata({ data: "json, name=userMax" })
   userMax: number;
 
-  @Metadata({ data: "json, name=userUsed" })
+  @SpeakeasyMetadata({ data: "json, name=userUsed" })
   userUsed: number;
 
-  @Metadata({ data: "json, name=webhooksMax" })
+  @SpeakeasyMetadata({ data: "json, name=webhooksMax" })
   webhooksMax?: number;
 }

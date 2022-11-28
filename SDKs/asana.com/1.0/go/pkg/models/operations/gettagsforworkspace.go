@@ -15,13 +15,13 @@ type GetTagsForWorkspaceQueryParams struct {
 	OptPretty *bool    `queryParam:"style=form,explode=true,name=opt_pretty"`
 }
 
+type GetTagsForWorkspace200ApplicationJSON struct {
+	Data []shared.TagCompact `json:"data,omitempty"`
+}
+
 type GetTagsForWorkspaceRequest struct {
 	PathParams  GetTagsForWorkspacePathParams
 	QueryParams GetTagsForWorkspaceQueryParams
-}
-
-type GetTagsForWorkspace200ApplicationJSON struct {
-	Data []shared.TagCompact `json:"data,omitempty"`
 }
 
 type GetTagsForWorkspaceResponse struct {

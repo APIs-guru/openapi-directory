@@ -1,6 +1,10 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -18,24 +22,24 @@ class UpdateControlPanelHeaders:
 @dataclass_json
 @dataclass
 class UpdateControlPanelRequestBody:
-    control_panel_arn: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ControlPanelArn' }})
-    control_panel_name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ControlPanelName' }})
+    control_panel_arn: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('ControlPanelArn') }})
+    control_panel_name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('ControlPanelName') }})
     
 
 @dataclass
 class UpdateControlPanelRequest:
-    headers: UpdateControlPanelHeaders = field(default=None)
-    request: UpdateControlPanelRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: UpdateControlPanelHeaders = field()
+    request: UpdateControlPanelRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class UpdateControlPanelResponse:
+    content_type: str = field()
+    status_code: int = field()
     access_denied_exception: Optional[Any] = field(default=None)
     conflict_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     internal_server_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     update_control_panel_response: Optional[shared.UpdateControlPanelResponse] = field(default=None)
     validation_exception: Optional[Any] = field(default=None)

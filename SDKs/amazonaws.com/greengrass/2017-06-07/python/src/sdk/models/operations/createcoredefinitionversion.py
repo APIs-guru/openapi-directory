@@ -1,12 +1,16 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,List,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
 @dataclass
 class CreateCoreDefinitionVersionPathParams:
-    core_definition_id: str = field(default=None, metadata={'path_param': { 'field_name': 'CoreDefinitionId', 'style': 'simple', 'explode': False }})
+    core_definition_id: str = field(metadata={'path_param': { 'field_name': 'CoreDefinitionId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -24,20 +28,20 @@ class CreateCoreDefinitionVersionHeaders:
 @dataclass_json
 @dataclass
 class CreateCoreDefinitionVersionRequestBody:
-    cores: Optional[List[shared.Core]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Cores' }})
+    cores: Optional[List[shared.Core]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Cores') }})
     
 
 @dataclass
 class CreateCoreDefinitionVersionRequest:
-    path_params: CreateCoreDefinitionVersionPathParams = field(default=None)
-    headers: CreateCoreDefinitionVersionHeaders = field(default=None)
-    request: CreateCoreDefinitionVersionRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: CreateCoreDefinitionVersionHeaders = field()
+    path_params: CreateCoreDefinitionVersionPathParams = field()
+    request: CreateCoreDefinitionVersionRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class CreateCoreDefinitionVersionResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     create_core_definition_version_response: Optional[shared.CreateCoreDefinitionVersionResponse] = field(default=None)
-    status_code: int = field(default=None)
     

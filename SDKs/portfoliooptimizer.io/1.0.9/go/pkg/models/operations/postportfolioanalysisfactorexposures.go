@@ -13,10 +13,6 @@ type PostPortfolioAnalysisFactorExposuresRequestBody struct {
 	Portfolios []PostPortfolioAnalysisFactorExposuresRequestBodyPortfolios `json:"portfolios"`
 }
 
-type PostPortfolioAnalysisFactorExposuresRequest struct {
-	Request PostPortfolioAnalysisFactorExposuresRequestBody `request:"mediaType=application/json"`
-}
-
 type PostPortfolioAnalysisFactorExposures200ApplicationJSONPortfolios struct {
 	PortfolioAlpha    float64   `json:"portfolioAlpha"`
 	PortfolioBetas    []float64 `json:"portfolioBetas"`
@@ -25,6 +21,10 @@ type PostPortfolioAnalysisFactorExposures200ApplicationJSONPortfolios struct {
 
 type PostPortfolioAnalysisFactorExposures200ApplicationJSON struct {
 	Portfolios []PostPortfolioAnalysisFactorExposures200ApplicationJSONPortfolios `json:"portfolios"`
+}
+
+type PostPortfolioAnalysisFactorExposuresRequest struct {
+	Request PostPortfolioAnalysisFactorExposuresRequestBody `request:"mediaType=application/json"`
 }
 
 type PostPortfolioAnalysisFactorExposuresResponse struct {

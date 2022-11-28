@@ -1,86 +1,87 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class PutDatasetPkRefreshPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=pk" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=pk" })
   pk: number;
 }
 
 
 export class PutDatasetPkRefreshSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=bearer" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" })
   jwt: shared.SchemeJwt;
 }
 
 
-export class PutDatasetPkRefreshRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: PutDatasetPkRefreshPathParams;
-
-  @Metadata()
-  security: PutDatasetPkRefreshSecurity;
-}
-
-
 export class PutDatasetPkRefresh200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class PutDatasetPkRefresh401ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class PutDatasetPkRefresh403ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class PutDatasetPkRefresh404ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class PutDatasetPkRefresh422ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class PutDatasetPkRefresh500ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
+export class PutDatasetPkRefreshRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: PutDatasetPkRefreshPathParams;
+
+  @SpeakeasyMetadata()
+  security: PutDatasetPkRefreshSecurity;
+}
+
+
 export class PutDatasetPkRefreshResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   putDatasetPkRefresh200ApplicationJsonObject?: PutDatasetPkRefresh200ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   putDatasetPkRefresh401ApplicationJsonObject?: PutDatasetPkRefresh401ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   putDatasetPkRefresh403ApplicationJsonObject?: PutDatasetPkRefresh403ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   putDatasetPkRefresh404ApplicationJsonObject?: PutDatasetPkRefresh404ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   putDatasetPkRefresh422ApplicationJsonObject?: PutDatasetPkRefresh422ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   putDatasetPkRefresh500ApplicationJsonObject?: PutDatasetPkRefresh500ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

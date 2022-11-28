@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetAppLaunchConfigurationRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=appId" })
+  @SpeakeasyMetadata({ data: "json, name=appId" })
   appId?: string;
 }

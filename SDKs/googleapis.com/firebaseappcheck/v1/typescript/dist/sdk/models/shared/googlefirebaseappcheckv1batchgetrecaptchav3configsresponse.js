@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { GoogleFirebaseAppcheckV1RecaptchaV3Config } from "./googlefirebaseappcheckv1recaptchav3config";
 // GoogleFirebaseAppcheckV1BatchGetRecaptchaV3ConfigsResponse
 /**
  * Response message for the BatchGetRecaptchaV3Configs method.
@@ -34,7 +34,7 @@ var GoogleFirebaseAppcheckV1BatchGetRecaptchaV3ConfigsResponse = /** @class */ (
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=configs", elemType: shared.GoogleFirebaseAppcheckV1RecaptchaV3Config }),
+        SpeakeasyMetadata({ data: "json, name=configs", elemType: GoogleFirebaseAppcheckV1RecaptchaV3Config }),
         __metadata("design:type", Array)
     ], GoogleFirebaseAppcheckV1BatchGetRecaptchaV3ConfigsResponse.prototype, "configs", void 0);
     return GoogleFirebaseAppcheckV1BatchGetRecaptchaV3ConfigsResponse;

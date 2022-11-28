@@ -8,6 +8,8 @@ const (
 	AutoMergeMergeMethodEnumRebase AutoMergeMergeMethodEnum = "rebase"
 )
 
+// AutoMerge
+// The status of auto merging a pull request.
 type AutoMerge struct {
 	CommitMessage string                   `json:"commit_message"`
 	CommitTitle   string                   `json:"commit_title"`

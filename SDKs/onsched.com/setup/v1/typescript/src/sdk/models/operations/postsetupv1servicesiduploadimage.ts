@@ -1,44 +1,45 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class PostSetupV1ServicesIdUploadimagePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" })
   id: string;
 }
 
 
 export class PostSetupV1ServicesIdUploadimageRequests extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/*+json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/*+json" })
   serviceImageInputModel?: shared.ServiceImageInputModel;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   serviceImageInputModel1?: shared.ServiceImageInputModel;
 
-  @Metadata({ data: "request, media_type=application/json-patch+json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json-patch+json" })
   serviceImageInputModel2?: shared.ServiceImageInputModel;
 
-  @Metadata({ data: "request, media_type=text/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=text/json" })
   serviceImageInputModel3?: shared.ServiceImageInputModel;
 }
 
 
 export class PostSetupV1ServicesIdUploadimageRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: PostSetupV1ServicesIdUploadimagePathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   request?: PostSetupV1ServicesIdUploadimageRequests;
 }
 
 
 export class PostSetupV1ServicesIdUploadimageResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   serviceViewModel?: shared.ServiceViewModel;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

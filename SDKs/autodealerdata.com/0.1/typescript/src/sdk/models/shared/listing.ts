@@ -1,46 +1,47 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class Listing extends SpeakeasyBase {
-  @Metadata({ data: "json, name=askPrice" })
+  @SpeakeasyMetadata({ data: "json, name=askPrice" })
   askPrice: number;
 
-  @Metadata({ data: "json, name=brandName" })
+  @SpeakeasyMetadata({ data: "json, name=brandName" })
   brandName: string;
 
-  @Metadata({ data: "json, name=color" })
+  @SpeakeasyMetadata({ data: "json, name=color" })
   color?: string;
 
-  @Metadata({ data: "json, name=dealerID" })
+  @SpeakeasyMetadata({ data: "json, name=dealerID" })
   dealerId: number;
 
-  @Metadata({ data: "json, name=firstSeen" })
+  @SpeakeasyMetadata({ data: "json, name=firstSeen" })
   firstSeen: Date;
 
-  @Metadata({ data: "json, name=interiorColor" })
+  @SpeakeasyMetadata({ data: "json, name=interiorColor" })
   interiorColor?: string;
 
-  @Metadata({ data: "json, name=isNew" })
+  @SpeakeasyMetadata({ data: "json, name=isNew" })
   isNew: boolean;
 
-  @Metadata({ data: "json, name=lastSeen" })
+  @SpeakeasyMetadata({ data: "json, name=lastSeen" })
   lastSeen: Date;
 
-  @Metadata({ data: "json, name=mileage" })
+  @SpeakeasyMetadata({ data: "json, name=mileage" })
   mileage?: number;
 
-  @Metadata({ data: "json, name=modelName" })
+  @SpeakeasyMetadata({ data: "json, name=modelName" })
   modelName: string;
 
-  @Metadata({ data: "json, name=msrp" })
+  @SpeakeasyMetadata({ data: "json, name=msrp" })
   msrp: number;
 
-  @Metadata({ data: "json, name=vin" })
+  @SpeakeasyMetadata({ data: "json, name=vin" })
   vin: string;
 
-  @Metadata({ data: "json, name=vinDecode" })
+  @SpeakeasyMetadata({ data: "json, name=vinDecode" })
   vinDecode?: Map<string, any>;
 
-  @Metadata({ data: "json, name=year" })
+  @SpeakeasyMetadata({ data: "json, name=year" })
   year: number;
 }

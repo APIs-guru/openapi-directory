@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
@@ -21,12 +22,12 @@ class DrivelabelsLimitsGetLabelQueryParams:
 
 @dataclass
 class DrivelabelsLimitsGetLabelRequest:
-    query_params: DrivelabelsLimitsGetLabelQueryParams = field(default=None)
+    query_params: DrivelabelsLimitsGetLabelQueryParams = field()
     
 
 @dataclass
 class DrivelabelsLimitsGetLabelResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_apps_drive_labels_v2beta_label_limits: Optional[shared.GoogleAppsDriveLabelsV2betaLabelLimits] = field(default=None)
-    status_code: int = field(default=None)
     

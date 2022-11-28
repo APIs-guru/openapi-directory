@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetRegionsRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=includeAvailabilityZones" })
+  @SpeakeasyMetadata({ data: "json, name=includeAvailabilityZones" })
   includeAvailabilityZones?: boolean;
 
-  @Metadata({ data: "json, name=includeRelationalDatabaseAvailabilityZones" })
+  @SpeakeasyMetadata({ data: "json, name=includeRelationalDatabaseAvailabilityZones" })
   includeRelationalDatabaseAvailabilityZones?: boolean;
 }

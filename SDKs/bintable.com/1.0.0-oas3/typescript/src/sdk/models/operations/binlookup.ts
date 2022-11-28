@@ -1,35 +1,36 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class BinLookupPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=bin" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=bin" })
   bin: string;
 }
 
 
 export class BinLookupQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=api_key" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=api_key" })
   apiKey: string;
 }
 
 
 export class BinLookupRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: BinLookupPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: BinLookupQueryParams;
 }
 
 
 export class BinLookupResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata({ elemType: shared.ResponseItem })
+  @SpeakeasyMetadata({ elemType: shared.ResponseItem })
   responseItems?: shared.ResponseItem[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

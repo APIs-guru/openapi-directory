@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostDetachLoadBalancerFromSubnetsActionEnum(str, Enum):
     DETACH_LOAD_BALANCER_FROM_SUBNETS = "DetachLoadBalancerFromSubnets"
@@ -10,8 +14,8 @@ class PostDetachLoadBalancerFromSubnetsVersionEnum(str, Enum):
 
 @dataclass
 class PostDetachLoadBalancerFromSubnetsQueryParams:
-    action: PostDetachLoadBalancerFromSubnetsActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostDetachLoadBalancerFromSubnetsVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostDetachLoadBalancerFromSubnetsActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostDetachLoadBalancerFromSubnetsVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostDetachLoadBalancerFromSubnetsHeaders:
 
 @dataclass
 class PostDetachLoadBalancerFromSubnetsRequest:
-    query_params: PostDetachLoadBalancerFromSubnetsQueryParams = field(default=None)
-    headers: PostDetachLoadBalancerFromSubnetsHeaders = field(default=None)
+    headers: PostDetachLoadBalancerFromSubnetsHeaders = field()
+    query_params: PostDetachLoadBalancerFromSubnetsQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostDetachLoadBalancerFromSubnetsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

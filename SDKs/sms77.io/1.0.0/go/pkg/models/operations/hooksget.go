@@ -10,10 +10,6 @@ type HooksGetQueryParams struct {
 	Action HooksGetActionEnum `queryParam:"style=form,explode=true,name=action"`
 }
 
-type HooksGetRequest struct {
-	QueryParams HooksGetQueryParams
-}
-
 type HooksGet200ApplicationJSONHooks struct {
 	Created       *string `json:"created,omitempty"`
 	EventType     *string `json:"event_type,omitempty"`
@@ -25,6 +21,10 @@ type HooksGet200ApplicationJSONHooks struct {
 type HooksGet200ApplicationJSON struct {
 	Hooks   []HooksGet200ApplicationJSONHooks `json:"hooks,omitempty"`
 	Success *bool                             `json:"success,omitempty"`
+}
+
+type HooksGetRequest struct {
+	QueryParams HooksGetQueryParams
 }
 
 type HooksGetResponse struct {

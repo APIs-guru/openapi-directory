@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 /**
  * Unambiguous identification of the account of the debtor to which a confirmation of funds consent will be applied.
 **/

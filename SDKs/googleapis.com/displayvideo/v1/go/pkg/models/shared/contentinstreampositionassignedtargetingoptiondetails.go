@@ -19,8 +19,17 @@ const (
 	ContentInstreamPositionAssignedTargetingOptionDetailsContentInstreamPositionEnumContentInstreamPositionUnknown     ContentInstreamPositionAssignedTargetingOptionDetailsContentInstreamPositionEnum = "CONTENT_INSTREAM_POSITION_UNKNOWN"
 )
 
+// ContentInstreamPositionAssignedTargetingOptionDetails
+// Assigned content instream position targeting option details. This will be populated in the content_instream_position_details field when targeting_type is `TARGETING_TYPE_CONTENT_INSTREAM_POSITION`.
 type ContentInstreamPositionAssignedTargetingOptionDetails struct {
 	AdType                  *ContentInstreamPositionAssignedTargetingOptionDetailsAdTypeEnum                  `json:"adType,omitempty"`
+	ContentInstreamPosition *ContentInstreamPositionAssignedTargetingOptionDetailsContentInstreamPositionEnum `json:"contentInstreamPosition,omitempty"`
+	TargetingOptionID       *string                                                                           `json:"targetingOptionId,omitempty"`
+}
+
+// ContentInstreamPositionAssignedTargetingOptionDetailsInput
+// Assigned content instream position targeting option details. This will be populated in the content_instream_position_details field when targeting_type is `TARGETING_TYPE_CONTENT_INSTREAM_POSITION`.
+type ContentInstreamPositionAssignedTargetingOptionDetailsInput struct {
 	ContentInstreamPosition *ContentInstreamPositionAssignedTargetingOptionDetailsContentInstreamPositionEnum `json:"contentInstreamPosition,omitempty"`
 	TargetingOptionID       *string                                                                           `json:"targetingOptionId,omitempty"`
 }

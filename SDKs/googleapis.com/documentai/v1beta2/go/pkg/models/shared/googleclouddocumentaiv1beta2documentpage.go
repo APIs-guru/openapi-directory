@@ -1,5 +1,7 @@
 package shared
 
+// GoogleCloudDocumentaiV1beta2DocumentPage
+// A page in a Document.
 type GoogleCloudDocumentaiV1beta2DocumentPage struct {
 	Blocks             []GoogleCloudDocumentaiV1beta2DocumentPageBlock             `json:"blocks,omitempty"`
 	DetectedBarcodes   []GoogleCloudDocumentaiV1beta2DocumentPageDetectedBarcode   `json:"detectedBarcodes,omitempty"`

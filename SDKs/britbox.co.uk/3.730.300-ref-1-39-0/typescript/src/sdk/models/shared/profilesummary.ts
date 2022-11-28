@@ -1,45 +1,45 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ClassificationSummary } from "./classificationsummary";
-import { ClassificationSummary } from "./classificationsummary";
+
 
 
 export class ProfileSummary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=color" })
+  @SpeakeasyMetadata({ data: "json, name=color" })
   color?: string;
 
-  @Metadata({ data: "json, name=heroAutoplay" })
+  @SpeakeasyMetadata({ data: "json, name=heroAutoplay" })
   heroAutoplay?: boolean;
 
-  @Metadata({ data: "json, name=heroWithAudio" })
+  @SpeakeasyMetadata({ data: "json, name=heroWithAudio" })
   heroWithAudio?: boolean;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: string;
 
-  @Metadata({ data: "json, name=isActive" })
+  @SpeakeasyMetadata({ data: "json, name=isActive" })
   isActive: boolean;
 
-  @Metadata({ data: "json, name=languageCode" })
+  @SpeakeasyMetadata({ data: "json, name=languageCode" })
   languageCode?: string;
 
-  @Metadata({ data: "json, name=marketingEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=marketingEnabled" })
   marketingEnabled: boolean;
 
-  @Metadata({ data: "json, name=maxRatingContentFilter" })
+  @SpeakeasyMetadata({ data: "json, name=maxRatingContentFilter" })
   maxRatingContentFilter?: ClassificationSummary;
 
-  @Metadata({ data: "json, name=minRatingPlaybackGuard" })
+  @SpeakeasyMetadata({ data: "json, name=minRatingPlaybackGuard" })
   minRatingPlaybackGuard?: ClassificationSummary;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 
-  @Metadata({ data: "json, name=pinEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=pinEnabled" })
   pinEnabled: boolean;
 
-  @Metadata({ data: "json, name=purchaseEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=purchaseEnabled" })
   purchaseEnabled: boolean;
 
-  @Metadata({ data: "json, name=segments" })
+  @SpeakeasyMetadata({ data: "json, name=segments" })
   segments: string[];
 }

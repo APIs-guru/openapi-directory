@@ -1,5 +1,7 @@
 package shared
 
+// UpdateFleetAttributesInput
+// Represents the input for a request operation.
 type UpdateFleetAttributesInput struct {
 	Description                    *string                      `json:"Description,omitempty"`
 	FleetID                        string                       `json:"FleetId"`

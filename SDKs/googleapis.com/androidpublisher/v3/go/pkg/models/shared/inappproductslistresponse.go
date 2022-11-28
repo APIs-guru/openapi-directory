@@ -1,5 +1,7 @@
 package shared
 
+// InappproductsListResponse
+// Response listing all in-app products.
 type InappproductsListResponse struct {
 	Inappproduct    []InAppProduct   `json:"inappproduct,omitempty"`
 	Kind            *string          `json:"kind,omitempty"`

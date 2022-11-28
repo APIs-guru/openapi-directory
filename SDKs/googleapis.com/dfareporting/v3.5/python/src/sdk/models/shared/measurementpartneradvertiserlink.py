@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class MeasurementPartnerAdvertiserLinkLinkStatusEnum(str, Enum):
     MEASUREMENT_PARTNER_UNLINKED = "MEASUREMENT_PARTNER_UNLINKED"
@@ -21,7 +23,7 @@ class MeasurementPartnerAdvertiserLinkMeasurementPartnerEnum(str, Enum):
 @dataclass_json
 @dataclass
 class MeasurementPartnerAdvertiserLink:
-    link_status: Optional[MeasurementPartnerAdvertiserLinkLinkStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'linkStatus' }})
-    measurement_partner: Optional[MeasurementPartnerAdvertiserLinkMeasurementPartnerEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'measurementPartner' }})
-    partner_advertiser_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'partnerAdvertiserId' }})
+    link_status: Optional[MeasurementPartnerAdvertiserLinkLinkStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('linkStatus') }})
+    measurement_partner: Optional[MeasurementPartnerAdvertiserLinkMeasurementPartnerEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('measurementPartner') }})
+    partner_advertiser_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('partnerAdvertiserId') }})
     

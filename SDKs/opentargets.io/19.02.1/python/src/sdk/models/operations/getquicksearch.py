@@ -4,17 +4,17 @@ from typing import Optional
 
 @dataclass
 class GetQuickSearchQueryParams:
-    q: str = field(default=None, metadata={'query_param': { 'field_name': 'q', 'style': 'form', 'explode': True }})
+    q: str = field(metadata={'query_param': { 'field_name': 'q', 'style': 'form', 'explode': True }})
     size: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'size', 'style': 'form', 'explode': True }})
     
 
 @dataclass
 class GetQuickSearchRequest:
-    query_params: GetQuickSearchQueryParams = field(default=None)
+    query_params: GetQuickSearchQueryParams = field()
     
 
 @dataclass
 class GetQuickSearchResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

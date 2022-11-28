@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 /**
  * Defines a policy of allowing every region by default and adding disallowed regions to a disallow list.
 **/

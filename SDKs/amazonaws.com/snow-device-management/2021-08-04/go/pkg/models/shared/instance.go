@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// Instance
+// The description of an instance. Currently, Amazon EC2 instances are the only supported instance type.
 type Instance struct {
 	AmiLaunchIndex      *int64                       `json:"amiLaunchIndex,omitempty"`
 	BlockDeviceMappings []InstanceBlockDeviceMapping `json:"blockDeviceMappings,omitempty"`

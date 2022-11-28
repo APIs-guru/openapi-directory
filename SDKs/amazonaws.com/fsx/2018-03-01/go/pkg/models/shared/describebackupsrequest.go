@@ -1,5 +1,7 @@
 package shared
 
+// DescribeBackupsRequest
+// The request object for <code>DescribeBackups</code> operation.
 type DescribeBackupsRequest struct {
 	BackupIds  []string `json:"BackupIds,omitempty"`
 	Filters    []Filter `json:"Filters,omitempty"`

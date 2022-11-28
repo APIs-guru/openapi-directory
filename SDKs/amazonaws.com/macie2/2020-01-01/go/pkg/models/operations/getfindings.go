@@ -14,6 +14,8 @@ type GetFindingsHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// GetFindingsRequestBodySortCriteria
+// Specifies criteria for sorting the results of a request for findings.
 type GetFindingsRequestBodySortCriteria struct {
 	AttributeName *string             `json:"attributeName,omitempty"`
 	OrderBy       *shared.OrderByEnum `json:"orderBy,omitempty"`

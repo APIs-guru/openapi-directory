@@ -1,35 +1,36 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
+
 export enum DiscussionApiGetFoldersFieldsEnum {
-    None = "None"
-,    LastTopic = "LastTopic"
-,    TopicCount = "TopicCount"
+    None = "None",
+    LastTopic = "LastTopic",
+    TopicCount = "TopicCount"
 }
 
 
 export class DiscussionApiGetFoldersQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=fields" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=fields" })
   fields?: DiscussionApiGetFoldersFieldsEnum;
 }
 
 
 export class DiscussionApiGetFoldersRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: DiscussionApiGetFoldersQueryParams;
 }
 
 
 export class DiscussionApiGetFoldersResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata({ elemType: shared.DiscussionFolderContract })
+  @SpeakeasyMetadata({ elemType: shared.DiscussionFolderContract })
   discussionFolderContracts?: shared.DiscussionFolderContract[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

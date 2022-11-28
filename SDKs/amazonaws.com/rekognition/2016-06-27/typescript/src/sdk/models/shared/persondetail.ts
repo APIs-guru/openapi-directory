@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BoundingBox } from "./boundingbox";
 import { FaceDetail } from "./facedetail";
+
 
 
 // PersonDetail
@@ -8,12 +9,12 @@ import { FaceDetail } from "./facedetail";
  * Details about a person detected in a video analysis request.
 **/
 export class PersonDetail extends SpeakeasyBase {
-  @Metadata({ data: "json, name=BoundingBox" })
+  @SpeakeasyMetadata({ data: "json, name=BoundingBox" })
   boundingBox?: BoundingBox;
 
-  @Metadata({ data: "json, name=Face" })
+  @SpeakeasyMetadata({ data: "json, name=Face" })
   face?: FaceDetail;
 
-  @Metadata({ data: "json, name=Index" })
+  @SpeakeasyMetadata({ data: "json, name=Index" })
   index?: number;
 }

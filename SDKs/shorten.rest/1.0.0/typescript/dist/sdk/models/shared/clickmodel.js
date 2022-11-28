@@ -22,50 +22,50 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var ClickModel = /** @class */ (function (_super) {
     __extends(ClickModel, _super);
     function ClickModel() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=alias" }),
+        SpeakeasyMetadata({ data: "json, name=alias" }),
         __metadata("design:type", String)
     ], ClickModel.prototype, "alias", void 0);
     __decorate([
-        Metadata({ data: "json, name=aliasId" }),
+        SpeakeasyMetadata({ data: "json, name=aliasId" }),
         __metadata("design:type", String)
     ], ClickModel.prototype, "aliasId", void 0);
     __decorate([
-        Metadata({ data: "json, name=browser" }),
+        SpeakeasyMetadata({ data: "json, name=browser" }),
         __metadata("design:type", String)
     ], ClickModel.prototype, "browser", void 0);
     __decorate([
-        Metadata({ data: "json, name=country" }),
+        SpeakeasyMetadata({ data: "json, name=country" }),
         __metadata("design:type", String)
     ], ClickModel.prototype, "country", void 0);
     __decorate([
-        Metadata({ data: "json, name=createdAt" }),
+        SpeakeasyMetadata({ data: "json, name=createdAt" }),
         __metadata("design:type", Number)
     ], ClickModel.prototype, "createdAt", void 0);
     __decorate([
-        Metadata({ data: "json, name=destination" }),
+        SpeakeasyMetadata({ data: "json, name=destination" }),
         __metadata("design:type", String)
     ], ClickModel.prototype, "destination", void 0);
     __decorate([
-        Metadata({ data: "json, name=domain" }),
+        SpeakeasyMetadata({ data: "json, name=domain" }),
         __metadata("design:type", String)
     ], ClickModel.prototype, "domain", void 0);
     __decorate([
-        Metadata({ data: "json, name=os" }),
+        SpeakeasyMetadata({ data: "json, name=os" }),
         __metadata("design:type", String)
     ], ClickModel.prototype, "os", void 0);
     __decorate([
-        Metadata({ data: "json, name=referrer" }),
+        SpeakeasyMetadata({ data: "json, name=referrer" }),
         __metadata("design:type", String)
     ], ClickModel.prototype, "referrer", void 0);
     __decorate([
-        Metadata({ data: "json, name=userAgent" }),
+        SpeakeasyMetadata({ data: "json, name=userAgent" }),
         __metadata("design:type", String)
     ], ClickModel.prototype, "userAgent", void 0);
     return ClickModel;

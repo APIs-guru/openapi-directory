@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Expr } from "./expr";
+
 
 
 // Binding
@@ -7,12 +8,12 @@ import { Expr } from "./expr";
  * Associates `members`, or principals, with a `role`.
 **/
 export class Binding extends SpeakeasyBase {
-  @Metadata({ data: "json, name=condition" })
+  @SpeakeasyMetadata({ data: "json, name=condition" })
   condition?: Expr;
 
-  @Metadata({ data: "json, name=members" })
+  @SpeakeasyMetadata({ data: "json, name=members" })
   members?: string[];
 
-  @Metadata({ data: "json, name=role" })
+  @SpeakeasyMetadata({ data: "json, name=role" })
   role?: string;
 }

@@ -1,7 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import resourceid
+from sdk import utils
+from . import *
 
 class ActivityContentDetailsSocialTypeEnum(str, Enum):
     UNSPECIFIED = "unspecified"
@@ -13,9 +15,13 @@ class ActivityContentDetailsSocialTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class ActivityContentDetailsSocial:
-    author: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'author' }})
-    image_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'imageUrl' }})
-    reference_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'referenceUrl' }})
-    resource_id: Optional[resourceid.ResourceID] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'resourceId' }})
-    type: Optional[ActivityContentDetailsSocialTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    r"""ActivityContentDetailsSocial
+    Details about a social network post.
+    """
+    
+    author: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('author') }})
+    image_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('imageUrl') }})
+    reference_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('referenceUrl') }})
+    resource_id: Optional[ResourceID] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('resourceId') }})
+    type: Optional[ActivityContentDetailsSocialTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('type') }})
     

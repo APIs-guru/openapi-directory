@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// PensionPensionPensionablePayCodes
+// The pensions' pensionable pay codes
 type PensionPensionPensionablePayCodes struct {
 	PayCode []string `json:"PayCode,omitempty"`
 }
@@ -21,6 +23,8 @@ const (
 	PensionPensionProRataMethodEnumWeekDaysPerCalendarMonth    PensionPensionProRataMethodEnum = "WeekDaysPerCalendarMonth"
 )
 
+// PensionPensionQualifyingPayCodes
+// The pensions' qualifying pay codes
 type PensionPensionQualifyingPayCodes struct {
 	PayCode []string `json:"PayCode,omitempty"`
 }

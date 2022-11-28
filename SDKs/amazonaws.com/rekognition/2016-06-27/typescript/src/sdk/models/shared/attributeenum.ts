@@ -1,6 +1,7 @@
 
 
+
 export enum AttributeEnum {
-    Default = "DEFAULT"
-,    All = "ALL"
+    Default = "DEFAULT",
+    All = "ALL"
 }

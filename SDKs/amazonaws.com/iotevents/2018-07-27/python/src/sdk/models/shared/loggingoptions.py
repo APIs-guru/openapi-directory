@@ -1,15 +1,20 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import detectordebugoption
-from . import logginglevel_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class LoggingOptions:
-    detector_debug_options: Optional[List[detectordebugoption.DetectorDebugOption]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'detectorDebugOptions' }})
-    enabled: bool = field(default=None, metadata={'dataclasses_json': { 'field_name': 'enabled' }})
-    level: logginglevel_enum.LoggingLevelEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'level' }})
-    role_arn: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'roleArn' }})
+    r"""LoggingOptions
+    The values of the AWS IoT Events logging options.
+    """
+    
+    enabled: bool = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('enabled') }})
+    level: LoggingLevelEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('level') }})
+    role_arn: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('roleArn') }})
+    detector_debug_options: Optional[List[DetectorDebugOption]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('detectorDebugOptions') }})
     

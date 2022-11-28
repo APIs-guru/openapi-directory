@@ -1,20 +1,20 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AutoCorrections } from "./autocorrections";
 import { ImageSearchItemCreative } from "./imagesearchitemcreative";
 import { RelatedSearch } from "./relatedsearch";
 
 
+
 export class CreativeImageSearchResults extends SpeakeasyBase {
-  @Metadata({ data: "json, name=auto_corrections" })
+  @SpeakeasyMetadata({ data: "json, name=auto_corrections" })
   autoCorrections?: AutoCorrections;
 
-  @Metadata({ data: "json, name=images", elemType: shared.ImageSearchItemCreative })
+  @SpeakeasyMetadata({ data: "json, name=images", elemType: ImageSearchItemCreative })
   images?: ImageSearchItemCreative[];
 
-  @Metadata({ data: "json, name=related_searches", elemType: shared.RelatedSearch })
+  @SpeakeasyMetadata({ data: "json, name=related_searches", elemType: RelatedSearch })
   relatedSearches?: RelatedSearch[];
 
-  @Metadata({ data: "json, name=result_count" })
+  @SpeakeasyMetadata({ data: "json, name=result_count" })
   resultCount?: number;
 }

@@ -1,31 +1,32 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetDripQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=code" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=code" })
   code?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=delay" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=delay" })
   delay?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=duration" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=duration" })
   duration?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=numbytes" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=numbytes" })
   numbytes?: number;
 }
 
 
 export class GetDripRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetDripQueryParams;
 }
 
 
 export class GetDripResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

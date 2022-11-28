@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 /**
  * A key-value pair associated with an Amazon Web Services resource. In EventBridge, rules and event buses support tagging.
 **/

@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
 @dataclass
 class UpdateFunctionConfigurationPathParams:
-    function_name: str = field(default=None, metadata={'path_param': { 'field_name': 'FunctionName', 'style': 'simple', 'explode': False }})
+    function_name: str = field(metadata={'path_param': { 'field_name': 'FunctionName', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -23,21 +28,33 @@ class UpdateFunctionConfigurationHeaders:
 @dataclass_json
 @dataclass
 class UpdateFunctionConfigurationRequestBodyDeadLetterConfig:
-    target_arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'TargetArn' }})
+    r"""UpdateFunctionConfigurationRequestBodyDeadLetterConfig
+    The <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/invocation-async.html#dlq\">dead-letter queue</a> for failed asynchronous invocations.
+    """
+    
+    target_arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('TargetArn') }})
     
 
 @dataclass_json
 @dataclass
 class UpdateFunctionConfigurationRequestBodyEnvironment:
-    variables: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Variables' }})
+    r"""UpdateFunctionConfigurationRequestBodyEnvironment
+    A function's environment variable settings. You can use environment variables to adjust your function's behavior without updating code. An environment variable is a pair of strings that are stored in a function's version-specific configuration. 
+    """
+    
+    variables: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Variables') }})
     
 
 @dataclass_json
 @dataclass
 class UpdateFunctionConfigurationRequestBodyImageConfig:
-    command: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Command' }})
-    entry_point: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'EntryPoint' }})
-    working_directory: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'WorkingDirectory' }})
+    r"""UpdateFunctionConfigurationRequestBodyImageConfig
+    Configuration values that override the container image Dockerfile settings. See <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/images-create.html#images-parms\">Container settings</a>. 
+    """
+    
+    command: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Command') }})
+    entry_point: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('EntryPoint') }})
+    working_directory: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('WorkingDirectory') }})
     
 class UpdateFunctionConfigurationRequestBodyRuntimeEnum(str, Enum):
     NODEJS = "nodejs"
@@ -70,48 +87,57 @@ class UpdateFunctionConfigurationRequestBodyRuntimeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class UpdateFunctionConfigurationRequestBodyTracingConfig:
-    mode: Optional[shared.TracingModeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Mode' }})
+    r"""UpdateFunctionConfigurationRequestBodyTracingConfig
+    The function's <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/services-xray.html\">X-Ray</a> tracing configuration. To sample and record incoming requests, set <code>Mode</code> to <code>Active</code>.
+    """
+    
+    mode: Optional[shared.TracingModeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Mode') }})
     
 
 @dataclass_json
 @dataclass
 class UpdateFunctionConfigurationRequestBodyVpcConfig:
-    security_group_ids: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'SecurityGroupIds' }})
-    subnet_ids: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'SubnetIds' }})
+    r"""UpdateFunctionConfigurationRequestBodyVpcConfig
+    The VPC security groups and subnets that are attached to a Lambda function. For more information, see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/configuration-vpc.html\">VPC Settings</a>.
+    """
+    
+    security_group_ids: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('SecurityGroupIds') }})
+    subnet_ids: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('SubnetIds') }})
     
 
 @dataclass_json
 @dataclass
 class UpdateFunctionConfigurationRequestBody:
-    dead_letter_config: Optional[UpdateFunctionConfigurationRequestBodyDeadLetterConfig] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'DeadLetterConfig' }})
-    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Description' }})
-    environment: Optional[UpdateFunctionConfigurationRequestBodyEnvironment] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Environment' }})
-    file_system_configs: Optional[List[shared.FileSystemConfig]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FileSystemConfigs' }})
-    handler: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Handler' }})
-    image_config: Optional[UpdateFunctionConfigurationRequestBodyImageConfig] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ImageConfig' }})
-    kms_key_arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'KMSKeyArn' }})
-    layers: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Layers' }})
-    memory_size: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'MemorySize' }})
-    revision_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'RevisionId' }})
-    role: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Role' }})
-    runtime: Optional[UpdateFunctionConfigurationRequestBodyRuntimeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Runtime' }})
-    timeout: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Timeout' }})
-    tracing_config: Optional[UpdateFunctionConfigurationRequestBodyTracingConfig] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'TracingConfig' }})
-    vpc_config: Optional[UpdateFunctionConfigurationRequestBodyVpcConfig] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'VpcConfig' }})
+    dead_letter_config: Optional[UpdateFunctionConfigurationRequestBodyDeadLetterConfig] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('DeadLetterConfig') }})
+    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Description') }})
+    environment: Optional[UpdateFunctionConfigurationRequestBodyEnvironment] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Environment') }})
+    file_system_configs: Optional[List[shared.FileSystemConfig]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('FileSystemConfigs') }})
+    handler: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Handler') }})
+    image_config: Optional[UpdateFunctionConfigurationRequestBodyImageConfig] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ImageConfig') }})
+    kms_key_arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('KMSKeyArn') }})
+    layers: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Layers') }})
+    memory_size: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('MemorySize') }})
+    revision_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('RevisionId') }})
+    role: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Role') }})
+    runtime: Optional[UpdateFunctionConfigurationRequestBodyRuntimeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Runtime') }})
+    timeout: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Timeout') }})
+    tracing_config: Optional[UpdateFunctionConfigurationRequestBodyTracingConfig] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('TracingConfig') }})
+    vpc_config: Optional[UpdateFunctionConfigurationRequestBodyVpcConfig] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('VpcConfig') }})
     
 
 @dataclass
 class UpdateFunctionConfigurationRequest:
-    path_params: UpdateFunctionConfigurationPathParams = field(default=None)
-    headers: UpdateFunctionConfigurationHeaders = field(default=None)
-    request: UpdateFunctionConfigurationRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: UpdateFunctionConfigurationHeaders = field()
+    path_params: UpdateFunctionConfigurationPathParams = field()
+    request: UpdateFunctionConfigurationRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class UpdateFunctionConfigurationResponse:
+    content_type: str = field()
+    status_code: int = field()
     code_signing_config_not_found_exception: Optional[Any] = field(default=None)
     code_verification_failed_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     function_configuration: Optional[shared.FunctionConfiguration] = field(default=None)
     invalid_code_signature_exception: Optional[Any] = field(default=None)
     invalid_parameter_value_exception: Optional[Any] = field(default=None)
@@ -119,6 +145,5 @@ class UpdateFunctionConfigurationResponse:
     resource_conflict_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
     service_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     too_many_requests_exception: Optional[Any] = field(default=None)
     

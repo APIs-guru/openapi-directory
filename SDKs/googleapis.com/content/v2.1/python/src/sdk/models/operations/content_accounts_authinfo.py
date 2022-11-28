@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
@@ -20,19 +21,19 @@ class ContentAccountsAuthinfoQueryParams:
 
 @dataclass
 class ContentAccountsAuthinfoSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class ContentAccountsAuthinfoRequest:
-    query_params: ContentAccountsAuthinfoQueryParams = field(default=None)
-    security: ContentAccountsAuthinfoSecurity = field(default=None)
+    query_params: ContentAccountsAuthinfoQueryParams = field()
+    security: ContentAccountsAuthinfoSecurity = field()
     
 
 @dataclass
 class ContentAccountsAuthinfoResponse:
+    content_type: str = field()
+    status_code: int = field()
     accounts_auth_info_response: Optional[shared.AccountsAuthInfoResponse] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

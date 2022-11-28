@@ -5,17 +5,17 @@ from sdk.models import shared
 
 @dataclass
 class DeleteSetupV1CalendarsBlockIDPathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class DeleteSetupV1CalendarsBlockIDRequest:
-    path_params: DeleteSetupV1CalendarsBlockIDPathParams = field(default=None)
+    path_params: DeleteSetupV1CalendarsBlockIDPathParams = field()
     
 
 @dataclass
 class DeleteSetupV1CalendarsBlockIDResponse:
+    content_type: str = field()
+    status_code: int = field()
     calendar_block_view_model: Optional[shared.CalendarBlockViewModel] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

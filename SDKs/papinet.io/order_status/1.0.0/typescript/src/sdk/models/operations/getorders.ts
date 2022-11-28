@@ -1,38 +1,39 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
+
 export enum GetOrdersOrderStatusEnum {
-    Active = "Active"
-,    Cancelled = "Cancelled"
-,    Completed = "Completed"
+    Active = "Active",
+    Cancelled = "Cancelled",
+    Completed = "Completed"
 }
 
 
 export class GetOrdersQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=limit" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=limit" })
   limit?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=offset" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=offset" })
   offset?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=orderStatus" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=orderStatus" })
   orderStatus?: GetOrdersOrderStatusEnum;
 }
 
 
 export class GetOrdersRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetOrdersQueryParams;
 }
 
 
 export class GetOrdersResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   listOfOrders?: shared.ListOfOrders;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

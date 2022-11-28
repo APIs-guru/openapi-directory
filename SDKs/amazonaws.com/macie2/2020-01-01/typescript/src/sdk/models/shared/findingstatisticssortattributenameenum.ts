@@ -1,6 +1,7 @@
 
 
+
 export enum FindingStatisticsSortAttributeNameEnum {
-    GroupKey = "groupKey"
-,    Count = "count"
+    GroupKey = "groupKey",
+    Count = "count"
 }

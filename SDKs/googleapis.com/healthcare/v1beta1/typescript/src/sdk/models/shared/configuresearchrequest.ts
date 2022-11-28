@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ConfigureSearchRequest
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Request to configure the search parameters for the specified FHIR store.
 **/
 export class ConfigureSearchRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=canonicalUrls" })
+  @SpeakeasyMetadata({ data: "json, name=canonicalUrls" })
   canonicalUrls?: string[];
 
-  @Metadata({ data: "json, name=validateOnly" })
+  @SpeakeasyMetadata({ data: "json, name=validateOnly" })
   validateOnly?: boolean;
 }

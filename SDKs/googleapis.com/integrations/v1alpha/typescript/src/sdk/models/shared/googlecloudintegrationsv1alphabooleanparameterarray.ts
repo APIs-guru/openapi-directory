@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudIntegrationsV1alphaBooleanParameterArray
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * This message only contains a field of boolean array.
 **/
 export class GoogleCloudIntegrationsV1alphaBooleanParameterArray extends SpeakeasyBase {
-  @Metadata({ data: "json, name=booleanValues" })
+  @SpeakeasyMetadata({ data: "json, name=booleanValues" })
   booleanValues?: boolean[];
 }

@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetDisassociateSubnetCidrBlockActionEnum(str, Enum):
     DISASSOCIATE_SUBNET_CIDR_BLOCK = "DisassociateSubnetCidrBlock"
@@ -10,9 +14,9 @@ class GetDisassociateSubnetCidrBlockVersionEnum(str, Enum):
 
 @dataclass
 class GetDisassociateSubnetCidrBlockQueryParams:
-    action: GetDisassociateSubnetCidrBlockActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    association_id: str = field(default=None, metadata={'query_param': { 'field_name': 'AssociationId', 'style': 'form', 'explode': True }})
-    version: GetDisassociateSubnetCidrBlockVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: GetDisassociateSubnetCidrBlockActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    association_id: str = field(metadata={'query_param': { 'field_name': 'AssociationId', 'style': 'form', 'explode': True }})
+    version: GetDisassociateSubnetCidrBlockVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -28,13 +32,13 @@ class GetDisassociateSubnetCidrBlockHeaders:
 
 @dataclass
 class GetDisassociateSubnetCidrBlockRequest:
-    query_params: GetDisassociateSubnetCidrBlockQueryParams = field(default=None)
-    headers: GetDisassociateSubnetCidrBlockHeaders = field(default=None)
+    headers: GetDisassociateSubnetCidrBlockHeaders = field()
+    query_params: GetDisassociateSubnetCidrBlockQueryParams = field()
     
 
 @dataclass
 class GetDisassociateSubnetCidrBlockResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

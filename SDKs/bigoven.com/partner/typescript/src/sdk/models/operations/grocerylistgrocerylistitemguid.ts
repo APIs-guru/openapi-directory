@@ -1,50 +1,51 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GroceryListGroceryListItemGuidPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=guid" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=guid" })
   guid: string;
 }
 
 
 export class GroceryListGroceryListItemGuidRequests extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   api2ControllersWebApiGroceryListControllerUpdateItemByGuidRequest?: shared.Api2ControllersWebApiGroceryListControllerUpdateItemByGuidRequest;
 
-  @Metadata({ data: "request, media_type=application/x-www-form-urlencoded" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/x-www-form-urlencoded" })
   api2ControllersWebApiGroceryListControllerUpdateItemByGuidRequest1?: shared.Api2ControllersWebApiGroceryListControllerUpdateItemByGuidRequest;
 
-  @Metadata({ data: "request, media_type=text/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=text/json" })
   api2ControllersWebApiGroceryListControllerUpdateItemByGuidRequest2?: shared.Api2ControllersWebApiGroceryListControllerUpdateItemByGuidRequest;
 
-  @Metadata({ data: "request, media_type=application/xml" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/xml" })
   applicationXml: Uint8Array;
 
-  @Metadata({ data: "request, media_type=text/xml" })
+  @SpeakeasyMetadata({ data: "request, media_type=text/xml" })
   textXml: Uint8Array;
 }
 
 
 export class GroceryListGroceryListItemGuidRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GroceryListGroceryListItemGuidPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   request: GroceryListGroceryListItemGuidRequests;
 }
 
 
 export class GroceryListGroceryListItemGuidResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   systemObject?: Map<string, any>;
 }

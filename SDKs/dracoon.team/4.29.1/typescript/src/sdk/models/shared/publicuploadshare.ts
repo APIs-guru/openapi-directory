@@ -1,56 +1,56 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PublicUploadedFileData } from "./publicuploadedfiledata";
-import { UserUserPublicKeyList } from "./useruserpublickeylist";
+import { UserUserPublicKeyListOutput } from "./useruserpublickeylist";
 
 
-// PublicUploadShare
+
+// PublicUploadShareOutput
 /** 
  * Upload Share information
 **/
-export class PublicUploadShare extends SpeakeasyBase {
-  @Metadata({ data: "json, name=createdAt" })
+export class PublicUploadShareOutput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=createdAt" })
   createdAt: Date;
 
-  @Metadata({ data: "json, name=creatorName" })
+  @SpeakeasyMetadata({ data: "json, name=creatorName" })
   creatorName: string;
 
-  @Metadata({ data: "json, name=creatorUsername" })
+  @SpeakeasyMetadata({ data: "json, name=creatorUsername" })
   creatorUsername?: string;
 
-  @Metadata({ data: "json, name=expireAt" })
+  @SpeakeasyMetadata({ data: "json, name=expireAt" })
   expireAt?: Date;
 
-  @Metadata({ data: "json, name=isEncrypted" })
+  @SpeakeasyMetadata({ data: "json, name=isEncrypted" })
   isEncrypted?: boolean;
 
-  @Metadata({ data: "json, name=isProtected" })
+  @SpeakeasyMetadata({ data: "json, name=isProtected" })
   isProtected: boolean;
 
-  @Metadata({ data: "json, name=maxSize" })
+  @SpeakeasyMetadata({ data: "json, name=maxSize" })
   maxSize?: number;
 
-  @Metadata({ data: "json, name=maxSlots" })
+  @SpeakeasyMetadata({ data: "json, name=maxSlots" })
   maxSlots: number;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=notes" })
+  @SpeakeasyMetadata({ data: "json, name=notes" })
   notes?: string;
 
-  @Metadata({ data: "json, name=remainingSize" })
+  @SpeakeasyMetadata({ data: "json, name=remainingSize" })
   remainingSize?: number;
 
-  @Metadata({ data: "json, name=remainingSlots" })
+  @SpeakeasyMetadata({ data: "json, name=remainingSlots" })
   remainingSlots?: number;
 
-  @Metadata({ data: "json, name=showUploadedFiles" })
+  @SpeakeasyMetadata({ data: "json, name=showUploadedFiles" })
   showUploadedFiles?: boolean;
 
-  @Metadata({ data: "json, name=uploadedFiles", elemType: shared.PublicUploadedFileData })
+  @SpeakeasyMetadata({ data: "json, name=uploadedFiles", elemType: PublicUploadedFileData })
   uploadedFiles?: PublicUploadedFileData[];
 
-  @Metadata({ data: "json, name=userUserPublicKeyList" })
-  userUserPublicKeyList?: UserUserPublicKeyList;
+  @SpeakeasyMetadata({ data: "json, name=userUserPublicKeyList" })
+  userUserPublicKeyList?: UserUserPublicKeyListOutput;
 }

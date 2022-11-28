@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 /**
  * Additional information about message delivery. All percentages are calculated with countMessagesAccepted as the denominator.
 **/

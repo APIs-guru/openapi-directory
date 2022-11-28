@@ -1,8 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Action } from "./action";
 import { Secret } from "./secret";
 import { Resources } from "./resources";
+
 
 
 // Pipeline
@@ -10,18 +10,18 @@ import { Resources } from "./resources";
  * Specifies a series of actions to execute, expressed as Docker containers.
 **/
 export class Pipeline extends SpeakeasyBase {
-  @Metadata({ data: "json, name=actions", elemType: shared.Action })
+  @SpeakeasyMetadata({ data: "json, name=actions", elemType: Action })
   actions?: Action[];
 
-  @Metadata({ data: "json, name=encryptedEnvironment" })
+  @SpeakeasyMetadata({ data: "json, name=encryptedEnvironment" })
   encryptedEnvironment?: Secret;
 
-  @Metadata({ data: "json, name=environment" })
+  @SpeakeasyMetadata({ data: "json, name=environment" })
   environment?: Map<string, string>;
 
-  @Metadata({ data: "json, name=resources" })
+  @SpeakeasyMetadata({ data: "json, name=resources" })
   resources?: Resources;
 
-  @Metadata({ data: "json, name=timeout" })
+  @SpeakeasyMetadata({ data: "json, name=timeout" })
   timeout?: string;
 }

@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostCopyDbParameterGroupActionEnum(str, Enum):
     COPY_DB_PARAMETER_GROUP = "CopyDBParameterGroup"
@@ -10,8 +14,8 @@ class PostCopyDbParameterGroupVersionEnum(str, Enum):
 
 @dataclass
 class PostCopyDbParameterGroupQueryParams:
-    action: PostCopyDbParameterGroupActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostCopyDbParameterGroupVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostCopyDbParameterGroupActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostCopyDbParameterGroupVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostCopyDbParameterGroupHeaders:
 
 @dataclass
 class PostCopyDbParameterGroupRequest:
-    query_params: PostCopyDbParameterGroupQueryParams = field(default=None)
-    headers: PostCopyDbParameterGroupHeaders = field(default=None)
+    headers: PostCopyDbParameterGroupHeaders = field()
+    query_params: PostCopyDbParameterGroupQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostCopyDbParameterGroupResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

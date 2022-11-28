@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetActivePayInstructionsReportOutputQueryParams = /** @class */ (function (_super) {
     __extends(GetActivePayInstructionsReportOutputQueryParams, _super);
@@ -30,27 +30,27 @@ var GetActivePayInstructionsReportOutputQueryParams = /** @class */ (function (_
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=ActiveOn" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=ActiveOn" }),
         __metadata("design:type", Date)
     ], GetActivePayInstructionsReportOutputQueryParams.prototype, "activeOn", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=EmployeeKey" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=EmployeeKey" }),
         __metadata("design:type", String)
     ], GetActivePayInstructionsReportOutputQueryParams.prototype, "employeeKey", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=EmployerKey" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=EmployerKey" }),
         __metadata("design:type", String)
     ], GetActivePayInstructionsReportOutputQueryParams.prototype, "employerKey", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=FromDate" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=FromDate" }),
         __metadata("design:type", Date)
     ], GetActivePayInstructionsReportOutputQueryParams.prototype, "fromDate", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=ToDate" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=ToDate" }),
         __metadata("design:type", Date)
     ], GetActivePayInstructionsReportOutputQueryParams.prototype, "toDate", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=Type" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Type" }),
         __metadata("design:type", String)
     ], GetActivePayInstructionsReportOutputQueryParams.prototype, "type", void 0);
     return GetActivePayInstructionsReportOutputQueryParams;
@@ -62,11 +62,11 @@ var GetActivePayInstructionsReportOutputHeaders = /** @class */ (function (_supe
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=Api-Version" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Api-Version" }),
         __metadata("design:type", String)
     ], GetActivePayInstructionsReportOutputHeaders.prototype, "apiVersion", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=Authorization" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Authorization" }),
         __metadata("design:type", String)
     ], GetActivePayInstructionsReportOutputHeaders.prototype, "authorization", void 0);
     return GetActivePayInstructionsReportOutputHeaders;
@@ -78,11 +78,11 @@ var GetActivePayInstructionsReportOutputRequest = /** @class */ (function (_supe
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetActivePayInstructionsReportOutputQueryParams)
     ], GetActivePayInstructionsReportOutputRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetActivePayInstructionsReportOutputHeaders)
     ], GetActivePayInstructionsReportOutputRequest.prototype, "headers", void 0);
     return GetActivePayInstructionsReportOutputRequest;
@@ -94,19 +94,19 @@ var GetActivePayInstructionsReportOutputResponse = /** @class */ (function (_sup
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetActivePayInstructionsReportOutputResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.ErrorModel)
     ], GetActivePayInstructionsReportOutputResponse.prototype, "errorModel", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], GetActivePayInstructionsReportOutputResponse.prototype, "getActivePayInstructionsReportOutput200ApplicationJsonBinaryString", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetActivePayInstructionsReportOutputResponse.prototype, "statusCode", void 0);
     return GetActivePayInstructionsReportOutputResponse;

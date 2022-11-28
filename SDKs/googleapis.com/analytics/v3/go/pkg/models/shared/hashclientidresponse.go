@@ -1,5 +1,7 @@
 package shared
 
+// HashClientIDResponse
+// JSON template for a hash Client Id response resource.
 type HashClientIDResponse struct {
 	ClientID       *string `json:"clientId,omitempty"`
 	HashedClientID *string `json:"hashedClientId,omitempty"`

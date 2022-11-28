@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ApprovalStateEnum } from "./approvalstateenum";
+
 
 
 // Approval
@@ -7,9 +8,9 @@ import { ApprovalStateEnum } from "./approvalstateenum";
  * Returns information about a specific approval on a pull request.
 **/
 export class Approval extends SpeakeasyBase {
-  @Metadata({ data: "json, name=approvalState" })
+  @SpeakeasyMetadata({ data: "json, name=approvalState" })
   approvalState?: ApprovalStateEnum;
 
-  @Metadata({ data: "json, name=userArn" })
+  @SpeakeasyMetadata({ data: "json, name=userArn" })
   userArn?: string;
 }

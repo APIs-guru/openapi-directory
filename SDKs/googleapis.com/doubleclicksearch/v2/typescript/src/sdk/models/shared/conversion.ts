@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CustomDimension } from "./customdimension";
 import { CustomMetric } from "./custommetric";
+
 
 
 // Conversion
@@ -9,105 +9,105 @@ import { CustomMetric } from "./custommetric";
  * A conversion containing data relevant to DoubleClick Search.
 **/
 export class Conversion extends SpeakeasyBase {
-  @Metadata({ data: "json, name=adGroupId" })
+  @SpeakeasyMetadata({ data: "json, name=adGroupId" })
   adGroupId?: string;
 
-  @Metadata({ data: "json, name=adId" })
+  @SpeakeasyMetadata({ data: "json, name=adId" })
   adId?: string;
 
-  @Metadata({ data: "json, name=advertiserId" })
+  @SpeakeasyMetadata({ data: "json, name=advertiserId" })
   advertiserId?: string;
 
-  @Metadata({ data: "json, name=agencyId" })
+  @SpeakeasyMetadata({ data: "json, name=agencyId" })
   agencyId?: string;
 
-  @Metadata({ data: "json, name=attributionModel" })
+  @SpeakeasyMetadata({ data: "json, name=attributionModel" })
   attributionModel?: string;
 
-  @Metadata({ data: "json, name=campaignId" })
+  @SpeakeasyMetadata({ data: "json, name=campaignId" })
   campaignId?: string;
 
-  @Metadata({ data: "json, name=channel" })
+  @SpeakeasyMetadata({ data: "json, name=channel" })
   channel?: string;
 
-  @Metadata({ data: "json, name=clickId" })
+  @SpeakeasyMetadata({ data: "json, name=clickId" })
   clickId?: string;
 
-  @Metadata({ data: "json, name=conversionId" })
+  @SpeakeasyMetadata({ data: "json, name=conversionId" })
   conversionId?: string;
 
-  @Metadata({ data: "json, name=conversionModifiedTimestamp" })
+  @SpeakeasyMetadata({ data: "json, name=conversionModifiedTimestamp" })
   conversionModifiedTimestamp?: string;
 
-  @Metadata({ data: "json, name=conversionTimestamp" })
+  @SpeakeasyMetadata({ data: "json, name=conversionTimestamp" })
   conversionTimestamp?: string;
 
-  @Metadata({ data: "json, name=countMillis" })
+  @SpeakeasyMetadata({ data: "json, name=countMillis" })
   countMillis?: string;
 
-  @Metadata({ data: "json, name=criterionId" })
+  @SpeakeasyMetadata({ data: "json, name=criterionId" })
   criterionId?: string;
 
-  @Metadata({ data: "json, name=currencyCode" })
+  @SpeakeasyMetadata({ data: "json, name=currencyCode" })
   currencyCode?: string;
 
-  @Metadata({ data: "json, name=customDimension", elemType: shared.CustomDimension })
+  @SpeakeasyMetadata({ data: "json, name=customDimension", elemType: CustomDimension })
   customDimension?: CustomDimension[];
 
-  @Metadata({ data: "json, name=customMetric", elemType: shared.CustomMetric })
+  @SpeakeasyMetadata({ data: "json, name=customMetric", elemType: CustomMetric })
   customMetric?: CustomMetric[];
 
-  @Metadata({ data: "json, name=customerId" })
+  @SpeakeasyMetadata({ data: "json, name=customerId" })
   customerId?: string;
 
-  @Metadata({ data: "json, name=deviceType" })
+  @SpeakeasyMetadata({ data: "json, name=deviceType" })
   deviceType?: string;
 
-  @Metadata({ data: "json, name=dsConversionId" })
+  @SpeakeasyMetadata({ data: "json, name=dsConversionId" })
   dsConversionId?: string;
 
-  @Metadata({ data: "json, name=engineAccountId" })
+  @SpeakeasyMetadata({ data: "json, name=engineAccountId" })
   engineAccountId?: string;
 
-  @Metadata({ data: "json, name=floodlightOrderId" })
+  @SpeakeasyMetadata({ data: "json, name=floodlightOrderId" })
   floodlightOrderId?: string;
 
-  @Metadata({ data: "json, name=inventoryAccountId" })
+  @SpeakeasyMetadata({ data: "json, name=inventoryAccountId" })
   inventoryAccountId?: string;
 
-  @Metadata({ data: "json, name=productCountry" })
+  @SpeakeasyMetadata({ data: "json, name=productCountry" })
   productCountry?: string;
 
-  @Metadata({ data: "json, name=productGroupId" })
+  @SpeakeasyMetadata({ data: "json, name=productGroupId" })
   productGroupId?: string;
 
-  @Metadata({ data: "json, name=productId" })
+  @SpeakeasyMetadata({ data: "json, name=productId" })
   productId?: string;
 
-  @Metadata({ data: "json, name=productLanguage" })
+  @SpeakeasyMetadata({ data: "json, name=productLanguage" })
   productLanguage?: string;
 
-  @Metadata({ data: "json, name=quantityMillis" })
+  @SpeakeasyMetadata({ data: "json, name=quantityMillis" })
   quantityMillis?: string;
 
-  @Metadata({ data: "json, name=revenueMicros" })
+  @SpeakeasyMetadata({ data: "json, name=revenueMicros" })
   revenueMicros?: string;
 
-  @Metadata({ data: "json, name=segmentationId" })
+  @SpeakeasyMetadata({ data: "json, name=segmentationId" })
   segmentationId?: string;
 
-  @Metadata({ data: "json, name=segmentationName" })
+  @SpeakeasyMetadata({ data: "json, name=segmentationName" })
   segmentationName?: string;
 
-  @Metadata({ data: "json, name=segmentationType" })
+  @SpeakeasyMetadata({ data: "json, name=segmentationType" })
   segmentationType?: string;
 
-  @Metadata({ data: "json, name=state" })
+  @SpeakeasyMetadata({ data: "json, name=state" })
   state?: string;
 
-  @Metadata({ data: "json, name=storeId" })
+  @SpeakeasyMetadata({ data: "json, name=storeId" })
   storeId?: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: string;
 }

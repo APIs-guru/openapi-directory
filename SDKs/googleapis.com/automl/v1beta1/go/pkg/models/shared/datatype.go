@@ -12,6 +12,8 @@ const (
 	DataTypeTypeCodeEnumCategory            DataTypeTypeCodeEnum = "CATEGORY"
 )
 
+// DataType
+// Indicated the type of data that can be stored in a structured data entity (e.g. a table).
 type DataType struct {
 	ListElementType *DataType             `json:"listElementType,omitempty"`
 	Nullable        *bool                 `json:"nullable,omitempty"`

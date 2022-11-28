@@ -22,10 +22,10 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DefinitionDocument } from "./definitiondocument";
 import { MetricsConfiguration } from "./metricsconfiguration";
+import { Tag } from "./tag";
 import { DeploymentTargetEnum } from "./deploymenttargetenum";
 var CreateSystemInstanceRequest = /** @class */ (function (_super) {
     __extends(CreateSystemInstanceRequest, _super);
@@ -33,31 +33,31 @@ var CreateSystemInstanceRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=definition" }),
+        SpeakeasyMetadata({ data: "json, name=definition" }),
         __metadata("design:type", DefinitionDocument)
     ], CreateSystemInstanceRequest.prototype, "definition", void 0);
     __decorate([
-        Metadata({ data: "json, name=flowActionsRoleArn" }),
+        SpeakeasyMetadata({ data: "json, name=flowActionsRoleArn" }),
         __metadata("design:type", String)
     ], CreateSystemInstanceRequest.prototype, "flowActionsRoleArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=greengrassGroupName" }),
+        SpeakeasyMetadata({ data: "json, name=greengrassGroupName" }),
         __metadata("design:type", String)
     ], CreateSystemInstanceRequest.prototype, "greengrassGroupName", void 0);
     __decorate([
-        Metadata({ data: "json, name=metricsConfiguration" }),
+        SpeakeasyMetadata({ data: "json, name=metricsConfiguration" }),
         __metadata("design:type", MetricsConfiguration)
     ], CreateSystemInstanceRequest.prototype, "metricsConfiguration", void 0);
     __decorate([
-        Metadata({ data: "json, name=s3BucketName" }),
+        SpeakeasyMetadata({ data: "json, name=s3BucketName" }),
         __metadata("design:type", String)
     ], CreateSystemInstanceRequest.prototype, "s3BucketName", void 0);
     __decorate([
-        Metadata({ data: "json, name=tags", elemType: shared.Tag }),
+        SpeakeasyMetadata({ data: "json, name=tags", elemType: Tag }),
         __metadata("design:type", Array)
     ], CreateSystemInstanceRequest.prototype, "tags", void 0);
     __decorate([
-        Metadata({ data: "json, name=target" }),
+        SpeakeasyMetadata({ data: "json, name=target" }),
         __metadata("design:type", String)
     ], CreateSystemInstanceRequest.prototype, "target", void 0);
     return CreateSystemInstanceRequest;

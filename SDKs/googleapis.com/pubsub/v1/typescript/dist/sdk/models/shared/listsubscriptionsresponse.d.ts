@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { Subscription } from "./subscription";
 /**
  * Response for the `ListSubscriptions` method.

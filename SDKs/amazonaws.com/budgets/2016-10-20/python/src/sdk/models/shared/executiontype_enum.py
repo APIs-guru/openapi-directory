@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class ExecutionTypeEnum(str, Enum):
     APPROVE_BUDGET_ACTION = "APPROVE_BUDGET_ACTION"

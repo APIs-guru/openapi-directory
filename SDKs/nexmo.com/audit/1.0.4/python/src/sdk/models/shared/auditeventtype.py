@@ -1,12 +1,14 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import eventtypes_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class AuditEventType:
-    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
-    type: Optional[eventtypes_enum.EventTypesEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('description') }})
+    type: Optional[EventTypesEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('type') }})
     

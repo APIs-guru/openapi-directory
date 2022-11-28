@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// ResourceShareInvitation
+// Describes an invitation to join a resource share.
 type ResourceShareInvitation struct {
 	InvitationTimestamp        *time.Time                         `json:"invitationTimestamp,omitempty"`
 	ReceiverAccountID          *string                            `json:"receiverAccountId,omitempty"`

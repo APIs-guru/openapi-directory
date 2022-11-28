@@ -4,8 +4,8 @@ from typing import List,Optional
 
 @dataclass
 class GetInstancesIDAttachmentsNameCompressedMd5PathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -15,14 +15,14 @@ class GetInstancesIDAttachmentsNameCompressedMd5Headers:
 
 @dataclass
 class GetInstancesIDAttachmentsNameCompressedMd5Request:
-    path_params: GetInstancesIDAttachmentsNameCompressedMd5PathParams = field(default=None)
-    headers: GetInstancesIDAttachmentsNameCompressedMd5Headers = field(default=None)
+    headers: GetInstancesIDAttachmentsNameCompressedMd5Headers = field()
+    path_params: GetInstancesIDAttachmentsNameCompressedMd5PathParams = field()
     
 
 @dataclass
 class GetInstancesIDAttachmentsNameCompressedMd5Response:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    headers: dict[str, List[str]] = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    headers: dict[str, List[str]] = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

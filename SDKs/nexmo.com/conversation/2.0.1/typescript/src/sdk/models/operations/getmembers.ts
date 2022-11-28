@@ -1,41 +1,42 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetMembersPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=conversation_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=conversation_id" })
   conversationId: string;
 }
 
 
-export class GetMembersRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: GetMembersPathParams;
-}
-
-
 export class GetMembers200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 
-  @Metadata({ data: "json, name=state" })
+  @SpeakeasyMetadata({ data: "json, name=state" })
   state: shared.MemberStateEnum;
 
-  @Metadata({ data: "json, name=user_id" })
+  @SpeakeasyMetadata({ data: "json, name=user_id" })
   userId: string;
 
-  @Metadata({ data: "json, name=user_name" })
+  @SpeakeasyMetadata({ data: "json, name=user_name" })
   userName: string;
 }
 
 
+export class GetMembersRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: GetMembersPathParams;
+}
+
+
 export class GetMembersResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata({ elemType: operations.GetMembers200ApplicationJson })
+  @SpeakeasyMetadata({ elemType: GetMembers200ApplicationJson })
   getMembers200ApplicationJsonObjects?: GetMembers200ApplicationJson[];
 }

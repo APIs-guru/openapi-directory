@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TruncateLogContext } from "./truncatelogcontext";
+
 
 
 // InstancesTruncateLogRequest
@@ -7,6 +8,6 @@ import { TruncateLogContext } from "./truncatelogcontext";
  * Instance truncate log request.
 **/
 export class InstancesTruncateLogRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=truncateLogContext" })
+  @SpeakeasyMetadata({ data: "json, name=truncateLogContext" })
   truncateLogContext?: TruncateLogContext;
 }

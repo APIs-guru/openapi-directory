@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ResourceId } from "./resourceid";
 /**
  * Identifying information for a single ancestor of a project.

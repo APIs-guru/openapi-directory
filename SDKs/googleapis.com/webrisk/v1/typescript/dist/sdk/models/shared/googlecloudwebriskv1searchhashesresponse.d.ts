@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudWebriskV1SearchHashesResponseThreatHash } from "./googlecloudwebriskv1searchhashesresponsethreathash";
 export declare class GoogleCloudWebriskV1SearchHashesResponse extends SpeakeasyBase {
     negativeExpireTime?: string;

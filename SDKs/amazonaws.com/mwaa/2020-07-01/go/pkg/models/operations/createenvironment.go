@@ -18,6 +18,8 @@ type CreateEnvironmentHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// CreateEnvironmentRequestBodyLoggingConfiguration
+// Defines the Apache Airflow logs to send to CloudWatch Logs: <code>DagProcessingLogs</code>, <code>SchedulerLogs</code>, <code>TaskLogs</code>, <code>WebserverLogs</code>, <code>WorkerLogs</code>.
 type CreateEnvironmentRequestBodyLoggingConfiguration struct {
 	DagProcessingLogs *shared.ModuleLoggingConfigurationInput `json:"DagProcessingLogs,omitempty"`
 	SchedulerLogs     *shared.ModuleLoggingConfigurationInput `json:"SchedulerLogs,omitempty"`
@@ -26,6 +28,8 @@ type CreateEnvironmentRequestBodyLoggingConfiguration struct {
 	WorkerLogs        *shared.ModuleLoggingConfigurationInput `json:"WorkerLogs,omitempty"`
 }
 
+// CreateEnvironmentRequestBodyNetworkConfiguration
+// The VPC networking components used to secure and enable network traffic between the AWS resources for your environment. To learn more, see <a href="https://docs.aws.amazon.com/mwaa/latest/userguide/networking-about.html">About networking on Amazon MWAA</a>.
 type CreateEnvironmentRequestBodyNetworkConfiguration struct {
 	SecurityGroupIds []string `json:"SecurityGroupIds,omitempty"`
 	SubnetIds        []string `json:"SubnetIds,omitempty"`

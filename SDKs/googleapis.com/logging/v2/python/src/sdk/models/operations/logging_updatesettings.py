@@ -1,11 +1,15 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class LoggingUpdateSettingsPathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,14 +30,14 @@ class LoggingUpdateSettingsQueryParams:
 
 @dataclass
 class LoggingUpdateSettingsSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class LoggingUpdateSettingsSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -44,15 +48,15 @@ class LoggingUpdateSettingsSecurity:
 
 @dataclass
 class LoggingUpdateSettingsRequest:
-    path_params: LoggingUpdateSettingsPathParams = field(default=None)
-    query_params: LoggingUpdateSettingsQueryParams = field(default=None)
-    request: Optional[shared.Settings] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: LoggingUpdateSettingsSecurity = field(default=None)
+    path_params: LoggingUpdateSettingsPathParams = field()
+    query_params: LoggingUpdateSettingsQueryParams = field()
+    security: LoggingUpdateSettingsSecurity = field()
+    request: Optional[shared.SettingsInput] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class LoggingUpdateSettingsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     settings: Optional[shared.Settings] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,23 +1,23 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CreateOntapVolumeConfiguration } from "./createontapvolumeconfiguration";
 import { Tag } from "./tag";
 import { VolumeTypeEnum } from "./volumetypeenum";
 
 
+
 export class CreateVolumeRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ClientRequestToken" })
+  @SpeakeasyMetadata({ data: "json, name=ClientRequestToken" })
   clientRequestToken?: string;
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name: string;
 
-  @Metadata({ data: "json, name=OntapConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=OntapConfiguration" })
   ontapConfiguration?: CreateOntapVolumeConfiguration;
 
-  @Metadata({ data: "json, name=Tags", elemType: shared.Tag })
+  @SpeakeasyMetadata({ data: "json, name=Tags", elemType: Tag })
   tags?: Tag[];
 
-  @Metadata({ data: "json, name=VolumeType" })
+  @SpeakeasyMetadata({ data: "json, name=VolumeType" })
   volumeType: VolumeTypeEnum;
 }

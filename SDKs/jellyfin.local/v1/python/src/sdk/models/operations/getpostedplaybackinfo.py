@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class GetPostedPlaybackInfoPathParams:
-    item_id: str = field(default=None, metadata={'path_param': { 'field_name': 'itemId', 'style': 'simple', 'explode': False }})
+    item_id: str = field(metadata={'path_param': { 'field_name': 'itemId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -35,20 +35,20 @@ class GetPostedPlaybackInfoRequests:
 
 @dataclass
 class GetPostedPlaybackInfoSecurity:
-    custom_authentication: shared.SchemeCustomAuthentication = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    custom_authentication: shared.SchemeCustomAuthentication = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
     
 
 @dataclass
 class GetPostedPlaybackInfoRequest:
-    path_params: GetPostedPlaybackInfoPathParams = field(default=None)
-    query_params: GetPostedPlaybackInfoQueryParams = field(default=None)
+    path_params: GetPostedPlaybackInfoPathParams = field()
+    query_params: GetPostedPlaybackInfoQueryParams = field()
+    security: GetPostedPlaybackInfoSecurity = field()
     request: Optional[GetPostedPlaybackInfoRequests] = field(default=None)
-    security: GetPostedPlaybackInfoSecurity = field(default=None)
     
 
 @dataclass
 class GetPostedPlaybackInfoResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     playback_info_response: Optional[shared.PlaybackInfoResponse] = field(default=None)
-    status_code: int = field(default=None)
     

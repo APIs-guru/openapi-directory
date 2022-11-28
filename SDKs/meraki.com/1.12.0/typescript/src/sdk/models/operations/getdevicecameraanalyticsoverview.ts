@@ -1,48 +1,49 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetDeviceCameraAnalyticsOverviewPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=serial" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=serial" })
   serial: string;
 }
 
 export enum GetDeviceCameraAnalyticsOverviewObjectTypeEnum {
-    Person = "person"
-,    Vehicle = "vehicle"
+    Person = "person",
+    Vehicle = "vehicle"
 }
 
 
 export class GetDeviceCameraAnalyticsOverviewQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=objectType" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=objectType" })
   objectType?: GetDeviceCameraAnalyticsOverviewObjectTypeEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=t0" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=t0" })
   t0?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=t1" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=t1" })
   t1?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=timespan" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=timespan" })
   timespan?: number;
 }
 
 
 export class GetDeviceCameraAnalyticsOverviewRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetDeviceCameraAnalyticsOverviewPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetDeviceCameraAnalyticsOverviewQueryParams;
 }
 
 
 export class GetDeviceCameraAnalyticsOverviewResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getDeviceCameraAnalyticsOverview200ApplicationJsonObject?: Map<string, any>;
 }

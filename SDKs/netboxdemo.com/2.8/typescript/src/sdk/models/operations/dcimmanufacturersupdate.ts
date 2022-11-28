@@ -1,29 +1,30 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class DcimManufacturersUpdatePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" })
   id: number;
 }
 
 
 export class DcimManufacturersUpdateRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: DcimManufacturersUpdatePathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
-  request: shared.Manufacturer;
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request: shared.ManufacturerInput;
 }
 
 
 export class DcimManufacturersUpdateResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   manufacturer?: shared.Manufacturer;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

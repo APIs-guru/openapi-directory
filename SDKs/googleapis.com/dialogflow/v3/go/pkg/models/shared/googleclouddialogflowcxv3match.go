@@ -12,6 +12,8 @@ const (
 	GoogleCloudDialogflowCxV3MatchMatchTypeEnumEvent                GoogleCloudDialogflowCxV3MatchMatchTypeEnum = "EVENT"
 )
 
+// GoogleCloudDialogflowCxV3Match
+// Represents one match result of MatchIntent.
 type GoogleCloudDialogflowCxV3Match struct {
 	Confidence    *float32                                     `json:"confidence,omitempty"`
 	Event         *string                                      `json:"event,omitempty"`

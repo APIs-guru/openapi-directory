@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudDialogflowCxV3OutputAudioConfig } from "./googleclouddialogflowcxv3outputaudioconfig";
 import { GoogleCloudDialogflowCxV3QueryResult } from "./googleclouddialogflowcxv3queryresult";
+
 
 
 // GoogleCloudDialogflowCxV3FulfillIntentResponse
@@ -8,15 +9,15 @@ import { GoogleCloudDialogflowCxV3QueryResult } from "./googleclouddialogflowcxv
  * Response of FulfillIntent
 **/
 export class GoogleCloudDialogflowCxV3FulfillIntentResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=outputAudio" })
+  @SpeakeasyMetadata({ data: "json, name=outputAudio" })
   outputAudio?: string;
 
-  @Metadata({ data: "json, name=outputAudioConfig" })
+  @SpeakeasyMetadata({ data: "json, name=outputAudioConfig" })
   outputAudioConfig?: GoogleCloudDialogflowCxV3OutputAudioConfig;
 
-  @Metadata({ data: "json, name=queryResult" })
+  @SpeakeasyMetadata({ data: "json, name=queryResult" })
   queryResult?: GoogleCloudDialogflowCxV3QueryResult;
 
-  @Metadata({ data: "json, name=responseId" })
+  @SpeakeasyMetadata({ data: "json, name=responseId" })
   responseId?: string;
 }

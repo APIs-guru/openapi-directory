@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// ConformancePackStatusDetail
+// Status details of a conformance pack.
 type ConformancePackStatusDetail struct {
 	ConformancePackArn          string                   `json:"ConformancePackArn"`
 	ConformancePackID           string                   `json:"ConformancePackId"`

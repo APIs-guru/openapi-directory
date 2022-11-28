@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CloudWatchAlarmDefinition } from "./cloudwatchalarmdefinition";
+
 
 
 // ScalingTrigger
@@ -7,6 +8,6 @@ import { CloudWatchAlarmDefinition } from "./cloudwatchalarmdefinition";
  * The conditions that trigger an automatic scaling activity.
 **/
 export class ScalingTrigger extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CloudWatchAlarmDefinition" })
+  @SpeakeasyMetadata({ data: "json, name=CloudWatchAlarmDefinition" })
   cloudWatchAlarmDefinition: CloudWatchAlarmDefinition;
 }

@@ -1,20 +1,21 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DataKeySpecEnum } from "./datakeyspecenum";
 
 
+
 export class GenerateDataKeyRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=EncryptionContext" })
+  @SpeakeasyMetadata({ data: "json, name=EncryptionContext" })
   encryptionContext?: Map<string, string>;
 
-  @Metadata({ data: "json, name=GrantTokens" })
+  @SpeakeasyMetadata({ data: "json, name=GrantTokens" })
   grantTokens?: string[];
 
-  @Metadata({ data: "json, name=KeyId" })
+  @SpeakeasyMetadata({ data: "json, name=KeyId" })
   keyId: string;
 
-  @Metadata({ data: "json, name=KeySpec" })
+  @SpeakeasyMetadata({ data: "json, name=KeySpec" })
   keySpec?: DataKeySpecEnum;
 
-  @Metadata({ data: "json, name=NumberOfBytes" })
+  @SpeakeasyMetadata({ data: "json, name=NumberOfBytes" })
   numberOfBytes?: number;
 }

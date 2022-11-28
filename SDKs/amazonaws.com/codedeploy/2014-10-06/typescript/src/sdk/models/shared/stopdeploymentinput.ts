@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // StopDeploymentInput
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  *  Represents the input of a <code>StopDeployment</code> operation. 
 **/
 export class StopDeploymentInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=autoRollbackEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=autoRollbackEnabled" })
   autoRollbackEnabled?: boolean;
 
-  @Metadata({ data: "json, name=deploymentId" })
+  @SpeakeasyMetadata({ data: "json, name=deploymentId" })
   deploymentId: string;
 }

@@ -1,5 +1,7 @@
 package shared
 
+// AndroidTest
+// An Android mobile test specification.
 type AndroidTest struct {
 	AndroidAppInfo             *AndroidAppInfo             `json:"androidAppInfo,omitempty"`
 	AndroidInstrumentationTest *AndroidInstrumentationTest `json:"androidInstrumentationTest,omitempty"`

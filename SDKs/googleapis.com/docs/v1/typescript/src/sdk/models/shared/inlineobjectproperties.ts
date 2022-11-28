@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { EmbeddedObject } from "./embeddedobject";
+
 
 
 // InlineObjectProperties
@@ -7,6 +8,6 @@ import { EmbeddedObject } from "./embeddedobject";
  * Properties of an InlineObject.
 **/
 export class InlineObjectProperties extends SpeakeasyBase {
-  @Metadata({ data: "json, name=embeddedObject" })
+  @SpeakeasyMetadata({ data: "json, name=embeddedObject" })
   embeddedObject?: EmbeddedObject;
 }

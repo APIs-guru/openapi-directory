@@ -1,48 +1,48 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GlueTable } from "./gluetable";
 import { TransformParameters } from "./transformparameters";
 import { TransformEncryption } from "./transformencryption";
 import { WorkerTypeEnum } from "./workertypeenum";
 
 
+
 export class CreateMlTransformRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Description" })
+  @SpeakeasyMetadata({ data: "json, name=Description" })
   description?: string;
 
-  @Metadata({ data: "json, name=GlueVersion" })
+  @SpeakeasyMetadata({ data: "json, name=GlueVersion" })
   glueVersion?: string;
 
-  @Metadata({ data: "json, name=InputRecordTables", elemType: shared.GlueTable })
+  @SpeakeasyMetadata({ data: "json, name=InputRecordTables", elemType: GlueTable })
   inputRecordTables: GlueTable[];
 
-  @Metadata({ data: "json, name=MaxCapacity" })
+  @SpeakeasyMetadata({ data: "json, name=MaxCapacity" })
   maxCapacity?: number;
 
-  @Metadata({ data: "json, name=MaxRetries" })
+  @SpeakeasyMetadata({ data: "json, name=MaxRetries" })
   maxRetries?: number;
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name: string;
 
-  @Metadata({ data: "json, name=NumberOfWorkers" })
+  @SpeakeasyMetadata({ data: "json, name=NumberOfWorkers" })
   numberOfWorkers?: number;
 
-  @Metadata({ data: "json, name=Parameters" })
+  @SpeakeasyMetadata({ data: "json, name=Parameters" })
   parameters: TransformParameters;
 
-  @Metadata({ data: "json, name=Role" })
+  @SpeakeasyMetadata({ data: "json, name=Role" })
   role: string;
 
-  @Metadata({ data: "json, name=Tags" })
+  @SpeakeasyMetadata({ data: "json, name=Tags" })
   tags?: Map<string, string>;
 
-  @Metadata({ data: "json, name=Timeout" })
+  @SpeakeasyMetadata({ data: "json, name=Timeout" })
   timeout?: number;
 
-  @Metadata({ data: "json, name=TransformEncryption" })
+  @SpeakeasyMetadata({ data: "json, name=TransformEncryption" })
   transformEncryption?: TransformEncryption;
 
-  @Metadata({ data: "json, name=WorkerType" })
+  @SpeakeasyMetadata({ data: "json, name=WorkerType" })
   workerType?: WorkerTypeEnum;
 }

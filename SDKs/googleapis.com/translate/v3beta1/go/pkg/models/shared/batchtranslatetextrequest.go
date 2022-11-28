@@ -1,5 +1,7 @@
 package shared
 
+// BatchTranslateTextRequest
+// The batch translation request.
 type BatchTranslateTextRequest struct {
 	Glossaries          map[string]TranslateTextGlossaryConfig `json:"glossaries,omitempty"`
 	InputConfigs        []InputConfig                          `json:"inputConfigs,omitempty"`

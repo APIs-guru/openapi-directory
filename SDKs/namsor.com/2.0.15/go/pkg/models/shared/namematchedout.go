@@ -1,5 +1,7 @@
 package shared
 
+// NameMatchedOut
+// Classified matched names
 type NameMatchedOut struct {
 	ID          *string  `json:"id,omitempty"`
 	MatchStatus *string  `json:"matchStatus,omitempty"`

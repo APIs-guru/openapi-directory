@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class MicerRequestBodyCertificateParameters extends SpeakeasyBase {
     appno: string;
@@ -18,10 +18,6 @@ export declare class MicerRequestBody extends SpeakeasyBase {
 export declare class MicerSecurity extends SpeakeasyBase {
     apiKey: shared.SchemeApiKey;
     clientId: shared.SchemeClientId;
-}
-export declare class MicerRequest extends SpeakeasyBase {
-    request?: MicerRequestBody;
-    security: MicerSecurity;
 }
 export declare enum Micer400ApplicationJsonErrorEnum {
     MissingParameter = "missing_parameter",
@@ -104,6 +100,10 @@ export declare enum Micer504ApplicationJsonErrorDescriptionEnum {
 export declare class Micer504ApplicationJson extends SpeakeasyBase {
     error?: Micer504ApplicationJsonErrorEnum;
     errorDescription?: Micer504ApplicationJsonErrorDescriptionEnum;
+}
+export declare class MicerRequest extends SpeakeasyBase {
+    request?: MicerRequestBody;
+    security: MicerSecurity;
 }
 export declare class MicerResponse extends SpeakeasyBase {
     contentType: string;

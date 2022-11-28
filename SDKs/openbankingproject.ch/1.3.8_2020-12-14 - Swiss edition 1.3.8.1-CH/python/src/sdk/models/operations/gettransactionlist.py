@@ -1,21 +1,22 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class GetTransactionListPathParams:
-    account_id: str = field(default=None, metadata={'path_param': { 'field_name': 'account-id', 'style': 'simple', 'explode': False }})
+    account_id: str = field(metadata={'path_param': { 'field_name': 'account-id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetTransactionListQueryParams:
-    booking_status: shared.BookingStatusEnum = field(default=None, metadata={'query_param': { 'field_name': 'bookingStatus', 'style': 'form', 'explode': True }})
-    date_from: Optional[datetime] = field(default=None, metadata={'query_param': { 'field_name': 'dateFrom', 'style': 'form', 'explode': True }})
-    date_to: Optional[datetime] = field(default=None, metadata={'query_param': { 'field_name': 'dateTo', 'style': 'form', 'explode': True }})
+    booking_status: shared.BookingStatusEnum = field(metadata={'query_param': { 'field_name': 'bookingStatus', 'style': 'form', 'explode': True }})
+    date_from: Optional[date] = field(default=None, metadata={'query_param': { 'field_name': 'dateFrom', 'style': 'form', 'explode': True }})
+    date_to: Optional[date] = field(default=None, metadata={'query_param': { 'field_name': 'dateTo', 'style': 'form', 'explode': True }})
     delta_list: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'deltaList', 'style': 'form', 'explode': True }})
     entry_reference_from: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'entryReferenceFrom', 'style': 'form', 'explode': True }})
     with_balance: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'withBalance', 'style': 'form', 'explode': True }})
@@ -23,7 +24,8 @@ class GetTransactionListQueryParams:
 
 @dataclass
 class GetTransactionListHeaders:
-    consent_id: str = field(default=None, metadata={'header': { 'field_name': 'Consent-ID', 'style': 'simple', 'explode': False }})
+    consent_id: str = field(metadata={'header': { 'field_name': 'Consent-ID', 'style': 'simple', 'explode': False }})
+    x_request_id: str = field(metadata={'header': { 'field_name': 'X-Request-ID', 'style': 'simple', 'explode': False }})
     digest: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'Digest', 'style': 'simple', 'explode': False }})
     psu_accept: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'PSU-Accept', 'style': 'simple', 'explode': False }})
     psu_accept_charset: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'PSU-Accept-Charset', 'style': 'simple', 'explode': False }})
@@ -37,7 +39,6 @@ class GetTransactionListHeaders:
     psu_user_agent: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'PSU-User-Agent', 'style': 'simple', 'explode': False }})
     signature: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'Signature', 'style': 'simple', 'explode': False }})
     tpp_signature_certificate: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'TPP-Signature-Certificate', 'style': 'simple', 'explode': False }})
-    x_request_id: str = field(default=None, metadata={'header': { 'field_name': 'X-Request-ID', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -47,16 +48,18 @@ class GetTransactionListSecurity:
 
 @dataclass
 class GetTransactionListRequest:
-    path_params: GetTransactionListPathParams = field(default=None)
-    query_params: GetTransactionListQueryParams = field(default=None)
-    headers: GetTransactionListHeaders = field(default=None)
-    security: GetTransactionListSecurity = field(default=None)
+    headers: GetTransactionListHeaders = field()
+    path_params: GetTransactionListPathParams = field()
+    query_params: GetTransactionListQueryParams = field()
+    security: GetTransactionListSecurity = field()
     
 
 @dataclass
 class GetTransactionListResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
+    content_type: str = field()
+    headers: dict[str, List[str]] = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     error400_ais: Optional[shared.Error400Ais] = field(default=None)
     error400_ng_ais: Optional[shared.Error400NgAis] = field(default=None)
     error401_ais: Optional[shared.Error401Ais] = field(default=None)
@@ -73,7 +76,5 @@ class GetTransactionListResponse:
     error409_ng_ais: Optional[shared.Error409NgAis] = field(default=None)
     error429_ais: Optional[shared.Error429Ais] = field(default=None)
     error429_ng_ais: Optional[shared.Error429NgAis] = field(default=None)
-    headers: dict[str, List[str]] = field(default=None)
-    status_code: int = field(default=None)
     transactions_response_200_json: Optional[shared.TransactionsResponse200JSON] = field(default=None)
     

@@ -1,5 +1,7 @@
 package shared
 
+// WebhookTestEntity
+// Create Webhook Test
 type WebhookTestEntity struct {
 	Code    *int32      `json:"code,omitempty"`
 	Data    *AutoEntity `json:"data,omitempty"`

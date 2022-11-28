@@ -1,5 +1,7 @@
 package shared
 
+// CreateFileSystemFromBackupRequest
+// The request object for the <code>CreateFileSystemFromBackup</code> operation.
 type CreateFileSystemFromBackupRequest struct {
 	BackupID             string                                `json:"BackupId"`
 	ClientRequestToken   *string                               `json:"ClientRequestToken,omitempty"`

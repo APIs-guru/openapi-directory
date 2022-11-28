@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BucketOwnerAccessEnum } from "./bucketowneraccessenum";
+
 
 
 // BuildArtifacts
@@ -7,24 +8,24 @@ import { BucketOwnerAccessEnum } from "./bucketowneraccessenum";
  * Information about build output artifacts.
 **/
 export class BuildArtifacts extends SpeakeasyBase {
-  @Metadata({ data: "json, name=artifactIdentifier" })
+  @SpeakeasyMetadata({ data: "json, name=artifactIdentifier" })
   artifactIdentifier?: string;
 
-  @Metadata({ data: "json, name=bucketOwnerAccess" })
+  @SpeakeasyMetadata({ data: "json, name=bucketOwnerAccess" })
   bucketOwnerAccess?: BucketOwnerAccessEnum;
 
-  @Metadata({ data: "json, name=encryptionDisabled" })
+  @SpeakeasyMetadata({ data: "json, name=encryptionDisabled" })
   encryptionDisabled?: boolean;
 
-  @Metadata({ data: "json, name=location" })
+  @SpeakeasyMetadata({ data: "json, name=location" })
   location?: string;
 
-  @Metadata({ data: "json, name=md5sum" })
+  @SpeakeasyMetadata({ data: "json, name=md5sum" })
   md5sum?: string;
 
-  @Metadata({ data: "json, name=overrideArtifactName" })
+  @SpeakeasyMetadata({ data: "json, name=overrideArtifactName" })
   overrideArtifactName?: boolean;
 
-  @Metadata({ data: "json, name=sha256sum" })
+  @SpeakeasyMetadata({ data: "json, name=sha256sum" })
   sha256sum?: string;
 }

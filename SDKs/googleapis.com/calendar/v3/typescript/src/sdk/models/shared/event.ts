@@ -1,12 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { EventAttachment } from "./eventattachment";
 import { EventAttendee } from "./eventattendee";
 import { ConferenceData } from "./conferencedata";
 import { EventDateTime } from "./eventdatetime";
-import { EventDateTime } from "./eventdatetime";
 import { EventReminder } from "./eventreminder";
-import { EventDateTime } from "./eventdatetime";
+
 
 
 // EventCreator
@@ -14,16 +12,16 @@ import { EventDateTime } from "./eventdatetime";
  * The creator of the event. Read-only.
 **/
 export class EventCreator extends SpeakeasyBase {
-  @Metadata({ data: "json, name=displayName" })
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
   displayName?: string;
 
-  @Metadata({ data: "json, name=email" })
+  @SpeakeasyMetadata({ data: "json, name=email" })
   email?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=self" })
+  @SpeakeasyMetadata({ data: "json, name=self" })
   self?: boolean;
 }
 
@@ -33,10 +31,10 @@ export class EventCreator extends SpeakeasyBase {
  * Extended properties of the event.
 **/
 export class EventExtendedProperties extends SpeakeasyBase {
-  @Metadata({ data: "json, name=private" })
+  @SpeakeasyMetadata({ data: "json, name=private" })
   private?: Map<string, string>;
 
-  @Metadata({ data: "json, name=shared" })
+  @SpeakeasyMetadata({ data: "json, name=shared" })
   shared?: Map<string, string>;
 }
 
@@ -46,28 +44,28 @@ export class EventExtendedProperties extends SpeakeasyBase {
  * A gadget that extends this event. Gadgets are deprecated; this structure is instead only used for returning birthday calendar metadata.
 **/
 export class EventGadget extends SpeakeasyBase {
-  @Metadata({ data: "json, name=display" })
+  @SpeakeasyMetadata({ data: "json, name=display" })
   display?: string;
 
-  @Metadata({ data: "json, name=height" })
+  @SpeakeasyMetadata({ data: "json, name=height" })
   height?: number;
 
-  @Metadata({ data: "json, name=iconLink" })
+  @SpeakeasyMetadata({ data: "json, name=iconLink" })
   iconLink?: string;
 
-  @Metadata({ data: "json, name=link" })
+  @SpeakeasyMetadata({ data: "json, name=link" })
   link?: string;
 
-  @Metadata({ data: "json, name=preferences" })
+  @SpeakeasyMetadata({ data: "json, name=preferences" })
   preferences?: Map<string, string>;
 
-  @Metadata({ data: "json, name=title" })
+  @SpeakeasyMetadata({ data: "json, name=title" })
   title?: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: string;
 
-  @Metadata({ data: "json, name=width" })
+  @SpeakeasyMetadata({ data: "json, name=width" })
   width?: number;
 }
 
@@ -77,16 +75,16 @@ export class EventGadget extends SpeakeasyBase {
  * The organizer of the event. If the organizer is also an attendee, this is indicated with a separate entry in attendees with the organizer field set to True. To change the organizer, use the move operation. Read-only, except when importing an event.
 **/
 export class EventOrganizer extends SpeakeasyBase {
-  @Metadata({ data: "json, name=displayName" })
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
   displayName?: string;
 
-  @Metadata({ data: "json, name=email" })
+  @SpeakeasyMetadata({ data: "json, name=email" })
   email?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=self" })
+  @SpeakeasyMetadata({ data: "json, name=self" })
   self?: boolean;
 }
 
@@ -96,10 +94,10 @@ export class EventOrganizer extends SpeakeasyBase {
  * Information about the event's reminders for the authenticated user.
 **/
 export class EventReminders extends SpeakeasyBase {
-  @Metadata({ data: "json, name=overrides", elemType: shared.EventReminder })
+  @SpeakeasyMetadata({ data: "json, name=overrides", elemType: EventReminder })
   overrides?: EventReminder[];
 
-  @Metadata({ data: "json, name=useDefault" })
+  @SpeakeasyMetadata({ data: "json, name=useDefault" })
   useDefault?: boolean;
 }
 
@@ -109,129 +107,129 @@ export class EventReminders extends SpeakeasyBase {
  * Source from which the event was created. For example, a web page, an email message or any document identifiable by an URL with HTTP or HTTPS scheme. Can only be seen or modified by the creator of the event.
 **/
 export class EventSource extends SpeakeasyBase {
-  @Metadata({ data: "json, name=title" })
+  @SpeakeasyMetadata({ data: "json, name=title" })
   title?: string;
 
-  @Metadata({ data: "json, name=url" })
+  @SpeakeasyMetadata({ data: "json, name=url" })
   url?: string;
 }
 
 
 export class Event extends SpeakeasyBase {
-  @Metadata({ data: "json, name=anyoneCanAddSelf" })
+  @SpeakeasyMetadata({ data: "json, name=anyoneCanAddSelf" })
   anyoneCanAddSelf?: boolean;
 
-  @Metadata({ data: "json, name=attachments", elemType: shared.EventAttachment })
+  @SpeakeasyMetadata({ data: "json, name=attachments", elemType: EventAttachment })
   attachments?: EventAttachment[];
 
-  @Metadata({ data: "json, name=attendees", elemType: shared.EventAttendee })
+  @SpeakeasyMetadata({ data: "json, name=attendees", elemType: EventAttendee })
   attendees?: EventAttendee[];
 
-  @Metadata({ data: "json, name=attendeesOmitted" })
+  @SpeakeasyMetadata({ data: "json, name=attendeesOmitted" })
   attendeesOmitted?: boolean;
 
-  @Metadata({ data: "json, name=colorId" })
+  @SpeakeasyMetadata({ data: "json, name=colorId" })
   colorId?: string;
 
-  @Metadata({ data: "json, name=conferenceData" })
+  @SpeakeasyMetadata({ data: "json, name=conferenceData" })
   conferenceData?: ConferenceData;
 
-  @Metadata({ data: "json, name=created" })
+  @SpeakeasyMetadata({ data: "json, name=created" })
   created?: Date;
 
-  @Metadata({ data: "json, name=creator" })
+  @SpeakeasyMetadata({ data: "json, name=creator" })
   creator?: EventCreator;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=end" })
+  @SpeakeasyMetadata({ data: "json, name=end" })
   end?: EventDateTime;
 
-  @Metadata({ data: "json, name=endTimeUnspecified" })
+  @SpeakeasyMetadata({ data: "json, name=endTimeUnspecified" })
   endTimeUnspecified?: boolean;
 
-  @Metadata({ data: "json, name=etag" })
+  @SpeakeasyMetadata({ data: "json, name=etag" })
   etag?: string;
 
-  @Metadata({ data: "json, name=eventType" })
+  @SpeakeasyMetadata({ data: "json, name=eventType" })
   eventType?: string;
 
-  @Metadata({ data: "json, name=extendedProperties" })
+  @SpeakeasyMetadata({ data: "json, name=extendedProperties" })
   extendedProperties?: EventExtendedProperties;
 
-  @Metadata({ data: "json, name=gadget" })
+  @SpeakeasyMetadata({ data: "json, name=gadget" })
   gadget?: EventGadget;
 
-  @Metadata({ data: "json, name=guestsCanInviteOthers" })
+  @SpeakeasyMetadata({ data: "json, name=guestsCanInviteOthers" })
   guestsCanInviteOthers?: boolean;
 
-  @Metadata({ data: "json, name=guestsCanModify" })
+  @SpeakeasyMetadata({ data: "json, name=guestsCanModify" })
   guestsCanModify?: boolean;
 
-  @Metadata({ data: "json, name=guestsCanSeeOtherGuests" })
+  @SpeakeasyMetadata({ data: "json, name=guestsCanSeeOtherGuests" })
   guestsCanSeeOtherGuests?: boolean;
 
-  @Metadata({ data: "json, name=hangoutLink" })
+  @SpeakeasyMetadata({ data: "json, name=hangoutLink" })
   hangoutLink?: string;
 
-  @Metadata({ data: "json, name=htmlLink" })
+  @SpeakeasyMetadata({ data: "json, name=htmlLink" })
   htmlLink?: string;
 
-  @Metadata({ data: "json, name=iCalUID" })
+  @SpeakeasyMetadata({ data: "json, name=iCalUID" })
   iCalUid?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=location" })
+  @SpeakeasyMetadata({ data: "json, name=location" })
   location?: string;
 
-  @Metadata({ data: "json, name=locked" })
+  @SpeakeasyMetadata({ data: "json, name=locked" })
   locked?: boolean;
 
-  @Metadata({ data: "json, name=organizer" })
+  @SpeakeasyMetadata({ data: "json, name=organizer" })
   organizer?: EventOrganizer;
 
-  @Metadata({ data: "json, name=originalStartTime" })
+  @SpeakeasyMetadata({ data: "json, name=originalStartTime" })
   originalStartTime?: EventDateTime;
 
-  @Metadata({ data: "json, name=privateCopy" })
+  @SpeakeasyMetadata({ data: "json, name=privateCopy" })
   privateCopy?: boolean;
 
-  @Metadata({ data: "json, name=recurrence" })
+  @SpeakeasyMetadata({ data: "json, name=recurrence" })
   recurrence?: string[];
 
-  @Metadata({ data: "json, name=recurringEventId" })
+  @SpeakeasyMetadata({ data: "json, name=recurringEventId" })
   recurringEventId?: string;
 
-  @Metadata({ data: "json, name=reminders" })
+  @SpeakeasyMetadata({ data: "json, name=reminders" })
   reminders?: EventReminders;
 
-  @Metadata({ data: "json, name=sequence" })
+  @SpeakeasyMetadata({ data: "json, name=sequence" })
   sequence?: number;
 
-  @Metadata({ data: "json, name=source" })
+  @SpeakeasyMetadata({ data: "json, name=source" })
   source?: EventSource;
 
-  @Metadata({ data: "json, name=start" })
+  @SpeakeasyMetadata({ data: "json, name=start" })
   start?: EventDateTime;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: string;
 
-  @Metadata({ data: "json, name=summary" })
+  @SpeakeasyMetadata({ data: "json, name=summary" })
   summary?: string;
 
-  @Metadata({ data: "json, name=transparency" })
+  @SpeakeasyMetadata({ data: "json, name=transparency" })
   transparency?: string;
 
-  @Metadata({ data: "json, name=updated" })
+  @SpeakeasyMetadata({ data: "json, name=updated" })
   updated?: Date;
 
-  @Metadata({ data: "json, name=visibility" })
+  @SpeakeasyMetadata({ data: "json, name=visibility" })
   visibility?: string;
 }

@@ -30,7 +30,7 @@ type DomainsProjectsLocationsRegistrationsRegisterSecurity struct {
 type DomainsProjectsLocationsRegistrationsRegisterRequest struct {
 	PathParams  DomainsProjectsLocationsRegistrationsRegisterPathParams
 	QueryParams DomainsProjectsLocationsRegistrationsRegisterQueryParams
-	Request     *shared.RegisterDomainRequest `request:"mediaType=application/json"`
+	Request     *shared.RegisterDomainRequestInput `request:"mediaType=application/json"`
 	Security    DomainsProjectsLocationsRegistrationsRegisterSecurity
 }
 

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export var GetImportVolumeActionEnum;
 (function (GetImportVolumeActionEnum) {
@@ -38,15 +38,15 @@ var GetImportVolumeImage = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, name=Bytes" }),
+        SpeakeasyMetadata({ data: "queryParam, name=Bytes" }),
         __metadata("design:type", Number)
     ], GetImportVolumeImage.prototype, "bytes", void 0);
     __decorate([
-        Metadata({ data: "queryParam, name=Format" }),
+        SpeakeasyMetadata({ data: "queryParam, name=Format" }),
         __metadata("design:type", String)
     ], GetImportVolumeImage.prototype, "format", void 0);
     __decorate([
-        Metadata({ data: "queryParam, name=ImportManifestUrl" }),
+        SpeakeasyMetadata({ data: "queryParam, name=ImportManifestUrl" }),
         __metadata("design:type", String)
     ], GetImportVolumeImage.prototype, "importManifestUrl", void 0);
     return GetImportVolumeImage;
@@ -66,7 +66,7 @@ var GetImportVolumeVolume = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, name=Size" }),
+        SpeakeasyMetadata({ data: "queryParam, name=Size" }),
         __metadata("design:type", Number)
     ], GetImportVolumeVolume.prototype, "size", void 0);
     return GetImportVolumeVolume;
@@ -78,31 +78,31 @@ var GetImportVolumeQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=Action" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Action" }),
         __metadata("design:type", String)
     ], GetImportVolumeQueryParams.prototype, "action", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=AvailabilityZone" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=AvailabilityZone" }),
         __metadata("design:type", String)
     ], GetImportVolumeQueryParams.prototype, "availabilityZone", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=Description" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Description" }),
         __metadata("design:type", String)
     ], GetImportVolumeQueryParams.prototype, "description", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=DryRun" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=DryRun" }),
         __metadata("design:type", Boolean)
     ], GetImportVolumeQueryParams.prototype, "dryRun", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=Image" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Image" }),
         __metadata("design:type", GetImportVolumeImage)
     ], GetImportVolumeQueryParams.prototype, "image", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=Version" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Version" }),
         __metadata("design:type", String)
     ], GetImportVolumeQueryParams.prototype, "version", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=Volume" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Volume" }),
         __metadata("design:type", GetImportVolumeVolume)
     ], GetImportVolumeQueryParams.prototype, "volume", void 0);
     return GetImportVolumeQueryParams;
@@ -114,31 +114,31 @@ var GetImportVolumeHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
         __metadata("design:type", String)
     ], GetImportVolumeHeaders.prototype, "xAmzAlgorithm", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
         __metadata("design:type", String)
     ], GetImportVolumeHeaders.prototype, "xAmzContentSha256", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
         __metadata("design:type", String)
     ], GetImportVolumeHeaders.prototype, "xAmzCredential", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
         __metadata("design:type", String)
     ], GetImportVolumeHeaders.prototype, "xAmzDate", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
         __metadata("design:type", String)
     ], GetImportVolumeHeaders.prototype, "xAmzSecurityToken", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
         __metadata("design:type", String)
     ], GetImportVolumeHeaders.prototype, "xAmzSignature", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
         __metadata("design:type", String)
     ], GetImportVolumeHeaders.prototype, "xAmzSignedHeaders", void 0);
     return GetImportVolumeHeaders;
@@ -150,11 +150,11 @@ var GetImportVolumeRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetImportVolumeQueryParams)
     ], GetImportVolumeRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetImportVolumeHeaders)
     ], GetImportVolumeRequest.prototype, "headers", void 0);
     return GetImportVolumeRequest;
@@ -166,15 +166,15 @@ var GetImportVolumeResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], GetImportVolumeResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetImportVolumeResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetImportVolumeResponse.prototype, "statusCode", void 0);
     return GetImportVolumeResponse;

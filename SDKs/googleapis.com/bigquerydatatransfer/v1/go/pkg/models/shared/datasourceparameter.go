@@ -12,6 +12,8 @@ const (
 	DataSourceParameterTypeEnumPlusPage        DataSourceParameterTypeEnum = "PLUS_PAGE"
 )
 
+// DataSourceParameter
+// A parameter used to define custom fields in a data source definition.
 type DataSourceParameter struct {
 	AllowedValues         []string                     `json:"allowedValues,omitempty"`
 	Deprecated            *bool                        `json:"deprecated,omitempty"`

@@ -11,7 +11,7 @@ import (
 	"strings"
 )
 
-var Servers = []string{
+var ServerList = []string{
 	"http://oralquestionsandmotions-api.parliament.uk",
 	"https://oralquestionsandmotions-api.parliament.uk",
 }
@@ -21,9 +21,13 @@ type HTTPClient interface {
 }
 
 type SDK struct {
-	defaultClient  HTTPClient
-	securityClient HTTPClient
-	serverURL      string
+	_defaultClient  HTTPClient
+	_securityClient HTTPClient
+
+	_serverURL  string
+	_language   string
+	_sdkVersion string
+	_genVersion string
 }
 
 type SDKOption func(*SDK)
@@ -34,27 +38,46 @@ func WithServerURL(serverURL string, params map[string]string) SDKOption {
 			serverURL = utils.ReplaceParameters(serverURL, params)
 		}
 
-		sdk.serverURL = serverURL
+		sdk._serverURL = serverURL
+	}
+}
+
+func WithClient(client HTTPClient) SDKOption {
+	return func(sdk *SDK) {
+		sdk._defaultClient = client
 	}
 }
 
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
-		defaultClient:  http.DefaultClient,
-		securityClient: http.DefaultClient,
+		_language:   "go",
+		_sdkVersion: "",
+		_genVersion: "internal",
 	}
 	for _, opt := range opts {
 		opt(sdk)
 	}
-	if sdk.serverURL == "" {
-		sdk.serverURL = Servers[0]
+
+	if sdk._defaultClient == nil {
+		sdk._defaultClient = http.DefaultClient
+	}
+	if sdk._securityClient == nil {
+
+		sdk._securityClient = sdk._defaultClient
+
+	}
+
+	if sdk._serverURL == "" {
+		sdk._serverURL = ServerList[0]
 	}
 
 	return sdk
 }
 
+// GetEarlyDayMotionsList - Returns a list of Early Day Motions
+// Get a list of Early Day Motions which meet the specified criteria. Only supports Published and Withdrawn status.
 func (s *SDK) GetEarlyDayMotionsList(ctx context.Context, request operations.GetEarlyDayMotionsListRequest) (*operations.GetEarlyDayMotionsListResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/EarlyDayMotions/list"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -64,7 +87,7 @@ func (s *SDK) GetEarlyDayMotionsList(ctx context.Context, request operations.Get
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -146,8 +169,10 @@ func (s *SDK) GetEarlyDayMotionsList(ctx context.Context, request operations.Get
 	return res, nil
 }
 
+// PublishedEarlyDayMotionGet - Returns a single Early Day Motion by ID
+// Get a single Early Day Motion which has the ID specified.
 func (s *SDK) PublishedEarlyDayMotionGet(ctx context.Context, request operations.PublishedEarlyDayMotionGetRequest) (*operations.PublishedEarlyDayMotionGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/EarlyDayMotion/{id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -155,7 +180,7 @@ func (s *SDK) PublishedEarlyDayMotionGet(ctx context.Context, request operations
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -226,8 +251,10 @@ func (s *SDK) PublishedEarlyDayMotionGet(ctx context.Context, request operations
 	return res, nil
 }
 
+// PublishedOralQuestionTimeGet - Returns a list of oral question times
+// A list of oral question times meeting the specified criteria.
 func (s *SDK) PublishedOralQuestionTimeGet(ctx context.Context, request operations.PublishedOralQuestionTimeGetRequest) (*operations.PublishedOralQuestionTimeGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/oralquestiontimes/list"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -237,7 +264,7 @@ func (s *SDK) PublishedOralQuestionTimeGet(ctx context.Context, request operatio
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -319,8 +346,10 @@ func (s *SDK) PublishedOralQuestionTimeGet(ctx context.Context, request operatio
 	return res, nil
 }
 
+// PublishedOralQuestionGet - Returns a list of oral questions
+// A list of oral questions meeting the specified criteria.
 func (s *SDK) PublishedOralQuestionGet(ctx context.Context, request operations.PublishedOralQuestionGetRequest) (*operations.PublishedOralQuestionGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/oralquestions/list"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -330,7 +359,7 @@ func (s *SDK) PublishedOralQuestionGet(ctx context.Context, request operations.P
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {

@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ServiceUpdateStatusEnum } from "./serviceupdatestatusenum";
 import { ServiceUpdateTypeEnum } from "./serviceupdatetypeenum";
+
 
 
 // ServiceUpdate
@@ -8,27 +9,27 @@ import { ServiceUpdateTypeEnum } from "./serviceupdatetypeenum";
  * An update that you can apply to your MemoryDB clusters.
 **/
 export class ServiceUpdate extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AutoUpdateStartDate" })
+  @SpeakeasyMetadata({ data: "json, name=AutoUpdateStartDate" })
   autoUpdateStartDate?: Date;
 
-  @Metadata({ data: "json, name=ClusterName" })
+  @SpeakeasyMetadata({ data: "json, name=ClusterName" })
   clusterName?: string;
 
-  @Metadata({ data: "json, name=Description" })
+  @SpeakeasyMetadata({ data: "json, name=Description" })
   description?: string;
 
-  @Metadata({ data: "json, name=NodesUpdated" })
+  @SpeakeasyMetadata({ data: "json, name=NodesUpdated" })
   nodesUpdated?: string;
 
-  @Metadata({ data: "json, name=ReleaseDate" })
+  @SpeakeasyMetadata({ data: "json, name=ReleaseDate" })
   releaseDate?: Date;
 
-  @Metadata({ data: "json, name=ServiceUpdateName" })
+  @SpeakeasyMetadata({ data: "json, name=ServiceUpdateName" })
   serviceUpdateName?: string;
 
-  @Metadata({ data: "json, name=Status" })
+  @SpeakeasyMetadata({ data: "json, name=Status" })
   status?: ServiceUpdateStatusEnum;
 
-  @Metadata({ data: "json, name=Type" })
+  @SpeakeasyMetadata({ data: "json, name=Type" })
   type?: ServiceUpdateTypeEnum;
 }

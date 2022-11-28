@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TableColumnProperties } from "./tablecolumnproperties";
+
 
 
 // TableStyle
@@ -8,6 +8,6 @@ import { TableColumnProperties } from "./tablecolumnproperties";
  * Styles that apply to a table.
 **/
 export class TableStyle extends SpeakeasyBase {
-  @Metadata({ data: "json, name=tableColumnProperties", elemType: shared.TableColumnProperties })
+  @SpeakeasyMetadata({ data: "json, name=tableColumnProperties", elemType: TableColumnProperties })
   tableColumnProperties?: TableColumnProperties[];
 }

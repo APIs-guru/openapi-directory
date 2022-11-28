@@ -1,38 +1,39 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetApiTextLoremIpsumQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=loremType" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=loremType" })
   loremType: shared.LoremTypeEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=number" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=number" })
   number: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=type" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=type" })
   type: shared.TextTypeEnum;
 }
 
 
 export class GetApiTextLoremIpsumHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Api-Key" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Api-Key" })
   xApiKey?: string;
 }
 
 
 export class GetApiTextLoremIpsumRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetApiTextLoremIpsumQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: GetApiTextLoremIpsumHeaders;
 }
 
 
 export class GetApiTextLoremIpsumResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

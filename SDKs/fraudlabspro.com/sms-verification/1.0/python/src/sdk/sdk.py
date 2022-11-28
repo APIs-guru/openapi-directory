@@ -1,7 +1,10 @@
-import warnings
+
+
 import requests
 from sdk.models import operations
 from . import utils
+
+
 
 
 SERVERS = [
@@ -11,28 +14,49 @@ SERVERS = [
 
 
 class SDK:
-    client = requests.Session()
-    server_url = SERVERS[0]
+    
+
+    _client: requests.Session
+    _security_client: requests.Session
+    
+    _server_url: str = SERVERS[0]
+    _language: str = "python"
+    _sdk_version: str = "0.0.1"
+    _gen_version: str = "internal"
+
+    def __init__(self) -> None:
+        self._client = requests.Session()
+        self._security_client = requests.Session()
+        
+
 
     def config_server_url(self, server_url: str, params: dict[str, str]):
-        if not params is None:
-            self.server_url = utils.replace_parameters(server_url, params)
+        if params is not None:
+            self._server_url = utils.replace_parameters(server_url, params)
         else:
-            self.server_url = server_url
-            
+            self._server_url = server_url
+
+        
     
 
+    def config_client(self, client: requests.Session):
+        self._client = client
+        
+    
+    
     
     def get_v1_verification_result(self, request: operations.GetV1VerificationResultRequest) -> operations.GetV1VerificationResultResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Verify that an OTP sent by the Send SMS Verification API is valid.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/v1/verification/result"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -46,15 +70,17 @@ class SDK:
 
     
     def post_v1_verification_send(self, request: operations.PostV1VerificationSendRequest) -> operations.PostV1VerificationSendResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Send an SMS with verification code and a custom message for authentication purpose.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/v1/verification/send"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 

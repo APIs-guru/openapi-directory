@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { FlowDefinitionStatusEnum } from "./flowdefinitionstatusenum";
+
 
 
 // FlowDefinitionSummary
@@ -7,18 +8,18 @@ import { FlowDefinitionStatusEnum } from "./flowdefinitionstatusenum";
  * Contains summary information about the flow definition.
 **/
 export class FlowDefinitionSummary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CreationTime" })
+  @SpeakeasyMetadata({ data: "json, name=CreationTime" })
   creationTime: Date;
 
-  @Metadata({ data: "json, name=FailureReason" })
+  @SpeakeasyMetadata({ data: "json, name=FailureReason" })
   failureReason?: string;
 
-  @Metadata({ data: "json, name=FlowDefinitionArn" })
+  @SpeakeasyMetadata({ data: "json, name=FlowDefinitionArn" })
   flowDefinitionArn: string;
 
-  @Metadata({ data: "json, name=FlowDefinitionName" })
+  @SpeakeasyMetadata({ data: "json, name=FlowDefinitionName" })
   flowDefinitionName: string;
 
-  @Metadata({ data: "json, name=FlowDefinitionStatus" })
+  @SpeakeasyMetadata({ data: "json, name=FlowDefinitionStatus" })
   flowDefinitionStatus: FlowDefinitionStatusEnum;
 }

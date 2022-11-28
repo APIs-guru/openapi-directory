@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetTeamPpaQueryParams = /** @class */ (function (_super) {
     __extends(GetTeamPpaQueryParams, _super);
@@ -30,19 +30,19 @@ var GetTeamPpaQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=conference" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=conference" }),
         __metadata("design:type", String)
     ], GetTeamPpaQueryParams.prototype, "conference", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=excludeGarbageTime" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=excludeGarbageTime" }),
         __metadata("design:type", Boolean)
     ], GetTeamPpaQueryParams.prototype, "excludeGarbageTime", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=team" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=team" }),
         __metadata("design:type", String)
     ], GetTeamPpaQueryParams.prototype, "team", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=year" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=year" }),
         __metadata("design:type", Number)
     ], GetTeamPpaQueryParams.prototype, "year", void 0);
     return GetTeamPpaQueryParams;
@@ -54,7 +54,7 @@ var GetTeamPpaRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetTeamPpaQueryParams)
     ], GetTeamPpaRequest.prototype, "queryParams", void 0);
     return GetTeamPpaRequest;
@@ -66,15 +66,15 @@ var GetTeamPpaResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetTeamPpaResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetTeamPpaResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata({ elemType: shared.TeamPpa }),
+        SpeakeasyMetadata({ elemType: shared.TeamPpa }),
         __metadata("design:type", Array)
     ], GetTeamPpaResponse.prototype, "teamPpas", void 0);
     return GetTeamPpaResponse;

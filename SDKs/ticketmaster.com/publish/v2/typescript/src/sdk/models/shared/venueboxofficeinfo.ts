@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // VenueBoxOfficeInfo
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Venue box office information
 **/
 export class VenueBoxOfficeInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=acceptedPaymentDetails" })
+  @SpeakeasyMetadata({ data: "json, name=acceptedPaymentDetails" })
   acceptedPaymentDetails?: Map<string, string>;
 
-  @Metadata({ data: "json, name=openHoursDetails" })
+  @SpeakeasyMetadata({ data: "json, name=openHoursDetails" })
   openHoursDetails?: Map<string, string>;
 
-  @Metadata({ data: "json, name=phoneNumberDetails" })
+  @SpeakeasyMetadata({ data: "json, name=phoneNumberDetails" })
   phoneNumberDetails?: Map<string, string>;
 
-  @Metadata({ data: "json, name=willCallDetails" })
+  @SpeakeasyMetadata({ data: "json, name=willCallDetails" })
   willCallDetails?: Map<string, string>;
 }

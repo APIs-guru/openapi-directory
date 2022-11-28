@@ -4,17 +4,17 @@ from typing import Any,Optional
 
 @dataclass
 class GetBatchPathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetBatchRequest:
-    path_params: GetBatchPathParams = field(default=None)
+    path_params: GetBatchPathParams = field()
     
 
 @dataclass
 class GetBatchResponse:
+    content_type: str = field()
+    status_code: int = field()
     batch: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

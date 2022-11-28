@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// Resource
+// The representation of a resource.
 type Resource struct {
 	DisabledDate *time.Time        `json:"DisabledDate,omitempty"`
 	Email        *string           `json:"Email,omitempty"`

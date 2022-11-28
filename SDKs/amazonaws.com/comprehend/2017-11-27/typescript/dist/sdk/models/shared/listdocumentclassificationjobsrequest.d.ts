@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { DocumentClassificationJobFilter } from "./documentclassificationjobfilter";
 export declare class ListDocumentClassificationJobsRequest extends SpeakeasyBase {
     filter?: DocumentClassificationJobFilter;

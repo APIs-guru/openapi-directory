@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { DeploymentLabelEntry } from "./deploymentlabelentry";
 import { Operation } from "./operation";
 import { TargetConfiguration } from "./targetconfiguration";

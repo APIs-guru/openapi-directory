@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Alarm } from "./alarm";
 
 
+
 export class PutScalingPolicyResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Alarms", elemType: shared.Alarm })
+  @SpeakeasyMetadata({ data: "json, name=Alarms", elemType: Alarm })
   alarms?: Alarm[];
 
-  @Metadata({ data: "json, name=PolicyARN" })
+  @SpeakeasyMetadata({ data: "json, name=PolicyARN" })
   policyArn: string;
 }

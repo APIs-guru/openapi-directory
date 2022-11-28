@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 export declare enum DynamicLinkWarningWarningCodeEnum {
     CodeUnspecified = "CODE_UNSPECIFIED",
     NotInProjectAndroidPackageName = "NOT_IN_PROJECT_ANDROID_PACKAGE_NAME",

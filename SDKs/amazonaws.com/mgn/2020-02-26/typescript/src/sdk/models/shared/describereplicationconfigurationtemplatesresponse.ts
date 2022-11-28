@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ReplicationConfigurationTemplate } from "./replicationconfigurationtemplate";
 
 
+
 export class DescribeReplicationConfigurationTemplatesResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=items", elemType: shared.ReplicationConfigurationTemplate })
+  @SpeakeasyMetadata({ data: "json, name=items", elemType: ReplicationConfigurationTemplate })
   items?: ReplicationConfigurationTemplate[];
 
-  @Metadata({ data: "json, name=nextToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextToken" })
   nextToken?: string;
 }

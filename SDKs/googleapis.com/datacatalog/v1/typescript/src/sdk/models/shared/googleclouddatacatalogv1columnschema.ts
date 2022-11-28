@@ -1,7 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
-import { GoogleCloudDatacatalogV1ColumnSchemaLookerColumnSpec } from "./googleclouddatacatalogv1columnschemalookercolumnspec";
-import { GoogleCloudDatacatalogV1ColumnSchema } from "./googleclouddatacatalogv1columnschema";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudDatacatalogV1ColumnSchema
@@ -9,21 +7,21 @@ import { GoogleCloudDatacatalogV1ColumnSchema } from "./googleclouddatacatalogv1
  * A column within a schema. Columns can be nested inside other columns.
 **/
 export class GoogleCloudDatacatalogV1ColumnSchema extends SpeakeasyBase {
-  @Metadata({ data: "json, name=column" })
+  @SpeakeasyMetadata({ data: "json, name=column" })
   column?: string;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=lookerColumnSpec" })
-  lookerColumnSpec?: GoogleCloudDatacatalogV1ColumnSchemaLookerColumnSpec;
+  @SpeakeasyMetadata({ data: "json, name=gcRule" })
+  gcRule?: string;
 
-  @Metadata({ data: "json, name=mode" })
+  @SpeakeasyMetadata({ data: "json, name=mode" })
   mode?: string;
 
-  @Metadata({ data: "json, name=subcolumns", elemType: shared.GoogleCloudDatacatalogV1ColumnSchema })
+  @SpeakeasyMetadata({ data: "json, name=subcolumns", elemType: GoogleCloudDatacatalogV1ColumnSchema })
   subcolumns?: GoogleCloudDatacatalogV1ColumnSchema[];
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: string;
 }

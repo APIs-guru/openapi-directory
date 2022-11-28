@@ -1,39 +1,72 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CategoryAugmentation } from "./categoryaugmentation";
 
 
+
 export class CategoryInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=augmentations", elemType: shared.CategoryAugmentation })
+  @SpeakeasyMetadata({ data: "json, name=augmentations", elemType: CategoryAugmentation })
   augmentations?: CategoryAugmentation[];
 
-  @Metadata({ data: "json, name=color" })
+  @SpeakeasyMetadata({ data: "json, name=color" })
   color?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=imageName" })
+  @SpeakeasyMetadata({ data: "json, name=imageName" })
   imageName?: string;
 
-  @Metadata({ data: "json, name=isDefault" })
+  @SpeakeasyMetadata({ data: "json, name=isDefault" })
   isDefault?: boolean;
 
-  @Metadata({ data: "json, name=keywordMatching" })
+  @SpeakeasyMetadata({ data: "json, name=keywordMatching" })
   keywordMatching?: number;
 
-  @Metadata({ data: "json, name=keywords" })
+  @SpeakeasyMetadata({ data: "json, name=keywords" })
   keywords?: string[];
 
-  @Metadata({ data: "json, name=lastMatch" })
+  @SpeakeasyMetadata({ data: "json, name=lastMatch" })
   lastMatch?: Date;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=options" })
+  @SpeakeasyMetadata({ data: "json, name=options" })
   options?: number;
 
-  @Metadata({ data: "json, name=order" })
+  @SpeakeasyMetadata({ data: "json, name=order" })
+  order?: number;
+}
+
+
+export class CategoryInfoInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=augmentations", elemType: CategoryAugmentation })
+  augmentations?: CategoryAugmentation[];
+
+  @SpeakeasyMetadata({ data: "json, name=color" })
+  color?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=id" })
+  id?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=imageName" })
+  imageName?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=keywordMatching" })
+  keywordMatching?: number;
+
+  @SpeakeasyMetadata({ data: "json, name=keywords" })
+  keywords?: string[];
+
+  @SpeakeasyMetadata({ data: "json, name=lastMatch" })
+  lastMatch?: Date;
+
+  @SpeakeasyMetadata({ data: "json, name=name" })
+  name?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=options" })
+  options?: number;
+
+  @SpeakeasyMetadata({ data: "json, name=order" })
   order?: number;
 }

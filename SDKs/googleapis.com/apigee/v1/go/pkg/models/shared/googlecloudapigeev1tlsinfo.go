@@ -1,5 +1,7 @@
 package shared
 
+// GoogleCloudApigeeV1TLSInfo
+// TLS configuration information for virtual hosts and TargetServers.
 type GoogleCloudApigeeV1TLSInfo struct {
 	Ciphers                []string                              `json:"ciphers,omitempty"`
 	ClientAuthEnabled      *bool                                 `json:"clientAuthEnabled,omitempty"`

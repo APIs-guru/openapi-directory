@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var CompetitionsLeaguesFormatEnum;
 (function (CompetitionsLeaguesFormatEnum) {
     CompetitionsLeaguesFormatEnum["Xml"] = "xml";
@@ -34,7 +34,7 @@ var CompetitionsLeaguesPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=format" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=format" }),
         __metadata("design:type", String)
     ], CompetitionsLeaguesPathParams.prototype, "format", void 0);
     return CompetitionsLeaguesPathParams;
@@ -46,7 +46,7 @@ var CompetitionsLeaguesRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", CompetitionsLeaguesPathParams)
     ], CompetitionsLeaguesRequest.prototype, "pathParams", void 0);
     return CompetitionsLeaguesRequest;
@@ -58,15 +58,15 @@ var CompetitionsLeaguesResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Array)
     ], CompetitionsLeaguesResponse.prototype, "competitions", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], CompetitionsLeaguesResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], CompetitionsLeaguesResponse.prototype, "statusCode", void 0);
     return CompetitionsLeaguesResponse;

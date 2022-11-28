@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AwsElbLoadBalancerSourceSecurityGroup
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Contains information about the security group for the load balancer.
 **/
 export class AwsElbLoadBalancerSourceSecurityGroup extends SpeakeasyBase {
-  @Metadata({ data: "json, name=GroupName" })
+  @SpeakeasyMetadata({ data: "json, name=GroupName" })
   groupName?: string;
 
-  @Metadata({ data: "json, name=OwnerAlias" })
+  @SpeakeasyMetadata({ data: "json, name=OwnerAlias" })
   ownerAlias?: string;
 }

@@ -4,18 +4,18 @@ from typing import Any,Optional
 
 @dataclass
 class RecipeZapRecipePathParams:
-    id: int = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: int = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class RecipeZapRecipeRequest:
-    path_params: RecipeZapRecipePathParams = field(default=None)
+    path_params: RecipeZapRecipePathParams = field()
     
 
 @dataclass
 class RecipeZapRecipeResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     system_object: Optional[dict[str, Any]] = field(default=None)
     

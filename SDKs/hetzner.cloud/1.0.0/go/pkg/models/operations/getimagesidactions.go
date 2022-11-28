@@ -40,11 +40,8 @@ type GetImagesIDActionsQueryParams struct {
 	Status *GetImagesIDActionsStatusParameterStatusEnum `queryParam:"style=form,explode=true,name=status"`
 }
 
-type GetImagesIDActionsRequest struct {
-	PathParams  GetImagesIDActionsPathParams
-	QueryParams GetImagesIDActionsQueryParams
-}
-
+// GetImagesIDActionsActionsResponseActionError
+// Error message for the Action if error occurred, otherwise null
 type GetImagesIDActionsActionsResponseActionError struct {
 	Code    string `json:"code"`
 	Message string `json:"message"`
@@ -90,6 +87,11 @@ type GetImagesIDActionsActionsResponseMeta struct {
 type GetImagesIDActionsActionsResponse struct {
 	Actions []GetImagesIDActionsActionsResponseAction `json:"actions"`
 	Meta    *GetImagesIDActionsActionsResponseMeta    `json:"meta,omitempty"`
+}
+
+type GetImagesIDActionsRequest struct {
+	PathParams  GetImagesIDActionsPathParams
+	QueryParams GetImagesIDActionsQueryParams
 }
 
 type GetImagesIDActionsResponse struct {

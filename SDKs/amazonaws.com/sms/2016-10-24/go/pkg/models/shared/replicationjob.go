@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// ReplicationJob
+// Represents a replication job.
 type ReplicationJob struct {
 	Description                 *string                  `json:"description,omitempty"`
 	Encrypted                   *bool                    `json:"encrypted,omitempty"`

@@ -1,21 +1,22 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum PaginationAuthScopeEnum {
-    Catalog = "Catalog"
-,    Commerce = "Commerce"
-,    Settings = "Settings"
+    Catalog = "Catalog",
+    Commerce = "Commerce",
+    Settings = "Settings"
 }
 
 export enum PaginationAuthTypeEnum {
-    UserAccount = "UserAccount"
-,    UserProfile = "UserProfile"
+    UserAccount = "UserAccount",
+    UserProfile = "UserProfile"
 }
 
 
 export class PaginationAuth extends SpeakeasyBase {
-  @Metadata({ data: "json, name=scope" })
+  @SpeakeasyMetadata({ data: "json, name=scope" })
   scope: PaginationAuthScopeEnum;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type: PaginationAuthTypeEnum;
 }

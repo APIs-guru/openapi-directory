@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudDataplexV1TaskExecutionSpec
@@ -6,18 +7,18 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Execution related settings, like retry and service_account.
 **/
 export class GoogleCloudDataplexV1TaskExecutionSpec extends SpeakeasyBase {
-  @Metadata({ data: "json, name=args" })
+  @SpeakeasyMetadata({ data: "json, name=args" })
   args?: Map<string, string>;
 
-  @Metadata({ data: "json, name=kmsKey" })
+  @SpeakeasyMetadata({ data: "json, name=kmsKey" })
   kmsKey?: string;
 
-  @Metadata({ data: "json, name=maxJobExecutionLifetime" })
+  @SpeakeasyMetadata({ data: "json, name=maxJobExecutionLifetime" })
   maxJobExecutionLifetime?: string;
 
-  @Metadata({ data: "json, name=project" })
+  @SpeakeasyMetadata({ data: "json, name=project" })
   project?: string;
 
-  @Metadata({ data: "json, name=serviceAccount" })
+  @SpeakeasyMetadata({ data: "json, name=serviceAccount" })
   serviceAccount?: string;
 }

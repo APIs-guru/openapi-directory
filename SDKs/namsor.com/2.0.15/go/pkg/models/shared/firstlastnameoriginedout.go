@@ -1,5 +1,7 @@
 package shared
 
+// FirstLastNameOriginedOut
+// Represents the output of inferring the LIKELY country of Origin from a personal name.
 type FirstLastNameOriginedOut struct {
 	CountriesOriginTop       []string `json:"countriesOriginTop,omitempty"`
 	CountryOrigin            *string  `json:"countryOrigin,omitempty"`

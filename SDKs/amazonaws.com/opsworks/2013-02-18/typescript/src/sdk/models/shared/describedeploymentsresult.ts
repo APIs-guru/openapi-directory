@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Deployment } from "./deployment";
+
 
 
 // DescribeDeploymentsResult
@@ -8,6 +8,6 @@ import { Deployment } from "./deployment";
  * Contains the response to a <code>DescribeDeployments</code> request.
 **/
 export class DescribeDeploymentsResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Deployments", elemType: shared.Deployment })
+  @SpeakeasyMetadata({ data: "json, name=Deployments", elemType: Deployment })
   deployments?: Deployment[];
 }

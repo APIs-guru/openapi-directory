@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // PostalAddress
 /**
  * Represents a postal address, e.g. for postal delivery or payments addresses. Given a postal address, a postal service can deliver items to a premise, P.O. Box or similar. It is not intended to model geographical locations (roads, towns, mountains). In typical usage an address would be created via user input or from importing existing data, depending on the type of process. Advice on address input / editing: - Use an internationalization-ready address widget such as https://github.com/google/libaddressinput) - Users should not be presented with UI elements for input or editing of fields outside countries where that field is used. For more guidance on how to use this schema, please see: https://support.google.com/business/answer/6397478
@@ -33,47 +33,47 @@ var PostalAddress = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=addressLines" }),
+        SpeakeasyMetadata({ data: "json, name=addressLines" }),
         __metadata("design:type", Array)
     ], PostalAddress.prototype, "addressLines", void 0);
     __decorate([
-        Metadata({ data: "json, name=administrativeArea" }),
+        SpeakeasyMetadata({ data: "json, name=administrativeArea" }),
         __metadata("design:type", String)
     ], PostalAddress.prototype, "administrativeArea", void 0);
     __decorate([
-        Metadata({ data: "json, name=languageCode" }),
+        SpeakeasyMetadata({ data: "json, name=languageCode" }),
         __metadata("design:type", String)
     ], PostalAddress.prototype, "languageCode", void 0);
     __decorate([
-        Metadata({ data: "json, name=locality" }),
+        SpeakeasyMetadata({ data: "json, name=locality" }),
         __metadata("design:type", String)
     ], PostalAddress.prototype, "locality", void 0);
     __decorate([
-        Metadata({ data: "json, name=organization" }),
+        SpeakeasyMetadata({ data: "json, name=organization" }),
         __metadata("design:type", String)
     ], PostalAddress.prototype, "organization", void 0);
     __decorate([
-        Metadata({ data: "json, name=postalCode" }),
+        SpeakeasyMetadata({ data: "json, name=postalCode" }),
         __metadata("design:type", String)
     ], PostalAddress.prototype, "postalCode", void 0);
     __decorate([
-        Metadata({ data: "json, name=recipients" }),
+        SpeakeasyMetadata({ data: "json, name=recipients" }),
         __metadata("design:type", Array)
     ], PostalAddress.prototype, "recipients", void 0);
     __decorate([
-        Metadata({ data: "json, name=regionCode" }),
+        SpeakeasyMetadata({ data: "json, name=regionCode" }),
         __metadata("design:type", String)
     ], PostalAddress.prototype, "regionCode", void 0);
     __decorate([
-        Metadata({ data: "json, name=revision" }),
+        SpeakeasyMetadata({ data: "json, name=revision" }),
         __metadata("design:type", Number)
     ], PostalAddress.prototype, "revision", void 0);
     __decorate([
-        Metadata({ data: "json, name=sortingCode" }),
+        SpeakeasyMetadata({ data: "json, name=sortingCode" }),
         __metadata("design:type", String)
     ], PostalAddress.prototype, "sortingCode", void 0);
     __decorate([
-        Metadata({ data: "json, name=sublocality" }),
+        SpeakeasyMetadata({ data: "json, name=sublocality" }),
         __metadata("design:type", String)
     ], PostalAddress.prototype, "sublocality", void 0);
     return PostalAddress;

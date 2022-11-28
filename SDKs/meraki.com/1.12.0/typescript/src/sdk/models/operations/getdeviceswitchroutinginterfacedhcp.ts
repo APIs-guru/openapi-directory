@@ -1,28 +1,29 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetDeviceSwitchRoutingInterfaceDhcpPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=interfaceId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=interfaceId" })
   interfaceId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=serial" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=serial" })
   serial: string;
 }
 
 
 export class GetDeviceSwitchRoutingInterfaceDhcpRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetDeviceSwitchRoutingInterfaceDhcpPathParams;
 }
 
 
 export class GetDeviceSwitchRoutingInterfaceDhcpResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getDeviceSwitchRoutingInterfaceDhcp200ApplicationJsonObject?: Map<string, any>;
 }

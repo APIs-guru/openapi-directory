@@ -26,6 +26,8 @@ type DeploymentSimpleUser struct {
 	URL               string  `json:"url"`
 }
 
+// Deployment
+// A request for a specific ref(branch,sha,tag) to be deployed
 type Deployment struct {
 	CreatedAt             time.Time              `json:"created_at"`
 	Creator               DeploymentSimpleUser   `json:"creator"`

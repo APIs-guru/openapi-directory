@@ -22,14 +22,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var GetRawAncestorsPathParams = /** @class */ (function (_super) {
     __extends(GetRawAncestorsPathParams, _super);
     function GetRawAncestorsPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=pid" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=pid" }),
         __metadata("design:type", String)
     ], GetRawAncestorsPathParams.prototype, "pid", void 0);
     return GetRawAncestorsPathParams;
@@ -41,7 +41,7 @@ var GetRawAncestorsRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetRawAncestorsPathParams)
     ], GetRawAncestorsRequest.prototype, "pathParams", void 0);
     return GetRawAncestorsRequest;
@@ -53,19 +53,19 @@ var GetRawAncestorsResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], GetRawAncestorsResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetRawAncestorsResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetRawAncestorsResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], GetRawAncestorsResponse.prototype, "nitro", void 0);
     return GetRawAncestorsResponse;

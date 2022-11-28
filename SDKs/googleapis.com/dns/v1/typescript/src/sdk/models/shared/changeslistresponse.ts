@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Change } from "./change";
 import { ResponseHeader } from "./responseheader";
+
 
 
 // ChangesListResponse
@@ -9,15 +9,15 @@ import { ResponseHeader } from "./responseheader";
  * The response to a request to enumerate Changes to a ResourceRecordSets collection.
 **/
 export class ChangesListResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=changes", elemType: shared.Change })
+  @SpeakeasyMetadata({ data: "json, name=changes", elemType: Change })
   changes?: Change[];
 
-  @Metadata({ data: "json, name=header" })
+  @SpeakeasyMetadata({ data: "json, name=header" })
   header?: ResponseHeader;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 }

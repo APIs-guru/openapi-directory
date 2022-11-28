@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// BotSummary
+// Summary information about a bot returned by the <a>ListBots</a> operation.
 type BotSummary struct {
 	BotID               *string        `json:"botId,omitempty"`
 	BotName             *string        `json:"botName,omitempty"`

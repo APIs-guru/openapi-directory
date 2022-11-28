@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { WordInfo } from "./wordinfo";
+
 
 
 // SpeechRecognitionAlternative
@@ -8,12 +8,12 @@ import { WordInfo } from "./wordinfo";
  * Alternative hypotheses (a.k.a. n-best list).
 **/
 export class SpeechRecognitionAlternative extends SpeakeasyBase {
-  @Metadata({ data: "json, name=confidence" })
+  @SpeakeasyMetadata({ data: "json, name=confidence" })
   confidence?: number;
 
-  @Metadata({ data: "json, name=transcript" })
+  @SpeakeasyMetadata({ data: "json, name=transcript" })
   transcript?: string;
 
-  @Metadata({ data: "json, name=words", elemType: shared.WordInfo })
+  @SpeakeasyMetadata({ data: "json, name=words", elemType: WordInfo })
   words?: WordInfo[];
 }

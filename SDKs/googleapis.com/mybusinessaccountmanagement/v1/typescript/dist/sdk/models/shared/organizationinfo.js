@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PostalAddress } from "./postaladdress";
 // OrganizationInfo
 /**
@@ -34,17 +34,33 @@ var OrganizationInfo = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=address" }),
+        SpeakeasyMetadata({ data: "json, name=address" }),
         __metadata("design:type", PostalAddress)
     ], OrganizationInfo.prototype, "address", void 0);
     __decorate([
-        Metadata({ data: "json, name=phoneNumber" }),
+        SpeakeasyMetadata({ data: "json, name=phoneNumber" }),
         __metadata("design:type", String)
     ], OrganizationInfo.prototype, "phoneNumber", void 0);
     __decorate([
-        Metadata({ data: "json, name=registeredDomain" }),
+        SpeakeasyMetadata({ data: "json, name=registeredDomain" }),
         __metadata("design:type", String)
     ], OrganizationInfo.prototype, "registeredDomain", void 0);
     return OrganizationInfo;
 }(SpeakeasyBase));
 export { OrganizationInfo };
+// OrganizationInfoInput
+/**
+ * Additional information stored for an organization.
+**/
+var OrganizationInfoInput = /** @class */ (function (_super) {
+    __extends(OrganizationInfoInput, _super);
+    function OrganizationInfoInput() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=address" }),
+        __metadata("design:type", PostalAddress)
+    ], OrganizationInfoInput.prototype, "address", void 0);
+    return OrganizationInfoInput;
+}(SpeakeasyBase));
+export { OrganizationInfoInput };

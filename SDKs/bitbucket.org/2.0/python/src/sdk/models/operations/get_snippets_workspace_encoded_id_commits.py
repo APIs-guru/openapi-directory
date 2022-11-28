@@ -5,42 +5,27 @@ from sdk.models import shared
 
 @dataclass
 class GetSnippetsWorkspaceEncodedIDCommitsPathParams:
-    encoded_id: str = field(default=None, metadata={'path_param': { 'field_name': 'encoded_id', 'style': 'simple', 'explode': False }})
-    workspace: str = field(default=None, metadata={'path_param': { 'field_name': 'workspace', 'style': 'simple', 'explode': False }})
-    
-
-@dataclass
-class GetSnippetsWorkspaceEncodedIDCommitsSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    
-
-@dataclass
-class GetSnippetsWorkspaceEncodedIDCommitsSecurityOption2:
-    basic: shared.SchemeBasic = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'basic' }})
-    
-
-@dataclass
-class GetSnippetsWorkspaceEncodedIDCommitsSecurityOption3:
-    api_key: shared.SchemeAPIKey = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    encoded_id: str = field(metadata={'path_param': { 'field_name': 'encoded_id', 'style': 'simple', 'explode': False }})
+    workspace: str = field(metadata={'path_param': { 'field_name': 'workspace', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetSnippetsWorkspaceEncodedIDCommitsSecurity:
-    option1: Optional[GetSnippetsWorkspaceEncodedIDCommitsSecurityOption1] = field(default=None, metadata={'security': { 'option': True }})
-    option2: Optional[GetSnippetsWorkspaceEncodedIDCommitsSecurityOption2] = field(default=None, metadata={'security': { 'option': True }})
-    option3: Optional[GetSnippetsWorkspaceEncodedIDCommitsSecurityOption3] = field(default=None, metadata={'security': { 'option': True }})
+    api_key: Optional[shared.SchemeAPIKey] = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    basic: Optional[shared.SchemeBasic] = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'basic' }})
+    oauth2: Optional[shared.SchemeOauth2] = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class GetSnippetsWorkspaceEncodedIDCommitsRequest:
-    path_params: GetSnippetsWorkspaceEncodedIDCommitsPathParams = field(default=None)
-    security: GetSnippetsWorkspaceEncodedIDCommitsSecurity = field(default=None)
+    path_params: GetSnippetsWorkspaceEncodedIDCommitsPathParams = field()
+    security: GetSnippetsWorkspaceEncodedIDCommitsSecurity = field()
     
 
 @dataclass
 class GetSnippetsWorkspaceEncodedIDCommitsResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error: Optional[dict[str, Any]] = field(default=None)
     paginated_snippet_commit: Optional[shared.PaginatedSnippetCommit] = field(default=None)
     

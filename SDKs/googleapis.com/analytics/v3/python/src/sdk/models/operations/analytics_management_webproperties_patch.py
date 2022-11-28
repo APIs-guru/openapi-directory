@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class AnalyticsManagementWebpropertiesPatchPathParams:
-    account_id: str = field(default=None, metadata={'path_param': { 'field_name': 'accountId', 'style': 'simple', 'explode': False }})
-    web_property_id: str = field(default=None, metadata={'path_param': { 'field_name': 'webPropertyId', 'style': 'simple', 'explode': False }})
+    account_id: str = field(metadata={'path_param': { 'field_name': 'accountId', 'style': 'simple', 'explode': False }})
+    web_property_id: str = field(metadata={'path_param': { 'field_name': 'webPropertyId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -22,21 +23,21 @@ class AnalyticsManagementWebpropertiesPatchQueryParams:
 
 @dataclass
 class AnalyticsManagementWebpropertiesPatchSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class AnalyticsManagementWebpropertiesPatchRequest:
-    path_params: AnalyticsManagementWebpropertiesPatchPathParams = field(default=None)
-    query_params: AnalyticsManagementWebpropertiesPatchQueryParams = field(default=None)
-    request: Optional[shared.Webproperty] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: AnalyticsManagementWebpropertiesPatchSecurity = field(default=None)
+    path_params: AnalyticsManagementWebpropertiesPatchPathParams = field()
+    query_params: AnalyticsManagementWebpropertiesPatchQueryParams = field()
+    security: AnalyticsManagementWebpropertiesPatchSecurity = field()
+    request: Optional[shared.WebpropertyInput] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class AnalyticsManagementWebpropertiesPatchResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     webproperty: Optional[shared.Webproperty] = field(default=None)
     

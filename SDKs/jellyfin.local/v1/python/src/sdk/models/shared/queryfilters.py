@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import nameguidpair
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class QueryFilters:
-    genres: Optional[List[nameguidpair.NameGUIDPair]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Genres' }})
-    tags: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Tags' }})
+    genres: Optional[List[NameGUIDPair]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Genres') }})
+    tags: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Tags') }})
     

@@ -1,91 +1,92 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
+
 export enum ListAccessPoliciesIdentityTypeEnum {
-    User = "USER"
-,    Group = "GROUP"
-,    Iam = "IAM"
+    User = "USER",
+    Group = "GROUP",
+    Iam = "IAM"
 }
 
 export enum ListAccessPoliciesResourceTypeEnum {
-    Portal = "PORTAL"
-,    Project = "PROJECT"
+    Portal = "PORTAL",
+    Project = "PROJECT"
 }
 
 
 export class ListAccessPoliciesQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=iamArn" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=iamArn" })
   iamArn?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=identityId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=identityId" })
   identityId?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=identityType" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=identityType" })
   identityType?: ListAccessPoliciesIdentityTypeEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=maxResults" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=maxResults" })
   maxResults?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=nextToken" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=nextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=resourceId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=resourceId" })
   resourceId?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=resourceType" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=resourceType" })
   resourceType?: ListAccessPoliciesResourceTypeEnum;
 }
 
 
 export class ListAccessPoliciesHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
 
 export class ListAccessPoliciesRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: ListAccessPoliciesQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: ListAccessPoliciesHeaders;
 }
 
 
 export class ListAccessPoliciesResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   internalFailureException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidRequestException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   listAccessPoliciesResponse?: shared.ListAccessPoliciesResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   throttlingException?: any;
 }

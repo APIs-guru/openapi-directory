@@ -1,13 +1,17 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import transformsortcolumntype_enum
-from . import sortdirectiontype_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class TransformSortCriteria:
-    column: transformsortcolumntype_enum.TransformSortColumnTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Column' }})
-    sort_direction: sortdirectiontype_enum.SortDirectionTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'SortDirection' }})
+    r"""TransformSortCriteria
+    The sorting criteria that are associated with the machine learning transform.
+    """
+    
+    column: TransformSortColumnTypeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Column') }})
+    sort_direction: SortDirectionTypeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('SortDirection') }})
     

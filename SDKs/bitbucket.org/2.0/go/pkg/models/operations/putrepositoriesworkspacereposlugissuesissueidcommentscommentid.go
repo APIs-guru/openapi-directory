@@ -11,22 +11,10 @@ type PutRepositoriesWorkspaceRepoSlugIssuesIssueIDCommentsCommentIDPathParams st
 	Workspace string `pathParam:"style=simple,explode=false,name=workspace"`
 }
 
-type PutRepositoriesWorkspaceRepoSlugIssuesIssueIDCommentsCommentIDSecurityOption1 struct {
-	Oauth2 shared.SchemeOauth2 `security:"scheme,type=oauth2"`
-}
-
-type PutRepositoriesWorkspaceRepoSlugIssuesIssueIDCommentsCommentIDSecurityOption2 struct {
-	Basic shared.SchemeBasic `security:"scheme,type=http,subtype=basic"`
-}
-
-type PutRepositoriesWorkspaceRepoSlugIssuesIssueIDCommentsCommentIDSecurityOption3 struct {
-	APIKey shared.SchemeAPIKey `security:"scheme,type=apiKey,subtype=header"`
-}
-
 type PutRepositoriesWorkspaceRepoSlugIssuesIssueIDCommentsCommentIDSecurity struct {
-	Option1 *PutRepositoriesWorkspaceRepoSlugIssuesIssueIDCommentsCommentIDSecurityOption1 `security:"option"`
-	Option2 *PutRepositoriesWorkspaceRepoSlugIssuesIssueIDCommentsCommentIDSecurityOption2 `security:"option"`
-	Option3 *PutRepositoriesWorkspaceRepoSlugIssuesIssueIDCommentsCommentIDSecurityOption3 `security:"option"`
+	Oauth2 *shared.SchemeOauth2 `security:"scheme,type=oauth2"`
+	Basic  *shared.SchemeBasic  `security:"scheme,type=http,subtype=basic"`
+	APIKey *shared.SchemeAPIKey `security:"scheme,type=apiKey,subtype=header"`
 }
 
 type PutRepositoriesWorkspaceRepoSlugIssuesIssueIDCommentsCommentIDRequest struct {

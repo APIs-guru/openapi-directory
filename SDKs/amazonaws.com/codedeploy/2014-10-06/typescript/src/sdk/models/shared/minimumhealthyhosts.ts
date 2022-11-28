@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { MinimumHealthyHostsTypeEnum } from "./minimumhealthyhoststypeenum";
+
 
 
 // MinimumHealthyHosts
@@ -7,9 +8,9 @@ import { MinimumHealthyHostsTypeEnum } from "./minimumhealthyhoststypeenum";
  * Information about minimum healthy instance.
 **/
 export class MinimumHealthyHosts extends SpeakeasyBase {
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: MinimumHealthyHostsTypeEnum;
 
-  @Metadata({ data: "json, name=value" })
+  @SpeakeasyMetadata({ data: "json, name=value" })
   value?: number;
 }

@@ -1,8 +1,11 @@
-import warnings
+
+__doc__ = """ SDK Documentation: https://docs.aws.amazon.com/route53-recovery-control-config/ - Amazon Web Services documentation"""
 import requests
-from typing import Any,List,Optional
-from sdk.models import operations, shared
+from typing import Any,Optional
+from sdk.models import shared, operations
 from . import utils
+
+
 
 
 SERVERS = [
@@ -14,37 +17,63 @@ SERVERS = [
 
 
 class SDK:
-    client = requests.Session()
-    server_url = SERVERS[0]
+    r"""SDK Documentation: https://docs.aws.amazon.com/route53-recovery-control-config/ - Amazon Web Services documentation"""
+
+    _client: requests.Session
+    _security_client: requests.Session
+    _security: shared.Security
+    _server_url: str = SERVERS[0]
+    _language: str = "python"
+    _sdk_version: str = "0.0.1"
+    _gen_version: str = "internal"
+
+    def __init__(self) -> None:
+        self._client = requests.Session()
+        self._security_client = requests.Session()
+        
+
 
     def config_server_url(self, server_url: str, params: dict[str, str]):
-        if not params is None:
-            self.server_url = utils.replace_parameters(server_url, params)
+        if params is not None:
+            self._server_url = utils.replace_parameters(server_url, params)
         else:
-            self.server_url = server_url
-            
-    
-    def config_security(self, security: shared.Security):
-        self.client = utils.configure_security_client(security)
+            self._server_url = server_url
 
+        
+    
+
+    def config_client(self, client: requests.Session):
+        self._client = client
+        
+        if self._security is not None:
+            self._security_client = utils.configure_security_client(self._client, self._security)
+        
+    
+
+    def config_security(self, security: shared.Security):
+        self._security = security
+        self._security_client = utils.configure_security_client(self._client, security)
+        
+    
+    
     
     def create_cluster(self, request: operations.CreateClusterRequest) -> operations.CreateClusterResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Create a new cluster. A cluster is a set of redundant Regional endpoints against which you can run API calls to update or get the state of one or more routing controls. Each cluster has a name, status, Amazon Resource Name (ARN), and an array of the five cluster endpoints (one for each supported Amazon Web Services Region) that you can use with API calls to the Amazon Route 53 Application Recovery Controller cluster data plane.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/cluster"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -87,22 +116,22 @@ class SDK:
 
     
     def create_control_panel(self, request: operations.CreateControlPanelRequest) -> operations.CreateControlPanelResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Creates a new control panel. A control panel represents a group of routing controls that can be changed together in a single transaction. You can use a control panel to centrally view the operational status of applications across your organization, and trigger multi-app failovers in a single transaction, for example, to fail over an Availability Zone or AWS Region.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/controlpanel"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -145,22 +174,22 @@ class SDK:
 
     
     def create_routing_control(self, request: operations.CreateRoutingControlRequest) -> operations.CreateRoutingControlResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""<p>Creates a new routing control.</p> <p>A routing control has one of two states: ON and OFF. You can map the routing control state to the state of an Amazon Route 53 health check, which can be used to control traffic routing.</p> <p>To get or update the routing control state, see the Recovery Cluster (data plane) API actions for Amazon Route 53 Application Recovery Controller.</p>
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/routingcontrol"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -203,22 +232,22 @@ class SDK:
 
     
     def create_safety_rule(self, request: operations.CreateSafetyRuleRequest) -> operations.CreateSafetyRuleResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""<p>Creates a safety rule in a control panel. Safety rules let you add safeguards around enabling and disabling routing controls, to help prevent unexpected outcomes.</p> <p>There are two types of safety rules: assertion rules and gating rules.</p> <p>Assertion rule: An assertion rule enforces that, when a routing control state is changed, the criteria set by the rule configuration is met. Otherwise, the change to the routing control is not accepted.</p> <p>Gating rule: A gating rule verifies that a set of gating controls evaluates as true, based on a rule configuration that you specify. If the gating rule evaluates to true, Amazon Route 53 Application Recovery Controller allows a set of routing control state changes to run and complete against the set of target controls.</p>
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/safetyrule"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -241,15 +270,17 @@ class SDK:
 
     
     def delete_cluster(self, request: operations.DeleteClusterRequest) -> operations.DeleteClusterResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Delete a cluster.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/cluster/{ClusterArn}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -288,15 +319,17 @@ class SDK:
 
     
     def delete_control_panel(self, request: operations.DeleteControlPanelRequest) -> operations.DeleteControlPanelResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Deletes a control panel.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/controlpanel/{ControlPanelArn}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -335,15 +368,17 @@ class SDK:
 
     
     def delete_routing_control(self, request: operations.DeleteRoutingControlRequest) -> operations.DeleteRoutingControlResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Deletes a routing control.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/routingcontrol/{RoutingControlArn}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -382,15 +417,17 @@ class SDK:
 
     
     def delete_safety_rule(self, request: operations.DeleteSafetyRuleRequest) -> operations.DeleteSafetyRuleResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""<p>Deletes a safety rule.</p>/&gt;
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/safetyrule/{SafetyRuleArn}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -417,15 +454,17 @@ class SDK:
 
     
     def describe_cluster(self, request: operations.DescribeClusterRequest) -> operations.DescribeClusterResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Display the details about a cluster. The response includes the cluster name, endpoints, status, and Amazon Resource Name (ARN).
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/cluster/{ClusterArn}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -464,15 +503,17 @@ class SDK:
 
     
     def describe_control_panel(self, request: operations.DescribeControlPanelRequest) -> operations.DescribeControlPanelResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Displays details about a control panel.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/controlpanel/{ControlPanelArn}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -511,15 +552,17 @@ class SDK:
 
     
     def describe_routing_control(self, request: operations.DescribeRoutingControlRequest) -> operations.DescribeRoutingControlResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""<p>Displays details about a routing control. A routing control has one of two states: ON and OFF. You can map the routing control state to the state of an Amazon Route 53 health check, which can be used to control routing.</p> <p>To get or update the routing control state, see the Recovery Cluster (data plane) API actions for Amazon Route 53 Application Recovery Controller.</p>
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/routingcontrol/{RoutingControlArn}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -558,15 +601,17 @@ class SDK:
 
     
     def describe_safety_rule(self, request: operations.DescribeSafetyRuleRequest) -> operations.DescribeSafetyRuleResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Describes the safety rules (that is, the assertion rules and gating rules) for the routing controls in a control panel.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/safetyrule/{SafetyRuleArn}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -589,17 +634,18 @@ class SDK:
 
     
     def list_associated_route53_health_checks(self, request: operations.ListAssociatedRoute53HealthChecksRequest) -> operations.ListAssociatedRoute53HealthChecksResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns an array of all Amazon Route 53 health checks associated with a specific routing control.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/routingcontrol/{RoutingControlArn}/associatedRoute53HealthChecks", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -626,17 +672,18 @@ class SDK:
 
     
     def list_clusters(self, request: operations.ListClustersRequest) -> operations.ListClustersResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns an array of all the clusters in an account.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/cluster"
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -671,17 +718,18 @@ class SDK:
 
     
     def list_control_panels(self, request: operations.ListControlPanelsRequest) -> operations.ListControlPanelsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns an array of control panels for a cluster.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/controlpanels"
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -716,17 +764,18 @@ class SDK:
 
     
     def list_routing_controls(self, request: operations.ListRoutingControlsRequest) -> operations.ListRoutingControlsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns an array of routing controls for a control panel. A routing control is an Amazon Route 53 Application Recovery Controller construct that has one of two states: ON and OFF. You can map the routing control state to the state of an Amazon Route 53 health check, which can be used to control routing.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/controlpanel/{ControlPanelArn}/routingcontrols", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -761,17 +810,18 @@ class SDK:
 
     
     def list_safety_rules(self, request: operations.ListSafetyRulesRequest) -> operations.ListSafetyRulesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""List the safety rules (the assertion rules and gating rules) that you've defined for the routing controls in a control panel.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/controlpanel/{ControlPanelArn}/safetyrules", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -806,22 +856,22 @@ class SDK:
 
     
     def update_control_panel(self, request: operations.UpdateControlPanelRequest) -> operations.UpdateControlPanelResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Updates a control panel. The only update you can make to a control panel is to change the name of the control panel.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/controlpanel"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -860,22 +910,22 @@ class SDK:
 
     
     def update_routing_control(self, request: operations.UpdateRoutingControlRequest) -> operations.UpdateRoutingControlResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Updates a routing control. You can only update the name of the routing control. To get or update the routing control state, see the Recovery Cluster (data plane) API actions for Amazon Route 53 Application Recovery Controller.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/routingcontrol"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -914,22 +964,22 @@ class SDK:
 
     
     def update_safety_rule(self, request: operations.UpdateSafetyRuleRequest) -> operations.UpdateSafetyRuleResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Update a safety rule (an assertion rule or gating rule) for the routing controls in a control panel. You can only update the name and the waiting period for a safety rule. To make other updates, delete the safety rule and create a new safety rule.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/safetyrule"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 

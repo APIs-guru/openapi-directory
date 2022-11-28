@@ -1,5 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Any,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
 from sdk.models import shared
 
 
@@ -23,17 +26,17 @@ class ListMembersHeaders:
 
 @dataclass
 class ListMembersRequest:
-    query_params: ListMembersQueryParams = field(default=None)
-    headers: ListMembersHeaders = field(default=None)
+    headers: ListMembersHeaders = field()
+    query_params: ListMembersQueryParams = field()
     
 
 @dataclass
 class ListMembersResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     internal_exception: Optional[Any] = field(default=None)
     invalid_access_exception: Optional[Any] = field(default=None)
     invalid_input_exception: Optional[Any] = field(default=None)
     limit_exceeded_exception: Optional[Any] = field(default=None)
     list_members_response: Optional[shared.ListMembersResponse] = field(default=None)
-    status_code: int = field(default=None)
     

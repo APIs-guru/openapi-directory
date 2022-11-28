@@ -5,12 +5,12 @@ from sdk.models import shared
 
 @dataclass
 class DcimDeviceBaysCreateRequest:
-    request: shared.WritableDeviceBay = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    request: shared.WritableDeviceBayInput = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class DcimDeviceBaysCreateResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     device_bay: Optional[shared.DeviceBay] = field(default=None)
-    status_code: int = field(default=None)
     

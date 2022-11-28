@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostUntagInstanceProfileActionEnum(str, Enum):
     UNTAG_INSTANCE_PROFILE = "UntagInstanceProfile"
@@ -10,8 +14,8 @@ class PostUntagInstanceProfileVersionEnum(str, Enum):
 
 @dataclass
 class PostUntagInstanceProfileQueryParams:
-    action: PostUntagInstanceProfileActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostUntagInstanceProfileVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostUntagInstanceProfileActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostUntagInstanceProfileVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostUntagInstanceProfileHeaders:
 
 @dataclass
 class PostUntagInstanceProfileRequest:
-    query_params: PostUntagInstanceProfileQueryParams = field(default=None)
-    headers: PostUntagInstanceProfileHeaders = field(default=None)
+    headers: PostUntagInstanceProfileHeaders = field()
+    query_params: PostUntagInstanceProfileQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostUntagInstanceProfileResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

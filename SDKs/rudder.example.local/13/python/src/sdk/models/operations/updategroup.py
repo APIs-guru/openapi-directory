@@ -1,18 +1,17 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
 @dataclass
 class UpdateGroupPathParams:
-    group_id: str = field(default=None, metadata={'path_param': { 'field_name': 'groupId', 'style': 'simple', 'explode': False }})
-    
-
-@dataclass
-class UpdateGroupRequest:
-    path_params: UpdateGroupPathParams = field(default=None)
-    request: shared.GroupUpdate = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    group_id: str = field(metadata={'path_param': { 'field_name': 'groupId', 'style': 'simple', 'explode': False }})
     
 class UpdateGroup200ApplicationJSONActionEnum(str, Enum):
     UPDATE_GROUP = "updateGroup"
@@ -21,7 +20,7 @@ class UpdateGroup200ApplicationJSONActionEnum(str, Enum):
 @dataclass_json
 @dataclass
 class UpdateGroup200ApplicationJSONData:
-    groups: List[shared.Group] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'groups' }})
+    groups: List[shared.Group] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('groups') }})
     
 class UpdateGroup200ApplicationJSONResultEnum(str, Enum):
     SUCCESS = "success"
@@ -31,14 +30,20 @@ class UpdateGroup200ApplicationJSONResultEnum(str, Enum):
 @dataclass_json
 @dataclass
 class UpdateGroup200ApplicationJSON:
-    action: UpdateGroup200ApplicationJSONActionEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'action' }})
-    data: UpdateGroup200ApplicationJSONData = field(default=None, metadata={'dataclasses_json': { 'field_name': 'data' }})
-    result: UpdateGroup200ApplicationJSONResultEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'result' }})
+    action: UpdateGroup200ApplicationJSONActionEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('action') }})
+    data: UpdateGroup200ApplicationJSONData = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('data') }})
+    result: UpdateGroup200ApplicationJSONResultEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('result') }})
+    
+
+@dataclass
+class UpdateGroupRequest:
+    path_params: UpdateGroupPathParams = field()
+    request: shared.GroupUpdate = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class UpdateGroupResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     update_group_200_application_json_object: Optional[UpdateGroup200ApplicationJSON] = field(default=None)
     

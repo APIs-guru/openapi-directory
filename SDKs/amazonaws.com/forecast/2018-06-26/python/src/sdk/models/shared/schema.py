@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import schemaattribute
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class Schema:
-    attributes: Optional[List[schemaattribute.SchemaAttribute]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Attributes' }})
+    r"""Schema
+    Defines the fields of a dataset. You specify this object in the <a>CreateDataset</a> request.
+    """
+    
+    attributes: Optional[List[SchemaAttribute]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Attributes') }})
     

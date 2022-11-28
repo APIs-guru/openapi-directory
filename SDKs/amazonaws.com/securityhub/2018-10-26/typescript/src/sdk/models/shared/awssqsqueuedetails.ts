@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AwsSqsQueueDetails
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Data about a queue.
 **/
 export class AwsSqsQueueDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DeadLetterTargetArn" })
+  @SpeakeasyMetadata({ data: "json, name=DeadLetterTargetArn" })
   deadLetterTargetArn?: string;
 
-  @Metadata({ data: "json, name=KmsDataKeyReusePeriodSeconds" })
+  @SpeakeasyMetadata({ data: "json, name=KmsDataKeyReusePeriodSeconds" })
   kmsDataKeyReusePeriodSeconds?: number;
 
-  @Metadata({ data: "json, name=KmsMasterKeyId" })
+  @SpeakeasyMetadata({ data: "json, name=KmsMasterKeyId" })
   kmsMasterKeyId?: string;
 
-  @Metadata({ data: "json, name=QueueName" })
+  @SpeakeasyMetadata({ data: "json, name=QueueName" })
   queueName?: string;
 }

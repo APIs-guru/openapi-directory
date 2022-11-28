@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { StatusTypeEnum } from "./statustypeenum";
+
 
 
 // BuildBatchFilter
@@ -7,6 +8,6 @@ import { StatusTypeEnum } from "./statustypeenum";
  * Specifies filters when retrieving batch builds.
 **/
 export class BuildBatchFilter extends SpeakeasyBase {
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: StatusTypeEnum;
 }

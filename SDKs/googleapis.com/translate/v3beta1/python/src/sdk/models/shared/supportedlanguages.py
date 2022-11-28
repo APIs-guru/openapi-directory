@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import supportedlanguage
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class SupportedLanguages:
-    languages: Optional[List[supportedlanguage.SupportedLanguage]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'languages' }})
+    r"""SupportedLanguages
+    The response message for discovering supported languages.
+    """
+    
+    languages: Optional[List[SupportedLanguage]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('languages') }})
     

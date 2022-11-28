@@ -1,65 +1,66 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetRealmAdminEventsPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=realm" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=realm" })
   realm: string;
 }
 
 
 export class GetRealmAdminEventsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=authClient" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=authClient" })
   authClient?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=authIpAddress" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=authIpAddress" })
   authIpAddress?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=authRealm" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=authRealm" })
   authRealm?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=authUser" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=authUser" })
   authUser?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=dateFrom" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=dateFrom" })
   dateFrom?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=dateTo" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=dateTo" })
   dateTo?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=first" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=first" })
   first?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=max" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=max" })
   max?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=operationTypes" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=operationTypes" })
   operationTypes?: string[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=resourcePath" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=resourcePath" })
   resourcePath?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=resourceTypes" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=resourceTypes" })
   resourceTypes?: string[];
 }
 
 
 export class GetRealmAdminEventsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetRealmAdminEventsPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetRealmAdminEventsQueryParams;
 }
 
 
 export class GetRealmAdminEventsResponse extends SpeakeasyBase {
-  @Metadata({ elemType: shared.AdminEventRepresentation })
+  @SpeakeasyMetadata({ elemType: shared.AdminEventRepresentation })
   adminEventRepresentations?: shared.AdminEventRepresentation[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

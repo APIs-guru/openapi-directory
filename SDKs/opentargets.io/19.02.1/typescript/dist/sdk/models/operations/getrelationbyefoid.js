@@ -22,14 +22,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var GetRelationByEfoidPathParams = /** @class */ (function (_super) {
     __extends(GetRelationByEfoidPathParams, _super);
     function GetRelationByEfoidPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=disease" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=disease" }),
         __metadata("design:type", String)
     ], GetRelationByEfoidPathParams.prototype, "disease", void 0);
     return GetRelationByEfoidPathParams;
@@ -41,7 +41,7 @@ var GetRelationByEfoidRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetRelationByEfoidPathParams)
     ], GetRelationByEfoidRequest.prototype, "pathParams", void 0);
     return GetRelationByEfoidRequest;
@@ -53,11 +53,11 @@ var GetRelationByEfoidResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetRelationByEfoidResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetRelationByEfoidResponse.prototype, "statusCode", void 0);
     return GetRelationByEfoidResponse;

@@ -1,11 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum GetInstanceHealthResponseHealthStateEnum {
-    HealthStateUnspecified = "HEALTH_STATE_UNSPECIFIED"
-,    Healthy = "HEALTHY"
-,    Unhealthy = "UNHEALTHY"
-,    AgentNotInstalled = "AGENT_NOT_INSTALLED"
-,    AgentNotRunning = "AGENT_NOT_RUNNING"
+    HealthStateUnspecified = "HEALTH_STATE_UNSPECIFIED",
+    Healthy = "HEALTHY",
+    Unhealthy = "UNHEALTHY",
+    AgentNotInstalled = "AGENT_NOT_INSTALLED",
+    AgentNotRunning = "AGENT_NOT_RUNNING"
 }
 
 
@@ -14,9 +15,9 @@ export enum GetInstanceHealthResponseHealthStateEnum {
  * Response for checking if a notebook instance is healthy.
 **/
 export class GetInstanceHealthResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=healthInfo" })
+  @SpeakeasyMetadata({ data: "json, name=healthInfo" })
   healthInfo?: Map<string, string>;
 
-  @Metadata({ data: "json, name=healthState" })
+  @SpeakeasyMetadata({ data: "json, name=healthState" })
   healthState?: GetInstanceHealthResponseHealthStateEnum;
 }

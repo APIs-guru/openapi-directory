@@ -1,14 +1,19 @@
 from dataclasses import dataclass, field
-from typing import Enum,List
+from typing import List
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import intentfiltername_enum
-from . import intentfilteroperator_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class IntentFilter:
-    name: intentfiltername_enum.IntentFilterNameEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    operator: intentfilteroperator_enum.IntentFilterOperatorEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'operator' }})
-    values: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'values' }})
+    r"""IntentFilter
+    Filters the response from the <code>ListIntents</code> operation.
+    """
+    
+    name: IntentFilterNameEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    operator: IntentFilterOperatorEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('operator') }})
+    values: List[str] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('values') }})
     

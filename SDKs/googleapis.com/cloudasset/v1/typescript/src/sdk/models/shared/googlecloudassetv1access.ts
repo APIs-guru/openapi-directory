@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { IamPolicyAnalysisState } from "./iampolicyanalysisstate";
+
 
 
 // GoogleCloudAssetV1Access
@@ -7,12 +8,12 @@ import { IamPolicyAnalysisState } from "./iampolicyanalysisstate";
  * An IAM role or permission under analysis.
 **/
 export class GoogleCloudAssetV1Access extends SpeakeasyBase {
-  @Metadata({ data: "json, name=analysisState" })
+  @SpeakeasyMetadata({ data: "json, name=analysisState" })
   analysisState?: IamPolicyAnalysisState;
 
-  @Metadata({ data: "json, name=permission" })
+  @SpeakeasyMetadata({ data: "json, name=permission" })
   permission?: string;
 
-  @Metadata({ data: "json, name=role" })
+  @SpeakeasyMetadata({ data: "json, name=role" })
   role?: string;
 }

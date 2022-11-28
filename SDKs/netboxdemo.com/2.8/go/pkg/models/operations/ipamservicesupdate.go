@@ -10,7 +10,7 @@ type IpamServicesUpdatePathParams struct {
 
 type IpamServicesUpdateRequest struct {
 	PathParams IpamServicesUpdatePathParams
-	Request    shared.WritableService `request:"mediaType=application/json"`
+	Request    shared.WritableServiceInput `request:"mediaType=application/json"`
 }
 
 type IpamServicesUpdateResponse struct {

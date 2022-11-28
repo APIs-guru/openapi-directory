@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// Namespace
+// A complex type that contains information about a specified namespace.
 type Namespace struct {
 	Arn              *string              `json:"Arn,omitempty"`
 	CreateDate       *time.Time           `json:"CreateDate,omitempty"`

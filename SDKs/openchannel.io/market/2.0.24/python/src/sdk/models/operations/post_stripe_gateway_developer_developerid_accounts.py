@@ -1,26 +1,26 @@
 from dataclasses import dataclass, field
-
+from typing import Optional
 
 
 @dataclass
 class PostStripeGatewayDeveloperDeveloperIDAccountsPathParams:
-    developer_id: str = field(default=None, metadata={'path_param': { 'field_name': 'developerId', 'style': 'simple', 'explode': False }})
+    developer_id: str = field(metadata={'path_param': { 'field_name': 'developerId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class PostStripeGatewayDeveloperDeveloperIDAccountsQueryParams:
-    redirect_url: str = field(default=None, metadata={'query_param': { 'field_name': 'redirectUrl', 'style': 'form', 'explode': True }})
+    redirect_url: str = field(metadata={'query_param': { 'field_name': 'redirectUrl', 'style': 'form', 'explode': True }})
     
 
 @dataclass
 class PostStripeGatewayDeveloperDeveloperIDAccountsRequest:
-    path_params: PostStripeGatewayDeveloperDeveloperIDAccountsPathParams = field(default=None)
-    query_params: PostStripeGatewayDeveloperDeveloperIDAccountsQueryParams = field(default=None)
+    path_params: PostStripeGatewayDeveloperDeveloperIDAccountsPathParams = field()
+    query_params: PostStripeGatewayDeveloperDeveloperIDAccountsQueryParams = field()
     
 
 @dataclass
 class PostStripeGatewayDeveloperDeveloperIDAccountsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

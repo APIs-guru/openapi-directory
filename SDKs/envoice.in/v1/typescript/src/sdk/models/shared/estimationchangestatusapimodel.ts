@@ -1,16 +1,17 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum EstimationChangeStatusApiModelStatusEnum {
-    Draft = "Draft"
-,    Accepted = "Accepted"
-,    Rejected = "Rejected"
+    Draft = "Draft",
+    Accepted = "Accepted",
+    Rejected = "Rejected"
 }
 
 
 export class EstimationChangeStatusApiModel extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Id, form, name=Id;" })
+  @SpeakeasyMetadata({ data: "json, name=Id, form, name=Id;" })
   id?: number;
 
-  @Metadata({ data: "json, name=Status, form, name=Status;" })
+  @SpeakeasyMetadata({ data: "json, name=Status, form, name=Status;" })
   status?: EstimationChangeStatusApiModelStatusEnum;
 }

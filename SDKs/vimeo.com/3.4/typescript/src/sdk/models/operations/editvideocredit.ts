@@ -1,53 +1,54 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class EditVideoCreditPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=credit_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=credit_id" })
   creditId: number;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=video_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=video_id" })
   videoId: number;
 }
 
 
 export class EditVideoCreditRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=role" })
+  @SpeakeasyMetadata({ data: "json, name=role" })
   role?: string;
 }
 
 
 export class EditVideoCreditSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   oauth2: shared.SchemeOauth2;
 }
 
 
 export class EditVideoCreditRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: EditVideoCreditPathParams;
 
-  @Metadata({ data: "request, media_type=application/vnd.vimeo.credit+json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/vnd.vimeo.credit+json" })
   request?: EditVideoCreditRequestBody;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: EditVideoCreditSecurity;
 }
 
 
 export class EditVideoCreditResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   credit?: shared.Credit;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   legacyError?: shared.LegacyError;
 }

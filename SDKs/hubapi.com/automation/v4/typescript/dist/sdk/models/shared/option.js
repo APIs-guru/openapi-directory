@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // Option
 /**
  * An option for a field value.
@@ -33,31 +33,31 @@ var Option = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=description" }),
+        SpeakeasyMetadata({ data: "json, name=description" }),
         __metadata("design:type", String)
     ], Option.prototype, "description", void 0);
     __decorate([
-        Metadata({ data: "json, name=displayOrder" }),
+        SpeakeasyMetadata({ data: "json, name=displayOrder" }),
         __metadata("design:type", Number)
     ], Option.prototype, "displayOrder", void 0);
     __decorate([
-        Metadata({ data: "json, name=doubleData" }),
+        SpeakeasyMetadata({ data: "json, name=doubleData" }),
         __metadata("design:type", Number)
     ], Option.prototype, "doubleData", void 0);
     __decorate([
-        Metadata({ data: "json, name=hidden" }),
+        SpeakeasyMetadata({ data: "json, name=hidden" }),
         __metadata("design:type", Boolean)
     ], Option.prototype, "hidden", void 0);
     __decorate([
-        Metadata({ data: "json, name=label" }),
+        SpeakeasyMetadata({ data: "json, name=label" }),
         __metadata("design:type", String)
     ], Option.prototype, "label", void 0);
     __decorate([
-        Metadata({ data: "json, name=readOnly" }),
+        SpeakeasyMetadata({ data: "json, name=readOnly" }),
         __metadata("design:type", Boolean)
     ], Option.prototype, "readOnly", void 0);
     __decorate([
-        Metadata({ data: "json, name=value" }),
+        SpeakeasyMetadata({ data: "json, name=value" }),
         __metadata("design:type", String)
     ], Option.prototype, "value", void 0);
     return Option;

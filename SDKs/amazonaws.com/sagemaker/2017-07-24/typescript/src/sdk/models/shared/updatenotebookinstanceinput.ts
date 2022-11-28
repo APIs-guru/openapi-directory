@@ -1,46 +1,47 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { NotebookInstanceAcceleratorTypeEnum } from "./notebookinstanceacceleratortypeenum";
 import { InstanceTypeEnum } from "./instancetypeenum";
 import { RootAccessEnum } from "./rootaccessenum";
 
 
+
 export class UpdateNotebookInstanceInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AcceleratorTypes" })
+  @SpeakeasyMetadata({ data: "json, name=AcceleratorTypes" })
   acceleratorTypes?: NotebookInstanceAcceleratorTypeEnum[];
 
-  @Metadata({ data: "json, name=AdditionalCodeRepositories" })
+  @SpeakeasyMetadata({ data: "json, name=AdditionalCodeRepositories" })
   additionalCodeRepositories?: string[];
 
-  @Metadata({ data: "json, name=DefaultCodeRepository" })
+  @SpeakeasyMetadata({ data: "json, name=DefaultCodeRepository" })
   defaultCodeRepository?: string;
 
-  @Metadata({ data: "json, name=DisassociateAcceleratorTypes" })
+  @SpeakeasyMetadata({ data: "json, name=DisassociateAcceleratorTypes" })
   disassociateAcceleratorTypes?: boolean;
 
-  @Metadata({ data: "json, name=DisassociateAdditionalCodeRepositories" })
+  @SpeakeasyMetadata({ data: "json, name=DisassociateAdditionalCodeRepositories" })
   disassociateAdditionalCodeRepositories?: boolean;
 
-  @Metadata({ data: "json, name=DisassociateDefaultCodeRepository" })
+  @SpeakeasyMetadata({ data: "json, name=DisassociateDefaultCodeRepository" })
   disassociateDefaultCodeRepository?: boolean;
 
-  @Metadata({ data: "json, name=DisassociateLifecycleConfig" })
+  @SpeakeasyMetadata({ data: "json, name=DisassociateLifecycleConfig" })
   disassociateLifecycleConfig?: boolean;
 
-  @Metadata({ data: "json, name=InstanceType" })
+  @SpeakeasyMetadata({ data: "json, name=InstanceType" })
   instanceType?: InstanceTypeEnum;
 
-  @Metadata({ data: "json, name=LifecycleConfigName" })
+  @SpeakeasyMetadata({ data: "json, name=LifecycleConfigName" })
   lifecycleConfigName?: string;
 
-  @Metadata({ data: "json, name=NotebookInstanceName" })
+  @SpeakeasyMetadata({ data: "json, name=NotebookInstanceName" })
   notebookInstanceName: string;
 
-  @Metadata({ data: "json, name=RoleArn" })
+  @SpeakeasyMetadata({ data: "json, name=RoleArn" })
   roleArn?: string;
 
-  @Metadata({ data: "json, name=RootAccess" })
+  @SpeakeasyMetadata({ data: "json, name=RootAccess" })
   rootAccess?: RootAccessEnum;
 
-  @Metadata({ data: "json, name=VolumeSizeInGB" })
+  @SpeakeasyMetadata({ data: "json, name=VolumeSizeInGB" })
   volumeSizeInGb?: number;
 }

@@ -1,9 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { MetricFilterMatchRecord } from "./metricfiltermatchrecord";
 
 
+
 export class TestMetricFilterResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=matches", elemType: shared.MetricFilterMatchRecord })
+  @SpeakeasyMetadata({ data: "json, name=matches", elemType: MetricFilterMatchRecord })
   matches?: MetricFilterMatchRecord[];
 }

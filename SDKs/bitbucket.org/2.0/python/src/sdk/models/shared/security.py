@@ -3,16 +3,17 @@ from dataclasses import dataclass, field
 
 
 @dataclass
-class SchemeAPIKey:
-    api_key: str = field(default=None, metadata={'security': { 'field_name': 'Authorization' }})
-    
-
-@dataclass
 class SchemeBasic:
-    authorization: str = field(default=None, metadata={'security': { 'field_name': 'Authorization' }})
+    password: str = field(metadata={'security': { 'field_name': 'password' }})
+    username: str = field(metadata={'security': { 'field_name': 'username' }})
     
 
 @dataclass
 class SchemeOauth2:
-    authorization: str = field(default=None, metadata={'security': { 'field_name': 'Authorization' }})
+    authorization: str = field(metadata={'security': { 'field_name': 'Authorization' }})
+    
+
+@dataclass
+class SchemeAPIKey:
+    api_key: str = field(metadata={'security': { 'field_name': 'Authorization' }})
     

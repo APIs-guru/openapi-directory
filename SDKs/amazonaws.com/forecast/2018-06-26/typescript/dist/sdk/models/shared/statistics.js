@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // Statistics
 /**
  * Provides statistics for each data field imported into to an Amazon Forecast dataset with the <a>CreateDatasetImportJob</a> operation.
@@ -33,51 +33,51 @@ var Statistics = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Avg" }),
+        SpeakeasyMetadata({ data: "json, name=Avg" }),
         __metadata("design:type", Number)
     ], Statistics.prototype, "avg", void 0);
     __decorate([
-        Metadata({ data: "json, name=Count" }),
+        SpeakeasyMetadata({ data: "json, name=Count" }),
         __metadata("design:type", Number)
     ], Statistics.prototype, "count", void 0);
     __decorate([
-        Metadata({ data: "json, name=CountDistinct" }),
+        SpeakeasyMetadata({ data: "json, name=CountDistinct" }),
         __metadata("design:type", Number)
     ], Statistics.prototype, "countDistinct", void 0);
     __decorate([
-        Metadata({ data: "json, name=CountDistinctLong" }),
+        SpeakeasyMetadata({ data: "json, name=CountDistinctLong" }),
         __metadata("design:type", Number)
     ], Statistics.prototype, "countDistinctLong", void 0);
     __decorate([
-        Metadata({ data: "json, name=CountLong" }),
+        SpeakeasyMetadata({ data: "json, name=CountLong" }),
         __metadata("design:type", Number)
     ], Statistics.prototype, "countLong", void 0);
     __decorate([
-        Metadata({ data: "json, name=CountNan" }),
+        SpeakeasyMetadata({ data: "json, name=CountNan" }),
         __metadata("design:type", Number)
     ], Statistics.prototype, "countNan", void 0);
     __decorate([
-        Metadata({ data: "json, name=CountNanLong" }),
+        SpeakeasyMetadata({ data: "json, name=CountNanLong" }),
         __metadata("design:type", Number)
     ], Statistics.prototype, "countNanLong", void 0);
     __decorate([
-        Metadata({ data: "json, name=CountNull" }),
+        SpeakeasyMetadata({ data: "json, name=CountNull" }),
         __metadata("design:type", Number)
     ], Statistics.prototype, "countNull", void 0);
     __decorate([
-        Metadata({ data: "json, name=CountNullLong" }),
+        SpeakeasyMetadata({ data: "json, name=CountNullLong" }),
         __metadata("design:type", Number)
     ], Statistics.prototype, "countNullLong", void 0);
     __decorate([
-        Metadata({ data: "json, name=Max" }),
+        SpeakeasyMetadata({ data: "json, name=Max" }),
         __metadata("design:type", String)
     ], Statistics.prototype, "max", void 0);
     __decorate([
-        Metadata({ data: "json, name=Min" }),
+        SpeakeasyMetadata({ data: "json, name=Min" }),
         __metadata("design:type", String)
     ], Statistics.prototype, "min", void 0);
     __decorate([
-        Metadata({ data: "json, name=Stddev" }),
+        SpeakeasyMetadata({ data: "json, name=Stddev" }),
         __metadata("design:type", Number)
     ], Statistics.prototype, "stddev", void 0);
     return Statistics;

@@ -10,12 +10,12 @@ class GetExportsQueryParams:
 
 @dataclass
 class GetExportsRequest:
-    query_params: GetExportsQueryParams = field(default=None)
+    query_params: GetExportsQueryParams = field()
     
 
 @dataclass
 class GetExportsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     get_exports_200_application_json_any: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ClassificationType } from "./classificationtype";
 // S3ResourceClassification
 /**
@@ -34,15 +34,15 @@ var S3ResourceClassification = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=bucketName" }),
+        SpeakeasyMetadata({ data: "json, name=bucketName" }),
         __metadata("design:type", String)
     ], S3ResourceClassification.prototype, "bucketName", void 0);
     __decorate([
-        Metadata({ data: "json, name=classificationType" }),
+        SpeakeasyMetadata({ data: "json, name=classificationType" }),
         __metadata("design:type", ClassificationType)
     ], S3ResourceClassification.prototype, "classificationType", void 0);
     __decorate([
-        Metadata({ data: "json, name=prefix" }),
+        SpeakeasyMetadata({ data: "json, name=prefix" }),
         __metadata("design:type", String)
     ], S3ResourceClassification.prototype, "prefix", void 0);
     return S3ResourceClassification;

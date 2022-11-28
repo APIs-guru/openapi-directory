@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AccountDetails } from "./accountdetails";
 import { AppIntegrity } from "./appintegrity";
 import { DeviceIntegrity } from "./deviceintegrity";
@@ -38,23 +38,23 @@ var TokenPayloadExternal = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=accountDetails" }),
+        SpeakeasyMetadata({ data: "json, name=accountDetails" }),
         __metadata("design:type", AccountDetails)
     ], TokenPayloadExternal.prototype, "accountDetails", void 0);
     __decorate([
-        Metadata({ data: "json, name=appIntegrity" }),
+        SpeakeasyMetadata({ data: "json, name=appIntegrity" }),
         __metadata("design:type", AppIntegrity)
     ], TokenPayloadExternal.prototype, "appIntegrity", void 0);
     __decorate([
-        Metadata({ data: "json, name=deviceIntegrity" }),
+        SpeakeasyMetadata({ data: "json, name=deviceIntegrity" }),
         __metadata("design:type", DeviceIntegrity)
     ], TokenPayloadExternal.prototype, "deviceIntegrity", void 0);
     __decorate([
-        Metadata({ data: "json, name=requestDetails" }),
+        SpeakeasyMetadata({ data: "json, name=requestDetails" }),
         __metadata("design:type", RequestDetails)
     ], TokenPayloadExternal.prototype, "requestDetails", void 0);
     __decorate([
-        Metadata({ data: "json, name=testingDetails" }),
+        SpeakeasyMetadata({ data: "json, name=testingDetails" }),
         __metadata("design:type", TestingDetails)
     ], TokenPayloadExternal.prototype, "testingDetails", void 0);
     return TokenPayloadExternal;

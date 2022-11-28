@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 
 class GetModifyDbClusterActionEnum(str, Enum):
     MODIFY_DB_CLUSTER = "ModifyDBCluster"
@@ -7,12 +11,20 @@ class GetModifyDbClusterActionEnum(str, Enum):
 
 @dataclass
 class GetModifyDbClusterCloudwatchLogsExportConfiguration:
+    r"""GetModifyDbClusterCloudwatchLogsExportConfiguration
+    <p>The configuration setting for the log types to be enabled for export to CloudWatch Logs for a specific DB instance or DB cluster.</p> <p>The <code>EnableLogTypes</code> and <code>DisableLogTypes</code> arrays determine which logs will be exported (or not exported) to CloudWatch Logs. The values within these arrays depend on the DB engine being used.</p> <p>For more information about exporting CloudWatch Logs for Amazon RDS DB instances, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch\">Publishing Database Logs to Amazon CloudWatch Logs </a> in the <i>Amazon RDS User Guide</i>.</p> <p>For more information about exporting CloudWatch Logs for Amazon Aurora DB clusters, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch\">Publishing Database Logs to Amazon CloudWatch Logs</a> in the <i>Amazon Aurora User Guide</i>.</p>
+    """
+    
     disable_log_types: Optional[List[str]] = field(default=None, metadata={'query_param': { 'field_name': 'DisableLogTypes' }})
     enable_log_types: Optional[List[str]] = field(default=None, metadata={'query_param': { 'field_name': 'EnableLogTypes' }})
     
 
 @dataclass
 class GetModifyDbClusterScalingConfiguration:
+    r"""GetModifyDbClusterScalingConfiguration
+    <p>Contains the scaling configuration of an Aurora Serverless DB cluster.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless.html\">Using Amazon Aurora Serverless</a> in the <i>Amazon Aurora User Guide</i>.</p>
+    """
+    
     auto_pause: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'AutoPause' }})
     max_capacity: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'MaxCapacity' }})
     min_capacity: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'MinCapacity' }})
@@ -26,14 +38,15 @@ class GetModifyDbClusterVersionEnum(str, Enum):
 
 @dataclass
 class GetModifyDbClusterQueryParams:
-    action: GetModifyDbClusterActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetModifyDbClusterActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    db_cluster_identifier: str = field(metadata={'query_param': { 'field_name': 'DBClusterIdentifier', 'style': 'form', 'explode': True }})
+    version: GetModifyDbClusterVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     allow_major_version_upgrade: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'AllowMajorVersionUpgrade', 'style': 'form', 'explode': True }})
     apply_immediately: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'ApplyImmediately', 'style': 'form', 'explode': True }})
     backtrack_window: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'BacktrackWindow', 'style': 'form', 'explode': True }})
     backup_retention_period: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'BackupRetentionPeriod', 'style': 'form', 'explode': True }})
     cloudwatch_logs_export_configuration: Optional[GetModifyDbClusterCloudwatchLogsExportConfiguration] = field(default=None, metadata={'query_param': { 'field_name': 'CloudwatchLogsExportConfiguration', 'style': 'form', 'explode': True }})
     copy_tags_to_snapshot: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'CopyTagsToSnapshot', 'style': 'form', 'explode': True }})
-    db_cluster_identifier: str = field(default=None, metadata={'query_param': { 'field_name': 'DBClusterIdentifier', 'style': 'form', 'explode': True }})
     db_cluster_parameter_group_name: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'DBClusterParameterGroupName', 'style': 'form', 'explode': True }})
     db_instance_parameter_group_name: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'DBInstanceParameterGroupName', 'style': 'form', 'explode': True }})
     deletion_protection: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'DeletionProtection', 'style': 'form', 'explode': True }})
@@ -50,7 +63,6 @@ class GetModifyDbClusterQueryParams:
     preferred_backup_window: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'PreferredBackupWindow', 'style': 'form', 'explode': True }})
     preferred_maintenance_window: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'PreferredMaintenanceWindow', 'style': 'form', 'explode': True }})
     scaling_configuration: Optional[GetModifyDbClusterScalingConfiguration] = field(default=None, metadata={'query_param': { 'field_name': 'ScalingConfiguration', 'style': 'form', 'explode': True }})
-    version: GetModifyDbClusterVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     vpc_security_group_ids: Optional[List[str]] = field(default=None, metadata={'query_param': { 'field_name': 'VpcSecurityGroupIds', 'style': 'form', 'explode': True }})
     
 
@@ -67,13 +79,13 @@ class GetModifyDbClusterHeaders:
 
 @dataclass
 class GetModifyDbClusterRequest:
-    query_params: GetModifyDbClusterQueryParams = field(default=None)
-    headers: GetModifyDbClusterHeaders = field(default=None)
+    headers: GetModifyDbClusterHeaders = field()
+    query_params: GetModifyDbClusterQueryParams = field()
     
 
 @dataclass
 class GetModifyDbClusterResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

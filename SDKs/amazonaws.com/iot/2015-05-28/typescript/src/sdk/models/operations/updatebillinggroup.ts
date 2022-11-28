@@ -1,33 +1,34 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class UpdateBillingGroupPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=billingGroupName" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=billingGroupName" })
   billingGroupName: string;
 }
 
 
 export class UpdateBillingGroupHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
@@ -37,54 +38,54 @@ export class UpdateBillingGroupHeaders extends SpeakeasyBase {
  * The properties of a billing group.
 **/
 export class UpdateBillingGroupRequestBodyBillingGroupProperties extends SpeakeasyBase {
-  @Metadata({ data: "json, name=billingGroupDescription" })
+  @SpeakeasyMetadata({ data: "json, name=billingGroupDescription" })
   billingGroupDescription?: string;
 }
 
 
 export class UpdateBillingGroupRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=billingGroupProperties" })
+  @SpeakeasyMetadata({ data: "json, name=billingGroupProperties" })
   billingGroupProperties: UpdateBillingGroupRequestBodyBillingGroupProperties;
 
-  @Metadata({ data: "json, name=expectedVersion" })
+  @SpeakeasyMetadata({ data: "json, name=expectedVersion" })
   expectedVersion?: number;
 }
 
 
 export class UpdateBillingGroupRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: UpdateBillingGroupPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: UpdateBillingGroupHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: UpdateBillingGroupRequestBody;
 }
 
 
 export class UpdateBillingGroupResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   internalFailureException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidRequestException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   resourceNotFoundException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   throttlingException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   updateBillingGroupResponse?: shared.UpdateBillingGroupResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   versionConflictException?: any;
 }

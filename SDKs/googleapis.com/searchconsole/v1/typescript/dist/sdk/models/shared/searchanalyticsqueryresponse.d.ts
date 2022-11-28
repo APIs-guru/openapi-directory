@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ApiDataRow } from "./apidatarow";
 export declare enum SearchAnalyticsQueryResponseResponseAggregationTypeEnum {
     Auto = "AUTO",

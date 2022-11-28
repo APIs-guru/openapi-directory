@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// Comment
+// Returns information about a specific comment.
 type Comment struct {
 	AuthorArn          *string          `json:"authorArn,omitempty"`
 	CallerReactions    []string         `json:"callerReactions,omitempty"`

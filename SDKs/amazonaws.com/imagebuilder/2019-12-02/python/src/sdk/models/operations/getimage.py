@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class GetImageQueryParams:
-    image_build_version_arn: str = field(default=None, metadata={'query_param': { 'field_name': 'imageBuildVersionArn', 'style': 'form', 'explode': True }})
+    image_build_version_arn: str = field(metadata={'query_param': { 'field_name': 'imageBuildVersionArn', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -21,19 +24,19 @@ class GetImageHeaders:
 
 @dataclass
 class GetImageRequest:
-    query_params: GetImageQueryParams = field(default=None)
-    headers: GetImageHeaders = field(default=None)
+    headers: GetImageHeaders = field()
+    query_params: GetImageQueryParams = field()
     
 
 @dataclass
 class GetImageResponse:
+    content_type: str = field()
+    status_code: int = field()
     call_rate_limit_exceeded_exception: Optional[Any] = field(default=None)
     client_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     forbidden_exception: Optional[Any] = field(default=None)
     get_image_response: Optional[shared.GetImageResponse] = field(default=None)
     invalid_request_exception: Optional[Any] = field(default=None)
     service_exception: Optional[Any] = field(default=None)
     service_unavailable_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

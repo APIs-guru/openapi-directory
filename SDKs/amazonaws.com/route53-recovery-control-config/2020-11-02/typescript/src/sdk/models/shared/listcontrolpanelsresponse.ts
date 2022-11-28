@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ControlPanel } from "./controlpanel";
 
 
+
 export class ListControlPanelsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ControlPanels", elemType: shared.ControlPanel })
+  @SpeakeasyMetadata({ data: "json, name=ControlPanels", elemType: ControlPanel })
   controlPanels?: ControlPanel[];
 
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 }

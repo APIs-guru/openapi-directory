@@ -5,12 +5,12 @@ from sdk.models import shared
 
 @dataclass
 class SecretsSecretsCreateRequest:
-    request: shared.WritableSecret = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    request: shared.WritableSecretInput = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class SecretsSecretsCreateResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     secret: Optional[shared.Secret] = field(default=None)
-    status_code: int = field(default=None)
     

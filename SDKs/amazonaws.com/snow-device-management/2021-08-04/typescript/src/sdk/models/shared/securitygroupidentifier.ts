@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // SecurityGroupIdentifier
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Information about the device's security group.
 **/
 export class SecurityGroupIdentifier extends SpeakeasyBase {
-  @Metadata({ data: "json, name=groupId" })
+  @SpeakeasyMetadata({ data: "json, name=groupId" })
   groupId?: string;
 
-  @Metadata({ data: "json, name=groupName" })
+  @SpeakeasyMetadata({ data: "json, name=groupName" })
   groupName?: string;
 }

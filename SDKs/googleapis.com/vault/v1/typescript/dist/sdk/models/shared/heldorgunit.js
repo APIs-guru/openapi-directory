@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // HeldOrgUnit
 /**
  * The organizational unit covered by a hold. This structure is immutable.
@@ -33,11 +33,11 @@ var HeldOrgUnit = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=holdTime" }),
+        SpeakeasyMetadata({ data: "json, name=holdTime" }),
         __metadata("design:type", String)
     ], HeldOrgUnit.prototype, "holdTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=orgUnitId" }),
+        SpeakeasyMetadata({ data: "json, name=orgUnitId" }),
         __metadata("design:type", String)
     ], HeldOrgUnit.prototype, "orgUnitId", void 0);
     return HeldOrgUnit;

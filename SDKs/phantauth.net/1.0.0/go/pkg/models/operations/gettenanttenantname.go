@@ -4,10 +4,6 @@ type GetTenantTenantnamePathParams struct {
 	Tenantname string `pathParam:"style=simple,explode=false,name=tenantname"`
 }
 
-type GetTenantTenantnameRequest struct {
-	PathParams GetTenantTenantnamePathParams
-}
-
 type GetTenantTenantname200ApplicationJSON struct {
 	AtID        *string       `json:"@id,omitempty"`
 	About       *string       `json:"about,omitempty"`
@@ -30,6 +26,10 @@ type GetTenantTenantname200ApplicationJSON struct {
 	Theme       *string       `json:"theme,omitempty"`
 	Userinfo    *string       `json:"userinfo,omitempty"`
 	Website     *string       `json:"website,omitempty"`
+}
+
+type GetTenantTenantnameRequest struct {
+	PathParams GetTenantTenantnamePathParams
 }
 
 type GetTenantTenantnameResponse struct {

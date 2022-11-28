@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // JobLogEventData
 /**
  * Job log data
@@ -33,19 +33,19 @@ var JobLogEventData = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=conversionServerID" }),
+        SpeakeasyMetadata({ data: "json, name=conversionServerID" }),
         __metadata("design:type", String)
     ], JobLogEventData.prototype, "conversionServerId", void 0);
     __decorate([
-        Metadata({ data: "json, name=rawError" }),
+        SpeakeasyMetadata({ data: "json, name=rawError" }),
         __metadata("design:type", String)
     ], JobLogEventData.prototype, "rawError", void 0);
     __decorate([
-        Metadata({ data: "json, name=sourceServerID" }),
+        SpeakeasyMetadata({ data: "json, name=sourceServerID" }),
         __metadata("design:type", String)
     ], JobLogEventData.prototype, "sourceServerId", void 0);
     __decorate([
-        Metadata({ data: "json, name=targetInstanceID" }),
+        SpeakeasyMetadata({ data: "json, name=targetInstanceID" }),
         __metadata("design:type", String)
     ], JobLogEventData.prototype, "targetInstanceId", void 0);
     return JobLogEventData;

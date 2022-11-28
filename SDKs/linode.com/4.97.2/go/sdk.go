@@ -11,7 +11,7 @@ import (
 	"strings"
 )
 
-var Servers = []string{
+var ServerList = []string{
 	"https://api.linode.com/v4",
 	"https://api.linode.com/v4beta",
 }
@@ -21,9 +21,13 @@ type HTTPClient interface {
 }
 
 type SDK struct {
-	defaultClient  HTTPClient
-	securityClient HTTPClient
-	serverURL      string
+	_defaultClient  HTTPClient
+	_securityClient HTTPClient
+
+	_serverURL  string
+	_language   string
+	_sdkVersion string
+	_genVersion string
 }
 
 type SDKOption func(*SDK)
@@ -34,27 +38,46 @@ func WithServerURL(serverURL string, params map[string]string) SDKOption {
 			serverURL = utils.ReplaceParameters(serverURL, params)
 		}
 
-		sdk.serverURL = serverURL
+		sdk._serverURL = serverURL
+	}
+}
+
+func WithClient(client HTTPClient) SDKOption {
+	return func(sdk *SDK) {
+		sdk._defaultClient = client
 	}
 }
 
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
-		defaultClient:  http.DefaultClient,
-		securityClient: http.DefaultClient,
+		_language:   "go",
+		_sdkVersion: "",
+		_genVersion: "internal",
 	}
 	for _, opt := range opts {
 		opt(sdk)
 	}
-	if sdk.serverURL == "" {
-		sdk.serverURL = Servers[0]
+
+	if sdk._defaultClient == nil {
+		sdk._defaultClient = http.DefaultClient
+	}
+	if sdk._securityClient == nil {
+
+		sdk._securityClient = sdk._defaultClient
+
+	}
+
+	if sdk._serverURL == "" {
+		sdk._serverURL = ServerList[0]
 	}
 
 	return sdk
 }
 
+// GetNodebalancersNodeBalancerIDStats - NodeBalancer Statistics View
+// Returns detailed statistics about the requested NodeBalancer.
 func (s *SDK) GetNodebalancersNodeBalancerIDStats(ctx context.Context, request operations.GetNodebalancersNodeBalancerIDStatsRequest) (*operations.GetNodebalancersNodeBalancerIDStatsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/nodebalancers/{nodeBalancerId}/stats", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -62,7 +85,7 @@ func (s *SDK) GetNodebalancersNodeBalancerIDStats(ctx context.Context, request o
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -102,8 +125,30 @@ func (s *SDK) GetNodebalancersNodeBalancerIDStats(ctx context.Context, request o
 	return res, nil
 }
 
+// PostImagesUpload - Image Upload
+// Initiates an Image upload.
+//
+// This endpoint creates a new private Image object and returns it along
+// with the URL to which image data can be uploaded.
+//
+// - Image data must be uploaded within 24 hours of creation or the
+// upload will be cancelled and the image deleted.
+//
+// - Image uploads should be made as an HTTP PUT request to the URL returned in the `upload_to`
+// response parameter, with a `Content-type: application/octet-stream` header included in the
+// request. For example:
+//
+//	curl -v \
+//	  -H "Content-Type: application/octet-stream" \
+//	  --upload-file example.img.gz \
+//	  $UPLOAD_URL \
+//	  --progress-bar \
+//	  --output /dev/null
+//
+// - Uploaded image data should be compressed in gzip (`.gz`) format. The uncompressed disk should be in raw
+// disk image (`.img`) format. A maximum compressed file size of 5GB is supported for upload at this time.
 func (s *SDK) PostImagesUpload(ctx context.Context, request operations.PostImagesUploadRequest) (*operations.PostImagesUploadResponse, error) {
-	baseURL := operations.PostImagesUploadServers[0]
+	baseURL := operations.PostImagesUploadServerList[0]
 	if request.ServerURL != nil {
 		baseURL = *request.ServerURL
 	}
@@ -122,7 +167,7 @@ func (s *SDK) PostImagesUpload(ctx context.Context, request operations.PostImage
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -162,8 +207,10 @@ func (s *SDK) PostImagesUpload(ctx context.Context, request operations.PostImage
 	return res, nil
 }
 
+// AcceptEntityTransfer - Entity Transfer Accept
+// **DEPRECATED**. Please use [Service Transfer Accept](/docs/api/account/#service-transfer-accept).
 func (s *SDK) AcceptEntityTransfer(ctx context.Context, request operations.AcceptEntityTransferRequest) (*operations.AcceptEntityTransferResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/account/entity-transfers/{token}/accept", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -171,7 +218,7 @@ func (s *SDK) AcceptEntityTransfer(ctx context.Context, request operations.Accep
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -211,8 +258,43 @@ func (s *SDK) AcceptEntityTransfer(ctx context.Context, request operations.Accep
 	return res, nil
 }
 
+// AcceptServiceTransfer - Service Transfer Accept
+// Accept a Service Transfer for the provided token to receive the services included in the transfer to your
+// account. At this time, only Linodes can be transferred.
+//
+// When accepted, email confirmations are sent to the accounts that created and accepted the transfer. A transfer
+// can take up to three hours to complete once accepted. Once a transfer is completed, billing for transferred
+// services ends for the sending account and begins for the receiving account.
+//
+// This command can only be accessed by the unrestricted users of the account that receives the transfer. Users
+// of the same account that created a transfer cannot accept the transfer.
+//
+// There are several conditions that must be met in order to accept a transfer request:
+//
+// 1. Only transfers with a `pending` status can be accepted.
+//
+//  1. The account accepting the transfer must have a registered payment method and must not have a past due
+//     balance or other account limitations for the services to be transferred.
+//
+// 1. Both the account that created the transfer and the account that is accepting the transfer must not have any
+// active Terms of Service violations.
+//
+// 1. The service must still be owned by the account that created the transfer.
+//
+// 1. Linodes must not:
+//
+//   - be assigned to a NodeBalancer, Firewall, VLAN, or Managed Service.
+//
+//   - have any attached Block Storage Volumes.
+//
+//   - have any shared IP addresses.
+//
+//   - have any assigned /56, /64, or /116 IPv6 ranges.
+//
+// Any and all of the above conditions must be cured and maintained by the relevant account prior to the
+// transfer's expiration to allow the transfer to be accepted by the receiving account.
 func (s *SDK) AcceptServiceTransfer(ctx context.Context, request operations.AcceptServiceTransferRequest) (*operations.AcceptServiceTransferResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/account/service-transfers/{token}/accept", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -220,7 +302,7 @@ func (s *SDK) AcceptServiceTransfer(ctx context.Context, request operations.Acce
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -260,8 +342,10 @@ func (s *SDK) AcceptServiceTransfer(ctx context.Context, request operations.Acce
 	return res, nil
 }
 
+// AddLinodeConfig - Configuration Profile Create
+// Adds a new Configuration profile to a Linode.
 func (s *SDK) AddLinodeConfig(ctx context.Context, request operations.AddLinodeConfigRequest) (*operations.AddLinodeConfigResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/linode/instances/{linodeId}/configs", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -279,7 +363,7 @@ func (s *SDK) AddLinodeConfig(ctx context.Context, request operations.AddLinodeC
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -319,8 +403,16 @@ func (s *SDK) AddLinodeConfig(ctx context.Context, request operations.AddLinodeC
 	return res, nil
 }
 
+// AddLinodeDisk - Disk Create
+// Adds a new Disk to a Linode. You can optionally create a Disk
+// from an Image (see [/images](/docs/api/images/#images-list) for a list of available public images,
+// or use one of your own), and optionally provide a StackScript to deploy
+// with this Disk.
+//
+// The default filesystem for new Disks is `ext4`. If creating a Disk from an Image, the filesystem
+// of the Image is used unless otherwise specified.
 func (s *SDK) AddLinodeDisk(ctx context.Context, request operations.AddLinodeDiskRequest) (*operations.AddLinodeDiskResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/linode/instances/{linodeId}/disks", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -338,7 +430,7 @@ func (s *SDK) AddLinodeDisk(ctx context.Context, request operations.AddLinodeDis
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -378,8 +470,10 @@ func (s *SDK) AddLinodeDisk(ctx context.Context, request operations.AddLinodeDis
 	return res, nil
 }
 
+// AddLinodeIP - IPv4 Address Allocate
+// Allocates a public or private IPv4 address to a Linode. Public IP Addresses, after the one included with each Linode, incur an additional monthly charge. If you need an additional public IP Address you must request one - please [open a support ticket](/docs/api/support/#support-ticket-open). You may not add more than one private IPv4 address to a single Linode.
 func (s *SDK) AddLinodeIP(ctx context.Context, request operations.AddLinodeIPRequest) (*operations.AddLinodeIPResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/linode/instances/{linodeId}/ips", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -397,7 +491,7 @@ func (s *SDK) AddLinodeIP(ctx context.Context, request operations.AddLinodeIPReq
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -437,8 +531,10 @@ func (s *SDK) AddLinodeIP(ctx context.Context, request operations.AddLinodeIPReq
 	return res, nil
 }
 
+// AddSSHKey - SSH Key Add
+// Adds an SSH Key to your Account profile.
 func (s *SDK) AddSSHKey(ctx context.Context, request operations.AddSSHKeyRequest) (*operations.AddSSHKeyResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/profile/sshkeys"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -453,7 +549,7 @@ func (s *SDK) AddSSHKey(ctx context.Context, request operations.AddSSHKeyRequest
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -493,8 +589,10 @@ func (s *SDK) AddSSHKey(ctx context.Context, request operations.AddSSHKeyRequest
 	return res, nil
 }
 
+// AddStackScript - StackScript Create
+// Creates a StackScript in your Account.
 func (s *SDK) AddStackScript(ctx context.Context, request operations.AddStackScriptRequest) (*operations.AddStackScriptResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/linode/stackscripts"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -512,7 +610,7 @@ func (s *SDK) AddStackScript(ctx context.Context, request operations.AddStackScr
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -552,8 +650,10 @@ func (s *SDK) AddStackScript(ctx context.Context, request operations.AddStackScr
 	return res, nil
 }
 
+// AllocateIP - IP Address Allocate
+// Allocates a new IPv4 Address on your Account. The Linode must be configured to support additional addresses - please [open a support ticket](/docs/api/support/#support-ticket-open) requesting additional addresses before attempting allocation.
 func (s *SDK) AllocateIP(ctx context.Context, request operations.AllocateIPRequest) (*operations.AllocateIPResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/networking/ips"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -571,7 +671,7 @@ func (s *SDK) AllocateIP(ctx context.Context, request operations.AllocateIPReque
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -611,8 +711,10 @@ func (s *SDK) AllocateIP(ctx context.Context, request operations.AllocateIPReque
 	return res, nil
 }
 
+// AssignIPs - Linodes Assign IPs
+// Assign multiple IPs to multiple Linodes in one Region. This allows swapping, shuffling, or otherwise reorganizing IPv4 Addresses to your Linodes.  When the assignment is finished, all Linodes must end up with at least one public IPv4 and no more than one private IPv4.
 func (s *SDK) AssignIPs(ctx context.Context, request operations.AssignIPsRequest) (*operations.AssignIPsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/networking/ipv4/assign"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -630,7 +732,7 @@ func (s *SDK) AssignIPs(ctx context.Context, request operations.AssignIPsRequest
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -670,8 +772,10 @@ func (s *SDK) AssignIPs(ctx context.Context, request operations.AssignIPsRequest
 	return res, nil
 }
 
+// AttachVolume - Volume Attach
+// Attaches a Volume on your Account to an existing Linode on your Account. In order for this request to complete successfully, your User must have `read_only` or `read_write` permission to the Volume and `read_write` permission to the Linode. Additionally, the Volume and Linode must be located in the same Region.
 func (s *SDK) AttachVolume(ctx context.Context, request operations.AttachVolumeRequest) (*operations.AttachVolumeResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/volumes/{volumeId}/attach", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -689,7 +793,7 @@ func (s *SDK) AttachVolume(ctx context.Context, request operations.AttachVolumeR
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -729,8 +833,16 @@ func (s *SDK) AttachVolume(ctx context.Context, request operations.AttachVolumeR
 	return res, nil
 }
 
+// BootLinodeInstance - Linode Boot
+// Boots a Linode you have permission to modify. If no parameters are given, a Config profile
+// will be chosen for this boot based on the following criteria:
+//
+//   - If there is only one Config profile for this Linode, it will be used.
+//   - If there is more than one Config profile, the last booted config will be used.
+//   - If there is more than one Config profile and none were the last to be booted (because the
+//     Linode was never booted or the last booted config was deleted) an error will be returned.
 func (s *SDK) BootLinodeInstance(ctx context.Context, request operations.BootLinodeInstanceRequest) (*operations.BootLinodeInstanceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/linode/instances/{linodeId}/boot", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -745,7 +857,7 @@ func (s *SDK) BootLinodeInstance(ctx context.Context, request operations.BootLin
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -785,8 +897,10 @@ func (s *SDK) BootLinodeInstance(ctx context.Context, request operations.BootLin
 	return res, nil
 }
 
+// CancelAccount - Account Cancel
+// Cancels an active Linode account. This action will cause Linode to attempt to charge the credit card on file for the remaining balance. An error will occur if Linode fails to charge the credit card on file. Restricted users will not be able to cancel an account.
 func (s *SDK) CancelAccount(ctx context.Context, request operations.CancelAccountRequest) (*operations.CancelAccountResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/account/cancel"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -804,7 +918,7 @@ func (s *SDK) CancelAccount(ctx context.Context, request operations.CancelAccoun
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -854,8 +968,10 @@ func (s *SDK) CancelAccount(ctx context.Context, request operations.CancelAccoun
 	return res, nil
 }
 
+// CancelBackups - Backups Cancel
+// Cancels the Backup service on the given Linode. Deletes all of this Linode's existing backups forever.
 func (s *SDK) CancelBackups(ctx context.Context, request operations.CancelBackupsRequest) (*operations.CancelBackupsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/linode/instances/{linodeId}/backups/cancel", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -863,7 +979,7 @@ func (s *SDK) CancelBackups(ctx context.Context, request operations.CancelBackup
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -903,8 +1019,17 @@ func (s *SDK) CancelBackups(ctx context.Context, request operations.CancelBackup
 	return res, nil
 }
 
+// CancelObjectStorage - Object Storage Cancel
+// Cancel Object Storage on an Account. All buckets on the Account must be empty
+// before Object Storage can be cancelled:
+//
+// - To delete a smaller number of objects, review the instructions in our
+// [How to Use Object Storage](/docs/platform/object-storage/how-to-use-object-storage/)
+// guide.
+// - To delete large amounts of objects, consult our guide on
+// [Lifecycle Policies](/docs/platform/object-storage/lifecycle-policies/).
 func (s *SDK) CancelObjectStorage(ctx context.Context, request operations.CancelObjectStorageRequest) (*operations.CancelObjectStorageResponse, error) {
-	baseURL := operations.CancelObjectStorageServers[0]
+	baseURL := operations.CancelObjectStorageServerList[0]
 	if request.ServerURL != nil {
 		baseURL = *request.ServerURL
 	}
@@ -916,7 +1041,7 @@ func (s *SDK) CancelObjectStorage(ctx context.Context, request operations.Cancel
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -956,8 +1081,10 @@ func (s *SDK) CancelObjectStorage(ctx context.Context, request operations.Cancel
 	return res, nil
 }
 
+// CloneDomain - Domain Clone
+// Clones a Domain and all associated DNS records from a Domain that is registered in Linode's DNS manager.
 func (s *SDK) CloneDomain(ctx context.Context, request operations.CloneDomainRequest) (*operations.CloneDomainResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/domains/{domainId}/clone", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -975,7 +1102,7 @@ func (s *SDK) CloneDomain(ctx context.Context, request operations.CloneDomainReq
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1015,8 +1142,10 @@ func (s *SDK) CloneDomain(ctx context.Context, request operations.CloneDomainReq
 	return res, nil
 }
 
+// CloneLinodeDisk - Disk Clone
+// Copies a disk, byte-for-byte, into a new Disk belonging to the same Linode. The Linode must have enough storage space available to accept a new Disk of the same size as this one or this operation will fail.
 func (s *SDK) CloneLinodeDisk(ctx context.Context, request operations.CloneLinodeDiskRequest) (*operations.CloneLinodeDiskResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/linode/instances/{linodeId}/disks/{diskId}/clone", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -1024,7 +1153,7 @@ func (s *SDK) CloneLinodeDisk(ctx context.Context, request operations.CloneLinod
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1064,8 +1193,22 @@ func (s *SDK) CloneLinodeDisk(ctx context.Context, request operations.CloneLinod
 	return res, nil
 }
 
+// CloneLinodeInstance - Linode Clone
+// You can clone your Linode's existing Disks or Configuration profiles to
+// another Linode on your Account. In order for this request to complete
+// successfully, your User must have the `add_linodes` grant. Cloning to a
+// new Linode will incur a charge on your Account.
+//
+// If cloning to an existing Linode, any actions currently running or
+// queued must be completed first before you can clone to it.
+//
+// Up to five clone operations from any given source Linode can be run concurrently.
+// If more concurrent clones are attempted, an HTTP 400 error will be
+// returned by this endpoint.
+//
+// Any [tags](/docs/api/tags/#tags-list) existing on the source Linode will be cloned to the target Linode.
 func (s *SDK) CloneLinodeInstance(ctx context.Context, request operations.CloneLinodeInstanceRequest) (*operations.CloneLinodeInstanceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/linode/instances/{linodeId}/clone", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1083,7 +1226,7 @@ func (s *SDK) CloneLinodeInstance(ctx context.Context, request operations.CloneL
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1123,8 +1266,10 @@ func (s *SDK) CloneLinodeInstance(ctx context.Context, request operations.CloneL
 	return res, nil
 }
 
+// CloneVolume - Volume Clone
+// Creates a Volume on your Account. In order for this request to complete successfully, your User must have the `add_volumes` grant. The new Volume will have the same size and data as the source Volume. Creating a new Volume will incur a charge on your Account.
 func (s *SDK) CloneVolume(ctx context.Context, request operations.CloneVolumeRequest) (*operations.CloneVolumeResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/volumes/{volumeId}/clone", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1142,7 +1287,7 @@ func (s *SDK) CloneVolume(ctx context.Context, request operations.CloneVolumeReq
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1182,8 +1327,10 @@ func (s *SDK) CloneVolume(ctx context.Context, request operations.CloneVolumeReq
 	return res, nil
 }
 
+// CloseTicket - Support Ticket Close
+// Closes a Support Ticket you have access to modify.
 func (s *SDK) CloseTicket(ctx context.Context, request operations.CloseTicketRequest) (*operations.CloseTicketResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/support/tickets/{ticketId}/close", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -1191,7 +1338,7 @@ func (s *SDK) CloseTicket(ctx context.Context, request operations.CloseTicketReq
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1231,8 +1378,10 @@ func (s *SDK) CloseTicket(ctx context.Context, request operations.CloseTicketReq
 	return res, nil
 }
 
+// CreateClient - OAuth Client Create
+// Creates an OAuth Client, which can be used to allow users (using their Linode account) to log in to your own application, and optionally grant your application some amount of access to their Linodes or other entities.
 func (s *SDK) CreateClient(ctx context.Context, request operations.CreateClientRequest) (*operations.CreateClientResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/account/oauth-clients"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1247,7 +1396,7 @@ func (s *SDK) CreateClient(ctx context.Context, request operations.CreateClientR
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1287,8 +1436,12 @@ func (s *SDK) CreateClient(ctx context.Context, request operations.CreateClientR
 	return res, nil
 }
 
+// CreateCreditCard - Credit Card Add/Edit
+// **DEPRECATED**. Please use Payment Method Add ([POST /account/payment-methods](/docs/api/account/#payment-method-add)).
+//
+// Adds a credit card Payment Method to your account and sets it as the default method.
 func (s *SDK) CreateCreditCard(ctx context.Context, request operations.CreateCreditCardRequest) (*operations.CreateCreditCardResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/account/credit-card"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1306,7 +1459,7 @@ func (s *SDK) CreateCreditCard(ctx context.Context, request operations.CreateCre
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1346,8 +1499,10 @@ func (s *SDK) CreateCreditCard(ctx context.Context, request operations.CreateCre
 	return res, nil
 }
 
+// CreateDomain - Domain Create
+// Adds a new Domain to Linode's DNS Manager. Linode is not a registrar, and you must own the domain before adding it here. Be sure to point your registrar to Linode's nameservers so that the records hosted here are used.
 func (s *SDK) CreateDomain(ctx context.Context, request operations.CreateDomainRequest) (*operations.CreateDomainResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/domains"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1365,7 +1520,7 @@ func (s *SDK) CreateDomain(ctx context.Context, request operations.CreateDomainR
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1405,8 +1560,10 @@ func (s *SDK) CreateDomain(ctx context.Context, request operations.CreateDomainR
 	return res, nil
 }
 
+// CreateDomainRecord - Domain Record Create
+// Adds a new Domain Record to the zonefile this Domain represents.
 func (s *SDK) CreateDomainRecord(ctx context.Context, request operations.CreateDomainRecordRequest) (*operations.CreateDomainRecordResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/domains/{domainId}/records", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1424,7 +1581,7 @@ func (s *SDK) CreateDomainRecord(ctx context.Context, request operations.CreateD
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1464,8 +1621,10 @@ func (s *SDK) CreateDomainRecord(ctx context.Context, request operations.CreateD
 	return res, nil
 }
 
+// CreateEntityTransfer - Entity Transfer Create
+// **DEPRECATED**. Please use [Service Transfer Create](/docs/api/account/#service-transfer-create).
 func (s *SDK) CreateEntityTransfer(ctx context.Context, request operations.CreateEntityTransferRequest) (*operations.CreateEntityTransferResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/account/entity-transfers"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1480,7 +1639,7 @@ func (s *SDK) CreateEntityTransfer(ctx context.Context, request operations.Creat
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1520,8 +1679,23 @@ func (s *SDK) CreateEntityTransfer(ctx context.Context, request operations.Creat
 	return res, nil
 }
 
+// CreateFirewallDevice - Firewall Device Create
+// Creates a Firewall Device, which assigns a Firewall to a Linode service (referred to
+// as the Device's `entity`). Currently, only Devices with an entity of type `linode` are accepted.
+// A Firewall can be assigned a single Linode service at a time. Additional disabled Firewalls can be
+// assigned to a service, but they cannot be enabled if another active Firewall
+// is already assigned to the same service.
+//
+// Creating a Firewall Device will apply the Rules from a Firewall to a Linode service.
+// A `firewall_device_add` Event is generated when the Firewall Device is added successfully.
+//
+// **Note:** When a Firewall is assigned to a Linode and you attempt
+// to [migrate the Linode to a data center](/docs/api/linode-instances/#dc-migrationpending-host-migration-initiate) that does not support Cloud Firewalls, the migration will fail.
+// Use the [List Regions](/docs/api/regions/#regions-list) endpoint to view a list of a data center's capabilities.
+//
+// Cloud Firewall is not available in every data center region. For the current list of availability, access the Regions List ([GET /regions](/docs/api/regions/#regions-list)) endpoint or see the [Cloud Firewall Product Documentation](https://www.linode.com/docs/products/networking/cloud-firewall/).
 func (s *SDK) CreateFirewallDevice(ctx context.Context, request operations.CreateFirewallDeviceRequest) (*operations.CreateFirewallDeviceResponse, error) {
-	baseURL := operations.CreateFirewallDeviceServers[0]
+	baseURL := operations.CreateFirewallDeviceServerList[0]
 	if request.ServerURL != nil {
 		baseURL = *request.ServerURL
 	}
@@ -1540,7 +1714,7 @@ func (s *SDK) CreateFirewallDevice(ctx context.Context, request operations.Creat
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1580,8 +1754,25 @@ func (s *SDK) CreateFirewallDevice(ctx context.Context, request operations.Creat
 	return res, nil
 }
 
+// CreateFirewalls - Firewall Create
+// Creates a Firewall to filter network traffic. Use the `rules` property to
+// create inbound and outbound access rules. Use the `devices` property to assign the
+// Firewall to a service. Currently, Firewalls can only be assigned to Linode
+// instances.
+//
+// A Firewall can be assigned to multiple Linode instances at a time.
+//
+// A Linode instance can have one active, assigned Firewall at a time.
+// Additional disabled Firewalls can still be added to a Linode instance.
+//
+// A `firewall_create` Event is generated when this endpoint returns successfully.
+//
+// Cloud Firewall is not fully available in every data center region. For the current list
+// of locations with full availability, access the Regions List ([GET /regions](/docs/api/regions/#regions-list))
+// endpoint or see the [Cloud Firewall Product Documentation](https://www.linode.com/docs/products/networking/cloud-firewall/).
+// Certain Regions have partial Firewall availability
 func (s *SDK) CreateFirewalls(ctx context.Context, request operations.CreateFirewallsRequest) (*operations.CreateFirewallsResponse, error) {
-	baseURL := operations.CreateFirewallsServers[0]
+	baseURL := operations.CreateFirewallsServerList[0]
 	if request.ServerURL != nil {
 		baseURL = *request.ServerURL
 	}
@@ -1600,7 +1791,7 @@ func (s *SDK) CreateFirewalls(ctx context.Context, request operations.CreateFire
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1640,8 +1831,17 @@ func (s *SDK) CreateFirewalls(ctx context.Context, request operations.CreateFire
 	return res, nil
 }
 
+// CreateImage - Image Create
+// Captures a private gold-master Image from a Linode Disk.
+//
+// **Pricing change:** Images will transition to a paid service with a
+// cost of $0.10/GB per month for each manual Custom Image stored on an
+// account. This change will be communicated to customers in advance.
+// Recovery Images, which are generated automatically after a Linode is
+// deleted and available for a finite period of time, are provided at no
+// cost.
 func (s *SDK) CreateImage(ctx context.Context, request operations.CreateImageRequest) (*operations.CreateImageResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/images"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1656,7 +1856,7 @@ func (s *SDK) CreateImage(ctx context.Context, request operations.CreateImageReq
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1696,8 +1896,15 @@ func (s *SDK) CreateImage(ctx context.Context, request operations.CreateImageReq
 	return res, nil
 }
 
+// CreateLkeCluster - Kubernetes Cluster Create
+// Creates a Kubernetes cluster. The Kubernetes cluster will be created
+// asynchronously. You can use the events system to determine when the
+// Kubernetes cluster is ready to use. Please note that it often takes 2-5 minutes before the
+// [Kubernetes API server endpoint](/docs/api/linode-kubernetes-engine-lke/#kubernetes-api-endpoints-list) and
+// the [Kubeconfig file](/docs/api/linode-kubernetes-engine-lke/#kubeconfig-view) for the new cluster
+// are ready.
 func (s *SDK) CreateLkeCluster(ctx context.Context, request operations.CreateLkeClusterRequest) (*operations.CreateLkeClusterResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/lke/clusters"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1712,7 +1919,7 @@ func (s *SDK) CreateLkeCluster(ctx context.Context, request operations.CreateLke
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1752,8 +1959,60 @@ func (s *SDK) CreateLkeCluster(ctx context.Context, request operations.CreateLke
 	return res, nil
 }
 
+// CreateLinodeInstance - Linode Create
+// Creates a Linode Instance on your Account. In order for this
+// request to complete successfully, your User must have the `add_linodes` grant. Creating a
+// new Linode will incur a charge on your Account.
+//
+// Linodes can be created using one of the available Types. See
+// [GET /linode/types](/docs/api/linode-types/#types-list) to get more
+// information about each Type's specs and cost.
+//
+// Linodes can be created in any one of our available
+// [Regions](/docs/api/regions/#regions-list) for a list
+// of available Regions you can deploy your Linode in.
+//
+// In an effort to fight spam, Linode restricts outbound connections on ports 25, 465, and 587
+// on all Linodes for new accounts created after November 5th, 2019. For more information,
+// see [Sending Email on Linode](/docs/email/running-a-mail-server/#sending-email-on-linode).
+//
+// Linodes can be created in a number of ways:
+//
+// * Using a Linode Linux Distribution image or an Image you created based on another Linode.
+//   - The Linode will be `running` after it completes `provisioning`.
+//   - A default config with two Disks, one being a 512 swap disk, is created.
+//   - `swap_size` can be used to customize the swap disk size.
+//   - Requires a `root_pass` be supplied to use for the root User's Account.
+//   - It is recommended to supply SSH keys for the root User using the `authorized_keys` field.
+//   - You may also supply a list of usernames via the `authorized_users` field.
+//   - These users must have an SSH Key associated with your Profile first. See [/profile/sshkeys](/docs/api/profile/#ssh-key-add) for more information.
+//
+// * Using a StackScript.
+//   - See [/linode/stackscripts](/docs/api/stackscripts/#stackscripts-list) for
+//     a list of available StackScripts.
+//   - The Linode will be `running` after it completes `provisioning`.
+//   - Requires a compatible Image to be supplied.
+//   - See [/linode/stackscript/{stackscriptId}](/docs/api/stackscripts/#stackscript-view) for compatible Images.
+//   - Requires a `root_pass` be supplied to use for the root User's Account.
+//   - It is recommended to supply SSH keys for the root User using the `authorized_keys` field.
+//   - You may also supply a list of usernames via the `authorized_users` field.
+//   - These users must have an SSH Key associated with your Profile first. See [/profile/sshkeys](/docs/api/profile/#ssh-key-add) for more information.
+//
+// * Using one of your other Linode's backups.
+//   - You must create a Linode large enough to accommodate the Backup's size.
+//   - The Disks and Config will match that of the Linode that was backed up.
+//   - The `root_pass` will match that of the Linode that was backed up.
+//
+// * Create an empty Linode.
+//   - The Linode will remain `offline` and must be manually started.
+//   - See [POST /linode/instances/{linodeId}/boot](/docs/api/linode-instances/#linode-boot).
+//   - Disks and Configs must be created manually.
+//   - This is only recommended for advanced use cases.
+//
+// **Important**: You must be an unrestricted User in order to add or modify
+// tags on Linodes.
 func (s *SDK) CreateLinodeInstance(ctx context.Context, request operations.CreateLinodeInstanceRequest) (*operations.CreateLinodeInstanceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/linode/instances"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1771,7 +2030,7 @@ func (s *SDK) CreateLinodeInstance(ctx context.Context, request operations.Creat
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1811,8 +2070,10 @@ func (s *SDK) CreateLinodeInstance(ctx context.Context, request operations.Creat
 	return res, nil
 }
 
+// CreateLongviewClient - Longview Client Create
+// Creates a Longview Client.  This Client will not begin monitoring the status of your server until you configure the Longview Client application on your Linode using the returning `install_code` and `api_key`.
 func (s *SDK) CreateLongviewClient(ctx context.Context, request operations.CreateLongviewClientRequest) (*operations.CreateLongviewClientResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/longview/clients"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1830,7 +2091,7 @@ func (s *SDK) CreateLongviewClient(ctx context.Context, request operations.Creat
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1870,8 +2131,10 @@ func (s *SDK) CreateLongviewClient(ctx context.Context, request operations.Creat
 	return res, nil
 }
 
+// CreateManagedContact - Managed Contact Create
+// Creates a Managed Contact.  A Managed Contact is someone Linode special forces can contact in the course of attempting to resolve an issue with a Managed Service.
 func (s *SDK) CreateManagedContact(ctx context.Context, request operations.CreateManagedContactRequest) (*operations.CreateManagedContactResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/managed/contacts"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1886,7 +2149,7 @@ func (s *SDK) CreateManagedContact(ctx context.Context, request operations.Creat
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1926,8 +2189,10 @@ func (s *SDK) CreateManagedContact(ctx context.Context, request operations.Creat
 	return res, nil
 }
 
+// CreateManagedCredential - Managed Credential Create
+// Creates a Managed Credential. A Managed Credential is stored securely to allow Linode special forces to access your Managed Services and resolve issues.
 func (s *SDK) CreateManagedCredential(ctx context.Context, request operations.CreateManagedCredentialRequest) (*operations.CreateManagedCredentialResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/managed/credentials"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1942,7 +2207,7 @@ func (s *SDK) CreateManagedCredential(ctx context.Context, request operations.Cr
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1982,8 +2247,10 @@ func (s *SDK) CreateManagedCredential(ctx context.Context, request operations.Cr
 	return res, nil
 }
 
+// CreateManagedService - Managed Service Create
+// Creates a Managed Service. Linode Managed will begin monitoring this service and reporting and attempting to resolve any Issues.
 func (s *SDK) CreateManagedService(ctx context.Context, request operations.CreateManagedServiceRequest) (*operations.CreateManagedServiceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/managed/services"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1998,7 +2265,7 @@ func (s *SDK) CreateManagedService(ctx context.Context, request operations.Creat
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2038,8 +2305,10 @@ func (s *SDK) CreateManagedService(ctx context.Context, request operations.Creat
 	return res, nil
 }
 
+// CreateNodeBalancer - NodeBalancer Create
+// Creates a NodeBalancer in the requested Region. This NodeBalancer will not start serving requests until it is configured.
 func (s *SDK) CreateNodeBalancer(ctx context.Context, request operations.CreateNodeBalancerRequest) (*operations.CreateNodeBalancerResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/nodebalancers"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2057,7 +2326,7 @@ func (s *SDK) CreateNodeBalancer(ctx context.Context, request operations.CreateN
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2097,8 +2366,10 @@ func (s *SDK) CreateNodeBalancer(ctx context.Context, request operations.CreateN
 	return res, nil
 }
 
+// CreateNodeBalancerConfig - Config Create
+// Creates a NodeBalancer Config, which allows the NodeBalancer to accept traffic on a new port. You will need to add NodeBalancer Nodes to the new Config before it can actually serve requests.
 func (s *SDK) CreateNodeBalancerConfig(ctx context.Context, request operations.CreateNodeBalancerConfigRequest) (*operations.CreateNodeBalancerConfigResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/nodebalancers/{nodeBalancerId}/configs", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2113,7 +2384,7 @@ func (s *SDK) CreateNodeBalancerConfig(ctx context.Context, request operations.C
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2153,8 +2424,10 @@ func (s *SDK) CreateNodeBalancerConfig(ctx context.Context, request operations.C
 	return res, nil
 }
 
+// CreateNodeBalancerNode - Node Create
+// Creates a NodeBalancer Node, a backend that can accept traffic for this NodeBalancer Config. Nodes are routed requests on the configured port based on their status.
 func (s *SDK) CreateNodeBalancerNode(ctx context.Context, request operations.CreateNodeBalancerNodeRequest) (*operations.CreateNodeBalancerNodeResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/nodebalancers/{nodeBalancerId}/configs/{configId}/nodes", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2172,7 +2445,7 @@ func (s *SDK) CreateNodeBalancerNode(ctx context.Context, request operations.Cre
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2212,8 +2485,15 @@ func (s *SDK) CreateNodeBalancerNode(ctx context.Context, request operations.Cre
 	return res, nil
 }
 
+// CreateObjectStorageBucket - Object Storage Bucket Create
+// Creates an Object Storage Bucket in the cluster specified. If the
+// bucket already exists and is owned by you, this endpoint will return a
+// `200` response with that bucket as if it had just been created.
+//
+// This endpoint is available for convenience. It is recommended that instead you
+// use the more [fully-featured S3 API](https://docs.ceph.com/en/latest/radosgw/s3/bucketops/#put-bucket) directly.
 func (s *SDK) CreateObjectStorageBucket(ctx context.Context, request operations.CreateObjectStorageBucketRequest) (*operations.CreateObjectStorageBucketResponse, error) {
-	baseURL := operations.CreateObjectStorageBucketServers[0]
+	baseURL := operations.CreateObjectStorageBucketServerList[0]
 	if request.ServerURL != nil {
 		baseURL = *request.ServerURL
 	}
@@ -2232,7 +2512,7 @@ func (s *SDK) CreateObjectStorageBucket(ctx context.Context, request operations.
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2272,8 +2552,19 @@ func (s *SDK) CreateObjectStorageBucket(ctx context.Context, request operations.
 	return res, nil
 }
 
+// CreateObjectStorageKeys - Object Storage Key Create
+// Provisions a new Object Storage Key on your account.
+//
+// * To create a Limited Access Key with specific permissions, send a `bucket_access`
+// array.
+//
+// * To create a Limited Access Key without access to any buckets, send an empty
+// `bucket_access` array.
+//
+// * To create an Access Key with unlimited access to all clusters and all buckets,
+// omit the `bucket_access` array.
 func (s *SDK) CreateObjectStorageKeys(ctx context.Context, request operations.CreateObjectStorageKeysRequest) (*operations.CreateObjectStorageKeysResponse, error) {
-	baseURL := operations.CreateObjectStorageKeysServers[0]
+	baseURL := operations.CreateObjectStorageKeysServerList[0]
 	if request.ServerURL != nil {
 		baseURL = *request.ServerURL
 	}
@@ -2292,7 +2583,7 @@ func (s *SDK) CreateObjectStorageKeys(ctx context.Context, request operations.Cr
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2332,8 +2623,16 @@ func (s *SDK) CreateObjectStorageKeys(ctx context.Context, request operations.Cr
 	return res, nil
 }
 
+// CreateObjectStorageObjectURL - Object Storage Object URL Create
+// Creates a pre-signed URL to access a single Object in a bucket. This
+// can be used to share objects, and also to create/delete objects by using
+// the appropriate HTTP method in your request body's `method` parameter.
+//
+// This endpoint is available for convenience. It is recommended that instead you
+// use the more [fully-featured S3 API](https://docs.ceph.com/en/latest/radosgw/s3/)
+// directly.
 func (s *SDK) CreateObjectStorageObjectURL(ctx context.Context, request operations.CreateObjectStorageObjectURLRequest) (*operations.CreateObjectStorageObjectURLResponse, error) {
-	baseURL := operations.CreateObjectStorageObjectURLServers[0]
+	baseURL := operations.CreateObjectStorageObjectURLServerList[0]
 	if request.ServerURL != nil {
 		baseURL = *request.ServerURL
 	}
@@ -2352,7 +2651,7 @@ func (s *SDK) CreateObjectStorageObjectURL(ctx context.Context, request operatio
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2392,8 +2691,14 @@ func (s *SDK) CreateObjectStorageObjectURL(ctx context.Context, request operatio
 	return res, nil
 }
 
+// CreateObjectStorageSsl - Object Storage TLS/SSL Cert Upload
+// Upload a TLS/SSL certificate and private key to be served when you visit your Object Storage bucket via HTTPS.
+// Your TLS/SSL certificate and private key are stored encrypted at rest.
+//
+// To replace an expired certificate, [delete your current certificate](/docs/api/object-storage/#object-storage-tlsssl-cert-delete)
+// and upload a new one.
 func (s *SDK) CreateObjectStorageSsl(ctx context.Context, request operations.CreateObjectStorageSslRequest) (*operations.CreateObjectStorageSslResponse, error) {
-	baseURL := operations.CreateObjectStorageSslServers[0]
+	baseURL := operations.CreateObjectStorageSslServerList[0]
 	if request.ServerURL != nil {
 		baseURL = *request.ServerURL
 	}
@@ -2412,7 +2717,7 @@ func (s *SDK) CreateObjectStorageSsl(ctx context.Context, request operations.Cre
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2452,8 +2757,10 @@ func (s *SDK) CreateObjectStorageSsl(ctx context.Context, request operations.Cre
 	return res, nil
 }
 
+// CreatePayPalPayment - PayPal Payment Stage
+// This begins the process of submitting a Payment via PayPal. After calling this endpoint, you must take the resulting `payment_id` along with the `payer_id` from your PayPal account and [POST /account/payments/paypal-execute](/docs/api/account/#stagedapproved-paypal-payment-execute) to complete the Payment.
 func (s *SDK) CreatePayPalPayment(ctx context.Context, request operations.CreatePayPalPaymentRequest) (*operations.CreatePayPalPaymentResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/account/payments/paypal"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2471,7 +2778,7 @@ func (s *SDK) CreatePayPalPayment(ctx context.Context, request operations.Create
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2511,8 +2818,10 @@ func (s *SDK) CreatePayPalPayment(ctx context.Context, request operations.Create
 	return res, nil
 }
 
+// CreatePayment - Payment Make
+// Makes a Payment to your Account via credit card. This will charge your credit card the requested amount.
 func (s *SDK) CreatePayment(ctx context.Context, request operations.CreatePaymentRequest) (*operations.CreatePaymentResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/account/payments"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2530,7 +2839,7 @@ func (s *SDK) CreatePayment(ctx context.Context, request operations.CreatePaymen
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2570,8 +2879,13 @@ func (s *SDK) CreatePayment(ctx context.Context, request operations.CreatePaymen
 	return res, nil
 }
 
+// CreatePaymentMethod - Payment Method Add
+// Adds a Payment Method to your Account with the option to set it as the default method.
+//
+// Prior to adding a Payment Method, ensure that your billing address information is up-to-date
+// with a valid `zip` by using the Account Update ([PUT /account](/docs/api/account/#account-update)) endpoint.
 func (s *SDK) CreatePaymentMethod(ctx context.Context, request operations.CreatePaymentMethodRequest) (*operations.CreatePaymentMethodResponse, error) {
-	baseURL := operations.CreatePaymentMethodServers[0]
+	baseURL := operations.CreatePaymentMethodServerList[0]
 	if request.ServerURL != nil {
 		baseURL = *request.ServerURL
 	}
@@ -2593,7 +2907,7 @@ func (s *SDK) CreatePaymentMethod(ctx context.Context, request operations.Create
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2633,8 +2947,10 @@ func (s *SDK) CreatePaymentMethod(ctx context.Context, request operations.Create
 	return res, nil
 }
 
+// CreatePersonalAccessToken - Personal Access Token Create
+// Creates a Personal Access Token for your User. The raw token will be returned in the response, but will never be returned again afterward so be sure to take note of it. You may create a token with _at most_ the scopes of your current token. The created token will be able to access your Account until the given expiry, or until it is revoked.
 func (s *SDK) CreatePersonalAccessToken(ctx context.Context, request operations.CreatePersonalAccessTokenRequest) (*operations.CreatePersonalAccessTokenResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/profile/tokens"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2652,7 +2968,7 @@ func (s *SDK) CreatePersonalAccessToken(ctx context.Context, request operations.
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2692,8 +3008,18 @@ func (s *SDK) CreatePersonalAccessToken(ctx context.Context, request operations.
 	return res, nil
 }
 
+// CreatePromoCredit - Promo Credit Add
+// Adds an expiring Promo Credit to your account.
+//
+// The following restrictions apply:
+//
+//   - Your account must be less than 90 days old.
+//   - There must not be an existing Promo Credit already on your account.
+//   - The requesting User must be unrestricted. Use the User Update
+//     ([PUT /account/users/{username}](/docs/api/account/#user-update)) to change a User's restricted status.
+//   - The `promo_code` must be valid and unexpired.
 func (s *SDK) CreatePromoCredit(ctx context.Context, request operations.CreatePromoCreditRequest) (*operations.CreatePromoCreditResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/account/promo-codes"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2708,7 +3034,7 @@ func (s *SDK) CreatePromoCredit(ctx context.Context, request operations.CreatePr
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2748,8 +3074,45 @@ func (s *SDK) CreatePromoCredit(ctx context.Context, request operations.CreatePr
 	return res, nil
 }
 
+// CreateServiceTransfer - Service Transfer Create
+// Creates a transfer request for the specified services. A request can contain any of the specified service types
+// and any number of each service type. At this time, only Linodes can be transferred.
+//
+// When created successfully, a confirmation email is sent to the account that created this transfer containing a
+// transfer token and instructions on completing the transfer.
+//
+// When a transfer is [accepted](/docs/api/account/#service-transfer-accept), the requested services are moved to
+// the receiving account. Linode services will not experience interruptions due to the transfer process. Backups
+// for Linodes are transferred as well.
+//
+// DNS records that are associated with requested services will not be transferred or updated. Please ensure that
+// associated DNS records have been updated or communicated to the recipient prior to the transfer.
+//
+// A transfer can take up to three hours to complete once accepted. When a transfer is
+// completed, billing for transferred services ends for the sending account and begins for the receiving account.
+//
+// This command can only be accessed by the unrestricted users of an account.
+//
+// There are several conditions that must be met in order to successfully create a transfer request:
+//
+// 1. The account creating the transfer must not have a past due balance or active Terms of Service violation.
+//
+// 1. The service must be owned by the account that is creating the transfer.
+//
+// 1. The service must not be assigned to another Service Transfer that is pending or that has been accepted and is
+// incomplete.
+//
+// 1. Linodes must not:
+//
+//   - be assigned to a NodeBalancer, Firewall, VLAN, or Managed Service.
+//
+//   - have any attached Block Storage Volumes.
+//
+//   - have any shared IP addresses.
+//
+//   - have any assigned /56, /64, or /116 IPv6 ranges.
 func (s *SDK) CreateServiceTransfer(ctx context.Context, request operations.CreateServiceTransferRequest) (*operations.CreateServiceTransferResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/account/service-transfers"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2764,7 +3127,7 @@ func (s *SDK) CreateServiceTransfer(ctx context.Context, request operations.Crea
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2804,8 +3167,11 @@ func (s *SDK) CreateServiceTransfer(ctx context.Context, request operations.Crea
 	return res, nil
 }
 
+// CreateSnapshot - Snapshot Create
+// Creates a snapshot Backup of a Linode.
+// ** If you already have a snapshot of this Linode, this is a destructive action. The previous snapshot will be deleted.**
 func (s *SDK) CreateSnapshot(ctx context.Context, request operations.CreateSnapshotRequest) (*operations.CreateSnapshotResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/linode/instances/{linodeId}/backups", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2823,7 +3189,7 @@ func (s *SDK) CreateSnapshot(ctx context.Context, request operations.CreateSnaps
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2863,8 +3229,12 @@ func (s *SDK) CreateSnapshot(ctx context.Context, request operations.CreateSnaps
 	return res, nil
 }
 
+// CreateTag - New Tag Create
+// Creates a new Tag and optionally tags requested objects with it immediately.
+//
+// **Important**: You must be an unrestricted User in order to add or modify Tags.
 func (s *SDK) CreateTag(ctx context.Context, request operations.CreateTagRequest) (*operations.CreateTagResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/tags"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2879,7 +3249,7 @@ func (s *SDK) CreateTag(ctx context.Context, request operations.CreateTagRequest
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2919,8 +3289,11 @@ func (s *SDK) CreateTag(ctx context.Context, request operations.CreateTagRequest
 	return res, nil
 }
 
+// CreateTicket - Support Ticket Open
+// Open a Support Ticket.
+// Only one of the ID attributes (`linode_id`, `domain_id`, etc.) can be set on a single Support Ticket.
 func (s *SDK) CreateTicket(ctx context.Context, request operations.CreateTicketRequest) (*operations.CreateTicketResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/support/tickets"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2935,7 +3308,7 @@ func (s *SDK) CreateTicket(ctx context.Context, request operations.CreateTicketR
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2975,8 +3348,11 @@ func (s *SDK) CreateTicket(ctx context.Context, request operations.CreateTicketR
 	return res, nil
 }
 
+// CreateTicketAttachment - Ticket Attachment Create
+// Adds a file attachment to an existing Support Ticket on your Account. File attachments are used to assist our Support team in resolving your Ticket. Examples of attachments are screen shots and text files that provide additional information.
+// Note: Accepted file extensions include: .gif, .jpg, .jpeg, .pjpg, .pjpeg, .tif, .tiff, .png, .pdf, or .txt.
 func (s *SDK) CreateTicketAttachment(ctx context.Context, request operations.CreateTicketAttachmentRequest) (*operations.CreateTicketAttachmentResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/support/tickets/{ticketId}/attachments", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2994,7 +3370,7 @@ func (s *SDK) CreateTicketAttachment(ctx context.Context, request operations.Cre
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3034,8 +3410,10 @@ func (s *SDK) CreateTicketAttachment(ctx context.Context, request operations.Cre
 	return res, nil
 }
 
+// CreateTicketReply - Reply Create
+// Adds a reply to an existing Support Ticket.
 func (s *SDK) CreateTicketReply(ctx context.Context, request operations.CreateTicketReplyRequest) (*operations.CreateTicketReplyResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/support/tickets/{ticketId}/replies", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3053,7 +3431,7 @@ func (s *SDK) CreateTicketReply(ctx context.Context, request operations.CreateTi
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3093,8 +3471,12 @@ func (s *SDK) CreateTicketReply(ctx context.Context, request operations.CreateTi
 	return res, nil
 }
 
+// CreateUser - User Create
+// Creates a User on your Account. Once created, a confirmation message containing password creation and login instructions is sent to the User's email address.
+//
+// The User's account access is determined by whether or not they are restricted, and what grants they have been given.
 func (s *SDK) CreateUser(ctx context.Context, request operations.CreateUserRequest) (*operations.CreateUserResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/account/users"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3109,7 +3491,7 @@ func (s *SDK) CreateUser(ctx context.Context, request operations.CreateUserReque
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3149,8 +3531,10 @@ func (s *SDK) CreateUser(ctx context.Context, request operations.CreateUserReque
 	return res, nil
 }
 
+// CreateVolume - Volume Create
+// Creates a Volume on your Account. In order for this to complete successfully, your User must have the `add_volumes` grant. Creating a new Volume will start accruing additional charges on your account.
 func (s *SDK) CreateVolume(ctx context.Context, request operations.CreateVolumeRequest) (*operations.CreateVolumeResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/volumes"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3168,7 +3552,7 @@ func (s *SDK) CreateVolume(ctx context.Context, request operations.CreateVolumeR
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3208,8 +3592,10 @@ func (s *SDK) CreateVolume(ctx context.Context, request operations.CreateVolumeR
 	return res, nil
 }
 
+// DeleteClient - OAuth Client Delete
+// Deletes an OAuth Client registered with Linode. The Client ID and Client secret will no longer be accepted by <a target="_top" href="https://login.linode.com">https://login.linode.com</a>, and all tokens issued to this client will be invalidated (meaning that if your application was using a token, it will no longer work).
 func (s *SDK) DeleteClient(ctx context.Context, request operations.DeleteClientRequest) (*operations.DeleteClientResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/account/oauth-clients/{clientId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -3217,7 +3603,7 @@ func (s *SDK) DeleteClient(ctx context.Context, request operations.DeleteClientR
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3257,8 +3643,12 @@ func (s *SDK) DeleteClient(ctx context.Context, request operations.DeleteClientR
 	return res, nil
 }
 
+// DeleteDisk - Disk Delete
+// Deletes a Disk you have permission to `read_write`.
+//
+// **Deleting a Disk is a destructive action and cannot be undone.**
 func (s *SDK) DeleteDisk(ctx context.Context, request operations.DeleteDiskRequest) (*operations.DeleteDiskResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/linode/instances/{linodeId}/disks/{diskId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -3266,7 +3656,7 @@ func (s *SDK) DeleteDisk(ctx context.Context, request operations.DeleteDiskReque
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3306,8 +3696,10 @@ func (s *SDK) DeleteDisk(ctx context.Context, request operations.DeleteDiskReque
 	return res, nil
 }
 
+// DeleteDomain - Domain Delete
+// Deletes a Domain from Linode's DNS Manager. The Domain will be removed from Linode's nameservers shortly after this operation completes. This also deletes all associated Domain Records.
 func (s *SDK) DeleteDomain(ctx context.Context, request operations.DeleteDomainRequest) (*operations.DeleteDomainResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/domains/{domainId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -3315,7 +3707,7 @@ func (s *SDK) DeleteDomain(ctx context.Context, request operations.DeleteDomainR
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3355,8 +3747,10 @@ func (s *SDK) DeleteDomain(ctx context.Context, request operations.DeleteDomainR
 	return res, nil
 }
 
+// DeleteDomainRecord - Domain Record Delete
+// Deletes a Record on this Domain.
 func (s *SDK) DeleteDomainRecord(ctx context.Context, request operations.DeleteDomainRecordRequest) (*operations.DeleteDomainRecordResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/domains/{domainId}/records/{recordId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -3364,7 +3758,7 @@ func (s *SDK) DeleteDomainRecord(ctx context.Context, request operations.DeleteD
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3404,8 +3798,10 @@ func (s *SDK) DeleteDomainRecord(ctx context.Context, request operations.DeleteD
 	return res, nil
 }
 
+// DeleteEntityTransfer - Entity Transfer Cancel
+// **DEPRECATED**. Please use [Service Transfer Cancel](/docs/api/account/#service-transfer-cancel).
 func (s *SDK) DeleteEntityTransfer(ctx context.Context, request operations.DeleteEntityTransferRequest) (*operations.DeleteEntityTransferResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/account/entity-transfers/{token}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -3413,7 +3809,7 @@ func (s *SDK) DeleteEntityTransfer(ctx context.Context, request operations.Delet
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3453,8 +3849,15 @@ func (s *SDK) DeleteEntityTransfer(ctx context.Context, request operations.Delet
 	return res, nil
 }
 
+// DeleteFirewall - Firewall Delete
+// Delete a Firewall resource by its ID. This will remove all of the Firewall's Rules
+// from any Linode services that the Firewall was assigned to.
+//
+// A `firewall_delete` Event is generated when this endpoint returns successfully.
+//
+// Cloud Firewall is not available in every data center region. For the current list of availability, access the Regions List ([GET /regions](/docs/api/regions/#regions-list)) endpoint or see the [Cloud Firewall Product Documentation](https://www.linode.com/docs/products/networking/cloud-firewall/).
 func (s *SDK) DeleteFirewall(ctx context.Context, request operations.DeleteFirewallRequest) (*operations.DeleteFirewallResponse, error) {
-	baseURL := operations.DeleteFirewallServers[0]
+	baseURL := operations.DeleteFirewallServerList[0]
 	if request.ServerURL != nil {
 		baseURL = *request.ServerURL
 	}
@@ -3466,7 +3869,7 @@ func (s *SDK) DeleteFirewall(ctx context.Context, request operations.DeleteFirew
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3506,8 +3909,17 @@ func (s *SDK) DeleteFirewall(ctx context.Context, request operations.DeleteFirew
 	return res, nil
 }
 
+// DeleteFirewallDevice - Firewall Device Delete
+// Removes a Firewall Device, which removes a Firewall from the Linode service it was
+// assigned to by the Device. This will remove all of the Firewall's Rules from the Linode
+// service. If any other Firewalls have been assigned to the Linode service, then those Rules
+// will remain in effect.
+//
+// A `firewall_device_remove` Event is generated when the Firewall Device is removed successfully.
+//
+// Cloud Firewall is not available in every data center region. For the current list of availability, access the Regions List ([GET /regions](/docs/api/regions/#regions-list)) endpoint or see the [Cloud Firewall Product Documentation](https://www.linode.com/docs/products/networking/cloud-firewall/).
 func (s *SDK) DeleteFirewallDevice(ctx context.Context, request operations.DeleteFirewallDeviceRequest) (*operations.DeleteFirewallDeviceResponse, error) {
-	baseURL := operations.DeleteFirewallDeviceServers[0]
+	baseURL := operations.DeleteFirewallDeviceServerList[0]
 	if request.ServerURL != nil {
 		baseURL = *request.ServerURL
 	}
@@ -3519,7 +3931,7 @@ func (s *SDK) DeleteFirewallDevice(ctx context.Context, request operations.Delet
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3559,8 +3971,12 @@ func (s *SDK) DeleteFirewallDevice(ctx context.Context, request operations.Delet
 	return res, nil
 }
 
+// DeleteImage - Image Delete
+// Deletes a private Image you have permission to `read_write`.
+//
+// **Deleting an Image is a destructive action and cannot be undone.**
 func (s *SDK) DeleteImage(ctx context.Context, request operations.DeleteImageRequest) (*operations.DeleteImageResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/images/{imageId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -3568,7 +3984,7 @@ func (s *SDK) DeleteImage(ctx context.Context, request operations.DeleteImageReq
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3608,8 +4024,20 @@ func (s *SDK) DeleteImage(ctx context.Context, request operations.DeleteImageReq
 	return res, nil
 }
 
+// DeleteLkeCluster - Kubernetes Cluster Delete
+// Deletes a Cluster you have permission to `read_write`.
+//
+// **Deleting a Cluster is a destructive action and cannot be undone.**
+//
+// Deleting a Cluster:
+//   - Deletes all Linodes in all pools within this Kubernetes cluster
+//   - Deletes all supporting Kubernetes services for this Kubernetes
+//     cluster (API server, etcd, etc)
+//   - Deletes all NodeBalancers created by this Kubernetes cluster
+//   - Does not delete any of the volumes created by this Kubernetes
+//     cluster
 func (s *SDK) DeleteLkeCluster(ctx context.Context, request operations.DeleteLkeClusterRequest) (*operations.DeleteLkeClusterResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/lke/clusters/{clusterId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -3617,7 +4045,7 @@ func (s *SDK) DeleteLkeCluster(ctx context.Context, request operations.DeleteLke
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3657,8 +4085,14 @@ func (s *SDK) DeleteLkeCluster(ctx context.Context, request operations.DeleteLke
 	return res, nil
 }
 
+// DeleteLkeClusterNode - Node Delete
+// Deletes a specific Node from a Node Pool.
+//
+// **Deleting a Node is a destructive action and cannot be undone.**
+//
+// Deleting a Node will reduce the size of the Node Pool it belongs to.
 func (s *SDK) DeleteLkeClusterNode(ctx context.Context, request operations.DeleteLkeClusterNodeRequest) (*operations.DeleteLkeClusterNodeResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/lke/clusters/{clusterId}/nodes/{nodeId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -3666,7 +4100,7 @@ func (s *SDK) DeleteLkeClusterNode(ctx context.Context, request operations.Delet
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3706,8 +4140,14 @@ func (s *SDK) DeleteLkeClusterNode(ctx context.Context, request operations.Delet
 	return res, nil
 }
 
+// DeleteLkeNodePool - Node Pool Delete
+// Delete a specific Node Pool from a Kubernetes cluster.
+//
+// **Deleting a Node Pool is a destructive action and cannot be undone.**
+//
+// Deleting a Node Pool will delete all Linodes within that Pool.
 func (s *SDK) DeleteLkeNodePool(ctx context.Context, request operations.DeleteLkeNodePoolRequest) (*operations.DeleteLkeNodePoolResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/lke/clusters/{clusterId}/pools/{poolId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -3715,7 +4155,7 @@ func (s *SDK) DeleteLkeNodePool(ctx context.Context, request operations.DeleteLk
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3755,8 +4195,10 @@ func (s *SDK) DeleteLkeNodePool(ctx context.Context, request operations.DeleteLk
 	return res, nil
 }
 
+// DeleteLinodeConfig - Configuration Profile Delete
+// Deletes the specified Configuration profile from the specified Linode.
 func (s *SDK) DeleteLinodeConfig(ctx context.Context, request operations.DeleteLinodeConfigRequest) (*operations.DeleteLinodeConfigResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/linode/instances/{linodeId}/configs/{configId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -3764,7 +4206,7 @@ func (s *SDK) DeleteLinodeConfig(ctx context.Context, request operations.DeleteL
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3804,8 +4246,19 @@ func (s *SDK) DeleteLinodeConfig(ctx context.Context, request operations.DeleteL
 	return res, nil
 }
 
+// DeleteLinodeInstance - Linode Delete
+// Deletes a Linode you have permission to `read_write`.
+//
+// **Deleting a Linode is a destructive action and cannot be undone.**
+//
+// Additionally, deleting a Linode:
+//
+//   - Gives up any IP addresses the Linode was assigned.
+//   - Deletes all Disks, Backups, Configs, etc.
+//   - Stops billing for the Linode and its associated services. You will be billed for time used
+//     within the billing period the Linode was active.
 func (s *SDK) DeleteLinodeInstance(ctx context.Context, request operations.DeleteLinodeInstanceRequest) (*operations.DeleteLinodeInstanceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/linode/instances/{linodeId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -3813,7 +4266,7 @@ func (s *SDK) DeleteLinodeInstance(ctx context.Context, request operations.Delet
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3853,8 +4306,14 @@ func (s *SDK) DeleteLinodeInstance(ctx context.Context, request operations.Delet
 	return res, nil
 }
 
+// DeleteLongviewClient - Longview Client Delete
+// Deletes a Longview Client from your Account.
+//
+// **All information stored for this client will be lost.**
+//
+// This _does not_ uninstall the Longview Client application for your Linode - you must do that manually.
 func (s *SDK) DeleteLongviewClient(ctx context.Context, request operations.DeleteLongviewClientRequest) (*operations.DeleteLongviewClientResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/longview/clients/{clientId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -3862,7 +4321,7 @@ func (s *SDK) DeleteLongviewClient(ctx context.Context, request operations.Delet
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3902,8 +4361,10 @@ func (s *SDK) DeleteLongviewClient(ctx context.Context, request operations.Delet
 	return res, nil
 }
 
+// DeleteManagedContact - Managed Contact Delete
+// Deletes a Managed Contact.
 func (s *SDK) DeleteManagedContact(ctx context.Context, request operations.DeleteManagedContactRequest) (*operations.DeleteManagedContactResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/managed/contacts/{contactId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -3911,7 +4372,7 @@ func (s *SDK) DeleteManagedContact(ctx context.Context, request operations.Delet
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3951,8 +4412,10 @@ func (s *SDK) DeleteManagedContact(ctx context.Context, request operations.Delet
 	return res, nil
 }
 
+// DeleteManagedCredential - Managed Credential Delete
+// Deletes a Managed Credential.  Linode special forces will no longer have access to this Credential when attempting to resolve issues.
 func (s *SDK) DeleteManagedCredential(ctx context.Context, request operations.DeleteManagedCredentialRequest) (*operations.DeleteManagedCredentialResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/managed/credentials/{credentialId}/revoke", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -3960,7 +4423,7 @@ func (s *SDK) DeleteManagedCredential(ctx context.Context, request operations.De
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4000,8 +4463,10 @@ func (s *SDK) DeleteManagedCredential(ctx context.Context, request operations.De
 	return res, nil
 }
 
+// DeleteManagedService - Managed Service Delete
+// Deletes a Managed Service.  This service will no longer be monitored by Linode Managed.
 func (s *SDK) DeleteManagedService(ctx context.Context, request operations.DeleteManagedServiceRequest) (*operations.DeleteManagedServiceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/managed/services/{serviceId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -4009,7 +4474,7 @@ func (s *SDK) DeleteManagedService(ctx context.Context, request operations.Delet
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4049,8 +4514,14 @@ func (s *SDK) DeleteManagedService(ctx context.Context, request operations.Delet
 	return res, nil
 }
 
+// DeleteNodeBalancer - NodeBalancer Delete
+// Deletes a NodeBalancer.
+//
+// **This is a destructive action and cannot be undone.**
+//
+// Deleting a NodeBalancer will also delete all associated Configs and Nodes, although the backend servers represented by the Nodes will not be changed or removed. Deleting a NodeBalancer will cause you to lose access to the IP Addresses assigned to this NodeBalancer.
 func (s *SDK) DeleteNodeBalancer(ctx context.Context, request operations.DeleteNodeBalancerRequest) (*operations.DeleteNodeBalancerResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/nodebalancers/{nodeBalancerId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -4058,7 +4529,7 @@ func (s *SDK) DeleteNodeBalancer(ctx context.Context, request operations.DeleteN
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4098,8 +4569,14 @@ func (s *SDK) DeleteNodeBalancer(ctx context.Context, request operations.DeleteN
 	return res, nil
 }
 
+// DeleteNodeBalancerConfig - Config Delete
+// Deletes the Config for a port of this NodeBalancer.
+//
+// **This cannot be undone.**
+//
+// Once completed, this NodeBalancer will no longer respond to requests on the given port. This also deletes all associated NodeBalancerNodes, but the Linodes they were routing traffic to will be unchanged and will not be removed.
 func (s *SDK) DeleteNodeBalancerConfig(ctx context.Context, request operations.DeleteNodeBalancerConfigRequest) (*operations.DeleteNodeBalancerConfigResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/nodebalancers/{nodeBalancerId}/configs/{configId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -4107,7 +4584,7 @@ func (s *SDK) DeleteNodeBalancerConfig(ctx context.Context, request operations.D
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4147,8 +4624,12 @@ func (s *SDK) DeleteNodeBalancerConfig(ctx context.Context, request operations.D
 	return res, nil
 }
 
+// DeleteNodeBalancerConfigNode - Node Delete
+// Deletes a Node from this Config. This backend will no longer receive traffic for the configured port of this NodeBalancer.
+//
+// This does not change or remove the Linode whose address was used in the creation of this Node.
 func (s *SDK) DeleteNodeBalancerConfigNode(ctx context.Context, request operations.DeleteNodeBalancerConfigNodeRequest) (*operations.DeleteNodeBalancerConfigNodeResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/nodebalancers/{nodeBalancerId}/configs/{configId}/nodes/{nodeId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -4156,7 +4637,7 @@ func (s *SDK) DeleteNodeBalancerConfigNode(ctx context.Context, request operatio
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4196,8 +4677,12 @@ func (s *SDK) DeleteNodeBalancerConfigNode(ctx context.Context, request operatio
 	return res, nil
 }
 
+// DeleteObjectStorageBucket - Object Storage Bucket Remove
+// Removes a single bucket. While buckets containing objects _may_ be deleted by including the `force` option in the request, such operations will fail if the bucket contains too many objects. The recommended way to empty large buckets is to use the [S3 API to configure lifecycle policies](https://docs.ceph.com/en/latest/radosgw/bucketpolicy/#) that remove all objects, then delete the bucket.
+//
+// This endpoint is available for convenience. It is recommended that instead you use the more [fully-featured S3 API](https://docs.ceph.com/en/latest/radosgw/s3/bucketops/#delete-bucket) directly.
 func (s *SDK) DeleteObjectStorageBucket(ctx context.Context, request operations.DeleteObjectStorageBucketRequest) (*operations.DeleteObjectStorageBucketResponse, error) {
-	baseURL := operations.DeleteObjectStorageBucketServers[0]
+	baseURL := operations.DeleteObjectStorageBucketServerList[0]
 	if request.ServerURL != nil {
 		baseURL = *request.ServerURL
 	}
@@ -4209,7 +4694,7 @@ func (s *SDK) DeleteObjectStorageBucket(ctx context.Context, request operations.
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4249,8 +4734,10 @@ func (s *SDK) DeleteObjectStorageBucket(ctx context.Context, request operations.
 	return res, nil
 }
 
+// DeleteObjectStorageKey - Object Storage Key Revoke
+// Revokes an Object Storage Key.  This keypair will no longer be usable by third-party clients.
 func (s *SDK) DeleteObjectStorageKey(ctx context.Context, request operations.DeleteObjectStorageKeyRequest) (*operations.DeleteObjectStorageKeyResponse, error) {
-	baseURL := operations.DeleteObjectStorageKeyServers[0]
+	baseURL := operations.DeleteObjectStorageKeyServerList[0]
 	if request.ServerURL != nil {
 		baseURL = *request.ServerURL
 	}
@@ -4262,7 +4749,7 @@ func (s *SDK) DeleteObjectStorageKey(ctx context.Context, request operations.Del
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4302,8 +4789,10 @@ func (s *SDK) DeleteObjectStorageKey(ctx context.Context, request operations.Del
 	return res, nil
 }
 
+// DeleteObjectStorageSsl - Object Storage TLS/SSL Cert Delete
+// Deletes this Object Storage bucket's user uploaded TLS/SSL certificate and private key.
 func (s *SDK) DeleteObjectStorageSsl(ctx context.Context, request operations.DeleteObjectStorageSslRequest) (*operations.DeleteObjectStorageSslResponse, error) {
-	baseURL := operations.DeleteObjectStorageSslServers[0]
+	baseURL := operations.DeleteObjectStorageSslServerList[0]
 	if request.ServerURL != nil {
 		baseURL = *request.ServerURL
 	}
@@ -4315,7 +4804,7 @@ func (s *SDK) DeleteObjectStorageSsl(ctx context.Context, request operations.Del
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4355,8 +4844,10 @@ func (s *SDK) DeleteObjectStorageSsl(ctx context.Context, request operations.Del
 	return res, nil
 }
 
+// DeletePersonalAccessToken - Personal Access Token Revoke
+// Revokes a Personal Access Token. The token will be invalidated immediately, and requests using that token will fail with a 401. It is possible to revoke access to the token making the request to revoke a token, but keep in mind that doing so could lose you access to the api and require you to create a new token through some other means.
 func (s *SDK) DeletePersonalAccessToken(ctx context.Context, request operations.DeletePersonalAccessTokenRequest) (*operations.DeletePersonalAccessTokenResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/profile/tokens/{tokenId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -4364,7 +4855,7 @@ func (s *SDK) DeletePersonalAccessToken(ctx context.Context, request operations.
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4404,8 +4895,10 @@ func (s *SDK) DeletePersonalAccessToken(ctx context.Context, request operations.
 	return res, nil
 }
 
+// DeleteProfileApp - App Access Revoke
+// Expires this app token. This token may no longer be used to access your Account.
 func (s *SDK) DeleteProfileApp(ctx context.Context, request operations.DeleteProfileAppRequest) (*operations.DeleteProfileAppResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/profile/apps/{appId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -4413,7 +4906,7 @@ func (s *SDK) DeleteProfileApp(ctx context.Context, request operations.DeletePro
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4453,8 +4946,12 @@ func (s *SDK) DeleteProfileApp(ctx context.Context, request operations.DeletePro
 	return res, nil
 }
 
+// DeleteSSHKey - SSH Key Delete
+// Deletes an SSH Key you have access to.
+//
+// **Note:** deleting an SSH Key will *not* remove it from any Linode or Disk that was deployed with `authorized_keys`. In those cases, the keys must be manually deleted on the Linode or Disk. This endpoint will only delete the key's association from your Profile.
 func (s *SDK) DeleteSSHKey(ctx context.Context, request operations.DeleteSSHKeyRequest) (*operations.DeleteSSHKeyResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/profile/sshkeys/{sshKeyId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -4462,7 +4959,7 @@ func (s *SDK) DeleteSSHKey(ctx context.Context, request operations.DeleteSSHKeyR
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4502,8 +4999,17 @@ func (s *SDK) DeleteSSHKey(ctx context.Context, request operations.DeleteSSHKeyR
 	return res, nil
 }
 
+// DeleteServiceTransfer - Service Transfer Cancel
+// Cancels the Service Transfer for the provided token. Once cancelled, a transfer cannot be accepted or otherwise
+// acted on in any way. If cancelled in error, the transfer must be
+// [created](/docs/api/account/#service-transfer-create) again.
+//
+// When cancelled, an email notification for the cancellation is sent to the account that created
+// this transfer. Transfers can not be cancelled if they are expired or have been accepted.
+//
+// This command can only be accessed by the unrestricted users of the account that created this transfer.
 func (s *SDK) DeleteServiceTransfer(ctx context.Context, request operations.DeleteServiceTransferRequest) (*operations.DeleteServiceTransferResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/account/service-transfers/{token}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -4511,7 +5017,7 @@ func (s *SDK) DeleteServiceTransfer(ctx context.Context, request operations.Dele
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4551,8 +5057,10 @@ func (s *SDK) DeleteServiceTransfer(ctx context.Context, request operations.Dele
 	return res, nil
 }
 
+// DeleteStackScript - StackScript Delete
+// Deletes a private StackScript you have permission to `read_write`. You cannot delete a public StackScript.
 func (s *SDK) DeleteStackScript(ctx context.Context, request operations.DeleteStackScriptRequest) (*operations.DeleteStackScriptResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/linode/stackscripts/{stackscriptId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -4560,7 +5068,7 @@ func (s *SDK) DeleteStackScript(ctx context.Context, request operations.DeleteSt
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4600,8 +5108,12 @@ func (s *SDK) DeleteStackScript(ctx context.Context, request operations.DeleteSt
 	return res, nil
 }
 
+// DeleteTag - Tag Delete
+// Remove a Tag from all objects and delete it.
+//
+// **Important**: You must be an unrestricted User in order to add or modify Tags.
 func (s *SDK) DeleteTag(ctx context.Context, request operations.DeleteTagRequest) (*operations.DeleteTagResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/tags/{label}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -4609,7 +5121,7 @@ func (s *SDK) DeleteTag(ctx context.Context, request operations.DeleteTagRequest
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4649,8 +5161,10 @@ func (s *SDK) DeleteTag(ctx context.Context, request operations.DeleteTagRequest
 	return res, nil
 }
 
+// DeleteUser - User Delete
+// Deletes a User. The deleted User will be immediately logged out and may no longer log in or perform any actions. All of the User's Grants will be removed.
 func (s *SDK) DeleteUser(ctx context.Context, request operations.DeleteUserRequest) (*operations.DeleteUserResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/account/users/{username}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -4658,7 +5172,7 @@ func (s *SDK) DeleteUser(ctx context.Context, request operations.DeleteUserReque
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4698,8 +5212,15 @@ func (s *SDK) DeleteUser(ctx context.Context, request operations.DeleteUserReque
 	return res, nil
 }
 
+// DeleteVolume - Volume Delete
+// Deletes a Volume you have permission to `read_write`.
+//
+// **Deleting a Volume is a destructive action and cannot be undone.**
+//
+// Deleting stops billing for the Volume. You will be billed for time used within
+// the billing period the Volume was active.
 func (s *SDK) DeleteVolume(ctx context.Context, request operations.DeleteVolumeRequest) (*operations.DeleteVolumeResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/volumes/{volumeId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -4707,7 +5228,7 @@ func (s *SDK) DeleteVolume(ctx context.Context, request operations.DeleteVolumeR
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4747,8 +5268,10 @@ func (s *SDK) DeleteVolume(ctx context.Context, request operations.DeleteVolumeR
 	return res, nil
 }
 
+// DetachVolume - Volume Detach
+// Detaches a Volume on your Account from a Linode on your Account. In order for this request to complete successfully, your User must have `read_write` access to the Volume and `read_write` access to the Linode.
 func (s *SDK) DetachVolume(ctx context.Context, request operations.DetachVolumeRequest) (*operations.DetachVolumeResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/volumes/{volumeId}/detach", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -4756,7 +5279,7 @@ func (s *SDK) DetachVolume(ctx context.Context, request operations.DetachVolumeR
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4796,8 +5319,10 @@ func (s *SDK) DetachVolume(ctx context.Context, request operations.DetachVolumeR
 	return res, nil
 }
 
+// DisableManagedService - Managed Service Disable
+// Temporarily disables monitoring of a Managed Service.
 func (s *SDK) DisableManagedService(ctx context.Context, request operations.DisableManagedServiceRequest) (*operations.DisableManagedServiceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/managed/services/{serviceId}/disable", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -4805,7 +5330,7 @@ func (s *SDK) DisableManagedService(ctx context.Context, request operations.Disa
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4845,8 +5370,10 @@ func (s *SDK) DisableManagedService(ctx context.Context, request operations.Disa
 	return res, nil
 }
 
+// EnableAccountManged - Linode Managed Enable
+// Enables Linode Managed for the entire account and sends a welcome email to the account's associated email address. Linode Managed can monitor any service or software stack reachable over TCP or HTTP. See our [Linode Managed guide](/docs/platform/linode-managed/) to learn more.
 func (s *SDK) EnableAccountManged(ctx context.Context, request operations.EnableAccountMangedRequest) (*operations.EnableAccountMangedResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/account/settings/managed-enable"
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -4854,7 +5381,7 @@ func (s *SDK) EnableAccountManged(ctx context.Context, request operations.Enable
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4894,8 +5421,10 @@ func (s *SDK) EnableAccountManged(ctx context.Context, request operations.Enable
 	return res, nil
 }
 
+// EnableBackups - Backups Enable
+// Enables backups for the specified Linode.
 func (s *SDK) EnableBackups(ctx context.Context, request operations.EnableBackupsRequest) (*operations.EnableBackupsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/linode/instances/{linodeId}/backups/enable", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -4903,7 +5432,7 @@ func (s *SDK) EnableBackups(ctx context.Context, request operations.EnableBackup
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4943,8 +5472,10 @@ func (s *SDK) EnableBackups(ctx context.Context, request operations.EnableBackup
 	return res, nil
 }
 
+// EnableManagedService - Managed Service Enable
+// Enables monitoring of a Managed Service.
 func (s *SDK) EnableManagedService(ctx context.Context, request operations.EnableManagedServiceRequest) (*operations.EnableManagedServiceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/managed/services/{serviceId}/enable", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -4952,7 +5483,7 @@ func (s *SDK) EnableManagedService(ctx context.Context, request operations.Enabl
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4992,8 +5523,10 @@ func (s *SDK) EnableManagedService(ctx context.Context, request operations.Enabl
 	return res, nil
 }
 
+// EventRead - Event Mark as Read
+// Marks a single Event as read.
 func (s *SDK) EventRead(ctx context.Context, request operations.EventReadRequest) (*operations.EventReadResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/account/events/{eventId}/read", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -5001,7 +5534,7 @@ func (s *SDK) EventRead(ctx context.Context, request operations.EventReadRequest
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5041,8 +5574,10 @@ func (s *SDK) EventRead(ctx context.Context, request operations.EventReadRequest
 	return res, nil
 }
 
+// EventSeen - Event Mark as Seen
+// Marks all Events up to and including this Event by ID as seen.
 func (s *SDK) EventSeen(ctx context.Context, request operations.EventSeenRequest) (*operations.EventSeenResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/account/events/{eventId}/seen", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -5050,7 +5585,7 @@ func (s *SDK) EventSeen(ctx context.Context, request operations.EventSeenRequest
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5090,8 +5625,10 @@ func (s *SDK) EventSeen(ctx context.Context, request operations.EventSeenRequest
 	return res, nil
 }
 
+// ExecutePayPalPayment - Staged/Approved PayPal Payment Execute
+// Given a PaymentID and PayerID - as generated by PayPal during the transaction authorization process - this endpoint executes the Payment to capture the funds and credit your Linode Account.
 func (s *SDK) ExecutePayPalPayment(ctx context.Context, request operations.ExecutePayPalPaymentRequest) (*operations.ExecutePayPalPaymentResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/account/payments/paypal/execute"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -5109,7 +5646,7 @@ func (s *SDK) ExecutePayPalPayment(ctx context.Context, request operations.Execu
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5149,8 +5686,10 @@ func (s *SDK) ExecutePayPalPayment(ctx context.Context, request operations.Execu
 	return res, nil
 }
 
+// GetAccount - Account View
+// Returns the contact and billing information related to your Account.
 func (s *SDK) GetAccount(ctx context.Context, request operations.GetAccountRequest) (*operations.GetAccountResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/account"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -5158,7 +5697,7 @@ func (s *SDK) GetAccount(ctx context.Context, request operations.GetAccountReque
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5198,8 +5737,10 @@ func (s *SDK) GetAccount(ctx context.Context, request operations.GetAccountReque
 	return res, nil
 }
 
+// GetAccountLogin - Login View
+// Returns a Login object that displays information about a successful login. The logins that can be viewed can be for any user on the account, and are not limited to only the logins of the user that is accessing this API endpoint. This command can only be accessed by the unrestricted users of the account.
 func (s *SDK) GetAccountLogin(ctx context.Context, request operations.GetAccountLoginRequest) (*operations.GetAccountLoginResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/account/logins/{loginId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -5207,7 +5748,7 @@ func (s *SDK) GetAccountLogin(ctx context.Context, request operations.GetAccount
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5247,8 +5788,10 @@ func (s *SDK) GetAccountLogin(ctx context.Context, request operations.GetAccount
 	return res, nil
 }
 
+// GetAccountLogins - User Logins List All
+// Returns a collection of successful logins for all users on the account during the last 90 days. This command can only be accessed by the unrestricted users of an account.
 func (s *SDK) GetAccountLogins(ctx context.Context, request operations.GetAccountLoginsRequest) (*operations.GetAccountLoginsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/account/logins"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -5256,7 +5799,7 @@ func (s *SDK) GetAccountLogins(ctx context.Context, request operations.GetAccoun
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5296,8 +5839,10 @@ func (s *SDK) GetAccountLogins(ctx context.Context, request operations.GetAccoun
 	return res, nil
 }
 
+// GetAccountSettings - Account Settings View
+// Returns information related to your Account settings: Managed service subscription, Longview subscription, and network helper.
 func (s *SDK) GetAccountSettings(ctx context.Context, request operations.GetAccountSettingsRequest) (*operations.GetAccountSettingsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/account/settings"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -5305,7 +5850,7 @@ func (s *SDK) GetAccountSettings(ctx context.Context, request operations.GetAcco
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5345,8 +5890,10 @@ func (s *SDK) GetAccountSettings(ctx context.Context, request operations.GetAcco
 	return res, nil
 }
 
+// GetBackup - Backup View
+// Returns information about a Backup.
 func (s *SDK) GetBackup(ctx context.Context, request operations.GetBackupRequest) (*operations.GetBackupResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/linode/instances/{linodeId}/backups/{backupId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -5354,7 +5901,7 @@ func (s *SDK) GetBackup(ctx context.Context, request operations.GetBackupRequest
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5394,8 +5941,10 @@ func (s *SDK) GetBackup(ctx context.Context, request operations.GetBackupRequest
 	return res, nil
 }
 
+// GetBackups - Backups List
+// Returns information about this Linode's available backups.
 func (s *SDK) GetBackups(ctx context.Context, request operations.GetBackupsRequest) (*operations.GetBackupsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/linode/instances/{linodeId}/backups", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -5403,7 +5952,7 @@ func (s *SDK) GetBackups(ctx context.Context, request operations.GetBackupsReque
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5443,8 +5992,10 @@ func (s *SDK) GetBackups(ctx context.Context, request operations.GetBackupsReque
 	return res, nil
 }
 
+// GetClient - OAuth Client View
+// Returns information about a single OAuth client.
 func (s *SDK) GetClient(ctx context.Context, request operations.GetClientRequest) (*operations.GetClientResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/account/oauth-clients/{clientId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -5452,7 +6003,7 @@ func (s *SDK) GetClient(ctx context.Context, request operations.GetClientRequest
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5492,8 +6043,10 @@ func (s *SDK) GetClient(ctx context.Context, request operations.GetClientRequest
 	return res, nil
 }
 
+// GetClientThumbnail - OAuth Client Thumbnail View
+// Returns the thumbnail for this OAuth Client.  This is a publicly-viewable endpoint, and can be accessed without authentication.
 func (s *SDK) GetClientThumbnail(ctx context.Context, request operations.GetClientThumbnailRequest) (*operations.GetClientThumbnailResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/account/oauth-clients/{clientId}/thumbnail", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -5501,7 +6054,7 @@ func (s *SDK) GetClientThumbnail(ctx context.Context, request operations.GetClie
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5541,8 +6094,10 @@ func (s *SDK) GetClientThumbnail(ctx context.Context, request operations.GetClie
 	return res, nil
 }
 
+// GetClients - OAuth Clients List
+// Returns a paginated list of OAuth Clients registered to your Account.  OAuth Clients allow users to log into applications you write or host using their Linode Account, and may allow them to grant some level of access to their Linodes or other entities to your application.
 func (s *SDK) GetClients(ctx context.Context, request operations.GetClientsRequest) (*operations.GetClientsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/account/oauth-clients"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -5552,7 +6107,7 @@ func (s *SDK) GetClients(ctx context.Context, request operations.GetClientsReque
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5592,8 +6147,10 @@ func (s *SDK) GetClients(ctx context.Context, request operations.GetClientsReque
 	return res, nil
 }
 
+// GetDevices - Trusted Devices List
+// Returns a paginated list of active TrustedDevices for your User. Browsers with an active Remember Me Session are logged into your account until the session expires or is revoked.
 func (s *SDK) GetDevices(ctx context.Context, request operations.GetDevicesRequest) (*operations.GetDevicesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/profile/devices"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -5601,7 +6158,7 @@ func (s *SDK) GetDevices(ctx context.Context, request operations.GetDevicesReque
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5641,8 +6198,10 @@ func (s *SDK) GetDevices(ctx context.Context, request operations.GetDevicesReque
 	return res, nil
 }
 
+// GetDomain - Domain View
+// This is a single Domain that you have registered in Linode's DNS Manager. Linode is not a registrar, and in order for this Domain record to work you must own the domain and point your registrar at Linode's nameservers.
 func (s *SDK) GetDomain(ctx context.Context, request operations.GetDomainRequest) (*operations.GetDomainResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/domains/{domainId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -5650,7 +6209,7 @@ func (s *SDK) GetDomain(ctx context.Context, request operations.GetDomainRequest
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5690,8 +6249,10 @@ func (s *SDK) GetDomain(ctx context.Context, request operations.GetDomainRequest
 	return res, nil
 }
 
+// GetDomainRecord - Domain Record View
+// View a single Record on this Domain.
 func (s *SDK) GetDomainRecord(ctx context.Context, request operations.GetDomainRecordRequest) (*operations.GetDomainRecordResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/domains/{domainId}/records/{recordId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -5699,7 +6260,7 @@ func (s *SDK) GetDomainRecord(ctx context.Context, request operations.GetDomainR
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5739,8 +6300,11 @@ func (s *SDK) GetDomainRecord(ctx context.Context, request operations.GetDomainR
 	return res, nil
 }
 
+// GetDomainRecords - Domain Records List
+// Returns a paginated list of Records configured on a Domain in Linode's
+// DNS Manager.
 func (s *SDK) GetDomainRecords(ctx context.Context, request operations.GetDomainRecordsRequest) (*operations.GetDomainRecordsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/domains/{domainId}/records", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -5750,7 +6314,7 @@ func (s *SDK) GetDomainRecords(ctx context.Context, request operations.GetDomain
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5780,8 +6344,10 @@ func (s *SDK) GetDomainRecords(ctx context.Context, request operations.GetDomain
 	return res, nil
 }
 
+// GetDomainZone - Domain Zone File View
+// Returns the zone file for the last rendered zone for the specified domain.
 func (s *SDK) GetDomainZone(ctx context.Context, request operations.GetDomainZoneRequest) (*operations.GetDomainZoneResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/domains/{domainId}/zone-file", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -5789,7 +6355,7 @@ func (s *SDK) GetDomainZone(ctx context.Context, request operations.GetDomainZon
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5829,8 +6395,10 @@ func (s *SDK) GetDomainZone(ctx context.Context, request operations.GetDomainZon
 	return res, nil
 }
 
+// GetDomains - Domains List
+// This is a collection of Domains that you have registered in Linode's DNS Manager.  Linode is not a registrar, and in order for these to work you must own the domains and point your registrar at Linode's nameservers.
 func (s *SDK) GetDomains(ctx context.Context, request operations.GetDomainsRequest) (*operations.GetDomainsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/domains"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -5840,7 +6408,7 @@ func (s *SDK) GetDomains(ctx context.Context, request operations.GetDomainsReque
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5880,8 +6448,10 @@ func (s *SDK) GetDomains(ctx context.Context, request operations.GetDomainsReque
 	return res, nil
 }
 
+// GetEntityTransfer - Entity Transfer View
+// **DEPRECATED**. Please use [Service Transfer View](/docs/api/account/#service-transfer-view).
 func (s *SDK) GetEntityTransfer(ctx context.Context, request operations.GetEntityTransferRequest) (*operations.GetEntityTransferResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/account/entity-transfers/{token}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -5889,7 +6459,7 @@ func (s *SDK) GetEntityTransfer(ctx context.Context, request operations.GetEntit
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5929,8 +6499,10 @@ func (s *SDK) GetEntityTransfer(ctx context.Context, request operations.GetEntit
 	return res, nil
 }
 
+// GetEntityTransfers - Entity Transfers List
+// **DEPRECATED**. Please use [Service Transfers List](/docs/api/account/#service-transfers-list).
 func (s *SDK) GetEntityTransfers(ctx context.Context, request operations.GetEntityTransfersRequest) (*operations.GetEntityTransfersResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/account/entity-transfers"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -5940,7 +6512,7 @@ func (s *SDK) GetEntityTransfers(ctx context.Context, request operations.GetEnti
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5980,8 +6552,10 @@ func (s *SDK) GetEntityTransfers(ctx context.Context, request operations.GetEnti
 	return res, nil
 }
 
+// GetEvent - Event View
+// Returns a single Event object.
 func (s *SDK) GetEvent(ctx context.Context, request operations.GetEventRequest) (*operations.GetEventResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/account/events/{eventId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -5989,7 +6563,7 @@ func (s *SDK) GetEvent(ctx context.Context, request operations.GetEventRequest) 
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6029,8 +6603,10 @@ func (s *SDK) GetEvent(ctx context.Context, request operations.GetEventRequest) 
 	return res, nil
 }
 
+// GetEvents - Events List
+// Returns a collection of Event objects representing actions taken on your Account from the last 90 days. The Events returned depend on your grants.
 func (s *SDK) GetEvents(ctx context.Context, request operations.GetEventsRequest) (*operations.GetEventsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/account/events"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -6040,7 +6616,7 @@ func (s *SDK) GetEvents(ctx context.Context, request operations.GetEventsRequest
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6080,8 +6656,15 @@ func (s *SDK) GetEvents(ctx context.Context, request operations.GetEventsRequest
 	return res, nil
 }
 
+// GetFirewall - Firewall View
+// Get a specific Firewall resource by its ID. The Firewall's Devices will not be
+// returned in the response. Instead, use the
+// [List Firewall Devices](/docs/api/networking/#firewall-devices-list)
+// endpoint to review them.
+//
+// Cloud Firewall is not available in every data center region. For the current list of availability, access the Regions List ([GET /regions](/docs/api/regions/#regions-list)) endpoint or see the [Cloud Firewall Product Documentation](https://www.linode.com/docs/products/networking/cloud-firewall/).
 func (s *SDK) GetFirewall(ctx context.Context, request operations.GetFirewallRequest) (*operations.GetFirewallResponse, error) {
-	baseURL := operations.GetFirewallServers[0]
+	baseURL := operations.GetFirewallServerList[0]
 	if request.ServerURL != nil {
 		baseURL = *request.ServerURL
 	}
@@ -6093,7 +6676,7 @@ func (s *SDK) GetFirewall(ctx context.Context, request operations.GetFirewallReq
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6133,8 +6716,14 @@ func (s *SDK) GetFirewall(ctx context.Context, request operations.GetFirewallReq
 	return res, nil
 }
 
+// GetFirewallDevice - Firewall Device View
+// Returns information for a Firewall Device, which assigns a Firewall
+// to a Linode service (referred to as the Device's `entity`). Currently,
+// only Devices with an entity of type `linode` are accepted.
+//
+// Cloud Firewall is not available in every data center region. For the current list of availability, access the Regions List ([GET /regions](/docs/api/regions/#regions-list)) endpoint or see the [Cloud Firewall Product Documentation](https://www.linode.com/docs/products/networking/cloud-firewall/).
 func (s *SDK) GetFirewallDevice(ctx context.Context, request operations.GetFirewallDeviceRequest) (*operations.GetFirewallDeviceResponse, error) {
-	baseURL := operations.GetFirewallDeviceServers[0]
+	baseURL := operations.GetFirewallDeviceServerList[0]
 	if request.ServerURL != nil {
 		baseURL = *request.ServerURL
 	}
@@ -6146,7 +6735,7 @@ func (s *SDK) GetFirewallDevice(ctx context.Context, request operations.GetFirew
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6186,8 +6775,14 @@ func (s *SDK) GetFirewallDevice(ctx context.Context, request operations.GetFirew
 	return res, nil
 }
 
+// GetFirewallDevices - Firewall Devices List
+// Returns a paginated list of a Firewall's Devices. A Firewall Device assigns a
+// Firewall to a Linode service (referred to as the Device's `entity`). Currently,
+// only Devices with an entity of type `linode` are accepted.
+//
+// Cloud Firewall is not available in every data center region. For the current list of availability, access the Regions List ([GET /regions](/docs/api/regions/#regions-list)) endpoint or see the [Cloud Firewall Product Documentation](https://www.linode.com/docs/products/networking/cloud-firewall/).
 func (s *SDK) GetFirewallDevices(ctx context.Context, request operations.GetFirewallDevicesRequest) (*operations.GetFirewallDevicesResponse, error) {
-	baseURL := operations.GetFirewallDevicesServers[0]
+	baseURL := operations.GetFirewallDevicesServerList[0]
 	if request.ServerURL != nil {
 		baseURL = *request.ServerURL
 	}
@@ -6201,7 +6796,7 @@ func (s *SDK) GetFirewallDevices(ctx context.Context, request operations.GetFire
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6241,8 +6836,19 @@ func (s *SDK) GetFirewallDevices(ctx context.Context, request operations.GetFire
 	return res, nil
 }
 
+// GetFirewallRules - Firewall Rules List
+// Returns the inbound and outbound Rules for a Firewall.
+//
+// This endpoint is in **beta**.
+//
+// * Gain access to [Linode Cloud Firewall](https://www.linode.com/products/firewall/) by signing up for our [Greenlight Beta program](https://www.linode.com/green-light/#sign-up-form).
+// * During the beta, Cloud Firewall is not available in every [data center region](/docs/api/regions). For the current list of availability, see the [Cloud Firewall Product Documentation](https://www.linode.com/docs/products/networking/cloud-firewall/).
+// * Please make sure to prepend all requests with
+// `/v4beta` instead of `/v4`, and be aware that this endpoint may receive breaking
+// updates in the future.  This notice will be removed when this endpoint is out of
+// beta.
 func (s *SDK) GetFirewallRules(ctx context.Context, request operations.GetFirewallRulesRequest) (*operations.GetFirewallRulesResponse, error) {
-	baseURL := operations.GetFirewallRulesServers[0]
+	baseURL := operations.GetFirewallRulesServerList[0]
 	if request.ServerURL != nil {
 		baseURL = *request.ServerURL
 	}
@@ -6254,7 +6860,7 @@ func (s *SDK) GetFirewallRules(ctx context.Context, request operations.GetFirewa
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6294,8 +6900,12 @@ func (s *SDK) GetFirewallRules(ctx context.Context, request operations.GetFirewa
 	return res, nil
 }
 
+// GetFirewalls - Firewalls List
+// Returns a paginated list of your Firewalls.
+//
+// Cloud Firewall is not available in every data center region. For the current list of availability, access the Regions List ([GET /regions](/docs/api/regions/#regions-list)) endpoint or see the [Cloud Firewall Product Documentation](https://www.linode.com/docs/products/networking/cloud-firewall/).
 func (s *SDK) GetFirewalls(ctx context.Context, request operations.GetFirewallsRequest) (*operations.GetFirewallsResponse, error) {
-	baseURL := operations.GetFirewallsServers[0]
+	baseURL := operations.GetFirewallsServerList[0]
 	if request.ServerURL != nil {
 		baseURL = *request.ServerURL
 	}
@@ -6309,7 +6919,7 @@ func (s *SDK) GetFirewalls(ctx context.Context, request operations.GetFirewallsR
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6349,8 +6959,10 @@ func (s *SDK) GetFirewalls(ctx context.Context, request operations.GetFirewallsR
 	return res, nil
 }
 
+// GetIP - IP Address View
+// Returns information about a single IP Address on your Account.
 func (s *SDK) GetIP(ctx context.Context, request operations.GetIPRequest) (*operations.GetIPResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/networking/ips/{address}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -6358,7 +6970,7 @@ func (s *SDK) GetIP(ctx context.Context, request operations.GetIPRequest) (*oper
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6398,8 +7010,10 @@ func (s *SDK) GetIP(ctx context.Context, request operations.GetIPRequest) (*oper
 	return res, nil
 }
 
+// GetIPs - IP Addresses List
+// Returns a paginated list of IP Addresses on your Account, excluding private addresses.
 func (s *SDK) GetIPs(ctx context.Context, request operations.GetIPsRequest) (*operations.GetIPsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/networking/ips"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -6407,7 +7021,7 @@ func (s *SDK) GetIPs(ctx context.Context, request operations.GetIPsRequest) (*op
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6447,8 +7061,10 @@ func (s *SDK) GetIPs(ctx context.Context, request operations.GetIPsRequest) (*op
 	return res, nil
 }
 
+// GetIPv6Pools - IPv6 Pools List
+// Displays the IPv6 pools on your Account. A pool of IPv6 addresses are routed to all of your Linodes in a single [Region](/docs/api/regions/#regions-list). Any Linode on your Account may bring up any address in this pool at any time, with no external configuration required.
 func (s *SDK) GetIPv6Pools(ctx context.Context, request operations.GetIPv6PoolsRequest) (*operations.GetIPv6PoolsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/networking/ipv6/pools"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -6458,7 +7074,7 @@ func (s *SDK) GetIPv6Pools(ctx context.Context, request operations.GetIPv6PoolsR
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6498,8 +7114,16 @@ func (s *SDK) GetIPv6Pools(ctx context.Context, request operations.GetIPv6PoolsR
 	return res, nil
 }
 
+// GetIPv6Ranges - IPv6 Ranges List
+// Displays the IPv6 ranges on your Account.
+//
+//   - An IPv6 range is a `/64` block of IPv6 addresses routed to a single Linode in a given [Region](/docs/api/regions/#regions-list).
+//
+//   - Your Linode is responsible for routing individual addresses in the range, or handling traffic for all the addresses in the range.
+//
+//   - You must [open a support ticket](/docs/api/support/#support-ticket-open) to request a `/64` block of IPv6 addresses to be added to your account.
 func (s *SDK) GetIPv6Ranges(ctx context.Context, request operations.GetIPv6RangesRequest) (*operations.GetIPv6RangesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/networking/ipv6/ranges"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -6509,7 +7133,7 @@ func (s *SDK) GetIPv6Ranges(ctx context.Context, request operations.GetIPv6Range
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6549,8 +7173,10 @@ func (s *SDK) GetIPv6Ranges(ctx context.Context, request operations.GetIPv6Range
 	return res, nil
 }
 
+// GetImage - Image View
+// Get information about a single Image.
 func (s *SDK) GetImage(ctx context.Context, request operations.GetImageRequest) (*operations.GetImageResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/images/{imageId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -6558,7 +7184,7 @@ func (s *SDK) GetImage(ctx context.Context, request operations.GetImageRequest) 
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6598,8 +7224,17 @@ func (s *SDK) GetImage(ctx context.Context, request operations.GetImageRequest) 
 	return res, nil
 }
 
+// GetImages - Images List
+// Returns a paginated list of Images.
+//
+// * **Public** Images have IDs that begin with "linode/". These distribution images are generally available to
+// all users. To view only public Images, call this endpoint without authentication.
+//
+// * **Private** Images have IDs that begin with "private/". These images are account-specific and only
+// accessible to users with `images:read_only` authorization. To view private Images you have access to in
+// addition to public images, call this endpoint with authentication.
 func (s *SDK) GetImages(ctx context.Context, request operations.GetImagesRequest) (*operations.GetImagesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/images"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -6609,7 +7244,7 @@ func (s *SDK) GetImages(ctx context.Context, request operations.GetImagesRequest
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6649,8 +7284,10 @@ func (s *SDK) GetImages(ctx context.Context, request operations.GetImagesRequest
 	return res, nil
 }
 
+// GetInvoice - Invoice View
+// Returns a single Invoice object.
 func (s *SDK) GetInvoice(ctx context.Context, request operations.GetInvoiceRequest) (*operations.GetInvoiceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/account/invoices/{invoiceId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -6658,7 +7295,7 @@ func (s *SDK) GetInvoice(ctx context.Context, request operations.GetInvoiceReque
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6698,8 +7335,10 @@ func (s *SDK) GetInvoice(ctx context.Context, request operations.GetInvoiceReque
 	return res, nil
 }
 
+// GetInvoiceItems - Invoice Items List
+// Returns a paginated list of Invoice items.
 func (s *SDK) GetInvoiceItems(ctx context.Context, request operations.GetInvoiceItemsRequest) (*operations.GetInvoiceItemsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/account/invoices/{invoiceId}/items", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -6709,7 +7348,7 @@ func (s *SDK) GetInvoiceItems(ctx context.Context, request operations.GetInvoice
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6749,8 +7388,10 @@ func (s *SDK) GetInvoiceItems(ctx context.Context, request operations.GetInvoice
 	return res, nil
 }
 
+// GetInvoices - Invoices List
+// Returns a paginated list of Invoices against your Account.
 func (s *SDK) GetInvoices(ctx context.Context, request operations.GetInvoicesRequest) (*operations.GetInvoicesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/account/invoices"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -6760,7 +7401,7 @@ func (s *SDK) GetInvoices(ctx context.Context, request operations.GetInvoicesReq
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6800,8 +7441,10 @@ func (s *SDK) GetInvoices(ctx context.Context, request operations.GetInvoicesReq
 	return res, nil
 }
 
+// GetKernel - Kernel View
+// Returns information about a single Kernel.
 func (s *SDK) GetKernel(ctx context.Context, request operations.GetKernelRequest) (*operations.GetKernelResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/linode/kernels/{kernelId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -6809,7 +7452,7 @@ func (s *SDK) GetKernel(ctx context.Context, request operations.GetKernelRequest
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6849,8 +7492,10 @@ func (s *SDK) GetKernel(ctx context.Context, request operations.GetKernelRequest
 	return res, nil
 }
 
+// GetKernels - Kernels List
+// Lists available Kernels.
 func (s *SDK) GetKernels(ctx context.Context, request operations.GetKernelsRequest) (*operations.GetKernelsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/linode/kernels"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -6860,7 +7505,7 @@ func (s *SDK) GetKernels(ctx context.Context, request operations.GetKernelsReque
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6900,8 +7545,10 @@ func (s *SDK) GetKernels(ctx context.Context, request operations.GetKernelsReque
 	return res, nil
 }
 
+// GetLkeCluster - Kubernetes Cluster View
+// Get a specific Cluster by ID.
 func (s *SDK) GetLkeCluster(ctx context.Context, request operations.GetLkeClusterRequest) (*operations.GetLkeClusterResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/lke/clusters/{clusterId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -6909,7 +7556,7 @@ func (s *SDK) GetLkeCluster(ctx context.Context, request operations.GetLkeCluste
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6949,8 +7596,10 @@ func (s *SDK) GetLkeCluster(ctx context.Context, request operations.GetLkeCluste
 	return res, nil
 }
 
+// GetLkeClusterAPIEndpoints - Kubernetes API Endpoints List
+// List the Kubernetes API server endpoints for this cluster. Please note that it often takes 2-5 minutes before the endpoint is ready after first [creating a new cluster](/docs/api/linode-kubernetes-engine-lke/#kubernetes-cluster-create).
 func (s *SDK) GetLkeClusterAPIEndpoints(ctx context.Context, request operations.GetLkeClusterAPIEndpointsRequest) (*operations.GetLkeClusterAPIEndpointsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/lke/clusters/{clusterId}/api-endpoints", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -6958,7 +7607,7 @@ func (s *SDK) GetLkeClusterAPIEndpoints(ctx context.Context, request operations.
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6998,8 +7647,11 @@ func (s *SDK) GetLkeClusterAPIEndpoints(ctx context.Context, request operations.
 	return res, nil
 }
 
+// GetLkeClusterKubeconfig - Kubeconfig View
+// Get the Kubeconfig file for a Cluster. Please note that it often takes 2-5 minutes before
+// the Kubeconfig file is ready after first [creating a new cluster](/docs/api/linode-kubernetes-engine-lke/#kubernetes-cluster-create).
 func (s *SDK) GetLkeClusterKubeconfig(ctx context.Context, request operations.GetLkeClusterKubeconfigRequest) (*operations.GetLkeClusterKubeconfigResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/lke/clusters/{clusterId}/kubeconfig", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -7007,7 +7659,7 @@ func (s *SDK) GetLkeClusterKubeconfig(ctx context.Context, request operations.Ge
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -7047,8 +7699,10 @@ func (s *SDK) GetLkeClusterKubeconfig(ctx context.Context, request operations.Ge
 	return res, nil
 }
 
+// GetLkeClusterNode - Node View
+// Returns the values for a specified node object.
 func (s *SDK) GetLkeClusterNode(ctx context.Context, request operations.GetLkeClusterNodeRequest) (*operations.GetLkeClusterNodeResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/lke/clusters/{clusterId}/nodes/{nodeId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -7056,7 +7710,7 @@ func (s *SDK) GetLkeClusterNode(ctx context.Context, request operations.GetLkeCl
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -7096,8 +7750,10 @@ func (s *SDK) GetLkeClusterNode(ctx context.Context, request operations.GetLkeCl
 	return res, nil
 }
 
+// GetLkeClusterPools - Node Pools List
+// Returns all active Node Pools on a Kubernetes cluster.
 func (s *SDK) GetLkeClusterPools(ctx context.Context, request operations.GetLkeClusterPoolsRequest) (*operations.GetLkeClusterPoolsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/lke/clusters/{clusterId}/pools", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -7105,7 +7761,7 @@ func (s *SDK) GetLkeClusterPools(ctx context.Context, request operations.GetLkeC
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -7145,8 +7801,10 @@ func (s *SDK) GetLkeClusterPools(ctx context.Context, request operations.GetLkeC
 	return res, nil
 }
 
+// GetLkeClusters - Kubernetes Clusters List
+// Lists current Kubernetes clusters available on your account.
 func (s *SDK) GetLkeClusters(ctx context.Context, request operations.GetLkeClustersRequest) (*operations.GetLkeClustersResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/lke/clusters"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -7154,7 +7812,7 @@ func (s *SDK) GetLkeClusters(ctx context.Context, request operations.GetLkeClust
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -7194,8 +7852,10 @@ func (s *SDK) GetLkeClusters(ctx context.Context, request operations.GetLkeClust
 	return res, nil
 }
 
+// GetLkeNodePool - Node Pool View
+// Get a specific Node Pool by ID.
 func (s *SDK) GetLkeNodePool(ctx context.Context, request operations.GetLkeNodePoolRequest) (*operations.GetLkeNodePoolResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/lke/clusters/{clusterId}/pools/{poolId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -7203,7 +7863,7 @@ func (s *SDK) GetLkeNodePool(ctx context.Context, request operations.GetLkeNodeP
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -7233,8 +7893,10 @@ func (s *SDK) GetLkeNodePool(ctx context.Context, request operations.GetLkeNodeP
 	return res, nil
 }
 
+// GetLkeVersion - Kubernetes Version View
+// View a Kubernetes version available for deployment to a Kubernetes cluster.
 func (s *SDK) GetLkeVersion(ctx context.Context, request operations.GetLkeVersionRequest) (*operations.GetLkeVersionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/lke/versions/{version}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -7242,7 +7904,7 @@ func (s *SDK) GetLkeVersion(ctx context.Context, request operations.GetLkeVersio
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -7282,8 +7944,10 @@ func (s *SDK) GetLkeVersion(ctx context.Context, request operations.GetLkeVersio
 	return res, nil
 }
 
+// GetLkeVersions - Kubernetes Versions List
+// List the Kubernetes versions available for deployment to a Kubernetes cluster.
 func (s *SDK) GetLkeVersions(ctx context.Context, request operations.GetLkeVersionsRequest) (*operations.GetLkeVersionsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/lke/versions"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -7291,7 +7955,7 @@ func (s *SDK) GetLkeVersions(ctx context.Context, request operations.GetLkeVersi
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -7331,8 +7995,10 @@ func (s *SDK) GetLkeVersions(ctx context.Context, request operations.GetLkeVersi
 	return res, nil
 }
 
+// GetLinodeConfig - Configuration Profile View
+// Returns information about a specific Configuration profile.
 func (s *SDK) GetLinodeConfig(ctx context.Context, request operations.GetLinodeConfigRequest) (*operations.GetLinodeConfigResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/linode/instances/{linodeId}/configs/{configId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -7340,7 +8006,7 @@ func (s *SDK) GetLinodeConfig(ctx context.Context, request operations.GetLinodeC
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -7380,8 +8046,10 @@ func (s *SDK) GetLinodeConfig(ctx context.Context, request operations.GetLinodeC
 	return res, nil
 }
 
+// GetLinodeConfigs - Configuration Profiles List
+// Lists Configuration profiles associated with a Linode.
 func (s *SDK) GetLinodeConfigs(ctx context.Context, request operations.GetLinodeConfigsRequest) (*operations.GetLinodeConfigsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/linode/instances/{linodeId}/configs", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -7391,7 +8059,7 @@ func (s *SDK) GetLinodeConfigs(ctx context.Context, request operations.GetLinode
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -7421,8 +8089,10 @@ func (s *SDK) GetLinodeConfigs(ctx context.Context, request operations.GetLinode
 	return res, nil
 }
 
+// GetLinodeDisk - Disk View
+// View Disk information for a Disk associated with this Linode.
 func (s *SDK) GetLinodeDisk(ctx context.Context, request operations.GetLinodeDiskRequest) (*operations.GetLinodeDiskResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/linode/instances/{linodeId}/disks/{diskId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -7430,7 +8100,7 @@ func (s *SDK) GetLinodeDisk(ctx context.Context, request operations.GetLinodeDis
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -7470,8 +8140,10 @@ func (s *SDK) GetLinodeDisk(ctx context.Context, request operations.GetLinodeDis
 	return res, nil
 }
 
+// GetLinodeDisks - Disks List
+// View Disk information for Disks associated with this Linode.
 func (s *SDK) GetLinodeDisks(ctx context.Context, request operations.GetLinodeDisksRequest) (*operations.GetLinodeDisksResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/linode/instances/{linodeId}/disks", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -7481,7 +8153,7 @@ func (s *SDK) GetLinodeDisks(ctx context.Context, request operations.GetLinodeDi
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -7521,8 +8193,10 @@ func (s *SDK) GetLinodeDisks(ctx context.Context, request operations.GetLinodeDi
 	return res, nil
 }
 
+// GetLinodeFirewalls - Firewalls List
+// View Firewall information for Firewalls associated with this Linode.
 func (s *SDK) GetLinodeFirewalls(ctx context.Context, request operations.GetLinodeFirewallsRequest) (*operations.GetLinodeFirewallsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/linode/instances/{linodeId}/firewalls", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -7532,7 +8206,7 @@ func (s *SDK) GetLinodeFirewalls(ctx context.Context, request operations.GetLino
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -7572,8 +8246,10 @@ func (s *SDK) GetLinodeFirewalls(ctx context.Context, request operations.GetLino
 	return res, nil
 }
 
+// GetLinodeIP - IP Address View
+// View information about the specified IP address associated with the specified Linode.
 func (s *SDK) GetLinodeIP(ctx context.Context, request operations.GetLinodeIPRequest) (*operations.GetLinodeIPResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/linode/instances/{linodeId}/ips/{address}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -7581,7 +8257,7 @@ func (s *SDK) GetLinodeIP(ctx context.Context, request operations.GetLinodeIPReq
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -7621,8 +8297,10 @@ func (s *SDK) GetLinodeIP(ctx context.Context, request operations.GetLinodeIPReq
 	return res, nil
 }
 
+// GetLinodeIPs - Networking Information List
+// Returns networking information for a single Linode.
 func (s *SDK) GetLinodeIPs(ctx context.Context, request operations.GetLinodeIPsRequest) (*operations.GetLinodeIPsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/linode/instances/{linodeId}/ips", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -7630,7 +8308,7 @@ func (s *SDK) GetLinodeIPs(ctx context.Context, request operations.GetLinodeIPsR
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -7670,8 +8348,10 @@ func (s *SDK) GetLinodeIPs(ctx context.Context, request operations.GetLinodeIPsR
 	return res, nil
 }
 
+// GetLinodeInstance - Linode View
+// Get a specific Linode by ID.
 func (s *SDK) GetLinodeInstance(ctx context.Context, request operations.GetLinodeInstanceRequest) (*operations.GetLinodeInstanceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/linode/instances/{linodeId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -7679,7 +8359,7 @@ func (s *SDK) GetLinodeInstance(ctx context.Context, request operations.GetLinod
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -7719,8 +8399,10 @@ func (s *SDK) GetLinodeInstance(ctx context.Context, request operations.GetLinod
 	return res, nil
 }
 
+// GetLinodeInstances - Linodes List
+// Returns a paginated list of Linodes you have permission to view.
 func (s *SDK) GetLinodeInstances(ctx context.Context, request operations.GetLinodeInstancesRequest) (*operations.GetLinodeInstancesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/linode/instances"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -7730,7 +8412,7 @@ func (s *SDK) GetLinodeInstances(ctx context.Context, request operations.GetLino
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -7770,8 +8452,10 @@ func (s *SDK) GetLinodeInstances(ctx context.Context, request operations.GetLino
 	return res, nil
 }
 
+// GetLinodeStats - Linode Statistics View
+// Returns CPU, IO, IPv4, and IPv6 statistics for your Linode for the past 24 hours.
 func (s *SDK) GetLinodeStats(ctx context.Context, request operations.GetLinodeStatsRequest) (*operations.GetLinodeStatsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/linode/instances/{linodeId}/stats", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -7779,7 +8463,7 @@ func (s *SDK) GetLinodeStats(ctx context.Context, request operations.GetLinodeSt
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -7819,8 +8503,10 @@ func (s *SDK) GetLinodeStats(ctx context.Context, request operations.GetLinodeSt
 	return res, nil
 }
 
+// GetLinodeStatsByYearMonth - Statistics View (year/month)
+// Returns statistics for a specific month. The year/month values must be either a date in the past, or the current month. If the current month, statistics will be retrieved for the past 30 days.
 func (s *SDK) GetLinodeStatsByYearMonth(ctx context.Context, request operations.GetLinodeStatsByYearMonthRequest) (*operations.GetLinodeStatsByYearMonthResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/linode/instances/{linodeId}/stats/{year}/{month}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -7828,7 +8514,7 @@ func (s *SDK) GetLinodeStatsByYearMonth(ctx context.Context, request operations.
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -7868,8 +8554,10 @@ func (s *SDK) GetLinodeStatsByYearMonth(ctx context.Context, request operations.
 	return res, nil
 }
 
+// GetLinodeTransfer - Network Transfer View
+// Returns a Linode's network transfer pool statistics for the current month.
 func (s *SDK) GetLinodeTransfer(ctx context.Context, request operations.GetLinodeTransferRequest) (*operations.GetLinodeTransferResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/linode/instances/{linodeId}/transfer", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -7877,7 +8565,7 @@ func (s *SDK) GetLinodeTransfer(ctx context.Context, request operations.GetLinod
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -7917,8 +8605,10 @@ func (s *SDK) GetLinodeTransfer(ctx context.Context, request operations.GetLinod
 	return res, nil
 }
 
+// GetLinodeTransferByYearMonth - Network Transfer View (year/month)
+// Returns a Linode's network transfer statistics for a specific month. The year/month values must be either a date in the past, or the current month.
 func (s *SDK) GetLinodeTransferByYearMonth(ctx context.Context, request operations.GetLinodeTransferByYearMonthRequest) (*operations.GetLinodeTransferByYearMonthResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/linode/instances/{linodeId}/transfer/{year}/{month}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -7926,7 +8616,7 @@ func (s *SDK) GetLinodeTransferByYearMonth(ctx context.Context, request operatio
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -7966,8 +8656,10 @@ func (s *SDK) GetLinodeTransferByYearMonth(ctx context.Context, request operatio
 	return res, nil
 }
 
+// GetLinodeType - Type View
+// Returns information about a specific Linode Type, including pricing and specifications. This is used when [creating](/docs/api/linode-instances/#linode-create) or [resizing](/docs/api/linode-instances/#linode-resize) Linodes.
 func (s *SDK) GetLinodeType(ctx context.Context, request operations.GetLinodeTypeRequest) (*operations.GetLinodeTypeResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/linode/types/{typeId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -7975,7 +8667,7 @@ func (s *SDK) GetLinodeType(ctx context.Context, request operations.GetLinodeTyp
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -8015,8 +8707,10 @@ func (s *SDK) GetLinodeType(ctx context.Context, request operations.GetLinodeTyp
 	return res, nil
 }
 
+// GetLinodeTypes - Types List
+// Returns collection of Linode Types, including pricing and specifications for each Type. These are used when [creating](/docs/api/linode-instances/#linode-create) or [resizing](/docs/api/linode-instances/#linode-resize) Linodes.
 func (s *SDK) GetLinodeTypes(ctx context.Context) (*operations.GetLinodeTypesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/linode/types"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -8024,7 +8718,7 @@ func (s *SDK) GetLinodeTypes(ctx context.Context) (*operations.GetLinodeTypesRes
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -8064,8 +8758,10 @@ func (s *SDK) GetLinodeTypes(ctx context.Context) (*operations.GetLinodeTypesRes
 	return res, nil
 }
 
+// GetLinodeVolumes - Linode's Volumes List
+// View Block Storage Volumes attached to this Linode.
 func (s *SDK) GetLinodeVolumes(ctx context.Context, request operations.GetLinodeVolumesRequest) (*operations.GetLinodeVolumesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/linode/instances/{linodeId}/volumes", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -8075,7 +8771,7 @@ func (s *SDK) GetLinodeVolumes(ctx context.Context, request operations.GetLinode
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -8115,8 +8811,10 @@ func (s *SDK) GetLinodeVolumes(ctx context.Context, request operations.GetLinode
 	return res, nil
 }
 
+// GetLongviewClient - Longview Client View
+// Returns a single Longview Client you can access.
 func (s *SDK) GetLongviewClient(ctx context.Context, request operations.GetLongviewClientRequest) (*operations.GetLongviewClientResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/longview/clients/{clientId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -8124,7 +8822,7 @@ func (s *SDK) GetLongviewClient(ctx context.Context, request operations.GetLongv
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -8164,8 +8862,10 @@ func (s *SDK) GetLongviewClient(ctx context.Context, request operations.GetLongv
 	return res, nil
 }
 
+// GetLongviewClients - Longview Clients List
+// Returns a paginated list of Longview Clients you have access to. Longview Client is used to monitor stats on your Linode with the help of the Longview Client application.
 func (s *SDK) GetLongviewClients(ctx context.Context, request operations.GetLongviewClientsRequest) (*operations.GetLongviewClientsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/longview/clients"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -8175,7 +8875,7 @@ func (s *SDK) GetLongviewClients(ctx context.Context, request operations.GetLong
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -8215,8 +8915,19 @@ func (s *SDK) GetLongviewClients(ctx context.Context, request operations.GetLong
 	return res, nil
 }
 
+// GetLongviewPlan - Longview Plan View
+// Get the details of your current Longview plan. This returns a `LongviewSubscription` object for your current Longview Pro plan, or an empty set `{}` if your current plan is Longview Free.
+//
+// You must have at least one of the following `global` [User Grants](/docs/api/account/#users-grants-view) in order to access this endpoint:
+//
+//   - `"account_access": read_write`
+//   - `"account_access": read_only`
+//   - `"longview_subscription": true`
+//   - `"add_longview": true`
+//
+// To update your subscription plan, send a request to [Update Longview Plan](/docs/api/longview/#longview-plan-update).
 func (s *SDK) GetLongviewPlan(ctx context.Context, request operations.GetLongviewPlanRequest) (*operations.GetLongviewPlanResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/longview/plan"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -8224,7 +8935,7 @@ func (s *SDK) GetLongviewPlan(ctx context.Context, request operations.GetLongvie
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -8264,8 +8975,10 @@ func (s *SDK) GetLongviewPlan(ctx context.Context, request operations.GetLongvie
 	return res, nil
 }
 
+// GetLongviewSubscription - Longview Subscription View
+// Get the Longview plan details as a single `LongviewSubscription` object for the provided subscription ID. This is a public endpoint and requires no authentication.
 func (s *SDK) GetLongviewSubscription(ctx context.Context, request operations.GetLongviewSubscriptionRequest) (*operations.GetLongviewSubscriptionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/longview/subscriptions/{subscriptionId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -8273,7 +8986,7 @@ func (s *SDK) GetLongviewSubscription(ctx context.Context, request operations.Ge
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -8313,8 +9026,10 @@ func (s *SDK) GetLongviewSubscription(ctx context.Context, request operations.Ge
 	return res, nil
 }
 
+// GetLongviewSubscriptions - Longview Subscriptions List
+// Returns a paginated list of available Longview Subscriptions. This is a public endpoint and requires no authentication.
 func (s *SDK) GetLongviewSubscriptions(ctx context.Context, request operations.GetLongviewSubscriptionsRequest) (*operations.GetLongviewSubscriptionsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/longview/subscriptions"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -8324,7 +9039,7 @@ func (s *SDK) GetLongviewSubscriptions(ctx context.Context, request operations.G
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -8364,8 +9079,14 @@ func (s *SDK) GetLongviewSubscriptions(ctx context.Context, request operations.G
 	return res, nil
 }
 
+// GetMaintenance - Maintenance List
+// Returns a collection of Maintenance objects for any entity a user has permissions to view.
+//
+// Currently, Linodes are the only entities available for viewing.
+//
+// **Beta**: This endpoint is in beta. Please make sure to prepend all requests with `/v4beta` instead of `/v4`, and be aware that this endpoint may receive breaking updates in the future. This notice will be removed when this endpoint is out of beta.
 func (s *SDK) GetMaintenance(ctx context.Context, request operations.GetMaintenanceRequest) (*operations.GetMaintenanceResponse, error) {
-	baseURL := operations.GetMaintenanceServers[0]
+	baseURL := operations.GetMaintenanceServerList[0]
 	if request.ServerURL != nil {
 		baseURL = *request.ServerURL
 	}
@@ -8377,7 +9098,7 @@ func (s *SDK) GetMaintenance(ctx context.Context, request operations.GetMaintena
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -8417,8 +9138,10 @@ func (s *SDK) GetMaintenance(ctx context.Context, request operations.GetMaintena
 	return res, nil
 }
 
+// GetManagedContact - Managed Contact View
+// Returns a single Managed Contact.
 func (s *SDK) GetManagedContact(ctx context.Context, request operations.GetManagedContactRequest) (*operations.GetManagedContactResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/managed/contacts/{contactId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -8426,7 +9149,7 @@ func (s *SDK) GetManagedContact(ctx context.Context, request operations.GetManag
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -8466,8 +9189,10 @@ func (s *SDK) GetManagedContact(ctx context.Context, request operations.GetManag
 	return res, nil
 }
 
+// GetManagedContacts - Managed Contacts List
+// Returns a paginated list of Managed Contacts on your Account.
 func (s *SDK) GetManagedContacts(ctx context.Context, request operations.GetManagedContactsRequest) (*operations.GetManagedContactsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/managed/contacts"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -8477,7 +9202,7 @@ func (s *SDK) GetManagedContacts(ctx context.Context, request operations.GetMana
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -8517,8 +9242,10 @@ func (s *SDK) GetManagedContacts(ctx context.Context, request operations.GetMana
 	return res, nil
 }
 
+// GetManagedCredential - Managed Credential View
+// Returns a single Managed Credential.
 func (s *SDK) GetManagedCredential(ctx context.Context, request operations.GetManagedCredentialRequest) (*operations.GetManagedCredentialResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/managed/credentials/{credentialId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -8526,7 +9253,7 @@ func (s *SDK) GetManagedCredential(ctx context.Context, request operations.GetMa
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -8566,8 +9293,10 @@ func (s *SDK) GetManagedCredential(ctx context.Context, request operations.GetMa
 	return res, nil
 }
 
+// GetManagedCredentials - Managed Credentials List
+// Returns a paginated list of Managed Credentials on your Account.
 func (s *SDK) GetManagedCredentials(ctx context.Context, request operations.GetManagedCredentialsRequest) (*operations.GetManagedCredentialsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/managed/credentials"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -8577,7 +9306,7 @@ func (s *SDK) GetManagedCredentials(ctx context.Context, request operations.GetM
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -8617,8 +9346,10 @@ func (s *SDK) GetManagedCredentials(ctx context.Context, request operations.GetM
 	return res, nil
 }
 
+// GetManagedIssue - Managed Issue View
+// Returns a single Issue that is impacting or did impact one of your Managed Services.
 func (s *SDK) GetManagedIssue(ctx context.Context, request operations.GetManagedIssueRequest) (*operations.GetManagedIssueResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/managed/issues/{issueId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -8626,7 +9357,7 @@ func (s *SDK) GetManagedIssue(ctx context.Context, request operations.GetManaged
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -8666,8 +9397,10 @@ func (s *SDK) GetManagedIssue(ctx context.Context, request operations.GetManaged
 	return res, nil
 }
 
+// GetManagedIssues - Managed Issues List
+// Returns a paginated list of recent and ongoing issues detected on your Managed Services.
 func (s *SDK) GetManagedIssues(ctx context.Context, request operations.GetManagedIssuesRequest) (*operations.GetManagedIssuesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/managed/issues"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -8677,7 +9410,7 @@ func (s *SDK) GetManagedIssues(ctx context.Context, request operations.GetManage
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -8717,8 +9450,10 @@ func (s *SDK) GetManagedIssues(ctx context.Context, request operations.GetManage
 	return res, nil
 }
 
+// GetManagedLinodeSetting - Linode's Managed Settings View
+// Returns a single Linode's Managed settings.
 func (s *SDK) GetManagedLinodeSetting(ctx context.Context, request operations.GetManagedLinodeSettingRequest) (*operations.GetManagedLinodeSettingResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/managed/linode-settings/{linodeId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -8726,7 +9461,7 @@ func (s *SDK) GetManagedLinodeSetting(ctx context.Context, request operations.Ge
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -8766,8 +9501,10 @@ func (s *SDK) GetManagedLinodeSetting(ctx context.Context, request operations.Ge
 	return res, nil
 }
 
+// GetManagedLinodeSettings - Managed Linode Settings List
+// Returns a paginated list of Managed Settings for your Linodes. There will be one entry per Linode on your Account.
 func (s *SDK) GetManagedLinodeSettings(ctx context.Context, request operations.GetManagedLinodeSettingsRequest) (*operations.GetManagedLinodeSettingsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/managed/linode-settings"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -8777,7 +9514,7 @@ func (s *SDK) GetManagedLinodeSettings(ctx context.Context, request operations.G
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -8817,8 +9554,10 @@ func (s *SDK) GetManagedLinodeSettings(ctx context.Context, request operations.G
 	return res, nil
 }
 
+// GetManagedService - Managed Service View
+// Returns information about a single Managed Service on your Account.
 func (s *SDK) GetManagedService(ctx context.Context, request operations.GetManagedServiceRequest) (*operations.GetManagedServiceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/managed/services/{serviceId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -8826,7 +9565,7 @@ func (s *SDK) GetManagedService(ctx context.Context, request operations.GetManag
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -8866,8 +9605,10 @@ func (s *SDK) GetManagedService(ctx context.Context, request operations.GetManag
 	return res, nil
 }
 
+// GetManagedServices - Managed Services List
+// Returns a paginated list of Managed Services on your Account. These are the services Linode Managed is monitoring and will report and attempt to resolve issues with.
 func (s *SDK) GetManagedServices(ctx context.Context, request operations.GetManagedServicesRequest) (*operations.GetManagedServicesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/managed/services"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -8875,7 +9616,7 @@ func (s *SDK) GetManagedServices(ctx context.Context, request operations.GetMana
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -8915,8 +9656,19 @@ func (s *SDK) GetManagedServices(ctx context.Context, request operations.GetMana
 	return res, nil
 }
 
+// GetManagedStats - Managed Stats List
+// Returns a list of Managed Stats on your Account in the form of x and y data points.
+// You can use these data points to plot your own graph visualizations. These stats
+// reflect the last 24 hours of combined usage across all managed Linodes on your account
+// giving you a high-level snapshot of data for the following:
+//
+// * cpu
+// * disk
+// * swap
+// * network in
+// * network out
 func (s *SDK) GetManagedStats(ctx context.Context, request operations.GetManagedStatsRequest) (*operations.GetManagedStatsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/managed/stats"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -8924,7 +9676,7 @@ func (s *SDK) GetManagedStats(ctx context.Context, request operations.GetManaged
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -8964,8 +9716,10 @@ func (s *SDK) GetManagedStats(ctx context.Context, request operations.GetManaged
 	return res, nil
 }
 
+// GetNodeBalancer - NodeBalancer View
+// Returns a single NodeBalancer you can access.
 func (s *SDK) GetNodeBalancer(ctx context.Context, request operations.GetNodeBalancerRequest) (*operations.GetNodeBalancerResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/nodebalancers/{nodeBalancerId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -8973,7 +9727,7 @@ func (s *SDK) GetNodeBalancer(ctx context.Context, request operations.GetNodeBal
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -9013,8 +9767,10 @@ func (s *SDK) GetNodeBalancer(ctx context.Context, request operations.GetNodeBal
 	return res, nil
 }
 
+// GetNodeBalancerConfig - Config View
+// Returns configuration information for a single port of this NodeBalancer.
 func (s *SDK) GetNodeBalancerConfig(ctx context.Context, request operations.GetNodeBalancerConfigRequest) (*operations.GetNodeBalancerConfigResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/nodebalancers/{nodeBalancerId}/configs/{configId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -9022,7 +9778,7 @@ func (s *SDK) GetNodeBalancerConfig(ctx context.Context, request operations.GetN
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -9062,8 +9818,10 @@ func (s *SDK) GetNodeBalancerConfig(ctx context.Context, request operations.GetN
 	return res, nil
 }
 
+// GetNodeBalancerConfigNodes - Nodes List
+// Returns a paginated list of NodeBalancer nodes associated with this Config. These are the backends that will be sent traffic for this port.
 func (s *SDK) GetNodeBalancerConfigNodes(ctx context.Context, request operations.GetNodeBalancerConfigNodesRequest) (*operations.GetNodeBalancerConfigNodesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/nodebalancers/{nodeBalancerId}/configs/{configId}/nodes", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -9073,7 +9831,7 @@ func (s *SDK) GetNodeBalancerConfigNodes(ctx context.Context, request operations
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -9113,8 +9871,12 @@ func (s *SDK) GetNodeBalancerConfigNodes(ctx context.Context, request operations
 	return res, nil
 }
 
+// GetNodeBalancerConfigs - Configs List
+// Returns a paginated list of NodeBalancer Configs associated with this NodeBalancer. NodeBalancer Configs represent individual ports that this NodeBalancer will accept traffic on, one Config per port.
+//
+// For example, if you wanted to accept standard HTTP traffic, you would need a Config listening on port 80.
 func (s *SDK) GetNodeBalancerConfigs(ctx context.Context, request operations.GetNodeBalancerConfigsRequest) (*operations.GetNodeBalancerConfigsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/nodebalancers/{nodeBalancerId}/configs", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -9124,7 +9886,7 @@ func (s *SDK) GetNodeBalancerConfigs(ctx context.Context, request operations.Get
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -9164,8 +9926,10 @@ func (s *SDK) GetNodeBalancerConfigs(ctx context.Context, request operations.Get
 	return res, nil
 }
 
+// GetNodeBalancerNode - Node View
+// Returns information about a single Node, a backend for this NodeBalancer's configured port.
 func (s *SDK) GetNodeBalancerNode(ctx context.Context, request operations.GetNodeBalancerNodeRequest) (*operations.GetNodeBalancerNodeResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/nodebalancers/{nodeBalancerId}/configs/{configId}/nodes/{nodeId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -9173,7 +9937,7 @@ func (s *SDK) GetNodeBalancerNode(ctx context.Context, request operations.GetNod
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -9213,8 +9977,10 @@ func (s *SDK) GetNodeBalancerNode(ctx context.Context, request operations.GetNod
 	return res, nil
 }
 
+// GetNodeBalancers - NodeBalancers List
+// Returns a paginated list of NodeBalancers you have access to.
 func (s *SDK) GetNodeBalancers(ctx context.Context, request operations.GetNodeBalancersRequest) (*operations.GetNodeBalancersResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/nodebalancers"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -9224,7 +9990,7 @@ func (s *SDK) GetNodeBalancers(ctx context.Context, request operations.GetNodeBa
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -9264,8 +10030,11 @@ func (s *SDK) GetNodeBalancers(ctx context.Context, request operations.GetNodeBa
 	return res, nil
 }
 
+// GetNotifications - Notifications List
+// Returns a collection of Notification objects representing important, often time-sensitive items related to your Account.
+// You cannot interact directly with Notifications, and a Notification will disappear when the circumstances causing it have been resolved. For example, if you have an important Ticket open, you must respond to the Ticket to dismiss the Notification.
 func (s *SDK) GetNotifications(ctx context.Context, request operations.GetNotificationsRequest) (*operations.GetNotificationsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/account/notifications"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -9273,7 +10042,7 @@ func (s *SDK) GetNotifications(ctx context.Context, request operations.GetNotifi
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -9313,8 +10082,13 @@ func (s *SDK) GetNotifications(ctx context.Context, request operations.GetNotifi
 	return res, nil
 }
 
+// GetObjectStorageBucket - Object Storage Bucket View
+// Returns a single Object Storage Bucket.
+//
+// This endpoint is available for convenience. It is recommended that instead you
+// use the more [fully-featured S3 API](https://docs.ceph.com/en/latest/radosgw/s3/bucketops/#get-bucket) directly.
 func (s *SDK) GetObjectStorageBucket(ctx context.Context, request operations.GetObjectStorageBucketRequest) (*operations.GetObjectStorageBucketResponse, error) {
-	baseURL := operations.GetObjectStorageBucketServers[0]
+	baseURL := operations.GetObjectStorageBucketServerList[0]
 	if request.ServerURL != nil {
 		baseURL = *request.ServerURL
 	}
@@ -9326,7 +10100,7 @@ func (s *SDK) GetObjectStorageBucket(ctx context.Context, request operations.Get
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -9366,8 +10140,16 @@ func (s *SDK) GetObjectStorageBucket(ctx context.Context, request operations.Get
 	return res, nil
 }
 
+// GetObjectStorageBucketContent - Object Storage Bucket Contents List
+// Returns the contents of a bucket. The contents are paginated using a `marker`,
+// which is the name of the last object on the previous page.  Objects may
+// be filtered by `prefix` and `delimiter` as well; see Query Parameters for more
+// information.
+//
+// This endpoint is available for convenience. It is recommended that instead you
+// use the more [fully-featured S3 API](https://docs.ceph.com/en/latest/radosgw/s3/objectops/#get-object) directly.
 func (s *SDK) GetObjectStorageBucketContent(ctx context.Context, request operations.GetObjectStorageBucketContentRequest) (*operations.GetObjectStorageBucketContentResponse, error) {
-	baseURL := operations.GetObjectStorageBucketContentServers[0]
+	baseURL := operations.GetObjectStorageBucketContentServerList[0]
 	if request.ServerURL != nil {
 		baseURL = *request.ServerURL
 	}
@@ -9381,7 +10163,7 @@ func (s *SDK) GetObjectStorageBucketContent(ctx context.Context, request operati
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -9421,8 +10203,13 @@ func (s *SDK) GetObjectStorageBucketContent(ctx context.Context, request operati
 	return res, nil
 }
 
+// GetObjectStorageBucketinCluster - Object Storage Buckets in Cluster List
+// Returns a list of Buckets in this cluster belonging to this Account.
+//
+// This endpoint is available for convenience. It is recommended that instead you
+// use the more [fully-featured S3 API](https://docs.ceph.com/en/latest/radosgw/s3/bucketops/#get-bucket) directly.
 func (s *SDK) GetObjectStorageBucketinCluster(ctx context.Context, request operations.GetObjectStorageBucketinClusterRequest) (*operations.GetObjectStorageBucketinClusterResponse, error) {
-	baseURL := operations.GetObjectStorageBucketinClusterServers[0]
+	baseURL := operations.GetObjectStorageBucketinClusterServerList[0]
 	if request.ServerURL != nil {
 		baseURL = *request.ServerURL
 	}
@@ -9434,7 +10221,7 @@ func (s *SDK) GetObjectStorageBucketinCluster(ctx context.Context, request opera
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -9474,8 +10261,13 @@ func (s *SDK) GetObjectStorageBucketinCluster(ctx context.Context, request opera
 	return res, nil
 }
 
+// GetObjectStorageBuckets - Object Storage Buckets List
+// Returns a paginated list of all Object Storage Buckets that you own.
+//
+// This endpoint is available for convenience. It is recommended that instead you
+// use the more [fully-featured S3 API](https://docs.ceph.com/en/latest/radosgw/s3/serviceops/#list-buckets) directly.
 func (s *SDK) GetObjectStorageBuckets(ctx context.Context, request operations.GetObjectStorageBucketsRequest) (*operations.GetObjectStorageBucketsResponse, error) {
-	baseURL := operations.GetObjectStorageBucketsServers[0]
+	baseURL := operations.GetObjectStorageBucketsServerList[0]
 	if request.ServerURL != nil {
 		baseURL = *request.ServerURL
 	}
@@ -9487,7 +10279,7 @@ func (s *SDK) GetObjectStorageBuckets(ctx context.Context, request operations.Ge
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -9527,8 +10319,10 @@ func (s *SDK) GetObjectStorageBuckets(ctx context.Context, request operations.Ge
 	return res, nil
 }
 
+// GetObjectStorageCluster - Cluster View
+// Returns a single Object Storage Cluster.
 func (s *SDK) GetObjectStorageCluster(ctx context.Context, request operations.GetObjectStorageClusterRequest) (*operations.GetObjectStorageClusterResponse, error) {
-	baseURL := operations.GetObjectStorageClusterServers[0]
+	baseURL := operations.GetObjectStorageClusterServerList[0]
 	if request.ServerURL != nil {
 		baseURL = *request.ServerURL
 	}
@@ -9540,7 +10334,7 @@ func (s *SDK) GetObjectStorageCluster(ctx context.Context, request operations.Ge
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -9580,8 +10374,12 @@ func (s *SDK) GetObjectStorageCluster(ctx context.Context, request operations.Ge
 	return res, nil
 }
 
+// GetObjectStorageClusters - Clusters List
+// Returns a paginated list of Object Storage Clusters that are available for
+// use.  Users can connect to the clusters with third party clients to create buckets
+// and upload objects.
 func (s *SDK) GetObjectStorageClusters(ctx context.Context, request operations.GetObjectStorageClustersRequest) (*operations.GetObjectStorageClustersResponse, error) {
-	baseURL := operations.GetObjectStorageClustersServers[0]
+	baseURL := operations.GetObjectStorageClustersServerList[0]
 	if request.ServerURL != nil {
 		baseURL = *request.ServerURL
 	}
@@ -9593,7 +10391,7 @@ func (s *SDK) GetObjectStorageClusters(ctx context.Context, request operations.G
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -9633,8 +10431,10 @@ func (s *SDK) GetObjectStorageClusters(ctx context.Context, request operations.G
 	return res, nil
 }
 
+// GetObjectStorageKey - Object Storage Key View
+// Returns a single Object Storage Key provisioned for your account.
 func (s *SDK) GetObjectStorageKey(ctx context.Context, request operations.GetObjectStorageKeyRequest) (*operations.GetObjectStorageKeyResponse, error) {
-	baseURL := operations.GetObjectStorageKeyServers[0]
+	baseURL := operations.GetObjectStorageKeyServerList[0]
 	if request.ServerURL != nil {
 		baseURL = *request.ServerURL
 	}
@@ -9646,7 +10446,7 @@ func (s *SDK) GetObjectStorageKey(ctx context.Context, request operations.GetObj
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -9686,8 +10486,11 @@ func (s *SDK) GetObjectStorageKey(ctx context.Context, request operations.GetObj
 	return res, nil
 }
 
+// GetObjectStorageKeys - Object Storage Keys List
+// Returns a paginated list of Object Storage Keys for authenticating to
+// the Object Storage S3 API.
 func (s *SDK) GetObjectStorageKeys(ctx context.Context, request operations.GetObjectStorageKeysRequest) (*operations.GetObjectStorageKeysResponse, error) {
-	baseURL := operations.GetObjectStorageKeysServers[0]
+	baseURL := operations.GetObjectStorageKeysServerList[0]
 	if request.ServerURL != nil {
 		baseURL = *request.ServerURL
 	}
@@ -9699,7 +10502,7 @@ func (s *SDK) GetObjectStorageKeys(ctx context.Context, request operations.GetOb
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -9739,8 +10542,11 @@ func (s *SDK) GetObjectStorageKeys(ctx context.Context, request operations.GetOb
 	return res, nil
 }
 
+// GetObjectStorageSsl - Object Storage TLS/SSL Cert View
+// Returns a boolean value indicating if this bucket has a corresponding TLS/SSL certificate that was
+// uploaded by an Account user.
 func (s *SDK) GetObjectStorageSsl(ctx context.Context, request operations.GetObjectStorageSslRequest) (*operations.GetObjectStorageSslResponse, error) {
-	baseURL := operations.GetObjectStorageSslServers[0]
+	baseURL := operations.GetObjectStorageSslServerList[0]
 	if request.ServerURL != nil {
 		baseURL = *request.ServerURL
 	}
@@ -9752,7 +10558,7 @@ func (s *SDK) GetObjectStorageSsl(ctx context.Context, request operations.GetObj
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -9792,8 +10598,13 @@ func (s *SDK) GetObjectStorageSsl(ctx context.Context, request operations.GetObj
 	return res, nil
 }
 
+// GetObjectStorageTransfer - Object Storage Transfer View
+// The amount of outbound data transfer used by your account's Object Storage buckets.
+// Object Storage adds 1 terabyte of outbound data transfer to your data transfer pool.
+// See the [Object Storage Pricing and Limitations](/docs/guides/pricing-and-limitations/)
+// guide for details on Object Storage transfer quotas.
 func (s *SDK) GetObjectStorageTransfer(ctx context.Context, request operations.GetObjectStorageTransferRequest) (*operations.GetObjectStorageTransferResponse, error) {
-	baseURL := operations.GetObjectStorageTransferServers[0]
+	baseURL := operations.GetObjectStorageTransferServerList[0]
 	if request.ServerURL != nil {
 		baseURL = *request.ServerURL
 	}
@@ -9805,7 +10616,7 @@ func (s *SDK) GetObjectStorageTransfer(ctx context.Context, request operations.G
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -9845,8 +10656,10 @@ func (s *SDK) GetObjectStorageTransfer(ctx context.Context, request operations.G
 	return res, nil
 }
 
+// GetPayment - Payment View
+// Returns information about a specific Payment.
 func (s *SDK) GetPayment(ctx context.Context, request operations.GetPaymentRequest) (*operations.GetPaymentResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/account/payments/{paymentId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -9854,7 +10667,7 @@ func (s *SDK) GetPayment(ctx context.Context, request operations.GetPaymentReque
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -9894,8 +10707,10 @@ func (s *SDK) GetPayment(ctx context.Context, request operations.GetPaymentReque
 	return res, nil
 }
 
+// GetPaymentMethods - Payment Methods List
+// Returns a paginated list of Payment Methods for this Account.
 func (s *SDK) GetPaymentMethods(ctx context.Context, request operations.GetPaymentMethodsRequest) (*operations.GetPaymentMethodsResponse, error) {
-	baseURL := operations.GetPaymentMethodsServers[0]
+	baseURL := operations.GetPaymentMethodsServerList[0]
 	if request.ServerURL != nil {
 		baseURL = *request.ServerURL
 	}
@@ -9909,7 +10724,7 @@ func (s *SDK) GetPaymentMethods(ctx context.Context, request operations.GetPayme
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -9949,8 +10764,10 @@ func (s *SDK) GetPaymentMethods(ctx context.Context, request operations.GetPayme
 	return res, nil
 }
 
+// GetPayments - Payments List
+// Returns a paginated list of Payments made on this Account.
 func (s *SDK) GetPayments(ctx context.Context, request operations.GetPaymentsRequest) (*operations.GetPaymentsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/account/payments"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -9960,7 +10777,7 @@ func (s *SDK) GetPayments(ctx context.Context, request operations.GetPaymentsReq
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -10000,8 +10817,10 @@ func (s *SDK) GetPayments(ctx context.Context, request operations.GetPaymentsReq
 	return res, nil
 }
 
+// GetPersonalAccessToken - Personal Access Token View
+// Returns a single Personal Access Token.
 func (s *SDK) GetPersonalAccessToken(ctx context.Context, request operations.GetPersonalAccessTokenRequest) (*operations.GetPersonalAccessTokenResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/profile/tokens/{tokenId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -10009,7 +10828,7 @@ func (s *SDK) GetPersonalAccessToken(ctx context.Context, request operations.Get
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -10049,8 +10868,10 @@ func (s *SDK) GetPersonalAccessToken(ctx context.Context, request operations.Get
 	return res, nil
 }
 
+// GetPersonalAccessTokens - Personal Access Tokens List
+// Returns a paginated list of Personal Access Tokens currently active for your User.
 func (s *SDK) GetPersonalAccessTokens(ctx context.Context, request operations.GetPersonalAccessTokensRequest) (*operations.GetPersonalAccessTokensResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/profile/tokens"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -10058,7 +10879,7 @@ func (s *SDK) GetPersonalAccessTokens(ctx context.Context, request operations.Ge
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -10098,8 +10919,12 @@ func (s *SDK) GetPersonalAccessTokens(ctx context.Context, request operations.Ge
 	return res, nil
 }
 
+// GetProfile - Profile View
+// Returns information about the current User. This can be used to see who is acting in applications where more than one token is managed. For example, in third-party OAuth applications.
+//
+// This endpoint is always accessible, no matter what OAuth scopes the acting token has.
 func (s *SDK) GetProfile(ctx context.Context, request operations.GetProfileRequest) (*operations.GetProfileResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/profile"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -10107,7 +10932,7 @@ func (s *SDK) GetProfile(ctx context.Context, request operations.GetProfileReque
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -10147,8 +10972,10 @@ func (s *SDK) GetProfile(ctx context.Context, request operations.GetProfileReque
 	return res, nil
 }
 
+// GetProfileApp - Authorized App View
+// Returns information about a single app you've authorized to access your Account.
 func (s *SDK) GetProfileApp(ctx context.Context, request operations.GetProfileAppRequest) (*operations.GetProfileAppResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/profile/apps/{appId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -10156,7 +10983,7 @@ func (s *SDK) GetProfileApp(ctx context.Context, request operations.GetProfileAp
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -10196,8 +11023,10 @@ func (s *SDK) GetProfileApp(ctx context.Context, request operations.GetProfileAp
 	return res, nil
 }
 
+// GetProfileApps - Authorized Apps List
+// This is a collection of OAuth apps that you've given access to your Account, and includes the level of access granted.
 func (s *SDK) GetProfileApps(ctx context.Context, request operations.GetProfileAppsRequest) (*operations.GetProfileAppsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/profile/apps"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -10207,7 +11036,7 @@ func (s *SDK) GetProfileApps(ctx context.Context, request operations.GetProfileA
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -10247,8 +11076,14 @@ func (s *SDK) GetProfileApps(ctx context.Context, request operations.GetProfileA
 	return res, nil
 }
 
+// GetProfileGrants - Grants List
+// This returns a GrantsResponse describing what the acting User has been granted access to.  For unrestricted users, this will return a  204 and no body because unrestricted users have access to everything without grants.  This will not return information about entities you do not have access to.  This endpoint is useful when writing third-party OAuth applications to see what options you should present to the acting User.
+//
+// For example, if they do not have `global.add_linodes`, you might not display a button to deploy a new Linode.
+//
+// Any client may access this endpoint; no OAuth scopes are required.
 func (s *SDK) GetProfileGrants(ctx context.Context, request operations.GetProfileGrantsRequest) (*operations.GetProfileGrantsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/profile/grants"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -10256,7 +11091,7 @@ func (s *SDK) GetProfileGrants(ctx context.Context, request operations.GetProfil
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -10297,8 +11132,10 @@ func (s *SDK) GetProfileGrants(ctx context.Context, request operations.GetProfil
 	return res, nil
 }
 
+// GetProfileLogin - Login View
+// Returns a login object displaying information about a successful account login from this user.
 func (s *SDK) GetProfileLogin(ctx context.Context, request operations.GetProfileLoginRequest) (*operations.GetProfileLoginResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/profile/logins/{loginId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -10306,7 +11143,7 @@ func (s *SDK) GetProfileLogin(ctx context.Context, request operations.GetProfile
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -10346,8 +11183,10 @@ func (s *SDK) GetProfileLogin(ctx context.Context, request operations.GetProfile
 	return res, nil
 }
 
+// GetProfileLogins - Logins List
+// Returns a collection of successful account logins from this user during the last 90 days.
 func (s *SDK) GetProfileLogins(ctx context.Context, request operations.GetProfileLoginsRequest) (*operations.GetProfileLoginsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/profile/logins"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -10355,7 +11194,7 @@ func (s *SDK) GetProfileLogins(ctx context.Context, request operations.GetProfil
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -10395,8 +11234,10 @@ func (s *SDK) GetProfileLogins(ctx context.Context, request operations.GetProfil
 	return res, nil
 }
 
+// GetRegion - Region View
+// Returns a single Region.
 func (s *SDK) GetRegion(ctx context.Context, request operations.GetRegionRequest) (*operations.GetRegionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/regions/{regionId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -10404,7 +11245,7 @@ func (s *SDK) GetRegion(ctx context.Context, request operations.GetRegionRequest
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -10444,8 +11285,11 @@ func (s *SDK) GetRegion(ctx context.Context, request operations.GetRegionRequest
 	return res, nil
 }
 
+// GetRegions - Regions List
+// Lists the Regions available for Linode services. Not all services are guaranteed to be
+// available in all Regions.
 func (s *SDK) GetRegions(ctx context.Context) (*operations.GetRegionsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/regions"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -10453,7 +11297,7 @@ func (s *SDK) GetRegions(ctx context.Context) (*operations.GetRegionsResponse, e
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -10493,8 +11337,10 @@ func (s *SDK) GetRegions(ctx context.Context) (*operations.GetRegionsResponse, e
 	return res, nil
 }
 
+// GetSSHKey - SSH Key View
+// Returns a single SSH Key object identified by `id` that you have access to view.
 func (s *SDK) GetSSHKey(ctx context.Context, request operations.GetSSHKeyRequest) (*operations.GetSSHKeyResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/profile/sshkeys/{sshKeyId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -10502,7 +11348,7 @@ func (s *SDK) GetSSHKey(ctx context.Context, request operations.GetSSHKeyRequest
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -10542,8 +11388,10 @@ func (s *SDK) GetSSHKey(ctx context.Context, request operations.GetSSHKeyRequest
 	return res, nil
 }
 
+// GetSSHKeys - SSH Keys List
+// Returns a collection of SSH Keys you've added to your Profile.
 func (s *SDK) GetSSHKeys(ctx context.Context, request operations.GetSSHKeysRequest) (*operations.GetSSHKeysResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/profile/sshkeys"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -10553,7 +11401,7 @@ func (s *SDK) GetSSHKeys(ctx context.Context, request operations.GetSSHKeysReque
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -10593,8 +11441,15 @@ func (s *SDK) GetSSHKeys(ctx context.Context, request operations.GetSSHKeysReque
 	return res, nil
 }
 
+// GetServiceTransfer - Service Transfer View
+// Returns the details of the Service Transfer for the provided token.
+//
+// While a transfer is pending, any unrestricted user *of any account* can access this command. After a
+// transfer has been accepted, it can only be viewed by unrestricted users of the accounts that created and
+// accepted the transfer. If cancelled or expired, only unrestricted users of the account that created the
+// transfer can view it.
 func (s *SDK) GetServiceTransfer(ctx context.Context, request operations.GetServiceTransferRequest) (*operations.GetServiceTransferResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/account/service-transfers/{token}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -10602,7 +11457,7 @@ func (s *SDK) GetServiceTransfer(ctx context.Context, request operations.GetServ
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -10642,8 +11497,12 @@ func (s *SDK) GetServiceTransfer(ctx context.Context, request operations.GetServ
 	return res, nil
 }
 
+// GetServiceTransfers - Service Transfers List
+// Returns a collection of all created and accepted Service Transfers for this account, regardless of the user that created or accepted the transfer.
+//
+// This command can only be accessed by the unrestricted users of an account.
 func (s *SDK) GetServiceTransfers(ctx context.Context, request operations.GetServiceTransfersRequest) (*operations.GetServiceTransfersResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/account/service-transfers"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -10653,7 +11512,7 @@ func (s *SDK) GetServiceTransfers(ctx context.Context, request operations.GetSer
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -10693,8 +11552,10 @@ func (s *SDK) GetServiceTransfers(ctx context.Context, request operations.GetSer
 	return res, nil
 }
 
+// GetStackScript - StackScript View
+// Returns all of the information about a specified StackScript, including the contents of the script.
 func (s *SDK) GetStackScript(ctx context.Context, request operations.GetStackScriptRequest) (*operations.GetStackScriptResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/linode/stackscripts/{stackscriptId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -10702,7 +11563,7 @@ func (s *SDK) GetStackScript(ctx context.Context, request operations.GetStackScr
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -10742,8 +11603,12 @@ func (s *SDK) GetStackScript(ctx context.Context, request operations.GetStackScr
 	return res, nil
 }
 
+// GetStackScripts - StackScripts List
+// If the request is not authenticated, only public StackScripts are returned.
+//
+// For more information on StackScripts, please read our [StackScripts guides](/docs/platform/stackscripts/).
 func (s *SDK) GetStackScripts(ctx context.Context, request operations.GetStackScriptsRequest) (*operations.GetStackScriptsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/linode/stackscripts"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -10753,7 +11618,7 @@ func (s *SDK) GetStackScripts(ctx context.Context, request operations.GetStackSc
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -10793,8 +11658,10 @@ func (s *SDK) GetStackScripts(ctx context.Context, request operations.GetStackSc
 	return res, nil
 }
 
+// GetTaggedObjects - Tagged Objects List
+// Returns a paginated list of all objects you've tagged with the requested Tag. This is a mixed collection of all object types.
 func (s *SDK) GetTaggedObjects(ctx context.Context, request operations.GetTaggedObjectsRequest) (*operations.GetTaggedObjectsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/tags/{label}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -10804,7 +11671,7 @@ func (s *SDK) GetTaggedObjects(ctx context.Context, request operations.GetTagged
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -10844,8 +11711,12 @@ func (s *SDK) GetTaggedObjects(ctx context.Context, request operations.GetTagged
 	return res, nil
 }
 
+// GetTags - Tags List
+// Tags are User-defined labels attached to objects in your Account, such as Linodes. They are used for specifying and grouping attributes of objects that are relevant to the User.
+//
+// This endpoint returns a paginated list of Tags on your account.
 func (s *SDK) GetTags(ctx context.Context, request operations.GetTagsRequest) (*operations.GetTagsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/tags"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -10855,7 +11726,7 @@ func (s *SDK) GetTags(ctx context.Context, request operations.GetTagsRequest) (*
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -10895,8 +11766,10 @@ func (s *SDK) GetTags(ctx context.Context, request operations.GetTagsRequest) (*
 	return res, nil
 }
 
+// GetTicket - Support Ticket View
+// Returns a Support Ticket under your Account.
 func (s *SDK) GetTicket(ctx context.Context, request operations.GetTicketRequest) (*operations.GetTicketResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/support/tickets/{ticketId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -10904,7 +11777,7 @@ func (s *SDK) GetTicket(ctx context.Context, request operations.GetTicketRequest
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -10944,8 +11817,10 @@ func (s *SDK) GetTicket(ctx context.Context, request operations.GetTicketRequest
 	return res, nil
 }
 
+// GetTicketReplies - Replies List
+// Returns a collection of replies to a Support Ticket on your Account.
 func (s *SDK) GetTicketReplies(ctx context.Context, request operations.GetTicketRepliesRequest) (*operations.GetTicketRepliesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/support/tickets/{ticketId}/replies", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -10955,7 +11830,7 @@ func (s *SDK) GetTicketReplies(ctx context.Context, request operations.GetTicket
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -10995,8 +11870,11 @@ func (s *SDK) GetTicketReplies(ctx context.Context, request operations.GetTicket
 	return res, nil
 }
 
+// GetTickets - Support Tickets List
+// Returns a collection of Support Tickets on your Account. Support Tickets can be both tickets you open with Linode for support, as well as tickets generated by Linode regarding your Account.
+// This collection includes all Support Tickets generated on your Account, with open tickets returned first.
 func (s *SDK) GetTickets(ctx context.Context, request operations.GetTicketsRequest) (*operations.GetTicketsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/support/tickets"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -11006,7 +11884,7 @@ func (s *SDK) GetTickets(ctx context.Context, request operations.GetTicketsReque
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -11046,8 +11924,10 @@ func (s *SDK) GetTickets(ctx context.Context, request operations.GetTicketsReque
 	return res, nil
 }
 
+// GetTransfer - Network Utilization View
+// Returns a Transfer object showing your network utilization, in GB, for the current month.
 func (s *SDK) GetTransfer(ctx context.Context, request operations.GetTransferRequest) (*operations.GetTransferResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/account/transfer"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -11055,7 +11935,7 @@ func (s *SDK) GetTransfer(ctx context.Context, request operations.GetTransferReq
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -11095,8 +11975,10 @@ func (s *SDK) GetTransfer(ctx context.Context, request operations.GetTransferReq
 	return res, nil
 }
 
+// GetTrustedDevice - Trusted Device View
+// Returns a single active TrustedDevice for your User.
 func (s *SDK) GetTrustedDevice(ctx context.Context, request operations.GetTrustedDeviceRequest) (*operations.GetTrustedDeviceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/profile/devices/{deviceId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -11104,7 +11986,7 @@ func (s *SDK) GetTrustedDevice(ctx context.Context, request operations.GetTruste
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -11144,8 +12026,10 @@ func (s *SDK) GetTrustedDevice(ctx context.Context, request operations.GetTruste
 	return res, nil
 }
 
+// GetUser - User View
+// Returns information about a single User on your Account.
 func (s *SDK) GetUser(ctx context.Context, request operations.GetUserRequest) (*operations.GetUserResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/account/users/{username}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -11153,7 +12037,7 @@ func (s *SDK) GetUser(ctx context.Context, request operations.GetUserRequest) (*
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -11193,8 +12077,12 @@ func (s *SDK) GetUser(ctx context.Context, request operations.GetUserRequest) (*
 	return res, nil
 }
 
+// GetUserGrants - User's Grants View
+// Returns the full grants structure for the specified account User (other than the account owner, see below for details). This includes all entities on the Account alongside the level of access this User has to each of them.
+//
+// The current authenticated User, including the account owner, may view their own grants at the [/profile/grants](/docs/api/profile/#grants-list) endpoint, but will not see entities that they do not have access to.
 func (s *SDK) GetUserGrants(ctx context.Context, request operations.GetUserGrantsRequest) (*operations.GetUserGrantsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/account/users/{username}/grants", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -11202,7 +12090,7 @@ func (s *SDK) GetUserGrants(ctx context.Context, request operations.GetUserGrant
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -11243,8 +12131,15 @@ func (s *SDK) GetUserGrants(ctx context.Context, request operations.GetUserGrant
 	return res, nil
 }
 
+// GetUserPreferences - User Preferences View
+// View a list of user preferences tied to the OAuth client that generated
+// the token making the request. The user preferences endpoints allow
+// consumers of the API to store arbitrary JSON data, such as a user's font
+// size preference or preferred display name. User preferences are available
+// for each OAuth client registered to your account, and as such an account can
+// have multiple user preferences.
 func (s *SDK) GetUserPreferences(ctx context.Context, request operations.GetUserPreferencesRequest) (*operations.GetUserPreferencesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/profile/preferences"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -11252,7 +12147,7 @@ func (s *SDK) GetUserPreferences(ctx context.Context, request operations.GetUser
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -11292,8 +12187,10 @@ func (s *SDK) GetUserPreferences(ctx context.Context, request operations.GetUser
 	return res, nil
 }
 
+// GetUsers - Users List
+// Returns a paginated list of Users on your Account. Users may access all or part of your Account based on their restricted status and grants.  An unrestricted User may access everything on the account, whereas restricted User may only access entities or perform actions they've been given specific grants to.
 func (s *SDK) GetUsers(ctx context.Context, request operations.GetUsersRequest) (*operations.GetUsersResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/account/users"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -11303,7 +12200,7 @@ func (s *SDK) GetUsers(ctx context.Context, request operations.GetUsersRequest) 
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -11343,8 +12240,33 @@ func (s *SDK) GetUsers(ctx context.Context, request operations.GetUsersRequest) 
 	return res, nil
 }
 
+// GetVlaNs - VLANs List
+// Returns a list of all Virtual Local Area Networks (VLANs) on your Account. VLANs provide
+// a mechanism for secure communication between two or more Linodes that are assigned to the
+// same VLAN and are both within the same Layer 2 broadcast domain.
+//
+// VLANs are created and attached to Linodes by using the `interfaces` property for the following endpoints:
+//
+// - Linode Create ([POST /linode/instances](/docs/api/linode-instances/#linode-create))
+// - Configuration Profile Create ([POST /linode/instances/{linodeId}/configs](/docs/api/linode-instances/#configuration-profile-create))
+// - Configuration Profile Update ([PUT /linode/instances/{linodeId}/configs/{configId}](/docs/api/linode-instances/#configuration-profile-update))
+//
+// There are several ways to detach a VLAN from a Linode:
+//
+// - [Update](/docs/api/linode-instances/#configuration-profile-update) the active Configuration Profile to remove the VLAN interface, then [reboot](/docs/api/linode-instances/#linode-reboot) the Linode.
+// - [Create](/docs/api/linode-instances/#configuration-profile-create) a new Configuration Profile without the VLAN interface, then [reboot](/docs/apilinode-instances/#linode-reboot) the Linode into the new Configuration Profile.
+// - [Delete](/docs/api/linode-instances/#linode-delete) the Linode.
+//
+// **VLANs cannot be manually renamed.** If a VLAN's label must be changed, create a new VLAN and attach all required Linodes to it.
+//
+// **VLANs cannot be manually deleted.** There is no need to manually delete a VLAN. If a VLAN is no longer needed, detach it from all Linodes. A VLANs that are not attached to any Linodes are automatically deleted within a short timeframe.
+//
+// **Note:** Only Next Generation Network (NGN) data centers support VLANs. Use the Regions ([/regions](/docs/api/regions/)) endpoint to view the capabilities of data center regions.
+// If a VLAN is attached to your Linode and you attempt to migrate or clone it to a non-NGN data center,
+// the migration or cloning will not initiate. If a Linode cannot be migrated because of an incompatibility,
+// you will be prompted to select a different data center or contact support.
 func (s *SDK) GetVlaNs(ctx context.Context, request operations.GetVlaNsRequest) (*operations.GetVlaNsResponse, error) {
-	baseURL := operations.GetVlaNsServers[0]
+	baseURL := operations.GetVlaNsServerList[0]
 	if request.ServerURL != nil {
 		baseURL = *request.ServerURL
 	}
@@ -11358,7 +12280,7 @@ func (s *SDK) GetVlaNs(ctx context.Context, request operations.GetVlaNsRequest) 
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -11398,8 +12320,10 @@ func (s *SDK) GetVlaNs(ctx context.Context, request operations.GetVlaNsRequest) 
 	return res, nil
 }
 
+// GetVolume - Volume View
+// Get information about a single Volume.
 func (s *SDK) GetVolume(ctx context.Context, request operations.GetVolumeRequest) (*operations.GetVolumeResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/volumes/{volumeId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -11409,7 +12333,7 @@ func (s *SDK) GetVolume(ctx context.Context, request operations.GetVolumeRequest
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -11449,8 +12373,10 @@ func (s *SDK) GetVolume(ctx context.Context, request operations.GetVolumeRequest
 	return res, nil
 }
 
+// GetVolumes - Volumes List
+// Returns a paginated list of Volumes you have permission to view.
 func (s *SDK) GetVolumes(ctx context.Context, request operations.GetVolumesRequest) (*operations.GetVolumesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/volumes"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -11460,7 +12386,7 @@ func (s *SDK) GetVolumes(ctx context.Context, request operations.GetVolumesReque
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -11500,8 +12426,16 @@ func (s *SDK) GetVolumes(ctx context.Context, request operations.GetVolumesReque
 	return res, nil
 }
 
+// ImportDomain - Domain Import
+// Imports a domain zone from a remote nameserver.
+// Your nameserver must allow zone transfers (AXFR) from the following IPs:
+//
+//   - 96.126.114.97
+//   - 96.126.114.98
+//   - 2600:3c00::5e
+//   - 2600:3c00::5f
 func (s *SDK) ImportDomain(ctx context.Context, request operations.ImportDomainRequest) (*operations.ImportDomainResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/domains/import"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -11516,7 +12450,7 @@ func (s *SDK) ImportDomain(ctx context.Context, request operations.ImportDomainR
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -11556,8 +12490,14 @@ func (s *SDK) ImportDomain(ctx context.Context, request operations.ImportDomainR
 	return res, nil
 }
 
+// MigrateLinodeInstance - DC Migration/Pending Host Migration Initiate
+// Initiate a pending host migration that has been scheduled by Linode or initiate a cross data center (DC) migration.  A list of pending migrations, if any, can be accessed from [GET /account/notifications](/docs/api/account/#notifications-list). When the migration begins, your Linode will be shutdown if not already off. If the migration initiated the shutdown, it will reboot the Linode when completed.
+//
+// To initiate a cross DC migration, you must pass a `region` parameter to the request body specifying the target data center region. You can view a list of all available regions and their feature capabilities from [GET /regions](/docs/api/regions/#regions-list). If your Linode has a DC migration already queued or you have initiated a previously scheduled migration, you will not be able to initiate a DC migration until it has completed.
+//
+// **Note:** Next Generation Network (NGN) data centers do not support IPv6 `/116` pools or IP Failover. If you have these features enabled on your Linode and attempt to migrate to an NGN data center, the migration will not initiate. If a Linode cannot be migrated because of an incompatibility, you will be prompted to select a different data center or contact support.
 func (s *SDK) MigrateLinodeInstance(ctx context.Context, request operations.MigrateLinodeInstanceRequest) (*operations.MigrateLinodeInstanceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/linode/instances/{linodeId}/migrate", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -11572,7 +12512,7 @@ func (s *SDK) MigrateLinodeInstance(ctx context.Context, request operations.Migr
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -11612,8 +12552,13 @@ func (s *SDK) MigrateLinodeInstance(ctx context.Context, request operations.Migr
 	return res, nil
 }
 
+// ModifyObjectStorageBucketAccess - Object Storage Bucket Access Modify
+// Allows changing basic Cross-origin Resource Sharing (CORS) and Access Control Level (ACL) settings.
+// Only allows enabling/disabling CORS for all origins, and/or setting canned ACLs.
+//
+// For more fine-grained control of both systems, please use the more [fully-featured S3 API](https://docs.ceph.com/en/latest/radosgw/s3/bucketops/#put-bucket-acl) directly.
 func (s *SDK) ModifyObjectStorageBucketAccess(ctx context.Context, request operations.ModifyObjectStorageBucketAccessRequest) (*operations.ModifyObjectStorageBucketAccessResponse, error) {
-	baseURL := operations.ModifyObjectStorageBucketAccessServers[0]
+	baseURL := operations.ModifyObjectStorageBucketAccessServerList[0]
 	if request.ServerURL != nil {
 		baseURL = *request.ServerURL
 	}
@@ -11632,7 +12577,7 @@ func (s *SDK) ModifyObjectStorageBucketAccess(ctx context.Context, request opera
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -11672,8 +12617,11 @@ func (s *SDK) ModifyObjectStorageBucketAccess(ctx context.Context, request opera
 	return res, nil
 }
 
+// MutateLinodeInstance - Linode Upgrade
+// Linodes created with now-deprecated Types are entitled to a free upgrade to the next generation. A mutating Linode will be allocated any new resources the upgraded Type provides, and will be subsequently restarted if it was currently running.
+// If any actions are currently running or queued, those actions must be completed first before you can initiate a mutate.
 func (s *SDK) MutateLinodeInstance(ctx context.Context, request operations.MutateLinodeInstanceRequest) (*operations.MutateLinodeInstanceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/linode/instances/{linodeId}/mutate", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -11688,7 +12636,7 @@ func (s *SDK) MutateLinodeInstance(ctx context.Context, request operations.Mutat
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -11728,8 +12676,14 @@ func (s *SDK) MutateLinodeInstance(ctx context.Context, request operations.Mutat
 	return res, nil
 }
 
+// PostLkeClusterNodeRecycle - Node Recycle
+// Recycles an individual Node in the designated Kubernetes Cluster. The Node will be deleted
+// and replaced with a new Linode, which may take a few minutes. Replacement Nodes are
+// installed with the latest available patch for the Cluster's Kubernetes Version.
+//
+// **Any local storage on deleted Linodes (such as "hostPath" and "emptyDir" volumes, or "local" PersistentVolumes) will be erased.**
 func (s *SDK) PostLkeClusterNodeRecycle(ctx context.Context, request operations.PostLkeClusterNodeRecycleRequest) (*operations.PostLkeClusterNodeRecycleResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/lke/clusters/{clusterId}/nodes/{nodeId}/recycle", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -11737,7 +12691,7 @@ func (s *SDK) PostLkeClusterNodeRecycle(ctx context.Context, request operations.
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -11777,8 +12731,14 @@ func (s *SDK) PostLkeClusterNodeRecycle(ctx context.Context, request operations.
 	return res, nil
 }
 
+// PostLkeClusterPoolRecycle - Node Pool Recycle
+// Recycles a Node Pool for the designated Kubernetes Cluster. All Linodes within the Node Pool will be deleted
+// and replaced with new Linodes on a rolling basis, which may take several minutes. Replacement Nodes are
+// installed with the latest available patch for the Cluster's Kubernetes Version.
+//
+// **Any local storage on deleted Linodes (such as "hostPath" and "emptyDir" volumes, or "local" PersistentVolumes) will be erased.**
 func (s *SDK) PostLkeClusterPoolRecycle(ctx context.Context, request operations.PostLkeClusterPoolRecycleRequest) (*operations.PostLkeClusterPoolRecycleResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/lke/clusters/{clusterId}/pools/{poolId}/recycle", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -11786,7 +12746,7 @@ func (s *SDK) PostLkeClusterPoolRecycle(ctx context.Context, request operations.
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -11826,8 +12786,10 @@ func (s *SDK) PostLkeClusterPoolRecycle(ctx context.Context, request operations.
 	return res, nil
 }
 
+// PostLkeClusterPools - Node Pool Create
+// Creates a new Node Pool for the designated Kubernetes cluster.
 func (s *SDK) PostLkeClusterPools(ctx context.Context, request operations.PostLkeClusterPoolsRequest) (*operations.PostLkeClusterPoolsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/lke/clusters/{clusterId}/pools", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -11845,7 +12807,7 @@ func (s *SDK) PostLkeClusterPools(ctx context.Context, request operations.PostLk
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -11885,8 +12847,14 @@ func (s *SDK) PostLkeClusterPools(ctx context.Context, request operations.PostLk
 	return res, nil
 }
 
+// PostLkeClusterRecycle - Cluster Nodes Recycle
+// Recycles all nodes in all pools of a designated Kubernetes Cluster. All Linodes within the Cluster will be deleted
+// and replaced with new Linodes on a rolling basis, which may take several minutes. Replacement Nodes are
+// installed with the latest available [patch version](https://github.com/kubernetes/community/blob/master/contributors/design-proposals/release/versioning.md#kubernetes-release-versioning) for the Cluster's current Kubernetes minor release.
+//
+// **Any local storage on deleted Linodes (such as "hostPath" and "emptyDir" volumes, or "local" PersistentVolumes) will be erased.**
 func (s *SDK) PostLkeClusterRecycle(ctx context.Context, request operations.PostLkeClusterRecycleRequest) (*operations.PostLkeClusterRecycleResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/lke/clusters/{clusterId}/recycle", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -11894,7 +12862,7 @@ func (s *SDK) PostLkeClusterRecycle(ctx context.Context, request operations.Post
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -11934,8 +12902,10 @@ func (s *SDK) PostLkeClusterRecycle(ctx context.Context, request operations.Post
 	return res, nil
 }
 
+// PutLkeCluster - Kubernetes Cluster Update
+// Updates a Kubernetes cluster.
 func (s *SDK) PutLkeCluster(ctx context.Context, request operations.PutLkeClusterRequest) (*operations.PutLkeClusterResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/lke/clusters/{clusterId}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -11950,7 +12920,7 @@ func (s *SDK) PutLkeCluster(ctx context.Context, request operations.PutLkeCluste
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -11980,8 +12950,14 @@ func (s *SDK) PutLkeCluster(ctx context.Context, request operations.PutLkeCluste
 	return res, nil
 }
 
+// PutLkeNodePool - Node Pool Update
+// Updates a Node Pool's count.
+//
+// Linodes will be created or deleted to match changes to the Node Pool's count.
+//
+// **Any local storage on deleted Linodes (such as "hostPath" and "emptyDir" volumes, or "local" PersistentVolumes) will be erased.**
 func (s *SDK) PutLkeNodePool(ctx context.Context, request operations.PutLkeNodePoolRequest) (*operations.PutLkeNodePoolResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/lke/clusters/{clusterId}/pools/{poolId}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -11996,7 +12972,7 @@ func (s *SDK) PutLkeNodePool(ctx context.Context, request operations.PutLkeNodeP
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -12026,8 +13002,10 @@ func (s *SDK) PutLkeNodePool(ctx context.Context, request operations.PutLkeNodeP
 	return res, nil
 }
 
+// RebootLinodeInstance - Linode Reboot
+// Reboots a Linode you have permission to modify. If any actions are currently running or queued, those actions must be completed first before you can initiate a reboot.
 func (s *SDK) RebootLinodeInstance(ctx context.Context, request operations.RebootLinodeInstanceRequest) (*operations.RebootLinodeInstanceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/linode/instances/{linodeId}/reboot", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -12042,7 +13020,7 @@ func (s *SDK) RebootLinodeInstance(ctx context.Context, request operations.Reboo
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -12082,8 +13060,16 @@ func (s *SDK) RebootLinodeInstance(ctx context.Context, request operations.Reboo
 	return res, nil
 }
 
+// RebuildLinodeInstance - Linode Rebuild
+// Rebuilds a Linode you have the `read_write` permission to modify.
+// A rebuild will first shut down the Linode, delete all disks and configs on the Linode, and then deploy a new `image` to the Linode with the given attributes. Additionally:
+//
+//   - Requires an `image` be supplied.
+//   - Requires a `root_pass` be supplied to use for the root User's Account.
+//   - It is recommended to supply SSH keys for the root User using the
+//     `authorized_keys` field.
 func (s *SDK) RebuildLinodeInstance(ctx context.Context, request operations.RebuildLinodeInstanceRequest) (*operations.RebuildLinodeInstanceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/linode/instances/{linodeId}/rebuild", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -12101,7 +13087,7 @@ func (s *SDK) RebuildLinodeInstance(ctx context.Context, request operations.Rebu
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -12141,8 +13127,10 @@ func (s *SDK) RebuildLinodeInstance(ctx context.Context, request operations.Rebu
 	return res, nil
 }
 
+// RebuildNodeBalancerConfig - Config Rebuild
+// Rebuilds a NodeBalancer Config and its Nodes that you have permission to modify.
 func (s *SDK) RebuildNodeBalancerConfig(ctx context.Context, request operations.RebuildNodeBalancerConfigRequest) (*operations.RebuildNodeBalancerConfigResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/nodebalancers/{nodeBalancerId}/configs/{configId}/rebuild", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -12160,7 +13148,7 @@ func (s *SDK) RebuildNodeBalancerConfig(ctx context.Context, request operations.
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -12200,8 +13188,10 @@ func (s *SDK) RebuildNodeBalancerConfig(ctx context.Context, request operations.
 	return res, nil
 }
 
+// RemoveLinodeIP - IPv4 Address Delete
+// Deletes a public IPv4 address associated with this Linode. This will fail if it is the Linode's last remaining public IPv4 address. Private IPv4 addresses cannot be removed via this endpoint.
 func (s *SDK) RemoveLinodeIP(ctx context.Context, request operations.RemoveLinodeIPRequest) (*operations.RemoveLinodeIPResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/linode/instances/{linodeId}/ips/{address}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -12209,7 +13199,7 @@ func (s *SDK) RemoveLinodeIP(ctx context.Context, request operations.RemoveLinod
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -12249,8 +13239,11 @@ func (s *SDK) RemoveLinodeIP(ctx context.Context, request operations.RemoveLinod
 	return res, nil
 }
 
+// RescueLinodeInstance - Linode Boot into Rescue Mode
+// Rescue Mode is a safe environment for performing many system recovery and disk management tasks. Rescue Mode is based on the Finnix recovery distribution, a self-contained and bootable Linux distribution. You can also use Rescue Mode for tasks other than disaster recovery, such as formatting disks to use different filesystems, copying data between disks, and downloading files from a disk via SSH and SFTP.
+// * Note that "sdh" is reserved and unavailable during rescue.
 func (s *SDK) RescueLinodeInstance(ctx context.Context, request operations.RescueLinodeInstanceRequest) (*operations.RescueLinodeInstanceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/linode/instances/{linodeId}/rescue", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -12265,7 +13258,7 @@ func (s *SDK) RescueLinodeInstance(ctx context.Context, request operations.Rescu
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -12305,8 +13298,10 @@ func (s *SDK) RescueLinodeInstance(ctx context.Context, request operations.Rescu
 	return res, nil
 }
 
+// ResetClientSecret - OAuth Client Secret Reset
+// Resets the OAuth Client secret for a client you own, and returns the OAuth Client with the plaintext secret. This secret is not supposed to be publicly known or disclosed anywhere. This can be used to generate a new secret in case the one you have has been leaked, or to get a new secret if you lost the original. The old secret is expired immediately, and logins to your client with the old secret will fail.
 func (s *SDK) ResetClientSecret(ctx context.Context, request operations.ResetClientSecretRequest) (*operations.ResetClientSecretResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/account/oauth-clients/{clientId}/reset-secret", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -12314,7 +13309,7 @@ func (s *SDK) ResetClientSecret(ctx context.Context, request operations.ResetCli
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -12354,8 +13349,10 @@ func (s *SDK) ResetClientSecret(ctx context.Context, request operations.ResetCli
 	return res, nil
 }
 
+// ResetDiskPassword - Disk Root Password Reset
+// Resets the password of a Disk you have permission to `read_write`.
 func (s *SDK) ResetDiskPassword(ctx context.Context, request operations.ResetDiskPasswordRequest) (*operations.ResetDiskPasswordResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/linode/instances/{linodeId}/disks/{diskId}/password", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -12373,7 +13370,7 @@ func (s *SDK) ResetDiskPassword(ctx context.Context, request operations.ResetDis
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -12413,8 +13410,13 @@ func (s *SDK) ResetDiskPassword(ctx context.Context, request operations.ResetDis
 	return res, nil
 }
 
+// ResetLinodePassword - Linode Root Password Reset
+// Resets the root password for this Linode.
+// * Your Linode must be [shut down](/docs/api/linode-instances/#linode-shut-down) for a password reset to complete.
+// * If your Linode has more than one disk (not counting its swap disk), use the [Reset Disk Root Password](/docs/api/linode-instances/#disk-root-password-reset) endpoint to update a specific disk's root password.
+// * A `password_reset` event is generated when a root password reset is successful.
 func (s *SDK) ResetLinodePassword(ctx context.Context, request operations.ResetLinodePasswordRequest) (*operations.ResetLinodePasswordResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/linode/instances/{linodeId}/password", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -12429,7 +13431,7 @@ func (s *SDK) ResetLinodePassword(ctx context.Context, request operations.ResetL
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -12469,8 +13471,18 @@ func (s *SDK) ResetLinodePassword(ctx context.Context, request operations.ResetL
 	return res, nil
 }
 
+// ResizeDisk - Disk Resize
+// Resizes a Disk you have permission to `read_write`.
+//
+// The Disk must not be in use. If the Disk is in use, the request will
+// succeed but the resize will ultimately fail. For a request to succeed,
+// the Linode must be shut down prior to resizing the Disk, or the Disk
+// must not be assigned to the Linode's active Configuration Profile.
+//
+// If you are resizing the Disk to a smaller size, it cannot be made smaller
+// than what is required by the total size of the files current on the Disk.
 func (s *SDK) ResizeDisk(ctx context.Context, request operations.ResizeDiskRequest) (*operations.ResizeDiskResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/linode/instances/{linodeId}/disks/{diskId}/resize", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -12488,7 +13500,7 @@ func (s *SDK) ResizeDisk(ctx context.Context, request operations.ResizeDiskReque
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -12528,8 +13540,15 @@ func (s *SDK) ResizeDisk(ctx context.Context, request operations.ResizeDiskReque
 	return res, nil
 }
 
+// ResizeLinodeInstance - Linode Resize
+// Resizes a Linode you have the `read_write` permission to a different Type. If any actions are currently running or queued, those actions must be completed first before you can initiate a resize. Additionally, the following criteria must be met in order to resize a Linode:
+//
+//   - The Linode must not have a pending migration.
+//   - Your Account cannot have an outstanding balance.
+//   - The Linode must not have more disk allocation than the new Type allows.
+//   - In that situation, you must first delete or resize the disk to be smaller.
 func (s *SDK) ResizeLinodeInstance(ctx context.Context, request operations.ResizeLinodeInstanceRequest) (*operations.ResizeLinodeInstanceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/linode/instances/{linodeId}/resize", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -12547,7 +13566,7 @@ func (s *SDK) ResizeLinodeInstance(ctx context.Context, request operations.Resiz
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -12587,8 +13606,11 @@ func (s *SDK) ResizeLinodeInstance(ctx context.Context, request operations.Resiz
 	return res, nil
 }
 
+// ResizeVolume - Volume Resize
+// Resize an existing Volume on your Account. In order for this request to complete successfully, your User must have the `read_write` permissions to the Volume.
+// * Volumes can only be resized up.
 func (s *SDK) ResizeVolume(ctx context.Context, request operations.ResizeVolumeRequest) (*operations.ResizeVolumeResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/volumes/{volumeId}/resize", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -12606,7 +13628,7 @@ func (s *SDK) ResizeVolume(ctx context.Context, request operations.ResizeVolumeR
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -12646,8 +13668,10 @@ func (s *SDK) ResizeVolume(ctx context.Context, request operations.ResizeVolumeR
 	return res, nil
 }
 
+// RestoreBackup - Backup Restore
+// Restores a Linode's Backup to the specified Linode.
 func (s *SDK) RestoreBackup(ctx context.Context, request operations.RestoreBackupRequest) (*operations.RestoreBackupResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/linode/instances/{linodeId}/backups/{backupId}/restore", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -12665,7 +13689,7 @@ func (s *SDK) RestoreBackup(ctx context.Context, request operations.RestoreBacku
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -12705,8 +13729,10 @@ func (s *SDK) RestoreBackup(ctx context.Context, request operations.RestoreBacku
 	return res, nil
 }
 
+// RevokeTrustedDevice - Trusted Device Revoke
+// Revoke an active TrustedDevice for your User.  Once a TrustedDevice is revoked, this device will have to log in again before accessing your Linode account.
 func (s *SDK) RevokeTrustedDevice(ctx context.Context, request operations.RevokeTrustedDeviceRequest) (*operations.RevokeTrustedDeviceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/profile/devices/{deviceId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -12714,7 +13740,7 @@ func (s *SDK) RevokeTrustedDevice(ctx context.Context, request operations.Revoke
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -12754,8 +13780,10 @@ func (s *SDK) RevokeTrustedDevice(ctx context.Context, request operations.Revoke
 	return res, nil
 }
 
+// SetClientThumbnail - OAuth Client Thumbnail Update
+// Upload a thumbnail for a client you own.  You must upload an image file that will be returned when the thumbnail is retrieved.  This image will be publicly-viewable.
 func (s *SDK) SetClientThumbnail(ctx context.Context, request operations.SetClientThumbnailRequest) (*operations.SetClientThumbnailResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/account/oauth-clients/{clientId}/thumbnail", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -12773,7 +13801,7 @@ func (s *SDK) SetClientThumbnail(ctx context.Context, request operations.SetClie
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -12813,8 +13841,10 @@ func (s *SDK) SetClientThumbnail(ctx context.Context, request operations.SetClie
 	return res, nil
 }
 
+// ShareIPs - IP Sharing Configure
+// Configure shared IPs.  A shared IP may be brought up on a Linode other than the one it lists in its response.  This can be used to allow one Linode to begin serving requests should another become unresponsive.
 func (s *SDK) ShareIPs(ctx context.Context, request operations.ShareIPsRequest) (*operations.ShareIPsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/networking/ipv4/share"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -12832,7 +13862,7 @@ func (s *SDK) ShareIPs(ctx context.Context, request operations.ShareIPsRequest) 
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -12872,8 +13902,10 @@ func (s *SDK) ShareIPs(ctx context.Context, request operations.ShareIPsRequest) 
 	return res, nil
 }
 
+// ShutdownLinodeInstance - Linode Shut Down
+// Shuts down a Linode you have permission to modify. If any actions are currently running or queued, those actions must be completed first before you can initiate a shutdown.
 func (s *SDK) ShutdownLinodeInstance(ctx context.Context, request operations.ShutdownLinodeInstanceRequest) (*operations.ShutdownLinodeInstanceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/linode/instances/{linodeId}/shutdown", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -12881,7 +13913,7 @@ func (s *SDK) ShutdownLinodeInstance(ctx context.Context, request operations.Shu
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -12921,8 +13953,10 @@ func (s *SDK) ShutdownLinodeInstance(ctx context.Context, request operations.Shu
 	return res, nil
 }
 
+// TfaConfirm - Two Factor Authentication Confirm/Enable
+// Confirms that you can successfully generate Two Factor codes and enables TFA on your Account. Once this is complete, login attempts from untrusted computers will be required to provide a Two Factor code before they are successful.
 func (s *SDK) TfaConfirm(ctx context.Context, request operations.TfaConfirmRequest) (*operations.TfaConfirmResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/profile/tfa-enable-confirm"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -12940,7 +13974,7 @@ func (s *SDK) TfaConfirm(ctx context.Context, request operations.TfaConfirmReque
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -12980,8 +14014,10 @@ func (s *SDK) TfaConfirm(ctx context.Context, request operations.TfaConfirmReque
 	return res, nil
 }
 
+// TfaDisable - Two Factor Authentication Disable
+// Disables Two Factor Authentication for your User. Once successful, login attempts from untrusted computers will only require a password before being successful. This is less secure, and is discouraged.
 func (s *SDK) TfaDisable(ctx context.Context, request operations.TfaDisableRequest) (*operations.TfaDisableResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/profile/tfa-disable"
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -12989,7 +14025,7 @@ func (s *SDK) TfaDisable(ctx context.Context, request operations.TfaDisableReque
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -13029,8 +14065,10 @@ func (s *SDK) TfaDisable(ctx context.Context, request operations.TfaDisableReque
 	return res, nil
 }
 
+// TfaEnable - Two Factor Secret Create
+// Generates a Two Factor secret for your User. TFA will not be enabled until you have successfully confirmed the code you were given with [tfa-enable-confirm](/docs/api/profile/#two-factor-secret-create) (see below). Once enabled, logins from untrusted computers will be required to provide a TFA code before they are successful.
 func (s *SDK) TfaEnable(ctx context.Context, request operations.TfaEnableRequest) (*operations.TfaEnableResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/profile/tfa-enable"
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -13038,7 +14076,7 @@ func (s *SDK) TfaEnable(ctx context.Context, request operations.TfaEnableRequest
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -13078,8 +14116,10 @@ func (s *SDK) TfaEnable(ctx context.Context, request operations.TfaEnableRequest
 	return res, nil
 }
 
+// UpdateAccount - Account Update
+// Updates contact and billing information related to your Account.
 func (s *SDK) UpdateAccount(ctx context.Context, request operations.UpdateAccountRequest) (*operations.UpdateAccountResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/account"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -13097,7 +14137,7 @@ func (s *SDK) UpdateAccount(ctx context.Context, request operations.UpdateAccoun
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -13137,8 +14177,12 @@ func (s *SDK) UpdateAccount(ctx context.Context, request operations.UpdateAccoun
 	return res, nil
 }
 
+// UpdateAccountSettings - Account Settings Update
+// Updates your Account settings.
+//
+// To update your Longview subscription plan, send a request to [Update Longview Plan](/docs/api/longview/#longview-plan-update).
 func (s *SDK) UpdateAccountSettings(ctx context.Context, request operations.UpdateAccountSettingsRequest) (*operations.UpdateAccountSettingsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/account/settings"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -13156,7 +14200,7 @@ func (s *SDK) UpdateAccountSettings(ctx context.Context, request operations.Upda
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -13196,8 +14240,10 @@ func (s *SDK) UpdateAccountSettings(ctx context.Context, request operations.Upda
 	return res, nil
 }
 
+// UpdateClient - OAuth Client Update
+// Update information about an OAuth Client on your Account. This can be especially useful to update the `redirect_uri` of your client in the event that the callback url changed in your application.
 func (s *SDK) UpdateClient(ctx context.Context, request operations.UpdateClientRequest) (*operations.UpdateClientResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/account/oauth-clients/{clientId}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -13212,7 +14258,7 @@ func (s *SDK) UpdateClient(ctx context.Context, request operations.UpdateClientR
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -13252,8 +14298,10 @@ func (s *SDK) UpdateClient(ctx context.Context, request operations.UpdateClientR
 	return res, nil
 }
 
+// UpdateDisk - Disk Update
+// Updates a Disk that you have permission to `read_write`.
 func (s *SDK) UpdateDisk(ctx context.Context, request operations.UpdateDiskRequest) (*operations.UpdateDiskResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/linode/instances/{linodeId}/disks/{diskId}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -13271,7 +14319,7 @@ func (s *SDK) UpdateDisk(ctx context.Context, request operations.UpdateDiskReque
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -13311,8 +14359,10 @@ func (s *SDK) UpdateDisk(ctx context.Context, request operations.UpdateDiskReque
 	return res, nil
 }
 
+// UpdateDomain - Domain Update
+// Update information about a Domain in Linode's DNS Manager.
 func (s *SDK) UpdateDomain(ctx context.Context, request operations.UpdateDomainRequest) (*operations.UpdateDomainResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/domains/{domainId}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -13330,7 +14380,7 @@ func (s *SDK) UpdateDomain(ctx context.Context, request operations.UpdateDomainR
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -13370,8 +14420,10 @@ func (s *SDK) UpdateDomain(ctx context.Context, request operations.UpdateDomainR
 	return res, nil
 }
 
+// UpdateDomainRecord - Domain Record Update
+// Updates a single Record on this Domain.
 func (s *SDK) UpdateDomainRecord(ctx context.Context, request operations.UpdateDomainRecordRequest) (*operations.UpdateDomainRecordResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/domains/{domainId}/records/{recordId}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -13389,7 +14441,7 @@ func (s *SDK) UpdateDomainRecord(ctx context.Context, request operations.UpdateD
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -13429,8 +14481,30 @@ func (s *SDK) UpdateDomainRecord(ctx context.Context, request operations.UpdateD
 	return res, nil
 }
 
+// UpdateFirewall - Firewall Update
+// Updates information for a Firewall. Some parts of a Firewall's configuration cannot
+// be manipulated by this endpoint:
+//
+// - A Firewall's Devices cannot be set with this endpoint. Instead, use the
+// [Create Firewall Device](/docs/api/networking/#firewall-device-create)
+// and [Delete Firewall Device](/docs/api/networking/#firewall-device-delete)
+// endpoints to assign and remove this Firewall from Linode services.
+//
+// - A Firewall's Rules cannot be changed with this endpoint. Instead, use the
+// [Update Firewall Rules](/docs/api/networking/#firewall-rules-update)
+// endpoint to update your Rules.
+//
+// - A Firewall's status can be set to `enabled` or `disabled` by this endpoint, but it cannot be
+// set to `deleted`. Instead, use the
+// [Delete Firewall](/docs/api/networking/#firewall-delete)
+// endpoint to delete a Firewall.
+//
+// If a Firewall's status is changed with this endpoint, a corresponding `firewall_enable` or
+// `firewall_disable` Event will be generated.
+//
+// Cloud Firewall is not available in every data center region. For the current list of availability, access the Regions List ([GET /regions](/docs/api/regions/#regions-list)) endpoint or see the [Cloud Firewall Product Documentation](https://www.linode.com/docs/products/networking/cloud-firewall/).
 func (s *SDK) UpdateFirewall(ctx context.Context, request operations.UpdateFirewallRequest) (*operations.UpdateFirewallResponse, error) {
-	baseURL := operations.UpdateFirewallServers[0]
+	baseURL := operations.UpdateFirewallServerList[0]
 	if request.ServerURL != nil {
 		baseURL = *request.ServerURL
 	}
@@ -13449,7 +14523,7 @@ func (s *SDK) UpdateFirewall(ctx context.Context, request operations.UpdateFirew
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -13489,8 +14563,13 @@ func (s *SDK) UpdateFirewall(ctx context.Context, request operations.UpdateFirew
 	return res, nil
 }
 
+// UpdateFirewallRules - Firewall Rules Update
+// Updates the inbound and outbound Rules for a Firewall. Using this endpoint will
+// replace all of a Firewall's ruleset with the Rules specified in your request.
+//
+// Cloud Firewall is not available in every data center region. For the current list of availability, access the Regions List ([GET /regions](/docs/api/regions/#regions-list)) endpoint or see the [Cloud Firewall Product Documentation](https://www.linode.com/docs/products/networking/cloud-firewall/).
 func (s *SDK) UpdateFirewallRules(ctx context.Context, request operations.UpdateFirewallRulesRequest) (*operations.UpdateFirewallRulesResponse, error) {
-	baseURL := operations.UpdateFirewallRulesServers[0]
+	baseURL := operations.UpdateFirewallRulesServerList[0]
 	if request.ServerURL != nil {
 		baseURL = *request.ServerURL
 	}
@@ -13509,7 +14588,7 @@ func (s *SDK) UpdateFirewallRules(ctx context.Context, request operations.Update
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -13549,8 +14628,10 @@ func (s *SDK) UpdateFirewallRules(ctx context.Context, request operations.Update
 	return res, nil
 }
 
+// UpdateIP - IP Address RDNS Update
+// Sets RDNS on an IP Address. Forward DNS must already be set up for reverse DNS to be applied. If you set the RDNS to `null` for public IPv4 addresses, it will be reset to the default _members.linode.com_ RDNS value.
 func (s *SDK) UpdateIP(ctx context.Context, request operations.UpdateIPRequest) (*operations.UpdateIPResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/networking/ips/{address}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -13568,7 +14649,7 @@ func (s *SDK) UpdateIP(ctx context.Context, request operations.UpdateIPRequest) 
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -13608,8 +14689,10 @@ func (s *SDK) UpdateIP(ctx context.Context, request operations.UpdateIPRequest) 
 	return res, nil
 }
 
+// UpdateImage - Image Update
+// Updates a private Image that you have permission to `read_write`.
 func (s *SDK) UpdateImage(ctx context.Context, request operations.UpdateImageRequest) (*operations.UpdateImageResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/images/{imageId}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -13627,7 +14710,7 @@ func (s *SDK) UpdateImage(ctx context.Context, request operations.UpdateImageReq
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -13667,8 +14750,10 @@ func (s *SDK) UpdateImage(ctx context.Context, request operations.UpdateImageReq
 	return res, nil
 }
 
+// UpdateLinodeConfig - Configuration Profile Update
+// Updates a Configuration profile.
 func (s *SDK) UpdateLinodeConfig(ctx context.Context, request operations.UpdateLinodeConfigRequest) (*operations.UpdateLinodeConfigResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/linode/instances/{linodeId}/configs/{configId}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -13686,7 +14771,7 @@ func (s *SDK) UpdateLinodeConfig(ctx context.Context, request operations.UpdateL
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -13726,8 +14811,10 @@ func (s *SDK) UpdateLinodeConfig(ctx context.Context, request operations.UpdateL
 	return res, nil
 }
 
+// UpdateLinodeIP - IP Address Update
+// Updates a particular IP Address associated with this Linode. Only allows setting/resetting reverse DNS.
 func (s *SDK) UpdateLinodeIP(ctx context.Context, request operations.UpdateLinodeIPRequest) (*operations.UpdateLinodeIPResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/linode/instances/{linodeId}/ips/{address}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -13742,7 +14829,7 @@ func (s *SDK) UpdateLinodeIP(ctx context.Context, request operations.UpdateLinod
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -13782,8 +14869,12 @@ func (s *SDK) UpdateLinodeIP(ctx context.Context, request operations.UpdateLinod
 	return res, nil
 }
 
+// UpdateLinodeInstance - Linode Update
+// Updates a Linode that you have permission to `read_write`.
+//
+// **Important**: You must be an unrestricted User in order to add or modify tags on Linodes.
 func (s *SDK) UpdateLinodeInstance(ctx context.Context, request operations.UpdateLinodeInstanceRequest) (*operations.UpdateLinodeInstanceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/linode/instances/{linodeId}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -13801,7 +14892,7 @@ func (s *SDK) UpdateLinodeInstance(ctx context.Context, request operations.Updat
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -13841,8 +14932,10 @@ func (s *SDK) UpdateLinodeInstance(ctx context.Context, request operations.Updat
 	return res, nil
 }
 
+// UpdateLongviewClient - Longview Client Update
+// Updates a Longview Client.  This cannot update how it monitors your server; use the Longview Client application on your Linode for monitoring configuration.
 func (s *SDK) UpdateLongviewClient(ctx context.Context, request operations.UpdateLongviewClientRequest) (*operations.UpdateLongviewClientResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/longview/clients/{clientId}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -13860,7 +14953,7 @@ func (s *SDK) UpdateLongviewClient(ctx context.Context, request operations.Updat
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -13900,8 +14993,14 @@ func (s *SDK) UpdateLongviewClient(ctx context.Context, request operations.Updat
 	return res, nil
 }
 
+// UpdateLongviewPlan - Longview Plan Update
+// Update your Longview plan to that of the given subcription ID. This returns a `LongviewSubscription` object for the updated Longview Pro plan, or an empty set `{}` if the updated plan is Longview Free.
+//
+// You must have `"longview_subscription": true` configured as a `global` [User Grant](/docs/api/account/#users-grants-view) in order to access this endpoint.
+//
+// You can send a request to the [List Longview Subscriptions](/docs/api/longview/#longview-subscriptions-list) endpoint to receive the details, including `id`'s, of each plan.
 func (s *SDK) UpdateLongviewPlan(ctx context.Context, request operations.UpdateLongviewPlanRequest) (*operations.UpdateLongviewPlanResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/longview/plan"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -13919,7 +15018,7 @@ func (s *SDK) UpdateLongviewPlan(ctx context.Context, request operations.UpdateL
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -13959,8 +15058,10 @@ func (s *SDK) UpdateLongviewPlan(ctx context.Context, request operations.UpdateL
 	return res, nil
 }
 
+// UpdateManagedContact - Managed Contact Update
+// Updates information about a Managed Contact.
 func (s *SDK) UpdateManagedContact(ctx context.Context, request operations.UpdateManagedContactRequest) (*operations.UpdateManagedContactResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/managed/contacts/{contactId}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -13978,7 +15079,7 @@ func (s *SDK) UpdateManagedContact(ctx context.Context, request operations.Updat
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -14018,8 +15119,10 @@ func (s *SDK) UpdateManagedContact(ctx context.Context, request operations.Updat
 	return res, nil
 }
 
+// UpdateManagedCredential - Managed Credential Update
+// Updates the label of a Managed Credential. This endpoint does not update the username and password for a Managed Credential. To do this, use the Update Managed Credential Username and Password ([POST /managed/credentials/{credentialId}/update](https://developers.linode.com/api/docs/v4#operation/updateManagedCredentialUsernamePassword)) endpoint instead.
 func (s *SDK) UpdateManagedCredential(ctx context.Context, request operations.UpdateManagedCredentialRequest) (*operations.UpdateManagedCredentialResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/managed/credentials/{credentialId}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -14037,7 +15140,7 @@ func (s *SDK) UpdateManagedCredential(ctx context.Context, request operations.Up
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -14077,8 +15180,10 @@ func (s *SDK) UpdateManagedCredential(ctx context.Context, request operations.Up
 	return res, nil
 }
 
+// UpdateManagedCredentialUsernamePassword - Managed Credential Username and Password Update
+// Updates the username and password for a Managed Credential.
 func (s *SDK) UpdateManagedCredentialUsernamePassword(ctx context.Context, request operations.UpdateManagedCredentialUsernamePasswordRequest) (*operations.UpdateManagedCredentialUsernamePasswordResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/managed/credentials/{credentialId}/update", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -14093,7 +15198,7 @@ func (s *SDK) UpdateManagedCredentialUsernamePassword(ctx context.Context, reque
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -14133,8 +15238,10 @@ func (s *SDK) UpdateManagedCredentialUsernamePassword(ctx context.Context, reque
 	return res, nil
 }
 
+// UpdateManagedLinodeSetting - Linode's Managed Settings Update
+// Updates a single Linode's Managed settings.
 func (s *SDK) UpdateManagedLinodeSetting(ctx context.Context, request operations.UpdateManagedLinodeSettingRequest) (*operations.UpdateManagedLinodeSettingResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/managed/linode-settings/{linodeId}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -14152,7 +15259,7 @@ func (s *SDK) UpdateManagedLinodeSetting(ctx context.Context, request operations
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -14192,8 +15299,10 @@ func (s *SDK) UpdateManagedLinodeSetting(ctx context.Context, request operations
 	return res, nil
 }
 
+// UpdateManagedService - Managed Service Update
+// Updates information about a Managed Service.
 func (s *SDK) UpdateManagedService(ctx context.Context, request operations.UpdateManagedServiceRequest) (*operations.UpdateManagedServiceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/managed/services/{serviceId}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -14211,7 +15320,7 @@ func (s *SDK) UpdateManagedService(ctx context.Context, request operations.Updat
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -14251,8 +15360,10 @@ func (s *SDK) UpdateManagedService(ctx context.Context, request operations.Updat
 	return res, nil
 }
 
+// UpdateNodeBalancer - NodeBalancer Update
+// Updates information about a NodeBalancer you can access.
 func (s *SDK) UpdateNodeBalancer(ctx context.Context, request operations.UpdateNodeBalancerRequest) (*operations.UpdateNodeBalancerResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/nodebalancers/{nodeBalancerId}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -14270,7 +15381,7 @@ func (s *SDK) UpdateNodeBalancer(ctx context.Context, request operations.UpdateN
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -14310,8 +15421,10 @@ func (s *SDK) UpdateNodeBalancer(ctx context.Context, request operations.UpdateN
 	return res, nil
 }
 
+// UpdateNodeBalancerConfig - Config Update
+// Updates the configuration for a single port on a NodeBalancer.
 func (s *SDK) UpdateNodeBalancerConfig(ctx context.Context, request operations.UpdateNodeBalancerConfigRequest) (*operations.UpdateNodeBalancerConfigResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/nodebalancers/{nodeBalancerId}/configs/{configId}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -14329,7 +15442,7 @@ func (s *SDK) UpdateNodeBalancerConfig(ctx context.Context, request operations.U
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -14369,8 +15482,10 @@ func (s *SDK) UpdateNodeBalancerConfig(ctx context.Context, request operations.U
 	return res, nil
 }
 
+// UpdateNodeBalancerNode - Node Update
+// Updates information about a Node, a backend for this NodeBalancer's configured port.
 func (s *SDK) UpdateNodeBalancerNode(ctx context.Context, request operations.UpdateNodeBalancerNodeRequest) (*operations.UpdateNodeBalancerNodeResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/nodebalancers/{nodeBalancerId}/configs/{configId}/nodes/{nodeId}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -14388,7 +15503,7 @@ func (s *SDK) UpdateNodeBalancerNode(ctx context.Context, request operations.Upd
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -14428,8 +15543,15 @@ func (s *SDK) UpdateNodeBalancerNode(ctx context.Context, request operations.Upd
 	return res, nil
 }
 
+// UpdateObjectStorageBucketACL - Object Storage Object ACL Config Update
+// Update an Object's configured Access Control List (ACL) in this Object Storage bucket.
+// ACLs define who can access your buckets and objects and specify the level of access
+// granted to those users.
+//
+// This endpoint is available for convenience. It is recommended that instead you
+// use the more [fully-featured S3 API](https://docs.ceph.com/en/latest/radosgw/s3/objectops/#set-object-acl) directly.
 func (s *SDK) UpdateObjectStorageBucketACL(ctx context.Context, request operations.UpdateObjectStorageBucketACLRequest) (*operations.UpdateObjectStorageBucketACLResponse, error) {
-	baseURL := operations.UpdateObjectStorageBucketACLServers[0]
+	baseURL := operations.UpdateObjectStorageBucketACLServerList[0]
 	if request.ServerURL != nil {
 		baseURL = *request.ServerURL
 	}
@@ -14448,7 +15570,7 @@ func (s *SDK) UpdateObjectStorageBucketACL(ctx context.Context, request operatio
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -14488,8 +15610,13 @@ func (s *SDK) UpdateObjectStorageBucketACL(ctx context.Context, request operatio
 	return res, nil
 }
 
+// UpdateObjectStorageBucketAccess - Object Storage Bucket Access Update
+// Allows changing basic Cross-origin Resource Sharing (CORS) and Access Control Level (ACL) settings.
+// Only allows enabling/disabling CORS for all origins, and/or setting canned ACLs.
+//
+// For more fine-grained control of both systems, please use the more [fully-featured S3 API](https://docs.ceph.com/en/latest/radosgw/s3/bucketops/#put-bucket-acl) directly.
 func (s *SDK) UpdateObjectStorageBucketAccess(ctx context.Context, request operations.UpdateObjectStorageBucketAccessRequest) (*operations.UpdateObjectStorageBucketAccessResponse, error) {
-	baseURL := operations.UpdateObjectStorageBucketAccessServers[0]
+	baseURL := operations.UpdateObjectStorageBucketAccessServerList[0]
 	if request.ServerURL != nil {
 		baseURL = *request.ServerURL
 	}
@@ -14508,7 +15635,7 @@ func (s *SDK) UpdateObjectStorageBucketAccess(ctx context.Context, request opera
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -14548,8 +15675,10 @@ func (s *SDK) UpdateObjectStorageBucketAccess(ctx context.Context, request opera
 	return res, nil
 }
 
+// UpdateObjectStorageKey - Object Storage Key Update
+// Updates an Object Storage Key on your account.
 func (s *SDK) UpdateObjectStorageKey(ctx context.Context, request operations.UpdateObjectStorageKeyRequest) (*operations.UpdateObjectStorageKeyResponse, error) {
-	baseURL := operations.UpdateObjectStorageKeyServers[0]
+	baseURL := operations.UpdateObjectStorageKeyServerList[0]
 	if request.ServerURL != nil {
 		baseURL = *request.ServerURL
 	}
@@ -14568,7 +15697,7 @@ func (s *SDK) UpdateObjectStorageKey(ctx context.Context, request operations.Upd
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -14608,8 +15737,10 @@ func (s *SDK) UpdateObjectStorageKey(ctx context.Context, request operations.Upd
 	return res, nil
 }
 
+// UpdatePersonalAccessToken - Personal Access Token Update
+// Updates a Personal Access Token.
 func (s *SDK) UpdatePersonalAccessToken(ctx context.Context, request operations.UpdatePersonalAccessTokenRequest) (*operations.UpdatePersonalAccessTokenResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/profile/tokens/{tokenId}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -14627,7 +15758,7 @@ func (s *SDK) UpdatePersonalAccessToken(ctx context.Context, request operations.
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -14667,8 +15798,10 @@ func (s *SDK) UpdatePersonalAccessToken(ctx context.Context, request operations.
 	return res, nil
 }
 
+// UpdateProfile - Profile Update
+// Update information in your Profile.  This endpoint requires the "account:read_write" OAuth Scope.
 func (s *SDK) UpdateProfile(ctx context.Context, request operations.UpdateProfileRequest) (*operations.UpdateProfileResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/profile"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -14686,7 +15819,7 @@ func (s *SDK) UpdateProfile(ctx context.Context, request operations.UpdateProfil
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -14726,8 +15859,10 @@ func (s *SDK) UpdateProfile(ctx context.Context, request operations.UpdateProfil
 	return res, nil
 }
 
+// UpdateSSHKey - SSH Key Update
+// Updates an SSH Key that you have permission to `read_write`.
 func (s *SDK) UpdateSSHKey(ctx context.Context, request operations.UpdateSSHKeyRequest) (*operations.UpdateSSHKeyResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/profile/sshkeys/{sshKeyId}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -14745,7 +15880,7 @@ func (s *SDK) UpdateSSHKey(ctx context.Context, request operations.UpdateSSHKeyR
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -14785,8 +15920,12 @@ func (s *SDK) UpdateSSHKey(ctx context.Context, request operations.UpdateSSHKeyR
 	return res, nil
 }
 
+// UpdateStackScript - StackScript Update
+// Updates a StackScript.
+//
+// **Once a StackScript is made public, it cannot be made private.**
 func (s *SDK) UpdateStackScript(ctx context.Context, request operations.UpdateStackScriptRequest) (*operations.UpdateStackScriptResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/linode/stackscripts/{stackscriptId}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -14801,7 +15940,7 @@ func (s *SDK) UpdateStackScript(ctx context.Context, request operations.UpdateSt
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -14841,8 +15980,10 @@ func (s *SDK) UpdateStackScript(ctx context.Context, request operations.UpdateSt
 	return res, nil
 }
 
+// UpdateUser - User Update
+// Update information about a User on your Account. This can be used to change the restricted status of a User. When making a User restricted, no grants will be configured by default and you must then set up grants in order for the User to access anything on the Account.
 func (s *SDK) UpdateUser(ctx context.Context, request operations.UpdateUserRequest) (*operations.UpdateUserResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/account/users/{username}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -14857,7 +15998,7 @@ func (s *SDK) UpdateUser(ctx context.Context, request operations.UpdateUserReque
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -14897,8 +16038,10 @@ func (s *SDK) UpdateUser(ctx context.Context, request operations.UpdateUserReque
 	return res, nil
 }
 
+// UpdateUserGrants - User's Grants Update
+// Update the grants a User has. This can be used to give a User access to new entities or actions, or take access away.  You do not need to include the grant for every entity on the Account in this request; any that are not included will remain unchanged.
 func (s *SDK) UpdateUserGrants(ctx context.Context, request operations.UpdateUserGrantsRequest) (*operations.UpdateUserGrantsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/account/users/{username}/grants", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -14916,7 +16059,7 @@ func (s *SDK) UpdateUserGrants(ctx context.Context, request operations.UpdateUse
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -14956,8 +16099,10 @@ func (s *SDK) UpdateUserGrants(ctx context.Context, request operations.UpdateUse
 	return res, nil
 }
 
+// UpdateUserPreferences - User Preferences Update
+// Updates a user's preferences. These preferences are tied to the OAuth client that generated the token making the request. The user preferences endpoints allow consumers of the API to store arbitrary JSON data, such as a user's font size preference or preferred display name. An account may have multiple preferences. Preferences, and the pertaining request body, may contain any arbitrary JSON data that the user would like to store.
 func (s *SDK) UpdateUserPreferences(ctx context.Context, request operations.UpdateUserPreferencesRequest) (*operations.UpdateUserPreferencesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/profile/preferences"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -14975,7 +16120,7 @@ func (s *SDK) UpdateUserPreferences(ctx context.Context, request operations.Upda
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -15015,8 +16160,10 @@ func (s *SDK) UpdateUserPreferences(ctx context.Context, request operations.Upda
 	return res, nil
 }
 
+// UpdateVolume - Volume Update
+// Updates a Volume that you have permission to `read_write`.
 func (s *SDK) UpdateVolume(ctx context.Context, request operations.UpdateVolumeRequest) (*operations.UpdateVolumeResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/volumes/{volumeId}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -15034,7 +16181,7 @@ func (s *SDK) UpdateVolume(ctx context.Context, request operations.UpdateVolumeR
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -15074,8 +16221,10 @@ func (s *SDK) UpdateVolume(ctx context.Context, request operations.UpdateVolumeR
 	return res, nil
 }
 
+// ViewManagedSSHKey - Managed SSH Key View
+// Returns the unique SSH public key assigned to your Linode account's Managed service. If you [add this public key](/docs/platform/linode-managed/#adding-the-public-key) to a Linode on your account, Linode special forces will be able to log in to the Linode with this key when attempting to resolve issues.
 func (s *SDK) ViewManagedSSHKey(ctx context.Context, request operations.ViewManagedSSHKeyRequest) (*operations.ViewManagedSSHKeyResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/managed/credentials/sshkey"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -15083,7 +16232,7 @@ func (s *SDK) ViewManagedSSHKey(ctx context.Context, request operations.ViewMana
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -15123,8 +16272,15 @@ func (s *SDK) ViewManagedSSHKey(ctx context.Context, request operations.ViewMana
 	return res, nil
 }
 
+// ViewObjectStorageBucketACL - Object Storage Object ACL Config View
+// View an Object’s configured Access Control List (ACL) in this Object Storage bucket.
+// ACLs define who can access your buckets and objects and specify the level of access
+// granted to those users.
+//
+// This endpoint is available for convenience. It is recommended that instead you
+// use the more [fully-featured S3 API](https://docs.ceph.com/en/latest/radosgw/s3/objectops/#get-object-acl) directly.
 func (s *SDK) ViewObjectStorageBucketACL(ctx context.Context, request operations.ViewObjectStorageBucketACLRequest) (*operations.ViewObjectStorageBucketACLResponse, error) {
-	baseURL := operations.ViewObjectStorageBucketACLServers[0]
+	baseURL := operations.ViewObjectStorageBucketACLServerList[0]
 	if request.ServerURL != nil {
 		baseURL = *request.ServerURL
 	}
@@ -15138,7 +16294,7 @@ func (s *SDK) ViewObjectStorageBucketACL(ctx context.Context, request operations
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {

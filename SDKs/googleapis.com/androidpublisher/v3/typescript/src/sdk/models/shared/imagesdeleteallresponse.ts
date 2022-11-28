@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Image } from "./image";
+
 
 
 // ImagesDeleteAllResponse
@@ -8,6 +8,6 @@ import { Image } from "./image";
  * Response for deleting all images.
 **/
 export class ImagesDeleteAllResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=deleted", elemType: shared.Image })
+  @SpeakeasyMetadata({ data: "json, name=deleted", elemType: Image })
   deleted?: Image[];
 }

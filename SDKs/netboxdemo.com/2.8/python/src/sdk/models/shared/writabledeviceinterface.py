@@ -1,7 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import nestedcable
+from sdk import utils
+from . import *
 
 class WritableDeviceInterfaceModeEnum(str, Enum):
     ACCESS = "access"
@@ -85,24 +87,20 @@ class WritableDeviceInterfaceTypeEnum(str, Enum):
 
 @dataclass_json
 @dataclass
-class WritableDeviceInterface:
-    cable: Optional[nestedcable.NestedCable] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'cable' }})
-    connected_endpoint: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'connected_endpoint' }})
-    connected_endpoint_type: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'connected_endpoint_type' }})
-    connection_status: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'connection_status' }})
-    count_ipaddresses: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'count_ipaddresses' }})
-    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
-    device: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'device' }})
-    enabled: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'enabled' }})
-    id: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
-    lag: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'lag' }})
-    mac_address: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'mac_address' }})
-    mgmt_only: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'mgmt_only' }})
-    mode: Optional[WritableDeviceInterfaceModeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'mode' }})
-    mtu: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'mtu' }})
-    name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    tagged_vlans: Optional[List[int]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tagged_vlans' }})
-    tags: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tags' }})
-    type: WritableDeviceInterfaceTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
-    untagged_vlan: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'untagged_vlan' }})
+class WritableDeviceInterfaceInput:
+    device: int = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('device') }})
+    name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    type: WritableDeviceInterfaceTypeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('type') }})
+    cable: Optional[NestedCableInput] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('cable') }})
+    connection_status: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('connection_status') }})
+    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('description') }})
+    enabled: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('enabled') }})
+    lag: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('lag') }})
+    mac_address: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('mac_address') }})
+    mgmt_only: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('mgmt_only') }})
+    mode: Optional[WritableDeviceInterfaceModeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('mode') }})
+    mtu: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('mtu') }})
+    tagged_vlans: Optional[List[int]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('tagged_vlans') }})
+    tags: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('tags') }})
+    untagged_vlan: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('untagged_vlan') }})
     

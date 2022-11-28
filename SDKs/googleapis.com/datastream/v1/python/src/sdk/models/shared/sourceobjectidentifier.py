@@ -1,15 +1,18 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import mysqlobjectidentifier
-from . import oracleobjectidentifier
-from . import postgresqlobjectidentifier
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class SourceObjectIdentifier:
-    mysql_identifier: Optional[mysqlobjectidentifier.MysqlObjectIdentifier] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'mysqlIdentifier' }})
-    oracle_identifier: Optional[oracleobjectidentifier.OracleObjectIdentifier] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'oracleIdentifier' }})
-    postgresql_identifier: Optional[postgresqlobjectidentifier.PostgresqlObjectIdentifier] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'postgresqlIdentifier' }})
+    r"""SourceObjectIdentifier
+    Represents an identifier of an object in the data source.
+    """
+    
+    mysql_identifier: Optional[MysqlObjectIdentifier] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('mysqlIdentifier') }})
+    oracle_identifier: Optional[OracleObjectIdentifier] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('oracleIdentifier') }})
+    postgresql_identifier: Optional[PostgresqlObjectIdentifier] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('postgresqlIdentifier') }})
     

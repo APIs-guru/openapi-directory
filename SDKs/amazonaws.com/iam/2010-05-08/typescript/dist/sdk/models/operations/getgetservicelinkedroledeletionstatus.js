@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var GetGetServiceLinkedRoleDeletionStatusActionEnum;
 (function (GetGetServiceLinkedRoleDeletionStatusActionEnum) {
     GetGetServiceLinkedRoleDeletionStatusActionEnum["GetServiceLinkedRoleDeletionStatus"] = "GetServiceLinkedRoleDeletionStatus";
@@ -37,15 +37,15 @@ var GetGetServiceLinkedRoleDeletionStatusQueryParams = /** @class */ (function (
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=Action" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Action" }),
         __metadata("design:type", String)
     ], GetGetServiceLinkedRoleDeletionStatusQueryParams.prototype, "action", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=DeletionTaskId" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=DeletionTaskId" }),
         __metadata("design:type", String)
     ], GetGetServiceLinkedRoleDeletionStatusQueryParams.prototype, "deletionTaskId", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=Version" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Version" }),
         __metadata("design:type", String)
     ], GetGetServiceLinkedRoleDeletionStatusQueryParams.prototype, "version", void 0);
     return GetGetServiceLinkedRoleDeletionStatusQueryParams;
@@ -57,31 +57,31 @@ var GetGetServiceLinkedRoleDeletionStatusHeaders = /** @class */ (function (_sup
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
         __metadata("design:type", String)
     ], GetGetServiceLinkedRoleDeletionStatusHeaders.prototype, "xAmzAlgorithm", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
         __metadata("design:type", String)
     ], GetGetServiceLinkedRoleDeletionStatusHeaders.prototype, "xAmzContentSha256", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
         __metadata("design:type", String)
     ], GetGetServiceLinkedRoleDeletionStatusHeaders.prototype, "xAmzCredential", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
         __metadata("design:type", String)
     ], GetGetServiceLinkedRoleDeletionStatusHeaders.prototype, "xAmzDate", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
         __metadata("design:type", String)
     ], GetGetServiceLinkedRoleDeletionStatusHeaders.prototype, "xAmzSecurityToken", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
         __metadata("design:type", String)
     ], GetGetServiceLinkedRoleDeletionStatusHeaders.prototype, "xAmzSignature", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
         __metadata("design:type", String)
     ], GetGetServiceLinkedRoleDeletionStatusHeaders.prototype, "xAmzSignedHeaders", void 0);
     return GetGetServiceLinkedRoleDeletionStatusHeaders;
@@ -93,11 +93,11 @@ var GetGetServiceLinkedRoleDeletionStatusRequest = /** @class */ (function (_sup
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetGetServiceLinkedRoleDeletionStatusQueryParams)
     ], GetGetServiceLinkedRoleDeletionStatusRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetGetServiceLinkedRoleDeletionStatusHeaders)
     ], GetGetServiceLinkedRoleDeletionStatusRequest.prototype, "headers", void 0);
     return GetGetServiceLinkedRoleDeletionStatusRequest;
@@ -109,15 +109,15 @@ var GetGetServiceLinkedRoleDeletionStatusResponse = /** @class */ (function (_su
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], GetGetServiceLinkedRoleDeletionStatusResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetGetServiceLinkedRoleDeletionStatusResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetGetServiceLinkedRoleDeletionStatusResponse.prototype, "statusCode", void 0);
     return GetGetServiceLinkedRoleDeletionStatusResponse;

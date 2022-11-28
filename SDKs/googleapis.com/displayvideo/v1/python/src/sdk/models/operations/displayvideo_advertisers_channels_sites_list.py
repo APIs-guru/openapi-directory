@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DisplayvideoAdvertisersChannelsSitesListPathParams:
-    advertiser_id: str = field(default=None, metadata={'path_param': { 'field_name': 'advertiserId', 'style': 'simple', 'explode': False }})
-    channel_id: str = field(default=None, metadata={'path_param': { 'field_name': 'channelId', 'style': 'simple', 'explode': False }})
+    advertiser_id: str = field(metadata={'path_param': { 'field_name': 'advertiserId', 'style': 'simple', 'explode': False }})
+    channel_id: str = field(metadata={'path_param': { 'field_name': 'channelId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -31,20 +32,20 @@ class DisplayvideoAdvertisersChannelsSitesListQueryParams:
 
 @dataclass
 class DisplayvideoAdvertisersChannelsSitesListSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DisplayvideoAdvertisersChannelsSitesListRequest:
-    path_params: DisplayvideoAdvertisersChannelsSitesListPathParams = field(default=None)
-    query_params: DisplayvideoAdvertisersChannelsSitesListQueryParams = field(default=None)
-    security: DisplayvideoAdvertisersChannelsSitesListSecurity = field(default=None)
+    path_params: DisplayvideoAdvertisersChannelsSitesListPathParams = field()
+    query_params: DisplayvideoAdvertisersChannelsSitesListQueryParams = field()
+    security: DisplayvideoAdvertisersChannelsSitesListSecurity = field()
     
 
 @dataclass
 class DisplayvideoAdvertisersChannelsSitesListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     list_sites_response: Optional[shared.ListSitesResponse] = field(default=None)
-    status_code: int = field(default=None)
     

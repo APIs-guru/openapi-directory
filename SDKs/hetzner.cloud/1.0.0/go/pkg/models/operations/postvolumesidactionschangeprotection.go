@@ -8,11 +8,8 @@ type PostVolumesIDActionsChangeProtectionRequestBody struct {
 	Delete *bool `json:"delete,omitempty"`
 }
 
-type PostVolumesIDActionsChangeProtectionRequest struct {
-	PathParams PostVolumesIDActionsChangeProtectionPathParams
-	Request    *PostVolumesIDActionsChangeProtectionRequestBody `request:"mediaType=application/json"`
-}
-
+// PostVolumesIDActionsChangeProtectionActionResponseActionError
+// Error message for the Action if error occurred, otherwise null
 type PostVolumesIDActionsChangeProtectionActionResponseActionError struct {
 	Code    string `json:"code"`
 	Message string `json:"message"`
@@ -44,6 +41,11 @@ type PostVolumesIDActionsChangeProtectionActionResponseAction struct {
 
 type PostVolumesIDActionsChangeProtectionActionResponse struct {
 	Action PostVolumesIDActionsChangeProtectionActionResponseAction `json:"action"`
+}
+
+type PostVolumesIDActionsChangeProtectionRequest struct {
+	PathParams PostVolumesIDActionsChangeProtectionPathParams
+	Request    *PostVolumesIDActionsChangeProtectionRequestBody `request:"mediaType=application/json"`
 }
 
 type PostVolumesIDActionsChangeProtectionResponse struct {

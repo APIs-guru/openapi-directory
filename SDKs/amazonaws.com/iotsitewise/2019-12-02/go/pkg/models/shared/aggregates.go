@@ -1,5 +1,7 @@
 package shared
 
+// Aggregates
+// Contains the (pre-calculated) aggregate values for an asset property.
 type Aggregates struct {
 	Average           *float64 `json:"average,omitempty"`
 	Count             *float64 `json:"count,omitempty"`

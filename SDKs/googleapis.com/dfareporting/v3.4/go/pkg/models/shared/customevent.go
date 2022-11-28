@@ -8,6 +8,8 @@ const (
 	CustomEventEventTypeEnumAnnotate CustomEventEventTypeEnum = "ANNOTATE"
 )
 
+// CustomEvent
+// Experimental feature (no support provided) A custom event represents a third party impression, a third party click, an annotation on a first party impression, or an annotation on a first party click.
 type CustomEvent struct {
 	AnnotateClickEvent        *CustomEventClickAnnotation      `json:"annotateClickEvent,omitempty"`
 	AnnotateImpressionEvent   *CustomEventImpressionAnnotation `json:"annotateImpressionEvent,omitempty"`

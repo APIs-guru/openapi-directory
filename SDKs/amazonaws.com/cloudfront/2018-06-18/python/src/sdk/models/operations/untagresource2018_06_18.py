@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class UntagResource20180618OperationEnum(str, Enum):
     UNTAG = "Untag"
@@ -7,8 +11,8 @@ class UntagResource20180618OperationEnum(str, Enum):
 
 @dataclass
 class UntagResource20180618QueryParams:
-    operation: UntagResource20180618OperationEnum = field(default=None, metadata={'query_param': { 'field_name': 'Operation', 'style': 'form', 'explode': True }})
-    resource: str = field(default=None, metadata={'query_param': { 'field_name': 'Resource', 'style': 'form', 'explode': True }})
+    operation: UntagResource20180618OperationEnum = field(metadata={'query_param': { 'field_name': 'Operation', 'style': 'form', 'explode': True }})
+    resource: str = field(metadata={'query_param': { 'field_name': 'Resource', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -24,14 +28,14 @@ class UntagResource20180618Headers:
 
 @dataclass
 class UntagResource20180618Request:
-    query_params: UntagResource20180618QueryParams = field(default=None)
-    headers: UntagResource20180618Headers = field(default=None)
-    request: bytes = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
+    headers: UntagResource20180618Headers = field()
+    query_params: UntagResource20180618QueryParams = field()
+    request: bytes = field(metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class UntagResource20180618Response:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

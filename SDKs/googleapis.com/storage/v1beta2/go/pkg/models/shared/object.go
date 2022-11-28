@@ -4,11 +4,15 @@ import (
 	"time"
 )
 
+// ObjectOwner
+// The owner of the object. This will always be the uploader of the object.
 type ObjectOwner struct {
 	Entity   *string `json:"entity,omitempty"`
 	EntityID *string `json:"entityId,omitempty"`
 }
 
+// Object
+// An object.
 type Object struct {
 	ACL                []ObjectAccessControl `json:"acl,omitempty"`
 	Bucket             *string               `json:"bucket,omitempty"`

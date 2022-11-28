@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // MessageCommentReactionEntity
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * List Message Comment Reactions
 **/
 export class MessageCommentReactionEntity extends SpeakeasyBase {
-  @Metadata({ data: "json, name=emoji" })
+  @SpeakeasyMetadata({ data: "json, name=emoji" })
   emoji?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: number;
 }

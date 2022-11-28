@@ -22,22 +22,22 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var AttachManagedPolicyToPermissionSetRequest = /** @class */ (function (_super) {
     __extends(AttachManagedPolicyToPermissionSetRequest, _super);
     function AttachManagedPolicyToPermissionSetRequest() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=InstanceArn" }),
+        SpeakeasyMetadata({ data: "json, name=InstanceArn" }),
         __metadata("design:type", String)
     ], AttachManagedPolicyToPermissionSetRequest.prototype, "instanceArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=ManagedPolicyArn" }),
+        SpeakeasyMetadata({ data: "json, name=ManagedPolicyArn" }),
         __metadata("design:type", String)
     ], AttachManagedPolicyToPermissionSetRequest.prototype, "managedPolicyArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=PermissionSetArn" }),
+        SpeakeasyMetadata({ data: "json, name=PermissionSetArn" }),
         __metadata("design:type", String)
     ], AttachManagedPolicyToPermissionSetRequest.prototype, "permissionSetArn", void 0);
     return AttachManagedPolicyToPermissionSetRequest;

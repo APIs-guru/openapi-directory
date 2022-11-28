@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // CustomMetricParentLink
@@ -6,10 +7,10 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Parent link for the custom metric. Points to the property to which the custom metric belongs.
 **/
 export class CustomMetricParentLink extends SpeakeasyBase {
-  @Metadata({ data: "json, name=href" })
+  @SpeakeasyMetadata({ data: "json, name=href" })
   href?: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: string;
 }
 
@@ -19,48 +20,85 @@ export class CustomMetricParentLink extends SpeakeasyBase {
  * JSON template for Analytics Custom Metric.
 **/
 export class CustomMetric extends SpeakeasyBase {
-  @Metadata({ data: "json, name=accountId" })
+  @SpeakeasyMetadata({ data: "json, name=accountId" })
   accountId?: string;
 
-  @Metadata({ data: "json, name=active" })
+  @SpeakeasyMetadata({ data: "json, name=active" })
   active?: boolean;
 
-  @Metadata({ data: "json, name=created" })
+  @SpeakeasyMetadata({ data: "json, name=created" })
   created?: Date;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=index" })
+  @SpeakeasyMetadata({ data: "json, name=index" })
   index?: number;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=max_value" })
+  @SpeakeasyMetadata({ data: "json, name=max_value" })
   maxValue?: string;
 
-  @Metadata({ data: "json, name=min_value" })
+  @SpeakeasyMetadata({ data: "json, name=min_value" })
   minValue?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=parentLink" })
+  @SpeakeasyMetadata({ data: "json, name=parentLink" })
   parentLink?: CustomMetricParentLink;
 
-  @Metadata({ data: "json, name=scope" })
+  @SpeakeasyMetadata({ data: "json, name=scope" })
   scope?: string;
 
-  @Metadata({ data: "json, name=selfLink" })
+  @SpeakeasyMetadata({ data: "json, name=selfLink" })
   selfLink?: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: string;
 
-  @Metadata({ data: "json, name=updated" })
+  @SpeakeasyMetadata({ data: "json, name=updated" })
   updated?: Date;
 
-  @Metadata({ data: "json, name=webPropertyId" })
+  @SpeakeasyMetadata({ data: "json, name=webPropertyId" })
+  webPropertyId?: string;
+}
+
+
+// CustomMetricInput
+/** 
+ * JSON template for Analytics Custom Metric.
+**/
+export class CustomMetricInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=accountId" })
+  accountId?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=active" })
+  active?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=id" })
+  id?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=max_value" })
+  maxValue?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=min_value" })
+  minValue?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=name" })
+  name?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=parentLink" })
+  parentLink?: CustomMetricParentLink;
+
+  @SpeakeasyMetadata({ data: "json, name=scope" })
+  scope?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=type" })
+  type?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=webPropertyId" })
   webPropertyId?: string;
 }

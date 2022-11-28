@@ -1,17 +1,17 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
-import { CreateAssignedTargetingOptionsRequest } from "./createassignedtargetingoptionsrequest";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { CreateAssignedTargetingOptionsRequestInput } from "./createassignedtargetingoptionsrequest";
 import { DeleteAssignedTargetingOptionsRequest } from "./deleteassignedtargetingoptionsrequest";
 
 
-// BulkEditAdvertiserAssignedTargetingOptionsRequest
+
+// BulkEditAdvertiserAssignedTargetingOptionsRequestInput
 /** 
  * Request message for BulkEditAdvertiserAssignedTargetingOptions.
 **/
-export class BulkEditAdvertiserAssignedTargetingOptionsRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=createRequests", elemType: shared.CreateAssignedTargetingOptionsRequest })
-  createRequests?: CreateAssignedTargetingOptionsRequest[];
+export class BulkEditAdvertiserAssignedTargetingOptionsRequestInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=createRequests", elemType: CreateAssignedTargetingOptionsRequestInput })
+  createRequests?: CreateAssignedTargetingOptionsRequestInput[];
 
-  @Metadata({ data: "json, name=deleteRequests", elemType: shared.DeleteAssignedTargetingOptionsRequest })
+  @SpeakeasyMetadata({ data: "json, name=deleteRequests", elemType: DeleteAssignedTargetingOptionsRequest })
   deleteRequests?: DeleteAssignedTargetingOptionsRequest[];
 }

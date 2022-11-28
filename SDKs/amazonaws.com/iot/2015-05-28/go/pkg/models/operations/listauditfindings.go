@@ -20,6 +20,8 @@ type ListAuditFindingsHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// ListAuditFindingsRequestBodyResourceIdentifier
+// Information that identifies the noncompliant resource.
 type ListAuditFindingsRequestBodyResourceIdentifier struct {
 	Account                 *string                         `json:"account,omitempty"`
 	CaCertificateID         *string                         `json:"caCertificateId,omitempty"`

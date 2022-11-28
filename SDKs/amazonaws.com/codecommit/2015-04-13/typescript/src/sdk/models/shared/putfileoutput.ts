@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class PutFileOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=blobId" })
+  @SpeakeasyMetadata({ data: "json, name=blobId" })
   blobId: string;
 
-  @Metadata({ data: "json, name=commitId" })
+  @SpeakeasyMetadata({ data: "json, name=commitId" })
   commitId: string;
 
-  @Metadata({ data: "json, name=treeId" })
+  @SpeakeasyMetadata({ data: "json, name=treeId" })
   treeId: string;
 }

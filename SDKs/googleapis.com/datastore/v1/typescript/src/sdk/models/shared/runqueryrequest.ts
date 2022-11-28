@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GqlQuery } from "./gqlquery";
 import { PartitionId } from "./partitionid";
 import { Query } from "./query";
 import { ReadOptions } from "./readoptions";
+
 
 
 // RunQueryRequest
@@ -10,18 +11,18 @@ import { ReadOptions } from "./readoptions";
  * The request for Datastore.RunQuery.
 **/
 export class RunQueryRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=databaseId" })
+  @SpeakeasyMetadata({ data: "json, name=databaseId" })
   databaseId?: string;
 
-  @Metadata({ data: "json, name=gqlQuery" })
+  @SpeakeasyMetadata({ data: "json, name=gqlQuery" })
   gqlQuery?: GqlQuery;
 
-  @Metadata({ data: "json, name=partitionId" })
+  @SpeakeasyMetadata({ data: "json, name=partitionId" })
   partitionId?: PartitionId;
 
-  @Metadata({ data: "json, name=query" })
+  @SpeakeasyMetadata({ data: "json, name=query" })
   query?: Query;
 
-  @Metadata({ data: "json, name=readOptions" })
+  @SpeakeasyMetadata({ data: "json, name=readOptions" })
   readOptions?: ReadOptions;
 }

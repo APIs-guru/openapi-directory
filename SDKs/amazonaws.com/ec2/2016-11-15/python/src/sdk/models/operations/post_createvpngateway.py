@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostCreateVpnGatewayActionEnum(str, Enum):
     CREATE_VPN_GATEWAY = "CreateVpnGateway"
@@ -10,8 +14,8 @@ class PostCreateVpnGatewayVersionEnum(str, Enum):
 
 @dataclass
 class PostCreateVpnGatewayQueryParams:
-    action: PostCreateVpnGatewayActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostCreateVpnGatewayVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostCreateVpnGatewayActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostCreateVpnGatewayVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostCreateVpnGatewayHeaders:
 
 @dataclass
 class PostCreateVpnGatewayRequest:
-    query_params: PostCreateVpnGatewayQueryParams = field(default=None)
-    headers: PostCreateVpnGatewayHeaders = field(default=None)
+    headers: PostCreateVpnGatewayHeaders = field()
+    query_params: PostCreateVpnGatewayQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostCreateVpnGatewayResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

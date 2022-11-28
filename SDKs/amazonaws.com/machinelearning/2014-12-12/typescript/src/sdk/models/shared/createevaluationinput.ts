@@ -1,16 +1,17 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class CreateEvaluationInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=EvaluationDataSourceId" })
+  @SpeakeasyMetadata({ data: "json, name=EvaluationDataSourceId" })
   evaluationDataSourceId: string;
 
-  @Metadata({ data: "json, name=EvaluationId" })
+  @SpeakeasyMetadata({ data: "json, name=EvaluationId" })
   evaluationId: string;
 
-  @Metadata({ data: "json, name=EvaluationName" })
+  @SpeakeasyMetadata({ data: "json, name=EvaluationName" })
   evaluationName?: string;
 
-  @Metadata({ data: "json, name=MLModelId" })
+  @SpeakeasyMetadata({ data: "json, name=MLModelId" })
   mlModelId: string;
 }

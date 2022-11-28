@@ -1,13 +1,18 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import player
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class StartMatchmakingInput:
-    configuration_name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ConfigurationName' }})
-    players: List[player.Player] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Players' }})
-    ticket_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'TicketId' }})
+    r"""StartMatchmakingInput
+    Represents the input for a request operation.
+    """
+    
+    configuration_name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('ConfigurationName') }})
+    players: List[Player] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Players') }})
+    ticket_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('TicketId') }})
     

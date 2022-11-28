@@ -5,18 +5,18 @@ from sdk.models import shared
 
 @dataclass
 class PostFileCommentsRequestBody:
-    body: str = field(default=None, metadata={'multipart_form': { 'field_name': 'body' }})
-    path: str = field(default=None, metadata={'multipart_form': { 'field_name': 'path' }})
+    body: str = field(metadata={'multipart_form': { 'field_name': 'body' }})
+    path: str = field(metadata={'multipart_form': { 'field_name': 'path' }})
     
 
 @dataclass
 class PostFileCommentsRequest:
-    request: PostFileCommentsRequestBody = field(default=None, metadata={'request': { 'media_type': 'multipart/form-data' }})
+    request: PostFileCommentsRequestBody = field(metadata={'request': { 'media_type': 'multipart/form-data' }})
     
 
 @dataclass
 class PostFileCommentsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     file_comment_entity: Optional[shared.FileCommentEntity] = field(default=None)
-    status_code: int = field(default=None)
     

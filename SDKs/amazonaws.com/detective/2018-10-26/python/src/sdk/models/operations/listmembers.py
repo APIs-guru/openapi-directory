@@ -1,6 +1,10 @@
 from dataclasses import dataclass, field
-from typing import Any,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -24,24 +28,24 @@ class ListMembersHeaders:
 @dataclass_json
 @dataclass
 class ListMembersRequestBody:
-    graph_arn: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'GraphArn' }})
-    max_results: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'MaxResults' }})
-    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'NextToken' }})
+    graph_arn: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('GraphArn') }})
+    max_results: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('MaxResults') }})
+    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('NextToken') }})
     
 
 @dataclass
 class ListMembersRequest:
-    query_params: ListMembersQueryParams = field(default=None)
-    headers: ListMembersHeaders = field(default=None)
-    request: ListMembersRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: ListMembersHeaders = field()
+    query_params: ListMembersQueryParams = field()
+    request: ListMembersRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class ListMembersResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     internal_server_exception: Optional[Any] = field(default=None)
     list_members_response: Optional[shared.ListMembersResponse] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     validation_exception: Optional[Any] = field(default=None)
     

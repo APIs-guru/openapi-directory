@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // DataRepositoryTaskStatus
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Provides the task status showing a running total of the total number of files to be processed, the number successfully processed, and the number of files the task failed to process.
 **/
 export class DataRepositoryTaskStatus extends SpeakeasyBase {
-  @Metadata({ data: "json, name=FailedCount" })
+  @SpeakeasyMetadata({ data: "json, name=FailedCount" })
   failedCount?: number;
 
-  @Metadata({ data: "json, name=LastUpdatedTime" })
+  @SpeakeasyMetadata({ data: "json, name=LastUpdatedTime" })
   lastUpdatedTime?: Date;
 
-  @Metadata({ data: "json, name=SucceededCount" })
+  @SpeakeasyMetadata({ data: "json, name=SucceededCount" })
   succeededCount?: number;
 
-  @Metadata({ data: "json, name=TotalCount" })
+  @SpeakeasyMetadata({ data: "json, name=TotalCount" })
   totalCount?: number;
 }

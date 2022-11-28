@@ -1,10 +1,13 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 
 
 @dataclass
 class DeleteProfilingGroupPathParams:
-    profiling_group_name: str = field(default=None, metadata={'path_param': { 'field_name': 'profilingGroupName', 'style': 'simple', 'explode': False }})
+    profiling_group_name: str = field(metadata={'path_param': { 'field_name': 'profilingGroupName', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -20,18 +23,18 @@ class DeleteProfilingGroupHeaders:
 
 @dataclass
 class DeleteProfilingGroupRequest:
-    path_params: DeleteProfilingGroupPathParams = field(default=None)
-    headers: DeleteProfilingGroupHeaders = field(default=None)
+    headers: DeleteProfilingGroupHeaders = field()
+    path_params: DeleteProfilingGroupPathParams = field()
     
 
 @dataclass
 class DeleteProfilingGroupResponse:
+    content_type: str = field()
+    status_code: int = field()
     conflict_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     delete_profiling_group_response: Optional[dict[str, Any]] = field(default=None)
     internal_server_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     validation_exception: Optional[Any] = field(default=None)
     

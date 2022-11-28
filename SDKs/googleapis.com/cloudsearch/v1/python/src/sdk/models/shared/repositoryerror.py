@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class RepositoryErrorTypeEnum(str, Enum):
     UNKNOWN = "UNKNOWN"
@@ -18,7 +20,11 @@ class RepositoryErrorTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class RepositoryError:
-    error_message: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'errorMessage' }})
-    http_status_code: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'httpStatusCode' }})
-    type: Optional[RepositoryErrorTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    r"""RepositoryError
+    Errors when the connector is communicating to the source repository.
+    """
+    
+    error_message: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('errorMessage') }})
+    http_status_code: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('httpStatusCode') }})
+    type: Optional[RepositoryErrorTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('type') }})
     

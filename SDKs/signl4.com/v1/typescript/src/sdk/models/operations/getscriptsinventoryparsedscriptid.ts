@@ -1,41 +1,42 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetScriptsInventoryParsedScriptIdPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=scriptId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=scriptId" })
   scriptId: string;
 }
 
 
 export class GetScriptsInventoryParsedScriptIdQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=language" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=language" })
   language?: string;
 }
 
 
 export class GetScriptsInventoryParsedScriptIdRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetScriptsInventoryParsedScriptIdPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetScriptsInventoryParsedScriptIdQueryParams;
 }
 
 
 export class GetScriptsInventoryParsedScriptIdResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   errorResponseContent?: shared.ErrorResponseContent;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   scriptInstanceDetails?: shared.ScriptInstanceDetails;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

@@ -1,58 +1,59 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
+
 export enum AlbumApiGetTopAlbumsFieldsEnum {
-    None = "None"
-,    AdditionalNames = "AdditionalNames"
-,    Artists = "Artists"
-,    Description = "Description"
-,    Discs = "Discs"
-,    Identifiers = "Identifiers"
-,    MainPicture = "MainPicture"
-,    Names = "Names"
-,    PVs = "PVs"
-,    ReleaseEvent = "ReleaseEvent"
-,    Tags = "Tags"
-,    Tracks = "Tracks"
-,    WebLinks = "WebLinks"
+    None = "None",
+    AdditionalNames = "AdditionalNames",
+    Artists = "Artists",
+    Description = "Description",
+    Discs = "Discs",
+    Identifiers = "Identifiers",
+    MainPicture = "MainPicture",
+    Names = "Names",
+    PVs = "PVs",
+    ReleaseEvent = "ReleaseEvent",
+    Tags = "Tags",
+    Tracks = "Tracks",
+    WebLinks = "WebLinks"
 }
 
 export enum AlbumApiGetTopAlbumsLanguagePreferenceEnum {
-    Default = "Default"
-,    Japanese = "Japanese"
-,    Romaji = "Romaji"
-,    English = "English"
+    Default = "Default",
+    Japanese = "Japanese",
+    Romaji = "Romaji",
+    English = "English"
 }
 
 
 export class AlbumApiGetTopAlbumsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=fields" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=fields" })
   fields?: AlbumApiGetTopAlbumsFieldsEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=ignoreIds" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=ignoreIds" })
   ignoreIds?: number[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=languagePreference" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=languagePreference" })
   languagePreference?: AlbumApiGetTopAlbumsLanguagePreferenceEnum;
 }
 
 
 export class AlbumApiGetTopAlbumsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: AlbumApiGetTopAlbumsQueryParams;
 }
 
 
 export class AlbumApiGetTopAlbumsResponse extends SpeakeasyBase {
-  @Metadata({ elemType: shared.AlbumForApiContract })
+  @SpeakeasyMetadata({ elemType: shared.AlbumForApiContract })
   albumForApiContracts?: shared.AlbumForApiContract[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

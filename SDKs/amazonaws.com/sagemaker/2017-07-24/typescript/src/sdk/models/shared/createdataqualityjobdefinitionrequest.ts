@@ -1,5 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DataQualityAppSpecification } from "./dataqualityappspecification";
 import { DataQualityBaselineConfig } from "./dataqualitybaselineconfig";
 import { DataQualityJobInput } from "./dataqualityjobinput";
@@ -10,34 +9,35 @@ import { MonitoringStoppingCondition } from "./monitoringstoppingcondition";
 import { Tag } from "./tag";
 
 
+
 export class CreateDataQualityJobDefinitionRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DataQualityAppSpecification" })
+  @SpeakeasyMetadata({ data: "json, name=DataQualityAppSpecification" })
   dataQualityAppSpecification: DataQualityAppSpecification;
 
-  @Metadata({ data: "json, name=DataQualityBaselineConfig" })
+  @SpeakeasyMetadata({ data: "json, name=DataQualityBaselineConfig" })
   dataQualityBaselineConfig?: DataQualityBaselineConfig;
 
-  @Metadata({ data: "json, name=DataQualityJobInput" })
+  @SpeakeasyMetadata({ data: "json, name=DataQualityJobInput" })
   dataQualityJobInput: DataQualityJobInput;
 
-  @Metadata({ data: "json, name=DataQualityJobOutputConfig" })
+  @SpeakeasyMetadata({ data: "json, name=DataQualityJobOutputConfig" })
   dataQualityJobOutputConfig: MonitoringOutputConfig;
 
-  @Metadata({ data: "json, name=JobDefinitionName" })
+  @SpeakeasyMetadata({ data: "json, name=JobDefinitionName" })
   jobDefinitionName: string;
 
-  @Metadata({ data: "json, name=JobResources" })
+  @SpeakeasyMetadata({ data: "json, name=JobResources" })
   jobResources: MonitoringResources;
 
-  @Metadata({ data: "json, name=NetworkConfig" })
+  @SpeakeasyMetadata({ data: "json, name=NetworkConfig" })
   networkConfig?: MonitoringNetworkConfig;
 
-  @Metadata({ data: "json, name=RoleArn" })
+  @SpeakeasyMetadata({ data: "json, name=RoleArn" })
   roleArn: string;
 
-  @Metadata({ data: "json, name=StoppingCondition" })
+  @SpeakeasyMetadata({ data: "json, name=StoppingCondition" })
   stoppingCondition?: MonitoringStoppingCondition;
 
-  @Metadata({ data: "json, name=Tags", elemType: shared.Tag })
+  @SpeakeasyMetadata({ data: "json, name=Tags", elemType: Tag })
   tags?: Tag[];
 }

@@ -22,14 +22,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var Destiny2GetPostGameCarnageReportPathParams = /** @class */ (function (_super) {
     __extends(Destiny2GetPostGameCarnageReportPathParams, _super);
     function Destiny2GetPostGameCarnageReportPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=activityId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=activityId" }),
         __metadata("design:type", Number)
     ], Destiny2GetPostGameCarnageReportPathParams.prototype, "activityId", void 0);
     return Destiny2GetPostGameCarnageReportPathParams;
@@ -41,7 +41,7 @@ var Destiny2GetPostGameCarnageReportRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Destiny2GetPostGameCarnageReportPathParams)
     ], Destiny2GetPostGameCarnageReportRequest.prototype, "pathParams", void 0);
     return Destiny2GetPostGameCarnageReportRequest;
@@ -53,15 +53,15 @@ var Destiny2GetPostGameCarnageReportResponse = /** @class */ (function (_super) 
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], Destiny2GetPostGameCarnageReportResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], Destiny2GetPostGameCarnageReportResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], Destiny2GetPostGameCarnageReportResponse.prototype, "statusCode", void 0);
     return Destiny2GetPostGameCarnageReportResponse;

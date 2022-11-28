@@ -1,6 +1,11 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -22,24 +27,24 @@ class PutDefaultEncryptionConfigurationRequestBodyEncryptionTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class PutDefaultEncryptionConfigurationRequestBody:
-    encryption_type: PutDefaultEncryptionConfigurationRequestBodyEncryptionTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'encryptionType' }})
-    kms_key_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'kmsKeyId' }})
+    encryption_type: PutDefaultEncryptionConfigurationRequestBodyEncryptionTypeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('encryptionType') }})
+    kms_key_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('kmsKeyId') }})
     
 
 @dataclass
 class PutDefaultEncryptionConfigurationRequest:
-    headers: PutDefaultEncryptionConfigurationHeaders = field(default=None)
-    request: PutDefaultEncryptionConfigurationRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: PutDefaultEncryptionConfigurationHeaders = field()
+    request: PutDefaultEncryptionConfigurationRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class PutDefaultEncryptionConfigurationResponse:
+    content_type: str = field()
+    status_code: int = field()
     conflicting_operation_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     internal_failure_exception: Optional[Any] = field(default=None)
     invalid_request_exception: Optional[Any] = field(default=None)
     limit_exceeded_exception: Optional[Any] = field(default=None)
     put_default_encryption_configuration_response: Optional[shared.PutDefaultEncryptionConfigurationResponse] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     

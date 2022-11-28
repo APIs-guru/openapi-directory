@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // OpsMetadata
@@ -6,18 +7,18 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Operational metadata for an application in Application Manager.
 **/
 export class OpsMetadata extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CreationDate" })
+  @SpeakeasyMetadata({ data: "json, name=CreationDate" })
   creationDate?: Date;
 
-  @Metadata({ data: "json, name=LastModifiedDate" })
+  @SpeakeasyMetadata({ data: "json, name=LastModifiedDate" })
   lastModifiedDate?: Date;
 
-  @Metadata({ data: "json, name=LastModifiedUser" })
+  @SpeakeasyMetadata({ data: "json, name=LastModifiedUser" })
   lastModifiedUser?: string;
 
-  @Metadata({ data: "json, name=OpsMetadataArn" })
+  @SpeakeasyMetadata({ data: "json, name=OpsMetadataArn" })
   opsMetadataArn?: string;
 
-  @Metadata({ data: "json, name=ResourceId" })
+  @SpeakeasyMetadata({ data: "json, name=ResourceId" })
   resourceId?: string;
 }

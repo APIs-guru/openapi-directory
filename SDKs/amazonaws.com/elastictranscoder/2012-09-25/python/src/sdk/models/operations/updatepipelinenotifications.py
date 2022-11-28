@@ -1,12 +1,16 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
 @dataclass
 class UpdatePipelineNotificationsPathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'Id', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'Id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -23,34 +27,38 @@ class UpdatePipelineNotificationsHeaders:
 @dataclass_json
 @dataclass
 class UpdatePipelineNotificationsRequestBodyNotifications:
-    completed: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Completed' }})
-    error: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Error' }})
-    progressing: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Progressing' }})
-    warning: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Warning' }})
+    r"""UpdatePipelineNotificationsRequestBodyNotifications
+    <p>The Amazon Simple Notification Service (Amazon SNS) topic or topics to notify in order to report job status.</p> <important> <p>To receive notifications, you must also subscribe to the new topic in the Amazon SNS console.</p> </important>
+    """
+    
+    completed: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Completed') }})
+    error: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Error') }})
+    progressing: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Progressing') }})
+    warning: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Warning') }})
     
 
 @dataclass_json
 @dataclass
 class UpdatePipelineNotificationsRequestBody:
-    notifications: UpdatePipelineNotificationsRequestBodyNotifications = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Notifications' }})
+    notifications: UpdatePipelineNotificationsRequestBodyNotifications = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Notifications') }})
     
 
 @dataclass
 class UpdatePipelineNotificationsRequest:
-    path_params: UpdatePipelineNotificationsPathParams = field(default=None)
-    headers: UpdatePipelineNotificationsHeaders = field(default=None)
-    request: UpdatePipelineNotificationsRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: UpdatePipelineNotificationsHeaders = field()
+    path_params: UpdatePipelineNotificationsPathParams = field()
+    request: UpdatePipelineNotificationsRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class UpdatePipelineNotificationsResponse:
+    content_type: str = field()
+    status_code: int = field()
     access_denied_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     incompatible_version_exception: Optional[Any] = field(default=None)
     internal_service_exception: Optional[Any] = field(default=None)
     resource_in_use_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     update_pipeline_notifications_response: Optional[shared.UpdatePipelineNotificationsResponse] = field(default=None)
     validation_exception: Optional[Any] = field(default=None)
     

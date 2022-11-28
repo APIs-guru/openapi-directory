@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import egressfilter
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class MeshSpec:
-    egress_filter: Optional[egressfilter.EgressFilter] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'egressFilter' }})
+    r"""MeshSpec
+    An object that represents the specification of a service mesh.
+    """
+    
+    egress_filter: Optional[EgressFilter] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('egressFilter') }})
     

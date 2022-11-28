@@ -1,6 +1,7 @@
 
 
+
 export enum LogTypeEnum {
-    Server = "server"
-,    Scheduler = "scheduler"
+    Server = "server",
+    Scheduler = "scheduler"
 }

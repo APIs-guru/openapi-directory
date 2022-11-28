@@ -1,47 +1,48 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
+
 export enum LicensesGetStatusEnum {
-    Active = "Active"
-,    Inactive = "Inactive"
-,    All = "All"
+    Active = "Active",
+    Inactive = "Inactive",
+    All = "All"
 }
 
 
 export class LicensesGetQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=DealerCode" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=DealerCode" })
   dealerCode?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Status" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Status" })
   status?: LicensesGetStatusEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=VoucherCode" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=VoucherCode" })
   voucherCode?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=limit" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=limit" })
   limit?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=offset" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=offset" })
   offset?: number;
 }
 
 
 export class LicensesGetRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: LicensesGetQueryParams;
 }
 
 
 export class LicensesGetResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   apiModelsApiError?: shared.ApiModelsApiError;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   apiPagedResponseDealerDbModelsLicense?: shared.ApiPagedResponseDealerDbModelsLicense;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

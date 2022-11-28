@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import listpopulationterm
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ListPopulationClause:
-    terms: Optional[List[listpopulationterm.ListPopulationTerm]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'terms' }})
+    r"""ListPopulationClause
+    A group clause made up of list population terms representing constraints joined by ORs.
+    """
+    
+    terms: Optional[List[ListPopulationTerm]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('terms') }})
     

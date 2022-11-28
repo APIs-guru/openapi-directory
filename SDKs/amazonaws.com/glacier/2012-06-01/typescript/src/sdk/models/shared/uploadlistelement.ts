@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // UploadListElement
@@ -6,18 +7,18 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A list of in-progress multipart uploads for a vault.
 **/
 export class UploadListElement extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ArchiveDescription" })
+  @SpeakeasyMetadata({ data: "json, name=ArchiveDescription" })
   archiveDescription?: string;
 
-  @Metadata({ data: "json, name=CreationDate" })
+  @SpeakeasyMetadata({ data: "json, name=CreationDate" })
   creationDate?: string;
 
-  @Metadata({ data: "json, name=MultipartUploadId" })
+  @SpeakeasyMetadata({ data: "json, name=MultipartUploadId" })
   multipartUploadId?: string;
 
-  @Metadata({ data: "json, name=PartSizeInBytes" })
+  @SpeakeasyMetadata({ data: "json, name=PartSizeInBytes" })
   partSizeInBytes?: number;
 
-  @Metadata({ data: "json, name=VaultARN" })
+  @SpeakeasyMetadata({ data: "json, name=VaultARN" })
   vaultArn?: string;
 }

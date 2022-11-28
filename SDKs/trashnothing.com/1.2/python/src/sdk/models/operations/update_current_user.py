@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
 from typing import Optional
@@ -31,7 +31,7 @@ class UpdateCurrentUserRequest:
 
 @dataclass
 class UpdateCurrentUserResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     current_user: Optional[shared.CurrentUser] = field(default=None)
-    status_code: int = field(default=None)
     

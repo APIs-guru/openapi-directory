@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class OrcFormatVersionEnum(str, Enum):
     V0_11 = "V0_11"

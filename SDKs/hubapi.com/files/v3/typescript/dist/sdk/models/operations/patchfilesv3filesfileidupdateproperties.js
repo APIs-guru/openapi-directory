@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var PatchFilesV3FilesFileIdUpdatePropertiesPathParams = /** @class */ (function (_super) {
     __extends(PatchFilesV3FilesFileIdUpdatePropertiesPathParams, _super);
@@ -30,49 +30,29 @@ var PatchFilesV3FilesFileIdUpdatePropertiesPathParams = /** @class */ (function 
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=fileId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=fileId" }),
         __metadata("design:type", String)
     ], PatchFilesV3FilesFileIdUpdatePropertiesPathParams.prototype, "fileId", void 0);
     return PatchFilesV3FilesFileIdUpdatePropertiesPathParams;
 }(SpeakeasyBase));
 export { PatchFilesV3FilesFileIdUpdatePropertiesPathParams };
-var PatchFilesV3FilesFileIdUpdatePropertiesSecurityOption1 = /** @class */ (function (_super) {
-    __extends(PatchFilesV3FilesFileIdUpdatePropertiesSecurityOption1, _super);
-    function PatchFilesV3FilesFileIdUpdatePropertiesSecurityOption1() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=query" }),
-        __metadata("design:type", shared.SchemeHapikey)
-    ], PatchFilesV3FilesFileIdUpdatePropertiesSecurityOption1.prototype, "hapikey", void 0);
-    return PatchFilesV3FilesFileIdUpdatePropertiesSecurityOption1;
-}(SpeakeasyBase));
-export { PatchFilesV3FilesFileIdUpdatePropertiesSecurityOption1 };
-var PatchFilesV3FilesFileIdUpdatePropertiesSecurityOption2 = /** @class */ (function (_super) {
-    __extends(PatchFilesV3FilesFileIdUpdatePropertiesSecurityOption2, _super);
-    function PatchFilesV3FilesFileIdUpdatePropertiesSecurityOption2() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
-        __metadata("design:type", shared.SchemeOauth2Legacy)
-    ], PatchFilesV3FilesFileIdUpdatePropertiesSecurityOption2.prototype, "oauth2Legacy", void 0);
-    return PatchFilesV3FilesFileIdUpdatePropertiesSecurityOption2;
-}(SpeakeasyBase));
-export { PatchFilesV3FilesFileIdUpdatePropertiesSecurityOption2 };
 var PatchFilesV3FilesFileIdUpdatePropertiesSecurity = /** @class */ (function (_super) {
     __extends(PatchFilesV3FilesFileIdUpdatePropertiesSecurity, _super);
     function PatchFilesV3FilesFileIdUpdatePropertiesSecurity() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, option=true" }),
-        __metadata("design:type", PatchFilesV3FilesFileIdUpdatePropertiesSecurityOption1)
-    ], PatchFilesV3FilesFileIdUpdatePropertiesSecurity.prototype, "option1", void 0);
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=query" }),
+        __metadata("design:type", shared.SchemeHapikey)
+    ], PatchFilesV3FilesFileIdUpdatePropertiesSecurity.prototype, "hapikey", void 0);
     __decorate([
-        Metadata({ data: "security, option=true" }),
-        __metadata("design:type", PatchFilesV3FilesFileIdUpdatePropertiesSecurityOption2)
-    ], PatchFilesV3FilesFileIdUpdatePropertiesSecurity.prototype, "option2", void 0);
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        __metadata("design:type", shared.SchemePrivateAppsLegacy)
+    ], PatchFilesV3FilesFileIdUpdatePropertiesSecurity.prototype, "privateAppsLegacy", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
+        __metadata("design:type", shared.SchemeOauth2Legacy)
+    ], PatchFilesV3FilesFileIdUpdatePropertiesSecurity.prototype, "oauth2Legacy", void 0);
     return PatchFilesV3FilesFileIdUpdatePropertiesSecurity;
 }(SpeakeasyBase));
 export { PatchFilesV3FilesFileIdUpdatePropertiesSecurity };
@@ -82,15 +62,15 @@ var PatchFilesV3FilesFileIdUpdatePropertiesRequest = /** @class */ (function (_s
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PatchFilesV3FilesFileIdUpdatePropertiesPathParams)
     ], PatchFilesV3FilesFileIdUpdatePropertiesRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", shared.FileUpdateInput)
     ], PatchFilesV3FilesFileIdUpdatePropertiesRequest.prototype, "request", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PatchFilesV3FilesFileIdUpdatePropertiesSecurity)
     ], PatchFilesV3FilesFileIdUpdatePropertiesRequest.prototype, "security", void 0);
     return PatchFilesV3FilesFileIdUpdatePropertiesRequest;
@@ -102,19 +82,19 @@ var PatchFilesV3FilesFileIdUpdatePropertiesResponse = /** @class */ (function (_
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], PatchFilesV3FilesFileIdUpdatePropertiesResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], PatchFilesV3FilesFileIdUpdatePropertiesResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.File)
     ], PatchFilesV3FilesFileIdUpdatePropertiesResponse.prototype, "file", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], PatchFilesV3FilesFileIdUpdatePropertiesResponse.prototype, "statusCode", void 0);
     return PatchFilesV3FilesFileIdUpdatePropertiesResponse;

@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostDeleteDhcpOptionsActionEnum(str, Enum):
     DELETE_DHCP_OPTIONS = "DeleteDhcpOptions"
@@ -10,8 +14,8 @@ class PostDeleteDhcpOptionsVersionEnum(str, Enum):
 
 @dataclass
 class PostDeleteDhcpOptionsQueryParams:
-    action: PostDeleteDhcpOptionsActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostDeleteDhcpOptionsVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostDeleteDhcpOptionsActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostDeleteDhcpOptionsVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,13 +31,13 @@ class PostDeleteDhcpOptionsHeaders:
 
 @dataclass
 class PostDeleteDhcpOptionsRequest:
-    query_params: PostDeleteDhcpOptionsQueryParams = field(default=None)
-    headers: PostDeleteDhcpOptionsHeaders = field(default=None)
+    headers: PostDeleteDhcpOptionsHeaders = field()
+    query_params: PostDeleteDhcpOptionsQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostDeleteDhcpOptionsResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

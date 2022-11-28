@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostChangePasswordActionEnum(str, Enum):
     CHANGE_PASSWORD = "ChangePassword"
@@ -10,8 +14,8 @@ class PostChangePasswordVersionEnum(str, Enum):
 
 @dataclass
 class PostChangePasswordQueryParams:
-    action: PostChangePasswordActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostChangePasswordVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostChangePasswordActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostChangePasswordVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostChangePasswordHeaders:
 
 @dataclass
 class PostChangePasswordRequest:
-    query_params: PostChangePasswordQueryParams = field(default=None)
-    headers: PostChangePasswordHeaders = field(default=None)
+    headers: PostChangePasswordHeaders = field()
+    query_params: PostChangePasswordQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostChangePasswordResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

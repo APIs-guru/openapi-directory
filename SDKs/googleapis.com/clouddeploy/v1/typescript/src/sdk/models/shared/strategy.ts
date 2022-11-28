@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Standard } from "./standard";
+
 
 
 // Strategy
@@ -7,6 +8,6 @@ import { Standard } from "./standard";
  * Strategy contains deployment strategy information.
 **/
 export class Strategy extends SpeakeasyBase {
-  @Metadata({ data: "json, name=standard" })
+  @SpeakeasyMetadata({ data: "json, name=standard" })
   standard?: Standard;
 }

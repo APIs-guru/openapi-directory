@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
+
 
 export enum DelListeNoireDelListeNoireEnum {
     One = "1"
@@ -7,33 +8,33 @@ export enum DelListeNoireDelListeNoireEnum {
 
 
 export class DelListeNoireQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=delListeNoire" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=delListeNoire" })
   delListeNoire: DelListeNoireDelListeNoireEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=keyid" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=keyid" })
   keyid: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=num" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=num" })
   num: string;
 }
 
 
 export class DelListeNoireRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: DelListeNoireQueryParams;
 }
 
 
 export class DelListeNoireResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   erreur?: shared.Erreur;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   listenoireReponse?: shared.ListenoireReponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

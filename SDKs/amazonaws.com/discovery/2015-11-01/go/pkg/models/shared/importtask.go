@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// ImportTask
+// An array of information related to the import task request that includes status information, times, IDs, the Amazon S3 Object URL for the import file, and more.
 type ImportTask struct {
 	ApplicationImportFailure  *int64            `json:"applicationImportFailure,omitempty"`
 	ApplicationImportSuccess  *int64            `json:"applicationImportSuccess,omitempty"`

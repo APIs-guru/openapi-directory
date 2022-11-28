@@ -22,8 +22,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { RecommendationRelatedAnomalyResource } from "./recommendationrelatedanomalyresource";
+import { RecommendationRelatedAnomalySourceDetail } from "./recommendationrelatedanomalysourcedetail";
 // RecommendationRelatedAnomaly
 /**
  *  Information about an anomaly that is related to a recommendation.
@@ -34,11 +35,11 @@ var RecommendationRelatedAnomaly = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Resources", elemType: shared.RecommendationRelatedAnomalyResource }),
+        SpeakeasyMetadata({ data: "json, name=Resources", elemType: RecommendationRelatedAnomalyResource }),
         __metadata("design:type", Array)
     ], RecommendationRelatedAnomaly.prototype, "resources", void 0);
     __decorate([
-        Metadata({ data: "json, name=SourceDetails", elemType: shared.RecommendationRelatedAnomalySourceDetail }),
+        SpeakeasyMetadata({ data: "json, name=SourceDetails", elemType: RecommendationRelatedAnomalySourceDetail }),
         __metadata("design:type", Array)
     ], RecommendationRelatedAnomaly.prototype, "sourceDetails", void 0);
     return RecommendationRelatedAnomaly;

@@ -1,6 +1,6 @@
 package operations
 
-var ConfirmPaymentOfTransaction1Servers = []string{
+var ConfirmPaymentOfTransaction1ServerList = []string{
 	"http://api.climatekuul.com:8000/footprint",
 }
 

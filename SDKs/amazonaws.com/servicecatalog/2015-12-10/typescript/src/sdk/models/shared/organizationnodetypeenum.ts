@@ -1,7 +1,8 @@
 
 
+
 export enum OrganizationNodeTypeEnum {
-    Organization = "ORGANIZATION"
-,    OrganizationalUnit = "ORGANIZATIONAL_UNIT"
-,    Account = "ACCOUNT"
+    Organization = "ORGANIZATION",
+    OrganizationalUnit = "ORGANIZATIONAL_UNIT",
+    Account = "ACCOUNT"
 }

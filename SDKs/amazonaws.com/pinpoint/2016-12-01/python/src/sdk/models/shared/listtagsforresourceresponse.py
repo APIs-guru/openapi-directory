@@ -1,11 +1,11 @@
 from dataclasses import dataclass, field
-from typing import List
 from dataclasses_json import dataclass_json
-from . import tagsmodel
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ListTagsForResourceResponse:
-    tags_model: tagsmodel.TagsModel = field(default=None, metadata={'dataclasses_json': { 'field_name': 'TagsModel' }})
+    tags_model: TagsModel = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('TagsModel') }})
     

@@ -1,39 +1,39 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AssetModelCompositeModel } from "./assetmodelcompositemodel";
 import { AssetModelHierarchy } from "./assetmodelhierarchy";
 import { AssetModelProperty } from "./assetmodelproperty";
 import { AssetModelStatus } from "./assetmodelstatus";
 
 
+
 export class DescribeAssetModelResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=assetModelArn" })
+  @SpeakeasyMetadata({ data: "json, name=assetModelArn" })
   assetModelArn: string;
 
-  @Metadata({ data: "json, name=assetModelCompositeModels", elemType: shared.AssetModelCompositeModel })
+  @SpeakeasyMetadata({ data: "json, name=assetModelCompositeModels", elemType: AssetModelCompositeModel })
   assetModelCompositeModels?: AssetModelCompositeModel[];
 
-  @Metadata({ data: "json, name=assetModelCreationDate" })
+  @SpeakeasyMetadata({ data: "json, name=assetModelCreationDate" })
   assetModelCreationDate: Date;
 
-  @Metadata({ data: "json, name=assetModelDescription" })
+  @SpeakeasyMetadata({ data: "json, name=assetModelDescription" })
   assetModelDescription: string;
 
-  @Metadata({ data: "json, name=assetModelHierarchies", elemType: shared.AssetModelHierarchy })
+  @SpeakeasyMetadata({ data: "json, name=assetModelHierarchies", elemType: AssetModelHierarchy })
   assetModelHierarchies: AssetModelHierarchy[];
 
-  @Metadata({ data: "json, name=assetModelId" })
+  @SpeakeasyMetadata({ data: "json, name=assetModelId" })
   assetModelId: string;
 
-  @Metadata({ data: "json, name=assetModelLastUpdateDate" })
+  @SpeakeasyMetadata({ data: "json, name=assetModelLastUpdateDate" })
   assetModelLastUpdateDate: Date;
 
-  @Metadata({ data: "json, name=assetModelName" })
+  @SpeakeasyMetadata({ data: "json, name=assetModelName" })
   assetModelName: string;
 
-  @Metadata({ data: "json, name=assetModelProperties", elemType: shared.AssetModelProperty })
+  @SpeakeasyMetadata({ data: "json, name=assetModelProperties", elemType: AssetModelProperty })
   assetModelProperties: AssetModelProperty[];
 
-  @Metadata({ data: "json, name=assetModelStatus" })
+  @SpeakeasyMetadata({ data: "json, name=assetModelStatus" })
   assetModelStatus: AssetModelStatus;
 }

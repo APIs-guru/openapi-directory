@@ -1,12 +1,16 @@
 from dataclasses import dataclass, field
 from dataclasses_json import dataclass_json
-from . import objectreference
-from . import objectreference
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class BatchAttachToIndex:
-    index_reference: objectreference.ObjectReference = field(default=None, metadata={'dataclasses_json': { 'field_name': 'IndexReference' }})
-    target_reference: objectreference.ObjectReference = field(default=None, metadata={'dataclasses_json': { 'field_name': 'TargetReference' }})
+    r"""BatchAttachToIndex
+    Attaches the specified object to the specified index inside a <a>BatchRead</a> operation. For more information, see <a>AttachToIndex</a> and <a>BatchReadRequest$Operations</a>.
+    """
+    
+    index_reference: ObjectReference = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('IndexReference') }})
+    target_reference: ObjectReference = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('TargetReference') }})
     

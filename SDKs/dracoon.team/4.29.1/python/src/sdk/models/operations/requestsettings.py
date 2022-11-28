@@ -10,13 +10,13 @@ class RequestSettingsHeaders:
 
 @dataclass
 class RequestSettingsRequest:
-    headers: RequestSettingsHeaders = field(default=None)
+    headers: RequestSettingsHeaders = field()
     
 
 @dataclass
 class RequestSettingsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     customer_settings_response: Optional[shared.CustomerSettingsResponse] = field(default=None)
     error_response: Optional[shared.ErrorResponse] = field(default=None)
-    status_code: int = field(default=None)
     

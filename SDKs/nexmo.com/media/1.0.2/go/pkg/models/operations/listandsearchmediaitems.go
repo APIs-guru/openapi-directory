@@ -19,10 +19,8 @@ type ListAndSearchMediaItemsQueryParams struct {
 	StartTime *string                           `queryParam:"style=form,explode=true,name=start_time"`
 }
 
-type ListAndSearchMediaItemsRequest struct {
-	QueryParams ListAndSearchMediaItemsQueryParams
-}
-
+// ListAndSearchMediaItems200ApplicationJSONEmbedded
+// A collection of media items. See [retrieve a media item](#retrieve-a-media-item) for a description of the returned fields
 type ListAndSearchMediaItems200ApplicationJSONEmbedded struct {
 	Media []shared.Media `json:"media,omitempty"`
 }
@@ -51,6 +49,10 @@ type ListAndSearchMediaItems200ApplicationJSON struct {
 	Count     *int64                                             `json:"count,omitempty"`
 	PageIndex *int64                                             `json:"page_index,omitempty"`
 	PageSize  *int64                                             `json:"page_size,omitempty"`
+}
+
+type ListAndSearchMediaItemsRequest struct {
+	QueryParams ListAndSearchMediaItemsQueryParams
 }
 
 type ListAndSearchMediaItemsResponse struct {

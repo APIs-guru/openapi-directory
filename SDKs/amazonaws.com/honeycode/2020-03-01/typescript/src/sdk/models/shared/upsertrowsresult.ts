@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { UpsertActionEnum } from "./upsertactionenum";
+
 
 
 // UpsertRowsResult
@@ -7,9 +8,9 @@ import { UpsertActionEnum } from "./upsertactionenum";
  *  An object that represents the result of a single upsert row request. 
 **/
 export class UpsertRowsResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=rowIds" })
+  @SpeakeasyMetadata({ data: "json, name=rowIds" })
   rowIds: string[];
 
-  @Metadata({ data: "json, name=upsertAction" })
+  @SpeakeasyMetadata({ data: "json, name=upsertAction" })
   upsertAction: UpsertActionEnum;
 }

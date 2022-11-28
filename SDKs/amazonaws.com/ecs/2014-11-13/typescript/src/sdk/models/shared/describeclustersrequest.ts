@@ -1,11 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ClusterFieldEnum } from "./clusterfieldenum";
 
 
+
 export class DescribeClustersRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=clusters" })
+  @SpeakeasyMetadata({ data: "json, name=clusters" })
   clusters?: string[];
 
-  @Metadata({ data: "json, name=include" })
+  @SpeakeasyMetadata({ data: "json, name=include" })
   include?: ClusterFieldEnum[];
 }

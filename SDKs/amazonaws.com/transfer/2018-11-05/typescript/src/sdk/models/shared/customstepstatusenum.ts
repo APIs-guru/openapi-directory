@@ -1,6 +1,7 @@
 
 
+
 export enum CustomStepStatusEnum {
-    Success = "SUCCESS"
-,    Failure = "FAILURE"
+    Success = "SUCCESS",
+    Failure = "FAILURE"
 }

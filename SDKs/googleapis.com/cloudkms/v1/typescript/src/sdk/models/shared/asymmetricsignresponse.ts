@@ -1,11 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum AsymmetricSignResponseProtectionLevelEnum {
-    ProtectionLevelUnspecified = "PROTECTION_LEVEL_UNSPECIFIED"
-,    Software = "SOFTWARE"
-,    Hsm = "HSM"
-,    External = "EXTERNAL"
-,    ExternalVpc = "EXTERNAL_VPC"
+    ProtectionLevelUnspecified = "PROTECTION_LEVEL_UNSPECIFIED",
+    Software = "SOFTWARE",
+    Hsm = "HSM",
+    External = "EXTERNAL",
+    ExternalVpc = "EXTERNAL_VPC"
 }
 
 
@@ -14,21 +15,21 @@ export enum AsymmetricSignResponseProtectionLevelEnum {
  * Response message for KeyManagementService.AsymmetricSign.
 **/
 export class AsymmetricSignResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=protectionLevel" })
+  @SpeakeasyMetadata({ data: "json, name=protectionLevel" })
   protectionLevel?: AsymmetricSignResponseProtectionLevelEnum;
 
-  @Metadata({ data: "json, name=signature" })
+  @SpeakeasyMetadata({ data: "json, name=signature" })
   signature?: string;
 
-  @Metadata({ data: "json, name=signatureCrc32c" })
+  @SpeakeasyMetadata({ data: "json, name=signatureCrc32c" })
   signatureCrc32c?: string;
 
-  @Metadata({ data: "json, name=verifiedDataCrc32c" })
+  @SpeakeasyMetadata({ data: "json, name=verifiedDataCrc32c" })
   verifiedDataCrc32c?: boolean;
 
-  @Metadata({ data: "json, name=verifiedDigestCrc32c" })
+  @SpeakeasyMetadata({ data: "json, name=verifiedDigestCrc32c" })
   verifiedDigestCrc32c?: boolean;
 }

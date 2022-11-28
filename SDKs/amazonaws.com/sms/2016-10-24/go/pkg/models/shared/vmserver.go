@@ -1,5 +1,7 @@
 package shared
 
+// VMServer
+// Represents a VM server.
 type VMServer struct {
 	VMManagerName   *string            `json:"vmManagerName,omitempty"`
 	VMManagerType   *VMManagerTypeEnum `json:"vmManagerType,omitempty"`

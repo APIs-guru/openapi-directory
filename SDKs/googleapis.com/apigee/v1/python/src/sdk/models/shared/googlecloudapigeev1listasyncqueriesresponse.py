@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import googlecloudapigeev1asyncquery
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class GoogleCloudApigeeV1ListAsyncQueriesResponse:
-    queries: Optional[List[googlecloudapigeev1asyncquery.GoogleCloudApigeeV1AsyncQuery]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'queries' }})
+    r"""GoogleCloudApigeeV1ListAsyncQueriesResponse
+    The response for ListAsyncQueries.
+    """
+    
+    queries: Optional[List[GoogleCloudApigeeV1AsyncQuery]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('queries') }})
     

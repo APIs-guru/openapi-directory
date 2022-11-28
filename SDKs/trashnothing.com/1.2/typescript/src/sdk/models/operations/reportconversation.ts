@@ -1,31 +1,32 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ReportConversationPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=conversation_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=conversation_id" })
   conversationId: string;
 }
 
 
 export class ReportConversationRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "multipart_form, name=reason" })
+  @SpeakeasyMetadata({ data: "multipart_form, name=reason" })
   reason: string;
 }
 
 
 export class ReportConversationRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: ReportConversationPathParams;
 
-  @Metadata({ data: "request, media_type=multipart/form-data" })
+  @SpeakeasyMetadata({ data: "request, media_type=multipart/form-data" })
   request: ReportConversationRequestBody;
 }
 
 
 export class ReportConversationResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

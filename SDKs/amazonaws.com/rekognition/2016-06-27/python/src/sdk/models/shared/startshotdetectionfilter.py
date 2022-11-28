@@ -1,10 +1,15 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass_json
 @dataclass
 class StartShotDetectionFilter:
-    min_segment_confidence: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'MinSegmentConfidence' }})
+    r"""StartShotDetectionFilter
+    Filters for the shot detection segments returned by <code>GetSegmentDetection</code>. For more information, see <a>StartSegmentDetectionFilters</a>.
+    """
+    
+    min_segment_confidence: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('MinSegmentConfidence') }})
     

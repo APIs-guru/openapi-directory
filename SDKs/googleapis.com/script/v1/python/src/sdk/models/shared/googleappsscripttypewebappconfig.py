@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class GoogleAppsScriptTypeWebAppConfigAccessEnum(str, Enum):
     UNKNOWN_ACCESS = "UNKNOWN_ACCESS"
@@ -18,6 +20,10 @@ class GoogleAppsScriptTypeWebAppConfigExecuteAsEnum(str, Enum):
 @dataclass_json
 @dataclass
 class GoogleAppsScriptTypeWebAppConfig:
-    access: Optional[GoogleAppsScriptTypeWebAppConfigAccessEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'access' }})
-    execute_as: Optional[GoogleAppsScriptTypeWebAppConfigExecuteAsEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'executeAs' }})
+    r"""GoogleAppsScriptTypeWebAppConfig
+    Web app entry point configuration.
+    """
+    
+    access: Optional[GoogleAppsScriptTypeWebAppConfigAccessEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('access') }})
+    execute_as: Optional[GoogleAppsScriptTypeWebAppConfigExecuteAsEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('executeAs') }})
     

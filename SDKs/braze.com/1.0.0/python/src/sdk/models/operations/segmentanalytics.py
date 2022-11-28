@@ -11,11 +11,11 @@ class SegmentAnalyticsQueryParams:
 
 @dataclass
 class SegmentAnalyticsRequest:
-    query_params: SegmentAnalyticsQueryParams = field(default=None)
+    query_params: SegmentAnalyticsQueryParams = field()
     
 
 @dataclass
 class SegmentAnalyticsResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

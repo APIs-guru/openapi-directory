@@ -1,5 +1,7 @@
 package shared
 
+// GoogleCloudRetailV2alphaBigQuerySource
+// BigQuery source import data from.
 type GoogleCloudRetailV2alphaBigQuerySource struct {
 	DataSchema    *string         `json:"dataSchema,omitempty"`
 	DatasetID     *string         `json:"datasetId,omitempty"`

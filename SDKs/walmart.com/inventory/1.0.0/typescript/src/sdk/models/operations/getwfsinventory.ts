@@ -1,109 +1,110 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetWfsInventoryQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=fromModifiedDate" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=fromModifiedDate" })
   fromModifiedDate?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=limit" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=limit" })
   limit?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=offset" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=offset" })
   offset?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=sku" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sku" })
   sku?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=toModifiedDate" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=toModifiedDate" })
   toModifiedDate?: string;
 }
 
 
 export class GetWfsInventoryHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=Authorization" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Authorization" })
   authorization: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=WM_CONSUMER.CHANNEL.TYPE" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=WM_CONSUMER.CHANNEL.TYPE" })
   wmConsumerChannelType: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=WM_QOS.CORRELATION_ID" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=WM_QOS.CORRELATION_ID" })
   wmQosCorrelationId: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=WM_SEC.ACCESS_TOKEN" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=WM_SEC.ACCESS_TOKEN" })
   wmSecAccessToken: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=WM_SVC.NAME" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=WM_SVC.NAME" })
   wmSvcName: string;
 }
 
 
-export class GetWfsInventoryRequest extends SpeakeasyBase {
-  @Metadata()
-  queryParams: GetWfsInventoryQueryParams;
-
-  @Metadata()
-  headers: GetWfsInventoryHeaders;
-}
-
-
 export class GetWfsInventory200ApplicationJsonHeaders extends SpeakeasyBase {
-  @Metadata({ data: "json, name=limit" })
+  @SpeakeasyMetadata({ data: "json, name=limit" })
   limit?: number;
 
-  @Metadata({ data: "json, name=offset" })
+  @SpeakeasyMetadata({ data: "json, name=offset" })
   offset?: number;
 
-  @Metadata({ data: "json, name=totalCount" })
+  @SpeakeasyMetadata({ data: "json, name=totalCount" })
   totalCount?: number;
 }
 
 
 export class GetWfsInventory200ApplicationJsonPayloadInventoryShipNodes extends SpeakeasyBase {
-  @Metadata({ data: "json, name=availToSellQty" })
+  @SpeakeasyMetadata({ data: "json, name=availToSellQty" })
   availToSellQty?: number;
 
-  @Metadata({ data: "json, name=modifiedDate" })
+  @SpeakeasyMetadata({ data: "json, name=modifiedDate" })
   modifiedDate?: string;
 
-  @Metadata({ data: "json, name=onHandQty" })
+  @SpeakeasyMetadata({ data: "json, name=onHandQty" })
   onHandQty?: number;
 
-  @Metadata({ data: "json, name=shipNodeType" })
+  @SpeakeasyMetadata({ data: "json, name=shipNodeType" })
   shipNodeType?: string;
 }
 
 
 export class GetWfsInventory200ApplicationJsonPayloadInventory extends SpeakeasyBase {
-  @Metadata({ data: "json, name=shipNodes", elemType: operations.GetWfsInventory200ApplicationJsonPayloadInventoryShipNodes })
+  @SpeakeasyMetadata({ data: "json, name=shipNodes", elemType: GetWfsInventory200ApplicationJsonPayloadInventoryShipNodes })
   shipNodes?: GetWfsInventory200ApplicationJsonPayloadInventoryShipNodes[];
 
-  @Metadata({ data: "json, name=sku" })
+  @SpeakeasyMetadata({ data: "json, name=sku" })
   sku?: string;
 }
 
 
 export class GetWfsInventory200ApplicationJsonPayload extends SpeakeasyBase {
-  @Metadata({ data: "json, name=inventory", elemType: operations.GetWfsInventory200ApplicationJsonPayloadInventory })
+  @SpeakeasyMetadata({ data: "json, name=inventory", elemType: GetWfsInventory200ApplicationJsonPayloadInventory })
   inventory?: GetWfsInventory200ApplicationJsonPayloadInventory[];
 }
 
 
 export class GetWfsInventory200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=headers" })
+  @SpeakeasyMetadata({ data: "json, name=headers" })
   headers?: GetWfsInventory200ApplicationJsonHeaders;
 
-  @Metadata({ data: "json, name=payload" })
+  @SpeakeasyMetadata({ data: "json, name=payload" })
   payload?: GetWfsInventory200ApplicationJsonPayload;
 }
 
 
+export class GetWfsInventoryRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  queryParams: GetWfsInventoryQueryParams;
+
+  @SpeakeasyMetadata()
+  headers: GetWfsInventoryHeaders;
+}
+
+
 export class GetWfsInventoryResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getWfsInventory200ApplicationJsonObject?: GetWfsInventory200ApplicationJson;
 }

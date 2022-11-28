@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class LaunchTypeEnum(str, Enum):
     EC2 = "EC2"

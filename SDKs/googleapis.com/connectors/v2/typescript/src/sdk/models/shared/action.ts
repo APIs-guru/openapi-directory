@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { InputParameter } from "./inputparameter";
 import { ResultMetadata } from "./resultmetadata";
+
 
 
 // Action
@@ -9,12 +9,12 @@ import { ResultMetadata } from "./resultmetadata";
  * Action message contains metadata information about a single action present in the external system.
 **/
 export class Action extends SpeakeasyBase {
-  @Metadata({ data: "json, name=inputParameters", elemType: shared.InputParameter })
+  @SpeakeasyMetadata({ data: "json, name=inputParameters", elemType: InputParameter })
   inputParameters?: InputParameter[];
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=resultMetadata", elemType: shared.ResultMetadata })
+  @SpeakeasyMetadata({ data: "json, name=resultMetadata", elemType: ResultMetadata })
   resultMetadata?: ResultMetadata[];
 }

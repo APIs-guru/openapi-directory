@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // Name
 /**
  * 2-letter ISO 639-1 language code for the corresponding item.
@@ -33,11 +33,11 @@ var Name = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=$" }),
+        SpeakeasyMetadata({ data: "json, name=$" }),
         __metadata("design:type", String)
     ], Name.prototype, "dollar", void 0);
     __decorate([
-        Metadata({ data: "json, name=@LanguageCode" }),
+        SpeakeasyMetadata({ data: "json, name=@LanguageCode" }),
         __metadata("design:type", String)
     ], Name.prototype, "atLanguageCode", void 0);
     return Name;

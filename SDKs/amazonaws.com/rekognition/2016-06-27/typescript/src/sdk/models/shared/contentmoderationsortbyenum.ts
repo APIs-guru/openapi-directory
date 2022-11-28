@@ -1,6 +1,7 @@
 
 
+
 export enum ContentModerationSortByEnum {
-    Name = "NAME"
-,    Timestamp = "TIMESTAMP"
+    Name = "NAME",
+    Timestamp = "TIMESTAMP"
 }

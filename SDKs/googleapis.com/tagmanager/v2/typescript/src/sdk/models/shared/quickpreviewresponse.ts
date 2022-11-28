@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ContainerVersion } from "./containerversion";
 import { SyncStatus } from "./syncstatus";
+
 
 
 // QuickPreviewResponse
@@ -8,12 +9,12 @@ import { SyncStatus } from "./syncstatus";
  * Response to quick previewing a workspace.
 **/
 export class QuickPreviewResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=compilerError" })
+  @SpeakeasyMetadata({ data: "json, name=compilerError" })
   compilerError?: boolean;
 
-  @Metadata({ data: "json, name=containerVersion" })
+  @SpeakeasyMetadata({ data: "json, name=containerVersion" })
   containerVersion?: ContainerVersion;
 
-  @Metadata({ data: "json, name=syncStatus" })
+  @SpeakeasyMetadata({ data: "json, name=syncStatus" })
   syncStatus?: SyncStatus;
 }

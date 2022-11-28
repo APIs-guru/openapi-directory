@@ -1,66 +1,67 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TflApiPresentationEntitiesPathAttribute } from "./tflapipresentationentitiespathattribute";
 
+
 export enum TflApiPresentationEntitiesInstructionStepSkyDirectionDescriptionEnum {
-    North = "North"
-,    NorthEast = "NorthEast"
-,    East = "East"
-,    SouthEast = "SouthEast"
-,    South = "South"
-,    SouthWest = "SouthWest"
-,    West = "West"
-,    NorthWest = "NorthWest"
+    North = "North",
+    NorthEast = "NorthEast",
+    East = "East",
+    SouthEast = "SouthEast",
+    South = "South",
+    SouthWest = "SouthWest",
+    West = "West",
+    NorthWest = "NorthWest"
 }
 
 export enum TflApiPresentationEntitiesInstructionStepTrackTypeEnum {
-    CycleSuperHighway = "CycleSuperHighway"
-,    CanalTowpath = "CanalTowpath"
-,    QuietRoad = "QuietRoad"
-,    ProvisionForCyclists = "ProvisionForCyclists"
-,    BusyRoads = "BusyRoads"
-,    None = "None"
-,    PushBike = "PushBike"
-,    Quietway = "Quietway"
+    CycleSuperHighway = "CycleSuperHighway",
+    CanalTowpath = "CanalTowpath",
+    QuietRoad = "QuietRoad",
+    ProvisionForCyclists = "ProvisionForCyclists",
+    BusyRoads = "BusyRoads",
+    None = "None",
+    PushBike = "PushBike",
+    Quietway = "Quietway"
 }
 
 
 export class TflApiPresentationEntitiesInstructionStep extends SpeakeasyBase {
-  @Metadata({ data: "json, name=cumulativeDistance" })
+  @SpeakeasyMetadata({ data: "json, name=cumulativeDistance" })
   cumulativeDistance?: number;
 
-  @Metadata({ data: "json, name=cumulativeTravelTime" })
+  @SpeakeasyMetadata({ data: "json, name=cumulativeTravelTime" })
   cumulativeTravelTime?: number;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=descriptionHeading" })
+  @SpeakeasyMetadata({ data: "json, name=descriptionHeading" })
   descriptionHeading?: string;
 
-  @Metadata({ data: "json, name=distance" })
+  @SpeakeasyMetadata({ data: "json, name=distance" })
   distance?: number;
 
-  @Metadata({ data: "json, name=latitude" })
+  @SpeakeasyMetadata({ data: "json, name=latitude" })
   latitude?: number;
 
-  @Metadata({ data: "json, name=longitude" })
+  @SpeakeasyMetadata({ data: "json, name=longitude" })
   longitude?: number;
 
-  @Metadata({ data: "json, name=pathAttribute" })
+  @SpeakeasyMetadata({ data: "json, name=pathAttribute" })
   pathAttribute?: TflApiPresentationEntitiesPathAttribute;
 
-  @Metadata({ data: "json, name=skyDirection" })
+  @SpeakeasyMetadata({ data: "json, name=skyDirection" })
   skyDirection?: number;
 
-  @Metadata({ data: "json, name=skyDirectionDescription" })
+  @SpeakeasyMetadata({ data: "json, name=skyDirectionDescription" })
   skyDirectionDescription?: TflApiPresentationEntitiesInstructionStepSkyDirectionDescriptionEnum;
 
-  @Metadata({ data: "json, name=streetName" })
+  @SpeakeasyMetadata({ data: "json, name=streetName" })
   streetName?: string;
 
-  @Metadata({ data: "json, name=trackType" })
+  @SpeakeasyMetadata({ data: "json, name=trackType" })
   trackType?: TflApiPresentationEntitiesInstructionStepTrackTypeEnum;
 
-  @Metadata({ data: "json, name=turnDirection" })
+  @SpeakeasyMetadata({ data: "json, name=turnDirection" })
   turnDirection?: string;
 }

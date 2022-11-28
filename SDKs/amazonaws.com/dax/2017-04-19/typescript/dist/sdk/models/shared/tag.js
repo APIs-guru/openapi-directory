@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // Tag
 /**
  * <p>A description of a tag. Every tag is a key-value pair. You can add up to 50 tags to a single DAX cluster.</p> <p>AWS-assigned tag names and values are automatically assigned the <code>aws:</code> prefix, which the user cannot assign. AWS-assigned tag names do not count towards the tag limit of 50. User-assigned tag names have the prefix <code>user:</code>.</p> <p>You cannot backdate the application of a tag.</p>
@@ -33,11 +33,11 @@ var Tag = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Key" }),
+        SpeakeasyMetadata({ data: "json, name=Key" }),
         __metadata("design:type", String)
     ], Tag.prototype, "key", void 0);
     __decorate([
-        Metadata({ data: "json, name=Value" }),
+        SpeakeasyMetadata({ data: "json, name=Value" }),
         __metadata("design:type", String)
     ], Tag.prototype, "value", void 0);
     return Tag;

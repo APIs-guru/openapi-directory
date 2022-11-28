@@ -1,9 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum ValidateAttestationOccurrenceResponseResultEnum {
-    ResultUnspecified = "RESULT_UNSPECIFIED"
-,    Verified = "VERIFIED"
-,    AttestationNotVerifiable = "ATTESTATION_NOT_VERIFIABLE"
+    ResultUnspecified = "RESULT_UNSPECIFIED",
+    Verified = "VERIFIED",
+    AttestationNotVerifiable = "ATTESTATION_NOT_VERIFIABLE"
 }
 
 
@@ -12,9 +13,9 @@ export enum ValidateAttestationOccurrenceResponseResultEnum {
  * Response message for ValidationHelperV1.ValidateAttestationOccurrence.
 **/
 export class ValidateAttestationOccurrenceResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=denialReason" })
+  @SpeakeasyMetadata({ data: "json, name=denialReason" })
   denialReason?: string;
 
-  @Metadata({ data: "json, name=result" })
+  @SpeakeasyMetadata({ data: "json, name=result" })
   result?: ValidateAttestationOccurrenceResponseResultEnum;
 }

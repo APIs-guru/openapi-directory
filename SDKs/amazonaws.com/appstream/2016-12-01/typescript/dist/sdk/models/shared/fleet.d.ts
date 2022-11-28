@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ComputeCapacityStatus } from "./computecapacitystatus";
 import { DomainJoinInfo } from "./domainjoininfo";
 import { FleetError } from "./fleeterror";

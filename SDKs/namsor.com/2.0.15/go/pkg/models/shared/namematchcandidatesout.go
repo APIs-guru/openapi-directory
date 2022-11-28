@@ -1,5 +1,7 @@
 package shared
 
+// NameMatchCandidatesOut
+// Classified matched names
 type NameMatchCandidatesOut struct {
 	FirstName       *string                 `json:"firstName,omitempty"`
 	ID              *string                 `json:"id,omitempty"`

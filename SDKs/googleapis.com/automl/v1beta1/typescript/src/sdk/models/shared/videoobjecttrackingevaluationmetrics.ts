@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BoundingBoxMetricsEntry } from "./boundingboxmetricsentry";
+
 
 
 // VideoObjectTrackingEvaluationMetrics
@@ -8,15 +8,15 @@ import { BoundingBoxMetricsEntry } from "./boundingboxmetricsentry";
  * Model evaluation metrics for video object tracking problems. Evaluates prediction quality of both labeled bounding boxes and labeled tracks (i.e. series of bounding boxes sharing same label and instance ID).
 **/
 export class VideoObjectTrackingEvaluationMetrics extends SpeakeasyBase {
-  @Metadata({ data: "json, name=boundingBoxMeanAveragePrecision" })
+  @SpeakeasyMetadata({ data: "json, name=boundingBoxMeanAveragePrecision" })
   boundingBoxMeanAveragePrecision?: number;
 
-  @Metadata({ data: "json, name=boundingBoxMetricsEntries", elemType: shared.BoundingBoxMetricsEntry })
+  @SpeakeasyMetadata({ data: "json, name=boundingBoxMetricsEntries", elemType: BoundingBoxMetricsEntry })
   boundingBoxMetricsEntries?: BoundingBoxMetricsEntry[];
 
-  @Metadata({ data: "json, name=evaluatedBoundingBoxCount" })
+  @SpeakeasyMetadata({ data: "json, name=evaluatedBoundingBoxCount" })
   evaluatedBoundingBoxCount?: number;
 
-  @Metadata({ data: "json, name=evaluatedFrameCount" })
+  @SpeakeasyMetadata({ data: "json, name=evaluatedFrameCount" })
   evaluatedFrameCount?: number;
 }

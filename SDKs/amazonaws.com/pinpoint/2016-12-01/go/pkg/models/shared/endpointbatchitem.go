@@ -1,5 +1,7 @@
 package shared
 
+// EndpointBatchItem
+// Specifies an endpoint to create or update and the settings and attributes to set or change for the endpoint.
 type EndpointBatchItem struct {
 	Address        *string              `json:"Address,omitempty"`
 	Attributes     map[string][]string  `json:"Attributes,omitempty"`

@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// DateColumnStatisticsData
+// Defines column statistics supported for timestamp data columns.
 type DateColumnStatisticsData struct {
 	MaximumValue           *time.Time `json:"MaximumValue,omitempty"`
 	MinimumValue           *time.Time `json:"MinimumValue,omitempty"`

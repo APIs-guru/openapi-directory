@@ -1,13 +1,13 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Arc } from "./arc";
 import { Word } from "./word";
 
 
+
 export class DependenciesOut extends SpeakeasyBase {
-  @Metadata({ data: "json, name=arcs", elemType: shared.Arc })
+  @SpeakeasyMetadata({ data: "json, name=arcs", elemType: Arc })
   arcs: Arc[];
 
-  @Metadata({ data: "json, name=words", elemType: shared.Word })
+  @SpeakeasyMetadata({ data: "json, name=words", elemType: Word })
   words: Word[];
 }

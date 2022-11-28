@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DeleteAdRequest } from "./deleteadrequest";
+
 
 
 // BulkDeleteAdRequest
@@ -8,6 +8,6 @@ import { DeleteAdRequest } from "./deleteadrequest";
  * This type defines the fields that the call uses to remove ads in bulk.
 **/
 export class BulkDeleteAdRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=requests", elemType: shared.DeleteAdRequest })
+  @SpeakeasyMetadata({ data: "json, name=requests", elemType: DeleteAdRequest })
   requests?: DeleteAdRequest[];
 }

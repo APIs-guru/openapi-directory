@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class Streamingbuffer extends SpeakeasyBase {
-  @Metadata({ data: "json, name=estimatedBytes" })
+  @SpeakeasyMetadata({ data: "json, name=estimatedBytes" })
   estimatedBytes?: string;
 
-  @Metadata({ data: "json, name=estimatedRows" })
+  @SpeakeasyMetadata({ data: "json, name=estimatedRows" })
   estimatedRows?: string;
 
-  @Metadata({ data: "json, name=oldestEntryTime" })
+  @SpeakeasyMetadata({ data: "json, name=oldestEntryTime" })
   oldestEntryTime?: string;
 }

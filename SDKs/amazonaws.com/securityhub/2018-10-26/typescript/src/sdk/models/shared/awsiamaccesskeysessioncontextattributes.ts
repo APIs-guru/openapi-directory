@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AwsIamAccessKeySessionContextAttributes
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Attributes of the session that the key was used for.
 **/
 export class AwsIamAccessKeySessionContextAttributes extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CreationDate" })
+  @SpeakeasyMetadata({ data: "json, name=CreationDate" })
   creationDate?: string;
 
-  @Metadata({ data: "json, name=MfaAuthenticated" })
+  @SpeakeasyMetadata({ data: "json, name=MfaAuthenticated" })
   mfaAuthenticated?: boolean;
 }

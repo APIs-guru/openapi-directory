@@ -1,10 +1,11 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 
 
 @dataclass
 class GetPhrasesPathParams:
-    word: str = field(default=None, metadata={'path_param': { 'field_name': 'word', 'style': 'simple', 'explode': False }})
+    word: str = field(metadata={'path_param': { 'field_name': 'word', 'style': 'simple', 'explode': False }})
     
 class GetPhrasesUseCanonicalEnum(str, Enum):
     FALSE = "false"
@@ -20,13 +21,13 @@ class GetPhrasesQueryParams:
 
 @dataclass
 class GetPhrasesRequest:
-    path_params: GetPhrasesPathParams = field(default=None)
-    query_params: GetPhrasesQueryParams = field(default=None)
+    path_params: GetPhrasesPathParams = field()
+    query_params: GetPhrasesQueryParams = field()
     
 
 @dataclass
 class GetPhrasesResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

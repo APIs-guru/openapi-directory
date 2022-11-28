@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TimeRange } from "./timerange";
+
 
 
 // StartManualTransferRunsRequest
@@ -7,9 +8,9 @@ import { TimeRange } from "./timerange";
  * A request to start manual transfer runs.
 **/
 export class StartManualTransferRunsRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=requestedRunTime" })
+  @SpeakeasyMetadata({ data: "json, name=requestedRunTime" })
   requestedRunTime?: string;
 
-  @Metadata({ data: "json, name=requestedTimeRange" })
+  @SpeakeasyMetadata({ data: "json, name=requestedTimeRange" })
   requestedTimeRange?: TimeRange;
 }

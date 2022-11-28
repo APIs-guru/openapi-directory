@@ -12,6 +12,8 @@ const (
 	GooglePrivacyDlpV2TimePartConfigPartToExtractEnumHourOfDay           GooglePrivacyDlpV2TimePartConfigPartToExtractEnum = "HOUR_OF_DAY"
 )
 
+// GooglePrivacyDlpV2TimePartConfig
+// For use with `Date`, `Timestamp`, and `TimeOfDay`, extract or preserve a portion of the value.
 type GooglePrivacyDlpV2TimePartConfig struct {
 	PartToExtract *GooglePrivacyDlpV2TimePartConfigPartToExtractEnum `json:"partToExtract,omitempty"`
 }

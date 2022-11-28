@@ -28,6 +28,8 @@ const (
 	OutputConfigurationContainerTypeEnumDisabled                        OutputConfigurationContainerTypeEnum = "Disabled"
 )
 
+// OutputConfigurationContainer
+// Configuration for the outputs of a meter (analog/digital outputs)
 type OutputConfigurationContainer struct {
 	DigitalOutputNoConnectionAction *OutputConfigurationContainerDigitalOutputNoConnectionActionEnum `json:"DigitalOutputNoConnectionAction,omitempty"`
 	Name                            *string                                                          `json:"Name,omitempty"`

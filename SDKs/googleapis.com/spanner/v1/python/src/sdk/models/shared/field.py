@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import type
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class Field:
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    type: Optional[type.Type] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    r"""Field
+    Message representing a single field of a struct.
+    """
+    
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    type: Optional[Type] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('type') }})
     

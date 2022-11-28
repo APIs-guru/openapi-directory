@@ -1,53 +1,54 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetCustomFieldsForWorkspacePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=workspace_gid" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=workspace_gid" })
   workspaceGid: string;
 }
 
 
 export class GetCustomFieldsForWorkspaceQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=limit" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=limit" })
   limit?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=offset" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=offset" })
   offset?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=false;name=opt_fields" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=opt_fields" })
   optFields?: string[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=opt_pretty" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=opt_pretty" })
   optPretty?: boolean;
 }
 
 
-export class GetCustomFieldsForWorkspaceRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: GetCustomFieldsForWorkspacePathParams;
-
-  @Metadata()
-  queryParams: GetCustomFieldsForWorkspaceQueryParams;
-}
-
-
 export class GetCustomFieldsForWorkspace200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=data", elemType: shared.CustomFieldResponse })
+  @SpeakeasyMetadata({ data: "json, name=data", elemType: shared.CustomFieldResponse })
   data?: shared.CustomFieldResponse[];
 }
 
 
+export class GetCustomFieldsForWorkspaceRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: GetCustomFieldsForWorkspacePathParams;
+
+  @SpeakeasyMetadata()
+  queryParams: GetCustomFieldsForWorkspaceQueryParams;
+}
+
+
 export class GetCustomFieldsForWorkspaceResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   errorResponse?: shared.ErrorResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getCustomFieldsForWorkspace200ApplicationJsonObject?: GetCustomFieldsForWorkspace200ApplicationJson;
 }

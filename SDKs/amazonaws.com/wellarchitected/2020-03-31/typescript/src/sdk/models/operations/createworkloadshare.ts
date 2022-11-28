@@ -1,94 +1,95 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class CreateWorkloadSharePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=WorkloadId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=WorkloadId" })
   workloadId: string;
 }
 
 
 export class CreateWorkloadShareHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
 export enum CreateWorkloadShareRequestBodyPermissionTypeEnum {
-    Readonly = "READONLY"
-,    Contributor = "CONTRIBUTOR"
+    Readonly = "READONLY",
+    Contributor = "CONTRIBUTOR"
 }
 
 
 export class CreateWorkloadShareRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ClientRequestToken" })
+  @SpeakeasyMetadata({ data: "json, name=ClientRequestToken" })
   clientRequestToken: string;
 
-  @Metadata({ data: "json, name=PermissionType" })
+  @SpeakeasyMetadata({ data: "json, name=PermissionType" })
   permissionType: CreateWorkloadShareRequestBodyPermissionTypeEnum;
 
-  @Metadata({ data: "json, name=SharedWith" })
+  @SpeakeasyMetadata({ data: "json, name=SharedWith" })
   sharedWith: string;
 }
 
 
 export class CreateWorkloadShareRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: CreateWorkloadSharePathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: CreateWorkloadShareHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: CreateWorkloadShareRequestBody;
 }
 
 
 export class CreateWorkloadShareResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   accessDeniedException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   conflictException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   createWorkloadShareOutput?: shared.CreateWorkloadShareOutput;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   internalServerException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   resourceNotFoundException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   serviceQuotaExceededException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   throttlingException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   validationException?: any;
 }

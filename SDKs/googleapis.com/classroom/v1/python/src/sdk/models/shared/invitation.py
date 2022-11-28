@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class InvitationRoleEnum(str, Enum):
     COURSE_ROLE_UNSPECIFIED = "COURSE_ROLE_UNSPECIFIED"
@@ -12,8 +14,12 @@ class InvitationRoleEnum(str, Enum):
 @dataclass_json
 @dataclass
 class Invitation:
-    course_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'courseId' }})
-    id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
-    role: Optional[InvitationRoleEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'role' }})
-    user_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'userId' }})
+    r"""Invitation
+    An invitation to join a course.
+    """
+    
+    course_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('courseId') }})
+    id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('id') }})
+    role: Optional[InvitationRoleEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('role') }})
+    user_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('userId') }})
     

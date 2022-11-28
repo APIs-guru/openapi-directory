@@ -1,17 +1,17 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Facility } from "./facility";
 import { PageLinks } from "./pagelinks";
 import { FacilitiesMetadata } from "./facilitiesmetadata";
 
 
+
 export class FacilitiesResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=data", elemType: shared.Facility })
+  @SpeakeasyMetadata({ data: "json, name=data", elemType: Facility })
   data?: Facility[];
 
-  @Metadata({ data: "json, name=links" })
+  @SpeakeasyMetadata({ data: "json, name=links" })
   links: PageLinks;
 
-  @Metadata({ data: "json, name=meta" })
+  @SpeakeasyMetadata({ data: "json, name=meta" })
   meta: FacilitiesMetadata;
 }

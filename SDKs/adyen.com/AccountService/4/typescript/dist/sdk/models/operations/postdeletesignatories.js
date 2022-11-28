@@ -22,45 +22,21 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
-var PostDeleteSignatoriesSecurityOption1 = /** @class */ (function (_super) {
-    __extends(PostDeleteSignatoriesSecurityOption1, _super);
-    function PostDeleteSignatoriesSecurityOption1() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    __decorate([
-        Metadata({ data: "security, scheme=true;type=http;subtype=basic" }),
-        __metadata("design:type", shared.SchemeBasicAuth)
-    ], PostDeleteSignatoriesSecurityOption1.prototype, "basicAuth", void 0);
-    return PostDeleteSignatoriesSecurityOption1;
-}(SpeakeasyBase));
-export { PostDeleteSignatoriesSecurityOption1 };
-var PostDeleteSignatoriesSecurityOption2 = /** @class */ (function (_super) {
-    __extends(PostDeleteSignatoriesSecurityOption2, _super);
-    function PostDeleteSignatoriesSecurityOption2() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
-        __metadata("design:type", shared.SchemeApiKeyAuth)
-    ], PostDeleteSignatoriesSecurityOption2.prototype, "apiKeyAuth", void 0);
-    return PostDeleteSignatoriesSecurityOption2;
-}(SpeakeasyBase));
-export { PostDeleteSignatoriesSecurityOption2 };
 var PostDeleteSignatoriesSecurity = /** @class */ (function (_super) {
     __extends(PostDeleteSignatoriesSecurity, _super);
     function PostDeleteSignatoriesSecurity() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, option=true" }),
-        __metadata("design:type", PostDeleteSignatoriesSecurityOption1)
-    ], PostDeleteSignatoriesSecurity.prototype, "option1", void 0);
+        SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=basic" }),
+        __metadata("design:type", shared.SchemeBasicAuth)
+    ], PostDeleteSignatoriesSecurity.prototype, "basicAuth", void 0);
     __decorate([
-        Metadata({ data: "security, option=true" }),
-        __metadata("design:type", PostDeleteSignatoriesSecurityOption2)
-    ], PostDeleteSignatoriesSecurity.prototype, "option2", void 0);
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        __metadata("design:type", shared.SchemeApiKeyAuth)
+    ], PostDeleteSignatoriesSecurity.prototype, "apiKeyAuth", void 0);
     return PostDeleteSignatoriesSecurity;
 }(SpeakeasyBase));
 export { PostDeleteSignatoriesSecurity };
@@ -70,11 +46,11 @@ var PostDeleteSignatoriesRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", Object)
     ], PostDeleteSignatoriesRequest.prototype, "request", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PostDeleteSignatoriesSecurity)
     ], PostDeleteSignatoriesRequest.prototype, "security", void 0);
     return PostDeleteSignatoriesRequest;
@@ -86,19 +62,19 @@ var PostDeleteSignatoriesResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], PostDeleteSignatoriesResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], PostDeleteSignatoriesResponse.prototype, "genericResponse", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], PostDeleteSignatoriesResponse.prototype, "serviceError", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], PostDeleteSignatoriesResponse.prototype, "statusCode", void 0);
     return PostDeleteSignatoriesResponse;

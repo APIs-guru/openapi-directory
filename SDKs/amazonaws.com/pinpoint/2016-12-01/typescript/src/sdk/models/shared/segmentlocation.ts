@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SetDimension } from "./setdimension";
 import { GpsPointDimension } from "./gpspointdimension";
+
 
 
 // SegmentLocation
@@ -8,9 +9,9 @@ import { GpsPointDimension } from "./gpspointdimension";
  * Specifies geographical dimension settings for a segment.
 **/
 export class SegmentLocation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Country" })
+  @SpeakeasyMetadata({ data: "json, name=Country" })
   country?: SetDimension;
 
-  @Metadata({ data: "json, name=GPSPoint" })
+  @SpeakeasyMetadata({ data: "json, name=GPSPoint" })
   gpsPoint?: GpsPointDimension;
 }

@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// FargateProfile
+// An object representing an Fargate profile.
 type FargateProfile struct {
 	ClusterName         *string                   `json:"clusterName,omitempty"`
 	CreatedAt           *time.Time                `json:"createdAt,omitempty"`

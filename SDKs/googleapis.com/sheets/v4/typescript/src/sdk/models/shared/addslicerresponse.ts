@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Slicer } from "./slicer";
+
 
 
 // AddSlicerResponse
@@ -7,6 +8,6 @@ import { Slicer } from "./slicer";
  * The result of adding a slicer to a spreadsheet.
 **/
 export class AddSlicerResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=slicer" })
+  @SpeakeasyMetadata({ data: "json, name=slicer" })
   slicer?: Slicer;
 }

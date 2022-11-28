@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var ListInputRoutingsHeaders = /** @class */ (function (_super) {
     __extends(ListInputRoutingsHeaders, _super);
@@ -30,31 +30,31 @@ var ListInputRoutingsHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
         __metadata("design:type", String)
     ], ListInputRoutingsHeaders.prototype, "xAmzAlgorithm", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
         __metadata("design:type", String)
     ], ListInputRoutingsHeaders.prototype, "xAmzContentSha256", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
         __metadata("design:type", String)
     ], ListInputRoutingsHeaders.prototype, "xAmzCredential", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
         __metadata("design:type", String)
     ], ListInputRoutingsHeaders.prototype, "xAmzDate", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
         __metadata("design:type", String)
     ], ListInputRoutingsHeaders.prototype, "xAmzSecurityToken", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
         __metadata("design:type", String)
     ], ListInputRoutingsHeaders.prototype, "xAmzSignature", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
         __metadata("design:type", String)
     ], ListInputRoutingsHeaders.prototype, "xAmzSignedHeaders", void 0);
     return ListInputRoutingsHeaders;
@@ -70,11 +70,11 @@ var ListInputRoutingsRequestBodyInputIdentifier = /** @class */ (function (_supe
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=iotEventsInputIdentifier" }),
+        SpeakeasyMetadata({ data: "json, name=iotEventsInputIdentifier" }),
         __metadata("design:type", shared.IotEventsInputIdentifier)
     ], ListInputRoutingsRequestBodyInputIdentifier.prototype, "iotEventsInputIdentifier", void 0);
     __decorate([
-        Metadata({ data: "json, name=iotSiteWiseInputIdentifier" }),
+        SpeakeasyMetadata({ data: "json, name=iotSiteWiseInputIdentifier" }),
         __metadata("design:type", shared.IotSiteWiseInputIdentifier)
     ], ListInputRoutingsRequestBodyInputIdentifier.prototype, "iotSiteWiseInputIdentifier", void 0);
     return ListInputRoutingsRequestBodyInputIdentifier;
@@ -86,15 +86,15 @@ var ListInputRoutingsRequestBody = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=inputIdentifier" }),
+        SpeakeasyMetadata({ data: "json, name=inputIdentifier" }),
         __metadata("design:type", ListInputRoutingsRequestBodyInputIdentifier)
     ], ListInputRoutingsRequestBody.prototype, "inputIdentifier", void 0);
     __decorate([
-        Metadata({ data: "json, name=maxResults" }),
+        SpeakeasyMetadata({ data: "json, name=maxResults" }),
         __metadata("design:type", Number)
     ], ListInputRoutingsRequestBody.prototype, "maxResults", void 0);
     __decorate([
-        Metadata({ data: "json, name=nextToken" }),
+        SpeakeasyMetadata({ data: "json, name=nextToken" }),
         __metadata("design:type", String)
     ], ListInputRoutingsRequestBody.prototype, "nextToken", void 0);
     return ListInputRoutingsRequestBody;
@@ -106,11 +106,11 @@ var ListInputRoutingsRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ListInputRoutingsHeaders)
     ], ListInputRoutingsRequest.prototype, "headers", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", ListInputRoutingsRequestBody)
     ], ListInputRoutingsRequest.prototype, "request", void 0);
     return ListInputRoutingsRequest;
@@ -122,35 +122,35 @@ var ListInputRoutingsResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], ListInputRoutingsResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], ListInputRoutingsResponse.prototype, "internalFailureException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], ListInputRoutingsResponse.prototype, "invalidRequestException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.ListInputRoutingsResponse)
     ], ListInputRoutingsResponse.prototype, "listInputRoutingsResponse", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], ListInputRoutingsResponse.prototype, "resourceNotFoundException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], ListInputRoutingsResponse.prototype, "serviceUnavailableException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], ListInputRoutingsResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], ListInputRoutingsResponse.prototype, "throttlingException", void 0);
     return ListInputRoutingsResponse;

@@ -10,6 +10,8 @@ const (
 	TrafficStatsDomainReputationEnumBad                           TrafficStatsDomainReputationEnum = "BAD"
 )
 
+// TrafficStats
+// Email traffic statistics pertaining to a specific date.
 type TrafficStats struct {
 	DeliveryErrors          []DeliveryError                   `json:"deliveryErrors,omitempty"`
 	DkimSuccessRatio        *float64                          `json:"dkimSuccessRatio,omitempty"`

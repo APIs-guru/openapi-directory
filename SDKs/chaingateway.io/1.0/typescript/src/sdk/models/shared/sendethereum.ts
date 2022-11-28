@@ -1,19 +1,20 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class SendEthereum extends SpeakeasyBase {
-  @Metadata({ data: "json, name=amount" })
+  @SpeakeasyMetadata({ data: "json, name=amount" })
   amount: string;
 
-  @Metadata({ data: "json, name=from" })
+  @SpeakeasyMetadata({ data: "json, name=from" })
   from: string;
 
-  @Metadata({ data: "json, name=ok" })
+  @SpeakeasyMetadata({ data: "json, name=ok" })
   ok: boolean;
 
-  @Metadata({ data: "json, name=to" })
+  @SpeakeasyMetadata({ data: "json, name=to" })
   to: string;
 
-  @Metadata({ data: "json, name=txid" })
+  @SpeakeasyMetadata({ data: "json, name=txid" })
   txid: string;
 }

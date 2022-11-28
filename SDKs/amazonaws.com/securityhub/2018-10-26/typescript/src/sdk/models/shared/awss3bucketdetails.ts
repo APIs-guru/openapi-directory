@@ -1,4 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AwsS3BucketBucketLifecycleConfigurationDetails } from "./awss3bucketbucketlifecycleconfigurationdetails";
 import { AwsS3BucketLoggingConfiguration } from "./awss3bucketloggingconfiguration";
 import { AwsS3BucketNotificationConfiguration } from "./awss3bucketnotificationconfiguration";
@@ -7,38 +7,39 @@ import { AwsS3AccountPublicAccessBlockDetails } from "./awss3accountpublicaccess
 import { AwsS3BucketServerSideEncryptionConfiguration } from "./awss3bucketserversideencryptionconfiguration";
 
 
+
 // AwsS3BucketDetails
 /** 
  * The details of an Amazon S3 bucket.
 **/
 export class AwsS3BucketDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AccessControlList" })
+  @SpeakeasyMetadata({ data: "json, name=AccessControlList" })
   accessControlList?: string;
 
-  @Metadata({ data: "json, name=BucketLifecycleConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=BucketLifecycleConfiguration" })
   bucketLifecycleConfiguration?: AwsS3BucketBucketLifecycleConfigurationDetails;
 
-  @Metadata({ data: "json, name=BucketLoggingConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=BucketLoggingConfiguration" })
   bucketLoggingConfiguration?: AwsS3BucketLoggingConfiguration;
 
-  @Metadata({ data: "json, name=BucketNotificationConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=BucketNotificationConfiguration" })
   bucketNotificationConfiguration?: AwsS3BucketNotificationConfiguration;
 
-  @Metadata({ data: "json, name=BucketWebsiteConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=BucketWebsiteConfiguration" })
   bucketWebsiteConfiguration?: AwsS3BucketWebsiteConfiguration;
 
-  @Metadata({ data: "json, name=CreatedAt" })
+  @SpeakeasyMetadata({ data: "json, name=CreatedAt" })
   createdAt?: string;
 
-  @Metadata({ data: "json, name=OwnerId" })
+  @SpeakeasyMetadata({ data: "json, name=OwnerId" })
   ownerId?: string;
 
-  @Metadata({ data: "json, name=OwnerName" })
+  @SpeakeasyMetadata({ data: "json, name=OwnerName" })
   ownerName?: string;
 
-  @Metadata({ data: "json, name=PublicAccessBlockConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=PublicAccessBlockConfiguration" })
   publicAccessBlockConfiguration?: AwsS3AccountPublicAccessBlockDetails;
 
-  @Metadata({ data: "json, name=ServerSideEncryptionConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=ServerSideEncryptionConfiguration" })
   serverSideEncryptionConfiguration?: AwsS3BucketServerSideEncryptionConfiguration;
 }

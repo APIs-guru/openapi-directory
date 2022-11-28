@@ -16,6 +16,8 @@ const (
 	LocationLocationTypeEnumStreetAddress           LocationLocationTypeEnum = "STREET_ADDRESS"
 )
 
+// Location
+// A resource that represents a location with full geographic information.
 type Location struct {
 	LatLng        *LatLng                   `json:"latLng,omitempty"`
 	LocationType  *LocationLocationTypeEnum `json:"locationType,omitempty"`

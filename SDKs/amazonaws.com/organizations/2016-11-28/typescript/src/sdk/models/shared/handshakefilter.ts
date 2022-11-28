@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ActionTypeEnum } from "./actiontypeenum";
+
 
 
 // HandshakeFilter
@@ -7,9 +8,9 @@ import { ActionTypeEnum } from "./actiontypeenum";
  * Specifies the criteria that are used to select the handshakes for the operation.
 **/
 export class HandshakeFilter extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ActionType" })
+  @SpeakeasyMetadata({ data: "json, name=ActionType" })
   actionType?: ActionTypeEnum;
 
-  @Metadata({ data: "json, name=ParentHandshakeId" })
+  @SpeakeasyMetadata({ data: "json, name=ParentHandshakeId" })
   parentHandshakeId?: string;
 }

@@ -1,13 +1,17 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import itemtype_enum
-from . import itemvalue
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ItemIdentifier:
-    type: itemtype_enum.ItemTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
-    value: itemvalue.ItemValue = field(default=None, metadata={'dataclasses_json': { 'field_name': 'value' }})
+    r"""ItemIdentifier
+    Details and type of a related item.
+    """
+    
+    type: ItemTypeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('type') }})
+    value: ItemValue = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('value') }})
     

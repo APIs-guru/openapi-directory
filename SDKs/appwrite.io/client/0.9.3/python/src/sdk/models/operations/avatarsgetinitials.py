@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
 from typing import Optional
+from sdk.models import shared
 
 
 @dataclass
@@ -13,18 +14,18 @@ class AvatarsGetInitialsQueryParams:
 
 @dataclass
 class AvatarsGetInitialsSecurity:
-    jwt: shared.SchemeJwt = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
-    project: shared.SchemeProject = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    jwt: shared.SchemeJwt = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    project: shared.SchemeProject = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
     
 
 @dataclass
 class AvatarsGetInitialsRequest:
-    query_params: AvatarsGetInitialsQueryParams = field(default=None)
-    security: AvatarsGetInitialsSecurity = field(default=None)
+    query_params: AvatarsGetInitialsQueryParams = field()
+    security: AvatarsGetInitialsSecurity = field()
     
 
 @dataclass
 class AvatarsGetInitialsResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // LeaderboardScoreRank
@@ -6,18 +7,18 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A score rank in a leaderboard.
 **/
 export class LeaderboardScoreRank extends SpeakeasyBase {
-  @Metadata({ data: "json, name=formattedNumScores" })
+  @SpeakeasyMetadata({ data: "json, name=formattedNumScores" })
   formattedNumScores?: string;
 
-  @Metadata({ data: "json, name=formattedRank" })
+  @SpeakeasyMetadata({ data: "json, name=formattedRank" })
   formattedRank?: string;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=numScores" })
+  @SpeakeasyMetadata({ data: "json, name=numScores" })
   numScores?: string;
 
-  @Metadata({ data: "json, name=rank" })
+  @SpeakeasyMetadata({ data: "json, name=rank" })
   rank?: string;
 }

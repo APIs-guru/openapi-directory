@@ -14,12 +14,12 @@ class GetAPICardHeaders:
 
 @dataclass
 class GetAPICardRequest:
-    query_params: GetAPICardQueryParams = field(default=None)
-    headers: GetAPICardHeaders = field(default=None)
+    headers: GetAPICardHeaders = field()
+    query_params: GetAPICardQueryParams = field()
     
 
 @dataclass
 class GetAPICardResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

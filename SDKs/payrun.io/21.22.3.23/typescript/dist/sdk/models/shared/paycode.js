@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // PayCodePayCodeNominalCode
 /**
  * The pay codes' nominal code
@@ -33,15 +33,15 @@ var PayCodePayCodeNominalCode = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=@href" }),
+        SpeakeasyMetadata({ data: "json, name=@href" }),
         __metadata("design:type", String)
     ], PayCodePayCodeNominalCode.prototype, "atHref", void 0);
     __decorate([
-        Metadata({ data: "json, name=@rel" }),
+        SpeakeasyMetadata({ data: "json, name=@rel" }),
         __metadata("design:type", String)
     ], PayCodePayCodeNominalCode.prototype, "atRel", void 0);
     __decorate([
-        Metadata({ data: "json, name=@title" }),
+        SpeakeasyMetadata({ data: "json, name=@title" }),
         __metadata("design:type", String)
     ], PayCodePayCodeNominalCode.prototype, "atTitle", void 0);
     return PayCodePayCodeNominalCode;
@@ -70,63 +70,63 @@ var PayCodePayCode = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Benefit" }),
+        SpeakeasyMetadata({ data: "json, name=Benefit" }),
         __metadata("design:type", Boolean)
     ], PayCodePayCode.prototype, "benefit", void 0);
     __decorate([
-        Metadata({ data: "json, name=Code" }),
+        SpeakeasyMetadata({ data: "json, name=Code" }),
         __metadata("design:type", String)
     ], PayCodePayCode.prototype, "code", void 0);
     __decorate([
-        Metadata({ data: "json, name=Description" }),
+        SpeakeasyMetadata({ data: "json, name=Description" }),
         __metadata("design:type", String)
     ], PayCodePayCode.prototype, "description", void 0);
     __decorate([
-        Metadata({ data: "json, name=EffectiveDate" }),
+        SpeakeasyMetadata({ data: "json, name=EffectiveDate" }),
         __metadata("design:type", Date)
     ], PayCodePayCode.prototype, "effectiveDate", void 0);
     __decorate([
-        Metadata({ data: "json, name=MetaData" }),
+        SpeakeasyMetadata({ data: "json, name=MetaData" }),
         __metadata("design:type", Map)
     ], PayCodePayCode.prototype, "metaData", void 0);
     __decorate([
-        Metadata({ data: "json, name=Niable" }),
+        SpeakeasyMetadata({ data: "json, name=Niable" }),
         __metadata("design:type", Boolean)
     ], PayCodePayCode.prototype, "niable", void 0);
     __decorate([
-        Metadata({ data: "json, name=NominalCode" }),
+        SpeakeasyMetadata({ data: "json, name=NominalCode" }),
         __metadata("design:type", PayCodePayCodeNominalCode)
     ], PayCodePayCode.prototype, "nominalCode", void 0);
     __decorate([
-        Metadata({ data: "json, name=NonArrestable" }),
+        SpeakeasyMetadata({ data: "json, name=NonArrestable" }),
         __metadata("design:type", Boolean)
     ], PayCodePayCode.prototype, "nonArrestable", void 0);
     __decorate([
-        Metadata({ data: "json, name=Notional" }),
+        SpeakeasyMetadata({ data: "json, name=Notional" }),
         __metadata("design:type", Boolean)
     ], PayCodePayCode.prototype, "notional", void 0);
     __decorate([
-        Metadata({ data: "json, name=Readonly" }),
+        SpeakeasyMetadata({ data: "json, name=Readonly" }),
         __metadata("design:type", Boolean)
     ], PayCodePayCode.prototype, "readonly", void 0);
     __decorate([
-        Metadata({ data: "json, name=Region" }),
+        SpeakeasyMetadata({ data: "json, name=Region" }),
         __metadata("design:type", String)
     ], PayCodePayCode.prototype, "region", void 0);
     __decorate([
-        Metadata({ data: "json, name=Revision" }),
+        SpeakeasyMetadata({ data: "json, name=Revision" }),
         __metadata("design:type", Number)
     ], PayCodePayCode.prototype, "revision", void 0);
     __decorate([
-        Metadata({ data: "json, name=Taxable" }),
+        SpeakeasyMetadata({ data: "json, name=Taxable" }),
         __metadata("design:type", Boolean)
     ], PayCodePayCode.prototype, "taxable", void 0);
     __decorate([
-        Metadata({ data: "json, name=Territory" }),
+        SpeakeasyMetadata({ data: "json, name=Territory" }),
         __metadata("design:type", String)
     ], PayCodePayCode.prototype, "territory", void 0);
     __decorate([
-        Metadata({ data: "json, name=Type" }),
+        SpeakeasyMetadata({ data: "json, name=Type" }),
         __metadata("design:type", String)
     ], PayCodePayCode.prototype, "type", void 0);
     return PayCodePayCode;
@@ -138,7 +138,7 @@ var PayCode = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=PayCode" }),
+        SpeakeasyMetadata({ data: "json, name=PayCode" }),
         __metadata("design:type", PayCodePayCode)
     ], PayCode.prototype, "payCode", void 0);
     return PayCode;

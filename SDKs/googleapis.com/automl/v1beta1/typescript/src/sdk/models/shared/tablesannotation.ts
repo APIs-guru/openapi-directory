@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DoubleRange } from "./doublerange";
 import { TablesModelColumnInfo } from "./tablesmodelcolumninfo";
+
 
 
 // TablesAnnotation
@@ -9,18 +9,18 @@ import { TablesModelColumnInfo } from "./tablesmodelcolumninfo";
  * Contains annotation details specific to Tables.
 **/
 export class TablesAnnotation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=baselineScore" })
+  @SpeakeasyMetadata({ data: "json, name=baselineScore" })
   baselineScore?: number;
 
-  @Metadata({ data: "json, name=predictionInterval" })
+  @SpeakeasyMetadata({ data: "json, name=predictionInterval" })
   predictionInterval?: DoubleRange;
 
-  @Metadata({ data: "json, name=score" })
+  @SpeakeasyMetadata({ data: "json, name=score" })
   score?: number;
 
-  @Metadata({ data: "json, name=tablesModelColumnInfo", elemType: shared.TablesModelColumnInfo })
+  @SpeakeasyMetadata({ data: "json, name=tablesModelColumnInfo", elemType: TablesModelColumnInfo })
   tablesModelColumnInfo?: TablesModelColumnInfo[];
 
-  @Metadata({ data: "json, name=value" })
+  @SpeakeasyMetadata({ data: "json, name=value" })
   value?: any;
 }

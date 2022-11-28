@@ -1,6 +1,7 @@
 
 
+
 export enum ControlStatusEnum {
-    Enabled = "ENABLED"
-,    Disabled = "DISABLED"
+    Enabled = "ENABLED",
+    Disabled = "DISABLED"
 }

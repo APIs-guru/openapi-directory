@@ -1,14 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { IdentityProviderTypeEnum } from "./identityprovidertypeenum";
 
 
+
 export class DescribeIdentityProviderConfigurationResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=IdentityProviderSamlMetadata" })
+  @SpeakeasyMetadata({ data: "json, name=IdentityProviderSamlMetadata" })
   identityProviderSamlMetadata?: string;
 
-  @Metadata({ data: "json, name=IdentityProviderType" })
+  @SpeakeasyMetadata({ data: "json, name=IdentityProviderType" })
   identityProviderType?: IdentityProviderTypeEnum;
 
-  @Metadata({ data: "json, name=ServiceProviderSamlMetadata" })
+  @SpeakeasyMetadata({ data: "json, name=ServiceProviderSamlMetadata" })
   serviceProviderSamlMetadata?: string;
 }

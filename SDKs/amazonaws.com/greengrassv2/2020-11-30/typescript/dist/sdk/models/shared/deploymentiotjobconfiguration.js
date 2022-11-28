@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { IoTJobAbortConfig } from "./iotjobabortconfig";
 import { IoTJobExecutionsRolloutConfig } from "./iotjobexecutionsrolloutconfig";
 import { IoTJobTimeoutConfig } from "./iotjobtimeoutconfig";
@@ -36,15 +36,15 @@ var DeploymentIoTJobConfiguration = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=abortConfig" }),
+        SpeakeasyMetadata({ data: "json, name=abortConfig" }),
         __metadata("design:type", IoTJobAbortConfig)
     ], DeploymentIoTJobConfiguration.prototype, "abortConfig", void 0);
     __decorate([
-        Metadata({ data: "json, name=jobExecutionsRolloutConfig" }),
+        SpeakeasyMetadata({ data: "json, name=jobExecutionsRolloutConfig" }),
         __metadata("design:type", IoTJobExecutionsRolloutConfig)
     ], DeploymentIoTJobConfiguration.prototype, "jobExecutionsRolloutConfig", void 0);
     __decorate([
-        Metadata({ data: "json, name=timeoutConfig" }),
+        SpeakeasyMetadata({ data: "json, name=timeoutConfig" }),
         __metadata("design:type", IoTJobTimeoutConfig)
     ], DeploymentIoTJobConfiguration.prototype, "timeoutConfig", void 0);
     return DeploymentIoTJobConfiguration;

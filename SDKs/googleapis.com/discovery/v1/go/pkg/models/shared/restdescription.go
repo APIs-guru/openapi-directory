@@ -1,17 +1,25 @@
 package shared
 
+// RestDescriptionAuthOauth2Scopes
+// The scope value.
 type RestDescriptionAuthOauth2Scopes struct {
 	Description *string `json:"description,omitempty"`
 }
 
+// RestDescriptionAuthOauth2
+// OAuth 2.0 authentication information.
 type RestDescriptionAuthOauth2 struct {
 	Scopes map[string]RestDescriptionAuthOauth2Scopes `json:"scopes,omitempty"`
 }
 
+// RestDescriptionAuth
+// Authentication information.
 type RestDescriptionAuth struct {
 	Oauth2 *RestDescriptionAuthOauth2 `json:"oauth2,omitempty"`
 }
 
+// RestDescriptionIcons
+// Links to 16x16 and 32x32 icons representing the API.
 type RestDescriptionIcons struct {
 	X16 *string `json:"x16,omitempty"`
 	X32 *string `json:"x32,omitempty"`

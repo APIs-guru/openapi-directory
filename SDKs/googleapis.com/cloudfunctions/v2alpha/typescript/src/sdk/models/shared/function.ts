@@ -1,23 +1,54 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { BuildConfigInput } from "./buildconfig";
+import { EventTriggerInput } from "./eventtrigger";
+import { ServiceConfigInput } from "./serviceconfig";
 import { BuildConfig } from "./buildconfig";
 import { EventTrigger } from "./eventtrigger";
 import { ServiceConfig } from "./serviceconfig";
 import { GoogleCloudFunctionsV2alphaStateMessage } from "./googlecloudfunctionsv2alphastatemessage";
 
+
 export enum FunctionEnvironmentEnum {
-    EnvironmentUnspecified = "ENVIRONMENT_UNSPECIFIED"
-,    Gen1 = "GEN_1"
-,    Gen2 = "GEN_2"
+    EnvironmentUnspecified = "ENVIRONMENT_UNSPECIFIED",
+    Gen1 = "GEN_1",
+    Gen2 = "GEN_2"
 }
 
 export enum FunctionStateEnum {
-    StateUnspecified = "STATE_UNSPECIFIED"
-,    Active = "ACTIVE"
-,    Failed = "FAILED"
-,    Deploying = "DEPLOYING"
-,    Deleting = "DELETING"
-,    Unknown = "UNKNOWN"
+    StateUnspecified = "STATE_UNSPECIFIED",
+    Active = "ACTIVE",
+    Failed = "FAILED",
+    Deploying = "DEPLOYING",
+    Deleting = "DELETING",
+    Unknown = "UNKNOWN"
+}
+
+
+// FunctionInput
+/** 
+ * Describes a Cloud Function that contains user computation executed in response to an event. It encapsulates function and trigger configurations.
+**/
+export class FunctionInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=buildConfig" })
+  buildConfig?: BuildConfigInput;
+
+  @SpeakeasyMetadata({ data: "json, name=description" })
+  description?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=environment" })
+  environment?: FunctionEnvironmentEnum;
+
+  @SpeakeasyMetadata({ data: "json, name=eventTrigger" })
+  eventTrigger?: EventTriggerInput;
+
+  @SpeakeasyMetadata({ data: "json, name=labels" })
+  labels?: Map<string, string>;
+
+  @SpeakeasyMetadata({ data: "json, name=name" })
+  name?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=serviceConfig" })
+  serviceConfig?: ServiceConfigInput;
 }
 
 
@@ -26,33 +57,33 @@ export enum FunctionStateEnum {
  * Describes a Cloud Function that contains user computation executed in response to an event. It encapsulates function and trigger configurations.
 **/
 export class Function extends SpeakeasyBase {
-  @Metadata({ data: "json, name=buildConfig" })
+  @SpeakeasyMetadata({ data: "json, name=buildConfig" })
   buildConfig?: BuildConfig;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=environment" })
+  @SpeakeasyMetadata({ data: "json, name=environment" })
   environment?: FunctionEnvironmentEnum;
 
-  @Metadata({ data: "json, name=eventTrigger" })
+  @SpeakeasyMetadata({ data: "json, name=eventTrigger" })
   eventTrigger?: EventTrigger;
 
-  @Metadata({ data: "json, name=labels" })
+  @SpeakeasyMetadata({ data: "json, name=labels" })
   labels?: Map<string, string>;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=serviceConfig" })
+  @SpeakeasyMetadata({ data: "json, name=serviceConfig" })
   serviceConfig?: ServiceConfig;
 
-  @Metadata({ data: "json, name=state" })
+  @SpeakeasyMetadata({ data: "json, name=state" })
   state?: FunctionStateEnum;
 
-  @Metadata({ data: "json, name=stateMessages", elemType: shared.GoogleCloudFunctionsV2alphaStateMessage })
+  @SpeakeasyMetadata({ data: "json, name=stateMessages", elemType: GoogleCloudFunctionsV2alphaStateMessage })
   stateMessages?: GoogleCloudFunctionsV2alphaStateMessage[];
 
-  @Metadata({ data: "json, name=updateTime" })
+  @SpeakeasyMetadata({ data: "json, name=updateTime" })
   updateTime?: string;
 }

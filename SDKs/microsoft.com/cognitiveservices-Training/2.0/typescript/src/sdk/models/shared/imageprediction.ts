@@ -1,21 +1,21 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Prediction } from "./prediction";
 
 
+
 export class ImagePrediction extends SpeakeasyBase {
-  @Metadata({ data: "json, name=created" })
+  @SpeakeasyMetadata({ data: "json, name=created" })
   created?: Date;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=iteration" })
+  @SpeakeasyMetadata({ data: "json, name=iteration" })
   iteration?: string;
 
-  @Metadata({ data: "json, name=predictions", elemType: shared.Prediction })
+  @SpeakeasyMetadata({ data: "json, name=predictions", elemType: Prediction })
   predictions?: Prediction[];
 
-  @Metadata({ data: "json, name=project" })
+  @SpeakeasyMetadata({ data: "json, name=project" })
   project?: string;
 }

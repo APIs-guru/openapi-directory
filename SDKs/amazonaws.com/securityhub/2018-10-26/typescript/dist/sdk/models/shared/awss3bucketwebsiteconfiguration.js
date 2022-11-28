@@ -1,0 +1,55 @@
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { AwsS3BucketWebsiteConfigurationRedirectTo } from "./awss3bucketwebsiteconfigurationredirectto";
+import { AwsS3BucketWebsiteConfigurationRoutingRule } from "./awss3bucketwebsiteconfigurationroutingrule";
+// AwsS3BucketWebsiteConfiguration
+/**
+ * Website parameters for the S3 bucket.
+**/
+var AwsS3BucketWebsiteConfiguration = /** @class */ (function (_super) {
+    __extends(AwsS3BucketWebsiteConfiguration, _super);
+    function AwsS3BucketWebsiteConfiguration() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=ErrorDocument" }),
+        __metadata("design:type", String)
+    ], AwsS3BucketWebsiteConfiguration.prototype, "errorDocument", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=IndexDocumentSuffix" }),
+        __metadata("design:type", String)
+    ], AwsS3BucketWebsiteConfiguration.prototype, "indexDocumentSuffix", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=RedirectAllRequestsTo" }),
+        __metadata("design:type", AwsS3BucketWebsiteConfigurationRedirectTo)
+    ], AwsS3BucketWebsiteConfiguration.prototype, "redirectAllRequestsTo", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=RoutingRules", elemType: AwsS3BucketWebsiteConfigurationRoutingRule }),
+        __metadata("design:type", Array)
+    ], AwsS3BucketWebsiteConfiguration.prototype, "routingRules", void 0);
+    return AwsS3BucketWebsiteConfiguration;
+}(SpeakeasyBase));
+export { AwsS3BucketWebsiteConfiguration };

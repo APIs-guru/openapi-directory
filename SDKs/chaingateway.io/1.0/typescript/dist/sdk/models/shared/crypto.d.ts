@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { Cipherparams } from "./cipherparams";
 import { Kdfparams } from "./kdfparams";
 export declare class Crypto extends SpeakeasyBase {

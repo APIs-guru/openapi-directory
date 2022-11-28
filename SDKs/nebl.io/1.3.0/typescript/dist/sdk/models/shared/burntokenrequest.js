@@ -22,19 +22,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var BurnTokenRequestBurn = /** @class */ (function (_super) {
     __extends(BurnTokenRequestBurn, _super);
     function BurnTokenRequestBurn() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=amount" }),
+        SpeakeasyMetadata({ data: "json, name=amount" }),
         __metadata("design:type", Number)
     ], BurnTokenRequestBurn.prototype, "amount", void 0);
     __decorate([
-        Metadata({ data: "json, name=tokenId" }),
+        SpeakeasyMetadata({ data: "json, name=tokenId" }),
         __metadata("design:type", String)
     ], BurnTokenRequestBurn.prototype, "tokenId", void 0);
     return BurnTokenRequestBurn;
@@ -46,15 +45,15 @@ var BurnTokenRequestTransfer = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=address" }),
+        SpeakeasyMetadata({ data: "json, name=address" }),
         __metadata("design:type", String)
     ], BurnTokenRequestTransfer.prototype, "address", void 0);
     __decorate([
-        Metadata({ data: "json, name=amount" }),
+        SpeakeasyMetadata({ data: "json, name=amount" }),
         __metadata("design:type", Number)
     ], BurnTokenRequestTransfer.prototype, "amount", void 0);
     __decorate([
-        Metadata({ data: "json, name=tokenId" }),
+        SpeakeasyMetadata({ data: "json, name=tokenId" }),
         __metadata("design:type", String)
     ], BurnTokenRequestTransfer.prototype, "tokenId", void 0);
     return BurnTokenRequestTransfer;
@@ -66,19 +65,19 @@ var BurnTokenRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=burn", elemType: shared.BurnTokenRequestBurn }),
+        SpeakeasyMetadata({ data: "json, name=burn", elemType: BurnTokenRequestBurn }),
         __metadata("design:type", Array)
     ], BurnTokenRequest.prototype, "burn", void 0);
     __decorate([
-        Metadata({ data: "json, name=fee" }),
+        SpeakeasyMetadata({ data: "json, name=fee" }),
         __metadata("design:type", Number)
     ], BurnTokenRequest.prototype, "fee", void 0);
     __decorate([
-        Metadata({ data: "json, name=from" }),
+        SpeakeasyMetadata({ data: "json, name=from" }),
         __metadata("design:type", Array)
     ], BurnTokenRequest.prototype, "from", void 0);
     __decorate([
-        Metadata({ data: "json, name=transfer", elemType: shared.BurnTokenRequestTransfer }),
+        SpeakeasyMetadata({ data: "json, name=transfer", elemType: BurnTokenRequestTransfer }),
         __metadata("design:type", Array)
     ], BurnTokenRequest.prototype, "transfer", void 0);
     return BurnTokenRequest;

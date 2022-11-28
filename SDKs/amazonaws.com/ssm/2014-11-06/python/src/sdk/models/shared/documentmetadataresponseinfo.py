@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import documentreviewerresponsesource
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class DocumentMetadataResponseInfo:
-    reviewer_response: Optional[List[documentreviewerresponsesource.DocumentReviewerResponseSource]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ReviewerResponse' }})
+    r"""DocumentMetadataResponseInfo
+    Details about the response to a document review request.
+    """
+    
+    reviewer_response: Optional[List[DocumentReviewerResponseSource]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ReviewerResponse') }})
     

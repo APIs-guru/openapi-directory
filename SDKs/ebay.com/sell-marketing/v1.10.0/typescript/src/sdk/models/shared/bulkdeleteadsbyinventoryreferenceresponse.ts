@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DeleteAdsByInventoryReferenceResponse } from "./deleteadsbyinventoryreferenceresponse";
+
 
 
 // BulkDeleteAdsByInventoryReferenceResponse
@@ -8,6 +8,6 @@ import { DeleteAdsByInventoryReferenceResponse } from "./deleteadsbyinventoryref
  * This type defines a container that lists the ads that bulkDeleteAdsByInventoryReference deleted.
 **/
 export class BulkDeleteAdsByInventoryReferenceResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=responses", elemType: shared.DeleteAdsByInventoryReferenceResponse })
+  @SpeakeasyMetadata({ data: "json, name=responses", elemType: DeleteAdsByInventoryReferenceResponse })
   responses?: DeleteAdsByInventoryReferenceResponse[];
 }

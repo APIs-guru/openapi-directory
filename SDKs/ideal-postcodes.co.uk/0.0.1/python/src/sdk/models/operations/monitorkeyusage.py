@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class MonitorKeyUsagePathParams:
-    key: str = field(default=None, metadata={'path_param': { 'field_name': 'key', 'style': 'simple', 'explode': False }})
+    key: str = field(metadata={'path_param': { 'field_name': 'key', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -18,21 +18,21 @@ class MonitorKeyUsageQueryParams:
 
 @dataclass
 class MonitorKeyUsageSecurity:
-    api_key: shared.SchemeAPIKey = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'query' }})
-    user_token: shared.SchemeUserToken = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'query' }})
+    api_key: shared.SchemeAPIKey = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'query' }})
+    user_token: shared.SchemeUserToken = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'query' }})
     
 
 @dataclass
 class MonitorKeyUsageRequest:
-    path_params: MonitorKeyUsagePathParams = field(default=None)
-    query_params: MonitorKeyUsageQueryParams = field(default=None)
-    security: MonitorKeyUsageSecurity = field(default=None)
+    path_params: MonitorKeyUsagePathParams = field()
+    query_params: MonitorKeyUsageQueryParams = field()
+    security: MonitorKeyUsageSecurity = field()
     
 
 @dataclass
 class MonitorKeyUsageResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error_response_schema: Optional[shared.ErrorResponseSchema] = field(default=None)
     key_usage_response_schema: Optional[shared.KeyUsageResponseSchema] = field(default=None)
-    status_code: int = field(default=None)
     

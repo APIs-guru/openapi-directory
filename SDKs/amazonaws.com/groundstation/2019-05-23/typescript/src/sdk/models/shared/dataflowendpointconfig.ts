@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // DataflowEndpointConfig
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Information about the dataflow endpoint <code>Config</code>.
 **/
 export class DataflowEndpointConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=dataflowEndpointName" })
+  @SpeakeasyMetadata({ data: "json, name=dataflowEndpointName" })
   dataflowEndpointName: string;
 
-  @Metadata({ data: "json, name=dataflowEndpointRegion" })
+  @SpeakeasyMetadata({ data: "json, name=dataflowEndpointRegion" })
   dataflowEndpointRegion?: string;
 }

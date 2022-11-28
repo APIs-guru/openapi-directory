@@ -22,19 +22,19 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { AggregatedValue } from "./aggregatedvalue";
 var GetAssetPropertyAggregatesResponse = /** @class */ (function (_super) {
     __extends(GetAssetPropertyAggregatesResponse, _super);
     function GetAssetPropertyAggregatesResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=aggregatedValues", elemType: shared.AggregatedValue }),
+        SpeakeasyMetadata({ data: "json, name=aggregatedValues", elemType: AggregatedValue }),
         __metadata("design:type", Array)
     ], GetAssetPropertyAggregatesResponse.prototype, "aggregatedValues", void 0);
     __decorate([
-        Metadata({ data: "json, name=nextToken" }),
+        SpeakeasyMetadata({ data: "json, name=nextToken" }),
         __metadata("design:type", String)
     ], GetAssetPropertyAggregatesResponse.prototype, "nextToken", void 0);
     return GetAssetPropertyAggregatesResponse;

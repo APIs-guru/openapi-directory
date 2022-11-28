@@ -6,6 +6,8 @@ const (
 	GetDefineRankExpressionActionEnumDefineRankExpression GetDefineRankExpressionActionEnum = "DefineRankExpression"
 )
 
+// GetDefineRankExpressionRankExpression
+// A named expression that can be evaluated at search time and used for ranking or thresholding in a search query.
 type GetDefineRankExpressionRankExpression struct {
 	RankExpression string `queryParam:"name=RankExpression"`
 	RankName       string `queryParam:"name=RankName"`

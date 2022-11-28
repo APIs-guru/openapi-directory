@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SimplifiedPlaylistObject } from "./simplifiedplaylistobject";
+
 
 
 // FeaturedPlaylistObjectPlaylists
@@ -8,33 +8,33 @@ import { SimplifiedPlaylistObject } from "./simplifiedplaylistobject";
  * https://developer.spotify.com/documentation/web-api/reference/#object-pagingobject - Find more info on the official Spotify Web API Reference
 **/
 export class FeaturedPlaylistObjectPlaylists extends SpeakeasyBase {
-  @Metadata({ data: "json, name=href" })
+  @SpeakeasyMetadata({ data: "json, name=href" })
   href?: string;
 
-  @Metadata({ data: "json, name=items", elemType: shared.SimplifiedPlaylistObject })
+  @SpeakeasyMetadata({ data: "json, name=items", elemType: SimplifiedPlaylistObject })
   items?: SimplifiedPlaylistObject[];
 
-  @Metadata({ data: "json, name=limit" })
+  @SpeakeasyMetadata({ data: "json, name=limit" })
   limit?: number;
 
-  @Metadata({ data: "json, name=next" })
+  @SpeakeasyMetadata({ data: "json, name=next" })
   next?: string;
 
-  @Metadata({ data: "json, name=offset" })
+  @SpeakeasyMetadata({ data: "json, name=offset" })
   offset?: number;
 
-  @Metadata({ data: "json, name=previous" })
+  @SpeakeasyMetadata({ data: "json, name=previous" })
   previous?: string;
 
-  @Metadata({ data: "json, name=total" })
+  @SpeakeasyMetadata({ data: "json, name=total" })
   total?: number;
 }
 
 
 export class FeaturedPlaylistObject extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 
-  @Metadata({ data: "json, name=playlists" })
+  @SpeakeasyMetadata({ data: "json, name=playlists" })
   playlists?: FeaturedPlaylistObjectPlaylists;
 }

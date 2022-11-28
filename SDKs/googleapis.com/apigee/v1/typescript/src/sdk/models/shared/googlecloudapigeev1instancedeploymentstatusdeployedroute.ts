@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudApigeeV1InstanceDeploymentStatusDeployedRoute
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Route deployed in the ingress routing table.
 **/
 export class GoogleCloudApigeeV1InstanceDeploymentStatusDeployedRoute extends SpeakeasyBase {
-  @Metadata({ data: "json, name=basepath" })
+  @SpeakeasyMetadata({ data: "json, name=basepath" })
   basepath?: string;
 
-  @Metadata({ data: "json, name=envgroup" })
+  @SpeakeasyMetadata({ data: "json, name=envgroup" })
   envgroup?: string;
 
-  @Metadata({ data: "json, name=environment" })
+  @SpeakeasyMetadata({ data: "json, name=environment" })
   environment?: string;
 
-  @Metadata({ data: "json, name=percentage" })
+  @SpeakeasyMetadata({ data: "json, name=percentage" })
   percentage?: number;
 }

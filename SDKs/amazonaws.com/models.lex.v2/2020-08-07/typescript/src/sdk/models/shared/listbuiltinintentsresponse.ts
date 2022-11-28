@@ -1,15 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BuiltInIntentSummary } from "./builtinintentsummary";
 
 
+
 export class ListBuiltInIntentsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=builtInIntentSummaries", elemType: shared.BuiltInIntentSummary })
+  @SpeakeasyMetadata({ data: "json, name=builtInIntentSummaries", elemType: BuiltInIntentSummary })
   builtInIntentSummaries?: BuiltInIntentSummary[];
 
-  @Metadata({ data: "json, name=localeId" })
+  @SpeakeasyMetadata({ data: "json, name=localeId" })
   localeId?: string;
 
-  @Metadata({ data: "json, name=nextToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextToken" })
   nextToken?: string;
 }

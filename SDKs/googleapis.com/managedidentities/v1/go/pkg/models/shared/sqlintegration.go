@@ -9,6 +9,8 @@ const (
 	SQLIntegrationStateEnumReady            SQLIntegrationStateEnum = "READY"
 )
 
+// SQLIntegration
+// Represents the SQL instance integrated with Managed AD.
 type SQLIntegration struct {
 	CreateTime  *string                  `json:"createTime,omitempty"`
 	Name        *string                  `json:"name,omitempty"`

@@ -33,7 +33,7 @@ type DisplayvideoPartnersChannelsPatchSecurity struct {
 type DisplayvideoPartnersChannelsPatchRequest struct {
 	PathParams  DisplayvideoPartnersChannelsPatchPathParams
 	QueryParams DisplayvideoPartnersChannelsPatchQueryParams
-	Request     *shared.Channel `request:"mediaType=application/json"`
+	Request     *shared.ChannelInput `request:"mediaType=application/json"`
 	Security    DisplayvideoPartnersChannelsPatchSecurity
 }
 

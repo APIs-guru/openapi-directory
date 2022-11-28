@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { StatusEnum } from "./statusenum";
 // TestCaseRun
 /**
@@ -34,39 +34,39 @@ var TestCaseRun = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=endTime" }),
+        SpeakeasyMetadata({ data: "json, name=endTime" }),
         __metadata("design:type", Date)
     ], TestCaseRun.prototype, "endTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=failure" }),
+        SpeakeasyMetadata({ data: "json, name=failure" }),
         __metadata("design:type", String)
     ], TestCaseRun.prototype, "failure", void 0);
     __decorate([
-        Metadata({ data: "json, name=logUrl" }),
+        SpeakeasyMetadata({ data: "json, name=logUrl" }),
         __metadata("design:type", String)
     ], TestCaseRun.prototype, "logUrl", void 0);
     __decorate([
-        Metadata({ data: "json, name=startTime" }),
+        SpeakeasyMetadata({ data: "json, name=startTime" }),
         __metadata("design:type", Date)
     ], TestCaseRun.prototype, "startTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=status" }),
+        SpeakeasyMetadata({ data: "json, name=status" }),
         __metadata("design:type", String)
     ], TestCaseRun.prototype, "status", void 0);
     __decorate([
-        Metadata({ data: "json, name=testCaseDefinitionId" }),
+        SpeakeasyMetadata({ data: "json, name=testCaseDefinitionId" }),
         __metadata("design:type", String)
     ], TestCaseRun.prototype, "testCaseDefinitionId", void 0);
     __decorate([
-        Metadata({ data: "json, name=testCaseDefinitionName" }),
+        SpeakeasyMetadata({ data: "json, name=testCaseDefinitionName" }),
         __metadata("design:type", String)
     ], TestCaseRun.prototype, "testCaseDefinitionName", void 0);
     __decorate([
-        Metadata({ data: "json, name=testCaseRunId" }),
+        SpeakeasyMetadata({ data: "json, name=testCaseRunId" }),
         __metadata("design:type", String)
     ], TestCaseRun.prototype, "testCaseRunId", void 0);
     __decorate([
-        Metadata({ data: "json, name=warnings" }),
+        SpeakeasyMetadata({ data: "json, name=warnings" }),
         __metadata("design:type", String)
     ], TestCaseRun.prototype, "warnings", void 0);
     return TestCaseRun;

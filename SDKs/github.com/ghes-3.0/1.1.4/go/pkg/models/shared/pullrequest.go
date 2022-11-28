@@ -397,6 +397,8 @@ const (
 	PullRequestStateEnumClosed PullRequestStateEnum = "closed"
 )
 
+// PullRequest
+// Pull requests let you tell others about changes you've pushed to a repository on GitHub. Once a pull request is sent, interested parties can review the set of changes, discuss potential modifications, and even push follow-up commits if necessary.
 type PullRequest struct {
 	Links               PullRequestLinks      `json:"_links"`
 	ActiveLockReason    *string               `json:"active_lock_reason,omitempty"`

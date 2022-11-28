@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class YoutubeAndPartnersBiddingStrategyTypeEnum(str, Enum):
     YOUTUBE_AND_PARTNERS_BIDDING_STRATEGY_TYPE_UNSPECIFIED = "YOUTUBE_AND_PARTNERS_BIDDING_STRATEGY_TYPE_UNSPECIFIED"
@@ -15,6 +17,10 @@ class YoutubeAndPartnersBiddingStrategyTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class YoutubeAndPartnersBiddingStrategy:
-    type: Optional[YoutubeAndPartnersBiddingStrategyTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
-    value: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'value' }})
+    r"""YoutubeAndPartnersBiddingStrategy
+    Settings that control the bid strategy for YouTube and Partners resources.
+    """
+    
+    type: Optional[YoutubeAndPartnersBiddingStrategyTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('type') }})
+    value: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('value') }})
     

@@ -20,11 +20,6 @@ type GetLoadBalancersIDMetricsQueryParams struct {
 	Type  GetLoadBalancersIDMetricsTypeEnum `queryParam:"style=form,explode=true,name=type"`
 }
 
-type GetLoadBalancersIDMetricsRequest struct {
-	PathParams  GetLoadBalancersIDMetricsPathParams
-	QueryParams GetLoadBalancersIDMetricsQueryParams
-}
-
 type GetLoadBalancersIDMetrics200ApplicationJSONMetricsTimeSeries struct {
 	Values [][]interface{} `json:"values"`
 }
@@ -38,6 +33,11 @@ type GetLoadBalancersIDMetrics200ApplicationJSONMetrics struct {
 
 type GetLoadBalancersIDMetrics200ApplicationJSON struct {
 	Metrics GetLoadBalancersIDMetrics200ApplicationJSONMetrics `json:"metrics"`
+}
+
+type GetLoadBalancersIDMetricsRequest struct {
+	PathParams  GetLoadBalancersIDMetricsPathParams
+	QueryParams GetLoadBalancersIDMetricsQueryParams
 }
 
 type GetLoadBalancersIDMetricsResponse struct {

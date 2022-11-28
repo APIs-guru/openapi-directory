@@ -1,17 +1,9 @@
 package shared
 
-import (
-	"time"
-)
-
-type WritablePrefix struct {
-	Created      *time.Time             `json:"created,omitempty"`
+type WritablePrefixInput struct {
 	CustomFields map[string]interface{} `json:"custom_fields,omitempty"`
 	Description  *string                `json:"description,omitempty"`
-	Family       *int64                 `json:"family,omitempty"`
-	ID           *int64                 `json:"id,omitempty"`
 	IsPool       *bool                  `json:"is_pool,omitempty"`
-	LastUpdated  *time.Time             `json:"last_updated,omitempty"`
 	Prefix       string                 `json:"prefix"`
 	Role         *int64                 `json:"role,omitempty"`
 	Site         *int64                 `json:"site,omitempty"`

@@ -18,11 +18,6 @@ type UpdateMonitorRequestBody struct {
 	Monitor *UpdateMonitorRequestBodyMonitor `json:"monitor,omitempty"`
 }
 
-type UpdateMonitorRequest struct {
-	PathParams UpdateMonitorPathParams
-	Request    *UpdateMonitorRequestBody `request:"mediaType=application/json"`
-}
-
 type UpdateMonitor200ApplicationJSONMonitor struct {
 	ID   *string `json:"id,omitempty"`
 	Name *string `json:"name,omitempty"`
@@ -31,6 +26,11 @@ type UpdateMonitor200ApplicationJSONMonitor struct {
 
 type UpdateMonitor200ApplicationJSON struct {
 	Monitor *UpdateMonitor200ApplicationJSONMonitor `json:"monitor,omitempty"`
+}
+
+type UpdateMonitorRequest struct {
+	PathParams UpdateMonitorPathParams
+	Request    *UpdateMonitorRequestBody `request:"mediaType=application/json"`
 }
 
 type UpdateMonitorResponse struct {

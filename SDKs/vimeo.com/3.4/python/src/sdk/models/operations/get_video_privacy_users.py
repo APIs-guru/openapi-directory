@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class GetVideoPrivacyUsersPathParams:
-    video_id: float = field(default=None, metadata={'path_param': { 'field_name': 'video_id', 'style': 'simple', 'explode': False }})
+    video_id: float = field(metadata={'path_param': { 'field_name': 'video_id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -16,14 +16,14 @@ class GetVideoPrivacyUsersQueryParams:
 
 @dataclass
 class GetVideoPrivacyUsersRequest:
-    path_params: GetVideoPrivacyUsersPathParams = field(default=None)
-    query_params: GetVideoPrivacyUsersQueryParams = field(default=None)
+    path_params: GetVideoPrivacyUsersPathParams = field()
+    query_params: GetVideoPrivacyUsersQueryParams = field()
     
 
 @dataclass
 class GetVideoPrivacyUsersResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     legacy_error: Optional[shared.LegacyError] = field(default=None)
     users: Optional[List[shared.User]] = field(default=None)
     

@@ -29,6 +29,8 @@ type PackageVersionPackageVersionMetadata struct {
 	PackageType PackageVersionPackageVersionMetadataPackageTypeEnum    `json:"package_type"`
 }
 
+// PackageVersion
+// A version of a software package
 type PackageVersion struct {
 	CreatedAt      time.Time                             `json:"created_at"`
 	DeletedAt      *time.Time                            `json:"deleted_at,omitempty"`

@@ -16,12 +16,6 @@ type GetCSSTemplatePkSecurity struct {
 	Jwt shared.SchemeJwt `security:"scheme,type=http,subtype=bearer"`
 }
 
-type GetCSSTemplatePkRequest struct {
-	PathParams  GetCSSTemplatePkPathParams
-	QueryParams GetCSSTemplatePkQueryParams
-	Security    GetCSSTemplatePkSecurity
-}
-
 type GetCSSTemplatePk200ApplicationJSONDescriptionColumns struct {
 	ColumnName *string `json:"column_name,omitempty"`
 }
@@ -57,6 +51,12 @@ type GetCSSTemplatePk422ApplicationJSON struct {
 
 type GetCSSTemplatePk500ApplicationJSON struct {
 	Message *string `json:"message,omitempty"`
+}
+
+type GetCSSTemplatePkRequest struct {
+	PathParams  GetCSSTemplatePkPathParams
+	QueryParams GetCSSTemplatePkQueryParams
+	Security    GetCSSTemplatePkSecurity
 }
 
 type GetCSSTemplatePkResponse struct {

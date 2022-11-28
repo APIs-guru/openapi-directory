@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Oidc
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Represents an OpenId Connect 1.0 identity provider.
 **/
 export class Oidc extends SpeakeasyBase {
-  @Metadata({ data: "json, name=allowedAudiences" })
+  @SpeakeasyMetadata({ data: "json, name=allowedAudiences" })
   allowedAudiences?: string[];
 
-  @Metadata({ data: "json, name=issuerUri" })
+  @SpeakeasyMetadata({ data: "json, name=issuerUri" })
   issuerUri?: string;
 }

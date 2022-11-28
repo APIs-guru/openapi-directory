@@ -1,6 +1,7 @@
 
 
+
 export enum CpuVendorArchitectureEnum {
-    AwsArm64 = "AWS_ARM64"
-,    Current = "CURRENT"
+    AwsArm64 = "AWS_ARM64",
+    Current = "CURRENT"
 }

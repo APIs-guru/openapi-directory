@@ -1,7 +1,8 @@
 
 
+
 export enum RateTypeEnum {
-    Fixedamount = "FIXEDAMOUNT"
-,    Multiple = "MULTIPLE"
-,    Rateperunit = "RATEPERUNIT"
+    Fixedamount = "FIXEDAMOUNT",
+    Multiple = "MULTIPLE",
+    Rateperunit = "RATEPERUNIT"
 }

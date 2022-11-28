@@ -1,19 +1,20 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ResourceAvailabilityViewModel extends SpeakeasyBase {
-  @Metadata({ data: "json, name=businessId" })
+  @SpeakeasyMetadata({ data: "json, name=businessId" })
   businessId?: number;
 
-  @Metadata({ data: "json, name=ignoreBusinessHours" })
+  @SpeakeasyMetadata({ data: "json, name=ignoreBusinessHours" })
   ignoreBusinessHours?: boolean;
 
-  @Metadata({ data: "json, name=resourceId" })
+  @SpeakeasyMetadata({ data: "json, name=resourceId" })
   resourceId?: number;
 
-  @Metadata({ data: "json, name=resourceName" })
+  @SpeakeasyMetadata({ data: "json, name=resourceName" })
   resourceName?: string;
 
-  @Metadata({ data: "json, name=resourceTzo" })
+  @SpeakeasyMetadata({ data: "json, name=resourceTzo" })
   resourceTzo?: number;
 }

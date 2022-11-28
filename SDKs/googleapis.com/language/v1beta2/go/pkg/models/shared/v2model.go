@@ -8,6 +8,8 @@ const (
 	V2ModelContentCategoriesVersionEnumV2                                  V2ModelContentCategoriesVersionEnum = "V2"
 )
 
+// V2Model
+// Options for the V2 model.
 type V2Model struct {
 	ContentCategoriesVersion *V2ModelContentCategoriesVersionEnum `json:"contentCategoriesVersion,omitempty"`
 }

@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostUpdateDomainEndpointOptionsActionEnum(str, Enum):
     UPDATE_DOMAIN_ENDPOINT_OPTIONS = "UpdateDomainEndpointOptions"
@@ -10,8 +14,8 @@ class PostUpdateDomainEndpointOptionsVersionEnum(str, Enum):
 
 @dataclass
 class PostUpdateDomainEndpointOptionsQueryParams:
-    action: PostUpdateDomainEndpointOptionsActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostUpdateDomainEndpointOptionsVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostUpdateDomainEndpointOptionsActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostUpdateDomainEndpointOptionsVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostUpdateDomainEndpointOptionsHeaders:
 
 @dataclass
 class PostUpdateDomainEndpointOptionsRequest:
-    query_params: PostUpdateDomainEndpointOptionsQueryParams = field(default=None)
-    headers: PostUpdateDomainEndpointOptionsHeaders = field(default=None)
+    headers: PostUpdateDomainEndpointOptionsHeaders = field()
+    query_params: PostUpdateDomainEndpointOptionsQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostUpdateDomainEndpointOptionsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

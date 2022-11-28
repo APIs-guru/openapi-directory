@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudChannelV1ImportCustomerRequest
@@ -6,21 +7,21 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Request message for CloudChannelService.ImportCustomer
 **/
 export class GoogleCloudChannelV1ImportCustomerRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=authToken" })
+  @SpeakeasyMetadata({ data: "json, name=authToken" })
   authToken?: string;
 
-  @Metadata({ data: "json, name=channelPartnerId" })
+  @SpeakeasyMetadata({ data: "json, name=channelPartnerId" })
   channelPartnerId?: string;
 
-  @Metadata({ data: "json, name=cloudIdentityId" })
+  @SpeakeasyMetadata({ data: "json, name=cloudIdentityId" })
   cloudIdentityId?: string;
 
-  @Metadata({ data: "json, name=customer" })
+  @SpeakeasyMetadata({ data: "json, name=customer" })
   customer?: string;
 
-  @Metadata({ data: "json, name=domain" })
+  @SpeakeasyMetadata({ data: "json, name=domain" })
   domain?: string;
 
-  @Metadata({ data: "json, name=overwriteIfExists" })
+  @SpeakeasyMetadata({ data: "json, name=overwriteIfExists" })
   overwriteIfExists?: boolean;
 }

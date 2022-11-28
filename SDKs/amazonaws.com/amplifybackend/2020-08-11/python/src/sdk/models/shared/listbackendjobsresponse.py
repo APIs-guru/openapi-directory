@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import backendjobrespobj
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ListBackendJobsResponse:
-    jobs: Optional[List[backendjobrespobj.BackendJobRespObj]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Jobs' }})
-    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'NextToken' }})
+    jobs: Optional[List[BackendJobRespObj]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Jobs') }})
+    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('NextToken') }})
     

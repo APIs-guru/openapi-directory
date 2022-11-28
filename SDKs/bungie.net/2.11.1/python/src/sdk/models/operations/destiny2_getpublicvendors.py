@@ -9,12 +9,12 @@ class Destiny2GetPublicVendorsQueryParams:
 
 @dataclass
 class Destiny2GetPublicVendorsRequest:
-    query_params: Destiny2GetPublicVendorsQueryParams = field(default=None)
+    query_params: Destiny2GetPublicVendorsQueryParams = field()
     
 
 @dataclass
 class Destiny2GetPublicVendorsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

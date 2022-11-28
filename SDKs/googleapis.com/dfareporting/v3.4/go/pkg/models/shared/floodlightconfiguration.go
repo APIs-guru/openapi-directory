@@ -15,6 +15,8 @@ const (
 	FloodlightConfigurationNaturalSearchConversionAttributionOptionEnumIncludeNaturalSearchTieredConversionAttribution FloodlightConfigurationNaturalSearchConversionAttributionOptionEnum = "INCLUDE_NATURAL_SEARCH_TIERED_CONVERSION_ATTRIBUTION"
 )
 
+// FloodlightConfiguration
+// Contains properties of a Floodlight configuration.
 type FloodlightConfiguration struct {
 	AccountID                                *string                                                              `json:"accountId,omitempty"`
 	AdvertiserID                             *string                                                              `json:"advertiserId,omitempty"`

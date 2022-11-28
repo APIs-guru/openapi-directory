@@ -1,62 +1,51 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class AddLinodeIpPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=linodeId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=linodeId" })
   linodeId: number;
 }
 
 
-export class AddLinodeIpSecurityOption1 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=bearer" })
-  personalAccessToken: shared.SchemePersonalAccessToken;
-}
-
-
-export class AddLinodeIpSecurityOption2 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
-  oauth: shared.SchemeOauth;
-}
-
-
 export class AddLinodeIpSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, option=true" })
-  option1?: AddLinodeIpSecurityOption1;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" })
+  personalAccessToken?: shared.SchemePersonalAccessToken;
 
-  @Metadata({ data: "security, option=true" })
-  option2?: AddLinodeIpSecurityOption2;
-}
-
-
-export class AddLinodeIpRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: AddLinodeIpPathParams;
-
-  @Metadata({ data: "request, media_type=application/json" })
-  request: any;
-
-  @Metadata()
-  security: AddLinodeIpSecurity;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
+  oauth?: shared.SchemeOauth;
 }
 
 
 export class AddLinodeIpDefaultApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=errors", elemType: shared.ErrorObject })
+  @SpeakeasyMetadata({ data: "json, name=errors", elemType: shared.ErrorObject })
   errors?: shared.ErrorObject[];
 }
 
 
+export class AddLinodeIpRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: AddLinodeIpPathParams;
+
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request: any;
+
+  @SpeakeasyMetadata()
+  security: AddLinodeIpSecurity;
+}
+
+
 export class AddLinodeIpResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   ipAddress?: shared.IpAddress;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   addLinodeIpDefaultApplicationJsonObject?: AddLinodeIpDefaultApplicationJson;
 }

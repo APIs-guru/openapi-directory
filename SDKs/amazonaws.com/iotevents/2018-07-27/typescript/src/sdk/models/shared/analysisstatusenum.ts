@@ -1,7 +1,8 @@
 
 
+
 export enum AnalysisStatusEnum {
-    Running = "RUNNING"
-,    Complete = "COMPLETE"
-,    Failed = "FAILED"
+    Running = "RUNNING",
+    Complete = "COMPLETE",
+    Failed = "FAILED"
 }

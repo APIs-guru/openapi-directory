@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ApiCoreDtoClickStreamHit } from "./apicoredtoclickstreamhit";
 
 
+
 export class ApiCoreDtoClickStreamHitListPage extends SpeakeasyBase {
-  @Metadata({ data: "json, name=hits", elemType: shared.ApiCoreDtoClickStreamHit })
+  @SpeakeasyMetadata({ data: "json, name=hits", elemType: ApiCoreDtoClickStreamHit })
   hits?: ApiCoreDtoClickStreamHit[];
 
-  @Metadata({ data: "json, name=lastKey" })
+  @SpeakeasyMetadata({ data: "json, name=lastKey" })
   lastKey?: string;
 }

@@ -1,54 +1,55 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Cors } from "./cors";
 import { ProtocolTypeEnum } from "./protocoltypeenum";
 
 
+
 export class UpdateApiResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ApiEndpoint" })
+  @SpeakeasyMetadata({ data: "json, name=ApiEndpoint" })
   apiEndpoint?: string;
 
-  @Metadata({ data: "json, name=ApiGatewayManaged" })
+  @SpeakeasyMetadata({ data: "json, name=ApiGatewayManaged" })
   apiGatewayManaged?: boolean;
 
-  @Metadata({ data: "json, name=ApiId" })
+  @SpeakeasyMetadata({ data: "json, name=ApiId" })
   apiId?: string;
 
-  @Metadata({ data: "json, name=ApiKeySelectionExpression" })
+  @SpeakeasyMetadata({ data: "json, name=ApiKeySelectionExpression" })
   apiKeySelectionExpression?: string;
 
-  @Metadata({ data: "json, name=CorsConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=CorsConfiguration" })
   corsConfiguration?: Cors;
 
-  @Metadata({ data: "json, name=CreatedDate" })
+  @SpeakeasyMetadata({ data: "json, name=CreatedDate" })
   createdDate?: Date;
 
-  @Metadata({ data: "json, name=Description" })
+  @SpeakeasyMetadata({ data: "json, name=Description" })
   description?: string;
 
-  @Metadata({ data: "json, name=DisableExecuteApiEndpoint" })
+  @SpeakeasyMetadata({ data: "json, name=DisableExecuteApiEndpoint" })
   disableExecuteApiEndpoint?: boolean;
 
-  @Metadata({ data: "json, name=DisableSchemaValidation" })
+  @SpeakeasyMetadata({ data: "json, name=DisableSchemaValidation" })
   disableSchemaValidation?: boolean;
 
-  @Metadata({ data: "json, name=ImportInfo" })
+  @SpeakeasyMetadata({ data: "json, name=ImportInfo" })
   importInfo?: string[];
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name?: string;
 
-  @Metadata({ data: "json, name=ProtocolType" })
+  @SpeakeasyMetadata({ data: "json, name=ProtocolType" })
   protocolType?: ProtocolTypeEnum;
 
-  @Metadata({ data: "json, name=RouteSelectionExpression" })
+  @SpeakeasyMetadata({ data: "json, name=RouteSelectionExpression" })
   routeSelectionExpression?: string;
 
-  @Metadata({ data: "json, name=Tags" })
+  @SpeakeasyMetadata({ data: "json, name=Tags" })
   tags?: Map<string, string>;
 
-  @Metadata({ data: "json, name=Version" })
+  @SpeakeasyMetadata({ data: "json, name=Version" })
   version?: string;
 
-  @Metadata({ data: "json, name=Warnings" })
+  @SpeakeasyMetadata({ data: "json, name=Warnings" })
   warnings?: string[];
 }

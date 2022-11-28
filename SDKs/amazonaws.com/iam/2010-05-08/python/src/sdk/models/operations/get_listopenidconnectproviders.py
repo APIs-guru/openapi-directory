@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetListOpenIDConnectProvidersActionEnum(str, Enum):
     LIST_OPEN_ID_CONNECT_PROVIDERS = "ListOpenIDConnectProviders"
@@ -10,8 +14,8 @@ class GetListOpenIDConnectProvidersVersionEnum(str, Enum):
 
 @dataclass
 class GetListOpenIDConnectProvidersQueryParams:
-    action: GetListOpenIDConnectProvidersActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: GetListOpenIDConnectProvidersVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: GetListOpenIDConnectProvidersActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: GetListOpenIDConnectProvidersVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,13 +31,13 @@ class GetListOpenIDConnectProvidersHeaders:
 
 @dataclass
 class GetListOpenIDConnectProvidersRequest:
-    query_params: GetListOpenIDConnectProvidersQueryParams = field(default=None)
-    headers: GetListOpenIDConnectProvidersHeaders = field(default=None)
+    headers: GetListOpenIDConnectProvidersHeaders = field()
+    query_params: GetListOpenIDConnectProvidersQueryParams = field()
     
 
 @dataclass
 class GetListOpenIDConnectProvidersResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

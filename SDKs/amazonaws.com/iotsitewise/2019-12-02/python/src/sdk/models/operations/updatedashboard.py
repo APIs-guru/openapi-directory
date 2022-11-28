@@ -1,11 +1,15 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass
 class UpdateDashboardPathParams:
-    dashboard_id: str = field(default=None, metadata={'path_param': { 'field_name': 'dashboardId', 'style': 'simple', 'explode': False }})
+    dashboard_id: str = field(metadata={'path_param': { 'field_name': 'dashboardId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -22,26 +26,26 @@ class UpdateDashboardHeaders:
 @dataclass_json
 @dataclass
 class UpdateDashboardRequestBody:
-    client_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'clientToken' }})
-    dashboard_definition: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'dashboardDefinition' }})
-    dashboard_description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'dashboardDescription' }})
-    dashboard_name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'dashboardName' }})
+    dashboard_definition: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('dashboardDefinition') }})
+    dashboard_name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('dashboardName') }})
+    client_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('clientToken') }})
+    dashboard_description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('dashboardDescription') }})
     
 
 @dataclass
 class UpdateDashboardRequest:
-    path_params: UpdateDashboardPathParams = field(default=None)
-    headers: UpdateDashboardHeaders = field(default=None)
-    request: UpdateDashboardRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: UpdateDashboardHeaders = field()
+    path_params: UpdateDashboardPathParams = field()
+    request: UpdateDashboardRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class UpdateDashboardResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     internal_failure_exception: Optional[Any] = field(default=None)
     invalid_request_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     update_dashboard_response: Optional[dict[str, Any]] = field(default=None)
     

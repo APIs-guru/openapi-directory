@@ -1,13 +1,13 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import detecttextfilters
-from . import image
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class DetectTextRequest:
-    filters: Optional[detecttextfilters.DetectTextFilters] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Filters' }})
-    image: image.Image = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Image' }})
+    image: Image = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Image') }})
+    filters: Optional[DetectTextFilters] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Filters') }})
     

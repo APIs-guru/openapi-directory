@@ -50,6 +50,8 @@ const (
 	ResultMetadataDataTypeEnumDataTypeTimestampWithTimezone ResultMetadataDataTypeEnum = "DATA_TYPE_TIMESTAMP_WITH_TIMEZONE"
 )
 
+// ResultMetadata
+// Metadata of result field.
 type ResultMetadata struct {
 	DataType    *ResultMetadataDataTypeEnum `json:"dataType,omitempty"`
 	Description *string                     `json:"description,omitempty"`

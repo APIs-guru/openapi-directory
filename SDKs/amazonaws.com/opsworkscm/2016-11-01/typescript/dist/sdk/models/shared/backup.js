@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BackupTypeEnum } from "./backuptypeenum";
 import { BackupStatusEnum } from "./backupstatusenum";
 // Backup
@@ -35,99 +35,99 @@ var Backup = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=BackupArn" }),
+        SpeakeasyMetadata({ data: "json, name=BackupArn" }),
         __metadata("design:type", String)
     ], Backup.prototype, "backupArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=BackupId" }),
+        SpeakeasyMetadata({ data: "json, name=BackupId" }),
         __metadata("design:type", String)
     ], Backup.prototype, "backupId", void 0);
     __decorate([
-        Metadata({ data: "json, name=BackupType" }),
+        SpeakeasyMetadata({ data: "json, name=BackupType" }),
         __metadata("design:type", String)
     ], Backup.prototype, "backupType", void 0);
     __decorate([
-        Metadata({ data: "json, name=CreatedAt" }),
+        SpeakeasyMetadata({ data: "json, name=CreatedAt" }),
         __metadata("design:type", Date)
     ], Backup.prototype, "createdAt", void 0);
     __decorate([
-        Metadata({ data: "json, name=Description" }),
+        SpeakeasyMetadata({ data: "json, name=Description" }),
         __metadata("design:type", String)
     ], Backup.prototype, "description", void 0);
     __decorate([
-        Metadata({ data: "json, name=Engine" }),
+        SpeakeasyMetadata({ data: "json, name=Engine" }),
         __metadata("design:type", String)
     ], Backup.prototype, "engine", void 0);
     __decorate([
-        Metadata({ data: "json, name=EngineModel" }),
+        SpeakeasyMetadata({ data: "json, name=EngineModel" }),
         __metadata("design:type", String)
     ], Backup.prototype, "engineModel", void 0);
     __decorate([
-        Metadata({ data: "json, name=EngineVersion" }),
+        SpeakeasyMetadata({ data: "json, name=EngineVersion" }),
         __metadata("design:type", String)
     ], Backup.prototype, "engineVersion", void 0);
     __decorate([
-        Metadata({ data: "json, name=InstanceProfileArn" }),
+        SpeakeasyMetadata({ data: "json, name=InstanceProfileArn" }),
         __metadata("design:type", String)
     ], Backup.prototype, "instanceProfileArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=InstanceType" }),
+        SpeakeasyMetadata({ data: "json, name=InstanceType" }),
         __metadata("design:type", String)
     ], Backup.prototype, "instanceType", void 0);
     __decorate([
-        Metadata({ data: "json, name=KeyPair" }),
+        SpeakeasyMetadata({ data: "json, name=KeyPair" }),
         __metadata("design:type", String)
     ], Backup.prototype, "keyPair", void 0);
     __decorate([
-        Metadata({ data: "json, name=PreferredBackupWindow" }),
+        SpeakeasyMetadata({ data: "json, name=PreferredBackupWindow" }),
         __metadata("design:type", String)
     ], Backup.prototype, "preferredBackupWindow", void 0);
     __decorate([
-        Metadata({ data: "json, name=PreferredMaintenanceWindow" }),
+        SpeakeasyMetadata({ data: "json, name=PreferredMaintenanceWindow" }),
         __metadata("design:type", String)
     ], Backup.prototype, "preferredMaintenanceWindow", void 0);
     __decorate([
-        Metadata({ data: "json, name=S3DataSize" }),
+        SpeakeasyMetadata({ data: "json, name=S3DataSize" }),
         __metadata("design:type", Number)
     ], Backup.prototype, "s3DataSize", void 0);
     __decorate([
-        Metadata({ data: "json, name=S3DataUrl" }),
+        SpeakeasyMetadata({ data: "json, name=S3DataUrl" }),
         __metadata("design:type", String)
     ], Backup.prototype, "s3DataUrl", void 0);
     __decorate([
-        Metadata({ data: "json, name=S3LogUrl" }),
+        SpeakeasyMetadata({ data: "json, name=S3LogUrl" }),
         __metadata("design:type", String)
     ], Backup.prototype, "s3LogUrl", void 0);
     __decorate([
-        Metadata({ data: "json, name=SecurityGroupIds" }),
+        SpeakeasyMetadata({ data: "json, name=SecurityGroupIds" }),
         __metadata("design:type", Array)
     ], Backup.prototype, "securityGroupIds", void 0);
     __decorate([
-        Metadata({ data: "json, name=ServerName" }),
+        SpeakeasyMetadata({ data: "json, name=ServerName" }),
         __metadata("design:type", String)
     ], Backup.prototype, "serverName", void 0);
     __decorate([
-        Metadata({ data: "json, name=ServiceRoleArn" }),
+        SpeakeasyMetadata({ data: "json, name=ServiceRoleArn" }),
         __metadata("design:type", String)
     ], Backup.prototype, "serviceRoleArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=Status" }),
+        SpeakeasyMetadata({ data: "json, name=Status" }),
         __metadata("design:type", String)
     ], Backup.prototype, "status", void 0);
     __decorate([
-        Metadata({ data: "json, name=StatusDescription" }),
+        SpeakeasyMetadata({ data: "json, name=StatusDescription" }),
         __metadata("design:type", String)
     ], Backup.prototype, "statusDescription", void 0);
     __decorate([
-        Metadata({ data: "json, name=SubnetIds" }),
+        SpeakeasyMetadata({ data: "json, name=SubnetIds" }),
         __metadata("design:type", Array)
     ], Backup.prototype, "subnetIds", void 0);
     __decorate([
-        Metadata({ data: "json, name=ToolsVersion" }),
+        SpeakeasyMetadata({ data: "json, name=ToolsVersion" }),
         __metadata("design:type", String)
     ], Backup.prototype, "toolsVersion", void 0);
     __decorate([
-        Metadata({ data: "json, name=UserArn" }),
+        SpeakeasyMetadata({ data: "json, name=UserArn" }),
         __metadata("design:type", String)
     ], Backup.prototype, "userArn", void 0);
     return Backup;

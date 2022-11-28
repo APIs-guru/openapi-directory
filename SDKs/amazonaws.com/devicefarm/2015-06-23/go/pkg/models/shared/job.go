@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// Job
+// Represents a device.
 type Job struct {
 	Arn           *string              `json:"arn,omitempty"`
 	Counters      *Counters            `json:"counters,omitempty"`

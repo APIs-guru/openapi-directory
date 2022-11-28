@@ -1,32 +1,33 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class RetrieveNearEarthObjectFeedQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=detailed" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=detailed" })
   detailed?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=end_date" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=end_date" })
   endDate?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=start_date" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=start_date" })
   startDate?: string;
 }
 
 
 export class RetrieveNearEarthObjectFeedRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: RetrieveNearEarthObjectFeedQueryParams;
 }
 
 
 export class RetrieveNearEarthObjectFeedResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   nearEarthObjectList?: shared.NearEarthObjectList;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

@@ -9,6 +9,8 @@ const (
 	GoogleAppsCloudidentityDevicesV1AndroidAttributesOwnershipPrivilegeEnumDeviceOwner                   GoogleAppsCloudidentityDevicesV1AndroidAttributesOwnershipPrivilegeEnum = "DEVICE_OWNER"
 )
 
+// GoogleAppsCloudidentityDevicesV1AndroidAttributes
+// Resource representing the Android specific attributes of a Device.
 type GoogleAppsCloudidentityDevicesV1AndroidAttributes struct {
 	EnabledUnknownSources *bool                                                                    `json:"enabledUnknownSources,omitempty"`
 	OwnerProfileAccount   *bool                                                                    `json:"ownerProfileAccount,omitempty"`

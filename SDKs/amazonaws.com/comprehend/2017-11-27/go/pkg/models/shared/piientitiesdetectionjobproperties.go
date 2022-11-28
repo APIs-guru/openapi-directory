@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// PiiEntitiesDetectionJobProperties
+// Provides information about a PII entities detection job.
 type PiiEntitiesDetectionJobProperties struct {
 	DataAccessRoleArn *string                       `json:"DataAccessRoleArn,omitempty"`
 	EndTime           *time.Time                    `json:"EndTime,omitempty"`

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GetPolicyVersionResponse
@@ -6,27 +7,27 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The output from the GetPolicyVersion operation.
 **/
 export class GetPolicyVersionResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=creationDate" })
+  @SpeakeasyMetadata({ data: "json, name=creationDate" })
   creationDate?: Date;
 
-  @Metadata({ data: "json, name=generationId" })
+  @SpeakeasyMetadata({ data: "json, name=generationId" })
   generationId?: string;
 
-  @Metadata({ data: "json, name=isDefaultVersion" })
+  @SpeakeasyMetadata({ data: "json, name=isDefaultVersion" })
   isDefaultVersion?: boolean;
 
-  @Metadata({ data: "json, name=lastModifiedDate" })
+  @SpeakeasyMetadata({ data: "json, name=lastModifiedDate" })
   lastModifiedDate?: Date;
 
-  @Metadata({ data: "json, name=policyArn" })
+  @SpeakeasyMetadata({ data: "json, name=policyArn" })
   policyArn?: string;
 
-  @Metadata({ data: "json, name=policyDocument" })
+  @SpeakeasyMetadata({ data: "json, name=policyDocument" })
   policyDocument?: string;
 
-  @Metadata({ data: "json, name=policyName" })
+  @SpeakeasyMetadata({ data: "json, name=policyName" })
   policyName?: string;
 
-  @Metadata({ data: "json, name=policyVersionId" })
+  @SpeakeasyMetadata({ data: "json, name=policyVersionId" })
   policyVersionId?: string;
 }

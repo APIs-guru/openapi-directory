@@ -10,13 +10,10 @@ var __assign = (this && this.__assign) || function () {
     return __assign.apply(this, arguments);
 };
 import axios from "axios";
+import FormData from "form-data";
 import * as operations from "./models/operations";
-import { SerializeRequestBody } from "../internal/utils/requestbody";
-import FormData from 'form-data';
-import { GetHeadersFromResponse } from "../internal/utils/headers";
-import { CreateSecurityClient } from "../internal/utils/security";
-import * as utils from "../internal/utils/utils";
-var Servers = [
+import * as utils from "../internal/utils";
+export var ServerList = [
     "https://polls.apiblueprint.org",
 ];
 export function WithServerURL(serverURL, params) {
@@ -24,12 +21,12 @@ export function WithServerURL(serverURL, params) {
         if (params != null) {
             serverURL = utils.ReplaceParameters(serverURL, params);
         }
-        sdk.serverURL = serverURL;
+        sdk._serverURL = serverURL;
     };
 }
 export function WithClient(client) {
     return function (sdk) {
-        sdk.defaultClient = client;
+        sdk._defaultClient = client;
     };
 }
 var SDK = /** @class */ (function () {
@@ -39,45 +36,44 @@ var SDK = /** @class */ (function () {
             opts[_i] = arguments[_i];
         }
         var _this = this;
+        this._language = "typescript";
+        this._sdkVersion = "0.0.1";
+        this._genVersion = "internal";
         opts.forEach(function (o) { return o(_this); });
-        if (this.serverURL == "") {
-            this.serverURL = Servers[0];
+        if (this._serverURL == "") {
+            this._serverURL = ServerList[0];
         }
-        if (!this.defaultClient) {
-            this.defaultClient = axios.create({ baseURL: this.serverURL });
+        if (!this._defaultClient) {
+            this._defaultClient = axios.create({ baseURL: this._serverURL });
         }
-        if (!this.securityClient) {
-            if (this.security) {
-                this.securityClient = CreateSecurityClient(this.defaultClient, this.security);
-            }
-            else {
-                this.securityClient = this.defaultClient;
-            }
+        if (!this._securityClient) {
+            this._securityClient = this._defaultClient;
         }
     }
-    // CreateANewQuestion - Create a New Question
     /**
+     * createANewQuestion - Create a New Question
+     *
      * You may create your own question using this action. It takes a JSON
      * object containing a question and a collection of answers in the
      * form of choices.
     **/
-    SDK.prototype.CreateANewQuestion = function (req, config) {
+    SDK.prototype.createANewQuestion = function (req, config) {
         var _a;
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.CreateANewQuestionRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = baseURL.replace(/\/$/, "") + "/questions";
         var _b = [{}, {}], reqBodyHeaders = _b[0], reqBody = _b[1];
         try {
-            _a = SerializeRequestBody(req), reqBodyHeaders = _a[0], reqBody = _a[1];
+            _a = utils.SerializeRequestBody(req), reqBodyHeaders = _a[0], reqBody = _a[1];
         }
         catch (e) {
             if (e instanceof Error) {
                 throw new Error("Error serializing request body, cause: ".concat(e.message));
             }
         }
-        var client = this.defaultClient;
+        var client = this._defaultClient;
         var headers = __assign(__assign({}, reqBodyHeaders), config === null || config === void 0 ? void 0 : config.headers);
         var body;
         if (reqBody instanceof FormData)
@@ -85,36 +81,36 @@ var SDK = /** @class */ (function () {
         else
             body = __assign({}, reqBody);
         return client
-            .post(url, body, __assign({ headers: headers }, config))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "post", headers: headers, data: body }, config)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
-            var res = { statusCode: httpRes.status, contentType: contentType, headers: GetHeadersFromResponse(httpRes.headers) };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 201:
+            var res = { statusCode: httpRes.status, contentType: contentType, headers: utils.GetHeadersFromResponse(httpRes.headers) };
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 201:
                     break;
             }
             return res;
         })
             .catch(function (error) { throw error; });
     };
-    // ListAllQuestions - List All Questions
-    SDK.prototype.ListAllQuestions = function (config) {
-        var baseURL = this.serverURL;
+    /**
+     * listAllQuestions - List All Questions
+    **/
+    SDK.prototype.listAllQuestions = function (config) {
+        var baseURL = this._serverURL;
         var url = baseURL.replace(/\/$/, "") + "/questions";
-        var client = this.defaultClient;
+        var client = this._defaultClient;
         return client
-            .get(url, __assign({}, config))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get" }, config)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
                     break;
             }
             return res;

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // SslCertsInsertRequest
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * SslCerts insert request.
 **/
 export class SslCertsInsertRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=commonName" })
+  @SpeakeasyMetadata({ data: "json, name=commonName" })
   commonName?: string;
 }

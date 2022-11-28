@@ -1,5 +1,8 @@
 package shared
 
+// DeploymentTarget
+//
+//	Information about the deployment target.
 type DeploymentTarget struct {
 	CloudFormationTarget *CloudFormationTarget     `json:"cloudFormationTarget,omitempty"`
 	DeploymentTargetType *DeploymentTargetTypeEnum `json:"deploymentTargetType,omitempty"`

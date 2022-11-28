@@ -31,7 +31,7 @@ type SecretmanagerProjectsSecretsCreateSecurity struct {
 type SecretmanagerProjectsSecretsCreateRequest struct {
 	PathParams  SecretmanagerProjectsSecretsCreatePathParams
 	QueryParams SecretmanagerProjectsSecretsCreateQueryParams
-	Request     *shared.Secret `request:"mediaType=application/json"`
+	Request     *shared.SecretInput `request:"mediaType=application/json"`
 	Security    SecretmanagerProjectsSecretsCreateSecurity
 }
 

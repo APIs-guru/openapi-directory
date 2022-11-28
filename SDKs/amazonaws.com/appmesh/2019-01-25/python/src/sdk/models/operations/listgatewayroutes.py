@@ -1,12 +1,15 @@
 from dataclasses import dataclass, field
-from typing import Any,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class ListGatewayRoutesPathParams:
-    mesh_name: str = field(default=None, metadata={'path_param': { 'field_name': 'meshName', 'style': 'simple', 'explode': False }})
-    virtual_gateway_name: str = field(default=None, metadata={'path_param': { 'field_name': 'virtualGatewayName', 'style': 'simple', 'explode': False }})
+    mesh_name: str = field(metadata={'path_param': { 'field_name': 'meshName', 'style': 'simple', 'explode': False }})
+    virtual_gateway_name: str = field(metadata={'path_param': { 'field_name': 'virtualGatewayName', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -29,20 +32,20 @@ class ListGatewayRoutesHeaders:
 
 @dataclass
 class ListGatewayRoutesRequest:
-    path_params: ListGatewayRoutesPathParams = field(default=None)
-    query_params: ListGatewayRoutesQueryParams = field(default=None)
-    headers: ListGatewayRoutesHeaders = field(default=None)
+    headers: ListGatewayRoutesHeaders = field()
+    path_params: ListGatewayRoutesPathParams = field()
+    query_params: ListGatewayRoutesQueryParams = field()
     
 
 @dataclass
 class ListGatewayRoutesResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     forbidden_exception: Optional[Any] = field(default=None)
     internal_server_error_exception: Optional[Any] = field(default=None)
     list_gateway_routes_output: Optional[shared.ListGatewayRoutesOutput] = field(default=None)
     not_found_exception: Optional[Any] = field(default=None)
     service_unavailable_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     too_many_requests_exception: Optional[Any] = field(default=None)
     

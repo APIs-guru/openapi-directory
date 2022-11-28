@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ProvisioningParameter } from "./provisioningparameter";
+
 
 
 // ServiceCatalogProvisioningDetails
@@ -8,15 +8,15 @@ import { ProvisioningParameter } from "./provisioningparameter";
  * Details that you specify to provision a service catalog product. For information about service catalog, see <a href="https://docs.aws.amazon.com/servicecatalog/latest/adminguide/introduction.html">What is Amazon Web Services Service Catalog</a>.
 **/
 export class ServiceCatalogProvisioningDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=PathId" })
+  @SpeakeasyMetadata({ data: "json, name=PathId" })
   pathId?: string;
 
-  @Metadata({ data: "json, name=ProductId" })
+  @SpeakeasyMetadata({ data: "json, name=ProductId" })
   productId: string;
 
-  @Metadata({ data: "json, name=ProvisioningArtifactId" })
+  @SpeakeasyMetadata({ data: "json, name=ProvisioningArtifactId" })
   provisioningArtifactId: string;
 
-  @Metadata({ data: "json, name=ProvisioningParameters", elemType: shared.ProvisioningParameter })
+  @SpeakeasyMetadata({ data: "json, name=ProvisioningParameters", elemType: ProvisioningParameter })
   provisioningParameters?: ProvisioningParameter[];
 }

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum AddPaymentMethodRequestTypeEnum {
     Card = "Card"
@@ -6,12 +7,12 @@ export enum AddPaymentMethodRequestTypeEnum {
 
 
 export class AddPaymentMethodRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=makeDefault" })
+  @SpeakeasyMetadata({ data: "json, name=makeDefault" })
   makeDefault?: boolean;
 
-  @Metadata({ data: "json, name=token" })
+  @SpeakeasyMetadata({ data: "json, name=token" })
   token: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type: AddPaymentMethodRequestTypeEnum;
 }

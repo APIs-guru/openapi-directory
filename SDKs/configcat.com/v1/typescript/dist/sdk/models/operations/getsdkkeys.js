@@ -22,53 +22,53 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
-var GetSdkKeysPathParams = /** @class */ (function (_super) {
-    __extends(GetSdkKeysPathParams, _super);
-    function GetSdkKeysPathParams() {
+var GetSDKKeysPathParams = /** @class */ (function (_super) {
+    __extends(GetSDKKeysPathParams, _super);
+    function GetSDKKeysPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=configId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=configId" }),
         __metadata("design:type", String)
-    ], GetSdkKeysPathParams.prototype, "configId", void 0);
+    ], GetSDKKeysPathParams.prototype, "configId", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=environmentId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=environmentId" }),
         __metadata("design:type", String)
-    ], GetSdkKeysPathParams.prototype, "environmentId", void 0);
-    return GetSdkKeysPathParams;
+    ], GetSDKKeysPathParams.prototype, "environmentId", void 0);
+    return GetSDKKeysPathParams;
 }(SpeakeasyBase));
-export { GetSdkKeysPathParams };
-var GetSdkKeysRequest = /** @class */ (function (_super) {
-    __extends(GetSdkKeysRequest, _super);
-    function GetSdkKeysRequest() {
+export { GetSDKKeysPathParams };
+var GetSDKKeysRequest = /** @class */ (function (_super) {
+    __extends(GetSDKKeysRequest, _super);
+    function GetSDKKeysRequest() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
-        __metadata("design:type", GetSdkKeysPathParams)
-    ], GetSdkKeysRequest.prototype, "pathParams", void 0);
-    return GetSdkKeysRequest;
+        SpeakeasyMetadata(),
+        __metadata("design:type", GetSDKKeysPathParams)
+    ], GetSDKKeysRequest.prototype, "pathParams", void 0);
+    return GetSDKKeysRequest;
 }(SpeakeasyBase));
-export { GetSdkKeysRequest };
-var GetSdkKeysResponse = /** @class */ (function (_super) {
-    __extends(GetSdkKeysResponse, _super);
-    function GetSdkKeysResponse() {
+export { GetSDKKeysRequest };
+var GetSDKKeysResponse = /** @class */ (function (_super) {
+    __extends(GetSDKKeysResponse, _super);
+    function GetSDKKeysResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
-    ], GetSdkKeysResponse.prototype, "contentType", void 0);
+    ], GetSDKKeysResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
-        __metadata("design:type", shared.SdkKeysModel)
-    ], GetSdkKeysResponse.prototype, "sdkKeysModel", void 0);
+        SpeakeasyMetadata(),
+        __metadata("design:type", shared.SDKKeysModel)
+    ], GetSDKKeysResponse.prototype, "sdkKeysModel", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
-    ], GetSdkKeysResponse.prototype, "statusCode", void 0);
-    return GetSdkKeysResponse;
+    ], GetSDKKeysResponse.prototype, "statusCode", void 0);
+    return GetSDKKeysResponse;
 }(SpeakeasyBase));
-export { GetSdkKeysResponse };
+export { GetSDKKeysResponse };

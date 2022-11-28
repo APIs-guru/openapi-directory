@@ -22,14 +22,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var GetDeveloperAccountsDeveloperAccountIdPathParams = /** @class */ (function (_super) {
     __extends(GetDeveloperAccountsDeveloperAccountIdPathParams, _super);
     function GetDeveloperAccountsDeveloperAccountIdPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=developerAccountId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=developerAccountId" }),
         __metadata("design:type", String)
     ], GetDeveloperAccountsDeveloperAccountIdPathParams.prototype, "developerAccountId", void 0);
     return GetDeveloperAccountsDeveloperAccountIdPathParams;
@@ -41,7 +41,7 @@ var GetDeveloperAccountsDeveloperAccountIdRequest = /** @class */ (function (_su
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetDeveloperAccountsDeveloperAccountIdPathParams)
     ], GetDeveloperAccountsDeveloperAccountIdRequest.prototype, "pathParams", void 0);
     return GetDeveloperAccountsDeveloperAccountIdRequest;
@@ -53,15 +53,15 @@ var GetDeveloperAccountsDeveloperAccountIdResponse = /** @class */ (function (_s
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], GetDeveloperAccountsDeveloperAccountIdResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetDeveloperAccountsDeveloperAccountIdResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetDeveloperAccountsDeveloperAccountIdResponse.prototype, "statusCode", void 0);
     return GetDeveloperAccountsDeveloperAccountIdResponse;

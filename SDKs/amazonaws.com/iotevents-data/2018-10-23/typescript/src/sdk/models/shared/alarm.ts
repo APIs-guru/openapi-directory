@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AlarmState } from "./alarmstate";
+
 
 
 // Alarm
@@ -7,24 +8,24 @@ import { AlarmState } from "./alarmstate";
  * Contains information about an alarm.
 **/
 export class Alarm extends SpeakeasyBase {
-  @Metadata({ data: "json, name=alarmModelName" })
+  @SpeakeasyMetadata({ data: "json, name=alarmModelName" })
   alarmModelName?: string;
 
-  @Metadata({ data: "json, name=alarmModelVersion" })
+  @SpeakeasyMetadata({ data: "json, name=alarmModelVersion" })
   alarmModelVersion?: string;
 
-  @Metadata({ data: "json, name=alarmState" })
+  @SpeakeasyMetadata({ data: "json, name=alarmState" })
   alarmState?: AlarmState;
 
-  @Metadata({ data: "json, name=creationTime" })
+  @SpeakeasyMetadata({ data: "json, name=creationTime" })
   creationTime?: Date;
 
-  @Metadata({ data: "json, name=keyValue" })
+  @SpeakeasyMetadata({ data: "json, name=keyValue" })
   keyValue?: string;
 
-  @Metadata({ data: "json, name=lastUpdateTime" })
+  @SpeakeasyMetadata({ data: "json, name=lastUpdateTime" })
   lastUpdateTime?: Date;
 
-  @Metadata({ data: "json, name=severity" })
+  @SpeakeasyMetadata({ data: "json, name=severity" })
   severity?: number;
 }

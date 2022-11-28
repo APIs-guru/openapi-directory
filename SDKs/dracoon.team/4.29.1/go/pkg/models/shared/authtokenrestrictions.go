@@ -1,5 +1,7 @@
 package shared
 
+// AuthTokenRestrictions
+// Auth token restrictions
 type AuthTokenRestrictions struct {
 	AccessTokenValidity  *int32 `json:"accessTokenValidity,omitempty"`
 	RefreshTokenValidity *int32 `json:"refreshTokenValidity,omitempty"`

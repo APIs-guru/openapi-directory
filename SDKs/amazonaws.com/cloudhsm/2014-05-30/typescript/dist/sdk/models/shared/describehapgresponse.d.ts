@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { CloudHsmObjectStateEnum } from "./cloudhsmobjectstateenum";
 /**
  * Contains the output of the <a>DescribeHapg</a> action.

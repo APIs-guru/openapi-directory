@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var PlayerSeasonAwayStatsFormatEnum;
 (function (PlayerSeasonAwayStatsFormatEnum) {
     PlayerSeasonAwayStatsFormatEnum["Xml"] = "XML";
@@ -34,11 +34,11 @@ var PlayerSeasonAwayStatsPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=format" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=format" }),
         __metadata("design:type", String)
     ], PlayerSeasonAwayStatsPathParams.prototype, "format", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=season" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=season" }),
         __metadata("design:type", String)
     ], PlayerSeasonAwayStatsPathParams.prototype, "season", void 0);
     return PlayerSeasonAwayStatsPathParams;
@@ -50,7 +50,7 @@ var PlayerSeasonAwayStatsRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PlayerSeasonAwayStatsPathParams)
     ], PlayerSeasonAwayStatsRequest.prototype, "pathParams", void 0);
     return PlayerSeasonAwayStatsRequest;
@@ -62,15 +62,15 @@ var PlayerSeasonAwayStatsResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], PlayerSeasonAwayStatsResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Array)
     ], PlayerSeasonAwayStatsResponse.prototype, "playerSeasons", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], PlayerSeasonAwayStatsResponse.prototype, "statusCode", void 0);
     return PlayerSeasonAwayStatsResponse;

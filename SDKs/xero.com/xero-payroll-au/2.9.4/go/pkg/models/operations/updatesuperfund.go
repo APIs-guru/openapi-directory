@@ -19,7 +19,7 @@ type UpdateSuperfundSecurity struct {
 type UpdateSuperfundRequest struct {
 	PathParams UpdateSuperfundPathParams
 	Headers    UpdateSuperfundHeaders
-	Request    []shared.SuperFund `request:"mediaType=application/json"`
+	Request    []shared.SuperFundInput `request:"mediaType=application/json"`
 	Security   UpdateSuperfundSecurity
 }
 

@@ -22,58 +22,58 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var Betslippart = /** @class */ (function (_super) {
     __extends(Betslippart, _super);
     function Betslippart() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=eachWayAvailable" }),
+        SpeakeasyMetadata({ data: "json, name=eachWayAvailable" }),
         __metadata("design:type", Boolean)
     ], Betslippart.prototype, "eachWayAvailable", void 0);
     __decorate([
-        Metadata({ data: "json, name=includeInMultiple" }),
+        SpeakeasyMetadata({ data: "json, name=includeInMultiple" }),
         __metadata("design:type", Boolean)
     ], Betslippart.prototype, "includeInMultiple", void 0);
     __decorate([
-        Metadata({ data: "json, name=legGroup" }),
+        SpeakeasyMetadata({ data: "json, name=legGroup" }),
         __metadata("design:type", Number)
     ], Betslippart.prototype, "legGroup", void 0);
     __decorate([
-        Metadata({ data: "json, name=priceChanged" }),
+        SpeakeasyMetadata({ data: "json, name=priceChanged" }),
         __metadata("design:type", Boolean)
     ], Betslippart.prototype, "priceChanged", void 0);
     __decorate([
-        Metadata({ data: "json, name=priceDen" }),
+        SpeakeasyMetadata({ data: "json, name=priceDen" }),
         __metadata("design:type", Number)
     ], Betslippart.prototype, "priceDen", void 0);
     __decorate([
-        Metadata({ data: "json, name=priceNum" }),
+        SpeakeasyMetadata({ data: "json, name=priceNum" }),
         __metadata("design:type", Number)
     ], Betslippart.prototype, "priceNum", void 0);
     __decorate([
-        Metadata({ data: "json, name=priceType" }),
+        SpeakeasyMetadata({ data: "json, name=priceType" }),
         __metadata("design:type", Number)
     ], Betslippart.prototype, "priceType", void 0);
     __decorate([
-        Metadata({ data: "json, name=selectionId" }),
+        SpeakeasyMetadata({ data: "json, name=selectionId" }),
         __metadata("design:type", Number)
     ], Betslippart.prototype, "selectionId", void 0);
     __decorate([
-        Metadata({ data: "json, name=singleAvailable" }),
+        SpeakeasyMetadata({ data: "json, name=singleAvailable" }),
         __metadata("design:type", Boolean)
     ], Betslippart.prototype, "singleAvailable", void 0);
     __decorate([
-        Metadata({ data: "json, name=startingPriceAvailable" }),
+        SpeakeasyMetadata({ data: "json, name=startingPriceAvailable" }),
         __metadata("design:type", Boolean)
     ], Betslippart.prototype, "startingPriceAvailable", void 0);
     __decorate([
-        Metadata({ data: "json, name=status" }),
+        SpeakeasyMetadata({ data: "json, name=status" }),
         __metadata("design:type", String)
     ], Betslippart.prototype, "status", void 0);
     __decorate([
-        Metadata({ data: "json, name=statusChanged" }),
+        SpeakeasyMetadata({ data: "json, name=statusChanged" }),
         __metadata("design:type", Boolean)
     ], Betslippart.prototype, "statusChanged", void 0);
     return Betslippart;

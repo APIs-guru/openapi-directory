@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { GuestAttributesEntry } from "./guestattributesentry";
 /**
  * Array of guest attribute namespace/key/value tuples.

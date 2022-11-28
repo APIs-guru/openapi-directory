@@ -25,7 +25,7 @@ type DrivelabelsLabelsDeltaQueryParams struct {
 type DrivelabelsLabelsDeltaRequest struct {
 	PathParams  DrivelabelsLabelsDeltaPathParams
 	QueryParams DrivelabelsLabelsDeltaQueryParams
-	Request     *shared.GoogleAppsDriveLabelsV2betaDeltaUpdateLabelRequest `request:"mediaType=application/json"`
+	Request     *shared.GoogleAppsDriveLabelsV2betaDeltaUpdateLabelRequestInput `request:"mediaType=application/json"`
 }
 
 type DrivelabelsLabelsDeltaResponse struct {

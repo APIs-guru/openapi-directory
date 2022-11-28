@@ -9,6 +9,8 @@ const (
 	OsPolicyResourceFileResourceStateEnumContentsMatch           OsPolicyResourceFileResourceStateEnum = "CONTENTS_MATCH"
 )
 
+// OsPolicyResourceFileResource
+// A resource that manages the state of a file.
 type OsPolicyResourceFileResource struct {
 	Content     *string                                `json:"content,omitempty"`
 	File        *OsPolicyResourceFile                  `json:"file,omitempty"`

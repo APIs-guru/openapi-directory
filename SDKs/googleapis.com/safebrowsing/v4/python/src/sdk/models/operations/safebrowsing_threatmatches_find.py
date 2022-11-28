@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
@@ -20,13 +21,13 @@ class SafebrowsingThreatMatchesFindQueryParams:
 
 @dataclass
 class SafebrowsingThreatMatchesFindRequest:
-    query_params: SafebrowsingThreatMatchesFindQueryParams = field(default=None)
+    query_params: SafebrowsingThreatMatchesFindQueryParams = field()
     request: Optional[shared.GoogleSecuritySafebrowsingV4FindThreatMatchesRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class SafebrowsingThreatMatchesFindResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_security_safebrowsing_v4_find_threat_matches_response: Optional[shared.GoogleSecuritySafebrowsingV4FindThreatMatchesResponse] = field(default=None)
-    status_code: int = field(default=None)
     

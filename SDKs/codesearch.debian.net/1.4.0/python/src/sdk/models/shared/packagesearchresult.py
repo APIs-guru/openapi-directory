@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
 from typing import List
 from dataclasses_json import dataclass_json
-from . import searchresult
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class PackageSearchResult:
-    package: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'package' }})
-    results: List[searchresult.SearchResult] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'results' }})
+    package: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('package') }})
+    results: List[SearchResult] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('results') }})
     

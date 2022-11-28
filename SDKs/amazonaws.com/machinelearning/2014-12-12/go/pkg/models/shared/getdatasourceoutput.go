@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// GetDataSourceOutput
+// Represents the output of a <code>GetDataSource</code> operation and describes a <code>DataSource</code>.
 type GetDataSourceOutput struct {
 	ComputeStatistics *bool             `json:"ComputeStatistics,omitempty"`
 	ComputeTime       *int64            `json:"ComputeTime,omitempty"`

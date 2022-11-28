@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { InventoryItemAttribute } from "./inventoryitemattribute";
+
 
 
 // InventoryItemSchema
@@ -8,15 +8,15 @@ import { InventoryItemAttribute } from "./inventoryitemattribute";
  * The inventory item schema definition. Users can use this to compose inventory query filters.
 **/
 export class InventoryItemSchema extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Attributes", elemType: shared.InventoryItemAttribute })
+  @SpeakeasyMetadata({ data: "json, name=Attributes", elemType: InventoryItemAttribute })
   attributes: InventoryItemAttribute[];
 
-  @Metadata({ data: "json, name=DisplayName" })
+  @SpeakeasyMetadata({ data: "json, name=DisplayName" })
   displayName?: string;
 
-  @Metadata({ data: "json, name=TypeName" })
+  @SpeakeasyMetadata({ data: "json, name=TypeName" })
   typeName: string;
 
-  @Metadata({ data: "json, name=Version" })
+  @SpeakeasyMetadata({ data: "json, name=Version" })
   version?: string;
 }

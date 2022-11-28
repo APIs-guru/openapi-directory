@@ -1,9 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { UpdateTransaction } from "./updatetransaction";
 
 
+
 export class UpdateTransactionsWrapper extends SpeakeasyBase {
-  @Metadata({ data: "json, name=transactions", elemType: shared.UpdateTransaction })
+  @SpeakeasyMetadata({ data: "json, name=transactions", elemType: UpdateTransaction })
   transactions: UpdateTransaction[];
 }

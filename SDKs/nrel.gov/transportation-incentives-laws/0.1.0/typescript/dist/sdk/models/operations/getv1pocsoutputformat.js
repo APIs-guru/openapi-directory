@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var GetV1PocsOutputFormatOutputFormatEnum;
 (function (GetV1PocsOutputFormatOutputFormatEnum) {
     GetV1PocsOutputFormatOutputFormatEnum["Json"] = "json";
@@ -34,7 +34,7 @@ var GetV1PocsOutputFormatPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=output_format" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=output_format" }),
         __metadata("design:type", String)
     ], GetV1PocsOutputFormatPathParams.prototype, "outputFormat", void 0);
     return GetV1PocsOutputFormatPathParams;
@@ -46,11 +46,11 @@ var GetV1PocsOutputFormatQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=api_key" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=api_key" }),
         __metadata("design:type", String)
     ], GetV1PocsOutputFormatQueryParams.prototype, "apiKey", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=jurisdiction" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=jurisdiction" }),
         __metadata("design:type", String)
     ], GetV1PocsOutputFormatQueryParams.prototype, "jurisdiction", void 0);
     return GetV1PocsOutputFormatQueryParams;
@@ -62,11 +62,11 @@ var GetV1PocsOutputFormatRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetV1PocsOutputFormatPathParams)
     ], GetV1PocsOutputFormatRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetV1PocsOutputFormatQueryParams)
     ], GetV1PocsOutputFormatRequest.prototype, "queryParams", void 0);
     return GetV1PocsOutputFormatRequest;
@@ -78,15 +78,15 @@ var GetV1PocsOutputFormatResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], GetV1PocsOutputFormatResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetV1PocsOutputFormatResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetV1PocsOutputFormatResponse.prototype, "statusCode", void 0);
     return GetV1PocsOutputFormatResponse;

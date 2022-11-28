@@ -19,7 +19,7 @@ type UpdateLeaveApplicationSecurity struct {
 type UpdateLeaveApplicationRequest struct {
 	PathParams UpdateLeaveApplicationPathParams
 	Headers    UpdateLeaveApplicationHeaders
-	Request    []shared.LeaveApplication `request:"mediaType=application/json"`
+	Request    []shared.LeaveApplicationInput `request:"mediaType=application/json"`
 	Security   UpdateLeaveApplicationSecurity
 }
 

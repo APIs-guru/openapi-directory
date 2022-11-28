@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DatastoreStatusEnum } from "./datastorestatusenum";
+
 
 
 // DatastoreFilter
@@ -7,15 +8,15 @@ import { DatastoreStatusEnum } from "./datastorestatusenum";
  * The filters applied to Data Store query.
 **/
 export class DatastoreFilter extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CreatedAfter" })
+  @SpeakeasyMetadata({ data: "json, name=CreatedAfter" })
   createdAfter?: Date;
 
-  @Metadata({ data: "json, name=CreatedBefore" })
+  @SpeakeasyMetadata({ data: "json, name=CreatedBefore" })
   createdBefore?: Date;
 
-  @Metadata({ data: "json, name=DatastoreName" })
+  @SpeakeasyMetadata({ data: "json, name=DatastoreName" })
   datastoreName?: string;
 
-  @Metadata({ data: "json, name=DatastoreStatus" })
+  @SpeakeasyMetadata({ data: "json, name=DatastoreStatus" })
   datastoreStatus?: DatastoreStatusEnum;
 }

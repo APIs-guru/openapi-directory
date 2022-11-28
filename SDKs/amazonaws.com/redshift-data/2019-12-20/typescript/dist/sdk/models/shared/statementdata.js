@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { SqlParameter } from "./sqlparameter";
 import { StatusStringEnum } from "./statusstringenum";
 // StatementData
 /**
@@ -35,43 +35,43 @@ var StatementData = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=CreatedAt" }),
+        SpeakeasyMetadata({ data: "json, name=CreatedAt" }),
         __metadata("design:type", Date)
     ], StatementData.prototype, "createdAt", void 0);
     __decorate([
-        Metadata({ data: "json, name=Id" }),
+        SpeakeasyMetadata({ data: "json, name=Id" }),
         __metadata("design:type", String)
     ], StatementData.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "json, name=IsBatchStatement" }),
+        SpeakeasyMetadata({ data: "json, name=IsBatchStatement" }),
         __metadata("design:type", Boolean)
     ], StatementData.prototype, "isBatchStatement", void 0);
     __decorate([
-        Metadata({ data: "json, name=QueryParameters", elemType: shared.SqlParameter }),
+        SpeakeasyMetadata({ data: "json, name=QueryParameters", elemType: SqlParameter }),
         __metadata("design:type", Array)
     ], StatementData.prototype, "queryParameters", void 0);
     __decorate([
-        Metadata({ data: "json, name=QueryString" }),
+        SpeakeasyMetadata({ data: "json, name=QueryString" }),
         __metadata("design:type", String)
     ], StatementData.prototype, "queryString", void 0);
     __decorate([
-        Metadata({ data: "json, name=QueryStrings" }),
+        SpeakeasyMetadata({ data: "json, name=QueryStrings" }),
         __metadata("design:type", Array)
     ], StatementData.prototype, "queryStrings", void 0);
     __decorate([
-        Metadata({ data: "json, name=SecretArn" }),
+        SpeakeasyMetadata({ data: "json, name=SecretArn" }),
         __metadata("design:type", String)
     ], StatementData.prototype, "secretArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=StatementName" }),
+        SpeakeasyMetadata({ data: "json, name=StatementName" }),
         __metadata("design:type", String)
     ], StatementData.prototype, "statementName", void 0);
     __decorate([
-        Metadata({ data: "json, name=Status" }),
+        SpeakeasyMetadata({ data: "json, name=Status" }),
         __metadata("design:type", String)
     ], StatementData.prototype, "status", void 0);
     __decorate([
-        Metadata({ data: "json, name=UpdatedAt" }),
+        SpeakeasyMetadata({ data: "json, name=UpdatedAt" }),
         __metadata("design:type", Date)
     ], StatementData.prototype, "updatedAt", void 0);
     return StatementData;

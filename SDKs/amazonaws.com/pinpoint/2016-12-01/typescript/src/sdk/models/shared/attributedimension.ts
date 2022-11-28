@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AttributeTypeEnum } from "./attributetypeenum";
+
 
 
 // AttributeDimension
@@ -7,9 +8,9 @@ import { AttributeTypeEnum } from "./attributetypeenum";
  * Specifies attribute-based criteria for including or excluding endpoints from a segment.
 **/
 export class AttributeDimension extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AttributeType" })
+  @SpeakeasyMetadata({ data: "json, name=AttributeType" })
   attributeType?: AttributeTypeEnum;
 
-  @Metadata({ data: "json, name=Values" })
+  @SpeakeasyMetadata({ data: "json, name=Values" })
   values: string[];
 }

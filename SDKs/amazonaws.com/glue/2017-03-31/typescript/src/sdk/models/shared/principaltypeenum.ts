@@ -1,7 +1,8 @@
 
 
+
 export enum PrincipalTypeEnum {
-    User = "USER"
-,    Role = "ROLE"
-,    Group = "GROUP"
+    User = "USER",
+    Role = "ROLE",
+    Group = "GROUP"
 }

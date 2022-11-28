@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// Project
+// Represents an operating-system neutral workspace for running and managing tests.
 type Project struct {
 	Arn                      *string    `json:"arn,omitempty"`
 	Created                  *time.Time `json:"created,omitempty"`

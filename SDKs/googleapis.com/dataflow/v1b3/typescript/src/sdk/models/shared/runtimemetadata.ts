@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ParameterMetadata } from "./parametermetadata";
-import { SdkInfo } from "./sdkinfo";
+import { SDKInfo } from "./sdkinfo";
+
 
 
 // RuntimeMetadata
@@ -9,9 +9,9 @@ import { SdkInfo } from "./sdkinfo";
  * RuntimeMetadata describing a runtime environment.
 **/
 export class RuntimeMetadata extends SpeakeasyBase {
-  @Metadata({ data: "json, name=parameters", elemType: shared.ParameterMetadata })
+  @SpeakeasyMetadata({ data: "json, name=parameters", elemType: ParameterMetadata })
   parameters?: ParameterMetadata[];
 
-  @Metadata({ data: "json, name=sdkInfo" })
-  sdkInfo?: SdkInfo;
+  @SpeakeasyMetadata({ data: "json, name=sdkInfo" })
+  sdkInfo?: SDKInfo;
 }

@@ -1,5 +1,7 @@
 package shared
 
+// PayStatementSummary
+// The pay statement summary model
 type PayStatementSummary struct {
 	AutoPay             *bool    `json:"autoPay,omitempty"`
 	BeginDate           *string  `json:"beginDate,omitempty"`

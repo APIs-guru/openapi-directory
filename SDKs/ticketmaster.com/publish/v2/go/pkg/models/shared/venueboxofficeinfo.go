@@ -1,5 +1,7 @@
 package shared
 
+// VenueBoxOfficeInfo
+// Venue box office information
 type VenueBoxOfficeInfo struct {
 	AcceptedPaymentDetails map[string]string `json:"acceptedPaymentDetails,omitempty"`
 	OpenHoursDetails       map[string]string `json:"openHoursDetails,omitempty"`

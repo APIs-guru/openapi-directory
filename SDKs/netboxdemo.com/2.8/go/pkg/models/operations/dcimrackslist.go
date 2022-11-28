@@ -106,15 +106,15 @@ type DcimRacksListQueryParams struct {
 	WidthN         *string `queryParam:"style=form,explode=true,name=width__n"`
 }
 
-type DcimRacksListRequest struct {
-	QueryParams DcimRacksListQueryParams
-}
-
 type DcimRacksList200ApplicationJSON struct {
 	Count    int64         `json:"count"`
 	Next     *string       `json:"next,omitempty"`
 	Previous *string       `json:"previous,omitempty"`
 	Results  []shared.Rack `json:"results"`
+}
+
+type DcimRacksListRequest struct {
+	QueryParams DcimRacksListQueryParams
 }
 
 type DcimRacksListResponse struct {

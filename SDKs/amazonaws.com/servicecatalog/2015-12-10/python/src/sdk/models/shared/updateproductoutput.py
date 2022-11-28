@@ -1,13 +1,16 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import productviewdetail
-from . import tag
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class UpdateProductOutput:
-    product_view_detail: Optional[productviewdetail.ProductViewDetail] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ProductViewDetail' }})
-    tags: Optional[List[tag.Tag]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Tags' }})
+    product_view_detail: Optional[ProductViewDetail] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ProductViewDetail') }})
+    tags: Optional[List[Tag]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Tags') }})
     

@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudDatacatalogV1SystemTimestamps } from "./googleclouddatacatalogv1systemtimestamps";
+
 
 
 // GoogleCloudDatacatalogV1GcsFileSpec
@@ -7,12 +8,12 @@ import { GoogleCloudDatacatalogV1SystemTimestamps } from "./googleclouddatacatal
  * Specification of a single file in Cloud Storage.
 **/
 export class GoogleCloudDatacatalogV1GcsFileSpec extends SpeakeasyBase {
-  @Metadata({ data: "json, name=filePath" })
+  @SpeakeasyMetadata({ data: "json, name=filePath" })
   filePath?: string;
 
-  @Metadata({ data: "json, name=gcsTimestamps" })
+  @SpeakeasyMetadata({ data: "json, name=gcsTimestamps" })
   gcsTimestamps?: GoogleCloudDatacatalogV1SystemTimestamps;
 
-  @Metadata({ data: "json, name=sizeBytes" })
+  @SpeakeasyMetadata({ data: "json, name=sizeBytes" })
   sizeBytes?: string;
 }

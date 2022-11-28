@@ -13,16 +13,16 @@ type PostPortfolioSimulationRebalancingDriftWeightRequestBody struct {
 	Portfolios []PostPortfolioSimulationRebalancingDriftWeightRequestBodyPortfolios `json:"portfolios"`
 }
 
-type PostPortfolioSimulationRebalancingDriftWeightRequest struct {
-	Request PostPortfolioSimulationRebalancingDriftWeightRequestBody `request:"mediaType=application/json"`
-}
-
 type PostPortfolioSimulationRebalancingDriftWeight200ApplicationJSONPortfolios struct {
 	PortfolioValues []float64 `json:"portfolioValues"`
 }
 
 type PostPortfolioSimulationRebalancingDriftWeight200ApplicationJSON struct {
 	Portfolios []PostPortfolioSimulationRebalancingDriftWeight200ApplicationJSONPortfolios `json:"portfolios"`
+}
+
+type PostPortfolioSimulationRebalancingDriftWeightRequest struct {
+	Request PostPortfolioSimulationRebalancingDriftWeightRequestBody `request:"mediaType=application/json"`
 }
 
 type PostPortfolioSimulationRebalancingDriftWeightResponse struct {

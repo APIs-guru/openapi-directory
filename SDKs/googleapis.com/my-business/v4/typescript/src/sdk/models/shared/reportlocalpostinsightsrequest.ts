@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BasicMetricsRequest } from "./basicmetricsrequest";
+
 
 
 // ReportLocalPostInsightsRequest
@@ -7,9 +8,9 @@ import { BasicMetricsRequest } from "./basicmetricsrequest";
  * Request message for Insights.ReportLocalPostInsights
 **/
 export class ReportLocalPostInsightsRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=basicRequest" })
+  @SpeakeasyMetadata({ data: "json, name=basicRequest" })
   basicRequest?: BasicMetricsRequest;
 
-  @Metadata({ data: "json, name=localPostNames" })
+  @SpeakeasyMetadata({ data: "json, name=localPostNames" })
   localPostNames?: string[];
 }

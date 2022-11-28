@@ -22,34 +22,34 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var Address = /** @class */ (function (_super) {
     __extends(Address, _super);
     function Address() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=address_1" }),
+        SpeakeasyMetadata({ data: "json, name=address_1" }),
         __metadata("design:type", String)
     ], Address.prototype, "address1", void 0);
     __decorate([
-        Metadata({ data: "json, name=address_2" }),
+        SpeakeasyMetadata({ data: "json, name=address_2" }),
         __metadata("design:type", String)
     ], Address.prototype, "address2", void 0);
     __decorate([
-        Metadata({ data: "json, name=city" }),
+        SpeakeasyMetadata({ data: "json, name=city" }),
         __metadata("design:type", String)
     ], Address.prototype, "city", void 0);
     __decorate([
-        Metadata({ data: "json, name=country" }),
+        SpeakeasyMetadata({ data: "json, name=country" }),
         __metadata("design:type", String)
     ], Address.prototype, "country", void 0);
     __decorate([
-        Metadata({ data: "json, name=postal_code" }),
+        SpeakeasyMetadata({ data: "json, name=postal_code" }),
         __metadata("design:type", String)
     ], Address.prototype, "postalCode", void 0);
     __decorate([
-        Metadata({ data: "json, name=state" }),
+        SpeakeasyMetadata({ data: "json, name=state" }),
         __metadata("design:type", String)
     ], Address.prototype, "state", void 0);
     return Address;

@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ConfigSource } from "./configsource";
+
 
 
 // SubmitConfigSourceRequest
@@ -7,9 +8,9 @@ import { ConfigSource } from "./configsource";
  * Request message for SubmitConfigSource method.
 **/
 export class SubmitConfigSourceRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=configSource" })
+  @SpeakeasyMetadata({ data: "json, name=configSource" })
   configSource?: ConfigSource;
 
-  @Metadata({ data: "json, name=validateOnly" })
+  @SpeakeasyMetadata({ data: "json, name=validateOnly" })
   validateOnly?: boolean;
 }

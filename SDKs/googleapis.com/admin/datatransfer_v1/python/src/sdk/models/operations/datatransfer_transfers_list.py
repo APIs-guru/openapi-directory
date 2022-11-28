@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
@@ -26,14 +27,14 @@ class DatatransferTransfersListQueryParams:
 
 @dataclass
 class DatatransferTransfersListSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DatatransferTransfersListSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -44,13 +45,13 @@ class DatatransferTransfersListSecurity:
 
 @dataclass
 class DatatransferTransfersListRequest:
-    query_params: DatatransferTransfersListQueryParams = field(default=None)
-    security: DatatransferTransfersListSecurity = field(default=None)
+    query_params: DatatransferTransfersListQueryParams = field()
+    security: DatatransferTransfersListSecurity = field()
     
 
 @dataclass
 class DatatransferTransfersListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     data_transfers_list_response: Optional[shared.DataTransfersListResponse] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,12 +1,15 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class GetDocumentationVersionPathParams:
-    doc_version: str = field(default=None, metadata={'path_param': { 'field_name': 'doc_version', 'style': 'simple', 'explode': False }})
-    restapi_id: str = field(default=None, metadata={'path_param': { 'field_name': 'restapi_id', 'style': 'simple', 'explode': False }})
+    doc_version: str = field(metadata={'path_param': { 'field_name': 'doc_version', 'style': 'simple', 'explode': False }})
+    restapi_id: str = field(metadata={'path_param': { 'field_name': 'restapi_id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -22,16 +25,16 @@ class GetDocumentationVersionHeaders:
 
 @dataclass
 class GetDocumentationVersionRequest:
-    path_params: GetDocumentationVersionPathParams = field(default=None)
-    headers: GetDocumentationVersionHeaders = field(default=None)
+    headers: GetDocumentationVersionHeaders = field()
+    path_params: GetDocumentationVersionPathParams = field()
     
 
 @dataclass
 class GetDocumentationVersionResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     documentation_version: Optional[shared.DocumentationVersion] = field(default=None)
     not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     too_many_requests_exception: Optional[Any] = field(default=None)
     unauthorized_exception: Optional[Any] = field(default=None)
     

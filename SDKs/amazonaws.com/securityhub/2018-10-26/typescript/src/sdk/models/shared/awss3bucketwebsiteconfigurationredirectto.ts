@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AwsS3BucketWebsiteConfigurationRedirectTo
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The redirect behavior for requests to the website.
 **/
 export class AwsS3BucketWebsiteConfigurationRedirectTo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Hostname" })
+  @SpeakeasyMetadata({ data: "json, name=Hostname" })
   hostname?: string;
 
-  @Metadata({ data: "json, name=Protocol" })
+  @SpeakeasyMetadata({ data: "json, name=Protocol" })
   protocol?: string;
 }

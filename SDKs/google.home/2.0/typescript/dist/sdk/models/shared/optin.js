@@ -22,62 +22,62 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var OptIn = /** @class */ (function (_super) {
     __extends(OptIn, _super);
     function OptIn() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=audio_hdr" }),
+        SpeakeasyMetadata({ data: "json, name=audio_hdr" }),
         __metadata("design:type", Boolean)
     ], OptIn.prototype, "audioHdr", void 0);
     __decorate([
-        Metadata({ data: "json, name=audio_surround_mode" }),
+        SpeakeasyMetadata({ data: "json, name=audio_surround_mode" }),
         __metadata("design:type", Number)
     ], OptIn.prototype, "audioSurroundMode", void 0);
     __decorate([
-        Metadata({ data: "json, name=autoplay_on_signal" }),
+        SpeakeasyMetadata({ data: "json, name=autoplay_on_signal" }),
         __metadata("design:type", Boolean)
     ], OptIn.prototype, "autoplayOnSignal", void 0);
     __decorate([
-        Metadata({ data: "json, name=cloud_ipc" }),
+        SpeakeasyMetadata({ data: "json, name=cloud_ipc" }),
         __metadata("design:type", Boolean)
     ], OptIn.prototype, "cloudIpc", void 0);
     __decorate([
-        Metadata({ data: "json, name=hdmi_prefer_50hz" }),
+        SpeakeasyMetadata({ data: "json, name=hdmi_prefer_50hz" }),
         __metadata("design:type", Boolean)
     ], OptIn.prototype, "hdmiPrefer50hz", void 0);
     __decorate([
-        Metadata({ data: "json, name=hdmi_prefer_high_fps" }),
+        SpeakeasyMetadata({ data: "json, name=hdmi_prefer_high_fps" }),
         __metadata("design:type", Boolean)
     ], OptIn.prototype, "hdmiPreferHighFps", void 0);
     __decorate([
-        Metadata({ data: "json, name=managed_mode" }),
+        SpeakeasyMetadata({ data: "json, name=managed_mode" }),
         __metadata("design:type", Boolean)
     ], OptIn.prototype, "managedMode", void 0);
     __decorate([
-        Metadata({ data: "json, name=opencast" }),
+        SpeakeasyMetadata({ data: "json, name=opencast" }),
         __metadata("design:type", Boolean)
     ], OptIn.prototype, "opencast", void 0);
     __decorate([
-        Metadata({ data: "json, name=preview_channel" }),
+        SpeakeasyMetadata({ data: "json, name=preview_channel" }),
         __metadata("design:type", Boolean)
     ], OptIn.prototype, "previewChannel", void 0);
     __decorate([
-        Metadata({ data: "json, name=remote_ducking" }),
+        SpeakeasyMetadata({ data: "json, name=remote_ducking" }),
         __metadata("design:type", Boolean)
     ], OptIn.prototype, "remoteDucking", void 0);
     __decorate([
-        Metadata({ data: "json, name=stats" }),
+        SpeakeasyMetadata({ data: "json, name=stats" }),
         __metadata("design:type", Boolean)
     ], OptIn.prototype, "stats", void 0);
     __decorate([
-        Metadata({ data: "json, name=ui_flipped" }),
+        SpeakeasyMetadata({ data: "json, name=ui_flipped" }),
         __metadata("design:type", Boolean)
     ], OptIn.prototype, "uiFlipped", void 0);
     __decorate([
-        Metadata({ data: "json, name=wpa3_support_enabled" }),
+        SpeakeasyMetadata({ data: "json, name=wpa3_support_enabled" }),
         __metadata("design:type", Boolean)
     ], OptIn.prototype, "wpa3SupportEnabled", void 0);
     return OptIn;

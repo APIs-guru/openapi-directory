@@ -1,5 +1,7 @@
 package shared
 
+// RedshiftDestinationUpdate
+// Describes an update for a destination in Amazon Redshift.
 type RedshiftDestinationUpdate struct {
 	CloudWatchLoggingOptions *CloudWatchLoggingOptions `json:"CloudWatchLoggingOptions,omitempty"`
 	ClusterJdbcurl           *string                   `json:"ClusterJDBCURL,omitempty"`

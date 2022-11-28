@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 /**
  * When updating application input configuration, provides information about an Amazon Kinesis Firehose delivery stream as the streaming source.
 **/

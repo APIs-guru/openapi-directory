@@ -1,11 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DayPart } from "./daypart";
 
+
 export enum DayPartTargetingTimeZoneTypeEnum {
-    TimeZoneSourceUnspecified = "TIME_ZONE_SOURCE_UNSPECIFIED"
-,    Publisher = "PUBLISHER"
-,    User = "USER"
+    TimeZoneSourceUnspecified = "TIME_ZONE_SOURCE_UNSPECIFIED",
+    Publisher = "PUBLISHER",
+    User = "USER"
 }
 
 
@@ -14,9 +14,9 @@ export enum DayPartTargetingTimeZoneTypeEnum {
  * Specifies the day part targeting criteria.
 **/
 export class DayPartTargeting extends SpeakeasyBase {
-  @Metadata({ data: "json, name=dayParts", elemType: shared.DayPart })
+  @SpeakeasyMetadata({ data: "json, name=dayParts", elemType: DayPart })
   dayParts?: DayPart[];
 
-  @Metadata({ data: "json, name=timeZoneType" })
+  @SpeakeasyMetadata({ data: "json, name=timeZoneType" })
   timeZoneType?: DayPartTargetingTimeZoneTypeEnum;
 }

@@ -22,46 +22,46 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var AuditLogItemModel = /** @class */ (function (_super) {
     __extends(AuditLogItemModel, _super);
     function AuditLogItemModel() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=actionTarget" }),
+        SpeakeasyMetadata({ data: "json, name=actionTarget" }),
         __metadata("design:type", String)
     ], AuditLogItemModel.prototype, "actionTarget", void 0);
     __decorate([
-        Metadata({ data: "json, name=auditLogDateTime" }),
+        SpeakeasyMetadata({ data: "json, name=auditLogDateTime" }),
         __metadata("design:type", Date)
     ], AuditLogItemModel.prototype, "auditLogDateTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=auditLogId" }),
+        SpeakeasyMetadata({ data: "json, name=auditLogId" }),
         __metadata("design:type", Number)
     ], AuditLogItemModel.prototype, "auditLogId", void 0);
     __decorate([
-        Metadata({ data: "json, name=auditLogType" }),
+        SpeakeasyMetadata({ data: "json, name=auditLogType" }),
         __metadata("design:type", String)
     ], AuditLogItemModel.prototype, "auditLogType", void 0);
     __decorate([
-        Metadata({ data: "json, name=details" }),
+        SpeakeasyMetadata({ data: "json, name=details" }),
         __metadata("design:type", String)
     ], AuditLogItemModel.prototype, "details", void 0);
     __decorate([
-        Metadata({ data: "json, name=userEmail" }),
+        SpeakeasyMetadata({ data: "json, name=userEmail" }),
         __metadata("design:type", String)
     ], AuditLogItemModel.prototype, "userEmail", void 0);
     __decorate([
-        Metadata({ data: "json, name=userName" }),
+        SpeakeasyMetadata({ data: "json, name=userName" }),
         __metadata("design:type", String)
     ], AuditLogItemModel.prototype, "userName", void 0);
     __decorate([
-        Metadata({ data: "json, name=where" }),
+        SpeakeasyMetadata({ data: "json, name=where" }),
         __metadata("design:type", String)
     ], AuditLogItemModel.prototype, "where", void 0);
     __decorate([
-        Metadata({ data: "json, name=why" }),
+        SpeakeasyMetadata({ data: "json, name=why" }),
         __metadata("design:type", String)
     ], AuditLogItemModel.prototype, "why", void 0);
     return AuditLogItemModel;

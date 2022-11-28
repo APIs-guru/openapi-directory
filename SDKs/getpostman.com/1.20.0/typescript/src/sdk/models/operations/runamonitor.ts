@@ -1,226 +1,227 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class RunAMonitorPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=monitor_uid" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=monitor_uid" })
   monitorUid: string;
 }
 
 
-export class RunAMonitorRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: RunAMonitorPathParams;
-}
-
-
 export class RunAMonitor200ApplicationJsonRunExecutionsItem extends SpeakeasyBase {
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 }
 
 
 export class RunAMonitor200ApplicationJsonRunExecutionsRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=contentLength" })
+  @SpeakeasyMetadata({ data: "json, name=contentLength" })
   contentLength?: number;
 
-  @Metadata({ data: "json, name=mode" })
+  @SpeakeasyMetadata({ data: "json, name=mode" })
   mode?: string;
 }
 
 
 export class RunAMonitor200ApplicationJsonRunExecutionsRequestHeaders extends SpeakeasyBase {
-  @Metadata({ data: "json, name=accept" })
+  @SpeakeasyMetadata({ data: "json, name=accept" })
   accept?: string;
 
-  @Metadata({ data: "json, name=accept-encoding" })
+  @SpeakeasyMetadata({ data: "json, name=accept-encoding" })
   acceptEncoding?: string;
 
-  @Metadata({ data: "json, name=content-length" })
+  @SpeakeasyMetadata({ data: "json, name=content-length" })
   contentLength?: number;
 
-  @Metadata({ data: "json, name=content-type" })
+  @SpeakeasyMetadata({ data: "json, name=content-type" })
   contentType?: string;
 }
 
 
 export class RunAMonitor200ApplicationJsonRunExecutionsRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=body" })
+  @SpeakeasyMetadata({ data: "json, name=body" })
   body?: RunAMonitor200ApplicationJsonRunExecutionsRequestBody;
 
-  @Metadata({ data: "json, name=headers" })
+  @SpeakeasyMetadata({ data: "json, name=headers" })
   headers?: RunAMonitor200ApplicationJsonRunExecutionsRequestHeaders;
 
-  @Metadata({ data: "json, name=method" })
+  @SpeakeasyMetadata({ data: "json, name=method" })
   method?: string;
 
-  @Metadata({ data: "json, name=timestamp" })
+  @SpeakeasyMetadata({ data: "json, name=timestamp" })
   timestamp?: string;
 
-  @Metadata({ data: "json, name=url" })
+  @SpeakeasyMetadata({ data: "json, name=url" })
   url?: string;
 }
 
 
 export class RunAMonitor200ApplicationJsonRunExecutionsResponseBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=contentLength" })
+  @SpeakeasyMetadata({ data: "json, name=contentLength" })
   contentLength?: number;
 }
 
 
 export class RunAMonitor200ApplicationJsonRunExecutionsResponseHeaders extends SpeakeasyBase {
-  @Metadata({ data: "json, name=connection" })
+  @SpeakeasyMetadata({ data: "json, name=connection" })
   connection?: string;
 
-  @Metadata({ data: "json, name=content-encoding" })
+  @SpeakeasyMetadata({ data: "json, name=content-encoding" })
   contentEncoding?: string;
 
-  @Metadata({ data: "json, name=content-type" })
+  @SpeakeasyMetadata({ data: "json, name=content-type" })
   contentType?: string;
 
-  @Metadata({ data: "json, name=date" })
+  @SpeakeasyMetadata({ data: "json, name=date" })
   date?: string;
 
-  @Metadata({ data: "json, name=transfer-encoding" })
+  @SpeakeasyMetadata({ data: "json, name=transfer-encoding" })
   transferEncoding?: string;
 }
 
 
 export class RunAMonitor200ApplicationJsonRunExecutionsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=body" })
+  @SpeakeasyMetadata({ data: "json, name=body" })
   body?: RunAMonitor200ApplicationJsonRunExecutionsResponseBody;
 
-  @Metadata({ data: "json, name=code" })
+  @SpeakeasyMetadata({ data: "json, name=code" })
   code?: number;
 
-  @Metadata({ data: "json, name=headers" })
+  @SpeakeasyMetadata({ data: "json, name=headers" })
   headers?: RunAMonitor200ApplicationJsonRunExecutionsResponseHeaders;
 
-  @Metadata({ data: "json, name=responseSize" })
+  @SpeakeasyMetadata({ data: "json, name=responseSize" })
   responseSize?: number;
 
-  @Metadata({ data: "json, name=responseTime" })
+  @SpeakeasyMetadata({ data: "json, name=responseTime" })
   responseTime?: number;
 }
 
 
 export class RunAMonitor200ApplicationJsonRunExecutions extends SpeakeasyBase {
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: number;
 
-  @Metadata({ data: "json, name=item" })
+  @SpeakeasyMetadata({ data: "json, name=item" })
   item?: RunAMonitor200ApplicationJsonRunExecutionsItem;
 
-  @Metadata({ data: "json, name=request" })
+  @SpeakeasyMetadata({ data: "json, name=request" })
   request?: RunAMonitor200ApplicationJsonRunExecutionsRequest;
 
-  @Metadata({ data: "json, name=response" })
+  @SpeakeasyMetadata({ data: "json, name=response" })
   response?: RunAMonitor200ApplicationJsonRunExecutionsResponse;
 }
 
 
 export class RunAMonitor200ApplicationJsonRunFailuresAssertion extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Status code is 400" })
+  @SpeakeasyMetadata({ data: "json, name=Status code is 400" })
   statusCodeIs400?: boolean;
 }
 
 
 export class RunAMonitor200ApplicationJsonRunFailures extends SpeakeasyBase {
-  @Metadata({ data: "json, name=assertion" })
+  @SpeakeasyMetadata({ data: "json, name=assertion" })
   assertion?: RunAMonitor200ApplicationJsonRunFailuresAssertion;
 
-  @Metadata({ data: "json, name=executionId" })
+  @SpeakeasyMetadata({ data: "json, name=executionId" })
   executionId?: number;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 }
 
 
 export class RunAMonitor200ApplicationJsonRunInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=collectionUid" })
+  @SpeakeasyMetadata({ data: "json, name=collectionUid" })
   collectionUid?: string;
 
-  @Metadata({ data: "json, name=finishedAt" })
+  @SpeakeasyMetadata({ data: "json, name=finishedAt" })
   finishedAt?: string;
 
-  @Metadata({ data: "json, name=jobId" })
+  @SpeakeasyMetadata({ data: "json, name=jobId" })
   jobId?: string;
 
-  @Metadata({ data: "json, name=monitorId" })
+  @SpeakeasyMetadata({ data: "json, name=monitorId" })
   monitorId?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=startedAt" })
+  @SpeakeasyMetadata({ data: "json, name=startedAt" })
   startedAt?: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: string;
 }
 
 
 export class RunAMonitor200ApplicationJsonRunStatsAssertions extends SpeakeasyBase {
-  @Metadata({ data: "json, name=failed" })
+  @SpeakeasyMetadata({ data: "json, name=failed" })
   failed?: number;
 
-  @Metadata({ data: "json, name=total" })
+  @SpeakeasyMetadata({ data: "json, name=total" })
   total?: number;
 }
 
 
 export class RunAMonitor200ApplicationJsonRunStatsRequests extends SpeakeasyBase {
-  @Metadata({ data: "json, name=failed" })
+  @SpeakeasyMetadata({ data: "json, name=failed" })
   failed?: number;
 
-  @Metadata({ data: "json, name=total" })
+  @SpeakeasyMetadata({ data: "json, name=total" })
   total?: number;
 }
 
 
 export class RunAMonitor200ApplicationJsonRunStats extends SpeakeasyBase {
-  @Metadata({ data: "json, name=assertions" })
+  @SpeakeasyMetadata({ data: "json, name=assertions" })
   assertions?: RunAMonitor200ApplicationJsonRunStatsAssertions;
 
-  @Metadata({ data: "json, name=requests" })
+  @SpeakeasyMetadata({ data: "json, name=requests" })
   requests?: RunAMonitor200ApplicationJsonRunStatsRequests;
 }
 
 
 export class RunAMonitor200ApplicationJsonRun extends SpeakeasyBase {
-  @Metadata({ data: "json, name=executions", elemType: operations.RunAMonitor200ApplicationJsonRunExecutions })
+  @SpeakeasyMetadata({ data: "json, name=executions", elemType: RunAMonitor200ApplicationJsonRunExecutions })
   executions?: RunAMonitor200ApplicationJsonRunExecutions[];
 
-  @Metadata({ data: "json, name=failures", elemType: operations.RunAMonitor200ApplicationJsonRunFailures })
+  @SpeakeasyMetadata({ data: "json, name=failures", elemType: RunAMonitor200ApplicationJsonRunFailures })
   failures?: RunAMonitor200ApplicationJsonRunFailures[];
 
-  @Metadata({ data: "json, name=info" })
+  @SpeakeasyMetadata({ data: "json, name=info" })
   info?: RunAMonitor200ApplicationJsonRunInfo;
 
-  @Metadata({ data: "json, name=stats" })
+  @SpeakeasyMetadata({ data: "json, name=stats" })
   stats?: RunAMonitor200ApplicationJsonRunStats;
 }
 
 
 export class RunAMonitor200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=run" })
+  @SpeakeasyMetadata({ data: "json, name=run" })
   run?: RunAMonitor200ApplicationJsonRun;
 }
 
 
+export class RunAMonitorRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: RunAMonitorPathParams;
+}
+
+
 export class RunAMonitorResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   runAMonitor200ApplicationJsonObject?: RunAMonitor200ApplicationJson;
 }

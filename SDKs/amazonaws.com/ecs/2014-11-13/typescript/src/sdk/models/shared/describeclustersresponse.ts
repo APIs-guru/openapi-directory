@@ -1,13 +1,13 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Cluster } from "./cluster";
 import { Failure } from "./failure";
 
 
+
 export class DescribeClustersResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=clusters", elemType: shared.Cluster })
+  @SpeakeasyMetadata({ data: "json, name=clusters", elemType: Cluster })
   clusters?: Cluster[];
 
-  @Metadata({ data: "json, name=failures", elemType: shared.Failure })
+  @SpeakeasyMetadata({ data: "json, name=failures", elemType: Failure })
   failures?: Failure[];
 }

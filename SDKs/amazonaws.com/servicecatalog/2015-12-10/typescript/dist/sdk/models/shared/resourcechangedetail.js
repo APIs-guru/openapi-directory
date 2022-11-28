@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { EvaluationTypeEnum } from "./evaluationtypeenum";
 import { ResourceTargetDefinition } from "./resourcetargetdefinition";
 // ResourceChangeDetail
@@ -35,15 +35,15 @@ var ResourceChangeDetail = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=CausingEntity" }),
+        SpeakeasyMetadata({ data: "json, name=CausingEntity" }),
         __metadata("design:type", String)
     ], ResourceChangeDetail.prototype, "causingEntity", void 0);
     __decorate([
-        Metadata({ data: "json, name=Evaluation" }),
+        SpeakeasyMetadata({ data: "json, name=Evaluation" }),
         __metadata("design:type", String)
     ], ResourceChangeDetail.prototype, "evaluation", void 0);
     __decorate([
-        Metadata({ data: "json, name=Target" }),
+        SpeakeasyMetadata({ data: "json, name=Target" }),
         __metadata("design:type", ResourceTargetDefinition)
     ], ResourceChangeDetail.prototype, "target", void 0);
     return ResourceChangeDetail;

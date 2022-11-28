@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { OrganizationNodeTypeEnum } from "./organizationnodetypeenum";
 export declare class ListOrganizationPortfolioAccessInput extends SpeakeasyBase {
     acceptLanguage?: string;

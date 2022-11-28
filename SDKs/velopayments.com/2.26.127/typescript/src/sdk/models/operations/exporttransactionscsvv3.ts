@@ -1,40 +1,41 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ExportTransactionsCsvv3QueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=endDate" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=endDate" })
   endDate?: Date;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=payorId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=payorId" })
   payorId?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=startDate" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=startDate" })
   startDate?: Date;
 }
 
 
 export class ExportTransactionsCsvv3Request extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: ExportTransactionsCsvv3QueryParams;
 }
 
 
 export class ExportTransactionsCsvv3Response extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   inlineResponse400?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   inlineResponse401?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   inlineResponse403?: any;
 }

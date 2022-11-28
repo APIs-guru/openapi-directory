@@ -1,109 +1,110 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetChatHistoryUsingPostQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=end" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=end" })
   end?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=padID" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=padID" })
   padId?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=start" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=start" })
   start?: string;
 }
 
 
-export class GetChatHistoryUsingPostRequest extends SpeakeasyBase {
-  @Metadata()
-  queryParams: GetChatHistoryUsingPostQueryParams;
-}
-
-
 export class GetChatHistoryUsingPost200ApplicationJsonDataMessages extends SpeakeasyBase {
-  @Metadata({ data: "json, name=text" })
+  @SpeakeasyMetadata({ data: "json, name=text" })
   text?: string;
 
-  @Metadata({ data: "json, name=time" })
+  @SpeakeasyMetadata({ data: "json, name=time" })
   time?: number;
 
-  @Metadata({ data: "json, name=userId" })
+  @SpeakeasyMetadata({ data: "json, name=userId" })
   userId?: string;
 
-  @Metadata({ data: "json, name=userName" })
+  @SpeakeasyMetadata({ data: "json, name=userName" })
   userName?: string;
 }
 
 
 export class GetChatHistoryUsingPost200ApplicationJsonData extends SpeakeasyBase {
-  @Metadata({ data: "json, name=messages", elemType: operations.GetChatHistoryUsingPost200ApplicationJsonDataMessages })
+  @SpeakeasyMetadata({ data: "json, name=messages", elemType: GetChatHistoryUsingPost200ApplicationJsonDataMessages })
   messages?: GetChatHistoryUsingPost200ApplicationJsonDataMessages[];
 }
 
 
 export class GetChatHistoryUsingPost200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=code" })
+  @SpeakeasyMetadata({ data: "json, name=code" })
   code?: number;
 
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data?: GetChatHistoryUsingPost200ApplicationJsonData;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class GetChatHistoryUsingPost400ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=code" })
+  @SpeakeasyMetadata({ data: "json, name=code" })
   code?: number;
 
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data?: Map<string, any>;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class GetChatHistoryUsingPost401ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=code" })
+  @SpeakeasyMetadata({ data: "json, name=code" })
   code?: number;
 
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data?: Map<string, any>;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class GetChatHistoryUsingPost500ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=code" })
+  @SpeakeasyMetadata({ data: "json, name=code" })
   code?: number;
 
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data?: Map<string, any>;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
+export class GetChatHistoryUsingPostRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  queryParams: GetChatHistoryUsingPostQueryParams;
+}
+
+
 export class GetChatHistoryUsingPostResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getChatHistoryUsingPost200ApplicationJsonObject?: GetChatHistoryUsingPost200ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getChatHistoryUsingPost400ApplicationJsonObject?: GetChatHistoryUsingPost400ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getChatHistoryUsingPost401ApplicationJsonObject?: GetChatHistoryUsingPost401ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getChatHistoryUsingPost500ApplicationJsonObject?: GetChatHistoryUsingPost500ApplicationJson;
 }

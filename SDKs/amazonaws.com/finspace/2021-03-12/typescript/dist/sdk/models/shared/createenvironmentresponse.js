@@ -22,22 +22,22 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var CreateEnvironmentResponse = /** @class */ (function (_super) {
     __extends(CreateEnvironmentResponse, _super);
     function CreateEnvironmentResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=environmentArn" }),
+        SpeakeasyMetadata({ data: "json, name=environmentArn" }),
         __metadata("design:type", String)
     ], CreateEnvironmentResponse.prototype, "environmentArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=environmentId" }),
+        SpeakeasyMetadata({ data: "json, name=environmentId" }),
         __metadata("design:type", String)
     ], CreateEnvironmentResponse.prototype, "environmentId", void 0);
     __decorate([
-        Metadata({ data: "json, name=environmentUrl" }),
+        SpeakeasyMetadata({ data: "json, name=environmentUrl" }),
         __metadata("design:type", String)
     ], CreateEnvironmentResponse.prototype, "environmentUrl", void 0);
     return CreateEnvironmentResponse;

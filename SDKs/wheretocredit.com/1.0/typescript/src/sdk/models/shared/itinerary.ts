@@ -1,18 +1,18 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Segment } from "./segment";
 
 
+
 export class Itinerary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=baseFareUSD" })
+  @SpeakeasyMetadata({ data: "json, name=baseFareUSD" })
   baseFareUsd?: number;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=segments", elemType: shared.Segment })
+  @SpeakeasyMetadata({ data: "json, name=segments", elemType: Segment })
   segments: Segment[];
 
-  @Metadata({ data: "json, name=ticketingCarrier" })
+  @SpeakeasyMetadata({ data: "json, name=ticketingCarrier" })
   ticketingCarrier?: string;
 }

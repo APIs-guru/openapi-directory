@@ -22,22 +22,22 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var AddPathParams = /** @class */ (function (_super) {
     __extends(AddPathParams, _super);
     function AddPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=agentNum" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=agentNum" }),
         __metadata("design:type", Number)
     ], AddPathParams.prototype, "agentNum", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=instance" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=instance" }),
         __metadata("design:type", String)
     ], AddPathParams.prototype, "instance", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=object" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=object" }),
         __metadata("design:type", String)
     ], AddPathParams.prototype, "object", void 0);
     return AddPathParams;
@@ -49,7 +49,7 @@ var AddRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", AddPathParams)
     ], AddRequest.prototype, "pathParams", void 0);
     return AddRequest;
@@ -61,15 +61,15 @@ var AddResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], AddResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], AddResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], AddResponse.prototype, "add200ApplicationJsonString", void 0);
     return AddResponse;

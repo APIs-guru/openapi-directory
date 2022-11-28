@@ -8,6 +8,8 @@ const (
 	LogicalNetworkInterfaceNetworkTypeEnumPrivate         LogicalNetworkInterfaceNetworkTypeEnum = "PRIVATE"
 )
 
+// LogicalNetworkInterface
+// Each logical network interface is effectively a network and IP pair.
 type LogicalNetworkInterface struct {
 	DefaultGateway *bool                                   `json:"defaultGateway,omitempty"`
 	ID             *string                                 `json:"id,omitempty"`

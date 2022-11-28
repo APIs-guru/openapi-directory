@@ -25,7 +25,7 @@ type StoragetransferTransferJobsCreateSecurity struct {
 
 type StoragetransferTransferJobsCreateRequest struct {
 	QueryParams StoragetransferTransferJobsCreateQueryParams
-	Request     *shared.TransferJob `request:"mediaType=application/json"`
+	Request     *shared.TransferJobInput `request:"mediaType=application/json"`
 	Security    StoragetransferTransferJobsCreateSecurity
 }
 

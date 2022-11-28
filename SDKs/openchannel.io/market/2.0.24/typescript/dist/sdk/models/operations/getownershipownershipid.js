@@ -22,14 +22,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var GetOwnershipOwnershipIdPathParams = /** @class */ (function (_super) {
     __extends(GetOwnershipOwnershipIdPathParams, _super);
     function GetOwnershipOwnershipIdPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=ownershipId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=ownershipId" }),
         __metadata("design:type", String)
     ], GetOwnershipOwnershipIdPathParams.prototype, "ownershipId", void 0);
     return GetOwnershipOwnershipIdPathParams;
@@ -41,7 +41,7 @@ var GetOwnershipOwnershipIdRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetOwnershipOwnershipIdPathParams)
     ], GetOwnershipOwnershipIdRequest.prototype, "pathParams", void 0);
     return GetOwnershipOwnershipIdRequest;
@@ -53,15 +53,15 @@ var GetOwnershipOwnershipIdResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], GetOwnershipOwnershipIdResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetOwnershipOwnershipIdResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetOwnershipOwnershipIdResponse.prototype, "statusCode", void 0);
     return GetOwnershipOwnershipIdResponse;

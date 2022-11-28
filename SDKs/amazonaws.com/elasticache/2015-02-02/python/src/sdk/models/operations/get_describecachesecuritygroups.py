@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetDescribeCacheSecurityGroupsActionEnum(str, Enum):
     DESCRIBE_CACHE_SECURITY_GROUPS = "DescribeCacheSecurityGroups"
@@ -10,11 +14,11 @@ class GetDescribeCacheSecurityGroupsVersionEnum(str, Enum):
 
 @dataclass
 class GetDescribeCacheSecurityGroupsQueryParams:
-    action: GetDescribeCacheSecurityGroupsActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetDescribeCacheSecurityGroupsActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: GetDescribeCacheSecurityGroupsVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     cache_security_group_name: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'CacheSecurityGroupName', 'style': 'form', 'explode': True }})
     marker: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'Marker', 'style': 'form', 'explode': True }})
     max_records: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'MaxRecords', 'style': 'form', 'explode': True }})
-    version: GetDescribeCacheSecurityGroupsVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -30,13 +34,13 @@ class GetDescribeCacheSecurityGroupsHeaders:
 
 @dataclass
 class GetDescribeCacheSecurityGroupsRequest:
-    query_params: GetDescribeCacheSecurityGroupsQueryParams = field(default=None)
-    headers: GetDescribeCacheSecurityGroupsHeaders = field(default=None)
+    headers: GetDescribeCacheSecurityGroupsHeaders = field()
+    query_params: GetDescribeCacheSecurityGroupsQueryParams = field()
     
 
 @dataclass
 class GetDescribeCacheSecurityGroupsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

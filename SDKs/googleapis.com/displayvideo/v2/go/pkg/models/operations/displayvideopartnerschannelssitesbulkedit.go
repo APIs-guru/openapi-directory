@@ -31,7 +31,7 @@ type DisplayvideoPartnersChannelsSitesBulkEditSecurity struct {
 type DisplayvideoPartnersChannelsSitesBulkEditRequest struct {
 	PathParams  DisplayvideoPartnersChannelsSitesBulkEditPathParams
 	QueryParams DisplayvideoPartnersChannelsSitesBulkEditQueryParams
-	Request     *shared.BulkEditSitesRequest `request:"mediaType=application/json"`
+	Request     *shared.BulkEditSitesRequestInput `request:"mediaType=application/json"`
 	Security    DisplayvideoPartnersChannelsSitesBulkEditSecurity
 }
 

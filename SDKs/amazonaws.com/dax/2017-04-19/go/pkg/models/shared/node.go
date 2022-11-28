@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// Node
+// Represents an individual node within a DAX cluster.
 type Node struct {
 	AvailabilityZone     *string    `json:"AvailabilityZone,omitempty"`
 	Endpoint             *Endpoint  `json:"Endpoint,omitempty"`

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AwsRdsEventSubscriptionDetails
@@ -6,33 +7,33 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Details about an Amazon RDS event notification subscription. The subscription allows Amazon RDS to post events to an SNS topic.
 **/
 export class AwsRdsEventSubscriptionDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CustSubscriptionId" })
+  @SpeakeasyMetadata({ data: "json, name=CustSubscriptionId" })
   custSubscriptionId?: string;
 
-  @Metadata({ data: "json, name=CustomerAwsId" })
+  @SpeakeasyMetadata({ data: "json, name=CustomerAwsId" })
   customerAwsId?: string;
 
-  @Metadata({ data: "json, name=Enabled" })
+  @SpeakeasyMetadata({ data: "json, name=Enabled" })
   enabled?: boolean;
 
-  @Metadata({ data: "json, name=EventCategoriesList" })
+  @SpeakeasyMetadata({ data: "json, name=EventCategoriesList" })
   eventCategoriesList?: string[];
 
-  @Metadata({ data: "json, name=EventSubscriptionArn" })
+  @SpeakeasyMetadata({ data: "json, name=EventSubscriptionArn" })
   eventSubscriptionArn?: string;
 
-  @Metadata({ data: "json, name=SnsTopicArn" })
+  @SpeakeasyMetadata({ data: "json, name=SnsTopicArn" })
   snsTopicArn?: string;
 
-  @Metadata({ data: "json, name=SourceIdsList" })
+  @SpeakeasyMetadata({ data: "json, name=SourceIdsList" })
   sourceIdsList?: string[];
 
-  @Metadata({ data: "json, name=SourceType" })
+  @SpeakeasyMetadata({ data: "json, name=SourceType" })
   sourceType?: string;
 
-  @Metadata({ data: "json, name=Status" })
+  @SpeakeasyMetadata({ data: "json, name=Status" })
   status?: string;
 
-  @Metadata({ data: "json, name=SubscriptionCreationTime" })
+  @SpeakeasyMetadata({ data: "json, name=SubscriptionCreationTime" })
   subscriptionCreationTime?: string;
 }

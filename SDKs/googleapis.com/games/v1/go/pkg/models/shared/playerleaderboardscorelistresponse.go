@@ -1,5 +1,7 @@
 package shared
 
+// PlayerLeaderboardScoreListResponse
+// A list of player leaderboard scores.
 type PlayerLeaderboardScoreListResponse struct {
 	Items         []PlayerLeaderboardScore `json:"items,omitempty"`
 	Kind          *string                  `json:"kind,omitempty"`

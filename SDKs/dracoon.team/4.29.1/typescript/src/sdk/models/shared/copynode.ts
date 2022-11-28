@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // CopyNode
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Copied node information
 **/
 export class CopyNode extends SpeakeasyBase {
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: number;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=timestampCreation" })
+  @SpeakeasyMetadata({ data: "json, name=timestampCreation" })
   timestampCreation?: Date;
 
-  @Metadata({ data: "json, name=timestampModification" })
+  @SpeakeasyMetadata({ data: "json, name=timestampModification" })
   timestampModification?: Date;
 }

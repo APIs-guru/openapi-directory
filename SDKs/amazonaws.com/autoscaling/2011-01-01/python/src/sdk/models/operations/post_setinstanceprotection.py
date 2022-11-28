@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostSetInstanceProtectionActionEnum(str, Enum):
     SET_INSTANCE_PROTECTION = "SetInstanceProtection"
@@ -10,8 +14,8 @@ class PostSetInstanceProtectionVersionEnum(str, Enum):
 
 @dataclass
 class PostSetInstanceProtectionQueryParams:
-    action: PostSetInstanceProtectionActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostSetInstanceProtectionVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostSetInstanceProtectionActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostSetInstanceProtectionVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostSetInstanceProtectionHeaders:
 
 @dataclass
 class PostSetInstanceProtectionRequest:
-    query_params: PostSetInstanceProtectionQueryParams = field(default=None)
-    headers: PostSetInstanceProtectionHeaders = field(default=None)
+    headers: PostSetInstanceProtectionHeaders = field()
+    query_params: PostSetInstanceProtectionQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostSetInstanceProtectionResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

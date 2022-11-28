@@ -1,27 +1,26 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
-import { Privilege } from "./privilege";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class Privilege extends SpeakeasyBase {
-  @Metadata({ data: "json, name=childPrivileges", elemType: shared.Privilege })
+  @SpeakeasyMetadata({ data: "json, name=childPrivileges", elemType: Privilege })
   childPrivileges?: Privilege[];
 
-  @Metadata({ data: "json, name=etag" })
+  @SpeakeasyMetadata({ data: "json, name=etag" })
   etag?: string;
 
-  @Metadata({ data: "json, name=isOuScopable" })
+  @SpeakeasyMetadata({ data: "json, name=isOuScopable" })
   isOuScopable?: boolean;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=privilegeName" })
+  @SpeakeasyMetadata({ data: "json, name=privilegeName" })
   privilegeName?: string;
 
-  @Metadata({ data: "json, name=serviceId" })
+  @SpeakeasyMetadata({ data: "json, name=serviceId" })
   serviceId?: string;
 
-  @Metadata({ data: "json, name=serviceName" })
+  @SpeakeasyMetadata({ data: "json, name=serviceName" })
   serviceName?: string;
 }

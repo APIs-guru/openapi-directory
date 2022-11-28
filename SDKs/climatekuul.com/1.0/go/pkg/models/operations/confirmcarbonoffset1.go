@@ -1,6 +1,6 @@
 package operations
 
-var ConfirmCarbonOffset1Servers = []string{
+var ConfirmCarbonOffset1ServerList = []string{
 	"http://api.climatekuul.com:8000/footprint",
 }
 

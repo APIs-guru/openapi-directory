@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // SsmlMessageType
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * An object that defines a message that contains SSML-formatted text.
 **/
 export class SsmlMessageType extends SpeakeasyBase {
-  @Metadata({ data: "json, name=LanguageCode" })
+  @SpeakeasyMetadata({ data: "json, name=LanguageCode" })
   languageCode?: string;
 
-  @Metadata({ data: "json, name=Text" })
+  @SpeakeasyMetadata({ data: "json, name=Text" })
   text?: string;
 
-  @Metadata({ data: "json, name=VoiceId" })
+  @SpeakeasyMetadata({ data: "json, name=VoiceId" })
   voiceId?: string;
 }

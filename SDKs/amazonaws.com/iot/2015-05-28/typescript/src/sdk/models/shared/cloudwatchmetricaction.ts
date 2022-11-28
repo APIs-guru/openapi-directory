@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // CloudwatchMetricAction
@@ -6,21 +7,21 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Describes an action that captures a CloudWatch metric.
 **/
 export class CloudwatchMetricAction extends SpeakeasyBase {
-  @Metadata({ data: "json, name=metricName" })
+  @SpeakeasyMetadata({ data: "json, name=metricName" })
   metricName: string;
 
-  @Metadata({ data: "json, name=metricNamespace" })
+  @SpeakeasyMetadata({ data: "json, name=metricNamespace" })
   metricNamespace: string;
 
-  @Metadata({ data: "json, name=metricTimestamp" })
+  @SpeakeasyMetadata({ data: "json, name=metricTimestamp" })
   metricTimestamp?: string;
 
-  @Metadata({ data: "json, name=metricUnit" })
+  @SpeakeasyMetadata({ data: "json, name=metricUnit" })
   metricUnit: string;
 
-  @Metadata({ data: "json, name=metricValue" })
+  @SpeakeasyMetadata({ data: "json, name=metricValue" })
   metricValue: string;
 
-  @Metadata({ data: "json, name=roleArn" })
+  @SpeakeasyMetadata({ data: "json, name=roleArn" })
   roleArn: string;
 }

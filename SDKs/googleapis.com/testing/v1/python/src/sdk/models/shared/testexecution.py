@@ -1,11 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import environment
-from . import shard
-from . import testdetails
-from . import testspecification
-from . import toolresultsstep
+from sdk import utils
+from . import *
 
 class TestExecutionStateEnum(str, Enum):
     TEST_STATE_UNSPECIFIED = "TEST_STATE_UNSPECIFIED"
@@ -24,14 +22,18 @@ class TestExecutionStateEnum(str, Enum):
 @dataclass_json
 @dataclass
 class TestExecution:
-    environment: Optional[environment.Environment] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'environment' }})
-    id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
-    matrix_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'matrixId' }})
-    project_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'projectId' }})
-    shard: Optional[shard.Shard] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'shard' }})
-    state: Optional[TestExecutionStateEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'state' }})
-    test_details: Optional[testdetails.TestDetails] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'testDetails' }})
-    test_specification: Optional[testspecification.TestSpecification] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'testSpecification' }})
-    timestamp: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'timestamp' }})
-    tool_results_step: Optional[toolresultsstep.ToolResultsStep] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'toolResultsStep' }})
+    r"""TestExecution
+    A single test executed in a single environment.
+    """
+    
+    environment: Optional[Environment] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('environment') }})
+    id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('id') }})
+    matrix_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('matrixId') }})
+    project_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('projectId') }})
+    shard: Optional[Shard] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('shard') }})
+    state: Optional[TestExecutionStateEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('state') }})
+    test_details: Optional[TestDetails] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('testDetails') }})
+    test_specification: Optional[TestSpecification] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('testSpecification') }})
+    timestamp: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('timestamp') }})
+    tool_results_step: Optional[ToolResultsStep] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('toolResultsStep') }})
     

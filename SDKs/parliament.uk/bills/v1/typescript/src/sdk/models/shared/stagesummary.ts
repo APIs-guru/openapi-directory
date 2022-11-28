@@ -1,31 +1,31 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { HouseEnum } from "./houseenum";
 import { BillStageSitting } from "./billstagesitting";
 
 
+
 export class StageSummary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=abbreviation" })
+  @SpeakeasyMetadata({ data: "json, name=abbreviation" })
   abbreviation?: string;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=house" })
+  @SpeakeasyMetadata({ data: "json, name=house" })
   house?: HouseEnum;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: number;
 
-  @Metadata({ data: "json, name=sessionId" })
+  @SpeakeasyMetadata({ data: "json, name=sessionId" })
   sessionId?: number;
 
-  @Metadata({ data: "json, name=sortOrder" })
+  @SpeakeasyMetadata({ data: "json, name=sortOrder" })
   sortOrder?: number;
 
-  @Metadata({ data: "json, name=stageId" })
+  @SpeakeasyMetadata({ data: "json, name=stageId" })
   stageId?: number;
 
-  @Metadata({ data: "json, name=stageSittings", elemType: shared.BillStageSitting })
+  @SpeakeasyMetadata({ data: "json, name=stageSittings", elemType: BillStageSitting })
   stageSittings?: BillStageSitting[];
 }

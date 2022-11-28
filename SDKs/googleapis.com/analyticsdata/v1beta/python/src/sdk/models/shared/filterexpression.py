@@ -1,17 +1,19 @@
 from dataclasses import dataclass, field
-from typing import List,Optional
+from typing import Optional
 from dataclasses_json import dataclass_json
-from . import filterexpressionlist
-from . import filter
-from . import filterexpression
-from . import filterexpressionlist
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class FilterExpression:
-    and_group: Optional[filterexpressionlist.FilterExpressionList] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'andGroup' }})
-    filter: Optional[filter.Filter] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'filter' }})
-    not_expression: Optional[filterexpression.FilterExpression] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'notExpression' }})
-    or_group: Optional[filterexpressionlist.FilterExpressionList] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'orGroup' }})
+    r"""FilterExpression
+    To express dimension or metric filters. The fields in the same FilterExpression need to be either all dimensions or all metrics.
+    """
+    
+    and_group: Optional[FilterExpressionList] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('andGroup') }})
+    filter: Optional[Filter] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('filter') }})
+    not_expression: Optional[FilterExpression] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('notExpression') }})
+    or_group: Optional[FilterExpressionList] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('orGroup') }})
     

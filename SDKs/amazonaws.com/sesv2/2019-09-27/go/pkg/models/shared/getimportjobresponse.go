@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// GetImportJobResponse
+// An HTTP 200 response if the request succeeds, or an error message if the request fails.
 type GetImportJobResponse struct {
 	CompletedTimestamp    *time.Time         `json:"CompletedTimestamp,omitempty"`
 	CreatedTimestamp      *time.Time         `json:"CreatedTimestamp,omitempty"`

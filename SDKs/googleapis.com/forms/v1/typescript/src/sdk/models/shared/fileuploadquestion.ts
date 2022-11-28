@@ -1,16 +1,17 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum FileUploadQuestionTypesEnum {
-    FileTypeUnspecified = "FILE_TYPE_UNSPECIFIED"
-,    Any = "ANY"
-,    Document = "DOCUMENT"
-,    Presentation = "PRESENTATION"
-,    Spreadsheet = "SPREADSHEET"
-,    Drawing = "DRAWING"
-,    Pdf = "PDF"
-,    Image = "IMAGE"
-,    Video = "VIDEO"
-,    Audio = "AUDIO"
+    FileTypeUnspecified = "FILE_TYPE_UNSPECIFIED",
+    Any = "ANY",
+    Document = "DOCUMENT",
+    Presentation = "PRESENTATION",
+    Spreadsheet = "SPREADSHEET",
+    Drawing = "DRAWING",
+    Pdf = "PDF",
+    Image = "IMAGE",
+    Video = "VIDEO",
+    Audio = "AUDIO"
 }
 
 
@@ -19,15 +20,15 @@ export enum FileUploadQuestionTypesEnum {
  * A file upload question. The API currently does not support creating file upload questions.
 **/
 export class FileUploadQuestion extends SpeakeasyBase {
-  @Metadata({ data: "json, name=folderId" })
+  @SpeakeasyMetadata({ data: "json, name=folderId" })
   folderId?: string;
 
-  @Metadata({ data: "json, name=maxFileSize" })
+  @SpeakeasyMetadata({ data: "json, name=maxFileSize" })
   maxFileSize?: string;
 
-  @Metadata({ data: "json, name=maxFiles" })
+  @SpeakeasyMetadata({ data: "json, name=maxFiles" })
   maxFiles?: number;
 
-  @Metadata({ data: "json, name=types" })
+  @SpeakeasyMetadata({ data: "json, name=types" })
   types?: FileUploadQuestionTypesEnum[];
 }

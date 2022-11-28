@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import List,Optional
 from sdk.models import shared
 
 
 @dataclass
 class GetElectioneeringAggregatesQueryParams:
-    api_key: str = field(default=None, metadata={'query_param': { 'field_name': 'api_key', 'style': 'form', 'explode': True }})
+    api_key: str = field(metadata={'query_param': { 'field_name': 'api_key', 'style': 'form', 'explode': True }})
     candidate_id: Optional[List[str]] = field(default=None, metadata={'query_param': { 'field_name': 'candidate_id', 'style': 'form', 'explode': True }})
     committee_id: Optional[List[str]] = field(default=None, metadata={'query_param': { 'field_name': 'committee_id', 'style': 'form', 'explode': True }})
     cycle: Optional[List[int]] = field(default=None, metadata={'query_param': { 'field_name': 'cycle', 'style': 'form', 'explode': True }})
@@ -19,12 +22,12 @@ class GetElectioneeringAggregatesQueryParams:
 
 @dataclass
 class GetElectioneeringAggregatesRequest:
-    query_params: GetElectioneeringAggregatesQueryParams = field(default=None)
+    query_params: GetElectioneeringAggregatesQueryParams = field()
     
 
 @dataclass
 class GetElectioneeringAggregatesResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     electioneering_by_candidate_page: Optional[shared.ElectioneeringByCandidatePage] = field(default=None)
-    status_code: int = field(default=None)
     

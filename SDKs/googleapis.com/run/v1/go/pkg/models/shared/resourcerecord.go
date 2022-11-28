@@ -9,6 +9,8 @@ const (
 	ResourceRecordTypeEnumCname                 ResourceRecordTypeEnum = "CNAME"
 )
 
+// ResourceRecord
+// A DNS resource record.
 type ResourceRecord struct {
 	Name   *string                 `json:"name,omitempty"`
 	Rrdata *string                 `json:"rrdata,omitempty"`

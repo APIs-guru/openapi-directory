@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { InstancePlatformEnum } from "./instanceplatformenum";
+
 
 
 // Bundle
@@ -7,36 +8,36 @@ import { InstancePlatformEnum } from "./instanceplatformenum";
  * Describes a bundle, which is a set of specs describing your virtual private server (or <i>instance</i>).
 **/
 export class Bundle extends SpeakeasyBase {
-  @Metadata({ data: "json, name=bundleId" })
+  @SpeakeasyMetadata({ data: "json, name=bundleId" })
   bundleId?: string;
 
-  @Metadata({ data: "json, name=cpuCount" })
+  @SpeakeasyMetadata({ data: "json, name=cpuCount" })
   cpuCount?: number;
 
-  @Metadata({ data: "json, name=diskSizeInGb" })
+  @SpeakeasyMetadata({ data: "json, name=diskSizeInGb" })
   diskSizeInGb?: number;
 
-  @Metadata({ data: "json, name=instanceType" })
+  @SpeakeasyMetadata({ data: "json, name=instanceType" })
   instanceType?: string;
 
-  @Metadata({ data: "json, name=isActive" })
+  @SpeakeasyMetadata({ data: "json, name=isActive" })
   isActive?: boolean;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=power" })
+  @SpeakeasyMetadata({ data: "json, name=power" })
   power?: number;
 
-  @Metadata({ data: "json, name=price" })
+  @SpeakeasyMetadata({ data: "json, name=price" })
   price?: number;
 
-  @Metadata({ data: "json, name=ramSizeInGb" })
+  @SpeakeasyMetadata({ data: "json, name=ramSizeInGb" })
   ramSizeInGb?: number;
 
-  @Metadata({ data: "json, name=supportedPlatforms" })
+  @SpeakeasyMetadata({ data: "json, name=supportedPlatforms" })
   supportedPlatforms?: InstancePlatformEnum[];
 
-  @Metadata({ data: "json, name=transferPerMonthInGb" })
+  @SpeakeasyMetadata({ data: "json, name=transferPerMonthInGb" })
   transferPerMonthInGb?: number;
 }

@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Backup } from "./backup";
+
 
 
 // DescribeBackupsResponse
@@ -8,9 +8,9 @@ import { Backup } from "./backup";
  * Response object for <code>DescribeBackups</code> operation.
 **/
 export class DescribeBackupsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Backups", elemType: shared.Backup })
+  @SpeakeasyMetadata({ data: "json, name=Backups", elemType: Backup })
   backups?: Backup[];
 
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 }

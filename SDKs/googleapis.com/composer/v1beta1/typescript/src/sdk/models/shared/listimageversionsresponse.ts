@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ImageVersion } from "./imageversion";
+
 
 
 // ListImageVersionsResponse
@@ -8,9 +8,9 @@ import { ImageVersion } from "./imageversion";
  * The ImageVersions in a project and location.
 **/
 export class ListImageVersionsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=imageVersions", elemType: shared.ImageVersion })
+  @SpeakeasyMetadata({ data: "json, name=imageVersions", elemType: ImageVersion })
   imageVersions?: ImageVersion[];
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 }

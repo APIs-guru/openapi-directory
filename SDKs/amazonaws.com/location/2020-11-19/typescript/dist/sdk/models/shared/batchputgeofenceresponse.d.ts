@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { BatchPutGeofenceError } from "./batchputgeofenceerror";
 import { BatchPutGeofenceSuccess } from "./batchputgeofencesuccess";
 export declare class BatchPutGeofenceResponse extends SpeakeasyBase {

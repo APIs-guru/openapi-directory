@@ -1,17 +1,16 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import product
-from . import links
-from . import meta
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class GetProductsResponse:
-    data: List[product.Product] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'data' }})
-    links: Optional[links.Links] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'links' }})
-    meta: Optional[meta.Meta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
-    status: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
-    status_code: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status_code' }})
+    data: List[Product] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('data') }})
+    status: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('status') }})
+    status_code: int = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('status_code') }})
+    links: Optional[Links] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('links') }})
+    meta: Optional[Meta] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('meta') }})
     

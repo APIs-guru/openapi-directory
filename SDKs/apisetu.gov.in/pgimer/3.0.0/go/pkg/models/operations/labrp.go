@@ -29,11 +29,6 @@ type LabrpSecurity struct {
 	ClientID shared.SchemeClientID `security:"scheme,type=apiKey,subtype=header"`
 }
 
-type LabrpRequest struct {
-	Request  *LabrpRequestBody `request:"mediaType=application/json"`
-	Security LabrpSecurity
-}
-
 type Labrp400ApplicationJSONErrorEnum string
 
 const (
@@ -163,6 +158,11 @@ const (
 type Labrp504ApplicationJSON struct {
 	Error            *Labrp504ApplicationJSONErrorEnum            `json:"error,omitempty"`
 	ErrorDescription *Labrp504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
+}
+
+type LabrpRequest struct {
+	Request  *LabrpRequestBody `request:"mediaType=application/json"`
+	Security LabrpSecurity
 }
 
 type LabrpResponse struct {

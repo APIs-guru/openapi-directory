@@ -1,60 +1,61 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetDeviceWirelessLatencyStatsPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=serial" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=serial" })
   serial: string;
 }
 
 export enum GetDeviceWirelessLatencyStatsBandEnum {
-    Two4 = "2.4"
-,    Five = "5"
+    Two4 = "2.4",
+    Five = "5"
 }
 
 
 export class GetDeviceWirelessLatencyStatsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=apTag" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=apTag" })
   apTag?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=band" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=band" })
   band?: GetDeviceWirelessLatencyStatsBandEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=fields" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=fields" })
   fields?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=ssid" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=ssid" })
   ssid?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=t0" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=t0" })
   t0?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=t1" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=t1" })
   t1?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=timespan" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=timespan" })
   timespan?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=vlan" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=vlan" })
   vlan?: number;
 }
 
 
 export class GetDeviceWirelessLatencyStatsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetDeviceWirelessLatencyStatsPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetDeviceWirelessLatencyStatsQueryParams;
 }
 
 
 export class GetDeviceWirelessLatencyStatsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getDeviceWirelessLatencyStats200ApplicationJsonObject?: Map<string, any>;
 }

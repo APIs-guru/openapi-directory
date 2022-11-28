@@ -14,6 +14,8 @@ type SetLoggingOptionsHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// SetLoggingOptionsRequestBodyLoggingOptionsPayload
+// Describes the logging options payload.
 type SetLoggingOptionsRequestBodyLoggingOptionsPayload struct {
 	LogLevel *shared.LogLevelEnum `json:"logLevel,omitempty"`
 	RoleArn  *string              `json:"roleArn,omitempty"`

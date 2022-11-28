@@ -1,6 +1,7 @@
 
 
+
 export enum TargetPlatformOsEnum {
-    Android = "ANDROID"
-,    Linux = "LINUX"
+    Android = "ANDROID",
+    Linux = "LINUX"
 }

@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { StreamDescription } from "./streamdescription";
+
 
 
 // DescribeStreamOutput
@@ -7,6 +8,6 @@ import { StreamDescription } from "./streamdescription";
  * Represents the output for <code>DescribeStream</code>.
 **/
 export class DescribeStreamOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=StreamDescription" })
+  @SpeakeasyMetadata({ data: "json, name=StreamDescription" })
   streamDescription: StreamDescription;
 }

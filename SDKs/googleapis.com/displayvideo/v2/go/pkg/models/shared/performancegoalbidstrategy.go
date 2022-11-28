@@ -13,6 +13,8 @@ const (
 	PerformanceGoalBidStrategyPerformanceGoalTypeEnumBiddingStrategyPerformanceGoalTypeAvViewed    PerformanceGoalBidStrategyPerformanceGoalTypeEnum = "BIDDING_STRATEGY_PERFORMANCE_GOAL_TYPE_AV_VIEWED"
 )
 
+// PerformanceGoalBidStrategy
+// A strategy that automatically adjusts the bid to meet or beat a specified performance goal.
 type PerformanceGoalBidStrategy struct {
 	CustomBiddingAlgorithmID     *string                                            `json:"customBiddingAlgorithmId,omitempty"`
 	MaxAverageCpmBidAmountMicros *string                                            `json:"maxAverageCpmBidAmountMicros,omitempty"`

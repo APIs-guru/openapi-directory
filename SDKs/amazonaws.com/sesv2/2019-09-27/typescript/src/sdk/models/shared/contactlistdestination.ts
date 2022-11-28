@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ContactListImportActionEnum } from "./contactlistimportactionenum";
+
 
 
 // ContactListDestination
@@ -7,9 +8,9 @@ import { ContactListImportActionEnum } from "./contactlistimportactionenum";
  * An object that contains details about the action of a contact list.
 **/
 export class ContactListDestination extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ContactListImportAction" })
+  @SpeakeasyMetadata({ data: "json, name=ContactListImportAction" })
   contactListImportAction: ContactListImportActionEnum;
 
-  @Metadata({ data: "json, name=ContactListName" })
+  @SpeakeasyMetadata({ data: "json, name=ContactListName" })
   contactListName: string;
 }

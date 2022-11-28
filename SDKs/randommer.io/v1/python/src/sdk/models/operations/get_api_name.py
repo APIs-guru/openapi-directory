@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class GetAPINameQueryParams:
-    name_type: shared.NameTypeEnum = field(default=None, metadata={'query_param': { 'field_name': 'nameType', 'style': 'form', 'explode': True }})
-    quantity: int = field(default=None, metadata={'query_param': { 'field_name': 'quantity', 'style': 'form', 'explode': True }})
+    name_type: shared.NameTypeEnum = field(metadata={'query_param': { 'field_name': 'nameType', 'style': 'form', 'explode': True }})
+    quantity: int = field(metadata={'query_param': { 'field_name': 'quantity', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -16,12 +17,12 @@ class GetAPINameHeaders:
 
 @dataclass
 class GetAPINameRequest:
-    query_params: GetAPINameQueryParams = field(default=None)
-    headers: GetAPINameHeaders = field(default=None)
+    headers: GetAPINameHeaders = field()
+    query_params: GetAPINameQueryParams = field()
     
 
 @dataclass
 class GetAPINameResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

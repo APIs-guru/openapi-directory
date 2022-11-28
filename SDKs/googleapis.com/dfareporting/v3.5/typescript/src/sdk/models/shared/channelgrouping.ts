@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ChannelGroupingRule } from "./channelgroupingrule";
+
 
 
 // ChannelGrouping
@@ -8,15 +8,15 @@ import { ChannelGroupingRule } from "./channelgroupingrule";
  * Represents a DfaReporting channel grouping.
 **/
 export class ChannelGrouping extends SpeakeasyBase {
-  @Metadata({ data: "json, name=fallbackName" })
+  @SpeakeasyMetadata({ data: "json, name=fallbackName" })
   fallbackName?: string;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=rules", elemType: shared.ChannelGroupingRule })
+  @SpeakeasyMetadata({ data: "json, name=rules", elemType: ChannelGroupingRule })
   rules?: ChannelGroupingRule[];
 }

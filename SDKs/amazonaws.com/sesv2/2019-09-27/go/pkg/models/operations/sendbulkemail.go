@@ -14,6 +14,8 @@ type SendBulkEmailHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// SendBulkEmailRequestBodyDefaultContent
+// An object that contains the body of the message. You can specify a template message.
 type SendBulkEmailRequestBodyDefaultContent struct {
 	Template *shared.Template `json:"Template,omitempty"`
 }

@@ -22,14 +22,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var GetSeriesIdOrderedSlicesPathParams = /** @class */ (function (_super) {
     __extends(GetSeriesIdOrderedSlicesPathParams, _super);
     function GetSeriesIdOrderedSlicesPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=id" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" }),
         __metadata("design:type", String)
     ], GetSeriesIdOrderedSlicesPathParams.prototype, "id", void 0);
     return GetSeriesIdOrderedSlicesPathParams;
@@ -41,7 +41,7 @@ var GetSeriesIdOrderedSlicesRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetSeriesIdOrderedSlicesPathParams)
     ], GetSeriesIdOrderedSlicesRequest.prototype, "pathParams", void 0);
     return GetSeriesIdOrderedSlicesRequest;
@@ -53,15 +53,15 @@ var GetSeriesIdOrderedSlicesResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetSeriesIdOrderedSlicesResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], GetSeriesIdOrderedSlicesResponse.prototype, "getSeriesIdOrderedSlices200ApplicationJsonAny", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetSeriesIdOrderedSlicesResponse.prototype, "statusCode", void 0);
     return GetSeriesIdOrderedSlicesResponse;

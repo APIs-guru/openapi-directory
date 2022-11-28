@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudApigeeV1Datastore } from "./googlecloudapigeev1datastore";
+
 
 
 // GoogleCloudApigeeV1ListDatastoresResponse
@@ -8,6 +8,6 @@ import { GoogleCloudApigeeV1Datastore } from "./googlecloudapigeev1datastore";
  * The response for ListDatastores
 **/
 export class GoogleCloudApigeeV1ListDatastoresResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=datastores", elemType: shared.GoogleCloudApigeeV1Datastore })
+  @SpeakeasyMetadata({ data: "json, name=datastores", elemType: GoogleCloudApigeeV1Datastore })
   datastores?: GoogleCloudApigeeV1Datastore[];
 }

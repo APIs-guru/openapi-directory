@@ -1,14 +1,35 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import { GoogleCloudContactcenterinsightsV1IssueModelInputDataConfig } from "./googlecloudcontactcenterinsightsv1issuemodelinputdataconfig";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { GoogleCloudContactcenterinsightsV1IssueModelInputDataConfigInput } from "./googlecloudcontactcenterinsightsv1issuemodelinputdataconfig";
 import { GoogleCloudContactcenterinsightsV1IssueModelLabelStats } from "./googlecloudcontactcenterinsightsv1issuemodellabelstats";
+import { GoogleCloudContactcenterinsightsV1IssueModelInputDataConfig } from "./googlecloudcontactcenterinsightsv1issuemodelinputdataconfig";
+
 
 export enum GoogleCloudContactcenterinsightsV1IssueModelStateEnum {
-    StateUnspecified = "STATE_UNSPECIFIED"
-,    Undeployed = "UNDEPLOYED"
-,    Deploying = "DEPLOYING"
-,    Deployed = "DEPLOYED"
-,    Undeploying = "UNDEPLOYING"
-,    Deleting = "DELETING"
+    StateUnspecified = "STATE_UNSPECIFIED",
+    Undeployed = "UNDEPLOYED",
+    Deploying = "DEPLOYING",
+    Deployed = "DEPLOYED",
+    Undeploying = "UNDEPLOYING",
+    Deleting = "DELETING"
+}
+
+
+// GoogleCloudContactcenterinsightsV1IssueModelInput
+/** 
+ * The issue model resource.
+**/
+export class GoogleCloudContactcenterinsightsV1IssueModelInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
+  displayName?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=inputDataConfig" })
+  inputDataConfig?: GoogleCloudContactcenterinsightsV1IssueModelInputDataConfigInput;
+
+  @SpeakeasyMetadata({ data: "json, name=name" })
+  name?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=trainingStats" })
+  trainingStats?: GoogleCloudContactcenterinsightsV1IssueModelLabelStats;
 }
 
 
@@ -17,24 +38,24 @@ export enum GoogleCloudContactcenterinsightsV1IssueModelStateEnum {
  * The issue model resource.
 **/
 export class GoogleCloudContactcenterinsightsV1IssueModel extends SpeakeasyBase {
-  @Metadata({ data: "json, name=createTime" })
+  @SpeakeasyMetadata({ data: "json, name=createTime" })
   createTime?: string;
 
-  @Metadata({ data: "json, name=displayName" })
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
   displayName?: string;
 
-  @Metadata({ data: "json, name=inputDataConfig" })
+  @SpeakeasyMetadata({ data: "json, name=inputDataConfig" })
   inputDataConfig?: GoogleCloudContactcenterinsightsV1IssueModelInputDataConfig;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=state" })
+  @SpeakeasyMetadata({ data: "json, name=state" })
   state?: GoogleCloudContactcenterinsightsV1IssueModelStateEnum;
 
-  @Metadata({ data: "json, name=trainingStats" })
+  @SpeakeasyMetadata({ data: "json, name=trainingStats" })
   trainingStats?: GoogleCloudContactcenterinsightsV1IssueModelLabelStats;
 
-  @Metadata({ data: "json, name=updateTime" })
+  @SpeakeasyMetadata({ data: "json, name=updateTime" })
   updateTime?: string;
 }

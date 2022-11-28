@@ -10,12 +10,12 @@ class GetChangesQueryParams:
 
 @dataclass
 class GetChangesRequest:
-    query_params: GetChangesQueryParams = field(default=None)
+    query_params: GetChangesQueryParams = field()
     
 
 @dataclass
 class GetChangesResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     get_changes_200_application_json_any: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

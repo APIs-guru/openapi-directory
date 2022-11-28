@@ -1,49 +1,50 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ContentDirectoryLinks extends SpeakeasyBase {
-  @Metadata({ data: "json, name=git" })
+  @SpeakeasyMetadata({ data: "json, name=git" })
   git: string;
 
-  @Metadata({ data: "json, name=html" })
+  @SpeakeasyMetadata({ data: "json, name=html" })
   html: string;
 
-  @Metadata({ data: "json, name=self" })
+  @SpeakeasyMetadata({ data: "json, name=self" })
   self: string;
 }
 
 
 export class ContentDirectory extends SpeakeasyBase {
-  @Metadata({ data: "json, name=_links" })
+  @SpeakeasyMetadata({ data: "json, name=_links" })
   links: ContentDirectoryLinks;
 
-  @Metadata({ data: "json, name=content" })
+  @SpeakeasyMetadata({ data: "json, name=content" })
   content?: string;
 
-  @Metadata({ data: "json, name=download_url" })
+  @SpeakeasyMetadata({ data: "json, name=download_url" })
   downloadUrl: string;
 
-  @Metadata({ data: "json, name=git_url" })
+  @SpeakeasyMetadata({ data: "json, name=git_url" })
   gitUrl: string;
 
-  @Metadata({ data: "json, name=html_url" })
+  @SpeakeasyMetadata({ data: "json, name=html_url" })
   htmlUrl: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 
-  @Metadata({ data: "json, name=path" })
+  @SpeakeasyMetadata({ data: "json, name=path" })
   path: string;
 
-  @Metadata({ data: "json, name=sha" })
+  @SpeakeasyMetadata({ data: "json, name=sha" })
   sha: string;
 
-  @Metadata({ data: "json, name=size" })
+  @SpeakeasyMetadata({ data: "json, name=size" })
   size: number;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type: string;
 
-  @Metadata({ data: "json, name=url" })
+  @SpeakeasyMetadata({ data: "json, name=url" })
   url: string;
 }

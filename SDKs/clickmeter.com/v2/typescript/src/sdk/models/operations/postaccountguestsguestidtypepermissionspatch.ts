@@ -1,58 +1,59 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
+
 export enum PostAccountGuestsGuestIdTypePermissionsPatchTypeEnum {
-    Datapoint = "datapoint"
-,    Group = "group"
+    Datapoint = "datapoint",
+    Group = "group"
 }
 
 
 export class PostAccountGuestsGuestIdTypePermissionsPatchPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=guestId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=guestId" })
   guestId: number;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=type" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=type" })
   type: PostAccountGuestsGuestIdTypePermissionsPatchTypeEnum;
 }
 
 
 export class PostAccountGuestsGuestIdTypePermissionsPatchRequests extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   apiCoreRequestsPermissionPatchRequest?: shared.ApiCoreRequestsPermissionPatchRequest;
 
-  @Metadata({ data: "request, media_type=application/x-www-form-urlencoded" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/x-www-form-urlencoded" })
   apiCoreRequestsPermissionPatchRequest1?: shared.ApiCoreRequestsPermissionPatchRequest;
 
-  @Metadata({ data: "request, media_type=text/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=text/json" })
   apiCoreRequestsPermissionPatchRequest2?: shared.ApiCoreRequestsPermissionPatchRequest;
 
-  @Metadata({ data: "request, media_type=application/xml" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/xml" })
   applicationXml: Uint8Array;
 
-  @Metadata({ data: "request, media_type=text/xml" })
+  @SpeakeasyMetadata({ data: "request, media_type=text/xml" })
   textXml: Uint8Array;
 }
 
 
 export class PostAccountGuestsGuestIdTypePermissionsPatchRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: PostAccountGuestsGuestIdTypePermissionsPatchPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   request: PostAccountGuestsGuestIdTypePermissionsPatchRequests;
 }
 
 
 export class PostAccountGuestsGuestIdTypePermissionsPatchResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   apiCoreResponsesEntityUriSystemInt64?: shared.ApiCoreResponsesEntityUriSystemInt64;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

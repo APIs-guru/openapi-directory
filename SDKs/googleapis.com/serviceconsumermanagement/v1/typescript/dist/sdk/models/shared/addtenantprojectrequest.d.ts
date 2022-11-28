@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { TenantProjectConfig } from "./tenantprojectconfig";
 /**
  * Request to add a newly created and configured tenant project to a tenancy unit.

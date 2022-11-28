@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class WebmastersSitemapsListPathParams:
-    site_url: str = field(default=None, metadata={'path_param': { 'field_name': 'siteUrl', 'style': 'simple', 'explode': False }})
+    site_url: str = field(metadata={'path_param': { 'field_name': 'siteUrl', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -22,14 +23,14 @@ class WebmastersSitemapsListQueryParams:
 
 @dataclass
 class WebmastersSitemapsListSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class WebmastersSitemapsListSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -40,14 +41,14 @@ class WebmastersSitemapsListSecurity:
 
 @dataclass
 class WebmastersSitemapsListRequest:
-    path_params: WebmastersSitemapsListPathParams = field(default=None)
-    query_params: WebmastersSitemapsListQueryParams = field(default=None)
-    security: WebmastersSitemapsListSecurity = field(default=None)
+    path_params: WebmastersSitemapsListPathParams = field()
+    query_params: WebmastersSitemapsListQueryParams = field()
+    security: WebmastersSitemapsListSecurity = field()
     
 
 @dataclass
 class WebmastersSitemapsListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     sitemaps_list_response: Optional[shared.SitemapsListResponse] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,87 +1,88 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
+
 export enum GetBuiltinIntentsLocaleEnum {
-    DeDe = "de-DE"
-,    EnAu = "en-AU"
-,    EnGb = "en-GB"
-,    EnIn = "en-IN"
-,    EnUs = "en-US"
-,    Es419 = "es-419"
-,    EsEs = "es-ES"
-,    EsUs = "es-US"
-,    FrFr = "fr-FR"
-,    FrCa = "fr-CA"
-,    ItIt = "it-IT"
-,    JaJp = "ja-JP"
-,    KoKr = "ko-KR"
+    DeDe = "de-DE",
+    EnAu = "en-AU",
+    EnGb = "en-GB",
+    EnIn = "en-IN",
+    EnUs = "en-US",
+    Es419 = "es-419",
+    EsEs = "es-ES",
+    EsUs = "es-US",
+    FrFr = "fr-FR",
+    FrCa = "fr-CA",
+    ItIt = "it-IT",
+    JaJp = "ja-JP",
+    KoKr = "ko-KR"
 }
 
 
 export class GetBuiltinIntentsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=locale" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=locale" })
   locale?: GetBuiltinIntentsLocaleEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=maxResults" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=maxResults" })
   maxResults?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=nextToken" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=nextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=signatureContains" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=signatureContains" })
   signatureContains?: string;
 }
 
 
 export class GetBuiltinIntentsHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
 
 export class GetBuiltinIntentsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetBuiltinIntentsQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: GetBuiltinIntentsHeaders;
 }
 
 
 export class GetBuiltinIntentsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   badRequestException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getBuiltinIntentsResponse?: shared.GetBuiltinIntentsResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   internalFailureException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   limitExceededException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

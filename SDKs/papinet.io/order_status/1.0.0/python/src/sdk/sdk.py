@@ -1,8 +1,11 @@
-import warnings
+
+
 import requests
-from typing import List,Optional
-from sdk.models import operations, shared
+from typing import Optional
+from sdk.models import shared, operations
 from . import utils
+
+
 
 
 SERVERS = [
@@ -11,28 +14,50 @@ SERVERS = [
 
 
 class SDK:
-    client = requests.Session()
-    server_url = SERVERS[0]
+    
+
+    _client: requests.Session
+    _security_client: requests.Session
+    
+    _server_url: str = SERVERS[0]
+    _language: str = "python"
+    _sdk_version: str = "0.0.1"
+    _gen_version: str = "internal"
+
+    def __init__(self) -> None:
+        self._client = requests.Session()
+        self._security_client = requests.Session()
+        
+
 
     def config_server_url(self, server_url: str, params: dict[str, str]):
-        if not params is None:
-            self.server_url = utils.replace_parameters(server_url, params)
+        if params is not None:
+            self._server_url = utils.replace_parameters(server_url, params)
         else:
-            self.server_url = server_url
-            
+            self._server_url = server_url
+
+        
     
 
+    def config_client(self, client: requests.Session):
+        self._client = client
+        
+    
+    
     
     def get_orders(self, request: operations.GetOrdersRequest) -> operations.GetOrdersResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""List `orders`
+        Gets a paginated list of all `orders`.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/orders"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -47,13 +72,17 @@ class SDK:
 
     
     def get_orders_order_id_(self, request: operations.GetOrdersOrderIDRequest) -> operations.GetOrdersOrderIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get an `order`
+        Gets the details of a specific `order`, including a paginated list of all its lines.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/orders/{orderId}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 

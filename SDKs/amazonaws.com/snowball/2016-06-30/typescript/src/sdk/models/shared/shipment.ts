@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Shipment
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The <code>Status</code> and <code>TrackingNumber</code> information for an inbound or outbound shipment.
 **/
 export class Shipment extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Status" })
+  @SpeakeasyMetadata({ data: "json, name=Status" })
   status?: string;
 
-  @Metadata({ data: "json, name=TrackingNumber" })
+  @SpeakeasyMetadata({ data: "json, name=TrackingNumber" })
   trackingNumber?: string;
 }

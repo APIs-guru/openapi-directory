@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DefaultGatewayRouteRewriteEnum } from "./defaultgatewayrouterewriteenum";
+
 
 
 // GatewayRouteHostnameRewrite
@@ -7,6 +8,6 @@ import { DefaultGatewayRouteRewriteEnum } from "./defaultgatewayrouterewriteenum
  * An object representing the gateway route host name to rewrite.
 **/
 export class GatewayRouteHostnameRewrite extends SpeakeasyBase {
-  @Metadata({ data: "json, name=defaultTargetHostname" })
+  @SpeakeasyMetadata({ data: "json, name=defaultTargetHostname" })
   defaultTargetHostname?: DefaultGatewayRouteRewriteEnum;
 }

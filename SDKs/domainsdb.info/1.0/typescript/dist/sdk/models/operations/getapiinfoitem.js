@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetApiInfoItemQueryParams = /** @class */ (function (_super) {
     __extends(GetApiInfoItemQueryParams, _super);
@@ -30,7 +30,7 @@ var GetApiInfoItemQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=api_key" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=api_key" }),
         __metadata("design:type", String)
     ], GetApiInfoItemQueryParams.prototype, "apiKey", void 0);
     return GetApiInfoItemQueryParams;
@@ -42,7 +42,7 @@ var GetApiInfoItemRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetApiInfoItemQueryParams)
     ], GetApiInfoItemRequest.prototype, "queryParams", void 0);
     return GetApiInfoItemRequest;
@@ -54,15 +54,15 @@ var GetApiInfoItemResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.ApiKeyInfo)
     ], GetApiInfoItemResponse.prototype, "apiKeyInfo", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetApiInfoItemResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetApiInfoItemResponse.prototype, "statusCode", void 0);
     return GetApiInfoItemResponse;

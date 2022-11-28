@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // CompatibleEnvironmentTemplate
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Compatible environment template data.
 **/
 export class CompatibleEnvironmentTemplate extends SpeakeasyBase {
-  @Metadata({ data: "json, name=majorVersion" })
+  @SpeakeasyMetadata({ data: "json, name=majorVersion" })
   majorVersion: string;
 
-  @Metadata({ data: "json, name=templateName" })
+  @SpeakeasyMetadata({ data: "json, name=templateName" })
   templateName: string;
 }

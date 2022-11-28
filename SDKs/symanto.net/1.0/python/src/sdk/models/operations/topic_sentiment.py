@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 class TopicSentimentDomainEnum(str, Enum):
@@ -16,13 +17,13 @@ class TopicSentimentQueryParams:
 
 @dataclass
 class TopicSentimentRequest:
-    query_params: TopicSentimentQueryParams = field(default=None)
+    query_params: TopicSentimentQueryParams = field()
     request: Optional[List[shared.Post]] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class TopicSentimentResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     topic_sentiment_response: Optional[List[shared.TopicSentimentOutput]] = field(default=None)
     

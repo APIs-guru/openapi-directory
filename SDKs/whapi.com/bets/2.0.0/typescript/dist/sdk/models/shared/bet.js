@@ -22,35 +22,35 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { Leg } from "./leg";
 var Bet = /** @class */ (function (_super) {
     __extends(Bet, _super);
     function Bet() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=delayedBetId" }),
+        SpeakeasyMetadata({ data: "json, name=delayedBetId" }),
         __metadata("design:type", String)
     ], Bet.prototype, "delayedBetId", void 0);
     __decorate([
-        Metadata({ data: "json, name=freeBetId" }),
+        SpeakeasyMetadata({ data: "json, name=freeBetId" }),
         __metadata("design:type", String)
     ], Bet.prototype, "freeBetId", void 0);
     __decorate([
-        Metadata({ data: "json, name=legs", elemType: shared.Leg }),
+        SpeakeasyMetadata({ data: "json, name=legs", elemType: Leg }),
         __metadata("design:type", Array)
     ], Bet.prototype, "legs", void 0);
     __decorate([
-        Metadata({ data: "json, name=number" }),
+        SpeakeasyMetadata({ data: "json, name=number" }),
         __metadata("design:type", Number)
     ], Bet.prototype, "number", void 0);
     __decorate([
-        Metadata({ data: "json, name=stake" }),
+        SpeakeasyMetadata({ data: "json, name=stake" }),
         __metadata("design:type", Number)
     ], Bet.prototype, "stake", void 0);
     __decorate([
-        Metadata({ data: "json, name=typeCode" }),
+        SpeakeasyMetadata({ data: "json, name=typeCode" }),
         __metadata("design:type", String)
     ], Bet.prototype, "typeCode", void 0);
     return Bet;

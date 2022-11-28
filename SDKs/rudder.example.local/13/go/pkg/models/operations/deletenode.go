@@ -12,17 +12,14 @@ type DeleteNodeQueryParams struct {
 	Mode *shared.NodeDeleteModeEnum `queryParam:"style=form,explode=true,name=mode"`
 }
 
-type DeleteNodeRequest struct {
-	PathParams  DeleteNodePathParams
-	QueryParams DeleteNodeQueryParams
-}
-
 type DeleteNode200ApplicationJSONActionEnum string
 
 const (
 	DeleteNode200ApplicationJSONActionEnumDeleteNode DeleteNode200ApplicationJSONActionEnum = "deleteNode"
 )
 
+// DeleteNode200ApplicationJSONData
+// Information about the node
 type DeleteNode200ApplicationJSONData struct {
 	Nodes []shared.NodeFull `json:"nodes"`
 }
@@ -38,6 +35,11 @@ type DeleteNode200ApplicationJSON struct {
 	Action DeleteNode200ApplicationJSONActionEnum `json:"action"`
 	Data   DeleteNode200ApplicationJSONData       `json:"data"`
 	Result DeleteNode200ApplicationJSONResultEnum `json:"result"`
+}
+
+type DeleteNodeRequest struct {
+	PathParams  DeleteNodePathParams
+	QueryParams DeleteNodeQueryParams
 }
 
 type DeleteNodeResponse struct {

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var ApiConfigHandlerAuthFailActionEnum;
 (function (ApiConfigHandlerAuthFailActionEnum) {
     ApiConfigHandlerAuthFailActionEnum["AuthFailActionUnspecified"] = "AUTH_FAIL_ACTION_UNSPECIFIED";
@@ -54,23 +54,23 @@ var ApiConfigHandler = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=authFailAction" }),
+        SpeakeasyMetadata({ data: "json, name=authFailAction" }),
         __metadata("design:type", String)
     ], ApiConfigHandler.prototype, "authFailAction", void 0);
     __decorate([
-        Metadata({ data: "json, name=login" }),
+        SpeakeasyMetadata({ data: "json, name=login" }),
         __metadata("design:type", String)
     ], ApiConfigHandler.prototype, "login", void 0);
     __decorate([
-        Metadata({ data: "json, name=script" }),
+        SpeakeasyMetadata({ data: "json, name=script" }),
         __metadata("design:type", String)
     ], ApiConfigHandler.prototype, "script", void 0);
     __decorate([
-        Metadata({ data: "json, name=securityLevel" }),
+        SpeakeasyMetadata({ data: "json, name=securityLevel" }),
         __metadata("design:type", String)
     ], ApiConfigHandler.prototype, "securityLevel", void 0);
     __decorate([
-        Metadata({ data: "json, name=url" }),
+        SpeakeasyMetadata({ data: "json, name=url" }),
         __metadata("design:type", String)
     ], ApiConfigHandler.prototype, "url", void 0);
     return ApiConfigHandler;

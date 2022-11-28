@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// Connection
+// Defines a connection to a data source.
 type Connection struct {
 	ConnectionProperties           map[string]string               `json:"ConnectionProperties,omitempty"`
 	ConnectionType                 *ConnectionTypeEnum             `json:"ConnectionType,omitempty"`

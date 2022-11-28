@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ScalingMetricTypeEnum } from "./scalingmetrictypeenum";
+
 
 
 // PredefinedScalingMetricSpecification
@@ -7,9 +8,9 @@ import { ScalingMetricTypeEnum } from "./scalingmetrictypeenum";
  * Represents a predefined metric that can be used for dynamic scaling as part of a target tracking scaling policy.
 **/
 export class PredefinedScalingMetricSpecification extends SpeakeasyBase {
-  @Metadata({ data: "json, name=PredefinedScalingMetricType" })
+  @SpeakeasyMetadata({ data: "json, name=PredefinedScalingMetricType" })
   predefinedScalingMetricType: ScalingMetricTypeEnum;
 
-  @Metadata({ data: "json, name=ResourceLabel" })
+  @SpeakeasyMetadata({ data: "json, name=ResourceLabel" })
   resourceLabel?: string;
 }

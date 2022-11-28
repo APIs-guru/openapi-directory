@@ -1,80 +1,80 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { UserAuthData } from "./userauthdata";
 import { UserAuthMethod } from "./userauthmethod";
-import { PublicKeyContainer } from "./publickeycontainer";
+import { PublicKeyContainerOutput } from "./publickeycontainer";
 import { UserAttributes } from "./userattributes";
 import { RoleList } from "./rolelist";
 
 
-// UserData
+
+// UserDataOutput
 /** 
  * User information
 **/
-export class UserData extends SpeakeasyBase {
-  @Metadata({ data: "json, name=authData" })
+export class UserDataOutput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=authData" })
   authData: UserAuthData;
 
-  @Metadata({ data: "json, name=authMethods", elemType: shared.UserAuthMethod })
+  @SpeakeasyMetadata({ data: "json, name=authMethods", elemType: UserAuthMethod })
   authMethods?: UserAuthMethod[];
 
-  @Metadata({ data: "json, name=avatarUuid" })
+  @SpeakeasyMetadata({ data: "json, name=avatarUuid" })
   avatarUuid: string;
 
-  @Metadata({ data: "json, name=email" })
+  @SpeakeasyMetadata({ data: "json, name=email" })
   email?: string;
 
-  @Metadata({ data: "json, name=expireAt" })
+  @SpeakeasyMetadata({ data: "json, name=expireAt" })
   expireAt?: Date;
 
-  @Metadata({ data: "json, name=firstName" })
+  @SpeakeasyMetadata({ data: "json, name=firstName" })
   firstName: string;
 
-  @Metadata({ data: "json, name=gender" })
+  @SpeakeasyMetadata({ data: "json, name=gender" })
   gender?: string;
 
-  @Metadata({ data: "json, name=hasManageableRooms" })
+  @SpeakeasyMetadata({ data: "json, name=hasManageableRooms" })
   hasManageableRooms?: boolean;
 
-  @Metadata({ data: "json, name=homeRoomId" })
+  @SpeakeasyMetadata({ data: "json, name=homeRoomId" })
   homeRoomId?: number;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: number;
 
-  @Metadata({ data: "json, name=isEncryptionEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=isEncryptionEnabled" })
   isEncryptionEnabled?: boolean;
 
-  @Metadata({ data: "json, name=isLocked" })
+  @SpeakeasyMetadata({ data: "json, name=isLocked" })
   isLocked: boolean;
 
-  @Metadata({ data: "json, name=lastLoginSuccessAt" })
+  @SpeakeasyMetadata({ data: "json, name=lastLoginSuccessAt" })
   lastLoginSuccessAt?: Date;
 
-  @Metadata({ data: "json, name=lastName" })
+  @SpeakeasyMetadata({ data: "json, name=lastName" })
   lastName: string;
 
-  @Metadata({ data: "json, name=lockStatus" })
+  @SpeakeasyMetadata({ data: "json, name=lockStatus" })
   lockStatus: number;
 
-  @Metadata({ data: "json, name=login" })
+  @SpeakeasyMetadata({ data: "json, name=login" })
   login?: string;
 
-  @Metadata({ data: "json, name=phone" })
+  @SpeakeasyMetadata({ data: "json, name=phone" })
   phone?: string;
 
-  @Metadata({ data: "json, name=publicKeyContainer" })
-  publicKeyContainer?: PublicKeyContainer;
+  @SpeakeasyMetadata({ data: "json, name=publicKeyContainer" })
+  publicKeyContainer?: PublicKeyContainerOutput;
 
-  @Metadata({ data: "json, name=title" })
+  @SpeakeasyMetadata({ data: "json, name=title" })
   title?: string;
 
-  @Metadata({ data: "json, name=userAttributes" })
+  @SpeakeasyMetadata({ data: "json, name=userAttributes" })
   userAttributes?: UserAttributes;
 
-  @Metadata({ data: "json, name=userName" })
+  @SpeakeasyMetadata({ data: "json, name=userName" })
   userName: string;
 
-  @Metadata({ data: "json, name=userRoles" })
+  @SpeakeasyMetadata({ data: "json, name=userRoles" })
   userRoles?: RoleList;
 }

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { SearchForPositionResult } from "./searchforpositionresult";
 import { SearchPlaceIndexForPositionSummary } from "./searchplaceindexforpositionsummary";
 export declare class SearchPlaceIndexForPositionResponse extends SpeakeasyBase {

@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 
 class GetAddonEnum(str, Enum):
     CONTINENT = "continent"
@@ -68,22 +69,22 @@ class GetPackageEnum(str, Enum):
 
 @dataclass
 class GetQueryParams:
+    ip: str = field(metadata={'query_param': { 'field_name': 'ip', 'style': 'form', 'explode': True }})
+    key: str = field(metadata={'query_param': { 'field_name': 'key', 'style': 'form', 'explode': True }})
     addon: Optional[List[GetAddonEnum]] = field(default=None, metadata={'query_param': { 'field_name': 'addon', 'style': 'form', 'explode': False }})
     format: Optional[GetFormatEnum] = field(default=None, metadata={'query_param': { 'field_name': 'format', 'style': 'form', 'explode': True }})
-    ip: str = field(default=None, metadata={'query_param': { 'field_name': 'ip', 'style': 'form', 'explode': True }})
-    key: str = field(default=None, metadata={'query_param': { 'field_name': 'key', 'style': 'form', 'explode': True }})
     lang: Optional[GetLangEnum] = field(default=None, metadata={'query_param': { 'field_name': 'lang', 'style': 'form', 'explode': True }})
     package: Optional[GetPackageEnum] = field(default=None, metadata={'query_param': { 'field_name': 'package', 'style': 'form', 'explode': True }})
     
 
 @dataclass
 class GetRequest:
-    query_params: GetQueryParams = field(default=None)
+    query_params: GetQueryParams = field()
     
 
 @dataclass
 class GetResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     get_200_application_json_string: Optional[str] = field(default=None)
-    status_code: int = field(default=None)
     

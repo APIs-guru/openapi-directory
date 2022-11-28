@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DynamodbDataSourceConfig } from "./dynamodbdatasourceconfig";
 import { ElasticsearchDataSourceConfig } from "./elasticsearchdatasourceconfig";
 import { HttpDataSourceConfig } from "./httpdatasourceconfig";
@@ -39,43 +39,43 @@ var DataSource = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=dataSourceArn" }),
+        SpeakeasyMetadata({ data: "json, name=dataSourceArn" }),
         __metadata("design:type", String)
     ], DataSource.prototype, "dataSourceArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=description" }),
+        SpeakeasyMetadata({ data: "json, name=description" }),
         __metadata("design:type", String)
     ], DataSource.prototype, "description", void 0);
     __decorate([
-        Metadata({ data: "json, name=dynamodbConfig" }),
+        SpeakeasyMetadata({ data: "json, name=dynamodbConfig" }),
         __metadata("design:type", DynamodbDataSourceConfig)
     ], DataSource.prototype, "dynamodbConfig", void 0);
     __decorate([
-        Metadata({ data: "json, name=elasticsearchConfig" }),
+        SpeakeasyMetadata({ data: "json, name=elasticsearchConfig" }),
         __metadata("design:type", ElasticsearchDataSourceConfig)
     ], DataSource.prototype, "elasticsearchConfig", void 0);
     __decorate([
-        Metadata({ data: "json, name=httpConfig" }),
+        SpeakeasyMetadata({ data: "json, name=httpConfig" }),
         __metadata("design:type", HttpDataSourceConfig)
     ], DataSource.prototype, "httpConfig", void 0);
     __decorate([
-        Metadata({ data: "json, name=lambdaConfig" }),
+        SpeakeasyMetadata({ data: "json, name=lambdaConfig" }),
         __metadata("design:type", LambdaDataSourceConfig)
     ], DataSource.prototype, "lambdaConfig", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], DataSource.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=relationalDatabaseConfig" }),
+        SpeakeasyMetadata({ data: "json, name=relationalDatabaseConfig" }),
         __metadata("design:type", RelationalDatabaseDataSourceConfig)
     ], DataSource.prototype, "relationalDatabaseConfig", void 0);
     __decorate([
-        Metadata({ data: "json, name=serviceRoleArn" }),
+        SpeakeasyMetadata({ data: "json, name=serviceRoleArn" }),
         __metadata("design:type", String)
     ], DataSource.prototype, "serviceRoleArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=type" }),
+        SpeakeasyMetadata({ data: "json, name=type" }),
         __metadata("design:type", String)
     ], DataSource.prototype, "type", void 0);
     return DataSource;

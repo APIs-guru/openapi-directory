@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var SourcesGetV2SourcesGetQueryParams = /** @class */ (function (_super) {
     __extends(SourcesGetV2SourcesGetQueryParams, _super);
@@ -30,35 +30,35 @@ var SourcesGetV2SourcesGetQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=limit" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=limit" }),
         __metadata("design:type", Number)
     ], SourcesGetV2SourcesGetQueryParams.prototype, "limit", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=offset" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=offset" }),
         __metadata("design:type", Number)
     ], SourcesGetV2SourcesGetQueryParams.prototype, "offset", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=order_by" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=order_by" }),
         __metadata("design:type", String)
     ], SourcesGetV2SourcesGetQueryParams.prototype, "orderBy", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=page" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page" }),
         __metadata("design:type", Number)
     ], SourcesGetV2SourcesGetQueryParams.prototype, "page", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=sort" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sort" }),
         __metadata("design:type", String)
     ], SourcesGetV2SourcesGetQueryParams.prototype, "sort", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=sourceId" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sourceId" }),
         __metadata("design:type", Array)
     ], SourcesGetV2SourcesGetQueryParams.prototype, "sourceId", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=sourceName" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sourceName" }),
         __metadata("design:type", Array)
     ], SourcesGetV2SourcesGetQueryParams.prototype, "sourceName", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=sourceSlug" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sourceSlug" }),
         __metadata("design:type", Array)
     ], SourcesGetV2SourcesGetQueryParams.prototype, "sourceSlug", void 0);
     return SourcesGetV2SourcesGetQueryParams;
@@ -70,7 +70,7 @@ var SourcesGetV2SourcesGetRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", SourcesGetV2SourcesGetQueryParams)
     ], SourcesGetV2SourcesGetRequest.prototype, "queryParams", void 0);
     return SourcesGetV2SourcesGetRequest;
@@ -82,19 +82,19 @@ var SourcesGetV2SourcesGetResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], SourcesGetV2SourcesGetResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.HttpValidationError)
     ], SourcesGetV2SourcesGetResponse.prototype, "httpValidationError", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.OpenAqResult)
     ], SourcesGetV2SourcesGetResponse.prototype, "openAqResult", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], SourcesGetV2SourcesGetResponse.prototype, "statusCode", void 0);
     return SourcesGetV2SourcesGetResponse;

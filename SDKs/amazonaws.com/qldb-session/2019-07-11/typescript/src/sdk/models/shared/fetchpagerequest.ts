@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // FetchPageRequest
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Specifies the details of the page to be fetched.
 **/
 export class FetchPageRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=NextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextPageToken" })
   nextPageToken: string;
 
-  @Metadata({ data: "json, name=TransactionId" })
+  @SpeakeasyMetadata({ data: "json, name=TransactionId" })
   transactionId: string;
 }

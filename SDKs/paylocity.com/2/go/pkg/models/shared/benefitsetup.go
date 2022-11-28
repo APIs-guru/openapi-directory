@@ -1,5 +1,7 @@
 package shared
 
+// BenefitSetup
+// The benefit setup model
 type BenefitSetup struct {
 	BenefitClass                   *string  `json:"benefitClass,omitempty"`
 	BenefitClassEffectiveDate      *string  `json:"benefitClassEffectiveDate,omitempty"`

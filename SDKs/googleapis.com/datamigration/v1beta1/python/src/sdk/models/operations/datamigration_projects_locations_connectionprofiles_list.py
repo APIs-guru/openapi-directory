@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DatamigrationProjectsLocationsConnectionProfilesListPathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -29,20 +30,20 @@ class DatamigrationProjectsLocationsConnectionProfilesListQueryParams:
 
 @dataclass
 class DatamigrationProjectsLocationsConnectionProfilesListSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DatamigrationProjectsLocationsConnectionProfilesListRequest:
-    path_params: DatamigrationProjectsLocationsConnectionProfilesListPathParams = field(default=None)
-    query_params: DatamigrationProjectsLocationsConnectionProfilesListQueryParams = field(default=None)
-    security: DatamigrationProjectsLocationsConnectionProfilesListSecurity = field(default=None)
+    path_params: DatamigrationProjectsLocationsConnectionProfilesListPathParams = field()
+    query_params: DatamigrationProjectsLocationsConnectionProfilesListQueryParams = field()
+    security: DatamigrationProjectsLocationsConnectionProfilesListSecurity = field()
     
 
 @dataclass
 class DatamigrationProjectsLocationsConnectionProfilesListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     list_connection_profiles_response: Optional[shared.ListConnectionProfilesResponse] = field(default=None)
-    status_code: int = field(default=None)
     

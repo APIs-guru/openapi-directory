@@ -1,41 +1,42 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class QualityGetDailyDataQualityForSitePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=version" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=version" })
   version: string;
 }
 
 
 export class QualityGetDailyDataQualityForSiteQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=end_date" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=end_date" })
   endDate: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=siteId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=siteId" })
   siteId: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=start_date" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=start_date" })
   startDate: string;
 }
 
 
 export class QualityGetDailyDataQualityForSiteRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: QualityGetDailyDataQualityForSitePathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: QualityGetDailyDataQualityForSiteQueryParams;
 }
 
 
 export class QualityGetDailyDataQualityForSiteResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   dailyQualityResponse?: shared.DailyQualityResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

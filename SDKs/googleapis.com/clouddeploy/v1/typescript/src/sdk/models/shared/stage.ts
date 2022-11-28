@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Strategy } from "./strategy";
+
 
 
 // Stage
@@ -7,12 +8,12 @@ import { Strategy } from "./strategy";
  * Stage specifies a location to which to deploy.
 **/
 export class Stage extends SpeakeasyBase {
-  @Metadata({ data: "json, name=profiles" })
+  @SpeakeasyMetadata({ data: "json, name=profiles" })
   profiles?: string[];
 
-  @Metadata({ data: "json, name=strategy" })
+  @SpeakeasyMetadata({ data: "json, name=strategy" })
   strategy?: Strategy;
 
-  @Metadata({ data: "json, name=targetId" })
+  @SpeakeasyMetadata({ data: "json, name=targetId" })
   targetId?: string;
 }

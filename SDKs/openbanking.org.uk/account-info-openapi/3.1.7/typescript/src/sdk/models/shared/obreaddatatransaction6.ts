@@ -1,9 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ObTransaction6 } from "./obtransaction6";
 
 
+
 export class ObReadDataTransaction6 extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Transaction", elemType: shared.ObTransaction6 })
+  @SpeakeasyMetadata({ data: "json, name=Transaction", elemType: ObTransaction6 })
   transaction?: ObTransaction6[];
 }

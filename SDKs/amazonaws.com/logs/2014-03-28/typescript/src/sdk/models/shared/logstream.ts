@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // LogStream
@@ -6,27 +7,27 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Represents a log stream, which is a sequence of log events from a single emitter of logs.
 **/
 export class LogStream extends SpeakeasyBase {
-  @Metadata({ data: "json, name=arn" })
+  @SpeakeasyMetadata({ data: "json, name=arn" })
   arn?: string;
 
-  @Metadata({ data: "json, name=creationTime" })
+  @SpeakeasyMetadata({ data: "json, name=creationTime" })
   creationTime?: number;
 
-  @Metadata({ data: "json, name=firstEventTimestamp" })
+  @SpeakeasyMetadata({ data: "json, name=firstEventTimestamp" })
   firstEventTimestamp?: number;
 
-  @Metadata({ data: "json, name=lastEventTimestamp" })
+  @SpeakeasyMetadata({ data: "json, name=lastEventTimestamp" })
   lastEventTimestamp?: number;
 
-  @Metadata({ data: "json, name=lastIngestionTime" })
+  @SpeakeasyMetadata({ data: "json, name=lastIngestionTime" })
   lastIngestionTime?: number;
 
-  @Metadata({ data: "json, name=logStreamName" })
+  @SpeakeasyMetadata({ data: "json, name=logStreamName" })
   logStreamName?: string;
 
-  @Metadata({ data: "json, name=storedBytes" })
+  @SpeakeasyMetadata({ data: "json, name=storedBytes" })
   storedBytes?: number;
 
-  @Metadata({ data: "json, name=uploadSequenceToken" })
+  @SpeakeasyMetadata({ data: "json, name=uploadSequenceToken" })
   uploadSequenceToken?: string;
 }

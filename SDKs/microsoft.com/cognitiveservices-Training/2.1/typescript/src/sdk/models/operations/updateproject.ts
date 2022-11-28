@@ -1,59 +1,60 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class UpdateProjectPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=projectId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=projectId" })
   projectId: string;
 }
 
 
 export class UpdateProjectHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=Training-Key" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Training-Key" })
   trainingKey: string;
 }
 
 
-export class UpdateProjectRequests extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/xml" })
+export class UpdateProjectRequestsInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "request, media_type=application/xml" })
   applicationXml: Uint8Array;
 
-  @Metadata({ data: "request, media_type=application/json" })
-  project?: shared.Project;
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  project?: shared.ProjectInput;
 
-  @Metadata({ data: "request, media_type=application/x-www-form-urlencoded" })
-  project1?: shared.Project;
+  @SpeakeasyMetadata({ data: "request, media_type=application/x-www-form-urlencoded" })
+  project1?: shared.ProjectInput;
 
-  @Metadata({ data: "request, media_type=text/json" })
-  project2?: shared.Project;
+  @SpeakeasyMetadata({ data: "request, media_type=text/json" })
+  project2?: shared.ProjectInput;
 
-  @Metadata({ data: "request, media_type=text/xml" })
+  @SpeakeasyMetadata({ data: "request, media_type=text/xml" })
   textXml: Uint8Array;
 }
 
 
 export class UpdateProjectRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: UpdateProjectPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: UpdateProjectHeaders;
 
-  @Metadata()
-  request: UpdateProjectRequests;
+  @SpeakeasyMetadata()
+  request: UpdateProjectRequestsInput;
 }
 
 
 export class UpdateProjectResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   project?: shared.Project;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

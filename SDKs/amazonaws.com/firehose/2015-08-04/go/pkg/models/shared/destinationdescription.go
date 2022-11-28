@@ -1,5 +1,7 @@
 package shared
 
+// DestinationDescription
+// Describes the destination for a delivery stream.
 type DestinationDescription struct {
 	DestinationID                       string                               `json:"DestinationId"`
 	ElasticsearchDestinationDescription *ElasticsearchDestinationDescription `json:"ElasticsearchDestinationDescription,omitempty"`

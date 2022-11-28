@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // PortRangeFromTo
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A range of ports.
 **/
 export class PortRangeFromTo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=From" })
+  @SpeakeasyMetadata({ data: "json, name=From" })
   from?: number;
 
-  @Metadata({ data: "json, name=To" })
+  @SpeakeasyMetadata({ data: "json, name=To" })
   to?: number;
 }

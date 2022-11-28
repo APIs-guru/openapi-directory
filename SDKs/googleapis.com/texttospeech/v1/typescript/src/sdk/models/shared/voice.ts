@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum VoiceSsmlGenderEnum {
-    SsmlVoiceGenderUnspecified = "SSML_VOICE_GENDER_UNSPECIFIED"
-,    Male = "MALE"
-,    Female = "FEMALE"
-,    Neutral = "NEUTRAL"
+    SsmlVoiceGenderUnspecified = "SSML_VOICE_GENDER_UNSPECIFIED",
+    Male = "MALE",
+    Female = "FEMALE",
+    Neutral = "NEUTRAL"
 }
 
 
@@ -13,15 +14,15 @@ export enum VoiceSsmlGenderEnum {
  * Description of a voice supported by the TTS service.
 **/
 export class Voice extends SpeakeasyBase {
-  @Metadata({ data: "json, name=languageCodes" })
+  @SpeakeasyMetadata({ data: "json, name=languageCodes" })
   languageCodes?: string[];
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=naturalSampleRateHertz" })
+  @SpeakeasyMetadata({ data: "json, name=naturalSampleRateHertz" })
   naturalSampleRateHertz?: number;
 
-  @Metadata({ data: "json, name=ssmlGender" })
+  @SpeakeasyMetadata({ data: "json, name=ssmlGender" })
   ssmlGender?: VoiceSsmlGenderEnum;
 }

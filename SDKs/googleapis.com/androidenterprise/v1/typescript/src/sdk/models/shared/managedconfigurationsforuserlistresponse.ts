@@ -1,9 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ManagedConfiguration } from "./managedconfiguration";
 
 
+
 export class ManagedConfigurationsForUserListResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=managedConfigurationForUser", elemType: shared.ManagedConfiguration })
+  @SpeakeasyMetadata({ data: "json, name=managedConfigurationForUser", elemType: ManagedConfiguration })
   managedConfigurationForUser?: ManagedConfiguration[];
 }

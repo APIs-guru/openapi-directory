@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class ExclusionRuleExcludeDeliveryEnum(str, Enum):
     STREAM = "Stream"
@@ -21,10 +23,14 @@ class ExclusionRuleExcludeMinResolutionEnum(str, Enum):
 @dataclass_json
 @dataclass
 class ExclusionRule:
-    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
-    device: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'device' }})
-    exclude_airplay: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'excludeAirplay' }})
-    exclude_chromecast: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'excludeChromecast' }})
-    exclude_delivery: Optional[ExclusionRuleExcludeDeliveryEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'excludeDelivery' }})
-    exclude_min_resolution: Optional[ExclusionRuleExcludeMinResolutionEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'excludeMinResolution' }})
+    r"""ExclusionRule
+    Defines playback exclusion rules for an Offer or Entitlement.
+    """
+    
+    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('description') }})
+    device: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('device') }})
+    exclude_airplay: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('excludeAirplay') }})
+    exclude_chromecast: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('excludeChromecast') }})
+    exclude_delivery: Optional[ExclusionRuleExcludeDeliveryEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('excludeDelivery') }})
+    exclude_min_resolution: Optional[ExclusionRuleExcludeMinResolutionEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('excludeMinResolution') }})
     

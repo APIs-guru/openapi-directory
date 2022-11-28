@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RdsHttpEndpointConfig } from "./rdshttpendpointconfig";
 import { RelationalDatabaseSourceTypeEnum } from "./relationaldatabasesourcetypeenum";
 // RelationalDatabaseDataSourceConfig
@@ -35,11 +35,11 @@ var RelationalDatabaseDataSourceConfig = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=rdsHttpEndpointConfig" }),
+        SpeakeasyMetadata({ data: "json, name=rdsHttpEndpointConfig" }),
         __metadata("design:type", RdsHttpEndpointConfig)
     ], RelationalDatabaseDataSourceConfig.prototype, "rdsHttpEndpointConfig", void 0);
     __decorate([
-        Metadata({ data: "json, name=relationalDatabaseSourceType" }),
+        SpeakeasyMetadata({ data: "json, name=relationalDatabaseSourceType" }),
         __metadata("design:type", String)
     ], RelationalDatabaseDataSourceConfig.prototype, "relationalDatabaseSourceType", void 0);
     return RelationalDatabaseDataSourceConfig;

@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class OcrPageResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=MeanConfidenceLevel" })
+  @SpeakeasyMetadata({ data: "json, name=MeanConfidenceLevel" })
   meanConfidenceLevel?: number;
 
-  @Metadata({ data: "json, name=PageNumber" })
+  @SpeakeasyMetadata({ data: "json, name=PageNumber" })
   pageNumber?: number;
 
-  @Metadata({ data: "json, name=TextResult" })
+  @SpeakeasyMetadata({ data: "json, name=TextResult" })
   textResult?: string;
 }

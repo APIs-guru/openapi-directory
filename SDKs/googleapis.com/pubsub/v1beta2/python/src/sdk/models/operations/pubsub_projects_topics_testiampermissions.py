@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class PubsubProjectsTopicsTestIamPermissionsPathParams:
-    resource: str = field(default=None, metadata={'path_param': { 'field_name': 'resource', 'style': 'simple', 'explode': False }})
+    resource: str = field(metadata={'path_param': { 'field_name': 'resource', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,14 +26,14 @@ class PubsubProjectsTopicsTestIamPermissionsQueryParams:
 
 @dataclass
 class PubsubProjectsTopicsTestIamPermissionsSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class PubsubProjectsTopicsTestIamPermissionsSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -43,15 +44,15 @@ class PubsubProjectsTopicsTestIamPermissionsSecurity:
 
 @dataclass
 class PubsubProjectsTopicsTestIamPermissionsRequest:
-    path_params: PubsubProjectsTopicsTestIamPermissionsPathParams = field(default=None)
-    query_params: PubsubProjectsTopicsTestIamPermissionsQueryParams = field(default=None)
+    path_params: PubsubProjectsTopicsTestIamPermissionsPathParams = field()
+    query_params: PubsubProjectsTopicsTestIamPermissionsQueryParams = field()
+    security: PubsubProjectsTopicsTestIamPermissionsSecurity = field()
     request: Optional[shared.TestIamPermissionsRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: PubsubProjectsTopicsTestIamPermissionsSecurity = field(default=None)
     
 
 @dataclass
 class PubsubProjectsTopicsTestIamPermissionsResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     test_iam_permissions_response: Optional[shared.TestIamPermissionsResponse] = field(default=None)
     

@@ -32,7 +32,7 @@ type TpuProjectsLocationsNodesCreateSecurity struct {
 type TpuProjectsLocationsNodesCreateRequest struct {
 	PathParams  TpuProjectsLocationsNodesCreatePathParams
 	QueryParams TpuProjectsLocationsNodesCreateQueryParams
-	Request     *shared.Node `request:"mediaType=application/json"`
+	Request     *shared.NodeInput `request:"mediaType=application/json"`
 	Security    TpuProjectsLocationsNodesCreateSecurity
 }
 

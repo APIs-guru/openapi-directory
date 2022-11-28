@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // ConstraintDetail
 /**
  * Information about a constraint.
@@ -33,27 +33,27 @@ var ConstraintDetail = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=ConstraintId" }),
+        SpeakeasyMetadata({ data: "json, name=ConstraintId" }),
         __metadata("design:type", String)
     ], ConstraintDetail.prototype, "constraintId", void 0);
     __decorate([
-        Metadata({ data: "json, name=Description" }),
+        SpeakeasyMetadata({ data: "json, name=Description" }),
         __metadata("design:type", String)
     ], ConstraintDetail.prototype, "description", void 0);
     __decorate([
-        Metadata({ data: "json, name=Owner" }),
+        SpeakeasyMetadata({ data: "json, name=Owner" }),
         __metadata("design:type", String)
     ], ConstraintDetail.prototype, "owner", void 0);
     __decorate([
-        Metadata({ data: "json, name=PortfolioId" }),
+        SpeakeasyMetadata({ data: "json, name=PortfolioId" }),
         __metadata("design:type", String)
     ], ConstraintDetail.prototype, "portfolioId", void 0);
     __decorate([
-        Metadata({ data: "json, name=ProductId" }),
+        SpeakeasyMetadata({ data: "json, name=ProductId" }),
         __metadata("design:type", String)
     ], ConstraintDetail.prototype, "productId", void 0);
     __decorate([
-        Metadata({ data: "json, name=Type" }),
+        SpeakeasyMetadata({ data: "json, name=Type" }),
         __metadata("design:type", String)
     ], ConstraintDetail.prototype, "type", void 0);
     return ConstraintDetail;

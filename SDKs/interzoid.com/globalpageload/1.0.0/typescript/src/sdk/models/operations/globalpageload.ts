@@ -1,52 +1,53 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GlobalpageloadQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=license" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=license" })
   license: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=origin" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=origin" })
   origin: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=url" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=url" })
   url: string;
 }
 
 
-export class GlobalpageloadRequest extends SpeakeasyBase {
-  @Metadata()
-  queryParams: GlobalpageloadQueryParams;
-}
-
-
 export class Globalpageload200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Code" })
+  @SpeakeasyMetadata({ data: "json, name=Code" })
   code?: string;
 
-  @Metadata({ data: "json, name=Contents" })
+  @SpeakeasyMetadata({ data: "json, name=Contents" })
   contents?: string;
 
-  @Metadata({ data: "json, name=Credits" })
+  @SpeakeasyMetadata({ data: "json, name=Credits" })
   credits?: string;
 
-  @Metadata({ data: "json, name=Origin" })
+  @SpeakeasyMetadata({ data: "json, name=Origin" })
   origin?: string;
 
-  @Metadata({ data: "json, name=PageResponseStatus" })
+  @SpeakeasyMetadata({ data: "json, name=PageResponseStatus" })
   pageResponseStatus?: string;
 
-  @Metadata({ data: "json, name=Seconds" })
+  @SpeakeasyMetadata({ data: "json, name=Seconds" })
   seconds?: string;
 }
 
 
+export class GlobalpageloadRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  queryParams: GlobalpageloadQueryParams;
+}
+
+
 export class GlobalpageloadResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   globalpageload200ApplicationJsonObject?: Globalpageload200ApplicationJson;
 }

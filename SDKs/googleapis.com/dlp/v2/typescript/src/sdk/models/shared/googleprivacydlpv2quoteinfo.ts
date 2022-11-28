@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GooglePrivacyDlpV2DateTime } from "./googleprivacydlpv2datetime";
+
 
 
 // GooglePrivacyDlpV2QuoteInfo
@@ -7,6 +8,6 @@ import { GooglePrivacyDlpV2DateTime } from "./googleprivacydlpv2datetime";
  * Message for infoType-dependent details parsed from quote.
 **/
 export class GooglePrivacyDlpV2QuoteInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=dateTime" })
+  @SpeakeasyMetadata({ data: "json, name=dateTime" })
   dateTime?: GooglePrivacyDlpV2DateTime;
 }

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var FindUsersByUsernameQueryParams = /** @class */ (function (_super) {
     __extends(FindUsersByUsernameQueryParams, _super);
@@ -30,31 +30,31 @@ var FindUsersByUsernameQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=false;name=expansions" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=expansions" }),
         __metadata("design:type", Array)
     ], FindUsersByUsernameQueryParams.prototype, "expansions", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=false;name=media.fields" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=media.fields" }),
         __metadata("design:type", Array)
     ], FindUsersByUsernameQueryParams.prototype, "mediaFields", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=false;name=place.fields" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=place.fields" }),
         __metadata("design:type", Array)
     ], FindUsersByUsernameQueryParams.prototype, "placeFields", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=false;name=poll.fields" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=poll.fields" }),
         __metadata("design:type", Array)
     ], FindUsersByUsernameQueryParams.prototype, "pollFields", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=false;name=tweet.fields" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=tweet.fields" }),
         __metadata("design:type", Array)
     ], FindUsersByUsernameQueryParams.prototype, "tweetFields", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=false;name=user.fields" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=user.fields" }),
         __metadata("design:type", Array)
     ], FindUsersByUsernameQueryParams.prototype, "userFields", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=false;name=usernames" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=usernames" }),
         __metadata("design:type", Array)
     ], FindUsersByUsernameQueryParams.prototype, "usernames", void 0);
     return FindUsersByUsernameQueryParams;
@@ -66,7 +66,7 @@ var FindUsersByUsernameRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", FindUsersByUsernameQueryParams)
     ], FindUsersByUsernameRequest.prototype, "queryParams", void 0);
     return FindUsersByUsernameRequest;
@@ -78,23 +78,23 @@ var FindUsersByUsernameResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], FindUsersByUsernameResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], FindUsersByUsernameResponse.prototype, "error", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], FindUsersByUsernameResponse.prototype, "problem", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], FindUsersByUsernameResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.UserLookupResponse)
     ], FindUsersByUsernameResponse.prototype, "userLookupResponse", void 0);
     return FindUsersByUsernameResponse;

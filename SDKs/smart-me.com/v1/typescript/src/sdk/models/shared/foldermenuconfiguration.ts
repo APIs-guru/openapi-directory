@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { FolderMenuItem } from "./foldermenuitem";
+
 
 
 // FolderMenuConfiguration
@@ -8,12 +8,12 @@ import { FolderMenuItem } from "./foldermenuitem";
  * Container Class for the Web API representing a folder menu and it's items
 **/
 export class FolderMenuConfiguration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=BrowserTimeZoneName" })
+  @SpeakeasyMetadata({ data: "json, name=BrowserTimeZoneName" })
   browserTimeZoneName?: string;
 
-  @Metadata({ data: "json, name=BrowserUtcTime" })
+  @SpeakeasyMetadata({ data: "json, name=BrowserUtcTime" })
   browserUtcTime?: string;
 
-  @Metadata({ data: "json, name=Items", elemType: shared.FolderMenuItem })
+  @SpeakeasyMetadata({ data: "json, name=Items", elemType: FolderMenuItem })
   items?: FolderMenuItem[];
 }

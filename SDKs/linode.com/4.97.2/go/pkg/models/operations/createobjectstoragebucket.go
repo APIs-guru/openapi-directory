@@ -4,7 +4,7 @@ import (
 	"openapi/pkg/models/shared"
 )
 
-var CreateObjectStorageBucketServers = []string{
+var CreateObjectStorageBucketServerList = []string{
 	"https://api.linode.com/v4",
 }
 
@@ -24,27 +24,19 @@ type CreateObjectStorageBucketRequestBody struct {
 	Label       string                                       `json:"label"`
 }
 
-type CreateObjectStorageBucketSecurityOption1 struct {
-	PersonalAccessToken shared.SchemePersonalAccessToken `security:"scheme,type=http,subtype=bearer"`
-}
-
-type CreateObjectStorageBucketSecurityOption2 struct {
-	Oauth shared.SchemeOauth `security:"scheme,type=oauth2"`
-}
-
 type CreateObjectStorageBucketSecurity struct {
-	Option1 *CreateObjectStorageBucketSecurityOption1 `security:"option"`
-	Option2 *CreateObjectStorageBucketSecurityOption2 `security:"option"`
+	PersonalAccessToken *shared.SchemePersonalAccessToken `security:"scheme,type=http,subtype=bearer"`
+	Oauth               *shared.SchemeOauth               `security:"scheme,type=oauth2"`
+}
+
+type CreateObjectStorageBucketDefaultApplicationJSON struct {
+	Errors []shared.ErrorObject `json:"errors,omitempty"`
 }
 
 type CreateObjectStorageBucketRequest struct {
 	ServerURL *string
 	Request   *CreateObjectStorageBucketRequestBody `request:"mediaType=application/json"`
 	Security  CreateObjectStorageBucketSecurity
-}
-
-type CreateObjectStorageBucketDefaultApplicationJSON struct {
-	Errors []shared.ErrorObject `json:"errors,omitempty"`
 }
 
 type CreateObjectStorageBucketResponse struct {

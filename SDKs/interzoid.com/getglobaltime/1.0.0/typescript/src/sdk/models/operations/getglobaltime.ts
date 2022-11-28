@@ -1,79 +1,80 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetglobaltimeQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=license" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=license" })
   license: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=locale" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=locale" })
   locale: string;
 }
 
 
-export class GetglobaltimeRequest extends SpeakeasyBase {
-  @Metadata()
-  queryParams: GetglobaltimeQueryParams;
-}
-
-
 export class Getglobaltime200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ClockTime" })
+  @SpeakeasyMetadata({ data: "json, name=ClockTime" })
   clockTime?: string;
 
-  @Metadata({ data: "json, name=Code" })
+  @SpeakeasyMetadata({ data: "json, name=Code" })
   code?: string;
 
-  @Metadata({ data: "json, name=Credits" })
+  @SpeakeasyMetadata({ data: "json, name=Credits" })
   credits?: string;
 
-  @Metadata({ data: "json, name=CurrentDate" })
+  @SpeakeasyMetadata({ data: "json, name=CurrentDate" })
   currentDate?: string;
 
-  @Metadata({ data: "json, name=CurrentTime" })
+  @SpeakeasyMetadata({ data: "json, name=CurrentTime" })
   currentTime?: string;
 
-  @Metadata({ data: "json, name=Day" })
+  @SpeakeasyMetadata({ data: "json, name=Day" })
   day?: string;
 
-  @Metadata({ data: "json, name=Hour" })
+  @SpeakeasyMetadata({ data: "json, name=Hour" })
   hour?: string;
 
-  @Metadata({ data: "json, name=Locale" })
+  @SpeakeasyMetadata({ data: "json, name=Locale" })
   locale?: string;
 
-  @Metadata({ data: "json, name=Minute" })
+  @SpeakeasyMetadata({ data: "json, name=Minute" })
   minute?: string;
 
-  @Metadata({ data: "json, name=Month" })
+  @SpeakeasyMetadata({ data: "json, name=Month" })
   month?: string;
 
-  @Metadata({ data: "json, name=MonthNumber" })
+  @SpeakeasyMetadata({ data: "json, name=MonthNumber" })
   monthNumber?: string;
 
-  @Metadata({ data: "json, name=Second" })
+  @SpeakeasyMetadata({ data: "json, name=Second" })
   second?: string;
 
-  @Metadata({ data: "json, name=TimeStamp" })
+  @SpeakeasyMetadata({ data: "json, name=TimeStamp" })
   timeStamp?: string;
 
-  @Metadata({ data: "json, name=Weekday" })
+  @SpeakeasyMetadata({ data: "json, name=Weekday" })
   weekday?: string;
 
-  @Metadata({ data: "json, name=Year" })
+  @SpeakeasyMetadata({ data: "json, name=Year" })
   year?: string;
 
-  @Metadata({ data: "json, name=Zone" })
+  @SpeakeasyMetadata({ data: "json, name=Zone" })
   zone?: string;
 }
 
 
+export class GetglobaltimeRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  queryParams: GetglobaltimeQueryParams;
+}
+
+
 export class GetglobaltimeResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getglobaltime200ApplicationJsonObject?: Getglobaltime200ApplicationJson;
 }

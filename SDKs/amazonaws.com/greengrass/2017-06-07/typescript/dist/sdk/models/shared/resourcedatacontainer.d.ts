@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { LocalDeviceResourceData } from "./localdeviceresourcedata";
 import { LocalVolumeResourceData } from "./localvolumeresourcedata";
 import { S3MachineLearningModelResourceData } from "./s3machinelearningmodelresourcedata";

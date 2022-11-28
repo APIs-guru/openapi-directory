@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { AddressAutocompleteResult } from "./addressautocompleteresult";
 export declare class AddressAutocompleteResponseSchema extends SpeakeasyBase {
     code?: number;

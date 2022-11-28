@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ActionType } from "./actiontype";
+
 
 
 // ListActionTypesOutput
@@ -8,9 +8,9 @@ import { ActionType } from "./actiontype";
  * Represents the output of a <code>ListActionTypes</code> action.
 **/
 export class ListActionTypesOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=actionTypes", elemType: shared.ActionType })
+  @SpeakeasyMetadata({ data: "json, name=actionTypes", elemType: ActionType })
   actionTypes: ActionType[];
 
-  @Metadata({ data: "json, name=nextToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextToken" })
   nextToken?: string;
 }

@@ -1,13 +1,14 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
 from typing import Optional
+from sdk.models import shared
 
 
 @dataclass
 class AppGetApplicationAPIUsagePathParams:
-    application_id: int = field(default=None, metadata={'path_param': { 'field_name': 'applicationId', 'style': 'simple', 'explode': False }})
+    application_id: int = field(metadata={'path_param': { 'field_name': 'applicationId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -18,19 +19,19 @@ class AppGetApplicationAPIUsageQueryParams:
 
 @dataclass
 class AppGetApplicationAPIUsageSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class AppGetApplicationAPIUsageRequest:
-    path_params: AppGetApplicationAPIUsagePathParams = field(default=None)
-    query_params: AppGetApplicationAPIUsageQueryParams = field(default=None)
-    security: AppGetApplicationAPIUsageSecurity = field(default=None)
+    path_params: AppGetApplicationAPIUsagePathParams = field()
+    query_params: AppGetApplicationAPIUsageQueryParams = field()
+    security: AppGetApplicationAPIUsageSecurity = field()
     
 
 @dataclass
 class AppGetApplicationAPIUsageResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

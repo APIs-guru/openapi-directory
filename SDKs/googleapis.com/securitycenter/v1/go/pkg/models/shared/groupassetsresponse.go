@@ -1,5 +1,7 @@
 package shared
 
+// GroupAssetsResponse
+// Response message for grouping by assets.
 type GroupAssetsResponse struct {
 	GroupByResults []GroupResult `json:"groupByResults,omitempty"`
 	NextPageToken  *string       `json:"nextPageToken,omitempty"`

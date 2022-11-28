@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { DatePattern } from "./datepattern";
 import { TimePattern } from "./timepattern";
 export declare class Alarm extends SpeakeasyBase {

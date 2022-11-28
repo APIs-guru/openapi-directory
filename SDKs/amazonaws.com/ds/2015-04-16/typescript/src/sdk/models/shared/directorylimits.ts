@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // DirectoryLimits
@@ -6,30 +7,30 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Contains directory limit information for a Region.
 **/
 export class DirectoryLimits extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CloudOnlyDirectoriesCurrentCount" })
+  @SpeakeasyMetadata({ data: "json, name=CloudOnlyDirectoriesCurrentCount" })
   cloudOnlyDirectoriesCurrentCount?: number;
 
-  @Metadata({ data: "json, name=CloudOnlyDirectoriesLimit" })
+  @SpeakeasyMetadata({ data: "json, name=CloudOnlyDirectoriesLimit" })
   cloudOnlyDirectoriesLimit?: number;
 
-  @Metadata({ data: "json, name=CloudOnlyDirectoriesLimitReached" })
+  @SpeakeasyMetadata({ data: "json, name=CloudOnlyDirectoriesLimitReached" })
   cloudOnlyDirectoriesLimitReached?: boolean;
 
-  @Metadata({ data: "json, name=CloudOnlyMicrosoftADCurrentCount" })
+  @SpeakeasyMetadata({ data: "json, name=CloudOnlyMicrosoftADCurrentCount" })
   cloudOnlyMicrosoftAdCurrentCount?: number;
 
-  @Metadata({ data: "json, name=CloudOnlyMicrosoftADLimit" })
+  @SpeakeasyMetadata({ data: "json, name=CloudOnlyMicrosoftADLimit" })
   cloudOnlyMicrosoftAdLimit?: number;
 
-  @Metadata({ data: "json, name=CloudOnlyMicrosoftADLimitReached" })
+  @SpeakeasyMetadata({ data: "json, name=CloudOnlyMicrosoftADLimitReached" })
   cloudOnlyMicrosoftAdLimitReached?: boolean;
 
-  @Metadata({ data: "json, name=ConnectedDirectoriesCurrentCount" })
+  @SpeakeasyMetadata({ data: "json, name=ConnectedDirectoriesCurrentCount" })
   connectedDirectoriesCurrentCount?: number;
 
-  @Metadata({ data: "json, name=ConnectedDirectoriesLimit" })
+  @SpeakeasyMetadata({ data: "json, name=ConnectedDirectoriesLimit" })
   connectedDirectoriesLimit?: number;
 
-  @Metadata({ data: "json, name=ConnectedDirectoriesLimitReached" })
+  @SpeakeasyMetadata({ data: "json, name=ConnectedDirectoriesLimitReached" })
   connectedDirectoriesLimitReached?: boolean;
 }

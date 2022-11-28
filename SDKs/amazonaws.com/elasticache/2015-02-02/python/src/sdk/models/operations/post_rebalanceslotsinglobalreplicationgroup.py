@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostRebalanceSlotsInGlobalReplicationGroupActionEnum(str, Enum):
     REBALANCE_SLOTS_IN_GLOBAL_REPLICATION_GROUP = "RebalanceSlotsInGlobalReplicationGroup"
@@ -10,8 +14,8 @@ class PostRebalanceSlotsInGlobalReplicationGroupVersionEnum(str, Enum):
 
 @dataclass
 class PostRebalanceSlotsInGlobalReplicationGroupQueryParams:
-    action: PostRebalanceSlotsInGlobalReplicationGroupActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostRebalanceSlotsInGlobalReplicationGroupVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostRebalanceSlotsInGlobalReplicationGroupActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostRebalanceSlotsInGlobalReplicationGroupVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostRebalanceSlotsInGlobalReplicationGroupHeaders:
 
 @dataclass
 class PostRebalanceSlotsInGlobalReplicationGroupRequest:
-    query_params: PostRebalanceSlotsInGlobalReplicationGroupQueryParams = field(default=None)
-    headers: PostRebalanceSlotsInGlobalReplicationGroupHeaders = field(default=None)
+    headers: PostRebalanceSlotsInGlobalReplicationGroupHeaders = field()
+    query_params: PostRebalanceSlotsInGlobalReplicationGroupQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostRebalanceSlotsInGlobalReplicationGroupResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

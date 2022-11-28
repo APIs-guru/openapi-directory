@@ -1,31 +1,32 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DeleteReportPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=commit" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=commit" })
   commit: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=repo_slug" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=repo_slug" })
   repoSlug: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=reportId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=reportId" })
   reportId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=workspace" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=workspace" })
   workspace: string;
 }
 
 
 export class DeleteReportRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: DeleteReportPathParams;
 }
 
 
 export class DeleteReportResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

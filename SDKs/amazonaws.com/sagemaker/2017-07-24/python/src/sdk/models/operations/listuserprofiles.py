@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
@@ -14,6 +18,7 @@ class ListUserProfilesXAmzTargetEnum(str, Enum):
 
 @dataclass
 class ListUserProfilesHeaders:
+    x_amz_target: ListUserProfilesXAmzTargetEnum = field(metadata={'header': { 'field_name': 'X-Amz-Target', 'style': 'simple', 'explode': False }})
     x_amz_algorithm: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Algorithm', 'style': 'simple', 'explode': False }})
     x_amz_content_sha256: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Content-Sha256', 'style': 'simple', 'explode': False }})
     x_amz_credential: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Credential', 'style': 'simple', 'explode': False }})
@@ -21,19 +26,18 @@ class ListUserProfilesHeaders:
     x_amz_security_token: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Security-Token', 'style': 'simple', 'explode': False }})
     x_amz_signature: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Signature', 'style': 'simple', 'explode': False }})
     x_amz_signed_headers: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-SignedHeaders', 'style': 'simple', 'explode': False }})
-    x_amz_target: ListUserProfilesXAmzTargetEnum = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Target', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class ListUserProfilesRequest:
-    query_params: ListUserProfilesQueryParams = field(default=None)
-    headers: ListUserProfilesHeaders = field(default=None)
-    request: shared.ListUserProfilesRequest = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: ListUserProfilesHeaders = field()
+    query_params: ListUserProfilesQueryParams = field()
+    request: shared.ListUserProfilesRequest = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class ListUserProfilesResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     list_user_profiles_response: Optional[shared.ListUserProfilesResponse] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,5 +1,8 @@
 from dataclasses import dataclass, field
-from typing import List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
 from sdk.models import shared
 
 
@@ -22,13 +25,13 @@ class ListLoggerDefinitionsHeaders:
 
 @dataclass
 class ListLoggerDefinitionsRequest:
-    query_params: ListLoggerDefinitionsQueryParams = field(default=None)
-    headers: ListLoggerDefinitionsHeaders = field(default=None)
+    headers: ListLoggerDefinitionsHeaders = field()
+    query_params: ListLoggerDefinitionsQueryParams = field()
     
 
 @dataclass
 class ListLoggerDefinitionsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     list_logger_definitions_response: Optional[shared.ListLoggerDefinitionsResponse] = field(default=None)
-    status_code: int = field(default=None)
     

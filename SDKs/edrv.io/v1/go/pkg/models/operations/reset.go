@@ -5,14 +5,14 @@ type ResetRequestBody struct {
 	Type          *string `json:"type,omitempty"`
 }
 
-type ResetRequest struct {
-	Request ResetRequestBody `request:"mediaType=application/json"`
-}
-
 type Reset201ApplicationJSON struct {
 	Message *string                `json:"message,omitempty"`
 	Ok      *bool                  `json:"ok,omitempty"`
 	Result  map[string]interface{} `json:"result,omitempty"`
+}
+
+type ResetRequest struct {
+	Request ResetRequestBody `request:"mediaType=application/json"`
 }
 
 type ResetResponse struct {

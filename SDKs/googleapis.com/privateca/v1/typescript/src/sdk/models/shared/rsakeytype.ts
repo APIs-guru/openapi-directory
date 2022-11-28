@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // RsaKeyType
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Describes an RSA key that may be used in a Certificate issued from a CaPool.
 **/
 export class RsaKeyType extends SpeakeasyBase {
-  @Metadata({ data: "json, name=maxModulusSize" })
+  @SpeakeasyMetadata({ data: "json, name=maxModulusSize" })
   maxModulusSize?: string;
 
-  @Metadata({ data: "json, name=minModulusSize" })
+  @SpeakeasyMetadata({ data: "json, name=minModulusSize" })
   minModulusSize?: string;
 }

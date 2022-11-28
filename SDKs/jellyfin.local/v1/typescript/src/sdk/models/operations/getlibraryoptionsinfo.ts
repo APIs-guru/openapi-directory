@@ -1,38 +1,39 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetLibraryOptionsInfoQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=isNewLibrary" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=isNewLibrary" })
   isNewLibrary?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=libraryContentType" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=libraryContentType" })
   libraryContentType?: string;
 }
 
 
 export class GetLibraryOptionsInfoSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
   customAuthentication: shared.SchemeCustomAuthentication;
 }
 
 
 export class GetLibraryOptionsInfoRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetLibraryOptionsInfoQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: GetLibraryOptionsInfoSecurity;
 }
 
 
 export class GetLibraryOptionsInfoResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   libraryOptionsResultDto?: shared.LibraryOptionsResultDto;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

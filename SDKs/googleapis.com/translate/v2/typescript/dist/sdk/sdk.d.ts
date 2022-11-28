@@ -1,18 +1,21 @@
-import { AxiosInstance, AxiosRequestConfig } from "axios";
-import * as operations from "./models/operations";
-declare type OptsFunc = (sdk: SDK) => void;
+import { AxiosInstance } from "axios";
+import { Detections } from "./detections";
+import { Languages } from "./languages";
+import { Translations } from "./translations";
+type OptsFunc = (sdk: SDK) => void;
+export declare const ServerList: readonly ["https://translation.googleapis.com/language/translate"];
 export declare function WithServerURL(serverURL: string, params?: Map<string, string>): OptsFunc;
 export declare function WithClient(client: AxiosInstance): OptsFunc;
 export declare class SDK {
-    defaultClient?: AxiosInstance;
-    securityClient?: AxiosInstance;
-    security?: any;
-    serverURL: string;
+    detections: Detections;
+    languages: Languages;
+    translations: Translations;
+    _defaultClient: AxiosInstance;
+    _securityClient: AxiosInstance;
+    _serverURL: string;
+    private _language;
+    private _sdkVersion;
+    private _genVersion;
     constructor(...opts: OptsFunc[]);
-    LanguageDetectionsDetect(req: operations.LanguageDetectionsDetectRequest, config?: AxiosRequestConfig): Promise<operations.LanguageDetectionsDetectResponse>;
-    LanguageDetectionsList(req: operations.LanguageDetectionsListRequest, config?: AxiosRequestConfig): Promise<operations.LanguageDetectionsListResponse>;
-    LanguageLanguagesList(req: operations.LanguageLanguagesListRequest, config?: AxiosRequestConfig): Promise<operations.LanguageLanguagesListResponse>;
-    LanguageTranslationsList(req: operations.LanguageTranslationsListRequest, config?: AxiosRequestConfig): Promise<operations.LanguageTranslationsListResponse>;
-    LanguageTranslationsTranslate(req: operations.LanguageTranslationsTranslateRequest, config?: AxiosRequestConfig): Promise<operations.LanguageTranslationsTranslateResponse>;
 }
 export {};

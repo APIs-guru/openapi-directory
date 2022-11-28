@@ -9,6 +9,8 @@ const (
 	ProvisioningQuotaAssetTypeEnumAssetTypeNetwork     ProvisioningQuotaAssetTypeEnum = "ASSET_TYPE_NETWORK"
 )
 
+// ProvisioningQuota
+// A provisioning quota for a given project.
 type ProvisioningQuota struct {
 	AssetType        *ProvisioningQuotaAssetTypeEnum `json:"assetType,omitempty"`
 	AvailableCount   *int32                          `json:"availableCount,omitempty"`

@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import operation
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class UploadKfpArtifactMediaResponse:
-    operation: Optional[operation.Operation] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'operation' }})
+    r"""UploadKfpArtifactMediaResponse
+    The response to upload an artifact.
+    """
+    
+    operation: Optional[Operation] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('operation') }})
     

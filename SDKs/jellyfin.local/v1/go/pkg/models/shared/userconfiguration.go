@@ -1,5 +1,7 @@
 package shared
 
+// UserConfiguration
+// Class UserConfiguration.
 type UserConfiguration struct {
 	AudioLanguagePreference    *string                   `json:"AudioLanguagePreference,omitempty"`
 	DisplayCollectionsView     *bool                     `json:"DisplayCollectionsView,omitempty"`

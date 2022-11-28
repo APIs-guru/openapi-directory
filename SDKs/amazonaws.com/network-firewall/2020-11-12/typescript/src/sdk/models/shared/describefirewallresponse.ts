@@ -1,15 +1,16 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Firewall } from "./firewall";
 import { FirewallStatus } from "./firewallstatus";
 
 
+
 export class DescribeFirewallResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Firewall" })
+  @SpeakeasyMetadata({ data: "json, name=Firewall" })
   firewall?: Firewall;
 
-  @Metadata({ data: "json, name=FirewallStatus" })
+  @SpeakeasyMetadata({ data: "json, name=FirewallStatus" })
   firewallStatus?: FirewallStatus;
 
-  @Metadata({ data: "json, name=UpdateToken" })
+  @SpeakeasyMetadata({ data: "json, name=UpdateToken" })
   updateToken?: string;
 }

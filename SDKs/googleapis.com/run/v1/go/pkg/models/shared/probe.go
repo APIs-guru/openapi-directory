@@ -1,5 +1,7 @@
 package shared
 
+// Probe
+// Probe describes a health check to be performed against a container to determine whether it is alive or ready to receive traffic.
 type Probe struct {
 	Exec                *ExecAction      `json:"exec,omitempty"`
 	FailureThreshold    *int32           `json:"failureThreshold,omitempty"`

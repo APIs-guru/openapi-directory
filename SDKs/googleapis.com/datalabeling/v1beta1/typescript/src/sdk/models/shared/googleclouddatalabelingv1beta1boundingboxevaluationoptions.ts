@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudDatalabelingV1beta1BoundingBoxEvaluationOptions
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Options regarding evaluation between bounding boxes.
 **/
 export class GoogleCloudDatalabelingV1beta1BoundingBoxEvaluationOptions extends SpeakeasyBase {
-  @Metadata({ data: "json, name=iouThreshold" })
+  @SpeakeasyMetadata({ data: "json, name=iouThreshold" })
   iouThreshold?: number;
 }

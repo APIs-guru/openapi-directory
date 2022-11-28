@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PollingOptions } from "./pollingoptions";
 // AsyncOptions
 /**
@@ -34,11 +34,11 @@ var AsyncOptions = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=methodMatch" }),
+        SpeakeasyMetadata({ data: "json, name=methodMatch" }),
         __metadata("design:type", String)
     ], AsyncOptions.prototype, "methodMatch", void 0);
     __decorate([
-        Metadata({ data: "json, name=pollingOptions" }),
+        SpeakeasyMetadata({ data: "json, name=pollingOptions" }),
         __metadata("design:type", PollingOptions)
     ], AsyncOptions.prototype, "pollingOptions", void 0);
     return AsyncOptions;

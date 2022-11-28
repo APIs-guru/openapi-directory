@@ -1,59 +1,60 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class TeamsGetMembershipsPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=teamId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=teamId" })
   teamId: string;
 }
 
 
 export class TeamsGetMembershipsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=limit" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=limit" })
   limit?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=offset" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=offset" })
   offset?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=orderType" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=orderType" })
   orderType?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=search" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=search" })
   search?: string;
 }
 
 
 export class TeamsGetMembershipsSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
   jwt: shared.SchemeJwt;
 
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
   key: shared.SchemeKey;
 
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
   project: shared.SchemeProject;
 }
 
 
 export class TeamsGetMembershipsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: TeamsGetMembershipsPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: TeamsGetMembershipsQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: TeamsGetMembershipsSecurity;
 }
 
 
 export class TeamsGetMembershipsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   membershipList?: shared.MembershipList;
 }

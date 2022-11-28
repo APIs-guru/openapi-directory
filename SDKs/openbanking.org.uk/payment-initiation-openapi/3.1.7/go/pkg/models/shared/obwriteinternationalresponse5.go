@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// ObWriteInternationalResponse5DataCharges
+// Set of elements used to provide details of a charge for the payment initiation.
 type ObWriteInternationalResponse5DataCharges struct {
 	Amount       ObActiveOrHistoricCurrencyAndAmount `json:"Amount"`
 	ChargeBearer ObChargeBearerType1CodeEnum         `json:"ChargeBearer"`
@@ -18,6 +20,8 @@ const (
 	ObWriteInternationalResponse5DataExchangeRateInformationRateTypeEnumIndicative ObWriteInternationalResponse5DataExchangeRateInformationRateTypeEnum = "Indicative"
 )
 
+// ObWriteInternationalResponse5DataExchangeRateInformation
+// Further detailed information on the exchange rate that has been used in the payment transaction.
 type ObWriteInternationalResponse5DataExchangeRateInformation struct {
 	ContractIdentification *string                                                              `json:"ContractIdentification,omitempty"`
 	ExchangeRate           float64                                                              `json:"ExchangeRate"`
@@ -26,11 +30,15 @@ type ObWriteInternationalResponse5DataExchangeRateInformation struct {
 	UnitCurrency           string                                                               `json:"UnitCurrency"`
 }
 
+// ObWriteInternationalResponse5DataInitiationCreditor
+// Party to which an amount of money is due.
 type ObWriteInternationalResponse5DataInitiationCreditor struct {
 	Name          *string           `json:"Name,omitempty"`
 	PostalAddress *ObPostalAddress6 `json:"PostalAddress,omitempty"`
 }
 
+// ObWriteInternationalResponse5DataInitiationCreditorAccount
+// Unambiguous identification of the account of the creditor to which a credit entry will be posted as a result of the payment transaction.
 type ObWriteInternationalResponse5DataInitiationCreditorAccount struct {
 	Identification          string  `json:"Identification"`
 	Name                    string  `json:"Name"`
@@ -38,6 +46,8 @@ type ObWriteInternationalResponse5DataInitiationCreditorAccount struct {
 	SecondaryIdentification *string `json:"SecondaryIdentification,omitempty"`
 }
 
+// ObWriteInternationalResponse5DataInitiationCreditorAgent
+// Financial institution servicing an account for the creditor.
 type ObWriteInternationalResponse5DataInitiationCreditorAgent struct {
 	Identification *string           `json:"Identification,omitempty"`
 	Name           *string           `json:"Name,omitempty"`
@@ -45,6 +55,8 @@ type ObWriteInternationalResponse5DataInitiationCreditorAgent struct {
 	SchemeName     *string           `json:"SchemeName,omitempty"`
 }
 
+// ObWriteInternationalResponse5DataInitiationDebtorAccount
+// Unambiguous identification of the account of the debtor to which a debit entry will be made as a result of the transaction.
 type ObWriteInternationalResponse5DataInitiationDebtorAccount struct {
 	Identification          string  `json:"Identification"`
 	Name                    *string `json:"Name,omitempty"`
@@ -60,6 +72,8 @@ const (
 	ObWriteInternationalResponse5DataInitiationExchangeRateInformationRateTypeEnumIndicative ObWriteInternationalResponse5DataInitiationExchangeRateInformationRateTypeEnum = "Indicative"
 )
 
+// ObWriteInternationalResponse5DataInitiationExchangeRateInformation
+// Provides details on the currency exchange rate and contract.
 type ObWriteInternationalResponse5DataInitiationExchangeRateInformation struct {
 	ContractIdentification *string                                                                        `json:"ContractIdentification,omitempty"`
 	ExchangeRate           *float64                                                                       `json:"ExchangeRate,omitempty"`
@@ -67,6 +81,9 @@ type ObWriteInternationalResponse5DataInitiationExchangeRateInformation struct {
 	UnitCurrency           string                                                                         `json:"UnitCurrency"`
 }
 
+// ObWriteInternationalResponse5DataInitiationInstructedAmount
+// Amount of money to be moved between the debtor and creditor, before deduction of charges, expressed in the currency as ordered by the initiating party.
+// Usage: This amount has to be transported unchanged through the transaction chain.
 type ObWriteInternationalResponse5DataInitiationInstructedAmount struct {
 	Amount   string `json:"Amount"`
 	Currency string `json:"Currency"`
@@ -79,11 +96,15 @@ const (
 	ObWriteInternationalResponse5DataInitiationInstructionPriorityEnumUrgent ObWriteInternationalResponse5DataInitiationInstructionPriorityEnum = "Urgent"
 )
 
+// ObWriteInternationalResponse5DataInitiationRemittanceInformation
+// Information supplied to enable the matching of an entry with the items that the transfer is intended to settle, such as commercial invoices in an accounts' receivable system.
 type ObWriteInternationalResponse5DataInitiationRemittanceInformation struct {
 	Reference    *string `json:"Reference,omitempty"`
 	Unstructured *string `json:"Unstructured,omitempty"`
 }
 
+// ObWriteInternationalResponse5DataInitiation
+// The Initiation payload is sent by the initiating party to the ASPSP. It is used to request movement of funds from the debtor account to a creditor for a single international payment.
 type ObWriteInternationalResponse5DataInitiation struct {
 	ChargeBearer              *ObChargeBearerType1CodeEnum                                        `json:"ChargeBearer,omitempty"`
 	Creditor                  *ObWriteInternationalResponse5DataInitiationCreditor                `json:"Creditor,omitempty"`
@@ -112,6 +133,8 @@ const (
 	ObWriteInternationalResponse5DataMultiAuthorisationStatusEnumRejected                     ObWriteInternationalResponse5DataMultiAuthorisationStatusEnum = "Rejected"
 )
 
+// ObWriteInternationalResponse5DataMultiAuthorisation
+// The multiple authorisation flow response from the ASPSP.
 type ObWriteInternationalResponse5DataMultiAuthorisation struct {
 	ExpirationDateTime *time.Time                                                    `json:"ExpirationDateTime,omitempty"`
 	LastUpdateDateTime *time.Time                                                    `json:"LastUpdateDateTime,omitempty"`
@@ -120,6 +143,8 @@ type ObWriteInternationalResponse5DataMultiAuthorisation struct {
 	Status             ObWriteInternationalResponse5DataMultiAuthorisationStatusEnum `json:"Status"`
 }
 
+// ObWriteInternationalResponse5DataRefundAccount
+// Provides the details to identify an account.
 type ObWriteInternationalResponse5DataRefundAccount struct {
 	Identification          string  `json:"Identification"`
 	Name                    string  `json:"Name"`
@@ -127,6 +152,8 @@ type ObWriteInternationalResponse5DataRefundAccount struct {
 	SecondaryIdentification *string `json:"SecondaryIdentification,omitempty"`
 }
 
+// ObWriteInternationalResponse5DataRefundAgent
+// Set of elements used to uniquely and unambiguously identify a financial institution or a branch of a financial institution.
 type ObWriteInternationalResponse5DataRefundAgent struct {
 	Identification *string           `json:"Identification,omitempty"`
 	Name           *string           `json:"Name,omitempty"`
@@ -134,6 +161,8 @@ type ObWriteInternationalResponse5DataRefundAgent struct {
 	SchemeName     *string           `json:"SchemeName,omitempty"`
 }
 
+// ObWriteInternationalResponse5DataRefundCreditor
+// Set of elements used to identify a person or an organisation.
 type ObWriteInternationalResponse5DataRefundCreditor struct {
 	Name          *string           `json:"Name,omitempty"`
 	PostalAddress *ObPostalAddress6 `json:"PostalAddress,omitempty"`

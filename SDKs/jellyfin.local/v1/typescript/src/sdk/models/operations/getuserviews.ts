@@ -1,41 +1,42 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetUserViewsPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=userId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=userId" })
   userId: string;
 }
 
 
 export class GetUserViewsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=includeExternalContent" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=includeExternalContent" })
   includeExternalContent?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=includeHidden" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=includeHidden" })
   includeHidden?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=presetViews" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=presetViews" })
   presetViews?: string[];
 }
 
 
 export class GetUserViewsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetUserViewsPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetUserViewsQueryParams;
 }
 
 
 export class GetUserViewsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   baseItemDtoQueryResult?: shared.BaseItemDtoQueryResult;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

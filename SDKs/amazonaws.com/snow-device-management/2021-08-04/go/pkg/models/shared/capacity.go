@@ -1,5 +1,7 @@
 package shared
 
+// Capacity
+// The physical capacity of the Amazon Web Services Snow Family device.
 type Capacity struct {
 	Available *int64  `json:"available,omitempty"`
 	Name      *string `json:"name,omitempty"`

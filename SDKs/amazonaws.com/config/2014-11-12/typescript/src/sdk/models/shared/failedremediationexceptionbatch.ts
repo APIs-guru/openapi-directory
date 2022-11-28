@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RemediationException } from "./remediationexception";
+
 
 
 // FailedRemediationExceptionBatch
@@ -8,9 +8,9 @@ import { RemediationException } from "./remediationexception";
  * List of each of the failed remediation exceptions with specific reasons.
 **/
 export class FailedRemediationExceptionBatch extends SpeakeasyBase {
-  @Metadata({ data: "json, name=FailedItems", elemType: shared.RemediationException })
+  @SpeakeasyMetadata({ data: "json, name=FailedItems", elemType: RemediationException })
   failedItems?: RemediationException[];
 
-  @Metadata({ data: "json, name=FailureMessage" })
+  @SpeakeasyMetadata({ data: "json, name=FailureMessage" })
   failureMessage?: string;
 }

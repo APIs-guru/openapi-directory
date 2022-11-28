@@ -1,7 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ConsumerQuotaLimit } from "./consumerquotalimit";
-import { ConsumerQuotaLimit } from "./consumerquotalimit";
+
 
 
 // ConsumerQuotaMetric
@@ -9,21 +8,21 @@ import { ConsumerQuotaLimit } from "./consumerquotalimit";
  * Consumer quota settings for a quota metric.
 **/
 export class ConsumerQuotaMetric extends SpeakeasyBase {
-  @Metadata({ data: "json, name=consumerQuotaLimits", elemType: shared.ConsumerQuotaLimit })
+  @SpeakeasyMetadata({ data: "json, name=consumerQuotaLimits", elemType: ConsumerQuotaLimit })
   consumerQuotaLimits?: ConsumerQuotaLimit[];
 
-  @Metadata({ data: "json, name=descendantConsumerQuotaLimits", elemType: shared.ConsumerQuotaLimit })
+  @SpeakeasyMetadata({ data: "json, name=descendantConsumerQuotaLimits", elemType: ConsumerQuotaLimit })
   descendantConsumerQuotaLimits?: ConsumerQuotaLimit[];
 
-  @Metadata({ data: "json, name=displayName" })
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
   displayName?: string;
 
-  @Metadata({ data: "json, name=metric" })
+  @SpeakeasyMetadata({ data: "json, name=metric" })
   metric?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=unit" })
+  @SpeakeasyMetadata({ data: "json, name=unit" })
   unit?: string;
 }

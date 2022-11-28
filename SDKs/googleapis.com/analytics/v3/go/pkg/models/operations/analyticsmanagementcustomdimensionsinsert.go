@@ -27,7 +27,7 @@ type AnalyticsManagementCustomDimensionsInsertSecurity struct {
 type AnalyticsManagementCustomDimensionsInsertRequest struct {
 	PathParams  AnalyticsManagementCustomDimensionsInsertPathParams
 	QueryParams AnalyticsManagementCustomDimensionsInsertQueryParams
-	Request     *shared.CustomDimension `request:"mediaType=application/json"`
+	Request     *shared.CustomDimensionInput `request:"mediaType=application/json"`
 	Security    AnalyticsManagementCustomDimensionsInsertSecurity
 }
 

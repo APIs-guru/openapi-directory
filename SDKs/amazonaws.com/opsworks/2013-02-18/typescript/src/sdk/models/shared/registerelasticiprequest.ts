@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class RegisterElasticIpRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ElasticIp" })
+  @SpeakeasyMetadata({ data: "json, name=ElasticIp" })
   elasticIp: string;
 
-  @Metadata({ data: "json, name=StackId" })
+  @SpeakeasyMetadata({ data: "json, name=StackId" })
   stackId: string;
 }

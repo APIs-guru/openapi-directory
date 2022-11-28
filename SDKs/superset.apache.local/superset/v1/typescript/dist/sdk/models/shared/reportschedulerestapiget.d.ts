@@ -1,0 +1,33 @@
+import { SpeakeasyBase } from "../../../internal/utils";
+import { Meta40 } from "./meta40";
+import { Meta41 } from "./meta41";
+import { Meta37 } from "./meta37";
+import { Meta39 } from "./meta39";
+import { Meta38 } from "./meta38";
+export declare class ReportScheduleRestApiGet extends SpeakeasyBase {
+    active?: boolean;
+    chart?: Meta40;
+    contextMarkdown?: string;
+    creationMethod?: string;
+    crontab: string;
+    dashboard?: Meta41;
+    database?: Meta37;
+    description?: string;
+    gracePeriod?: number;
+    id?: number;
+    lastEvalDttm?: Date;
+    lastState?: string;
+    lastValue?: number;
+    lastValueRowJson?: string;
+    logRetention?: number;
+    name: string;
+    owners?: Meta39;
+    recipients: Meta38;
+    reportFormat?: string;
+    sql?: string;
+    timezone?: string;
+    type: string;
+    validatorConfigJson?: string;
+    validatorType?: string;
+    workingTimeout?: number;
+}

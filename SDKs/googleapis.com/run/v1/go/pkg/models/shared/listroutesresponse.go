@@ -1,5 +1,7 @@
 package shared
 
+// ListRoutesResponse
+// ListRoutesResponse is a list of Route resources.
 type ListRoutesResponse struct {
 	APIVersion  *string   `json:"apiVersion,omitempty"`
 	Items       []Route   `json:"items,omitempty"`

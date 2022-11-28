@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var GetTimestagsFilterEnum;
 (function (GetTimestagsFilterEnum) {
     GetTimestagsFilterEnum["Des"] = "Des";
@@ -36,15 +36,15 @@ var GetTimestagsQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=filter" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=filter" }),
         __metadata("design:type", String)
     ], GetTimestagsQueryParams.prototype, "filter", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=max" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=max" }),
         __metadata("design:type", Number)
     ], GetTimestagsQueryParams.prototype, "max", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=query" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=query" }),
         __metadata("design:type", String)
     ], GetTimestagsQueryParams.prototype, "query", void 0);
     return GetTimestagsQueryParams;
@@ -56,7 +56,7 @@ var GetTimestagsRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetTimestagsQueryParams)
     ], GetTimestagsRequest.prototype, "queryParams", void 0);
     return GetTimestagsRequest;
@@ -68,15 +68,15 @@ var GetTimestagsResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetTimestagsResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Array)
     ], GetTimestagsResponse.prototype, "getTimestags200ApplicationJsonArrays", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetTimestagsResponse.prototype, "statusCode", void 0);
     return GetTimestagsResponse;

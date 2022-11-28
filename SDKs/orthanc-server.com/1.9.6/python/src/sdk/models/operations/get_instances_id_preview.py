@@ -4,7 +4,7 @@ from typing import Optional
 
 @dataclass
 class GetInstancesIDPreviewPathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -19,14 +19,14 @@ class GetInstancesIDPreviewHeaders:
 
 @dataclass
 class GetInstancesIDPreviewRequest:
-    path_params: GetInstancesIDPreviewPathParams = field(default=None)
-    query_params: GetInstancesIDPreviewQueryParams = field(default=None)
-    headers: GetInstancesIDPreviewHeaders = field(default=None)
+    headers: GetInstancesIDPreviewHeaders = field()
+    path_params: GetInstancesIDPreviewPathParams = field()
+    query_params: GetInstancesIDPreviewQueryParams = field()
     
 
 @dataclass
 class GetInstancesIDPreviewResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

@@ -1,4 +1,4 @@
-from .__xgafv_enum import *
+from ._xgafv_enum import *
 from .account import *
 from .alt_enum import *
 from .androiddevice import *
@@ -18,7 +18,7 @@ from .appbundle import *
 from .canceltestmatrixresponse import *
 from .clientinfo import *
 from .clientinfodetail import *
-from .date import *
+from .date_ import *
 from .devicefile import *
 from .deviceipblock import *
 from .deviceipblockcatalog import *
@@ -42,6 +42,7 @@ from .iosversion import *
 from .iosxctest import *
 from .locale import *
 from .manualsharding import *
+from .metadata import *
 from .networkconfiguration import *
 from .networkconfigurationcatalog import *
 from .obbfile import *
@@ -68,4 +69,5 @@ from .toolresultshistory import *
 from .toolresultsstep import *
 from .trafficrule import *
 from .uniformsharding import *
+from .usesfeature import *
 from .xcodeversion import *

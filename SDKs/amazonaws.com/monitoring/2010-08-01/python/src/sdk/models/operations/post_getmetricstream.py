@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostGetMetricStreamActionEnum(str, Enum):
     GET_METRIC_STREAM = "GetMetricStream"
@@ -10,8 +14,8 @@ class PostGetMetricStreamVersionEnum(str, Enum):
 
 @dataclass
 class PostGetMetricStreamQueryParams:
-    action: PostGetMetricStreamActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostGetMetricStreamVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostGetMetricStreamActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostGetMetricStreamVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostGetMetricStreamHeaders:
 
 @dataclass
 class PostGetMetricStreamRequest:
-    query_params: PostGetMetricStreamQueryParams = field(default=None)
-    headers: PostGetMetricStreamHeaders = field(default=None)
+    headers: PostGetMetricStreamHeaders = field()
+    query_params: PostGetMetricStreamQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostGetMetricStreamResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

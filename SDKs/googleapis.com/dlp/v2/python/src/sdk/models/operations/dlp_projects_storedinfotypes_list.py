@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DlpProjectsStoredInfoTypesListPathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -29,20 +30,20 @@ class DlpProjectsStoredInfoTypesListQueryParams:
 
 @dataclass
 class DlpProjectsStoredInfoTypesListSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DlpProjectsStoredInfoTypesListRequest:
-    path_params: DlpProjectsStoredInfoTypesListPathParams = field(default=None)
-    query_params: DlpProjectsStoredInfoTypesListQueryParams = field(default=None)
-    security: DlpProjectsStoredInfoTypesListSecurity = field(default=None)
+    path_params: DlpProjectsStoredInfoTypesListPathParams = field()
+    query_params: DlpProjectsStoredInfoTypesListQueryParams = field()
+    security: DlpProjectsStoredInfoTypesListSecurity = field()
     
 
 @dataclass
 class DlpProjectsStoredInfoTypesListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_privacy_dlp_v2_list_stored_info_types_response: Optional[shared.GooglePrivacyDlpV2ListStoredInfoTypesResponse] = field(default=None)
-    status_code: int = field(default=None)
     

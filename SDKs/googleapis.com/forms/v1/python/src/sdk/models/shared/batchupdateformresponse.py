@@ -1,15 +1,21 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import form
-from . import response
-from . import writecontrol
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class BatchUpdateFormResponse:
-    form: Optional[form.Form] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'form' }})
-    replies: Optional[List[response.Response]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'replies' }})
-    write_control: Optional[writecontrol.WriteControl] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'writeControl' }})
+    r"""BatchUpdateFormResponse
+    Response to a BatchUpdateFormRequest.
+    """
+    
+    form: Optional[Form] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('form') }})
+    replies: Optional[List[Response]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('replies') }})
+    write_control: Optional[WriteControl] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('writeControl') }})
     

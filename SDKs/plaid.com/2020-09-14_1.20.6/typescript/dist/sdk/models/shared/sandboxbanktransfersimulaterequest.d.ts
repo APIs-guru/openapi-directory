@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 /**
  * SandboxBankTransferSimulateRequest defines the request schema for `/sandbox/bank_transfer/simulate`
 **/

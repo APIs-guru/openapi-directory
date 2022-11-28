@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AggregateComplianceByConfigRule } from "./aggregatecompliancebyconfigrule";
 
 
+
 export class DescribeAggregateComplianceByConfigRulesResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AggregateComplianceByConfigRules", elemType: shared.AggregateComplianceByConfigRule })
+  @SpeakeasyMetadata({ data: "json, name=AggregateComplianceByConfigRules", elemType: AggregateComplianceByConfigRule })
   aggregateComplianceByConfigRules?: AggregateComplianceByConfigRule[];
 
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 }

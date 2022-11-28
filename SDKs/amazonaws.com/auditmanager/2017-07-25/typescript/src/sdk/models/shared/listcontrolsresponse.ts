@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ControlMetadata } from "./controlmetadata";
 
 
+
 export class ListControlsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=controlMetadataList", elemType: shared.ControlMetadata })
+  @SpeakeasyMetadata({ data: "json, name=controlMetadataList", elemType: ControlMetadata })
   controlMetadataList?: ControlMetadata[];
 
-  @Metadata({ data: "json, name=nextToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextToken" })
   nextToken?: string;
 }

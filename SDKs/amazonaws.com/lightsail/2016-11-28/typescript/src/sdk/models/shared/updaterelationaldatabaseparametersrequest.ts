@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RelationalDatabaseParameter } from "./relationaldatabaseparameter";
 
 
+
 export class UpdateRelationalDatabaseParametersRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=parameters", elemType: shared.RelationalDatabaseParameter })
+  @SpeakeasyMetadata({ data: "json, name=parameters", elemType: RelationalDatabaseParameter })
   parameters: RelationalDatabaseParameter[];
 
-  @Metadata({ data: "json, name=relationalDatabaseName" })
+  @SpeakeasyMetadata({ data: "json, name=relationalDatabaseName" })
   relationalDatabaseName: string;
 }

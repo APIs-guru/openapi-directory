@@ -1,12 +1,15 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import List,Optional
 from sdk.models import shared
 
 
 @dataclass
 class UpdateSettingValuePathParams:
-    environment_id: str = field(default=None, metadata={'path_param': { 'field_name': 'environmentId', 'style': 'simple', 'explode': False }})
-    setting_id: int = field(default=None, metadata={'path_param': { 'field_name': 'settingId', 'style': 'simple', 'explode': False }})
+    environment_id: str = field(metadata={'path_param': { 'field_name': 'environmentId', 'style': 'simple', 'explode': False }})
+    setting_id: int = field(metadata={'path_param': { 'field_name': 'settingId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -24,15 +27,15 @@ class UpdateSettingValueRequests:
 
 @dataclass
 class UpdateSettingValueRequest:
-    path_params: UpdateSettingValuePathParams = field(default=None)
-    query_params: UpdateSettingValueQueryParams = field(default=None)
-    request: UpdateSettingValueRequests = field(default=None)
+    path_params: UpdateSettingValuePathParams = field()
+    query_params: UpdateSettingValueQueryParams = field()
+    request: UpdateSettingValueRequests = field()
     
 
 @dataclass
 class UpdateSettingValueResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     setting_value_model: Optional[shared.SettingValueModel] = field(default=None)
     setting_value_model_haljson: Optional[shared.SettingValueModelHaljson] = field(default=None)
-    status_code: int = field(default=None)
     

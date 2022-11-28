@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // IdentitytoolkitRelyingpartyVerifyPhoneNumberRequest
@@ -6,24 +7,24 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Request for Identitytoolkit-VerifyPhoneNumber
 **/
 export class IdentitytoolkitRelyingpartyVerifyPhoneNumberRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=code" })
+  @SpeakeasyMetadata({ data: "json, name=code" })
   code?: string;
 
-  @Metadata({ data: "json, name=idToken" })
+  @SpeakeasyMetadata({ data: "json, name=idToken" })
   idToken?: string;
 
-  @Metadata({ data: "json, name=operation" })
+  @SpeakeasyMetadata({ data: "json, name=operation" })
   operation?: string;
 
-  @Metadata({ data: "json, name=phoneNumber" })
+  @SpeakeasyMetadata({ data: "json, name=phoneNumber" })
   phoneNumber?: string;
 
-  @Metadata({ data: "json, name=sessionInfo" })
+  @SpeakeasyMetadata({ data: "json, name=sessionInfo" })
   sessionInfo?: string;
 
-  @Metadata({ data: "json, name=temporaryProof" })
+  @SpeakeasyMetadata({ data: "json, name=temporaryProof" })
   temporaryProof?: string;
 
-  @Metadata({ data: "json, name=verificationProof" })
+  @SpeakeasyMetadata({ data: "json, name=verificationProof" })
   verificationProof?: string;
 }

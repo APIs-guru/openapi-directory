@@ -1,42 +1,42 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
-export const GETOBJECTSTORAGECLUSTER_SERVERS = [
-	"https://api.linode.com/v4",
-];
 
+export const GetObjectStorageClusterServerList = [
+	"https://api.linode.com/v4",
+] as const;
 
 
 export class GetObjectStorageClusterPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=clusterId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=clusterId" })
   clusterId: string;
 }
 
 
-export class GetObjectStorageClusterRequest extends SpeakeasyBase {
-  @Metadata()
-  serverUrl?: string;
-
-  @Metadata()
-  pathParams: GetObjectStorageClusterPathParams;
-}
-
-
 export class GetObjectStorageClusterDefaultApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=errors", elemType: shared.ErrorObject })
+  @SpeakeasyMetadata({ data: "json, name=errors", elemType: shared.ErrorObject })
   errors?: shared.ErrorObject[];
 }
 
 
+export class GetObjectStorageClusterRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  serverUrl?: string;
+
+  @SpeakeasyMetadata()
+  pathParams: GetObjectStorageClusterPathParams;
+}
+
+
 export class GetObjectStorageClusterResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   objectStorageCluster?: shared.ObjectStorageCluster;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getObjectStorageClusterDefaultApplicationJsonObject?: GetObjectStorageClusterDefaultApplicationJson;
 }

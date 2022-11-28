@@ -1,37 +1,38 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class PublishMockPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=mock_uid" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=mock_uid" })
   mockUid: string;
 }
 
 
-export class PublishMockRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: PublishMockPathParams;
-}
-
-
 export class PublishMock200ApplicationJsonMock extends SpeakeasyBase {
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 }
 
 
 export class PublishMock200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=mock" })
+  @SpeakeasyMetadata({ data: "json, name=mock" })
   mock?: PublishMock200ApplicationJsonMock;
 }
 
 
+export class PublishMockRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: PublishMockPathParams;
+}
+
+
 export class PublishMockResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   publishMock200ApplicationJsonObject?: PublishMock200ApplicationJson;
 }

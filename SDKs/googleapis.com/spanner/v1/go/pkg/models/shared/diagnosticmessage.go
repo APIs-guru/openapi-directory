@@ -10,6 +10,8 @@ const (
 	DiagnosticMessageSeverityEnumFatal               DiagnosticMessageSeverityEnum = "FATAL"
 )
 
+// DiagnosticMessage
+// A message representing the key visualizer diagnostic messages.
 type DiagnosticMessage struct {
 	Info           *LocalizedString               `json:"info,omitempty"`
 	Metric         *LocalizedString               `json:"metric,omitempty"`

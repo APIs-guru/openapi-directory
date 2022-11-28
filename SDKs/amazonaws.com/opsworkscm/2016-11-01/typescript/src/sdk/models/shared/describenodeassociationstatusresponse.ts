@@ -1,13 +1,13 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { EngineAttribute } from "./engineattribute";
 import { NodeAssociationStatusEnum } from "./nodeassociationstatusenum";
 
 
+
 export class DescribeNodeAssociationStatusResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=EngineAttributes", elemType: shared.EngineAttribute })
+  @SpeakeasyMetadata({ data: "json, name=EngineAttributes", elemType: EngineAttribute })
   engineAttributes?: EngineAttribute[];
 
-  @Metadata({ data: "json, name=NodeAssociationStatus" })
+  @SpeakeasyMetadata({ data: "json, name=NodeAssociationStatus" })
   nodeAssociationStatus?: NodeAssociationStatusEnum;
 }

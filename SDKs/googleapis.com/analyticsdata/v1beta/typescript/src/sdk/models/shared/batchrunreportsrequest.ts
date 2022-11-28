@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RunReportRequest } from "./runreportrequest";
+
 
 
 // BatchRunReportsRequest
@@ -8,6 +8,6 @@ import { RunReportRequest } from "./runreportrequest";
  * The batch request containing multiple report requests.
 **/
 export class BatchRunReportsRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=requests", elemType: shared.RunReportRequest })
+  @SpeakeasyMetadata({ data: "json, name=requests", elemType: RunReportRequest })
   requests?: RunReportRequest[];
 }

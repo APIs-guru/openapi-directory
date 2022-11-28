@@ -38,7 +38,7 @@ type AnalyticsManagementUnsampledReportsInsertSecurity struct {
 type AnalyticsManagementUnsampledReportsInsertRequest struct {
 	PathParams  AnalyticsManagementUnsampledReportsInsertPathParams
 	QueryParams AnalyticsManagementUnsampledReportsInsertQueryParams
-	Request     *shared.UnsampledReport `request:"mediaType=application/json"`
+	Request     *shared.UnsampledReportInput `request:"mediaType=application/json"`
 	Security    AnalyticsManagementUnsampledReportsInsertSecurity
 }
 

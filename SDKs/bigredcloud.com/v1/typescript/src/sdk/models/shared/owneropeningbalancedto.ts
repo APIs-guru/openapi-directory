@@ -1,36 +1,36 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { OwnerOpeningBalanceVatEntryDto } from "./owneropeningbalancevatentrydto";
 
 
+
 export class OwnerOpeningBalanceDto extends SpeakeasyBase {
-  @Metadata({ data: "json, name=entryDate" })
+  @SpeakeasyMetadata({ data: "json, name=entryDate" })
   entryDate?: Date;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: number;
 
-  @Metadata({ data: "json, name=isChanged" })
+  @SpeakeasyMetadata({ data: "json, name=isChanged" })
   isChanged?: boolean;
 
-  @Metadata({ data: "json, name=procDate" })
+  @SpeakeasyMetadata({ data: "json, name=procDate" })
   procDate?: Date;
 
-  @Metadata({ data: "json, name=reference" })
+  @SpeakeasyMetadata({ data: "json, name=reference" })
   reference?: string;
 
-  @Metadata({ data: "json, name=timestamp" })
+  @SpeakeasyMetadata({ data: "json, name=timestamp" })
   timestamp?: string;
 
-  @Metadata({ data: "json, name=total" })
+  @SpeakeasyMetadata({ data: "json, name=total" })
   total?: number;
 
-  @Metadata({ data: "json, name=totalVAT" })
+  @SpeakeasyMetadata({ data: "json, name=totalVAT" })
   totalVat?: number;
 
-  @Metadata({ data: "json, name=unpaid" })
+  @SpeakeasyMetadata({ data: "json, name=unpaid" })
   unpaid?: number;
 
-  @Metadata({ data: "json, name=vatEntries", elemType: shared.OwnerOpeningBalanceVatEntryDto })
+  @SpeakeasyMetadata({ data: "json, name=vatEntries", elemType: OwnerOpeningBalanceVatEntryDto })
   vatEntries?: OwnerOpeningBalanceVatEntryDto[];
 }

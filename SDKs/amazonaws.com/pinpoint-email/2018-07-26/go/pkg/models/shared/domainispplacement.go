@@ -1,5 +1,7 @@
 package shared
 
+// DomainIspPlacement
+// An object that contains inbox placement data for email sent from one of your email domains to a specific email provider.
 type DomainIspPlacement struct {
 	InboxPercentage *float64 `json:"InboxPercentage,omitempty"`
 	InboxRawCount   *int64   `json:"InboxRawCount,omitempty"`

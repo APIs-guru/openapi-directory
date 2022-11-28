@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
+
 
 export enum StartReplicationTaskAssessmentRunXAmzTargetEnum {
     AmazonDmSv20160101StartReplicationTaskAssessmentRun = "AmazonDMSv20160101.StartReplicationTaskAssessmentRun"
@@ -7,84 +8,84 @@ export enum StartReplicationTaskAssessmentRunXAmzTargetEnum {
 
 
 export class StartReplicationTaskAssessmentRunHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Target" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Target" })
   xAmzTarget: StartReplicationTaskAssessmentRunXAmzTargetEnum;
 }
 
 
 export class StartReplicationTaskAssessmentRunRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: StartReplicationTaskAssessmentRunHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: shared.StartReplicationTaskAssessmentRunMessage;
 }
 
 
 export class StartReplicationTaskAssessmentRunResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   accessDeniedFault?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidResourceStateFault?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   kmsAccessDeniedFault?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   kmsDisabledFault?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   kmsFault?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   kmsInvalidStateFault?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   kmsKeyNotAccessibleFault?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   kmsNotFoundFault?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   resourceAlreadyExistsFault?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   resourceNotFoundFault?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   s3AccessDeniedFault?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   s3ResourceNotFoundFault?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   startReplicationTaskAssessmentRunResponse?: shared.StartReplicationTaskAssessmentRunResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

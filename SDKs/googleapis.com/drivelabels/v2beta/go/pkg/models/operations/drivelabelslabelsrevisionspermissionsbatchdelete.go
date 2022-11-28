@@ -5,8 +5,7 @@ import (
 )
 
 type DrivelabelsLabelsRevisionsPermissionsBatchDeletePathParams struct {
-	LabelsID    string `pathParam:"style=simple,explode=false,name=labelsId"`
-	RevisionsID string `pathParam:"style=simple,explode=false,name=revisionsId"`
+	Parent string `pathParam:"style=simple,explode=false,name=parent"`
 }
 
 type DrivelabelsLabelsRevisionsPermissionsBatchDeleteQueryParams struct {

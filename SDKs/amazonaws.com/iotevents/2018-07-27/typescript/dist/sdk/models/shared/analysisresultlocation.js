@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // AnalysisResultLocation
 /**
  * Contains information that you can use to locate the field in your detector model that the analysis result references.
@@ -33,7 +33,7 @@ var AnalysisResultLocation = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=path" }),
+        SpeakeasyMetadata({ data: "json, name=path" }),
         __metadata("design:type", String)
     ], AnalysisResultLocation.prototype, "path", void 0);
     return AnalysisResultLocation;

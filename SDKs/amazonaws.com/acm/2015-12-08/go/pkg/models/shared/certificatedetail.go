@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// CertificateDetail
+// Contains metadata about an ACM certificate. This structure is returned in the response to a <a>DescribeCertificate</a> request.
 type CertificateDetail struct {
 	CertificateArn          *string                 `json:"CertificateArn,omitempty"`
 	CertificateAuthorityArn *string                 `json:"CertificateAuthorityArn,omitempty"`

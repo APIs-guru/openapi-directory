@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { ConfigManagementSyncError } from "./configmanagementsyncerror";
 export var ConfigManagementSyncStateCodeEnum;
 (function (ConfigManagementSyncStateCodeEnum) {
     ConfigManagementSyncStateCodeEnum["SyncCodeUnspecified"] = "SYNC_CODE_UNSPECIFIED";
@@ -45,31 +45,31 @@ var ConfigManagementSyncState = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=code" }),
+        SpeakeasyMetadata({ data: "json, name=code" }),
         __metadata("design:type", String)
     ], ConfigManagementSyncState.prototype, "code", void 0);
     __decorate([
-        Metadata({ data: "json, name=errors", elemType: shared.ConfigManagementSyncError }),
+        SpeakeasyMetadata({ data: "json, name=errors", elemType: ConfigManagementSyncError }),
         __metadata("design:type", Array)
     ], ConfigManagementSyncState.prototype, "errors", void 0);
     __decorate([
-        Metadata({ data: "json, name=importToken" }),
+        SpeakeasyMetadata({ data: "json, name=importToken" }),
         __metadata("design:type", String)
     ], ConfigManagementSyncState.prototype, "importToken", void 0);
     __decorate([
-        Metadata({ data: "json, name=lastSync" }),
+        SpeakeasyMetadata({ data: "json, name=lastSync" }),
         __metadata("design:type", String)
     ], ConfigManagementSyncState.prototype, "lastSync", void 0);
     __decorate([
-        Metadata({ data: "json, name=lastSyncTime" }),
+        SpeakeasyMetadata({ data: "json, name=lastSyncTime" }),
         __metadata("design:type", String)
     ], ConfigManagementSyncState.prototype, "lastSyncTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=sourceToken" }),
+        SpeakeasyMetadata({ data: "json, name=sourceToken" }),
         __metadata("design:type", String)
     ], ConfigManagementSyncState.prototype, "sourceToken", void 0);
     __decorate([
-        Metadata({ data: "json, name=syncToken" }),
+        SpeakeasyMetadata({ data: "json, name=syncToken" }),
         __metadata("design:type", String)
     ], ConfigManagementSyncState.prototype, "syncToken", void 0);
     return ConfigManagementSyncState;

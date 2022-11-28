@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostRestoreDbClusterToPointInTimeActionEnum(str, Enum):
     RESTORE_DB_CLUSTER_TO_POINT_IN_TIME = "RestoreDBClusterToPointInTime"
@@ -10,8 +14,8 @@ class PostRestoreDbClusterToPointInTimeVersionEnum(str, Enum):
 
 @dataclass
 class PostRestoreDbClusterToPointInTimeQueryParams:
-    action: PostRestoreDbClusterToPointInTimeActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostRestoreDbClusterToPointInTimeVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostRestoreDbClusterToPointInTimeActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostRestoreDbClusterToPointInTimeVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostRestoreDbClusterToPointInTimeHeaders:
 
 @dataclass
 class PostRestoreDbClusterToPointInTimeRequest:
-    query_params: PostRestoreDbClusterToPointInTimeQueryParams = field(default=None)
-    headers: PostRestoreDbClusterToPointInTimeHeaders = field(default=None)
+    headers: PostRestoreDbClusterToPointInTimeHeaders = field()
+    query_params: PostRestoreDbClusterToPointInTimeQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostRestoreDbClusterToPointInTimeResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

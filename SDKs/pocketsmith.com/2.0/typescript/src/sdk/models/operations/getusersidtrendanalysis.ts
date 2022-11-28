@@ -1,57 +1,58 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetUsersIdTrendAnalysisPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" })
   id: number;
 }
 
 export enum GetUsersIdTrendAnalysisPeriodEnum {
-    Weeks = "weeks"
-,    Months = "months"
-,    Years = "years"
-,    Event = "event"
+    Weeks = "weeks",
+    Months = "months",
+    Years = "years",
+    Event = "event"
 }
 
 
 export class GetUsersIdTrendAnalysisQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=categories" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=categories" })
   categories: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=end_date" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=end_date" })
   endDate: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=interval" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=interval" })
   interval: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=period" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=period" })
   period: GetUsersIdTrendAnalysisPeriodEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=scenarios" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=scenarios" })
   scenarios: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=start_date" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=start_date" })
   startDate: string;
 }
 
 
 export class GetUsersIdTrendAnalysisRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetUsersIdTrendAnalysisPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetUsersIdTrendAnalysisQueryParams;
 }
 
 
 export class GetUsersIdTrendAnalysisResponse extends SpeakeasyBase {
-  @Metadata({ elemType: shared.BudgetAnalysisPackage })
+  @SpeakeasyMetadata({ elemType: shared.BudgetAnalysisPackage })
   budgetAnalysisPackages?: shared.BudgetAnalysisPackage[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

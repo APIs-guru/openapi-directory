@@ -1,10 +1,13 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 
 
 @dataclass
 class StopBulkDeploymentPathParams:
-    bulk_deployment_id: str = field(default=None, metadata={'path_param': { 'field_name': 'BulkDeploymentId', 'style': 'simple', 'explode': False }})
+    bulk_deployment_id: str = field(metadata={'path_param': { 'field_name': 'BulkDeploymentId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -20,14 +23,14 @@ class StopBulkDeploymentHeaders:
 
 @dataclass
 class StopBulkDeploymentRequest:
-    path_params: StopBulkDeploymentPathParams = field(default=None)
-    headers: StopBulkDeploymentHeaders = field(default=None)
+    headers: StopBulkDeploymentHeaders = field()
+    path_params: StopBulkDeploymentPathParams = field()
     
 
 @dataclass
 class StopBulkDeploymentResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     stop_bulk_deployment_response: Optional[dict[str, Any]] = field(default=None)
     

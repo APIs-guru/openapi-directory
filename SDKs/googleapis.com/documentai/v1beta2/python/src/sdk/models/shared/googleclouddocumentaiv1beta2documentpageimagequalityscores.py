@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import googleclouddocumentaiv1beta2documentpageimagequalityscoresdetecteddefect
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class GoogleCloudDocumentaiV1beta2DocumentPageImageQualityScores:
-    detected_defects: Optional[List[googleclouddocumentaiv1beta2documentpageimagequalityscoresdetecteddefect.GoogleCloudDocumentaiV1beta2DocumentPageImageQualityScoresDetectedDefect]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'detectedDefects' }})
-    quality_score: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'qualityScore' }})
+    r"""GoogleCloudDocumentaiV1beta2DocumentPageImageQualityScores
+    Image Quality Scores for the page image
+    """
+    
+    detected_defects: Optional[List[GoogleCloudDocumentaiV1beta2DocumentPageImageQualityScoresDetectedDefect]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('detectedDefects') }})
+    quality_score: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('qualityScore') }})
     

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // RdsHttpEndpointConfig
 /**
  * The Amazon RDS HTTP endpoint configuration.
@@ -33,23 +33,23 @@ var RdsHttpEndpointConfig = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=awsRegion" }),
+        SpeakeasyMetadata({ data: "json, name=awsRegion" }),
         __metadata("design:type", String)
     ], RdsHttpEndpointConfig.prototype, "awsRegion", void 0);
     __decorate([
-        Metadata({ data: "json, name=awsSecretStoreArn" }),
+        SpeakeasyMetadata({ data: "json, name=awsSecretStoreArn" }),
         __metadata("design:type", String)
     ], RdsHttpEndpointConfig.prototype, "awsSecretStoreArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=databaseName" }),
+        SpeakeasyMetadata({ data: "json, name=databaseName" }),
         __metadata("design:type", String)
     ], RdsHttpEndpointConfig.prototype, "databaseName", void 0);
     __decorate([
-        Metadata({ data: "json, name=dbClusterIdentifier" }),
+        SpeakeasyMetadata({ data: "json, name=dbClusterIdentifier" }),
         __metadata("design:type", String)
     ], RdsHttpEndpointConfig.prototype, "dbClusterIdentifier", void 0);
     __decorate([
-        Metadata({ data: "json, name=schema" }),
+        SpeakeasyMetadata({ data: "json, name=schema" }),
         __metadata("design:type", String)
     ], RdsHttpEndpointConfig.prototype, "schema", void 0);
     return RdsHttpEndpointConfig;

@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// InboxRecipientEntity
+// List Inbox Recipients
 type InboxRecipientEntity struct {
 	Company   *string    `json:"company,omitempty"`
 	Name      *string    `json:"name,omitempty"`

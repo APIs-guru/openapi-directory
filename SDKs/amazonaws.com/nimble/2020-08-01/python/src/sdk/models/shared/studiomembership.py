@@ -1,13 +1,15 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import studiopersona_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class StudioMembership:
-    identity_store_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'identityStoreId' }})
-    persona: Optional[studiopersona_enum.StudioPersonaEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'persona' }})
-    principal_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'principalId' }})
+    identity_store_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('identityStoreId') }})
+    persona: Optional[StudioPersonaEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('persona') }})
+    principal_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('principalId') }})
     

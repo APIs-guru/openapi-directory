@@ -25,7 +25,7 @@ type SpeechSpeechLongrunningrecognizeSecurity struct {
 
 type SpeechSpeechLongrunningrecognizeRequest struct {
 	QueryParams SpeechSpeechLongrunningrecognizeQueryParams
-	Request     *shared.LongRunningRecognizeRequest `request:"mediaType=application/json"`
+	Request     *shared.LongRunningRecognizeRequestInput `request:"mediaType=application/json"`
 	Security    SpeechSpeechLongrunningrecognizeSecurity
 }
 

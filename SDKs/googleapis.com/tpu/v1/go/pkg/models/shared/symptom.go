@@ -12,6 +12,8 @@ const (
 	SymptomSymptomTypeEnumProjectAbuse           SymptomSymptomTypeEnum = "PROJECT_ABUSE"
 )
 
+// Symptom
+// A Symptom instance.
 type Symptom struct {
 	CreateTime  *string                 `json:"createTime,omitempty"`
 	Details     *string                 `json:"details,omitempty"`

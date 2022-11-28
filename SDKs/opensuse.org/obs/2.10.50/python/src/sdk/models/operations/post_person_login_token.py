@@ -1,10 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
+from sdk.models import shared
 
 
 @dataclass
 class PostPersonLoginTokenPathParams:
-    login: str = field(default=None, metadata={'path_param': { 'field_name': 'login', 'style': 'simple', 'explode': False }})
+    login: str = field(metadata={'path_param': { 'field_name': 'login', 'style': 'simple', 'explode': False }})
     
 class PostPersonLoginTokenOperationEnum(str, Enum):
     RUNSERVICE = "runservice"
@@ -22,19 +24,19 @@ class PostPersonLoginTokenQueryParams:
 
 @dataclass
 class PostPersonLoginTokenSecurity:
-    basic_authentication: shared.SchemeBasicAuthentication = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'basic' }})
+    basic_authentication: shared.SchemeBasicAuthentication = field(metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'basic' }})
     
 
 @dataclass
 class PostPersonLoginTokenRequest:
-    path_params: PostPersonLoginTokenPathParams = field(default=None)
-    query_params: PostPersonLoginTokenQueryParams = field(default=None)
-    security: PostPersonLoginTokenSecurity = field(default=None)
+    path_params: PostPersonLoginTokenPathParams = field()
+    query_params: PostPersonLoginTokenQueryParams = field()
+    security: PostPersonLoginTokenSecurity = field()
     
 
 @dataclass
 class PostPersonLoginTokenResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

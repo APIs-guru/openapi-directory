@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AccessDeniedPageSettings } from "./accessdeniedpagesettings";
 import { AttributePropagationSettings } from "./attributepropagationsettings";
 import { CsmSettings } from "./csmsettings";
+
 
 
 // ApplicationSettings
@@ -9,15 +10,15 @@ import { CsmSettings } from "./csmsettings";
  * Wrapper over application specific settings for IAP.
 **/
 export class ApplicationSettings extends SpeakeasyBase {
-  @Metadata({ data: "json, name=accessDeniedPageSettings" })
+  @SpeakeasyMetadata({ data: "json, name=accessDeniedPageSettings" })
   accessDeniedPageSettings?: AccessDeniedPageSettings;
 
-  @Metadata({ data: "json, name=attributePropagationSettings" })
+  @SpeakeasyMetadata({ data: "json, name=attributePropagationSettings" })
   attributePropagationSettings?: AttributePropagationSettings;
 
-  @Metadata({ data: "json, name=cookieDomain" })
+  @SpeakeasyMetadata({ data: "json, name=cookieDomain" })
   cookieDomain?: string;
 
-  @Metadata({ data: "json, name=csmSettings" })
+  @SpeakeasyMetadata({ data: "json, name=csmSettings" })
   csmSettings?: CsmSettings;
 }

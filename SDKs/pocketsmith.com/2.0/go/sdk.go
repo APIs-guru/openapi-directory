@@ -10,7 +10,7 @@ import (
 	"strings"
 )
 
-var Servers = []string{
+var ServerList = []string{
 	"https://api.pocketsmith.com/v2",
 }
 
@@ -19,9 +19,13 @@ type HTTPClient interface {
 }
 
 type SDK struct {
-	defaultClient  HTTPClient
-	securityClient HTTPClient
-	serverURL      string
+	_defaultClient  HTTPClient
+	_securityClient HTTPClient
+	_security       *shared.Security
+	_serverURL      string
+	_language       string
+	_sdkVersion     string
+	_genVersion     string
 }
 
 type SDKOption func(*SDK)
@@ -32,33 +36,56 @@ func WithServerURL(serverURL string, params map[string]string) SDKOption {
 			serverURL = utils.ReplaceParameters(serverURL, params)
 		}
 
-		sdk.serverURL = serverURL
+		sdk._serverURL = serverURL
+	}
+}
+
+func WithClient(client HTTPClient) SDKOption {
+	return func(sdk *SDK) {
+		sdk._defaultClient = client
 	}
 }
 
 func WithSecurity(security shared.Security) SDKOption {
 	return func(sdk *SDK) {
-		sdk.securityClient = utils.CreateSecurityClient(security)
+		sdk._security = &security
 	}
 }
 
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
-		defaultClient:  http.DefaultClient,
-		securityClient: http.DefaultClient,
+		_language:   "go",
+		_sdkVersion: "",
+		_genVersion: "internal",
 	}
 	for _, opt := range opts {
 		opt(sdk)
 	}
-	if sdk.serverURL == "" {
-		sdk.serverURL = Servers[0]
+
+	if sdk._defaultClient == nil {
+		sdk._defaultClient = http.DefaultClient
+	}
+	if sdk._securityClient == nil {
+
+		if sdk._security != nil {
+			sdk._securityClient = utils.ConfigureSecurityClient(sdk._defaultClient, sdk._security)
+		} else {
+			sdk._securityClient = sdk._defaultClient
+		}
+
+	}
+
+	if sdk._serverURL == "" {
+		sdk._serverURL = ServerList[0]
 	}
 
 	return sdk
 }
 
+// DeleteAccountsID - Delete account
+// Deletes an account and all its data by ID, optionally merge scenarios into another account.
 func (s *SDK) DeleteAccountsID(ctx context.Context, request operations.DeleteAccountsIDRequest) (*operations.DeleteAccountsIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/accounts/{id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -66,7 +93,7 @@ func (s *SDK) DeleteAccountsID(ctx context.Context, request operations.DeleteAcc
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -117,8 +144,10 @@ func (s *SDK) DeleteAccountsID(ctx context.Context, request operations.DeleteAcc
 	return res, nil
 }
 
+// DeleteAttachmentsID - Delete attachment
+// Deletes a particular attachment by its ID.
 func (s *SDK) DeleteAttachmentsID(ctx context.Context, request operations.DeleteAttachmentsIDRequest) (*operations.DeleteAttachmentsIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/attachments/{id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -126,7 +155,7 @@ func (s *SDK) DeleteAttachmentsID(ctx context.Context, request operations.Delete
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -167,8 +196,10 @@ func (s *SDK) DeleteAttachmentsID(ctx context.Context, request operations.Delete
 	return res, nil
 }
 
+// DeleteCategoriesID - Delete category
+// Deletes a particular category by its ID. This will delete all budgets within the category, and uncategorize all transactions assigned to the category.
 func (s *SDK) DeleteCategoriesID(ctx context.Context, request operations.DeleteCategoriesIDRequest) (*operations.DeleteCategoriesIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/categories/{id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -176,7 +207,7 @@ func (s *SDK) DeleteCategoriesID(ctx context.Context, request operations.DeleteC
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -217,8 +248,10 @@ func (s *SDK) DeleteCategoriesID(ctx context.Context, request operations.DeleteC
 	return res, nil
 }
 
+// DeleteInstitutionsID - Delete institution
+// Deletes an institution and all data within. Alternatively, another institution can be provided to merge the data into to avoid losing it.
 func (s *SDK) DeleteInstitutionsID(ctx context.Context, request operations.DeleteInstitutionsIDRequest) (*operations.DeleteInstitutionsIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/institutions/{id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -226,7 +259,7 @@ func (s *SDK) DeleteInstitutionsID(ctx context.Context, request operations.Delet
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -277,8 +310,10 @@ func (s *SDK) DeleteInstitutionsID(ctx context.Context, request operations.Delet
 	return res, nil
 }
 
+// DeleteTransactionsTransactionIDAttachmentsAttachmentID - Unassigns attachment in transaction
+// Unassigns a particular attachment by its ID from the transaction ID. This does not delete the attachment, it only removes its association from the transaction.
 func (s *SDK) DeleteTransactionsTransactionIDAttachmentsAttachmentID(ctx context.Context, request operations.DeleteTransactionsTransactionIDAttachmentsAttachmentIDRequest) (*operations.DeleteTransactionsTransactionIDAttachmentsAttachmentIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/transactions/{transaction_id}/attachments/{attachment_id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -286,7 +321,7 @@ func (s *SDK) DeleteTransactionsTransactionIDAttachmentsAttachmentID(ctx context
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -327,8 +362,10 @@ func (s *SDK) DeleteTransactionsTransactionIDAttachmentsAttachmentID(ctx context
 	return res, nil
 }
 
+// GetAccountsID - Get account
+// Gets an account by its ID.
 func (s *SDK) GetAccountsID(ctx context.Context, request operations.GetAccountsIDRequest) (*operations.GetAccountsIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/accounts/{id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -336,7 +373,7 @@ func (s *SDK) GetAccountsID(ctx context.Context, request operations.GetAccountsI
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -386,8 +423,10 @@ func (s *SDK) GetAccountsID(ctx context.Context, request operations.GetAccountsI
 	return res, nil
 }
 
+// GetAccountsIDTransactions - List transactions in account
+// Lists transactions belonging to an account by its ID.
 func (s *SDK) GetAccountsIDTransactions(ctx context.Context, request operations.GetAccountsIDTransactionsRequest) (*operations.GetAccountsIDTransactionsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/accounts/{id}/transactions", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -397,7 +436,7 @@ func (s *SDK) GetAccountsIDTransactions(ctx context.Context, request operations.
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -457,8 +496,10 @@ func (s *SDK) GetAccountsIDTransactions(ctx context.Context, request operations.
 	return res, nil
 }
 
+// GetAttachmentsID - Get attachment
+// Gets a particular attachment by its ID.
 func (s *SDK) GetAttachmentsID(ctx context.Context, request operations.GetAttachmentsIDRequest) (*operations.GetAttachmentsIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/attachments/{id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -466,7 +507,7 @@ func (s *SDK) GetAttachmentsID(ctx context.Context, request operations.GetAttach
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -516,8 +557,10 @@ func (s *SDK) GetAttachmentsID(ctx context.Context, request operations.GetAttach
 	return res, nil
 }
 
+// GetCategoriesID - Get category
+// Gets a particular category by its ID.
 func (s *SDK) GetCategoriesID(ctx context.Context, request operations.GetCategoriesIDRequest) (*operations.GetCategoriesIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/categories/{id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -525,7 +568,7 @@ func (s *SDK) GetCategoriesID(ctx context.Context, request operations.GetCategor
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -575,8 +618,10 @@ func (s *SDK) GetCategoriesID(ctx context.Context, request operations.GetCategor
 	return res, nil
 }
 
+// GetInstitutionsID - Get institution
+// Gets an institution by its ID.
 func (s *SDK) GetInstitutionsID(ctx context.Context, request operations.GetInstitutionsIDRequest) (*operations.GetInstitutionsIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/institutions/{id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -584,7 +629,7 @@ func (s *SDK) GetInstitutionsID(ctx context.Context, request operations.GetInsti
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -634,8 +679,10 @@ func (s *SDK) GetInstitutionsID(ctx context.Context, request operations.GetInsti
 	return res, nil
 }
 
+// GetInstitutionsIDAccounts - List accounts in institution
+// Lists accounts belonging to an institution by its ID.
 func (s *SDK) GetInstitutionsIDAccounts(ctx context.Context, request operations.GetInstitutionsIDAccountsRequest) (*operations.GetInstitutionsIDAccountsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/institutions/{id}/accounts", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -643,7 +690,7 @@ func (s *SDK) GetInstitutionsIDAccounts(ctx context.Context, request operations.
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -693,8 +740,10 @@ func (s *SDK) GetInstitutionsIDAccounts(ctx context.Context, request operations.
 	return res, nil
 }
 
+// GetMe - Get the authorised user
+// Gets the user that corresponds to the access token used in the request.
 func (s *SDK) GetMe(ctx context.Context) (*operations.GetMeResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/me"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -702,7 +751,7 @@ func (s *SDK) GetMe(ctx context.Context) (*operations.GetMeResponse, error) {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -732,8 +781,10 @@ func (s *SDK) GetMe(ctx context.Context) (*operations.GetMeResponse, error) {
 	return res, nil
 }
 
+// GetTransactionAccountsID - Get transaction account
+// Gets a transaction account by its ID.
 func (s *SDK) GetTransactionAccountsID(ctx context.Context, request operations.GetTransactionAccountsIDRequest) (*operations.GetTransactionAccountsIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/transaction_accounts/{id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -741,7 +792,7 @@ func (s *SDK) GetTransactionAccountsID(ctx context.Context, request operations.G
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -791,8 +842,10 @@ func (s *SDK) GetTransactionAccountsID(ctx context.Context, request operations.G
 	return res, nil
 }
 
+// GetTransactionAccountsIDTransactions - List transactions in transaction account
+// Lists transactions belonging to a transaction account by its ID.
 func (s *SDK) GetTransactionAccountsIDTransactions(ctx context.Context, request operations.GetTransactionAccountsIDTransactionsRequest) (*operations.GetTransactionAccountsIDTransactionsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/transaction_accounts/{id}/transactions", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -802,7 +855,7 @@ func (s *SDK) GetTransactionAccountsIDTransactions(ctx context.Context, request 
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -862,8 +915,10 @@ func (s *SDK) GetTransactionAccountsIDTransactions(ctx context.Context, request 
 	return res, nil
 }
 
+// GetTransactionsID - Get a transaction
+// Gets a transaction by its ID.
 func (s *SDK) GetTransactionsID(ctx context.Context, request operations.GetTransactionsIDRequest) (*operations.GetTransactionsIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/transactions/{id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -871,7 +926,7 @@ func (s *SDK) GetTransactionsID(ctx context.Context, request operations.GetTrans
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -921,8 +976,10 @@ func (s *SDK) GetTransactionsID(ctx context.Context, request operations.GetTrans
 	return res, nil
 }
 
+// GetTransactionsIDAttachments - List attachments in transaction
+// Lists attachments belonging to a transaction by their ID.
 func (s *SDK) GetTransactionsIDAttachments(ctx context.Context, request operations.GetTransactionsIDAttachmentsRequest) (*operations.GetTransactionsIDAttachmentsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/transactions/{id}/attachments", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -930,7 +987,7 @@ func (s *SDK) GetTransactionsIDAttachments(ctx context.Context, request operatio
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -980,8 +1037,10 @@ func (s *SDK) GetTransactionsIDAttachments(ctx context.Context, request operatio
 	return res, nil
 }
 
+// GetUsersID - Get user
+// Gets a user by ID. You must be authorised as the target user in order to make this request.
 func (s *SDK) GetUsersID(ctx context.Context, request operations.GetUsersIDRequest) (*operations.GetUsersIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/users/{id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -989,7 +1048,7 @@ func (s *SDK) GetUsersID(ctx context.Context, request operations.GetUsersIDReque
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1029,8 +1088,10 @@ func (s *SDK) GetUsersID(ctx context.Context, request operations.GetUsersIDReque
 	return res, nil
 }
 
+// GetUsersIDAccounts - List accounts in user
+// Lists all accounts belonging to the user by their ID.
 func (s *SDK) GetUsersIDAccounts(ctx context.Context, request operations.GetUsersIDAccountsRequest) (*operations.GetUsersIDAccountsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/users/{id}/accounts", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1038,7 +1099,7 @@ func (s *SDK) GetUsersIDAccounts(ctx context.Context, request operations.GetUser
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1088,8 +1149,10 @@ func (s *SDK) GetUsersIDAccounts(ctx context.Context, request operations.GetUser
 	return res, nil
 }
 
+// GetUsersIDAttachments - Lists attachments in user
+// Lists attachments belonging to a user by their ID.
 func (s *SDK) GetUsersIDAttachments(ctx context.Context, request operations.GetUsersIDAttachmentsRequest) (*operations.GetUsersIDAttachmentsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/users/{id}/attachments", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1099,7 +1162,7 @@ func (s *SDK) GetUsersIDAttachments(ctx context.Context, request operations.GetU
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1149,8 +1212,10 @@ func (s *SDK) GetUsersIDAttachments(ctx context.Context, request operations.GetU
 	return res, nil
 }
 
+// GetUsersIDBudget - List budget for user
+// Lists the user's budget, consisting of one or more budget analysis packages, one per category. Akin to the list on the Budget page in PocketSmith.
 func (s *SDK) GetUsersIDBudget(ctx context.Context, request operations.GetUsersIDBudgetRequest) (*operations.GetUsersIDBudgetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/users/{id}/budget", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1160,7 +1225,7 @@ func (s *SDK) GetUsersIDBudget(ctx context.Context, request operations.GetUsersI
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1190,8 +1255,10 @@ func (s *SDK) GetUsersIDBudget(ctx context.Context, request operations.GetUsersI
 	return res, nil
 }
 
+// GetUsersIDBudgetSummary - Get budget summary for user
+// Get the user's budget summary, containing an expense and income analysis for all categories (excluding transfer categories) for the given period and date range. Akin to the overall budget shown on the Budget page in PocketSmith.
 func (s *SDK) GetUsersIDBudgetSummary(ctx context.Context, request operations.GetUsersIDBudgetSummaryRequest) (*operations.GetUsersIDBudgetSummaryResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/users/{id}/budget_summary", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1201,7 +1268,7 @@ func (s *SDK) GetUsersIDBudgetSummary(ctx context.Context, request operations.Ge
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1231,8 +1298,10 @@ func (s *SDK) GetUsersIDBudgetSummary(ctx context.Context, request operations.Ge
 	return res, nil
 }
 
+// GetUsersIDCategories - List categories in user
+// Lists all categories belonging to a user by their ID.
 func (s *SDK) GetUsersIDCategories(ctx context.Context, request operations.GetUsersIDCategoriesRequest) (*operations.GetUsersIDCategoriesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/users/{id}/categories", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1240,7 +1309,7 @@ func (s *SDK) GetUsersIDCategories(ctx context.Context, request operations.GetUs
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1290,8 +1359,10 @@ func (s *SDK) GetUsersIDCategories(ctx context.Context, request operations.GetUs
 	return res, nil
 }
 
+// GetUsersIDCategoryRules - List category rules in user
+// Lists all category rules belonging to a user by their ID.
 func (s *SDK) GetUsersIDCategoryRules(ctx context.Context, request operations.GetUsersIDCategoryRulesRequest) (*operations.GetUsersIDCategoryRulesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/users/{id}/category_rules", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1299,7 +1370,7 @@ func (s *SDK) GetUsersIDCategoryRules(ctx context.Context, request operations.Ge
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1349,8 +1420,10 @@ func (s *SDK) GetUsersIDCategoryRules(ctx context.Context, request operations.Ge
 	return res, nil
 }
 
+// GetUsersIDInstitutions - List institutions in user
+// Lists all the institutions belonging to the user.
 func (s *SDK) GetUsersIDInstitutions(ctx context.Context, request operations.GetUsersIDInstitutionsRequest) (*operations.GetUsersIDInstitutionsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/users/{id}/institutions", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1358,7 +1431,7 @@ func (s *SDK) GetUsersIDInstitutions(ctx context.Context, request operations.Get
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1408,8 +1481,10 @@ func (s *SDK) GetUsersIDInstitutions(ctx context.Context, request operations.Get
 	return res, nil
 }
 
+// GetUsersIDTransactionAccounts - List transaction accounts in user
+// List all transaction accounts belonging to a user.
 func (s *SDK) GetUsersIDTransactionAccounts(ctx context.Context, request operations.GetUsersIDTransactionAccountsRequest) (*operations.GetUsersIDTransactionAccountsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/users/{id}/transaction_accounts", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1417,7 +1492,7 @@ func (s *SDK) GetUsersIDTransactionAccounts(ctx context.Context, request operati
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1467,8 +1542,10 @@ func (s *SDK) GetUsersIDTransactionAccounts(ctx context.Context, request operati
 	return res, nil
 }
 
+// GetUsersIDTransactions - List transactions in user
+// Lists transactions belonging to a user by their ID.
 func (s *SDK) GetUsersIDTransactions(ctx context.Context, request operations.GetUsersIDTransactionsRequest) (*operations.GetUsersIDTransactionsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/users/{id}/transactions", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1478,7 +1555,7 @@ func (s *SDK) GetUsersIDTransactions(ctx context.Context, request operations.Get
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1538,8 +1615,10 @@ func (s *SDK) GetUsersIDTransactions(ctx context.Context, request operations.Get
 	return res, nil
 }
 
+// GetUsersIDTrendAnalysis - Get trend analysis for user
+// Get an income and/or expense budget analysis for the given date range and period across any number of categories and scenarios. Akin to the Trends page in PocketSmith.
 func (s *SDK) GetUsersIDTrendAnalysis(ctx context.Context, request operations.GetUsersIDTrendAnalysisRequest) (*operations.GetUsersIDTrendAnalysisResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/users/{id}/trend_analysis", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1549,7 +1628,7 @@ func (s *SDK) GetUsersIDTrendAnalysis(ctx context.Context, request operations.Ge
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1579,8 +1658,10 @@ func (s *SDK) GetUsersIDTrendAnalysis(ctx context.Context, request operations.Ge
 	return res, nil
 }
 
+// PostCategoriesIDCategoryRules - Create category rule in category
+// Creates a rule to allocate a category to transactions.
 func (s *SDK) PostCategoriesIDCategoryRules(ctx context.Context, request operations.PostCategoriesIDCategoryRulesRequest) (*operations.PostCategoriesIDCategoryRulesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/categories/{id}/category_rules", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1595,7 +1676,7 @@ func (s *SDK) PostCategoriesIDCategoryRules(ctx context.Context, request operati
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1655,8 +1736,10 @@ func (s *SDK) PostCategoriesIDCategoryRules(ctx context.Context, request operati
 	return res, nil
 }
 
+// PostTransactionAccountsIDTransactions - Create a transaction in transaction account
+// Creates a transaction in a transaction account by its ID.
 func (s *SDK) PostTransactionAccountsIDTransactions(ctx context.Context, request operations.PostTransactionAccountsIDTransactionsRequest) (*operations.PostTransactionAccountsIDTransactionsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/transaction_accounts/{id}/transactions", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1671,7 +1754,7 @@ func (s *SDK) PostTransactionAccountsIDTransactions(ctx context.Context, request
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1731,8 +1814,10 @@ func (s *SDK) PostTransactionAccountsIDTransactions(ctx context.Context, request
 	return res, nil
 }
 
+// PostTransactionsIDAttachments - Assigns attachment to transaction
+// Assigns an attachment to the transaction by their ID.
 func (s *SDK) PostTransactionsIDAttachments(ctx context.Context, request operations.PostTransactionsIDAttachmentsRequest) (*operations.PostTransactionsIDAttachmentsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/transactions/{id}/attachments", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1747,7 +1832,7 @@ func (s *SDK) PostTransactionsIDAttachments(ctx context.Context, request operati
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1807,8 +1892,10 @@ func (s *SDK) PostTransactionsIDAttachments(ctx context.Context, request operati
 	return res, nil
 }
 
+// PostUsersIDAccounts - Create an account in user
+// Creates and returns an account belonging to the user by their ID.
 func (s *SDK) PostUsersIDAccounts(ctx context.Context, request operations.PostUsersIDAccountsRequest) (*operations.PostUsersIDAccountsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/users/{id}/accounts", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1823,7 +1910,7 @@ func (s *SDK) PostUsersIDAccounts(ctx context.Context, request operations.PostUs
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1873,8 +1960,10 @@ func (s *SDK) PostUsersIDAccounts(ctx context.Context, request operations.PostUs
 	return res, nil
 }
 
+// PostUsersIDAttachments - Create attachment in user
+// Creates an attachment belonging to the user by their ID.
 func (s *SDK) PostUsersIDAttachments(ctx context.Context, request operations.PostUsersIDAttachmentsRequest) (*operations.PostUsersIDAttachmentsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/users/{id}/attachments", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1889,7 +1978,7 @@ func (s *SDK) PostUsersIDAttachments(ctx context.Context, request operations.Pos
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1949,8 +2038,10 @@ func (s *SDK) PostUsersIDAttachments(ctx context.Context, request operations.Pos
 	return res, nil
 }
 
+// PostUsersIDCategories - Create category in user
+// Creates a category belonging to the user by their ID.
 func (s *SDK) PostUsersIDCategories(ctx context.Context, request operations.PostUsersIDCategoriesRequest) (*operations.PostUsersIDCategoriesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/users/{id}/categories", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1965,7 +2056,7 @@ func (s *SDK) PostUsersIDCategories(ctx context.Context, request operations.Post
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2025,8 +2116,10 @@ func (s *SDK) PostUsersIDCategories(ctx context.Context, request operations.Post
 	return res, nil
 }
 
+// PostUsersIDInstitutions - Create institution in user
+// Creates an institution belonging to a user.
 func (s *SDK) PostUsersIDInstitutions(ctx context.Context, request operations.PostUsersIDInstitutionsRequest) (*operations.PostUsersIDInstitutionsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/users/{id}/institutions", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2041,7 +2134,7 @@ func (s *SDK) PostUsersIDInstitutions(ctx context.Context, request operations.Po
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2101,8 +2194,10 @@ func (s *SDK) PostUsersIDInstitutions(ctx context.Context, request operations.Po
 	return res, nil
 }
 
+// PutAccountsID - Update account
+// Updates and returns an account by its ID.
 func (s *SDK) PutAccountsID(ctx context.Context, request operations.PutAccountsIDRequest) (*operations.PutAccountsIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/accounts/{id}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2117,7 +2212,7 @@ func (s *SDK) PutAccountsID(ctx context.Context, request operations.PutAccountsI
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2177,8 +2272,10 @@ func (s *SDK) PutAccountsID(ctx context.Context, request operations.PutAccountsI
 	return res, nil
 }
 
+// PutAttachmentsID - Update attachment
+// Updates the title of the attachment.
 func (s *SDK) PutAttachmentsID(ctx context.Context, request operations.PutAttachmentsIDRequest) (*operations.PutAttachmentsIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/attachments/{id}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2193,7 +2290,7 @@ func (s *SDK) PutAttachmentsID(ctx context.Context, request operations.PutAttach
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2243,8 +2340,10 @@ func (s *SDK) PutAttachmentsID(ctx context.Context, request operations.PutAttach
 	return res, nil
 }
 
+// PutCategoriesID - Update category
+// Updates the title, colour or parent of the category.
 func (s *SDK) PutCategoriesID(ctx context.Context, request operations.PutCategoriesIDRequest) (*operations.PutCategoriesIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/categories/{id}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2259,7 +2358,7 @@ func (s *SDK) PutCategoriesID(ctx context.Context, request operations.PutCategor
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2319,8 +2418,10 @@ func (s *SDK) PutCategoriesID(ctx context.Context, request operations.PutCategor
 	return res, nil
 }
 
+// PutInstitutionsID - Update institution
+// Updates the title and currency code for an institution.
 func (s *SDK) PutInstitutionsID(ctx context.Context, request operations.PutInstitutionsIDRequest) (*operations.PutInstitutionsIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/institutions/{id}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2335,7 +2436,7 @@ func (s *SDK) PutInstitutionsID(ctx context.Context, request operations.PutInsti
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2395,8 +2496,10 @@ func (s *SDK) PutInstitutionsID(ctx context.Context, request operations.PutInsti
 	return res, nil
 }
 
+// PutTransactionAccountsID - Update transaction account
+// Change which institution the transaction account belongs to.
 func (s *SDK) PutTransactionAccountsID(ctx context.Context, request operations.PutTransactionAccountsIDRequest) (*operations.PutTransactionAccountsIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/transaction_accounts/{id}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2411,7 +2514,7 @@ func (s *SDK) PutTransactionAccountsID(ctx context.Context, request operations.P
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2461,8 +2564,10 @@ func (s *SDK) PutTransactionAccountsID(ctx context.Context, request operations.P
 	return res, nil
 }
 
+// PutTransactionsID - Update a transaction
+// Updates a transaction by its ID.
 func (s *SDK) PutTransactionsID(ctx context.Context, request operations.PutTransactionsIDRequest) (*operations.PutTransactionsIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/transactions/{id}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2479,7 +2584,7 @@ func (s *SDK) PutTransactionsID(ctx context.Context, request operations.PutTrans
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2539,8 +2644,10 @@ func (s *SDK) PutTransactionsID(ctx context.Context, request operations.PutTrans
 	return res, nil
 }
 
+// PutUsersID - Update user
+// Updates the user by their ID. You must be authorised as the target user in order to make this request.
 func (s *SDK) PutUsersID(ctx context.Context, request operations.PutUsersIDRequest) (*operations.PutUsersIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/users/{id}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2555,7 +2662,7 @@ func (s *SDK) PutUsersID(ctx context.Context, request operations.PutUsersIDReque
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2615,8 +2722,10 @@ func (s *SDK) PutUsersID(ctx context.Context, request operations.PutUsersIDReque
 	return res, nil
 }
 
+// PutUsersIDAccounts - Update the display order of accounts in user
+// Updates the display order of accounts belonging to the user, by accepting an array of accounts in their new display order.
 func (s *SDK) PutUsersIDAccounts(ctx context.Context, request operations.PutUsersIDAccountsRequest) (*operations.PutUsersIDAccountsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/users/{id}/accounts", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2631,7 +2740,7 @@ func (s *SDK) PutUsersIDAccounts(ctx context.Context, request operations.PutUser
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {

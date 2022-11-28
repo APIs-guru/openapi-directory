@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DomainRedirect } from "./domainredirect";
 import { DomainProvisioning } from "./domainprovisioning";
 
+
 export enum DomainStatusEnum {
-    DomainStatusUnspecified = "DOMAIN_STATUS_UNSPECIFIED"
-,    DomainChangePending = "DOMAIN_CHANGE_PENDING"
-,    DomainActive = "DOMAIN_ACTIVE"
-,    DomainVerificationRequired = "DOMAIN_VERIFICATION_REQUIRED"
-,    DomainVerificationLost = "DOMAIN_VERIFICATION_LOST"
+    DomainStatusUnspecified = "DOMAIN_STATUS_UNSPECIFIED",
+    DomainChangePending = "DOMAIN_CHANGE_PENDING",
+    DomainActive = "DOMAIN_ACTIVE",
+    DomainVerificationRequired = "DOMAIN_VERIFICATION_REQUIRED",
+    DomainVerificationLost = "DOMAIN_VERIFICATION_LOST"
 }
 
 
@@ -16,21 +17,21 @@ export enum DomainStatusEnum {
  * The intended behavior and status information of a domain.
 **/
 export class Domain extends SpeakeasyBase {
-  @Metadata({ data: "json, name=domainName" })
+  @SpeakeasyMetadata({ data: "json, name=domainName" })
   domainName?: string;
 
-  @Metadata({ data: "json, name=domainRedirect" })
+  @SpeakeasyMetadata({ data: "json, name=domainRedirect" })
   domainRedirect?: DomainRedirect;
 
-  @Metadata({ data: "json, name=provisioning" })
+  @SpeakeasyMetadata({ data: "json, name=provisioning" })
   provisioning?: DomainProvisioning;
 
-  @Metadata({ data: "json, name=site" })
+  @SpeakeasyMetadata({ data: "json, name=site" })
   site?: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: DomainStatusEnum;
 
-  @Metadata({ data: "json, name=updateTime" })
+  @SpeakeasyMetadata({ data: "json, name=updateTime" })
   updateTime?: string;
 }

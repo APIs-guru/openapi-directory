@@ -1,11 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from typing import Any,List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import autoscalingsettings
-from . import disk
-from . import package
-from . import sdkharnesscontainerimage
-from . import taskrunnersettings
+from sdk import utils
+from . import *
 
 class WorkerPoolDefaultPackageSetEnum(str, Enum):
     DEFAULT_PACKAGE_SET_UNKNOWN = "DEFAULT_PACKAGE_SET_UNKNOWN"
@@ -28,26 +26,30 @@ class WorkerPoolTeardownPolicyEnum(str, Enum):
 @dataclass_json
 @dataclass
 class WorkerPool:
-    autoscaling_settings: Optional[autoscalingsettings.AutoscalingSettings] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'autoscalingSettings' }})
-    data_disks: Optional[List[disk.Disk]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'dataDisks' }})
-    default_package_set: Optional[WorkerPoolDefaultPackageSetEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'defaultPackageSet' }})
-    disk_size_gb: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'diskSizeGb' }})
-    disk_source_image: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'diskSourceImage' }})
-    disk_type: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'diskType' }})
-    ip_configuration: Optional[WorkerPoolIPConfigurationEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ipConfiguration' }})
-    kind: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'kind' }})
-    machine_type: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'machineType' }})
-    metadata: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'metadata' }})
-    network: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'network' }})
-    num_threads_per_worker: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'numThreadsPerWorker' }})
-    num_workers: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'numWorkers' }})
-    on_host_maintenance: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'onHostMaintenance' }})
-    packages: Optional[List[package.Package]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'packages' }})
-    pool_args: Optional[dict[str, Any]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'poolArgs' }})
-    sdk_harness_container_images: Optional[List[sdkharnesscontainerimage.SdkHarnessContainerImage]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'sdkHarnessContainerImages' }})
-    subnetwork: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'subnetwork' }})
-    taskrunner_settings: Optional[taskrunnersettings.TaskRunnerSettings] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'taskrunnerSettings' }})
-    teardown_policy: Optional[WorkerPoolTeardownPolicyEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'teardownPolicy' }})
-    worker_harness_container_image: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'workerHarnessContainerImage' }})
-    zone: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'zone' }})
+    r"""WorkerPool
+    Describes one particular pool of Cloud Dataflow workers to be instantiated by the Cloud Dataflow service in order to perform the computations required by a job. Note that a workflow job may use multiple pools, in order to match the various computational requirements of the various stages of the job.
+    """
+    
+    autoscaling_settings: Optional[AutoscalingSettings] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('autoscalingSettings') }})
+    data_disks: Optional[List[Disk]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('dataDisks') }})
+    default_package_set: Optional[WorkerPoolDefaultPackageSetEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('defaultPackageSet') }})
+    disk_size_gb: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('diskSizeGb') }})
+    disk_source_image: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('diskSourceImage') }})
+    disk_type: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('diskType') }})
+    ip_configuration: Optional[WorkerPoolIPConfigurationEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ipConfiguration') }})
+    kind: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('kind') }})
+    machine_type: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('machineType') }})
+    metadata: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('metadata') }})
+    network: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('network') }})
+    num_threads_per_worker: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('numThreadsPerWorker') }})
+    num_workers: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('numWorkers') }})
+    on_host_maintenance: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('onHostMaintenance') }})
+    packages: Optional[List[Package]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('packages') }})
+    pool_args: Optional[dict[str, Any]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('poolArgs') }})
+    sdk_harness_container_images: Optional[List[SDKHarnessContainerImage]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('sdkHarnessContainerImages') }})
+    subnetwork: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('subnetwork') }})
+    taskrunner_settings: Optional[TaskRunnerSettings] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('taskrunnerSettings') }})
+    teardown_policy: Optional[WorkerPoolTeardownPolicyEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('teardownPolicy') }})
+    worker_harness_container_image: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('workerHarnessContainerImage') }})
+    zone: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('zone') }})
     

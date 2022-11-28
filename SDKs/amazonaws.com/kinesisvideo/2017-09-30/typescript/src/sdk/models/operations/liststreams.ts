@@ -1,36 +1,37 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class ListStreamsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=MaxResults" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=MaxResults" })
   maxResults?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=NextToken" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=NextToken" })
   nextToken?: string;
 }
 
 
 export class ListStreamsHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
@@ -40,51 +41,51 @@ export class ListStreamsHeaders extends SpeakeasyBase {
  * Specifies the condition that streams must satisfy to be returned when you list streams (see the <code>ListStreams</code> API). A condition has a comparison operation and a value. Currently, you can specify only the <code>BEGINS_WITH</code> operator, which finds streams whose names start with a given prefix. 
 **/
 export class ListStreamsRequestBodyStreamNameCondition extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ComparisonOperator" })
+  @SpeakeasyMetadata({ data: "json, name=ComparisonOperator" })
   comparisonOperator?: shared.ComparisonOperatorEnum;
 
-  @Metadata({ data: "json, name=ComparisonValue" })
+  @SpeakeasyMetadata({ data: "json, name=ComparisonValue" })
   comparisonValue?: string;
 }
 
 
 export class ListStreamsRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=MaxResults" })
+  @SpeakeasyMetadata({ data: "json, name=MaxResults" })
   maxResults?: number;
 
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=StreamNameCondition" })
+  @SpeakeasyMetadata({ data: "json, name=StreamNameCondition" })
   streamNameCondition?: ListStreamsRequestBodyStreamNameCondition;
 }
 
 
 export class ListStreamsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: ListStreamsQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: ListStreamsHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: ListStreamsRequestBody;
 }
 
 
 export class ListStreamsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   clientLimitExceededException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidArgumentException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   listStreamsOutput?: shared.ListStreamsOutput;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

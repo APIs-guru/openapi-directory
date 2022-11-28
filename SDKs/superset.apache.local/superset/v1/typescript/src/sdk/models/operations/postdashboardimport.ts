@@ -1,92 +1,93 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class PostDashboardImportRequestBodyFormData extends SpeakeasyBase {
-  @Metadata({ data: "multipart_form, content=true" })
+  @SpeakeasyMetadata({ data: "multipart_form, content=true" })
   content: Uint8Array;
 
-  @Metadata({ data: "multipart_form, name=formData" })
+  @SpeakeasyMetadata({ data: "multipart_form, name=formData" })
   formData: string;
 }
 
 
 export class PostDashboardImportRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "multipart_form, file=true" })
+  @SpeakeasyMetadata({ data: "multipart_form, file=true" })
   formData?: PostDashboardImportRequestBodyFormData;
 
-  @Metadata({ data: "multipart_form, name=overwrite" })
+  @SpeakeasyMetadata({ data: "multipart_form, name=overwrite" })
   overwrite?: boolean;
 
-  @Metadata({ data: "multipart_form, name=passwords" })
+  @SpeakeasyMetadata({ data: "multipart_form, name=passwords" })
   passwords?: string;
 }
 
 
 export class PostDashboardImportSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=bearer" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" })
   jwt: shared.SchemeJwt;
 }
 
 
-export class PostDashboardImportRequest extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=multipart/form-data" })
-  request: PostDashboardImportRequestBody;
-
-  @Metadata()
-  security: PostDashboardImportSecurity;
-}
-
-
 export class PostDashboardImport200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class PostDashboardImport400ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class PostDashboardImport401ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class PostDashboardImport422ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class PostDashboardImport500ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
+export class PostDashboardImportRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "request, media_type=multipart/form-data" })
+  request: PostDashboardImportRequestBody;
+
+  @SpeakeasyMetadata()
+  security: PostDashboardImportSecurity;
+}
+
+
 export class PostDashboardImportResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   postDashboardImport200ApplicationJsonObject?: PostDashboardImport200ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   postDashboardImport400ApplicationJsonObject?: PostDashboardImport400ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   postDashboardImport401ApplicationJsonObject?: PostDashboardImport401ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   postDashboardImport422ApplicationJsonObject?: PostDashboardImport422ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   postDashboardImport500ApplicationJsonObject?: PostDashboardImport500ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

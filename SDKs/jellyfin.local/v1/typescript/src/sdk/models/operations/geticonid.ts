@@ -1,31 +1,32 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetIconIdPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=fileName" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=fileName" })
   fileName: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=serverId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=serverId" })
   serverId: string;
 }
 
 
 export class GetIconIdRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetIconIdPathParams;
 }
 
 
 export class GetIconIdResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getIconId200ImageWildcardBinaryString?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   problemDetails?: Map<string, any>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

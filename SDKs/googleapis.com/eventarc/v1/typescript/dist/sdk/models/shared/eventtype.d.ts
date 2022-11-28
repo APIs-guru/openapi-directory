@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { FilteringAttribute } from "./filteringattribute";
 /**
  * A representation of the event type resource.

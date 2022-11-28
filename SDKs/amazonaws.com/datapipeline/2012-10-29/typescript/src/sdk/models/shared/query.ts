@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Selector } from "./selector";
+
 
 
 // Query
@@ -8,6 +8,6 @@ import { Selector } from "./selector";
  * Defines the query to run against an object.
 **/
 export class Query extends SpeakeasyBase {
-  @Metadata({ data: "json, name=selectors", elemType: shared.Selector })
+  @SpeakeasyMetadata({ data: "json, name=selectors", elemType: Selector })
   selectors?: Selector[];
 }

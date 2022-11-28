@@ -1,34 +1,35 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetRealmIdentityProviderInstancesAliasExportPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=alias" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=alias" })
   alias: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=realm" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=realm" })
   realm: string;
 }
 
 
 export class GetRealmIdentityProviderInstancesAliasExportQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=format" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=format" })
   format?: string;
 }
 
 
 export class GetRealmIdentityProviderInstancesAliasExportRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetRealmIdentityProviderInstancesAliasExportPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetRealmIdentityProviderInstancesAliasExportQueryParams;
 }
 
 
 export class GetRealmIdentityProviderInstancesAliasExportResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

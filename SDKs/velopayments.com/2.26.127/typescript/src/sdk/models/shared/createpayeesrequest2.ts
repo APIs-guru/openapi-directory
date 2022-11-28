@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
-import { CreatePayee2 } from "./createpayee2";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { CreatePayee2Input } from "./createpayee2";
 
 
-export class CreatePayeesRequest2 extends SpeakeasyBase {
-  @Metadata({ data: "json, name=payees", elemType: shared.CreatePayee2 })
-  payees: CreatePayee2[];
 
-  @Metadata({ data: "json, name=payorId" })
+export class CreatePayeesRequest2Input extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=payees", elemType: CreatePayee2Input })
+  payees: CreatePayee2Input[];
+
+  @SpeakeasyMetadata({ data: "json, name=payorId" })
   payorId: string;
 }

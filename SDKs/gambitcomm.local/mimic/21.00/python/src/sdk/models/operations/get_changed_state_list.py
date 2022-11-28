@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class GetChangedStateListResponse:
+    content_type: str = field()
+    status_code: int = field()
     agent_states: Optional[List[shared.AgentState]] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

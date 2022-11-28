@@ -1,5 +1,7 @@
 package shared
 
+// BlueGreenDeploymentConfiguration
+// Information about blue/green deployment options for a deployment group.
 type BlueGreenDeploymentConfiguration struct {
 	DeploymentReadyOption                     *DeploymentReadyOption         `json:"deploymentReadyOption,omitempty"`
 	GreenFleetProvisioningOption              *GreenFleetProvisioningOption  `json:"greenFleetProvisioningOption,omitempty"`

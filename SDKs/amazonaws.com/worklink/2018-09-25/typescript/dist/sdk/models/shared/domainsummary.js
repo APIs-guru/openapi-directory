@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DomainStatusEnum } from "./domainstatusenum";
 // DomainSummary
 /**
@@ -34,19 +34,19 @@ var DomainSummary = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=CreatedTime" }),
+        SpeakeasyMetadata({ data: "json, name=CreatedTime" }),
         __metadata("design:type", Date)
     ], DomainSummary.prototype, "createdTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=DisplayName" }),
+        SpeakeasyMetadata({ data: "json, name=DisplayName" }),
         __metadata("design:type", String)
     ], DomainSummary.prototype, "displayName", void 0);
     __decorate([
-        Metadata({ data: "json, name=DomainName" }),
+        SpeakeasyMetadata({ data: "json, name=DomainName" }),
         __metadata("design:type", String)
     ], DomainSummary.prototype, "domainName", void 0);
     __decorate([
-        Metadata({ data: "json, name=DomainStatus" }),
+        SpeakeasyMetadata({ data: "json, name=DomainStatus" }),
         __metadata("design:type", String)
     ], DomainSummary.prototype, "domainStatus", void 0);
     return DomainSummary;

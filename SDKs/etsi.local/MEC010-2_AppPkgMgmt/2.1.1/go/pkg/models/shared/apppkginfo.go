@@ -1,5 +1,7 @@
 package shared
 
+// AppPkgInfo
+// 'The data type AppPkgInfo represents the parameters for an application package resource'
 type AppPkgInfo struct {
 	Links               AppPkgInfoLinks            `json:"_links"`
 	AdditionalArtifacts *interface{}               `json:"additionalArtifacts,omitempty"`

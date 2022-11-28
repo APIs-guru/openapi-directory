@@ -1,5 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ConsumptionConfiguration } from "./consumptionconfiguration";
 import { Entitlement } from "./entitlement";
 import { Issuer } from "./issuer";
@@ -7,37 +6,38 @@ import { Metadata } from "./metadata";
 import { DatetimeRange } from "./datetimerange";
 
 
+
 export class CreateLicenseRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Beneficiary" })
+  @SpeakeasyMetadata({ data: "json, name=Beneficiary" })
   beneficiary: string;
 
-  @Metadata({ data: "json, name=ClientToken" })
+  @SpeakeasyMetadata({ data: "json, name=ClientToken" })
   clientToken: string;
 
-  @Metadata({ data: "json, name=ConsumptionConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=ConsumptionConfiguration" })
   consumptionConfiguration: ConsumptionConfiguration;
 
-  @Metadata({ data: "json, name=Entitlements", elemType: shared.Entitlement })
+  @SpeakeasyMetadata({ data: "json, name=Entitlements", elemType: Entitlement })
   entitlements: Entitlement[];
 
-  @Metadata({ data: "json, name=HomeRegion" })
+  @SpeakeasyMetadata({ data: "json, name=HomeRegion" })
   homeRegion: string;
 
-  @Metadata({ data: "json, name=Issuer" })
+  @SpeakeasyMetadata({ data: "json, name=Issuer" })
   issuer: Issuer;
 
-  @Metadata({ data: "json, name=LicenseMetadata", elemType: shared.Metadata })
+  @SpeakeasyMetadata({ data: "json, name=LicenseMetadata", elemType: Metadata })
   licenseMetadata?: Metadata[];
 
-  @Metadata({ data: "json, name=LicenseName" })
+  @SpeakeasyMetadata({ data: "json, name=LicenseName" })
   licenseName: string;
 
-  @Metadata({ data: "json, name=ProductName" })
+  @SpeakeasyMetadata({ data: "json, name=ProductName" })
   productName: string;
 
-  @Metadata({ data: "json, name=ProductSKU" })
+  @SpeakeasyMetadata({ data: "json, name=ProductSKU" })
   productSku: string;
 
-  @Metadata({ data: "json, name=Validity" })
+  @SpeakeasyMetadata({ data: "json, name=Validity" })
   validity: DatetimeRange;
 }

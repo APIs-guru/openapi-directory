@@ -1,13 +1,18 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import grantee
-from . import permission_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class Grant:
-    grantee: Optional[grantee.Grantee] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Grantee' }})
-    permission: Optional[permission_enum.PermissionEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Permission' }})
+    r"""Grant
+    Contains information about a grant.
+    """
+    
+    grantee: Optional[Grantee] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Grantee') }})
+    permission: Optional[PermissionEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Permission') }})
     

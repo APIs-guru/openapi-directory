@@ -1,24 +1,24 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ImageOption } from "./imageoption";
 
 
+
 export class TypeOptions extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ImageFetcherOrder" })
+  @SpeakeasyMetadata({ data: "json, name=ImageFetcherOrder" })
   imageFetcherOrder?: string[];
 
-  @Metadata({ data: "json, name=ImageFetchers" })
+  @SpeakeasyMetadata({ data: "json, name=ImageFetchers" })
   imageFetchers?: string[];
 
-  @Metadata({ data: "json, name=ImageOptions", elemType: shared.ImageOption })
+  @SpeakeasyMetadata({ data: "json, name=ImageOptions", elemType: ImageOption })
   imageOptions?: ImageOption[];
 
-  @Metadata({ data: "json, name=MetadataFetcherOrder" })
+  @SpeakeasyMetadata({ data: "json, name=MetadataFetcherOrder" })
   metadataFetcherOrder?: string[];
 
-  @Metadata({ data: "json, name=MetadataFetchers" })
+  @SpeakeasyMetadata({ data: "json, name=MetadataFetchers" })
   metadataFetchers?: string[];
 
-  @Metadata({ data: "json, name=Type" })
+  @SpeakeasyMetadata({ data: "json, name=Type" })
   type?: string;
 }

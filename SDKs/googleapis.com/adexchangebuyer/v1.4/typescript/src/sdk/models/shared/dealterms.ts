@@ -1,4 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Price } from "./price";
 import { DealTermsGuaranteedFixedPriceTerms } from "./dealtermsguaranteedfixedpriceterms";
 import { DealTermsNonGuaranteedAuctionTerms } from "./dealtermsnonguaranteedauctionterms";
@@ -6,34 +6,35 @@ import { DealTermsNonGuaranteedFixedPriceTerms } from "./dealtermsnonguaranteedf
 import { DealTermsRubiconNonGuaranteedTerms } from "./dealtermsrubiconnonguaranteedterms";
 
 
+
 export class DealTerms extends SpeakeasyBase {
-  @Metadata({ data: "json, name=brandingType" })
+  @SpeakeasyMetadata({ data: "json, name=brandingType" })
   brandingType?: string;
 
-  @Metadata({ data: "json, name=crossListedExternalDealIdType" })
+  @SpeakeasyMetadata({ data: "json, name=crossListedExternalDealIdType" })
   crossListedExternalDealIdType?: string;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=estimatedGrossSpend" })
+  @SpeakeasyMetadata({ data: "json, name=estimatedGrossSpend" })
   estimatedGrossSpend?: Price;
 
-  @Metadata({ data: "json, name=estimatedImpressionsPerDay" })
+  @SpeakeasyMetadata({ data: "json, name=estimatedImpressionsPerDay" })
   estimatedImpressionsPerDay?: string;
 
-  @Metadata({ data: "json, name=guaranteedFixedPriceTerms" })
+  @SpeakeasyMetadata({ data: "json, name=guaranteedFixedPriceTerms" })
   guaranteedFixedPriceTerms?: DealTermsGuaranteedFixedPriceTerms;
 
-  @Metadata({ data: "json, name=nonGuaranteedAuctionTerms" })
+  @SpeakeasyMetadata({ data: "json, name=nonGuaranteedAuctionTerms" })
   nonGuaranteedAuctionTerms?: DealTermsNonGuaranteedAuctionTerms;
 
-  @Metadata({ data: "json, name=nonGuaranteedFixedPriceTerms" })
+  @SpeakeasyMetadata({ data: "json, name=nonGuaranteedFixedPriceTerms" })
   nonGuaranteedFixedPriceTerms?: DealTermsNonGuaranteedFixedPriceTerms;
 
-  @Metadata({ data: "json, name=rubiconNonGuaranteedTerms" })
+  @SpeakeasyMetadata({ data: "json, name=rubiconNonGuaranteedTerms" })
   rubiconNonGuaranteedTerms?: DealTermsRubiconNonGuaranteedTerms;
 
-  @Metadata({ data: "json, name=sellerTimeZone" })
+  @SpeakeasyMetadata({ data: "json, name=sellerTimeZone" })
   sellerTimeZone?: string;
 }

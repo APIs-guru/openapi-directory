@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 
@@ -16,13 +17,13 @@ class CountriesGetv1V1CountriesGetQueryParams:
 
 @dataclass
 class CountriesGetv1V1CountriesGetRequest:
-    query_params: CountriesGetv1V1CountriesGetQueryParams = field(default=None)
+    query_params: CountriesGetv1V1CountriesGetQueryParams = field()
     
 
 @dataclass
 class CountriesGetv1V1CountriesGetResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     http_validation_error: Optional[shared.HTTPValidationError] = field(default=None)
     open_aq_countries_result: Optional[shared.OpenAqCountriesResult] = field(default=None)
-    status_code: int = field(default=None)
     

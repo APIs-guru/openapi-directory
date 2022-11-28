@@ -1,9 +1,6 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 export declare class DeleteWorkspaceQueryParams extends SpeakeasyBase {
     workspaceId: string;
-}
-export declare class DeleteWorkspaceRequest extends SpeakeasyBase {
-    queryParams: DeleteWorkspaceQueryParams;
 }
 export declare class DeleteWorkspace200ApplicationJsonResponse extends SpeakeasyBase {
     success?: boolean;
@@ -56,6 +53,9 @@ export declare class DeleteWorkspace422ApplicationJson extends SpeakeasyBase {
 export declare class DeleteWorkspace500ApplicationJson extends SpeakeasyBase {
     error?: string;
     status?: number;
+}
+export declare class DeleteWorkspaceRequest extends SpeakeasyBase {
+    queryParams: DeleteWorkspaceQueryParams;
 }
 export declare class DeleteWorkspaceResponse extends SpeakeasyBase {
     contentType: string;

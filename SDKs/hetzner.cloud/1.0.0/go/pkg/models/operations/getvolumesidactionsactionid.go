@@ -5,10 +5,8 @@ type GetVolumesIDActionsActionIDPathParams struct {
 	ID       int64 `pathParam:"style=simple,explode=false,name=id"`
 }
 
-type GetVolumesIDActionsActionIDRequest struct {
-	PathParams GetVolumesIDActionsActionIDPathParams
-}
-
+// GetVolumesIDActionsActionIDActionResponseActionError
+// Error message for the Action if error occurred, otherwise null
 type GetVolumesIDActionsActionIDActionResponseActionError struct {
 	Code    string `json:"code"`
 	Message string `json:"message"`
@@ -40,6 +38,10 @@ type GetVolumesIDActionsActionIDActionResponseAction struct {
 
 type GetVolumesIDActionsActionIDActionResponse struct {
 	Action GetVolumesIDActionsActionIDActionResponseAction `json:"action"`
+}
+
+type GetVolumesIDActionsActionIDRequest struct {
+	PathParams GetVolumesIDActionsActionIDPathParams
 }
 
 type GetVolumesIDActionsActionIDResponse struct {

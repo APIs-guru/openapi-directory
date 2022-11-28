@@ -1,5 +1,25 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { QueryContent } from "./querycontent";
+
+
+
+// SavedQueryInput
+/** 
+ * A saved query which can be shared with others or used later.
+**/
+export class SavedQueryInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=content" })
+  content?: QueryContent;
+
+  @SpeakeasyMetadata({ data: "json, name=description" })
+  description?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=labels" })
+  labels?: Map<string, string>;
+
+  @SpeakeasyMetadata({ data: "json, name=name" })
+  name?: string;
+}
 
 
 // SavedQuery
@@ -7,27 +27,27 @@ import { QueryContent } from "./querycontent";
  * A saved query which can be shared with others or used later.
 **/
 export class SavedQuery extends SpeakeasyBase {
-  @Metadata({ data: "json, name=content" })
+  @SpeakeasyMetadata({ data: "json, name=content" })
   content?: QueryContent;
 
-  @Metadata({ data: "json, name=createTime" })
+  @SpeakeasyMetadata({ data: "json, name=createTime" })
   createTime?: string;
 
-  @Metadata({ data: "json, name=creator" })
+  @SpeakeasyMetadata({ data: "json, name=creator" })
   creator?: string;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=labels" })
+  @SpeakeasyMetadata({ data: "json, name=labels" })
   labels?: Map<string, string>;
 
-  @Metadata({ data: "json, name=lastUpdateTime" })
+  @SpeakeasyMetadata({ data: "json, name=lastUpdateTime" })
   lastUpdateTime?: string;
 
-  @Metadata({ data: "json, name=lastUpdater" })
+  @SpeakeasyMetadata({ data: "json, name=lastUpdater" })
   lastUpdater?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 }

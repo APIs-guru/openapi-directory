@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var SrcSearchlyApiV1ControllersSimilarityByContentRequestBody = /** @class */ (function (_super) {
     __extends(SrcSearchlyApiV1ControllersSimilarityByContentRequestBody, _super);
@@ -30,7 +30,7 @@ var SrcSearchlyApiV1ControllersSimilarityByContentRequestBody = /** @class */ (f
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=content" }),
+        SpeakeasyMetadata({ data: "json, name=content" }),
         __metadata("design:type", String)
     ], SrcSearchlyApiV1ControllersSimilarityByContentRequestBody.prototype, "content", void 0);
     return SrcSearchlyApiV1ControllersSimilarityByContentRequestBody;
@@ -42,7 +42,7 @@ var SrcSearchlyApiV1ControllersSimilarityByContentRequest = /** @class */ (funct
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", SrcSearchlyApiV1ControllersSimilarityByContentRequestBody)
     ], SrcSearchlyApiV1ControllersSimilarityByContentRequest.prototype, "request", void 0);
     return SrcSearchlyApiV1ControllersSimilarityByContentRequest;
@@ -54,19 +54,19 @@ var SrcSearchlyApiV1ControllersSimilarityByContentResponse = /** @class */ (func
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.ApiResponseSimilarity)
     ], SrcSearchlyApiV1ControllersSimilarityByContentResponse.prototype, "apiResponseSimilarity", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], SrcSearchlyApiV1ControllersSimilarityByContentResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], SrcSearchlyApiV1ControllersSimilarityByContentResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], SrcSearchlyApiV1ControllersSimilarityByContentResponse.prototype, "srcSearchlyApiV1ControllersSimilarityByContentDefaultApplicationTextString", void 0);
     return SrcSearchlyApiV1ControllersSimilarityByContentResponse;

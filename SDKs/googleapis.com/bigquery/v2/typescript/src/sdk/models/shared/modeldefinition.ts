@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BqmlTrainingRun } from "./bqmltrainingrun";
+
 
 
 // ModelDefinitionModelOptions
@@ -8,21 +8,21 @@ import { BqmlTrainingRun } from "./bqmltrainingrun";
  * [Output-only, Beta] Model options used for the first training run. These options are immutable for subsequent training runs. Default values are used for any options not specified in the input query.
 **/
 export class ModelDefinitionModelOptions extends SpeakeasyBase {
-  @Metadata({ data: "json, name=labels" })
+  @SpeakeasyMetadata({ data: "json, name=labels" })
   labels?: string[];
 
-  @Metadata({ data: "json, name=lossType" })
+  @SpeakeasyMetadata({ data: "json, name=lossType" })
   lossType?: string;
 
-  @Metadata({ data: "json, name=modelType" })
+  @SpeakeasyMetadata({ data: "json, name=modelType" })
   modelType?: string;
 }
 
 
 export class ModelDefinition extends SpeakeasyBase {
-  @Metadata({ data: "json, name=modelOptions" })
+  @SpeakeasyMetadata({ data: "json, name=modelOptions" })
   modelOptions?: ModelDefinitionModelOptions;
 
-  @Metadata({ data: "json, name=trainingRuns", elemType: shared.BqmlTrainingRun })
+  @SpeakeasyMetadata({ data: "json, name=trainingRuns", elemType: BqmlTrainingRun })
   trainingRuns?: BqmlTrainingRun[];
 }

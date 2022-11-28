@@ -1,7 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import rgbcolor
+from sdk import utils
+from . import *
 
 class OpaqueColorThemeColorEnum(str, Enum):
     THEME_COLOR_TYPE_UNSPECIFIED = "THEME_COLOR_TYPE_UNSPECIFIED"
@@ -26,6 +28,10 @@ class OpaqueColorThemeColorEnum(str, Enum):
 @dataclass_json
 @dataclass
 class OpaqueColor:
-    rgb_color: Optional[rgbcolor.RgbColor] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'rgbColor' }})
-    theme_color: Optional[OpaqueColorThemeColorEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'themeColor' }})
+    r"""OpaqueColor
+    A themeable solid color value.
+    """
+    
+    rgb_color: Optional[RgbColor] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('rgbColor') }})
+    theme_color: Optional[OpaqueColorThemeColorEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('themeColor') }})
     

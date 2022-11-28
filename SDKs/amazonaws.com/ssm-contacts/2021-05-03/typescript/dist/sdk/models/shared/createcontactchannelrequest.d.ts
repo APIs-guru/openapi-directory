@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ContactChannelAddress } from "./contactchanneladdress";
 import { ChannelTypeEnum } from "./channeltypeenum";
 export declare class CreateContactChannelRequest extends SpeakeasyBase {

@@ -10,7 +10,7 @@ import (
 	"strings"
 )
 
-var Servers = []string{
+var ServerList = []string{
 	"http://etherpad.local",
 	"http://pads.mro.name/api/1.2.15",
 }
@@ -20,9 +20,13 @@ type HTTPClient interface {
 }
 
 type SDK struct {
-	defaultClient  HTTPClient
-	securityClient HTTPClient
-	serverURL      string
+	_defaultClient  HTTPClient
+	_securityClient HTTPClient
+	_security       *shared.Security
+	_serverURL      string
+	_language       string
+	_sdkVersion     string
+	_genVersion     string
 }
 
 type SDKOption func(*SDK)
@@ -33,33 +37,55 @@ func WithServerURL(serverURL string, params map[string]string) SDKOption {
 			serverURL = utils.ReplaceParameters(serverURL, params)
 		}
 
-		sdk.serverURL = serverURL
+		sdk._serverURL = serverURL
+	}
+}
+
+func WithClient(client HTTPClient) SDKOption {
+	return func(sdk *SDK) {
+		sdk._defaultClient = client
 	}
 }
 
 func WithSecurity(security shared.Security) SDKOption {
 	return func(sdk *SDK) {
-		sdk.securityClient = utils.CreateSecurityClient(security)
+		sdk._security = &security
 	}
 }
 
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
-		defaultClient:  http.DefaultClient,
-		securityClient: http.DefaultClient,
+		_language:   "go",
+		_sdkVersion: "",
+		_genVersion: "internal",
 	}
 	for _, opt := range opts {
 		opt(sdk)
 	}
-	if sdk.serverURL == "" {
-		sdk.serverURL = Servers[0]
+
+	if sdk._defaultClient == nil {
+		sdk._defaultClient = http.DefaultClient
+	}
+	if sdk._securityClient == nil {
+
+		if sdk._security != nil {
+			sdk._securityClient = utils.ConfigureSecurityClient(sdk._defaultClient, sdk._security)
+		} else {
+			sdk._securityClient = sdk._defaultClient
+		}
+
+	}
+
+	if sdk._serverURL == "" {
+		sdk._serverURL = ServerList[0]
 	}
 
 	return sdk
 }
 
+// AppendChatMessageUsingGet - appends a chat message
 func (s *SDK) AppendChatMessageUsingGet(ctx context.Context, request operations.AppendChatMessageUsingGetRequest) (*operations.AppendChatMessageUsingGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/appendChatMessage"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -69,7 +95,7 @@ func (s *SDK) AppendChatMessageUsingGet(ctx context.Context, request operations.
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -129,8 +155,9 @@ func (s *SDK) AppendChatMessageUsingGet(ctx context.Context, request operations.
 	return res, nil
 }
 
+// AppendChatMessageUsingPost - appends a chat message
 func (s *SDK) AppendChatMessageUsingPost(ctx context.Context, request operations.AppendChatMessageUsingPostRequest) (*operations.AppendChatMessageUsingPostResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/appendChatMessage"
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -140,7 +167,7 @@ func (s *SDK) AppendChatMessageUsingPost(ctx context.Context, request operations
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -201,7 +228,7 @@ func (s *SDK) AppendChatMessageUsingPost(ctx context.Context, request operations
 }
 
 func (s *SDK) AppendTextUsingGet(ctx context.Context, request operations.AppendTextUsingGetRequest) (*operations.AppendTextUsingGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/appendText"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -211,7 +238,7 @@ func (s *SDK) AppendTextUsingGet(ctx context.Context, request operations.AppendT
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -272,7 +299,7 @@ func (s *SDK) AppendTextUsingGet(ctx context.Context, request operations.AppendT
 }
 
 func (s *SDK) AppendTextUsingPost(ctx context.Context, request operations.AppendTextUsingPostRequest) (*operations.AppendTextUsingPostResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/appendText"
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -282,7 +309,7 @@ func (s *SDK) AppendTextUsingPost(ctx context.Context, request operations.Append
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -342,8 +369,9 @@ func (s *SDK) AppendTextUsingPost(ctx context.Context, request operations.Append
 	return res, nil
 }
 
+// CheckTokenUsingGet - returns ok when the current api token is valid
 func (s *SDK) CheckTokenUsingGet(ctx context.Context) (*operations.CheckTokenUsingGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/checkToken"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -351,7 +379,7 @@ func (s *SDK) CheckTokenUsingGet(ctx context.Context) (*operations.CheckTokenUsi
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -411,8 +439,9 @@ func (s *SDK) CheckTokenUsingGet(ctx context.Context) (*operations.CheckTokenUsi
 	return res, nil
 }
 
+// CheckTokenUsingPost - returns ok when the current api token is valid
 func (s *SDK) CheckTokenUsingPost(ctx context.Context) (*operations.CheckTokenUsingPostResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/checkToken"
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -420,7 +449,7 @@ func (s *SDK) CheckTokenUsingPost(ctx context.Context) (*operations.CheckTokenUs
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -481,7 +510,7 @@ func (s *SDK) CheckTokenUsingPost(ctx context.Context) (*operations.CheckTokenUs
 }
 
 func (s *SDK) CopyPadUsingGet(ctx context.Context, request operations.CopyPadUsingGetRequest) (*operations.CopyPadUsingGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/copyPad"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -491,7 +520,7 @@ func (s *SDK) CopyPadUsingGet(ctx context.Context, request operations.CopyPadUsi
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -552,7 +581,7 @@ func (s *SDK) CopyPadUsingGet(ctx context.Context, request operations.CopyPadUsi
 }
 
 func (s *SDK) CopyPadUsingPost(ctx context.Context, request operations.CopyPadUsingPostRequest) (*operations.CopyPadUsingPostResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/copyPad"
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -562,7 +591,7 @@ func (s *SDK) CopyPadUsingPost(ctx context.Context, request operations.CopyPadUs
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -623,7 +652,7 @@ func (s *SDK) CopyPadUsingPost(ctx context.Context, request operations.CopyPadUs
 }
 
 func (s *SDK) CopyPadWithoutHistoryUsingGet(ctx context.Context, request operations.CopyPadWithoutHistoryUsingGetRequest) (*operations.CopyPadWithoutHistoryUsingGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/copyPadWithoutHistory"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -633,7 +662,7 @@ func (s *SDK) CopyPadWithoutHistoryUsingGet(ctx context.Context, request operati
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -694,7 +723,7 @@ func (s *SDK) CopyPadWithoutHistoryUsingGet(ctx context.Context, request operati
 }
 
 func (s *SDK) CopyPadWithoutHistoryUsingPost(ctx context.Context, request operations.CopyPadWithoutHistoryUsingPostRequest) (*operations.CopyPadWithoutHistoryUsingPostResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/copyPadWithoutHistory"
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -704,7 +733,7 @@ func (s *SDK) CopyPadWithoutHistoryUsingPost(ctx context.Context, request operat
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -764,8 +793,9 @@ func (s *SDK) CopyPadWithoutHistoryUsingPost(ctx context.Context, request operat
 	return res, nil
 }
 
+// CreateAuthorIfNotExistsForUsingGet - this functions helps you to map your application author ids to Etherpad author ids
 func (s *SDK) CreateAuthorIfNotExistsForUsingGet(ctx context.Context, request operations.CreateAuthorIfNotExistsForUsingGetRequest) (*operations.CreateAuthorIfNotExistsForUsingGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/createAuthorIfNotExistsFor"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -775,7 +805,7 @@ func (s *SDK) CreateAuthorIfNotExistsForUsingGet(ctx context.Context, request op
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -835,8 +865,9 @@ func (s *SDK) CreateAuthorIfNotExistsForUsingGet(ctx context.Context, request op
 	return res, nil
 }
 
+// CreateAuthorIfNotExistsForUsingPost - this functions helps you to map your application author ids to Etherpad author ids
 func (s *SDK) CreateAuthorIfNotExistsForUsingPost(ctx context.Context, request operations.CreateAuthorIfNotExistsForUsingPostRequest) (*operations.CreateAuthorIfNotExistsForUsingPostResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/createAuthorIfNotExistsFor"
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -846,7 +877,7 @@ func (s *SDK) CreateAuthorIfNotExistsForUsingPost(ctx context.Context, request o
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -906,8 +937,9 @@ func (s *SDK) CreateAuthorIfNotExistsForUsingPost(ctx context.Context, request o
 	return res, nil
 }
 
+// CreateAuthorUsingGet - creates a new author
 func (s *SDK) CreateAuthorUsingGet(ctx context.Context, request operations.CreateAuthorUsingGetRequest) (*operations.CreateAuthorUsingGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/createAuthor"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -917,7 +949,7 @@ func (s *SDK) CreateAuthorUsingGet(ctx context.Context, request operations.Creat
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -977,8 +1009,9 @@ func (s *SDK) CreateAuthorUsingGet(ctx context.Context, request operations.Creat
 	return res, nil
 }
 
+// CreateAuthorUsingPost - creates a new author
 func (s *SDK) CreateAuthorUsingPost(ctx context.Context, request operations.CreateAuthorUsingPostRequest) (*operations.CreateAuthorUsingPostResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/createAuthor"
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -988,7 +1021,7 @@ func (s *SDK) CreateAuthorUsingPost(ctx context.Context, request operations.Crea
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1049,7 +1082,7 @@ func (s *SDK) CreateAuthorUsingPost(ctx context.Context, request operations.Crea
 }
 
 func (s *SDK) CreateDiffHTMLUsingGet(ctx context.Context, request operations.CreateDiffHTMLUsingGetRequest) (*operations.CreateDiffHTMLUsingGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/createDiffHTML"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1059,7 +1092,7 @@ func (s *SDK) CreateDiffHTMLUsingGet(ctx context.Context, request operations.Cre
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1120,7 +1153,7 @@ func (s *SDK) CreateDiffHTMLUsingGet(ctx context.Context, request operations.Cre
 }
 
 func (s *SDK) CreateDiffHTMLUsingPost(ctx context.Context, request operations.CreateDiffHTMLUsingPostRequest) (*operations.CreateDiffHTMLUsingPostResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/createDiffHTML"
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -1130,7 +1163,7 @@ func (s *SDK) CreateDiffHTMLUsingPost(ctx context.Context, request operations.Cr
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1190,8 +1223,9 @@ func (s *SDK) CreateDiffHTMLUsingPost(ctx context.Context, request operations.Cr
 	return res, nil
 }
 
+// CreateGroupIfNotExistsForUsingGet - this functions helps you to map your application group ids to Etherpad group ids
 func (s *SDK) CreateGroupIfNotExistsForUsingGet(ctx context.Context, request operations.CreateGroupIfNotExistsForUsingGetRequest) (*operations.CreateGroupIfNotExistsForUsingGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/createGroupIfNotExistsFor"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1201,7 +1235,7 @@ func (s *SDK) CreateGroupIfNotExistsForUsingGet(ctx context.Context, request ope
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1261,8 +1295,9 @@ func (s *SDK) CreateGroupIfNotExistsForUsingGet(ctx context.Context, request ope
 	return res, nil
 }
 
+// CreateGroupIfNotExistsForUsingPost - this functions helps you to map your application group ids to Etherpad group ids
 func (s *SDK) CreateGroupIfNotExistsForUsingPost(ctx context.Context, request operations.CreateGroupIfNotExistsForUsingPostRequest) (*operations.CreateGroupIfNotExistsForUsingPostResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/createGroupIfNotExistsFor"
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -1272,7 +1307,7 @@ func (s *SDK) CreateGroupIfNotExistsForUsingPost(ctx context.Context, request op
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1332,8 +1367,9 @@ func (s *SDK) CreateGroupIfNotExistsForUsingPost(ctx context.Context, request op
 	return res, nil
 }
 
+// CreateGroupPadUsingGet - creates a new pad in this group
 func (s *SDK) CreateGroupPadUsingGet(ctx context.Context, request operations.CreateGroupPadUsingGetRequest) (*operations.CreateGroupPadUsingGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/createGroupPad"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1343,7 +1379,7 @@ func (s *SDK) CreateGroupPadUsingGet(ctx context.Context, request operations.Cre
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1403,8 +1439,9 @@ func (s *SDK) CreateGroupPadUsingGet(ctx context.Context, request operations.Cre
 	return res, nil
 }
 
+// CreateGroupPadUsingPost - creates a new pad in this group
 func (s *SDK) CreateGroupPadUsingPost(ctx context.Context, request operations.CreateGroupPadUsingPostRequest) (*operations.CreateGroupPadUsingPostResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/createGroupPad"
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -1414,7 +1451,7 @@ func (s *SDK) CreateGroupPadUsingPost(ctx context.Context, request operations.Cr
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1474,8 +1511,9 @@ func (s *SDK) CreateGroupPadUsingPost(ctx context.Context, request operations.Cr
 	return res, nil
 }
 
+// CreateGroupUsingGet - creates a new group
 func (s *SDK) CreateGroupUsingGet(ctx context.Context) (*operations.CreateGroupUsingGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/createGroup"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1483,7 +1521,7 @@ func (s *SDK) CreateGroupUsingGet(ctx context.Context) (*operations.CreateGroupU
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1543,8 +1581,9 @@ func (s *SDK) CreateGroupUsingGet(ctx context.Context) (*operations.CreateGroupU
 	return res, nil
 }
 
+// CreateGroupUsingPost - creates a new group
 func (s *SDK) CreateGroupUsingPost(ctx context.Context) (*operations.CreateGroupUsingPostResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/createGroup"
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -1552,7 +1591,7 @@ func (s *SDK) CreateGroupUsingPost(ctx context.Context) (*operations.CreateGroup
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1612,8 +1651,9 @@ func (s *SDK) CreateGroupUsingPost(ctx context.Context) (*operations.CreateGroup
 	return res, nil
 }
 
+// CreatePadUsingGet - creates a new (non-group) pad. Note that if you need to create a group Pad, you should call createGroupPad
 func (s *SDK) CreatePadUsingGet(ctx context.Context, request operations.CreatePadUsingGetRequest) (*operations.CreatePadUsingGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/createPad"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1623,7 +1663,7 @@ func (s *SDK) CreatePadUsingGet(ctx context.Context, request operations.CreatePa
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1683,8 +1723,9 @@ func (s *SDK) CreatePadUsingGet(ctx context.Context, request operations.CreatePa
 	return res, nil
 }
 
+// CreatePadUsingPost - creates a new (non-group) pad. Note that if you need to create a group Pad, you should call createGroupPad
 func (s *SDK) CreatePadUsingPost(ctx context.Context, request operations.CreatePadUsingPostRequest) (*operations.CreatePadUsingPostResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/createPad"
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -1694,7 +1735,7 @@ func (s *SDK) CreatePadUsingPost(ctx context.Context, request operations.CreateP
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1754,8 +1795,9 @@ func (s *SDK) CreatePadUsingPost(ctx context.Context, request operations.CreateP
 	return res, nil
 }
 
+// CreateSessionUsingGet - creates a new session. validUntil is an unix timestamp in seconds
 func (s *SDK) CreateSessionUsingGet(ctx context.Context, request operations.CreateSessionUsingGetRequest) (*operations.CreateSessionUsingGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/createSession"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1765,7 +1807,7 @@ func (s *SDK) CreateSessionUsingGet(ctx context.Context, request operations.Crea
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1825,8 +1867,9 @@ func (s *SDK) CreateSessionUsingGet(ctx context.Context, request operations.Crea
 	return res, nil
 }
 
+// CreateSessionUsingPost - creates a new session. validUntil is an unix timestamp in seconds
 func (s *SDK) CreateSessionUsingPost(ctx context.Context, request operations.CreateSessionUsingPostRequest) (*operations.CreateSessionUsingPostResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/createSession"
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -1836,7 +1879,7 @@ func (s *SDK) CreateSessionUsingPost(ctx context.Context, request operations.Cre
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1896,8 +1939,9 @@ func (s *SDK) CreateSessionUsingPost(ctx context.Context, request operations.Cre
 	return res, nil
 }
 
+// DeleteGroupUsingGet - deletes a group
 func (s *SDK) DeleteGroupUsingGet(ctx context.Context, request operations.DeleteGroupUsingGetRequest) (*operations.DeleteGroupUsingGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/deleteGroup"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1907,7 +1951,7 @@ func (s *SDK) DeleteGroupUsingGet(ctx context.Context, request operations.Delete
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1967,8 +2011,9 @@ func (s *SDK) DeleteGroupUsingGet(ctx context.Context, request operations.Delete
 	return res, nil
 }
 
+// DeleteGroupUsingPost - deletes a group
 func (s *SDK) DeleteGroupUsingPost(ctx context.Context, request operations.DeleteGroupUsingPostRequest) (*operations.DeleteGroupUsingPostResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/deleteGroup"
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -1978,7 +2023,7 @@ func (s *SDK) DeleteGroupUsingPost(ctx context.Context, request operations.Delet
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2038,8 +2083,9 @@ func (s *SDK) DeleteGroupUsingPost(ctx context.Context, request operations.Delet
 	return res, nil
 }
 
+// DeletePadUsingGet - deletes a pad
 func (s *SDK) DeletePadUsingGet(ctx context.Context, request operations.DeletePadUsingGetRequest) (*operations.DeletePadUsingGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/deletePad"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2049,7 +2095,7 @@ func (s *SDK) DeletePadUsingGet(ctx context.Context, request operations.DeletePa
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2109,8 +2155,9 @@ func (s *SDK) DeletePadUsingGet(ctx context.Context, request operations.DeletePa
 	return res, nil
 }
 
+// DeletePadUsingPost - deletes a pad
 func (s *SDK) DeletePadUsingPost(ctx context.Context, request operations.DeletePadUsingPostRequest) (*operations.DeletePadUsingPostResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/deletePad"
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -2120,7 +2167,7 @@ func (s *SDK) DeletePadUsingPost(ctx context.Context, request operations.DeleteP
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2180,8 +2227,9 @@ func (s *SDK) DeletePadUsingPost(ctx context.Context, request operations.DeleteP
 	return res, nil
 }
 
+// DeleteSessionUsingGet - deletes a session
 func (s *SDK) DeleteSessionUsingGet(ctx context.Context, request operations.DeleteSessionUsingGetRequest) (*operations.DeleteSessionUsingGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/deleteSession"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2191,7 +2239,7 @@ func (s *SDK) DeleteSessionUsingGet(ctx context.Context, request operations.Dele
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2251,8 +2299,9 @@ func (s *SDK) DeleteSessionUsingGet(ctx context.Context, request operations.Dele
 	return res, nil
 }
 
+// DeleteSessionUsingPost - deletes a session
 func (s *SDK) DeleteSessionUsingPost(ctx context.Context, request operations.DeleteSessionUsingPostRequest) (*operations.DeleteSessionUsingPostResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/deleteSession"
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -2262,7 +2311,7 @@ func (s *SDK) DeleteSessionUsingPost(ctx context.Context, request operations.Del
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2323,7 +2372,7 @@ func (s *SDK) DeleteSessionUsingPost(ctx context.Context, request operations.Del
 }
 
 func (s *SDK) GetAttributePoolUsingGet(ctx context.Context, request operations.GetAttributePoolUsingGetRequest) (*operations.GetAttributePoolUsingGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/getAttributePool"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2333,7 +2382,7 @@ func (s *SDK) GetAttributePoolUsingGet(ctx context.Context, request operations.G
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2394,7 +2443,7 @@ func (s *SDK) GetAttributePoolUsingGet(ctx context.Context, request operations.G
 }
 
 func (s *SDK) GetAttributePoolUsingPost(ctx context.Context, request operations.GetAttributePoolUsingPostRequest) (*operations.GetAttributePoolUsingPostResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/getAttributePool"
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -2404,7 +2453,7 @@ func (s *SDK) GetAttributePoolUsingPost(ctx context.Context, request operations.
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2464,8 +2513,9 @@ func (s *SDK) GetAttributePoolUsingPost(ctx context.Context, request operations.
 	return res, nil
 }
 
+// GetAuthorNameUsingGet - Returns the Author Name of the author
 func (s *SDK) GetAuthorNameUsingGet(ctx context.Context, request operations.GetAuthorNameUsingGetRequest) (*operations.GetAuthorNameUsingGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/getAuthorName"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2475,7 +2525,7 @@ func (s *SDK) GetAuthorNameUsingGet(ctx context.Context, request operations.GetA
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2535,8 +2585,9 @@ func (s *SDK) GetAuthorNameUsingGet(ctx context.Context, request operations.GetA
 	return res, nil
 }
 
+// GetAuthorNameUsingPost - Returns the Author Name of the author
 func (s *SDK) GetAuthorNameUsingPost(ctx context.Context, request operations.GetAuthorNameUsingPostRequest) (*operations.GetAuthorNameUsingPostResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/getAuthorName"
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -2546,7 +2597,7 @@ func (s *SDK) GetAuthorNameUsingPost(ctx context.Context, request operations.Get
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2606,8 +2657,9 @@ func (s *SDK) GetAuthorNameUsingPost(ctx context.Context, request operations.Get
 	return res, nil
 }
 
+// GetChatHeadUsingGet - returns the chatHead (chat-message) of the pad
 func (s *SDK) GetChatHeadUsingGet(ctx context.Context, request operations.GetChatHeadUsingGetRequest) (*operations.GetChatHeadUsingGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/getChatHead"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2617,7 +2669,7 @@ func (s *SDK) GetChatHeadUsingGet(ctx context.Context, request operations.GetCha
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2677,8 +2729,9 @@ func (s *SDK) GetChatHeadUsingGet(ctx context.Context, request operations.GetCha
 	return res, nil
 }
 
+// GetChatHeadUsingPost - returns the chatHead (chat-message) of the pad
 func (s *SDK) GetChatHeadUsingPost(ctx context.Context, request operations.GetChatHeadUsingPostRequest) (*operations.GetChatHeadUsingPostResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/getChatHead"
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -2688,7 +2741,7 @@ func (s *SDK) GetChatHeadUsingPost(ctx context.Context, request operations.GetCh
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2748,8 +2801,9 @@ func (s *SDK) GetChatHeadUsingPost(ctx context.Context, request operations.GetCh
 	return res, nil
 }
 
+// GetChatHistoryUsingGet - returns the chat history
 func (s *SDK) GetChatHistoryUsingGet(ctx context.Context, request operations.GetChatHistoryUsingGetRequest) (*operations.GetChatHistoryUsingGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/getChatHistory"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2759,7 +2813,7 @@ func (s *SDK) GetChatHistoryUsingGet(ctx context.Context, request operations.Get
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2819,8 +2873,9 @@ func (s *SDK) GetChatHistoryUsingGet(ctx context.Context, request operations.Get
 	return res, nil
 }
 
+// GetChatHistoryUsingPost - returns the chat history
 func (s *SDK) GetChatHistoryUsingPost(ctx context.Context, request operations.GetChatHistoryUsingPostRequest) (*operations.GetChatHistoryUsingPostResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/getChatHistory"
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -2830,7 +2885,7 @@ func (s *SDK) GetChatHistoryUsingPost(ctx context.Context, request operations.Ge
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2890,8 +2945,9 @@ func (s *SDK) GetChatHistoryUsingPost(ctx context.Context, request operations.Ge
 	return res, nil
 }
 
+// GetHTMLUsingGet - returns the text of a pad formatted as HTML
 func (s *SDK) GetHTMLUsingGet(ctx context.Context, request operations.GetHTMLUsingGetRequest) (*operations.GetHTMLUsingGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/getHTML"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2901,7 +2957,7 @@ func (s *SDK) GetHTMLUsingGet(ctx context.Context, request operations.GetHTMLUsi
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2961,8 +3017,9 @@ func (s *SDK) GetHTMLUsingGet(ctx context.Context, request operations.GetHTMLUsi
 	return res, nil
 }
 
+// GetHTMLUsingPost - returns the text of a pad formatted as HTML
 func (s *SDK) GetHTMLUsingPost(ctx context.Context, request operations.GetHTMLUsingPostRequest) (*operations.GetHTMLUsingPostResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/getHTML"
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -2972,7 +3029,7 @@ func (s *SDK) GetHTMLUsingPost(ctx context.Context, request operations.GetHTMLUs
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3032,8 +3089,9 @@ func (s *SDK) GetHTMLUsingPost(ctx context.Context, request operations.GetHTMLUs
 	return res, nil
 }
 
+// GetLastEditedUsingGet - returns the timestamp of the last revision of the pad
 func (s *SDK) GetLastEditedUsingGet(ctx context.Context, request operations.GetLastEditedUsingGetRequest) (*operations.GetLastEditedUsingGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/getLastEdited"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3043,7 +3101,7 @@ func (s *SDK) GetLastEditedUsingGet(ctx context.Context, request operations.GetL
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3103,8 +3161,9 @@ func (s *SDK) GetLastEditedUsingGet(ctx context.Context, request operations.GetL
 	return res, nil
 }
 
+// GetLastEditedUsingPost - returns the timestamp of the last revision of the pad
 func (s *SDK) GetLastEditedUsingPost(ctx context.Context, request operations.GetLastEditedUsingPostRequest) (*operations.GetLastEditedUsingPostResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/getLastEdited"
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -3114,7 +3173,7 @@ func (s *SDK) GetLastEditedUsingPost(ctx context.Context, request operations.Get
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3175,7 +3234,7 @@ func (s *SDK) GetLastEditedUsingPost(ctx context.Context, request operations.Get
 }
 
 func (s *SDK) GetPadIDUsingGet(ctx context.Context, request operations.GetPadIDUsingGetRequest) (*operations.GetPadIDUsingGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/getPadID"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3185,7 +3244,7 @@ func (s *SDK) GetPadIDUsingGet(ctx context.Context, request operations.GetPadIDU
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3246,7 +3305,7 @@ func (s *SDK) GetPadIDUsingGet(ctx context.Context, request operations.GetPadIDU
 }
 
 func (s *SDK) GetPadIDUsingPost(ctx context.Context, request operations.GetPadIDUsingPostRequest) (*operations.GetPadIDUsingPostResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/getPadID"
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -3256,7 +3315,7 @@ func (s *SDK) GetPadIDUsingPost(ctx context.Context, request operations.GetPadID
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3316,8 +3375,9 @@ func (s *SDK) GetPadIDUsingPost(ctx context.Context, request operations.GetPadID
 	return res, nil
 }
 
+// GetPublicStatusUsingGet - return true of false
 func (s *SDK) GetPublicStatusUsingGet(ctx context.Context, request operations.GetPublicStatusUsingGetRequest) (*operations.GetPublicStatusUsingGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/getPublicStatus"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3327,7 +3387,7 @@ func (s *SDK) GetPublicStatusUsingGet(ctx context.Context, request operations.Ge
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3387,8 +3447,9 @@ func (s *SDK) GetPublicStatusUsingGet(ctx context.Context, request operations.Ge
 	return res, nil
 }
 
+// GetPublicStatusUsingPost - return true of false
 func (s *SDK) GetPublicStatusUsingPost(ctx context.Context, request operations.GetPublicStatusUsingPostRequest) (*operations.GetPublicStatusUsingPostResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/getPublicStatus"
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -3398,7 +3459,7 @@ func (s *SDK) GetPublicStatusUsingPost(ctx context.Context, request operations.G
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3458,8 +3519,9 @@ func (s *SDK) GetPublicStatusUsingPost(ctx context.Context, request operations.G
 	return res, nil
 }
 
+// GetReadOnlyIDUsingGet - returns the read only link of a pad
 func (s *SDK) GetReadOnlyIDUsingGet(ctx context.Context, request operations.GetReadOnlyIDUsingGetRequest) (*operations.GetReadOnlyIDUsingGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/getReadOnlyID"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3469,7 +3531,7 @@ func (s *SDK) GetReadOnlyIDUsingGet(ctx context.Context, request operations.GetR
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3529,8 +3591,9 @@ func (s *SDK) GetReadOnlyIDUsingGet(ctx context.Context, request operations.GetR
 	return res, nil
 }
 
+// GetReadOnlyIDUsingPost - returns the read only link of a pad
 func (s *SDK) GetReadOnlyIDUsingPost(ctx context.Context, request operations.GetReadOnlyIDUsingPostRequest) (*operations.GetReadOnlyIDUsingPostResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/getReadOnlyID"
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -3540,7 +3603,7 @@ func (s *SDK) GetReadOnlyIDUsingPost(ctx context.Context, request operations.Get
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3601,7 +3664,7 @@ func (s *SDK) GetReadOnlyIDUsingPost(ctx context.Context, request operations.Get
 }
 
 func (s *SDK) GetRevisionChangesetUsingGet(ctx context.Context, request operations.GetRevisionChangesetUsingGetRequest) (*operations.GetRevisionChangesetUsingGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/getRevisionChangeset"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3611,7 +3674,7 @@ func (s *SDK) GetRevisionChangesetUsingGet(ctx context.Context, request operatio
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3672,7 +3735,7 @@ func (s *SDK) GetRevisionChangesetUsingGet(ctx context.Context, request operatio
 }
 
 func (s *SDK) GetRevisionChangesetUsingPost(ctx context.Context, request operations.GetRevisionChangesetUsingPostRequest) (*operations.GetRevisionChangesetUsingPostResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/getRevisionChangeset"
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -3682,7 +3745,7 @@ func (s *SDK) GetRevisionChangesetUsingPost(ctx context.Context, request operati
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3742,8 +3805,9 @@ func (s *SDK) GetRevisionChangesetUsingPost(ctx context.Context, request operati
 	return res, nil
 }
 
+// GetRevisionsCountUsingGet - returns the number of revisions of this pad
 func (s *SDK) GetRevisionsCountUsingGet(ctx context.Context, request operations.GetRevisionsCountUsingGetRequest) (*operations.GetRevisionsCountUsingGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/getRevisionsCount"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3753,7 +3817,7 @@ func (s *SDK) GetRevisionsCountUsingGet(ctx context.Context, request operations.
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3813,8 +3877,9 @@ func (s *SDK) GetRevisionsCountUsingGet(ctx context.Context, request operations.
 	return res, nil
 }
 
+// GetRevisionsCountUsingPost - returns the number of revisions of this pad
 func (s *SDK) GetRevisionsCountUsingPost(ctx context.Context, request operations.GetRevisionsCountUsingPostRequest) (*operations.GetRevisionsCountUsingPostResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/getRevisionsCount"
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -3824,7 +3889,7 @@ func (s *SDK) GetRevisionsCountUsingPost(ctx context.Context, request operations
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3885,7 +3950,7 @@ func (s *SDK) GetRevisionsCountUsingPost(ctx context.Context, request operations
 }
 
 func (s *SDK) GetSavedRevisionsCountUsingGet(ctx context.Context, request operations.GetSavedRevisionsCountUsingGetRequest) (*operations.GetSavedRevisionsCountUsingGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/getSavedRevisionsCount"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3895,7 +3960,7 @@ func (s *SDK) GetSavedRevisionsCountUsingGet(ctx context.Context, request operat
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3956,7 +4021,7 @@ func (s *SDK) GetSavedRevisionsCountUsingGet(ctx context.Context, request operat
 }
 
 func (s *SDK) GetSavedRevisionsCountUsingPost(ctx context.Context, request operations.GetSavedRevisionsCountUsingPostRequest) (*operations.GetSavedRevisionsCountUsingPostResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/getSavedRevisionsCount"
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -3966,7 +4031,7 @@ func (s *SDK) GetSavedRevisionsCountUsingPost(ctx context.Context, request opera
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4026,8 +4091,9 @@ func (s *SDK) GetSavedRevisionsCountUsingPost(ctx context.Context, request opera
 	return res, nil
 }
 
+// GetSessionInfoUsingGet - returns informations about a session
 func (s *SDK) GetSessionInfoUsingGet(ctx context.Context, request operations.GetSessionInfoUsingGetRequest) (*operations.GetSessionInfoUsingGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/getSessionInfo"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -4037,7 +4103,7 @@ func (s *SDK) GetSessionInfoUsingGet(ctx context.Context, request operations.Get
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4097,8 +4163,9 @@ func (s *SDK) GetSessionInfoUsingGet(ctx context.Context, request operations.Get
 	return res, nil
 }
 
+// GetSessionInfoUsingPost - returns informations about a session
 func (s *SDK) GetSessionInfoUsingPost(ctx context.Context, request operations.GetSessionInfoUsingPostRequest) (*operations.GetSessionInfoUsingPostResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/getSessionInfo"
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -4108,7 +4175,7 @@ func (s *SDK) GetSessionInfoUsingPost(ctx context.Context, request operations.Ge
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4169,7 +4236,7 @@ func (s *SDK) GetSessionInfoUsingPost(ctx context.Context, request operations.Ge
 }
 
 func (s *SDK) GetStatsUsingGet(ctx context.Context) (*operations.GetStatsUsingGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/getStats"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -4177,7 +4244,7 @@ func (s *SDK) GetStatsUsingGet(ctx context.Context) (*operations.GetStatsUsingGe
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4238,7 +4305,7 @@ func (s *SDK) GetStatsUsingGet(ctx context.Context) (*operations.GetStatsUsingGe
 }
 
 func (s *SDK) GetStatsUsingPost(ctx context.Context) (*operations.GetStatsUsingPostResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/getStats"
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -4246,7 +4313,7 @@ func (s *SDK) GetStatsUsingPost(ctx context.Context) (*operations.GetStatsUsingP
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4306,8 +4373,9 @@ func (s *SDK) GetStatsUsingPost(ctx context.Context) (*operations.GetStatsUsingP
 	return res, nil
 }
 
+// GetTextUsingGet - returns the text of a pad
 func (s *SDK) GetTextUsingGet(ctx context.Context, request operations.GetTextUsingGetRequest) (*operations.GetTextUsingGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/getText"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -4317,7 +4385,7 @@ func (s *SDK) GetTextUsingGet(ctx context.Context, request operations.GetTextUsi
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4377,8 +4445,9 @@ func (s *SDK) GetTextUsingGet(ctx context.Context, request operations.GetTextUsi
 	return res, nil
 }
 
+// GetTextUsingPost - returns the text of a pad
 func (s *SDK) GetTextUsingPost(ctx context.Context, request operations.GetTextUsingPostRequest) (*operations.GetTextUsingPostResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/getText"
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -4388,7 +4457,7 @@ func (s *SDK) GetTextUsingPost(ctx context.Context, request operations.GetTextUs
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4449,7 +4518,7 @@ func (s *SDK) GetTextUsingPost(ctx context.Context, request operations.GetTextUs
 }
 
 func (s *SDK) ListAllGroupsUsingGet(ctx context.Context) (*operations.ListAllGroupsUsingGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/listAllGroups"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -4457,7 +4526,7 @@ func (s *SDK) ListAllGroupsUsingGet(ctx context.Context) (*operations.ListAllGro
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4518,7 +4587,7 @@ func (s *SDK) ListAllGroupsUsingGet(ctx context.Context) (*operations.ListAllGro
 }
 
 func (s *SDK) ListAllGroupsUsingPost(ctx context.Context) (*operations.ListAllGroupsUsingPostResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/listAllGroups"
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -4526,7 +4595,7 @@ func (s *SDK) ListAllGroupsUsingPost(ctx context.Context) (*operations.ListAllGr
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4586,8 +4655,9 @@ func (s *SDK) ListAllGroupsUsingPost(ctx context.Context) (*operations.ListAllGr
 	return res, nil
 }
 
+// ListAllPadsUsingGet - list all the pads
 func (s *SDK) ListAllPadsUsingGet(ctx context.Context) (*operations.ListAllPadsUsingGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/listAllPads"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -4595,7 +4665,7 @@ func (s *SDK) ListAllPadsUsingGet(ctx context.Context) (*operations.ListAllPadsU
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4655,8 +4725,9 @@ func (s *SDK) ListAllPadsUsingGet(ctx context.Context) (*operations.ListAllPadsU
 	return res, nil
 }
 
+// ListAllPadsUsingPost - list all the pads
 func (s *SDK) ListAllPadsUsingPost(ctx context.Context) (*operations.ListAllPadsUsingPostResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/listAllPads"
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -4664,7 +4735,7 @@ func (s *SDK) ListAllPadsUsingPost(ctx context.Context) (*operations.ListAllPads
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4724,8 +4795,9 @@ func (s *SDK) ListAllPadsUsingPost(ctx context.Context) (*operations.ListAllPads
 	return res, nil
 }
 
+// ListAuthorsOfPadUsingGet - returns an array of authors who contributed to this pad
 func (s *SDK) ListAuthorsOfPadUsingGet(ctx context.Context, request operations.ListAuthorsOfPadUsingGetRequest) (*operations.ListAuthorsOfPadUsingGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/listAuthorsOfPad"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -4735,7 +4807,7 @@ func (s *SDK) ListAuthorsOfPadUsingGet(ctx context.Context, request operations.L
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4795,8 +4867,9 @@ func (s *SDK) ListAuthorsOfPadUsingGet(ctx context.Context, request operations.L
 	return res, nil
 }
 
+// ListAuthorsOfPadUsingPost - returns an array of authors who contributed to this pad
 func (s *SDK) ListAuthorsOfPadUsingPost(ctx context.Context, request operations.ListAuthorsOfPadUsingPostRequest) (*operations.ListAuthorsOfPadUsingPostResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/listAuthorsOfPad"
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -4806,7 +4879,7 @@ func (s *SDK) ListAuthorsOfPadUsingPost(ctx context.Context, request operations.
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4866,8 +4939,9 @@ func (s *SDK) ListAuthorsOfPadUsingPost(ctx context.Context, request operations.
 	return res, nil
 }
 
+// ListPadsOfAuthorUsingGet - returns an array of all pads this author contributed to
 func (s *SDK) ListPadsOfAuthorUsingGet(ctx context.Context, request operations.ListPadsOfAuthorUsingGetRequest) (*operations.ListPadsOfAuthorUsingGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/listPadsOfAuthor"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -4877,7 +4951,7 @@ func (s *SDK) ListPadsOfAuthorUsingGet(ctx context.Context, request operations.L
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4937,8 +5011,9 @@ func (s *SDK) ListPadsOfAuthorUsingGet(ctx context.Context, request operations.L
 	return res, nil
 }
 
+// ListPadsOfAuthorUsingPost - returns an array of all pads this author contributed to
 func (s *SDK) ListPadsOfAuthorUsingPost(ctx context.Context, request operations.ListPadsOfAuthorUsingPostRequest) (*operations.ListPadsOfAuthorUsingPostResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/listPadsOfAuthor"
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -4948,7 +5023,7 @@ func (s *SDK) ListPadsOfAuthorUsingPost(ctx context.Context, request operations.
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5008,8 +5083,9 @@ func (s *SDK) ListPadsOfAuthorUsingPost(ctx context.Context, request operations.
 	return res, nil
 }
 
+// ListPadsUsingGet - returns all pads of this group
 func (s *SDK) ListPadsUsingGet(ctx context.Context, request operations.ListPadsUsingGetRequest) (*operations.ListPadsUsingGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/listPads"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -5019,7 +5095,7 @@ func (s *SDK) ListPadsUsingGet(ctx context.Context, request operations.ListPadsU
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5079,8 +5155,9 @@ func (s *SDK) ListPadsUsingGet(ctx context.Context, request operations.ListPadsU
 	return res, nil
 }
 
+// ListPadsUsingPost - returns all pads of this group
 func (s *SDK) ListPadsUsingPost(ctx context.Context, request operations.ListPadsUsingPostRequest) (*operations.ListPadsUsingPostResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/listPads"
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -5090,7 +5167,7 @@ func (s *SDK) ListPadsUsingPost(ctx context.Context, request operations.ListPads
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5151,7 +5228,7 @@ func (s *SDK) ListPadsUsingPost(ctx context.Context, request operations.ListPads
 }
 
 func (s *SDK) ListSavedRevisionsUsingGet(ctx context.Context, request operations.ListSavedRevisionsUsingGetRequest) (*operations.ListSavedRevisionsUsingGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/listSavedRevisions"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -5161,7 +5238,7 @@ func (s *SDK) ListSavedRevisionsUsingGet(ctx context.Context, request operations
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5222,7 +5299,7 @@ func (s *SDK) ListSavedRevisionsUsingGet(ctx context.Context, request operations
 }
 
 func (s *SDK) ListSavedRevisionsUsingPost(ctx context.Context, request operations.ListSavedRevisionsUsingPostRequest) (*operations.ListSavedRevisionsUsingPostResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/listSavedRevisions"
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -5232,7 +5309,7 @@ func (s *SDK) ListSavedRevisionsUsingPost(ctx context.Context, request operation
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5292,8 +5369,9 @@ func (s *SDK) ListSavedRevisionsUsingPost(ctx context.Context, request operation
 	return res, nil
 }
 
+// ListSessionsOfAuthorUsingGet - returns all sessions of an author
 func (s *SDK) ListSessionsOfAuthorUsingGet(ctx context.Context, request operations.ListSessionsOfAuthorUsingGetRequest) (*operations.ListSessionsOfAuthorUsingGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/listSessionsOfAuthor"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -5303,7 +5381,7 @@ func (s *SDK) ListSessionsOfAuthorUsingGet(ctx context.Context, request operatio
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5363,8 +5441,9 @@ func (s *SDK) ListSessionsOfAuthorUsingGet(ctx context.Context, request operatio
 	return res, nil
 }
 
+// ListSessionsOfAuthorUsingPost - returns all sessions of an author
 func (s *SDK) ListSessionsOfAuthorUsingPost(ctx context.Context, request operations.ListSessionsOfAuthorUsingPostRequest) (*operations.ListSessionsOfAuthorUsingPostResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/listSessionsOfAuthor"
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -5374,7 +5453,7 @@ func (s *SDK) ListSessionsOfAuthorUsingPost(ctx context.Context, request operati
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5435,7 +5514,7 @@ func (s *SDK) ListSessionsOfAuthorUsingPost(ctx context.Context, request operati
 }
 
 func (s *SDK) ListSessionsOfGroupUsingGet(ctx context.Context, request operations.ListSessionsOfGroupUsingGetRequest) (*operations.ListSessionsOfGroupUsingGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/listSessionsOfGroup"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -5445,7 +5524,7 @@ func (s *SDK) ListSessionsOfGroupUsingGet(ctx context.Context, request operation
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5506,7 +5585,7 @@ func (s *SDK) ListSessionsOfGroupUsingGet(ctx context.Context, request operation
 }
 
 func (s *SDK) ListSessionsOfGroupUsingPost(ctx context.Context, request operations.ListSessionsOfGroupUsingPostRequest) (*operations.ListSessionsOfGroupUsingPostResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/listSessionsOfGroup"
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -5516,7 +5595,7 @@ func (s *SDK) ListSessionsOfGroupUsingPost(ctx context.Context, request operatio
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5577,7 +5656,7 @@ func (s *SDK) ListSessionsOfGroupUsingPost(ctx context.Context, request operatio
 }
 
 func (s *SDK) MovePadUsingGet(ctx context.Context, request operations.MovePadUsingGetRequest) (*operations.MovePadUsingGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/movePad"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -5587,7 +5666,7 @@ func (s *SDK) MovePadUsingGet(ctx context.Context, request operations.MovePadUsi
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5648,7 +5727,7 @@ func (s *SDK) MovePadUsingGet(ctx context.Context, request operations.MovePadUsi
 }
 
 func (s *SDK) MovePadUsingPost(ctx context.Context, request operations.MovePadUsingPostRequest) (*operations.MovePadUsingPostResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/movePad"
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -5658,7 +5737,7 @@ func (s *SDK) MovePadUsingPost(ctx context.Context, request operations.MovePadUs
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5718,8 +5797,9 @@ func (s *SDK) MovePadUsingPost(ctx context.Context, request operations.MovePadUs
 	return res, nil
 }
 
+// PadUsersCountUsingGet - returns the number of user that are currently editing this pad
 func (s *SDK) PadUsersCountUsingGet(ctx context.Context, request operations.PadUsersCountUsingGetRequest) (*operations.PadUsersCountUsingGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/padUsersCount"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -5729,7 +5809,7 @@ func (s *SDK) PadUsersCountUsingGet(ctx context.Context, request operations.PadU
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5789,8 +5869,9 @@ func (s *SDK) PadUsersCountUsingGet(ctx context.Context, request operations.PadU
 	return res, nil
 }
 
+// PadUsersCountUsingPost - returns the number of user that are currently editing this pad
 func (s *SDK) PadUsersCountUsingPost(ctx context.Context, request operations.PadUsersCountUsingPostRequest) (*operations.PadUsersCountUsingPostResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/padUsersCount"
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -5800,7 +5881,7 @@ func (s *SDK) PadUsersCountUsingPost(ctx context.Context, request operations.Pad
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5860,8 +5941,9 @@ func (s *SDK) PadUsersCountUsingPost(ctx context.Context, request operations.Pad
 	return res, nil
 }
 
+// PadUsersUsingGet - returns the list of users that are currently editing this pad
 func (s *SDK) PadUsersUsingGet(ctx context.Context, request operations.PadUsersUsingGetRequest) (*operations.PadUsersUsingGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/padUsers"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -5871,7 +5953,7 @@ func (s *SDK) PadUsersUsingGet(ctx context.Context, request operations.PadUsersU
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5931,8 +6013,9 @@ func (s *SDK) PadUsersUsingGet(ctx context.Context, request operations.PadUsersU
 	return res, nil
 }
 
+// PadUsersUsingPost - returns the list of users that are currently editing this pad
 func (s *SDK) PadUsersUsingPost(ctx context.Context, request operations.PadUsersUsingPostRequest) (*operations.PadUsersUsingPostResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/padUsers"
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -5942,7 +6025,7 @@ func (s *SDK) PadUsersUsingPost(ctx context.Context, request operations.PadUsers
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6003,7 +6086,7 @@ func (s *SDK) PadUsersUsingPost(ctx context.Context, request operations.PadUsers
 }
 
 func (s *SDK) RestoreRevisionUsingGet(ctx context.Context, request operations.RestoreRevisionUsingGetRequest) (*operations.RestoreRevisionUsingGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/restoreRevision"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -6013,7 +6096,7 @@ func (s *SDK) RestoreRevisionUsingGet(ctx context.Context, request operations.Re
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6074,7 +6157,7 @@ func (s *SDK) RestoreRevisionUsingGet(ctx context.Context, request operations.Re
 }
 
 func (s *SDK) RestoreRevisionUsingPost(ctx context.Context, request operations.RestoreRevisionUsingPostRequest) (*operations.RestoreRevisionUsingPostResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/restoreRevision"
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -6084,7 +6167,7 @@ func (s *SDK) RestoreRevisionUsingPost(ctx context.Context, request operations.R
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6145,7 +6228,7 @@ func (s *SDK) RestoreRevisionUsingPost(ctx context.Context, request operations.R
 }
 
 func (s *SDK) SaveRevisionUsingGet(ctx context.Context, request operations.SaveRevisionUsingGetRequest) (*operations.SaveRevisionUsingGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/saveRevision"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -6155,7 +6238,7 @@ func (s *SDK) SaveRevisionUsingGet(ctx context.Context, request operations.SaveR
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6216,7 +6299,7 @@ func (s *SDK) SaveRevisionUsingGet(ctx context.Context, request operations.SaveR
 }
 
 func (s *SDK) SaveRevisionUsingPost(ctx context.Context, request operations.SaveRevisionUsingPostRequest) (*operations.SaveRevisionUsingPostResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/saveRevision"
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -6226,7 +6309,7 @@ func (s *SDK) SaveRevisionUsingPost(ctx context.Context, request operations.Save
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6286,8 +6369,9 @@ func (s *SDK) SaveRevisionUsingPost(ctx context.Context, request operations.Save
 	return res, nil
 }
 
+// SendClientsMessageUsingGet - sends a custom message of type msg to the pad
 func (s *SDK) SendClientsMessageUsingGet(ctx context.Context, request operations.SendClientsMessageUsingGetRequest) (*operations.SendClientsMessageUsingGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/sendClientsMessage"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -6297,7 +6381,7 @@ func (s *SDK) SendClientsMessageUsingGet(ctx context.Context, request operations
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6357,8 +6441,9 @@ func (s *SDK) SendClientsMessageUsingGet(ctx context.Context, request operations
 	return res, nil
 }
 
+// SendClientsMessageUsingPost - sends a custom message of type msg to the pad
 func (s *SDK) SendClientsMessageUsingPost(ctx context.Context, request operations.SendClientsMessageUsingPostRequest) (*operations.SendClientsMessageUsingPostResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/sendClientsMessage"
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -6368,7 +6453,7 @@ func (s *SDK) SendClientsMessageUsingPost(ctx context.Context, request operation
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6428,8 +6513,9 @@ func (s *SDK) SendClientsMessageUsingPost(ctx context.Context, request operation
 	return res, nil
 }
 
+// SetHTMLUsingGet - sets the text of a pad with HTML
 func (s *SDK) SetHTMLUsingGet(ctx context.Context, request operations.SetHTMLUsingGetRequest) (*operations.SetHTMLUsingGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/setHTML"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -6439,7 +6525,7 @@ func (s *SDK) SetHTMLUsingGet(ctx context.Context, request operations.SetHTMLUsi
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6499,8 +6585,9 @@ func (s *SDK) SetHTMLUsingGet(ctx context.Context, request operations.SetHTMLUsi
 	return res, nil
 }
 
+// SetHTMLUsingPost - sets the text of a pad with HTML
 func (s *SDK) SetHTMLUsingPost(ctx context.Context, request operations.SetHTMLUsingPostRequest) (*operations.SetHTMLUsingPostResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/setHTML"
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -6510,7 +6597,7 @@ func (s *SDK) SetHTMLUsingPost(ctx context.Context, request operations.SetHTMLUs
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6570,8 +6657,9 @@ func (s *SDK) SetHTMLUsingPost(ctx context.Context, request operations.SetHTMLUs
 	return res, nil
 }
 
+// SetPublicStatusUsingGet - sets a boolean for the public status of a pad
 func (s *SDK) SetPublicStatusUsingGet(ctx context.Context, request operations.SetPublicStatusUsingGetRequest) (*operations.SetPublicStatusUsingGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/setPublicStatus"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -6581,7 +6669,7 @@ func (s *SDK) SetPublicStatusUsingGet(ctx context.Context, request operations.Se
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6641,8 +6729,9 @@ func (s *SDK) SetPublicStatusUsingGet(ctx context.Context, request operations.Se
 	return res, nil
 }
 
+// SetPublicStatusUsingPost - sets a boolean for the public status of a pad
 func (s *SDK) SetPublicStatusUsingPost(ctx context.Context, request operations.SetPublicStatusUsingPostRequest) (*operations.SetPublicStatusUsingPostResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/setPublicStatus"
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -6652,7 +6741,7 @@ func (s *SDK) SetPublicStatusUsingPost(ctx context.Context, request operations.S
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6712,8 +6801,9 @@ func (s *SDK) SetPublicStatusUsingPost(ctx context.Context, request operations.S
 	return res, nil
 }
 
+// SetTextUsingGet - sets the text of a pad
 func (s *SDK) SetTextUsingGet(ctx context.Context, request operations.SetTextUsingGetRequest) (*operations.SetTextUsingGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/setText"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -6723,7 +6813,7 @@ func (s *SDK) SetTextUsingGet(ctx context.Context, request operations.SetTextUsi
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6783,8 +6873,9 @@ func (s *SDK) SetTextUsingGet(ctx context.Context, request operations.SetTextUsi
 	return res, nil
 }
 
+// SetTextUsingPost - sets the text of a pad
 func (s *SDK) SetTextUsingPost(ctx context.Context, request operations.SetTextUsingPostRequest) (*operations.SetTextUsingPostResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/setText"
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -6794,7 +6885,7 @@ func (s *SDK) SetTextUsingPost(ctx context.Context, request operations.SetTextUs
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {

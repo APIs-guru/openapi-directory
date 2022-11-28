@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SingleUser } from "./singleuser";
+
 
 
 // UserList
@@ -8,6 +8,6 @@ import { SingleUser } from "./singleuser";
  * Wrapper for UserList Field value.
 **/
 export class UserList extends SpeakeasyBase {
-  @Metadata({ data: "json, name=values", elemType: shared.SingleUser })
+  @SpeakeasyMetadata({ data: "json, name=values", elemType: SingleUser })
   values?: SingleUser[];
 }

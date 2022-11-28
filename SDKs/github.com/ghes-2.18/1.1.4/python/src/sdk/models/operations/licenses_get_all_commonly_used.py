@@ -12,12 +12,12 @@ class LicensesGetAllCommonlyUsedQueryParams:
 
 @dataclass
 class LicensesGetAllCommonlyUsedRequest:
-    query_params: LicensesGetAllCommonlyUsedQueryParams = field(default=None)
+    query_params: LicensesGetAllCommonlyUsedQueryParams = field()
     
 
 @dataclass
 class LicensesGetAllCommonlyUsedResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     license_simples: Optional[List[shared.LicenseSimple]] = field(default=None)
     

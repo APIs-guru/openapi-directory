@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AutoMlContainerDefinition
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A list of container definitions that describe the different containers that make up an AutoML candidate. For more information, see .
 **/
 export class AutoMlContainerDefinition extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Environment" })
+  @SpeakeasyMetadata({ data: "json, name=Environment" })
   environment?: Map<string, string>;
 
-  @Metadata({ data: "json, name=Image" })
+  @SpeakeasyMetadata({ data: "json, name=Image" })
   image: string;
 
-  @Metadata({ data: "json, name=ModelDataUrl" })
+  @SpeakeasyMetadata({ data: "json, name=ModelDataUrl" })
   modelDataUrl: string;
 }

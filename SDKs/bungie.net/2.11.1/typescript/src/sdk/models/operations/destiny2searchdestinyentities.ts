@@ -1,37 +1,38 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class Destiny2SearchDestinyEntitiesPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=searchTerm" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=searchTerm" })
   searchTerm: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=type" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=type" })
   type: string;
 }
 
 
 export class Destiny2SearchDestinyEntitiesQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=page" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page" })
   page?: number;
 }
 
 
 export class Destiny2SearchDestinyEntitiesRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: Destiny2SearchDestinyEntitiesPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: Destiny2SearchDestinyEntitiesQueryParams;
 }
 
 
 export class Destiny2SearchDestinyEntitiesResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

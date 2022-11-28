@@ -1,5 +1,7 @@
 package shared
 
+// GoogleAppsDriveLabelsV2betaFieldSelectionOptionsChoiceDisplayHints
+// UI display hints for rendering an option.
 type GoogleAppsDriveLabelsV2betaFieldSelectionOptionsChoiceDisplayHints struct {
 	BadgeColors     *GoogleAppsDriveLabelsV2betaBadgeColors `json:"badgeColors,omitempty"`
 	BadgePriority   *string                                 `json:"badgePriority,omitempty"`

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetBelegePathParams = /** @class */ (function (_super) {
     __extends(GetBelegePathParams, _super);
@@ -30,7 +30,7 @@ var GetBelegePathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=registrierkasseUuid" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=registrierkasseUuid" }),
         __metadata("design:type", String)
     ], GetBelegePathParams.prototype, "registrierkasseUuid", void 0);
     return GetBelegePathParams;
@@ -53,35 +53,35 @@ var GetBelegeQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=after" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=after" }),
         __metadata("design:type", String)
     ], GetBelegeQueryParams.prototype, "after", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=before" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=before" }),
         __metadata("design:type", String)
     ], GetBelegeQueryParams.prototype, "before", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=format" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=format" }),
         __metadata("design:type", String)
     ], GetBelegeQueryParams.prototype, "format", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=gte" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=gte" }),
         __metadata("design:type", Number)
     ], GetBelegeQueryParams.prototype, "gte", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=limit" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=limit" }),
         __metadata("design:type", Number)
     ], GetBelegeQueryParams.prototype, "limit", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=lte" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=lte" }),
         __metadata("design:type", Number)
     ], GetBelegeQueryParams.prototype, "lte", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=offset" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=offset" }),
         __metadata("design:type", Number)
     ], GetBelegeQueryParams.prototype, "offset", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=order" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=order" }),
         __metadata("design:type", String)
     ], GetBelegeQueryParams.prototype, "order", void 0);
     return GetBelegeQueryParams;
@@ -93,11 +93,11 @@ var GetBelegeRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetBelegePathParams)
     ], GetBelegeRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetBelegeQueryParams)
     ], GetBelegeRequest.prototype, "queryParams", void 0);
     return GetBelegeRequest;
@@ -109,15 +109,15 @@ var GetBelegeResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.Belege)
     ], GetBelegeResponse.prototype, "belege", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetBelegeResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetBelegeResponse.prototype, "statusCode", void 0);
     return GetBelegeResponse;

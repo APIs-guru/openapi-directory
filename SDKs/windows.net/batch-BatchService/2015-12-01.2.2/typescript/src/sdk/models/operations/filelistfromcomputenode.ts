@@ -1,70 +1,71 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class FileListFromComputeNodePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=nodeId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=nodeId" })
   nodeId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=poolId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=poolId" })
   poolId: string;
 }
 
 
 export class FileListFromComputeNodeQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=$filter" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=$filter" })
   dollarFilter?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=api-version" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=api-version" })
   apiVersion: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=maxresults" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=maxresults" })
   maxresults?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=recursive" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=recursive" })
   recursive?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=timeout" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=timeout" })
   timeout?: number;
 }
 
 
 export class FileListFromComputeNodeHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=client-request-id" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=client-request-id" })
   clientRequestId?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=ocp-date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=ocp-date" })
   ocpDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=return-client-request-id" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=return-client-request-id" })
   returnClientRequestId?: boolean;
 }
 
 
 export class FileListFromComputeNodeRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: FileListFromComputeNodePathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: FileListFromComputeNodeQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: FileListFromComputeNodeHeaders;
 }
 
 
 export class FileListFromComputeNodeResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   batchError?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: Map<string, string[]>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   nodeFileListResult?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

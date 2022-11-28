@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var ExportAssetsCsvQueryParams = /** @class */ (function (_super) {
     __extends(ExportAssetsCsvQueryParams, _super);
@@ -30,7 +30,7 @@ var ExportAssetsCsvQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=search" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=search" }),
         __metadata("design:type", String)
     ], ExportAssetsCsvQueryParams.prototype, "search", void 0);
     return ExportAssetsCsvQueryParams;
@@ -42,7 +42,7 @@ var ExportAssetsCsvSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=http;subtype=bearer" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" }),
         __metadata("design:type", shared.SchemeBearerAuth)
     ], ExportAssetsCsvSecurity.prototype, "bearerAuth", void 0);
     return ExportAssetsCsvSecurity;
@@ -54,11 +54,11 @@ var ExportAssetsCsvRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ExportAssetsCsvQueryParams)
     ], ExportAssetsCsvRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ExportAssetsCsvSecurity)
     ], ExportAssetsCsvRequest.prototype, "security", void 0);
     return ExportAssetsCsvRequest;
@@ -70,15 +70,15 @@ var ExportAssetsCsvResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], ExportAssetsCsvResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], ExportAssetsCsvResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], ExportAssetsCsvResponse.prototype, "exportAssetsCsv200TextCsvBinaryString", void 0);
     return ExportAssetsCsvResponse;

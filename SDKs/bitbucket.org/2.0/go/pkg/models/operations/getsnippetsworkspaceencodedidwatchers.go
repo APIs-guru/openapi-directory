@@ -9,22 +9,10 @@ type GetSnippetsWorkspaceEncodedIDWatchersPathParams struct {
 	Workspace string `pathParam:"style=simple,explode=false,name=workspace"`
 }
 
-type GetSnippetsWorkspaceEncodedIDWatchersSecurityOption1 struct {
-	Oauth2 shared.SchemeOauth2 `security:"scheme,type=oauth2"`
-}
-
-type GetSnippetsWorkspaceEncodedIDWatchersSecurityOption2 struct {
-	Basic shared.SchemeBasic `security:"scheme,type=http,subtype=basic"`
-}
-
-type GetSnippetsWorkspaceEncodedIDWatchersSecurityOption3 struct {
-	APIKey shared.SchemeAPIKey `security:"scheme,type=apiKey,subtype=header"`
-}
-
 type GetSnippetsWorkspaceEncodedIDWatchersSecurity struct {
-	Option1 *GetSnippetsWorkspaceEncodedIDWatchersSecurityOption1 `security:"option"`
-	Option2 *GetSnippetsWorkspaceEncodedIDWatchersSecurityOption2 `security:"option"`
-	Option3 *GetSnippetsWorkspaceEncodedIDWatchersSecurityOption3 `security:"option"`
+	Oauth2 *shared.SchemeOauth2 `security:"scheme,type=oauth2"`
+	Basic  *shared.SchemeBasic  `security:"scheme,type=http,subtype=basic"`
+	APIKey *shared.SchemeAPIKey `security:"scheme,type=apiKey,subtype=header"`
 }
 
 type GetSnippetsWorkspaceEncodedIDWatchersRequest struct {

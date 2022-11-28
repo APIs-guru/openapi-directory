@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DataplexProjectsLocationsOperationsGetPathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 class DataplexProjectsLocationsOperationsGetViewEnum(str, Enum):
     ENTITY_VIEW_UNSPECIFIED = "ENTITY_VIEW_UNSPECIFIED"
@@ -32,20 +33,20 @@ class DataplexProjectsLocationsOperationsGetQueryParams:
 
 @dataclass
 class DataplexProjectsLocationsOperationsGetSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DataplexProjectsLocationsOperationsGetRequest:
-    path_params: DataplexProjectsLocationsOperationsGetPathParams = field(default=None)
-    query_params: DataplexProjectsLocationsOperationsGetQueryParams = field(default=None)
-    security: DataplexProjectsLocationsOperationsGetSecurity = field(default=None)
+    path_params: DataplexProjectsLocationsOperationsGetPathParams = field()
+    query_params: DataplexProjectsLocationsOperationsGetQueryParams = field()
+    security: DataplexProjectsLocationsOperationsGetSecurity = field()
     
 
 @dataclass
 class DataplexProjectsLocationsOperationsGetResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_longrunning_operation: Optional[shared.GoogleLongrunningOperation] = field(default=None)
-    status_code: int = field(default=None)
     

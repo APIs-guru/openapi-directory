@@ -1,14 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ConferenceSolutionKey } from "./conferencesolutionkey";
 
 
+
 export class ConferenceSolution extends SpeakeasyBase {
-  @Metadata({ data: "json, name=iconUri" })
+  @SpeakeasyMetadata({ data: "json, name=iconUri" })
   iconUri?: string;
 
-  @Metadata({ data: "json, name=key" })
+  @SpeakeasyMetadata({ data: "json, name=key" })
   key?: ConferenceSolutionKey;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 }

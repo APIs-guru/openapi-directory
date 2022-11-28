@@ -1,22 +1,22 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
-import { AssignedInventorySource } from "./assignedinventorysource";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { AssignedInventorySourceInput } from "./assignedinventorysource";
 
 
-// BulkEditAssignedInventorySourcesRequest
+
+// BulkEditAssignedInventorySourcesRequestInput
 /** 
  * Request message for AssignedInventorySourceService.BulkEdit.
 **/
-export class BulkEditAssignedInventorySourcesRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=advertiserId" })
+export class BulkEditAssignedInventorySourcesRequestInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=advertiserId" })
   advertiserId?: string;
 
-  @Metadata({ data: "json, name=createdAssignedInventorySources", elemType: shared.AssignedInventorySource })
-  createdAssignedInventorySources?: AssignedInventorySource[];
+  @SpeakeasyMetadata({ data: "json, name=createdAssignedInventorySources", elemType: AssignedInventorySourceInput })
+  createdAssignedInventorySources?: AssignedInventorySourceInput[];
 
-  @Metadata({ data: "json, name=deletedAssignedInventorySources" })
+  @SpeakeasyMetadata({ data: "json, name=deletedAssignedInventorySources" })
   deletedAssignedInventorySources?: string[];
 
-  @Metadata({ data: "json, name=partnerId" })
+  @SpeakeasyMetadata({ data: "json, name=partnerId" })
   partnerId?: string;
 }

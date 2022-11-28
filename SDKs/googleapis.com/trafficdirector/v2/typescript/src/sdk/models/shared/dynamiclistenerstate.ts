@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DynamicListenerState extends SpeakeasyBase {
-  @Metadata({ data: "json, name=lastUpdated" })
+  @SpeakeasyMetadata({ data: "json, name=lastUpdated" })
   lastUpdated?: string;
 
-  @Metadata({ data: "json, name=listener" })
+  @SpeakeasyMetadata({ data: "json, name=listener" })
   listener?: Map<string, any>;
 
-  @Metadata({ data: "json, name=versionInfo" })
+  @SpeakeasyMetadata({ data: "json, name=versionInfo" })
   versionInfo?: string;
 }

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // DropRowRangeRequest
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Request message for google.bigtable.admin.v2.BigtableTableAdmin.DropRowRange
 **/
 export class DropRowRangeRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=deleteAllDataFromTable" })
+  @SpeakeasyMetadata({ data: "json, name=deleteAllDataFromTable" })
   deleteAllDataFromTable?: boolean;
 
-  @Metadata({ data: "json, name=rowKeyPrefix" })
+  @SpeakeasyMetadata({ data: "json, name=rowKeyPrefix" })
   rowKeyPrefix?: string;
 }

@@ -1,10 +1,13 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 
 
 @dataclass
 class DeleteReplicationSetQueryParams:
-    arn: str = field(default=None, metadata={'query_param': { 'field_name': 'arn', 'style': 'form', 'explode': True }})
+    arn: str = field(metadata={'query_param': { 'field_name': 'arn', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -20,18 +23,18 @@ class DeleteReplicationSetHeaders:
 
 @dataclass
 class DeleteReplicationSetRequest:
-    query_params: DeleteReplicationSetQueryParams = field(default=None)
-    headers: DeleteReplicationSetHeaders = field(default=None)
+    headers: DeleteReplicationSetHeaders = field()
+    query_params: DeleteReplicationSetQueryParams = field()
     
 
 @dataclass
 class DeleteReplicationSetResponse:
+    content_type: str = field()
+    status_code: int = field()
     access_denied_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     delete_replication_set_output: Optional[dict[str, Any]] = field(default=None)
     internal_server_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     validation_exception: Optional[Any] = field(default=None)
     

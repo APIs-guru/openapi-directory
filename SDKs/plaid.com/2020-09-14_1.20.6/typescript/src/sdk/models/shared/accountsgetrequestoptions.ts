@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AccountsGetRequestOptions
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * An optional object to filter `/accounts/get` results.
 **/
 export class AccountsGetRequestOptions extends SpeakeasyBase {
-  @Metadata({ data: "json, name=account_ids" })
+  @SpeakeasyMetadata({ data: "json, name=account_ids" })
   accountIds?: string[];
 }

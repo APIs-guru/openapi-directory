@@ -1,9 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum GoogleMapsPlayablelocationsV3ImpressionImpressionTypeEnum {
-    ImpressionTypeUnspecified = "IMPRESSION_TYPE_UNSPECIFIED"
-,    Presented = "PRESENTED"
-,    Interacted = "INTERACTED"
+    ImpressionTypeUnspecified = "IMPRESSION_TYPE_UNSPECIFIED",
+    Presented = "PRESENTED",
+    Interacted = "INTERACTED"
 }
 
 
@@ -12,12 +13,12 @@ export enum GoogleMapsPlayablelocationsV3ImpressionImpressionTypeEnum {
  * Encapsulates impression event details.
 **/
 export class GoogleMapsPlayablelocationsV3Impression extends SpeakeasyBase {
-  @Metadata({ data: "json, name=gameObjectType" })
+  @SpeakeasyMetadata({ data: "json, name=gameObjectType" })
   gameObjectType?: number;
 
-  @Metadata({ data: "json, name=impressionType" })
+  @SpeakeasyMetadata({ data: "json, name=impressionType" })
   impressionType?: GoogleMapsPlayablelocationsV3ImpressionImpressionTypeEnum;
 
-  @Metadata({ data: "json, name=locationName" })
+  @SpeakeasyMetadata({ data: "json, name=locationName" })
   locationName?: string;
 }

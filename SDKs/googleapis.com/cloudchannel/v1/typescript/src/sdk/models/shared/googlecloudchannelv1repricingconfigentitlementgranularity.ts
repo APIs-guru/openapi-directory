@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudChannelV1RepricingConfigEntitlementGranularity
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Applies the repricing configuration at the entitlement level.
 **/
 export class GoogleCloudChannelV1RepricingConfigEntitlementGranularity extends SpeakeasyBase {
-  @Metadata({ data: "json, name=entitlement" })
+  @SpeakeasyMetadata({ data: "json, name=entitlement" })
   entitlement?: string;
 }

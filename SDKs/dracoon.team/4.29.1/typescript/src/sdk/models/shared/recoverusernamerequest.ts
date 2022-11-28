@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // RecoverUserNameRequest
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Recover usernames for email
 **/
 export class RecoverUserNameRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=creatorLanguage" })
+  @SpeakeasyMetadata({ data: "json, name=creatorLanguage" })
   creatorLanguage?: string;
 
-  @Metadata({ data: "json, name=email" })
+  @SpeakeasyMetadata({ data: "json, name=email" })
   email: string;
 }

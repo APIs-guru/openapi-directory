@@ -9,6 +9,8 @@ const (
 	GoogleFirestoreAdminV1beta1IndexStateEnumError            GoogleFirestoreAdminV1beta1IndexStateEnum = "ERROR"
 )
 
+// GoogleFirestoreAdminV1beta1Index
+// An index definition.
 type GoogleFirestoreAdminV1beta1Index struct {
 	CollectionID *string                                    `json:"collectionId,omitempty"`
 	Fields       []GoogleFirestoreAdminV1beta1IndexField    `json:"fields,omitempty"`

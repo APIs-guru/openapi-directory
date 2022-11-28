@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class IticrRequestBodyCertificateParameters extends SpeakeasyBase {
     fullName: string;
@@ -16,10 +16,6 @@ export declare class IticrRequestBody extends SpeakeasyBase {
 export declare class IticrSecurity extends SpeakeasyBase {
     apiKey: shared.SchemeApiKey;
     clientId: shared.SchemeClientId;
-}
-export declare class IticrRequest extends SpeakeasyBase {
-    request?: IticrRequestBody;
-    security: IticrSecurity;
 }
 export declare enum Iticr400ApplicationJsonErrorEnum {
     MissingParameter = "missing_parameter",
@@ -102,6 +98,10 @@ export declare enum Iticr504ApplicationJsonErrorDescriptionEnum {
 export declare class Iticr504ApplicationJson extends SpeakeasyBase {
     error?: Iticr504ApplicationJsonErrorEnum;
     errorDescription?: Iticr504ApplicationJsonErrorDescriptionEnum;
+}
+export declare class IticrRequest extends SpeakeasyBase {
+    request?: IticrRequestBody;
+    security: IticrSecurity;
 }
 export declare class IticrResponse extends SpeakeasyBase {
     contentType: string;

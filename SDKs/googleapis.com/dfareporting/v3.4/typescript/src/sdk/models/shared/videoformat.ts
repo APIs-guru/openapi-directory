@@ -1,12 +1,13 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Size } from "./size";
 
+
 export enum VideoFormatFileTypeEnum {
-    Flv = "FLV"
-,    Threegpp = "THREEGPP"
-,    Mp4 = "MP4"
-,    Webm = "WEBM"
-,    M3U8 = "M3U8"
+    Flv = "FLV",
+    Threegpp = "THREEGPP",
+    Mp4 = "MP4",
+    Webm = "WEBM",
+    M3U8 = "M3U8"
 }
 
 
@@ -15,18 +16,18 @@ export enum VideoFormatFileTypeEnum {
  * Contains information about supported video formats.
 **/
 export class VideoFormat extends SpeakeasyBase {
-  @Metadata({ data: "json, name=fileType" })
+  @SpeakeasyMetadata({ data: "json, name=fileType" })
   fileType?: VideoFormatFileTypeEnum;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: number;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=resolution" })
+  @SpeakeasyMetadata({ data: "json, name=resolution" })
   resolution?: Size;
 
-  @Metadata({ data: "json, name=targetBitRate" })
+  @SpeakeasyMetadata({ data: "json, name=targetBitRate" })
   targetBitRate?: number;
 }

@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class CloudkmsProjectsLocationsKeyRingsImportJobsListPathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -29,14 +30,14 @@ class CloudkmsProjectsLocationsKeyRingsImportJobsListQueryParams:
 
 @dataclass
 class CloudkmsProjectsLocationsKeyRingsImportJobsListSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class CloudkmsProjectsLocationsKeyRingsImportJobsListSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -47,14 +48,14 @@ class CloudkmsProjectsLocationsKeyRingsImportJobsListSecurity:
 
 @dataclass
 class CloudkmsProjectsLocationsKeyRingsImportJobsListRequest:
-    path_params: CloudkmsProjectsLocationsKeyRingsImportJobsListPathParams = field(default=None)
-    query_params: CloudkmsProjectsLocationsKeyRingsImportJobsListQueryParams = field(default=None)
-    security: CloudkmsProjectsLocationsKeyRingsImportJobsListSecurity = field(default=None)
+    path_params: CloudkmsProjectsLocationsKeyRingsImportJobsListPathParams = field()
+    query_params: CloudkmsProjectsLocationsKeyRingsImportJobsListQueryParams = field()
+    security: CloudkmsProjectsLocationsKeyRingsImportJobsListSecurity = field()
     
 
 @dataclass
 class CloudkmsProjectsLocationsKeyRingsImportJobsListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     list_import_jobs_response: Optional[shared.ListImportJobsResponse] = field(default=None)
-    status_code: int = field(default=None)
     

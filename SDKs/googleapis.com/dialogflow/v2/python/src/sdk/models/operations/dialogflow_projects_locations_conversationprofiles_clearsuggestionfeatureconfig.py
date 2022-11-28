@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DialogflowProjectsLocationsConversationProfilesClearSuggestionFeatureConfigPathParams:
-    conversation_profile: str = field(default=None, metadata={'path_param': { 'field_name': 'conversationProfile', 'style': 'simple', 'explode': False }})
+    conversation_profile: str = field(metadata={'path_param': { 'field_name': 'conversationProfile', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,14 +26,14 @@ class DialogflowProjectsLocationsConversationProfilesClearSuggestionFeatureConfi
 
 @dataclass
 class DialogflowProjectsLocationsConversationProfilesClearSuggestionFeatureConfigSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DialogflowProjectsLocationsConversationProfilesClearSuggestionFeatureConfigSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -43,15 +44,15 @@ class DialogflowProjectsLocationsConversationProfilesClearSuggestionFeatureConfi
 
 @dataclass
 class DialogflowProjectsLocationsConversationProfilesClearSuggestionFeatureConfigRequest:
-    path_params: DialogflowProjectsLocationsConversationProfilesClearSuggestionFeatureConfigPathParams = field(default=None)
-    query_params: DialogflowProjectsLocationsConversationProfilesClearSuggestionFeatureConfigQueryParams = field(default=None)
+    path_params: DialogflowProjectsLocationsConversationProfilesClearSuggestionFeatureConfigPathParams = field()
+    query_params: DialogflowProjectsLocationsConversationProfilesClearSuggestionFeatureConfigQueryParams = field()
+    security: DialogflowProjectsLocationsConversationProfilesClearSuggestionFeatureConfigSecurity = field()
     request: Optional[shared.GoogleCloudDialogflowV2ClearSuggestionFeatureConfigRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: DialogflowProjectsLocationsConversationProfilesClearSuggestionFeatureConfigSecurity = field(default=None)
     
 
 @dataclass
 class DialogflowProjectsLocationsConversationProfilesClearSuggestionFeatureConfigResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_longrunning_operation: Optional[shared.GoogleLongrunningOperation] = field(default=None)
-    status_code: int = field(default=None)
     

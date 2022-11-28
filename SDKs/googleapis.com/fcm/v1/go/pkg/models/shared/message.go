@@ -1,5 +1,7 @@
 package shared
 
+// Message
+// Message to send by Firebase Cloud Messaging Service.
 type Message struct {
 	Android      *AndroidConfig    `json:"android,omitempty"`
 	Apns         *ApnsConfig       `json:"apns,omitempty"`

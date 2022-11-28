@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RefreshDataSourceObjectExecutionStatus } from "./refreshdatasourceobjectexecutionstatus";
+
 
 
 // RefreshDataSourceResponse
@@ -8,6 +8,6 @@ import { RefreshDataSourceObjectExecutionStatus } from "./refreshdatasourceobjec
  * The response from refreshing one or multiple data source objects.
 **/
 export class RefreshDataSourceResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=statuses", elemType: shared.RefreshDataSourceObjectExecutionStatus })
+  @SpeakeasyMetadata({ data: "json, name=statuses", elemType: RefreshDataSourceObjectExecutionStatus })
   statuses?: RefreshDataSourceObjectExecutionStatus[];
 }

@@ -1,9 +1,33 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudRecaptchaenterpriseV1AccountDefenderAssessment } from "./googlecloudrecaptchaenterprisev1accountdefenderassessment";
 import { GoogleCloudRecaptchaenterpriseV1Event } from "./googlecloudrecaptchaenterprisev1event";
-import { GoogleCloudRecaptchaenterpriseV1PrivatePasswordLeakVerification } from "./googlecloudrecaptchaenterprisev1privatepasswordleakverification";
+import { GoogleCloudRecaptchaenterpriseV1PrivatePasswordLeakVerificationInput } from "./googlecloudrecaptchaenterprisev1privatepasswordleakverification";
 import { GoogleCloudRecaptchaenterpriseV1RiskAnalysis } from "./googlecloudrecaptchaenterprisev1riskanalysis";
 import { GoogleCloudRecaptchaenterpriseV1TokenProperties } from "./googlecloudrecaptchaenterprisev1tokenproperties";
+import { GoogleCloudRecaptchaenterpriseV1PrivatePasswordLeakVerification } from "./googlecloudrecaptchaenterprisev1privatepasswordleakverification";
+
+
+
+// GoogleCloudRecaptchaenterpriseV1AssessmentInput
+/** 
+ * A recaptcha assessment resource.
+**/
+export class GoogleCloudRecaptchaenterpriseV1AssessmentInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=accountDefenderAssessment" })
+  accountDefenderAssessment?: GoogleCloudRecaptchaenterpriseV1AccountDefenderAssessment;
+
+  @SpeakeasyMetadata({ data: "json, name=event" })
+  event?: GoogleCloudRecaptchaenterpriseV1Event;
+
+  @SpeakeasyMetadata({ data: "json, name=privatePasswordLeakVerification" })
+  privatePasswordLeakVerification?: GoogleCloudRecaptchaenterpriseV1PrivatePasswordLeakVerificationInput;
+
+  @SpeakeasyMetadata({ data: "json, name=riskAnalysis" })
+  riskAnalysis?: GoogleCloudRecaptchaenterpriseV1RiskAnalysis;
+
+  @SpeakeasyMetadata({ data: "json, name=tokenProperties" })
+  tokenProperties?: GoogleCloudRecaptchaenterpriseV1TokenProperties;
+}
 
 
 // GoogleCloudRecaptchaenterpriseV1Assessment
@@ -11,21 +35,21 @@ import { GoogleCloudRecaptchaenterpriseV1TokenProperties } from "./googlecloudre
  * A recaptcha assessment resource.
 **/
 export class GoogleCloudRecaptchaenterpriseV1Assessment extends SpeakeasyBase {
-  @Metadata({ data: "json, name=accountDefenderAssessment" })
+  @SpeakeasyMetadata({ data: "json, name=accountDefenderAssessment" })
   accountDefenderAssessment?: GoogleCloudRecaptchaenterpriseV1AccountDefenderAssessment;
 
-  @Metadata({ data: "json, name=event" })
+  @SpeakeasyMetadata({ data: "json, name=event" })
   event?: GoogleCloudRecaptchaenterpriseV1Event;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=privatePasswordLeakVerification" })
+  @SpeakeasyMetadata({ data: "json, name=privatePasswordLeakVerification" })
   privatePasswordLeakVerification?: GoogleCloudRecaptchaenterpriseV1PrivatePasswordLeakVerification;
 
-  @Metadata({ data: "json, name=riskAnalysis" })
+  @SpeakeasyMetadata({ data: "json, name=riskAnalysis" })
   riskAnalysis?: GoogleCloudRecaptchaenterpriseV1RiskAnalysis;
 
-  @Metadata({ data: "json, name=tokenProperties" })
+  @SpeakeasyMetadata({ data: "json, name=tokenProperties" })
   tokenProperties?: GoogleCloudRecaptchaenterpriseV1TokenProperties;
 }

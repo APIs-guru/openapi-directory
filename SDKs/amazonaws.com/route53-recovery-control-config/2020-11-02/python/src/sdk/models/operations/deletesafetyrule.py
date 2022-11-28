@@ -1,10 +1,13 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 
 
 @dataclass
 class DeleteSafetyRulePathParams:
-    safety_rule_arn: str = field(default=None, metadata={'path_param': { 'field_name': 'SafetyRuleArn', 'style': 'simple', 'explode': False }})
+    safety_rule_arn: str = field(metadata={'path_param': { 'field_name': 'SafetyRuleArn', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -20,16 +23,16 @@ class DeleteSafetyRuleHeaders:
 
 @dataclass
 class DeleteSafetyRuleRequest:
-    path_params: DeleteSafetyRulePathParams = field(default=None)
-    headers: DeleteSafetyRuleHeaders = field(default=None)
+    headers: DeleteSafetyRuleHeaders = field()
+    path_params: DeleteSafetyRulePathParams = field()
     
 
 @dataclass
 class DeleteSafetyRuleResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     delete_safety_rule_response: Optional[dict[str, Any]] = field(default=None)
     internal_server_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     validation_exception: Optional[Any] = field(default=None)
     

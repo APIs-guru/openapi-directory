@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Any,List,Optional
+from typing import Any,Optional
 
 
 @dataclass
@@ -11,12 +11,12 @@ class RegistryListProjectsQueryParams:
 
 @dataclass
 class RegistryListProjectsRequest:
-    query_params: RegistryListProjectsQueryParams = field(default=None)
+    query_params: RegistryListProjectsQueryParams = field()
     
 
 @dataclass
 class RegistryListProjectsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     list_projects_response: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

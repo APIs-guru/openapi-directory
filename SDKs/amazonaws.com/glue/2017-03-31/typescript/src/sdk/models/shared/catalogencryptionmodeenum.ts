@@ -1,6 +1,7 @@
 
 
+
 export enum CatalogEncryptionModeEnum {
-    Disabled = "DISABLED"
-,    SseKms = "SSE-KMS"
+    Disabled = "DISABLED",
+    SseKms = "SSE-KMS"
 }

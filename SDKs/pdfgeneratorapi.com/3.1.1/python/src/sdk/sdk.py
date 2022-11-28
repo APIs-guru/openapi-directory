@@ -1,8 +1,11 @@
-import warnings
+
+
 import requests
 from typing import Optional
-from sdk.models import operations, shared
+from sdk.models import shared, operations
 from . import utils
+
+
 
 
 SERVERS = [
@@ -11,30 +14,59 @@ SERVERS = [
 
 
 class SDK:
-    client = requests.Session()
-    server_url = SERVERS[0]
+    
+
+    _client: requests.Session
+    _security_client: requests.Session
+    _security: shared.Security
+    _server_url: str = SERVERS[0]
+    _language: str = "python"
+    _sdk_version: str = "0.0.1"
+    _gen_version: str = "internal"
+
+    def __init__(self) -> None:
+        self._client = requests.Session()
+        self._security_client = requests.Session()
+        
+
 
     def config_server_url(self, server_url: str, params: dict[str, str]):
-        if not params is None:
-            self.server_url = utils.replace_parameters(server_url, params)
+        if params is not None:
+            self._server_url = utils.replace_parameters(server_url, params)
         else:
-            self.server_url = server_url
-            
-    
-    def config_security(self, security: shared.Security):
-        self.client = utils.configure_security_client(security)
+            self._server_url = server_url
 
+        
+    
+
+    def config_client(self, client: requests.Session):
+        self._client = client
+        
+        if self._security is not None:
+            self._security_client = utils.configure_security_client(self._client, self._security)
+        
+    
+
+    def config_security(self, security: shared.Security):
+        self._security = security
+        self._security_client = utils.configure_security_client(self._client, security)
+        
+    
+    
     
     def copy_template(self, request: operations.CopyTemplateRequest) -> operations.CopyTemplateResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Copy template
+        Creates a copy of a template to the workspace specified in authentication parameters.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/templates/templateId/copy"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -69,22 +101,23 @@ class SDK:
 
     
     def create_template(self, request: operations.CreateTemplateRequest) -> operations.CreateTemplateResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Create template
+        Creates a new template. If template configuration is not specified in the request body then an empty template is created. Template is placed to the workspace specified in authentication params. Template configuration must be sent in the request body.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/templates"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -119,15 +152,18 @@ class SDK:
 
     
     def delete_template(self, request: operations.DeleteTemplateRequest) -> operations.DeleteTemplateResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Delete template
+        Deletes the template from workspace
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/templates/templateId"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -162,15 +198,18 @@ class SDK:
 
     
     def delete_workspace(self, request: operations.DeleteWorkspaceRequest) -> operations.DeleteWorkspaceResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Delete workspace
+        Deletes the workspace
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/workspaces/workspaceId"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -205,24 +244,25 @@ class SDK:
 
     
     def get_editor_url(self, request: operations.GetEditorURLRequest) -> operations.GetEditorURLResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Open editor
+        Returns an unique URL which you can use to redirect your user to the editor from your application or use the generated URL as iframe source to show the editor within your application.
+        
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/templates/templateId/editor"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -257,15 +297,18 @@ class SDK:
 
     
     def get_template(self, request: operations.GetTemplateRequest) -> operations.GetTemplateResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get template
+        Returns template configuration
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/templates/templateId"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -300,13 +343,17 @@ class SDK:
 
     
     def get_templates(self) -> operations.GetTemplatesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get templates
+        Returns a list of templates available for the authenticated workspace
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/templates"
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -341,15 +388,18 @@ class SDK:
 
     
     def get_workspace(self, request: operations.GetWorkspaceRequest) -> operations.GetWorkspaceResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get workspace
+        Returns workspace information
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/workspaces/workspaceId"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -384,24 +434,24 @@ class SDK:
 
     
     def merge_template(self, request: operations.MergeTemplateRequest) -> operations.MergeTemplateResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Generate document
+        Merges template with data and returns base64 encoded document or a public URL to a document. You can send json encoded data in request body or a public URL to your json file as the data parameter. NB! When the public URL option is used, the document is stored for 30 days and automatically deleted.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/templates/templateId/output"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -436,24 +486,24 @@ class SDK:
 
     
     def merge_templates(self, request: operations.MergeTemplatesRequest) -> operations.MergeTemplatesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Generate document (multiple templates)
+        Allows to merge multiples template with data and returns base64 encoded document or public URL to a document. NB! When the public URL option is used, the document is stored for 30 days and automatically deleted.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/templates/output"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -488,24 +538,24 @@ class SDK:
 
     
     def update_template(self, request: operations.UpdateTemplateRequest) -> operations.UpdateTemplateResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Update template
+        Updates template configuration. The template configuration for pages and layout must be complete as the entire configuration is replaced and not merged.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/templates/templateId"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 

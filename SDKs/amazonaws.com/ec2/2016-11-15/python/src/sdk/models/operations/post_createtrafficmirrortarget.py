@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostCreateTrafficMirrorTargetActionEnum(str, Enum):
     CREATE_TRAFFIC_MIRROR_TARGET = "CreateTrafficMirrorTarget"
@@ -10,8 +14,8 @@ class PostCreateTrafficMirrorTargetVersionEnum(str, Enum):
 
 @dataclass
 class PostCreateTrafficMirrorTargetQueryParams:
-    action: PostCreateTrafficMirrorTargetActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostCreateTrafficMirrorTargetVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostCreateTrafficMirrorTargetActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostCreateTrafficMirrorTargetVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostCreateTrafficMirrorTargetHeaders:
 
 @dataclass
 class PostCreateTrafficMirrorTargetRequest:
-    query_params: PostCreateTrafficMirrorTargetQueryParams = field(default=None)
-    headers: PostCreateTrafficMirrorTargetHeaders = field(default=None)
+    headers: PostCreateTrafficMirrorTargetHeaders = field()
+    query_params: PostCreateTrafficMirrorTargetQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostCreateTrafficMirrorTargetResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

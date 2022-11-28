@@ -1,11 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ExternalEvaluation } from "./externalevaluation";
 
 
+
 export class PutExternalEvaluationRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ConfigRuleName" })
+  @SpeakeasyMetadata({ data: "json, name=ConfigRuleName" })
   configRuleName: string;
 
-  @Metadata({ data: "json, name=ExternalEvaluation" })
+  @SpeakeasyMetadata({ data: "json, name=ExternalEvaluation" })
   externalEvaluation: ExternalEvaluation;
 }

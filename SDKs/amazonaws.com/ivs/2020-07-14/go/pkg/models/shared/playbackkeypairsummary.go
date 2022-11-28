@@ -1,5 +1,7 @@
 package shared
 
+// PlaybackKeyPairSummary
+// Summary information about a playback key pair.
 type PlaybackKeyPairSummary struct {
 	Arn  *string           `json:"arn,omitempty"`
 	Name *string           `json:"name,omitempty"`

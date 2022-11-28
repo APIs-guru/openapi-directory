@@ -1,5 +1,7 @@
 package shared
 
+// Filters
+// A filter collection lists filters created by users in an Analytics account. Each resource in the collection corresponds to a filter.
 type Filters struct {
 	Items        []Filter `json:"items,omitempty"`
 	ItemsPerPage *int32   `json:"itemsPerPage,omitempty"`

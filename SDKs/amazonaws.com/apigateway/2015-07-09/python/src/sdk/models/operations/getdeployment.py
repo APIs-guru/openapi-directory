@@ -1,12 +1,15 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,List,Optional
 from sdk.models import shared
 
 
 @dataclass
 class GetDeploymentPathParams:
-    deployment_id: str = field(default=None, metadata={'path_param': { 'field_name': 'deployment_id', 'style': 'simple', 'explode': False }})
-    restapi_id: str = field(default=None, metadata={'path_param': { 'field_name': 'restapi_id', 'style': 'simple', 'explode': False }})
+    deployment_id: str = field(metadata={'path_param': { 'field_name': 'deployment_id', 'style': 'simple', 'explode': False }})
+    restapi_id: str = field(metadata={'path_param': { 'field_name': 'restapi_id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -27,19 +30,19 @@ class GetDeploymentHeaders:
 
 @dataclass
 class GetDeploymentRequest:
-    path_params: GetDeploymentPathParams = field(default=None)
-    query_params: GetDeploymentQueryParams = field(default=None)
-    headers: GetDeploymentHeaders = field(default=None)
+    headers: GetDeploymentHeaders = field()
+    path_params: GetDeploymentPathParams = field()
+    query_params: GetDeploymentQueryParams = field()
     
 
 @dataclass
 class GetDeploymentResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     deployment: Optional[shared.Deployment] = field(default=None)
     not_found_exception: Optional[Any] = field(default=None)
     service_unavailable_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     too_many_requests_exception: Optional[Any] = field(default=None)
     unauthorized_exception: Optional[Any] = field(default=None)
     

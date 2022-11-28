@@ -1,17 +1,14 @@
-import axios, { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
-import { MatchContentType } from "../internal/utils/contenttype";
+import axios, { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse, ParamsSerializerOptions } from "axios";
+import FormData from "form-data";
 import * as operations from "./models/operations";
-import { ParamsSerializerOptions } from "axios";
-import { GetQueryParamSerializer } from "../internal/utils/queryparams";
-import { SerializeRequestBody } from "../internal/utils/requestbody";
-import FormData from 'form-data';
-import { CreateSecurityClient } from "../internal/utils/security";
-import * as utils from "../internal/utils/utils";
+import * as utils from "../internal/utils";
+
+
 
 type OptsFunc = (sdk: SDK) => void;
 
-const Servers = [
-  "https://api.flickr.com/services",
+export const ServerList = [
+	"https://api.flickr.com/services",
 ] as const;
 
 export function WithServerURL(
@@ -22,47 +19,47 @@ export function WithServerURL(
     if (params != null) {
       serverURL = utils.ReplaceParameters(serverURL, params);
     }
-    sdk.serverURL = serverURL;
+    sdk._serverURL = serverURL;
   };
 }
 
 export function WithClient(client: AxiosInstance): OptsFunc {
   return (sdk: SDK) => {
-    sdk.defaultClient = client;
+    sdk._defaultClient = client;
   };
 }
 
 
 export class SDK {
-  defaultClient?: AxiosInstance;
-  securityClient?: AxiosInstance;
-  security?: any;
-  serverURL: string;
+
+  public _defaultClient: AxiosInstance;
+  public _securityClient: AxiosInstance;
+  
+  public _serverURL: string;
+  private _language = "typescript";
+  private _sdkVersion = "0.0.1";
+  private _genVersion = "internal";
 
   constructor(...opts: OptsFunc[]) {
     opts.forEach((o) => o(this));
-    if (this.serverURL == "") {
-      this.serverURL = Servers[0];
+    if (this._serverURL == "") {
+      this._serverURL = ServerList[0];
     }
 
-    if (!this.defaultClient) {
-      this.defaultClient = axios.create({ baseURL: this.serverURL });
+    if (!this._defaultClient) {
+      this._defaultClient = axios.create({ baseURL: this._serverURL });
     }
 
-    if (!this.securityClient) {
-      if (this.security) {
-        this.securityClient = CreateSecurityClient(
-          this.defaultClient,
-          this.security
-        );
-      } else {
-        this.securityClient = this.defaultClient;
-      }
+    if (!this._securityClient) {
+      this._securityClient = this._defaultClient;
     }
+    
   }
   
-  // GetRestMethodEqualFlickrGroupsPoolsGetContext - Returns next and previous photos for a photo in a group pool
-  GetRestMethodEqualFlickrGroupsPoolsGetContext(
+  /**
+   * getRestMethodEqualFlickrGroupsPoolsGetContext - Returns next and previous photos for a photo in a group pool
+  **/
+  getRestMethodEqualFlickrGroupsPoolsGetContext(
     req: operations.GetRestMethodEqualFlickrGroupsPoolsGetContextRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetRestMethodEqualFlickrGroupsPoolsGetContextResponse> {
@@ -70,12 +67,11 @@ export class SDK {
       req = new operations.GetRestMethodEqualFlickrGroupsPoolsGetContextRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/rest?method=flickr.groups.pools.getContext";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -84,17 +80,18 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetRestMethodEqualFlickrGroupsPoolsGetContextResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetRestMethodEqualFlickrGroupsPoolsGetContextResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getRestMethodEqualFlickrGroupsPoolsGetContext200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -106,8 +103,10 @@ export class SDK {
   }
 
   
-  // Echo - Echos the input parameters back in the response
-  Echo(
+  /**
+   * echo - Echos the input parameters back in the response
+  **/
+  echo(
     req: operations.EchoRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.EchoResponse> {
@@ -115,12 +114,11 @@ export class SDK {
       req = new operations.EchoRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/rest?method=flickr.test.echo";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -129,17 +127,18 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.EchoResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.EchoResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.echo200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -151,8 +150,10 @@ export class SDK {
   }
 
   
-  // GetAccessToken - Returns an access token
-  GetAccessToken(
+  /**
+   * getAccessToken - Returns an access token
+  **/
+  getAccessToken(
     req: operations.GetAccessTokenRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetAccessTokenResponse> {
@@ -160,12 +161,11 @@ export class SDK {
       req = new operations.GetAccessTokenRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/oauth/access_token";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -174,17 +174,18 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetAccessTokenResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetAccessTokenResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getAccessToken200ApplicationJsonString = JSON.stringify(httpRes?.data);
             }
             break;
@@ -196,8 +197,10 @@ export class SDK {
   }
 
   
-  // GetAlbumById - Returns a list of photos in an album.
-  GetAlbumById(
+  /**
+   * getAlbumById - Returns a list of photos in an album.
+  **/
+  getAlbumById(
     req: operations.GetAlbumByIdRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetAlbumByIdResponse> {
@@ -205,12 +208,11 @@ export class SDK {
       req = new operations.GetAlbumByIdRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/rest?method=flickr.photosets.getPhotos";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -219,17 +221,18 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetAlbumByIdResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetAlbumByIdResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getAlbumById200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -241,8 +244,10 @@ export class SDK {
   }
 
   
-  // GetAlbumContextById - Returns next and previous photos for a photo in a set
-  GetAlbumContextById(
+  /**
+   * getAlbumContextById - Returns next and previous photos for a photo in a set
+  **/
+  getAlbumContextById(
     req: operations.GetAlbumContextByIdRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetAlbumContextByIdResponse> {
@@ -250,12 +255,11 @@ export class SDK {
       req = new operations.GetAlbumContextByIdRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/rest?method=flickr.photosets.getContext";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -264,17 +268,18 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetAlbumContextByIdResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetAlbumContextByIdResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getAlbumContextById200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -286,8 +291,10 @@ export class SDK {
   }
 
   
-  // GetAlbumsByPersonId - Returns the albums belonging to the specified user
-  GetAlbumsByPersonId(
+  /**
+   * getAlbumsByPersonId - Returns the albums belonging to the specified user
+  **/
+  getAlbumsByPersonId(
     req: operations.GetAlbumsByPersonIdRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetAlbumsByPersonIdResponse> {
@@ -295,12 +302,11 @@ export class SDK {
       req = new operations.GetAlbumsByPersonIdRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/rest?method=flickr.photosets.getList";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -309,17 +315,18 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetAlbumsByPersonIdResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetAlbumsByPersonIdResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getAlbumsByPersonId200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -331,8 +338,10 @@ export class SDK {
   }
 
   
-  // GetFavoritesByPersonId - Returns a list of the user's favorite photos. Only photos which the calling user has permission to see are returned.
-  GetFavoritesByPersonId(
+  /**
+   * getFavoritesByPersonId - Returns a list of the user's favorite photos. Only photos which the calling user has permission to see are returned.
+  **/
+  getFavoritesByPersonId(
     req: operations.GetFavoritesByPersonIdRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetFavoritesByPersonIdResponse> {
@@ -340,12 +349,11 @@ export class SDK {
       req = new operations.GetFavoritesByPersonIdRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/rest?method=flickr.favorites.getList";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -354,17 +362,18 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetFavoritesByPersonIdResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetFavoritesByPersonIdResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getFavoritesByPersonId200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -376,8 +385,10 @@ export class SDK {
   }
 
   
-  // GetFavoritesContextById - Returns next and previous favorites for a photo in a user's favorites
-  GetFavoritesContextById(
+  /**
+   * getFavoritesContextById - Returns next and previous favorites for a photo in a user's favorites
+  **/
+  getFavoritesContextById(
     req: operations.GetFavoritesContextByIdRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetFavoritesContextByIdResponse> {
@@ -385,12 +396,11 @@ export class SDK {
       req = new operations.GetFavoritesContextByIdRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/rest?method=flickr.favorites.getContext";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -399,17 +409,18 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetFavoritesContextByIdResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetFavoritesContextByIdResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getFavoritesContextById200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -421,8 +432,10 @@ export class SDK {
   }
 
   
-  // GetGalleryPhotosById - Returns a list of photos in a gallery.
-  GetGalleryPhotosById(
+  /**
+   * getGalleryPhotosById - Returns a list of photos in a gallery.
+  **/
+  getGalleryPhotosById(
     req: operations.GetGalleryPhotosByIdRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetGalleryPhotosByIdResponse> {
@@ -430,12 +443,11 @@ export class SDK {
       req = new operations.GetGalleryPhotosByIdRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/rest?method=flickr.galleries.getPhotos";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -444,17 +456,18 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetGalleryPhotosByIdResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetGalleryPhotosByIdResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getGalleryPhotosById200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -466,8 +479,10 @@ export class SDK {
   }
 
   
-  // GetGroupById - Get information about a group
-  GetGroupById(
+  /**
+   * getGroupById - Get information about a group
+  **/
+  getGroupById(
     req: operations.GetGroupByIdRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetGroupByIdResponse> {
@@ -475,12 +490,11 @@ export class SDK {
       req = new operations.GetGroupByIdRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/rest?method=flickr.groups.getInfo";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -489,17 +503,18 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetGroupByIdResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetGroupByIdResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getGroupById200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -511,8 +526,10 @@ export class SDK {
   }
 
   
-  // GetGroupDiscussionsById - Get a list of discussion topics in a group.
-  GetGroupDiscussionsById(
+  /**
+   * getGroupDiscussionsById - Get a list of discussion topics in a group.
+  **/
+  getGroupDiscussionsById(
     req: operations.GetGroupDiscussionsByIdRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetGroupDiscussionsByIdResponse> {
@@ -520,12 +537,11 @@ export class SDK {
       req = new operations.GetGroupDiscussionsByIdRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/rest?method=flickr.groups.discuss.topics.getList";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -534,17 +550,18 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetGroupDiscussionsByIdResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetGroupDiscussionsByIdResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getGroupDiscussionsById200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -556,8 +573,10 @@ export class SDK {
   }
 
   
-  // GetGroupPhotosById - Returns a list of pool photos for a given group
-  GetGroupPhotosById(
+  /**
+   * getGroupPhotosById - Returns a list of pool photos for a given group
+  **/
+  getGroupPhotosById(
     req: operations.GetGroupPhotosByIdRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetGroupPhotosByIdResponse> {
@@ -565,12 +584,11 @@ export class SDK {
       req = new operations.GetGroupPhotosByIdRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/rest?method=flickr.groups.pools.getPhotos";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -579,17 +597,18 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetGroupPhotosByIdResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetGroupPhotosByIdResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getGroupPhotosById200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -601,8 +620,10 @@ export class SDK {
   }
 
   
-  // GetGroupTopicById - Get information about a group discussion topic
-  GetGroupTopicById(
+  /**
+   * getGroupTopicById - Get information about a group discussion topic
+  **/
+  getGroupTopicById(
     req: operations.GetGroupTopicByIdRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetGroupTopicByIdResponse> {
@@ -610,12 +631,11 @@ export class SDK {
       req = new operations.GetGroupTopicByIdRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/rest?method=flickr.groups.discuss.topics.getInfo";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -624,17 +644,18 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetGroupTopicByIdResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetGroupTopicByIdResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getGroupTopicById200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -646,8 +667,10 @@ export class SDK {
   }
 
   
-  // GetGroupTopicRepliesById - Get information on a group topic reply
-  GetGroupTopicRepliesById(
+  /**
+   * getGroupTopicRepliesById - Get information on a group topic reply
+  **/
+  getGroupTopicRepliesById(
     req: operations.GetGroupTopicRepliesByIdRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetGroupTopicRepliesByIdResponse> {
@@ -655,12 +678,11 @@ export class SDK {
       req = new operations.GetGroupTopicRepliesByIdRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/rest?method=flickr.groups.discuss.replies.getInfo";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -669,17 +691,18 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetGroupTopicRepliesByIdResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetGroupTopicRepliesByIdResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getGroupTopicRepliesById200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -691,8 +714,10 @@ export class SDK {
   }
 
   
-  // GetLicenseById - Fetches a list of available photo licenses for Flickr
-  GetLicenseById(
+  /**
+   * getLicenseById - Fetches a list of available photo licenses for Flickr
+  **/
+  getLicenseById(
     req: operations.GetLicenseByIdRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetLicenseByIdResponse> {
@@ -700,12 +725,11 @@ export class SDK {
       req = new operations.GetLicenseByIdRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/rest?method=flickr.photos.licenses.getInfo";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -714,17 +738,18 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetLicenseByIdResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetLicenseByIdResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getLicenseById200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -736,8 +761,10 @@ export class SDK {
   }
 
   
-  // GetMediaByPersonId - Return photos from the given user's photostream
-  GetMediaByPersonId(
+  /**
+   * getMediaByPersonId - Return photos from the given user's photostream
+  **/
+  getMediaByPersonId(
     req: operations.GetMediaByPersonIdRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetMediaByPersonIdResponse> {
@@ -745,12 +772,11 @@ export class SDK {
       req = new operations.GetMediaByPersonIdRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/rest?method=flickr.people.getPhotos";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -759,17 +785,18 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetMediaByPersonIdResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetMediaByPersonIdResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getMediaByPersonId200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -781,8 +808,10 @@ export class SDK {
   }
 
   
-  // GetMediaBySearch - Return a list of photos matching some criteria.
-  GetMediaBySearch(
+  /**
+   * getMediaBySearch - Return a list of photos matching some criteria.
+  **/
+  getMediaBySearch(
     req: operations.GetMediaBySearchRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetMediaBySearchResponse> {
@@ -790,12 +819,11 @@ export class SDK {
       req = new operations.GetMediaBySearchRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/rest?method=flickr.photos.search";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -804,17 +832,18 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetMediaBySearchResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetMediaBySearchResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getMediaBySearch200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -826,8 +855,10 @@ export class SDK {
   }
 
   
-  // GetPersonById - Returns a person
-  GetPersonById(
+  /**
+   * getPersonById - Returns a person
+  **/
+  getPersonById(
     req: operations.GetPersonByIdRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetPersonByIdResponse> {
@@ -835,12 +866,11 @@ export class SDK {
       req = new operations.GetPersonByIdRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/rest?method=flickr.people.getInfo";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -849,17 +879,18 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetPersonByIdResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetPersonByIdResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getPersonById200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -871,8 +902,10 @@ export class SDK {
   }
 
   
-  // GetPhotoById - Returns a photo
-  GetPhotoById(
+  /**
+   * getPhotoById - Returns a photo
+  **/
+  getPhotoById(
     req: operations.GetPhotoByIdRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetPhotoByIdResponse> {
@@ -880,12 +913,11 @@ export class SDK {
       req = new operations.GetPhotoByIdRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/rest?method=flickr.photos.getInfo";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -894,17 +926,18 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetPhotoByIdResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetPhotoByIdResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getPhotoById200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -916,8 +949,10 @@ export class SDK {
   }
 
   
-  // GetPhotoExifById - Retrieves a list of EXIF/TIFF/GPS tags for a given photo. The calling user must have permission to view the photo.
-  GetPhotoExifById(
+  /**
+   * getPhotoExifById - Retrieves a list of EXIF/TIFF/GPS tags for a given photo. The calling user must have permission to view the photo.
+  **/
+  getPhotoExifById(
     req: operations.GetPhotoExifByIdRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetPhotoExifByIdResponse> {
@@ -925,12 +960,11 @@ export class SDK {
       req = new operations.GetPhotoExifByIdRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/rest?method=flickr.photos.getExif";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -939,17 +973,18 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetPhotoExifByIdResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetPhotoExifByIdResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getPhotoExifById200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -961,8 +996,10 @@ export class SDK {
   }
 
   
-  // GetPhotoSizesById - Returns photo sizes
-  GetPhotoSizesById(
+  /**
+   * getPhotoSizesById - Returns photo sizes
+  **/
+  getPhotoSizesById(
     req: operations.GetPhotoSizesByIdRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetPhotoSizesByIdResponse> {
@@ -970,12 +1007,11 @@ export class SDK {
       req = new operations.GetPhotoSizesByIdRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/rest?method=flickr.photos.getSizes";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -984,17 +1020,18 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetPhotoSizesByIdResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetPhotoSizesByIdResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getPhotoSizesById200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -1006,8 +1043,10 @@ export class SDK {
   }
 
   
-  // GetPhotolistContextById - Returns next and previous photos in a photo list
-  GetPhotolistContextById(
+  /**
+   * getPhotolistContextById - Returns next and previous photos in a photo list
+  **/
+  getPhotolistContextById(
     req: operations.GetPhotolistContextByIdRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetPhotolistContextByIdResponse> {
@@ -1015,12 +1054,11 @@ export class SDK {
       req = new operations.GetPhotolistContextByIdRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/rest?method=flickr.photolist.getContext";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -1029,17 +1067,18 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetPhotolistContextByIdResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetPhotolistContextByIdResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getPhotolistContextById200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -1051,8 +1090,10 @@ export class SDK {
   }
 
   
-  // GetPhotostreamContextById - Returns next and previous photos for a photo in a photostream
-  GetPhotostreamContextById(
+  /**
+   * getPhotostreamContextById - Returns next and previous photos for a photo in a photostream
+  **/
+  getPhotostreamContextById(
     req: operations.GetPhotostreamContextByIdRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetPhotostreamContextByIdResponse> {
@@ -1060,12 +1101,11 @@ export class SDK {
       req = new operations.GetPhotostreamContextByIdRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/rest?method=flickr.photos.getContext";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -1074,17 +1114,18 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetPhotostreamContextByIdResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetPhotostreamContextByIdResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getPhotostreamContextById200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -1096,8 +1137,10 @@ export class SDK {
   }
 
   
-  // GetRequestToken - Returns an oauth token and oauth token secret
-  GetRequestToken(
+  /**
+   * getRequestToken - Returns an oauth token and oauth token secret
+  **/
+  getRequestToken(
     req: operations.GetRequestTokenRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetRequestTokenResponse> {
@@ -1105,12 +1148,11 @@ export class SDK {
       req = new operations.GetRequestTokenRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/oauth/request_token";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -1119,17 +1161,18 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetRequestTokenResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetRequestTokenResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getRequestToken200ApplicationJsonString = JSON.stringify(httpRes?.data);
             }
             break;
@@ -1141,8 +1184,10 @@ export class SDK {
   }
 
   
-  // UploadPhoto - Uploads a new photo to Flickr
-  UploadPhoto(
+  /**
+   * uploadPhoto - Uploads a new photo to Flickr
+  **/
+  uploadPhoto(
     req: operations.UploadPhotoRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.UploadPhotoResponse> {
@@ -1150,41 +1195,39 @@ export class SDK {
       req = new operations.UploadPhotoRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/upload";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._defaultClient!;const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.UploadPhotoResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.UploadPhotoResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.uploadPhoto200ApplicationJsonObject = httpRes?.data;
             }
             break;

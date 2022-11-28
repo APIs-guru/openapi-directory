@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var PersistenceConfigPersistenceModeEnum;
 (function (PersistenceConfigPersistenceModeEnum) {
     PersistenceConfigPersistenceModeEnum["PersistenceModeUnspecified"] = "PERSISTENCE_MODE_UNSPECIFIED";
@@ -37,6 +37,30 @@ export var PersistenceConfigRdbSnapshotPeriodEnum;
     PersistenceConfigRdbSnapshotPeriodEnum["TwelveHours"] = "TWELVE_HOURS";
     PersistenceConfigRdbSnapshotPeriodEnum["TwentyFourHours"] = "TWENTY_FOUR_HOURS";
 })(PersistenceConfigRdbSnapshotPeriodEnum || (PersistenceConfigRdbSnapshotPeriodEnum = {}));
+// PersistenceConfigInput
+/**
+ * Configuration of the persistence functionality.
+**/
+var PersistenceConfigInput = /** @class */ (function (_super) {
+    __extends(PersistenceConfigInput, _super);
+    function PersistenceConfigInput() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=persistenceMode" }),
+        __metadata("design:type", String)
+    ], PersistenceConfigInput.prototype, "persistenceMode", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=rdbSnapshotPeriod" }),
+        __metadata("design:type", String)
+    ], PersistenceConfigInput.prototype, "rdbSnapshotPeriod", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=rdbSnapshotStartTime" }),
+        __metadata("design:type", String)
+    ], PersistenceConfigInput.prototype, "rdbSnapshotStartTime", void 0);
+    return PersistenceConfigInput;
+}(SpeakeasyBase));
+export { PersistenceConfigInput };
 // PersistenceConfig
 /**
  * Configuration of the persistence functionality.
@@ -47,19 +71,19 @@ var PersistenceConfig = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=persistenceMode" }),
+        SpeakeasyMetadata({ data: "json, name=persistenceMode" }),
         __metadata("design:type", String)
     ], PersistenceConfig.prototype, "persistenceMode", void 0);
     __decorate([
-        Metadata({ data: "json, name=rdbNextSnapshotTime" }),
+        SpeakeasyMetadata({ data: "json, name=rdbNextSnapshotTime" }),
         __metadata("design:type", String)
     ], PersistenceConfig.prototype, "rdbNextSnapshotTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=rdbSnapshotPeriod" }),
+        SpeakeasyMetadata({ data: "json, name=rdbSnapshotPeriod" }),
         __metadata("design:type", String)
     ], PersistenceConfig.prototype, "rdbSnapshotPeriod", void 0);
     __decorate([
-        Metadata({ data: "json, name=rdbSnapshotStartTime" }),
+        SpeakeasyMetadata({ data: "json, name=rdbSnapshotStartTime" }),
         __metadata("design:type", String)
     ], PersistenceConfig.prototype, "rdbSnapshotStartTime", void 0);
     return PersistenceConfig;

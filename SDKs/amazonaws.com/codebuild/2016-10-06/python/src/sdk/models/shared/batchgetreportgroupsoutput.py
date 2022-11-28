@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import reportgroup
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class BatchGetReportGroupsOutput:
-    report_groups: Optional[List[reportgroup.ReportGroup]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'reportGroups' }})
-    report_groups_not_found: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'reportGroupsNotFound' }})
+    report_groups: Optional[List[ReportGroup]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('reportGroups') }})
+    report_groups_not_found: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('reportGroupsNotFound') }})
     

@@ -42,6 +42,10 @@ type WebhookEventResourceRelationships struct {
 	Webhook     WebhookEventResourceRelationshipsWebhook      `json:"webhook"`
 }
 
+// WebhookEventResource
+// Provides the event data used in asynchronous webhook event callbacks to
+// subscribed endpoints. Webhooks events have defined `eventType`s and may
+// optionally relate to other resources within the Up API.
 type WebhookEventResource struct {
 	Attributes    WebhookEventResourceAttributes    `json:"attributes"`
 	ID            string                            `json:"id"`

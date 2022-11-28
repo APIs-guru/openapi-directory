@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class ProjectsListForOrgPathParams:
-    org: str = field(default=None, metadata={'path_param': { 'field_name': 'org', 'style': 'simple', 'explode': False }})
+    org: str = field(metadata={'path_param': { 'field_name': 'org', 'style': 'simple', 'explode': False }})
     
 class ProjectsListForOrgStateEnum(str, Enum):
     OPEN = "open"
@@ -22,15 +23,15 @@ class ProjectsListForOrgQueryParams:
 
 @dataclass
 class ProjectsListForOrgRequest:
-    path_params: ProjectsListForOrgPathParams = field(default=None)
-    query_params: ProjectsListForOrgQueryParams = field(default=None)
+    path_params: ProjectsListForOrgPathParams = field()
+    query_params: ProjectsListForOrgQueryParams = field()
     
 
 @dataclass
 class ProjectsListForOrgResponse:
-    content_type: str = field(default=None)
-    headers: dict[str, List[str]] = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    headers: dict[str, List[str]] = field()
+    status_code: int = field()
     projects: Optional[List[shared.Project]] = field(default=None)
     validation_error_simple: Optional[shared.ValidationErrorSimple] = field(default=None)
     

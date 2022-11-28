@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { PublicDnsNamespaceChange } from "./publicdnsnamespacechange";
 export declare class UpdatePublicDnsNamespaceRequest extends SpeakeasyBase {
     id: string;

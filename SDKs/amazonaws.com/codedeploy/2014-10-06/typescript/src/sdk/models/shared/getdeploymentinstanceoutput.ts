@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { InstanceSummary } from "./instancesummary";
+
 
 
 // GetDeploymentInstanceOutput
@@ -7,6 +8,6 @@ import { InstanceSummary } from "./instancesummary";
  *  Represents the output of a <code>GetDeploymentInstance</code> operation. 
 **/
 export class GetDeploymentInstanceOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=instanceSummary" })
+  @SpeakeasyMetadata({ data: "json, name=instanceSummary" })
   instanceSummary?: InstanceSummary;
 }

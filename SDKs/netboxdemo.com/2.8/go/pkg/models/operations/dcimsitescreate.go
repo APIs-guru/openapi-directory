@@ -5,7 +5,7 @@ import (
 )
 
 type DcimSitesCreateRequest struct {
-	Request shared.WritableSite `request:"mediaType=application/json"`
+	Request shared.WritableSiteInput `request:"mediaType=application/json"`
 }
 
 type DcimSitesCreateResponse struct {

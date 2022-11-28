@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AwsElbLoadBalancerHealthCheck
@@ -6,18 +7,18 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Contains information about the health checks that are conducted on the load balancer.
 **/
 export class AwsElbLoadBalancerHealthCheck extends SpeakeasyBase {
-  @Metadata({ data: "json, name=HealthyThreshold" })
+  @SpeakeasyMetadata({ data: "json, name=HealthyThreshold" })
   healthyThreshold?: number;
 
-  @Metadata({ data: "json, name=Interval" })
+  @SpeakeasyMetadata({ data: "json, name=Interval" })
   interval?: number;
 
-  @Metadata({ data: "json, name=Target" })
+  @SpeakeasyMetadata({ data: "json, name=Target" })
   target?: string;
 
-  @Metadata({ data: "json, name=Timeout" })
+  @SpeakeasyMetadata({ data: "json, name=Timeout" })
   timeout?: number;
 
-  @Metadata({ data: "json, name=UnhealthyThreshold" })
+  @SpeakeasyMetadata({ data: "json, name=UnhealthyThreshold" })
   unhealthyThreshold?: number;
 }

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // CreateImportJobResponse
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * An HTTP 200 response if the request succeeds, or an error message if the request fails.
 **/
 export class CreateImportJobResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=JobId" })
+  @SpeakeasyMetadata({ data: "json, name=JobId" })
   jobId?: string;
 }

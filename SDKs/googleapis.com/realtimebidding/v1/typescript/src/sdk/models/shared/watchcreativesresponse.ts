@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // WatchCreativesResponse
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A response for the request to receive push notification when a bidder's creatives change status.
 **/
 export class WatchCreativesResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=subscription" })
+  @SpeakeasyMetadata({ data: "json, name=subscription" })
   subscription?: string;
 
-  @Metadata({ data: "json, name=topic" })
+  @SpeakeasyMetadata({ data: "json, name=topic" })
   topic?: string;
 }

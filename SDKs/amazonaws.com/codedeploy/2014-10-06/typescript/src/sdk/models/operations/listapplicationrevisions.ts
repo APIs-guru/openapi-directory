@@ -1,9 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class ListApplicationRevisionsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=nextToken" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=nextToken" })
   nextToken?: string;
 }
 
@@ -13,81 +14,81 @@ export enum ListApplicationRevisionsXAmzTargetEnum {
 
 
 export class ListApplicationRevisionsHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Target" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Target" })
   xAmzTarget: ListApplicationRevisionsXAmzTargetEnum;
 }
 
 
 export class ListApplicationRevisionsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: ListApplicationRevisionsQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: ListApplicationRevisionsHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: shared.ListApplicationRevisionsInput;
 }
 
 
 export class ListApplicationRevisionsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   applicationDoesNotExistException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   applicationNameRequiredException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   bucketNameFilterRequiredException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidApplicationNameException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidBucketNameFilterException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidDeployedStateFilterException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidKeyPrefixFilterException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidNextTokenException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidSortByException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidSortOrderException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   listApplicationRevisionsOutput?: shared.ListApplicationRevisionsOutput;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

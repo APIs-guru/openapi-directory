@@ -21,6 +21,8 @@ type UpdateSlotTypeHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// UpdateSlotTypeRequestBodyValueSelectionSetting
+// Contains settings used by Amazon Lex to select a slot value.
 type UpdateSlotTypeRequestBodyValueSelectionSetting struct {
 	RegexFilter        *shared.SlotValueRegexFilter            `json:"regexFilter,omitempty"`
 	ResolutionStrategy *shared.SlotValueResolutionStrategyEnum `json:"resolutionStrategy,omitempty"`

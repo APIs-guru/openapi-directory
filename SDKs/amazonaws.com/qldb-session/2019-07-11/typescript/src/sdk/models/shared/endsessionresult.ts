@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TimingInformation } from "./timinginformation";
+
 
 
 // EndSessionResult
@@ -7,6 +8,6 @@ import { TimingInformation } from "./timinginformation";
  * Contains the details of the ended session.
 **/
 export class EndSessionResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=TimingInformation" })
+  @SpeakeasyMetadata({ data: "json, name=TimingInformation" })
   timingInformation?: TimingInformation;
 }

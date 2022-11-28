@@ -175,6 +175,8 @@ const (
 	CreativeAssetWindowModeEnumTransparent CreativeAssetWindowModeEnum = "TRANSPARENT"
 )
 
+// CreativeAsset
+// Creative Asset.
 type CreativeAsset struct {
 	ActionScript3         *bool                               `json:"actionScript3,omitempty"`
 	Active                *bool                               `json:"active,omitempty"`

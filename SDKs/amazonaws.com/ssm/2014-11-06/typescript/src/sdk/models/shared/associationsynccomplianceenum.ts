@@ -1,6 +1,7 @@
 
 
+
 export enum AssociationSyncComplianceEnum {
-    Auto = "AUTO"
-,    Manual = "MANUAL"
+    Auto = "AUTO",
+    Manual = "MANUAL"
 }

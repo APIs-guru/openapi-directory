@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostPurchaseScheduledInstancesActionEnum(str, Enum):
     PURCHASE_SCHEDULED_INSTANCES = "PurchaseScheduledInstances"
@@ -10,8 +14,8 @@ class PostPurchaseScheduledInstancesVersionEnum(str, Enum):
 
 @dataclass
 class PostPurchaseScheduledInstancesQueryParams:
-    action: PostPurchaseScheduledInstancesActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostPurchaseScheduledInstancesVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostPurchaseScheduledInstancesActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostPurchaseScheduledInstancesVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostPurchaseScheduledInstancesHeaders:
 
 @dataclass
 class PostPurchaseScheduledInstancesRequest:
-    query_params: PostPurchaseScheduledInstancesQueryParams = field(default=None)
-    headers: PostPurchaseScheduledInstancesHeaders = field(default=None)
+    headers: PostPurchaseScheduledInstancesHeaders = field()
+    query_params: PostPurchaseScheduledInstancesQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostPurchaseScheduledInstancesResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

@@ -1,41 +1,42 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class EnterpriseAdminListGlobalWebhooksQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=page" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page" })
   page?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=per_page" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=per_page" })
   perPage?: number;
 }
 
 
 export class EnterpriseAdminListGlobalWebhooksHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=accept" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=accept" })
   accept: string;
 }
 
 
 export class EnterpriseAdminListGlobalWebhooksRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: EnterpriseAdminListGlobalWebhooksQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: EnterpriseAdminListGlobalWebhooksHeaders;
 }
 
 
 export class EnterpriseAdminListGlobalWebhooksResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: Map<string, string[]>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata({ elemType: shared.GlobalHook })
+  @SpeakeasyMetadata({ elemType: shared.GlobalHook })
   globalHooks?: shared.GlobalHook[];
 }

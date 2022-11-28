@@ -1,52 +1,52 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { LinuxIpTypeEnum } from "./linuxiptypeenum";
 import { LinuxSite } from "./linuxsite";
 
 
+
 export class LinuxHostingDetail extends SpeakeasyBase {
-  @Metadata({ data: "json, name=actual_size" })
+  @SpeakeasyMetadata({ data: "json, name=actual_size" })
   actualSize?: number;
 
-  @Metadata({ data: "json, name=domain_name" })
+  @SpeakeasyMetadata({ data: "json, name=domain_name" })
   domainName?: string;
 
-  @Metadata({ data: "json, name=ftp_enabled" })
+  @SpeakeasyMetadata({ data: "json, name=ftp_enabled" })
   ftpEnabled?: boolean;
 
-  @Metadata({ data: "json, name=ftp_username" })
+  @SpeakeasyMetadata({ data: "json, name=ftp_username" })
   ftpUsername?: string;
 
-  @Metadata({ data: "json, name=ip" })
+  @SpeakeasyMetadata({ data: "json, name=ip" })
   ip?: string;
 
-  @Metadata({ data: "json, name=ip_type" })
+  @SpeakeasyMetadata({ data: "json, name=ip_type" })
   ipType?: LinuxIpTypeEnum;
 
-  @Metadata({ data: "json, name=max_size" })
+  @SpeakeasyMetadata({ data: "json, name=max_size" })
   maxSize?: number;
 
-  @Metadata({ data: "json, name=max_webspace_size" })
+  @SpeakeasyMetadata({ data: "json, name=max_webspace_size" })
   maxWebspaceSize?: number;
 
-  @Metadata({ data: "json, name=mysql_database_names" })
+  @SpeakeasyMetadata({ data: "json, name=mysql_database_names" })
   mysqlDatabaseNames?: string[];
 
-  @Metadata({ data: "json, name=php_version" })
+  @SpeakeasyMetadata({ data: "json, name=php_version" })
   phpVersion?: string;
 
-  @Metadata({ data: "json, name=servicepack_id" })
+  @SpeakeasyMetadata({ data: "json, name=servicepack_id" })
   servicepackId?: number;
 
-  @Metadata({ data: "json, name=sites", elemType: shared.LinuxSite })
+  @SpeakeasyMetadata({ data: "json, name=sites", elemType: LinuxSite })
   sites?: LinuxSite[];
 
-  @Metadata({ data: "json, name=ssh_host" })
+  @SpeakeasyMetadata({ data: "json, name=ssh_host" })
   sshHost?: string;
 
-  @Metadata({ data: "json, name=ssh_username" })
+  @SpeakeasyMetadata({ data: "json, name=ssh_username" })
   sshUsername?: string;
 
-  @Metadata({ data: "json, name=webspace_usage" })
+  @SpeakeasyMetadata({ data: "json, name=webspace_usage" })
   webspaceUsage?: number;
 }

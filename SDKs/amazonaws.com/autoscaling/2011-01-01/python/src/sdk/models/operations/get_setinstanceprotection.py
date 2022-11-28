@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 
 class GetSetInstanceProtectionActionEnum(str, Enum):
     SET_INSTANCE_PROTECTION = "SetInstanceProtection"
@@ -10,11 +14,11 @@ class GetSetInstanceProtectionVersionEnum(str, Enum):
 
 @dataclass
 class GetSetInstanceProtectionQueryParams:
-    action: GetSetInstanceProtectionActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    auto_scaling_group_name: str = field(default=None, metadata={'query_param': { 'field_name': 'AutoScalingGroupName', 'style': 'form', 'explode': True }})
-    instance_ids: List[str] = field(default=None, metadata={'query_param': { 'field_name': 'InstanceIds', 'style': 'form', 'explode': True }})
-    protected_from_scale_in: bool = field(default=None, metadata={'query_param': { 'field_name': 'ProtectedFromScaleIn', 'style': 'form', 'explode': True }})
-    version: GetSetInstanceProtectionVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: GetSetInstanceProtectionActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    auto_scaling_group_name: str = field(metadata={'query_param': { 'field_name': 'AutoScalingGroupName', 'style': 'form', 'explode': True }})
+    instance_ids: List[str] = field(metadata={'query_param': { 'field_name': 'InstanceIds', 'style': 'form', 'explode': True }})
+    protected_from_scale_in: bool = field(metadata={'query_param': { 'field_name': 'ProtectedFromScaleIn', 'style': 'form', 'explode': True }})
+    version: GetSetInstanceProtectionVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -30,13 +34,13 @@ class GetSetInstanceProtectionHeaders:
 
 @dataclass
 class GetSetInstanceProtectionRequest:
-    query_params: GetSetInstanceProtectionQueryParams = field(default=None)
-    headers: GetSetInstanceProtectionHeaders = field(default=None)
+    headers: GetSetInstanceProtectionHeaders = field()
+    query_params: GetSetInstanceProtectionQueryParams = field()
     
 
 @dataclass
 class GetSetInstanceProtectionResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

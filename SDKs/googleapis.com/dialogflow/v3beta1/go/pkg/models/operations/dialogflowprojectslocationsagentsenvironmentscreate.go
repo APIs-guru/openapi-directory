@@ -40,7 +40,7 @@ type DialogflowProjectsLocationsAgentsEnvironmentsCreateSecurity struct {
 type DialogflowProjectsLocationsAgentsEnvironmentsCreateRequest struct {
 	PathParams  DialogflowProjectsLocationsAgentsEnvironmentsCreatePathParams
 	QueryParams DialogflowProjectsLocationsAgentsEnvironmentsCreateQueryParams
-	Request     *shared.GoogleCloudDialogflowCxV3beta1Environment `request:"mediaType=application/json"`
+	Request     *shared.GoogleCloudDialogflowCxV3beta1EnvironmentInput `request:"mediaType=application/json"`
 	Security    DialogflowProjectsLocationsAgentsEnvironmentsCreateSecurity
 }
 

@@ -1,8 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Image } from "./image";
 import { Aspect } from "./aspect";
-import { Image } from "./image";
+
 
 
 // ProductSummary
@@ -10,42 +9,42 @@ import { Image } from "./image";
  * This type contains a summary of a specified product. The product summary includes information about the product's identifiers, product images, aspects, and the getProduct URL for retrieving the product details.
 **/
 export class ProductSummary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=additionalImages", elemType: shared.Image })
+  @SpeakeasyMetadata({ data: "json, name=additionalImages", elemType: Image })
   additionalImages?: Image[];
 
-  @Metadata({ data: "json, name=aspects", elemType: shared.Aspect })
+  @SpeakeasyMetadata({ data: "json, name=aspects", elemType: Aspect })
   aspects?: Aspect[];
 
-  @Metadata({ data: "json, name=brand" })
+  @SpeakeasyMetadata({ data: "json, name=brand" })
   brand?: string;
 
-  @Metadata({ data: "json, name=ean" })
+  @SpeakeasyMetadata({ data: "json, name=ean" })
   ean?: string[];
 
-  @Metadata({ data: "json, name=epid" })
+  @SpeakeasyMetadata({ data: "json, name=epid" })
   epid?: string;
 
-  @Metadata({ data: "json, name=gtin" })
+  @SpeakeasyMetadata({ data: "json, name=gtin" })
   gtin?: string[];
 
-  @Metadata({ data: "json, name=image" })
+  @SpeakeasyMetadata({ data: "json, name=image" })
   image?: Image;
 
-  @Metadata({ data: "json, name=isbn" })
+  @SpeakeasyMetadata({ data: "json, name=isbn" })
   isbn?: string[];
 
-  @Metadata({ data: "json, name=mpn" })
+  @SpeakeasyMetadata({ data: "json, name=mpn" })
   mpn?: string[];
 
-  @Metadata({ data: "json, name=productHref" })
+  @SpeakeasyMetadata({ data: "json, name=productHref" })
   productHref?: string;
 
-  @Metadata({ data: "json, name=productWebUrl" })
+  @SpeakeasyMetadata({ data: "json, name=productWebUrl" })
   productWebUrl?: string;
 
-  @Metadata({ data: "json, name=title" })
+  @SpeakeasyMetadata({ data: "json, name=title" })
   title?: string;
 
-  @Metadata({ data: "json, name=upc" })
+  @SpeakeasyMetadata({ data: "json, name=upc" })
   upc?: string[];
 }

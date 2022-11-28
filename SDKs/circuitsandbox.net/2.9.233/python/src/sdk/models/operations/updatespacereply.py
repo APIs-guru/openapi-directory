@@ -1,12 +1,16 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,List,Optional
+from sdk.models import shared
 
 
 @dataclass
 class UpdateSpaceReplyPathParams:
-    reply_id: str = field(default=None, metadata={'path_param': { 'field_name': 'replyId', 'style': 'simple', 'explode': False }})
-    space_id: str = field(default=None, metadata={'path_param': { 'field_name': 'spaceId', 'style': 'simple', 'explode': False }})
-    topic_id: str = field(default=None, metadata={'path_param': { 'field_name': 'topicId', 'style': 'simple', 'explode': False }})
+    reply_id: str = field(metadata={'path_param': { 'field_name': 'replyId', 'style': 'simple', 'explode': False }})
+    space_id: str = field(metadata={'path_param': { 'field_name': 'spaceId', 'style': 'simple', 'explode': False }})
+    topic_id: str = field(metadata={'path_param': { 'field_name': 'topicId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -20,20 +24,20 @@ class UpdateSpaceReplyRequestBody:
 
 @dataclass
 class UpdateSpaceReplySecurity:
-    oauth: shared.SchemeOauth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth: shared.SchemeOauth = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class UpdateSpaceReplyRequest:
-    path_params: UpdateSpaceReplyPathParams = field(default=None)
+    path_params: UpdateSpaceReplyPathParams = field()
+    security: UpdateSpaceReplySecurity = field()
     request: Optional[UpdateSpaceReplyRequestBody] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
-    security: UpdateSpaceReplySecurity = field(default=None)
     
 
 @dataclass
 class UpdateSpaceReplyResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     space_reply: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

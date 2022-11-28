@@ -1,46 +1,46 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Group } from "./group";
 import { Link } from "./link";
 
 
+
 export class FhirCondition extends SpeakeasyBase {
-  @Metadata({ data: "json, name=asserter" })
+  @SpeakeasyMetadata({ data: "json, name=asserter" })
   asserter?: string;
 
-  @Metadata({ data: "json, name=category" })
+  @SpeakeasyMetadata({ data: "json, name=category" })
   category?: string;
 
-  @Metadata({ data: "json, name=code" })
+  @SpeakeasyMetadata({ data: "json, name=code" })
   code?: string;
 
-  @Metadata({ data: "json, name=date" })
+  @SpeakeasyMetadata({ data: "json, name=date" })
   date?: Date;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=fullDescription" })
+  @SpeakeasyMetadata({ data: "json, name=fullDescription" })
   fullDescription?: string;
 
-  @Metadata({ data: "json, name=group" })
+  @SpeakeasyMetadata({ data: "json, name=group" })
   group?: Group;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: number;
 
-  @Metadata({ data: "json, name=identifier" })
+  @SpeakeasyMetadata({ data: "json, name=identifier" })
   identifier?: string;
 
-  @Metadata({ data: "json, name=links", elemType: shared.Link })
+  @SpeakeasyMetadata({ data: "json, name=links", elemType: Link })
   links?: Link[];
 
-  @Metadata({ data: "json, name=notes" })
+  @SpeakeasyMetadata({ data: "json, name=notes" })
   notes?: string;
 
-  @Metadata({ data: "json, name=severity" })
+  @SpeakeasyMetadata({ data: "json, name=severity" })
   severity?: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: string;
 }

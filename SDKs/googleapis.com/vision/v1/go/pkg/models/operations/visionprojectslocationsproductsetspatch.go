@@ -41,7 +41,7 @@ type VisionProjectsLocationsProductSetsPatchSecurity struct {
 type VisionProjectsLocationsProductSetsPatchRequest struct {
 	PathParams  VisionProjectsLocationsProductSetsPatchPathParams
 	QueryParams VisionProjectsLocationsProductSetsPatchQueryParams
-	Request     *shared.ProductSet `request:"mediaType=application/json"`
+	Request     *shared.ProductSetInput `request:"mediaType=application/json"`
 	Security    VisionProjectsLocationsProductSetsPatchSecurity
 }
 

@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ImportAptArtifactsGcsSource } from "./importaptartifactsgcssource";
+
 
 
 // ImportAptArtifactsRequest
@@ -7,6 +8,6 @@ import { ImportAptArtifactsGcsSource } from "./importaptartifactsgcssource";
  * The request to import new apt artifacts.
 **/
 export class ImportAptArtifactsRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=gcsSource" })
+  @SpeakeasyMetadata({ data: "json, name=gcsSource" })
   gcsSource?: ImportAptArtifactsGcsSource;
 }

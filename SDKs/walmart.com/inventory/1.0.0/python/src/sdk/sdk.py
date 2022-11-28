@@ -1,8 +1,11 @@
-import warnings
+
+
 import requests
 from typing import Optional
-from sdk.models import operations, shared
+from sdk.models import shared, operations
 from . import utils
+
+
 
 
 SERVERS = [
@@ -12,32 +15,60 @@ SERVERS = [
 
 
 class SDK:
-    client = requests.Session()
-    server_url = SERVERS[0]
+    
+
+    _client: requests.Session
+    _security_client: requests.Session
+    _security: shared.Security
+    _server_url: str = SERVERS[0]
+    _language: str = "python"
+    _sdk_version: str = "0.0.1"
+    _gen_version: str = "internal"
+
+    def __init__(self) -> None:
+        self._client = requests.Session()
+        self._security_client = requests.Session()
+        
+
 
     def config_server_url(self, server_url: str, params: dict[str, str]):
-        if not params is None:
-            self.server_url = utils.replace_parameters(server_url, params)
+        if params is not None:
+            self._server_url = utils.replace_parameters(server_url, params)
         else:
-            self.server_url = server_url
-            
-    
-    def config_security(self, security: shared.Security):
-        self.client = utils.configure_security_client(security)
+            self._server_url = server_url
 
+        
+    
+
+    def config_client(self, client: requests.Session):
+        self._client = client
+        
+        if self._security is not None:
+            self._security_client = utils.configure_security_client(self._client, self._security)
+        
+    
+
+    def config_security(self, security: shared.Security):
+        self._security = security
+        self._security_client = utils.configure_security_client(self._client, security)
+        
+    
+    
     
     def get_inventory(self, request: operations.GetInventoryRequest) -> operations.GetInventoryResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Inventory
+        You can use this API to get the inventory for a given item.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/v3/inventory"
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -54,17 +85,19 @@ class SDK:
 
     
     def get_multi_node_inventory_for_all_sku_and_all_ship_nodes(self, request: operations.GetMultiNodeInventoryForAllSkuAndAllShipNodesRequest) -> operations.GetMultiNodeInventoryForAllSkuAndAllShipNodesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Multiple Item Inventory for All Ship Nodes
+        This API will retrieve the inventory count for all of a seller's items across all ship nodes by item to ship node mapping. Inventory can be zero or non-zero.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/v3/inventories"
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -79,17 +112,19 @@ class SDK:
 
     
     def get_multi_node_inventory_for_sku_and_all_shipnodes(self, request: operations.GetMultiNodeInventoryForSkuAndAllShipnodesRequest) -> operations.GetMultiNodeInventoryForSkuAndAllShipnodesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Single Item Inventory by Ship Node
+        This API will retrieve the inventory count for an item across all ship nodes or one specific ship node. You can specify the ship node for which you want to fetch the inventory
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v3/inventories/{sku}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -104,17 +139,19 @@ class SDK:
 
     
     def get_wfs_inventory(self, request: operations.GetWfsInventoryRequest) -> operations.GetWfsInventoryResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""WFS Inventory
+        You can use this API to get the current Available to Sell inventory quantities for all WFS items in your catalog. You can also query specific SKUs or filter to only items updated after a specific date in order to reduce the response size.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/v3/fulfillment/inventory"
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -129,24 +166,24 @@ class SDK:
 
     
     def update_bulk_inventory(self, request: operations.UpdateBulkInventoryRequest) -> operations.UpdateBulkInventoryResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Bulk Item Inventory Update
+        Updates inventory for items in bulk. Refer to the throttling limits before uploading the Feed files.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/v3/feeds"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -163,24 +200,24 @@ class SDK:
 
     
     def update_inventory_for_an_item(self, request: operations.UpdateInventoryForAnItemRequest) -> operations.UpdateInventoryForAnItemResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Update inventory
+        Updates the inventory for a given item.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/v3/inventory"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -197,22 +234,23 @@ class SDK:
 
     
     def update_multi_node_inventory(self, request: operations.UpdateMultiNodeInventoryRequest) -> operations.UpdateMultiNodeInventoryResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Update Item Inventory per Ship Node
+        This API will update the inventory for an item across one or more fulfillment centers, known as ship nodes.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v3/inventories/{sku}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 

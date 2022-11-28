@@ -22,6 +22,8 @@ const (
 	EventTagTypeEnumClickThroughEventTag         EventTagTypeEnum = "CLICK_THROUGH_EVENT_TAG"
 )
 
+// EventTag
+// Contains properties of an event tag.
 type EventTag struct {
 	AccountID                  *string                     `json:"accountId,omitempty"`
 	AdvertiserID               *string                     `json:"advertiserId,omitempty"`

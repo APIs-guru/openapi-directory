@@ -1,39 +1,39 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Message } from "./message";
 
 
+
 export class MessagesResponseError extends SpeakeasyBase {
-  @Metadata({ data: "json, name=code" })
+  @SpeakeasyMetadata({ data: "json, name=code" })
   code?: string;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class MessagesResponsePagination extends SpeakeasyBase {
-  @Metadata({ data: "json, name=limit" })
+  @SpeakeasyMetadata({ data: "json, name=limit" })
   limit?: number;
 
-  @Metadata({ data: "json, name=offset" })
+  @SpeakeasyMetadata({ data: "json, name=offset" })
   offset?: number;
 
-  @Metadata({ data: "json, name=totalCount" })
+  @SpeakeasyMetadata({ data: "json, name=totalCount" })
   totalCount?: number;
 }
 
 
 export class MessagesResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=data", elemType: shared.Message })
+  @SpeakeasyMetadata({ data: "json, name=data", elemType: Message })
   data?: Message[];
 
-  @Metadata({ data: "json, name=error" })
+  @SpeakeasyMetadata({ data: "json, name=error" })
   error?: MessagesResponseError;
 
-  @Metadata({ data: "json, name=pagination" })
+  @SpeakeasyMetadata({ data: "json, name=pagination" })
   pagination?: MessagesResponsePagination;
 
-  @Metadata({ data: "json, name=success" })
+  @SpeakeasyMetadata({ data: "json, name=success" })
   success?: boolean;
 }

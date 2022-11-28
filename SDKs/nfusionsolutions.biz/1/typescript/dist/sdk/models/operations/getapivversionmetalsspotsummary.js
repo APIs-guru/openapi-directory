@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetApiVVersionMetalsSpotSummaryPathParams = /** @class */ (function (_super) {
     __extends(GetApiVVersionMetalsSpotSummaryPathParams, _super);
@@ -30,7 +30,7 @@ var GetApiVVersionMetalsSpotSummaryPathParams = /** @class */ (function (_super)
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=version" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=version" }),
         __metadata("design:type", String)
     ], GetApiVVersionMetalsSpotSummaryPathParams.prototype, "version", void 0);
     return GetApiVVersionMetalsSpotSummaryPathParams;
@@ -42,23 +42,23 @@ var GetApiVVersionMetalsSpotSummaryQueryParams = /** @class */ (function (_super
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=currency" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=currency" }),
         __metadata("design:type", String)
     ], GetApiVVersionMetalsSpotSummaryQueryParams.prototype, "currency", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=format" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=format" }),
         __metadata("design:type", String)
     ], GetApiVVersionMetalsSpotSummaryQueryParams.prototype, "format", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=metals" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=metals" }),
         __metadata("design:type", String)
     ], GetApiVVersionMetalsSpotSummaryQueryParams.prototype, "metals", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=token" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=token" }),
         __metadata("design:type", String)
     ], GetApiVVersionMetalsSpotSummaryQueryParams.prototype, "token", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=unitofmeasure" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=unitofmeasure" }),
         __metadata("design:type", String)
     ], GetApiVVersionMetalsSpotSummaryQueryParams.prototype, "unitofmeasure", void 0);
     return GetApiVVersionMetalsSpotSummaryQueryParams;
@@ -70,11 +70,11 @@ var GetApiVVersionMetalsSpotSummaryRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetApiVVersionMetalsSpotSummaryPathParams)
     ], GetApiVVersionMetalsSpotSummaryRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetApiVVersionMetalsSpotSummaryQueryParams)
     ], GetApiVVersionMetalsSpotSummaryRequest.prototype, "queryParams", void 0);
     return GetApiVVersionMetalsSpotSummaryRequest;
@@ -86,23 +86,23 @@ var GetApiVVersionMetalsSpotSummaryResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], GetApiVVersionMetalsSpotSummaryResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetApiVVersionMetalsSpotSummaryResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Map)
     ], GetApiVVersionMetalsSpotSummaryResponse.prototype, "problemDetails", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetApiVVersionMetalsSpotSummaryResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata({ elemType: shared.SummaryResponse }),
+        SpeakeasyMetadata({ elemType: shared.SummaryResponse }),
         __metadata("design:type", Array)
     ], GetApiVVersionMetalsSpotSummaryResponse.prototype, "summaryResponses", void 0);
     return GetApiVVersionMetalsSpotSummaryResponse;

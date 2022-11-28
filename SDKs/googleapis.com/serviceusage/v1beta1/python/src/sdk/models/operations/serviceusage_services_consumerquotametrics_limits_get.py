@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class ServiceusageServicesConsumerQuotaMetricsLimitsGetPathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 class ServiceusageServicesConsumerQuotaMetricsLimitsGetViewEnum(str, Enum):
     QUOTA_VIEW_UNSPECIFIED = "QUOTA_VIEW_UNSPECIFIED"
@@ -31,14 +32,14 @@ class ServiceusageServicesConsumerQuotaMetricsLimitsGetQueryParams:
 
 @dataclass
 class ServiceusageServicesConsumerQuotaMetricsLimitsGetSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class ServiceusageServicesConsumerQuotaMetricsLimitsGetSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -49,14 +50,14 @@ class ServiceusageServicesConsumerQuotaMetricsLimitsGetSecurity:
 
 @dataclass
 class ServiceusageServicesConsumerQuotaMetricsLimitsGetRequest:
-    path_params: ServiceusageServicesConsumerQuotaMetricsLimitsGetPathParams = field(default=None)
-    query_params: ServiceusageServicesConsumerQuotaMetricsLimitsGetQueryParams = field(default=None)
-    security: ServiceusageServicesConsumerQuotaMetricsLimitsGetSecurity = field(default=None)
+    path_params: ServiceusageServicesConsumerQuotaMetricsLimitsGetPathParams = field()
+    query_params: ServiceusageServicesConsumerQuotaMetricsLimitsGetQueryParams = field()
+    security: ServiceusageServicesConsumerQuotaMetricsLimitsGetSecurity = field()
     
 
 @dataclass
 class ServiceusageServicesConsumerQuotaMetricsLimitsGetResponse:
+    content_type: str = field()
+    status_code: int = field()
     consumer_quota_limit: Optional[shared.ConsumerQuotaLimit] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

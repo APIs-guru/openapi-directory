@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var TestInvokeAuthorizerPathParams = /** @class */ (function (_super) {
     __extends(TestInvokeAuthorizerPathParams, _super);
@@ -30,11 +30,11 @@ var TestInvokeAuthorizerPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=authorizer_id" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=authorizer_id" }),
         __metadata("design:type", String)
     ], TestInvokeAuthorizerPathParams.prototype, "authorizerId", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=restapi_id" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=restapi_id" }),
         __metadata("design:type", String)
     ], TestInvokeAuthorizerPathParams.prototype, "restapiId", void 0);
     return TestInvokeAuthorizerPathParams;
@@ -46,31 +46,31 @@ var TestInvokeAuthorizerHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
         __metadata("design:type", String)
     ], TestInvokeAuthorizerHeaders.prototype, "xAmzAlgorithm", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
         __metadata("design:type", String)
     ], TestInvokeAuthorizerHeaders.prototype, "xAmzContentSha256", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
         __metadata("design:type", String)
     ], TestInvokeAuthorizerHeaders.prototype, "xAmzCredential", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
         __metadata("design:type", String)
     ], TestInvokeAuthorizerHeaders.prototype, "xAmzDate", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
         __metadata("design:type", String)
     ], TestInvokeAuthorizerHeaders.prototype, "xAmzSecurityToken", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
         __metadata("design:type", String)
     ], TestInvokeAuthorizerHeaders.prototype, "xAmzSignature", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
         __metadata("design:type", String)
     ], TestInvokeAuthorizerHeaders.prototype, "xAmzSignedHeaders", void 0);
     return TestInvokeAuthorizerHeaders;
@@ -82,27 +82,27 @@ var TestInvokeAuthorizerRequestBody = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=additionalContext" }),
+        SpeakeasyMetadata({ data: "json, name=additionalContext" }),
         __metadata("design:type", Map)
     ], TestInvokeAuthorizerRequestBody.prototype, "additionalContext", void 0);
     __decorate([
-        Metadata({ data: "json, name=body" }),
+        SpeakeasyMetadata({ data: "json, name=body" }),
         __metadata("design:type", String)
     ], TestInvokeAuthorizerRequestBody.prototype, "body", void 0);
     __decorate([
-        Metadata({ data: "json, name=headers" }),
+        SpeakeasyMetadata({ data: "json, name=headers" }),
         __metadata("design:type", Map)
     ], TestInvokeAuthorizerRequestBody.prototype, "headers", void 0);
     __decorate([
-        Metadata({ data: "json, name=multiValueHeaders" }),
+        SpeakeasyMetadata({ data: "json, name=multiValueHeaders" }),
         __metadata("design:type", Map)
     ], TestInvokeAuthorizerRequestBody.prototype, "multiValueHeaders", void 0);
     __decorate([
-        Metadata({ data: "json, name=pathWithQueryString" }),
+        SpeakeasyMetadata({ data: "json, name=pathWithQueryString" }),
         __metadata("design:type", String)
     ], TestInvokeAuthorizerRequestBody.prototype, "pathWithQueryString", void 0);
     __decorate([
-        Metadata({ data: "json, name=stageVariables" }),
+        SpeakeasyMetadata({ data: "json, name=stageVariables" }),
         __metadata("design:type", Map)
     ], TestInvokeAuthorizerRequestBody.prototype, "stageVariables", void 0);
     return TestInvokeAuthorizerRequestBody;
@@ -114,15 +114,15 @@ var TestInvokeAuthorizerRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", TestInvokeAuthorizerPathParams)
     ], TestInvokeAuthorizerRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", TestInvokeAuthorizerHeaders)
     ], TestInvokeAuthorizerRequest.prototype, "headers", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", TestInvokeAuthorizerRequestBody)
     ], TestInvokeAuthorizerRequest.prototype, "request", void 0);
     return TestInvokeAuthorizerRequest;
@@ -134,31 +134,31 @@ var TestInvokeAuthorizerResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], TestInvokeAuthorizerResponse.prototype, "badRequestException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], TestInvokeAuthorizerResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], TestInvokeAuthorizerResponse.prototype, "notFoundException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], TestInvokeAuthorizerResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.TestInvokeAuthorizerResponse)
     ], TestInvokeAuthorizerResponse.prototype, "testInvokeAuthorizerResponse", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], TestInvokeAuthorizerResponse.prototype, "tooManyRequestsException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], TestInvokeAuthorizerResponse.prototype, "unauthorizedException", void 0);
     return TestInvokeAuthorizerResponse;

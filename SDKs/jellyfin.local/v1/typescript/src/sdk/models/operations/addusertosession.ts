@@ -1,35 +1,36 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class AddUserToSessionPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=sessionId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=sessionId" })
   sessionId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=userId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=userId" })
   userId: string;
 }
 
 
 export class AddUserToSessionSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
   customAuthentication: shared.SchemeCustomAuthentication;
 }
 
 
 export class AddUserToSessionRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: AddUserToSessionPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: AddUserToSessionSecurity;
 }
 
 
 export class AddUserToSessionResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

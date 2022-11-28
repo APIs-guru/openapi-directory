@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DataSourceColumnReference } from "./datasourcecolumnreference";
+
 
 
 // DataSourceColumn
@@ -7,9 +8,9 @@ import { DataSourceColumnReference } from "./datasourcecolumnreference";
  * A column in a data source.
 **/
 export class DataSourceColumn extends SpeakeasyBase {
-  @Metadata({ data: "json, name=formula" })
+  @SpeakeasyMetadata({ data: "json, name=formula" })
   formula?: string;
 
-  @Metadata({ data: "json, name=reference" })
+  @SpeakeasyMetadata({ data: "json, name=reference" })
   reference?: DataSourceColumnReference;
 }

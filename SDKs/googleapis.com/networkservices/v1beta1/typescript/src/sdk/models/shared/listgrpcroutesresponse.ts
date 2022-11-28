@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GrpcRoute } from "./grpcroute";
+
 
 
 // ListGrpcRoutesResponse
@@ -8,9 +8,9 @@ import { GrpcRoute } from "./grpcroute";
  * Response returned by the ListGrpcRoutes method.
 **/
 export class ListGrpcRoutesResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=grpcRoutes", elemType: shared.GrpcRoute })
+  @SpeakeasyMetadata({ data: "json, name=grpcRoutes", elemType: GrpcRoute })
   grpcRoutes?: GrpcRoute[];
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 }

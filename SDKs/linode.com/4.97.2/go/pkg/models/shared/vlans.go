@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// Vlans
+// A virtual local area network (VLAN) associated with your Account.
 type Vlans struct {
 	Created *time.Time `json:"created,omitempty"`
 	Label   *string    `json:"label,omitempty"`

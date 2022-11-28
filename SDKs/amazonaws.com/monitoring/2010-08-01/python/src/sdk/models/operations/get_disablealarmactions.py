@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 
 class GetDisableAlarmActionsActionEnum(str, Enum):
     DISABLE_ALARM_ACTIONS = "DisableAlarmActions"
@@ -10,9 +14,9 @@ class GetDisableAlarmActionsVersionEnum(str, Enum):
 
 @dataclass
 class GetDisableAlarmActionsQueryParams:
-    action: GetDisableAlarmActionsActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    alarm_names: List[str] = field(default=None, metadata={'query_param': { 'field_name': 'AlarmNames', 'style': 'form', 'explode': True }})
-    version: GetDisableAlarmActionsVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: GetDisableAlarmActionsActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    alarm_names: List[str] = field(metadata={'query_param': { 'field_name': 'AlarmNames', 'style': 'form', 'explode': True }})
+    version: GetDisableAlarmActionsVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -28,12 +32,12 @@ class GetDisableAlarmActionsHeaders:
 
 @dataclass
 class GetDisableAlarmActionsRequest:
-    query_params: GetDisableAlarmActionsQueryParams = field(default=None)
-    headers: GetDisableAlarmActionsHeaders = field(default=None)
+    headers: GetDisableAlarmActionsHeaders = field()
+    query_params: GetDisableAlarmActionsQueryParams = field()
     
 
 @dataclass
 class GetDisableAlarmActionsResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

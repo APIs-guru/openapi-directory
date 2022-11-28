@@ -1,6 +1,7 @@
 
 
+
 export enum FormatEnum {
-    Json = "json"
-,    Xml = "xml"
+    Json = "json",
+    Xml = "xml"
 }

@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GooglePrivacyDlpV2Value } from "./googleprivacydlpv2value";
+
 
 
 // GooglePrivacyDlpV2ValueFrequency
@@ -7,9 +8,9 @@ import { GooglePrivacyDlpV2Value } from "./googleprivacydlpv2value";
  * A value of a field, including its frequency.
 **/
 export class GooglePrivacyDlpV2ValueFrequency extends SpeakeasyBase {
-  @Metadata({ data: "json, name=count" })
+  @SpeakeasyMetadata({ data: "json, name=count" })
   count?: string;
 
-  @Metadata({ data: "json, name=value" })
+  @SpeakeasyMetadata({ data: "json, name=value" })
   value?: GooglePrivacyDlpV2Value;
 }

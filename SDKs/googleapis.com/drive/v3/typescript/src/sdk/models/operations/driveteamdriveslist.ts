@@ -1,86 +1,87 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class DriveTeamdrivesListQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=alt" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=alt" })
   alt?: shared.AltEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=fields" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=fields" })
   fields?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=key" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=key" })
   key?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=oauth_token" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=oauth_token" })
   oauthToken?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=pageSize" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=pageSize" })
   pageSize?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=pageToken" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=pageToken" })
   pageToken?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=prettyPrint" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=prettyPrint" })
   prettyPrint?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=q" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=q" })
   q?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=quotaUser" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=quotaUser" })
   quotaUser?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=useDomainAdminAccess" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=useDomainAdminAccess" })
   useDomainAdminAccess?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=userIp" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=userIp" })
   userIp?: string;
 }
 
 
 export class DriveTeamdrivesListSecurityOption1 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   oauth2: shared.SchemeOauth2;
 
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   oauth2c: shared.SchemeOauth2c;
 }
 
 
 export class DriveTeamdrivesListSecurityOption2 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   oauth2: shared.SchemeOauth2;
 
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   oauth2c: shared.SchemeOauth2c;
 }
 
 
 export class DriveTeamdrivesListSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, option=true" })
+  @SpeakeasyMetadata({ data: "security, option=true" })
   option1?: DriveTeamdrivesListSecurityOption1;
 
-  @Metadata({ data: "security, option=true" })
+  @SpeakeasyMetadata({ data: "security, option=true" })
   option2?: DriveTeamdrivesListSecurityOption2;
 }
 
 
 export class DriveTeamdrivesListRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: DriveTeamdrivesListQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: DriveTeamdrivesListSecurity;
 }
 
 
 export class DriveTeamdrivesListResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   teamDriveList?: shared.TeamDriveList;
 }

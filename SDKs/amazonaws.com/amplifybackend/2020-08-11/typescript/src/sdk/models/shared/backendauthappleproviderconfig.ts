@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // BackendAuthAppleProviderConfig
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Describes Apple social federation configurations for allowing your app users to sign in using OAuth.
 **/
 export class BackendAuthAppleProviderConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ClientId" })
+  @SpeakeasyMetadata({ data: "json, name=ClientId" })
   clientId?: string;
 
-  @Metadata({ data: "json, name=KeyId" })
+  @SpeakeasyMetadata({ data: "json, name=KeyId" })
   keyId?: string;
 
-  @Metadata({ data: "json, name=PrivateKey" })
+  @SpeakeasyMetadata({ data: "json, name=PrivateKey" })
   privateKey?: string;
 
-  @Metadata({ data: "json, name=TeamId" })
+  @SpeakeasyMetadata({ data: "json, name=TeamId" })
   teamId?: string;
 }

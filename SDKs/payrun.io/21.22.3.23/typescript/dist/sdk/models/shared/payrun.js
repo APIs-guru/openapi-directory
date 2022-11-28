@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var PayRunPayRunPayFrequencyEnum;
 (function (PayRunPayRunPayFrequencyEnum) {
     PayRunPayRunPayFrequencyEnum["Weekly"] = "Weekly";
@@ -41,15 +41,15 @@ var PayRunPayRunPaySchedule = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=@href" }),
+        SpeakeasyMetadata({ data: "json, name=@href" }),
         __metadata("design:type", String)
     ], PayRunPayRunPaySchedule.prototype, "atHref", void 0);
     __decorate([
-        Metadata({ data: "json, name=@rel" }),
+        SpeakeasyMetadata({ data: "json, name=@rel" }),
         __metadata("design:type", String)
     ], PayRunPayRunPaySchedule.prototype, "atRel", void 0);
     __decorate([
-        Metadata({ data: "json, name=@title" }),
+        SpeakeasyMetadata({ data: "json, name=@title" }),
         __metadata("design:type", String)
     ], PayRunPayRunPaySchedule.prototype, "atTitle", void 0);
     return PayRunPayRunPaySchedule;
@@ -65,15 +65,15 @@ var PayRunPayRunProceedingPayRun = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=@href" }),
+        SpeakeasyMetadata({ data: "json, name=@href" }),
         __metadata("design:type", String)
     ], PayRunPayRunProceedingPayRun.prototype, "atHref", void 0);
     __decorate([
-        Metadata({ data: "json, name=@rel" }),
+        SpeakeasyMetadata({ data: "json, name=@rel" }),
         __metadata("design:type", String)
     ], PayRunPayRunProceedingPayRun.prototype, "atRel", void 0);
     __decorate([
-        Metadata({ data: "json, name=@title" }),
+        SpeakeasyMetadata({ data: "json, name=@title" }),
         __metadata("design:type", String)
     ], PayRunPayRunProceedingPayRun.prototype, "atTitle", void 0);
     return PayRunPayRunProceedingPayRun;
@@ -85,47 +85,47 @@ var PayRunPayRun = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Executed" }),
+        SpeakeasyMetadata({ data: "json, name=Executed" }),
         __metadata("design:type", Date)
     ], PayRunPayRun.prototype, "executed", void 0);
     __decorate([
-        Metadata({ data: "json, name=IsSupplementary" }),
+        SpeakeasyMetadata({ data: "json, name=IsSupplementary" }),
         __metadata("design:type", Boolean)
     ], PayRunPayRun.prototype, "isSupplementary", void 0);
     __decorate([
-        Metadata({ data: "json, name=PayFrequency" }),
+        SpeakeasyMetadata({ data: "json, name=PayFrequency" }),
         __metadata("design:type", String)
     ], PayRunPayRun.prototype, "payFrequency", void 0);
     __decorate([
-        Metadata({ data: "json, name=PaySchedule" }),
+        SpeakeasyMetadata({ data: "json, name=PaySchedule" }),
         __metadata("design:type", PayRunPayRunPaySchedule)
     ], PayRunPayRun.prototype, "paySchedule", void 0);
     __decorate([
-        Metadata({ data: "json, name=PaymentDate" }),
+        SpeakeasyMetadata({ data: "json, name=PaymentDate" }),
         __metadata("design:type", Date)
     ], PayRunPayRun.prototype, "paymentDate", void 0);
     __decorate([
-        Metadata({ data: "json, name=PeriodEnd" }),
+        SpeakeasyMetadata({ data: "json, name=PeriodEnd" }),
         __metadata("design:type", Date)
     ], PayRunPayRun.prototype, "periodEnd", void 0);
     __decorate([
-        Metadata({ data: "json, name=PeriodStart" }),
+        SpeakeasyMetadata({ data: "json, name=PeriodStart" }),
         __metadata("design:type", Date)
     ], PayRunPayRun.prototype, "periodStart", void 0);
     __decorate([
-        Metadata({ data: "json, name=ProceedingPayRun" }),
+        SpeakeasyMetadata({ data: "json, name=ProceedingPayRun" }),
         __metadata("design:type", PayRunPayRunProceedingPayRun)
     ], PayRunPayRun.prototype, "proceedingPayRun", void 0);
     __decorate([
-        Metadata({ data: "json, name=Sequence" }),
+        SpeakeasyMetadata({ data: "json, name=Sequence" }),
         __metadata("design:type", Number)
     ], PayRunPayRun.prototype, "sequence", void 0);
     __decorate([
-        Metadata({ data: "json, name=TaxPeriod" }),
+        SpeakeasyMetadata({ data: "json, name=TaxPeriod" }),
         __metadata("design:type", Number)
     ], PayRunPayRun.prototype, "taxPeriod", void 0);
     __decorate([
-        Metadata({ data: "json, name=TaxYear" }),
+        SpeakeasyMetadata({ data: "json, name=TaxYear" }),
         __metadata("design:type", Number)
     ], PayRunPayRun.prototype, "taxYear", void 0);
     return PayRunPayRun;
@@ -137,7 +137,7 @@ var PayRun = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=PayRun" }),
+        SpeakeasyMetadata({ data: "json, name=PayRun" }),
         __metadata("design:type", PayRunPayRun)
     ], PayRun.prototype, "payRun", void 0);
     return PayRun;

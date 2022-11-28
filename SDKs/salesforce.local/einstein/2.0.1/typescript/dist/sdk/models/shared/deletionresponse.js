@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var DeletionResponseStatusOfTheDeletionEnum;
 (function (DeletionResponseStatusOfTheDeletionEnum) {
     DeletionResponseStatusOfTheDeletionEnum["Queued"] = "QUEUED";
@@ -44,35 +44,35 @@ var DeletionResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=deletedObjectId" }),
+        SpeakeasyMetadata({ data: "json, name=deletedObjectId" }),
         __metadata("design:type", String)
     ], DeletionResponse.prototype, "deletedObjectId", void 0);
     __decorate([
-        Metadata({ data: "json, name=id" }),
+        SpeakeasyMetadata({ data: "json, name=id" }),
         __metadata("design:type", String)
     ], DeletionResponse.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "json, name=message" }),
+        SpeakeasyMetadata({ data: "json, name=message" }),
         __metadata("design:type", String)
     ], DeletionResponse.prototype, "message", void 0);
     __decorate([
-        Metadata({ data: "json, name=object" }),
+        SpeakeasyMetadata({ data: "json, name=object" }),
         __metadata("design:type", String)
     ], DeletionResponse.prototype, "object", void 0);
     __decorate([
-        Metadata({ data: "json, name=organizationId" }),
+        SpeakeasyMetadata({ data: "json, name=organizationId" }),
         __metadata("design:type", String)
     ], DeletionResponse.prototype, "organizationId", void 0);
     __decorate([
-        Metadata({ data: "json, name=progress" }),
+        SpeakeasyMetadata({ data: "json, name=progress" }),
         __metadata("design:type", Number)
     ], DeletionResponse.prototype, "progress", void 0);
     __decorate([
-        Metadata({ data: "json, name=status" }),
+        SpeakeasyMetadata({ data: "json, name=status" }),
         __metadata("design:type", String)
     ], DeletionResponse.prototype, "status", void 0);
     __decorate([
-        Metadata({ data: "json, name=type" }),
+        SpeakeasyMetadata({ data: "json, name=type" }),
         __metadata("design:type", String)
     ], DeletionResponse.prototype, "type", void 0);
     return DeletionResponse;

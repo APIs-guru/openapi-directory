@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // DelegatedService
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Contains information about the AWS service for which the account is a delegated administrator.
 **/
 export class DelegatedService extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DelegationEnabledDate" })
+  @SpeakeasyMetadata({ data: "json, name=DelegationEnabledDate" })
   delegationEnabledDate?: Date;
 
-  @Metadata({ data: "json, name=ServicePrincipal" })
+  @SpeakeasyMetadata({ data: "json, name=ServicePrincipal" })
   servicePrincipal?: string;
 }

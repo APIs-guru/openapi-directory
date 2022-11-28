@@ -1,7 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import shoppingadsprogramstatusreviewineligibilityreasondetails
+from sdk import utils
+from . import *
 
 class ShoppingAdsProgramStatusRegionStatusEligibilityStatusEnum(str, Enum):
     STATE_UNSPECIFIED = "STATE_UNSPECIFIED"
@@ -32,13 +37,17 @@ class ShoppingAdsProgramStatusRegionStatusReviewIneligibilityReasonEnum(str, Enu
 @dataclass_json
 @dataclass
 class ShoppingAdsProgramStatusRegionStatus:
-    disapproval_date: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'disapprovalDate' }})
-    eligibility_status: Optional[ShoppingAdsProgramStatusRegionStatusEligibilityStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'eligibilityStatus' }})
-    onboarding_issues: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'onboardingIssues' }})
-    region_codes: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'regionCodes' }})
-    review_eligibility_status: Optional[ShoppingAdsProgramStatusRegionStatusReviewEligibilityStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'reviewEligibilityStatus' }})
-    review_ineligibility_reason: Optional[ShoppingAdsProgramStatusRegionStatusReviewIneligibilityReasonEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'reviewIneligibilityReason' }})
-    review_ineligibility_reason_description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'reviewIneligibilityReasonDescription' }})
-    review_ineligibility_reason_details: Optional[shoppingadsprogramstatusreviewineligibilityreasondetails.ShoppingAdsProgramStatusReviewIneligibilityReasonDetails] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'reviewIneligibilityReasonDetails' }})
-    review_issues: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'reviewIssues' }})
+    r"""ShoppingAdsProgramStatusRegionStatus
+    Status of program and region.
+    """
+    
+    disapproval_date: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('disapprovalDate') }})
+    eligibility_status: Optional[ShoppingAdsProgramStatusRegionStatusEligibilityStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('eligibilityStatus') }})
+    onboarding_issues: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('onboardingIssues') }})
+    region_codes: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('regionCodes') }})
+    review_eligibility_status: Optional[ShoppingAdsProgramStatusRegionStatusReviewEligibilityStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('reviewEligibilityStatus') }})
+    review_ineligibility_reason: Optional[ShoppingAdsProgramStatusRegionStatusReviewIneligibilityReasonEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('reviewIneligibilityReason') }})
+    review_ineligibility_reason_description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('reviewIneligibilityReasonDescription') }})
+    review_ineligibility_reason_details: Optional[ShoppingAdsProgramStatusReviewIneligibilityReasonDetails] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('reviewIneligibilityReasonDetails') }})
+    review_issues: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('reviewIssues') }})
     

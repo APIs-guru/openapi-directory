@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class PostenSatzEnum(str, Enum):
     NORMAL = "NORMAL"
@@ -13,12 +15,12 @@ class PostenSatzEnum(str, Enum):
 @dataclass_json
 @dataclass
 class Posten:
-    bezeichnung: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Bezeichnung' }})
-    brutto_betrag: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'BruttoBetrag' }})
-    externer_beleg_belegkreis: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Externer-Beleg-Belegkreis' }})
-    externer_beleg_bezeichnung: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Externer-Beleg-Bezeichnung' }})
-    externer_beleg_referenz: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Externer-Beleg-Referenz' }})
-    menge: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Menge' }})
-    netto_betrag: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'NettoBetrag' }})
-    satz: PostenSatzEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Satz' }})
+    bezeichnung: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Bezeichnung') }})
+    brutto_betrag: int = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('BruttoBetrag') }})
+    menge: int = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Menge') }})
+    netto_betrag: int = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('NettoBetrag') }})
+    satz: PostenSatzEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Satz') }})
+    externer_beleg_belegkreis: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Externer-Beleg-Belegkreis') }})
+    externer_beleg_bezeichnung: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Externer-Beleg-Bezeichnung') }})
+    externer_beleg_referenz: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Externer-Beleg-Referenz') }})
     

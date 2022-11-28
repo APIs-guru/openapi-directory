@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { HealthCheckProtocolEnum } from "./healthcheckprotocolenum";
 /**
  * Describes the settings for the health check that AWS App Runner performs to monitor the health of a service.

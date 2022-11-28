@@ -1,88 +1,89 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class CreateDiffHtmlUsingPostQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=endRev" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=endRev" })
   endRev?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=padID" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=padID" })
   padId?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=startRev" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=startRev" })
   startRev?: string;
 }
 
 
-export class CreateDiffHtmlUsingPostRequest extends SpeakeasyBase {
-  @Metadata()
-  queryParams: CreateDiffHtmlUsingPostQueryParams;
-}
-
-
 export class CreateDiffHtmlUsingPost200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=code" })
+  @SpeakeasyMetadata({ data: "json, name=code" })
   code?: number;
 
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data?: Map<string, any>;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class CreateDiffHtmlUsingPost400ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=code" })
+  @SpeakeasyMetadata({ data: "json, name=code" })
   code?: number;
 
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data?: Map<string, any>;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class CreateDiffHtmlUsingPost401ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=code" })
+  @SpeakeasyMetadata({ data: "json, name=code" })
   code?: number;
 
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data?: Map<string, any>;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class CreateDiffHtmlUsingPost500ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=code" })
+  @SpeakeasyMetadata({ data: "json, name=code" })
   code?: number;
 
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data?: Map<string, any>;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
+export class CreateDiffHtmlUsingPostRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  queryParams: CreateDiffHtmlUsingPostQueryParams;
+}
+
+
 export class CreateDiffHtmlUsingPostResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   createDiffHtmlUsingPost200ApplicationJsonObject?: CreateDiffHtmlUsingPost200ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   createDiffHtmlUsingPost400ApplicationJsonObject?: CreateDiffHtmlUsingPost400ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   createDiffHtmlUsingPost401ApplicationJsonObject?: CreateDiffHtmlUsingPost401ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   createDiffHtmlUsingPost500ApplicationJsonObject?: CreateDiffHtmlUsingPost500ApplicationJson;
 }

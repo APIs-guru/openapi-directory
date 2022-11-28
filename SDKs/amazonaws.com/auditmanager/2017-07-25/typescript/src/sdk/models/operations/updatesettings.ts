@@ -1,27 +1,28 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class UpdateSettingsHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
@@ -31,54 +32,54 @@ export class UpdateSettingsHeaders extends SpeakeasyBase {
  *  The location in which Audit Manager saves assessment reports for the given assessment. 
 **/
 export class UpdateSettingsRequestBodyDefaultAssessmentReportsDestination extends SpeakeasyBase {
-  @Metadata({ data: "json, name=destination" })
+  @SpeakeasyMetadata({ data: "json, name=destination" })
   destination?: string;
 
-  @Metadata({ data: "json, name=destinationType" })
+  @SpeakeasyMetadata({ data: "json, name=destinationType" })
   destinationType?: shared.AssessmentReportDestinationTypeEnum;
 }
 
 
 export class UpdateSettingsRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=defaultAssessmentReportsDestination" })
+  @SpeakeasyMetadata({ data: "json, name=defaultAssessmentReportsDestination" })
   defaultAssessmentReportsDestination?: UpdateSettingsRequestBodyDefaultAssessmentReportsDestination;
 
-  @Metadata({ data: "json, name=defaultProcessOwners", elemType: shared.Role })
+  @SpeakeasyMetadata({ data: "json, name=defaultProcessOwners", elemType: shared.Role })
   defaultProcessOwners?: shared.Role[];
 
-  @Metadata({ data: "json, name=kmsKey" })
+  @SpeakeasyMetadata({ data: "json, name=kmsKey" })
   kmsKey?: string;
 
-  @Metadata({ data: "json, name=snsTopic" })
+  @SpeakeasyMetadata({ data: "json, name=snsTopic" })
   snsTopic?: string;
 }
 
 
 export class UpdateSettingsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: UpdateSettingsHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: UpdateSettingsRequestBody;
 }
 
 
 export class UpdateSettingsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   accessDeniedException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   internalServerException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   updateSettingsResponse?: shared.UpdateSettingsResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   validationException?: any;
 }

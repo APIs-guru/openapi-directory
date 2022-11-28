@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Dimension } from "./dimension";
-import { Dimension } from "./dimension";
+
 
 
 // Size
@@ -8,9 +8,9 @@ import { Dimension } from "./dimension";
  * A width and height.
 **/
 export class Size extends SpeakeasyBase {
-  @Metadata({ data: "json, name=height" })
+  @SpeakeasyMetadata({ data: "json, name=height" })
   height?: Dimension;
 
-  @Metadata({ data: "json, name=width" })
+  @SpeakeasyMetadata({ data: "json, name=width" })
   width?: Dimension;
 }

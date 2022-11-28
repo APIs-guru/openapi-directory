@@ -1,21 +1,26 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import webhookbuildtype_enum
-from . import webhookfilter
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class Webhook:
-    branch_filter: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'branchFilter' }})
-    build_type: Optional[webhookbuildtype_enum.WebhookBuildTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'buildType' }})
-    filter_groups: Optional[List[List[webhookfilter.WebhookFilter]]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'filterGroups' }})
-    last_modified_secret: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'lastModifiedSecret', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    payload_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'payloadUrl' }})
-    secret: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'secret' }})
-    url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'url' }})
+    r"""Webhook
+    Information about a webhook that connects repository events to a build project in CodeBuild.
+    """
+    
+    branch_filter: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('branchFilter') }})
+    build_type: Optional[WebhookBuildTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('buildType') }})
+    filter_groups: Optional[List[List[WebhookFilter]]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('filterGroups') }})
+    last_modified_secret: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('lastModifiedSecret'), 'encoder': utils.datetimeisoformat(True), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    payload_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('payloadUrl') }})
+    secret: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('secret') }})
+    url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('url') }})
     

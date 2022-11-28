@@ -1,7 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import structuredmessage
+from sdk import utils
+from . import *
 
 class AutoscalingEventEventTypeEnum(str, Enum):
     TYPE_UNKNOWN = "TYPE_UNKNOWN"
@@ -14,10 +16,14 @@ class AutoscalingEventEventTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class AutoscalingEvent:
-    current_num_workers: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'currentNumWorkers' }})
-    description: Optional[structuredmessage.StructuredMessage] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
-    event_type: Optional[AutoscalingEventEventTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'eventType' }})
-    target_num_workers: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'targetNumWorkers' }})
-    time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'time' }})
-    worker_pool: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'workerPool' }})
+    r"""AutoscalingEvent
+    A structured message reporting an autoscaling decision made by the Dataflow service.
+    """
+    
+    current_num_workers: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('currentNumWorkers') }})
+    description: Optional[StructuredMessage] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('description') }})
+    event_type: Optional[AutoscalingEventEventTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('eventType') }})
+    target_num_workers: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('targetNumWorkers') }})
+    time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('time') }})
+    worker_pool: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('workerPool') }})
     

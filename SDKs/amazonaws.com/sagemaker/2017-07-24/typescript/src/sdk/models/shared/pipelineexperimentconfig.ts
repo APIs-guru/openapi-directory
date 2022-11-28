@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // PipelineExperimentConfig
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Specifies the names of the experiment and trial created by a pipeline.
 **/
 export class PipelineExperimentConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ExperimentName" })
+  @SpeakeasyMetadata({ data: "json, name=ExperimentName" })
   experimentName?: string;
 
-  @Metadata({ data: "json, name=TrialName" })
+  @SpeakeasyMetadata({ data: "json, name=TrialName" })
   trialName?: string;
 }

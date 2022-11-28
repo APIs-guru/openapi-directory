@@ -1,18 +1,19 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ObjectGroupEnum } from "./objectgroupenum";
 import { ObjectTypeEnum } from "./objecttypeenum";
 
 
+
 export class Association extends SpeakeasyBase {
-  @Metadata({ data: "json, name=FileId" })
+  @SpeakeasyMetadata({ data: "json, name=FileId" })
   fileId?: string;
 
-  @Metadata({ data: "json, name=ObjectGroup" })
+  @SpeakeasyMetadata({ data: "json, name=ObjectGroup" })
   objectGroup?: ObjectGroupEnum;
 
-  @Metadata({ data: "json, name=ObjectId" })
+  @SpeakeasyMetadata({ data: "json, name=ObjectId" })
   objectId?: string;
 
-  @Metadata({ data: "json, name=ObjectType" })
+  @SpeakeasyMetadata({ data: "json, name=ObjectType" })
   objectType?: ObjectTypeEnum;
 }

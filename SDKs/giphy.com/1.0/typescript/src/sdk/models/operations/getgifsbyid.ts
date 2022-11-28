@@ -1,38 +1,39 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetGifsByIdQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=ids" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=ids" })
   ids?: string;
 }
 
 
-export class GetGifsByIdRequest extends SpeakeasyBase {
-  @Metadata()
-  queryParams: GetGifsByIdQueryParams;
-}
-
-
 export class GetGifsById200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=data", elemType: shared.Gif })
+  @SpeakeasyMetadata({ data: "json, name=data", elemType: shared.Gif })
   data?: shared.Gif[];
 
-  @Metadata({ data: "json, name=meta" })
+  @SpeakeasyMetadata({ data: "json, name=meta" })
   meta?: shared.Meta;
 
-  @Metadata({ data: "json, name=pagination" })
+  @SpeakeasyMetadata({ data: "json, name=pagination" })
   pagination?: shared.Pagination;
 }
 
 
+export class GetGifsByIdRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  queryParams: GetGifsByIdQueryParams;
+}
+
+
 export class GetGifsByIdResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getGifsById200ApplicationJsonObject?: GetGifsById200ApplicationJson;
 }

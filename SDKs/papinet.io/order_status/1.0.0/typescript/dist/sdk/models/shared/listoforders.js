@@ -22,20 +22,20 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PaginationLinks } from "./paginationlinks";
+import { OrderHeader } from "./orderheader";
 var ListOfOrders = /** @class */ (function (_super) {
     __extends(ListOfOrders, _super);
     function ListOfOrders() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=links" }),
+        SpeakeasyMetadata({ data: "json, name=links" }),
         __metadata("design:type", PaginationLinks)
     ], ListOfOrders.prototype, "links", void 0);
     __decorate([
-        Metadata({ data: "json, name=orders", elemType: shared.OrderHeader }),
+        SpeakeasyMetadata({ data: "json, name=orders", elemType: OrderHeader }),
         __metadata("design:type", Array)
     ], ListOfOrders.prototype, "orders", void 0);
     return ListOfOrders;

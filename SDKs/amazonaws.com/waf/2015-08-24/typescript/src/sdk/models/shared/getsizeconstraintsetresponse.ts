@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SizeConstraintSet } from "./sizeconstraintset";
 
 
+
 export class GetSizeConstraintSetResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=SizeConstraintSet" })
+  @SpeakeasyMetadata({ data: "json, name=SizeConstraintSet" })
   sizeConstraintSet?: SizeConstraintSet;
 }

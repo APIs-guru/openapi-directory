@@ -1,31 +1,32 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class SessionControllerLogoutPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=shortName" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=shortName" })
   shortName: string;
 }
 
 
 export class SessionControllerLogoutQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=token" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=token" })
   token: string;
 }
 
 
 export class SessionControllerLogoutRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: SessionControllerLogoutPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: SessionControllerLogoutQueryParams;
 }
 
 
 export class SessionControllerLogoutResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

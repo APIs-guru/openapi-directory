@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ObjectIdentifierAndLinkNameTuple } from "./objectidentifierandlinknametuple";
+
 
 
 // BatchListObjectParentsResponse
@@ -8,9 +8,9 @@ import { ObjectIdentifierAndLinkNameTuple } from "./objectidentifierandlinknamet
  * Represents the output of a <a>ListObjectParents</a> response operation.
 **/
 export class BatchListObjectParentsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=ParentLinks", elemType: shared.ObjectIdentifierAndLinkNameTuple })
+  @SpeakeasyMetadata({ data: "json, name=ParentLinks", elemType: ObjectIdentifierAndLinkNameTuple })
   parentLinks?: ObjectIdentifierAndLinkNameTuple[];
 }

@@ -1,5 +1,7 @@
 package shared
 
+// Region
+// Contains information about a region that can be targeted by ads.
 type Region struct {
 	CountryCode   *string `json:"countryCode,omitempty"`
 	CountryDartID *string `json:"countryDartId,omitempty"`

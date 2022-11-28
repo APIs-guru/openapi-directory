@@ -1,5 +1,7 @@
 package shared
 
+// RemoteImageInfo
+// Class RemoteImageInfo.
 type RemoteImageInfo struct {
 	CommunityRating *float64        `json:"CommunityRating,omitempty"`
 	Height          *int32          `json:"Height,omitempty"`

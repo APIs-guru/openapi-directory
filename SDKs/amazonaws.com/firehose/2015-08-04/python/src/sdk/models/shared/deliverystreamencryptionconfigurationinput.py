@@ -1,12 +1,18 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import keytype_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class DeliveryStreamEncryptionConfigurationInput:
-    key_arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'KeyARN' }})
-    key_type: keytype_enum.KeyTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'KeyType' }})
+    r"""DeliveryStreamEncryptionConfigurationInput
+    Specifies the type and Amazon Resource Name (ARN) of the CMK to use for Server-Side Encryption (SSE). 
+    """
+    
+    key_type: KeyTypeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('KeyType') }})
+    key_arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('KeyARN') }})
     

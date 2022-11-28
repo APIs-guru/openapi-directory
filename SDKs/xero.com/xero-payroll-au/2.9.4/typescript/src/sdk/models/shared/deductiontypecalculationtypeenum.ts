@@ -1,7 +1,8 @@
 
 
+
 export enum DeductionTypeCalculationTypeEnum {
-    Fixedamount = "FIXEDAMOUNT"
-,    Pretax = "PRETAX"
-,    Posttax = "POSTTAX"
+    Fixedamount = "FIXEDAMOUNT",
+    Pretax = "PRETAX",
+    Posttax = "POSTTAX"
 }

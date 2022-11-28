@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// RegionDescription
+// The replicated Region information for a directory.
 type RegionDescription struct {
 	DesiredNumberOfDomainControllers *int64                `json:"DesiredNumberOfDomainControllers,omitempty"`
 	DirectoryID                      *string               `json:"DirectoryId,omitempty"`

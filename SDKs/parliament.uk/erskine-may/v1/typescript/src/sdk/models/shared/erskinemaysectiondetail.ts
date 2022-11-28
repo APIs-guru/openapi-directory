@@ -1,43 +1,43 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ErskineMayFootnote } from "./erskinemayfootnote";
 import { ErskineMaySectionOverview } from "./erskinemaysectionoverview";
 
 
+
 export class ErskineMaySectionDetail extends SpeakeasyBase {
-  @Metadata({ data: "json, name=chapterNumber" })
+  @SpeakeasyMetadata({ data: "json, name=chapterNumber" })
   chapterNumber?: number;
 
-  @Metadata({ data: "json, name=chapterTitle" })
+  @SpeakeasyMetadata({ data: "json, name=chapterTitle" })
   chapterTitle?: string;
 
-  @Metadata({ data: "json, name=contentHtml" })
+  @SpeakeasyMetadata({ data: "json, name=contentHtml" })
   contentHtml?: string;
 
-  @Metadata({ data: "json, name=footnotes", elemType: shared.ErskineMayFootnote })
+  @SpeakeasyMetadata({ data: "json, name=footnotes", elemType: ErskineMayFootnote })
   footnotes?: ErskineMayFootnote[];
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: number;
 
-  @Metadata({ data: "json, name=parentSectionId" })
+  @SpeakeasyMetadata({ data: "json, name=parentSectionId" })
   parentSectionId?: number;
 
-  @Metadata({ data: "json, name=parentSectionTitle" })
+  @SpeakeasyMetadata({ data: "json, name=parentSectionTitle" })
   parentSectionTitle?: string;
 
-  @Metadata({ data: "json, name=partNumber" })
+  @SpeakeasyMetadata({ data: "json, name=partNumber" })
   partNumber?: number;
 
-  @Metadata({ data: "json, name=partTitle" })
+  @SpeakeasyMetadata({ data: "json, name=partTitle" })
   partTitle?: string;
 
-  @Metadata({ data: "json, name=subSections", elemType: shared.ErskineMaySectionOverview })
+  @SpeakeasyMetadata({ data: "json, name=subSections", elemType: ErskineMaySectionOverview })
   subSections?: ErskineMaySectionOverview[];
 
-  @Metadata({ data: "json, name=title" })
+  @SpeakeasyMetadata({ data: "json, name=title" })
   title?: string;
 
-  @Metadata({ data: "json, name=titleChain" })
+  @SpeakeasyMetadata({ data: "json, name=titleChain" })
   titleChain?: string;
 }

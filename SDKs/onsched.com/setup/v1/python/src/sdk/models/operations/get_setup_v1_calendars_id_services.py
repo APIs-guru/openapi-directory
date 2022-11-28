@@ -4,7 +4,7 @@ from typing import Any,Optional
 
 @dataclass
 class GetSetupV1CalendarsIDServicesPathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -15,13 +15,13 @@ class GetSetupV1CalendarsIDServicesQueryParams:
 
 @dataclass
 class GetSetupV1CalendarsIDServicesRequest:
-    path_params: GetSetupV1CalendarsIDServicesPathParams = field(default=None)
-    query_params: GetSetupV1CalendarsIDServicesQueryParams = field(default=None)
+    path_params: GetSetupV1CalendarsIDServicesPathParams = field()
+    query_params: GetSetupV1CalendarsIDServicesQueryParams = field()
     
 
 @dataclass
 class GetSetupV1CalendarsIDServicesResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     service_list_view_model: Optional[dict[str, Any]] = field(default=None)
-    status_code: int = field(default=None)
     

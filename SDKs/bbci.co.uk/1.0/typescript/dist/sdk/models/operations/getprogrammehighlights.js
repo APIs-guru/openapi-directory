@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetProgrammeHighlightsQueryParams = /** @class */ (function (_super) {
     __extends(GetProgrammeHighlightsQueryParams, _super);
@@ -30,19 +30,19 @@ var GetProgrammeHighlightsQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=availability" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=availability" }),
         __metadata("design:type", String)
     ], GetProgrammeHighlightsQueryParams.prototype, "availability", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=lang" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=lang" }),
         __metadata("design:type", String)
     ], GetProgrammeHighlightsQueryParams.prototype, "lang", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=mixin" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=mixin" }),
         __metadata("design:type", Array)
     ], GetProgrammeHighlightsQueryParams.prototype, "mixin", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=rights" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=rights" }),
         __metadata("design:type", String)
     ], GetProgrammeHighlightsQueryParams.prototype, "rights", void 0);
     return GetProgrammeHighlightsQueryParams;
@@ -54,7 +54,7 @@ var GetProgrammeHighlightsRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetProgrammeHighlightsQueryParams)
     ], GetProgrammeHighlightsRequest.prototype, "queryParams", void 0);
     return GetProgrammeHighlightsRequest;
@@ -66,15 +66,15 @@ var GetProgrammeHighlightsResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetProgrammeHighlightsResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetProgrammeHighlightsResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], GetProgrammeHighlightsResponse.prototype, "ibl", void 0);
     return GetProgrammeHighlightsResponse;

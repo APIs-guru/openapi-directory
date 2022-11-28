@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // SigV4Authorization
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * For more information, see <a href="https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html">Signature Version 4 signing process</a>.
 **/
 export class SigV4Authorization extends SpeakeasyBase {
-  @Metadata({ data: "json, name=roleArn" })
+  @SpeakeasyMetadata({ data: "json, name=roleArn" })
   roleArn: string;
 
-  @Metadata({ data: "json, name=serviceName" })
+  @SpeakeasyMetadata({ data: "json, name=serviceName" })
   serviceName: string;
 
-  @Metadata({ data: "json, name=signingRegion" })
+  @SpeakeasyMetadata({ data: "json, name=signingRegion" })
   signingRegion: string;
 }

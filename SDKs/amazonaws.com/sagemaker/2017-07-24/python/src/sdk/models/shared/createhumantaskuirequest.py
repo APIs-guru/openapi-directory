@@ -1,14 +1,14 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import tag
-from . import uitemplate
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class CreateHumanTaskUIRequest:
-    human_task_ui_name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'HumanTaskUiName' }})
-    tags: Optional[List[tag.Tag]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Tags' }})
-    ui_template: uitemplate.UITemplate = field(default=None, metadata={'dataclasses_json': { 'field_name': 'UiTemplate' }})
+    human_task_ui_name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('HumanTaskUiName') }})
+    ui_template: UITemplate = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('UiTemplate') }})
+    tags: Optional[List[Tag]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Tags') }})
     

@@ -1,34 +1,35 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class PortfolioActivationsMetadata extends SpeakeasyBase {
-  @Metadata({ data: "json, name=rootContentId" })
+  @SpeakeasyMetadata({ data: "json, name=rootContentId" })
   rootContentId?: string;
 }
 
 
 export class PortfolioActivations extends SpeakeasyBase {
-  @Metadata({ data: "json, name=contentId" })
+  @SpeakeasyMetadata({ data: "json, name=contentId" })
   contentId?: string;
 
-  @Metadata({ data: "json, name=end" })
+  @SpeakeasyMetadata({ data: "json, name=end" })
   end?: Date;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=info" })
+  @SpeakeasyMetadata({ data: "json, name=info" })
   info?: string;
 
-  @Metadata({ data: "json, name=learnersCount" })
+  @SpeakeasyMetadata({ data: "json, name=learnersCount" })
   learnersCount?: number;
 
-  @Metadata({ data: "json, name=metadata" })
+  @SpeakeasyMetadata({ data: "json, name=metadata" })
   metadata?: PortfolioActivationsMetadata;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=start" })
+  @SpeakeasyMetadata({ data: "json, name=start" })
   start?: Date;
 }

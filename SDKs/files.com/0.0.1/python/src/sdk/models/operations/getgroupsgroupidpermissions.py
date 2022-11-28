@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class GetGroupsGroupIDPermissionsPathParams:
-    group_id: str = field(default=None, metadata={'path_param': { 'field_name': 'group_id', 'style': 'simple', 'explode': False }})
+    group_id: str = field(metadata={'path_param': { 'field_name': 'group_id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,13 +26,13 @@ class GetGroupsGroupIDPermissionsQueryParams:
 
 @dataclass
 class GetGroupsGroupIDPermissionsRequest:
-    path_params: GetGroupsGroupIDPermissionsPathParams = field(default=None)
-    query_params: GetGroupsGroupIDPermissionsQueryParams = field(default=None)
+    path_params: GetGroupsGroupIDPermissionsPathParams = field()
+    query_params: GetGroupsGroupIDPermissionsQueryParams = field()
     
 
 @dataclass
 class GetGroupsGroupIDPermissionsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     permission_entities: Optional[List[shared.PermissionEntity]] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum GoogleCloudContactcenterinsightsV1AnswerFeedbackCorrectnessLevelEnum {
-    CorrectnessLevelUnspecified = "CORRECTNESS_LEVEL_UNSPECIFIED"
-,    NotCorrect = "NOT_CORRECT"
-,    PartiallyCorrect = "PARTIALLY_CORRECT"
-,    FullyCorrect = "FULLY_CORRECT"
+    CorrectnessLevelUnspecified = "CORRECTNESS_LEVEL_UNSPECIFIED",
+    NotCorrect = "NOT_CORRECT",
+    PartiallyCorrect = "PARTIALLY_CORRECT",
+    FullyCorrect = "FULLY_CORRECT"
 }
 
 
@@ -13,12 +14,12 @@ export enum GoogleCloudContactcenterinsightsV1AnswerFeedbackCorrectnessLevelEnum
  * The feedback that the customer has about a certain answer in the conversation.
 **/
 export class GoogleCloudContactcenterinsightsV1AnswerFeedback extends SpeakeasyBase {
-  @Metadata({ data: "json, name=clicked" })
+  @SpeakeasyMetadata({ data: "json, name=clicked" })
   clicked?: boolean;
 
-  @Metadata({ data: "json, name=correctnessLevel" })
+  @SpeakeasyMetadata({ data: "json, name=correctnessLevel" })
   correctnessLevel?: GoogleCloudContactcenterinsightsV1AnswerFeedbackCorrectnessLevelEnum;
 
-  @Metadata({ data: "json, name=displayed" })
+  @SpeakeasyMetadata({ data: "json, name=displayed" })
   displayed?: boolean;
 }

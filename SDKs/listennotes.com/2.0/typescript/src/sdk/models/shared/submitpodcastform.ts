@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class SubmitPodcastForm extends SpeakeasyBase {
-  @Metadata({ data: "form, name=email;" })
+  @SpeakeasyMetadata({ data: "form, name=email;" })
   email?: string;
 
-  @Metadata({ data: "form, name=rss;" })
+  @SpeakeasyMetadata({ data: "form, name=rss;" })
   rss: string;
 }

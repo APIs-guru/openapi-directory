@@ -1,5 +1,7 @@
 package shared
 
+// Instance
+// Represents an EC2 instance provisioned as part of cluster.
 type Instance struct {
 	EbsVolumes       []EbsVolume     `json:"EbsVolumes,omitempty"`
 	Ec2InstanceID    *string         `json:"Ec2InstanceId,omitempty"`

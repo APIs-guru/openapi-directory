@@ -1,25 +1,26 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class UpdateClusterRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ClusterName" })
+  @SpeakeasyMetadata({ data: "json, name=ClusterName" })
   clusterName: string;
 
-  @Metadata({ data: "json, name=Description" })
+  @SpeakeasyMetadata({ data: "json, name=Description" })
   description?: string;
 
-  @Metadata({ data: "json, name=NotificationTopicArn" })
+  @SpeakeasyMetadata({ data: "json, name=NotificationTopicArn" })
   notificationTopicArn?: string;
 
-  @Metadata({ data: "json, name=NotificationTopicStatus" })
+  @SpeakeasyMetadata({ data: "json, name=NotificationTopicStatus" })
   notificationTopicStatus?: string;
 
-  @Metadata({ data: "json, name=ParameterGroupName" })
+  @SpeakeasyMetadata({ data: "json, name=ParameterGroupName" })
   parameterGroupName?: string;
 
-  @Metadata({ data: "json, name=PreferredMaintenanceWindow" })
+  @SpeakeasyMetadata({ data: "json, name=PreferredMaintenanceWindow" })
   preferredMaintenanceWindow?: string;
 
-  @Metadata({ data: "json, name=SecurityGroupIds" })
+  @SpeakeasyMetadata({ data: "json, name=SecurityGroupIds" })
   securityGroupIds?: string[];
 }

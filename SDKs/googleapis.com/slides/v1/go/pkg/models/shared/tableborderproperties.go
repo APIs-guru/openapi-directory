@@ -12,6 +12,8 @@ const (
 	TableBorderPropertiesDashStyleEnumLongDashDot          TableBorderPropertiesDashStyleEnum = "LONG_DASH_DOT"
 )
 
+// TableBorderProperties
+// The border styling properties of the TableBorderCell.
 type TableBorderProperties struct {
 	DashStyle       *TableBorderPropertiesDashStyleEnum `json:"dashStyle,omitempty"`
 	TableBorderFill *TableBorderFill                    `json:"tableBorderFill,omitempty"`

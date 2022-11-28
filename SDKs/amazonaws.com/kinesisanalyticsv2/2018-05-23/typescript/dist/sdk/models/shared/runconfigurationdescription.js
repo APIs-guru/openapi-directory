@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ApplicationRestoreConfiguration } from "./applicationrestoreconfiguration";
 import { FlinkRunConfiguration } from "./flinkrunconfiguration";
 // RunConfigurationDescription
@@ -35,11 +35,11 @@ var RunConfigurationDescription = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=ApplicationRestoreConfigurationDescription" }),
+        SpeakeasyMetadata({ data: "json, name=ApplicationRestoreConfigurationDescription" }),
         __metadata("design:type", ApplicationRestoreConfiguration)
     ], RunConfigurationDescription.prototype, "applicationRestoreConfigurationDescription", void 0);
     __decorate([
-        Metadata({ data: "json, name=FlinkRunConfigurationDescription" }),
+        SpeakeasyMetadata({ data: "json, name=FlinkRunConfigurationDescription" }),
         __metadata("design:type", FlinkRunConfiguration)
     ], RunConfigurationDescription.prototype, "flinkRunConfigurationDescription", void 0);
     return RunConfigurationDescription;

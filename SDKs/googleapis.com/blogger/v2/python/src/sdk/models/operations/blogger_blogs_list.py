@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class BloggerBlogsListPathParams:
-    user_id: str = field(default=None, metadata={'path_param': { 'field_name': 'userId', 'style': 'simple', 'explode': False }})
+    user_id: str = field(metadata={'path_param': { 'field_name': 'userId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,20 +26,20 @@ class BloggerBlogsListQueryParams:
 
 @dataclass
 class BloggerBlogsListSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class BloggerBlogsListRequest:
-    path_params: BloggerBlogsListPathParams = field(default=None)
-    query_params: BloggerBlogsListQueryParams = field(default=None)
-    security: BloggerBlogsListSecurity = field(default=None)
+    path_params: BloggerBlogsListPathParams = field()
+    query_params: BloggerBlogsListQueryParams = field()
+    security: BloggerBlogsListSecurity = field()
     
 
 @dataclass
 class BloggerBlogsListResponse:
+    content_type: str = field()
+    status_code: int = field()
     blog_list: Optional[shared.BlogList] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class GetAPIMembersIDContributionSummaryPathParams:
-    id: int = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: int = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -15,14 +15,14 @@ class GetAPIMembersIDContributionSummaryQueryParams:
 
 @dataclass
 class GetAPIMembersIDContributionSummaryRequest:
-    path_params: GetAPIMembersIDContributionSummaryPathParams = field(default=None)
-    query_params: GetAPIMembersIDContributionSummaryQueryParams = field(default=None)
+    path_params: GetAPIMembersIDContributionSummaryPathParams = field()
+    query_params: GetAPIMembersIDContributionSummaryQueryParams = field()
     
 
 @dataclass
 class GetAPIMembersIDContributionSummaryResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     debate_contribution_members_service_search_result: Optional[shared.DebateContributionMembersServiceSearchResult] = field(default=None)
-    status_code: int = field(default=None)
     

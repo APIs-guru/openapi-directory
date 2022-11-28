@@ -1,5 +1,7 @@
 package shared
 
+// MotorcycleBaseListing
+// Base motorcycle listing
 type MotorcycleBaseListing struct {
 	Build           *MotorcycleBuild  `json:"build,omitempty"`
 	Color           *string           `json:"color,omitempty"`

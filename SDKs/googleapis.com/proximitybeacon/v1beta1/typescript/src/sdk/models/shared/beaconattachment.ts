@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // BeaconAttachment
@@ -6,18 +7,18 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Project-specific data associated with a beacon.
 **/
 export class BeaconAttachment extends SpeakeasyBase {
-  @Metadata({ data: "json, name=attachmentName" })
+  @SpeakeasyMetadata({ data: "json, name=attachmentName" })
   attachmentName?: string;
 
-  @Metadata({ data: "json, name=creationTimeMs" })
+  @SpeakeasyMetadata({ data: "json, name=creationTimeMs" })
   creationTimeMs?: string;
 
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data?: string;
 
-  @Metadata({ data: "json, name=maxDistanceMeters" })
+  @SpeakeasyMetadata({ data: "json, name=maxDistanceMeters" })
   maxDistanceMeters?: number;
 
-  @Metadata({ data: "json, name=namespacedType" })
+  @SpeakeasyMetadata({ data: "json, name=namespacedType" })
   namespacedType?: string;
 }

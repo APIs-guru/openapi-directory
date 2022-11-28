@@ -1,16 +1,17 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import providertype_enum
-from . import vpcconfiguration
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class GetHostOutput:
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Name' }})
-    provider_endpoint: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ProviderEndpoint' }})
-    provider_type: Optional[providertype_enum.ProviderTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ProviderType' }})
-    status: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Status' }})
-    vpc_configuration: Optional[vpcconfiguration.VpcConfiguration] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'VpcConfiguration' }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Name') }})
+    provider_endpoint: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ProviderEndpoint') }})
+    provider_type: Optional[ProviderTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ProviderType') }})
+    status: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Status') }})
+    vpc_configuration: Optional[VpcConfiguration] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('VpcConfiguration') }})
     

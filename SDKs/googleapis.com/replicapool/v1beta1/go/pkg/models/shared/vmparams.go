@@ -1,5 +1,7 @@
 package shared
 
+// VMParams
+// Parameters for creating a Compute Engine Instance resource. Most fields are identical to the corresponding Compute Engine resource.
 type VMParams struct {
 	BaseInstanceName  *string            `json:"baseInstanceName,omitempty"`
 	CanIPForward      *bool              `json:"canIpForward,omitempty"`

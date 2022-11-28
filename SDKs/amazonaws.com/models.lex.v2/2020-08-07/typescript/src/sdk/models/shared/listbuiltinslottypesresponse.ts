@@ -1,15 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BuiltInSlotTypeSummary } from "./builtinslottypesummary";
 
 
+
 export class ListBuiltInSlotTypesResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=builtInSlotTypeSummaries", elemType: shared.BuiltInSlotTypeSummary })
+  @SpeakeasyMetadata({ data: "json, name=builtInSlotTypeSummaries", elemType: BuiltInSlotTypeSummary })
   builtInSlotTypeSummaries?: BuiltInSlotTypeSummary[];
 
-  @Metadata({ data: "json, name=localeId" })
+  @SpeakeasyMetadata({ data: "json, name=localeId" })
   localeId?: string;
 
-  @Metadata({ data: "json, name=nextToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextToken" })
   nextToken?: string;
 }

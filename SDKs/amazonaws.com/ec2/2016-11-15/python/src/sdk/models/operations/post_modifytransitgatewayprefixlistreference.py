@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostModifyTransitGatewayPrefixListReferenceActionEnum(str, Enum):
     MODIFY_TRANSIT_GATEWAY_PREFIX_LIST_REFERENCE = "ModifyTransitGatewayPrefixListReference"
@@ -10,8 +14,8 @@ class PostModifyTransitGatewayPrefixListReferenceVersionEnum(str, Enum):
 
 @dataclass
 class PostModifyTransitGatewayPrefixListReferenceQueryParams:
-    action: PostModifyTransitGatewayPrefixListReferenceActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostModifyTransitGatewayPrefixListReferenceVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostModifyTransitGatewayPrefixListReferenceActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostModifyTransitGatewayPrefixListReferenceVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostModifyTransitGatewayPrefixListReferenceHeaders:
 
 @dataclass
 class PostModifyTransitGatewayPrefixListReferenceRequest:
-    query_params: PostModifyTransitGatewayPrefixListReferenceQueryParams = field(default=None)
-    headers: PostModifyTransitGatewayPrefixListReferenceHeaders = field(default=None)
+    headers: PostModifyTransitGatewayPrefixListReferenceHeaders = field()
+    query_params: PostModifyTransitGatewayPrefixListReferenceQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostModifyTransitGatewayPrefixListReferenceResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

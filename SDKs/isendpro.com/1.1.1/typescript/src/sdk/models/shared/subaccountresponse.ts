@@ -1,29 +1,29 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class SubaccountResponseEtatEtat extends SpeakeasyBase {
-  @Metadata({ data: "json, name=code" })
+  @SpeakeasyMetadata({ data: "json, name=code" })
   code?: string;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 
-  @Metadata({ data: "json, name=subAccountId" })
+  @SpeakeasyMetadata({ data: "json, name=subAccountId" })
   subAccountId?: string;
 
-  @Metadata({ data: "json, name=subAccountKeyid" })
+  @SpeakeasyMetadata({ data: "json, name=subAccountKeyid" })
   subAccountKeyid?: string;
 }
 
 
 export class SubaccountResponseEtat extends SpeakeasyBase {
-  @Metadata({ data: "json, name=etat", elemType: shared.SubaccountResponseEtatEtat })
+  @SpeakeasyMetadata({ data: "json, name=etat", elemType: SubaccountResponseEtatEtat })
   etat?: SubaccountResponseEtatEtat[];
 }
 
 
 export class SubaccountResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=etat" })
+  @SpeakeasyMetadata({ data: "json, name=etat" })
   etat?: SubaccountResponseEtat;
 }

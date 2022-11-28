@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PlatformEnum } from "./platformenum";
+
 
 
 // ImageRecipeSummary
@@ -7,24 +8,24 @@ import { PlatformEnum } from "./platformenum";
  * A summary of an image recipe.
 **/
 export class ImageRecipeSummary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=arn" })
+  @SpeakeasyMetadata({ data: "json, name=arn" })
   arn?: string;
 
-  @Metadata({ data: "json, name=dateCreated" })
+  @SpeakeasyMetadata({ data: "json, name=dateCreated" })
   dateCreated?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=owner" })
+  @SpeakeasyMetadata({ data: "json, name=owner" })
   owner?: string;
 
-  @Metadata({ data: "json, name=parentImage" })
+  @SpeakeasyMetadata({ data: "json, name=parentImage" })
   parentImage?: string;
 
-  @Metadata({ data: "json, name=platform" })
+  @SpeakeasyMetadata({ data: "json, name=platform" })
   platform?: PlatformEnum;
 
-  @Metadata({ data: "json, name=tags" })
+  @SpeakeasyMetadata({ data: "json, name=tags" })
   tags?: Map<string, string>;
 }

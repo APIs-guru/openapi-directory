@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // PasswordStatus
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Read-only password status.
 **/
 export class PasswordStatus extends SpeakeasyBase {
-  @Metadata({ data: "json, name=locked" })
+  @SpeakeasyMetadata({ data: "json, name=locked" })
   locked?: boolean;
 
-  @Metadata({ data: "json, name=passwordExpirationTime" })
+  @SpeakeasyMetadata({ data: "json, name=passwordExpirationTime" })
   passwordExpirationTime?: string;
 }

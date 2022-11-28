@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import List,Optional
+from typing import Optional
 
 
 @dataclass
@@ -12,11 +12,11 @@ class ListUserSSubscriptionGroupSmsQueryParams:
 
 @dataclass
 class ListUserSSubscriptionGroupSmsRequest:
-    query_params: ListUserSSubscriptionGroupSmsQueryParams = field(default=None)
+    query_params: ListUserSSubscriptionGroupSmsQueryParams = field()
     
 
 @dataclass
 class ListUserSSubscriptionGroupSmsResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

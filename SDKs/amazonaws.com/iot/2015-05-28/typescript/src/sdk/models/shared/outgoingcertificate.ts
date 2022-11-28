@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // OutgoingCertificate
@@ -6,21 +7,21 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A certificate that has been transferred but not yet accepted.
 **/
 export class OutgoingCertificate extends SpeakeasyBase {
-  @Metadata({ data: "json, name=certificateArn" })
+  @SpeakeasyMetadata({ data: "json, name=certificateArn" })
   certificateArn?: string;
 
-  @Metadata({ data: "json, name=certificateId" })
+  @SpeakeasyMetadata({ data: "json, name=certificateId" })
   certificateId?: string;
 
-  @Metadata({ data: "json, name=creationDate" })
+  @SpeakeasyMetadata({ data: "json, name=creationDate" })
   creationDate?: Date;
 
-  @Metadata({ data: "json, name=transferDate" })
+  @SpeakeasyMetadata({ data: "json, name=transferDate" })
   transferDate?: Date;
 
-  @Metadata({ data: "json, name=transferMessage" })
+  @SpeakeasyMetadata({ data: "json, name=transferMessage" })
   transferMessage?: string;
 
-  @Metadata({ data: "json, name=transferredTo" })
+  @SpeakeasyMetadata({ data: "json, name=transferredTo" })
   transferredTo?: string;
 }

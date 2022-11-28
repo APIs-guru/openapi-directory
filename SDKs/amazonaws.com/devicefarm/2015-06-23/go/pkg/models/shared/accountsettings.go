@@ -1,5 +1,7 @@
 package shared
 
+// AccountSettings
+// A container for account-level settings in AWS Device Farm.
 type AccountSettings struct {
 	AwsAccountNumber             *string          `json:"awsAccountNumber,omitempty"`
 	DefaultJobTimeoutMinutes     *int64           `json:"defaultJobTimeoutMinutes,omitempty"`

@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ComparisonOperatorEnum } from "./comparisonoperatorenum";
 import { MachineLearningDetectionConfig } from "./machinelearningdetectionconfig";
 import { StatisticalThreshold } from "./statisticalthreshold";
 import { MetricValue } from "./metricvalue";
+
 
 
 // BehaviorCriteria
@@ -10,24 +11,24 @@ import { MetricValue } from "./metricvalue";
  * The criteria by which the behavior is determined to be normal.
 **/
 export class BehaviorCriteria extends SpeakeasyBase {
-  @Metadata({ data: "json, name=comparisonOperator" })
+  @SpeakeasyMetadata({ data: "json, name=comparisonOperator" })
   comparisonOperator?: ComparisonOperatorEnum;
 
-  @Metadata({ data: "json, name=consecutiveDatapointsToAlarm" })
+  @SpeakeasyMetadata({ data: "json, name=consecutiveDatapointsToAlarm" })
   consecutiveDatapointsToAlarm?: number;
 
-  @Metadata({ data: "json, name=consecutiveDatapointsToClear" })
+  @SpeakeasyMetadata({ data: "json, name=consecutiveDatapointsToClear" })
   consecutiveDatapointsToClear?: number;
 
-  @Metadata({ data: "json, name=durationSeconds" })
+  @SpeakeasyMetadata({ data: "json, name=durationSeconds" })
   durationSeconds?: number;
 
-  @Metadata({ data: "json, name=mlDetectionConfig" })
+  @SpeakeasyMetadata({ data: "json, name=mlDetectionConfig" })
   mlDetectionConfig?: MachineLearningDetectionConfig;
 
-  @Metadata({ data: "json, name=statisticalThreshold" })
+  @SpeakeasyMetadata({ data: "json, name=statisticalThreshold" })
   statisticalThreshold?: StatisticalThreshold;
 
-  @Metadata({ data: "json, name=value" })
+  @SpeakeasyMetadata({ data: "json, name=value" })
   value?: MetricValue;
 }

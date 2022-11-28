@@ -1,17 +1,18 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum DiagnosticLevelEnum {
-    Unknown = "UNKNOWN"
-,    Information = "INFORMATION"
-,    Warning = "WARNING"
-,    Error = "ERROR"
+    Unknown = "UNKNOWN",
+    Information = "INFORMATION",
+    Warning = "WARNING",
+    Error = "ERROR"
 }
 
 
 export class Diagnostic extends SpeakeasyBase {
-  @Metadata({ data: "json, name=field" })
+  @SpeakeasyMetadata({ data: "json, name=field" })
   field?: string;
 
-  @Metadata({ data: "json, name=level" })
+  @SpeakeasyMetadata({ data: "json, name=level" })
   level?: DiagnosticLevelEnum;
 }

@@ -1,35 +1,36 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetUsersMeVideosVideoIdRatingPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=videoId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=videoId" })
   videoId: number;
 }
 
 
 export class GetUsersMeVideosVideoIdRatingSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   oAuth2: shared.SchemeOAuth2;
 }
 
 
 export class GetUsersMeVideosVideoIdRatingRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetUsersMeVideosVideoIdRatingPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: GetUsersMeVideosVideoIdRatingSecurity;
 }
 
 
 export class GetUsersMeVideosVideoIdRatingResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getMeVideoRating?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

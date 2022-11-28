@@ -1,47 +1,48 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class CreatePortfolioQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=false;name=opt_fields" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=opt_fields" })
   optFields?: string[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=opt_pretty" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=opt_pretty" })
   optPretty?: boolean;
 }
 
 
-export class CreatePortfolioRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=data" })
-  data?: shared.PortfolioRequest;
-}
-
-
-export class CreatePortfolioRequest extends SpeakeasyBase {
-  @Metadata()
-  queryParams: CreatePortfolioQueryParams;
-
-  @Metadata({ data: "request, media_type=application/json" })
-  request: CreatePortfolioRequestBody;
+export class CreatePortfolioRequestBodyInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=data" })
+  data?: shared.PortfolioRequestInput;
 }
 
 
 export class CreatePortfolio201ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data?: shared.PortfolioResponse;
 }
 
 
+export class CreatePortfolioRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  queryParams: CreatePortfolioQueryParams;
+
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request: CreatePortfolioRequestBodyInput;
+}
+
+
 export class CreatePortfolioResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   errorResponse?: shared.ErrorResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   createPortfolio201ApplicationJsonObject?: CreatePortfolio201ApplicationJson;
 }

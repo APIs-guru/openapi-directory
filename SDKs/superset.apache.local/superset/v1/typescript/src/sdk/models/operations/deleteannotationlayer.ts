@@ -1,77 +1,78 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class DeleteAnnotationLayerQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, serialization=json;name=q" })
+  @SpeakeasyMetadata({ data: "queryParam, serialization=json;name=q" })
   q?: number[];
 }
 
 
 export class DeleteAnnotationLayerSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=bearer" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" })
   jwt: shared.SchemeJwt;
 }
 
 
-export class DeleteAnnotationLayerRequest extends SpeakeasyBase {
-  @Metadata()
-  queryParams: DeleteAnnotationLayerQueryParams;
-
-  @Metadata()
-  security: DeleteAnnotationLayerSecurity;
-}
-
-
 export class DeleteAnnotationLayer200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class DeleteAnnotationLayer401ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class DeleteAnnotationLayer404ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class DeleteAnnotationLayer422ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class DeleteAnnotationLayer500ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
+export class DeleteAnnotationLayerRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  queryParams: DeleteAnnotationLayerQueryParams;
+
+  @SpeakeasyMetadata()
+  security: DeleteAnnotationLayerSecurity;
+}
+
+
 export class DeleteAnnotationLayerResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   deleteAnnotationLayer200ApplicationJsonObject?: DeleteAnnotationLayer200ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   deleteAnnotationLayer401ApplicationJsonObject?: DeleteAnnotationLayer401ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   deleteAnnotationLayer404ApplicationJsonObject?: DeleteAnnotationLayer404ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   deleteAnnotationLayer422ApplicationJsonObject?: DeleteAnnotationLayer422ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   deleteAnnotationLayer500ApplicationJsonObject?: DeleteAnnotationLayer500ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleAppsScriptTypeExecutionApiConfig } from "./googleappsscripttypeexecutionapiconfig";
+
 
 
 // GoogleAppsScriptTypeExecutionApiEntryPoint
@@ -7,6 +8,6 @@ import { GoogleAppsScriptTypeExecutionApiConfig } from "./googleappsscripttypeex
  * An API executable entry point.
 **/
 export class GoogleAppsScriptTypeExecutionApiEntryPoint extends SpeakeasyBase {
-  @Metadata({ data: "json, name=entryPointConfig" })
+  @SpeakeasyMetadata({ data: "json, name=entryPointConfig" })
   entryPointConfig?: GoogleAppsScriptTypeExecutionApiConfig;
 }

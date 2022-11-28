@@ -6,6 +6,8 @@ const (
 	GetReplaceIamInstanceProfileAssociationActionEnumReplaceIamInstanceProfileAssociation GetReplaceIamInstanceProfileAssociationActionEnum = "ReplaceIamInstanceProfileAssociation"
 )
 
+// GetReplaceIamInstanceProfileAssociationIamInstanceProfile
+// Describes an IAM instance profile.
 type GetReplaceIamInstanceProfileAssociationIamInstanceProfile struct {
 	Arn  *string `queryParam:"name=Arn"`
 	Name *string `queryParam:"name=Name"`

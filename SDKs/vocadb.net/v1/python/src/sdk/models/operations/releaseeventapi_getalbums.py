@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class ReleaseEventAPIGetAlbumsPathParams:
-    event_id: int = field(default=None, metadata={'path_param': { 'field_name': 'eventId', 'style': 'simple', 'explode': False }})
+    event_id: int = field(metadata={'path_param': { 'field_name': 'eventId', 'style': 'simple', 'explode': False }})
     
 class ReleaseEventAPIGetAlbumsFieldsEnum(str, Enum):
     NONE = "None"
@@ -37,14 +38,14 @@ class ReleaseEventAPIGetAlbumsQueryParams:
 
 @dataclass
 class ReleaseEventAPIGetAlbumsRequest:
-    path_params: ReleaseEventAPIGetAlbumsPathParams = field(default=None)
-    query_params: ReleaseEventAPIGetAlbumsQueryParams = field(default=None)
+    path_params: ReleaseEventAPIGetAlbumsPathParams = field()
+    query_params: ReleaseEventAPIGetAlbumsQueryParams = field()
     
 
 @dataclass
 class ReleaseEventAPIGetAlbumsResponse:
+    content_type: str = field()
+    status_code: int = field()
     album_for_api_contracts: Optional[List[shared.AlbumForAPIContract]] = field(default=None)
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    body: Optional[bytes] = field(default=None)
     

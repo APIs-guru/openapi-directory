@@ -26,6 +26,8 @@ const (
 	CertificateAuthorityTypeEnumSubordinate     CertificateAuthorityTypeEnum = "SUBORDINATE"
 )
 
+// CertificateAuthority
+// A CertificateAuthority represents an individual Certificate Authority. A CertificateAuthority can be used to create Certificates.
 type CertificateAuthority struct {
 	AccessUrls                *AccessUrls                    `json:"accessUrls,omitempty"`
 	CaCertificateDescriptions []CertificateDescription       `json:"caCertificateDescriptions,omitempty"`
@@ -45,4 +47,20 @@ type CertificateAuthority struct {
 	Tier                      *CertificateAuthorityTierEnum  `json:"tier,omitempty"`
 	Type                      *CertificateAuthorityTypeEnum  `json:"type,omitempty"`
 	UpdateTime                *string                        `json:"updateTime,omitempty"`
+}
+
+// CertificateAuthorityInput
+// A CertificateAuthority represents an individual Certificate Authority. A CertificateAuthority can be used to create Certificates.
+type CertificateAuthorityInput struct {
+	AccessUrls        *AccessUrls                   `json:"accessUrls,omitempty"`
+	CertificatePolicy *CertificateAuthorityPolicy   `json:"certificatePolicy,omitempty"`
+	Config            *CertificateConfig            `json:"config,omitempty"`
+	GcsBucket         *string                       `json:"gcsBucket,omitempty"`
+	IssuingOptions    *IssuingOptions               `json:"issuingOptions,omitempty"`
+	KeySpec           *KeyVersionSpec               `json:"keySpec,omitempty"`
+	Labels            map[string]string             `json:"labels,omitempty"`
+	Lifetime          *string                       `json:"lifetime,omitempty"`
+	SubordinateConfig *SubordinateConfig            `json:"subordinateConfig,omitempty"`
+	Tier              *CertificateAuthorityTierEnum `json:"tier,omitempty"`
+	Type              *CertificateAuthorityTypeEnum `json:"type,omitempty"`
 }

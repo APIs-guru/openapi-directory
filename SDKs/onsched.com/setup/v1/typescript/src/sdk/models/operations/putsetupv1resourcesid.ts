@@ -1,56 +1,57 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class PutSetupV1ResourcesIdPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" })
   id: string;
 }
 
 
 export class PutSetupV1ResourcesIdQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=googleAuthReturnUrl" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=googleAuthReturnUrl" })
   googleAuthReturnUrl?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=outlookAuthReturnUrl" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=outlookAuthReturnUrl" })
   outlookAuthReturnUrl?: string;
 }
 
 
 export class PutSetupV1ResourcesIdRequests extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/*+json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/*+json" })
   resourceUpdateModel?: shared.ResourceUpdateModel;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   resourceUpdateModel1?: shared.ResourceUpdateModel;
 
-  @Metadata({ data: "request, media_type=application/json-patch+json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json-patch+json" })
   resourceUpdateModel2?: shared.ResourceUpdateModel;
 
-  @Metadata({ data: "request, media_type=text/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=text/json" })
   resourceUpdateModel3?: shared.ResourceUpdateModel;
 }
 
 
 export class PutSetupV1ResourcesIdRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: PutSetupV1ResourcesIdPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: PutSetupV1ResourcesIdQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   request?: PutSetupV1ResourcesIdRequests;
 }
 
 
 export class PutSetupV1ResourcesIdResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   resourceViewModel?: shared.ResourceViewModel;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

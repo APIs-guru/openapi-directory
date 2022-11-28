@@ -1,34 +1,35 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ResetPasswordPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=userId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=userId" })
   userId: string;
 }
 
 
 export class ResetPasswordQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=sendEmail" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sendEmail" })
   sendEmail?: string;
 }
 
 
 export class ResetPasswordRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: ResetPasswordPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: ResetPasswordQueryParams;
 
-  @Metadata({ data: "request, media_type=text/plain" })
+  @SpeakeasyMetadata({ data: "request, media_type=text/plain" })
   request?: Uint8Array;
 }
 
 
 export class ResetPasswordResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

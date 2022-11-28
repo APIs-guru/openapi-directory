@@ -9,6 +9,8 @@ const (
 	GoogleAnalyticsAdminV1alphaAudienceDimensionOrMetricFilterNumericFilterOperationEnumGreaterThan          GoogleAnalyticsAdminV1alphaAudienceDimensionOrMetricFilterNumericFilterOperationEnum = "GREATER_THAN"
 )
 
+// GoogleAnalyticsAdminV1alphaAudienceDimensionOrMetricFilterNumericFilter
+// A filter for numeric or date values on a dimension or metric.
 type GoogleAnalyticsAdminV1alphaAudienceDimensionOrMetricFilterNumericFilter struct {
 	Operation *GoogleAnalyticsAdminV1alphaAudienceDimensionOrMetricFilterNumericFilterOperationEnum `json:"operation,omitempty"`
 	Value     *GoogleAnalyticsAdminV1alphaAudienceDimensionOrMetricFilterNumericValue               `json:"value,omitempty"`

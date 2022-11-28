@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Charity } from "./charity";
 import { PricingSummary } from "./pricingsummary";
 import { Product } from "./product";
+
 
 
 // ItemDraft
@@ -9,21 +10,21 @@ import { Product } from "./product";
  * The type that defines the fields for the listing details.
 **/
 export class ItemDraft extends SpeakeasyBase {
-  @Metadata({ data: "json, name=categoryId" })
+  @SpeakeasyMetadata({ data: "json, name=categoryId" })
   categoryId?: string;
 
-  @Metadata({ data: "json, name=charity" })
+  @SpeakeasyMetadata({ data: "json, name=charity" })
   charity?: Charity;
 
-  @Metadata({ data: "json, name=condition" })
+  @SpeakeasyMetadata({ data: "json, name=condition" })
   condition?: string;
 
-  @Metadata({ data: "json, name=format" })
+  @SpeakeasyMetadata({ data: "json, name=format" })
   format?: string;
 
-  @Metadata({ data: "json, name=pricingSummary" })
+  @SpeakeasyMetadata({ data: "json, name=pricingSummary" })
   pricingSummary?: PricingSummary;
 
-  @Metadata({ data: "json, name=product" })
+  @SpeakeasyMetadata({ data: "json, name=product" })
   product?: Product;
 }

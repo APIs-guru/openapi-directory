@@ -37,10 +37,8 @@ type GetActionsQueryParams struct {
 	Status *GetActionsStatusParameterStatusEnum `queryParam:"style=form,explode=true,name=status"`
 }
 
-type GetActionsRequest struct {
-	QueryParams GetActionsQueryParams
-}
-
+// GetActionsActionsResponseActionError
+// Error message for the Action if error occurred, otherwise null
 type GetActionsActionsResponseActionError struct {
 	Code    string `json:"code"`
 	Message string `json:"message"`
@@ -86,6 +84,10 @@ type GetActionsActionsResponseMeta struct {
 type GetActionsActionsResponse struct {
 	Actions []GetActionsActionsResponseAction `json:"actions"`
 	Meta    *GetActionsActionsResponseMeta    `json:"meta,omitempty"`
+}
+
+type GetActionsRequest struct {
+	QueryParams GetActionsQueryParams
 }
 
 type GetActionsResponse struct {

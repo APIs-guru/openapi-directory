@@ -1,5 +1,7 @@
 package shared
 
+// VoiceOfMerchantState
+// Response message for VoiceOfMerchant.GetVoiceOfMerchantState.
 type VoiceOfMerchantState struct {
 	ComplyWithGuidelines     *ComplyWithGuidelines  `json:"complyWithGuidelines,omitempty"`
 	HasBusinessAuthority     *bool                  `json:"hasBusinessAuthority,omitempty"`

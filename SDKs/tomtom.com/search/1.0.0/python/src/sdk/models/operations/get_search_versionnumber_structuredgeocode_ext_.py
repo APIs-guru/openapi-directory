@@ -1,17 +1,18 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class GetSearchVersionNumberStructuredGeocodeExtPathParams:
-    ext: shared.ExtEnum = field(default=None, metadata={'path_param': { 'field_name': 'ext', 'style': 'simple', 'explode': False }})
-    version_number: int = field(default=None, metadata={'path_param': { 'field_name': 'versionNumber', 'style': 'simple', 'explode': False }})
+    ext: shared.ExtEnum = field(metadata={'path_param': { 'field_name': 'ext', 'style': 'simple', 'explode': False }})
+    version_number: int = field(metadata={'path_param': { 'field_name': 'versionNumber', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetSearchVersionNumberStructuredGeocodeExtQueryParams:
-    country_code: str = field(default=None, metadata={'query_param': { 'field_name': 'countryCode', 'style': 'form', 'explode': True }})
+    country_code: str = field(metadata={'query_param': { 'field_name': 'countryCode', 'style': 'form', 'explode': True }})
     country_secondary_subdivision: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'countrySecondarySubdivision', 'style': 'form', 'explode': True }})
     country_subdivision: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'countrySubdivision', 'style': 'form', 'explode': True }})
     country_tertiary_subdivision: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'countryTertiarySubdivision', 'style': 'form', 'explode': True }})
@@ -29,12 +30,12 @@ class GetSearchVersionNumberStructuredGeocodeExtQueryParams:
 
 @dataclass
 class GetSearchVersionNumberStructuredGeocodeExtRequest:
-    path_params: GetSearchVersionNumberStructuredGeocodeExtPathParams = field(default=None)
-    query_params: GetSearchVersionNumberStructuredGeocodeExtQueryParams = field(default=None)
+    path_params: GetSearchVersionNumberStructuredGeocodeExtPathParams = field()
+    query_params: GetSearchVersionNumberStructuredGeocodeExtQueryParams = field()
     
 
 @dataclass
 class GetSearchVersionNumberStructuredGeocodeExtResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

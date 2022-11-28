@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AwsEc2SecurityGroupIpRange
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A range of IPv4 addresses.
 **/
 export class AwsEc2SecurityGroupIpRange extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CidrIp" })
+  @SpeakeasyMetadata({ data: "json, name=CidrIp" })
   cidrIp?: string;
 }

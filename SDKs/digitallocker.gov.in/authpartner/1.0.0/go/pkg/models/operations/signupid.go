@@ -8,11 +8,6 @@ type SignUpIDSecurity struct {
 	Oauthsecurity shared.SchemeOauthsecurity `security:"scheme,type=oauth2"`
 }
 
-type SignUpIDRequest struct {
-	Request  *interface{} `request:"mediaType=multipart/form-data"`
-	Security SignUpIDSecurity
-}
-
 type SignUpID401ApplicationJSON struct {
 	Error            *string `json:"error,omitempty"`
 	ErrorDescription *string `json:"error_description,omitempty"`
@@ -21,6 +16,11 @@ type SignUpID401ApplicationJSON struct {
 type SignUpID500ApplicationJSON struct {
 	Error            *interface{} `json:"error,omitempty"`
 	ErrorDescription *interface{} `json:"error_description,omitempty"`
+}
+
+type SignUpIDRequest struct {
+	Request  *interface{} `request:"mediaType=multipart/form-data"`
+	Security SignUpIDSecurity
 }
 
 type SignUpIDResponse struct {

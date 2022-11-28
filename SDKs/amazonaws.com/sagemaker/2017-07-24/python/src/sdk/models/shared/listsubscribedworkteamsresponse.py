@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import subscribedworkteam
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ListSubscribedWorkteamsResponse:
-    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'NextToken' }})
-    subscribed_workteams: List[subscribedworkteam.SubscribedWorkteam] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'SubscribedWorkteams' }})
+    subscribed_workteams: List[SubscribedWorkteam] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('SubscribedWorkteams') }})
+    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('NextToken') }})
     

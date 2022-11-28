@@ -33,6 +33,8 @@ const (
 	NiResponseJSONAdvancedSyncValidNumberEnumInferredNotValid NiResponseJSONAdvancedSyncValidNumberEnum = "inferred_not_valid"
 )
 
+// NiResponseJSONAdvancedSync
+// Advanced Response (sync)
 type NiResponseJSONAdvancedSync struct {
 	CallerIdentity            *NiCallerIdentity                          `json:"caller_identity,omitempty"`
 	CountryCode               string                                     `json:"country_code"`

@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DocumentInputConfig } from "./documentinputconfig";
 import { DocumentOutputConfig } from "./documentoutputconfig";
 import { TranslateTextGlossaryConfig } from "./translatetextglossaryconfig";
+
 
 
 // TranslateDocumentRequest
@@ -9,27 +10,30 @@ import { TranslateTextGlossaryConfig } from "./translatetextglossaryconfig";
  * A document translation request.
 **/
 export class TranslateDocumentRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=customizedAttribution" })
+  @SpeakeasyMetadata({ data: "json, name=customizedAttribution" })
   customizedAttribution?: string;
 
-  @Metadata({ data: "json, name=documentInputConfig" })
+  @SpeakeasyMetadata({ data: "json, name=documentInputConfig" })
   documentInputConfig?: DocumentInputConfig;
 
-  @Metadata({ data: "json, name=documentOutputConfig" })
+  @SpeakeasyMetadata({ data: "json, name=documentOutputConfig" })
   documentOutputConfig?: DocumentOutputConfig;
 
-  @Metadata({ data: "json, name=glossaryConfig" })
+  @SpeakeasyMetadata({ data: "json, name=glossaryConfig" })
   glossaryConfig?: TranslateTextGlossaryConfig;
 
-  @Metadata({ data: "json, name=labels" })
+  @SpeakeasyMetadata({ data: "json, name=isTranslateNativePdfOnly" })
+  isTranslateNativePdfOnly?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=labels" })
   labels?: Map<string, string>;
 
-  @Metadata({ data: "json, name=model" })
+  @SpeakeasyMetadata({ data: "json, name=model" })
   model?: string;
 
-  @Metadata({ data: "json, name=sourceLanguageCode" })
+  @SpeakeasyMetadata({ data: "json, name=sourceLanguageCode" })
   sourceLanguageCode?: string;
 
-  @Metadata({ data: "json, name=targetLanguageCode" })
+  @SpeakeasyMetadata({ data: "json, name=targetLanguageCode" })
   targetLanguageCode?: string;
 }

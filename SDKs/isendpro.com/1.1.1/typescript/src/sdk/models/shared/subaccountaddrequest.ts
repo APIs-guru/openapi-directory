@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum SubaccountAddRequestSubAccountEditEnum {
     AddAccount = "addAccount"
@@ -6,15 +7,15 @@ export enum SubaccountAddRequestSubAccountEditEnum {
 
 
 export class SubaccountAddRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=keyid" })
+  @SpeakeasyMetadata({ data: "json, name=keyid" })
   keyid: string;
 
-  @Metadata({ data: "json, name=subAccountEdit" })
+  @SpeakeasyMetadata({ data: "json, name=subAccountEdit" })
   subAccountEdit: SubaccountAddRequestSubAccountEditEnum;
 
-  @Metadata({ data: "json, name=subAccountLogin" })
+  @SpeakeasyMetadata({ data: "json, name=subAccountLogin" })
   subAccountLogin: string;
 
-  @Metadata({ data: "json, name=subAccountPassword" })
+  @SpeakeasyMetadata({ data: "json, name=subAccountPassword" })
   subAccountPassword: string;
 }

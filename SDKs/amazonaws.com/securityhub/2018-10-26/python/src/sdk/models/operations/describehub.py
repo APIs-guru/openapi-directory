@@ -1,4 +1,7 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
@@ -21,18 +24,18 @@ class DescribeHubHeaders:
 
 @dataclass
 class DescribeHubRequest:
-    query_params: DescribeHubQueryParams = field(default=None)
-    headers: DescribeHubHeaders = field(default=None)
+    headers: DescribeHubHeaders = field()
+    query_params: DescribeHubQueryParams = field()
     
 
 @dataclass
 class DescribeHubResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     describe_hub_response: Optional[shared.DescribeHubResponse] = field(default=None)
     internal_exception: Optional[Any] = field(default=None)
     invalid_access_exception: Optional[Any] = field(default=None)
     invalid_input_exception: Optional[Any] = field(default=None)
     limit_exceeded_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

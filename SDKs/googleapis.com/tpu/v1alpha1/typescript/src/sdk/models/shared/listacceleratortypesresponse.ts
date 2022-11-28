@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AcceleratorType } from "./acceleratortype";
+
 
 
 // ListAcceleratorTypesResponse
@@ -8,12 +8,12 @@ import { AcceleratorType } from "./acceleratortype";
  * Response for ListAcceleratorTypes.
 **/
 export class ListAcceleratorTypesResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=acceleratorTypes", elemType: shared.AcceleratorType })
+  @SpeakeasyMetadata({ data: "json, name=acceleratorTypes", elemType: AcceleratorType })
   acceleratorTypes?: AcceleratorType[];
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 
-  @Metadata({ data: "json, name=unreachable" })
+  @SpeakeasyMetadata({ data: "json, name=unreachable" })
   unreachable?: string[];
 }

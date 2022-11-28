@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { Money } from "./money";
 /**
  * The price rate indicating starting usage and its corresponding price.

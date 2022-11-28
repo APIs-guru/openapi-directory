@@ -10,14 +10,14 @@ class GetRulesQueryParams:
 
 @dataclass
 class GetRulesRequest:
-    query_params: GetRulesQueryParams = field(default=None)
+    query_params: GetRulesQueryParams = field()
     
 
 @dataclass
 class GetRulesResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error: Optional[Any] = field(default=None)
     get_rules_response: Optional[shared.GetRulesResponse] = field(default=None)
     problem: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

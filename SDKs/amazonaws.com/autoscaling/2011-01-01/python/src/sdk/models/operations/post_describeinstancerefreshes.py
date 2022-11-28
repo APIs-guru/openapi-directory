@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostDescribeInstanceRefreshesActionEnum(str, Enum):
     DESCRIBE_INSTANCE_REFRESHES = "DescribeInstanceRefreshes"
@@ -10,8 +14,8 @@ class PostDescribeInstanceRefreshesVersionEnum(str, Enum):
 
 @dataclass
 class PostDescribeInstanceRefreshesQueryParams:
-    action: PostDescribeInstanceRefreshesActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostDescribeInstanceRefreshesVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostDescribeInstanceRefreshesActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostDescribeInstanceRefreshesVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostDescribeInstanceRefreshesHeaders:
 
 @dataclass
 class PostDescribeInstanceRefreshesRequest:
-    query_params: PostDescribeInstanceRefreshesQueryParams = field(default=None)
-    headers: PostDescribeInstanceRefreshesHeaders = field(default=None)
+    headers: PostDescribeInstanceRefreshesHeaders = field()
+    query_params: PostDescribeInstanceRefreshesQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostDescribeInstanceRefreshesResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

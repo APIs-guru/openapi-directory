@@ -1,35 +1,36 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class PostSetupV1BusinessusersRequests extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/*+json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/*+json" })
   businessUserInputModel?: shared.BusinessUserInputModel;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   businessUserInputModel1?: shared.BusinessUserInputModel;
 
-  @Metadata({ data: "request, media_type=application/json-patch+json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json-patch+json" })
   businessUserInputModel2?: shared.BusinessUserInputModel;
 
-  @Metadata({ data: "request, media_type=text/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=text/json" })
   businessUserInputModel3?: shared.BusinessUserInputModel;
 }
 
 
 export class PostSetupV1BusinessusersRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   request?: PostSetupV1BusinessusersRequests;
 }
 
 
 export class PostSetupV1BusinessusersResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   businessUserViewModel?: shared.BusinessUserViewModel;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

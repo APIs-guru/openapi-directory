@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class PalcsRequestBodyCertificateParameters extends SpeakeasyBase {
     applicationNo: string;
@@ -16,10 +16,6 @@ export declare class PalcsRequestBody extends SpeakeasyBase {
 export declare class PalcsSecurity extends SpeakeasyBase {
     apiKey: shared.SchemeApiKey;
     clientId: shared.SchemeClientId;
-}
-export declare class PalcsRequest extends SpeakeasyBase {
-    request?: PalcsRequestBody;
-    security: PalcsSecurity;
 }
 export declare enum Palcs400ApplicationJsonErrorEnum {
     MissingParameter = "missing_parameter",
@@ -102,6 +98,10 @@ export declare enum Palcs504ApplicationJsonErrorDescriptionEnum {
 export declare class Palcs504ApplicationJson extends SpeakeasyBase {
     error?: Palcs504ApplicationJsonErrorEnum;
     errorDescription?: Palcs504ApplicationJsonErrorDescriptionEnum;
+}
+export declare class PalcsRequest extends SpeakeasyBase {
+    request?: PalcsRequestBody;
+    security: PalcsSecurity;
 }
 export declare class PalcsResponse extends SpeakeasyBase {
     contentType: string;

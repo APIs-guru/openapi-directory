@@ -1,10 +1,15 @@
 from dataclasses import dataclass, field
 from dataclasses_json import dataclass_json
-from . import devicetype
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class GetDeviceResponse:
-    device: devicetype.DeviceType = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Device' }})
+    r"""GetDeviceResponse
+    Gets the device response.
+    """
+    
+    device: DeviceType = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Device') }})
     

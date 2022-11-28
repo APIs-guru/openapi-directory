@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SocketAddress } from "./socketaddress";
 import { EndpointStatusEnum } from "./endpointstatusenum";
 // DataflowEndpoint
@@ -35,19 +35,19 @@ var DataflowEndpoint = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=address" }),
+        SpeakeasyMetadata({ data: "json, name=address" }),
         __metadata("design:type", SocketAddress)
     ], DataflowEndpoint.prototype, "address", void 0);
     __decorate([
-        Metadata({ data: "json, name=mtu" }),
+        SpeakeasyMetadata({ data: "json, name=mtu" }),
         __metadata("design:type", Number)
     ], DataflowEndpoint.prototype, "mtu", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], DataflowEndpoint.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=status" }),
+        SpeakeasyMetadata({ data: "json, name=status" }),
         __metadata("design:type", String)
     ], DataflowEndpoint.prototype, "status", void 0);
     return DataflowEndpoint;

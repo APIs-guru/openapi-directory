@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostDeleteNetworkInterfaceActionEnum(str, Enum):
     DELETE_NETWORK_INTERFACE = "DeleteNetworkInterface"
@@ -10,8 +14,8 @@ class PostDeleteNetworkInterfaceVersionEnum(str, Enum):
 
 @dataclass
 class PostDeleteNetworkInterfaceQueryParams:
-    action: PostDeleteNetworkInterfaceActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostDeleteNetworkInterfaceVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostDeleteNetworkInterfaceActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostDeleteNetworkInterfaceVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,13 +31,13 @@ class PostDeleteNetworkInterfaceHeaders:
 
 @dataclass
 class PostDeleteNetworkInterfaceRequest:
-    query_params: PostDeleteNetworkInterfaceQueryParams = field(default=None)
-    headers: PostDeleteNetworkInterfaceHeaders = field(default=None)
+    headers: PostDeleteNetworkInterfaceHeaders = field()
+    query_params: PostDeleteNetworkInterfaceQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostDeleteNetworkInterfaceResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

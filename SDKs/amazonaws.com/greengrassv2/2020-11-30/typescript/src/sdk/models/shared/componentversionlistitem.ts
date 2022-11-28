@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ComponentVersionListItem
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Contains information about a component version in a list.
 **/
 export class ComponentVersionListItem extends SpeakeasyBase {
-  @Metadata({ data: "json, name=arn" })
+  @SpeakeasyMetadata({ data: "json, name=arn" })
   arn?: string;
 
-  @Metadata({ data: "json, name=componentName" })
+  @SpeakeasyMetadata({ data: "json, name=componentName" })
   componentName?: string;
 
-  @Metadata({ data: "json, name=componentVersion" })
+  @SpeakeasyMetadata({ data: "json, name=componentVersion" })
   componentVersion?: string;
 }

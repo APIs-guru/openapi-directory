@@ -1,7 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import timeofday
+from sdk import utils
+from . import *
 
 class DataSourceRefreshWeeklyScheduleDaysOfWeekEnum(str, Enum):
     DAY_OF_WEEK_UNSPECIFIED = "DAY_OF_WEEK_UNSPECIFIED"
@@ -17,6 +19,10 @@ class DataSourceRefreshWeeklyScheduleDaysOfWeekEnum(str, Enum):
 @dataclass_json
 @dataclass
 class DataSourceRefreshWeeklySchedule:
-    days_of_week: Optional[List[DataSourceRefreshWeeklyScheduleDaysOfWeekEnum]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'daysOfWeek' }})
-    start_time: Optional[timeofday.TimeOfDay] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'startTime' }})
+    r"""DataSourceRefreshWeeklySchedule
+    A weekly schedule for data to refresh on specific days in a given time interval.
+    """
+    
+    days_of_week: Optional[List[DataSourceRefreshWeeklyScheduleDaysOfWeekEnum]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('daysOfWeek') }})
+    start_time: Optional[TimeOfDay] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('startTime') }})
     

@@ -1,6 +1,7 @@
 
 
+
 export enum SuperFundTypeEnum {
-    Regulated = "REGULATED"
-,    Smsf = "SMSF"
+    Regulated = "REGULATED",
+    Smsf = "SMSF"
 }

@@ -19,6 +19,8 @@ const (
 	CommuteFilterRoadTrafficEnumBusyHour               CommuteFilterRoadTrafficEnum = "BUSY_HOUR"
 )
 
+// CommuteFilter
+// Parameters needed for commute search.
 type CommuteFilter struct {
 	AllowImpreciseAddresses *bool                           `json:"allowImpreciseAddresses,omitempty"`
 	CommuteMethod           *CommuteFilterCommuteMethodEnum `json:"commuteMethod,omitempty"`

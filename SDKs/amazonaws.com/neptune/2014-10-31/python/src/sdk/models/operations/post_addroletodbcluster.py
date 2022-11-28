@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostAddRoleToDbClusterActionEnum(str, Enum):
     ADD_ROLE_TO_DB_CLUSTER = "AddRoleToDBCluster"
@@ -10,8 +14,8 @@ class PostAddRoleToDbClusterVersionEnum(str, Enum):
 
 @dataclass
 class PostAddRoleToDbClusterQueryParams:
-    action: PostAddRoleToDbClusterActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostAddRoleToDbClusterVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostAddRoleToDbClusterActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostAddRoleToDbClusterVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostAddRoleToDbClusterHeaders:
 
 @dataclass
 class PostAddRoleToDbClusterRequest:
-    query_params: PostAddRoleToDbClusterQueryParams = field(default=None)
-    headers: PostAddRoleToDbClusterHeaders = field(default=None)
+    headers: PostAddRoleToDbClusterHeaders = field()
+    query_params: PostAddRoleToDbClusterQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostAddRoleToDbClusterResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

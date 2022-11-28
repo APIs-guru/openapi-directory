@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class SignJwtResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=keyId" })
+  @SpeakeasyMetadata({ data: "json, name=keyId" })
   keyId?: string;
 
-  @Metadata({ data: "json, name=signedJwt" })
+  @SpeakeasyMetadata({ data: "json, name=signedJwt" })
   signedJwt?: string;
 }

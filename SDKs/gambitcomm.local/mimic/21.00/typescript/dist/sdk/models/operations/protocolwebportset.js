@@ -22,26 +22,26 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var ProtocolWebPortSetPathParams = /** @class */ (function (_super) {
     __extends(ProtocolWebPortSetPathParams, _super);
     function ProtocolWebPortSetPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=agentNum" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=agentNum" }),
         __metadata("design:type", Number)
     ], ProtocolWebPortSetPathParams.prototype, "agentNum", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=port" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=port" }),
         __metadata("design:type", Number)
     ], ProtocolWebPortSetPathParams.prototype, "port", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=protocol" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=protocol" }),
         __metadata("design:type", String)
     ], ProtocolWebPortSetPathParams.prototype, "protocol", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=version" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=version" }),
         __metadata("design:type", String)
     ], ProtocolWebPortSetPathParams.prototype, "version", void 0);
     return ProtocolWebPortSetPathParams;
@@ -53,7 +53,7 @@ var ProtocolWebPortSetRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ProtocolWebPortSetPathParams)
     ], ProtocolWebPortSetRequest.prototype, "pathParams", void 0);
     return ProtocolWebPortSetRequest;
@@ -65,15 +65,15 @@ var ProtocolWebPortSetResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], ProtocolWebPortSetResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], ProtocolWebPortSetResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], ProtocolWebPortSetResponse.prototype, "protocolWebPortSet200ApplicationJsonString", void 0);
     return ProtocolWebPortSetResponse;

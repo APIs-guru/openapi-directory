@@ -1,15 +1,16 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DebugOptions } from "./debugoptions";
 import { Schema } from "./schema";
 
 
+
 export class UpdateSchemaRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=debugOptions" })
+  @SpeakeasyMetadata({ data: "json, name=debugOptions" })
   debugOptions?: DebugOptions;
 
-  @Metadata({ data: "json, name=schema" })
+  @SpeakeasyMetadata({ data: "json, name=schema" })
   schema?: Schema;
 
-  @Metadata({ data: "json, name=validateOnly" })
+  @SpeakeasyMetadata({ data: "json, name=validateOnly" })
   validateOnly?: boolean;
 }

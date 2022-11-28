@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class UpdatePlaceIndexResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=IndexArn" })
+  @SpeakeasyMetadata({ data: "json, name=IndexArn" })
   indexArn: string;
 
-  @Metadata({ data: "json, name=IndexName" })
+  @SpeakeasyMetadata({ data: "json, name=IndexName" })
   indexName: string;
 
-  @Metadata({ data: "json, name=UpdateTime" })
+  @SpeakeasyMetadata({ data: "json, name=UpdateTime" })
   updateTime: Date;
 }

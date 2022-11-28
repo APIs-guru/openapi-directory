@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // SalesTaxJurisdiction
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A unique ID for a sales tax jurisdiction.
 **/
 export class SalesTaxJurisdiction extends SpeakeasyBase {
-  @Metadata({ data: "json, name=salesTaxJurisdictionId" })
+  @SpeakeasyMetadata({ data: "json, name=salesTaxJurisdictionId" })
   salesTaxJurisdictionId?: string;
 }

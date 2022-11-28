@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ConsumedCapacity } from "./consumedcapacity";
 import { AttributeValue } from "./attributevalue";
+
 
 
 // GetItemOutput
@@ -9,9 +9,9 @@ import { AttributeValue } from "./attributevalue";
  * Represents the output of a <code>GetItem</code> operation.
 **/
 export class GetItemOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ConsumedCapacity" })
+  @SpeakeasyMetadata({ data: "json, name=ConsumedCapacity" })
   consumedCapacity?: ConsumedCapacity;
 
-  @Metadata({ data: "json, name=Item", elemType: shared.AttributeValue })
+  @SpeakeasyMetadata({ data: "json, name=Item", elemType: AttributeValue })
   item?: Map<string, AttributeValue>;
 }

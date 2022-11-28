@@ -1,21 +1,22 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class UpdateNetworkApplianceSecurityIntrusionPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=networkId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=networkId" })
   networkId: string;
 }
 
 export enum UpdateNetworkApplianceSecurityIntrusionRequestBodyIdsRulesetsEnum {
-    Connectivity = "connectivity"
-,    Balanced = "balanced"
-,    Security = "security"
+    Connectivity = "connectivity",
+    Balanced = "balanced",
+    Security = "security"
 }
 
 export enum UpdateNetworkApplianceSecurityIntrusionRequestBodyModeEnum {
-    Prevention = "prevention"
-,    Detection = "detection"
-,    Disabled = "disabled"
+    Prevention = "prevention",
+    Detection = "detection",
+    Disabled = "disabled"
 }
 
 
@@ -24,45 +25,45 @@ export enum UpdateNetworkApplianceSecurityIntrusionRequestBodyModeEnum {
  * Set the included/excluded networks from the intrusion engine (optional - omitting will leave current config unchanged). This is available only in 'passthrough' mode
 **/
 export class UpdateNetworkApplianceSecurityIntrusionRequestBodyProtectedNetworks extends SpeakeasyBase {
-  @Metadata({ data: "json, name=excludedCidr" })
+  @SpeakeasyMetadata({ data: "json, name=excludedCidr" })
   excludedCidr?: string[];
 
-  @Metadata({ data: "json, name=includedCidr" })
+  @SpeakeasyMetadata({ data: "json, name=includedCidr" })
   includedCidr?: string[];
 
-  @Metadata({ data: "json, name=useDefault" })
+  @SpeakeasyMetadata({ data: "json, name=useDefault" })
   useDefault?: boolean;
 }
 
 
 export class UpdateNetworkApplianceSecurityIntrusionRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=idsRulesets" })
+  @SpeakeasyMetadata({ data: "json, name=idsRulesets" })
   idsRulesets?: UpdateNetworkApplianceSecurityIntrusionRequestBodyIdsRulesetsEnum;
 
-  @Metadata({ data: "json, name=mode" })
+  @SpeakeasyMetadata({ data: "json, name=mode" })
   mode?: UpdateNetworkApplianceSecurityIntrusionRequestBodyModeEnum;
 
-  @Metadata({ data: "json, name=protectedNetworks" })
+  @SpeakeasyMetadata({ data: "json, name=protectedNetworks" })
   protectedNetworks?: UpdateNetworkApplianceSecurityIntrusionRequestBodyProtectedNetworks;
 }
 
 
 export class UpdateNetworkApplianceSecurityIntrusionRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: UpdateNetworkApplianceSecurityIntrusionPathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request?: UpdateNetworkApplianceSecurityIntrusionRequestBody;
 }
 
 
 export class UpdateNetworkApplianceSecurityIntrusionResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   updateNetworkApplianceSecurityIntrusion200ApplicationJsonObject?: Map<string, any>;
 }

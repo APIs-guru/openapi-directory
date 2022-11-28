@@ -1,10 +1,15 @@
 from dataclasses import dataclass, field
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass_json
 @dataclass
 class FetchPageRequest:
-    next_page_token: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'NextPageToken' }})
-    transaction_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'TransactionId' }})
+    r"""FetchPageRequest
+    Specifies the details of the page to be fetched.
+    """
+    
+    next_page_token: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('NextPageToken') }})
+    transaction_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('TransactionId') }})
     

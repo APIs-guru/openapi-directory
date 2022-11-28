@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class TagmanagerAccountsContainersWorkspacesFoldersCreatePathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,21 +26,21 @@ class TagmanagerAccountsContainersWorkspacesFoldersCreateQueryParams:
 
 @dataclass
 class TagmanagerAccountsContainersWorkspacesFoldersCreateSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class TagmanagerAccountsContainersWorkspacesFoldersCreateRequest:
-    path_params: TagmanagerAccountsContainersWorkspacesFoldersCreatePathParams = field(default=None)
-    query_params: TagmanagerAccountsContainersWorkspacesFoldersCreateQueryParams = field(default=None)
+    path_params: TagmanagerAccountsContainersWorkspacesFoldersCreatePathParams = field()
+    query_params: TagmanagerAccountsContainersWorkspacesFoldersCreateQueryParams = field()
+    security: TagmanagerAccountsContainersWorkspacesFoldersCreateSecurity = field()
     request: Optional[shared.Folder] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: TagmanagerAccountsContainersWorkspacesFoldersCreateSecurity = field(default=None)
     
 
 @dataclass
 class TagmanagerAccountsContainersWorkspacesFoldersCreateResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     folder: Optional[shared.Folder] = field(default=None)
-    status_code: int = field(default=None)
     

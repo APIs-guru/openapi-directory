@@ -1,5 +1,25 @@
 package shared
 
+type GoogleCloudApigeeV1CustomReportInput struct {
+	ChartType   *string                                 `json:"chartType,omitempty"`
+	Comments    []string                                `json:"comments,omitempty"`
+	Dimensions  []string                                `json:"dimensions,omitempty"`
+	DisplayName *string                                 `json:"displayName,omitempty"`
+	Filter      *string                                 `json:"filter,omitempty"`
+	FromTime    *string                                 `json:"fromTime,omitempty"`
+	Limit       *string                                 `json:"limit,omitempty"`
+	Metrics     []GoogleCloudApigeeV1CustomReportMetric `json:"metrics,omitempty"`
+	Name        *string                                 `json:"name,omitempty"`
+	Offset      *string                                 `json:"offset,omitempty"`
+	Properties  []GoogleCloudApigeeV1ReportProperty     `json:"properties,omitempty"`
+	SortByCols  []string                                `json:"sortByCols,omitempty"`
+	SortOrder   *string                                 `json:"sortOrder,omitempty"`
+	Tags        []string                                `json:"tags,omitempty"`
+	TimeUnit    *string                                 `json:"timeUnit,omitempty"`
+	ToTime      *string                                 `json:"toTime,omitempty"`
+	Topk        *string                                 `json:"topk,omitempty"`
+}
+
 type GoogleCloudApigeeV1CustomReport struct {
 	ChartType      *string                                 `json:"chartType,omitempty"`
 	Comments       []string                                `json:"comments,omitempty"`

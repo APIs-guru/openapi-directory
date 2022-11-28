@@ -1,11 +1,15 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class GetVodSeasonsPathParams:
-    ondemand_id: float = field(default=None, metadata={'path_param': { 'field_name': 'ondemand_id', 'style': 'simple', 'explode': False }})
+    ondemand_id: float = field(metadata={'path_param': { 'field_name': 'ondemand_id', 'style': 'simple', 'explode': False }})
     
 class GetVodSeasonsDirectionEnum(str, Enum):
     ASC = "asc"
@@ -30,14 +34,14 @@ class GetVodSeasonsQueryParams:
 
 @dataclass
 class GetVodSeasonsRequest:
-    path_params: GetVodSeasonsPathParams = field(default=None)
-    query_params: GetVodSeasonsQueryParams = field(default=None)
+    path_params: GetVodSeasonsPathParams = field()
+    query_params: GetVodSeasonsQueryParams = field()
     
 
 @dataclass
 class GetVodSeasonsResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     legacy_error: Optional[shared.LegacyError] = field(default=None)
     on_demand_seasons: Optional[List[shared.OnDemandSeason]] = field(default=None)
     

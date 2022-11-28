@@ -1,6 +1,7 @@
 
 
+
 export enum ApprovalStateEnum {
-    Approve = "APPROVE"
-,    Revoke = "REVOKE"
+    Approve = "APPROVE",
+    Revoke = "REVOKE"
 }

@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Definition } from "./definition";
+
 
 
 // MetadataHeader
@@ -8,9 +8,9 @@ import { Definition } from "./definition";
  * Type that defines the metadata header fields.
 **/
 export class MetadataHeader extends SpeakeasyBase {
-  @Metadata({ data: "json, name=key" })
+  @SpeakeasyMetadata({ data: "json, name=key" })
   key?: string;
 
-  @Metadata({ data: "json, name=metadataKeys", elemType: shared.Definition })
+  @SpeakeasyMetadata({ data: "json, name=metadataKeys", elemType: Definition })
   metadataKeys?: Definition[];
 }

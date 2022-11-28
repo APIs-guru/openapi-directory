@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostModifyNetworkInterfaceAttributeActionEnum(str, Enum):
     MODIFY_NETWORK_INTERFACE_ATTRIBUTE = "ModifyNetworkInterfaceAttribute"
@@ -10,8 +14,8 @@ class PostModifyNetworkInterfaceAttributeVersionEnum(str, Enum):
 
 @dataclass
 class PostModifyNetworkInterfaceAttributeQueryParams:
-    action: PostModifyNetworkInterfaceAttributeActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostModifyNetworkInterfaceAttributeVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostModifyNetworkInterfaceAttributeActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostModifyNetworkInterfaceAttributeVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,13 +31,13 @@ class PostModifyNetworkInterfaceAttributeHeaders:
 
 @dataclass
 class PostModifyNetworkInterfaceAttributeRequest:
-    query_params: PostModifyNetworkInterfaceAttributeQueryParams = field(default=None)
-    headers: PostModifyNetworkInterfaceAttributeHeaders = field(default=None)
+    headers: PostModifyNetworkInterfaceAttributeHeaders = field()
+    query_params: PostModifyNetworkInterfaceAttributeQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostModifyNetworkInterfaceAttributeResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

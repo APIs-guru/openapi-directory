@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class RemoveGroupPathParams:
-    group_id: int = field(default=None, metadata={'path_param': { 'field_name': 'group_id', 'style': 'simple', 'explode': False }})
+    group_id: int = field(metadata={'path_param': { 'field_name': 'group_id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -15,13 +15,13 @@ class RemoveGroupHeaders:
 
 @dataclass
 class RemoveGroupRequest:
-    path_params: RemoveGroupPathParams = field(default=None)
-    headers: RemoveGroupHeaders = field(default=None)
+    headers: RemoveGroupHeaders = field()
+    path_params: RemoveGroupPathParams = field()
     
 
 @dataclass
 class RemoveGroupResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error_response: Optional[shared.ErrorResponse] = field(default=None)
-    status_code: int = field(default=None)
     

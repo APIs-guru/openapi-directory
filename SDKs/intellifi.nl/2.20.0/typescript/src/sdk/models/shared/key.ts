@@ -1,25 +1,35 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
+
+
+export class KeyInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=is_read_only" })
+  isReadOnly?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=label" })
+  label?: string;
+}
 
 
 export class Key extends SpeakeasyBase {
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=is_read_only" })
+  @SpeakeasyMetadata({ data: "json, name=is_read_only" })
   isReadOnly?: boolean;
 
-  @Metadata({ data: "json, name=label" })
+  @SpeakeasyMetadata({ data: "json, name=label" })
   label?: string;
 
-  @Metadata({ data: "json, name=secret" })
+  @SpeakeasyMetadata({ data: "json, name=secret" })
   secret?: string;
 
-  @Metadata({ data: "json, name=time_created" })
+  @SpeakeasyMetadata({ data: "json, name=time_created" })
   timeCreated?: string;
 
-  @Metadata({ data: "json, name=time_updated" })
+  @SpeakeasyMetadata({ data: "json, name=time_updated" })
   timeUpdated?: string;
 
-  @Metadata({ data: "json, name=url" })
+  @SpeakeasyMetadata({ data: "json, name=url" })
   url?: string;
 }

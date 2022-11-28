@@ -1,50 +1,51 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class PutWebhooksWebhookIdPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=webhookId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=webhookId" })
   webhookId: string;
 }
 
 
 export class PutWebhooksWebhookIdRequests extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/*+json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/*+json" })
   webhookBaseInfo?: shared.WebhookBaseInfo;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   webhookBaseInfo1?: shared.WebhookBaseInfo;
 
-  @Metadata({ data: "request, media_type=application/json-patch+json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json-patch+json" })
   webhookBaseInfo2?: shared.WebhookBaseInfo;
 
-  @Metadata({ data: "request, media_type=text/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=text/json" })
   webhookBaseInfo3?: shared.WebhookBaseInfo;
 }
 
 
 export class PutWebhooksWebhookIdRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: PutWebhooksWebhookIdPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   request?: PutWebhooksWebhookIdRequests;
 }
 
 
 export class PutWebhooksWebhookIdResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   errorResponseContent?: shared.ErrorResponseContent;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   webhookInfo?: shared.WebhookInfo;
 }

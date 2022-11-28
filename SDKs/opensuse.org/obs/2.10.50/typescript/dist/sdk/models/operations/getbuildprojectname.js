@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetBuildProjectNamePathParams = /** @class */ (function (_super) {
     __extends(GetBuildProjectNamePathParams, _super);
@@ -30,7 +30,7 @@ var GetBuildProjectNamePathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=project_name" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=project_name" }),
         __metadata("design:type", String)
     ], GetBuildProjectNamePathParams.prototype, "projectName", void 0);
     return GetBuildProjectNamePathParams;
@@ -42,7 +42,7 @@ var GetBuildProjectNameSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=http;subtype=basic" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=basic" }),
         __metadata("design:type", shared.SchemeBasicAuthentication)
     ], GetBuildProjectNameSecurity.prototype, "basicAuthentication", void 0);
     return GetBuildProjectNameSecurity;
@@ -54,11 +54,11 @@ var GetBuildProjectNameRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetBuildProjectNamePathParams)
     ], GetBuildProjectNameRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetBuildProjectNameSecurity)
     ], GetBuildProjectNameRequest.prototype, "security", void 0);
     return GetBuildProjectNameRequest;
@@ -70,15 +70,15 @@ var GetBuildProjectNameResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], GetBuildProjectNameResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetBuildProjectNameResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetBuildProjectNameResponse.prototype, "statusCode", void 0);
     return GetBuildProjectNameResponse;

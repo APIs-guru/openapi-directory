@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class PostSetupV1ResourcesIDBlockPathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -18,13 +18,13 @@ class PostSetupV1ResourcesIDBlockRequests:
 
 @dataclass
 class PostSetupV1ResourcesIDBlockRequest:
-    path_params: PostSetupV1ResourcesIDBlockPathParams = field(default=None)
+    path_params: PostSetupV1ResourcesIDBlockPathParams = field()
     request: Optional[PostSetupV1ResourcesIDBlockRequests] = field(default=None)
     
 
 @dataclass
 class PostSetupV1ResourcesIDBlockResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     resource_block_view_model: Optional[shared.ResourceBlockViewModel] = field(default=None)
-    status_code: int = field(default=None)
     

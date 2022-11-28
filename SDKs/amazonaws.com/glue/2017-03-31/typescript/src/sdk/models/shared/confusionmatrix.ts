@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ConfusionMatrix
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * <p>The confusion matrix shows you what your transform is predicting accurately and what types of errors it is making.</p> <p>For more information, see <a href="https://en.wikipedia.org/wiki/Confusion_matrix">Confusion matrix</a> in Wikipedia.</p>
 **/
 export class ConfusionMatrix extends SpeakeasyBase {
-  @Metadata({ data: "json, name=NumFalseNegatives" })
+  @SpeakeasyMetadata({ data: "json, name=NumFalseNegatives" })
   numFalseNegatives?: number;
 
-  @Metadata({ data: "json, name=NumFalsePositives" })
+  @SpeakeasyMetadata({ data: "json, name=NumFalsePositives" })
   numFalsePositives?: number;
 
-  @Metadata({ data: "json, name=NumTrueNegatives" })
+  @SpeakeasyMetadata({ data: "json, name=NumTrueNegatives" })
   numTrueNegatives?: number;
 
-  @Metadata({ data: "json, name=NumTruePositives" })
+  @SpeakeasyMetadata({ data: "json, name=NumTruePositives" })
   numTruePositives?: number;
 }

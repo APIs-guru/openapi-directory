@@ -14,12 +14,12 @@ class GetGeofencesQueryParams:
 
 @dataclass
 class GetGeofencesRequest:
-    query_params: GetGeofencesQueryParams = field(default=None)
+    query_params: GetGeofencesQueryParams = field()
     
 
 @dataclass
 class GetGeofencesResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     geofences: Optional[List[shared.Geofence]] = field(default=None)
-    status_code: int = field(default=None)
     

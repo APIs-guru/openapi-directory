@@ -6,6 +6,8 @@ const (
 	GetSystemInfo200ApplicationJSONActionEnumGetSystemInfo GetSystemInfo200ApplicationJSONActionEnum = "getSystemInfo"
 )
 
+// GetSystemInfo200ApplicationJSONData
+// Information about the service
 type GetSystemInfo200ApplicationJSONData struct {
 	Rudder interface{} `json:"rudder"`
 }

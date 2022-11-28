@@ -1,7 +1,8 @@
 
 
+
 export enum ListCompilationJobsSortByEnum {
-    Name = "Name"
-,    CreationTime = "CreationTime"
-,    Status = "Status"
+    Name = "Name",
+    CreationTime = "CreationTime",
+    Status = "Status"
 }

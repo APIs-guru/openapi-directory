@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Money } from "./money";
-import { Money } from "./money";
+
 
 
 // RegionalSubscriptionOfferPhaseConfig
@@ -8,15 +8,15 @@ import { Money } from "./money";
  * Configuration for a single phase of a subscription offer in a single region.
 **/
 export class RegionalSubscriptionOfferPhaseConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=absoluteDiscount" })
+  @SpeakeasyMetadata({ data: "json, name=absoluteDiscount" })
   absoluteDiscount?: Money;
 
-  @Metadata({ data: "json, name=price" })
+  @SpeakeasyMetadata({ data: "json, name=price" })
   price?: Money;
 
-  @Metadata({ data: "json, name=regionCode" })
+  @SpeakeasyMetadata({ data: "json, name=regionCode" })
   regionCode?: string;
 
-  @Metadata({ data: "json, name=relativeDiscount" })
+  @SpeakeasyMetadata({ data: "json, name=relativeDiscount" })
   relativeDiscount?: number;
 }

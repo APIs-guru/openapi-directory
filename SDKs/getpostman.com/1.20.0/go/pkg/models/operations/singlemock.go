@@ -4,10 +4,6 @@ type SingleMockPathParams struct {
 	MockUID string `pathParam:"style=simple,explode=false,name=mock_uid"`
 }
 
-type SingleMockRequest struct {
-	PathParams SingleMockPathParams
-}
-
 type SingleMock200ApplicationJSONMock struct {
 	Collection  *string `json:"collection,omitempty"`
 	Environment *string `json:"environment,omitempty"`
@@ -19,6 +15,10 @@ type SingleMock200ApplicationJSONMock struct {
 
 type SingleMock200ApplicationJSON struct {
 	Mock *SingleMock200ApplicationJSONMock `json:"mock,omitempty"`
+}
+
+type SingleMockRequest struct {
+	PathParams SingleMockPathParams
 }
 
 type SingleMockResponse struct {

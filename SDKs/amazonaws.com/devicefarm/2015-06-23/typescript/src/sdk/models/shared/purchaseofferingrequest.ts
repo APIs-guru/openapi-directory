@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // PurchaseOfferingRequest
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Represents a request for a purchase offering.
 **/
 export class PurchaseOfferingRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=offeringId" })
+  @SpeakeasyMetadata({ data: "json, name=offeringId" })
   offeringId: string;
 
-  @Metadata({ data: "json, name=offeringPromotionId" })
+  @SpeakeasyMetadata({ data: "json, name=offeringPromotionId" })
   offeringPromotionId?: string;
 
-  @Metadata({ data: "json, name=quantity" })
+  @SpeakeasyMetadata({ data: "json, name=quantity" })
   quantity: number;
 }

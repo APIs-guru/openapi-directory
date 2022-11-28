@@ -1,58 +1,59 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class CreateNetworkSwitchQosRulePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=networkId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=networkId" })
   networkId: string;
 }
 
 export enum CreateNetworkSwitchQosRuleRequestBodyProtocolEnum {
-    Any = "ANY"
-,    Tcp = "TCP"
-,    Udp = "UDP"
+    Any = "ANY",
+    Tcp = "TCP",
+    Udp = "UDP"
 }
 
 
 export class CreateNetworkSwitchQosRuleRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=dscp" })
+  @SpeakeasyMetadata({ data: "json, name=dscp" })
   dscp?: number;
 
-  @Metadata({ data: "json, name=dstPort" })
+  @SpeakeasyMetadata({ data: "json, name=dstPort" })
   dstPort?: number;
 
-  @Metadata({ data: "json, name=dstPortRange" })
+  @SpeakeasyMetadata({ data: "json, name=dstPortRange" })
   dstPortRange?: string;
 
-  @Metadata({ data: "json, name=protocol" })
+  @SpeakeasyMetadata({ data: "json, name=protocol" })
   protocol?: CreateNetworkSwitchQosRuleRequestBodyProtocolEnum;
 
-  @Metadata({ data: "json, name=srcPort" })
+  @SpeakeasyMetadata({ data: "json, name=srcPort" })
   srcPort?: number;
 
-  @Metadata({ data: "json, name=srcPortRange" })
+  @SpeakeasyMetadata({ data: "json, name=srcPortRange" })
   srcPortRange?: string;
 
-  @Metadata({ data: "json, name=vlan" })
+  @SpeakeasyMetadata({ data: "json, name=vlan" })
   vlan: number;
 }
 
 
 export class CreateNetworkSwitchQosRuleRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: CreateNetworkSwitchQosRulePathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: CreateNetworkSwitchQosRuleRequestBody;
 }
 
 
 export class CreateNetworkSwitchQosRuleResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   createNetworkSwitchQosRule201ApplicationJsonObject?: Map<string, any>;
 }

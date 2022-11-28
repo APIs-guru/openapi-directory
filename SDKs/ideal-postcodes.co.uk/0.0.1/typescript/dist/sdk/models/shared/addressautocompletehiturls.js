@@ -22,18 +22,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var AddressAutocompleteHitUrls = /** @class */ (function (_super) {
     __extends(AddressAutocompleteHitUrls, _super);
     function AddressAutocompleteHitUrls() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=udprn" }),
+        SpeakeasyMetadata({ data: "json, name=udprn" }),
         __metadata("design:type", String)
     ], AddressAutocompleteHitUrls.prototype, "udprn", void 0);
     __decorate([
-        Metadata({ data: "json, name=umprn" }),
+        SpeakeasyMetadata({ data: "json, name=umprn" }),
         __metadata("design:type", String)
     ], AddressAutocompleteHitUrls.prototype, "umprn", void 0);
     return AddressAutocompleteHitUrls;

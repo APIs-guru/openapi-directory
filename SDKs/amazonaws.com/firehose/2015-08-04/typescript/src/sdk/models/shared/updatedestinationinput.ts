@@ -1,4 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ElasticsearchDestinationUpdate } from "./elasticsearchdestinationupdate";
 import { ExtendedS3DestinationUpdate } from "./extendeds3destinationupdate";
 import { HttpEndpointDestinationUpdate } from "./httpendpointdestinationupdate";
@@ -7,31 +7,32 @@ import { S3DestinationUpdate } from "./s3destinationupdate";
 import { SplunkDestinationUpdate } from "./splunkdestinationupdate";
 
 
+
 export class UpdateDestinationInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CurrentDeliveryStreamVersionId" })
+  @SpeakeasyMetadata({ data: "json, name=CurrentDeliveryStreamVersionId" })
   currentDeliveryStreamVersionId: string;
 
-  @Metadata({ data: "json, name=DeliveryStreamName" })
+  @SpeakeasyMetadata({ data: "json, name=DeliveryStreamName" })
   deliveryStreamName: string;
 
-  @Metadata({ data: "json, name=DestinationId" })
+  @SpeakeasyMetadata({ data: "json, name=DestinationId" })
   destinationId: string;
 
-  @Metadata({ data: "json, name=ElasticsearchDestinationUpdate" })
+  @SpeakeasyMetadata({ data: "json, name=ElasticsearchDestinationUpdate" })
   elasticsearchDestinationUpdate?: ElasticsearchDestinationUpdate;
 
-  @Metadata({ data: "json, name=ExtendedS3DestinationUpdate" })
+  @SpeakeasyMetadata({ data: "json, name=ExtendedS3DestinationUpdate" })
   extendedS3DestinationUpdate?: ExtendedS3DestinationUpdate;
 
-  @Metadata({ data: "json, name=HttpEndpointDestinationUpdate" })
+  @SpeakeasyMetadata({ data: "json, name=HttpEndpointDestinationUpdate" })
   httpEndpointDestinationUpdate?: HttpEndpointDestinationUpdate;
 
-  @Metadata({ data: "json, name=RedshiftDestinationUpdate" })
+  @SpeakeasyMetadata({ data: "json, name=RedshiftDestinationUpdate" })
   redshiftDestinationUpdate?: RedshiftDestinationUpdate;
 
-  @Metadata({ data: "json, name=S3DestinationUpdate" })
+  @SpeakeasyMetadata({ data: "json, name=S3DestinationUpdate" })
   s3DestinationUpdate?: S3DestinationUpdate;
 
-  @Metadata({ data: "json, name=SplunkDestinationUpdate" })
+  @SpeakeasyMetadata({ data: "json, name=SplunkDestinationUpdate" })
   splunkDestinationUpdate?: SplunkDestinationUpdate;
 }

@@ -1,0 +1,30 @@
+import { SpeakeasyBase } from "../../../internal/utils";
+import { SummaryEnumAnsweredByEnum } from "./summaryenumansweredbyenum";
+import { SummaryEnumCallStateEnum } from "./summaryenumcallstateenum";
+import { SummaryEnumCallTypeEnum } from "./summaryenumcalltypeenum";
+import { SummaryEnumProcessingStateEnum } from "./summaryenumprocessingstateenum";
+export declare class InsightsV1CallSummary extends SpeakeasyBase {
+    accountSid?: string;
+    annotation?: any;
+    answeredBy?: SummaryEnumAnsweredByEnum;
+    attributes?: any;
+    callSid?: string;
+    callState?: SummaryEnumCallStateEnum;
+    callType?: SummaryEnumCallTypeEnum;
+    carrierEdge?: any;
+    clientEdge?: any;
+    connectDuration?: number;
+    createdTime?: Date;
+    duration?: number;
+    endTime?: Date;
+    from?: any;
+    processingState?: SummaryEnumProcessingStateEnum;
+    properties?: any;
+    sdkEdge?: any;
+    sipEdge?: any;
+    startTime?: Date;
+    tags?: string[];
+    to?: any;
+    trust?: any;
+    url?: string;
+}

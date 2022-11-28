@@ -22,18 +22,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var DisassociateAttributeGroupResponse = /** @class */ (function (_super) {
     __extends(DisassociateAttributeGroupResponse, _super);
     function DisassociateAttributeGroupResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=applicationArn" }),
+        SpeakeasyMetadata({ data: "json, name=applicationArn" }),
         __metadata("design:type", String)
     ], DisassociateAttributeGroupResponse.prototype, "applicationArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=attributeGroupArn" }),
+        SpeakeasyMetadata({ data: "json, name=attributeGroupArn" }),
         __metadata("design:type", String)
     ], DisassociateAttributeGroupResponse.prototype, "attributeGroupArn", void 0);
     return DisassociateAttributeGroupResponse;

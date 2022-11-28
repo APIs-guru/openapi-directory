@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var AddOrUpdateNonPrimaryStateTaxPathParams = /** @class */ (function (_super) {
     __extends(AddOrUpdateNonPrimaryStateTaxPathParams, _super);
@@ -30,11 +30,11 @@ var AddOrUpdateNonPrimaryStateTaxPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=companyId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=companyId" }),
         __metadata("design:type", String)
     ], AddOrUpdateNonPrimaryStateTaxPathParams.prototype, "companyId", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=employeeId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=employeeId" }),
         __metadata("design:type", String)
     ], AddOrUpdateNonPrimaryStateTaxPathParams.prototype, "employeeId", void 0);
     return AddOrUpdateNonPrimaryStateTaxPathParams;
@@ -46,7 +46,7 @@ var AddOrUpdateNonPrimaryStateTaxSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemePaylocityAuth)
     ], AddOrUpdateNonPrimaryStateTaxSecurity.prototype, "paylocityAuth", void 0);
     return AddOrUpdateNonPrimaryStateTaxSecurity;
@@ -58,15 +58,15 @@ var AddOrUpdateNonPrimaryStateTaxRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", AddOrUpdateNonPrimaryStateTaxPathParams)
     ], AddOrUpdateNonPrimaryStateTaxRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", shared.NonPrimaryStateTax)
     ], AddOrUpdateNonPrimaryStateTaxRequest.prototype, "request", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", AddOrUpdateNonPrimaryStateTaxSecurity)
     ], AddOrUpdateNonPrimaryStateTaxRequest.prototype, "security", void 0);
     return AddOrUpdateNonPrimaryStateTaxRequest;
@@ -78,15 +78,15 @@ var AddOrUpdateNonPrimaryStateTaxResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], AddOrUpdateNonPrimaryStateTaxResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], AddOrUpdateNonPrimaryStateTaxResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata({ elemType: shared.Error }),
+        SpeakeasyMetadata({ elemType: shared.Error }),
         __metadata("design:type", Array)
     ], AddOrUpdateNonPrimaryStateTaxResponse.prototype, "errors", void 0);
     return AddOrUpdateNonPrimaryStateTaxResponse;

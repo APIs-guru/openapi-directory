@@ -1,5 +1,7 @@
 package shared
 
+// PutEvaluationsRequest
+// <p/>
 type PutEvaluationsRequest struct {
 	Evaluations []Evaluation `json:"Evaluations,omitempty"`
 	ResultToken string       `json:"ResultToken"`

@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from typing import Any,List,Optional
+from enum import Enum
 from sdk.models import shared
 
 
@@ -33,13 +34,13 @@ class LatestGetV2LatestGetQueryParams:
 
 @dataclass
 class LatestGetV2LatestGetRequest:
-    query_params: LatestGetV2LatestGetQueryParams = field(default=None)
+    query_params: LatestGetV2LatestGetQueryParams = field()
     
 
 @dataclass
 class LatestGetV2LatestGetResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     http_validation_error: Optional[shared.HTTPValidationError] = field(default=None)
     open_aq_result: Optional[shared.OpenAqResult] = field(default=None)
-    status_code: int = field(default=None)
     

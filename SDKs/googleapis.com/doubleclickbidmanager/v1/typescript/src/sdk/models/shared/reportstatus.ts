@@ -1,16 +1,17 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ReportFailure } from "./reportfailure";
 
+
 export enum ReportStatusFormatEnum {
-    Csv = "CSV"
-,    ExcelCsv = "EXCEL_CSV"
-,    Xlsx = "XLSX"
+    Csv = "CSV",
+    ExcelCsv = "EXCEL_CSV",
+    Xlsx = "XLSX"
 }
 
 export enum ReportStatusStateEnum {
-    Running = "RUNNING"
-,    Done = "DONE"
-,    Failed = "FAILED"
+    Running = "RUNNING",
+    Done = "DONE",
+    Failed = "FAILED"
 }
 
 
@@ -19,15 +20,15 @@ export enum ReportStatusStateEnum {
  * Report status.
 **/
 export class ReportStatus extends SpeakeasyBase {
-  @Metadata({ data: "json, name=failure" })
+  @SpeakeasyMetadata({ data: "json, name=failure" })
   failure?: ReportFailure;
 
-  @Metadata({ data: "json, name=finishTimeMs" })
+  @SpeakeasyMetadata({ data: "json, name=finishTimeMs" })
   finishTimeMs?: string;
 
-  @Metadata({ data: "json, name=format" })
+  @SpeakeasyMetadata({ data: "json, name=format" })
   format?: ReportStatusFormatEnum;
 
-  @Metadata({ data: "json, name=state" })
+  @SpeakeasyMetadata({ data: "json, name=state" })
   state?: ReportStatusStateEnum;
 }

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // BillingDestination
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Configuration of a specific billing destination (Currently only support bill against consumer project).
 **/
 export class BillingDestination extends SpeakeasyBase {
-  @Metadata({ data: "json, name=metrics" })
+  @SpeakeasyMetadata({ data: "json, name=metrics" })
   metrics?: string[];
 
-  @Metadata({ data: "json, name=monitoredResource" })
+  @SpeakeasyMetadata({ data: "json, name=monitoredResource" })
   monitoredResource?: string;
 }

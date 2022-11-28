@@ -1,5 +1,7 @@
 package shared
 
+// AwsEc2SecurityGroupUserIDGroupPair
+// A relationship between a security group and a user.
 type AwsEc2SecurityGroupUserIDGroupPair struct {
 	GroupID                *string `json:"GroupId,omitempty"`
 	GroupName              *string `json:"GroupName,omitempty"`

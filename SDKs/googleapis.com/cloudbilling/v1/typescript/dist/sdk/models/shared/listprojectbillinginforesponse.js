@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { ProjectBillingInfo } from "./projectbillinginfo";
 // ListProjectBillingInfoResponse
 /**
  * Request message for `ListProjectBillingInfoResponse`.
@@ -34,11 +34,11 @@ var ListProjectBillingInfoResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=nextPageToken" }),
+        SpeakeasyMetadata({ data: "json, name=nextPageToken" }),
         __metadata("design:type", String)
     ], ListProjectBillingInfoResponse.prototype, "nextPageToken", void 0);
     __decorate([
-        Metadata({ data: "json, name=projectBillingInfo", elemType: shared.ProjectBillingInfo }),
+        SpeakeasyMetadata({ data: "json, name=projectBillingInfo", elemType: ProjectBillingInfo }),
         __metadata("design:type", Array)
     ], ListProjectBillingInfoResponse.prototype, "projectBillingInfo", void 0);
     return ListProjectBillingInfoResponse;

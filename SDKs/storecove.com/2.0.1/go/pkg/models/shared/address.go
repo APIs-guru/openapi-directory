@@ -1,5 +1,7 @@
 package shared
 
+// Address
+// The address
 type Address struct {
 	City    *string     `json:"city,omitempty"`
 	Country CountryEnum `json:"country"`

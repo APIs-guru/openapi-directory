@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// IncidentRecordSummary
+// Details describing an incident record.
 type IncidentRecordSummary struct {
 	Arn                  string                   `json:"arn"`
 	CreationTime         time.Time                `json:"creationTime"`

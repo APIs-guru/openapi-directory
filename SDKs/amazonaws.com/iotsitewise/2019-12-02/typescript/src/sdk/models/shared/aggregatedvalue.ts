@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { QualityEnum } from "./qualityenum";
 import { Aggregates } from "./aggregates";
+
 
 
 // AggregatedValue
@@ -8,12 +9,12 @@ import { Aggregates } from "./aggregates";
  * Contains aggregated asset property values (for example, average, minimum, and maximum).
 **/
 export class AggregatedValue extends SpeakeasyBase {
-  @Metadata({ data: "json, name=quality" })
+  @SpeakeasyMetadata({ data: "json, name=quality" })
   quality?: QualityEnum;
 
-  @Metadata({ data: "json, name=timestamp" })
+  @SpeakeasyMetadata({ data: "json, name=timestamp" })
   timestamp: Date;
 
-  @Metadata({ data: "json, name=value" })
+  @SpeakeasyMetadata({ data: "json, name=value" })
   value: Aggregates;
 }

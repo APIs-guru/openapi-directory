@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class UpdateVirtualInterfaceAttributesRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=mtu" })
+  @SpeakeasyMetadata({ data: "json, name=mtu" })
   mtu?: number;
 
-  @Metadata({ data: "json, name=virtualInterfaceId" })
+  @SpeakeasyMetadata({ data: "json, name=virtualInterfaceId" })
   virtualInterfaceId: string;
 }

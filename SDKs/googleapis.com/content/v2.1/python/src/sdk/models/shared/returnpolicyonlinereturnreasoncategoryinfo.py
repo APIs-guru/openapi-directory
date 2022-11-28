@@ -1,7 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import returnpolicyonlinereturnshippingfee
+from sdk import utils
+from . import *
 
 class ReturnPolicyOnlineReturnReasonCategoryInfoReturnLabelSourceEnum(str, Enum):
     RETURN_LABEL_SOURCE_UNSPECIFIED = "RETURN_LABEL_SOURCE_UNSPECIFIED"
@@ -18,7 +20,11 @@ class ReturnPolicyOnlineReturnReasonCategoryInfoReturnReasonCategoryEnum(str, En
 @dataclass_json
 @dataclass
 class ReturnPolicyOnlineReturnReasonCategoryInfo:
-    return_label_source: Optional[ReturnPolicyOnlineReturnReasonCategoryInfoReturnLabelSourceEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'returnLabelSource' }})
-    return_reason_category: Optional[ReturnPolicyOnlineReturnReasonCategoryInfoReturnReasonCategoryEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'returnReasonCategory' }})
-    return_shipping_fee: Optional[returnpolicyonlinereturnshippingfee.ReturnPolicyOnlineReturnShippingFee] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'returnShippingFee' }})
+    r"""ReturnPolicyOnlineReturnReasonCategoryInfo
+    The return reason category info wrapper.
+    """
+    
+    return_label_source: Optional[ReturnPolicyOnlineReturnReasonCategoryInfoReturnLabelSourceEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('returnLabelSource') }})
+    return_reason_category: Optional[ReturnPolicyOnlineReturnReasonCategoryInfoReturnReasonCategoryEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('returnReasonCategory') }})
+    return_shipping_fee: Optional[ReturnPolicyOnlineReturnShippingFee] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('returnShippingFee') }})
     

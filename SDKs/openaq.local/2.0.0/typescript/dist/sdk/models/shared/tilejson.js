@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // TileJson
 /**
  * TileJSON model.
@@ -34,59 +34,59 @@ var TileJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=attribution" }),
+        SpeakeasyMetadata({ data: "json, name=attribution" }),
         __metadata("design:type", String)
     ], TileJson.prototype, "attribution", void 0);
     __decorate([
-        Metadata({ data: "json, name=bounds" }),
+        SpeakeasyMetadata({ data: "json, name=bounds" }),
         __metadata("design:type", Array)
     ], TileJson.prototype, "bounds", void 0);
     __decorate([
-        Metadata({ data: "json, name=data" }),
+        SpeakeasyMetadata({ data: "json, name=data" }),
         __metadata("design:type", Array)
     ], TileJson.prototype, "data", void 0);
     __decorate([
-        Metadata({ data: "json, name=description" }),
+        SpeakeasyMetadata({ data: "json, name=description" }),
         __metadata("design:type", String)
     ], TileJson.prototype, "description", void 0);
     __decorate([
-        Metadata({ data: "json, name=grids" }),
+        SpeakeasyMetadata({ data: "json, name=grids" }),
         __metadata("design:type", Array)
     ], TileJson.prototype, "grids", void 0);
     __decorate([
-        Metadata({ data: "json, name=legend" }),
+        SpeakeasyMetadata({ data: "json, name=legend" }),
         __metadata("design:type", String)
     ], TileJson.prototype, "legend", void 0);
     __decorate([
-        Metadata({ data: "json, name=maxzoom" }),
+        SpeakeasyMetadata({ data: "json, name=maxzoom" }),
         __metadata("design:type", Number)
     ], TileJson.prototype, "maxzoom", void 0);
     __decorate([
-        Metadata({ data: "json, name=minzoom" }),
+        SpeakeasyMetadata({ data: "json, name=minzoom" }),
         __metadata("design:type", Number)
     ], TileJson.prototype, "minzoom", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], TileJson.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=scheme" }),
+        SpeakeasyMetadata({ data: "json, name=scheme" }),
         __metadata("design:type", String)
     ], TileJson.prototype, "scheme", void 0);
     __decorate([
-        Metadata({ data: "json, name=template" }),
+        SpeakeasyMetadata({ data: "json, name=template" }),
         __metadata("design:type", String)
     ], TileJson.prototype, "template", void 0);
     __decorate([
-        Metadata({ data: "json, name=tilejson" }),
+        SpeakeasyMetadata({ data: "json, name=tilejson" }),
         __metadata("design:type", String)
     ], TileJson.prototype, "tilejson", void 0);
     __decorate([
-        Metadata({ data: "json, name=tiles" }),
+        SpeakeasyMetadata({ data: "json, name=tiles" }),
         __metadata("design:type", Array)
     ], TileJson.prototype, "tiles", void 0);
     __decorate([
-        Metadata({ data: "json, name=version" }),
+        SpeakeasyMetadata({ data: "json, name=version" }),
         __metadata("design:type", String)
     ], TileJson.prototype, "version", void 0);
     return TileJson;

@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostUnmonitorInstancesActionEnum(str, Enum):
     UNMONITOR_INSTANCES = "UnmonitorInstances"
@@ -10,8 +14,8 @@ class PostUnmonitorInstancesVersionEnum(str, Enum):
 
 @dataclass
 class PostUnmonitorInstancesQueryParams:
-    action: PostUnmonitorInstancesActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostUnmonitorInstancesVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostUnmonitorInstancesActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostUnmonitorInstancesVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostUnmonitorInstancesHeaders:
 
 @dataclass
 class PostUnmonitorInstancesRequest:
-    query_params: PostUnmonitorInstancesQueryParams = field(default=None)
-    headers: PostUnmonitorInstancesHeaders = field(default=None)
+    headers: PostUnmonitorInstancesHeaders = field()
+    query_params: PostUnmonitorInstancesQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostUnmonitorInstancesResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

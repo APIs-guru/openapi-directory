@@ -1,17 +1,16 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { LfTagPair } from "./lftagpair";
 import { ColumnLfTag } from "./columnlftag";
-import { LfTagPair } from "./lftagpair";
+
 
 
 export class GetResourceLfTagsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=LFTagOnDatabase", elemType: shared.LfTagPair })
+  @SpeakeasyMetadata({ data: "json, name=LFTagOnDatabase", elemType: LfTagPair })
   lfTagOnDatabase?: LfTagPair[];
 
-  @Metadata({ data: "json, name=LFTagsOnColumns", elemType: shared.ColumnLfTag })
+  @SpeakeasyMetadata({ data: "json, name=LFTagsOnColumns", elemType: ColumnLfTag })
   lfTagsOnColumns?: ColumnLfTag[];
 
-  @Metadata({ data: "json, name=LFTagsOnTable", elemType: shared.LfTagPair })
+  @SpeakeasyMetadata({ data: "json, name=LFTagsOnTable", elemType: LfTagPair })
   lfTagsOnTable?: LfTagPair[];
 }

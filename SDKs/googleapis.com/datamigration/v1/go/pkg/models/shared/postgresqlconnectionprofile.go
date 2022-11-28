@@ -8,6 +8,8 @@ const (
 	PostgreSQLConnectionProfileNetworkArchitectureEnumNetworkArchitectureNewCsqlProducer PostgreSQLConnectionProfileNetworkArchitectureEnum = "NETWORK_ARCHITECTURE_NEW_CSQL_PRODUCER"
 )
 
+// PostgreSQLConnectionProfile
+// Specifies connection parameters required specifically for PostgreSQL databases.
 type PostgreSQLConnectionProfile struct {
 	CloudSQLID          *string                                             `json:"cloudSqlId,omitempty"`
 	Host                *string                                             `json:"host,omitempty"`
@@ -17,4 +19,15 @@ type PostgreSQLConnectionProfile struct {
 	Port                *int32                                              `json:"port,omitempty"`
 	Ssl                 *SslConfig                                          `json:"ssl,omitempty"`
 	Username            *string                                             `json:"username,omitempty"`
+}
+
+// PostgreSQLConnectionProfileInput
+// Specifies connection parameters required specifically for PostgreSQL databases.
+type PostgreSQLConnectionProfileInput struct {
+	CloudSQLID *string         `json:"cloudSqlId,omitempty"`
+	Host       *string         `json:"host,omitempty"`
+	Password   *string         `json:"password,omitempty"`
+	Port       *int32          `json:"port,omitempty"`
+	Ssl        *SslConfigInput `json:"ssl,omitempty"`
+	Username   *string         `json:"username,omitempty"`
 }

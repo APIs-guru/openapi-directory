@@ -10,13 +10,13 @@ class RequestActiveDirectoryAuthInfoQueryParams:
 
 @dataclass
 class RequestActiveDirectoryAuthInfoRequest:
-    query_params: RequestActiveDirectoryAuthInfoQueryParams = field(default=None)
+    query_params: RequestActiveDirectoryAuthInfoQueryParams = field()
     
 
 @dataclass
 class RequestActiveDirectoryAuthInfoResponse:
+    content_type: str = field()
+    status_code: int = field()
     active_directory_auth_info: Optional[shared.ActiveDirectoryAuthInfo] = field(default=None)
-    content_type: str = field(default=None)
     error_response: Optional[shared.ErrorResponse] = field(default=None)
-    status_code: int = field(default=None)
     

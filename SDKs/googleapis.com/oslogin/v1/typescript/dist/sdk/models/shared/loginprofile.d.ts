@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { PosixAccount } from "./posixaccount";
 import { SshPublicKey } from "./sshpublickey";
 /**

@@ -1,125 +1,126 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class UpdateReplicationConfigurationHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
 export enum UpdateReplicationConfigurationRequestBodyDataPlaneRoutingEnum {
-    PrivateIp = "PRIVATE_IP"
-,    PublicIp = "PUBLIC_IP"
+    PrivateIp = "PRIVATE_IP",
+    PublicIp = "PUBLIC_IP"
 }
 
 export enum UpdateReplicationConfigurationRequestBodyDefaultLargeStagingDiskTypeEnum {
-    Gp2 = "GP2"
-,    St1 = "ST1"
+    Gp2 = "GP2",
+    St1 = "ST1"
 }
 
 export enum UpdateReplicationConfigurationRequestBodyEbsEncryptionEnum {
-    Default = "DEFAULT"
-,    Custom = "CUSTOM"
+    Default = "DEFAULT",
+    Custom = "CUSTOM"
 }
 
 
 export class UpdateReplicationConfigurationRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=associateDefaultSecurityGroup" })
+  @SpeakeasyMetadata({ data: "json, name=associateDefaultSecurityGroup" })
   associateDefaultSecurityGroup?: boolean;
 
-  @Metadata({ data: "json, name=bandwidthThrottling" })
+  @SpeakeasyMetadata({ data: "json, name=bandwidthThrottling" })
   bandwidthThrottling?: number;
 
-  @Metadata({ data: "json, name=createPublicIP" })
+  @SpeakeasyMetadata({ data: "json, name=createPublicIP" })
   createPublicIp?: boolean;
 
-  @Metadata({ data: "json, name=dataPlaneRouting" })
+  @SpeakeasyMetadata({ data: "json, name=dataPlaneRouting" })
   dataPlaneRouting?: UpdateReplicationConfigurationRequestBodyDataPlaneRoutingEnum;
 
-  @Metadata({ data: "json, name=defaultLargeStagingDiskType" })
+  @SpeakeasyMetadata({ data: "json, name=defaultLargeStagingDiskType" })
   defaultLargeStagingDiskType?: UpdateReplicationConfigurationRequestBodyDefaultLargeStagingDiskTypeEnum;
 
-  @Metadata({ data: "json, name=ebsEncryption" })
+  @SpeakeasyMetadata({ data: "json, name=ebsEncryption" })
   ebsEncryption?: UpdateReplicationConfigurationRequestBodyEbsEncryptionEnum;
 
-  @Metadata({ data: "json, name=ebsEncryptionKeyArn" })
+  @SpeakeasyMetadata({ data: "json, name=ebsEncryptionKeyArn" })
   ebsEncryptionKeyArn?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=replicatedDisks", elemType: shared.ReplicationConfigurationReplicatedDisk })
+  @SpeakeasyMetadata({ data: "json, name=replicatedDisks", elemType: shared.ReplicationConfigurationReplicatedDisk })
   replicatedDisks?: shared.ReplicationConfigurationReplicatedDisk[];
 
-  @Metadata({ data: "json, name=replicationServerInstanceType" })
+  @SpeakeasyMetadata({ data: "json, name=replicationServerInstanceType" })
   replicationServerInstanceType?: string;
 
-  @Metadata({ data: "json, name=replicationServersSecurityGroupsIDs" })
+  @SpeakeasyMetadata({ data: "json, name=replicationServersSecurityGroupsIDs" })
   replicationServersSecurityGroupsIDs?: string[];
 
-  @Metadata({ data: "json, name=sourceServerID" })
+  @SpeakeasyMetadata({ data: "json, name=sourceServerID" })
   sourceServerId: string;
 
-  @Metadata({ data: "json, name=stagingAreaSubnetId" })
+  @SpeakeasyMetadata({ data: "json, name=stagingAreaSubnetId" })
   stagingAreaSubnetId?: string;
 
-  @Metadata({ data: "json, name=stagingAreaTags" })
+  @SpeakeasyMetadata({ data: "json, name=stagingAreaTags" })
   stagingAreaTags?: Map<string, string>;
 
-  @Metadata({ data: "json, name=useDedicatedReplicationServer" })
+  @SpeakeasyMetadata({ data: "json, name=useDedicatedReplicationServer" })
   useDedicatedReplicationServer?: boolean;
 }
 
 
 export class UpdateReplicationConfigurationRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: UpdateReplicationConfigurationHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: UpdateReplicationConfigurationRequestBody;
 }
 
 
 export class UpdateReplicationConfigurationResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   accessDeniedException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   conflictException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   replicationConfiguration?: shared.ReplicationConfiguration;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   resourceNotFoundException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   uninitializedAccountException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   validationException?: any;
 }

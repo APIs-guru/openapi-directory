@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { PiiEntityTypeEnum } from "./piientitytypeenum";
 /**
  * Provides information about a PII entity.

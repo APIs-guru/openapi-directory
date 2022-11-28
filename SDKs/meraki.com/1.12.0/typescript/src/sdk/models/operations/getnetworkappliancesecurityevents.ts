@@ -1,60 +1,61 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetNetworkApplianceSecurityEventsPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=networkId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=networkId" })
   networkId: string;
 }
 
 export enum GetNetworkApplianceSecurityEventsSortOrderEnum {
-    Ascending = "ascending"
-,    Descending = "descending"
+    Ascending = "ascending",
+    Descending = "descending"
 }
 
 
 export class GetNetworkApplianceSecurityEventsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=endingBefore" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=endingBefore" })
   endingBefore?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=perPage" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=perPage" })
   perPage?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=sortOrder" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sortOrder" })
   sortOrder?: GetNetworkApplianceSecurityEventsSortOrderEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=startingAfter" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=startingAfter" })
   startingAfter?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=t0" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=t0" })
   t0?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=t1" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=t1" })
   t1?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=timespan" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=timespan" })
   timespan?: number;
 }
 
 
 export class GetNetworkApplianceSecurityEventsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetNetworkApplianceSecurityEventsPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetNetworkApplianceSecurityEventsQueryParams;
 }
 
 
 export class GetNetworkApplianceSecurityEventsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: Map<string, string[]>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getNetworkApplianceSecurityEvents200ApplicationJsonObject?: Map<string, any>;
 }

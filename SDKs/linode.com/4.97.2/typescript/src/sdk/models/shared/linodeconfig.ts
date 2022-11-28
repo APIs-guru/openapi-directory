@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Devices } from "./devices";
 import { LinodeConfigInterface } from "./linodeconfiginterface";
+
 
 
 // LinodeConfigHelpers
@@ -9,65 +9,98 @@ import { LinodeConfigInterface } from "./linodeconfiginterface";
  * Helpers enabled when booting to this Linode Config.
 **/
 export class LinodeConfigHelpers extends SpeakeasyBase {
-  @Metadata({ data: "json, name=devtmpfs_automount" })
+  @SpeakeasyMetadata({ data: "json, name=devtmpfs_automount" })
   devtmpfsAutomount?: boolean;
 
-  @Metadata({ data: "json, name=distro" })
+  @SpeakeasyMetadata({ data: "json, name=distro" })
   distro?: boolean;
 
-  @Metadata({ data: "json, name=modules_dep" })
+  @SpeakeasyMetadata({ data: "json, name=modules_dep" })
   modulesDep?: boolean;
 
-  @Metadata({ data: "json, name=network" })
+  @SpeakeasyMetadata({ data: "json, name=network" })
   network?: boolean;
 
-  @Metadata({ data: "json, name=updatedb_disabled" })
+  @SpeakeasyMetadata({ data: "json, name=updatedb_disabled" })
   updatedbDisabled?: boolean;
 }
 
 export enum LinodeConfigRunLevelEnum {
-    Default = "default"
-,    Single = "single"
-,    Binbash = "binbash"
+    Default = "default",
+    Single = "single",
+    Binbash = "binbash"
 }
 
 export enum LinodeConfigVirtModeEnum {
-    Paravirt = "paravirt"
-,    Fullvirt = "fullvirt"
+    Paravirt = "paravirt",
+    Fullvirt = "fullvirt"
+}
+
+
+export class LinodeConfigInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=comments" })
+  comments?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=devices" })
+  devices: Devices;
+
+  @SpeakeasyMetadata({ data: "json, name=helpers" })
+  helpers?: LinodeConfigHelpers;
+
+  @SpeakeasyMetadata({ data: "json, name=interfaces", elemType: LinodeConfigInterface })
+  interfaces?: LinodeConfigInterface[];
+
+  @SpeakeasyMetadata({ data: "json, name=kernel" })
+  kernel?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=label" })
+  label: string;
+
+  @SpeakeasyMetadata({ data: "json, name=memory_limit" })
+  memoryLimit?: number;
+
+  @SpeakeasyMetadata({ data: "json, name=root_device" })
+  rootDevice?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=run_level" })
+  runLevel?: LinodeConfigRunLevelEnum;
+
+  @SpeakeasyMetadata({ data: "json, name=virt_mode" })
+  virtMode?: LinodeConfigVirtModeEnum;
 }
 
 
 export class LinodeConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=comments" })
+  @SpeakeasyMetadata({ data: "json, name=comments" })
   comments?: string;
 
-  @Metadata({ data: "json, name=devices" })
+  @SpeakeasyMetadata({ data: "json, name=devices" })
   devices: Devices;
 
-  @Metadata({ data: "json, name=helpers" })
+  @SpeakeasyMetadata({ data: "json, name=helpers" })
   helpers?: LinodeConfigHelpers;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: number;
 
-  @Metadata({ data: "json, name=interfaces", elemType: shared.LinodeConfigInterface })
+  @SpeakeasyMetadata({ data: "json, name=interfaces", elemType: LinodeConfigInterface })
   interfaces?: LinodeConfigInterface[];
 
-  @Metadata({ data: "json, name=kernel" })
+  @SpeakeasyMetadata({ data: "json, name=kernel" })
   kernel?: string;
 
-  @Metadata({ data: "json, name=label" })
+  @SpeakeasyMetadata({ data: "json, name=label" })
   label: string;
 
-  @Metadata({ data: "json, name=memory_limit" })
+  @SpeakeasyMetadata({ data: "json, name=memory_limit" })
   memoryLimit?: number;
 
-  @Metadata({ data: "json, name=root_device" })
+  @SpeakeasyMetadata({ data: "json, name=root_device" })
   rootDevice?: string;
 
-  @Metadata({ data: "json, name=run_level" })
+  @SpeakeasyMetadata({ data: "json, name=run_level" })
   runLevel?: LinodeConfigRunLevelEnum;
 
-  @Metadata({ data: "json, name=virt_mode" })
+  @SpeakeasyMetadata({ data: "json, name=virt_mode" })
   virtMode?: LinodeConfigVirtModeEnum;
 }

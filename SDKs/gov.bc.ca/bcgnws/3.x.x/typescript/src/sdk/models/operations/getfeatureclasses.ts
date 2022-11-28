@@ -1,27 +1,28 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum GetFeatureClassesOutputFormatEnum {
-    Json = "json"
-,    Xml = "xml"
+    Json = "json",
+    Xml = "xml"
 }
 
 
 export class GetFeatureClassesQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=outputFormat" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=outputFormat" })
   outputFormat: GetFeatureClassesOutputFormatEnum;
 }
 
 
 export class GetFeatureClassesRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetFeatureClassesQueryParams;
 }
 
 
 export class GetFeatureClassesResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

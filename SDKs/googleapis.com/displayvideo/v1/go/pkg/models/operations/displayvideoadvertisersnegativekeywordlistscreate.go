@@ -30,7 +30,7 @@ type DisplayvideoAdvertisersNegativeKeywordListsCreateSecurity struct {
 type DisplayvideoAdvertisersNegativeKeywordListsCreateRequest struct {
 	PathParams  DisplayvideoAdvertisersNegativeKeywordListsCreatePathParams
 	QueryParams DisplayvideoAdvertisersNegativeKeywordListsCreateQueryParams
-	Request     *shared.NegativeKeywordList `request:"mediaType=application/json"`
+	Request     *shared.NegativeKeywordListInput `request:"mediaType=application/json"`
 	Security    DisplayvideoAdvertisersNegativeKeywordListsCreateSecurity
 }
 

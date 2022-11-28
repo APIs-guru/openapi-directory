@@ -1,31 +1,32 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class Grocery extends SpeakeasyBase {
-  @Metadata({ data: "json, name=activeIngredients" })
+  @SpeakeasyMetadata({ data: "json, name=activeIngredients" })
   activeIngredients?: string;
 
-  @Metadata({ data: "json, name=alcoholByVolume" })
+  @SpeakeasyMetadata({ data: "json, name=alcoholByVolume" })
   alcoholByVolume?: number;
 
-  @Metadata({ data: "json, name=allergens" })
+  @SpeakeasyMetadata({ data: "json, name=allergens" })
   allergens?: string;
 
-  @Metadata({ data: "json, name=derivedNutritionClaim" })
+  @SpeakeasyMetadata({ data: "json, name=derivedNutritionClaim" })
   derivedNutritionClaim?: string[];
 
-  @Metadata({ data: "json, name=directions" })
+  @SpeakeasyMetadata({ data: "json, name=directions" })
   directions?: string;
 
-  @Metadata({ data: "json, name=indications" })
+  @SpeakeasyMetadata({ data: "json, name=indications" })
   indications?: string;
 
-  @Metadata({ data: "json, name=ingredients" })
+  @SpeakeasyMetadata({ data: "json, name=ingredients" })
   ingredients?: string;
 
-  @Metadata({ data: "json, name=nutritionClaim" })
+  @SpeakeasyMetadata({ data: "json, name=nutritionClaim" })
   nutritionClaim?: string[];
 
-  @Metadata({ data: "json, name=storageInstructions" })
+  @SpeakeasyMetadata({ data: "json, name=storageInstructions" })
   storageInstructions?: string;
 }

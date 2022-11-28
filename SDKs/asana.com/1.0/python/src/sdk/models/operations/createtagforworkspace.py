@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
 @dataclass
 class CreateTagForWorkspacePathParams:
-    workspace_gid: str = field(default=None, metadata={'path_param': { 'field_name': 'workspace_gid', 'style': 'simple', 'explode': False }})
+    workspace_gid: str = field(metadata={'path_param': { 'field_name': 'workspace_gid', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -17,27 +18,27 @@ class CreateTagForWorkspaceQueryParams:
 
 @dataclass_json
 @dataclass
-class CreateTagForWorkspaceRequestBody:
-    data: Optional[shared.TagResponse] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'data' }})
-    
-
-@dataclass
-class CreateTagForWorkspaceRequest:
-    path_params: CreateTagForWorkspacePathParams = field(default=None)
-    query_params: CreateTagForWorkspaceQueryParams = field(default=None)
-    request: CreateTagForWorkspaceRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+class CreateTagForWorkspaceRequestBodyInput:
+    data: Optional[shared.TagResponseInput] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('data') }})
     
 
 @dataclass_json
 @dataclass
 class CreateTagForWorkspace201ApplicationJSON:
-    data: Optional[shared.TagResponse] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'data' }})
+    data: Optional[shared.TagResponse] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('data') }})
+    
+
+@dataclass
+class CreateTagForWorkspaceRequest:
+    path_params: CreateTagForWorkspacePathParams = field()
+    query_params: CreateTagForWorkspaceQueryParams = field()
+    request: CreateTagForWorkspaceRequestBodyInput = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class CreateTagForWorkspaceResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error_response: Optional[shared.ErrorResponse] = field(default=None)
-    status_code: int = field(default=None)
     create_tag_for_workspace_201_application_json_object: Optional[CreateTagForWorkspace201ApplicationJSON] = field(default=None)
     

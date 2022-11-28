@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // InstanceInfo
@@ -6,27 +7,27 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * For display only. Metadata associated with a Compute Engine instance.
 **/
 export class InstanceInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=displayName" })
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
   displayName?: string;
 
-  @Metadata({ data: "json, name=externalIp" })
+  @SpeakeasyMetadata({ data: "json, name=externalIp" })
   externalIp?: string;
 
-  @Metadata({ data: "json, name=interface" })
+  @SpeakeasyMetadata({ data: "json, name=interface" })
   interface?: string;
 
-  @Metadata({ data: "json, name=internalIp" })
+  @SpeakeasyMetadata({ data: "json, name=internalIp" })
   internalIp?: string;
 
-  @Metadata({ data: "json, name=networkTags" })
+  @SpeakeasyMetadata({ data: "json, name=networkTags" })
   networkTags?: string[];
 
-  @Metadata({ data: "json, name=networkUri" })
+  @SpeakeasyMetadata({ data: "json, name=networkUri" })
   networkUri?: string;
 
-  @Metadata({ data: "json, name=serviceAccount" })
+  @SpeakeasyMetadata({ data: "json, name=serviceAccount" })
   serviceAccount?: string;
 
-  @Metadata({ data: "json, name=uri" })
+  @SpeakeasyMetadata({ data: "json, name=uri" })
   uri?: string;
 }

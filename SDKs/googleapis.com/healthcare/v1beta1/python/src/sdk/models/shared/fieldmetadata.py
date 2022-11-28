@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class FieldMetadataActionEnum(str, Enum):
     ACTION_UNSPECIFIED = "ACTION_UNSPECIFIED"
@@ -12,6 +14,10 @@ class FieldMetadataActionEnum(str, Enum):
 @dataclass_json
 @dataclass
 class FieldMetadata:
-    action: Optional[FieldMetadataActionEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'action' }})
-    paths: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'paths' }})
+    r"""FieldMetadata
+    Specifies FHIR paths to match, and how to handle de-identification of matching fields.
+    """
+    
+    action: Optional[FieldMetadataActionEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('action') }})
+    paths: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('paths') }})
     

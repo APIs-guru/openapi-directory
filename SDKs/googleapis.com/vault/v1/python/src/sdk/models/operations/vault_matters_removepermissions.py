@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class VaultMattersRemovePermissionsPathParams:
-    matter_id: str = field(default=None, metadata={'path_param': { 'field_name': 'matterId', 'style': 'simple', 'explode': False }})
+    matter_id: str = field(metadata={'path_param': { 'field_name': 'matterId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,21 +26,21 @@ class VaultMattersRemovePermissionsQueryParams:
 
 @dataclass
 class VaultMattersRemovePermissionsSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class VaultMattersRemovePermissionsRequest:
-    path_params: VaultMattersRemovePermissionsPathParams = field(default=None)
-    query_params: VaultMattersRemovePermissionsQueryParams = field(default=None)
+    path_params: VaultMattersRemovePermissionsPathParams = field()
+    query_params: VaultMattersRemovePermissionsQueryParams = field()
+    security: VaultMattersRemovePermissionsSecurity = field()
     request: Optional[shared.RemoveMatterPermissionsRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: VaultMattersRemovePermissionsSecurity = field(default=None)
     
 
 @dataclass
 class VaultMattersRemovePermissionsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     empty: Optional[dict[str, Any]] = field(default=None)
-    status_code: int = field(default=None)
     

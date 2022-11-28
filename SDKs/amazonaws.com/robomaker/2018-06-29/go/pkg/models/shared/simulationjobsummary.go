@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// SimulationJobSummary
+// Summary information for a simulation job.
 type SimulationJobSummary struct {
 	Arn                        *string                  `json:"arn,omitempty"`
 	DataSourceNames            []string                 `json:"dataSourceNames,omitempty"`

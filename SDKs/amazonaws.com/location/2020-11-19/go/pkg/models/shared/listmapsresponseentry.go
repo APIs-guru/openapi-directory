@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// ListMapsResponseEntry
+// Contains details of an existing map resource in your AWS account.
 type ListMapsResponseEntry struct {
 	CreateTime  time.Time       `json:"CreateTime"`
 	DataSource  string          `json:"DataSource"`

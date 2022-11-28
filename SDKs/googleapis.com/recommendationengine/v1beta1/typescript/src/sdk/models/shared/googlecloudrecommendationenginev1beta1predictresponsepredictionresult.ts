@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudRecommendationengineV1beta1PredictResponsePredictionResult
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * PredictionResult represents the recommendation prediction results.
 **/
 export class GoogleCloudRecommendationengineV1beta1PredictResponsePredictionResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=itemMetadata" })
+  @SpeakeasyMetadata({ data: "json, name=itemMetadata" })
   itemMetadata?: Map<string, any>;
 }

@@ -1,25 +1,26 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class CollectionsMetadataSubjectsRelationshipsPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=cgm_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=cgm_id" })
   cgmId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=collection_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=collection_id" })
   collectionId: string;
 }
 
 
 export class CollectionsMetadataSubjectsRelationshipsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: CollectionsMetadataSubjectsRelationshipsPathParams;
 }
 
 
 export class CollectionsMetadataSubjectsRelationshipsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

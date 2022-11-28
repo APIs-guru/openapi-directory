@@ -1,44 +1,45 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetTransactionsFilteredByIdPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=ican" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=ican" })
   ican: number;
 }
 
 
 export class GetTransactionsFilteredByIdQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=dateRangeFrom" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=dateRangeFrom" })
   dateRangeFrom: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=dateRangeTo" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=dateRangeTo" })
   dateRangeTo: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=searchKeyword" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=searchKeyword" })
   searchKeyword: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=transactionTypes" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=transactionTypes" })
   transactionTypes: string[];
 }
 
 
 export class GetTransactionsFilteredByIdRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetTransactionsFilteredByIdPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetTransactionsFilteredByIdQueryParams;
 }
 
 
 export class GetTransactionsFilteredByIdResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   oneaccounts1Percent7BicanPercent7D1transactionsGetResponses200ContentApplication1jsonSchema?: shared.Oneaccounts1Percent7BicanPercent7D1transactionsGetResponses200ContentApplication1jsonSchema;
 }

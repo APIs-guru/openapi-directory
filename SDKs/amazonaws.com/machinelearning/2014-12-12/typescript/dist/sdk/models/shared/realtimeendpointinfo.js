@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RealtimeEndpointStatusEnum } from "./realtimeendpointstatusenum";
 // RealtimeEndpointInfo
 /**
@@ -34,19 +34,19 @@ var RealtimeEndpointInfo = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=CreatedAt" }),
+        SpeakeasyMetadata({ data: "json, name=CreatedAt" }),
         __metadata("design:type", Date)
     ], RealtimeEndpointInfo.prototype, "createdAt", void 0);
     __decorate([
-        Metadata({ data: "json, name=EndpointStatus" }),
+        SpeakeasyMetadata({ data: "json, name=EndpointStatus" }),
         __metadata("design:type", String)
     ], RealtimeEndpointInfo.prototype, "endpointStatus", void 0);
     __decorate([
-        Metadata({ data: "json, name=EndpointUrl" }),
+        SpeakeasyMetadata({ data: "json, name=EndpointUrl" }),
         __metadata("design:type", String)
     ], RealtimeEndpointInfo.prototype, "endpointUrl", void 0);
     __decorate([
-        Metadata({ data: "json, name=PeakRequestsPerSecond" }),
+        SpeakeasyMetadata({ data: "json, name=PeakRequestsPerSecond" }),
         __metadata("design:type", Number)
     ], RealtimeEndpointInfo.prototype, "peakRequestsPerSecond", void 0);
     return RealtimeEndpointInfo;

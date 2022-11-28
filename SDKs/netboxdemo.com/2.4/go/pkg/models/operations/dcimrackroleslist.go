@@ -12,15 +12,15 @@ type DcimRackRolesListQueryParams struct {
 	Slug   *string `queryParam:"style=form,explode=true,name=slug"`
 }
 
-type DcimRackRolesListRequest struct {
-	QueryParams DcimRackRolesListQueryParams
-}
-
 type DcimRackRolesList200ApplicationJSON struct {
 	Count    int64             `json:"count"`
 	Next     *string           `json:"next,omitempty"`
 	Previous *string           `json:"previous,omitempty"`
 	Results  []shared.RackRole `json:"results"`
+}
+
+type DcimRackRolesListRequest struct {
+	QueryParams DcimRackRolesListQueryParams
 }
 
 type DcimRackRolesListResponse struct {

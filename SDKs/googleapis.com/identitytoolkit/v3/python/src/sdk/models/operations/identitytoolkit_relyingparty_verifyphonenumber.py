@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
@@ -16,20 +17,20 @@ class IdentitytoolkitRelyingpartyVerifyPhoneNumberQueryParams:
 
 @dataclass
 class IdentitytoolkitRelyingpartyVerifyPhoneNumberSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class IdentitytoolkitRelyingpartyVerifyPhoneNumberRequest:
-    query_params: IdentitytoolkitRelyingpartyVerifyPhoneNumberQueryParams = field(default=None)
+    query_params: IdentitytoolkitRelyingpartyVerifyPhoneNumberQueryParams = field()
+    security: IdentitytoolkitRelyingpartyVerifyPhoneNumberSecurity = field()
     request: Optional[shared.IdentitytoolkitRelyingpartyVerifyPhoneNumberRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: IdentitytoolkitRelyingpartyVerifyPhoneNumberSecurity = field(default=None)
     
 
 @dataclass
 class IdentitytoolkitRelyingpartyVerifyPhoneNumberResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     identitytoolkit_relyingparty_verify_phone_number_response: Optional[shared.IdentitytoolkitRelyingpartyVerifyPhoneNumberResponse] = field(default=None)
-    status_code: int = field(default=None)
     

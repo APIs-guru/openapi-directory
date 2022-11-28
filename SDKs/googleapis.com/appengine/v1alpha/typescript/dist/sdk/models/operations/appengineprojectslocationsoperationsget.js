@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var AppengineProjectsLocationsOperationsGetPathParams = /** @class */ (function (_super) {
     __extends(AppengineProjectsLocationsOperationsGetPathParams, _super);
@@ -30,15 +30,15 @@ var AppengineProjectsLocationsOperationsGetPathParams = /** @class */ (function 
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=locationsId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=locationsId" }),
         __metadata("design:type", String)
     ], AppengineProjectsLocationsOperationsGetPathParams.prototype, "locationsId", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=operationsId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=operationsId" }),
         __metadata("design:type", String)
     ], AppengineProjectsLocationsOperationsGetPathParams.prototype, "operationsId", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=projectsId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=projectsId" }),
         __metadata("design:type", String)
     ], AppengineProjectsLocationsOperationsGetPathParams.prototype, "projectsId", void 0);
     return AppengineProjectsLocationsOperationsGetPathParams;
@@ -50,47 +50,47 @@ var AppengineProjectsLocationsOperationsGetQueryParams = /** @class */ (function
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=$.xgafv" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=$.xgafv" }),
         __metadata("design:type", String)
     ], AppengineProjectsLocationsOperationsGetQueryParams.prototype, "dollarXgafv", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=access_token" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=access_token" }),
         __metadata("design:type", String)
     ], AppengineProjectsLocationsOperationsGetQueryParams.prototype, "accessToken", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=alt" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=alt" }),
         __metadata("design:type", String)
     ], AppengineProjectsLocationsOperationsGetQueryParams.prototype, "alt", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=callback" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=callback" }),
         __metadata("design:type", String)
     ], AppengineProjectsLocationsOperationsGetQueryParams.prototype, "callback", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=fields" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=fields" }),
         __metadata("design:type", String)
     ], AppengineProjectsLocationsOperationsGetQueryParams.prototype, "fields", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=key" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=key" }),
         __metadata("design:type", String)
     ], AppengineProjectsLocationsOperationsGetQueryParams.prototype, "key", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=oauth_token" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=oauth_token" }),
         __metadata("design:type", String)
     ], AppengineProjectsLocationsOperationsGetQueryParams.prototype, "oauthToken", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=prettyPrint" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=prettyPrint" }),
         __metadata("design:type", Boolean)
     ], AppengineProjectsLocationsOperationsGetQueryParams.prototype, "prettyPrint", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=quotaUser" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=quotaUser" }),
         __metadata("design:type", String)
     ], AppengineProjectsLocationsOperationsGetQueryParams.prototype, "quotaUser", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=uploadType" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=uploadType" }),
         __metadata("design:type", String)
     ], AppengineProjectsLocationsOperationsGetQueryParams.prototype, "uploadType", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=upload_protocol" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=upload_protocol" }),
         __metadata("design:type", String)
     ], AppengineProjectsLocationsOperationsGetQueryParams.prototype, "uploadProtocol", void 0);
     return AppengineProjectsLocationsOperationsGetQueryParams;
@@ -102,11 +102,11 @@ var AppengineProjectsLocationsOperationsGetSecurityOption1 = /** @class */ (func
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2)
     ], AppengineProjectsLocationsOperationsGetSecurityOption1.prototype, "oauth2", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2c)
     ], AppengineProjectsLocationsOperationsGetSecurityOption1.prototype, "oauth2c", void 0);
     return AppengineProjectsLocationsOperationsGetSecurityOption1;
@@ -118,11 +118,11 @@ var AppengineProjectsLocationsOperationsGetSecurityOption2 = /** @class */ (func
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2)
     ], AppengineProjectsLocationsOperationsGetSecurityOption2.prototype, "oauth2", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2c)
     ], AppengineProjectsLocationsOperationsGetSecurityOption2.prototype, "oauth2c", void 0);
     return AppengineProjectsLocationsOperationsGetSecurityOption2;
@@ -134,11 +134,11 @@ var AppengineProjectsLocationsOperationsGetSecurityOption3 = /** @class */ (func
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2)
     ], AppengineProjectsLocationsOperationsGetSecurityOption3.prototype, "oauth2", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2c)
     ], AppengineProjectsLocationsOperationsGetSecurityOption3.prototype, "oauth2c", void 0);
     return AppengineProjectsLocationsOperationsGetSecurityOption3;
@@ -150,15 +150,15 @@ var AppengineProjectsLocationsOperationsGetSecurity = /** @class */ (function (_
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, option=true" }),
+        SpeakeasyMetadata({ data: "security, option=true" }),
         __metadata("design:type", AppengineProjectsLocationsOperationsGetSecurityOption1)
     ], AppengineProjectsLocationsOperationsGetSecurity.prototype, "option1", void 0);
     __decorate([
-        Metadata({ data: "security, option=true" }),
+        SpeakeasyMetadata({ data: "security, option=true" }),
         __metadata("design:type", AppengineProjectsLocationsOperationsGetSecurityOption2)
     ], AppengineProjectsLocationsOperationsGetSecurity.prototype, "option2", void 0);
     __decorate([
-        Metadata({ data: "security, option=true" }),
+        SpeakeasyMetadata({ data: "security, option=true" }),
         __metadata("design:type", AppengineProjectsLocationsOperationsGetSecurityOption3)
     ], AppengineProjectsLocationsOperationsGetSecurity.prototype, "option3", void 0);
     return AppengineProjectsLocationsOperationsGetSecurity;
@@ -170,15 +170,15 @@ var AppengineProjectsLocationsOperationsGetRequest = /** @class */ (function (_s
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", AppengineProjectsLocationsOperationsGetPathParams)
     ], AppengineProjectsLocationsOperationsGetRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", AppengineProjectsLocationsOperationsGetQueryParams)
     ], AppengineProjectsLocationsOperationsGetRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", AppengineProjectsLocationsOperationsGetSecurity)
     ], AppengineProjectsLocationsOperationsGetRequest.prototype, "security", void 0);
     return AppengineProjectsLocationsOperationsGetRequest;
@@ -190,15 +190,15 @@ var AppengineProjectsLocationsOperationsGetResponse = /** @class */ (function (_
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], AppengineProjectsLocationsOperationsGetResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.Operation)
     ], AppengineProjectsLocationsOperationsGetResponse.prototype, "operation", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], AppengineProjectsLocationsOperationsGetResponse.prototype, "statusCode", void 0);
     return AppengineProjectsLocationsOperationsGetResponse;

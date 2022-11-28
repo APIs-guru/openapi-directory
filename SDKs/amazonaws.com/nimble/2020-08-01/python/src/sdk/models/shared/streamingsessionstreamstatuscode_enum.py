@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class StreamingSessionStreamStatusCodeEnum(str, Enum):
     STREAM_CREATE_IN_PROGRESS = "STREAM_CREATE_IN_PROGRESS"

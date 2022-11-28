@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // UrlDispatchRule
 /**
  * Rules to match an HTTP request and dispatch that request to a service.
@@ -33,15 +33,15 @@ var UrlDispatchRule = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=domain" }),
+        SpeakeasyMetadata({ data: "json, name=domain" }),
         __metadata("design:type", String)
     ], UrlDispatchRule.prototype, "domain", void 0);
     __decorate([
-        Metadata({ data: "json, name=path" }),
+        SpeakeasyMetadata({ data: "json, name=path" }),
         __metadata("design:type", String)
     ], UrlDispatchRule.prototype, "path", void 0);
     __decorate([
-        Metadata({ data: "json, name=service" }),
+        SpeakeasyMetadata({ data: "json, name=service" }),
         __metadata("design:type", String)
     ], UrlDispatchRule.prototype, "service", void 0);
     return UrlDispatchRule;

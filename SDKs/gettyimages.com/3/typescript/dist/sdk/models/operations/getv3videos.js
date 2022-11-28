@@ -22,18 +22,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var GetV3VideosQueryParams = /** @class */ (function (_super) {
     __extends(GetV3VideosQueryParams, _super);
     function GetV3VideosQueryParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=false;name=fields" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=fields" }),
         __metadata("design:type", Array)
     ], GetV3VideosQueryParams.prototype, "fields", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=false;name=ids" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=ids" }),
         __metadata("design:type", Array)
     ], GetV3VideosQueryParams.prototype, "ids", void 0);
     return GetV3VideosQueryParams;
@@ -45,7 +45,7 @@ var GetV3VideosHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=Accept-Language" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Accept-Language" }),
         __metadata("design:type", String)
     ], GetV3VideosHeaders.prototype, "acceptLanguage", void 0);
     return GetV3VideosHeaders;
@@ -57,11 +57,11 @@ var GetV3VideosRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetV3VideosQueryParams)
     ], GetV3VideosRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetV3VideosHeaders)
     ], GetV3VideosRequest.prototype, "headers", void 0);
     return GetV3VideosRequest;
@@ -73,11 +73,11 @@ var GetV3VideosResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetV3VideosResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetV3VideosResponse.prototype, "statusCode", void 0);
     return GetV3VideosResponse;

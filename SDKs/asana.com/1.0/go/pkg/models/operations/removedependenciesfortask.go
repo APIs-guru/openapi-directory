@@ -17,14 +17,14 @@ type RemoveDependenciesForTaskRequestBody struct {
 	Data *shared.ModifyDependenciesRequest `json:"data,omitempty"`
 }
 
+type RemoveDependenciesForTask200ApplicationJSON struct {
+	Data []map[string]interface{} `json:"data,omitempty"`
+}
+
 type RemoveDependenciesForTaskRequest struct {
 	PathParams  RemoveDependenciesForTaskPathParams
 	QueryParams RemoveDependenciesForTaskQueryParams
 	Request     RemoveDependenciesForTaskRequestBody `request:"mediaType=application/json"`
-}
-
-type RemoveDependenciesForTask200ApplicationJSON struct {
-	Data []map[string]interface{} `json:"data,omitempty"`
 }
 
 type RemoveDependenciesForTaskResponse struct {

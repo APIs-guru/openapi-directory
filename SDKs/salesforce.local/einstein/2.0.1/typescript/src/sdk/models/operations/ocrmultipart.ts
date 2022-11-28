@@ -1,56 +1,57 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class OcrMultipartRequestBodySampleContent extends SpeakeasyBase {
-  @Metadata({ data: "multipart_form, content=true" })
+  @SpeakeasyMetadata({ data: "multipart_form, content=true" })
   content: Uint8Array;
 
-  @Metadata({ data: "multipart_form, name=sampleContent" })
+  @SpeakeasyMetadata({ data: "multipart_form, name=sampleContent" })
   sampleContent: string;
 }
 
 
 export class OcrMultipartRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "multipart_form, name=modelId" })
+  @SpeakeasyMetadata({ data: "multipart_form, name=modelId" })
   modelId?: string;
 
-  @Metadata({ data: "multipart_form, file=true" })
+  @SpeakeasyMetadata({ data: "multipart_form, file=true" })
   sampleContent?: OcrMultipartRequestBodySampleContent;
 
-  @Metadata({ data: "multipart_form, name=sampleId" })
+  @SpeakeasyMetadata({ data: "multipart_form, name=sampleId" })
   sampleId?: string;
 
-  @Metadata({ data: "multipart_form, name=sampleLocation" })
+  @SpeakeasyMetadata({ data: "multipart_form, name=sampleLocation" })
   sampleLocation?: string;
 
-  @Metadata({ data: "multipart_form, name=task" })
+  @SpeakeasyMetadata({ data: "multipart_form, name=task" })
   task?: string;
 }
 
 
 export class OcrMultipartSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=bearer" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" })
   bearerToken: shared.SchemeBearerToken;
 }
 
 
 export class OcrMultipartRequest extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=multipart/form-data" })
+  @SpeakeasyMetadata({ data: "request, media_type=multipart/form-data" })
   request?: OcrMultipartRequestBody;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: OcrMultipartSecurity;
 }
 
 
 export class OcrMultipartResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   ocrPredictResponse?: shared.OcrPredictResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

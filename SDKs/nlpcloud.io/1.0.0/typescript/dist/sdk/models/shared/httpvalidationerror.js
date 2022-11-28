@@ -22,15 +22,15 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { ValidationError } from "./validationerror";
 var HttpValidationError = /** @class */ (function (_super) {
     __extends(HttpValidationError, _super);
     function HttpValidationError() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=detail", elemType: shared.ValidationError }),
+        SpeakeasyMetadata({ data: "json, name=detail", elemType: ValidationError }),
         __metadata("design:type", Array)
     ], HttpValidationError.prototype, "detail", void 0);
     return HttpValidationError;

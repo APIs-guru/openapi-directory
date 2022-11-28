@@ -1,16 +1,17 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ActionConfirmationBody } from "./actionconfirmationbody";
 
+
 export enum ActionHookActionBodyHttpMethodEnum {
-    Connect = "CONNECT"
-,    Delete = "DELETE"
-,    Get = "GET"
-,    Head = "HEAD"
-,    Options = "OPTIONS"
-,    Patch = "PATCH"
-,    Post = "POST"
-,    Put = "PUT"
-,    Trace = "TRACE"
+    Connect = "CONNECT",
+    Delete = "DELETE",
+    Get = "GET",
+    Head = "HEAD",
+    Options = "OPTIONS",
+    Patch = "PATCH",
+    Post = "POST",
+    Put = "PUT",
+    Trace = "TRACE"
 }
 
 export enum ActionHookActionBodyTypeEnum {
@@ -19,21 +20,21 @@ export enum ActionHookActionBodyTypeEnum {
 
 
 export class ActionHookActionBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=confirmation" })
+  @SpeakeasyMetadata({ data: "json, name=confirmation" })
   confirmation?: ActionConfirmationBody;
 
-  @Metadata({ data: "json, name=httpMethod" })
+  @SpeakeasyMetadata({ data: "json, name=httpMethod" })
   httpMethod: ActionHookActionBodyHttpMethodEnum;
 
-  @Metadata({ data: "json, name=label" })
+  @SpeakeasyMetadata({ data: "json, name=label" })
   label?: string;
 
-  @Metadata({ data: "json, name=propertyNamesIncluded" })
+  @SpeakeasyMetadata({ data: "json, name=propertyNamesIncluded" })
   propertyNamesIncluded: string[];
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type: ActionHookActionBodyTypeEnum;
 
-  @Metadata({ data: "json, name=url" })
+  @SpeakeasyMetadata({ data: "json, name=url" })
   url: string;
 }

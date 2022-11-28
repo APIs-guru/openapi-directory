@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // MetricsSource
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * <p/>
 **/
 export class MetricsSource extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ContentDigest" })
+  @SpeakeasyMetadata({ data: "json, name=ContentDigest" })
   contentDigest?: string;
 
-  @Metadata({ data: "json, name=ContentType" })
+  @SpeakeasyMetadata({ data: "json, name=ContentType" })
   contentType: string;
 
-  @Metadata({ data: "json, name=S3Uri" })
+  @SpeakeasyMetadata({ data: "json, name=S3Uri" })
   s3Uri: string;
 }

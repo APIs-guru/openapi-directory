@@ -1,15 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ResourceCount } from "./resourcecount";
 
 
+
 export class GetDiscoveredResourceCountsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=nextToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=resourceCounts", elemType: shared.ResourceCount })
+  @SpeakeasyMetadata({ data: "json, name=resourceCounts", elemType: ResourceCount })
   resourceCounts?: ResourceCount[];
 
-  @Metadata({ data: "json, name=totalDiscoveredResources" })
+  @SpeakeasyMetadata({ data: "json, name=totalDiscoveredResources" })
   totalDiscoveredResources?: number;
 }

@@ -22,18 +22,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var GetServiceRoleForAccountResponse = /** @class */ (function (_super) {
     __extends(GetServiceRoleForAccountResponse, _super);
     function GetServiceRoleForAccountResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=AssociatedAt" }),
+        SpeakeasyMetadata({ data: "json, name=AssociatedAt" }),
         __metadata("design:type", String)
     ], GetServiceRoleForAccountResponse.prototype, "associatedAt", void 0);
     __decorate([
-        Metadata({ data: "json, name=RoleArn" }),
+        SpeakeasyMetadata({ data: "json, name=RoleArn" }),
         __metadata("design:type", String)
     ], GetServiceRoleForAccountResponse.prototype, "roleArn", void 0);
     return GetServiceRoleForAccountResponse;

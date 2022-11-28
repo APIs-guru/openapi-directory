@@ -1,4 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { EntityRecognizerInputDataConfig } from "./entityrecognizerinputdataconfig";
 import { LanguageCodeEnum } from "./languagecodeenum";
 import { EntityRecognizerMetadata } from "./entityrecognizermetadata";
@@ -6,50 +6,51 @@ import { ModelStatusEnum } from "./modelstatusenum";
 import { VpcConfig } from "./vpcconfig";
 
 
+
 // EntityRecognizerProperties
 /** 
  * Describes information about an entity recognizer.
 **/
 export class EntityRecognizerProperties extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DataAccessRoleArn" })
+  @SpeakeasyMetadata({ data: "json, name=DataAccessRoleArn" })
   dataAccessRoleArn?: string;
 
-  @Metadata({ data: "json, name=EndTime" })
+  @SpeakeasyMetadata({ data: "json, name=EndTime" })
   endTime?: Date;
 
-  @Metadata({ data: "json, name=EntityRecognizerArn" })
+  @SpeakeasyMetadata({ data: "json, name=EntityRecognizerArn" })
   entityRecognizerArn?: string;
 
-  @Metadata({ data: "json, name=InputDataConfig" })
+  @SpeakeasyMetadata({ data: "json, name=InputDataConfig" })
   inputDataConfig?: EntityRecognizerInputDataConfig;
 
-  @Metadata({ data: "json, name=LanguageCode" })
+  @SpeakeasyMetadata({ data: "json, name=LanguageCode" })
   languageCode?: LanguageCodeEnum;
 
-  @Metadata({ data: "json, name=Message" })
+  @SpeakeasyMetadata({ data: "json, name=Message" })
   message?: string;
 
-  @Metadata({ data: "json, name=ModelKmsKeyId" })
+  @SpeakeasyMetadata({ data: "json, name=ModelKmsKeyId" })
   modelKmsKeyId?: string;
 
-  @Metadata({ data: "json, name=RecognizerMetadata" })
+  @SpeakeasyMetadata({ data: "json, name=RecognizerMetadata" })
   recognizerMetadata?: EntityRecognizerMetadata;
 
-  @Metadata({ data: "json, name=Status" })
+  @SpeakeasyMetadata({ data: "json, name=Status" })
   status?: ModelStatusEnum;
 
-  @Metadata({ data: "json, name=SubmitTime" })
+  @SpeakeasyMetadata({ data: "json, name=SubmitTime" })
   submitTime?: Date;
 
-  @Metadata({ data: "json, name=TrainingEndTime" })
+  @SpeakeasyMetadata({ data: "json, name=TrainingEndTime" })
   trainingEndTime?: Date;
 
-  @Metadata({ data: "json, name=TrainingStartTime" })
+  @SpeakeasyMetadata({ data: "json, name=TrainingStartTime" })
   trainingStartTime?: Date;
 
-  @Metadata({ data: "json, name=VolumeKmsKeyId" })
+  @SpeakeasyMetadata({ data: "json, name=VolumeKmsKeyId" })
   volumeKmsKeyId?: string;
 
-  @Metadata({ data: "json, name=VpcConfig" })
+  @SpeakeasyMetadata({ data: "json, name=VpcConfig" })
   vpcConfig?: VpcConfig;
 }

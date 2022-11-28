@@ -8,11 +8,6 @@ type PostLogSecurity struct {
 	Jwt shared.SchemeJwt `security:"scheme,type=http,subtype=bearer"`
 }
 
-type PostLogRequest struct {
-	Request  shared.LogRestAPIPost `request:"mediaType=application/json"`
-	Security PostLogSecurity
-}
-
 type PostLog201ApplicationJSON struct {
 	ID     *string                `json:"id,omitempty"`
 	Result *shared.LogRestAPIPost `json:"result,omitempty"`
@@ -32,6 +27,11 @@ type PostLog422ApplicationJSON struct {
 
 type PostLog500ApplicationJSON struct {
 	Message *string `json:"message,omitempty"`
+}
+
+type PostLogRequest struct {
+	Request  shared.LogRestAPIPost `request:"mediaType=application/json"`
+	Security PostLogSecurity
 }
 
 type PostLogResponse struct {

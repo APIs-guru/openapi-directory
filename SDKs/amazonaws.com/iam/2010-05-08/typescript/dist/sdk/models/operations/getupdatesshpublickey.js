@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var GetUpdateSshPublicKeyActionEnum;
 (function (GetUpdateSshPublicKeyActionEnum) {
     GetUpdateSshPublicKeyActionEnum["UpdateSshPublicKey"] = "UpdateSSHPublicKey";
@@ -42,23 +42,23 @@ var GetUpdateSshPublicKeyQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=Action" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Action" }),
         __metadata("design:type", String)
     ], GetUpdateSshPublicKeyQueryParams.prototype, "action", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=SSHPublicKeyId" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=SSHPublicKeyId" }),
         __metadata("design:type", String)
     ], GetUpdateSshPublicKeyQueryParams.prototype, "sshPublicKeyId", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=Status" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Status" }),
         __metadata("design:type", String)
     ], GetUpdateSshPublicKeyQueryParams.prototype, "status", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=UserName" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=UserName" }),
         __metadata("design:type", String)
     ], GetUpdateSshPublicKeyQueryParams.prototype, "userName", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=Version" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Version" }),
         __metadata("design:type", String)
     ], GetUpdateSshPublicKeyQueryParams.prototype, "version", void 0);
     return GetUpdateSshPublicKeyQueryParams;
@@ -70,31 +70,31 @@ var GetUpdateSshPublicKeyHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
         __metadata("design:type", String)
     ], GetUpdateSshPublicKeyHeaders.prototype, "xAmzAlgorithm", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
         __metadata("design:type", String)
     ], GetUpdateSshPublicKeyHeaders.prototype, "xAmzContentSha256", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
         __metadata("design:type", String)
     ], GetUpdateSshPublicKeyHeaders.prototype, "xAmzCredential", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
         __metadata("design:type", String)
     ], GetUpdateSshPublicKeyHeaders.prototype, "xAmzDate", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
         __metadata("design:type", String)
     ], GetUpdateSshPublicKeyHeaders.prototype, "xAmzSecurityToken", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
         __metadata("design:type", String)
     ], GetUpdateSshPublicKeyHeaders.prototype, "xAmzSignature", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
         __metadata("design:type", String)
     ], GetUpdateSshPublicKeyHeaders.prototype, "xAmzSignedHeaders", void 0);
     return GetUpdateSshPublicKeyHeaders;
@@ -106,11 +106,11 @@ var GetUpdateSshPublicKeyRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetUpdateSshPublicKeyQueryParams)
     ], GetUpdateSshPublicKeyRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetUpdateSshPublicKeyHeaders)
     ], GetUpdateSshPublicKeyRequest.prototype, "headers", void 0);
     return GetUpdateSshPublicKeyRequest;
@@ -122,15 +122,15 @@ var GetUpdateSshPublicKeyResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], GetUpdateSshPublicKeyResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetUpdateSshPublicKeyResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetUpdateSshPublicKeyResponse.prototype, "statusCode", void 0);
     return GetUpdateSshPublicKeyResponse;

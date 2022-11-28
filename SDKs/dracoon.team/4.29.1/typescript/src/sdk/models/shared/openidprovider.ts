@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // OpenIdProvider
@@ -6,21 +7,21 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * OpenID Connect provider information
 **/
 export class OpenIdProvider extends SpeakeasyBase {
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: number;
 
-  @Metadata({ data: "json, name=isGlobalAvailable" })
+  @SpeakeasyMetadata({ data: "json, name=isGlobalAvailable" })
   isGlobalAvailable: boolean;
 
-  @Metadata({ data: "json, name=issuer" })
+  @SpeakeasyMetadata({ data: "json, name=issuer" })
   issuer: string;
 
-  @Metadata({ data: "json, name=mappingClaim" })
+  @SpeakeasyMetadata({ data: "json, name=mappingClaim" })
   mappingClaim: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 
-  @Metadata({ data: "json, name=userManagementUrl" })
+  @SpeakeasyMetadata({ data: "json, name=userManagementUrl" })
   userManagementUrl?: string;
 }

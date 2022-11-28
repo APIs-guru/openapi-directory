@@ -5,18 +5,18 @@ from sdk.models import shared
 
 @dataclass
 class GetCustomFieldsJSONQueryParams:
-    authtoken: str = field(default=None, metadata={'query_param': { 'field_name': 'authtoken', 'style': 'form', 'explode': True }})
-    login: str = field(default=None, metadata={'query_param': { 'field_name': 'login', 'style': 'form', 'explode': True }})
+    authtoken: str = field(metadata={'query_param': { 'field_name': 'authtoken', 'style': 'form', 'explode': True }})
+    login: str = field(metadata={'query_param': { 'field_name': 'login', 'style': 'form', 'explode': True }})
     
 
 @dataclass
 class GetCustomFieldsJSONRequest:
-    query_params: GetCustomFieldsJSONQueryParams = field(default=None)
+    query_params: GetCustomFieldsJSONQueryParams = field()
     
 
 @dataclass
 class GetCustomFieldsJSONResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     custom_fields: Optional[List[shared.CustomField]] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -31,7 +31,7 @@ type RetailProjectsLocationsCatalogsControlsCreateSecurity struct {
 type RetailProjectsLocationsCatalogsControlsCreateRequest struct {
 	PathParams  RetailProjectsLocationsCatalogsControlsCreatePathParams
 	QueryParams RetailProjectsLocationsCatalogsControlsCreateQueryParams
-	Request     *shared.GoogleCloudRetailV2alphaControl `request:"mediaType=application/json"`
+	Request     *shared.GoogleCloudRetailV2alphaControlInput `request:"mediaType=application/json"`
 	Security    RetailProjectsLocationsCatalogsControlsCreateSecurity
 }
 

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AwsEcsTaskDefinitionContainerDefinitionsRepositoryCredentialsDetails
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The private repository authentication credentials to use.
 **/
 export class AwsEcsTaskDefinitionContainerDefinitionsRepositoryCredentialsDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CredentialsParameter" })
+  @SpeakeasyMetadata({ data: "json, name=CredentialsParameter" })
   credentialsParameter?: string;
 }

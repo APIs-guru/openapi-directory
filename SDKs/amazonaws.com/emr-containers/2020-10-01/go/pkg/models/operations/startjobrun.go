@@ -18,11 +18,15 @@ type StartJobRunHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// StartJobRunRequestBodyConfigurationOverrides
+// A configuration specification to be used to override existing configurations.
 type StartJobRunRequestBodyConfigurationOverrides struct {
 	ApplicationConfiguration []shared.Configuration          `json:"applicationConfiguration,omitempty"`
 	MonitoringConfiguration  *shared.MonitoringConfiguration `json:"monitoringConfiguration,omitempty"`
 }
 
+// StartJobRunRequestBodyJobDriver
+// Specify the driver that the job runs on.
 type StartJobRunRequestBodyJobDriver struct {
 	SparkSubmitJobDriver *shared.SparkSubmitJobDriver `json:"sparkSubmitJobDriver,omitempty"`
 }

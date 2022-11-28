@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class UpgradePlanPathParams:
-    platform: str = field(default=None, metadata={'path_param': { 'field_name': 'platform', 'style': 'simple', 'explode': False }})
+    platform: str = field(metadata={'path_param': { 'field_name': 'platform', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -15,20 +15,20 @@ class UpgradePlanQueryParams:
 
 @dataclass
 class UpgradePlanSecurity:
-    account_auth: shared.SchemeAccountAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    account_auth: shared.SchemeAccountAuth = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class UpgradePlanRequest:
-    path_params: UpgradePlanPathParams = field(default=None)
-    query_params: UpgradePlanQueryParams = field(default=None)
-    request: shared.ItvUpgradePlanRequest = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: UpgradePlanSecurity = field(default=None)
+    path_params: UpgradePlanPathParams = field()
+    query_params: UpgradePlanQueryParams = field()
+    request: shared.ItvUpgradePlanRequest = field(metadata={'request': { 'media_type': 'application/json' }})
+    security: UpgradePlanSecurity = field()
     
 
 @dataclass
 class UpgradePlanResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     service_error: Optional[shared.ServiceError] = field(default=None)
-    status_code: int = field(default=None)
     

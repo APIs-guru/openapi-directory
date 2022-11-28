@@ -1,97 +1,98 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum PostGeomarksNewRequestBodyBufferCapEnum {
-    Round = "ROUND"
-,    Square = "SQUARE"
-,    Flat = "FLAT"
+    Round = "ROUND",
+    Square = "SQUARE",
+    Flat = "FLAT"
 }
 
 export enum PostGeomarksNewRequestBodyBufferJoinEnum {
-    Round = "ROUND"
-,    Mitre = "MITRE"
-,    Bevel = "BEVEL"
+    Round = "ROUND",
+    Mitre = "MITRE",
+    Bevel = "BEVEL"
 }
 
 export enum PostGeomarksNewRequestBodyFormatEnum {
-    Json = "json"
-,    Xml = "xml"
-,    Kml = "kml"
-,    Kmz = "kmz"
-,    Shp = "shp"
-,    Shpz = "shpz"
-,    Geojson = "geojson"
-,    Gml = "gml"
-,    Wkt = "wkt"
+    Json = "json",
+    Xml = "xml",
+    Kml = "kml",
+    Kmz = "kmz",
+    Shp = "shp",
+    Shpz = "shpz",
+    Geojson = "geojson",
+    Gml = "gml",
+    Wkt = "wkt"
 }
 
 export enum PostGeomarksNewRequestBodyResultFormatEnum {
-    Json = "json"
-,    Xml = "xml"
-,    Kml = "kml"
-,    Kmz = "kmz"
-,    Shp = "shp"
-,    Shpz = "shpz"
-,    Geojson = "geojson"
-,    Gml = "gml"
-,    Wkt = "wkt"
+    Json = "json",
+    Xml = "xml",
+    Kml = "kml",
+    Kmz = "kmz",
+    Shp = "shp",
+    Shpz = "shpz",
+    Geojson = "geojson",
+    Gml = "gml",
+    Wkt = "wkt"
 }
 
 
 export class PostGeomarksNewRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "form, name=allowOverlap;" })
+  @SpeakeasyMetadata({ data: "form, name=allowOverlap;" })
   allowOverlap?: boolean;
 
-  @Metadata({ data: "form, name=body;" })
+  @SpeakeasyMetadata({ data: "form, name=body;" })
   body?: string;
 
-  @Metadata({ data: "form, name=bufferCap;" })
+  @SpeakeasyMetadata({ data: "form, name=bufferCap;" })
   bufferCap?: PostGeomarksNewRequestBodyBufferCapEnum;
 
-  @Metadata({ data: "form, name=bufferJoin;" })
+  @SpeakeasyMetadata({ data: "form, name=bufferJoin;" })
   bufferJoin?: PostGeomarksNewRequestBodyBufferJoinEnum;
 
-  @Metadata({ data: "form, name=bufferMetres;" })
+  @SpeakeasyMetadata({ data: "form, name=bufferMetres;" })
   bufferMetres?: number;
 
-  @Metadata({ data: "form, name=bufferMitreLimit;" })
+  @SpeakeasyMetadata({ data: "form, name=bufferMitreLimit;" })
   bufferMitreLimit?: number;
 
-  @Metadata({ data: "form, name=bufferSegments;" })
+  @SpeakeasyMetadata({ data: "form, name=bufferSegments;" })
   bufferSegments?: number;
 
-  @Metadata({ data: "form, name=callback;" })
+  @SpeakeasyMetadata({ data: "form, name=callback;" })
   callback?: string;
 
-  @Metadata({ data: "form, name=failureRedirectUrl;" })
+  @SpeakeasyMetadata({ data: "form, name=failureRedirectUrl;" })
   failureRedirectUrl?: string;
 
-  @Metadata({ data: "form, name=format;" })
+  @SpeakeasyMetadata({ data: "form, name=format;" })
   format?: PostGeomarksNewRequestBodyFormatEnum;
 
-  @Metadata({ data: "form, name=multiple;" })
+  @SpeakeasyMetadata({ data: "form, name=multiple;" })
   multiple?: boolean;
 
-  @Metadata({ data: "form, name=redirectUrl;" })
+  @SpeakeasyMetadata({ data: "form, name=redirectUrl;" })
   redirectUrl?: string;
 
-  @Metadata({ data: "form, name=resultFormat;" })
+  @SpeakeasyMetadata({ data: "form, name=resultFormat;" })
   resultFormat?: PostGeomarksNewRequestBodyResultFormatEnum;
 
-  @Metadata({ data: "form, name=srid;" })
+  @SpeakeasyMetadata({ data: "form, name=srid;" })
   srid?: number;
 }
 
 
 export class PostGeomarksNewRequest extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/x-www-form-urlencoded" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/x-www-form-urlencoded" })
   request?: PostGeomarksNewRequestBody;
 }
 
 
 export class PostGeomarksNewResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

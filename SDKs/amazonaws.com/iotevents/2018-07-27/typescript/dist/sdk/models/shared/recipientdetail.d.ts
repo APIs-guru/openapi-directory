@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { SsoIdentity } from "./ssoidentity";
 /**
  * The information that identifies the recipient.

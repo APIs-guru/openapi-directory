@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from typing import Optional
+from enum import Enum
 
 class GetAPIArticlesMediaTypeExtensionMediaTypeExtensionEnum(str, Enum):
     DOT_JSON = ".json"
@@ -7,17 +8,17 @@ class GetAPIArticlesMediaTypeExtensionMediaTypeExtensionEnum(str, Enum):
 
 @dataclass
 class GetAPIArticlesMediaTypeExtensionPathParams:
-    media_type_extension: GetAPIArticlesMediaTypeExtensionMediaTypeExtensionEnum = field(default=None, metadata={'path_param': { 'field_name': 'mediaTypeExtension', 'style': 'simple', 'explode': False }})
+    media_type_extension: GetAPIArticlesMediaTypeExtensionMediaTypeExtensionEnum = field(metadata={'path_param': { 'field_name': 'mediaTypeExtension', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetAPIArticlesMediaTypeExtensionRequest:
-    path_params: GetAPIArticlesMediaTypeExtensionPathParams = field(default=None)
+    path_params: GetAPIArticlesMediaTypeExtensionPathParams = field()
     
 
 @dataclass
 class GetAPIArticlesMediaTypeExtensionResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

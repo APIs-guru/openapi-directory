@@ -1,15 +1,16 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ProvisioningArtifactDetail } from "./provisioningartifactdetail";
 import { StatusEnum } from "./statusenum";
 
 
+
 export class CreateProvisioningArtifactOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Info" })
+  @SpeakeasyMetadata({ data: "json, name=Info" })
   info?: Map<string, string>;
 
-  @Metadata({ data: "json, name=ProvisioningArtifactDetail" })
+  @SpeakeasyMetadata({ data: "json, name=ProvisioningArtifactDetail" })
   provisioningArtifactDetail?: ProvisioningArtifactDetail;
 
-  @Metadata({ data: "json, name=Status" })
+  @SpeakeasyMetadata({ data: "json, name=Status" })
   status?: StatusEnum;
 }

@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PhotoId } from "./photoid";
+
 
 
 // Connection
@@ -7,6 +8,6 @@ import { PhotoId } from "./photoid";
  * A connection is the link from a source photo to a destination photo.
 **/
 export class Connection extends SpeakeasyBase {
-  @Metadata({ data: "json, name=target" })
+  @SpeakeasyMetadata({ data: "json, name=target" })
   target?: PhotoId;
 }

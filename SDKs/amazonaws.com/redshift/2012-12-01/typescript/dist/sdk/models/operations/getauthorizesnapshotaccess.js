@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var GetAuthorizeSnapshotAccessActionEnum;
 (function (GetAuthorizeSnapshotAccessActionEnum) {
     GetAuthorizeSnapshotAccessActionEnum["AuthorizeSnapshotAccess"] = "AuthorizeSnapshotAccess";
@@ -37,23 +37,23 @@ var GetAuthorizeSnapshotAccessQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=AccountWithRestoreAccess" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=AccountWithRestoreAccess" }),
         __metadata("design:type", String)
     ], GetAuthorizeSnapshotAccessQueryParams.prototype, "accountWithRestoreAccess", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=Action" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Action" }),
         __metadata("design:type", String)
     ], GetAuthorizeSnapshotAccessQueryParams.prototype, "action", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=SnapshotClusterIdentifier" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=SnapshotClusterIdentifier" }),
         __metadata("design:type", String)
     ], GetAuthorizeSnapshotAccessQueryParams.prototype, "snapshotClusterIdentifier", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=SnapshotIdentifier" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=SnapshotIdentifier" }),
         __metadata("design:type", String)
     ], GetAuthorizeSnapshotAccessQueryParams.prototype, "snapshotIdentifier", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=Version" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Version" }),
         __metadata("design:type", String)
     ], GetAuthorizeSnapshotAccessQueryParams.prototype, "version", void 0);
     return GetAuthorizeSnapshotAccessQueryParams;
@@ -65,31 +65,31 @@ var GetAuthorizeSnapshotAccessHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
         __metadata("design:type", String)
     ], GetAuthorizeSnapshotAccessHeaders.prototype, "xAmzAlgorithm", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
         __metadata("design:type", String)
     ], GetAuthorizeSnapshotAccessHeaders.prototype, "xAmzContentSha256", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
         __metadata("design:type", String)
     ], GetAuthorizeSnapshotAccessHeaders.prototype, "xAmzCredential", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
         __metadata("design:type", String)
     ], GetAuthorizeSnapshotAccessHeaders.prototype, "xAmzDate", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
         __metadata("design:type", String)
     ], GetAuthorizeSnapshotAccessHeaders.prototype, "xAmzSecurityToken", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
         __metadata("design:type", String)
     ], GetAuthorizeSnapshotAccessHeaders.prototype, "xAmzSignature", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
         __metadata("design:type", String)
     ], GetAuthorizeSnapshotAccessHeaders.prototype, "xAmzSignedHeaders", void 0);
     return GetAuthorizeSnapshotAccessHeaders;
@@ -101,11 +101,11 @@ var GetAuthorizeSnapshotAccessRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetAuthorizeSnapshotAccessQueryParams)
     ], GetAuthorizeSnapshotAccessRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetAuthorizeSnapshotAccessHeaders)
     ], GetAuthorizeSnapshotAccessRequest.prototype, "headers", void 0);
     return GetAuthorizeSnapshotAccessRequest;
@@ -117,15 +117,15 @@ var GetAuthorizeSnapshotAccessResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], GetAuthorizeSnapshotAccessResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetAuthorizeSnapshotAccessResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetAuthorizeSnapshotAccessResponse.prototype, "statusCode", void 0);
     return GetAuthorizeSnapshotAccessResponse;

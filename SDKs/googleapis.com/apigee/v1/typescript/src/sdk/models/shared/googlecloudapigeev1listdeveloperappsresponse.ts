@@ -1,9 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudApigeeV1DeveloperApp } from "./googlecloudapigeev1developerapp";
 
 
+
 export class GoogleCloudApigeeV1ListDeveloperAppsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=app", elemType: shared.GoogleCloudApigeeV1DeveloperApp })
+  @SpeakeasyMetadata({ data: "json, name=app", elemType: GoogleCloudApigeeV1DeveloperApp })
   app?: GoogleCloudApigeeV1DeveloperApp[];
 }

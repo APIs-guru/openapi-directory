@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import googlecloudbeyondcorpappconnectorsv1alphaappconnectorinstanceconfig
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class GoogleCloudBeyondcorpAppconnectorsV1alphaResolveInstanceConfigResponse:
-    instance_config: Optional[googlecloudbeyondcorpappconnectorsv1alphaappconnectorinstanceconfig.GoogleCloudBeyondcorpAppconnectorsV1alphaAppConnectorInstanceConfig] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'instanceConfig' }})
+    r"""GoogleCloudBeyondcorpAppconnectorsV1alphaResolveInstanceConfigResponse
+    Response message for BeyondCorp.ResolveInstanceConfig.
+    """
+    
+    instance_config: Optional[GoogleCloudBeyondcorpAppconnectorsV1alphaAppConnectorInstanceConfig] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('instanceConfig') }})
     

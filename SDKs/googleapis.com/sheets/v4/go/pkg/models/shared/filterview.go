@@ -1,5 +1,7 @@
 package shared
 
+// FilterView
+// A filter view.
 type FilterView struct {
 	Criteria     map[string]FilterCriteria `json:"criteria,omitempty"`
 	FilterSpecs  []FilterSpec              `json:"filterSpecs,omitempty"`

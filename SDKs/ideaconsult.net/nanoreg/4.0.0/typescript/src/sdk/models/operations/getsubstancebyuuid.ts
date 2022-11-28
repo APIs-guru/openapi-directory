@@ -1,44 +1,45 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetSubstanceByUuidPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=db" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=db" })
   db: shared.AmbitDatabaseIdEnum;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=uuid" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=uuid" })
   uuid: string;
 }
 
 
 export class GetSubstanceByUuidQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=page" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page" })
   page?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=pagesize" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=pagesize" })
   pagesize?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=property_uris[]" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=property_uris[]" })
   propertyUris?: string;
 }
 
 
 export class GetSubstanceByUuidRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetSubstanceByUuidPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetSubstanceByUuidQueryParams;
 }
 
 
 export class GetSubstanceByUuidResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   substance?: shared.Substance;
 }

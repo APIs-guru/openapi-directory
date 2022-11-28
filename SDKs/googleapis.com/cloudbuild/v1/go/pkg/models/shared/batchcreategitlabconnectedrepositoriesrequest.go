@@ -1,5 +1,7 @@
 package shared
 
-type BatchCreateGitLabConnectedRepositoriesRequest struct {
-	Requests []CreateGitLabConnectedRepositoryRequest `json:"requests,omitempty"`
+// BatchCreateGitLabConnectedRepositoriesRequestInput
+// RPC request object accepted by BatchCreateGitLabConnectedRepositories RPC method.
+type BatchCreateGitLabConnectedRepositoriesRequestInput struct {
+	Requests []CreateGitLabConnectedRepositoryRequestInput `json:"requests,omitempty"`
 }

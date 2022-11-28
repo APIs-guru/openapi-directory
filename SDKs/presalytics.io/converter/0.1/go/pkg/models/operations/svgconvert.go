@@ -9,13 +9,13 @@ type SvgconvertFileToConvert struct {
 	File *SvgconvertFileToConvertFile `multipartForm:"file"`
 }
 
-type SvgconvertRequest struct {
-	Request SvgconvertFileToConvert `request:"mediaType=multipart/form-data"`
-}
-
 type SvgconvertFileURL struct {
 	BlobName *string `json:"blob_name,omitempty"`
 	BlobURL  *string `json:"blob_url,omitempty"`
+}
+
+type SvgconvertRequest struct {
+	Request SvgconvertFileToConvert `request:"mediaType=multipart/form-data"`
 }
 
 type SvgconvertResponse struct {

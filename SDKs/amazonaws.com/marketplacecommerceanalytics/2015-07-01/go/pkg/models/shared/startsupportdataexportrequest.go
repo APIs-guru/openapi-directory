@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// StartSupportDataExportRequest
+// Container for the parameters to the StartSupportDataExport operation.
 type StartSupportDataExportRequest struct {
 	CustomerDefinedValues   map[string]string      `json:"customerDefinedValues,omitempty"`
 	DataSetType             SupportDataSetTypeEnum `json:"dataSetType"`

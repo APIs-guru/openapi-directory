@@ -1,64 +1,65 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ControllersSystemItemAttributes extends SpeakeasyBase {
-  @Metadata({ data: "json, name=created" })
+  @SpeakeasyMetadata({ data: "json, name=created" })
   created?: string;
 
-  @Metadata({ data: "json, name=culled_timestamp" })
+  @SpeakeasyMetadata({ data: "json, name=culled_timestamp" })
   culledTimestamp?: string;
 
-  @Metadata({ data: "json, name=display_name" })
+  @SpeakeasyMetadata({ data: "json, name=display_name" })
   displayName?: string;
 
-  @Metadata({ data: "json, name=insights_id" })
+  @SpeakeasyMetadata({ data: "json, name=insights_id" })
   insightsId?: string;
 
-  @Metadata({ data: "json, name=last_evaluation" })
+  @SpeakeasyMetadata({ data: "json, name=last_evaluation" })
   lastEvaluation?: string;
 
-  @Metadata({ data: "json, name=last_upload" })
+  @SpeakeasyMetadata({ data: "json, name=last_upload" })
   lastUpload?: string;
 
-  @Metadata({ data: "json, name=os_major" })
+  @SpeakeasyMetadata({ data: "json, name=os_major" })
   osMajor?: string;
 
-  @Metadata({ data: "json, name=os_minor" })
+  @SpeakeasyMetadata({ data: "json, name=os_minor" })
   osMinor?: string;
 
-  @Metadata({ data: "json, name=os_name" })
+  @SpeakeasyMetadata({ data: "json, name=os_name" })
   osName?: string;
 
-  @Metadata({ data: "json, name=other_count" })
+  @SpeakeasyMetadata({ data: "json, name=other_count" })
   otherCount?: number;
 
-  @Metadata({ data: "json, name=packages_installed" })
+  @SpeakeasyMetadata({ data: "json, name=packages_installed" })
   packagesInstalled?: number;
 
-  @Metadata({ data: "json, name=packages_updatable" })
+  @SpeakeasyMetadata({ data: "json, name=packages_updatable" })
   packagesUpdatable?: number;
 
-  @Metadata({ data: "json, name=rhba_count" })
+  @SpeakeasyMetadata({ data: "json, name=rhba_count" })
   rhbaCount?: number;
 
-  @Metadata({ data: "json, name=rhea_count" })
+  @SpeakeasyMetadata({ data: "json, name=rhea_count" })
   rheaCount?: number;
 
-  @Metadata({ data: "json, name=rhsa_count" })
+  @SpeakeasyMetadata({ data: "json, name=rhsa_count" })
   rhsaCount?: number;
 
-  @Metadata({ data: "json, name=rhsm" })
+  @SpeakeasyMetadata({ data: "json, name=rhsm" })
   rhsm?: string;
 
-  @Metadata({ data: "json, name=stale" })
+  @SpeakeasyMetadata({ data: "json, name=stale" })
   stale?: boolean;
 
-  @Metadata({ data: "json, name=stale_timestamp" })
+  @SpeakeasyMetadata({ data: "json, name=stale_timestamp" })
   staleTimestamp?: string;
 
-  @Metadata({ data: "json, name=stale_warning_timestamp" })
+  @SpeakeasyMetadata({ data: "json, name=stale_warning_timestamp" })
   staleWarningTimestamp?: string;
 
-  @Metadata({ data: "json, name=third_party" })
+  @SpeakeasyMetadata({ data: "json, name=third_party" })
   thirdParty?: boolean;
 }

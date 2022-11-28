@@ -1,18 +1,24 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import operation_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class RecordPatch:
-    device_last_modified_date: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'DeviceLastModifiedDate', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    key: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Key' }})
-    op: operation_enum.OperationEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Op' }})
-    sync_count: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'SyncCount' }})
-    value: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Value' }})
+    r"""RecordPatch
+    An update operation for a record.
+    """
+    
+    key: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Key') }})
+    op: OperationEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Op') }})
+    sync_count: int = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('SyncCount') }})
+    device_last_modified_date: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('DeviceLastModifiedDate'), 'encoder': utils.datetimeisoformat(True), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    value: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Value') }})
     

@@ -1,47 +1,48 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
+
 export enum CreateCheckTruoraPriorityEnum {
-    Low = "low"
-,    Medium = "medium"
-,    High = "high"
+    Low = "low",
+    Medium = "medium",
+    High = "high"
 }
 
 
 export class CreateCheckHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=Truora-Priority" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Truora-Priority" })
   truoraPriority?: CreateCheckTruoraPriorityEnum;
 }
 
 
 export class CreateCheckSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
   apiKey: shared.SchemeApiKey;
 }
 
 
 export class CreateCheckRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: CreateCheckHeaders;
 
-  @Metadata({ data: "request, media_type=application/x-www-form-urlencoded" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/x-www-form-urlencoded" })
   request: shared.CreateCheckInput;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: CreateCheckSecurity;
 }
 
 
 export class CreateCheckResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   checkOutput?: shared.CheckOutput;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   error?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

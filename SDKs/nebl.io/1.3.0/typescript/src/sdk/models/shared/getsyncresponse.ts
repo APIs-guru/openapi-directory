@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GetSyncResponse
@@ -6,21 +7,21 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Object containing node sync status
 **/
 export class GetSyncResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=blockChainHeight" })
+  @SpeakeasyMetadata({ data: "json, name=blockChainHeight" })
   blockChainHeight?: number;
 
-  @Metadata({ data: "json, name=error" })
+  @SpeakeasyMetadata({ data: "json, name=error" })
   error?: string;
 
-  @Metadata({ data: "json, name=height" })
+  @SpeakeasyMetadata({ data: "json, name=height" })
   height?: number;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: string;
 
-  @Metadata({ data: "json, name=syncPercentage" })
+  @SpeakeasyMetadata({ data: "json, name=syncPercentage" })
   syncPercentage?: number;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: string;
 }

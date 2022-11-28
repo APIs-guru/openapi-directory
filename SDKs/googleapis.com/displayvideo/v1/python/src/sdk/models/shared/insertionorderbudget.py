@@ -1,7 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import insertionorderbudgetsegment
+from sdk import utils
+from . import *
 
 class InsertionOrderBudgetAutomationTypeEnum(str, Enum):
     INSERTION_ORDER_AUTOMATION_TYPE_UNSPECIFIED = "INSERTION_ORDER_AUTOMATION_TYPE_UNSPECIFIED"
@@ -18,7 +20,11 @@ class InsertionOrderBudgetBudgetUnitEnum(str, Enum):
 @dataclass_json
 @dataclass
 class InsertionOrderBudget:
-    automation_type: Optional[InsertionOrderBudgetAutomationTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'automationType' }})
-    budget_segments: Optional[List[insertionorderbudgetsegment.InsertionOrderBudgetSegment]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'budgetSegments' }})
-    budget_unit: Optional[InsertionOrderBudgetBudgetUnitEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'budgetUnit' }})
+    r"""InsertionOrderBudget
+    Settings that control how insertion order budget is allocated.
+    """
+    
+    automation_type: Optional[InsertionOrderBudgetAutomationTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('automationType') }})
+    budget_segments: Optional[List[InsertionOrderBudgetSegment]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('budgetSegments') }})
+    budget_unit: Optional[InsertionOrderBudgetBudgetUnitEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('budgetUnit') }})
     

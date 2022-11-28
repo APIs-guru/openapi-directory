@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // WakeOnLanInfo
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Provides the MAC address and port for wake-on-LAN functionality.
 **/
 export class WakeOnLanInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=MacAddress" })
+  @SpeakeasyMetadata({ data: "json, name=MacAddress" })
   macAddress?: string;
 
-  @Metadata({ data: "json, name=Port" })
+  @SpeakeasyMetadata({ data: "json, name=Port" })
   port?: number;
 }

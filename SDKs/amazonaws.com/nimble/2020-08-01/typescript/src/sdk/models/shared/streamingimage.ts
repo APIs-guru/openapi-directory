@@ -1,46 +1,47 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { StreamingImageEncryptionConfiguration } from "./streamingimageencryptionconfiguration";
 import { StreamingImageStateEnum } from "./streamingimagestateenum";
 import { StreamingImageStatusCodeEnum } from "./streamingimagestatuscodeenum";
 
 
+
 export class StreamingImage extends SpeakeasyBase {
-  @Metadata({ data: "json, name=arn" })
+  @SpeakeasyMetadata({ data: "json, name=arn" })
   arn?: string;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=ec2ImageId" })
+  @SpeakeasyMetadata({ data: "json, name=ec2ImageId" })
   ec2ImageId?: string;
 
-  @Metadata({ data: "json, name=encryptionConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=encryptionConfiguration" })
   encryptionConfiguration?: StreamingImageEncryptionConfiguration;
 
-  @Metadata({ data: "json, name=eulaIds" })
+  @SpeakeasyMetadata({ data: "json, name=eulaIds" })
   eulaIds?: string[];
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=owner" })
+  @SpeakeasyMetadata({ data: "json, name=owner" })
   owner?: string;
 
-  @Metadata({ data: "json, name=platform" })
+  @SpeakeasyMetadata({ data: "json, name=platform" })
   platform?: string;
 
-  @Metadata({ data: "json, name=state" })
+  @SpeakeasyMetadata({ data: "json, name=state" })
   state?: StreamingImageStateEnum;
 
-  @Metadata({ data: "json, name=statusCode" })
+  @SpeakeasyMetadata({ data: "json, name=statusCode" })
   statusCode?: StreamingImageStatusCodeEnum;
 
-  @Metadata({ data: "json, name=statusMessage" })
+  @SpeakeasyMetadata({ data: "json, name=statusMessage" })
   statusMessage?: string;
 
-  @Metadata({ data: "json, name=streamingImageId" })
+  @SpeakeasyMetadata({ data: "json, name=streamingImageId" })
   streamingImageId?: string;
 
-  @Metadata({ data: "json, name=tags" })
+  @SpeakeasyMetadata({ data: "json, name=tags" })
   tags?: Map<string, string>;
 }

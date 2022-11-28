@@ -1,11 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum UpgradeInstanceInternalRequestTypeEnum {
-    UpgradeTypeUnspecified = "UPGRADE_TYPE_UNSPECIFIED"
-,    UpgradeFramework = "UPGRADE_FRAMEWORK"
-,    UpgradeOs = "UPGRADE_OS"
-,    UpgradeCuda = "UPGRADE_CUDA"
-,    UpgradeAll = "UPGRADE_ALL"
+    UpgradeTypeUnspecified = "UPGRADE_TYPE_UNSPECIFIED",
+    UpgradeFramework = "UPGRADE_FRAMEWORK",
+    UpgradeOs = "UPGRADE_OS",
+    UpgradeCuda = "UPGRADE_CUDA",
+    UpgradeAll = "UPGRADE_ALL"
 }
 
 
@@ -14,9 +15,9 @@ export enum UpgradeInstanceInternalRequestTypeEnum {
  * Request for upgrading a notebook instance from within the VM
 **/
 export class UpgradeInstanceInternalRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: UpgradeInstanceInternalRequestTypeEnum;
 
-  @Metadata({ data: "json, name=vmId" })
+  @SpeakeasyMetadata({ data: "json, name=vmId" })
   vmId?: string;
 }

@@ -1,41 +1,42 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetResourcesCampaignsIdMediaJsonPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" })
   id: number;
 }
 
 
 export class GetResourcesCampaignsIdMediaJsonQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=false;name=max" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=max" })
   max?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=false;name=offset" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=offset" })
   offset?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=false;name=sort" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=sort" })
   sort?: string;
 }
 
 
 export class GetResourcesCampaignsIdMediaJsonRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetResourcesCampaignsIdMediaJsonPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetResourcesCampaignsIdMediaJsonQueryParams;
 }
 
 
 export class GetResourcesCampaignsIdMediaJsonResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   mediaItemWrapped?: shared.MediaItemWrapped;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

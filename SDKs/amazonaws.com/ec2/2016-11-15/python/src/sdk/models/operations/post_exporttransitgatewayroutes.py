@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostExportTransitGatewayRoutesActionEnum(str, Enum):
     EXPORT_TRANSIT_GATEWAY_ROUTES = "ExportTransitGatewayRoutes"
@@ -10,8 +14,8 @@ class PostExportTransitGatewayRoutesVersionEnum(str, Enum):
 
 @dataclass
 class PostExportTransitGatewayRoutesQueryParams:
-    action: PostExportTransitGatewayRoutesActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostExportTransitGatewayRoutesVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostExportTransitGatewayRoutesActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostExportTransitGatewayRoutesVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostExportTransitGatewayRoutesHeaders:
 
 @dataclass
 class PostExportTransitGatewayRoutesRequest:
-    query_params: PostExportTransitGatewayRoutesQueryParams = field(default=None)
-    headers: PostExportTransitGatewayRoutesHeaders = field(default=None)
+    headers: PostExportTransitGatewayRoutesHeaders = field()
+    query_params: PostExportTransitGatewayRoutesQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostExportTransitGatewayRoutesResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

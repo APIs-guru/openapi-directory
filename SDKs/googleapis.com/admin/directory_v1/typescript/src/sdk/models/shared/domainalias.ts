@@ -1,22 +1,23 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DomainAlias extends SpeakeasyBase {
-  @Metadata({ data: "json, name=creationTime" })
+  @SpeakeasyMetadata({ data: "json, name=creationTime" })
   creationTime?: string;
 
-  @Metadata({ data: "json, name=domainAliasName" })
+  @SpeakeasyMetadata({ data: "json, name=domainAliasName" })
   domainAliasName?: string;
 
-  @Metadata({ data: "json, name=etag" })
+  @SpeakeasyMetadata({ data: "json, name=etag" })
   etag?: string;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=parentDomainName" })
+  @SpeakeasyMetadata({ data: "json, name=parentDomainName" })
   parentDomainName?: string;
 
-  @Metadata({ data: "json, name=verified" })
+  @SpeakeasyMetadata({ data: "json, name=verified" })
   verified?: boolean;
 }

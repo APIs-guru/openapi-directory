@@ -22,31 +22,31 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { Tag } from "./tag";
 var CopySnapshotRequest = /** @class */ (function (_super) {
     __extends(CopySnapshotRequest, _super);
     function CopySnapshotRequest() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=KmsKeyId" }),
+        SpeakeasyMetadata({ data: "json, name=KmsKeyId" }),
         __metadata("design:type", String)
     ], CopySnapshotRequest.prototype, "kmsKeyId", void 0);
     __decorate([
-        Metadata({ data: "json, name=SourceSnapshotName" }),
+        SpeakeasyMetadata({ data: "json, name=SourceSnapshotName" }),
         __metadata("design:type", String)
     ], CopySnapshotRequest.prototype, "sourceSnapshotName", void 0);
     __decorate([
-        Metadata({ data: "json, name=Tags", elemType: shared.Tag }),
+        SpeakeasyMetadata({ data: "json, name=Tags", elemType: Tag }),
         __metadata("design:type", Array)
     ], CopySnapshotRequest.prototype, "tags", void 0);
     __decorate([
-        Metadata({ data: "json, name=TargetBucket" }),
+        SpeakeasyMetadata({ data: "json, name=TargetBucket" }),
         __metadata("design:type", String)
     ], CopySnapshotRequest.prototype, "targetBucket", void 0);
     __decorate([
-        Metadata({ data: "json, name=TargetSnapshotName" }),
+        SpeakeasyMetadata({ data: "json, name=TargetSnapshotName" }),
         __metadata("design:type", String)
     ], CopySnapshotRequest.prototype, "targetSnapshotName", void 0);
     return CopySnapshotRequest;

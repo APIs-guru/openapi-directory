@@ -1,5 +1,7 @@
 package shared
 
+// GoogleFirebaseAppcheckV1PlayIntegrityConfig
+// An app's Play Integrity configuration object. This configuration controls certain properties of the `AppCheckToken` returned by ExchangePlayIntegrityToken, such as its ttl. Note that your registered SHA-256 certificate fingerprints are used to validate tokens issued by the Play Integrity API; please register them via the Firebase Console or programmatically via the [Firebase Management Service](https://firebase.google.com/docs/projects/api/reference/rest/v1beta1/projects.androidApps.sha/create).
 type GoogleFirebaseAppcheckV1PlayIntegrityConfig struct {
 	Name     *string `json:"name,omitempty"`
 	TokenTTL *string `json:"tokenTtl,omitempty"`

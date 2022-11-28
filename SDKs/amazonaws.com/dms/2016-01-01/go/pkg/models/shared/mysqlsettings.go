@@ -1,5 +1,7 @@
 package shared
 
+// MySQLSettings
+// Provides information that defines a MySQL endpoint.
 type MySQLSettings struct {
 	AfterConnectScript            *string           `json:"AfterConnectScript,omitempty"`
 	CleanSourceMetadataOnMismatch *bool             `json:"CleanSourceMetadataOnMismatch,omitempty"`

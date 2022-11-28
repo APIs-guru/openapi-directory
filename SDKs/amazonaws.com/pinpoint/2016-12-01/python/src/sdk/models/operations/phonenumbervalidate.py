@@ -1,6 +1,10 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -18,32 +22,36 @@ class PhoneNumberValidateHeaders:
 @dataclass_json
 @dataclass
 class PhoneNumberValidateRequestBodyNumberValidateRequest:
-    iso_country_code: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'IsoCountryCode' }})
-    phone_number: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'PhoneNumber' }})
+    r"""PhoneNumberValidateRequestBodyNumberValidateRequest
+    Specifies a phone number to validate and retrieve information about.
+    """
+    
+    iso_country_code: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('IsoCountryCode') }})
+    phone_number: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('PhoneNumber') }})
     
 
 @dataclass_json
 @dataclass
 class PhoneNumberValidateRequestBody:
-    number_validate_request: PhoneNumberValidateRequestBodyNumberValidateRequest = field(default=None, metadata={'dataclasses_json': { 'field_name': 'NumberValidateRequest' }})
+    number_validate_request: PhoneNumberValidateRequestBodyNumberValidateRequest = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('NumberValidateRequest') }})
     
 
 @dataclass
 class PhoneNumberValidateRequest:
-    headers: PhoneNumberValidateHeaders = field(default=None)
-    request: PhoneNumberValidateRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: PhoneNumberValidateHeaders = field()
+    request: PhoneNumberValidateRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class PhoneNumberValidateResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     forbidden_exception: Optional[Any] = field(default=None)
     internal_server_error_exception: Optional[Any] = field(default=None)
     method_not_allowed_exception: Optional[Any] = field(default=None)
     not_found_exception: Optional[Any] = field(default=None)
     payload_too_large_exception: Optional[Any] = field(default=None)
     phone_number_validate_response: Optional[shared.PhoneNumberValidateResponse] = field(default=None)
-    status_code: int = field(default=None)
     too_many_requests_exception: Optional[Any] = field(default=None)
     

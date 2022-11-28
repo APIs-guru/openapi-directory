@@ -1,10 +1,15 @@
 from dataclasses import dataclass, field
 from dataclasses_json import dataclass_json
-from . import typedlinkspecifier
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class BatchDetachTypedLink:
-    typed_link_specifier: typedlinkspecifier.TypedLinkSpecifier = field(default=None, metadata={'dataclasses_json': { 'field_name': 'TypedLinkSpecifier' }})
+    r"""BatchDetachTypedLink
+    Detaches a typed link from a specified source and target object inside a <a>BatchRead</a> operation. For more information, see <a>DetachTypedLink</a> and <a>BatchReadRequest$Operations</a>.
+    """
+    
+    typed_link_specifier: TypedLinkSpecifier = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('TypedLinkSpecifier') }})
     

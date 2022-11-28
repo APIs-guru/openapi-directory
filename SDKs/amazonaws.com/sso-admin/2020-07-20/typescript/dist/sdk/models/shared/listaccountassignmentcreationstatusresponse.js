@@ -22,19 +22,19 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { AccountAssignmentOperationStatusMetadata } from "./accountassignmentoperationstatusmetadata";
 var ListAccountAssignmentCreationStatusResponse = /** @class */ (function (_super) {
     __extends(ListAccountAssignmentCreationStatusResponse, _super);
     function ListAccountAssignmentCreationStatusResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=AccountAssignmentsCreationStatus", elemType: shared.AccountAssignmentOperationStatusMetadata }),
+        SpeakeasyMetadata({ data: "json, name=AccountAssignmentsCreationStatus", elemType: AccountAssignmentOperationStatusMetadata }),
         __metadata("design:type", Array)
     ], ListAccountAssignmentCreationStatusResponse.prototype, "accountAssignmentsCreationStatus", void 0);
     __decorate([
-        Metadata({ data: "json, name=NextToken" }),
+        SpeakeasyMetadata({ data: "json, name=NextToken" }),
         __metadata("design:type", String)
     ], ListAccountAssignmentCreationStatusResponse.prototype, "nextToken", void 0);
     return ListAccountAssignmentCreationStatusResponse;

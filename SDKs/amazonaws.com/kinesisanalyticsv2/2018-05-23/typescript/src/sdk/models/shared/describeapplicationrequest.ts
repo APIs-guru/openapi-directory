@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DescribeApplicationRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ApplicationName" })
+  @SpeakeasyMetadata({ data: "json, name=ApplicationName" })
   applicationName: string;
 
-  @Metadata({ data: "json, name=IncludeAdditionalDetails" })
+  @SpeakeasyMetadata({ data: "json, name=IncludeAdditionalDetails" })
   includeAdditionalDetails?: boolean;
 }

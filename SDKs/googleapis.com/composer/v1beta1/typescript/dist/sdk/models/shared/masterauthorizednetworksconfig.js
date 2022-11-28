@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { CidrBlock } from "./cidrblock";
 // MasterAuthorizedNetworksConfig
 /**
  * Configuration options for the master authorized networks feature. Enabled master authorized networks will disallow all external traffic to access Kubernetes master through HTTPS except traffic from the given CIDR blocks, Google Compute Engine Public IPs and Google Prod IPs.
@@ -34,11 +34,11 @@ var MasterAuthorizedNetworksConfig = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=cidrBlocks", elemType: shared.CidrBlock }),
+        SpeakeasyMetadata({ data: "json, name=cidrBlocks", elemType: CidrBlock }),
         __metadata("design:type", Array)
     ], MasterAuthorizedNetworksConfig.prototype, "cidrBlocks", void 0);
     __decorate([
-        Metadata({ data: "json, name=enabled" }),
+        SpeakeasyMetadata({ data: "json, name=enabled" }),
         __metadata("design:type", Boolean)
     ], MasterAuthorizedNetworksConfig.prototype, "enabled", void 0);
     return MasterAuthorizedNetworksConfig;

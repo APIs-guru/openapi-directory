@@ -10,7 +10,7 @@ import (
 	"strings"
 )
 
-var Servers = []string{
+var ServerList = []string{
 	"http://robomaker.{region}.amazonaws.com",
 	"https://robomaker.{region}.amazonaws.com",
 	"http://robomaker.{region}.amazonaws.com.cn",
@@ -21,10 +21,15 @@ type HTTPClient interface {
 	Do(req *http.Request) (*http.Response, error)
 }
 
+// SDK Documentation: https://docs.aws.amazon.com/robomaker/ - Amazon Web Services documentation
 type SDK struct {
-	defaultClient  HTTPClient
-	securityClient HTTPClient
-	serverURL      string
+	_defaultClient  HTTPClient
+	_securityClient HTTPClient
+	_security       *shared.Security
+	_serverURL      string
+	_language       string
+	_sdkVersion     string
+	_genVersion     string
 }
 
 type SDKOption func(*SDK)
@@ -35,33 +40,55 @@ func WithServerURL(serverURL string, params map[string]string) SDKOption {
 			serverURL = utils.ReplaceParameters(serverURL, params)
 		}
 
-		sdk.serverURL = serverURL
+		sdk._serverURL = serverURL
+	}
+}
+
+func WithClient(client HTTPClient) SDKOption {
+	return func(sdk *SDK) {
+		sdk._defaultClient = client
 	}
 }
 
 func WithSecurity(security shared.Security) SDKOption {
 	return func(sdk *SDK) {
-		sdk.securityClient = utils.CreateSecurityClient(security)
+		sdk._security = &security
 	}
 }
 
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
-		defaultClient:  http.DefaultClient,
-		securityClient: http.DefaultClient,
+		_language:   "go",
+		_sdkVersion: "",
+		_genVersion: "internal",
 	}
 	for _, opt := range opts {
 		opt(sdk)
 	}
-	if sdk.serverURL == "" {
-		sdk.serverURL = Servers[0]
+
+	if sdk._defaultClient == nil {
+		sdk._defaultClient = http.DefaultClient
+	}
+	if sdk._securityClient == nil {
+
+		if sdk._security != nil {
+			sdk._securityClient = utils.ConfigureSecurityClient(sdk._defaultClient, sdk._security)
+		} else {
+			sdk._securityClient = sdk._defaultClient
+		}
+
+	}
+
+	if sdk._serverURL == "" {
+		sdk._serverURL = ServerList[0]
 	}
 
 	return sdk
 }
 
+// BatchDeleteWorlds - Deletes one or more worlds in a batch operation.
 func (s *SDK) BatchDeleteWorlds(ctx context.Context, request operations.BatchDeleteWorldsRequest) (*operations.BatchDeleteWorldsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/batchDeleteWorlds"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -81,7 +108,7 @@ func (s *SDK) BatchDeleteWorlds(ctx context.Context, request operations.BatchDel
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -141,8 +168,9 @@ func (s *SDK) BatchDeleteWorlds(ctx context.Context, request operations.BatchDel
 	return res, nil
 }
 
+// BatchDescribeSimulationJob - Describes one or more simulation jobs.
 func (s *SDK) BatchDescribeSimulationJob(ctx context.Context, request operations.BatchDescribeSimulationJobRequest) (*operations.BatchDescribeSimulationJobResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/batchDescribeSimulationJob"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -162,7 +190,7 @@ func (s *SDK) BatchDescribeSimulationJob(ctx context.Context, request operations
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -232,8 +260,9 @@ func (s *SDK) BatchDescribeSimulationJob(ctx context.Context, request operations
 	return res, nil
 }
 
+// CancelDeploymentJob - Cancels the specified deployment job.
 func (s *SDK) CancelDeploymentJob(ctx context.Context, request operations.CancelDeploymentJobRequest) (*operations.CancelDeploymentJobResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/cancelDeploymentJob"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -253,7 +282,7 @@ func (s *SDK) CancelDeploymentJob(ctx context.Context, request operations.Cancel
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -323,8 +352,9 @@ func (s *SDK) CancelDeploymentJob(ctx context.Context, request operations.Cancel
 	return res, nil
 }
 
+// CancelSimulationJob - Cancels the specified simulation job.
 func (s *SDK) CancelSimulationJob(ctx context.Context, request operations.CancelSimulationJobRequest) (*operations.CancelSimulationJobResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/cancelSimulationJob"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -344,7 +374,7 @@ func (s *SDK) CancelSimulationJob(ctx context.Context, request operations.Cancel
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -414,8 +444,9 @@ func (s *SDK) CancelSimulationJob(ctx context.Context, request operations.Cancel
 	return res, nil
 }
 
+// CancelSimulationJobBatch - Cancels a simulation job batch. When you cancel a simulation job batch, you are also cancelling all of the active simulation jobs created as part of the batch.
 func (s *SDK) CancelSimulationJobBatch(ctx context.Context, request operations.CancelSimulationJobBatchRequest) (*operations.CancelSimulationJobBatchResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/cancelSimulationJobBatch"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -435,7 +466,7 @@ func (s *SDK) CancelSimulationJobBatch(ctx context.Context, request operations.C
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -505,8 +536,9 @@ func (s *SDK) CancelSimulationJobBatch(ctx context.Context, request operations.C
 	return res, nil
 }
 
+// CancelWorldExportJob - Cancels the specified export job.
 func (s *SDK) CancelWorldExportJob(ctx context.Context, request operations.CancelWorldExportJobRequest) (*operations.CancelWorldExportJobResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/cancelWorldExportJob"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -526,7 +558,7 @@ func (s *SDK) CancelWorldExportJob(ctx context.Context, request operations.Cance
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -596,8 +628,9 @@ func (s *SDK) CancelWorldExportJob(ctx context.Context, request operations.Cance
 	return res, nil
 }
 
+// CancelWorldGenerationJob - Cancels the specified world generator job.
 func (s *SDK) CancelWorldGenerationJob(ctx context.Context, request operations.CancelWorldGenerationJobRequest) (*operations.CancelWorldGenerationJobResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/cancelWorldGenerationJob"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -617,7 +650,7 @@ func (s *SDK) CancelWorldGenerationJob(ctx context.Context, request operations.C
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -687,8 +720,9 @@ func (s *SDK) CancelWorldGenerationJob(ctx context.Context, request operations.C
 	return res, nil
 }
 
+// CreateDeploymentJob - <p>Deploys a specific version of a robot application to robots in a fleet.</p> <p>The robot application must have a numbered <code>applicationVersion</code> for consistency reasons. To create a new version, use <code>CreateRobotApplicationVersion</code> or see <a href="https://docs.aws.amazon.com/robomaker/latest/dg/create-robot-application-version.html">Creating a Robot Application Version</a>. </p> <note> <p>After 90 days, deployment jobs expire and will be deleted. They will no longer be accessible. </p> </note>
 func (s *SDK) CreateDeploymentJob(ctx context.Context, request operations.CreateDeploymentJobRequest) (*operations.CreateDeploymentJobResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/createDeploymentJob"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -708,7 +742,7 @@ func (s *SDK) CreateDeploymentJob(ctx context.Context, request operations.Create
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -808,8 +842,9 @@ func (s *SDK) CreateDeploymentJob(ctx context.Context, request operations.Create
 	return res, nil
 }
 
+// CreateFleet - Creates a fleet, a logical group of robots running the same robot application.
 func (s *SDK) CreateFleet(ctx context.Context, request operations.CreateFleetRequest) (*operations.CreateFleetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/createFleet"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -829,7 +864,7 @@ func (s *SDK) CreateFleet(ctx context.Context, request operations.CreateFleetReq
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -899,8 +934,9 @@ func (s *SDK) CreateFleet(ctx context.Context, request operations.CreateFleetReq
 	return res, nil
 }
 
+// CreateRobot - Creates a robot.
 func (s *SDK) CreateRobot(ctx context.Context, request operations.CreateRobotRequest) (*operations.CreateRobotResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/createRobot"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -920,7 +956,7 @@ func (s *SDK) CreateRobot(ctx context.Context, request operations.CreateRobotReq
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1000,8 +1036,9 @@ func (s *SDK) CreateRobot(ctx context.Context, request operations.CreateRobotReq
 	return res, nil
 }
 
+// CreateRobotApplication - Creates a robot application.
 func (s *SDK) CreateRobotApplication(ctx context.Context, request operations.CreateRobotApplicationRequest) (*operations.CreateRobotApplicationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/createRobotApplication"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1021,7 +1058,7 @@ func (s *SDK) CreateRobotApplication(ctx context.Context, request operations.Cre
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1111,8 +1148,9 @@ func (s *SDK) CreateRobotApplication(ctx context.Context, request operations.Cre
 	return res, nil
 }
 
+// CreateRobotApplicationVersion - Creates a version of a robot application.
 func (s *SDK) CreateRobotApplicationVersion(ctx context.Context, request operations.CreateRobotApplicationVersionRequest) (*operations.CreateRobotApplicationVersionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/createRobotApplicationVersion"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1132,7 +1170,7 @@ func (s *SDK) CreateRobotApplicationVersion(ctx context.Context, request operati
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1212,8 +1250,9 @@ func (s *SDK) CreateRobotApplicationVersion(ctx context.Context, request operati
 	return res, nil
 }
 
+// CreateSimulationApplication - Creates a simulation application.
 func (s *SDK) CreateSimulationApplication(ctx context.Context, request operations.CreateSimulationApplicationRequest) (*operations.CreateSimulationApplicationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/createSimulationApplication"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1233,7 +1272,7 @@ func (s *SDK) CreateSimulationApplication(ctx context.Context, request operation
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1323,8 +1362,9 @@ func (s *SDK) CreateSimulationApplication(ctx context.Context, request operation
 	return res, nil
 }
 
+// CreateSimulationApplicationVersion - Creates a simulation application with a specific revision id.
 func (s *SDK) CreateSimulationApplicationVersion(ctx context.Context, request operations.CreateSimulationApplicationVersionRequest) (*operations.CreateSimulationApplicationVersionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/createSimulationApplicationVersion"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1344,7 +1384,7 @@ func (s *SDK) CreateSimulationApplicationVersion(ctx context.Context, request op
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1424,8 +1464,9 @@ func (s *SDK) CreateSimulationApplicationVersion(ctx context.Context, request op
 	return res, nil
 }
 
+// CreateSimulationJob - <p>Creates a simulation job.</p> <note> <p>After 90 days, simulation jobs expire and will be deleted. They will no longer be accessible. </p> </note>
 func (s *SDK) CreateSimulationJob(ctx context.Context, request operations.CreateSimulationJobRequest) (*operations.CreateSimulationJobResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/createSimulationJob"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1445,7 +1486,7 @@ func (s *SDK) CreateSimulationJob(ctx context.Context, request operations.Create
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1545,8 +1586,9 @@ func (s *SDK) CreateSimulationJob(ctx context.Context, request operations.Create
 	return res, nil
 }
 
+// CreateWorldExportJob - Creates a world export job.
 func (s *SDK) CreateWorldExportJob(ctx context.Context, request operations.CreateWorldExportJobRequest) (*operations.CreateWorldExportJobResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/createWorldExportJob"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1566,7 +1608,7 @@ func (s *SDK) CreateWorldExportJob(ctx context.Context, request operations.Creat
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1656,8 +1698,9 @@ func (s *SDK) CreateWorldExportJob(ctx context.Context, request operations.Creat
 	return res, nil
 }
 
+// CreateWorldGenerationJob - Creates worlds using the specified template.
 func (s *SDK) CreateWorldGenerationJob(ctx context.Context, request operations.CreateWorldGenerationJobRequest) (*operations.CreateWorldGenerationJobResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/createWorldGenerationJob"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1677,7 +1720,7 @@ func (s *SDK) CreateWorldGenerationJob(ctx context.Context, request operations.C
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1777,8 +1820,9 @@ func (s *SDK) CreateWorldGenerationJob(ctx context.Context, request operations.C
 	return res, nil
 }
 
+// CreateWorldTemplate - Creates a world template.
 func (s *SDK) CreateWorldTemplate(ctx context.Context, request operations.CreateWorldTemplateRequest) (*operations.CreateWorldTemplateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/createWorldTemplate"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1798,7 +1842,7 @@ func (s *SDK) CreateWorldTemplate(ctx context.Context, request operations.Create
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1888,8 +1932,9 @@ func (s *SDK) CreateWorldTemplate(ctx context.Context, request operations.Create
 	return res, nil
 }
 
+// DeleteFleet - Deletes a fleet.
 func (s *SDK) DeleteFleet(ctx context.Context, request operations.DeleteFleetRequest) (*operations.DeleteFleetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/deleteFleet"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1909,7 +1954,7 @@ func (s *SDK) DeleteFleet(ctx context.Context, request operations.DeleteFleetReq
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1969,8 +2014,9 @@ func (s *SDK) DeleteFleet(ctx context.Context, request operations.DeleteFleetReq
 	return res, nil
 }
 
+// DeleteRobot - Deletes a robot.
 func (s *SDK) DeleteRobot(ctx context.Context, request operations.DeleteRobotRequest) (*operations.DeleteRobotResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/deleteRobot"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1990,7 +2036,7 @@ func (s *SDK) DeleteRobot(ctx context.Context, request operations.DeleteRobotReq
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2050,8 +2096,9 @@ func (s *SDK) DeleteRobot(ctx context.Context, request operations.DeleteRobotReq
 	return res, nil
 }
 
+// DeleteRobotApplication - Deletes a robot application.
 func (s *SDK) DeleteRobotApplication(ctx context.Context, request operations.DeleteRobotApplicationRequest) (*operations.DeleteRobotApplicationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/deleteRobotApplication"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2071,7 +2118,7 @@ func (s *SDK) DeleteRobotApplication(ctx context.Context, request operations.Del
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2131,8 +2178,9 @@ func (s *SDK) DeleteRobotApplication(ctx context.Context, request operations.Del
 	return res, nil
 }
 
+// DeleteSimulationApplication - Deletes a simulation application.
 func (s *SDK) DeleteSimulationApplication(ctx context.Context, request operations.DeleteSimulationApplicationRequest) (*operations.DeleteSimulationApplicationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/deleteSimulationApplication"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2152,7 +2200,7 @@ func (s *SDK) DeleteSimulationApplication(ctx context.Context, request operation
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2212,8 +2260,9 @@ func (s *SDK) DeleteSimulationApplication(ctx context.Context, request operation
 	return res, nil
 }
 
+// DeleteWorldTemplate - Deletes a world template.
 func (s *SDK) DeleteWorldTemplate(ctx context.Context, request operations.DeleteWorldTemplateRequest) (*operations.DeleteWorldTemplateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/deleteWorldTemplate"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2233,7 +2282,7 @@ func (s *SDK) DeleteWorldTemplate(ctx context.Context, request operations.Delete
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2303,8 +2352,9 @@ func (s *SDK) DeleteWorldTemplate(ctx context.Context, request operations.Delete
 	return res, nil
 }
 
+// DeregisterRobot - Deregisters a robot.
 func (s *SDK) DeregisterRobot(ctx context.Context, request operations.DeregisterRobotRequest) (*operations.DeregisterRobotResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/deregisterRobot"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2324,7 +2374,7 @@ func (s *SDK) DeregisterRobot(ctx context.Context, request operations.Deregister
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2394,8 +2444,9 @@ func (s *SDK) DeregisterRobot(ctx context.Context, request operations.Deregister
 	return res, nil
 }
 
+// DescribeDeploymentJob - Describes a deployment job.
 func (s *SDK) DescribeDeploymentJob(ctx context.Context, request operations.DescribeDeploymentJobRequest) (*operations.DescribeDeploymentJobResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/describeDeploymentJob"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2415,7 +2466,7 @@ func (s *SDK) DescribeDeploymentJob(ctx context.Context, request operations.Desc
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2485,8 +2536,9 @@ func (s *SDK) DescribeDeploymentJob(ctx context.Context, request operations.Desc
 	return res, nil
 }
 
+// DescribeFleet - Describes a fleet.
 func (s *SDK) DescribeFleet(ctx context.Context, request operations.DescribeFleetRequest) (*operations.DescribeFleetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/describeFleet"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2506,7 +2558,7 @@ func (s *SDK) DescribeFleet(ctx context.Context, request operations.DescribeFlee
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2576,8 +2628,9 @@ func (s *SDK) DescribeFleet(ctx context.Context, request operations.DescribeFlee
 	return res, nil
 }
 
+// DescribeRobot - Describes a robot.
 func (s *SDK) DescribeRobot(ctx context.Context, request operations.DescribeRobotRequest) (*operations.DescribeRobotResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/describeRobot"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2597,7 +2650,7 @@ func (s *SDK) DescribeRobot(ctx context.Context, request operations.DescribeRobo
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2667,8 +2720,9 @@ func (s *SDK) DescribeRobot(ctx context.Context, request operations.DescribeRobo
 	return res, nil
 }
 
+// DescribeRobotApplication - Describes a robot application.
 func (s *SDK) DescribeRobotApplication(ctx context.Context, request operations.DescribeRobotApplicationRequest) (*operations.DescribeRobotApplicationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/describeRobotApplication"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2688,7 +2742,7 @@ func (s *SDK) DescribeRobotApplication(ctx context.Context, request operations.D
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2758,8 +2812,9 @@ func (s *SDK) DescribeRobotApplication(ctx context.Context, request operations.D
 	return res, nil
 }
 
+// DescribeSimulationApplication - Describes a simulation application.
 func (s *SDK) DescribeSimulationApplication(ctx context.Context, request operations.DescribeSimulationApplicationRequest) (*operations.DescribeSimulationApplicationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/describeSimulationApplication"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2779,7 +2834,7 @@ func (s *SDK) DescribeSimulationApplication(ctx context.Context, request operati
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2849,8 +2904,9 @@ func (s *SDK) DescribeSimulationApplication(ctx context.Context, request operati
 	return res, nil
 }
 
+// DescribeSimulationJob - Describes a simulation job.
 func (s *SDK) DescribeSimulationJob(ctx context.Context, request operations.DescribeSimulationJobRequest) (*operations.DescribeSimulationJobResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/describeSimulationJob"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2870,7 +2926,7 @@ func (s *SDK) DescribeSimulationJob(ctx context.Context, request operations.Desc
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2940,8 +2996,9 @@ func (s *SDK) DescribeSimulationJob(ctx context.Context, request operations.Desc
 	return res, nil
 }
 
+// DescribeSimulationJobBatch - Describes a simulation job batch.
 func (s *SDK) DescribeSimulationJobBatch(ctx context.Context, request operations.DescribeSimulationJobBatchRequest) (*operations.DescribeSimulationJobBatchResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/describeSimulationJobBatch"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2961,7 +3018,7 @@ func (s *SDK) DescribeSimulationJobBatch(ctx context.Context, request operations
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3021,8 +3078,9 @@ func (s *SDK) DescribeSimulationJobBatch(ctx context.Context, request operations
 	return res, nil
 }
 
+// DescribeWorld - Describes a world.
 func (s *SDK) DescribeWorld(ctx context.Context, request operations.DescribeWorldRequest) (*operations.DescribeWorldResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/describeWorld"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3042,7 +3100,7 @@ func (s *SDK) DescribeWorld(ctx context.Context, request operations.DescribeWorl
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3112,8 +3170,9 @@ func (s *SDK) DescribeWorld(ctx context.Context, request operations.DescribeWorl
 	return res, nil
 }
 
+// DescribeWorldExportJob - Describes a world export job.
 func (s *SDK) DescribeWorldExportJob(ctx context.Context, request operations.DescribeWorldExportJobRequest) (*operations.DescribeWorldExportJobResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/describeWorldExportJob"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3133,7 +3192,7 @@ func (s *SDK) DescribeWorldExportJob(ctx context.Context, request operations.Des
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3203,8 +3262,9 @@ func (s *SDK) DescribeWorldExportJob(ctx context.Context, request operations.Des
 	return res, nil
 }
 
+// DescribeWorldGenerationJob - Describes a world generation job.
 func (s *SDK) DescribeWorldGenerationJob(ctx context.Context, request operations.DescribeWorldGenerationJobRequest) (*operations.DescribeWorldGenerationJobResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/describeWorldGenerationJob"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3224,7 +3284,7 @@ func (s *SDK) DescribeWorldGenerationJob(ctx context.Context, request operations
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3294,8 +3354,9 @@ func (s *SDK) DescribeWorldGenerationJob(ctx context.Context, request operations
 	return res, nil
 }
 
+// DescribeWorldTemplate - Describes a world template.
 func (s *SDK) DescribeWorldTemplate(ctx context.Context, request operations.DescribeWorldTemplateRequest) (*operations.DescribeWorldTemplateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/describeWorldTemplate"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3315,7 +3376,7 @@ func (s *SDK) DescribeWorldTemplate(ctx context.Context, request operations.Desc
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3385,8 +3446,9 @@ func (s *SDK) DescribeWorldTemplate(ctx context.Context, request operations.Desc
 	return res, nil
 }
 
+// GetWorldTemplateBody - Gets the world template body.
 func (s *SDK) GetWorldTemplateBody(ctx context.Context, request operations.GetWorldTemplateBodyRequest) (*operations.GetWorldTemplateBodyResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/getWorldTemplateBody"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3406,7 +3468,7 @@ func (s *SDK) GetWorldTemplateBody(ctx context.Context, request operations.GetWo
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3476,8 +3538,9 @@ func (s *SDK) GetWorldTemplateBody(ctx context.Context, request operations.GetWo
 	return res, nil
 }
 
+// ListDeploymentJobs - Returns a list of deployment jobs for a fleet. You can optionally provide filters to retrieve specific deployment jobs.
 func (s *SDK) ListDeploymentJobs(ctx context.Context, request operations.ListDeploymentJobsRequest) (*operations.ListDeploymentJobsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/listDeploymentJobs"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3499,7 +3562,7 @@ func (s *SDK) ListDeploymentJobs(ctx context.Context, request operations.ListDep
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3569,8 +3632,9 @@ func (s *SDK) ListDeploymentJobs(ctx context.Context, request operations.ListDep
 	return res, nil
 }
 
+// ListFleets - Returns a list of fleets. You can optionally provide filters to retrieve specific fleets.
 func (s *SDK) ListFleets(ctx context.Context, request operations.ListFleetsRequest) (*operations.ListFleetsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/listFleets"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3592,7 +3656,7 @@ func (s *SDK) ListFleets(ctx context.Context, request operations.ListFleetsReque
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3662,8 +3726,9 @@ func (s *SDK) ListFleets(ctx context.Context, request operations.ListFleetsReque
 	return res, nil
 }
 
+// ListRobotApplications - Returns a list of robot application. You can optionally provide filters to retrieve specific robot applications.
 func (s *SDK) ListRobotApplications(ctx context.Context, request operations.ListRobotApplicationsRequest) (*operations.ListRobotApplicationsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/listRobotApplications"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3685,7 +3750,7 @@ func (s *SDK) ListRobotApplications(ctx context.Context, request operations.List
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3745,8 +3810,9 @@ func (s *SDK) ListRobotApplications(ctx context.Context, request operations.List
 	return res, nil
 }
 
+// ListRobots - Returns a list of robots. You can optionally provide filters to retrieve specific robots.
 func (s *SDK) ListRobots(ctx context.Context, request operations.ListRobotsRequest) (*operations.ListRobotsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/listRobots"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3768,7 +3834,7 @@ func (s *SDK) ListRobots(ctx context.Context, request operations.ListRobotsReque
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3838,8 +3904,9 @@ func (s *SDK) ListRobots(ctx context.Context, request operations.ListRobotsReque
 	return res, nil
 }
 
+// ListSimulationApplications - Returns a list of simulation applications. You can optionally provide filters to retrieve specific simulation applications.
 func (s *SDK) ListSimulationApplications(ctx context.Context, request operations.ListSimulationApplicationsRequest) (*operations.ListSimulationApplicationsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/listSimulationApplications"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3861,7 +3928,7 @@ func (s *SDK) ListSimulationApplications(ctx context.Context, request operations
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3921,8 +3988,9 @@ func (s *SDK) ListSimulationApplications(ctx context.Context, request operations
 	return res, nil
 }
 
+// ListSimulationJobBatches - Returns a list simulation job batches. You can optionally provide filters to retrieve specific simulation batch jobs.
 func (s *SDK) ListSimulationJobBatches(ctx context.Context, request operations.ListSimulationJobBatchesRequest) (*operations.ListSimulationJobBatchesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/listSimulationJobBatches"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3944,7 +4012,7 @@ func (s *SDK) ListSimulationJobBatches(ctx context.Context, request operations.L
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3994,8 +4062,9 @@ func (s *SDK) ListSimulationJobBatches(ctx context.Context, request operations.L
 	return res, nil
 }
 
+// ListSimulationJobs - Returns a list of simulation jobs. You can optionally provide filters to retrieve specific simulation jobs.
 func (s *SDK) ListSimulationJobs(ctx context.Context, request operations.ListSimulationJobsRequest) (*operations.ListSimulationJobsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/listSimulationJobs"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -4017,7 +4086,7 @@ func (s *SDK) ListSimulationJobs(ctx context.Context, request operations.ListSim
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4077,8 +4146,9 @@ func (s *SDK) ListSimulationJobs(ctx context.Context, request operations.ListSim
 	return res, nil
 }
 
+// ListTagsForResource - Lists all tags on a AWS RoboMaker resource.
 func (s *SDK) ListTagsForResource(ctx context.Context, request operations.ListTagsForResourceRequest) (*operations.ListTagsForResourceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/tags/{resourceArn}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -4088,7 +4158,7 @@ func (s *SDK) ListTagsForResource(ctx context.Context, request operations.ListTa
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4158,8 +4228,9 @@ func (s *SDK) ListTagsForResource(ctx context.Context, request operations.ListTa
 	return res, nil
 }
 
+// ListWorldExportJobs - Lists world export jobs.
 func (s *SDK) ListWorldExportJobs(ctx context.Context, request operations.ListWorldExportJobsRequest) (*operations.ListWorldExportJobsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/listWorldExportJobs"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -4181,7 +4252,7 @@ func (s *SDK) ListWorldExportJobs(ctx context.Context, request operations.ListWo
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4241,8 +4312,9 @@ func (s *SDK) ListWorldExportJobs(ctx context.Context, request operations.ListWo
 	return res, nil
 }
 
+// ListWorldGenerationJobs - Lists world generator jobs.
 func (s *SDK) ListWorldGenerationJobs(ctx context.Context, request operations.ListWorldGenerationJobsRequest) (*operations.ListWorldGenerationJobsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/listWorldGenerationJobs"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -4264,7 +4336,7 @@ func (s *SDK) ListWorldGenerationJobs(ctx context.Context, request operations.Li
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4324,8 +4396,9 @@ func (s *SDK) ListWorldGenerationJobs(ctx context.Context, request operations.Li
 	return res, nil
 }
 
+// ListWorldTemplates - Lists world templates.
 func (s *SDK) ListWorldTemplates(ctx context.Context, request operations.ListWorldTemplatesRequest) (*operations.ListWorldTemplatesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/listWorldTemplates"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -4347,7 +4420,7 @@ func (s *SDK) ListWorldTemplates(ctx context.Context, request operations.ListWor
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4407,8 +4480,9 @@ func (s *SDK) ListWorldTemplates(ctx context.Context, request operations.ListWor
 	return res, nil
 }
 
+// ListWorlds - Lists worlds.
 func (s *SDK) ListWorlds(ctx context.Context, request operations.ListWorldsRequest) (*operations.ListWorldsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/listWorlds"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -4430,7 +4504,7 @@ func (s *SDK) ListWorlds(ctx context.Context, request operations.ListWorldsReque
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4490,8 +4564,9 @@ func (s *SDK) ListWorlds(ctx context.Context, request operations.ListWorldsReque
 	return res, nil
 }
 
+// RegisterRobot - Registers a robot with a fleet.
 func (s *SDK) RegisterRobot(ctx context.Context, request operations.RegisterRobotRequest) (*operations.RegisterRobotResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/registerRobot"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -4511,7 +4586,7 @@ func (s *SDK) RegisterRobot(ctx context.Context, request operations.RegisterRobo
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4591,8 +4666,9 @@ func (s *SDK) RegisterRobot(ctx context.Context, request operations.RegisterRobo
 	return res, nil
 }
 
+// RestartSimulationJob - Restarts a running simulation job.
 func (s *SDK) RestartSimulationJob(ctx context.Context, request operations.RestartSimulationJobRequest) (*operations.RestartSimulationJobResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/restartSimulationJob"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -4612,7 +4688,7 @@ func (s *SDK) RestartSimulationJob(ctx context.Context, request operations.Resta
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4692,8 +4768,9 @@ func (s *SDK) RestartSimulationJob(ctx context.Context, request operations.Resta
 	return res, nil
 }
 
+// StartSimulationJobBatch - Starts a new simulation job batch. The batch is defined using one or more <code>SimulationJobRequest</code> objects.
 func (s *SDK) StartSimulationJobBatch(ctx context.Context, request operations.StartSimulationJobBatchRequest) (*operations.StartSimulationJobBatchResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/startSimulationJobBatch"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -4713,7 +4790,7 @@ func (s *SDK) StartSimulationJobBatch(ctx context.Context, request operations.St
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4793,8 +4870,9 @@ func (s *SDK) StartSimulationJobBatch(ctx context.Context, request operations.St
 	return res, nil
 }
 
+// SyncDeploymentJob - Syncrhonizes robots in a fleet to the latest deployment. This is helpful if robots were added after a deployment.
 func (s *SDK) SyncDeploymentJob(ctx context.Context, request operations.SyncDeploymentJobRequest) (*operations.SyncDeploymentJobResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/syncDeploymentJob"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -4814,7 +4892,7 @@ func (s *SDK) SyncDeploymentJob(ctx context.Context, request operations.SyncDepl
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4914,8 +4992,9 @@ func (s *SDK) SyncDeploymentJob(ctx context.Context, request operations.SyncDepl
 	return res, nil
 }
 
+// TagResource - <p>Adds or edits tags for a AWS RoboMaker resource.</p> <p>Each tag consists of a tag key and a tag value. Tag keys and tag values are both required, but tag values can be empty strings. </p> <p>For information about the rules that apply to tag keys and tag values, see <a href="https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/allocation-tag-restrictions.html">User-Defined Tag Restrictions</a> in the <i>AWS Billing and Cost Management User Guide</i>. </p>
 func (s *SDK) TagResource(ctx context.Context, request operations.TagResourceRequest) (*operations.TagResourceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/tags/{resourceArn}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -4935,7 +5014,7 @@ func (s *SDK) TagResource(ctx context.Context, request operations.TagResourceReq
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5005,8 +5084,9 @@ func (s *SDK) TagResource(ctx context.Context, request operations.TagResourceReq
 	return res, nil
 }
 
+// UntagResource - <p>Removes the specified tags from the specified AWS RoboMaker resource.</p> <p>To remove a tag, specify the tag key. To change the tag value of an existing tag key, use <a href="https://docs.aws.amazon.com/robomaker/latest/dg/API_TagResource.html"> <code>TagResource</code> </a>. </p>
 func (s *SDK) UntagResource(ctx context.Context, request operations.UntagResourceRequest) (*operations.UntagResourceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/tags/{resourceArn}#tagKeys", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -5018,7 +5098,7 @@ func (s *SDK) UntagResource(ctx context.Context, request operations.UntagResourc
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5088,8 +5168,9 @@ func (s *SDK) UntagResource(ctx context.Context, request operations.UntagResourc
 	return res, nil
 }
 
+// UpdateRobotApplication - Updates a robot application.
 func (s *SDK) UpdateRobotApplication(ctx context.Context, request operations.UpdateRobotApplicationRequest) (*operations.UpdateRobotApplicationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/updateRobotApplication"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -5109,7 +5190,7 @@ func (s *SDK) UpdateRobotApplication(ctx context.Context, request operations.Upd
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5189,8 +5270,9 @@ func (s *SDK) UpdateRobotApplication(ctx context.Context, request operations.Upd
 	return res, nil
 }
 
+// UpdateSimulationApplication - Updates a simulation application.
 func (s *SDK) UpdateSimulationApplication(ctx context.Context, request operations.UpdateSimulationApplicationRequest) (*operations.UpdateSimulationApplicationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/updateSimulationApplication"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -5210,7 +5292,7 @@ func (s *SDK) UpdateSimulationApplication(ctx context.Context, request operation
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5290,8 +5372,9 @@ func (s *SDK) UpdateSimulationApplication(ctx context.Context, request operation
 	return res, nil
 }
 
+// UpdateWorldTemplate - Updates a world template.
 func (s *SDK) UpdateWorldTemplate(ctx context.Context, request operations.UpdateWorldTemplateRequest) (*operations.UpdateWorldTemplateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/updateWorldTemplate"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -5311,7 +5394,7 @@ func (s *SDK) UpdateWorldTemplate(ctx context.Context, request operations.Update
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {

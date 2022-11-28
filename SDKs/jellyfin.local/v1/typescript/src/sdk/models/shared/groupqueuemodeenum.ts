@@ -1,6 +1,7 @@
 
 
+
 export enum GroupQueueModeEnum {
-    Queue = "Queue"
-,    QueueNext = "QueueNext"
+    Queue = "Queue",
+    QueueNext = "QueueNext"
 }

@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum ActivityContentDetailsPromotedItemCtaTypeEnum {
-    CtaTypeUnspecified = "ctaTypeUnspecified"
-,    VisitAdvertiserSite = "visitAdvertiserSite"
+    CtaTypeUnspecified = "ctaTypeUnspecified",
+    VisitAdvertiserSite = "visitAdvertiserSite"
 }
 
 
@@ -11,33 +12,33 @@ export enum ActivityContentDetailsPromotedItemCtaTypeEnum {
  * Details about a resource which is being promoted.
 **/
 export class ActivityContentDetailsPromotedItem extends SpeakeasyBase {
-  @Metadata({ data: "json, name=adTag" })
+  @SpeakeasyMetadata({ data: "json, name=adTag" })
   adTag?: string;
 
-  @Metadata({ data: "json, name=clickTrackingUrl" })
+  @SpeakeasyMetadata({ data: "json, name=clickTrackingUrl" })
   clickTrackingUrl?: string;
 
-  @Metadata({ data: "json, name=creativeViewUrl" })
+  @SpeakeasyMetadata({ data: "json, name=creativeViewUrl" })
   creativeViewUrl?: string;
 
-  @Metadata({ data: "json, name=ctaType" })
+  @SpeakeasyMetadata({ data: "json, name=ctaType" })
   ctaType?: ActivityContentDetailsPromotedItemCtaTypeEnum;
 
-  @Metadata({ data: "json, name=customCtaButtonText" })
+  @SpeakeasyMetadata({ data: "json, name=customCtaButtonText" })
   customCtaButtonText?: string;
 
-  @Metadata({ data: "json, name=descriptionText" })
+  @SpeakeasyMetadata({ data: "json, name=descriptionText" })
   descriptionText?: string;
 
-  @Metadata({ data: "json, name=destinationUrl" })
+  @SpeakeasyMetadata({ data: "json, name=destinationUrl" })
   destinationUrl?: string;
 
-  @Metadata({ data: "json, name=forecastingUrl" })
+  @SpeakeasyMetadata({ data: "json, name=forecastingUrl" })
   forecastingUrl?: string[];
 
-  @Metadata({ data: "json, name=impressionUrl" })
+  @SpeakeasyMetadata({ data: "json, name=impressionUrl" })
   impressionUrl?: string[];
 
-  @Metadata({ data: "json, name=videoId" })
+  @SpeakeasyMetadata({ data: "json, name=videoId" })
   videoId?: string;
 }

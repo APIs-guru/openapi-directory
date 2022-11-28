@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class ChromepolicyCustomersPoliciesNetworksDefineCertificatePathParams:
-    customer: str = field(default=None, metadata={'path_param': { 'field_name': 'customer', 'style': 'simple', 'explode': False }})
+    customer: str = field(metadata={'path_param': { 'field_name': 'customer', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,21 +26,21 @@ class ChromepolicyCustomersPoliciesNetworksDefineCertificateQueryParams:
 
 @dataclass
 class ChromepolicyCustomersPoliciesNetworksDefineCertificateSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class ChromepolicyCustomersPoliciesNetworksDefineCertificateRequest:
-    path_params: ChromepolicyCustomersPoliciesNetworksDefineCertificatePathParams = field(default=None)
-    query_params: ChromepolicyCustomersPoliciesNetworksDefineCertificateQueryParams = field(default=None)
+    path_params: ChromepolicyCustomersPoliciesNetworksDefineCertificatePathParams = field()
+    query_params: ChromepolicyCustomersPoliciesNetworksDefineCertificateQueryParams = field()
+    security: ChromepolicyCustomersPoliciesNetworksDefineCertificateSecurity = field()
     request: Optional[shared.GoogleChromePolicyVersionsV1DefineCertificateRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: ChromepolicyCustomersPoliciesNetworksDefineCertificateSecurity = field(default=None)
     
 
 @dataclass
 class ChromepolicyCustomersPoliciesNetworksDefineCertificateResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_chrome_policy_versions_v1_define_certificate_response: Optional[shared.GoogleChromePolicyVersionsV1DefineCertificateResponse] = field(default=None)
-    status_code: int = field(default=None)
     

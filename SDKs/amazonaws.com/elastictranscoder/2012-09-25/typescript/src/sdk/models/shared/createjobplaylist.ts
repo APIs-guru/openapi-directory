@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { HlsContentProtection } from "./hlscontentprotection";
 import { PlayReadyDrm } from "./playreadydrm";
+
 
 
 // CreateJobPlaylist
@@ -8,18 +9,18 @@ import { PlayReadyDrm } from "./playreadydrm";
  * Information about the master playlist.
 **/
 export class CreateJobPlaylist extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Format" })
+  @SpeakeasyMetadata({ data: "json, name=Format" })
   format?: string;
 
-  @Metadata({ data: "json, name=HlsContentProtection" })
+  @SpeakeasyMetadata({ data: "json, name=HlsContentProtection" })
   hlsContentProtection?: HlsContentProtection;
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name?: string;
 
-  @Metadata({ data: "json, name=OutputKeys" })
+  @SpeakeasyMetadata({ data: "json, name=OutputKeys" })
   outputKeys?: string[];
 
-  @Metadata({ data: "json, name=PlayReadyDrm" })
+  @SpeakeasyMetadata({ data: "json, name=PlayReadyDrm" })
   playReadyDrm?: PlayReadyDrm;
 }

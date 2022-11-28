@@ -1,16 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleChromePolicyVersionsV1AdditionalTargetKeyName } from "./googlechromepolicyversionsv1additionaltargetkeyname";
 import { Proto2FileDescriptorProto } from "./proto2filedescriptorproto";
 import { GoogleChromePolicyVersionsV1PolicySchemaFieldDescription } from "./googlechromepolicyversionsv1policyschemafielddescription";
 import { GoogleChromePolicyVersionsV1PolicySchemaNoticeDescription } from "./googlechromepolicyversionsv1policyschemanoticedescription";
 import { ChromeCrosDpanelAutosettingsProtoPolicyApiLifecycle } from "./chromecrosdpanelautosettingsprotopolicyapilifecycle";
-import { ChromeCrosDpanelAutosettingsProtoPolicyApiLifecycle } from "./chromecrosdpanelautosettingsprotopolicyapilifecycle";
+
 
 export enum GoogleChromePolicyVersionsV1PolicySchemaValidTargetResourcesEnum {
-    TargetResourceUnspecified = "TARGET_RESOURCE_UNSPECIFIED"
-,    OrgUnit = "ORG_UNIT"
-,    Group = "GROUP"
+    TargetResourceUnspecified = "TARGET_RESOURCE_UNSPECIFIED",
+    OrgUnit = "ORG_UNIT",
+    Group = "GROUP"
 }
 
 
@@ -19,42 +18,42 @@ export enum GoogleChromePolicyVersionsV1PolicySchemaValidTargetResourcesEnum {
  * Resource representing a policy schema.
 **/
 export class GoogleChromePolicyVersionsV1PolicySchema extends SpeakeasyBase {
-  @Metadata({ data: "json, name=accessRestrictions" })
+  @SpeakeasyMetadata({ data: "json, name=accessRestrictions" })
   accessRestrictions?: string[];
 
-  @Metadata({ data: "json, name=additionalTargetKeyNames", elemType: shared.GoogleChromePolicyVersionsV1AdditionalTargetKeyName })
+  @SpeakeasyMetadata({ data: "json, name=additionalTargetKeyNames", elemType: GoogleChromePolicyVersionsV1AdditionalTargetKeyName })
   additionalTargetKeyNames?: GoogleChromePolicyVersionsV1AdditionalTargetKeyName[];
 
-  @Metadata({ data: "json, name=categoryTitle" })
+  @SpeakeasyMetadata({ data: "json, name=categoryTitle" })
   categoryTitle?: string;
 
-  @Metadata({ data: "json, name=definition" })
+  @SpeakeasyMetadata({ data: "json, name=definition" })
   definition?: Proto2FileDescriptorProto;
 
-  @Metadata({ data: "json, name=fieldDescriptions", elemType: shared.GoogleChromePolicyVersionsV1PolicySchemaFieldDescription })
+  @SpeakeasyMetadata({ data: "json, name=fieldDescriptions", elemType: GoogleChromePolicyVersionsV1PolicySchemaFieldDescription })
   fieldDescriptions?: GoogleChromePolicyVersionsV1PolicySchemaFieldDescription[];
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=notices", elemType: shared.GoogleChromePolicyVersionsV1PolicySchemaNoticeDescription })
+  @SpeakeasyMetadata({ data: "json, name=notices", elemType: GoogleChromePolicyVersionsV1PolicySchemaNoticeDescription })
   notices?: GoogleChromePolicyVersionsV1PolicySchemaNoticeDescription[];
 
-  @Metadata({ data: "json, name=policyApiLifecycle" })
+  @SpeakeasyMetadata({ data: "json, name=policyApiLifecycle" })
   policyApiLifecycle?: ChromeCrosDpanelAutosettingsProtoPolicyApiLifecycle;
 
-  @Metadata({ data: "json, name=policyApiLifeycle" })
+  @SpeakeasyMetadata({ data: "json, name=policyApiLifeycle" })
   policyApiLifeycle?: ChromeCrosDpanelAutosettingsProtoPolicyApiLifecycle;
 
-  @Metadata({ data: "json, name=policyDescription" })
+  @SpeakeasyMetadata({ data: "json, name=policyDescription" })
   policyDescription?: string;
 
-  @Metadata({ data: "json, name=schemaName" })
+  @SpeakeasyMetadata({ data: "json, name=schemaName" })
   schemaName?: string;
 
-  @Metadata({ data: "json, name=supportUri" })
+  @SpeakeasyMetadata({ data: "json, name=supportUri" })
   supportUri?: string;
 
-  @Metadata({ data: "json, name=validTargetResources" })
+  @SpeakeasyMetadata({ data: "json, name=validTargetResources" })
   validTargetResources?: GoogleChromePolicyVersionsV1PolicySchemaValidTargetResourcesEnum[];
 }

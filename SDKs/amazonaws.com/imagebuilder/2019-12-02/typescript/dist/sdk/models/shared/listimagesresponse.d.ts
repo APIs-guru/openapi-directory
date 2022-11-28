@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ImageVersion } from "./imageversion";
 export declare class ListImagesResponse extends SpeakeasyBase {
     imageVersionList?: ImageVersion[];

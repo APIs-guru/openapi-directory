@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var CreateFundsConfirmationsHeaders = /** @class */ (function (_super) {
     __extends(CreateFundsConfirmationsHeaders, _super);
@@ -30,23 +30,23 @@ var CreateFundsConfirmationsHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=Authorization" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Authorization" }),
         __metadata("design:type", String)
     ], CreateFundsConfirmationsHeaders.prototype, "authorization", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=x-customer-user-agent" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=x-customer-user-agent" }),
         __metadata("design:type", String)
     ], CreateFundsConfirmationsHeaders.prototype, "xCustomerUserAgent", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=x-fapi-auth-date" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=x-fapi-auth-date" }),
         __metadata("design:type", String)
     ], CreateFundsConfirmationsHeaders.prototype, "xFapiAuthDate", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=x-fapi-customer-ip-address" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=x-fapi-customer-ip-address" }),
         __metadata("design:type", String)
     ], CreateFundsConfirmationsHeaders.prototype, "xFapiCustomerIpAddress", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=x-fapi-interaction-id" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=x-fapi-interaction-id" }),
         __metadata("design:type", String)
     ], CreateFundsConfirmationsHeaders.prototype, "xFapiInteractionId", void 0);
     return CreateFundsConfirmationsHeaders;
@@ -58,7 +58,7 @@ var CreateFundsConfirmationsSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemePsuoAuth2Security)
     ], CreateFundsConfirmationsSecurity.prototype, "psuoAuth2Security", void 0);
     return CreateFundsConfirmationsSecurity;
@@ -70,15 +70,15 @@ var CreateFundsConfirmationsRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", CreateFundsConfirmationsHeaders)
     ], CreateFundsConfirmationsRequest.prototype, "headers", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", shared.ObFundsConfirmation1)
     ], CreateFundsConfirmationsRequest.prototype, "request", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", CreateFundsConfirmationsSecurity)
     ], CreateFundsConfirmationsRequest.prototype, "security", void 0);
     return CreateFundsConfirmationsRequest;
@@ -90,23 +90,23 @@ var CreateFundsConfirmationsResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], CreateFundsConfirmationsResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Map)
     ], CreateFundsConfirmationsResponse.prototype, "headers", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.ObErrorResponse1)
     ], CreateFundsConfirmationsResponse.prototype, "obErrorResponse1", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.ObFundsConfirmationResponse1)
     ], CreateFundsConfirmationsResponse.prototype, "obFundsConfirmationResponse1", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], CreateFundsConfirmationsResponse.prototype, "statusCode", void 0);
     return CreateFundsConfirmationsResponse;

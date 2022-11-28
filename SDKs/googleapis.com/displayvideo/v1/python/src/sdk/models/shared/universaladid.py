@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class UniversalAdIDRegistryEnum(str, Enum):
     UNIVERSAL_AD_REGISTRY_UNSPECIFIED = "UNIVERSAL_AD_REGISTRY_UNSPECIFIED"
@@ -14,6 +16,10 @@ class UniversalAdIDRegistryEnum(str, Enum):
 @dataclass_json
 @dataclass
 class UniversalAdID:
-    id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
-    registry: Optional[UniversalAdIDRegistryEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'registry' }})
+    r"""UniversalAdID
+    A creative identifier provided by a registry that is unique across all platforms. This is part of the VAST 4.0 standard.
+    """
+    
+    id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('id') }})
+    registry: Optional[UniversalAdIDRegistryEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('registry') }})
     

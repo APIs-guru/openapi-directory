@@ -1,20 +1,20 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import subnetmapping
-from . import tag
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class CreateFirewallRequest:
-    delete_protection: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'DeleteProtection' }})
-    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Description' }})
-    firewall_name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FirewallName' }})
-    firewall_policy_arn: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FirewallPolicyArn' }})
-    firewall_policy_change_protection: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FirewallPolicyChangeProtection' }})
-    subnet_change_protection: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'SubnetChangeProtection' }})
-    subnet_mappings: List[subnetmapping.SubnetMapping] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'SubnetMappings' }})
-    tags: Optional[List[tag.Tag]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Tags' }})
-    vpc_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'VpcId' }})
+    firewall_name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('FirewallName') }})
+    firewall_policy_arn: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('FirewallPolicyArn') }})
+    subnet_mappings: List[SubnetMapping] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('SubnetMappings') }})
+    vpc_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('VpcId') }})
+    delete_protection: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('DeleteProtection') }})
+    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Description') }})
+    firewall_policy_change_protection: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('FirewallPolicyChangeProtection') }})
+    subnet_change_protection: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('SubnetChangeProtection') }})
+    tags: Optional[List[Tag]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Tags') }})
     

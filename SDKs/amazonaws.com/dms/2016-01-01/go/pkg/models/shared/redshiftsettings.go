@@ -1,5 +1,7 @@
 package shared
 
+// RedshiftSettings
+// Provides information that defines an Amazon Redshift endpoint.
 type RedshiftSettings struct {
 	AcceptAnyDate                *bool                    `json:"AcceptAnyDate,omitempty"`
 	AfterConnectScript           *string                  `json:"AfterConnectScript,omitempty"`

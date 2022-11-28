@@ -1,5 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { HiTypeEnumEnum } from "./hitypeenumenum";
 import { ConsentManagerPatientId } from "./consentmanagerpatientid";
 import { Permission } from "./permission";
@@ -7,82 +6,83 @@ import { UsePurpose } from "./usepurpose";
 import { ConsentStatusEnum } from "./consentstatusenum";
 
 
+
 export class HipConsentNotificationNotificationConsentDetailCareContexts extends SpeakeasyBase {
-  @Metadata({ data: "json, name=careContextReference" })
+  @SpeakeasyMetadata({ data: "json, name=careContextReference" })
   careContextReference: string;
 
-  @Metadata({ data: "json, name=patientReference" })
+  @SpeakeasyMetadata({ data: "json, name=patientReference" })
   patientReference: string;
 }
 
 
 export class HipConsentNotificationNotificationConsentDetailConsentManager extends SpeakeasyBase {
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: string;
 }
 
 
 export class HipConsentNotificationNotificationConsentDetailHip extends SpeakeasyBase {
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: string;
 }
 
 
 export class HipConsentNotificationNotificationConsentDetail extends SpeakeasyBase {
-  @Metadata({ data: "json, name=careContexts", elemType: shared.HipConsentNotificationNotificationConsentDetailCareContexts })
+  @SpeakeasyMetadata({ data: "json, name=careContexts", elemType: HipConsentNotificationNotificationConsentDetailCareContexts })
   careContexts: HipConsentNotificationNotificationConsentDetailCareContexts[];
 
-  @Metadata({ data: "json, name=consentId" })
+  @SpeakeasyMetadata({ data: "json, name=consentId" })
   consentId: string;
 
-  @Metadata({ data: "json, name=consentManager" })
+  @SpeakeasyMetadata({ data: "json, name=consentManager" })
   consentManager: HipConsentNotificationNotificationConsentDetailConsentManager;
 
-  @Metadata({ data: "json, name=createdAt" })
+  @SpeakeasyMetadata({ data: "json, name=createdAt" })
   createdAt: Date;
 
-  @Metadata({ data: "json, name=hiTypes" })
+  @SpeakeasyMetadata({ data: "json, name=hiTypes" })
   hiTypes: HiTypeEnumEnum[];
 
-  @Metadata({ data: "json, name=hip" })
+  @SpeakeasyMetadata({ data: "json, name=hip" })
   hip: HipConsentNotificationNotificationConsentDetailHip;
 
-  @Metadata({ data: "json, name=patient" })
+  @SpeakeasyMetadata({ data: "json, name=patient" })
   patient: ConsentManagerPatientId;
 
-  @Metadata({ data: "json, name=permission" })
+  @SpeakeasyMetadata({ data: "json, name=permission" })
   permission: Permission;
 
-  @Metadata({ data: "json, name=purpose" })
+  @SpeakeasyMetadata({ data: "json, name=purpose" })
   purpose: UsePurpose;
 
-  @Metadata({ data: "json, name=schemaVersion" })
+  @SpeakeasyMetadata({ data: "json, name=schemaVersion" })
   schemaVersion?: string;
 }
 
 
 export class HipConsentNotificationNotification extends SpeakeasyBase {
-  @Metadata({ data: "json, name=consentDetail" })
+  @SpeakeasyMetadata({ data: "json, name=consentDetail" })
   consentDetail: HipConsentNotificationNotificationConsentDetail;
 
-  @Metadata({ data: "json, name=consentId" })
+  @SpeakeasyMetadata({ data: "json, name=consentId" })
   consentId: string;
 
-  @Metadata({ data: "json, name=signature" })
+  @SpeakeasyMetadata({ data: "json, name=signature" })
   signature: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status: ConsentStatusEnum;
 }
 
 
 export class HipConsentNotification extends SpeakeasyBase {
-  @Metadata({ data: "json, name=notification" })
+  @SpeakeasyMetadata({ data: "json, name=notification" })
   notification: HipConsentNotificationNotification;
 
-  @Metadata({ data: "json, name=requestId" })
+  @SpeakeasyMetadata({ data: "json, name=requestId" })
   requestId: string;
 
-  @Metadata({ data: "json, name=timestamp" })
+  @SpeakeasyMetadata({ data: "json, name=timestamp" })
   timestamp: Date;
 }

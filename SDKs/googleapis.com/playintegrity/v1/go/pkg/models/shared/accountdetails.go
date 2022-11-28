@@ -9,8 +9,9 @@ const (
 	AccountDetailsAppLicensingVerdictEnumUnevaluated AccountDetailsAppLicensingVerdictEnum = "UNEVALUATED"
 )
 
+// AccountDetails
+// Contains the account information such as the licensing status for the user in the scope.
 type AccountDetails struct {
 	AccountActivity     *AccountActivity                       `json:"accountActivity,omitempty"`
-	AccountRiskVerdict  *AccountRiskVerdict                    `json:"accountRiskVerdict,omitempty"`
 	AppLicensingVerdict *AccountDetailsAppLicensingVerdictEnum `json:"appLicensingVerdict,omitempty"`
 }

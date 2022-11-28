@@ -22,19 +22,19 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { FlowExecutionMessage } from "./flowexecutionmessage";
 var ListFlowExecutionMessagesResponse = /** @class */ (function (_super) {
     __extends(ListFlowExecutionMessagesResponse, _super);
     function ListFlowExecutionMessagesResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=messages", elemType: shared.FlowExecutionMessage }),
+        SpeakeasyMetadata({ data: "json, name=messages", elemType: FlowExecutionMessage }),
         __metadata("design:type", Array)
     ], ListFlowExecutionMessagesResponse.prototype, "messages", void 0);
     __decorate([
-        Metadata({ data: "json, name=nextToken" }),
+        SpeakeasyMetadata({ data: "json, name=nextToken" }),
         __metadata("design:type", String)
     ], ListFlowExecutionMessagesResponse.prototype, "nextToken", void 0);
     return ListFlowExecutionMessagesResponse;

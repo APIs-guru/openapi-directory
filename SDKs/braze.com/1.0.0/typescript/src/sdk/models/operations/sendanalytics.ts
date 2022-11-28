@@ -1,31 +1,32 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class SendAnalyticsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=campaign_id" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=campaign_id" })
   campaignId?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=ending_at" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=ending_at" })
   endingAt?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=length" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=length" })
   length?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=send_id" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=send_id" })
   sendId?: string;
 }
 
 
 export class SendAnalyticsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: SendAnalyticsQueryParams;
 }
 
 
 export class SendAnalyticsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

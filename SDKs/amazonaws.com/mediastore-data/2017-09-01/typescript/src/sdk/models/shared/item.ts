@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ItemTypeEnum } from "./itemtypeenum";
+
 
 
 // Item
@@ -7,21 +8,21 @@ import { ItemTypeEnum } from "./itemtypeenum";
  * A metadata entry for a folder or object.
 **/
 export class Item extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ContentLength" })
+  @SpeakeasyMetadata({ data: "json, name=ContentLength" })
   contentLength?: number;
 
-  @Metadata({ data: "json, name=ContentType" })
+  @SpeakeasyMetadata({ data: "json, name=ContentType" })
   contentType?: string;
 
-  @Metadata({ data: "json, name=ETag" })
+  @SpeakeasyMetadata({ data: "json, name=ETag" })
   eTag?: string;
 
-  @Metadata({ data: "json, name=LastModified" })
+  @SpeakeasyMetadata({ data: "json, name=LastModified" })
   lastModified?: Date;
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name?: string;
 
-  @Metadata({ data: "json, name=Type" })
+  @SpeakeasyMetadata({ data: "json, name=Type" })
   type?: ItemTypeEnum;
 }

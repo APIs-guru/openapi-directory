@@ -1,11 +1,15 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class AndroiddeviceprovisioningPartnersDevicesUpdateMetadataAsyncPathParams:
-    partner_id: str = field(default=None, metadata={'path_param': { 'field_name': 'partnerId', 'style': 'simple', 'explode': False }})
+    partner_id: str = field(metadata={'path_param': { 'field_name': 'partnerId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,14 +29,14 @@ class AndroiddeviceprovisioningPartnersDevicesUpdateMetadataAsyncQueryParams:
 
 @dataclass
 class AndroiddeviceprovisioningPartnersDevicesUpdateMetadataAsyncRequest:
-    path_params: AndroiddeviceprovisioningPartnersDevicesUpdateMetadataAsyncPathParams = field(default=None)
-    query_params: AndroiddeviceprovisioningPartnersDevicesUpdateMetadataAsyncQueryParams = field(default=None)
+    path_params: AndroiddeviceprovisioningPartnersDevicesUpdateMetadataAsyncPathParams = field()
+    query_params: AndroiddeviceprovisioningPartnersDevicesUpdateMetadataAsyncQueryParams = field()
     request: Optional[shared.UpdateDeviceMetadataInBatchRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class AndroiddeviceprovisioningPartnersDevicesUpdateMetadataAsyncResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     operation: Optional[shared.Operation] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ReplaceAllTextResponse
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The result of replacing text.
 **/
 export class ReplaceAllTextResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=occurrencesChanged" })
+  @SpeakeasyMetadata({ data: "json, name=occurrencesChanged" })
   occurrencesChanged?: number;
 }

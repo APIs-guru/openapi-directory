@@ -1,5 +1,7 @@
 package shared
 
+// CapacityProvider
+// The details of a capacity provider.
 type CapacityProvider struct {
 	AutoScalingGroupProvider *AutoScalingGroupProvider         `json:"autoScalingGroupProvider,omitempty"`
 	CapacityProviderArn      *string                           `json:"capacityProviderArn,omitempty"`

@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class ResourceAttributeTypeEnum(str, Enum):
     IPV4_ADDRESS = "IPV4_ADDRESS"

@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class GetCustomDataIdentifierPathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -21,20 +24,20 @@ class GetCustomDataIdentifierHeaders:
 
 @dataclass
 class GetCustomDataIdentifierRequest:
-    path_params: GetCustomDataIdentifierPathParams = field(default=None)
-    headers: GetCustomDataIdentifierHeaders = field(default=None)
+    headers: GetCustomDataIdentifierHeaders = field()
+    path_params: GetCustomDataIdentifierPathParams = field()
     
 
 @dataclass
 class GetCustomDataIdentifierResponse:
+    content_type: str = field()
+    status_code: int = field()
     access_denied_exception: Optional[Any] = field(default=None)
     conflict_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     get_custom_data_identifier_response: Optional[shared.GetCustomDataIdentifierResponse] = field(default=None)
     internal_server_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
     service_quota_exceeded_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     validation_exception: Optional[Any] = field(default=None)
     

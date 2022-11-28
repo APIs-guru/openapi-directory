@@ -1,16 +1,17 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class UserDutyInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=lastStatusChange" })
+  @SpeakeasyMetadata({ data: "json, name=lastStatusChange" })
   lastStatusChange?: Date;
 
-  @Metadata({ data: "json, name=onDuty" })
+  @SpeakeasyMetadata({ data: "json, name=onDuty" })
   onDuty?: boolean;
 
-  @Metadata({ data: "json, name=onManagerDuty" })
+  @SpeakeasyMetadata({ data: "json, name=onManagerDuty" })
   onManagerDuty?: boolean;
 
-  @Metadata({ data: "json, name=overdue" })
+  @SpeakeasyMetadata({ data: "json, name=overdue" })
   overdue?: boolean;
 }

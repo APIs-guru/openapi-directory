@@ -1,28 +1,28 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { OrderShipmentLineItemShipment } from "./ordershipmentlineitemshipment";
 import { OrdersCustomBatchRequestEntryShipLineItemsShipmentInfo } from "./orderscustombatchrequestentryshiplineitemsshipmentinfo";
 
 
+
 export class OrdersShipLineItemsRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=carrier" })
+  @SpeakeasyMetadata({ data: "json, name=carrier" })
   carrier?: string;
 
-  @Metadata({ data: "json, name=lineItems", elemType: shared.OrderShipmentLineItemShipment })
+  @SpeakeasyMetadata({ data: "json, name=lineItems", elemType: OrderShipmentLineItemShipment })
   lineItems?: OrderShipmentLineItemShipment[];
 
-  @Metadata({ data: "json, name=operationId" })
+  @SpeakeasyMetadata({ data: "json, name=operationId" })
   operationId?: string;
 
-  @Metadata({ data: "json, name=shipmentGroupId" })
+  @SpeakeasyMetadata({ data: "json, name=shipmentGroupId" })
   shipmentGroupId?: string;
 
-  @Metadata({ data: "json, name=shipmentId" })
+  @SpeakeasyMetadata({ data: "json, name=shipmentId" })
   shipmentId?: string;
 
-  @Metadata({ data: "json, name=shipmentInfos", elemType: shared.OrdersCustomBatchRequestEntryShipLineItemsShipmentInfo })
+  @SpeakeasyMetadata({ data: "json, name=shipmentInfos", elemType: OrdersCustomBatchRequestEntryShipLineItemsShipmentInfo })
   shipmentInfos?: OrdersCustomBatchRequestEntryShipLineItemsShipmentInfo[];
 
-  @Metadata({ data: "json, name=trackingId" })
+  @SpeakeasyMetadata({ data: "json, name=trackingId" })
   trackingId?: string;
 }

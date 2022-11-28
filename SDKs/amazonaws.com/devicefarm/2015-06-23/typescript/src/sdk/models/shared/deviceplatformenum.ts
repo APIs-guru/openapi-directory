@@ -1,6 +1,7 @@
 
 
+
 export enum DevicePlatformEnum {
-    Android = "ANDROID"
-,    Ios = "IOS"
+    Android = "ANDROID",
+    Ios = "IOS"
 }

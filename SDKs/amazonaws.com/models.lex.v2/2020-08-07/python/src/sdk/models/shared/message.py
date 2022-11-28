@@ -1,17 +1,19 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import custompayload
-from . import imageresponsecard
-from . import plaintextmessage
-from . import ssmlmessage
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class Message:
-    custom_payload: Optional[custompayload.CustomPayload] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'customPayload' }})
-    image_response_card: Optional[imageresponsecard.ImageResponseCard] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'imageResponseCard' }})
-    plain_text_message: Optional[plaintextmessage.PlainTextMessage] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'plainTextMessage' }})
-    ssml_message: Optional[ssmlmessage.SsmlMessage] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ssmlMessage' }})
+    r"""Message
+    The object that provides message text and it's type.
+    """
+    
+    custom_payload: Optional[CustomPayload] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('customPayload') }})
+    image_response_card: Optional[ImageResponseCard] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('imageResponseCard') }})
+    plain_text_message: Optional[PlainTextMessage] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('plainTextMessage') }})
+    ssml_message: Optional[SsmlMessage] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ssmlMessage') }})
     

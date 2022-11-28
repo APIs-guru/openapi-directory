@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ImageActionTypeEnum } from "./imageactiontypeenum";
 /**
  * The type of action to be taken.

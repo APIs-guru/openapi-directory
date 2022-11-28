@@ -22,18 +22,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var CellLocation = /** @class */ (function (_super) {
     __extends(CellLocation, _super);
     function CellLocation() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=colIndex" }),
+        SpeakeasyMetadata({ data: "json, name=colIndex" }),
         __metadata("design:type", Number)
     ], CellLocation.prototype, "colIndex", void 0);
     __decorate([
-        Metadata({ data: "json, name=rowIndex" }),
+        SpeakeasyMetadata({ data: "json, name=rowIndex" }),
         __metadata("design:type", Number)
     ], CellLocation.prototype, "rowIndex", void 0);
     return CellLocation;

@@ -30,7 +30,7 @@ type MemcacheProjectsLocationsInstancesUpdateParametersSecurity struct {
 type MemcacheProjectsLocationsInstancesUpdateParametersRequest struct {
 	PathParams  MemcacheProjectsLocationsInstancesUpdateParametersPathParams
 	QueryParams MemcacheProjectsLocationsInstancesUpdateParametersQueryParams
-	Request     *shared.UpdateParametersRequest `request:"mediaType=application/json"`
+	Request     *shared.UpdateParametersRequestInput `request:"mediaType=application/json"`
 	Security    MemcacheProjectsLocationsInstancesUpdateParametersSecurity
 }
 

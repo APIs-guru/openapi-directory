@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class MybusinessaccountmanagementLocationsAdminsCreatePathParams extends SpeakeasyBase {
     parent: string;
@@ -19,7 +19,7 @@ export declare class MybusinessaccountmanagementLocationsAdminsCreateQueryParams
 export declare class MybusinessaccountmanagementLocationsAdminsCreateRequest extends SpeakeasyBase {
     pathParams: MybusinessaccountmanagementLocationsAdminsCreatePathParams;
     queryParams: MybusinessaccountmanagementLocationsAdminsCreateQueryParams;
-    request?: shared.Admin;
+    request?: shared.AdminInput;
 }
 export declare class MybusinessaccountmanagementLocationsAdminsCreateResponse extends SpeakeasyBase {
     admin?: shared.Admin;

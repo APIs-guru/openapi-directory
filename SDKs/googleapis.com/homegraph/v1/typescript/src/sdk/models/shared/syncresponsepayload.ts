@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Device } from "./device";
+
 
 
 // SyncResponsePayload
@@ -8,9 +8,9 @@ import { Device } from "./device";
  * Payload containing device information.
 **/
 export class SyncResponsePayload extends SpeakeasyBase {
-  @Metadata({ data: "json, name=agentUserId" })
+  @SpeakeasyMetadata({ data: "json, name=agentUserId" })
   agentUserId?: string;
 
-  @Metadata({ data: "json, name=devices", elemType: shared.Device })
+  @SpeakeasyMetadata({ data: "json, name=devices", elemType: Device })
   devices?: Device[];
 }

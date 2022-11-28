@@ -14,6 +14,10 @@ const (
 	PageEntryTypeEnumPeopleEntry     PageEntryTypeEnum = "PeopleEntry"
 )
 
+// PageEntry
+// Represents an entry of a Page.
+// Defines what specific piece of content should be presented e.g. an Item or ItemList.
+// Also defines what visual template should be used to render that content.
 type PageEntry struct {
 	CustomFields map[string]interface{} `json:"customFields,omitempty"`
 	ID           string                 `json:"id"`

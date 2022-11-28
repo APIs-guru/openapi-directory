@@ -40,7 +40,7 @@ type FirebaserulesProjectsReleasesPatchSecurity struct {
 type FirebaserulesProjectsReleasesPatchRequest struct {
 	PathParams  FirebaserulesProjectsReleasesPatchPathParams
 	QueryParams FirebaserulesProjectsReleasesPatchQueryParams
-	Request     *shared.UpdateReleaseRequest `request:"mediaType=application/json"`
+	Request     *shared.UpdateReleaseRequestInput `request:"mediaType=application/json"`
 	Security    FirebaserulesProjectsReleasesPatchSecurity
 }
 

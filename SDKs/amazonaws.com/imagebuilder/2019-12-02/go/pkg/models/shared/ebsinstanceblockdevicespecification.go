@@ -1,5 +1,7 @@
 package shared
 
+// EbsInstanceBlockDeviceSpecification
+// Amazon EBS-specific block device mapping specifications.
 type EbsInstanceBlockDeviceSpecification struct {
 	DeleteOnTermination *bool              `json:"deleteOnTermination,omitempty"`
 	Encrypted           *bool              `json:"encrypted,omitempty"`

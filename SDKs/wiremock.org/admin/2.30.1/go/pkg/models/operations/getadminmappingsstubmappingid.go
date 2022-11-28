@@ -4,10 +4,8 @@ type GetAdminMappingsStubMappingIDPathParams struct {
 	StubMappingID string `pathParam:"style=simple,explode=false,name=stubMappingId"`
 }
 
-type GetAdminMappingsStubMappingIDRequest struct {
-	PathParams GetAdminMappingsStubMappingIDPathParams
-}
-
+// GetAdminMappingsStubMappingID200ApplicationJSONRequestBasicAuthCredentials
+// Pre-emptive basic auth credentials to match against
 type GetAdminMappingsStubMappingID200ApplicationJSONRequestBasicAuthCredentials struct {
 	Password string `json:"password"`
 	Username string `json:"username"`
@@ -65,6 +63,10 @@ type GetAdminMappingsStubMappingID200ApplicationJSON struct {
 	Response              *GetAdminMappingsStubMappingID200ApplicationJSONResponse `json:"response,omitempty"`
 	ScenarioName          *string                                                  `json:"scenarioName,omitempty"`
 	UUID                  *string                                                  `json:"uuid,omitempty"`
+}
+
+type GetAdminMappingsStubMappingIDRequest struct {
+	PathParams GetAdminMappingsStubMappingIDPathParams
 }
 
 type GetAdminMappingsStubMappingIDResponse struct {

@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Crawl } from "./crawl";
+
 
 
 // CrawlerNodeDetails
@@ -8,6 +8,6 @@ import { Crawl } from "./crawl";
  * The details of a Crawler node present in the workflow.
 **/
 export class CrawlerNodeDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Crawls", elemType: shared.Crawl })
+  @SpeakeasyMetadata({ data: "json, name=Crawls", elemType: Crawl })
   crawls?: Crawl[];
 }

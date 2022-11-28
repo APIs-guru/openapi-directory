@@ -1,5 +1,7 @@
 package shared
 
+// DisputeSummaryResponse
+// This type defines the base response payload of the getPaymentDisputeSummaries method. Each payment dispute that matches the input criteria is returned under the paymentDisputeSummaries array.
 type DisputeSummaryResponse struct {
 	Href                    *string                 `json:"href,omitempty"`
 	Limit                   *int32                  `json:"limit,omitempty"`

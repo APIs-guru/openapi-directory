@@ -4,17 +4,9 @@ import (
 	"openapi/pkg/models/shared"
 )
 
-type CreateTaxRatesSecurityOption1 struct {
-	ZettleAPIKey shared.SchemeZettleAPIKey `security:"scheme,type=apiKey,subtype=header"`
-}
-
-type CreateTaxRatesSecurityOption2 struct {
-	ZettleOauth shared.SchemeZettleOauth `security:"scheme,type=oauth2"`
-}
-
 type CreateTaxRatesSecurity struct {
-	Option1 *CreateTaxRatesSecurityOption1 `security:"option"`
-	Option2 *CreateTaxRatesSecurityOption2 `security:"option"`
+	ZettleAPIKey *shared.SchemeZettleAPIKey `security:"scheme,type=apiKey,subtype=header"`
+	ZettleOauth  *shared.SchemeZettleOauth  `security:"scheme,type=oauth2"`
 }
 
 type CreateTaxRatesRequest struct {

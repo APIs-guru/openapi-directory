@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ListItemNamesForUnmappedIdentityResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=itemNames" })
+  @SpeakeasyMetadata({ data: "json, name=itemNames" })
   itemNames?: string[];
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 }

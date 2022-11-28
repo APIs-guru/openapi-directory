@@ -1,4 +1,4 @@
-from .__xgafv_enum import *
+from ._xgafv_enum import *
 from .accessurls import *
 from .activatecertificateauthorityrequest import *
 from .allowedconfiglist import *

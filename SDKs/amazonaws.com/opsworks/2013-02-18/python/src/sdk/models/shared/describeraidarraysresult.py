@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import raidarray
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class DescribeRaidArraysResult:
-    raid_arrays: Optional[List[raidarray.RaidArray]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'RaidArrays' }})
+    r"""DescribeRaidArraysResult
+    Contains the response to a <code>DescribeRaidArrays</code> request.
+    """
+    
+    raid_arrays: Optional[List[RaidArray]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('RaidArrays') }})
     

@@ -4,26 +4,13 @@ import (
 	"openapi/pkg/models/shared"
 )
 
-var GetMaintenanceServers = []string{
+var GetMaintenanceServerList = []string{
 	"https://api.linode.com/v4beta",
 }
 
-type GetMaintenanceSecurityOption1 struct {
-	PersonalAccessToken shared.SchemePersonalAccessToken `security:"scheme,type=http,subtype=bearer"`
-}
-
-type GetMaintenanceSecurityOption2 struct {
-	Oauth shared.SchemeOauth `security:"scheme,type=oauth2"`
-}
-
 type GetMaintenanceSecurity struct {
-	Option1 *GetMaintenanceSecurityOption1 `security:"option"`
-	Option2 *GetMaintenanceSecurityOption2 `security:"option"`
-}
-
-type GetMaintenanceRequest struct {
-	ServerURL *string
-	Security  GetMaintenanceSecurity
+	PersonalAccessToken *shared.SchemePersonalAccessToken `security:"scheme,type=http,subtype=bearer"`
+	Oauth               *shared.SchemeOauth               `security:"scheme,type=oauth2"`
 }
 
 type GetMaintenance200ApplicationJSON struct {
@@ -35,6 +22,11 @@ type GetMaintenance200ApplicationJSON struct {
 
 type GetMaintenanceDefaultApplicationJSON struct {
 	Errors []shared.ErrorObject `json:"errors,omitempty"`
+}
+
+type GetMaintenanceRequest struct {
+	ServerURL *string
+	Security  GetMaintenanceSecurity
 }
 
 type GetMaintenanceResponse struct {

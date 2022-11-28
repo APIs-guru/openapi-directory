@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AttributeContext } from "./attributecontext";
+
 
 
 // ReportRequest
@@ -8,9 +8,9 @@ import { AttributeContext } from "./attributecontext";
  * Request message for the Report method.
 **/
 export class ReportRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=operations", elemType: shared.AttributeContext })
+  @SpeakeasyMetadata({ data: "json, name=operations", elemType: AttributeContext })
   operations?: AttributeContext[];
 
-  @Metadata({ data: "json, name=serviceConfigId" })
+  @SpeakeasyMetadata({ data: "json, name=serviceConfigId" })
   serviceConfigId?: string;
 }

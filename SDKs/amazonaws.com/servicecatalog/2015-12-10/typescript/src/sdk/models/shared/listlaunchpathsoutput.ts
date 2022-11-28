@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { LaunchPathSummary } from "./launchpathsummary";
 
 
+
 export class ListLaunchPathsOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=LaunchPathSummaries", elemType: shared.LaunchPathSummary })
+  @SpeakeasyMetadata({ data: "json, name=LaunchPathSummaries", elemType: LaunchPathSummary })
   launchPathSummaries?: LaunchPathSummary[];
 
-  @Metadata({ data: "json, name=NextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextPageToken" })
   nextPageToken?: string;
 }

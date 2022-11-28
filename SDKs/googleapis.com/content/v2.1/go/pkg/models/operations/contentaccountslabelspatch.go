@@ -31,7 +31,7 @@ type ContentAccountsLabelsPatchSecurity struct {
 type ContentAccountsLabelsPatchRequest struct {
 	PathParams  ContentAccountsLabelsPatchPathParams
 	QueryParams ContentAccountsLabelsPatchQueryParams
-	Request     *shared.AccountLabel `request:"mediaType=application/json"`
+	Request     *shared.AccountLabelInput `request:"mediaType=application/json"`
 	Security    ContentAccountsLabelsPatchSecurity
 }
 

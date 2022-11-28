@@ -1,9 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudRetailV2alphaSearchResponseFacet } from "./googlecloudretailv2alphasearchresponsefacet";
 import { GoogleCloudRetailV2alphaSearchRequestBoostSpecConditionBoostSpec } from "./googlecloudretailv2alphasearchrequestboostspecconditionboostspec";
 import { GoogleCloudRetailV2alphaSearchResponseQueryExpansionInfo } from "./googlecloudretailv2alphasearchresponsequeryexpansioninfo";
 import { GoogleCloudRetailV2alphaSearchResponseSearchResult } from "./googlecloudretailv2alphasearchresponsesearchresult";
+
 
 
 // GoogleCloudRetailV2alphaSearchResponse
@@ -11,33 +11,33 @@ import { GoogleCloudRetailV2alphaSearchResponseSearchResult } from "./googleclou
  * Response message for SearchService.Search method.
 **/
 export class GoogleCloudRetailV2alphaSearchResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=appliedControls" })
+  @SpeakeasyMetadata({ data: "json, name=appliedControls" })
   appliedControls?: string[];
 
-  @Metadata({ data: "json, name=attributionToken" })
+  @SpeakeasyMetadata({ data: "json, name=attributionToken" })
   attributionToken?: string;
 
-  @Metadata({ data: "json, name=correctedQuery" })
+  @SpeakeasyMetadata({ data: "json, name=correctedQuery" })
   correctedQuery?: string;
 
-  @Metadata({ data: "json, name=facets", elemType: shared.GoogleCloudRetailV2alphaSearchResponseFacet })
+  @SpeakeasyMetadata({ data: "json, name=facets", elemType: GoogleCloudRetailV2alphaSearchResponseFacet })
   facets?: GoogleCloudRetailV2alphaSearchResponseFacet[];
 
-  @Metadata({ data: "json, name=invalidConditionBoostSpecs", elemType: shared.GoogleCloudRetailV2alphaSearchRequestBoostSpecConditionBoostSpec })
+  @SpeakeasyMetadata({ data: "json, name=invalidConditionBoostSpecs", elemType: GoogleCloudRetailV2alphaSearchRequestBoostSpecConditionBoostSpec })
   invalidConditionBoostSpecs?: GoogleCloudRetailV2alphaSearchRequestBoostSpecConditionBoostSpec[];
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 
-  @Metadata({ data: "json, name=queryExpansionInfo" })
+  @SpeakeasyMetadata({ data: "json, name=queryExpansionInfo" })
   queryExpansionInfo?: GoogleCloudRetailV2alphaSearchResponseQueryExpansionInfo;
 
-  @Metadata({ data: "json, name=redirectUri" })
+  @SpeakeasyMetadata({ data: "json, name=redirectUri" })
   redirectUri?: string;
 
-  @Metadata({ data: "json, name=results", elemType: shared.GoogleCloudRetailV2alphaSearchResponseSearchResult })
+  @SpeakeasyMetadata({ data: "json, name=results", elemType: GoogleCloudRetailV2alphaSearchResponseSearchResult })
   results?: GoogleCloudRetailV2alphaSearchResponseSearchResult[];
 
-  @Metadata({ data: "json, name=totalSize" })
+  @SpeakeasyMetadata({ data: "json, name=totalSize" })
   totalSize?: number;
 }

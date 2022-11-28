@@ -1,10 +1,16 @@
 from dataclasses import dataclass, field
 from dataclasses_json import dataclass_json
-from . import accountresource
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class GetAccountResponse:
-    data: accountresource.AccountResource = field(default=None, metadata={'dataclasses_json': { 'field_name': 'data' }})
+    r"""GetAccountResponse
+    Successful response to get a single account.
+    
+    """
+    
+    data: AccountResource = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('data') }})
     

@@ -22,14 +22,26 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+var SchemePrivateAppsLegacy = /** @class */ (function (_super) {
+    __extends(SchemePrivateAppsLegacy, _super);
+    function SchemePrivateAppsLegacy() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "security, name=private-app-legacy" }),
+        __metadata("design:type", String)
+    ], SchemePrivateAppsLegacy.prototype, "apiKey", void 0);
+    return SchemePrivateAppsLegacy;
+}(SpeakeasyBase));
+export { SchemePrivateAppsLegacy };
 var SchemeHapikey = /** @class */ (function (_super) {
     __extends(SchemeHapikey, _super);
     function SchemeHapikey() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, name=hapikey" }),
+        SpeakeasyMetadata({ data: "security, name=hapikey" }),
         __metadata("design:type", String)
     ], SchemeHapikey.prototype, "apiKey", void 0);
     return SchemeHapikey;
@@ -41,7 +53,7 @@ var SchemeOauth2Legacy = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, name=Authorization" }),
+        SpeakeasyMetadata({ data: "security, name=Authorization" }),
         __metadata("design:type", String)
     ], SchemeOauth2Legacy.prototype, "authorization", void 0);
     return SchemeOauth2Legacy;

@@ -7,6 +7,8 @@ const (
 	GoogleCloudPolicysimulatorV1beta1ReplayConfigLogSourceEnumRecentAccesses       GoogleCloudPolicysimulatorV1beta1ReplayConfigLogSourceEnum = "RECENT_ACCESSES"
 )
 
+// GoogleCloudPolicysimulatorV1beta1ReplayConfig
+// The configuration used for a Replay.
 type GoogleCloudPolicysimulatorV1beta1ReplayConfig struct {
 	LogSource     *GoogleCloudPolicysimulatorV1beta1ReplayConfigLogSourceEnum `json:"logSource,omitempty"`
 	PolicyOverlay map[string]GoogleIamV1Policy                                `json:"policyOverlay,omitempty"`

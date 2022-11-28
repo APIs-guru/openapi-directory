@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// Api2ModelsRecipesRecipeVideoResponse
+// DTO used to return the details of a recipe video
 type Api2ModelsRecipesRecipeVideoResponse struct {
 	InsertedOn     *time.Time `json:"InsertedOn,omitempty"`
 	IsPrimaryVideo *bool      `json:"IsPrimaryVideo,omitempty"`

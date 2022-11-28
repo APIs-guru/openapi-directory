@@ -1,6 +1,10 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class HookEditFieldsEventEnum(str, Enum):
     ORDER_UPDATED = "order_updated"
@@ -20,6 +24,6 @@ class HookEditFieldsEventEnum(str, Enum):
 @dataclass_json
 @dataclass
 class HookEditFields:
-    event: HookEditFieldsEventEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'event' }})
-    url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'url' }})
+    event: HookEditFieldsEventEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('event') }})
+    url: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('url') }})
     

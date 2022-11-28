@@ -10,6 +10,8 @@ const (
 	GoogleCloudMlV1TrialStateEnumStopping         GoogleCloudMlV1TrialStateEnum = "STOPPING"
 )
 
+// GoogleCloudMlV1Trial
+// A message representing a trial.
 type GoogleCloudMlV1Trial struct {
 	ClientID         *string                         `json:"clientId,omitempty"`
 	EndTime          *string                         `json:"endTime,omitempty"`
@@ -21,4 +23,13 @@ type GoogleCloudMlV1Trial struct {
 	StartTime        *string                         `json:"startTime,omitempty"`
 	State            *GoogleCloudMlV1TrialStateEnum  `json:"state,omitempty"`
 	TrialInfeasible  *bool                           `json:"trialInfeasible,omitempty"`
+}
+
+// GoogleCloudMlV1TrialInput
+// A message representing a trial.
+type GoogleCloudMlV1TrialInput struct {
+	FinalMeasurement *GoogleCloudMlV1Measurement     `json:"finalMeasurement,omitempty"`
+	Measurements     []GoogleCloudMlV1Measurement    `json:"measurements,omitempty"`
+	Parameters       []GoogleCloudMlV1TrialParameter `json:"parameters,omitempty"`
+	State            *GoogleCloudMlV1TrialStateEnum  `json:"state,omitempty"`
 }

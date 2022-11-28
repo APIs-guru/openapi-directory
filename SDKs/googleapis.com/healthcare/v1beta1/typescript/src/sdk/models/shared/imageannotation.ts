@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BoundingPoly } from "./boundingpoly";
+
 
 
 // ImageAnnotation
@@ -8,9 +8,9 @@ import { BoundingPoly } from "./boundingpoly";
  * Image annotation.
 **/
 export class ImageAnnotation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=boundingPolys", elemType: shared.BoundingPoly })
+  @SpeakeasyMetadata({ data: "json, name=boundingPolys", elemType: BoundingPoly })
   boundingPolys?: BoundingPoly[];
 
-  @Metadata({ data: "json, name=frameIndex" })
+  @SpeakeasyMetadata({ data: "json, name=frameIndex" })
   frameIndex?: number;
 }

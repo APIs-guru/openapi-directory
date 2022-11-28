@@ -5,12 +5,12 @@ from sdk.models import shared
 
 @dataclass
 class AssetReportRemoveRequest:
-    request: shared.AssetReportRemoveRequest = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    request: shared.AssetReportRemoveRequest = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class AssetReportRemoveResponse:
+    content_type: str = field()
+    status_code: int = field()
     asset_report_remove_response: Optional[dict[str, Any]] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

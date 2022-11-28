@@ -8,6 +8,8 @@ const (
 	GoogleCloudContactcenterinsightsV1ExportInsightsDataRequestWriteDispositionEnumWriteAppend                 GoogleCloudContactcenterinsightsV1ExportInsightsDataRequestWriteDispositionEnum = "WRITE_APPEND"
 )
 
+// GoogleCloudContactcenterinsightsV1ExportInsightsDataRequest
+// The request to export insights.
 type GoogleCloudContactcenterinsightsV1ExportInsightsDataRequest struct {
 	BigQueryDestination *GoogleCloudContactcenterinsightsV1ExportInsightsDataRequestBigQueryDestination  `json:"bigQueryDestination,omitempty"`
 	Filter              *string                                                                          `json:"filter,omitempty"`

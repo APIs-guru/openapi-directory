@@ -1,27 +1,27 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
-export const GETV05HEARTBEAT_SERVERS = [
-	"https://your-hrp-server.com",
-];
 
+export const GetV05HeartbeatServerList = [
+	"https://your-hrp-server.com",
+] as const;
 
 
 export class GetV05HeartbeatRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   serverUrl?: string;
 }
 
 
 export class GetV05HeartbeatResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   heartbeatResponse?: shared.HeartbeatResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

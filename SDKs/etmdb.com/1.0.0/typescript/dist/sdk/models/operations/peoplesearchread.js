@@ -22,14 +22,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var PeopleSearchReadPathParams = /** @class */ (function (_super) {
     __extends(PeopleSearchReadPathParams, _super);
     function PeopleSearchReadPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=user" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=user" }),
         __metadata("design:type", String)
     ], PeopleSearchReadPathParams.prototype, "user", void 0);
     return PeopleSearchReadPathParams;
@@ -41,7 +41,7 @@ var PeopleSearchReadRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PeopleSearchReadPathParams)
     ], PeopleSearchReadRequest.prototype, "pathParams", void 0);
     return PeopleSearchReadRequest;
@@ -53,11 +53,11 @@ var PeopleSearchReadResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], PeopleSearchReadResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], PeopleSearchReadResponse.prototype, "statusCode", void 0);
     return PeopleSearchReadResponse;

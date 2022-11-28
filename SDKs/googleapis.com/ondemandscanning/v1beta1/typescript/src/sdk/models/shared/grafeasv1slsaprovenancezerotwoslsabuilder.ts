@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GrafeasV1SlsaProvenanceZeroTwoSlsaBuilder
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Identifies the entity that executed the recipe, which is trusted to have correctly performed the operation and populated this provenance.
 **/
 export class GrafeasV1SlsaProvenanceZeroTwoSlsaBuilder extends SpeakeasyBase {
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 }

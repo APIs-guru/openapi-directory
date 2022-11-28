@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // FailurePolicy
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Describes the policy in case of function's execution failure. If empty, then defaults to ignoring failures (i.e. not retrying them).
 **/
 export class FailurePolicy extends SpeakeasyBase {
-  @Metadata({ data: "json, name=retry" })
+  @SpeakeasyMetadata({ data: "json, name=retry" })
   retry?: Map<string, any>;
 }

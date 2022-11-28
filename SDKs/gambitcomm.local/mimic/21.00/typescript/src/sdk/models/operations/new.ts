@@ -1,32 +1,33 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class NewPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=IP" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=IP" })
   ip: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=agentNum" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=agentNum" })
   agentNum: number;
 }
 
 
 export class NewRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: NewPathParams;
 
-  @Metadata({ data: "request, media_type=application/json", elemType: shared.Triplet })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json", elemType: shared.Triplet })
   request: shared.Triplet[];
 }
 
 
 export class NewResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   new200ApplicationJsonString?: string;
 }

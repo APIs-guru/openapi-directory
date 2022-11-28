@@ -17,6 +17,8 @@ type PendingDeploymentReviewers struct {
 	Type     *DeploymentReviewerTypeEnum `json:"type,omitempty"`
 }
 
+// PendingDeployment
+// Details of a deployment that is waiting for protection rules to pass
 type PendingDeployment struct {
 	CurrentUserCanApprove bool                         `json:"current_user_can_approve"`
 	Environment           PendingDeploymentEnvironment `json:"environment"`

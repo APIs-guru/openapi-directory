@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class LookupUmprnPathParams:
-    umprn: str = field(default=None, metadata={'path_param': { 'field_name': 'umprn', 'style': 'simple', 'explode': False }})
+    umprn: str = field(metadata={'path_param': { 'field_name': 'umprn', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -16,21 +16,21 @@ class LookupUmprnQueryParams:
 
 @dataclass
 class LookupUmprnSecurity:
-    api_key: shared.SchemeAPIKey = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'query' }})
-    user_token: shared.SchemeUserToken = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'query' }})
+    api_key: shared.SchemeAPIKey = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'query' }})
+    user_token: shared.SchemeUserToken = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'query' }})
     
 
 @dataclass
 class LookupUmprnRequest:
-    path_params: LookupUmprnPathParams = field(default=None)
-    query_params: LookupUmprnQueryParams = field(default=None)
-    security: LookupUmprnSecurity = field(default=None)
+    path_params: LookupUmprnPathParams = field()
+    query_params: LookupUmprnQueryParams = field()
+    security: LookupUmprnSecurity = field()
     
 
 @dataclass
 class LookupUmprnResponse:
+    content_type: str = field()
+    status_code: int = field()
     address_lookup_response_schema: Optional[shared.AddressLookupResponseSchema] = field(default=None)
-    content_type: str = field(default=None)
     error_response_schema: Optional[shared.ErrorResponseSchema] = field(default=None)
-    status_code: int = field(default=None)
     

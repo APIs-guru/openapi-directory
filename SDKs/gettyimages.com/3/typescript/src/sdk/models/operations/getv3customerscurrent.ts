@@ -1,26 +1,27 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetV3CustomersCurrentHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=Accept-Language" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Accept-Language" })
   acceptLanguage?: string;
 }
 
 
 export class GetV3CustomersCurrentRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: GetV3CustomersCurrentHeaders;
 }
 
 
 export class GetV3CustomersCurrentResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   customerInfoResponse?: shared.CustomerInfoResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BudgetDetail } from "./budgetdetail";
 
 
+
 export class ListBudgetsForResourceOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Budgets", elemType: shared.BudgetDetail })
+  @SpeakeasyMetadata({ data: "json, name=Budgets", elemType: BudgetDetail })
   budgets?: BudgetDetail[];
 
-  @Metadata({ data: "json, name=NextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextPageToken" })
   nextPageToken?: string;
 }

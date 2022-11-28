@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetCreateDbParameterGroupActionEnum(str, Enum):
     CREATE_DB_PARAMETER_GROUP = "CreateDBParameterGroup"
@@ -10,11 +14,11 @@ class GetCreateDbParameterGroupVersionEnum(str, Enum):
 
 @dataclass
 class GetCreateDbParameterGroupQueryParams:
-    action: GetCreateDbParameterGroupActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    db_parameter_group_family: str = field(default=None, metadata={'query_param': { 'field_name': 'DBParameterGroupFamily', 'style': 'form', 'explode': True }})
-    db_parameter_group_name: str = field(default=None, metadata={'query_param': { 'field_name': 'DBParameterGroupName', 'style': 'form', 'explode': True }})
-    description: str = field(default=None, metadata={'query_param': { 'field_name': 'Description', 'style': 'form', 'explode': True }})
-    version: GetCreateDbParameterGroupVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: GetCreateDbParameterGroupActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    db_parameter_group_family: str = field(metadata={'query_param': { 'field_name': 'DBParameterGroupFamily', 'style': 'form', 'explode': True }})
+    db_parameter_group_name: str = field(metadata={'query_param': { 'field_name': 'DBParameterGroupName', 'style': 'form', 'explode': True }})
+    description: str = field(metadata={'query_param': { 'field_name': 'Description', 'style': 'form', 'explode': True }})
+    version: GetCreateDbParameterGroupVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -30,13 +34,13 @@ class GetCreateDbParameterGroupHeaders:
 
 @dataclass
 class GetCreateDbParameterGroupRequest:
-    query_params: GetCreateDbParameterGroupQueryParams = field(default=None)
-    headers: GetCreateDbParameterGroupHeaders = field(default=None)
+    headers: GetCreateDbParameterGroupHeaders = field()
+    query_params: GetCreateDbParameterGroupQueryParams = field()
     
 
 @dataclass
 class GetCreateDbParameterGroupResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { FailedBatchItem } from "./failedbatchitem";
 
 
+
 export class BatchUpdateTableRowsResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=failedBatchItems", elemType: shared.FailedBatchItem })
+  @SpeakeasyMetadata({ data: "json, name=failedBatchItems", elemType: FailedBatchItem })
   failedBatchItems?: FailedBatchItem[];
 
-  @Metadata({ data: "json, name=workbookCursor" })
+  @SpeakeasyMetadata({ data: "json, name=workbookCursor" })
   workbookCursor: number;
 }

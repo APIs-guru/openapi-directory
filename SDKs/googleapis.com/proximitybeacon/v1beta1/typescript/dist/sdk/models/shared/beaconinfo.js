@@ -22,9 +22,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AdvertisedId } from "./advertisedid";
+import { AttachmentInfo } from "./attachmentinfo";
 // BeaconInfo
 /**
  * A subset of beacon information served via the `beaconinfo.getforobserved` method, which you call when users of your app encounter your beacons.
@@ -35,15 +35,15 @@ var BeaconInfo = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=advertisedId" }),
+        SpeakeasyMetadata({ data: "json, name=advertisedId" }),
         __metadata("design:type", AdvertisedId)
     ], BeaconInfo.prototype, "advertisedId", void 0);
     __decorate([
-        Metadata({ data: "json, name=attachments", elemType: shared.AttachmentInfo }),
+        SpeakeasyMetadata({ data: "json, name=attachments", elemType: AttachmentInfo }),
         __metadata("design:type", Array)
     ], BeaconInfo.prototype, "attachments", void 0);
     __decorate([
-        Metadata({ data: "json, name=beaconName" }),
+        SpeakeasyMetadata({ data: "json, name=beaconName" }),
         __metadata("design:type", String)
     ], BeaconInfo.prototype, "beaconName", void 0);
     return BeaconInfo;

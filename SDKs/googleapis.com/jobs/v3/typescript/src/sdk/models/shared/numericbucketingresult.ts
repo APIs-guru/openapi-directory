@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BucketizedCount } from "./bucketizedcount";
+
 
 
 // NumericBucketingResult
@@ -8,12 +8,12 @@ import { BucketizedCount } from "./bucketizedcount";
  * Output only. Custom numeric bucketing result.
 **/
 export class NumericBucketingResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=counts", elemType: shared.BucketizedCount })
+  @SpeakeasyMetadata({ data: "json, name=counts", elemType: BucketizedCount })
   counts?: BucketizedCount[];
 
-  @Metadata({ data: "json, name=maxValue" })
+  @SpeakeasyMetadata({ data: "json, name=maxValue" })
   maxValue?: number;
 
-  @Metadata({ data: "json, name=minValue" })
+  @SpeakeasyMetadata({ data: "json, name=minValue" })
   minValue?: number;
 }

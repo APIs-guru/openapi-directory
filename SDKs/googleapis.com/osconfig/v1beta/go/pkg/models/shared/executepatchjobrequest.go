@@ -1,5 +1,7 @@
 package shared
 
+// ExecutePatchJobRequest
+// A request message to initiate patching across Compute Engine instances.
 type ExecutePatchJobRequest struct {
 	Description    *string              `json:"description,omitempty"`
 	DisplayName    *string              `json:"displayName,omitempty"`

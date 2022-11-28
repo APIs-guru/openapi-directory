@@ -41,7 +41,7 @@ type DataprocProjectsRegionsClustersCreateSecurity struct {
 type DataprocProjectsRegionsClustersCreateRequest struct {
 	PathParams  DataprocProjectsRegionsClustersCreatePathParams
 	QueryParams DataprocProjectsRegionsClustersCreateQueryParams
-	Request     *shared.Cluster `request:"mediaType=application/json"`
+	Request     *shared.ClusterInput `request:"mediaType=application/json"`
 	Security    DataprocProjectsRegionsClustersCreateSecurity
 }
 

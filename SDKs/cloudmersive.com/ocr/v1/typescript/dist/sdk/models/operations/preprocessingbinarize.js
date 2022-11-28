@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var PreprocessingBinarizeRequestBodyImageFile = /** @class */ (function (_super) {
     __extends(PreprocessingBinarizeRequestBodyImageFile, _super);
@@ -30,11 +30,11 @@ var PreprocessingBinarizeRequestBodyImageFile = /** @class */ (function (_super)
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "multipart_form, content=true" }),
+        SpeakeasyMetadata({ data: "multipart_form, content=true" }),
         __metadata("design:type", Uint8Array)
     ], PreprocessingBinarizeRequestBodyImageFile.prototype, "content", void 0);
     __decorate([
-        Metadata({ data: "multipart_form, name=imageFile" }),
+        SpeakeasyMetadata({ data: "multipart_form, name=imageFile" }),
         __metadata("design:type", String)
     ], PreprocessingBinarizeRequestBodyImageFile.prototype, "imageFile", void 0);
     return PreprocessingBinarizeRequestBodyImageFile;
@@ -46,7 +46,7 @@ var PreprocessingBinarizeRequestBody = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "multipart_form, file=true" }),
+        SpeakeasyMetadata({ data: "multipart_form, file=true" }),
         __metadata("design:type", PreprocessingBinarizeRequestBodyImageFile)
     ], PreprocessingBinarizeRequestBody.prototype, "imageFile", void 0);
     return PreprocessingBinarizeRequestBody;
@@ -58,7 +58,7 @@ var PreprocessingBinarizeSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeApikey)
     ], PreprocessingBinarizeSecurity.prototype, "apikey", void 0);
     return PreprocessingBinarizeSecurity;
@@ -70,11 +70,11 @@ var PreprocessingBinarizeRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "request, media_type=multipart/form-data" }),
+        SpeakeasyMetadata({ data: "request, media_type=multipart/form-data" }),
         __metadata("design:type", PreprocessingBinarizeRequestBody)
     ], PreprocessingBinarizeRequest.prototype, "request", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PreprocessingBinarizeSecurity)
     ], PreprocessingBinarizeRequest.prototype, "security", void 0);
     return PreprocessingBinarizeRequest;
@@ -86,27 +86,27 @@ var PreprocessingBinarizeResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], PreprocessingBinarizeResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], PreprocessingBinarizeResponse.prototype, "preprocessingBinarize200ApplicationJsonByteString", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], PreprocessingBinarizeResponse.prototype, "preprocessingBinarize200ApplicationXmlByteString", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], PreprocessingBinarizeResponse.prototype, "preprocessingBinarize200TextJsonByteString", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], PreprocessingBinarizeResponse.prototype, "preprocessingBinarize200TextXmlByteString", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], PreprocessingBinarizeResponse.prototype, "statusCode", void 0);
     return PreprocessingBinarizeResponse;

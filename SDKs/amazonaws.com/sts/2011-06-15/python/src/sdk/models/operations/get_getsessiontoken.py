@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetGetSessionTokenActionEnum(str, Enum):
     GET_SESSION_TOKEN = "GetSessionToken"
@@ -10,11 +14,11 @@ class GetGetSessionTokenVersionEnum(str, Enum):
 
 @dataclass
 class GetGetSessionTokenQueryParams:
-    action: GetGetSessionTokenActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetGetSessionTokenActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: GetGetSessionTokenVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     duration_seconds: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'DurationSeconds', 'style': 'form', 'explode': True }})
     serial_number: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'SerialNumber', 'style': 'form', 'explode': True }})
     token_code: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'TokenCode', 'style': 'form', 'explode': True }})
-    version: GetGetSessionTokenVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -30,13 +34,13 @@ class GetGetSessionTokenHeaders:
 
 @dataclass
 class GetGetSessionTokenRequest:
-    query_params: GetGetSessionTokenQueryParams = field(default=None)
-    headers: GetGetSessionTokenHeaders = field(default=None)
+    headers: GetGetSessionTokenHeaders = field()
+    query_params: GetGetSessionTokenQueryParams = field()
     
 
 @dataclass
 class GetGetSessionTokenResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

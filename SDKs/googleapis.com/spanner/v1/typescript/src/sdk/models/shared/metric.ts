@@ -1,18 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { LocalizedString } from "./localizedstring";
 import { DerivedMetric } from "./derivedmetric";
-import { LocalizedString } from "./localizedstring";
 import { IndexedHotKey } from "./indexedhotkey";
 import { IndexedKeyRangeInfos } from "./indexedkeyrangeinfos";
-import { LocalizedString } from "./localizedstring";
 import { MetricMatrix } from "./metricmatrix";
-import { LocalizedString } from "./localizedstring";
+
 
 export enum MetricAggregationEnum {
-    AggregationUnspecified = "AGGREGATION_UNSPECIFIED"
-,    Max = "MAX"
-,    Sum = "SUM"
+    AggregationUnspecified = "AGGREGATION_UNSPECIFIED",
+    Max = "MAX",
+    Sum = "SUM"
 }
 
 
@@ -21,39 +18,39 @@ export enum MetricAggregationEnum {
  * A message representing the actual monitoring data, values for each key bucket over time, of a metric.
 **/
 export class Metric extends SpeakeasyBase {
-  @Metadata({ data: "json, name=aggregation" })
+  @SpeakeasyMetadata({ data: "json, name=aggregation" })
   aggregation?: MetricAggregationEnum;
 
-  @Metadata({ data: "json, name=category" })
+  @SpeakeasyMetadata({ data: "json, name=category" })
   category?: LocalizedString;
 
-  @Metadata({ data: "json, name=derived" })
+  @SpeakeasyMetadata({ data: "json, name=derived" })
   derived?: DerivedMetric;
 
-  @Metadata({ data: "json, name=displayLabel" })
+  @SpeakeasyMetadata({ data: "json, name=displayLabel" })
   displayLabel?: LocalizedString;
 
-  @Metadata({ data: "json, name=hasNonzeroData" })
+  @SpeakeasyMetadata({ data: "json, name=hasNonzeroData" })
   hasNonzeroData?: boolean;
 
-  @Metadata({ data: "json, name=hotValue" })
+  @SpeakeasyMetadata({ data: "json, name=hotValue" })
   hotValue?: number;
 
-  @Metadata({ data: "json, name=indexedHotKeys", elemType: shared.IndexedHotKey })
+  @SpeakeasyMetadata({ data: "json, name=indexedHotKeys", elemType: IndexedHotKey })
   indexedHotKeys?: Map<string, IndexedHotKey>;
 
-  @Metadata({ data: "json, name=indexedKeyRangeInfos", elemType: shared.IndexedKeyRangeInfos })
+  @SpeakeasyMetadata({ data: "json, name=indexedKeyRangeInfos", elemType: IndexedKeyRangeInfos })
   indexedKeyRangeInfos?: Map<string, IndexedKeyRangeInfos>;
 
-  @Metadata({ data: "json, name=info" })
+  @SpeakeasyMetadata({ data: "json, name=info" })
   info?: LocalizedString;
 
-  @Metadata({ data: "json, name=matrix" })
+  @SpeakeasyMetadata({ data: "json, name=matrix" })
   matrix?: MetricMatrix;
 
-  @Metadata({ data: "json, name=unit" })
+  @SpeakeasyMetadata({ data: "json, name=unit" })
   unit?: LocalizedString;
 
-  @Metadata({ data: "json, name=visible" })
+  @SpeakeasyMetadata({ data: "json, name=visible" })
   visible?: boolean;
 }

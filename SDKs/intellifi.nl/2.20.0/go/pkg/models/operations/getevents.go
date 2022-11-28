@@ -29,10 +29,6 @@ type GetEventsQueryParams struct {
 	UntilID           *string                            `queryParam:"style=form,explode=true,name=until_id"`
 }
 
-type GetEventsRequest struct {
-	QueryParams GetEventsQueryParams
-}
-
 type GetEvents200ApplicationJSON struct {
 	Count           *int64         `json:"count,omitempty"`
 	CountCurrent    *int64         `json:"count_current,omitempty"`
@@ -41,6 +37,10 @@ type GetEvents200ApplicationJSON struct {
 	QueryDurationMs *int64         `json:"query_duration_ms,omitempty"`
 	Results         []shared.Event `json:"results,omitempty"`
 	URL             *string        `json:"url,omitempty"`
+}
+
+type GetEventsRequest struct {
+	QueryParams GetEventsQueryParams
 }
 
 type GetEventsResponse struct {

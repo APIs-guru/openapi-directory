@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Target } from "./target";
 // HomeRegionControl
 /**
@@ -34,19 +34,19 @@ var HomeRegionControl = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=ControlId" }),
+        SpeakeasyMetadata({ data: "json, name=ControlId" }),
         __metadata("design:type", String)
     ], HomeRegionControl.prototype, "controlId", void 0);
     __decorate([
-        Metadata({ data: "json, name=HomeRegion" }),
+        SpeakeasyMetadata({ data: "json, name=HomeRegion" }),
         __metadata("design:type", String)
     ], HomeRegionControl.prototype, "homeRegion", void 0);
     __decorate([
-        Metadata({ data: "json, name=RequestedTime" }),
+        SpeakeasyMetadata({ data: "json, name=RequestedTime" }),
         __metadata("design:type", Date)
     ], HomeRegionControl.prototype, "requestedTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=Target" }),
+        SpeakeasyMetadata({ data: "json, name=Target" }),
         __metadata("design:type", Target)
     ], HomeRegionControl.prototype, "target", void 0);
     return HomeRegionControl;

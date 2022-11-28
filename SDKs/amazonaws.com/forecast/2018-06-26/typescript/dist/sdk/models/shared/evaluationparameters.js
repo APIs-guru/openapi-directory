@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // EvaluationParameters
 /**
  * Parameters that define how to split a dataset into training data and testing data, and the number of iterations to perform. These parameters are specified in the predefined algorithms but you can override them in the <a>CreatePredictor</a> request.
@@ -33,11 +33,11 @@ var EvaluationParameters = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=BackTestWindowOffset" }),
+        SpeakeasyMetadata({ data: "json, name=BackTestWindowOffset" }),
         __metadata("design:type", Number)
     ], EvaluationParameters.prototype, "backTestWindowOffset", void 0);
     __decorate([
-        Metadata({ data: "json, name=NumberOfBacktestWindows" }),
+        SpeakeasyMetadata({ data: "json, name=NumberOfBacktestWindows" }),
         __metadata("design:type", Number)
     ], EvaluationParameters.prototype, "numberOfBacktestWindows", void 0);
     return EvaluationParameters;

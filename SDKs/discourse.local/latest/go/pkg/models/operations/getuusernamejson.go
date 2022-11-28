@@ -9,11 +9,6 @@ type GetUUsernameJSONHeaders struct {
 	APIUsername string `header:"style=simple,explode=false,name=Api-Username"`
 }
 
-type GetUUsernameJSONRequest struct {
-	PathParams GetUUsernameJSONPathParams
-	Headers    GetUUsernameJSONHeaders
-}
-
 type GetUUsernameJSON200ApplicationJSONUserGroupUsers struct {
 	GroupID           *int64 `json:"group_id,omitempty"`
 	NotificationLevel *int64 `json:"notification_level,omitempty"`
@@ -175,6 +170,11 @@ type GetUUsernameJSON200ApplicationJSONUser struct {
 type GetUUsernameJSON200ApplicationJSON struct {
 	User       *GetUUsernameJSON200ApplicationJSONUser `json:"user,omitempty"`
 	UserBadges []interface{}                           `json:"user_badges,omitempty"`
+}
+
+type GetUUsernameJSONRequest struct {
+	PathParams GetUUsernameJSONPathParams
+	Headers    GetUUsernameJSONHeaders
 }
 
 type GetUUsernameJSONResponse struct {

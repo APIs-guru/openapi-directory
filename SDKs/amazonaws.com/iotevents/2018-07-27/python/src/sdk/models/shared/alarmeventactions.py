@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import alarmaction
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class AlarmEventActions:
-    alarm_actions: Optional[List[alarmaction.AlarmAction]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'alarmActions' }})
+    r"""AlarmEventActions
+    Contains information about one or more alarm actions.
+    """
+    
+    alarm_actions: Optional[List[AlarmAction]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('alarmActions') }})
     

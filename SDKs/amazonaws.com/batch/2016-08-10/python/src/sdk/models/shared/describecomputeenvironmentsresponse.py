@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import computeenvironmentdetail
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class DescribeComputeEnvironmentsResponse:
-    compute_environments: Optional[List[computeenvironmentdetail.ComputeEnvironmentDetail]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'computeEnvironments' }})
-    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'nextToken' }})
+    compute_environments: Optional[List[ComputeEnvironmentDetail]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('computeEnvironments') }})
+    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('nextToken') }})
     

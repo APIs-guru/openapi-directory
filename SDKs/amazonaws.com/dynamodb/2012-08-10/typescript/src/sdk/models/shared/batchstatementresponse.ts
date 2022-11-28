@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BatchStatementError } from "./batchstatementerror";
 import { AttributeValue } from "./attributevalue";
+
 
 
 // BatchStatementResponse
@@ -9,12 +9,12 @@ import { AttributeValue } from "./attributevalue";
  *  A PartiQL batch statement response.. 
 **/
 export class BatchStatementResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Error" })
+  @SpeakeasyMetadata({ data: "json, name=Error" })
   error?: BatchStatementError;
 
-  @Metadata({ data: "json, name=Item", elemType: shared.AttributeValue })
+  @SpeakeasyMetadata({ data: "json, name=Item", elemType: AttributeValue })
   item?: Map<string, AttributeValue>;
 
-  @Metadata({ data: "json, name=TableName" })
+  @SpeakeasyMetadata({ data: "json, name=TableName" })
   tableName?: string;
 }

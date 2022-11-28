@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ReprocessingSummary } from "./reprocessingsummary";
+
 
 
 // PipelineSummary
@@ -8,15 +8,15 @@ import { ReprocessingSummary } from "./reprocessingsummary";
  * A summary of information about a pipeline.
 **/
 export class PipelineSummary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=creationTime" })
+  @SpeakeasyMetadata({ data: "json, name=creationTime" })
   creationTime?: Date;
 
-  @Metadata({ data: "json, name=lastUpdateTime" })
+  @SpeakeasyMetadata({ data: "json, name=lastUpdateTime" })
   lastUpdateTime?: Date;
 
-  @Metadata({ data: "json, name=pipelineName" })
+  @SpeakeasyMetadata({ data: "json, name=pipelineName" })
   pipelineName?: string;
 
-  @Metadata({ data: "json, name=reprocessingSummaries", elemType: shared.ReprocessingSummary })
+  @SpeakeasyMetadata({ data: "json, name=reprocessingSummaries", elemType: ReprocessingSummary })
   reprocessingSummaries?: ReprocessingSummary[];
 }

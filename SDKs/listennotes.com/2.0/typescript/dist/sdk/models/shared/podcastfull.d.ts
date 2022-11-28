@@ -1,0 +1,33 @@
+import { SpeakeasyBase } from "../../../internal/utils";
+import { EpisodeMinimum } from "./episodeminimum";
+import { PodcastExtraField } from "./podcastextrafield";
+import { PodcastLookingForField } from "./podcastlookingforfield";
+import { PodcastTypeFieldEnum } from "./podcasttypefieldenum";
+export declare class PodcastFull extends SpeakeasyBase {
+    country?: string;
+    description?: string;
+    earliestPubDateMs?: number;
+    email?: string;
+    episodes?: EpisodeMinimum[];
+    explicitContent?: boolean;
+    extra?: PodcastExtraField;
+    genreIds?: number[];
+    id?: string;
+    image?: string;
+    isClaimed?: boolean;
+    itunesId?: number;
+    language?: string;
+    latestPubDateMs?: number;
+    listenScore?: number;
+    listenScoreGlobalRank?: string;
+    listennotesUrl?: string;
+    lookingFor?: PodcastLookingForField;
+    nextEpisodePubDate?: number;
+    publisher?: string;
+    rss?: string;
+    thumbnail?: string;
+    title?: string;
+    totalEpisodes?: number;
+    type?: PodcastTypeFieldEnum;
+    website?: string;
+}

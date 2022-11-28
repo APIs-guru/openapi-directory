@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // InstancesCount
@@ -6,63 +7,63 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Describes how many instances a stack has for each status.
 **/
 export class InstancesCount extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Assigning" })
+  @SpeakeasyMetadata({ data: "json, name=Assigning" })
   assigning?: number;
 
-  @Metadata({ data: "json, name=Booting" })
+  @SpeakeasyMetadata({ data: "json, name=Booting" })
   booting?: number;
 
-  @Metadata({ data: "json, name=ConnectionLost" })
+  @SpeakeasyMetadata({ data: "json, name=ConnectionLost" })
   connectionLost?: number;
 
-  @Metadata({ data: "json, name=Deregistering" })
+  @SpeakeasyMetadata({ data: "json, name=Deregistering" })
   deregistering?: number;
 
-  @Metadata({ data: "json, name=Online" })
+  @SpeakeasyMetadata({ data: "json, name=Online" })
   online?: number;
 
-  @Metadata({ data: "json, name=Pending" })
+  @SpeakeasyMetadata({ data: "json, name=Pending" })
   pending?: number;
 
-  @Metadata({ data: "json, name=Rebooting" })
+  @SpeakeasyMetadata({ data: "json, name=Rebooting" })
   rebooting?: number;
 
-  @Metadata({ data: "json, name=Registered" })
+  @SpeakeasyMetadata({ data: "json, name=Registered" })
   registered?: number;
 
-  @Metadata({ data: "json, name=Registering" })
+  @SpeakeasyMetadata({ data: "json, name=Registering" })
   registering?: number;
 
-  @Metadata({ data: "json, name=Requested" })
+  @SpeakeasyMetadata({ data: "json, name=Requested" })
   requested?: number;
 
-  @Metadata({ data: "json, name=RunningSetup" })
+  @SpeakeasyMetadata({ data: "json, name=RunningSetup" })
   runningSetup?: number;
 
-  @Metadata({ data: "json, name=SetupFailed" })
+  @SpeakeasyMetadata({ data: "json, name=SetupFailed" })
   setupFailed?: number;
 
-  @Metadata({ data: "json, name=ShuttingDown" })
+  @SpeakeasyMetadata({ data: "json, name=ShuttingDown" })
   shuttingDown?: number;
 
-  @Metadata({ data: "json, name=StartFailed" })
+  @SpeakeasyMetadata({ data: "json, name=StartFailed" })
   startFailed?: number;
 
-  @Metadata({ data: "json, name=StopFailed" })
+  @SpeakeasyMetadata({ data: "json, name=StopFailed" })
   stopFailed?: number;
 
-  @Metadata({ data: "json, name=Stopped" })
+  @SpeakeasyMetadata({ data: "json, name=Stopped" })
   stopped?: number;
 
-  @Metadata({ data: "json, name=Stopping" })
+  @SpeakeasyMetadata({ data: "json, name=Stopping" })
   stopping?: number;
 
-  @Metadata({ data: "json, name=Terminated" })
+  @SpeakeasyMetadata({ data: "json, name=Terminated" })
   terminated?: number;
 
-  @Metadata({ data: "json, name=Terminating" })
+  @SpeakeasyMetadata({ data: "json, name=Terminating" })
   terminating?: number;
 
-  @Metadata({ data: "json, name=Unassigning" })
+  @SpeakeasyMetadata({ data: "json, name=Unassigning" })
   unassigning?: number;
 }

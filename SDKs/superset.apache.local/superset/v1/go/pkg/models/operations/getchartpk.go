@@ -16,12 +16,6 @@ type GetChartPkSecurity struct {
 	Jwt shared.SchemeJwt `security:"scheme,type=http,subtype=bearer"`
 }
 
-type GetChartPkRequest struct {
-	PathParams  GetChartPkPathParams
-	QueryParams GetChartPkQueryParams
-	Security    GetChartPkSecurity
-}
-
 type GetChartPk200ApplicationJSONDescriptionColumns struct {
 	ColumnName *string `json:"column_name,omitempty"`
 }
@@ -57,6 +51,12 @@ type GetChartPk422ApplicationJSON struct {
 
 type GetChartPk500ApplicationJSON struct {
 	Message *string `json:"message,omitempty"`
+}
+
+type GetChartPkRequest struct {
+	PathParams  GetChartPkPathParams
+	QueryParams GetChartPkQueryParams
+	Security    GetChartPkSecurity
 }
 
 type GetChartPkResponse struct {

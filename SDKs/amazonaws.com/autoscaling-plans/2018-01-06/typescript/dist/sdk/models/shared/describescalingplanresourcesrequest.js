@@ -22,26 +22,26 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var DescribeScalingPlanResourcesRequest = /** @class */ (function (_super) {
     __extends(DescribeScalingPlanResourcesRequest, _super);
     function DescribeScalingPlanResourcesRequest() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=MaxResults" }),
+        SpeakeasyMetadata({ data: "json, name=MaxResults" }),
         __metadata("design:type", Number)
     ], DescribeScalingPlanResourcesRequest.prototype, "maxResults", void 0);
     __decorate([
-        Metadata({ data: "json, name=NextToken" }),
+        SpeakeasyMetadata({ data: "json, name=NextToken" }),
         __metadata("design:type", String)
     ], DescribeScalingPlanResourcesRequest.prototype, "nextToken", void 0);
     __decorate([
-        Metadata({ data: "json, name=ScalingPlanName" }),
+        SpeakeasyMetadata({ data: "json, name=ScalingPlanName" }),
         __metadata("design:type", String)
     ], DescribeScalingPlanResourcesRequest.prototype, "scalingPlanName", void 0);
     __decorate([
-        Metadata({ data: "json, name=ScalingPlanVersion" }),
+        SpeakeasyMetadata({ data: "json, name=ScalingPlanVersion" }),
         __metadata("design:type", Number)
     ], DescribeScalingPlanResourcesRequest.prototype, "scalingPlanVersion", void 0);
     return DescribeScalingPlanResourcesRequest;

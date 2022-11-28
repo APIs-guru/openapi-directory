@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ApiCallDetails
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Provides information about an API operation that an entity invoked for an affected resource.
 **/
 export class ApiCallDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=api" })
+  @SpeakeasyMetadata({ data: "json, name=api" })
   api?: string;
 
-  @Metadata({ data: "json, name=apiServiceName" })
+  @SpeakeasyMetadata({ data: "json, name=apiServiceName" })
   apiServiceName?: string;
 
-  @Metadata({ data: "json, name=firstSeen" })
+  @SpeakeasyMetadata({ data: "json, name=firstSeen" })
   firstSeen?: Date;
 
-  @Metadata({ data: "json, name=lastSeen" })
+  @SpeakeasyMetadata({ data: "json, name=lastSeen" })
   lastSeen?: Date;
 }

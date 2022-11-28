@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostModifyFpgaImageAttributeActionEnum(str, Enum):
     MODIFY_FPGA_IMAGE_ATTRIBUTE = "ModifyFpgaImageAttribute"
@@ -10,8 +14,8 @@ class PostModifyFpgaImageAttributeVersionEnum(str, Enum):
 
 @dataclass
 class PostModifyFpgaImageAttributeQueryParams:
-    action: PostModifyFpgaImageAttributeActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostModifyFpgaImageAttributeVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostModifyFpgaImageAttributeActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostModifyFpgaImageAttributeVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostModifyFpgaImageAttributeHeaders:
 
 @dataclass
 class PostModifyFpgaImageAttributeRequest:
-    query_params: PostModifyFpgaImageAttributeQueryParams = field(default=None)
-    headers: PostModifyFpgaImageAttributeHeaders = field(default=None)
+    headers: PostModifyFpgaImageAttributeHeaders = field()
+    query_params: PostModifyFpgaImageAttributeQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostModifyFpgaImageAttributeResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

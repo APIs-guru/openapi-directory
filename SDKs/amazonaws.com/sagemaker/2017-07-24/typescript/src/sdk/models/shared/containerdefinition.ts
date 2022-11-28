@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ImageConfig } from "./imageconfig";
 import { ContainerModeEnum } from "./containermodeenum";
 import { MultiModelConfig } from "./multimodelconfig";
+
 
 
 // ContainerDefinition
@@ -9,27 +10,27 @@ import { MultiModelConfig } from "./multimodelconfig";
  * Describes the container, as part of model definition.
 **/
 export class ContainerDefinition extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ContainerHostname" })
+  @SpeakeasyMetadata({ data: "json, name=ContainerHostname" })
   containerHostname?: string;
 
-  @Metadata({ data: "json, name=Environment" })
+  @SpeakeasyMetadata({ data: "json, name=Environment" })
   environment?: Map<string, string>;
 
-  @Metadata({ data: "json, name=Image" })
+  @SpeakeasyMetadata({ data: "json, name=Image" })
   image?: string;
 
-  @Metadata({ data: "json, name=ImageConfig" })
+  @SpeakeasyMetadata({ data: "json, name=ImageConfig" })
   imageConfig?: ImageConfig;
 
-  @Metadata({ data: "json, name=Mode" })
+  @SpeakeasyMetadata({ data: "json, name=Mode" })
   mode?: ContainerModeEnum;
 
-  @Metadata({ data: "json, name=ModelDataUrl" })
+  @SpeakeasyMetadata({ data: "json, name=ModelDataUrl" })
   modelDataUrl?: string;
 
-  @Metadata({ data: "json, name=ModelPackageName" })
+  @SpeakeasyMetadata({ data: "json, name=ModelPackageName" })
   modelPackageName?: string;
 
-  @Metadata({ data: "json, name=MultiModelConfig" })
+  @SpeakeasyMetadata({ data: "json, name=MultiModelConfig" })
   multiModelConfig?: MultiModelConfig;
 }

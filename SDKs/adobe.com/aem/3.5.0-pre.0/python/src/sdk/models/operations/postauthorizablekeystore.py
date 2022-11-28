@@ -4,8 +4,8 @@ from typing import Optional
 
 @dataclass
 class PostAuthorizableKeystorePathParams:
-    authorizable_id: str = field(default=None, metadata={'path_param': { 'field_name': 'authorizableId', 'style': 'simple', 'explode': False }})
-    intermediate_path: str = field(default=None, metadata={'path_param': { 'field_name': 'intermediatePath', 'style': 'simple', 'explode': False }})
+    authorizable_id: str = field(metadata={'path_param': { 'field_name': 'authorizableId', 'style': 'simple', 'explode': False }})
+    intermediate_path: str = field(metadata={'path_param': { 'field_name': 'intermediatePath', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -23,20 +23,20 @@ class PostAuthorizableKeystoreQueryParams:
 
 @dataclass
 class PostAuthorizableKeystoreRequestBodyCertChain:
-    cert_chain: str = field(default=None, metadata={'multipart_form': { 'field_name': 'cert-chain' }})
-    content: bytes = field(default=None, metadata={'multipart_form': { 'content': True }})
+    cert_chain: str = field(metadata={'multipart_form': { 'field_name': 'cert-chain' }})
+    content: bytes = field(metadata={'multipart_form': { 'content': True }})
     
 
 @dataclass
 class PostAuthorizableKeystoreRequestBodyKeyStore:
-    content: bytes = field(default=None, metadata={'multipart_form': { 'content': True }})
-    key_store: str = field(default=None, metadata={'multipart_form': { 'field_name': 'keyStore' }})
+    content: bytes = field(metadata={'multipart_form': { 'content': True }})
+    key_store: str = field(metadata={'multipart_form': { 'field_name': 'keyStore' }})
     
 
 @dataclass
 class PostAuthorizableKeystoreRequestBodyPk:
-    content: bytes = field(default=None, metadata={'multipart_form': { 'content': True }})
-    pk: str = field(default=None, metadata={'multipart_form': { 'field_name': 'pk' }})
+    content: bytes = field(metadata={'multipart_form': { 'content': True }})
+    pk: str = field(metadata={'multipart_form': { 'field_name': 'pk' }})
     
 
 @dataclass
@@ -48,15 +48,15 @@ class PostAuthorizableKeystoreRequestBody:
 
 @dataclass
 class PostAuthorizableKeystoreRequest:
-    path_params: PostAuthorizableKeystorePathParams = field(default=None)
-    query_params: PostAuthorizableKeystoreQueryParams = field(default=None)
+    path_params: PostAuthorizableKeystorePathParams = field()
+    query_params: PostAuthorizableKeystoreQueryParams = field()
     request: Optional[PostAuthorizableKeystoreRequestBody] = field(default=None, metadata={'request': { 'media_type': 'multipart/form-data' }})
     
 
 @dataclass
 class PostAuthorizableKeystoreResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     post_authorizable_keystore_default_text_plain_string: Optional[str] = field(default=None)
     

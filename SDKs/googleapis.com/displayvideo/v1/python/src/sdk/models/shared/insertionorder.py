@@ -1,13 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import biddingstrategy
-from . import insertionorderbudget
-from . import frequencycap
-from . import integrationdetails
-from . import pacing
-from . import partnercost
-from . import performancegoal
+from sdk import utils
+from . import *
 
 class InsertionOrderBillableOutcomeEnum(str, Enum):
     BILLABLE_OUTCOME_UNSPECIFIED = "BILLABLE_OUTCOME_UNSPECIFIED"
@@ -38,21 +37,46 @@ class InsertionOrderReservationTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class InsertionOrder:
-    advertiser_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'advertiserId' }})
-    bid_strategy: Optional[biddingstrategy.BiddingStrategy] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'bidStrategy' }})
-    billable_outcome: Optional[InsertionOrderBillableOutcomeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'billableOutcome' }})
-    budget: Optional[insertionorderbudget.InsertionOrderBudget] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'budget' }})
-    campaign_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'campaignId' }})
-    display_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'displayName' }})
-    entity_status: Optional[InsertionOrderEntityStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'entityStatus' }})
-    frequency_cap: Optional[frequencycap.FrequencyCap] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'frequencyCap' }})
-    insertion_order_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'insertionOrderId' }})
-    insertion_order_type: Optional[InsertionOrderInsertionOrderTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'insertionOrderType' }})
-    integration_details: Optional[integrationdetails.IntegrationDetails] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'integrationDetails' }})
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    pacing: Optional[pacing.Pacing] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'pacing' }})
-    partner_costs: Optional[List[partnercost.PartnerCost]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'partnerCosts' }})
-    performance_goal: Optional[performancegoal.PerformanceGoal] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'performanceGoal' }})
-    reservation_type: Optional[InsertionOrderReservationTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'reservationType' }})
-    update_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'updateTime' }})
+    r"""InsertionOrder
+    A single insertion order.
+    """
+    
+    advertiser_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('advertiserId') }})
+    bid_strategy: Optional[BiddingStrategy] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('bidStrategy') }})
+    billable_outcome: Optional[InsertionOrderBillableOutcomeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('billableOutcome') }})
+    budget: Optional[InsertionOrderBudget] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('budget') }})
+    campaign_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('campaignId') }})
+    display_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('displayName') }})
+    entity_status: Optional[InsertionOrderEntityStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('entityStatus') }})
+    frequency_cap: Optional[FrequencyCap] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('frequencyCap') }})
+    insertion_order_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('insertionOrderId') }})
+    insertion_order_type: Optional[InsertionOrderInsertionOrderTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('insertionOrderType') }})
+    integration_details: Optional[IntegrationDetails] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('integrationDetails') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    pacing: Optional[Pacing] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('pacing') }})
+    partner_costs: Optional[List[PartnerCost]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('partnerCosts') }})
+    performance_goal: Optional[PerformanceGoal] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('performanceGoal') }})
+    reservation_type: Optional[InsertionOrderReservationTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('reservationType') }})
+    update_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('updateTime') }})
+    
+
+@dataclass_json
+@dataclass
+class InsertionOrderInput:
+    r"""InsertionOrderInput
+    A single insertion order.
+    """
+    
+    bid_strategy: Optional[BiddingStrategy] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('bidStrategy') }})
+    billable_outcome: Optional[InsertionOrderBillableOutcomeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('billableOutcome') }})
+    budget: Optional[InsertionOrderBudget] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('budget') }})
+    campaign_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('campaignId') }})
+    display_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('displayName') }})
+    entity_status: Optional[InsertionOrderEntityStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('entityStatus') }})
+    frequency_cap: Optional[FrequencyCap] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('frequencyCap') }})
+    insertion_order_type: Optional[InsertionOrderInsertionOrderTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('insertionOrderType') }})
+    integration_details: Optional[IntegrationDetails] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('integrationDetails') }})
+    pacing: Optional[Pacing] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('pacing') }})
+    partner_costs: Optional[List[PartnerCost]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('partnerCosts') }})
+    performance_goal: Optional[PerformanceGoal] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('performanceGoal') }})
     

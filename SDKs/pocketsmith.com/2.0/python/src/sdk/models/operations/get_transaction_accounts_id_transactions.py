@@ -1,11 +1,15 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class GetTransactionAccountsIDTransactionsPathParams:
-    id: int = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: int = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 class GetTransactionAccountsIDTransactionsTypeEnum(str, Enum):
     DEBIT = "debit"
@@ -24,14 +28,14 @@ class GetTransactionAccountsIDTransactionsQueryParams:
 
 @dataclass
 class GetTransactionAccountsIDTransactionsRequest:
-    path_params: GetTransactionAccountsIDTransactionsPathParams = field(default=None)
-    query_params: GetTransactionAccountsIDTransactionsQueryParams = field(default=None)
+    path_params: GetTransactionAccountsIDTransactionsPathParams = field()
+    query_params: GetTransactionAccountsIDTransactionsQueryParams = field()
     
 
 @dataclass
 class GetTransactionAccountsIDTransactionsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error: Optional[shared.Error] = field(default=None)
-    status_code: int = field(default=None)
     transactions: Optional[List[shared.Transaction]] = field(default=None)
     

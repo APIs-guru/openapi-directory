@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // WorkerResource
@@ -6,18 +7,18 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Configuration for resources used by Airflow workers.
 **/
 export class WorkerResource extends SpeakeasyBase {
-  @Metadata({ data: "json, name=cpu" })
+  @SpeakeasyMetadata({ data: "json, name=cpu" })
   cpu?: number;
 
-  @Metadata({ data: "json, name=maxCount" })
+  @SpeakeasyMetadata({ data: "json, name=maxCount" })
   maxCount?: number;
 
-  @Metadata({ data: "json, name=memoryGb" })
+  @SpeakeasyMetadata({ data: "json, name=memoryGb" })
   memoryGb?: number;
 
-  @Metadata({ data: "json, name=minCount" })
+  @SpeakeasyMetadata({ data: "json, name=minCount" })
   minCount?: number;
 
-  @Metadata({ data: "json, name=storageGb" })
+  @SpeakeasyMetadata({ data: "json, name=storageGb" })
   storageGb?: number;
 }

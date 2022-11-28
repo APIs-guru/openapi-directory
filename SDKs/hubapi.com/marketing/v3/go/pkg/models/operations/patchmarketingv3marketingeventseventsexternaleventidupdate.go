@@ -12,17 +12,10 @@ type PatchMarketingV3MarketingEventsEventsExternalEventIDUpdateQueryParams struc
 	ExternalAccountID string `queryParam:"style=form,explode=true,name=externalAccountId"`
 }
 
-type PatchMarketingV3MarketingEventsEventsExternalEventIDUpdateSecurityOption1 struct {
-	Hapikey shared.SchemeHapikey `security:"scheme,type=apiKey,subtype=query"`
-}
-
-type PatchMarketingV3MarketingEventsEventsExternalEventIDUpdateSecurityOption2 struct {
-	Oauth2Legacy shared.SchemeOauth2Legacy `security:"scheme,type=oauth2"`
-}
-
 type PatchMarketingV3MarketingEventsEventsExternalEventIDUpdateSecurity struct {
-	Option1 *PatchMarketingV3MarketingEventsEventsExternalEventIDUpdateSecurityOption1 `security:"option"`
-	Option2 *PatchMarketingV3MarketingEventsEventsExternalEventIDUpdateSecurityOption2 `security:"option"`
+	Hapikey           *shared.SchemeHapikey           `security:"scheme,type=apiKey,subtype=query"`
+	PrivateAppsLegacy *shared.SchemePrivateAppsLegacy `security:"scheme,type=apiKey,subtype=header"`
+	Oauth2Legacy      *shared.SchemeOauth2Legacy      `security:"scheme,type=oauth2"`
 }
 
 type PatchMarketingV3MarketingEventsEventsExternalEventIDUpdateRequest struct {

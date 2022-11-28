@@ -4,32 +4,22 @@ from sdk.models import shared
 
 
 @dataclass
-class FetchUploadStatusesSecurityOption1:
-    api_key: shared.SchemeAPIKey = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
-    
-
-@dataclass
-class FetchUploadStatusesSecurityOption2:
-    oauth2_authorization_code: shared.SchemeOauth2AuthorizationCode = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    
-
-@dataclass
 class FetchUploadStatusesSecurity:
-    option1: Optional[FetchUploadStatusesSecurityOption1] = field(default=None, metadata={'security': { 'option': True }})
-    option2: Optional[FetchUploadStatusesSecurityOption2] = field(default=None, metadata={'security': { 'option': True }})
+    api_key: Optional[shared.SchemeAPIKey] = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    oauth2_authorization_code: Optional[shared.SchemeOauth2AuthorizationCode] = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class FetchUploadStatusesRequest:
+    security: FetchUploadStatusesSecurity = field()
     request: Optional[shared.UploadStatusQuery] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: FetchUploadStatusesSecurity = field(default=None)
     
 
 @dataclass
 class FetchUploadStatusesResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    headers: dict[str, List[str]] = field()
+    status_code: int = field()
     error: Optional[shared.Error] = field(default=None)
-    headers: dict[str, List[str]] = field(default=None)
-    status_code: int = field(default=None)
     upload_statuses: Optional[shared.UploadStatuses] = field(default=None)
     

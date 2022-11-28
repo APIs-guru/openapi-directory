@@ -9,11 +9,11 @@ class QuittungZugferdQueryParams:
 
 @dataclass
 class QuittungZugferdRequest:
-    query_params: QuittungZugferdQueryParams = field(default=None)
+    query_params: QuittungZugferdQueryParams = field()
     
 
 @dataclass
 class QuittungZugferdResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

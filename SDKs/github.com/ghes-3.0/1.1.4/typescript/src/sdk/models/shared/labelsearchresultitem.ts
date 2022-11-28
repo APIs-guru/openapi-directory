@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SearchResultTextMatches } from "./searchresulttextmatches";
+
 
 
 // LabelSearchResultItem
@@ -8,30 +8,30 @@ import { SearchResultTextMatches } from "./searchresulttextmatches";
  * Label Search Result Item
 **/
 export class LabelSearchResultItem extends SpeakeasyBase {
-  @Metadata({ data: "json, name=color" })
+  @SpeakeasyMetadata({ data: "json, name=color" })
   color: string;
 
-  @Metadata({ data: "json, name=default" })
+  @SpeakeasyMetadata({ data: "json, name=default" })
   default: boolean;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: number;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 
-  @Metadata({ data: "json, name=node_id" })
+  @SpeakeasyMetadata({ data: "json, name=node_id" })
   nodeId: string;
 
-  @Metadata({ data: "json, name=score" })
+  @SpeakeasyMetadata({ data: "json, name=score" })
   score: number;
 
-  @Metadata({ data: "json, name=text_matches", elemType: shared.SearchResultTextMatches })
+  @SpeakeasyMetadata({ data: "json, name=text_matches", elemType: SearchResultTextMatches })
   textMatches?: SearchResultTextMatches[];
 
-  @Metadata({ data: "json, name=url" })
+  @SpeakeasyMetadata({ data: "json, name=url" })
   url: string;
 }

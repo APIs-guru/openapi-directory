@@ -40,16 +40,16 @@ type GetMediaBySearchQueryParams struct {
 	WoeID          *string  `queryParam:"style=form,explode=true,name=woe_id"`
 }
 
-type GetMediaBySearchRequest struct {
-	QueryParams GetMediaBySearchQueryParams
-}
-
 type GetMediaBySearch200ApplicationJSON struct {
 	Page    *float64       `json:"page,omitempty"`
 	Pages   *float64       `json:"pages,omitempty"`
 	Perpage *float64       `json:"perpage,omitempty"`
 	Photos  []shared.Photo `json:"photos,omitempty"`
 	Total   *float64       `json:"total,omitempty"`
+}
+
+type GetMediaBySearchRequest struct {
+	QueryParams GetMediaBySearchQueryParams
 }
 
 type GetMediaBySearchResponse struct {

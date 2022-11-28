@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class FirestoreProjectsDatabasesDocumentsBeginTransactionPathParams:
-    database: str = field(default=None, metadata={'path_param': { 'field_name': 'database', 'style': 'simple', 'explode': False }})
+    database: str = field(metadata={'path_param': { 'field_name': 'database', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,14 +26,14 @@ class FirestoreProjectsDatabasesDocumentsBeginTransactionQueryParams:
 
 @dataclass
 class FirestoreProjectsDatabasesDocumentsBeginTransactionSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class FirestoreProjectsDatabasesDocumentsBeginTransactionSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -43,15 +44,15 @@ class FirestoreProjectsDatabasesDocumentsBeginTransactionSecurity:
 
 @dataclass
 class FirestoreProjectsDatabasesDocumentsBeginTransactionRequest:
-    path_params: FirestoreProjectsDatabasesDocumentsBeginTransactionPathParams = field(default=None)
-    query_params: FirestoreProjectsDatabasesDocumentsBeginTransactionQueryParams = field(default=None)
+    path_params: FirestoreProjectsDatabasesDocumentsBeginTransactionPathParams = field()
+    query_params: FirestoreProjectsDatabasesDocumentsBeginTransactionQueryParams = field()
+    security: FirestoreProjectsDatabasesDocumentsBeginTransactionSecurity = field()
     request: Optional[shared.BeginTransactionRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: FirestoreProjectsDatabasesDocumentsBeginTransactionSecurity = field(default=None)
     
 
 @dataclass
 class FirestoreProjectsDatabasesDocumentsBeginTransactionResponse:
+    content_type: str = field()
+    status_code: int = field()
     begin_transaction_response: Optional[shared.BeginTransactionResponse] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

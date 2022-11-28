@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import simplecondition
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class MultiConditionalBranch:
-    condition: Optional[simplecondition.SimpleCondition] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Condition' }})
-    next_activity: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'NextActivity' }})
+    r"""MultiConditionalBranch
+    Specifies a condition to evaluate for an activity path in a journey.
+    """
+    
+    condition: Optional[SimpleCondition] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Condition') }})
+    next_activity: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('NextActivity') }})
     

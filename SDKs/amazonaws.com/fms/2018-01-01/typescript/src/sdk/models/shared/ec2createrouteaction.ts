@@ -1,7 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ActionTarget } from "./actiontarget";
-import { ActionTarget } from "./actiontarget";
-import { ActionTarget } from "./actiontarget";
+
 
 
 // Ec2CreateRouteAction
@@ -9,24 +8,24 @@ import { ActionTarget } from "./actiontarget";
  * Information about the CreateRoute action in Amazon EC2.
 **/
 export class Ec2CreateRouteAction extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Description" })
+  @SpeakeasyMetadata({ data: "json, name=Description" })
   description?: string;
 
-  @Metadata({ data: "json, name=DestinationCidrBlock" })
+  @SpeakeasyMetadata({ data: "json, name=DestinationCidrBlock" })
   destinationCidrBlock?: string;
 
-  @Metadata({ data: "json, name=DestinationIpv6CidrBlock" })
+  @SpeakeasyMetadata({ data: "json, name=DestinationIpv6CidrBlock" })
   destinationIpv6CidrBlock?: string;
 
-  @Metadata({ data: "json, name=DestinationPrefixListId" })
+  @SpeakeasyMetadata({ data: "json, name=DestinationPrefixListId" })
   destinationPrefixListId?: string;
 
-  @Metadata({ data: "json, name=GatewayId" })
+  @SpeakeasyMetadata({ data: "json, name=GatewayId" })
   gatewayId?: ActionTarget;
 
-  @Metadata({ data: "json, name=RouteTableId" })
+  @SpeakeasyMetadata({ data: "json, name=RouteTableId" })
   routeTableId: ActionTarget;
 
-  @Metadata({ data: "json, name=VpcEndpointId" })
+  @SpeakeasyMetadata({ data: "json, name=VpcEndpointId" })
   vpcEndpointId?: ActionTarget;
 }

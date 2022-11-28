@@ -22,54 +22,54 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { InferenceInputConfiguration } from "./inferenceinputconfiguration";
 import { InferenceOutputConfiguration } from "./inferenceoutputconfiguration";
 import { DataUploadFrequencyEnum } from "./datauploadfrequencyenum";
+import { Tag } from "./tag";
 var CreateInferenceSchedulerRequest = /** @class */ (function (_super) {
     __extends(CreateInferenceSchedulerRequest, _super);
     function CreateInferenceSchedulerRequest() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=ClientToken" }),
+        SpeakeasyMetadata({ data: "json, name=ClientToken" }),
         __metadata("design:type", String)
     ], CreateInferenceSchedulerRequest.prototype, "clientToken", void 0);
     __decorate([
-        Metadata({ data: "json, name=DataDelayOffsetInMinutes" }),
+        SpeakeasyMetadata({ data: "json, name=DataDelayOffsetInMinutes" }),
         __metadata("design:type", Number)
     ], CreateInferenceSchedulerRequest.prototype, "dataDelayOffsetInMinutes", void 0);
     __decorate([
-        Metadata({ data: "json, name=DataInputConfiguration" }),
+        SpeakeasyMetadata({ data: "json, name=DataInputConfiguration" }),
         __metadata("design:type", InferenceInputConfiguration)
     ], CreateInferenceSchedulerRequest.prototype, "dataInputConfiguration", void 0);
     __decorate([
-        Metadata({ data: "json, name=DataOutputConfiguration" }),
+        SpeakeasyMetadata({ data: "json, name=DataOutputConfiguration" }),
         __metadata("design:type", InferenceOutputConfiguration)
     ], CreateInferenceSchedulerRequest.prototype, "dataOutputConfiguration", void 0);
     __decorate([
-        Metadata({ data: "json, name=DataUploadFrequency" }),
+        SpeakeasyMetadata({ data: "json, name=DataUploadFrequency" }),
         __metadata("design:type", String)
     ], CreateInferenceSchedulerRequest.prototype, "dataUploadFrequency", void 0);
     __decorate([
-        Metadata({ data: "json, name=InferenceSchedulerName" }),
+        SpeakeasyMetadata({ data: "json, name=InferenceSchedulerName" }),
         __metadata("design:type", String)
     ], CreateInferenceSchedulerRequest.prototype, "inferenceSchedulerName", void 0);
     __decorate([
-        Metadata({ data: "json, name=ModelName" }),
+        SpeakeasyMetadata({ data: "json, name=ModelName" }),
         __metadata("design:type", String)
     ], CreateInferenceSchedulerRequest.prototype, "modelName", void 0);
     __decorate([
-        Metadata({ data: "json, name=RoleArn" }),
+        SpeakeasyMetadata({ data: "json, name=RoleArn" }),
         __metadata("design:type", String)
     ], CreateInferenceSchedulerRequest.prototype, "roleArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=ServerSideKmsKeyId" }),
+        SpeakeasyMetadata({ data: "json, name=ServerSideKmsKeyId" }),
         __metadata("design:type", String)
     ], CreateInferenceSchedulerRequest.prototype, "serverSideKmsKeyId", void 0);
     __decorate([
-        Metadata({ data: "json, name=Tags", elemType: shared.Tag }),
+        SpeakeasyMetadata({ data: "json, name=Tags", elemType: Tag }),
         __metadata("design:type", Array)
     ], CreateInferenceSchedulerRequest.prototype, "tags", void 0);
     return CreateInferenceSchedulerRequest;

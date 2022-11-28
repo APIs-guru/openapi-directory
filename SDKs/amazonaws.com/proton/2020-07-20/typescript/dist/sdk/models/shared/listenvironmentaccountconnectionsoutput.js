@@ -22,19 +22,19 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { EnvironmentAccountConnectionSummary } from "./environmentaccountconnectionsummary";
 var ListEnvironmentAccountConnectionsOutput = /** @class */ (function (_super) {
     __extends(ListEnvironmentAccountConnectionsOutput, _super);
     function ListEnvironmentAccountConnectionsOutput() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=environmentAccountConnections", elemType: shared.EnvironmentAccountConnectionSummary }),
+        SpeakeasyMetadata({ data: "json, name=environmentAccountConnections", elemType: EnvironmentAccountConnectionSummary }),
         __metadata("design:type", Array)
     ], ListEnvironmentAccountConnectionsOutput.prototype, "environmentAccountConnections", void 0);
     __decorate([
-        Metadata({ data: "json, name=nextToken" }),
+        SpeakeasyMetadata({ data: "json, name=nextToken" }),
         __metadata("design:type", String)
     ], ListEnvironmentAccountConnectionsOutput.prototype, "nextToken", void 0);
     return ListEnvironmentAccountConnectionsOutput;

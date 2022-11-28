@@ -1,5 +1,7 @@
 package shared
 
+// CreateAuthURIResponse
+// Response of creating the IDP authentication URL.
 type CreateAuthURIResponse struct {
 	AllProviders        []string `json:"allProviders,omitempty"`
 	AuthURI             *string  `json:"authUri,omitempty"`

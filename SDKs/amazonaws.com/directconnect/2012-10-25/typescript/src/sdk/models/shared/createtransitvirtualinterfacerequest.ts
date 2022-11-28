@@ -1,11 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { NewTransitVirtualInterface } from "./newtransitvirtualinterface";
 
 
+
 export class CreateTransitVirtualInterfaceRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=connectionId" })
+  @SpeakeasyMetadata({ data: "json, name=connectionId" })
   connectionId: string;
 
-  @Metadata({ data: "json, name=newTransitVirtualInterface" })
+  @SpeakeasyMetadata({ data: "json, name=newTransitVirtualInterface" })
   newTransitVirtualInterface: NewTransitVirtualInterface;
 }

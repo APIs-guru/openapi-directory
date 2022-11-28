@@ -1,6 +1,7 @@
 
 
+
 export enum CheckoutTypeEnum {
-    Provisional = "PROVISIONAL"
-,    Perpetual = "PERPETUAL"
+    Provisional = "PROVISIONAL",
+    Perpetual = "PERPETUAL"
 }

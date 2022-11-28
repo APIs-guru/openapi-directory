@@ -1,17 +1,19 @@
 package shared
 
-type SdkVersionSdkSupportStatusEnum string
+type SDKVersionSDKSupportStatusEnum string
 
 const (
-	SdkVersionSdkSupportStatusEnumUnknown     SdkVersionSdkSupportStatusEnum = "UNKNOWN"
-	SdkVersionSdkSupportStatusEnumSupported   SdkVersionSdkSupportStatusEnum = "SUPPORTED"
-	SdkVersionSdkSupportStatusEnumStale       SdkVersionSdkSupportStatusEnum = "STALE"
-	SdkVersionSdkSupportStatusEnumDeprecated  SdkVersionSdkSupportStatusEnum = "DEPRECATED"
-	SdkVersionSdkSupportStatusEnumUnsupported SdkVersionSdkSupportStatusEnum = "UNSUPPORTED"
+	SdkVersionSdkSupportStatusEnumUnknown     SDKVersionSDKSupportStatusEnum = "UNKNOWN"
+	SdkVersionSdkSupportStatusEnumSupported   SDKVersionSDKSupportStatusEnum = "SUPPORTED"
+	SdkVersionSdkSupportStatusEnumStale       SDKVersionSDKSupportStatusEnum = "STALE"
+	SdkVersionSdkSupportStatusEnumDeprecated  SDKVersionSDKSupportStatusEnum = "DEPRECATED"
+	SdkVersionSdkSupportStatusEnumUnsupported SDKVersionSDKSupportStatusEnum = "UNSUPPORTED"
 )
 
-type SdkVersion struct {
-	SdkSupportStatus   *SdkVersionSdkSupportStatusEnum `json:"sdkSupportStatus,omitempty"`
+// SDKVersion
+// The version of the SDK used to run the job.
+type SDKVersion struct {
+	SdkSupportStatus   *SDKVersionSDKSupportStatusEnum `json:"sdkSupportStatus,omitempty"`
 	Version            *string                         `json:"version,omitempty"`
 	VersionDisplayName *string                         `json:"versionDisplayName,omitempty"`
 }

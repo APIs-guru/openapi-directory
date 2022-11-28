@@ -1,25 +1,26 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class EmailStatementDto extends SpeakeasyBase {
-  @Metadata({ data: "json, name=bccAddresses" })
+  @SpeakeasyMetadata({ data: "json, name=bccAddresses" })
   bccAddresses?: string[];
 
-  @Metadata({ data: "json, name=customerId" })
+  @SpeakeasyMetadata({ data: "json, name=customerId" })
   customerId?: number;
 
-  @Metadata({ data: "json, name=fromPeriod" })
+  @SpeakeasyMetadata({ data: "json, name=fromPeriod" })
   fromPeriod?: Date;
 
-  @Metadata({ data: "json, name=messageBody" })
+  @SpeakeasyMetadata({ data: "json, name=messageBody" })
   messageBody?: string;
 
-  @Metadata({ data: "json, name=minimumBalance" })
+  @SpeakeasyMetadata({ data: "json, name=minimumBalance" })
   minimumBalance?: number;
 
-  @Metadata({ data: "json, name=toAddress" })
+  @SpeakeasyMetadata({ data: "json, name=toAddress" })
   toAddress?: string;
 
-  @Metadata({ data: "json, name=toPeriod" })
+  @SpeakeasyMetadata({ data: "json, name=toPeriod" })
   toPeriod?: Date;
 }

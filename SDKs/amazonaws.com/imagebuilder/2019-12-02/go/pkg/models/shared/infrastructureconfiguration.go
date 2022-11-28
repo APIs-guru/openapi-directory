@@ -1,5 +1,7 @@
 package shared
 
+// InfrastructureConfiguration
+// Details of the infrastructure configuration.
 type InfrastructureConfiguration struct {
 	Arn                        *string           `json:"arn,omitempty"`
 	DateCreated                *string           `json:"dateCreated,omitempty"`

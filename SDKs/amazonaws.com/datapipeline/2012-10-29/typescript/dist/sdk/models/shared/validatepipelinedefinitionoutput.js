@@ -22,8 +22,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { ValidationError } from "./validationerror";
+import { ValidationWarning } from "./validationwarning";
 // ValidatePipelineDefinitionOutput
 /**
  * Contains the output of ValidatePipelineDefinition.
@@ -34,15 +35,15 @@ var ValidatePipelineDefinitionOutput = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=errored" }),
+        SpeakeasyMetadata({ data: "json, name=errored" }),
         __metadata("design:type", Boolean)
     ], ValidatePipelineDefinitionOutput.prototype, "errored", void 0);
     __decorate([
-        Metadata({ data: "json, name=validationErrors", elemType: shared.ValidationError }),
+        SpeakeasyMetadata({ data: "json, name=validationErrors", elemType: ValidationError }),
         __metadata("design:type", Array)
     ], ValidatePipelineDefinitionOutput.prototype, "validationErrors", void 0);
     __decorate([
-        Metadata({ data: "json, name=validationWarnings", elemType: shared.ValidationWarning }),
+        SpeakeasyMetadata({ data: "json, name=validationWarnings", elemType: ValidationWarning }),
         __metadata("design:type", Array)
     ], ValidatePipelineDefinitionOutput.prototype, "validationWarnings", void 0);
     return ValidatePipelineDefinitionOutput;

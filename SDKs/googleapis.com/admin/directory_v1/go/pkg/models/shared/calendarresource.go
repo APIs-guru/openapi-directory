@@ -1,5 +1,7 @@
 package shared
 
+// CalendarResource
+// Public API: Resources.calendars
 type CalendarResource struct {
 	BuildingID             *string      `json:"buildingId,omitempty"`
 	Capacity               *int32       `json:"capacity,omitempty"`

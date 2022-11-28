@@ -1,5 +1,7 @@
 package shared
 
+// AcceleratorAttributes
+// Attributes of an accelerator.
 type AcceleratorAttributes struct {
 	FlowLogsEnabled  *bool   `json:"FlowLogsEnabled,omitempty"`
 	FlowLogsS3Bucket *string `json:"FlowLogsS3Bucket,omitempty"`

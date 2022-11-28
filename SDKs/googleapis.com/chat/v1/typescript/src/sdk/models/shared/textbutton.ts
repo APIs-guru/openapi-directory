@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { OnClick } from "./onclick";
+
 
 
 // TextButton
@@ -7,9 +8,9 @@ import { OnClick } from "./onclick";
  * A button with text and onclick action.
 **/
 export class TextButton extends SpeakeasyBase {
-  @Metadata({ data: "json, name=onClick" })
+  @SpeakeasyMetadata({ data: "json, name=onClick" })
   onClick?: OnClick;
 
-  @Metadata({ data: "json, name=text" })
+  @SpeakeasyMetadata({ data: "json, name=text" })
   text?: string;
 }

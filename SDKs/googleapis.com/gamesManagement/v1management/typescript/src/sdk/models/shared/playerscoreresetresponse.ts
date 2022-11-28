@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // PlayerScoreResetResponse
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A list of reset leaderboard entry resources.
 **/
 export class PlayerScoreResetResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=definitionId" })
+  @SpeakeasyMetadata({ data: "json, name=definitionId" })
   definitionId?: string;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=resetScoreTimeSpans" })
+  @SpeakeasyMetadata({ data: "json, name=resetScoreTimeSpans" })
   resetScoreTimeSpans?: string[];
 }

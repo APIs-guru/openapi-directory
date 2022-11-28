@@ -10,13 +10,13 @@ class CreateAndPreserveKeyPairHeaders:
 
 @dataclass
 class CreateAndPreserveKeyPairRequest:
-    headers: CreateAndPreserveKeyPairHeaders = field(default=None)
-    request: shared.CreateKeyPairRequest = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: CreateAndPreserveKeyPairHeaders = field()
+    request: shared.CreateKeyPairRequest = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class CreateAndPreserveKeyPairResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error_response: Optional[shared.ErrorResponse] = field(default=None)
-    status_code: int = field(default=None)
     

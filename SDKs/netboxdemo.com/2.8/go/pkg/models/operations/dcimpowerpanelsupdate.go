@@ -10,7 +10,7 @@ type DcimPowerPanelsUpdatePathParams struct {
 
 type DcimPowerPanelsUpdateRequest struct {
 	PathParams DcimPowerPanelsUpdatePathParams
-	Request    shared.WritablePowerPanel `request:"mediaType=application/json"`
+	Request    shared.WritablePowerPanelInput `request:"mediaType=application/json"`
 }
 
 type DcimPowerPanelsUpdateResponse struct {

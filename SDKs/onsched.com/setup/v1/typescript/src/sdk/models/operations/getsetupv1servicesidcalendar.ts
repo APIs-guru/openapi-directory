@@ -1,35 +1,36 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetSetupV1ServicesIdCalendarPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" })
   id: string;
 }
 
 
 export class GetSetupV1ServicesIdCalendarQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=locationId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=locationId" })
   locationId?: string;
 }
 
 
 export class GetSetupV1ServicesIdCalendarRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetSetupV1ServicesIdCalendarPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetSetupV1ServicesIdCalendarQueryParams;
 }
 
 
 export class GetSetupV1ServicesIdCalendarResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   serviceCalendarViewModel?: shared.ServiceCalendarViewModel;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

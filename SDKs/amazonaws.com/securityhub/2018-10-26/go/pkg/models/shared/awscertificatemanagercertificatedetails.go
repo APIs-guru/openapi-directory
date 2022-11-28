@@ -1,5 +1,7 @@
 package shared
 
+// AwsCertificateManagerCertificateDetails
+// Provides details about an Certificate Manager certificate.
 type AwsCertificateManagerCertificateDetails struct {
 	CertificateAuthorityArn *string                                                  `json:"CertificateAuthorityArn,omitempty"`
 	CreatedAt               *string                                                  `json:"CreatedAt,omitempty"`

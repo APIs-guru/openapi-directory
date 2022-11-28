@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { JsonFileCompressionEnum } from "./jsonfilecompressionenum";
 /**
  * Contains information about how a source JSON data file should be analyzed.

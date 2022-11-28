@@ -10,6 +10,8 @@ const (
 	GenerateRandomBytesRequestProtectionLevelEnumExternalVpc                GenerateRandomBytesRequestProtectionLevelEnum = "EXTERNAL_VPC"
 )
 
+// GenerateRandomBytesRequest
+// Request message for KeyManagementService.GenerateRandomBytes.
 type GenerateRandomBytesRequest struct {
 	LengthBytes     *int32                                         `json:"lengthBytes,omitempty"`
 	ProtectionLevel *GenerateRandomBytesRequestProtectionLevelEnum `json:"protectionLevel,omitempty"`

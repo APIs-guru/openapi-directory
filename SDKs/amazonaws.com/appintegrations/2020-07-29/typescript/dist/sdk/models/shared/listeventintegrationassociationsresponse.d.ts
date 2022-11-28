@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { EventIntegrationAssociation } from "./eventintegrationassociation";
 export declare class ListEventIntegrationAssociationsResponse extends SpeakeasyBase {
     eventIntegrationAssociations?: EventIntegrationAssociation[];

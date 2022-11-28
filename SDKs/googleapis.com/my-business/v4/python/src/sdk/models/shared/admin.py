@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class AdminRoleEnum(str, Enum):
     ADMIN_ROLE_UNSPECIFIED = "ADMIN_ROLE_UNSPECIFIED"
@@ -13,8 +15,12 @@ class AdminRoleEnum(str, Enum):
 @dataclass_json
 @dataclass
 class Admin:
-    admin_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'adminName' }})
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    pending_invitation: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'pendingInvitation' }})
-    role: Optional[AdminRoleEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'role' }})
+    r"""Admin
+    An administrator of an Account or a Location.
+    """
+    
+    admin_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('adminName') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    pending_invitation: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('pendingInvitation') }})
+    role: Optional[AdminRoleEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('role') }})
     

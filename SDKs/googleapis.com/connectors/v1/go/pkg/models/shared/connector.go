@@ -9,6 +9,8 @@ const (
 	ConnectorLaunchStageEnumDeprecated             ConnectorLaunchStageEnum = "DEPRECATED"
 )
 
+// Connector
+// Connectors indicates a specific connector type, e.x. Salesforce, SAP etc.
 type Connector struct {
 	CreateTime        *string                   `json:"createTime,omitempty"`
 	Description       *string                   `json:"description,omitempty"`

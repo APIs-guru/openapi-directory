@@ -1,37 +1,35 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 
 
-export class WritableInventoryItem extends SpeakeasyBase {
-  @Metadata({ data: "json, name=asset_tag" })
+
+export class WritableInventoryItemInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=asset_tag" })
   assetTag?: string;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=device" })
+  @SpeakeasyMetadata({ data: "json, name=device" })
   device: number;
 
-  @Metadata({ data: "json, name=discovered" })
+  @SpeakeasyMetadata({ data: "json, name=discovered" })
   discovered?: boolean;
 
-  @Metadata({ data: "json, name=id" })
-  id?: number;
-
-  @Metadata({ data: "json, name=manufacturer" })
+  @SpeakeasyMetadata({ data: "json, name=manufacturer" })
   manufacturer?: number;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 
-  @Metadata({ data: "json, name=parent" })
+  @SpeakeasyMetadata({ data: "json, name=parent" })
   parent?: number;
 
-  @Metadata({ data: "json, name=part_id" })
+  @SpeakeasyMetadata({ data: "json, name=part_id" })
   partId?: string;
 
-  @Metadata({ data: "json, name=serial" })
+  @SpeakeasyMetadata({ data: "json, name=serial" })
   serial?: string;
 
-  @Metadata({ data: "json, name=tags" })
+  @SpeakeasyMetadata({ data: "json, name=tags" })
   tags?: string[];
 }

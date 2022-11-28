@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Error } from "./error";
+
 
 
 // BaseResponse
@@ -8,6 +8,6 @@ import { Error } from "./error";
  * This type defines the fields for any warning error messages.
 **/
 export class BaseResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=warnings", elemType: shared.Error })
+  @SpeakeasyMetadata({ data: "json, name=warnings", elemType: Error })
   warnings?: Error[];
 }

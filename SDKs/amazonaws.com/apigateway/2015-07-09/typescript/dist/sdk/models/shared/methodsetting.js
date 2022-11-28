@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { UnauthorizedCacheControlHeaderStrategyEnum } from "./unauthorizedcachecontrolheaderstrategyenum";
 // MethodSetting
 /**
@@ -34,43 +34,43 @@ var MethodSetting = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=cacheDataEncrypted" }),
+        SpeakeasyMetadata({ data: "json, name=cacheDataEncrypted" }),
         __metadata("design:type", Boolean)
     ], MethodSetting.prototype, "cacheDataEncrypted", void 0);
     __decorate([
-        Metadata({ data: "json, name=cacheTtlInSeconds" }),
+        SpeakeasyMetadata({ data: "json, name=cacheTtlInSeconds" }),
         __metadata("design:type", Number)
     ], MethodSetting.prototype, "cacheTtlInSeconds", void 0);
     __decorate([
-        Metadata({ data: "json, name=cachingEnabled" }),
+        SpeakeasyMetadata({ data: "json, name=cachingEnabled" }),
         __metadata("design:type", Boolean)
     ], MethodSetting.prototype, "cachingEnabled", void 0);
     __decorate([
-        Metadata({ data: "json, name=dataTraceEnabled" }),
+        SpeakeasyMetadata({ data: "json, name=dataTraceEnabled" }),
         __metadata("design:type", Boolean)
     ], MethodSetting.prototype, "dataTraceEnabled", void 0);
     __decorate([
-        Metadata({ data: "json, name=loggingLevel" }),
+        SpeakeasyMetadata({ data: "json, name=loggingLevel" }),
         __metadata("design:type", String)
     ], MethodSetting.prototype, "loggingLevel", void 0);
     __decorate([
-        Metadata({ data: "json, name=metricsEnabled" }),
+        SpeakeasyMetadata({ data: "json, name=metricsEnabled" }),
         __metadata("design:type", Boolean)
     ], MethodSetting.prototype, "metricsEnabled", void 0);
     __decorate([
-        Metadata({ data: "json, name=requireAuthorizationForCacheControl" }),
+        SpeakeasyMetadata({ data: "json, name=requireAuthorizationForCacheControl" }),
         __metadata("design:type", Boolean)
     ], MethodSetting.prototype, "requireAuthorizationForCacheControl", void 0);
     __decorate([
-        Metadata({ data: "json, name=throttlingBurstLimit" }),
+        SpeakeasyMetadata({ data: "json, name=throttlingBurstLimit" }),
         __metadata("design:type", Number)
     ], MethodSetting.prototype, "throttlingBurstLimit", void 0);
     __decorate([
-        Metadata({ data: "json, name=throttlingRateLimit" }),
+        SpeakeasyMetadata({ data: "json, name=throttlingRateLimit" }),
         __metadata("design:type", Number)
     ], MethodSetting.prototype, "throttlingRateLimit", void 0);
     __decorate([
-        Metadata({ data: "json, name=unauthorizedCacheControlHeaderStrategy" }),
+        SpeakeasyMetadata({ data: "json, name=unauthorizedCacheControlHeaderStrategy" }),
         __metadata("design:type", String)
     ], MethodSetting.prototype, "unauthorizedCacheControlHeaderStrategy", void 0);
     return MethodSetting;

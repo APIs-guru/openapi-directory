@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var FireteamGetClanFireteamPathParams = /** @class */ (function (_super) {
     __extends(FireteamGetClanFireteamPathParams, _super);
@@ -30,11 +30,11 @@ var FireteamGetClanFireteamPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=fireteamId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=fireteamId" }),
         __metadata("design:type", Number)
     ], FireteamGetClanFireteamPathParams.prototype, "fireteamId", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=groupId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=groupId" }),
         __metadata("design:type", Number)
     ], FireteamGetClanFireteamPathParams.prototype, "groupId", void 0);
     return FireteamGetClanFireteamPathParams;
@@ -46,7 +46,7 @@ var FireteamGetClanFireteamSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2)
     ], FireteamGetClanFireteamSecurity.prototype, "oauth2", void 0);
     return FireteamGetClanFireteamSecurity;
@@ -58,11 +58,11 @@ var FireteamGetClanFireteamRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", FireteamGetClanFireteamPathParams)
     ], FireteamGetClanFireteamRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", FireteamGetClanFireteamSecurity)
     ], FireteamGetClanFireteamRequest.prototype, "security", void 0);
     return FireteamGetClanFireteamRequest;
@@ -74,15 +74,15 @@ var FireteamGetClanFireteamResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], FireteamGetClanFireteamResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], FireteamGetClanFireteamResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], FireteamGetClanFireteamResponse.prototype, "statusCode", void 0);
     return FireteamGetClanFireteamResponse;

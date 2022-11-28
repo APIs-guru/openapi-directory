@@ -9,11 +9,6 @@ type GetTopJSONPeriodEqualFlagHeaders struct {
 	APIUsername string `header:"style=simple,explode=false,name=Api-Username"`
 }
 
-type GetTopJSONPeriodEqualFlagRequest struct {
-	PathParams GetTopJSONPeriodEqualFlagPathParams
-	Headers    GetTopJSONPeriodEqualFlagHeaders
-}
-
 type GetTopJSONPeriodEqualFlag200ApplicationJSONTopicListTopicsPosters struct {
 	Description    *string `json:"description,omitempty"`
 	Extras         *string `json:"extras,omitempty"`
@@ -78,6 +73,11 @@ type GetTopJSONPeriodEqualFlag200ApplicationJSON struct {
 	PrimaryGroups []interface{}                                         `json:"primary_groups,omitempty"`
 	TopicList     *GetTopJSONPeriodEqualFlag200ApplicationJSONTopicList `json:"topic_list,omitempty"`
 	Users         []GetTopJSONPeriodEqualFlag200ApplicationJSONUsers    `json:"users,omitempty"`
+}
+
+type GetTopJSONPeriodEqualFlagRequest struct {
+	PathParams GetTopJSONPeriodEqualFlagPathParams
+	Headers    GetTopJSONPeriodEqualFlagHeaders
 }
 
 type GetTopJSONPeriodEqualFlagResponse struct {

@@ -13,12 +13,12 @@ type PostAssetsCorrelationMatrixRequestBody2 struct {
 	AssetsCovarianceMatrix [][]float64 `json:"assetsCovarianceMatrix"`
 }
 
-type PostAssetsCorrelationMatrixRequest struct {
-	Request interface{} `request:"mediaType=application/json"`
-}
-
 type PostAssetsCorrelationMatrix200ApplicationJSON struct {
 	AssetsCorrelationMatrix [][]float64 `json:"assetsCorrelationMatrix"`
+}
+
+type PostAssetsCorrelationMatrixRequest struct {
+	Request interface{} `request:"mediaType=application/json"`
 }
 
 type PostAssetsCorrelationMatrixResponse struct {

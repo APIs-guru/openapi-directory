@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GuideInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=EndDate" })
+  @SpeakeasyMetadata({ data: "json, name=EndDate" })
   endDate?: Date;
 
-  @Metadata({ data: "json, name=StartDate" })
+  @SpeakeasyMetadata({ data: "json, name=StartDate" })
   startDate?: Date;
 }

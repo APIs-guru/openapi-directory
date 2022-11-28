@@ -1,9 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Grant } from "./grant";
 import { CannedAclEnum } from "./cannedaclenum";
 import { Encryption } from "./encryption";
 import { StorageClassEnum } from "./storageclassenum";
+
 
 
 // S3Location
@@ -11,27 +11,27 @@ import { StorageClassEnum } from "./storageclassenum";
  * Contains information about the location in Amazon S3 where the select job results are stored.
 **/
 export class S3Location extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AccessControlList", elemType: shared.Grant })
+  @SpeakeasyMetadata({ data: "json, name=AccessControlList", elemType: Grant })
   accessControlList?: Grant[];
 
-  @Metadata({ data: "json, name=BucketName" })
+  @SpeakeasyMetadata({ data: "json, name=BucketName" })
   bucketName?: string;
 
-  @Metadata({ data: "json, name=CannedACL" })
+  @SpeakeasyMetadata({ data: "json, name=CannedACL" })
   cannedAcl?: CannedAclEnum;
 
-  @Metadata({ data: "json, name=Encryption" })
+  @SpeakeasyMetadata({ data: "json, name=Encryption" })
   encryption?: Encryption;
 
-  @Metadata({ data: "json, name=Prefix" })
+  @SpeakeasyMetadata({ data: "json, name=Prefix" })
   prefix?: string;
 
-  @Metadata({ data: "json, name=StorageClass" })
+  @SpeakeasyMetadata({ data: "json, name=StorageClass" })
   storageClass?: StorageClassEnum;
 
-  @Metadata({ data: "json, name=Tagging" })
+  @SpeakeasyMetadata({ data: "json, name=Tagging" })
   tagging?: Map<string, string>;
 
-  @Metadata({ data: "json, name=UserMetadata" })
+  @SpeakeasyMetadata({ data: "json, name=UserMetadata" })
   userMetadata?: Map<string, string>;
 }

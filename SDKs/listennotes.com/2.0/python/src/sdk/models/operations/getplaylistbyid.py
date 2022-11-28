@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class GetPlaylistByIDPathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 class GetPlaylistByIDSortEnum(str, Enum):
     RECENT_ADDED_FIRST = "recent_added_first"
@@ -27,20 +28,20 @@ class GetPlaylistByIDQueryParams:
 
 @dataclass
 class GetPlaylistByIDHeaders:
-    x_listen_api_key: str = field(default=None, metadata={'header': { 'field_name': 'X-ListenAPI-Key', 'style': 'simple', 'explode': False }})
+    x_listen_api_key: str = field(metadata={'header': { 'field_name': 'X-ListenAPI-Key', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetPlaylistByIDRequest:
-    path_params: GetPlaylistByIDPathParams = field(default=None)
-    query_params: GetPlaylistByIDQueryParams = field(default=None)
-    headers: GetPlaylistByIDHeaders = field(default=None)
+    headers: GetPlaylistByIDHeaders = field()
+    path_params: GetPlaylistByIDPathParams = field()
+    query_params: GetPlaylistByIDQueryParams = field()
     
 
 @dataclass
 class GetPlaylistByIDResponse:
-    content_type: str = field(default=None)
-    headers: dict[str, List[str]] = field(default=None)
+    content_type: str = field()
+    headers: dict[str, List[str]] = field()
+    status_code: int = field()
     playlist_response: Optional[shared.PlaylistResponse] = field(default=None)
-    status_code: int = field(default=None)
     

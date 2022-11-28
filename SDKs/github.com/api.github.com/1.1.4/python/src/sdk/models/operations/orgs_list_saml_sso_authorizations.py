@@ -5,17 +5,17 @@ from sdk.models import shared
 
 @dataclass
 class OrgsListSamlSsoAuthorizationsPathParams:
-    org: str = field(default=None, metadata={'path_param': { 'field_name': 'org', 'style': 'simple', 'explode': False }})
+    org: str = field(metadata={'path_param': { 'field_name': 'org', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class OrgsListSamlSsoAuthorizationsRequest:
-    path_params: OrgsListSamlSsoAuthorizationsPathParams = field(default=None)
+    path_params: OrgsListSamlSsoAuthorizationsPathParams = field()
     
 
 @dataclass
 class OrgsListSamlSsoAuthorizationsResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     credential_authorizations: Optional[List[shared.CredentialAuthorization]] = field(default=None)
     

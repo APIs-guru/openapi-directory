@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PatchJob } from "./patchjob";
+
 
 
 // ListPatchJobsResponse
@@ -8,9 +8,9 @@ import { PatchJob } from "./patchjob";
  * A response message for listing patch jobs.
 **/
 export class ListPatchJobsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 
-  @Metadata({ data: "json, name=patchJobs", elemType: shared.PatchJob })
+  @SpeakeasyMetadata({ data: "json, name=patchJobs", elemType: PatchJob })
   patchJobs?: PatchJob[];
 }

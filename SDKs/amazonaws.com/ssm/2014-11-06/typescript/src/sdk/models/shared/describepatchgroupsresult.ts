@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PatchGroupPatchBaselineMapping } from "./patchgrouppatchbaselinemapping";
 
 
+
 export class DescribePatchGroupsResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Mappings", elemType: shared.PatchGroupPatchBaselineMapping })
+  @SpeakeasyMetadata({ data: "json, name=Mappings", elemType: PatchGroupPatchBaselineMapping })
   mappings?: PatchGroupPatchBaselineMapping[];
 
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 }

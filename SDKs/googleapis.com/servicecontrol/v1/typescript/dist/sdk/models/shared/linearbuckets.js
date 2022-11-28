@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // LinearBuckets
 /**
  * Describing buckets with constant width.
@@ -33,15 +33,15 @@ var LinearBuckets = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=numFiniteBuckets" }),
+        SpeakeasyMetadata({ data: "json, name=numFiniteBuckets" }),
         __metadata("design:type", Number)
     ], LinearBuckets.prototype, "numFiniteBuckets", void 0);
     __decorate([
-        Metadata({ data: "json, name=offset" }),
+        SpeakeasyMetadata({ data: "json, name=offset" }),
         __metadata("design:type", Number)
     ], LinearBuckets.prototype, "offset", void 0);
     __decorate([
-        Metadata({ data: "json, name=width" }),
+        SpeakeasyMetadata({ data: "json, name=width" }),
         __metadata("design:type", Number)
     ], LinearBuckets.prototype, "width", void 0);
     return LinearBuckets;

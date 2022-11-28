@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { ResourceRecord } from "./resourcerecord";
 import { SslSettings } from "./sslsettings";
 // DomainMapping
 /**
@@ -35,19 +35,19 @@ var DomainMapping = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=id" }),
+        SpeakeasyMetadata({ data: "json, name=id" }),
         __metadata("design:type", String)
     ], DomainMapping.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], DomainMapping.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=resourceRecords", elemType: shared.ResourceRecord }),
+        SpeakeasyMetadata({ data: "json, name=resourceRecords", elemType: ResourceRecord }),
         __metadata("design:type", Array)
     ], DomainMapping.prototype, "resourceRecords", void 0);
     __decorate([
-        Metadata({ data: "json, name=sslSettings" }),
+        SpeakeasyMetadata({ data: "json, name=sslSettings" }),
         __metadata("design:type", SslSettings)
     ], DomainMapping.prototype, "sslSettings", void 0);
     return DomainMapping;

@@ -5,7 +5,7 @@ import (
 )
 
 type ExtrasExportTemplatesCreateRequest struct {
-	Request shared.ExportTemplate `request:"mediaType=application/json"`
+	Request shared.ExportTemplateInput `request:"mediaType=application/json"`
 }
 
 type ExtrasExportTemplatesCreateResponse struct {

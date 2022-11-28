@@ -1,9 +1,8 @@
 package shared
 
-type WritableConfigContext struct {
+type WritableConfigContextInput struct {
 	Data         string  `json:"data"`
 	Description  *string `json:"description,omitempty"`
-	ID           *int64  `json:"id,omitempty"`
 	IsActive     *bool   `json:"is_active,omitempty"`
 	Name         string  `json:"name"`
 	Platforms    []int64 `json:"platforms,omitempty"`

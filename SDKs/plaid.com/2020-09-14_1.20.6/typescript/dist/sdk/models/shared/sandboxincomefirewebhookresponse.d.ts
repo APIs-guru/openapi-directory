@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 /**
  * SandboxIncomeFireWebhookResponse defines the response schema for `/sandbox/income/fire_webhook`
 **/

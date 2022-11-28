@@ -7,6 +7,8 @@ const (
 	AutoTextTypeEnumSlideNumber     AutoTextTypeEnum = "SLIDE_NUMBER"
 )
 
+// AutoText
+// A TextElement kind that represents auto text.
 type AutoText struct {
 	Content *string           `json:"content,omitempty"`
 	Style   *TextStyle        `json:"style,omitempty"`

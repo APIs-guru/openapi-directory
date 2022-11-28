@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { IntCandidates } from "./intcandidates";
 import { IntRange } from "./intrange";
+
 
 
 // IntHparamSearchSpace
@@ -8,9 +9,9 @@ import { IntRange } from "./intrange";
  * Search space for an int hyperparameter.
 **/
 export class IntHparamSearchSpace extends SpeakeasyBase {
-  @Metadata({ data: "json, name=candidates" })
+  @SpeakeasyMetadata({ data: "json, name=candidates" })
   candidates?: IntCandidates;
 
-  @Metadata({ data: "json, name=range" })
+  @SpeakeasyMetadata({ data: "json, name=range" })
   range?: IntRange;
 }

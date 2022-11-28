@@ -5,35 +5,25 @@ from sdk.models import shared
 
 @dataclass
 class GetVsmAccountPathParams:
-    external_id: str = field(default=None, metadata={'path_param': { 'field_name': 'external_id', 'style': 'simple', 'explode': False }})
-    
-
-@dataclass
-class GetVsmAccountSecurityOption1:
-    bearer_auth: shared.SchemeBearerAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer' }})
-    
-
-@dataclass
-class GetVsmAccountSecurityOption2:
-    basic_auth: shared.SchemeBasicAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'basic' }})
+    external_id: str = field(metadata={'path_param': { 'field_name': 'external_id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetVsmAccountSecurity:
-    option1: Optional[GetVsmAccountSecurityOption1] = field(default=None, metadata={'security': { 'option': True }})
-    option2: Optional[GetVsmAccountSecurityOption2] = field(default=None, metadata={'security': { 'option': True }})
+    basic_auth: Optional[shared.SchemeBasicAuth] = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'basic' }})
+    bearer_auth: Optional[shared.SchemeBearerAuth] = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer' }})
     
 
 @dataclass
 class GetVsmAccountRequest:
-    path_params: GetVsmAccountPathParams = field(default=None)
-    security: GetVsmAccountSecurity = field(default=None)
+    path_params: GetVsmAccountPathParams = field()
+    security: GetVsmAccountSecurity = field()
     
 
 @dataclass
 class GetVsmAccountResponse:
+    content_type: str = field()
+    status_code: int = field()
     four_hundred_and_one_response: Optional[shared.FourHundredAndOneResponse] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     vsm_account_response: Optional[shared.VsmAccountResponse] = field(default=None)
     

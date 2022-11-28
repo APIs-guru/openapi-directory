@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum ScriptErrorErrorCodeEnum {
-    ErrorCodeUnspecified = "ERROR_CODE_UNSPECIFIED"
-,    SyntaxError = "SYNTAX_ERROR"
-,    DeprecatedSyntax = "DEPRECATED_SYNTAX"
-,    InternalError = "INTERNAL_ERROR"
+    ErrorCodeUnspecified = "ERROR_CODE_UNSPECIFIED",
+    SyntaxError = "SYNTAX_ERROR",
+    DeprecatedSyntax = "DEPRECATED_SYNTAX",
+    InternalError = "INTERNAL_ERROR"
 }
 
 
@@ -13,15 +14,15 @@ export enum ScriptErrorErrorCodeEnum {
  * An error message for a custom bidding script.
 **/
 export class ScriptError extends SpeakeasyBase {
-  @Metadata({ data: "json, name=column" })
+  @SpeakeasyMetadata({ data: "json, name=column" })
   column?: string;
 
-  @Metadata({ data: "json, name=errorCode" })
+  @SpeakeasyMetadata({ data: "json, name=errorCode" })
   errorCode?: ScriptErrorErrorCodeEnum;
 
-  @Metadata({ data: "json, name=errorMessage" })
+  @SpeakeasyMetadata({ data: "json, name=errorMessage" })
   errorMessage?: string;
 
-  @Metadata({ data: "json, name=line" })
+  @SpeakeasyMetadata({ data: "json, name=line" })
   line?: string;
 }

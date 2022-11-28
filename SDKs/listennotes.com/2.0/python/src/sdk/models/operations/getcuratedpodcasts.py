@@ -10,19 +10,19 @@ class GetCuratedPodcastsQueryParams:
 
 @dataclass
 class GetCuratedPodcastsHeaders:
-    x_listen_api_key: str = field(default=None, metadata={'header': { 'field_name': 'X-ListenAPI-Key', 'style': 'simple', 'explode': False }})
+    x_listen_api_key: str = field(metadata={'header': { 'field_name': 'X-ListenAPI-Key', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetCuratedPodcastsRequest:
-    query_params: GetCuratedPodcastsQueryParams = field(default=None)
-    headers: GetCuratedPodcastsHeaders = field(default=None)
+    headers: GetCuratedPodcastsHeaders = field()
+    query_params: GetCuratedPodcastsQueryParams = field()
     
 
 @dataclass
 class GetCuratedPodcastsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    headers: dict[str, List[str]] = field()
+    status_code: int = field()
     get_curated_podcasts_response: Optional[shared.GetCuratedPodcastsResponse] = field(default=None)
-    headers: dict[str, List[str]] = field(default=None)
-    status_code: int = field(default=None)
     

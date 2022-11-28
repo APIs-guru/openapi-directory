@@ -1,56 +1,57 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetOffersHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=Authorization" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Authorization" })
   authorization: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=x-customer-user-agent" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=x-customer-user-agent" })
   xCustomerUserAgent?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=x-fapi-auth-date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=x-fapi-auth-date" })
   xFapiAuthDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=x-fapi-customer-ip-address" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=x-fapi-customer-ip-address" })
   xFapiCustomerIpAddress?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=x-fapi-interaction-id" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=x-fapi-interaction-id" })
   xFapiInteractionId?: string;
 }
 
 
 export class GetOffersSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   psuoAuth2Security: shared.SchemePsuoAuth2Security;
 }
 
 
 export class GetOffersRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: GetOffersHeaders;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: GetOffersSecurity;
 }
 
 
 export class GetOffersResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: Map<string, string[]>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   obErrorResponse1?: shared.ObErrorResponse1;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   obReadOffer1?: shared.ObReadOffer1;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

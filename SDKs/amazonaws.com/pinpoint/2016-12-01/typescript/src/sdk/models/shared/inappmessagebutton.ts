@@ -1,8 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { OverrideButtonConfiguration } from "./overridebuttonconfiguration";
 import { DefaultButtonConfiguration } from "./defaultbuttonconfiguration";
-import { OverrideButtonConfiguration } from "./overridebuttonconfiguration";
-import { OverrideButtonConfiguration } from "./overridebuttonconfiguration";
+
 
 
 // InAppMessageButton
@@ -10,15 +9,15 @@ import { OverrideButtonConfiguration } from "./overridebuttonconfiguration";
  * Button Config for an in-app message.
 **/
 export class InAppMessageButton extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Android" })
+  @SpeakeasyMetadata({ data: "json, name=Android" })
   android?: OverrideButtonConfiguration;
 
-  @Metadata({ data: "json, name=DefaultConfig" })
+  @SpeakeasyMetadata({ data: "json, name=DefaultConfig" })
   defaultConfig?: DefaultButtonConfiguration;
 
-  @Metadata({ data: "json, name=IOS" })
+  @SpeakeasyMetadata({ data: "json, name=IOS" })
   ios?: OverrideButtonConfiguration;
 
-  @Metadata({ data: "json, name=Web" })
+  @SpeakeasyMetadata({ data: "json, name=Web" })
   web?: OverrideButtonConfiguration;
 }

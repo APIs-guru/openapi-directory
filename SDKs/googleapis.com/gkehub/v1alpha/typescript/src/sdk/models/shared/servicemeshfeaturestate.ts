@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ServiceMeshAnalysisMessage } from "./servicemeshanalysismessage";
+
 
 
 // ServiceMeshFeatureState
@@ -8,6 +8,6 @@ import { ServiceMeshAnalysisMessage } from "./servicemeshanalysismessage";
  * **Service Mesh**: State for the whole Hub, as analyzed by the Service Mesh Hub Controller.
 **/
 export class ServiceMeshFeatureState extends SpeakeasyBase {
-  @Metadata({ data: "json, name=analysisMessages", elemType: shared.ServiceMeshAnalysisMessage })
+  @SpeakeasyMetadata({ data: "json, name=analysisMessages", elemType: ServiceMeshAnalysisMessage })
   analysisMessages?: ServiceMeshAnalysisMessage[];
 }

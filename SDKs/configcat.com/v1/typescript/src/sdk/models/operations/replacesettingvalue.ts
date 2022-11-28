@@ -1,56 +1,57 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class ReplaceSettingValuePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=environmentId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=environmentId" })
   environmentId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=settingId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=settingId" })
   settingId: number;
 }
 
 
 export class ReplaceSettingValueQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=reason" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=reason" })
   reason?: string;
 }
 
 
 export class ReplaceSettingValueRequests extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/*+json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/*+json" })
   updateSettingValueModel?: shared.UpdateSettingValueModel;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   updateSettingValueModel1?: shared.UpdateSettingValueModel;
 
-  @Metadata({ data: "request, media_type=text/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=text/json" })
   updateSettingValueModel2?: shared.UpdateSettingValueModel;
 }
 
 
 export class ReplaceSettingValueRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: ReplaceSettingValuePathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: ReplaceSettingValueQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   request: ReplaceSettingValueRequests;
 }
 
 
 export class ReplaceSettingValueResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   settingValueModel?: shared.SettingValueModel;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   settingValueModelHaljson?: shared.SettingValueModelHaljson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

@@ -1,5 +1,7 @@
 package shared
 
+// ContainerRecipe
+// A container recipe.
 type ContainerRecipe struct {
 	Arn                    *string                    `json:"arn,omitempty"`
 	Components             []ComponentConfiguration   `json:"components,omitempty"`

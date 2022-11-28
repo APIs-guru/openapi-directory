@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ConfigManagementGitConfig } from "./configmanagementgitconfig";
 import { ConfigManagementOciConfig } from "./configmanagementociconfig";
+
 
 
 // ConfigManagementConfigSync
@@ -8,21 +9,21 @@ import { ConfigManagementOciConfig } from "./configmanagementociconfig";
  * Configuration for Config Sync
 **/
 export class ConfigManagementConfigSync extends SpeakeasyBase {
-  @Metadata({ data: "json, name=allowVerticalScale" })
+  @SpeakeasyMetadata({ data: "json, name=allowVerticalScale" })
   allowVerticalScale?: boolean;
 
-  @Metadata({ data: "json, name=enabled" })
+  @SpeakeasyMetadata({ data: "json, name=enabled" })
   enabled?: boolean;
 
-  @Metadata({ data: "json, name=git" })
+  @SpeakeasyMetadata({ data: "json, name=git" })
   git?: ConfigManagementGitConfig;
 
-  @Metadata({ data: "json, name=oci" })
+  @SpeakeasyMetadata({ data: "json, name=oci" })
   oci?: ConfigManagementOciConfig;
 
-  @Metadata({ data: "json, name=preventDrift" })
+  @SpeakeasyMetadata({ data: "json, name=preventDrift" })
   preventDrift?: boolean;
 
-  @Metadata({ data: "json, name=sourceFormat" })
+  @SpeakeasyMetadata({ data: "json, name=sourceFormat" })
   sourceFormat?: string;
 }

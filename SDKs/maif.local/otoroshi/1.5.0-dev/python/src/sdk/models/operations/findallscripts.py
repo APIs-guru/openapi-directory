@@ -5,17 +5,17 @@ from sdk.models import shared
 
 @dataclass
 class FindAllScriptsSecurity:
-    otoroshi_auth: shared.SchemeOtoroshiAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'basic' }})
+    otoroshi_auth: shared.SchemeOtoroshiAuth = field(metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'basic' }})
     
 
 @dataclass
 class FindAllScriptsRequest:
-    security: FindAllScriptsSecurity = field(default=None)
+    security: FindAllScriptsSecurity = field()
     
 
 @dataclass
 class FindAllScriptsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     scripts: Optional[List[shared.Script]] = field(default=None)
-    status_code: int = field(default=None)
     

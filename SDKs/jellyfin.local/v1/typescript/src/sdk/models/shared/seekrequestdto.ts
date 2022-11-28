@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // SeekRequestDto
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Class SeekRequestDto.
 **/
 export class SeekRequestDto extends SpeakeasyBase {
-  @Metadata({ data: "json, name=PositionTicks" })
+  @SpeakeasyMetadata({ data: "json, name=PositionTicks" })
   positionTicks?: number;
 }

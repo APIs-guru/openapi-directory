@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ConnectorInstanceConfig } from "./connectorinstanceconfig";
+
 
 
 // ResolveInstanceConfigResponse
@@ -7,6 +8,6 @@ import { ConnectorInstanceConfig } from "./connectorinstanceconfig";
  * Response message for BeyondCorp.ResolveInstanceConfig.
 **/
 export class ResolveInstanceConfigResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=instanceConfig" })
+  @SpeakeasyMetadata({ data: "json, name=instanceConfig" })
   instanceConfig?: ConnectorInstanceConfig;
 }

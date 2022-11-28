@@ -1,6 +1,7 @@
 
 
+
 export enum MaintenanceStatusEnum {
-    Success = "SUCCESS"
-,    Failed = "FAILED"
+    Success = "SUCCESS",
+    Failed = "FAILED"
 }

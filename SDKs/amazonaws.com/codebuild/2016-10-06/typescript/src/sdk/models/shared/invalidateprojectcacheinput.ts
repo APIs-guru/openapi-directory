@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class InvalidateProjectCacheInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=projectName" })
+  @SpeakeasyMetadata({ data: "json, name=projectName" })
   projectName: string;
 }

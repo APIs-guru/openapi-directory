@@ -1,6 +1,7 @@
 
 
+
 export enum ListOrderEnum {
-    Asc = "asc"
-,    Desc = "desc"
+    Asc = "asc",
+    Desc = "desc"
 }

@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CostEstimationResult } from "./costestimationresult";
+
 
 
 // EstimateCostScenarioForBillingAccountResponse
@@ -7,6 +8,6 @@ import { CostEstimationResult } from "./costestimationresult";
  * Response for EstimateCostScenarioForBillingAccount
 **/
 export class EstimateCostScenarioForBillingAccountResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=costEstimationResult" })
+  @SpeakeasyMetadata({ data: "json, name=costEstimationResult" })
   costEstimationResult?: CostEstimationResult;
 }

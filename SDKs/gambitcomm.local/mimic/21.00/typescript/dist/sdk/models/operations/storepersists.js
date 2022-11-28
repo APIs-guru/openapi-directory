@@ -22,14 +22,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var StorePersistsPathParams = /** @class */ (function (_super) {
     __extends(StorePersistsPathParams, _super);
     function StorePersistsPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=var" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=var" }),
         __metadata("design:type", String)
     ], StorePersistsPathParams.prototype, "var", void 0);
     return StorePersistsPathParams;
@@ -41,7 +41,7 @@ var StorePersistsRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", StorePersistsPathParams)
     ], StorePersistsRequest.prototype, "pathParams", void 0);
     return StorePersistsRequest;
@@ -53,15 +53,15 @@ var StorePersistsResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], StorePersistsResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], StorePersistsResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], StorePersistsResponse.prototype, "storePersists200ApplicationJsonString", void 0);
     return StorePersistsResponse;

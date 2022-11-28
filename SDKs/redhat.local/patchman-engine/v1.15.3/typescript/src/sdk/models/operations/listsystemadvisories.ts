@@ -1,79 +1,80 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class ListSystemAdvisoriesPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=inventory_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=inventory_id" })
   inventoryId: string;
 }
 
 export enum ListSystemAdvisoriesSortEnum {
-    Id = "id"
-,    Name = "name"
-,    Type = "type"
-,    Synopsis = "synopsis"
-,    PublicDate = "public_date"
+    Id = "id",
+    Name = "name",
+    Type = "type",
+    Synopsis = "synopsis",
+    PublicDate = "public_date"
 }
 
 
 export class ListSystemAdvisoriesQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=filter[advisory_type]" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=filter[advisory_type]" })
   filterAdvisoryType?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=filter[description]" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=filter[description]" })
   filterDescription?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=filter[id]" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=filter[id]" })
   filterId?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=filter[public_date]" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=filter[public_date]" })
   filterPublicDate?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=filter[severity]" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=filter[severity]" })
   filterSeverity?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=filter[synopsis]" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=filter[synopsis]" })
   filterSynopsis?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=limit" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=limit" })
   limit?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=offset" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=offset" })
   offset?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=search" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=search" })
   search?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=sort" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sort" })
   sort?: ListSystemAdvisoriesSortEnum;
 }
 
 
 export class ListSystemAdvisoriesSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
   rhIdentity: shared.SchemeRhIdentity;
 }
 
 
 export class ListSystemAdvisoriesRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: ListSystemAdvisoriesPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: ListSystemAdvisoriesQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: ListSystemAdvisoriesSecurity;
 }
 
 
 export class ListSystemAdvisoriesResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   controllersSystemAdvisoriesResponse?: shared.ControllersSystemAdvisoriesResponse;
 }

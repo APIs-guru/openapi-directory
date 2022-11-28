@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// ChannelSummary
+// A summary of information about a channel.
 type ChannelSummary struct {
 	ChannelName            *string                `json:"channelName,omitempty"`
 	ChannelStorage         *ChannelStorageSummary `json:"channelStorage,omitempty"`

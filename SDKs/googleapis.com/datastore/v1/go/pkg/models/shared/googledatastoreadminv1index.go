@@ -18,6 +18,16 @@ const (
 	GoogleDatastoreAdminV1IndexStateEnumError            GoogleDatastoreAdminV1IndexStateEnum = "ERROR"
 )
 
+// GoogleDatastoreAdminV1IndexInput
+// Datastore composite index definition.
+type GoogleDatastoreAdminV1IndexInput struct {
+	Ancestor   *GoogleDatastoreAdminV1IndexAncestorEnum `json:"ancestor,omitempty"`
+	Kind       *string                                  `json:"kind,omitempty"`
+	Properties []GoogleDatastoreAdminV1IndexedProperty  `json:"properties,omitempty"`
+}
+
+// GoogleDatastoreAdminV1Index
+// Datastore composite index definition.
 type GoogleDatastoreAdminV1Index struct {
 	Ancestor   *GoogleDatastoreAdminV1IndexAncestorEnum `json:"ancestor,omitempty"`
 	IndexID    *string                                  `json:"indexId,omitempty"`

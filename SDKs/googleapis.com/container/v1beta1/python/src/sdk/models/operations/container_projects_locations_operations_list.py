@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class ContainerProjectsLocationsOperationsListPathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -27,20 +28,20 @@ class ContainerProjectsLocationsOperationsListQueryParams:
 
 @dataclass
 class ContainerProjectsLocationsOperationsListSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class ContainerProjectsLocationsOperationsListRequest:
-    path_params: ContainerProjectsLocationsOperationsListPathParams = field(default=None)
-    query_params: ContainerProjectsLocationsOperationsListQueryParams = field(default=None)
-    security: ContainerProjectsLocationsOperationsListSecurity = field(default=None)
+    path_params: ContainerProjectsLocationsOperationsListPathParams = field()
+    query_params: ContainerProjectsLocationsOperationsListQueryParams = field()
+    security: ContainerProjectsLocationsOperationsListSecurity = field()
     
 
 @dataclass
 class ContainerProjectsLocationsOperationsListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     list_operations_response: Optional[shared.ListOperationsResponse] = field(default=None)
-    status_code: int = field(default=None)
     

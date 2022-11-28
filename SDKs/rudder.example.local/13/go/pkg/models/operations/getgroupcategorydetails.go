@@ -8,10 +8,6 @@ type GetGroupCategoryDetailsPathParams struct {
 	GroupCategoryID string `pathParam:"style=simple,explode=false,name=groupCategoryId"`
 }
 
-type GetGroupCategoryDetailsRequest struct {
-	PathParams GetGroupCategoryDetailsPathParams
-}
-
 type GetGroupCategoryDetails200ApplicationJSONActionEnum string
 
 const (
@@ -33,6 +29,10 @@ type GetGroupCategoryDetails200ApplicationJSON struct {
 	Action GetGroupCategoryDetails200ApplicationJSONActionEnum `json:"action"`
 	Data   GetGroupCategoryDetails200ApplicationJSONData       `json:"data"`
 	Result GetGroupCategoryDetails200ApplicationJSONResultEnum `json:"result"`
+}
+
+type GetGroupCategoryDetailsRequest struct {
+	PathParams GetGroupCategoryDetailsPathParams
 }
 
 type GetGroupCategoryDetailsResponse struct {

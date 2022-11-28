@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetEnableVgwRoutePropagationActionEnum(str, Enum):
     ENABLE_VGW_ROUTE_PROPAGATION = "EnableVgwRoutePropagation"
@@ -10,11 +14,11 @@ class GetEnableVgwRoutePropagationVersionEnum(str, Enum):
 
 @dataclass
 class GetEnableVgwRoutePropagationQueryParams:
-    action: GetEnableVgwRoutePropagationActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetEnableVgwRoutePropagationActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    gateway_id: str = field(metadata={'query_param': { 'field_name': 'GatewayId', 'style': 'form', 'explode': True }})
+    route_table_id: str = field(metadata={'query_param': { 'field_name': 'RouteTableId', 'style': 'form', 'explode': True }})
+    version: GetEnableVgwRoutePropagationVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     dry_run: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'DryRun', 'style': 'form', 'explode': True }})
-    gateway_id: str = field(default=None, metadata={'query_param': { 'field_name': 'GatewayId', 'style': 'form', 'explode': True }})
-    route_table_id: str = field(default=None, metadata={'query_param': { 'field_name': 'RouteTableId', 'style': 'form', 'explode': True }})
-    version: GetEnableVgwRoutePropagationVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -30,12 +34,12 @@ class GetEnableVgwRoutePropagationHeaders:
 
 @dataclass
 class GetEnableVgwRoutePropagationRequest:
-    query_params: GetEnableVgwRoutePropagationQueryParams = field(default=None)
-    headers: GetEnableVgwRoutePropagationHeaders = field(default=None)
+    headers: GetEnableVgwRoutePropagationHeaders = field()
+    query_params: GetEnableVgwRoutePropagationQueryParams = field()
     
 
 @dataclass
 class GetEnableVgwRoutePropagationResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

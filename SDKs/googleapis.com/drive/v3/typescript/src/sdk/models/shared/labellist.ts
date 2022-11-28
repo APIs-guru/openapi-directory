@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Label } from "./label";
+
 
 
 // LabelList
@@ -8,12 +8,12 @@ import { Label } from "./label";
  * A list of labels.
 **/
 export class LabelList extends SpeakeasyBase {
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=labels", elemType: shared.Label })
+  @SpeakeasyMetadata({ data: "json, name=labels", elemType: Label })
   labels?: Label[];
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 }

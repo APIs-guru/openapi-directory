@@ -1,22 +1,23 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class NewsFeedCardsDetailsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=card_id" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=card_id" })
   cardId?: string;
 }
 
 
 export class NewsFeedCardsDetailsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: NewsFeedCardsDetailsQueryParams;
 }
 
 
 export class NewsFeedCardsDetailsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

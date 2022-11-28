@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class GrantAppLevelPermissionsEnum(str, Enum):
     APP_LEVEL_PERMISSION_UNSPECIFIED = "APP_LEVEL_PERMISSION_UNSPECIFIED"
@@ -19,7 +21,11 @@ class GrantAppLevelPermissionsEnum(str, Enum):
 @dataclass_json
 @dataclass
 class Grant:
-    app_level_permissions: Optional[List[GrantAppLevelPermissionsEnum]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'appLevelPermissions' }})
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    package_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'packageName' }})
+    r"""Grant
+    An access grant resource.
+    """
+    
+    app_level_permissions: Optional[List[GrantAppLevelPermissionsEnum]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('appLevelPermissions') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    package_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('packageName') }})
     

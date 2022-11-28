@@ -1,122 +1,123 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetSigningBasketPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=basketId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=basketId" })
   basketId: string;
 }
 
 
 export class GetSigningBasketHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=Digest" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Digest" })
   digest?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=PSU-Accept" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=PSU-Accept" })
   psuAccept?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=PSU-Accept-Charset" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=PSU-Accept-Charset" })
   psuAcceptCharset?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=PSU-Accept-Encoding" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=PSU-Accept-Encoding" })
   psuAcceptEncoding?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=PSU-Accept-Language" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=PSU-Accept-Language" })
   psuAcceptLanguage?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=PSU-Device-ID" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=PSU-Device-ID" })
   psuDeviceId?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=PSU-Geo-Location" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=PSU-Geo-Location" })
   psuGeoLocation?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=PSU-Http-Method" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=PSU-Http-Method" })
   psuHttpMethod?: shared.PsuHttpMethodEnum;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=PSU-IP-Address" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=PSU-IP-Address" })
   psuIpAddress?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=PSU-IP-Port" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=PSU-IP-Port" })
   psuIpPort?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=PSU-User-Agent" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=PSU-User-Agent" })
   psuUserAgent?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Signature" })
   signature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=TPP-Signature-Certificate" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=TPP-Signature-Certificate" })
   tppSignatureCertificate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Request-ID" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Request-ID" })
   xRequestId: string;
 }
 
 
 export class GetSigningBasketSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=bearer" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" })
   bearerAuthOAuth?: shared.SchemeBearerAuthOAuth;
 }
 
 
 export class GetSigningBasketRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetSigningBasketPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: GetSigningBasketHeaders;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: GetSigningBasketSecurity;
 }
 
 
 export class GetSigningBasketResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   error400NgSbs?: shared.Error400NgSbs;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   error400Sbs?: shared.Error400Sbs;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   error401NgSbs?: shared.Error401NgSbs;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   error401Sbs?: shared.Error401Sbs;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   error403NgSbs?: shared.Error403NgSbs;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   error403Sbs?: shared.Error403Sbs;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   error404NgSbs?: shared.Error404NgSbs;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   error404Sbs?: shared.Error404Sbs;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   error405NgSbs?: shared.Error405NgSbs;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   error405Sbs?: shared.Error405Sbs;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   error409NgSbs?: shared.Error409NgSbs;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   error409Sbs?: shared.Error409Sbs;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: Map<string, string[]>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   signingBasketResponse200?: shared.SigningBasketResponse200;
 }

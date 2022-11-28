@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostGetServerCertificateActionEnum(str, Enum):
     GET_SERVER_CERTIFICATE = "GetServerCertificate"
@@ -10,8 +14,8 @@ class PostGetServerCertificateVersionEnum(str, Enum):
 
 @dataclass
 class PostGetServerCertificateQueryParams:
-    action: PostGetServerCertificateActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostGetServerCertificateVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostGetServerCertificateActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostGetServerCertificateVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostGetServerCertificateHeaders:
 
 @dataclass
 class PostGetServerCertificateRequest:
-    query_params: PostGetServerCertificateQueryParams = field(default=None)
-    headers: PostGetServerCertificateHeaders = field(default=None)
+    headers: PostGetServerCertificateHeaders = field()
+    query_params: PostGetServerCertificateQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostGetServerCertificateResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

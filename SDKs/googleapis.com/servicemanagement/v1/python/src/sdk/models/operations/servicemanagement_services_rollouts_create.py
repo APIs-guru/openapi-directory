@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class ServicemanagementServicesRolloutsCreatePathParams:
-    service_name: str = field(default=None, metadata={'path_param': { 'field_name': 'serviceName', 'style': 'simple', 'explode': False }})
+    service_name: str = field(metadata={'path_param': { 'field_name': 'serviceName', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,14 +26,14 @@ class ServicemanagementServicesRolloutsCreateQueryParams:
 
 @dataclass
 class ServicemanagementServicesRolloutsCreateSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class ServicemanagementServicesRolloutsCreateSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -43,15 +44,15 @@ class ServicemanagementServicesRolloutsCreateSecurity:
 
 @dataclass
 class ServicemanagementServicesRolloutsCreateRequest:
-    path_params: ServicemanagementServicesRolloutsCreatePathParams = field(default=None)
-    query_params: ServicemanagementServicesRolloutsCreateQueryParams = field(default=None)
+    path_params: ServicemanagementServicesRolloutsCreatePathParams = field()
+    query_params: ServicemanagementServicesRolloutsCreateQueryParams = field()
+    security: ServicemanagementServicesRolloutsCreateSecurity = field()
     request: Optional[shared.Rollout] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: ServicemanagementServicesRolloutsCreateSecurity = field(default=None)
     
 
 @dataclass
 class ServicemanagementServicesRolloutsCreateResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     operation: Optional[shared.Operation] = field(default=None)
-    status_code: int = field(default=None)
     

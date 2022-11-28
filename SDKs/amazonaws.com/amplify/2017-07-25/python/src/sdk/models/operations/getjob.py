@@ -1,13 +1,16 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class GetJobPathParams:
-    app_id: str = field(default=None, metadata={'path_param': { 'field_name': 'appId', 'style': 'simple', 'explode': False }})
-    branch_name: str = field(default=None, metadata={'path_param': { 'field_name': 'branchName', 'style': 'simple', 'explode': False }})
-    job_id: str = field(default=None, metadata={'path_param': { 'field_name': 'jobId', 'style': 'simple', 'explode': False }})
+    app_id: str = field(metadata={'path_param': { 'field_name': 'appId', 'style': 'simple', 'explode': False }})
+    branch_name: str = field(metadata={'path_param': { 'field_name': 'branchName', 'style': 'simple', 'explode': False }})
+    job_id: str = field(metadata={'path_param': { 'field_name': 'jobId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -23,18 +26,18 @@ class GetJobHeaders:
 
 @dataclass
 class GetJobRequest:
-    path_params: GetJobPathParams = field(default=None)
-    headers: GetJobHeaders = field(default=None)
+    headers: GetJobHeaders = field()
+    path_params: GetJobPathParams = field()
     
 
 @dataclass
 class GetJobResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     get_job_result: Optional[shared.GetJobResult] = field(default=None)
     internal_failure_exception: Optional[Any] = field(default=None)
     limit_exceeded_exception: Optional[Any] = field(default=None)
     not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     unauthorized_exception: Optional[Any] = field(default=None)
     

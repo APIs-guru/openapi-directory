@@ -1,52 +1,53 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class UpdateNetworkSwitchStpPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=networkId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=networkId" })
   networkId: string;
 }
 
 
 export class UpdateNetworkSwitchStpRequestBodyStpBridgePriority extends SpeakeasyBase {
-  @Metadata({ data: "json, name=stacks" })
+  @SpeakeasyMetadata({ data: "json, name=stacks" })
   stacks?: string[];
 
-  @Metadata({ data: "json, name=stpPriority" })
+  @SpeakeasyMetadata({ data: "json, name=stpPriority" })
   stpPriority: number;
 
-  @Metadata({ data: "json, name=switchProfiles" })
+  @SpeakeasyMetadata({ data: "json, name=switchProfiles" })
   switchProfiles?: string[];
 
-  @Metadata({ data: "json, name=switches" })
+  @SpeakeasyMetadata({ data: "json, name=switches" })
   switches?: string[];
 }
 
 
 export class UpdateNetworkSwitchStpRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=rstpEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=rstpEnabled" })
   rstpEnabled?: boolean;
 
-  @Metadata({ data: "json, name=stpBridgePriority", elemType: operations.UpdateNetworkSwitchStpRequestBodyStpBridgePriority })
+  @SpeakeasyMetadata({ data: "json, name=stpBridgePriority", elemType: UpdateNetworkSwitchStpRequestBodyStpBridgePriority })
   stpBridgePriority?: UpdateNetworkSwitchStpRequestBodyStpBridgePriority[];
 }
 
 
 export class UpdateNetworkSwitchStpRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: UpdateNetworkSwitchStpPathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request?: UpdateNetworkSwitchStpRequestBody;
 }
 
 
 export class UpdateNetworkSwitchStpResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   updateNetworkSwitchStp200ApplicationJsonObject?: Map<string, any>;
 }

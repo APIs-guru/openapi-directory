@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { MonthlyTransfer } from "./monthlytransfer";
 import { InstancePortInfo } from "./instanceportinfo";
+
 
 
 // InstanceNetworking
@@ -9,9 +9,9 @@ import { InstancePortInfo } from "./instanceportinfo";
  * Describes monthly data transfer rates and port information for an instance.
 **/
 export class InstanceNetworking extends SpeakeasyBase {
-  @Metadata({ data: "json, name=monthlyTransfer" })
+  @SpeakeasyMetadata({ data: "json, name=monthlyTransfer" })
   monthlyTransfer?: MonthlyTransfer;
 
-  @Metadata({ data: "json, name=ports", elemType: shared.InstancePortInfo })
+  @SpeakeasyMetadata({ data: "json, name=ports", elemType: InstancePortInfo })
   ports?: InstancePortInfo[];
 }

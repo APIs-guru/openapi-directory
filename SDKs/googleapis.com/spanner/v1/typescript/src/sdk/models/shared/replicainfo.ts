@@ -1,20 +1,21 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum ReplicaInfoTypeEnum {
-    TypeUnspecified = "TYPE_UNSPECIFIED"
-,    ReadWrite = "READ_WRITE"
-,    ReadOnly = "READ_ONLY"
-,    Witness = "WITNESS"
+    TypeUnspecified = "TYPE_UNSPECIFIED",
+    ReadWrite = "READ_WRITE",
+    ReadOnly = "READ_ONLY",
+    Witness = "WITNESS"
 }
 
 
 export class ReplicaInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=defaultLeaderLocation" })
+  @SpeakeasyMetadata({ data: "json, name=defaultLeaderLocation" })
   defaultLeaderLocation?: boolean;
 
-  @Metadata({ data: "json, name=location" })
+  @SpeakeasyMetadata({ data: "json, name=location" })
   location?: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: ReplicaInfoTypeEnum;
 }

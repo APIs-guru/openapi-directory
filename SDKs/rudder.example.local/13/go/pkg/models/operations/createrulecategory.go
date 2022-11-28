@@ -4,10 +4,6 @@ import (
 	"openapi/pkg/models/shared"
 )
 
-type CreateRuleCategoryRequest struct {
-	Request shared.RuleCategory `request:"mediaType=application/json"`
-}
-
 type CreateRuleCategory200ApplicationJSONActionEnum string
 
 const (
@@ -29,6 +25,10 @@ type CreateRuleCategory200ApplicationJSON struct {
 	Action CreateRuleCategory200ApplicationJSONActionEnum `json:"action"`
 	Data   CreateRuleCategory200ApplicationJSONData       `json:"data"`
 	Result CreateRuleCategory200ApplicationJSONResultEnum `json:"result"`
+}
+
+type CreateRuleCategoryRequest struct {
+	Request shared.RuleCategory `request:"mediaType=application/json"`
 }
 
 type CreateRuleCategoryResponse struct {

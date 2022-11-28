@@ -10,7 +10,7 @@ import (
 	"strings"
 )
 
-var Servers = []string{
+var ServerList = []string{
 	"https://cloud.redhat.com/{basePath}",
 	"http://localhost:{port}/{basePath}",
 }
@@ -20,9 +20,13 @@ type HTTPClient interface {
 }
 
 type SDK struct {
-	defaultClient  HTTPClient
-	securityClient HTTPClient
-	serverURL      string
+	_defaultClient  HTTPClient
+	_securityClient HTTPClient
+	_security       *shared.Security
+	_serverURL      string
+	_language       string
+	_sdkVersion     string
+	_genVersion     string
 }
 
 type SDKOption func(*SDK)
@@ -33,33 +37,56 @@ func WithServerURL(serverURL string, params map[string]string) SDKOption {
 			serverURL = utils.ReplaceParameters(serverURL, params)
 		}
 
-		sdk.serverURL = serverURL
+		sdk._serverURL = serverURL
+	}
+}
+
+func WithClient(client HTTPClient) SDKOption {
+	return func(sdk *SDK) {
+		sdk._defaultClient = client
 	}
 }
 
 func WithSecurity(security shared.Security) SDKOption {
 	return func(sdk *SDK) {
-		sdk.securityClient = utils.CreateSecurityClient(security)
+		sdk._security = &security
 	}
 }
 
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
-		defaultClient:  http.DefaultClient,
-		securityClient: http.DefaultClient,
+		_language:   "go",
+		_sdkVersion: "",
+		_genVersion: "internal",
 	}
 	for _, opt := range opts {
 		opt(sdk)
 	}
-	if sdk.serverURL == "" {
-		sdk.serverURL = Servers[0]
+
+	if sdk._defaultClient == nil {
+		sdk._defaultClient = http.DefaultClient
+	}
+	if sdk._securityClient == nil {
+
+		if sdk._security != nil {
+			sdk._securityClient = utils.ConfigureSecurityClient(sdk._defaultClient, sdk._security)
+		} else {
+			sdk._securityClient = sdk._defaultClient
+		}
+
+	}
+
+	if sdk._serverURL == "" {
+		sdk._serverURL = ServerList[0]
 	}
 
 	return sdk
 }
 
+// AppliedInventoriesTagsForServiceOffering - Invokes computing of ServiceInventories tags for given ServiceOffering
+// Returns an array of inventories tags
 func (s *SDK) AppliedInventoriesTagsForServiceOffering(ctx context.Context, request operations.AppliedInventoriesTagsForServiceOfferingRequest) (*operations.AppliedInventoriesTagsForServiceOfferingResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/service_offerings/{id}/applied_inventories_tags", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -77,7 +104,7 @@ func (s *SDK) AppliedInventoriesTagsForServiceOffering(ctx context.Context, requ
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -108,8 +135,9 @@ func (s *SDK) AppliedInventoriesTagsForServiceOffering(ctx context.Context, requ
 	return res, nil
 }
 
+// GetDocumentation - Return this API document in JSON format
 func (s *SDK) GetDocumentation(ctx context.Context) (*operations.GetDocumentationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/openapi.json"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -117,7 +145,7 @@ func (s *SDK) GetDocumentation(ctx context.Context) (*operations.GetDocumentatio
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -147,8 +175,10 @@ func (s *SDK) GetDocumentation(ctx context.Context) (*operations.GetDocumentatio
 	return res, nil
 }
 
+// IncrementalRefreshSource - Incremental Refresh an existing Source
+// Incremental Refresh a source object
 func (s *SDK) IncrementalRefreshSource(ctx context.Context, request operations.IncrementalRefreshSourceRequest) (*operations.IncrementalRefreshSourceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/sources/{id}/incremental_refresh", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "PATCH", url, nil)
@@ -156,7 +186,7 @@ func (s *SDK) IncrementalRefreshSource(ctx context.Context, request operations.I
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -180,8 +210,10 @@ func (s *SDK) IncrementalRefreshSource(ctx context.Context, request operations.I
 	return res, nil
 }
 
+// ListServiceCredentialTypes - List ServiceCredentialTypes
+// Returns an array of ServiceCredentialType objects
 func (s *SDK) ListServiceCredentialTypes(ctx context.Context, request operations.ListServiceCredentialTypesRequest) (*operations.ListServiceCredentialTypesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/service_credential_types"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -191,7 +223,7 @@ func (s *SDK) ListServiceCredentialTypes(ctx context.Context, request operations
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -221,8 +253,10 @@ func (s *SDK) ListServiceCredentialTypes(ctx context.Context, request operations
 	return res, nil
 }
 
+// ListServiceCredentials - List ServiceCredentials
+// Returns an array of ServiceCredential objects
 func (s *SDK) ListServiceCredentials(ctx context.Context, request operations.ListServiceCredentialsRequest) (*operations.ListServiceCredentialsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/service_credentials"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -232,7 +266,7 @@ func (s *SDK) ListServiceCredentials(ctx context.Context, request operations.Lis
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -262,8 +296,10 @@ func (s *SDK) ListServiceCredentials(ctx context.Context, request operations.Lis
 	return res, nil
 }
 
+// ListServiceInstances - List ServiceInstances
+// Returns an array of ServiceInstance objects
 func (s *SDK) ListServiceInstances(ctx context.Context, request operations.ListServiceInstancesRequest) (*operations.ListServiceInstancesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/service_instances"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -273,7 +309,7 @@ func (s *SDK) ListServiceInstances(ctx context.Context, request operations.ListS
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -303,8 +339,10 @@ func (s *SDK) ListServiceInstances(ctx context.Context, request operations.ListS
 	return res, nil
 }
 
+// ListServiceInventories - List ServiceInventories
+// Returns an array of ServiceInventory objects
 func (s *SDK) ListServiceInventories(ctx context.Context, request operations.ListServiceInventoriesRequest) (*operations.ListServiceInventoriesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/service_inventories"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -314,7 +352,7 @@ func (s *SDK) ListServiceInventories(ctx context.Context, request operations.Lis
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -344,8 +382,10 @@ func (s *SDK) ListServiceInventories(ctx context.Context, request operations.Lis
 	return res, nil
 }
 
+// ListServiceInventoryTags - List Tags for ServiceInventory
+// Returns an array of Tag objects
 func (s *SDK) ListServiceInventoryTags(ctx context.Context, request operations.ListServiceInventoryTagsRequest) (*operations.ListServiceInventoryTagsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/service_inventories/{id}/tags", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -355,7 +395,7 @@ func (s *SDK) ListServiceInventoryTags(ctx context.Context, request operations.L
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -395,8 +435,10 @@ func (s *SDK) ListServiceInventoryTags(ctx context.Context, request operations.L
 	return res, nil
 }
 
+// ListServiceOfferingNodes - List ServiceOfferingNodes
+// Returns an array of ServiceOfferingNode objects
 func (s *SDK) ListServiceOfferingNodes(ctx context.Context, request operations.ListServiceOfferingNodesRequest) (*operations.ListServiceOfferingNodesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/service_offering_nodes"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -406,7 +448,7 @@ func (s *SDK) ListServiceOfferingNodes(ctx context.Context, request operations.L
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -436,8 +478,10 @@ func (s *SDK) ListServiceOfferingNodes(ctx context.Context, request operations.L
 	return res, nil
 }
 
+// ListServiceOfferingServiceInstances - List ServiceInstances for ServiceOffering
+// Returns an array of ServiceInstance objects
 func (s *SDK) ListServiceOfferingServiceInstances(ctx context.Context, request operations.ListServiceOfferingServiceInstancesRequest) (*operations.ListServiceOfferingServiceInstancesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/service_offerings/{id}/service_instances", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -447,7 +491,7 @@ func (s *SDK) ListServiceOfferingServiceInstances(ctx context.Context, request o
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -487,8 +531,10 @@ func (s *SDK) ListServiceOfferingServiceInstances(ctx context.Context, request o
 	return res, nil
 }
 
+// ListServiceOfferingServiceOfferingNodes - List ServiceOfferingNodes for ServiceOffering
+// Returns an array of ServiceOfferingNode objects
 func (s *SDK) ListServiceOfferingServiceOfferingNodes(ctx context.Context, request operations.ListServiceOfferingServiceOfferingNodesRequest) (*operations.ListServiceOfferingServiceOfferingNodesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/service_offerings/{id}/service_offering_nodes", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -498,7 +544,7 @@ func (s *SDK) ListServiceOfferingServiceOfferingNodes(ctx context.Context, reque
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -538,8 +584,10 @@ func (s *SDK) ListServiceOfferingServiceOfferingNodes(ctx context.Context, reque
 	return res, nil
 }
 
+// ListServiceOfferingServicePlans - List ServicePlans for ServiceOffering
+// Returns an array of ServicePlan objects
 func (s *SDK) ListServiceOfferingServicePlans(ctx context.Context, request operations.ListServiceOfferingServicePlansRequest) (*operations.ListServiceOfferingServicePlansResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/service_offerings/{id}/service_plans", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -549,7 +597,7 @@ func (s *SDK) ListServiceOfferingServicePlans(ctx context.Context, request opera
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -589,8 +637,10 @@ func (s *SDK) ListServiceOfferingServicePlans(ctx context.Context, request opera
 	return res, nil
 }
 
+// ListServiceOfferings - List ServiceOfferings
+// Returns an array of ServiceOffering objects
 func (s *SDK) ListServiceOfferings(ctx context.Context, request operations.ListServiceOfferingsRequest) (*operations.ListServiceOfferingsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/service_offerings"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -600,7 +650,7 @@ func (s *SDK) ListServiceOfferings(ctx context.Context, request operations.ListS
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -630,8 +680,10 @@ func (s *SDK) ListServiceOfferings(ctx context.Context, request operations.ListS
 	return res, nil
 }
 
+// ListServicePlans - List ServicePlans
+// Returns an array of ServicePlan objects
 func (s *SDK) ListServicePlans(ctx context.Context, request operations.ListServicePlansRequest) (*operations.ListServicePlansResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/service_plans"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -641,7 +693,7 @@ func (s *SDK) ListServicePlans(ctx context.Context, request operations.ListServi
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -671,8 +723,10 @@ func (s *SDK) ListServicePlans(ctx context.Context, request operations.ListServi
 	return res, nil
 }
 
+// ListSourceServiceInstances - List ServiceInstances for Source
+// Returns an array of ServiceInstance objects
 func (s *SDK) ListSourceServiceInstances(ctx context.Context, request operations.ListSourceServiceInstancesRequest) (*operations.ListSourceServiceInstancesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/sources/{id}/service_instances", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -682,7 +736,7 @@ func (s *SDK) ListSourceServiceInstances(ctx context.Context, request operations
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -722,8 +776,10 @@ func (s *SDK) ListSourceServiceInstances(ctx context.Context, request operations
 	return res, nil
 }
 
+// ListSourceServiceInventories - List ServiceInventories for Source
+// Returns an array of ServiceInventory objects
 func (s *SDK) ListSourceServiceInventories(ctx context.Context, request operations.ListSourceServiceInventoriesRequest) (*operations.ListSourceServiceInventoriesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/sources/{id}/service_inventories", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -733,7 +789,7 @@ func (s *SDK) ListSourceServiceInventories(ctx context.Context, request operatio
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -773,8 +829,10 @@ func (s *SDK) ListSourceServiceInventories(ctx context.Context, request operatio
 	return res, nil
 }
 
+// ListSourceServiceOfferingNodes - List ServiceOfferingNodes for Source
+// Returns an array of ServiceOfferingNode objects
 func (s *SDK) ListSourceServiceOfferingNodes(ctx context.Context, request operations.ListSourceServiceOfferingNodesRequest) (*operations.ListSourceServiceOfferingNodesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/sources/{id}/service_offering_nodes", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -784,7 +842,7 @@ func (s *SDK) ListSourceServiceOfferingNodes(ctx context.Context, request operat
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -824,8 +882,10 @@ func (s *SDK) ListSourceServiceOfferingNodes(ctx context.Context, request operat
 	return res, nil
 }
 
+// ListSourceServiceOfferings - List ServiceOfferings for Source
+// Returns an array of ServiceOffering objects
 func (s *SDK) ListSourceServiceOfferings(ctx context.Context, request operations.ListSourceServiceOfferingsRequest) (*operations.ListSourceServiceOfferingsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/sources/{id}/service_offerings", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -835,7 +895,7 @@ func (s *SDK) ListSourceServiceOfferings(ctx context.Context, request operations
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -875,8 +935,10 @@ func (s *SDK) ListSourceServiceOfferings(ctx context.Context, request operations
 	return res, nil
 }
 
+// ListSourceServicePlans - List ServicePlans for Source
+// Returns an array of ServicePlan objects
 func (s *SDK) ListSourceServicePlans(ctx context.Context, request operations.ListSourceServicePlansRequest) (*operations.ListSourceServicePlansResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/sources/{id}/service_plans", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -886,7 +948,7 @@ func (s *SDK) ListSourceServicePlans(ctx context.Context, request operations.Lis
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -926,8 +988,10 @@ func (s *SDK) ListSourceServicePlans(ctx context.Context, request operations.Lis
 	return res, nil
 }
 
+// ListSourceTasks - List Tasks for Source
+// Returns an array of Task objects
 func (s *SDK) ListSourceTasks(ctx context.Context, request operations.ListSourceTasksRequest) (*operations.ListSourceTasksResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/sources/{id}/tasks", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -937,7 +1001,7 @@ func (s *SDK) ListSourceTasks(ctx context.Context, request operations.ListSource
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -977,8 +1041,10 @@ func (s *SDK) ListSourceTasks(ctx context.Context, request operations.ListSource
 	return res, nil
 }
 
+// ListSources - List Sources
+// Returns an array of Source objects
 func (s *SDK) ListSources(ctx context.Context, request operations.ListSourcesRequest) (*operations.ListSourcesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/sources"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -988,7 +1054,7 @@ func (s *SDK) ListSources(ctx context.Context, request operations.ListSourcesReq
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1018,8 +1084,10 @@ func (s *SDK) ListSources(ctx context.Context, request operations.ListSourcesReq
 	return res, nil
 }
 
+// ListTags - List Tags
+// Returns an array of Tag objects
 func (s *SDK) ListTags(ctx context.Context, request operations.ListTagsRequest) (*operations.ListTagsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/tags"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1029,7 +1097,7 @@ func (s *SDK) ListTags(ctx context.Context, request operations.ListTagsRequest) 
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1059,8 +1127,10 @@ func (s *SDK) ListTags(ctx context.Context, request operations.ListTagsRequest) 
 	return res, nil
 }
 
+// ListTasks - List Tasks
+// Returns an array of Task objects
 func (s *SDK) ListTasks(ctx context.Context, request operations.ListTasksRequest) (*operations.ListTasksResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/tasks"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1070,7 +1140,7 @@ func (s *SDK) ListTasks(ctx context.Context, request operations.ListTasksRequest
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1100,8 +1170,10 @@ func (s *SDK) ListTasks(ctx context.Context, request operations.ListTasksRequest
 	return res, nil
 }
 
+// OrderServiceOffering - Order an existing ServiceOffering
+// Returns a Task id
 func (s *SDK) OrderServiceOffering(ctx context.Context, request operations.OrderServiceOfferingRequest) (*operations.OrderServiceOfferingResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/service_offerings/{id}/order", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1119,7 +1191,7 @@ func (s *SDK) OrderServiceOffering(ctx context.Context, request operations.Order
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1150,8 +1222,10 @@ func (s *SDK) OrderServiceOffering(ctx context.Context, request operations.Order
 	return res, nil
 }
 
+// PostGraphQl - Perform a GraphQL Query
+// Performs a GraphQL Query
 func (s *SDK) PostGraphQl(ctx context.Context, request operations.PostGraphQlRequest) (*operations.PostGraphQlResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/graphql"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1169,7 +1243,7 @@ func (s *SDK) PostGraphQl(ctx context.Context, request operations.PostGraphQlReq
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1199,8 +1273,10 @@ func (s *SDK) PostGraphQl(ctx context.Context, request operations.PostGraphQlReq
 	return res, nil
 }
 
+// RefreshSource -  Refresh an existing Source
+// Refresh a source object
 func (s *SDK) RefreshSource(ctx context.Context, request operations.RefreshSourceRequest) (*operations.RefreshSourceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/sources/{id}/refresh", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "PATCH", url, nil)
@@ -1208,7 +1284,7 @@ func (s *SDK) RefreshSource(ctx context.Context, request operations.RefreshSourc
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1232,8 +1308,10 @@ func (s *SDK) RefreshSource(ctx context.Context, request operations.RefreshSourc
 	return res, nil
 }
 
+// ShowServiceCredential - Show an existing ServiceCredential
+// Returns a ServiceCredential object
 func (s *SDK) ShowServiceCredential(ctx context.Context, request operations.ShowServiceCredentialRequest) (*operations.ShowServiceCredentialResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/service_credentials/{id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1241,7 +1319,7 @@ func (s *SDK) ShowServiceCredential(ctx context.Context, request operations.Show
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1281,8 +1359,10 @@ func (s *SDK) ShowServiceCredential(ctx context.Context, request operations.Show
 	return res, nil
 }
 
+// ShowServiceCredentialType - Show an existing ServiceCredentialType
+// Returns a ServiceCredentialType object
 func (s *SDK) ShowServiceCredentialType(ctx context.Context, request operations.ShowServiceCredentialTypeRequest) (*operations.ShowServiceCredentialTypeResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/service_credential_types/{id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1290,7 +1370,7 @@ func (s *SDK) ShowServiceCredentialType(ctx context.Context, request operations.
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1330,8 +1410,10 @@ func (s *SDK) ShowServiceCredentialType(ctx context.Context, request operations.
 	return res, nil
 }
 
+// ShowServiceInstance - Show an existing ServiceInstance
+// Returns a ServiceInstance object
 func (s *SDK) ShowServiceInstance(ctx context.Context, request operations.ShowServiceInstanceRequest) (*operations.ShowServiceInstanceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/service_instances/{id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1339,7 +1421,7 @@ func (s *SDK) ShowServiceInstance(ctx context.Context, request operations.ShowSe
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1379,8 +1461,10 @@ func (s *SDK) ShowServiceInstance(ctx context.Context, request operations.ShowSe
 	return res, nil
 }
 
+// ShowServiceInventory - Show an existing ServiceInventory
+// Returns a ServiceInventory object
 func (s *SDK) ShowServiceInventory(ctx context.Context, request operations.ShowServiceInventoryRequest) (*operations.ShowServiceInventoryResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/service_inventories/{id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1388,7 +1472,7 @@ func (s *SDK) ShowServiceInventory(ctx context.Context, request operations.ShowS
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1428,8 +1512,10 @@ func (s *SDK) ShowServiceInventory(ctx context.Context, request operations.ShowS
 	return res, nil
 }
 
+// ShowServiceOffering - Show an existing ServiceOffering
+// Returns a ServiceOffering object
 func (s *SDK) ShowServiceOffering(ctx context.Context, request operations.ShowServiceOfferingRequest) (*operations.ShowServiceOfferingResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/service_offerings/{id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1437,7 +1523,7 @@ func (s *SDK) ShowServiceOffering(ctx context.Context, request operations.ShowSe
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1477,8 +1563,10 @@ func (s *SDK) ShowServiceOffering(ctx context.Context, request operations.ShowSe
 	return res, nil
 }
 
+// ShowServiceOfferingNode - Show an existing ServiceOfferingNode
+// Returns a ServiceOfferingNode object
 func (s *SDK) ShowServiceOfferingNode(ctx context.Context, request operations.ShowServiceOfferingNodeRequest) (*operations.ShowServiceOfferingNodeResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/service_offering_nodes/{id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1486,7 +1574,7 @@ func (s *SDK) ShowServiceOfferingNode(ctx context.Context, request operations.Sh
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1526,8 +1614,10 @@ func (s *SDK) ShowServiceOfferingNode(ctx context.Context, request operations.Sh
 	return res, nil
 }
 
+// ShowServicePlan - Show an existing ServicePlan
+// Returns a ServicePlan object
 func (s *SDK) ShowServicePlan(ctx context.Context, request operations.ShowServicePlanRequest) (*operations.ShowServicePlanResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/service_plans/{id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1535,7 +1625,7 @@ func (s *SDK) ShowServicePlan(ctx context.Context, request operations.ShowServic
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1575,8 +1665,10 @@ func (s *SDK) ShowServicePlan(ctx context.Context, request operations.ShowServic
 	return res, nil
 }
 
+// ShowSource - Show an existing Source
+// Returns a Source object
 func (s *SDK) ShowSource(ctx context.Context, request operations.ShowSourceRequest) (*operations.ShowSourceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/sources/{id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1584,7 +1676,7 @@ func (s *SDK) ShowSource(ctx context.Context, request operations.ShowSourceReque
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1624,8 +1716,10 @@ func (s *SDK) ShowSource(ctx context.Context, request operations.ShowSourceReque
 	return res, nil
 }
 
+// ShowTask - Show an existing Task
+// Returns a Task object
 func (s *SDK) ShowTask(ctx context.Context, request operations.ShowTaskRequest) (*operations.ShowTaskResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/tasks/{id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1633,7 +1727,7 @@ func (s *SDK) ShowTask(ctx context.Context, request operations.ShowTaskRequest) 
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1673,8 +1767,10 @@ func (s *SDK) ShowTask(ctx context.Context, request operations.ShowTaskRequest) 
 	return res, nil
 }
 
+// TagServiceInventory - Tag a ServiceInventory
+// Tags a ServiceInventory object
 func (s *SDK) TagServiceInventory(ctx context.Context, request operations.TagServiceInventoryRequest) (*operations.TagServiceInventoryResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/service_inventories/{id}/tag", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1692,7 +1788,7 @@ func (s *SDK) TagServiceInventory(ctx context.Context, request operations.TagSer
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1723,8 +1819,10 @@ func (s *SDK) TagServiceInventory(ctx context.Context, request operations.TagSer
 	return res, nil
 }
 
+// UntagServiceInventory - Untag a ServiceInventory
+// Untags a ServiceInventory object
 func (s *SDK) UntagServiceInventory(ctx context.Context, request operations.UntagServiceInventoryRequest) (*operations.UntagServiceInventoryResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/service_inventories/{id}/untag", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1742,7 +1840,7 @@ func (s *SDK) UntagServiceInventory(ctx context.Context, request operations.Unta
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1763,8 +1861,10 @@ func (s *SDK) UntagServiceInventory(ctx context.Context, request operations.Unta
 	return res, nil
 }
 
+// UpdateTask - Update an existing Task
+// Updates a Task object
 func (s *SDK) UpdateTask(ctx context.Context, request operations.UpdateTaskRequest) (*operations.UpdateTaskResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/tasks/{id}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1782,7 +1882,7 @@ func (s *SDK) UpdateTask(ctx context.Context, request operations.UpdateTaskReque
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {

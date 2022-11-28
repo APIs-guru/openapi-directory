@@ -20,6 +20,8 @@ type UpdateRouteHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// UpdateRouteRequestBodySpec
+// An object representing the specification of a route.
 type UpdateRouteRequestBodySpec struct {
 	HTTPRoute *shared.HTTPRoute `json:"httpRoute,omitempty"`
 }

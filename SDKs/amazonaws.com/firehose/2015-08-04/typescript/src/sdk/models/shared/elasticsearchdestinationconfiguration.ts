@@ -1,4 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ElasticsearchBufferingHints } from "./elasticsearchbufferinghints";
 import { CloudWatchLoggingOptions } from "./cloudwatchloggingoptions";
 import { ElasticsearchIndexRotationPeriodEnum } from "./elasticsearchindexrotationperiodenum";
@@ -9,47 +9,48 @@ import { S3DestinationConfiguration } from "./s3destinationconfiguration";
 import { VpcConfiguration } from "./vpcconfiguration";
 
 
+
 // ElasticsearchDestinationConfiguration
 /** 
  * Describes the configuration of a destination in Amazon ES.
 **/
 export class ElasticsearchDestinationConfiguration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=BufferingHints" })
+  @SpeakeasyMetadata({ data: "json, name=BufferingHints" })
   bufferingHints?: ElasticsearchBufferingHints;
 
-  @Metadata({ data: "json, name=CloudWatchLoggingOptions" })
+  @SpeakeasyMetadata({ data: "json, name=CloudWatchLoggingOptions" })
   cloudWatchLoggingOptions?: CloudWatchLoggingOptions;
 
-  @Metadata({ data: "json, name=ClusterEndpoint" })
+  @SpeakeasyMetadata({ data: "json, name=ClusterEndpoint" })
   clusterEndpoint?: string;
 
-  @Metadata({ data: "json, name=DomainARN" })
+  @SpeakeasyMetadata({ data: "json, name=DomainARN" })
   domainArn?: string;
 
-  @Metadata({ data: "json, name=IndexName" })
+  @SpeakeasyMetadata({ data: "json, name=IndexName" })
   indexName: string;
 
-  @Metadata({ data: "json, name=IndexRotationPeriod" })
+  @SpeakeasyMetadata({ data: "json, name=IndexRotationPeriod" })
   indexRotationPeriod?: ElasticsearchIndexRotationPeriodEnum;
 
-  @Metadata({ data: "json, name=ProcessingConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=ProcessingConfiguration" })
   processingConfiguration?: ProcessingConfiguration;
 
-  @Metadata({ data: "json, name=RetryOptions" })
+  @SpeakeasyMetadata({ data: "json, name=RetryOptions" })
   retryOptions?: ElasticsearchRetryOptions;
 
-  @Metadata({ data: "json, name=RoleARN" })
+  @SpeakeasyMetadata({ data: "json, name=RoleARN" })
   roleArn: string;
 
-  @Metadata({ data: "json, name=S3BackupMode" })
+  @SpeakeasyMetadata({ data: "json, name=S3BackupMode" })
   s3BackupMode?: ElasticsearchS3BackupModeEnum;
 
-  @Metadata({ data: "json, name=S3Configuration" })
+  @SpeakeasyMetadata({ data: "json, name=S3Configuration" })
   s3Configuration: S3DestinationConfiguration;
 
-  @Metadata({ data: "json, name=TypeName" })
+  @SpeakeasyMetadata({ data: "json, name=TypeName" })
   typeName?: string;
 
-  @Metadata({ data: "json, name=VpcConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=VpcConfiguration" })
   vpcConfiguration?: VpcConfiguration;
 }

@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import embeddedchart
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class AddChartResponse:
-    chart: Optional[embeddedchart.EmbeddedChart] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'chart' }})
+    r"""AddChartResponse
+    The result of adding a chart to a spreadsheet.
+    """
+    
+    chart: Optional[EmbeddedChart] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('chart') }})
     

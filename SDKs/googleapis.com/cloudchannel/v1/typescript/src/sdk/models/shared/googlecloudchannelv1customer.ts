@@ -1,7 +1,41 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import { GoogleCloudChannelV1CloudIdentityInfo } from "./googlecloudchannelv1cloudidentityinfo";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { GoogleCloudChannelV1CloudIdentityInfoInput } from "./googlecloudchannelv1cloudidentityinfo";
 import { GoogleTypePostalAddress } from "./googletypepostaladdress";
+import { GoogleCloudChannelV1ContactInfoInput } from "./googlecloudchannelv1contactinfo";
+import { GoogleCloudChannelV1CloudIdentityInfo } from "./googlecloudchannelv1cloudidentityinfo";
 import { GoogleCloudChannelV1ContactInfo } from "./googlecloudchannelv1contactinfo";
+
+
+
+// GoogleCloudChannelV1CustomerInput
+/** 
+ * Entity representing a customer of a reseller or distributor.
+**/
+export class GoogleCloudChannelV1CustomerInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=alternateEmail" })
+  alternateEmail?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=channelPartnerId" })
+  channelPartnerId?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=cloudIdentityInfo" })
+  cloudIdentityInfo?: GoogleCloudChannelV1CloudIdentityInfoInput;
+
+  @SpeakeasyMetadata({ data: "json, name=domain" })
+  domain?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=languageCode" })
+  languageCode?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=orgDisplayName" })
+  orgDisplayName?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=orgPostalAddress" })
+  orgPostalAddress?: GoogleTypePostalAddress;
+
+  @SpeakeasyMetadata({ data: "json, name=primaryContactInfo" })
+  primaryContactInfo?: GoogleCloudChannelV1ContactInfoInput;
+}
 
 
 // GoogleCloudChannelV1Customer
@@ -9,39 +43,39 @@ import { GoogleCloudChannelV1ContactInfo } from "./googlecloudchannelv1contactin
  * Entity representing a customer of a reseller or distributor.
 **/
 export class GoogleCloudChannelV1Customer extends SpeakeasyBase {
-  @Metadata({ data: "json, name=alternateEmail" })
+  @SpeakeasyMetadata({ data: "json, name=alternateEmail" })
   alternateEmail?: string;
 
-  @Metadata({ data: "json, name=channelPartnerId" })
+  @SpeakeasyMetadata({ data: "json, name=channelPartnerId" })
   channelPartnerId?: string;
 
-  @Metadata({ data: "json, name=cloudIdentityId" })
+  @SpeakeasyMetadata({ data: "json, name=cloudIdentityId" })
   cloudIdentityId?: string;
 
-  @Metadata({ data: "json, name=cloudIdentityInfo" })
+  @SpeakeasyMetadata({ data: "json, name=cloudIdentityInfo" })
   cloudIdentityInfo?: GoogleCloudChannelV1CloudIdentityInfo;
 
-  @Metadata({ data: "json, name=createTime" })
+  @SpeakeasyMetadata({ data: "json, name=createTime" })
   createTime?: string;
 
-  @Metadata({ data: "json, name=domain" })
+  @SpeakeasyMetadata({ data: "json, name=domain" })
   domain?: string;
 
-  @Metadata({ data: "json, name=languageCode" })
+  @SpeakeasyMetadata({ data: "json, name=languageCode" })
   languageCode?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=orgDisplayName" })
+  @SpeakeasyMetadata({ data: "json, name=orgDisplayName" })
   orgDisplayName?: string;
 
-  @Metadata({ data: "json, name=orgPostalAddress" })
+  @SpeakeasyMetadata({ data: "json, name=orgPostalAddress" })
   orgPostalAddress?: GoogleTypePostalAddress;
 
-  @Metadata({ data: "json, name=primaryContactInfo" })
+  @SpeakeasyMetadata({ data: "json, name=primaryContactInfo" })
   primaryContactInfo?: GoogleCloudChannelV1ContactInfo;
 
-  @Metadata({ data: "json, name=updateTime" })
+  @SpeakeasyMetadata({ data: "json, name=updateTime" })
   updateTime?: string;
 }

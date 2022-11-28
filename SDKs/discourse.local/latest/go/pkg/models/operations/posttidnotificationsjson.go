@@ -22,14 +22,14 @@ type PostTIDNotificationsJSONRequestBody struct {
 	NotificationLevel PostTIDNotificationsJSONRequestBodyNotificationLevelEnum `json:"notification_level"`
 }
 
+type PostTIDNotificationsJSON200ApplicationJSON struct {
+	Success *string `json:"success,omitempty"`
+}
+
 type PostTIDNotificationsJSONRequest struct {
 	PathParams PostTIDNotificationsJSONPathParams
 	Headers    PostTIDNotificationsJSONHeaders
 	Request    *PostTIDNotificationsJSONRequestBody `request:"mediaType=application/json"`
-}
-
-type PostTIDNotificationsJSON200ApplicationJSON struct {
-	Success *string `json:"success,omitempty"`
 }
 
 type PostTIDNotificationsJSONResponse struct {

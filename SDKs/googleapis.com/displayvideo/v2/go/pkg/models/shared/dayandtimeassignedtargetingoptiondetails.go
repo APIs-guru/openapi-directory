@@ -21,6 +21,8 @@ const (
 	DayAndTimeAssignedTargetingOptionDetailsTimeZoneResolutionEnumTimeZoneResolutionAdvertiser  DayAndTimeAssignedTargetingOptionDetailsTimeZoneResolutionEnum = "TIME_ZONE_RESOLUTION_ADVERTISER"
 )
 
+// DayAndTimeAssignedTargetingOptionDetails
+// Representation of a segment of time defined on a specific day of the week and with a start and end time. The time represented by `start_hour` must be before the time represented by `end_hour`.
 type DayAndTimeAssignedTargetingOptionDetails struct {
 	DayOfWeek          *DayAndTimeAssignedTargetingOptionDetailsDayOfWeekEnum          `json:"dayOfWeek,omitempty"`
 	EndHour            *int32                                                          `json:"endHour,omitempty"`

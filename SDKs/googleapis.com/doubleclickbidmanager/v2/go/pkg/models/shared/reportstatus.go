@@ -18,6 +18,8 @@ const (
 	ReportStatusStateEnumFailed           ReportStatusStateEnum = "FAILED"
 )
 
+// ReportStatus
+// Report status.
 type ReportStatus struct {
 	FinishTime *string                 `json:"finishTime,omitempty"`
 	Format     *ReportStatusFormatEnum `json:"format,omitempty"`

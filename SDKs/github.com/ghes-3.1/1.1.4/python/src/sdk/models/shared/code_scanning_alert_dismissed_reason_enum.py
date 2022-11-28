@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class CodeScanningAlertDismissedReasonEnum(str, Enum):
     MAP_DOLLAR_REF_NUMBER_COMPONENTS_SCHEMAS_SECRET_SCANNING_ALERT_RESOLUTION_ENUM_0_ = "map[$ref:#/components/schemas/secret-scanning-alert-resolution/enum/0]"

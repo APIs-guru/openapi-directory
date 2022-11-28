@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// StandardsControl
+// Details for an individual security standard control.
 type StandardsControl struct {
 	ControlID              *string             `json:"ControlId,omitempty"`
 	ControlStatus          *ControlStatusEnum  `json:"ControlStatus,omitempty"`

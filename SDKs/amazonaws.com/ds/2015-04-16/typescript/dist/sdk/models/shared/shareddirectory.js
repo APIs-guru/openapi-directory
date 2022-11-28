@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ShareMethodEnum } from "./sharemethodenum";
 import { ShareStatusEnum } from "./sharestatusenum";
 // SharedDirectory
@@ -35,39 +35,39 @@ var SharedDirectory = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=CreatedDateTime" }),
+        SpeakeasyMetadata({ data: "json, name=CreatedDateTime" }),
         __metadata("design:type", Date)
     ], SharedDirectory.prototype, "createdDateTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=LastUpdatedDateTime" }),
+        SpeakeasyMetadata({ data: "json, name=LastUpdatedDateTime" }),
         __metadata("design:type", Date)
     ], SharedDirectory.prototype, "lastUpdatedDateTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=OwnerAccountId" }),
+        SpeakeasyMetadata({ data: "json, name=OwnerAccountId" }),
         __metadata("design:type", String)
     ], SharedDirectory.prototype, "ownerAccountId", void 0);
     __decorate([
-        Metadata({ data: "json, name=OwnerDirectoryId" }),
+        SpeakeasyMetadata({ data: "json, name=OwnerDirectoryId" }),
         __metadata("design:type", String)
     ], SharedDirectory.prototype, "ownerDirectoryId", void 0);
     __decorate([
-        Metadata({ data: "json, name=ShareMethod" }),
+        SpeakeasyMetadata({ data: "json, name=ShareMethod" }),
         __metadata("design:type", String)
     ], SharedDirectory.prototype, "shareMethod", void 0);
     __decorate([
-        Metadata({ data: "json, name=ShareNotes" }),
+        SpeakeasyMetadata({ data: "json, name=ShareNotes" }),
         __metadata("design:type", String)
     ], SharedDirectory.prototype, "shareNotes", void 0);
     __decorate([
-        Metadata({ data: "json, name=ShareStatus" }),
+        SpeakeasyMetadata({ data: "json, name=ShareStatus" }),
         __metadata("design:type", String)
     ], SharedDirectory.prototype, "shareStatus", void 0);
     __decorate([
-        Metadata({ data: "json, name=SharedAccountId" }),
+        SpeakeasyMetadata({ data: "json, name=SharedAccountId" }),
         __metadata("design:type", String)
     ], SharedDirectory.prototype, "sharedAccountId", void 0);
     __decorate([
-        Metadata({ data: "json, name=SharedDirectoryId" }),
+        SpeakeasyMetadata({ data: "json, name=SharedDirectoryId" }),
         __metadata("design:type", String)
     ], SharedDirectory.prototype, "sharedDirectoryId", void 0);
     return SharedDirectory;

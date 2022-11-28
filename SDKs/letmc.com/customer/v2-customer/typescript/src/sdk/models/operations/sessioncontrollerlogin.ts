@@ -1,46 +1,47 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class SessionControllerLoginPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=shortName" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=shortName" })
   shortName: string;
 }
 
 
 export class SessionControllerLoginQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=password" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=password" })
   password: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=username" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=username" })
   username: string;
 }
 
 
 export class SessionControllerLoginRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: SessionControllerLoginPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: SessionControllerLoginQueryParams;
 }
 
 
 export class SessionControllerLoginResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   sessionControllerLogin200ApplicationJsonString?: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   sessionControllerLogin200ApplicationXmlString?: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   sessionControllerLogin200TextJsonString?: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   sessionControllerLogin200TextXmlString?: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

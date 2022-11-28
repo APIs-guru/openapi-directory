@@ -22,18 +22,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var DeleteOrganizationMemberPathParams = /** @class */ (function (_super) {
     __extends(DeleteOrganizationMemberPathParams, _super);
     function DeleteOrganizationMemberPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=organizationId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=organizationId" }),
         __metadata("design:type", String)
     ], DeleteOrganizationMemberPathParams.prototype, "organizationId", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=userId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=userId" }),
         __metadata("design:type", String)
     ], DeleteOrganizationMemberPathParams.prototype, "userId", void 0);
     return DeleteOrganizationMemberPathParams;
@@ -45,7 +45,7 @@ var DeleteOrganizationMemberRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", DeleteOrganizationMemberPathParams)
     ], DeleteOrganizationMemberRequest.prototype, "pathParams", void 0);
     return DeleteOrganizationMemberRequest;
@@ -57,11 +57,11 @@ var DeleteOrganizationMemberResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], DeleteOrganizationMemberResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], DeleteOrganizationMemberResponse.prototype, "statusCode", void 0);
     return DeleteOrganizationMemberResponse;

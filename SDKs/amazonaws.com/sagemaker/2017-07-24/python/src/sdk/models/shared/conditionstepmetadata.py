@@ -1,11 +1,17 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import conditionoutcome_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ConditionStepMetadata:
-    outcome: Optional[conditionoutcome_enum.ConditionOutcomeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Outcome' }})
+    r"""ConditionStepMetadata
+    Metadata for a Condition step.
+    """
+    
+    outcome: Optional[ConditionOutcomeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Outcome') }})
     

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // S3Reference
 /**
  * <p>Amazon S3 object representing the updated message content, in MIME format.</p> <note> <p>The region for the S3 bucket containing the S3 object must match the region used for WorkMail operations. Also, for WorkMail to process an S3 object, it must have permission to access that object. For more information, see <a href="https://docs.aws.amazon.com/workmail/latest/adminguide/update-with-lambda.html"> Updating message content with AWS Lambda</a>.</p> </note>
@@ -33,15 +33,15 @@ var S3Reference = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=bucket" }),
+        SpeakeasyMetadata({ data: "json, name=bucket" }),
         __metadata("design:type", String)
     ], S3Reference.prototype, "bucket", void 0);
     __decorate([
-        Metadata({ data: "json, name=key" }),
+        SpeakeasyMetadata({ data: "json, name=key" }),
         __metadata("design:type", String)
     ], S3Reference.prototype, "key", void 0);
     __decorate([
-        Metadata({ data: "json, name=objectVersion" }),
+        SpeakeasyMetadata({ data: "json, name=objectVersion" }),
         __metadata("design:type", String)
     ], S3Reference.prototype, "objectVersion", void 0);
     return S3Reference;

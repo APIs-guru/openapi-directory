@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum,List
+from enum import Enum
 
 class UserAPIPostRefreshEntryEditEntryTypeEnum(str, Enum):
     UNDEFINED = "Undefined"
@@ -18,17 +18,17 @@ class UserAPIPostRefreshEntryEditEntryTypeEnum(str, Enum):
 
 @dataclass
 class UserAPIPostRefreshEntryEditQueryParams:
-    entry_id: int = field(default=None, metadata={'query_param': { 'field_name': 'entryId', 'style': 'form', 'explode': True }})
-    entry_type: UserAPIPostRefreshEntryEditEntryTypeEnum = field(default=None, metadata={'query_param': { 'field_name': 'entryType', 'style': 'form', 'explode': True }})
+    entry_id: int = field(metadata={'query_param': { 'field_name': 'entryId', 'style': 'form', 'explode': True }})
+    entry_type: UserAPIPostRefreshEntryEditEntryTypeEnum = field(metadata={'query_param': { 'field_name': 'entryType', 'style': 'form', 'explode': True }})
     
 
 @dataclass
 class UserAPIPostRefreshEntryEditRequest:
-    query_params: UserAPIPostRefreshEntryEditQueryParams = field(default=None)
+    query_params: UserAPIPostRefreshEntryEditQueryParams = field()
     
 
 @dataclass
 class UserAPIPostRefreshEntryEditResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

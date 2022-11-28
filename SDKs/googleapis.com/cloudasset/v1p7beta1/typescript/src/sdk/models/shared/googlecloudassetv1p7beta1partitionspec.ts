@@ -1,9 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum GoogleCloudAssetV1p7beta1PartitionSpecPartitionKeyEnum {
-    PartitionKeyUnspecified = "PARTITION_KEY_UNSPECIFIED"
-,    ReadTime = "READ_TIME"
-,    RequestTime = "REQUEST_TIME"
+    PartitionKeyUnspecified = "PARTITION_KEY_UNSPECIFIED",
+    ReadTime = "READ_TIME",
+    RequestTime = "REQUEST_TIME"
 }
 
 
@@ -12,6 +13,6 @@ export enum GoogleCloudAssetV1p7beta1PartitionSpecPartitionKeyEnum {
  * Specifications of BigQuery partitioned table as export destination.
 **/
 export class GoogleCloudAssetV1p7beta1PartitionSpec extends SpeakeasyBase {
-  @Metadata({ data: "json, name=partitionKey" })
+  @SpeakeasyMetadata({ data: "json, name=partitionKey" })
   partitionKey?: GoogleCloudAssetV1p7beta1PartitionSpecPartitionKeyEnum;
 }

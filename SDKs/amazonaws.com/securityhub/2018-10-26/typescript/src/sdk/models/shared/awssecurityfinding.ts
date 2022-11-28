@@ -1,5 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Action } from "./action";
 import { Compliance } from "./compliance";
 import { FindingProviderFields } from "./findingproviderfields";
@@ -21,125 +20,126 @@ import { Workflow } from "./workflow";
 import { WorkflowStateEnum } from "./workflowstateenum";
 
 
+
 // AwsSecurityFinding
 /** 
  * <p>Provides consistent format for the contents of the Security Hub-aggregated findings. <code>AwsSecurityFinding</code> format enables you to share findings between Amazon Web Services security services and third-party solutions, and security standards checks.</p> <note> <p>A finding is a potential security issue generated either by Amazon Web Services services or by the integrated third-party solutions and standards checks.</p> </note>
 **/
 export class AwsSecurityFinding extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Action" })
+  @SpeakeasyMetadata({ data: "json, name=Action" })
   action?: Action;
 
-  @Metadata({ data: "json, name=AwsAccountId" })
+  @SpeakeasyMetadata({ data: "json, name=AwsAccountId" })
   awsAccountId: string;
 
-  @Metadata({ data: "json, name=CompanyName" })
+  @SpeakeasyMetadata({ data: "json, name=CompanyName" })
   companyName?: string;
 
-  @Metadata({ data: "json, name=Compliance" })
+  @SpeakeasyMetadata({ data: "json, name=Compliance" })
   compliance?: Compliance;
 
-  @Metadata({ data: "json, name=Confidence" })
+  @SpeakeasyMetadata({ data: "json, name=Confidence" })
   confidence?: number;
 
-  @Metadata({ data: "json, name=CreatedAt" })
+  @SpeakeasyMetadata({ data: "json, name=CreatedAt" })
   createdAt: string;
 
-  @Metadata({ data: "json, name=Criticality" })
+  @SpeakeasyMetadata({ data: "json, name=Criticality" })
   criticality?: number;
 
-  @Metadata({ data: "json, name=Description" })
+  @SpeakeasyMetadata({ data: "json, name=Description" })
   description: string;
 
-  @Metadata({ data: "json, name=FindingProviderFields" })
+  @SpeakeasyMetadata({ data: "json, name=FindingProviderFields" })
   findingProviderFields?: FindingProviderFields;
 
-  @Metadata({ data: "json, name=FirstObservedAt" })
+  @SpeakeasyMetadata({ data: "json, name=FirstObservedAt" })
   firstObservedAt?: string;
 
-  @Metadata({ data: "json, name=GeneratorId" })
+  @SpeakeasyMetadata({ data: "json, name=GeneratorId" })
   generatorId: string;
 
-  @Metadata({ data: "json, name=Id" })
+  @SpeakeasyMetadata({ data: "json, name=Id" })
   id: string;
 
-  @Metadata({ data: "json, name=LastObservedAt" })
+  @SpeakeasyMetadata({ data: "json, name=LastObservedAt" })
   lastObservedAt?: string;
 
-  @Metadata({ data: "json, name=Malware", elemType: shared.Malware })
+  @SpeakeasyMetadata({ data: "json, name=Malware", elemType: Malware })
   malware?: Malware[];
 
-  @Metadata({ data: "json, name=Network" })
+  @SpeakeasyMetadata({ data: "json, name=Network" })
   network?: Network;
 
-  @Metadata({ data: "json, name=NetworkPath", elemType: shared.NetworkPathComponent })
+  @SpeakeasyMetadata({ data: "json, name=NetworkPath", elemType: NetworkPathComponent })
   networkPath?: NetworkPathComponent[];
 
-  @Metadata({ data: "json, name=Note" })
+  @SpeakeasyMetadata({ data: "json, name=Note" })
   note?: Note;
 
-  @Metadata({ data: "json, name=PatchSummary" })
+  @SpeakeasyMetadata({ data: "json, name=PatchSummary" })
   patchSummary?: PatchSummary;
 
-  @Metadata({ data: "json, name=Process" })
+  @SpeakeasyMetadata({ data: "json, name=Process" })
   process?: ProcessDetails;
 
-  @Metadata({ data: "json, name=ProductArn" })
+  @SpeakeasyMetadata({ data: "json, name=ProductArn" })
   productArn: string;
 
-  @Metadata({ data: "json, name=ProductFields" })
+  @SpeakeasyMetadata({ data: "json, name=ProductFields" })
   productFields?: Map<string, string>;
 
-  @Metadata({ data: "json, name=ProductName" })
+  @SpeakeasyMetadata({ data: "json, name=ProductName" })
   productName?: string;
 
-  @Metadata({ data: "json, name=RecordState" })
+  @SpeakeasyMetadata({ data: "json, name=RecordState" })
   recordState?: RecordStateEnum;
 
-  @Metadata({ data: "json, name=Region" })
+  @SpeakeasyMetadata({ data: "json, name=Region" })
   region?: string;
 
-  @Metadata({ data: "json, name=RelatedFindings", elemType: shared.RelatedFinding })
+  @SpeakeasyMetadata({ data: "json, name=RelatedFindings", elemType: RelatedFinding })
   relatedFindings?: RelatedFinding[];
 
-  @Metadata({ data: "json, name=Remediation" })
+  @SpeakeasyMetadata({ data: "json, name=Remediation" })
   remediation?: Remediation;
 
-  @Metadata({ data: "json, name=Resources", elemType: shared.Resource })
+  @SpeakeasyMetadata({ data: "json, name=Resources", elemType: Resource })
   resources: Resource[];
 
-  @Metadata({ data: "json, name=SchemaVersion" })
+  @SpeakeasyMetadata({ data: "json, name=SchemaVersion" })
   schemaVersion: string;
 
-  @Metadata({ data: "json, name=Severity" })
+  @SpeakeasyMetadata({ data: "json, name=Severity" })
   severity?: Severity;
 
-  @Metadata({ data: "json, name=SourceUrl" })
+  @SpeakeasyMetadata({ data: "json, name=SourceUrl" })
   sourceUrl?: string;
 
-  @Metadata({ data: "json, name=ThreatIntelIndicators", elemType: shared.ThreatIntelIndicator })
+  @SpeakeasyMetadata({ data: "json, name=ThreatIntelIndicators", elemType: ThreatIntelIndicator })
   threatIntelIndicators?: ThreatIntelIndicator[];
 
-  @Metadata({ data: "json, name=Title" })
+  @SpeakeasyMetadata({ data: "json, name=Title" })
   title: string;
 
-  @Metadata({ data: "json, name=Types" })
+  @SpeakeasyMetadata({ data: "json, name=Types" })
   types?: string[];
 
-  @Metadata({ data: "json, name=UpdatedAt" })
+  @SpeakeasyMetadata({ data: "json, name=UpdatedAt" })
   updatedAt: string;
 
-  @Metadata({ data: "json, name=UserDefinedFields" })
+  @SpeakeasyMetadata({ data: "json, name=UserDefinedFields" })
   userDefinedFields?: Map<string, string>;
 
-  @Metadata({ data: "json, name=VerificationState" })
+  @SpeakeasyMetadata({ data: "json, name=VerificationState" })
   verificationState?: VerificationStateEnum;
 
-  @Metadata({ data: "json, name=Vulnerabilities", elemType: shared.Vulnerability })
+  @SpeakeasyMetadata({ data: "json, name=Vulnerabilities", elemType: Vulnerability })
   vulnerabilities?: Vulnerability[];
 
-  @Metadata({ data: "json, name=Workflow" })
+  @SpeakeasyMetadata({ data: "json, name=Workflow" })
   workflow?: Workflow;
 
-  @Metadata({ data: "json, name=WorkflowState" })
+  @SpeakeasyMetadata({ data: "json, name=WorkflowState" })
   workflowState?: WorkflowStateEnum;
 }

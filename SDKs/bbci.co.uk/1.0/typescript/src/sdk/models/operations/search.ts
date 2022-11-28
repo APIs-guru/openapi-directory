@@ -1,35 +1,36 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class SearchQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=availability" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=availability" })
   availability: shared.AvailabilityEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=lang" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=lang" })
   lang: shared.LangEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=q" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=q" })
   q: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=rights" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=rights" })
   rights: shared.RightsEnum;
 }
 
 
 export class SearchRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: SearchQueryParams;
 }
 
 
 export class SearchResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   ibl?: any;
 }

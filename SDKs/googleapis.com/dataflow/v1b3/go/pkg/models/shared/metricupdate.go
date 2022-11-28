@@ -1,5 +1,7 @@
 package shared
 
+// MetricUpdate
+// Describes the state of a metric.
 type MetricUpdate struct {
 	Cumulative   *bool                 `json:"cumulative,omitempty"`
 	Distribution *interface{}          `json:"distribution,omitempty"`

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudPaymentsResellerSubscriptionV1ServicePeriod } from "./googlecloudpaymentsresellersubscriptionv1serviceperiod";
 // GoogleCloudPaymentsResellerSubscriptionV1SubscriptionLineItemOneTimeRecurrenceDetails
 /**
@@ -34,7 +34,7 @@ var GoogleCloudPaymentsResellerSubscriptionV1SubscriptionLineItemOneTimeRecurren
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=servicePeriod" }),
+        SpeakeasyMetadata({ data: "json, name=servicePeriod" }),
         __metadata("design:type", GoogleCloudPaymentsResellerSubscriptionV1ServicePeriod)
     ], GoogleCloudPaymentsResellerSubscriptionV1SubscriptionLineItemOneTimeRecurrenceDetails.prototype, "servicePeriod", void 0);
     return GoogleCloudPaymentsResellerSubscriptionV1SubscriptionLineItemOneTimeRecurrenceDetails;

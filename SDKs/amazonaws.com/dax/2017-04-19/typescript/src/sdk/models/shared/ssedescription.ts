@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SseStatusEnum } from "./ssestatusenum";
+
 
 
 // SseDescription
@@ -7,6 +8,6 @@ import { SseStatusEnum } from "./ssestatusenum";
  * The description of the server-side encryption status on the specified DAX cluster.
 **/
 export class SseDescription extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Status" })
+  @SpeakeasyMetadata({ data: "json, name=Status" })
   status?: SseStatusEnum;
 }

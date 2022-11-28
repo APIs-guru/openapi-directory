@@ -1,10 +1,13 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Optional
 
 
 @dataclass
 class GetCloudFrontOriginAccessIdentity20180618PathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'Id', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'Id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -20,13 +23,13 @@ class GetCloudFrontOriginAccessIdentity20180618Headers:
 
 @dataclass
 class GetCloudFrontOriginAccessIdentity20180618Request:
-    path_params: GetCloudFrontOriginAccessIdentity20180618PathParams = field(default=None)
-    headers: GetCloudFrontOriginAccessIdentity20180618Headers = field(default=None)
+    headers: GetCloudFrontOriginAccessIdentity20180618Headers = field()
+    path_params: GetCloudFrontOriginAccessIdentity20180618PathParams = field()
     
 
 @dataclass
 class GetCloudFrontOriginAccessIdentity20180618Response:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

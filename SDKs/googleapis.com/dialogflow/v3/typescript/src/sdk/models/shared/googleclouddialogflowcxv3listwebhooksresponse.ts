@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudDialogflowCxV3Webhook } from "./googleclouddialogflowcxv3webhook";
+
 
 
 // GoogleCloudDialogflowCxV3ListWebhooksResponse
@@ -8,9 +8,9 @@ import { GoogleCloudDialogflowCxV3Webhook } from "./googleclouddialogflowcxv3web
  * The response message for Webhooks.ListWebhooks.
 **/
 export class GoogleCloudDialogflowCxV3ListWebhooksResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 
-  @Metadata({ data: "json, name=webhooks", elemType: shared.GoogleCloudDialogflowCxV3Webhook })
+  @SpeakeasyMetadata({ data: "json, name=webhooks", elemType: GoogleCloudDialogflowCxV3Webhook })
   webhooks?: GoogleCloudDialogflowCxV3Webhook[];
 }

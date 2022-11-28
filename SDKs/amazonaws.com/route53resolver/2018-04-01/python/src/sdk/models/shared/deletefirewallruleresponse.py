@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import firewallrule
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class DeleteFirewallRuleResponse:
-    firewall_rule: Optional[firewallrule.FirewallRule] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FirewallRule' }})
+    firewall_rule: Optional[FirewallRule] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('FirewallRule') }})
     

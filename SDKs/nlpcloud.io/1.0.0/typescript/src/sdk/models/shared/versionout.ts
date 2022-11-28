@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class VersionOut extends SpeakeasyBase {
-  @Metadata({ data: "json, name=spacy" })
+  @SpeakeasyMetadata({ data: "json, name=spacy" })
   spacy: string;
 }

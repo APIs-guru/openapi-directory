@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var CryptoKeyVersionTemplateAlgorithmEnum;
 (function (CryptoKeyVersionTemplateAlgorithmEnum) {
     CryptoKeyVersionTemplateAlgorithmEnum["CryptoKeyVersionAlgorithmUnspecified"] = "CRYPTO_KEY_VERSION_ALGORITHM_UNSPECIFIED";
@@ -49,6 +49,10 @@ export var CryptoKeyVersionTemplateAlgorithmEnum;
     CryptoKeyVersionTemplateAlgorithmEnum["EcSignP384Sha384"] = "EC_SIGN_P384_SHA384";
     CryptoKeyVersionTemplateAlgorithmEnum["EcSignSecp256K1Sha256"] = "EC_SIGN_SECP256K1_SHA256";
     CryptoKeyVersionTemplateAlgorithmEnum["HmacSha256"] = "HMAC_SHA256";
+    CryptoKeyVersionTemplateAlgorithmEnum["HmacSha1"] = "HMAC_SHA1";
+    CryptoKeyVersionTemplateAlgorithmEnum["HmacSha384"] = "HMAC_SHA384";
+    CryptoKeyVersionTemplateAlgorithmEnum["HmacSha512"] = "HMAC_SHA512";
+    CryptoKeyVersionTemplateAlgorithmEnum["HmacSha224"] = "HMAC_SHA224";
     CryptoKeyVersionTemplateAlgorithmEnum["ExternalSymmetricEncryption"] = "EXTERNAL_SYMMETRIC_ENCRYPTION";
 })(CryptoKeyVersionTemplateAlgorithmEnum || (CryptoKeyVersionTemplateAlgorithmEnum = {}));
 export var CryptoKeyVersionTemplateProtectionLevelEnum;
@@ -69,11 +73,11 @@ var CryptoKeyVersionTemplate = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=algorithm" }),
+        SpeakeasyMetadata({ data: "json, name=algorithm" }),
         __metadata("design:type", String)
     ], CryptoKeyVersionTemplate.prototype, "algorithm", void 0);
     __decorate([
-        Metadata({ data: "json, name=protectionLevel" }),
+        SpeakeasyMetadata({ data: "json, name=protectionLevel" }),
         __metadata("design:type", String)
     ], CryptoKeyVersionTemplate.prototype, "protectionLevel", void 0);
     return CryptoKeyVersionTemplate;

@@ -1,5 +1,7 @@
 package shared
 
+// GetConfigResponse
+// <p/>
 type GetConfigResponse struct {
 	ConfigArn  string                    `json:"configArn"`
 	ConfigData ConfigTypeData            `json:"configData"`

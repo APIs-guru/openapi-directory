@@ -13,18 +13,18 @@ class CreateCollectionQueryParams:
 
 @dataclass
 class CreateCollectionSecurity:
-    custom_authentication: shared.SchemeCustomAuthentication = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    custom_authentication: shared.SchemeCustomAuthentication = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
     
 
 @dataclass
 class CreateCollectionRequest:
-    query_params: CreateCollectionQueryParams = field(default=None)
-    security: CreateCollectionSecurity = field(default=None)
+    query_params: CreateCollectionQueryParams = field()
+    security: CreateCollectionSecurity = field()
     
 
 @dataclass
 class CreateCollectionResponse:
+    content_type: str = field()
+    status_code: int = field()
     collection_creation_result: Optional[shared.CollectionCreationResult] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

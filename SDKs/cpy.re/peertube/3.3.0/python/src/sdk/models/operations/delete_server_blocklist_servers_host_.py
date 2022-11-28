@@ -1,25 +1,25 @@
 from dataclasses import dataclass, field
-
+from sdk.models import shared
 
 
 @dataclass
 class DeleteServerBlocklistServersHostPathParams:
-    host: str = field(default=None, metadata={'path_param': { 'field_name': 'host', 'style': 'simple', 'explode': False }})
+    host: str = field(metadata={'path_param': { 'field_name': 'host', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class DeleteServerBlocklistServersHostSecurity:
-    o_auth2: shared.SchemeOAuth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    o_auth2: shared.SchemeOAuth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DeleteServerBlocklistServersHostRequest:
-    path_params: DeleteServerBlocklistServersHostPathParams = field(default=None)
-    security: DeleteServerBlocklistServersHostSecurity = field(default=None)
+    path_params: DeleteServerBlocklistServersHostPathParams = field()
+    security: DeleteServerBlocklistServersHostSecurity = field()
     
 
 @dataclass
 class DeleteServerBlocklistServersHostResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

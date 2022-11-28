@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ApiEndpoints
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * objects with two fields, the first one has the endpoint name as key and its description as value, the second one has HTTP verb to use (GET, POST PUT, DELETE) as key and the supported version an API path for value.
 **/
 export class ApiEndpoints extends SpeakeasyBase {
-  @Metadata({ data: "json, name=endpointName" })
+  @SpeakeasyMetadata({ data: "json, name=endpointName" })
   endpointName?: string;
 
-  @Metadata({ data: "json, name=httpVerb" })
+  @SpeakeasyMetadata({ data: "json, name=httpVerb" })
   httpVerb?: any;
 }

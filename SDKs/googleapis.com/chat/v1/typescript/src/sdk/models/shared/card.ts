@@ -1,8 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CardAction } from "./cardaction";
 import { CardHeader } from "./cardheader";
 import { Section } from "./section";
+
 
 
 // Card
@@ -10,15 +10,15 @@ import { Section } from "./section";
  * A card is a UI element that can contain UI widgets such as texts, images.
 **/
 export class Card extends SpeakeasyBase {
-  @Metadata({ data: "json, name=cardActions", elemType: shared.CardAction })
+  @SpeakeasyMetadata({ data: "json, name=cardActions", elemType: CardAction })
   cardActions?: CardAction[];
 
-  @Metadata({ data: "json, name=header" })
+  @SpeakeasyMetadata({ data: "json, name=header" })
   header?: CardHeader;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=sections", elemType: shared.Section })
+  @SpeakeasyMetadata({ data: "json, name=sections", elemType: Section })
   sections?: Section[];
 }

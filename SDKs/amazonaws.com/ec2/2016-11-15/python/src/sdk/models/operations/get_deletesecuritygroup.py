@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetDeleteSecurityGroupActionEnum(str, Enum):
     DELETE_SECURITY_GROUP = "DeleteSecurityGroup"
@@ -10,11 +14,11 @@ class GetDeleteSecurityGroupVersionEnum(str, Enum):
 
 @dataclass
 class GetDeleteSecurityGroupQueryParams:
-    action: GetDeleteSecurityGroupActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetDeleteSecurityGroupActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: GetDeleteSecurityGroupVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     dry_run: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'DryRun', 'style': 'form', 'explode': True }})
     group_id: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'GroupId', 'style': 'form', 'explode': True }})
     group_name: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'GroupName', 'style': 'form', 'explode': True }})
-    version: GetDeleteSecurityGroupVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -30,12 +34,12 @@ class GetDeleteSecurityGroupHeaders:
 
 @dataclass
 class GetDeleteSecurityGroupRequest:
-    query_params: GetDeleteSecurityGroupQueryParams = field(default=None)
-    headers: GetDeleteSecurityGroupHeaders = field(default=None)
+    headers: GetDeleteSecurityGroupHeaders = field()
+    query_params: GetDeleteSecurityGroupQueryParams = field()
     
 
 @dataclass
 class GetDeleteSecurityGroupResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

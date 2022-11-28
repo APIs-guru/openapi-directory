@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { DeviceUnderTest } from "./deviceundertest";
 /**
  * Gets suite run configuration.

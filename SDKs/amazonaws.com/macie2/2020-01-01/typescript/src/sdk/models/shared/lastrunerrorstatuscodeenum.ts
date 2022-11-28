@@ -1,6 +1,7 @@
 
 
+
 export enum LastRunErrorStatusCodeEnum {
-    None = "NONE"
-,    Error = "ERROR"
+    None = "NONE",
+    Error = "ERROR"
 }

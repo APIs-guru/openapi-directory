@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DeleteAppImageConfigRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AppImageConfigName" })
+  @SpeakeasyMetadata({ data: "json, name=AppImageConfigName" })
   appImageConfigName: string;
 }

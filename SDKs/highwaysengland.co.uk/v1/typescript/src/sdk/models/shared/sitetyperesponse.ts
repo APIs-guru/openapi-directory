@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SiteType } from "./sitetype";
 
 
+
 export class SiteTypeResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=row_count" })
+  @SpeakeasyMetadata({ data: "json, name=row_count" })
   rowCount?: number;
 
-  @Metadata({ data: "json, name=sitetypes", elemType: shared.SiteType })
+  @SpeakeasyMetadata({ data: "json, name=sitetypes", elemType: SiteType })
   sitetypes?: SiteType[];
 }

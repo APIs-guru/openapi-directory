@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ComputeFarmConfiguration
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The configuration for a render farm that is associated with a studio resource.
 **/
 export class ComputeFarmConfiguration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=activeDirectoryUser" })
+  @SpeakeasyMetadata({ data: "json, name=activeDirectoryUser" })
   activeDirectoryUser?: string;
 
-  @Metadata({ data: "json, name=endpoint" })
+  @SpeakeasyMetadata({ data: "json, name=endpoint" })
   endpoint?: string;
 }

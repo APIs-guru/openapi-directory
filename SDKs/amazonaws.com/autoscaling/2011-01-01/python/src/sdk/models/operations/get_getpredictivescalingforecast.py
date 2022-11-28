@@ -1,8 +1,9 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 
 class GetGetPredictiveScalingForecastActionEnum(str, Enum):
     GET_PREDICTIVE_SCALING_FORECAST = "GetPredictiveScalingForecast"
@@ -13,12 +14,12 @@ class GetGetPredictiveScalingForecastVersionEnum(str, Enum):
 
 @dataclass
 class GetGetPredictiveScalingForecastQueryParams:
-    action: GetGetPredictiveScalingForecastActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    auto_scaling_group_name: str = field(default=None, metadata={'query_param': { 'field_name': 'AutoScalingGroupName', 'style': 'form', 'explode': True }})
-    end_time: datetime = field(default=None, metadata={'query_param': { 'field_name': 'EndTime', 'style': 'form', 'explode': True }})
-    policy_name: str = field(default=None, metadata={'query_param': { 'field_name': 'PolicyName', 'style': 'form', 'explode': True }})
-    start_time: datetime = field(default=None, metadata={'query_param': { 'field_name': 'StartTime', 'style': 'form', 'explode': True }})
-    version: GetGetPredictiveScalingForecastVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: GetGetPredictiveScalingForecastActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    auto_scaling_group_name: str = field(metadata={'query_param': { 'field_name': 'AutoScalingGroupName', 'style': 'form', 'explode': True }})
+    end_time: datetime = field(metadata={'query_param': { 'field_name': 'EndTime', 'style': 'form', 'explode': True }})
+    policy_name: str = field(metadata={'query_param': { 'field_name': 'PolicyName', 'style': 'form', 'explode': True }})
+    start_time: datetime = field(metadata={'query_param': { 'field_name': 'StartTime', 'style': 'form', 'explode': True }})
+    version: GetGetPredictiveScalingForecastVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -34,13 +35,13 @@ class GetGetPredictiveScalingForecastHeaders:
 
 @dataclass
 class GetGetPredictiveScalingForecastRequest:
-    query_params: GetGetPredictiveScalingForecastQueryParams = field(default=None)
-    headers: GetGetPredictiveScalingForecastHeaders = field(default=None)
+    headers: GetGetPredictiveScalingForecastHeaders = field()
+    query_params: GetGetPredictiveScalingForecastQueryParams = field()
     
 
 @dataclass
 class GetGetPredictiveScalingForecastResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

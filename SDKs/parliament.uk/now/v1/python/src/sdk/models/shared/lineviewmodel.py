@@ -1,7 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import memberviewmodel
+from sdk import utils
+from . import *
 
 class LineViewModelContentTypeEnum(str, Enum):
     GENERIC = "Generic"
@@ -45,14 +47,14 @@ class LineViewModelVerticalAlignmentEnum(str, Enum):
 @dataclass_json
 @dataclass
 class LineViewModel:
-    content: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'content' }})
-    content_additional_json: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'contentAdditionalJson' }})
-    content_type: Optional[LineViewModelContentTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'contentType' }})
-    content_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'contentUrl' }})
-    display_order: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'displayOrder' }})
-    force_capitalisation: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'forceCapitalisation' }})
-    horizontal_alignment: Optional[LineViewModelHorizontalAlignmentEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'horizontalAlignment' }})
-    member: Optional[memberviewmodel.MemberViewModel] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'member' }})
-    style: Optional[LineViewModelStyleEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'style' }})
-    vertical_alignment: Optional[LineViewModelVerticalAlignmentEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'verticalAlignment' }})
+    content: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('content') }})
+    content_additional_json: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('contentAdditionalJson') }})
+    content_type: Optional[LineViewModelContentTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('contentType') }})
+    content_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('contentUrl') }})
+    display_order: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('displayOrder') }})
+    force_capitalisation: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('forceCapitalisation') }})
+    horizontal_alignment: Optional[LineViewModelHorizontalAlignmentEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('horizontalAlignment') }})
+    member: Optional[MemberViewModel] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('member') }})
+    style: Optional[LineViewModelStyleEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('style') }})
+    vertical_alignment: Optional[LineViewModelVerticalAlignmentEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('verticalAlignment') }})
     

@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ModelStatusEnum } from "./modelstatusenum";
+
 
 
 // EntityRecognizerFilter
@@ -7,12 +8,12 @@ import { ModelStatusEnum } from "./modelstatusenum";
  * Provides information for filtering a list of entity recognizers. You can only specify one filtering parameter in a request. For more information, see the operation./&gt;
 **/
 export class EntityRecognizerFilter extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Status" })
+  @SpeakeasyMetadata({ data: "json, name=Status" })
   status?: ModelStatusEnum;
 
-  @Metadata({ data: "json, name=SubmitTimeAfter" })
+  @SpeakeasyMetadata({ data: "json, name=SubmitTimeAfter" })
   submitTimeAfter?: Date;
 
-  @Metadata({ data: "json, name=SubmitTimeBefore" })
+  @SpeakeasyMetadata({ data: "json, name=SubmitTimeBefore" })
   submitTimeBefore?: Date;
 }

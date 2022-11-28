@@ -1,38 +1,39 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetPlayersPlayerIdPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=playerId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=playerId" })
   playerId: string;
 }
 
 
 export class GetPlayersPlayerIdSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=bearer" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" })
   bearerAuth: shared.SchemeBearerAuth;
 }
 
 
 export class GetPlayersPlayerIdRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetPlayersPlayerIdPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: GetPlayersPlayerIdSecurity;
 }
 
 
 export class GetPlayersPlayerIdResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   notFound?: shared.NotFound;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   player?: shared.Player;
 }

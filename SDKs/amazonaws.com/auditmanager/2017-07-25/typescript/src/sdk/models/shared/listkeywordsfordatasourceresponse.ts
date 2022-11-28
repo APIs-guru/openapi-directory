@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ListKeywordsForDataSourceResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=keywords" })
+  @SpeakeasyMetadata({ data: "json, name=keywords" })
   keywords?: string[];
 
-  @Metadata({ data: "json, name=nextToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextToken" })
   nextToken?: string;
 }

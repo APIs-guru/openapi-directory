@@ -32,7 +32,7 @@ type GkehubProjectsLocationsFeaturesPatchSecurity struct {
 type GkehubProjectsLocationsFeaturesPatchRequest struct {
 	PathParams  GkehubProjectsLocationsFeaturesPatchPathParams
 	QueryParams GkehubProjectsLocationsFeaturesPatchQueryParams
-	Request     *shared.Feature `request:"mediaType=application/json"`
+	Request     *shared.FeatureInput `request:"mediaType=application/json"`
 	Security    GkehubProjectsLocationsFeaturesPatchSecurity
 }
 

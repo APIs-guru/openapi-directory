@@ -22,30 +22,30 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var CreateProvisionedProductPlanOutput = /** @class */ (function (_super) {
     __extends(CreateProvisionedProductPlanOutput, _super);
     function CreateProvisionedProductPlanOutput() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=PlanId" }),
+        SpeakeasyMetadata({ data: "json, name=PlanId" }),
         __metadata("design:type", String)
     ], CreateProvisionedProductPlanOutput.prototype, "planId", void 0);
     __decorate([
-        Metadata({ data: "json, name=PlanName" }),
+        SpeakeasyMetadata({ data: "json, name=PlanName" }),
         __metadata("design:type", String)
     ], CreateProvisionedProductPlanOutput.prototype, "planName", void 0);
     __decorate([
-        Metadata({ data: "json, name=ProvisionProductId" }),
+        SpeakeasyMetadata({ data: "json, name=ProvisionProductId" }),
         __metadata("design:type", String)
     ], CreateProvisionedProductPlanOutput.prototype, "provisionProductId", void 0);
     __decorate([
-        Metadata({ data: "json, name=ProvisionedProductName" }),
+        SpeakeasyMetadata({ data: "json, name=ProvisionedProductName" }),
         __metadata("design:type", String)
     ], CreateProvisionedProductPlanOutput.prototype, "provisionedProductName", void 0);
     __decorate([
-        Metadata({ data: "json, name=ProvisioningArtifactId" }),
+        SpeakeasyMetadata({ data: "json, name=ProvisioningArtifactId" }),
         __metadata("design:type", String)
     ], CreateProvisionedProductPlanOutput.prototype, "provisioningArtifactId", void 0);
     return CreateProvisionedProductPlanOutput;

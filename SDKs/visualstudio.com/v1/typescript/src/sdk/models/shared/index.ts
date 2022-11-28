@@ -63,7 +63,6 @@ export * from "./seedinfobody";
 export * from "./sku";
 export * from "./skuinforesult";
 export * from "./storageusagedetail";
-export * from "./stringstringkeyvaluepair";
 export * from "./subscriptionaccountowner";
 export * from "./subscriptionadditionalproperties";
 export * from "./subscriptiondata";

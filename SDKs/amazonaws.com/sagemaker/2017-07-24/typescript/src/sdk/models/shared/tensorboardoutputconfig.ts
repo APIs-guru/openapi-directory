@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // TensorBoardOutputConfig
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Configuration of storage locations for the Debugger TensorBoard output data.
 **/
 export class TensorBoardOutputConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=LocalPath" })
+  @SpeakeasyMetadata({ data: "json, name=LocalPath" })
   localPath?: string;
 
-  @Metadata({ data: "json, name=S3OutputPath" })
+  @SpeakeasyMetadata({ data: "json, name=S3OutputPath" })
   s3OutputPath: string;
 }

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ApplicationCategory
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * An application category object.
 **/
 export class ApplicationCategory extends SpeakeasyBase {
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=primary" })
+  @SpeakeasyMetadata({ data: "json, name=primary" })
   primary?: string;
 
-  @Metadata({ data: "json, name=secondary" })
+  @SpeakeasyMetadata({ data: "json, name=secondary" })
   secondary?: string;
 }

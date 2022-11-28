@@ -46,6 +46,8 @@ type ReviewCommentSimpleUser struct {
 	URL               string  `json:"url"`
 }
 
+// ReviewComment
+// Legacy Review Comment
 type ReviewComment struct {
 	Links               ReviewCommentLinks          `json:"_links"`
 	AuthorAssociation   AuthorAssociationEnum       `json:"author_association"`

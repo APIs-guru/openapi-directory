@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // InputLambdaProcessorDescription
 /**
  * For a SQL-based Kinesis Data Analytics application, an object that contains the Amazon Resource Name (ARN) of the AWS Lambda function that is used to preprocess records in the stream.
@@ -33,11 +33,11 @@ var InputLambdaProcessorDescription = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=ResourceARN" }),
+        SpeakeasyMetadata({ data: "json, name=ResourceARN" }),
         __metadata("design:type", String)
     ], InputLambdaProcessorDescription.prototype, "resourceArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=RoleARN" }),
+        SpeakeasyMetadata({ data: "json, name=RoleARN" }),
         __metadata("design:type", String)
     ], InputLambdaProcessorDescription.prototype, "roleArn", void 0);
     return InputLambdaProcessorDescription;

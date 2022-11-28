@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum AlertFeedbackTypeEnum {
-    AlertFeedbackTypeUnspecified = "ALERT_FEEDBACK_TYPE_UNSPECIFIED"
-,    NotUseful = "NOT_USEFUL"
-,    SomewhatUseful = "SOMEWHAT_USEFUL"
-,    VeryUseful = "VERY_USEFUL"
+    AlertFeedbackTypeUnspecified = "ALERT_FEEDBACK_TYPE_UNSPECIFIED",
+    NotUseful = "NOT_USEFUL",
+    SomewhatUseful = "SOMEWHAT_USEFUL",
+    VeryUseful = "VERY_USEFUL"
 }
 
 
@@ -13,21 +14,21 @@ export enum AlertFeedbackTypeEnum {
  * A customer feedback about an alert.
 **/
 export class AlertFeedback extends SpeakeasyBase {
-  @Metadata({ data: "json, name=alertId" })
+  @SpeakeasyMetadata({ data: "json, name=alertId" })
   alertId?: string;
 
-  @Metadata({ data: "json, name=createTime" })
+  @SpeakeasyMetadata({ data: "json, name=createTime" })
   createTime?: string;
 
-  @Metadata({ data: "json, name=customerId" })
+  @SpeakeasyMetadata({ data: "json, name=customerId" })
   customerId?: string;
 
-  @Metadata({ data: "json, name=email" })
+  @SpeakeasyMetadata({ data: "json, name=email" })
   email?: string;
 
-  @Metadata({ data: "json, name=feedbackId" })
+  @SpeakeasyMetadata({ data: "json, name=feedbackId" })
   feedbackId?: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: AlertFeedbackTypeEnum;
 }

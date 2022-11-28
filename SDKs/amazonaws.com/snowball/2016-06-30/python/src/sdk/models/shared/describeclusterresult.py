@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import clustermetadata
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class DescribeClusterResult:
-    cluster_metadata: Optional[clustermetadata.ClusterMetadata] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ClusterMetadata' }})
+    cluster_metadata: Optional[ClusterMetadata] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ClusterMetadata') }})
     

@@ -1,13 +1,13 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ProductViewSummary } from "./productviewsummary";
 import { ProvisioningArtifact } from "./provisioningartifact";
 
 
+
 export class DescribeProductViewOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ProductViewSummary" })
+  @SpeakeasyMetadata({ data: "json, name=ProductViewSummary" })
   productViewSummary?: ProductViewSummary;
 
-  @Metadata({ data: "json, name=ProvisioningArtifacts", elemType: shared.ProvisioningArtifact })
+  @SpeakeasyMetadata({ data: "json, name=ProvisioningArtifacts", elemType: ProvisioningArtifact })
   provisioningArtifacts?: ProvisioningArtifact[];
 }

@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class ReasonCodeEnum(str, Enum):
     AWS_SERVICE_ACCESS_DISABLED = "AWS_SERVICE_ACCESS_DISABLED"

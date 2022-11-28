@@ -15,10 +15,14 @@ type DetachFromIndexHeaders struct {
 	XAmzDataPartition string  `header:"style=simple,explode=false,name=x-amz-data-partition"`
 }
 
+// DetachFromIndexRequestBodyIndexReference
+// The reference that identifies an object.
 type DetachFromIndexRequestBodyIndexReference struct {
 	Selector *string `json:"Selector,omitempty"`
 }
 
+// DetachFromIndexRequestBodyTargetReference
+// The reference that identifies an object.
 type DetachFromIndexRequestBodyTargetReference struct {
 	Selector *string `json:"Selector,omitempty"`
 }

@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class GetExperimentTemplatePathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -21,15 +24,15 @@ class GetExperimentTemplateHeaders:
 
 @dataclass
 class GetExperimentTemplateRequest:
-    path_params: GetExperimentTemplatePathParams = field(default=None)
-    headers: GetExperimentTemplateHeaders = field(default=None)
+    headers: GetExperimentTemplateHeaders = field()
+    path_params: GetExperimentTemplatePathParams = field()
     
 
 @dataclass
 class GetExperimentTemplateResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     get_experiment_template_response: Optional[shared.GetExperimentTemplateResponse] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     validation_exception: Optional[Any] = field(default=None)
     

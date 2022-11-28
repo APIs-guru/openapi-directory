@@ -4,6 +4,10 @@ from typing import Optional
 
 @dataclass
 class CreateContinuousCheckInput:
+    r"""CreateContinuousCheckInput
+     Represents to CreateContinuousCheckInput
+    """
+    
     check_id: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'check_id' }})
     frequency: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'frequency' }})
     status: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'status' }})

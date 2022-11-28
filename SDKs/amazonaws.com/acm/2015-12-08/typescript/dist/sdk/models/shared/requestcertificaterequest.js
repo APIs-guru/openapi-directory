@@ -22,9 +22,10 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { DomainValidationOption } from "./domainvalidationoption";
 import { CertificateOptions } from "./certificateoptions";
+import { Tag } from "./tag";
 import { ValidationMethodEnum } from "./validationmethodenum";
 var RequestCertificateRequest = /** @class */ (function (_super) {
     __extends(RequestCertificateRequest, _super);
@@ -32,35 +33,35 @@ var RequestCertificateRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=CertificateAuthorityArn" }),
+        SpeakeasyMetadata({ data: "json, name=CertificateAuthorityArn" }),
         __metadata("design:type", String)
     ], RequestCertificateRequest.prototype, "certificateAuthorityArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=DomainName" }),
+        SpeakeasyMetadata({ data: "json, name=DomainName" }),
         __metadata("design:type", String)
     ], RequestCertificateRequest.prototype, "domainName", void 0);
     __decorate([
-        Metadata({ data: "json, name=DomainValidationOptions", elemType: shared.DomainValidationOption }),
+        SpeakeasyMetadata({ data: "json, name=DomainValidationOptions", elemType: DomainValidationOption }),
         __metadata("design:type", Array)
     ], RequestCertificateRequest.prototype, "domainValidationOptions", void 0);
     __decorate([
-        Metadata({ data: "json, name=IdempotencyToken" }),
+        SpeakeasyMetadata({ data: "json, name=IdempotencyToken" }),
         __metadata("design:type", String)
     ], RequestCertificateRequest.prototype, "idempotencyToken", void 0);
     __decorate([
-        Metadata({ data: "json, name=Options" }),
+        SpeakeasyMetadata({ data: "json, name=Options" }),
         __metadata("design:type", CertificateOptions)
     ], RequestCertificateRequest.prototype, "options", void 0);
     __decorate([
-        Metadata({ data: "json, name=SubjectAlternativeNames" }),
+        SpeakeasyMetadata({ data: "json, name=SubjectAlternativeNames" }),
         __metadata("design:type", Array)
     ], RequestCertificateRequest.prototype, "subjectAlternativeNames", void 0);
     __decorate([
-        Metadata({ data: "json, name=Tags", elemType: shared.Tag }),
+        SpeakeasyMetadata({ data: "json, name=Tags", elemType: Tag }),
         __metadata("design:type", Array)
     ], RequestCertificateRequest.prototype, "tags", void 0);
     __decorate([
-        Metadata({ data: "json, name=ValidationMethod" }),
+        SpeakeasyMetadata({ data: "json, name=ValidationMethod" }),
         __metadata("design:type", String)
     ], RequestCertificateRequest.prototype, "validationMethod", void 0);
     return RequestCertificateRequest;

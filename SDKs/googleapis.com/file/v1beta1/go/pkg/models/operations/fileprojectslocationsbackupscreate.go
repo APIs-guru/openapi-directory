@@ -31,7 +31,7 @@ type FileProjectsLocationsBackupsCreateSecurity struct {
 type FileProjectsLocationsBackupsCreateRequest struct {
 	PathParams  FileProjectsLocationsBackupsCreatePathParams
 	QueryParams FileProjectsLocationsBackupsCreateQueryParams
-	Request     *shared.Backup `request:"mediaType=application/json"`
+	Request     *shared.BackupInput `request:"mediaType=application/json"`
 	Security    FileProjectsLocationsBackupsCreateSecurity
 }
 

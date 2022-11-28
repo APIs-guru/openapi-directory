@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { PubsubMessage } from "./pubsubmessage";
 /**
  * A message and its corresponding acknowledgment ID.

@@ -17,12 +17,12 @@ class GetLinesQueryParams:
 
 @dataclass
 class GetLinesRequest:
-    query_params: GetLinesQueryParams = field(default=None)
+    query_params: GetLinesQueryParams = field()
     
 
 @dataclass
 class GetLinesResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     game_lines: Optional[List[shared.GameLines]] = field(default=None)
-    status_code: int = field(default=None)
     

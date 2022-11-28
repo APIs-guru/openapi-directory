@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// BatchJobInstructionBatchJobInstructionDelete
+// The batch job instructions' instructions
 type BatchJobInstructionBatchJobInstructionDelete struct {
 	Delete []interface{} `json:"DELETE,omitempty"`
 }

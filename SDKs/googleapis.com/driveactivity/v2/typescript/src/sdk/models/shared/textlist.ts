@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Text } from "./text";
+
 
 
 // TextList
@@ -8,6 +8,6 @@ import { Text } from "./text";
  * Wrapper for Text List Field value.
 **/
 export class TextList extends SpeakeasyBase {
-  @Metadata({ data: "json, name=values", elemType: shared.Text })
+  @SpeakeasyMetadata({ data: "json, name=values", elemType: Text })
   values?: Text[];
 }

@@ -8,10 +8,6 @@ type RetrieveConversationPathParams struct {
 	ConversationID string `pathParam:"style=simple,explode=false,name=conversation_id"`
 }
 
-type RetrieveConversationRequest struct {
-	PathParams RetrieveConversationPathParams
-}
-
 type RetrieveConversation200ApplicationJSONMembers struct {
 	Channel   *shared.Channel            `json:"channel,omitempty"`
 	Initiator *shared.Initiator          `json:"initiator,omitempty"`
@@ -26,6 +22,8 @@ type RetrieveConversation200ApplicationJSONProperties struct {
 	Video *bool `json:"video,omitempty"`
 }
 
+// RetrieveConversation200ApplicationJSON
+// Conversation Object
 type RetrieveConversation200ApplicationJSON struct {
 	Links          *shared.LinksConversation                         `json:"_links,omitempty"`
 	APIKey         *string                                           `json:"api_key,omitempty"`
@@ -37,6 +35,10 @@ type RetrieveConversation200ApplicationJSON struct {
 	SequenceNumber *string                                           `json:"sequence_number,omitempty"`
 	Timestamp      *shared.TimestampResConversation                  `json:"timestamp,omitempty"`
 	UUID           string                                            `json:"uuid"`
+}
+
+type RetrieveConversationRequest struct {
+	PathParams RetrieveConversationPathParams
 }
 
 type RetrieveConversationResponse struct {

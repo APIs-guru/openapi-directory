@@ -27,10 +27,6 @@ type GetServicesQueryParams struct {
 	UntilID     *string    `queryParam:"style=form,explode=true,name=until_id"`
 }
 
-type GetServicesRequest struct {
-	QueryParams GetServicesQueryParams
-}
-
 type GetServices200ApplicationJSON struct {
 	Count           *int64           `json:"count,omitempty"`
 	CountCurrent    *int64           `json:"count_current,omitempty"`
@@ -39,6 +35,10 @@ type GetServices200ApplicationJSON struct {
 	QueryDurationMs *int64           `json:"query_duration_ms,omitempty"`
 	Results         []shared.Service `json:"results,omitempty"`
 	URL             *string          `json:"url,omitempty"`
+}
+
+type GetServicesRequest struct {
+	QueryParams GetServicesQueryParams
 }
 
 type GetServicesResponse struct {

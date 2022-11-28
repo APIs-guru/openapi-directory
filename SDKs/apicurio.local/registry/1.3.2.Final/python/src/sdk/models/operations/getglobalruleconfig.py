@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 class GetGlobalRuleConfigRuleEnum(str, Enum):
@@ -9,18 +10,18 @@ class GetGlobalRuleConfigRuleEnum(str, Enum):
 
 @dataclass
 class GetGlobalRuleConfigPathParams:
-    rule: GetGlobalRuleConfigRuleEnum = field(default=None, metadata={'path_param': { 'field_name': 'rule', 'style': 'simple', 'explode': False }})
+    rule: GetGlobalRuleConfigRuleEnum = field(metadata={'path_param': { 'field_name': 'rule', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetGlobalRuleConfigRequest:
-    path_params: GetGlobalRuleConfigPathParams = field(default=None)
+    path_params: GetGlobalRuleConfigPathParams = field()
     
 
 @dataclass
 class GetGlobalRuleConfigResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error: Optional[shared.Error] = field(default=None)
     rule: Optional[shared.Rule] = field(default=None)
-    status_code: int = field(default=None)
     

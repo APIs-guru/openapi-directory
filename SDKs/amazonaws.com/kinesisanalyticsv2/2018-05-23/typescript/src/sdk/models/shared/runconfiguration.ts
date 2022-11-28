@@ -1,8 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ApplicationRestoreConfiguration } from "./applicationrestoreconfiguration";
 import { FlinkRunConfiguration } from "./flinkrunconfiguration";
 import { SqlRunConfiguration } from "./sqlrunconfiguration";
+
 
 
 // RunConfiguration
@@ -10,12 +10,12 @@ import { SqlRunConfiguration } from "./sqlrunconfiguration";
  * Describes the starting parameters for an Kinesis Data Analytics application.
 **/
 export class RunConfiguration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ApplicationRestoreConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=ApplicationRestoreConfiguration" })
   applicationRestoreConfiguration?: ApplicationRestoreConfiguration;
 
-  @Metadata({ data: "json, name=FlinkRunConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=FlinkRunConfiguration" })
   flinkRunConfiguration?: FlinkRunConfiguration;
 
-  @Metadata({ data: "json, name=SqlRunConfigurations", elemType: shared.SqlRunConfiguration })
+  @SpeakeasyMetadata({ data: "json, name=SqlRunConfigurations", elemType: SqlRunConfiguration })
   sqlRunConfigurations?: SqlRunConfiguration[];
 }

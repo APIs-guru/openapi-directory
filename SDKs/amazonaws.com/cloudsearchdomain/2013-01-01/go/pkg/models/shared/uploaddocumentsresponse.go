@@ -1,5 +1,7 @@
 package shared
 
+// UploadDocumentsResponse
+// Contains the response to an <code>UploadDocuments</code> request.
 type UploadDocumentsResponse struct {
 	Adds     *int64                   `json:"adds,omitempty"`
 	Deletes  *int64                   `json:"deletes,omitempty"`

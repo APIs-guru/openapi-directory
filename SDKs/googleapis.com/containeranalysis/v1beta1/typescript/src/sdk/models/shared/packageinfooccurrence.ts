@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { License } from "./license";
+
 
 
 // PackageInfoOccurrence
@@ -7,33 +8,55 @@ import { License } from "./license";
  * PackageInfoOccurrence represents an SPDX Package Information section: https://spdx.github.io/spdx-spec/3-package-information/
 **/
 export class PackageInfoOccurrence extends SpeakeasyBase {
-  @Metadata({ data: "json, name=comment" })
+  @SpeakeasyMetadata({ data: "json, name=comment" })
   comment?: string;
 
-  @Metadata({ data: "json, name=filename" })
+  @SpeakeasyMetadata({ data: "json, name=filename" })
   filename?: string;
 
-  @Metadata({ data: "json, name=homePage" })
+  @SpeakeasyMetadata({ data: "json, name=homePage" })
   homePage?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=licenseConcluded" })
+  @SpeakeasyMetadata({ data: "json, name=licenseConcluded" })
   licenseConcluded?: License;
 
-  @Metadata({ data: "json, name=packageType" })
+  @SpeakeasyMetadata({ data: "json, name=packageType" })
   packageType?: string;
 
-  @Metadata({ data: "json, name=sourceInfo" })
+  @SpeakeasyMetadata({ data: "json, name=sourceInfo" })
   sourceInfo?: string;
 
-  @Metadata({ data: "json, name=summaryDescription" })
+  @SpeakeasyMetadata({ data: "json, name=summaryDescription" })
   summaryDescription?: string;
 
-  @Metadata({ data: "json, name=title" })
+  @SpeakeasyMetadata({ data: "json, name=title" })
   title?: string;
 
-  @Metadata({ data: "json, name=version" })
+  @SpeakeasyMetadata({ data: "json, name=version" })
   version?: string;
+}
+
+
+// PackageInfoOccurrenceInput
+/** 
+ * PackageInfoOccurrence represents an SPDX Package Information section: https://spdx.github.io/spdx-spec/3-package-information/
+**/
+export class PackageInfoOccurrenceInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=comment" })
+  comment?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=filename" })
+  filename?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=id" })
+  id?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=licenseConcluded" })
+  licenseConcluded?: License;
+
+  @SpeakeasyMetadata({ data: "json, name=sourceInfo" })
+  sourceInfo?: string;
 }

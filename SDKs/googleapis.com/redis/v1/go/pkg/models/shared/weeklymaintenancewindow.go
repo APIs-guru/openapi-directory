@@ -13,8 +13,17 @@ const (
 	WeeklyMaintenanceWindowDayEnumSunday               WeeklyMaintenanceWindowDayEnum = "SUNDAY"
 )
 
+// WeeklyMaintenanceWindow
+// Time window in which disruptive maintenance updates occur. Non-disruptive updates can occur inside or outside this window.
 type WeeklyMaintenanceWindow struct {
 	Day       *WeeklyMaintenanceWindowDayEnum `json:"day,omitempty"`
 	Duration  *string                         `json:"duration,omitempty"`
+	StartTime *TimeOfDay                      `json:"startTime,omitempty"`
+}
+
+// WeeklyMaintenanceWindowInput
+// Time window in which disruptive maintenance updates occur. Non-disruptive updates can occur inside or outside this window.
+type WeeklyMaintenanceWindowInput struct {
+	Day       *WeeklyMaintenanceWindowDayEnum `json:"day,omitempty"`
 	StartTime *TimeOfDay                      `json:"startTime,omitempty"`
 }

@@ -1,8 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import filterpair
-from . import options
+from sdk import utils
+from . import *
 
 class ParametersTypeEnum(str, Enum):
     REPORT_TYPE_UNSPECIFIED = "REPORT_TYPE_UNSPECIFIED"
@@ -22,9 +23,13 @@ class ParametersTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class Parameters:
-    filters: Optional[List[filterpair.FilterPair]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'filters' }})
-    group_bys: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'groupBys' }})
-    metrics: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'metrics' }})
-    options: Optional[options.Options] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'options' }})
-    type: Optional[ParametersTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    r"""Parameters
+    Parameters of a query or report.
+    """
+    
+    filters: Optional[List[FilterPair]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('filters') }})
+    group_bys: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('groupBys') }})
+    metrics: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('metrics') }})
+    options: Optional[Options] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('options') }})
+    type: Optional[ParametersTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('type') }})
     

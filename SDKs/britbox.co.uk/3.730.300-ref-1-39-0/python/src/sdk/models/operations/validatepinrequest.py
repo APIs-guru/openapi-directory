@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 
@@ -11,14 +15,14 @@ class ValidatePinRequestQueryParams:
 
 @dataclass
 class ValidatePinRequestRequest:
-    query_params: ValidatePinRequestQueryParams = field(default=None)
-    request: shared.EeValidatePinRequest = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    query_params: ValidatePinRequestQueryParams = field()
+    request: shared.EeValidatePinRequest = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class ValidatePinRequestResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     ee_validate_pin_response: Optional[shared.EeValidatePinResponse] = field(default=None)
     service_error: Optional[shared.ServiceError] = field(default=None)
-    status_code: int = field(default=None)
     

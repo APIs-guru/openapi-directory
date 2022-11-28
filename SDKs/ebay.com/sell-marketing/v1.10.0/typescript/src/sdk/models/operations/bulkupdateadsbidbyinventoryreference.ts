@@ -1,38 +1,39 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class BulkUpdateAdsBidByInventoryReferencePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=campaign_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=campaign_id" })
   campaignId: string;
 }
 
 
 export class BulkUpdateAdsBidByInventoryReferenceSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   apiAuth: shared.SchemeApiAuth;
 }
 
 
 export class BulkUpdateAdsBidByInventoryReferenceRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: BulkUpdateAdsBidByInventoryReferencePathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: shared.BulkCreateAdsByInventoryReferenceRequest;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: BulkUpdateAdsBidByInventoryReferenceSecurity;
 }
 
 
 export class BulkUpdateAdsBidByInventoryReferenceResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   bulkCreateAdsByInventoryReferenceResponse?: shared.BulkCreateAdsByInventoryReferenceResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

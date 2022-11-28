@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PolicyTypeEnum } from "./policytypeenum";
+
 
 
 // PolicySummary
@@ -7,21 +8,21 @@ import { PolicyTypeEnum } from "./policytypeenum";
  * Contains information about a policy, but does not include the content. To see the content of a policy, see <a>DescribePolicy</a>.
 **/
 export class PolicySummary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Arn" })
+  @SpeakeasyMetadata({ data: "json, name=Arn" })
   arn?: string;
 
-  @Metadata({ data: "json, name=AwsManaged" })
+  @SpeakeasyMetadata({ data: "json, name=AwsManaged" })
   awsManaged?: boolean;
 
-  @Metadata({ data: "json, name=Description" })
+  @SpeakeasyMetadata({ data: "json, name=Description" })
   description?: string;
 
-  @Metadata({ data: "json, name=Id" })
+  @SpeakeasyMetadata({ data: "json, name=Id" })
   id?: string;
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name?: string;
 
-  @Metadata({ data: "json, name=Type" })
+  @SpeakeasyMetadata({ data: "json, name=Type" })
   type?: PolicyTypeEnum;
 }

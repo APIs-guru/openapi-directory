@@ -1,9 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum SasPortalNrqzValidationStateEnum {
-    StateUnspecified = "STATE_UNSPECIFIED"
-,    Draft = "DRAFT"
-,    Final = "FINAL"
+    StateUnspecified = "STATE_UNSPECIFIED",
+    Draft = "DRAFT",
+    Final = "FINAL"
 }
 
 
@@ -12,18 +13,18 @@ export enum SasPortalNrqzValidationStateEnum {
  * Information about National Radio Quiet Zone validation.
 **/
 export class SasPortalNrqzValidation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=caseId" })
+  @SpeakeasyMetadata({ data: "json, name=caseId" })
   caseId?: string;
 
-  @Metadata({ data: "json, name=cpiId" })
+  @SpeakeasyMetadata({ data: "json, name=cpiId" })
   cpiId?: string;
 
-  @Metadata({ data: "json, name=latitude" })
+  @SpeakeasyMetadata({ data: "json, name=latitude" })
   latitude?: number;
 
-  @Metadata({ data: "json, name=longitude" })
+  @SpeakeasyMetadata({ data: "json, name=longitude" })
   longitude?: number;
 
-  @Metadata({ data: "json, name=state" })
+  @SpeakeasyMetadata({ data: "json, name=state" })
   state?: SasPortalNrqzValidationStateEnum;
 }

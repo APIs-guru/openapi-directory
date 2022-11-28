@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { VmwareVmsDetails } from "./vmwarevmsdetails";
+
 
 
 // FetchInventoryResponse
@@ -7,12 +8,12 @@ import { VmwareVmsDetails } from "./vmwarevmsdetails";
  * Response message for fetchInventory.
 **/
 export class FetchInventoryResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 
-  @Metadata({ data: "json, name=updateTime" })
+  @SpeakeasyMetadata({ data: "json, name=updateTime" })
   updateTime?: string;
 
-  @Metadata({ data: "json, name=vmwareVms" })
+  @SpeakeasyMetadata({ data: "json, name=vmwareVms" })
   vmwareVms?: VmwareVmsDetails;
 }

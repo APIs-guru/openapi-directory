@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DrivePermissionsInsertPathParams:
-    file_id: str = field(default=None, metadata={'path_param': { 'field_name': 'fileId', 'style': 'simple', 'explode': False }})
+    file_id: str = field(metadata={'path_param': { 'field_name': 'fileId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -28,14 +29,14 @@ class DrivePermissionsInsertQueryParams:
 
 @dataclass
 class DrivePermissionsInsertSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DrivePermissionsInsertSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -46,15 +47,15 @@ class DrivePermissionsInsertSecurity:
 
 @dataclass
 class DrivePermissionsInsertRequest:
-    path_params: DrivePermissionsInsertPathParams = field(default=None)
-    query_params: DrivePermissionsInsertQueryParams = field(default=None)
-    request: Optional[shared.Permission] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: DrivePermissionsInsertSecurity = field(default=None)
+    path_params: DrivePermissionsInsertPathParams = field()
+    query_params: DrivePermissionsInsertQueryParams = field()
+    security: DrivePermissionsInsertSecurity = field()
+    request: Optional[shared.PermissionInput] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class DrivePermissionsInsertResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     permission: Optional[shared.Permission] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 class GetAvailableNumbersFeaturesEnum(str, Enum):
@@ -14,7 +15,7 @@ class GetAvailableNumbersFeaturesEnum(str, Enum):
 
 @dataclass
 class GetAvailableNumbersQueryParams:
-    country: str = field(default=None, metadata={'query_param': { 'field_name': 'country', 'style': 'form', 'explode': True }})
+    country: str = field(metadata={'query_param': { 'field_name': 'country', 'style': 'form', 'explode': True }})
     features: Optional[GetAvailableNumbersFeaturesEnum] = field(default=None, metadata={'query_param': { 'field_name': 'features', 'style': 'form', 'explode': True }})
     index: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'index', 'style': 'form', 'explode': True }})
     pattern: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'pattern', 'style': 'form', 'explode': True }})
@@ -25,14 +26,14 @@ class GetAvailableNumbersQueryParams:
 
 @dataclass
 class GetAvailableNumbersRequest:
-    query_params: GetAvailableNumbersQueryParams = field(default=None)
+    query_params: GetAvailableNumbersQueryParams = field()
     
 
 @dataclass
 class GetAvailableNumbersResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     account_unauthorized: Optional[shared.AccountUnauthorized] = field(default=None)
     available_numbers: Optional[shared.AvailableNumbers] = field(default=None)
     

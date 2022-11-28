@@ -14,6 +14,8 @@ const (
 	FrequencyCapTimeUnitTypeEnumStream                  FrequencyCapTimeUnitTypeEnum = "STREAM"
 )
 
+// FrequencyCap
+// Message contains details about publisher-set frequency caps of the delivery.
 type FrequencyCap struct {
 	MaxImpressions *int32                        `json:"maxImpressions,omitempty"`
 	TimeUnitType   *FrequencyCapTimeUnitTypeEnum `json:"timeUnitType,omitempty"`

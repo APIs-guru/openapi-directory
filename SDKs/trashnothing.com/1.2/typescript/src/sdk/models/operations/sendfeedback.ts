@@ -1,28 +1,29 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class SendFeedbackRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "multipart_form, name=message" })
+  @SpeakeasyMetadata({ data: "multipart_form, name=message" })
   message: string;
 
-  @Metadata({ data: "multipart_form, name=meta" })
+  @SpeakeasyMetadata({ data: "multipart_form, name=meta" })
   meta?: string;
 
-  @Metadata({ data: "multipart_form, name=subject" })
+  @SpeakeasyMetadata({ data: "multipart_form, name=subject" })
   subject: string;
 }
 
 
 export class SendFeedbackRequest extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=multipart/form-data" })
+  @SpeakeasyMetadata({ data: "request, media_type=multipart/form-data" })
   request: SendFeedbackRequestBody;
 }
 
 
 export class SendFeedbackResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

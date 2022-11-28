@@ -1,32 +1,33 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { FileModeTypeEnumEnum } from "./filemodetypeenumenum";
 
 
+
 export class PutFileInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=branchName" })
+  @SpeakeasyMetadata({ data: "json, name=branchName" })
   branchName: string;
 
-  @Metadata({ data: "json, name=commitMessage" })
+  @SpeakeasyMetadata({ data: "json, name=commitMessage" })
   commitMessage?: string;
 
-  @Metadata({ data: "json, name=email" })
+  @SpeakeasyMetadata({ data: "json, name=email" })
   email?: string;
 
-  @Metadata({ data: "json, name=fileContent" })
+  @SpeakeasyMetadata({ data: "json, name=fileContent" })
   fileContent: string;
 
-  @Metadata({ data: "json, name=fileMode" })
+  @SpeakeasyMetadata({ data: "json, name=fileMode" })
   fileMode?: FileModeTypeEnumEnum;
 
-  @Metadata({ data: "json, name=filePath" })
+  @SpeakeasyMetadata({ data: "json, name=filePath" })
   filePath: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=parentCommitId" })
+  @SpeakeasyMetadata({ data: "json, name=parentCommitId" })
   parentCommitId?: string;
 
-  @Metadata({ data: "json, name=repositoryName" })
+  @SpeakeasyMetadata({ data: "json, name=repositoryName" })
   repositoryName: string;
 }

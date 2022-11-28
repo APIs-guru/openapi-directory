@@ -1,11 +1,15 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class UpdateSubscriptionPathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -17,19 +21,19 @@ class UpdateSubscriptionQueryParams:
 
 @dataclass
 class UpdateSubscriptionSecurity:
-    account_auth: shared.SchemeAccountAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    account_auth: shared.SchemeAccountAuth = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class UpdateSubscriptionRequest:
-    path_params: UpdateSubscriptionPathParams = field(default=None)
-    query_params: UpdateSubscriptionQueryParams = field(default=None)
-    security: UpdateSubscriptionSecurity = field(default=None)
+    path_params: UpdateSubscriptionPathParams = field()
+    query_params: UpdateSubscriptionQueryParams = field()
+    security: UpdateSubscriptionSecurity = field()
     
 
 @dataclass
 class UpdateSubscriptionResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     service_error: Optional[shared.ServiceError] = field(default=None)
-    status_code: int = field(default=None)
     

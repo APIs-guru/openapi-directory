@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // TranslateTextRequest
 /**
  * The main translation request message for the Cloud Translation API.
@@ -33,23 +33,23 @@ var TranslateTextRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=format" }),
+        SpeakeasyMetadata({ data: "json, name=format" }),
         __metadata("design:type", String)
     ], TranslateTextRequest.prototype, "format", void 0);
     __decorate([
-        Metadata({ data: "json, name=model" }),
+        SpeakeasyMetadata({ data: "json, name=model" }),
         __metadata("design:type", String)
     ], TranslateTextRequest.prototype, "model", void 0);
     __decorate([
-        Metadata({ data: "json, name=q" }),
+        SpeakeasyMetadata({ data: "json, name=q" }),
         __metadata("design:type", Array)
     ], TranslateTextRequest.prototype, "q", void 0);
     __decorate([
-        Metadata({ data: "json, name=source" }),
+        SpeakeasyMetadata({ data: "json, name=source" }),
         __metadata("design:type", String)
     ], TranslateTextRequest.prototype, "source", void 0);
     __decorate([
-        Metadata({ data: "json, name=target" }),
+        SpeakeasyMetadata({ data: "json, name=target" }),
         __metadata("design:type", String)
     ], TranslateTextRequest.prototype, "target", void 0);
     return TranslateTextRequest;

@@ -1,62 +1,63 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class PostSpinsRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "form, name=artist;" })
+  @SpeakeasyMetadata({ data: "form, name=artist;" })
   artist: string;
 
-  @Metadata({ data: "form, name=composer;" })
+  @SpeakeasyMetadata({ data: "form, name=composer;" })
   composer?: string;
 
-  @Metadata({ data: "form, name=duration;" })
+  @SpeakeasyMetadata({ data: "form, name=duration;" })
   duration?: number;
 
-  @Metadata({ data: "form, name=genre;" })
+  @SpeakeasyMetadata({ data: "form, name=genre;" })
   genre?: string;
 
-  @Metadata({ data: "form, name=isrc;" })
+  @SpeakeasyMetadata({ data: "form, name=isrc;" })
   isrc?: string;
 
-  @Metadata({ data: "form, name=label;" })
+  @SpeakeasyMetadata({ data: "form, name=label;" })
   label?: string;
 
-  @Metadata({ data: "form, name=live;" })
+  @SpeakeasyMetadata({ data: "form, name=live;" })
   live?: boolean;
 
-  @Metadata({ data: "form, name=release;" })
+  @SpeakeasyMetadata({ data: "form, name=release;" })
   release?: string;
 
-  @Metadata({ data: "form, name=song;" })
+  @SpeakeasyMetadata({ data: "form, name=song;" })
   song: string;
 
-  @Metadata({ data: "form, name=start;" })
+  @SpeakeasyMetadata({ data: "form, name=start;" })
   start?: Date;
 }
 
 
 export class PostSpinsRequest extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/x-www-form-urlencoded" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/x-www-form-urlencoded" })
   request?: PostSpinsRequestBody;
 }
 
 
 export class PostSpinsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   error?: shared.Error;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   spin?: shared.Spin;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata({ elemType: shared.ValidationError })
+  @SpeakeasyMetadata({ elemType: shared.ValidationError })
   validationErrors?: shared.ValidationError[];
 }

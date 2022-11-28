@@ -1,12 +1,18 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import durationunit_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class Duration:
-    unit: Optional[durationunit_enum.DurationUnitEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'unit' }})
-    value: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'value' }})
+    r"""Duration
+    An object that represents a duration of time.
+    """
+    
+    unit: Optional[DurationUnitEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('unit') }})
+    value: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('value') }})
     

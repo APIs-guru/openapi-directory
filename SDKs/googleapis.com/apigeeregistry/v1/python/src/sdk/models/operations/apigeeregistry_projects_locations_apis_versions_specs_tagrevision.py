@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class ApigeeregistryProjectsLocationsApisVersionsSpecsTagRevisionPathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,21 +26,21 @@ class ApigeeregistryProjectsLocationsApisVersionsSpecsTagRevisionQueryParams:
 
 @dataclass
 class ApigeeregistryProjectsLocationsApisVersionsSpecsTagRevisionSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class ApigeeregistryProjectsLocationsApisVersionsSpecsTagRevisionRequest:
-    path_params: ApigeeregistryProjectsLocationsApisVersionsSpecsTagRevisionPathParams = field(default=None)
-    query_params: ApigeeregistryProjectsLocationsApisVersionsSpecsTagRevisionQueryParams = field(default=None)
+    path_params: ApigeeregistryProjectsLocationsApisVersionsSpecsTagRevisionPathParams = field()
+    query_params: ApigeeregistryProjectsLocationsApisVersionsSpecsTagRevisionQueryParams = field()
+    security: ApigeeregistryProjectsLocationsApisVersionsSpecsTagRevisionSecurity = field()
     request: Optional[shared.TagAPISpecRevisionRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: ApigeeregistryProjectsLocationsApisVersionsSpecsTagRevisionSecurity = field(default=None)
     
 
 @dataclass
 class ApigeeregistryProjectsLocationsApisVersionsSpecsTagRevisionResponse:
+    content_type: str = field()
+    status_code: int = field()
     api_spec: Optional[shared.APISpec] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,7 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import shoppingadsprogramstatusregionstatus
+from sdk import utils
+from . import *
 
 class ShoppingAdsProgramStatusGlobalStateEnum(str, Enum):
     PROGRAM_STATE_UNSPECIFIED = "PROGRAM_STATE_UNSPECIFIED"
@@ -13,6 +15,10 @@ class ShoppingAdsProgramStatusGlobalStateEnum(str, Enum):
 @dataclass_json
 @dataclass
 class ShoppingAdsProgramStatus:
-    global_state: Optional[ShoppingAdsProgramStatusGlobalStateEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'globalState' }})
-    region_statuses: Optional[List[shoppingadsprogramstatusregionstatus.ShoppingAdsProgramStatusRegionStatus]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'regionStatuses' }})
+    r"""ShoppingAdsProgramStatus
+    Response message for GetShoppingAdsProgramStatus.
+    """
+    
+    global_state: Optional[ShoppingAdsProgramStatusGlobalStateEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('globalState') }})
+    region_statuses: Optional[List[ShoppingAdsProgramStatusRegionStatus]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('regionStatuses') }})
     

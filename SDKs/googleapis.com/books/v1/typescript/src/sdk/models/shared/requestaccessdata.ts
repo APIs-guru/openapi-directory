@@ -1,15 +1,16 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ConcurrentAccessRestriction } from "./concurrentaccessrestriction";
 import { DownloadAccessRestriction } from "./downloadaccessrestriction";
 
 
+
 export class RequestAccessData extends SpeakeasyBase {
-  @Metadata({ data: "json, name=concurrentAccess" })
+  @SpeakeasyMetadata({ data: "json, name=concurrentAccess" })
   concurrentAccess?: ConcurrentAccessRestriction;
 
-  @Metadata({ data: "json, name=downloadAccess" })
+  @SpeakeasyMetadata({ data: "json, name=downloadAccess" })
   downloadAccess?: DownloadAccessRestriction;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 }

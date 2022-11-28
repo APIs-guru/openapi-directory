@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class TableCell extends SpeakeasyBase {
-  @Metadata({ data: "json, name=v" })
+  @SpeakeasyMetadata({ data: "json, name=v" })
   v?: any;
 }

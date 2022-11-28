@@ -68,6 +68,8 @@ const (
 	CreativeHostingSourceEnumHostingSourceRichMedia   CreativeHostingSourceEnum = "HOSTING_SOURCE_RICH_MEDIA"
 )
 
+// Creative
+// A single Creative.
 type Creative struct {
 	AdditionalDimensions      []Dimensions                     `json:"additionalDimensions,omitempty"`
 	AdvertiserID              *string                          `json:"advertiserId,omitempty"`
@@ -116,4 +118,41 @@ type Creative struct {
 	UpdateTime                *string                          `json:"updateTime,omitempty"`
 	VastTagURL                *string                          `json:"vastTagUrl,omitempty"`
 	Vpaid                     *bool                            `json:"vpaid,omitempty"`
+}
+
+// CreativeInput
+// A single Creative.
+type CreativeInput struct {
+	AdditionalDimensions      []Dimensions                    `json:"additionalDimensions,omitempty"`
+	AppendedTag               *string                         `json:"appendedTag,omitempty"`
+	Assets                    []AssetAssociation              `json:"assets,omitempty"`
+	CmTrackingAd              *CmTrackingAd                   `json:"cmTrackingAd,omitempty"`
+	CompanionCreativeIds      []string                        `json:"companionCreativeIds,omitempty"`
+	CounterEvents             []CounterEvent                  `json:"counterEvents,omitempty"`
+	CreativeType              *CreativeCreativeTypeEnum       `json:"creativeType,omitempty"`
+	Dimensions                *Dimensions                     `json:"dimensions,omitempty"`
+	DisplayName               *string                         `json:"displayName,omitempty"`
+	EntityStatus              *CreativeEntityStatusEnum       `json:"entityStatus,omitempty"`
+	ExitEvents                []ExitEvent                     `json:"exitEvents,omitempty"`
+	ExpandOnHover             *bool                           `json:"expandOnHover,omitempty"`
+	ExpandingDirection        *CreativeExpandingDirectionEnum `json:"expandingDirection,omitempty"`
+	HostingSource             *CreativeHostingSourceEnum      `json:"hostingSource,omitempty"`
+	IasCampaignMonitoring     *bool                           `json:"iasCampaignMonitoring,omitempty"`
+	IntegrationCode           *string                         `json:"integrationCode,omitempty"`
+	JsTrackerURL              *string                         `json:"jsTrackerUrl,omitempty"`
+	Notes                     *string                         `json:"notes,omitempty"`
+	ObaIcon                   *ObaIcon                        `json:"obaIcon,omitempty"`
+	ProgressOffset            *AudioVideoOffset               `json:"progressOffset,omitempty"`
+	RequireHtml5              *bool                           `json:"requireHtml5,omitempty"`
+	RequireMraid              *bool                           `json:"requireMraid,omitempty"`
+	RequirePingForAttribution *bool                           `json:"requirePingForAttribution,omitempty"`
+	ReviewStatus              *ReviewStatusInfo               `json:"reviewStatus,omitempty"`
+	SkipOffset                *AudioVideoOffset               `json:"skipOffset,omitempty"`
+	Skippable                 *bool                           `json:"skippable,omitempty"`
+	ThirdPartyTag             *string                         `json:"thirdPartyTag,omitempty"`
+	ThirdPartyUrls            []ThirdPartyURL                 `json:"thirdPartyUrls,omitempty"`
+	TimerEvents               []TimerEvent                    `json:"timerEvents,omitempty"`
+	TrackerUrls               []string                        `json:"trackerUrls,omitempty"`
+	UniversalAdID             *UniversalAdID                  `json:"universalAdId,omitempty"`
+	VastTagURL                *string                         `json:"vastTagUrl,omitempty"`
 }

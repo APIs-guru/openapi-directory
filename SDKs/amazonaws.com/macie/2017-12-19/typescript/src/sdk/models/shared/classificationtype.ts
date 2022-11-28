@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { S3ContinuousClassificationTypeEnum } from "./s3continuousclassificationtypeenum";
 import { S3OneTimeClassificationTypeEnum } from "./s3onetimeclassificationtypeenum";
+
 
 
 // ClassificationType
@@ -8,9 +9,9 @@ import { S3OneTimeClassificationTypeEnum } from "./s3onetimeclassificationtypeen
  * The classification type that Amazon Macie Classic applies to the associated S3 resources. 
 **/
 export class ClassificationType extends SpeakeasyBase {
-  @Metadata({ data: "json, name=continuous" })
+  @SpeakeasyMetadata({ data: "json, name=continuous" })
   continuous: S3ContinuousClassificationTypeEnum;
 
-  @Metadata({ data: "json, name=oneTime" })
+  @SpeakeasyMetadata({ data: "json, name=oneTime" })
   oneTime: S3OneTimeClassificationTypeEnum;
 }

@@ -1,18 +1,19 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum MetaCommunicationMediumEnum {
-    Mobile = "MOBILE"
-,    Email = "EMAIL"
+    Mobile = "MOBILE",
+    Email = "EMAIL"
 }
 
 
 export class Meta extends SpeakeasyBase {
-  @Metadata({ data: "json, name=communicationExpiry" })
+  @SpeakeasyMetadata({ data: "json, name=communicationExpiry" })
   communicationExpiry?: string;
 
-  @Metadata({ data: "json, name=communicationHint" })
+  @SpeakeasyMetadata({ data: "json, name=communicationHint" })
   communicationHint?: string;
 
-  @Metadata({ data: "json, name=communicationMedium" })
+  @SpeakeasyMetadata({ data: "json, name=communicationMedium" })
   communicationMedium?: MetaCommunicationMediumEnum;
 }

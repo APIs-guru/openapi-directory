@@ -6,17 +6,23 @@ const (
 	GetModifyClientVpnEndpointActionEnumModifyClientVpnEndpoint GetModifyClientVpnEndpointActionEnum = "ModifyClientVpnEndpoint"
 )
 
+// GetModifyClientVpnEndpointClientConnectOptions
+// The options for managing connection authorization for new client connections.
 type GetModifyClientVpnEndpointClientConnectOptions struct {
 	Enabled           *bool   `queryParam:"name=Enabled"`
 	LambdaFunctionArn *string `queryParam:"name=LambdaFunctionArn"`
 }
 
+// GetModifyClientVpnEndpointConnectionLogOptions
+// Describes the client connection logging options for the Client VPN endpoint.
 type GetModifyClientVpnEndpointConnectionLogOptions struct {
 	CloudwatchLogGroup  *string `queryParam:"name=CloudwatchLogGroup"`
 	CloudwatchLogStream *string `queryParam:"name=CloudwatchLogStream"`
 	Enabled             *bool   `queryParam:"name=Enabled"`
 }
 
+// GetModifyClientVpnEndpointDNSServers
+// Information about the DNS server to be used.
 type GetModifyClientVpnEndpointDNSServers struct {
 	CustomDNSServers []string `queryParam:"name=CustomDnsServers"`
 	Enabled          *bool    `queryParam:"name=Enabled"`

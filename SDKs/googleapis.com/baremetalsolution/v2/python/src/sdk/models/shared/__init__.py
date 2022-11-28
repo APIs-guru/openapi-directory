@@ -1,4 +1,4 @@
-from .__xgafv_enum import *
+from ._xgafv_enum import *
 from .allowedclient import *
 from .alt_enum import *
 from .detachlunrequest import *
@@ -17,6 +17,7 @@ from .listnetworkusageresponse import *
 from .listnfssharesresponse import *
 from .listprovisioningquotasresponse import *
 from .listsshkeysresponse import *
+from .listvolumesnapshotsresponse import *
 from .listvolumesresponse import *
 from .location import *
 from .logicalnetworkinterface import *
@@ -46,4 +47,5 @@ from .submitprovisioningconfigresponse import *
 from .vlanattachment import *
 from .volume import *
 from .volumeconfig import *
+from .volumesnapshot import *
 from .vrf import *

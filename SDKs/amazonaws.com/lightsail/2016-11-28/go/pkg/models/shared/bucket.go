@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// Bucket
+// Describes an Amazon Lightsail bucket.
 type Bucket struct {
 	AbleToUpdateBundle       *bool                     `json:"ableToUpdateBundle,omitempty"`
 	AccessRules              *AccessRules              `json:"accessRules,omitempty"`

@@ -1,11 +1,15 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass
 class UpdateEmailTemplatePathParams:
-    template_name: str = field(default=None, metadata={'path_param': { 'field_name': 'TemplateName', 'style': 'simple', 'explode': False }})
+    template_name: str = field(metadata={'path_param': { 'field_name': 'TemplateName', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -22,30 +26,34 @@ class UpdateEmailTemplateHeaders:
 @dataclass_json
 @dataclass
 class UpdateEmailTemplateRequestBodyTemplateContent:
-    html: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Html' }})
-    subject: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Subject' }})
-    text: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Text' }})
+    r"""UpdateEmailTemplateRequestBodyTemplateContent
+    The content of the email, composed of a subject line, an HTML part, and a text-only part.
+    """
+    
+    html: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Html') }})
+    subject: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Subject') }})
+    text: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Text') }})
     
 
 @dataclass_json
 @dataclass
 class UpdateEmailTemplateRequestBody:
-    template_content: UpdateEmailTemplateRequestBodyTemplateContent = field(default=None, metadata={'dataclasses_json': { 'field_name': 'TemplateContent' }})
+    template_content: UpdateEmailTemplateRequestBodyTemplateContent = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('TemplateContent') }})
     
 
 @dataclass
 class UpdateEmailTemplateRequest:
-    path_params: UpdateEmailTemplatePathParams = field(default=None)
-    headers: UpdateEmailTemplateHeaders = field(default=None)
-    request: UpdateEmailTemplateRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: UpdateEmailTemplateHeaders = field()
+    path_params: UpdateEmailTemplatePathParams = field()
+    request: UpdateEmailTemplateRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class UpdateEmailTemplateResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     too_many_requests_exception: Optional[Any] = field(default=None)
     update_email_template_response: Optional[dict[str, Any]] = field(default=None)
     

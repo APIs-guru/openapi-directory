@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import enterprisecrmfrontendseventbusprototaskentity
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class GoogleCloudIntegrationsV1alphaListTaskEntitiesResponse:
-    task_entities: Optional[List[enterprisecrmfrontendseventbusprototaskentity.EnterpriseCrmFrontendsEventbusProtoTaskEntity]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'taskEntities' }})
+    r"""GoogleCloudIntegrationsV1alphaListTaskEntitiesResponse
+    This is a UI only method and will be moved away. Response for ListTaskEntities.
+    """
+    
+    task_entities: Optional[List[EnterpriseCrmFrontendsEventbusProtoTaskEntity]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('taskEntities') }})
     

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // PhysicalConnectionRequirements
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Specifies the physical requirements for a connection.
 **/
 export class PhysicalConnectionRequirements extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AvailabilityZone" })
+  @SpeakeasyMetadata({ data: "json, name=AvailabilityZone" })
   availabilityZone?: string;
 
-  @Metadata({ data: "json, name=SecurityGroupIdList" })
+  @SpeakeasyMetadata({ data: "json, name=SecurityGroupIdList" })
   securityGroupIdList?: string[];
 
-  @Metadata({ data: "json, name=SubnetId" })
+  @SpeakeasyMetadata({ data: "json, name=SubnetId" })
   subnetId?: string;
 }

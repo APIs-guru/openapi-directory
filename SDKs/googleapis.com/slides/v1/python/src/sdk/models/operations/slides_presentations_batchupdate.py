@@ -1,11 +1,15 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class SlidesPresentationsBatchUpdatePathParams:
-    presentation_id: str = field(default=None, metadata={'path_param': { 'field_name': 'presentationId', 'style': 'simple', 'explode': False }})
+    presentation_id: str = field(metadata={'path_param': { 'field_name': 'presentationId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,38 +29,38 @@ class SlidesPresentationsBatchUpdateQueryParams:
 
 @dataclass
 class SlidesPresentationsBatchUpdateSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class SlidesPresentationsBatchUpdateSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class SlidesPresentationsBatchUpdateSecurityOption3:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class SlidesPresentationsBatchUpdateSecurityOption4:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class SlidesPresentationsBatchUpdateSecurityOption5:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class SlidesPresentationsBatchUpdateSecurityOption6:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -71,15 +75,15 @@ class SlidesPresentationsBatchUpdateSecurity:
 
 @dataclass
 class SlidesPresentationsBatchUpdateRequest:
-    path_params: SlidesPresentationsBatchUpdatePathParams = field(default=None)
-    query_params: SlidesPresentationsBatchUpdateQueryParams = field(default=None)
+    path_params: SlidesPresentationsBatchUpdatePathParams = field()
+    query_params: SlidesPresentationsBatchUpdateQueryParams = field()
+    security: SlidesPresentationsBatchUpdateSecurity = field()
     request: Optional[shared.BatchUpdatePresentationRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: SlidesPresentationsBatchUpdateSecurity = field(default=None)
     
 
 @dataclass
 class SlidesPresentationsBatchUpdateResponse:
+    content_type: str = field()
+    status_code: int = field()
     batch_update_presentation_response: Optional[shared.BatchUpdatePresentationResponse] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

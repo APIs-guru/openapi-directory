@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ModelDigests
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Provides information to verify the integrity of stored model artifacts. 
 **/
 export class ModelDigests extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ArtifactDigest" })
+  @SpeakeasyMetadata({ data: "json, name=ArtifactDigest" })
   artifactDigest?: string;
 }

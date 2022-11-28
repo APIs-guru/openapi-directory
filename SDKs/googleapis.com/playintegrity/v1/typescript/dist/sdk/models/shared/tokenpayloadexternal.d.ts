@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { AccountDetails } from "./accountdetails";
 import { AppIntegrity } from "./appintegrity";
 import { DeviceIntegrity } from "./deviceintegrity";

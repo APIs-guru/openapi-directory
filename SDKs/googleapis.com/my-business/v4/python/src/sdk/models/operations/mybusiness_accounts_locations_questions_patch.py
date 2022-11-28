@@ -1,11 +1,15 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class MybusinessAccountsLocationsQuestionsPatchPathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,14 +30,14 @@ class MybusinessAccountsLocationsQuestionsPatchQueryParams:
 
 @dataclass
 class MybusinessAccountsLocationsQuestionsPatchRequest:
-    path_params: MybusinessAccountsLocationsQuestionsPatchPathParams = field(default=None)
-    query_params: MybusinessAccountsLocationsQuestionsPatchQueryParams = field(default=None)
+    path_params: MybusinessAccountsLocationsQuestionsPatchPathParams = field()
+    query_params: MybusinessAccountsLocationsQuestionsPatchQueryParams = field()
     request: Optional[shared.Question] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class MybusinessAccountsLocationsQuestionsPatchResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     question: Optional[shared.Question] = field(default=None)
-    status_code: int = field(default=None)
     

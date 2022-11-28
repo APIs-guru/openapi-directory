@@ -1,5 +1,25 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { MachineConfig } from "./machineconfig";
+
+
+
+// PrimaryInstanceSettingsInput
+/** 
+ * Settings for the cluster's primary instance
+**/
+export class PrimaryInstanceSettingsInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=databaseFlags" })
+  databaseFlags?: Map<string, string>;
+
+  @SpeakeasyMetadata({ data: "json, name=id" })
+  id?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=labels" })
+  labels?: Map<string, string>;
+
+  @SpeakeasyMetadata({ data: "json, name=machineConfig" })
+  machineConfig?: MachineConfig;
+}
 
 
 // PrimaryInstanceSettings
@@ -7,18 +27,18 @@ import { MachineConfig } from "./machineconfig";
  * Settings for the cluster's primary instance
 **/
 export class PrimaryInstanceSettings extends SpeakeasyBase {
-  @Metadata({ data: "json, name=databaseFlags" })
+  @SpeakeasyMetadata({ data: "json, name=databaseFlags" })
   databaseFlags?: Map<string, string>;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=labels" })
+  @SpeakeasyMetadata({ data: "json, name=labels" })
   labels?: Map<string, string>;
 
-  @Metadata({ data: "json, name=machineConfig" })
+  @SpeakeasyMetadata({ data: "json, name=machineConfig" })
   machineConfig?: MachineConfig;
 
-  @Metadata({ data: "json, name=privateIp" })
+  @SpeakeasyMetadata({ data: "json, name=privateIp" })
   privateIp?: string;
 }

@@ -1,17 +1,31 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
+
+
+// TagBindingInput
+/** 
+ * A TagBinding represents a connection between a TagValue and a cloud resource Once a TagBinding is created, the TagValue is applied to all the descendants of the Google Cloud resource.
+**/
+export class TagBindingInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=parent" })
+  parent?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=tagValue" })
+  tagValue?: string;
+}
 
 
 // TagBinding
 /** 
- * A TagBinding represents a connection between a TagValue and a cloud resource (currently project, folder, or organization). Once a TagBinding is created, the TagValue is applied to all the descendants of the cloud resource.
+ * A TagBinding represents a connection between a TagValue and a cloud resource Once a TagBinding is created, the TagValue is applied to all the descendants of the Google Cloud resource.
 **/
 export class TagBinding extends SpeakeasyBase {
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=parent" })
+  @SpeakeasyMetadata({ data: "json, name=parent" })
   parent?: string;
 
-  @Metadata({ data: "json, name=tagValue" })
+  @SpeakeasyMetadata({ data: "json, name=tagValue" })
   tagValue?: string;
 }

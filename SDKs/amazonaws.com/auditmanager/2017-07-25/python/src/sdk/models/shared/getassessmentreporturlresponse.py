@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import url
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class GetAssessmentReportURLResponse:
-    pre_signed_url: Optional[url.URL] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'preSignedUrl' }})
+    pre_signed_url: Optional[URL] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('preSignedUrl') }})
     

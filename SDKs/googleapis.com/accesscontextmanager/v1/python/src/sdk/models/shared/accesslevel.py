@@ -1,16 +1,20 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import basiclevel
-from . import customlevel
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class AccessLevel:
-    basic: Optional[basiclevel.BasicLevel] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'basic' }})
-    custom: Optional[customlevel.CustomLevel] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'custom' }})
-    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    title: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'title' }})
+    r"""AccessLevel
+    An `AccessLevel` is a label that can be applied to requests to Google Cloud services, along with a list of requirements necessary for the label to be applied.
+    """
+    
+    basic: Optional[BasicLevel] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('basic') }})
+    custom: Optional[CustomLevel] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('custom') }})
+    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('description') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    title: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('title') }})
     

@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { UserType } from "./usertype";
 
 
+
 export class ListUsersInGroupResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=Users", elemType: shared.UserType })
+  @SpeakeasyMetadata({ data: "json, name=Users", elemType: UserType })
   users?: UserType[];
 }

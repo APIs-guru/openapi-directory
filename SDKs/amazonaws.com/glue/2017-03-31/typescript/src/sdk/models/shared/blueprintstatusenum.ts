@@ -1,8 +1,9 @@
 
 
+
 export enum BlueprintStatusEnum {
-    Creating = "CREATING"
-,    Active = "ACTIVE"
-,    Updating = "UPDATING"
-,    Failed = "FAILED"
+    Creating = "CREATING",
+    Active = "ACTIVE",
+    Updating = "UPDATING",
+    Failed = "FAILED"
 }

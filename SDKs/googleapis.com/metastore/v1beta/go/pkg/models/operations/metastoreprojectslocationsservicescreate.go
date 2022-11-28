@@ -32,7 +32,7 @@ type MetastoreProjectsLocationsServicesCreateSecurity struct {
 type MetastoreProjectsLocationsServicesCreateRequest struct {
 	PathParams  MetastoreProjectsLocationsServicesCreatePathParams
 	QueryParams MetastoreProjectsLocationsServicesCreateQueryParams
-	Request     *shared.Service `request:"mediaType=application/json"`
+	Request     *shared.ServiceInput `request:"mediaType=application/json"`
 	Security    MetastoreProjectsLocationsServicesCreateSecurity
 }
 

@@ -1,28 +1,29 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ExportStatusEnum } from "./exportstatusenum";
 import { ExportTypeEnum } from "./exporttypeenum";
 import { ResourceTypeEnum } from "./resourcetypeenum";
 
 
+
 export class GetExportResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=exportStatus" })
+  @SpeakeasyMetadata({ data: "json, name=exportStatus" })
   exportStatus?: ExportStatusEnum;
 
-  @Metadata({ data: "json, name=exportType" })
+  @SpeakeasyMetadata({ data: "json, name=exportType" })
   exportType?: ExportTypeEnum;
 
-  @Metadata({ data: "json, name=failureReason" })
+  @SpeakeasyMetadata({ data: "json, name=failureReason" })
   failureReason?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=resourceType" })
+  @SpeakeasyMetadata({ data: "json, name=resourceType" })
   resourceType?: ResourceTypeEnum;
 
-  @Metadata({ data: "json, name=url" })
+  @SpeakeasyMetadata({ data: "json, name=url" })
   url?: string;
 
-  @Metadata({ data: "json, name=version" })
+  @SpeakeasyMetadata({ data: "json, name=version" })
   version?: string;
 }

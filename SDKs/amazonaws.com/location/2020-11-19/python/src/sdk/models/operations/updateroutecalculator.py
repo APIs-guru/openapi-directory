@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
 @dataclass
 class UpdateRouteCalculatorPathParams:
-    calculator_name: str = field(default=None, metadata={'path_param': { 'field_name': 'CalculatorName', 'style': 'simple', 'explode': False }})
+    calculator_name: str = field(metadata={'path_param': { 'field_name': 'CalculatorName', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -28,24 +33,24 @@ class UpdateRouteCalculatorRequestBodyPricingPlanEnum(str, Enum):
 @dataclass_json
 @dataclass
 class UpdateRouteCalculatorRequestBody:
-    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Description' }})
-    pricing_plan: Optional[UpdateRouteCalculatorRequestBodyPricingPlanEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'PricingPlan' }})
+    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Description') }})
+    pricing_plan: Optional[UpdateRouteCalculatorRequestBodyPricingPlanEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('PricingPlan') }})
     
 
 @dataclass
 class UpdateRouteCalculatorRequest:
-    path_params: UpdateRouteCalculatorPathParams = field(default=None)
-    headers: UpdateRouteCalculatorHeaders = field(default=None)
-    request: UpdateRouteCalculatorRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: UpdateRouteCalculatorHeaders = field()
+    path_params: UpdateRouteCalculatorPathParams = field()
+    request: UpdateRouteCalculatorRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class UpdateRouteCalculatorResponse:
+    content_type: str = field()
+    status_code: int = field()
     access_denied_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     internal_server_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     update_route_calculator_response: Optional[shared.UpdateRouteCalculatorResponse] = field(default=None)
     validation_exception: Optional[Any] = field(default=None)

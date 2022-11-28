@@ -1,15 +1,13 @@
-import axios, { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
-import { MatchContentType } from "../internal/utils/contenttype";
+import axios, { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse, ParamsSerializerOptions } from "axios";
 import * as operations from "./models/operations";
-import { ParamsSerializerOptions } from "axios";
-import { GetQueryParamSerializer } from "../internal/utils/queryparams";
-import { CreateSecurityClient } from "../internal/utils/security";
-import * as utils from "../internal/utils/utils";
+import * as utils from "../internal/utils";
+
+
 
 type OptsFunc = (sdk: SDK) => void;
 
-const Servers = [
-  "https://bills-api.parliament.uk",
+export const ServerList = [
+	"https://bills-api.parliament.uk",
 ] as const;
 
 export function WithServerURL(
@@ -20,47 +18,47 @@ export function WithServerURL(
     if (params != null) {
       serverURL = utils.ReplaceParameters(serverURL, params);
     }
-    sdk.serverURL = serverURL;
+    sdk._serverURL = serverURL;
   };
 }
 
 export function WithClient(client: AxiosInstance): OptsFunc {
   return (sdk: SDK) => {
-    sdk.defaultClient = client;
+    sdk._defaultClient = client;
   };
 }
 
 
 export class SDK {
-  defaultClient?: AxiosInstance;
-  securityClient?: AxiosInstance;
-  security?: any;
-  serverURL: string;
+
+  public _defaultClient: AxiosInstance;
+  public _securityClient: AxiosInstance;
+  
+  public _serverURL: string;
+  private _language = "typescript";
+  private _sdkVersion = "0.0.1";
+  private _genVersion = "internal";
 
   constructor(...opts: OptsFunc[]) {
     opts.forEach((o) => o(this));
-    if (this.serverURL == "") {
-      this.serverURL = Servers[0];
+    if (this._serverURL == "") {
+      this._serverURL = ServerList[0];
     }
 
-    if (!this.defaultClient) {
-      this.defaultClient = axios.create({ baseURL: this.serverURL });
+    if (!this._defaultClient) {
+      this._defaultClient = axios.create({ baseURL: this._serverURL });
     }
 
-    if (!this.securityClient) {
-      if (this.security) {
-        this.securityClient = CreateSecurityClient(
-          this.defaultClient,
-          this.security
-        );
-      } else {
-        this.securityClient = this.defaultClient;
-      }
+    if (!this._securityClient) {
+      this._securityClient = this._defaultClient;
     }
+    
   }
   
-  // GetApiV1BillTypes - Returns a list of Bill types.
-  GetApiV1BillTypes(
+  /**
+   * getApiV1BillTypes - Returns a list of Bill types.
+  **/
+  getApiV1BillTypes(
     req: operations.GetApiV1BillTypesRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetApiV1BillTypesResponse> {
@@ -68,12 +66,11 @@ export class SDK {
       req = new operations.GetApiV1BillTypesRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/api/v1/BillTypes";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -82,40 +79,41 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetApiV1BillTypesResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetApiV1BillTypesResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.billTypeSearchResult = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.billTypeSearchResult = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/plain`)) {
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `text/plain`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.problemDetails = httpRes?.data;
             }
             break;
@@ -127,8 +125,10 @@ export class SDK {
   }
 
   
-  // GetApiV1BillsBillIdStages - Returns all Bill stages.
-  GetApiV1BillsBillIdStages(
+  /**
+   * getApiV1BillsBillIdStages - Returns all Bill stages.
+  **/
+  getApiV1BillsBillIdStages(
     req: operations.GetApiV1BillsBillIdStagesRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetApiV1BillsBillIdStagesResponse> {
@@ -136,12 +136,11 @@ export class SDK {
       req = new operations.GetApiV1BillsBillIdStagesRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/api/v1/Bills/{billId}/Stages", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -150,54 +149,55 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetApiV1BillsBillIdStagesResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetApiV1BillsBillIdStagesResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.stageSummarySearchResult = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.stageSummarySearchResult = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/plain`)) {
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `text/plain`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.problemDetails = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `text/plain`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.problemDetails = httpRes?.data;
             }
             break;
@@ -209,8 +209,10 @@ export class SDK {
   }
 
   
-  // GetApiV1BillsBillIdStagesStageIdPublications - Return a list of Bill stage publications.
-  GetApiV1BillsBillIdStagesStageIdPublications(
+  /**
+   * getApiV1BillsBillIdStagesStageIdPublications - Return a list of Bill stage publications.
+  **/
+  getApiV1BillsBillIdStagesStageIdPublications(
     req: operations.GetApiV1BillsBillIdStagesStageIdPublicationsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetApiV1BillsBillIdStagesStageIdPublicationsResponse> {
@@ -218,60 +220,60 @@ export class SDK {
       req = new operations.GetApiV1BillsBillIdStagesStageIdPublicationsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/api/v1/Bills/{billId}/Stages/{stageId}/Publications", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetApiV1BillsBillIdStagesStageIdPublicationsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetApiV1BillsBillIdStagesStageIdPublicationsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.billStagePublicationList = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.billStagePublicationList = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/plain`)) {
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `text/plain`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.problemDetails = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `text/plain`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.problemDetails = httpRes?.data;
             }
             break;
@@ -283,8 +285,10 @@ export class SDK {
   }
 
   
-  // GetApiV1PublicationTypes - Returns a list of publication types.
-  GetApiV1PublicationTypes(
+  /**
+   * getApiV1PublicationTypes - Returns a list of publication types.
+  **/
+  getApiV1PublicationTypes(
     req: operations.GetApiV1PublicationTypesRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetApiV1PublicationTypesResponse> {
@@ -292,12 +296,11 @@ export class SDK {
       req = new operations.GetApiV1PublicationTypesRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/api/v1/PublicationTypes";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -306,40 +309,41 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetApiV1PublicationTypesResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetApiV1PublicationTypesResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.publicationTypeSearchResult = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.publicationTypeSearchResult = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/plain`)) {
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `text/plain`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.problemDetails = httpRes?.data;
             }
             break;
@@ -351,8 +355,10 @@ export class SDK {
   }
 
   
-  // GetApiV1PublicationsPublicationIdDocumentsDocumentId - Return information on a document.
-  GetApiV1PublicationsPublicationIdDocumentsDocumentId(
+  /**
+   * getApiV1PublicationsPublicationIdDocumentsDocumentId - Return information on a document.
+  **/
+  getApiV1PublicationsPublicationIdDocumentsDocumentId(
     req: operations.GetApiV1PublicationsPublicationIdDocumentsDocumentIdRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetApiV1PublicationsPublicationIdDocumentsDocumentIdResponse> {
@@ -360,60 +366,60 @@ export class SDK {
       req = new operations.GetApiV1PublicationsPublicationIdDocumentsDocumentIdRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/api/v1/Publications/{publicationId}/Documents/{documentId}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetApiV1PublicationsPublicationIdDocumentsDocumentIdResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetApiV1PublicationsPublicationIdDocumentsDocumentIdResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.publicationDocument = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.publicationDocument = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/plain`)) {
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `text/plain`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.problemDetails = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `text/plain`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.problemDetails = httpRes?.data;
             }
             break;
@@ -425,8 +431,10 @@ export class SDK {
   }
 
   
-  // GetApiV1PublicationsPublicationIdDocumentsDocumentIdDownload - Return a document.
-  GetApiV1PublicationsPublicationIdDocumentsDocumentIdDownload(
+  /**
+   * getApiV1PublicationsPublicationIdDocumentsDocumentIdDownload - Return a document.
+  **/
+  getApiV1PublicationsPublicationIdDocumentsDocumentIdDownload(
     req: operations.GetApiV1PublicationsPublicationIdDocumentsDocumentIdDownloadRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetApiV1PublicationsPublicationIdDocumentsDocumentIdDownloadResponse> {
@@ -434,45 +442,45 @@ export class SDK {
       req = new operations.GetApiV1PublicationsPublicationIdDocumentsDocumentIdDownloadRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/api/v1/Publications/{publicationId}/Documents/{documentId}/Download", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetApiV1PublicationsPublicationIdDocumentsDocumentIdDownloadResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.GetApiV1PublicationsPublicationIdDocumentsDocumentIdDownloadResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/plain`)) {
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/plain`)) {
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
@@ -487,8 +495,10 @@ export class SDK {
   }
 
   
-  // GetApiV1RssBillsIdRss - Returns an Rss feed of a certain Bill.
-  GetApiV1RssBillsIdRss(
+  /**
+   * getApiV1RssBillsIdRss - Returns an Rss feed of a certain Bill.
+  **/
+  getApiV1RssBillsIdRss(
     req: operations.GetApiV1RssBillsIdRssRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetApiV1RssBillsIdRssResponse> {
@@ -496,45 +506,45 @@ export class SDK {
       req = new operations.GetApiV1RssBillsIdRssRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/api/v1/Rss/Bills/{id}.rss", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetApiV1RssBillsIdRssResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.GetApiV1RssBillsIdRssResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/plain`)) {
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/plain`)) {
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
@@ -549,27 +559,28 @@ export class SDK {
   }
 
   
-  // GetApiV1RssAllbillsRss - Returns an Rss feed of all Bills.
-  GetApiV1RssAllbillsRss(
-    
+  /**
+   * getApiV1RssAllbillsRss - Returns an Rss feed of all Bills.
+  **/
+  getApiV1RssAllbillsRss(
     config?: AxiosRequestConfig
   ): Promise<operations.GetApiV1RssAllbillsRssResponse> {
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/api/v1/Rss/allbills.rss";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetApiV1RssAllbillsRssResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.GetApiV1RssAllbillsRssResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
         }
 
@@ -579,27 +590,28 @@ export class SDK {
   }
 
   
-  // GetApiV1RssPrivatebillsRss - Returns an Rss feed of private Bills.
-  GetApiV1RssPrivatebillsRss(
-    
+  /**
+   * getApiV1RssPrivatebillsRss - Returns an Rss feed of private Bills.
+  **/
+  getApiV1RssPrivatebillsRss(
     config?: AxiosRequestConfig
   ): Promise<operations.GetApiV1RssPrivatebillsRssResponse> {
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/api/v1/Rss/privatebills.rss";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetApiV1RssPrivatebillsRssResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.GetApiV1RssPrivatebillsRssResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
         }
 
@@ -609,27 +621,28 @@ export class SDK {
   }
 
   
-  // GetApiV1RssPublicbillsRss - Returns an Rss feed of public Bills.
-  GetApiV1RssPublicbillsRss(
-    
+  /**
+   * getApiV1RssPublicbillsRss - Returns an Rss feed of public Bills.
+  **/
+  getApiV1RssPublicbillsRss(
     config?: AxiosRequestConfig
   ): Promise<operations.GetApiV1RssPublicbillsRssResponse> {
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/api/v1/Rss/publicbills.rss";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetApiV1RssPublicbillsRssResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.GetApiV1RssPublicbillsRssResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
         }
 
@@ -639,8 +652,10 @@ export class SDK {
   }
 
   
-  // GetApiV1Stages - Returns a list of Bill stages.
-  GetApiV1Stages(
+  /**
+   * getApiV1Stages - Returns a list of Bill stages.
+  **/
+  getApiV1Stages(
     req: operations.GetApiV1StagesRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetApiV1StagesResponse> {
@@ -648,12 +663,11 @@ export class SDK {
       req = new operations.GetApiV1StagesRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/api/v1/Stages";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -662,40 +676,41 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetApiV1StagesResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetApiV1StagesResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.stageReferenceSearchResult = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.stageReferenceSearchResult = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/plain`)) {
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `text/plain`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.problemDetails = httpRes?.data;
             }
             break;
@@ -707,8 +722,10 @@ export class SDK {
   }
 
   
-  // GetAmendment - Returns an amendment.
-  GetAmendment(
+  /**
+   * getAmendment - Returns an amendment.
+  **/
+  getAmendment(
     req: operations.GetAmendmentRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetAmendmentResponse> {
@@ -716,60 +733,60 @@ export class SDK {
       req = new operations.GetAmendmentRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/api/v1/Bills/{billId}/Stages/{billStageId}/Amendments/{amendmentId}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetAmendmentResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetAmendmentResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.amendmentDetail = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.amendmentDetail = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/plain`)) {
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `text/plain`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.problemDetails = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `text/plain`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.problemDetails = httpRes?.data;
             }
             break;
@@ -781,8 +798,10 @@ export class SDK {
   }
 
   
-  // GetAmendments - Returns a list of amendments.
-  GetAmendments(
+  /**
+   * getAmendments - Returns a list of amendments.
+  **/
+  getAmendments(
     req: operations.GetAmendmentsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetAmendmentsResponse> {
@@ -790,12 +809,11 @@ export class SDK {
       req = new operations.GetAmendmentsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/api/v1/Bills/{billId}/Stages/{billStageId}/Amendments", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -804,54 +822,55 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetAmendmentsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetAmendmentsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.amendmentSearchItemSearchResult = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.amendmentSearchItemSearchResult = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/plain`)) {
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `text/plain`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.problemDetails = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `text/plain`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.problemDetails = httpRes?.data;
             }
             break;
@@ -863,8 +882,10 @@ export class SDK {
   }
 
   
-  // GetBill - Return a Bill.
-  GetBill(
+  /**
+   * getBill - Return a Bill.
+  **/
+  getBill(
     req: operations.GetBillRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetBillResponse> {
@@ -872,60 +893,60 @@ export class SDK {
       req = new operations.GetBillRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/api/v1/Bills/{billId}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetBillResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetBillResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.bill = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.bill = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/plain`)) {
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `text/plain`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.problemDetails = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `text/plain`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.problemDetails = httpRes?.data;
             }
             break;
@@ -937,8 +958,10 @@ export class SDK {
   }
 
   
-  // GetBillPublication - Return a list of Bill publications.
-  GetBillPublication(
+  /**
+   * getBillPublication - Return a list of Bill publications.
+  **/
+  getBillPublication(
     req: operations.GetBillPublicationRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetBillPublicationResponse> {
@@ -946,60 +969,60 @@ export class SDK {
       req = new operations.GetBillPublicationRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/api/v1/Bills/{billId}/Publications", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetBillPublicationResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetBillPublicationResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.billPublicationList = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.billPublicationList = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/plain`)) {
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `text/plain`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.problemDetails = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `text/plain`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.problemDetails = httpRes?.data;
             }
             break;
@@ -1011,8 +1034,10 @@ export class SDK {
   }
 
   
-  // GetBillStageDetails - Returns a Bill stage.
-  GetBillStageDetails(
+  /**
+   * getBillStageDetails - Returns a Bill stage.
+  **/
+  getBillStageDetails(
     req: operations.GetBillStageDetailsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetBillStageDetailsResponse> {
@@ -1020,60 +1045,60 @@ export class SDK {
       req = new operations.GetBillStageDetailsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/api/v1/Bills/{billId}/Stages/{billStageId}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetBillStageDetailsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetBillStageDetailsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.billStageDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.billStageDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/plain`)) {
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `text/plain`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.problemDetails = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `text/plain`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.problemDetails = httpRes?.data;
             }
             break;
@@ -1085,8 +1110,10 @@ export class SDK {
   }
 
   
-  // GetBills - Returns a list of Bills.
-  GetBills(
+  /**
+   * getBills - Returns a list of Bills.
+  **/
+  getBills(
     req: operations.GetBillsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetBillsResponse> {
@@ -1094,12 +1121,11 @@ export class SDK {
       req = new operations.GetBillsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/api/v1/Bills";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -1108,40 +1134,41 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetBillsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetBillsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.billSummarySearchResult = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.billSummarySearchResult = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/plain`)) {
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `text/plain`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.problemDetails = httpRes?.data;
             }
             break;
@@ -1153,8 +1180,10 @@ export class SDK {
   }
 
   
-  // GetNewsArticles - Returns a list of news articles for a Bill.
-  GetNewsArticles(
+  /**
+   * getNewsArticles - Returns a list of news articles for a Bill.
+  **/
+  getNewsArticles(
     req: operations.GetNewsArticlesRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetNewsArticlesResponse> {
@@ -1162,12 +1191,11 @@ export class SDK {
       req = new operations.GetNewsArticlesRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/api/v1/Bills/{billId}/NewsArticles", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -1176,54 +1204,55 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetNewsArticlesResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetNewsArticlesResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.newsArticlesSummarySearchResult = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.newsArticlesSummarySearchResult = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/plain`)) {
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `text/plain`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.problemDetails = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `text/plain`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.problemDetails = httpRes?.data;
             }
             break;
@@ -1235,8 +1264,10 @@ export class SDK {
   }
 
   
-  // GetSittings - Returns a list of Sittings.
-  GetSittings(
+  /**
+   * getSittings - Returns a list of Sittings.
+  **/
+  getSittings(
     req: operations.GetSittingsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetSittingsResponse> {
@@ -1244,12 +1275,11 @@ export class SDK {
       req = new operations.GetSittingsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/api/v1/Sittings";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -1258,40 +1288,41 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetSittingsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetSittingsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.billStageSittingSearchResult = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.billStageSittingSearchResult = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/plain`)) {
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `text/plain`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.problemDetails = httpRes?.data;
             }
             break;

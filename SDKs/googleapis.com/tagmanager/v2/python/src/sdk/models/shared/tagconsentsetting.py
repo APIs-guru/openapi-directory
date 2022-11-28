@@ -1,7 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import parameter
+from sdk import utils
+from . import *
 
 class TagConsentSettingConsentStatusEnum(str, Enum):
     NOT_SET = "notSet"
@@ -12,6 +14,6 @@ class TagConsentSettingConsentStatusEnum(str, Enum):
 @dataclass_json
 @dataclass
 class TagConsentSetting:
-    consent_status: Optional[TagConsentSettingConsentStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'consentStatus' }})
-    consent_type: Optional[parameter.Parameter] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'consentType' }})
+    consent_status: Optional[TagConsentSettingConsentStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('consentStatus') }})
+    consent_type: Optional[Parameter] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('consentType') }})
     

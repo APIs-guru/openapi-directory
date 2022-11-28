@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import videoformat
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class VideoFormatsListResponse:
-    kind: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'kind' }})
-    video_formats: Optional[List[videoformat.VideoFormat]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'videoFormats' }})
+    r"""VideoFormatsListResponse
+    Video Format List Response
+    """
+    
+    kind: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('kind') }})
+    video_formats: Optional[List[VideoFormat]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('videoFormats') }})
     

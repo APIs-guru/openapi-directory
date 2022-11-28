@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { EncryptionTypeEnum } from "./encryptiontypeenum";
+
 
 
 // Record
@@ -7,18 +8,18 @@ import { EncryptionTypeEnum } from "./encryptiontypeenum";
  * The unit of data of the Kinesis data stream, which is composed of a sequence number, a partition key, and a data blob.
 **/
 export class Record extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ApproximateArrivalTimestamp" })
+  @SpeakeasyMetadata({ data: "json, name=ApproximateArrivalTimestamp" })
   approximateArrivalTimestamp?: Date;
 
-  @Metadata({ data: "json, name=Data" })
+  @SpeakeasyMetadata({ data: "json, name=Data" })
   data: string;
 
-  @Metadata({ data: "json, name=EncryptionType" })
+  @SpeakeasyMetadata({ data: "json, name=EncryptionType" })
   encryptionType?: EncryptionTypeEnum;
 
-  @Metadata({ data: "json, name=PartitionKey" })
+  @SpeakeasyMetadata({ data: "json, name=PartitionKey" })
   partitionKey: string;
 
-  @Metadata({ data: "json, name=SequenceNumber" })
+  @SpeakeasyMetadata({ data: "json, name=SequenceNumber" })
   sequenceNumber: string;
 }

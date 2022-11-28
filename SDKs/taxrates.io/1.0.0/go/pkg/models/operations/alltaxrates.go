@@ -7,10 +7,6 @@ type AllTaxRatesQueryParams struct {
 	Filter      *string `queryParam:"style=form,explode=true,name=filter"`
 }
 
-type AllTaxRatesRequest struct {
-	QueryParams AllTaxRatesQueryParams
-}
-
 type AllTaxRates200ApplicationJSONRates struct {
 	DataName    *string `json:"data_name,omitempty"`
 	DataValue   *string `json:"data_value,omitempty"`
@@ -30,6 +26,10 @@ type AllTaxRates500ApplicationJSON struct {
 	Code    *string `json:"code,omitempty"`
 	Fields  *string `json:"fields,omitempty"`
 	Message *string `json:"message,omitempty"`
+}
+
+type AllTaxRatesRequest struct {
+	QueryParams AllTaxRatesQueryParams
 }
 
 type AllTaxRatesResponse struct {

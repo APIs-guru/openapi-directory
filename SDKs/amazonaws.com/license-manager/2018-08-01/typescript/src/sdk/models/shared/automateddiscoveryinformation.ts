@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AutomatedDiscoveryInformation
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Describes automated discovery.
 **/
 export class AutomatedDiscoveryInformation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=LastRunTime" })
+  @SpeakeasyMetadata({ data: "json, name=LastRunTime" })
   lastRunTime?: Date;
 }

@@ -22,9 +22,10 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { BucketInfo } from "./bucketinfo";
 import { Hits } from "./hits";
+import { FieldStats } from "./fieldstats";
 import { SearchStatus } from "./searchstatus";
 // SearchResponse
 /**
@@ -36,19 +37,19 @@ var SearchResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=facets", elemType: shared.BucketInfo }),
+        SpeakeasyMetadata({ data: "json, name=facets", elemType: BucketInfo }),
         __metadata("design:type", Map)
     ], SearchResponse.prototype, "facets", void 0);
     __decorate([
-        Metadata({ data: "json, name=hits" }),
+        SpeakeasyMetadata({ data: "json, name=hits" }),
         __metadata("design:type", Hits)
     ], SearchResponse.prototype, "hits", void 0);
     __decorate([
-        Metadata({ data: "json, name=stats", elemType: shared.FieldStats }),
+        SpeakeasyMetadata({ data: "json, name=stats", elemType: FieldStats }),
         __metadata("design:type", Map)
     ], SearchResponse.prototype, "stats", void 0);
     __decorate([
-        Metadata({ data: "json, name=status" }),
+        SpeakeasyMetadata({ data: "json, name=status" }),
         __metadata("design:type", SearchStatus)
     ], SearchResponse.prototype, "status", void 0);
     return SearchResponse;

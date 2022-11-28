@@ -11,12 +11,12 @@ class GetCalendarsQueryParams:
 
 @dataclass
 class GetCalendarsRequest:
-    query_params: GetCalendarsQueryParams = field(default=None)
+    query_params: GetCalendarsQueryParams = field()
     
 
 @dataclass
 class GetCalendarsResponse:
+    content_type: str = field()
+    status_code: int = field()
     calendars: Optional[List[shared.Calendar]] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

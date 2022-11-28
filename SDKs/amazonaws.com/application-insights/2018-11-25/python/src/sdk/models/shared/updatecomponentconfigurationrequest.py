@@ -1,15 +1,20 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import tier_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class UpdateComponentConfigurationRequest:
-    component_configuration: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ComponentConfiguration' }})
-    component_name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ComponentName' }})
-    monitor: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Monitor' }})
-    resource_group_name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ResourceGroupName' }})
-    tier: Optional[tier_enum.TierEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Tier' }})
+    component_name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('ComponentName') }})
+    resource_group_name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('ResourceGroupName') }})
+    component_configuration: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ComponentConfiguration') }})
+    monitor: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Monitor') }})
+    tier: Optional[TierEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Tier') }})
     

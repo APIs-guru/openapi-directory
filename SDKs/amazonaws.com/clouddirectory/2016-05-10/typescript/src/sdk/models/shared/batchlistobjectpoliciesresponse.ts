@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // BatchListObjectPoliciesResponse
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Represents the output of a <a>ListObjectPolicies</a> response operation.
 **/
 export class BatchListObjectPoliciesResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AttachedPolicyIds" })
+  @SpeakeasyMetadata({ data: "json, name=AttachedPolicyIds" })
   attachedPolicyIds?: string[];
 
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 }

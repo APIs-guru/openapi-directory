@@ -1,8 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import filterpair
-from . import options
+from sdk import utils
+from . import *
 
 class ParametersGroupBysEnum(str, Enum):
     FILTER_UNKNOWN = "FILTER_UNKNOWN"
@@ -806,10 +807,14 @@ class ParametersTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class Parameters:
-    filters: Optional[List[filterpair.FilterPair]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'filters' }})
-    group_bys: Optional[List[ParametersGroupBysEnum]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'groupBys' }})
-    include_invite_data: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'includeInviteData' }})
-    metrics: Optional[List[ParametersMetricsEnum]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'metrics' }})
-    options: Optional[options.Options] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'options' }})
-    type: Optional[ParametersTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    r"""Parameters
+    Parameters of a query or report.
+    """
+    
+    filters: Optional[List[FilterPair]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('filters') }})
+    group_bys: Optional[List[ParametersGroupBysEnum]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('groupBys') }})
+    include_invite_data: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('includeInviteData') }})
+    metrics: Optional[List[ParametersMetricsEnum]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('metrics') }})
+    options: Optional[Options] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('options') }})
+    type: Optional[ParametersTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('type') }})
     

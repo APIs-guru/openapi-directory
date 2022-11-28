@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class SchedulingNodeAffinityOperatorEnum(str, Enum):
     OPERATOR_UNSPECIFIED = "OPERATOR_UNSPECIFIED"
@@ -11,7 +13,11 @@ class SchedulingNodeAffinityOperatorEnum(str, Enum):
 @dataclass_json
 @dataclass
 class SchedulingNodeAffinity:
-    key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
-    operator: Optional[SchedulingNodeAffinityOperatorEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'operator' }})
-    values: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'values' }})
+    r"""SchedulingNodeAffinity
+    Node Affinity: the configuration of desired nodes onto which this Instance could be scheduled. Based on https://cloud.google.com/compute/docs/reference/rest/v1/instances/setScheduling
+    """
+    
+    key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('key') }})
+    operator: Optional[SchedulingNodeAffinityOperatorEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('operator') }})
+    values: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('values') }})
     

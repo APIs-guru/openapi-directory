@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // PlaceAddress
@@ -6,7 +7,7 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The physical address of the place.
 **/
 export class PlaceAddress extends SpeakeasyBase {
-  @Metadata({ data: "json, name=formatted" })
+  @SpeakeasyMetadata({ data: "json, name=formatted" })
   formatted?: string;
 }
 
@@ -16,27 +17,27 @@ export class PlaceAddress extends SpeakeasyBase {
  * The position of the place.
 **/
 export class PlacePosition extends SpeakeasyBase {
-  @Metadata({ data: "json, name=latitude" })
+  @SpeakeasyMetadata({ data: "json, name=latitude" })
   latitude?: number;
 
-  @Metadata({ data: "json, name=longitude" })
+  @SpeakeasyMetadata({ data: "json, name=longitude" })
   longitude?: number;
 }
 
 
 export class Place extends SpeakeasyBase {
-  @Metadata({ data: "json, name=address" })
+  @SpeakeasyMetadata({ data: "json, name=address" })
   address?: PlaceAddress;
 
-  @Metadata({ data: "json, name=displayName" })
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
   displayName?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=position" })
+  @SpeakeasyMetadata({ data: "json, name=position" })
   position?: PlacePosition;
 }

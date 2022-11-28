@@ -1,5 +1,7 @@
 package shared
 
+// PaginatedWorkspaces
+// A paginated list of workspaces.
 type PaginatedWorkspaces struct {
 	Next     *string                  `json:"next,omitempty"`
 	Page     *int64                   `json:"page,omitempty"`

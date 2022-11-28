@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { IntegrationLinkModel } from "./integrationlinkmodel";
 import { RolloutPercentageItemModel } from "./rolloutpercentageitemmodel";
 import { RolloutRuleModel } from "./rolloutrulemodel";

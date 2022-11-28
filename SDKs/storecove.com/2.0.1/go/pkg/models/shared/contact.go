@@ -1,5 +1,7 @@
 package shared
 
+// Contact
+// Contact details for the invoice
 type Contact struct {
 	Email     *string `json:"email,omitempty"`
 	FirstName *string `json:"firstName,omitempty"`

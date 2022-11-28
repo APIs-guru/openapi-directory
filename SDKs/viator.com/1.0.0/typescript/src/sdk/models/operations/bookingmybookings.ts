@@ -1,329 +1,330 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class BookingMybookingsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=email" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=email" })
   email?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=itineraryOrItemId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=itineraryOrItemId" })
   itineraryOrItemId?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=voucherKey" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=voucherKey" })
   voucherKey?: string;
 }
 
 
 export class BookingMybookingsHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=Accept-Language" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Accept-Language" })
   acceptLanguage: string;
 }
 
 
-export class BookingMybookingsRequest extends SpeakeasyBase {
-  @Metadata()
-  queryParams: BookingMybookingsQueryParams;
-
-  @Metadata()
-  headers: BookingMybookingsHeaders;
-}
-
-
 export class BookingMybookings200ApplicationJsonDataItemSummariesMerchantTermsAndConditionsCancellationFromTourDate extends SpeakeasyBase {
-  @Metadata({ data: "json, name=dayRangeMax" })
+  @SpeakeasyMetadata({ data: "json, name=dayRangeMax" })
   dayRangeMax?: number;
 
-  @Metadata({ data: "json, name=dayRangeMin" })
+  @SpeakeasyMetadata({ data: "json, name=dayRangeMin" })
   dayRangeMin?: number;
 
-  @Metadata({ data: "json, name=percentageRefundable" })
+  @SpeakeasyMetadata({ data: "json, name=percentageRefundable" })
   percentageRefundable?: number;
 
-  @Metadata({ data: "json, name=policyEndTimestamp" })
+  @SpeakeasyMetadata({ data: "json, name=policyEndTimestamp" })
   policyEndTimestamp?: number;
 
-  @Metadata({ data: "json, name=policyStartTimestamp" })
+  @SpeakeasyMetadata({ data: "json, name=policyStartTimestamp" })
   policyStartTimestamp?: number;
 }
 
 
 export class BookingMybookings200ApplicationJsonDataItemSummariesMerchantTermsAndConditions extends SpeakeasyBase {
-  @Metadata({ data: "json, name=amountRefundable" })
+  @SpeakeasyMetadata({ data: "json, name=amountRefundable" })
   amountRefundable?: string;
 
-  @Metadata({ data: "json, name=cancellationFromTourDate", elemType: operations.BookingMybookings200ApplicationJsonDataItemSummariesMerchantTermsAndConditionsCancellationFromTourDate })
+  @SpeakeasyMetadata({ data: "json, name=cancellationFromTourDate", elemType: BookingMybookings200ApplicationJsonDataItemSummariesMerchantTermsAndConditionsCancellationFromTourDate })
   cancellationFromTourDate?: BookingMybookings200ApplicationJsonDataItemSummariesMerchantTermsAndConditionsCancellationFromTourDate[];
 
-  @Metadata({ data: "json, name=termsAndConditions" })
+  @SpeakeasyMetadata({ data: "json, name=termsAndConditions" })
   termsAndConditions?: string;
 }
 
 
 export class BookingMybookings200ApplicationJsonDataItemSummariesTravellerAgeBands extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ageBandId" })
+  @SpeakeasyMetadata({ data: "json, name=ageBandId" })
   ageBandId?: number;
 
-  @Metadata({ data: "json, name=count" })
+  @SpeakeasyMetadata({ data: "json, name=count" })
   count?: number;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=pluralDescription" })
+  @SpeakeasyMetadata({ data: "json, name=pluralDescription" })
   pluralDescription?: string;
 
-  @Metadata({ data: "json, name=sortOrder" })
+  @SpeakeasyMetadata({ data: "json, name=sortOrder" })
   sortOrder?: number;
 }
 
 
 export class BookingMybookings200ApplicationJsonDataItemSummaries extends SpeakeasyBase {
-  @Metadata({ data: "json, name=barcodeOption" })
+  @SpeakeasyMetadata({ data: "json, name=barcodeOption" })
   barcodeOption?: string;
 
-  @Metadata({ data: "json, name=barcodeType" })
+  @SpeakeasyMetadata({ data: "json, name=barcodeType" })
   barcodeType?: string;
 
-  @Metadata({ data: "json, name=bookingEngineId" })
+  @SpeakeasyMetadata({ data: "json, name=bookingEngineId" })
   bookingEngineId?: shared.BookingEngineIdResponseEnum;
 
-  @Metadata({ data: "json, name=bookingStatus" })
+  @SpeakeasyMetadata({ data: "json, name=bookingStatus" })
   bookingStatus?: shared.BookingStatusItem;
 
-  @Metadata({ data: "json, name=currencyCode" })
+  @SpeakeasyMetadata({ data: "json, name=currencyCode" })
   currencyCode?: string;
 
-  @Metadata({ data: "json, name=departsFrom" })
+  @SpeakeasyMetadata({ data: "json, name=departsFrom" })
   departsFrom?: string;
 
-  @Metadata({ data: "json, name=departurePoint" })
+  @SpeakeasyMetadata({ data: "json, name=departurePoint" })
   departurePoint?: string;
 
-  @Metadata({ data: "json, name=departurePointAddress" })
+  @SpeakeasyMetadata({ data: "json, name=departurePointAddress" })
   departurePointAddress?: string;
 
-  @Metadata({ data: "json, name=departurePointDirections" })
+  @SpeakeasyMetadata({ data: "json, name=departurePointDirections" })
   departurePointDirections?: string;
 
-  @Metadata({ data: "json, name=destId" })
+  @SpeakeasyMetadata({ data: "json, name=destId" })
   destId?: number;
 
-  @Metadata({ data: "json, name=distributorItemRef" })
+  @SpeakeasyMetadata({ data: "json, name=distributorItemRef" })
   distributorItemRef?: string;
 
-  @Metadata({ data: "json, name=hoursConfirmed" })
+  @SpeakeasyMetadata({ data: "json, name=hoursConfirmed" })
   hoursConfirmed?: number;
 
-  @Metadata({ data: "json, name=itemId" })
+  @SpeakeasyMetadata({ data: "json, name=itemId" })
   itemId?: string;
 
-  @Metadata({ data: "json, name=itineraryId" })
+  @SpeakeasyMetadata({ data: "json, name=itineraryId" })
   itineraryId?: number;
 
-  @Metadata({ data: "json, name=languageServicesLanguageCode" })
+  @SpeakeasyMetadata({ data: "json, name=languageServicesLanguageCode" })
   languageServicesLanguageCode?: string;
 
-  @Metadata({ data: "json, name=lastRetailPrice" })
+  @SpeakeasyMetadata({ data: "json, name=lastRetailPrice" })
   lastRetailPrice?: number;
 
-  @Metadata({ data: "json, name=lastRetailPriceFormatted" })
+  @SpeakeasyMetadata({ data: "json, name=lastRetailPriceFormatted" })
   lastRetailPriceFormatted?: string;
 
-  @Metadata({ data: "json, name=leadTravellerFirstname" })
+  @SpeakeasyMetadata({ data: "json, name=leadTravellerFirstname" })
   leadTravellerFirstname?: string;
 
-  @Metadata({ data: "json, name=leadTravellerSurname" })
+  @SpeakeasyMetadata({ data: "json, name=leadTravellerSurname" })
   leadTravellerSurname?: string;
 
-  @Metadata({ data: "json, name=leadTravellerTitle" })
+  @SpeakeasyMetadata({ data: "json, name=leadTravellerTitle" })
   leadTravellerTitle?: string;
 
-  @Metadata({ data: "json, name=merchantCancellable" })
+  @SpeakeasyMetadata({ data: "json, name=merchantCancellable" })
   merchantCancellable?: boolean;
 
-  @Metadata({ data: "json, name=merchantNetPrice" })
+  @SpeakeasyMetadata({ data: "json, name=merchantNetPrice" })
   merchantNetPrice?: number;
 
-  @Metadata({ data: "json, name=merchantNetPriceFormatted" })
+  @SpeakeasyMetadata({ data: "json, name=merchantNetPriceFormatted" })
   merchantNetPriceFormatted?: string;
 
-  @Metadata({ data: "json, name=merchantTermsAndConditions" })
+  @SpeakeasyMetadata({ data: "json, name=merchantTermsAndConditions" })
   merchantTermsAndConditions?: BookingMybookings200ApplicationJsonDataItemSummariesMerchantTermsAndConditions;
 
-  @Metadata({ data: "json, name=obfsId" })
+  @SpeakeasyMetadata({ data: "json, name=obfsId" })
   obfsId?: string;
 
-  @Metadata({ data: "json, name=passbooks" })
+  @SpeakeasyMetadata({ data: "json, name=passbooks" })
   passbooks?: string;
 
-  @Metadata({ data: "json, name=price" })
+  @SpeakeasyMetadata({ data: "json, name=price" })
   price?: number;
 
-  @Metadata({ data: "json, name=priceFormatted" })
+  @SpeakeasyMetadata({ data: "json, name=priceFormatted" })
   priceFormatted?: string;
 
-  @Metadata({ data: "json, name=priceUSD" })
+  @SpeakeasyMetadata({ data: "json, name=priceUSD" })
   priceUsd?: number;
 
-  @Metadata({ data: "json, name=productCode" })
+  @SpeakeasyMetadata({ data: "json, name=productCode" })
   productCode?: string;
 
-  @Metadata({ data: "json, name=productPulledDown" })
+  @SpeakeasyMetadata({ data: "json, name=productPulledDown" })
   productPulledDown?: boolean;
 
-  @Metadata({ data: "json, name=productTitle" })
+  @SpeakeasyMetadata({ data: "json, name=productTitle" })
   productTitle?: string;
 
-  @Metadata({ data: "json, name=productWidgetList" })
+  @SpeakeasyMetadata({ data: "json, name=productWidgetList" })
   productWidgetList?: string;
 
-  @Metadata({ data: "json, name=rulesApplied" })
+  @SpeakeasyMetadata({ data: "json, name=rulesApplied" })
   rulesApplied?: string;
 
-  @Metadata({ data: "json, name=savingAmount" })
+  @SpeakeasyMetadata({ data: "json, name=savingAmount" })
   savingAmount?: string;
 
-  @Metadata({ data: "json, name=savingAmountFormated" })
+  @SpeakeasyMetadata({ data: "json, name=savingAmountFormated" })
   savingAmountFormated?: string;
 
-  @Metadata({ data: "json, name=sortOrder" })
+  @SpeakeasyMetadata({ data: "json, name=sortOrder" })
   sortOrder?: number;
 
-  @Metadata({ data: "json, name=termsAndConditions" })
+  @SpeakeasyMetadata({ data: "json, name=termsAndConditions" })
   termsAndConditions?: string;
 
-  @Metadata({ data: "json, name=tourGradeCode" })
+  @SpeakeasyMetadata({ data: "json, name=tourGradeCode" })
   tourGradeCode?: string;
 
-  @Metadata({ data: "json, name=tourGradeDescription" })
+  @SpeakeasyMetadata({ data: "json, name=tourGradeDescription" })
   tourGradeDescription?: string;
 
-  @Metadata({ data: "json, name=travelDate" })
+  @SpeakeasyMetadata({ data: "json, name=travelDate" })
   travelDate?: string;
 
-  @Metadata({ data: "json, name=travellerAgeBands", elemType: operations.BookingMybookings200ApplicationJsonDataItemSummariesTravellerAgeBands })
+  @SpeakeasyMetadata({ data: "json, name=travellerAgeBands", elemType: BookingMybookings200ApplicationJsonDataItemSummariesTravellerAgeBands })
   travellerAgeBands?: BookingMybookings200ApplicationJsonDataItemSummariesTravellerAgeBands[];
 
-  @Metadata({ data: "json, name=voucherKey" })
+  @SpeakeasyMetadata({ data: "json, name=voucherKey" })
   voucherKey?: string;
 
-  @Metadata({ data: "json, name=voucherOption" })
+  @SpeakeasyMetadata({ data: "json, name=voucherOption" })
   voucherOption?: string;
 
-  @Metadata({ data: "json, name=voucherRequirements" })
+  @SpeakeasyMetadata({ data: "json, name=voucherRequirements" })
   voucherRequirements?: string;
 
-  @Metadata({ data: "json, name=voucherURL" })
+  @SpeakeasyMetadata({ data: "json, name=voucherURL" })
   voucherUrl?: string;
 
-  @Metadata({ data: "json, name=vouchers" })
+  @SpeakeasyMetadata({ data: "json, name=vouchers" })
   vouchers?: string;
 }
 
 
 export class BookingMybookings200ApplicationJsonData extends SpeakeasyBase {
-  @Metadata({ data: "json, name=bookerEmail" })
+  @SpeakeasyMetadata({ data: "json, name=bookerEmail" })
   bookerEmail?: string;
 
-  @Metadata({ data: "json, name=bookingDate" })
+  @SpeakeasyMetadata({ data: "json, name=bookingDate" })
   bookingDate?: string;
 
-  @Metadata({ data: "json, name=bookingStatus" })
+  @SpeakeasyMetadata({ data: "json, name=bookingStatus" })
   bookingStatus?: shared.BookingStatusItinerary;
 
-  @Metadata({ data: "json, name=currencyCode" })
+  @SpeakeasyMetadata({ data: "json, name=currencyCode" })
   currencyCode?: string;
 
-  @Metadata({ data: "json, name=distributorRef" })
+  @SpeakeasyMetadata({ data: "json, name=distributorRef" })
   distributorRef?: string;
 
-  @Metadata({ data: "json, name=exchangeRate" })
+  @SpeakeasyMetadata({ data: "json, name=exchangeRate" })
   exchangeRate?: number;
 
-  @Metadata({ data: "json, name=hasVoucher" })
+  @SpeakeasyMetadata({ data: "json, name=hasVoucher" })
   hasVoucher?: boolean;
 
-  @Metadata({ data: "json, name=itemSummaries", elemType: operations.BookingMybookings200ApplicationJsonDataItemSummaries })
+  @SpeakeasyMetadata({ data: "json, name=itemSummaries", elemType: BookingMybookings200ApplicationJsonDataItemSummaries })
   itemSummaries?: BookingMybookings200ApplicationJsonDataItemSummaries[];
 
-  @Metadata({ data: "json, name=itineraryId" })
+  @SpeakeasyMetadata({ data: "json, name=itineraryId" })
   itineraryId?: number;
 
-  @Metadata({ data: "json, name=rulesApplied" })
+  @SpeakeasyMetadata({ data: "json, name=rulesApplied" })
   rulesApplied?: string;
 
-  @Metadata({ data: "json, name=sortOrder" })
+  @SpeakeasyMetadata({ data: "json, name=sortOrder" })
   sortOrder?: number;
 
-  @Metadata({ data: "json, name=totalPrice" })
+  @SpeakeasyMetadata({ data: "json, name=totalPrice" })
   totalPrice?: number;
 
-  @Metadata({ data: "json, name=totalPriceFormatted" })
+  @SpeakeasyMetadata({ data: "json, name=totalPriceFormatted" })
   totalPriceFormatted?: string;
 
-  @Metadata({ data: "json, name=totalPriceUSD" })
+  @SpeakeasyMetadata({ data: "json, name=totalPriceUSD" })
   totalPriceUsd?: number;
 
-  @Metadata({ data: "json, name=userId" })
+  @SpeakeasyMetadata({ data: "json, name=userId" })
   userId?: string;
 
-  @Metadata({ data: "json, name=voucherKey" })
+  @SpeakeasyMetadata({ data: "json, name=voucherKey" })
   voucherKey?: string;
 
-  @Metadata({ data: "json, name=voucherURL" })
+  @SpeakeasyMetadata({ data: "json, name=voucherURL" })
   voucherUrl?: string;
 }
 
 
 export class BookingMybookings200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data?: BookingMybookings200ApplicationJsonData;
 
-  @Metadata({ data: "json, name=dateStamp" })
+  @SpeakeasyMetadata({ data: "json, name=dateStamp" })
   dateStamp?: string;
 
-  @Metadata({ data: "json, name=errorCodes" })
+  @SpeakeasyMetadata({ data: "json, name=errorCodes" })
   errorCodes?: string[];
 
-  @Metadata({ data: "json, name=errorMessage" })
+  @SpeakeasyMetadata({ data: "json, name=errorMessage" })
   errorMessage?: any[];
 
-  @Metadata({ data: "json, name=errorMessageText" })
+  @SpeakeasyMetadata({ data: "json, name=errorMessageText" })
   errorMessageText?: string;
 
-  @Metadata({ data: "json, name=errorName" })
+  @SpeakeasyMetadata({ data: "json, name=errorName" })
   errorName?: string;
 
-  @Metadata({ data: "json, name=errorReference" })
+  @SpeakeasyMetadata({ data: "json, name=errorReference" })
   errorReference?: string;
 
-  @Metadata({ data: "json, name=errorType" })
+  @SpeakeasyMetadata({ data: "json, name=errorType" })
   errorType?: string;
 
-  @Metadata({ data: "json, name=extraInfo" })
+  @SpeakeasyMetadata({ data: "json, name=extraInfo" })
   extraInfo?: Map<string, any>;
 
-  @Metadata({ data: "json, name=extraObject" })
+  @SpeakeasyMetadata({ data: "json, name=extraObject" })
   extraObject?: Map<string, any>;
 
-  @Metadata({ data: "json, name=success" })
+  @SpeakeasyMetadata({ data: "json, name=success" })
   success?: boolean;
 
-  @Metadata({ data: "json, name=totalCount" })
+  @SpeakeasyMetadata({ data: "json, name=totalCount" })
   totalCount?: number;
 
-  @Metadata({ data: "json, name=vmid" })
+  @SpeakeasyMetadata({ data: "json, name=vmid" })
   vmid?: string;
 }
 
 
+export class BookingMybookingsRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  queryParams: BookingMybookingsQueryParams;
+
+  @SpeakeasyMetadata()
+  headers: BookingMybookingsHeaders;
+}
+
+
 export class BookingMybookingsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   bookingMybookings200ApplicationJsonObject?: BookingMybookings200ApplicationJson;
 }

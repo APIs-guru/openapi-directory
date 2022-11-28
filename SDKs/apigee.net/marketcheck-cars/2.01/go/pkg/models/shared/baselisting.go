@@ -1,5 +1,7 @@
 package shared
 
+// BaseListing
+// Minimal set of attributes describing a listing
 type BaseListing struct {
 	Build            *Build            `json:"build,omitempty"`
 	Carfax1Owner     *bool             `json:"carfax_1_owner,omitempty"`

@@ -1,35 +1,36 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetItemPromotionPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=promotion_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=promotion_id" })
   promotionId: string;
 }
 
 
 export class GetItemPromotionSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   apiAuth: shared.SchemeApiAuth;
 }
 
 
 export class GetItemPromotionRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetItemPromotionPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: GetItemPromotionSecurity;
 }
 
 
 export class GetItemPromotionResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   itemPromotionResponse?: shared.ItemPromotionResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

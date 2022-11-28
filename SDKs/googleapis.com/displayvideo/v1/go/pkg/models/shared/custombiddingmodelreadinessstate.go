@@ -10,6 +10,8 @@ const (
 	CustomBiddingModelReadinessStateReadinessStateEnumReadinessStateNoValidScript    CustomBiddingModelReadinessStateReadinessStateEnum = "READINESS_STATE_NO_VALID_SCRIPT"
 )
 
+// CustomBiddingModelReadinessState
+// The custom bidding algorithm model readiness state for a single shared advertiser.
 type CustomBiddingModelReadinessState struct {
 	AdvertiserID   *string                                             `json:"advertiserId,omitempty"`
 	ReadinessState *CustomBiddingModelReadinessStateReadinessStateEnum `json:"readinessState,omitempty"`

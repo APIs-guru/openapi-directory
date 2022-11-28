@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // DescribePipelinesInput
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Contains the parameters for DescribePipelines.
 **/
 export class DescribePipelinesInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=pipelineIds" })
+  @SpeakeasyMetadata({ data: "json, name=pipelineIds" })
   pipelineIds: string[];
 }

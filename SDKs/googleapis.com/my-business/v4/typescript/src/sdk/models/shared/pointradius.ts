@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { LatLng } from "./latlng";
+
 
 
 // PointRadius
@@ -7,9 +8,9 @@ import { LatLng } from "./latlng";
  * A radius around a particular point (latitude/longitude).
 **/
 export class PointRadius extends SpeakeasyBase {
-  @Metadata({ data: "json, name=latlng" })
+  @SpeakeasyMetadata({ data: "json, name=latlng" })
   latlng?: LatLng;
 
-  @Metadata({ data: "json, name=radiusKm" })
+  @SpeakeasyMetadata({ data: "json, name=radiusKm" })
   radiusKm?: number;
 }

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AwsApiGatewayAccessLogSettings
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Contains information about settings for logging access for the stage.
 **/
 export class AwsApiGatewayAccessLogSettings extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DestinationArn" })
+  @SpeakeasyMetadata({ data: "json, name=DestinationArn" })
   destinationArn?: string;
 
-  @Metadata({ data: "json, name=Format" })
+  @SpeakeasyMetadata({ data: "json, name=Format" })
   format?: string;
 }

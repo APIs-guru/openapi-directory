@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BatchArrayProperties } from "./batcharrayproperties";
 import { BatchRetryStrategy } from "./batchretrystrategy";
 // BatchParameters
@@ -35,19 +35,19 @@ var BatchParameters = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=ArrayProperties" }),
+        SpeakeasyMetadata({ data: "json, name=ArrayProperties" }),
         __metadata("design:type", BatchArrayProperties)
     ], BatchParameters.prototype, "arrayProperties", void 0);
     __decorate([
-        Metadata({ data: "json, name=JobDefinition" }),
+        SpeakeasyMetadata({ data: "json, name=JobDefinition" }),
         __metadata("design:type", String)
     ], BatchParameters.prototype, "jobDefinition", void 0);
     __decorate([
-        Metadata({ data: "json, name=JobName" }),
+        SpeakeasyMetadata({ data: "json, name=JobName" }),
         __metadata("design:type", String)
     ], BatchParameters.prototype, "jobName", void 0);
     __decorate([
-        Metadata({ data: "json, name=RetryStrategy" }),
+        SpeakeasyMetadata({ data: "json, name=RetryStrategy" }),
         __metadata("design:type", BatchRetryStrategy)
     ], BatchParameters.prototype, "retryStrategy", void 0);
     return BatchParameters;

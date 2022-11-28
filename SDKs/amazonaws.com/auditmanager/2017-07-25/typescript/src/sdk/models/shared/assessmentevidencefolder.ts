@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AssessmentEvidenceFolder
@@ -6,57 +7,57 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  *  The folder in which Audit Manager stores evidence for an assessment. 
 **/
 export class AssessmentEvidenceFolder extends SpeakeasyBase {
-  @Metadata({ data: "json, name=assessmentId" })
+  @SpeakeasyMetadata({ data: "json, name=assessmentId" })
   assessmentId?: string;
 
-  @Metadata({ data: "json, name=assessmentReportSelectionCount" })
+  @SpeakeasyMetadata({ data: "json, name=assessmentReportSelectionCount" })
   assessmentReportSelectionCount?: number;
 
-  @Metadata({ data: "json, name=author" })
+  @SpeakeasyMetadata({ data: "json, name=author" })
   author?: string;
 
-  @Metadata({ data: "json, name=controlId" })
+  @SpeakeasyMetadata({ data: "json, name=controlId" })
   controlId?: string;
 
-  @Metadata({ data: "json, name=controlName" })
+  @SpeakeasyMetadata({ data: "json, name=controlName" })
   controlName?: string;
 
-  @Metadata({ data: "json, name=controlSetId" })
+  @SpeakeasyMetadata({ data: "json, name=controlSetId" })
   controlSetId?: string;
 
-  @Metadata({ data: "json, name=dataSource" })
+  @SpeakeasyMetadata({ data: "json, name=dataSource" })
   dataSource?: string;
 
-  @Metadata({ data: "json, name=date" })
+  @SpeakeasyMetadata({ data: "json, name=date" })
   date?: Date;
 
-  @Metadata({ data: "json, name=evidenceAwsServiceSourceCount" })
+  @SpeakeasyMetadata({ data: "json, name=evidenceAwsServiceSourceCount" })
   evidenceAwsServiceSourceCount?: number;
 
-  @Metadata({ data: "json, name=evidenceByTypeComplianceCheckCount" })
+  @SpeakeasyMetadata({ data: "json, name=evidenceByTypeComplianceCheckCount" })
   evidenceByTypeComplianceCheckCount?: number;
 
-  @Metadata({ data: "json, name=evidenceByTypeComplianceCheckIssuesCount" })
+  @SpeakeasyMetadata({ data: "json, name=evidenceByTypeComplianceCheckIssuesCount" })
   evidenceByTypeComplianceCheckIssuesCount?: number;
 
-  @Metadata({ data: "json, name=evidenceByTypeConfigurationDataCount" })
+  @SpeakeasyMetadata({ data: "json, name=evidenceByTypeConfigurationDataCount" })
   evidenceByTypeConfigurationDataCount?: number;
 
-  @Metadata({ data: "json, name=evidenceByTypeManualCount" })
+  @SpeakeasyMetadata({ data: "json, name=evidenceByTypeManualCount" })
   evidenceByTypeManualCount?: number;
 
-  @Metadata({ data: "json, name=evidenceByTypeUserActivityCount" })
+  @SpeakeasyMetadata({ data: "json, name=evidenceByTypeUserActivityCount" })
   evidenceByTypeUserActivityCount?: number;
 
-  @Metadata({ data: "json, name=evidenceResourcesIncludedCount" })
+  @SpeakeasyMetadata({ data: "json, name=evidenceResourcesIncludedCount" })
   evidenceResourcesIncludedCount?: number;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=totalEvidence" })
+  @SpeakeasyMetadata({ data: "json, name=totalEvidence" })
   totalEvidence?: number;
 }

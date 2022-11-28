@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ProjectConfig } from "./projectconfig";
+
 
 
 // UpdateProjectConfigRequest
@@ -7,9 +8,9 @@ import { ProjectConfig } from "./projectconfig";
  * Request for UpdateProjectConfig.
 **/
 export class UpdateProjectConfigRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=projectConfig" })
+  @SpeakeasyMetadata({ data: "json, name=projectConfig" })
   projectConfig?: ProjectConfig;
 
-  @Metadata({ data: "json, name=updateMask" })
+  @SpeakeasyMetadata({ data: "json, name=updateMask" })
   updateMask?: string;
 }

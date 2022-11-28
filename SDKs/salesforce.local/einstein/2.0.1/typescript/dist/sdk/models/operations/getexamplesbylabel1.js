@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetExamplesByLabel1QueryParams = /** @class */ (function (_super) {
     __extends(GetExamplesByLabel1QueryParams, _super);
@@ -30,15 +30,15 @@ var GetExamplesByLabel1QueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=count" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=count" }),
         __metadata("design:type", String)
     ], GetExamplesByLabel1QueryParams.prototype, "count", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=labelId" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=labelId" }),
         __metadata("design:type", String)
     ], GetExamplesByLabel1QueryParams.prototype, "labelId", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=offset" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=offset" }),
         __metadata("design:type", String)
     ], GetExamplesByLabel1QueryParams.prototype, "offset", void 0);
     return GetExamplesByLabel1QueryParams;
@@ -50,7 +50,7 @@ var GetExamplesByLabel1Security = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=http;subtype=bearer" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" }),
         __metadata("design:type", shared.SchemeBearerToken)
     ], GetExamplesByLabel1Security.prototype, "bearerToken", void 0);
     return GetExamplesByLabel1Security;
@@ -62,11 +62,11 @@ var GetExamplesByLabel1Request = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetExamplesByLabel1QueryParams)
     ], GetExamplesByLabel1Request.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetExamplesByLabel1Security)
     ], GetExamplesByLabel1Request.prototype, "security", void 0);
     return GetExamplesByLabel1Request;
@@ -78,15 +78,15 @@ var GetExamplesByLabel1Response = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetExamplesByLabel1Response.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.ExampleList)
     ], GetExamplesByLabel1Response.prototype, "exampleList", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetExamplesByLabel1Response.prototype, "statusCode", void 0);
     return GetExamplesByLabel1Response;

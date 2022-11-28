@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class ChromemanagementCustomersReportsCountChromeVersionsPathParams:
-    customer: str = field(default=None, metadata={'path_param': { 'field_name': 'customer', 'style': 'simple', 'explode': False }})
+    customer: str = field(metadata={'path_param': { 'field_name': 'customer', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -29,20 +30,20 @@ class ChromemanagementCustomersReportsCountChromeVersionsQueryParams:
 
 @dataclass
 class ChromemanagementCustomersReportsCountChromeVersionsSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class ChromemanagementCustomersReportsCountChromeVersionsRequest:
-    path_params: ChromemanagementCustomersReportsCountChromeVersionsPathParams = field(default=None)
-    query_params: ChromemanagementCustomersReportsCountChromeVersionsQueryParams = field(default=None)
-    security: ChromemanagementCustomersReportsCountChromeVersionsSecurity = field(default=None)
+    path_params: ChromemanagementCustomersReportsCountChromeVersionsPathParams = field()
+    query_params: ChromemanagementCustomersReportsCountChromeVersionsQueryParams = field()
+    security: ChromemanagementCustomersReportsCountChromeVersionsSecurity = field()
     
 
 @dataclass
 class ChromemanagementCustomersReportsCountChromeVersionsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_chrome_management_v1_count_chrome_versions_response: Optional[shared.GoogleChromeManagementV1CountChromeVersionsResponse] = field(default=None)
-    status_code: int = field(default=None)
     

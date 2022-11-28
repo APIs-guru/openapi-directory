@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class AssignedUserRoleUserRoleEnum(str, Enum):
     USER_ROLE_UNSPECIFIED = "USER_ROLE_UNSPECIFIED"
@@ -20,8 +22,24 @@ class AssignedUserRoleUserRoleEnum(str, Enum):
 @dataclass_json
 @dataclass
 class AssignedUserRole:
-    advertiser_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'advertiserId' }})
-    assigned_user_role_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'assignedUserRoleId' }})
-    partner_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'partnerId' }})
-    user_role: Optional[AssignedUserRoleUserRoleEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'userRole' }})
+    r"""AssignedUserRole
+    A single assigned user role, which defines a user's authorized interaction with a specified partner or advertiser.
+    """
+    
+    advertiser_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('advertiserId') }})
+    assigned_user_role_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('assignedUserRoleId') }})
+    partner_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('partnerId') }})
+    user_role: Optional[AssignedUserRoleUserRoleEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('userRole') }})
+    
+
+@dataclass_json
+@dataclass
+class AssignedUserRoleInput:
+    r"""AssignedUserRoleInput
+    A single assigned user role, which defines a user's authorized interaction with a specified partner or advertiser.
+    """
+    
+    advertiser_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('advertiserId') }})
+    partner_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('partnerId') }})
+    user_role: Optional[AssignedUserRoleUserRoleEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('userRole') }})
     

@@ -17,14 +17,14 @@ class PostForecastHistoryAndForecastRequests:
 
 @dataclass
 class PostForecastHistoryAndForecastRequest:
-    headers: PostForecastHistoryAndForecastHeaders = field(default=None)
+    headers: PostForecastHistoryAndForecastHeaders = field()
     request: Optional[PostForecastHistoryAndForecastRequests] = field(default=None)
     
 
 @dataclass
 class PostForecastHistoryAndForecastResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     history_and_forecast_response: Optional[shared.HistoryAndForecastResponse] = field(default=None)
-    status_code: int = field(default=None)
     

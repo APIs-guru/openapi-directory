@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { AccountEmbeddedObject } from "./accountembeddedobject";
 import { Links } from "./links";
 export declare class AccountHalResponse extends SpeakeasyBase {

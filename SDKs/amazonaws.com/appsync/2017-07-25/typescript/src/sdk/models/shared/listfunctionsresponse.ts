@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { FunctionConfiguration } from "./functionconfiguration";
 
 
+
 export class ListFunctionsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=functions", elemType: shared.FunctionConfiguration })
+  @SpeakeasyMetadata({ data: "json, name=functions", elemType: FunctionConfiguration })
   functions?: FunctionConfiguration[];
 
-  @Metadata({ data: "json, name=nextToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextToken" })
   nextToken?: string;
 }

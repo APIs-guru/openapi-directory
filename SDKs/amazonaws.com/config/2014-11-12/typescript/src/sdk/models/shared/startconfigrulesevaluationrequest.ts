@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // StartConfigRulesEvaluationRequest
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * <p/>
 **/
 export class StartConfigRulesEvaluationRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ConfigRuleNames" })
+  @SpeakeasyMetadata({ data: "json, name=ConfigRuleNames" })
   configRuleNames?: string[];
 }

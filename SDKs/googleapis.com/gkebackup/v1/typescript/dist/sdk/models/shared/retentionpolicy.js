@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // RetentionPolicy
 /**
  * RetentionPolicy defines a Backup retention policy for a BackupPlan.
@@ -33,15 +33,15 @@ var RetentionPolicy = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=backupDeleteLockDays" }),
+        SpeakeasyMetadata({ data: "json, name=backupDeleteLockDays" }),
         __metadata("design:type", Number)
     ], RetentionPolicy.prototype, "backupDeleteLockDays", void 0);
     __decorate([
-        Metadata({ data: "json, name=backupRetainDays" }),
+        SpeakeasyMetadata({ data: "json, name=backupRetainDays" }),
         __metadata("design:type", Number)
     ], RetentionPolicy.prototype, "backupRetainDays", void 0);
     __decorate([
-        Metadata({ data: "json, name=locked" }),
+        SpeakeasyMetadata({ data: "json, name=locked" }),
         __metadata("design:type", Boolean)
     ], RetentionPolicy.prototype, "locked", void 0);
     return RetentionPolicy;

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // S3Location
 /**
  * The Amazon S3 location where the source code files provided with the project request are stored.
@@ -33,11 +33,11 @@ var S3Location = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=bucketKey" }),
+        SpeakeasyMetadata({ data: "json, name=bucketKey" }),
         __metadata("design:type", String)
     ], S3Location.prototype, "bucketKey", void 0);
     __decorate([
-        Metadata({ data: "json, name=bucketName" }),
+        SpeakeasyMetadata({ data: "json, name=bucketName" }),
         __metadata("design:type", String)
     ], S3Location.prototype, "bucketName", void 0);
     return S3Location;

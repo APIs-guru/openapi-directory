@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CustomDataIdentifierSummary } from "./customdataidentifiersummary";
 
 
+
 export class ListCustomDataIdentifiersResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=items", elemType: shared.CustomDataIdentifierSummary })
+  @SpeakeasyMetadata({ data: "json, name=items", elemType: CustomDataIdentifierSummary })
   items?: CustomDataIdentifierSummary[];
 
-  @Metadata({ data: "json, name=nextToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextToken" })
   nextToken?: string;
 }

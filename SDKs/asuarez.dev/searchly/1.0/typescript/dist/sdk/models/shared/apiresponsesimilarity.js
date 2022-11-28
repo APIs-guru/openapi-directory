@@ -22,8 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // ApiResponseSimilarityResponseSimilarityList
 /**
  * Song similarity item.
@@ -34,35 +33,35 @@ var ApiResponseSimilarityResponseSimilarityList = /** @class */ (function (_supe
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=artist_name" }),
+        SpeakeasyMetadata({ data: "json, name=artist_name" }),
         __metadata("design:type", String)
     ], ApiResponseSimilarityResponseSimilarityList.prototype, "artistName", void 0);
     __decorate([
-        Metadata({ data: "json, name=artist_url" }),
+        SpeakeasyMetadata({ data: "json, name=artist_url" }),
         __metadata("design:type", String)
     ], ApiResponseSimilarityResponseSimilarityList.prototype, "artistUrl", void 0);
     __decorate([
-        Metadata({ data: "json, name=id" }),
+        SpeakeasyMetadata({ data: "json, name=id" }),
         __metadata("design:type", Number)
     ], ApiResponseSimilarityResponseSimilarityList.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "json, name=index_id" }),
+        SpeakeasyMetadata({ data: "json, name=index_id" }),
         __metadata("design:type", Number)
     ], ApiResponseSimilarityResponseSimilarityList.prototype, "indexId", void 0);
     __decorate([
-        Metadata({ data: "json, name=lyrics" }),
+        SpeakeasyMetadata({ data: "json, name=lyrics" }),
         __metadata("design:type", String)
     ], ApiResponseSimilarityResponseSimilarityList.prototype, "lyrics", void 0);
     __decorate([
-        Metadata({ data: "json, name=percentage" }),
+        SpeakeasyMetadata({ data: "json, name=percentage" }),
         __metadata("design:type", Number)
     ], ApiResponseSimilarityResponseSimilarityList.prototype, "percentage", void 0);
     __decorate([
-        Metadata({ data: "json, name=song_name" }),
+        SpeakeasyMetadata({ data: "json, name=song_name" }),
         __metadata("design:type", String)
     ], ApiResponseSimilarityResponseSimilarityList.prototype, "songName", void 0);
     __decorate([
-        Metadata({ data: "json, name=song_url" }),
+        SpeakeasyMetadata({ data: "json, name=song_url" }),
         __metadata("design:type", String)
     ], ApiResponseSimilarityResponseSimilarityList.prototype, "songUrl", void 0);
     return ApiResponseSimilarityResponseSimilarityList;
@@ -78,7 +77,7 @@ var ApiResponseSimilarityResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=similarity_list", elemType: shared.ApiResponseSimilarityResponseSimilarityList }),
+        SpeakeasyMetadata({ data: "json, name=similarity_list", elemType: ApiResponseSimilarityResponseSimilarityList }),
         __metadata("design:type", Array)
     ], ApiResponseSimilarityResponse.prototype, "similarityList", void 0);
     return ApiResponseSimilarityResponse;
@@ -90,15 +89,15 @@ var ApiResponseSimilarity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", Boolean)
     ], ApiResponseSimilarity.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=message" }),
+        SpeakeasyMetadata({ data: "json, name=message" }),
         __metadata("design:type", String)
     ], ApiResponseSimilarity.prototype, "message", void 0);
     __decorate([
-        Metadata({ data: "json, name=response" }),
+        SpeakeasyMetadata({ data: "json, name=response" }),
         __metadata("design:type", ApiResponseSimilarityResponse)
     ], ApiResponseSimilarity.prototype, "response", void 0);
     return ApiResponseSimilarity;

@@ -1,18 +1,18 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { InputLogEvent } from "./inputlogevent";
 
 
+
 export class PutLogEventsRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=logEvents", elemType: shared.InputLogEvent })
+  @SpeakeasyMetadata({ data: "json, name=logEvents", elemType: InputLogEvent })
   logEvents: InputLogEvent[];
 
-  @Metadata({ data: "json, name=logGroupName" })
+  @SpeakeasyMetadata({ data: "json, name=logGroupName" })
   logGroupName: string;
 
-  @Metadata({ data: "json, name=logStreamName" })
+  @SpeakeasyMetadata({ data: "json, name=logStreamName" })
   logStreamName: string;
 
-  @Metadata({ data: "json, name=sequenceToken" })
+  @SpeakeasyMetadata({ data: "json, name=sequenceToken" })
   sequenceToken?: string;
 }

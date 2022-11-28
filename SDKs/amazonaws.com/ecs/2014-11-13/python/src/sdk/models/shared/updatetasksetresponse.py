@@ -1,11 +1,15 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import taskset
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class UpdateTaskSetResponse:
-    task_set: Optional[taskset.TaskSet] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'taskSet' }})
+    task_set: Optional[TaskSet] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('taskSet') }})
     

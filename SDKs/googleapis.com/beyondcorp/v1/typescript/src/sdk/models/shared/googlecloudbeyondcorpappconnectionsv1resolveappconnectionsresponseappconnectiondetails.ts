@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudBeyondcorpAppconnectionsV1AppConnection } from "./googlecloudbeyondcorpappconnectionsv1appconnection";
+
 
 
 // GoogleCloudBeyondcorpAppconnectionsV1ResolveAppConnectionsResponseAppConnectionDetails
@@ -7,9 +8,9 @@ import { GoogleCloudBeyondcorpAppconnectionsV1AppConnection } from "./googleclou
  * Details of the AppConnection.
 **/
 export class GoogleCloudBeyondcorpAppconnectionsV1ResolveAppConnectionsResponseAppConnectionDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=appConnection" })
+  @SpeakeasyMetadata({ data: "json, name=appConnection" })
   appConnection?: GoogleCloudBeyondcorpAppconnectionsV1AppConnection;
 
-  @Metadata({ data: "json, name=recentMigVms" })
+  @SpeakeasyMetadata({ data: "json, name=recentMigVms" })
   recentMigVms?: string[];
 }

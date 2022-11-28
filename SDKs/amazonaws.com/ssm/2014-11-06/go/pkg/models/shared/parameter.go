@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// Parameter
+// An Amazon Web Services Systems Manager parameter in Parameter Store.
 type Parameter struct {
 	Arn              *string            `json:"ARN,omitempty"`
 	DataType         *string            `json:"DataType,omitempty"`

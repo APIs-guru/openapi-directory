@@ -1,97 +1,98 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class CandidateHistory extends SpeakeasyBase {
-  @Metadata({ data: "json, name=active_through" })
+  @SpeakeasyMetadata({ data: "json, name=active_through" })
   activeThrough?: number;
 
-  @Metadata({ data: "json, name=address_city" })
+  @SpeakeasyMetadata({ data: "json, name=address_city" })
   addressCity?: string;
 
-  @Metadata({ data: "json, name=address_state" })
+  @SpeakeasyMetadata({ data: "json, name=address_state" })
   addressState?: string;
 
-  @Metadata({ data: "json, name=address_street_1" })
+  @SpeakeasyMetadata({ data: "json, name=address_street_1" })
   addressStreet1?: string;
 
-  @Metadata({ data: "json, name=address_street_2" })
+  @SpeakeasyMetadata({ data: "json, name=address_street_2" })
   addressStreet2?: string;
 
-  @Metadata({ data: "json, name=address_zip" })
+  @SpeakeasyMetadata({ data: "json, name=address_zip" })
   addressZip?: string;
 
-  @Metadata({ data: "json, name=candidate_election_year" })
+  @SpeakeasyMetadata({ data: "json, name=candidate_election_year" })
   candidateElectionYear?: number;
 
-  @Metadata({ data: "json, name=candidate_id" })
+  @SpeakeasyMetadata({ data: "json, name=candidate_id" })
   candidateId: string;
 
-  @Metadata({ data: "json, name=candidate_inactive" })
+  @SpeakeasyMetadata({ data: "json, name=candidate_inactive" })
   candidateInactive?: boolean;
 
-  @Metadata({ data: "json, name=candidate_status" })
+  @SpeakeasyMetadata({ data: "json, name=candidate_status" })
   candidateStatus?: string;
 
-  @Metadata({ data: "json, name=cycles" })
+  @SpeakeasyMetadata({ data: "json, name=cycles" })
   cycles?: number[];
 
-  @Metadata({ data: "json, name=district" })
+  @SpeakeasyMetadata({ data: "json, name=district" })
   district?: string;
 
-  @Metadata({ data: "json, name=district_number" })
+  @SpeakeasyMetadata({ data: "json, name=district_number" })
   districtNumber?: number;
 
-  @Metadata({ data: "json, name=election_districts" })
+  @SpeakeasyMetadata({ data: "json, name=election_districts" })
   electionDistricts?: string[];
 
-  @Metadata({ data: "json, name=election_years" })
+  @SpeakeasyMetadata({ data: "json, name=election_years" })
   electionYears?: number[];
 
-  @Metadata({ data: "json, name=fec_cycles_in_election" })
+  @SpeakeasyMetadata({ data: "json, name=fec_cycles_in_election" })
   fecCyclesInElection?: number[];
 
-  @Metadata({ data: "json, name=first_file_date" })
+  @SpeakeasyMetadata({ data: "json, name=first_file_date" })
   firstFileDate?: Date;
 
-  @Metadata({ data: "json, name=flags" })
+  @SpeakeasyMetadata({ data: "json, name=flags" })
   flags?: string;
 
-  @Metadata({ data: "json, name=incumbent_challenge" })
+  @SpeakeasyMetadata({ data: "json, name=incumbent_challenge" })
   incumbentChallenge?: string;
 
-  @Metadata({ data: "json, name=incumbent_challenge_full" })
+  @SpeakeasyMetadata({ data: "json, name=incumbent_challenge_full" })
   incumbentChallengeFull?: string;
 
-  @Metadata({ data: "json, name=last_f2_date" })
+  @SpeakeasyMetadata({ data: "json, name=last_f2_date" })
   lastF2Date?: Date;
 
-  @Metadata({ data: "json, name=last_file_date" })
+  @SpeakeasyMetadata({ data: "json, name=last_file_date" })
   lastFileDate?: Date;
 
-  @Metadata({ data: "json, name=load_date" })
+  @SpeakeasyMetadata({ data: "json, name=load_date" })
   loadDate?: Date;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=office" })
+  @SpeakeasyMetadata({ data: "json, name=office" })
   office?: string;
 
-  @Metadata({ data: "json, name=office_full" })
+  @SpeakeasyMetadata({ data: "json, name=office_full" })
   officeFull?: string;
 
-  @Metadata({ data: "json, name=party" })
+  @SpeakeasyMetadata({ data: "json, name=party" })
   party?: string;
 
-  @Metadata({ data: "json, name=party_full" })
+  @SpeakeasyMetadata({ data: "json, name=party_full" })
   partyFull?: string;
 
-  @Metadata({ data: "json, name=rounded_election_years" })
+  @SpeakeasyMetadata({ data: "json, name=rounded_election_years" })
   roundedElectionYears?: number[];
 
-  @Metadata({ data: "json, name=state" })
+  @SpeakeasyMetadata({ data: "json, name=state" })
   state?: string;
 
-  @Metadata({ data: "json, name=two_year_period" })
+  @SpeakeasyMetadata({ data: "json, name=two_year_period" })
   twoYearPeriod: number;
 }

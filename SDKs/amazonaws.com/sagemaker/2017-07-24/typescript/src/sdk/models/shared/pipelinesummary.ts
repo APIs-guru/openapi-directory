@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // PipelineSummary
@@ -6,27 +7,27 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A summary of a pipeline.
 **/
 export class PipelineSummary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CreationTime" })
+  @SpeakeasyMetadata({ data: "json, name=CreationTime" })
   creationTime?: Date;
 
-  @Metadata({ data: "json, name=LastExecutionTime" })
+  @SpeakeasyMetadata({ data: "json, name=LastExecutionTime" })
   lastExecutionTime?: Date;
 
-  @Metadata({ data: "json, name=LastModifiedTime" })
+  @SpeakeasyMetadata({ data: "json, name=LastModifiedTime" })
   lastModifiedTime?: Date;
 
-  @Metadata({ data: "json, name=PipelineArn" })
+  @SpeakeasyMetadata({ data: "json, name=PipelineArn" })
   pipelineArn?: string;
 
-  @Metadata({ data: "json, name=PipelineDescription" })
+  @SpeakeasyMetadata({ data: "json, name=PipelineDescription" })
   pipelineDescription?: string;
 
-  @Metadata({ data: "json, name=PipelineDisplayName" })
+  @SpeakeasyMetadata({ data: "json, name=PipelineDisplayName" })
   pipelineDisplayName?: string;
 
-  @Metadata({ data: "json, name=PipelineName" })
+  @SpeakeasyMetadata({ data: "json, name=PipelineName" })
   pipelineName?: string;
 
-  @Metadata({ data: "json, name=RoleArn" })
+  @SpeakeasyMetadata({ data: "json, name=RoleArn" })
   roleArn?: string;
 }

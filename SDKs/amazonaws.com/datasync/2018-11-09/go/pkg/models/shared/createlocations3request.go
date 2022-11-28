@@ -1,5 +1,7 @@
 package shared
 
+// CreateLocationS3Request
+// CreateLocationS3Request
 type CreateLocationS3Request struct {
 	AgentArns      []string            `json:"AgentArns,omitempty"`
 	S3BucketArn    string              `json:"S3BucketArn"`

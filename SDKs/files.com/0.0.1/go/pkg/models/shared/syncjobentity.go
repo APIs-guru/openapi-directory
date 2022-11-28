@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// SyncJobEntity
+// List Sync Jobs
 type SyncJobEntity struct {
 	FolderBehaviorID     *int32     `json:"folder_behavior_id,omitempty"`
 	QueuedAt             *time.Time `json:"queued_at,omitempty"`

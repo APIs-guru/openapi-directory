@@ -1,12 +1,16 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class AndroidenterpriseWebappsUpdatePathParams:
-    enterprise_id: str = field(default=None, metadata={'path_param': { 'field_name': 'enterpriseId', 'style': 'simple', 'explode': False }})
-    web_app_id: str = field(default=None, metadata={'path_param': { 'field_name': 'webAppId', 'style': 'simple', 'explode': False }})
+    enterprise_id: str = field(metadata={'path_param': { 'field_name': 'enterpriseId', 'style': 'simple', 'explode': False }})
+    web_app_id: str = field(metadata={'path_param': { 'field_name': 'webAppId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,21 +30,21 @@ class AndroidenterpriseWebappsUpdateQueryParams:
 
 @dataclass
 class AndroidenterpriseWebappsUpdateSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class AndroidenterpriseWebappsUpdateRequest:
-    path_params: AndroidenterpriseWebappsUpdatePathParams = field(default=None)
-    query_params: AndroidenterpriseWebappsUpdateQueryParams = field(default=None)
+    path_params: AndroidenterpriseWebappsUpdatePathParams = field()
+    query_params: AndroidenterpriseWebappsUpdateQueryParams = field()
+    security: AndroidenterpriseWebappsUpdateSecurity = field()
     request: Optional[shared.WebApp] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: AndroidenterpriseWebappsUpdateSecurity = field(default=None)
     
 
 @dataclass
 class AndroidenterpriseWebappsUpdateResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     web_app: Optional[shared.WebApp] = field(default=None)
     

@@ -22,12 +22,12 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ApplicationConfigurationDescription } from "./applicationconfigurationdescription";
 import { ApplicationMaintenanceConfigurationDescription } from "./applicationmaintenanceconfigurationdescription";
 import { ApplicationModeEnum } from "./applicationmodeenum";
 import { ApplicationStatusEnum } from "./applicationstatusenum";
+import { CloudWatchLoggingOptionDescription } from "./cloudwatchloggingoptiondescription";
 import { RuntimeEnvironmentEnum } from "./runtimeenvironmentenum";
 // ApplicationDetail
 /**
@@ -39,71 +39,71 @@ var ApplicationDetail = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=ApplicationARN" }),
+        SpeakeasyMetadata({ data: "json, name=ApplicationARN" }),
         __metadata("design:type", String)
     ], ApplicationDetail.prototype, "applicationArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=ApplicationConfigurationDescription" }),
+        SpeakeasyMetadata({ data: "json, name=ApplicationConfigurationDescription" }),
         __metadata("design:type", ApplicationConfigurationDescription)
     ], ApplicationDetail.prototype, "applicationConfigurationDescription", void 0);
     __decorate([
-        Metadata({ data: "json, name=ApplicationDescription" }),
+        SpeakeasyMetadata({ data: "json, name=ApplicationDescription" }),
         __metadata("design:type", String)
     ], ApplicationDetail.prototype, "applicationDescription", void 0);
     __decorate([
-        Metadata({ data: "json, name=ApplicationMaintenanceConfigurationDescription" }),
+        SpeakeasyMetadata({ data: "json, name=ApplicationMaintenanceConfigurationDescription" }),
         __metadata("design:type", ApplicationMaintenanceConfigurationDescription)
     ], ApplicationDetail.prototype, "applicationMaintenanceConfigurationDescription", void 0);
     __decorate([
-        Metadata({ data: "json, name=ApplicationMode" }),
+        SpeakeasyMetadata({ data: "json, name=ApplicationMode" }),
         __metadata("design:type", String)
     ], ApplicationDetail.prototype, "applicationMode", void 0);
     __decorate([
-        Metadata({ data: "json, name=ApplicationName" }),
+        SpeakeasyMetadata({ data: "json, name=ApplicationName" }),
         __metadata("design:type", String)
     ], ApplicationDetail.prototype, "applicationName", void 0);
     __decorate([
-        Metadata({ data: "json, name=ApplicationStatus" }),
+        SpeakeasyMetadata({ data: "json, name=ApplicationStatus" }),
         __metadata("design:type", String)
     ], ApplicationDetail.prototype, "applicationStatus", void 0);
     __decorate([
-        Metadata({ data: "json, name=ApplicationVersionId" }),
+        SpeakeasyMetadata({ data: "json, name=ApplicationVersionId" }),
         __metadata("design:type", Number)
     ], ApplicationDetail.prototype, "applicationVersionId", void 0);
     __decorate([
-        Metadata({ data: "json, name=ApplicationVersionRolledBackFrom" }),
+        SpeakeasyMetadata({ data: "json, name=ApplicationVersionRolledBackFrom" }),
         __metadata("design:type", Number)
     ], ApplicationDetail.prototype, "applicationVersionRolledBackFrom", void 0);
     __decorate([
-        Metadata({ data: "json, name=ApplicationVersionRolledBackTo" }),
+        SpeakeasyMetadata({ data: "json, name=ApplicationVersionRolledBackTo" }),
         __metadata("design:type", Number)
     ], ApplicationDetail.prototype, "applicationVersionRolledBackTo", void 0);
     __decorate([
-        Metadata({ data: "json, name=ApplicationVersionUpdatedFrom" }),
+        SpeakeasyMetadata({ data: "json, name=ApplicationVersionUpdatedFrom" }),
         __metadata("design:type", Number)
     ], ApplicationDetail.prototype, "applicationVersionUpdatedFrom", void 0);
     __decorate([
-        Metadata({ data: "json, name=CloudWatchLoggingOptionDescriptions", elemType: shared.CloudWatchLoggingOptionDescription }),
+        SpeakeasyMetadata({ data: "json, name=CloudWatchLoggingOptionDescriptions", elemType: CloudWatchLoggingOptionDescription }),
         __metadata("design:type", Array)
     ], ApplicationDetail.prototype, "cloudWatchLoggingOptionDescriptions", void 0);
     __decorate([
-        Metadata({ data: "json, name=ConditionalToken" }),
+        SpeakeasyMetadata({ data: "json, name=ConditionalToken" }),
         __metadata("design:type", String)
     ], ApplicationDetail.prototype, "conditionalToken", void 0);
     __decorate([
-        Metadata({ data: "json, name=CreateTimestamp" }),
+        SpeakeasyMetadata({ data: "json, name=CreateTimestamp" }),
         __metadata("design:type", Date)
     ], ApplicationDetail.prototype, "createTimestamp", void 0);
     __decorate([
-        Metadata({ data: "json, name=LastUpdateTimestamp" }),
+        SpeakeasyMetadata({ data: "json, name=LastUpdateTimestamp" }),
         __metadata("design:type", Date)
     ], ApplicationDetail.prototype, "lastUpdateTimestamp", void 0);
     __decorate([
-        Metadata({ data: "json, name=RuntimeEnvironment" }),
+        SpeakeasyMetadata({ data: "json, name=RuntimeEnvironment" }),
         __metadata("design:type", String)
     ], ApplicationDetail.prototype, "runtimeEnvironment", void 0);
     __decorate([
-        Metadata({ data: "json, name=ServiceExecutionRole" }),
+        SpeakeasyMetadata({ data: "json, name=ServiceExecutionRole" }),
         __metadata("design:type", String)
     ], ApplicationDetail.prototype, "serviceExecutionRole", void 0);
     return ApplicationDetail;

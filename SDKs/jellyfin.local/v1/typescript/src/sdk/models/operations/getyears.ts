@@ -1,77 +1,78 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetYearsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=enableImageTypes" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=enableImageTypes" })
   enableImageTypes?: shared.ImageTypeEnum[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=enableImages" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=enableImages" })
   enableImages?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=enableUserData" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=enableUserData" })
   enableUserData?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=excludeItemTypes" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=excludeItemTypes" })
   excludeItemTypes?: string[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=fields" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=fields" })
   fields?: shared.ItemFieldsEnum[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=imageTypeLimit" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=imageTypeLimit" })
   imageTypeLimit?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=includeItemTypes" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=includeItemTypes" })
   includeItemTypes?: string[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=limit" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=limit" })
   limit?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=mediaTypes" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=mediaTypes" })
   mediaTypes?: string[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=parentId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=parentId" })
   parentId?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=recursive" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=recursive" })
   recursive?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=sortBy" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sortBy" })
   sortBy?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=sortOrder" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sortOrder" })
   sortOrder?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=startIndex" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=startIndex" })
   startIndex?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=userId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=userId" })
   userId?: string;
 }
 
 
 export class GetYearsSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
   customAuthentication: shared.SchemeCustomAuthentication;
 }
 
 
 export class GetYearsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetYearsQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: GetYearsSecurity;
 }
 
 
 export class GetYearsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   baseItemDtoQueryResult?: shared.BaseItemDtoQueryResult;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

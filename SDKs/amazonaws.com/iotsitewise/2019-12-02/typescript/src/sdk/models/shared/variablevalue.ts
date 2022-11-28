@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // VariableValue
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Identifies a property value used in an expression.
 **/
 export class VariableValue extends SpeakeasyBase {
-  @Metadata({ data: "json, name=hierarchyId" })
+  @SpeakeasyMetadata({ data: "json, name=hierarchyId" })
   hierarchyId?: string;
 
-  @Metadata({ data: "json, name=propertyId" })
+  @SpeakeasyMetadata({ data: "json, name=propertyId" })
   propertyId: string;
 }

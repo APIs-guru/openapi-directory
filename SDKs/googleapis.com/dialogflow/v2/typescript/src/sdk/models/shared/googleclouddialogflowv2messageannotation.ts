@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudDialogflowV2AnnotatedMessagePart } from "./googleclouddialogflowv2annotatedmessagepart";
+
 
 
 // GoogleCloudDialogflowV2MessageAnnotation
@@ -8,9 +8,9 @@ import { GoogleCloudDialogflowV2AnnotatedMessagePart } from "./googleclouddialog
  * Represents the result of annotation for the message.
 **/
 export class GoogleCloudDialogflowV2MessageAnnotation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=containEntities" })
+  @SpeakeasyMetadata({ data: "json, name=containEntities" })
   containEntities?: boolean;
 
-  @Metadata({ data: "json, name=parts", elemType: shared.GoogleCloudDialogflowV2AnnotatedMessagePart })
+  @SpeakeasyMetadata({ data: "json, name=parts", elemType: GoogleCloudDialogflowV2AnnotatedMessagePart })
   parts?: GoogleCloudDialogflowV2AnnotatedMessagePart[];
 }

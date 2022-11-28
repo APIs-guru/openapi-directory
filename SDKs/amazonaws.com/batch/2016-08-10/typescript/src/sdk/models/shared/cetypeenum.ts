@@ -1,6 +1,7 @@
 
 
+
 export enum CeTypeEnum {
-    Managed = "MANAGED"
-,    Unmanaged = "UNMANAGED"
+    Managed = "MANAGED",
+    Unmanaged = "UNMANAGED"
 }

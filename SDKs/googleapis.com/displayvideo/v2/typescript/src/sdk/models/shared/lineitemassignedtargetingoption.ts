@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AssignedTargetingOption } from "./assignedtargetingoption";
+
 
 
 // LineItemAssignedTargetingOption
@@ -7,9 +8,9 @@ import { AssignedTargetingOption } from "./assignedtargetingoption";
  * Wrapper object associating an assigned_targeting_option resource and the line item it is assigned to.
 **/
 export class LineItemAssignedTargetingOption extends SpeakeasyBase {
-  @Metadata({ data: "json, name=assignedTargetingOption" })
+  @SpeakeasyMetadata({ data: "json, name=assignedTargetingOption" })
   assignedTargetingOption?: AssignedTargetingOption;
 
-  @Metadata({ data: "json, name=lineItemId" })
+  @SpeakeasyMetadata({ data: "json, name=lineItemId" })
   lineItemId?: string;
 }

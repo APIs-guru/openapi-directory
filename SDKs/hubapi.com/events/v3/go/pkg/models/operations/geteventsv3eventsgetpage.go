@@ -17,17 +17,10 @@ type GetEventsV3EventsGetPageQueryParams struct {
 	Sort           []string   `queryParam:"style=form,explode=true,name=sort"`
 }
 
-type GetEventsV3EventsGetPageSecurityOption1 struct {
-	Hapikey shared.SchemeHapikey `security:"scheme,type=apiKey,subtype=query"`
-}
-
-type GetEventsV3EventsGetPageSecurityOption2 struct {
-	Oauth2Legacy shared.SchemeOauth2Legacy `security:"scheme,type=oauth2"`
-}
-
 type GetEventsV3EventsGetPageSecurity struct {
-	Option1 *GetEventsV3EventsGetPageSecurityOption1 `security:"option"`
-	Option2 *GetEventsV3EventsGetPageSecurityOption2 `security:"option"`
+	Hapikey           *shared.SchemeHapikey           `security:"scheme,type=apiKey,subtype=query"`
+	Oauth2Legacy      *shared.SchemeOauth2Legacy      `security:"scheme,type=oauth2"`
+	PrivateAppsLegacy *shared.SchemePrivateAppsLegacy `security:"scheme,type=apiKey,subtype=header"`
 }
 
 type GetEventsV3EventsGetPageRequest struct {

@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class GetAPIMembersIDEdmsPathParams:
-    id: int = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: int = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -15,14 +15,14 @@ class GetAPIMembersIDEdmsQueryParams:
 
 @dataclass
 class GetAPIMembersIDEdmsRequest:
-    path_params: GetAPIMembersIDEdmsPathParams = field(default=None)
-    query_params: GetAPIMembersIDEdmsQueryParams = field(default=None)
+    path_params: GetAPIMembersIDEdmsPathParams = field()
+    query_params: GetAPIMembersIDEdmsQueryParams = field()
     
 
 @dataclass
 class GetAPIMembersIDEdmsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     early_day_motion_members_service_search_result: Optional[shared.EarlyDayMotionMembersServiceSearchResult] = field(default=None)
-    status_code: int = field(default=None)
     

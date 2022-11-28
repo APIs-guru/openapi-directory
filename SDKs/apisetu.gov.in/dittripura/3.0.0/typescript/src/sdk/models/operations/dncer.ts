@@ -1,12 +1,13 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class DncerRequestBodyCertificateParameters extends SpeakeasyBase {
-  @Metadata({ data: "json, name=RefNo" })
+  @SpeakeasyMetadata({ data: "json, name=RefNo" })
   refNo: string;
 
-  @Metadata({ data: "json, name=TokenNo" })
+  @SpeakeasyMetadata({ data: "json, name=TokenNo" })
   tokenNo: string;
 }
 
@@ -16,97 +17,88 @@ export enum DncerRequestBodyFormatEnum {
 
 
 export class DncerRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=certificateParameters" })
+  @SpeakeasyMetadata({ data: "json, name=certificateParameters" })
   certificateParameters?: DncerRequestBodyCertificateParameters;
 
-  @Metadata({ data: "json, name=consentArtifact" })
+  @SpeakeasyMetadata({ data: "json, name=consentArtifact" })
   consentArtifact?: any;
 
-  @Metadata({ data: "json, name=format" })
+  @SpeakeasyMetadata({ data: "json, name=format" })
   format: DncerRequestBodyFormatEnum;
 
-  @Metadata({ data: "json, name=txnId" })
+  @SpeakeasyMetadata({ data: "json, name=txnId" })
   txnId: string;
 }
 
 
 export class DncerSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
   apiKey: shared.SchemeApiKey;
 
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
   clientId: shared.SchemeClientId;
 }
 
-
-export class DncerRequest extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/json" })
-  request?: DncerRequestBody;
-
-  @Metadata()
-  security: DncerSecurity;
-}
-
 export enum Dncer400ApplicationJsonErrorEnum {
-    MissingParameter = "missing_parameter"
-,    InvalidParameter = "invalid_parameter"
-,    InvalidFormat = "invalid_format"
-,    InvalidTxnid = "invalid_txnid"
-,    InvalidConsentid = "invalid_consentid"
+    MissingParameter = "missing_parameter",
+    InvalidParameter = "invalid_parameter",
+    InvalidFormat = "invalid_format",
+    InvalidTxnid = "invalid_txnid",
+    InvalidConsentid = "invalid_consentid"
 }
 
 export enum Dncer400ApplicationJsonErrorDescriptionEnum {
-    PleaseProvideAllMandatoryParameters = "Please provide all mandatory parameters"
-,    BadRequest = "Bad request"
-,    TheFormatParameterIsInvalid = "The format parameter is invalid"
-,    TheTxnIdParameterMustBeInUuidFormat = "The txnId parameter must be in UUID format"
-,    TheConsentIdParameterMustBeInUuidFormat = "The consentId parameter must be in UUID format"
+    PleaseProvideAllMandatoryParameters = "Please provide all mandatory parameters",
+    BadRequest = "Bad request",
+    TheFormatParameterIsInvalid = "The format parameter is invalid",
+    TheTxnIdParameterMustBeInUuidFormat = "The txnId parameter must be in UUID format",
+    TheConsentIdParameterMustBeInUuidFormat = "The consentId parameter must be in UUID format"
 }
 
 
 export class Dncer400ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=error" })
+  @SpeakeasyMetadata({ data: "json, name=error" })
   error?: Dncer400ApplicationJsonErrorEnum;
 
-  @Metadata({ data: "json, name=errorDescription" })
+  @SpeakeasyMetadata({ data: "json, name=errorDescription" })
   errorDescription?: Dncer400ApplicationJsonErrorDescriptionEnum;
 }
 
 export enum Dncer401ApplicationJsonErrorEnum {
-    InvalidAuthentication = "invalid_authentication"
-,    InvalidAuthorization = "invalid_authorization"
+    InvalidAuthentication = "invalid_authentication",
+    InvalidAuthorization = "invalid_authorization"
 }
 
 export enum Dncer401ApplicationJsonErrorDescriptionEnum {
-    AuthenticationFailed = "Authentication failed"
-,    YouAreNotAuthorizedToUseThisApi = "You are not authorized to use this API"
+    AuthenticationFailed = "Authentication failed",
+    YouAreNotAuthorizedToUseThisApi = "You are not authorized to use this API"
 }
 
 
 export class Dncer401ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=error" })
+  @SpeakeasyMetadata({ data: "json, name=error" })
   error?: Dncer401ApplicationJsonErrorEnum;
 
-  @Metadata({ data: "json, name=errorDescription" })
+  @SpeakeasyMetadata({ data: "json, name=errorDescription" })
   errorDescription?: Dncer401ApplicationJsonErrorDescriptionEnum;
 }
 
 export enum Dncer404ApplicationJsonErrorEnum {
-    RecordNotFound = "record_not_found"
-,    UrlNotFound = "url_not_found"
+    RecordNotFound = "record_not_found",
+    UrlNotFound = "url_not_found"
 }
 
 export enum Dncer404ApplicationJsonErrorDescriptionEnum {
-    NoRecordFound = "No record found"
-,    YourApiUrlOrPathIsIncorrect = "Your API url or path is incorrect"
+    NoRecordFound = "No record found",
+    YourApiUrlOrPathIsIncorrect = "Your API url or path is incorrect"
 }
 
 
 export class Dncer404ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=error" })
+  @SpeakeasyMetadata({ data: "json, name=error" })
   error?: Dncer404ApplicationJsonErrorEnum;
 
-  @Metadata({ data: "json, name=errorDescription" })
+  @SpeakeasyMetadata({ data: "json, name=errorDescription" })
   errorDescription?: Dncer404ApplicationJsonErrorDescriptionEnum;
 }
 
@@ -120,10 +112,10 @@ export enum Dncer500ApplicationJsonErrorDescriptionEnum {
 
 
 export class Dncer500ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=error" })
+  @SpeakeasyMetadata({ data: "json, name=error" })
   error?: Dncer500ApplicationJsonErrorEnum;
 
-  @Metadata({ data: "json, name=errorDescription" })
+  @SpeakeasyMetadata({ data: "json, name=errorDescription" })
   errorDescription?: Dncer500ApplicationJsonErrorDescriptionEnum;
 }
 
@@ -137,10 +129,10 @@ export enum Dncer502ApplicationJsonErrorDescriptionEnum {
 
 
 export class Dncer502ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=error" })
+  @SpeakeasyMetadata({ data: "json, name=error" })
   error?: Dncer502ApplicationJsonErrorEnum;
 
-  @Metadata({ data: "json, name=errorDescription" })
+  @SpeakeasyMetadata({ data: "json, name=errorDescription" })
   errorDescription?: Dncer502ApplicationJsonErrorDescriptionEnum;
 }
 
@@ -154,10 +146,10 @@ export enum Dncer503ApplicationJsonErrorDescriptionEnum {
 
 
 export class Dncer503ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=error" })
+  @SpeakeasyMetadata({ data: "json, name=error" })
   error?: Dncer503ApplicationJsonErrorEnum;
 
-  @Metadata({ data: "json, name=errorDescription" })
+  @SpeakeasyMetadata({ data: "json, name=errorDescription" })
   errorDescription?: Dncer503ApplicationJsonErrorDescriptionEnum;
 }
 
@@ -171,39 +163,48 @@ export enum Dncer504ApplicationJsonErrorDescriptionEnum {
 
 
 export class Dncer504ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=error" })
+  @SpeakeasyMetadata({ data: "json, name=error" })
   error?: Dncer504ApplicationJsonErrorEnum;
 
-  @Metadata({ data: "json, name=errorDescription" })
+  @SpeakeasyMetadata({ data: "json, name=errorDescription" })
   errorDescription?: Dncer504ApplicationJsonErrorDescriptionEnum;
 }
 
 
+export class DncerRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request?: DncerRequestBody;
+
+  @SpeakeasyMetadata()
+  security: DncerSecurity;
+}
+
+
 export class DncerResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   dncer400ApplicationJsonObject?: Dncer400ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   dncer401ApplicationJsonObject?: Dncer401ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   dncer404ApplicationJsonObject?: Dncer404ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   dncer500ApplicationJsonObject?: Dncer500ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   dncer502ApplicationJsonObject?: Dncer502ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   dncer503ApplicationJsonObject?: Dncer503ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   dncer504ApplicationJsonObject?: Dncer504ApplicationJson;
 }

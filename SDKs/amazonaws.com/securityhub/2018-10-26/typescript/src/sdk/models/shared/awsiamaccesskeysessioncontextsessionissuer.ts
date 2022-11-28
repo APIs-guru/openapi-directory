@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AwsIamAccessKeySessionContextSessionIssuer
@@ -6,18 +7,18 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Information about the entity that created the session.
 **/
 export class AwsIamAccessKeySessionContextSessionIssuer extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AccountId" })
+  @SpeakeasyMetadata({ data: "json, name=AccountId" })
   accountId?: string;
 
-  @Metadata({ data: "json, name=Arn" })
+  @SpeakeasyMetadata({ data: "json, name=Arn" })
   arn?: string;
 
-  @Metadata({ data: "json, name=PrincipalId" })
+  @SpeakeasyMetadata({ data: "json, name=PrincipalId" })
   principalId?: string;
 
-  @Metadata({ data: "json, name=Type" })
+  @SpeakeasyMetadata({ data: "json, name=Type" })
   type?: string;
 
-  @Metadata({ data: "json, name=UserName" })
+  @SpeakeasyMetadata({ data: "json, name=UserName" })
   userName?: string;
 }

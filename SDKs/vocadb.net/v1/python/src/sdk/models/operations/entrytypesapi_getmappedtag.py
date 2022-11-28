@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 class EntryTypesAPIGetMappedTagEntryTypeEnum(str, Enum):
@@ -19,8 +20,8 @@ class EntryTypesAPIGetMappedTagEntryTypeEnum(str, Enum):
 
 @dataclass
 class EntryTypesAPIGetMappedTagPathParams:
-    entry_type: EntryTypesAPIGetMappedTagEntryTypeEnum = field(default=None, metadata={'path_param': { 'field_name': 'entryType', 'style': 'simple', 'explode': False }})
-    sub_type: str = field(default=None, metadata={'path_param': { 'field_name': 'subType', 'style': 'simple', 'explode': False }})
+    entry_type: EntryTypesAPIGetMappedTagEntryTypeEnum = field(metadata={'path_param': { 'field_name': 'entryType', 'style': 'simple', 'explode': False }})
+    sub_type: str = field(metadata={'path_param': { 'field_name': 'subType', 'style': 'simple', 'explode': False }})
     
 class EntryTypesAPIGetMappedTagFieldsEnum(str, Enum):
     NONE = "None"
@@ -42,14 +43,14 @@ class EntryTypesAPIGetMappedTagQueryParams:
 
 @dataclass
 class EntryTypesAPIGetMappedTagRequest:
-    path_params: EntryTypesAPIGetMappedTagPathParams = field(default=None)
-    query_params: EntryTypesAPIGetMappedTagQueryParams = field(default=None)
+    path_params: EntryTypesAPIGetMappedTagPathParams = field()
+    query_params: EntryTypesAPIGetMappedTagQueryParams = field()
     
 
 @dataclass
 class EntryTypesAPIGetMappedTagResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     tag_for_api_contract: Optional[shared.TagForAPIContract] = field(default=None)
     

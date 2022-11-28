@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // MetastoreConfig
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Specifies a Metastore configuration.
 **/
 export class MetastoreConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=dataprocMetastoreService" })
+  @SpeakeasyMetadata({ data: "json, name=dataprocMetastoreService" })
   dataprocMetastoreService?: string;
 }

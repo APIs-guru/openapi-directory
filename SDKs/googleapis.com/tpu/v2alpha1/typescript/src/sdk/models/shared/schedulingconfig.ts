@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // SchedulingConfig
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Sets the scheduling options for this node.
 **/
 export class SchedulingConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=preemptible" })
+  @SpeakeasyMetadata({ data: "json, name=preemptible" })
   preemptible?: boolean;
 
-  @Metadata({ data: "json, name=reserved" })
+  @SpeakeasyMetadata({ data: "json, name=reserved" })
   reserved?: boolean;
 }

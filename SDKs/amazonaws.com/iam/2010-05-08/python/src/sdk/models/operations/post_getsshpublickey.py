@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostGetSSHPublicKeyActionEnum(str, Enum):
     GET_SSH_PUBLIC_KEY = "GetSSHPublicKey"
@@ -10,8 +14,8 @@ class PostGetSSHPublicKeyVersionEnum(str, Enum):
 
 @dataclass
 class PostGetSSHPublicKeyQueryParams:
-    action: PostGetSSHPublicKeyActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostGetSSHPublicKeyVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostGetSSHPublicKeyActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostGetSSHPublicKeyVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostGetSSHPublicKeyHeaders:
 
 @dataclass
 class PostGetSSHPublicKeyRequest:
-    query_params: PostGetSSHPublicKeyQueryParams = field(default=None)
-    headers: PostGetSSHPublicKeyHeaders = field(default=None)
+    headers: PostGetSSHPublicKeyHeaders = field()
+    query_params: PostGetSSHPublicKeyQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostGetSSHPublicKeyResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

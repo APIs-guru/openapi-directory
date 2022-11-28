@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // HeldAccount
 /**
  * An account covered by a hold. This structure is immutable. It can be an individual account or a Google Group, depending on the service. To work with Vault resources, the account must have the [required Vault privileges] (https://support.google.com/vault/answer/2799699) and access to the matter. To access a matter, the account must have created the matter, have the matter shared with them, or have the **View All Matters** privilege.
@@ -33,23 +33,23 @@ var HeldAccount = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=accountId" }),
+        SpeakeasyMetadata({ data: "json, name=accountId" }),
         __metadata("design:type", String)
     ], HeldAccount.prototype, "accountId", void 0);
     __decorate([
-        Metadata({ data: "json, name=email" }),
+        SpeakeasyMetadata({ data: "json, name=email" }),
         __metadata("design:type", String)
     ], HeldAccount.prototype, "email", void 0);
     __decorate([
-        Metadata({ data: "json, name=firstName" }),
+        SpeakeasyMetadata({ data: "json, name=firstName" }),
         __metadata("design:type", String)
     ], HeldAccount.prototype, "firstName", void 0);
     __decorate([
-        Metadata({ data: "json, name=holdTime" }),
+        SpeakeasyMetadata({ data: "json, name=holdTime" }),
         __metadata("design:type", String)
     ], HeldAccount.prototype, "holdTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=lastName" }),
+        SpeakeasyMetadata({ data: "json, name=lastName" }),
         __metadata("design:type", String)
     ], HeldAccount.prototype, "lastName", void 0);
     return HeldAccount;

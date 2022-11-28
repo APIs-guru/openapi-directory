@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var PutCisInstructionTagPathParams = /** @class */ (function (_super) {
     __extends(PutCisInstructionTagPathParams, _super);
@@ -30,19 +30,19 @@ var PutCisInstructionTagPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=CisInstructionId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=CisInstructionId" }),
         __metadata("design:type", String)
     ], PutCisInstructionTagPathParams.prototype, "cisInstructionId", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=EmployerId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=EmployerId" }),
         __metadata("design:type", String)
     ], PutCisInstructionTagPathParams.prototype, "employerId", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=SubContractorId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=SubContractorId" }),
         __metadata("design:type", String)
     ], PutCisInstructionTagPathParams.prototype, "subContractorId", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=TagId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=TagId" }),
         __metadata("design:type", String)
     ], PutCisInstructionTagPathParams.prototype, "tagId", void 0);
     return PutCisInstructionTagPathParams;
@@ -54,11 +54,11 @@ var PutCisInstructionTagHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=Api-Version" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Api-Version" }),
         __metadata("design:type", String)
     ], PutCisInstructionTagHeaders.prototype, "apiVersion", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=Authorization" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Authorization" }),
         __metadata("design:type", String)
     ], PutCisInstructionTagHeaders.prototype, "authorization", void 0);
     return PutCisInstructionTagHeaders;
@@ -70,11 +70,11 @@ var PutCisInstructionTagRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PutCisInstructionTagPathParams)
     ], PutCisInstructionTagRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PutCisInstructionTagHeaders)
     ], PutCisInstructionTagRequest.prototype, "headers", void 0);
     return PutCisInstructionTagRequest;
@@ -86,19 +86,19 @@ var PutCisInstructionTagResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], PutCisInstructionTagResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.ErrorModel)
     ], PutCisInstructionTagResponse.prototype, "errorModel", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], PutCisInstructionTagResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.Tag)
     ], PutCisInstructionTagResponse.prototype, "tag", void 0);
     return PutCisInstructionTagResponse;

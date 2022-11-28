@@ -1,41 +1,42 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class QualityGetOverallDataQualityForSitesPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=version" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=version" })
   version: string;
 }
 
 
 export class QualityGetOverallDataQualityForSitesQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=end_date" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=end_date" })
   endDate: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=sites" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sites" })
   sites: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=start_date" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=start_date" })
   startDate: string;
 }
 
 
 export class QualityGetOverallDataQualityForSitesRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: QualityGetOverallDataQualityForSitesPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: QualityGetOverallDataQualityForSitesQueryParams;
 }
 
 
 export class QualityGetOverallDataQualityForSitesResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   overallQualityResponse?: shared.OverallQualityResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

@@ -1,67 +1,68 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetBelegePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=registrierkasseUuid" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=registrierkasseUuid" })
   registrierkasseUuid: string;
 }
 
 export enum GetBelegeFormatEnum {
-    Export = "export"
-,    Beleg = "beleg"
-,    Uuidlist = "uuidlist"
+    Export = "export",
+    Beleg = "beleg",
+    Uuidlist = "uuidlist"
 }
 
 export enum GetBelegeOrderEnum {
-    Asc = "asc"
-,    Desc = "desc"
+    Asc = "asc",
+    Desc = "desc"
 }
 
 
 export class GetBelegeQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=after" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=after" })
   after?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=before" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=before" })
   before?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=format" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=format" })
   format: GetBelegeFormatEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=gte" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=gte" })
   gte?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=limit" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=limit" })
   limit?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=lte" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=lte" })
   lte?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=offset" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=offset" })
   offset?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=order" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=order" })
   order?: GetBelegeOrderEnum;
 }
 
 
 export class GetBelegeRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetBelegePathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetBelegeQueryParams;
 }
 
 
 export class GetBelegeResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   belege?: shared.Belege;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

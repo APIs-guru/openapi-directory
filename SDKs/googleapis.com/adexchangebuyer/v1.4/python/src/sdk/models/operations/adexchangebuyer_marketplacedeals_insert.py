@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class AdexchangebuyerMarketplacedealsInsertPathParams:
-    proposal_id: str = field(default=None, metadata={'path_param': { 'field_name': 'proposalId', 'style': 'simple', 'explode': False }})
+    proposal_id: str = field(metadata={'path_param': { 'field_name': 'proposalId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -21,21 +22,21 @@ class AdexchangebuyerMarketplacedealsInsertQueryParams:
 
 @dataclass
 class AdexchangebuyerMarketplacedealsInsertSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class AdexchangebuyerMarketplacedealsInsertRequest:
-    path_params: AdexchangebuyerMarketplacedealsInsertPathParams = field(default=None)
-    query_params: AdexchangebuyerMarketplacedealsInsertQueryParams = field(default=None)
+    path_params: AdexchangebuyerMarketplacedealsInsertPathParams = field()
+    query_params: AdexchangebuyerMarketplacedealsInsertQueryParams = field()
+    security: AdexchangebuyerMarketplacedealsInsertSecurity = field()
     request: Optional[shared.AddOrderDealsRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: AdexchangebuyerMarketplacedealsInsertSecurity = field(default=None)
     
 
 @dataclass
 class AdexchangebuyerMarketplacedealsInsertResponse:
+    content_type: str = field()
+    status_code: int = field()
     add_order_deals_response: Optional[shared.AddOrderDealsResponse] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

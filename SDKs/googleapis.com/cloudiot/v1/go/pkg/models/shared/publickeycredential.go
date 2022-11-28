@@ -10,6 +10,8 @@ const (
 	PublicKeyCredentialFormatEnumEs256X509Pem               PublicKeyCredentialFormatEnum = "ES256_X509_PEM"
 )
 
+// PublicKeyCredential
+// A public key format and data.
 type PublicKeyCredential struct {
 	Format *PublicKeyCredentialFormatEnum `json:"format,omitempty"`
 	Key    *string                        `json:"key,omitempty"`

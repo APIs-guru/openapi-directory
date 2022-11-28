@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // LookbackConfiguration
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Lookback configuration settings.
 **/
 export class LookbackConfiguration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=clickDuration" })
+  @SpeakeasyMetadata({ data: "json, name=clickDuration" })
   clickDuration?: number;
 
-  @Metadata({ data: "json, name=postImpressionActivitiesDuration" })
+  @SpeakeasyMetadata({ data: "json, name=postImpressionActivitiesDuration" })
   postImpressionActivitiesDuration?: number;
 }

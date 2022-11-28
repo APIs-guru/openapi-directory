@@ -1,11 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CapabilitySyncStatusEnum } from "./capabilitysyncstatusenum";
 
 
+
 export class UpdateGatewayCapabilityConfigurationResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=capabilityNamespace" })
+  @SpeakeasyMetadata({ data: "json, name=capabilityNamespace" })
   capabilityNamespace: string;
 
-  @Metadata({ data: "json, name=capabilitySyncStatus" })
+  @SpeakeasyMetadata({ data: "json, name=capabilitySyncStatus" })
   capabilitySyncStatus: CapabilitySyncStatusEnum;
 }

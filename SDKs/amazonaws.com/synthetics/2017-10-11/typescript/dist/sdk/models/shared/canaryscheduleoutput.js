@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // CanaryScheduleOutput
 /**
  * How long, in seconds, for the canary to continue making regular runs according to the schedule in the <code>Expression</code> value.
@@ -33,11 +33,11 @@ var CanaryScheduleOutput = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=DurationInSeconds" }),
+        SpeakeasyMetadata({ data: "json, name=DurationInSeconds" }),
         __metadata("design:type", Number)
     ], CanaryScheduleOutput.prototype, "durationInSeconds", void 0);
     __decorate([
-        Metadata({ data: "json, name=Expression" }),
+        SpeakeasyMetadata({ data: "json, name=Expression" }),
         __metadata("design:type", String)
     ], CanaryScheduleOutput.prototype, "expression", void 0);
     return CanaryScheduleOutput;

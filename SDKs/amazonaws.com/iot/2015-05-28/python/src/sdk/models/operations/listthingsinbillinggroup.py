@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
-from typing import Any,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class ListThingsInBillingGroupPathParams:
-    billing_group_name: str = field(default=None, metadata={'path_param': { 'field_name': 'billingGroupName', 'style': 'simple', 'explode': False }})
+    billing_group_name: str = field(metadata={'path_param': { 'field_name': 'billingGroupName', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -27,18 +30,18 @@ class ListThingsInBillingGroupHeaders:
 
 @dataclass
 class ListThingsInBillingGroupRequest:
-    path_params: ListThingsInBillingGroupPathParams = field(default=None)
-    query_params: ListThingsInBillingGroupQueryParams = field(default=None)
-    headers: ListThingsInBillingGroupHeaders = field(default=None)
+    headers: ListThingsInBillingGroupHeaders = field()
+    path_params: ListThingsInBillingGroupPathParams = field()
+    query_params: ListThingsInBillingGroupQueryParams = field()
     
 
 @dataclass
 class ListThingsInBillingGroupResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     internal_failure_exception: Optional[Any] = field(default=None)
     invalid_request_exception: Optional[Any] = field(default=None)
     list_things_in_billing_group_response: Optional[shared.ListThingsInBillingGroupResponse] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     

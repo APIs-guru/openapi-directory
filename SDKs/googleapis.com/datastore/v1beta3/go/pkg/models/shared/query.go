@@ -1,5 +1,7 @@
 package shared
 
+// Query
+// A query for entities.
 type Query struct {
 	DistinctOn  []PropertyReference `json:"distinctOn,omitempty"`
 	EndCursor   *string             `json:"endCursor,omitempty"`

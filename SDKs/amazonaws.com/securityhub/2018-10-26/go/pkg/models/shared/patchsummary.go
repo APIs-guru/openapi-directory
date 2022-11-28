@@ -1,5 +1,7 @@
 package shared
 
+// PatchSummary
+// Provides an overview of the patch compliance status for an instance against a selected compliance standard.
 type PatchSummary struct {
 	FailedCount            *int64  `json:"FailedCount,omitempty"`
 	ID                     string  `json:"Id"`

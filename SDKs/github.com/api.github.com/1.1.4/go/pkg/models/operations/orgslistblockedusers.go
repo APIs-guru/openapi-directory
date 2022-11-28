@@ -8,13 +8,13 @@ type OrgsListBlockedUsersPathParams struct {
 	Org string `pathParam:"style=simple,explode=false,name=org"`
 }
 
-type OrgsListBlockedUsersRequest struct {
-	PathParams OrgsListBlockedUsersPathParams
-}
-
 type OrgsListBlockedUsers415ApplicationJSON struct {
 	DocumentationURL string `json:"documentation_url"`
 	Message          string `json:"message"`
+}
+
+type OrgsListBlockedUsersRequest struct {
+	PathParams OrgsListBlockedUsersPathParams
 }
 
 type OrgsListBlockedUsersResponse struct {

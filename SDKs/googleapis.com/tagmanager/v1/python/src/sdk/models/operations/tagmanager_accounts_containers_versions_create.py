@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class TagmanagerAccountsContainersVersionsCreatePathParams:
-    account_id: str = field(default=None, metadata={'path_param': { 'field_name': 'accountId', 'style': 'simple', 'explode': False }})
-    container_id: str = field(default=None, metadata={'path_param': { 'field_name': 'containerId', 'style': 'simple', 'explode': False }})
+    account_id: str = field(metadata={'path_param': { 'field_name': 'accountId', 'style': 'simple', 'explode': False }})
+    container_id: str = field(metadata={'path_param': { 'field_name': 'containerId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,21 +27,21 @@ class TagmanagerAccountsContainersVersionsCreateQueryParams:
 
 @dataclass
 class TagmanagerAccountsContainersVersionsCreateSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class TagmanagerAccountsContainersVersionsCreateRequest:
-    path_params: TagmanagerAccountsContainersVersionsCreatePathParams = field(default=None)
-    query_params: TagmanagerAccountsContainersVersionsCreateQueryParams = field(default=None)
+    path_params: TagmanagerAccountsContainersVersionsCreatePathParams = field()
+    query_params: TagmanagerAccountsContainersVersionsCreateQueryParams = field()
+    security: TagmanagerAccountsContainersVersionsCreateSecurity = field()
     request: Optional[shared.CreateContainerVersionRequestVersionOptions] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: TagmanagerAccountsContainersVersionsCreateSecurity = field(default=None)
     
 
 @dataclass
 class TagmanagerAccountsContainersVersionsCreateResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     create_container_version_response: Optional[shared.CreateContainerVersionResponse] = field(default=None)
-    status_code: int = field(default=None)
     

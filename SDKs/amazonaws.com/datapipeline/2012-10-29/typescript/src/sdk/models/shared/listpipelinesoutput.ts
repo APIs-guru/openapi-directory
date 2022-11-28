@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PipelineIdName } from "./pipelineidname";
+
 
 
 // ListPipelinesOutput
@@ -8,12 +8,12 @@ import { PipelineIdName } from "./pipelineidname";
  * Contains the output of ListPipelines.
 **/
 export class ListPipelinesOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=hasMoreResults" })
+  @SpeakeasyMetadata({ data: "json, name=hasMoreResults" })
   hasMoreResults?: boolean;
 
-  @Metadata({ data: "json, name=marker" })
+  @SpeakeasyMetadata({ data: "json, name=marker" })
   marker?: string;
 
-  @Metadata({ data: "json, name=pipelineIdList", elemType: shared.PipelineIdName })
+  @SpeakeasyMetadata({ data: "json, name=pipelineIdList", elemType: PipelineIdName })
   pipelineIdList: PipelineIdName[];
 }

@@ -47,6 +47,8 @@ const (
 	ScanConfigErrorCodeEnumUnsupportedURLScheme                        ScanConfigErrorCodeEnum = "UNSUPPORTED_URL_SCHEME"
 )
 
+// ScanConfigError
+// Defines a custom error message used by CreateScanConfig and UpdateScanConfig APIs when scan configuration validation fails. It is also reported as part of a ScanRunErrorTrace message if scan validation fails due to a scan configuration error.
 type ScanConfigError struct {
 	Code      *ScanConfigErrorCodeEnum `json:"code,omitempty"`
 	FieldName *string                  `json:"fieldName,omitempty"`

@@ -30,7 +30,7 @@ type ContentPromotionsCreateSecurity struct {
 type ContentPromotionsCreateRequest struct {
 	PathParams  ContentPromotionsCreatePathParams
 	QueryParams ContentPromotionsCreateQueryParams
-	Request     *shared.Promotion `request:"mediaType=application/json"`
+	Request     *shared.PromotionInput `request:"mediaType=application/json"`
 	Security    ContentPromotionsCreateSecurity
 }
 

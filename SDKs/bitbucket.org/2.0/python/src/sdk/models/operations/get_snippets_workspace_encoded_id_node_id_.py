@@ -1,47 +1,33 @@
 from dataclasses import dataclass, field
 from typing import Any,Optional
+from sdk.models import shared
 
 
 @dataclass
 class GetSnippetsWorkspaceEncodedIDNodeIDPathParams:
-    encoded_id: str = field(default=None, metadata={'path_param': { 'field_name': 'encoded_id', 'style': 'simple', 'explode': False }})
-    node_id: str = field(default=None, metadata={'path_param': { 'field_name': 'node_id', 'style': 'simple', 'explode': False }})
-    workspace: str = field(default=None, metadata={'path_param': { 'field_name': 'workspace', 'style': 'simple', 'explode': False }})
-    
-
-@dataclass
-class GetSnippetsWorkspaceEncodedIDNodeIDSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    
-
-@dataclass
-class GetSnippetsWorkspaceEncodedIDNodeIDSecurityOption2:
-    basic: shared.SchemeBasic = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'basic' }})
-    
-
-@dataclass
-class GetSnippetsWorkspaceEncodedIDNodeIDSecurityOption3:
-    api_key: shared.SchemeAPIKey = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    encoded_id: str = field(metadata={'path_param': { 'field_name': 'encoded_id', 'style': 'simple', 'explode': False }})
+    node_id: str = field(metadata={'path_param': { 'field_name': 'node_id', 'style': 'simple', 'explode': False }})
+    workspace: str = field(metadata={'path_param': { 'field_name': 'workspace', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetSnippetsWorkspaceEncodedIDNodeIDSecurity:
-    option1: Optional[GetSnippetsWorkspaceEncodedIDNodeIDSecurityOption1] = field(default=None, metadata={'security': { 'option': True }})
-    option2: Optional[GetSnippetsWorkspaceEncodedIDNodeIDSecurityOption2] = field(default=None, metadata={'security': { 'option': True }})
-    option3: Optional[GetSnippetsWorkspaceEncodedIDNodeIDSecurityOption3] = field(default=None, metadata={'security': { 'option': True }})
+    api_key: Optional[shared.SchemeAPIKey] = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    basic: Optional[shared.SchemeBasic] = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'basic' }})
+    oauth2: Optional[shared.SchemeOauth2] = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class GetSnippetsWorkspaceEncodedIDNodeIDRequest:
-    path_params: GetSnippetsWorkspaceEncodedIDNodeIDPathParams = field(default=None)
-    security: GetSnippetsWorkspaceEncodedIDNodeIDSecurity = field(default=None)
+    path_params: GetSnippetsWorkspaceEncodedIDNodeIDPathParams = field()
+    security: GetSnippetsWorkspaceEncodedIDNodeIDSecurity = field()
     
 
 @dataclass
 class GetSnippetsWorkspaceEncodedIDNodeIDResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     error: Optional[dict[str, Any]] = field(default=None)
     snippet: Optional[dict[str, Any]] = field(default=None)
     

@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class CheckInLicenseRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Beneficiary" })
+  @SpeakeasyMetadata({ data: "json, name=Beneficiary" })
   beneficiary?: string;
 
-  @Metadata({ data: "json, name=LicenseConsumptionToken" })
+  @SpeakeasyMetadata({ data: "json, name=LicenseConsumptionToken" })
   licenseConsumptionToken: string;
 }

@@ -11,10 +11,8 @@ var __assign = (this && this.__assign) || function () {
 };
 import axios from "axios";
 import * as operations from "./models/operations";
-import { GetQueryParamSerializer } from "../internal/utils/queryparams";
-import { CreateSecurityClient } from "../internal/utils/security";
-import * as utils from "../internal/utils/utils";
-var Servers = [
+import * as utils from "../internal/utils";
+export var ServerList = [
     "https://webservice.wikipathways.org",
 ];
 export function WithServerURL(serverURL, params) {
@@ -22,12 +20,12 @@ export function WithServerURL(serverURL, params) {
         if (params != null) {
             serverURL = utils.ReplaceParameters(serverURL, params);
         }
-        sdk.serverURL = serverURL;
+        sdk._serverURL = serverURL;
     };
 }
 export function WithClient(client) {
     return function (sdk) {
-        sdk.defaultClient = client;
+        sdk._defaultClient = client;
     };
 }
 var SDK = /** @class */ (function () {
@@ -37,718 +35,743 @@ var SDK = /** @class */ (function () {
             opts[_i] = arguments[_i];
         }
         var _this = this;
+        this._language = "typescript";
+        this._sdkVersion = "0.0.1";
+        this._genVersion = "internal";
         opts.forEach(function (o) { return o(_this); });
-        if (this.serverURL == "") {
-            this.serverURL = Servers[0];
+        if (this._serverURL == "") {
+            this._serverURL = ServerList[0];
         }
-        if (!this.defaultClient) {
-            this.defaultClient = axios.create({ baseURL: this.serverURL });
+        if (!this._defaultClient) {
+            this._defaultClient = axios.create({ baseURL: this._serverURL });
         }
-        if (!this.securityClient) {
-            if (this.security) {
-                this.securityClient = CreateSecurityClient(this.defaultClient, this.security);
-            }
-            else {
-                this.securityClient = this.defaultClient;
-            }
+        if (!this._securityClient) {
+            this._securityClient = this._defaultClient;
         }
     }
-    // GetFindInteractions - findInteractionsFind interactions defined in WikiPathways pathways.
-    SDK.prototype.GetFindInteractions = function (req, config) {
+    /**
+     * getFindInteractions - findInteractionsFind interactions defined in WikiPathways pathways.
+    **/
+    SDK.prototype.getFindInteractions = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.GetFindInteractionsRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = baseURL.replace(/\/$/, "") + "/findInteractions";
-        var client = this.defaultClient;
-        var qpSerializer = GetQueryParamSerializer(req.queryParams);
+        var client = this._defaultClient;
+        var qpSerializer = utils.GetQueryParamSerializer(req.queryParams);
         var requestConfig = __assign(__assign({}, config), { params: req.queryParams, paramsSerializer: qpSerializer });
         return client
-            .get(url, __assign({}, requestConfig))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get" }, requestConfig)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
                     break;
             }
             return res;
         })
             .catch(function (error) { throw error; });
     };
-    // GetFindPathwaysByLiterature - findPathwaysByLiterature
-    SDK.prototype.GetFindPathwaysByLiterature = function (req, config) {
+    /**
+     * getFindPathwaysByLiterature - findPathwaysByLiterature
+    **/
+    SDK.prototype.getFindPathwaysByLiterature = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.GetFindPathwaysByLiteratureRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = baseURL.replace(/\/$/, "") + "/findPathwaysByLiterature";
-        var client = this.defaultClient;
-        var qpSerializer = GetQueryParamSerializer(req.queryParams);
+        var client = this._defaultClient;
+        var qpSerializer = utils.GetQueryParamSerializer(req.queryParams);
         var requestConfig = __assign(__assign({}, config), { params: req.queryParams, paramsSerializer: qpSerializer });
         return client
-            .get(url, __assign({}, requestConfig))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get" }, requestConfig)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
                     break;
             }
             return res;
         })
             .catch(function (error) { throw error; });
     };
-    // GetFindPathwaysByText - findPathwaysByText
-    SDK.prototype.GetFindPathwaysByText = function (req, config) {
+    /**
+     * getFindPathwaysByText - findPathwaysByText
+    **/
+    SDK.prototype.getFindPathwaysByText = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.GetFindPathwaysByTextRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = baseURL.replace(/\/$/, "") + "/findPathwaysByText";
-        var client = this.defaultClient;
-        var qpSerializer = GetQueryParamSerializer(req.queryParams);
+        var client = this._defaultClient;
+        var qpSerializer = utils.GetQueryParamSerializer(req.queryParams);
         var requestConfig = __assign(__assign({}, config), { params: req.queryParams, paramsSerializer: qpSerializer });
         return client
-            .get(url, __assign({}, requestConfig))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get" }, requestConfig)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
                     break;
             }
             return res;
         })
             .catch(function (error) { throw error; });
     };
-    // GetFindPathwaysByXref - findPathwaysByXref
-    SDK.prototype.GetFindPathwaysByXref = function (req, config) {
+    /**
+     * getFindPathwaysByXref - findPathwaysByXref
+    **/
+    SDK.prototype.getFindPathwaysByXref = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.GetFindPathwaysByXrefRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = baseURL.replace(/\/$/, "") + "/findPathwaysByXref";
-        var client = this.defaultClient;
-        var qpSerializer = GetQueryParamSerializer(req.queryParams);
+        var client = this._defaultClient;
+        var qpSerializer = utils.GetQueryParamSerializer(req.queryParams);
         var requestConfig = __assign(__assign({}, config), { params: req.queryParams, paramsSerializer: qpSerializer });
         return client
-            .get(url, __assign({}, requestConfig))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get" }, requestConfig)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
                     break;
             }
             return res;
         })
             .catch(function (error) { throw error; });
     };
-    // GetGetColoredPathway - getColoredPathwayGet a colored image version of the pathway.
-    SDK.prototype.GetGetColoredPathway = function (req, config) {
+    /**
+     * getGetColoredPathway - getColoredPathwayGet a colored image version of the pathway.
+    **/
+    SDK.prototype.getGetColoredPathway = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.GetGetColoredPathwayRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = baseURL.replace(/\/$/, "") + "/getColoredPathway";
-        var client = this.defaultClient;
-        var qpSerializer = GetQueryParamSerializer(req.queryParams);
+        var client = this._defaultClient;
+        var qpSerializer = utils.GetQueryParamSerializer(req.queryParams);
         var requestConfig = __assign(__assign({}, config), { params: req.queryParams, paramsSerializer: qpSerializer });
         return client
-            .get(url, __assign({}, requestConfig))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get" }, requestConfig)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
                     break;
             }
             return res;
         })
             .catch(function (error) { throw error; });
     };
-    // GetGetCurationTagHistory - getCurationTagHistory
-    SDK.prototype.GetGetCurationTagHistory = function (req, config) {
+    /**
+     * getGetCurationTagHistory - getCurationTagHistory
+    **/
+    SDK.prototype.getGetCurationTagHistory = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.GetGetCurationTagHistoryRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = baseURL.replace(/\/$/, "") + "/getCurationTagHistory";
-        var client = this.defaultClient;
-        var qpSerializer = GetQueryParamSerializer(req.queryParams);
+        var client = this._defaultClient;
+        var qpSerializer = utils.GetQueryParamSerializer(req.queryParams);
         var requestConfig = __assign(__assign({}, config), { params: req.queryParams, paramsSerializer: qpSerializer });
         return client
-            .get(url, __assign({}, requestConfig))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get" }, requestConfig)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
                     break;
             }
             return res;
         })
             .catch(function (error) { throw error; });
     };
-    // GetGetCurationTags - getCurationTagsGet all curation tags for the given tag name. Use this method if you want to find all pathways that are tagged with a specific curation tag.
-    SDK.prototype.GetGetCurationTags = function (req, config) {
+    /**
+     * getGetCurationTags - getCurationTagsGet all curation tags for the given tag name. Use this method if you want to find all pathways that are tagged with a specific curation tag.
+    **/
+    SDK.prototype.getGetCurationTags = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.GetGetCurationTagsRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = baseURL.replace(/\/$/, "") + "/getCurationTags";
-        var client = this.defaultClient;
-        var qpSerializer = GetQueryParamSerializer(req.queryParams);
+        var client = this._defaultClient;
+        var qpSerializer = utils.GetQueryParamSerializer(req.queryParams);
         var requestConfig = __assign(__assign({}, config), { params: req.queryParams, paramsSerializer: qpSerializer });
         return client
-            .get(url, __assign({}, requestConfig))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get" }, requestConfig)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
                     break;
             }
             return res;
         })
             .catch(function (error) { throw error; });
     };
-    // GetGetCurationTagsByName - getCurationTagsByNameGet all curation tags for the given tag name. Use this method if you want to find all pathways that are tagged with a specific curation tag.
-    SDK.prototype.GetGetCurationTagsByName = function (req, config) {
+    /**
+     * getGetCurationTagsByName - getCurationTagsByNameGet all curation tags for the given tag name. Use this method if you want to find all pathways that are tagged with a specific curation tag.
+    **/
+    SDK.prototype.getGetCurationTagsByName = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.GetGetCurationTagsByNameRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = baseURL.replace(/\/$/, "") + "/getCurationTagsByName";
-        var client = this.defaultClient;
-        var qpSerializer = GetQueryParamSerializer(req.queryParams);
+        var client = this._defaultClient;
+        var qpSerializer = utils.GetQueryParamSerializer(req.queryParams);
         var requestConfig = __assign(__assign({}, config), { params: req.queryParams, paramsSerializer: qpSerializer });
         return client
-            .get(url, __assign({}, requestConfig))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get" }, requestConfig)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
                     break;
             }
             return res;
         })
             .catch(function (error) { throw error; });
     };
-    // GetGetOntologyTermsByPathway - getOntologyTermsByPathway
-    SDK.prototype.GetGetOntologyTermsByPathway = function (req, config) {
+    /**
+     * getGetOntologyTermsByPathway - getOntologyTermsByPathway
+    **/
+    SDK.prototype.getGetOntologyTermsByPathway = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.GetGetOntologyTermsByPathwayRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = baseURL.replace(/\/$/, "") + "/getOntologyTermsByPathway";
-        var client = this.defaultClient;
-        var qpSerializer = GetQueryParamSerializer(req.queryParams);
+        var client = this._defaultClient;
+        var qpSerializer = utils.GetQueryParamSerializer(req.queryParams);
         var requestConfig = __assign(__assign({}, config), { params: req.queryParams, paramsSerializer: qpSerializer });
         return client
-            .get(url, __assign({}, requestConfig))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get" }, requestConfig)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
                     break;
             }
             return res;
         })
             .catch(function (error) { throw error; });
     };
-    // GetGetPathway - getPathway
-    SDK.prototype.GetGetPathway = function (req, config) {
+    /**
+     * getGetPathway - getPathway
+    **/
+    SDK.prototype.getGetPathway = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.GetGetPathwayRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = baseURL.replace(/\/$/, "") + "/getPathway";
-        var client = this.defaultClient;
-        var qpSerializer = GetQueryParamSerializer(req.queryParams);
+        var client = this._defaultClient;
+        var qpSerializer = utils.GetQueryParamSerializer(req.queryParams);
         var requestConfig = __assign(__assign({}, config), { params: req.queryParams, paramsSerializer: qpSerializer });
         return client
-            .get(url, __assign({}, requestConfig))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get" }, requestConfig)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
                     break;
             }
             return res;
         })
             .catch(function (error) { throw error; });
     };
-    // GetGetPathwayAs - getPathwayAsDownload a pathway in the specified file format.
-    SDK.prototype.GetGetPathwayAs = function (req, config) {
+    /**
+     * getGetPathwayAs - getPathwayAsDownload a pathway in the specified file format.
+    **/
+    SDK.prototype.getGetPathwayAs = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.GetGetPathwayAsRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = baseURL.replace(/\/$/, "") + "/getPathwayAs";
-        var client = this.defaultClient;
-        var qpSerializer = GetQueryParamSerializer(req.queryParams);
+        var client = this._defaultClient;
+        var qpSerializer = utils.GetQueryParamSerializer(req.queryParams);
         var requestConfig = __assign(__assign({}, config), { params: req.queryParams, paramsSerializer: qpSerializer });
         return client
-            .get(url, __assign({}, requestConfig))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get" }, requestConfig)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
                     break;
             }
             return res;
         })
             .catch(function (error) { throw error; });
     };
-    // GetGetPathwayHistory - getPathwayHistoryGet the revision history of a pathway.
-    SDK.prototype.GetGetPathwayHistory = function (req, config) {
+    /**
+     * getGetPathwayHistory - getPathwayHistoryGet the revision history of a pathway.
+    **/
+    SDK.prototype.getGetPathwayHistory = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.GetGetPathwayHistoryRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = baseURL.replace(/\/$/, "") + "/getPathwayHistory";
-        var client = this.defaultClient;
-        var qpSerializer = GetQueryParamSerializer(req.queryParams);
+        var client = this._defaultClient;
+        var qpSerializer = utils.GetQueryParamSerializer(req.queryParams);
         var requestConfig = __assign(__assign({}, config), { params: req.queryParams, paramsSerializer: qpSerializer });
         return client
-            .get(url, __assign({}, requestConfig))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get" }, requestConfig)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
                     break;
             }
             return res;
         })
             .catch(function (error) { throw error; });
     };
-    // GetGetPathwayInfo - getPathwayInfoGet some general info about the pathway, such as the name, species, without downloading the GPML.
-    SDK.prototype.GetGetPathwayInfo = function (req, config) {
+    /**
+     * getGetPathwayInfo - getPathwayInfoGet some general info about the pathway, such as the name, species, without downloading the GPML.
+    **/
+    SDK.prototype.getGetPathwayInfo = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.GetGetPathwayInfoRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = baseURL.replace(/\/$/, "") + "/getPathwayInfo";
-        var client = this.defaultClient;
-        var qpSerializer = GetQueryParamSerializer(req.queryParams);
+        var client = this._defaultClient;
+        var qpSerializer = utils.GetQueryParamSerializer(req.queryParams);
         var requestConfig = __assign(__assign({}, config), { params: req.queryParams, paramsSerializer: qpSerializer });
         return client
-            .get(url, __assign({}, requestConfig))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get" }, requestConfig)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
                     break;
             }
             return res;
         })
             .catch(function (error) { throw error; });
     };
-    // GetGetPathwaysByOntologyTerm - getPathwaysByOntologyTerm
-    SDK.prototype.GetGetPathwaysByOntologyTerm = function (req, config) {
+    /**
+     * getGetPathwaysByOntologyTerm - getPathwaysByOntologyTerm
+    **/
+    SDK.prototype.getGetPathwaysByOntologyTerm = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.GetGetPathwaysByOntologyTermRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = baseURL.replace(/\/$/, "") + "/getPathwaysByOntologyTerm";
-        var client = this.defaultClient;
-        var qpSerializer = GetQueryParamSerializer(req.queryParams);
+        var client = this._defaultClient;
+        var qpSerializer = utils.GetQueryParamSerializer(req.queryParams);
         var requestConfig = __assign(__assign({}, config), { params: req.queryParams, paramsSerializer: qpSerializer });
         return client
-            .get(url, __assign({}, requestConfig))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get" }, requestConfig)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
                     break;
             }
             return res;
         })
             .catch(function (error) { throw error; });
     };
-    // GetGetPathwaysByParentOntologyTerm - getPathwaysByParentOntologyTerm
-    SDK.prototype.GetGetPathwaysByParentOntologyTerm = function (req, config) {
+    /**
+     * getGetPathwaysByParentOntologyTerm - getPathwaysByParentOntologyTerm
+    **/
+    SDK.prototype.getGetPathwaysByParentOntologyTerm = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.GetGetPathwaysByParentOntologyTermRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = baseURL.replace(/\/$/, "") + "/getPathwaysByParentOntologyTerm";
-        var client = this.defaultClient;
-        var qpSerializer = GetQueryParamSerializer(req.queryParams);
+        var client = this._defaultClient;
+        var qpSerializer = utils.GetQueryParamSerializer(req.queryParams);
         var requestConfig = __assign(__assign({}, config), { params: req.queryParams, paramsSerializer: qpSerializer });
         return client
-            .get(url, __assign({}, requestConfig))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get" }, requestConfig)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
                     break;
             }
             return res;
         })
             .catch(function (error) { throw error; });
     };
-    // GetGetRecentChanges - getRecentChangesGet the recently changed pathways.<br>Note: the recent changes table only retains items for a limited time (2 months), so there is no guarantee that you will get all changes when the timestamp points to a date that is more than 2 months in the past.
-    SDK.prototype.GetGetRecentChanges = function (req, config) {
+    /**
+     * getGetRecentChanges - getRecentChangesGet the recently changed pathways.<br>Note: the recent changes table only retains items for a limited time (2 months), so there is no guarantee that you will get all changes when the timestamp points to a date that is more than 2 months in the past.
+    **/
+    SDK.prototype.getGetRecentChanges = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.GetGetRecentChangesRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = baseURL.replace(/\/$/, "") + "/getRecentChanges";
-        var client = this.defaultClient;
-        var qpSerializer = GetQueryParamSerializer(req.queryParams);
+        var client = this._defaultClient;
+        var qpSerializer = utils.GetQueryParamSerializer(req.queryParams);
         var requestConfig = __assign(__assign({}, config), { params: req.queryParams, paramsSerializer: qpSerializer });
         return client
-            .get(url, __assign({}, requestConfig))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get" }, requestConfig)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
                     break;
             }
             return res;
         })
             .catch(function (error) { throw error; });
     };
-    // GetGetUserByOrcid - getUserByOrcid
-    SDK.prototype.GetGetUserByOrcid = function (req, config) {
+    /**
+     * getGetUserByOrcid - getUserByOrcid
+    **/
+    SDK.prototype.getGetUserByOrcid = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.GetGetUserByOrcidRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = baseURL.replace(/\/$/, "") + "/getUserByOrcid";
-        var client = this.defaultClient;
-        var qpSerializer = GetQueryParamSerializer(req.queryParams);
+        var client = this._defaultClient;
+        var qpSerializer = utils.GetQueryParamSerializer(req.queryParams);
         var requestConfig = __assign(__assign({}, config), { params: req.queryParams, paramsSerializer: qpSerializer });
         return client
-            .get(url, __assign({}, requestConfig))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get" }, requestConfig)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
                     break;
             }
             return res;
         })
             .catch(function (error) { throw error; });
     };
-    // GetGetXrefList - getXrefList
-    SDK.prototype.GetGetXrefList = function (req, config) {
+    /**
+     * getGetXrefList - getXrefList
+    **/
+    SDK.prototype.getGetXrefList = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.GetGetXrefListRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = baseURL.replace(/\/$/, "") + "/getXrefList";
-        var client = this.defaultClient;
-        var qpSerializer = GetQueryParamSerializer(req.queryParams);
+        var client = this._defaultClient;
+        var qpSerializer = utils.GetQueryParamSerializer(req.queryParams);
         var requestConfig = __assign(__assign({}, config), { params: req.queryParams, paramsSerializer: qpSerializer });
         return client
-            .get(url, __assign({}, requestConfig))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get" }, requestConfig)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
                     break;
             }
             return res;
         })
             .catch(function (error) { throw error; });
     };
-    // GetListOrganisms - listOrganisms
-    SDK.prototype.GetListOrganisms = function (req, config) {
+    /**
+     * getListOrganisms - listOrganisms
+    **/
+    SDK.prototype.getListOrganisms = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.GetListOrganismsRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = baseURL.replace(/\/$/, "") + "/listOrganisms";
-        var client = this.defaultClient;
-        var qpSerializer = GetQueryParamSerializer(req.queryParams);
+        var client = this._defaultClient;
+        var qpSerializer = utils.GetQueryParamSerializer(req.queryParams);
         var requestConfig = __assign(__assign({}, config), { params: req.queryParams, paramsSerializer: qpSerializer });
         return client
-            .get(url, __assign({}, requestConfig))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get" }, requestConfig)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
                     break;
             }
             return res;
         })
             .catch(function (error) { throw error; });
     };
-    // GetListPathways - listPathways
-    SDK.prototype.GetListPathways = function (req, config) {
+    /**
+     * getListPathways - listPathways
+    **/
+    SDK.prototype.getListPathways = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.GetListPathwaysRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = baseURL.replace(/\/$/, "") + "/listPathways";
-        var client = this.defaultClient;
-        var qpSerializer = GetQueryParamSerializer(req.queryParams);
+        var client = this._defaultClient;
+        var qpSerializer = utils.GetQueryParamSerializer(req.queryParams);
         var requestConfig = __assign(__assign({}, config), { params: req.queryParams, paramsSerializer: qpSerializer });
         return client
-            .get(url, __assign({}, requestConfig))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get" }, requestConfig)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
                     break;
             }
             return res;
         })
             .catch(function (error) { throw error; });
     };
-    // GetLogin - loginStart a logged in session, using an existing WikiPathways account. This function will return an authentication code that can be used to excecute methods that need authentication (e.g. updatePathway).
-    SDK.prototype.GetLogin = function (req, config) {
+    /**
+     * getLogin - loginStart a logged in session, using an existing WikiPathways account. This function will return an authentication code that can be used to excecute methods that need authentication (e.g. updatePathway).
+    **/
+    SDK.prototype.getLogin = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.GetLoginRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = baseURL.replace(/\/$/, "") + "/login";
-        var client = this.defaultClient;
-        var qpSerializer = GetQueryParamSerializer(req.queryParams);
+        var client = this._defaultClient;
+        var qpSerializer = utils.GetQueryParamSerializer(req.queryParams);
         var requestConfig = __assign(__assign({}, config), { params: req.queryParams, paramsSerializer: qpSerializer });
         return client
-            .get(url, __assign({}, requestConfig))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get" }, requestConfig)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
                     break;
             }
             return res;
         })
             .catch(function (error) { throw error; });
     };
-    // GetRemoveCurationTag - removeCurationTagRemove a curation tag from a pathway.
-    SDK.prototype.GetRemoveCurationTag = function (req, config) {
+    /**
+     * getRemoveCurationTag - removeCurationTagRemove a curation tag from a pathway.
+    **/
+    SDK.prototype.getRemoveCurationTag = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.GetRemoveCurationTagRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = baseURL.replace(/\/$/, "") + "/removeCurationTag";
-        var client = this.defaultClient;
-        var qpSerializer = GetQueryParamSerializer(req.queryParams);
+        var client = this._defaultClient;
+        var qpSerializer = utils.GetQueryParamSerializer(req.queryParams);
         var requestConfig = __assign(__assign({}, config), { params: req.queryParams, paramsSerializer: qpSerializer });
         return client
-            .get(url, __assign({}, requestConfig))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get" }, requestConfig)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
                     break;
             }
             return res;
         })
             .catch(function (error) { throw error; });
     };
-    // GetRemoveOntologyTag - removeOntologyTag
-    SDK.prototype.GetRemoveOntologyTag = function (req, config) {
+    /**
+     * getRemoveOntologyTag - removeOntologyTag
+    **/
+    SDK.prototype.getRemoveOntologyTag = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.GetRemoveOntologyTagRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = baseURL.replace(/\/$/, "") + "/removeOntologyTag";
-        var client = this.defaultClient;
-        var qpSerializer = GetQueryParamSerializer(req.queryParams);
+        var client = this._defaultClient;
+        var qpSerializer = utils.GetQueryParamSerializer(req.queryParams);
         var requestConfig = __assign(__assign({}, config), { params: req.queryParams, paramsSerializer: qpSerializer });
         return client
-            .get(url, __assign({}, requestConfig))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get" }, requestConfig)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
                     break;
             }
             return res;
         })
             .catch(function (error) { throw error; });
     };
-    // GetSaveCurationTag - saveCurationTag
-    SDK.prototype.GetSaveCurationTag = function (req, config) {
+    /**
+     * getSaveCurationTag - saveCurationTag
+    **/
+    SDK.prototype.getSaveCurationTag = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.GetSaveCurationTagRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = baseURL.replace(/\/$/, "") + "/saveCurationTag";
-        var client = this.defaultClient;
-        var qpSerializer = GetQueryParamSerializer(req.queryParams);
+        var client = this._defaultClient;
+        var qpSerializer = utils.GetQueryParamSerializer(req.queryParams);
         var requestConfig = __assign(__assign({}, config), { params: req.queryParams, paramsSerializer: qpSerializer });
         return client
-            .get(url, __assign({}, requestConfig))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get" }, requestConfig)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
                     break;
             }
             return res;
         })
             .catch(function (error) { throw error; });
     };
-    // GetSaveOntologyTag - saveOntologyTag
-    SDK.prototype.GetSaveOntologyTag = function (req, config) {
+    /**
+     * getSaveOntologyTag - saveOntologyTag
+    **/
+    SDK.prototype.getSaveOntologyTag = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.GetSaveOntologyTagRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = baseURL.replace(/\/$/, "") + "/saveOntologyTag";
-        var client = this.defaultClient;
-        var qpSerializer = GetQueryParamSerializer(req.queryParams);
+        var client = this._defaultClient;
+        var qpSerializer = utils.GetQueryParamSerializer(req.queryParams);
         var requestConfig = __assign(__assign({}, config), { params: req.queryParams, paramsSerializer: qpSerializer });
         return client
-            .get(url, __assign({}, requestConfig))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get" }, requestConfig)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
                     break;
             }
             return res;
         })
             .catch(function (error) { throw error; });
     };
-    // GetUpdatePathway - updatePathwayUpdate a pathway on the wiki with the given GPML code.<br>Note: To create/modify pathways via the web service, you need to have an account with web service write permissions. Please contact us to request write access for the web service.
-    SDK.prototype.GetUpdatePathway = function (req, config) {
+    /**
+     * getUpdatePathway - updatePathwayUpdate a pathway on the wiki with the given GPML code.<br>Note: To create/modify pathways via the web service, you need to have an account with web service write permissions. Please contact us to request write access for the web service.
+    **/
+    SDK.prototype.getUpdatePathway = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.GetUpdatePathwayRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = baseURL.replace(/\/$/, "") + "/updatePathway";
-        var client = this.defaultClient;
-        var qpSerializer = GetQueryParamSerializer(req.queryParams);
+        var client = this._defaultClient;
+        var qpSerializer = utils.GetQueryParamSerializer(req.queryParams);
         var requestConfig = __assign(__assign({}, config), { params: req.queryParams, paramsSerializer: qpSerializer });
         return client
-            .get(url, __assign({}, requestConfig))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get" }, requestConfig)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
                     break;
             }
             return res;
         })
             .catch(function (error) { throw error; });
     };
-    // PostCreatePathway - createPathwayCreate a new pathway on the wiki with the given GPML code.<br>Note: To create/modify pathways via the web service, you need to have an account with web service write permissions. Please contact us to request write access for the web service.
-    SDK.prototype.PostCreatePathway = function (req, config) {
+    /**
+     * postCreatePathway - createPathwayCreate a new pathway on the wiki with the given GPML code.<br>Note: To create/modify pathways via the web service, you need to have an account with web service write permissions. Please contact us to request write access for the web service.
+    **/
+    SDK.prototype.postCreatePathway = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.PostCreatePathwayRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = baseURL.replace(/\/$/, "") + "/createPathway";
-        var client = this.defaultClient;
-        var qpSerializer = GetQueryParamSerializer(req.queryParams);
+        var client = this._defaultClient;
+        var qpSerializer = utils.GetQueryParamSerializer(req.queryParams);
         var requestConfig = __assign(__assign({}, config), { params: req.queryParams, paramsSerializer: qpSerializer });
         return client
-            .post(url, __assign({}, requestConfig))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "post" }, requestConfig)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
                     break;
             }
             return res;

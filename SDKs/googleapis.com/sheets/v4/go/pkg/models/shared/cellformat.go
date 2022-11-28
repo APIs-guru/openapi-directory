@@ -44,6 +44,8 @@ const (
 	CellFormatWrapStrategyEnumWrap                    CellFormatWrapStrategyEnum = "WRAP"
 )
 
+// CellFormat
+// The format of a cell.
 type CellFormat struct {
 	BackgroundColor      *Color                              `json:"backgroundColor,omitempty"`
 	BackgroundColorStyle *ColorStyle                         `json:"backgroundColorStyle,omitempty"`

@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum GoogleCloudRecommenderV1ReliabilityProjectionRisksEnum {
-    RiskTypeUnspecified = "RISK_TYPE_UNSPECIFIED"
-,    ServiceDisruption = "SERVICE_DISRUPTION"
-,    DataLoss = "DATA_LOSS"
-,    AccessDeny = "ACCESS_DENY"
+    RiskTypeUnspecified = "RISK_TYPE_UNSPECIFIED",
+    ServiceDisruption = "SERVICE_DISRUPTION",
+    DataLoss = "DATA_LOSS",
+    AccessDeny = "ACCESS_DENY"
 }
 
 
@@ -13,9 +14,9 @@ export enum GoogleCloudRecommenderV1ReliabilityProjectionRisksEnum {
  * Contains information on the impact of a reliability recommendation.
 **/
 export class GoogleCloudRecommenderV1ReliabilityProjection extends SpeakeasyBase {
-  @Metadata({ data: "json, name=details" })
+  @SpeakeasyMetadata({ data: "json, name=details" })
   details?: Map<string, any>;
 
-  @Metadata({ data: "json, name=risks" })
+  @SpeakeasyMetadata({ data: "json, name=risks" })
   risks?: GoogleCloudRecommenderV1ReliabilityProjectionRisksEnum[];
 }

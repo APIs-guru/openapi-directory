@@ -1,7 +1,8 @@
 
 
+
 export enum PrivateConnectionProvisioningStatusEnum {
-    Failed = "FAILED"
-,    Pending = "PENDING"
-,    Created = "CREATED"
+    Failed = "FAILED",
+    Pending = "PENDING",
+    Created = "CREATED"
 }

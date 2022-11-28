@@ -1,13 +1,13 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import proactiveinsight
-from . import reactiveinsight
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class DescribeInsightResponse:
-    proactive_insight: Optional[proactiveinsight.ProactiveInsight] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ProactiveInsight' }})
-    reactive_insight: Optional[reactiveinsight.ReactiveInsight] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ReactiveInsight' }})
+    proactive_insight: Optional[ProactiveInsight] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ProactiveInsight') }})
+    reactive_insight: Optional[ReactiveInsight] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ReactiveInsight') }})
     

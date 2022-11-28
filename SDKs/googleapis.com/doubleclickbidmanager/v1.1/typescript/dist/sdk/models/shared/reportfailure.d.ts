@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 export declare enum ReportFailureErrorCodeEnum {
     AuthenticationError = "AUTHENTICATION_ERROR",
     UnauthorizedApiAccess = "UNAUTHORIZED_API_ACCESS",

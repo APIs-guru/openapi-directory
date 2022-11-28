@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Job } from "./job";
 import { ListMeta } from "./listmeta";
+
 
 
 // ListJobsResponse
@@ -9,21 +9,21 @@ import { ListMeta } from "./listmeta";
  * ListJobsResponse is a list of Jobs resources.
 **/
 export class ListJobsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=apiVersion" })
+  @SpeakeasyMetadata({ data: "json, name=apiVersion" })
   apiVersion?: string;
 
-  @Metadata({ data: "json, name=items", elemType: shared.Job })
+  @SpeakeasyMetadata({ data: "json, name=items", elemType: Job })
   items?: Job[];
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=metadata" })
+  @SpeakeasyMetadata({ data: "json, name=metadata" })
   metadata?: ListMeta;
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 
-  @Metadata({ data: "json, name=unreachable" })
+  @SpeakeasyMetadata({ data: "json, name=unreachable" })
   unreachable?: string[];
 }

@@ -22,22 +22,22 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var MergeRequest = /** @class */ (function (_super) {
     __extends(MergeRequest, _super);
     function MergeRequest() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=fileName" }),
+        SpeakeasyMetadata({ data: "json, name=fileName" }),
         __metadata("design:type", String)
     ], MergeRequest.prototype, "fileName", void 0);
     __decorate([
-        Metadata({ data: "json, name=inlinePdf" }),
+        SpeakeasyMetadata({ data: "json, name=inlinePdf" }),
         __metadata("design:type", Boolean)
     ], MergeRequest.prototype, "inlinePdf", void 0);
     __decorate([
-        Metadata({ data: "json, name=urls" }),
+        SpeakeasyMetadata({ data: "json, name=urls" }),
         __metadata("design:type", Array)
     ], MergeRequest.prototype, "urls", void 0);
     return MergeRequest;

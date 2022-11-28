@@ -1,6 +1,7 @@
 
 
+
 export enum AmbiguousRoleResolutionTypeEnum {
-    AuthenticatedRole = "AuthenticatedRole"
-,    Deny = "Deny"
+    AuthenticatedRole = "AuthenticatedRole",
+    Deny = "Deny"
 }

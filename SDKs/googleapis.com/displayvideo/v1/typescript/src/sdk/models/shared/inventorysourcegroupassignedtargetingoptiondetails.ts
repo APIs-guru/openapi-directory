@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // InventorySourceGroupAssignedTargetingOptionDetails
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Targeting details for inventory source group. This will be populated in the details field of an AssignedTargetingOption when targeting_type is `TARGETING_TYPE_INVENTORY_SOURCE_GROUP`.
 **/
 export class InventorySourceGroupAssignedTargetingOptionDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=inventorySourceGroupId" })
+  @SpeakeasyMetadata({ data: "json, name=inventorySourceGroupId" })
   inventorySourceGroupId?: string;
 }

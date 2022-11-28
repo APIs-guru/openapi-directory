@@ -1,0 +1,16 @@
+import { SpeakeasyBase } from "../../../internal/utils";
+import { GoogleCloudDialogflowV2beta1HumanAgentAssistantConfigSuggestionQueryConfigContextFilterSettings } from "./googleclouddialogflowv2beta1humanagentassistantconfigsuggestionqueryconfigcontextfiltersettings";
+import { GoogleCloudDialogflowV2beta1HumanAgentAssistantConfigSuggestionQueryConfigDialogflowQuerySource } from "./googleclouddialogflowv2beta1humanagentassistantconfigsuggestionqueryconfigdialogflowquerysource";
+import { GoogleCloudDialogflowV2beta1HumanAgentAssistantConfigSuggestionQueryConfigDocumentQuerySource } from "./googleclouddialogflowv2beta1humanagentassistantconfigsuggestionqueryconfigdocumentquerysource";
+import { GoogleCloudDialogflowV2beta1HumanAgentAssistantConfigSuggestionQueryConfigKnowledgeBaseQuerySource } from "./googleclouddialogflowv2beta1humanagentassistantconfigsuggestionqueryconfigknowledgebasequerysource";
+/**
+ * Config for suggestion query.
+**/
+export declare class GoogleCloudDialogflowV2beta1HumanAgentAssistantConfigSuggestionQueryConfig extends SpeakeasyBase {
+    confidenceThreshold?: number;
+    contextFilterSettings?: GoogleCloudDialogflowV2beta1HumanAgentAssistantConfigSuggestionQueryConfigContextFilterSettings;
+    dialogflowQuerySource?: GoogleCloudDialogflowV2beta1HumanAgentAssistantConfigSuggestionQueryConfigDialogflowQuerySource;
+    documentQuerySource?: GoogleCloudDialogflowV2beta1HumanAgentAssistantConfigSuggestionQueryConfigDocumentQuerySource;
+    knowledgeBaseQuerySource?: GoogleCloudDialogflowV2beta1HumanAgentAssistantConfigSuggestionQueryConfigKnowledgeBaseQuerySource;
+    maxResults?: number;
+}

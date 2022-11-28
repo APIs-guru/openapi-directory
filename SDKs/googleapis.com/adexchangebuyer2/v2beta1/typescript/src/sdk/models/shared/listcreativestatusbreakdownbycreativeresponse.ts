@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { FilteredBidCreativeRow } from "./filteredbidcreativerow";
+
 
 
 // ListCreativeStatusBreakdownByCreativeResponse
@@ -8,9 +8,9 @@ import { FilteredBidCreativeRow } from "./filteredbidcreativerow";
  * Response message for listing all creatives associated with a given filtered bid reason.
 **/
 export class ListCreativeStatusBreakdownByCreativeResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=filteredBidCreativeRows", elemType: shared.FilteredBidCreativeRow })
+  @SpeakeasyMetadata({ data: "json, name=filteredBidCreativeRows", elemType: FilteredBidCreativeRow })
   filteredBidCreativeRows?: FilteredBidCreativeRow[];
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 }

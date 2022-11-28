@@ -1,12 +1,14 @@
 from dataclasses import dataclass, field
-from typing import Enum,List
+from typing import List
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import languagecode_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class BatchDetectSentimentRequest:
-    language_code: languagecode_enum.LanguageCodeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'LanguageCode' }})
-    text_list: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'TextList' }})
+    language_code: LanguageCodeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('LanguageCode') }})
+    text_list: List[str] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('TextList') }})
     

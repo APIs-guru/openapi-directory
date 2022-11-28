@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class AdministrativeActionTypeEnum(str, Enum):
     FILE_SYSTEM_UPDATE = "FILE_SYSTEM_UPDATE"

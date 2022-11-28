@@ -10,13 +10,13 @@ class SetUserKeyPairHeaders:
 
 @dataclass
 class SetUserKeyPairRequest:
-    headers: SetUserKeyPairHeaders = field(default=None)
-    request: shared.UserKeyPairContainer = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: SetUserKeyPairHeaders = field()
+    request: shared.UserKeyPairContainer = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class SetUserKeyPairResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error_response: Optional[shared.ErrorResponse] = field(default=None)
-    status_code: int = field(default=None)
     

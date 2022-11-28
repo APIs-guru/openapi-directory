@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class RegisterResourceRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ResourceArn" })
+  @SpeakeasyMetadata({ data: "json, name=ResourceArn" })
   resourceArn: string;
 
-  @Metadata({ data: "json, name=RoleArn" })
+  @SpeakeasyMetadata({ data: "json, name=RoleArn" })
   roleArn?: string;
 
-  @Metadata({ data: "json, name=UseServiceLinkedRole" })
+  @SpeakeasyMetadata({ data: "json, name=UseServiceLinkedRole" })
   useServiceLinkedRole?: boolean;
 }

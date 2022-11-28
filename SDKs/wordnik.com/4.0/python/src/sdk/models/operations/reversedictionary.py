@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 
 class ReverseDictionaryExcludeSourceDictionariesEnum(str, Enum):
     AHD = "ahd"
@@ -34,6 +35,7 @@ class ReverseDictionarySortOrderEnum(str, Enum):
 
 @dataclass
 class ReverseDictionaryQueryParams:
+    query: str = field(metadata={'query_param': { 'field_name': 'query', 'style': 'form', 'explode': True }})
     exclude_part_of_speech: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'excludePartOfSpeech', 'style': 'form', 'explode': True }})
     exclude_source_dictionaries: Optional[ReverseDictionaryExcludeSourceDictionariesEnum] = field(default=None, metadata={'query_param': { 'field_name': 'excludeSourceDictionaries', 'style': 'form', 'explode': True }})
     expand_terms: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'expandTerms', 'style': 'form', 'explode': True }})
@@ -46,7 +48,6 @@ class ReverseDictionaryQueryParams:
     max_length: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'maxLength', 'style': 'form', 'explode': True }})
     min_corpus_count: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'minCorpusCount', 'style': 'form', 'explode': True }})
     min_length: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'minLength', 'style': 'form', 'explode': True }})
-    query: str = field(default=None, metadata={'query_param': { 'field_name': 'query', 'style': 'form', 'explode': True }})
     skip: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'skip', 'style': 'form', 'explode': True }})
     sort_by: Optional[ReverseDictionarySortByEnum] = field(default=None, metadata={'query_param': { 'field_name': 'sortBy', 'style': 'form', 'explode': True }})
     sort_order: Optional[ReverseDictionarySortOrderEnum] = field(default=None, metadata={'query_param': { 'field_name': 'sortOrder', 'style': 'form', 'explode': True }})
@@ -54,12 +55,12 @@ class ReverseDictionaryQueryParams:
 
 @dataclass
 class ReverseDictionaryRequest:
-    query_params: ReverseDictionaryQueryParams = field(default=None)
+    query_params: ReverseDictionaryQueryParams = field()
     
 
 @dataclass
 class ReverseDictionaryResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

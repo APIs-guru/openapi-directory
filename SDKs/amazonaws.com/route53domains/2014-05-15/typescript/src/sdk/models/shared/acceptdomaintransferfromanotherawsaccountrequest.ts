@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AcceptDomainTransferFromAnotherAwsAccountRequest
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The AcceptDomainTransferFromAnotherAwsAccount request includes the following elements.
 **/
 export class AcceptDomainTransferFromAnotherAwsAccountRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DomainName" })
+  @SpeakeasyMetadata({ data: "json, name=DomainName" })
   domainName: string;
 
-  @Metadata({ data: "json, name=Password" })
+  @SpeakeasyMetadata({ data: "json, name=Password" })
   password: string;
 }

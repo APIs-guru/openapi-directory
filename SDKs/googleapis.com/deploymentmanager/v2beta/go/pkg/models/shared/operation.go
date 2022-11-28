@@ -6,6 +6,8 @@ type OperationErrorErrors struct {
 	Message  *string `json:"message,omitempty"`
 }
 
+// OperationError
+// [Output Only] If errors are generated during processing of the operation, this field will be populated.
 type OperationError struct {
 	Errors []OperationErrorErrors `json:"errors,omitempty"`
 }
@@ -61,6 +63,8 @@ type OperationWarnings struct {
 	Message *string                    `json:"message,omitempty"`
 }
 
+// Operation
+// Represents an Operation resource. Google Compute Engine has three Operation resources: * [Global](/compute/docs/reference/rest/{$api_version}/globalOperations) * [Regional](/compute/docs/reference/rest/{$api_version}/regionOperations) * [Zonal](/compute/docs/reference/rest/{$api_version}/zoneOperations) You can use an operation resource to manage asynchronous API requests. For more information, read Handling API responses. Operations can be global, regional or zonal. - For global operations, use the `globalOperations` resource. - For regional operations, use the `regionOperations` resource. - For zonal operations, use the `zonalOperations` resource. For more information, read Global, Regional, and Zonal Resources.
 type Operation struct {
 	ClientOperationID   *string              `json:"clientOperationId,omitempty"`
 	CreationTimestamp   *string              `json:"creationTimestamp,omitempty"`

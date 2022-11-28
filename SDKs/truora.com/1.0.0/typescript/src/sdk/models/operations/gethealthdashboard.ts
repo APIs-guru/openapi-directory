@@ -1,41 +1,42 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetHealthDashboardQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=country" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=country" })
   country?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=unixTimestampSeconds" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=unixTimestampSeconds" })
   unixTimestampSeconds?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=unixtimezoneOffsetSeconds" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=unixtimezoneOffsetSeconds" })
   unixtimezoneOffsetSeconds?: string;
 }
 
 
 export class GetHealthDashboardSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
   apiKey: shared.SchemeApiKey;
 }
 
 
 export class GetHealthDashboardRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetHealthDashboardQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: GetHealthDashboardSecurity;
 }
 
 
 export class GetHealthDashboardResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata({ elemType: shared.Database })
+  @SpeakeasyMetadata({ elemType: shared.Database })
   databases?: shared.Database[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

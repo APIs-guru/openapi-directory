@@ -1,6 +1,7 @@
 
 
+
 export enum WafOverrideActionTypeEnum {
-    None = "NONE"
-,    Count = "COUNT"
+    None = "NONE",
+    Count = "COUNT"
 }

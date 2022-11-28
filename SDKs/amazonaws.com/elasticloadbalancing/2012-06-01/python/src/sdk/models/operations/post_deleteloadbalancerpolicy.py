@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostDeleteLoadBalancerPolicyActionEnum(str, Enum):
     DELETE_LOAD_BALANCER_POLICY = "DeleteLoadBalancerPolicy"
@@ -10,8 +14,8 @@ class PostDeleteLoadBalancerPolicyVersionEnum(str, Enum):
 
 @dataclass
 class PostDeleteLoadBalancerPolicyQueryParams:
-    action: PostDeleteLoadBalancerPolicyActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostDeleteLoadBalancerPolicyVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostDeleteLoadBalancerPolicyActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostDeleteLoadBalancerPolicyVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostDeleteLoadBalancerPolicyHeaders:
 
 @dataclass
 class PostDeleteLoadBalancerPolicyRequest:
-    query_params: PostDeleteLoadBalancerPolicyQueryParams = field(default=None)
-    headers: PostDeleteLoadBalancerPolicyHeaders = field(default=None)
+    headers: PostDeleteLoadBalancerPolicyHeaders = field()
+    query_params: PostDeleteLoadBalancerPolicyQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostDeleteLoadBalancerPolicyResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

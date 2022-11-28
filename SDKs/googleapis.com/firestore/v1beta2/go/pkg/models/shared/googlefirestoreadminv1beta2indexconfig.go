@@ -1,5 +1,7 @@
 package shared
 
+// GoogleFirestoreAdminV1beta2IndexConfig
+// The index configuration for this field.
 type GoogleFirestoreAdminV1beta2IndexConfig struct {
 	AncestorField      *string                            `json:"ancestorField,omitempty"`
 	Indexes            []GoogleFirestoreAdminV1beta2Index `json:"indexes,omitempty"`

@@ -1,5 +1,7 @@
 package shared
 
+// Blueprint
+// Describes a blueprint (a virtual private server image).
 type Blueprint struct {
 	BlueprintID *string               `json:"blueprintId,omitempty"`
 	Description *string               `json:"description,omitempty"`

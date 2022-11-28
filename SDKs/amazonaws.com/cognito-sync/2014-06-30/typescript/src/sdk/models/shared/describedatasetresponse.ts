@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Dataset } from "./dataset";
+
 
 
 // DescribeDatasetResponse
@@ -7,6 +8,6 @@ import { Dataset } from "./dataset";
  * Response to a successful DescribeDataset request.
 **/
 export class DescribeDatasetResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Dataset" })
+  @SpeakeasyMetadata({ data: "json, name=Dataset" })
   dataset?: Dataset;
 }

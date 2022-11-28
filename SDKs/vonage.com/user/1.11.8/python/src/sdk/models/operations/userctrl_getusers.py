@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class UserCtrlGetUsersPathParams:
-    account_id: str = field(default=None, metadata={'path_param': { 'field_name': 'account_id', 'style': 'simple', 'explode': False }})
+    account_id: str = field(metadata={'path_param': { 'field_name': 'account_id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -20,20 +20,20 @@ class UserCtrlGetUsersQueryParams:
 
 @dataclass
 class UserCtrlGetUsersSecurity:
-    bearer_auth: shared.SchemeBearerAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer' }})
+    bearer_auth: shared.SchemeBearerAuth = field(metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer' }})
     
 
 @dataclass
 class UserCtrlGetUsersRequest:
-    path_params: UserCtrlGetUsersPathParams = field(default=None)
-    query_params: UserCtrlGetUsersQueryParams = field(default=None)
-    security: UserCtrlGetUsersSecurity = field(default=None)
+    path_params: UserCtrlGetUsersPathParams = field()
+    query_params: UserCtrlGetUsersQueryParams = field()
+    security: UserCtrlGetUsersSecurity = field()
     
 
 @dataclass
 class UserCtrlGetUsersResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     users_hal_response: Optional[shared.UsersHalResponse] = field(default=None)
     validation_errors_response: Optional[shared.ValidationErrorsResponse] = field(default=None)
     

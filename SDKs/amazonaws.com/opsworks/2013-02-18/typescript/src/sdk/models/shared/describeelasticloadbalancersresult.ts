@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ElasticLoadBalancer } from "./elasticloadbalancer";
+
 
 
 // DescribeElasticLoadBalancersResult
@@ -8,6 +8,6 @@ import { ElasticLoadBalancer } from "./elasticloadbalancer";
  * Contains the response to a <code>DescribeElasticLoadBalancers</code> request.
 **/
 export class DescribeElasticLoadBalancersResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ElasticLoadBalancers", elemType: shared.ElasticLoadBalancer })
+  @SpeakeasyMetadata({ data: "json, name=ElasticLoadBalancers", elemType: ElasticLoadBalancer })
   elasticLoadBalancers?: ElasticLoadBalancer[];
 }

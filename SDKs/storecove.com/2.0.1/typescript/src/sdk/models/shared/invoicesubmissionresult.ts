@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // InvoiceSubmissionResult
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The result of an invoice submission
 **/
 export class InvoiceSubmissionResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=guid" })
+  @SpeakeasyMetadata({ data: "json, name=guid" })
   guid?: string;
 }

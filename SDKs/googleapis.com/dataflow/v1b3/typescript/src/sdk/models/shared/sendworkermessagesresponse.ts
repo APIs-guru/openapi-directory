@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { WorkerMessageResponse } from "./workermessageresponse";
+
 
 
 // SendWorkerMessagesResponse
@@ -8,6 +8,6 @@ import { WorkerMessageResponse } from "./workermessageresponse";
  * The response to the worker messages.
 **/
 export class SendWorkerMessagesResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=workerMessageResponses", elemType: shared.WorkerMessageResponse })
+  @SpeakeasyMetadata({ data: "json, name=workerMessageResponses", elemType: WorkerMessageResponse })
   workerMessageResponses?: WorkerMessageResponse[];
 }

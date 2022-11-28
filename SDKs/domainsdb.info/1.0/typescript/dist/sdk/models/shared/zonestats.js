@@ -22,27 +22,27 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { ZoneStatistics } from "./zonestatistics";
 var ZoneStats = /** @class */ (function (_super) {
     __extends(ZoneStats, _super);
     function ZoneStats() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=next_page" }),
+        SpeakeasyMetadata({ data: "json, name=next_page" }),
         __metadata("design:type", String)
     ], ZoneStats.prototype, "nextPage", void 0);
     __decorate([
-        Metadata({ data: "json, name=statistics", elemType: shared.ZoneStatistics }),
+        SpeakeasyMetadata({ data: "json, name=statistics", elemType: ZoneStatistics }),
         __metadata("design:type", Array)
     ], ZoneStats.prototype, "statistics", void 0);
     __decorate([
-        Metadata({ data: "json, name=time" }),
+        SpeakeasyMetadata({ data: "json, name=time" }),
         __metadata("design:type", String)
     ], ZoneStats.prototype, "time", void 0);
     __decorate([
-        Metadata({ data: "json, name=total" }),
+        SpeakeasyMetadata({ data: "json, name=total" }),
         __metadata("design:type", Number)
     ], ZoneStats.prototype, "total", void 0);
     return ZoneStats;

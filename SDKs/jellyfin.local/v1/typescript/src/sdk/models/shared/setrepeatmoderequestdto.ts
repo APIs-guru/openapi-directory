@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GroupRepeatModeEnum } from "./grouprepeatmodeenum";
+
 
 
 // SetRepeatModeRequestDto
@@ -7,6 +8,6 @@ import { GroupRepeatModeEnum } from "./grouprepeatmodeenum";
  * Class SetRepeatModeRequestDto.
 **/
 export class SetRepeatModeRequestDto extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Mode" })
+  @SpeakeasyMetadata({ data: "json, name=Mode" })
   mode?: GroupRepeatModeEnum;
 }

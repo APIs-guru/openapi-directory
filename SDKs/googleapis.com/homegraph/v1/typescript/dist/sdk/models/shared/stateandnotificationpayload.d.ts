@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ReportStateAndNotificationDevice } from "./reportstateandnotificationdevice";
 /**
  * Payload containing the state and notification information for devices.

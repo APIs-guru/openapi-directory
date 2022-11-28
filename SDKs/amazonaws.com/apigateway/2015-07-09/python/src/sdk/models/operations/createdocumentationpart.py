@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
 @dataclass
 class CreateDocumentationPartPathParams:
-    restapi_id: str = field(default=None, metadata={'path_param': { 'field_name': 'restapi_id', 'style': 'simple', 'explode': False }})
+    restapi_id: str = field(metadata={'path_param': { 'field_name': 'restapi_id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -23,36 +28,40 @@ class CreateDocumentationPartHeaders:
 @dataclass_json
 @dataclass
 class CreateDocumentationPartRequestBodyLocation:
-    method: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'method' }})
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    path: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'path' }})
-    status_code: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'statusCode' }})
-    type: Optional[shared.DocumentationPartTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    r"""CreateDocumentationPartRequestBodyLocation
+    Specifies the target API entity to which the documentation applies.
+    """
+    
+    method: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('method') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    path: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('path') }})
+    status_code: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('statusCode') }})
+    type: Optional[shared.DocumentationPartTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('type') }})
     
 
 @dataclass_json
 @dataclass
 class CreateDocumentationPartRequestBody:
-    location: CreateDocumentationPartRequestBodyLocation = field(default=None, metadata={'dataclasses_json': { 'field_name': 'location' }})
-    properties: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'properties' }})
+    location: CreateDocumentationPartRequestBodyLocation = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('location') }})
+    properties: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('properties') }})
     
 
 @dataclass
 class CreateDocumentationPartRequest:
-    path_params: CreateDocumentationPartPathParams = field(default=None)
-    headers: CreateDocumentationPartHeaders = field(default=None)
-    request: CreateDocumentationPartRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: CreateDocumentationPartHeaders = field()
+    path_params: CreateDocumentationPartPathParams = field()
+    request: CreateDocumentationPartRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class CreateDocumentationPartResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
     conflict_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     documentation_part: Optional[shared.DocumentationPart] = field(default=None)
     limit_exceeded_exception: Optional[Any] = field(default=None)
     not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     too_many_requests_exception: Optional[Any] = field(default=None)
     unauthorized_exception: Optional[Any] = field(default=None)
     

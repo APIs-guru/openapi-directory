@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // SandboxRequest
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Request to create a new sandbox
 **/
 export class SandboxRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=sandboxId" })
+  @SpeakeasyMetadata({ data: "json, name=sandboxId" })
   sandboxId: string;
 }

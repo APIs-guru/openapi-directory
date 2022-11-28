@@ -1,8 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { VirtualGatewayBackendDefaults } from "./virtualgatewaybackenddefaults";
 import { VirtualGatewayListener } from "./virtualgatewaylistener";
 import { VirtualGatewayLogging } from "./virtualgatewaylogging";
+
 
 
 // VirtualGatewaySpec
@@ -10,12 +10,12 @@ import { VirtualGatewayLogging } from "./virtualgatewaylogging";
  * An object that represents the specification of a service mesh resource.
 **/
 export class VirtualGatewaySpec extends SpeakeasyBase {
-  @Metadata({ data: "json, name=backendDefaults" })
+  @SpeakeasyMetadata({ data: "json, name=backendDefaults" })
   backendDefaults?: VirtualGatewayBackendDefaults;
 
-  @Metadata({ data: "json, name=listeners", elemType: shared.VirtualGatewayListener })
+  @SpeakeasyMetadata({ data: "json, name=listeners", elemType: VirtualGatewayListener })
   listeners: VirtualGatewayListener[];
 
-  @Metadata({ data: "json, name=logging" })
+  @SpeakeasyMetadata({ data: "json, name=logging" })
   logging?: VirtualGatewayLogging;
 }

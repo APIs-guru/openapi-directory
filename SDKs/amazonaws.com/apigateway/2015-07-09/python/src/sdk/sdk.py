@@ -1,8 +1,11 @@
-import warnings
+
+__doc__ = """ SDK Documentation: https://docs.aws.amazon.com/apigateway/ - Amazon Web Services documentation"""
 import requests
 from typing import Any,Optional
-from sdk.models import operations, shared
+from sdk.models import shared, operations
 from . import utils
+
+
 
 
 SERVERS = [
@@ -14,37 +17,63 @@ SERVERS = [
 
 
 class SDK:
-    client = requests.Session()
-    server_url = SERVERS[0]
+    r"""SDK Documentation: https://docs.aws.amazon.com/apigateway/ - Amazon Web Services documentation"""
+
+    _client: requests.Session
+    _security_client: requests.Session
+    _security: shared.Security
+    _server_url: str = SERVERS[0]
+    _language: str = "python"
+    _sdk_version: str = "0.0.1"
+    _gen_version: str = "internal"
+
+    def __init__(self) -> None:
+        self._client = requests.Session()
+        self._security_client = requests.Session()
+        
+
 
     def config_server_url(self, server_url: str, params: dict[str, str]):
-        if not params is None:
-            self.server_url = utils.replace_parameters(server_url, params)
+        if params is not None:
+            self._server_url = utils.replace_parameters(server_url, params)
         else:
-            self.server_url = server_url
-            
-    
-    def config_security(self, security: shared.Security):
-        self.client = utils.configure_security_client(security)
+            self._server_url = server_url
 
+        
+    
+
+    def config_client(self, client: requests.Session):
+        self._client = client
+        
+        if self._security is not None:
+            self._security_client = utils.configure_security_client(self._client, self._security)
+        
+    
+
+    def config_security(self, security: shared.Security):
+        self._security = security
+        self._security_client = utils.configure_security_client(self._client, security)
+        
+    
+    
     
     def create_api_key(self, request: operations.CreateAPIKeyRequest) -> operations.CreateAPIKeyResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""<p>Create an <a>ApiKey</a> resource. </p> <div class=\"seeAlso\"><a href=\"https://docs.aws.amazon.com/cli/latest/reference/apigateway/create-api-key.html\">AWS CLI</a></div>
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/apikeys"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -83,22 +112,22 @@ class SDK:
 
     
     def create_authorizer(self, request: operations.CreateAuthorizerRequest) -> operations.CreateAuthorizerResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""<p>Adds a new <a>Authorizer</a> resource to an existing <a>RestApi</a> resource.</p> <div class=\"seeAlso\"><a href=\"https://docs.aws.amazon.com/cli/latest/reference/apigateway/create-authorizer.html\">AWS CLI</a></div>
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/restapis/{restapi_id}/authorizers", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -137,22 +166,22 @@ class SDK:
 
     
     def create_base_path_mapping(self, request: operations.CreateBasePathMappingRequest) -> operations.CreateBasePathMappingResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Creates a new <a>BasePathMapping</a> resource.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/domainnames/{domain_name}/basepathmappings", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -191,22 +220,22 @@ class SDK:
 
     
     def create_deployment(self, request: operations.CreateDeploymentRequest) -> operations.CreateDeploymentResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Creates a <a>Deployment</a> resource, which makes a specified <a>RestApi</a> callable over the internet.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/restapis/{restapi_id}/deployments", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -249,22 +278,19 @@ class SDK:
 
     
     def create_documentation_part(self, request: operations.CreateDocumentationPartRequest) -> operations.CreateDocumentationPartResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/restapis/{restapi_id}/documentation/parts", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -303,22 +329,19 @@ class SDK:
 
     
     def create_documentation_version(self, request: operations.CreateDocumentationVersionRequest) -> operations.CreateDocumentationVersionResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/restapis/{restapi_id}/documentation/versions", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -357,22 +380,22 @@ class SDK:
 
     
     def create_domain_name(self, request: operations.CreateDomainNameRequest) -> operations.CreateDomainNameResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Creates a new domain name.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/domainnames"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -407,22 +430,22 @@ class SDK:
 
     
     def create_model(self, request: operations.CreateModelRequest) -> operations.CreateModelResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Adds a new <a>Model</a> resource to an existing <a>RestApi</a> resource.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/restapis/{restapi_id}/models", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -461,22 +484,22 @@ class SDK:
 
     
     def create_request_validator(self, request: operations.CreateRequestValidatorRequest) -> operations.CreateRequestValidatorResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Creates a <a>ReqeustValidator</a> of a given <a>RestApi</a>.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/restapis/{restapi_id}/requestvalidators", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -515,22 +538,22 @@ class SDK:
 
     
     def create_resource(self, request: operations.CreateResourceRequest) -> operations.CreateResourceResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Creates a <a>Resource</a> resource.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/restapis/{restapi_id}/resources/{parent_id}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -569,22 +592,22 @@ class SDK:
 
     
     def create_rest_api(self, request: operations.CreateRestAPIRequest) -> operations.CreateRestAPIResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Creates a new <a>RestApi</a> resource.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/restapis"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -619,22 +642,22 @@ class SDK:
 
     
     def create_stage(self, request: operations.CreateStageRequest) -> operations.CreateStageResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Creates a new <a>Stage</a> resource that references a pre-existing <a>Deployment</a> for the API. 
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/restapis/{restapi_id}/stages", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -673,22 +696,22 @@ class SDK:
 
     
     def create_usage_plan(self, request: operations.CreateUsagePlanRequest) -> operations.CreateUsagePlanResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Creates a usage plan with the throttle and quota limits, as well as the associated API stages, specified in the payload. 
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/usageplans"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -727,22 +750,22 @@ class SDK:
 
     
     def create_usage_plan_key(self, request: operations.CreateUsagePlanKeyRequest) -> operations.CreateUsagePlanKeyResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Creates a usage plan key for adding an existing API key to a usage plan.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/usageplans/{usageplanId}/keys", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -781,22 +804,22 @@ class SDK:
 
     
     def create_vpc_link(self, request: operations.CreateVpcLinkRequest) -> operations.CreateVpcLinkResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Creates a VPC link, under the caller's account in a selected region, in an asynchronous operation that typically takes 2-4 minutes to complete and become operational. The caller must have permissions to create and update VPC Endpoint services.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/vpclinks"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -831,15 +854,17 @@ class SDK:
 
     
     def delete_api_key(self, request: operations.DeleteAPIKeyRequest) -> operations.DeleteAPIKeyResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Deletes the <a>ApiKey</a> resource.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/apikeys/{api_Key}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -872,15 +897,17 @@ class SDK:
 
     
     def delete_authorizer(self, request: operations.DeleteAuthorizerRequest) -> operations.DeleteAuthorizerResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""<p>Deletes an existing <a>Authorizer</a> resource.</p> <div class=\"seeAlso\"><a href=\"https://docs.aws.amazon.com/cli/latest/reference/apigateway/delete-authorizer.html\">AWS CLI</a></div>
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/restapis/{restapi_id}/authorizers/{authorizer_id}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -913,15 +940,17 @@ class SDK:
 
     
     def delete_base_path_mapping(self, request: operations.DeleteBasePathMappingRequest) -> operations.DeleteBasePathMappingResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Deletes the <a>BasePathMapping</a> resource.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/domainnames/{domain_name}/basepathmappings/{base_path}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -954,15 +983,17 @@ class SDK:
 
     
     def delete_client_certificate(self, request: operations.DeleteClientCertificateRequest) -> operations.DeleteClientCertificateResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Deletes the <a>ClientCertificate</a> resource.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/clientcertificates/{clientcertificate_id}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -995,15 +1026,17 @@ class SDK:
 
     
     def delete_deployment(self, request: operations.DeleteDeploymentRequest) -> operations.DeleteDeploymentResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Deletes a <a>Deployment</a> resource. Deleting a deployment will only succeed if there are no <a>Stage</a> resources associated with it.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/restapis/{restapi_id}/deployments/{deployment_id}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1040,15 +1073,14 @@ class SDK:
 
     
     def delete_documentation_part(self, request: operations.DeleteDocumentationPartRequest) -> operations.DeleteDocumentationPartResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/restapis/{restapi_id}/documentation/parts/{part_id}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1081,15 +1113,14 @@ class SDK:
 
     
     def delete_documentation_version(self, request: operations.DeleteDocumentationVersionRequest) -> operations.DeleteDocumentationVersionResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/restapis/{restapi_id}/documentation/versions/{doc_version}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1122,15 +1153,17 @@ class SDK:
 
     
     def delete_domain_name(self, request: operations.DeleteDomainNameRequest) -> operations.DeleteDomainNameResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Deletes the <a>DomainName</a> resource.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/domainnames/{domain_name}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1163,15 +1196,17 @@ class SDK:
 
     
     def delete_gateway_response(self, request: operations.DeleteGatewayResponseRequest) -> operations.DeleteGatewayResponseResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Clears any customization of a <a>GatewayResponse</a> of a specified response type on the given <a>RestApi</a> and resets it with the default settings.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/restapis/{restapi_id}/gatewayresponses/{response_type}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1204,15 +1239,17 @@ class SDK:
 
     
     def delete_integration(self, request: operations.DeleteIntegrationRequest) -> operations.DeleteIntegrationResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Represents a delete integration.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/restapis/{restapi_id}/resources/{resource_id}/methods/{http_method}/integration", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1245,15 +1282,17 @@ class SDK:
 
     
     def delete_integration_response(self, request: operations.DeleteIntegrationResponseRequest) -> operations.DeleteIntegrationResponseResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Represents a delete integration response.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/restapis/{restapi_id}/resources/{resource_id}/methods/{http_method}/integration/responses/{status_code}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1286,15 +1325,17 @@ class SDK:
 
     
     def delete_method(self, request: operations.DeleteMethodRequest) -> operations.DeleteMethodResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Deletes an existing <a>Method</a> resource.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/restapis/{restapi_id}/resources/{resource_id}/methods/{http_method}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1323,15 +1364,17 @@ class SDK:
 
     
     def delete_method_response(self, request: operations.DeleteMethodResponseRequest) -> operations.DeleteMethodResponseResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Deletes an existing <a>MethodResponse</a> resource.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/restapis/{restapi_id}/resources/{resource_id}/methods/{http_method}/responses/{status_code}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1364,15 +1407,17 @@ class SDK:
 
     
     def delete_model(self, request: operations.DeleteModelRequest) -> operations.DeleteModelResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Deletes a model.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/restapis/{restapi_id}/models/{model_name}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1405,15 +1450,17 @@ class SDK:
 
     
     def delete_request_validator(self, request: operations.DeleteRequestValidatorRequest) -> operations.DeleteRequestValidatorResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Deletes a <a>RequestValidator</a> of a given <a>RestApi</a>.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/restapis/{restapi_id}/requestvalidators/{requestvalidator_id}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1446,15 +1493,17 @@ class SDK:
 
     
     def delete_resource(self, request: operations.DeleteResourceRequest) -> operations.DeleteResourceResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Deletes a <a>Resource</a> resource.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/restapis/{restapi_id}/resources/{resource_id}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1487,15 +1536,17 @@ class SDK:
 
     
     def delete_rest_api(self, request: operations.DeleteRestAPIRequest) -> operations.DeleteRestAPIResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Deletes the specified API.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/restapis/{restapi_id}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1528,15 +1579,17 @@ class SDK:
 
     
     def delete_stage(self, request: operations.DeleteStageRequest) -> operations.DeleteStageResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Deletes a <a>Stage</a> resource.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/restapis/{restapi_id}/stages/{stage_name}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1573,15 +1626,17 @@ class SDK:
 
     
     def delete_usage_plan(self, request: operations.DeleteUsagePlanRequest) -> operations.DeleteUsagePlanResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Deletes a usage plan of a given plan Id.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/usageplans/{usageplanId}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1614,15 +1669,17 @@ class SDK:
 
     
     def delete_usage_plan_key(self, request: operations.DeleteUsagePlanKeyRequest) -> operations.DeleteUsagePlanKeyResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Deletes a usage plan key and remove the underlying API key from the associated usage plan.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/usageplans/{usageplanId}/keys/{keyId}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1655,15 +1712,17 @@ class SDK:
 
     
     def delete_vpc_link(self, request: operations.DeleteVpcLinkRequest) -> operations.DeleteVpcLinkResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Deletes an existing <a>VpcLink</a> of a specified identifier.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/vpclinks/{vpclink_id}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1696,15 +1755,17 @@ class SDK:
 
     
     def flush_stage_authorizers_cache(self, request: operations.FlushStageAuthorizersCacheRequest) -> operations.FlushStageAuthorizersCacheResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Flushes all authorizer cache entries on a stage.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/restapis/{restapi_id}/stages/{stage_name}/cache/authorizers", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1741,15 +1802,17 @@ class SDK:
 
     
     def flush_stage_cache(self, request: operations.FlushStageCacheRequest) -> operations.FlushStageCacheResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Flushes a stage's cache.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/restapis/{restapi_id}/stages/{stage_name}/cache/data", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1786,22 +1849,22 @@ class SDK:
 
     
     def generate_client_certificate(self, request: operations.GenerateClientCertificateRequest) -> operations.GenerateClientCertificateResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Generates a <a>ClientCertificate</a> resource.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/clientcertificates"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1836,15 +1899,17 @@ class SDK:
 
     
     def get_account(self, request: operations.GetAccountRequest) -> operations.GetAccountResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Gets information about the current <a>Account</a> resource.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/account"
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1875,17 +1940,18 @@ class SDK:
 
     
     def get_api_key(self, request: operations.GetAPIKeyRequest) -> operations.GetAPIKeyResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Gets information about the current <a>ApiKey</a> resource.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/apikeys/{api_Key}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1916,17 +1982,18 @@ class SDK:
 
     
     def get_api_keys(self, request: operations.GetAPIKeysRequest) -> operations.GetAPIKeysResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Gets information about the current <a>ApiKeys</a> resource.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/apikeys"
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1957,15 +2024,17 @@ class SDK:
 
     
     def get_authorizer(self, request: operations.GetAuthorizerRequest) -> operations.GetAuthorizerResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""<p>Describe an existing <a>Authorizer</a> resource.</p> <div class=\"seeAlso\"><a href=\"https://docs.aws.amazon.com/cli/latest/reference/apigateway/get-authorizer.html\">AWS CLI</a></div>
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/restapis/{restapi_id}/authorizers/{authorizer_id}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1996,17 +2065,18 @@ class SDK:
 
     
     def get_authorizers(self, request: operations.GetAuthorizersRequest) -> operations.GetAuthorizersResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""<p>Describe an existing <a>Authorizers</a> resource.</p> <div class=\"seeAlso\"><a href=\"https://docs.aws.amazon.com/cli/latest/reference/apigateway/get-authorizers.html\">AWS CLI</a></div>
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/restapis/{restapi_id}/authorizers", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2037,15 +2107,17 @@ class SDK:
 
     
     def get_base_path_mapping(self, request: operations.GetBasePathMappingRequest) -> operations.GetBasePathMappingResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Describe a <a>BasePathMapping</a> resource.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/domainnames/{domain_name}/basepathmappings/{base_path}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2076,17 +2148,18 @@ class SDK:
 
     
     def get_base_path_mappings(self, request: operations.GetBasePathMappingsRequest) -> operations.GetBasePathMappingsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Represents a collection of <a>BasePathMapping</a> resources.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/domainnames/{domain_name}/basepathmappings", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2117,15 +2190,17 @@ class SDK:
 
     
     def get_client_certificate(self, request: operations.GetClientCertificateRequest) -> operations.GetClientCertificateResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Gets information about the current <a>ClientCertificate</a> resource.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/clientcertificates/{clientcertificate_id}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2156,17 +2231,18 @@ class SDK:
 
     
     def get_client_certificates(self, request: operations.GetClientCertificatesRequest) -> operations.GetClientCertificatesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Gets a collection of <a>ClientCertificate</a> resources.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/clientcertificates"
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2197,17 +2273,18 @@ class SDK:
 
     
     def get_deployment(self, request: operations.GetDeploymentRequest) -> operations.GetDeploymentResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Gets information about a <a>Deployment</a> resource.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/restapis/{restapi_id}/deployments/{deployment_id}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2242,17 +2319,18 @@ class SDK:
 
     
     def get_deployments(self, request: operations.GetDeploymentsRequest) -> operations.GetDeploymentsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Gets information about a <a>Deployments</a> collection.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/restapis/{restapi_id}/deployments", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2287,15 +2365,14 @@ class SDK:
 
     
     def get_documentation_part(self, request: operations.GetDocumentationPartRequest) -> operations.GetDocumentationPartResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/restapis/{restapi_id}/documentation/parts/{part_id}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2326,17 +2403,15 @@ class SDK:
 
     
     def get_documentation_parts(self, request: operations.GetDocumentationPartsRequest) -> operations.GetDocumentationPartsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/restapis/{restapi_id}/documentation/parts", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2367,15 +2442,14 @@ class SDK:
 
     
     def get_documentation_version(self, request: operations.GetDocumentationVersionRequest) -> operations.GetDocumentationVersionResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/restapis/{restapi_id}/documentation/versions/{doc_version}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2402,17 +2476,15 @@ class SDK:
 
     
     def get_documentation_versions(self, request: operations.GetDocumentationVersionsRequest) -> operations.GetDocumentationVersionsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/restapis/{restapi_id}/documentation/versions", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2443,15 +2515,17 @@ class SDK:
 
     
     def get_domain_name(self, request: operations.GetDomainNameRequest) -> operations.GetDomainNameResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Represents a domain name that is contained in a simpler, more intuitive URL that can be called.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/domainnames/{domain_name}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2482,17 +2556,18 @@ class SDK:
 
     
     def get_domain_names(self, request: operations.GetDomainNamesRequest) -> operations.GetDomainNamesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Represents a collection of <a>DomainName</a> resources.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/domainnames"
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2523,17 +2598,18 @@ class SDK:
 
     
     def get_export(self, request: operations.GetExportRequest) -> operations.GetExportResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Exports a deployed version of a <a>RestApi</a> in a specified format.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/restapis/{restapi_id}/stages/{stage_name}/exports/{export_type}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2572,15 +2648,17 @@ class SDK:
 
     
     def get_gateway_response(self, request: operations.GetGatewayResponseRequest) -> operations.GetGatewayResponseResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Gets a <a>GatewayResponse</a> of a specified response type on the given <a>RestApi</a>.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/restapis/{restapi_id}/gatewayresponses/{response_type}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2611,17 +2689,18 @@ class SDK:
 
     
     def get_gateway_responses(self, request: operations.GetGatewayResponsesRequest) -> operations.GetGatewayResponsesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Gets the <a>GatewayResponses</a> collection on the given <a>RestApi</a>. If an API developer has not added any definitions for gateway responses, the result will be the API Gateway-generated default <a>GatewayResponses</a> collection for the supported response types.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/restapis/{restapi_id}/gatewayresponses", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2652,15 +2731,17 @@ class SDK:
 
     
     def get_integration(self, request: operations.GetIntegrationRequest) -> operations.GetIntegrationResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get the integration settings.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/restapis/{restapi_id}/resources/{resource_id}/methods/{http_method}/integration", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2691,15 +2772,17 @@ class SDK:
 
     
     def get_integration_response(self, request: operations.GetIntegrationResponseRequest) -> operations.GetIntegrationResponseResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Represents a get integration response.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/restapis/{restapi_id}/resources/{resource_id}/methods/{http_method}/integration/responses/{status_code}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2730,15 +2813,17 @@ class SDK:
 
     
     def get_method(self, request: operations.GetMethodRequest) -> operations.GetMethodResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Describe an existing <a>Method</a> resource.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/restapis/{restapi_id}/resources/{resource_id}/methods/{http_method}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2765,15 +2850,17 @@ class SDK:
 
     
     def get_method_response(self, request: operations.GetMethodResponseRequest) -> operations.GetMethodResponseResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Describes a <a>MethodResponse</a> resource.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/restapis/{restapi_id}/resources/{resource_id}/methods/{http_method}/responses/{status_code}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2800,17 +2887,18 @@ class SDK:
 
     
     def get_model(self, request: operations.GetModelRequest) -> operations.GetModelResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Describes an existing model defined for a <a>RestApi</a> resource.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/restapis/{restapi_id}/models/{model_name}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2841,15 +2929,17 @@ class SDK:
 
     
     def get_model_template(self, request: operations.GetModelTemplateRequest) -> operations.GetModelTemplateResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Generates a sample mapping template that can be used to transform a payload into the structure of a model.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/restapis/{restapi_id}/models/{model_name}/default_template", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2880,17 +2970,18 @@ class SDK:
 
     
     def get_models(self, request: operations.GetModelsRequest) -> operations.GetModelsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Describes existing <a>Models</a> defined for a <a>RestApi</a> resource.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/restapis/{restapi_id}/models", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2921,15 +3012,17 @@ class SDK:
 
     
     def get_request_validator(self, request: operations.GetRequestValidatorRequest) -> operations.GetRequestValidatorResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Gets a <a>RequestValidator</a> of a given <a>RestApi</a>.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/restapis/{restapi_id}/requestvalidators/{requestvalidator_id}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2960,17 +3053,18 @@ class SDK:
 
     
     def get_request_validators(self, request: operations.GetRequestValidatorsRequest) -> operations.GetRequestValidatorsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Gets the <a>RequestValidators</a> collection of a given <a>RestApi</a>.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/restapis/{restapi_id}/requestvalidators", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -3001,17 +3095,18 @@ class SDK:
 
     
     def get_resource(self, request: operations.GetResourceRequest) -> operations.GetResourceResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Lists information about a resource.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/restapis/{restapi_id}/resources/{resource_id}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -3038,17 +3133,18 @@ class SDK:
 
     
     def get_resources(self, request: operations.GetResourcesRequest) -> operations.GetResourcesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Lists information about a collection of <a>Resource</a> resources.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/restapis/{restapi_id}/resources", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -3079,15 +3175,17 @@ class SDK:
 
     
     def get_rest_api(self, request: operations.GetRestAPIRequest) -> operations.GetRestAPIResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Lists the <a>RestApi</a> resource in the collection.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/restapis/{restapi_id}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -3118,17 +3216,18 @@ class SDK:
 
     
     def get_rest_apis(self, request: operations.GetRestApisRequest) -> operations.GetRestApisResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Lists the <a>RestApis</a> resources for your collection.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/restapis"
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -3158,26 +3257,27 @@ class SDK:
         return res
 
     
-    def get_sdk(self, request: operations.GetSdkRequest) -> operations.GetSdkResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+    def get_sdk(self, request: operations.GetSDKRequest) -> operations.GetSDKResponse:
+        r"""Generates a client SDK for a <a>RestApi</a> and <a>Stage</a>.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/restapis/{restapi_id}/stages/{stage_name}/sdks/{sdk_type}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
-        res = operations.GetSdkResponse(status_code=r.status_code, content_type=content_type)
+        res = operations.GetSDKResponse(status_code=r.status_code, content_type=content_type)
         
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[shared.SdkResponse])
+                out = utils.unmarshal_json(r.text, Optional[shared.SDKResponse])
                 res.sdk_response = out
         elif r.status_code == 480:
             if utils.match_content_type(content_type, "application/json"):
@@ -3207,24 +3307,23 @@ class SDK:
         return res
 
     
-    def get_sdk_type(self, request: operations.GetSdkTypeRequest) -> operations.GetSdkTypeResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+    def get_sdk_type(self, request: operations.GetSDKTypeRequest) -> operations.GetSDKTypeResponse:
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/sdktypes/{sdktype_id}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
-        res = operations.GetSdkTypeResponse(status_code=r.status_code, content_type=content_type)
+        res = operations.GetSDKTypeResponse(status_code=r.status_code, content_type=content_type)
         
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[shared.SdkType])
+                out = utils.unmarshal_json(r.text, Optional[shared.SDKType])
                 res.sdk_type = out
         elif r.status_code == 480:
             if utils.match_content_type(content_type, "application/json"):
@@ -3246,26 +3345,24 @@ class SDK:
         return res
 
     
-    def get_sdk_types(self, request: operations.GetSdkTypesRequest) -> operations.GetSdkTypesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+    def get_sdk_types(self, request: operations.GetSDKTypesRequest) -> operations.GetSDKTypesResponse:
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/sdktypes"
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
-        res = operations.GetSdkTypesResponse(status_code=r.status_code, content_type=content_type)
+        res = operations.GetSDKTypesResponse(status_code=r.status_code, content_type=content_type)
         
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[shared.SdkTypes])
+                out = utils.unmarshal_json(r.text, Optional[shared.SDKTypes])
                 res.sdk_types = out
         elif r.status_code == 480:
             if utils.match_content_type(content_type, "application/json"):
@@ -3288,15 +3385,17 @@ class SDK:
 
     
     def get_stage(self, request: operations.GetStageRequest) -> operations.GetStageResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Gets information about a <a>Stage</a> resource.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/restapis/{restapi_id}/stages/{stage_name}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -3335,17 +3434,18 @@ class SDK:
 
     
     def get_stages(self, request: operations.GetStagesRequest) -> operations.GetStagesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Gets information about one or more <a>Stage</a> resources.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/restapis/{restapi_id}/stages", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -3384,17 +3484,18 @@ class SDK:
 
     
     def get_tags(self, request: operations.GetTagsRequest) -> operations.GetTagsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Gets the <a>Tags</a> collection for a given resource.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/tags/{resource_arn}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -3425,17 +3526,18 @@ class SDK:
 
     
     def get_usage(self, request: operations.GetUsageRequest) -> operations.GetUsageResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Gets the usage data of a usage plan in a specified time interval.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/usageplans/{usageplanId}/usage#startDate&endDate", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -3466,15 +3568,17 @@ class SDK:
 
     
     def get_usage_plan(self, request: operations.GetUsagePlanRequest) -> operations.GetUsagePlanResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Gets a usage plan of a given plan identifier.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/usageplans/{usageplanId}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -3505,15 +3609,17 @@ class SDK:
 
     
     def get_usage_plan_key(self, request: operations.GetUsagePlanKeyRequest) -> operations.GetUsagePlanKeyResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Gets a usage plan key of a given key identifier.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/usageplans/{usageplanId}/keys/{keyId}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -3544,17 +3650,18 @@ class SDK:
 
     
     def get_usage_plan_keys(self, request: operations.GetUsagePlanKeysRequest) -> operations.GetUsagePlanKeysResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Gets all the usage plan keys representing the API keys added to a specified usage plan.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/usageplans/{usageplanId}/keys", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -3585,17 +3692,18 @@ class SDK:
 
     
     def get_usage_plans(self, request: operations.GetUsagePlansRequest) -> operations.GetUsagePlansResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Gets all the usage plans of the caller's account.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/usageplans"
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -3626,15 +3734,17 @@ class SDK:
 
     
     def get_vpc_link(self, request: operations.GetVpcLinkRequest) -> operations.GetVpcLinkResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Gets a specified VPC link under the caller's account in a region.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/vpclinks/{vpclink_id}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -3665,17 +3775,18 @@ class SDK:
 
     
     def get_vpc_links(self, request: operations.GetVpcLinksRequest) -> operations.GetVpcLinksResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Gets the <a>VpcLinks</a> collection under the caller's account in a selected region.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/vpclinks"
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -3706,24 +3817,23 @@ class SDK:
 
     
     def import_api_keys(self, request: operations.ImportAPIKeysRequest) -> operations.ImportAPIKeysResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Import API keys from an external source, such as a CSV-formatted file.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/apikeys#mode=import&format"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -3762,24 +3872,20 @@ class SDK:
 
     
     def import_documentation_parts(self, request: operations.ImportDocumentationPartsRequest) -> operations.ImportDocumentationPartsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/restapis/{restapi_id}/documentation/parts", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -3818,24 +3924,23 @@ class SDK:
 
     
     def import_rest_api(self, request: operations.ImportRestAPIRequest) -> operations.ImportRestAPIResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""A feature of the API Gateway control service for creating a new API from an external API definition file.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/restapis#mode=import"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -3874,22 +3979,22 @@ class SDK:
 
     
     def put_gateway_response(self, request: operations.PutGatewayResponseRequest) -> operations.PutGatewayResponseResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Creates a customization of a <a>GatewayResponse</a> of a specified response type and status code on the given <a>RestApi</a>.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/restapis/{restapi_id}/gatewayresponses/{response_type}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -3928,22 +4033,22 @@ class SDK:
 
     
     def put_integration(self, request: operations.PutIntegrationRequest) -> operations.PutIntegrationResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Sets up a method's integration.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/restapis/{restapi_id}/resources/{resource_id}/methods/{http_method}/integration", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -3982,22 +4087,22 @@ class SDK:
 
     
     def put_integration_response(self, request: operations.PutIntegrationResponseRequest) -> operations.PutIntegrationResponseResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Represents a put integration.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/restapis/{restapi_id}/resources/{resource_id}/methods/{http_method}/integration/responses/{status_code}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -4036,22 +4141,22 @@ class SDK:
 
     
     def put_method(self, request: operations.PutMethodRequest) -> operations.PutMethodResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Add a method to an existing <a>Resource</a> resource.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/restapis/{restapi_id}/resources/{resource_id}/methods/{http_method}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -4090,22 +4195,22 @@ class SDK:
 
     
     def put_method_response(self, request: operations.PutMethodResponseRequest) -> operations.PutMethodResponseResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Adds a <a>MethodResponse</a> to an existing <a>Method</a> resource.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/restapis/{restapi_id}/resources/{resource_id}/methods/{http_method}/responses/{status_code}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -4144,24 +4249,23 @@ class SDK:
 
     
     def put_rest_api(self, request: operations.PutRestAPIRequest) -> operations.PutRestAPIResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""A feature of the API Gateway control service for updating an existing API with an input of external API definitions. The update can take the form of merging the supplied definition into the existing API or overwriting the existing API.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/restapis/{restapi_id}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -4200,22 +4304,22 @@ class SDK:
 
     
     def tag_resource(self, request: operations.TagResourceRequest) -> operations.TagResourceResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Adds or updates a tag on a given resource.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/tags/{resource_arn}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -4252,22 +4356,22 @@ class SDK:
 
     
     def test_invoke_authorizer(self, request: operations.TestInvokeAuthorizerRequest) -> operations.TestInvokeAuthorizerResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""<p>Simulate the execution of an <a>Authorizer</a> in your <a>RestApi</a> with headers, parameters, and an incoming request body.</p> <div class=\"seeAlso\"> <a href=\"https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-use-lambda-authorizer.html\">Use Lambda Function as Authorizer</a> <a href=\"https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-integrate-with-cognito.html\">Use Cognito User Pool as Authorizer</a> </div>
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/restapis/{restapi_id}/authorizers/{authorizer_id}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -4298,22 +4402,22 @@ class SDK:
 
     
     def test_invoke_method(self, request: operations.TestInvokeMethodRequest) -> operations.TestInvokeMethodResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Simulate the execution of a <a>Method</a> in your <a>RestApi</a> with headers, parameters, and an incoming request body.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/restapis/{restapi_id}/resources/{resource_id}/methods/{http_method}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -4344,17 +4448,18 @@ class SDK:
 
     
     def untag_resource(self, request: operations.UntagResourceRequest) -> operations.UntagResourceResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Removes a tag from a given resource.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/tags/{resource_arn}#tagKeys", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -4391,22 +4496,22 @@ class SDK:
 
     
     def update_account(self, request: operations.UpdateAccountRequest) -> operations.UpdateAccountResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Changes information about the current <a>Account</a> resource.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/account"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PATCH", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -4445,22 +4550,22 @@ class SDK:
 
     
     def update_api_key(self, request: operations.UpdateAPIKeyRequest) -> operations.UpdateAPIKeyResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Changes information about an <a>ApiKey</a> resource.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/apikeys/{api_Key}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PATCH", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -4499,22 +4604,22 @@ class SDK:
 
     
     def update_authorizer(self, request: operations.UpdateAuthorizerRequest) -> operations.UpdateAuthorizerResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""<p>Updates an existing <a>Authorizer</a> resource.</p> <div class=\"seeAlso\"><a href=\"https://docs.aws.amazon.com/cli/latest/reference/apigateway/update-authorizer.html\">AWS CLI</a></div>
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/restapis/{restapi_id}/authorizers/{authorizer_id}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PATCH", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -4553,22 +4658,22 @@ class SDK:
 
     
     def update_base_path_mapping(self, request: operations.UpdateBasePathMappingRequest) -> operations.UpdateBasePathMappingResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Changes information about the <a>BasePathMapping</a> resource.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/domainnames/{domain_name}/basepathmappings/{base_path}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PATCH", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -4607,22 +4712,22 @@ class SDK:
 
     
     def update_client_certificate(self, request: operations.UpdateClientCertificateRequest) -> operations.UpdateClientCertificateResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Changes information about an <a>ClientCertificate</a> resource.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/clientcertificates/{clientcertificate_id}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PATCH", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -4661,22 +4766,22 @@ class SDK:
 
     
     def update_deployment(self, request: operations.UpdateDeploymentRequest) -> operations.UpdateDeploymentResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Changes information about a <a>Deployment</a> resource.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/restapis/{restapi_id}/deployments/{deployment_id}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PATCH", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -4719,22 +4824,19 @@ class SDK:
 
     
     def update_documentation_part(self, request: operations.UpdateDocumentationPartRequest) -> operations.UpdateDocumentationPartResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/restapis/{restapi_id}/documentation/parts/{part_id}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PATCH", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -4773,22 +4875,19 @@ class SDK:
 
     
     def update_documentation_version(self, request: operations.UpdateDocumentationVersionRequest) -> operations.UpdateDocumentationVersionResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/restapis/{restapi_id}/documentation/versions/{doc_version}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PATCH", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -4827,22 +4926,22 @@ class SDK:
 
     
     def update_domain_name(self, request: operations.UpdateDomainNameRequest) -> operations.UpdateDomainNameResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Changes information about the <a>DomainName</a> resource.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/domainnames/{domain_name}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PATCH", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -4881,22 +4980,22 @@ class SDK:
 
     
     def update_gateway_response(self, request: operations.UpdateGatewayResponseRequest) -> operations.UpdateGatewayResponseResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Updates a <a>GatewayResponse</a> of a specified response type on the given <a>RestApi</a>.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/restapis/{restapi_id}/gatewayresponses/{response_type}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PATCH", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -4935,22 +5034,22 @@ class SDK:
 
     
     def update_integration(self, request: operations.UpdateIntegrationRequest) -> operations.UpdateIntegrationResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Represents an update integration.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/restapis/{restapi_id}/resources/{resource_id}/methods/{http_method}/integration", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PATCH", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -4989,22 +5088,22 @@ class SDK:
 
     
     def update_integration_response(self, request: operations.UpdateIntegrationResponseRequest) -> operations.UpdateIntegrationResponseResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Represents an update integration response.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/restapis/{restapi_id}/resources/{resource_id}/methods/{http_method}/integration/responses/{status_code}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PATCH", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -5043,22 +5142,22 @@ class SDK:
 
     
     def update_method(self, request: operations.UpdateMethodRequest) -> operations.UpdateMethodResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Updates an existing <a>Method</a> resource.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/restapis/{restapi_id}/resources/{resource_id}/methods/{http_method}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PATCH", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -5093,22 +5192,22 @@ class SDK:
 
     
     def update_method_response(self, request: operations.UpdateMethodResponseRequest) -> operations.UpdateMethodResponseResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Updates an existing <a>MethodResponse</a> resource.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/restapis/{restapi_id}/resources/{resource_id}/methods/{http_method}/responses/{status_code}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PATCH", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -5147,22 +5246,22 @@ class SDK:
 
     
     def update_model(self, request: operations.UpdateModelRequest) -> operations.UpdateModelResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Changes information about a model.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/restapis/{restapi_id}/models/{model_name}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PATCH", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -5201,22 +5300,22 @@ class SDK:
 
     
     def update_request_validator(self, request: operations.UpdateRequestValidatorRequest) -> operations.UpdateRequestValidatorResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Updates a <a>RequestValidator</a> of a given <a>RestApi</a>.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/restapis/{restapi_id}/requestvalidators/{requestvalidator_id}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PATCH", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -5255,22 +5354,22 @@ class SDK:
 
     
     def update_resource(self, request: operations.UpdateResourceRequest) -> operations.UpdateResourceResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Changes information about a <a>Resource</a> resource.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/restapis/{restapi_id}/resources/{resource_id}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PATCH", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -5305,22 +5404,22 @@ class SDK:
 
     
     def update_rest_api(self, request: operations.UpdateRestAPIRequest) -> operations.UpdateRestAPIResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Changes information about the specified API.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/restapis/{restapi_id}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PATCH", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -5359,22 +5458,22 @@ class SDK:
 
     
     def update_stage(self, request: operations.UpdateStageRequest) -> operations.UpdateStageResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Changes information about a <a>Stage</a> resource.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/restapis/{restapi_id}/stages/{stage_name}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PATCH", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -5413,22 +5512,22 @@ class SDK:
 
     
     def update_usage(self, request: operations.UpdateUsageRequest) -> operations.UpdateUsageResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Grants a temporary extension to the remaining quota of a usage plan associated with a specified API key.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/usageplans/{usageplanId}/keys/{keyId}/usage", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PATCH", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -5467,22 +5566,22 @@ class SDK:
 
     
     def update_usage_plan(self, request: operations.UpdateUsagePlanRequest) -> operations.UpdateUsagePlanResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Updates a usage plan of a given plan Id.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/usageplans/{usageplanId}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PATCH", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -5521,22 +5620,22 @@ class SDK:
 
     
     def update_vpc_link(self, request: operations.UpdateVpcLinkRequest) -> operations.UpdateVpcLinkResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Updates an existing <a>VpcLink</a> of a specified identifier.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/vpclinks/{vpclink_id}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PATCH", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 

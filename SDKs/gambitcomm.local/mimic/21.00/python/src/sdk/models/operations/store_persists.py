@@ -4,17 +4,17 @@ from typing import Optional
 
 @dataclass
 class StorePersistsPathParams:
-    var: str = field(default=None, metadata={'path_param': { 'field_name': 'var', 'style': 'simple', 'explode': False }})
+    var: str = field(metadata={'path_param': { 'field_name': 'var', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class StorePersistsRequest:
-    path_params: StorePersistsPathParams = field(default=None)
+    path_params: StorePersistsPathParams = field()
     
 
 @dataclass
 class StorePersistsResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     store_persists_200_application_json_string: Optional[str] = field(default=None)
     

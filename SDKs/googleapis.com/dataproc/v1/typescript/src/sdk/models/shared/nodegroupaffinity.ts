@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // NodeGroupAffinity
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Node Group Affinity for clusters using sole-tenant node groups.
 **/
 export class NodeGroupAffinity extends SpeakeasyBase {
-  @Metadata({ data: "json, name=nodeGroupUri" })
+  @SpeakeasyMetadata({ data: "json, name=nodeGroupUri" })
   nodeGroupUri?: string;
 }

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // ClassifierEvaluationMetrics
 /**
  * Describes the result metrics for the test data associated with an documentation classifier.
@@ -33,35 +33,35 @@ var ClassifierEvaluationMetrics = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Accuracy" }),
+        SpeakeasyMetadata({ data: "json, name=Accuracy" }),
         __metadata("design:type", Number)
     ], ClassifierEvaluationMetrics.prototype, "accuracy", void 0);
     __decorate([
-        Metadata({ data: "json, name=F1Score" }),
+        SpeakeasyMetadata({ data: "json, name=F1Score" }),
         __metadata("design:type", Number)
     ], ClassifierEvaluationMetrics.prototype, "f1Score", void 0);
     __decorate([
-        Metadata({ data: "json, name=HammingLoss" }),
+        SpeakeasyMetadata({ data: "json, name=HammingLoss" }),
         __metadata("design:type", Number)
     ], ClassifierEvaluationMetrics.prototype, "hammingLoss", void 0);
     __decorate([
-        Metadata({ data: "json, name=MicroF1Score" }),
+        SpeakeasyMetadata({ data: "json, name=MicroF1Score" }),
         __metadata("design:type", Number)
     ], ClassifierEvaluationMetrics.prototype, "microF1Score", void 0);
     __decorate([
-        Metadata({ data: "json, name=MicroPrecision" }),
+        SpeakeasyMetadata({ data: "json, name=MicroPrecision" }),
         __metadata("design:type", Number)
     ], ClassifierEvaluationMetrics.prototype, "microPrecision", void 0);
     __decorate([
-        Metadata({ data: "json, name=MicroRecall" }),
+        SpeakeasyMetadata({ data: "json, name=MicroRecall" }),
         __metadata("design:type", Number)
     ], ClassifierEvaluationMetrics.prototype, "microRecall", void 0);
     __decorate([
-        Metadata({ data: "json, name=Precision" }),
+        SpeakeasyMetadata({ data: "json, name=Precision" }),
         __metadata("design:type", Number)
     ], ClassifierEvaluationMetrics.prototype, "precision", void 0);
     __decorate([
-        Metadata({ data: "json, name=Recall" }),
+        SpeakeasyMetadata({ data: "json, name=Recall" }),
         __metadata("design:type", Number)
     ], ClassifierEvaluationMetrics.prototype, "recall", void 0);
     return ClassifierEvaluationMetrics;

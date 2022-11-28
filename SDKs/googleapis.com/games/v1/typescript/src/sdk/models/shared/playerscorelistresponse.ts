@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PlayerScoreResponse } from "./playerscoreresponse";
+
 
 
 // PlayerScoreListResponse
@@ -8,9 +8,9 @@ import { PlayerScoreResponse } from "./playerscoreresponse";
  * A list of score submission statuses.
 **/
 export class PlayerScoreListResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=submittedScores", elemType: shared.PlayerScoreResponse })
+  @SpeakeasyMetadata({ data: "json, name=submittedScores", elemType: PlayerScoreResponse })
   submittedScores?: PlayerScoreResponse[];
 }

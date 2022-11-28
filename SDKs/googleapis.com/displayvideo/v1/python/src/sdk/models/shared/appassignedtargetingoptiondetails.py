@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class AppAssignedTargetingOptionDetailsAppPlatformEnum(str, Enum):
     APP_PLATFORM_UNSPECIFIED = "APP_PLATFORM_UNSPECIFIED"
@@ -19,8 +21,24 @@ class AppAssignedTargetingOptionDetailsAppPlatformEnum(str, Enum):
 @dataclass_json
 @dataclass
 class AppAssignedTargetingOptionDetails:
-    app_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'appId' }})
-    app_platform: Optional[AppAssignedTargetingOptionDetailsAppPlatformEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'appPlatform' }})
-    display_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'displayName' }})
-    negative: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'negative' }})
+    r"""AppAssignedTargetingOptionDetails
+    Details for assigned app targeting option. This will be populated in the details field of an AssignedTargetingOption when targeting_type is `TARGETING_TYPE_APP`.
+    """
+    
+    app_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('appId') }})
+    app_platform: Optional[AppAssignedTargetingOptionDetailsAppPlatformEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('appPlatform') }})
+    display_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('displayName') }})
+    negative: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('negative') }})
+    
+
+@dataclass_json
+@dataclass
+class AppAssignedTargetingOptionDetailsInput:
+    r"""AppAssignedTargetingOptionDetailsInput
+    Details for assigned app targeting option. This will be populated in the details field of an AssignedTargetingOption when targeting_type is `TARGETING_TYPE_APP`.
+    """
+    
+    app_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('appId') }})
+    app_platform: Optional[AppAssignedTargetingOptionDetailsAppPlatformEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('appPlatform') }})
+    negative: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('negative') }})
     

@@ -1,22 +1,23 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DescribeWorldResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=arn" })
+  @SpeakeasyMetadata({ data: "json, name=arn" })
   arn?: string;
 
-  @Metadata({ data: "json, name=createdAt" })
+  @SpeakeasyMetadata({ data: "json, name=createdAt" })
   createdAt?: Date;
 
-  @Metadata({ data: "json, name=generationJob" })
+  @SpeakeasyMetadata({ data: "json, name=generationJob" })
   generationJob?: string;
 
-  @Metadata({ data: "json, name=tags" })
+  @SpeakeasyMetadata({ data: "json, name=tags" })
   tags?: Map<string, string>;
 
-  @Metadata({ data: "json, name=template" })
+  @SpeakeasyMetadata({ data: "json, name=template" })
   template?: string;
 
-  @Metadata({ data: "json, name=worldDescriptionBody" })
+  @SpeakeasyMetadata({ data: "json, name=worldDescriptionBody" })
   worldDescriptionBody?: string;
 }

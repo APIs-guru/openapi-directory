@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { SyncConfig } from "./syncconfig";
 /**
  * A function is a reusable entity. Multiple functions can be used to compose the resolver logic.

@@ -1,9 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum TargetWindowTargetWindowOptionEnum {
-    NewWindow = "NEW_WINDOW"
-,    CurrentWindow = "CURRENT_WINDOW"
-,    Custom = "CUSTOM"
+    NewWindow = "NEW_WINDOW",
+    CurrentWindow = "CURRENT_WINDOW",
+    Custom = "CUSTOM"
 }
 
 
@@ -12,9 +13,9 @@ export enum TargetWindowTargetWindowOptionEnum {
  * Target Window.
 **/
 export class TargetWindow extends SpeakeasyBase {
-  @Metadata({ data: "json, name=customHtml" })
+  @SpeakeasyMetadata({ data: "json, name=customHtml" })
   customHtml?: string;
 
-  @Metadata({ data: "json, name=targetWindowOption" })
+  @SpeakeasyMetadata({ data: "json, name=targetWindowOption" })
   targetWindowOption?: TargetWindowTargetWindowOptionEnum;
 }

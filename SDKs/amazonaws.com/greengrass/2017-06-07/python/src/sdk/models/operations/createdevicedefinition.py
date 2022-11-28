@@ -1,6 +1,10 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,List,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -19,27 +23,31 @@ class CreateDeviceDefinitionHeaders:
 @dataclass_json
 @dataclass
 class CreateDeviceDefinitionRequestBodyInitialVersion:
-    devices: Optional[List[shared.Device]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Devices' }})
+    r"""CreateDeviceDefinitionRequestBodyInitialVersion
+    Information about a device definition version.
+    """
+    
+    devices: Optional[List[shared.Device]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Devices') }})
     
 
 @dataclass_json
 @dataclass
 class CreateDeviceDefinitionRequestBody:
-    initial_version: Optional[CreateDeviceDefinitionRequestBodyInitialVersion] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'InitialVersion' }})
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Name' }})
-    tags: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tags' }})
+    initial_version: Optional[CreateDeviceDefinitionRequestBodyInitialVersion] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('InitialVersion') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Name') }})
+    tags: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('tags') }})
     
 
 @dataclass
 class CreateDeviceDefinitionRequest:
-    headers: CreateDeviceDefinitionHeaders = field(default=None)
-    request: CreateDeviceDefinitionRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: CreateDeviceDefinitionHeaders = field()
+    request: CreateDeviceDefinitionRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class CreateDeviceDefinitionResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     create_device_definition_response: Optional[shared.CreateDeviceDefinitionResponse] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,13 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 
 
-export class UserMembership extends SpeakeasyBase {
-  @Metadata({ data: "json, name=isValid" })
-  isValid?: boolean;
 
-  @Metadata({ data: "json, name=roleId" })
+export class UserMembershipInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=roleId" })
   roleId?: string;
 
-  @Metadata({ data: "json, name=teamId" })
+  @SpeakeasyMetadata({ data: "json, name=teamId" })
   teamId?: string;
 }

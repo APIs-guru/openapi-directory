@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CustomerManagedEncryptionStatus } from "./customermanagedencryptionstatus";
+
 
 
 // AutomaticStatus
@@ -7,6 +8,6 @@ import { CustomerManagedEncryptionStatus } from "./customermanagedencryptionstat
  * The replication status of a SecretVersion using automatic replication. Only populated if the parent Secret has an automatic replication policy.
 **/
 export class AutomaticStatus extends SpeakeasyBase {
-  @Metadata({ data: "json, name=customerManagedEncryption" })
+  @SpeakeasyMetadata({ data: "json, name=customerManagedEncryption" })
   customerManagedEncryption?: CustomerManagedEncryptionStatus;
 }

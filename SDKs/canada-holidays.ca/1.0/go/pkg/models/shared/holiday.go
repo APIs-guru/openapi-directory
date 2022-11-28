@@ -13,6 +13,8 @@ const (
 	HolidayFederalEnumFalse HolidayFederalEnum = "false"
 )
 
+// Holiday
+// A Canadian holiday. Includes a name, date, and a list of regions that observe this holiday.
 type Holiday struct {
 	Date      *time.Time          `json:"date,omitempty"`
 	Federal   *HolidayFederalEnum `json:"federal,omitempty"`

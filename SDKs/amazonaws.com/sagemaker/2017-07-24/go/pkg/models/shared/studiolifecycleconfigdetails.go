@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// StudioLifecycleConfigDetails
+// Details of the Studio Lifecycle Configuration.
 type StudioLifecycleConfigDetails struct {
 	CreationTime                 *time.Time                        `json:"CreationTime,omitempty"`
 	LastModifiedTime             *time.Time                        `json:"LastModifiedTime,omitempty"`

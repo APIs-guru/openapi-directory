@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CrawlStateEnum } from "./crawlstateenum";
 import { LogicalOperatorEnum } from "./logicaloperatorenum";
 import { JobRunStateEnum } from "./jobrunstateenum";
+
 
 
 // Condition
@@ -9,18 +10,18 @@ import { JobRunStateEnum } from "./jobrunstateenum";
  * Defines a condition under which a trigger fires.
 **/
 export class Condition extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CrawlState" })
+  @SpeakeasyMetadata({ data: "json, name=CrawlState" })
   crawlState?: CrawlStateEnum;
 
-  @Metadata({ data: "json, name=CrawlerName" })
+  @SpeakeasyMetadata({ data: "json, name=CrawlerName" })
   crawlerName?: string;
 
-  @Metadata({ data: "json, name=JobName" })
+  @SpeakeasyMetadata({ data: "json, name=JobName" })
   jobName?: string;
 
-  @Metadata({ data: "json, name=LogicalOperator" })
+  @SpeakeasyMetadata({ data: "json, name=LogicalOperator" })
   logicalOperator?: LogicalOperatorEnum;
 
-  @Metadata({ data: "json, name=State" })
+  @SpeakeasyMetadata({ data: "json, name=State" })
   state?: JobRunStateEnum;
 }

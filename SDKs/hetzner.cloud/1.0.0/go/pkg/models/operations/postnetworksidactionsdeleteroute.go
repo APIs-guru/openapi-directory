@@ -9,11 +9,8 @@ type PostNetworksIDActionsDeleteRouteAddDeleteRouteRequest struct {
 	Gateway     string `json:"gateway"`
 }
 
-type PostNetworksIDActionsDeleteRouteRequest struct {
-	PathParams PostNetworksIDActionsDeleteRoutePathParams
-	Request    *PostNetworksIDActionsDeleteRouteAddDeleteRouteRequest `request:"mediaType=application/json"`
-}
-
+// PostNetworksIDActionsDeleteRouteActionResponseActionError
+// Error message for the Action if error occurred, otherwise null
 type PostNetworksIDActionsDeleteRouteActionResponseActionError struct {
 	Code    string `json:"code"`
 	Message string `json:"message"`
@@ -45,6 +42,11 @@ type PostNetworksIDActionsDeleteRouteActionResponseAction struct {
 
 type PostNetworksIDActionsDeleteRouteActionResponse struct {
 	Action PostNetworksIDActionsDeleteRouteActionResponseAction `json:"action"`
+}
+
+type PostNetworksIDActionsDeleteRouteRequest struct {
+	PathParams PostNetworksIDActionsDeleteRoutePathParams
+	Request    *PostNetworksIDActionsDeleteRouteAddDeleteRouteRequest `request:"mediaType=application/json"`
 }
 
 type PostNetworksIDActionsDeleteRouteResponse struct {

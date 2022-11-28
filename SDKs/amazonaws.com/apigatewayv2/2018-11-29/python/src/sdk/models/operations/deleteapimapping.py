@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 
 
 @dataclass
 class DeleteAPIMappingPathParams:
-    api_mapping_id: str = field(default=None, metadata={'path_param': { 'field_name': 'apiMappingId', 'style': 'simple', 'explode': False }})
-    domain_name: str = field(default=None, metadata={'path_param': { 'field_name': 'domainName', 'style': 'simple', 'explode': False }})
+    api_mapping_id: str = field(metadata={'path_param': { 'field_name': 'apiMappingId', 'style': 'simple', 'explode': False }})
+    domain_name: str = field(metadata={'path_param': { 'field_name': 'domainName', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -21,15 +24,15 @@ class DeleteAPIMappingHeaders:
 
 @dataclass
 class DeleteAPIMappingRequest:
-    path_params: DeleteAPIMappingPathParams = field(default=None)
-    headers: DeleteAPIMappingHeaders = field(default=None)
+    headers: DeleteAPIMappingHeaders = field()
+    path_params: DeleteAPIMappingPathParams = field()
     
 
 @dataclass
 class DeleteAPIMappingResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     too_many_requests_exception: Optional[Any] = field(default=None)
     

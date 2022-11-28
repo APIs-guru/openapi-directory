@@ -1,5 +1,7 @@
 package shared
 
+// PaginatedSnippetCommit
+// A paginated list of snippet commits.
 type PaginatedSnippetCommit struct {
 	Next     *string                  `json:"next,omitempty"`
 	Page     *int64                   `json:"page,omitempty"`

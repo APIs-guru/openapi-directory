@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class CloudkmsProjectsLocationsListPathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -28,14 +29,14 @@ class CloudkmsProjectsLocationsListQueryParams:
 
 @dataclass
 class CloudkmsProjectsLocationsListSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class CloudkmsProjectsLocationsListSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -46,14 +47,14 @@ class CloudkmsProjectsLocationsListSecurity:
 
 @dataclass
 class CloudkmsProjectsLocationsListRequest:
-    path_params: CloudkmsProjectsLocationsListPathParams = field(default=None)
-    query_params: CloudkmsProjectsLocationsListQueryParams = field(default=None)
-    security: CloudkmsProjectsLocationsListSecurity = field(default=None)
+    path_params: CloudkmsProjectsLocationsListPathParams = field()
+    query_params: CloudkmsProjectsLocationsListQueryParams = field()
+    security: CloudkmsProjectsLocationsListSecurity = field()
     
 
 @dataclass
 class CloudkmsProjectsLocationsListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     list_locations_response: Optional[shared.ListLocationsResponse] = field(default=None)
-    status_code: int = field(default=None)
     

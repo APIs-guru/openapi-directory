@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 class GetPopularCarsCarTypeEnum(str, Enum):
@@ -15,8 +16,8 @@ class GetPopularCarsCountryEnum(str, Enum):
 
 @dataclass
 class GetPopularCarsQueryParams:
+    car_type: GetPopularCarsCarTypeEnum = field(metadata={'query_param': { 'field_name': 'car_type', 'style': 'form', 'explode': True }})
     api_key: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'api_key', 'style': 'form', 'explode': True }})
-    car_type: GetPopularCarsCarTypeEnum = field(default=None, metadata={'query_param': { 'field_name': 'car_type', 'style': 'form', 'explode': True }})
     city_state: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'city_state', 'style': 'form', 'explode': True }})
     country: Optional[GetPopularCarsCountryEnum] = field(default=None, metadata={'query_param': { 'field_name': 'country', 'style': 'form', 'explode': True }})
     state: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'state', 'style': 'form', 'explode': True }})
@@ -24,13 +25,13 @@ class GetPopularCarsQueryParams:
 
 @dataclass
 class GetPopularCarsRequest:
-    query_params: GetPopularCarsQueryParams = field(default=None)
+    query_params: GetPopularCarsQueryParams = field()
     
 
 @dataclass
 class GetPopularCarsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error: Optional[shared.Error] = field(default=None)
     popular_cars: Optional[shared.PopularCars] = field(default=None)
-    status_code: int = field(default=None)
     

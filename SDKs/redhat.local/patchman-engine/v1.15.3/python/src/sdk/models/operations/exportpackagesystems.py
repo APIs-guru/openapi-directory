@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class ExportPackageSystemsPathParams:
-    package_name: str = field(default=None, metadata={'path_param': { 'field_name': 'package_name', 'style': 'simple', 'explode': False }})
+    package_name: str = field(metadata={'path_param': { 'field_name': 'package_name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -17,19 +17,19 @@ class ExportPackageSystemsQueryParams:
 
 @dataclass
 class ExportPackageSystemsSecurity:
-    rh_identity: shared.SchemeRhIdentity = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    rh_identity: shared.SchemeRhIdentity = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
     
 
 @dataclass
 class ExportPackageSystemsRequest:
-    path_params: ExportPackageSystemsPathParams = field(default=None)
-    query_params: ExportPackageSystemsQueryParams = field(default=None)
-    security: ExportPackageSystemsSecurity = field(default=None)
+    path_params: ExportPackageSystemsPathParams = field()
+    query_params: ExportPackageSystemsQueryParams = field()
+    security: ExportPackageSystemsSecurity = field()
     
 
 @dataclass
 class ExportPackageSystemsResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     controllers_package_system_items: Optional[List[shared.ControllersPackageSystemItem]] = field(default=None)
     

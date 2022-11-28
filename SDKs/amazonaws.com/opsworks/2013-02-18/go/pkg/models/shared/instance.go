@@ -1,5 +1,7 @@
 package shared
 
+// Instance
+// Describes an instance.
 type Instance struct {
 	AgentVersion             *string                 `json:"AgentVersion,omitempty"`
 	AmiID                    *string                 `json:"AmiId,omitempty"`

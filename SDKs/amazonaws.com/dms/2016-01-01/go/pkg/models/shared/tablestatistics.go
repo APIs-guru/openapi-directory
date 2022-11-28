@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// TableStatistics
+// Provides a collection of table statistics in response to a request by the <code>DescribeTableStatistics</code> operation.
 type TableStatistics struct {
 	Ddls                         *int64     `json:"Ddls,omitempty"`
 	Deletes                      *int64     `json:"Deletes,omitempty"`

@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AndroidAppInfo } from "./androidappinfo";
 import { AndroidInstrumentationTest } from "./androidinstrumentationtest";
 import { AndroidRoboTest } from "./androidrobotest";
 import { Duration } from "./duration";
+
 
 
 // AndroidTest
@@ -10,18 +11,18 @@ import { Duration } from "./duration";
  * An Android mobile test specification.
 **/
 export class AndroidTest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=androidAppInfo" })
+  @SpeakeasyMetadata({ data: "json, name=androidAppInfo" })
   androidAppInfo?: AndroidAppInfo;
 
-  @Metadata({ data: "json, name=androidInstrumentationTest" })
+  @SpeakeasyMetadata({ data: "json, name=androidInstrumentationTest" })
   androidInstrumentationTest?: AndroidInstrumentationTest;
 
-  @Metadata({ data: "json, name=androidRoboTest" })
+  @SpeakeasyMetadata({ data: "json, name=androidRoboTest" })
   androidRoboTest?: AndroidRoboTest;
 
-  @Metadata({ data: "json, name=androidTestLoop" })
+  @SpeakeasyMetadata({ data: "json, name=androidTestLoop" })
   androidTestLoop?: Map<string, any>;
 
-  @Metadata({ data: "json, name=testTimeout" })
+  @SpeakeasyMetadata({ data: "json, name=testTimeout" })
   testTimeout?: Duration;
 }

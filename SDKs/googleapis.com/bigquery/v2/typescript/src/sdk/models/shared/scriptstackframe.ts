@@ -1,22 +1,23 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ScriptStackFrame extends SpeakeasyBase {
-  @Metadata({ data: "json, name=endColumn" })
+  @SpeakeasyMetadata({ data: "json, name=endColumn" })
   endColumn?: number;
 
-  @Metadata({ data: "json, name=endLine" })
+  @SpeakeasyMetadata({ data: "json, name=endLine" })
   endLine?: number;
 
-  @Metadata({ data: "json, name=procedureId" })
+  @SpeakeasyMetadata({ data: "json, name=procedureId" })
   procedureId?: string;
 
-  @Metadata({ data: "json, name=startColumn" })
+  @SpeakeasyMetadata({ data: "json, name=startColumn" })
   startColumn?: number;
 
-  @Metadata({ data: "json, name=startLine" })
+  @SpeakeasyMetadata({ data: "json, name=startLine" })
   startLine?: number;
 
-  @Metadata({ data: "json, name=text" })
+  @SpeakeasyMetadata({ data: "json, name=text" })
   text?: string;
 }

@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ImageTagPredictionModel } from "./imagetagpredictionmodel";
+
 
 
 // ImagePredictionResultModel
@@ -8,18 +8,18 @@ import { ImageTagPredictionModel } from "./imagetagpredictionmodel";
  * result of an image prediction request
 **/
 export class ImagePredictionResultModel extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Created" })
+  @SpeakeasyMetadata({ data: "json, name=Created" })
   created?: Date;
 
-  @Metadata({ data: "json, name=Id" })
+  @SpeakeasyMetadata({ data: "json, name=Id" })
   id?: string;
 
-  @Metadata({ data: "json, name=Iteration" })
+  @SpeakeasyMetadata({ data: "json, name=Iteration" })
   iteration?: string;
 
-  @Metadata({ data: "json, name=Predictions", elemType: shared.ImageTagPredictionModel })
+  @SpeakeasyMetadata({ data: "json, name=Predictions", elemType: ImageTagPredictionModel })
   predictions?: ImageTagPredictionModel[];
 
-  @Metadata({ data: "json, name=Project" })
+  @SpeakeasyMetadata({ data: "json, name=Project" })
   project?: string;
 }

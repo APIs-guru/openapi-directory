@@ -1,6 +1,7 @@
 
 
+
 export enum ReviewableHitStatusEnum {
-    Reviewable = "Reviewable"
-,    Reviewing = "Reviewing"
+    Reviewable = "Reviewable",
+    Reviewing = "Reviewing"
 }

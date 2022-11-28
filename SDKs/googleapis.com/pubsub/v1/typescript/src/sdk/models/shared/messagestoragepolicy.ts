@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // MessageStoragePolicy
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A policy constraining the storage of messages published to the topic.
 **/
 export class MessageStoragePolicy extends SpeakeasyBase {
-  @Metadata({ data: "json, name=allowedPersistenceRegions" })
+  @SpeakeasyMetadata({ data: "json, name=allowedPersistenceRegions" })
   allowedPersistenceRegions?: string[];
 }

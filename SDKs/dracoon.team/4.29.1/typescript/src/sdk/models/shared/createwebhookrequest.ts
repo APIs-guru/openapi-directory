@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // CreateWebhookRequest
@@ -6,21 +7,21 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Request model for creating a webhook
 **/
 export class CreateWebhookRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=eventTypeNames" })
+  @SpeakeasyMetadata({ data: "json, name=eventTypeNames" })
   eventTypeNames: string[];
 
-  @Metadata({ data: "json, name=isEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=isEnabled" })
   isEnabled?: boolean;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 
-  @Metadata({ data: "json, name=secret" })
+  @SpeakeasyMetadata({ data: "json, name=secret" })
   secret?: string;
 
-  @Metadata({ data: "json, name=triggerExampleEvent" })
+  @SpeakeasyMetadata({ data: "json, name=triggerExampleEvent" })
   triggerExampleEvent?: boolean;
 
-  @Metadata({ data: "json, name=url" })
+  @SpeakeasyMetadata({ data: "json, name=url" })
   url: string;
 }

@@ -1,16 +1,21 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,List,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class UpdateConsentsPsuDataPathParams:
-    authorisation_id: str = field(default=None, metadata={'path_param': { 'field_name': 'authorisationId', 'style': 'simple', 'explode': False }})
-    consent_id: str = field(default=None, metadata={'path_param': { 'field_name': 'consentId', 'style': 'simple', 'explode': False }})
+    authorisation_id: str = field(metadata={'path_param': { 'field_name': 'authorisationId', 'style': 'simple', 'explode': False }})
+    consent_id: str = field(metadata={'path_param': { 'field_name': 'consentId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class UpdateConsentsPsuDataHeaders:
+    x_request_id: str = field(metadata={'header': { 'field_name': 'X-Request-ID', 'style': 'simple', 'explode': False }})
     digest: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'Digest', 'style': 'simple', 'explode': False }})
     psu_accept: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'PSU-Accept', 'style': 'simple', 'explode': False }})
     psu_accept_charset: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'PSU-Accept-Charset', 'style': 'simple', 'explode': False }})
@@ -28,7 +33,6 @@ class UpdateConsentsPsuDataHeaders:
     psu_user_agent: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'PSU-User-Agent', 'style': 'simple', 'explode': False }})
     signature: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'Signature', 'style': 'simple', 'explode': False }})
     tpp_signature_certificate: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'TPP-Signature-Certificate', 'style': 'simple', 'explode': False }})
-    x_request_id: str = field(default=None, metadata={'header': { 'field_name': 'X-Request-ID', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -38,15 +42,17 @@ class UpdateConsentsPsuDataSecurity:
 
 @dataclass
 class UpdateConsentsPsuDataRequest:
-    path_params: UpdateConsentsPsuDataPathParams = field(default=None)
-    headers: UpdateConsentsPsuDataHeaders = field(default=None)
+    headers: UpdateConsentsPsuDataHeaders = field()
+    path_params: UpdateConsentsPsuDataPathParams = field()
+    security: UpdateConsentsPsuDataSecurity = field()
     request: Optional[Any] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: UpdateConsentsPsuDataSecurity = field(default=None)
     
 
 @dataclass
 class UpdateConsentsPsuDataResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    headers: dict[str, List[str]] = field()
+    status_code: int = field()
     error400_ais: Optional[shared.Error400Ais] = field(default=None)
     error400_ng_ais: Optional[shared.Error400NgAis] = field(default=None)
     error401_ais: Optional[shared.Error401Ais] = field(default=None)
@@ -63,7 +69,5 @@ class UpdateConsentsPsuDataResponse:
     error409_ng_ais: Optional[shared.Error409NgAis] = field(default=None)
     error429_ais: Optional[shared.Error429Ais] = field(default=None)
     error429_ng_ais: Optional[shared.Error429NgAis] = field(default=None)
-    headers: dict[str, List[str]] = field(default=None)
-    status_code: int = field(default=None)
     update_consents_psu_data_200_application_json_one_of: Optional[Any] = field(default=None)
     

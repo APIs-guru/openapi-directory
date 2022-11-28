@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // OsInfo
@@ -6,27 +7,27 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Operating system information for the VM.
 **/
 export class OsInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=architecture" })
+  @SpeakeasyMetadata({ data: "json, name=architecture" })
   architecture?: string;
 
-  @Metadata({ data: "json, name=hostname" })
+  @SpeakeasyMetadata({ data: "json, name=hostname" })
   hostname?: string;
 
-  @Metadata({ data: "json, name=kernelRelease" })
+  @SpeakeasyMetadata({ data: "json, name=kernelRelease" })
   kernelRelease?: string;
 
-  @Metadata({ data: "json, name=kernelVersion" })
+  @SpeakeasyMetadata({ data: "json, name=kernelVersion" })
   kernelVersion?: string;
 
-  @Metadata({ data: "json, name=longName" })
+  @SpeakeasyMetadata({ data: "json, name=longName" })
   longName?: string;
 
-  @Metadata({ data: "json, name=osconfigAgentVersion" })
+  @SpeakeasyMetadata({ data: "json, name=osconfigAgentVersion" })
   osconfigAgentVersion?: string;
 
-  @Metadata({ data: "json, name=shortName" })
+  @SpeakeasyMetadata({ data: "json, name=shortName" })
   shortName?: string;
 
-  @Metadata({ data: "json, name=version" })
+  @SpeakeasyMetadata({ data: "json, name=version" })
   version?: string;
 }

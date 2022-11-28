@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { FirewallRuleGroup } from "./firewallrulegroup";
 
 
+
 export class DeleteFirewallRuleGroupResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=FirewallRuleGroup" })
+  @SpeakeasyMetadata({ data: "json, name=FirewallRuleGroup" })
   firewallRuleGroup?: FirewallRuleGroup;
 }

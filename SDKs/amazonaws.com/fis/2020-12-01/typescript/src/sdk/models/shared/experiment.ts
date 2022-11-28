@@ -1,9 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ExperimentAction } from "./experimentaction";
 import { ExperimentState } from "./experimentstate";
 import { ExperimentStopCondition } from "./experimentstopcondition";
 import { ExperimentTarget } from "./experimenttarget";
+
 
 
 // Experiment
@@ -11,36 +11,36 @@ import { ExperimentTarget } from "./experimenttarget";
  * Describes an experiment.
 **/
 export class Experiment extends SpeakeasyBase {
-  @Metadata({ data: "json, name=actions", elemType: shared.ExperimentAction })
+  @SpeakeasyMetadata({ data: "json, name=actions", elemType: ExperimentAction })
   actions?: Map<string, ExperimentAction>;
 
-  @Metadata({ data: "json, name=creationTime" })
+  @SpeakeasyMetadata({ data: "json, name=creationTime" })
   creationTime?: Date;
 
-  @Metadata({ data: "json, name=endTime" })
+  @SpeakeasyMetadata({ data: "json, name=endTime" })
   endTime?: Date;
 
-  @Metadata({ data: "json, name=experimentTemplateId" })
+  @SpeakeasyMetadata({ data: "json, name=experimentTemplateId" })
   experimentTemplateId?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=roleArn" })
+  @SpeakeasyMetadata({ data: "json, name=roleArn" })
   roleArn?: string;
 
-  @Metadata({ data: "json, name=startTime" })
+  @SpeakeasyMetadata({ data: "json, name=startTime" })
   startTime?: Date;
 
-  @Metadata({ data: "json, name=state" })
+  @SpeakeasyMetadata({ data: "json, name=state" })
   state?: ExperimentState;
 
-  @Metadata({ data: "json, name=stopConditions", elemType: shared.ExperimentStopCondition })
+  @SpeakeasyMetadata({ data: "json, name=stopConditions", elemType: ExperimentStopCondition })
   stopConditions?: ExperimentStopCondition[];
 
-  @Metadata({ data: "json, name=tags" })
+  @SpeakeasyMetadata({ data: "json, name=tags" })
   tags?: Map<string, string>;
 
-  @Metadata({ data: "json, name=targets", elemType: shared.ExperimentTarget })
+  @SpeakeasyMetadata({ data: "json, name=targets", elemType: ExperimentTarget })
   targets?: Map<string, ExperimentTarget>;
 }

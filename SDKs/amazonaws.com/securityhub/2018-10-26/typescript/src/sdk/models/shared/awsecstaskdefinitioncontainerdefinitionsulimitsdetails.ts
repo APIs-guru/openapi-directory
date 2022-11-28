@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AwsEcsTaskDefinitionContainerDefinitionsUlimitsDetails
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A ulimit to set in the container.
 **/
 export class AwsEcsTaskDefinitionContainerDefinitionsUlimitsDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=HardLimit" })
+  @SpeakeasyMetadata({ data: "json, name=HardLimit" })
   hardLimit?: number;
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name?: string;
 
-  @Metadata({ data: "json, name=SoftLimit" })
+  @SpeakeasyMetadata({ data: "json, name=SoftLimit" })
   softLimit?: number;
 }

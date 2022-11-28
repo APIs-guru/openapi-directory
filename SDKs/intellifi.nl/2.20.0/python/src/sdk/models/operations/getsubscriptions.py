@@ -1,9 +1,10 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
 from typing import List,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -34,26 +35,26 @@ class GetSubscriptionsQueryParams:
     verify_target_certificate: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'verify_target_certificate', 'style': 'form', 'explode': True }})
     
 
-@dataclass
-class GetSubscriptionsRequest:
-    query_params: GetSubscriptionsQueryParams = field(default=None)
-    
-
 @dataclass_json
 @dataclass
 class GetSubscriptions200ApplicationJSON:
-    count: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'count' }})
-    count_current: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'count_current' }})
-    is_limited: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'is_limited' }})
-    next_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next_url' }})
-    query_duration_ms: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'query_duration_ms' }})
-    results: Optional[List[shared.Subscription]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'results' }})
-    url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'url' }})
+    count: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('count') }})
+    count_current: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('count_current') }})
+    is_limited: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('is_limited') }})
+    next_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('next_url') }})
+    query_duration_ms: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('query_duration_ms') }})
+    results: Optional[List[shared.Subscription]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('results') }})
+    url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('url') }})
+    
+
+@dataclass
+class GetSubscriptionsRequest:
+    query_params: GetSubscriptionsQueryParams = field()
     
 
 @dataclass
 class GetSubscriptionsResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     get_subscriptions_200_application_json_object: Optional[GetSubscriptions200ApplicationJSON] = field(default=None)
     

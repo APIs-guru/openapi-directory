@@ -1,5 +1,7 @@
 package shared
 
+// QueryInput
+// Represents the input of a <code>Query</code> operation.
 type QueryInput struct {
 	AttributesToGet           []string                    `json:"AttributesToGet,omitempty"`
 	ConditionalOperator       *ConditionalOperatorEnum    `json:"ConditionalOperator,omitempty"`

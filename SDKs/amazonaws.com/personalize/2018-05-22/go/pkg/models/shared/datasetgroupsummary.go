@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// DatasetGroupSummary
+// Provides a summary of the properties of a dataset group. For a complete listing, call the <a>DescribeDatasetGroup</a> API.
 type DatasetGroupSummary struct {
 	CreationDateTime    *time.Time `json:"creationDateTime,omitempty"`
 	DatasetGroupArn     *string    `json:"datasetGroupArn,omitempty"`

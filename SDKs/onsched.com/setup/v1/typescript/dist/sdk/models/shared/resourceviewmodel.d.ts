@@ -1,0 +1,32 @@
+import { SpeakeasyBase } from "../../../internal/utils";
+export declare class ResourceViewModel extends SpeakeasyBase {
+    bioLink?: string;
+    bookingNotification?: number;
+    calendarAvailability?: number;
+    deletedStatus?: boolean;
+    deletedTime?: Date;
+    description?: string;
+    effectiveDate?: Date;
+    email?: string;
+    gender?: string;
+    googleCalendarAuthUrl?: string;
+    googleCalendarAuthorized?: boolean;
+    googleCalendarId?: string;
+    groupId?: number;
+    hourly?: number;
+    id?: string;
+    ignoreBusinessHours?: boolean;
+    imageUrl?: string;
+    locationId?: string;
+    name?: string;
+    notificationType?: number;
+    objectName?: string;
+    outlookCalendarAuthUrl?: string;
+    outlookCalendarAuthorized?: boolean;
+    outlookCalendarId?: string;
+    skypeName?: string;
+    sortKey?: number;
+    timezoneIana?: string;
+    timezoneId?: string;
+    timezoneOffset?: number;
+}

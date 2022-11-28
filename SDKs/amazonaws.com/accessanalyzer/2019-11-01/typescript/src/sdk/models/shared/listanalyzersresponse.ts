@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AnalyzerSummary } from "./analyzersummary";
+
 
 
 // ListAnalyzersResponse
@@ -8,9 +8,9 @@ import { AnalyzerSummary } from "./analyzersummary";
  * The response to the request.
 **/
 export class ListAnalyzersResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=analyzers", elemType: shared.AnalyzerSummary })
+  @SpeakeasyMetadata({ data: "json, name=analyzers", elemType: AnalyzerSummary })
   analyzers: AnalyzerSummary[];
 
-  @Metadata({ data: "json, name=nextToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextToken" })
   nextToken?: string;
 }

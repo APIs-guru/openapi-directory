@@ -1,5 +1,7 @@
 package shared
 
+// GoogleCloudRecommendationengineV1beta1CatalogItem
+// CatalogItem captures all metadata information of items to be recommended.
 type GoogleCloudRecommendationengineV1beta1CatalogItem struct {
 	CategoryHierarchies []GoogleCloudRecommendationengineV1beta1CatalogItemCategoryHierarchy `json:"categoryHierarchies,omitempty"`
 	Description         *string                                                              `json:"description,omitempty"`

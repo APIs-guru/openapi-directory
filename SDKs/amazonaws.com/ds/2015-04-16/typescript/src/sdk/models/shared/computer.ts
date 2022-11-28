@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Attribute } from "./attribute";
+
 
 
 // Computer
@@ -8,12 +8,12 @@ import { Attribute } from "./attribute";
  * Contains information about a computer account in a directory.
 **/
 export class Computer extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ComputerAttributes", elemType: shared.Attribute })
+  @SpeakeasyMetadata({ data: "json, name=ComputerAttributes", elemType: Attribute })
   computerAttributes?: Attribute[];
 
-  @Metadata({ data: "json, name=ComputerId" })
+  @SpeakeasyMetadata({ data: "json, name=ComputerId" })
   computerId?: string;
 
-  @Metadata({ data: "json, name=ComputerName" })
+  @SpeakeasyMetadata({ data: "json, name=ComputerName" })
   computerName?: string;
 }

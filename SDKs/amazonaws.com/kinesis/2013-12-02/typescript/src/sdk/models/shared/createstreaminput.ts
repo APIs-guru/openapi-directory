@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // CreateStreamInput
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Represents the input for <code>CreateStream</code>.
 **/
 export class CreateStreamInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ShardCount" })
+  @SpeakeasyMetadata({ data: "json, name=ShardCount" })
   shardCount: number;
 
-  @Metadata({ data: "json, name=StreamName" })
+  @SpeakeasyMetadata({ data: "json, name=StreamName" })
   streamName: string;
 }

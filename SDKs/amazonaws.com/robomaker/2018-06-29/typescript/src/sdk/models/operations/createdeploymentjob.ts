@@ -1,27 +1,28 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class CreateDeploymentJobHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
@@ -31,75 +32,75 @@ export class CreateDeploymentJobHeaders extends SpeakeasyBase {
  * Information about a deployment configuration.
 **/
 export class CreateDeploymentJobRequestBodyDeploymentConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=concurrentDeploymentPercentage" })
+  @SpeakeasyMetadata({ data: "json, name=concurrentDeploymentPercentage" })
   concurrentDeploymentPercentage?: number;
 
-  @Metadata({ data: "json, name=downloadConditionFile" })
+  @SpeakeasyMetadata({ data: "json, name=downloadConditionFile" })
   downloadConditionFile?: shared.S3Object;
 
-  @Metadata({ data: "json, name=failureThresholdPercentage" })
+  @SpeakeasyMetadata({ data: "json, name=failureThresholdPercentage" })
   failureThresholdPercentage?: number;
 
-  @Metadata({ data: "json, name=robotDeploymentTimeoutInSeconds" })
+  @SpeakeasyMetadata({ data: "json, name=robotDeploymentTimeoutInSeconds" })
   robotDeploymentTimeoutInSeconds?: number;
 }
 
 
 export class CreateDeploymentJobRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=clientRequestToken" })
+  @SpeakeasyMetadata({ data: "json, name=clientRequestToken" })
   clientRequestToken: string;
 
-  @Metadata({ data: "json, name=deploymentApplicationConfigs", elemType: shared.DeploymentApplicationConfig })
+  @SpeakeasyMetadata({ data: "json, name=deploymentApplicationConfigs", elemType: shared.DeploymentApplicationConfig })
   deploymentApplicationConfigs: shared.DeploymentApplicationConfig[];
 
-  @Metadata({ data: "json, name=deploymentConfig" })
+  @SpeakeasyMetadata({ data: "json, name=deploymentConfig" })
   deploymentConfig?: CreateDeploymentJobRequestBodyDeploymentConfig;
 
-  @Metadata({ data: "json, name=fleet" })
+  @SpeakeasyMetadata({ data: "json, name=fleet" })
   fleet: string;
 
-  @Metadata({ data: "json, name=tags" })
+  @SpeakeasyMetadata({ data: "json, name=tags" })
   tags?: Map<string, string>;
 }
 
 
 export class CreateDeploymentJobRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: CreateDeploymentJobHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: CreateDeploymentJobRequestBody;
 }
 
 
 export class CreateDeploymentJobResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   concurrentDeploymentException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   createDeploymentJobResponse?: shared.CreateDeploymentJobResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   idempotentParameterMismatchException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   internalServerException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidParameterException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   limitExceededException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   resourceNotFoundException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   throttlingException?: any;
 }

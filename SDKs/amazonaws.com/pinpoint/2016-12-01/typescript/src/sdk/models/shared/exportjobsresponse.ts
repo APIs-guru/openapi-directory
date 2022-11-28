@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ExportJobResponse } from "./exportjobresponse";
+
 
 
 // ExportJobsResponse
@@ -8,9 +8,9 @@ import { ExportJobResponse } from "./exportjobresponse";
  * Provides information about all the export jobs that are associated with an application or segment. An export job is a job that exports endpoint definitions to a file.
 **/
 export class ExportJobsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Item", elemType: shared.ExportJobResponse })
+  @SpeakeasyMetadata({ data: "json, name=Item", elemType: ExportJobResponse })
   item: ExportJobResponse[];
 
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 }

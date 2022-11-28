@@ -187,6 +187,8 @@ const (
 	MappingJobStateCodeEnumZj MappingJobStateCodeEnum = "ZJ"
 )
 
+// MappingJob
+// For V3: securityType2 is required when idType is BASE_TICKER or ID_EXCH_SYMBOL.  expiration is required when securityType2 is Option or Warrant.  maturity is required when securityType2 is Pool.
 type MappingJob struct {
 	ContractSize            []float64                 `json:"contractSize,omitempty"`
 	Coupon                  []float64                 `json:"coupon,omitempty"`

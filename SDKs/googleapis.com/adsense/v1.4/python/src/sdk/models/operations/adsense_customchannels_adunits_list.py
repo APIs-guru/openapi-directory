@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class AdsenseCustomchannelsAdunitsListPathParams:
-    ad_client_id: str = field(default=None, metadata={'path_param': { 'field_name': 'adClientId', 'style': 'simple', 'explode': False }})
-    custom_channel_id: str = field(default=None, metadata={'path_param': { 'field_name': 'customChannelId', 'style': 'simple', 'explode': False }})
+    ad_client_id: str = field(metadata={'path_param': { 'field_name': 'adClientId', 'style': 'simple', 'explode': False }})
+    custom_channel_id: str = field(metadata={'path_param': { 'field_name': 'customChannelId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,14 +26,14 @@ class AdsenseCustomchannelsAdunitsListQueryParams:
 
 @dataclass
 class AdsenseCustomchannelsAdunitsListSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class AdsenseCustomchannelsAdunitsListSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -43,14 +44,14 @@ class AdsenseCustomchannelsAdunitsListSecurity:
 
 @dataclass
 class AdsenseCustomchannelsAdunitsListRequest:
-    path_params: AdsenseCustomchannelsAdunitsListPathParams = field(default=None)
-    query_params: AdsenseCustomchannelsAdunitsListQueryParams = field(default=None)
-    security: AdsenseCustomchannelsAdunitsListSecurity = field(default=None)
+    path_params: AdsenseCustomchannelsAdunitsListPathParams = field()
+    query_params: AdsenseCustomchannelsAdunitsListQueryParams = field()
+    security: AdsenseCustomchannelsAdunitsListSecurity = field()
     
 
 @dataclass
 class AdsenseCustomchannelsAdunitsListResponse:
+    content_type: str = field()
+    status_code: int = field()
     ad_units: Optional[shared.AdUnits] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

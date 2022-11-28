@@ -1,6 +1,7 @@
 
 
+
 export enum PropagateTagsEnum {
-    TaskDefinition = "TASK_DEFINITION"
-,    Service = "SERVICE"
+    TaskDefinition = "TASK_DEFINITION",
+    Service = "SERVICE"
 }

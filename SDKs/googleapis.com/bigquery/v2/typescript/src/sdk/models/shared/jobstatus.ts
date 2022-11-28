@@ -1,16 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ErrorProto } from "./errorproto";
-import { ErrorProto } from "./errorproto";
+
 
 
 export class JobStatus extends SpeakeasyBase {
-  @Metadata({ data: "json, name=errorResult" })
+  @SpeakeasyMetadata({ data: "json, name=errorResult" })
   errorResult?: ErrorProto;
 
-  @Metadata({ data: "json, name=errors", elemType: shared.ErrorProto })
+  @SpeakeasyMetadata({ data: "json, name=errors", elemType: ErrorProto })
   errors?: ErrorProto[];
 
-  @Metadata({ data: "json, name=state" })
+  @SpeakeasyMetadata({ data: "json, name=state" })
   state?: string;
 }

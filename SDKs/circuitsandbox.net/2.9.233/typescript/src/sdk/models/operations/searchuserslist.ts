@@ -1,44 +1,45 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class SearchUsersListQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=name" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=name" })
   name: string[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=returnFullUserInfo" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=returnFullUserInfo" })
   returnFullUserInfo?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=secondaryLookup" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=secondaryLookup" })
   secondaryLookup?: boolean;
 }
 
 
 export class SearchUsersListSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   oauth: shared.SchemeOauth;
 }
 
 
 export class SearchUsersListRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: SearchUsersListQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: SearchUsersListSecurity;
 }
 
 
 export class SearchUsersListResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   users?: any[];
 }

@@ -1,64 +1,65 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class PostAssetsVarianceRequestBody1Assets extends SpeakeasyBase {
-  @Metadata({ data: "json, name=assetReturns" })
+  @SpeakeasyMetadata({ data: "json, name=assetReturns" })
   assetReturns: number[];
 }
 
 
 export class PostAssetsVarianceRequestBody1 extends SpeakeasyBase {
-  @Metadata({ data: "json, name=assets", elemType: operations.PostAssetsVarianceRequestBody1Assets })
+  @SpeakeasyMetadata({ data: "json, name=assets", elemType: PostAssetsVarianceRequestBody1Assets })
   assets: PostAssetsVarianceRequestBody1Assets[];
 }
 
 
 export class PostAssetsVarianceRequestBody2 extends SpeakeasyBase {
-  @Metadata({ data: "json, name=assets" })
+  @SpeakeasyMetadata({ data: "json, name=assets" })
   assets: number;
 
-  @Metadata({ data: "json, name=assetsCovarianceMatrix" })
+  @SpeakeasyMetadata({ data: "json, name=assetsCovarianceMatrix" })
   assetsCovarianceMatrix: number[][];
 }
 
 
 export class PostAssetsVarianceRequestBody3Assets extends SpeakeasyBase {
-  @Metadata({ data: "json, name=assetVolatility" })
+  @SpeakeasyMetadata({ data: "json, name=assetVolatility" })
   assetVolatility: number;
 }
 
 
 export class PostAssetsVarianceRequestBody3 extends SpeakeasyBase {
-  @Metadata({ data: "json, name=assets", elemType: operations.PostAssetsVarianceRequestBody3Assets })
+  @SpeakeasyMetadata({ data: "json, name=assets", elemType: PostAssetsVarianceRequestBody3Assets })
   assets: PostAssetsVarianceRequestBody3Assets[];
 }
 
 
-export class PostAssetsVarianceRequest extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/json" })
-  request: any;
-}
-
-
 export class PostAssetsVariance200ApplicationJsonAssets extends SpeakeasyBase {
-  @Metadata({ data: "json, name=assetVariance" })
+  @SpeakeasyMetadata({ data: "json, name=assetVariance" })
   assetVariance: number;
 }
 
 
 export class PostAssetsVariance200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=assets", elemType: operations.PostAssetsVariance200ApplicationJsonAssets })
+  @SpeakeasyMetadata({ data: "json, name=assets", elemType: PostAssetsVariance200ApplicationJsonAssets })
   assets: PostAssetsVariance200ApplicationJsonAssets[];
 }
 
 
+export class PostAssetsVarianceRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request: any;
+}
+
+
 export class PostAssetsVarianceResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   postAssetsVariance200ApplicationJsonObject?: PostAssetsVariance200ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

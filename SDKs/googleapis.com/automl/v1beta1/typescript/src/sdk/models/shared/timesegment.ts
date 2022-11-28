@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // TimeSegment
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A time period inside of an example that has a time dimension (e.g. video).
 **/
 export class TimeSegment extends SpeakeasyBase {
-  @Metadata({ data: "json, name=endTimeOffset" })
+  @SpeakeasyMetadata({ data: "json, name=endTimeOffset" })
   endTimeOffset?: string;
 
-  @Metadata({ data: "json, name=startTimeOffset" })
+  @SpeakeasyMetadata({ data: "json, name=startTimeOffset" })
   startTimeOffset?: string;
 }

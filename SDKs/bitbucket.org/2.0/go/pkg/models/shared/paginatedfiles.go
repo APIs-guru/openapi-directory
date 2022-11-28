@@ -1,5 +1,7 @@
 package shared
 
+// PaginatedFiles
+// A paginated list of commit_file objects.
 type PaginatedFiles struct {
 	Next     *string                  `json:"next,omitempty"`
 	Page     *int64                   `json:"page,omitempty"`

@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class GetV3ImagesIDDownloadhistoryPathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -20,14 +20,14 @@ class GetV3ImagesIDDownloadhistoryHeaders:
 
 @dataclass
 class GetV3ImagesIDDownloadhistoryRequest:
-    path_params: GetV3ImagesIDDownloadhistoryPathParams = field(default=None)
-    query_params: GetV3ImagesIDDownloadhistoryQueryParams = field(default=None)
-    headers: GetV3ImagesIDDownloadhistoryHeaders = field(default=None)
+    headers: GetV3ImagesIDDownloadhistoryHeaders = field()
+    path_params: GetV3ImagesIDDownloadhistoryPathParams = field()
+    query_params: GetV3ImagesIDDownloadhistoryQueryParams = field()
     
 
 @dataclass
 class GetV3ImagesIDDownloadhistoryResponse:
+    content_type: str = field()
+    status_code: int = field()
     asset_download_history_results: Optional[shared.AssetDownloadHistoryResults] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

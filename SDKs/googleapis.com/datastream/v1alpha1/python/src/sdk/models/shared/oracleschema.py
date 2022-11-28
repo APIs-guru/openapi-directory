@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import oracletable
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class OracleSchema:
-    oracle_tables: Optional[List[oracletable.OracleTable]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'oracleTables' }})
-    schema_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'schemaName' }})
+    r"""OracleSchema
+    Oracle schema.
+    """
+    
+    oracle_tables: Optional[List[OracleTable]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('oracleTables') }})
+    schema_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('schemaName') }})
     

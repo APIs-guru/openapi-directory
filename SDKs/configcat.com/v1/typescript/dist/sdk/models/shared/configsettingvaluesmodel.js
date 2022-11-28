@@ -22,29 +22,29 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ConfigModel } from "./configmodel";
 import { EnvironmentModel } from "./environmentmodel";
+import { ConfigSettingValueModel } from "./configsettingvaluemodel";
 var ConfigSettingValuesModel = /** @class */ (function (_super) {
     __extends(ConfigSettingValuesModel, _super);
     function ConfigSettingValuesModel() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=config" }),
+        SpeakeasyMetadata({ data: "json, name=config" }),
         __metadata("design:type", ConfigModel)
     ], ConfigSettingValuesModel.prototype, "config", void 0);
     __decorate([
-        Metadata({ data: "json, name=environment" }),
+        SpeakeasyMetadata({ data: "json, name=environment" }),
         __metadata("design:type", EnvironmentModel)
     ], ConfigSettingValuesModel.prototype, "environment", void 0);
     __decorate([
-        Metadata({ data: "json, name=readOnly" }),
+        SpeakeasyMetadata({ data: "json, name=readOnly" }),
         __metadata("design:type", Boolean)
     ], ConfigSettingValuesModel.prototype, "readOnly", void 0);
     __decorate([
-        Metadata({ data: "json, name=settingValues", elemType: shared.ConfigSettingValueModel }),
+        SpeakeasyMetadata({ data: "json, name=settingValues", elemType: ConfigSettingValueModel }),
         __metadata("design:type", Array)
     ], ConfigSettingValuesModel.prototype, "settingValues", void 0);
     return ConfigSettingValuesModel;

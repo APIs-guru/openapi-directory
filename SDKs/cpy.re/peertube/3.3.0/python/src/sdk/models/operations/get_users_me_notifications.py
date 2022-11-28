@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
 from typing import Any,Optional
+from sdk.models import shared
 
 
 @dataclass
@@ -12,18 +13,18 @@ class GetUsersMeNotificationsQueryParams:
 
 @dataclass
 class GetUsersMeNotificationsSecurity:
-    o_auth2: shared.SchemeOAuth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    o_auth2: shared.SchemeOAuth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class GetUsersMeNotificationsRequest:
-    query_params: GetUsersMeNotificationsQueryParams = field(default=None)
-    security: GetUsersMeNotificationsSecurity = field(default=None)
+    query_params: GetUsersMeNotificationsQueryParams = field()
+    security: GetUsersMeNotificationsSecurity = field()
     
 
 @dataclass
 class GetUsersMeNotificationsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     notification_list_response: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

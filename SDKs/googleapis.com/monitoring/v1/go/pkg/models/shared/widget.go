@@ -1,5 +1,7 @@
 package shared
 
+// Widget
+// Widget contains a single dashboard component and configuration of how to present the component in the dashboard.
 type Widget struct {
 	AlertChart       *AlertChart            `json:"alertChart,omitempty"`
 	Blank            map[string]interface{} `json:"blank,omitempty"`

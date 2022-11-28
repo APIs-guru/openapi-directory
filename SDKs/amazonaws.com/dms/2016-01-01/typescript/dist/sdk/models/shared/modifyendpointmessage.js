@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DmsTransferSettings } from "./dmstransfersettings";
 import { DocDbSettings } from "./docdbsettings";
 import { DynamoDbSettings } from "./dynamodbsettings";
@@ -52,131 +52,131 @@ var ModifyEndpointMessage = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=CertificateArn" }),
+        SpeakeasyMetadata({ data: "json, name=CertificateArn" }),
         __metadata("design:type", String)
     ], ModifyEndpointMessage.prototype, "certificateArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=DatabaseName" }),
+        SpeakeasyMetadata({ data: "json, name=DatabaseName" }),
         __metadata("design:type", String)
     ], ModifyEndpointMessage.prototype, "databaseName", void 0);
     __decorate([
-        Metadata({ data: "json, name=DmsTransferSettings" }),
+        SpeakeasyMetadata({ data: "json, name=DmsTransferSettings" }),
         __metadata("design:type", DmsTransferSettings)
     ], ModifyEndpointMessage.prototype, "dmsTransferSettings", void 0);
     __decorate([
-        Metadata({ data: "json, name=DocDbSettings" }),
+        SpeakeasyMetadata({ data: "json, name=DocDbSettings" }),
         __metadata("design:type", DocDbSettings)
     ], ModifyEndpointMessage.prototype, "docDbSettings", void 0);
     __decorate([
-        Metadata({ data: "json, name=DynamoDbSettings" }),
+        SpeakeasyMetadata({ data: "json, name=DynamoDbSettings" }),
         __metadata("design:type", DynamoDbSettings)
     ], ModifyEndpointMessage.prototype, "dynamoDbSettings", void 0);
     __decorate([
-        Metadata({ data: "json, name=ElasticsearchSettings" }),
+        SpeakeasyMetadata({ data: "json, name=ElasticsearchSettings" }),
         __metadata("design:type", ElasticsearchSettings)
     ], ModifyEndpointMessage.prototype, "elasticsearchSettings", void 0);
     __decorate([
-        Metadata({ data: "json, name=EndpointArn" }),
+        SpeakeasyMetadata({ data: "json, name=EndpointArn" }),
         __metadata("design:type", String)
     ], ModifyEndpointMessage.prototype, "endpointArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=EndpointIdentifier" }),
+        SpeakeasyMetadata({ data: "json, name=EndpointIdentifier" }),
         __metadata("design:type", String)
     ], ModifyEndpointMessage.prototype, "endpointIdentifier", void 0);
     __decorate([
-        Metadata({ data: "json, name=EndpointType" }),
+        SpeakeasyMetadata({ data: "json, name=EndpointType" }),
         __metadata("design:type", String)
     ], ModifyEndpointMessage.prototype, "endpointType", void 0);
     __decorate([
-        Metadata({ data: "json, name=EngineName" }),
+        SpeakeasyMetadata({ data: "json, name=EngineName" }),
         __metadata("design:type", String)
     ], ModifyEndpointMessage.prototype, "engineName", void 0);
     __decorate([
-        Metadata({ data: "json, name=ExactSettings" }),
+        SpeakeasyMetadata({ data: "json, name=ExactSettings" }),
         __metadata("design:type", Boolean)
     ], ModifyEndpointMessage.prototype, "exactSettings", void 0);
     __decorate([
-        Metadata({ data: "json, name=ExternalTableDefinition" }),
+        SpeakeasyMetadata({ data: "json, name=ExternalTableDefinition" }),
         __metadata("design:type", String)
     ], ModifyEndpointMessage.prototype, "externalTableDefinition", void 0);
     __decorate([
-        Metadata({ data: "json, name=ExtraConnectionAttributes" }),
+        SpeakeasyMetadata({ data: "json, name=ExtraConnectionAttributes" }),
         __metadata("design:type", String)
     ], ModifyEndpointMessage.prototype, "extraConnectionAttributes", void 0);
     __decorate([
-        Metadata({ data: "json, name=IBMDb2Settings" }),
+        SpeakeasyMetadata({ data: "json, name=IBMDb2Settings" }),
         __metadata("design:type", IbmDb2Settings)
     ], ModifyEndpointMessage.prototype, "ibmDb2Settings", void 0);
     __decorate([
-        Metadata({ data: "json, name=KafkaSettings" }),
+        SpeakeasyMetadata({ data: "json, name=KafkaSettings" }),
         __metadata("design:type", KafkaSettings)
     ], ModifyEndpointMessage.prototype, "kafkaSettings", void 0);
     __decorate([
-        Metadata({ data: "json, name=KinesisSettings" }),
+        SpeakeasyMetadata({ data: "json, name=KinesisSettings" }),
         __metadata("design:type", KinesisSettings)
     ], ModifyEndpointMessage.prototype, "kinesisSettings", void 0);
     __decorate([
-        Metadata({ data: "json, name=MicrosoftSQLServerSettings" }),
+        SpeakeasyMetadata({ data: "json, name=MicrosoftSQLServerSettings" }),
         __metadata("design:type", MicrosoftSqlServerSettings)
     ], ModifyEndpointMessage.prototype, "microsoftSqlServerSettings", void 0);
     __decorate([
-        Metadata({ data: "json, name=MongoDbSettings" }),
+        SpeakeasyMetadata({ data: "json, name=MongoDbSettings" }),
         __metadata("design:type", MongoDbSettings)
     ], ModifyEndpointMessage.prototype, "mongoDbSettings", void 0);
     __decorate([
-        Metadata({ data: "json, name=MySQLSettings" }),
+        SpeakeasyMetadata({ data: "json, name=MySQLSettings" }),
         __metadata("design:type", MySqlSettings)
     ], ModifyEndpointMessage.prototype, "mySqlSettings", void 0);
     __decorate([
-        Metadata({ data: "json, name=NeptuneSettings" }),
+        SpeakeasyMetadata({ data: "json, name=NeptuneSettings" }),
         __metadata("design:type", NeptuneSettings)
     ], ModifyEndpointMessage.prototype, "neptuneSettings", void 0);
     __decorate([
-        Metadata({ data: "json, name=OracleSettings" }),
+        SpeakeasyMetadata({ data: "json, name=OracleSettings" }),
         __metadata("design:type", OracleSettings)
     ], ModifyEndpointMessage.prototype, "oracleSettings", void 0);
     __decorate([
-        Metadata({ data: "json, name=Password" }),
+        SpeakeasyMetadata({ data: "json, name=Password" }),
         __metadata("design:type", String)
     ], ModifyEndpointMessage.prototype, "password", void 0);
     __decorate([
-        Metadata({ data: "json, name=Port" }),
+        SpeakeasyMetadata({ data: "json, name=Port" }),
         __metadata("design:type", Number)
     ], ModifyEndpointMessage.prototype, "port", void 0);
     __decorate([
-        Metadata({ data: "json, name=PostgreSQLSettings" }),
+        SpeakeasyMetadata({ data: "json, name=PostgreSQLSettings" }),
         __metadata("design:type", PostgreSqlSettings)
     ], ModifyEndpointMessage.prototype, "postgreSqlSettings", void 0);
     __decorate([
-        Metadata({ data: "json, name=RedisSettings" }),
+        SpeakeasyMetadata({ data: "json, name=RedisSettings" }),
         __metadata("design:type", RedisSettings)
     ], ModifyEndpointMessage.prototype, "redisSettings", void 0);
     __decorate([
-        Metadata({ data: "json, name=RedshiftSettings" }),
+        SpeakeasyMetadata({ data: "json, name=RedshiftSettings" }),
         __metadata("design:type", RedshiftSettings)
     ], ModifyEndpointMessage.prototype, "redshiftSettings", void 0);
     __decorate([
-        Metadata({ data: "json, name=S3Settings" }),
+        SpeakeasyMetadata({ data: "json, name=S3Settings" }),
         __metadata("design:type", S3Settings)
     ], ModifyEndpointMessage.prototype, "s3Settings", void 0);
     __decorate([
-        Metadata({ data: "json, name=ServerName" }),
+        SpeakeasyMetadata({ data: "json, name=ServerName" }),
         __metadata("design:type", String)
     ], ModifyEndpointMessage.prototype, "serverName", void 0);
     __decorate([
-        Metadata({ data: "json, name=ServiceAccessRoleArn" }),
+        SpeakeasyMetadata({ data: "json, name=ServiceAccessRoleArn" }),
         __metadata("design:type", String)
     ], ModifyEndpointMessage.prototype, "serviceAccessRoleArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=SslMode" }),
+        SpeakeasyMetadata({ data: "json, name=SslMode" }),
         __metadata("design:type", String)
     ], ModifyEndpointMessage.prototype, "sslMode", void 0);
     __decorate([
-        Metadata({ data: "json, name=SybaseSettings" }),
+        SpeakeasyMetadata({ data: "json, name=SybaseSettings" }),
         __metadata("design:type", SybaseSettings)
     ], ModifyEndpointMessage.prototype, "sybaseSettings", void 0);
     __decorate([
-        Metadata({ data: "json, name=Username" }),
+        SpeakeasyMetadata({ data: "json, name=Username" }),
         __metadata("design:type", String)
     ], ModifyEndpointMessage.prototype, "username", void 0);
     return ModifyEndpointMessage;

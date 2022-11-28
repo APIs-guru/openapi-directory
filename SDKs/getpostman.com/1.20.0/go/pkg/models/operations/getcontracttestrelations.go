@@ -5,10 +5,6 @@ type GetContractTestRelationsPathParams struct {
 	APIVersionID string `pathParam:"style=simple,explode=false,name=apiVersionId"`
 }
 
-type GetContractTestRelationsRequest struct {
-	PathParams GetContractTestRelationsPathParams
-}
-
 type GetContractTestRelations200ApplicationJSONContracttest struct {
 	CollectionID *string `json:"collectionId,omitempty"`
 	ID           *string `json:"id,omitempty"`
@@ -18,6 +14,10 @@ type GetContractTestRelations200ApplicationJSONContracttest struct {
 
 type GetContractTestRelations200ApplicationJSON struct {
 	Contracttest []GetContractTestRelations200ApplicationJSONContracttest `json:"contracttest,omitempty"`
+}
+
+type GetContractTestRelationsRequest struct {
+	PathParams GetContractTestRelationsPathParams
 }
 
 type GetContractTestRelationsResponse struct {

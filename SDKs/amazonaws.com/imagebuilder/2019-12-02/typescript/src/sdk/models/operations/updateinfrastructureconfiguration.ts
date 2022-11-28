@@ -1,27 +1,28 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class UpdateInfrastructureConfigurationHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
@@ -31,90 +32,90 @@ export class UpdateInfrastructureConfigurationHeaders extends SpeakeasyBase {
  * Logging configuration defines where Image Builder uploads your logs.
 **/
 export class UpdateInfrastructureConfigurationRequestBodyLogging extends SpeakeasyBase {
-  @Metadata({ data: "json, name=s3Logs" })
+  @SpeakeasyMetadata({ data: "json, name=s3Logs" })
   s3Logs?: shared.S3Logs;
 }
 
 
 export class UpdateInfrastructureConfigurationRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=clientToken" })
+  @SpeakeasyMetadata({ data: "json, name=clientToken" })
   clientToken: string;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=infrastructureConfigurationArn" })
+  @SpeakeasyMetadata({ data: "json, name=infrastructureConfigurationArn" })
   infrastructureConfigurationArn: string;
 
-  @Metadata({ data: "json, name=instanceProfileName" })
+  @SpeakeasyMetadata({ data: "json, name=instanceProfileName" })
   instanceProfileName: string;
 
-  @Metadata({ data: "json, name=instanceTypes" })
+  @SpeakeasyMetadata({ data: "json, name=instanceTypes" })
   instanceTypes?: string[];
 
-  @Metadata({ data: "json, name=keyPair" })
+  @SpeakeasyMetadata({ data: "json, name=keyPair" })
   keyPair?: string;
 
-  @Metadata({ data: "json, name=logging" })
+  @SpeakeasyMetadata({ data: "json, name=logging" })
   logging?: UpdateInfrastructureConfigurationRequestBodyLogging;
 
-  @Metadata({ data: "json, name=resourceTags" })
+  @SpeakeasyMetadata({ data: "json, name=resourceTags" })
   resourceTags?: Map<string, string>;
 
-  @Metadata({ data: "json, name=securityGroupIds" })
+  @SpeakeasyMetadata({ data: "json, name=securityGroupIds" })
   securityGroupIds?: string[];
 
-  @Metadata({ data: "json, name=snsTopicArn" })
+  @SpeakeasyMetadata({ data: "json, name=snsTopicArn" })
   snsTopicArn?: string;
 
-  @Metadata({ data: "json, name=subnetId" })
+  @SpeakeasyMetadata({ data: "json, name=subnetId" })
   subnetId?: string;
 
-  @Metadata({ data: "json, name=terminateInstanceOnFailure" })
+  @SpeakeasyMetadata({ data: "json, name=terminateInstanceOnFailure" })
   terminateInstanceOnFailure?: boolean;
 }
 
 
 export class UpdateInfrastructureConfigurationRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: UpdateInfrastructureConfigurationHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: UpdateInfrastructureConfigurationRequestBody;
 }
 
 
 export class UpdateInfrastructureConfigurationResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   callRateLimitExceededException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   clientException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   forbiddenException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   idempotentParameterMismatchException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidRequestException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   resourceInUseException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   serviceException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   serviceUnavailableException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   updateInfrastructureConfigurationResponse?: shared.UpdateInfrastructureConfigurationResponse;
 }

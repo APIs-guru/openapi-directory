@@ -1,9 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum VirtualTariffConsumptionDataTariffTypeEnum {
-    Battery = "Battery"
-,    Solar = "Solar"
-,    Normal = "Normal"
+    Battery = "Battery",
+    Solar = "Solar",
+    Normal = "Normal"
 }
 
 
@@ -12,18 +13,18 @@ export enum VirtualTariffConsumptionDataTariffTypeEnum {
  * Container class for the virtual tariff consumption
 **/
 export class VirtualTariffConsumptionData extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Consumption" })
+  @SpeakeasyMetadata({ data: "json, name=Consumption" })
   consumption?: number;
 
-  @Metadata({ data: "json, name=Currency" })
+  @SpeakeasyMetadata({ data: "json, name=Currency" })
   currency?: string;
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name?: string;
 
-  @Metadata({ data: "json, name=Price" })
+  @SpeakeasyMetadata({ data: "json, name=Price" })
   price?: number;
 
-  @Metadata({ data: "json, name=TariffType" })
+  @SpeakeasyMetadata({ data: "json, name=TariffType" })
   tariffType?: VirtualTariffConsumptionDataTariffTypeEnum;
 }

@@ -1,43 +1,44 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class KeyRevokeNosecretQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=code" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=code" })
   code?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=email" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=email" })
   email: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=phone" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=phone" })
   phone: string;
 }
 
 
-export class KeyRevokeNosecretRequest extends SpeakeasyBase {
-  @Metadata()
-  queryParams: KeyRevokeNosecretQueryParams;
-}
-
-
 export class KeyRevokeNosecret200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: string;
 }
 
 
+export class KeyRevokeNosecretRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  queryParams: KeyRevokeNosecretQueryParams;
+}
+
+
 export class KeyRevokeNosecretResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   error?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   keyRevokeNosecret200ApplicationJsonObject?: KeyRevokeNosecret200ApplicationJson;
 }

@@ -1,7 +1,8 @@
 
 
+
 export enum PlaybackErrorCodeEnum {
-    NotAllowed = "NotAllowed"
-,    NoCompatibleStream = "NoCompatibleStream"
-,    RateLimitExceeded = "RateLimitExceeded"
+    NotAllowed = "NotAllowed",
+    NoCompatibleStream = "NoCompatibleStream",
+    RateLimitExceeded = "RateLimitExceeded"
 }

@@ -22,10 +22,11 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ArrayPropertiesDetail } from "./arraypropertiesdetail";
+import { AttemptDetail } from "./attemptdetail";
 import { ContainerDetail } from "./containerdetail";
+import { JobDependency } from "./jobdependency";
 import { NodeDetails } from "./nodedetails";
 import { NodeProperties } from "./nodeproperties";
 import { RetryStrategy } from "./retrystrategy";
@@ -41,91 +42,91 @@ var JobDetail = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=arrayProperties" }),
+        SpeakeasyMetadata({ data: "json, name=arrayProperties" }),
         __metadata("design:type", ArrayPropertiesDetail)
     ], JobDetail.prototype, "arrayProperties", void 0);
     __decorate([
-        Metadata({ data: "json, name=attempts", elemType: shared.AttemptDetail }),
+        SpeakeasyMetadata({ data: "json, name=attempts", elemType: AttemptDetail }),
         __metadata("design:type", Array)
     ], JobDetail.prototype, "attempts", void 0);
     __decorate([
-        Metadata({ data: "json, name=container" }),
+        SpeakeasyMetadata({ data: "json, name=container" }),
         __metadata("design:type", ContainerDetail)
     ], JobDetail.prototype, "container", void 0);
     __decorate([
-        Metadata({ data: "json, name=createdAt" }),
+        SpeakeasyMetadata({ data: "json, name=createdAt" }),
         __metadata("design:type", Number)
     ], JobDetail.prototype, "createdAt", void 0);
     __decorate([
-        Metadata({ data: "json, name=dependsOn", elemType: shared.JobDependency }),
+        SpeakeasyMetadata({ data: "json, name=dependsOn", elemType: JobDependency }),
         __metadata("design:type", Array)
     ], JobDetail.prototype, "dependsOn", void 0);
     __decorate([
-        Metadata({ data: "json, name=jobArn" }),
+        SpeakeasyMetadata({ data: "json, name=jobArn" }),
         __metadata("design:type", String)
     ], JobDetail.prototype, "jobArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=jobDefinition" }),
+        SpeakeasyMetadata({ data: "json, name=jobDefinition" }),
         __metadata("design:type", String)
     ], JobDetail.prototype, "jobDefinition", void 0);
     __decorate([
-        Metadata({ data: "json, name=jobId" }),
+        SpeakeasyMetadata({ data: "json, name=jobId" }),
         __metadata("design:type", String)
     ], JobDetail.prototype, "jobId", void 0);
     __decorate([
-        Metadata({ data: "json, name=jobName" }),
+        SpeakeasyMetadata({ data: "json, name=jobName" }),
         __metadata("design:type", String)
     ], JobDetail.prototype, "jobName", void 0);
     __decorate([
-        Metadata({ data: "json, name=jobQueue" }),
+        SpeakeasyMetadata({ data: "json, name=jobQueue" }),
         __metadata("design:type", String)
     ], JobDetail.prototype, "jobQueue", void 0);
     __decorate([
-        Metadata({ data: "json, name=nodeDetails" }),
+        SpeakeasyMetadata({ data: "json, name=nodeDetails" }),
         __metadata("design:type", NodeDetails)
     ], JobDetail.prototype, "nodeDetails", void 0);
     __decorate([
-        Metadata({ data: "json, name=nodeProperties" }),
+        SpeakeasyMetadata({ data: "json, name=nodeProperties" }),
         __metadata("design:type", NodeProperties)
     ], JobDetail.prototype, "nodeProperties", void 0);
     __decorate([
-        Metadata({ data: "json, name=parameters" }),
+        SpeakeasyMetadata({ data: "json, name=parameters" }),
         __metadata("design:type", Map)
     ], JobDetail.prototype, "parameters", void 0);
     __decorate([
-        Metadata({ data: "json, name=platformCapabilities" }),
+        SpeakeasyMetadata({ data: "json, name=platformCapabilities" }),
         __metadata("design:type", Array)
     ], JobDetail.prototype, "platformCapabilities", void 0);
     __decorate([
-        Metadata({ data: "json, name=propagateTags" }),
+        SpeakeasyMetadata({ data: "json, name=propagateTags" }),
         __metadata("design:type", Boolean)
     ], JobDetail.prototype, "propagateTags", void 0);
     __decorate([
-        Metadata({ data: "json, name=retryStrategy" }),
+        SpeakeasyMetadata({ data: "json, name=retryStrategy" }),
         __metadata("design:type", RetryStrategy)
     ], JobDetail.prototype, "retryStrategy", void 0);
     __decorate([
-        Metadata({ data: "json, name=startedAt" }),
+        SpeakeasyMetadata({ data: "json, name=startedAt" }),
         __metadata("design:type", Number)
     ], JobDetail.prototype, "startedAt", void 0);
     __decorate([
-        Metadata({ data: "json, name=status" }),
+        SpeakeasyMetadata({ data: "json, name=status" }),
         __metadata("design:type", String)
     ], JobDetail.prototype, "status", void 0);
     __decorate([
-        Metadata({ data: "json, name=statusReason" }),
+        SpeakeasyMetadata({ data: "json, name=statusReason" }),
         __metadata("design:type", String)
     ], JobDetail.prototype, "statusReason", void 0);
     __decorate([
-        Metadata({ data: "json, name=stoppedAt" }),
+        SpeakeasyMetadata({ data: "json, name=stoppedAt" }),
         __metadata("design:type", Number)
     ], JobDetail.prototype, "stoppedAt", void 0);
     __decorate([
-        Metadata({ data: "json, name=tags" }),
+        SpeakeasyMetadata({ data: "json, name=tags" }),
         __metadata("design:type", Map)
     ], JobDetail.prototype, "tags", void 0);
     __decorate([
-        Metadata({ data: "json, name=timeout" }),
+        SpeakeasyMetadata({ data: "json, name=timeout" }),
         __metadata("design:type", JobTimeout)
     ], JobDetail.prototype, "timeout", void 0);
     return JobDetail;

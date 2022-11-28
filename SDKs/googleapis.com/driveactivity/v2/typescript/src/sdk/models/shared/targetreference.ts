@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DriveReference } from "./drivereference";
 import { DriveItemReference } from "./driveitemreference";
 import { TeamDriveReference } from "./teamdrivereference";
+
 
 
 // TargetReference
@@ -9,12 +10,12 @@ import { TeamDriveReference } from "./teamdrivereference";
  * A lightweight reference to the target of activity.
 **/
 export class TargetReference extends SpeakeasyBase {
-  @Metadata({ data: "json, name=drive" })
+  @SpeakeasyMetadata({ data: "json, name=drive" })
   drive?: DriveReference;
 
-  @Metadata({ data: "json, name=driveItem" })
+  @SpeakeasyMetadata({ data: "json, name=driveItem" })
   driveItem?: DriveItemReference;
 
-  @Metadata({ data: "json, name=teamDrive" })
+  @SpeakeasyMetadata({ data: "json, name=teamDrive" })
   teamDrive?: TeamDriveReference;
 }

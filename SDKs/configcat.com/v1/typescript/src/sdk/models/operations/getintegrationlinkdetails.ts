@@ -1,29 +1,30 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetIntegrationLinkDetailsPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=integrationLinkType" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=integrationLinkType" })
   integrationLinkType: shared.IntegrationLinkTypeEnum;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=key" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=key" })
   key: string;
 }
 
 
 export class GetIntegrationLinkDetailsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetIntegrationLinkDetailsPathParams;
 }
 
 
 export class GetIntegrationLinkDetailsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   integrationLinkDetailsModel?: shared.IntegrationLinkDetailsModel;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

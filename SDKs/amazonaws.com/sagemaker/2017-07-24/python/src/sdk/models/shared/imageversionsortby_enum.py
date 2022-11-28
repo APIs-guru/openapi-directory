@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class ImageVersionSortByEnum(str, Enum):
     CREATION_TIME = "CREATION_TIME"

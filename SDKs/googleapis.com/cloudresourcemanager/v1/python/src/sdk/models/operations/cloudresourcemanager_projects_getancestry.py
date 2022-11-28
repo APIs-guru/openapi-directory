@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class CloudresourcemanagerProjectsGetAncestryPathParams:
-    project_id: str = field(default=None, metadata={'path_param': { 'field_name': 'projectId', 'style': 'simple', 'explode': False }})
+    project_id: str = field(metadata={'path_param': { 'field_name': 'projectId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,14 +26,14 @@ class CloudresourcemanagerProjectsGetAncestryQueryParams:
 
 @dataclass
 class CloudresourcemanagerProjectsGetAncestrySecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class CloudresourcemanagerProjectsGetAncestrySecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -43,15 +44,15 @@ class CloudresourcemanagerProjectsGetAncestrySecurity:
 
 @dataclass
 class CloudresourcemanagerProjectsGetAncestryRequest:
-    path_params: CloudresourcemanagerProjectsGetAncestryPathParams = field(default=None)
-    query_params: CloudresourcemanagerProjectsGetAncestryQueryParams = field(default=None)
+    path_params: CloudresourcemanagerProjectsGetAncestryPathParams = field()
+    query_params: CloudresourcemanagerProjectsGetAncestryQueryParams = field()
+    security: CloudresourcemanagerProjectsGetAncestrySecurity = field()
     request: Optional[dict[str, Any]] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: CloudresourcemanagerProjectsGetAncestrySecurity = field(default=None)
     
 
 @dataclass
 class CloudresourcemanagerProjectsGetAncestryResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     get_ancestry_response: Optional[shared.GetAncestryResponse] = field(default=None)
-    status_code: int = field(default=None)
     

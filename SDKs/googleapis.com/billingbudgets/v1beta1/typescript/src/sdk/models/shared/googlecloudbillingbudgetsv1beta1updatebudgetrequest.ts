@@ -1,15 +1,16 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import { GoogleCloudBillingBudgetsV1beta1Budget } from "./googlecloudbillingbudgetsv1beta1budget";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { GoogleCloudBillingBudgetsV1beta1BudgetInput } from "./googlecloudbillingbudgetsv1beta1budget";
 
 
-// GoogleCloudBillingBudgetsV1beta1UpdateBudgetRequest
+
+// GoogleCloudBillingBudgetsV1beta1UpdateBudgetRequestInput
 /** 
  * Request for UpdateBudget
 **/
-export class GoogleCloudBillingBudgetsV1beta1UpdateBudgetRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=budget" })
-  budget?: GoogleCloudBillingBudgetsV1beta1Budget;
+export class GoogleCloudBillingBudgetsV1beta1UpdateBudgetRequestInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=budget" })
+  budget?: GoogleCloudBillingBudgetsV1beta1BudgetInput;
 
-  @Metadata({ data: "json, name=updateMask" })
+  @SpeakeasyMetadata({ data: "json, name=updateMask" })
   updateMask?: string;
 }

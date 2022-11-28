@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DetectorState } from "./detectorstate";
+
 
 
 // Detector
@@ -7,21 +8,21 @@ import { DetectorState } from "./detectorstate";
  * Information about the detector (instance).
 **/
 export class Detector extends SpeakeasyBase {
-  @Metadata({ data: "json, name=creationTime" })
+  @SpeakeasyMetadata({ data: "json, name=creationTime" })
   creationTime?: Date;
 
-  @Metadata({ data: "json, name=detectorModelName" })
+  @SpeakeasyMetadata({ data: "json, name=detectorModelName" })
   detectorModelName?: string;
 
-  @Metadata({ data: "json, name=detectorModelVersion" })
+  @SpeakeasyMetadata({ data: "json, name=detectorModelVersion" })
   detectorModelVersion?: string;
 
-  @Metadata({ data: "json, name=keyValue" })
+  @SpeakeasyMetadata({ data: "json, name=keyValue" })
   keyValue?: string;
 
-  @Metadata({ data: "json, name=lastUpdateTime" })
+  @SpeakeasyMetadata({ data: "json, name=lastUpdateTime" })
   lastUpdateTime?: Date;
 
-  @Metadata({ data: "json, name=state" })
+  @SpeakeasyMetadata({ data: "json, name=state" })
   state?: DetectorState;
 }

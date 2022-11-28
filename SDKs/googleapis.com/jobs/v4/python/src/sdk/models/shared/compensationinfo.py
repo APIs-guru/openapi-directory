@@ -1,15 +1,18 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import compensationrange
-from . import compensationrange
-from . import compensationentry
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class CompensationInfo:
-    annualized_base_compensation_range: Optional[compensationrange.CompensationRange] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'annualizedBaseCompensationRange' }})
-    annualized_total_compensation_range: Optional[compensationrange.CompensationRange] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'annualizedTotalCompensationRange' }})
-    entries: Optional[List[compensationentry.CompensationEntry]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'entries' }})
+    r"""CompensationInfo
+    Job compensation details.
+    """
+    
+    annualized_base_compensation_range: Optional[CompensationRange] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('annualizedBaseCompensationRange') }})
+    annualized_total_compensation_range: Optional[CompensationRange] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('annualizedTotalCompensationRange') }})
+    entries: Optional[List[CompensationEntry]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('entries') }})
     

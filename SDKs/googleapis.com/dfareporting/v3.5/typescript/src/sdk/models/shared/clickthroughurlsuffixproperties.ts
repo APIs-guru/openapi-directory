@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ClickThroughUrlSuffixProperties
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Click Through URL Suffix settings.
 **/
 export class ClickThroughUrlSuffixProperties extends SpeakeasyBase {
-  @Metadata({ data: "json, name=clickThroughUrlSuffix" })
+  @SpeakeasyMetadata({ data: "json, name=clickThroughUrlSuffix" })
   clickThroughUrlSuffix?: string;
 
-  @Metadata({ data: "json, name=overrideInheritedSuffix" })
+  @SpeakeasyMetadata({ data: "json, name=overrideInheritedSuffix" })
   overrideInheritedSuffix?: boolean;
 }

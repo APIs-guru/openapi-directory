@@ -9,6 +9,8 @@ export * from "./collectionresponseactionfunctionidentifiernopaging";
 export * from "./collectionresponseactionrevisionforwardpaging";
 export * from "./collectionresponseextensionactiondefinitionforwardpaging";
 export * from "./conditionalsinglefielddependency";
+export * from "./error";
+export * from "./errordetail";
 export * from "./extensionactiondefinition";
 export * from "./extensionactiondefinitioninput";
 export * from "./extensionactiondefinitionpatch";

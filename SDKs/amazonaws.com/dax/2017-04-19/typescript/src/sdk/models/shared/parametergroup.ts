@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ParameterGroup
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A named set of parameters that are applied to all of the nodes in a DAX cluster.
 **/
 export class ParameterGroup extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Description" })
+  @SpeakeasyMetadata({ data: "json, name=Description" })
   description?: string;
 
-  @Metadata({ data: "json, name=ParameterGroupName" })
+  @SpeakeasyMetadata({ data: "json, name=ParameterGroupName" })
   parameterGroupName?: string;
 }

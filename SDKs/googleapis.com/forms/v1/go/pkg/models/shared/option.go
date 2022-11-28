@@ -9,6 +9,18 @@ const (
 	OptionGoToActionEnumSubmitForm            OptionGoToActionEnum = "SUBMIT_FORM"
 )
 
+// OptionInput
+// An option for a Choice question.
+type OptionInput struct {
+	GoToAction    *OptionGoToActionEnum `json:"goToAction,omitempty"`
+	GoToSectionID *string               `json:"goToSectionId,omitempty"`
+	Image         *ImageInput           `json:"image,omitempty"`
+	IsOther       *bool                 `json:"isOther,omitempty"`
+	Value         *string               `json:"value,omitempty"`
+}
+
+// Option
+// An option for a Choice question.
 type Option struct {
 	GoToAction    *OptionGoToActionEnum `json:"goToAction,omitempty"`
 	GoToSectionID *string               `json:"goToSectionId,omitempty"`

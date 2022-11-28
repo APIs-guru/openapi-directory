@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var GetAddRoleToDbInstanceActionEnum;
 (function (GetAddRoleToDbInstanceActionEnum) {
     GetAddRoleToDbInstanceActionEnum["AddRoleToDbInstance"] = "AddRoleToDBInstance";
@@ -37,23 +37,23 @@ var GetAddRoleToDbInstanceQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=Action" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Action" }),
         __metadata("design:type", String)
     ], GetAddRoleToDbInstanceQueryParams.prototype, "action", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=DBInstanceIdentifier" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=DBInstanceIdentifier" }),
         __metadata("design:type", String)
     ], GetAddRoleToDbInstanceQueryParams.prototype, "dbInstanceIdentifier", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=FeatureName" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=FeatureName" }),
         __metadata("design:type", String)
     ], GetAddRoleToDbInstanceQueryParams.prototype, "featureName", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=RoleArn" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=RoleArn" }),
         __metadata("design:type", String)
     ], GetAddRoleToDbInstanceQueryParams.prototype, "roleArn", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=Version" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Version" }),
         __metadata("design:type", String)
     ], GetAddRoleToDbInstanceQueryParams.prototype, "version", void 0);
     return GetAddRoleToDbInstanceQueryParams;
@@ -65,31 +65,31 @@ var GetAddRoleToDbInstanceHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
         __metadata("design:type", String)
     ], GetAddRoleToDbInstanceHeaders.prototype, "xAmzAlgorithm", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
         __metadata("design:type", String)
     ], GetAddRoleToDbInstanceHeaders.prototype, "xAmzContentSha256", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
         __metadata("design:type", String)
     ], GetAddRoleToDbInstanceHeaders.prototype, "xAmzCredential", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
         __metadata("design:type", String)
     ], GetAddRoleToDbInstanceHeaders.prototype, "xAmzDate", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
         __metadata("design:type", String)
     ], GetAddRoleToDbInstanceHeaders.prototype, "xAmzSecurityToken", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
         __metadata("design:type", String)
     ], GetAddRoleToDbInstanceHeaders.prototype, "xAmzSignature", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
         __metadata("design:type", String)
     ], GetAddRoleToDbInstanceHeaders.prototype, "xAmzSignedHeaders", void 0);
     return GetAddRoleToDbInstanceHeaders;
@@ -101,11 +101,11 @@ var GetAddRoleToDbInstanceRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetAddRoleToDbInstanceQueryParams)
     ], GetAddRoleToDbInstanceRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetAddRoleToDbInstanceHeaders)
     ], GetAddRoleToDbInstanceRequest.prototype, "headers", void 0);
     return GetAddRoleToDbInstanceRequest;
@@ -117,15 +117,15 @@ var GetAddRoleToDbInstanceResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], GetAddRoleToDbInstanceResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetAddRoleToDbInstanceResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetAddRoleToDbInstanceResponse.prototype, "statusCode", void 0);
     return GetAddRoleToDbInstanceResponse;

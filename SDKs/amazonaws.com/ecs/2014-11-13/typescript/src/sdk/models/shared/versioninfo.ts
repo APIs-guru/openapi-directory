@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // VersionInfo
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The Docker and Amazon ECS container agent version information about a container instance.
 **/
 export class VersionInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=agentHash" })
+  @SpeakeasyMetadata({ data: "json, name=agentHash" })
   agentHash?: string;
 
-  @Metadata({ data: "json, name=agentVersion" })
+  @SpeakeasyMetadata({ data: "json, name=agentVersion" })
   agentVersion?: string;
 
-  @Metadata({ data: "json, name=dockerVersion" })
+  @SpeakeasyMetadata({ data: "json, name=dockerVersion" })
   dockerVersion?: string;
 }

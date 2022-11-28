@@ -1,5 +1,7 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from typing import Any,Optional
+from enum import Enum
+from sdk.models import shared
 
 class PepOrderTypeEnum(str, Enum):
     UNKNOWN = ""
@@ -9,8 +11,8 @@ class PepOrderTypeEnum(str, Enum):
 
 @dataclass
 class PepOrderPathParams:
-    search: str = field(default=None, metadata={'path_param': { 'field_name': 'search', 'style': 'simple', 'explode': False }})
-    type: PepOrderTypeEnum = field(default=None, metadata={'path_param': { 'field_name': 'type', 'style': 'simple', 'explode': False }})
+    search: str = field(metadata={'path_param': { 'field_name': 'search', 'style': 'simple', 'explode': False }})
+    type: PepOrderTypeEnum = field(metadata={'path_param': { 'field_name': 'type', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -35,20 +37,20 @@ class PepOrderRequestBody:
 
 @dataclass
 class PepOrderSecurity:
-    user_key: shared.SchemeUserKey = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    user_key: shared.SchemeUserKey = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
     
 
 @dataclass
 class PepOrderRequest:
-    path_params: PepOrderPathParams = field(default=None)
+    path_params: PepOrderPathParams = field()
+    security: PepOrderSecurity = field()
     request: Optional[PepOrderRequestBody] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
-    security: PepOrderSecurity = field(default=None)
     
 
 @dataclass
 class PepOrderResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     pep_order_200_application_json_any: Optional[Any] = field(default=None)
     pep_order_default_application_json_any: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,27 +1,27 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CuratedListSimple } from "./curatedlistsimple";
 
 
+
 export class GetCuratedPodcastsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=curated_lists", elemType: shared.CuratedListSimple })
+  @SpeakeasyMetadata({ data: "json, name=curated_lists", elemType: CuratedListSimple })
   curatedLists: CuratedListSimple[];
 
-  @Metadata({ data: "json, name=has_next" })
+  @SpeakeasyMetadata({ data: "json, name=has_next" })
   hasNext: boolean;
 
-  @Metadata({ data: "json, name=has_previous" })
+  @SpeakeasyMetadata({ data: "json, name=has_previous" })
   hasPrevious: boolean;
 
-  @Metadata({ data: "json, name=next_page_number" })
+  @SpeakeasyMetadata({ data: "json, name=next_page_number" })
   nextPageNumber: number;
 
-  @Metadata({ data: "json, name=page_number" })
+  @SpeakeasyMetadata({ data: "json, name=page_number" })
   pageNumber: number;
 
-  @Metadata({ data: "json, name=previous_page_number" })
+  @SpeakeasyMetadata({ data: "json, name=previous_page_number" })
   previousPageNumber: number;
 
-  @Metadata({ data: "json, name=total" })
+  @SpeakeasyMetadata({ data: "json, name=total" })
   total: number;
 }

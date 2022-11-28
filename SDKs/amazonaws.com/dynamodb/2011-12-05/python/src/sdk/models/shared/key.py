@@ -1,13 +1,17 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import attributevalue
-from . import attributevalue
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class Key:
-    hash_key_element: attributevalue.AttributeValue = field(default=None, metadata={'dataclasses_json': { 'field_name': 'HashKeyElement' }})
-    range_key_element: Optional[attributevalue.AttributeValue] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'RangeKeyElement' }})
+    r"""Key
+    The primary key that uniquely identifies each item in a table. A primary key can be a one attribute (hash) primary key or a two attribute (hash-and-range) primary key.
+    """
+    
+    hash_key_element: AttributeValue = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('HashKeyElement') }})
+    range_key_element: Optional[AttributeValue] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('RangeKeyElement') }})
     

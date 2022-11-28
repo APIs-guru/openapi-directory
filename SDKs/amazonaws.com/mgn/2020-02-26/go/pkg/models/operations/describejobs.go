@@ -19,6 +19,8 @@ type DescribeJobsHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// DescribeJobsRequestBodyFilters
+// Request to describe Job log filters.
 type DescribeJobsRequestBodyFilters struct {
 	FromDate *string  `json:"fromDate,omitempty"`
 	JobIDs   []string `json:"jobIDs,omitempty"`

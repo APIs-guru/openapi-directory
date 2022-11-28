@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // CanaryCodeOutput
 /**
  * This structure contains information about the canary's Lambda handler and where its code is stored by CloudWatch Synthetics.
@@ -33,11 +33,11 @@ var CanaryCodeOutput = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Handler" }),
+        SpeakeasyMetadata({ data: "json, name=Handler" }),
         __metadata("design:type", String)
     ], CanaryCodeOutput.prototype, "handler", void 0);
     __decorate([
-        Metadata({ data: "json, name=SourceLocationArn" }),
+        SpeakeasyMetadata({ data: "json, name=SourceLocationArn" }),
         __metadata("design:type", String)
     ], CanaryCodeOutput.prototype, "sourceLocationArn", void 0);
     return CanaryCodeOutput;

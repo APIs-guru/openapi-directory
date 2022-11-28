@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Name } from "./name";
 import { GlobalPermission } from "./globalpermission";
+
 
 
 // UserProfile
@@ -9,21 +9,21 @@ import { GlobalPermission } from "./globalpermission";
  * Global information for a user.
 **/
 export class UserProfile extends SpeakeasyBase {
-  @Metadata({ data: "json, name=emailAddress" })
+  @SpeakeasyMetadata({ data: "json, name=emailAddress" })
   emailAddress?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: Name;
 
-  @Metadata({ data: "json, name=permissions", elemType: shared.GlobalPermission })
+  @SpeakeasyMetadata({ data: "json, name=permissions", elemType: GlobalPermission })
   permissions?: GlobalPermission[];
 
-  @Metadata({ data: "json, name=photoUrl" })
+  @SpeakeasyMetadata({ data: "json, name=photoUrl" })
   photoUrl?: string;
 
-  @Metadata({ data: "json, name=verifiedTeacher" })
+  @SpeakeasyMetadata({ data: "json, name=verifiedTeacher" })
   verifiedTeacher?: boolean;
 }

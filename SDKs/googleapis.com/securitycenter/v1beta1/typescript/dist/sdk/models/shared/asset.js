@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SecurityCenterProperties } from "./securitycenterproperties";
 import { GoogleCloudSecuritycenterV1beta1SecurityMarks } from "./googlecloudsecuritycenterv1beta1securitymarks";
 // Asset
@@ -35,27 +35,27 @@ var Asset = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=createTime" }),
+        SpeakeasyMetadata({ data: "json, name=createTime" }),
         __metadata("design:type", String)
     ], Asset.prototype, "createTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], Asset.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=resourceProperties" }),
+        SpeakeasyMetadata({ data: "json, name=resourceProperties" }),
         __metadata("design:type", Map)
     ], Asset.prototype, "resourceProperties", void 0);
     __decorate([
-        Metadata({ data: "json, name=securityCenterProperties" }),
+        SpeakeasyMetadata({ data: "json, name=securityCenterProperties" }),
         __metadata("design:type", SecurityCenterProperties)
     ], Asset.prototype, "securityCenterProperties", void 0);
     __decorate([
-        Metadata({ data: "json, name=securityMarks" }),
+        SpeakeasyMetadata({ data: "json, name=securityMarks" }),
         __metadata("design:type", GoogleCloudSecuritycenterV1beta1SecurityMarks)
     ], Asset.prototype, "securityMarks", void 0);
     __decorate([
-        Metadata({ data: "json, name=updateTime" }),
+        SpeakeasyMetadata({ data: "json, name=updateTime" }),
         __metadata("design:type", String)
     ], Asset.prototype, "updateTime", void 0);
     return Asset;

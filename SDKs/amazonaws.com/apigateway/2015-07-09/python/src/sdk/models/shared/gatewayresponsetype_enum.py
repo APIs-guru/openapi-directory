@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class GatewayResponseTypeEnum(str, Enum):
     DEFAULT_4_XX = "DEFAULT_4XX"

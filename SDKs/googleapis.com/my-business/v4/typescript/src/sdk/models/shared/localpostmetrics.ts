@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { MetricValue } from "./metricvalue";
+
 
 
 // LocalPostMetrics
@@ -8,9 +8,9 @@ import { MetricValue } from "./metricvalue";
  * All the metrics requested for a Local Post.
 **/
 export class LocalPostMetrics extends SpeakeasyBase {
-  @Metadata({ data: "json, name=localPostName" })
+  @SpeakeasyMetadata({ data: "json, name=localPostName" })
   localPostName?: string;
 
-  @Metadata({ data: "json, name=metricValues", elemType: shared.MetricValue })
+  @SpeakeasyMetadata({ data: "json, name=metricValues", elemType: MetricValue })
   metricValues?: MetricValue[];
 }

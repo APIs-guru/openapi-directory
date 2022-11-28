@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// ScheduledTriggerProperties
+// Specifies the configuration details of a scheduled-trigger flow that you define. Currently, these settings only apply to the scheduled-trigger type.
 type ScheduledTriggerProperties struct {
 	DataPullMode       *DataPullModeEnum `json:"DataPullMode,omitempty"`
 	FirstExecutionFrom *time.Time        `json:"FirstExecutionFrom,omitempty"`

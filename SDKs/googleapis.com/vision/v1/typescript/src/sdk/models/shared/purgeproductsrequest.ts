@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ProductSetPurgeConfig } from "./productsetpurgeconfig";
+
 
 
 // PurgeProductsRequest
@@ -7,12 +8,12 @@ import { ProductSetPurgeConfig } from "./productsetpurgeconfig";
  * Request message for the `PurgeProducts` method.
 **/
 export class PurgeProductsRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=deleteOrphanProducts" })
+  @SpeakeasyMetadata({ data: "json, name=deleteOrphanProducts" })
   deleteOrphanProducts?: boolean;
 
-  @Metadata({ data: "json, name=force" })
+  @SpeakeasyMetadata({ data: "json, name=force" })
   force?: boolean;
 
-  @Metadata({ data: "json, name=productSetPurgeConfig" })
+  @SpeakeasyMetadata({ data: "json, name=productSetPurgeConfig" })
   productSetPurgeConfig?: ProductSetPurgeConfig;
 }

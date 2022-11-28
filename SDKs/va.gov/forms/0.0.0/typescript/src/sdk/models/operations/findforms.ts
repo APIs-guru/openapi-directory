@@ -1,47 +1,48 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class FindFormsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=query" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=query" })
   query?: string;
 }
 
 
 export class FindFormsSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
   apikey: shared.SchemeApikey;
 }
 
 
-export class FindFormsRequest extends SpeakeasyBase {
-  @Metadata()
-  queryParams: FindFormsQueryParams;
-
-  @Metadata()
-  security: FindFormsSecurity;
-}
-
-
 export class FindForms200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data: any[];
 }
 
 
+export class FindFormsRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  queryParams: FindFormsQueryParams;
+
+  @SpeakeasyMetadata()
+  security: FindFormsSecurity;
+}
+
+
 export class FindFormsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   findForms200ApplicationJsonObject?: FindForms200ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   findForms401ApplicationJsonAny?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   findForms429ApplicationJsonAny?: any;
 }

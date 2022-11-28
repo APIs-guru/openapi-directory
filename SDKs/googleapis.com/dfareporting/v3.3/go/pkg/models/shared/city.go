@@ -1,5 +1,7 @@
 package shared
 
+// City
+// Contains information about a city that can be targeted by ads.
 type City struct {
 	CountryCode   *string `json:"countryCode,omitempty"`
 	CountryDartID *string `json:"countryDartId,omitempty"`

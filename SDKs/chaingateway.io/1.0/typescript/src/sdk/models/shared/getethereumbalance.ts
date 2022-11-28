@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetEthereumBalance extends SpeakeasyBase {
-  @Metadata({ data: "json, name=balance" })
+  @SpeakeasyMetadata({ data: "json, name=balance" })
   balance: number;
 
-  @Metadata({ data: "json, name=ethereumaddress" })
+  @SpeakeasyMetadata({ data: "json, name=ethereumaddress" })
   ethereumaddress: string;
 
-  @Metadata({ data: "json, name=ok" })
+  @SpeakeasyMetadata({ data: "json, name=ok" })
   ok: boolean;
 }

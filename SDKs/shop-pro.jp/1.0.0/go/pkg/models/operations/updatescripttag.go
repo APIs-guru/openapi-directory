@@ -30,12 +30,6 @@ type UpdateScriptTagSecurity struct {
 	OAuth2 shared.SchemeOAuth2 `security:"scheme,type=oauth2"`
 }
 
-type UpdateScriptTagRequest struct {
-	PathParams UpdateScriptTagPathParams
-	Request    *UpdateScriptTagRequestBody `request:"mediaType=application/json"`
-	Security   UpdateScriptTagSecurity
-}
-
 type UpdateScriptTag200ApplicationJSONScriptTagDisplayScopeEnum string
 
 const (
@@ -55,6 +49,12 @@ type UpdateScriptTag200ApplicationJSONScriptTag struct {
 
 type UpdateScriptTag200ApplicationJSON struct {
 	ScriptTag *UpdateScriptTag200ApplicationJSONScriptTag `json:"script_tag,omitempty"`
+}
+
+type UpdateScriptTagRequest struct {
+	PathParams UpdateScriptTagPathParams
+	Request    *UpdateScriptTagRequestBody `request:"mediaType=application/json"`
+	Security   UpdateScriptTagSecurity
 }
 
 type UpdateScriptTagResponse struct {

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Date } from "./date";
 export var DiagnosticsAlertsEnum;
 (function (DiagnosticsAlertsEnum) {
@@ -41,15 +41,15 @@ var Diagnostics = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=alerts" }),
+        SpeakeasyMetadata({ data: "json, name=alerts" }),
         __metadata("design:type", Array)
     ], Diagnostics.prototype, "alerts", void 0);
     __decorate([
-        Metadata({ data: "json, name=beaconName" }),
+        SpeakeasyMetadata({ data: "json, name=beaconName" }),
         __metadata("design:type", String)
     ], Diagnostics.prototype, "beaconName", void 0);
     __decorate([
-        Metadata({ data: "json, name=estimatedLowBatteryDate" }),
+        SpeakeasyMetadata({ data: "json, name=estimatedLowBatteryDate" }),
         __metadata("design:type", Date)
     ], Diagnostics.prototype, "estimatedLowBatteryDate", void 0);
     return Diagnostics;

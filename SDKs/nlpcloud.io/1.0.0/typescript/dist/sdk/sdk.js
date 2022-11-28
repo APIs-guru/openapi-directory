@@ -10,14 +10,11 @@ var __assign = (this && this.__assign) || function () {
     return __assign.apply(this, arguments);
 };
 import axios from "axios";
-import { MatchContentType } from "../internal/utils/contenttype";
+import FormData from "form-data";
 import * as operations from "./models/operations";
-import { SerializeRequestBody } from "../internal/utils/requestbody";
-import FormData from 'form-data';
-import { CreateSecurityClient } from "../internal/utils/security";
-import * as utils from "../internal/utils/utils";
+import * as utils from "../internal/utils";
 import { Security } from "./models/shared";
-var Servers = [
+export var ServerList = [
     "https://nlpcloud.io",
 ];
 export function WithServerURL(serverURL, params) {
@@ -25,12 +22,12 @@ export function WithServerURL(serverURL, params) {
         if (params != null) {
             serverURL = utils.ReplaceParameters(serverURL, params);
         }
-        sdk.serverURL = serverURL;
+        sdk._serverURL = serverURL;
     };
 }
 export function WithClient(client) {
     return function (sdk) {
-        sdk.defaultClient = client;
+        sdk._defaultClient = client;
     };
 }
 export function WithSecurity(security) {
@@ -38,7 +35,7 @@ export function WithSecurity(security) {
         security = new Security(security);
     }
     return function (sdk) {
-        sdk.security = security;
+        sdk._security = security;
     };
 }
 var SDK = /** @class */ (function () {
@@ -48,40 +45,45 @@ var SDK = /** @class */ (function () {
             opts[_i] = arguments[_i];
         }
         var _this = this;
+        this._language = "typescript";
+        this._sdkVersion = "0.0.1";
+        this._genVersion = "internal";
         opts.forEach(function (o) { return o(_this); });
-        if (this.serverURL == "") {
-            this.serverURL = Servers[0];
+        if (this._serverURL == "") {
+            this._serverURL = ServerList[0];
         }
-        if (!this.defaultClient) {
-            this.defaultClient = axios.create({ baseURL: this.serverURL });
+        if (!this._defaultClient) {
+            this._defaultClient = axios.create({ baseURL: this._serverURL });
         }
-        if (!this.securityClient) {
-            if (this.security) {
-                this.securityClient = CreateSecurityClient(this.defaultClient, this.security);
+        if (!this._securityClient) {
+            if (this._security) {
+                this._securityClient = utils.CreateSecurityClient(this._defaultClient, this._security);
             }
             else {
-                this.securityClient = this.defaultClient;
+                this._securityClient = this._defaultClient;
             }
         }
     }
-    // ReadDependenciesV1EnCoreWebSmDependenciesPost - Read Dependencies
-    SDK.prototype.ReadDependenciesV1EnCoreWebSmDependenciesPost = function (req, config) {
+    /**
+     * readDependenciesV1EnCoreWebSmDependenciesPost - Read Dependencies
+    **/
+    SDK.prototype.readDependenciesV1EnCoreWebSmDependenciesPost = function (req, config) {
         var _a;
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.ReadDependenciesV1EnCoreWebSmDependenciesPostRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = baseURL.replace(/\/$/, "") + "/v1/en_core_web_sm/dependencies";
         var _b = [{}, {}], reqBodyHeaders = _b[0], reqBody = _b[1];
         try {
-            _a = SerializeRequestBody(req), reqBodyHeaders = _a[0], reqBody = _a[1];
+            _a = utils.SerializeRequestBody(req), reqBodyHeaders = _a[0], reqBody = _a[1];
         }
         catch (e) {
             if (e instanceof Error) {
                 throw new Error("Error serializing request body, cause: ".concat(e.message));
             }
         }
-        var client = this.securityClient;
+        var client = this._securityClient;
         var headers = __assign(__assign({}, reqBodyHeaders), config === null || config === void 0 ? void 0 : config.headers);
         var body;
         if (reqBody instanceof FormData)
@@ -91,21 +93,20 @@ var SDK = /** @class */ (function () {
         if (body == null || Object.keys(body).length === 0)
             throw new Error("request body is required");
         return client
-            .post(url, body, __assign({ headers: headers }, config))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "post", headers: headers, data: body }, config)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
-                    if (MatchContentType(contentType, "application/json")) {
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
+                    if (utils.MatchContentType(contentType, "application/json")) {
                         res.dependenciesOut = httpRes === null || httpRes === void 0 ? void 0 : httpRes.data;
                     }
                     break;
-                case 422:
-                    if (MatchContentType(contentType, "application/json")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 422:
+                    if (utils.MatchContentType(contentType, "application/json")) {
                         res.httpValidationError = httpRes === null || httpRes === void 0 ? void 0 : httpRes.data;
                     }
                     break;
@@ -114,24 +115,26 @@ var SDK = /** @class */ (function () {
         })
             .catch(function (error) { throw error; });
     };
-    // ReadEntitiesV1EnCoreWebSmEntitiesPost - Read Entities
-    SDK.prototype.ReadEntitiesV1EnCoreWebSmEntitiesPost = function (req, config) {
+    /**
+     * readEntitiesV1EnCoreWebSmEntitiesPost - Read Entities
+    **/
+    SDK.prototype.readEntitiesV1EnCoreWebSmEntitiesPost = function (req, config) {
         var _a;
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.ReadEntitiesV1EnCoreWebSmEntitiesPostRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = baseURL.replace(/\/$/, "") + "/v1/en_core_web_sm/entities";
         var _b = [{}, {}], reqBodyHeaders = _b[0], reqBody = _b[1];
         try {
-            _a = SerializeRequestBody(req), reqBodyHeaders = _a[0], reqBody = _a[1];
+            _a = utils.SerializeRequestBody(req), reqBodyHeaders = _a[0], reqBody = _a[1];
         }
         catch (e) {
             if (e instanceof Error) {
                 throw new Error("Error serializing request body, cause: ".concat(e.message));
             }
         }
-        var client = this.securityClient;
+        var client = this._securityClient;
         var headers = __assign(__assign({}, reqBodyHeaders), config === null || config === void 0 ? void 0 : config.headers);
         var body;
         if (reqBody instanceof FormData)
@@ -141,21 +144,20 @@ var SDK = /** @class */ (function () {
         if (body == null || Object.keys(body).length === 0)
             throw new Error("request body is required");
         return client
-            .post(url, body, __assign({ headers: headers }, config))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "post", headers: headers, data: body }, config)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
-                    if (MatchContentType(contentType, "application/json")) {
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
+                    if (utils.MatchContentType(contentType, "application/json")) {
                         res.entitiesOut = httpRes === null || httpRes === void 0 ? void 0 : httpRes.data;
                     }
                     break;
-                case 422:
-                    if (MatchContentType(contentType, "application/json")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 422:
+                    if (utils.MatchContentType(contentType, "application/json")) {
                         res.httpValidationError = httpRes === null || httpRes === void 0 ? void 0 : httpRes.data;
                     }
                     break;
@@ -164,22 +166,23 @@ var SDK = /** @class */ (function () {
         })
             .catch(function (error) { throw error; });
     };
-    // ReadRootV1EnCoreWebSmGet - Read Root
-    SDK.prototype.ReadRootV1EnCoreWebSmGet = function (config) {
-        var baseURL = this.serverURL;
+    /**
+     * readRootV1EnCoreWebSmGet - Read Root
+    **/
+    SDK.prototype.readRootV1EnCoreWebSmGet = function (config) {
+        var baseURL = this._serverURL;
         var url = baseURL.replace(/\/$/, "") + "/v1/en_core_web_sm/";
-        var client = this.securityClient;
+        var client = this._securityClient;
         return client
-            .get(url, __assign({}, config))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get" }, config)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
-                    if (MatchContentType(contentType, "application/json")) {
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
+                    if (utils.MatchContentType(contentType, "application/json")) {
                         res.readRootV1EnCoreWebSmGet200ApplicationJsonAny = httpRes === null || httpRes === void 0 ? void 0 : httpRes.data;
                     }
                     break;
@@ -188,24 +191,26 @@ var SDK = /** @class */ (function () {
         })
             .catch(function (error) { throw error; });
     };
-    // ReadSentenceDependenciesV1EnCoreWebSmSentenceDependenciesPost - Read Sentence Dependencies
-    SDK.prototype.ReadSentenceDependenciesV1EnCoreWebSmSentenceDependenciesPost = function (req, config) {
+    /**
+     * readSentenceDependenciesV1EnCoreWebSmSentenceDependenciesPost - Read Sentence Dependencies
+    **/
+    SDK.prototype.readSentenceDependenciesV1EnCoreWebSmSentenceDependenciesPost = function (req, config) {
         var _a;
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.ReadSentenceDependenciesV1EnCoreWebSmSentenceDependenciesPostRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = baseURL.replace(/\/$/, "") + "/v1/en_core_web_sm/sentence-dependencies";
         var _b = [{}, {}], reqBodyHeaders = _b[0], reqBody = _b[1];
         try {
-            _a = SerializeRequestBody(req), reqBodyHeaders = _a[0], reqBody = _a[1];
+            _a = utils.SerializeRequestBody(req), reqBodyHeaders = _a[0], reqBody = _a[1];
         }
         catch (e) {
             if (e instanceof Error) {
                 throw new Error("Error serializing request body, cause: ".concat(e.message));
             }
         }
-        var client = this.securityClient;
+        var client = this._securityClient;
         var headers = __assign(__assign({}, reqBodyHeaders), config === null || config === void 0 ? void 0 : config.headers);
         var body;
         if (reqBody instanceof FormData)
@@ -215,21 +220,20 @@ var SDK = /** @class */ (function () {
         if (body == null || Object.keys(body).length === 0)
             throw new Error("request body is required");
         return client
-            .post(url, body, __assign({ headers: headers }, config))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "post", headers: headers, data: body }, config)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
-                    if (MatchContentType(contentType, "application/json")) {
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
+                    if (utils.MatchContentType(contentType, "application/json")) {
                         res.sentenceDependenciesOut = httpRes === null || httpRes === void 0 ? void 0 : httpRes.data;
                     }
                     break;
-                case 422:
-                    if (MatchContentType(contentType, "application/json")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 422:
+                    if (utils.MatchContentType(contentType, "application/json")) {
                         res.httpValidationError = httpRes === null || httpRes === void 0 ? void 0 : httpRes.data;
                     }
                     break;
@@ -238,22 +242,23 @@ var SDK = /** @class */ (function () {
         })
             .catch(function (error) { throw error; });
     };
-    // ReadVersionV1EnCoreWebSmVersionGet - Read Version
-    SDK.prototype.ReadVersionV1EnCoreWebSmVersionGet = function (config) {
-        var baseURL = this.serverURL;
+    /**
+     * readVersionV1EnCoreWebSmVersionGet - Read Version
+    **/
+    SDK.prototype.readVersionV1EnCoreWebSmVersionGet = function (config) {
+        var baseURL = this._serverURL;
         var url = baseURL.replace(/\/$/, "") + "/v1/en_core_web_sm/version";
-        var client = this.securityClient;
+        var client = this._securityClient;
         return client
-            .get(url, __assign({}, config))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get" }, config)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
-                    if (MatchContentType(contentType, "application/json")) {
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
+                    if (utils.MatchContentType(contentType, "application/json")) {
                         res.versionOut = httpRes === null || httpRes === void 0 ? void 0 : httpRes.data;
                     }
                     break;

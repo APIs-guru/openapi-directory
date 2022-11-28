@@ -5,10 +5,6 @@ type SetPublicStatusUsingGetQueryParams struct {
 	PublicStatus *string `queryParam:"style=form,explode=true,name=publicStatus"`
 }
 
-type SetPublicStatusUsingGetRequest struct {
-	QueryParams SetPublicStatusUsingGetQueryParams
-}
-
 type SetPublicStatusUsingGet200ApplicationJSON struct {
 	Code    *int64                 `json:"code,omitempty"`
 	Data    map[string]interface{} `json:"data,omitempty"`
@@ -31,6 +27,10 @@ type SetPublicStatusUsingGet500ApplicationJSON struct {
 	Code    *int64                 `json:"code,omitempty"`
 	Data    map[string]interface{} `json:"data,omitempty"`
 	Message *string                `json:"message,omitempty"`
+}
+
+type SetPublicStatusUsingGetRequest struct {
+	QueryParams SetPublicStatusUsingGetQueryParams
 }
 
 type SetPublicStatusUsingGetResponse struct {

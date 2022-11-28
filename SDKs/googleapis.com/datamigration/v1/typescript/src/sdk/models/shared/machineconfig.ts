@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // MachineConfig
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * MachineConfig describes the configuration of a machine.
 **/
 export class MachineConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=cpuCount" })
+  @SpeakeasyMetadata({ data: "json, name=cpuCount" })
   cpuCount?: number;
 }

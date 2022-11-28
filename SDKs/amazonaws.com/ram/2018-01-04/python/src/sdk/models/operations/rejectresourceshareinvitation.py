@@ -1,6 +1,10 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -18,19 +22,20 @@ class RejectResourceShareInvitationHeaders:
 @dataclass_json
 @dataclass
 class RejectResourceShareInvitationRequestBody:
-    client_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'clientToken' }})
-    resource_share_invitation_arn: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'resourceShareInvitationArn' }})
+    resource_share_invitation_arn: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('resourceShareInvitationArn') }})
+    client_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('clientToken') }})
     
 
 @dataclass
 class RejectResourceShareInvitationRequest:
-    headers: RejectResourceShareInvitationHeaders = field(default=None)
-    request: RejectResourceShareInvitationRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: RejectResourceShareInvitationHeaders = field()
+    request: RejectResourceShareInvitationRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class RejectResourceShareInvitationResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     idempotent_parameter_mismatch_exception: Optional[Any] = field(default=None)
     invalid_client_token_exception: Optional[Any] = field(default=None)
     malformed_arn_exception: Optional[Any] = field(default=None)
@@ -42,5 +47,4 @@ class RejectResourceShareInvitationResponse:
     resource_share_invitation_expired_exception: Optional[Any] = field(default=None)
     server_internal_exception: Optional[Any] = field(default=None)
     service_unavailable_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

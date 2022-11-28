@@ -1,5 +1,7 @@
 package shared
 
+// DirectConnectGateway
+// Information about a Direct Connect gateway, which enables you to connect virtual interfaces and virtual private gateway or transit gateways.
 type DirectConnectGateway struct {
 	AmazonSideAsn             *int64                         `json:"amazonSideAsn,omitempty"`
 	DirectConnectGatewayID    *string                        `json:"directConnectGatewayId,omitempty"`

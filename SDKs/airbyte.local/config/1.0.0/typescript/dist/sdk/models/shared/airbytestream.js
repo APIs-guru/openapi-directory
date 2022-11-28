@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // AirbyteStream
 /**
  * the immutable schema defined by the source
@@ -33,31 +33,31 @@ var AirbyteStream = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=defaultCursorField" }),
+        SpeakeasyMetadata({ data: "json, name=defaultCursorField" }),
         __metadata("design:type", Array)
     ], AirbyteStream.prototype, "defaultCursorField", void 0);
     __decorate([
-        Metadata({ data: "json, name=jsonSchema" }),
+        SpeakeasyMetadata({ data: "json, name=jsonSchema" }),
         __metadata("design:type", Map)
     ], AirbyteStream.prototype, "jsonSchema", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], AirbyteStream.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=namespace" }),
+        SpeakeasyMetadata({ data: "json, name=namespace" }),
         __metadata("design:type", String)
     ], AirbyteStream.prototype, "namespace", void 0);
     __decorate([
-        Metadata({ data: "json, name=sourceDefinedCursor" }),
+        SpeakeasyMetadata({ data: "json, name=sourceDefinedCursor" }),
         __metadata("design:type", Boolean)
     ], AirbyteStream.prototype, "sourceDefinedCursor", void 0);
     __decorate([
-        Metadata({ data: "json, name=sourceDefinedPrimaryKey" }),
+        SpeakeasyMetadata({ data: "json, name=sourceDefinedPrimaryKey" }),
         __metadata("design:type", Array)
     ], AirbyteStream.prototype, "sourceDefinedPrimaryKey", void 0);
     __decorate([
-        Metadata({ data: "json, name=supportedSyncModes" }),
+        SpeakeasyMetadata({ data: "json, name=supportedSyncModes" }),
         __metadata("design:type", Array)
     ], AirbyteStream.prototype, "supportedSyncModes", void 0);
     return AirbyteStream;

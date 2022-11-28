@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class FirebaseProjectsRemoveAnalyticsPathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,14 +26,14 @@ class FirebaseProjectsRemoveAnalyticsQueryParams:
 
 @dataclass
 class FirebaseProjectsRemoveAnalyticsSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class FirebaseProjectsRemoveAnalyticsSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -43,15 +44,15 @@ class FirebaseProjectsRemoveAnalyticsSecurity:
 
 @dataclass
 class FirebaseProjectsRemoveAnalyticsRequest:
-    path_params: FirebaseProjectsRemoveAnalyticsPathParams = field(default=None)
-    query_params: FirebaseProjectsRemoveAnalyticsQueryParams = field(default=None)
+    path_params: FirebaseProjectsRemoveAnalyticsPathParams = field()
+    query_params: FirebaseProjectsRemoveAnalyticsQueryParams = field()
+    security: FirebaseProjectsRemoveAnalyticsSecurity = field()
     request: Optional[shared.RemoveAnalyticsRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: FirebaseProjectsRemoveAnalyticsSecurity = field(default=None)
     
 
 @dataclass
 class FirebaseProjectsRemoveAnalyticsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     empty: Optional[dict[str, Any]] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // PropertyDisplayOptions
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The display options for a property.
 **/
 export class PropertyDisplayOptions extends SpeakeasyBase {
-  @Metadata({ data: "json, name=displayLabel" })
+  @SpeakeasyMetadata({ data: "json, name=displayLabel" })
   displayLabel?: string;
 }

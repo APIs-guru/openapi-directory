@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { InputContext } from "./inputcontext";
 import { OutputContext } from "./outputcontext";
+
 
 
 // IntentSummary
@@ -9,24 +9,24 @@ import { OutputContext } from "./outputcontext";
  * Summary information about an intent returned by the <code>ListIntents</code> operation.
 **/
 export class IntentSummary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=inputContexts", elemType: shared.InputContext })
+  @SpeakeasyMetadata({ data: "json, name=inputContexts", elemType: InputContext })
   inputContexts?: InputContext[];
 
-  @Metadata({ data: "json, name=intentId" })
+  @SpeakeasyMetadata({ data: "json, name=intentId" })
   intentId?: string;
 
-  @Metadata({ data: "json, name=intentName" })
+  @SpeakeasyMetadata({ data: "json, name=intentName" })
   intentName?: string;
 
-  @Metadata({ data: "json, name=lastUpdatedDateTime" })
+  @SpeakeasyMetadata({ data: "json, name=lastUpdatedDateTime" })
   lastUpdatedDateTime?: Date;
 
-  @Metadata({ data: "json, name=outputContexts", elemType: shared.OutputContext })
+  @SpeakeasyMetadata({ data: "json, name=outputContexts", elemType: OutputContext })
   outputContexts?: OutputContext[];
 
-  @Metadata({ data: "json, name=parentIntentSignature" })
+  @SpeakeasyMetadata({ data: "json, name=parentIntentSignature" })
   parentIntentSignature?: string;
 }

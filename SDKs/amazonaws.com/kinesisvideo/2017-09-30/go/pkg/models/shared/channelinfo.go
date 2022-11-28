@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// ChannelInfo
+// A structure that encapsulates a signaling channel's metadata and properties.
 type ChannelInfo struct {
 	ChannelArn                *string                    `json:"ChannelARN,omitempty"`
 	ChannelName               *string                    `json:"ChannelName,omitempty"`

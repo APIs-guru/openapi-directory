@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudChannelV1Media } from "./googlecloudchannelv1media";
+
 
 
 // GoogleCloudChannelV1MarketingInfo
@@ -7,12 +8,12 @@ import { GoogleCloudChannelV1Media } from "./googlecloudchannelv1media";
  * Represents the marketing information for a Product, SKU or Offer.
 **/
 export class GoogleCloudChannelV1MarketingInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=defaultLogo" })
+  @SpeakeasyMetadata({ data: "json, name=defaultLogo" })
   defaultLogo?: GoogleCloudChannelV1Media;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=displayName" })
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
   displayName?: string;
 }

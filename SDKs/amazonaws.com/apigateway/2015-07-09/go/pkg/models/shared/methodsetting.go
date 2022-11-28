@@ -1,5 +1,7 @@
 package shared
 
+// MethodSetting
+// Specifies the method setting properties.
 type MethodSetting struct {
 	CacheDataEncrypted                     *bool                                       `json:"cacheDataEncrypted,omitempty"`
 	CacheTTLInSeconds                      *int64                                      `json:"cacheTtlInSeconds,omitempty"`

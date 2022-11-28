@@ -1,6 +1,7 @@
 
 
+
 export enum ContainerServiceMetricNameEnum {
-    CpuUtilization = "CPUUtilization"
-,    MemoryUtilization = "MemoryUtilization"
+    CpuUtilization = "CPUUtilization",
+    MemoryUtilization = "MemoryUtilization"
 }

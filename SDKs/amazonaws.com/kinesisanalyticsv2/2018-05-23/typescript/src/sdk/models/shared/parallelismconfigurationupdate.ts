@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ConfigurationTypeEnum } from "./configurationtypeenum";
+
 
 
 // ParallelismConfigurationUpdate
@@ -7,15 +8,15 @@ import { ConfigurationTypeEnum } from "./configurationtypeenum";
  * Describes updates to parameters for how an application executes multiple tasks simultaneously.
 **/
 export class ParallelismConfigurationUpdate extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AutoScalingEnabledUpdate" })
+  @SpeakeasyMetadata({ data: "json, name=AutoScalingEnabledUpdate" })
   autoScalingEnabledUpdate?: boolean;
 
-  @Metadata({ data: "json, name=ConfigurationTypeUpdate" })
+  @SpeakeasyMetadata({ data: "json, name=ConfigurationTypeUpdate" })
   configurationTypeUpdate?: ConfigurationTypeEnum;
 
-  @Metadata({ data: "json, name=ParallelismPerKPUUpdate" })
+  @SpeakeasyMetadata({ data: "json, name=ParallelismPerKPUUpdate" })
   parallelismPerKpuUpdate?: number;
 
-  @Metadata({ data: "json, name=ParallelismUpdate" })
+  @SpeakeasyMetadata({ data: "json, name=ParallelismUpdate" })
   parallelismUpdate?: number;
 }

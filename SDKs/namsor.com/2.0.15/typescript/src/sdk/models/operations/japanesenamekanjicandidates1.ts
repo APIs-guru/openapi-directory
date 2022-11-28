@@ -1,38 +1,39 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class JapaneseNameKanjiCandidates1PathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=japaneseGivenNameLatin" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=japaneseGivenNameLatin" })
   japaneseGivenNameLatin: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=japaneseSurnameLatin" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=japaneseSurnameLatin" })
   japaneseSurnameLatin: string;
 }
 
 
 export class JapaneseNameKanjiCandidates1Security extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
   apiKey: shared.SchemeApiKey;
 }
 
 
 export class JapaneseNameKanjiCandidates1Request extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: JapaneseNameKanjiCandidates1PathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: JapaneseNameKanjiCandidates1Security;
 }
 
 
 export class JapaneseNameKanjiCandidates1Response extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   nameMatchCandidatesOut?: shared.NameMatchCandidatesOut;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

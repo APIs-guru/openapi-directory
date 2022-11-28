@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ActionCodeEnum } from "./actioncodeenum";
 import { InventoryRetrievalJobDescription } from "./inventoryretrievaljobdescription";
 import { OutputLocation } from "./outputlocation";
@@ -38,87 +38,87 @@ var GlacierJobDescription = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Action" }),
+        SpeakeasyMetadata({ data: "json, name=Action" }),
         __metadata("design:type", String)
     ], GlacierJobDescription.prototype, "action", void 0);
     __decorate([
-        Metadata({ data: "json, name=ArchiveId" }),
+        SpeakeasyMetadata({ data: "json, name=ArchiveId" }),
         __metadata("design:type", String)
     ], GlacierJobDescription.prototype, "archiveId", void 0);
     __decorate([
-        Metadata({ data: "json, name=ArchiveSHA256TreeHash" }),
+        SpeakeasyMetadata({ data: "json, name=ArchiveSHA256TreeHash" }),
         __metadata("design:type", String)
     ], GlacierJobDescription.prototype, "archiveSha256TreeHash", void 0);
     __decorate([
-        Metadata({ data: "json, name=ArchiveSizeInBytes" }),
+        SpeakeasyMetadata({ data: "json, name=ArchiveSizeInBytes" }),
         __metadata("design:type", Number)
     ], GlacierJobDescription.prototype, "archiveSizeInBytes", void 0);
     __decorate([
-        Metadata({ data: "json, name=Completed" }),
+        SpeakeasyMetadata({ data: "json, name=Completed" }),
         __metadata("design:type", Boolean)
     ], GlacierJobDescription.prototype, "completed", void 0);
     __decorate([
-        Metadata({ data: "json, name=CompletionDate" }),
+        SpeakeasyMetadata({ data: "json, name=CompletionDate" }),
         __metadata("design:type", String)
     ], GlacierJobDescription.prototype, "completionDate", void 0);
     __decorate([
-        Metadata({ data: "json, name=CreationDate" }),
+        SpeakeasyMetadata({ data: "json, name=CreationDate" }),
         __metadata("design:type", String)
     ], GlacierJobDescription.prototype, "creationDate", void 0);
     __decorate([
-        Metadata({ data: "json, name=InventoryRetrievalParameters" }),
+        SpeakeasyMetadata({ data: "json, name=InventoryRetrievalParameters" }),
         __metadata("design:type", InventoryRetrievalJobDescription)
     ], GlacierJobDescription.prototype, "inventoryRetrievalParameters", void 0);
     __decorate([
-        Metadata({ data: "json, name=InventorySizeInBytes" }),
+        SpeakeasyMetadata({ data: "json, name=InventorySizeInBytes" }),
         __metadata("design:type", Number)
     ], GlacierJobDescription.prototype, "inventorySizeInBytes", void 0);
     __decorate([
-        Metadata({ data: "json, name=JobDescription" }),
+        SpeakeasyMetadata({ data: "json, name=JobDescription" }),
         __metadata("design:type", String)
     ], GlacierJobDescription.prototype, "jobDescription", void 0);
     __decorate([
-        Metadata({ data: "json, name=JobId" }),
+        SpeakeasyMetadata({ data: "json, name=JobId" }),
         __metadata("design:type", String)
     ], GlacierJobDescription.prototype, "jobId", void 0);
     __decorate([
-        Metadata({ data: "json, name=JobOutputPath" }),
+        SpeakeasyMetadata({ data: "json, name=JobOutputPath" }),
         __metadata("design:type", String)
     ], GlacierJobDescription.prototype, "jobOutputPath", void 0);
     __decorate([
-        Metadata({ data: "json, name=OutputLocation" }),
+        SpeakeasyMetadata({ data: "json, name=OutputLocation" }),
         __metadata("design:type", OutputLocation)
     ], GlacierJobDescription.prototype, "outputLocation", void 0);
     __decorate([
-        Metadata({ data: "json, name=RetrievalByteRange" }),
+        SpeakeasyMetadata({ data: "json, name=RetrievalByteRange" }),
         __metadata("design:type", String)
     ], GlacierJobDescription.prototype, "retrievalByteRange", void 0);
     __decorate([
-        Metadata({ data: "json, name=SHA256TreeHash" }),
+        SpeakeasyMetadata({ data: "json, name=SHA256TreeHash" }),
         __metadata("design:type", String)
     ], GlacierJobDescription.prototype, "sha256TreeHash", void 0);
     __decorate([
-        Metadata({ data: "json, name=SNSTopic" }),
+        SpeakeasyMetadata({ data: "json, name=SNSTopic" }),
         __metadata("design:type", String)
     ], GlacierJobDescription.prototype, "snsTopic", void 0);
     __decorate([
-        Metadata({ data: "json, name=SelectParameters" }),
+        SpeakeasyMetadata({ data: "json, name=SelectParameters" }),
         __metadata("design:type", SelectParameters)
     ], GlacierJobDescription.prototype, "selectParameters", void 0);
     __decorate([
-        Metadata({ data: "json, name=StatusCode" }),
+        SpeakeasyMetadata({ data: "json, name=StatusCode" }),
         __metadata("design:type", String)
     ], GlacierJobDescription.prototype, "statusCode", void 0);
     __decorate([
-        Metadata({ data: "json, name=StatusMessage" }),
+        SpeakeasyMetadata({ data: "json, name=StatusMessage" }),
         __metadata("design:type", String)
     ], GlacierJobDescription.prototype, "statusMessage", void 0);
     __decorate([
-        Metadata({ data: "json, name=Tier" }),
+        SpeakeasyMetadata({ data: "json, name=Tier" }),
         __metadata("design:type", String)
     ], GlacierJobDescription.prototype, "tier", void 0);
     __decorate([
-        Metadata({ data: "json, name=VaultARN" }),
+        SpeakeasyMetadata({ data: "json, name=VaultARN" }),
         __metadata("design:type", String)
     ], GlacierJobDescription.prototype, "vaultArn", void 0);
     return GlacierJobDescription;

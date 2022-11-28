@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PricingPlanEnum } from "./pricingplanenum";
+
 
 
 // ListGeofenceCollectionsResponseEntry
@@ -7,21 +8,21 @@ import { PricingPlanEnum } from "./pricingplanenum";
  * Contains the geofence collection details.
 **/
 export class ListGeofenceCollectionsResponseEntry extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CollectionName" })
+  @SpeakeasyMetadata({ data: "json, name=CollectionName" })
   collectionName: string;
 
-  @Metadata({ data: "json, name=CreateTime" })
+  @SpeakeasyMetadata({ data: "json, name=CreateTime" })
   createTime: Date;
 
-  @Metadata({ data: "json, name=Description" })
+  @SpeakeasyMetadata({ data: "json, name=Description" })
   description: string;
 
-  @Metadata({ data: "json, name=PricingPlan" })
+  @SpeakeasyMetadata({ data: "json, name=PricingPlan" })
   pricingPlan: PricingPlanEnum;
 
-  @Metadata({ data: "json, name=PricingPlanDataSource" })
+  @SpeakeasyMetadata({ data: "json, name=PricingPlanDataSource" })
   pricingPlanDataSource?: string;
 
-  @Metadata({ data: "json, name=UpdateTime" })
+  @SpeakeasyMetadata({ data: "json, name=UpdateTime" })
   updateTime: Date;
 }

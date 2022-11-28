@@ -1,40 +1,41 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class RegistryCreateApiVersionPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=api" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=api" })
   api: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=project" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=project" })
   project: string;
 }
 
 
 export class RegistryCreateApiVersionQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=api_version_id" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=api_version_id" })
   apiVersionId?: string;
 }
 
 
 export class RegistryCreateApiVersionRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: RegistryCreateApiVersionPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: RegistryCreateApiVersionQueryParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: any;
 }
 
 
 export class RegistryCreateApiVersionResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   apiVersion?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

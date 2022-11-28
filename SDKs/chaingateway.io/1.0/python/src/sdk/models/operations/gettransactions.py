@@ -5,18 +5,18 @@ from sdk.models import shared
 
 @dataclass
 class GetTransactionsHeaders:
-    authorization: str = field(default=None, metadata={'header': { 'field_name': 'Authorization', 'style': 'simple', 'explode': False }})
+    authorization: str = field(metadata={'header': { 'field_name': 'Authorization', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetTransactionsRequest:
-    headers: GetTransactionsHeaders = field(default=None)
-    request: shared.GetTransactionsRequest = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: GetTransactionsHeaders = field()
+    request: shared.GetTransactionsRequest = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class GetTransactionsResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     get_transactions: Optional[shared.GetTransactions] = field(default=None)
     

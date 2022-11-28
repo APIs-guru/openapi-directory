@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ObPartyRelationships1Account
@@ -6,10 +7,10 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Relationship to the Account resource.
 **/
 export class ObPartyRelationships1Account extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Id" })
+  @SpeakeasyMetadata({ data: "json, name=Id" })
   id: string;
 
-  @Metadata({ data: "json, name=Related" })
+  @SpeakeasyMetadata({ data: "json, name=Related" })
   related: string;
 }
 
@@ -19,6 +20,6 @@ export class ObPartyRelationships1Account extends SpeakeasyBase {
  * The Party's relationships with other resources.
 **/
 export class ObPartyRelationships1 extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Account" })
+  @SpeakeasyMetadata({ data: "json, name=Account" })
   account?: ObPartyRelationships1Account;
 }

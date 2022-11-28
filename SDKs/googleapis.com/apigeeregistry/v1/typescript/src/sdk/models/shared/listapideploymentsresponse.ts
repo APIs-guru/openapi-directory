@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ApiDeployment } from "./apideployment";
+
 
 
 // ListApiDeploymentsResponse
@@ -8,9 +8,9 @@ import { ApiDeployment } from "./apideployment";
  * Response message for ListApiDeployments.
 **/
 export class ListApiDeploymentsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=apiDeployments", elemType: shared.ApiDeployment })
+  @SpeakeasyMetadata({ data: "json, name=apiDeployments", elemType: ApiDeployment })
   apiDeployments?: ApiDeployment[];
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 }

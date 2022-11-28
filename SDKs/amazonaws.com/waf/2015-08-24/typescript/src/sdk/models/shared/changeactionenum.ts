@@ -1,6 +1,7 @@
 
 
+
 export enum ChangeActionEnum {
-    Insert = "INSERT"
-,    Delete = "DELETE"
+    Insert = "INSERT",
+    Delete = "DELETE"
 }

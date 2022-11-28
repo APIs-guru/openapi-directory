@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Operation } from "./operation";
 // CheckRequest
 /**
@@ -34,19 +34,19 @@ var CheckRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=operation" }),
+        SpeakeasyMetadata({ data: "json, name=operation" }),
         __metadata("design:type", Operation)
     ], CheckRequest.prototype, "operation", void 0);
     __decorate([
-        Metadata({ data: "json, name=requestProjectSettings" }),
+        SpeakeasyMetadata({ data: "json, name=requestProjectSettings" }),
         __metadata("design:type", Boolean)
     ], CheckRequest.prototype, "requestProjectSettings", void 0);
     __decorate([
-        Metadata({ data: "json, name=serviceConfigId" }),
+        SpeakeasyMetadata({ data: "json, name=serviceConfigId" }),
         __metadata("design:type", String)
     ], CheckRequest.prototype, "serviceConfigId", void 0);
     __decorate([
-        Metadata({ data: "json, name=skipActivationCheck" }),
+        SpeakeasyMetadata({ data: "json, name=skipActivationCheck" }),
         __metadata("design:type", Boolean)
     ], CheckRequest.prototype, "skipActivationCheck", void 0);
     return CheckRequest;

@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ModifyBackupAttributesRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=BackupId" })
+  @SpeakeasyMetadata({ data: "json, name=BackupId" })
   backupId: string;
 
-  @Metadata({ data: "json, name=NeverExpires" })
+  @SpeakeasyMetadata({ data: "json, name=NeverExpires" })
   neverExpires: boolean;
 }

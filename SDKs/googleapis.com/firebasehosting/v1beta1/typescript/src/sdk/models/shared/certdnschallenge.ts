@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // CertDnsChallenge
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Represents a DNS certificate challenge.
 **/
 export class CertDnsChallenge extends SpeakeasyBase {
-  @Metadata({ data: "json, name=domainName" })
+  @SpeakeasyMetadata({ data: "json, name=domainName" })
   domainName?: string;
 
-  @Metadata({ data: "json, name=token" })
+  @SpeakeasyMetadata({ data: "json, name=token" })
   token?: string;
 }

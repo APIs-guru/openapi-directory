@@ -12,11 +12,6 @@ type GetCSSTemplateInfoSecurity struct {
 	Jwt shared.SchemeJwt `security:"scheme,type=http,subtype=bearer"`
 }
 
-type GetCSSTemplateInfoRequest struct {
-	QueryParams GetCSSTemplateInfoQueryParams
-	Security    GetCSSTemplateInfoSecurity
-}
-
 type GetCSSTemplateInfo200ApplicationJSONFiltersColumnName struct {
 	Name     *string `json:"name,omitempty"`
 	Operator *string `json:"operator,omitempty"`
@@ -47,6 +42,11 @@ type GetCSSTemplateInfo422ApplicationJSON struct {
 
 type GetCSSTemplateInfo500ApplicationJSON struct {
 	Message *string `json:"message,omitempty"`
+}
+
+type GetCSSTemplateInfoRequest struct {
+	QueryParams GetCSSTemplateInfoQueryParams
+	Security    GetCSSTemplateInfoSecurity
 }
 
 type GetCSSTemplateInfoResponse struct {

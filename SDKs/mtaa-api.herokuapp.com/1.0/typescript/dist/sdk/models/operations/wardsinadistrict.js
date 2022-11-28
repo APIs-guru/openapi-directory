@@ -22,22 +22,22 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var WardsInADistrictPathParams = /** @class */ (function (_super) {
     __extends(WardsInADistrictPathParams, _super);
     function WardsInADistrictPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=country" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=country" }),
         __metadata("design:type", String)
     ], WardsInADistrictPathParams.prototype, "country", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=district" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=district" }),
         __metadata("design:type", String)
     ], WardsInADistrictPathParams.prototype, "district", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=region" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=region" }),
         __metadata("design:type", String)
     ], WardsInADistrictPathParams.prototype, "region", void 0);
     return WardsInADistrictPathParams;
@@ -49,7 +49,7 @@ var WardsInADistrictRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", WardsInADistrictPathParams)
     ], WardsInADistrictRequest.prototype, "pathParams", void 0);
     return WardsInADistrictRequest;
@@ -61,11 +61,11 @@ var WardsInADistrictResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], WardsInADistrictResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], WardsInADistrictResponse.prototype, "statusCode", void 0);
     return WardsInADistrictResponse;

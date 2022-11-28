@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ModelSummary
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Provides summary information about a model.
 **/
 export class ModelSummary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CreationTime" })
+  @SpeakeasyMetadata({ data: "json, name=CreationTime" })
   creationTime: Date;
 
-  @Metadata({ data: "json, name=ModelArn" })
+  @SpeakeasyMetadata({ data: "json, name=ModelArn" })
   modelArn: string;
 
-  @Metadata({ data: "json, name=ModelName" })
+  @SpeakeasyMetadata({ data: "json, name=ModelName" })
   modelName: string;
 }

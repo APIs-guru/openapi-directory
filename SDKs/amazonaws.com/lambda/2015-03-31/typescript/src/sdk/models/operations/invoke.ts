@@ -1,169 +1,170 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class InvokePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=FunctionName" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=FunctionName" })
   functionName: string;
 }
 
 
 export class InvokeQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Qualifier" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Qualifier" })
   qualifier?: string;
 }
 
 export enum InvokeXAmzInvocationTypeEnum {
-    Event = "Event"
-,    RequestResponse = "RequestResponse"
-,    DryRun = "DryRun"
+    Event = "Event",
+    RequestResponse = "RequestResponse",
+    DryRun = "DryRun"
 }
 
 export enum InvokeXAmzLogTypeEnum {
-    None = "None"
-,    Tail = "Tail"
+    None = "None",
+    Tail = "Tail"
 }
 
 
 export class InvokeHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Client-Context" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Client-Context" })
   xAmzClientContext?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Invocation-Type" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Invocation-Type" })
   xAmzInvocationType?: InvokeXAmzInvocationTypeEnum;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Log-Type" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Log-Type" })
   xAmzLogType?: InvokeXAmzLogTypeEnum;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
 
 export class InvokeRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Payload" })
+  @SpeakeasyMetadata({ data: "json, name=Payload" })
   payload?: string;
 }
 
 
 export class InvokeRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: InvokePathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: InvokeQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: InvokeHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: InvokeRequestBody;
 }
 
 
 export class InvokeResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   ec2AccessDeniedException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   ec2ThrottledException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   ec2UnexpectedException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   efsioException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   efsMountConnectivityException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   efsMountFailureException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   efsMountTimeoutException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   eniLimitReachedException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidParameterValueException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidRequestContentException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidRuntimeException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidSecurityGroupIdException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidSubnetIdException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidZipFileException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invocationResponse?: shared.InvocationResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   kmsAccessDeniedException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   kmsDisabledException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   kmsInvalidStateException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   kmsNotFoundException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   requestTooLargeException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   resourceConflictException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   resourceNotFoundException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   resourceNotReadyException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   serviceException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   subnetIpAddressLimitReachedException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   tooManyRequestsException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   unsupportedMediaTypeException?: any;
 }

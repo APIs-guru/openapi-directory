@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { SignatureInfo } from "./signatureinfo";
 /**
  * A decision that has been made to approve access to a resource.

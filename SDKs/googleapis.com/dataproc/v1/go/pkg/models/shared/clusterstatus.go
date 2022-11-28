@@ -24,6 +24,8 @@ const (
 	ClusterStatusSubstateEnumStaleStatus ClusterStatusSubstateEnum = "STALE_STATUS"
 )
 
+// ClusterStatus
+// The status of a cluster and its instances.
 type ClusterStatus struct {
 	Detail         *string                    `json:"detail,omitempty"`
 	State          *ClusterStatusStateEnum    `json:"state,omitempty"`

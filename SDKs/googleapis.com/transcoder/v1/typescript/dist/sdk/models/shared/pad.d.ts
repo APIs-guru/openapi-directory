@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 /**
  * Pad filter configuration for the input video. The padded input video is scaled after padding with black to match the output resolution.
 **/

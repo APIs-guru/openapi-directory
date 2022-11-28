@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import googleclouddialogflowv2intent
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
-class GoogleCloudDialogflowV2BatchDeleteIntentsRequest:
-    intents: Optional[List[googleclouddialogflowv2intent.GoogleCloudDialogflowV2Intent]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'intents' }})
+class GoogleCloudDialogflowV2BatchDeleteIntentsRequestInput:
+    r"""GoogleCloudDialogflowV2BatchDeleteIntentsRequestInput
+    The request message for Intents.BatchDeleteIntents.
+    """
+    
+    intents: Optional[List[GoogleCloudDialogflowV2IntentInput]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('intents') }})
     

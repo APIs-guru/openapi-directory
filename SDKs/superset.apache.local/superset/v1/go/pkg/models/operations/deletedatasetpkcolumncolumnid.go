@@ -13,11 +13,6 @@ type DeleteDatasetPkColumnColumnIDSecurity struct {
 	Jwt shared.SchemeJwt `security:"scheme,type=http,subtype=bearer"`
 }
 
-type DeleteDatasetPkColumnColumnIDRequest struct {
-	PathParams DeleteDatasetPkColumnColumnIDPathParams
-	Security   DeleteDatasetPkColumnColumnIDSecurity
-}
-
 type DeleteDatasetPkColumnColumnID200ApplicationJSON struct {
 	Message *string `json:"message,omitempty"`
 }
@@ -40,6 +35,11 @@ type DeleteDatasetPkColumnColumnID422ApplicationJSON struct {
 
 type DeleteDatasetPkColumnColumnID500ApplicationJSON struct {
 	Message *string `json:"message,omitempty"`
+}
+
+type DeleteDatasetPkColumnColumnIDRequest struct {
+	PathParams DeleteDatasetPkColumnColumnIDPathParams
+	Security   DeleteDatasetPkColumnColumnIDSecurity
 }
 
 type DeleteDatasetPkColumnColumnIDResponse struct {

@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetAuthorizeCacheSecurityGroupIngressActionEnum(str, Enum):
     AUTHORIZE_CACHE_SECURITY_GROUP_INGRESS = "AuthorizeCacheSecurityGroupIngress"
@@ -10,11 +14,11 @@ class GetAuthorizeCacheSecurityGroupIngressVersionEnum(str, Enum):
 
 @dataclass
 class GetAuthorizeCacheSecurityGroupIngressQueryParams:
-    action: GetAuthorizeCacheSecurityGroupIngressActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    cache_security_group_name: str = field(default=None, metadata={'query_param': { 'field_name': 'CacheSecurityGroupName', 'style': 'form', 'explode': True }})
-    ec2_security_group_name: str = field(default=None, metadata={'query_param': { 'field_name': 'EC2SecurityGroupName', 'style': 'form', 'explode': True }})
-    ec2_security_group_owner_id: str = field(default=None, metadata={'query_param': { 'field_name': 'EC2SecurityGroupOwnerId', 'style': 'form', 'explode': True }})
-    version: GetAuthorizeCacheSecurityGroupIngressVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: GetAuthorizeCacheSecurityGroupIngressActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    cache_security_group_name: str = field(metadata={'query_param': { 'field_name': 'CacheSecurityGroupName', 'style': 'form', 'explode': True }})
+    ec2_security_group_name: str = field(metadata={'query_param': { 'field_name': 'EC2SecurityGroupName', 'style': 'form', 'explode': True }})
+    ec2_security_group_owner_id: str = field(metadata={'query_param': { 'field_name': 'EC2SecurityGroupOwnerId', 'style': 'form', 'explode': True }})
+    version: GetAuthorizeCacheSecurityGroupIngressVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -30,13 +34,13 @@ class GetAuthorizeCacheSecurityGroupIngressHeaders:
 
 @dataclass
 class GetAuthorizeCacheSecurityGroupIngressRequest:
-    query_params: GetAuthorizeCacheSecurityGroupIngressQueryParams = field(default=None)
-    headers: GetAuthorizeCacheSecurityGroupIngressHeaders = field(default=None)
+    headers: GetAuthorizeCacheSecurityGroupIngressHeaders = field()
+    query_params: GetAuthorizeCacheSecurityGroupIngressQueryParams = field()
     
 
 @dataclass
 class GetAuthorizeCacheSecurityGroupIngressResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

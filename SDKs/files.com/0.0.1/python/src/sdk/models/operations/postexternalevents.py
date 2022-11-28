@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 class PostExternalEventsRequestBodyStatusEnum(str, Enum):
@@ -10,18 +11,18 @@ class PostExternalEventsRequestBodyStatusEnum(str, Enum):
 
 @dataclass
 class PostExternalEventsRequestBody:
-    body: str = field(default=None, metadata={'multipart_form': { 'field_name': 'body' }})
-    status: PostExternalEventsRequestBodyStatusEnum = field(default=None, metadata={'multipart_form': { 'field_name': 'status' }})
+    body: str = field(metadata={'multipart_form': { 'field_name': 'body' }})
+    status: PostExternalEventsRequestBodyStatusEnum = field(metadata={'multipart_form': { 'field_name': 'status' }})
     
 
 @dataclass
 class PostExternalEventsRequest:
-    request: PostExternalEventsRequestBody = field(default=None, metadata={'request': { 'media_type': 'multipart/form-data' }})
+    request: PostExternalEventsRequestBody = field(metadata={'request': { 'media_type': 'multipart/form-data' }})
     
 
 @dataclass
 class PostExternalEventsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     external_event_entity: Optional[shared.ExternalEventEntity] = field(default=None)
-    status_code: int = field(default=None)
     

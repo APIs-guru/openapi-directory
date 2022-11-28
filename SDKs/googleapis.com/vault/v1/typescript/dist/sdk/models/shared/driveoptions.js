@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var DriveOptionsClientSideEncryptedOptionEnum;
 (function (DriveOptionsClientSideEncryptedOptionEnum) {
     DriveOptionsClientSideEncryptedOptionEnum["ClientSideEncryptedOptionUnspecified"] = "CLIENT_SIDE_ENCRYPTED_OPTION_UNSPECIFIED";
@@ -40,19 +40,19 @@ var DriveOptions = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=clientSideEncryptedOption" }),
+        SpeakeasyMetadata({ data: "json, name=clientSideEncryptedOption" }),
         __metadata("design:type", String)
     ], DriveOptions.prototype, "clientSideEncryptedOption", void 0);
     __decorate([
-        Metadata({ data: "json, name=includeSharedDrives" }),
+        SpeakeasyMetadata({ data: "json, name=includeSharedDrives" }),
         __metadata("design:type", Boolean)
     ], DriveOptions.prototype, "includeSharedDrives", void 0);
     __decorate([
-        Metadata({ data: "json, name=includeTeamDrives" }),
+        SpeakeasyMetadata({ data: "json, name=includeTeamDrives" }),
         __metadata("design:type", Boolean)
     ], DriveOptions.prototype, "includeTeamDrives", void 0);
     __decorate([
-        Metadata({ data: "json, name=versionDate" }),
+        SpeakeasyMetadata({ data: "json, name=versionDate" }),
         __metadata("design:type", String)
     ], DriveOptions.prototype, "versionDate", void 0);
     return DriveOptions;

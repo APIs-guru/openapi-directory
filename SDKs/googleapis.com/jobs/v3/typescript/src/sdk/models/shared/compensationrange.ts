@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Money } from "./money";
-import { Money } from "./money";
+
 
 
 // CompensationRange
@@ -8,9 +8,9 @@ import { Money } from "./money";
  * Compensation range.
 **/
 export class CompensationRange extends SpeakeasyBase {
-  @Metadata({ data: "json, name=maxCompensation" })
+  @SpeakeasyMetadata({ data: "json, name=maxCompensation" })
   maxCompensation?: Money;
 
-  @Metadata({ data: "json, name=minCompensation" })
+  @SpeakeasyMetadata({ data: "json, name=minCompensation" })
   minCompensation?: Money;
 }

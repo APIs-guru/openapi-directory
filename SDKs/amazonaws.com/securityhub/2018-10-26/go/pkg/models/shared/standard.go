@@ -1,5 +1,7 @@
 package shared
 
+// Standard
+// Provides information about a specific standard.
 type Standard struct {
 	Description      *string `json:"Description,omitempty"`
 	EnabledByDefault *bool   `json:"EnabledByDefault,omitempty"`

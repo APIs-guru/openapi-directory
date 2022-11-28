@@ -1,45 +1,45 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AcEntryDto } from "./acentrydto";
 
 
+
 export class ProductTranDto extends SpeakeasyBase {
-  @Metadata({ data: "json, name=acEntries", elemType: shared.AcEntryDto })
+  @SpeakeasyMetadata({ data: "json, name=acEntries", elemType: AcEntryDto })
   acEntries?: AcEntryDto[];
 
-  @Metadata({ data: "json, name=amount" })
+  @SpeakeasyMetadata({ data: "json, name=amount" })
   amount?: number;
 
-  @Metadata({ data: "json, name=amountNet" })
+  @SpeakeasyMetadata({ data: "json, name=amountNet" })
   amountNet: number;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: number;
 
-  @Metadata({ data: "json, name=percentage" })
+  @SpeakeasyMetadata({ data: "json, name=percentage" })
   percentage?: number;
 
-  @Metadata({ data: "json, name=productCode" })
+  @SpeakeasyMetadata({ data: "json, name=productCode" })
   productCode?: string;
 
-  @Metadata({ data: "json, name=productId" })
+  @SpeakeasyMetadata({ data: "json, name=productId" })
   productId?: number;
 
-  @Metadata({ data: "json, name=quantity" })
+  @SpeakeasyMetadata({ data: "json, name=quantity" })
   quantity?: number;
 
-  @Metadata({ data: "json, name=tranNotes" })
+  @SpeakeasyMetadata({ data: "json, name=tranNotes" })
   tranNotes?: string[];
 
-  @Metadata({ data: "json, name=unitPrice" })
+  @SpeakeasyMetadata({ data: "json, name=unitPrice" })
   unitPrice?: number;
 
-  @Metadata({ data: "json, name=vat" })
+  @SpeakeasyMetadata({ data: "json, name=vat" })
   vat?: number;
 
-  @Metadata({ data: "json, name=vatAnalysisTypeId" })
+  @SpeakeasyMetadata({ data: "json, name=vatAnalysisTypeId" })
   vatAnalysisTypeId?: number;
 
-  @Metadata({ data: "json, name=vatRateId" })
+  @SpeakeasyMetadata({ data: "json, name=vatRateId" })
   vatRateId?: number;
 }

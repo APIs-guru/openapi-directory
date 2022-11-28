@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // GoogleFactcheckingFactchecktoolsV1alpha1ClaimReviewAuthor
 /**
  * Information about the claim review author.
@@ -33,11 +33,11 @@ var GoogleFactcheckingFactchecktoolsV1alpha1ClaimReviewAuthor = /** @class */ (f
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=imageUrl" }),
+        SpeakeasyMetadata({ data: "json, name=imageUrl" }),
         __metadata("design:type", String)
     ], GoogleFactcheckingFactchecktoolsV1alpha1ClaimReviewAuthor.prototype, "imageUrl", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], GoogleFactcheckingFactchecktoolsV1alpha1ClaimReviewAuthor.prototype, "name", void 0);
     return GoogleFactcheckingFactchecktoolsV1alpha1ClaimReviewAuthor;

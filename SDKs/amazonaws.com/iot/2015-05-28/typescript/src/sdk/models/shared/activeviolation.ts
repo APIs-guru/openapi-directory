@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Behavior } from "./behavior";
 import { MetricValue } from "./metricvalue";
 import { ViolationEventAdditionalInfo } from "./violationeventadditionalinfo";
+
 
 
 // ActiveViolation
@@ -9,27 +10,27 @@ import { ViolationEventAdditionalInfo } from "./violationeventadditionalinfo";
  * Information about an active Device Defender security profile behavior violation.
 **/
 export class ActiveViolation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=behavior" })
+  @SpeakeasyMetadata({ data: "json, name=behavior" })
   behavior?: Behavior;
 
-  @Metadata({ data: "json, name=lastViolationTime" })
+  @SpeakeasyMetadata({ data: "json, name=lastViolationTime" })
   lastViolationTime?: Date;
 
-  @Metadata({ data: "json, name=lastViolationValue" })
+  @SpeakeasyMetadata({ data: "json, name=lastViolationValue" })
   lastViolationValue?: MetricValue;
 
-  @Metadata({ data: "json, name=securityProfileName" })
+  @SpeakeasyMetadata({ data: "json, name=securityProfileName" })
   securityProfileName?: string;
 
-  @Metadata({ data: "json, name=thingName" })
+  @SpeakeasyMetadata({ data: "json, name=thingName" })
   thingName?: string;
 
-  @Metadata({ data: "json, name=violationEventAdditionalInfo" })
+  @SpeakeasyMetadata({ data: "json, name=violationEventAdditionalInfo" })
   violationEventAdditionalInfo?: ViolationEventAdditionalInfo;
 
-  @Metadata({ data: "json, name=violationId" })
+  @SpeakeasyMetadata({ data: "json, name=violationId" })
   violationId?: string;
 
-  @Metadata({ data: "json, name=violationStartTime" })
+  @SpeakeasyMetadata({ data: "json, name=violationStartTime" })
   violationStartTime?: Date;
 }

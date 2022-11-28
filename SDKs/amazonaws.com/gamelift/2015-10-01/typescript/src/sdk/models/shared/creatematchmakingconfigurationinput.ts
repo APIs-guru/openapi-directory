@@ -1,9 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BackfillModeEnum } from "./backfillmodeenum";
 import { FlexMatchModeEnum } from "./flexmatchmodeenum";
 import { GameProperty } from "./gameproperty";
 import { Tag } from "./tag";
+
 
 
 // CreateMatchmakingConfigurationInput
@@ -11,48 +11,48 @@ import { Tag } from "./tag";
  * Represents the input for a request operation.
 **/
 export class CreateMatchmakingConfigurationInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AcceptanceRequired" })
+  @SpeakeasyMetadata({ data: "json, name=AcceptanceRequired" })
   acceptanceRequired: boolean;
 
-  @Metadata({ data: "json, name=AcceptanceTimeoutSeconds" })
+  @SpeakeasyMetadata({ data: "json, name=AcceptanceTimeoutSeconds" })
   acceptanceTimeoutSeconds?: number;
 
-  @Metadata({ data: "json, name=AdditionalPlayerCount" })
+  @SpeakeasyMetadata({ data: "json, name=AdditionalPlayerCount" })
   additionalPlayerCount?: number;
 
-  @Metadata({ data: "json, name=BackfillMode" })
+  @SpeakeasyMetadata({ data: "json, name=BackfillMode" })
   backfillMode?: BackfillModeEnum;
 
-  @Metadata({ data: "json, name=CustomEventData" })
+  @SpeakeasyMetadata({ data: "json, name=CustomEventData" })
   customEventData?: string;
 
-  @Metadata({ data: "json, name=Description" })
+  @SpeakeasyMetadata({ data: "json, name=Description" })
   description?: string;
 
-  @Metadata({ data: "json, name=FlexMatchMode" })
+  @SpeakeasyMetadata({ data: "json, name=FlexMatchMode" })
   flexMatchMode?: FlexMatchModeEnum;
 
-  @Metadata({ data: "json, name=GameProperties", elemType: shared.GameProperty })
+  @SpeakeasyMetadata({ data: "json, name=GameProperties", elemType: GameProperty })
   gameProperties?: GameProperty[];
 
-  @Metadata({ data: "json, name=GameSessionData" })
+  @SpeakeasyMetadata({ data: "json, name=GameSessionData" })
   gameSessionData?: string;
 
-  @Metadata({ data: "json, name=GameSessionQueueArns" })
+  @SpeakeasyMetadata({ data: "json, name=GameSessionQueueArns" })
   gameSessionQueueArns?: string[];
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name: string;
 
-  @Metadata({ data: "json, name=NotificationTarget" })
+  @SpeakeasyMetadata({ data: "json, name=NotificationTarget" })
   notificationTarget?: string;
 
-  @Metadata({ data: "json, name=RequestTimeoutSeconds" })
+  @SpeakeasyMetadata({ data: "json, name=RequestTimeoutSeconds" })
   requestTimeoutSeconds: number;
 
-  @Metadata({ data: "json, name=RuleSetName" })
+  @SpeakeasyMetadata({ data: "json, name=RuleSetName" })
   ruleSetName: string;
 
-  @Metadata({ data: "json, name=Tags", elemType: shared.Tag })
+  @SpeakeasyMetadata({ data: "json, name=Tags", elemType: Tag })
   tags?: Tag[];
 }

@@ -1,22 +1,23 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetTargetExpressionByEnsgidQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=gene" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=gene" })
   gene: string;
 }
 
 
 export class GetTargetExpressionByEnsgidRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetTargetExpressionByEnsgidQueryParams;
 }
 
 
 export class GetTargetExpressionByEnsgidResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

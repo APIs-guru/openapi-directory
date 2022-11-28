@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BasicAuth } from "./basicauth";
 import { ServiceAccount } from "./serviceaccount";
+
 
 
 // Credential
@@ -8,12 +9,12 @@ import { ServiceAccount } from "./serviceaccount";
  * The credential used by Deployment Manager and TypeProvider. Only one of the options is permitted.
 **/
 export class Credential extends SpeakeasyBase {
-  @Metadata({ data: "json, name=basicAuth" })
+  @SpeakeasyMetadata({ data: "json, name=basicAuth" })
   basicAuth?: BasicAuth;
 
-  @Metadata({ data: "json, name=serviceAccount" })
+  @SpeakeasyMetadata({ data: "json, name=serviceAccount" })
   serviceAccount?: ServiceAccount;
 
-  @Metadata({ data: "json, name=useProjectDefault" })
+  @SpeakeasyMetadata({ data: "json, name=useProjectDefault" })
   useProjectDefault?: boolean;
 }

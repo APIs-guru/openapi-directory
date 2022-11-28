@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TaskStatusEnum } from "./taskstatusenum";
+
 
 
 // SetTaskStatusInput
@@ -7,18 +8,18 @@ import { TaskStatusEnum } from "./taskstatusenum";
  * Contains the parameters for SetTaskStatus.
 **/
 export class SetTaskStatusInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=errorId" })
+  @SpeakeasyMetadata({ data: "json, name=errorId" })
   errorId?: string;
 
-  @Metadata({ data: "json, name=errorMessage" })
+  @SpeakeasyMetadata({ data: "json, name=errorMessage" })
   errorMessage?: string;
 
-  @Metadata({ data: "json, name=errorStackTrace" })
+  @SpeakeasyMetadata({ data: "json, name=errorStackTrace" })
   errorStackTrace?: string;
 
-  @Metadata({ data: "json, name=taskId" })
+  @SpeakeasyMetadata({ data: "json, name=taskId" })
   taskId: string;
 
-  @Metadata({ data: "json, name=taskStatus" })
+  @SpeakeasyMetadata({ data: "json, name=taskStatus" })
   taskStatus: TaskStatusEnum;
 }

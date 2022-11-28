@@ -1,12 +1,16 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,List,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
 @dataclass
 class CreateResourceDefinitionVersionPathParams:
-    resource_definition_id: str = field(default=None, metadata={'path_param': { 'field_name': 'ResourceDefinitionId', 'style': 'simple', 'explode': False }})
+    resource_definition_id: str = field(metadata={'path_param': { 'field_name': 'ResourceDefinitionId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -24,20 +28,20 @@ class CreateResourceDefinitionVersionHeaders:
 @dataclass_json
 @dataclass
 class CreateResourceDefinitionVersionRequestBody:
-    resources: Optional[List[shared.Resource]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Resources' }})
+    resources: Optional[List[shared.Resource]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Resources') }})
     
 
 @dataclass
 class CreateResourceDefinitionVersionRequest:
-    path_params: CreateResourceDefinitionVersionPathParams = field(default=None)
-    headers: CreateResourceDefinitionVersionHeaders = field(default=None)
-    request: CreateResourceDefinitionVersionRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: CreateResourceDefinitionVersionHeaders = field()
+    path_params: CreateResourceDefinitionVersionPathParams = field()
+    request: CreateResourceDefinitionVersionRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class CreateResourceDefinitionVersionResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     create_resource_definition_version_response: Optional[shared.CreateResourceDefinitionVersionResponse] = field(default=None)
-    status_code: int = field(default=None)
     

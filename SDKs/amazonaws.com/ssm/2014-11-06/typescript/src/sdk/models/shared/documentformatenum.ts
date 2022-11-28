@@ -1,7 +1,8 @@
 
 
+
 export enum DocumentFormatEnum {
-    Yaml = "YAML"
-,    Json = "JSON"
-,    Text = "TEXT"
+    Yaml = "YAML",
+    Json = "JSON",
+    Text = "TEXT"
 }

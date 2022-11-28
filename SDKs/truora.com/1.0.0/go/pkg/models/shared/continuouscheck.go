@@ -13,6 +13,8 @@ const (
 	ContinuousCheckContinuousCheckStatusEnumSame ContinuousCheckContinuousCheckStatusEnum = "same"
 )
 
+// ContinuousCheck
+// Continuous check allows for background checks to be performed on the same people or vehicles periodically and notifies if new information is found. Allowing companies to keep an eye on their workforce or vehicle fleet for any recent wrongdoing they might be involved in.
 type ContinuousCheck struct {
 	ContinuousCheckID     *string                                  `json:"ContinuousCheckID,omitempty"`
 	ContinuousCheckStatus ContinuousCheckContinuousCheckStatusEnum `json:"ContinuousCheckStatus"`

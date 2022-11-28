@@ -1,9 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DeviceMethod } from "./devicemethod";
 
 
+
 export class GetDeviceMethodsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DeviceMethods", elemType: shared.DeviceMethod })
+  @SpeakeasyMetadata({ data: "json, name=DeviceMethods", elemType: DeviceMethod })
   deviceMethods?: DeviceMethod[];
 }

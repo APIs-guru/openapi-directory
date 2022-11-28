@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { Filter } from "./filter";
 import { SortOrderEnum } from "./sortorderenum";
 export declare class ListResolverQueryLogConfigsRequest extends SpeakeasyBase {

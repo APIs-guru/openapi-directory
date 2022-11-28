@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { IntentMetadata } from "./intentmetadata";
 
 
+
 export class GetIntentsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=intents", elemType: shared.IntentMetadata })
+  @SpeakeasyMetadata({ data: "json, name=intents", elemType: IntentMetadata })
   intents?: IntentMetadata[];
 
-  @Metadata({ data: "json, name=nextToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextToken" })
   nextToken?: string;
 }

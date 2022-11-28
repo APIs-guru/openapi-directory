@@ -10,11 +10,11 @@ class GetCacheHeaders:
 
 @dataclass
 class GetCacheRequest:
-    headers: GetCacheHeaders = field(default=None)
+    headers: GetCacheHeaders = field()
     
 
 @dataclass
 class GetCacheResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

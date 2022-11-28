@@ -1,7 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import lineproperties
+from sdk import utils
+from . import *
 
 class LineLineCategoryEnum(str, Enum):
     LINE_CATEGORY_UNSPECIFIED = "LINE_CATEGORY_UNSPECIFIED"
@@ -26,7 +28,11 @@ class LineLineTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class Line:
-    line_category: Optional[LineLineCategoryEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'lineCategory' }})
-    line_properties: Optional[lineproperties.LineProperties] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'lineProperties' }})
-    line_type: Optional[LineLineTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'lineType' }})
+    r"""Line
+    A PageElement kind representing a non-connector line, straight connector, curved connector, or bent connector.
+    """
+    
+    line_category: Optional[LineLineCategoryEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('lineCategory') }})
+    line_properties: Optional[LineProperties] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('lineProperties') }})
+    line_type: Optional[LineLineTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('lineType') }})
     

@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class CompleteFileUploadPathParams:
-    upload_id: str = field(default=None, metadata={'path_param': { 'field_name': 'upload_id', 'style': 'simple', 'explode': False }})
+    upload_id: str = field(metadata={'path_param': { 'field_name': 'upload_id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -16,15 +19,15 @@ class CompleteFileUploadHeaders:
 
 @dataclass
 class CompleteFileUploadRequest:
-    path_params: CompleteFileUploadPathParams = field(default=None)
-    headers: CompleteFileUploadHeaders = field(default=None)
-    request: shared.CompleteUploadRequest = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: CompleteFileUploadHeaders = field()
+    path_params: CompleteFileUploadPathParams = field()
+    request: shared.CompleteUploadRequest = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class CompleteFileUploadResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error_response: Optional[shared.ErrorResponse] = field(default=None)
     node: Optional[shared.Node] = field(default=None)
-    status_code: int = field(default=None)
     

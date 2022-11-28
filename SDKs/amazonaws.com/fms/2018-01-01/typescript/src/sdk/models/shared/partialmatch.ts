@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // PartialMatch
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The reference rule that partially matches the <code>ViolationTarget</code> rule and violation reason.
 **/
 export class PartialMatch extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Reference" })
+  @SpeakeasyMetadata({ data: "json, name=Reference" })
   reference?: string;
 
-  @Metadata({ data: "json, name=TargetViolationReasons" })
+  @SpeakeasyMetadata({ data: "json, name=TargetViolationReasons" })
   targetViolationReasons?: string[];
 }

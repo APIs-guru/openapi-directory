@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SystemResourceLimits } from "./systemresourcelimits";
 // ComponentRunWith
 /**
@@ -34,11 +34,11 @@ var ComponentRunWith = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=posixUser" }),
+        SpeakeasyMetadata({ data: "json, name=posixUser" }),
         __metadata("design:type", String)
     ], ComponentRunWith.prototype, "posixUser", void 0);
     __decorate([
-        Metadata({ data: "json, name=systemResourceLimits" }),
+        SpeakeasyMetadata({ data: "json, name=systemResourceLimits" }),
         __metadata("design:type", SystemResourceLimits)
     ], ComponentRunWith.prototype, "systemResourceLimits", void 0);
     return ComponentRunWith;

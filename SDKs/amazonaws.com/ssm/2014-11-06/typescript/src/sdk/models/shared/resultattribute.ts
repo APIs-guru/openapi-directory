@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ResultAttribute
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The inventory item result attribute.
 **/
 export class ResultAttribute extends SpeakeasyBase {
-  @Metadata({ data: "json, name=TypeName" })
+  @SpeakeasyMetadata({ data: "json, name=TypeName" })
   typeName: string;
 }

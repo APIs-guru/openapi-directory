@@ -1,6 +1,7 @@
 
 
+
 export enum EntityTypeEnum {
-    Key = "KEY"
-,    Value = "VALUE"
+    Key = "KEY",
+    Value = "VALUE"
 }

@@ -1,10 +1,13 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,List,Optional
 
 
 @dataclass
 class UntagResourcePathParams:
-    resource_arn: str = field(default=None, metadata={'path_param': { 'field_name': 'resourceArn', 'style': 'simple', 'explode': False }})
+    resource_arn: str = field(metadata={'path_param': { 'field_name': 'resourceArn', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,14 +28,14 @@ class UntagResourceHeaders:
 
 @dataclass
 class UntagResourceRequest:
-    path_params: UntagResourcePathParams = field(default=None)
-    query_params: UntagResourceQueryParams = field(default=None)
-    headers: UntagResourceHeaders = field(default=None)
+    headers: UntagResourceHeaders = field()
+    path_params: UntagResourcePathParams = field()
+    query_params: UntagResourceQueryParams = field()
     
 
 @dataclass
 class UntagResourceResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     untag_resource_response: Optional[dict[str, Any]] = field(default=None)
     

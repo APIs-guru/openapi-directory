@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AntennaDemodDecodeDetails } from "./antennademoddecodedetails";
 import { EndpointDetails } from "./endpointdetails";
 import { S3RecordingDetails } from "./s3recordingdetails";
+
 
 
 // ConfigDetails
@@ -9,12 +10,12 @@ import { S3RecordingDetails } from "./s3recordingdetails";
  * Details for certain <code>Config</code> object types in a contact.
 **/
 export class ConfigDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=antennaDemodDecodeDetails" })
+  @SpeakeasyMetadata({ data: "json, name=antennaDemodDecodeDetails" })
   antennaDemodDecodeDetails?: AntennaDemodDecodeDetails;
 
-  @Metadata({ data: "json, name=endpointDetails" })
+  @SpeakeasyMetadata({ data: "json, name=endpointDetails" })
   endpointDetails?: EndpointDetails;
 
-  @Metadata({ data: "json, name=s3RecordingDetails" })
+  @SpeakeasyMetadata({ data: "json, name=s3RecordingDetails" })
   s3RecordingDetails?: S3RecordingDetails;
 }

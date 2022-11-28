@@ -1,5 +1,7 @@
 package shared
 
-type ReplaceNegativeKeywordsRequest struct {
-	NewNegativeKeywords []NegativeKeyword `json:"newNegativeKeywords,omitempty"`
+// ReplaceNegativeKeywordsRequestInput
+// Request message for NegativeKeywordService.ReplaceNegativeKeywords.
+type ReplaceNegativeKeywordsRequestInput struct {
+	NewNegativeKeywords []NegativeKeywordInput `json:"newNegativeKeywords,omitempty"`
 }

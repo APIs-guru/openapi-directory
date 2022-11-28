@@ -1,47 +1,48 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class EndpointGetMultipleArtistsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=ids" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=ids" })
   ids: string;
 }
 
 
 export class EndpointGetMultipleArtistsHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=Authorization" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Authorization" })
   authorization: string;
 }
 
 
 export class EndpointGetMultipleArtistsSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   spotifyAuth: shared.SchemeSpotifyAuth;
 }
 
 
 export class EndpointGetMultipleArtistsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: EndpointGetMultipleArtistsQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: EndpointGetMultipleArtistsHeaders;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: EndpointGetMultipleArtistsSecurity;
 }
 
 
 export class EndpointGetMultipleArtistsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   artistsObject?: shared.ArtistsObject;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   errorResponseObject?: shared.ErrorResponseObject;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

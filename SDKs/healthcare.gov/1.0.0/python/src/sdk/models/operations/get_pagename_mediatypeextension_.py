@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from typing import Optional
+from enum import Enum
 
 class GetPageNameMediaTypeExtensionMediaTypeExtensionEnum(str, Enum):
     DOT_JSON = ".json"
@@ -7,18 +8,18 @@ class GetPageNameMediaTypeExtensionMediaTypeExtensionEnum(str, Enum):
 
 @dataclass
 class GetPageNameMediaTypeExtensionPathParams:
-    media_type_extension: GetPageNameMediaTypeExtensionMediaTypeExtensionEnum = field(default=None, metadata={'path_param': { 'field_name': 'mediaTypeExtension', 'style': 'simple', 'explode': False }})
-    page_name: str = field(default=None, metadata={'path_param': { 'field_name': 'pageName', 'style': 'simple', 'explode': False }})
+    media_type_extension: GetPageNameMediaTypeExtensionMediaTypeExtensionEnum = field(metadata={'path_param': { 'field_name': 'mediaTypeExtension', 'style': 'simple', 'explode': False }})
+    page_name: str = field(metadata={'path_param': { 'field_name': 'pageName', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetPageNameMediaTypeExtensionRequest:
-    path_params: GetPageNameMediaTypeExtensionPathParams = field(default=None)
+    path_params: GetPageNameMediaTypeExtensionPathParams = field()
     
 
 @dataclass
 class GetPageNameMediaTypeExtensionResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

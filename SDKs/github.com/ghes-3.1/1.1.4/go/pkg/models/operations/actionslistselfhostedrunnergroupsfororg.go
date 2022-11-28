@@ -13,14 +13,14 @@ type ActionsListSelfHostedRunnerGroupsForOrgQueryParams struct {
 	PerPage *int64 `queryParam:"style=form,explode=true,name=per_page"`
 }
 
-type ActionsListSelfHostedRunnerGroupsForOrgRequest struct {
-	PathParams  ActionsListSelfHostedRunnerGroupsForOrgPathParams
-	QueryParams ActionsListSelfHostedRunnerGroupsForOrgQueryParams
-}
-
 type ActionsListSelfHostedRunnerGroupsForOrg200ApplicationJSON struct {
 	RunnerGroups []shared.RunnerGroupsOrg `json:"runner_groups"`
 	TotalCount   float64                  `json:"total_count"`
+}
+
+type ActionsListSelfHostedRunnerGroupsForOrgRequest struct {
+	PathParams  ActionsListSelfHostedRunnerGroupsForOrgPathParams
+	QueryParams ActionsListSelfHostedRunnerGroupsForOrgQueryParams
 }
 
 type ActionsListSelfHostedRunnerGroupsForOrgResponse struct {

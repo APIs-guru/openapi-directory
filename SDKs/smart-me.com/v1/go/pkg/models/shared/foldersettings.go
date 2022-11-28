@@ -29,6 +29,8 @@ const (
 	FolderSettingsFolderTypeEnumGridPhotovoltaicPowerSystem FolderSettingsFolderTypeEnum = "GridPhotovoltaicPowerSystem"
 )
 
+// FolderSettings
+// Container for the folder settings
 type FolderSettings struct {
 	Description                    *string                       `json:"Description,omitempty" form:"name=Description"`
 	Enable                         *bool                         `json:"Enable,omitempty" form:"name=Enable"`

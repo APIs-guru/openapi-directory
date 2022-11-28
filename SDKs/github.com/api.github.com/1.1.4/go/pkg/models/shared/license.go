@@ -1,5 +1,7 @@
 package shared
 
+// License
+// License
 type License struct {
 	Body           string   `json:"body"`
 	Conditions     []string `json:"conditions"`

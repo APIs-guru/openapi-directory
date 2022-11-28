@@ -1,4 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GenericProblem } from "./genericproblem";
 import { InvalidRequestProblem } from "./invalidrequestproblem";
 import { ClientForbiddenProblem } from "./clientforbiddenproblem";
@@ -10,13 +10,14 @@ import { UsageCapExceededProblem } from "./usagecapexceededproblem";
 import { Expansions } from "./expansions";
 
 
+
 export class UserLookupResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data?: any[];
 
-  @Metadata({ data: "json, name=errors" })
+  @SpeakeasyMetadata({ data: "json, name=errors" })
   errors?: any[];
 
-  @Metadata({ data: "json, name=includes" })
+  @SpeakeasyMetadata({ data: "json, name=includes" })
   includes?: Expansions;
 }

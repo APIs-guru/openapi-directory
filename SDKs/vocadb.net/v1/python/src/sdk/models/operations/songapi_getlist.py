@@ -1,8 +1,9 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
-from typing import Any,Enum,List,Optional
+from typing import Any,List,Optional
+from enum import Enum
 from sdk.models import shared
 
 class SongAPIGetListArtistParticipationStatusEnum(str, Enum):
@@ -101,13 +102,13 @@ class SongAPIGetListQueryParams:
 
 @dataclass
 class SongAPIGetListRequest:
-    query_params: SongAPIGetListQueryParams = field(default=None)
+    query_params: SongAPIGetListQueryParams = field()
     
 
 @dataclass
 class SongAPIGetListResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     partial_find_result_song_for_api_contract_: Optional[shared.PartialFindResultSongForAPIContract] = field(default=None)
-    status_code: int = field(default=None)
     

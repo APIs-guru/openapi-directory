@@ -1,67 +1,68 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class PromotionFields extends SpeakeasyBase {
-  @Metadata({ data: "json, name=begins_at" })
+  @SpeakeasyMetadata({ data: "json, name=begins_at" })
   beginsAt?: string;
 
-  @Metadata({ data: "json, name=categories" })
+  @SpeakeasyMetadata({ data: "json, name=categories" })
   categories?: any[];
 
-  @Metadata({ data: "json, name=code" })
+  @SpeakeasyMetadata({ data: "json, name=code" })
   code?: string;
 
-  @Metadata({ data: "json, name=condition_price" })
+  @SpeakeasyMetadata({ data: "json, name=condition_price" })
   conditionPrice?: number;
 
-  @Metadata({ data: "json, name=condition_qty" })
+  @SpeakeasyMetadata({ data: "json, name=condition_qty" })
   conditionQty?: number;
 
-  @Metadata({ data: "json, name=cumulative" })
+  @SpeakeasyMetadata({ data: "json, name=cumulative" })
   cumulative?: boolean;
 
-  @Metadata({ data: "json, name=customer_categories" })
+  @SpeakeasyMetadata({ data: "json, name=customer_categories" })
   customerCategories?: any[];
 
-  @Metadata({ data: "json, name=discount_amount_fix" })
+  @SpeakeasyMetadata({ data: "json, name=discount_amount_fix" })
   discountAmountFix?: number;
 
-  @Metadata({ data: "json, name=discount_amount_percent" })
+  @SpeakeasyMetadata({ data: "json, name=discount_amount_percent" })
   discountAmountPercent?: number;
 
-  @Metadata({ data: "json, name=discount_target" })
+  @SpeakeasyMetadata({ data: "json, name=discount_target" })
   discountTarget?: string;
 
-  @Metadata({ data: "json, name=enabled" })
+  @SpeakeasyMetadata({ data: "json, name=enabled" })
   enabled?: boolean;
 
-  @Metadata({ data: "json, name=expires_at" })
+  @SpeakeasyMetadata({ data: "json, name=expires_at" })
   expiresAt?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: number;
 
-  @Metadata({ data: "json, name=lasts" })
+  @SpeakeasyMetadata({ data: "json, name=lasts" })
   lasts?: string;
 
-  @Metadata({ data: "json, name=max_times_used" })
+  @SpeakeasyMetadata({ data: "json, name=max_times_used" })
   maxTimesUsed?: number;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=products" })
+  @SpeakeasyMetadata({ data: "json, name=products" })
   products?: any[];
 
-  @Metadata({ data: "json, name=products_x" })
+  @SpeakeasyMetadata({ data: "json, name=products_x" })
   productsX?: any[];
 
-  @Metadata({ data: "json, name=quantity_x" })
+  @SpeakeasyMetadata({ data: "json, name=quantity_x" })
   quantityX?: number;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: string;
 
-  @Metadata({ data: "json, name=times_used" })
+  @SpeakeasyMetadata({ data: "json, name=times_used" })
   timesUsed?: number;
 }

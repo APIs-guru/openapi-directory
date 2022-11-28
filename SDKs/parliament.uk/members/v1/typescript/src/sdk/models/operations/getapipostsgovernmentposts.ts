@@ -1,29 +1,30 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetApiPostsGovernmentPostsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=departmentId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=departmentId" })
   departmentId?: number;
 }
 
 
 export class GetApiPostsGovernmentPostsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetApiPostsGovernmentPostsQueryParams;
 }
 
 
 export class GetApiPostsGovernmentPostsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata({ elemType: shared.GovernmentOppositionPostItem })
+  @SpeakeasyMetadata({ elemType: shared.GovernmentOppositionPostItem })
   governmentOppositionPostItems?: shared.GovernmentOppositionPostItem[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

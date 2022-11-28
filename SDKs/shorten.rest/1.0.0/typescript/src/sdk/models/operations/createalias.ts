@@ -1,41 +1,42 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class CreateAliasQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=aliasName" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=aliasName" })
   aliasName?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=domainName" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=domainName" })
   domainName?: string;
 }
 
 
 export class CreateAliasSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
   apiKeyAuth: shared.SchemeApiKeyAuth;
 }
 
 
 export class CreateAliasRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: CreateAliasQueryParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: shared.CreateAliasModel;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: CreateAliasSecurity;
 }
 
 
 export class CreateAliasResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   createAliasResponseModel?: shared.CreateAliasResponseModel;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

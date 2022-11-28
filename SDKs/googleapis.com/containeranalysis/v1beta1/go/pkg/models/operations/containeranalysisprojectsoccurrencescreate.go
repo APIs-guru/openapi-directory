@@ -30,7 +30,7 @@ type ContaineranalysisProjectsOccurrencesCreateSecurity struct {
 type ContaineranalysisProjectsOccurrencesCreateRequest struct {
 	PathParams  ContaineranalysisProjectsOccurrencesCreatePathParams
 	QueryParams ContaineranalysisProjectsOccurrencesCreateQueryParams
-	Request     *shared.Occurrence `request:"mediaType=application/json"`
+	Request     *shared.OccurrenceInput `request:"mediaType=application/json"`
 	Security    ContaineranalysisProjectsOccurrencesCreateSecurity
 }
 

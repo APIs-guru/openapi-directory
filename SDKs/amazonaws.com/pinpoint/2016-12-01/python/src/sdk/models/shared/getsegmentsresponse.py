@@ -1,10 +1,11 @@
 from dataclasses import dataclass, field
 from dataclasses_json import dataclass_json
-from . import segmentsresponse
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class GetSegmentsResponse:
-    segments_response: segmentsresponse.SegmentsResponse = field(default=None, metadata={'dataclasses_json': { 'field_name': 'SegmentsResponse' }})
+    segments_response: SegmentsResponse = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('SegmentsResponse') }})
     

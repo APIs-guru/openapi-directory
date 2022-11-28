@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DominantColorsAnnotation } from "./dominantcolorsannotation";
+
 
 
 // ImageProperties
@@ -7,6 +8,6 @@ import { DominantColorsAnnotation } from "./dominantcolorsannotation";
  * Stores image properties, such as dominant colors.
 **/
 export class ImageProperties extends SpeakeasyBase {
-  @Metadata({ data: "json, name=dominantColors" })
+  @SpeakeasyMetadata({ data: "json, name=dominantColors" })
   dominantColors?: DominantColorsAnnotation;
 }

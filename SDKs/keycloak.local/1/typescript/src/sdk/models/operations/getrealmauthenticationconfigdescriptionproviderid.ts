@@ -1,29 +1,30 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetRealmAuthenticationConfigDescriptionProviderIdPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=providerId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=providerId" })
   providerId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=realm" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=realm" })
   realm: string;
 }
 
 
 export class GetRealmAuthenticationConfigDescriptionProviderIdRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetRealmAuthenticationConfigDescriptionProviderIdPathParams;
 }
 
 
 export class GetRealmAuthenticationConfigDescriptionProviderIdResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   authenticatorConfigInfoRepresentation?: shared.AuthenticatorConfigInfoRepresentation;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

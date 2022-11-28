@@ -1,97 +1,98 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class UpdateIntegrationResponsePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=apiId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=apiId" })
   apiId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=integrationId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=integrationId" })
   integrationId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=integrationResponseId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=integrationResponseId" })
   integrationResponseId: string;
 }
 
 
 export class UpdateIntegrationResponseHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
 export enum UpdateIntegrationResponseRequestBodyContentHandlingStrategyEnum {
-    ConvertToBinary = "CONVERT_TO_BINARY"
-,    ConvertToText = "CONVERT_TO_TEXT"
+    ConvertToBinary = "CONVERT_TO_BINARY",
+    ConvertToText = "CONVERT_TO_TEXT"
 }
 
 
 export class UpdateIntegrationResponseRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=contentHandlingStrategy" })
+  @SpeakeasyMetadata({ data: "json, name=contentHandlingStrategy" })
   contentHandlingStrategy?: UpdateIntegrationResponseRequestBodyContentHandlingStrategyEnum;
 
-  @Metadata({ data: "json, name=integrationResponseKey" })
+  @SpeakeasyMetadata({ data: "json, name=integrationResponseKey" })
   integrationResponseKey?: string;
 
-  @Metadata({ data: "json, name=responseParameters" })
+  @SpeakeasyMetadata({ data: "json, name=responseParameters" })
   responseParameters?: Map<string, string>;
 
-  @Metadata({ data: "json, name=responseTemplates" })
+  @SpeakeasyMetadata({ data: "json, name=responseTemplates" })
   responseTemplates?: Map<string, string>;
 
-  @Metadata({ data: "json, name=templateSelectionExpression" })
+  @SpeakeasyMetadata({ data: "json, name=templateSelectionExpression" })
   templateSelectionExpression?: string;
 }
 
 
 export class UpdateIntegrationResponseRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: UpdateIntegrationResponsePathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: UpdateIntegrationResponseHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: UpdateIntegrationResponseRequestBody;
 }
 
 
 export class UpdateIntegrationResponseResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   badRequestException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   conflictException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   notFoundException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   tooManyRequestsException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   updateIntegrationResponseResponse?: shared.UpdateIntegrationResponseResponse;
 }

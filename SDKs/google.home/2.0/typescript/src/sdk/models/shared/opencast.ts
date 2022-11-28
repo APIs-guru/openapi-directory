@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class Opencast extends SpeakeasyBase {
-  @Metadata({ data: "json, name=pin_code" })
+  @SpeakeasyMetadata({ data: "json, name=pin_code" })
   pinCode: string;
 }

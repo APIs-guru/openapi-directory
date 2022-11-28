@@ -1,47 +1,48 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class EndpointSetVolumeForUsersPlaybackQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=device_id" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=device_id" })
   deviceId?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=volume_percent" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=volume_percent" })
   volumePercent: number;
 }
 
 
 export class EndpointSetVolumeForUsersPlaybackHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=Authorization" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Authorization" })
   authorization: string;
 }
 
 
 export class EndpointSetVolumeForUsersPlaybackSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   spotifyAuth: shared.SchemeSpotifyAuth;
 }
 
 
 export class EndpointSetVolumeForUsersPlaybackRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: EndpointSetVolumeForUsersPlaybackQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: EndpointSetVolumeForUsersPlaybackHeaders;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: EndpointSetVolumeForUsersPlaybackSecurity;
 }
 
 
 export class EndpointSetVolumeForUsersPlaybackResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   errorResponseObject?: shared.ErrorResponseObject;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

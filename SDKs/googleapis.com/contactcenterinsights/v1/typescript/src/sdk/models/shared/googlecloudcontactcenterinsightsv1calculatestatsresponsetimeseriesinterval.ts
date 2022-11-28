@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudContactcenterinsightsV1CalculateStatsResponseTimeSeriesInterval
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A single interval in a time series.
 **/
 export class GoogleCloudContactcenterinsightsV1CalculateStatsResponseTimeSeriesInterval extends SpeakeasyBase {
-  @Metadata({ data: "json, name=conversationCount" })
+  @SpeakeasyMetadata({ data: "json, name=conversationCount" })
   conversationCount?: number;
 
-  @Metadata({ data: "json, name=startTime" })
+  @SpeakeasyMetadata({ data: "json, name=startTime" })
   startTime?: string;
 }

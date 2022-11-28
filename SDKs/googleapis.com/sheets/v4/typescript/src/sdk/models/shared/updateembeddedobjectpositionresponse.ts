@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { EmbeddedObjectPosition } from "./embeddedobjectposition";
+
 
 
 // UpdateEmbeddedObjectPositionResponse
@@ -7,6 +8,6 @@ import { EmbeddedObjectPosition } from "./embeddedobjectposition";
  * The result of updating an embedded object's position.
 **/
 export class UpdateEmbeddedObjectPositionResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=position" })
+  @SpeakeasyMetadata({ data: "json, name=position" })
   position?: EmbeddedObjectPosition;
 }

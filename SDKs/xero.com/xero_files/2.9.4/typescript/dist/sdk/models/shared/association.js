@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ObjectGroupEnum } from "./objectgroupenum";
 import { ObjectTypeEnum } from "./objecttypeenum";
 var Association = /** @class */ (function (_super) {
@@ -31,19 +31,19 @@ var Association = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=FileId" }),
+        SpeakeasyMetadata({ data: "json, name=FileId" }),
         __metadata("design:type", String)
     ], Association.prototype, "fileId", void 0);
     __decorate([
-        Metadata({ data: "json, name=ObjectGroup" }),
+        SpeakeasyMetadata({ data: "json, name=ObjectGroup" }),
         __metadata("design:type", String)
     ], Association.prototype, "objectGroup", void 0);
     __decorate([
-        Metadata({ data: "json, name=ObjectId" }),
+        SpeakeasyMetadata({ data: "json, name=ObjectId" }),
         __metadata("design:type", String)
     ], Association.prototype, "objectId", void 0);
     __decorate([
-        Metadata({ data: "json, name=ObjectType" }),
+        SpeakeasyMetadata({ data: "json, name=ObjectType" }),
         __metadata("design:type", String)
     ], Association.prototype, "objectType", void 0);
     return Association;

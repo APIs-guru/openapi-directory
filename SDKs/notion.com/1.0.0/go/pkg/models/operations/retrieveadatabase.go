@@ -4,10 +4,6 @@ type RetrieveADatabasePathParams struct {
 	ID string `pathParam:"style=simple,explode=false,name=id"`
 }
 
-type RetrieveADatabaseRequest struct {
-	PathParams RetrieveADatabasePathParams
-}
-
 type RetrieveADatabase200ApplicationJSONPropertiesAuthorMultiSelectOptions struct {
 	Color *string `json:"color,omitempty"`
 	ID    *string `json:"id,omitempty"`
@@ -160,6 +156,10 @@ type RetrieveADatabase200ApplicationJSON struct {
 	Object         *string                                        `json:"object,omitempty"`
 	Properties     *RetrieveADatabase200ApplicationJSONProperties `json:"properties,omitempty"`
 	Title          []RetrieveADatabase200ApplicationJSONTitle     `json:"title,omitempty"`
+}
+
+type RetrieveADatabaseRequest struct {
+	PathParams RetrieveADatabasePathParams
 }
 
 type RetrieveADatabaseResponse struct {

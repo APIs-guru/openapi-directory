@@ -1,5 +1,7 @@
 package shared
 
+// CreateShipmentFromQuoteRequest
+// This complex type contains the request payload for the createFromShippingQuote method.
 type CreateShipmentFromQuoteRequest struct {
 	AdditionalOptions  []AdditionalOption `json:"additionalOptions,omitempty"`
 	LabelCustomMessage *string            `json:"labelCustomMessage,omitempty"`

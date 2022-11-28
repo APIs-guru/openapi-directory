@@ -5,25 +5,25 @@ from sdk.models import shared
 
 @dataclass
 class DeleteChannelCategoryPathParams:
-    category: str = field(default=None, metadata={'path_param': { 'field_name': 'category', 'style': 'simple', 'explode': False }})
-    channel_id: float = field(default=None, metadata={'path_param': { 'field_name': 'channel_id', 'style': 'simple', 'explode': False }})
+    category: str = field(metadata={'path_param': { 'field_name': 'category', 'style': 'simple', 'explode': False }})
+    channel_id: float = field(metadata={'path_param': { 'field_name': 'channel_id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class DeleteChannelCategorySecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DeleteChannelCategoryRequest:
-    path_params: DeleteChannelCategoryPathParams = field(default=None)
-    security: DeleteChannelCategorySecurity = field(default=None)
+    path_params: DeleteChannelCategoryPathParams = field()
+    security: DeleteChannelCategorySecurity = field()
     
 
 @dataclass
 class DeleteChannelCategoryResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error: Optional[shared.Error] = field(default=None)
     legacy_error: Optional[shared.LegacyError] = field(default=None)
     

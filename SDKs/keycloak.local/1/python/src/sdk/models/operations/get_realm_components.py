@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class GetRealmComponentsPathParams:
-    realm: str = field(default=None, metadata={'path_param': { 'field_name': 'realm', 'style': 'simple', 'explode': False }})
+    realm: str = field(metadata={'path_param': { 'field_name': 'realm', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -17,13 +17,13 @@ class GetRealmComponentsQueryParams:
 
 @dataclass
 class GetRealmComponentsRequest:
-    path_params: GetRealmComponentsPathParams = field(default=None)
-    query_params: GetRealmComponentsQueryParams = field(default=None)
+    path_params: GetRealmComponentsPathParams = field()
+    query_params: GetRealmComponentsQueryParams = field()
     
 
 @dataclass
 class GetRealmComponentsResponse:
+    content_type: str = field()
+    status_code: int = field()
     component_representations: Optional[List[shared.ComponentRepresentation]] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

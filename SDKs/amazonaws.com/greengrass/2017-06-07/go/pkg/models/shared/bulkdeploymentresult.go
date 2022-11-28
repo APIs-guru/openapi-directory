@@ -1,5 +1,7 @@
 package shared
 
+// BulkDeploymentResult
+// Information about an individual group deployment in a bulk deployment operation.
 type BulkDeploymentResult struct {
 	CreatedAt        *string             `json:"CreatedAt,omitempty"`
 	DeploymentArn    *string             `json:"DeploymentArn,omitempty"`

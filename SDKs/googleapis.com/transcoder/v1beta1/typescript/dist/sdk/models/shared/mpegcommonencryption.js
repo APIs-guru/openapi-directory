@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // MpegCommonEncryption
 /**
  * Configuration for MPEG Common Encryption (MPEG-CENC).
@@ -33,11 +33,11 @@ var MpegCommonEncryption = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=keyId" }),
+        SpeakeasyMetadata({ data: "json, name=keyId" }),
         __metadata("design:type", String)
     ], MpegCommonEncryption.prototype, "keyId", void 0);
     __decorate([
-        Metadata({ data: "json, name=scheme" }),
+        SpeakeasyMetadata({ data: "json, name=scheme" }),
         __metadata("design:type", String)
     ], MpegCommonEncryption.prototype, "scheme", void 0);
     return MpegCommonEncryption;

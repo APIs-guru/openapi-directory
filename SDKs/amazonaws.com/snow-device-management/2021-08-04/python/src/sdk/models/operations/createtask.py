@@ -1,6 +1,10 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,List,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -18,35 +22,39 @@ class CreateTaskHeaders:
 @dataclass_json
 @dataclass
 class CreateTaskRequestBodyCommand:
-    reboot: Optional[dict[str, Any]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'reboot' }})
-    unlock: Optional[dict[str, Any]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'unlock' }})
+    r"""CreateTaskRequestBodyCommand
+    The command given to the device to execute.
+    """
+    
+    reboot: Optional[dict[str, Any]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('reboot') }})
+    unlock: Optional[dict[str, Any]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('unlock') }})
     
 
 @dataclass_json
 @dataclass
 class CreateTaskRequestBody:
-    client_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'clientToken' }})
-    command: CreateTaskRequestBodyCommand = field(default=None, metadata={'dataclasses_json': { 'field_name': 'command' }})
-    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
-    tags: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tags' }})
-    targets: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'targets' }})
+    command: CreateTaskRequestBodyCommand = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('command') }})
+    targets: List[str] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('targets') }})
+    client_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('clientToken') }})
+    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('description') }})
+    tags: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('tags') }})
     
 
 @dataclass
 class CreateTaskRequest:
-    headers: CreateTaskHeaders = field(default=None)
-    request: CreateTaskRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: CreateTaskHeaders = field()
+    request: CreateTaskRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class CreateTaskResponse:
+    content_type: str = field()
+    status_code: int = field()
     access_denied_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     create_task_output: Optional[shared.CreateTaskOutput] = field(default=None)
     internal_server_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
     service_quota_exceeded_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     validation_exception: Optional[Any] = field(default=None)
     

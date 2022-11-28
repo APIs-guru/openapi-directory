@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { MessagePart } from "./messagepart";
+
 
 
 // Message
@@ -7,30 +8,30 @@ import { MessagePart } from "./messagepart";
  * An email message.
 **/
 export class Message extends SpeakeasyBase {
-  @Metadata({ data: "json, name=historyId" })
+  @SpeakeasyMetadata({ data: "json, name=historyId" })
   historyId?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=internalDate" })
+  @SpeakeasyMetadata({ data: "json, name=internalDate" })
   internalDate?: string;
 
-  @Metadata({ data: "json, name=labelIds" })
+  @SpeakeasyMetadata({ data: "json, name=labelIds" })
   labelIds?: string[];
 
-  @Metadata({ data: "json, name=payload" })
+  @SpeakeasyMetadata({ data: "json, name=payload" })
   payload?: MessagePart;
 
-  @Metadata({ data: "json, name=raw" })
+  @SpeakeasyMetadata({ data: "json, name=raw" })
   raw?: string;
 
-  @Metadata({ data: "json, name=sizeEstimate" })
+  @SpeakeasyMetadata({ data: "json, name=sizeEstimate" })
   sizeEstimate?: number;
 
-  @Metadata({ data: "json, name=snippet" })
+  @SpeakeasyMetadata({ data: "json, name=snippet" })
   snippet?: string;
 
-  @Metadata({ data: "json, name=threadId" })
+  @SpeakeasyMetadata({ data: "json, name=threadId" })
   threadId?: string;
 }

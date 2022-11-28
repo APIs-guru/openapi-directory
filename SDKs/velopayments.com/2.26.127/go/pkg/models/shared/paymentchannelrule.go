@@ -1,5 +1,7 @@
 package shared
 
+// PaymentChannelRule
+// Rules that will get applied when creating or updating a payment channel for the given country
 type PaymentChannelRule struct {
 	DisplayName  string `json:"displayName"`
 	DisplayOrder *int64 `json:"displayOrder,omitempty"`

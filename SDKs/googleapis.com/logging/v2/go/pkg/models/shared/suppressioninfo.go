@@ -8,6 +8,8 @@ const (
 	SuppressionInfoReasonEnumNotConsumed       SuppressionInfoReasonEnum = "NOT_CONSUMED"
 )
 
+// SuppressionInfo
+// Information about entries that were omitted from the session.
 type SuppressionInfo struct {
 	Reason          *SuppressionInfoReasonEnum `json:"reason,omitempty"`
 	SuppressedCount *int32                     `json:"suppressedCount,omitempty"`

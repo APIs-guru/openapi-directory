@@ -13,13 +13,13 @@ type CampaignsRemoveSecurity struct {
 	SakariAuth shared.SchemeSakariAuth `security:"scheme,type=oauth2"`
 }
 
+type CampaignsRemove200ApplicationJSON struct {
+	Success *bool `json:"success,omitempty"`
+}
+
 type CampaignsRemoveRequest struct {
 	PathParams CampaignsRemovePathParams
 	Security   CampaignsRemoveSecurity
-}
-
-type CampaignsRemove200ApplicationJSON struct {
-	Success *bool `json:"success,omitempty"`
 }
 
 type CampaignsRemoveResponse struct {

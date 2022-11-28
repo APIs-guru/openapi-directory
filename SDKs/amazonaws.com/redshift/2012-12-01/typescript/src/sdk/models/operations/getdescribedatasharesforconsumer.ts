@@ -1,12 +1,13 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum GetDescribeDataSharesForConsumerActionEnum {
     DescribeDataSharesForConsumer = "DescribeDataSharesForConsumer"
 }
 
 export enum GetDescribeDataSharesForConsumerStatusEnum {
-    Active = "ACTIVE"
-,    Available = "AVAILABLE"
+    Active = "ACTIVE",
+    Available = "AVAILABLE"
 }
 
 export enum GetDescribeDataSharesForConsumerVersionEnum {
@@ -15,66 +16,66 @@ export enum GetDescribeDataSharesForConsumerVersionEnum {
 
 
 export class GetDescribeDataSharesForConsumerQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Action" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Action" })
   action: GetDescribeDataSharesForConsumerActionEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=ConsumerArn" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=ConsumerArn" })
   consumerArn?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Marker" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Marker" })
   marker?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=MaxRecords" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=MaxRecords" })
   maxRecords?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Status" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Status" })
   status?: GetDescribeDataSharesForConsumerStatusEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Version" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Version" })
   version: GetDescribeDataSharesForConsumerVersionEnum;
 }
 
 
 export class GetDescribeDataSharesForConsumerHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
 
 export class GetDescribeDataSharesForConsumerRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetDescribeDataSharesForConsumerQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: GetDescribeDataSharesForConsumerHeaders;
 }
 
 
 export class GetDescribeDataSharesForConsumerResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

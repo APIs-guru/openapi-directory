@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { LoggerComponentEnum } from "./loggercomponentenum";
 import { LoggerLevelEnum } from "./loggerlevelenum";
 import { LoggerTypeEnum } from "./loggertypeenum";

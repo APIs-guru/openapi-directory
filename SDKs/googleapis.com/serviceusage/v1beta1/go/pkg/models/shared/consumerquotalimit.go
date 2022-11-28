@@ -1,5 +1,7 @@
 package shared
 
+// ConsumerQuotaLimit
+// Consumer quota settings for a quota limit.
 type ConsumerQuotaLimit struct {
 	AllowsAdminOverrides *bool         `json:"allowsAdminOverrides,omitempty"`
 	IsPrecise            *bool         `json:"isPrecise,omitempty"`

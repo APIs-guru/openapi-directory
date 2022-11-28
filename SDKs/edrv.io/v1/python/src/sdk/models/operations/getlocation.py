@@ -4,7 +4,7 @@ from typing import Optional
 
 @dataclass
 class GetLocationPathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -15,12 +15,12 @@ class GetLocationQueryParams:
 
 @dataclass
 class GetLocationRequest:
-    path_params: GetLocationPathParams = field(default=None)
-    query_params: GetLocationQueryParams = field(default=None)
+    path_params: GetLocationPathParams = field()
+    query_params: GetLocationQueryParams = field()
     
 
 @dataclass
 class GetLocationResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

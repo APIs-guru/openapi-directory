@@ -1,6 +1,7 @@
 
 
+
 export enum DataPullModeEnum {
-    Incremental = "Incremental"
-,    Complete = "Complete"
+    Incremental = "Incremental",
+    Complete = "Complete"
 }

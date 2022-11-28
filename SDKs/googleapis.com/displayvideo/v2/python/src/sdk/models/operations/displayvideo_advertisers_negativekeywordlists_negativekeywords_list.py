@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DisplayvideoAdvertisersNegativeKeywordListsNegativeKeywordsListPathParams:
-    advertiser_id: str = field(default=None, metadata={'path_param': { 'field_name': 'advertiserId', 'style': 'simple', 'explode': False }})
-    negative_keyword_list_id: str = field(default=None, metadata={'path_param': { 'field_name': 'negativeKeywordListId', 'style': 'simple', 'explode': False }})
+    advertiser_id: str = field(metadata={'path_param': { 'field_name': 'advertiserId', 'style': 'simple', 'explode': False }})
+    negative_keyword_list_id: str = field(metadata={'path_param': { 'field_name': 'negativeKeywordListId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -30,20 +31,20 @@ class DisplayvideoAdvertisersNegativeKeywordListsNegativeKeywordsListQueryParams
 
 @dataclass
 class DisplayvideoAdvertisersNegativeKeywordListsNegativeKeywordsListSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DisplayvideoAdvertisersNegativeKeywordListsNegativeKeywordsListRequest:
-    path_params: DisplayvideoAdvertisersNegativeKeywordListsNegativeKeywordsListPathParams = field(default=None)
-    query_params: DisplayvideoAdvertisersNegativeKeywordListsNegativeKeywordsListQueryParams = field(default=None)
-    security: DisplayvideoAdvertisersNegativeKeywordListsNegativeKeywordsListSecurity = field(default=None)
+    path_params: DisplayvideoAdvertisersNegativeKeywordListsNegativeKeywordsListPathParams = field()
+    query_params: DisplayvideoAdvertisersNegativeKeywordListsNegativeKeywordsListQueryParams = field()
+    security: DisplayvideoAdvertisersNegativeKeywordListsNegativeKeywordsListSecurity = field()
     
 
 @dataclass
 class DisplayvideoAdvertisersNegativeKeywordListsNegativeKeywordsListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     list_negative_keywords_response: Optional[shared.ListNegativeKeywordsResponse] = field(default=None)
-    status_code: int = field(default=None)
     

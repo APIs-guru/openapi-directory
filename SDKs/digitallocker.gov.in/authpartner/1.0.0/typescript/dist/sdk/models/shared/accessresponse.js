@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var AccessResponseEaadharEnum;
 (function (AccessResponseEaadharEnum) {
     AccessResponseEaadharEnum["Y"] = "Y";
@@ -40,47 +40,47 @@ var AccessResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=access_token" }),
+        SpeakeasyMetadata({ data: "json, name=access_token" }),
         __metadata("design:type", String)
     ], AccessResponse.prototype, "accessToken", void 0);
     __decorate([
-        Metadata({ data: "json, name=digilocker_id" }),
+        SpeakeasyMetadata({ data: "json, name=digilocker_id" }),
         __metadata("design:type", String)
     ], AccessResponse.prototype, "digilockerId", void 0);
     __decorate([
-        Metadata({ data: "json, name=dob" }),
+        SpeakeasyMetadata({ data: "json, name=dob" }),
         __metadata("design:type", Number)
     ], AccessResponse.prototype, "dob", void 0);
     __decorate([
-        Metadata({ data: "json, name=eaadhar" }),
+        SpeakeasyMetadata({ data: "json, name=eaadhar" }),
         __metadata("design:type", String)
     ], AccessResponse.prototype, "eaadhar", void 0);
     __decorate([
-        Metadata({ data: "json, name=expires_in" }),
+        SpeakeasyMetadata({ data: "json, name=expires_in" }),
         __metadata("design:type", Number)
     ], AccessResponse.prototype, "expiresIn", void 0);
     __decorate([
-        Metadata({ data: "json, name=gender" }),
+        SpeakeasyMetadata({ data: "json, name=gender" }),
         __metadata("design:type", String)
     ], AccessResponse.prototype, "gender", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], AccessResponse.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=reference_key" }),
+        SpeakeasyMetadata({ data: "json, name=reference_key" }),
         __metadata("design:type", String)
     ], AccessResponse.prototype, "referenceKey", void 0);
     __decorate([
-        Metadata({ data: "json, name=refresh_token" }),
+        SpeakeasyMetadata({ data: "json, name=refresh_token" }),
         __metadata("design:type", String)
     ], AccessResponse.prototype, "refreshToken", void 0);
     __decorate([
-        Metadata({ data: "json, name=scope" }),
+        SpeakeasyMetadata({ data: "json, name=scope" }),
         __metadata("design:type", String)
     ], AccessResponse.prototype, "scope", void 0);
     __decorate([
-        Metadata({ data: "json, name=token_type" }),
+        SpeakeasyMetadata({ data: "json, name=token_type" }),
         __metadata("design:type", String)
     ], AccessResponse.prototype, "tokenType", void 0);
     return AccessResponse;

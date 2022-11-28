@@ -1,12 +1,15 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class GetFunctionPathParams:
-    api_id: str = field(default=None, metadata={'path_param': { 'field_name': 'apiId', 'style': 'simple', 'explode': False }})
-    function_id: str = field(default=None, metadata={'path_param': { 'field_name': 'functionId', 'style': 'simple', 'explode': False }})
+    api_id: str = field(metadata={'path_param': { 'field_name': 'apiId', 'style': 'simple', 'explode': False }})
+    function_id: str = field(metadata={'path_param': { 'field_name': 'functionId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -22,16 +25,16 @@ class GetFunctionHeaders:
 
 @dataclass
 class GetFunctionRequest:
-    path_params: GetFunctionPathParams = field(default=None)
-    headers: GetFunctionHeaders = field(default=None)
+    headers: GetFunctionHeaders = field()
+    path_params: GetFunctionPathParams = field()
     
 
 @dataclass
 class GetFunctionResponse:
+    content_type: str = field()
+    status_code: int = field()
     concurrent_modification_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     get_function_response: Optional[shared.GetFunctionResponse] = field(default=None)
     not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     unauthorized_exception: Optional[Any] = field(default=None)
     

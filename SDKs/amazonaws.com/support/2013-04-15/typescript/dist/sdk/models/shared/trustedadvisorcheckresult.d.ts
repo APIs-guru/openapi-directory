@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { TrustedAdvisorCategorySpecificSummary } from "./trustedadvisorcategoryspecificsummary";
 import { TrustedAdvisorResourceDetail } from "./trustedadvisorresourcedetail";
 import { TrustedAdvisorResourcesSummary } from "./trustedadvisorresourcessummary";

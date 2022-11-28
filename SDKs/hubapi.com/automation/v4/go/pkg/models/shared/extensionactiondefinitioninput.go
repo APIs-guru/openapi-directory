@@ -1,5 +1,7 @@
 package shared
 
+// ExtensionActionDefinitionInput
+// State of custom workflow action to be created.
 type ExtensionActionDefinitionInput struct {
 	ActionURL              string                  `json:"actionUrl"`
 	ArchivedAt             *int64                  `json:"archivedAt,omitempty"`

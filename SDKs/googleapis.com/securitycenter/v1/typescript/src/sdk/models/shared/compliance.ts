@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Compliance
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Contains compliance information about a security standard indicating unmet recommendations.
 **/
 export class Compliance extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ids" })
+  @SpeakeasyMetadata({ data: "json, name=ids" })
   ids?: string[];
 
-  @Metadata({ data: "json, name=standard" })
+  @SpeakeasyMetadata({ data: "json, name=standard" })
   standard?: string;
 
-  @Metadata({ data: "json, name=version" })
+  @SpeakeasyMetadata({ data: "json, name=version" })
   version?: string;
 }

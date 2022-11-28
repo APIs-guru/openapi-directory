@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var ServicedirectoryProjectsLocationsRegistrationPoliciesTestIamPermissionsPathParams = /** @class */ (function (_super) {
     __extends(ServicedirectoryProjectsLocationsRegistrationPoliciesTestIamPermissionsPathParams, _super);
@@ -30,7 +30,7 @@ var ServicedirectoryProjectsLocationsRegistrationPoliciesTestIamPermissionsPathP
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=resource" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=resource" }),
         __metadata("design:type", String)
     ], ServicedirectoryProjectsLocationsRegistrationPoliciesTestIamPermissionsPathParams.prototype, "resource", void 0);
     return ServicedirectoryProjectsLocationsRegistrationPoliciesTestIamPermissionsPathParams;
@@ -42,47 +42,47 @@ var ServicedirectoryProjectsLocationsRegistrationPoliciesTestIamPermissionsQuery
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=$.xgafv" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=$.xgafv" }),
         __metadata("design:type", String)
     ], ServicedirectoryProjectsLocationsRegistrationPoliciesTestIamPermissionsQueryParams.prototype, "dollarXgafv", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=access_token" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=access_token" }),
         __metadata("design:type", String)
     ], ServicedirectoryProjectsLocationsRegistrationPoliciesTestIamPermissionsQueryParams.prototype, "accessToken", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=alt" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=alt" }),
         __metadata("design:type", String)
     ], ServicedirectoryProjectsLocationsRegistrationPoliciesTestIamPermissionsQueryParams.prototype, "alt", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=callback" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=callback" }),
         __metadata("design:type", String)
     ], ServicedirectoryProjectsLocationsRegistrationPoliciesTestIamPermissionsQueryParams.prototype, "callback", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=fields" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=fields" }),
         __metadata("design:type", String)
     ], ServicedirectoryProjectsLocationsRegistrationPoliciesTestIamPermissionsQueryParams.prototype, "fields", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=key" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=key" }),
         __metadata("design:type", String)
     ], ServicedirectoryProjectsLocationsRegistrationPoliciesTestIamPermissionsQueryParams.prototype, "key", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=oauth_token" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=oauth_token" }),
         __metadata("design:type", String)
     ], ServicedirectoryProjectsLocationsRegistrationPoliciesTestIamPermissionsQueryParams.prototype, "oauthToken", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=prettyPrint" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=prettyPrint" }),
         __metadata("design:type", Boolean)
     ], ServicedirectoryProjectsLocationsRegistrationPoliciesTestIamPermissionsQueryParams.prototype, "prettyPrint", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=quotaUser" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=quotaUser" }),
         __metadata("design:type", String)
     ], ServicedirectoryProjectsLocationsRegistrationPoliciesTestIamPermissionsQueryParams.prototype, "quotaUser", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=uploadType" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=uploadType" }),
         __metadata("design:type", String)
     ], ServicedirectoryProjectsLocationsRegistrationPoliciesTestIamPermissionsQueryParams.prototype, "uploadType", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=upload_protocol" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=upload_protocol" }),
         __metadata("design:type", String)
     ], ServicedirectoryProjectsLocationsRegistrationPoliciesTestIamPermissionsQueryParams.prototype, "uploadProtocol", void 0);
     return ServicedirectoryProjectsLocationsRegistrationPoliciesTestIamPermissionsQueryParams;
@@ -94,11 +94,11 @@ var ServicedirectoryProjectsLocationsRegistrationPoliciesTestIamPermissionsSecur
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2)
     ], ServicedirectoryProjectsLocationsRegistrationPoliciesTestIamPermissionsSecurity.prototype, "oauth2", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2c)
     ], ServicedirectoryProjectsLocationsRegistrationPoliciesTestIamPermissionsSecurity.prototype, "oauth2c", void 0);
     return ServicedirectoryProjectsLocationsRegistrationPoliciesTestIamPermissionsSecurity;
@@ -110,19 +110,19 @@ var ServicedirectoryProjectsLocationsRegistrationPoliciesTestIamPermissionsReque
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ServicedirectoryProjectsLocationsRegistrationPoliciesTestIamPermissionsPathParams)
     ], ServicedirectoryProjectsLocationsRegistrationPoliciesTestIamPermissionsRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ServicedirectoryProjectsLocationsRegistrationPoliciesTestIamPermissionsQueryParams)
     ], ServicedirectoryProjectsLocationsRegistrationPoliciesTestIamPermissionsRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", shared.TestIamPermissionsRequest)
     ], ServicedirectoryProjectsLocationsRegistrationPoliciesTestIamPermissionsRequest.prototype, "request", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ServicedirectoryProjectsLocationsRegistrationPoliciesTestIamPermissionsSecurity)
     ], ServicedirectoryProjectsLocationsRegistrationPoliciesTestIamPermissionsRequest.prototype, "security", void 0);
     return ServicedirectoryProjectsLocationsRegistrationPoliciesTestIamPermissionsRequest;
@@ -134,15 +134,15 @@ var ServicedirectoryProjectsLocationsRegistrationPoliciesTestIamPermissionsRespo
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], ServicedirectoryProjectsLocationsRegistrationPoliciesTestIamPermissionsResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], ServicedirectoryProjectsLocationsRegistrationPoliciesTestIamPermissionsResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.TestIamPermissionsResponse)
     ], ServicedirectoryProjectsLocationsRegistrationPoliciesTestIamPermissionsResponse.prototype, "testIamPermissionsResponse", void 0);
     return ServicedirectoryProjectsLocationsRegistrationPoliciesTestIamPermissionsResponse;

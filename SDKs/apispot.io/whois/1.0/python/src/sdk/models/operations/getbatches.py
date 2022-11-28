@@ -4,7 +4,7 @@ from typing import Any,Optional
 
 @dataclass
 class GetBatchesResponse:
+    content_type: str = field()
+    status_code: int = field()
     array_of_batch: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

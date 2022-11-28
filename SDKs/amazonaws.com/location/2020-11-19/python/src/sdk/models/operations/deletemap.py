@@ -1,10 +1,13 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 
 
 @dataclass
 class DeleteMapPathParams:
-    map_name: str = field(default=None, metadata={'path_param': { 'field_name': 'MapName', 'style': 'simple', 'explode': False }})
+    map_name: str = field(metadata={'path_param': { 'field_name': 'MapName', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -20,18 +23,18 @@ class DeleteMapHeaders:
 
 @dataclass
 class DeleteMapRequest:
-    path_params: DeleteMapPathParams = field(default=None)
-    headers: DeleteMapHeaders = field(default=None)
+    headers: DeleteMapHeaders = field()
+    path_params: DeleteMapPathParams = field()
     
 
 @dataclass
 class DeleteMapResponse:
+    content_type: str = field()
+    status_code: int = field()
     access_denied_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     delete_map_response: Optional[dict[str, Any]] = field(default=None)
     internal_server_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     validation_exception: Optional[Any] = field(default=None)
     

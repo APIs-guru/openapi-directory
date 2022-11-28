@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Aes128Encryption
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Configuration for AES-128 encryption.
 **/
 export class Aes128Encryption extends SpeakeasyBase {
-  @Metadata({ data: "json, name=keyUri" })
+  @SpeakeasyMetadata({ data: "json, name=keyUri" })
   keyUri?: string;
 }

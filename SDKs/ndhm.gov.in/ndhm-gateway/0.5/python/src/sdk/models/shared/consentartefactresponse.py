@@ -1,75 +1,70 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import hitypeenum_enum
-from . import consentmanagerpatientid
-from . import permission
-from . import usepurpose
-from . import requester
-from . import consentstatus_enum
-from . import error
-from . import requestreference
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ConsentArtefactResponseConsentConsentDetailCareContexts:
-    care_context_reference: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'careContextReference' }})
-    patient_reference: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'patientReference' }})
+    care_context_reference: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('careContextReference') }})
+    patient_reference: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('patientReference') }})
     
 
 @dataclass_json
 @dataclass
 class ConsentArtefactResponseConsentConsentDetailConsentManager:
-    id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
+    id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('id') }})
     
 
 @dataclass_json
 @dataclass
 class ConsentArtefactResponseConsentConsentDetailHip:
-    id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
+    id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('id') }})
     
 
 @dataclass_json
 @dataclass
 class ConsentArtefactResponseConsentConsentDetailHiu:
-    id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
+    id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('id') }})
     
 
 @dataclass_json
 @dataclass
 class ConsentArtefactResponseConsentConsentDetail:
-    care_contexts: List[ConsentArtefactResponseConsentConsentDetailCareContexts] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'careContexts' }})
-    consent_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'consentId' }})
-    consent_manager: ConsentArtefactResponseConsentConsentDetailConsentManager = field(default=None, metadata={'dataclasses_json': { 'field_name': 'consentManager' }})
-    created_at: datetime = field(default=None, metadata={'dataclasses_json': { 'field_name': 'createdAt', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    hi_types: List[hitypeenum_enum.HiTypeEnumEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'hiTypes' }})
-    hip: ConsentArtefactResponseConsentConsentDetailHip = field(default=None, metadata={'dataclasses_json': { 'field_name': 'hip' }})
-    hiu: ConsentArtefactResponseConsentConsentDetailHiu = field(default=None, metadata={'dataclasses_json': { 'field_name': 'hiu' }})
-    patient: consentmanagerpatientid.ConsentManagerPatientID = field(default=None, metadata={'dataclasses_json': { 'field_name': 'patient' }})
-    permission: permission.Permission = field(default=None, metadata={'dataclasses_json': { 'field_name': 'permission' }})
-    purpose: usepurpose.UsePurpose = field(default=None, metadata={'dataclasses_json': { 'field_name': 'purpose' }})
-    requester: Optional[requester.Requester] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'requester' }})
-    schema_version: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'schemaVersion' }})
+    care_contexts: List[ConsentArtefactResponseConsentConsentDetailCareContexts] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('careContexts') }})
+    consent_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('consentId') }})
+    consent_manager: ConsentArtefactResponseConsentConsentDetailConsentManager = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('consentManager') }})
+    created_at: datetime = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('createdAt'), 'encoder': utils.datetimeisoformat(False), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    hi_types: List[HiTypeEnumEnum] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('hiTypes') }})
+    hip: ConsentArtefactResponseConsentConsentDetailHip = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('hip') }})
+    hiu: ConsentArtefactResponseConsentConsentDetailHiu = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('hiu') }})
+    patient: ConsentManagerPatientID = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('patient') }})
+    permission: Permission = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('permission') }})
+    purpose: UsePurpose = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('purpose') }})
+    requester: Optional[Requester] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('requester') }})
+    schema_version: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('schemaVersion') }})
     
 
 @dataclass_json
 @dataclass
 class ConsentArtefactResponseConsent:
-    consent_detail: ConsentArtefactResponseConsentConsentDetail = field(default=None, metadata={'dataclasses_json': { 'field_name': 'consentDetail' }})
-    signature: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'signature' }})
-    status: consentstatus_enum.ConsentStatusEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+    consent_detail: ConsentArtefactResponseConsentConsentDetail = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('consentDetail') }})
+    signature: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('signature') }})
+    status: ConsentStatusEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('status') }})
     
 
 @dataclass_json
 @dataclass
 class ConsentArtefactResponse:
-    consent: Optional[ConsentArtefactResponseConsent] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'consent' }})
-    error: Optional[error.Error] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'error' }})
-    request_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'requestId' }})
-    resp: requestreference.RequestReference = field(default=None, metadata={'dataclasses_json': { 'field_name': 'resp' }})
-    timestamp: datetime = field(default=None, metadata={'dataclasses_json': { 'field_name': 'timestamp', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    request_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('requestId') }})
+    resp: RequestReference = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('resp') }})
+    timestamp: datetime = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('timestamp'), 'encoder': utils.datetimeisoformat(False), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    consent: Optional[ConsentArtefactResponseConsent] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('consent') }})
+    error: Optional[Error] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('error') }})
     

@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import rendererformattedstrings
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class I18n:
-    renderer_formatted_strings: Optional[rendererformattedstrings.RendererFormattedStrings] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'rendererFormattedStrings' }})
+    r"""I18n
+    Message containing the i18n data for the LHR - Version 1.
+    """
+    
+    renderer_formatted_strings: Optional[RendererFormattedStrings] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('rendererFormattedStrings') }})
     

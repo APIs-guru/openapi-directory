@@ -1,16 +1,17 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ListStreamConsumersInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=MaxResults" })
+  @SpeakeasyMetadata({ data: "json, name=MaxResults" })
   maxResults?: number;
 
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=StreamARN" })
+  @SpeakeasyMetadata({ data: "json, name=StreamARN" })
   streamArn: string;
 
-  @Metadata({ data: "json, name=StreamCreationTimestamp" })
+  @SpeakeasyMetadata({ data: "json, name=StreamCreationTimestamp" })
   streamCreationTimestamp?: Date;
 }

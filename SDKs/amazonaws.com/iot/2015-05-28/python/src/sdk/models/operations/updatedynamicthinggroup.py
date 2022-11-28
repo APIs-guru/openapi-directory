@@ -1,12 +1,16 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
 @dataclass
 class UpdateDynamicThingGroupPathParams:
-    thing_group_name: str = field(default=None, metadata={'path_param': { 'field_name': 'thingGroupName', 'style': 'simple', 'explode': False }})
+    thing_group_name: str = field(metadata={'path_param': { 'field_name': 'thingGroupName', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -23,35 +27,39 @@ class UpdateDynamicThingGroupHeaders:
 @dataclass_json
 @dataclass
 class UpdateDynamicThingGroupRequestBodyThingGroupProperties:
-    attribute_payload: Optional[shared.AttributePayload] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'attributePayload' }})
-    thing_group_description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'thingGroupDescription' }})
+    r"""UpdateDynamicThingGroupRequestBodyThingGroupProperties
+    Thing group properties.
+    """
+    
+    attribute_payload: Optional[shared.AttributePayload] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('attributePayload') }})
+    thing_group_description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('thingGroupDescription') }})
     
 
 @dataclass_json
 @dataclass
 class UpdateDynamicThingGroupRequestBody:
-    expected_version: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'expectedVersion' }})
-    index_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'indexName' }})
-    query_string: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'queryString' }})
-    query_version: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'queryVersion' }})
-    thing_group_properties: UpdateDynamicThingGroupRequestBodyThingGroupProperties = field(default=None, metadata={'dataclasses_json': { 'field_name': 'thingGroupProperties' }})
+    thing_group_properties: UpdateDynamicThingGroupRequestBodyThingGroupProperties = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('thingGroupProperties') }})
+    expected_version: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('expectedVersion') }})
+    index_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('indexName') }})
+    query_string: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('queryString') }})
+    query_version: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('queryVersion') }})
     
 
 @dataclass
 class UpdateDynamicThingGroupRequest:
-    path_params: UpdateDynamicThingGroupPathParams = field(default=None)
-    headers: UpdateDynamicThingGroupHeaders = field(default=None)
-    request: UpdateDynamicThingGroupRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: UpdateDynamicThingGroupHeaders = field()
+    path_params: UpdateDynamicThingGroupPathParams = field()
+    request: UpdateDynamicThingGroupRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class UpdateDynamicThingGroupResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     internal_failure_exception: Optional[Any] = field(default=None)
     invalid_query_exception: Optional[Any] = field(default=None)
     invalid_request_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     update_dynamic_thing_group_response: Optional[shared.UpdateDynamicThingGroupResponse] = field(default=None)
     version_conflict_exception: Optional[Any] = field(default=None)

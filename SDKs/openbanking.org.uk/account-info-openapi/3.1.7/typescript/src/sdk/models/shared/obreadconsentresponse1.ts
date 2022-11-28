@@ -1,76 +1,77 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Links } from "./links";
 import { Meta } from "./meta";
 
+
 export enum ObReadConsentResponse1DataPermissionsEnum {
-    ReadAccountsBasic = "ReadAccountsBasic"
-,    ReadAccountsDetail = "ReadAccountsDetail"
-,    ReadBalances = "ReadBalances"
-,    ReadBeneficiariesBasic = "ReadBeneficiariesBasic"
-,    ReadBeneficiariesDetail = "ReadBeneficiariesDetail"
-,    ReadDirectDebits = "ReadDirectDebits"
-,    ReadOffers = "ReadOffers"
-,    ReadPan = "ReadPAN"
-,    ReadParty = "ReadParty"
-,    ReadPartyPsu = "ReadPartyPSU"
-,    ReadProducts = "ReadProducts"
-,    ReadScheduledPaymentsBasic = "ReadScheduledPaymentsBasic"
-,    ReadScheduledPaymentsDetail = "ReadScheduledPaymentsDetail"
-,    ReadStandingOrdersBasic = "ReadStandingOrdersBasic"
-,    ReadStandingOrdersDetail = "ReadStandingOrdersDetail"
-,    ReadStatementsBasic = "ReadStatementsBasic"
-,    ReadStatementsDetail = "ReadStatementsDetail"
-,    ReadTransactionsBasic = "ReadTransactionsBasic"
-,    ReadTransactionsCredits = "ReadTransactionsCredits"
-,    ReadTransactionsDebits = "ReadTransactionsDebits"
-,    ReadTransactionsDetail = "ReadTransactionsDetail"
+    ReadAccountsBasic = "ReadAccountsBasic",
+    ReadAccountsDetail = "ReadAccountsDetail",
+    ReadBalances = "ReadBalances",
+    ReadBeneficiariesBasic = "ReadBeneficiariesBasic",
+    ReadBeneficiariesDetail = "ReadBeneficiariesDetail",
+    ReadDirectDebits = "ReadDirectDebits",
+    ReadOffers = "ReadOffers",
+    ReadPan = "ReadPAN",
+    ReadParty = "ReadParty",
+    ReadPartyPsu = "ReadPartyPSU",
+    ReadProducts = "ReadProducts",
+    ReadScheduledPaymentsBasic = "ReadScheduledPaymentsBasic",
+    ReadScheduledPaymentsDetail = "ReadScheduledPaymentsDetail",
+    ReadStandingOrdersBasic = "ReadStandingOrdersBasic",
+    ReadStandingOrdersDetail = "ReadStandingOrdersDetail",
+    ReadStatementsBasic = "ReadStatementsBasic",
+    ReadStatementsDetail = "ReadStatementsDetail",
+    ReadTransactionsBasic = "ReadTransactionsBasic",
+    ReadTransactionsCredits = "ReadTransactionsCredits",
+    ReadTransactionsDebits = "ReadTransactionsDebits",
+    ReadTransactionsDetail = "ReadTransactionsDetail"
 }
 
 export enum ObReadConsentResponse1DataStatusEnum {
-    Authorised = "Authorised"
-,    AwaitingAuthorisation = "AwaitingAuthorisation"
-,    Rejected = "Rejected"
-,    Revoked = "Revoked"
+    Authorised = "Authorised",
+    AwaitingAuthorisation = "AwaitingAuthorisation",
+    Rejected = "Rejected",
+    Revoked = "Revoked"
 }
 
 
 export class ObReadConsentResponse1Data extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ConsentId" })
+  @SpeakeasyMetadata({ data: "json, name=ConsentId" })
   consentId: string;
 
-  @Metadata({ data: "json, name=CreationDateTime" })
+  @SpeakeasyMetadata({ data: "json, name=CreationDateTime" })
   creationDateTime: Date;
 
-  @Metadata({ data: "json, name=ExpirationDateTime" })
+  @SpeakeasyMetadata({ data: "json, name=ExpirationDateTime" })
   expirationDateTime?: Date;
 
-  @Metadata({ data: "json, name=Permissions" })
+  @SpeakeasyMetadata({ data: "json, name=Permissions" })
   permissions: ObReadConsentResponse1DataPermissionsEnum[];
 
-  @Metadata({ data: "json, name=Status" })
+  @SpeakeasyMetadata({ data: "json, name=Status" })
   status: ObReadConsentResponse1DataStatusEnum;
 
-  @Metadata({ data: "json, name=StatusUpdateDateTime" })
+  @SpeakeasyMetadata({ data: "json, name=StatusUpdateDateTime" })
   statusUpdateDateTime: Date;
 
-  @Metadata({ data: "json, name=TransactionFromDateTime" })
+  @SpeakeasyMetadata({ data: "json, name=TransactionFromDateTime" })
   transactionFromDateTime?: Date;
 
-  @Metadata({ data: "json, name=TransactionToDateTime" })
+  @SpeakeasyMetadata({ data: "json, name=TransactionToDateTime" })
   transactionToDateTime?: Date;
 }
 
 
 export class ObReadConsentResponse1 extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Data" })
+  @SpeakeasyMetadata({ data: "json, name=Data" })
   data: ObReadConsentResponse1Data;
 
-  @Metadata({ data: "json, name=Links" })
+  @SpeakeasyMetadata({ data: "json, name=Links" })
   links?: Links;
 
-  @Metadata({ data: "json, name=Meta" })
+  @SpeakeasyMetadata({ data: "json, name=Meta" })
   meta?: Meta;
 
-  @Metadata({ data: "json, name=Risk" })
+  @SpeakeasyMetadata({ data: "json, name=Risk" })
   risk: Map<string, any>;
 }

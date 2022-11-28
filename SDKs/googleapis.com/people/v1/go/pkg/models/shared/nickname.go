@@ -12,8 +12,18 @@ const (
 	NicknameTypeEnumShortName     NicknameTypeEnum = "SHORT_NAME"
 )
 
+// Nickname
+// A person's nickname.
 type Nickname struct {
 	Metadata *FieldMetadata    `json:"metadata,omitempty"`
 	Type     *NicknameTypeEnum `json:"type,omitempty"`
 	Value    *string           `json:"value,omitempty"`
+}
+
+// NicknameInput
+// A person's nickname.
+type NicknameInput struct {
+	Metadata *FieldMetadataInput `json:"metadata,omitempty"`
+	Type     *NicknameTypeEnum   `json:"type,omitempty"`
+	Value    *string             `json:"value,omitempty"`
 }

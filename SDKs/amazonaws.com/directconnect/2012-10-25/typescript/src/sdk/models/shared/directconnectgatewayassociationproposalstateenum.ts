@@ -1,7 +1,8 @@
 
 
+
 export enum DirectConnectGatewayAssociationProposalStateEnum {
-    Requested = "requested"
-,    Accepted = "accepted"
-,    Deleted = "deleted"
+    Requested = "requested",
+    Accepted = "accepted",
+    Deleted = "deleted"
 }

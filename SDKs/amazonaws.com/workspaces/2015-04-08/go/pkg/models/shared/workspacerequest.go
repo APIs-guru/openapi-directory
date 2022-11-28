@@ -1,5 +1,7 @@
 package shared
 
+// WorkspaceRequest
+// Describes the information used to create a WorkSpace.
 type WorkspaceRequest struct {
 	BundleID                    string               `json:"BundleId"`
 	DirectoryID                 string               `json:"DirectoryId"`

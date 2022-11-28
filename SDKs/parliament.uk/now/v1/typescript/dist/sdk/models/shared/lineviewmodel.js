@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { MemberViewModel } from "./memberviewmodel";
 export var LineViewModelContentTypeEnum;
 (function (LineViewModelContentTypeEnum) {
@@ -72,43 +72,43 @@ var LineViewModel = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=content" }),
+        SpeakeasyMetadata({ data: "json, name=content" }),
         __metadata("design:type", String)
     ], LineViewModel.prototype, "content", void 0);
     __decorate([
-        Metadata({ data: "json, name=contentAdditionalJson" }),
+        SpeakeasyMetadata({ data: "json, name=contentAdditionalJson" }),
         __metadata("design:type", String)
     ], LineViewModel.prototype, "contentAdditionalJson", void 0);
     __decorate([
-        Metadata({ data: "json, name=contentType" }),
+        SpeakeasyMetadata({ data: "json, name=contentType" }),
         __metadata("design:type", String)
     ], LineViewModel.prototype, "contentType", void 0);
     __decorate([
-        Metadata({ data: "json, name=contentUrl" }),
+        SpeakeasyMetadata({ data: "json, name=contentUrl" }),
         __metadata("design:type", String)
     ], LineViewModel.prototype, "contentUrl", void 0);
     __decorate([
-        Metadata({ data: "json, name=displayOrder" }),
+        SpeakeasyMetadata({ data: "json, name=displayOrder" }),
         __metadata("design:type", Number)
     ], LineViewModel.prototype, "displayOrder", void 0);
     __decorate([
-        Metadata({ data: "json, name=forceCapitalisation" }),
+        SpeakeasyMetadata({ data: "json, name=forceCapitalisation" }),
         __metadata("design:type", Boolean)
     ], LineViewModel.prototype, "forceCapitalisation", void 0);
     __decorate([
-        Metadata({ data: "json, name=horizontalAlignment" }),
+        SpeakeasyMetadata({ data: "json, name=horizontalAlignment" }),
         __metadata("design:type", String)
     ], LineViewModel.prototype, "horizontalAlignment", void 0);
     __decorate([
-        Metadata({ data: "json, name=member" }),
+        SpeakeasyMetadata({ data: "json, name=member" }),
         __metadata("design:type", MemberViewModel)
     ], LineViewModel.prototype, "member", void 0);
     __decorate([
-        Metadata({ data: "json, name=style" }),
+        SpeakeasyMetadata({ data: "json, name=style" }),
         __metadata("design:type", String)
     ], LineViewModel.prototype, "style", void 0);
     __decorate([
-        Metadata({ data: "json, name=verticalAlignment" }),
+        SpeakeasyMetadata({ data: "json, name=verticalAlignment" }),
         __metadata("design:type", String)
     ], LineViewModel.prototype, "verticalAlignment", void 0);
     return LineViewModel;

@@ -13,6 +13,8 @@ const (
 	DealerDbModelsVoucherTypeEnumRightToRepair DealerDbModelsVoucherTypeEnum = "RightToRepair"
 )
 
+// DealerDbModelsVoucher
+// A voucher for EDT activation
 type DealerDbModelsVoucher struct {
 	CreatedDate    *time.Time                     `json:"CreatedDate,omitempty" form:"name=CreatedDate"`
 	DealerCode     *string                        `json:"DealerCode,omitempty" form:"name=DealerCode"`

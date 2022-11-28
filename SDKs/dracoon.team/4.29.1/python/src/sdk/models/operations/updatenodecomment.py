@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class UpdateNodeCommentPathParams:
-    comment_id: int = field(default=None, metadata={'path_param': { 'field_name': 'comment_id', 'style': 'simple', 'explode': False }})
+    comment_id: int = field(metadata={'path_param': { 'field_name': 'comment_id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -16,15 +19,15 @@ class UpdateNodeCommentHeaders:
 
 @dataclass
 class UpdateNodeCommentRequest:
-    path_params: UpdateNodeCommentPathParams = field(default=None)
-    headers: UpdateNodeCommentHeaders = field(default=None)
-    request: shared.ChangeNodeCommentRequest = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: UpdateNodeCommentHeaders = field()
+    path_params: UpdateNodeCommentPathParams = field()
+    request: shared.ChangeNodeCommentRequest = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class UpdateNodeCommentResponse:
+    content_type: str = field()
+    status_code: int = field()
     comment: Optional[shared.Comment] = field(default=None)
-    content_type: str = field(default=None)
     error_response: Optional[shared.ErrorResponse] = field(default=None)
-    status_code: int = field(default=None)
     

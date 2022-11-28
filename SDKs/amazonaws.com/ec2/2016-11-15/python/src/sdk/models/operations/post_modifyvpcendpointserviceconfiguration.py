@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostModifyVpcEndpointServiceConfigurationActionEnum(str, Enum):
     MODIFY_VPC_ENDPOINT_SERVICE_CONFIGURATION = "ModifyVpcEndpointServiceConfiguration"
@@ -10,8 +14,8 @@ class PostModifyVpcEndpointServiceConfigurationVersionEnum(str, Enum):
 
 @dataclass
 class PostModifyVpcEndpointServiceConfigurationQueryParams:
-    action: PostModifyVpcEndpointServiceConfigurationActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostModifyVpcEndpointServiceConfigurationVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostModifyVpcEndpointServiceConfigurationActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostModifyVpcEndpointServiceConfigurationVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostModifyVpcEndpointServiceConfigurationHeaders:
 
 @dataclass
 class PostModifyVpcEndpointServiceConfigurationRequest:
-    query_params: PostModifyVpcEndpointServiceConfigurationQueryParams = field(default=None)
-    headers: PostModifyVpcEndpointServiceConfigurationHeaders = field(default=None)
+    headers: PostModifyVpcEndpointServiceConfigurationHeaders = field()
+    query_params: PostModifyVpcEndpointServiceConfigurationQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostModifyVpcEndpointServiceConfigurationResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

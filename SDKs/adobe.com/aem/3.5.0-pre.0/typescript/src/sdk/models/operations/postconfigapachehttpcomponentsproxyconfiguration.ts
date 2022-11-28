@@ -1,55 +1,56 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class PostConfigApacheHttpComponentsProxyConfigurationQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=proxy.enabled" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=proxy.enabled" })
   proxyEnabled?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=proxy.enabled@TypeHint" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=proxy.enabled@TypeHint" })
   proxyEnabledAtTypeHint?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=proxy.exceptions" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=proxy.exceptions" })
   proxyExceptions?: string[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=proxy.exceptions@TypeHint" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=proxy.exceptions@TypeHint" })
   proxyExceptionsAtTypeHint?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=proxy.host" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=proxy.host" })
   proxyHost?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=proxy.host@TypeHint" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=proxy.host@TypeHint" })
   proxyHostAtTypeHint?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=proxy.password" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=proxy.password" })
   proxyPassword?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=proxy.password@TypeHint" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=proxy.password@TypeHint" })
   proxyPasswordAtTypeHint?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=proxy.port" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=proxy.port" })
   proxyPort?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=proxy.port@TypeHint" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=proxy.port@TypeHint" })
   proxyPortAtTypeHint?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=proxy.user" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=proxy.user" })
   proxyUser?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=proxy.user@TypeHint" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=proxy.user@TypeHint" })
   proxyUserAtTypeHint?: string;
 }
 
 
 export class PostConfigApacheHttpComponentsProxyConfigurationRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: PostConfigApacheHttpComponentsProxyConfigurationQueryParams;
 }
 
 
 export class PostConfigApacheHttpComponentsProxyConfigurationResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

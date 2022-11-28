@@ -8,6 +8,8 @@ const (
 	AccountCredentialsPurposeEnumShopifyIntegration                   AccountCredentialsPurposeEnum = "SHOPIFY_INTEGRATION"
 )
 
+// AccountCredentials
+// Credentials allowing Google to call a partner's API on behalf of a merchant.
 type AccountCredentials struct {
 	AccessToken *string                        `json:"accessToken,omitempty"`
 	ExpiresIn   *string                        `json:"expiresIn,omitempty"`

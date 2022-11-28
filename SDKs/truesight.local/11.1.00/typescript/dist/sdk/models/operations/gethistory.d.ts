@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 export declare class GetHistoryQueryParams extends SpeakeasyBase {
     applicationId?: string;
     from?: number;

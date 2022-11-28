@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // DownloadTokenGenerateResponse
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Download URL
 **/
 export class DownloadTokenGenerateResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=downloadUrl" })
+  @SpeakeasyMetadata({ data: "json, name=downloadUrl" })
   downloadUrl: string;
 
-  @Metadata({ data: "json, name=token" })
+  @SpeakeasyMetadata({ data: "json, name=token" })
   token: string;
 }

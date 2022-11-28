@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BatchDeleteImportDataErrorCodeEnum } from "./batchdeleteimportdataerrorcodeenum";
 // BatchDeleteImportDataError
 /**
@@ -34,15 +34,15 @@ var BatchDeleteImportDataError = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=errorCode" }),
+        SpeakeasyMetadata({ data: "json, name=errorCode" }),
         __metadata("design:type", String)
     ], BatchDeleteImportDataError.prototype, "errorCode", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], BatchDeleteImportDataError.prototype, "errorDescription", void 0);
     __decorate([
-        Metadata({ data: "json, name=importTaskId" }),
+        SpeakeasyMetadata({ data: "json, name=importTaskId" }),
         __metadata("design:type", String)
     ], BatchDeleteImportDataError.prototype, "importTaskId", void 0);
     return BatchDeleteImportDataError;

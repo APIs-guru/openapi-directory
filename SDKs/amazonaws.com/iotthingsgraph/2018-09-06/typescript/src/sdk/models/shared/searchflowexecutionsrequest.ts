@@ -1,22 +1,23 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class SearchFlowExecutionsRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=endTime" })
+  @SpeakeasyMetadata({ data: "json, name=endTime" })
   endTime?: Date;
 
-  @Metadata({ data: "json, name=flowExecutionId" })
+  @SpeakeasyMetadata({ data: "json, name=flowExecutionId" })
   flowExecutionId?: string;
 
-  @Metadata({ data: "json, name=maxResults" })
+  @SpeakeasyMetadata({ data: "json, name=maxResults" })
   maxResults?: number;
 
-  @Metadata({ data: "json, name=nextToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=startTime" })
+  @SpeakeasyMetadata({ data: "json, name=startTime" })
   startTime?: Date;
 
-  @Metadata({ data: "json, name=systemInstanceId" })
+  @SpeakeasyMetadata({ data: "json, name=systemInstanceId" })
   systemInstanceId: string;
 }

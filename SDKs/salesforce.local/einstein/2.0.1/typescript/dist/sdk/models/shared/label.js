@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // Label
 /**
  * Contains information about the label with which the example is associated.
@@ -33,19 +33,19 @@ var Label = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=datasetId" }),
+        SpeakeasyMetadata({ data: "json, name=datasetId" }),
         __metadata("design:type", Number)
     ], Label.prototype, "datasetId", void 0);
     __decorate([
-        Metadata({ data: "json, name=id" }),
+        SpeakeasyMetadata({ data: "json, name=id" }),
         __metadata("design:type", Number)
     ], Label.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], Label.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=numExamples" }),
+        SpeakeasyMetadata({ data: "json, name=numExamples" }),
         __metadata("design:type", Number)
     ], Label.prototype, "numExamples", void 0);
     return Label;

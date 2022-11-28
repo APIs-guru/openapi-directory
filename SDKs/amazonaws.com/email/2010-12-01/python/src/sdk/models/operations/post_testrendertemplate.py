@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostTestRenderTemplateActionEnum(str, Enum):
     TEST_RENDER_TEMPLATE = "TestRenderTemplate"
@@ -10,8 +14,8 @@ class PostTestRenderTemplateVersionEnum(str, Enum):
 
 @dataclass
 class PostTestRenderTemplateQueryParams:
-    action: PostTestRenderTemplateActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostTestRenderTemplateVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostTestRenderTemplateActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostTestRenderTemplateVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostTestRenderTemplateHeaders:
 
 @dataclass
 class PostTestRenderTemplateRequest:
-    query_params: PostTestRenderTemplateQueryParams = field(default=None)
-    headers: PostTestRenderTemplateHeaders = field(default=None)
+    headers: PostTestRenderTemplateHeaders = field()
+    query_params: PostTestRenderTemplateQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostTestRenderTemplateResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

@@ -34,6 +34,8 @@ const (
 	GetTranscriptRequestBodySortOrderEnumAscending  GetTranscriptRequestBodySortOrderEnum = "ASCENDING"
 )
 
+// GetTranscriptRequestBodyStartPosition
+// A filtering option for where to start. For example, if you sent 100 messages, start with message 50.
 type GetTranscriptRequestBodyStartPosition struct {
 	AbsoluteTime *string `json:"AbsoluteTime,omitempty"`
 	ID           *string `json:"Id,omitempty"`

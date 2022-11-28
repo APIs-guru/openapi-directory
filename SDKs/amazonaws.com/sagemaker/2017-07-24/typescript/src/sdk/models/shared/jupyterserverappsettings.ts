@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ResourceSpec } from "./resourcespec";
+
 
 
 // JupyterServerAppSettings
@@ -7,9 +8,9 @@ import { ResourceSpec } from "./resourcespec";
  * The JupyterServer app settings.
 **/
 export class JupyterServerAppSettings extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DefaultResourceSpec" })
+  @SpeakeasyMetadata({ data: "json, name=DefaultResourceSpec" })
   defaultResourceSpec?: ResourceSpec;
 
-  @Metadata({ data: "json, name=LifecycleConfigArns" })
+  @SpeakeasyMetadata({ data: "json, name=LifecycleConfigArns" })
   lifecycleConfigArns?: string[];
 }

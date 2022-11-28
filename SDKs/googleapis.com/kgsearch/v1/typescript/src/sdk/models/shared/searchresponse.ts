@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // SearchResponse
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Response message includes the context and a list of matching results which contain the detail of associated entities.
 **/
 export class SearchResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=@context" })
+  @SpeakeasyMetadata({ data: "json, name=@context" })
   atContext?: any;
 
-  @Metadata({ data: "json, name=@type" })
+  @SpeakeasyMetadata({ data: "json, name=@type" })
   atType?: any;
 
-  @Metadata({ data: "json, name=itemListElement" })
+  @SpeakeasyMetadata({ data: "json, name=itemListElement" })
   itemListElement?: any[];
 }

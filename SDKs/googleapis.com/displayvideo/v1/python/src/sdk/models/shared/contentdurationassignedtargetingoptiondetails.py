@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class ContentDurationAssignedTargetingOptionDetailsContentDurationEnum(str, Enum):
     CONTENT_DURATION_UNSPECIFIED = "CONTENT_DURATION_UNSPECIFIED"
@@ -15,7 +17,21 @@ class ContentDurationAssignedTargetingOptionDetailsContentDurationEnum(str, Enum
 
 @dataclass_json
 @dataclass
+class ContentDurationAssignedTargetingOptionDetailsInput:
+    r"""ContentDurationAssignedTargetingOptionDetailsInput
+    Details for content duration assigned targeting option. This will be populated in the content_duration_details field when targeting_type is `TARGETING_TYPE_CONTENT_DURATION`. Explicitly targeting all options is not supported. Remove all content duration targeting options to achieve this effect.
+    """
+    
+    targeting_option_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('targetingOptionId') }})
+    
+
+@dataclass_json
+@dataclass
 class ContentDurationAssignedTargetingOptionDetails:
-    content_duration: Optional[ContentDurationAssignedTargetingOptionDetailsContentDurationEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'contentDuration' }})
-    targeting_option_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'targetingOptionId' }})
+    r"""ContentDurationAssignedTargetingOptionDetails
+    Details for content duration assigned targeting option. This will be populated in the content_duration_details field when targeting_type is `TARGETING_TYPE_CONTENT_DURATION`. Explicitly targeting all options is not supported. Remove all content duration targeting options to achieve this effect.
+    """
+    
+    content_duration: Optional[ContentDurationAssignedTargetingOptionDetailsContentDurationEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('contentDuration') }})
+    targeting_option_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('targetingOptionId') }})
     

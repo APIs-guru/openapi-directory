@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AttributeValueList } from "./attributevaluelist";
 // Condition
 /**
@@ -34,15 +34,15 @@ var Condition = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=after" }),
+        SpeakeasyMetadata({ data: "json, name=after" }),
         __metadata("design:type", Date)
     ], Condition.prototype, "after", void 0);
     __decorate([
-        Metadata({ data: "json, name=before" }),
+        SpeakeasyMetadata({ data: "json, name=before" }),
         __metadata("design:type", Date)
     ], Condition.prototype, "before", void 0);
     __decorate([
-        Metadata({ data: "json, name=equals" }),
+        SpeakeasyMetadata({ data: "json, name=equals" }),
         __metadata("design:type", AttributeValueList)
     ], Condition.prototype, "equals", void 0);
     return Condition;

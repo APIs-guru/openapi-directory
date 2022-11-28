@@ -4,18 +4,18 @@ from typing import Any,Optional
 
 @dataclass
 class PostInstancesIDModifyPathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class PostInstancesIDModifyRequest:
-    path_params: PostInstancesIDModifyPathParams = field(default=None)
+    path_params: PostInstancesIDModifyPathParams = field()
     request: Optional[Any] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class PostInstancesIDModifyResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

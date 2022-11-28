@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostDeleteLocalGatewayRouteTableVpcAssociationActionEnum(str, Enum):
     DELETE_LOCAL_GATEWAY_ROUTE_TABLE_VPC_ASSOCIATION = "DeleteLocalGatewayRouteTableVpcAssociation"
@@ -10,8 +14,8 @@ class PostDeleteLocalGatewayRouteTableVpcAssociationVersionEnum(str, Enum):
 
 @dataclass
 class PostDeleteLocalGatewayRouteTableVpcAssociationQueryParams:
-    action: PostDeleteLocalGatewayRouteTableVpcAssociationActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostDeleteLocalGatewayRouteTableVpcAssociationVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostDeleteLocalGatewayRouteTableVpcAssociationActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostDeleteLocalGatewayRouteTableVpcAssociationVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostDeleteLocalGatewayRouteTableVpcAssociationHeaders:
 
 @dataclass
 class PostDeleteLocalGatewayRouteTableVpcAssociationRequest:
-    query_params: PostDeleteLocalGatewayRouteTableVpcAssociationQueryParams = field(default=None)
-    headers: PostDeleteLocalGatewayRouteTableVpcAssociationHeaders = field(default=None)
+    headers: PostDeleteLocalGatewayRouteTableVpcAssociationHeaders = field()
+    query_params: PostDeleteLocalGatewayRouteTableVpcAssociationQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostDeleteLocalGatewayRouteTableVpcAssociationResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

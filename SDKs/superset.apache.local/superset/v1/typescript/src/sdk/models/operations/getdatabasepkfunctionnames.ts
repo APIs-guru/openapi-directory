@@ -1,62 +1,63 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetDatabasePkFunctionNamesPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=pk" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=pk" })
   pk: number;
 }
 
 
 export class GetDatabasePkFunctionNamesSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=bearer" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" })
   jwt: shared.SchemeJwt;
 }
 
 
-export class GetDatabasePkFunctionNamesRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: GetDatabasePkFunctionNamesPathParams;
-
-  @Metadata()
-  security: GetDatabasePkFunctionNamesSecurity;
-}
-
-
 export class GetDatabasePkFunctionNames401ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class GetDatabasePkFunctionNames404ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class GetDatabasePkFunctionNames500ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
+export class GetDatabasePkFunctionNamesRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: GetDatabasePkFunctionNamesPathParams;
+
+  @SpeakeasyMetadata()
+  security: GetDatabasePkFunctionNamesSecurity;
+}
+
+
 export class GetDatabasePkFunctionNamesResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   databaseFunctionNamesResponse?: shared.DatabaseFunctionNamesResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getDatabasePkFunctionNames401ApplicationJsonObject?: GetDatabasePkFunctionNames401ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getDatabasePkFunctionNames404ApplicationJsonObject?: GetDatabasePkFunctionNames404ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getDatabasePkFunctionNames500ApplicationJsonObject?: GetDatabasePkFunctionNames500ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

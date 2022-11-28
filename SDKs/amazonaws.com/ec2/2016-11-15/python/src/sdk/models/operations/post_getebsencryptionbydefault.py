@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostGetEbsEncryptionByDefaultActionEnum(str, Enum):
     GET_EBS_ENCRYPTION_BY_DEFAULT = "GetEbsEncryptionByDefault"
@@ -10,8 +14,8 @@ class PostGetEbsEncryptionByDefaultVersionEnum(str, Enum):
 
 @dataclass
 class PostGetEbsEncryptionByDefaultQueryParams:
-    action: PostGetEbsEncryptionByDefaultActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostGetEbsEncryptionByDefaultVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostGetEbsEncryptionByDefaultActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostGetEbsEncryptionByDefaultVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostGetEbsEncryptionByDefaultHeaders:
 
 @dataclass
 class PostGetEbsEncryptionByDefaultRequest:
-    query_params: PostGetEbsEncryptionByDefaultQueryParams = field(default=None)
-    headers: PostGetEbsEncryptionByDefaultHeaders = field(default=None)
+    headers: PostGetEbsEncryptionByDefaultHeaders = field()
+    query_params: PostGetEbsEncryptionByDefaultQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostGetEbsEncryptionByDefaultResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

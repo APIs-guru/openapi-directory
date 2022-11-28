@@ -1,7 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import user
+from sdk import utils
+from . import *
 
 class AssignmentSubtypeEnum(str, Enum):
     SUBTYPE_UNSPECIFIED = "SUBTYPE_UNSPECIFIED"
@@ -17,6 +19,10 @@ class AssignmentSubtypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class Assignment:
-    assigned_user: Optional[user.User] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'assignedUser' }})
-    subtype: Optional[AssignmentSubtypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'subtype' }})
+    r"""Assignment
+    A comment with an assignment.
+    """
+    
+    assigned_user: Optional[User] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('assignedUser') }})
+    subtype: Optional[AssignmentSubtypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('subtype') }})
     

@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { Resource } from "./resource";
 // Event
 /**
  * Contains information about an event that was returned by a lookup request. The result includes a representation of a CloudTrail event.
@@ -34,39 +34,39 @@ var Event = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=AccessKeyId" }),
+        SpeakeasyMetadata({ data: "json, name=AccessKeyId" }),
         __metadata("design:type", String)
     ], Event.prototype, "accessKeyId", void 0);
     __decorate([
-        Metadata({ data: "json, name=CloudTrailEvent" }),
+        SpeakeasyMetadata({ data: "json, name=CloudTrailEvent" }),
         __metadata("design:type", String)
     ], Event.prototype, "cloudTrailEvent", void 0);
     __decorate([
-        Metadata({ data: "json, name=EventId" }),
+        SpeakeasyMetadata({ data: "json, name=EventId" }),
         __metadata("design:type", String)
     ], Event.prototype, "eventId", void 0);
     __decorate([
-        Metadata({ data: "json, name=EventName" }),
+        SpeakeasyMetadata({ data: "json, name=EventName" }),
         __metadata("design:type", String)
     ], Event.prototype, "eventName", void 0);
     __decorate([
-        Metadata({ data: "json, name=EventSource" }),
+        SpeakeasyMetadata({ data: "json, name=EventSource" }),
         __metadata("design:type", String)
     ], Event.prototype, "eventSource", void 0);
     __decorate([
-        Metadata({ data: "json, name=EventTime" }),
+        SpeakeasyMetadata({ data: "json, name=EventTime" }),
         __metadata("design:type", Date)
     ], Event.prototype, "eventTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=ReadOnly" }),
+        SpeakeasyMetadata({ data: "json, name=ReadOnly" }),
         __metadata("design:type", String)
     ], Event.prototype, "readOnly", void 0);
     __decorate([
-        Metadata({ data: "json, name=Resources", elemType: shared.Resource }),
+        SpeakeasyMetadata({ data: "json, name=Resources", elemType: Resource }),
         __metadata("design:type", Array)
     ], Event.prototype, "resources", void 0);
     __decorate([
-        Metadata({ data: "json, name=Username" }),
+        SpeakeasyMetadata({ data: "json, name=Username" }),
         __metadata("design:type", String)
     ], Event.prototype, "username", void 0);
     return Event;

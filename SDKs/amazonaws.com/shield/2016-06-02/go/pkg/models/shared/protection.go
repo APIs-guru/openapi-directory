@@ -1,5 +1,7 @@
 package shared
 
+// Protection
+// An object that represents a resource that is under DDoS protection.
 type Protection struct {
 	HealthCheckIds []string `json:"HealthCheckIds,omitempty"`
 	ID             *string  `json:"Id,omitempty"`

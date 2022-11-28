@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ServiceInsightHealth } from "./serviceinsighthealth";
 import { ServiceNameEnum } from "./servicenameenum";
+
 
 
 // ServiceHealth
@@ -8,9 +9,9 @@ import { ServiceNameEnum } from "./servicenameenum";
  * Represents the health of an AWS service.
 **/
 export class ServiceHealth extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Insight" })
+  @SpeakeasyMetadata({ data: "json, name=Insight" })
   insight?: ServiceInsightHealth;
 
-  @Metadata({ data: "json, name=ServiceName" })
+  @SpeakeasyMetadata({ data: "json, name=ServiceName" })
   serviceName?: ServiceNameEnum;
 }

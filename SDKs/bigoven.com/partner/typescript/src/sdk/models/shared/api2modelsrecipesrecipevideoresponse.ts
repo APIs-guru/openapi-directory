@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Api2ModelsRecipesRecipeVideoResponse
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * DTO used to return the details of a recipe video
 **/
 export class Api2ModelsRecipesRecipeVideoResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=InsertedOn" })
+  @SpeakeasyMetadata({ data: "json, name=InsertedOn" })
   insertedOn?: Date;
 
-  @Metadata({ data: "json, name=IsPrimaryVideo" })
+  @SpeakeasyMetadata({ data: "json, name=IsPrimaryVideo" })
   isPrimaryVideo?: boolean;
 
-  @Metadata({ data: "json, name=MediaId" })
+  @SpeakeasyMetadata({ data: "json, name=MediaId" })
   mediaId?: string;
 
-  @Metadata({ data: "json, name=VidId" })
+  @SpeakeasyMetadata({ data: "json, name=VidId" })
   vidId?: number;
 }

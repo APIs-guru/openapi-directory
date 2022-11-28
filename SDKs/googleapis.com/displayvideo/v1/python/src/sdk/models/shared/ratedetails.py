@@ -1,8 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import money
-from . import money
+from sdk import utils
+from . import *
 
 class RateDetailsInventorySourceRateTypeEnum(str, Enum):
     INVENTORY_SOURCE_RATE_TYPE_UNSPECIFIED = "INVENTORY_SOURCE_RATE_TYPE_UNSPECIFIED"
@@ -15,8 +16,12 @@ class RateDetailsInventorySourceRateTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class RateDetails:
-    inventory_source_rate_type: Optional[RateDetailsInventorySourceRateTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'inventorySourceRateType' }})
-    minimum_spend: Optional[money.Money] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'minimumSpend' }})
-    rate: Optional[money.Money] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'rate' }})
-    units_purchased: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'unitsPurchased' }})
+    r"""RateDetails
+    The rate related settings of the inventory source.
+    """
+    
+    inventory_source_rate_type: Optional[RateDetailsInventorySourceRateTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('inventorySourceRateType') }})
+    minimum_spend: Optional[Money] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('minimumSpend') }})
+    rate: Optional[Money] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('rate') }})
+    units_purchased: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('unitsPurchased') }})
     

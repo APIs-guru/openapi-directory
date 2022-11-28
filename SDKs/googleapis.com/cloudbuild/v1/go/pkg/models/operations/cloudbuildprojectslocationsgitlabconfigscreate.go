@@ -31,7 +31,7 @@ type CloudbuildProjectsLocationsGitLabConfigsCreateSecurity struct {
 type CloudbuildProjectsLocationsGitLabConfigsCreateRequest struct {
 	PathParams  CloudbuildProjectsLocationsGitLabConfigsCreatePathParams
 	QueryParams CloudbuildProjectsLocationsGitLabConfigsCreateQueryParams
-	Request     *shared.GitLabConfig `request:"mediaType=application/json"`
+	Request     *shared.GitLabConfigInput `request:"mediaType=application/json"`
 	Security    CloudbuildProjectsLocationsGitLabConfigsCreateSecurity
 }
 

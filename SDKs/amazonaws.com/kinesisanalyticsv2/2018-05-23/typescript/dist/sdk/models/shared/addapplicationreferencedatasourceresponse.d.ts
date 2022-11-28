@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ReferenceDataSourceDescription } from "./referencedatasourcedescription";
 export declare class AddApplicationReferenceDataSourceResponse extends SpeakeasyBase {
     applicationArn?: string;

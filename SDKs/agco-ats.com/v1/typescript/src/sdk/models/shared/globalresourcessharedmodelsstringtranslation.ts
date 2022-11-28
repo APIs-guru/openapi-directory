@@ -1,14 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum GlobalResourcesSharedModelsStringTranslationStateEnum {
-    Original = "Original"
-,    Requested = "Requested"
-,    Processing = "Processing"
-,    Processed = "Processed"
-,    Validated = "Validated"
-,    Invalidated = "Invalidated"
-,    RequestPending = "RequestPending"
-,    CreatePending = "CreatePending"
+    Original = "Original",
+    Requested = "Requested",
+    Processing = "Processing",
+    Processed = "Processed",
+    Validated = "Validated",
+    Invalidated = "Invalidated",
+    RequestPending = "RequestPending",
+    CreatePending = "CreatePending"
 }
 
 
@@ -17,21 +18,21 @@ export enum GlobalResourcesSharedModelsStringTranslationStateEnum {
  * A translation of a string in a specific language
 **/
 export class GlobalResourcesSharedModelsStringTranslation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AuthorId, form, name=AuthorId;" })
+  @SpeakeasyMetadata({ data: "json, name=AuthorId, form, name=AuthorId;" })
   authorId?: number;
 
-  @Metadata({ data: "json, name=LanguageId, form, name=LanguageId;" })
+  @SpeakeasyMetadata({ data: "json, name=LanguageId, form, name=LanguageId;" })
   languageId?: number;
 
-  @Metadata({ data: "json, name=State, form, name=State;" })
+  @SpeakeasyMetadata({ data: "json, name=State, form, name=State;" })
   state?: GlobalResourcesSharedModelsStringTranslationStateEnum;
 
-  @Metadata({ data: "json, name=StringId, form, name=StringId;" })
+  @SpeakeasyMetadata({ data: "json, name=StringId, form, name=StringId;" })
   stringId?: string;
 
-  @Metadata({ data: "json, name=StringValue, form, name=StringValue;" })
+  @SpeakeasyMetadata({ data: "json, name=StringValue, form, name=StringValue;" })
   stringValue: string;
 
-  @Metadata({ data: "json, name=Timestamp, form, name=Timestamp;" })
+  @SpeakeasyMetadata({ data: "json, name=Timestamp, form, name=Timestamp;" })
   timestamp?: string;
 }

@@ -1,19 +1,20 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class AllocateConnectionOnInterconnectRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=bandwidth" })
+  @SpeakeasyMetadata({ data: "json, name=bandwidth" })
   bandwidth: string;
 
-  @Metadata({ data: "json, name=connectionName" })
+  @SpeakeasyMetadata({ data: "json, name=connectionName" })
   connectionName: string;
 
-  @Metadata({ data: "json, name=interconnectId" })
+  @SpeakeasyMetadata({ data: "json, name=interconnectId" })
   interconnectId: string;
 
-  @Metadata({ data: "json, name=ownerAccount" })
+  @SpeakeasyMetadata({ data: "json, name=ownerAccount" })
   ownerAccount: string;
 
-  @Metadata({ data: "json, name=vlan" })
+  @SpeakeasyMetadata({ data: "json, name=vlan" })
   vlan: number;
 }

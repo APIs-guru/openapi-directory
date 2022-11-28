@@ -16,12 +16,6 @@ type GetDocumentWithPathQueryParams struct {
 	Provenance *bool   `queryParam:"style=form,explode=true,name=provenance"`
 }
 
-type GetDocumentWithPathRequest struct {
-	PathParams  GetDocumentWithPathPathParams
-	QueryParams GetDocumentWithPathQueryParams
-	Request     []byte `request:"mediaType=application/x-yaml"`
-}
-
 type GetDocumentWithPath200ApplicationJSONExplanationLocalsKey struct {
 	Type  *string `json:"type,omitempty"`
 	Value *string `json:"value,omitempty"`
@@ -42,6 +36,9 @@ type GetDocumentWithPath200ApplicationJSONExplanationNodeTerms struct {
 	Value *string `json:"value,omitempty"`
 }
 
+// GetDocumentWithPath200ApplicationJSONExplanationNode
+// The AST element associated with the evaluation step.
+// https://godoc.org/github.com/open-policy-agent/opa/ast - AST
 type GetDocumentWithPath200ApplicationJSONExplanationNode struct {
 	Index *float64                                                    `json:"index,omitempty"`
 	Terms []GetDocumentWithPath200ApplicationJSONExplanationNodeTerms `json:"terms,omitempty"`
@@ -111,6 +108,12 @@ type GetDocumentWithPath200ApplicationJSON struct {
 	Metrics     *GetDocumentWithPath200ApplicationJSONMetrics      `json:"metrics,omitempty"`
 	Provenance  *GetDocumentWithPath200ApplicationJSONProvenance   `json:"provenance,omitempty"`
 	Result      []interface{}                                      `json:"result,omitempty"`
+}
+
+type GetDocumentWithPathRequest struct {
+	PathParams  GetDocumentWithPathPathParams
+	QueryParams GetDocumentWithPathQueryParams
+	Request     []byte `request:"mediaType=application/x-yaml"`
 }
 
 type GetDocumentWithPathResponse struct {

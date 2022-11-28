@@ -8,10 +8,6 @@ type DeleteGroupPathParams struct {
 	GroupID string `pathParam:"style=simple,explode=false,name=groupId"`
 }
 
-type DeleteGroupRequest struct {
-	PathParams DeleteGroupPathParams
-}
-
 type DeleteGroup200ApplicationJSONActionEnum string
 
 const (
@@ -33,6 +29,10 @@ type DeleteGroup200ApplicationJSON struct {
 	Action DeleteGroup200ApplicationJSONActionEnum `json:"action"`
 	Data   DeleteGroup200ApplicationJSONData       `json:"data"`
 	Result DeleteGroup200ApplicationJSONResultEnum `json:"result"`
+}
+
+type DeleteGroupRequest struct {
+	PathParams DeleteGroupPathParams
 }
 
 type DeleteGroupResponse struct {

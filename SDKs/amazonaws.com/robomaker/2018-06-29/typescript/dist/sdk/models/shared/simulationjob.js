@@ -22,14 +22,16 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ComputeResponse } from "./computeresponse";
+import { DataSource } from "./datasource";
 import { FailureBehaviorEnum } from "./failurebehaviorenum";
 import { SimulationJobErrorCodeEnum } from "./simulationjoberrorcodeenum";
 import { LoggingConfig } from "./loggingconfig";
 import { NetworkInterface } from "./networkinterface";
 import { OutputLocation } from "./outputlocation";
+import { RobotApplicationConfig } from "./robotapplicationconfig";
+import { SimulationApplicationConfig } from "./simulationapplicationconfig";
 import { SimulationJobStatusEnum } from "./simulationjobstatusenum";
 import { VpcConfigResponse } from "./vpcconfigresponse";
 // SimulationJob
@@ -42,87 +44,87 @@ var SimulationJob = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=arn" }),
+        SpeakeasyMetadata({ data: "json, name=arn" }),
         __metadata("design:type", String)
     ], SimulationJob.prototype, "arn", void 0);
     __decorate([
-        Metadata({ data: "json, name=clientRequestToken" }),
+        SpeakeasyMetadata({ data: "json, name=clientRequestToken" }),
         __metadata("design:type", String)
     ], SimulationJob.prototype, "clientRequestToken", void 0);
     __decorate([
-        Metadata({ data: "json, name=compute" }),
+        SpeakeasyMetadata({ data: "json, name=compute" }),
         __metadata("design:type", ComputeResponse)
     ], SimulationJob.prototype, "compute", void 0);
     __decorate([
-        Metadata({ data: "json, name=dataSources", elemType: shared.DataSource }),
+        SpeakeasyMetadata({ data: "json, name=dataSources", elemType: DataSource }),
         __metadata("design:type", Array)
     ], SimulationJob.prototype, "dataSources", void 0);
     __decorate([
-        Metadata({ data: "json, name=failureBehavior" }),
+        SpeakeasyMetadata({ data: "json, name=failureBehavior" }),
         __metadata("design:type", String)
     ], SimulationJob.prototype, "failureBehavior", void 0);
     __decorate([
-        Metadata({ data: "json, name=failureCode" }),
+        SpeakeasyMetadata({ data: "json, name=failureCode" }),
         __metadata("design:type", String)
     ], SimulationJob.prototype, "failureCode", void 0);
     __decorate([
-        Metadata({ data: "json, name=failureReason" }),
+        SpeakeasyMetadata({ data: "json, name=failureReason" }),
         __metadata("design:type", String)
     ], SimulationJob.prototype, "failureReason", void 0);
     __decorate([
-        Metadata({ data: "json, name=iamRole" }),
+        SpeakeasyMetadata({ data: "json, name=iamRole" }),
         __metadata("design:type", String)
     ], SimulationJob.prototype, "iamRole", void 0);
     __decorate([
-        Metadata({ data: "json, name=lastStartedAt" }),
+        SpeakeasyMetadata({ data: "json, name=lastStartedAt" }),
         __metadata("design:type", Date)
     ], SimulationJob.prototype, "lastStartedAt", void 0);
     __decorate([
-        Metadata({ data: "json, name=lastUpdatedAt" }),
+        SpeakeasyMetadata({ data: "json, name=lastUpdatedAt" }),
         __metadata("design:type", Date)
     ], SimulationJob.prototype, "lastUpdatedAt", void 0);
     __decorate([
-        Metadata({ data: "json, name=loggingConfig" }),
+        SpeakeasyMetadata({ data: "json, name=loggingConfig" }),
         __metadata("design:type", LoggingConfig)
     ], SimulationJob.prototype, "loggingConfig", void 0);
     __decorate([
-        Metadata({ data: "json, name=maxJobDurationInSeconds" }),
+        SpeakeasyMetadata({ data: "json, name=maxJobDurationInSeconds" }),
         __metadata("design:type", Number)
     ], SimulationJob.prototype, "maxJobDurationInSeconds", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], SimulationJob.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=networkInterface" }),
+        SpeakeasyMetadata({ data: "json, name=networkInterface" }),
         __metadata("design:type", NetworkInterface)
     ], SimulationJob.prototype, "networkInterface", void 0);
     __decorate([
-        Metadata({ data: "json, name=outputLocation" }),
+        SpeakeasyMetadata({ data: "json, name=outputLocation" }),
         __metadata("design:type", OutputLocation)
     ], SimulationJob.prototype, "outputLocation", void 0);
     __decorate([
-        Metadata({ data: "json, name=robotApplications", elemType: shared.RobotApplicationConfig }),
+        SpeakeasyMetadata({ data: "json, name=robotApplications", elemType: RobotApplicationConfig }),
         __metadata("design:type", Array)
     ], SimulationJob.prototype, "robotApplications", void 0);
     __decorate([
-        Metadata({ data: "json, name=simulationApplications", elemType: shared.SimulationApplicationConfig }),
+        SpeakeasyMetadata({ data: "json, name=simulationApplications", elemType: SimulationApplicationConfig }),
         __metadata("design:type", Array)
     ], SimulationJob.prototype, "simulationApplications", void 0);
     __decorate([
-        Metadata({ data: "json, name=simulationTimeMillis" }),
+        SpeakeasyMetadata({ data: "json, name=simulationTimeMillis" }),
         __metadata("design:type", Number)
     ], SimulationJob.prototype, "simulationTimeMillis", void 0);
     __decorate([
-        Metadata({ data: "json, name=status" }),
+        SpeakeasyMetadata({ data: "json, name=status" }),
         __metadata("design:type", String)
     ], SimulationJob.prototype, "status", void 0);
     __decorate([
-        Metadata({ data: "json, name=tags" }),
+        SpeakeasyMetadata({ data: "json, name=tags" }),
         __metadata("design:type", Map)
     ], SimulationJob.prototype, "tags", void 0);
     __decorate([
-        Metadata({ data: "json, name=vpcConfig" }),
+        SpeakeasyMetadata({ data: "json, name=vpcConfig" }),
         __metadata("design:type", VpcConfigResponse)
     ], SimulationJob.prototype, "vpcConfig", void 0);
     return SimulationJob;

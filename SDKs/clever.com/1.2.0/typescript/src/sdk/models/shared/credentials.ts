@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class Credentials extends SpeakeasyBase {
-  @Metadata({ data: "json, name=district_username" })
+  @SpeakeasyMetadata({ data: "json, name=district_username" })
   districtUsername?: string;
 }

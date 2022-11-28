@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Execution } from "./execution";
+
 
 
 // ExecutionList
@@ -8,9 +8,9 @@ import { Execution } from "./execution";
  * Executions List
 **/
 export class ExecutionList extends SpeakeasyBase {
-  @Metadata({ data: "json, name=executions", elemType: shared.Execution })
+  @SpeakeasyMetadata({ data: "json, name=executions", elemType: Execution })
   executions: Execution[];
 
-  @Metadata({ data: "json, name=sum" })
+  @SpeakeasyMetadata({ data: "json, name=sum" })
   sum: number;
 }

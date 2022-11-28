@@ -1,5 +1,7 @@
 package shared
 
+// GoogleAppsDriveLabelsV2Field
+// Defines a field that has a display name, data type, and other configuration options. This field defines the kind of metadata that may be set on a Drive item.
 type GoogleAppsDriveLabelsV2Field struct {
 	AppliedCapabilities *GoogleAppsDriveLabelsV2FieldAppliedCapabilities `json:"appliedCapabilities,omitempty"`
 	CreateTime          *string                                          `json:"createTime,omitempty"`

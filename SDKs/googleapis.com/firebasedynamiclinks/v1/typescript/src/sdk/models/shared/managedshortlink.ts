@@ -1,16 +1,17 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DynamicLinkInfo } from "./dynamiclinkinfo";
 
+
 export enum ManagedShortLinkFlaggedAttributeEnum {
-    UnspecifiedAttribute = "UNSPECIFIED_ATTRIBUTE"
-,    Spam = "SPAM"
+    UnspecifiedAttribute = "UNSPECIFIED_ATTRIBUTE",
+    Spam = "SPAM"
 }
 
 export enum ManagedShortLinkVisibilityEnum {
-    UnspecifiedVisibility = "UNSPECIFIED_VISIBILITY"
-,    Unarchived = "UNARCHIVED"
-,    Archived = "ARCHIVED"
-,    NeverShown = "NEVER_SHOWN"
+    UnspecifiedVisibility = "UNSPECIFIED_VISIBILITY",
+    Unarchived = "UNARCHIVED",
+    Archived = "ARCHIVED",
+    NeverShown = "NEVER_SHOWN"
 }
 
 
@@ -19,21 +20,21 @@ export enum ManagedShortLinkVisibilityEnum {
  * Managed Short Link.
 **/
 export class ManagedShortLink extends SpeakeasyBase {
-  @Metadata({ data: "json, name=creationTime" })
+  @SpeakeasyMetadata({ data: "json, name=creationTime" })
   creationTime?: string;
 
-  @Metadata({ data: "json, name=flaggedAttribute" })
+  @SpeakeasyMetadata({ data: "json, name=flaggedAttribute" })
   flaggedAttribute?: ManagedShortLinkFlaggedAttributeEnum[];
 
-  @Metadata({ data: "json, name=info" })
+  @SpeakeasyMetadata({ data: "json, name=info" })
   info?: DynamicLinkInfo;
 
-  @Metadata({ data: "json, name=link" })
+  @SpeakeasyMetadata({ data: "json, name=link" })
   link?: string;
 
-  @Metadata({ data: "json, name=linkName" })
+  @SpeakeasyMetadata({ data: "json, name=linkName" })
   linkName?: string;
 
-  @Metadata({ data: "json, name=visibility" })
+  @SpeakeasyMetadata({ data: "json, name=visibility" })
   visibility?: ManagedShortLinkVisibilityEnum;
 }

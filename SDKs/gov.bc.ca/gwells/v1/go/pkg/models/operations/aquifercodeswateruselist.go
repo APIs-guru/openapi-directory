@@ -9,15 +9,15 @@ type AquiferCodesWaterUseListQueryParams struct {
 	Offset *int64 `queryParam:"style=form,explode=true,name=offset"`
 }
 
-type AquiferCodesWaterUseListRequest struct {
-	QueryParams AquiferCodesWaterUseListQueryParams
-}
-
 type AquiferCodesWaterUseList200ApplicationJSON struct {
 	Count    int64             `json:"count"`
 	Next     *string           `json:"next,omitempty"`
 	Previous *string           `json:"previous,omitempty"`
 	Results  []shared.WaterUse `json:"results"`
+}
+
+type AquiferCodesWaterUseListRequest struct {
+	QueryParams AquiferCodesWaterUseListQueryParams
 }
 
 type AquiferCodesWaterUseListResponse struct {

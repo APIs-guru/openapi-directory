@@ -1,5 +1,7 @@
 package shared
 
+// PostgresqlColumn
+// PostgreSQL Column.
 type PostgresqlColumn struct {
 	Column          *string `json:"column,omitempty"`
 	DataType        *string `json:"dataType,omitempty"`

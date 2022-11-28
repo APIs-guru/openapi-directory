@@ -1,5 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AssociationComplianceSeverityEnum } from "./associationcomplianceseverityenum";
 import { InstanceAssociationOutputLocation } from "./instanceassociationoutputlocation";
 import { AssociationSyncComplianceEnum } from "./associationsynccomplianceenum";
@@ -7,52 +6,53 @@ import { TargetLocation } from "./targetlocation";
 import { Target } from "./target";
 
 
+
 export class CreateAssociationRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ApplyOnlyAtCronInterval" })
+  @SpeakeasyMetadata({ data: "json, name=ApplyOnlyAtCronInterval" })
   applyOnlyAtCronInterval?: boolean;
 
-  @Metadata({ data: "json, name=AssociationName" })
+  @SpeakeasyMetadata({ data: "json, name=AssociationName" })
   associationName?: string;
 
-  @Metadata({ data: "json, name=AutomationTargetParameterName" })
+  @SpeakeasyMetadata({ data: "json, name=AutomationTargetParameterName" })
   automationTargetParameterName?: string;
 
-  @Metadata({ data: "json, name=CalendarNames" })
+  @SpeakeasyMetadata({ data: "json, name=CalendarNames" })
   calendarNames?: string[];
 
-  @Metadata({ data: "json, name=ComplianceSeverity" })
+  @SpeakeasyMetadata({ data: "json, name=ComplianceSeverity" })
   complianceSeverity?: AssociationComplianceSeverityEnum;
 
-  @Metadata({ data: "json, name=DocumentVersion" })
+  @SpeakeasyMetadata({ data: "json, name=DocumentVersion" })
   documentVersion?: string;
 
-  @Metadata({ data: "json, name=InstanceId" })
+  @SpeakeasyMetadata({ data: "json, name=InstanceId" })
   instanceId?: string;
 
-  @Metadata({ data: "json, name=MaxConcurrency" })
+  @SpeakeasyMetadata({ data: "json, name=MaxConcurrency" })
   maxConcurrency?: string;
 
-  @Metadata({ data: "json, name=MaxErrors" })
+  @SpeakeasyMetadata({ data: "json, name=MaxErrors" })
   maxErrors?: string;
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name: string;
 
-  @Metadata({ data: "json, name=OutputLocation" })
+  @SpeakeasyMetadata({ data: "json, name=OutputLocation" })
   outputLocation?: InstanceAssociationOutputLocation;
 
-  @Metadata({ data: "json, name=Parameters" })
+  @SpeakeasyMetadata({ data: "json, name=Parameters" })
   parameters?: Map<string, string[]>;
 
-  @Metadata({ data: "json, name=ScheduleExpression" })
+  @SpeakeasyMetadata({ data: "json, name=ScheduleExpression" })
   scheduleExpression?: string;
 
-  @Metadata({ data: "json, name=SyncCompliance" })
+  @SpeakeasyMetadata({ data: "json, name=SyncCompliance" })
   syncCompliance?: AssociationSyncComplianceEnum;
 
-  @Metadata({ data: "json, name=TargetLocations", elemType: shared.TargetLocation })
+  @SpeakeasyMetadata({ data: "json, name=TargetLocations", elemType: TargetLocation })
   targetLocations?: TargetLocation[];
 
-  @Metadata({ data: "json, name=Targets", elemType: shared.Target })
+  @SpeakeasyMetadata({ data: "json, name=Targets", elemType: Target })
   targets?: Target[];
 }

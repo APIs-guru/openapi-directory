@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class UserAPIGetFollowedArtistsPathParams:
-    id: int = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: int = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 class UserAPIGetFollowedArtistsArtistTypeEnum(str, Enum):
     UNKNOWN = "Unknown"
@@ -80,14 +81,14 @@ class UserAPIGetFollowedArtistsQueryParams:
 
 @dataclass
 class UserAPIGetFollowedArtistsRequest:
-    path_params: UserAPIGetFollowedArtistsPathParams = field(default=None)
-    query_params: UserAPIGetFollowedArtistsQueryParams = field(default=None)
+    path_params: UserAPIGetFollowedArtistsPathParams = field()
+    query_params: UserAPIGetFollowedArtistsQueryParams = field()
     
 
 @dataclass
 class UserAPIGetFollowedArtistsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     partial_find_result_artist_for_user_for_api_contract_: Optional[shared.PartialFindResultArtistForUserForAPIContract] = field(default=None)
-    status_code: int = field(default=None)
     

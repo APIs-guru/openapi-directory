@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ChannelRequired extends SpeakeasyBase {
-  @Metadata({ data: "json, name=isBroadcastOnly" })
+  @SpeakeasyMetadata({ data: "json, name=isBroadcastOnly" })
   isBroadcastOnly?: boolean;
 
-  @Metadata({ data: "json, name=title" })
+  @SpeakeasyMetadata({ data: "json, name=title" })
   title: string;
 }

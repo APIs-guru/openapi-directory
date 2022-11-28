@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // MetadataOptions
@@ -6,24 +7,24 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Class MetadataOptions.
 **/
 export class MetadataOptions extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DisabledImageFetchers" })
+  @SpeakeasyMetadata({ data: "json, name=DisabledImageFetchers" })
   disabledImageFetchers?: string[];
 
-  @Metadata({ data: "json, name=DisabledMetadataFetchers" })
+  @SpeakeasyMetadata({ data: "json, name=DisabledMetadataFetchers" })
   disabledMetadataFetchers?: string[];
 
-  @Metadata({ data: "json, name=DisabledMetadataSavers" })
+  @SpeakeasyMetadata({ data: "json, name=DisabledMetadataSavers" })
   disabledMetadataSavers?: string[];
 
-  @Metadata({ data: "json, name=ImageFetcherOrder" })
+  @SpeakeasyMetadata({ data: "json, name=ImageFetcherOrder" })
   imageFetcherOrder?: string[];
 
-  @Metadata({ data: "json, name=ItemType" })
+  @SpeakeasyMetadata({ data: "json, name=ItemType" })
   itemType?: string;
 
-  @Metadata({ data: "json, name=LocalMetadataReaderOrder" })
+  @SpeakeasyMetadata({ data: "json, name=LocalMetadataReaderOrder" })
   localMetadataReaderOrder?: string[];
 
-  @Metadata({ data: "json, name=MetadataFetcherOrder" })
+  @SpeakeasyMetadata({ data: "json, name=MetadataFetcherOrder" })
   metadataFetcherOrder?: string[];
 }

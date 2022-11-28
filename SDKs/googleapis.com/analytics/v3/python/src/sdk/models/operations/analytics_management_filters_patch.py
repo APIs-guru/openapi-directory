@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class AnalyticsManagementFiltersPatchPathParams:
-    account_id: str = field(default=None, metadata={'path_param': { 'field_name': 'accountId', 'style': 'simple', 'explode': False }})
-    filter_id: str = field(default=None, metadata={'path_param': { 'field_name': 'filterId', 'style': 'simple', 'explode': False }})
+    account_id: str = field(metadata={'path_param': { 'field_name': 'accountId', 'style': 'simple', 'explode': False }})
+    filter_id: str = field(metadata={'path_param': { 'field_name': 'filterId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -22,21 +23,21 @@ class AnalyticsManagementFiltersPatchQueryParams:
 
 @dataclass
 class AnalyticsManagementFiltersPatchSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class AnalyticsManagementFiltersPatchRequest:
-    path_params: AnalyticsManagementFiltersPatchPathParams = field(default=None)
-    query_params: AnalyticsManagementFiltersPatchQueryParams = field(default=None)
-    request: Optional[shared.Filter] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: AnalyticsManagementFiltersPatchSecurity = field(default=None)
+    path_params: AnalyticsManagementFiltersPatchPathParams = field()
+    query_params: AnalyticsManagementFiltersPatchQueryParams = field()
+    security: AnalyticsManagementFiltersPatchSecurity = field()
+    request: Optional[shared.FilterInput] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class AnalyticsManagementFiltersPatchResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     filter: Optional[shared.Filter] = field(default=None)
-    status_code: int = field(default=None)
     

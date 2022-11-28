@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // AnomalyReportedTimeRange
 /**
  *  A time range that specifies when DevOps Guru opens and then closes an anomaly. This is different from <code>AnomalyTimeRange</code>, which specifies the time range when DevOps Guru actually observes the anomalous behavior.
@@ -33,11 +33,11 @@ var AnomalyReportedTimeRange = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=CloseTime" }),
+        SpeakeasyMetadata({ data: "json, name=CloseTime" }),
         __metadata("design:type", Date)
     ], AnomalyReportedTimeRange.prototype, "closeTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=OpenTime" }),
+        SpeakeasyMetadata({ data: "json, name=OpenTime" }),
         __metadata("design:type", Date)
     ], AnomalyReportedTimeRange.prototype, "openTime", void 0);
     return AnomalyReportedTimeRange;

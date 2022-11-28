@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Field } from "./field";
+
 
 
 // PipelineObject
@@ -8,12 +8,12 @@ import { Field } from "./field";
  * Contains information about a pipeline object. This can be a logical, physical, or physical attempt pipeline object. The complete set of components of a pipeline defines the pipeline.
 **/
 export class PipelineObject extends SpeakeasyBase {
-  @Metadata({ data: "json, name=fields", elemType: shared.Field })
+  @SpeakeasyMetadata({ data: "json, name=fields", elemType: Field })
   fields: Field[];
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 }

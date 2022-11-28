@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import segment
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ParsedData:
-    segments: Optional[List[segment.Segment]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'segments' }})
+    r"""ParsedData
+    The content of a HL7v2 message in a structured format.
+    """
+    
+    segments: Optional[List[Segment]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('segments') }})
     

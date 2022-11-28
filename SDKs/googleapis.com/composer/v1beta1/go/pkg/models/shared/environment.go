@@ -11,6 +11,17 @@ const (
 	EnvironmentStateEnumError            EnvironmentStateEnum = "ERROR"
 )
 
+// EnvironmentInput
+// An environment for running orchestration tasks.
+type EnvironmentInput struct {
+	Config *EnvironmentConfigInput `json:"config,omitempty"`
+	Labels map[string]string       `json:"labels,omitempty"`
+	Name   *string                 `json:"name,omitempty"`
+	State  *EnvironmentStateEnum   `json:"state,omitempty"`
+}
+
+// Environment
+// An environment for running orchestration tasks.
 type Environment struct {
 	Config     *EnvironmentConfig    `json:"config,omitempty"`
 	CreateTime *string               `json:"createTime,omitempty"`

@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class QueuePlayPointer extends SpeakeasyBase {
-  @Metadata({ data: "json, name=contentIdentifier" })
+  @SpeakeasyMetadata({ data: "json, name=contentIdentifier" })
   contentIdentifier?: string;
 
-  @Metadata({ data: "json, name=offsetInMillis" })
+  @SpeakeasyMetadata({ data: "json, name=offsetInMillis" })
   offsetInMillis?: number;
 }

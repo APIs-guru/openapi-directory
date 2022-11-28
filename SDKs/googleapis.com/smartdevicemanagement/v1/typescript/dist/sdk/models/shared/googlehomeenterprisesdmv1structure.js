@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // GoogleHomeEnterpriseSdmV1Structure
 /**
  * Structure resource represents an instance of enterprise managed home or hotel room.
@@ -33,11 +33,11 @@ var GoogleHomeEnterpriseSdmV1Structure = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], GoogleHomeEnterpriseSdmV1Structure.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=traits" }),
+        SpeakeasyMetadata({ data: "json, name=traits" }),
         __metadata("design:type", Map)
     ], GoogleHomeEnterpriseSdmV1Structure.prototype, "traits", void 0);
     return GoogleHomeEnterpriseSdmV1Structure;

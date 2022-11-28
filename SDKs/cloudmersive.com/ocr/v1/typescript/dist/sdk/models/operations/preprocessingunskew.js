@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var PreprocessingUnskewRequestBodyImageFile = /** @class */ (function (_super) {
     __extends(PreprocessingUnskewRequestBodyImageFile, _super);
@@ -30,11 +30,11 @@ var PreprocessingUnskewRequestBodyImageFile = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "multipart_form, content=true" }),
+        SpeakeasyMetadata({ data: "multipart_form, content=true" }),
         __metadata("design:type", Uint8Array)
     ], PreprocessingUnskewRequestBodyImageFile.prototype, "content", void 0);
     __decorate([
-        Metadata({ data: "multipart_form, name=imageFile" }),
+        SpeakeasyMetadata({ data: "multipart_form, name=imageFile" }),
         __metadata("design:type", String)
     ], PreprocessingUnskewRequestBodyImageFile.prototype, "imageFile", void 0);
     return PreprocessingUnskewRequestBodyImageFile;
@@ -46,7 +46,7 @@ var PreprocessingUnskewRequestBody = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "multipart_form, file=true" }),
+        SpeakeasyMetadata({ data: "multipart_form, file=true" }),
         __metadata("design:type", PreprocessingUnskewRequestBodyImageFile)
     ], PreprocessingUnskewRequestBody.prototype, "imageFile", void 0);
     return PreprocessingUnskewRequestBody;
@@ -58,7 +58,7 @@ var PreprocessingUnskewSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeApikey)
     ], PreprocessingUnskewSecurity.prototype, "apikey", void 0);
     return PreprocessingUnskewSecurity;
@@ -70,11 +70,11 @@ var PreprocessingUnskewRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "request, media_type=multipart/form-data" }),
+        SpeakeasyMetadata({ data: "request, media_type=multipart/form-data" }),
         __metadata("design:type", PreprocessingUnskewRequestBody)
     ], PreprocessingUnskewRequest.prototype, "request", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PreprocessingUnskewSecurity)
     ], PreprocessingUnskewRequest.prototype, "security", void 0);
     return PreprocessingUnskewRequest;
@@ -86,27 +86,27 @@ var PreprocessingUnskewResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], PreprocessingUnskewResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], PreprocessingUnskewResponse.prototype, "preprocessingUnskew200ApplicationJsonByteString", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], PreprocessingUnskewResponse.prototype, "preprocessingUnskew200ApplicationXmlByteString", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], PreprocessingUnskewResponse.prototype, "preprocessingUnskew200TextJsonByteString", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], PreprocessingUnskewResponse.prototype, "preprocessingUnskew200TextXmlByteString", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], PreprocessingUnskewResponse.prototype, "statusCode", void 0);
     return PreprocessingUnskewResponse;

@@ -1,5 +1,7 @@
 package shared
 
+// AwsS3BucketWebsiteConfigurationRoutingRuleRedirect
+// The rules to redirect the request if the condition in <code>Condition</code> is met.
 type AwsS3BucketWebsiteConfigurationRoutingRuleRedirect struct {
 	Hostname             *string `json:"Hostname,omitempty"`
 	HTTPRedirectCode     *string `json:"HttpRedirectCode,omitempty"`

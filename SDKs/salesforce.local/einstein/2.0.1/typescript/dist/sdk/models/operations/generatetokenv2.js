@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export var GenerateTokenV2RequestBodyGrantTypeEnum;
 (function (GenerateTokenV2RequestBodyGrantTypeEnum) {
@@ -35,23 +35,23 @@ var GenerateTokenV2RequestBody = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "form, name=assertion;" }),
+        SpeakeasyMetadata({ data: "form, name=assertion;" }),
         __metadata("design:type", String)
     ], GenerateTokenV2RequestBody.prototype, "assertion", void 0);
     __decorate([
-        Metadata({ data: "form, name=grant_type;" }),
+        SpeakeasyMetadata({ data: "form, name=grant_type;" }),
         __metadata("design:type", String)
     ], GenerateTokenV2RequestBody.prototype, "grantType", void 0);
     __decorate([
-        Metadata({ data: "form, name=refresh_token;" }),
+        SpeakeasyMetadata({ data: "form, name=refresh_token;" }),
         __metadata("design:type", String)
     ], GenerateTokenV2RequestBody.prototype, "refreshToken", void 0);
     __decorate([
-        Metadata({ data: "form, name=scope;" }),
+        SpeakeasyMetadata({ data: "form, name=scope;" }),
         __metadata("design:type", String)
     ], GenerateTokenV2RequestBody.prototype, "scope", void 0);
     __decorate([
-        Metadata({ data: "form, name=valid_for;" }),
+        SpeakeasyMetadata({ data: "form, name=valid_for;" }),
         __metadata("design:type", Number)
     ], GenerateTokenV2RequestBody.prototype, "validFor", void 0);
     return GenerateTokenV2RequestBody;
@@ -63,7 +63,7 @@ var GenerateTokenV2Request = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "request, media_type=application/x-www-form-urlencoded" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/x-www-form-urlencoded" }),
         __metadata("design:type", GenerateTokenV2RequestBody)
     ], GenerateTokenV2Request.prototype, "request", void 0);
     return GenerateTokenV2Request;
@@ -75,15 +75,15 @@ var GenerateTokenV2Response = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GenerateTokenV2Response.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.GenerateAccessTokenResponse)
     ], GenerateTokenV2Response.prototype, "generateAccessTokenResponse", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GenerateTokenV2Response.prototype, "statusCode", void 0);
     return GenerateTokenV2Response;

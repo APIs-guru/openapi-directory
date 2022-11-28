@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DataSource } from "./datasource";
+
 
 
 // DescribeDataSourcesOutput
@@ -8,9 +8,9 @@ import { DataSource } from "./datasource";
  * Represents the query results from a <a>DescribeDataSources</a> operation. The content is essentially a list of <code>DataSource</code>.
 **/
 export class DescribeDataSourcesOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=Results", elemType: shared.DataSource })
+  @SpeakeasyMetadata({ data: "json, name=Results", elemType: DataSource })
   results?: DataSource[];
 }

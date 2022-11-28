@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // RuntimeVersion
 /**
  * This structure contains information about one canary runtime version. For more information about runtime versions, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_Library.html"> Canary Runtime Versions</a>.
@@ -33,19 +33,19 @@ var RuntimeVersion = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=DeprecationDate" }),
+        SpeakeasyMetadata({ data: "json, name=DeprecationDate" }),
         __metadata("design:type", Date)
     ], RuntimeVersion.prototype, "deprecationDate", void 0);
     __decorate([
-        Metadata({ data: "json, name=Description" }),
+        SpeakeasyMetadata({ data: "json, name=Description" }),
         __metadata("design:type", String)
     ], RuntimeVersion.prototype, "description", void 0);
     __decorate([
-        Metadata({ data: "json, name=ReleaseDate" }),
+        SpeakeasyMetadata({ data: "json, name=ReleaseDate" }),
         __metadata("design:type", Date)
     ], RuntimeVersion.prototype, "releaseDate", void 0);
     __decorate([
-        Metadata({ data: "json, name=VersionName" }),
+        SpeakeasyMetadata({ data: "json, name=VersionName" }),
         __metadata("design:type", String)
     ], RuntimeVersion.prototype, "versionName", void 0);
     return RuntimeVersion;

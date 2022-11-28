@@ -20,6 +20,8 @@ const (
 	UpdateNetworkApplianceSecurityIntrusionRequestBodyModeEnumDisabled   UpdateNetworkApplianceSecurityIntrusionRequestBodyModeEnum = "disabled"
 )
 
+// UpdateNetworkApplianceSecurityIntrusionRequestBodyProtectedNetworks
+// Set the included/excluded networks from the intrusion engine (optional - omitting will leave current config unchanged). This is available only in 'passthrough' mode
 type UpdateNetworkApplianceSecurityIntrusionRequestBodyProtectedNetworks struct {
 	ExcludedCidr []string `json:"excludedCidr,omitempty"`
 	IncludedCidr []string `json:"includedCidr,omitempty"`

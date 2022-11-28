@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
 @dataclass
 class CreateFleetMetricPathParams:
-    metric_name: str = field(default=None, metadata={'path_param': { 'field_name': 'metricName', 'style': 'simple', 'explode': False }})
+    metric_name: str = field(metadata={'path_param': { 'field_name': 'metricName', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -23,8 +28,12 @@ class CreateFleetMetricHeaders:
 @dataclass_json
 @dataclass
 class CreateFleetMetricRequestBodyAggregationType:
-    name: Optional[shared.AggregationTypeNameEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    values: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'values' }})
+    r"""CreateFleetMetricRequestBodyAggregationType
+    The type of aggregation queries.
+    """
+    
+    name: Optional[shared.AggregationTypeNameEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    values: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('values') }})
     
 class CreateFleetMetricRequestBodyUnitEnum(str, Enum):
     SECONDS = "Seconds"
@@ -59,27 +68,28 @@ class CreateFleetMetricRequestBodyUnitEnum(str, Enum):
 @dataclass_json
 @dataclass
 class CreateFleetMetricRequestBody:
-    aggregation_field: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'aggregationField' }})
-    aggregation_type: CreateFleetMetricRequestBodyAggregationType = field(default=None, metadata={'dataclasses_json': { 'field_name': 'aggregationType' }})
-    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
-    index_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'indexName' }})
-    period: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'period' }})
-    query_string: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'queryString' }})
-    query_version: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'queryVersion' }})
-    tags: Optional[List[shared.Tag]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tags' }})
-    unit: Optional[CreateFleetMetricRequestBodyUnitEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'unit' }})
+    aggregation_field: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('aggregationField') }})
+    aggregation_type: CreateFleetMetricRequestBodyAggregationType = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('aggregationType') }})
+    period: int = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('period') }})
+    query_string: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('queryString') }})
+    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('description') }})
+    index_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('indexName') }})
+    query_version: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('queryVersion') }})
+    tags: Optional[List[shared.Tag]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('tags') }})
+    unit: Optional[CreateFleetMetricRequestBodyUnitEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('unit') }})
     
 
 @dataclass
 class CreateFleetMetricRequest:
-    path_params: CreateFleetMetricPathParams = field(default=None)
-    headers: CreateFleetMetricHeaders = field(default=None)
-    request: CreateFleetMetricRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: CreateFleetMetricHeaders = field()
+    path_params: CreateFleetMetricPathParams = field()
+    request: CreateFleetMetricRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class CreateFleetMetricResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     create_fleet_metric_response: Optional[shared.CreateFleetMetricResponse] = field(default=None)
     index_not_ready_exception: Optional[Any] = field(default=None)
     internal_failure_exception: Optional[Any] = field(default=None)
@@ -90,7 +100,6 @@ class CreateFleetMetricResponse:
     resource_already_exists_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
     service_unavailable_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     unauthorized_exception: Optional[Any] = field(default=None)
     

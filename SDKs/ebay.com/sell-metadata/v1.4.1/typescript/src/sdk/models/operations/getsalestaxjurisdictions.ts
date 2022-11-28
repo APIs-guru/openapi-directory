@@ -1,35 +1,36 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetSalesTaxJurisdictionsPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=countryCode" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=countryCode" })
   countryCode: string;
 }
 
 
 export class GetSalesTaxJurisdictionsSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   apiAuth: shared.SchemeApiAuth;
 }
 
 
 export class GetSalesTaxJurisdictionsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetSalesTaxJurisdictionsPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: GetSalesTaxJurisdictionsSecurity;
 }
 
 
 export class GetSalesTaxJurisdictionsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   salesTaxJurisdictions?: shared.SalesTaxJurisdictions;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

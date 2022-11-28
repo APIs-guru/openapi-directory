@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetFreeBetsQueryParams = /** @class */ (function (_super) {
     __extends(GetFreeBetsQueryParams, _super);
@@ -30,15 +30,15 @@ var GetFreeBetsQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=false;name=exclude" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=exclude" }),
         __metadata("design:type", Array)
     ], GetFreeBetsQueryParams.prototype, "exclude", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=false;name=fields" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=fields" }),
         __metadata("design:type", Array)
     ], GetFreeBetsQueryParams.prototype, "fields", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=false;name=include" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=include" }),
         __metadata("design:type", Array)
     ], GetFreeBetsQueryParams.prototype, "include", void 0);
     return GetFreeBetsQueryParams;
@@ -50,15 +50,15 @@ var GetFreeBetsHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=apiKey" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=apiKey" }),
         __metadata("design:type", String)
     ], GetFreeBetsHeaders.prototype, "apiKey", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=apiSecret" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=apiSecret" }),
         __metadata("design:type", String)
     ], GetFreeBetsHeaders.prototype, "apiSecret", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=apiTicket" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=apiTicket" }),
         __metadata("design:type", String)
     ], GetFreeBetsHeaders.prototype, "apiTicket", void 0);
     return GetFreeBetsHeaders;
@@ -70,11 +70,11 @@ var GetFreeBetsRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetFreeBetsQueryParams)
     ], GetFreeBetsRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetFreeBetsHeaders)
     ], GetFreeBetsRequest.prototype, "headers", void 0);
     return GetFreeBetsRequest;
@@ -86,15 +86,15 @@ var GetFreeBetsResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetFreeBetsResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetFreeBetsResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata({ elemType: shared.FreeBetDetail }),
+        SpeakeasyMetadata({ elemType: shared.FreeBetDetail }),
         __metadata("design:type", Array)
     ], GetFreeBetsResponse.prototype, "freeBet", void 0);
     return GetFreeBetsResponse;

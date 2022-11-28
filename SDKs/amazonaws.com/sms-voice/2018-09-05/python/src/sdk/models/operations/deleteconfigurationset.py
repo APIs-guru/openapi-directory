@@ -1,10 +1,13 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 
 
 @dataclass
 class DeleteConfigurationSetPathParams:
-    configuration_set_name: str = field(default=None, metadata={'path_param': { 'field_name': 'ConfigurationSetName', 'style': 'simple', 'explode': False }})
+    configuration_set_name: str = field(metadata={'path_param': { 'field_name': 'ConfigurationSetName', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -20,17 +23,17 @@ class DeleteConfigurationSetHeaders:
 
 @dataclass
 class DeleteConfigurationSetRequest:
-    path_params: DeleteConfigurationSetPathParams = field(default=None)
-    headers: DeleteConfigurationSetHeaders = field(default=None)
+    headers: DeleteConfigurationSetHeaders = field()
+    path_params: DeleteConfigurationSetPathParams = field()
     
 
 @dataclass
 class DeleteConfigurationSetResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     delete_configuration_set_response: Optional[dict[str, Any]] = field(default=None)
     internal_service_error_exception: Optional[Any] = field(default=None)
     not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     too_many_requests_exception: Optional[Any] = field(default=None)
     

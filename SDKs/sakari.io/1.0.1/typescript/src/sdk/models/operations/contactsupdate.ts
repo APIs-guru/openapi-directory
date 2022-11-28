@@ -1,38 +1,39 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class ContactsUpdatePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=accountId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=accountId" })
   accountId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=contactId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=contactId" })
   contactId: string;
 }
 
 
 export class ContactsUpdateSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   sakariAuth: shared.SchemeSakariAuth;
 }
 
 
 export class ContactsUpdateRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: ContactsUpdatePathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: ContactsUpdateSecurity;
 }
 
 
 export class ContactsUpdateResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contactResponse?: shared.ContactResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

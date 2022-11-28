@@ -10,7 +10,7 @@ import (
 	"strings"
 )
 
-var Servers = []string{
+var ServerList = []string{
 	"http://savingsplans.{region}.amazonaws.com",
 	"https://savingsplans.{region}.amazonaws.com",
 	"http://savingsplans.{region}.amazonaws.com.cn",
@@ -21,10 +21,15 @@ type HTTPClient interface {
 	Do(req *http.Request) (*http.Response, error)
 }
 
+// SDK Documentation: https://docs.aws.amazon.com/savingsplans/ - Amazon Web Services documentation
 type SDK struct {
-	defaultClient  HTTPClient
-	securityClient HTTPClient
-	serverURL      string
+	_defaultClient  HTTPClient
+	_securityClient HTTPClient
+	_security       *shared.Security
+	_serverURL      string
+	_language       string
+	_sdkVersion     string
+	_genVersion     string
 }
 
 type SDKOption func(*SDK)
@@ -35,33 +40,55 @@ func WithServerURL(serverURL string, params map[string]string) SDKOption {
 			serverURL = utils.ReplaceParameters(serverURL, params)
 		}
 
-		sdk.serverURL = serverURL
+		sdk._serverURL = serverURL
+	}
+}
+
+func WithClient(client HTTPClient) SDKOption {
+	return func(sdk *SDK) {
+		sdk._defaultClient = client
 	}
 }
 
 func WithSecurity(security shared.Security) SDKOption {
 	return func(sdk *SDK) {
-		sdk.securityClient = utils.CreateSecurityClient(security)
+		sdk._security = &security
 	}
 }
 
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
-		defaultClient:  http.DefaultClient,
-		securityClient: http.DefaultClient,
+		_language:   "go",
+		_sdkVersion: "",
+		_genVersion: "internal",
 	}
 	for _, opt := range opts {
 		opt(sdk)
 	}
-	if sdk.serverURL == "" {
-		sdk.serverURL = Servers[0]
+
+	if sdk._defaultClient == nil {
+		sdk._defaultClient = http.DefaultClient
+	}
+	if sdk._securityClient == nil {
+
+		if sdk._security != nil {
+			sdk._securityClient = utils.ConfigureSecurityClient(sdk._defaultClient, sdk._security)
+		} else {
+			sdk._securityClient = sdk._defaultClient
+		}
+
+	}
+
+	if sdk._serverURL == "" {
+		sdk._serverURL = ServerList[0]
 	}
 
 	return sdk
 }
 
+// CreateSavingsPlan - Creates a Savings Plan.
 func (s *SDK) CreateSavingsPlan(ctx context.Context, request operations.CreateSavingsPlanRequest) (*operations.CreateSavingsPlanResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/CreateSavingsPlan"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -81,7 +108,7 @@ func (s *SDK) CreateSavingsPlan(ctx context.Context, request operations.CreateSa
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -151,8 +178,9 @@ func (s *SDK) CreateSavingsPlan(ctx context.Context, request operations.CreateSa
 	return res, nil
 }
 
+// DeleteQueuedSavingsPlan - Deletes the queued purchase for the specified Savings Plan.
 func (s *SDK) DeleteQueuedSavingsPlan(ctx context.Context, request operations.DeleteQueuedSavingsPlanRequest) (*operations.DeleteQueuedSavingsPlanResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/DeleteQueuedSavingsPlan"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -172,7 +200,7 @@ func (s *SDK) DeleteQueuedSavingsPlan(ctx context.Context, request operations.De
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -242,8 +270,9 @@ func (s *SDK) DeleteQueuedSavingsPlan(ctx context.Context, request operations.De
 	return res, nil
 }
 
+// DescribeSavingsPlanRates - Describes the specified Savings Plans rates.
 func (s *SDK) DescribeSavingsPlanRates(ctx context.Context, request operations.DescribeSavingsPlanRatesRequest) (*operations.DescribeSavingsPlanRatesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/DescribeSavingsPlanRates"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -263,7 +292,7 @@ func (s *SDK) DescribeSavingsPlanRates(ctx context.Context, request operations.D
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -313,8 +342,9 @@ func (s *SDK) DescribeSavingsPlanRates(ctx context.Context, request operations.D
 	return res, nil
 }
 
+// DescribeSavingsPlans - Describes the specified Savings Plans.
 func (s *SDK) DescribeSavingsPlans(ctx context.Context, request operations.DescribeSavingsPlansRequest) (*operations.DescribeSavingsPlansResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/DescribeSavingsPlans"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -334,7 +364,7 @@ func (s *SDK) DescribeSavingsPlans(ctx context.Context, request operations.Descr
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -384,8 +414,9 @@ func (s *SDK) DescribeSavingsPlans(ctx context.Context, request operations.Descr
 	return res, nil
 }
 
+// DescribeSavingsPlansOfferingRates - Describes the specified Savings Plans offering rates.
 func (s *SDK) DescribeSavingsPlansOfferingRates(ctx context.Context, request operations.DescribeSavingsPlansOfferingRatesRequest) (*operations.DescribeSavingsPlansOfferingRatesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/DescribeSavingsPlansOfferingRates"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -405,7 +436,7 @@ func (s *SDK) DescribeSavingsPlansOfferingRates(ctx context.Context, request ope
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -455,8 +486,9 @@ func (s *SDK) DescribeSavingsPlansOfferingRates(ctx context.Context, request ope
 	return res, nil
 }
 
+// DescribeSavingsPlansOfferings - Describes the specified Savings Plans offerings.
 func (s *SDK) DescribeSavingsPlansOfferings(ctx context.Context, request operations.DescribeSavingsPlansOfferingsRequest) (*operations.DescribeSavingsPlansOfferingsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/DescribeSavingsPlansOfferings"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -476,7 +508,7 @@ func (s *SDK) DescribeSavingsPlansOfferings(ctx context.Context, request operati
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -526,8 +558,9 @@ func (s *SDK) DescribeSavingsPlansOfferings(ctx context.Context, request operati
 	return res, nil
 }
 
+// ListTagsForResource - Lists the tags for the specified resource.
 func (s *SDK) ListTagsForResource(ctx context.Context, request operations.ListTagsForResourceRequest) (*operations.ListTagsForResourceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/ListTagsForResource"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -547,7 +580,7 @@ func (s *SDK) ListTagsForResource(ctx context.Context, request operations.ListTa
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -607,8 +640,9 @@ func (s *SDK) ListTagsForResource(ctx context.Context, request operations.ListTa
 	return res, nil
 }
 
+// TagResource - Adds the specified tags to the specified resource.
 func (s *SDK) TagResource(ctx context.Context, request operations.TagResourceRequest) (*operations.TagResourceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/TagResource"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -628,7 +662,7 @@ func (s *SDK) TagResource(ctx context.Context, request operations.TagResourceReq
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -698,8 +732,9 @@ func (s *SDK) TagResource(ctx context.Context, request operations.TagResourceReq
 	return res, nil
 }
 
+// UntagResource - Removes the specified tags from the specified resource.
 func (s *SDK) UntagResource(ctx context.Context, request operations.UntagResourceRequest) (*operations.UntagResourceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/UntagResource"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -719,7 +754,7 @@ func (s *SDK) UntagResource(ctx context.Context, request operations.UntagResourc
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {

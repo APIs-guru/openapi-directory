@@ -1,46 +1,47 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ExtensionConfigurationHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=Accept-Language" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Accept-Language" })
   acceptLanguage: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=Cache-Control" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Cache-Control" })
   cacheControl: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=If-None-Match" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=If-None-Match" })
   ifNoneMatch?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=Request-Timeout" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Request-Timeout" })
   requestTimeout: number;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=User-Agent" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=User-Agent" })
   userAgent: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=x-applecloudextension-retry-count" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=x-applecloudextension-retry-count" })
   xApplecloudextensionRetryCount?: number;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=x-applecloudextension-session-id" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=x-applecloudextension-session-id" })
   xApplecloudextensionSessionId: string;
 }
 
 
 export class ExtensionConfigurationRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: ExtensionConfigurationHeaders;
 }
 
 
 export class ExtensionConfigurationResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: Map<string, string[]>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

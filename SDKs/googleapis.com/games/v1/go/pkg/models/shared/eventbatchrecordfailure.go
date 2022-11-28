@@ -12,6 +12,8 @@ const (
 	EventBatchRecordFailureFailureCauseEnumRecordRateHigh               EventBatchRecordFailureFailureCauseEnum = "RECORD_RATE_HIGH"
 )
 
+// EventBatchRecordFailure
+// A batch update failure resource.
 type EventBatchRecordFailure struct {
 	FailureCause *EventBatchRecordFailureFailureCauseEnum `json:"failureCause,omitempty"`
 	Kind         *string                                  `json:"kind,omitempty"`

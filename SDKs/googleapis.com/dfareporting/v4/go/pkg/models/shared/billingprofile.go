@@ -16,6 +16,8 @@ const (
 	BillingProfileStatusEnumArchived    BillingProfileStatusEnum = "ARCHIVED"
 )
 
+// BillingProfile
+// Contains properties of a Campaign Manager Billing Profile.
 type BillingProfile struct {
 	ConsolidatedInvoice         *bool                           `json:"consolidatedInvoice,omitempty"`
 	CountryCode                 *string                         `json:"countryCode,omitempty"`

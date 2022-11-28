@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // BatchGetRecordIdentifier
 /**
  * The identifier that identifies the batch of Records you are retrieving in a batch.
@@ -33,15 +33,15 @@ var BatchGetRecordIdentifier = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=FeatureGroupName" }),
+        SpeakeasyMetadata({ data: "json, name=FeatureGroupName" }),
         __metadata("design:type", String)
     ], BatchGetRecordIdentifier.prototype, "featureGroupName", void 0);
     __decorate([
-        Metadata({ data: "json, name=FeatureNames" }),
+        SpeakeasyMetadata({ data: "json, name=FeatureNames" }),
         __metadata("design:type", Array)
     ], BatchGetRecordIdentifier.prototype, "featureNames", void 0);
     __decorate([
-        Metadata({ data: "json, name=RecordIdentifiersValueAsString" }),
+        SpeakeasyMetadata({ data: "json, name=RecordIdentifiersValueAsString" }),
         __metadata("design:type", Array)
     ], BatchGetRecordIdentifier.prototype, "recordIdentifiersValueAsString", void 0);
     return BatchGetRecordIdentifier;

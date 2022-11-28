@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostDeleteRouteActionEnum(str, Enum):
     DELETE_ROUTE = "DeleteRoute"
@@ -10,8 +14,8 @@ class PostDeleteRouteVersionEnum(str, Enum):
 
 @dataclass
 class PostDeleteRouteQueryParams:
-    action: PostDeleteRouteActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostDeleteRouteVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostDeleteRouteActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostDeleteRouteVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,13 +31,13 @@ class PostDeleteRouteHeaders:
 
 @dataclass
 class PostDeleteRouteRequest:
-    query_params: PostDeleteRouteQueryParams = field(default=None)
-    headers: PostDeleteRouteHeaders = field(default=None)
+    headers: PostDeleteRouteHeaders = field()
+    query_params: PostDeleteRouteQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostDeleteRouteResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Usd
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Represents an amount of money in United States dollars.
 **/
 export class Usd extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Cents" })
+  @SpeakeasyMetadata({ data: "json, name=Cents" })
   cents?: number;
 
-  @Metadata({ data: "json, name=Dollars" })
+  @SpeakeasyMetadata({ data: "json, name=Dollars" })
   dollars?: number;
 
-  @Metadata({ data: "json, name=TenthFractionsOfACent" })
+  @SpeakeasyMetadata({ data: "json, name=TenthFractionsOfACent" })
   tenthFractionsOfACent?: number;
 }

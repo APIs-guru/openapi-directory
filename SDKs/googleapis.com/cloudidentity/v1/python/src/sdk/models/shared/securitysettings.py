@@ -1,12 +1,16 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import memberrestriction
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
-class SecuritySettings:
-    member_restriction: Optional[memberrestriction.MemberRestriction] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'memberRestriction' }})
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
+class SecuritySettingsInput:
+    r"""SecuritySettingsInput
+    The definition of security settings.
+    """
+    
+    member_restriction: Optional[MemberRestriction] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('memberRestriction') }})
     

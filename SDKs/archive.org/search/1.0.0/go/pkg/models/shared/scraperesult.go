@@ -1,5 +1,7 @@
 package shared
 
+// ScrapeResult
+// The result of a scrape request
 type ScrapeResult struct {
 	Count    *int64                   `json:"count,omitempty"`
 	Cursor   *string                  `json:"cursor,omitempty"`

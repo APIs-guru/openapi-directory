@@ -30,7 +30,7 @@ type ContactcenterinsightsProjectsLocationsViewsCreateSecurity struct {
 type ContactcenterinsightsProjectsLocationsViewsCreateRequest struct {
 	PathParams  ContactcenterinsightsProjectsLocationsViewsCreatePathParams
 	QueryParams ContactcenterinsightsProjectsLocationsViewsCreateQueryParams
-	Request     *shared.GoogleCloudContactcenterinsightsV1View `request:"mediaType=application/json"`
+	Request     *shared.GoogleCloudContactcenterinsightsV1ViewInput `request:"mediaType=application/json"`
 	Security    ContactcenterinsightsProjectsLocationsViewsCreateSecurity
 }
 

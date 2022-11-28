@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Announcement
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Enterprise global announcement
 **/
 export class Announcement extends SpeakeasyBase {
-  @Metadata({ data: "json, name=announcement" })
+  @SpeakeasyMetadata({ data: "json, name=announcement" })
   announcement: string;
 
-  @Metadata({ data: "json, name=expires_at" })
+  @SpeakeasyMetadata({ data: "json, name=expires_at" })
   expiresAt?: Date;
 }

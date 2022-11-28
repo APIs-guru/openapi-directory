@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare enum DeleteQueryDefinitionXAmzTargetEnum {
     Logs20140328DeleteQueryDefinition = "Logs_20140328.DeleteQueryDefinition"

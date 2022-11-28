@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // TrackingNumberResponse
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The Tracking Number Response model
 **/
 export class TrackingNumberResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=trackingNumber" })
+  @SpeakeasyMetadata({ data: "json, name=trackingNumber" })
   trackingNumber?: string;
 }

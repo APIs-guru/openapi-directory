@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { FaultRootCauseService } from "./faultrootcauseservice";
+
 
 
 // FaultRootCause
@@ -8,9 +8,9 @@ import { FaultRootCauseService } from "./faultrootcauseservice";
  * The root cause information for a trace summary fault.
 **/
 export class FaultRootCause extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ClientImpacting" })
+  @SpeakeasyMetadata({ data: "json, name=ClientImpacting" })
   clientImpacting?: boolean;
 
-  @Metadata({ data: "json, name=Services", elemType: shared.FaultRootCauseService })
+  @SpeakeasyMetadata({ data: "json, name=Services", elemType: FaultRootCauseService })
   services?: FaultRootCauseService[];
 }

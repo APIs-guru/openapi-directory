@@ -11,7 +11,7 @@ import (
 	"strings"
 )
 
-var Servers = []string{
+var ServerList = []string{
 	"https://connect.signl4.com/api",
 }
 
@@ -20,9 +20,13 @@ type HTTPClient interface {
 }
 
 type SDK struct {
-	defaultClient  HTTPClient
-	securityClient HTTPClient
-	serverURL      string
+	_defaultClient  HTTPClient
+	_securityClient HTTPClient
+	_security       *shared.Security
+	_serverURL      string
+	_language       string
+	_sdkVersion     string
+	_genVersion     string
 }
 
 type SDKOption func(*SDK)
@@ -33,33 +37,58 @@ func WithServerURL(serverURL string, params map[string]string) SDKOption {
 			serverURL = utils.ReplaceParameters(serverURL, params)
 		}
 
-		sdk.serverURL = serverURL
+		sdk._serverURL = serverURL
+	}
+}
+
+func WithClient(client HTTPClient) SDKOption {
+	return func(sdk *SDK) {
+		sdk._defaultClient = client
 	}
 }
 
 func WithSecurity(security shared.Security) SDKOption {
 	return func(sdk *SDK) {
-		sdk.securityClient = utils.CreateSecurityClient(security)
+		sdk._security = &security
 	}
 }
 
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
-		defaultClient:  http.DefaultClient,
-		securityClient: http.DefaultClient,
+		_language:   "go",
+		_sdkVersion: "",
+		_genVersion: "internal",
 	}
 	for _, opt := range opts {
 		opt(sdk)
 	}
-	if sdk.serverURL == "" {
-		sdk.serverURL = Servers[0]
+
+	if sdk._defaultClient == nil {
+		sdk._defaultClient = http.DefaultClient
+	}
+	if sdk._securityClient == nil {
+
+		if sdk._security != nil {
+			sdk._securityClient = utils.ConfigureSecurityClient(sdk._defaultClient, sdk._security)
+		} else {
+			sdk._securityClient = sdk._defaultClient
+		}
+
+	}
+
+	if sdk._serverURL == "" {
+		sdk._serverURL = ServerList[0]
 	}
 
 	return sdk
 }
 
+// DeleteCategoriesTeamIDCategoryID - Delete an existing category
+// Sample Request:
+//
+//	DELETE /categories/cbb70402-1359-477f-ac92-0171cf2b5ff7/c0054336-cd89-4abf-882d-ba69b5adb25e
 func (s *SDK) DeleteCategoriesTeamIDCategoryID(ctx context.Context, request operations.DeleteCategoriesTeamIDCategoryIDRequest) (*operations.DeleteCategoriesTeamIDCategoryIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/categories/{teamId}/{categoryId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -67,7 +96,7 @@ func (s *SDK) DeleteCategoriesTeamIDCategoryID(ctx context.Context, request oper
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -185,8 +214,10 @@ func (s *SDK) DeleteCategoriesTeamIDCategoryID(ctx context.Context, request oper
 	return res, nil
 }
 
+// DeleteScriptsInstancesInstanceID - Deletes a script instance.
+// Gets the script instance specified by the passed instance id.
 func (s *SDK) DeleteScriptsInstancesInstanceID(ctx context.Context, request operations.DeleteScriptsInstancesInstanceIDRequest) (*operations.DeleteScriptsInstancesInstanceIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/scripts/instances/{instanceId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -194,7 +225,7 @@ func (s *SDK) DeleteScriptsInstancesInstanceID(ctx context.Context, request oper
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -263,8 +294,9 @@ func (s *SDK) DeleteScriptsInstancesInstanceID(ctx context.Context, request oper
 	return res, nil
 }
 
+// DeleteTeamsTeamIDMembershipsUserID - Removes a user or invitation from a team, and may delete the user if he is not in any team.
 func (s *SDK) DeleteTeamsTeamIDMembershipsUserID(ctx context.Context, request operations.DeleteTeamsTeamIDMembershipsUserIDRequest) (*operations.DeleteTeamsTeamIDMembershipsUserIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/teams/{teamId}/memberships/{userId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -274,7 +306,7 @@ func (s *SDK) DeleteTeamsTeamIDMembershipsUserID(ctx context.Context, request op
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -418,8 +450,9 @@ func (s *SDK) DeleteTeamsTeamIDMembershipsUserID(ctx context.Context, request op
 	return res, nil
 }
 
+// DeleteTeamsTeamIDSchedulesDutyID - Delete a specific duty.
 func (s *SDK) DeleteTeamsTeamIDSchedulesDutyID(ctx context.Context, request operations.DeleteTeamsTeamIDSchedulesDutyIDRequest) (*operations.DeleteTeamsTeamIDSchedulesDutyIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/teams/{teamId}/schedules/{dutyId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -427,7 +460,7 @@ func (s *SDK) DeleteTeamsTeamIDSchedulesDutyID(ctx context.Context, request oper
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -544,8 +577,10 @@ func (s *SDK) DeleteTeamsTeamIDSchedulesDutyID(ctx context.Context, request oper
 	return res, nil
 }
 
+// DeleteWebhooksWebhookID - Delete Webhook by Id
+// Deletes the specified webhook so that it will no longer be notified.
 func (s *SDK) DeleteWebhooksWebhookID(ctx context.Context, request operations.DeleteWebhooksWebhookIDRequest) (*operations.DeleteWebhooksWebhookIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/webhooks/{webhookId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -553,7 +588,7 @@ func (s *SDK) DeleteWebhooksWebhookID(ctx context.Context, request operations.De
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -646,8 +681,10 @@ func (s *SDK) DeleteWebhooksWebhookID(ctx context.Context, request operations.De
 	return res, nil
 }
 
+// GetAlertsAlertID - Get Alert
+// Gets an alert by id.
 func (s *SDK) GetAlertsAlertID(ctx context.Context, request operations.GetAlertsAlertIDRequest) (*operations.GetAlertsAlertIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/alerts/{alertId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -655,7 +692,7 @@ func (s *SDK) GetAlertsAlertID(ctx context.Context, request operations.GetAlerts
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -771,8 +808,10 @@ func (s *SDK) GetAlertsAlertID(ctx context.Context, request operations.GetAlerts
 	return res, nil
 }
 
+// GetAlertsAlertIDAnnotations - Get annotations of an alert
+// Get annotations of an alert by id.
 func (s *SDK) GetAlertsAlertIDAnnotations(ctx context.Context, request operations.GetAlertsAlertIDAnnotationsRequest) (*operations.GetAlertsAlertIDAnnotationsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/alerts/{alertId}/annotations", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -780,7 +819,7 @@ func (s *SDK) GetAlertsAlertIDAnnotations(ctx context.Context, request operation
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -897,8 +936,10 @@ func (s *SDK) GetAlertsAlertIDAnnotations(ctx context.Context, request operation
 	return res, nil
 }
 
+// GetAlertsAlertIDAttachments - Get attachments of an alert
+// Get attachments of an alert by id.
 func (s *SDK) GetAlertsAlertIDAttachments(ctx context.Context, request operations.GetAlertsAlertIDAttachmentsRequest) (*operations.GetAlertsAlertIDAttachmentsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/alerts/{alertId}/attachments", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -906,7 +947,7 @@ func (s *SDK) GetAlertsAlertIDAttachments(ctx context.Context, request operation
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1022,8 +1063,9 @@ func (s *SDK) GetAlertsAlertIDAttachments(ctx context.Context, request operation
 	return res, nil
 }
 
+// GetAlertsAlertIDAttachmentsAttachmentID - Gets a specified attachment of a specified alert.
 func (s *SDK) GetAlertsAlertIDAttachmentsAttachmentID(ctx context.Context, request operations.GetAlertsAlertIDAttachmentsAttachmentIDRequest) (*operations.GetAlertsAlertIDAttachmentsAttachmentIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/alerts/{alertId}/attachments/{attachmentId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1033,7 +1075,7 @@ func (s *SDK) GetAlertsAlertIDAttachmentsAttachmentID(ctx context.Context, reque
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1151,8 +1193,10 @@ func (s *SDK) GetAlertsAlertIDAttachmentsAttachmentID(ctx context.Context, reque
 	return res, nil
 }
 
+// GetAlertsAlertIDNotifications - Get alert notifications
+// Get notifications of all users by alert id.
 func (s *SDK) GetAlertsAlertIDNotifications(ctx context.Context, request operations.GetAlertsAlertIDNotificationsRequest) (*operations.GetAlertsAlertIDNotificationsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/alerts/{alertId}/notifications", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1160,7 +1204,7 @@ func (s *SDK) GetAlertsAlertIDNotifications(ctx context.Context, request operati
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1276,8 +1320,10 @@ func (s *SDK) GetAlertsAlertIDNotifications(ctx context.Context, request operati
 	return res, nil
 }
 
+// GetAlertsAlertIDOverview - Get an overview alert.
+// Get overview alert by id.
 func (s *SDK) GetAlertsAlertIDOverview(ctx context.Context, request operations.GetAlertsAlertIDOverviewRequest) (*operations.GetAlertsAlertIDOverviewResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/alerts/{alertId}/overview", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1285,7 +1331,7 @@ func (s *SDK) GetAlertsAlertIDOverview(ctx context.Context, request operations.G
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1401,8 +1447,11 @@ func (s *SDK) GetAlertsAlertIDOverview(ctx context.Context, request operations.G
 	return res, nil
 }
 
+// GetAlertsReport - Get Alert Report
+// Returns information about the occurred alert volume in different time periods as well as information about the
+// response behaviour (amount of confirmed and unhandled alerts) of your team members.
 func (s *SDK) GetAlertsReport(ctx context.Context, request operations.GetAlertsReportRequest) (*operations.GetAlertsReportResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/alerts/report"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1412,7 +1461,7 @@ func (s *SDK) GetAlertsReport(ctx context.Context, request operations.GetAlertsR
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1528,8 +1577,10 @@ func (s *SDK) GetAlertsReport(ctx context.Context, request operations.GetAlertsR
 	return res, nil
 }
 
+// GetCategoriesImages - Gets the names of all alert category images.
+// You can get the image by going to account.signl4.com/images/alerts/categoryImageName.svg
 func (s *SDK) GetCategoriesImages(ctx context.Context) (*operations.GetCategoriesImagesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/categories/images"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1537,7 +1588,7 @@ func (s *SDK) GetCategoriesImages(ctx context.Context) (*operations.GetCategorie
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1654,8 +1705,12 @@ func (s *SDK) GetCategoriesImages(ctx context.Context) (*operations.GetCategorie
 	return res, nil
 }
 
+// GetCategoriesTeamID - Get all categories
+// Sample Request:
+//
+//	GET /categories/cbb70402-1359-477f-ac92-0171cf2b5ff7
 func (s *SDK) GetCategoriesTeamID(ctx context.Context, request operations.GetCategoriesTeamIDRequest) (*operations.GetCategoriesTeamIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/categories/{teamId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1663,7 +1718,7 @@ func (s *SDK) GetCategoriesTeamID(ctx context.Context, request operations.GetCat
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1803,8 +1858,12 @@ func (s *SDK) GetCategoriesTeamID(ctx context.Context, request operations.GetCat
 	return res, nil
 }
 
+// GetCategoriesTeamIDCategoryID - Get a specific category
+// Sample Request:
+//
+//	GET /categories/cbb70402-1359-477f-ac92-0171cf2b5ff7/c0054336-cd89-4abf-882d-ba69b5adb25e
 func (s *SDK) GetCategoriesTeamIDCategoryID(ctx context.Context, request operations.GetCategoriesTeamIDCategoryIDRequest) (*operations.GetCategoriesTeamIDCategoryIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/categories/{teamId}/{categoryId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1812,7 +1871,7 @@ func (s *SDK) GetCategoriesTeamIDCategoryID(ctx context.Context, request operati
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1952,8 +2011,12 @@ func (s *SDK) GetCategoriesTeamIDCategoryID(ctx context.Context, request operati
 	return res, nil
 }
 
+// GetCategoriesTeamIDCategoryIDMetrics - Get metrics for a specific category
+// Sample Request:
+//
+//	GET /categories/cbb70402-1359-477f-ac92-0171cf2b5ff7/c0054336-cd89-4abf-882d-ba69b5adb25e/metrics
 func (s *SDK) GetCategoriesTeamIDCategoryIDMetrics(ctx context.Context, request operations.GetCategoriesTeamIDCategoryIDMetricsRequest) (*operations.GetCategoriesTeamIDCategoryIDMetricsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/categories/{teamId}/{categoryId}/metrics", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1961,7 +2024,7 @@ func (s *SDK) GetCategoriesTeamIDCategoryIDMetrics(ctx context.Context, request 
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2101,8 +2164,14 @@ func (s *SDK) GetCategoriesTeamIDCategoryIDMetrics(ctx context.Context, request 
 	return res, nil
 }
 
+// GetCategoriesTeamIDCategoryIDSubscriptions - Get category subscriptions
+// Sample Request:
+//
+//	GET /categories/cbb70402-1359-477f-ac92-0171cf2b5ff7/c0054336-cd89-4abf-882d-ba69b5adb25e/subscriptions
+//	{
+//	}
 func (s *SDK) GetCategoriesTeamIDCategoryIDSubscriptions(ctx context.Context, request operations.GetCategoriesTeamIDCategoryIDSubscriptionsRequest) (*operations.GetCategoriesTeamIDCategoryIDSubscriptionsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/categories/{teamId}/{categoryId}/subscriptions", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2110,7 +2179,7 @@ func (s *SDK) GetCategoriesTeamIDCategoryIDSubscriptions(ctx context.Context, re
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2227,8 +2296,12 @@ func (s *SDK) GetCategoriesTeamIDCategoryIDSubscriptions(ctx context.Context, re
 	return res, nil
 }
 
+// GetCategoriesTeamIDMetrics - Get metrics for all categories
+// Sample Request:
+//
+//	GET /categories/cbb70402-1359-477f-ac92-0171cf2b5ff7/metrics
 func (s *SDK) GetCategoriesTeamIDMetrics(ctx context.Context, request operations.GetCategoriesTeamIDMetricsRequest) (*operations.GetCategoriesTeamIDMetricsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/categories/{teamId}/metrics", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2236,7 +2309,7 @@ func (s *SDK) GetCategoriesTeamIDMetrics(ctx context.Context, request operations
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2376,8 +2449,10 @@ func (s *SDK) GetCategoriesTeamIDMetrics(ctx context.Context, request operations
 	return res, nil
 }
 
+// GetEventsEventIDOverview - Get overview event
+// Get overview event by id.
 func (s *SDK) GetEventsEventIDOverview(ctx context.Context, request operations.GetEventsEventIDOverviewRequest) (*operations.GetEventsEventIDOverviewResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/events/{eventId}/overview", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2385,7 +2460,7 @@ func (s *SDK) GetEventsEventIDOverview(ctx context.Context, request operations.G
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2501,8 +2576,10 @@ func (s *SDK) GetEventsEventIDOverview(ctx context.Context, request operations.G
 	return res, nil
 }
 
+// GetEventsEventIDParameters - Get event parameters
+// Get parameters of an event by id.
 func (s *SDK) GetEventsEventIDParameters(ctx context.Context, request operations.GetEventsEventIDParametersRequest) (*operations.GetEventsEventIDParametersResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/events/{eventId}/parameters", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2510,7 +2587,7 @@ func (s *SDK) GetEventsEventIDParameters(ctx context.Context, request operations
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2626,8 +2703,9 @@ func (s *SDK) GetEventsEventIDParameters(ctx context.Context, request operations
 	return res, nil
 }
 
+// GetPrepaidBalance - Get your subscription's current prepaid balance.
 func (s *SDK) GetPrepaidBalance(ctx context.Context) (*operations.GetPrepaidBalanceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/prepaid/balance"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2635,7 +2713,7 @@ func (s *SDK) GetPrepaidBalance(ctx context.Context) (*operations.GetPrepaidBala
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2751,8 +2829,9 @@ func (s *SDK) GetPrepaidBalance(ctx context.Context) (*operations.GetPrepaidBala
 	return res, nil
 }
 
+// GetPrepaidSettings - Get your subscription's current prepaid settings.
 func (s *SDK) GetPrepaidSettings(ctx context.Context) (*operations.GetPrepaidSettingsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/prepaid/settings"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2760,7 +2839,7 @@ func (s *SDK) GetPrepaidSettings(ctx context.Context) (*operations.GetPrepaidSet
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2876,8 +2955,9 @@ func (s *SDK) GetPrepaidSettings(ctx context.Context) (*operations.GetPrepaidSet
 	return res, nil
 }
 
+// GetPrepaidTransactions - Get your subscription's prepaid transactions.
 func (s *SDK) GetPrepaidTransactions(ctx context.Context) (*operations.GetPrepaidTransactionsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/prepaid/transactions"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2885,7 +2965,7 @@ func (s *SDK) GetPrepaidTransactions(ctx context.Context) (*operations.GetPrepai
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3001,8 +3081,10 @@ func (s *SDK) GetPrepaidTransactions(ctx context.Context) (*operations.GetPrepai
 	return res, nil
 }
 
+// GetScriptsInstances - Returns all script instances of the SIGNL4 team
+// Returns all script instances in the subscription.
 func (s *SDK) GetScriptsInstances(ctx context.Context, request operations.GetScriptsInstancesRequest) (*operations.GetScriptsInstancesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/scripts/instances"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3012,7 +3094,7 @@ func (s *SDK) GetScriptsInstances(ctx context.Context, request operations.GetScr
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3080,8 +3162,10 @@ func (s *SDK) GetScriptsInstances(ctx context.Context, request operations.GetScr
 	return res, nil
 }
 
+// GetScriptsInstancesInstanceID - Returns all information about a given script instance which includes its runtime status.
+// Gets the script instance specified by the passed instance id.
 func (s *SDK) GetScriptsInstancesInstanceID(ctx context.Context, request operations.GetScriptsInstancesInstanceIDRequest) (*operations.GetScriptsInstancesInstanceIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/scripts/instances/{instanceId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3089,7 +3173,7 @@ func (s *SDK) GetScriptsInstancesInstanceID(ctx context.Context, request operati
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3181,8 +3265,10 @@ func (s *SDK) GetScriptsInstancesInstanceID(ctx context.Context, request operati
 	return res, nil
 }
 
+// GetScriptsInventory - Returns all available inventory scripts which can be added to a SIGNL4 subscription.
+// Returns all available inventory scripts which can be added to a SIGNL4 subscription.
 func (s *SDK) GetScriptsInventory(ctx context.Context) (*operations.GetScriptsInventoryResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/scripts/inventory"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3190,7 +3276,7 @@ func (s *SDK) GetScriptsInventory(ctx context.Context) (*operations.GetScriptsIn
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3282,8 +3368,9 @@ func (s *SDK) GetScriptsInventory(ctx context.Context) (*operations.GetScriptsIn
 	return res, nil
 }
 
+// GetScriptsInventoryParsed - Returns all inventory scripts.
 func (s *SDK) GetScriptsInventoryParsed(ctx context.Context, request operations.GetScriptsInventoryParsedRequest) (*operations.GetScriptsInventoryParsedResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/scripts/inventory/parsed"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3293,7 +3380,7 @@ func (s *SDK) GetScriptsInventoryParsed(ctx context.Context, request operations.
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3385,8 +3472,10 @@ func (s *SDK) GetScriptsInventoryParsed(ctx context.Context, request operations.
 	return res, nil
 }
 
+// GetScriptsInventoryParsedScriptID - Returns an inventory script by its id.
+// Gets the script specified by the passed script id.
 func (s *SDK) GetScriptsInventoryParsedScriptID(ctx context.Context, request operations.GetScriptsInventoryParsedScriptIDRequest) (*operations.GetScriptsInventoryParsedScriptIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/scripts/inventory/parsed/{scriptId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3396,7 +3485,7 @@ func (s *SDK) GetScriptsInventoryParsedScriptID(ctx context.Context, request ope
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3488,8 +3577,9 @@ func (s *SDK) GetScriptsInventoryParsedScriptID(ctx context.Context, request ope
 	return res, nil
 }
 
+// GetSubscriptions - Get infos of all available/managed subscriptions.
 func (s *SDK) GetSubscriptions(ctx context.Context) (*operations.GetSubscriptionsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/subscriptions"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3497,7 +3587,7 @@ func (s *SDK) GetSubscriptions(ctx context.Context) (*operations.GetSubscription
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3637,8 +3727,9 @@ func (s *SDK) GetSubscriptions(ctx context.Context) (*operations.GetSubscription
 	return res, nil
 }
 
+// GetSubscriptionsSubscriptionID - Get infos of a specific subscription.
 func (s *SDK) GetSubscriptionsSubscriptionID(ctx context.Context, request operations.GetSubscriptionsSubscriptionIDRequest) (*operations.GetSubscriptionsSubscriptionIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/subscriptions/{subscriptionId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3646,7 +3737,7 @@ func (s *SDK) GetSubscriptionsSubscriptionID(ctx context.Context, request operat
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3786,8 +3877,9 @@ func (s *SDK) GetSubscriptionsSubscriptionID(ctx context.Context, request operat
 	return res, nil
 }
 
+// GetSubscriptionsSubscriptionIDChannelPrices - Returns the subscription's channel price information.
 func (s *SDK) GetSubscriptionsSubscriptionIDChannelPrices(ctx context.Context, request operations.GetSubscriptionsSubscriptionIDChannelPricesRequest) (*operations.GetSubscriptionsSubscriptionIDChannelPricesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/subscriptions/{subscriptionId}/channelPrices", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3795,7 +3887,7 @@ func (s *SDK) GetSubscriptionsSubscriptionIDChannelPrices(ctx context.Context, r
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3911,8 +4003,9 @@ func (s *SDK) GetSubscriptionsSubscriptionIDChannelPrices(ctx context.Context, r
 	return res, nil
 }
 
+// GetSubscriptionsSubscriptionIDFeatures - Returns the features of a specified subscription.
 func (s *SDK) GetSubscriptionsSubscriptionIDFeatures(ctx context.Context, request operations.GetSubscriptionsSubscriptionIDFeaturesRequest) (*operations.GetSubscriptionsSubscriptionIDFeaturesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/subscriptions/{subscriptionId}/features", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3920,7 +4013,7 @@ func (s *SDK) GetSubscriptionsSubscriptionIDFeatures(ctx context.Context, reques
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4060,8 +4153,9 @@ func (s *SDK) GetSubscriptionsSubscriptionIDFeatures(ctx context.Context, reques
 	return res, nil
 }
 
+// GetSubscriptionsSubscriptionIDPrepaidBalance - Get a subscription's current prepaid balance.
 func (s *SDK) GetSubscriptionsSubscriptionIDPrepaidBalance(ctx context.Context, request operations.GetSubscriptionsSubscriptionIDPrepaidBalanceRequest) (*operations.GetSubscriptionsSubscriptionIDPrepaidBalanceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/subscriptions/{subscriptionId}/prepaidBalance", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -4069,7 +4163,7 @@ func (s *SDK) GetSubscriptionsSubscriptionIDPrepaidBalance(ctx context.Context, 
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4209,8 +4303,9 @@ func (s *SDK) GetSubscriptionsSubscriptionIDPrepaidBalance(ctx context.Context, 
 	return res, nil
 }
 
+// GetSubscriptionsSubscriptionIDPrepaidSettings - Get a subscription's current prepaid settings.
 func (s *SDK) GetSubscriptionsSubscriptionIDPrepaidSettings(ctx context.Context, request operations.GetSubscriptionsSubscriptionIDPrepaidSettingsRequest) (*operations.GetSubscriptionsSubscriptionIDPrepaidSettingsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/subscriptions/{subscriptionId}/prepaidSettings", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -4218,7 +4313,7 @@ func (s *SDK) GetSubscriptionsSubscriptionIDPrepaidSettings(ctx context.Context,
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4358,8 +4453,9 @@ func (s *SDK) GetSubscriptionsSubscriptionIDPrepaidSettings(ctx context.Context,
 	return res, nil
 }
 
+// GetSubscriptionsSubscriptionIDPrepaidTransactions - Get a subscription's prepaid transactions.
 func (s *SDK) GetSubscriptionsSubscriptionIDPrepaidTransactions(ctx context.Context, request operations.GetSubscriptionsSubscriptionIDPrepaidTransactionsRequest) (*operations.GetSubscriptionsSubscriptionIDPrepaidTransactionsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/subscriptions/{subscriptionId}/prepaidTransactions", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -4367,7 +4463,7 @@ func (s *SDK) GetSubscriptionsSubscriptionIDPrepaidTransactions(ctx context.Cont
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4507,8 +4603,9 @@ func (s *SDK) GetSubscriptionsSubscriptionIDPrepaidTransactions(ctx context.Cont
 	return res, nil
 }
 
+// GetSubscriptionsSubscriptionIDTeams - Get infos for all teams of the subscription.
 func (s *SDK) GetSubscriptionsSubscriptionIDTeams(ctx context.Context, request operations.GetSubscriptionsSubscriptionIDTeamsRequest) (*operations.GetSubscriptionsSubscriptionIDTeamsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/subscriptions/{subscriptionId}/teams", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -4516,7 +4613,7 @@ func (s *SDK) GetSubscriptionsSubscriptionIDTeams(ctx context.Context, request o
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4632,8 +4729,9 @@ func (s *SDK) GetSubscriptionsSubscriptionIDTeams(ctx context.Context, request o
 	return res, nil
 }
 
+// GetSubscriptionsSubscriptionIDUserLicenses - Gets a subscription's user licenses.
 func (s *SDK) GetSubscriptionsSubscriptionIDUserLicenses(ctx context.Context, request operations.GetSubscriptionsSubscriptionIDUserLicensesRequest) (*operations.GetSubscriptionsSubscriptionIDUserLicensesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/subscriptions/{subscriptionId}/userLicenses", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -4641,7 +4739,7 @@ func (s *SDK) GetSubscriptionsSubscriptionIDUserLicenses(ctx context.Context, re
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4781,8 +4879,9 @@ func (s *SDK) GetSubscriptionsSubscriptionIDUserLicenses(ctx context.Context, re
 	return res, nil
 }
 
+// GetTeams - Get infos of all teams.
 func (s *SDK) GetTeams(ctx context.Context) (*operations.GetTeamsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/teams"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -4790,7 +4889,7 @@ func (s *SDK) GetTeams(ctx context.Context) (*operations.GetTeamsResponse, error
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4906,8 +5005,9 @@ func (s *SDK) GetTeams(ctx context.Context) (*operations.GetTeamsResponse, error
 	return res, nil
 }
 
+// GetTeamsTeamID - Gets infos of a specific team.
 func (s *SDK) GetTeamsTeamID(ctx context.Context, request operations.GetTeamsTeamIDRequest) (*operations.GetTeamsTeamIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/teams/{teamId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -4915,7 +5015,7 @@ func (s *SDK) GetTeamsTeamID(ctx context.Context, request operations.GetTeamsTea
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5055,8 +5155,9 @@ func (s *SDK) GetTeamsTeamID(ctx context.Context, request operations.GetTeamsTea
 	return res, nil
 }
 
+// GetTeamsTeamIDAlertReports - Get information about downloadable alert reports
 func (s *SDK) GetTeamsTeamIDAlertReports(ctx context.Context, request operations.GetTeamsTeamIDAlertReportsRequest) (*operations.GetTeamsTeamIDAlertReportsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/teams/{teamId}/alertReports", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -5064,7 +5165,7 @@ func (s *SDK) GetTeamsTeamIDAlertReports(ctx context.Context, request operations
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5204,8 +5305,9 @@ func (s *SDK) GetTeamsTeamIDAlertReports(ctx context.Context, request operations
 	return res, nil
 }
 
+// GetTeamsTeamIDAlertReportsFileName - Returns Alert Report
 func (s *SDK) GetTeamsTeamIDAlertReportsFileName(ctx context.Context, request operations.GetTeamsTeamIDAlertReportsFileNameRequest) (*operations.GetTeamsTeamIDAlertReportsFileNameResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/teams/{teamId}/alertReports/{fileName}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -5213,7 +5315,7 @@ func (s *SDK) GetTeamsTeamIDAlertReportsFileName(ctx context.Context, request op
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5353,8 +5455,9 @@ func (s *SDK) GetTeamsTeamIDAlertReportsFileName(ctx context.Context, request op
 	return res, nil
 }
 
+// GetTeamsTeamIDAlertSettings - Gets alert settings of a specific team.
 func (s *SDK) GetTeamsTeamIDAlertSettings(ctx context.Context, request operations.GetTeamsTeamIDAlertSettingsRequest) (*operations.GetTeamsTeamIDAlertSettingsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/teams/{teamId}/alertSettings", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -5362,7 +5465,7 @@ func (s *SDK) GetTeamsTeamIDAlertSettings(ctx context.Context, request operation
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5502,8 +5605,9 @@ func (s *SDK) GetTeamsTeamIDAlertSettings(ctx context.Context, request operation
 	return res, nil
 }
 
+// GetTeamsTeamIDDutyReports - Get Information about downloadable reports
 func (s *SDK) GetTeamsTeamIDDutyReports(ctx context.Context, request operations.GetTeamsTeamIDDutyReportsRequest) (*operations.GetTeamsTeamIDDutyReportsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/teams/{teamId}/dutyReports", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -5511,7 +5615,7 @@ func (s *SDK) GetTeamsTeamIDDutyReports(ctx context.Context, request operations.
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5651,8 +5755,9 @@ func (s *SDK) GetTeamsTeamIDDutyReports(ctx context.Context, request operations.
 	return res, nil
 }
 
+// GetTeamsTeamIDDutyReportsFileName - Download duty report with a specific fileName
 func (s *SDK) GetTeamsTeamIDDutyReportsFileName(ctx context.Context, request operations.GetTeamsTeamIDDutyReportsFileNameRequest) (*operations.GetTeamsTeamIDDutyReportsFileNameResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/teams/{teamId}/dutyReports/{fileName}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -5660,7 +5765,7 @@ func (s *SDK) GetTeamsTeamIDDutyReportsFileName(ctx context.Context, request ope
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5800,8 +5905,9 @@ func (s *SDK) GetTeamsTeamIDDutyReportsFileName(ctx context.Context, request ope
 	return res, nil
 }
 
+// GetTeamsTeamIDDutysummary - Get duty assistant info for a team
 func (s *SDK) GetTeamsTeamIDDutysummary(ctx context.Context, request operations.GetTeamsTeamIDDutysummaryRequest) (*operations.GetTeamsTeamIDDutysummaryResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/teams/{teamId}/dutysummary", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -5811,7 +5917,7 @@ func (s *SDK) GetTeamsTeamIDDutysummary(ctx context.Context, request operations.
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5903,8 +6009,9 @@ func (s *SDK) GetTeamsTeamIDDutysummary(ctx context.Context, request operations.
 	return res, nil
 }
 
+// GetTeamsTeamIDEventSources - Gets event sources of a specific team.
 func (s *SDK) GetTeamsTeamIDEventSources(ctx context.Context, request operations.GetTeamsTeamIDEventSourcesRequest) (*operations.GetTeamsTeamIDEventSourcesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/teams/{teamId}/eventSources", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -5912,7 +6019,7 @@ func (s *SDK) GetTeamsTeamIDEventSources(ctx context.Context, request operations
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6052,8 +6159,9 @@ func (s *SDK) GetTeamsTeamIDEventSources(ctx context.Context, request operations
 	return res, nil
 }
 
+// GetTeamsTeamIDMemberships - Get all invites of a team.
 func (s *SDK) GetTeamsTeamIDMemberships(ctx context.Context, request operations.GetTeamsTeamIDMembershipsRequest) (*operations.GetTeamsTeamIDMembershipsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/teams/{teamId}/memberships", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -6061,7 +6169,7 @@ func (s *SDK) GetTeamsTeamIDMemberships(ctx context.Context, request operations.
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6179,8 +6287,9 @@ func (s *SDK) GetTeamsTeamIDMemberships(ctx context.Context, request operations.
 	return res, nil
 }
 
+// GetTeamsTeamIDSchedules - Returns information about all duties that belong to the team.
 func (s *SDK) GetTeamsTeamIDSchedules(ctx context.Context, request operations.GetTeamsTeamIDSchedulesRequest) (*operations.GetTeamsTeamIDSchedulesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/teams/{teamId}/schedules", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -6190,7 +6299,7 @@ func (s *SDK) GetTeamsTeamIDSchedules(ctx context.Context, request operations.Ge
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6330,8 +6439,9 @@ func (s *SDK) GetTeamsTeamIDSchedules(ctx context.Context, request operations.Ge
 	return res, nil
 }
 
+// GetTeamsTeamIDSchedulesScheduleID - Returns information of the duty schedule with the specified Id.
 func (s *SDK) GetTeamsTeamIDSchedulesScheduleID(ctx context.Context, request operations.GetTeamsTeamIDSchedulesScheduleIDRequest) (*operations.GetTeamsTeamIDSchedulesScheduleIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/teams/{teamId}/schedules/{scheduleId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -6339,7 +6449,7 @@ func (s *SDK) GetTeamsTeamIDSchedulesScheduleID(ctx context.Context, request ope
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6479,8 +6589,9 @@ func (s *SDK) GetTeamsTeamIDSchedulesScheduleID(ctx context.Context, request ope
 	return res, nil
 }
 
+// GetTeamsTeamIDSetupProgress - Gets setup progress of a specific team.
 func (s *SDK) GetTeamsTeamIDSetupProgress(ctx context.Context, request operations.GetTeamsTeamIDSetupProgressRequest) (*operations.GetTeamsTeamIDSetupProgressResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/teams/{teamId}/setupProgress", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -6488,7 +6599,7 @@ func (s *SDK) GetTeamsTeamIDSetupProgress(ctx context.Context, request operation
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6628,8 +6739,11 @@ func (s *SDK) GetTeamsTeamIDSetupProgress(ctx context.Context, request operation
 	return res, nil
 }
 
+// GetUsers - Get all Users
+// Returns a list of user objects with details such as their email address and duty information. Only users who
+// are part of your team will be returned.
 func (s *SDK) GetUsers(ctx context.Context) (*operations.GetUsersResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/users"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -6637,7 +6751,7 @@ func (s *SDK) GetUsers(ctx context.Context) (*operations.GetUsersResponse, error
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6730,8 +6844,10 @@ func (s *SDK) GetUsers(ctx context.Context) (*operations.GetUsersResponse, error
 	return res, nil
 }
 
+// GetUsersUserID - Get User by Id
+// Returns a user object with details such as his email address and duty information.
 func (s *SDK) GetUsersUserID(ctx context.Context, request operations.GetUsersUserIDRequest) (*operations.GetUsersUserIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/users/{userId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -6739,7 +6855,7 @@ func (s *SDK) GetUsersUserID(ctx context.Context, request operations.GetUsersUse
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6832,8 +6948,10 @@ func (s *SDK) GetUsersUserID(ctx context.Context, request operations.GetUsersUse
 	return res, nil
 }
 
+// GetUsersUserIDDutyStatus - Get duty status by user Id
+// Returns a object with duty information.
 func (s *SDK) GetUsersUserIDDutyStatus(ctx context.Context, request operations.GetUsersUserIDDutyStatusRequest) (*operations.GetUsersUserIDDutyStatusResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/users/{userId}/dutyStatus", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -6841,7 +6959,7 @@ func (s *SDK) GetUsersUserIDDutyStatus(ctx context.Context, request operations.G
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6935,7 +7053,7 @@ func (s *SDK) GetUsersUserIDDutyStatus(ctx context.Context, request operations.G
 }
 
 func (s *SDK) GetUsersUserIDImage(ctx context.Context, request operations.GetUsersUserIDImageRequest) (*operations.GetUsersUserIDImageResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/users/{userId}/image", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -6945,7 +7063,7 @@ func (s *SDK) GetUsersUserIDImage(ctx context.Context, request operations.GetUse
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -7061,8 +7179,9 @@ func (s *SDK) GetUsersUserIDImage(ctx context.Context, request operations.GetUse
 	return res, nil
 }
 
+// GetUsersUserIDSetupProgress - Gets setup progress of a specific user.
 func (s *SDK) GetUsersUserIDSetupProgress(ctx context.Context, request operations.GetUsersUserIDSetupProgressRequest) (*operations.GetUsersUserIDSetupProgressResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/users/{userId}/setupProgress", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -7070,7 +7189,7 @@ func (s *SDK) GetUsersUserIDSetupProgress(ctx context.Context, request operation
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -7210,8 +7329,10 @@ func (s *SDK) GetUsersUserIDSetupProgress(ctx context.Context, request operation
 	return res, nil
 }
 
+// GetWebhooks - Get Webhooks
+// Returns a collection of defined outbound webhooks in the system.
 func (s *SDK) GetWebhooks(ctx context.Context, request operations.GetWebhooksRequest) (*operations.GetWebhooksResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/webhooks"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -7221,7 +7342,7 @@ func (s *SDK) GetWebhooks(ctx context.Context, request operations.GetWebhooksReq
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -7313,8 +7434,10 @@ func (s *SDK) GetWebhooks(ctx context.Context, request operations.GetWebhooksReq
 	return res, nil
 }
 
+// GetWebhookByID - Get Webhook by Id
+// Returns information of the webhook specified by the passed id.
 func (s *SDK) GetWebhookByID(ctx context.Context, request operations.GetWebhookByIDRequest) (*operations.GetWebhookByIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/webhooks/{webhookId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -7322,7 +7445,7 @@ func (s *SDK) GetWebhookByID(ctx context.Context, request operations.GetWebhookB
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -7441,8 +7564,10 @@ func (s *SDK) GetWebhookByID(ctx context.Context, request operations.GetWebhookB
 	return res, nil
 }
 
+// PostAlerts - Trigger Alert
+// Triggers a new alert for your team. All team members on duty will receive alert notifications.
 func (s *SDK) PostAlerts(ctx context.Context, request operations.PostAlertsRequest) (*operations.PostAlertsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/alerts"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -7457,7 +7582,7 @@ func (s *SDK) PostAlerts(ctx context.Context, request operations.PostAlertsReque
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -7573,8 +7698,10 @@ func (s *SDK) PostAlerts(ctx context.Context, request operations.PostAlertsReque
 	return res, nil
 }
 
+// PostAlertsAcknowledgeAll - Confirms all visible alerts
+// This method confirms all unhandled alerts your team currently has by a specific user.
 func (s *SDK) PostAlertsAcknowledgeAll(ctx context.Context, request operations.PostAlertsAcknowledgeAllRequest) (*operations.PostAlertsAcknowledgeAllResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/alerts/acknowledgeAll"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -7591,7 +7718,7 @@ func (s *SDK) PostAlertsAcknowledgeAll(ctx context.Context, request operations.P
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -7661,8 +7788,10 @@ func (s *SDK) PostAlertsAcknowledgeAll(ctx context.Context, request operations.P
 	return res, nil
 }
 
+// PostAlertsAcknowledgeMultiple - Acknowlegde multiple alerts
+// This method confirms all alerts provided.
 func (s *SDK) PostAlertsAcknowledgeMultiple(ctx context.Context, request operations.PostAlertsAcknowledgeMultipleRequest) (*operations.PostAlertsAcknowledgeMultipleResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/alerts/acknowledgeMultiple"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -7677,7 +7806,7 @@ func (s *SDK) PostAlertsAcknowledgeMultiple(ctx context.Context, request operati
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -7770,8 +7899,9 @@ func (s *SDK) PostAlertsAcknowledgeMultiple(ctx context.Context, request operati
 	return res, nil
 }
 
+// PostAlertsAlertIDAcknowledge - Acknowledge an alert
 func (s *SDK) PostAlertsAlertIDAcknowledge(ctx context.Context, request operations.PostAlertsAlertIDAcknowledgeRequest) (*operations.PostAlertsAlertIDAcknowledgeResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/alerts/{alertId}/acknowledge", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -7786,7 +7916,7 @@ func (s *SDK) PostAlertsAlertIDAcknowledge(ctx context.Context, request operatio
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -7926,8 +8056,10 @@ func (s *SDK) PostAlertsAlertIDAcknowledge(ctx context.Context, request operatio
 	return res, nil
 }
 
+// PostAlertsAlertIDAnnotate - Annotate Alert
+// Annotates an alert by given Annotation Info.
 func (s *SDK) PostAlertsAlertIDAnnotate(ctx context.Context, request operations.PostAlertsAlertIDAnnotateRequest) (*operations.PostAlertsAlertIDAnnotateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/alerts/{alertId}/annotate", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -7942,7 +8074,7 @@ func (s *SDK) PostAlertsAlertIDAnnotate(ctx context.Context, request operations.
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -8058,8 +8190,9 @@ func (s *SDK) PostAlertsAlertIDAnnotate(ctx context.Context, request operations.
 	return res, nil
 }
 
+// PostAlertsAlertIDClose - Close an alert
 func (s *SDK) PostAlertsAlertIDClose(ctx context.Context, request operations.PostAlertsAlertIDCloseRequest) (*operations.PostAlertsAlertIDCloseResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/alerts/{alertId}/close", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -8074,7 +8207,7 @@ func (s *SDK) PostAlertsAlertIDClose(ctx context.Context, request operations.Pos
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -8214,8 +8347,10 @@ func (s *SDK) PostAlertsAlertIDClose(ctx context.Context, request operations.Pos
 	return res, nil
 }
 
+// PostAlertsAlertIDUndoAcknowledge - Undo the acknowledgement of an alert.
+// This method tries to undo an alert acknowledgement.
 func (s *SDK) PostAlertsAlertIDUndoAcknowledge(ctx context.Context, request operations.PostAlertsAlertIDUndoAcknowledgeRequest) (*operations.PostAlertsAlertIDUndoAcknowledgeResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/alerts/{alertId}/undoAcknowledge", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -8230,7 +8365,7 @@ func (s *SDK) PostAlertsAlertIDUndoAcknowledge(ctx context.Context, request oper
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -8346,8 +8481,10 @@ func (s *SDK) PostAlertsAlertIDUndoAcknowledge(ctx context.Context, request oper
 	return res, nil
 }
 
+// PostAlertsAlertIDUndoClose - Undo the closure of an alert.
+// This method tries to undo an alert close.
 func (s *SDK) PostAlertsAlertIDUndoClose(ctx context.Context, request operations.PostAlertsAlertIDUndoCloseRequest) (*operations.PostAlertsAlertIDUndoCloseResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/alerts/{alertId}/undoClose", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -8362,7 +8499,7 @@ func (s *SDK) PostAlertsAlertIDUndoClose(ctx context.Context, request operations
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -8478,8 +8615,10 @@ func (s *SDK) PostAlertsAlertIDUndoClose(ctx context.Context, request operations
 	return res, nil
 }
 
+// PostAlertsCloseAll - Close all acknowledged alerts.
+// This method closes all acknowledged alerts your team currently has.
 func (s *SDK) PostAlertsCloseAll(ctx context.Context, request operations.PostAlertsCloseAllRequest) (*operations.PostAlertsCloseAllResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/alerts/closeAll"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -8496,7 +8635,7 @@ func (s *SDK) PostAlertsCloseAll(ctx context.Context, request operations.PostAle
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -8589,8 +8728,10 @@ func (s *SDK) PostAlertsCloseAll(ctx context.Context, request operations.PostAle
 	return res, nil
 }
 
+// PostAlertsCloseMultiple - Close multiple alerts
+// This method closes all alerts provided.
 func (s *SDK) PostAlertsCloseMultiple(ctx context.Context, request operations.PostAlertsCloseMultipleRequest) (*operations.PostAlertsCloseMultipleResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/alerts/closeMultiple"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -8605,7 +8746,7 @@ func (s *SDK) PostAlertsCloseMultiple(ctx context.Context, request operations.Po
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -8698,8 +8839,9 @@ func (s *SDK) PostAlertsCloseMultiple(ctx context.Context, request operations.Po
 	return res, nil
 }
 
+// PostAlertsPaged - Gets alerts paged
 func (s *SDK) PostAlertsPaged(ctx context.Context, request operations.PostAlertsPagedRequest) (*operations.PostAlertsPagedResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/alerts/paged"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -8716,7 +8858,7 @@ func (s *SDK) PostAlertsPaged(ctx context.Context, request operations.PostAlerts
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -8857,8 +8999,10 @@ func (s *SDK) PostAlertsPaged(ctx context.Context, request operations.PostAlerts
 	return res, nil
 }
 
+// PostAlertsUndoAcknowledgeMultiple - Queue undo of multiple acknowledgments.
+// This method tries to undo the acknowledgement of multiple alerts via a queue. The operation is handled in the background.
 func (s *SDK) PostAlertsUndoAcknowledgeMultiple(ctx context.Context, request operations.PostAlertsUndoAcknowledgeMultipleRequest) (*operations.PostAlertsUndoAcknowledgeMultipleResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/alerts/undoAcknowledgeMultiple"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -8873,7 +9017,7 @@ func (s *SDK) PostAlertsUndoAcknowledgeMultiple(ctx context.Context, request ope
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -8966,8 +9110,10 @@ func (s *SDK) PostAlertsUndoAcknowledgeMultiple(ctx context.Context, request ope
 	return res, nil
 }
 
+// PostAlertsUndoCloseMultiple - Withdraw closure of multiple alerts
+// This method tries to undo multiple alert closes. The operation is handled in the background.
 func (s *SDK) PostAlertsUndoCloseMultiple(ctx context.Context, request operations.PostAlertsUndoCloseMultipleRequest) (*operations.PostAlertsUndoCloseMultipleResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/alerts/undoCloseMultiple"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -8982,7 +9128,7 @@ func (s *SDK) PostAlertsUndoCloseMultiple(ctx context.Context, request operation
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -9075,8 +9221,26 @@ func (s *SDK) PostAlertsUndoCloseMultiple(ctx context.Context, request operation
 	return res, nil
 }
 
+// PostCategoriesTeamID - Create a new category
+// Sample Request:
+//
+//	POST /categories/cbb70402-1359-477f-ac92-0171cf2b5ff7
+//	{
+//	    "name": "Water",
+//	    "imageName": "water.svg",
+//	    "color": "#0000cc",
+//	    "keywordMatching": "Any",
+//	    "keywords": [
+//	        {
+//	            "value": "H2O"
+//	        },
+//	        {
+//	            "value": "Water"
+//	        }
+//	    ]
+//	}
 func (s *SDK) PostCategoriesTeamID(ctx context.Context, request operations.PostCategoriesTeamIDRequest) (*operations.PostCategoriesTeamIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/categories/{teamId}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -9091,7 +9255,7 @@ func (s *SDK) PostCategoriesTeamID(ctx context.Context, request operations.PostC
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -9231,8 +9395,14 @@ func (s *SDK) PostCategoriesTeamID(ctx context.Context, request operations.PostC
 	return res, nil
 }
 
+// PostCategoriesTeamIDCategoryIDSubscriptions - Set category subscriptions
+// Sample Request:
+//
+//	POST /categories/cbb70402-1359-477f-ac92-0171cf2b5ff7/c0054336-cd89-4abf-882d-ba69b5adb25e/subscriptions
+//	{
+//	}
 func (s *SDK) PostCategoriesTeamIDCategoryIDSubscriptions(ctx context.Context, request operations.PostCategoriesTeamIDCategoryIDSubscriptionsRequest) (*operations.PostCategoriesTeamIDCategoryIDSubscriptionsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/categories/{teamId}/{categoryId}/subscriptions", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -9247,7 +9417,7 @@ func (s *SDK) PostCategoriesTeamIDCategoryIDSubscriptions(ctx context.Context, r
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -9364,8 +9534,10 @@ func (s *SDK) PostCategoriesTeamIDCategoryIDSubscriptions(ctx context.Context, r
 	return res, nil
 }
 
+// PostEventsPaged - Get overview event paged.
+// Get overview event paged. If there are more results, you also get a continuation token which you can add to the event filter.
 func (s *SDK) PostEventsPaged(ctx context.Context, request operations.PostEventsPagedRequest) (*operations.PostEventsPagedResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/events/paged"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -9382,7 +9554,7 @@ func (s *SDK) PostEventsPaged(ctx context.Context, request operations.PostEvents
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -9499,8 +9671,10 @@ func (s *SDK) PostEventsPaged(ctx context.Context, request operations.PostEvents
 	return res, nil
 }
 
+// PostScriptsInstances - Creates a new script instance in the in the SIGNL4 team.
+// Creates a new script instance of the script specified in the request body.
 func (s *SDK) PostScriptsInstances(ctx context.Context, request operations.PostScriptsInstancesRequest) (*operations.PostScriptsInstancesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/scripts/instances"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -9515,7 +9689,7 @@ func (s *SDK) PostScriptsInstances(ctx context.Context, request operations.PostS
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -9655,8 +9829,9 @@ func (s *SDK) PostScriptsInstances(ctx context.Context, request operations.PostS
 	return res, nil
 }
 
+// PostScriptsInstancesInstanceIDDisable - Disables a given script instance.
 func (s *SDK) PostScriptsInstancesInstanceIDDisable(ctx context.Context, request operations.PostScriptsInstancesInstanceIDDisableRequest) (*operations.PostScriptsInstancesInstanceIDDisableResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/scripts/instances/{instanceId}/disable", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -9664,7 +9839,7 @@ func (s *SDK) PostScriptsInstancesInstanceIDDisable(ctx context.Context, request
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -9780,8 +9955,9 @@ func (s *SDK) PostScriptsInstancesInstanceIDDisable(ctx context.Context, request
 	return res, nil
 }
 
+// PostScriptsInstancesInstanceIDEnable - Enables a script instance.
 func (s *SDK) PostScriptsInstancesInstanceIDEnable(ctx context.Context, request operations.PostScriptsInstancesInstanceIDEnableRequest) (*operations.PostScriptsInstancesInstanceIDEnableResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/scripts/instances/{instanceId}/enable", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -9789,7 +9965,7 @@ func (s *SDK) PostScriptsInstancesInstanceIDEnable(ctx context.Context, request 
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -9905,8 +10081,9 @@ func (s *SDK) PostScriptsInstancesInstanceIDEnable(ctx context.Context, request 
 	return res, nil
 }
 
+// PostTeamsTeamIDAlertSettings - Sets alert settings of a specific team.
 func (s *SDK) PostTeamsTeamIDAlertSettings(ctx context.Context, request operations.PostTeamsTeamIDAlertSettingsRequest) (*operations.PostTeamsTeamIDAlertSettingsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/teams/{teamId}/alertSettings", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -9921,7 +10098,7 @@ func (s *SDK) PostTeamsTeamIDAlertSettings(ctx context.Context, request operatio
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -10061,8 +10238,9 @@ func (s *SDK) PostTeamsTeamIDAlertSettings(ctx context.Context, request operatio
 	return res, nil
 }
 
+// PostTeamsTeamIDMemberships - Invite users to a team
 func (s *SDK) PostTeamsTeamIDMemberships(ctx context.Context, request operations.PostTeamsTeamIDMembershipsRequest) (*operations.PostTeamsTeamIDMembershipsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/teams/{teamId}/memberships", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -10077,7 +10255,7 @@ func (s *SDK) PostTeamsTeamIDMemberships(ctx context.Context, request operations
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -10195,8 +10373,9 @@ func (s *SDK) PostTeamsTeamIDMemberships(ctx context.Context, request operations
 	return res, nil
 }
 
+// PostTeamsTeamIDMembershipsResendInviteMail - Sends invite email again if an invite exists
 func (s *SDK) PostTeamsTeamIDMembershipsResendInviteMail(ctx context.Context, request operations.PostTeamsTeamIDMembershipsResendInviteMailRequest) (*operations.PostTeamsTeamIDMembershipsResendInviteMailResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/teams/{teamId}/memberships/resendInviteMail", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -10211,7 +10390,7 @@ func (s *SDK) PostTeamsTeamIDMembershipsResendInviteMail(ctx context.Context, re
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -10330,8 +10509,9 @@ func (s *SDK) PostTeamsTeamIDMembershipsResendInviteMail(ctx context.Context, re
 	return res, nil
 }
 
+// PostTeamsTeamIDSchedules - Create/Update given duty schedule.
 func (s *SDK) PostTeamsTeamIDSchedules(ctx context.Context, request operations.PostTeamsTeamIDSchedulesRequest) (*operations.PostTeamsTeamIDSchedulesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/teams/{teamId}/schedules", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -10346,7 +10526,7 @@ func (s *SDK) PostTeamsTeamIDSchedules(ctx context.Context, request operations.P
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -10510,8 +10690,9 @@ func (s *SDK) PostTeamsTeamIDSchedules(ctx context.Context, request operations.P
 	return res, nil
 }
 
+// PostTeamsTeamIDSchedulesDeleteRange - Delete duty schedules in range
 func (s *SDK) PostTeamsTeamIDSchedulesDeleteRange(ctx context.Context, request operations.PostTeamsTeamIDSchedulesDeleteRangeRequest) (*operations.PostTeamsTeamIDSchedulesDeleteRangeResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/teams/{teamId}/schedules/deleteRange", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -10526,7 +10707,7 @@ func (s *SDK) PostTeamsTeamIDSchedulesDeleteRange(ctx context.Context, request o
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -10690,8 +10871,9 @@ func (s *SDK) PostTeamsTeamIDSchedulesDeleteRange(ctx context.Context, request o
 	return res, nil
 }
 
+// PostTeamsTeamIDSchedulesMultiple - Save multiple schedules. It is possible to override existing schedules if you wish
 func (s *SDK) PostTeamsTeamIDSchedulesMultiple(ctx context.Context, request operations.PostTeamsTeamIDSchedulesMultipleRequest) (*operations.PostTeamsTeamIDSchedulesMultipleResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/teams/{teamId}/schedules/multiple", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -10708,7 +10890,7 @@ func (s *SDK) PostTeamsTeamIDSchedulesMultiple(ctx context.Context, request oper
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -10872,8 +11054,9 @@ func (s *SDK) PostTeamsTeamIDSchedulesMultiple(ctx context.Context, request oper
 	return res, nil
 }
 
+// PostUsersUserIDCheckPermissions - Checks if a user has the provided permission.
 func (s *SDK) PostUsersUserIDCheckPermissions(ctx context.Context, request operations.PostUsersUserIDCheckPermissionsRequest) (*operations.PostUsersUserIDCheckPermissionsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/users/{userId}/checkPermissions", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -10890,7 +11073,7 @@ func (s *SDK) PostUsersUserIDCheckPermissions(ctx context.Context, request opera
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -11006,8 +11189,9 @@ func (s *SDK) PostUsersUserIDCheckPermissions(ctx context.Context, request opera
 	return res, nil
 }
 
+// PostUsersUserIDImage - Uploaded a profile image for a specified user.
 func (s *SDK) PostUsersUserIDImage(ctx context.Context, request operations.PostUsersUserIDImageRequest) (*operations.PostUsersUserIDImageResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/users/{userId}/image", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -11015,7 +11199,7 @@ func (s *SDK) PostUsersUserIDImage(ctx context.Context, request operations.PostU
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -11133,8 +11317,10 @@ func (s *SDK) PostUsersUserIDImage(ctx context.Context, request operations.PostU
 	return res, nil
 }
 
+// PostUsersUserIDPunchIn - Punch User in
+// The specified user will be punched in to duty.
 func (s *SDK) PostUsersUserIDPunchIn(ctx context.Context, request operations.PostUsersUserIDPunchInRequest) (*operations.PostUsersUserIDPunchInResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/users/{userId}/punchIn", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -11142,7 +11328,7 @@ func (s *SDK) PostUsersUserIDPunchIn(ctx context.Context, request operations.Pos
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -11258,8 +11444,10 @@ func (s *SDK) PostUsersUserIDPunchIn(ctx context.Context, request operations.Pos
 	return res, nil
 }
 
+// PostUsersUserIDPunchInAsManager - Punch User in as Manager
+// The specified user will be punched in to duty as a manager.
 func (s *SDK) PostUsersUserIDPunchInAsManager(ctx context.Context, request operations.PostUsersUserIDPunchInAsManagerRequest) (*operations.PostUsersUserIDPunchInAsManagerResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/users/{userId}/punchInAsManager", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -11267,7 +11455,7 @@ func (s *SDK) PostUsersUserIDPunchInAsManager(ctx context.Context, request opera
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -11383,8 +11571,10 @@ func (s *SDK) PostUsersUserIDPunchInAsManager(ctx context.Context, request opera
 	return res, nil
 }
 
+// PostUsersUserIDPunchOut - Punch User out
+// The specified user will be punched out from duty.
 func (s *SDK) PostUsersUserIDPunchOut(ctx context.Context, request operations.PostUsersUserIDPunchOutRequest) (*operations.PostUsersUserIDPunchOutResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/users/{userId}/punchOut", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -11392,7 +11582,7 @@ func (s *SDK) PostUsersUserIDPunchOut(ctx context.Context, request operations.Po
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -11532,8 +11722,10 @@ func (s *SDK) PostUsersUserIDPunchOut(ctx context.Context, request operations.Po
 	return res, nil
 }
 
+// PostWebhooks - Create Webhook
+// Creates a new outbound webhook that will be notified when certain events occur.
 func (s *SDK) PostWebhooks(ctx context.Context, request operations.PostWebhooksRequest) (*operations.PostWebhooksResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/webhooks"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -11548,7 +11740,7 @@ func (s *SDK) PostWebhooks(ctx context.Context, request operations.PostWebhooksR
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -11643,8 +11835,9 @@ func (s *SDK) PostWebhooks(ctx context.Context, request operations.PostWebhooksR
 	return res, nil
 }
 
+// PostWebhooksWebhookIDDisable - Ability to enable a webHook.
 func (s *SDK) PostWebhooksWebhookIDDisable(ctx context.Context, request operations.PostWebhooksWebhookIDDisableRequest) (*operations.PostWebhooksWebhookIDDisableResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/webhooks/{webhookId}/disable", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -11652,7 +11845,7 @@ func (s *SDK) PostWebhooksWebhookIDDisable(ctx context.Context, request operatio
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -11768,8 +11961,9 @@ func (s *SDK) PostWebhooksWebhookIDDisable(ctx context.Context, request operatio
 	return res, nil
 }
 
+// PostWebhooksWebhookIDEnable - Ability to disable a webHook.
 func (s *SDK) PostWebhooksWebhookIDEnable(ctx context.Context, request operations.PostWebhooksWebhookIDEnableRequest) (*operations.PostWebhooksWebhookIDEnableResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/webhooks/{webhookId}/enable", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -11777,7 +11971,7 @@ func (s *SDK) PostWebhooksWebhookIDEnable(ctx context.Context, request operation
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -11893,8 +12087,29 @@ func (s *SDK) PostWebhooksWebhookIDEnable(ctx context.Context, request operation
 	return res, nil
 }
 
+// PutCategoriesTeamIDCategoryID - Update an existing category
+// Sample Request:
+//
+//	PUT /categories/cbb70402-1359-477f-ac92-0171cf2b5ff7/c0054336-cd89-4abf-882d-ba69b5adb25e
+//	{
+//	    "name": "Water-Updated",
+//	    "imageName": "water.svg",
+//	    "color": "#0000cc",
+//	    "keywordMatching": "All",
+//	    "keywords": [
+//	        {
+//	            "value": "H2O"
+//	        },
+//	        {
+//	            "value": "Water"
+//	        },
+//	        {
+//	            "value": "Wet"
+//	        }
+//	    ]
+//	}
 func (s *SDK) PutCategoriesTeamIDCategoryID(ctx context.Context, request operations.PutCategoriesTeamIDCategoryIDRequest) (*operations.PutCategoriesTeamIDCategoryIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/categories/{teamId}/{categoryId}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -11909,7 +12124,7 @@ func (s *SDK) PutCategoriesTeamIDCategoryID(ctx context.Context, request operati
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -12049,8 +12264,9 @@ func (s *SDK) PutCategoriesTeamIDCategoryID(ctx context.Context, request operati
 	return res, nil
 }
 
+// PutPrepaidSettings - Update your subscription's current prepaid settings.
 func (s *SDK) PutPrepaidSettings(ctx context.Context, request operations.PutPrepaidSettingsRequest) (*operations.PutPrepaidSettingsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/prepaid/settings"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -12065,7 +12281,7 @@ func (s *SDK) PutPrepaidSettings(ctx context.Context, request operations.PutPrep
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -12181,8 +12397,10 @@ func (s *SDK) PutPrepaidSettings(ctx context.Context, request operations.PutPrep
 	return res, nil
 }
 
+// PutScriptsInstancesInstanceID - Updates a given script instance, typically used for updating the configuration of a script.
+// Updates the specified script instance.
 func (s *SDK) PutScriptsInstancesInstanceID(ctx context.Context, request operations.PutScriptsInstancesInstanceIDRequest) (*operations.PutScriptsInstancesInstanceIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/scripts/instances/{instanceId}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -12197,7 +12415,7 @@ func (s *SDK) PutScriptsInstancesInstanceID(ctx context.Context, request operati
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -12313,8 +12531,10 @@ func (s *SDK) PutScriptsInstancesInstanceID(ctx context.Context, request operati
 	return res, nil
 }
 
+// PutScriptsInstancesInstanceIDData - Updates custom data of a given script instance which includes its display name.
+// Updates the specified script instance.
 func (s *SDK) PutScriptsInstancesInstanceIDData(ctx context.Context, request operations.PutScriptsInstancesInstanceIDDataRequest) (*operations.PutScriptsInstancesInstanceIDDataResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/scripts/instances/{instanceId}/data", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -12329,7 +12549,7 @@ func (s *SDK) PutScriptsInstancesInstanceIDData(ctx context.Context, request ope
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -12445,8 +12665,9 @@ func (s *SDK) PutScriptsInstancesInstanceIDData(ctx context.Context, request ope
 	return res, nil
 }
 
+// PutSubscriptionsSubscriptionIDPrepaidSettings - Update a subscription's current prepaid settings.
 func (s *SDK) PutSubscriptionsSubscriptionIDPrepaidSettings(ctx context.Context, request operations.PutSubscriptionsSubscriptionIDPrepaidSettingsRequest) (*operations.PutSubscriptionsSubscriptionIDPrepaidSettingsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/subscriptions/{subscriptionId}/prepaidSettings", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -12461,7 +12682,7 @@ func (s *SDK) PutSubscriptionsSubscriptionIDPrepaidSettings(ctx context.Context,
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -12601,8 +12822,9 @@ func (s *SDK) PutSubscriptionsSubscriptionIDPrepaidSettings(ctx context.Context,
 	return res, nil
 }
 
+// PutSubscriptionsSubscriptionIDProfile - Updates a subscriptions profile.
 func (s *SDK) PutSubscriptionsSubscriptionIDProfile(ctx context.Context, request operations.PutSubscriptionsSubscriptionIDProfileRequest) (*operations.PutSubscriptionsSubscriptionIDProfileResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/subscriptions/{subscriptionId}/profile", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -12617,7 +12839,7 @@ func (s *SDK) PutSubscriptionsSubscriptionIDProfile(ctx context.Context, request
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -12757,8 +12979,11 @@ func (s *SDK) PutSubscriptionsSubscriptionIDProfile(ctx context.Context, request
 	return res, nil
 }
 
+// PutTeamsTeamIDMembershipsUserID - Update user's team membership.
+// Updates the user's team membership. You can move the user to another team within the subscription
+// and/or change the user's role.
 func (s *SDK) PutTeamsTeamIDMembershipsUserID(ctx context.Context, request operations.PutTeamsTeamIDMembershipsUserIDRequest) (*operations.PutTeamsTeamIDMembershipsUserIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/teams/{teamId}/memberships/{userId}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -12775,7 +13000,7 @@ func (s *SDK) PutTeamsTeamIDMembershipsUserID(ctx context.Context, request opera
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -12939,8 +13164,9 @@ func (s *SDK) PutTeamsTeamIDMembershipsUserID(ctx context.Context, request opera
 	return res, nil
 }
 
+// PutTeamsTeamIDProfile - Updates team profile of a team
 func (s *SDK) PutTeamsTeamIDProfile(ctx context.Context, request operations.PutTeamsTeamIDProfileRequest) (*operations.PutTeamsTeamIDProfileResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/teams/{teamId}/profile", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -12955,7 +13181,7 @@ func (s *SDK) PutTeamsTeamIDProfile(ctx context.Context, request operations.PutT
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -13095,8 +13321,9 @@ func (s *SDK) PutTeamsTeamIDProfile(ctx context.Context, request operations.PutT
 	return res, nil
 }
 
+// PutUsersUserIDChangePassword - Updates the password of a user
 func (s *SDK) PutUsersUserIDChangePassword(ctx context.Context, request operations.PutUsersUserIDChangePasswordRequest) (*operations.PutUsersUserIDChangePasswordResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/users/{userId}/changePassword", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -13111,7 +13338,7 @@ func (s *SDK) PutUsersUserIDChangePassword(ctx context.Context, request operatio
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -13228,8 +13455,9 @@ func (s *SDK) PutUsersUserIDChangePassword(ctx context.Context, request operatio
 	return res, nil
 }
 
+// PutUsersUserIDProfile - Updates user profile of an user
 func (s *SDK) PutUsersUserIDProfile(ctx context.Context, request operations.PutUsersUserIDProfileRequest) (*operations.PutUsersUserIDProfileResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/users/{userId}/profile", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -13244,7 +13472,7 @@ func (s *SDK) PutUsersUserIDProfile(ctx context.Context, request operations.PutU
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -13384,8 +13612,10 @@ func (s *SDK) PutUsersUserIDProfile(ctx context.Context, request operations.PutU
 	return res, nil
 }
 
+// PutWebhooksWebhookID - Update Webhook by Id
+// Updates the specified webhook.
 func (s *SDK) PutWebhooksWebhookID(ctx context.Context, request operations.PutWebhooksWebhookIDRequest) (*operations.PutWebhooksWebhookIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/webhooks/{webhookId}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -13400,7 +13630,7 @@ func (s *SDK) PutWebhooksWebhookID(ctx context.Context, request operations.PutWe
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {

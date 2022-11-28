@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Video } from "./video";
+
 
 
 // VideoItem
@@ -7,9 +8,9 @@ import { Video } from "./video";
  * An item containing a video.
 **/
 export class VideoItem extends SpeakeasyBase {
-  @Metadata({ data: "json, name=caption" })
+  @SpeakeasyMetadata({ data: "json, name=caption" })
   caption?: string;
 
-  @Metadata({ data: "json, name=video" })
+  @SpeakeasyMetadata({ data: "json, name=video" })
   video?: Video;
 }

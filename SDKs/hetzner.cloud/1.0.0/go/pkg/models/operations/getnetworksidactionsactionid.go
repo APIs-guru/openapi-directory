@@ -5,10 +5,8 @@ type GetNetworksIDActionsActionIDPathParams struct {
 	ID       int64 `pathParam:"style=simple,explode=false,name=id"`
 }
 
-type GetNetworksIDActionsActionIDRequest struct {
-	PathParams GetNetworksIDActionsActionIDPathParams
-}
-
+// GetNetworksIDActionsActionIDActionResponseActionError
+// Error message for the Action if error occurred, otherwise null
 type GetNetworksIDActionsActionIDActionResponseActionError struct {
 	Code    string `json:"code"`
 	Message string `json:"message"`
@@ -40,6 +38,10 @@ type GetNetworksIDActionsActionIDActionResponseAction struct {
 
 type GetNetworksIDActionsActionIDActionResponse struct {
 	Action GetNetworksIDActionsActionIDActionResponseAction `json:"action"`
+}
+
+type GetNetworksIDActionsActionIDRequest struct {
+	PathParams GetNetworksIDActionsActionIDPathParams
 }
 
 type GetNetworksIDActionsActionIDResponse struct {

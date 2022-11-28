@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { MemberAccountStatus } from "./memberaccountstatus";
 
 
+
 export class GetOrganizationConfigRuleDetailedStatusResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=OrganizationConfigRuleDetailedStatus", elemType: shared.MemberAccountStatus })
+  @SpeakeasyMetadata({ data: "json, name=OrganizationConfigRuleDetailedStatus", elemType: MemberAccountStatus })
   organizationConfigRuleDetailedStatus?: MemberAccountStatus[];
 }

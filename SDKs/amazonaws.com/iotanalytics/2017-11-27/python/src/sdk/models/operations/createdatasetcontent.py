@@ -1,12 +1,16 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
 @dataclass
 class CreateDatasetContentPathParams:
-    dataset_name: str = field(default=None, metadata={'path_param': { 'field_name': 'datasetName', 'style': 'simple', 'explode': False }})
+    dataset_name: str = field(metadata={'path_param': { 'field_name': 'datasetName', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -23,24 +27,24 @@ class CreateDatasetContentHeaders:
 @dataclass_json
 @dataclass
 class CreateDatasetContentRequestBody:
-    version_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'versionId' }})
+    version_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('versionId') }})
     
 
 @dataclass
 class CreateDatasetContentRequest:
-    path_params: CreateDatasetContentPathParams = field(default=None)
-    headers: CreateDatasetContentHeaders = field(default=None)
-    request: CreateDatasetContentRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: CreateDatasetContentHeaders = field()
+    path_params: CreateDatasetContentPathParams = field()
+    request: CreateDatasetContentRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class CreateDatasetContentResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     create_dataset_content_response: Optional[shared.CreateDatasetContentResponse] = field(default=None)
     internal_failure_exception: Optional[Any] = field(default=None)
     invalid_request_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
     service_unavailable_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     

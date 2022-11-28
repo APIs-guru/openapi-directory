@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class OcppSessionsResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     easee_chargers: Optional[List[shared.EaseeCharger]] = field(default=None)
     

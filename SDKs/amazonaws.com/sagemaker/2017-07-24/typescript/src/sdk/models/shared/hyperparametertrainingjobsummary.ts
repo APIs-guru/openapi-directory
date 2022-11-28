@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { FinalHyperParameterTuningJobObjectiveMetric } from "./finalhyperparametertuningjobobjectivemetric";
 import { ObjectiveStatusEnum } from "./objectivestatusenum";
 import { TrainingJobStatusEnum } from "./trainingjobstatusenum";
+
 
 
 // HyperParameterTrainingJobSummary
@@ -9,39 +10,39 @@ import { TrainingJobStatusEnum } from "./trainingjobstatusenum";
  * Specifies summary information about a training job.
 **/
 export class HyperParameterTrainingJobSummary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CreationTime" })
+  @SpeakeasyMetadata({ data: "json, name=CreationTime" })
   creationTime: Date;
 
-  @Metadata({ data: "json, name=FailureReason" })
+  @SpeakeasyMetadata({ data: "json, name=FailureReason" })
   failureReason?: string;
 
-  @Metadata({ data: "json, name=FinalHyperParameterTuningJobObjectiveMetric" })
+  @SpeakeasyMetadata({ data: "json, name=FinalHyperParameterTuningJobObjectiveMetric" })
   finalHyperParameterTuningJobObjectiveMetric?: FinalHyperParameterTuningJobObjectiveMetric;
 
-  @Metadata({ data: "json, name=ObjectiveStatus" })
+  @SpeakeasyMetadata({ data: "json, name=ObjectiveStatus" })
   objectiveStatus?: ObjectiveStatusEnum;
 
-  @Metadata({ data: "json, name=TrainingEndTime" })
+  @SpeakeasyMetadata({ data: "json, name=TrainingEndTime" })
   trainingEndTime?: Date;
 
-  @Metadata({ data: "json, name=TrainingJobArn" })
+  @SpeakeasyMetadata({ data: "json, name=TrainingJobArn" })
   trainingJobArn: string;
 
-  @Metadata({ data: "json, name=TrainingJobDefinitionName" })
+  @SpeakeasyMetadata({ data: "json, name=TrainingJobDefinitionName" })
   trainingJobDefinitionName?: string;
 
-  @Metadata({ data: "json, name=TrainingJobName" })
+  @SpeakeasyMetadata({ data: "json, name=TrainingJobName" })
   trainingJobName: string;
 
-  @Metadata({ data: "json, name=TrainingJobStatus" })
+  @SpeakeasyMetadata({ data: "json, name=TrainingJobStatus" })
   trainingJobStatus: TrainingJobStatusEnum;
 
-  @Metadata({ data: "json, name=TrainingStartTime" })
+  @SpeakeasyMetadata({ data: "json, name=TrainingStartTime" })
   trainingStartTime?: Date;
 
-  @Metadata({ data: "json, name=TunedHyperParameters" })
+  @SpeakeasyMetadata({ data: "json, name=TunedHyperParameters" })
   tunedHyperParameters: Map<string, string>;
 
-  @Metadata({ data: "json, name=TuningJobName" })
+  @SpeakeasyMetadata({ data: "json, name=TuningJobName" })
   tuningJobName?: string;
 }

@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DcimRacksElevationPathParams:
-    id: int = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: int = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 class DcimRacksElevationFaceEnum(str, Enum):
     FRONT = "front"
@@ -31,13 +32,13 @@ class DcimRacksElevationQueryParams:
 
 @dataclass
 class DcimRacksElevationRequest:
-    path_params: DcimRacksElevationPathParams = field(default=None)
-    query_params: DcimRacksElevationQueryParams = field(default=None)
+    path_params: DcimRacksElevationPathParams = field()
+    query_params: DcimRacksElevationQueryParams = field()
     
 
 @dataclass
 class DcimRacksElevationResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     rack_units: Optional[List[shared.RackUnit]] = field(default=None)
-    status_code: int = field(default=None)
     

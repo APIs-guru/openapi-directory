@@ -22,27 +22,27 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { Tag } from "./tag";
 var CreateParameterGroupRequest = /** @class */ (function (_super) {
     __extends(CreateParameterGroupRequest, _super);
     function CreateParameterGroupRequest() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Description" }),
+        SpeakeasyMetadata({ data: "json, name=Description" }),
         __metadata("design:type", String)
     ], CreateParameterGroupRequest.prototype, "description", void 0);
     __decorate([
-        Metadata({ data: "json, name=Family" }),
+        SpeakeasyMetadata({ data: "json, name=Family" }),
         __metadata("design:type", String)
     ], CreateParameterGroupRequest.prototype, "family", void 0);
     __decorate([
-        Metadata({ data: "json, name=ParameterGroupName" }),
+        SpeakeasyMetadata({ data: "json, name=ParameterGroupName" }),
         __metadata("design:type", String)
     ], CreateParameterGroupRequest.prototype, "parameterGroupName", void 0);
     __decorate([
-        Metadata({ data: "json, name=Tags", elemType: shared.Tag }),
+        SpeakeasyMetadata({ data: "json, name=Tags", elemType: Tag }),
         __metadata("design:type", Array)
     ], CreateParameterGroupRequest.prototype, "tags", void 0);
     return CreateParameterGroupRequest;

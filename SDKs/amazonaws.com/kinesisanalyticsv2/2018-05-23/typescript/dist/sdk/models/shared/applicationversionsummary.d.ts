@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ApplicationStatusEnum } from "./applicationstatusenum";
 /**
  * The summary of the application version.

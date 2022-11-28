@@ -11,7 +11,7 @@ import (
 	"strings"
 )
 
-var Servers = []string{
+var ServerList = []string{
 	"http://jellyfin.local",
 	"http://localhost",
 }
@@ -21,9 +21,13 @@ type HTTPClient interface {
 }
 
 type SDK struct {
-	defaultClient  HTTPClient
-	securityClient HTTPClient
-	serverURL      string
+	_defaultClient  HTTPClient
+	_securityClient HTTPClient
+
+	_serverURL  string
+	_language   string
+	_sdkVersion string
+	_genVersion string
 }
 
 type SDKOption func(*SDK)
@@ -34,27 +38,45 @@ func WithServerURL(serverURL string, params map[string]string) SDKOption {
 			serverURL = utils.ReplaceParameters(serverURL, params)
 		}
 
-		sdk.serverURL = serverURL
+		sdk._serverURL = serverURL
+	}
+}
+
+func WithClient(client HTTPClient) SDKOption {
+	return func(sdk *SDK) {
+		sdk._defaultClient = client
 	}
 }
 
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
-		defaultClient:  http.DefaultClient,
-		securityClient: http.DefaultClient,
+		_language:   "go",
+		_sdkVersion: "",
+		_genVersion: "internal",
 	}
 	for _, opt := range opts {
 		opt(sdk)
 	}
-	if sdk.serverURL == "" {
-		sdk.serverURL = Servers[0]
+
+	if sdk._defaultClient == nil {
+		sdk._defaultClient = http.DefaultClient
+	}
+	if sdk._securityClient == nil {
+
+		sdk._securityClient = sdk._defaultClient
+
+	}
+
+	if sdk._serverURL == "" {
+		sdk._serverURL = ServerList[0]
 	}
 
 	return sdk
 }
 
+// Activate - Temporarily activates quick connect for five minutes.
 func (s *SDK) Activate(ctx context.Context, request operations.ActivateRequest) (*operations.ActivateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/QuickConnect/Activate"
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -62,7 +84,7 @@ func (s *SDK) Activate(ctx context.Context, request operations.ActivateRequest) 
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -108,8 +130,9 @@ func (s *SDK) Activate(ctx context.Context, request operations.ActivateRequest) 
 	return res, nil
 }
 
+// AddListingProvider - Adds a listings provider.
 func (s *SDK) AddListingProvider(ctx context.Context, request operations.AddListingProviderRequest) (*operations.AddListingProviderResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/LiveTv/ListingProviders"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -126,7 +149,7 @@ func (s *SDK) AddListingProvider(ctx context.Context, request operations.AddList
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -172,8 +195,9 @@ func (s *SDK) AddListingProvider(ctx context.Context, request operations.AddList
 	return res, nil
 }
 
+// AddMediaPath - Add a media path to a library.
 func (s *SDK) AddMediaPath(ctx context.Context, request operations.AddMediaPathRequest) (*operations.AddMediaPathResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/Library/VirtualFolders/Paths"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -193,7 +217,7 @@ func (s *SDK) AddMediaPath(ctx context.Context, request operations.AddMediaPathR
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -216,8 +240,9 @@ func (s *SDK) AddMediaPath(ctx context.Context, request operations.AddMediaPathR
 	return res, nil
 }
 
+// AddToCollection - Adds items to a collection.
 func (s *SDK) AddToCollection(ctx context.Context, request operations.AddToCollectionRequest) (*operations.AddToCollectionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Collections/{collectionId}/Items", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -227,7 +252,7 @@ func (s *SDK) AddToCollection(ctx context.Context, request operations.AddToColle
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -250,8 +275,9 @@ func (s *SDK) AddToCollection(ctx context.Context, request operations.AddToColle
 	return res, nil
 }
 
+// AddToPlaylist - Adds items to a playlist.
 func (s *SDK) AddToPlaylist(ctx context.Context, request operations.AddToPlaylistRequest) (*operations.AddToPlaylistResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Playlists/{playlistId}/Items", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -261,7 +287,7 @@ func (s *SDK) AddToPlaylist(ctx context.Context, request operations.AddToPlaylis
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -284,8 +310,9 @@ func (s *SDK) AddToPlaylist(ctx context.Context, request operations.AddToPlaylis
 	return res, nil
 }
 
+// AddTunerHost - Adds a tuner host.
 func (s *SDK) AddTunerHost(ctx context.Context, request operations.AddTunerHostRequest) (*operations.AddTunerHostResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/LiveTv/TunerHosts"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -300,7 +327,7 @@ func (s *SDK) AddTunerHost(ctx context.Context, request operations.AddTunerHostR
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -346,8 +373,9 @@ func (s *SDK) AddTunerHost(ctx context.Context, request operations.AddTunerHostR
 	return res, nil
 }
 
+// AddUserToSession - Adds an additional user to a session.
 func (s *SDK) AddUserToSession(ctx context.Context, request operations.AddUserToSessionRequest) (*operations.AddUserToSessionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Sessions/{sessionId}/User/{userId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -355,7 +383,7 @@ func (s *SDK) AddUserToSession(ctx context.Context, request operations.AddUserTo
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -378,8 +406,9 @@ func (s *SDK) AddUserToSession(ctx context.Context, request operations.AddUserTo
 	return res, nil
 }
 
+// AddVirtualFolder - Adds a virtual folder.
 func (s *SDK) AddVirtualFolder(ctx context.Context, request operations.AddVirtualFolderRequest) (*operations.AddVirtualFolderResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/Library/VirtualFolders"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -396,7 +425,7 @@ func (s *SDK) AddVirtualFolder(ctx context.Context, request operations.AddVirtua
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -419,8 +448,9 @@ func (s *SDK) AddVirtualFolder(ctx context.Context, request operations.AddVirtua
 	return res, nil
 }
 
+// ApplySearchCriteria - Applies search criteria to an item and refreshes metadata.
 func (s *SDK) ApplySearchCriteria(ctx context.Context, request operations.ApplySearchCriteriaRequest) (*operations.ApplySearchCriteriaResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Items/RemoteSearch/Apply/{itemId}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -440,7 +470,7 @@ func (s *SDK) ApplySearchCriteria(ctx context.Context, request operations.ApplyS
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -463,8 +493,9 @@ func (s *SDK) ApplySearchCriteria(ctx context.Context, request operations.ApplyS
 	return res, nil
 }
 
+// AuthenticateUser - Authenticates a user.
 func (s *SDK) AuthenticateUser(ctx context.Context, request operations.AuthenticateUserRequest) (*operations.AuthenticateUserResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Users/{userId}/Authenticate", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -474,7 +505,7 @@ func (s *SDK) AuthenticateUser(ctx context.Context, request operations.Authentic
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -566,8 +597,9 @@ func (s *SDK) AuthenticateUser(ctx context.Context, request operations.Authentic
 	return res, nil
 }
 
+// AuthenticateUserByName - Authenticates a user by name.
 func (s *SDK) AuthenticateUserByName(ctx context.Context, request operations.AuthenticateUserByNameRequest) (*operations.AuthenticateUserByNameResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/Users/AuthenticateByName"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -585,7 +617,7 @@ func (s *SDK) AuthenticateUserByName(ctx context.Context, request operations.Aut
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -629,8 +661,9 @@ func (s *SDK) AuthenticateUserByName(ctx context.Context, request operations.Aut
 	return res, nil
 }
 
+// AuthenticateWithQuickConnect - Authenticates a user with quick connect.
 func (s *SDK) AuthenticateWithQuickConnect(ctx context.Context, request operations.AuthenticateWithQuickConnectRequest) (*operations.AuthenticateWithQuickConnectResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/Users/AuthenticateWithQuickConnect"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -648,7 +681,7 @@ func (s *SDK) AuthenticateWithQuickConnect(ctx context.Context, request operatio
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -693,8 +726,9 @@ func (s *SDK) AuthenticateWithQuickConnect(ctx context.Context, request operatio
 	return res, nil
 }
 
+// Authorize - Authorizes a pending quick connect request.
 func (s *SDK) Authorize(ctx context.Context, request operations.AuthorizeRequest) (*operations.AuthorizeResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/QuickConnect/Authorize"
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -704,7 +738,7 @@ func (s *SDK) Authorize(ctx context.Context, request operations.AuthorizeRequest
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -773,8 +807,9 @@ func (s *SDK) Authorize(ctx context.Context, request operations.AuthorizeRequest
 	return res, nil
 }
 
+// Available - Enables or disables quick connect.
 func (s *SDK) Available(ctx context.Context, request operations.AvailableRequest) (*operations.AvailableResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/QuickConnect/Available"
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -784,7 +819,7 @@ func (s *SDK) Available(ctx context.Context, request operations.AvailableRequest
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -807,8 +842,9 @@ func (s *SDK) Available(ctx context.Context, request operations.AvailableRequest
 	return res, nil
 }
 
+// CancelPackageInstallation - Cancels a package installation.
 func (s *SDK) CancelPackageInstallation(ctx context.Context, request operations.CancelPackageInstallationRequest) (*operations.CancelPackageInstallationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Packages/Installing/{packageId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -816,7 +852,7 @@ func (s *SDK) CancelPackageInstallation(ctx context.Context, request operations.
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -839,8 +875,9 @@ func (s *SDK) CancelPackageInstallation(ctx context.Context, request operations.
 	return res, nil
 }
 
+// CancelSeriesTimer - Cancels a live tv series timer.
 func (s *SDK) CancelSeriesTimer(ctx context.Context, request operations.CancelSeriesTimerRequest) (*operations.CancelSeriesTimerResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/LiveTv/SeriesTimers/{timerId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -848,7 +885,7 @@ func (s *SDK) CancelSeriesTimer(ctx context.Context, request operations.CancelSe
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -871,8 +908,9 @@ func (s *SDK) CancelSeriesTimer(ctx context.Context, request operations.CancelSe
 	return res, nil
 }
 
+// CancelTimer - Cancels a live tv timer.
 func (s *SDK) CancelTimer(ctx context.Context, request operations.CancelTimerRequest) (*operations.CancelTimerResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/LiveTv/Timers/{timerId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -880,7 +918,7 @@ func (s *SDK) CancelTimer(ctx context.Context, request operations.CancelTimerReq
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -903,8 +941,9 @@ func (s *SDK) CancelTimer(ctx context.Context, request operations.CancelTimerReq
 	return res, nil
 }
 
+// CloseLiveStream - Closes a media source.
 func (s *SDK) CloseLiveStream(ctx context.Context, request operations.CloseLiveStreamRequest) (*operations.CloseLiveStreamResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/LiveStreams/Close"
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -914,7 +953,7 @@ func (s *SDK) CloseLiveStream(ctx context.Context, request operations.CloseLiveS
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -937,8 +976,9 @@ func (s *SDK) CloseLiveStream(ctx context.Context, request operations.CloseLiveS
 	return res, nil
 }
 
+// CompleteWizard - Completes the startup wizard.
 func (s *SDK) CompleteWizard(ctx context.Context, request operations.CompleteWizardRequest) (*operations.CompleteWizardResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/Startup/Complete"
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -946,7 +986,7 @@ func (s *SDK) CompleteWizard(ctx context.Context, request operations.CompleteWiz
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -969,8 +1009,9 @@ func (s *SDK) CompleteWizard(ctx context.Context, request operations.CompleteWiz
 	return res, nil
 }
 
+// Connect - Attempts to retrieve authentication information.
 func (s *SDK) Connect(ctx context.Context, request operations.ConnectRequest) (*operations.ConnectResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/QuickConnect/Connect"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -980,7 +1021,7 @@ func (s *SDK) Connect(ctx context.Context, request operations.ConnectRequest) (*
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1048,8 +1089,9 @@ func (s *SDK) Connect(ctx context.Context, request operations.ConnectRequest) (*
 	return res, nil
 }
 
+// CreateAdminNotification - Sends a notification to all admins.
 func (s *SDK) CreateAdminNotification(ctx context.Context, request operations.CreateAdminNotificationRequest) (*operations.CreateAdminNotificationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/Notifications/Admin"
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -1059,7 +1101,7 @@ func (s *SDK) CreateAdminNotification(ctx context.Context, request operations.Cr
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1082,8 +1124,9 @@ func (s *SDK) CreateAdminNotification(ctx context.Context, request operations.Cr
 	return res, nil
 }
 
+// CreateCollection - Creates a new collection.
 func (s *SDK) CreateCollection(ctx context.Context, request operations.CreateCollectionRequest) (*operations.CreateCollectionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/Collections"
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -1093,7 +1136,7 @@ func (s *SDK) CreateCollection(ctx context.Context, request operations.CreateCol
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1139,8 +1182,9 @@ func (s *SDK) CreateCollection(ctx context.Context, request operations.CreateCol
 	return res, nil
 }
 
+// CreateKey - Create a new api key.
 func (s *SDK) CreateKey(ctx context.Context, request operations.CreateKeyRequest) (*operations.CreateKeyResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/Auth/Keys"
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -1150,7 +1194,7 @@ func (s *SDK) CreateKey(ctx context.Context, request operations.CreateKeyRequest
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1173,8 +1217,10 @@ func (s *SDK) CreateKey(ctx context.Context, request operations.CreateKeyRequest
 	return res, nil
 }
 
+// CreatePlaylist - Creates a new playlist.
+// For backwards compatibility parameters can be sent via Query or Body, with Query having higher precedence.
 func (s *SDK) CreatePlaylist(ctx context.Context, request operations.CreatePlaylistRequest) (*operations.CreatePlaylistResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/Playlists"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1191,7 +1237,7 @@ func (s *SDK) CreatePlaylist(ctx context.Context, request operations.CreatePlayl
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1237,8 +1283,9 @@ func (s *SDK) CreatePlaylist(ctx context.Context, request operations.CreatePlayl
 	return res, nil
 }
 
+// CreateProfile - Creates a profile.
 func (s *SDK) CreateProfile(ctx context.Context, request operations.CreateProfileRequest) (*operations.CreateProfileResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/Dlna/Profiles"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1253,7 +1300,7 @@ func (s *SDK) CreateProfile(ctx context.Context, request operations.CreateProfil
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1276,8 +1323,9 @@ func (s *SDK) CreateProfile(ctx context.Context, request operations.CreateProfil
 	return res, nil
 }
 
+// CreateSeriesTimer - Creates a live tv series timer.
 func (s *SDK) CreateSeriesTimer(ctx context.Context, request operations.CreateSeriesTimerRequest) (*operations.CreateSeriesTimerResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/LiveTv/SeriesTimers"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1292,7 +1340,7 @@ func (s *SDK) CreateSeriesTimer(ctx context.Context, request operations.CreateSe
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1315,8 +1363,9 @@ func (s *SDK) CreateSeriesTimer(ctx context.Context, request operations.CreateSe
 	return res, nil
 }
 
+// CreateTimer - Creates a live tv timer.
 func (s *SDK) CreateTimer(ctx context.Context, request operations.CreateTimerRequest) (*operations.CreateTimerResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/LiveTv/Timers"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1331,7 +1380,7 @@ func (s *SDK) CreateTimer(ctx context.Context, request operations.CreateTimerReq
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1354,8 +1403,9 @@ func (s *SDK) CreateTimer(ctx context.Context, request operations.CreateTimerReq
 	return res, nil
 }
 
+// CreateUserByName - Creates a user.
 func (s *SDK) CreateUserByName(ctx context.Context, request operations.CreateUserByNameRequest) (*operations.CreateUserByNameResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/Users/New"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1373,7 +1423,7 @@ func (s *SDK) CreateUserByName(ctx context.Context, request operations.CreateUse
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1419,8 +1469,9 @@ func (s *SDK) CreateUserByName(ctx context.Context, request operations.CreateUse
 	return res, nil
 }
 
+// Deauthorize - Deauthorize all quick connect devices for the current user.
 func (s *SDK) Deauthorize(ctx context.Context, request operations.DeauthorizeRequest) (*operations.DeauthorizeResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/QuickConnect/Deauthorize"
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -1428,7 +1479,7 @@ func (s *SDK) Deauthorize(ctx context.Context, request operations.DeauthorizeReq
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1474,8 +1525,9 @@ func (s *SDK) Deauthorize(ctx context.Context, request operations.DeauthorizeReq
 	return res, nil
 }
 
+// DeleteAlternateSources - Removes alternate video sources.
 func (s *SDK) DeleteAlternateSources(ctx context.Context, request operations.DeleteAlternateSourcesRequest) (*operations.DeleteAlternateSourcesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Videos/{itemId}/AlternateSources", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -1483,7 +1535,7 @@ func (s *SDK) DeleteAlternateSources(ctx context.Context, request operations.Del
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1530,8 +1582,9 @@ func (s *SDK) DeleteAlternateSources(ctx context.Context, request operations.Del
 	return res, nil
 }
 
+// DeleteDevice - Deletes a device.
 func (s *SDK) DeleteDevice(ctx context.Context, request operations.DeleteDeviceRequest) (*operations.DeleteDeviceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/Devices"
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -1541,7 +1594,7 @@ func (s *SDK) DeleteDevice(ctx context.Context, request operations.DeleteDeviceR
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1588,8 +1641,9 @@ func (s *SDK) DeleteDevice(ctx context.Context, request operations.DeleteDeviceR
 	return res, nil
 }
 
+// DeleteItem - Deletes an item from the library and filesystem.
 func (s *SDK) DeleteItem(ctx context.Context, request operations.DeleteItemRequest) (*operations.DeleteItemResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Items/{itemId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -1597,7 +1651,7 @@ func (s *SDK) DeleteItem(ctx context.Context, request operations.DeleteItemReque
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1643,8 +1697,9 @@ func (s *SDK) DeleteItem(ctx context.Context, request operations.DeleteItemReque
 	return res, nil
 }
 
+// DeleteItemImage - Delete an item's image.
 func (s *SDK) DeleteItemImage(ctx context.Context, request operations.DeleteItemImageRequest) (*operations.DeleteItemImageResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Items/{itemId}/Images/{imageType}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -1654,7 +1709,7 @@ func (s *SDK) DeleteItemImage(ctx context.Context, request operations.DeleteItem
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1701,8 +1756,9 @@ func (s *SDK) DeleteItemImage(ctx context.Context, request operations.DeleteItem
 	return res, nil
 }
 
+// DeleteItemImageByIndex - Delete an item's image.
 func (s *SDK) DeleteItemImageByIndex(ctx context.Context, request operations.DeleteItemImageByIndexRequest) (*operations.DeleteItemImageByIndexResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Items/{itemId}/Images/{imageType}/{imageIndex}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -1710,7 +1766,7 @@ func (s *SDK) DeleteItemImageByIndex(ctx context.Context, request operations.Del
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1757,8 +1813,9 @@ func (s *SDK) DeleteItemImageByIndex(ctx context.Context, request operations.Del
 	return res, nil
 }
 
+// DeleteItems - Deletes items from the library and filesystem.
 func (s *SDK) DeleteItems(ctx context.Context, request operations.DeleteItemsRequest) (*operations.DeleteItemsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/Items"
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -1768,7 +1825,7 @@ func (s *SDK) DeleteItems(ctx context.Context, request operations.DeleteItemsReq
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1814,8 +1871,9 @@ func (s *SDK) DeleteItems(ctx context.Context, request operations.DeleteItemsReq
 	return res, nil
 }
 
+// DeleteListingProvider - Delete listing provider.
 func (s *SDK) DeleteListingProvider(ctx context.Context, request operations.DeleteListingProviderRequest) (*operations.DeleteListingProviderResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/LiveTv/ListingProviders"
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -1825,7 +1883,7 @@ func (s *SDK) DeleteListingProvider(ctx context.Context, request operations.Dele
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1848,8 +1906,9 @@ func (s *SDK) DeleteListingProvider(ctx context.Context, request operations.Dele
 	return res, nil
 }
 
+// DeleteProfile - Deletes a profile.
 func (s *SDK) DeleteProfile(ctx context.Context, request operations.DeleteProfileRequest) (*operations.DeleteProfileResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Dlna/Profiles/{profileId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -1857,7 +1916,7 @@ func (s *SDK) DeleteProfile(ctx context.Context, request operations.DeleteProfil
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1904,8 +1963,9 @@ func (s *SDK) DeleteProfile(ctx context.Context, request operations.DeleteProfil
 	return res, nil
 }
 
+// DeleteRecording - Deletes a live tv recording.
 func (s *SDK) DeleteRecording(ctx context.Context, request operations.DeleteRecordingRequest) (*operations.DeleteRecordingResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/LiveTv/Recordings/{recordingId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -1913,7 +1973,7 @@ func (s *SDK) DeleteRecording(ctx context.Context, request operations.DeleteReco
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1960,8 +2020,9 @@ func (s *SDK) DeleteRecording(ctx context.Context, request operations.DeleteReco
 	return res, nil
 }
 
+// DeleteSubtitle - Deletes an external subtitle file.
 func (s *SDK) DeleteSubtitle(ctx context.Context, request operations.DeleteSubtitleRequest) (*operations.DeleteSubtitleResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Videos/{itemId}/Subtitles/{index}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -1969,7 +2030,7 @@ func (s *SDK) DeleteSubtitle(ctx context.Context, request operations.DeleteSubti
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2016,8 +2077,9 @@ func (s *SDK) DeleteSubtitle(ctx context.Context, request operations.DeleteSubti
 	return res, nil
 }
 
+// DeleteTunerHost - Deletes a tuner host.
 func (s *SDK) DeleteTunerHost(ctx context.Context, request operations.DeleteTunerHostRequest) (*operations.DeleteTunerHostResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/LiveTv/TunerHosts"
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -2027,7 +2089,7 @@ func (s *SDK) DeleteTunerHost(ctx context.Context, request operations.DeleteTune
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2050,8 +2112,9 @@ func (s *SDK) DeleteTunerHost(ctx context.Context, request operations.DeleteTune
 	return res, nil
 }
 
+// DeleteUser - Deletes a user.
 func (s *SDK) DeleteUser(ctx context.Context, request operations.DeleteUserRequest) (*operations.DeleteUserResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Users/{userId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -2059,7 +2122,7 @@ func (s *SDK) DeleteUser(ctx context.Context, request operations.DeleteUserReque
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2106,8 +2169,9 @@ func (s *SDK) DeleteUser(ctx context.Context, request operations.DeleteUserReque
 	return res, nil
 }
 
+// DeleteUserImage - Delete the user's image.
 func (s *SDK) DeleteUserImage(ctx context.Context, request operations.DeleteUserImageRequest) (*operations.DeleteUserImageResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Users/{userId}/Images/{imageType}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -2117,7 +2181,7 @@ func (s *SDK) DeleteUserImage(ctx context.Context, request operations.DeleteUser
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2163,8 +2227,9 @@ func (s *SDK) DeleteUserImage(ctx context.Context, request operations.DeleteUser
 	return res, nil
 }
 
+// DeleteUserImageByIndex - Delete the user's image.
 func (s *SDK) DeleteUserImageByIndex(ctx context.Context, request operations.DeleteUserImageByIndexRequest) (*operations.DeleteUserImageByIndexResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Users/{userId}/Images/{imageType}/{index}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -2172,7 +2237,7 @@ func (s *SDK) DeleteUserImageByIndex(ctx context.Context, request operations.Del
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2218,8 +2283,9 @@ func (s *SDK) DeleteUserImageByIndex(ctx context.Context, request operations.Del
 	return res, nil
 }
 
+// DeleteUserItemRating - Deletes a user's saved personal rating for an item.
 func (s *SDK) DeleteUserItemRating(ctx context.Context, request operations.DeleteUserItemRatingRequest) (*operations.DeleteUserItemRatingResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Users/{userId}/Items/{itemId}/Rating", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -2227,7 +2293,7 @@ func (s *SDK) DeleteUserItemRating(ctx context.Context, request operations.Delet
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2273,8 +2339,66 @@ func (s *SDK) DeleteUserItemRating(ctx context.Context, request operations.Delet
 	return res, nil
 }
 
+// DisablePlugin - Disable a plugin.
+func (s *SDK) DisablePlugin(ctx context.Context, request operations.DisablePluginRequest) (*operations.DisablePluginResponse, error) {
+	baseURL := s._serverURL
+	url := utils.GenerateURL(ctx, baseURL, "/Plugins/{pluginId}/{version}/Disable", request.PathParams)
+
+	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
+	if err != nil {
+		return nil, fmt.Errorf("error creating request: %w", err)
+	}
+
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
+
+	httpRes, err := client.Do(req)
+	if err != nil {
+		return nil, fmt.Errorf("error sending request: %w", err)
+	}
+	defer httpRes.Body.Close()
+
+	contentType := httpRes.Header.Get("Content-Type")
+
+	res := &operations.DisablePluginResponse{
+		StatusCode:  int64(httpRes.StatusCode),
+		ContentType: contentType,
+	}
+	switch {
+	case httpRes.StatusCode == 204:
+	case httpRes.StatusCode == 401:
+	case httpRes.StatusCode == 403:
+	case httpRes.StatusCode == 404:
+		switch {
+		case utils.MatchContentType(contentType, `application/json`):
+			var out map[string]interface{}
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
+				return nil, err
+			}
+
+			res.ProblemDetails = out
+		case utils.MatchContentType(contentType, `application/json; profile="CamelCase"`):
+			var out map[string]interface{}
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
+				return nil, err
+			}
+
+			res.ProblemDetails = out
+		case utils.MatchContentType(contentType, `application/json; profile="PascalCase"`):
+			var out map[string]interface{}
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
+				return nil, err
+			}
+
+			res.ProblemDetails = out
+		}
+	}
+
+	return res, nil
+}
+
+// DiscoverTuners - Discover tuners.
 func (s *SDK) DiscoverTuners(ctx context.Context, request operations.DiscoverTunersRequest) (*operations.DiscoverTunersResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/LiveTv/Tuners/Discover"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2284,7 +2408,7 @@ func (s *SDK) DiscoverTuners(ctx context.Context, request operations.DiscoverTun
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2330,8 +2454,9 @@ func (s *SDK) DiscoverTuners(ctx context.Context, request operations.DiscoverTun
 	return res, nil
 }
 
+// DiscvoverTuners - Discover tuners.
 func (s *SDK) DiscvoverTuners(ctx context.Context, request operations.DiscvoverTunersRequest) (*operations.DiscvoverTunersResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/LiveTv/Tuners/Discvover"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2341,7 +2466,7 @@ func (s *SDK) DiscvoverTuners(ctx context.Context, request operations.DiscvoverT
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2387,8 +2512,9 @@ func (s *SDK) DiscvoverTuners(ctx context.Context, request operations.DiscvoverT
 	return res, nil
 }
 
+// DisplayContent - Instructs a session to browse to an item or view.
 func (s *SDK) DisplayContent(ctx context.Context, request operations.DisplayContentRequest) (*operations.DisplayContentResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Sessions/{sessionId}/Viewing", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -2398,7 +2524,7 @@ func (s *SDK) DisplayContent(ctx context.Context, request operations.DisplayCont
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2421,8 +2547,9 @@ func (s *SDK) DisplayContent(ctx context.Context, request operations.DisplayCont
 	return res, nil
 }
 
+// DownloadRemoteImage - Downloads a remote image for an item.
 func (s *SDK) DownloadRemoteImage(ctx context.Context, request operations.DownloadRemoteImageRequest) (*operations.DownloadRemoteImageResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Items/{itemId}/RemoteImages/Download", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -2432,7 +2559,7 @@ func (s *SDK) DownloadRemoteImage(ctx context.Context, request operations.Downlo
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2479,8 +2606,9 @@ func (s *SDK) DownloadRemoteImage(ctx context.Context, request operations.Downlo
 	return res, nil
 }
 
+// DownloadRemoteSubtitles - Downloads a remote subtitle.
 func (s *SDK) DownloadRemoteSubtitles(ctx context.Context, request operations.DownloadRemoteSubtitlesRequest) (*operations.DownloadRemoteSubtitlesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Items/{itemId}/RemoteSearch/Subtitles/{subtitleId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -2488,7 +2616,7 @@ func (s *SDK) DownloadRemoteSubtitles(ctx context.Context, request operations.Do
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2511,8 +2639,66 @@ func (s *SDK) DownloadRemoteSubtitles(ctx context.Context, request operations.Do
 	return res, nil
 }
 
+// EnablePlugin - Enables a disabled plugin.
+func (s *SDK) EnablePlugin(ctx context.Context, request operations.EnablePluginRequest) (*operations.EnablePluginResponse, error) {
+	baseURL := s._serverURL
+	url := utils.GenerateURL(ctx, baseURL, "/Plugins/{pluginId}/{version}/Enable", request.PathParams)
+
+	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
+	if err != nil {
+		return nil, fmt.Errorf("error creating request: %w", err)
+	}
+
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
+
+	httpRes, err := client.Do(req)
+	if err != nil {
+		return nil, fmt.Errorf("error sending request: %w", err)
+	}
+	defer httpRes.Body.Close()
+
+	contentType := httpRes.Header.Get("Content-Type")
+
+	res := &operations.EnablePluginResponse{
+		StatusCode:  int64(httpRes.StatusCode),
+		ContentType: contentType,
+	}
+	switch {
+	case httpRes.StatusCode == 204:
+	case httpRes.StatusCode == 401:
+	case httpRes.StatusCode == 403:
+	case httpRes.StatusCode == 404:
+		switch {
+		case utils.MatchContentType(contentType, `application/json`):
+			var out map[string]interface{}
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
+				return nil, err
+			}
+
+			res.ProblemDetails = out
+		case utils.MatchContentType(contentType, `application/json; profile="CamelCase"`):
+			var out map[string]interface{}
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
+				return nil, err
+			}
+
+			res.ProblemDetails = out
+		case utils.MatchContentType(contentType, `application/json; profile="PascalCase"`):
+			var out map[string]interface{}
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
+				return nil, err
+			}
+
+			res.ProblemDetails = out
+		}
+	}
+
+	return res, nil
+}
+
+// ForgotPassword - Initiates the forgot password process for a local user.
 func (s *SDK) ForgotPassword(ctx context.Context, request operations.ForgotPasswordRequest) (*operations.ForgotPasswordResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/Users/ForgotPassword"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2530,7 +2716,7 @@ func (s *SDK) ForgotPassword(ctx context.Context, request operations.ForgotPassw
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2574,8 +2760,9 @@ func (s *SDK) ForgotPassword(ctx context.Context, request operations.ForgotPassw
 	return res, nil
 }
 
+// ForgotPasswordPin - Redeems a forgot password pin.
 func (s *SDK) ForgotPasswordPin(ctx context.Context, request operations.ForgotPasswordPinRequest) (*operations.ForgotPasswordPinResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/Users/ForgotPassword/Pin"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2590,7 +2777,7 @@ func (s *SDK) ForgotPasswordPin(ctx context.Context, request operations.ForgotPa
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2634,8 +2821,9 @@ func (s *SDK) ForgotPasswordPin(ctx context.Context, request operations.ForgotPa
 	return res, nil
 }
 
+// Get - Gets the search hint result.
 func (s *SDK) Get(ctx context.Context, request operations.GetRequest) (*operations.GetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/Search/Hints"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2645,7 +2833,7 @@ func (s *SDK) Get(ctx context.Context, request operations.GetRequest) (*operatio
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2691,8 +2879,9 @@ func (s *SDK) Get(ctx context.Context, request operations.GetRequest) (*operatio
 	return res, nil
 }
 
+// GetAdditionalPart - Gets additional parts for a video.
 func (s *SDK) GetAdditionalPart(ctx context.Context, request operations.GetAdditionalPartRequest) (*operations.GetAdditionalPartResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Videos/{itemId}/AdditionalParts", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2702,7 +2891,7 @@ func (s *SDK) GetAdditionalPart(ctx context.Context, request operations.GetAddit
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2748,8 +2937,9 @@ func (s *SDK) GetAdditionalPart(ctx context.Context, request operations.GetAddit
 	return res, nil
 }
 
+// GetAlbumArtists - Gets all album artists from a given item, folder, or the entire library.
 func (s *SDK) GetAlbumArtists(ctx context.Context, request operations.GetAlbumArtistsRequest) (*operations.GetAlbumArtistsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/Artists/AlbumArtists"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2759,7 +2949,7 @@ func (s *SDK) GetAlbumArtists(ctx context.Context, request operations.GetAlbumAr
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2805,8 +2995,9 @@ func (s *SDK) GetAlbumArtists(ctx context.Context, request operations.GetAlbumAr
 	return res, nil
 }
 
+// GetAllChannelFeatures - Get all channel features.
 func (s *SDK) GetAllChannelFeatures(ctx context.Context, request operations.GetAllChannelFeaturesRequest) (*operations.GetAllChannelFeaturesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/Channels/Features"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2814,7 +3005,7 @@ func (s *SDK) GetAllChannelFeatures(ctx context.Context, request operations.GetA
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2860,8 +3051,9 @@ func (s *SDK) GetAllChannelFeatures(ctx context.Context, request operations.GetA
 	return res, nil
 }
 
+// GetAncestors - Gets all parents of an item.
 func (s *SDK) GetAncestors(ctx context.Context, request operations.GetAncestorsRequest) (*operations.GetAncestorsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Items/{itemId}/Ancestors", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2871,7 +3063,7 @@ func (s *SDK) GetAncestors(ctx context.Context, request operations.GetAncestorsR
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2941,8 +3133,9 @@ func (s *SDK) GetAncestors(ctx context.Context, request operations.GetAncestorsR
 	return res, nil
 }
 
+// GetArtistByName - Gets an artist by name.
 func (s *SDK) GetArtistByName(ctx context.Context, request operations.GetArtistByNameRequest) (*operations.GetArtistByNameResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Artists/{name}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2952,7 +3145,7 @@ func (s *SDK) GetArtistByName(ctx context.Context, request operations.GetArtistB
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2998,8 +3191,9 @@ func (s *SDK) GetArtistByName(ctx context.Context, request operations.GetArtistB
 	return res, nil
 }
 
+// GetArtistImage - Get artist image by name.
 func (s *SDK) GetArtistImage(ctx context.Context, request operations.GetArtistImageRequest) (*operations.GetArtistImageResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Artists/{name}/Images/{imageType}/{imageIndex}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3009,7 +3203,7 @@ func (s *SDK) GetArtistImage(ctx context.Context, request operations.GetArtistIm
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3063,8 +3257,9 @@ func (s *SDK) GetArtistImage(ctx context.Context, request operations.GetArtistIm
 	return res, nil
 }
 
+// GetArtists - Gets all artists from a given item, folder, or the entire library.
 func (s *SDK) GetArtists(ctx context.Context, request operations.GetArtistsRequest) (*operations.GetArtistsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/Artists"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3074,7 +3269,7 @@ func (s *SDK) GetArtists(ctx context.Context, request operations.GetArtistsReque
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3120,8 +3315,9 @@ func (s *SDK) GetArtists(ctx context.Context, request operations.GetArtistsReque
 	return res, nil
 }
 
+// GetAttachment - Get video attachment.
 func (s *SDK) GetAttachment(ctx context.Context, request operations.GetAttachmentRequest) (*operations.GetAttachmentResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Videos/{videoId}/{mediaSourceId}/Attachments/{index}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3129,7 +3325,7 @@ func (s *SDK) GetAttachment(ctx context.Context, request operations.GetAttachmen
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3183,8 +3379,9 @@ func (s *SDK) GetAttachment(ctx context.Context, request operations.GetAttachmen
 	return res, nil
 }
 
+// GetAudioStream - Gets an audio stream.
 func (s *SDK) GetAudioStream(ctx context.Context, request operations.GetAudioStreamRequest) (*operations.GetAudioStreamResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Audio/{itemId}/stream", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3194,7 +3391,7 @@ func (s *SDK) GetAudioStream(ctx context.Context, request operations.GetAudioStr
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3224,8 +3421,9 @@ func (s *SDK) GetAudioStream(ctx context.Context, request operations.GetAudioStr
 	return res, nil
 }
 
+// GetAudioStreamByContainer - Gets an audio stream.
 func (s *SDK) GetAudioStreamByContainer(ctx context.Context, request operations.GetAudioStreamByContainerRequest) (*operations.GetAudioStreamByContainerResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Audio/{itemId}/stream.{container}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3235,7 +3433,7 @@ func (s *SDK) GetAudioStreamByContainer(ctx context.Context, request operations.
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3265,8 +3463,9 @@ func (s *SDK) GetAudioStreamByContainer(ctx context.Context, request operations.
 	return res, nil
 }
 
+// GetAuthProviders - Get all auth providers.
 func (s *SDK) GetAuthProviders(ctx context.Context, request operations.GetAuthProvidersRequest) (*operations.GetAuthProvidersResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/Auth/Providers"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3274,7 +3473,7 @@ func (s *SDK) GetAuthProviders(ctx context.Context, request operations.GetAuthPr
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3320,8 +3519,9 @@ func (s *SDK) GetAuthProviders(ctx context.Context, request operations.GetAuthPr
 	return res, nil
 }
 
+// GetBitrateTestBytes - Tests the network with a request with the size of the bitrate.
 func (s *SDK) GetBitrateTestBytes(ctx context.Context, request operations.GetBitrateTestBytesRequest) (*operations.GetBitrateTestBytesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/Playback/BitrateTest"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3331,7 +3531,7 @@ func (s *SDK) GetBitrateTestBytes(ctx context.Context, request operations.GetBit
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3394,8 +3594,9 @@ func (s *SDK) GetBitrateTestBytes(ctx context.Context, request operations.GetBit
 	return res, nil
 }
 
+// GetBookRemoteSearchResults - Get book remote search.
 func (s *SDK) GetBookRemoteSearchResults(ctx context.Context, request operations.GetBookRemoteSearchResultsRequest) (*operations.GetBookRemoteSearchResultsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/Items/RemoteSearch/Book"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3413,7 +3614,7 @@ func (s *SDK) GetBookRemoteSearchResults(ctx context.Context, request operations
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3459,8 +3660,9 @@ func (s *SDK) GetBookRemoteSearchResults(ctx context.Context, request operations
 	return res, nil
 }
 
+// GetBoxSetRemoteSearchResults - Get box set remote search.
 func (s *SDK) GetBoxSetRemoteSearchResults(ctx context.Context, request operations.GetBoxSetRemoteSearchResultsRequest) (*operations.GetBoxSetRemoteSearchResultsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/Items/RemoteSearch/BoxSet"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3478,7 +3680,7 @@ func (s *SDK) GetBoxSetRemoteSearchResults(ctx context.Context, request operatio
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3524,8 +3726,9 @@ func (s *SDK) GetBoxSetRemoteSearchResults(ctx context.Context, request operatio
 	return res, nil
 }
 
+// GetBrandingCSS - Gets branding css.
 func (s *SDK) GetBrandingCSS(ctx context.Context) (*operations.GetBrandingCSSResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/Branding/Css"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3533,7 +3736,7 @@ func (s *SDK) GetBrandingCSS(ctx context.Context) (*operations.GetBrandingCSSRes
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3589,8 +3792,9 @@ func (s *SDK) GetBrandingCSS(ctx context.Context) (*operations.GetBrandingCSSRes
 	return res, nil
 }
 
+// GetBrandingCSS2 - Gets branding css.
 func (s *SDK) GetBrandingCSS2(ctx context.Context) (*operations.GetBrandingCSS2Response, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/Branding/Css.css"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3598,7 +3802,7 @@ func (s *SDK) GetBrandingCSS2(ctx context.Context) (*operations.GetBrandingCSS2R
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3654,8 +3858,9 @@ func (s *SDK) GetBrandingCSS2(ctx context.Context) (*operations.GetBrandingCSS2R
 	return res, nil
 }
 
+// GetBrandingOptions - Gets branding configuration.
 func (s *SDK) GetBrandingOptions(ctx context.Context) (*operations.GetBrandingOptionsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/Branding/Configuration"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3663,7 +3868,7 @@ func (s *SDK) GetBrandingOptions(ctx context.Context) (*operations.GetBrandingOp
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3707,8 +3912,9 @@ func (s *SDK) GetBrandingOptions(ctx context.Context) (*operations.GetBrandingOp
 	return res, nil
 }
 
+// GetChannel - Gets a live tv channel.
 func (s *SDK) GetChannel(ctx context.Context, request operations.GetChannelRequest) (*operations.GetChannelResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/LiveTv/Channels/{channelId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3718,7 +3924,7 @@ func (s *SDK) GetChannel(ctx context.Context, request operations.GetChannelReque
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3764,8 +3970,9 @@ func (s *SDK) GetChannel(ctx context.Context, request operations.GetChannelReque
 	return res, nil
 }
 
+// GetChannelFeatures - Get channel features.
 func (s *SDK) GetChannelFeatures(ctx context.Context, request operations.GetChannelFeaturesRequest) (*operations.GetChannelFeaturesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Channels/{channelId}/Features", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3773,7 +3980,7 @@ func (s *SDK) GetChannelFeatures(ctx context.Context, request operations.GetChan
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3819,8 +4026,9 @@ func (s *SDK) GetChannelFeatures(ctx context.Context, request operations.GetChan
 	return res, nil
 }
 
+// GetChannelItems - Get channel items.
 func (s *SDK) GetChannelItems(ctx context.Context, request operations.GetChannelItemsRequest) (*operations.GetChannelItemsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Channels/{channelId}/Items", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3830,7 +4038,7 @@ func (s *SDK) GetChannelItems(ctx context.Context, request operations.GetChannel
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3876,8 +4084,9 @@ func (s *SDK) GetChannelItems(ctx context.Context, request operations.GetChannel
 	return res, nil
 }
 
+// GetChannelMappingOptions - Get channel mapping options.
 func (s *SDK) GetChannelMappingOptions(ctx context.Context, request operations.GetChannelMappingOptionsRequest) (*operations.GetChannelMappingOptionsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/LiveTv/ChannelMappingOptions"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3887,7 +4096,7 @@ func (s *SDK) GetChannelMappingOptions(ctx context.Context, request operations.G
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3933,8 +4142,9 @@ func (s *SDK) GetChannelMappingOptions(ctx context.Context, request operations.G
 	return res, nil
 }
 
+// GetChannels - Gets available channels.
 func (s *SDK) GetChannels(ctx context.Context, request operations.GetChannelsRequest) (*operations.GetChannelsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/Channels"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3944,7 +4154,7 @@ func (s *SDK) GetChannels(ctx context.Context, request operations.GetChannelsReq
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3990,8 +4200,9 @@ func (s *SDK) GetChannels(ctx context.Context, request operations.GetChannelsReq
 	return res, nil
 }
 
+// GetConfiguration - Gets application configuration.
 func (s *SDK) GetConfiguration(ctx context.Context, request operations.GetConfigurationRequest) (*operations.GetConfigurationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/System/Configuration"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3999,7 +4210,7 @@ func (s *SDK) GetConfiguration(ctx context.Context, request operations.GetConfig
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4045,8 +4256,9 @@ func (s *SDK) GetConfiguration(ctx context.Context, request operations.GetConfig
 	return res, nil
 }
 
+// GetConfigurationPages - Gets the configuration pages.
 func (s *SDK) GetConfigurationPages(ctx context.Context, request operations.GetConfigurationPagesRequest) (*operations.GetConfigurationPagesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/web/ConfigurationPages"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -4056,7 +4268,7 @@ func (s *SDK) GetConfigurationPages(ctx context.Context, request operations.GetC
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4124,8 +4336,9 @@ func (s *SDK) GetConfigurationPages(ctx context.Context, request operations.GetC
 	return res, nil
 }
 
+// GetConnectionManager - Gets Dlna media receiver registrar xml.
 func (s *SDK) GetConnectionManager(ctx context.Context, request operations.GetConnectionManagerRequest) (*operations.GetConnectionManagerResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Dlna/{serverId}/ConnectionManager", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -4133,7 +4346,7 @@ func (s *SDK) GetConnectionManager(ctx context.Context, request operations.GetCo
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4164,8 +4377,9 @@ func (s *SDK) GetConnectionManager(ctx context.Context, request operations.GetCo
 	return res, nil
 }
 
+// GetConnectionManager2 - Gets Dlna media receiver registrar xml.
 func (s *SDK) GetConnectionManager2(ctx context.Context, request operations.GetConnectionManager2Request) (*operations.GetConnectionManager2Response, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Dlna/{serverId}/ConnectionManager/ConnectionManager", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -4173,7 +4387,7 @@ func (s *SDK) GetConnectionManager2(ctx context.Context, request operations.GetC
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4204,8 +4418,9 @@ func (s *SDK) GetConnectionManager2(ctx context.Context, request operations.GetC
 	return res, nil
 }
 
+// GetConnectionManager3 - Gets Dlna media receiver registrar xml.
 func (s *SDK) GetConnectionManager3(ctx context.Context, request operations.GetConnectionManager3Request) (*operations.GetConnectionManager3Response, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Dlna/{serverId}/ConnectionManager/ConnectionManager.xml", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -4213,7 +4428,7 @@ func (s *SDK) GetConnectionManager3(ctx context.Context, request operations.GetC
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4244,8 +4459,9 @@ func (s *SDK) GetConnectionManager3(ctx context.Context, request operations.GetC
 	return res, nil
 }
 
+// GetContentDirectory - Gets Dlna content directory xml.
 func (s *SDK) GetContentDirectory(ctx context.Context, request operations.GetContentDirectoryRequest) (*operations.GetContentDirectoryResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Dlna/{serverId}/ContentDirectory", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -4253,7 +4469,7 @@ func (s *SDK) GetContentDirectory(ctx context.Context, request operations.GetCon
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4284,8 +4500,9 @@ func (s *SDK) GetContentDirectory(ctx context.Context, request operations.GetCon
 	return res, nil
 }
 
+// GetContentDirectory2 - Gets Dlna content directory xml.
 func (s *SDK) GetContentDirectory2(ctx context.Context, request operations.GetContentDirectory2Request) (*operations.GetContentDirectory2Response, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Dlna/{serverId}/ContentDirectory/ContentDirectory", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -4293,7 +4510,7 @@ func (s *SDK) GetContentDirectory2(ctx context.Context, request operations.GetCo
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4324,8 +4541,9 @@ func (s *SDK) GetContentDirectory2(ctx context.Context, request operations.GetCo
 	return res, nil
 }
 
+// GetContentDirectory3 - Gets Dlna content directory xml.
 func (s *SDK) GetContentDirectory3(ctx context.Context, request operations.GetContentDirectory3Request) (*operations.GetContentDirectory3Response, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Dlna/{serverId}/ContentDirectory/ContentDirectory.xml", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -4333,7 +4551,7 @@ func (s *SDK) GetContentDirectory3(ctx context.Context, request operations.GetCo
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4364,8 +4582,9 @@ func (s *SDK) GetContentDirectory3(ctx context.Context, request operations.GetCo
 	return res, nil
 }
 
+// GetCountries - Gets known countries.
 func (s *SDK) GetCountries(ctx context.Context, request operations.GetCountriesRequest) (*operations.GetCountriesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/Localization/Countries"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -4373,7 +4592,7 @@ func (s *SDK) GetCountries(ctx context.Context, request operations.GetCountriesR
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4419,8 +4638,9 @@ func (s *SDK) GetCountries(ctx context.Context, request operations.GetCountriesR
 	return res, nil
 }
 
+// GetCriticReviews - Gets critic review for an item.
 func (s *SDK) GetCriticReviews(ctx context.Context, request operations.GetCriticReviewsRequest) (*operations.GetCriticReviewsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Items/{itemId}/CriticReviews", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -4428,7 +4648,7 @@ func (s *SDK) GetCriticReviews(ctx context.Context, request operations.GetCritic
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4474,8 +4694,9 @@ func (s *SDK) GetCriticReviews(ctx context.Context, request operations.GetCritic
 	return res, nil
 }
 
+// GetCultures - Gets known cultures.
 func (s *SDK) GetCultures(ctx context.Context, request operations.GetCulturesRequest) (*operations.GetCulturesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/Localization/Cultures"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -4483,7 +4704,7 @@ func (s *SDK) GetCultures(ctx context.Context, request operations.GetCulturesReq
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4529,8 +4750,9 @@ func (s *SDK) GetCultures(ctx context.Context, request operations.GetCulturesReq
 	return res, nil
 }
 
+// GetCurrentUser - Gets the user based on auth token.
 func (s *SDK) GetCurrentUser(ctx context.Context, request operations.GetCurrentUserRequest) (*operations.GetCurrentUserResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/Users/Me"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -4538,7 +4760,7 @@ func (s *SDK) GetCurrentUser(ctx context.Context, request operations.GetCurrentU
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4608,8 +4830,9 @@ func (s *SDK) GetCurrentUser(ctx context.Context, request operations.GetCurrentU
 	return res, nil
 }
 
+// GetDashboardConfigurationPage - Gets a dashboard configuration page.
 func (s *SDK) GetDashboardConfigurationPage(ctx context.Context, request operations.GetDashboardConfigurationPageRequest) (*operations.GetDashboardConfigurationPageResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/web/ConfigurationPage"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -4619,7 +4842,7 @@ func (s *SDK) GetDashboardConfigurationPage(ctx context.Context, request operati
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4680,8 +4903,9 @@ func (s *SDK) GetDashboardConfigurationPage(ctx context.Context, request operati
 	return res, nil
 }
 
+// GetDefaultDirectoryBrowser - Get Default directory browser.
 func (s *SDK) GetDefaultDirectoryBrowser(ctx context.Context, request operations.GetDefaultDirectoryBrowserRequest) (*operations.GetDefaultDirectoryBrowserResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/Environment/DefaultDirectoryBrowser"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -4689,7 +4913,7 @@ func (s *SDK) GetDefaultDirectoryBrowser(ctx context.Context, request operations
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4735,8 +4959,9 @@ func (s *SDK) GetDefaultDirectoryBrowser(ctx context.Context, request operations
 	return res, nil
 }
 
+// GetDefaultListingProvider - Gets default listings provider info.
 func (s *SDK) GetDefaultListingProvider(ctx context.Context, request operations.GetDefaultListingProviderRequest) (*operations.GetDefaultListingProviderResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/LiveTv/ListingProviders/Default"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -4744,7 +4969,7 @@ func (s *SDK) GetDefaultListingProvider(ctx context.Context, request operations.
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4790,8 +5015,9 @@ func (s *SDK) GetDefaultListingProvider(ctx context.Context, request operations.
 	return res, nil
 }
 
+// GetDefaultMetadataOptions - Gets a default MetadataOptions object.
 func (s *SDK) GetDefaultMetadataOptions(ctx context.Context, request operations.GetDefaultMetadataOptionsRequest) (*operations.GetDefaultMetadataOptionsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/System/Configuration/MetadataOptions/Default"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -4799,7 +5025,7 @@ func (s *SDK) GetDefaultMetadataOptions(ctx context.Context, request operations.
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4845,8 +5071,9 @@ func (s *SDK) GetDefaultMetadataOptions(ctx context.Context, request operations.
 	return res, nil
 }
 
+// GetDefaultProfile - Gets the default profile.
 func (s *SDK) GetDefaultProfile(ctx context.Context, request operations.GetDefaultProfileRequest) (*operations.GetDefaultProfileResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/Dlna/Profiles/Default"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -4854,7 +5081,7 @@ func (s *SDK) GetDefaultProfile(ctx context.Context, request operations.GetDefau
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4900,8 +5127,9 @@ func (s *SDK) GetDefaultProfile(ctx context.Context, request operations.GetDefau
 	return res, nil
 }
 
+// GetDefaultTimer - Gets the default values for a new timer.
 func (s *SDK) GetDefaultTimer(ctx context.Context, request operations.GetDefaultTimerRequest) (*operations.GetDefaultTimerResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/LiveTv/Timers/Defaults"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -4911,7 +5139,7 @@ func (s *SDK) GetDefaultTimer(ctx context.Context, request operations.GetDefault
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4957,8 +5185,9 @@ func (s *SDK) GetDefaultTimer(ctx context.Context, request operations.GetDefault
 	return res, nil
 }
 
+// GetDescriptionXML - Get Description Xml.
 func (s *SDK) GetDescriptionXML(ctx context.Context, request operations.GetDescriptionXMLRequest) (*operations.GetDescriptionXMLResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Dlna/{serverId}/description", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -4966,7 +5195,7 @@ func (s *SDK) GetDescriptionXML(ctx context.Context, request operations.GetDescr
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4997,8 +5226,9 @@ func (s *SDK) GetDescriptionXML(ctx context.Context, request operations.GetDescr
 	return res, nil
 }
 
+// GetDescriptionXML2 - Get Description Xml.
 func (s *SDK) GetDescriptionXML2(ctx context.Context, request operations.GetDescriptionXML2Request) (*operations.GetDescriptionXML2Response, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Dlna/{serverId}/description.xml", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -5006,7 +5236,7 @@ func (s *SDK) GetDescriptionXML2(ctx context.Context, request operations.GetDesc
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5037,8 +5267,9 @@ func (s *SDK) GetDescriptionXML2(ctx context.Context, request operations.GetDesc
 	return res, nil
 }
 
+// GetDeviceInfo - Get info for a device.
 func (s *SDK) GetDeviceInfo(ctx context.Context, request operations.GetDeviceInfoRequest) (*operations.GetDeviceInfoResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/Devices/Info"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -5048,7 +5279,7 @@ func (s *SDK) GetDeviceInfo(ctx context.Context, request operations.GetDeviceInf
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5118,8 +5349,9 @@ func (s *SDK) GetDeviceInfo(ctx context.Context, request operations.GetDeviceInf
 	return res, nil
 }
 
+// GetDeviceOptions - Get options for a device.
 func (s *SDK) GetDeviceOptions(ctx context.Context, request operations.GetDeviceOptionsRequest) (*operations.GetDeviceOptionsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/Devices/Options"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -5129,7 +5361,7 @@ func (s *SDK) GetDeviceOptions(ctx context.Context, request operations.GetDevice
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5199,8 +5431,9 @@ func (s *SDK) GetDeviceOptions(ctx context.Context, request operations.GetDevice
 	return res, nil
 }
 
+// GetDevices - Get Devices.
 func (s *SDK) GetDevices(ctx context.Context, request operations.GetDevicesRequest) (*operations.GetDevicesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/Devices"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -5210,7 +5443,7 @@ func (s *SDK) GetDevices(ctx context.Context, request operations.GetDevicesReque
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5256,8 +5489,9 @@ func (s *SDK) GetDevices(ctx context.Context, request operations.GetDevicesReque
 	return res, nil
 }
 
+// GetDirectoryContents - Gets the contents of a given directory in the file system.
 func (s *SDK) GetDirectoryContents(ctx context.Context, request operations.GetDirectoryContentsRequest) (*operations.GetDirectoryContentsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/Environment/DirectoryContents"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -5267,7 +5501,7 @@ func (s *SDK) GetDirectoryContents(ctx context.Context, request operations.GetDi
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5313,8 +5547,9 @@ func (s *SDK) GetDirectoryContents(ctx context.Context, request operations.GetDi
 	return res, nil
 }
 
+// GetDisplayPreferences - Get Display Preferences.
 func (s *SDK) GetDisplayPreferences(ctx context.Context, request operations.GetDisplayPreferencesRequest) (*operations.GetDisplayPreferencesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/DisplayPreferences/{displayPreferencesId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -5324,7 +5559,7 @@ func (s *SDK) GetDisplayPreferences(ctx context.Context, request operations.GetD
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5370,8 +5605,9 @@ func (s *SDK) GetDisplayPreferences(ctx context.Context, request operations.GetD
 	return res, nil
 }
 
+// GetDownload - Downloads item media.
 func (s *SDK) GetDownload(ctx context.Context, request operations.GetDownloadRequest) (*operations.GetDownloadResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Items/{itemId}/Download", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -5379,7 +5615,7 @@ func (s *SDK) GetDownload(ctx context.Context, request operations.GetDownloadReq
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5442,8 +5678,9 @@ func (s *SDK) GetDownload(ctx context.Context, request operations.GetDownloadReq
 	return res, nil
 }
 
+// GetDrives - Gets available drives from the server's file system.
 func (s *SDK) GetDrives(ctx context.Context, request operations.GetDrivesRequest) (*operations.GetDrivesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/Environment/Drives"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -5451,7 +5688,7 @@ func (s *SDK) GetDrives(ctx context.Context, request operations.GetDrivesRequest
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5497,8 +5734,9 @@ func (s *SDK) GetDrives(ctx context.Context, request operations.GetDrivesRequest
 	return res, nil
 }
 
+// GetEndpointInfo - Gets information about the request endpoint.
 func (s *SDK) GetEndpointInfo(ctx context.Context, request operations.GetEndpointInfoRequest) (*operations.GetEndpointInfoResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/System/Endpoint"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -5506,7 +5744,7 @@ func (s *SDK) GetEndpointInfo(ctx context.Context, request operations.GetEndpoin
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5552,8 +5790,9 @@ func (s *SDK) GetEndpointInfo(ctx context.Context, request operations.GetEndpoin
 	return res, nil
 }
 
+// GetEpisodes - Gets episodes for a tv season.
 func (s *SDK) GetEpisodes(ctx context.Context, request operations.GetEpisodesRequest) (*operations.GetEpisodesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Shows/{seriesId}/Episodes", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -5563,7 +5802,7 @@ func (s *SDK) GetEpisodes(ctx context.Context, request operations.GetEpisodesReq
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5633,8 +5872,9 @@ func (s *SDK) GetEpisodes(ctx context.Context, request operations.GetEpisodesReq
 	return res, nil
 }
 
+// GetExternalIDInfos - Get the item's external id info.
 func (s *SDK) GetExternalIDInfos(ctx context.Context, request operations.GetExternalIDInfosRequest) (*operations.GetExternalIDInfosResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Items/{itemId}/ExternalIdInfos", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -5642,7 +5882,7 @@ func (s *SDK) GetExternalIDInfos(ctx context.Context, request operations.GetExte
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5712,8 +5952,9 @@ func (s *SDK) GetExternalIDInfos(ctx context.Context, request operations.GetExte
 	return res, nil
 }
 
+// GetFallbackFont - Gets a fallback font file.
 func (s *SDK) GetFallbackFont(ctx context.Context, request operations.GetFallbackFontRequest) (*operations.GetFallbackFontResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/FallbackFont/Fonts/{name}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -5721,7 +5962,7 @@ func (s *SDK) GetFallbackFont(ctx context.Context, request operations.GetFallbac
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5753,8 +5994,9 @@ func (s *SDK) GetFallbackFont(ctx context.Context, request operations.GetFallbac
 	return res, nil
 }
 
+// GetFallbackFontList - Gets a list of available fallback font files.
 func (s *SDK) GetFallbackFontList(ctx context.Context, request operations.GetFallbackFontListRequest) (*operations.GetFallbackFontListResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/FallbackFont/Fonts"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -5762,7 +6004,7 @@ func (s *SDK) GetFallbackFontList(ctx context.Context, request operations.GetFal
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5808,8 +6050,9 @@ func (s *SDK) GetFallbackFontList(ctx context.Context, request operations.GetFal
 	return res, nil
 }
 
+// GetFile - Get the original file of an item.
 func (s *SDK) GetFile(ctx context.Context, request operations.GetFileRequest) (*operations.GetFileResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Items/{itemId}/File", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -5817,7 +6060,7 @@ func (s *SDK) GetFile(ctx context.Context, request operations.GetFileRequest) (*
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5880,8 +6123,9 @@ func (s *SDK) GetFile(ctx context.Context, request operations.GetFileRequest) (*
 	return res, nil
 }
 
+// GetFirstUser - Gets the first user.
 func (s *SDK) GetFirstUser(ctx context.Context, request operations.GetFirstUserRequest) (*operations.GetFirstUserResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/Startup/User"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -5889,7 +6133,7 @@ func (s *SDK) GetFirstUser(ctx context.Context, request operations.GetFirstUserR
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5935,8 +6179,9 @@ func (s *SDK) GetFirstUser(ctx context.Context, request operations.GetFirstUserR
 	return res, nil
 }
 
+// GetFirstUser2 - Gets the first user.
 func (s *SDK) GetFirstUser2(ctx context.Context, request operations.GetFirstUser2Request) (*operations.GetFirstUser2Response, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/Startup/FirstUser"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -5944,7 +6189,7 @@ func (s *SDK) GetFirstUser2(ctx context.Context, request operations.GetFirstUser
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5990,8 +6235,9 @@ func (s *SDK) GetFirstUser2(ctx context.Context, request operations.GetFirstUser
 	return res, nil
 }
 
+// GetGeneralImage - Get General Image.
 func (s *SDK) GetGeneralImage(ctx context.Context, request operations.GetGeneralImageRequest) (*operations.GetGeneralImageResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Images/General/{name}/{type}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -5999,7 +6245,7 @@ func (s *SDK) GetGeneralImage(ctx context.Context, request operations.GetGeneral
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6060,8 +6306,9 @@ func (s *SDK) GetGeneralImage(ctx context.Context, request operations.GetGeneral
 	return res, nil
 }
 
+// GetGeneralImages - Get all general images.
 func (s *SDK) GetGeneralImages(ctx context.Context, request operations.GetGeneralImagesRequest) (*operations.GetGeneralImagesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/Images/General"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -6069,7 +6316,7 @@ func (s *SDK) GetGeneralImages(ctx context.Context, request operations.GetGenera
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6115,8 +6362,9 @@ func (s *SDK) GetGeneralImages(ctx context.Context, request operations.GetGenera
 	return res, nil
 }
 
+// GetGenre - Gets a genre, by name.
 func (s *SDK) GetGenre(ctx context.Context, request operations.GetGenreRequest) (*operations.GetGenreResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Genres/{genreName}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -6126,7 +6374,7 @@ func (s *SDK) GetGenre(ctx context.Context, request operations.GetGenreRequest) 
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6172,8 +6420,9 @@ func (s *SDK) GetGenre(ctx context.Context, request operations.GetGenreRequest) 
 	return res, nil
 }
 
+// GetGenreImage - Get genre image by name.
 func (s *SDK) GetGenreImage(ctx context.Context, request operations.GetGenreImageRequest) (*operations.GetGenreImageResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Genres/{name}/Images/{imageType}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -6183,7 +6432,7 @@ func (s *SDK) GetGenreImage(ctx context.Context, request operations.GetGenreImag
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6237,8 +6486,9 @@ func (s *SDK) GetGenreImage(ctx context.Context, request operations.GetGenreImag
 	return res, nil
 }
 
+// GetGenreImageByIndex - Get genre image by name.
 func (s *SDK) GetGenreImageByIndex(ctx context.Context, request operations.GetGenreImageByIndexRequest) (*operations.GetGenreImageByIndexResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Genres/{name}/Images/{imageType}/{imageIndex}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -6248,7 +6498,7 @@ func (s *SDK) GetGenreImageByIndex(ctx context.Context, request operations.GetGe
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6302,8 +6552,9 @@ func (s *SDK) GetGenreImageByIndex(ctx context.Context, request operations.GetGe
 	return res, nil
 }
 
+// GetGenres - Gets all genres from a given item, folder, or the entire library.
 func (s *SDK) GetGenres(ctx context.Context, request operations.GetGenresRequest) (*operations.GetGenresResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/Genres"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -6313,7 +6564,7 @@ func (s *SDK) GetGenres(ctx context.Context, request operations.GetGenresRequest
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6359,8 +6610,9 @@ func (s *SDK) GetGenres(ctx context.Context, request operations.GetGenresRequest
 	return res, nil
 }
 
+// GetGroupingOptions - Get user view grouping options.
 func (s *SDK) GetGroupingOptions(ctx context.Context, request operations.GetGroupingOptionsRequest) (*operations.GetGroupingOptionsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Users/{userId}/GroupingOptions", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -6368,7 +6620,7 @@ func (s *SDK) GetGroupingOptions(ctx context.Context, request operations.GetGrou
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6436,8 +6688,9 @@ func (s *SDK) GetGroupingOptions(ctx context.Context, request operations.GetGrou
 	return res, nil
 }
 
+// GetGuideInfo - Get guid info.
 func (s *SDK) GetGuideInfo(ctx context.Context, request operations.GetGuideInfoRequest) (*operations.GetGuideInfoResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/LiveTv/GuideInfo"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -6445,7 +6698,7 @@ func (s *SDK) GetGuideInfo(ctx context.Context, request operations.GetGuideInfoR
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6491,8 +6744,9 @@ func (s *SDK) GetGuideInfo(ctx context.Context, request operations.GetGuideInfoR
 	return res, nil
 }
 
+// GetHlsAudioSegment - Gets a video stream using HTTP live streaming.
 func (s *SDK) GetHlsAudioSegment(ctx context.Context, request operations.GetHlsAudioSegmentRequest) (*operations.GetHlsAudioSegmentResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Audio/{itemId}/hls1/{playlistId}/{segmentId}.{container}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -6502,7 +6756,7 @@ func (s *SDK) GetHlsAudioSegment(ctx context.Context, request operations.GetHlsA
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6534,8 +6788,9 @@ func (s *SDK) GetHlsAudioSegment(ctx context.Context, request operations.GetHlsA
 	return res, nil
 }
 
+// GetHlsAudioSegmentLegacyAac - Gets the specified audio segment for an audio item.
 func (s *SDK) GetHlsAudioSegmentLegacyAac(ctx context.Context, request operations.GetHlsAudioSegmentLegacyAacRequest) (*operations.GetHlsAudioSegmentLegacyAacResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Audio/{itemId}/hls/{segmentId}/stream.aac", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -6543,7 +6798,7 @@ func (s *SDK) GetHlsAudioSegmentLegacyAac(ctx context.Context, request operation
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6573,8 +6828,9 @@ func (s *SDK) GetHlsAudioSegmentLegacyAac(ctx context.Context, request operation
 	return res, nil
 }
 
+// GetHlsAudioSegmentLegacyMp3 - Gets the specified audio segment for an audio item.
 func (s *SDK) GetHlsAudioSegmentLegacyMp3(ctx context.Context, request operations.GetHlsAudioSegmentLegacyMp3Request) (*operations.GetHlsAudioSegmentLegacyMp3Response, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Audio/{itemId}/hls/{segmentId}/stream.mp3", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -6582,7 +6838,7 @@ func (s *SDK) GetHlsAudioSegmentLegacyMp3(ctx context.Context, request operation
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6612,8 +6868,9 @@ func (s *SDK) GetHlsAudioSegmentLegacyMp3(ctx context.Context, request operation
 	return res, nil
 }
 
+// GetHlsPlaylistLegacy - Gets a hls video playlist.
 func (s *SDK) GetHlsPlaylistLegacy(ctx context.Context, request operations.GetHlsPlaylistLegacyRequest) (*operations.GetHlsPlaylistLegacyResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Videos/{itemId}/hls/{playlistId}/stream.m3u8", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -6621,7 +6878,7 @@ func (s *SDK) GetHlsPlaylistLegacy(ctx context.Context, request operations.GetHl
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6653,8 +6910,9 @@ func (s *SDK) GetHlsPlaylistLegacy(ctx context.Context, request operations.GetHl
 	return res, nil
 }
 
+// GetHlsVideoSegment - Gets a video stream using HTTP live streaming.
 func (s *SDK) GetHlsVideoSegment(ctx context.Context, request operations.GetHlsVideoSegmentRequest) (*operations.GetHlsVideoSegmentResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Videos/{itemId}/hls1/{playlistId}/{segmentId}.{container}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -6664,7 +6922,7 @@ func (s *SDK) GetHlsVideoSegment(ctx context.Context, request operations.GetHlsV
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6696,8 +6954,9 @@ func (s *SDK) GetHlsVideoSegment(ctx context.Context, request operations.GetHlsV
 	return res, nil
 }
 
+// GetHlsVideoSegmentLegacy - Gets a hls video segment.
 func (s *SDK) GetHlsVideoSegmentLegacy(ctx context.Context, request operations.GetHlsVideoSegmentLegacyRequest) (*operations.GetHlsVideoSegmentLegacyResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Videos/{itemId}/hls/{playlistId}/{segmentId}.{segmentContainer}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -6705,7 +6964,7 @@ func (s *SDK) GetHlsVideoSegmentLegacy(ctx context.Context, request operations.G
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6759,8 +7018,9 @@ func (s *SDK) GetHlsVideoSegmentLegacy(ctx context.Context, request operations.G
 	return res, nil
 }
 
+// GetIcon - Gets a server icon.
 func (s *SDK) GetIcon(ctx context.Context, request operations.GetIconRequest) (*operations.GetIconResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Dlna/icons/{fileName}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -6768,7 +7028,7 @@ func (s *SDK) GetIcon(ctx context.Context, request operations.GetIconRequest) (*
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6823,8 +7083,9 @@ func (s *SDK) GetIcon(ctx context.Context, request operations.GetIconRequest) (*
 	return res, nil
 }
 
+// GetIconID - Gets a server icon.
 func (s *SDK) GetIconID(ctx context.Context, request operations.GetIconIDRequest) (*operations.GetIconIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Dlna/{serverId}/icons/{fileName}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -6832,7 +7093,7 @@ func (s *SDK) GetIconID(ctx context.Context, request operations.GetIconIDRequest
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6887,8 +7148,9 @@ func (s *SDK) GetIconID(ctx context.Context, request operations.GetIconIDRequest
 	return res, nil
 }
 
+// GetInstantMixFromAlbum - Creates an instant playlist based on a given song.
 func (s *SDK) GetInstantMixFromAlbum(ctx context.Context, request operations.GetInstantMixFromAlbumRequest) (*operations.GetInstantMixFromAlbumResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Albums/{id}/InstantMix", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -6898,7 +7160,7 @@ func (s *SDK) GetInstantMixFromAlbum(ctx context.Context, request operations.Get
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6944,8 +7206,9 @@ func (s *SDK) GetInstantMixFromAlbum(ctx context.Context, request operations.Get
 	return res, nil
 }
 
+// GetInstantMixFromArtists - Creates an instant playlist based on a given song.
 func (s *SDK) GetInstantMixFromArtists(ctx context.Context, request operations.GetInstantMixFromArtistsRequest) (*operations.GetInstantMixFromArtistsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Artists/{id}/InstantMix", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -6955,7 +7218,7 @@ func (s *SDK) GetInstantMixFromArtists(ctx context.Context, request operations.G
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -7001,8 +7264,9 @@ func (s *SDK) GetInstantMixFromArtists(ctx context.Context, request operations.G
 	return res, nil
 }
 
+// GetInstantMixFromItem - Creates an instant playlist based on a given song.
 func (s *SDK) GetInstantMixFromItem(ctx context.Context, request operations.GetInstantMixFromItemRequest) (*operations.GetInstantMixFromItemResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Items/{id}/InstantMix", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -7012,7 +7276,7 @@ func (s *SDK) GetInstantMixFromItem(ctx context.Context, request operations.GetI
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -7058,8 +7322,9 @@ func (s *SDK) GetInstantMixFromItem(ctx context.Context, request operations.GetI
 	return res, nil
 }
 
+// GetInstantMixFromMusicGenre - Creates an instant playlist based on a given song.
 func (s *SDK) GetInstantMixFromMusicGenre(ctx context.Context, request operations.GetInstantMixFromMusicGenreRequest) (*operations.GetInstantMixFromMusicGenreResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/MusicGenres/{name}/InstantMix", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -7069,7 +7334,7 @@ func (s *SDK) GetInstantMixFromMusicGenre(ctx context.Context, request operation
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -7115,8 +7380,9 @@ func (s *SDK) GetInstantMixFromMusicGenre(ctx context.Context, request operation
 	return res, nil
 }
 
+// GetInstantMixFromMusicGenres - Creates an instant playlist based on a given song.
 func (s *SDK) GetInstantMixFromMusicGenres(ctx context.Context, request operations.GetInstantMixFromMusicGenresRequest) (*operations.GetInstantMixFromMusicGenresResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/MusicGenres/{id}/InstantMix", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -7126,7 +7392,7 @@ func (s *SDK) GetInstantMixFromMusicGenres(ctx context.Context, request operatio
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -7172,8 +7438,9 @@ func (s *SDK) GetInstantMixFromMusicGenres(ctx context.Context, request operatio
 	return res, nil
 }
 
+// GetInstantMixFromPlaylist - Creates an instant playlist based on a given song.
 func (s *SDK) GetInstantMixFromPlaylist(ctx context.Context, request operations.GetInstantMixFromPlaylistRequest) (*operations.GetInstantMixFromPlaylistResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Playlists/{id}/InstantMix", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -7183,7 +7450,7 @@ func (s *SDK) GetInstantMixFromPlaylist(ctx context.Context, request operations.
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -7229,8 +7496,9 @@ func (s *SDK) GetInstantMixFromPlaylist(ctx context.Context, request operations.
 	return res, nil
 }
 
+// GetInstantMixFromSong - Creates an instant playlist based on a given song.
 func (s *SDK) GetInstantMixFromSong(ctx context.Context, request operations.GetInstantMixFromSongRequest) (*operations.GetInstantMixFromSongResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Songs/{id}/InstantMix", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -7240,7 +7508,7 @@ func (s *SDK) GetInstantMixFromSong(ctx context.Context, request operations.GetI
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -7286,8 +7554,9 @@ func (s *SDK) GetInstantMixFromSong(ctx context.Context, request operations.GetI
 	return res, nil
 }
 
+// GetIntros - Gets intros to play before the main media item plays.
 func (s *SDK) GetIntros(ctx context.Context, request operations.GetIntrosRequest) (*operations.GetIntrosResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Users/{userId}/Items/{itemId}/Intros", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -7295,7 +7564,7 @@ func (s *SDK) GetIntros(ctx context.Context, request operations.GetIntrosRequest
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -7341,8 +7610,9 @@ func (s *SDK) GetIntros(ctx context.Context, request operations.GetIntrosRequest
 	return res, nil
 }
 
+// GetItem - Gets an item from a user's library.
 func (s *SDK) GetItem(ctx context.Context, request operations.GetItemRequest) (*operations.GetItemResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Users/{userId}/Items/{itemId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -7350,7 +7620,7 @@ func (s *SDK) GetItem(ctx context.Context, request operations.GetItemRequest) (*
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -7396,8 +7666,9 @@ func (s *SDK) GetItem(ctx context.Context, request operations.GetItemRequest) (*
 	return res, nil
 }
 
+// GetItemCounts - Get item counts.
 func (s *SDK) GetItemCounts(ctx context.Context, request operations.GetItemCountsRequest) (*operations.GetItemCountsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/Items/Counts"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -7407,7 +7678,7 @@ func (s *SDK) GetItemCounts(ctx context.Context, request operations.GetItemCount
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -7453,8 +7724,9 @@ func (s *SDK) GetItemCounts(ctx context.Context, request operations.GetItemCount
 	return res, nil
 }
 
+// GetItemImage - Gets the item's image.
 func (s *SDK) GetItemImage(ctx context.Context, request operations.GetItemImageRequest) (*operations.GetItemImageResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Items/{itemId}/Images/{imageType}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -7464,7 +7736,7 @@ func (s *SDK) GetItemImage(ctx context.Context, request operations.GetItemImageR
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -7518,8 +7790,9 @@ func (s *SDK) GetItemImage(ctx context.Context, request operations.GetItemImageR
 	return res, nil
 }
 
+// GetItemImage2 - Gets the item's image.
 func (s *SDK) GetItemImage2(ctx context.Context, request operations.GetItemImage2Request) (*operations.GetItemImage2Response, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Items/{itemId}/Images/{imageType}/{imageIndex}/{tag}/{format}/{maxWidth}/{maxHeight}/{percentPlayed}/{unplayedCount}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -7529,7 +7802,7 @@ func (s *SDK) GetItemImage2(ctx context.Context, request operations.GetItemImage
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -7583,8 +7856,9 @@ func (s *SDK) GetItemImage2(ctx context.Context, request operations.GetItemImage
 	return res, nil
 }
 
+// GetItemImageByIndex - Gets the item's image.
 func (s *SDK) GetItemImageByIndex(ctx context.Context, request operations.GetItemImageByIndexRequest) (*operations.GetItemImageByIndexResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Items/{itemId}/Images/{imageType}/{imageIndex}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -7594,7 +7868,7 @@ func (s *SDK) GetItemImageByIndex(ctx context.Context, request operations.GetIte
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -7648,8 +7922,9 @@ func (s *SDK) GetItemImageByIndex(ctx context.Context, request operations.GetIte
 	return res, nil
 }
 
+// GetItemImageInfos - Get item image infos.
 func (s *SDK) GetItemImageInfos(ctx context.Context, request operations.GetItemImageInfosRequest) (*operations.GetItemImageInfosResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Items/{itemId}/Images", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -7657,7 +7932,7 @@ func (s *SDK) GetItemImageInfos(ctx context.Context, request operations.GetItemI
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -7727,8 +8002,9 @@ func (s *SDK) GetItemImageInfos(ctx context.Context, request operations.GetItemI
 	return res, nil
 }
 
+// GetItems - Gets items based on a query.
 func (s *SDK) GetItems(ctx context.Context, request operations.GetItemsRequest) (*operations.GetItemsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/Items"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -7738,7 +8014,7 @@ func (s *SDK) GetItems(ctx context.Context, request operations.GetItemsRequest) 
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -7784,8 +8060,9 @@ func (s *SDK) GetItems(ctx context.Context, request operations.GetItemsRequest) 
 	return res, nil
 }
 
+// GetItemsByUserID - Gets items based on a query.
 func (s *SDK) GetItemsByUserID(ctx context.Context, request operations.GetItemsByUserIDRequest) (*operations.GetItemsByUserIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Users/{userId}/Items", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -7795,7 +8072,7 @@ func (s *SDK) GetItemsByUserID(ctx context.Context, request operations.GetItemsB
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -7841,8 +8118,9 @@ func (s *SDK) GetItemsByUserID(ctx context.Context, request operations.GetItemsB
 	return res, nil
 }
 
+// GetKeys - Get all keys.
 func (s *SDK) GetKeys(ctx context.Context, request operations.GetKeysRequest) (*operations.GetKeysResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/Auth/Keys"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -7850,7 +8128,7 @@ func (s *SDK) GetKeys(ctx context.Context, request operations.GetKeysRequest) (*
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -7896,8 +8174,9 @@ func (s *SDK) GetKeys(ctx context.Context, request operations.GetKeysRequest) (*
 	return res, nil
 }
 
+// GetLatestChannelItems - Gets latest channel items.
 func (s *SDK) GetLatestChannelItems(ctx context.Context, request operations.GetLatestChannelItemsRequest) (*operations.GetLatestChannelItemsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/Channels/Items/Latest"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -7907,7 +8186,7 @@ func (s *SDK) GetLatestChannelItems(ctx context.Context, request operations.GetL
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -7953,8 +8232,9 @@ func (s *SDK) GetLatestChannelItems(ctx context.Context, request operations.GetL
 	return res, nil
 }
 
+// GetLatestMedia - Gets latest media.
 func (s *SDK) GetLatestMedia(ctx context.Context, request operations.GetLatestMediaRequest) (*operations.GetLatestMediaResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Users/{userId}/Items/Latest", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -7964,7 +8244,7 @@ func (s *SDK) GetLatestMedia(ctx context.Context, request operations.GetLatestMe
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -8010,8 +8290,9 @@ func (s *SDK) GetLatestMedia(ctx context.Context, request operations.GetLatestMe
 	return res, nil
 }
 
+// GetLibraryOptionsInfo - Gets the library options info.
 func (s *SDK) GetLibraryOptionsInfo(ctx context.Context, request operations.GetLibraryOptionsInfoRequest) (*operations.GetLibraryOptionsInfoResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/Libraries/AvailableOptions"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -8021,7 +8302,7 @@ func (s *SDK) GetLibraryOptionsInfo(ctx context.Context, request operations.GetL
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -8067,8 +8348,9 @@ func (s *SDK) GetLibraryOptionsInfo(ctx context.Context, request operations.GetL
 	return res, nil
 }
 
+// GetLineups - Gets available lineups.
 func (s *SDK) GetLineups(ctx context.Context, request operations.GetLineupsRequest) (*operations.GetLineupsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/LiveTv/ListingProviders/Lineups"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -8078,7 +8360,7 @@ func (s *SDK) GetLineups(ctx context.Context, request operations.GetLineupsReque
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -8124,8 +8406,9 @@ func (s *SDK) GetLineups(ctx context.Context, request operations.GetLineupsReque
 	return res, nil
 }
 
+// GetLiveHlsStream - Gets a hls live stream.
 func (s *SDK) GetLiveHlsStream(ctx context.Context, request operations.GetLiveHlsStreamRequest) (*operations.GetLiveHlsStreamResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Videos/{itemId}/live.m3u8", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -8135,7 +8418,7 @@ func (s *SDK) GetLiveHlsStream(ctx context.Context, request operations.GetLiveHl
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -8167,8 +8450,9 @@ func (s *SDK) GetLiveHlsStream(ctx context.Context, request operations.GetLiveHl
 	return res, nil
 }
 
+// GetLiveRecordingFile - Gets a live tv recording stream.
 func (s *SDK) GetLiveRecordingFile(ctx context.Context, request operations.GetLiveRecordingFileRequest) (*operations.GetLiveRecordingFileResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/LiveTv/LiveRecordings/{recordingId}/stream", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -8176,7 +8460,7 @@ func (s *SDK) GetLiveRecordingFile(ctx context.Context, request operations.GetLi
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -8230,8 +8514,9 @@ func (s *SDK) GetLiveRecordingFile(ctx context.Context, request operations.GetLi
 	return res, nil
 }
 
+// GetLiveStreamFile - Gets a live tv channel stream.
 func (s *SDK) GetLiveStreamFile(ctx context.Context, request operations.GetLiveStreamFileRequest) (*operations.GetLiveStreamFileResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/LiveTv/LiveStreamFiles/{streamId}/stream.{container}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -8239,7 +8524,7 @@ func (s *SDK) GetLiveStreamFile(ctx context.Context, request operations.GetLiveS
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -8293,8 +8578,9 @@ func (s *SDK) GetLiveStreamFile(ctx context.Context, request operations.GetLiveS
 	return res, nil
 }
 
+// GetLiveTvChannels - Gets available live tv channels.
 func (s *SDK) GetLiveTvChannels(ctx context.Context, request operations.GetLiveTvChannelsRequest) (*operations.GetLiveTvChannelsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/LiveTv/Channels"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -8304,7 +8590,7 @@ func (s *SDK) GetLiveTvChannels(ctx context.Context, request operations.GetLiveT
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -8350,8 +8636,9 @@ func (s *SDK) GetLiveTvChannels(ctx context.Context, request operations.GetLiveT
 	return res, nil
 }
 
+// GetLiveTvInfo - Gets available live tv services.
 func (s *SDK) GetLiveTvInfo(ctx context.Context, request operations.GetLiveTvInfoRequest) (*operations.GetLiveTvInfoResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/LiveTv/Info"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -8359,7 +8646,7 @@ func (s *SDK) GetLiveTvInfo(ctx context.Context, request operations.GetLiveTvInf
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -8405,8 +8692,9 @@ func (s *SDK) GetLiveTvInfo(ctx context.Context, request operations.GetLiveTvInf
 	return res, nil
 }
 
+// GetLiveTvPrograms - Gets available live tv epgs.
 func (s *SDK) GetLiveTvPrograms(ctx context.Context, request operations.GetLiveTvProgramsRequest) (*operations.GetLiveTvProgramsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/LiveTv/Programs"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -8416,7 +8704,7 @@ func (s *SDK) GetLiveTvPrograms(ctx context.Context, request operations.GetLiveT
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -8462,8 +8750,9 @@ func (s *SDK) GetLiveTvPrograms(ctx context.Context, request operations.GetLiveT
 	return res, nil
 }
 
+// GetLocalTrailers - Gets local trailers for an item.
 func (s *SDK) GetLocalTrailers(ctx context.Context, request operations.GetLocalTrailersRequest) (*operations.GetLocalTrailersResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Users/{userId}/Items/{itemId}/LocalTrailers", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -8471,7 +8760,7 @@ func (s *SDK) GetLocalTrailers(ctx context.Context, request operations.GetLocalT
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -8517,8 +8806,9 @@ func (s *SDK) GetLocalTrailers(ctx context.Context, request operations.GetLocalT
 	return res, nil
 }
 
+// GetLocalizationOptions - Gets localization options.
 func (s *SDK) GetLocalizationOptions(ctx context.Context, request operations.GetLocalizationOptionsRequest) (*operations.GetLocalizationOptionsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/Localization/Options"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -8526,7 +8816,7 @@ func (s *SDK) GetLocalizationOptions(ctx context.Context, request operations.Get
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -8572,8 +8862,9 @@ func (s *SDK) GetLocalizationOptions(ctx context.Context, request operations.Get
 	return res, nil
 }
 
+// GetLogEntries - Gets activity log entries.
 func (s *SDK) GetLogEntries(ctx context.Context, request operations.GetLogEntriesRequest) (*operations.GetLogEntriesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/System/ActivityLog/Entries"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -8583,7 +8874,7 @@ func (s *SDK) GetLogEntries(ctx context.Context, request operations.GetLogEntrie
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -8629,8 +8920,9 @@ func (s *SDK) GetLogEntries(ctx context.Context, request operations.GetLogEntrie
 	return res, nil
 }
 
+// GetLogFile - Gets a log file.
 func (s *SDK) GetLogFile(ctx context.Context, request operations.GetLogFileRequest) (*operations.GetLogFileResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/System/Logs/Log"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -8640,7 +8932,7 @@ func (s *SDK) GetLogFile(ctx context.Context, request operations.GetLogFileReque
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -8672,8 +8964,9 @@ func (s *SDK) GetLogFile(ctx context.Context, request operations.GetLogFileReque
 	return res, nil
 }
 
+// GetMasterHlsAudioPlaylist - Gets an audio hls playlist stream.
 func (s *SDK) GetMasterHlsAudioPlaylist(ctx context.Context, request operations.GetMasterHlsAudioPlaylistRequest) (*operations.GetMasterHlsAudioPlaylistResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Audio/{itemId}/master.m3u8", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -8683,7 +8976,7 @@ func (s *SDK) GetMasterHlsAudioPlaylist(ctx context.Context, request operations.
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -8715,8 +9008,9 @@ func (s *SDK) GetMasterHlsAudioPlaylist(ctx context.Context, request operations.
 	return res, nil
 }
 
+// GetMasterHlsVideoPlaylist - Gets a video hls playlist stream.
 func (s *SDK) GetMasterHlsVideoPlaylist(ctx context.Context, request operations.GetMasterHlsVideoPlaylistRequest) (*operations.GetMasterHlsVideoPlaylistResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Videos/{itemId}/master.m3u8", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -8726,7 +9020,7 @@ func (s *SDK) GetMasterHlsVideoPlaylist(ctx context.Context, request operations.
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -8758,8 +9052,9 @@ func (s *SDK) GetMasterHlsVideoPlaylist(ctx context.Context, request operations.
 	return res, nil
 }
 
+// GetMediaFolders - Gets all user media folders.
 func (s *SDK) GetMediaFolders(ctx context.Context, request operations.GetMediaFoldersRequest) (*operations.GetMediaFoldersResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/Library/MediaFolders"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -8769,7 +9064,7 @@ func (s *SDK) GetMediaFolders(ctx context.Context, request operations.GetMediaFo
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -8815,8 +9110,9 @@ func (s *SDK) GetMediaFolders(ctx context.Context, request operations.GetMediaFo
 	return res, nil
 }
 
+// GetMediaInfoImage - Get media info image.
 func (s *SDK) GetMediaInfoImage(ctx context.Context, request operations.GetMediaInfoImageRequest) (*operations.GetMediaInfoImageResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Images/MediaInfo/{theme}/{name}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -8824,7 +9120,7 @@ func (s *SDK) GetMediaInfoImage(ctx context.Context, request operations.GetMedia
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -8885,8 +9181,9 @@ func (s *SDK) GetMediaInfoImage(ctx context.Context, request operations.GetMedia
 	return res, nil
 }
 
+// GetMediaInfoImages - Get all media info images.
 func (s *SDK) GetMediaInfoImages(ctx context.Context, request operations.GetMediaInfoImagesRequest) (*operations.GetMediaInfoImagesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/Images/MediaInfo"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -8894,7 +9191,7 @@ func (s *SDK) GetMediaInfoImages(ctx context.Context, request operations.GetMedi
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -8940,8 +9237,9 @@ func (s *SDK) GetMediaInfoImages(ctx context.Context, request operations.GetMedi
 	return res, nil
 }
 
+// GetMediaReceiverRegistrar - Gets Dlna media receiver registrar xml.
 func (s *SDK) GetMediaReceiverRegistrar(ctx context.Context, request operations.GetMediaReceiverRegistrarRequest) (*operations.GetMediaReceiverRegistrarResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Dlna/{serverId}/MediaReceiverRegistrar", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -8949,7 +9247,7 @@ func (s *SDK) GetMediaReceiverRegistrar(ctx context.Context, request operations.
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -8980,8 +9278,9 @@ func (s *SDK) GetMediaReceiverRegistrar(ctx context.Context, request operations.
 	return res, nil
 }
 
+// GetMediaReceiverRegistrar2 - Gets Dlna media receiver registrar xml.
 func (s *SDK) GetMediaReceiverRegistrar2(ctx context.Context, request operations.GetMediaReceiverRegistrar2Request) (*operations.GetMediaReceiverRegistrar2Response, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Dlna/{serverId}/MediaReceiverRegistrar/MediaReceiverRegistrar", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -8989,7 +9288,7 @@ func (s *SDK) GetMediaReceiverRegistrar2(ctx context.Context, request operations
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -9020,8 +9319,9 @@ func (s *SDK) GetMediaReceiverRegistrar2(ctx context.Context, request operations
 	return res, nil
 }
 
+// GetMediaReceiverRegistrar3 - Gets Dlna media receiver registrar xml.
 func (s *SDK) GetMediaReceiverRegistrar3(ctx context.Context, request operations.GetMediaReceiverRegistrar3Request) (*operations.GetMediaReceiverRegistrar3Response, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Dlna/{serverId}/MediaReceiverRegistrar/MediaReceiverRegistrar.xml", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -9029,7 +9329,7 @@ func (s *SDK) GetMediaReceiverRegistrar3(ctx context.Context, request operations
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -9060,8 +9360,9 @@ func (s *SDK) GetMediaReceiverRegistrar3(ctx context.Context, request operations
 	return res, nil
 }
 
+// GetMetadataEditorInfo - Gets metadata editor info for an item.
 func (s *SDK) GetMetadataEditorInfo(ctx context.Context, request operations.GetMetadataEditorInfoRequest) (*operations.GetMetadataEditorInfoResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Items/{itemId}/MetadataEditor", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -9069,7 +9370,7 @@ func (s *SDK) GetMetadataEditorInfo(ctx context.Context, request operations.GetM
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -9139,8 +9440,9 @@ func (s *SDK) GetMetadataEditorInfo(ctx context.Context, request operations.GetM
 	return res, nil
 }
 
+// GetMovieRecommendations - Gets movie recommendations.
 func (s *SDK) GetMovieRecommendations(ctx context.Context, request operations.GetMovieRecommendationsRequest) (*operations.GetMovieRecommendationsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/Movies/Recommendations"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -9150,7 +9452,7 @@ func (s *SDK) GetMovieRecommendations(ctx context.Context, request operations.Ge
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -9196,8 +9498,9 @@ func (s *SDK) GetMovieRecommendations(ctx context.Context, request operations.Ge
 	return res, nil
 }
 
+// GetMovieRemoteSearchResults - Get movie remote search.
 func (s *SDK) GetMovieRemoteSearchResults(ctx context.Context, request operations.GetMovieRemoteSearchResultsRequest) (*operations.GetMovieRemoteSearchResultsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/Items/RemoteSearch/Movie"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -9215,7 +9518,7 @@ func (s *SDK) GetMovieRemoteSearchResults(ctx context.Context, request operation
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -9261,8 +9564,9 @@ func (s *SDK) GetMovieRemoteSearchResults(ctx context.Context, request operation
 	return res, nil
 }
 
+// GetMusicAlbumRemoteSearchResults - Get music album remote search.
 func (s *SDK) GetMusicAlbumRemoteSearchResults(ctx context.Context, request operations.GetMusicAlbumRemoteSearchResultsRequest) (*operations.GetMusicAlbumRemoteSearchResultsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/Items/RemoteSearch/MusicAlbum"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -9280,7 +9584,7 @@ func (s *SDK) GetMusicAlbumRemoteSearchResults(ctx context.Context, request oper
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -9326,8 +9630,9 @@ func (s *SDK) GetMusicAlbumRemoteSearchResults(ctx context.Context, request oper
 	return res, nil
 }
 
+// GetMusicArtistRemoteSearchResults - Get music artist remote search.
 func (s *SDK) GetMusicArtistRemoteSearchResults(ctx context.Context, request operations.GetMusicArtistRemoteSearchResultsRequest) (*operations.GetMusicArtistRemoteSearchResultsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/Items/RemoteSearch/MusicArtist"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -9345,7 +9650,7 @@ func (s *SDK) GetMusicArtistRemoteSearchResults(ctx context.Context, request ope
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -9391,8 +9696,9 @@ func (s *SDK) GetMusicArtistRemoteSearchResults(ctx context.Context, request ope
 	return res, nil
 }
 
+// GetMusicGenre - Gets a music genre, by name.
 func (s *SDK) GetMusicGenre(ctx context.Context, request operations.GetMusicGenreRequest) (*operations.GetMusicGenreResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/MusicGenres/{genreName}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -9402,7 +9708,7 @@ func (s *SDK) GetMusicGenre(ctx context.Context, request operations.GetMusicGenr
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -9448,8 +9754,9 @@ func (s *SDK) GetMusicGenre(ctx context.Context, request operations.GetMusicGenr
 	return res, nil
 }
 
+// GetMusicGenreImage - Get music genre image by name.
 func (s *SDK) GetMusicGenreImage(ctx context.Context, request operations.GetMusicGenreImageRequest) (*operations.GetMusicGenreImageResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/MusicGenres/{name}/Images/{imageType}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -9459,7 +9766,7 @@ func (s *SDK) GetMusicGenreImage(ctx context.Context, request operations.GetMusi
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -9513,8 +9820,9 @@ func (s *SDK) GetMusicGenreImage(ctx context.Context, request operations.GetMusi
 	return res, nil
 }
 
+// GetMusicGenreImageByIndex - Get music genre image by name.
 func (s *SDK) GetMusicGenreImageByIndex(ctx context.Context, request operations.GetMusicGenreImageByIndexRequest) (*operations.GetMusicGenreImageByIndexResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/MusicGenres/{name}/Images/{imageType}/{imageIndex}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -9524,7 +9832,7 @@ func (s *SDK) GetMusicGenreImageByIndex(ctx context.Context, request operations.
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -9578,8 +9886,9 @@ func (s *SDK) GetMusicGenreImageByIndex(ctx context.Context, request operations.
 	return res, nil
 }
 
+// GetMusicGenres - Gets all music genres from a given item, folder, or the entire library.
 func (s *SDK) GetMusicGenres(ctx context.Context, request operations.GetMusicGenresRequest) (*operations.GetMusicGenresResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/MusicGenres"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -9589,7 +9898,7 @@ func (s *SDK) GetMusicGenres(ctx context.Context, request operations.GetMusicGen
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -9635,8 +9944,9 @@ func (s *SDK) GetMusicGenres(ctx context.Context, request operations.GetMusicGen
 	return res, nil
 }
 
+// GetMusicVideoRemoteSearchResults - Get music video remote search.
 func (s *SDK) GetMusicVideoRemoteSearchResults(ctx context.Context, request operations.GetMusicVideoRemoteSearchResultsRequest) (*operations.GetMusicVideoRemoteSearchResultsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/Items/RemoteSearch/MusicVideo"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -9654,7 +9964,7 @@ func (s *SDK) GetMusicVideoRemoteSearchResults(ctx context.Context, request oper
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -9700,8 +10010,9 @@ func (s *SDK) GetMusicVideoRemoteSearchResults(ctx context.Context, request oper
 	return res, nil
 }
 
+// GetNamedConfiguration - Gets a named configuration.
 func (s *SDK) GetNamedConfiguration(ctx context.Context, request operations.GetNamedConfigurationRequest) (*operations.GetNamedConfigurationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/System/Configuration/{key}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -9709,7 +10020,7 @@ func (s *SDK) GetNamedConfiguration(ctx context.Context, request operations.GetN
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -9741,8 +10052,9 @@ func (s *SDK) GetNamedConfiguration(ctx context.Context, request operations.GetN
 	return res, nil
 }
 
+// GetNetworkShares - Gets network paths.
 func (s *SDK) GetNetworkShares(ctx context.Context, request operations.GetNetworkSharesRequest) (*operations.GetNetworkSharesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/Environment/NetworkShares"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -9750,7 +10062,7 @@ func (s *SDK) GetNetworkShares(ctx context.Context, request operations.GetNetwor
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -9796,8 +10108,9 @@ func (s *SDK) GetNetworkShares(ctx context.Context, request operations.GetNetwor
 	return res, nil
 }
 
+// GetNextUp - Gets a list of next up episodes.
 func (s *SDK) GetNextUp(ctx context.Context, request operations.GetNextUpRequest) (*operations.GetNextUpResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/Shows/NextUp"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -9807,7 +10120,7 @@ func (s *SDK) GetNextUp(ctx context.Context, request operations.GetNextUpRequest
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -9853,8 +10166,9 @@ func (s *SDK) GetNextUp(ctx context.Context, request operations.GetNextUpRequest
 	return res, nil
 }
 
+// GetNotificationServices - Gets notification services.
 func (s *SDK) GetNotificationServices(ctx context.Context, request operations.GetNotificationServicesRequest) (*operations.GetNotificationServicesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/Notifications/Services"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -9862,7 +10176,7 @@ func (s *SDK) GetNotificationServices(ctx context.Context, request operations.Ge
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -9908,8 +10222,9 @@ func (s *SDK) GetNotificationServices(ctx context.Context, request operations.Ge
 	return res, nil
 }
 
+// GetNotificationTypes - Gets notification types.
 func (s *SDK) GetNotificationTypes(ctx context.Context, request operations.GetNotificationTypesRequest) (*operations.GetNotificationTypesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/Notifications/Types"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -9917,7 +10232,7 @@ func (s *SDK) GetNotificationTypes(ctx context.Context, request operations.GetNo
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -9963,8 +10278,9 @@ func (s *SDK) GetNotificationTypes(ctx context.Context, request operations.GetNo
 	return res, nil
 }
 
+// GetNotifications - Gets a user's notifications.
 func (s *SDK) GetNotifications(ctx context.Context, request operations.GetNotificationsRequest) (*operations.GetNotificationsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Notifications/{userId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -9972,7 +10288,7 @@ func (s *SDK) GetNotifications(ctx context.Context, request operations.GetNotifi
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -10018,8 +10334,9 @@ func (s *SDK) GetNotifications(ctx context.Context, request operations.GetNotifi
 	return res, nil
 }
 
+// GetNotificationsSummary - Gets a user's notification summary.
 func (s *SDK) GetNotificationsSummary(ctx context.Context, request operations.GetNotificationsSummaryRequest) (*operations.GetNotificationsSummaryResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Notifications/{userId}/Summary", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -10027,7 +10344,7 @@ func (s *SDK) GetNotificationsSummary(ctx context.Context, request operations.Ge
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -10073,8 +10390,9 @@ func (s *SDK) GetNotificationsSummary(ctx context.Context, request operations.Ge
 	return res, nil
 }
 
+// GetPackageInfo - Gets a package by name or assembly GUID.
 func (s *SDK) GetPackageInfo(ctx context.Context, request operations.GetPackageInfoRequest) (*operations.GetPackageInfoResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Packages/{name}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -10084,7 +10402,7 @@ func (s *SDK) GetPackageInfo(ctx context.Context, request operations.GetPackageI
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -10130,8 +10448,9 @@ func (s *SDK) GetPackageInfo(ctx context.Context, request operations.GetPackageI
 	return res, nil
 }
 
+// GetPackages - Gets available packages.
 func (s *SDK) GetPackages(ctx context.Context, request operations.GetPackagesRequest) (*operations.GetPackagesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/Packages"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -10139,7 +10458,7 @@ func (s *SDK) GetPackages(ctx context.Context, request operations.GetPackagesReq
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -10185,8 +10504,9 @@ func (s *SDK) GetPackages(ctx context.Context, request operations.GetPackagesReq
 	return res, nil
 }
 
+// GetParentPath - Gets the parent path of a given path.
 func (s *SDK) GetParentPath(ctx context.Context, request operations.GetParentPathRequest) (*operations.GetParentPathResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/Environment/ParentPath"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -10196,7 +10516,7 @@ func (s *SDK) GetParentPath(ctx context.Context, request operations.GetParentPat
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -10245,8 +10565,9 @@ func (s *SDK) GetParentPath(ctx context.Context, request operations.GetParentPat
 	return res, nil
 }
 
+// GetParentalRatings - Gets known parental ratings.
 func (s *SDK) GetParentalRatings(ctx context.Context, request operations.GetParentalRatingsRequest) (*operations.GetParentalRatingsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/Localization/ParentalRatings"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -10254,7 +10575,7 @@ func (s *SDK) GetParentalRatings(ctx context.Context, request operations.GetPare
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -10300,8 +10621,9 @@ func (s *SDK) GetParentalRatings(ctx context.Context, request operations.GetPare
 	return res, nil
 }
 
+// GetPasswordResetProviders - Get all password reset providers.
 func (s *SDK) GetPasswordResetProviders(ctx context.Context, request operations.GetPasswordResetProvidersRequest) (*operations.GetPasswordResetProvidersResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/Auth/PasswordResetProviders"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -10309,7 +10631,7 @@ func (s *SDK) GetPasswordResetProviders(ctx context.Context, request operations.
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -10355,8 +10677,9 @@ func (s *SDK) GetPasswordResetProviders(ctx context.Context, request operations.
 	return res, nil
 }
 
+// GetPerson - Get person by name.
 func (s *SDK) GetPerson(ctx context.Context, request operations.GetPersonRequest) (*operations.GetPersonResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Persons/{name}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -10366,7 +10689,7 @@ func (s *SDK) GetPerson(ctx context.Context, request operations.GetPersonRequest
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -10436,8 +10759,9 @@ func (s *SDK) GetPerson(ctx context.Context, request operations.GetPersonRequest
 	return res, nil
 }
 
+// GetPersonImage - Get person image by name.
 func (s *SDK) GetPersonImage(ctx context.Context, request operations.GetPersonImageRequest) (*operations.GetPersonImageResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Persons/{name}/Images/{imageType}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -10447,7 +10771,7 @@ func (s *SDK) GetPersonImage(ctx context.Context, request operations.GetPersonIm
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -10501,8 +10825,9 @@ func (s *SDK) GetPersonImage(ctx context.Context, request operations.GetPersonIm
 	return res, nil
 }
 
+// GetPersonImageByIndex - Get person image by name.
 func (s *SDK) GetPersonImageByIndex(ctx context.Context, request operations.GetPersonImageByIndexRequest) (*operations.GetPersonImageByIndexResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Persons/{name}/Images/{imageType}/{imageIndex}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -10512,7 +10837,7 @@ func (s *SDK) GetPersonImageByIndex(ctx context.Context, request operations.GetP
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -10566,8 +10891,9 @@ func (s *SDK) GetPersonImageByIndex(ctx context.Context, request operations.GetP
 	return res, nil
 }
 
+// GetPersonRemoteSearchResults - Get person remote search.
 func (s *SDK) GetPersonRemoteSearchResults(ctx context.Context, request operations.GetPersonRemoteSearchResultsRequest) (*operations.GetPersonRemoteSearchResultsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/Items/RemoteSearch/Person"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -10585,7 +10911,7 @@ func (s *SDK) GetPersonRemoteSearchResults(ctx context.Context, request operatio
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -10631,8 +10957,9 @@ func (s *SDK) GetPersonRemoteSearchResults(ctx context.Context, request operatio
 	return res, nil
 }
 
+// GetPersons - Gets all persons.
 func (s *SDK) GetPersons(ctx context.Context, request operations.GetPersonsRequest) (*operations.GetPersonsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/Persons"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -10642,7 +10969,7 @@ func (s *SDK) GetPersons(ctx context.Context, request operations.GetPersonsReque
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -10688,8 +11015,9 @@ func (s *SDK) GetPersons(ctx context.Context, request operations.GetPersonsReque
 	return res, nil
 }
 
+// GetPhysicalPaths - Gets a list of physical paths from virtual folders.
 func (s *SDK) GetPhysicalPaths(ctx context.Context, request operations.GetPhysicalPathsRequest) (*operations.GetPhysicalPathsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/Library/PhysicalPaths"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -10697,7 +11025,7 @@ func (s *SDK) GetPhysicalPaths(ctx context.Context, request operations.GetPhysic
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -10743,8 +11071,9 @@ func (s *SDK) GetPhysicalPaths(ctx context.Context, request operations.GetPhysic
 	return res, nil
 }
 
+// GetPingSystem - Pings the system.
 func (s *SDK) GetPingSystem(ctx context.Context) (*operations.GetPingSystemResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/System/Ping"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -10752,7 +11081,7 @@ func (s *SDK) GetPingSystem(ctx context.Context) (*operations.GetPingSystemRespo
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -10799,8 +11128,9 @@ func (s *SDK) GetPingSystem(ctx context.Context) (*operations.GetPingSystemRespo
 	return res, nil
 }
 
+// GetPlaybackInfo - Gets live playback media info for an item.
 func (s *SDK) GetPlaybackInfo(ctx context.Context, request operations.GetPlaybackInfoRequest) (*operations.GetPlaybackInfoResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Items/{itemId}/PlaybackInfo", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -10810,7 +11140,7 @@ func (s *SDK) GetPlaybackInfo(ctx context.Context, request operations.GetPlaybac
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -10856,8 +11186,9 @@ func (s *SDK) GetPlaybackInfo(ctx context.Context, request operations.GetPlaybac
 	return res, nil
 }
 
+// GetPlaylistItems - Gets the original items of a playlist.
 func (s *SDK) GetPlaylistItems(ctx context.Context, request operations.GetPlaylistItemsRequest) (*operations.GetPlaylistItemsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Playlists/{playlistId}/Items", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -10867,7 +11198,7 @@ func (s *SDK) GetPlaylistItems(ctx context.Context, request operations.GetPlayli
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -10914,8 +11245,9 @@ func (s *SDK) GetPlaylistItems(ctx context.Context, request operations.GetPlayli
 	return res, nil
 }
 
+// GetPluginConfiguration - Gets plugin configuration.
 func (s *SDK) GetPluginConfiguration(ctx context.Context, request operations.GetPluginConfigurationRequest) (*operations.GetPluginConfigurationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Plugins/{pluginId}/Configuration", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -10923,7 +11255,7 @@ func (s *SDK) GetPluginConfiguration(ctx context.Context, request operations.Get
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -10993,8 +11325,75 @@ func (s *SDK) GetPluginConfiguration(ctx context.Context, request operations.Get
 	return res, nil
 }
 
+// GetPluginImage - Gets a plugin's image.
+func (s *SDK) GetPluginImage(ctx context.Context, request operations.GetPluginImageRequest) (*operations.GetPluginImageResponse, error) {
+	baseURL := s._serverURL
+	url := utils.GenerateURL(ctx, baseURL, "/Plugins/{pluginId}/{version}/Image", request.PathParams)
+
+	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
+	if err != nil {
+		return nil, fmt.Errorf("error creating request: %w", err)
+	}
+
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
+
+	httpRes, err := client.Do(req)
+	if err != nil {
+		return nil, fmt.Errorf("error sending request: %w", err)
+	}
+	defer httpRes.Body.Close()
+
+	contentType := httpRes.Header.Get("Content-Type")
+
+	res := &operations.GetPluginImageResponse{
+		StatusCode:  int64(httpRes.StatusCode),
+		ContentType: contentType,
+	}
+	switch {
+	case httpRes.StatusCode == 200:
+		switch {
+		case utils.MatchContentType(contentType, `image/*`):
+			out, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
+			}
+
+			res.GetPluginImage200ImageWildcardBinaryString = out
+		}
+	case httpRes.StatusCode == 401:
+	case httpRes.StatusCode == 403:
+	case httpRes.StatusCode == 404:
+		switch {
+		case utils.MatchContentType(contentType, `application/json`):
+			var out map[string]interface{}
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
+				return nil, err
+			}
+
+			res.ProblemDetails = out
+		case utils.MatchContentType(contentType, `application/json; profile="CamelCase"`):
+			var out map[string]interface{}
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
+				return nil, err
+			}
+
+			res.ProblemDetails = out
+		case utils.MatchContentType(contentType, `application/json; profile="PascalCase"`):
+			var out map[string]interface{}
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
+				return nil, err
+			}
+
+			res.ProblemDetails = out
+		}
+	}
+
+	return res, nil
+}
+
+// GetPluginManifest - Gets a plugin's manifest.
 func (s *SDK) GetPluginManifest(ctx context.Context, request operations.GetPluginManifestRequest) (*operations.GetPluginManifestResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Plugins/{pluginId}/Manifest", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -11002,7 +11401,7 @@ func (s *SDK) GetPluginManifest(ctx context.Context, request operations.GetPlugi
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -11049,8 +11448,9 @@ func (s *SDK) GetPluginManifest(ctx context.Context, request operations.GetPlugi
 	return res, nil
 }
 
+// GetPlugins - Gets a list of currently installed plugins.
 func (s *SDK) GetPlugins(ctx context.Context, request operations.GetPluginsRequest) (*operations.GetPluginsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/Plugins"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -11058,7 +11458,7 @@ func (s *SDK) GetPlugins(ctx context.Context, request operations.GetPluginsReque
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -11104,8 +11504,10 @@ func (s *SDK) GetPlugins(ctx context.Context, request operations.GetPluginsReque
 	return res, nil
 }
 
+// GetPostedPlaybackInfo - Gets live playback media info for an item.
+// For backwards compatibility parameters can be sent via Query or Body, with Query having higher precedence.
 func (s *SDK) GetPostedPlaybackInfo(ctx context.Context, request operations.GetPostedPlaybackInfoRequest) (*operations.GetPostedPlaybackInfoResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Items/{itemId}/PlaybackInfo", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -11122,7 +11524,7 @@ func (s *SDK) GetPostedPlaybackInfo(ctx context.Context, request operations.GetP
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -11168,8 +11570,9 @@ func (s *SDK) GetPostedPlaybackInfo(ctx context.Context, request operations.GetP
 	return res, nil
 }
 
+// GetProfile - Gets a single profile.
 func (s *SDK) GetProfile(ctx context.Context, request operations.GetProfileRequest) (*operations.GetProfileResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Dlna/Profiles/{profileId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -11177,7 +11580,7 @@ func (s *SDK) GetProfile(ctx context.Context, request operations.GetProfileReque
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -11247,8 +11650,9 @@ func (s *SDK) GetProfile(ctx context.Context, request operations.GetProfileReque
 	return res, nil
 }
 
+// GetProfileInfos - Get profile infos.
 func (s *SDK) GetProfileInfos(ctx context.Context, request operations.GetProfileInfosRequest) (*operations.GetProfileInfosResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/Dlna/ProfileInfos"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -11256,7 +11660,7 @@ func (s *SDK) GetProfileInfos(ctx context.Context, request operations.GetProfile
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -11302,8 +11706,9 @@ func (s *SDK) GetProfileInfos(ctx context.Context, request operations.GetProfile
 	return res, nil
 }
 
+// GetProgram - Gets a live tv program.
 func (s *SDK) GetProgram(ctx context.Context, request operations.GetProgramRequest) (*operations.GetProgramResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/LiveTv/Programs/{programId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -11313,7 +11718,7 @@ func (s *SDK) GetProgram(ctx context.Context, request operations.GetProgramReque
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -11359,8 +11764,9 @@ func (s *SDK) GetProgram(ctx context.Context, request operations.GetProgramReque
 	return res, nil
 }
 
+// GetPrograms - Gets available live tv epgs.
 func (s *SDK) GetPrograms(ctx context.Context, request operations.GetProgramsRequest) (*operations.GetProgramsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/LiveTv/Programs"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -11375,7 +11781,7 @@ func (s *SDK) GetPrograms(ctx context.Context, request operations.GetProgramsReq
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -11421,8 +11827,9 @@ func (s *SDK) GetPrograms(ctx context.Context, request operations.GetProgramsReq
 	return res, nil
 }
 
+// GetPublicSystemInfo - Gets public information about the server.
 func (s *SDK) GetPublicSystemInfo(ctx context.Context) (*operations.GetPublicSystemInfoResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/System/Info/Public"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -11430,7 +11837,7 @@ func (s *SDK) GetPublicSystemInfo(ctx context.Context) (*operations.GetPublicSys
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -11474,8 +11881,9 @@ func (s *SDK) GetPublicSystemInfo(ctx context.Context) (*operations.GetPublicSys
 	return res, nil
 }
 
+// GetPublicUsers - Gets a list of publicly visible users for display on a login screen.
 func (s *SDK) GetPublicUsers(ctx context.Context) (*operations.GetPublicUsersResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/Users/Public"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -11483,7 +11891,7 @@ func (s *SDK) GetPublicUsers(ctx context.Context) (*operations.GetPublicUsersRes
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -11527,8 +11935,9 @@ func (s *SDK) GetPublicUsers(ctx context.Context) (*operations.GetPublicUsersRes
 	return res, nil
 }
 
+// GetQueryFilters - Gets query filters.
 func (s *SDK) GetQueryFilters(ctx context.Context, request operations.GetQueryFiltersRequest) (*operations.GetQueryFiltersResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/Items/Filters2"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -11538,7 +11947,7 @@ func (s *SDK) GetQueryFilters(ctx context.Context, request operations.GetQueryFi
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -11584,8 +11993,9 @@ func (s *SDK) GetQueryFilters(ctx context.Context, request operations.GetQueryFi
 	return res, nil
 }
 
+// GetQueryFiltersLegacy - Gets legacy query filters.
 func (s *SDK) GetQueryFiltersLegacy(ctx context.Context, request operations.GetQueryFiltersLegacyRequest) (*operations.GetQueryFiltersLegacyResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/Items/Filters"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -11595,7 +12005,7 @@ func (s *SDK) GetQueryFiltersLegacy(ctx context.Context, request operations.GetQ
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -11641,8 +12051,9 @@ func (s *SDK) GetQueryFiltersLegacy(ctx context.Context, request operations.GetQ
 	return res, nil
 }
 
+// GetRatingImage - Get rating image.
 func (s *SDK) GetRatingImage(ctx context.Context, request operations.GetRatingImageRequest) (*operations.GetRatingImageResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Images/Ratings/{theme}/{name}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -11650,7 +12061,7 @@ func (s *SDK) GetRatingImage(ctx context.Context, request operations.GetRatingIm
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -11711,8 +12122,9 @@ func (s *SDK) GetRatingImage(ctx context.Context, request operations.GetRatingIm
 	return res, nil
 }
 
+// GetRatingImages - Get all general images.
 func (s *SDK) GetRatingImages(ctx context.Context, request operations.GetRatingImagesRequest) (*operations.GetRatingImagesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/Images/Ratings"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -11720,7 +12132,7 @@ func (s *SDK) GetRatingImages(ctx context.Context, request operations.GetRatingI
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -11766,8 +12178,9 @@ func (s *SDK) GetRatingImages(ctx context.Context, request operations.GetRatingI
 	return res, nil
 }
 
+// GetRecommendedPrograms - Gets recommended live tv epgs.
 func (s *SDK) GetRecommendedPrograms(ctx context.Context, request operations.GetRecommendedProgramsRequest) (*operations.GetRecommendedProgramsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/LiveTv/Programs/Recommended"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -11777,7 +12190,7 @@ func (s *SDK) GetRecommendedPrograms(ctx context.Context, request operations.Get
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -11823,8 +12236,9 @@ func (s *SDK) GetRecommendedPrograms(ctx context.Context, request operations.Get
 	return res, nil
 }
 
+// GetRecording - Gets a live tv recording.
 func (s *SDK) GetRecording(ctx context.Context, request operations.GetRecordingRequest) (*operations.GetRecordingResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/LiveTv/Recordings/{recordingId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -11834,7 +12248,7 @@ func (s *SDK) GetRecording(ctx context.Context, request operations.GetRecordingR
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -11880,8 +12294,9 @@ func (s *SDK) GetRecording(ctx context.Context, request operations.GetRecordingR
 	return res, nil
 }
 
+// GetRecordingFolders - Gets recording folders.
 func (s *SDK) GetRecordingFolders(ctx context.Context, request operations.GetRecordingFoldersRequest) (*operations.GetRecordingFoldersResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/LiveTv/Recordings/Folders"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -11891,7 +12306,7 @@ func (s *SDK) GetRecordingFolders(ctx context.Context, request operations.GetRec
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -11937,8 +12352,9 @@ func (s *SDK) GetRecordingFolders(ctx context.Context, request operations.GetRec
 	return res, nil
 }
 
+// GetRecordingGroup - Get recording group.
 func (s *SDK) GetRecordingGroup(ctx context.Context, request operations.GetRecordingGroupRequest) (*operations.GetRecordingGroupResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/LiveTv/Recordings/Groups/{groupId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -11946,7 +12362,7 @@ func (s *SDK) GetRecordingGroup(ctx context.Context, request operations.GetRecor
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -11992,8 +12408,9 @@ func (s *SDK) GetRecordingGroup(ctx context.Context, request operations.GetRecor
 	return res, nil
 }
 
+// GetRecordingGroups - Gets live tv recording groups.
 func (s *SDK) GetRecordingGroups(ctx context.Context, request operations.GetRecordingGroupsRequest) (*operations.GetRecordingGroupsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/LiveTv/Recordings/Groups"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -12003,7 +12420,7 @@ func (s *SDK) GetRecordingGroups(ctx context.Context, request operations.GetReco
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -12049,8 +12466,9 @@ func (s *SDK) GetRecordingGroups(ctx context.Context, request operations.GetReco
 	return res, nil
 }
 
+// GetRecordings - Gets live tv recordings.
 func (s *SDK) GetRecordings(ctx context.Context, request operations.GetRecordingsRequest) (*operations.GetRecordingsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/LiveTv/Recordings"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -12060,7 +12478,7 @@ func (s *SDK) GetRecordings(ctx context.Context, request operations.GetRecording
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -12106,8 +12524,9 @@ func (s *SDK) GetRecordings(ctx context.Context, request operations.GetRecording
 	return res, nil
 }
 
+// GetRecordingsSeries - Gets live tv recording series.
 func (s *SDK) GetRecordingsSeries(ctx context.Context, request operations.GetRecordingsSeriesRequest) (*operations.GetRecordingsSeriesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/LiveTv/Recordings/Series"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -12117,7 +12536,7 @@ func (s *SDK) GetRecordingsSeries(ctx context.Context, request operations.GetRec
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -12163,8 +12582,9 @@ func (s *SDK) GetRecordingsSeries(ctx context.Context, request operations.GetRec
 	return res, nil
 }
 
+// GetRemoteImage - Gets a remote image.
 func (s *SDK) GetRemoteImage(ctx context.Context, request operations.GetRemoteImageRequest) (*operations.GetRemoteImageResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/Images/Remote"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -12174,7 +12594,7 @@ func (s *SDK) GetRemoteImage(ctx context.Context, request operations.GetRemoteIm
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -12235,8 +12655,9 @@ func (s *SDK) GetRemoteImage(ctx context.Context, request operations.GetRemoteIm
 	return res, nil
 }
 
+// GetRemoteImageProviders - Gets available remote image providers for an item.
 func (s *SDK) GetRemoteImageProviders(ctx context.Context, request operations.GetRemoteImageProvidersRequest) (*operations.GetRemoteImageProvidersResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Items/{itemId}/RemoteImages/Providers", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -12244,7 +12665,7 @@ func (s *SDK) GetRemoteImageProviders(ctx context.Context, request operations.Ge
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -12314,8 +12735,9 @@ func (s *SDK) GetRemoteImageProviders(ctx context.Context, request operations.Ge
 	return res, nil
 }
 
+// GetRemoteImages - Gets available remote images for an item.
 func (s *SDK) GetRemoteImages(ctx context.Context, request operations.GetRemoteImagesRequest) (*operations.GetRemoteImagesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Items/{itemId}/RemoteImages", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -12325,7 +12747,7 @@ func (s *SDK) GetRemoteImages(ctx context.Context, request operations.GetRemoteI
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -12395,8 +12817,9 @@ func (s *SDK) GetRemoteImages(ctx context.Context, request operations.GetRemoteI
 	return res, nil
 }
 
+// GetRemoteSearchImage - Gets a remote image.
 func (s *SDK) GetRemoteSearchImage(ctx context.Context, request operations.GetRemoteSearchImageRequest) (*operations.GetRemoteSearchImageResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/Items/RemoteSearch/Image"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -12406,7 +12829,7 @@ func (s *SDK) GetRemoteSearchImage(ctx context.Context, request operations.GetRe
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -12438,8 +12861,9 @@ func (s *SDK) GetRemoteSearchImage(ctx context.Context, request operations.GetRe
 	return res, nil
 }
 
+// GetRemoteSubtitles - Gets the remote subtitles.
 func (s *SDK) GetRemoteSubtitles(ctx context.Context, request operations.GetRemoteSubtitlesRequest) (*operations.GetRemoteSubtitlesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Providers/Subtitles/Subtitles/{id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -12447,7 +12871,7 @@ func (s *SDK) GetRemoteSubtitles(ctx context.Context, request operations.GetRemo
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -12479,8 +12903,9 @@ func (s *SDK) GetRemoteSubtitles(ctx context.Context, request operations.GetRemo
 	return res, nil
 }
 
+// GetRepositories - Gets all package repositories.
 func (s *SDK) GetRepositories(ctx context.Context, request operations.GetRepositoriesRequest) (*operations.GetRepositoriesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/Repositories"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -12488,7 +12913,7 @@ func (s *SDK) GetRepositories(ctx context.Context, request operations.GetReposit
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -12534,8 +12959,9 @@ func (s *SDK) GetRepositories(ctx context.Context, request operations.GetReposit
 	return res, nil
 }
 
+// GetResumeItems - Gets items based on a query.
 func (s *SDK) GetResumeItems(ctx context.Context, request operations.GetResumeItemsRequest) (*operations.GetResumeItemsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Users/{userId}/Items/Resume", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -12545,7 +12971,7 @@ func (s *SDK) GetResumeItems(ctx context.Context, request operations.GetResumeIt
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -12591,8 +13017,9 @@ func (s *SDK) GetResumeItems(ctx context.Context, request operations.GetResumeIt
 	return res, nil
 }
 
+// GetRootFolder - Gets the root folder from a user's library.
 func (s *SDK) GetRootFolder(ctx context.Context, request operations.GetRootFolderRequest) (*operations.GetRootFolderResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Users/{userId}/Items/Root", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -12600,7 +13027,7 @@ func (s *SDK) GetRootFolder(ctx context.Context, request operations.GetRootFolde
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -12646,8 +13073,9 @@ func (s *SDK) GetRootFolder(ctx context.Context, request operations.GetRootFolde
 	return res, nil
 }
 
+// GetSchedulesDirectCountries - Gets available countries.
 func (s *SDK) GetSchedulesDirectCountries(ctx context.Context, request operations.GetSchedulesDirectCountriesRequest) (*operations.GetSchedulesDirectCountriesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/LiveTv/ListingProviders/SchedulesDirect/Countries"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -12655,7 +13083,7 @@ func (s *SDK) GetSchedulesDirectCountries(ctx context.Context, request operation
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -12687,8 +13115,9 @@ func (s *SDK) GetSchedulesDirectCountries(ctx context.Context, request operation
 	return res, nil
 }
 
+// GetSeasons - Gets seasons for a tv series.
 func (s *SDK) GetSeasons(ctx context.Context, request operations.GetSeasonsRequest) (*operations.GetSeasonsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Shows/{seriesId}/Seasons", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -12698,7 +13127,7 @@ func (s *SDK) GetSeasons(ctx context.Context, request operations.GetSeasonsReque
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -12768,8 +13197,9 @@ func (s *SDK) GetSeasons(ctx context.Context, request operations.GetSeasonsReque
 	return res, nil
 }
 
+// GetSeriesRemoteSearchResults - Get series remote search.
 func (s *SDK) GetSeriesRemoteSearchResults(ctx context.Context, request operations.GetSeriesRemoteSearchResultsRequest) (*operations.GetSeriesRemoteSearchResultsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/Items/RemoteSearch/Series"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -12787,7 +13217,7 @@ func (s *SDK) GetSeriesRemoteSearchResults(ctx context.Context, request operatio
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -12833,8 +13263,9 @@ func (s *SDK) GetSeriesRemoteSearchResults(ctx context.Context, request operatio
 	return res, nil
 }
 
+// GetSeriesTimer - Gets a live tv series timer.
 func (s *SDK) GetSeriesTimer(ctx context.Context, request operations.GetSeriesTimerRequest) (*operations.GetSeriesTimerResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/LiveTv/SeriesTimers/{timerId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -12842,7 +13273,7 @@ func (s *SDK) GetSeriesTimer(ctx context.Context, request operations.GetSeriesTi
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -12912,8 +13343,9 @@ func (s *SDK) GetSeriesTimer(ctx context.Context, request operations.GetSeriesTi
 	return res, nil
 }
 
+// GetSeriesTimers - Gets live tv series timers.
 func (s *SDK) GetSeriesTimers(ctx context.Context, request operations.GetSeriesTimersRequest) (*operations.GetSeriesTimersResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/LiveTv/SeriesTimers"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -12923,7 +13355,7 @@ func (s *SDK) GetSeriesTimers(ctx context.Context, request operations.GetSeriesT
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -12969,8 +13401,9 @@ func (s *SDK) GetSeriesTimers(ctx context.Context, request operations.GetSeriesT
 	return res, nil
 }
 
+// GetServerLogs - Gets a list of available server log files.
 func (s *SDK) GetServerLogs(ctx context.Context, request operations.GetServerLogsRequest) (*operations.GetServerLogsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/System/Logs"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -12978,7 +13411,7 @@ func (s *SDK) GetServerLogs(ctx context.Context, request operations.GetServerLog
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -13024,8 +13457,9 @@ func (s *SDK) GetServerLogs(ctx context.Context, request operations.GetServerLog
 	return res, nil
 }
 
+// GetSessions - Gets a list of sessions.
 func (s *SDK) GetSessions(ctx context.Context, request operations.GetSessionsRequest) (*operations.GetSessionsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/Sessions"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -13035,7 +13469,7 @@ func (s *SDK) GetSessions(ctx context.Context, request operations.GetSessionsReq
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -13081,8 +13515,9 @@ func (s *SDK) GetSessions(ctx context.Context, request operations.GetSessionsReq
 	return res, nil
 }
 
+// GetSimilarAlbums - Gets similar items.
 func (s *SDK) GetSimilarAlbums(ctx context.Context, request operations.GetSimilarAlbumsRequest) (*operations.GetSimilarAlbumsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Albums/{itemId}/Similar", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -13092,7 +13527,7 @@ func (s *SDK) GetSimilarAlbums(ctx context.Context, request operations.GetSimila
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -13138,8 +13573,9 @@ func (s *SDK) GetSimilarAlbums(ctx context.Context, request operations.GetSimila
 	return res, nil
 }
 
+// GetSimilarArtists - Gets similar items.
 func (s *SDK) GetSimilarArtists(ctx context.Context, request operations.GetSimilarArtistsRequest) (*operations.GetSimilarArtistsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Artists/{itemId}/Similar", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -13149,7 +13585,7 @@ func (s *SDK) GetSimilarArtists(ctx context.Context, request operations.GetSimil
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -13195,8 +13631,9 @@ func (s *SDK) GetSimilarArtists(ctx context.Context, request operations.GetSimil
 	return res, nil
 }
 
+// GetSimilarItems - Gets similar items.
 func (s *SDK) GetSimilarItems(ctx context.Context, request operations.GetSimilarItemsRequest) (*operations.GetSimilarItemsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Items/{itemId}/Similar", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -13206,7 +13643,7 @@ func (s *SDK) GetSimilarItems(ctx context.Context, request operations.GetSimilar
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -13252,8 +13689,9 @@ func (s *SDK) GetSimilarItems(ctx context.Context, request operations.GetSimilar
 	return res, nil
 }
 
+// GetSimilarMovies - Gets similar items.
 func (s *SDK) GetSimilarMovies(ctx context.Context, request operations.GetSimilarMoviesRequest) (*operations.GetSimilarMoviesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Movies/{itemId}/Similar", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -13263,7 +13701,7 @@ func (s *SDK) GetSimilarMovies(ctx context.Context, request operations.GetSimila
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -13309,8 +13747,9 @@ func (s *SDK) GetSimilarMovies(ctx context.Context, request operations.GetSimila
 	return res, nil
 }
 
+// GetSimilarShows - Gets similar items.
 func (s *SDK) GetSimilarShows(ctx context.Context, request operations.GetSimilarShowsRequest) (*operations.GetSimilarShowsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Shows/{itemId}/Similar", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -13320,7 +13759,7 @@ func (s *SDK) GetSimilarShows(ctx context.Context, request operations.GetSimilar
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -13366,8 +13805,9 @@ func (s *SDK) GetSimilarShows(ctx context.Context, request operations.GetSimilar
 	return res, nil
 }
 
+// GetSimilarTrailers - Gets similar items.
 func (s *SDK) GetSimilarTrailers(ctx context.Context, request operations.GetSimilarTrailersRequest) (*operations.GetSimilarTrailersResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Trailers/{itemId}/Similar", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -13377,7 +13817,7 @@ func (s *SDK) GetSimilarTrailers(ctx context.Context, request operations.GetSimi
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -13423,8 +13863,9 @@ func (s *SDK) GetSimilarTrailers(ctx context.Context, request operations.GetSimi
 	return res, nil
 }
 
+// GetSpecialFeatures - Gets special features for an item.
 func (s *SDK) GetSpecialFeatures(ctx context.Context, request operations.GetSpecialFeaturesRequest) (*operations.GetSpecialFeaturesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Users/{userId}/Items/{itemId}/SpecialFeatures", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -13432,7 +13873,7 @@ func (s *SDK) GetSpecialFeatures(ctx context.Context, request operations.GetSpec
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -13478,8 +13919,9 @@ func (s *SDK) GetSpecialFeatures(ctx context.Context, request operations.GetSpec
 	return res, nil
 }
 
+// GetStartupConfiguration - Gets the initial startup wizard configuration.
 func (s *SDK) GetStartupConfiguration(ctx context.Context, request operations.GetStartupConfigurationRequest) (*operations.GetStartupConfigurationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/Startup/Configuration"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -13487,7 +13929,7 @@ func (s *SDK) GetStartupConfiguration(ctx context.Context, request operations.Ge
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -13533,8 +13975,9 @@ func (s *SDK) GetStartupConfiguration(ctx context.Context, request operations.Ge
 	return res, nil
 }
 
+// GetStatus - Gets the current quick connect state.
 func (s *SDK) GetStatus(ctx context.Context) (*operations.GetStatusResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/QuickConnect/Status"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -13542,7 +13985,7 @@ func (s *SDK) GetStatus(ctx context.Context) (*operations.GetStatusResponse, err
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -13586,8 +14029,9 @@ func (s *SDK) GetStatus(ctx context.Context) (*operations.GetStatusResponse, err
 	return res, nil
 }
 
+// GetStudio - Gets a studio by name.
 func (s *SDK) GetStudio(ctx context.Context, request operations.GetStudioRequest) (*operations.GetStudioResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Studios/{name}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -13597,7 +14041,7 @@ func (s *SDK) GetStudio(ctx context.Context, request operations.GetStudioRequest
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -13643,8 +14087,9 @@ func (s *SDK) GetStudio(ctx context.Context, request operations.GetStudioRequest
 	return res, nil
 }
 
+// GetStudioImage - Get studio image by name.
 func (s *SDK) GetStudioImage(ctx context.Context, request operations.GetStudioImageRequest) (*operations.GetStudioImageResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Studios/{name}/Images/{imageType}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -13654,7 +14099,7 @@ func (s *SDK) GetStudioImage(ctx context.Context, request operations.GetStudioIm
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -13708,8 +14153,9 @@ func (s *SDK) GetStudioImage(ctx context.Context, request operations.GetStudioIm
 	return res, nil
 }
 
+// GetStudioImageByIndex - Get studio image by name.
 func (s *SDK) GetStudioImageByIndex(ctx context.Context, request operations.GetStudioImageByIndexRequest) (*operations.GetStudioImageByIndexResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Studios/{name}/Images/{imageType}/{imageIndex}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -13719,7 +14165,7 @@ func (s *SDK) GetStudioImageByIndex(ctx context.Context, request operations.GetS
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -13773,8 +14219,9 @@ func (s *SDK) GetStudioImageByIndex(ctx context.Context, request operations.GetS
 	return res, nil
 }
 
+// GetStudios - Gets all studios from a given item, folder, or the entire library.
 func (s *SDK) GetStudios(ctx context.Context, request operations.GetStudiosRequest) (*operations.GetStudiosResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/Studios"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -13784,7 +14231,7 @@ func (s *SDK) GetStudios(ctx context.Context, request operations.GetStudiosReque
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -13830,8 +14277,9 @@ func (s *SDK) GetStudios(ctx context.Context, request operations.GetStudiosReque
 	return res, nil
 }
 
+// GetSubtitle - Gets subtitles in a specified format.
 func (s *SDK) GetSubtitle(ctx context.Context, request operations.GetSubtitleRequest) (*operations.GetSubtitleResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Videos/{itemId}/{mediaSourceId}/Subtitles/{index}/Stream.{format}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -13841,7 +14289,7 @@ func (s *SDK) GetSubtitle(ctx context.Context, request operations.GetSubtitleReq
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -13871,8 +14319,9 @@ func (s *SDK) GetSubtitle(ctx context.Context, request operations.GetSubtitleReq
 	return res, nil
 }
 
+// GetSubtitlePlaylist - Gets an HLS subtitle playlist.
 func (s *SDK) GetSubtitlePlaylist(ctx context.Context, request operations.GetSubtitlePlaylistRequest) (*operations.GetSubtitlePlaylistResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Videos/{itemId}/{mediaSourceId}/Subtitles/{index}/subtitles.m3u8", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -13882,7 +14331,7 @@ func (s *SDK) GetSubtitlePlaylist(ctx context.Context, request operations.GetSub
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -13914,8 +14363,9 @@ func (s *SDK) GetSubtitlePlaylist(ctx context.Context, request operations.GetSub
 	return res, nil
 }
 
+// GetSubtitleWithTicks - Gets subtitles in a specified format.
 func (s *SDK) GetSubtitleWithTicks(ctx context.Context, request operations.GetSubtitleWithTicksRequest) (*operations.GetSubtitleWithTicksResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Videos/{itemId}/{mediaSourceId}/Subtitles/{index}/{startPositionTicks}/Stream.{format}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -13925,7 +14375,7 @@ func (s *SDK) GetSubtitleWithTicks(ctx context.Context, request operations.GetSu
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -13955,8 +14405,9 @@ func (s *SDK) GetSubtitleWithTicks(ctx context.Context, request operations.GetSu
 	return res, nil
 }
 
+// GetSuggestions - Gets suggestions.
 func (s *SDK) GetSuggestions(ctx context.Context, request operations.GetSuggestionsRequest) (*operations.GetSuggestionsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Users/{userId}/Suggestions", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -13966,7 +14417,7 @@ func (s *SDK) GetSuggestions(ctx context.Context, request operations.GetSuggesti
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -14012,8 +14463,9 @@ func (s *SDK) GetSuggestions(ctx context.Context, request operations.GetSuggesti
 	return res, nil
 }
 
+// GetSystemInfo - Gets information about the server.
 func (s *SDK) GetSystemInfo(ctx context.Context, request operations.GetSystemInfoRequest) (*operations.GetSystemInfoResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/System/Info"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -14021,7 +14473,7 @@ func (s *SDK) GetSystemInfo(ctx context.Context, request operations.GetSystemInf
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -14067,8 +14519,9 @@ func (s *SDK) GetSystemInfo(ctx context.Context, request operations.GetSystemInf
 	return res, nil
 }
 
+// GetTask - Get task by id.
 func (s *SDK) GetTask(ctx context.Context, request operations.GetTaskRequest) (*operations.GetTaskResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/ScheduledTasks/{taskId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -14076,7 +14529,7 @@ func (s *SDK) GetTask(ctx context.Context, request operations.GetTaskRequest) (*
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -14146,8 +14599,9 @@ func (s *SDK) GetTask(ctx context.Context, request operations.GetTaskRequest) (*
 	return res, nil
 }
 
+// GetTasks - Get tasks.
 func (s *SDK) GetTasks(ctx context.Context, request operations.GetTasksRequest) (*operations.GetTasksResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/ScheduledTasks"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -14157,7 +14611,7 @@ func (s *SDK) GetTasks(ctx context.Context, request operations.GetTasksRequest) 
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -14203,8 +14657,9 @@ func (s *SDK) GetTasks(ctx context.Context, request operations.GetTasksRequest) 
 	return res, nil
 }
 
+// GetThemeMedia - Get theme songs and videos for an item.
 func (s *SDK) GetThemeMedia(ctx context.Context, request operations.GetThemeMediaRequest) (*operations.GetThemeMediaResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Items/{itemId}/ThemeMedia", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -14214,7 +14669,7 @@ func (s *SDK) GetThemeMedia(ctx context.Context, request operations.GetThemeMedi
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -14261,8 +14716,9 @@ func (s *SDK) GetThemeMedia(ctx context.Context, request operations.GetThemeMedi
 	return res, nil
 }
 
+// GetThemeSongs - Get theme songs for an item.
 func (s *SDK) GetThemeSongs(ctx context.Context, request operations.GetThemeSongsRequest) (*operations.GetThemeSongsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Items/{itemId}/ThemeSongs", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -14272,7 +14728,7 @@ func (s *SDK) GetThemeSongs(ctx context.Context, request operations.GetThemeSong
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -14342,8 +14798,9 @@ func (s *SDK) GetThemeSongs(ctx context.Context, request operations.GetThemeSong
 	return res, nil
 }
 
+// GetThemeVideos - Get theme videos for an item.
 func (s *SDK) GetThemeVideos(ctx context.Context, request operations.GetThemeVideosRequest) (*operations.GetThemeVideosResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Items/{itemId}/ThemeVideos", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -14353,7 +14810,7 @@ func (s *SDK) GetThemeVideos(ctx context.Context, request operations.GetThemeVid
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -14423,8 +14880,9 @@ func (s *SDK) GetThemeVideos(ctx context.Context, request operations.GetThemeVid
 	return res, nil
 }
 
+// GetTimer - Gets a timer.
 func (s *SDK) GetTimer(ctx context.Context, request operations.GetTimerRequest) (*operations.GetTimerResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/LiveTv/Timers/{timerId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -14432,7 +14890,7 @@ func (s *SDK) GetTimer(ctx context.Context, request operations.GetTimerRequest) 
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -14478,8 +14936,9 @@ func (s *SDK) GetTimer(ctx context.Context, request operations.GetTimerRequest) 
 	return res, nil
 }
 
+// GetTimers - Gets the live tv timers.
 func (s *SDK) GetTimers(ctx context.Context, request operations.GetTimersRequest) (*operations.GetTimersResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/LiveTv/Timers"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -14489,7 +14948,7 @@ func (s *SDK) GetTimers(ctx context.Context, request operations.GetTimersRequest
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -14535,8 +14994,9 @@ func (s *SDK) GetTimers(ctx context.Context, request operations.GetTimersRequest
 	return res, nil
 }
 
+// GetTrailerRemoteSearchResults - Get trailer remote search.
 func (s *SDK) GetTrailerRemoteSearchResults(ctx context.Context, request operations.GetTrailerRemoteSearchResultsRequest) (*operations.GetTrailerRemoteSearchResultsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/Items/RemoteSearch/Trailer"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -14554,7 +15014,7 @@ func (s *SDK) GetTrailerRemoteSearchResults(ctx context.Context, request operati
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -14600,8 +15060,9 @@ func (s *SDK) GetTrailerRemoteSearchResults(ctx context.Context, request operati
 	return res, nil
 }
 
+// GetTrailers - Finds movies and trailers similar to a given trailer.
 func (s *SDK) GetTrailers(ctx context.Context, request operations.GetTrailersRequest) (*operations.GetTrailersResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/Trailers"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -14611,7 +15072,7 @@ func (s *SDK) GetTrailers(ctx context.Context, request operations.GetTrailersReq
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -14657,8 +15118,9 @@ func (s *SDK) GetTrailers(ctx context.Context, request operations.GetTrailersReq
 	return res, nil
 }
 
+// GetTunerHostTypes - Get tuner host types.
 func (s *SDK) GetTunerHostTypes(ctx context.Context, request operations.GetTunerHostTypesRequest) (*operations.GetTunerHostTypesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/LiveTv/TunerHosts/Types"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -14666,7 +15128,7 @@ func (s *SDK) GetTunerHostTypes(ctx context.Context, request operations.GetTuner
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -14712,8 +15174,9 @@ func (s *SDK) GetTunerHostTypes(ctx context.Context, request operations.GetTuner
 	return res, nil
 }
 
+// GetUniversalAudioStream - Gets an audio stream.
 func (s *SDK) GetUniversalAudioStream(ctx context.Context, request operations.GetUniversalAudioStreamRequest) (*operations.GetUniversalAudioStreamResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Audio/{itemId}/universal", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -14723,7 +15186,7 @@ func (s *SDK) GetUniversalAudioStream(ctx context.Context, request operations.Ge
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -14756,8 +15219,9 @@ func (s *SDK) GetUniversalAudioStream(ctx context.Context, request operations.Ge
 	return res, nil
 }
 
+// GetUpcomingEpisodes - Gets a list of upcoming episodes.
 func (s *SDK) GetUpcomingEpisodes(ctx context.Context, request operations.GetUpcomingEpisodesRequest) (*operations.GetUpcomingEpisodesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/Shows/Upcoming"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -14767,7 +15231,7 @@ func (s *SDK) GetUpcomingEpisodes(ctx context.Context, request operations.GetUpc
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -14813,8 +15277,9 @@ func (s *SDK) GetUpcomingEpisodes(ctx context.Context, request operations.GetUpc
 	return res, nil
 }
 
+// GetUserByID - Gets a user by Id.
 func (s *SDK) GetUserByID(ctx context.Context, request operations.GetUserByIDRequest) (*operations.GetUserByIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Users/{userId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -14822,7 +15287,7 @@ func (s *SDK) GetUserByID(ctx context.Context, request operations.GetUserByIDReq
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -14892,8 +15357,9 @@ func (s *SDK) GetUserByID(ctx context.Context, request operations.GetUserByIDReq
 	return res, nil
 }
 
+// GetUserImage - Get user profile image.
 func (s *SDK) GetUserImage(ctx context.Context, request operations.GetUserImageRequest) (*operations.GetUserImageResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Users/{userId}/Images/{imageType}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -14903,7 +15369,7 @@ func (s *SDK) GetUserImage(ctx context.Context, request operations.GetUserImageR
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -14957,8 +15423,9 @@ func (s *SDK) GetUserImage(ctx context.Context, request operations.GetUserImageR
 	return res, nil
 }
 
+// GetUserImageByIndex - Get user profile image.
 func (s *SDK) GetUserImageByIndex(ctx context.Context, request operations.GetUserImageByIndexRequest) (*operations.GetUserImageByIndexResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Users/{userId}/Images/{imageType}/{imageIndex}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -14968,7 +15435,7 @@ func (s *SDK) GetUserImageByIndex(ctx context.Context, request operations.GetUse
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -15022,8 +15489,9 @@ func (s *SDK) GetUserImageByIndex(ctx context.Context, request operations.GetUse
 	return res, nil
 }
 
+// GetUserViews - Get user views.
 func (s *SDK) GetUserViews(ctx context.Context, request operations.GetUserViewsRequest) (*operations.GetUserViewsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Users/{userId}/Views", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -15033,7 +15501,7 @@ func (s *SDK) GetUserViews(ctx context.Context, request operations.GetUserViewsR
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -15077,8 +15545,9 @@ func (s *SDK) GetUserViews(ctx context.Context, request operations.GetUserViewsR
 	return res, nil
 }
 
+// GetUsers - Gets a list of users.
 func (s *SDK) GetUsers(ctx context.Context, request operations.GetUsersRequest) (*operations.GetUsersResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/Users"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -15088,7 +15557,7 @@ func (s *SDK) GetUsers(ctx context.Context, request operations.GetUsersRequest) 
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -15134,8 +15603,9 @@ func (s *SDK) GetUsers(ctx context.Context, request operations.GetUsersRequest) 
 	return res, nil
 }
 
+// GetUtcTime - Gets the current UTC time.
 func (s *SDK) GetUtcTime(ctx context.Context) (*operations.GetUtcTimeResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/GetUtcTime"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -15143,7 +15613,7 @@ func (s *SDK) GetUtcTime(ctx context.Context) (*operations.GetUtcTimeResponse, e
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -15187,8 +15657,9 @@ func (s *SDK) GetUtcTime(ctx context.Context) (*operations.GetUtcTimeResponse, e
 	return res, nil
 }
 
+// GetVariantHlsAudioPlaylist - Gets an audio stream using HTTP live streaming.
 func (s *SDK) GetVariantHlsAudioPlaylist(ctx context.Context, request operations.GetVariantHlsAudioPlaylistRequest) (*operations.GetVariantHlsAudioPlaylistResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Audio/{itemId}/main.m3u8", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -15198,7 +15669,7 @@ func (s *SDK) GetVariantHlsAudioPlaylist(ctx context.Context, request operations
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -15230,8 +15701,9 @@ func (s *SDK) GetVariantHlsAudioPlaylist(ctx context.Context, request operations
 	return res, nil
 }
 
+// GetVariantHlsVideoPlaylist - Gets a video stream using HTTP live streaming.
 func (s *SDK) GetVariantHlsVideoPlaylist(ctx context.Context, request operations.GetVariantHlsVideoPlaylistRequest) (*operations.GetVariantHlsVideoPlaylistResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Videos/{itemId}/main.m3u8", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -15241,7 +15713,7 @@ func (s *SDK) GetVariantHlsVideoPlaylist(ctx context.Context, request operations
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -15273,8 +15745,9 @@ func (s *SDK) GetVariantHlsVideoPlaylist(ctx context.Context, request operations
 	return res, nil
 }
 
+// GetVideoStream - Gets a video stream.
 func (s *SDK) GetVideoStream(ctx context.Context, request operations.GetVideoStreamRequest) (*operations.GetVideoStreamResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Videos/{itemId}/stream", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -15284,7 +15757,7 @@ func (s *SDK) GetVideoStream(ctx context.Context, request operations.GetVideoStr
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -15314,8 +15787,9 @@ func (s *SDK) GetVideoStream(ctx context.Context, request operations.GetVideoStr
 	return res, nil
 }
 
+// GetVideoStreamByContainer - Gets a video stream.
 func (s *SDK) GetVideoStreamByContainer(ctx context.Context, request operations.GetVideoStreamByContainerRequest) (*operations.GetVideoStreamByContainerResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Videos/{itemId}/{stream}.{container}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -15325,7 +15799,7 @@ func (s *SDK) GetVideoStreamByContainer(ctx context.Context, request operations.
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -15355,8 +15829,9 @@ func (s *SDK) GetVideoStreamByContainer(ctx context.Context, request operations.
 	return res, nil
 }
 
+// GetVirtualFolders - Gets all virtual folders.
 func (s *SDK) GetVirtualFolders(ctx context.Context, request operations.GetVirtualFoldersRequest) (*operations.GetVirtualFoldersResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/Library/VirtualFolders"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -15364,7 +15839,7 @@ func (s *SDK) GetVirtualFolders(ctx context.Context, request operations.GetVirtu
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -15410,8 +15885,9 @@ func (s *SDK) GetVirtualFolders(ctx context.Context, request operations.GetVirtu
 	return res, nil
 }
 
+// GetWakeOnLanInfo - Gets wake on lan information.
 func (s *SDK) GetWakeOnLanInfo(ctx context.Context, request operations.GetWakeOnLanInfoRequest) (*operations.GetWakeOnLanInfoResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/System/WakeOnLanInfo"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -15419,7 +15895,7 @@ func (s *SDK) GetWakeOnLanInfo(ctx context.Context, request operations.GetWakeOn
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -15465,8 +15941,9 @@ func (s *SDK) GetWakeOnLanInfo(ctx context.Context, request operations.GetWakeOn
 	return res, nil
 }
 
+// GetYear - Gets a year.
 func (s *SDK) GetYear(ctx context.Context, request operations.GetYearRequest) (*operations.GetYearResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Years/{year}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -15476,7 +15953,7 @@ func (s *SDK) GetYear(ctx context.Context, request operations.GetYearRequest) (*
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -15546,8 +16023,9 @@ func (s *SDK) GetYear(ctx context.Context, request operations.GetYearRequest) (*
 	return res, nil
 }
 
+// GetYears - Get years.
 func (s *SDK) GetYears(ctx context.Context, request operations.GetYearsRequest) (*operations.GetYearsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/Years"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -15557,7 +16035,7 @@ func (s *SDK) GetYears(ctx context.Context, request operations.GetYearsRequest) 
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -15603,8 +16081,9 @@ func (s *SDK) GetYears(ctx context.Context, request operations.GetYearsRequest) 
 	return res, nil
 }
 
+// HeadArtistImage - Get artist image by name.
 func (s *SDK) HeadArtistImage(ctx context.Context, request operations.HeadArtistImageRequest) (*operations.HeadArtistImageResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Artists/{name}/Images/{imageType}/{imageIndex}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "HEAD", url, nil)
@@ -15614,7 +16093,7 @@ func (s *SDK) HeadArtistImage(ctx context.Context, request operations.HeadArtist
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -15668,8 +16147,9 @@ func (s *SDK) HeadArtistImage(ctx context.Context, request operations.HeadArtist
 	return res, nil
 }
 
+// HeadAudioStream - Gets an audio stream.
 func (s *SDK) HeadAudioStream(ctx context.Context, request operations.HeadAudioStreamRequest) (*operations.HeadAudioStreamResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Audio/{itemId}/stream", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "HEAD", url, nil)
@@ -15679,7 +16159,7 @@ func (s *SDK) HeadAudioStream(ctx context.Context, request operations.HeadAudioS
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -15709,8 +16189,9 @@ func (s *SDK) HeadAudioStream(ctx context.Context, request operations.HeadAudioS
 	return res, nil
 }
 
+// HeadAudioStreamByContainer - Gets an audio stream.
 func (s *SDK) HeadAudioStreamByContainer(ctx context.Context, request operations.HeadAudioStreamByContainerRequest) (*operations.HeadAudioStreamByContainerResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Audio/{itemId}/stream.{container}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "HEAD", url, nil)
@@ -15720,7 +16201,7 @@ func (s *SDK) HeadAudioStreamByContainer(ctx context.Context, request operations
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -15750,8 +16231,9 @@ func (s *SDK) HeadAudioStreamByContainer(ctx context.Context, request operations
 	return res, nil
 }
 
+// HeadGenreImage - Get genre image by name.
 func (s *SDK) HeadGenreImage(ctx context.Context, request operations.HeadGenreImageRequest) (*operations.HeadGenreImageResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Genres/{name}/Images/{imageType}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "HEAD", url, nil)
@@ -15761,7 +16243,7 @@ func (s *SDK) HeadGenreImage(ctx context.Context, request operations.HeadGenreIm
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -15815,8 +16297,9 @@ func (s *SDK) HeadGenreImage(ctx context.Context, request operations.HeadGenreIm
 	return res, nil
 }
 
+// HeadGenreImageByIndex - Get genre image by name.
 func (s *SDK) HeadGenreImageByIndex(ctx context.Context, request operations.HeadGenreImageByIndexRequest) (*operations.HeadGenreImageByIndexResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Genres/{name}/Images/{imageType}/{imageIndex}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "HEAD", url, nil)
@@ -15826,7 +16309,7 @@ func (s *SDK) HeadGenreImageByIndex(ctx context.Context, request operations.Head
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -15880,8 +16363,9 @@ func (s *SDK) HeadGenreImageByIndex(ctx context.Context, request operations.Head
 	return res, nil
 }
 
+// HeadItemImage - Gets the item's image.
 func (s *SDK) HeadItemImage(ctx context.Context, request operations.HeadItemImageRequest) (*operations.HeadItemImageResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Items/{itemId}/Images/{imageType}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "HEAD", url, nil)
@@ -15891,7 +16375,7 @@ func (s *SDK) HeadItemImage(ctx context.Context, request operations.HeadItemImag
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -15945,8 +16429,9 @@ func (s *SDK) HeadItemImage(ctx context.Context, request operations.HeadItemImag
 	return res, nil
 }
 
+// HeadItemImage2 - Gets the item's image.
 func (s *SDK) HeadItemImage2(ctx context.Context, request operations.HeadItemImage2Request) (*operations.HeadItemImage2Response, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Items/{itemId}/Images/{imageType}/{imageIndex}/{tag}/{format}/{maxWidth}/{maxHeight}/{percentPlayed}/{unplayedCount}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "HEAD", url, nil)
@@ -15956,7 +16441,7 @@ func (s *SDK) HeadItemImage2(ctx context.Context, request operations.HeadItemIma
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -16010,8 +16495,9 @@ func (s *SDK) HeadItemImage2(ctx context.Context, request operations.HeadItemIma
 	return res, nil
 }
 
+// HeadItemImageByIndex - Gets the item's image.
 func (s *SDK) HeadItemImageByIndex(ctx context.Context, request operations.HeadItemImageByIndexRequest) (*operations.HeadItemImageByIndexResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Items/{itemId}/Images/{imageType}/{imageIndex}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "HEAD", url, nil)
@@ -16021,7 +16507,7 @@ func (s *SDK) HeadItemImageByIndex(ctx context.Context, request operations.HeadI
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -16075,8 +16561,9 @@ func (s *SDK) HeadItemImageByIndex(ctx context.Context, request operations.HeadI
 	return res, nil
 }
 
+// HeadMasterHlsAudioPlaylist - Gets an audio hls playlist stream.
 func (s *SDK) HeadMasterHlsAudioPlaylist(ctx context.Context, request operations.HeadMasterHlsAudioPlaylistRequest) (*operations.HeadMasterHlsAudioPlaylistResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Audio/{itemId}/master.m3u8", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "HEAD", url, nil)
@@ -16086,7 +16573,7 @@ func (s *SDK) HeadMasterHlsAudioPlaylist(ctx context.Context, request operations
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -16118,8 +16605,9 @@ func (s *SDK) HeadMasterHlsAudioPlaylist(ctx context.Context, request operations
 	return res, nil
 }
 
+// HeadMasterHlsVideoPlaylist - Gets a video hls playlist stream.
 func (s *SDK) HeadMasterHlsVideoPlaylist(ctx context.Context, request operations.HeadMasterHlsVideoPlaylistRequest) (*operations.HeadMasterHlsVideoPlaylistResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Videos/{itemId}/master.m3u8", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "HEAD", url, nil)
@@ -16129,7 +16617,7 @@ func (s *SDK) HeadMasterHlsVideoPlaylist(ctx context.Context, request operations
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -16161,8 +16649,9 @@ func (s *SDK) HeadMasterHlsVideoPlaylist(ctx context.Context, request operations
 	return res, nil
 }
 
+// HeadMusicGenreImage - Get music genre image by name.
 func (s *SDK) HeadMusicGenreImage(ctx context.Context, request operations.HeadMusicGenreImageRequest) (*operations.HeadMusicGenreImageResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/MusicGenres/{name}/Images/{imageType}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "HEAD", url, nil)
@@ -16172,7 +16661,7 @@ func (s *SDK) HeadMusicGenreImage(ctx context.Context, request operations.HeadMu
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -16226,8 +16715,9 @@ func (s *SDK) HeadMusicGenreImage(ctx context.Context, request operations.HeadMu
 	return res, nil
 }
 
+// HeadMusicGenreImageByIndex - Get music genre image by name.
 func (s *SDK) HeadMusicGenreImageByIndex(ctx context.Context, request operations.HeadMusicGenreImageByIndexRequest) (*operations.HeadMusicGenreImageByIndexResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/MusicGenres/{name}/Images/{imageType}/{imageIndex}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "HEAD", url, nil)
@@ -16237,7 +16727,7 @@ func (s *SDK) HeadMusicGenreImageByIndex(ctx context.Context, request operations
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -16291,8 +16781,9 @@ func (s *SDK) HeadMusicGenreImageByIndex(ctx context.Context, request operations
 	return res, nil
 }
 
+// HeadPersonImage - Get person image by name.
 func (s *SDK) HeadPersonImage(ctx context.Context, request operations.HeadPersonImageRequest) (*operations.HeadPersonImageResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Persons/{name}/Images/{imageType}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "HEAD", url, nil)
@@ -16302,7 +16793,7 @@ func (s *SDK) HeadPersonImage(ctx context.Context, request operations.HeadPerson
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -16356,8 +16847,9 @@ func (s *SDK) HeadPersonImage(ctx context.Context, request operations.HeadPerson
 	return res, nil
 }
 
+// HeadPersonImageByIndex - Get person image by name.
 func (s *SDK) HeadPersonImageByIndex(ctx context.Context, request operations.HeadPersonImageByIndexRequest) (*operations.HeadPersonImageByIndexResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Persons/{name}/Images/{imageType}/{imageIndex}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "HEAD", url, nil)
@@ -16367,7 +16859,7 @@ func (s *SDK) HeadPersonImageByIndex(ctx context.Context, request operations.Hea
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -16421,8 +16913,9 @@ func (s *SDK) HeadPersonImageByIndex(ctx context.Context, request operations.Hea
 	return res, nil
 }
 
+// HeadStudioImage - Get studio image by name.
 func (s *SDK) HeadStudioImage(ctx context.Context, request operations.HeadStudioImageRequest) (*operations.HeadStudioImageResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Studios/{name}/Images/{imageType}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "HEAD", url, nil)
@@ -16432,7 +16925,7 @@ func (s *SDK) HeadStudioImage(ctx context.Context, request operations.HeadStudio
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -16486,8 +16979,9 @@ func (s *SDK) HeadStudioImage(ctx context.Context, request operations.HeadStudio
 	return res, nil
 }
 
+// HeadStudioImageByIndex - Get studio image by name.
 func (s *SDK) HeadStudioImageByIndex(ctx context.Context, request operations.HeadStudioImageByIndexRequest) (*operations.HeadStudioImageByIndexResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Studios/{name}/Images/{imageType}/{imageIndex}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "HEAD", url, nil)
@@ -16497,7 +16991,7 @@ func (s *SDK) HeadStudioImageByIndex(ctx context.Context, request operations.Hea
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -16551,8 +17045,9 @@ func (s *SDK) HeadStudioImageByIndex(ctx context.Context, request operations.Hea
 	return res, nil
 }
 
+// HeadUniversalAudioStream - Gets an audio stream.
 func (s *SDK) HeadUniversalAudioStream(ctx context.Context, request operations.HeadUniversalAudioStreamRequest) (*operations.HeadUniversalAudioStreamResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Audio/{itemId}/universal", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "HEAD", url, nil)
@@ -16562,7 +17057,7 @@ func (s *SDK) HeadUniversalAudioStream(ctx context.Context, request operations.H
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -16595,8 +17090,9 @@ func (s *SDK) HeadUniversalAudioStream(ctx context.Context, request operations.H
 	return res, nil
 }
 
+// HeadUserImage - Get user profile image.
 func (s *SDK) HeadUserImage(ctx context.Context, request operations.HeadUserImageRequest) (*operations.HeadUserImageResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Users/{userId}/Images/{imageType}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "HEAD", url, nil)
@@ -16606,7 +17102,7 @@ func (s *SDK) HeadUserImage(ctx context.Context, request operations.HeadUserImag
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -16660,8 +17156,9 @@ func (s *SDK) HeadUserImage(ctx context.Context, request operations.HeadUserImag
 	return res, nil
 }
 
+// HeadUserImageByIndex - Get user profile image.
 func (s *SDK) HeadUserImageByIndex(ctx context.Context, request operations.HeadUserImageByIndexRequest) (*operations.HeadUserImageByIndexResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Users/{userId}/Images/{imageType}/{imageIndex}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "HEAD", url, nil)
@@ -16671,7 +17168,7 @@ func (s *SDK) HeadUserImageByIndex(ctx context.Context, request operations.HeadU
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -16725,8 +17222,9 @@ func (s *SDK) HeadUserImageByIndex(ctx context.Context, request operations.HeadU
 	return res, nil
 }
 
+// HeadVideoStream - Gets a video stream.
 func (s *SDK) HeadVideoStream(ctx context.Context, request operations.HeadVideoStreamRequest) (*operations.HeadVideoStreamResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Videos/{itemId}/stream", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "HEAD", url, nil)
@@ -16736,7 +17234,7 @@ func (s *SDK) HeadVideoStream(ctx context.Context, request operations.HeadVideoS
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -16766,8 +17264,9 @@ func (s *SDK) HeadVideoStream(ctx context.Context, request operations.HeadVideoS
 	return res, nil
 }
 
+// HeadVideoStreamByContainer - Gets a video stream.
 func (s *SDK) HeadVideoStreamByContainer(ctx context.Context, request operations.HeadVideoStreamByContainerRequest) (*operations.HeadVideoStreamByContainerResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Videos/{itemId}/{stream}.{container}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "HEAD", url, nil)
@@ -16777,7 +17276,7 @@ func (s *SDK) HeadVideoStreamByContainer(ctx context.Context, request operations
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -16807,8 +17306,9 @@ func (s *SDK) HeadVideoStreamByContainer(ctx context.Context, request operations
 	return res, nil
 }
 
+// Initiate - Initiate a new quick connect request.
 func (s *SDK) Initiate(ctx context.Context) (*operations.InitiateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/QuickConnect/Initiate"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -16816,7 +17316,7 @@ func (s *SDK) Initiate(ctx context.Context) (*operations.InitiateResponse, error
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -16861,8 +17361,9 @@ func (s *SDK) Initiate(ctx context.Context) (*operations.InitiateResponse, error
 	return res, nil
 }
 
+// InstallPackage - Installs a package.
 func (s *SDK) InstallPackage(ctx context.Context, request operations.InstallPackageRequest) (*operations.InstallPackageResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Packages/Installed/{name}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -16872,7 +17373,7 @@ func (s *SDK) InstallPackage(ctx context.Context, request operations.InstallPack
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -16919,8 +17420,9 @@ func (s *SDK) InstallPackage(ctx context.Context, request operations.InstallPack
 	return res, nil
 }
 
+// MarkFavoriteItem - Marks an item as a favorite.
 func (s *SDK) MarkFavoriteItem(ctx context.Context, request operations.MarkFavoriteItemRequest) (*operations.MarkFavoriteItemResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Users/{userId}/FavoriteItems/{itemId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -16928,7 +17430,7 @@ func (s *SDK) MarkFavoriteItem(ctx context.Context, request operations.MarkFavor
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -16974,8 +17476,9 @@ func (s *SDK) MarkFavoriteItem(ctx context.Context, request operations.MarkFavor
 	return res, nil
 }
 
+// MarkPlayedItem - Marks an item as played for user.
 func (s *SDK) MarkPlayedItem(ctx context.Context, request operations.MarkPlayedItemRequest) (*operations.MarkPlayedItemResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Users/{userId}/PlayedItems/{itemId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -16985,7 +17488,7 @@ func (s *SDK) MarkPlayedItem(ctx context.Context, request operations.MarkPlayedI
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -17031,8 +17534,9 @@ func (s *SDK) MarkPlayedItem(ctx context.Context, request operations.MarkPlayedI
 	return res, nil
 }
 
+// MarkUnplayedItem - Marks an item as unplayed for user.
 func (s *SDK) MarkUnplayedItem(ctx context.Context, request operations.MarkUnplayedItemRequest) (*operations.MarkUnplayedItemResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Users/{userId}/PlayedItems/{itemId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -17040,7 +17544,7 @@ func (s *SDK) MarkUnplayedItem(ctx context.Context, request operations.MarkUnpla
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -17086,8 +17590,9 @@ func (s *SDK) MarkUnplayedItem(ctx context.Context, request operations.MarkUnpla
 	return res, nil
 }
 
+// MergeVersions - Merges videos into a single record.
 func (s *SDK) MergeVersions(ctx context.Context, request operations.MergeVersionsRequest) (*operations.MergeVersionsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/Videos/MergeVersions"
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -17097,7 +17602,7 @@ func (s *SDK) MergeVersions(ctx context.Context, request operations.MergeVersion
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -17144,8 +17649,9 @@ func (s *SDK) MergeVersions(ctx context.Context, request operations.MergeVersion
 	return res, nil
 }
 
+// MoveItem - Moves a playlist item.
 func (s *SDK) MoveItem(ctx context.Context, request operations.MoveItemRequest) (*operations.MoveItemResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Playlists/{playlistId}/Items/{itemId}/Move/{newIndex}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -17153,7 +17659,7 @@ func (s *SDK) MoveItem(ctx context.Context, request operations.MoveItemRequest) 
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -17176,8 +17682,9 @@ func (s *SDK) MoveItem(ctx context.Context, request operations.MoveItemRequest) 
 	return res, nil
 }
 
+// OnPlaybackProgress - Reports a user's playback progress.
 func (s *SDK) OnPlaybackProgress(ctx context.Context, request operations.OnPlaybackProgressRequest) (*operations.OnPlaybackProgressResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Users/{userId}/PlayingItems/{itemId}/Progress", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -17187,7 +17694,7 @@ func (s *SDK) OnPlaybackProgress(ctx context.Context, request operations.OnPlayb
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -17210,8 +17717,9 @@ func (s *SDK) OnPlaybackProgress(ctx context.Context, request operations.OnPlayb
 	return res, nil
 }
 
+// OnPlaybackStart - Reports that a user has begun playing an item.
 func (s *SDK) OnPlaybackStart(ctx context.Context, request operations.OnPlaybackStartRequest) (*operations.OnPlaybackStartResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Users/{userId}/PlayingItems/{itemId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -17221,7 +17729,7 @@ func (s *SDK) OnPlaybackStart(ctx context.Context, request operations.OnPlayback
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -17244,8 +17752,9 @@ func (s *SDK) OnPlaybackStart(ctx context.Context, request operations.OnPlayback
 	return res, nil
 }
 
+// OnPlaybackStopped - Reports that a user has stopped playing an item.
 func (s *SDK) OnPlaybackStopped(ctx context.Context, request operations.OnPlaybackStoppedRequest) (*operations.OnPlaybackStoppedResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Users/{userId}/PlayingItems/{itemId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -17255,7 +17764,7 @@ func (s *SDK) OnPlaybackStopped(ctx context.Context, request operations.OnPlayba
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -17278,8 +17787,9 @@ func (s *SDK) OnPlaybackStopped(ctx context.Context, request operations.OnPlayba
 	return res, nil
 }
 
+// OpenLiveStream - Opens a media source.
 func (s *SDK) OpenLiveStream(ctx context.Context, request operations.OpenLiveStreamRequest) (*operations.OpenLiveStreamResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/LiveStreams/Open"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -17296,7 +17806,7 @@ func (s *SDK) OpenLiveStream(ctx context.Context, request operations.OpenLiveStr
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -17342,8 +17852,9 @@ func (s *SDK) OpenLiveStream(ctx context.Context, request operations.OpenLiveStr
 	return res, nil
 }
 
+// PingPlaybackSession - Pings a playback session.
 func (s *SDK) PingPlaybackSession(ctx context.Context, request operations.PingPlaybackSessionRequest) (*operations.PingPlaybackSessionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/Sessions/Playing/Ping"
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -17353,7 +17864,7 @@ func (s *SDK) PingPlaybackSession(ctx context.Context, request operations.PingPl
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -17376,8 +17887,9 @@ func (s *SDK) PingPlaybackSession(ctx context.Context, request operations.PingPl
 	return res, nil
 }
 
+// Play - Instructs a session to play an item.
 func (s *SDK) Play(ctx context.Context, request operations.PlayRequest) (*operations.PlayResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Sessions/{sessionId}/Playing", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -17387,7 +17899,7 @@ func (s *SDK) Play(ctx context.Context, request operations.PlayRequest) (*operat
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -17410,8 +17922,9 @@ func (s *SDK) Play(ctx context.Context, request operations.PlayRequest) (*operat
 	return res, nil
 }
 
+// Post - Refreshes metadata for an item.
 func (s *SDK) Post(ctx context.Context, request operations.PostRequest) (*operations.PostResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Items/{itemId}/Refresh", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -17421,7 +17934,7 @@ func (s *SDK) Post(ctx context.Context, request operations.PostRequest) (*operat
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -17468,8 +17981,9 @@ func (s *SDK) Post(ctx context.Context, request operations.PostRequest) (*operat
 	return res, nil
 }
 
+// PostAddedMovies - Reports that new movies have been added by an external source.
 func (s *SDK) PostAddedMovies(ctx context.Context, request operations.PostAddedMoviesRequest) (*operations.PostAddedMoviesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/Library/Movies/Added"
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -17479,7 +17993,7 @@ func (s *SDK) PostAddedMovies(ctx context.Context, request operations.PostAddedM
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -17502,8 +18016,9 @@ func (s *SDK) PostAddedMovies(ctx context.Context, request operations.PostAddedM
 	return res, nil
 }
 
+// PostAddedSeries - Reports that new episodes of a series have been added by an external source.
 func (s *SDK) PostAddedSeries(ctx context.Context, request operations.PostAddedSeriesRequest) (*operations.PostAddedSeriesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/Library/Series/Added"
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -17513,7 +18028,7 @@ func (s *SDK) PostAddedSeries(ctx context.Context, request operations.PostAddedS
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -17536,8 +18051,9 @@ func (s *SDK) PostAddedSeries(ctx context.Context, request operations.PostAddedS
 	return res, nil
 }
 
+// PostCapabilities - Updates capabilities for a device.
 func (s *SDK) PostCapabilities(ctx context.Context, request operations.PostCapabilitiesRequest) (*operations.PostCapabilitiesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/Sessions/Capabilities"
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -17547,7 +18063,7 @@ func (s *SDK) PostCapabilities(ctx context.Context, request operations.PostCapab
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -17570,8 +18086,9 @@ func (s *SDK) PostCapabilities(ctx context.Context, request operations.PostCapab
 	return res, nil
 }
 
+// PostFullCapabilities - Updates capabilities for a device.
 func (s *SDK) PostFullCapabilities(ctx context.Context, request operations.PostFullCapabilitiesRequest) (*operations.PostFullCapabilitiesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/Sessions/Capabilities/Full"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -17591,7 +18108,7 @@ func (s *SDK) PostFullCapabilities(ctx context.Context, request operations.PostF
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -17614,8 +18131,9 @@ func (s *SDK) PostFullCapabilities(ctx context.Context, request operations.PostF
 	return res, nil
 }
 
+// PostPingSystem - Pings the system.
 func (s *SDK) PostPingSystem(ctx context.Context) (*operations.PostPingSystemResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/System/Ping"
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -17623,7 +18141,7 @@ func (s *SDK) PostPingSystem(ctx context.Context) (*operations.PostPingSystemRes
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -17670,8 +18188,9 @@ func (s *SDK) PostPingSystem(ctx context.Context) (*operations.PostPingSystemRes
 	return res, nil
 }
 
+// PostUpdatedMedia - Reports that new movies have been added by an external source.
 func (s *SDK) PostUpdatedMedia(ctx context.Context, request operations.PostUpdatedMediaRequest) (*operations.PostUpdatedMediaResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/Library/Media/Updated"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -17689,7 +18208,7 @@ func (s *SDK) PostUpdatedMedia(ctx context.Context, request operations.PostUpdat
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -17712,8 +18231,9 @@ func (s *SDK) PostUpdatedMedia(ctx context.Context, request operations.PostUpdat
 	return res, nil
 }
 
+// PostUpdatedMovies - Reports that new movies have been added by an external source.
 func (s *SDK) PostUpdatedMovies(ctx context.Context, request operations.PostUpdatedMoviesRequest) (*operations.PostUpdatedMoviesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/Library/Movies/Updated"
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -17723,7 +18243,7 @@ func (s *SDK) PostUpdatedMovies(ctx context.Context, request operations.PostUpda
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -17746,8 +18266,9 @@ func (s *SDK) PostUpdatedMovies(ctx context.Context, request operations.PostUpda
 	return res, nil
 }
 
+// PostUpdatedSeries - Reports that new episodes of a series have been added by an external source.
 func (s *SDK) PostUpdatedSeries(ctx context.Context, request operations.PostUpdatedSeriesRequest) (*operations.PostUpdatedSeriesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/Library/Series/Updated"
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -17757,7 +18278,7 @@ func (s *SDK) PostUpdatedSeries(ctx context.Context, request operations.PostUpda
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -17780,8 +18301,9 @@ func (s *SDK) PostUpdatedSeries(ctx context.Context, request operations.PostUpda
 	return res, nil
 }
 
+// PostUserImage - Sets the user image.
 func (s *SDK) PostUserImage(ctx context.Context, request operations.PostUserImageRequest) (*operations.PostUserImageResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Users/{userId}/Images/{imageType}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -17791,7 +18313,7 @@ func (s *SDK) PostUserImage(ctx context.Context, request operations.PostUserImag
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -17837,8 +18359,9 @@ func (s *SDK) PostUserImage(ctx context.Context, request operations.PostUserImag
 	return res, nil
 }
 
+// PostUserImageByIndex - Sets the user image.
 func (s *SDK) PostUserImageByIndex(ctx context.Context, request operations.PostUserImageByIndexRequest) (*operations.PostUserImageByIndexResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Users/{userId}/Images/{imageType}/{index}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -17846,7 +18369,7 @@ func (s *SDK) PostUserImageByIndex(ctx context.Context, request operations.PostU
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -17892,8 +18415,9 @@ func (s *SDK) PostUserImageByIndex(ctx context.Context, request operations.PostU
 	return res, nil
 }
 
+// ProcessConnectionManagerControlRequest - Process a connection manager control request.
 func (s *SDK) ProcessConnectionManagerControlRequest(ctx context.Context, request operations.ProcessConnectionManagerControlRequestRequest) (*operations.ProcessConnectionManagerControlRequestResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Dlna/{serverId}/ConnectionManager/Control", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -17901,7 +18425,7 @@ func (s *SDK) ProcessConnectionManagerControlRequest(ctx context.Context, reques
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -17932,8 +18456,9 @@ func (s *SDK) ProcessConnectionManagerControlRequest(ctx context.Context, reques
 	return res, nil
 }
 
+// ProcessContentDirectoryControlRequest - Process a content directory control request.
 func (s *SDK) ProcessContentDirectoryControlRequest(ctx context.Context, request operations.ProcessContentDirectoryControlRequestRequest) (*operations.ProcessContentDirectoryControlRequestResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Dlna/{serverId}/ContentDirectory/Control", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -17941,7 +18466,7 @@ func (s *SDK) ProcessContentDirectoryControlRequest(ctx context.Context, request
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -17972,8 +18497,9 @@ func (s *SDK) ProcessContentDirectoryControlRequest(ctx context.Context, request
 	return res, nil
 }
 
+// ProcessMediaReceiverRegistrarControlRequest - Process a media receiver registrar control request.
 func (s *SDK) ProcessMediaReceiverRegistrarControlRequest(ctx context.Context, request operations.ProcessMediaReceiverRegistrarControlRequestRequest) (*operations.ProcessMediaReceiverRegistrarControlRequestResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Dlna/{serverId}/MediaReceiverRegistrar/Control", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -17981,7 +18507,7 @@ func (s *SDK) ProcessMediaReceiverRegistrarControlRequest(ctx context.Context, r
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -18012,8 +18538,9 @@ func (s *SDK) ProcessMediaReceiverRegistrarControlRequest(ctx context.Context, r
 	return res, nil
 }
 
+// RefreshLibrary - Starts a library scan.
 func (s *SDK) RefreshLibrary(ctx context.Context, request operations.RefreshLibraryRequest) (*operations.RefreshLibraryResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/Library/Refresh"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -18021,7 +18548,7 @@ func (s *SDK) RefreshLibrary(ctx context.Context, request operations.RefreshLibr
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -18044,8 +18571,9 @@ func (s *SDK) RefreshLibrary(ctx context.Context, request operations.RefreshLibr
 	return res, nil
 }
 
+// RemoveFromCollection - Removes items from a collection.
 func (s *SDK) RemoveFromCollection(ctx context.Context, request operations.RemoveFromCollectionRequest) (*operations.RemoveFromCollectionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Collections/{collectionId}/Items", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -18055,7 +18583,7 @@ func (s *SDK) RemoveFromCollection(ctx context.Context, request operations.Remov
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -18078,8 +18606,9 @@ func (s *SDK) RemoveFromCollection(ctx context.Context, request operations.Remov
 	return res, nil
 }
 
+// RemoveFromPlaylist - Removes items from a playlist.
 func (s *SDK) RemoveFromPlaylist(ctx context.Context, request operations.RemoveFromPlaylistRequest) (*operations.RemoveFromPlaylistResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Playlists/{playlistId}/Items", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -18089,7 +18618,7 @@ func (s *SDK) RemoveFromPlaylist(ctx context.Context, request operations.RemoveF
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -18112,8 +18641,9 @@ func (s *SDK) RemoveFromPlaylist(ctx context.Context, request operations.RemoveF
 	return res, nil
 }
 
+// RemoveMediaPath - Remove a media path.
 func (s *SDK) RemoveMediaPath(ctx context.Context, request operations.RemoveMediaPathRequest) (*operations.RemoveMediaPathResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/Library/VirtualFolders/Paths"
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -18123,7 +18653,7 @@ func (s *SDK) RemoveMediaPath(ctx context.Context, request operations.RemoveMedi
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -18146,8 +18676,9 @@ func (s *SDK) RemoveMediaPath(ctx context.Context, request operations.RemoveMedi
 	return res, nil
 }
 
+// RemoveUserFromSession - Removes an additional user from a session.
 func (s *SDK) RemoveUserFromSession(ctx context.Context, request operations.RemoveUserFromSessionRequest) (*operations.RemoveUserFromSessionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Sessions/{sessionId}/User/{userId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -18155,7 +18686,7 @@ func (s *SDK) RemoveUserFromSession(ctx context.Context, request operations.Remo
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -18178,8 +18709,9 @@ func (s *SDK) RemoveUserFromSession(ctx context.Context, request operations.Remo
 	return res, nil
 }
 
+// RemoveVirtualFolder - Removes a virtual folder.
 func (s *SDK) RemoveVirtualFolder(ctx context.Context, request operations.RemoveVirtualFolderRequest) (*operations.RemoveVirtualFolderResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/Library/VirtualFolders"
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -18189,7 +18721,7 @@ func (s *SDK) RemoveVirtualFolder(ctx context.Context, request operations.Remove
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -18212,8 +18744,9 @@ func (s *SDK) RemoveVirtualFolder(ctx context.Context, request operations.Remove
 	return res, nil
 }
 
+// RenameVirtualFolder - Renames a virtual folder.
 func (s *SDK) RenameVirtualFolder(ctx context.Context, request operations.RenameVirtualFolderRequest) (*operations.RenameVirtualFolderResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/Library/VirtualFolders/Name"
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -18223,7 +18756,7 @@ func (s *SDK) RenameVirtualFolder(ctx context.Context, request operations.Rename
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -18294,8 +18827,9 @@ func (s *SDK) RenameVirtualFolder(ctx context.Context, request operations.Rename
 	return res, nil
 }
 
+// ReportPlaybackProgress - Reports playback progress within a session.
 func (s *SDK) ReportPlaybackProgress(ctx context.Context, request operations.ReportPlaybackProgressRequest) (*operations.ReportPlaybackProgressResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/Sessions/Playing/Progress"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -18310,7 +18844,7 @@ func (s *SDK) ReportPlaybackProgress(ctx context.Context, request operations.Rep
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -18333,8 +18867,9 @@ func (s *SDK) ReportPlaybackProgress(ctx context.Context, request operations.Rep
 	return res, nil
 }
 
+// ReportPlaybackStart - Reports playback has started within a session.
 func (s *SDK) ReportPlaybackStart(ctx context.Context, request operations.ReportPlaybackStartRequest) (*operations.ReportPlaybackStartResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/Sessions/Playing"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -18349,7 +18884,7 @@ func (s *SDK) ReportPlaybackStart(ctx context.Context, request operations.Report
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -18372,8 +18907,9 @@ func (s *SDK) ReportPlaybackStart(ctx context.Context, request operations.Report
 	return res, nil
 }
 
+// ReportPlaybackStopped - Reports playback has stopped within a session.
 func (s *SDK) ReportPlaybackStopped(ctx context.Context, request operations.ReportPlaybackStoppedRequest) (*operations.ReportPlaybackStoppedResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/Sessions/Playing/Stopped"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -18388,7 +18924,7 @@ func (s *SDK) ReportPlaybackStopped(ctx context.Context, request operations.Repo
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -18411,8 +18947,9 @@ func (s *SDK) ReportPlaybackStopped(ctx context.Context, request operations.Repo
 	return res, nil
 }
 
+// ReportSessionEnded - Reports that a session has ended.
 func (s *SDK) ReportSessionEnded(ctx context.Context, request operations.ReportSessionEndedRequest) (*operations.ReportSessionEndedResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/Sessions/Logout"
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -18420,7 +18957,7 @@ func (s *SDK) ReportSessionEnded(ctx context.Context, request operations.ReportS
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -18443,8 +18980,9 @@ func (s *SDK) ReportSessionEnded(ctx context.Context, request operations.ReportS
 	return res, nil
 }
 
+// ReportViewing - Reports that a session is viewing an item.
 func (s *SDK) ReportViewing(ctx context.Context, request operations.ReportViewingRequest) (*operations.ReportViewingResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/Sessions/Viewing"
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -18454,7 +18992,7 @@ func (s *SDK) ReportViewing(ctx context.Context, request operations.ReportViewin
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -18477,8 +19015,9 @@ func (s *SDK) ReportViewing(ctx context.Context, request operations.ReportViewin
 	return res, nil
 }
 
+// ResetTuner - Resets a tv tuner.
 func (s *SDK) ResetTuner(ctx context.Context, request operations.ResetTunerRequest) (*operations.ResetTunerResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/LiveTv/Tuners/{tunerId}/Reset", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -18486,7 +19025,7 @@ func (s *SDK) ResetTuner(ctx context.Context, request operations.ResetTunerReque
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -18509,8 +19048,9 @@ func (s *SDK) ResetTuner(ctx context.Context, request operations.ResetTunerReque
 	return res, nil
 }
 
+// RestartApplication - Restarts the application.
 func (s *SDK) RestartApplication(ctx context.Context, request operations.RestartApplicationRequest) (*operations.RestartApplicationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/System/Restart"
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -18518,7 +19058,7 @@ func (s *SDK) RestartApplication(ctx context.Context, request operations.Restart
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -18541,8 +19081,9 @@ func (s *SDK) RestartApplication(ctx context.Context, request operations.Restart
 	return res, nil
 }
 
+// RevokeKey - Remove an api key.
 func (s *SDK) RevokeKey(ctx context.Context, request operations.RevokeKeyRequest) (*operations.RevokeKeyResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Auth/Keys/{key}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -18550,7 +19091,7 @@ func (s *SDK) RevokeKey(ctx context.Context, request operations.RevokeKeyRequest
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -18573,8 +19114,9 @@ func (s *SDK) RevokeKey(ctx context.Context, request operations.RevokeKeyRequest
 	return res, nil
 }
 
+// SearchRemoteSubtitles - Search remote subtitles.
 func (s *SDK) SearchRemoteSubtitles(ctx context.Context, request operations.SearchRemoteSubtitlesRequest) (*operations.SearchRemoteSubtitlesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Items/{itemId}/RemoteSearch/Subtitles/{language}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -18584,7 +19126,7 @@ func (s *SDK) SearchRemoteSubtitles(ctx context.Context, request operations.Sear
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -18630,8 +19172,9 @@ func (s *SDK) SearchRemoteSubtitles(ctx context.Context, request operations.Sear
 	return res, nil
 }
 
+// SendFullGeneralCommand - Issues a full general command to a client.
 func (s *SDK) SendFullGeneralCommand(ctx context.Context, request operations.SendFullGeneralCommandRequest) (*operations.SendFullGeneralCommandResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Sessions/{sessionId}/Command", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -18649,7 +19192,7 @@ func (s *SDK) SendFullGeneralCommand(ctx context.Context, request operations.Sen
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -18672,8 +19215,9 @@ func (s *SDK) SendFullGeneralCommand(ctx context.Context, request operations.Sen
 	return res, nil
 }
 
+// SendGeneralCommand - Issues a general command to a client.
 func (s *SDK) SendGeneralCommand(ctx context.Context, request operations.SendGeneralCommandRequest) (*operations.SendGeneralCommandResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Sessions/{sessionId}/Command/{command}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -18681,7 +19225,7 @@ func (s *SDK) SendGeneralCommand(ctx context.Context, request operations.SendGen
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -18704,8 +19248,9 @@ func (s *SDK) SendGeneralCommand(ctx context.Context, request operations.SendGen
 	return res, nil
 }
 
+// SendMessageCommand - Issues a command to a client to display a message to the user.
 func (s *SDK) SendMessageCommand(ctx context.Context, request operations.SendMessageCommandRequest) (*operations.SendMessageCommandResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Sessions/{sessionId}/Message", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -18715,7 +19260,7 @@ func (s *SDK) SendMessageCommand(ctx context.Context, request operations.SendMes
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -18738,8 +19283,9 @@ func (s *SDK) SendMessageCommand(ctx context.Context, request operations.SendMes
 	return res, nil
 }
 
+// SendPlaystateCommand - Issues a playstate command to a client.
 func (s *SDK) SendPlaystateCommand(ctx context.Context, request operations.SendPlaystateCommandRequest) (*operations.SendPlaystateCommandResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Sessions/{sessionId}/Playing/{command}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -18749,7 +19295,7 @@ func (s *SDK) SendPlaystateCommand(ctx context.Context, request operations.SendP
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -18772,8 +19318,9 @@ func (s *SDK) SendPlaystateCommand(ctx context.Context, request operations.SendP
 	return res, nil
 }
 
+// SendSystemCommand - Issues a system command to a client.
 func (s *SDK) SendSystemCommand(ctx context.Context, request operations.SendSystemCommandRequest) (*operations.SendSystemCommandResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Sessions/{sessionId}/System/{command}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -18781,7 +19328,7 @@ func (s *SDK) SendSystemCommand(ctx context.Context, request operations.SendSyst
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -18804,8 +19351,9 @@ func (s *SDK) SendSystemCommand(ctx context.Context, request operations.SendSyst
 	return res, nil
 }
 
+// SetChannelMapping - Set channel mappings.
 func (s *SDK) SetChannelMapping(ctx context.Context, request operations.SetChannelMappingRequest) (*operations.SetChannelMappingResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/LiveTv/ChannelMappings"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -18823,7 +19371,7 @@ func (s *SDK) SetChannelMapping(ctx context.Context, request operations.SetChann
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -18869,8 +19417,9 @@ func (s *SDK) SetChannelMapping(ctx context.Context, request operations.SetChann
 	return res, nil
 }
 
+// SetItemImage - Set item image.
 func (s *SDK) SetItemImage(ctx context.Context, request operations.SetItemImageRequest) (*operations.SetItemImageResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Items/{itemId}/Images/{imageType}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -18878,7 +19427,7 @@ func (s *SDK) SetItemImage(ctx context.Context, request operations.SetItemImageR
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -18925,8 +19474,9 @@ func (s *SDK) SetItemImage(ctx context.Context, request operations.SetItemImageR
 	return res, nil
 }
 
+// SetItemImageByIndex - Set item image.
 func (s *SDK) SetItemImageByIndex(ctx context.Context, request operations.SetItemImageByIndexRequest) (*operations.SetItemImageByIndexResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Items/{itemId}/Images/{imageType}/{imageIndex}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -18934,7 +19484,7 @@ func (s *SDK) SetItemImageByIndex(ctx context.Context, request operations.SetIte
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -18981,8 +19531,9 @@ func (s *SDK) SetItemImageByIndex(ctx context.Context, request operations.SetIte
 	return res, nil
 }
 
+// SetRead - Sets notifications as read.
 func (s *SDK) SetRead(ctx context.Context, request operations.SetReadRequest) (*operations.SetReadResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Notifications/{userId}/Read", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -18990,7 +19541,7 @@ func (s *SDK) SetRead(ctx context.Context, request operations.SetReadRequest) (*
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -19013,8 +19564,9 @@ func (s *SDK) SetRead(ctx context.Context, request operations.SetReadRequest) (*
 	return res, nil
 }
 
+// SetRemoteAccess - Sets remote access and UPnP.
 func (s *SDK) SetRemoteAccess(ctx context.Context, request operations.SetRemoteAccessRequest) (*operations.SetRemoteAccessResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/Startup/RemoteAccess"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -19032,7 +19584,7 @@ func (s *SDK) SetRemoteAccess(ctx context.Context, request operations.SetRemoteA
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -19055,8 +19607,9 @@ func (s *SDK) SetRemoteAccess(ctx context.Context, request operations.SetRemoteA
 	return res, nil
 }
 
+// SetRepositories - Sets the enabled and existing package repositories.
 func (s *SDK) SetRepositories(ctx context.Context, request operations.SetRepositoriesRequest) (*operations.SetRepositoriesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/Repositories"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -19071,7 +19624,7 @@ func (s *SDK) SetRepositories(ctx context.Context, request operations.SetReposit
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -19094,8 +19647,9 @@ func (s *SDK) SetRepositories(ctx context.Context, request operations.SetReposit
 	return res, nil
 }
 
+// SetUnread - Sets notifications as unread.
 func (s *SDK) SetUnread(ctx context.Context, request operations.SetUnreadRequest) (*operations.SetUnreadResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Notifications/{userId}/Unread", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -19103,7 +19657,7 @@ func (s *SDK) SetUnread(ctx context.Context, request operations.SetUnreadRequest
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -19126,8 +19680,9 @@ func (s *SDK) SetUnread(ctx context.Context, request operations.SetUnreadRequest
 	return res, nil
 }
 
+// ShutdownApplication - Shuts down the application.
 func (s *SDK) ShutdownApplication(ctx context.Context, request operations.ShutdownApplicationRequest) (*operations.ShutdownApplicationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/System/Shutdown"
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -19135,7 +19690,7 @@ func (s *SDK) ShutdownApplication(ctx context.Context, request operations.Shutdo
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -19158,8 +19713,9 @@ func (s *SDK) ShutdownApplication(ctx context.Context, request operations.Shutdo
 	return res, nil
 }
 
+// StartTask - Start specified task.
 func (s *SDK) StartTask(ctx context.Context, request operations.StartTaskRequest) (*operations.StartTaskResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/ScheduledTasks/Running/{taskId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -19167,7 +19723,7 @@ func (s *SDK) StartTask(ctx context.Context, request operations.StartTaskRequest
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -19214,8 +19770,9 @@ func (s *SDK) StartTask(ctx context.Context, request operations.StartTaskRequest
 	return res, nil
 }
 
+// StopEncodingProcess - Stops an active encoding.
 func (s *SDK) StopEncodingProcess(ctx context.Context, request operations.StopEncodingProcessRequest) (*operations.StopEncodingProcessResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/Videos/ActiveEncodings"
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -19225,7 +19782,7 @@ func (s *SDK) StopEncodingProcess(ctx context.Context, request operations.StopEn
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -19248,8 +19805,9 @@ func (s *SDK) StopEncodingProcess(ctx context.Context, request operations.StopEn
 	return res, nil
 }
 
+// StopTask - Stop specified task.
 func (s *SDK) StopTask(ctx context.Context, request operations.StopTaskRequest) (*operations.StopTaskResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/ScheduledTasks/Running/{taskId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -19257,7 +19815,7 @@ func (s *SDK) StopTask(ctx context.Context, request operations.StopTaskRequest) 
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -19304,8 +19862,9 @@ func (s *SDK) StopTask(ctx context.Context, request operations.StopTaskRequest) 
 	return res, nil
 }
 
+// SyncPlayBuffering - Notify SyncPlay group that member is buffering.
 func (s *SDK) SyncPlayBuffering(ctx context.Context, request operations.SyncPlayBufferingRequest) (*operations.SyncPlayBufferingResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/SyncPlay/Buffering"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -19323,7 +19882,7 @@ func (s *SDK) SyncPlayBuffering(ctx context.Context, request operations.SyncPlay
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -19346,8 +19905,9 @@ func (s *SDK) SyncPlayBuffering(ctx context.Context, request operations.SyncPlay
 	return res, nil
 }
 
+// SyncPlayCreateGroup - Create a new SyncPlay group.
 func (s *SDK) SyncPlayCreateGroup(ctx context.Context, request operations.SyncPlayCreateGroupRequest) (*operations.SyncPlayCreateGroupResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/SyncPlay/New"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -19365,7 +19925,7 @@ func (s *SDK) SyncPlayCreateGroup(ctx context.Context, request operations.SyncPl
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -19388,8 +19948,9 @@ func (s *SDK) SyncPlayCreateGroup(ctx context.Context, request operations.SyncPl
 	return res, nil
 }
 
+// SyncPlayGetGroups - Gets all SyncPlay groups.
 func (s *SDK) SyncPlayGetGroups(ctx context.Context, request operations.SyncPlayGetGroupsRequest) (*operations.SyncPlayGetGroupsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/SyncPlay/List"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -19397,7 +19958,7 @@ func (s *SDK) SyncPlayGetGroups(ctx context.Context, request operations.SyncPlay
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -19443,8 +20004,9 @@ func (s *SDK) SyncPlayGetGroups(ctx context.Context, request operations.SyncPlay
 	return res, nil
 }
 
+// SyncPlayJoinGroup - Join an existing SyncPlay group.
 func (s *SDK) SyncPlayJoinGroup(ctx context.Context, request operations.SyncPlayJoinGroupRequest) (*operations.SyncPlayJoinGroupResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/SyncPlay/Join"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -19462,7 +20024,7 @@ func (s *SDK) SyncPlayJoinGroup(ctx context.Context, request operations.SyncPlay
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -19485,8 +20047,9 @@ func (s *SDK) SyncPlayJoinGroup(ctx context.Context, request operations.SyncPlay
 	return res, nil
 }
 
+// SyncPlayLeaveGroup - Leave the joined SyncPlay group.
 func (s *SDK) SyncPlayLeaveGroup(ctx context.Context, request operations.SyncPlayLeaveGroupRequest) (*operations.SyncPlayLeaveGroupResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/SyncPlay/Leave"
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -19494,7 +20057,7 @@ func (s *SDK) SyncPlayLeaveGroup(ctx context.Context, request operations.SyncPla
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -19517,8 +20080,9 @@ func (s *SDK) SyncPlayLeaveGroup(ctx context.Context, request operations.SyncPla
 	return res, nil
 }
 
+// SyncPlayMovePlaylistItem - Request to move an item in the playlist in SyncPlay group.
 func (s *SDK) SyncPlayMovePlaylistItem(ctx context.Context, request operations.SyncPlayMovePlaylistItemRequest) (*operations.SyncPlayMovePlaylistItemResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/SyncPlay/MovePlaylistItem"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -19536,7 +20100,7 @@ func (s *SDK) SyncPlayMovePlaylistItem(ctx context.Context, request operations.S
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -19559,8 +20123,9 @@ func (s *SDK) SyncPlayMovePlaylistItem(ctx context.Context, request operations.S
 	return res, nil
 }
 
+// SyncPlayNextItem - Request next item in SyncPlay group.
 func (s *SDK) SyncPlayNextItem(ctx context.Context, request operations.SyncPlayNextItemRequest) (*operations.SyncPlayNextItemResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/SyncPlay/NextItem"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -19578,7 +20143,7 @@ func (s *SDK) SyncPlayNextItem(ctx context.Context, request operations.SyncPlayN
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -19601,8 +20166,9 @@ func (s *SDK) SyncPlayNextItem(ctx context.Context, request operations.SyncPlayN
 	return res, nil
 }
 
+// SyncPlayPause - Request pause in SyncPlay group.
 func (s *SDK) SyncPlayPause(ctx context.Context, request operations.SyncPlayPauseRequest) (*operations.SyncPlayPauseResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/SyncPlay/Pause"
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -19610,7 +20176,7 @@ func (s *SDK) SyncPlayPause(ctx context.Context, request operations.SyncPlayPaus
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -19633,8 +20199,9 @@ func (s *SDK) SyncPlayPause(ctx context.Context, request operations.SyncPlayPaus
 	return res, nil
 }
 
+// SyncPlayPing - Update session ping.
 func (s *SDK) SyncPlayPing(ctx context.Context, request operations.SyncPlayPingRequest) (*operations.SyncPlayPingResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/SyncPlay/Ping"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -19652,7 +20219,7 @@ func (s *SDK) SyncPlayPing(ctx context.Context, request operations.SyncPlayPingR
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -19675,8 +20242,9 @@ func (s *SDK) SyncPlayPing(ctx context.Context, request operations.SyncPlayPingR
 	return res, nil
 }
 
+// SyncPlayPreviousItem - Request previous item in SyncPlay group.
 func (s *SDK) SyncPlayPreviousItem(ctx context.Context, request operations.SyncPlayPreviousItemRequest) (*operations.SyncPlayPreviousItemResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/SyncPlay/PreviousItem"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -19694,7 +20262,7 @@ func (s *SDK) SyncPlayPreviousItem(ctx context.Context, request operations.SyncP
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -19717,8 +20285,9 @@ func (s *SDK) SyncPlayPreviousItem(ctx context.Context, request operations.SyncP
 	return res, nil
 }
 
+// SyncPlayQueue - Request to queue items to the playlist of a SyncPlay group.
 func (s *SDK) SyncPlayQueue(ctx context.Context, request operations.SyncPlayQueueRequest) (*operations.SyncPlayQueueResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/SyncPlay/Queue"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -19736,7 +20305,7 @@ func (s *SDK) SyncPlayQueue(ctx context.Context, request operations.SyncPlayQueu
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -19759,8 +20328,9 @@ func (s *SDK) SyncPlayQueue(ctx context.Context, request operations.SyncPlayQueu
 	return res, nil
 }
 
+// SyncPlayReady - Notify SyncPlay group that member is ready for playback.
 func (s *SDK) SyncPlayReady(ctx context.Context, request operations.SyncPlayReadyRequest) (*operations.SyncPlayReadyResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/SyncPlay/Ready"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -19778,7 +20348,7 @@ func (s *SDK) SyncPlayReady(ctx context.Context, request operations.SyncPlayRead
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -19801,8 +20371,9 @@ func (s *SDK) SyncPlayReady(ctx context.Context, request operations.SyncPlayRead
 	return res, nil
 }
 
+// SyncPlayRemoveFromPlaylist - Request to remove items from the playlist in SyncPlay group.
 func (s *SDK) SyncPlayRemoveFromPlaylist(ctx context.Context, request operations.SyncPlayRemoveFromPlaylistRequest) (*operations.SyncPlayRemoveFromPlaylistResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/SyncPlay/RemoveFromPlaylist"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -19820,7 +20391,7 @@ func (s *SDK) SyncPlayRemoveFromPlaylist(ctx context.Context, request operations
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -19843,8 +20414,9 @@ func (s *SDK) SyncPlayRemoveFromPlaylist(ctx context.Context, request operations
 	return res, nil
 }
 
+// SyncPlaySeek - Request seek in SyncPlay group.
 func (s *SDK) SyncPlaySeek(ctx context.Context, request operations.SyncPlaySeekRequest) (*operations.SyncPlaySeekResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/SyncPlay/Seek"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -19862,7 +20434,7 @@ func (s *SDK) SyncPlaySeek(ctx context.Context, request operations.SyncPlaySeekR
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -19885,8 +20457,9 @@ func (s *SDK) SyncPlaySeek(ctx context.Context, request operations.SyncPlaySeekR
 	return res, nil
 }
 
+// SyncPlaySetIgnoreWait - Request SyncPlay group to ignore member during group-wait.
 func (s *SDK) SyncPlaySetIgnoreWait(ctx context.Context, request operations.SyncPlaySetIgnoreWaitRequest) (*operations.SyncPlaySetIgnoreWaitResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/SyncPlay/SetIgnoreWait"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -19904,7 +20477,7 @@ func (s *SDK) SyncPlaySetIgnoreWait(ctx context.Context, request operations.Sync
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -19927,8 +20500,9 @@ func (s *SDK) SyncPlaySetIgnoreWait(ctx context.Context, request operations.Sync
 	return res, nil
 }
 
+// SyncPlaySetNewQueue - Request to set new playlist in SyncPlay group.
 func (s *SDK) SyncPlaySetNewQueue(ctx context.Context, request operations.SyncPlaySetNewQueueRequest) (*operations.SyncPlaySetNewQueueResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/SyncPlay/SetNewQueue"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -19946,7 +20520,7 @@ func (s *SDK) SyncPlaySetNewQueue(ctx context.Context, request operations.SyncPl
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -19969,8 +20543,9 @@ func (s *SDK) SyncPlaySetNewQueue(ctx context.Context, request operations.SyncPl
 	return res, nil
 }
 
+// SyncPlaySetPlaylistItem - Request to change playlist item in SyncPlay group.
 func (s *SDK) SyncPlaySetPlaylistItem(ctx context.Context, request operations.SyncPlaySetPlaylistItemRequest) (*operations.SyncPlaySetPlaylistItemResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/SyncPlay/SetPlaylistItem"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -19988,7 +20563,7 @@ func (s *SDK) SyncPlaySetPlaylistItem(ctx context.Context, request operations.Sy
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -20011,8 +20586,9 @@ func (s *SDK) SyncPlaySetPlaylistItem(ctx context.Context, request operations.Sy
 	return res, nil
 }
 
+// SyncPlaySetRepeatMode - Request to set repeat mode in SyncPlay group.
 func (s *SDK) SyncPlaySetRepeatMode(ctx context.Context, request operations.SyncPlaySetRepeatModeRequest) (*operations.SyncPlaySetRepeatModeResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/SyncPlay/SetRepeatMode"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -20030,7 +20606,7 @@ func (s *SDK) SyncPlaySetRepeatMode(ctx context.Context, request operations.Sync
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -20053,8 +20629,9 @@ func (s *SDK) SyncPlaySetRepeatMode(ctx context.Context, request operations.Sync
 	return res, nil
 }
 
+// SyncPlaySetShuffleMode - Request to set shuffle mode in SyncPlay group.
 func (s *SDK) SyncPlaySetShuffleMode(ctx context.Context, request operations.SyncPlaySetShuffleModeRequest) (*operations.SyncPlaySetShuffleModeResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/SyncPlay/SetShuffleMode"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -20072,7 +20649,7 @@ func (s *SDK) SyncPlaySetShuffleMode(ctx context.Context, request operations.Syn
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -20095,8 +20672,9 @@ func (s *SDK) SyncPlaySetShuffleMode(ctx context.Context, request operations.Syn
 	return res, nil
 }
 
+// SyncPlayStop - Request stop in SyncPlay group.
 func (s *SDK) SyncPlayStop(ctx context.Context, request operations.SyncPlayStopRequest) (*operations.SyncPlayStopResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/SyncPlay/Stop"
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -20104,7 +20682,7 @@ func (s *SDK) SyncPlayStop(ctx context.Context, request operations.SyncPlayStopR
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -20127,8 +20705,9 @@ func (s *SDK) SyncPlayStop(ctx context.Context, request operations.SyncPlayStopR
 	return res, nil
 }
 
+// SyncPlayUnpause - Request unpause in SyncPlay group.
 func (s *SDK) SyncPlayUnpause(ctx context.Context, request operations.SyncPlayUnpauseRequest) (*operations.SyncPlayUnpauseResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/SyncPlay/Unpause"
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -20136,7 +20715,7 @@ func (s *SDK) SyncPlayUnpause(ctx context.Context, request operations.SyncPlayUn
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -20159,8 +20738,9 @@ func (s *SDK) SyncPlayUnpause(ctx context.Context, request operations.SyncPlayUn
 	return res, nil
 }
 
+// UninstallPlugin - Uninstalls a plugin.
 func (s *SDK) UninstallPlugin(ctx context.Context, request operations.UninstallPluginRequest) (*operations.UninstallPluginResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Plugins/{pluginId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -20168,7 +20748,7 @@ func (s *SDK) UninstallPlugin(ctx context.Context, request operations.UninstallP
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -20215,8 +20795,66 @@ func (s *SDK) UninstallPlugin(ctx context.Context, request operations.UninstallP
 	return res, nil
 }
 
+// UninstallPluginByVersion - Uninstalls a plugin by version.
+func (s *SDK) UninstallPluginByVersion(ctx context.Context, request operations.UninstallPluginByVersionRequest) (*operations.UninstallPluginByVersionResponse, error) {
+	baseURL := s._serverURL
+	url := utils.GenerateURL(ctx, baseURL, "/Plugins/{pluginId}/{version}", request.PathParams)
+
+	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
+	if err != nil {
+		return nil, fmt.Errorf("error creating request: %w", err)
+	}
+
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
+
+	httpRes, err := client.Do(req)
+	if err != nil {
+		return nil, fmt.Errorf("error sending request: %w", err)
+	}
+	defer httpRes.Body.Close()
+
+	contentType := httpRes.Header.Get("Content-Type")
+
+	res := &operations.UninstallPluginByVersionResponse{
+		StatusCode:  int64(httpRes.StatusCode),
+		ContentType: contentType,
+	}
+	switch {
+	case httpRes.StatusCode == 204:
+	case httpRes.StatusCode == 401:
+	case httpRes.StatusCode == 403:
+	case httpRes.StatusCode == 404:
+		switch {
+		case utils.MatchContentType(contentType, `application/json`):
+			var out map[string]interface{}
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
+				return nil, err
+			}
+
+			res.ProblemDetails = out
+		case utils.MatchContentType(contentType, `application/json; profile="CamelCase"`):
+			var out map[string]interface{}
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
+				return nil, err
+			}
+
+			res.ProblemDetails = out
+		case utils.MatchContentType(contentType, `application/json; profile="PascalCase"`):
+			var out map[string]interface{}
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
+				return nil, err
+			}
+
+			res.ProblemDetails = out
+		}
+	}
+
+	return res, nil
+}
+
+// UnmarkFavoriteItem - Unmarks item as a favorite.
 func (s *SDK) UnmarkFavoriteItem(ctx context.Context, request operations.UnmarkFavoriteItemRequest) (*operations.UnmarkFavoriteItemResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Users/{userId}/FavoriteItems/{itemId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -20224,7 +20862,7 @@ func (s *SDK) UnmarkFavoriteItem(ctx context.Context, request operations.UnmarkF
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -20270,8 +20908,9 @@ func (s *SDK) UnmarkFavoriteItem(ctx context.Context, request operations.UnmarkF
 	return res, nil
 }
 
+// UpdateConfiguration - Updates application configuration.
 func (s *SDK) UpdateConfiguration(ctx context.Context, request operations.UpdateConfigurationRequest) (*operations.UpdateConfigurationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/System/Configuration"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -20289,7 +20928,7 @@ func (s *SDK) UpdateConfiguration(ctx context.Context, request operations.Update
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -20312,8 +20951,9 @@ func (s *SDK) UpdateConfiguration(ctx context.Context, request operations.Update
 	return res, nil
 }
 
+// UpdateDeviceOptions - Update device options.
 func (s *SDK) UpdateDeviceOptions(ctx context.Context, request operations.UpdateDeviceOptionsRequest) (*operations.UpdateDeviceOptionsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/Devices/Options"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -20333,7 +20973,7 @@ func (s *SDK) UpdateDeviceOptions(ctx context.Context, request operations.Update
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -20380,8 +21020,9 @@ func (s *SDK) UpdateDeviceOptions(ctx context.Context, request operations.Update
 	return res, nil
 }
 
+// UpdateDisplayPreferences - Update Display Preferences.
 func (s *SDK) UpdateDisplayPreferences(ctx context.Context, request operations.UpdateDisplayPreferencesRequest) (*operations.UpdateDisplayPreferencesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/DisplayPreferences/{displayPreferencesId}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -20401,7 +21042,7 @@ func (s *SDK) UpdateDisplayPreferences(ctx context.Context, request operations.U
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -20424,8 +21065,9 @@ func (s *SDK) UpdateDisplayPreferences(ctx context.Context, request operations.U
 	return res, nil
 }
 
+// UpdateInitialConfiguration - Sets the initial startup wizard configuration.
 func (s *SDK) UpdateInitialConfiguration(ctx context.Context, request operations.UpdateInitialConfigurationRequest) (*operations.UpdateInitialConfigurationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/Startup/Configuration"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -20443,7 +21085,7 @@ func (s *SDK) UpdateInitialConfiguration(ctx context.Context, request operations
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -20466,8 +21108,9 @@ func (s *SDK) UpdateInitialConfiguration(ctx context.Context, request operations
 	return res, nil
 }
 
+// UpdateItem - Updates an item.
 func (s *SDK) UpdateItem(ctx context.Context, request operations.UpdateItemRequest) (*operations.UpdateItemResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Items/{itemId}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -20485,7 +21128,7 @@ func (s *SDK) UpdateItem(ctx context.Context, request operations.UpdateItemReque
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -20532,8 +21175,9 @@ func (s *SDK) UpdateItem(ctx context.Context, request operations.UpdateItemReque
 	return res, nil
 }
 
+// UpdateItemContentType - Updates an item's content type.
 func (s *SDK) UpdateItemContentType(ctx context.Context, request operations.UpdateItemContentTypeRequest) (*operations.UpdateItemContentTypeResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Items/{itemId}/ContentType", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -20543,7 +21187,7 @@ func (s *SDK) UpdateItemContentType(ctx context.Context, request operations.Upda
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -20590,8 +21234,9 @@ func (s *SDK) UpdateItemContentType(ctx context.Context, request operations.Upda
 	return res, nil
 }
 
+// UpdateItemImageIndex - Updates the index for an item image.
 func (s *SDK) UpdateItemImageIndex(ctx context.Context, request operations.UpdateItemImageIndexRequest) (*operations.UpdateItemImageIndexResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Items/{itemId}/Images/{imageType}/{imageIndex}/Index", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -20601,7 +21246,7 @@ func (s *SDK) UpdateItemImageIndex(ctx context.Context, request operations.Updat
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -20648,8 +21293,9 @@ func (s *SDK) UpdateItemImageIndex(ctx context.Context, request operations.Updat
 	return res, nil
 }
 
+// UpdateLibraryOptions - Update library options.
 func (s *SDK) UpdateLibraryOptions(ctx context.Context, request operations.UpdateLibraryOptionsRequest) (*operations.UpdateLibraryOptionsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/Library/VirtualFolders/LibraryOptions"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -20664,7 +21310,7 @@ func (s *SDK) UpdateLibraryOptions(ctx context.Context, request operations.Updat
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -20687,8 +21333,9 @@ func (s *SDK) UpdateLibraryOptions(ctx context.Context, request operations.Updat
 	return res, nil
 }
 
+// UpdateMediaEncoderPath - Updates the path to the media encoder.
 func (s *SDK) UpdateMediaEncoderPath(ctx context.Context, request operations.UpdateMediaEncoderPathRequest) (*operations.UpdateMediaEncoderPathResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/System/MediaEncoder/Path"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -20706,7 +21353,7 @@ func (s *SDK) UpdateMediaEncoderPath(ctx context.Context, request operations.Upd
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -20729,8 +21376,9 @@ func (s *SDK) UpdateMediaEncoderPath(ctx context.Context, request operations.Upd
 	return res, nil
 }
 
+// UpdateMediaPath - Updates a media path.
 func (s *SDK) UpdateMediaPath(ctx context.Context, request operations.UpdateMediaPathRequest) (*operations.UpdateMediaPathResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/Library/VirtualFolders/Paths/Update"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -20747,7 +21395,7 @@ func (s *SDK) UpdateMediaPath(ctx context.Context, request operations.UpdateMedi
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -20770,8 +21418,9 @@ func (s *SDK) UpdateMediaPath(ctx context.Context, request operations.UpdateMedi
 	return res, nil
 }
 
+// UpdateNamedConfiguration - Updates named configuration.
 func (s *SDK) UpdateNamedConfiguration(ctx context.Context, request operations.UpdateNamedConfigurationRequest) (*operations.UpdateNamedConfigurationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/System/Configuration/{key}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -20779,7 +21428,7 @@ func (s *SDK) UpdateNamedConfiguration(ctx context.Context, request operations.U
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -20802,8 +21451,10 @@ func (s *SDK) UpdateNamedConfiguration(ctx context.Context, request operations.U
 	return res, nil
 }
 
+// UpdatePluginConfiguration - Updates plugin configuration.
+// Accepts plugin configuration as JSON body.
 func (s *SDK) UpdatePluginConfiguration(ctx context.Context, request operations.UpdatePluginConfigurationRequest) (*operations.UpdatePluginConfigurationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Plugins/{pluginId}/Configuration", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -20811,7 +21462,7 @@ func (s *SDK) UpdatePluginConfiguration(ctx context.Context, request operations.
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -20858,8 +21509,9 @@ func (s *SDK) UpdatePluginConfiguration(ctx context.Context, request operations.
 	return res, nil
 }
 
+// UpdatePluginSecurityInfo - Updates plugin security info.
 func (s *SDK) UpdatePluginSecurityInfo(ctx context.Context, request operations.UpdatePluginSecurityInfoRequest) (*operations.UpdatePluginSecurityInfoResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/Plugins/SecurityInfo"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -20877,7 +21529,7 @@ func (s *SDK) UpdatePluginSecurityInfo(ctx context.Context, request operations.U
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -20900,8 +21552,9 @@ func (s *SDK) UpdatePluginSecurityInfo(ctx context.Context, request operations.U
 	return res, nil
 }
 
+// UpdateProfile - Updates a profile.
 func (s *SDK) UpdateProfile(ctx context.Context, request operations.UpdateProfileRequest) (*operations.UpdateProfileResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Dlna/Profiles/{profileId}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -20916,7 +21569,7 @@ func (s *SDK) UpdateProfile(ctx context.Context, request operations.UpdateProfil
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -20963,8 +21616,9 @@ func (s *SDK) UpdateProfile(ctx context.Context, request operations.UpdateProfil
 	return res, nil
 }
 
+// UpdateSeriesTimer - Updates a live tv series timer.
 func (s *SDK) UpdateSeriesTimer(ctx context.Context, request operations.UpdateSeriesTimerRequest) (*operations.UpdateSeriesTimerResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/LiveTv/SeriesTimers/{timerId}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -20979,7 +21633,7 @@ func (s *SDK) UpdateSeriesTimer(ctx context.Context, request operations.UpdateSe
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -21002,8 +21656,9 @@ func (s *SDK) UpdateSeriesTimer(ctx context.Context, request operations.UpdateSe
 	return res, nil
 }
 
+// UpdateStartupUser - Sets the user name and password.
 func (s *SDK) UpdateStartupUser(ctx context.Context, request operations.UpdateStartupUserRequest) (*operations.UpdateStartupUserResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/Startup/User"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -21018,7 +21673,7 @@ func (s *SDK) UpdateStartupUser(ctx context.Context, request operations.UpdateSt
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -21041,8 +21696,9 @@ func (s *SDK) UpdateStartupUser(ctx context.Context, request operations.UpdateSt
 	return res, nil
 }
 
+// UpdateTask - Update specified task triggers.
 func (s *SDK) UpdateTask(ctx context.Context, request operations.UpdateTaskRequest) (*operations.UpdateTaskResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/ScheduledTasks/{taskId}/Triggers", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -21060,7 +21716,7 @@ func (s *SDK) UpdateTask(ctx context.Context, request operations.UpdateTaskReque
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -21107,8 +21763,9 @@ func (s *SDK) UpdateTask(ctx context.Context, request operations.UpdateTaskReque
 	return res, nil
 }
 
+// UpdateTimer - Updates a live tv timer.
 func (s *SDK) UpdateTimer(ctx context.Context, request operations.UpdateTimerRequest) (*operations.UpdateTimerResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/LiveTv/Timers/{timerId}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -21123,7 +21780,7 @@ func (s *SDK) UpdateTimer(ctx context.Context, request operations.UpdateTimerReq
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -21146,8 +21803,9 @@ func (s *SDK) UpdateTimer(ctx context.Context, request operations.UpdateTimerReq
 	return res, nil
 }
 
+// UpdateUser - Updates a user.
 func (s *SDK) UpdateUser(ctx context.Context, request operations.UpdateUserRequest) (*operations.UpdateUserResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Users/{userId}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -21165,7 +21823,7 @@ func (s *SDK) UpdateUser(ctx context.Context, request operations.UpdateUserReque
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -21235,8 +21893,9 @@ func (s *SDK) UpdateUser(ctx context.Context, request operations.UpdateUserReque
 	return res, nil
 }
 
+// UpdateUserConfiguration - Updates a user configuration.
 func (s *SDK) UpdateUserConfiguration(ctx context.Context, request operations.UpdateUserConfigurationRequest) (*operations.UpdateUserConfigurationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Users/{userId}/Configuration", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -21254,7 +21913,7 @@ func (s *SDK) UpdateUserConfiguration(ctx context.Context, request operations.Up
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -21300,8 +21959,9 @@ func (s *SDK) UpdateUserConfiguration(ctx context.Context, request operations.Up
 	return res, nil
 }
 
+// UpdateUserEasyPassword - Updates a user's easy password.
 func (s *SDK) UpdateUserEasyPassword(ctx context.Context, request operations.UpdateUserEasyPasswordRequest) (*operations.UpdateUserEasyPasswordResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Users/{userId}/EasyPassword", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -21319,7 +21979,7 @@ func (s *SDK) UpdateUserEasyPassword(ctx context.Context, request operations.Upd
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -21389,8 +22049,9 @@ func (s *SDK) UpdateUserEasyPassword(ctx context.Context, request operations.Upd
 	return res, nil
 }
 
+// UpdateUserItemRating - Updates a user's rating for an item.
 func (s *SDK) UpdateUserItemRating(ctx context.Context, request operations.UpdateUserItemRatingRequest) (*operations.UpdateUserItemRatingResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Users/{userId}/Items/{itemId}/Rating", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -21400,7 +22061,7 @@ func (s *SDK) UpdateUserItemRating(ctx context.Context, request operations.Updat
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -21446,8 +22107,9 @@ func (s *SDK) UpdateUserItemRating(ctx context.Context, request operations.Updat
 	return res, nil
 }
 
+// UpdateUserPassword - Updates a user's password.
 func (s *SDK) UpdateUserPassword(ctx context.Context, request operations.UpdateUserPasswordRequest) (*operations.UpdateUserPasswordResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Users/{userId}/Password", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -21465,7 +22127,7 @@ func (s *SDK) UpdateUserPassword(ctx context.Context, request operations.UpdateU
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -21535,8 +22197,9 @@ func (s *SDK) UpdateUserPassword(ctx context.Context, request operations.UpdateU
 	return res, nil
 }
 
+// UpdateUserPolicy - Updates a user policy.
 func (s *SDK) UpdateUserPolicy(ctx context.Context, request operations.UpdateUserPolicyRequest) (*operations.UpdateUserPolicyResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Users/{userId}/Policy", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -21554,7 +22217,7 @@ func (s *SDK) UpdateUserPolicy(ctx context.Context, request operations.UpdateUse
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -21624,8 +22287,9 @@ func (s *SDK) UpdateUserPolicy(ctx context.Context, request operations.UpdateUse
 	return res, nil
 }
 
+// UploadSubtitle - Upload an external subtitle file.
 func (s *SDK) UploadSubtitle(ctx context.Context, request operations.UploadSubtitleRequest) (*operations.UploadSubtitleResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Videos/{itemId}/Subtitles", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -21643,7 +22307,7 @@ func (s *SDK) UploadSubtitle(ctx context.Context, request operations.UploadSubti
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -21664,8 +22328,9 @@ func (s *SDK) UploadSubtitle(ctx context.Context, request operations.UploadSubti
 	return res, nil
 }
 
+// ValidatePath - Validates path.
 func (s *SDK) ValidatePath(ctx context.Context, request operations.ValidatePathRequest) (*operations.ValidatePathResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/Environment/ValidatePath"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -21683,7 +22348,7 @@ func (s *SDK) ValidatePath(ctx context.Context, request operations.ValidatePathR
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {

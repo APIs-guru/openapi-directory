@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { Config } from "./config";
 export declare enum WebSecurityScannerSettingsServiceEnablementStateEnum {
     EnablementStateUnspecified = "ENABLEMENT_STATE_UNSPECIFIED",

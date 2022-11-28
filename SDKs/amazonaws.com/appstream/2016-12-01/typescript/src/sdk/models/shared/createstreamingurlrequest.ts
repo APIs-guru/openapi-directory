@@ -1,22 +1,23 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class CreateStreamingUrlRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ApplicationId" })
+  @SpeakeasyMetadata({ data: "json, name=ApplicationId" })
   applicationId?: string;
 
-  @Metadata({ data: "json, name=FleetName" })
+  @SpeakeasyMetadata({ data: "json, name=FleetName" })
   fleetName: string;
 
-  @Metadata({ data: "json, name=SessionContext" })
+  @SpeakeasyMetadata({ data: "json, name=SessionContext" })
   sessionContext?: string;
 
-  @Metadata({ data: "json, name=StackName" })
+  @SpeakeasyMetadata({ data: "json, name=StackName" })
   stackName: string;
 
-  @Metadata({ data: "json, name=UserId" })
+  @SpeakeasyMetadata({ data: "json, name=UserId" })
   userId: string;
 
-  @Metadata({ data: "json, name=Validity" })
+  @SpeakeasyMetadata({ data: "json, name=Validity" })
   validity?: number;
 }

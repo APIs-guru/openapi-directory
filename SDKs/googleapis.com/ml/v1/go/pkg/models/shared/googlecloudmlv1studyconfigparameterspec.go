@@ -19,6 +19,8 @@ const (
 	GoogleCloudMlV1StudyConfigParameterSpecTypeEnumDiscrete                 GoogleCloudMlV1StudyConfigParameterSpecTypeEnum = "DISCRETE"
 )
 
+// GoogleCloudMlV1StudyConfigParameterSpec
+// Represents a single parameter to optimize.
 type GoogleCloudMlV1StudyConfigParameterSpec struct {
 	CategoricalValueSpec    *GoogleCloudMlV1StudyConfigParameterSpecCategoricalValueSpec               `json:"categoricalValueSpec,omitempty"`
 	ChildParameterSpecs     []GoogleCloudMlV1StudyConfigParameterSpec                                  `json:"childParameterSpecs,omitempty"`

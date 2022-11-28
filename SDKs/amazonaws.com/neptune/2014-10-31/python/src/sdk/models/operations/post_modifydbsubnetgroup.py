@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostModifyDbSubnetGroupActionEnum(str, Enum):
     MODIFY_DB_SUBNET_GROUP = "ModifyDBSubnetGroup"
@@ -10,8 +14,8 @@ class PostModifyDbSubnetGroupVersionEnum(str, Enum):
 
 @dataclass
 class PostModifyDbSubnetGroupQueryParams:
-    action: PostModifyDbSubnetGroupActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostModifyDbSubnetGroupVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostModifyDbSubnetGroupActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostModifyDbSubnetGroupVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostModifyDbSubnetGroupHeaders:
 
 @dataclass
 class PostModifyDbSubnetGroupRequest:
-    query_params: PostModifyDbSubnetGroupQueryParams = field(default=None)
-    headers: PostModifyDbSubnetGroupHeaders = field(default=None)
+    headers: PostModifyDbSubnetGroupHeaders = field()
+    query_params: PostModifyDbSubnetGroupQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostModifyDbSubnetGroupResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

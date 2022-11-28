@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { AssignmentSubmission } from "./assignmentsubmission";
 import { MultipleChoiceSubmission } from "./multiplechoicesubmission";
 import { ShortAnswerSubmission } from "./shortanswersubmission";

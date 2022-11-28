@@ -22,19 +22,19 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { PreviousAssetPurchase } from "./previousassetpurchase";
 var PreviousAssetPurchases = /** @class */ (function (_super) {
     __extends(PreviousAssetPurchases, _super);
     function PreviousAssetPurchases() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=previous_purchases", elemType: shared.PreviousAssetPurchase }),
+        SpeakeasyMetadata({ data: "json, name=previous_purchases", elemType: PreviousAssetPurchase }),
         __metadata("design:type", Array)
     ], PreviousAssetPurchases.prototype, "previousPurchases", void 0);
     __decorate([
-        Metadata({ data: "json, name=result_count" }),
+        SpeakeasyMetadata({ data: "json, name=result_count" }),
         __metadata("design:type", Number)
     ], PreviousAssetPurchases.prototype, "resultCount", void 0);
     return PreviousAssetPurchases;

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // LogPattern
 /**
  * An object that defines the log patterns that belongs to a <code>LogPatternSet</code>.
@@ -33,19 +33,19 @@ var LogPattern = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Pattern" }),
+        SpeakeasyMetadata({ data: "json, name=Pattern" }),
         __metadata("design:type", String)
     ], LogPattern.prototype, "pattern", void 0);
     __decorate([
-        Metadata({ data: "json, name=PatternName" }),
+        SpeakeasyMetadata({ data: "json, name=PatternName" }),
         __metadata("design:type", String)
     ], LogPattern.prototype, "patternName", void 0);
     __decorate([
-        Metadata({ data: "json, name=PatternSetName" }),
+        SpeakeasyMetadata({ data: "json, name=PatternSetName" }),
         __metadata("design:type", String)
     ], LogPattern.prototype, "patternSetName", void 0);
     __decorate([
-        Metadata({ data: "json, name=Rank" }),
+        SpeakeasyMetadata({ data: "json, name=Rank" }),
         __metadata("design:type", Number)
     ], LogPattern.prototype, "rank", void 0);
     return LogPattern;

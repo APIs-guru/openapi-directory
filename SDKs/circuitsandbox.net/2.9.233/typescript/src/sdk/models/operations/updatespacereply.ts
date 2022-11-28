@@ -1,65 +1,66 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class UpdateSpaceReplyPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=replyId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=replyId" })
   replyId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=spaceId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=spaceId" })
   spaceId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=topicId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=topicId" })
   topicId: string;
 }
 
 
 export class UpdateSpaceReplyRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "form, name=attachments;" })
+  @SpeakeasyMetadata({ data: "form, name=attachments;" })
   attachments?: string[];
 
-  @Metadata({ data: "form, name=complex;" })
+  @SpeakeasyMetadata({ data: "form, name=complex;" })
   complex?: boolean;
 
-  @Metadata({ data: "form, name=content;" })
+  @SpeakeasyMetadata({ data: "form, name=content;" })
   content?: string;
 
-  @Metadata({ data: "form, name=formMetaData;" })
+  @SpeakeasyMetadata({ data: "form, name=formMetaData;" })
   formMetaData?: string;
 
-  @Metadata({ data: "form, name=mentionedUsers;" })
+  @SpeakeasyMetadata({ data: "form, name=mentionedUsers;" })
   mentionedUsers?: string[];
 }
 
 
 export class UpdateSpaceReplySecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   oauth: shared.SchemeOauth;
 }
 
 
 export class UpdateSpaceReplyRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: UpdateSpaceReplyPathParams;
 
-  @Metadata({ data: "request, media_type=application/x-www-form-urlencoded" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/x-www-form-urlencoded" })
   request?: UpdateSpaceReplyRequestBody;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: UpdateSpaceReplySecurity;
 }
 
 
 export class UpdateSpaceReplyResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   spaceReply?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

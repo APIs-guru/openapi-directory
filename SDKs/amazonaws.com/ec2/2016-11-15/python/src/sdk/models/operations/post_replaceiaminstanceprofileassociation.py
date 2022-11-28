@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostReplaceIamInstanceProfileAssociationActionEnum(str, Enum):
     REPLACE_IAM_INSTANCE_PROFILE_ASSOCIATION = "ReplaceIamInstanceProfileAssociation"
@@ -10,8 +14,8 @@ class PostReplaceIamInstanceProfileAssociationVersionEnum(str, Enum):
 
 @dataclass
 class PostReplaceIamInstanceProfileAssociationQueryParams:
-    action: PostReplaceIamInstanceProfileAssociationActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostReplaceIamInstanceProfileAssociationVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostReplaceIamInstanceProfileAssociationActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostReplaceIamInstanceProfileAssociationVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostReplaceIamInstanceProfileAssociationHeaders:
 
 @dataclass
 class PostReplaceIamInstanceProfileAssociationRequest:
-    query_params: PostReplaceIamInstanceProfileAssociationQueryParams = field(default=None)
-    headers: PostReplaceIamInstanceProfileAssociationHeaders = field(default=None)
+    headers: PostReplaceIamInstanceProfileAssociationHeaders = field()
+    query_params: PostReplaceIamInstanceProfileAssociationQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostReplaceIamInstanceProfileAssociationResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

@@ -1,5 +1,7 @@
 package shared
 
+// GoogleCloudRecommendationengineV1beta1PurchaseTransaction
+// A transaction represents the entire purchase transaction.
 type GoogleCloudRecommendationengineV1beta1PurchaseTransaction struct {
 	Costs        map[string]float32 `json:"costs,omitempty"`
 	CurrencyCode *string            `json:"currencyCode,omitempty"`

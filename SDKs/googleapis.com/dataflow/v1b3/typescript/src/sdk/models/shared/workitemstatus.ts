@@ -1,5 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CounterUpdate } from "./counterupdate";
 import { DynamicSourceSplit } from "./dynamicsourcesplit";
 import { Status } from "./status";
@@ -11,50 +10,51 @@ import { SourceOperationResponse } from "./sourceoperationresponse";
 import { Position } from "./position";
 
 
+
 // WorkItemStatus
 /** 
  * Conveys a worker's progress through the work described by a WorkItem.
 **/
 export class WorkItemStatus extends SpeakeasyBase {
-  @Metadata({ data: "json, name=completed" })
+  @SpeakeasyMetadata({ data: "json, name=completed" })
   completed?: boolean;
 
-  @Metadata({ data: "json, name=counterUpdates", elemType: shared.CounterUpdate })
+  @SpeakeasyMetadata({ data: "json, name=counterUpdates", elemType: CounterUpdate })
   counterUpdates?: CounterUpdate[];
 
-  @Metadata({ data: "json, name=dynamicSourceSplit" })
+  @SpeakeasyMetadata({ data: "json, name=dynamicSourceSplit" })
   dynamicSourceSplit?: DynamicSourceSplit;
 
-  @Metadata({ data: "json, name=errors", elemType: shared.Status })
+  @SpeakeasyMetadata({ data: "json, name=errors", elemType: Status })
   errors?: Status[];
 
-  @Metadata({ data: "json, name=metricUpdates", elemType: shared.MetricUpdate })
+  @SpeakeasyMetadata({ data: "json, name=metricUpdates", elemType: MetricUpdate })
   metricUpdates?: MetricUpdate[];
 
-  @Metadata({ data: "json, name=progress" })
+  @SpeakeasyMetadata({ data: "json, name=progress" })
   progress?: ApproximateProgress;
 
-  @Metadata({ data: "json, name=reportIndex" })
+  @SpeakeasyMetadata({ data: "json, name=reportIndex" })
   reportIndex?: string;
 
-  @Metadata({ data: "json, name=reportedProgress" })
+  @SpeakeasyMetadata({ data: "json, name=reportedProgress" })
   reportedProgress?: ApproximateReportedProgress;
 
-  @Metadata({ data: "json, name=requestedLeaseDuration" })
+  @SpeakeasyMetadata({ data: "json, name=requestedLeaseDuration" })
   requestedLeaseDuration?: string;
 
-  @Metadata({ data: "json, name=sourceFork" })
+  @SpeakeasyMetadata({ data: "json, name=sourceFork" })
   sourceFork?: SourceFork;
 
-  @Metadata({ data: "json, name=sourceOperationResponse" })
+  @SpeakeasyMetadata({ data: "json, name=sourceOperationResponse" })
   sourceOperationResponse?: SourceOperationResponse;
 
-  @Metadata({ data: "json, name=stopPosition" })
+  @SpeakeasyMetadata({ data: "json, name=stopPosition" })
   stopPosition?: Position;
 
-  @Metadata({ data: "json, name=totalThrottlerWaitTimeSeconds" })
+  @SpeakeasyMetadata({ data: "json, name=totalThrottlerWaitTimeSeconds" })
   totalThrottlerWaitTimeSeconds?: number;
 
-  @Metadata({ data: "json, name=workItemId" })
+  @SpeakeasyMetadata({ data: "json, name=workItemId" })
   workItemId?: string;
 }

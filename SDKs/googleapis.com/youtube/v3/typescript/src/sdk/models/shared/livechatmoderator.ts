@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { LiveChatModeratorSnippet } from "./livechatmoderatorsnippet";
+
 
 
 // LiveChatModerator
@@ -7,15 +8,15 @@ import { LiveChatModeratorSnippet } from "./livechatmoderatorsnippet";
  * A *liveChatModerator* resource represents a moderator for a YouTube live chat. A chat moderator has the ability to ban/unban users from a chat, remove message, etc.
 **/
 export class LiveChatModerator extends SpeakeasyBase {
-  @Metadata({ data: "json, name=etag" })
+  @SpeakeasyMetadata({ data: "json, name=etag" })
   etag?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=snippet" })
+  @SpeakeasyMetadata({ data: "json, name=snippet" })
   snippet?: LiveChatModeratorSnippet;
 }

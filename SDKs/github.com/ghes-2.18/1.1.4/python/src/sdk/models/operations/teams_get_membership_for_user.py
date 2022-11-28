@@ -5,18 +5,18 @@ from sdk.models import shared
 
 @dataclass
 class TeamsGetMembershipForUserPathParams:
-    team_id: int = field(default=None, metadata={'path_param': { 'field_name': 'team_id', 'style': 'simple', 'explode': False }})
-    username: str = field(default=None, metadata={'path_param': { 'field_name': 'username', 'style': 'simple', 'explode': False }})
+    team_id: int = field(metadata={'path_param': { 'field_name': 'team_id', 'style': 'simple', 'explode': False }})
+    username: str = field(metadata={'path_param': { 'field_name': 'username', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class TeamsGetMembershipForUserRequest:
-    path_params: TeamsGetMembershipForUserPathParams = field(default=None)
+    path_params: TeamsGetMembershipForUserPathParams = field()
     
 
 @dataclass
 class TeamsGetMembershipForUserResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     team_membership: Optional[shared.TeamMembership] = field(default=None)
     

@@ -8,6 +8,8 @@ const (
 	SectionSectionTypeEnumServices               SectionSectionTypeEnum = "SERVICES"
 )
 
+// Section
+// A section of the price list containing one or more items.
 type Section struct {
 	Items       []Item                  `json:"items,omitempty"`
 	Labels      []Label                 `json:"labels,omitempty"`

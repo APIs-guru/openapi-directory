@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AppImageConfigDetails } from "./appimageconfigdetails";
 
 
+
 export class ListAppImageConfigsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AppImageConfigs", elemType: shared.AppImageConfigDetails })
+  @SpeakeasyMetadata({ data: "json, name=AppImageConfigs", elemType: AppImageConfigDetails })
   appImageConfigs?: AppImageConfigDetails[];
 
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 }

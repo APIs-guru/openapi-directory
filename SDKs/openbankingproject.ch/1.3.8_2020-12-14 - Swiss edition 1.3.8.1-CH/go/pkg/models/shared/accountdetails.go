@@ -7,6 +7,15 @@ const (
 	AccountDetailsUsageEnumOrga AccountDetailsUsageEnum = "ORGA"
 )
 
+// AccountDetails
+// The ASPSP shall give at least one of the account reference identifiers:
+//   - iban
+//   - bban
+//   - pan
+//   - maskedPan
+//   - msisdn
+//
+// If the account is a multicurrency account currency code in "currency" is set to "XXX".
 type AccountDetails struct {
 	Links           map[string]HrefType      `json:"_links,omitempty"`
 	Balances        []Balance                `json:"balances,omitempty"`

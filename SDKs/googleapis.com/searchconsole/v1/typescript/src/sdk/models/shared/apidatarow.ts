@@ -1,19 +1,20 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ApiDataRow extends SpeakeasyBase {
-  @Metadata({ data: "json, name=clicks" })
+  @SpeakeasyMetadata({ data: "json, name=clicks" })
   clicks?: number;
 
-  @Metadata({ data: "json, name=ctr" })
+  @SpeakeasyMetadata({ data: "json, name=ctr" })
   ctr?: number;
 
-  @Metadata({ data: "json, name=impressions" })
+  @SpeakeasyMetadata({ data: "json, name=impressions" })
   impressions?: number;
 
-  @Metadata({ data: "json, name=keys" })
+  @SpeakeasyMetadata({ data: "json, name=keys" })
   keys?: string[];
 
-  @Metadata({ data: "json, name=position" })
+  @SpeakeasyMetadata({ data: "json, name=position" })
   position?: number;
 }

@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class Dimensions extends SpeakeasyBase {
-  @Metadata({ data: "json, name=dpi" })
+  @SpeakeasyMetadata({ data: "json, name=dpi" })
   dpi?: number;
 
-  @Metadata({ data: "json, name=height" })
+  @SpeakeasyMetadata({ data: "json, name=height" })
   height?: number;
 
-  @Metadata({ data: "json, name=width" })
+  @SpeakeasyMetadata({ data: "json, name=width" })
   width?: number;
 }

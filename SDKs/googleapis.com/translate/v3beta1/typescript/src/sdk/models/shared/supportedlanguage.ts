@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // SupportedLanguage
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A single supported language response corresponds to information related to one supported language.
 **/
 export class SupportedLanguage extends SpeakeasyBase {
-  @Metadata({ data: "json, name=displayName" })
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
   displayName?: string;
 
-  @Metadata({ data: "json, name=languageCode" })
+  @SpeakeasyMetadata({ data: "json, name=languageCode" })
   languageCode?: string;
 
-  @Metadata({ data: "json, name=supportSource" })
+  @SpeakeasyMetadata({ data: "json, name=supportSource" })
   supportSource?: boolean;
 
-  @Metadata({ data: "json, name=supportTarget" })
+  @SpeakeasyMetadata({ data: "json, name=supportTarget" })
   supportTarget?: boolean;
 }

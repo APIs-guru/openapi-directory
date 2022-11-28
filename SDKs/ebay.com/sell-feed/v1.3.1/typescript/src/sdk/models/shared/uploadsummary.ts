@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // UploadSummary
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * This container provides summary information on an upload feed (not applicable for download feed types).
 **/
 export class UploadSummary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=failureCount" })
+  @SpeakeasyMetadata({ data: "json, name=failureCount" })
   failureCount?: number;
 
-  @Metadata({ data: "json, name=successCount" })
+  @SpeakeasyMetadata({ data: "json, name=successCount" })
   successCount?: number;
 }

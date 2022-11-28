@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // StartShotDetectionFilter
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Filters for the shot detection segments returned by <code>GetSegmentDetection</code>. For more information, see <a>StartSegmentDetectionFilters</a>.
 **/
 export class StartShotDetectionFilter extends SpeakeasyBase {
-  @Metadata({ data: "json, name=MinSegmentConfidence" })
+  @SpeakeasyMetadata({ data: "json, name=MinSegmentConfidence" })
   minSegmentConfidence?: number;
 }

@@ -1,67 +1,68 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum ReleaseAssetStateEnum {
-    Uploaded = "uploaded"
-,    Open = "open"
+    Uploaded = "uploaded",
+    Open = "open"
 }
 
 
 export class ReleaseAssetSimpleUser extends SpeakeasyBase {
-  @Metadata({ data: "json, name=avatar_url" })
+  @SpeakeasyMetadata({ data: "json, name=avatar_url" })
   avatarUrl: string;
 
-  @Metadata({ data: "json, name=events_url" })
+  @SpeakeasyMetadata({ data: "json, name=events_url" })
   eventsUrl: string;
 
-  @Metadata({ data: "json, name=followers_url" })
+  @SpeakeasyMetadata({ data: "json, name=followers_url" })
   followersUrl: string;
 
-  @Metadata({ data: "json, name=following_url" })
+  @SpeakeasyMetadata({ data: "json, name=following_url" })
   followingUrl: string;
 
-  @Metadata({ data: "json, name=gists_url" })
+  @SpeakeasyMetadata({ data: "json, name=gists_url" })
   gistsUrl: string;
 
-  @Metadata({ data: "json, name=gravatar_id" })
+  @SpeakeasyMetadata({ data: "json, name=gravatar_id" })
   gravatarId: string;
 
-  @Metadata({ data: "json, name=html_url" })
+  @SpeakeasyMetadata({ data: "json, name=html_url" })
   htmlUrl: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: number;
 
-  @Metadata({ data: "json, name=login" })
+  @SpeakeasyMetadata({ data: "json, name=login" })
   login: string;
 
-  @Metadata({ data: "json, name=node_id" })
+  @SpeakeasyMetadata({ data: "json, name=node_id" })
   nodeId: string;
 
-  @Metadata({ data: "json, name=organizations_url" })
+  @SpeakeasyMetadata({ data: "json, name=organizations_url" })
   organizationsUrl: string;
 
-  @Metadata({ data: "json, name=received_events_url" })
+  @SpeakeasyMetadata({ data: "json, name=received_events_url" })
   receivedEventsUrl: string;
 
-  @Metadata({ data: "json, name=repos_url" })
+  @SpeakeasyMetadata({ data: "json, name=repos_url" })
   reposUrl: string;
 
-  @Metadata({ data: "json, name=site_admin" })
+  @SpeakeasyMetadata({ data: "json, name=site_admin" })
   siteAdmin: boolean;
 
-  @Metadata({ data: "json, name=starred_at" })
+  @SpeakeasyMetadata({ data: "json, name=starred_at" })
   starredAt?: string;
 
-  @Metadata({ data: "json, name=starred_url" })
+  @SpeakeasyMetadata({ data: "json, name=starred_url" })
   starredUrl: string;
 
-  @Metadata({ data: "json, name=subscriptions_url" })
+  @SpeakeasyMetadata({ data: "json, name=subscriptions_url" })
   subscriptionsUrl: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type: string;
 
-  @Metadata({ data: "json, name=url" })
+  @SpeakeasyMetadata({ data: "json, name=url" })
   url: string;
 }
 
@@ -71,42 +72,42 @@ export class ReleaseAssetSimpleUser extends SpeakeasyBase {
  * Data related to a release.
 **/
 export class ReleaseAsset extends SpeakeasyBase {
-  @Metadata({ data: "json, name=browser_download_url" })
+  @SpeakeasyMetadata({ data: "json, name=browser_download_url" })
   browserDownloadUrl: string;
 
-  @Metadata({ data: "json, name=content_type" })
+  @SpeakeasyMetadata({ data: "json, name=content_type" })
   contentType: string;
 
-  @Metadata({ data: "json, name=created_at" })
+  @SpeakeasyMetadata({ data: "json, name=created_at" })
   createdAt: Date;
 
-  @Metadata({ data: "json, name=download_count" })
+  @SpeakeasyMetadata({ data: "json, name=download_count" })
   downloadCount: number;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: number;
 
-  @Metadata({ data: "json, name=label" })
+  @SpeakeasyMetadata({ data: "json, name=label" })
   label: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 
-  @Metadata({ data: "json, name=node_id" })
+  @SpeakeasyMetadata({ data: "json, name=node_id" })
   nodeId: string;
 
-  @Metadata({ data: "json, name=size" })
+  @SpeakeasyMetadata({ data: "json, name=size" })
   size: number;
 
-  @Metadata({ data: "json, name=state" })
+  @SpeakeasyMetadata({ data: "json, name=state" })
   state: ReleaseAssetStateEnum;
 
-  @Metadata({ data: "json, name=updated_at" })
+  @SpeakeasyMetadata({ data: "json, name=updated_at" })
   updatedAt: Date;
 
-  @Metadata({ data: "json, name=uploader" })
+  @SpeakeasyMetadata({ data: "json, name=uploader" })
   uploader: ReleaseAssetSimpleUser;
 
-  @Metadata({ data: "json, name=url" })
+  @SpeakeasyMetadata({ data: "json, name=url" })
   url: string;
 }

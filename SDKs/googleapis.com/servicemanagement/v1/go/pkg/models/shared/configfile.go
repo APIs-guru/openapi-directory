@@ -11,6 +11,8 @@ const (
 	ConfigFileFileTypeEnumProtoFile              ConfigFileFileTypeEnum = "PROTO_FILE"
 )
 
+// ConfigFile
+// Generic specification of a source configuration file
 type ConfigFile struct {
 	FileContents *string                 `json:"fileContents,omitempty"`
 	FilePath     *string                 `json:"filePath,omitempty"`

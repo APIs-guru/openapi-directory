@@ -1,5 +1,7 @@
 package shared
 
+// AwsEc2VpnConnectionOptionsTunnelOptionsDetails
+// The VPN tunnel options.
 type AwsEc2VpnConnectionOptionsTunnelOptionsDetails struct {
 	DpdTimeoutSeconds          *int64   `json:"DpdTimeoutSeconds,omitempty"`
 	IkeVersions                []string `json:"IkeVersions,omitempty"`

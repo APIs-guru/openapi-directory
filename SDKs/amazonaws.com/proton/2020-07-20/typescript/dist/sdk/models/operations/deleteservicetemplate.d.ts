@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare enum DeleteServiceTemplateXAmzTargetEnum {
     AwsProton20200720DeleteServiceTemplate = "AwsProton20200720.DeleteServiceTemplate"

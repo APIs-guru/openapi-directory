@@ -1,19 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 
 
-export class WritableVirtualChassis extends SpeakeasyBase {
-  @Metadata({ data: "json, name=domain" })
+
+export class WritableVirtualChassisInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=domain" })
   domain?: string;
 
-  @Metadata({ data: "json, name=id" })
-  id?: number;
-
-  @Metadata({ data: "json, name=master" })
+  @SpeakeasyMetadata({ data: "json, name=master" })
   master: number;
 
-  @Metadata({ data: "json, name=member_count" })
-  memberCount?: number;
-
-  @Metadata({ data: "json, name=tags" })
+  @SpeakeasyMetadata({ data: "json, name=tags" })
   tags?: string[];
 }

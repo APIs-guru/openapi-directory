@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DeploymentCommandNameEnum } from "./deploymentcommandnameenum";
+
 
 
 // DeploymentCommand
@@ -7,9 +8,9 @@ import { DeploymentCommandNameEnum } from "./deploymentcommandnameenum";
  * Used to specify a stack or deployment command.
 **/
 export class DeploymentCommand extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Args" })
+  @SpeakeasyMetadata({ data: "json, name=Args" })
   args?: Map<string, string[]>;
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name: DeploymentCommandNameEnum;
 }

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // DocumentList
 /**
  * Documents List
@@ -33,11 +33,11 @@ var DocumentList = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=documents" }),
+        SpeakeasyMetadata({ data: "json, name=documents" }),
         __metadata("design:type", Array)
     ], DocumentList.prototype, "documents", void 0);
     __decorate([
-        Metadata({ data: "json, name=sum" }),
+        SpeakeasyMetadata({ data: "json, name=sum" }),
         __metadata("design:type", Number)
     ], DocumentList.prototype, "sum", void 0);
     return DocumentList;

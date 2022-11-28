@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AwsAutoScalingLaunchConfigurationBlockDeviceMappingsEbsDetails
@@ -6,21 +7,21 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Parameters that are used to automatically set up EBS volumes when an instance is launched.
 **/
 export class AwsAutoScalingLaunchConfigurationBlockDeviceMappingsEbsDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DeleteOnTermination" })
+  @SpeakeasyMetadata({ data: "json, name=DeleteOnTermination" })
   deleteOnTermination?: boolean;
 
-  @Metadata({ data: "json, name=Encrypted" })
+  @SpeakeasyMetadata({ data: "json, name=Encrypted" })
   encrypted?: boolean;
 
-  @Metadata({ data: "json, name=Iops" })
+  @SpeakeasyMetadata({ data: "json, name=Iops" })
   iops?: number;
 
-  @Metadata({ data: "json, name=SnapshotId" })
+  @SpeakeasyMetadata({ data: "json, name=SnapshotId" })
   snapshotId?: string;
 
-  @Metadata({ data: "json, name=VolumeSize" })
+  @SpeakeasyMetadata({ data: "json, name=VolumeSize" })
   volumeSize?: number;
 
-  @Metadata({ data: "json, name=VolumeType" })
+  @SpeakeasyMetadata({ data: "json, name=VolumeType" })
   volumeType?: string;
 }

@@ -10,7 +10,7 @@ type IpamVlanGroupsUpdatePathParams struct {
 
 type IpamVlanGroupsUpdateRequest struct {
 	PathParams IpamVlanGroupsUpdatePathParams
-	Request    shared.WritableVlanGroup `request:"mediaType=application/json"`
+	Request    shared.WritableVlanGroupInput `request:"mediaType=application/json"`
 }
 
 type IpamVlanGroupsUpdateResponse struct {

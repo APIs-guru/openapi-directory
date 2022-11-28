@@ -5,9 +5,9 @@ from sdk.models import shared
 
 @dataclass
 class AftermarketServicesGetCertsResponse:
+    content_type: str = field()
+    status_code: int = field()
     api_models_api_error: Optional[shared.APIModelsAPIError] = field(default=None)
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    body: Optional[bytes] = field(default=None)
     system_object: Optional[dict[str, Any]] = field(default=None)
     

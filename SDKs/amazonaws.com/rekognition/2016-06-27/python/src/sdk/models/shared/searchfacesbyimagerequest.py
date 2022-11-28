@@ -1,16 +1,17 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import image
-from . import qualityfilter_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class SearchFacesByImageRequest:
-    collection_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'CollectionId' }})
-    face_match_threshold: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FaceMatchThreshold' }})
-    image: image.Image = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Image' }})
-    max_faces: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'MaxFaces' }})
-    quality_filter: Optional[qualityfilter_enum.QualityFilterEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'QualityFilter' }})
+    collection_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('CollectionId') }})
+    image: Image = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Image') }})
+    face_match_threshold: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('FaceMatchThreshold') }})
+    max_faces: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('MaxFaces') }})
+    quality_filter: Optional[QualityFilterEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('QualityFilter') }})
     

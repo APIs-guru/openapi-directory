@@ -1,5 +1,7 @@
 package shared
 
+// Error
+// This type contains a error or warning related to a call request.
 type Error struct {
 	Category     *string          `json:"category,omitempty"`
 	Domain       *string          `json:"domain,omitempty"`

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // ResourcePolicy
 /**
  * A policy enabling one or more entities to put logs to a log group in this account.
@@ -33,15 +33,15 @@ var ResourcePolicy = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=lastUpdatedTime" }),
+        SpeakeasyMetadata({ data: "json, name=lastUpdatedTime" }),
         __metadata("design:type", Number)
     ], ResourcePolicy.prototype, "lastUpdatedTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=policyDocument" }),
+        SpeakeasyMetadata({ data: "json, name=policyDocument" }),
         __metadata("design:type", String)
     ], ResourcePolicy.prototype, "policyDocument", void 0);
     __decorate([
-        Metadata({ data: "json, name=policyName" }),
+        SpeakeasyMetadata({ data: "json, name=policyName" }),
         __metadata("design:type", String)
     ], ResourcePolicy.prototype, "policyName", void 0);
     return ResourcePolicy;

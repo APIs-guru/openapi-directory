@@ -22,6 +22,8 @@ const (
 	FailureInfoErrorCodeEnumDataLoss           FailureInfoErrorCodeEnum = "DATA_LOSS"
 )
 
+// FailureInfo
+// Info about failures
 type FailureInfo struct {
 	ErrorCode    *FailureInfoErrorCodeEnum `json:"errorCode,omitempty"`
 	ErrorMessage *string                   `json:"errorMessage,omitempty"`

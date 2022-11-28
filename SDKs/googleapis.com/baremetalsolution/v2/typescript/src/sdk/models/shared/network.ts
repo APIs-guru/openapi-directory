@@ -1,21 +1,21 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { NetworkMountPoint } from "./networkmountpoint";
 import { NetworkAddressReservation } from "./networkaddressreservation";
 import { Vrf } from "./vrf";
 
+
 export enum NetworkStateEnum {
-    StateUnspecified = "STATE_UNSPECIFIED"
-,    Provisioning = "PROVISIONING"
-,    Provisioned = "PROVISIONED"
-,    Deprovisioning = "DEPROVISIONING"
-,    Updating = "UPDATING"
+    StateUnspecified = "STATE_UNSPECIFIED",
+    Provisioning = "PROVISIONING",
+    Provisioned = "PROVISIONED",
+    Deprovisioning = "DEPROVISIONING",
+    Updating = "UPDATING"
 }
 
 export enum NetworkTypeEnum {
-    TypeUnspecified = "TYPE_UNSPECIFIED"
-,    Client = "CLIENT"
-,    Private = "PRIVATE"
+    TypeUnspecified = "TYPE_UNSPECIFIED",
+    Client = "CLIENT",
+    Private = "PRIVATE"
 }
 
 
@@ -24,51 +24,51 @@ export enum NetworkTypeEnum {
  * A Network.
 **/
 export class Network extends SpeakeasyBase {
-  @Metadata({ data: "json, name=cidr" })
+  @SpeakeasyMetadata({ data: "json, name=cidr" })
   cidr?: string;
 
-  @Metadata({ data: "json, name=gatewayIp" })
+  @SpeakeasyMetadata({ data: "json, name=gatewayIp" })
   gatewayIp?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=ipAddress" })
+  @SpeakeasyMetadata({ data: "json, name=ipAddress" })
   ipAddress?: string;
 
-  @Metadata({ data: "json, name=jumboFramesEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=jumboFramesEnabled" })
   jumboFramesEnabled?: boolean;
 
-  @Metadata({ data: "json, name=labels" })
+  @SpeakeasyMetadata({ data: "json, name=labels" })
   labels?: Map<string, string>;
 
-  @Metadata({ data: "json, name=macAddress" })
+  @SpeakeasyMetadata({ data: "json, name=macAddress" })
   macAddress?: string[];
 
-  @Metadata({ data: "json, name=mountPoints", elemType: shared.NetworkMountPoint })
+  @SpeakeasyMetadata({ data: "json, name=mountPoints", elemType: NetworkMountPoint })
   mountPoints?: NetworkMountPoint[];
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=pod" })
+  @SpeakeasyMetadata({ data: "json, name=pod" })
   pod?: string;
 
-  @Metadata({ data: "json, name=reservations", elemType: shared.NetworkAddressReservation })
+  @SpeakeasyMetadata({ data: "json, name=reservations", elemType: NetworkAddressReservation })
   reservations?: NetworkAddressReservation[];
 
-  @Metadata({ data: "json, name=servicesCidr" })
+  @SpeakeasyMetadata({ data: "json, name=servicesCidr" })
   servicesCidr?: string;
 
-  @Metadata({ data: "json, name=state" })
+  @SpeakeasyMetadata({ data: "json, name=state" })
   state?: NetworkStateEnum;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: NetworkTypeEnum;
 
-  @Metadata({ data: "json, name=vlanId" })
+  @SpeakeasyMetadata({ data: "json, name=vlanId" })
   vlanId?: string;
 
-  @Metadata({ data: "json, name=vrf" })
+  @SpeakeasyMetadata({ data: "json, name=vrf" })
   vrf?: Vrf;
 }

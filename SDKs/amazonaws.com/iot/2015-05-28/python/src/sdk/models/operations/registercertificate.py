@@ -1,6 +1,11 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -31,30 +36,30 @@ class RegisterCertificateRequestBodyStatusEnum(str, Enum):
 @dataclass_json
 @dataclass
 class RegisterCertificateRequestBody:
-    ca_certificate_pem: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'caCertificatePem' }})
-    certificate_pem: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'certificatePem' }})
-    status: Optional[RegisterCertificateRequestBodyStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+    certificate_pem: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('certificatePem') }})
+    ca_certificate_pem: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('caCertificatePem') }})
+    status: Optional[RegisterCertificateRequestBodyStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('status') }})
     
 
 @dataclass
 class RegisterCertificateRequest:
-    query_params: RegisterCertificateQueryParams = field(default=None)
-    headers: RegisterCertificateHeaders = field(default=None)
-    request: RegisterCertificateRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: RegisterCertificateHeaders = field()
+    query_params: RegisterCertificateQueryParams = field()
+    request: RegisterCertificateRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class RegisterCertificateResponse:
+    content_type: str = field()
+    status_code: int = field()
     certificate_conflict_exception: Optional[Any] = field(default=None)
     certificate_state_exception: Optional[Any] = field(default=None)
     certificate_validation_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     internal_failure_exception: Optional[Any] = field(default=None)
     invalid_request_exception: Optional[Any] = field(default=None)
     register_certificate_response: Optional[shared.RegisterCertificateResponse] = field(default=None)
     resource_already_exists_exception: Optional[Any] = field(default=None)
     service_unavailable_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     unauthorized_exception: Optional[Any] = field(default=None)
     

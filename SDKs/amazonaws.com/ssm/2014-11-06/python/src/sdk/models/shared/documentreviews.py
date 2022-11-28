@@ -1,13 +1,18 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import documentreviewaction_enum
-from . import documentreviewcommentsource
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class DocumentReviews:
-    action: documentreviewaction_enum.DocumentReviewActionEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Action' }})
-    comment: Optional[List[documentreviewcommentsource.DocumentReviewCommentSource]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Comment' }})
+    r"""DocumentReviews
+    Information about a document approval review.
+    """
+    
+    action: DocumentReviewActionEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Action') }})
+    comment: Optional[List[DocumentReviewCommentSource]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Comment') }})
     

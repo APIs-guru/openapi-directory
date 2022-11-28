@@ -1,7 +1,8 @@
 
 
+
 export enum AnsweredEnum {
-    Any = "Any"
-,    Answered = "Answered"
-,    Unanswered = "Unanswered"
+    Any = "Any",
+    Answered = "Answered",
+    Unanswered = "Unanswered"
 }

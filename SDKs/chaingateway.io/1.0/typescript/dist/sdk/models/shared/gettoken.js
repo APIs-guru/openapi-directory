@@ -22,34 +22,34 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var GetToken = /** @class */ (function (_super) {
     __extends(GetToken, _super);
     function GetToken() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=contractaddress" }),
+        SpeakeasyMetadata({ data: "json, name=contractaddress" }),
         __metadata("design:type", String)
     ], GetToken.prototype, "contractaddress", void 0);
     __decorate([
-        Metadata({ data: "json, name=decimals" }),
+        SpeakeasyMetadata({ data: "json, name=decimals" }),
         __metadata("design:type", Number)
     ], GetToken.prototype, "decimals", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], GetToken.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=ok" }),
+        SpeakeasyMetadata({ data: "json, name=ok" }),
         __metadata("design:type", Boolean)
     ], GetToken.prototype, "ok", void 0);
     __decorate([
-        Metadata({ data: "json, name=supply" }),
+        SpeakeasyMetadata({ data: "json, name=supply" }),
         __metadata("design:type", Number)
     ], GetToken.prototype, "supply", void 0);
     __decorate([
-        Metadata({ data: "json, name=symbol" }),
+        SpeakeasyMetadata({ data: "json, name=symbol" }),
         __metadata("design:type", String)
     ], GetToken.prototype, "symbol", void 0);
     return GetToken;

@@ -1,27 +1,28 @@
 from dataclasses import dataclass, field
 from typing import Any,Optional
+from sdk.models import shared
 
 
 @dataclass
 class CreateDirectConversationRequestBody:
-    participant: str = field(default=None, metadata={'form': { 'field_name': 'participant' }})
+    participant: str = field(metadata={'form': { 'field_name': 'participant' }})
     
 
 @dataclass
 class CreateDirectConversationSecurity:
-    oauth: shared.SchemeOauth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth: shared.SchemeOauth = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class CreateDirectConversationRequest:
-    request: CreateDirectConversationRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
-    security: CreateDirectConversationSecurity = field(default=None)
+    request: CreateDirectConversationRequestBody = field(metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    security: CreateDirectConversationSecurity = field()
     
 
 @dataclass
 class CreateDirectConversationResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     conversation: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

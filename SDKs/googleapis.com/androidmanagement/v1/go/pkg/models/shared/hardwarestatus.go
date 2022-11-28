@@ -1,5 +1,7 @@
 package shared
 
+// HardwareStatus
+// Hardware status. Temperatures may be compared to the temperature thresholds available in hardwareInfo to determine hardware health.
 type HardwareStatus struct {
 	BatteryTemperatures []float32 `json:"batteryTemperatures,omitempty"`
 	CPUTemperatures     []float32 `json:"cpuTemperatures,omitempty"`

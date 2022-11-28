@@ -1,5 +1,7 @@
 package shared
 
+// Product
+// Contains details about a product.
 type Product struct {
 	ActivationURL                     *string               `json:"ActivationUrl,omitempty"`
 	Categories                        []string              `json:"Categories,omitempty"`

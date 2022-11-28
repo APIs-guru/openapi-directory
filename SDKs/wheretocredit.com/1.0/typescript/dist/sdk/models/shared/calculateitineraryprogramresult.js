@@ -22,34 +22,34 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var CalculateItineraryProgramResult = /** @class */ (function (_super) {
     __extends(CalculateItineraryProgramResult, _super);
     function CalculateItineraryProgramResult() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=airlines" }),
+        SpeakeasyMetadata({ data: "json, name=airlines" }),
         __metadata("design:type", Array)
     ], CalculateItineraryProgramResult.prototype, "airlines", void 0);
     __decorate([
-        Metadata({ data: "json, name=id" }),
+        SpeakeasyMetadata({ data: "json, name=id" }),
         __metadata("design:type", String)
     ], CalculateItineraryProgramResult.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], CalculateItineraryProgramResult.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=revenueBased" }),
+        SpeakeasyMetadata({ data: "json, name=revenueBased" }),
         __metadata("design:type", Boolean)
     ], CalculateItineraryProgramResult.prototype, "revenueBased", void 0);
     __decorate([
-        Metadata({ data: "json, name=unpublished" }),
+        SpeakeasyMetadata({ data: "json, name=unpublished" }),
         __metadata("design:type", Boolean)
     ], CalculateItineraryProgramResult.prototype, "unpublished", void 0);
     __decorate([
-        Metadata({ data: "json, name=value" }),
+        SpeakeasyMetadata({ data: "json, name=value" }),
         __metadata("design:type", Number)
     ], CalculateItineraryProgramResult.prototype, "value", void 0);
     return CalculateItineraryProgramResult;

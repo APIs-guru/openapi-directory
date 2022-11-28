@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// Run
+// Represents a test run on a set of devices with a given app package, test parameters, and so on.
 type Run struct {
 	AppUpload             *string                  `json:"appUpload,omitempty"`
 	Arn                   *string                  `json:"arn,omitempty"`

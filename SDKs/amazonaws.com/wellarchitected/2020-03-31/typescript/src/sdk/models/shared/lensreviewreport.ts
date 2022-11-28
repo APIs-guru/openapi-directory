@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // LensReviewReport
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A report of a lens review.
 **/
 export class LensReviewReport extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Base64String" })
+  @SpeakeasyMetadata({ data: "json, name=Base64String" })
   base64String?: string;
 
-  @Metadata({ data: "json, name=LensAlias" })
+  @SpeakeasyMetadata({ data: "json, name=LensAlias" })
   lensAlias?: string;
 }

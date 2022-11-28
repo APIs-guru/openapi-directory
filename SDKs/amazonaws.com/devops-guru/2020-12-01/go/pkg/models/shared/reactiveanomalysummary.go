@@ -1,5 +1,7 @@
 package shared
 
+// ReactiveAnomalySummary
+// Details about a reactive anomaly. This object is returned by <code>DescribeAnomaly.</code>
 type ReactiveAnomalySummary struct {
 	AnomalyReportedTimeRange *AnomalyReportedTimeRange `json:"AnomalyReportedTimeRange,omitempty"`
 	AnomalyTimeRange         *AnomalyTimeRange         `json:"AnomalyTimeRange,omitempty"`

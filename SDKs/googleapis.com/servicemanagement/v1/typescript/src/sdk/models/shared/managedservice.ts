@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ManagedService
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The full representation of a Service that is managed by Google Service Management.
 **/
 export class ManagedService extends SpeakeasyBase {
-  @Metadata({ data: "json, name=producerProjectId" })
+  @SpeakeasyMetadata({ data: "json, name=producerProjectId" })
   producerProjectId?: string;
 
-  @Metadata({ data: "json, name=serviceName" })
+  @SpeakeasyMetadata({ data: "json, name=serviceName" })
   serviceName?: string;
 }

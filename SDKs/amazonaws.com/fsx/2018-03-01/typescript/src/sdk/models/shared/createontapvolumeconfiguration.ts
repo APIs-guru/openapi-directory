@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SecurityStyleEnum } from "./securitystyleenum";
 import { TieringPolicy } from "./tieringpolicy";
+
 
 
 // CreateOntapVolumeConfiguration
@@ -8,21 +9,21 @@ import { TieringPolicy } from "./tieringpolicy";
  * Specifies the configuration of the ONTAP volume that you are creating.
 **/
 export class CreateOntapVolumeConfiguration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=JunctionPath" })
+  @SpeakeasyMetadata({ data: "json, name=JunctionPath" })
   junctionPath: string;
 
-  @Metadata({ data: "json, name=SecurityStyle" })
+  @SpeakeasyMetadata({ data: "json, name=SecurityStyle" })
   securityStyle?: SecurityStyleEnum;
 
-  @Metadata({ data: "json, name=SizeInMegabytes" })
+  @SpeakeasyMetadata({ data: "json, name=SizeInMegabytes" })
   sizeInMegabytes: number;
 
-  @Metadata({ data: "json, name=StorageEfficiencyEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=StorageEfficiencyEnabled" })
   storageEfficiencyEnabled: boolean;
 
-  @Metadata({ data: "json, name=StorageVirtualMachineId" })
+  @SpeakeasyMetadata({ data: "json, name=StorageVirtualMachineId" })
   storageVirtualMachineId: string;
 
-  @Metadata({ data: "json, name=TieringPolicy" })
+  @SpeakeasyMetadata({ data: "json, name=TieringPolicy" })
   tieringPolicy?: TieringPolicy;
 }

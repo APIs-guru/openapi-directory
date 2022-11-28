@@ -1,5 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AutoMlJobConfig } from "./automljobconfig";
 import { AutoMlJobObjective } from "./automljobobjective";
 import { AutoMlChannel } from "./automlchannel";
@@ -9,34 +8,35 @@ import { ProblemTypeEnum } from "./problemtypeenum";
 import { Tag } from "./tag";
 
 
+
 export class CreateAutoMlJobRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AutoMLJobConfig" })
+  @SpeakeasyMetadata({ data: "json, name=AutoMLJobConfig" })
   autoMlJobConfig?: AutoMlJobConfig;
 
-  @Metadata({ data: "json, name=AutoMLJobName" })
+  @SpeakeasyMetadata({ data: "json, name=AutoMLJobName" })
   autoMlJobName: string;
 
-  @Metadata({ data: "json, name=AutoMLJobObjective" })
+  @SpeakeasyMetadata({ data: "json, name=AutoMLJobObjective" })
   autoMlJobObjective?: AutoMlJobObjective;
 
-  @Metadata({ data: "json, name=GenerateCandidateDefinitionsOnly" })
+  @SpeakeasyMetadata({ data: "json, name=GenerateCandidateDefinitionsOnly" })
   generateCandidateDefinitionsOnly?: boolean;
 
-  @Metadata({ data: "json, name=InputDataConfig", elemType: shared.AutoMlChannel })
+  @SpeakeasyMetadata({ data: "json, name=InputDataConfig", elemType: AutoMlChannel })
   inputDataConfig: AutoMlChannel[];
 
-  @Metadata({ data: "json, name=ModelDeployConfig" })
+  @SpeakeasyMetadata({ data: "json, name=ModelDeployConfig" })
   modelDeployConfig?: ModelDeployConfig;
 
-  @Metadata({ data: "json, name=OutputDataConfig" })
+  @SpeakeasyMetadata({ data: "json, name=OutputDataConfig" })
   outputDataConfig: AutoMlOutputDataConfig;
 
-  @Metadata({ data: "json, name=ProblemType" })
+  @SpeakeasyMetadata({ data: "json, name=ProblemType" })
   problemType?: ProblemTypeEnum;
 
-  @Metadata({ data: "json, name=RoleArn" })
+  @SpeakeasyMetadata({ data: "json, name=RoleArn" })
   roleArn: string;
 
-  @Metadata({ data: "json, name=Tags", elemType: shared.Tag })
+  @SpeakeasyMetadata({ data: "json, name=Tags", elemType: Tag })
   tags?: Tag[];
 }

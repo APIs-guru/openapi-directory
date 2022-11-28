@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { DatastorePartitions } from "./datastorepartitions";
 import { FileFormatConfiguration } from "./fileformatconfiguration";
 import { RetentionPeriod } from "./retentionperiod";

@@ -1,4 +1,4 @@
-from .__xgafv_enum import *
+from ._xgafv_enum import *
 from .addidpcredentialrequest import *
 from .alt_enum import *
 from .androidattributes import *
@@ -35,6 +35,7 @@ from .lookupselfdeviceusersresponse import *
 from .memberrelation import *
 from .membership import *
 from .membershiprole import *
+from .membershiprole1 import *
 from .membershiprolerestrictionevaluation import *
 from .modifymembershiprolesrequest import *
 from .modifymembershiprolesresponse import *

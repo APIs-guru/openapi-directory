@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class IdeahubPlatformsPropertiesIdeaActivitiesCreatePathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,14 +26,14 @@ class IdeahubPlatformsPropertiesIdeaActivitiesCreateQueryParams:
 
 @dataclass
 class IdeahubPlatformsPropertiesIdeaActivitiesCreateRequest:
-    path_params: IdeahubPlatformsPropertiesIdeaActivitiesCreatePathParams = field(default=None)
-    query_params: IdeahubPlatformsPropertiesIdeaActivitiesCreateQueryParams = field(default=None)
+    path_params: IdeahubPlatformsPropertiesIdeaActivitiesCreatePathParams = field()
+    query_params: IdeahubPlatformsPropertiesIdeaActivitiesCreateQueryParams = field()
     request: Optional[shared.GoogleSearchIdeahubV1betaIdeaActivity] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class IdeahubPlatformsPropertiesIdeaActivitiesCreateResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_search_ideahub_v1beta_idea_activity: Optional[shared.GoogleSearchIdeahubV1betaIdeaActivity] = field(default=None)
-    status_code: int = field(default=None)
     

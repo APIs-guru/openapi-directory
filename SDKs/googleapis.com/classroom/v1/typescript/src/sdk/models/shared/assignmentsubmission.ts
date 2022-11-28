@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Attachment } from "./attachment";
+
 
 
 // AssignmentSubmission
@@ -8,6 +8,6 @@ import { Attachment } from "./attachment";
  * Student work for an assignment.
 **/
 export class AssignmentSubmission extends SpeakeasyBase {
-  @Metadata({ data: "json, name=attachments", elemType: shared.Attachment })
+  @SpeakeasyMetadata({ data: "json, name=attachments", elemType: Attachment })
   attachments?: Attachment[];
 }

@@ -1,10 +1,11 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 
 
 @dataclass
 class GetMapVersionNumberStaticimagePathParams:
-    version_number: int = field(default=None, metadata={'path_param': { 'field_name': 'versionNumber', 'style': 'simple', 'explode': False }})
+    version_number: int = field(metadata={'path_param': { 'field_name': 'versionNumber', 'style': 'simple', 'explode': False }})
     
 class GetMapVersionNumberStaticimageFormatEnum(str, Enum):
     PNG = "png"
@@ -40,12 +41,12 @@ class GetMapVersionNumberStaticimageQueryParams:
 
 @dataclass
 class GetMapVersionNumberStaticimageRequest:
-    path_params: GetMapVersionNumberStaticimagePathParams = field(default=None)
-    query_params: GetMapVersionNumberStaticimageQueryParams = field(default=None)
+    path_params: GetMapVersionNumberStaticimagePathParams = field()
+    query_params: GetMapVersionNumberStaticimageQueryParams = field()
     
 
 @dataclass
 class GetMapVersionNumberStaticimageResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

@@ -40,6 +40,8 @@ const (
 	MeasurementPartnerWrappingDataTagWrappingModeEnumNonVpaidFiltering    MeasurementPartnerWrappingDataTagWrappingModeEnum = "NON_VPAID_FILTERING"
 )
 
+// MeasurementPartnerWrappingData
+// Placement tag wrapping
 type MeasurementPartnerWrappingData struct {
 	LinkStatus         *MeasurementPartnerWrappingDataLinkStatusEnum         `json:"linkStatus,omitempty"`
 	MeasurementPartner *MeasurementPartnerWrappingDataMeasurementPartnerEnum `json:"measurementPartner,omitempty"`

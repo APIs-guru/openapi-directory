@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Compatibility
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Compatibility information.
 **/
 export class Compatibility extends SpeakeasyBase {
-  @Metadata({ data: "json, name=clusterVersion" })
+  @SpeakeasyMetadata({ data: "json, name=clusterVersion" })
   clusterVersion?: string;
 
-  @Metadata({ data: "json, name=defaultVersion" })
+  @SpeakeasyMetadata({ data: "json, name=defaultVersion" })
   defaultVersion?: boolean;
 
-  @Metadata({ data: "json, name=platformVersions" })
+  @SpeakeasyMetadata({ data: "json, name=platformVersions" })
   platformVersions?: string[];
 }

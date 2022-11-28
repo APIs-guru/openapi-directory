@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class CloudresourcemanagerProjectsClearOrgPolicyPathParams:
-    resource: str = field(default=None, metadata={'path_param': { 'field_name': 'resource', 'style': 'simple', 'explode': False }})
+    resource: str = field(metadata={'path_param': { 'field_name': 'resource', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,21 +26,21 @@ class CloudresourcemanagerProjectsClearOrgPolicyQueryParams:
 
 @dataclass
 class CloudresourcemanagerProjectsClearOrgPolicySecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class CloudresourcemanagerProjectsClearOrgPolicyRequest:
-    path_params: CloudresourcemanagerProjectsClearOrgPolicyPathParams = field(default=None)
-    query_params: CloudresourcemanagerProjectsClearOrgPolicyQueryParams = field(default=None)
+    path_params: CloudresourcemanagerProjectsClearOrgPolicyPathParams = field()
+    query_params: CloudresourcemanagerProjectsClearOrgPolicyQueryParams = field()
+    security: CloudresourcemanagerProjectsClearOrgPolicySecurity = field()
     request: Optional[shared.ClearOrgPolicyRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: CloudresourcemanagerProjectsClearOrgPolicySecurity = field(default=None)
     
 
 @dataclass
 class CloudresourcemanagerProjectsClearOrgPolicyResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     empty: Optional[dict[str, Any]] = field(default=None)
-    status_code: int = field(default=None)
     

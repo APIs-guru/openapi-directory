@@ -12,27 +12,19 @@ type BootLinodeInstanceRequestBody struct {
 	ConfigID *int64 `json:"config_id,omitempty"`
 }
 
-type BootLinodeInstanceSecurityOption1 struct {
-	PersonalAccessToken shared.SchemePersonalAccessToken `security:"scheme,type=http,subtype=bearer"`
-}
-
-type BootLinodeInstanceSecurityOption2 struct {
-	Oauth shared.SchemeOauth `security:"scheme,type=oauth2"`
-}
-
 type BootLinodeInstanceSecurity struct {
-	Option1 *BootLinodeInstanceSecurityOption1 `security:"option"`
-	Option2 *BootLinodeInstanceSecurityOption2 `security:"option"`
+	PersonalAccessToken *shared.SchemePersonalAccessToken `security:"scheme,type=http,subtype=bearer"`
+	Oauth               *shared.SchemeOauth               `security:"scheme,type=oauth2"`
+}
+
+type BootLinodeInstanceDefaultApplicationJSON struct {
+	Errors []shared.ErrorObject `json:"errors,omitempty"`
 }
 
 type BootLinodeInstanceRequest struct {
 	PathParams BootLinodeInstancePathParams
 	Request    *BootLinodeInstanceRequestBody `request:"mediaType=application/json"`
 	Security   BootLinodeInstanceSecurity
-}
-
-type BootLinodeInstanceDefaultApplicationJSON struct {
-	Errors []shared.ErrorObject `json:"errors,omitempty"`
 }
 
 type BootLinodeInstanceResponse struct {

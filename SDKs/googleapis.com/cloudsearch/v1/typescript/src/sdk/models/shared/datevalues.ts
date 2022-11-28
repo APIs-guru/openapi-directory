@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Date } from "./date";
+
 
 
 // DateValues
@@ -8,6 +8,6 @@ import { Date } from "./date";
  * List of date values.
 **/
 export class DateValues extends SpeakeasyBase {
-  @Metadata({ data: "json, name=values", elemType: shared.Date })
+  @SpeakeasyMetadata({ data: "json, name=values", elemType: Date })
   values?: Date[];
 }

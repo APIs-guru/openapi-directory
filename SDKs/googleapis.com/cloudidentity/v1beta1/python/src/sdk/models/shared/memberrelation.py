@@ -1,8 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import entitykey
-from . import transitivemembershiprole
+from sdk import utils
+from . import *
 
 class MemberRelationRelationTypeEnum(str, Enum):
     RELATION_TYPE_UNSPECIFIED = "RELATION_TYPE_UNSPECIFIED"
@@ -14,8 +15,12 @@ class MemberRelationRelationTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class MemberRelation:
-    member: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'member' }})
-    preferred_member_key: Optional[List[entitykey.EntityKey]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'preferredMemberKey' }})
-    relation_type: Optional[MemberRelationRelationTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'relationType' }})
-    roles: Optional[List[transitivemembershiprole.TransitiveMembershipRole]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'roles' }})
+    r"""MemberRelation
+    Message representing a transitive membership of a group.
+    """
+    
+    member: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('member') }})
+    preferred_member_key: Optional[List[EntityKey]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('preferredMemberKey') }})
+    relation_type: Optional[MemberRelationRelationTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('relationType') }})
+    roles: Optional[List[TransitiveMembershipRole]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('roles') }})
     

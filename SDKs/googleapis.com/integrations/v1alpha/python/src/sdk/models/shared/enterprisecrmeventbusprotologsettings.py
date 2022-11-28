@@ -1,8 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import enterprisecrmlogginggwssanitizeoptions
-from . import enterprisecrmlogginggwsfieldlimits
+from sdk import utils
+from . import *
 
 class EnterpriseCrmEventbusProtoLogSettingsSeedPeriodEnum(str, Enum):
     SEED_PERIOD_UNSPECIFIED = "SEED_PERIOD_UNSPECIFIED"
@@ -20,9 +21,13 @@ class EnterpriseCrmEventbusProtoLogSettingsSeedScopeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class EnterpriseCrmEventbusProtoLogSettings:
-    log_field_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'logFieldName' }})
-    sanitize_options: Optional[enterprisecrmlogginggwssanitizeoptions.EnterpriseCrmLoggingGwsSanitizeOptions] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'sanitizeOptions' }})
-    seed_period: Optional[EnterpriseCrmEventbusProtoLogSettingsSeedPeriodEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'seedPeriod' }})
-    seed_scope: Optional[EnterpriseCrmEventbusProtoLogSettingsSeedScopeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'seedScope' }})
-    shortening_limits: Optional[enterprisecrmlogginggwsfieldlimits.EnterpriseCrmLoggingGwsFieldLimits] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'shorteningLimits' }})
+    r"""EnterpriseCrmEventbusProtoLogSettings
+    The LogSettings define the logging attributes for an event property. These attributes are used to map the property to the parameter in the log proto. Also used to define scrubbing/truncation behavior and PII information. See go/integration-platform/analytics/logging_task.md for details.
+    """
+    
+    log_field_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('logFieldName') }})
+    sanitize_options: Optional[EnterpriseCrmLoggingGwsSanitizeOptions] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('sanitizeOptions') }})
+    seed_period: Optional[EnterpriseCrmEventbusProtoLogSettingsSeedPeriodEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('seedPeriod') }})
+    seed_scope: Optional[EnterpriseCrmEventbusProtoLogSettingsSeedScopeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('seedScope') }})
+    shortening_limits: Optional[EnterpriseCrmLoggingGwsFieldLimits] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('shorteningLimits') }})
     

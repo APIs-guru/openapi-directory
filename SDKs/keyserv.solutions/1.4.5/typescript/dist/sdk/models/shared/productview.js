@@ -22,35 +22,35 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { SubscriptionView } from "./subscriptionview";
 var ProductView = /** @class */ (function (_super) {
     __extends(ProductView, _super);
     function ProductView() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=created" }),
+        SpeakeasyMetadata({ data: "json, name=created" }),
         __metadata("design:type", Date)
     ], ProductView.prototype, "created", void 0);
     __decorate([
-        Metadata({ data: "json, name=custom" }),
+        SpeakeasyMetadata({ data: "json, name=custom" }),
         __metadata("design:type", Object)
     ], ProductView.prototype, "custom", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], ProductView.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=serial" }),
+        SpeakeasyMetadata({ data: "json, name=serial" }),
         __metadata("design:type", String)
     ], ProductView.prototype, "serial", void 0);
     __decorate([
-        Metadata({ data: "json, name=subscriptions", elemType: shared.SubscriptionView }),
+        SpeakeasyMetadata({ data: "json, name=subscriptions", elemType: SubscriptionView }),
         __metadata("design:type", Array)
     ], ProductView.prototype, "subscriptions", void 0);
     __decorate([
-        Metadata({ data: "json, name=updated" }),
+        SpeakeasyMetadata({ data: "json, name=updated" }),
         __metadata("design:type", Date)
     ], ProductView.prototype, "updated", void 0);
     return ProductView;

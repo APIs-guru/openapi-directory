@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BinLogCoordinates } from "./binlogcoordinates";
+
 
 
 // CloneContext
@@ -7,24 +8,24 @@ import { BinLogCoordinates } from "./binlogcoordinates";
  * Database instance clone context.
 **/
 export class CloneContext extends SpeakeasyBase {
-  @Metadata({ data: "json, name=allocatedIpRange" })
+  @SpeakeasyMetadata({ data: "json, name=allocatedIpRange" })
   allocatedIpRange?: string;
 
-  @Metadata({ data: "json, name=binLogCoordinates" })
+  @SpeakeasyMetadata({ data: "json, name=binLogCoordinates" })
   binLogCoordinates?: BinLogCoordinates;
 
-  @Metadata({ data: "json, name=databaseNames" })
+  @SpeakeasyMetadata({ data: "json, name=databaseNames" })
   databaseNames?: string[];
 
-  @Metadata({ data: "json, name=destinationInstanceName" })
+  @SpeakeasyMetadata({ data: "json, name=destinationInstanceName" })
   destinationInstanceName?: string;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=pitrTimestampMs" })
+  @SpeakeasyMetadata({ data: "json, name=pitrTimestampMs" })
   pitrTimestampMs?: string;
 
-  @Metadata({ data: "json, name=pointInTime" })
+  @SpeakeasyMetadata({ data: "json, name=pointInTime" })
   pointInTime?: string;
 }

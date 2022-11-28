@@ -22,38 +22,38 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var ClearAddress = /** @class */ (function (_super) {
     __extends(ClearAddress, _super);
     function ClearAddress() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=amount" }),
+        SpeakeasyMetadata({ data: "json, name=amount" }),
         __metadata("design:type", Number)
     ], ClearAddress.prototype, "amount", void 0);
     __decorate([
-        Metadata({ data: "json, name=ethereumaddress" }),
+        SpeakeasyMetadata({ data: "json, name=ethereumaddress" }),
         __metadata("design:type", String)
     ], ClearAddress.prototype, "ethereumaddress", void 0);
     __decorate([
-        Metadata({ data: "json, name=gas" }),
+        SpeakeasyMetadata({ data: "json, name=gas" }),
         __metadata("design:type", Number)
     ], ClearAddress.prototype, "gas", void 0);
     __decorate([
-        Metadata({ data: "json, name=newaddress" }),
+        SpeakeasyMetadata({ data: "json, name=newaddress" }),
         __metadata("design:type", String)
     ], ClearAddress.prototype, "newaddress", void 0);
     __decorate([
-        Metadata({ data: "json, name=ok" }),
+        SpeakeasyMetadata({ data: "json, name=ok" }),
         __metadata("design:type", Boolean)
     ], ClearAddress.prototype, "ok", void 0);
     __decorate([
-        Metadata({ data: "json, name=total" }),
+        SpeakeasyMetadata({ data: "json, name=total" }),
         __metadata("design:type", String)
     ], ClearAddress.prototype, "total", void 0);
     __decorate([
-        Metadata({ data: "json, name=txid" }),
+        SpeakeasyMetadata({ data: "json, name=txid" }),
         __metadata("design:type", String)
     ], ClearAddress.prototype, "txid", void 0);
     return ClearAddress;

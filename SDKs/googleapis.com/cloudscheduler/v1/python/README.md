@@ -1,0 +1,137 @@
+# openapi
+
+<!-- Start SDK Installation -->
+## SDK Installation
+
+```bash
+pip install openapi
+```
+<!-- End SDK Installation -->
+
+<!-- Start SDK Example Usage -->
+## SDK Example Usage
+
+```python
+import sdk
+from sdk.models import operations, shared
+
+s = sdk.SDK()
+    
+req = operations.CloudschedulerProjectsLocationsJobsCreateRequest(
+    security=operations.CloudschedulerProjectsLocationsJobsCreateSecurity(
+        oauth2=shared.SchemeOauth2(
+            authorization="Bearer YOUR_ACCESS_TOKEN_HERE",
+        )
+        oauth2c=shared.SchemeOauth2c(
+            authorization="Bearer YOUR_ACCESS_TOKEN_HERE",
+        ),
+    ),
+    path_params=operations.CloudschedulerProjectsLocationsJobsCreatePathParams(
+        parent="totam",
+    ),
+    query_params=operations.CloudschedulerProjectsLocationsJobsCreateQueryParams(
+        dollar_xgafv="1",
+        access_token="harum",
+        alt="media",
+        callback="et",
+        fields="esse",
+        key="eos",
+        oauth_token="laborum",
+        pretty_print=True,
+        quota_user="consequuntur",
+        upload_type="autem",
+        upload_protocol="laudantium",
+    ),
+    request=shared.Job(
+        app_engine_http_target=shared.AppEngineHTTPTarget(
+            app_engine_routing=shared.AppEngineRouting(
+                host="asperiores",
+                instance="eos",
+                service="ullam",
+                version="esse",
+            ),
+            body="culpa",
+            headers={
+                "quod": "illum",
+                "consequuntur": "tempore",
+            },
+            http_method="DELETE",
+            relative_uri="tempora",
+        ),
+        attempt_deadline="vitae",
+        description="animi",
+        http_target=shared.HTTPTarget(
+            body="aut",
+            headers={
+                "rem": "ut",
+                "amet": "qui",
+            },
+            http_method="GET",
+            oauth_token=shared.OAuthToken(
+                scope="sapiente",
+                service_account_email="hic",
+            ),
+            oidc_token=shared.OidcToken(
+                audience="voluptas",
+                service_account_email="minima",
+            ),
+            uri="officia",
+        ),
+        last_attempt_time="in",
+        name="sequi",
+        pubsub_target=shared.PubsubTarget(
+            attributes={
+                "ipsa": "iste",
+            },
+            data="omnis",
+            topic_name="debitis",
+        ),
+        retry_config=shared.RetryConfig(
+            max_backoff_duration="itaque",
+            max_doublings=115168905495215181,
+            max_retry_duration="molestiae",
+            min_backoff_duration="architecto",
+            retry_count=6902781708756402763,
+        ),
+        schedule="ea",
+        schedule_time="sit",
+        state="UPDATE_FAILED",
+        status=shared.Status(
+            code=2626272047583457803,
+            details=[
+                {
+                    "at": "et",
+                },
+            ],
+            message="id",
+        ),
+        time_zone="veniam",
+        user_update_time="velit",
+    ),
+)
+    
+res = s.projects.cloudscheduler_projects_locations_jobs_create(req)
+
+if res.job is not None:
+    # handle response
+```
+<!-- End SDK Example Usage -->
+
+<!-- Start SDK Available Operations -->
+## SDK Available Operations
+
+### projects
+
+* `cloudscheduler_projects_locations_jobs_create` - Creates a job.
+* `cloudscheduler_projects_locations_jobs_delete` - Deletes a job.
+* `cloudscheduler_projects_locations_jobs_get` - Gets a job.
+* `cloudscheduler_projects_locations_jobs_list` - Lists jobs.
+* `cloudscheduler_projects_locations_jobs_patch` - Updates a job. If successful, the updated Job is returned. If the job does not exist, `NOT_FOUND` is returned. If UpdateJob does not successfully return, it is possible for the job to be in an Job.State.UPDATE_FAILED state. A job in this state may not be executed. If this happens, retry the UpdateJob request until a successful response is received.
+* `cloudscheduler_projects_locations_jobs_pause` - Pauses a job. If a job is paused then the system will stop executing the job until it is re-enabled via ResumeJob. The state of the job is stored in state; if paused it will be set to Job.State.PAUSED. A job must be in Job.State.ENABLED to be paused.
+* `cloudscheduler_projects_locations_jobs_resume` - Resume a job. This method reenables a job after it has been Job.State.PAUSED. The state of a job is stored in Job.state; after calling this method it will be set to Job.State.ENABLED. A job must be in Job.State.PAUSED to be resumed.
+* `cloudscheduler_projects_locations_jobs_run` - Forces a job to run now. When this method is called, Cloud Scheduler will dispatch the job, even if the job is already running.
+* `cloudscheduler_projects_locations_list` - Lists information about the supported locations for this service.
+
+<!-- End SDK Available Operations -->
+
+### SDK Generated by [Speakeasy](https://docs.speakeasyapi.dev/docs/using-speakeasy/client-sdks)

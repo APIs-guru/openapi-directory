@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class ReferencesAirportsByAirportCodeGetPathParams:
-    airport_code: str = field(default=None, metadata={'path_param': { 'field_name': 'airportCode', 'style': 'simple', 'explode': False }})
+    airport_code: str = field(metadata={'path_param': { 'field_name': 'airportCode', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -18,25 +18,25 @@ class ReferencesAirportsByAirportCodeGetQueryParams:
 
 @dataclass
 class ReferencesAirportsByAirportCodeGetHeaders:
-    accept: str = field(default=None, metadata={'header': { 'field_name': 'Accept', 'style': 'simple', 'explode': False }})
+    accept: str = field(metadata={'header': { 'field_name': 'Accept', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class ReferencesAirportsByAirportCodeGetSecurity:
-    auth: shared.SchemeAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    auth: shared.SchemeAuth = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class ReferencesAirportsByAirportCodeGetRequest:
-    path_params: ReferencesAirportsByAirportCodeGetPathParams = field(default=None)
-    query_params: ReferencesAirportsByAirportCodeGetQueryParams = field(default=None)
-    headers: ReferencesAirportsByAirportCodeGetHeaders = field(default=None)
-    security: ReferencesAirportsByAirportCodeGetSecurity = field(default=None)
+    headers: ReferencesAirportsByAirportCodeGetHeaders = field()
+    path_params: ReferencesAirportsByAirportCodeGetPathParams = field()
+    query_params: ReferencesAirportsByAirportCodeGetQueryParams = field()
+    security: ReferencesAirportsByAirportCodeGetSecurity = field()
     
 
 @dataclass
 class ReferencesAirportsByAirportCodeGetResponse:
+    content_type: str = field()
+    status_code: int = field()
     airport_response: Optional[shared.AirportResponse] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

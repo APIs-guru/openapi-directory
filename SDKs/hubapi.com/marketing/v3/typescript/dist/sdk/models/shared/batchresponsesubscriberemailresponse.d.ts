@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { StandardError } from "./standarderror";
 import { SubscriberEmailResponse } from "./subscriberemailresponse";
 export declare enum BatchResponseSubscriberEmailResponseStatusEnum {

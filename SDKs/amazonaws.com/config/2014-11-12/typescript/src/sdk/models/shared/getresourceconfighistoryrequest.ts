@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ChronologicalOrderEnum } from "./chronologicalorderenum";
 import { ResourceTypeEnum } from "./resourcetypeenum";
+
 
 
 // GetResourceConfigHistoryRequest
@@ -8,24 +9,24 @@ import { ResourceTypeEnum } from "./resourcetypeenum";
  * The input for the <a>GetResourceConfigHistory</a> action.
 **/
 export class GetResourceConfigHistoryRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=chronologicalOrder" })
+  @SpeakeasyMetadata({ data: "json, name=chronologicalOrder" })
   chronologicalOrder?: ChronologicalOrderEnum;
 
-  @Metadata({ data: "json, name=earlierTime" })
+  @SpeakeasyMetadata({ data: "json, name=earlierTime" })
   earlierTime?: Date;
 
-  @Metadata({ data: "json, name=laterTime" })
+  @SpeakeasyMetadata({ data: "json, name=laterTime" })
   laterTime?: Date;
 
-  @Metadata({ data: "json, name=limit" })
+  @SpeakeasyMetadata({ data: "json, name=limit" })
   limit?: number;
 
-  @Metadata({ data: "json, name=nextToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=resourceId" })
+  @SpeakeasyMetadata({ data: "json, name=resourceId" })
   resourceId: string;
 
-  @Metadata({ data: "json, name=resourceType" })
+  @SpeakeasyMetadata({ data: "json, name=resourceType" })
   resourceType: ResourceTypeEnum;
 }

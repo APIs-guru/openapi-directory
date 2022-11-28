@@ -22,23 +22,23 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { IpSetUpdate } from "./ipsetupdate";
 var UpdateIpSetRequest = /** @class */ (function (_super) {
     __extends(UpdateIpSetRequest, _super);
     function UpdateIpSetRequest() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=ChangeToken" }),
+        SpeakeasyMetadata({ data: "json, name=ChangeToken" }),
         __metadata("design:type", String)
     ], UpdateIpSetRequest.prototype, "changeToken", void 0);
     __decorate([
-        Metadata({ data: "json, name=IPSetId" }),
+        SpeakeasyMetadata({ data: "json, name=IPSetId" }),
         __metadata("design:type", String)
     ], UpdateIpSetRequest.prototype, "ipSetId", void 0);
     __decorate([
-        Metadata({ data: "json, name=Updates", elemType: shared.IpSetUpdate }),
+        SpeakeasyMetadata({ data: "json, name=Updates", elemType: IpSetUpdate }),
         __metadata("design:type", Array)
     ], UpdateIpSetRequest.prototype, "updates", void 0);
     return UpdateIpSetRequest;

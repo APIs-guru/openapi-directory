@@ -1,4 +1,7 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
@@ -16,16 +19,16 @@ class DescribeLoggingOptionsHeaders:
 
 @dataclass
 class DescribeLoggingOptionsRequest:
-    headers: DescribeLoggingOptionsHeaders = field(default=None)
+    headers: DescribeLoggingOptionsHeaders = field()
     
 
 @dataclass
 class DescribeLoggingOptionsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     describe_logging_options_response: Optional[shared.DescribeLoggingOptionsResponse] = field(default=None)
     internal_failure_exception: Optional[Any] = field(default=None)
     invalid_request_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     

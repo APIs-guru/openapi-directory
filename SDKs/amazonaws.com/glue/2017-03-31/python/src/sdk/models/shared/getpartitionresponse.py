@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import partition
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class GetPartitionResponse:
-    partition: Optional[partition.Partition] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Partition' }})
+    partition: Optional[Partition] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Partition') }})
     

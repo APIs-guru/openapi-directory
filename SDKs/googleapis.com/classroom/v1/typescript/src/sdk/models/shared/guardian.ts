@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { UserProfile } from "./userprofile";
+
 
 
 // Guardian
@@ -7,15 +8,15 @@ import { UserProfile } from "./userprofile";
  * Association between a student and a guardian of that student. The guardian may receive information about the student's course work.
 **/
 export class Guardian extends SpeakeasyBase {
-  @Metadata({ data: "json, name=guardianId" })
+  @SpeakeasyMetadata({ data: "json, name=guardianId" })
   guardianId?: string;
 
-  @Metadata({ data: "json, name=guardianProfile" })
+  @SpeakeasyMetadata({ data: "json, name=guardianProfile" })
   guardianProfile?: UserProfile;
 
-  @Metadata({ data: "json, name=invitedEmailAddress" })
+  @SpeakeasyMetadata({ data: "json, name=invitedEmailAddress" })
   invitedEmailAddress?: string;
 
-  @Metadata({ data: "json, name=studentId" })
+  @SpeakeasyMetadata({ data: "json, name=studentId" })
   studentId?: string;
 }

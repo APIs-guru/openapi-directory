@@ -1,17 +1,18 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Color } from "./color";
 
+
 export enum ColorStyleThemeColorEnum {
-    ThemeColorTypeUnspecified = "THEME_COLOR_TYPE_UNSPECIFIED"
-,    Text = "TEXT"
-,    Background = "BACKGROUND"
-,    Accent1 = "ACCENT1"
-,    Accent2 = "ACCENT2"
-,    Accent3 = "ACCENT3"
-,    Accent4 = "ACCENT4"
-,    Accent5 = "ACCENT5"
-,    Accent6 = "ACCENT6"
-,    Link = "LINK"
+    ThemeColorTypeUnspecified = "THEME_COLOR_TYPE_UNSPECIFIED",
+    Text = "TEXT",
+    Background = "BACKGROUND",
+    Accent1 = "ACCENT1",
+    Accent2 = "ACCENT2",
+    Accent3 = "ACCENT3",
+    Accent4 = "ACCENT4",
+    Accent5 = "ACCENT5",
+    Accent6 = "ACCENT6",
+    Link = "LINK"
 }
 
 
@@ -20,9 +21,9 @@ export enum ColorStyleThemeColorEnum {
  * A color value.
 **/
 export class ColorStyle extends SpeakeasyBase {
-  @Metadata({ data: "json, name=rgbColor" })
+  @SpeakeasyMetadata({ data: "json, name=rgbColor" })
   rgbColor?: Color;
 
-  @Metadata({ data: "json, name=themeColor" })
+  @SpeakeasyMetadata({ data: "json, name=themeColor" })
   themeColor?: ColorStyleThemeColorEnum;
 }

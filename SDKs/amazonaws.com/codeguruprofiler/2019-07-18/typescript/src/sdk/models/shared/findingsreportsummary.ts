@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // FindingsReportSummary
@@ -6,18 +7,18 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  *  Information about potential recommendations that might be created from the analysis of profiling data. 
 **/
 export class FindingsReportSummary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=profileEndTime" })
+  @SpeakeasyMetadata({ data: "json, name=profileEndTime" })
   profileEndTime?: Date;
 
-  @Metadata({ data: "json, name=profileStartTime" })
+  @SpeakeasyMetadata({ data: "json, name=profileStartTime" })
   profileStartTime?: Date;
 
-  @Metadata({ data: "json, name=profilingGroupName" })
+  @SpeakeasyMetadata({ data: "json, name=profilingGroupName" })
   profilingGroupName?: string;
 
-  @Metadata({ data: "json, name=totalNumberOfFindings" })
+  @SpeakeasyMetadata({ data: "json, name=totalNumberOfFindings" })
   totalNumberOfFindings?: number;
 }

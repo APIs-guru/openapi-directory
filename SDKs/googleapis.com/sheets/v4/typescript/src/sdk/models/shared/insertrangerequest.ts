@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GridRange } from "./gridrange";
 
+
 export enum InsertRangeRequestShiftDimensionEnum {
-    DimensionUnspecified = "DIMENSION_UNSPECIFIED"
-,    Rows = "ROWS"
-,    Columns = "COLUMNS"
+    DimensionUnspecified = "DIMENSION_UNSPECIFIED",
+    Rows = "ROWS",
+    Columns = "COLUMNS"
 }
 
 
@@ -13,9 +14,9 @@ export enum InsertRangeRequestShiftDimensionEnum {
  * Inserts cells into a range, shifting the existing cells over or down.
 **/
 export class InsertRangeRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=range" })
+  @SpeakeasyMetadata({ data: "json, name=range" })
   range?: GridRange;
 
-  @Metadata({ data: "json, name=shiftDimension" })
+  @SpeakeasyMetadata({ data: "json, name=shiftDimension" })
   shiftDimension?: InsertRangeRequestShiftDimensionEnum;
 }

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Range
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Specifies the location of an occurrence of sensitive data in a non-binary text file, such as an HTML, TXT, or XML file.
 **/
 export class Range extends SpeakeasyBase {
-  @Metadata({ data: "json, name=end" })
+  @SpeakeasyMetadata({ data: "json, name=end" })
   end?: number;
 
-  @Metadata({ data: "json, name=start" })
+  @SpeakeasyMetadata({ data: "json, name=start" })
   start?: number;
 
-  @Metadata({ data: "json, name=startColumn" })
+  @SpeakeasyMetadata({ data: "json, name=startColumn" })
   startColumn?: number;
 }

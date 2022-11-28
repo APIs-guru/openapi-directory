@@ -30,7 +30,7 @@ type CloudbuildProjectsLocationsGitLabConfigsConnectedRepositoriesBatchCreateSec
 type CloudbuildProjectsLocationsGitLabConfigsConnectedRepositoriesBatchCreateRequest struct {
 	PathParams  CloudbuildProjectsLocationsGitLabConfigsConnectedRepositoriesBatchCreatePathParams
 	QueryParams CloudbuildProjectsLocationsGitLabConfigsConnectedRepositoriesBatchCreateQueryParams
-	Request     *shared.BatchCreateGitLabConnectedRepositoriesRequest `request:"mediaType=application/json"`
+	Request     *shared.BatchCreateGitLabConnectedRepositoriesRequestInput `request:"mediaType=application/json"`
 	Security    CloudbuildProjectsLocationsGitLabConfigsConnectedRepositoriesBatchCreateSecurity
 }
 

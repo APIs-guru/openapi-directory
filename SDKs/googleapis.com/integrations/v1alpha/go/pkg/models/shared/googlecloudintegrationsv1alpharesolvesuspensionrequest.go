@@ -1,5 +1,7 @@
 package shared
 
-type GoogleCloudIntegrationsV1alphaResolveSuspensionRequest struct {
-	Suspension *GoogleCloudIntegrationsV1alphaSuspension `json:"suspension,omitempty"`
+// GoogleCloudIntegrationsV1alphaResolveSuspensionRequestInput
+// Request for [Suspensions.ResolveSuspensions].
+type GoogleCloudIntegrationsV1alphaResolveSuspensionRequestInput struct {
+	Suspension *GoogleCloudIntegrationsV1alphaSuspensionInput `json:"suspension,omitempty"`
 }

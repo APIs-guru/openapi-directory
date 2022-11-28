@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { MemberDisabledReasonEnum } from "./memberdisabledreasonenum";
 import { MemberStatusEnum } from "./memberstatusenum";
 // MemberDetail
@@ -35,55 +35,55 @@ var MemberDetail = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=AccountId" }),
+        SpeakeasyMetadata({ data: "json, name=AccountId" }),
         __metadata("design:type", String)
     ], MemberDetail.prototype, "accountId", void 0);
     __decorate([
-        Metadata({ data: "json, name=AdministratorId" }),
+        SpeakeasyMetadata({ data: "json, name=AdministratorId" }),
         __metadata("design:type", String)
     ], MemberDetail.prototype, "administratorId", void 0);
     __decorate([
-        Metadata({ data: "json, name=DisabledReason" }),
+        SpeakeasyMetadata({ data: "json, name=DisabledReason" }),
         __metadata("design:type", String)
     ], MemberDetail.prototype, "disabledReason", void 0);
     __decorate([
-        Metadata({ data: "json, name=EmailAddress" }),
+        SpeakeasyMetadata({ data: "json, name=EmailAddress" }),
         __metadata("design:type", String)
     ], MemberDetail.prototype, "emailAddress", void 0);
     __decorate([
-        Metadata({ data: "json, name=GraphArn" }),
+        SpeakeasyMetadata({ data: "json, name=GraphArn" }),
         __metadata("design:type", String)
     ], MemberDetail.prototype, "graphArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=InvitedTime" }),
+        SpeakeasyMetadata({ data: "json, name=InvitedTime" }),
         __metadata("design:type", Date)
     ], MemberDetail.prototype, "invitedTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=MasterId" }),
+        SpeakeasyMetadata({ data: "json, name=MasterId" }),
         __metadata("design:type", String)
     ], MemberDetail.prototype, "masterId", void 0);
     __decorate([
-        Metadata({ data: "json, name=PercentOfGraphUtilization" }),
+        SpeakeasyMetadata({ data: "json, name=PercentOfGraphUtilization" }),
         __metadata("design:type", Number)
     ], MemberDetail.prototype, "percentOfGraphUtilization", void 0);
     __decorate([
-        Metadata({ data: "json, name=PercentOfGraphUtilizationUpdatedTime" }),
+        SpeakeasyMetadata({ data: "json, name=PercentOfGraphUtilizationUpdatedTime" }),
         __metadata("design:type", Date)
     ], MemberDetail.prototype, "percentOfGraphUtilizationUpdatedTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=Status" }),
+        SpeakeasyMetadata({ data: "json, name=Status" }),
         __metadata("design:type", String)
     ], MemberDetail.prototype, "status", void 0);
     __decorate([
-        Metadata({ data: "json, name=UpdatedTime" }),
+        SpeakeasyMetadata({ data: "json, name=UpdatedTime" }),
         __metadata("design:type", Date)
     ], MemberDetail.prototype, "updatedTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=VolumeUsageInBytes" }),
+        SpeakeasyMetadata({ data: "json, name=VolumeUsageInBytes" }),
         __metadata("design:type", Number)
     ], MemberDetail.prototype, "volumeUsageInBytes", void 0);
     __decorate([
-        Metadata({ data: "json, name=VolumeUsageUpdatedTime" }),
+        SpeakeasyMetadata({ data: "json, name=VolumeUsageUpdatedTime" }),
         __metadata("design:type", Date)
     ], MemberDetail.prototype, "volumeUsageUpdatedTime", void 0);
     return MemberDetail;

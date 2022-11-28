@@ -9,6 +9,8 @@ const (
 	FloodlightGroupWebTagTypeEnumWebTagTypeDynamic     FloodlightGroupWebTagTypeEnum = "WEB_TAG_TYPE_DYNAMIC"
 )
 
+// FloodlightGroup
+// A single Floodlight group.
 type FloodlightGroup struct {
 	ActiveViewConfig  *ActiveViewVideoViewabilityMetricConfig `json:"activeViewConfig,omitempty"`
 	CustomVariables   map[string]interface{}                  `json:"customVariables,omitempty"`

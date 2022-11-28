@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostRemoveRoleFromDbClusterActionEnum(str, Enum):
     REMOVE_ROLE_FROM_DB_CLUSTER = "RemoveRoleFromDBCluster"
@@ -10,8 +14,8 @@ class PostRemoveRoleFromDbClusterVersionEnum(str, Enum):
 
 @dataclass
 class PostRemoveRoleFromDbClusterQueryParams:
-    action: PostRemoveRoleFromDbClusterActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostRemoveRoleFromDbClusterVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostRemoveRoleFromDbClusterActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostRemoveRoleFromDbClusterVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostRemoveRoleFromDbClusterHeaders:
 
 @dataclass
 class PostRemoveRoleFromDbClusterRequest:
-    query_params: PostRemoveRoleFromDbClusterQueryParams = field(default=None)
-    headers: PostRemoveRoleFromDbClusterHeaders = field(default=None)
+    headers: PostRemoveRoleFromDbClusterHeaders = field()
+    query_params: PostRemoveRoleFromDbClusterQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostRemoveRoleFromDbClusterResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

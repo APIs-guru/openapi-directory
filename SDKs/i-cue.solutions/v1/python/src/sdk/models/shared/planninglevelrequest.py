@@ -1,8 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import planningleveldatadto
-from . import planninglevelinforequest
+from sdk import utils
+from . import *
 
 class PlanningLevelRequestMethodEnum(str, Enum):
     AUTO_BEST_PICK = "AutoBestPick"
@@ -27,10 +31,10 @@ class PlanningLevelRequestMethodEnum(str, Enum):
 @dataclass_json
 @dataclass
 class PlanningLevelRequest:
-    data: Optional[List[planningleveldatadto.PlanningLevelDataDto]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'data' }})
-    method: PlanningLevelRequestMethodEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'method' }})
-    override: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'override' }})
-    params: Optional[planninglevelinforequest.PlanningLevelInfoRequest] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'params' }})
-    planning_level_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'planningLevelId' }})
-    start_date: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'startDate' }})
+    method: PlanningLevelRequestMethodEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('method') }})
+    planning_level_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('planningLevelId') }})
+    start_date: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('startDate') }})
+    data: Optional[List[PlanningLevelDataDto]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('data') }})
+    override: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('override') }})
+    params: Optional[PlanningLevelInfoRequest] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('params') }})
     

@@ -8,6 +8,8 @@ const (
 	AttractionTypeEnumAttraction AttractionTypeEnum = "attraction"
 )
 
+// Attraction
+// Attraction
 type Attraction struct {
 	Active          *bool                    `json:"active,omitempty"`
 	AdditionalInfos map[string]string        `json:"additionalInfos,omitempty"`

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetDeviceCodeIdSecurity = /** @class */ (function (_super) {
     __extends(GetDeviceCodeIdSecurity, _super);
@@ -30,71 +30,71 @@ var GetDeviceCodeIdSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauthsecurity)
     ], GetDeviceCodeIdSecurity.prototype, "oauthsecurity", void 0);
     return GetDeviceCodeIdSecurity;
 }(SpeakeasyBase));
 export { GetDeviceCodeIdSecurity };
-var GetDeviceCodeIdRequest = /** @class */ (function (_super) {
-    __extends(GetDeviceCodeIdRequest, _super);
-    function GetDeviceCodeIdRequest() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
-        __metadata("design:type", Object)
-    ], GetDeviceCodeIdRequest.prototype, "request", void 0);
-    __decorate([
-        Metadata(),
-        __metadata("design:type", GetDeviceCodeIdSecurity)
-    ], GetDeviceCodeIdRequest.prototype, "security", void 0);
-    return GetDeviceCodeIdRequest;
-}(SpeakeasyBase));
-export { GetDeviceCodeIdRequest };
 var GetDeviceCodeId401ApplicationJson = /** @class */ (function (_super) {
     __extends(GetDeviceCodeId401ApplicationJson, _super);
     function GetDeviceCodeId401ApplicationJson() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], GetDeviceCodeId401ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=error_description" }),
+        SpeakeasyMetadata({ data: "json, name=error_description" }),
         __metadata("design:type", String)
     ], GetDeviceCodeId401ApplicationJson.prototype, "errorDescription", void 0);
     return GetDeviceCodeId401ApplicationJson;
 }(SpeakeasyBase));
 export { GetDeviceCodeId401ApplicationJson };
+var GetDeviceCodeIdRequest = /** @class */ (function (_super) {
+    __extends(GetDeviceCodeIdRequest, _super);
+    function GetDeviceCodeIdRequest() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
+        __metadata("design:type", Object)
+    ], GetDeviceCodeIdRequest.prototype, "request", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", GetDeviceCodeIdSecurity)
+    ], GetDeviceCodeIdRequest.prototype, "security", void 0);
+    return GetDeviceCodeIdRequest;
+}(SpeakeasyBase));
+export { GetDeviceCodeIdRequest };
 var GetDeviceCodeIdResponse = /** @class */ (function (_super) {
     __extends(GetDeviceCodeIdResponse, _super);
     function GetDeviceCodeIdResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetDeviceCodeIdResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.DeviceAuthorizationCodeResponse)
     ], GetDeviceCodeIdResponse.prototype, "deviceAuthorizationCodeResponse", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], GetDeviceCodeIdResponse.prototype, "getDeviceCodeId400ApplicationJsonOneOf", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetDeviceCodeId401ApplicationJson)
     ], GetDeviceCodeIdResponse.prototype, "getDeviceCodeId401ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], GetDeviceCodeIdResponse.prototype, "getDeviceCodeId500ApplicationJsonOneOf", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetDeviceCodeIdResponse.prototype, "statusCode", void 0);
     return GetDeviceCodeIdResponse;

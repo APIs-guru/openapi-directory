@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// AutomationExecution
+// Detailed information about the current state of an individual Automation execution.
 type AutomationExecution struct {
 	AssociationID               *string                        `json:"AssociationId,omitempty"`
 	AutomationExecutionID       *string                        `json:"AutomationExecutionId,omitempty"`

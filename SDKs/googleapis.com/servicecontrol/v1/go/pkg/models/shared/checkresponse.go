@@ -1,5 +1,7 @@
 package shared
 
+// CheckResponse
+// Response message for the Check method.
 type CheckResponse struct {
 	CheckErrors      []CheckError `json:"checkErrors,omitempty"`
 	CheckInfo        *CheckInfo   `json:"checkInfo,omitempty"`

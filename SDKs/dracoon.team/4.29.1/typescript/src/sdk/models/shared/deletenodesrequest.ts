@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // DeleteNodesRequest
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Request model for deleting nodes
 **/
 export class DeleteNodesRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=nodeIds" })
+  @SpeakeasyMetadata({ data: "json, name=nodeIds" })
   nodeIds: number[];
 }

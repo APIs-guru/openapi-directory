@@ -1,9 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
-import { UserContext } from "./usercontext";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { UserContext } from "./usercontext";
 import { ExperimentSource } from "./experimentsource";
 import { Tag } from "./tag";
+
 
 
 // Experiment
@@ -11,33 +10,33 @@ import { Tag } from "./tag";
  * The properties of an experiment as returned by the <a>Search</a> API.
 **/
 export class Experiment extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CreatedBy" })
+  @SpeakeasyMetadata({ data: "json, name=CreatedBy" })
   createdBy?: UserContext;
 
-  @Metadata({ data: "json, name=CreationTime" })
+  @SpeakeasyMetadata({ data: "json, name=CreationTime" })
   creationTime?: Date;
 
-  @Metadata({ data: "json, name=Description" })
+  @SpeakeasyMetadata({ data: "json, name=Description" })
   description?: string;
 
-  @Metadata({ data: "json, name=DisplayName" })
+  @SpeakeasyMetadata({ data: "json, name=DisplayName" })
   displayName?: string;
 
-  @Metadata({ data: "json, name=ExperimentArn" })
+  @SpeakeasyMetadata({ data: "json, name=ExperimentArn" })
   experimentArn?: string;
 
-  @Metadata({ data: "json, name=ExperimentName" })
+  @SpeakeasyMetadata({ data: "json, name=ExperimentName" })
   experimentName?: string;
 
-  @Metadata({ data: "json, name=LastModifiedBy" })
+  @SpeakeasyMetadata({ data: "json, name=LastModifiedBy" })
   lastModifiedBy?: UserContext;
 
-  @Metadata({ data: "json, name=LastModifiedTime" })
+  @SpeakeasyMetadata({ data: "json, name=LastModifiedTime" })
   lastModifiedTime?: Date;
 
-  @Metadata({ data: "json, name=Source" })
+  @SpeakeasyMetadata({ data: "json, name=Source" })
   source?: ExperimentSource;
 
-  @Metadata({ data: "json, name=Tags", elemType: shared.Tag })
+  @SpeakeasyMetadata({ data: "json, name=Tags", elemType: Tag })
   tags?: Tag[];
 }

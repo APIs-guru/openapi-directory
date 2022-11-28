@@ -22,22 +22,22 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var UpdateServerEngineAttributesRequest = /** @class */ (function (_super) {
     __extends(UpdateServerEngineAttributesRequest, _super);
     function UpdateServerEngineAttributesRequest() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=AttributeName" }),
+        SpeakeasyMetadata({ data: "json, name=AttributeName" }),
         __metadata("design:type", String)
     ], UpdateServerEngineAttributesRequest.prototype, "attributeName", void 0);
     __decorate([
-        Metadata({ data: "json, name=AttributeValue" }),
+        SpeakeasyMetadata({ data: "json, name=AttributeValue" }),
         __metadata("design:type", String)
     ], UpdateServerEngineAttributesRequest.prototype, "attributeValue", void 0);
     __decorate([
-        Metadata({ data: "json, name=ServerName" }),
+        SpeakeasyMetadata({ data: "json, name=ServerName" }),
         __metadata("design:type", String)
     ], UpdateServerEngineAttributesRequest.prototype, "serverName", void 0);
     return UpdateServerEngineAttributesRequest;

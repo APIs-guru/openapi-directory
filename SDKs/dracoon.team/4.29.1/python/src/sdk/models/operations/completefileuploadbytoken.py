@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class CompleteFileUploadByTokenPathParams:
-    token: str = field(default=None, metadata={'path_param': { 'field_name': 'token', 'style': 'simple', 'explode': False }})
+    token: str = field(metadata={'path_param': { 'field_name': 'token', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -15,15 +18,15 @@ class CompleteFileUploadByTokenHeaders:
 
 @dataclass
 class CompleteFileUploadByTokenRequest:
-    path_params: CompleteFileUploadByTokenPathParams = field(default=None)
-    headers: CompleteFileUploadByTokenHeaders = field(default=None)
-    request: shared.CompleteUploadRequest = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: CompleteFileUploadByTokenHeaders = field()
+    path_params: CompleteFileUploadByTokenPathParams = field()
+    request: shared.CompleteUploadRequest = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class CompleteFileUploadByTokenResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error_response: Optional[shared.ErrorResponse] = field(default=None)
     node: Optional[shared.Node] = field(default=None)
-    status_code: int = field(default=None)
     

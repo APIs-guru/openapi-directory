@@ -1,7 +1,8 @@
 
 
+
 export enum HitAccessActionsEnum {
-    Accept = "Accept"
-,    PreviewAndAccept = "PreviewAndAccept"
-,    DiscoverPreviewAndAccept = "DiscoverPreviewAndAccept"
+    Accept = "Accept",
+    PreviewAndAccept = "PreviewAndAccept",
+    DiscoverPreviewAndAccept = "DiscoverPreviewAndAccept"
 }

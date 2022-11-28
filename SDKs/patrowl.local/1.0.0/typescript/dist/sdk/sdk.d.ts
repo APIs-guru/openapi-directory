@@ -1,69 +1,17 @@
-import { AxiosInstance, AxiosRequestConfig } from "axios";
-import * as operations from "./models/operations";
-declare type OptsFunc = (sdk: SDK) => void;
+import { AxiosInstance } from "axios";
+import { PatrowlEngine } from "./patrowlengine";
+type OptsFunc = (sdk: SDK) => void;
+export declare const ServerList: readonly ["http://patrowl.local", "http://localhost:5001/engines/nmap/", "http://localhost:5004/engines/ssllabs/", "http://localhost:5005/engines/arachni/", "http://localhost:5006/engines/owl_dns/", "http://localhost:5007/engines/virustotal/", "http://localhost:5008/engines/urlvoid/", "http://localhost:5009/engines/cortex/", "http://localhost:5012/engines/owl_leaks/", "http://localhost:5013/engines/owl_code/", "http://localhost:5014/engines/sslscan/"];
 export declare function WithServerURL(serverURL: string, params?: Map<string, string>): OptsFunc;
 export declare function WithClient(client: AxiosInstance): OptsFunc;
 export declare class SDK {
-    defaultClient?: AxiosInstance;
-    securityClient?: AxiosInstance;
-    security?: any;
-    serverURL: string;
+    patrowlEngine: PatrowlEngine;
+    _defaultClient: AxiosInstance;
+    _securityClient: AxiosInstance;
+    _serverURL: string;
+    private _language;
+    private _sdkVersion;
+    private _genVersion;
     constructor(...opts: OptsFunc[]);
-    /**
-     * Clean scan identified by id.
-    **/
-    CleanScanPage(req: operations.CleanScanPageRequest, config?: AxiosRequestConfig): Promise<operations.CleanScanPageResponse>;
-    /**
-     * Clean all current scans.
-    **/
-    CleanScansPage(config?: AxiosRequestConfig): Promise<operations.CleanScansPageResponse>;
-    /**
-     * Get findings on finished scans.
-    **/
-    GetFindingPage(req: operations.GetFindingPageRequest, config?: AxiosRequestConfig): Promise<operations.GetFindingPageResponse>;
-    /**
-     * Start a new scan.
-    **/
-    StartScanPage(req: operations.StartScanPageRequest, config?: AxiosRequestConfig): Promise<operations.StartScanPageResponse>;
-    /**
-     * Status of a scan identified by id.
-    **/
-    StatusScanPage(req: operations.StatusScanPageRequest, config?: AxiosRequestConfig): Promise<operations.StatusScanPageResponse>;
-    /**
-     * Status all current scans.
-    **/
-    StatusScansPage(config?: AxiosRequestConfig): Promise<operations.StatusScansPageResponse>;
-    /**
-     * Stop a scan identified by id.
-    **/
-    StopScanPage(req: operations.StopScanPageRequest, config?: AxiosRequestConfig): Promise<operations.StopScanPageResponse>;
-    /**
-     * Stop all current scans.
-    **/
-    StopScansPage(config?: AxiosRequestConfig): Promise<operations.StopScansPageResponse>;
-    /**
-     * Return index page
-    **/
-    GetDefaultPage(config?: AxiosRequestConfig): Promise<operations.GetDefaultPageResponse>;
-    /**
-     * Return information on engine.
-    **/
-    GetInfoPage(config?: AxiosRequestConfig): Promise<operations.GetInfoPageResponse>;
-    /**
-     * Return liveness page
-    **/
-    GetLivenessPage(config?: AxiosRequestConfig): Promise<operations.GetLivenessPageResponse>;
-    /**
-     * Return liveness page
-    **/
-    GetReadinessPage(config?: AxiosRequestConfig): Promise<operations.GetReadinessPageResponse>;
-    /**
-     * Return test page
-    **/
-    GetTestPage(config?: AxiosRequestConfig): Promise<operations.GetTestPageResponse>;
-    /**
-     * Reload the configuration file.
-    **/
-    ReloadConfigurationPage(config?: AxiosRequestConfig): Promise<operations.ReloadConfigurationPageResponse>;
 }
 export {};

@@ -5,36 +5,26 @@ from sdk.models import shared
 
 @dataclass
 class PutLkeNodePoolPathParams:
-    cluster_id: int = field(default=None, metadata={'path_param': { 'field_name': 'clusterId', 'style': 'simple', 'explode': False }})
-    pool_id: int = field(default=None, metadata={'path_param': { 'field_name': 'poolId', 'style': 'simple', 'explode': False }})
-    
-
-@dataclass
-class PutLkeNodePoolSecurityOption1:
-    personal_access_token: shared.SchemePersonalAccessToken = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer' }})
-    
-
-@dataclass
-class PutLkeNodePoolSecurityOption2:
-    oauth: shared.SchemeOauth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    cluster_id: int = field(metadata={'path_param': { 'field_name': 'clusterId', 'style': 'simple', 'explode': False }})
+    pool_id: int = field(metadata={'path_param': { 'field_name': 'poolId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class PutLkeNodePoolSecurity:
-    option1: Optional[PutLkeNodePoolSecurityOption1] = field(default=None, metadata={'security': { 'option': True }})
-    option2: Optional[PutLkeNodePoolSecurityOption2] = field(default=None, metadata={'security': { 'option': True }})
+    oauth: Optional[shared.SchemeOauth] = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    personal_access_token: Optional[shared.SchemePersonalAccessToken] = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer' }})
     
 
 @dataclass
 class PutLkeNodePoolRequest:
-    path_params: PutLkeNodePoolPathParams = field(default=None)
+    path_params: PutLkeNodePoolPathParams = field()
+    security: PutLkeNodePoolSecurity = field()
     request: Optional[Any] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: PutLkeNodePoolSecurity = field(default=None)
     
 
 @dataclass
 class PutLkeNodePoolResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     lke_node_pool: Optional[shared.LkeNodePool] = field(default=None)
-    status_code: int = field(default=None)
     

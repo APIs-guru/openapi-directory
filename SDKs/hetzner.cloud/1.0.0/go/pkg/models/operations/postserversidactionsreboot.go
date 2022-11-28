@@ -4,10 +4,8 @@ type PostServersIDActionsRebootPathParams struct {
 	ID int64 `pathParam:"style=simple,explode=false,name=id"`
 }
 
-type PostServersIDActionsRebootRequest struct {
-	PathParams PostServersIDActionsRebootPathParams
-}
-
+// PostServersIDActionsRebootActionResponseActionError
+// Error message for the Action if error occurred, otherwise null
 type PostServersIDActionsRebootActionResponseActionError struct {
 	Code    string `json:"code"`
 	Message string `json:"message"`
@@ -39,6 +37,10 @@ type PostServersIDActionsRebootActionResponseAction struct {
 
 type PostServersIDActionsRebootActionResponse struct {
 	Action PostServersIDActionsRebootActionResponseAction `json:"action"`
+}
+
+type PostServersIDActionsRebootRequest struct {
+	PathParams PostServersIDActionsRebootPathParams
 }
 
 type PostServersIDActionsRebootResponse struct {

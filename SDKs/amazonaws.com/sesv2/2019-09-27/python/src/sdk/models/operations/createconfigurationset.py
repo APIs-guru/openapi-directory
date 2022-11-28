@@ -1,9 +1,11 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
-from typing import Any,Enum,List,Optional
+from typing import Any,List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -21,62 +23,82 @@ class CreateConfigurationSetHeaders:
 @dataclass_json
 @dataclass
 class CreateConfigurationSetRequestBodyDeliveryOptions:
-    sending_pool_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'SendingPoolName' }})
-    tls_policy: Optional[shared.TLSPolicyEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'TlsPolicy' }})
+    r"""CreateConfigurationSetRequestBodyDeliveryOptions
+    Used to associate a configuration set with a dedicated IP pool.
+    """
+    
+    sending_pool_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('SendingPoolName') }})
+    tls_policy: Optional[shared.TLSPolicyEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('TlsPolicy') }})
     
 
 @dataclass_json
 @dataclass
 class CreateConfigurationSetRequestBodyReputationOptions:
-    last_fresh_start: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'LastFreshStart', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    reputation_metrics_enabled: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ReputationMetricsEnabled' }})
+    r"""CreateConfigurationSetRequestBodyReputationOptions
+    Enable or disable collection of reputation metrics for emails that you send using this configuration set in the current AWS Region. 
+    """
+    
+    last_fresh_start: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('LastFreshStart'), 'encoder': utils.datetimeisoformat(True), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    reputation_metrics_enabled: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ReputationMetricsEnabled') }})
     
 
 @dataclass_json
 @dataclass
 class CreateConfigurationSetRequestBodySendingOptions:
-    sending_enabled: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'SendingEnabled' }})
+    r"""CreateConfigurationSetRequestBodySendingOptions
+    Used to enable or disable email sending for messages that use this configuration set in the current AWS Region.
+    """
+    
+    sending_enabled: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('SendingEnabled') }})
     
 
 @dataclass_json
 @dataclass
 class CreateConfigurationSetRequestBodySuppressionOptions:
-    suppressed_reasons: Optional[List[shared.SuppressionListReasonEnum]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'SuppressedReasons' }})
+    r"""CreateConfigurationSetRequestBodySuppressionOptions
+    An object that contains information about the suppression list preferences for your account.
+    """
+    
+    suppressed_reasons: Optional[List[shared.SuppressionListReasonEnum]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('SuppressedReasons') }})
     
 
 @dataclass_json
 @dataclass
 class CreateConfigurationSetRequestBodyTrackingOptions:
-    custom_redirect_domain: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'CustomRedirectDomain' }})
+    r"""CreateConfigurationSetRequestBodyTrackingOptions
+    <p>An object that defines the tracking options for a configuration set. When you use the Amazon SES API v2 to send an email, it contains an invisible image that's used to track when recipients open your email. If your email contains links, those links are changed slightly in order to track when recipients click them.</p> <p>These images and links include references to a domain operated by AWS. You can optionally configure the Amazon SES to use a domain that you operate for these images and links.</p>
+    """
+    
+    custom_redirect_domain: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('CustomRedirectDomain') }})
     
 
 @dataclass_json
 @dataclass
 class CreateConfigurationSetRequestBody:
-    configuration_set_name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ConfigurationSetName' }})
-    delivery_options: Optional[CreateConfigurationSetRequestBodyDeliveryOptions] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'DeliveryOptions' }})
-    reputation_options: Optional[CreateConfigurationSetRequestBodyReputationOptions] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ReputationOptions' }})
-    sending_options: Optional[CreateConfigurationSetRequestBodySendingOptions] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'SendingOptions' }})
-    suppression_options: Optional[CreateConfigurationSetRequestBodySuppressionOptions] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'SuppressionOptions' }})
-    tags: Optional[List[shared.Tag]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Tags' }})
-    tracking_options: Optional[CreateConfigurationSetRequestBodyTrackingOptions] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'TrackingOptions' }})
+    configuration_set_name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('ConfigurationSetName') }})
+    delivery_options: Optional[CreateConfigurationSetRequestBodyDeliveryOptions] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('DeliveryOptions') }})
+    reputation_options: Optional[CreateConfigurationSetRequestBodyReputationOptions] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ReputationOptions') }})
+    sending_options: Optional[CreateConfigurationSetRequestBodySendingOptions] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('SendingOptions') }})
+    suppression_options: Optional[CreateConfigurationSetRequestBodySuppressionOptions] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('SuppressionOptions') }})
+    tags: Optional[List[shared.Tag]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Tags') }})
+    tracking_options: Optional[CreateConfigurationSetRequestBodyTrackingOptions] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('TrackingOptions') }})
     
 
 @dataclass
 class CreateConfigurationSetRequest:
-    headers: CreateConfigurationSetHeaders = field(default=None)
-    request: CreateConfigurationSetRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: CreateConfigurationSetHeaders = field()
+    request: CreateConfigurationSetRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class CreateConfigurationSetResponse:
+    content_type: str = field()
+    status_code: int = field()
     already_exists_exception: Optional[Any] = field(default=None)
     bad_request_exception: Optional[Any] = field(default=None)
     concurrent_modification_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     create_configuration_set_response: Optional[dict[str, Any]] = field(default=None)
     limit_exceeded_exception: Optional[Any] = field(default=None)
     not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     too_many_requests_exception: Optional[Any] = field(default=None)
     

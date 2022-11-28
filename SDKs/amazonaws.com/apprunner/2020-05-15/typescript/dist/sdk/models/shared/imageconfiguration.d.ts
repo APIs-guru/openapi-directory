@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 /**
  * Describes the configuration that AWS App Runner uses to run an App Runner service using an image pulled from a source image repository.
 **/

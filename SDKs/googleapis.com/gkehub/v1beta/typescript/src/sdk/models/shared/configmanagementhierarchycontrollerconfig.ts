@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ConfigManagementHierarchyControllerConfig
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Configuration for Hierarchy Controller
 **/
 export class ConfigManagementHierarchyControllerConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=enableHierarchicalResourceQuota" })
+  @SpeakeasyMetadata({ data: "json, name=enableHierarchicalResourceQuota" })
   enableHierarchicalResourceQuota?: boolean;
 
-  @Metadata({ data: "json, name=enablePodTreeLabels" })
+  @SpeakeasyMetadata({ data: "json, name=enablePodTreeLabels" })
   enablePodTreeLabels?: boolean;
 
-  @Metadata({ data: "json, name=enabled" })
+  @SpeakeasyMetadata({ data: "json, name=enabled" })
   enabled?: boolean;
 }

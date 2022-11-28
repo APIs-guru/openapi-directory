@@ -1,44 +1,45 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class EndpointUnfollowPlaylistPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=playlist_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=playlist_id" })
   playlistId: string;
 }
 
 
 export class EndpointUnfollowPlaylistHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=Authorization" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Authorization" })
   authorization: string;
 }
 
 
 export class EndpointUnfollowPlaylistSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   spotifyAuth: shared.SchemeSpotifyAuth;
 }
 
 
 export class EndpointUnfollowPlaylistRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: EndpointUnfollowPlaylistPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: EndpointUnfollowPlaylistHeaders;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: EndpointUnfollowPlaylistSecurity;
 }
 
 
 export class EndpointUnfollowPlaylistResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   errorResponseObject?: shared.ErrorResponseObject;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

@@ -4,17 +4,17 @@ from sdk.models import shared
 
 @dataclass
 class CreateReportTaskSecurity:
-    api_auth: shared.SchemeAPIAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    api_auth: shared.SchemeAPIAuth = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class CreateReportTaskRequest:
-    request: shared.CreateReportTask = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: CreateReportTaskSecurity = field(default=None)
+    request: shared.CreateReportTask = field(metadata={'request': { 'media_type': 'application/json' }})
+    security: CreateReportTaskSecurity = field()
     
 
 @dataclass
 class CreateReportTaskResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

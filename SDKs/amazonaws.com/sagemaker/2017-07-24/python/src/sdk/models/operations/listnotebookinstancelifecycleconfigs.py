@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
@@ -14,6 +18,7 @@ class ListNotebookInstanceLifecycleConfigsXAmzTargetEnum(str, Enum):
 
 @dataclass
 class ListNotebookInstanceLifecycleConfigsHeaders:
+    x_amz_target: ListNotebookInstanceLifecycleConfigsXAmzTargetEnum = field(metadata={'header': { 'field_name': 'X-Amz-Target', 'style': 'simple', 'explode': False }})
     x_amz_algorithm: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Algorithm', 'style': 'simple', 'explode': False }})
     x_amz_content_sha256: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Content-Sha256', 'style': 'simple', 'explode': False }})
     x_amz_credential: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Credential', 'style': 'simple', 'explode': False }})
@@ -21,19 +26,18 @@ class ListNotebookInstanceLifecycleConfigsHeaders:
     x_amz_security_token: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Security-Token', 'style': 'simple', 'explode': False }})
     x_amz_signature: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Signature', 'style': 'simple', 'explode': False }})
     x_amz_signed_headers: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-SignedHeaders', 'style': 'simple', 'explode': False }})
-    x_amz_target: ListNotebookInstanceLifecycleConfigsXAmzTargetEnum = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Target', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class ListNotebookInstanceLifecycleConfigsRequest:
-    query_params: ListNotebookInstanceLifecycleConfigsQueryParams = field(default=None)
-    headers: ListNotebookInstanceLifecycleConfigsHeaders = field(default=None)
-    request: shared.ListNotebookInstanceLifecycleConfigsInput = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: ListNotebookInstanceLifecycleConfigsHeaders = field()
+    query_params: ListNotebookInstanceLifecycleConfigsQueryParams = field()
+    request: shared.ListNotebookInstanceLifecycleConfigsInput = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class ListNotebookInstanceLifecycleConfigsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     list_notebook_instance_lifecycle_configs_output: Optional[shared.ListNotebookInstanceLifecycleConfigsOutput] = field(default=None)
-    status_code: int = field(default=None)
     

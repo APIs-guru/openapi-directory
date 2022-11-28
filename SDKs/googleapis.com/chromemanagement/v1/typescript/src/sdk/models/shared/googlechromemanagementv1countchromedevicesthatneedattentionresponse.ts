@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleChromeManagementV1CountChromeDevicesThatNeedAttentionResponse
@@ -6,18 +7,18 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Response containing counts for devices that need attention.
 **/
 export class GoogleChromeManagementV1CountChromeDevicesThatNeedAttentionResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=noRecentPolicySyncCount" })
+  @SpeakeasyMetadata({ data: "json, name=noRecentPolicySyncCount" })
   noRecentPolicySyncCount?: string;
 
-  @Metadata({ data: "json, name=noRecentUserActivityCount" })
+  @SpeakeasyMetadata({ data: "json, name=noRecentUserActivityCount" })
   noRecentUserActivityCount?: string;
 
-  @Metadata({ data: "json, name=osVersionNotCompliantCount" })
+  @SpeakeasyMetadata({ data: "json, name=osVersionNotCompliantCount" })
   osVersionNotCompliantCount?: string;
 
-  @Metadata({ data: "json, name=pendingUpdate" })
+  @SpeakeasyMetadata({ data: "json, name=pendingUpdate" })
   pendingUpdate?: string;
 
-  @Metadata({ data: "json, name=unsupportedPolicyCount" })
+  @SpeakeasyMetadata({ data: "json, name=unsupportedPolicyCount" })
   unsupportedPolicyCount?: string;
 }

@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
 from typing import Optional
+from sdk.models import shared
 
 
 @dataclass
 class DenySpaceAccesPathParams:
-    participant_id: str = field(default=None, metadata={'path_param': { 'field_name': 'participantId', 'style': 'simple', 'explode': False }})
-    space_id: str = field(default=None, metadata={'path_param': { 'field_name': 'spaceId', 'style': 'simple', 'explode': False }})
+    participant_id: str = field(metadata={'path_param': { 'field_name': 'participantId', 'style': 'simple', 'explode': False }})
+    space_id: str = field(metadata={'path_param': { 'field_name': 'spaceId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -15,18 +16,18 @@ class DenySpaceAccesRequestBody:
 
 @dataclass
 class DenySpaceAccesSecurity:
-    oauth: shared.SchemeOauth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth: shared.SchemeOauth = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DenySpaceAccesRequest:
-    path_params: DenySpaceAccesPathParams = field(default=None)
+    path_params: DenySpaceAccesPathParams = field()
+    security: DenySpaceAccesSecurity = field()
     request: Optional[DenySpaceAccesRequestBody] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
-    security: DenySpaceAccesSecurity = field(default=None)
     
 
 @dataclass
 class DenySpaceAccesResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

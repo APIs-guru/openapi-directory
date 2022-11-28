@@ -1,7 +1,26 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import { ContactGroupMembership } from "./contactgroupmembership";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { ContactGroupMembershipInput } from "./contactgroupmembership";
 import { DomainMembership } from "./domainmembership";
+import { FieldMetadataInput } from "./fieldmetadata";
+import { ContactGroupMembership } from "./contactgroupmembership";
 import { FieldMetadata } from "./fieldmetadata";
+
+
+
+// MembershipInput
+/** 
+ * A person's membership in a group. Only contact group memberships can be modified.
+**/
+export class MembershipInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=contactGroupMembership" })
+  contactGroupMembership?: ContactGroupMembershipInput;
+
+  @SpeakeasyMetadata({ data: "json, name=domainMembership" })
+  domainMembership?: DomainMembership;
+
+  @SpeakeasyMetadata({ data: "json, name=metadata" })
+  metadata?: FieldMetadataInput;
+}
 
 
 // Membership
@@ -9,12 +28,12 @@ import { FieldMetadata } from "./fieldmetadata";
  * A person's membership in a group. Only contact group memberships can be modified.
 **/
 export class Membership extends SpeakeasyBase {
-  @Metadata({ data: "json, name=contactGroupMembership" })
+  @SpeakeasyMetadata({ data: "json, name=contactGroupMembership" })
   contactGroupMembership?: ContactGroupMembership;
 
-  @Metadata({ data: "json, name=domainMembership" })
+  @SpeakeasyMetadata({ data: "json, name=domainMembership" })
   domainMembership?: DomainMembership;
 
-  @Metadata({ data: "json, name=metadata" })
+  @SpeakeasyMetadata({ data: "json, name=metadata" })
   metadata?: FieldMetadata;
 }

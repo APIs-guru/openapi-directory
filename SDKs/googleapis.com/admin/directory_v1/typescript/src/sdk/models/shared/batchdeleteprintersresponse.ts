@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { FailureInfo } from "./failureinfo";
+
 
 
 // BatchDeletePrintersResponse
@@ -8,9 +8,9 @@ import { FailureInfo } from "./failureinfo";
  * Response for deleting existing printers in batch.
 **/
 export class BatchDeletePrintersResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=failedPrinters", elemType: shared.FailureInfo })
+  @SpeakeasyMetadata({ data: "json, name=failedPrinters", elemType: FailureInfo })
   failedPrinters?: FailureInfo[];
 
-  @Metadata({ data: "json, name=printerIds" })
+  @SpeakeasyMetadata({ data: "json, name=printerIds" })
   printerIds?: string[];
 }

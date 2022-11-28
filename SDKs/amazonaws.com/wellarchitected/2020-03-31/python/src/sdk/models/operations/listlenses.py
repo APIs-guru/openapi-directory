@@ -1,5 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Any,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
 from sdk.models import shared
 
 
@@ -22,17 +25,17 @@ class ListLensesHeaders:
 
 @dataclass
 class ListLensesRequest:
-    query_params: ListLensesQueryParams = field(default=None)
-    headers: ListLensesHeaders = field(default=None)
+    headers: ListLensesHeaders = field()
+    query_params: ListLensesQueryParams = field()
     
 
 @dataclass
 class ListLensesResponse:
+    content_type: str = field()
+    status_code: int = field()
     access_denied_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     internal_server_exception: Optional[Any] = field(default=None)
     list_lenses_output: Optional[shared.ListLensesOutput] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     validation_exception: Optional[Any] = field(default=None)
     

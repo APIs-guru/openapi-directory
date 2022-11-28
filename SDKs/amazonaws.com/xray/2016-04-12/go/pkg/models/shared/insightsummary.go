@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// InsightSummary
+// Information that describes an insight.
 type InsightSummary struct {
 	Categories                              []InsightCategoryEnum    `json:"Categories,omitempty"`
 	ClientRequestImpactStatistics           *RequestImpactStatistics `json:"ClientRequestImpactStatistics,omitempty"`

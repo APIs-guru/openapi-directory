@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GeofenceGeometry } from "./geofencegeometry";
 // BatchPutGeofenceRequestEntry
 /**
@@ -34,11 +34,11 @@ var BatchPutGeofenceRequestEntry = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=GeofenceId" }),
+        SpeakeasyMetadata({ data: "json, name=GeofenceId" }),
         __metadata("design:type", String)
     ], BatchPutGeofenceRequestEntry.prototype, "geofenceId", void 0);
     __decorate([
-        Metadata({ data: "json, name=Geometry" }),
+        SpeakeasyMetadata({ data: "json, name=Geometry" }),
         __metadata("design:type", GeofenceGeometry)
     ], BatchPutGeofenceRequestEntry.prototype, "geometry", void 0);
     return BatchPutGeofenceRequestEntry;

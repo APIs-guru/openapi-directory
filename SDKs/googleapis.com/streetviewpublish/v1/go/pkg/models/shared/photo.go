@@ -21,6 +21,19 @@ const (
 	PhotoTransferStatusEnumReceivedViaTransfer   PhotoTransferStatusEnum = "RECEIVED_VIA_TRANSFER"
 )
 
+// PhotoInput
+// Photo is used to store 360 photos along with photo metadata.
+type PhotoInput struct {
+	CaptureTime     *string      `json:"captureTime,omitempty"`
+	Connections     []Connection `json:"connections,omitempty"`
+	PhotoID         *PhotoID     `json:"photoId,omitempty"`
+	Places          []PlaceInput `json:"places,omitempty"`
+	Pose            *Pose        `json:"pose,omitempty"`
+	UploadReference *UploadRef   `json:"uploadReference,omitempty"`
+}
+
+// Photo
+// Photo is used to store 360 photos along with photo metadata.
 type Photo struct {
 	CaptureTime       *string                     `json:"captureTime,omitempty"`
 	Connections       []Connection                `json:"connections,omitempty"`

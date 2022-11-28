@@ -1,35 +1,36 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetAvailablePhpVersionsPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=domainName" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=domainName" })
   domainName: string;
 }
 
 
 export class GetAvailablePhpVersionsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=domain_name" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=domain_name" })
   domainName: string;
 }
 
 
 export class GetAvailablePhpVersionsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetAvailablePhpVersionsPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetAvailablePhpVersionsQueryParams;
 }
 
 
 export class GetAvailablePhpVersionsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata({ elemType: shared.PhpVersion })
+  @SpeakeasyMetadata({ elemType: shared.PhpVersion })
   phpVersions?: shared.PhpVersion[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

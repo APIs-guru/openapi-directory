@@ -1,8 +1,11 @@
-import warnings
+
+
 import requests
 from typing import List,Optional
-from sdk.models import operations, shared
+from sdk.models import shared, operations
 from . import utils
+
+
 
 
 SERVERS = [
@@ -11,28 +14,57 @@ SERVERS = [
 
 
 class SDK:
-    client = requests.Session()
-    server_url = SERVERS[0]
+    
+
+    _client: requests.Session
+    _security_client: requests.Session
+    _security: shared.Security
+    _server_url: str = SERVERS[0]
+    _language: str = "python"
+    _sdk_version: str = "0.0.1"
+    _gen_version: str = "internal"
+
+    def __init__(self) -> None:
+        self._client = requests.Session()
+        self._security_client = requests.Session()
+        
+
 
     def config_server_url(self, server_url: str, params: dict[str, str]):
-        if not params is None:
-            self.server_url = utils.replace_parameters(server_url, params)
+        if params is not None:
+            self._server_url = utils.replace_parameters(server_url, params)
         else:
-            self.server_url = server_url
-            
-    
-    def config_security(self, security: shared.Security):
-        self.client = utils.configure_security_client(security)
+            self._server_url = server_url
 
+        
+    
+
+    def config_client(self, client: requests.Session):
+        self._client = client
+        
+        if self._security is not None:
+            self._security_client = utils.configure_security_client(self._client, self._security)
+        
+    
+
+    def config_security(self, security: shared.Security):
+        self._security = security
+        self._security_client = utils.configure_security_client(self._client, security)
+        
+    
+    
     
     def get_auth(self, request: operations.GetAuthRequest) -> operations.GetAuthResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Request a JWT access token using your obono username and password.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/auth"
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -47,13 +79,16 @@ class SDK:
 
     
     def get_belege_beleg_uuid_(self, request: operations.GetBelegeBelegUUIDRequest) -> operations.GetBelegeBelegUUIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieves a particular `Beleg` from the \"Datenerfassungsprotokoll\".
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/belege/{belegUuid}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -70,15 +105,14 @@ class SDK:
 
     
     def get_export_csv_registrierkassen_registrierkasse_uuid_belege(self, request: operations.GetExportCsvRegistrierkassenRegistrierkasseUUIDBelegeRequest) -> operations.GetExportCsvRegistrierkassenRegistrierkasseUUIDBelegeResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/export/csv/registrierkassen/{registrierkasseUuid}/belege", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -91,15 +125,14 @@ class SDK:
 
     
     def get_export_dep131_registrierkassen_registrierkasse_uuid_belege(self, request: operations.GetExportDep131RegistrierkassenRegistrierkasseUUIDBelegeRequest) -> operations.GetExportDep131RegistrierkassenRegistrierkasseUUIDBelegeResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/export/dep131/registrierkassen/{registrierkasseUuid}/belege", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -112,15 +145,14 @@ class SDK:
 
     
     def get_export_dep7_registrierkassen_registrierkasse_uuid_belege(self, request: operations.GetExportDep7RegistrierkassenRegistrierkasseUUIDBelegeRequest) -> operations.GetExportDep7RegistrierkassenRegistrierkasseUUIDBelegeResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/export/dep7/registrierkassen/{registrierkasseUuid}/belege", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -133,15 +165,14 @@ class SDK:
 
     
     def get_export_gobd_registrierkassen_registrierkasse_uuid_(self, request: operations.GetExportGobdRegistrierkassenRegistrierkasseUUIDRequest) -> operations.GetExportGobdRegistrierkassenRegistrierkasseUUIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/export/gobd/registrierkassen/{registrierkasseUuid}", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -154,13 +185,13 @@ class SDK:
 
     
     def get_export_html_belege_beleg_uuid_(self, request: operations.GetExportHTMLBelegeBelegUUIDRequest) -> operations.GetExportHTMLBelegeBelegUUIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/export/html/belege/{belegUuid}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -173,13 +204,13 @@ class SDK:
 
     
     def get_export_pdf_belege_beleg_uuid_(self, request: operations.GetExportPdfBelegeBelegUUIDRequest) -> operations.GetExportPdfBelegeBelegUUIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/export/pdf/belege/{belegUuid}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -192,13 +223,13 @@ class SDK:
 
     
     def get_export_qr_belege_beleg_uuid_(self, request: operations.GetExportQrBelegeBelegUUIDRequest) -> operations.GetExportQrBelegeBelegUUIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/export/qr/belege/{belegUuid}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -211,15 +242,14 @@ class SDK:
 
     
     def get_export_thermal_print_belege_beleg_uuid_(self, request: operations.GetExportThermalPrintBelegeBelegUUIDRequest) -> operations.GetExportThermalPrintBelegeBelegUUIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/export/thermal-print/belege/{belegUuid}", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -232,15 +262,14 @@ class SDK:
 
     
     def get_export_xls_registrierkassen_registrierkasse_uuid_belege(self, request: operations.GetExportXlsRegistrierkassenRegistrierkasseUUIDBelegeRequest) -> operations.GetExportXlsRegistrierkassenRegistrierkasseUUIDBelegeResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/export/xls/registrierkassen/{registrierkasseUuid}/belege", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -253,22 +282,22 @@ class SDK:
 
     
     def add_beleg(self, request: operations.AddBelegRequest) -> operations.AddBelegResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Signs a receipt and stores it in the \"Datenerfassungsprotokoll\".
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/registrierkassen/{registrierkasseUuid}/belege/{belegUuid}", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -294,22 +323,22 @@ class SDK:
 
     
     def create_abschluss(self, request: operations.CreateAbschlussRequest) -> operations.CreateAbschlussResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Generates an `Abschlussbeleg`.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/registrierkassen/{registrierkasseUuid}/abschluss", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -323,13 +352,16 @@ class SDK:
 
     
     def get_beleg(self, request: operations.GetBelegRequest) -> operations.GetBelegResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieves a particular `Beleg` from the \"Datenerfassungsprotokoll\".
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/registrierkassen/{registrierkasseUuid}/belege/{belegUuid}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -346,15 +378,17 @@ class SDK:
 
     
     def get_belege(self, request: operations.GetBelegeRequest) -> operations.GetBelegeResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieves the `Beleg` collection from the \"Datenerfassungsprotokoll\".
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/registrierkassen/{registrierkasseUuid}/belege", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -369,13 +403,16 @@ class SDK:
 
     
     def get_dep(self, request: operations.GetDepRequest) -> operations.GetDepResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Generates a DEP file.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/registrierkassen/{registrierkasseUuid}/dep", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -388,15 +425,17 @@ class SDK:
 
     
     def get_monatsbelege(self, request: operations.GetMonatsbelegeRequest) -> operations.GetMonatsbelegeResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns a list of `Monatsbelege`.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/registrierkassen/{registrierkasseUuid}/monatsbelege", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -411,13 +450,16 @@ class SDK:
 
     
     def get_registrierkasse(self, request: operations.GetRegistrierkasseRequest) -> operations.GetRegistrierkasseResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns information about a particular `Registrierkasse`.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/registrierkassen/{registrierkasseUuid}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 

@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostCreateEnvironmentActionEnum(str, Enum):
     CREATE_ENVIRONMENT = "CreateEnvironment"
@@ -10,8 +14,8 @@ class PostCreateEnvironmentVersionEnum(str, Enum):
 
 @dataclass
 class PostCreateEnvironmentQueryParams:
-    action: PostCreateEnvironmentActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostCreateEnvironmentVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostCreateEnvironmentActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostCreateEnvironmentVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostCreateEnvironmentHeaders:
 
 @dataclass
 class PostCreateEnvironmentRequest:
-    query_params: PostCreateEnvironmentQueryParams = field(default=None)
-    headers: PostCreateEnvironmentHeaders = field(default=None)
+    headers: PostCreateEnvironmentHeaders = field()
+    query_params: PostCreateEnvironmentQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostCreateEnvironmentResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

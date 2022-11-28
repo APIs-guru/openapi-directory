@@ -1,35 +1,36 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetDocumentResourcePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=document_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=document_id" })
   documentId: string;
 }
 
 
 export class GetDocumentResourceHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Fields" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Fields" })
   xFields?: string;
 }
 
 
 export class GetDocumentResourceRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetDocumentResourcePathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: GetDocumentResourceHeaders;
 }
 
 
 export class GetDocumentResourceResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   documentModelGet?: shared.DocumentModelGet;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

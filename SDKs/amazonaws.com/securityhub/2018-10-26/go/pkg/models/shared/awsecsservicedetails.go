@@ -1,5 +1,7 @@
 package shared
 
+// AwsEcsServiceDetails
+// Provides details about a service within an ECS cluster.
 type AwsEcsServiceDetails struct {
 	CapacityProviderStrategy      []AwsEcsServiceCapacityProviderStrategyDetails `json:"CapacityProviderStrategy,omitempty"`
 	Cluster                       *string                                        `json:"Cluster,omitempty"`

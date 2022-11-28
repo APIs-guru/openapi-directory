@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { CorrectiveRecommendations } from "./correctiverecommendations";
 import { VariationDetails } from "./variationdetails";
 import { NameValueList } from "./namevaluelist";

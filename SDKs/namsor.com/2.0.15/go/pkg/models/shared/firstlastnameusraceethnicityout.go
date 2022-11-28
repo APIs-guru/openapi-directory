@@ -22,6 +22,8 @@ const (
 	FirstLastNameUsRaceEthnicityOutRaceEthnicityAltEnumPi   FirstLastNameUsRaceEthnicityOutRaceEthnicityAltEnum = "PI"
 )
 
+// FirstLastNameUsRaceEthnicityOut
+// Represents the output of inferring the LIKELY US 'race/ethnicity' from a personal name, given US country of residence and (optionally) a ZIP5 code.
 type FirstLastNameUsRaceEthnicityOut struct {
 	FirstName                *string                                              `json:"firstName,omitempty"`
 	ID                       *string                                              `json:"id,omitempty"`

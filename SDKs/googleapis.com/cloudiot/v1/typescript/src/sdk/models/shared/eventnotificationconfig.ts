@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // EventNotificationConfig
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The configuration for forwarding telemetry events.
 **/
 export class EventNotificationConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=pubsubTopicName" })
+  @SpeakeasyMetadata({ data: "json, name=pubsubTopicName" })
   pubsubTopicName?: string;
 
-  @Metadata({ data: "json, name=subfolderMatches" })
+  @SpeakeasyMetadata({ data: "json, name=subfolderMatches" })
   subfolderMatches?: string;
 }

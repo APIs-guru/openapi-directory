@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // MetaCursors
@@ -6,13 +7,13 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Cursors to navigate to previous or next pages through the API
 **/
 export class MetaCursors extends SpeakeasyBase {
-  @Metadata({ data: "json, name=current" })
+  @SpeakeasyMetadata({ data: "json, name=current" })
   current?: string;
 
-  @Metadata({ data: "json, name=next" })
+  @SpeakeasyMetadata({ data: "json, name=next" })
   next?: string;
 
-  @Metadata({ data: "json, name=previous" })
+  @SpeakeasyMetadata({ data: "json, name=previous" })
   previous?: string;
 }
 
@@ -22,9 +23,9 @@ export class MetaCursors extends SpeakeasyBase {
  * Response metadata
 **/
 export class Meta extends SpeakeasyBase {
-  @Metadata({ data: "json, name=cursors" })
+  @SpeakeasyMetadata({ data: "json, name=cursors" })
   cursors?: MetaCursors;
 
-  @Metadata({ data: "json, name=items_on_page" })
+  @SpeakeasyMetadata({ data: "json, name=items_on_page" })
   itemsOnPage?: number;
 }

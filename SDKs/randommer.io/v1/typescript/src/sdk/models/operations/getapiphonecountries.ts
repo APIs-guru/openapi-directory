@@ -1,22 +1,23 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetApiPhoneCountriesHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Api-Key" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Api-Key" })
   xApiKey?: string;
 }
 
 
 export class GetApiPhoneCountriesRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: GetApiPhoneCountriesHeaders;
 }
 
 
 export class GetApiPhoneCountriesResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

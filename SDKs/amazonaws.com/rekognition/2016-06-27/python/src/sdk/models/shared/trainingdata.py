@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import asset
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class TrainingData:
-    assets: Optional[List[asset.Asset]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Assets' }})
+    r"""TrainingData
+    The dataset used for training.
+    """
+    
+    assets: Optional[List[Asset]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Assets') }})
     

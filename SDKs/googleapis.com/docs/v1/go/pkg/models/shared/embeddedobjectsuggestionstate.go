@@ -1,5 +1,7 @@
 package shared
 
+// EmbeddedObjectSuggestionState
+// A mask that indicates which of the fields on the base EmbeddedObject have been changed in this suggestion. For any field set to true, there's a new suggested value.
 type EmbeddedObjectSuggestionState struct {
 	DescriptionSuggested                     *bool                                  `json:"descriptionSuggested,omitempty"`
 	EmbeddedDrawingPropertiesSuggestionState map[string]interface{}                 `json:"embeddedDrawingPropertiesSuggestionState,omitempty"`

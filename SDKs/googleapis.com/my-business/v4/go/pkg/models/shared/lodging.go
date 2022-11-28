@@ -1,5 +1,7 @@
 package shared
 
+// Lodging
+// Lodging of a location that provides accomodations.
 type Lodging struct {
 	Accessibility    *Accessibility     `json:"accessibility,omitempty"`
 	Activities       *Activities        `json:"activities,omitempty"`

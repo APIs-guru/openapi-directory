@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ArrayValue } from "./arrayvalue";
+
 
 
 // Field
@@ -7,24 +8,24 @@ import { ArrayValue } from "./arrayvalue";
  * Contains a value.
 **/
 export class Field extends SpeakeasyBase {
-  @Metadata({ data: "json, name=arrayValue" })
+  @SpeakeasyMetadata({ data: "json, name=arrayValue" })
   arrayValue?: ArrayValue;
 
-  @Metadata({ data: "json, name=blobValue" })
+  @SpeakeasyMetadata({ data: "json, name=blobValue" })
   blobValue?: string;
 
-  @Metadata({ data: "json, name=booleanValue" })
+  @SpeakeasyMetadata({ data: "json, name=booleanValue" })
   booleanValue?: boolean;
 
-  @Metadata({ data: "json, name=doubleValue" })
+  @SpeakeasyMetadata({ data: "json, name=doubleValue" })
   doubleValue?: number;
 
-  @Metadata({ data: "json, name=isNull" })
+  @SpeakeasyMetadata({ data: "json, name=isNull" })
   isNull?: boolean;
 
-  @Metadata({ data: "json, name=longValue" })
+  @SpeakeasyMetadata({ data: "json, name=longValue" })
   longValue?: number;
 
-  @Metadata({ data: "json, name=stringValue" })
+  @SpeakeasyMetadata({ data: "json, name=stringValue" })
   stringValue?: string;
 }

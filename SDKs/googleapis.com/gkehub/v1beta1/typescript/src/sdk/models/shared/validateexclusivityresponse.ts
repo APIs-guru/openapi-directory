@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleRpcStatus } from "./googlerpcstatus";
+
 
 
 // ValidateExclusivityResponse
@@ -7,6 +8,6 @@ import { GoogleRpcStatus } from "./googlerpcstatus";
  * The response of exclusivity artifacts validation result status.
 **/
 export class ValidateExclusivityResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: GoogleRpcStatus;
 }

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // CodeGenEdge
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Represents a directional edge in a directed acyclic graph (DAG).
 **/
 export class CodeGenEdge extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Source" })
+  @SpeakeasyMetadata({ data: "json, name=Source" })
   source: string;
 
-  @Metadata({ data: "json, name=Target" })
+  @SpeakeasyMetadata({ data: "json, name=Target" })
   target: string;
 
-  @Metadata({ data: "json, name=TargetParameter" })
+  @SpeakeasyMetadata({ data: "json, name=TargetParameter" })
   targetParameter?: string;
 }

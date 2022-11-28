@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare enum DisableSsoXAmzTargetEnum {
     DirectoryService20150416DisableSso = "DirectoryService_20150416.DisableSso"

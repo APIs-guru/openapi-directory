@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // V2GetKeyStringResponse
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Response message for `GetKeyString` method.
 **/
 export class V2GetKeyStringResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=keyString" })
+  @SpeakeasyMetadata({ data: "json, name=keyString" })
   keyString?: string;
 }

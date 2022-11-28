@@ -1,18 +1,22 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import availabilityzone
-from . import regionname_enum
-from . import availabilityzone
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class Region:
-    availability_zones: Optional[List[availabilityzone.AvailabilityZone]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'availabilityZones' }})
-    continent_code: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'continentCode' }})
-    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
-    display_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'displayName' }})
-    name: Optional[regionname_enum.RegionNameEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    relational_database_availability_zones: Optional[List[availabilityzone.AvailabilityZone]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'relationalDatabaseAvailabilityZones' }})
+    r"""Region
+    Describes the AWS Region.
+    """
+    
+    availability_zones: Optional[List[AvailabilityZone]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('availabilityZones') }})
+    continent_code: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('continentCode') }})
+    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('description') }})
+    display_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('displayName') }})
+    name: Optional[RegionNameEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    relational_database_availability_zones: Optional[List[AvailabilityZone]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('relationalDatabaseAvailabilityZones') }})
     

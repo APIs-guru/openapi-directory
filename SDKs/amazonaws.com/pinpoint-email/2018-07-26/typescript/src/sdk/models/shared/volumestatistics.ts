@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // VolumeStatistics
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * An object that contains information about the amount of email that was delivered to recipients.
 **/
 export class VolumeStatistics extends SpeakeasyBase {
-  @Metadata({ data: "json, name=InboxRawCount" })
+  @SpeakeasyMetadata({ data: "json, name=InboxRawCount" })
   inboxRawCount?: number;
 
-  @Metadata({ data: "json, name=ProjectedInbox" })
+  @SpeakeasyMetadata({ data: "json, name=ProjectedInbox" })
   projectedInbox?: number;
 
-  @Metadata({ data: "json, name=ProjectedSpam" })
+  @SpeakeasyMetadata({ data: "json, name=ProjectedSpam" })
   projectedSpam?: number;
 
-  @Metadata({ data: "json, name=SpamRawCount" })
+  @SpeakeasyMetadata({ data: "json, name=SpamRawCount" })
   spamRawCount?: number;
 }

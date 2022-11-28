@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GovidRequestBodyCertificateParameters = /** @class */ (function (_super) {
     __extends(GovidRequestBodyCertificateParameters, _super);
@@ -30,7 +30,7 @@ var GovidRequestBodyCertificateParameters = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=_uniqueid" }),
+        SpeakeasyMetadata({ data: "json, name=_uniqueid" }),
         __metadata("design:type", String)
     ], GovidRequestBodyCertificateParameters.prototype, "uniqueid", void 0);
     return GovidRequestBodyCertificateParameters;
@@ -46,19 +46,19 @@ var GovidRequestBody = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=certificateParameters" }),
+        SpeakeasyMetadata({ data: "json, name=certificateParameters" }),
         __metadata("design:type", GovidRequestBodyCertificateParameters)
     ], GovidRequestBody.prototype, "certificateParameters", void 0);
     __decorate([
-        Metadata({ data: "json, name=consentArtifact" }),
+        SpeakeasyMetadata({ data: "json, name=consentArtifact" }),
         __metadata("design:type", Object)
     ], GovidRequestBody.prototype, "consentArtifact", void 0);
     __decorate([
-        Metadata({ data: "json, name=format" }),
+        SpeakeasyMetadata({ data: "json, name=format" }),
         __metadata("design:type", String)
     ], GovidRequestBody.prototype, "format", void 0);
     __decorate([
-        Metadata({ data: "json, name=txnId" }),
+        SpeakeasyMetadata({ data: "json, name=txnId" }),
         __metadata("design:type", String)
     ], GovidRequestBody.prototype, "txnId", void 0);
     return GovidRequestBody;
@@ -70,32 +70,16 @@ var GovidSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeApiKey)
     ], GovidSecurity.prototype, "apiKey", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeClientId)
     ], GovidSecurity.prototype, "clientId", void 0);
     return GovidSecurity;
 }(SpeakeasyBase));
 export { GovidSecurity };
-var GovidRequest = /** @class */ (function (_super) {
-    __extends(GovidRequest, _super);
-    function GovidRequest() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
-        __metadata("design:type", GovidRequestBody)
-    ], GovidRequest.prototype, "request", void 0);
-    __decorate([
-        Metadata(),
-        __metadata("design:type", GovidSecurity)
-    ], GovidRequest.prototype, "security", void 0);
-    return GovidRequest;
-}(SpeakeasyBase));
-export { GovidRequest };
 export var Govid400ApplicationJsonErrorEnum;
 (function (Govid400ApplicationJsonErrorEnum) {
     Govid400ApplicationJsonErrorEnum["MissingParameter"] = "missing_parameter";
@@ -118,11 +102,11 @@ var Govid400ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Govid400ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Govid400ApplicationJson.prototype, "errorDescription", void 0);
     return Govid400ApplicationJson;
@@ -144,11 +128,11 @@ var Govid401ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Govid401ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Govid401ApplicationJson.prototype, "errorDescription", void 0);
     return Govid401ApplicationJson;
@@ -170,11 +154,11 @@ var Govid404ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Govid404ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Govid404ApplicationJson.prototype, "errorDescription", void 0);
     return Govid404ApplicationJson;
@@ -194,11 +178,11 @@ var Govid500ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Govid500ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Govid500ApplicationJson.prototype, "errorDescription", void 0);
     return Govid500ApplicationJson;
@@ -218,11 +202,11 @@ var Govid502ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Govid502ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Govid502ApplicationJson.prototype, "errorDescription", void 0);
     return Govid502ApplicationJson;
@@ -242,11 +226,11 @@ var Govid503ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Govid503ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Govid503ApplicationJson.prototype, "errorDescription", void 0);
     return Govid503ApplicationJson;
@@ -266,55 +250,71 @@ var Govid504ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Govid504ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Govid504ApplicationJson.prototype, "errorDescription", void 0);
     return Govid504ApplicationJson;
 }(SpeakeasyBase));
 export { Govid504ApplicationJson };
+var GovidRequest = /** @class */ (function (_super) {
+    __extends(GovidRequest, _super);
+    function GovidRequest() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
+        __metadata("design:type", GovidRequestBody)
+    ], GovidRequest.prototype, "request", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", GovidSecurity)
+    ], GovidRequest.prototype, "security", void 0);
+    return GovidRequest;
+}(SpeakeasyBase));
+export { GovidRequest };
 var GovidResponse = /** @class */ (function (_super) {
     __extends(GovidResponse, _super);
     function GovidResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GovidResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GovidResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Govid400ApplicationJson)
     ], GovidResponse.prototype, "govid400ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Govid401ApplicationJson)
     ], GovidResponse.prototype, "govid401ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Govid404ApplicationJson)
     ], GovidResponse.prototype, "govid404ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Govid500ApplicationJson)
     ], GovidResponse.prototype, "govid500ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Govid502ApplicationJson)
     ], GovidResponse.prototype, "govid502ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Govid503ApplicationJson)
     ], GovidResponse.prototype, "govid503ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Govid504ApplicationJson)
     ], GovidResponse.prototype, "govid504ApplicationJsonObject", void 0);
     return GovidResponse;

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var PostUploadHeaders = /** @class */ (function (_super) {
     __extends(PostUploadHeaders, _super);
@@ -30,49 +30,25 @@ var PostUploadHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Recipient-Email" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Recipient-Email" }),
         __metadata("design:type", String)
     ], PostUploadHeaders.prototype, "xRecipientEmail", void 0);
     return PostUploadHeaders;
 }(SpeakeasyBase));
 export { PostUploadHeaders };
-var PostUploadSecurityOption1 = /** @class */ (function (_super) {
-    __extends(PostUploadSecurityOption1, _super);
-    function PostUploadSecurityOption1() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
-        __metadata("design:type", shared.SchemeApiKey)
-    ], PostUploadSecurityOption1.prototype, "apiKey", void 0);
-    return PostUploadSecurityOption1;
-}(SpeakeasyBase));
-export { PostUploadSecurityOption1 };
-var PostUploadSecurityOption2 = /** @class */ (function (_super) {
-    __extends(PostUploadSecurityOption2, _super);
-    function PostUploadSecurityOption2() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
-        __metadata("design:type", shared.SchemeOauth2AuthorizationCode)
-    ], PostUploadSecurityOption2.prototype, "oauth2AuthorizationCode", void 0);
-    return PostUploadSecurityOption2;
-}(SpeakeasyBase));
-export { PostUploadSecurityOption2 };
 var PostUploadSecurity = /** @class */ (function (_super) {
     __extends(PostUploadSecurity, _super);
     function PostUploadSecurity() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, option=true" }),
-        __metadata("design:type", PostUploadSecurityOption1)
-    ], PostUploadSecurity.prototype, "option1", void 0);
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        __metadata("design:type", shared.SchemeApiKey)
+    ], PostUploadSecurity.prototype, "apiKey", void 0);
     __decorate([
-        Metadata({ data: "security, option=true" }),
-        __metadata("design:type", PostUploadSecurityOption2)
-    ], PostUploadSecurity.prototype, "option2", void 0);
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
+        __metadata("design:type", shared.SchemeOauth2AuthorizationCode)
+    ], PostUploadSecurity.prototype, "oauth2AuthorizationCode", void 0);
     return PostUploadSecurity;
 }(SpeakeasyBase));
 export { PostUploadSecurity };
@@ -82,15 +58,15 @@ var PostUploadRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PostUploadHeaders)
     ], PostUploadRequest.prototype, "headers", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", shared.Upload)
     ], PostUploadRequest.prototype, "request", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PostUploadSecurity)
     ], PostUploadRequest.prototype, "security", void 0);
     return PostUploadRequest;
@@ -102,23 +78,23 @@ var PostUploadResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], PostUploadResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], PostUploadResponse.prototype, "createdUpload", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.Error)
     ], PostUploadResponse.prototype, "error", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Map)
     ], PostUploadResponse.prototype, "headers", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], PostUploadResponse.prototype, "statusCode", void 0);
     return PostUploadResponse;

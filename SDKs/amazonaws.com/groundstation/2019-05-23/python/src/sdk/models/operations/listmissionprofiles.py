@@ -1,5 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Any,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
 from sdk.models import shared
 
 
@@ -22,16 +25,16 @@ class ListMissionProfilesHeaders:
 
 @dataclass
 class ListMissionProfilesRequest:
-    query_params: ListMissionProfilesQueryParams = field(default=None)
-    headers: ListMissionProfilesHeaders = field(default=None)
+    headers: ListMissionProfilesHeaders = field()
+    query_params: ListMissionProfilesQueryParams = field()
     
 
 @dataclass
 class ListMissionProfilesResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     dependency_exception: Optional[Any] = field(default=None)
     invalid_parameter_exception: Optional[Any] = field(default=None)
     list_mission_profiles_response: Optional[shared.ListMissionProfilesResponse] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

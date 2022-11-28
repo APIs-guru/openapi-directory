@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { SourceFrequencyEnum } from "./sourcefrequencyenum";
 import { SourceKeyword } from "./sourcekeyword";
 import { SourceSetUpOptionEnum } from "./sourcesetupoptionenum";

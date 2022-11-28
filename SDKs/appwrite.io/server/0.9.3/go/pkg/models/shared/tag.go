@@ -1,5 +1,7 @@
 package shared
 
+// Tag
+// Tag
 type Tag struct {
 	DollarID    string `json:"$id"`
 	Command     string `json:"command"`

@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostRevokeCacheSecurityGroupIngressActionEnum(str, Enum):
     REVOKE_CACHE_SECURITY_GROUP_INGRESS = "RevokeCacheSecurityGroupIngress"
@@ -10,8 +14,8 @@ class PostRevokeCacheSecurityGroupIngressVersionEnum(str, Enum):
 
 @dataclass
 class PostRevokeCacheSecurityGroupIngressQueryParams:
-    action: PostRevokeCacheSecurityGroupIngressActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostRevokeCacheSecurityGroupIngressVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostRevokeCacheSecurityGroupIngressActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostRevokeCacheSecurityGroupIngressVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostRevokeCacheSecurityGroupIngressHeaders:
 
 @dataclass
 class PostRevokeCacheSecurityGroupIngressRequest:
-    query_params: PostRevokeCacheSecurityGroupIngressQueryParams = field(default=None)
-    headers: PostRevokeCacheSecurityGroupIngressHeaders = field(default=None)
+    headers: PostRevokeCacheSecurityGroupIngressHeaders = field()
+    query_params: PostRevokeCacheSecurityGroupIngressQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostRevokeCacheSecurityGroupIngressResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

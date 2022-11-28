@@ -29,11 +29,6 @@ type PodocSecurity struct {
 	ClientID shared.SchemeClientID `security:"scheme,type=apiKey,subtype=header"`
 }
 
-type PodocRequest struct {
-	Request  *PodocRequestBody `request:"mediaType=application/json"`
-	Security PodocSecurity
-}
-
 type Podoc400ApplicationJSONErrorEnum string
 
 const (
@@ -163,6 +158,11 @@ const (
 type Podoc504ApplicationJSON struct {
 	Error            *Podoc504ApplicationJSONErrorEnum            `json:"error,omitempty"`
 	ErrorDescription *Podoc504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
+}
+
+type PodocRequest struct {
+	Request  *PodocRequestBody `request:"mediaType=application/json"`
+	Security PodocSecurity
 }
 
 type PodocResponse struct {

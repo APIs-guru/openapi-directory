@@ -1,34 +1,35 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DeleteSshKeyPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=domainName" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=domainName" })
   domainName: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=fingerprint" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=fingerprint" })
   fingerprint: string;
 }
 
 
 export class DeleteSshKeyQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=domain_name" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=domain_name" })
   domainName: string;
 }
 
 
 export class DeleteSshKeyRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: DeleteSshKeyPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: DeleteSshKeyQueryParams;
 }
 
 
 export class DeleteSshKeyResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

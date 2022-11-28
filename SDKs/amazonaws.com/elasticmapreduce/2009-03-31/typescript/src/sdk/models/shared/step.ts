@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ActionOnFailureEnum } from "./actiononfailureenum";
 import { HadoopStepConfig } from "./hadoopstepconfig";
 import { StepStatus } from "./stepstatus";
+
 
 
 // Step
@@ -9,18 +10,18 @@ import { StepStatus } from "./stepstatus";
  * This represents a step in a cluster.
 **/
 export class Step extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ActionOnFailure" })
+  @SpeakeasyMetadata({ data: "json, name=ActionOnFailure" })
   actionOnFailure?: ActionOnFailureEnum;
 
-  @Metadata({ data: "json, name=Config" })
+  @SpeakeasyMetadata({ data: "json, name=Config" })
   config?: HadoopStepConfig;
 
-  @Metadata({ data: "json, name=Id" })
+  @SpeakeasyMetadata({ data: "json, name=Id" })
   id?: string;
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name?: string;
 
-  @Metadata({ data: "json, name=Status" })
+  @SpeakeasyMetadata({ data: "json, name=Status" })
   status?: StepStatus;
 }

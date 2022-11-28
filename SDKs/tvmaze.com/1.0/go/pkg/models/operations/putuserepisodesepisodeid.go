@@ -10,7 +10,7 @@ type PutUserEpisodesEpisodeIDPathParams struct {
 
 type PutUserEpisodesEpisodeIDRequest struct {
 	PathParams PutUserEpisodesEpisodeIDPathParams
-	Request    *shared.MarkedEpisode `request:"mediaType=application/json"`
+	Request    *shared.MarkedEpisodeInput `request:"mediaType=application/json"`
 }
 
 type PutUserEpisodesEpisodeIDResponse struct {

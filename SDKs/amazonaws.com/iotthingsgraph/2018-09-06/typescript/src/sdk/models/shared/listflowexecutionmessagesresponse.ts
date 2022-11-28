@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { FlowExecutionMessage } from "./flowexecutionmessage";
 
 
+
 export class ListFlowExecutionMessagesResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=messages", elemType: shared.FlowExecutionMessage })
+  @SpeakeasyMetadata({ data: "json, name=messages", elemType: FlowExecutionMessage })
   messages?: FlowExecutionMessage[];
 
-  @Metadata({ data: "json, name=nextToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextToken" })
   nextToken?: string;
 }

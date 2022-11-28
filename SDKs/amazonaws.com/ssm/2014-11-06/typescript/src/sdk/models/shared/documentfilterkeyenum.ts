@@ -1,8 +1,9 @@
 
 
+
 export enum DocumentFilterKeyEnum {
-    Name = "Name"
-,    Owner = "Owner"
-,    PlatformTypes = "PlatformTypes"
-,    DocumentType = "DocumentType"
+    Name = "Name",
+    Owner = "Owner",
+    PlatformTypes = "PlatformTypes",
+    DocumentType = "DocumentType"
 }

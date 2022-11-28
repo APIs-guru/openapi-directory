@@ -8,6 +8,8 @@ const (
 	GoogleAnalyticsAdminV1alphaAudienceFilterClauseClauseTypeEnumExclude                       GoogleAnalyticsAdminV1alphaAudienceFilterClauseClauseTypeEnum = "EXCLUDE"
 )
 
+// GoogleAnalyticsAdminV1alphaAudienceFilterClause
+// A clause for defining either a simple or sequence filter. A filter can be inclusive (i.e., users satisfying the filter clause are included in the Audience) or exclusive (i.e., users satisfying the filter clause are excluded from the Audience).
 type GoogleAnalyticsAdminV1alphaAudienceFilterClause struct {
 	ClauseType     *GoogleAnalyticsAdminV1alphaAudienceFilterClauseClauseTypeEnum `json:"clauseType,omitempty"`
 	SequenceFilter *GoogleAnalyticsAdminV1alphaAudienceSequenceFilter             `json:"sequenceFilter,omitempty"`

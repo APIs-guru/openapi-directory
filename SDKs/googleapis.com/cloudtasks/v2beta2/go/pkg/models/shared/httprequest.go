@@ -13,6 +13,8 @@ const (
 	HTTPRequestHTTPMethodEnumOptions               HTTPRequestHTTPMethodEnum = "OPTIONS"
 )
 
+// HTTPRequest
+// HTTP request. The task will be pushed to the worker as an HTTP request. An HTTP request embodies a url, an http method, headers, body and authorization for the http task.
 type HTTPRequest struct {
 	Body       *string                    `json:"body,omitempty"`
 	Headers    map[string]string          `json:"headers,omitempty"`

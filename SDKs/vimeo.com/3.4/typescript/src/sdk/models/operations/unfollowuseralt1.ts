@@ -1,32 +1,33 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class UnfollowUserAlt1PathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=follow_user_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=follow_user_id" })
   followUserId: number;
 }
 
 
 export class UnfollowUserAlt1Security extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   oauth2: shared.SchemeOauth2;
 }
 
 
 export class UnfollowUserAlt1Request extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: UnfollowUserAlt1PathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: UnfollowUserAlt1Security;
 }
 
 
 export class UnfollowUserAlt1Response extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

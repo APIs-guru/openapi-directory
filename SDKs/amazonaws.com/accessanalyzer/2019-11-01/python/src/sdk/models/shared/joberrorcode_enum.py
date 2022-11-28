@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class JobErrorCodeEnum(str, Enum):
     AUTHORIZATION_ERROR = "AUTHORIZATION_ERROR"

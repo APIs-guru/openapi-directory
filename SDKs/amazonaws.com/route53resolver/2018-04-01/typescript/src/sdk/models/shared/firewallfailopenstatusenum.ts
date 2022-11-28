@@ -1,6 +1,7 @@
 
 
+
 export enum FirewallFailOpenStatusEnum {
-    Enabled = "ENABLED"
-,    Disabled = "DISABLED"
+    Enabled = "ENABLED",
+    Disabled = "DISABLED"
 }

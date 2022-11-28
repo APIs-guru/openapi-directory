@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { SubscriptionTypeEnum } from "./subscriptiontypeenum";
 /**
  * Contains the inputs for the <code>CreateHsm</code> operation.

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // DiskMap
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Describes a block storage disk mapping.
 **/
 export class DiskMap extends SpeakeasyBase {
-  @Metadata({ data: "json, name=newDiskName" })
+  @SpeakeasyMetadata({ data: "json, name=newDiskName" })
   newDiskName?: string;
 
-  @Metadata({ data: "json, name=originalDiskPath" })
+  @SpeakeasyMetadata({ data: "json, name=originalDiskPath" })
   originalDiskPath?: string;
 }

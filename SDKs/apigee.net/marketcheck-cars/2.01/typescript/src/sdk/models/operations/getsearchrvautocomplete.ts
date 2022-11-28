@@ -1,105 +1,106 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
+
 export enum GetSearchRvAutoCompleteFieldEnum {
-    Make = "make"
-,    Model = "model"
-,    Trim = "trim"
-,    Class = "class"
-,    Transmission = "transmission"
-,    FuelType = "fuel_type"
-,    ExteriorColor = "exterior_color"
-,    InteriorColor = "interior_color"
-,    Engine = "engine"
-,    State = "state"
-,    City = "city"
+    Make = "make",
+    Model = "model",
+    Trim = "trim",
+    Class = "class",
+    Transmission = "transmission",
+    FuelType = "fuel_type",
+    ExteriorColor = "exterior_color",
+    InteriorColor = "interior_color",
+    Engine = "engine",
+    State = "state",
+    City = "city"
 }
 
 export enum GetSearchRvAutoCompleteSortByEnum {
-    Index = "index"
-,    Count = "count"
+    Index = "index",
+    Count = "count"
 }
 
 
 export class GetSearchRvAutoCompleteQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=api_key" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=api_key" })
   apiKey?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=body_type" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=body_type" })
   bodyType?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=city" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=city" })
   city?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=color" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=color" })
   color?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=drivetrain" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=drivetrain" })
   drivetrain?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=engine" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=engine" })
   engine?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=field" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=field" })
   field: GetSearchRvAutoCompleteFieldEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=fuel_type" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=fuel_type" })
   fuelType?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=ignore_case" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=ignore_case" })
   ignoreCase?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=input" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=input" })
   input: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=inventory_type" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=inventory_type" })
   inventoryType?: shared.InventoryTypeEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=make" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=make" })
   make?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=model" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=model" })
   model?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=sort_by" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sort_by" })
   sortBy?: GetSearchRvAutoCompleteSortByEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=state" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=state" })
   state?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=term_counts" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=term_counts" })
   termCounts?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=transmission" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=transmission" })
   transmission?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=trim" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=trim" })
   trim?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=vehicle_type" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=vehicle_type" })
   vehicleType?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=year" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=year" })
   year?: string;
 }
 
 
 export class GetSearchRvAutoCompleteRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetSearchRvAutoCompleteQueryParams;
 }
 
 
 export class GetSearchRvAutoCompleteResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   error?: shared.Error;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   searchAutoCompleteResponse?: shared.SearchAutoCompleteResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

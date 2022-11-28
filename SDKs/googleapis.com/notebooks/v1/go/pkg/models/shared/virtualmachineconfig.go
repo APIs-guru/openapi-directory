@@ -8,6 +8,28 @@ const (
 	VirtualMachineConfigNicTypeEnumGvnic              VirtualMachineConfigNicTypeEnum = "GVNIC"
 )
 
+// VirtualMachineConfigInput
+// The config settings for virtual machine.
+type VirtualMachineConfigInput struct {
+	AcceleratorConfig      *RuntimeAcceleratorConfig        `json:"acceleratorConfig,omitempty"`
+	BootImage              map[string]interface{}           `json:"bootImage,omitempty"`
+	ContainerImages        []ContainerImage                 `json:"containerImages,omitempty"`
+	DataDisk               *LocalDiskInput                  `json:"dataDisk,omitempty"`
+	EncryptionConfig       *EncryptionConfig                `json:"encryptionConfig,omitempty"`
+	InternalIPOnly         *bool                            `json:"internalIpOnly,omitempty"`
+	Labels                 map[string]string                `json:"labels,omitempty"`
+	MachineType            *string                          `json:"machineType,omitempty"`
+	Metadata               map[string]string                `json:"metadata,omitempty"`
+	Network                *string                          `json:"network,omitempty"`
+	NicType                *VirtualMachineConfigNicTypeEnum `json:"nicType,omitempty"`
+	ReservedIPRange        *string                          `json:"reservedIpRange,omitempty"`
+	ShieldedInstanceConfig *RuntimeShieldedInstanceConfig   `json:"shieldedInstanceConfig,omitempty"`
+	Subnet                 *string                          `json:"subnet,omitempty"`
+	Tags                   []string                         `json:"tags,omitempty"`
+}
+
+// VirtualMachineConfig
+// The config settings for virtual machine.
 type VirtualMachineConfig struct {
 	AcceleratorConfig      *RuntimeAcceleratorConfig        `json:"acceleratorConfig,omitempty"`
 	BootImage              map[string]interface{}           `json:"bootImage,omitempty"`

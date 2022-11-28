@@ -1,57 +1,57 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Volume } from "./volume";
 
 
+
 export class DiscoveryclustersClustersBannerWithContentContainer extends SpeakeasyBase {
-  @Metadata({ data: "json, name=fillColorArgb" })
+  @SpeakeasyMetadata({ data: "json, name=fillColorArgb" })
   fillColorArgb?: string;
 
-  @Metadata({ data: "json, name=imageUrl" })
+  @SpeakeasyMetadata({ data: "json, name=imageUrl" })
   imageUrl?: string;
 
-  @Metadata({ data: "json, name=maskColorArgb" })
+  @SpeakeasyMetadata({ data: "json, name=maskColorArgb" })
   maskColorArgb?: string;
 
-  @Metadata({ data: "json, name=moreButtonText" })
+  @SpeakeasyMetadata({ data: "json, name=moreButtonText" })
   moreButtonText?: string;
 
-  @Metadata({ data: "json, name=moreButtonUrl" })
+  @SpeakeasyMetadata({ data: "json, name=moreButtonUrl" })
   moreButtonUrl?: string;
 
-  @Metadata({ data: "json, name=textColorArgb" })
+  @SpeakeasyMetadata({ data: "json, name=textColorArgb" })
   textColorArgb?: string;
 }
 
 
 export class DiscoveryclustersClusters extends SpeakeasyBase {
-  @Metadata({ data: "json, name=banner_with_content_container" })
+  @SpeakeasyMetadata({ data: "json, name=banner_with_content_container" })
   bannerWithContentContainer?: DiscoveryclustersClustersBannerWithContentContainer;
 
-  @Metadata({ data: "json, name=subTitle" })
+  @SpeakeasyMetadata({ data: "json, name=subTitle" })
   subTitle?: string;
 
-  @Metadata({ data: "json, name=title" })
+  @SpeakeasyMetadata({ data: "json, name=title" })
   title?: string;
 
-  @Metadata({ data: "json, name=totalVolumes" })
+  @SpeakeasyMetadata({ data: "json, name=totalVolumes" })
   totalVolumes?: number;
 
-  @Metadata({ data: "json, name=uid" })
+  @SpeakeasyMetadata({ data: "json, name=uid" })
   uid?: string;
 
-  @Metadata({ data: "json, name=volumes", elemType: shared.Volume })
+  @SpeakeasyMetadata({ data: "json, name=volumes", elemType: Volume })
   volumes?: Volume[];
 }
 
 
 export class Discoveryclusters extends SpeakeasyBase {
-  @Metadata({ data: "json, name=clusters", elemType: shared.DiscoveryclustersClusters })
+  @SpeakeasyMetadata({ data: "json, name=clusters", elemType: DiscoveryclustersClusters })
   clusters?: DiscoveryclustersClusters[];
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=totalClusters" })
+  @SpeakeasyMetadata({ data: "json, name=totalClusters" })
   totalClusters?: number;
 }

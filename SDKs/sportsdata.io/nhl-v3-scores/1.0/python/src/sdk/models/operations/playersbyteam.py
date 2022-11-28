@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from typing import Any,List,Optional
+from enum import Enum
 
 class PlayersByTeamFormatEnum(str, Enum):
     XML = "XML"
@@ -8,18 +9,18 @@ class PlayersByTeamFormatEnum(str, Enum):
 
 @dataclass
 class PlayersByTeamPathParams:
-    format: PlayersByTeamFormatEnum = field(default=None, metadata={'path_param': { 'field_name': 'format', 'style': 'simple', 'explode': False }})
-    team: str = field(default=None, metadata={'path_param': { 'field_name': 'team', 'style': 'simple', 'explode': False }})
+    format: PlayersByTeamFormatEnum = field(metadata={'path_param': { 'field_name': 'format', 'style': 'simple', 'explode': False }})
+    team: str = field(metadata={'path_param': { 'field_name': 'team', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class PlayersByTeamRequest:
-    path_params: PlayersByTeamPathParams = field(default=None)
+    path_params: PlayersByTeamPathParams = field()
     
 
 @dataclass
 class PlayersByTeamResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     players: Optional[List[Any]] = field(default=None)
-    status_code: int = field(default=None)
     

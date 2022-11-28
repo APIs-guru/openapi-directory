@@ -22,9 +22,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ComplianceDetails } from "./compliancedetails";
+import { Tag } from "./tag";
 // ResourceTagMapping
 /**
  * A list of resource ARNs and the tags (keys and values) that are associated with each.
@@ -35,15 +35,15 @@ var ResourceTagMapping = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=ComplianceDetails" }),
+        SpeakeasyMetadata({ data: "json, name=ComplianceDetails" }),
         __metadata("design:type", ComplianceDetails)
     ], ResourceTagMapping.prototype, "complianceDetails", void 0);
     __decorate([
-        Metadata({ data: "json, name=ResourceARN" }),
+        SpeakeasyMetadata({ data: "json, name=ResourceARN" }),
         __metadata("design:type", String)
     ], ResourceTagMapping.prototype, "resourceArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=Tags", elemType: shared.Tag }),
+        SpeakeasyMetadata({ data: "json, name=Tags", elemType: Tag }),
         __metadata("design:type", Array)
     ], ResourceTagMapping.prototype, "tags", void 0);
     return ResourceTagMapping;

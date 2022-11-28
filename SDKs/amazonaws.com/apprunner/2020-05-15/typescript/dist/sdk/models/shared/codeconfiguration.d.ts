@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { CodeConfigurationValues } from "./codeconfigurationvalues";
 import { ConfigurationSourceEnum } from "./configurationsourceenum";
 /**

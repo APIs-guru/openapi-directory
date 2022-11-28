@@ -5,8 +5,8 @@ from sdk.models import shared
 
 @dataclass
 class PostAs2KeysRequestBody:
-    as2_partnership_name: str = field(default=None, metadata={'multipart_form': { 'field_name': 'as2_partnership_name' }})
-    public_key: str = field(default=None, metadata={'multipart_form': { 'field_name': 'public_key' }})
+    as2_partnership_name: str = field(metadata={'multipart_form': { 'field_name': 'as2_partnership_name' }})
+    public_key: str = field(metadata={'multipart_form': { 'field_name': 'public_key' }})
     user_id: Optional[int] = field(default=None, metadata={'multipart_form': { 'field_name': 'user_id' }})
     
 
@@ -17,7 +17,7 @@ class PostAs2KeysRequest:
 
 @dataclass
 class PostAs2KeysResponse:
+    content_type: str = field()
+    status_code: int = field()
     as2_key_entity: Optional[shared.As2KeyEntity] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

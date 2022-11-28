@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var SscerRequestBodyCertificateParameters = /** @class */ (function (_super) {
     __extends(SscerRequestBodyCertificateParameters, _super);
@@ -30,27 +30,27 @@ var SscerRequestBodyCertificateParameters = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=CUID" }),
+        SpeakeasyMetadata({ data: "json, name=CUID" }),
         __metadata("design:type", String)
     ], SscerRequestBodyCertificateParameters.prototype, "cuid", void 0);
     __decorate([
-        Metadata({ data: "json, name=DOB" }),
+        SpeakeasyMetadata({ data: "json, name=DOB" }),
         __metadata("design:type", String)
     ], SscerRequestBodyCertificateParameters.prototype, "dob", void 0);
     __decorate([
-        Metadata({ data: "json, name=FullName" }),
+        SpeakeasyMetadata({ data: "json, name=FullName" }),
         __metadata("design:type", String)
     ], SscerRequestBodyCertificateParameters.prototype, "fullName", void 0);
     __decorate([
-        Metadata({ data: "json, name=IDXN" }),
+        SpeakeasyMetadata({ data: "json, name=IDXN" }),
         __metadata("design:type", String)
     ], SscerRequestBodyCertificateParameters.prototype, "idxn", void 0);
     __decorate([
-        Metadata({ data: "json, name=UID" }),
+        SpeakeasyMetadata({ data: "json, name=UID" }),
         __metadata("design:type", String)
     ], SscerRequestBodyCertificateParameters.prototype, "uid", void 0);
     __decorate([
-        Metadata({ data: "json, name=YOE" }),
+        SpeakeasyMetadata({ data: "json, name=YOE" }),
         __metadata("design:type", String)
     ], SscerRequestBodyCertificateParameters.prototype, "yoe", void 0);
     return SscerRequestBodyCertificateParameters;
@@ -66,19 +66,19 @@ var SscerRequestBody = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=certificateParameters" }),
+        SpeakeasyMetadata({ data: "json, name=certificateParameters" }),
         __metadata("design:type", SscerRequestBodyCertificateParameters)
     ], SscerRequestBody.prototype, "certificateParameters", void 0);
     __decorate([
-        Metadata({ data: "json, name=consentArtifact" }),
+        SpeakeasyMetadata({ data: "json, name=consentArtifact" }),
         __metadata("design:type", Object)
     ], SscerRequestBody.prototype, "consentArtifact", void 0);
     __decorate([
-        Metadata({ data: "json, name=format" }),
+        SpeakeasyMetadata({ data: "json, name=format" }),
         __metadata("design:type", String)
     ], SscerRequestBody.prototype, "format", void 0);
     __decorate([
-        Metadata({ data: "json, name=txnId" }),
+        SpeakeasyMetadata({ data: "json, name=txnId" }),
         __metadata("design:type", String)
     ], SscerRequestBody.prototype, "txnId", void 0);
     return SscerRequestBody;
@@ -90,32 +90,16 @@ var SscerSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeApiKey)
     ], SscerSecurity.prototype, "apiKey", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeClientId)
     ], SscerSecurity.prototype, "clientId", void 0);
     return SscerSecurity;
 }(SpeakeasyBase));
 export { SscerSecurity };
-var SscerRequest = /** @class */ (function (_super) {
-    __extends(SscerRequest, _super);
-    function SscerRequest() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
-        __metadata("design:type", SscerRequestBody)
-    ], SscerRequest.prototype, "request", void 0);
-    __decorate([
-        Metadata(),
-        __metadata("design:type", SscerSecurity)
-    ], SscerRequest.prototype, "security", void 0);
-    return SscerRequest;
-}(SpeakeasyBase));
-export { SscerRequest };
 export var Sscer400ApplicationJsonErrorEnum;
 (function (Sscer400ApplicationJsonErrorEnum) {
     Sscer400ApplicationJsonErrorEnum["MissingParameter"] = "missing_parameter";
@@ -138,11 +122,11 @@ var Sscer400ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Sscer400ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Sscer400ApplicationJson.prototype, "errorDescription", void 0);
     return Sscer400ApplicationJson;
@@ -164,11 +148,11 @@ var Sscer401ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Sscer401ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Sscer401ApplicationJson.prototype, "errorDescription", void 0);
     return Sscer401ApplicationJson;
@@ -190,11 +174,11 @@ var Sscer404ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Sscer404ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Sscer404ApplicationJson.prototype, "errorDescription", void 0);
     return Sscer404ApplicationJson;
@@ -214,11 +198,11 @@ var Sscer500ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Sscer500ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Sscer500ApplicationJson.prototype, "errorDescription", void 0);
     return Sscer500ApplicationJson;
@@ -238,11 +222,11 @@ var Sscer502ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Sscer502ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Sscer502ApplicationJson.prototype, "errorDescription", void 0);
     return Sscer502ApplicationJson;
@@ -262,11 +246,11 @@ var Sscer503ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Sscer503ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Sscer503ApplicationJson.prototype, "errorDescription", void 0);
     return Sscer503ApplicationJson;
@@ -286,55 +270,71 @@ var Sscer504ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Sscer504ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Sscer504ApplicationJson.prototype, "errorDescription", void 0);
     return Sscer504ApplicationJson;
 }(SpeakeasyBase));
 export { Sscer504ApplicationJson };
+var SscerRequest = /** @class */ (function (_super) {
+    __extends(SscerRequest, _super);
+    function SscerRequest() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
+        __metadata("design:type", SscerRequestBody)
+    ], SscerRequest.prototype, "request", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", SscerSecurity)
+    ], SscerRequest.prototype, "security", void 0);
+    return SscerRequest;
+}(SpeakeasyBase));
+export { SscerRequest };
 var SscerResponse = /** @class */ (function (_super) {
     __extends(SscerResponse, _super);
     function SscerResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], SscerResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], SscerResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Sscer400ApplicationJson)
     ], SscerResponse.prototype, "sscer400ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Sscer401ApplicationJson)
     ], SscerResponse.prototype, "sscer401ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Sscer404ApplicationJson)
     ], SscerResponse.prototype, "sscer404ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Sscer500ApplicationJson)
     ], SscerResponse.prototype, "sscer500ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Sscer502ApplicationJson)
     ], SscerResponse.prototype, "sscer502ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Sscer503ApplicationJson)
     ], SscerResponse.prototype, "sscer503ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Sscer504ApplicationJson)
     ], SscerResponse.prototype, "sscer504ApplicationJsonObject", void 0);
     return SscerResponse;

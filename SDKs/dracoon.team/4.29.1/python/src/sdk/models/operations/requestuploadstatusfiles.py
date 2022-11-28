@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class RequestUploadStatusFilesPathParams:
-    upload_id: str = field(default=None, metadata={'path_param': { 'field_name': 'upload_id', 'style': 'simple', 'explode': False }})
+    upload_id: str = field(metadata={'path_param': { 'field_name': 'upload_id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -16,14 +19,14 @@ class RequestUploadStatusFilesHeaders:
 
 @dataclass
 class RequestUploadStatusFilesRequest:
-    path_params: RequestUploadStatusFilesPathParams = field(default=None)
-    headers: RequestUploadStatusFilesHeaders = field(default=None)
+    headers: RequestUploadStatusFilesHeaders = field()
+    path_params: RequestUploadStatusFilesPathParams = field()
     
 
 @dataclass
 class RequestUploadStatusFilesResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error_response: Optional[shared.ErrorResponse] = field(default=None)
     s3_file_upload_status: Optional[shared.S3FileUploadStatus] = field(default=None)
-    status_code: int = field(default=None)
     

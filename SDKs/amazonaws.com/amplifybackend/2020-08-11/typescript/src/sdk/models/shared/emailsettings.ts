@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // EmailSettings
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The configuration for the email sent when an app user forgets their password.
 **/
 export class EmailSettings extends SpeakeasyBase {
-  @Metadata({ data: "json, name=EmailMessage" })
+  @SpeakeasyMetadata({ data: "json, name=EmailMessage" })
   emailMessage?: string;
 
-  @Metadata({ data: "json, name=EmailSubject" })
+  @SpeakeasyMetadata({ data: "json, name=EmailSubject" })
   emailSubject?: string;
 }

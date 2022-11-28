@@ -4,10 +4,8 @@ type GetVolumesIDPathParams struct {
 	ID int64 `pathParam:"style=simple,explode=false,name=id"`
 }
 
-type GetVolumesIDRequest struct {
-	PathParams GetVolumesIDPathParams
-}
-
+// GetVolumesID200ApplicationJSONVolumeLocation
+// Location of the Volume. Volume can only be attached to Servers in the same Location.
 type GetVolumesID200ApplicationJSONVolumeLocation struct {
 	City        string  `json:"city"`
 	Country     string  `json:"country"`
@@ -19,6 +17,8 @@ type GetVolumesID200ApplicationJSONVolumeLocation struct {
 	NetworkZone string  `json:"network_zone"`
 }
 
+// GetVolumesID200ApplicationJSONVolumeProtection
+// Protection configuration for the Resource
 type GetVolumesID200ApplicationJSONVolumeProtection struct {
 	Delete bool `json:"delete"`
 }
@@ -46,6 +46,10 @@ type GetVolumesID200ApplicationJSONVolume struct {
 
 type GetVolumesID200ApplicationJSON struct {
 	Volume GetVolumesID200ApplicationJSONVolume `json:"volume"`
+}
+
+type GetVolumesIDRequest struct {
+	PathParams GetVolumesIDPathParams
 }
 
 type GetVolumesIDResponse struct {

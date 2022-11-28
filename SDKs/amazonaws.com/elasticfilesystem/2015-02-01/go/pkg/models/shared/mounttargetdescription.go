@@ -1,5 +1,7 @@
 package shared
 
+// MountTargetDescription
+// Provides a description of a mount target.
 type MountTargetDescription struct {
 	AvailabilityZoneID   *string            `json:"AvailabilityZoneId,omitempty"`
 	AvailabilityZoneName *string            `json:"AvailabilityZoneName,omitempty"`

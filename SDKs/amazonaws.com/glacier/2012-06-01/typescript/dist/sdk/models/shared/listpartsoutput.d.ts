@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { PartListElement } from "./partlistelement";
 /**
  * Contains the Amazon S3 Glacier response to your request.

@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 
@@ -11,20 +12,20 @@ class AddPaymentMethodQueryParams:
 
 @dataclass
 class AddPaymentMethodSecurity:
-    account_auth: shared.SchemeAccountAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    account_auth: shared.SchemeAccountAuth = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class AddPaymentMethodRequest:
-    query_params: AddPaymentMethodQueryParams = field(default=None)
-    request: shared.AddPaymentMethodRequest = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: AddPaymentMethodSecurity = field(default=None)
+    query_params: AddPaymentMethodQueryParams = field()
+    request: shared.AddPaymentMethodRequest = field(metadata={'request': { 'media_type': 'application/json' }})
+    security: AddPaymentMethodSecurity = field()
     
 
 @dataclass
 class AddPaymentMethodResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     payment_method: Optional[shared.PaymentMethod] = field(default=None)
     service_error: Optional[shared.ServiceError] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -10,16 +10,11 @@ var __assign = (this && this.__assign) || function () {
     return __assign.apply(this, arguments);
 };
 import axios from "axios";
-import { MatchContentType } from "../internal/utils/contenttype";
+import FormData from "form-data";
 import * as operations from "./models/operations";
-import { GetQueryParamSerializer } from "../internal/utils/queryparams";
-import { SerializeRequestBody } from "../internal/utils/requestbody";
-import FormData from 'form-data';
-import { GetHeadersFromRequest } from "../internal/utils/headers";
-import { CreateSecurityClient } from "../internal/utils/security";
-import * as utils from "../internal/utils/utils";
+import * as utils from "../internal/utils";
 import { Security } from "./models/shared";
-var Servers = [
+export var ServerList = [
     "http://rds.{region}.amazonaws.com",
     "https://rds.{region}.amazonaws.com",
     "http://rds.amazonaws.com",
@@ -32,12 +27,12 @@ export function WithServerURL(serverURL, params) {
         if (params != null) {
             serverURL = utils.ReplaceParameters(serverURL, params);
         }
-        sdk.serverURL = serverURL;
+        sdk._serverURL = serverURL;
     };
 }
 export function WithClient(client) {
     return function (sdk) {
-        sdk.defaultClient = client;
+        sdk._defaultClient = client;
     };
 }
 export function WithSecurity(security) {
@@ -45,10 +40,10 @@ export function WithSecurity(security) {
         security = new Security(security);
     }
     return function (sdk) {
-        sdk.security = security;
+        sdk._security = security;
     };
 }
-// SDK Documentation: https://docs.aws.amazon.com/rds/ - Amazon Web Services documentation
+/* SDK Documentation: https://docs.aws.amazon.com/rds/ - Amazon Web Services documentation*/
 var SDK = /** @class */ (function () {
     function SDK() {
         var opts = [];
@@ -56,43 +51,45 @@ var SDK = /** @class */ (function () {
             opts[_i] = arguments[_i];
         }
         var _this = this;
+        this._language = "typescript";
+        this._sdkVersion = "0.0.1";
+        this._genVersion = "internal";
         opts.forEach(function (o) { return o(_this); });
-        if (this.serverURL == "") {
-            this.serverURL = Servers[0];
+        if (this._serverURL == "") {
+            this._serverURL = ServerList[0];
         }
-        if (!this.defaultClient) {
-            this.defaultClient = axios.create({ baseURL: this.serverURL });
+        if (!this._defaultClient) {
+            this._defaultClient = axios.create({ baseURL: this._serverURL });
         }
-        if (!this.securityClient) {
-            if (this.security) {
-                this.securityClient = CreateSecurityClient(this.defaultClient, this.security);
+        if (!this._securityClient) {
+            if (this._security) {
+                this._securityClient = utils.CreateSecurityClient(this._defaultClient, this._security);
             }
             else {
-                this.securityClient = this.defaultClient;
+                this._securityClient = this._defaultClient;
             }
         }
     }
-    SDK.prototype.GetAddSourceIdentifierToSubscription = function (req, config) {
+    SDK.prototype.getAddSourceIdentifierToSubscription = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.GetAddSourceIdentifierToSubscriptionRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = baseURL.replace(/\/$/, "") + "/#Action=AddSourceIdentifierToSubscription";
-        var client = this.securityClient;
-        var headers = __assign(__assign({}, GetHeadersFromRequest(req.headers)), config === null || config === void 0 ? void 0 : config.headers);
-        var qpSerializer = GetQueryParamSerializer(req.queryParams);
+        var client = this._securityClient;
+        var headers = __assign(__assign({}, utils.GetHeadersFromRequest(req.headers)), config === null || config === void 0 ? void 0 : config.headers);
+        var qpSerializer = utils.GetQueryParamSerializer(req.queryParams);
         var requestConfig = __assign(__assign({}, config), { params: req.queryParams, paramsSerializer: qpSerializer });
         return client
-            .get(url, __assign({}, requestConfig))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get", headers: headers }, requestConfig)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
-                    if (MatchContentType(contentType, "text/xml")) {
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -100,8 +97,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 480:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 480:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -109,8 +106,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 481:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 481:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -123,27 +120,26 @@ var SDK = /** @class */ (function () {
         })
             .catch(function (error) { throw error; });
     };
-    SDK.prototype.GetAuthorizeDbSecurityGroupIngress = function (req, config) {
+    SDK.prototype.getAuthorizeDbSecurityGroupIngress = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.GetAuthorizeDbSecurityGroupIngressRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = baseURL.replace(/\/$/, "") + "/#Action=AuthorizeDBSecurityGroupIngress";
-        var client = this.securityClient;
-        var headers = __assign(__assign({}, GetHeadersFromRequest(req.headers)), config === null || config === void 0 ? void 0 : config.headers);
-        var qpSerializer = GetQueryParamSerializer(req.queryParams);
+        var client = this._securityClient;
+        var headers = __assign(__assign({}, utils.GetHeadersFromRequest(req.headers)), config === null || config === void 0 ? void 0 : config.headers);
+        var qpSerializer = utils.GetQueryParamSerializer(req.queryParams);
         var requestConfig = __assign(__assign({}, config), { params: req.queryParams, paramsSerializer: qpSerializer });
         return client
-            .get(url, __assign({}, requestConfig))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get", headers: headers }, requestConfig)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
-                    if (MatchContentType(contentType, "text/xml")) {
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -151,8 +147,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 480:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 480:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -160,8 +156,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 481:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 481:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -169,8 +165,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 482:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 482:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -178,8 +174,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 483:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 483:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -192,27 +188,26 @@ var SDK = /** @class */ (function () {
         })
             .catch(function (error) { throw error; });
     };
-    SDK.prototype.GetCopyDbSnapshot = function (req, config) {
+    SDK.prototype.getCopyDbSnapshot = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.GetCopyDbSnapshotRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = baseURL.replace(/\/$/, "") + "/#Action=CopyDBSnapshot";
-        var client = this.securityClient;
-        var headers = __assign(__assign({}, GetHeadersFromRequest(req.headers)), config === null || config === void 0 ? void 0 : config.headers);
-        var qpSerializer = GetQueryParamSerializer(req.queryParams);
+        var client = this._securityClient;
+        var headers = __assign(__assign({}, utils.GetHeadersFromRequest(req.headers)), config === null || config === void 0 ? void 0 : config.headers);
+        var qpSerializer = utils.GetQueryParamSerializer(req.queryParams);
         var requestConfig = __assign(__assign({}, config), { params: req.queryParams, paramsSerializer: qpSerializer });
         return client
-            .get(url, __assign({}, requestConfig))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get", headers: headers }, requestConfig)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
-                    if (MatchContentType(contentType, "text/xml")) {
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -220,8 +215,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 480:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 480:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -229,8 +224,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 481:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 481:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -238,8 +233,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 482:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 482:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -247,8 +242,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 483:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 483:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -261,27 +256,26 @@ var SDK = /** @class */ (function () {
         })
             .catch(function (error) { throw error; });
     };
-    SDK.prototype.GetCreateDbInstance = function (req, config) {
+    SDK.prototype.getCreateDbInstance = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.GetCreateDbInstanceRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = baseURL.replace(/\/$/, "") + "/#Action=CreateDBInstance";
-        var client = this.securityClient;
-        var headers = __assign(__assign({}, GetHeadersFromRequest(req.headers)), config === null || config === void 0 ? void 0 : config.headers);
-        var qpSerializer = GetQueryParamSerializer(req.queryParams);
+        var client = this._securityClient;
+        var headers = __assign(__assign({}, utils.GetHeadersFromRequest(req.headers)), config === null || config === void 0 ? void 0 : config.headers);
+        var qpSerializer = utils.GetQueryParamSerializer(req.queryParams);
         var requestConfig = __assign(__assign({}, config), { params: req.queryParams, paramsSerializer: qpSerializer });
         return client
-            .get(url, __assign({}, requestConfig))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get", headers: headers }, requestConfig)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
-                    if (MatchContentType(contentType, "text/xml")) {
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -289,8 +283,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 480:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 480:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -298,8 +292,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 481:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 481:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -307,8 +301,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 482:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 482:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -316,8 +310,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 483:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 483:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -325,8 +319,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 484:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 484:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -334,8 +328,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 485:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 485:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -343,8 +337,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 486:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 486:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -352,8 +346,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 487:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 487:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -361,8 +355,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 488:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 488:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -370,8 +364,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 489:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 489:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -379,8 +373,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 490:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 490:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -388,8 +382,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 491:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 491:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -402,27 +396,26 @@ var SDK = /** @class */ (function () {
         })
             .catch(function (error) { throw error; });
     };
-    SDK.prototype.GetCreateDbInstanceReadReplica = function (req, config) {
+    SDK.prototype.getCreateDbInstanceReadReplica = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.GetCreateDbInstanceReadReplicaRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = baseURL.replace(/\/$/, "") + "/#Action=CreateDBInstanceReadReplica";
-        var client = this.securityClient;
-        var headers = __assign(__assign({}, GetHeadersFromRequest(req.headers)), config === null || config === void 0 ? void 0 : config.headers);
-        var qpSerializer = GetQueryParamSerializer(req.queryParams);
+        var client = this._securityClient;
+        var headers = __assign(__assign({}, utils.GetHeadersFromRequest(req.headers)), config === null || config === void 0 ? void 0 : config.headers);
+        var qpSerializer = utils.GetQueryParamSerializer(req.queryParams);
         var requestConfig = __assign(__assign({}, config), { params: req.queryParams, paramsSerializer: qpSerializer });
         return client
-            .get(url, __assign({}, requestConfig))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get", headers: headers }, requestConfig)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
-                    if (MatchContentType(contentType, "text/xml")) {
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -430,8 +423,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 480:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 480:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -439,8 +432,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 481:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 481:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -448,8 +441,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 482:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 482:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -457,8 +450,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 483:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 483:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -466,8 +459,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 484:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 484:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -475,8 +468,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 485:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 485:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -484,8 +477,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 486:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 486:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -493,8 +486,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 487:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 487:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -502,8 +495,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 488:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 488:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -511,8 +504,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 489:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 489:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -520,8 +513,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 490:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 490:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -529,8 +522,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 491:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 491:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -538,8 +531,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 492:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 492:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -547,8 +540,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 493:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 493:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -561,27 +554,26 @@ var SDK = /** @class */ (function () {
         })
             .catch(function (error) { throw error; });
     };
-    SDK.prototype.GetCreateDbParameterGroup = function (req, config) {
+    SDK.prototype.getCreateDbParameterGroup = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.GetCreateDbParameterGroupRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = baseURL.replace(/\/$/, "") + "/#Action=CreateDBParameterGroup";
-        var client = this.securityClient;
-        var headers = __assign(__assign({}, GetHeadersFromRequest(req.headers)), config === null || config === void 0 ? void 0 : config.headers);
-        var qpSerializer = GetQueryParamSerializer(req.queryParams);
+        var client = this._securityClient;
+        var headers = __assign(__assign({}, utils.GetHeadersFromRequest(req.headers)), config === null || config === void 0 ? void 0 : config.headers);
+        var qpSerializer = utils.GetQueryParamSerializer(req.queryParams);
         var requestConfig = __assign(__assign({}, config), { params: req.queryParams, paramsSerializer: qpSerializer });
         return client
-            .get(url, __assign({}, requestConfig))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get", headers: headers }, requestConfig)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
-                    if (MatchContentType(contentType, "text/xml")) {
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -589,8 +581,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 480:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 480:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -598,8 +590,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 481:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 481:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -612,27 +604,26 @@ var SDK = /** @class */ (function () {
         })
             .catch(function (error) { throw error; });
     };
-    SDK.prototype.GetCreateDbSecurityGroup = function (req, config) {
+    SDK.prototype.getCreateDbSecurityGroup = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.GetCreateDbSecurityGroupRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = baseURL.replace(/\/$/, "") + "/#Action=CreateDBSecurityGroup";
-        var client = this.securityClient;
-        var headers = __assign(__assign({}, GetHeadersFromRequest(req.headers)), config === null || config === void 0 ? void 0 : config.headers);
-        var qpSerializer = GetQueryParamSerializer(req.queryParams);
+        var client = this._securityClient;
+        var headers = __assign(__assign({}, utils.GetHeadersFromRequest(req.headers)), config === null || config === void 0 ? void 0 : config.headers);
+        var qpSerializer = utils.GetQueryParamSerializer(req.queryParams);
         var requestConfig = __assign(__assign({}, config), { params: req.queryParams, paramsSerializer: qpSerializer });
         return client
-            .get(url, __assign({}, requestConfig))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get", headers: headers }, requestConfig)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
-                    if (MatchContentType(contentType, "text/xml")) {
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -640,8 +631,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 480:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 480:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -649,8 +640,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 481:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 481:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -658,8 +649,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 482:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 482:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -672,27 +663,26 @@ var SDK = /** @class */ (function () {
         })
             .catch(function (error) { throw error; });
     };
-    SDK.prototype.GetCreateDbSnapshot = function (req, config) {
+    SDK.prototype.getCreateDbSnapshot = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.GetCreateDbSnapshotRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = baseURL.replace(/\/$/, "") + "/#Action=CreateDBSnapshot";
-        var client = this.securityClient;
-        var headers = __assign(__assign({}, GetHeadersFromRequest(req.headers)), config === null || config === void 0 ? void 0 : config.headers);
-        var qpSerializer = GetQueryParamSerializer(req.queryParams);
+        var client = this._securityClient;
+        var headers = __assign(__assign({}, utils.GetHeadersFromRequest(req.headers)), config === null || config === void 0 ? void 0 : config.headers);
+        var qpSerializer = utils.GetQueryParamSerializer(req.queryParams);
         var requestConfig = __assign(__assign({}, config), { params: req.queryParams, paramsSerializer: qpSerializer });
         return client
-            .get(url, __assign({}, requestConfig))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get", headers: headers }, requestConfig)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
-                    if (MatchContentType(contentType, "text/xml")) {
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -700,8 +690,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 480:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 480:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -709,8 +699,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 481:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 481:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -718,8 +708,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 482:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 482:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -727,8 +717,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 483:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 483:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -741,27 +731,26 @@ var SDK = /** @class */ (function () {
         })
             .catch(function (error) { throw error; });
     };
-    SDK.prototype.GetCreateDbSubnetGroup = function (req, config) {
+    SDK.prototype.getCreateDbSubnetGroup = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.GetCreateDbSubnetGroupRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = baseURL.replace(/\/$/, "") + "/#Action=CreateDBSubnetGroup";
-        var client = this.securityClient;
-        var headers = __assign(__assign({}, GetHeadersFromRequest(req.headers)), config === null || config === void 0 ? void 0 : config.headers);
-        var qpSerializer = GetQueryParamSerializer(req.queryParams);
+        var client = this._securityClient;
+        var headers = __assign(__assign({}, utils.GetHeadersFromRequest(req.headers)), config === null || config === void 0 ? void 0 : config.headers);
+        var qpSerializer = utils.GetQueryParamSerializer(req.queryParams);
         var requestConfig = __assign(__assign({}, config), { params: req.queryParams, paramsSerializer: qpSerializer });
         return client
-            .get(url, __assign({}, requestConfig))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get", headers: headers }, requestConfig)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
-                    if (MatchContentType(contentType, "text/xml")) {
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -769,8 +758,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 480:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 480:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -778,8 +767,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 481:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 481:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -787,8 +776,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 482:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 482:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -796,8 +785,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 483:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 483:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -805,8 +794,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 484:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 484:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -819,27 +808,26 @@ var SDK = /** @class */ (function () {
         })
             .catch(function (error) { throw error; });
     };
-    SDK.prototype.GetCreateEventSubscription = function (req, config) {
+    SDK.prototype.getCreateEventSubscription = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.GetCreateEventSubscriptionRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = baseURL.replace(/\/$/, "") + "/#Action=CreateEventSubscription";
-        var client = this.securityClient;
-        var headers = __assign(__assign({}, GetHeadersFromRequest(req.headers)), config === null || config === void 0 ? void 0 : config.headers);
-        var qpSerializer = GetQueryParamSerializer(req.queryParams);
+        var client = this._securityClient;
+        var headers = __assign(__assign({}, utils.GetHeadersFromRequest(req.headers)), config === null || config === void 0 ? void 0 : config.headers);
+        var qpSerializer = utils.GetQueryParamSerializer(req.queryParams);
         var requestConfig = __assign(__assign({}, config), { params: req.queryParams, paramsSerializer: qpSerializer });
         return client
-            .get(url, __assign({}, requestConfig))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get", headers: headers }, requestConfig)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
-                    if (MatchContentType(contentType, "text/xml")) {
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -847,8 +835,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 480:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 480:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -856,8 +844,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 481:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 481:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -865,8 +853,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 482:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 482:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -874,8 +862,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 483:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 483:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -883,8 +871,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 484:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 484:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -892,8 +880,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 485:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 485:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -901,8 +889,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 486:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 486:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -915,27 +903,26 @@ var SDK = /** @class */ (function () {
         })
             .catch(function (error) { throw error; });
     };
-    SDK.prototype.GetCreateOptionGroup = function (req, config) {
+    SDK.prototype.getCreateOptionGroup = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.GetCreateOptionGroupRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = baseURL.replace(/\/$/, "") + "/#Action=CreateOptionGroup";
-        var client = this.securityClient;
-        var headers = __assign(__assign({}, GetHeadersFromRequest(req.headers)), config === null || config === void 0 ? void 0 : config.headers);
-        var qpSerializer = GetQueryParamSerializer(req.queryParams);
+        var client = this._securityClient;
+        var headers = __assign(__assign({}, utils.GetHeadersFromRequest(req.headers)), config === null || config === void 0 ? void 0 : config.headers);
+        var qpSerializer = utils.GetQueryParamSerializer(req.queryParams);
         var requestConfig = __assign(__assign({}, config), { params: req.queryParams, paramsSerializer: qpSerializer });
         return client
-            .get(url, __assign({}, requestConfig))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get", headers: headers }, requestConfig)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
-                    if (MatchContentType(contentType, "text/xml")) {
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -943,8 +930,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 480:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 480:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -952,8 +939,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 481:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 481:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -966,27 +953,26 @@ var SDK = /** @class */ (function () {
         })
             .catch(function (error) { throw error; });
     };
-    SDK.prototype.GetDeleteDbInstance = function (req, config) {
+    SDK.prototype.getDeleteDbInstance = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.GetDeleteDbInstanceRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = baseURL.replace(/\/$/, "") + "/#Action=DeleteDBInstance";
-        var client = this.securityClient;
-        var headers = __assign(__assign({}, GetHeadersFromRequest(req.headers)), config === null || config === void 0 ? void 0 : config.headers);
-        var qpSerializer = GetQueryParamSerializer(req.queryParams);
+        var client = this._securityClient;
+        var headers = __assign(__assign({}, utils.GetHeadersFromRequest(req.headers)), config === null || config === void 0 ? void 0 : config.headers);
+        var qpSerializer = utils.GetQueryParamSerializer(req.queryParams);
         var requestConfig = __assign(__assign({}, config), { params: req.queryParams, paramsSerializer: qpSerializer });
         return client
-            .get(url, __assign({}, requestConfig))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get", headers: headers }, requestConfig)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
-                    if (MatchContentType(contentType, "text/xml")) {
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -994,8 +980,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 480:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 480:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -1003,8 +989,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 481:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 481:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -1012,8 +998,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 482:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 482:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -1021,8 +1007,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 483:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 483:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -1035,29 +1021,28 @@ var SDK = /** @class */ (function () {
         })
             .catch(function (error) { throw error; });
     };
-    SDK.prototype.GetDeleteDbParameterGroup = function (req, config) {
+    SDK.prototype.getDeleteDbParameterGroup = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.GetDeleteDbParameterGroupRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = baseURL.replace(/\/$/, "") + "/#Action=DeleteDBParameterGroup";
-        var client = this.securityClient;
-        var headers = __assign(__assign({}, GetHeadersFromRequest(req.headers)), config === null || config === void 0 ? void 0 : config.headers);
-        var qpSerializer = GetQueryParamSerializer(req.queryParams);
+        var client = this._securityClient;
+        var headers = __assign(__assign({}, utils.GetHeadersFromRequest(req.headers)), config === null || config === void 0 ? void 0 : config.headers);
+        var qpSerializer = utils.GetQueryParamSerializer(req.queryParams);
         var requestConfig = __assign(__assign({}, config), { params: req.queryParams, paramsSerializer: qpSerializer });
         return client
-            .get(url, __assign({}, requestConfig))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get", headers: headers }, requestConfig)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
                     break;
-                case 480:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 480:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -1065,8 +1050,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 481:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 481:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -1079,29 +1064,28 @@ var SDK = /** @class */ (function () {
         })
             .catch(function (error) { throw error; });
     };
-    SDK.prototype.GetDeleteDbSecurityGroup = function (req, config) {
+    SDK.prototype.getDeleteDbSecurityGroup = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.GetDeleteDbSecurityGroupRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = baseURL.replace(/\/$/, "") + "/#Action=DeleteDBSecurityGroup";
-        var client = this.securityClient;
-        var headers = __assign(__assign({}, GetHeadersFromRequest(req.headers)), config === null || config === void 0 ? void 0 : config.headers);
-        var qpSerializer = GetQueryParamSerializer(req.queryParams);
+        var client = this._securityClient;
+        var headers = __assign(__assign({}, utils.GetHeadersFromRequest(req.headers)), config === null || config === void 0 ? void 0 : config.headers);
+        var qpSerializer = utils.GetQueryParamSerializer(req.queryParams);
         var requestConfig = __assign(__assign({}, config), { params: req.queryParams, paramsSerializer: qpSerializer });
         return client
-            .get(url, __assign({}, requestConfig))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get", headers: headers }, requestConfig)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
                     break;
-                case 480:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 480:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -1109,8 +1093,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 481:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 481:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -1123,27 +1107,26 @@ var SDK = /** @class */ (function () {
         })
             .catch(function (error) { throw error; });
     };
-    SDK.prototype.GetDeleteDbSnapshot = function (req, config) {
+    SDK.prototype.getDeleteDbSnapshot = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.GetDeleteDbSnapshotRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = baseURL.replace(/\/$/, "") + "/#Action=DeleteDBSnapshot";
-        var client = this.securityClient;
-        var headers = __assign(__assign({}, GetHeadersFromRequest(req.headers)), config === null || config === void 0 ? void 0 : config.headers);
-        var qpSerializer = GetQueryParamSerializer(req.queryParams);
+        var client = this._securityClient;
+        var headers = __assign(__assign({}, utils.GetHeadersFromRequest(req.headers)), config === null || config === void 0 ? void 0 : config.headers);
+        var qpSerializer = utils.GetQueryParamSerializer(req.queryParams);
         var requestConfig = __assign(__assign({}, config), { params: req.queryParams, paramsSerializer: qpSerializer });
         return client
-            .get(url, __assign({}, requestConfig))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get", headers: headers }, requestConfig)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
-                    if (MatchContentType(contentType, "text/xml")) {
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -1151,8 +1134,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 480:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 480:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -1160,8 +1143,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 481:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 481:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -1174,29 +1157,28 @@ var SDK = /** @class */ (function () {
         })
             .catch(function (error) { throw error; });
     };
-    SDK.prototype.GetDeleteDbSubnetGroup = function (req, config) {
+    SDK.prototype.getDeleteDbSubnetGroup = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.GetDeleteDbSubnetGroupRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = baseURL.replace(/\/$/, "") + "/#Action=DeleteDBSubnetGroup";
-        var client = this.securityClient;
-        var headers = __assign(__assign({}, GetHeadersFromRequest(req.headers)), config === null || config === void 0 ? void 0 : config.headers);
-        var qpSerializer = GetQueryParamSerializer(req.queryParams);
+        var client = this._securityClient;
+        var headers = __assign(__assign({}, utils.GetHeadersFromRequest(req.headers)), config === null || config === void 0 ? void 0 : config.headers);
+        var qpSerializer = utils.GetQueryParamSerializer(req.queryParams);
         var requestConfig = __assign(__assign({}, config), { params: req.queryParams, paramsSerializer: qpSerializer });
         return client
-            .get(url, __assign({}, requestConfig))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get", headers: headers }, requestConfig)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
                     break;
-                case 480:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 480:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -1204,8 +1186,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 481:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 481:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -1213,8 +1195,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 482:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 482:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -1227,27 +1209,26 @@ var SDK = /** @class */ (function () {
         })
             .catch(function (error) { throw error; });
     };
-    SDK.prototype.GetDeleteEventSubscription = function (req, config) {
+    SDK.prototype.getDeleteEventSubscription = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.GetDeleteEventSubscriptionRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = baseURL.replace(/\/$/, "") + "/#Action=DeleteEventSubscription";
-        var client = this.securityClient;
-        var headers = __assign(__assign({}, GetHeadersFromRequest(req.headers)), config === null || config === void 0 ? void 0 : config.headers);
-        var qpSerializer = GetQueryParamSerializer(req.queryParams);
+        var client = this._securityClient;
+        var headers = __assign(__assign({}, utils.GetHeadersFromRequest(req.headers)), config === null || config === void 0 ? void 0 : config.headers);
+        var qpSerializer = utils.GetQueryParamSerializer(req.queryParams);
         var requestConfig = __assign(__assign({}, config), { params: req.queryParams, paramsSerializer: qpSerializer });
         return client
-            .get(url, __assign({}, requestConfig))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get", headers: headers }, requestConfig)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
-                    if (MatchContentType(contentType, "text/xml")) {
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -1255,8 +1236,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 480:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 480:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -1264,8 +1245,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 481:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 481:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -1278,29 +1259,28 @@ var SDK = /** @class */ (function () {
         })
             .catch(function (error) { throw error; });
     };
-    SDK.prototype.GetDeleteOptionGroup = function (req, config) {
+    SDK.prototype.getDeleteOptionGroup = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.GetDeleteOptionGroupRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = baseURL.replace(/\/$/, "") + "/#Action=DeleteOptionGroup";
-        var client = this.securityClient;
-        var headers = __assign(__assign({}, GetHeadersFromRequest(req.headers)), config === null || config === void 0 ? void 0 : config.headers);
-        var qpSerializer = GetQueryParamSerializer(req.queryParams);
+        var client = this._securityClient;
+        var headers = __assign(__assign({}, utils.GetHeadersFromRequest(req.headers)), config === null || config === void 0 ? void 0 : config.headers);
+        var qpSerializer = utils.GetQueryParamSerializer(req.queryParams);
         var requestConfig = __assign(__assign({}, config), { params: req.queryParams, paramsSerializer: qpSerializer });
         return client
-            .get(url, __assign({}, requestConfig))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get", headers: headers }, requestConfig)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
                     break;
-                case 480:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 480:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -1308,8 +1288,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 481:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 481:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -1322,27 +1302,26 @@ var SDK = /** @class */ (function () {
         })
             .catch(function (error) { throw error; });
     };
-    SDK.prototype.GetDescribeDbEngineVersions = function (req, config) {
+    SDK.prototype.getDescribeDbEngineVersions = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.GetDescribeDbEngineVersionsRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = baseURL.replace(/\/$/, "") + "/#Action=DescribeDBEngineVersions";
-        var client = this.securityClient;
-        var headers = __assign(__assign({}, GetHeadersFromRequest(req.headers)), config === null || config === void 0 ? void 0 : config.headers);
-        var qpSerializer = GetQueryParamSerializer(req.queryParams);
+        var client = this._securityClient;
+        var headers = __assign(__assign({}, utils.GetHeadersFromRequest(req.headers)), config === null || config === void 0 ? void 0 : config.headers);
+        var qpSerializer = utils.GetQueryParamSerializer(req.queryParams);
         var requestConfig = __assign(__assign({}, config), { params: req.queryParams, paramsSerializer: qpSerializer });
         return client
-            .get(url, __assign({}, requestConfig))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get", headers: headers }, requestConfig)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
-                    if (MatchContentType(contentType, "text/xml")) {
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -1355,27 +1334,26 @@ var SDK = /** @class */ (function () {
         })
             .catch(function (error) { throw error; });
     };
-    SDK.prototype.GetDescribeDbInstances = function (req, config) {
+    SDK.prototype.getDescribeDbInstances = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.GetDescribeDbInstancesRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = baseURL.replace(/\/$/, "") + "/#Action=DescribeDBInstances";
-        var client = this.securityClient;
-        var headers = __assign(__assign({}, GetHeadersFromRequest(req.headers)), config === null || config === void 0 ? void 0 : config.headers);
-        var qpSerializer = GetQueryParamSerializer(req.queryParams);
+        var client = this._securityClient;
+        var headers = __assign(__assign({}, utils.GetHeadersFromRequest(req.headers)), config === null || config === void 0 ? void 0 : config.headers);
+        var qpSerializer = utils.GetQueryParamSerializer(req.queryParams);
         var requestConfig = __assign(__assign({}, config), { params: req.queryParams, paramsSerializer: qpSerializer });
         return client
-            .get(url, __assign({}, requestConfig))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get", headers: headers }, requestConfig)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
-                    if (MatchContentType(contentType, "text/xml")) {
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -1383,8 +1361,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 480:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 480:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -1397,27 +1375,26 @@ var SDK = /** @class */ (function () {
         })
             .catch(function (error) { throw error; });
     };
-    SDK.prototype.GetDescribeDbParameterGroups = function (req, config) {
+    SDK.prototype.getDescribeDbParameterGroups = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.GetDescribeDbParameterGroupsRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = baseURL.replace(/\/$/, "") + "/#Action=DescribeDBParameterGroups";
-        var client = this.securityClient;
-        var headers = __assign(__assign({}, GetHeadersFromRequest(req.headers)), config === null || config === void 0 ? void 0 : config.headers);
-        var qpSerializer = GetQueryParamSerializer(req.queryParams);
+        var client = this._securityClient;
+        var headers = __assign(__assign({}, utils.GetHeadersFromRequest(req.headers)), config === null || config === void 0 ? void 0 : config.headers);
+        var qpSerializer = utils.GetQueryParamSerializer(req.queryParams);
         var requestConfig = __assign(__assign({}, config), { params: req.queryParams, paramsSerializer: qpSerializer });
         return client
-            .get(url, __assign({}, requestConfig))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get", headers: headers }, requestConfig)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
-                    if (MatchContentType(contentType, "text/xml")) {
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -1425,8 +1402,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 480:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 480:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -1439,27 +1416,26 @@ var SDK = /** @class */ (function () {
         })
             .catch(function (error) { throw error; });
     };
-    SDK.prototype.GetDescribeDbParameters = function (req, config) {
+    SDK.prototype.getDescribeDbParameters = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.GetDescribeDbParametersRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = baseURL.replace(/\/$/, "") + "/#Action=DescribeDBParameters";
-        var client = this.securityClient;
-        var headers = __assign(__assign({}, GetHeadersFromRequest(req.headers)), config === null || config === void 0 ? void 0 : config.headers);
-        var qpSerializer = GetQueryParamSerializer(req.queryParams);
+        var client = this._securityClient;
+        var headers = __assign(__assign({}, utils.GetHeadersFromRequest(req.headers)), config === null || config === void 0 ? void 0 : config.headers);
+        var qpSerializer = utils.GetQueryParamSerializer(req.queryParams);
         var requestConfig = __assign(__assign({}, config), { params: req.queryParams, paramsSerializer: qpSerializer });
         return client
-            .get(url, __assign({}, requestConfig))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get", headers: headers }, requestConfig)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
-                    if (MatchContentType(contentType, "text/xml")) {
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -1467,8 +1443,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 480:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 480:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -1481,27 +1457,26 @@ var SDK = /** @class */ (function () {
         })
             .catch(function (error) { throw error; });
     };
-    SDK.prototype.GetDescribeDbSecurityGroups = function (req, config) {
+    SDK.prototype.getDescribeDbSecurityGroups = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.GetDescribeDbSecurityGroupsRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = baseURL.replace(/\/$/, "") + "/#Action=DescribeDBSecurityGroups";
-        var client = this.securityClient;
-        var headers = __assign(__assign({}, GetHeadersFromRequest(req.headers)), config === null || config === void 0 ? void 0 : config.headers);
-        var qpSerializer = GetQueryParamSerializer(req.queryParams);
+        var client = this._securityClient;
+        var headers = __assign(__assign({}, utils.GetHeadersFromRequest(req.headers)), config === null || config === void 0 ? void 0 : config.headers);
+        var qpSerializer = utils.GetQueryParamSerializer(req.queryParams);
         var requestConfig = __assign(__assign({}, config), { params: req.queryParams, paramsSerializer: qpSerializer });
         return client
-            .get(url, __assign({}, requestConfig))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get", headers: headers }, requestConfig)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
-                    if (MatchContentType(contentType, "text/xml")) {
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -1509,8 +1484,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 480:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 480:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -1523,27 +1498,26 @@ var SDK = /** @class */ (function () {
         })
             .catch(function (error) { throw error; });
     };
-    SDK.prototype.GetDescribeDbSnapshots = function (req, config) {
+    SDK.prototype.getDescribeDbSnapshots = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.GetDescribeDbSnapshotsRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = baseURL.replace(/\/$/, "") + "/#Action=DescribeDBSnapshots";
-        var client = this.securityClient;
-        var headers = __assign(__assign({}, GetHeadersFromRequest(req.headers)), config === null || config === void 0 ? void 0 : config.headers);
-        var qpSerializer = GetQueryParamSerializer(req.queryParams);
+        var client = this._securityClient;
+        var headers = __assign(__assign({}, utils.GetHeadersFromRequest(req.headers)), config === null || config === void 0 ? void 0 : config.headers);
+        var qpSerializer = utils.GetQueryParamSerializer(req.queryParams);
         var requestConfig = __assign(__assign({}, config), { params: req.queryParams, paramsSerializer: qpSerializer });
         return client
-            .get(url, __assign({}, requestConfig))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get", headers: headers }, requestConfig)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
-                    if (MatchContentType(contentType, "text/xml")) {
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -1551,8 +1525,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 480:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 480:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -1565,27 +1539,26 @@ var SDK = /** @class */ (function () {
         })
             .catch(function (error) { throw error; });
     };
-    SDK.prototype.GetDescribeDbSubnetGroups = function (req, config) {
+    SDK.prototype.getDescribeDbSubnetGroups = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.GetDescribeDbSubnetGroupsRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = baseURL.replace(/\/$/, "") + "/#Action=DescribeDBSubnetGroups";
-        var client = this.securityClient;
-        var headers = __assign(__assign({}, GetHeadersFromRequest(req.headers)), config === null || config === void 0 ? void 0 : config.headers);
-        var qpSerializer = GetQueryParamSerializer(req.queryParams);
+        var client = this._securityClient;
+        var headers = __assign(__assign({}, utils.GetHeadersFromRequest(req.headers)), config === null || config === void 0 ? void 0 : config.headers);
+        var qpSerializer = utils.GetQueryParamSerializer(req.queryParams);
         var requestConfig = __assign(__assign({}, config), { params: req.queryParams, paramsSerializer: qpSerializer });
         return client
-            .get(url, __assign({}, requestConfig))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get", headers: headers }, requestConfig)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
-                    if (MatchContentType(contentType, "text/xml")) {
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -1593,8 +1566,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 480:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 480:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -1607,27 +1580,26 @@ var SDK = /** @class */ (function () {
         })
             .catch(function (error) { throw error; });
     };
-    SDK.prototype.GetDescribeEngineDefaultParameters = function (req, config) {
+    SDK.prototype.getDescribeEngineDefaultParameters = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.GetDescribeEngineDefaultParametersRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = baseURL.replace(/\/$/, "") + "/#Action=DescribeEngineDefaultParameters";
-        var client = this.securityClient;
-        var headers = __assign(__assign({}, GetHeadersFromRequest(req.headers)), config === null || config === void 0 ? void 0 : config.headers);
-        var qpSerializer = GetQueryParamSerializer(req.queryParams);
+        var client = this._securityClient;
+        var headers = __assign(__assign({}, utils.GetHeadersFromRequest(req.headers)), config === null || config === void 0 ? void 0 : config.headers);
+        var qpSerializer = utils.GetQueryParamSerializer(req.queryParams);
         var requestConfig = __assign(__assign({}, config), { params: req.queryParams, paramsSerializer: qpSerializer });
         return client
-            .get(url, __assign({}, requestConfig))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get", headers: headers }, requestConfig)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
-                    if (MatchContentType(contentType, "text/xml")) {
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -1640,27 +1612,26 @@ var SDK = /** @class */ (function () {
         })
             .catch(function (error) { throw error; });
     };
-    SDK.prototype.GetDescribeEventCategories = function (req, config) {
+    SDK.prototype.getDescribeEventCategories = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.GetDescribeEventCategoriesRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = baseURL.replace(/\/$/, "") + "/#Action=DescribeEventCategories";
-        var client = this.securityClient;
-        var headers = __assign(__assign({}, GetHeadersFromRequest(req.headers)), config === null || config === void 0 ? void 0 : config.headers);
-        var qpSerializer = GetQueryParamSerializer(req.queryParams);
+        var client = this._securityClient;
+        var headers = __assign(__assign({}, utils.GetHeadersFromRequest(req.headers)), config === null || config === void 0 ? void 0 : config.headers);
+        var qpSerializer = utils.GetQueryParamSerializer(req.queryParams);
         var requestConfig = __assign(__assign({}, config), { params: req.queryParams, paramsSerializer: qpSerializer });
         return client
-            .get(url, __assign({}, requestConfig))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get", headers: headers }, requestConfig)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
-                    if (MatchContentType(contentType, "text/xml")) {
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -1673,27 +1644,26 @@ var SDK = /** @class */ (function () {
         })
             .catch(function (error) { throw error; });
     };
-    SDK.prototype.GetDescribeEventSubscriptions = function (req, config) {
+    SDK.prototype.getDescribeEventSubscriptions = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.GetDescribeEventSubscriptionsRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = baseURL.replace(/\/$/, "") + "/#Action=DescribeEventSubscriptions";
-        var client = this.securityClient;
-        var headers = __assign(__assign({}, GetHeadersFromRequest(req.headers)), config === null || config === void 0 ? void 0 : config.headers);
-        var qpSerializer = GetQueryParamSerializer(req.queryParams);
+        var client = this._securityClient;
+        var headers = __assign(__assign({}, utils.GetHeadersFromRequest(req.headers)), config === null || config === void 0 ? void 0 : config.headers);
+        var qpSerializer = utils.GetQueryParamSerializer(req.queryParams);
         var requestConfig = __assign(__assign({}, config), { params: req.queryParams, paramsSerializer: qpSerializer });
         return client
-            .get(url, __assign({}, requestConfig))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get", headers: headers }, requestConfig)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
-                    if (MatchContentType(contentType, "text/xml")) {
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -1701,8 +1671,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 480:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 480:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -1715,27 +1685,26 @@ var SDK = /** @class */ (function () {
         })
             .catch(function (error) { throw error; });
     };
-    SDK.prototype.GetDescribeEvents = function (req, config) {
+    SDK.prototype.getDescribeEvents = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.GetDescribeEventsRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = baseURL.replace(/\/$/, "") + "/#Action=DescribeEvents";
-        var client = this.securityClient;
-        var headers = __assign(__assign({}, GetHeadersFromRequest(req.headers)), config === null || config === void 0 ? void 0 : config.headers);
-        var qpSerializer = GetQueryParamSerializer(req.queryParams);
+        var client = this._securityClient;
+        var headers = __assign(__assign({}, utils.GetHeadersFromRequest(req.headers)), config === null || config === void 0 ? void 0 : config.headers);
+        var qpSerializer = utils.GetQueryParamSerializer(req.queryParams);
         var requestConfig = __assign(__assign({}, config), { params: req.queryParams, paramsSerializer: qpSerializer });
         return client
-            .get(url, __assign({}, requestConfig))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get", headers: headers }, requestConfig)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
-                    if (MatchContentType(contentType, "text/xml")) {
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -1748,27 +1717,26 @@ var SDK = /** @class */ (function () {
         })
             .catch(function (error) { throw error; });
     };
-    SDK.prototype.GetDescribeOptionGroupOptions = function (req, config) {
+    SDK.prototype.getDescribeOptionGroupOptions = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.GetDescribeOptionGroupOptionsRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = baseURL.replace(/\/$/, "") + "/#Action=DescribeOptionGroupOptions";
-        var client = this.securityClient;
-        var headers = __assign(__assign({}, GetHeadersFromRequest(req.headers)), config === null || config === void 0 ? void 0 : config.headers);
-        var qpSerializer = GetQueryParamSerializer(req.queryParams);
+        var client = this._securityClient;
+        var headers = __assign(__assign({}, utils.GetHeadersFromRequest(req.headers)), config === null || config === void 0 ? void 0 : config.headers);
+        var qpSerializer = utils.GetQueryParamSerializer(req.queryParams);
         var requestConfig = __assign(__assign({}, config), { params: req.queryParams, paramsSerializer: qpSerializer });
         return client
-            .get(url, __assign({}, requestConfig))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get", headers: headers }, requestConfig)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
-                    if (MatchContentType(contentType, "text/xml")) {
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -1781,27 +1749,26 @@ var SDK = /** @class */ (function () {
         })
             .catch(function (error) { throw error; });
     };
-    SDK.prototype.GetDescribeOptionGroups = function (req, config) {
+    SDK.prototype.getDescribeOptionGroups = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.GetDescribeOptionGroupsRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = baseURL.replace(/\/$/, "") + "/#Action=DescribeOptionGroups";
-        var client = this.securityClient;
-        var headers = __assign(__assign({}, GetHeadersFromRequest(req.headers)), config === null || config === void 0 ? void 0 : config.headers);
-        var qpSerializer = GetQueryParamSerializer(req.queryParams);
+        var client = this._securityClient;
+        var headers = __assign(__assign({}, utils.GetHeadersFromRequest(req.headers)), config === null || config === void 0 ? void 0 : config.headers);
+        var qpSerializer = utils.GetQueryParamSerializer(req.queryParams);
         var requestConfig = __assign(__assign({}, config), { params: req.queryParams, paramsSerializer: qpSerializer });
         return client
-            .get(url, __assign({}, requestConfig))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get", headers: headers }, requestConfig)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
-                    if (MatchContentType(contentType, "text/xml")) {
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -1809,8 +1776,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 480:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 480:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -1823,27 +1790,26 @@ var SDK = /** @class */ (function () {
         })
             .catch(function (error) { throw error; });
     };
-    SDK.prototype.GetDescribeOrderableDbInstanceOptions = function (req, config) {
+    SDK.prototype.getDescribeOrderableDbInstanceOptions = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.GetDescribeOrderableDbInstanceOptionsRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = baseURL.replace(/\/$/, "") + "/#Action=DescribeOrderableDBInstanceOptions";
-        var client = this.securityClient;
-        var headers = __assign(__assign({}, GetHeadersFromRequest(req.headers)), config === null || config === void 0 ? void 0 : config.headers);
-        var qpSerializer = GetQueryParamSerializer(req.queryParams);
+        var client = this._securityClient;
+        var headers = __assign(__assign({}, utils.GetHeadersFromRequest(req.headers)), config === null || config === void 0 ? void 0 : config.headers);
+        var qpSerializer = utils.GetQueryParamSerializer(req.queryParams);
         var requestConfig = __assign(__assign({}, config), { params: req.queryParams, paramsSerializer: qpSerializer });
         return client
-            .get(url, __assign({}, requestConfig))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get", headers: headers }, requestConfig)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
-                    if (MatchContentType(contentType, "text/xml")) {
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -1856,27 +1822,26 @@ var SDK = /** @class */ (function () {
         })
             .catch(function (error) { throw error; });
     };
-    SDK.prototype.GetDescribeReservedDbInstances = function (req, config) {
+    SDK.prototype.getDescribeReservedDbInstances = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.GetDescribeReservedDbInstancesRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = baseURL.replace(/\/$/, "") + "/#Action=DescribeReservedDBInstances";
-        var client = this.securityClient;
-        var headers = __assign(__assign({}, GetHeadersFromRequest(req.headers)), config === null || config === void 0 ? void 0 : config.headers);
-        var qpSerializer = GetQueryParamSerializer(req.queryParams);
+        var client = this._securityClient;
+        var headers = __assign(__assign({}, utils.GetHeadersFromRequest(req.headers)), config === null || config === void 0 ? void 0 : config.headers);
+        var qpSerializer = utils.GetQueryParamSerializer(req.queryParams);
         var requestConfig = __assign(__assign({}, config), { params: req.queryParams, paramsSerializer: qpSerializer });
         return client
-            .get(url, __assign({}, requestConfig))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get", headers: headers }, requestConfig)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
-                    if (MatchContentType(contentType, "text/xml")) {
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -1884,8 +1849,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 480:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 480:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -1898,27 +1863,26 @@ var SDK = /** @class */ (function () {
         })
             .catch(function (error) { throw error; });
     };
-    SDK.prototype.GetDescribeReservedDbInstancesOfferings = function (req, config) {
+    SDK.prototype.getDescribeReservedDbInstancesOfferings = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.GetDescribeReservedDbInstancesOfferingsRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = baseURL.replace(/\/$/, "") + "/#Action=DescribeReservedDBInstancesOfferings";
-        var client = this.securityClient;
-        var headers = __assign(__assign({}, GetHeadersFromRequest(req.headers)), config === null || config === void 0 ? void 0 : config.headers);
-        var qpSerializer = GetQueryParamSerializer(req.queryParams);
+        var client = this._securityClient;
+        var headers = __assign(__assign({}, utils.GetHeadersFromRequest(req.headers)), config === null || config === void 0 ? void 0 : config.headers);
+        var qpSerializer = utils.GetQueryParamSerializer(req.queryParams);
         var requestConfig = __assign(__assign({}, config), { params: req.queryParams, paramsSerializer: qpSerializer });
         return client
-            .get(url, __assign({}, requestConfig))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get", headers: headers }, requestConfig)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
-                    if (MatchContentType(contentType, "text/xml")) {
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -1926,8 +1890,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 480:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 480:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -1940,27 +1904,26 @@ var SDK = /** @class */ (function () {
         })
             .catch(function (error) { throw error; });
     };
-    SDK.prototype.GetListTagsForResource = function (req, config) {
+    SDK.prototype.getListTagsForResource = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.GetListTagsForResourceRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = baseURL.replace(/\/$/, "") + "/#Action=ListTagsForResource";
-        var client = this.securityClient;
-        var headers = __assign(__assign({}, GetHeadersFromRequest(req.headers)), config === null || config === void 0 ? void 0 : config.headers);
-        var qpSerializer = GetQueryParamSerializer(req.queryParams);
+        var client = this._securityClient;
+        var headers = __assign(__assign({}, utils.GetHeadersFromRequest(req.headers)), config === null || config === void 0 ? void 0 : config.headers);
+        var qpSerializer = utils.GetQueryParamSerializer(req.queryParams);
         var requestConfig = __assign(__assign({}, config), { params: req.queryParams, paramsSerializer: qpSerializer });
         return client
-            .get(url, __assign({}, requestConfig))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get", headers: headers }, requestConfig)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
-                    if (MatchContentType(contentType, "text/xml")) {
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -1968,8 +1931,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 480:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 480:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -1977,8 +1940,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 481:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 481:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -1991,27 +1954,26 @@ var SDK = /** @class */ (function () {
         })
             .catch(function (error) { throw error; });
     };
-    SDK.prototype.GetModifyDbInstance = function (req, config) {
+    SDK.prototype.getModifyDbInstance = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.GetModifyDbInstanceRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = baseURL.replace(/\/$/, "") + "/#Action=ModifyDBInstance";
-        var client = this.securityClient;
-        var headers = __assign(__assign({}, GetHeadersFromRequest(req.headers)), config === null || config === void 0 ? void 0 : config.headers);
-        var qpSerializer = GetQueryParamSerializer(req.queryParams);
+        var client = this._securityClient;
+        var headers = __assign(__assign({}, utils.GetHeadersFromRequest(req.headers)), config === null || config === void 0 ? void 0 : config.headers);
+        var qpSerializer = utils.GetQueryParamSerializer(req.queryParams);
         var requestConfig = __assign(__assign({}, config), { params: req.queryParams, paramsSerializer: qpSerializer });
         return client
-            .get(url, __assign({}, requestConfig))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get", headers: headers }, requestConfig)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
-                    if (MatchContentType(contentType, "text/xml")) {
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -2019,8 +1981,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 480:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 480:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -2028,8 +1990,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 481:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 481:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -2037,8 +1999,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 482:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 482:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -2046,8 +2008,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 483:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 483:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -2055,8 +2017,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 484:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 484:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -2064,8 +2026,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 485:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 485:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -2073,8 +2035,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 486:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 486:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -2082,8 +2044,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 487:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 487:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -2091,8 +2053,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 488:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 488:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -2100,8 +2062,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 489:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 489:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -2109,8 +2071,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 490:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 490:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -2118,8 +2080,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 491:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 491:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -2132,27 +2094,26 @@ var SDK = /** @class */ (function () {
         })
             .catch(function (error) { throw error; });
     };
-    SDK.prototype.GetModifyDbSubnetGroup = function (req, config) {
+    SDK.prototype.getModifyDbSubnetGroup = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.GetModifyDbSubnetGroupRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = baseURL.replace(/\/$/, "") + "/#Action=ModifyDBSubnetGroup";
-        var client = this.securityClient;
-        var headers = __assign(__assign({}, GetHeadersFromRequest(req.headers)), config === null || config === void 0 ? void 0 : config.headers);
-        var qpSerializer = GetQueryParamSerializer(req.queryParams);
+        var client = this._securityClient;
+        var headers = __assign(__assign({}, utils.GetHeadersFromRequest(req.headers)), config === null || config === void 0 ? void 0 : config.headers);
+        var qpSerializer = utils.GetQueryParamSerializer(req.queryParams);
         var requestConfig = __assign(__assign({}, config), { params: req.queryParams, paramsSerializer: qpSerializer });
         return client
-            .get(url, __assign({}, requestConfig))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get", headers: headers }, requestConfig)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
-                    if (MatchContentType(contentType, "text/xml")) {
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -2160,8 +2121,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 480:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 480:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -2169,8 +2130,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 481:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 481:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -2178,8 +2139,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 482:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 482:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -2187,8 +2148,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 483:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 483:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -2196,8 +2157,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 484:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 484:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -2210,27 +2171,26 @@ var SDK = /** @class */ (function () {
         })
             .catch(function (error) { throw error; });
     };
-    SDK.prototype.GetModifyEventSubscription = function (req, config) {
+    SDK.prototype.getModifyEventSubscription = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.GetModifyEventSubscriptionRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = baseURL.replace(/\/$/, "") + "/#Action=ModifyEventSubscription";
-        var client = this.securityClient;
-        var headers = __assign(__assign({}, GetHeadersFromRequest(req.headers)), config === null || config === void 0 ? void 0 : config.headers);
-        var qpSerializer = GetQueryParamSerializer(req.queryParams);
+        var client = this._securityClient;
+        var headers = __assign(__assign({}, utils.GetHeadersFromRequest(req.headers)), config === null || config === void 0 ? void 0 : config.headers);
+        var qpSerializer = utils.GetQueryParamSerializer(req.queryParams);
         var requestConfig = __assign(__assign({}, config), { params: req.queryParams, paramsSerializer: qpSerializer });
         return client
-            .get(url, __assign({}, requestConfig))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get", headers: headers }, requestConfig)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
-                    if (MatchContentType(contentType, "text/xml")) {
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -2238,8 +2198,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 480:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 480:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -2247,8 +2207,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 481:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 481:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -2256,8 +2216,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 482:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 482:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -2265,8 +2225,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 483:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 483:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -2274,8 +2234,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 484:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 484:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -2283,8 +2243,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 485:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 485:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -2297,27 +2257,26 @@ var SDK = /** @class */ (function () {
         })
             .catch(function (error) { throw error; });
     };
-    SDK.prototype.GetPromoteReadReplica = function (req, config) {
+    SDK.prototype.getPromoteReadReplica = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.GetPromoteReadReplicaRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = baseURL.replace(/\/$/, "") + "/#Action=PromoteReadReplica";
-        var client = this.securityClient;
-        var headers = __assign(__assign({}, GetHeadersFromRequest(req.headers)), config === null || config === void 0 ? void 0 : config.headers);
-        var qpSerializer = GetQueryParamSerializer(req.queryParams);
+        var client = this._securityClient;
+        var headers = __assign(__assign({}, utils.GetHeadersFromRequest(req.headers)), config === null || config === void 0 ? void 0 : config.headers);
+        var qpSerializer = utils.GetQueryParamSerializer(req.queryParams);
         var requestConfig = __assign(__assign({}, config), { params: req.queryParams, paramsSerializer: qpSerializer });
         return client
-            .get(url, __assign({}, requestConfig))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get", headers: headers }, requestConfig)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
-                    if (MatchContentType(contentType, "text/xml")) {
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -2325,8 +2284,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 480:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 480:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -2334,8 +2293,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 481:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 481:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -2348,27 +2307,26 @@ var SDK = /** @class */ (function () {
         })
             .catch(function (error) { throw error; });
     };
-    SDK.prototype.GetPurchaseReservedDbInstancesOffering = function (req, config) {
+    SDK.prototype.getPurchaseReservedDbInstancesOffering = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.GetPurchaseReservedDbInstancesOfferingRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = baseURL.replace(/\/$/, "") + "/#Action=PurchaseReservedDBInstancesOffering";
-        var client = this.securityClient;
-        var headers = __assign(__assign({}, GetHeadersFromRequest(req.headers)), config === null || config === void 0 ? void 0 : config.headers);
-        var qpSerializer = GetQueryParamSerializer(req.queryParams);
+        var client = this._securityClient;
+        var headers = __assign(__assign({}, utils.GetHeadersFromRequest(req.headers)), config === null || config === void 0 ? void 0 : config.headers);
+        var qpSerializer = utils.GetQueryParamSerializer(req.queryParams);
         var requestConfig = __assign(__assign({}, config), { params: req.queryParams, paramsSerializer: qpSerializer });
         return client
-            .get(url, __assign({}, requestConfig))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get", headers: headers }, requestConfig)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
-                    if (MatchContentType(contentType, "text/xml")) {
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -2376,8 +2334,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 480:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 480:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -2385,8 +2343,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 481:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 481:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -2394,8 +2352,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 482:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 482:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -2408,27 +2366,26 @@ var SDK = /** @class */ (function () {
         })
             .catch(function (error) { throw error; });
     };
-    SDK.prototype.GetRebootDbInstance = function (req, config) {
+    SDK.prototype.getRebootDbInstance = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.GetRebootDbInstanceRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = baseURL.replace(/\/$/, "") + "/#Action=RebootDBInstance";
-        var client = this.securityClient;
-        var headers = __assign(__assign({}, GetHeadersFromRequest(req.headers)), config === null || config === void 0 ? void 0 : config.headers);
-        var qpSerializer = GetQueryParamSerializer(req.queryParams);
+        var client = this._securityClient;
+        var headers = __assign(__assign({}, utils.GetHeadersFromRequest(req.headers)), config === null || config === void 0 ? void 0 : config.headers);
+        var qpSerializer = utils.GetQueryParamSerializer(req.queryParams);
         var requestConfig = __assign(__assign({}, config), { params: req.queryParams, paramsSerializer: qpSerializer });
         return client
-            .get(url, __assign({}, requestConfig))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get", headers: headers }, requestConfig)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
-                    if (MatchContentType(contentType, "text/xml")) {
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -2436,8 +2393,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 480:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 480:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -2445,8 +2402,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 481:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 481:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -2459,27 +2416,26 @@ var SDK = /** @class */ (function () {
         })
             .catch(function (error) { throw error; });
     };
-    SDK.prototype.GetRemoveSourceIdentifierFromSubscription = function (req, config) {
+    SDK.prototype.getRemoveSourceIdentifierFromSubscription = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.GetRemoveSourceIdentifierFromSubscriptionRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = baseURL.replace(/\/$/, "") + "/#Action=RemoveSourceIdentifierFromSubscription";
-        var client = this.securityClient;
-        var headers = __assign(__assign({}, GetHeadersFromRequest(req.headers)), config === null || config === void 0 ? void 0 : config.headers);
-        var qpSerializer = GetQueryParamSerializer(req.queryParams);
+        var client = this._securityClient;
+        var headers = __assign(__assign({}, utils.GetHeadersFromRequest(req.headers)), config === null || config === void 0 ? void 0 : config.headers);
+        var qpSerializer = utils.GetQueryParamSerializer(req.queryParams);
         var requestConfig = __assign(__assign({}, config), { params: req.queryParams, paramsSerializer: qpSerializer });
         return client
-            .get(url, __assign({}, requestConfig))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get", headers: headers }, requestConfig)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
-                    if (MatchContentType(contentType, "text/xml")) {
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -2487,8 +2443,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 480:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 480:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -2496,8 +2452,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 481:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 481:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -2510,29 +2466,28 @@ var SDK = /** @class */ (function () {
         })
             .catch(function (error) { throw error; });
     };
-    SDK.prototype.GetRemoveTagsFromResource = function (req, config) {
+    SDK.prototype.getRemoveTagsFromResource = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.GetRemoveTagsFromResourceRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = baseURL.replace(/\/$/, "") + "/#Action=RemoveTagsFromResource";
-        var client = this.securityClient;
-        var headers = __assign(__assign({}, GetHeadersFromRequest(req.headers)), config === null || config === void 0 ? void 0 : config.headers);
-        var qpSerializer = GetQueryParamSerializer(req.queryParams);
+        var client = this._securityClient;
+        var headers = __assign(__assign({}, utils.GetHeadersFromRequest(req.headers)), config === null || config === void 0 ? void 0 : config.headers);
+        var qpSerializer = utils.GetQueryParamSerializer(req.queryParams);
         var requestConfig = __assign(__assign({}, config), { params: req.queryParams, paramsSerializer: qpSerializer });
         return client
-            .get(url, __assign({}, requestConfig))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get", headers: headers }, requestConfig)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
                     break;
-                case 480:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 480:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -2540,8 +2495,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 481:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 481:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -2554,27 +2509,26 @@ var SDK = /** @class */ (function () {
         })
             .catch(function (error) { throw error; });
     };
-    SDK.prototype.GetRestoreDbInstanceFromDbSnapshot = function (req, config) {
+    SDK.prototype.getRestoreDbInstanceFromDbSnapshot = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.GetRestoreDbInstanceFromDbSnapshotRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = baseURL.replace(/\/$/, "") + "/#Action=RestoreDBInstanceFromDBSnapshot";
-        var client = this.securityClient;
-        var headers = __assign(__assign({}, GetHeadersFromRequest(req.headers)), config === null || config === void 0 ? void 0 : config.headers);
-        var qpSerializer = GetQueryParamSerializer(req.queryParams);
+        var client = this._securityClient;
+        var headers = __assign(__assign({}, utils.GetHeadersFromRequest(req.headers)), config === null || config === void 0 ? void 0 : config.headers);
+        var qpSerializer = utils.GetQueryParamSerializer(req.queryParams);
         var requestConfig = __assign(__assign({}, config), { params: req.queryParams, paramsSerializer: qpSerializer });
         return client
-            .get(url, __assign({}, requestConfig))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get", headers: headers }, requestConfig)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
-                    if (MatchContentType(contentType, "text/xml")) {
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -2582,8 +2536,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 480:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 480:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -2591,8 +2545,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 481:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 481:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -2600,8 +2554,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 482:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 482:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -2609,8 +2563,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 483:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 483:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -2618,8 +2572,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 484:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 484:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -2627,8 +2581,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 485:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 485:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -2636,8 +2590,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 486:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 486:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -2645,8 +2599,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 487:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 487:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -2654,8 +2608,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 488:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 488:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -2663,8 +2617,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 489:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 489:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -2672,8 +2626,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 490:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 490:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -2681,8 +2635,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 491:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 491:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -2690,8 +2644,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 492:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 492:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -2704,27 +2658,26 @@ var SDK = /** @class */ (function () {
         })
             .catch(function (error) { throw error; });
     };
-    SDK.prototype.GetRestoreDbInstanceToPointInTime = function (req, config) {
+    SDK.prototype.getRestoreDbInstanceToPointInTime = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.GetRestoreDbInstanceToPointInTimeRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = baseURL.replace(/\/$/, "") + "/#Action=RestoreDBInstanceToPointInTime";
-        var client = this.securityClient;
-        var headers = __assign(__assign({}, GetHeadersFromRequest(req.headers)), config === null || config === void 0 ? void 0 : config.headers);
-        var qpSerializer = GetQueryParamSerializer(req.queryParams);
+        var client = this._securityClient;
+        var headers = __assign(__assign({}, utils.GetHeadersFromRequest(req.headers)), config === null || config === void 0 ? void 0 : config.headers);
+        var qpSerializer = utils.GetQueryParamSerializer(req.queryParams);
         var requestConfig = __assign(__assign({}, config), { params: req.queryParams, paramsSerializer: qpSerializer });
         return client
-            .get(url, __assign({}, requestConfig))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get", headers: headers }, requestConfig)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
-                    if (MatchContentType(contentType, "text/xml")) {
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -2732,8 +2685,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 480:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 480:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -2741,8 +2694,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 481:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 481:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -2750,8 +2703,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 482:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 482:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -2759,8 +2712,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 483:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 483:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -2768,8 +2721,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 484:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 484:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -2777,8 +2730,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 485:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 485:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -2786,8 +2739,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 486:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 486:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -2795,8 +2748,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 487:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 487:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -2804,8 +2757,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 488:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 488:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -2813,8 +2766,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 489:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 489:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -2822,8 +2775,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 490:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 490:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -2831,8 +2784,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 491:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 491:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -2840,8 +2793,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 492:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 492:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -2849,8 +2802,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 493:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 493:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -2863,27 +2816,26 @@ var SDK = /** @class */ (function () {
         })
             .catch(function (error) { throw error; });
     };
-    SDK.prototype.GetRevokeDbSecurityGroupIngress = function (req, config) {
+    SDK.prototype.getRevokeDbSecurityGroupIngress = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.GetRevokeDbSecurityGroupIngressRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = baseURL.replace(/\/$/, "") + "/#Action=RevokeDBSecurityGroupIngress";
-        var client = this.securityClient;
-        var headers = __assign(__assign({}, GetHeadersFromRequest(req.headers)), config === null || config === void 0 ? void 0 : config.headers);
-        var qpSerializer = GetQueryParamSerializer(req.queryParams);
+        var client = this._securityClient;
+        var headers = __assign(__assign({}, utils.GetHeadersFromRequest(req.headers)), config === null || config === void 0 ? void 0 : config.headers);
+        var qpSerializer = utils.GetQueryParamSerializer(req.queryParams);
         var requestConfig = __assign(__assign({}, config), { params: req.queryParams, paramsSerializer: qpSerializer });
         return client
-            .get(url, __assign({}, requestConfig))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get", headers: headers }, requestConfig)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
-                    if (MatchContentType(contentType, "text/xml")) {
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -2891,8 +2843,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 480:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 480:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -2900,8 +2852,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 481:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 481:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -2909,8 +2861,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 482:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 482:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -2923,25 +2875,25 @@ var SDK = /** @class */ (function () {
         })
             .catch(function (error) { throw error; });
     };
-    SDK.prototype.PostAddSourceIdentifierToSubscription = function (req, config) {
+    SDK.prototype.postAddSourceIdentifierToSubscription = function (req, config) {
         var _a;
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.PostAddSourceIdentifierToSubscriptionRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = baseURL.replace(/\/$/, "") + "/#Action=AddSourceIdentifierToSubscription";
         var _b = [{}, {}], reqBodyHeaders = _b[0], reqBody = _b[1];
         try {
-            _a = SerializeRequestBody(req), reqBodyHeaders = _a[0], reqBody = _a[1];
+            _a = utils.SerializeRequestBody(req), reqBodyHeaders = _a[0], reqBody = _a[1];
         }
         catch (e) {
             if (e instanceof Error) {
                 throw new Error("Error serializing request body, cause: ".concat(e.message));
             }
         }
-        var client = this.securityClient;
-        var headers = __assign(__assign(__assign({}, GetHeadersFromRequest(req.headers)), reqBodyHeaders), config === null || config === void 0 ? void 0 : config.headers);
-        var qpSerializer = GetQueryParamSerializer(req.queryParams);
+        var client = this._securityClient;
+        var headers = __assign(__assign(__assign({}, utils.GetHeadersFromRequest(req.headers)), reqBodyHeaders), config === null || config === void 0 ? void 0 : config.headers);
+        var qpSerializer = utils.GetQueryParamSerializer(req.queryParams);
         var requestConfig = __assign(__assign({}, config), { params: req.queryParams, paramsSerializer: qpSerializer });
         var body;
         if (reqBody instanceof FormData)
@@ -2949,16 +2901,15 @@ var SDK = /** @class */ (function () {
         else
             body = __assign({}, reqBody);
         return client
-            .post(url, body, __assign({ headers: headers }, requestConfig))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "post", headers: headers, data: body }, requestConfig)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
-                    if (MatchContentType(contentType, "text/xml")) {
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -2966,8 +2917,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 480:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 480:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -2975,8 +2926,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 481:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 481:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -2989,25 +2940,25 @@ var SDK = /** @class */ (function () {
         })
             .catch(function (error) { throw error; });
     };
-    SDK.prototype.PostAddTagsToResource = function (req, config) {
+    SDK.prototype.postAddTagsToResource = function (req, config) {
         var _a;
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.PostAddTagsToResourceRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = baseURL.replace(/\/$/, "") + "/#Action=AddTagsToResource";
         var _b = [{}, {}], reqBodyHeaders = _b[0], reqBody = _b[1];
         try {
-            _a = SerializeRequestBody(req), reqBodyHeaders = _a[0], reqBody = _a[1];
+            _a = utils.SerializeRequestBody(req), reqBodyHeaders = _a[0], reqBody = _a[1];
         }
         catch (e) {
             if (e instanceof Error) {
                 throw new Error("Error serializing request body, cause: ".concat(e.message));
             }
         }
-        var client = this.securityClient;
-        var headers = __assign(__assign(__assign({}, GetHeadersFromRequest(req.headers)), reqBodyHeaders), config === null || config === void 0 ? void 0 : config.headers);
-        var qpSerializer = GetQueryParamSerializer(req.queryParams);
+        var client = this._securityClient;
+        var headers = __assign(__assign(__assign({}, utils.GetHeadersFromRequest(req.headers)), reqBodyHeaders), config === null || config === void 0 ? void 0 : config.headers);
+        var qpSerializer = utils.GetQueryParamSerializer(req.queryParams);
         var requestConfig = __assign(__assign({}, config), { params: req.queryParams, paramsSerializer: qpSerializer });
         var body;
         if (reqBody instanceof FormData)
@@ -3015,18 +2966,17 @@ var SDK = /** @class */ (function () {
         else
             body = __assign({}, reqBody);
         return client
-            .post(url, body, __assign({ headers: headers }, requestConfig))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "post", headers: headers, data: body }, requestConfig)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
                     break;
-                case 480:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 480:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -3034,8 +2984,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 481:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 481:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -3048,25 +2998,25 @@ var SDK = /** @class */ (function () {
         })
             .catch(function (error) { throw error; });
     };
-    SDK.prototype.PostAuthorizeDbSecurityGroupIngress = function (req, config) {
+    SDK.prototype.postAuthorizeDbSecurityGroupIngress = function (req, config) {
         var _a;
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.PostAuthorizeDbSecurityGroupIngressRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = baseURL.replace(/\/$/, "") + "/#Action=AuthorizeDBSecurityGroupIngress";
         var _b = [{}, {}], reqBodyHeaders = _b[0], reqBody = _b[1];
         try {
-            _a = SerializeRequestBody(req), reqBodyHeaders = _a[0], reqBody = _a[1];
+            _a = utils.SerializeRequestBody(req), reqBodyHeaders = _a[0], reqBody = _a[1];
         }
         catch (e) {
             if (e instanceof Error) {
                 throw new Error("Error serializing request body, cause: ".concat(e.message));
             }
         }
-        var client = this.securityClient;
-        var headers = __assign(__assign(__assign({}, GetHeadersFromRequest(req.headers)), reqBodyHeaders), config === null || config === void 0 ? void 0 : config.headers);
-        var qpSerializer = GetQueryParamSerializer(req.queryParams);
+        var client = this._securityClient;
+        var headers = __assign(__assign(__assign({}, utils.GetHeadersFromRequest(req.headers)), reqBodyHeaders), config === null || config === void 0 ? void 0 : config.headers);
+        var qpSerializer = utils.GetQueryParamSerializer(req.queryParams);
         var requestConfig = __assign(__assign({}, config), { params: req.queryParams, paramsSerializer: qpSerializer });
         var body;
         if (reqBody instanceof FormData)
@@ -3074,16 +3024,15 @@ var SDK = /** @class */ (function () {
         else
             body = __assign({}, reqBody);
         return client
-            .post(url, body, __assign({ headers: headers }, requestConfig))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "post", headers: headers, data: body }, requestConfig)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
-                    if (MatchContentType(contentType, "text/xml")) {
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -3091,8 +3040,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 480:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 480:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -3100,8 +3049,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 481:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 481:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -3109,8 +3058,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 482:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 482:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -3118,8 +3067,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 483:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 483:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -3132,25 +3081,25 @@ var SDK = /** @class */ (function () {
         })
             .catch(function (error) { throw error; });
     };
-    SDK.prototype.PostCopyDbSnapshot = function (req, config) {
+    SDK.prototype.postCopyDbSnapshot = function (req, config) {
         var _a;
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.PostCopyDbSnapshotRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = baseURL.replace(/\/$/, "") + "/#Action=CopyDBSnapshot";
         var _b = [{}, {}], reqBodyHeaders = _b[0], reqBody = _b[1];
         try {
-            _a = SerializeRequestBody(req), reqBodyHeaders = _a[0], reqBody = _a[1];
+            _a = utils.SerializeRequestBody(req), reqBodyHeaders = _a[0], reqBody = _a[1];
         }
         catch (e) {
             if (e instanceof Error) {
                 throw new Error("Error serializing request body, cause: ".concat(e.message));
             }
         }
-        var client = this.securityClient;
-        var headers = __assign(__assign(__assign({}, GetHeadersFromRequest(req.headers)), reqBodyHeaders), config === null || config === void 0 ? void 0 : config.headers);
-        var qpSerializer = GetQueryParamSerializer(req.queryParams);
+        var client = this._securityClient;
+        var headers = __assign(__assign(__assign({}, utils.GetHeadersFromRequest(req.headers)), reqBodyHeaders), config === null || config === void 0 ? void 0 : config.headers);
+        var qpSerializer = utils.GetQueryParamSerializer(req.queryParams);
         var requestConfig = __assign(__assign({}, config), { params: req.queryParams, paramsSerializer: qpSerializer });
         var body;
         if (reqBody instanceof FormData)
@@ -3158,16 +3107,15 @@ var SDK = /** @class */ (function () {
         else
             body = __assign({}, reqBody);
         return client
-            .post(url, body, __assign({ headers: headers }, requestConfig))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "post", headers: headers, data: body }, requestConfig)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
-                    if (MatchContentType(contentType, "text/xml")) {
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -3175,8 +3123,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 480:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 480:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -3184,8 +3132,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 481:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 481:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -3193,8 +3141,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 482:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 482:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -3202,8 +3150,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 483:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 483:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -3216,25 +3164,25 @@ var SDK = /** @class */ (function () {
         })
             .catch(function (error) { throw error; });
     };
-    SDK.prototype.PostCreateDbInstance = function (req, config) {
+    SDK.prototype.postCreateDbInstance = function (req, config) {
         var _a;
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.PostCreateDbInstanceRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = baseURL.replace(/\/$/, "") + "/#Action=CreateDBInstance";
         var _b = [{}, {}], reqBodyHeaders = _b[0], reqBody = _b[1];
         try {
-            _a = SerializeRequestBody(req), reqBodyHeaders = _a[0], reqBody = _a[1];
+            _a = utils.SerializeRequestBody(req), reqBodyHeaders = _a[0], reqBody = _a[1];
         }
         catch (e) {
             if (e instanceof Error) {
                 throw new Error("Error serializing request body, cause: ".concat(e.message));
             }
         }
-        var client = this.securityClient;
-        var headers = __assign(__assign(__assign({}, GetHeadersFromRequest(req.headers)), reqBodyHeaders), config === null || config === void 0 ? void 0 : config.headers);
-        var qpSerializer = GetQueryParamSerializer(req.queryParams);
+        var client = this._securityClient;
+        var headers = __assign(__assign(__assign({}, utils.GetHeadersFromRequest(req.headers)), reqBodyHeaders), config === null || config === void 0 ? void 0 : config.headers);
+        var qpSerializer = utils.GetQueryParamSerializer(req.queryParams);
         var requestConfig = __assign(__assign({}, config), { params: req.queryParams, paramsSerializer: qpSerializer });
         var body;
         if (reqBody instanceof FormData)
@@ -3242,16 +3190,15 @@ var SDK = /** @class */ (function () {
         else
             body = __assign({}, reqBody);
         return client
-            .post(url, body, __assign({ headers: headers }, requestConfig))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "post", headers: headers, data: body }, requestConfig)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
-                    if (MatchContentType(contentType, "text/xml")) {
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -3259,8 +3206,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 480:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 480:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -3268,8 +3215,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 481:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 481:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -3277,8 +3224,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 482:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 482:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -3286,8 +3233,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 483:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 483:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -3295,8 +3242,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 484:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 484:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -3304,8 +3251,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 485:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 485:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -3313,8 +3260,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 486:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 486:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -3322,8 +3269,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 487:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 487:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -3331,8 +3278,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 488:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 488:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -3340,8 +3287,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 489:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 489:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -3349,8 +3296,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 490:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 490:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -3358,8 +3305,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 491:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 491:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -3372,25 +3319,25 @@ var SDK = /** @class */ (function () {
         })
             .catch(function (error) { throw error; });
     };
-    SDK.prototype.PostCreateDbInstanceReadReplica = function (req, config) {
+    SDK.prototype.postCreateDbInstanceReadReplica = function (req, config) {
         var _a;
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.PostCreateDbInstanceReadReplicaRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = baseURL.replace(/\/$/, "") + "/#Action=CreateDBInstanceReadReplica";
         var _b = [{}, {}], reqBodyHeaders = _b[0], reqBody = _b[1];
         try {
-            _a = SerializeRequestBody(req), reqBodyHeaders = _a[0], reqBody = _a[1];
+            _a = utils.SerializeRequestBody(req), reqBodyHeaders = _a[0], reqBody = _a[1];
         }
         catch (e) {
             if (e instanceof Error) {
                 throw new Error("Error serializing request body, cause: ".concat(e.message));
             }
         }
-        var client = this.securityClient;
-        var headers = __assign(__assign(__assign({}, GetHeadersFromRequest(req.headers)), reqBodyHeaders), config === null || config === void 0 ? void 0 : config.headers);
-        var qpSerializer = GetQueryParamSerializer(req.queryParams);
+        var client = this._securityClient;
+        var headers = __assign(__assign(__assign({}, utils.GetHeadersFromRequest(req.headers)), reqBodyHeaders), config === null || config === void 0 ? void 0 : config.headers);
+        var qpSerializer = utils.GetQueryParamSerializer(req.queryParams);
         var requestConfig = __assign(__assign({}, config), { params: req.queryParams, paramsSerializer: qpSerializer });
         var body;
         if (reqBody instanceof FormData)
@@ -3398,16 +3345,15 @@ var SDK = /** @class */ (function () {
         else
             body = __assign({}, reqBody);
         return client
-            .post(url, body, __assign({ headers: headers }, requestConfig))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "post", headers: headers, data: body }, requestConfig)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
-                    if (MatchContentType(contentType, "text/xml")) {
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -3415,8 +3361,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 480:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 480:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -3424,8 +3370,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 481:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 481:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -3433,8 +3379,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 482:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 482:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -3442,8 +3388,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 483:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 483:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -3451,8 +3397,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 484:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 484:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -3460,8 +3406,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 485:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 485:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -3469,8 +3415,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 486:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 486:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -3478,8 +3424,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 487:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 487:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -3487,8 +3433,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 488:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 488:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -3496,8 +3442,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 489:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 489:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -3505,8 +3451,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 490:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 490:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -3514,8 +3460,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 491:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 491:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -3523,8 +3469,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 492:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 492:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -3532,8 +3478,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 493:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 493:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -3546,25 +3492,25 @@ var SDK = /** @class */ (function () {
         })
             .catch(function (error) { throw error; });
     };
-    SDK.prototype.PostCreateDbParameterGroup = function (req, config) {
+    SDK.prototype.postCreateDbParameterGroup = function (req, config) {
         var _a;
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.PostCreateDbParameterGroupRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = baseURL.replace(/\/$/, "") + "/#Action=CreateDBParameterGroup";
         var _b = [{}, {}], reqBodyHeaders = _b[0], reqBody = _b[1];
         try {
-            _a = SerializeRequestBody(req), reqBodyHeaders = _a[0], reqBody = _a[1];
+            _a = utils.SerializeRequestBody(req), reqBodyHeaders = _a[0], reqBody = _a[1];
         }
         catch (e) {
             if (e instanceof Error) {
                 throw new Error("Error serializing request body, cause: ".concat(e.message));
             }
         }
-        var client = this.securityClient;
-        var headers = __assign(__assign(__assign({}, GetHeadersFromRequest(req.headers)), reqBodyHeaders), config === null || config === void 0 ? void 0 : config.headers);
-        var qpSerializer = GetQueryParamSerializer(req.queryParams);
+        var client = this._securityClient;
+        var headers = __assign(__assign(__assign({}, utils.GetHeadersFromRequest(req.headers)), reqBodyHeaders), config === null || config === void 0 ? void 0 : config.headers);
+        var qpSerializer = utils.GetQueryParamSerializer(req.queryParams);
         var requestConfig = __assign(__assign({}, config), { params: req.queryParams, paramsSerializer: qpSerializer });
         var body;
         if (reqBody instanceof FormData)
@@ -3572,16 +3518,15 @@ var SDK = /** @class */ (function () {
         else
             body = __assign({}, reqBody);
         return client
-            .post(url, body, __assign({ headers: headers }, requestConfig))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "post", headers: headers, data: body }, requestConfig)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
-                    if (MatchContentType(contentType, "text/xml")) {
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -3589,8 +3534,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 480:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 480:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -3598,8 +3543,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 481:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 481:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -3612,25 +3557,25 @@ var SDK = /** @class */ (function () {
         })
             .catch(function (error) { throw error; });
     };
-    SDK.prototype.PostCreateDbSecurityGroup = function (req, config) {
+    SDK.prototype.postCreateDbSecurityGroup = function (req, config) {
         var _a;
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.PostCreateDbSecurityGroupRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = baseURL.replace(/\/$/, "") + "/#Action=CreateDBSecurityGroup";
         var _b = [{}, {}], reqBodyHeaders = _b[0], reqBody = _b[1];
         try {
-            _a = SerializeRequestBody(req), reqBodyHeaders = _a[0], reqBody = _a[1];
+            _a = utils.SerializeRequestBody(req), reqBodyHeaders = _a[0], reqBody = _a[1];
         }
         catch (e) {
             if (e instanceof Error) {
                 throw new Error("Error serializing request body, cause: ".concat(e.message));
             }
         }
-        var client = this.securityClient;
-        var headers = __assign(__assign(__assign({}, GetHeadersFromRequest(req.headers)), reqBodyHeaders), config === null || config === void 0 ? void 0 : config.headers);
-        var qpSerializer = GetQueryParamSerializer(req.queryParams);
+        var client = this._securityClient;
+        var headers = __assign(__assign(__assign({}, utils.GetHeadersFromRequest(req.headers)), reqBodyHeaders), config === null || config === void 0 ? void 0 : config.headers);
+        var qpSerializer = utils.GetQueryParamSerializer(req.queryParams);
         var requestConfig = __assign(__assign({}, config), { params: req.queryParams, paramsSerializer: qpSerializer });
         var body;
         if (reqBody instanceof FormData)
@@ -3638,16 +3583,15 @@ var SDK = /** @class */ (function () {
         else
             body = __assign({}, reqBody);
         return client
-            .post(url, body, __assign({ headers: headers }, requestConfig))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "post", headers: headers, data: body }, requestConfig)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
-                    if (MatchContentType(contentType, "text/xml")) {
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -3655,8 +3599,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 480:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 480:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -3664,8 +3608,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 481:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 481:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -3673,8 +3617,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 482:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 482:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -3687,25 +3631,25 @@ var SDK = /** @class */ (function () {
         })
             .catch(function (error) { throw error; });
     };
-    SDK.prototype.PostCreateDbSnapshot = function (req, config) {
+    SDK.prototype.postCreateDbSnapshot = function (req, config) {
         var _a;
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.PostCreateDbSnapshotRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = baseURL.replace(/\/$/, "") + "/#Action=CreateDBSnapshot";
         var _b = [{}, {}], reqBodyHeaders = _b[0], reqBody = _b[1];
         try {
-            _a = SerializeRequestBody(req), reqBodyHeaders = _a[0], reqBody = _a[1];
+            _a = utils.SerializeRequestBody(req), reqBodyHeaders = _a[0], reqBody = _a[1];
         }
         catch (e) {
             if (e instanceof Error) {
                 throw new Error("Error serializing request body, cause: ".concat(e.message));
             }
         }
-        var client = this.securityClient;
-        var headers = __assign(__assign(__assign({}, GetHeadersFromRequest(req.headers)), reqBodyHeaders), config === null || config === void 0 ? void 0 : config.headers);
-        var qpSerializer = GetQueryParamSerializer(req.queryParams);
+        var client = this._securityClient;
+        var headers = __assign(__assign(__assign({}, utils.GetHeadersFromRequest(req.headers)), reqBodyHeaders), config === null || config === void 0 ? void 0 : config.headers);
+        var qpSerializer = utils.GetQueryParamSerializer(req.queryParams);
         var requestConfig = __assign(__assign({}, config), { params: req.queryParams, paramsSerializer: qpSerializer });
         var body;
         if (reqBody instanceof FormData)
@@ -3713,16 +3657,15 @@ var SDK = /** @class */ (function () {
         else
             body = __assign({}, reqBody);
         return client
-            .post(url, body, __assign({ headers: headers }, requestConfig))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "post", headers: headers, data: body }, requestConfig)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
-                    if (MatchContentType(contentType, "text/xml")) {
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -3730,8 +3673,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 480:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 480:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -3739,8 +3682,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 481:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 481:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -3748,8 +3691,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 482:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 482:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -3757,8 +3700,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 483:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 483:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -3771,25 +3714,25 @@ var SDK = /** @class */ (function () {
         })
             .catch(function (error) { throw error; });
     };
-    SDK.prototype.PostCreateDbSubnetGroup = function (req, config) {
+    SDK.prototype.postCreateDbSubnetGroup = function (req, config) {
         var _a;
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.PostCreateDbSubnetGroupRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = baseURL.replace(/\/$/, "") + "/#Action=CreateDBSubnetGroup";
         var _b = [{}, {}], reqBodyHeaders = _b[0], reqBody = _b[1];
         try {
-            _a = SerializeRequestBody(req), reqBodyHeaders = _a[0], reqBody = _a[1];
+            _a = utils.SerializeRequestBody(req), reqBodyHeaders = _a[0], reqBody = _a[1];
         }
         catch (e) {
             if (e instanceof Error) {
                 throw new Error("Error serializing request body, cause: ".concat(e.message));
             }
         }
-        var client = this.securityClient;
-        var headers = __assign(__assign(__assign({}, GetHeadersFromRequest(req.headers)), reqBodyHeaders), config === null || config === void 0 ? void 0 : config.headers);
-        var qpSerializer = GetQueryParamSerializer(req.queryParams);
+        var client = this._securityClient;
+        var headers = __assign(__assign(__assign({}, utils.GetHeadersFromRequest(req.headers)), reqBodyHeaders), config === null || config === void 0 ? void 0 : config.headers);
+        var qpSerializer = utils.GetQueryParamSerializer(req.queryParams);
         var requestConfig = __assign(__assign({}, config), { params: req.queryParams, paramsSerializer: qpSerializer });
         var body;
         if (reqBody instanceof FormData)
@@ -3797,16 +3740,15 @@ var SDK = /** @class */ (function () {
         else
             body = __assign({}, reqBody);
         return client
-            .post(url, body, __assign({ headers: headers }, requestConfig))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "post", headers: headers, data: body }, requestConfig)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
-                    if (MatchContentType(contentType, "text/xml")) {
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -3814,8 +3756,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 480:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 480:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -3823,8 +3765,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 481:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 481:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -3832,8 +3774,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 482:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 482:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -3841,8 +3783,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 483:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 483:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -3850,8 +3792,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 484:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 484:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -3864,25 +3806,25 @@ var SDK = /** @class */ (function () {
         })
             .catch(function (error) { throw error; });
     };
-    SDK.prototype.PostCreateEventSubscription = function (req, config) {
+    SDK.prototype.postCreateEventSubscription = function (req, config) {
         var _a;
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.PostCreateEventSubscriptionRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = baseURL.replace(/\/$/, "") + "/#Action=CreateEventSubscription";
         var _b = [{}, {}], reqBodyHeaders = _b[0], reqBody = _b[1];
         try {
-            _a = SerializeRequestBody(req), reqBodyHeaders = _a[0], reqBody = _a[1];
+            _a = utils.SerializeRequestBody(req), reqBodyHeaders = _a[0], reqBody = _a[1];
         }
         catch (e) {
             if (e instanceof Error) {
                 throw new Error("Error serializing request body, cause: ".concat(e.message));
             }
         }
-        var client = this.securityClient;
-        var headers = __assign(__assign(__assign({}, GetHeadersFromRequest(req.headers)), reqBodyHeaders), config === null || config === void 0 ? void 0 : config.headers);
-        var qpSerializer = GetQueryParamSerializer(req.queryParams);
+        var client = this._securityClient;
+        var headers = __assign(__assign(__assign({}, utils.GetHeadersFromRequest(req.headers)), reqBodyHeaders), config === null || config === void 0 ? void 0 : config.headers);
+        var qpSerializer = utils.GetQueryParamSerializer(req.queryParams);
         var requestConfig = __assign(__assign({}, config), { params: req.queryParams, paramsSerializer: qpSerializer });
         var body;
         if (reqBody instanceof FormData)
@@ -3890,16 +3832,15 @@ var SDK = /** @class */ (function () {
         else
             body = __assign({}, reqBody);
         return client
-            .post(url, body, __assign({ headers: headers }, requestConfig))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "post", headers: headers, data: body }, requestConfig)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
-                    if (MatchContentType(contentType, "text/xml")) {
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -3907,8 +3848,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 480:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 480:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -3916,8 +3857,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 481:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 481:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -3925,8 +3866,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 482:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 482:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -3934,8 +3875,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 483:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 483:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -3943,8 +3884,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 484:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 484:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -3952,8 +3893,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 485:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 485:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -3961,8 +3902,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 486:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 486:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -3975,25 +3916,25 @@ var SDK = /** @class */ (function () {
         })
             .catch(function (error) { throw error; });
     };
-    SDK.prototype.PostCreateOptionGroup = function (req, config) {
+    SDK.prototype.postCreateOptionGroup = function (req, config) {
         var _a;
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.PostCreateOptionGroupRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = baseURL.replace(/\/$/, "") + "/#Action=CreateOptionGroup";
         var _b = [{}, {}], reqBodyHeaders = _b[0], reqBody = _b[1];
         try {
-            _a = SerializeRequestBody(req), reqBodyHeaders = _a[0], reqBody = _a[1];
+            _a = utils.SerializeRequestBody(req), reqBodyHeaders = _a[0], reqBody = _a[1];
         }
         catch (e) {
             if (e instanceof Error) {
                 throw new Error("Error serializing request body, cause: ".concat(e.message));
             }
         }
-        var client = this.securityClient;
-        var headers = __assign(__assign(__assign({}, GetHeadersFromRequest(req.headers)), reqBodyHeaders), config === null || config === void 0 ? void 0 : config.headers);
-        var qpSerializer = GetQueryParamSerializer(req.queryParams);
+        var client = this._securityClient;
+        var headers = __assign(__assign(__assign({}, utils.GetHeadersFromRequest(req.headers)), reqBodyHeaders), config === null || config === void 0 ? void 0 : config.headers);
+        var qpSerializer = utils.GetQueryParamSerializer(req.queryParams);
         var requestConfig = __assign(__assign({}, config), { params: req.queryParams, paramsSerializer: qpSerializer });
         var body;
         if (reqBody instanceof FormData)
@@ -4001,16 +3942,15 @@ var SDK = /** @class */ (function () {
         else
             body = __assign({}, reqBody);
         return client
-            .post(url, body, __assign({ headers: headers }, requestConfig))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "post", headers: headers, data: body }, requestConfig)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
-                    if (MatchContentType(contentType, "text/xml")) {
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -4018,8 +3958,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 480:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 480:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -4027,8 +3967,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 481:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 481:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -4041,25 +3981,25 @@ var SDK = /** @class */ (function () {
         })
             .catch(function (error) { throw error; });
     };
-    SDK.prototype.PostDeleteDbInstance = function (req, config) {
+    SDK.prototype.postDeleteDbInstance = function (req, config) {
         var _a;
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.PostDeleteDbInstanceRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = baseURL.replace(/\/$/, "") + "/#Action=DeleteDBInstance";
         var _b = [{}, {}], reqBodyHeaders = _b[0], reqBody = _b[1];
         try {
-            _a = SerializeRequestBody(req), reqBodyHeaders = _a[0], reqBody = _a[1];
+            _a = utils.SerializeRequestBody(req), reqBodyHeaders = _a[0], reqBody = _a[1];
         }
         catch (e) {
             if (e instanceof Error) {
                 throw new Error("Error serializing request body, cause: ".concat(e.message));
             }
         }
-        var client = this.securityClient;
-        var headers = __assign(__assign(__assign({}, GetHeadersFromRequest(req.headers)), reqBodyHeaders), config === null || config === void 0 ? void 0 : config.headers);
-        var qpSerializer = GetQueryParamSerializer(req.queryParams);
+        var client = this._securityClient;
+        var headers = __assign(__assign(__assign({}, utils.GetHeadersFromRequest(req.headers)), reqBodyHeaders), config === null || config === void 0 ? void 0 : config.headers);
+        var qpSerializer = utils.GetQueryParamSerializer(req.queryParams);
         var requestConfig = __assign(__assign({}, config), { params: req.queryParams, paramsSerializer: qpSerializer });
         var body;
         if (reqBody instanceof FormData)
@@ -4067,16 +4007,15 @@ var SDK = /** @class */ (function () {
         else
             body = __assign({}, reqBody);
         return client
-            .post(url, body, __assign({ headers: headers }, requestConfig))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "post", headers: headers, data: body }, requestConfig)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
-                    if (MatchContentType(contentType, "text/xml")) {
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -4084,8 +4023,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 480:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 480:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -4093,8 +4032,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 481:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 481:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -4102,8 +4041,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 482:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 482:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -4111,8 +4050,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 483:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 483:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -4125,25 +4064,25 @@ var SDK = /** @class */ (function () {
         })
             .catch(function (error) { throw error; });
     };
-    SDK.prototype.PostDeleteDbParameterGroup = function (req, config) {
+    SDK.prototype.postDeleteDbParameterGroup = function (req, config) {
         var _a;
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.PostDeleteDbParameterGroupRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = baseURL.replace(/\/$/, "") + "/#Action=DeleteDBParameterGroup";
         var _b = [{}, {}], reqBodyHeaders = _b[0], reqBody = _b[1];
         try {
-            _a = SerializeRequestBody(req), reqBodyHeaders = _a[0], reqBody = _a[1];
+            _a = utils.SerializeRequestBody(req), reqBodyHeaders = _a[0], reqBody = _a[1];
         }
         catch (e) {
             if (e instanceof Error) {
                 throw new Error("Error serializing request body, cause: ".concat(e.message));
             }
         }
-        var client = this.securityClient;
-        var headers = __assign(__assign(__assign({}, GetHeadersFromRequest(req.headers)), reqBodyHeaders), config === null || config === void 0 ? void 0 : config.headers);
-        var qpSerializer = GetQueryParamSerializer(req.queryParams);
+        var client = this._securityClient;
+        var headers = __assign(__assign(__assign({}, utils.GetHeadersFromRequest(req.headers)), reqBodyHeaders), config === null || config === void 0 ? void 0 : config.headers);
+        var qpSerializer = utils.GetQueryParamSerializer(req.queryParams);
         var requestConfig = __assign(__assign({}, config), { params: req.queryParams, paramsSerializer: qpSerializer });
         var body;
         if (reqBody instanceof FormData)
@@ -4151,18 +4090,17 @@ var SDK = /** @class */ (function () {
         else
             body = __assign({}, reqBody);
         return client
-            .post(url, body, __assign({ headers: headers }, requestConfig))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "post", headers: headers, data: body }, requestConfig)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
                     break;
-                case 480:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 480:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -4170,8 +4108,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 481:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 481:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -4184,25 +4122,25 @@ var SDK = /** @class */ (function () {
         })
             .catch(function (error) { throw error; });
     };
-    SDK.prototype.PostDeleteDbSecurityGroup = function (req, config) {
+    SDK.prototype.postDeleteDbSecurityGroup = function (req, config) {
         var _a;
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.PostDeleteDbSecurityGroupRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = baseURL.replace(/\/$/, "") + "/#Action=DeleteDBSecurityGroup";
         var _b = [{}, {}], reqBodyHeaders = _b[0], reqBody = _b[1];
         try {
-            _a = SerializeRequestBody(req), reqBodyHeaders = _a[0], reqBody = _a[1];
+            _a = utils.SerializeRequestBody(req), reqBodyHeaders = _a[0], reqBody = _a[1];
         }
         catch (e) {
             if (e instanceof Error) {
                 throw new Error("Error serializing request body, cause: ".concat(e.message));
             }
         }
-        var client = this.securityClient;
-        var headers = __assign(__assign(__assign({}, GetHeadersFromRequest(req.headers)), reqBodyHeaders), config === null || config === void 0 ? void 0 : config.headers);
-        var qpSerializer = GetQueryParamSerializer(req.queryParams);
+        var client = this._securityClient;
+        var headers = __assign(__assign(__assign({}, utils.GetHeadersFromRequest(req.headers)), reqBodyHeaders), config === null || config === void 0 ? void 0 : config.headers);
+        var qpSerializer = utils.GetQueryParamSerializer(req.queryParams);
         var requestConfig = __assign(__assign({}, config), { params: req.queryParams, paramsSerializer: qpSerializer });
         var body;
         if (reqBody instanceof FormData)
@@ -4210,18 +4148,17 @@ var SDK = /** @class */ (function () {
         else
             body = __assign({}, reqBody);
         return client
-            .post(url, body, __assign({ headers: headers }, requestConfig))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "post", headers: headers, data: body }, requestConfig)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
                     break;
-                case 480:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 480:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -4229,8 +4166,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 481:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 481:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -4243,25 +4180,25 @@ var SDK = /** @class */ (function () {
         })
             .catch(function (error) { throw error; });
     };
-    SDK.prototype.PostDeleteDbSnapshot = function (req, config) {
+    SDK.prototype.postDeleteDbSnapshot = function (req, config) {
         var _a;
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.PostDeleteDbSnapshotRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = baseURL.replace(/\/$/, "") + "/#Action=DeleteDBSnapshot";
         var _b = [{}, {}], reqBodyHeaders = _b[0], reqBody = _b[1];
         try {
-            _a = SerializeRequestBody(req), reqBodyHeaders = _a[0], reqBody = _a[1];
+            _a = utils.SerializeRequestBody(req), reqBodyHeaders = _a[0], reqBody = _a[1];
         }
         catch (e) {
             if (e instanceof Error) {
                 throw new Error("Error serializing request body, cause: ".concat(e.message));
             }
         }
-        var client = this.securityClient;
-        var headers = __assign(__assign(__assign({}, GetHeadersFromRequest(req.headers)), reqBodyHeaders), config === null || config === void 0 ? void 0 : config.headers);
-        var qpSerializer = GetQueryParamSerializer(req.queryParams);
+        var client = this._securityClient;
+        var headers = __assign(__assign(__assign({}, utils.GetHeadersFromRequest(req.headers)), reqBodyHeaders), config === null || config === void 0 ? void 0 : config.headers);
+        var qpSerializer = utils.GetQueryParamSerializer(req.queryParams);
         var requestConfig = __assign(__assign({}, config), { params: req.queryParams, paramsSerializer: qpSerializer });
         var body;
         if (reqBody instanceof FormData)
@@ -4269,16 +4206,15 @@ var SDK = /** @class */ (function () {
         else
             body = __assign({}, reqBody);
         return client
-            .post(url, body, __assign({ headers: headers }, requestConfig))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "post", headers: headers, data: body }, requestConfig)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
-                    if (MatchContentType(contentType, "text/xml")) {
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -4286,8 +4222,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 480:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 480:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -4295,8 +4231,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 481:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 481:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -4309,25 +4245,25 @@ var SDK = /** @class */ (function () {
         })
             .catch(function (error) { throw error; });
     };
-    SDK.prototype.PostDeleteDbSubnetGroup = function (req, config) {
+    SDK.prototype.postDeleteDbSubnetGroup = function (req, config) {
         var _a;
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.PostDeleteDbSubnetGroupRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = baseURL.replace(/\/$/, "") + "/#Action=DeleteDBSubnetGroup";
         var _b = [{}, {}], reqBodyHeaders = _b[0], reqBody = _b[1];
         try {
-            _a = SerializeRequestBody(req), reqBodyHeaders = _a[0], reqBody = _a[1];
+            _a = utils.SerializeRequestBody(req), reqBodyHeaders = _a[0], reqBody = _a[1];
         }
         catch (e) {
             if (e instanceof Error) {
                 throw new Error("Error serializing request body, cause: ".concat(e.message));
             }
         }
-        var client = this.securityClient;
-        var headers = __assign(__assign(__assign({}, GetHeadersFromRequest(req.headers)), reqBodyHeaders), config === null || config === void 0 ? void 0 : config.headers);
-        var qpSerializer = GetQueryParamSerializer(req.queryParams);
+        var client = this._securityClient;
+        var headers = __assign(__assign(__assign({}, utils.GetHeadersFromRequest(req.headers)), reqBodyHeaders), config === null || config === void 0 ? void 0 : config.headers);
+        var qpSerializer = utils.GetQueryParamSerializer(req.queryParams);
         var requestConfig = __assign(__assign({}, config), { params: req.queryParams, paramsSerializer: qpSerializer });
         var body;
         if (reqBody instanceof FormData)
@@ -4335,18 +4271,17 @@ var SDK = /** @class */ (function () {
         else
             body = __assign({}, reqBody);
         return client
-            .post(url, body, __assign({ headers: headers }, requestConfig))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "post", headers: headers, data: body }, requestConfig)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
                     break;
-                case 480:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 480:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -4354,8 +4289,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 481:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 481:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -4363,8 +4298,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 482:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 482:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -4377,25 +4312,25 @@ var SDK = /** @class */ (function () {
         })
             .catch(function (error) { throw error; });
     };
-    SDK.prototype.PostDeleteEventSubscription = function (req, config) {
+    SDK.prototype.postDeleteEventSubscription = function (req, config) {
         var _a;
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.PostDeleteEventSubscriptionRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = baseURL.replace(/\/$/, "") + "/#Action=DeleteEventSubscription";
         var _b = [{}, {}], reqBodyHeaders = _b[0], reqBody = _b[1];
         try {
-            _a = SerializeRequestBody(req), reqBodyHeaders = _a[0], reqBody = _a[1];
+            _a = utils.SerializeRequestBody(req), reqBodyHeaders = _a[0], reqBody = _a[1];
         }
         catch (e) {
             if (e instanceof Error) {
                 throw new Error("Error serializing request body, cause: ".concat(e.message));
             }
         }
-        var client = this.securityClient;
-        var headers = __assign(__assign(__assign({}, GetHeadersFromRequest(req.headers)), reqBodyHeaders), config === null || config === void 0 ? void 0 : config.headers);
-        var qpSerializer = GetQueryParamSerializer(req.queryParams);
+        var client = this._securityClient;
+        var headers = __assign(__assign(__assign({}, utils.GetHeadersFromRequest(req.headers)), reqBodyHeaders), config === null || config === void 0 ? void 0 : config.headers);
+        var qpSerializer = utils.GetQueryParamSerializer(req.queryParams);
         var requestConfig = __assign(__assign({}, config), { params: req.queryParams, paramsSerializer: qpSerializer });
         var body;
         if (reqBody instanceof FormData)
@@ -4403,16 +4338,15 @@ var SDK = /** @class */ (function () {
         else
             body = __assign({}, reqBody);
         return client
-            .post(url, body, __assign({ headers: headers }, requestConfig))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "post", headers: headers, data: body }, requestConfig)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
-                    if (MatchContentType(contentType, "text/xml")) {
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -4420,8 +4354,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 480:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 480:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -4429,8 +4363,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 481:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 481:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -4443,25 +4377,25 @@ var SDK = /** @class */ (function () {
         })
             .catch(function (error) { throw error; });
     };
-    SDK.prototype.PostDeleteOptionGroup = function (req, config) {
+    SDK.prototype.postDeleteOptionGroup = function (req, config) {
         var _a;
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.PostDeleteOptionGroupRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = baseURL.replace(/\/$/, "") + "/#Action=DeleteOptionGroup";
         var _b = [{}, {}], reqBodyHeaders = _b[0], reqBody = _b[1];
         try {
-            _a = SerializeRequestBody(req), reqBodyHeaders = _a[0], reqBody = _a[1];
+            _a = utils.SerializeRequestBody(req), reqBodyHeaders = _a[0], reqBody = _a[1];
         }
         catch (e) {
             if (e instanceof Error) {
                 throw new Error("Error serializing request body, cause: ".concat(e.message));
             }
         }
-        var client = this.securityClient;
-        var headers = __assign(__assign(__assign({}, GetHeadersFromRequest(req.headers)), reqBodyHeaders), config === null || config === void 0 ? void 0 : config.headers);
-        var qpSerializer = GetQueryParamSerializer(req.queryParams);
+        var client = this._securityClient;
+        var headers = __assign(__assign(__assign({}, utils.GetHeadersFromRequest(req.headers)), reqBodyHeaders), config === null || config === void 0 ? void 0 : config.headers);
+        var qpSerializer = utils.GetQueryParamSerializer(req.queryParams);
         var requestConfig = __assign(__assign({}, config), { params: req.queryParams, paramsSerializer: qpSerializer });
         var body;
         if (reqBody instanceof FormData)
@@ -4469,18 +4403,17 @@ var SDK = /** @class */ (function () {
         else
             body = __assign({}, reqBody);
         return client
-            .post(url, body, __assign({ headers: headers }, requestConfig))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "post", headers: headers, data: body }, requestConfig)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
                     break;
-                case 480:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 480:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -4488,8 +4421,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 481:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 481:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -4502,25 +4435,25 @@ var SDK = /** @class */ (function () {
         })
             .catch(function (error) { throw error; });
     };
-    SDK.prototype.PostDescribeDbEngineVersions = function (req, config) {
+    SDK.prototype.postDescribeDbEngineVersions = function (req, config) {
         var _a;
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.PostDescribeDbEngineVersionsRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = baseURL.replace(/\/$/, "") + "/#Action=DescribeDBEngineVersions";
         var _b = [{}, {}], reqBodyHeaders = _b[0], reqBody = _b[1];
         try {
-            _a = SerializeRequestBody(req), reqBodyHeaders = _a[0], reqBody = _a[1];
+            _a = utils.SerializeRequestBody(req), reqBodyHeaders = _a[0], reqBody = _a[1];
         }
         catch (e) {
             if (e instanceof Error) {
                 throw new Error("Error serializing request body, cause: ".concat(e.message));
             }
         }
-        var client = this.securityClient;
-        var headers = __assign(__assign(__assign({}, GetHeadersFromRequest(req.headers)), reqBodyHeaders), config === null || config === void 0 ? void 0 : config.headers);
-        var qpSerializer = GetQueryParamSerializer(req.queryParams);
+        var client = this._securityClient;
+        var headers = __assign(__assign(__assign({}, utils.GetHeadersFromRequest(req.headers)), reqBodyHeaders), config === null || config === void 0 ? void 0 : config.headers);
+        var qpSerializer = utils.GetQueryParamSerializer(req.queryParams);
         var requestConfig = __assign(__assign({}, config), { params: req.queryParams, paramsSerializer: qpSerializer });
         var body;
         if (reqBody instanceof FormData)
@@ -4528,16 +4461,15 @@ var SDK = /** @class */ (function () {
         else
             body = __assign({}, reqBody);
         return client
-            .post(url, body, __assign({ headers: headers }, requestConfig))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "post", headers: headers, data: body }, requestConfig)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
-                    if (MatchContentType(contentType, "text/xml")) {
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -4550,25 +4482,25 @@ var SDK = /** @class */ (function () {
         })
             .catch(function (error) { throw error; });
     };
-    SDK.prototype.PostDescribeDbInstances = function (req, config) {
+    SDK.prototype.postDescribeDbInstances = function (req, config) {
         var _a;
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.PostDescribeDbInstancesRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = baseURL.replace(/\/$/, "") + "/#Action=DescribeDBInstances";
         var _b = [{}, {}], reqBodyHeaders = _b[0], reqBody = _b[1];
         try {
-            _a = SerializeRequestBody(req), reqBodyHeaders = _a[0], reqBody = _a[1];
+            _a = utils.SerializeRequestBody(req), reqBodyHeaders = _a[0], reqBody = _a[1];
         }
         catch (e) {
             if (e instanceof Error) {
                 throw new Error("Error serializing request body, cause: ".concat(e.message));
             }
         }
-        var client = this.securityClient;
-        var headers = __assign(__assign(__assign({}, GetHeadersFromRequest(req.headers)), reqBodyHeaders), config === null || config === void 0 ? void 0 : config.headers);
-        var qpSerializer = GetQueryParamSerializer(req.queryParams);
+        var client = this._securityClient;
+        var headers = __assign(__assign(__assign({}, utils.GetHeadersFromRequest(req.headers)), reqBodyHeaders), config === null || config === void 0 ? void 0 : config.headers);
+        var qpSerializer = utils.GetQueryParamSerializer(req.queryParams);
         var requestConfig = __assign(__assign({}, config), { params: req.queryParams, paramsSerializer: qpSerializer });
         var body;
         if (reqBody instanceof FormData)
@@ -4576,16 +4508,15 @@ var SDK = /** @class */ (function () {
         else
             body = __assign({}, reqBody);
         return client
-            .post(url, body, __assign({ headers: headers }, requestConfig))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "post", headers: headers, data: body }, requestConfig)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
-                    if (MatchContentType(contentType, "text/xml")) {
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -4593,8 +4524,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 480:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 480:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -4607,25 +4538,25 @@ var SDK = /** @class */ (function () {
         })
             .catch(function (error) { throw error; });
     };
-    SDK.prototype.PostDescribeDbParameterGroups = function (req, config) {
+    SDK.prototype.postDescribeDbParameterGroups = function (req, config) {
         var _a;
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.PostDescribeDbParameterGroupsRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = baseURL.replace(/\/$/, "") + "/#Action=DescribeDBParameterGroups";
         var _b = [{}, {}], reqBodyHeaders = _b[0], reqBody = _b[1];
         try {
-            _a = SerializeRequestBody(req), reqBodyHeaders = _a[0], reqBody = _a[1];
+            _a = utils.SerializeRequestBody(req), reqBodyHeaders = _a[0], reqBody = _a[1];
         }
         catch (e) {
             if (e instanceof Error) {
                 throw new Error("Error serializing request body, cause: ".concat(e.message));
             }
         }
-        var client = this.securityClient;
-        var headers = __assign(__assign(__assign({}, GetHeadersFromRequest(req.headers)), reqBodyHeaders), config === null || config === void 0 ? void 0 : config.headers);
-        var qpSerializer = GetQueryParamSerializer(req.queryParams);
+        var client = this._securityClient;
+        var headers = __assign(__assign(__assign({}, utils.GetHeadersFromRequest(req.headers)), reqBodyHeaders), config === null || config === void 0 ? void 0 : config.headers);
+        var qpSerializer = utils.GetQueryParamSerializer(req.queryParams);
         var requestConfig = __assign(__assign({}, config), { params: req.queryParams, paramsSerializer: qpSerializer });
         var body;
         if (reqBody instanceof FormData)
@@ -4633,16 +4564,15 @@ var SDK = /** @class */ (function () {
         else
             body = __assign({}, reqBody);
         return client
-            .post(url, body, __assign({ headers: headers }, requestConfig))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "post", headers: headers, data: body }, requestConfig)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
-                    if (MatchContentType(contentType, "text/xml")) {
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -4650,8 +4580,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 480:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 480:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -4664,25 +4594,25 @@ var SDK = /** @class */ (function () {
         })
             .catch(function (error) { throw error; });
     };
-    SDK.prototype.PostDescribeDbParameters = function (req, config) {
+    SDK.prototype.postDescribeDbParameters = function (req, config) {
         var _a;
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.PostDescribeDbParametersRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = baseURL.replace(/\/$/, "") + "/#Action=DescribeDBParameters";
         var _b = [{}, {}], reqBodyHeaders = _b[0], reqBody = _b[1];
         try {
-            _a = SerializeRequestBody(req), reqBodyHeaders = _a[0], reqBody = _a[1];
+            _a = utils.SerializeRequestBody(req), reqBodyHeaders = _a[0], reqBody = _a[1];
         }
         catch (e) {
             if (e instanceof Error) {
                 throw new Error("Error serializing request body, cause: ".concat(e.message));
             }
         }
-        var client = this.securityClient;
-        var headers = __assign(__assign(__assign({}, GetHeadersFromRequest(req.headers)), reqBodyHeaders), config === null || config === void 0 ? void 0 : config.headers);
-        var qpSerializer = GetQueryParamSerializer(req.queryParams);
+        var client = this._securityClient;
+        var headers = __assign(__assign(__assign({}, utils.GetHeadersFromRequest(req.headers)), reqBodyHeaders), config === null || config === void 0 ? void 0 : config.headers);
+        var qpSerializer = utils.GetQueryParamSerializer(req.queryParams);
         var requestConfig = __assign(__assign({}, config), { params: req.queryParams, paramsSerializer: qpSerializer });
         var body;
         if (reqBody instanceof FormData)
@@ -4690,16 +4620,15 @@ var SDK = /** @class */ (function () {
         else
             body = __assign({}, reqBody);
         return client
-            .post(url, body, __assign({ headers: headers }, requestConfig))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "post", headers: headers, data: body }, requestConfig)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
-                    if (MatchContentType(contentType, "text/xml")) {
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -4707,8 +4636,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 480:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 480:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -4721,25 +4650,25 @@ var SDK = /** @class */ (function () {
         })
             .catch(function (error) { throw error; });
     };
-    SDK.prototype.PostDescribeDbSecurityGroups = function (req, config) {
+    SDK.prototype.postDescribeDbSecurityGroups = function (req, config) {
         var _a;
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.PostDescribeDbSecurityGroupsRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = baseURL.replace(/\/$/, "") + "/#Action=DescribeDBSecurityGroups";
         var _b = [{}, {}], reqBodyHeaders = _b[0], reqBody = _b[1];
         try {
-            _a = SerializeRequestBody(req), reqBodyHeaders = _a[0], reqBody = _a[1];
+            _a = utils.SerializeRequestBody(req), reqBodyHeaders = _a[0], reqBody = _a[1];
         }
         catch (e) {
             if (e instanceof Error) {
                 throw new Error("Error serializing request body, cause: ".concat(e.message));
             }
         }
-        var client = this.securityClient;
-        var headers = __assign(__assign(__assign({}, GetHeadersFromRequest(req.headers)), reqBodyHeaders), config === null || config === void 0 ? void 0 : config.headers);
-        var qpSerializer = GetQueryParamSerializer(req.queryParams);
+        var client = this._securityClient;
+        var headers = __assign(__assign(__assign({}, utils.GetHeadersFromRequest(req.headers)), reqBodyHeaders), config === null || config === void 0 ? void 0 : config.headers);
+        var qpSerializer = utils.GetQueryParamSerializer(req.queryParams);
         var requestConfig = __assign(__assign({}, config), { params: req.queryParams, paramsSerializer: qpSerializer });
         var body;
         if (reqBody instanceof FormData)
@@ -4747,16 +4676,15 @@ var SDK = /** @class */ (function () {
         else
             body = __assign({}, reqBody);
         return client
-            .post(url, body, __assign({ headers: headers }, requestConfig))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "post", headers: headers, data: body }, requestConfig)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
-                    if (MatchContentType(contentType, "text/xml")) {
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -4764,8 +4692,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 480:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 480:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -4778,25 +4706,25 @@ var SDK = /** @class */ (function () {
         })
             .catch(function (error) { throw error; });
     };
-    SDK.prototype.PostDescribeDbSnapshots = function (req, config) {
+    SDK.prototype.postDescribeDbSnapshots = function (req, config) {
         var _a;
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.PostDescribeDbSnapshotsRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = baseURL.replace(/\/$/, "") + "/#Action=DescribeDBSnapshots";
         var _b = [{}, {}], reqBodyHeaders = _b[0], reqBody = _b[1];
         try {
-            _a = SerializeRequestBody(req), reqBodyHeaders = _a[0], reqBody = _a[1];
+            _a = utils.SerializeRequestBody(req), reqBodyHeaders = _a[0], reqBody = _a[1];
         }
         catch (e) {
             if (e instanceof Error) {
                 throw new Error("Error serializing request body, cause: ".concat(e.message));
             }
         }
-        var client = this.securityClient;
-        var headers = __assign(__assign(__assign({}, GetHeadersFromRequest(req.headers)), reqBodyHeaders), config === null || config === void 0 ? void 0 : config.headers);
-        var qpSerializer = GetQueryParamSerializer(req.queryParams);
+        var client = this._securityClient;
+        var headers = __assign(__assign(__assign({}, utils.GetHeadersFromRequest(req.headers)), reqBodyHeaders), config === null || config === void 0 ? void 0 : config.headers);
+        var qpSerializer = utils.GetQueryParamSerializer(req.queryParams);
         var requestConfig = __assign(__assign({}, config), { params: req.queryParams, paramsSerializer: qpSerializer });
         var body;
         if (reqBody instanceof FormData)
@@ -4804,16 +4732,15 @@ var SDK = /** @class */ (function () {
         else
             body = __assign({}, reqBody);
         return client
-            .post(url, body, __assign({ headers: headers }, requestConfig))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "post", headers: headers, data: body }, requestConfig)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
-                    if (MatchContentType(contentType, "text/xml")) {
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -4821,8 +4748,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 480:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 480:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -4835,25 +4762,25 @@ var SDK = /** @class */ (function () {
         })
             .catch(function (error) { throw error; });
     };
-    SDK.prototype.PostDescribeDbSubnetGroups = function (req, config) {
+    SDK.prototype.postDescribeDbSubnetGroups = function (req, config) {
         var _a;
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.PostDescribeDbSubnetGroupsRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = baseURL.replace(/\/$/, "") + "/#Action=DescribeDBSubnetGroups";
         var _b = [{}, {}], reqBodyHeaders = _b[0], reqBody = _b[1];
         try {
-            _a = SerializeRequestBody(req), reqBodyHeaders = _a[0], reqBody = _a[1];
+            _a = utils.SerializeRequestBody(req), reqBodyHeaders = _a[0], reqBody = _a[1];
         }
         catch (e) {
             if (e instanceof Error) {
                 throw new Error("Error serializing request body, cause: ".concat(e.message));
             }
         }
-        var client = this.securityClient;
-        var headers = __assign(__assign(__assign({}, GetHeadersFromRequest(req.headers)), reqBodyHeaders), config === null || config === void 0 ? void 0 : config.headers);
-        var qpSerializer = GetQueryParamSerializer(req.queryParams);
+        var client = this._securityClient;
+        var headers = __assign(__assign(__assign({}, utils.GetHeadersFromRequest(req.headers)), reqBodyHeaders), config === null || config === void 0 ? void 0 : config.headers);
+        var qpSerializer = utils.GetQueryParamSerializer(req.queryParams);
         var requestConfig = __assign(__assign({}, config), { params: req.queryParams, paramsSerializer: qpSerializer });
         var body;
         if (reqBody instanceof FormData)
@@ -4861,16 +4788,15 @@ var SDK = /** @class */ (function () {
         else
             body = __assign({}, reqBody);
         return client
-            .post(url, body, __assign({ headers: headers }, requestConfig))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "post", headers: headers, data: body }, requestConfig)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
-                    if (MatchContentType(contentType, "text/xml")) {
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -4878,8 +4804,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 480:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 480:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -4892,25 +4818,25 @@ var SDK = /** @class */ (function () {
         })
             .catch(function (error) { throw error; });
     };
-    SDK.prototype.PostDescribeEngineDefaultParameters = function (req, config) {
+    SDK.prototype.postDescribeEngineDefaultParameters = function (req, config) {
         var _a;
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.PostDescribeEngineDefaultParametersRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = baseURL.replace(/\/$/, "") + "/#Action=DescribeEngineDefaultParameters";
         var _b = [{}, {}], reqBodyHeaders = _b[0], reqBody = _b[1];
         try {
-            _a = SerializeRequestBody(req), reqBodyHeaders = _a[0], reqBody = _a[1];
+            _a = utils.SerializeRequestBody(req), reqBodyHeaders = _a[0], reqBody = _a[1];
         }
         catch (e) {
             if (e instanceof Error) {
                 throw new Error("Error serializing request body, cause: ".concat(e.message));
             }
         }
-        var client = this.securityClient;
-        var headers = __assign(__assign(__assign({}, GetHeadersFromRequest(req.headers)), reqBodyHeaders), config === null || config === void 0 ? void 0 : config.headers);
-        var qpSerializer = GetQueryParamSerializer(req.queryParams);
+        var client = this._securityClient;
+        var headers = __assign(__assign(__assign({}, utils.GetHeadersFromRequest(req.headers)), reqBodyHeaders), config === null || config === void 0 ? void 0 : config.headers);
+        var qpSerializer = utils.GetQueryParamSerializer(req.queryParams);
         var requestConfig = __assign(__assign({}, config), { params: req.queryParams, paramsSerializer: qpSerializer });
         var body;
         if (reqBody instanceof FormData)
@@ -4918,16 +4844,15 @@ var SDK = /** @class */ (function () {
         else
             body = __assign({}, reqBody);
         return client
-            .post(url, body, __assign({ headers: headers }, requestConfig))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "post", headers: headers, data: body }, requestConfig)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
-                    if (MatchContentType(contentType, "text/xml")) {
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -4940,25 +4865,25 @@ var SDK = /** @class */ (function () {
         })
             .catch(function (error) { throw error; });
     };
-    SDK.prototype.PostDescribeEventCategories = function (req, config) {
+    SDK.prototype.postDescribeEventCategories = function (req, config) {
         var _a;
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.PostDescribeEventCategoriesRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = baseURL.replace(/\/$/, "") + "/#Action=DescribeEventCategories";
         var _b = [{}, {}], reqBodyHeaders = _b[0], reqBody = _b[1];
         try {
-            _a = SerializeRequestBody(req), reqBodyHeaders = _a[0], reqBody = _a[1];
+            _a = utils.SerializeRequestBody(req), reqBodyHeaders = _a[0], reqBody = _a[1];
         }
         catch (e) {
             if (e instanceof Error) {
                 throw new Error("Error serializing request body, cause: ".concat(e.message));
             }
         }
-        var client = this.securityClient;
-        var headers = __assign(__assign(__assign({}, GetHeadersFromRequest(req.headers)), reqBodyHeaders), config === null || config === void 0 ? void 0 : config.headers);
-        var qpSerializer = GetQueryParamSerializer(req.queryParams);
+        var client = this._securityClient;
+        var headers = __assign(__assign(__assign({}, utils.GetHeadersFromRequest(req.headers)), reqBodyHeaders), config === null || config === void 0 ? void 0 : config.headers);
+        var qpSerializer = utils.GetQueryParamSerializer(req.queryParams);
         var requestConfig = __assign(__assign({}, config), { params: req.queryParams, paramsSerializer: qpSerializer });
         var body;
         if (reqBody instanceof FormData)
@@ -4966,16 +4891,15 @@ var SDK = /** @class */ (function () {
         else
             body = __assign({}, reqBody);
         return client
-            .post(url, body, __assign({ headers: headers }, requestConfig))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "post", headers: headers, data: body }, requestConfig)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
-                    if (MatchContentType(contentType, "text/xml")) {
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -4988,25 +4912,25 @@ var SDK = /** @class */ (function () {
         })
             .catch(function (error) { throw error; });
     };
-    SDK.prototype.PostDescribeEventSubscriptions = function (req, config) {
+    SDK.prototype.postDescribeEventSubscriptions = function (req, config) {
         var _a;
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.PostDescribeEventSubscriptionsRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = baseURL.replace(/\/$/, "") + "/#Action=DescribeEventSubscriptions";
         var _b = [{}, {}], reqBodyHeaders = _b[0], reqBody = _b[1];
         try {
-            _a = SerializeRequestBody(req), reqBodyHeaders = _a[0], reqBody = _a[1];
+            _a = utils.SerializeRequestBody(req), reqBodyHeaders = _a[0], reqBody = _a[1];
         }
         catch (e) {
             if (e instanceof Error) {
                 throw new Error("Error serializing request body, cause: ".concat(e.message));
             }
         }
-        var client = this.securityClient;
-        var headers = __assign(__assign(__assign({}, GetHeadersFromRequest(req.headers)), reqBodyHeaders), config === null || config === void 0 ? void 0 : config.headers);
-        var qpSerializer = GetQueryParamSerializer(req.queryParams);
+        var client = this._securityClient;
+        var headers = __assign(__assign(__assign({}, utils.GetHeadersFromRequest(req.headers)), reqBodyHeaders), config === null || config === void 0 ? void 0 : config.headers);
+        var qpSerializer = utils.GetQueryParamSerializer(req.queryParams);
         var requestConfig = __assign(__assign({}, config), { params: req.queryParams, paramsSerializer: qpSerializer });
         var body;
         if (reqBody instanceof FormData)
@@ -5014,16 +4938,15 @@ var SDK = /** @class */ (function () {
         else
             body = __assign({}, reqBody);
         return client
-            .post(url, body, __assign({ headers: headers }, requestConfig))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "post", headers: headers, data: body }, requestConfig)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
-                    if (MatchContentType(contentType, "text/xml")) {
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -5031,8 +4954,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 480:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 480:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -5045,25 +4968,25 @@ var SDK = /** @class */ (function () {
         })
             .catch(function (error) { throw error; });
     };
-    SDK.prototype.PostDescribeEvents = function (req, config) {
+    SDK.prototype.postDescribeEvents = function (req, config) {
         var _a;
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.PostDescribeEventsRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = baseURL.replace(/\/$/, "") + "/#Action=DescribeEvents";
         var _b = [{}, {}], reqBodyHeaders = _b[0], reqBody = _b[1];
         try {
-            _a = SerializeRequestBody(req), reqBodyHeaders = _a[0], reqBody = _a[1];
+            _a = utils.SerializeRequestBody(req), reqBodyHeaders = _a[0], reqBody = _a[1];
         }
         catch (e) {
             if (e instanceof Error) {
                 throw new Error("Error serializing request body, cause: ".concat(e.message));
             }
         }
-        var client = this.securityClient;
-        var headers = __assign(__assign(__assign({}, GetHeadersFromRequest(req.headers)), reqBodyHeaders), config === null || config === void 0 ? void 0 : config.headers);
-        var qpSerializer = GetQueryParamSerializer(req.queryParams);
+        var client = this._securityClient;
+        var headers = __assign(__assign(__assign({}, utils.GetHeadersFromRequest(req.headers)), reqBodyHeaders), config === null || config === void 0 ? void 0 : config.headers);
+        var qpSerializer = utils.GetQueryParamSerializer(req.queryParams);
         var requestConfig = __assign(__assign({}, config), { params: req.queryParams, paramsSerializer: qpSerializer });
         var body;
         if (reqBody instanceof FormData)
@@ -5071,16 +4994,15 @@ var SDK = /** @class */ (function () {
         else
             body = __assign({}, reqBody);
         return client
-            .post(url, body, __assign({ headers: headers }, requestConfig))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "post", headers: headers, data: body }, requestConfig)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
-                    if (MatchContentType(contentType, "text/xml")) {
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -5093,25 +5015,25 @@ var SDK = /** @class */ (function () {
         })
             .catch(function (error) { throw error; });
     };
-    SDK.prototype.PostDescribeOptionGroupOptions = function (req, config) {
+    SDK.prototype.postDescribeOptionGroupOptions = function (req, config) {
         var _a;
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.PostDescribeOptionGroupOptionsRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = baseURL.replace(/\/$/, "") + "/#Action=DescribeOptionGroupOptions";
         var _b = [{}, {}], reqBodyHeaders = _b[0], reqBody = _b[1];
         try {
-            _a = SerializeRequestBody(req), reqBodyHeaders = _a[0], reqBody = _a[1];
+            _a = utils.SerializeRequestBody(req), reqBodyHeaders = _a[0], reqBody = _a[1];
         }
         catch (e) {
             if (e instanceof Error) {
                 throw new Error("Error serializing request body, cause: ".concat(e.message));
             }
         }
-        var client = this.securityClient;
-        var headers = __assign(__assign(__assign({}, GetHeadersFromRequest(req.headers)), reqBodyHeaders), config === null || config === void 0 ? void 0 : config.headers);
-        var qpSerializer = GetQueryParamSerializer(req.queryParams);
+        var client = this._securityClient;
+        var headers = __assign(__assign(__assign({}, utils.GetHeadersFromRequest(req.headers)), reqBodyHeaders), config === null || config === void 0 ? void 0 : config.headers);
+        var qpSerializer = utils.GetQueryParamSerializer(req.queryParams);
         var requestConfig = __assign(__assign({}, config), { params: req.queryParams, paramsSerializer: qpSerializer });
         var body;
         if (reqBody instanceof FormData)
@@ -5119,16 +5041,15 @@ var SDK = /** @class */ (function () {
         else
             body = __assign({}, reqBody);
         return client
-            .post(url, body, __assign({ headers: headers }, requestConfig))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "post", headers: headers, data: body }, requestConfig)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
-                    if (MatchContentType(contentType, "text/xml")) {
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -5141,25 +5062,25 @@ var SDK = /** @class */ (function () {
         })
             .catch(function (error) { throw error; });
     };
-    SDK.prototype.PostDescribeOptionGroups = function (req, config) {
+    SDK.prototype.postDescribeOptionGroups = function (req, config) {
         var _a;
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.PostDescribeOptionGroupsRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = baseURL.replace(/\/$/, "") + "/#Action=DescribeOptionGroups";
         var _b = [{}, {}], reqBodyHeaders = _b[0], reqBody = _b[1];
         try {
-            _a = SerializeRequestBody(req), reqBodyHeaders = _a[0], reqBody = _a[1];
+            _a = utils.SerializeRequestBody(req), reqBodyHeaders = _a[0], reqBody = _a[1];
         }
         catch (e) {
             if (e instanceof Error) {
                 throw new Error("Error serializing request body, cause: ".concat(e.message));
             }
         }
-        var client = this.securityClient;
-        var headers = __assign(__assign(__assign({}, GetHeadersFromRequest(req.headers)), reqBodyHeaders), config === null || config === void 0 ? void 0 : config.headers);
-        var qpSerializer = GetQueryParamSerializer(req.queryParams);
+        var client = this._securityClient;
+        var headers = __assign(__assign(__assign({}, utils.GetHeadersFromRequest(req.headers)), reqBodyHeaders), config === null || config === void 0 ? void 0 : config.headers);
+        var qpSerializer = utils.GetQueryParamSerializer(req.queryParams);
         var requestConfig = __assign(__assign({}, config), { params: req.queryParams, paramsSerializer: qpSerializer });
         var body;
         if (reqBody instanceof FormData)
@@ -5167,16 +5088,15 @@ var SDK = /** @class */ (function () {
         else
             body = __assign({}, reqBody);
         return client
-            .post(url, body, __assign({ headers: headers }, requestConfig))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "post", headers: headers, data: body }, requestConfig)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
-                    if (MatchContentType(contentType, "text/xml")) {
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -5184,8 +5104,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 480:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 480:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -5198,25 +5118,25 @@ var SDK = /** @class */ (function () {
         })
             .catch(function (error) { throw error; });
     };
-    SDK.prototype.PostDescribeOrderableDbInstanceOptions = function (req, config) {
+    SDK.prototype.postDescribeOrderableDbInstanceOptions = function (req, config) {
         var _a;
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.PostDescribeOrderableDbInstanceOptionsRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = baseURL.replace(/\/$/, "") + "/#Action=DescribeOrderableDBInstanceOptions";
         var _b = [{}, {}], reqBodyHeaders = _b[0], reqBody = _b[1];
         try {
-            _a = SerializeRequestBody(req), reqBodyHeaders = _a[0], reqBody = _a[1];
+            _a = utils.SerializeRequestBody(req), reqBodyHeaders = _a[0], reqBody = _a[1];
         }
         catch (e) {
             if (e instanceof Error) {
                 throw new Error("Error serializing request body, cause: ".concat(e.message));
             }
         }
-        var client = this.securityClient;
-        var headers = __assign(__assign(__assign({}, GetHeadersFromRequest(req.headers)), reqBodyHeaders), config === null || config === void 0 ? void 0 : config.headers);
-        var qpSerializer = GetQueryParamSerializer(req.queryParams);
+        var client = this._securityClient;
+        var headers = __assign(__assign(__assign({}, utils.GetHeadersFromRequest(req.headers)), reqBodyHeaders), config === null || config === void 0 ? void 0 : config.headers);
+        var qpSerializer = utils.GetQueryParamSerializer(req.queryParams);
         var requestConfig = __assign(__assign({}, config), { params: req.queryParams, paramsSerializer: qpSerializer });
         var body;
         if (reqBody instanceof FormData)
@@ -5224,16 +5144,15 @@ var SDK = /** @class */ (function () {
         else
             body = __assign({}, reqBody);
         return client
-            .post(url, body, __assign({ headers: headers }, requestConfig))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "post", headers: headers, data: body }, requestConfig)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
-                    if (MatchContentType(contentType, "text/xml")) {
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -5246,25 +5165,25 @@ var SDK = /** @class */ (function () {
         })
             .catch(function (error) { throw error; });
     };
-    SDK.prototype.PostDescribeReservedDbInstances = function (req, config) {
+    SDK.prototype.postDescribeReservedDbInstances = function (req, config) {
         var _a;
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.PostDescribeReservedDbInstancesRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = baseURL.replace(/\/$/, "") + "/#Action=DescribeReservedDBInstances";
         var _b = [{}, {}], reqBodyHeaders = _b[0], reqBody = _b[1];
         try {
-            _a = SerializeRequestBody(req), reqBodyHeaders = _a[0], reqBody = _a[1];
+            _a = utils.SerializeRequestBody(req), reqBodyHeaders = _a[0], reqBody = _a[1];
         }
         catch (e) {
             if (e instanceof Error) {
                 throw new Error("Error serializing request body, cause: ".concat(e.message));
             }
         }
-        var client = this.securityClient;
-        var headers = __assign(__assign(__assign({}, GetHeadersFromRequest(req.headers)), reqBodyHeaders), config === null || config === void 0 ? void 0 : config.headers);
-        var qpSerializer = GetQueryParamSerializer(req.queryParams);
+        var client = this._securityClient;
+        var headers = __assign(__assign(__assign({}, utils.GetHeadersFromRequest(req.headers)), reqBodyHeaders), config === null || config === void 0 ? void 0 : config.headers);
+        var qpSerializer = utils.GetQueryParamSerializer(req.queryParams);
         var requestConfig = __assign(__assign({}, config), { params: req.queryParams, paramsSerializer: qpSerializer });
         var body;
         if (reqBody instanceof FormData)
@@ -5272,16 +5191,15 @@ var SDK = /** @class */ (function () {
         else
             body = __assign({}, reqBody);
         return client
-            .post(url, body, __assign({ headers: headers }, requestConfig))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "post", headers: headers, data: body }, requestConfig)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
-                    if (MatchContentType(contentType, "text/xml")) {
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -5289,8 +5207,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 480:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 480:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -5303,25 +5221,25 @@ var SDK = /** @class */ (function () {
         })
             .catch(function (error) { throw error; });
     };
-    SDK.prototype.PostDescribeReservedDbInstancesOfferings = function (req, config) {
+    SDK.prototype.postDescribeReservedDbInstancesOfferings = function (req, config) {
         var _a;
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.PostDescribeReservedDbInstancesOfferingsRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = baseURL.replace(/\/$/, "") + "/#Action=DescribeReservedDBInstancesOfferings";
         var _b = [{}, {}], reqBodyHeaders = _b[0], reqBody = _b[1];
         try {
-            _a = SerializeRequestBody(req), reqBodyHeaders = _a[0], reqBody = _a[1];
+            _a = utils.SerializeRequestBody(req), reqBodyHeaders = _a[0], reqBody = _a[1];
         }
         catch (e) {
             if (e instanceof Error) {
                 throw new Error("Error serializing request body, cause: ".concat(e.message));
             }
         }
-        var client = this.securityClient;
-        var headers = __assign(__assign(__assign({}, GetHeadersFromRequest(req.headers)), reqBodyHeaders), config === null || config === void 0 ? void 0 : config.headers);
-        var qpSerializer = GetQueryParamSerializer(req.queryParams);
+        var client = this._securityClient;
+        var headers = __assign(__assign(__assign({}, utils.GetHeadersFromRequest(req.headers)), reqBodyHeaders), config === null || config === void 0 ? void 0 : config.headers);
+        var qpSerializer = utils.GetQueryParamSerializer(req.queryParams);
         var requestConfig = __assign(__assign({}, config), { params: req.queryParams, paramsSerializer: qpSerializer });
         var body;
         if (reqBody instanceof FormData)
@@ -5329,16 +5247,15 @@ var SDK = /** @class */ (function () {
         else
             body = __assign({}, reqBody);
         return client
-            .post(url, body, __assign({ headers: headers }, requestConfig))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "post", headers: headers, data: body }, requestConfig)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
-                    if (MatchContentType(contentType, "text/xml")) {
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -5346,8 +5263,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 480:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 480:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -5360,25 +5277,25 @@ var SDK = /** @class */ (function () {
         })
             .catch(function (error) { throw error; });
     };
-    SDK.prototype.PostListTagsForResource = function (req, config) {
+    SDK.prototype.postListTagsForResource = function (req, config) {
         var _a;
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.PostListTagsForResourceRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = baseURL.replace(/\/$/, "") + "/#Action=ListTagsForResource";
         var _b = [{}, {}], reqBodyHeaders = _b[0], reqBody = _b[1];
         try {
-            _a = SerializeRequestBody(req), reqBodyHeaders = _a[0], reqBody = _a[1];
+            _a = utils.SerializeRequestBody(req), reqBodyHeaders = _a[0], reqBody = _a[1];
         }
         catch (e) {
             if (e instanceof Error) {
                 throw new Error("Error serializing request body, cause: ".concat(e.message));
             }
         }
-        var client = this.securityClient;
-        var headers = __assign(__assign(__assign({}, GetHeadersFromRequest(req.headers)), reqBodyHeaders), config === null || config === void 0 ? void 0 : config.headers);
-        var qpSerializer = GetQueryParamSerializer(req.queryParams);
+        var client = this._securityClient;
+        var headers = __assign(__assign(__assign({}, utils.GetHeadersFromRequest(req.headers)), reqBodyHeaders), config === null || config === void 0 ? void 0 : config.headers);
+        var qpSerializer = utils.GetQueryParamSerializer(req.queryParams);
         var requestConfig = __assign(__assign({}, config), { params: req.queryParams, paramsSerializer: qpSerializer });
         var body;
         if (reqBody instanceof FormData)
@@ -5386,16 +5303,15 @@ var SDK = /** @class */ (function () {
         else
             body = __assign({}, reqBody);
         return client
-            .post(url, body, __assign({ headers: headers }, requestConfig))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "post", headers: headers, data: body }, requestConfig)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
-                    if (MatchContentType(contentType, "text/xml")) {
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -5403,8 +5319,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 480:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 480:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -5412,8 +5328,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 481:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 481:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -5426,25 +5342,25 @@ var SDK = /** @class */ (function () {
         })
             .catch(function (error) { throw error; });
     };
-    SDK.prototype.PostModifyDbInstance = function (req, config) {
+    SDK.prototype.postModifyDbInstance = function (req, config) {
         var _a;
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.PostModifyDbInstanceRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = baseURL.replace(/\/$/, "") + "/#Action=ModifyDBInstance";
         var _b = [{}, {}], reqBodyHeaders = _b[0], reqBody = _b[1];
         try {
-            _a = SerializeRequestBody(req), reqBodyHeaders = _a[0], reqBody = _a[1];
+            _a = utils.SerializeRequestBody(req), reqBodyHeaders = _a[0], reqBody = _a[1];
         }
         catch (e) {
             if (e instanceof Error) {
                 throw new Error("Error serializing request body, cause: ".concat(e.message));
             }
         }
-        var client = this.securityClient;
-        var headers = __assign(__assign(__assign({}, GetHeadersFromRequest(req.headers)), reqBodyHeaders), config === null || config === void 0 ? void 0 : config.headers);
-        var qpSerializer = GetQueryParamSerializer(req.queryParams);
+        var client = this._securityClient;
+        var headers = __assign(__assign(__assign({}, utils.GetHeadersFromRequest(req.headers)), reqBodyHeaders), config === null || config === void 0 ? void 0 : config.headers);
+        var qpSerializer = utils.GetQueryParamSerializer(req.queryParams);
         var requestConfig = __assign(__assign({}, config), { params: req.queryParams, paramsSerializer: qpSerializer });
         var body;
         if (reqBody instanceof FormData)
@@ -5452,16 +5368,15 @@ var SDK = /** @class */ (function () {
         else
             body = __assign({}, reqBody);
         return client
-            .post(url, body, __assign({ headers: headers }, requestConfig))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "post", headers: headers, data: body }, requestConfig)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
-                    if (MatchContentType(contentType, "text/xml")) {
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -5469,8 +5384,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 480:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 480:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -5478,8 +5393,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 481:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 481:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -5487,8 +5402,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 482:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 482:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -5496,8 +5411,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 483:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 483:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -5505,8 +5420,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 484:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 484:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -5514,8 +5429,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 485:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 485:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -5523,8 +5438,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 486:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 486:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -5532,8 +5447,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 487:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 487:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -5541,8 +5456,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 488:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 488:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -5550,8 +5465,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 489:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 489:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -5559,8 +5474,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 490:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 490:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -5568,8 +5483,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 491:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 491:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -5582,25 +5497,25 @@ var SDK = /** @class */ (function () {
         })
             .catch(function (error) { throw error; });
     };
-    SDK.prototype.PostModifyDbParameterGroup = function (req, config) {
+    SDK.prototype.postModifyDbParameterGroup = function (req, config) {
         var _a;
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.PostModifyDbParameterGroupRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = baseURL.replace(/\/$/, "") + "/#Action=ModifyDBParameterGroup";
         var _b = [{}, {}], reqBodyHeaders = _b[0], reqBody = _b[1];
         try {
-            _a = SerializeRequestBody(req), reqBodyHeaders = _a[0], reqBody = _a[1];
+            _a = utils.SerializeRequestBody(req), reqBodyHeaders = _a[0], reqBody = _a[1];
         }
         catch (e) {
             if (e instanceof Error) {
                 throw new Error("Error serializing request body, cause: ".concat(e.message));
             }
         }
-        var client = this.securityClient;
-        var headers = __assign(__assign(__assign({}, GetHeadersFromRequest(req.headers)), reqBodyHeaders), config === null || config === void 0 ? void 0 : config.headers);
-        var qpSerializer = GetQueryParamSerializer(req.queryParams);
+        var client = this._securityClient;
+        var headers = __assign(__assign(__assign({}, utils.GetHeadersFromRequest(req.headers)), reqBodyHeaders), config === null || config === void 0 ? void 0 : config.headers);
+        var qpSerializer = utils.GetQueryParamSerializer(req.queryParams);
         var requestConfig = __assign(__assign({}, config), { params: req.queryParams, paramsSerializer: qpSerializer });
         var body;
         if (reqBody instanceof FormData)
@@ -5608,16 +5523,15 @@ var SDK = /** @class */ (function () {
         else
             body = __assign({}, reqBody);
         return client
-            .post(url, body, __assign({ headers: headers }, requestConfig))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "post", headers: headers, data: body }, requestConfig)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
-                    if (MatchContentType(contentType, "text/xml")) {
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -5625,8 +5539,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 480:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 480:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -5634,8 +5548,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 481:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 481:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -5648,25 +5562,25 @@ var SDK = /** @class */ (function () {
         })
             .catch(function (error) { throw error; });
     };
-    SDK.prototype.PostModifyDbSubnetGroup = function (req, config) {
+    SDK.prototype.postModifyDbSubnetGroup = function (req, config) {
         var _a;
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.PostModifyDbSubnetGroupRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = baseURL.replace(/\/$/, "") + "/#Action=ModifyDBSubnetGroup";
         var _b = [{}, {}], reqBodyHeaders = _b[0], reqBody = _b[1];
         try {
-            _a = SerializeRequestBody(req), reqBodyHeaders = _a[0], reqBody = _a[1];
+            _a = utils.SerializeRequestBody(req), reqBodyHeaders = _a[0], reqBody = _a[1];
         }
         catch (e) {
             if (e instanceof Error) {
                 throw new Error("Error serializing request body, cause: ".concat(e.message));
             }
         }
-        var client = this.securityClient;
-        var headers = __assign(__assign(__assign({}, GetHeadersFromRequest(req.headers)), reqBodyHeaders), config === null || config === void 0 ? void 0 : config.headers);
-        var qpSerializer = GetQueryParamSerializer(req.queryParams);
+        var client = this._securityClient;
+        var headers = __assign(__assign(__assign({}, utils.GetHeadersFromRequest(req.headers)), reqBodyHeaders), config === null || config === void 0 ? void 0 : config.headers);
+        var qpSerializer = utils.GetQueryParamSerializer(req.queryParams);
         var requestConfig = __assign(__assign({}, config), { params: req.queryParams, paramsSerializer: qpSerializer });
         var body;
         if (reqBody instanceof FormData)
@@ -5674,16 +5588,15 @@ var SDK = /** @class */ (function () {
         else
             body = __assign({}, reqBody);
         return client
-            .post(url, body, __assign({ headers: headers }, requestConfig))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "post", headers: headers, data: body }, requestConfig)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
-                    if (MatchContentType(contentType, "text/xml")) {
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -5691,8 +5604,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 480:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 480:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -5700,8 +5613,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 481:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 481:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -5709,8 +5622,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 482:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 482:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -5718,8 +5631,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 483:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 483:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -5727,8 +5640,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 484:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 484:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -5741,25 +5654,25 @@ var SDK = /** @class */ (function () {
         })
             .catch(function (error) { throw error; });
     };
-    SDK.prototype.PostModifyEventSubscription = function (req, config) {
+    SDK.prototype.postModifyEventSubscription = function (req, config) {
         var _a;
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.PostModifyEventSubscriptionRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = baseURL.replace(/\/$/, "") + "/#Action=ModifyEventSubscription";
         var _b = [{}, {}], reqBodyHeaders = _b[0], reqBody = _b[1];
         try {
-            _a = SerializeRequestBody(req), reqBodyHeaders = _a[0], reqBody = _a[1];
+            _a = utils.SerializeRequestBody(req), reqBodyHeaders = _a[0], reqBody = _a[1];
         }
         catch (e) {
             if (e instanceof Error) {
                 throw new Error("Error serializing request body, cause: ".concat(e.message));
             }
         }
-        var client = this.securityClient;
-        var headers = __assign(__assign(__assign({}, GetHeadersFromRequest(req.headers)), reqBodyHeaders), config === null || config === void 0 ? void 0 : config.headers);
-        var qpSerializer = GetQueryParamSerializer(req.queryParams);
+        var client = this._securityClient;
+        var headers = __assign(__assign(__assign({}, utils.GetHeadersFromRequest(req.headers)), reqBodyHeaders), config === null || config === void 0 ? void 0 : config.headers);
+        var qpSerializer = utils.GetQueryParamSerializer(req.queryParams);
         var requestConfig = __assign(__assign({}, config), { params: req.queryParams, paramsSerializer: qpSerializer });
         var body;
         if (reqBody instanceof FormData)
@@ -5767,16 +5680,15 @@ var SDK = /** @class */ (function () {
         else
             body = __assign({}, reqBody);
         return client
-            .post(url, body, __assign({ headers: headers }, requestConfig))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "post", headers: headers, data: body }, requestConfig)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
-                    if (MatchContentType(contentType, "text/xml")) {
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -5784,8 +5696,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 480:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 480:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -5793,8 +5705,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 481:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 481:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -5802,8 +5714,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 482:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 482:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -5811,8 +5723,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 483:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 483:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -5820,8 +5732,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 484:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 484:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -5829,8 +5741,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 485:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 485:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -5843,25 +5755,25 @@ var SDK = /** @class */ (function () {
         })
             .catch(function (error) { throw error; });
     };
-    SDK.prototype.PostModifyOptionGroup = function (req, config) {
+    SDK.prototype.postModifyOptionGroup = function (req, config) {
         var _a;
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.PostModifyOptionGroupRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = baseURL.replace(/\/$/, "") + "/#Action=ModifyOptionGroup";
         var _b = [{}, {}], reqBodyHeaders = _b[0], reqBody = _b[1];
         try {
-            _a = SerializeRequestBody(req), reqBodyHeaders = _a[0], reqBody = _a[1];
+            _a = utils.SerializeRequestBody(req), reqBodyHeaders = _a[0], reqBody = _a[1];
         }
         catch (e) {
             if (e instanceof Error) {
                 throw new Error("Error serializing request body, cause: ".concat(e.message));
             }
         }
-        var client = this.securityClient;
-        var headers = __assign(__assign(__assign({}, GetHeadersFromRequest(req.headers)), reqBodyHeaders), config === null || config === void 0 ? void 0 : config.headers);
-        var qpSerializer = GetQueryParamSerializer(req.queryParams);
+        var client = this._securityClient;
+        var headers = __assign(__assign(__assign({}, utils.GetHeadersFromRequest(req.headers)), reqBodyHeaders), config === null || config === void 0 ? void 0 : config.headers);
+        var qpSerializer = utils.GetQueryParamSerializer(req.queryParams);
         var requestConfig = __assign(__assign({}, config), { params: req.queryParams, paramsSerializer: qpSerializer });
         var body;
         if (reqBody instanceof FormData)
@@ -5869,16 +5781,15 @@ var SDK = /** @class */ (function () {
         else
             body = __assign({}, reqBody);
         return client
-            .post(url, body, __assign({ headers: headers }, requestConfig))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "post", headers: headers, data: body }, requestConfig)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
-                    if (MatchContentType(contentType, "text/xml")) {
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -5886,8 +5797,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 480:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 480:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -5895,8 +5806,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 481:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 481:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -5909,25 +5820,25 @@ var SDK = /** @class */ (function () {
         })
             .catch(function (error) { throw error; });
     };
-    SDK.prototype.PostPromoteReadReplica = function (req, config) {
+    SDK.prototype.postPromoteReadReplica = function (req, config) {
         var _a;
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.PostPromoteReadReplicaRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = baseURL.replace(/\/$/, "") + "/#Action=PromoteReadReplica";
         var _b = [{}, {}], reqBodyHeaders = _b[0], reqBody = _b[1];
         try {
-            _a = SerializeRequestBody(req), reqBodyHeaders = _a[0], reqBody = _a[1];
+            _a = utils.SerializeRequestBody(req), reqBodyHeaders = _a[0], reqBody = _a[1];
         }
         catch (e) {
             if (e instanceof Error) {
                 throw new Error("Error serializing request body, cause: ".concat(e.message));
             }
         }
-        var client = this.securityClient;
-        var headers = __assign(__assign(__assign({}, GetHeadersFromRequest(req.headers)), reqBodyHeaders), config === null || config === void 0 ? void 0 : config.headers);
-        var qpSerializer = GetQueryParamSerializer(req.queryParams);
+        var client = this._securityClient;
+        var headers = __assign(__assign(__assign({}, utils.GetHeadersFromRequest(req.headers)), reqBodyHeaders), config === null || config === void 0 ? void 0 : config.headers);
+        var qpSerializer = utils.GetQueryParamSerializer(req.queryParams);
         var requestConfig = __assign(__assign({}, config), { params: req.queryParams, paramsSerializer: qpSerializer });
         var body;
         if (reqBody instanceof FormData)
@@ -5935,16 +5846,15 @@ var SDK = /** @class */ (function () {
         else
             body = __assign({}, reqBody);
         return client
-            .post(url, body, __assign({ headers: headers }, requestConfig))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "post", headers: headers, data: body }, requestConfig)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
-                    if (MatchContentType(contentType, "text/xml")) {
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -5952,8 +5862,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 480:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 480:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -5961,8 +5871,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 481:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 481:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -5975,25 +5885,25 @@ var SDK = /** @class */ (function () {
         })
             .catch(function (error) { throw error; });
     };
-    SDK.prototype.PostPurchaseReservedDbInstancesOffering = function (req, config) {
+    SDK.prototype.postPurchaseReservedDbInstancesOffering = function (req, config) {
         var _a;
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.PostPurchaseReservedDbInstancesOfferingRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = baseURL.replace(/\/$/, "") + "/#Action=PurchaseReservedDBInstancesOffering";
         var _b = [{}, {}], reqBodyHeaders = _b[0], reqBody = _b[1];
         try {
-            _a = SerializeRequestBody(req), reqBodyHeaders = _a[0], reqBody = _a[1];
+            _a = utils.SerializeRequestBody(req), reqBodyHeaders = _a[0], reqBody = _a[1];
         }
         catch (e) {
             if (e instanceof Error) {
                 throw new Error("Error serializing request body, cause: ".concat(e.message));
             }
         }
-        var client = this.securityClient;
-        var headers = __assign(__assign(__assign({}, GetHeadersFromRequest(req.headers)), reqBodyHeaders), config === null || config === void 0 ? void 0 : config.headers);
-        var qpSerializer = GetQueryParamSerializer(req.queryParams);
+        var client = this._securityClient;
+        var headers = __assign(__assign(__assign({}, utils.GetHeadersFromRequest(req.headers)), reqBodyHeaders), config === null || config === void 0 ? void 0 : config.headers);
+        var qpSerializer = utils.GetQueryParamSerializer(req.queryParams);
         var requestConfig = __assign(__assign({}, config), { params: req.queryParams, paramsSerializer: qpSerializer });
         var body;
         if (reqBody instanceof FormData)
@@ -6001,16 +5911,15 @@ var SDK = /** @class */ (function () {
         else
             body = __assign({}, reqBody);
         return client
-            .post(url, body, __assign({ headers: headers }, requestConfig))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "post", headers: headers, data: body }, requestConfig)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
-                    if (MatchContentType(contentType, "text/xml")) {
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -6018,8 +5927,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 480:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 480:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -6027,8 +5936,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 481:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 481:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -6036,8 +5945,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 482:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 482:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -6050,25 +5959,25 @@ var SDK = /** @class */ (function () {
         })
             .catch(function (error) { throw error; });
     };
-    SDK.prototype.PostRebootDbInstance = function (req, config) {
+    SDK.prototype.postRebootDbInstance = function (req, config) {
         var _a;
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.PostRebootDbInstanceRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = baseURL.replace(/\/$/, "") + "/#Action=RebootDBInstance";
         var _b = [{}, {}], reqBodyHeaders = _b[0], reqBody = _b[1];
         try {
-            _a = SerializeRequestBody(req), reqBodyHeaders = _a[0], reqBody = _a[1];
+            _a = utils.SerializeRequestBody(req), reqBodyHeaders = _a[0], reqBody = _a[1];
         }
         catch (e) {
             if (e instanceof Error) {
                 throw new Error("Error serializing request body, cause: ".concat(e.message));
             }
         }
-        var client = this.securityClient;
-        var headers = __assign(__assign(__assign({}, GetHeadersFromRequest(req.headers)), reqBodyHeaders), config === null || config === void 0 ? void 0 : config.headers);
-        var qpSerializer = GetQueryParamSerializer(req.queryParams);
+        var client = this._securityClient;
+        var headers = __assign(__assign(__assign({}, utils.GetHeadersFromRequest(req.headers)), reqBodyHeaders), config === null || config === void 0 ? void 0 : config.headers);
+        var qpSerializer = utils.GetQueryParamSerializer(req.queryParams);
         var requestConfig = __assign(__assign({}, config), { params: req.queryParams, paramsSerializer: qpSerializer });
         var body;
         if (reqBody instanceof FormData)
@@ -6076,16 +5985,15 @@ var SDK = /** @class */ (function () {
         else
             body = __assign({}, reqBody);
         return client
-            .post(url, body, __assign({ headers: headers }, requestConfig))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "post", headers: headers, data: body }, requestConfig)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
-                    if (MatchContentType(contentType, "text/xml")) {
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -6093,8 +6001,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 480:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 480:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -6102,8 +6010,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 481:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 481:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -6116,25 +6024,25 @@ var SDK = /** @class */ (function () {
         })
             .catch(function (error) { throw error; });
     };
-    SDK.prototype.PostRemoveSourceIdentifierFromSubscription = function (req, config) {
+    SDK.prototype.postRemoveSourceIdentifierFromSubscription = function (req, config) {
         var _a;
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.PostRemoveSourceIdentifierFromSubscriptionRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = baseURL.replace(/\/$/, "") + "/#Action=RemoveSourceIdentifierFromSubscription";
         var _b = [{}, {}], reqBodyHeaders = _b[0], reqBody = _b[1];
         try {
-            _a = SerializeRequestBody(req), reqBodyHeaders = _a[0], reqBody = _a[1];
+            _a = utils.SerializeRequestBody(req), reqBodyHeaders = _a[0], reqBody = _a[1];
         }
         catch (e) {
             if (e instanceof Error) {
                 throw new Error("Error serializing request body, cause: ".concat(e.message));
             }
         }
-        var client = this.securityClient;
-        var headers = __assign(__assign(__assign({}, GetHeadersFromRequest(req.headers)), reqBodyHeaders), config === null || config === void 0 ? void 0 : config.headers);
-        var qpSerializer = GetQueryParamSerializer(req.queryParams);
+        var client = this._securityClient;
+        var headers = __assign(__assign(__assign({}, utils.GetHeadersFromRequest(req.headers)), reqBodyHeaders), config === null || config === void 0 ? void 0 : config.headers);
+        var qpSerializer = utils.GetQueryParamSerializer(req.queryParams);
         var requestConfig = __assign(__assign({}, config), { params: req.queryParams, paramsSerializer: qpSerializer });
         var body;
         if (reqBody instanceof FormData)
@@ -6142,16 +6050,15 @@ var SDK = /** @class */ (function () {
         else
             body = __assign({}, reqBody);
         return client
-            .post(url, body, __assign({ headers: headers }, requestConfig))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "post", headers: headers, data: body }, requestConfig)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
-                    if (MatchContentType(contentType, "text/xml")) {
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -6159,8 +6066,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 480:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 480:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -6168,8 +6075,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 481:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 481:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -6182,25 +6089,25 @@ var SDK = /** @class */ (function () {
         })
             .catch(function (error) { throw error; });
     };
-    SDK.prototype.PostRemoveTagsFromResource = function (req, config) {
+    SDK.prototype.postRemoveTagsFromResource = function (req, config) {
         var _a;
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.PostRemoveTagsFromResourceRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = baseURL.replace(/\/$/, "") + "/#Action=RemoveTagsFromResource";
         var _b = [{}, {}], reqBodyHeaders = _b[0], reqBody = _b[1];
         try {
-            _a = SerializeRequestBody(req), reqBodyHeaders = _a[0], reqBody = _a[1];
+            _a = utils.SerializeRequestBody(req), reqBodyHeaders = _a[0], reqBody = _a[1];
         }
         catch (e) {
             if (e instanceof Error) {
                 throw new Error("Error serializing request body, cause: ".concat(e.message));
             }
         }
-        var client = this.securityClient;
-        var headers = __assign(__assign(__assign({}, GetHeadersFromRequest(req.headers)), reqBodyHeaders), config === null || config === void 0 ? void 0 : config.headers);
-        var qpSerializer = GetQueryParamSerializer(req.queryParams);
+        var client = this._securityClient;
+        var headers = __assign(__assign(__assign({}, utils.GetHeadersFromRequest(req.headers)), reqBodyHeaders), config === null || config === void 0 ? void 0 : config.headers);
+        var qpSerializer = utils.GetQueryParamSerializer(req.queryParams);
         var requestConfig = __assign(__assign({}, config), { params: req.queryParams, paramsSerializer: qpSerializer });
         var body;
         if (reqBody instanceof FormData)
@@ -6208,18 +6115,17 @@ var SDK = /** @class */ (function () {
         else
             body = __assign({}, reqBody);
         return client
-            .post(url, body, __assign({ headers: headers }, requestConfig))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "post", headers: headers, data: body }, requestConfig)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
                     break;
-                case 480:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 480:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -6227,8 +6133,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 481:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 481:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -6241,25 +6147,25 @@ var SDK = /** @class */ (function () {
         })
             .catch(function (error) { throw error; });
     };
-    SDK.prototype.PostResetDbParameterGroup = function (req, config) {
+    SDK.prototype.postResetDbParameterGroup = function (req, config) {
         var _a;
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.PostResetDbParameterGroupRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = baseURL.replace(/\/$/, "") + "/#Action=ResetDBParameterGroup";
         var _b = [{}, {}], reqBodyHeaders = _b[0], reqBody = _b[1];
         try {
-            _a = SerializeRequestBody(req), reqBodyHeaders = _a[0], reqBody = _a[1];
+            _a = utils.SerializeRequestBody(req), reqBodyHeaders = _a[0], reqBody = _a[1];
         }
         catch (e) {
             if (e instanceof Error) {
                 throw new Error("Error serializing request body, cause: ".concat(e.message));
             }
         }
-        var client = this.securityClient;
-        var headers = __assign(__assign(__assign({}, GetHeadersFromRequest(req.headers)), reqBodyHeaders), config === null || config === void 0 ? void 0 : config.headers);
-        var qpSerializer = GetQueryParamSerializer(req.queryParams);
+        var client = this._securityClient;
+        var headers = __assign(__assign(__assign({}, utils.GetHeadersFromRequest(req.headers)), reqBodyHeaders), config === null || config === void 0 ? void 0 : config.headers);
+        var qpSerializer = utils.GetQueryParamSerializer(req.queryParams);
         var requestConfig = __assign(__assign({}, config), { params: req.queryParams, paramsSerializer: qpSerializer });
         var body;
         if (reqBody instanceof FormData)
@@ -6267,16 +6173,15 @@ var SDK = /** @class */ (function () {
         else
             body = __assign({}, reqBody);
         return client
-            .post(url, body, __assign({ headers: headers }, requestConfig))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "post", headers: headers, data: body }, requestConfig)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
-                    if (MatchContentType(contentType, "text/xml")) {
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -6284,8 +6189,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 480:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 480:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -6293,8 +6198,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 481:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 481:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -6307,25 +6212,25 @@ var SDK = /** @class */ (function () {
         })
             .catch(function (error) { throw error; });
     };
-    SDK.prototype.PostRestoreDbInstanceFromDbSnapshot = function (req, config) {
+    SDK.prototype.postRestoreDbInstanceFromDbSnapshot = function (req, config) {
         var _a;
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.PostRestoreDbInstanceFromDbSnapshotRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = baseURL.replace(/\/$/, "") + "/#Action=RestoreDBInstanceFromDBSnapshot";
         var _b = [{}, {}], reqBodyHeaders = _b[0], reqBody = _b[1];
         try {
-            _a = SerializeRequestBody(req), reqBodyHeaders = _a[0], reqBody = _a[1];
+            _a = utils.SerializeRequestBody(req), reqBodyHeaders = _a[0], reqBody = _a[1];
         }
         catch (e) {
             if (e instanceof Error) {
                 throw new Error("Error serializing request body, cause: ".concat(e.message));
             }
         }
-        var client = this.securityClient;
-        var headers = __assign(__assign(__assign({}, GetHeadersFromRequest(req.headers)), reqBodyHeaders), config === null || config === void 0 ? void 0 : config.headers);
-        var qpSerializer = GetQueryParamSerializer(req.queryParams);
+        var client = this._securityClient;
+        var headers = __assign(__assign(__assign({}, utils.GetHeadersFromRequest(req.headers)), reqBodyHeaders), config === null || config === void 0 ? void 0 : config.headers);
+        var qpSerializer = utils.GetQueryParamSerializer(req.queryParams);
         var requestConfig = __assign(__assign({}, config), { params: req.queryParams, paramsSerializer: qpSerializer });
         var body;
         if (reqBody instanceof FormData)
@@ -6333,16 +6238,15 @@ var SDK = /** @class */ (function () {
         else
             body = __assign({}, reqBody);
         return client
-            .post(url, body, __assign({ headers: headers }, requestConfig))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "post", headers: headers, data: body }, requestConfig)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
-                    if (MatchContentType(contentType, "text/xml")) {
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -6350,8 +6254,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 480:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 480:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -6359,8 +6263,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 481:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 481:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -6368,8 +6272,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 482:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 482:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -6377,8 +6281,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 483:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 483:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -6386,8 +6290,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 484:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 484:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -6395,8 +6299,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 485:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 485:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -6404,8 +6308,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 486:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 486:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -6413,8 +6317,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 487:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 487:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -6422,8 +6326,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 488:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 488:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -6431,8 +6335,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 489:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 489:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -6440,8 +6344,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 490:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 490:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -6449,8 +6353,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 491:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 491:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -6458,8 +6362,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 492:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 492:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -6472,25 +6376,25 @@ var SDK = /** @class */ (function () {
         })
             .catch(function (error) { throw error; });
     };
-    SDK.prototype.PostRestoreDbInstanceToPointInTime = function (req, config) {
+    SDK.prototype.postRestoreDbInstanceToPointInTime = function (req, config) {
         var _a;
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.PostRestoreDbInstanceToPointInTimeRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = baseURL.replace(/\/$/, "") + "/#Action=RestoreDBInstanceToPointInTime";
         var _b = [{}, {}], reqBodyHeaders = _b[0], reqBody = _b[1];
         try {
-            _a = SerializeRequestBody(req), reqBodyHeaders = _a[0], reqBody = _a[1];
+            _a = utils.SerializeRequestBody(req), reqBodyHeaders = _a[0], reqBody = _a[1];
         }
         catch (e) {
             if (e instanceof Error) {
                 throw new Error("Error serializing request body, cause: ".concat(e.message));
             }
         }
-        var client = this.securityClient;
-        var headers = __assign(__assign(__assign({}, GetHeadersFromRequest(req.headers)), reqBodyHeaders), config === null || config === void 0 ? void 0 : config.headers);
-        var qpSerializer = GetQueryParamSerializer(req.queryParams);
+        var client = this._securityClient;
+        var headers = __assign(__assign(__assign({}, utils.GetHeadersFromRequest(req.headers)), reqBodyHeaders), config === null || config === void 0 ? void 0 : config.headers);
+        var qpSerializer = utils.GetQueryParamSerializer(req.queryParams);
         var requestConfig = __assign(__assign({}, config), { params: req.queryParams, paramsSerializer: qpSerializer });
         var body;
         if (reqBody instanceof FormData)
@@ -6498,16 +6402,15 @@ var SDK = /** @class */ (function () {
         else
             body = __assign({}, reqBody);
         return client
-            .post(url, body, __assign({ headers: headers }, requestConfig))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "post", headers: headers, data: body }, requestConfig)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
-                    if (MatchContentType(contentType, "text/xml")) {
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -6515,8 +6418,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 480:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 480:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -6524,8 +6427,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 481:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 481:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -6533,8 +6436,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 482:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 482:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -6542,8 +6445,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 483:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 483:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -6551,8 +6454,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 484:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 484:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -6560,8 +6463,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 485:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 485:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -6569,8 +6472,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 486:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 486:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -6578,8 +6481,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 487:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 487:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -6587,8 +6490,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 488:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 488:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -6596,8 +6499,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 489:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 489:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -6605,8 +6508,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 490:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 490:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -6614,8 +6517,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 491:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 491:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -6623,8 +6526,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 492:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 492:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -6632,8 +6535,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 493:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 493:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -6646,25 +6549,25 @@ var SDK = /** @class */ (function () {
         })
             .catch(function (error) { throw error; });
     };
-    SDK.prototype.PostRevokeDbSecurityGroupIngress = function (req, config) {
+    SDK.prototype.postRevokeDbSecurityGroupIngress = function (req, config) {
         var _a;
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.PostRevokeDbSecurityGroupIngressRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = baseURL.replace(/\/$/, "") + "/#Action=RevokeDBSecurityGroupIngress";
         var _b = [{}, {}], reqBodyHeaders = _b[0], reqBody = _b[1];
         try {
-            _a = SerializeRequestBody(req), reqBodyHeaders = _a[0], reqBody = _a[1];
+            _a = utils.SerializeRequestBody(req), reqBodyHeaders = _a[0], reqBody = _a[1];
         }
         catch (e) {
             if (e instanceof Error) {
                 throw new Error("Error serializing request body, cause: ".concat(e.message));
             }
         }
-        var client = this.securityClient;
-        var headers = __assign(__assign(__assign({}, GetHeadersFromRequest(req.headers)), reqBodyHeaders), config === null || config === void 0 ? void 0 : config.headers);
-        var qpSerializer = GetQueryParamSerializer(req.queryParams);
+        var client = this._securityClient;
+        var headers = __assign(__assign(__assign({}, utils.GetHeadersFromRequest(req.headers)), reqBodyHeaders), config === null || config === void 0 ? void 0 : config.headers);
+        var qpSerializer = utils.GetQueryParamSerializer(req.queryParams);
         var requestConfig = __assign(__assign({}, config), { params: req.queryParams, paramsSerializer: qpSerializer });
         var body;
         if (reqBody instanceof FormData)
@@ -6672,16 +6575,15 @@ var SDK = /** @class */ (function () {
         else
             body = __assign({}, reqBody);
         return client
-            .post(url, body, __assign({ headers: headers }, requestConfig))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "post", headers: headers, data: body }, requestConfig)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
-                    if (MatchContentType(contentType, "text/xml")) {
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -6689,8 +6591,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 480:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 480:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -6698,8 +6600,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 481:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 481:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -6707,8 +6609,8 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 482:
-                    if (MatchContentType(contentType, "text/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 482:
+                    if (utils.MatchContentType(contentType, "text/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)

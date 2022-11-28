@@ -1,32 +1,33 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetApiV1SecretsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=planId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=planId" })
   planId?: string;
 }
 
 
 export class GetApiV1SecretsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetApiV1SecretsQueryParams;
 }
 
 
 export class GetApiV1SecretsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   problemDetails?: Map<string, any>;
 
-  @Metadata({ elemType: shared.ScopedSecretResultBody })
+  @SpeakeasyMetadata({ elemType: shared.ScopedSecretResultBody })
   scopedSecretResultBodies?: shared.ScopedSecretResultBody[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

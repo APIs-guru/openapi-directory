@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { UserResponse } from "./userresponse";
+
 
 
 // PagedUserResponse
@@ -8,12 +8,12 @@ import { UserResponse } from "./userresponse";
  * List Users Response Object
 **/
 export class PagedUserResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=content", elemType: shared.UserResponse })
+  @SpeakeasyMetadata({ data: "json, name=content", elemType: UserResponse })
   content?: UserResponse[];
 
-  @Metadata({ data: "json, name=links" })
+  @SpeakeasyMetadata({ data: "json, name=links" })
   links?: any[];
 
-  @Metadata({ data: "json, name=page" })
+  @SpeakeasyMetadata({ data: "json, name=page" })
   page?: any;
 }

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // CancelOperationRequest
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * CancelOperationRequest cancels a single operation.
 **/
 export class CancelOperationRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=operationId" })
+  @SpeakeasyMetadata({ data: "json, name=operationId" })
   operationId?: string;
 
-  @Metadata({ data: "json, name=projectId" })
+  @SpeakeasyMetadata({ data: "json, name=projectId" })
   projectId?: string;
 
-  @Metadata({ data: "json, name=zone" })
+  @SpeakeasyMetadata({ data: "json, name=zone" })
   zone?: string;
 }

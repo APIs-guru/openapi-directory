@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var FslcsRequestBodyCertificateParameters = /** @class */ (function (_super) {
     __extends(FslcsRequestBodyCertificateParameters, _super);
@@ -30,11 +30,11 @@ var FslcsRequestBodyCertificateParameters = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=RefNo" }),
+        SpeakeasyMetadata({ data: "json, name=RefNo" }),
         __metadata("design:type", String)
     ], FslcsRequestBodyCertificateParameters.prototype, "refNo", void 0);
     __decorate([
-        Metadata({ data: "json, name=TokenNo" }),
+        SpeakeasyMetadata({ data: "json, name=TokenNo" }),
         __metadata("design:type", String)
     ], FslcsRequestBodyCertificateParameters.prototype, "tokenNo", void 0);
     return FslcsRequestBodyCertificateParameters;
@@ -50,19 +50,19 @@ var FslcsRequestBody = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=certificateParameters" }),
+        SpeakeasyMetadata({ data: "json, name=certificateParameters" }),
         __metadata("design:type", FslcsRequestBodyCertificateParameters)
     ], FslcsRequestBody.prototype, "certificateParameters", void 0);
     __decorate([
-        Metadata({ data: "json, name=consentArtifact" }),
+        SpeakeasyMetadata({ data: "json, name=consentArtifact" }),
         __metadata("design:type", Object)
     ], FslcsRequestBody.prototype, "consentArtifact", void 0);
     __decorate([
-        Metadata({ data: "json, name=format" }),
+        SpeakeasyMetadata({ data: "json, name=format" }),
         __metadata("design:type", String)
     ], FslcsRequestBody.prototype, "format", void 0);
     __decorate([
-        Metadata({ data: "json, name=txnId" }),
+        SpeakeasyMetadata({ data: "json, name=txnId" }),
         __metadata("design:type", String)
     ], FslcsRequestBody.prototype, "txnId", void 0);
     return FslcsRequestBody;
@@ -74,32 +74,16 @@ var FslcsSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeApiKey)
     ], FslcsSecurity.prototype, "apiKey", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeClientId)
     ], FslcsSecurity.prototype, "clientId", void 0);
     return FslcsSecurity;
 }(SpeakeasyBase));
 export { FslcsSecurity };
-var FslcsRequest = /** @class */ (function (_super) {
-    __extends(FslcsRequest, _super);
-    function FslcsRequest() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
-        __metadata("design:type", FslcsRequestBody)
-    ], FslcsRequest.prototype, "request", void 0);
-    __decorate([
-        Metadata(),
-        __metadata("design:type", FslcsSecurity)
-    ], FslcsRequest.prototype, "security", void 0);
-    return FslcsRequest;
-}(SpeakeasyBase));
-export { FslcsRequest };
 export var Fslcs400ApplicationJsonErrorEnum;
 (function (Fslcs400ApplicationJsonErrorEnum) {
     Fslcs400ApplicationJsonErrorEnum["MissingParameter"] = "missing_parameter";
@@ -122,11 +106,11 @@ var Fslcs400ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Fslcs400ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Fslcs400ApplicationJson.prototype, "errorDescription", void 0);
     return Fslcs400ApplicationJson;
@@ -148,11 +132,11 @@ var Fslcs401ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Fslcs401ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Fslcs401ApplicationJson.prototype, "errorDescription", void 0);
     return Fslcs401ApplicationJson;
@@ -174,11 +158,11 @@ var Fslcs404ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Fslcs404ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Fslcs404ApplicationJson.prototype, "errorDescription", void 0);
     return Fslcs404ApplicationJson;
@@ -198,11 +182,11 @@ var Fslcs500ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Fslcs500ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Fslcs500ApplicationJson.prototype, "errorDescription", void 0);
     return Fslcs500ApplicationJson;
@@ -222,11 +206,11 @@ var Fslcs502ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Fslcs502ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Fslcs502ApplicationJson.prototype, "errorDescription", void 0);
     return Fslcs502ApplicationJson;
@@ -246,11 +230,11 @@ var Fslcs503ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Fslcs503ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Fslcs503ApplicationJson.prototype, "errorDescription", void 0);
     return Fslcs503ApplicationJson;
@@ -270,55 +254,71 @@ var Fslcs504ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Fslcs504ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Fslcs504ApplicationJson.prototype, "errorDescription", void 0);
     return Fslcs504ApplicationJson;
 }(SpeakeasyBase));
 export { Fslcs504ApplicationJson };
+var FslcsRequest = /** @class */ (function (_super) {
+    __extends(FslcsRequest, _super);
+    function FslcsRequest() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
+        __metadata("design:type", FslcsRequestBody)
+    ], FslcsRequest.prototype, "request", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", FslcsSecurity)
+    ], FslcsRequest.prototype, "security", void 0);
+    return FslcsRequest;
+}(SpeakeasyBase));
+export { FslcsRequest };
 var FslcsResponse = /** @class */ (function (_super) {
     __extends(FslcsResponse, _super);
     function FslcsResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], FslcsResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], FslcsResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Fslcs400ApplicationJson)
     ], FslcsResponse.prototype, "fslcs400ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Fslcs401ApplicationJson)
     ], FslcsResponse.prototype, "fslcs401ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Fslcs404ApplicationJson)
     ], FslcsResponse.prototype, "fslcs404ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Fslcs500ApplicationJson)
     ], FslcsResponse.prototype, "fslcs500ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Fslcs502ApplicationJson)
     ], FslcsResponse.prototype, "fslcs502ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Fslcs503ApplicationJson)
     ], FslcsResponse.prototype, "fslcs503ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Fslcs504ApplicationJson)
     ], FslcsResponse.prototype, "fslcs504ApplicationJsonObject", void 0);
     return FslcsResponse;

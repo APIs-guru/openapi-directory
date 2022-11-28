@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CmHybridConfig } from "./cmhybridconfig";
 import { ThirdPartyOnlyConfig } from "./thirdpartyonlyconfig";
+
 
 
 // AdvertiserAdServerConfig
@@ -8,9 +9,9 @@ import { ThirdPartyOnlyConfig } from "./thirdpartyonlyconfig";
  * Ad server related settings of an advertiser.
 **/
 export class AdvertiserAdServerConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=cmHybridConfig" })
+  @SpeakeasyMetadata({ data: "json, name=cmHybridConfig" })
   cmHybridConfig?: CmHybridConfig;
 
-  @Metadata({ data: "json, name=thirdPartyOnlyConfig" })
+  @SpeakeasyMetadata({ data: "json, name=thirdPartyOnlyConfig" })
   thirdPartyOnlyConfig?: ThirdPartyOnlyConfig;
 }

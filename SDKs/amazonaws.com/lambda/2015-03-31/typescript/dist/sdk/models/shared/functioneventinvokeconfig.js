@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DestinationConfig } from "./destinationconfig";
 var FunctionEventInvokeConfig = /** @class */ (function (_super) {
     __extends(FunctionEventInvokeConfig, _super);
@@ -30,23 +30,23 @@ var FunctionEventInvokeConfig = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=DestinationConfig" }),
+        SpeakeasyMetadata({ data: "json, name=DestinationConfig" }),
         __metadata("design:type", DestinationConfig)
     ], FunctionEventInvokeConfig.prototype, "destinationConfig", void 0);
     __decorate([
-        Metadata({ data: "json, name=FunctionArn" }),
+        SpeakeasyMetadata({ data: "json, name=FunctionArn" }),
         __metadata("design:type", String)
     ], FunctionEventInvokeConfig.prototype, "functionArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=LastModified" }),
+        SpeakeasyMetadata({ data: "json, name=LastModified" }),
         __metadata("design:type", Date)
     ], FunctionEventInvokeConfig.prototype, "lastModified", void 0);
     __decorate([
-        Metadata({ data: "json, name=MaximumEventAgeInSeconds" }),
+        SpeakeasyMetadata({ data: "json, name=MaximumEventAgeInSeconds" }),
         __metadata("design:type", Number)
     ], FunctionEventInvokeConfig.prototype, "maximumEventAgeInSeconds", void 0);
     __decorate([
-        Metadata({ data: "json, name=MaximumRetryAttempts" }),
+        SpeakeasyMetadata({ data: "json, name=MaximumRetryAttempts" }),
         __metadata("design:type", Number)
     ], FunctionEventInvokeConfig.prototype, "maximumRetryAttempts", void 0);
     return FunctionEventInvokeConfig;

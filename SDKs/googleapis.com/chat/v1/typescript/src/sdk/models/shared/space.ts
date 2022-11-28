@@ -1,10 +1,18 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SpaceDetails } from "./spacedetails";
 
+
+export enum SpaceSpaceThreadingStateEnum {
+    SpaceThreadingStateUnspecified = "SPACE_THREADING_STATE_UNSPECIFIED",
+    ThreadedMessages = "THREADED_MESSAGES",
+    GroupedMessages = "GROUPED_MESSAGES",
+    UnthreadedMessages = "UNTHREADED_MESSAGES"
+}
+
 export enum SpaceTypeEnum {
-    TypeUnspecified = "TYPE_UNSPECIFIED"
-,    Room = "ROOM"
-,    Dm = "DM"
+    TypeUnspecified = "TYPE_UNSPECIFIED",
+    Room = "ROOM",
+    Dm = "DM"
 }
 
 
@@ -13,21 +21,43 @@ export enum SpaceTypeEnum {
  * A space in Google Chat. Spaces are conversations between two or more users or 1:1 messages between a user and a Chat app.
 **/
 export class Space extends SpeakeasyBase {
-  @Metadata({ data: "json, name=displayName" })
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
   displayName?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=singleUserBotDm" })
+  @SpeakeasyMetadata({ data: "json, name=singleUserBotDm" })
   singleUserBotDm?: boolean;
 
-  @Metadata({ data: "json, name=spaceDetails" })
+  @SpeakeasyMetadata({ data: "json, name=spaceDetails" })
   spaceDetails?: SpaceDetails;
 
-  @Metadata({ data: "json, name=threaded" })
+  @SpeakeasyMetadata({ data: "json, name=spaceThreadingState" })
+  spaceThreadingState?: SpaceSpaceThreadingStateEnum;
+
+  @SpeakeasyMetadata({ data: "json, name=threaded" })
   threaded?: boolean;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: SpaceTypeEnum;
+}
+
+
+// SpaceInput
+/** 
+ * A space in Google Chat. Spaces are conversations between two or more users or 1:1 messages between a user and a Chat app.
+**/
+export class SpaceInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
+  displayName?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=name" })
+  name?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=singleUserBotDm" })
+  singleUserBotDm?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=spaceDetails" })
+  spaceDetails?: SpaceDetails;
 }

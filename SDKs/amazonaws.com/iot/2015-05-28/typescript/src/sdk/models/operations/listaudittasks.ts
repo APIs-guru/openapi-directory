@@ -1,89 +1,90 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
+
 export enum ListAuditTasksTaskStatusEnum {
-    InProgress = "IN_PROGRESS"
-,    Completed = "COMPLETED"
-,    Failed = "FAILED"
-,    Canceled = "CANCELED"
+    InProgress = "IN_PROGRESS",
+    Completed = "COMPLETED",
+    Failed = "FAILED",
+    Canceled = "CANCELED"
 }
 
 export enum ListAuditTasksTaskTypeEnum {
-    OnDemandAuditTask = "ON_DEMAND_AUDIT_TASK"
-,    ScheduledAuditTask = "SCHEDULED_AUDIT_TASK"
+    OnDemandAuditTask = "ON_DEMAND_AUDIT_TASK",
+    ScheduledAuditTask = "SCHEDULED_AUDIT_TASK"
 }
 
 
 export class ListAuditTasksQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=endTime" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=endTime" })
   endTime: Date;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=maxResults" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=maxResults" })
   maxResults?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=nextToken" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=nextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=startTime" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=startTime" })
   startTime: Date;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=taskStatus" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=taskStatus" })
   taskStatus?: ListAuditTasksTaskStatusEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=taskType" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=taskType" })
   taskType?: ListAuditTasksTaskTypeEnum;
 }
 
 
 export class ListAuditTasksHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
 
 export class ListAuditTasksRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: ListAuditTasksQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: ListAuditTasksHeaders;
 }
 
 
 export class ListAuditTasksResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   internalFailureException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidRequestException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   listAuditTasksResponse?: shared.ListAuditTasksResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   throttlingException?: any;
 }

@@ -1,46 +1,47 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class Precinct extends SpeakeasyBase {
-  @Metadata({ data: "json, name=administrationRegionId" })
+  @SpeakeasyMetadata({ data: "json, name=administrationRegionId" })
   administrationRegionId?: string;
 
-  @Metadata({ data: "json, name=contestId" })
+  @SpeakeasyMetadata({ data: "json, name=contestId" })
   contestId?: string[];
 
-  @Metadata({ data: "json, name=datasetId" })
+  @SpeakeasyMetadata({ data: "json, name=datasetId" })
   datasetId?: string;
 
-  @Metadata({ data: "json, name=earlyVoteSiteId" })
+  @SpeakeasyMetadata({ data: "json, name=earlyVoteSiteId" })
   earlyVoteSiteId?: string[];
 
-  @Metadata({ data: "json, name=electoralDistrictId" })
+  @SpeakeasyMetadata({ data: "json, name=electoralDistrictId" })
   electoralDistrictId?: string[];
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=mailOnly" })
+  @SpeakeasyMetadata({ data: "json, name=mailOnly" })
   mailOnly?: boolean;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=number" })
+  @SpeakeasyMetadata({ data: "json, name=number" })
   number?: string;
 
-  @Metadata({ data: "json, name=ocdId" })
+  @SpeakeasyMetadata({ data: "json, name=ocdId" })
   ocdId?: string[];
 
-  @Metadata({ data: "json, name=pollingLocationId" })
+  @SpeakeasyMetadata({ data: "json, name=pollingLocationId" })
   pollingLocationId?: string[];
 
-  @Metadata({ data: "json, name=spatialBoundaryId" })
+  @SpeakeasyMetadata({ data: "json, name=spatialBoundaryId" })
   spatialBoundaryId?: string[];
 
-  @Metadata({ data: "json, name=splitName" })
+  @SpeakeasyMetadata({ data: "json, name=splitName" })
   splitName?: string;
 
-  @Metadata({ data: "json, name=ward" })
+  @SpeakeasyMetadata({ data: "json, name=ward" })
   ward?: string;
 }

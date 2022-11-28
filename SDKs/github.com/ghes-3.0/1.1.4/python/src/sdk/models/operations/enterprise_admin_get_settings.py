@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class EnterpriseAdminGetSettingsResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     enterprise_settings: Optional[shared.EnterpriseSettings] = field(default=None)
     

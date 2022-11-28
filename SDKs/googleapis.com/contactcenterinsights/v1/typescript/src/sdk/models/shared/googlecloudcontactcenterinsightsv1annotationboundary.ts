@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudContactcenterinsightsV1AnnotationBoundary
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A point in a conversation that marks the start or the end of an annotation.
 **/
 export class GoogleCloudContactcenterinsightsV1AnnotationBoundary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=transcriptIndex" })
+  @SpeakeasyMetadata({ data: "json, name=transcriptIndex" })
   transcriptIndex?: number;
 
-  @Metadata({ data: "json, name=wordIndex" })
+  @SpeakeasyMetadata({ data: "json, name=wordIndex" })
   wordIndex?: number;
 }

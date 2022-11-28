@@ -1,6 +1,7 @@
 
 
+
 export enum DnsResponseTypeEnum {
-    Loadbalancer = "LOADBALANCER"
-,    Endpoints = "ENDPOINTS"
+    Loadbalancer = "LOADBALANCER",
+    Endpoints = "ENDPOINTS"
 }

@@ -276,6 +276,8 @@ type MinimalRepositoryRepository struct {
 	WatchersCount          int64                                          `json:"watchers_count"`
 }
 
+// MinimalRepository
+// Minimal Repository
 type MinimalRepository struct {
 	AnonymousAccessEnabled *bool                         `json:"anonymous_access_enabled,omitempty"`
 	ArchiveURL             string                        `json:"archive_url"`

@@ -1,12 +1,18 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import filtertype_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class FilterRule:
-    filter_type: Optional[filtertype_enum.FilterTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FilterType' }})
-    value: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Value' }})
+    r"""FilterRule
+    Specifies which files, folders, and objects to include or exclude when transferring files from source to destination.
+    """
+    
+    filter_type: Optional[FilterTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('FilterType') }})
+    value: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Value') }})
     

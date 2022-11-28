@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudIntegrationsV1alphaLiftSuspensionResponse
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Response of lift Suspense
 **/
 export class GoogleCloudIntegrationsV1alphaLiftSuspensionResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=eventExecutionInfoId" })
+  @SpeakeasyMetadata({ data: "json, name=eventExecutionInfoId" })
   eventExecutionInfoId?: string;
 }

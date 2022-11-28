@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class BatchDetectDominantLanguageRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=TextList" })
+  @SpeakeasyMetadata({ data: "json, name=TextList" })
   textList: string[];
 }

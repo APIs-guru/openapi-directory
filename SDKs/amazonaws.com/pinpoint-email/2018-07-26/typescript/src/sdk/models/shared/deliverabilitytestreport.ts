@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DeliverabilityTestStatusEnum } from "./deliverabilityteststatusenum";
+
 
 
 // DeliverabilityTestReport
@@ -7,21 +8,21 @@ import { DeliverabilityTestStatusEnum } from "./deliverabilityteststatusenum";
  * An object that contains metadata related to a predictive inbox placement test.
 **/
 export class DeliverabilityTestReport extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CreateDate" })
+  @SpeakeasyMetadata({ data: "json, name=CreateDate" })
   createDate?: Date;
 
-  @Metadata({ data: "json, name=DeliverabilityTestStatus" })
+  @SpeakeasyMetadata({ data: "json, name=DeliverabilityTestStatus" })
   deliverabilityTestStatus?: DeliverabilityTestStatusEnum;
 
-  @Metadata({ data: "json, name=FromEmailAddress" })
+  @SpeakeasyMetadata({ data: "json, name=FromEmailAddress" })
   fromEmailAddress?: string;
 
-  @Metadata({ data: "json, name=ReportId" })
+  @SpeakeasyMetadata({ data: "json, name=ReportId" })
   reportId?: string;
 
-  @Metadata({ data: "json, name=ReportName" })
+  @SpeakeasyMetadata({ data: "json, name=ReportName" })
   reportName?: string;
 
-  @Metadata({ data: "json, name=Subject" })
+  @SpeakeasyMetadata({ data: "json, name=Subject" })
   subject?: string;
 }

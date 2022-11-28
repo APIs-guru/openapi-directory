@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetTransactionHashPathParams = /** @class */ (function (_super) {
     __extends(GetTransactionHashPathParams, _super);
@@ -30,7 +30,7 @@ var GetTransactionHashPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=hash" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=hash" }),
         __metadata("design:type", String)
     ], GetTransactionHashPathParams.prototype, "hash", void 0);
     return GetTransactionHashPathParams;
@@ -42,7 +42,7 @@ var GetTransactionHashSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeKey2)
     ], GetTransactionHashSecurity.prototype, "key2", void 0);
     return GetTransactionHashSecurity;
@@ -54,11 +54,11 @@ var GetTransactionHashRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetTransactionHashPathParams)
     ], GetTransactionHashRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetTransactionHashSecurity)
     ], GetTransactionHashRequest.prototype, "security", void 0);
     return GetTransactionHashRequest;
@@ -70,19 +70,19 @@ var GetTransactionHashResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetTransactionHashResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Map)
     ], GetTransactionHashResponse.prototype, "empty", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Map)
     ], GetTransactionHashResponse.prototype, "headers", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetTransactionHashResponse.prototype, "statusCode", void 0);
     return GetTransactionHashResponse;

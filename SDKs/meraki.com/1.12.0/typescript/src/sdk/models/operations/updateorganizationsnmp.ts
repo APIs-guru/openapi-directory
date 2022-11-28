@@ -1,62 +1,63 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class UpdateOrganizationSnmpPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=organizationId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=organizationId" })
   organizationId: string;
 }
 
 export enum UpdateOrganizationSnmpRequestBodyV3AuthModeEnum {
-    Md5 = "MD5"
-,    Sha = "SHA"
+    Md5 = "MD5",
+    Sha = "SHA"
 }
 
 export enum UpdateOrganizationSnmpRequestBodyV3PrivModeEnum {
-    Des = "DES"
-,    Aes128 = "AES128"
+    Des = "DES",
+    Aes128 = "AES128"
 }
 
 
 export class UpdateOrganizationSnmpRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=peerIps" })
+  @SpeakeasyMetadata({ data: "json, name=peerIps" })
   peerIps?: string[];
 
-  @Metadata({ data: "json, name=v2cEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=v2cEnabled" })
   v2cEnabled?: boolean;
 
-  @Metadata({ data: "json, name=v3AuthMode" })
+  @SpeakeasyMetadata({ data: "json, name=v3AuthMode" })
   v3AuthMode?: UpdateOrganizationSnmpRequestBodyV3AuthModeEnum;
 
-  @Metadata({ data: "json, name=v3AuthPass" })
+  @SpeakeasyMetadata({ data: "json, name=v3AuthPass" })
   v3AuthPass?: string;
 
-  @Metadata({ data: "json, name=v3Enabled" })
+  @SpeakeasyMetadata({ data: "json, name=v3Enabled" })
   v3Enabled?: boolean;
 
-  @Metadata({ data: "json, name=v3PrivMode" })
+  @SpeakeasyMetadata({ data: "json, name=v3PrivMode" })
   v3PrivMode?: UpdateOrganizationSnmpRequestBodyV3PrivModeEnum;
 
-  @Metadata({ data: "json, name=v3PrivPass" })
+  @SpeakeasyMetadata({ data: "json, name=v3PrivPass" })
   v3PrivPass?: string;
 }
 
 
 export class UpdateOrganizationSnmpRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: UpdateOrganizationSnmpPathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request?: UpdateOrganizationSnmpRequestBody;
 }
 
 
 export class UpdateOrganizationSnmpResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   updateOrganizationSnmp200ApplicationJsonObject?: Map<string, any>;
 }

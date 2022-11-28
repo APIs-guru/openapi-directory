@@ -9,10 +9,6 @@ type GetAtmsHeaders struct {
 	IfNoneMatch     *string `header:"style=simple,explode=false,name=If-None-Match"`
 }
 
-type GetAtmsRequest struct {
-	Headers GetAtmsHeaders
-}
-
 type GetAtms400ErrorObjectDescriptionEnum string
 
 const (
@@ -174,6 +170,8 @@ const (
 	GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmAccessibilityTypesEnumWheelchairAccess  GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmAccessibilityTypesEnum = "WheelchairAccess"
 )
 
+// GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmAddress
+// Postal Address
 type GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmAddress struct {
 	BuildingNumberOrName *string `json:"BuildingNumberOrName,omitempty"`
 	Country              string  `json:"Country"`
@@ -184,6 +182,8 @@ type GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmAddress struct {
 	TownName             *string `json:"TownName,omitempty"`
 }
 
+// GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmGeographicLocation
+// Geographic Coordinates
 type GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmGeographicLocation struct {
 	Latitude  string `json:"Latitude"`
 	Longitude string `json:"Longitude"`
@@ -244,21 +244,29 @@ const (
 	GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmOrganisationBrandTrademarkIpoCodeEnumEu GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmOrganisationBrandTrademarkIpoCodeEnum = "EU"
 )
 
+// GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmOrganisationBrand
+// Brand
 type GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmOrganisationBrand struct {
 	TrademarkID      string                                                                                         `json:"TrademarkID"`
 	TrademarkIpoCode GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmOrganisationBrandTrademarkIpoCodeEnum `json:"TrademarkIPOCode"`
 }
 
+// GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmOrganisationParentOrganisationOrganisationName
+// Organisation Name
 type GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmOrganisationParentOrganisationOrganisationName struct {
 	LegalName string `json:"LegalName"`
 }
 
+// GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmOrganisationParentOrganisation
+// Parent organisation
 type GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmOrganisationParentOrganisation struct {
 	Bic              *string                                                                                                 `json:"BIC,omitempty"`
 	Lei              *string                                                                                                 `json:"LEI,omitempty"`
 	OrganisationName GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmOrganisationParentOrganisationOrganisationName `json:"OrganisationName"`
 }
 
+// GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmOrganisation
+// Organisation
 type GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmOrganisation struct {
 	Brand              GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmOrganisationBrand              `json:"Brand"`
 	ParentOrganisation GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmOrganisationParentOrganisation `json:"ParentOrganisation"`
@@ -310,6 +318,10 @@ type GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaData struct {
 type GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSON struct {
 	Data []GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtm    `json:"data"`
 	Meta GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaData `json:"meta"`
+}
+
+type GetAtmsRequest struct {
+	Headers GetAtmsHeaders
 }
 
 type GetAtmsResponse struct {

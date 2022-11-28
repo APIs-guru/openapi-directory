@@ -1,5 +1,7 @@
 package shared
 
+// SegmentDetection
+// A technical cue or shot detection segment detected in a video. An array of <code>SegmentDetection</code> objects containing all segments detected in a stored video is returned by <a>GetSegmentDetection</a>.
 type SegmentDetection struct {
 	DurationFrames       *int64               `json:"DurationFrames,omitempty"`
 	DurationMillis       *int64               `json:"DurationMillis,omitempty"`

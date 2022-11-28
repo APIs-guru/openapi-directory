@@ -4,7 +4,7 @@ from typing import Optional
 
 @dataclass
 class GetExportXlsRegistrierkassenRegistrierkasseUUIDBelegePathParams:
-    registrierkasse_uuid: str = field(default=None, metadata={'path_param': { 'field_name': 'registrierkasseUuid', 'style': 'simple', 'explode': False }})
+    registrierkasse_uuid: str = field(metadata={'path_param': { 'field_name': 'registrierkasseUuid', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -15,12 +15,12 @@ class GetExportXlsRegistrierkassenRegistrierkasseUUIDBelegeQueryParams:
 
 @dataclass
 class GetExportXlsRegistrierkassenRegistrierkasseUUIDBelegeRequest:
-    path_params: GetExportXlsRegistrierkassenRegistrierkasseUUIDBelegePathParams = field(default=None)
-    query_params: GetExportXlsRegistrierkassenRegistrierkasseUUIDBelegeQueryParams = field(default=None)
+    path_params: GetExportXlsRegistrierkassenRegistrierkasseUUIDBelegePathParams = field()
+    query_params: GetExportXlsRegistrierkassenRegistrierkasseUUIDBelegeQueryParams = field()
     
 
 @dataclass
 class GetExportXlsRegistrierkassenRegistrierkasseUUIDBelegeResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

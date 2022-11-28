@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetDescribeEventCategoriesActionEnum(str, Enum):
     DESCRIBE_EVENT_CATEGORIES = "DescribeEventCategories"
@@ -10,9 +14,9 @@ class GetDescribeEventCategoriesVersionEnum(str, Enum):
 
 @dataclass
 class GetDescribeEventCategoriesQueryParams:
-    action: GetDescribeEventCategoriesActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetDescribeEventCategoriesActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: GetDescribeEventCategoriesVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     source_type: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'SourceType', 'style': 'form', 'explode': True }})
-    version: GetDescribeEventCategoriesVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -28,13 +32,13 @@ class GetDescribeEventCategoriesHeaders:
 
 @dataclass
 class GetDescribeEventCategoriesRequest:
-    query_params: GetDescribeEventCategoriesQueryParams = field(default=None)
-    headers: GetDescribeEventCategoriesHeaders = field(default=None)
+    headers: GetDescribeEventCategoriesHeaders = field()
+    query_params: GetDescribeEventCategoriesQueryParams = field()
     
 
 @dataclass
 class GetDescribeEventCategoriesResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

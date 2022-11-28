@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class GetStoryPathParams:
-    story_id: str = field(default=None, metadata={'path_param': { 'field_name': 'story_id', 'style': 'simple', 'explode': False }})
+    story_id: str = field(metadata={'path_param': { 'field_name': 'story_id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -14,37 +14,22 @@ class GetStoryQueryParams:
     
 
 @dataclass
-class GetStorySecurityOption1:
-    oauth2_implicit: shared.SchemeOauth2Implicit = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    
-
-@dataclass
-class GetStorySecurityOption2:
-    oauth2_code: shared.SchemeOauth2Code = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    
-
-@dataclass
-class GetStorySecurityOption3:
-    api_key: shared.SchemeAPIKey = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'query' }})
-    
-
-@dataclass
 class GetStorySecurity:
-    option1: Optional[GetStorySecurityOption1] = field(default=None, metadata={'security': { 'option': True }})
-    option2: Optional[GetStorySecurityOption2] = field(default=None, metadata={'security': { 'option': True }})
-    option3: Optional[GetStorySecurityOption3] = field(default=None, metadata={'security': { 'option': True }})
+    api_key: Optional[shared.SchemeAPIKey] = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'query' }})
+    oauth2_code: Optional[shared.SchemeOauth2Code] = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2_implicit: Optional[shared.SchemeOauth2Implicit] = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class GetStoryRequest:
-    path_params: GetStoryPathParams = field(default=None)
-    query_params: GetStoryQueryParams = field(default=None)
-    security: GetStorySecurity = field(default=None)
+    path_params: GetStoryPathParams = field()
+    query_params: GetStoryQueryParams = field()
+    security: GetStorySecurity = field()
     
 
 @dataclass
 class GetStoryResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     story: Optional[shared.Story] = field(default=None)
     

@@ -22,12 +22,16 @@ const (
 	UpdateNetworkSwitchAccessPolicyRequestBodyHostModeEnumMultiAuth   UpdateNetworkSwitchAccessPolicyRequestBodyHostModeEnum = "Multi-Auth"
 )
 
+// UpdateNetworkSwitchAccessPolicyRequestBodyRadiusCriticalAuth
+// Critical auth settings for when authentication is rejected by the RADIUS server
 type UpdateNetworkSwitchAccessPolicyRequestBodyRadiusCriticalAuth struct {
 	DataVlanID        *int64 `json:"dataVlanId,omitempty"`
 	SuspendPortBounce *bool  `json:"suspendPortBounce,omitempty"`
 	VoiceVlanID       *int64 `json:"voiceVlanId,omitempty"`
 }
 
+// UpdateNetworkSwitchAccessPolicyRequestBodyRadius
+// Object for RADIUS Settings
 type UpdateNetworkSwitchAccessPolicyRequestBodyRadius struct {
 	CriticalAuth *UpdateNetworkSwitchAccessPolicyRequestBodyRadiusCriticalAuth `json:"criticalAuth,omitempty"`
 }

@@ -22,30 +22,30 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var CheckRequest = /** @class */ (function (_super) {
     __extends(CheckRequest, _super);
     function CheckRequest() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "form, name=api_key;" }),
+        SpeakeasyMetadata({ data: "form, name=api_key;" }),
         __metadata("design:type", String)
     ], CheckRequest.prototype, "apiKey", void 0);
     __decorate([
-        Metadata({ data: "form, name=api_secret;" }),
+        SpeakeasyMetadata({ data: "form, name=api_secret;" }),
         __metadata("design:type", String)
     ], CheckRequest.prototype, "apiSecret", void 0);
     __decorate([
-        Metadata({ data: "form, name=code;" }),
+        SpeakeasyMetadata({ data: "form, name=code;" }),
         __metadata("design:type", String)
     ], CheckRequest.prototype, "code", void 0);
     __decorate([
-        Metadata({ data: "form, name=ip_address;" }),
+        SpeakeasyMetadata({ data: "form, name=ip_address;" }),
         __metadata("design:type", String)
     ], CheckRequest.prototype, "ipAddress", void 0);
     __decorate([
-        Metadata({ data: "form, name=request_id;" }),
+        SpeakeasyMetadata({ data: "form, name=request_id;" }),
         __metadata("design:type", String)
     ], CheckRequest.prototype, "requestId", void 0);
     return CheckRequest;

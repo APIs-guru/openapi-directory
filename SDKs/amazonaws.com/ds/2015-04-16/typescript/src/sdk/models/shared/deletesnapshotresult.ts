@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // DeleteSnapshotResult
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Contains the results of the <a>DeleteSnapshot</a> operation.
 **/
 export class DeleteSnapshotResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=SnapshotId" })
+  @SpeakeasyMetadata({ data: "json, name=SnapshotId" })
   snapshotId?: string;
 }

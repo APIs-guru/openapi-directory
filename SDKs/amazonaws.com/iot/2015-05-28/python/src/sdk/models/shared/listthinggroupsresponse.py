@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import groupnameandarn
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ListThingGroupsResponse:
-    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'nextToken' }})
-    thing_groups: Optional[List[groupnameandarn.GroupNameAndArn]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'thingGroups' }})
+    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('nextToken') }})
+    thing_groups: Optional[List[GroupNameAndArn]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('thingGroups') }})
     

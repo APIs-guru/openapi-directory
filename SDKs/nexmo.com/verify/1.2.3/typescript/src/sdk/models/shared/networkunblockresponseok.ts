@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // NetworkUnblockResponseOk
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Success
 **/
 export class NetworkUnblockResponseOk extends SpeakeasyBase {
-  @Metadata({ data: "json, name=network" })
+  @SpeakeasyMetadata({ data: "json, name=network" })
   network?: string;
 
-  @Metadata({ data: "json, name=unblocked_until" })
+  @SpeakeasyMetadata({ data: "json, name=unblocked_until" })
   unblockedUntil?: string;
 }

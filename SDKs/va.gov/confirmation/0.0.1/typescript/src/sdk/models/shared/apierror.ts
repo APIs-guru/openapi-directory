@@ -1,18 +1,18 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ApiErrorErrors extends SpeakeasyBase {
-  @Metadata({ data: "json, name=code" })
+  @SpeakeasyMetadata({ data: "json, name=code" })
   code?: string;
 
-  @Metadata({ data: "json, name=detail" })
+  @SpeakeasyMetadata({ data: "json, name=detail" })
   detail?: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: string;
 
-  @Metadata({ data: "json, name=title" })
+  @SpeakeasyMetadata({ data: "json, name=title" })
   title?: string;
 }
 
@@ -22,6 +22,6 @@ export class ApiErrorErrors extends SpeakeasyBase {
  * API invocation or processing error
 **/
 export class ApiError extends SpeakeasyBase {
-  @Metadata({ data: "json, name=errors", elemType: shared.ApiErrorErrors })
+  @SpeakeasyMetadata({ data: "json, name=errors", elemType: ApiErrorErrors })
   errors?: ApiErrorErrors[];
 }

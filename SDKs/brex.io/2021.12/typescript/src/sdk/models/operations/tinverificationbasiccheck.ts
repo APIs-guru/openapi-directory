@@ -1,41 +1,42 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class TinVerificationBasicCheckQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=name" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=name" })
   name: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=tin" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=tin" })
   tin: string;
 }
 
 
 export class TinVerificationBasicCheckSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
   userKey: shared.SchemeUserKey;
 }
 
 
 export class TinVerificationBasicCheckRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: TinVerificationBasicCheckQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: TinVerificationBasicCheckSecurity;
 }
 
 
 export class TinVerificationBasicCheckResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   tinVerificationBasicCheck200ApplicationJsonAny?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   tinVerificationBasicCheckDefaultApplicationJsonAny?: any;
 }

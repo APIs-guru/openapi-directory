@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // EdgeMetric
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Information required for edge device metrics.
 **/
 export class EdgeMetric extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Dimension" })
+  @SpeakeasyMetadata({ data: "json, name=Dimension" })
   dimension?: string;
 
-  @Metadata({ data: "json, name=MetricName" })
+  @SpeakeasyMetadata({ data: "json, name=MetricName" })
   metricName?: string;
 
-  @Metadata({ data: "json, name=Timestamp" })
+  @SpeakeasyMetadata({ data: "json, name=Timestamp" })
   timestamp?: Date;
 
-  @Metadata({ data: "json, name=Value" })
+  @SpeakeasyMetadata({ data: "json, name=Value" })
   value?: number;
 }

@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// GetResourceConfigHistoryRequest
+// The input for the <a>GetResourceConfigHistory</a> action.
 type GetResourceConfigHistoryRequest struct {
 	ChronologicalOrder *ChronologicalOrderEnum `json:"chronologicalOrder,omitempty"`
 	EarlierTime        *time.Time              `json:"earlierTime,omitempty"`

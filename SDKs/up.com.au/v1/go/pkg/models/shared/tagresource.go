@@ -12,6 +12,8 @@ type TagResourceRelationships struct {
 	Transactions TagResourceRelationshipsTransactions `json:"transactions"`
 }
 
+// TagResource
+// Provides information about a tag.
 type TagResource struct {
 	ID            string                   `json:"id"`
 	Relationships TagResourceRelationships `json:"relationships"`

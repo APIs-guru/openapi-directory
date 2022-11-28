@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { LibraryOptions } from "./libraryoptions";
+
 
 
 // AddVirtualFolderDto
@@ -7,6 +8,6 @@ import { LibraryOptions } from "./libraryoptions";
  * Add virtual folder dto.
 **/
 export class AddVirtualFolderDto extends SpeakeasyBase {
-  @Metadata({ data: "json, name=LibraryOptions" })
+  @SpeakeasyMetadata({ data: "json, name=LibraryOptions" })
   libraryOptions?: LibraryOptions;
 }

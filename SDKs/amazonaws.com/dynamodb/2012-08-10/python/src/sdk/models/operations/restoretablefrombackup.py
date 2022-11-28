@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 class RestoreTableFromBackupXAmzTargetEnum(str, Enum):
@@ -8,6 +12,7 @@ class RestoreTableFromBackupXAmzTargetEnum(str, Enum):
 
 @dataclass
 class RestoreTableFromBackupHeaders:
+    x_amz_target: RestoreTableFromBackupXAmzTargetEnum = field(metadata={'header': { 'field_name': 'X-Amz-Target', 'style': 'simple', 'explode': False }})
     x_amz_algorithm: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Algorithm', 'style': 'simple', 'explode': False }})
     x_amz_content_sha256: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Content-Sha256', 'style': 'simple', 'explode': False }})
     x_amz_credential: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Credential', 'style': 'simple', 'explode': False }})
@@ -15,24 +20,23 @@ class RestoreTableFromBackupHeaders:
     x_amz_security_token: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Security-Token', 'style': 'simple', 'explode': False }})
     x_amz_signature: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Signature', 'style': 'simple', 'explode': False }})
     x_amz_signed_headers: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-SignedHeaders', 'style': 'simple', 'explode': False }})
-    x_amz_target: RestoreTableFromBackupXAmzTargetEnum = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Target', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class RestoreTableFromBackupRequest:
-    headers: RestoreTableFromBackupHeaders = field(default=None)
-    request: shared.RestoreTableFromBackupInput = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: RestoreTableFromBackupHeaders = field()
+    request: shared.RestoreTableFromBackupInput = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class RestoreTableFromBackupResponse:
+    content_type: str = field()
+    status_code: int = field()
     backup_in_use_exception: Optional[Any] = field(default=None)
     backup_not_found_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     internal_server_error: Optional[Any] = field(default=None)
     limit_exceeded_exception: Optional[Any] = field(default=None)
     restore_table_from_backup_output: Optional[shared.RestoreTableFromBackupOutput] = field(default=None)
-    status_code: int = field(default=None)
     table_already_exists_exception: Optional[Any] = field(default=None)
     table_in_use_exception: Optional[Any] = field(default=None)
     

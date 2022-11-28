@@ -1,50 +1,51 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetVoucherByIdPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=planId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=planId" })
   planId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=voucherId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=voucherId" })
   voucherId: string;
 }
 
 
 export class GetVoucherByIdQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=lang" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=lang" })
   lang?: string;
 }
 
 
 export class GetVoucherByIdSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   accountAuth: shared.SchemeAccountAuth;
 }
 
 
 export class GetVoucherByIdRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetVoucherByIdPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetVoucherByIdQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: GetVoucherByIdSecurity;
 }
 
 
 export class GetVoucherByIdResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   itvVoucher?: shared.ItvVoucher;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   serviceError?: shared.ServiceError;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

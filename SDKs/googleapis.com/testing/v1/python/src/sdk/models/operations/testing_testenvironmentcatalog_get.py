@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 class TestingTestEnvironmentCatalogGetEnvironmentTypeEnum(str, Enum):
@@ -13,7 +14,7 @@ class TestingTestEnvironmentCatalogGetEnvironmentTypeEnum(str, Enum):
 
 @dataclass
 class TestingTestEnvironmentCatalogGetPathParams:
-    environment_type: TestingTestEnvironmentCatalogGetEnvironmentTypeEnum = field(default=None, metadata={'path_param': { 'field_name': 'environmentType', 'style': 'simple', 'explode': False }})
+    environment_type: TestingTestEnvironmentCatalogGetEnvironmentTypeEnum = field(metadata={'path_param': { 'field_name': 'environmentType', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -34,14 +35,14 @@ class TestingTestEnvironmentCatalogGetQueryParams:
 
 @dataclass
 class TestingTestEnvironmentCatalogGetSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class TestingTestEnvironmentCatalogGetSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -52,14 +53,14 @@ class TestingTestEnvironmentCatalogGetSecurity:
 
 @dataclass
 class TestingTestEnvironmentCatalogGetRequest:
-    path_params: TestingTestEnvironmentCatalogGetPathParams = field(default=None)
-    query_params: TestingTestEnvironmentCatalogGetQueryParams = field(default=None)
-    security: TestingTestEnvironmentCatalogGetSecurity = field(default=None)
+    path_params: TestingTestEnvironmentCatalogGetPathParams = field()
+    query_params: TestingTestEnvironmentCatalogGetQueryParams = field()
+    security: TestingTestEnvironmentCatalogGetSecurity = field()
     
 
 @dataclass
 class TestingTestEnvironmentCatalogGetResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     test_environment_catalog: Optional[shared.TestEnvironmentCatalog] = field(default=None)
     

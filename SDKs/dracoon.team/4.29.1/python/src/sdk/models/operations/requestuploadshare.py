@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class RequestUploadSharePathParams:
-    share_id: int = field(default=None, metadata={'path_param': { 'field_name': 'share_id', 'style': 'simple', 'explode': False }})
+    share_id: int = field(metadata={'path_param': { 'field_name': 'share_id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -16,14 +19,14 @@ class RequestUploadShareHeaders:
 
 @dataclass
 class RequestUploadShareRequest:
-    path_params: RequestUploadSharePathParams = field(default=None)
-    headers: RequestUploadShareHeaders = field(default=None)
+    headers: RequestUploadShareHeaders = field()
+    path_params: RequestUploadSharePathParams = field()
     
 
 @dataclass
 class RequestUploadShareResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error_response: Optional[shared.ErrorResponse] = field(default=None)
-    status_code: int = field(default=None)
     upload_share: Optional[shared.UploadShare] = field(default=None)
     

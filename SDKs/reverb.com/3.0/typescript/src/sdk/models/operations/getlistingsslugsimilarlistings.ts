@@ -1,22 +1,23 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetListingsSlugSimilarListingsPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=slug" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=slug" })
   slug: string;
 }
 
 
 export class GetListingsSlugSimilarListingsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetListingsSlugSimilarListingsPathParams;
 }
 
 
 export class GetListingsSlugSimilarListingsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

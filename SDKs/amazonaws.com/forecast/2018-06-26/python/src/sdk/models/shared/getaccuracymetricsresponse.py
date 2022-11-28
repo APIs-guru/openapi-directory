@@ -1,15 +1,15 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import automloverridestrategy_enum
-from . import optimizationmetric_enum
-from . import evaluationresult
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class GetAccuracyMetricsResponse:
-    auto_ml_override_strategy: Optional[automloverridestrategy_enum.AutoMlOverrideStrategyEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AutoMLOverrideStrategy' }})
-    optimization_metric: Optional[optimizationmetric_enum.OptimizationMetricEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'OptimizationMetric' }})
-    predictor_evaluation_results: Optional[List[evaluationresult.EvaluationResult]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'PredictorEvaluationResults' }})
+    auto_ml_override_strategy: Optional[AutoMlOverrideStrategyEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('AutoMLOverrideStrategy') }})
+    optimization_metric: Optional[OptimizationMetricEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('OptimizationMetric') }})
+    predictor_evaluation_results: Optional[List[EvaluationResult]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('PredictorEvaluationResults') }})
     

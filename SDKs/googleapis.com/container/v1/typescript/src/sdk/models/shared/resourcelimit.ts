@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ResourceLimit
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Contains information about amount of some resource in the cluster. For memory, value should be in GB.
 **/
 export class ResourceLimit extends SpeakeasyBase {
-  @Metadata({ data: "json, name=maximum" })
+  @SpeakeasyMetadata({ data: "json, name=maximum" })
   maximum?: string;
 
-  @Metadata({ data: "json, name=minimum" })
+  @SpeakeasyMetadata({ data: "json, name=minimum" })
   minimum?: string;
 
-  @Metadata({ data: "json, name=resourceType" })
+  @SpeakeasyMetadata({ data: "json, name=resourceType" })
   resourceType?: string;
 }

@@ -5,6 +5,6 @@ from .slack_get_slack_get import *
 from .slack_post_slack_post import *
 from .sns_get_sns_get import *
 from .sns_post_sns_post import *
-from .topic_topic__topic_name__get import *
+from .topic_topic_topic_name_get import *
 from .twilio_message_get_twilio_get import *
 from .twilio_message_post_twilio_post import *

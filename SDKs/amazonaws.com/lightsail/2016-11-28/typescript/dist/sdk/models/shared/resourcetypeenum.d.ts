@@ -1,0 +1,22 @@
+export declare enum ResourceTypeEnum {
+    ContainerService = "ContainerService",
+    Instance = "Instance",
+    StaticIp = "StaticIp",
+    KeyPair = "KeyPair",
+    InstanceSnapshot = "InstanceSnapshot",
+    Domain = "Domain",
+    PeeredVpc = "PeeredVpc",
+    LoadBalancer = "LoadBalancer",
+    LoadBalancerTlsCertificate = "LoadBalancerTlsCertificate",
+    Disk = "Disk",
+    DiskSnapshot = "DiskSnapshot",
+    RelationalDatabase = "RelationalDatabase",
+    RelationalDatabaseSnapshot = "RelationalDatabaseSnapshot",
+    ExportSnapshotRecord = "ExportSnapshotRecord",
+    CloudFormationStackRecord = "CloudFormationStackRecord",
+    Alarm = "Alarm",
+    ContactMethod = "ContactMethod",
+    Distribution = "Distribution",
+    Certificate = "Certificate",
+    Bucket = "Bucket"
+}

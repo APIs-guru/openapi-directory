@@ -1,5 +1,7 @@
 package shared
 
+// GetComplianceDetailsByConfigRuleRequest
+// <p/>
 type GetComplianceDetailsByConfigRuleRequest struct {
 	ComplianceTypes []ComplianceTypeEnum `json:"ComplianceTypes,omitempty"`
 	ConfigRuleName  string               `json:"ConfigRuleName"`

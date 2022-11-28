@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 
 
 @dataclass
 class RemovePermissionPathParams:
-    function_name: str = field(default=None, metadata={'path_param': { 'field_name': 'FunctionName', 'style': 'simple', 'explode': False }})
-    statement_id: str = field(default=None, metadata={'path_param': { 'field_name': 'StatementId', 'style': 'simple', 'explode': False }})
+    function_name: str = field(metadata={'path_param': { 'field_name': 'FunctionName', 'style': 'simple', 'explode': False }})
+    statement_id: str = field(metadata={'path_param': { 'field_name': 'StatementId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -27,18 +30,18 @@ class RemovePermissionHeaders:
 
 @dataclass
 class RemovePermissionRequest:
-    path_params: RemovePermissionPathParams = field(default=None)
-    query_params: RemovePermissionQueryParams = field(default=None)
-    headers: RemovePermissionHeaders = field(default=None)
+    headers: RemovePermissionHeaders = field()
+    path_params: RemovePermissionPathParams = field()
+    query_params: RemovePermissionQueryParams = field()
     
 
 @dataclass
 class RemovePermissionResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     invalid_parameter_value_exception: Optional[Any] = field(default=None)
     precondition_failed_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
     service_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     too_many_requests_exception: Optional[Any] = field(default=None)
     

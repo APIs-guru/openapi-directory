@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostDescribeKeyPairsActionEnum(str, Enum):
     DESCRIBE_KEY_PAIRS = "DescribeKeyPairs"
@@ -10,8 +14,8 @@ class PostDescribeKeyPairsVersionEnum(str, Enum):
 
 @dataclass
 class PostDescribeKeyPairsQueryParams:
-    action: PostDescribeKeyPairsActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostDescribeKeyPairsVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostDescribeKeyPairsActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostDescribeKeyPairsVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostDescribeKeyPairsHeaders:
 
 @dataclass
 class PostDescribeKeyPairsRequest:
-    query_params: PostDescribeKeyPairsQueryParams = field(default=None)
-    headers: PostDescribeKeyPairsHeaders = field(default=None)
+    headers: PostDescribeKeyPairsHeaders = field()
+    query_params: PostDescribeKeyPairsQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostDescribeKeyPairsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

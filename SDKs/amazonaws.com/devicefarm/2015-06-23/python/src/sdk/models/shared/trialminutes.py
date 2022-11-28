@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass_json
 @dataclass
 class TrialMinutes:
-    remaining: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'remaining' }})
-    total: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'total' }})
+    r"""TrialMinutes
+    Represents information about free trial device minutes for an AWS account.
+    """
+    
+    remaining: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('remaining') }})
+    total: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('total') }})
     

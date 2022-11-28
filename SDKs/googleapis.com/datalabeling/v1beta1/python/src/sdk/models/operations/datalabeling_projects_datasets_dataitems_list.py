@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DatalabelingProjectsDatasetsDataItemsListPathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -28,20 +29,20 @@ class DatalabelingProjectsDatasetsDataItemsListQueryParams:
 
 @dataclass
 class DatalabelingProjectsDatasetsDataItemsListSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DatalabelingProjectsDatasetsDataItemsListRequest:
-    path_params: DatalabelingProjectsDatasetsDataItemsListPathParams = field(default=None)
-    query_params: DatalabelingProjectsDatasetsDataItemsListQueryParams = field(default=None)
-    security: DatalabelingProjectsDatasetsDataItemsListSecurity = field(default=None)
+    path_params: DatalabelingProjectsDatasetsDataItemsListPathParams = field()
+    query_params: DatalabelingProjectsDatasetsDataItemsListQueryParams = field()
+    security: DatalabelingProjectsDatasetsDataItemsListSecurity = field()
     
 
 @dataclass
 class DatalabelingProjectsDatasetsDataItemsListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_cloud_datalabeling_v1beta1_list_data_items_response: Optional[shared.GoogleCloudDatalabelingV1beta1ListDataItemsResponse] = field(default=None)
-    status_code: int = field(default=None)
     

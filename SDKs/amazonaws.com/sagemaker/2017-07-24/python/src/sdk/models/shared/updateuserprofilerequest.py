@@ -1,13 +1,17 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import usersettings
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class UpdateUserProfileRequest:
-    domain_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'DomainId' }})
-    user_profile_name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'UserProfileName' }})
-    user_settings: Optional[usersettings.UserSettings] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'UserSettings' }})
+    domain_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('DomainId') }})
+    user_profile_name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('UserProfileName') }})
+    user_settings: Optional[UserSettings] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('UserSettings') }})
     

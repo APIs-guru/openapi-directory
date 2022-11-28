@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class SubscriptionCreateRequestEventTypeEnum(str, Enum):
     CONTACT_PROPERTY_CHANGE = "contact.propertyChange"
@@ -32,7 +34,11 @@ class SubscriptionCreateRequestEventTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class SubscriptionCreateRequest:
-    active: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'active' }})
-    event_type: SubscriptionCreateRequestEventTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'eventType' }})
-    property_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'propertyName' }})
+    r"""SubscriptionCreateRequest
+    New webhook settings for an app.
+    """
+    
+    event_type: SubscriptionCreateRequestEventTypeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('eventType') }})
+    active: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('active') }})
+    property_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('propertyName') }})
     

@@ -46,7 +46,7 @@ type FormsFormsBatchUpdateSecurity struct {
 type FormsFormsBatchUpdateRequest struct {
 	PathParams  FormsFormsBatchUpdatePathParams
 	QueryParams FormsFormsBatchUpdateQueryParams
-	Request     *shared.BatchUpdateFormRequest `request:"mediaType=application/json"`
+	Request     *shared.BatchUpdateFormRequestInput `request:"mediaType=application/json"`
 	Security    FormsFormsBatchUpdateSecurity
 }
 

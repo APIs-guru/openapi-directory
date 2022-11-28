@@ -26,11 +26,6 @@ type LpgtvSecurity struct {
 	ClientID shared.SchemeClientID `security:"scheme,type=apiKey,subtype=header"`
 }
 
-type LpgtvRequest struct {
-	Request  *LpgtvRequestBody `request:"mediaType=application/json"`
-	Security LpgtvSecurity
-}
-
 type Lpgtv400ApplicationJSONErrorEnum string
 
 const (
@@ -160,6 +155,11 @@ const (
 type Lpgtv504ApplicationJSON struct {
 	Error            *Lpgtv504ApplicationJSONErrorEnum            `json:"error,omitempty"`
 	ErrorDescription *Lpgtv504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
+}
+
+type LpgtvRequest struct {
+	Request  *LpgtvRequestBody `request:"mediaType=application/json"`
+	Security LpgtvSecurity
 }
 
 type LpgtvResponse struct {

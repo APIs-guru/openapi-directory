@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// ResourceSharePermissionDetail
+// Information about an RAM permission.
 type ResourceSharePermissionDetail struct {
 	Arn                   *string    `json:"arn,omitempty"`
 	CreationTime          *time.Time `json:"creationTime,omitempty"`

@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class SmartdevicemanagementEnterprisesStructuresRoomsListPathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -27,20 +28,20 @@ class SmartdevicemanagementEnterprisesStructuresRoomsListQueryParams:
 
 @dataclass
 class SmartdevicemanagementEnterprisesStructuresRoomsListSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class SmartdevicemanagementEnterprisesStructuresRoomsListRequest:
-    path_params: SmartdevicemanagementEnterprisesStructuresRoomsListPathParams = field(default=None)
-    query_params: SmartdevicemanagementEnterprisesStructuresRoomsListQueryParams = field(default=None)
-    security: SmartdevicemanagementEnterprisesStructuresRoomsListSecurity = field(default=None)
+    path_params: SmartdevicemanagementEnterprisesStructuresRoomsListPathParams = field()
+    query_params: SmartdevicemanagementEnterprisesStructuresRoomsListQueryParams = field()
+    security: SmartdevicemanagementEnterprisesStructuresRoomsListSecurity = field()
     
 
 @dataclass
 class SmartdevicemanagementEnterprisesStructuresRoomsListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_home_enterprise_sdm_v1_list_rooms_response: Optional[shared.GoogleHomeEnterpriseSdmV1ListRoomsResponse] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,18 +1,18 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { InvalidInputProperty } from "./invalidinputproperty";
 
 
+
 export class InvalidInputExceptionInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=exceptionClassName" })
+  @SpeakeasyMetadata({ data: "json, name=exceptionClassName" })
   exceptionClassName?: string;
 
-  @Metadata({ data: "json, name=exceptionStack" })
+  @SpeakeasyMetadata({ data: "json, name=exceptionStack" })
   exceptionStack?: string[];
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message: string;
 
-  @Metadata({ data: "json, name=validationErrors", elemType: shared.InvalidInputProperty })
+  @SpeakeasyMetadata({ data: "json, name=validationErrors", elemType: InvalidInputProperty })
   validationErrors: InvalidInputProperty[];
 }

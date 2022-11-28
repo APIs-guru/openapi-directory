@@ -1,57 +1,58 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum CreateHookInputEventTypeEnum {
-    All = "all"
-,    Check = "check"
-,    ContinuousCheck = "continuous_check"
+    All = "all",
+    Check = "check",
+    ContinuousCheck = "continuous_check"
 }
 
 export enum CreateHookInputStatusEnum {
-    Enabled = "enabled"
-,    Disabled = "disabled"
+    Enabled = "enabled",
+    Disabled = "disabled"
 }
 
 export enum CreateHookInputSubscriberLanguageEnum {
-    Af = "af"
-,    Ar = "ar"
-,    Ca = "ca"
-,    Cs = "cs"
-,    Da = "da"
-,    De = "de"
-,    El = "el"
-,    En = "en"
-,    Es = "es"
-,    Fi = "fi"
-,    Fr = "fr"
-,    He = "he"
-,    Hi = "hi"
-,    Hr = "hr"
-,    Hu = "hu"
-,    Id = "id"
-,    It = "it"
-,    Ja = "ja"
-,    Ko = "ko"
-,    Ms = "ms"
-,    Nb = "nb"
-,    Nl = "nl"
-,    Pl = "pl"
-,    Pt = "pt"
-,    PrBr = "pr-BR"
-,    Ro = "ro"
-,    Ru = "ru"
-,    Sv = "sv"
-,    Th = "th"
-,    Tl = "tl"
-,    Tr = "tr"
-,    Vi = "vi"
-,    Zh = "zh"
-,    ZhCn = "zh-CN"
-,    ZhHk = "zh-HK"
+    Af = "af",
+    Ar = "ar",
+    Ca = "ca",
+    Cs = "cs",
+    Da = "da",
+    De = "de",
+    El = "el",
+    En = "en",
+    Es = "es",
+    Fi = "fi",
+    Fr = "fr",
+    He = "he",
+    Hi = "hi",
+    Hr = "hr",
+    Hu = "hu",
+    Id = "id",
+    It = "it",
+    Ja = "ja",
+    Ko = "ko",
+    Ms = "ms",
+    Nb = "nb",
+    Nl = "nl",
+    Pl = "pl",
+    Pt = "pt",
+    PrBr = "pr-BR",
+    Ro = "ro",
+    Ru = "ru",
+    Sv = "sv",
+    Th = "th",
+    Tl = "tl",
+    Tr = "tr",
+    Vi = "vi",
+    Zh = "zh",
+    ZhCn = "zh-CN",
+    ZhHk = "zh-HK"
 }
 
 export enum CreateHookInputSubscriberTypeEnum {
-    Web = "web"
-,    Email = "email"
+    Web = "web",
+    Email = "email"
 }
 
 
@@ -60,27 +61,27 @@ export enum CreateHookInputSubscriberTypeEnum {
  * Creates a hook related to previous created check.
 **/
 export class CreateHookInput extends SpeakeasyBase {
-  @Metadata({ data: "form, name=actions;" })
+  @SpeakeasyMetadata({ data: "form, name=actions;" })
   actions?: string[];
 
-  @Metadata({ data: "form, name=event_type;" })
+  @SpeakeasyMetadata({ data: "form, name=event_type;" })
   eventType: CreateHookInputEventTypeEnum;
 
-  @Metadata({ data: "form, name=status;" })
+  @SpeakeasyMetadata({ data: "form, name=status;" })
   status?: CreateHookInputStatusEnum;
 
-  @Metadata({ data: "form, name=subscriber_address;" })
+  @SpeakeasyMetadata({ data: "form, name=subscriber_address;" })
   subscriberAddress?: string;
 
-  @Metadata({ data: "form, name=subscriber_language;" })
+  @SpeakeasyMetadata({ data: "form, name=subscriber_language;" })
   subscriberLanguage?: CreateHookInputSubscriberLanguageEnum;
 
-  @Metadata({ data: "form, name=subscriber_name;" })
+  @SpeakeasyMetadata({ data: "form, name=subscriber_name;" })
   subscriberName?: string;
 
-  @Metadata({ data: "form, name=subscriber_type;" })
+  @SpeakeasyMetadata({ data: "form, name=subscriber_type;" })
   subscriberType: CreateHookInputSubscriberTypeEnum;
 
-  @Metadata({ data: "form, name=subscriber_url;" })
+  @SpeakeasyMetadata({ data: "form, name=subscriber_url;" })
   subscriberUrl?: string;
 }

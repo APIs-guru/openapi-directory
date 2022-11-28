@@ -1,17 +1,18 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Price } from "./price";
 
 
+
 export class DealTermsGuaranteedFixedPriceTermsBillingInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=currencyConversionTimeMs" })
+  @SpeakeasyMetadata({ data: "json, name=currencyConversionTimeMs" })
   currencyConversionTimeMs?: string;
 
-  @Metadata({ data: "json, name=dfpLineItemId" })
+  @SpeakeasyMetadata({ data: "json, name=dfpLineItemId" })
   dfpLineItemId?: string;
 
-  @Metadata({ data: "json, name=originalContractedQuantity" })
+  @SpeakeasyMetadata({ data: "json, name=originalContractedQuantity" })
   originalContractedQuantity?: string;
 
-  @Metadata({ data: "json, name=price" })
+  @SpeakeasyMetadata({ data: "json, name=price" })
   price?: Price;
 }

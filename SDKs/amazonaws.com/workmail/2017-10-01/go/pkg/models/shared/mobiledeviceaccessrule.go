@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// MobileDeviceAccessRule
+// A rule that controls access to mobile devices for an Amazon WorkMail group.
 type MobileDeviceAccessRule struct {
 	DateCreated               *time.Time                        `json:"DateCreated,omitempty"`
 	DateModified              *time.Time                        `json:"DateModified,omitempty"`

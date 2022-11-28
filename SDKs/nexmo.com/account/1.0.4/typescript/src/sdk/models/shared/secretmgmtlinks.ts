@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // SecretMgmtLinksSelf
@@ -6,7 +7,7 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * This resource
 **/
 export class SecretMgmtLinksSelf extends SpeakeasyBase {
-  @Metadata({ data: "json, name=href" })
+  @SpeakeasyMetadata({ data: "json, name=href" })
   href?: string;
 }
 
@@ -16,6 +17,6 @@ export class SecretMgmtLinksSelf extends SpeakeasyBase {
  * Links related to this resource
 **/
 export class SecretMgmtLinks extends SpeakeasyBase {
-  @Metadata({ data: "json, name=self" })
+  @SpeakeasyMetadata({ data: "json, name=self" })
   self?: SecretMgmtLinksSelf;
 }

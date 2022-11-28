@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { LandlordDetailsModel } from "./landlorddetailsmodel";
+
 
 
 // LandlordSettingsModel
@@ -8,6 +8,6 @@ import { LandlordDetailsModel } from "./landlorddetailsmodel";
  * Landlord Settings
 **/
 export class LandlordSettingsModel extends SpeakeasyBase {
-  @Metadata({ data: "json, name=LinkedAccounts", elemType: shared.LandlordDetailsModel })
+  @SpeakeasyMetadata({ data: "json, name=LinkedAccounts", elemType: LandlordDetailsModel })
   linkedAccounts?: LandlordDetailsModel[];
 }

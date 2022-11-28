@@ -1,5 +1,7 @@
 package shared
 
+// AccessPointDescription
+// Provides a description of an EFS file system access point.
 type AccessPointDescription struct {
 	AccessPointArn *string             `json:"AccessPointArn,omitempty"`
 	AccessPointID  *string             `json:"AccessPointId,omitempty"`

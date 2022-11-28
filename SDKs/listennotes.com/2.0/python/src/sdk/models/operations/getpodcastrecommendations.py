@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class GetPodcastRecommendationsPathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -15,20 +15,20 @@ class GetPodcastRecommendationsQueryParams:
 
 @dataclass
 class GetPodcastRecommendationsHeaders:
-    x_listen_api_key: str = field(default=None, metadata={'header': { 'field_name': 'X-ListenAPI-Key', 'style': 'simple', 'explode': False }})
+    x_listen_api_key: str = field(metadata={'header': { 'field_name': 'X-ListenAPI-Key', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetPodcastRecommendationsRequest:
-    path_params: GetPodcastRecommendationsPathParams = field(default=None)
-    query_params: GetPodcastRecommendationsQueryParams = field(default=None)
-    headers: GetPodcastRecommendationsHeaders = field(default=None)
+    headers: GetPodcastRecommendationsHeaders = field()
+    path_params: GetPodcastRecommendationsPathParams = field()
+    query_params: GetPodcastRecommendationsQueryParams = field()
     
 
 @dataclass
 class GetPodcastRecommendationsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    headers: dict[str, List[str]] = field()
+    status_code: int = field()
     get_podcast_recommendations_response: Optional[shared.GetPodcastRecommendationsResponse] = field(default=None)
-    headers: dict[str, List[str]] = field(default=None)
-    status_code: int = field(default=None)
     

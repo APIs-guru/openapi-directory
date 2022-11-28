@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CreateConnectionApiKeyAuthRequestParameters } from "./createconnectionapikeyauthrequestparameters";
 import { CreateConnectionBasicAuthRequestParameters } from "./createconnectionbasicauthrequestparameters";
 import { ConnectionHttpParameters } from "./connectionhttpparameters";
 import { CreateConnectionOAuthRequestParameters } from "./createconnectionoauthrequestparameters";
+
 
 
 // CreateConnectionAuthRequestParameters
@@ -10,15 +11,15 @@ import { CreateConnectionOAuthRequestParameters } from "./createconnectionoauthr
  * Contains the authorization parameters for the connection.
 **/
 export class CreateConnectionAuthRequestParameters extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ApiKeyAuthParameters" })
+  @SpeakeasyMetadata({ data: "json, name=ApiKeyAuthParameters" })
   apiKeyAuthParameters?: CreateConnectionApiKeyAuthRequestParameters;
 
-  @Metadata({ data: "json, name=BasicAuthParameters" })
+  @SpeakeasyMetadata({ data: "json, name=BasicAuthParameters" })
   basicAuthParameters?: CreateConnectionBasicAuthRequestParameters;
 
-  @Metadata({ data: "json, name=InvocationHttpParameters" })
+  @SpeakeasyMetadata({ data: "json, name=InvocationHttpParameters" })
   invocationHttpParameters?: ConnectionHttpParameters;
 
-  @Metadata({ data: "json, name=OAuthParameters" })
+  @SpeakeasyMetadata({ data: "json, name=OAuthParameters" })
   oAuthParameters?: CreateConnectionOAuthRequestParameters;
 }

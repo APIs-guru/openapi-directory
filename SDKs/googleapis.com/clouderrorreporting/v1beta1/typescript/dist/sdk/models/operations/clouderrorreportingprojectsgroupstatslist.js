@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var ClouderrorreportingProjectsGroupStatsListPathParams = /** @class */ (function (_super) {
     __extends(ClouderrorreportingProjectsGroupStatsListPathParams, _super);
@@ -30,7 +30,7 @@ var ClouderrorreportingProjectsGroupStatsListPathParams = /** @class */ (functio
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=projectName" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=projectName" }),
         __metadata("design:type", String)
     ], ClouderrorreportingProjectsGroupStatsListPathParams.prototype, "projectName", void 0);
     return ClouderrorreportingProjectsGroupStatsListPathParams;
@@ -65,91 +65,91 @@ var ClouderrorreportingProjectsGroupStatsListQueryParams = /** @class */ (functi
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=$.xgafv" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=$.xgafv" }),
         __metadata("design:type", String)
     ], ClouderrorreportingProjectsGroupStatsListQueryParams.prototype, "dollarXgafv", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=access_token" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=access_token" }),
         __metadata("design:type", String)
     ], ClouderrorreportingProjectsGroupStatsListQueryParams.prototype, "accessToken", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=alignment" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=alignment" }),
         __metadata("design:type", String)
     ], ClouderrorreportingProjectsGroupStatsListQueryParams.prototype, "alignment", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=alignmentTime" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=alignmentTime" }),
         __metadata("design:type", String)
     ], ClouderrorreportingProjectsGroupStatsListQueryParams.prototype, "alignmentTime", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=alt" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=alt" }),
         __metadata("design:type", String)
     ], ClouderrorreportingProjectsGroupStatsListQueryParams.prototype, "alt", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=callback" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=callback" }),
         __metadata("design:type", String)
     ], ClouderrorreportingProjectsGroupStatsListQueryParams.prototype, "callback", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=fields" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=fields" }),
         __metadata("design:type", String)
     ], ClouderrorreportingProjectsGroupStatsListQueryParams.prototype, "fields", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=groupId" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=groupId" }),
         __metadata("design:type", Array)
     ], ClouderrorreportingProjectsGroupStatsListQueryParams.prototype, "groupId", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=key" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=key" }),
         __metadata("design:type", String)
     ], ClouderrorreportingProjectsGroupStatsListQueryParams.prototype, "key", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=oauth_token" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=oauth_token" }),
         __metadata("design:type", String)
     ], ClouderrorreportingProjectsGroupStatsListQueryParams.prototype, "oauthToken", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=order" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=order" }),
         __metadata("design:type", String)
     ], ClouderrorreportingProjectsGroupStatsListQueryParams.prototype, "order", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=pageSize" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=pageSize" }),
         __metadata("design:type", Number)
     ], ClouderrorreportingProjectsGroupStatsListQueryParams.prototype, "pageSize", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=pageToken" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=pageToken" }),
         __metadata("design:type", String)
     ], ClouderrorreportingProjectsGroupStatsListQueryParams.prototype, "pageToken", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=prettyPrint" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=prettyPrint" }),
         __metadata("design:type", Boolean)
     ], ClouderrorreportingProjectsGroupStatsListQueryParams.prototype, "prettyPrint", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=quotaUser" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=quotaUser" }),
         __metadata("design:type", String)
     ], ClouderrorreportingProjectsGroupStatsListQueryParams.prototype, "quotaUser", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=serviceFilter.resourceType" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=serviceFilter.resourceType" }),
         __metadata("design:type", String)
     ], ClouderrorreportingProjectsGroupStatsListQueryParams.prototype, "serviceFilterResourceType", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=serviceFilter.service" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=serviceFilter.service" }),
         __metadata("design:type", String)
     ], ClouderrorreportingProjectsGroupStatsListQueryParams.prototype, "serviceFilterService", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=serviceFilter.version" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=serviceFilter.version" }),
         __metadata("design:type", String)
     ], ClouderrorreportingProjectsGroupStatsListQueryParams.prototype, "serviceFilterVersion", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=timeRange.period" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=timeRange.period" }),
         __metadata("design:type", String)
     ], ClouderrorreportingProjectsGroupStatsListQueryParams.prototype, "timeRangePeriod", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=timedCountDuration" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=timedCountDuration" }),
         __metadata("design:type", String)
     ], ClouderrorreportingProjectsGroupStatsListQueryParams.prototype, "timedCountDuration", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=uploadType" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=uploadType" }),
         __metadata("design:type", String)
     ], ClouderrorreportingProjectsGroupStatsListQueryParams.prototype, "uploadType", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=upload_protocol" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=upload_protocol" }),
         __metadata("design:type", String)
     ], ClouderrorreportingProjectsGroupStatsListQueryParams.prototype, "uploadProtocol", void 0);
     return ClouderrorreportingProjectsGroupStatsListQueryParams;
@@ -161,11 +161,11 @@ var ClouderrorreportingProjectsGroupStatsListSecurity = /** @class */ (function 
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2)
     ], ClouderrorreportingProjectsGroupStatsListSecurity.prototype, "oauth2", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2c)
     ], ClouderrorreportingProjectsGroupStatsListSecurity.prototype, "oauth2c", void 0);
     return ClouderrorreportingProjectsGroupStatsListSecurity;
@@ -177,15 +177,15 @@ var ClouderrorreportingProjectsGroupStatsListRequest = /** @class */ (function (
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ClouderrorreportingProjectsGroupStatsListPathParams)
     ], ClouderrorreportingProjectsGroupStatsListRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ClouderrorreportingProjectsGroupStatsListQueryParams)
     ], ClouderrorreportingProjectsGroupStatsListRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ClouderrorreportingProjectsGroupStatsListSecurity)
     ], ClouderrorreportingProjectsGroupStatsListRequest.prototype, "security", void 0);
     return ClouderrorreportingProjectsGroupStatsListRequest;
@@ -197,15 +197,15 @@ var ClouderrorreportingProjectsGroupStatsListResponse = /** @class */ (function 
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], ClouderrorreportingProjectsGroupStatsListResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.ListGroupStatsResponse)
     ], ClouderrorreportingProjectsGroupStatsListResponse.prototype, "listGroupStatsResponse", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], ClouderrorreportingProjectsGroupStatsListResponse.prototype, "statusCode", void 0);
     return ClouderrorreportingProjectsGroupStatsListResponse;

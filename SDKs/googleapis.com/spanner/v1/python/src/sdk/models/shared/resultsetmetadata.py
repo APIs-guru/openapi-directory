@@ -1,15 +1,18 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import structtype
-from . import transaction
-from . import structtype
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ResultSetMetadata:
-    row_type: Optional[structtype.StructType] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'rowType' }})
-    transaction: Optional[transaction.Transaction] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'transaction' }})
-    undeclared_parameters: Optional[structtype.StructType] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'undeclaredParameters' }})
+    r"""ResultSetMetadata
+    Metadata about a ResultSet or PartialResultSet.
+    """
+    
+    row_type: Optional[StructType] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('rowType') }})
+    transaction: Optional[Transaction] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('transaction') }})
+    undeclared_parameters: Optional[StructType] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('undeclaredParameters') }})
     

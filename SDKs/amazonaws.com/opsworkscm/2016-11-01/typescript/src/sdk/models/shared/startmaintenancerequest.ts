@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { EngineAttribute } from "./engineattribute";
 
 
+
 export class StartMaintenanceRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=EngineAttributes", elemType: shared.EngineAttribute })
+  @SpeakeasyMetadata({ data: "json, name=EngineAttributes", elemType: EngineAttribute })
   engineAttributes?: EngineAttribute[];
 
-  @Metadata({ data: "json, name=ServerName" })
+  @SpeakeasyMetadata({ data: "json, name=ServerName" })
   serverName: string;
 }

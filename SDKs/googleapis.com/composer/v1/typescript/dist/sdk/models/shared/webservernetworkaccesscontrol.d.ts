@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { AllowedIpRange } from "./allowediprange";
 /**
  * Network-level access control policy for the Airflow web server.

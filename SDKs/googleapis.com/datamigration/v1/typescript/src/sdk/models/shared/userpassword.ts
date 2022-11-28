@@ -1,4 +1,18 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
+
+
+// UserPasswordInput
+/** 
+ * The username/password for a database user. Used for specifying initial users at cluster creation time.
+**/
+export class UserPasswordInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=password" })
+  password?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=user" })
+  user?: string;
+}
 
 
 // UserPassword
@@ -6,12 +20,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The username/password for a database user. Used for specifying initial users at cluster creation time.
 **/
 export class UserPassword extends SpeakeasyBase {
-  @Metadata({ data: "json, name=password" })
+  @SpeakeasyMetadata({ data: "json, name=password" })
   password?: string;
 
-  @Metadata({ data: "json, name=passwordSet" })
+  @SpeakeasyMetadata({ data: "json, name=passwordSet" })
   passwordSet?: boolean;
 
-  @Metadata({ data: "json, name=user" })
+  @SpeakeasyMetadata({ data: "json, name=user" })
   user?: string;
 }

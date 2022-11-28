@@ -18,6 +18,8 @@ const (
 	ProbingDetailsResultEnumUndetermined             ProbingDetailsResultEnum = "UNDETERMINED"
 )
 
+// ProbingDetails
+// Results of active probing from the last run of the test.
 type ProbingDetails struct {
 	AbortCause                *ProbingDetailsAbortCauseEnum `json:"abortCause,omitempty"`
 	DestinationEgressLocation *EdgeLocation                 `json:"destinationEgressLocation,omitempty"`

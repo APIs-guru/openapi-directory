@@ -17,6 +17,8 @@ const (
 	GetIosPostInstallAttributionRequestVisualStyleEnumCustomStyle        GetIosPostInstallAttributionRequestVisualStyleEnum = "CUSTOM_STYLE"
 )
 
+// GetIosPostInstallAttributionRequest
+// Request for iSDK to execute strong match flow for post-install attribution. This is meant for iOS requests only. Requests from other platforms will not be honored.
 type GetIosPostInstallAttributionRequest struct {
 	AppInstallationTime    *string                                                 `json:"appInstallationTime,omitempty"`
 	BundleID               *string                                                 `json:"bundleId,omitempty"`

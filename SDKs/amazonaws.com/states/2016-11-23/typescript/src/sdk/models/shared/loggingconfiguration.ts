@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { LogDestination } from "./logdestination";
 import { LogLevelEnum } from "./loglevelenum";
+
 
 
 // LoggingConfiguration
@@ -9,12 +9,12 @@ import { LogLevelEnum } from "./loglevelenum";
  * The <code>LoggingConfiguration</code> data type is used to set CloudWatch Logs options.
 **/
 export class LoggingConfiguration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=destinations", elemType: shared.LogDestination })
+  @SpeakeasyMetadata({ data: "json, name=destinations", elemType: LogDestination })
   destinations?: LogDestination[];
 
-  @Metadata({ data: "json, name=includeExecutionData" })
+  @SpeakeasyMetadata({ data: "json, name=includeExecutionData" })
   includeExecutionData?: boolean;
 
-  @Metadata({ data: "json, name=level" })
+  @SpeakeasyMetadata({ data: "json, name=level" })
   level?: LogLevelEnum;
 }

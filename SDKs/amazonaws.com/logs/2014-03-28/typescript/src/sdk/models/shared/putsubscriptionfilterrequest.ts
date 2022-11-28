@@ -1,23 +1,24 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DistributionEnum } from "./distributionenum";
 
 
+
 export class PutSubscriptionFilterRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=destinationArn" })
+  @SpeakeasyMetadata({ data: "json, name=destinationArn" })
   destinationArn: string;
 
-  @Metadata({ data: "json, name=distribution" })
+  @SpeakeasyMetadata({ data: "json, name=distribution" })
   distribution?: DistributionEnum;
 
-  @Metadata({ data: "json, name=filterName" })
+  @SpeakeasyMetadata({ data: "json, name=filterName" })
   filterName: string;
 
-  @Metadata({ data: "json, name=filterPattern" })
+  @SpeakeasyMetadata({ data: "json, name=filterPattern" })
   filterPattern: string;
 
-  @Metadata({ data: "json, name=logGroupName" })
+  @SpeakeasyMetadata({ data: "json, name=logGroupName" })
   logGroupName: string;
 
-  @Metadata({ data: "json, name=roleArn" })
+  @SpeakeasyMetadata({ data: "json, name=roleArn" })
   roleArn?: string;
 }

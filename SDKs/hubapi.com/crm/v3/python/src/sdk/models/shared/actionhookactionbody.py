@@ -1,7 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import actionconfirmationbody
+from sdk import utils
+from . import *
 
 class ActionHookActionBodyHTTPMethodEnum(str, Enum):
     CONNECT = "CONNECT"
@@ -21,10 +23,10 @@ class ActionHookActionBodyTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class ActionHookActionBody:
-    confirmation: Optional[actionconfirmationbody.ActionConfirmationBody] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'confirmation' }})
-    http_method: ActionHookActionBodyHTTPMethodEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'httpMethod' }})
-    label: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'label' }})
-    property_names_included: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'propertyNamesIncluded' }})
-    type: ActionHookActionBodyTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
-    url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'url' }})
+    http_method: ActionHookActionBodyHTTPMethodEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('httpMethod') }})
+    property_names_included: List[str] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('propertyNamesIncluded') }})
+    type: ActionHookActionBodyTypeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('type') }})
+    url: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('url') }})
+    confirmation: Optional[ActionConfirmationBody] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('confirmation') }})
+    label: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('label') }})
     

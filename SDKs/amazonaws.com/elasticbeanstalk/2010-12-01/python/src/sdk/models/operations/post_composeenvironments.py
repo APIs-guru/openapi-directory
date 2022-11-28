@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostComposeEnvironmentsActionEnum(str, Enum):
     COMPOSE_ENVIRONMENTS = "ComposeEnvironments"
@@ -10,8 +14,8 @@ class PostComposeEnvironmentsVersionEnum(str, Enum):
 
 @dataclass
 class PostComposeEnvironmentsQueryParams:
-    action: PostComposeEnvironmentsActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostComposeEnvironmentsVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostComposeEnvironmentsActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostComposeEnvironmentsVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostComposeEnvironmentsHeaders:
 
 @dataclass
 class PostComposeEnvironmentsRequest:
-    query_params: PostComposeEnvironmentsQueryParams = field(default=None)
-    headers: PostComposeEnvironmentsHeaders = field(default=None)
+    headers: PostComposeEnvironmentsHeaders = field()
+    query_params: PostComposeEnvironmentsQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostComposeEnvironmentsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

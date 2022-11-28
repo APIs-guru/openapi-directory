@@ -1,0 +1,25 @@
+export var LifecycleStateEnum;
+(function (LifecycleStateEnum) {
+    LifecycleStateEnum["Pending"] = "Pending";
+    LifecycleStateEnum["PendingWait"] = "Pending:Wait";
+    LifecycleStateEnum["PendingProceed"] = "Pending:Proceed";
+    LifecycleStateEnum["Quarantined"] = "Quarantined";
+    LifecycleStateEnum["InService"] = "InService";
+    LifecycleStateEnum["Terminating"] = "Terminating";
+    LifecycleStateEnum["TerminatingWait"] = "Terminating:Wait";
+    LifecycleStateEnum["TerminatingProceed"] = "Terminating:Proceed";
+    LifecycleStateEnum["Terminated"] = "Terminated";
+    LifecycleStateEnum["Detaching"] = "Detaching";
+    LifecycleStateEnum["Detached"] = "Detached";
+    LifecycleStateEnum["EnteringStandby"] = "EnteringStandby";
+    LifecycleStateEnum["Standby"] = "Standby";
+    LifecycleStateEnum["WarmedPending"] = "Warmed:Pending";
+    LifecycleStateEnum["WarmedPendingWait"] = "Warmed:Pending:Wait";
+    LifecycleStateEnum["WarmedPendingProceed"] = "Warmed:Pending:Proceed";
+    LifecycleStateEnum["WarmedTerminating"] = "Warmed:Terminating";
+    LifecycleStateEnum["WarmedTerminatingWait"] = "Warmed:Terminating:Wait";
+    LifecycleStateEnum["WarmedTerminatingProceed"] = "Warmed:Terminating:Proceed";
+    LifecycleStateEnum["WarmedTerminated"] = "Warmed:Terminated";
+    LifecycleStateEnum["WarmedStopped"] = "Warmed:Stopped";
+    LifecycleStateEnum["WarmedRunning"] = "Warmed:Running";
+})(LifecycleStateEnum || (LifecycleStateEnum = {}));

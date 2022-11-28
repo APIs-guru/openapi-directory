@@ -17,12 +17,9 @@ type EndpointGetAListOfCurrentUsersPlaylistsSecurity struct {
 	SpotifyAuth shared.SchemeSpotifyAuth `security:"scheme,type=oauth2"`
 }
 
-type EndpointGetAListOfCurrentUsersPlaylistsRequest struct {
-	QueryParams EndpointGetAListOfCurrentUsersPlaylistsQueryParams
-	Headers     EndpointGetAListOfCurrentUsersPlaylistsHeaders
-	Security    EndpointGetAListOfCurrentUsersPlaylistsSecurity
-}
+// EndpointGetAListOfCurrentUsersPlaylists200ApplicationJSON
 
+// https://developer.spotify.com/documentation/web-api/reference/#object-pagingobject - Find more info on the official Spotify Web API Reference
 type EndpointGetAListOfCurrentUsersPlaylists200ApplicationJSON struct {
 	Href     *string                           `json:"href,omitempty"`
 	Items    []shared.SimplifiedPlaylistObject `json:"items,omitempty"`
@@ -31,6 +28,12 @@ type EndpointGetAListOfCurrentUsersPlaylists200ApplicationJSON struct {
 	Offset   *int32                            `json:"offset,omitempty"`
 	Previous *string                           `json:"previous,omitempty"`
 	Total    *int32                            `json:"total,omitempty"`
+}
+
+type EndpointGetAListOfCurrentUsersPlaylistsRequest struct {
+	QueryParams EndpointGetAListOfCurrentUsersPlaylistsQueryParams
+	Headers     EndpointGetAListOfCurrentUsersPlaylistsHeaders
+	Security    EndpointGetAListOfCurrentUsersPlaylistsSecurity
 }
 
 type EndpointGetAListOfCurrentUsersPlaylistsResponse struct {

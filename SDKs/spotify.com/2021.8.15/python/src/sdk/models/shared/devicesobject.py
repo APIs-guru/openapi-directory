@@ -1,11 +1,17 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import deviceobject
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class DevicesObject:
-    devices: Optional[List[deviceobject.DeviceObject]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'devices' }})
+    r"""DevicesObject
+
+    https://developer.spotify.com/documentation/web-api/reference/#object-devicesobject - Find more info on the official Spotify Web API Reference
+    """
+    
+    devices: Optional[List[DeviceObject]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('devices') }})
     

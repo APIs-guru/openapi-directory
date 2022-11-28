@@ -1,17 +1,17 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CreativeAssignment } from "./creativeassignment";
 
+
 export enum CreativeRotationTypeEnum {
-    CreativeRotationTypeSequential = "CREATIVE_ROTATION_TYPE_SEQUENTIAL"
-,    CreativeRotationTypeRandom = "CREATIVE_ROTATION_TYPE_RANDOM"
+    CreativeRotationTypeSequential = "CREATIVE_ROTATION_TYPE_SEQUENTIAL",
+    CreativeRotationTypeRandom = "CREATIVE_ROTATION_TYPE_RANDOM"
 }
 
 export enum CreativeRotationWeightCalculationStrategyEnum {
-    WeightStrategyEqual = "WEIGHT_STRATEGY_EQUAL"
-,    WeightStrategyCustom = "WEIGHT_STRATEGY_CUSTOM"
-,    WeightStrategyHighestCtr = "WEIGHT_STRATEGY_HIGHEST_CTR"
-,    WeightStrategyOptimized = "WEIGHT_STRATEGY_OPTIMIZED"
+    WeightStrategyEqual = "WEIGHT_STRATEGY_EQUAL",
+    WeightStrategyCustom = "WEIGHT_STRATEGY_CUSTOM",
+    WeightStrategyHighestCtr = "WEIGHT_STRATEGY_HIGHEST_CTR",
+    WeightStrategyOptimized = "WEIGHT_STRATEGY_OPTIMIZED"
 }
 
 
@@ -20,15 +20,15 @@ export enum CreativeRotationWeightCalculationStrategyEnum {
  * Creative Rotation.
 **/
 export class CreativeRotation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=creativeAssignments", elemType: shared.CreativeAssignment })
+  @SpeakeasyMetadata({ data: "json, name=creativeAssignments", elemType: CreativeAssignment })
   creativeAssignments?: CreativeAssignment[];
 
-  @Metadata({ data: "json, name=creativeOptimizationConfigurationId" })
+  @SpeakeasyMetadata({ data: "json, name=creativeOptimizationConfigurationId" })
   creativeOptimizationConfigurationId?: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: CreativeRotationTypeEnum;
 
-  @Metadata({ data: "json, name=weightCalculationStrategy" })
+  @SpeakeasyMetadata({ data: "json, name=weightCalculationStrategy" })
   weightCalculationStrategy?: CreativeRotationWeightCalculationStrategyEnum;
 }

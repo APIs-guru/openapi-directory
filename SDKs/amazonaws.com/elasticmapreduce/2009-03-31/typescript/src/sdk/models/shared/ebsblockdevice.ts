@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { VolumeSpecification } from "./volumespecification";
+
 
 
 // EbsBlockDevice
@@ -7,9 +8,9 @@ import { VolumeSpecification } from "./volumespecification";
  * Configuration of requested EBS block device associated with the instance group.
 **/
 export class EbsBlockDevice extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Device" })
+  @SpeakeasyMetadata({ data: "json, name=Device" })
   device?: string;
 
-  @Metadata({ data: "json, name=VolumeSpecification" })
+  @SpeakeasyMetadata({ data: "json, name=VolumeSpecification" })
   volumeSpecification?: VolumeSpecification;
 }

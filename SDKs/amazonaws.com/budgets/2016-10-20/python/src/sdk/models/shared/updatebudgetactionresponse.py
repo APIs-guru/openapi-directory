@@ -1,14 +1,17 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from dataclasses_json import dataclass_json
-from . import action
-from . import action
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class UpdateBudgetActionResponse:
-    account_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AccountId' }})
-    budget_name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'BudgetName' }})
-    new_action: action.Action = field(default=None, metadata={'dataclasses_json': { 'field_name': 'NewAction' }})
-    old_action: action.Action = field(default=None, metadata={'dataclasses_json': { 'field_name': 'OldAction' }})
+    account_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('AccountId') }})
+    budget_name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('BudgetName') }})
+    new_action: Action = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('NewAction') }})
+    old_action: Action = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('OldAction') }})
     

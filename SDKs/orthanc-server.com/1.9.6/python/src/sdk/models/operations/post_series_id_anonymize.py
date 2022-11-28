@@ -4,18 +4,18 @@ from typing import Any,Optional
 
 @dataclass
 class PostSeriesIDAnonymizePathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class PostSeriesIDAnonymizeRequest:
-    path_params: PostSeriesIDAnonymizePathParams = field(default=None)
+    path_params: PostSeriesIDAnonymizePathParams = field()
     request: Optional[Any] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class PostSeriesIDAnonymizeResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     post_series_id_anonymize_200_application_json_any: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

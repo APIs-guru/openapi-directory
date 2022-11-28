@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class CreateMetricSetResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=MetricSetArn" })
+  @SpeakeasyMetadata({ data: "json, name=MetricSetArn" })
   metricSetArn?: string;
 }

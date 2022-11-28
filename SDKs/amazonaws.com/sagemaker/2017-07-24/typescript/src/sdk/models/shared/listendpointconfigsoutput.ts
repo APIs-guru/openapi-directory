@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { EndpointConfigSummary } from "./endpointconfigsummary";
 
 
+
 export class ListEndpointConfigsOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=EndpointConfigs", elemType: shared.EndpointConfigSummary })
+  @SpeakeasyMetadata({ data: "json, name=EndpointConfigs", elemType: EndpointConfigSummary })
   endpointConfigs: EndpointConfigSummary[];
 
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 }

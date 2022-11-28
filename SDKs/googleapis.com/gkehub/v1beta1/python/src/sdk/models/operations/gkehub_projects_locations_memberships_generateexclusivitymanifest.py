@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class GkehubProjectsLocationsMembershipsGenerateExclusivityManifestPathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -27,20 +28,20 @@ class GkehubProjectsLocationsMembershipsGenerateExclusivityManifestQueryParams:
 
 @dataclass
 class GkehubProjectsLocationsMembershipsGenerateExclusivityManifestSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class GkehubProjectsLocationsMembershipsGenerateExclusivityManifestRequest:
-    path_params: GkehubProjectsLocationsMembershipsGenerateExclusivityManifestPathParams = field(default=None)
-    query_params: GkehubProjectsLocationsMembershipsGenerateExclusivityManifestQueryParams = field(default=None)
-    security: GkehubProjectsLocationsMembershipsGenerateExclusivityManifestSecurity = field(default=None)
+    path_params: GkehubProjectsLocationsMembershipsGenerateExclusivityManifestPathParams = field()
+    query_params: GkehubProjectsLocationsMembershipsGenerateExclusivityManifestQueryParams = field()
+    security: GkehubProjectsLocationsMembershipsGenerateExclusivityManifestSecurity = field()
     
 
 @dataclass
 class GkehubProjectsLocationsMembershipsGenerateExclusivityManifestResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     generate_exclusivity_manifest_response: Optional[shared.GenerateExclusivityManifestResponse] = field(default=None)
-    status_code: int = field(default=None)
     

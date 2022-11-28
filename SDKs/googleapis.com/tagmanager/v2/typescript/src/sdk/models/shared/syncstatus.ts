@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // SyncStatus
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The status of a workspace after synchronization.
 **/
 export class SyncStatus extends SpeakeasyBase {
-  @Metadata({ data: "json, name=mergeConflict" })
+  @SpeakeasyMetadata({ data: "json, name=mergeConflict" })
   mergeConflict?: boolean;
 
-  @Metadata({ data: "json, name=syncError" })
+  @SpeakeasyMetadata({ data: "json, name=syncError" })
   syncError?: boolean;
 }

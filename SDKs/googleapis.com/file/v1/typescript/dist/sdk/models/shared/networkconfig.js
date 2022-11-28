@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var NetworkConfigConnectModeEnum;
 (function (NetworkConfigConnectModeEnum) {
     NetworkConfigConnectModeEnum["ConnectModeUnspecified"] = "CONNECT_MODE_UNSPECIFIED";
@@ -44,25 +44,53 @@ var NetworkConfig = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=connectMode" }),
+        SpeakeasyMetadata({ data: "json, name=connectMode" }),
         __metadata("design:type", String)
     ], NetworkConfig.prototype, "connectMode", void 0);
     __decorate([
-        Metadata({ data: "json, name=ipAddresses" }),
+        SpeakeasyMetadata({ data: "json, name=ipAddresses" }),
         __metadata("design:type", Array)
     ], NetworkConfig.prototype, "ipAddresses", void 0);
     __decorate([
-        Metadata({ data: "json, name=modes" }),
+        SpeakeasyMetadata({ data: "json, name=modes" }),
         __metadata("design:type", Array)
     ], NetworkConfig.prototype, "modes", void 0);
     __decorate([
-        Metadata({ data: "json, name=network" }),
+        SpeakeasyMetadata({ data: "json, name=network" }),
         __metadata("design:type", String)
     ], NetworkConfig.prototype, "network", void 0);
     __decorate([
-        Metadata({ data: "json, name=reservedIpRange" }),
+        SpeakeasyMetadata({ data: "json, name=reservedIpRange" }),
         __metadata("design:type", String)
     ], NetworkConfig.prototype, "reservedIpRange", void 0);
     return NetworkConfig;
 }(SpeakeasyBase));
 export { NetworkConfig };
+// NetworkConfigInput
+/**
+ * Network configuration for the instance.
+**/
+var NetworkConfigInput = /** @class */ (function (_super) {
+    __extends(NetworkConfigInput, _super);
+    function NetworkConfigInput() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=connectMode" }),
+        __metadata("design:type", String)
+    ], NetworkConfigInput.prototype, "connectMode", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=modes" }),
+        __metadata("design:type", Array)
+    ], NetworkConfigInput.prototype, "modes", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=network" }),
+        __metadata("design:type", String)
+    ], NetworkConfigInput.prototype, "network", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=reservedIpRange" }),
+        __metadata("design:type", String)
+    ], NetworkConfigInput.prototype, "reservedIpRange", void 0);
+    return NetworkConfigInput;
+}(SpeakeasyBase));
+export { NetworkConfigInput };

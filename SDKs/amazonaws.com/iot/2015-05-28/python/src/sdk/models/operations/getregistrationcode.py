@@ -1,4 +1,7 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
@@ -16,17 +19,17 @@ class GetRegistrationCodeHeaders:
 
 @dataclass
 class GetRegistrationCodeRequest:
-    headers: GetRegistrationCodeHeaders = field(default=None)
+    headers: GetRegistrationCodeHeaders = field()
     
 
 @dataclass
 class GetRegistrationCodeResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     get_registration_code_response: Optional[shared.GetRegistrationCodeResponse] = field(default=None)
     internal_failure_exception: Optional[Any] = field(default=None)
     invalid_request_exception: Optional[Any] = field(default=None)
     service_unavailable_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     unauthorized_exception: Optional[Any] = field(default=None)
     

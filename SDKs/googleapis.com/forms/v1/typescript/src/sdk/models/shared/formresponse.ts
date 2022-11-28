@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Answer } from "./answer";
+
 
 
 // FormResponse
@@ -8,24 +8,24 @@ import { Answer } from "./answer";
  * A form response.
 **/
 export class FormResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=answers", elemType: shared.Answer })
+  @SpeakeasyMetadata({ data: "json, name=answers", elemType: Answer })
   answers?: Map<string, Answer>;
 
-  @Metadata({ data: "json, name=createTime" })
+  @SpeakeasyMetadata({ data: "json, name=createTime" })
   createTime?: string;
 
-  @Metadata({ data: "json, name=formId" })
+  @SpeakeasyMetadata({ data: "json, name=formId" })
   formId?: string;
 
-  @Metadata({ data: "json, name=lastSubmittedTime" })
+  @SpeakeasyMetadata({ data: "json, name=lastSubmittedTime" })
   lastSubmittedTime?: string;
 
-  @Metadata({ data: "json, name=respondentEmail" })
+  @SpeakeasyMetadata({ data: "json, name=respondentEmail" })
   respondentEmail?: string;
 
-  @Metadata({ data: "json, name=responseId" })
+  @SpeakeasyMetadata({ data: "json, name=responseId" })
   responseId?: string;
 
-  @Metadata({ data: "json, name=totalScore" })
+  @SpeakeasyMetadata({ data: "json, name=totalScore" })
   totalScore?: number;
 }

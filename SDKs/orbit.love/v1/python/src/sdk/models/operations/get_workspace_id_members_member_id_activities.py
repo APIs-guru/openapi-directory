@@ -1,11 +1,13 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
+from sdk.models import shared
 
 
 @dataclass
 class GetWorkspaceIDMembersMemberIDActivitiesPathParams:
-    member_id: str = field(default=None, metadata={'path_param': { 'field_name': 'member_id', 'style': 'simple', 'explode': False }})
-    workspace_id: str = field(default=None, metadata={'path_param': { 'field_name': 'workspace_id', 'style': 'simple', 'explode': False }})
+    member_id: str = field(metadata={'path_param': { 'field_name': 'member_id', 'style': 'simple', 'explode': False }})
+    workspace_id: str = field(metadata={'path_param': { 'field_name': 'workspace_id', 'style': 'simple', 'explode': False }})
     
 class GetWorkspaceIDMembersMemberIDActivitiesDirectionEnum(str, Enum):
     ASC = "ASC"
@@ -33,18 +35,18 @@ class GetWorkspaceIDMembersMemberIDActivitiesQueryParams:
 
 @dataclass
 class GetWorkspaceIDMembersMemberIDActivitiesSecurity:
-    bearer: shared.SchemeBearer = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    bearer: shared.SchemeBearer = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
     
 
 @dataclass
 class GetWorkspaceIDMembersMemberIDActivitiesRequest:
-    path_params: GetWorkspaceIDMembersMemberIDActivitiesPathParams = field(default=None)
-    query_params: GetWorkspaceIDMembersMemberIDActivitiesQueryParams = field(default=None)
-    security: GetWorkspaceIDMembersMemberIDActivitiesSecurity = field(default=None)
+    path_params: GetWorkspaceIDMembersMemberIDActivitiesPathParams = field()
+    query_params: GetWorkspaceIDMembersMemberIDActivitiesQueryParams = field()
+    security: GetWorkspaceIDMembersMemberIDActivitiesSecurity = field()
     
 
 @dataclass
 class GetWorkspaceIDMembersMemberIDActivitiesResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

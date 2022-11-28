@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// BillingRecord
+// Information for one billing record.
 type BillingRecord struct {
 	BillDate   *time.Time         `json:"BillDate,omitempty"`
 	DomainName *string            `json:"DomainName,omitempty"`

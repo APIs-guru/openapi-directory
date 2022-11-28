@@ -1,15 +1,20 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
 @dataclass
 class ListSlotsPathParams:
-    bot_id: str = field(default=None, metadata={'path_param': { 'field_name': 'botId', 'style': 'simple', 'explode': False }})
-    bot_version: str = field(default=None, metadata={'path_param': { 'field_name': 'botVersion', 'style': 'simple', 'explode': False }})
-    intent_id: str = field(default=None, metadata={'path_param': { 'field_name': 'intentId', 'style': 'simple', 'explode': False }})
-    locale_id: str = field(default=None, metadata={'path_param': { 'field_name': 'localeId', 'style': 'simple', 'explode': False }})
+    bot_id: str = field(metadata={'path_param': { 'field_name': 'botId', 'style': 'simple', 'explode': False }})
+    bot_version: str = field(metadata={'path_param': { 'field_name': 'botVersion', 'style': 'simple', 'explode': False }})
+    intent_id: str = field(metadata={'path_param': { 'field_name': 'intentId', 'style': 'simple', 'explode': False }})
+    locale_id: str = field(metadata={'path_param': { 'field_name': 'localeId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -32,34 +37,38 @@ class ListSlotsHeaders:
 @dataclass_json
 @dataclass
 class ListSlotsRequestBodySortBy:
-    attribute: Optional[shared.SlotSortAttributeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'attribute' }})
-    order: Optional[shared.SortOrderEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'order' }})
+    r"""ListSlotsRequestBodySortBy
+    Specifies attributes for sorting a list of bots.
+    """
+    
+    attribute: Optional[shared.SlotSortAttributeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('attribute') }})
+    order: Optional[shared.SortOrderEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('order') }})
     
 
 @dataclass_json
 @dataclass
 class ListSlotsRequestBody:
-    filters: Optional[List[shared.SlotFilter]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'filters' }})
-    max_results: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'maxResults' }})
-    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'nextToken' }})
-    sort_by: Optional[ListSlotsRequestBodySortBy] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'sortBy' }})
+    filters: Optional[List[shared.SlotFilter]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('filters') }})
+    max_results: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('maxResults') }})
+    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('nextToken') }})
+    sort_by: Optional[ListSlotsRequestBodySortBy] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('sortBy') }})
     
 
 @dataclass
 class ListSlotsRequest:
-    path_params: ListSlotsPathParams = field(default=None)
-    query_params: ListSlotsQueryParams = field(default=None)
-    headers: ListSlotsHeaders = field(default=None)
-    request: ListSlotsRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: ListSlotsHeaders = field()
+    path_params: ListSlotsPathParams = field()
+    query_params: ListSlotsQueryParams = field()
+    request: ListSlotsRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class ListSlotsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     internal_server_exception: Optional[Any] = field(default=None)
     list_slots_response: Optional[shared.ListSlotsResponse] = field(default=None)
     service_quota_exceeded_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     validation_exception: Optional[Any] = field(default=None)
     

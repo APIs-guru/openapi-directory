@@ -1,10 +1,15 @@
 from dataclasses import dataclass, field
 from dataclasses_json import dataclass_json
-from . import kmsencryptionconfig
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class SseConfiguration:
-    kms_encryption_config: kmsencryptionconfig.KmsEncryptionConfig = field(default=None, metadata={'dataclasses_json': { 'field_name': 'KmsEncryptionConfig' }})
+    r"""SseConfiguration
+     The server-side encryption key configuration for a customer provided encryption key. 
+    """
+    
+    kms_encryption_config: KmsEncryptionConfig = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('KmsEncryptionConfig') }})
     

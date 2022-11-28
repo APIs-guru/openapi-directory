@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DestinationSyncModeEnum } from "./destinationsyncmodeenum";
 import { SyncModeEnum } from "./syncmodeenum";
+
 
 
 // AirbyteStreamConfiguration
@@ -8,21 +9,21 @@ import { SyncModeEnum } from "./syncmodeenum";
  * the mutable part of the stream to configure the destination
 **/
 export class AirbyteStreamConfiguration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=aliasName" })
+  @SpeakeasyMetadata({ data: "json, name=aliasName" })
   aliasName?: string;
 
-  @Metadata({ data: "json, name=cursorField" })
+  @SpeakeasyMetadata({ data: "json, name=cursorField" })
   cursorField?: string[];
 
-  @Metadata({ data: "json, name=destinationSyncMode" })
+  @SpeakeasyMetadata({ data: "json, name=destinationSyncMode" })
   destinationSyncMode: DestinationSyncModeEnum;
 
-  @Metadata({ data: "json, name=primaryKey" })
+  @SpeakeasyMetadata({ data: "json, name=primaryKey" })
   primaryKey?: string[][];
 
-  @Metadata({ data: "json, name=selected" })
+  @SpeakeasyMetadata({ data: "json, name=selected" })
   selected?: boolean;
 
-  @Metadata({ data: "json, name=syncMode" })
+  @SpeakeasyMetadata({ data: "json, name=syncMode" })
   syncMode: SyncModeEnum;
 }

@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { LookupAttributeKeyEnum } from "./lookupattributekeyenum";
+
 
 
 // LookupAttribute
@@ -7,9 +8,9 @@ import { LookupAttributeKeyEnum } from "./lookupattributekeyenum";
  * Specifies an attribute and value that filter the events returned.
 **/
 export class LookupAttribute extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AttributeKey" })
+  @SpeakeasyMetadata({ data: "json, name=AttributeKey" })
   attributeKey: LookupAttributeKeyEnum;
 
-  @Metadata({ data: "json, name=AttributeValue" })
+  @SpeakeasyMetadata({ data: "json, name=AttributeValue" })
   attributeValue: string;
 }

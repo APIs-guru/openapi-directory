@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // UpdateUserPoolDomainResponse
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The UpdateUserPoolDomain response output.
 **/
 export class UpdateUserPoolDomainResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CloudFrontDomain" })
+  @SpeakeasyMetadata({ data: "json, name=CloudFrontDomain" })
   cloudFrontDomain?: string;
 }

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudDialogflowV2beta1AutomatedAgentConfig
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Defines the Automated Agent to connect to a conversation.
 **/
 export class GoogleCloudDialogflowV2beta1AutomatedAgentConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=agent" })
+  @SpeakeasyMetadata({ data: "json, name=agent" })
   agent?: string;
 }

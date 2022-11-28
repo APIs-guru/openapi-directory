@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ModifyContactGroupMembersResponse
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The response to a modify contact group members request.
 **/
 export class ModifyContactGroupMembersResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=canNotRemoveLastContactGroupResourceNames" })
+  @SpeakeasyMetadata({ data: "json, name=canNotRemoveLastContactGroupResourceNames" })
   canNotRemoveLastContactGroupResourceNames?: string[];
 
-  @Metadata({ data: "json, name=notFoundResourceNames" })
+  @SpeakeasyMetadata({ data: "json, name=notFoundResourceNames" })
   notFoundResourceNames?: string[];
 }

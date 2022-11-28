@@ -1,39 +1,40 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum RrSetRoutingPolicyLoadBalancerTargetIpProtocolEnum {
-    Undefined = "UNDEFINED"
-,    Tcp = "TCP"
-,    Udp = "UDP"
+    Undefined = "UNDEFINED",
+    Tcp = "TCP",
+    Udp = "UDP"
 }
 
 export enum RrSetRoutingPolicyLoadBalancerTargetLoadBalancerTypeEnum {
-    None = "NONE"
-,    RegionalL4Ilb = "REGIONAL_L4ILB"
+    None = "NONE",
+    RegionalL4Ilb = "REGIONAL_L4ILB"
 }
 
 
 export class RrSetRoutingPolicyLoadBalancerTarget extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ipAddress" })
+  @SpeakeasyMetadata({ data: "json, name=ipAddress" })
   ipAddress?: string;
 
-  @Metadata({ data: "json, name=ipProtocol" })
+  @SpeakeasyMetadata({ data: "json, name=ipProtocol" })
   ipProtocol?: RrSetRoutingPolicyLoadBalancerTargetIpProtocolEnum;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=loadBalancerType" })
+  @SpeakeasyMetadata({ data: "json, name=loadBalancerType" })
   loadBalancerType?: RrSetRoutingPolicyLoadBalancerTargetLoadBalancerTypeEnum;
 
-  @Metadata({ data: "json, name=networkUrl" })
+  @SpeakeasyMetadata({ data: "json, name=networkUrl" })
   networkUrl?: string;
 
-  @Metadata({ data: "json, name=port" })
+  @SpeakeasyMetadata({ data: "json, name=port" })
   port?: string;
 
-  @Metadata({ data: "json, name=project" })
+  @SpeakeasyMetadata({ data: "json, name=project" })
   project?: string;
 
-  @Metadata({ data: "json, name=region" })
+  @SpeakeasyMetadata({ data: "json, name=region" })
   region?: string;
 }

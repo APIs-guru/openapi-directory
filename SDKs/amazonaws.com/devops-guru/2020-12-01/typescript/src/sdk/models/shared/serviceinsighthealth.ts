@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ServiceInsightHealth
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Contains the number of open proactive and reactive insights in an analyzed AWS service.
 **/
 export class ServiceInsightHealth extends SpeakeasyBase {
-  @Metadata({ data: "json, name=OpenProactiveInsights" })
+  @SpeakeasyMetadata({ data: "json, name=OpenProactiveInsights" })
   openProactiveInsights?: number;
 
-  @Metadata({ data: "json, name=OpenReactiveInsights" })
+  @SpeakeasyMetadata({ data: "json, name=OpenReactiveInsights" })
   openReactiveInsights?: number;
 }

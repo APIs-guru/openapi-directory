@@ -4,7 +4,7 @@ from typing import Any,Optional
 
 @dataclass
 class GetAccountsNameVideoChannelsPathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -17,13 +17,13 @@ class GetAccountsNameVideoChannelsQueryParams:
 
 @dataclass
 class GetAccountsNameVideoChannelsRequest:
-    path_params: GetAccountsNameVideoChannelsPathParams = field(default=None)
-    query_params: GetAccountsNameVideoChannelsQueryParams = field(default=None)
+    path_params: GetAccountsNameVideoChannelsPathParams = field()
+    query_params: GetAccountsNameVideoChannelsQueryParams = field()
     
 
 @dataclass
 class GetAccountsNameVideoChannelsResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     video_channel_list: Optional[Any] = field(default=None)
     

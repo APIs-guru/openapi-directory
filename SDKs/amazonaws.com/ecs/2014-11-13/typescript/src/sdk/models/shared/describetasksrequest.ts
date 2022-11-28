@@ -1,14 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TaskFieldEnum } from "./taskfieldenum";
 
 
+
 export class DescribeTasksRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=cluster" })
+  @SpeakeasyMetadata({ data: "json, name=cluster" })
   cluster?: string;
 
-  @Metadata({ data: "json, name=include" })
+  @SpeakeasyMetadata({ data: "json, name=include" })
   include?: TaskFieldEnum[];
 
-  @Metadata({ data: "json, name=tasks" })
+  @SpeakeasyMetadata({ data: "json, name=tasks" })
   tasks: string[];
 }

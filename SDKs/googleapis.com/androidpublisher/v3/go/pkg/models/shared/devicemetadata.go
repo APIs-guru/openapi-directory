@@ -1,5 +1,7 @@
 package shared
 
+// DeviceMetadata
+// Characteristics of the user's device.
 type DeviceMetadata struct {
 	CPUMake          *string `json:"cpuMake,omitempty"`
 	CPUModel         *string `json:"cpuModel,omitempty"`

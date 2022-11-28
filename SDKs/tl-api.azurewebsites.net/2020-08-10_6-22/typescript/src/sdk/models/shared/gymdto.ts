@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GymDto
@@ -8,15 +9,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  *             
 **/
 export class GymDto extends SpeakeasyBase {
-  @Metadata({ data: "json, name=externalGymNumber" })
+  @SpeakeasyMetadata({ data: "json, name=externalGymNumber" })
   externalGymNumber?: number;
 
-  @Metadata({ data: "json, name=gymId" })
+  @SpeakeasyMetadata({ data: "json, name=gymId" })
   gymId?: number;
 
-  @Metadata({ data: "json, name=gymName" })
+  @SpeakeasyMetadata({ data: "json, name=gymName" })
   gymName?: string;
 
-  @Metadata({ data: "json, name=location" })
+  @SpeakeasyMetadata({ data: "json, name=location" })
   location?: string;
 }

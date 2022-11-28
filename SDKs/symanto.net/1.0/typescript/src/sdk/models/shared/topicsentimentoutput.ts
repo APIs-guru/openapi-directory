@@ -1,26 +1,26 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Sentiment } from "./sentiment";
 import { TopicSentiment } from "./topicsentiment";
 import { Topic } from "./topic";
 
 
+
 export class TopicSentimentOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=language" })
+  @SpeakeasyMetadata({ data: "json, name=language" })
   language?: string;
 
-  @Metadata({ data: "json, name=sentiments", elemType: shared.Sentiment })
+  @SpeakeasyMetadata({ data: "json, name=sentiments", elemType: Sentiment })
   sentiments?: Sentiment[];
 
-  @Metadata({ data: "json, name=text" })
+  @SpeakeasyMetadata({ data: "json, name=text" })
   text?: string;
 
-  @Metadata({ data: "json, name=topicSentiments", elemType: shared.TopicSentiment })
+  @SpeakeasyMetadata({ data: "json, name=topicSentiments", elemType: TopicSentiment })
   topicSentiments?: TopicSentiment[];
 
-  @Metadata({ data: "json, name=topics", elemType: shared.Topic })
+  @SpeakeasyMetadata({ data: "json, name=topics", elemType: Topic })
   topics?: Topic[];
 }

@@ -8,6 +8,8 @@ const (
 	MultiClusterIngressFeatureSpecBillingEnumAnthosLicense      MultiClusterIngressFeatureSpecBillingEnum = "ANTHOS_LICENSE"
 )
 
+// MultiClusterIngressFeatureSpec
+// **Multi-cluster Ingress**: The configuration for the MultiClusterIngress feature.
 type MultiClusterIngressFeatureSpec struct {
 	Billing          *MultiClusterIngressFeatureSpecBillingEnum `json:"billing,omitempty"`
 	ConfigMembership *string                                    `json:"configMembership,omitempty"`

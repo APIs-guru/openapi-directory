@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // CleverSettings
@@ -6,18 +7,18 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Configuration for CleverCloud client
 **/
 export class CleverSettings extends SpeakeasyBase {
-  @Metadata({ data: "json, name=consumerKey" })
+  @SpeakeasyMetadata({ data: "json, name=consumerKey" })
   consumerKey: string;
 
-  @Metadata({ data: "json, name=consumerSecret" })
+  @SpeakeasyMetadata({ data: "json, name=consumerSecret" })
   consumerSecret: string;
 
-  @Metadata({ data: "json, name=orgaId" })
+  @SpeakeasyMetadata({ data: "json, name=orgaId" })
   orgaId: string;
 
-  @Metadata({ data: "json, name=secret" })
+  @SpeakeasyMetadata({ data: "json, name=secret" })
   secret: string;
 
-  @Metadata({ data: "json, name=token" })
+  @SpeakeasyMetadata({ data: "json, name=token" })
   token: string;
 }

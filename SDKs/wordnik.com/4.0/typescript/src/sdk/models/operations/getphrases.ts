@@ -1,45 +1,46 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetPhrasesPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=word" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=word" })
   word: string;
 }
 
 export enum GetPhrasesUseCanonicalEnum {
-    False = "false"
-,    True = "true"
+    False = "false",
+    True = "true"
 }
 
 
 export class GetPhrasesQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=limit" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=limit" })
   limit?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=useCanonical" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=useCanonical" })
   useCanonical?: GetPhrasesUseCanonicalEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=wlmi" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=wlmi" })
   wlmi?: number;
 }
 
 
 export class GetPhrasesRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetPhrasesPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetPhrasesQueryParams;
 }
 
 
 export class GetPhrasesResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

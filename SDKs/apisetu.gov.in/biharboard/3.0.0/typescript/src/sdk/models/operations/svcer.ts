@@ -1,21 +1,22 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class SvcerRequestBodyCertificateParameters extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DOB" })
+  @SpeakeasyMetadata({ data: "json, name=DOB" })
   dob: string;
 
-  @Metadata({ data: "json, name=FullName" })
+  @SpeakeasyMetadata({ data: "json, name=FullName" })
   fullName: string;
 
-  @Metadata({ data: "json, name=RROLL" })
+  @SpeakeasyMetadata({ data: "json, name=RROLL" })
   rroll: string;
 
-  @Metadata({ data: "json, name=RROLL_CODE" })
+  @SpeakeasyMetadata({ data: "json, name=RROLL_CODE" })
   rrollCode: string;
 
-  @Metadata({ data: "json, name=year" })
+  @SpeakeasyMetadata({ data: "json, name=year" })
   year: string;
 }
 
@@ -25,97 +26,88 @@ export enum SvcerRequestBodyFormatEnum {
 
 
 export class SvcerRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=certificateParameters" })
+  @SpeakeasyMetadata({ data: "json, name=certificateParameters" })
   certificateParameters?: SvcerRequestBodyCertificateParameters;
 
-  @Metadata({ data: "json, name=consentArtifact" })
+  @SpeakeasyMetadata({ data: "json, name=consentArtifact" })
   consentArtifact?: any;
 
-  @Metadata({ data: "json, name=format" })
+  @SpeakeasyMetadata({ data: "json, name=format" })
   format: SvcerRequestBodyFormatEnum;
 
-  @Metadata({ data: "json, name=txnId" })
+  @SpeakeasyMetadata({ data: "json, name=txnId" })
   txnId: string;
 }
 
 
 export class SvcerSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
   apiKey: shared.SchemeApiKey;
 
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
   clientId: shared.SchemeClientId;
 }
 
-
-export class SvcerRequest extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/json" })
-  request?: SvcerRequestBody;
-
-  @Metadata()
-  security: SvcerSecurity;
-}
-
 export enum Svcer400ApplicationJsonErrorEnum {
-    MissingParameter = "missing_parameter"
-,    InvalidParameter = "invalid_parameter"
-,    InvalidFormat = "invalid_format"
-,    InvalidTxnid = "invalid_txnid"
-,    InvalidConsentid = "invalid_consentid"
+    MissingParameter = "missing_parameter",
+    InvalidParameter = "invalid_parameter",
+    InvalidFormat = "invalid_format",
+    InvalidTxnid = "invalid_txnid",
+    InvalidConsentid = "invalid_consentid"
 }
 
 export enum Svcer400ApplicationJsonErrorDescriptionEnum {
-    PleaseProvideAllMandatoryParameters = "Please provide all mandatory parameters"
-,    BadRequest = "Bad request"
-,    TheFormatParameterIsInvalid = "The format parameter is invalid"
-,    TheTxnIdParameterMustBeInUuidFormat = "The txnId parameter must be in UUID format"
-,    TheConsentIdParameterMustBeInUuidFormat = "The consentId parameter must be in UUID format"
+    PleaseProvideAllMandatoryParameters = "Please provide all mandatory parameters",
+    BadRequest = "Bad request",
+    TheFormatParameterIsInvalid = "The format parameter is invalid",
+    TheTxnIdParameterMustBeInUuidFormat = "The txnId parameter must be in UUID format",
+    TheConsentIdParameterMustBeInUuidFormat = "The consentId parameter must be in UUID format"
 }
 
 
 export class Svcer400ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=error" })
+  @SpeakeasyMetadata({ data: "json, name=error" })
   error?: Svcer400ApplicationJsonErrorEnum;
 
-  @Metadata({ data: "json, name=errorDescription" })
+  @SpeakeasyMetadata({ data: "json, name=errorDescription" })
   errorDescription?: Svcer400ApplicationJsonErrorDescriptionEnum;
 }
 
 export enum Svcer401ApplicationJsonErrorEnum {
-    InvalidAuthentication = "invalid_authentication"
-,    InvalidAuthorization = "invalid_authorization"
+    InvalidAuthentication = "invalid_authentication",
+    InvalidAuthorization = "invalid_authorization"
 }
 
 export enum Svcer401ApplicationJsonErrorDescriptionEnum {
-    AuthenticationFailed = "Authentication failed"
-,    YouAreNotAuthorizedToUseThisApi = "You are not authorized to use this API"
+    AuthenticationFailed = "Authentication failed",
+    YouAreNotAuthorizedToUseThisApi = "You are not authorized to use this API"
 }
 
 
 export class Svcer401ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=error" })
+  @SpeakeasyMetadata({ data: "json, name=error" })
   error?: Svcer401ApplicationJsonErrorEnum;
 
-  @Metadata({ data: "json, name=errorDescription" })
+  @SpeakeasyMetadata({ data: "json, name=errorDescription" })
   errorDescription?: Svcer401ApplicationJsonErrorDescriptionEnum;
 }
 
 export enum Svcer404ApplicationJsonErrorEnum {
-    RecordNotFound = "record_not_found"
-,    UrlNotFound = "url_not_found"
+    RecordNotFound = "record_not_found",
+    UrlNotFound = "url_not_found"
 }
 
 export enum Svcer404ApplicationJsonErrorDescriptionEnum {
-    NoRecordFound = "No record found"
-,    YourApiUrlOrPathIsIncorrect = "Your API url or path is incorrect"
+    NoRecordFound = "No record found",
+    YourApiUrlOrPathIsIncorrect = "Your API url or path is incorrect"
 }
 
 
 export class Svcer404ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=error" })
+  @SpeakeasyMetadata({ data: "json, name=error" })
   error?: Svcer404ApplicationJsonErrorEnum;
 
-  @Metadata({ data: "json, name=errorDescription" })
+  @SpeakeasyMetadata({ data: "json, name=errorDescription" })
   errorDescription?: Svcer404ApplicationJsonErrorDescriptionEnum;
 }
 
@@ -129,10 +121,10 @@ export enum Svcer500ApplicationJsonErrorDescriptionEnum {
 
 
 export class Svcer500ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=error" })
+  @SpeakeasyMetadata({ data: "json, name=error" })
   error?: Svcer500ApplicationJsonErrorEnum;
 
-  @Metadata({ data: "json, name=errorDescription" })
+  @SpeakeasyMetadata({ data: "json, name=errorDescription" })
   errorDescription?: Svcer500ApplicationJsonErrorDescriptionEnum;
 }
 
@@ -146,10 +138,10 @@ export enum Svcer502ApplicationJsonErrorDescriptionEnum {
 
 
 export class Svcer502ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=error" })
+  @SpeakeasyMetadata({ data: "json, name=error" })
   error?: Svcer502ApplicationJsonErrorEnum;
 
-  @Metadata({ data: "json, name=errorDescription" })
+  @SpeakeasyMetadata({ data: "json, name=errorDescription" })
   errorDescription?: Svcer502ApplicationJsonErrorDescriptionEnum;
 }
 
@@ -163,10 +155,10 @@ export enum Svcer503ApplicationJsonErrorDescriptionEnum {
 
 
 export class Svcer503ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=error" })
+  @SpeakeasyMetadata({ data: "json, name=error" })
   error?: Svcer503ApplicationJsonErrorEnum;
 
-  @Metadata({ data: "json, name=errorDescription" })
+  @SpeakeasyMetadata({ data: "json, name=errorDescription" })
   errorDescription?: Svcer503ApplicationJsonErrorDescriptionEnum;
 }
 
@@ -180,39 +172,48 @@ export enum Svcer504ApplicationJsonErrorDescriptionEnum {
 
 
 export class Svcer504ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=error" })
+  @SpeakeasyMetadata({ data: "json, name=error" })
   error?: Svcer504ApplicationJsonErrorEnum;
 
-  @Metadata({ data: "json, name=errorDescription" })
+  @SpeakeasyMetadata({ data: "json, name=errorDescription" })
   errorDescription?: Svcer504ApplicationJsonErrorDescriptionEnum;
 }
 
 
+export class SvcerRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request?: SvcerRequestBody;
+
+  @SpeakeasyMetadata()
+  security: SvcerSecurity;
+}
+
+
 export class SvcerResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   svcer400ApplicationJsonObject?: Svcer400ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   svcer401ApplicationJsonObject?: Svcer401ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   svcer404ApplicationJsonObject?: Svcer404ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   svcer500ApplicationJsonObject?: Svcer500ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   svcer502ApplicationJsonObject?: Svcer502ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   svcer503ApplicationJsonObject?: Svcer503ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   svcer504ApplicationJsonObject?: Svcer504ApplicationJson;
 }

@@ -1,17 +1,17 @@
-import { AxiosInstance, AxiosRequestConfig } from "axios";
-import * as operations from "./models/operations";
-declare type OptsFunc = (sdk: SDK) => void;
+import { AxiosInstance } from "axios";
+import { RequestTag } from "./requesttag";
+type OptsFunc = (sdk: SDK) => void;
+export declare const ServerList: readonly ["https://api.nasa.gov/planetary", "http://api.nasa.gov/planetary"];
 export declare function WithServerURL(serverURL: string, params?: Map<string, string>): OptsFunc;
 export declare function WithClient(client: AxiosInstance): OptsFunc;
 export declare class SDK {
-    defaultClient?: AxiosInstance;
-    securityClient?: AxiosInstance;
-    security?: any;
-    serverURL: string;
+    requestTag: RequestTag;
+    _defaultClient: AxiosInstance;
+    _securityClient: AxiosInstance;
+    _serverURL: string;
+    private _language;
+    private _sdkVersion;
+    private _genVersion;
     constructor(...opts: OptsFunc[]);
-    /**
-     * Returns the picture of the day
-    **/
-    GetApod(req: operations.GetApodRequest, config?: AxiosRequestConfig): Promise<operations.GetApodResponse>;
 }
 export {};

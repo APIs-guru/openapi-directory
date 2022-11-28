@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DescribeFhirDatastoreRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DatastoreId" })
+  @SpeakeasyMetadata({ data: "json, name=DatastoreId" })
   datastoreId?: string;
 }

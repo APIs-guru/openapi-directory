@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CheckpointConfigurationDescription } from "./checkpointconfigurationdescription";
 import { MonitoringConfigurationDescription } from "./monitoringconfigurationdescription";
 import { ParallelismConfigurationDescription } from "./parallelismconfigurationdescription";
+
 
 
 // FlinkApplicationConfigurationDescription
@@ -9,15 +10,15 @@ import { ParallelismConfigurationDescription } from "./parallelismconfigurationd
  * Describes configuration parameters for a Flink-based Kinesis Data Analytics application.
 **/
 export class FlinkApplicationConfigurationDescription extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CheckpointConfigurationDescription" })
+  @SpeakeasyMetadata({ data: "json, name=CheckpointConfigurationDescription" })
   checkpointConfigurationDescription?: CheckpointConfigurationDescription;
 
-  @Metadata({ data: "json, name=JobPlanDescription" })
+  @SpeakeasyMetadata({ data: "json, name=JobPlanDescription" })
   jobPlanDescription?: string;
 
-  @Metadata({ data: "json, name=MonitoringConfigurationDescription" })
+  @SpeakeasyMetadata({ data: "json, name=MonitoringConfigurationDescription" })
   monitoringConfigurationDescription?: MonitoringConfigurationDescription;
 
-  @Metadata({ data: "json, name=ParallelismConfigurationDescription" })
+  @SpeakeasyMetadata({ data: "json, name=ParallelismConfigurationDescription" })
   parallelismConfigurationDescription?: ParallelismConfigurationDescription;
 }

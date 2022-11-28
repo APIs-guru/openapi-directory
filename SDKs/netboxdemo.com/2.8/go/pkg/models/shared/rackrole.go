@@ -8,3 +8,10 @@ type RackRole struct {
 	RackCount   *int64  `json:"rack_count,omitempty"`
 	Slug        string  `json:"slug"`
 }
+
+type RackRoleInput struct {
+	Color       *string `json:"color,omitempty"`
+	Description *string `json:"description,omitempty"`
+	Name        string  `json:"name"`
+	Slug        string  `json:"slug"`
+}

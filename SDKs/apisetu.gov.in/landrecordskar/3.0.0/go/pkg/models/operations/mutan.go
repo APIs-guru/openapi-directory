@@ -27,11 +27,6 @@ type MutanSecurity struct {
 	ClientID shared.SchemeClientID `security:"scheme,type=apiKey,subtype=header"`
 }
 
-type MutanRequest struct {
-	Request  *MutanRequestBody `request:"mediaType=application/json"`
-	Security MutanSecurity
-}
-
 type Mutan400ApplicationJSONErrorEnum string
 
 const (
@@ -161,6 +156,11 @@ const (
 type Mutan504ApplicationJSON struct {
 	Error            *Mutan504ApplicationJSONErrorEnum            `json:"error,omitempty"`
 	ErrorDescription *Mutan504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
+}
+
+type MutanRequest struct {
+	Request  *MutanRequestBody `request:"mediaType=application/json"`
+	Security MutanSecurity
 }
 
 type MutanResponse struct {

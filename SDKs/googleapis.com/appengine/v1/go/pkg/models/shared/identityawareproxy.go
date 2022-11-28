@@ -1,5 +1,7 @@
 package shared
 
+// IdentityAwareProxy
+// Identity-Aware Proxy
 type IdentityAwareProxy struct {
 	Enabled                  *bool   `json:"enabled,omitempty"`
 	Oauth2ClientID           *string `json:"oauth2ClientId,omitempty"`

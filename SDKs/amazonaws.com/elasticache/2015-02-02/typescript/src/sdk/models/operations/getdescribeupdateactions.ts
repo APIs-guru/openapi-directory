@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
+
 
 export enum GetDescribeUpdateActionsActionEnum {
     DescribeUpdateActions = "DescribeUpdateActions"
@@ -11,10 +12,10 @@ export enum GetDescribeUpdateActionsActionEnum {
  * Filters update actions from the service updates that are in available status during the time range.
 **/
 export class GetDescribeUpdateActionsServiceUpdateTimeRange extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, name=EndTime" })
+  @SpeakeasyMetadata({ data: "queryParam, name=EndTime" })
   endTime?: Date;
 
-  @Metadata({ data: "queryParam, name=StartTime" })
+  @SpeakeasyMetadata({ data: "queryParam, name=StartTime" })
   startTime?: Date;
 }
 
@@ -24,84 +25,84 @@ export enum GetDescribeUpdateActionsVersionEnum {
 
 
 export class GetDescribeUpdateActionsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Action" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Action" })
   action: GetDescribeUpdateActionsActionEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=CacheClusterIds" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=CacheClusterIds" })
   cacheClusterIds?: string[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Engine" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Engine" })
   engine?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Marker" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Marker" })
   marker?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=MaxRecords" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=MaxRecords" })
   maxRecords?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=ReplicationGroupIds" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=ReplicationGroupIds" })
   replicationGroupIds?: string[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=ServiceUpdateName" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=ServiceUpdateName" })
   serviceUpdateName?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=ServiceUpdateStatus" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=ServiceUpdateStatus" })
   serviceUpdateStatus?: shared.ServiceUpdateStatusEnum[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=ServiceUpdateTimeRange" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=ServiceUpdateTimeRange" })
   serviceUpdateTimeRange?: GetDescribeUpdateActionsServiceUpdateTimeRange;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=ShowNodeLevelUpdateStatus" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=ShowNodeLevelUpdateStatus" })
   showNodeLevelUpdateStatus?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=UpdateActionStatus" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=UpdateActionStatus" })
   updateActionStatus?: shared.UpdateActionStatusEnum[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Version" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Version" })
   version: GetDescribeUpdateActionsVersionEnum;
 }
 
 
 export class GetDescribeUpdateActionsHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
 
 export class GetDescribeUpdateActionsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetDescribeUpdateActionsQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: GetDescribeUpdateActionsHeaders;
 }
 
 
 export class GetDescribeUpdateActionsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

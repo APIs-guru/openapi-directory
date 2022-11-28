@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class ObjectTokenDataTypeEnum(str, Enum):
     BOOLEAN = "BOOLEAN"
@@ -17,8 +19,8 @@ class ObjectTokenDataTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class ObjectToken:
-    data_type: Optional[ObjectTokenDataTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'dataType' }})
-    label: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'label' }})
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    value: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'value' }})
+    value: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('value') }})
+    data_type: Optional[ObjectTokenDataTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('dataType') }})
+    label: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('label') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
     

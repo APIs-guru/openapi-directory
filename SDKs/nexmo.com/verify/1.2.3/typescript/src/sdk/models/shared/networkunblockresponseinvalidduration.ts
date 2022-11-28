@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class NetworkUnblockResponseInvalidDurationInvalidParameters extends SpeakeasyBase {
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=reason" })
+  @SpeakeasyMetadata({ data: "json, name=reason" })
   reason?: string;
 }
 
@@ -16,18 +16,18 @@ export class NetworkUnblockResponseInvalidDurationInvalidParameters extends Spea
  * Invalid Duration
 **/
 export class NetworkUnblockResponseInvalidDuration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=detail" })
+  @SpeakeasyMetadata({ data: "json, name=detail" })
   detail?: string;
 
-  @Metadata({ data: "json, name=instance" })
+  @SpeakeasyMetadata({ data: "json, name=instance" })
   instance?: string;
 
-  @Metadata({ data: "json, name=invalid_parameters", elemType: shared.NetworkUnblockResponseInvalidDurationInvalidParameters })
+  @SpeakeasyMetadata({ data: "json, name=invalid_parameters", elemType: NetworkUnblockResponseInvalidDurationInvalidParameters })
   invalidParameters?: NetworkUnblockResponseInvalidDurationInvalidParameters[];
 
-  @Metadata({ data: "json, name=title" })
+  @SpeakeasyMetadata({ data: "json, name=title" })
   title?: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: string;
 }

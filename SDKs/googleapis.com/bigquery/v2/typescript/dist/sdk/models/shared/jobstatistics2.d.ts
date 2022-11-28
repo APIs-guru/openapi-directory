@@ -1,0 +1,54 @@
+import { SpeakeasyBase } from "../../../internal/utils";
+import { BiEngineStatistics } from "./bienginestatistics";
+import { TableReference } from "./tablereference";
+import { DatasetReference } from "./datasetreference";
+import { RoutineReference } from "./routinereference";
+import { RowAccessPolicyReference } from "./rowaccesspolicyreference";
+import { DmlStatistics } from "./dmlstatistics";
+import { MlStatistics } from "./mlstatistics";
+import { BigQueryModelTraining } from "./bigquerymodeltraining";
+import { ExplainQueryStage } from "./explainquerystage";
+import { TableSchema } from "./tableschema";
+import { SearchStatistics } from "./searchstatistics";
+import { SparkStatistics } from "./sparkstatistics";
+import { QueryTimelineSample } from "./querytimelinesample";
+import { QueryParameter } from "./queryparameter";
+export declare class JobStatistics2ReservationUsage extends SpeakeasyBase {
+    name?: string;
+    slotMs?: string;
+}
+export declare class JobStatistics2 extends SpeakeasyBase {
+    biEngineStatistics?: BiEngineStatistics;
+    billingTier?: number;
+    cacheHit?: boolean;
+    ddlAffectedRowAccessPolicyCount?: string;
+    ddlDestinationTable?: TableReference;
+    ddlOperationPerformed?: string;
+    ddlTargetDataset?: DatasetReference;
+    ddlTargetRoutine?: RoutineReference;
+    ddlTargetRowAccessPolicy?: RowAccessPolicyReference;
+    ddlTargetTable?: TableReference;
+    dmlStats?: DmlStatistics;
+    estimatedBytesProcessed?: string;
+    mlStatistics?: MlStatistics;
+    modelTraining?: BigQueryModelTraining;
+    modelTrainingCurrentIteration?: number;
+    modelTrainingExpectedTotalIteration?: string;
+    numDmlAffectedRows?: string;
+    queryPlan?: ExplainQueryStage[];
+    referencedRoutines?: RoutineReference[];
+    referencedTables?: TableReference[];
+    reservationUsage?: JobStatistics2ReservationUsage[];
+    schema?: TableSchema;
+    searchStatistics?: SearchStatistics;
+    sparkStatistics?: SparkStatistics;
+    statementType?: string;
+    timeline?: QueryTimelineSample[];
+    totalBytesBilled?: string;
+    totalBytesProcessed?: string;
+    totalBytesProcessedAccuracy?: string;
+    totalPartitionsProcessed?: string;
+    totalSlotMs?: string;
+    transferredBytes?: string;
+    undeclaredQueryParameters?: QueryParameter[];
+}

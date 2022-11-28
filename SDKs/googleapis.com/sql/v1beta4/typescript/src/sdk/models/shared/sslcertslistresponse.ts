@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SslCert } from "./sslcert";
+
 
 
 // SslCertsListResponse
@@ -8,9 +8,9 @@ import { SslCert } from "./sslcert";
  * SslCerts list response.
 **/
 export class SslCertsListResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=items", elemType: shared.SslCert })
+  @SpeakeasyMetadata({ data: "json, name=items", elemType: SslCert })
   items?: SslCert[];
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 }

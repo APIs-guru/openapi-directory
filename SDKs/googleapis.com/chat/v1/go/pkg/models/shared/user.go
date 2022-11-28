@@ -8,6 +8,16 @@ const (
 	UserTypeEnumBot             UserTypeEnum = "BOT"
 )
 
+// UserInput
+// A user in Google Chat.
+type UserInput struct {
+	DomainID *string       `json:"domainId,omitempty"`
+	Name     *string       `json:"name,omitempty"`
+	Type     *UserTypeEnum `json:"type,omitempty"`
+}
+
+// User
+// A user in Google Chat.
 type User struct {
 	DisplayName *string       `json:"displayName,omitempty"`
 	DomainID    *string       `json:"domainId,omitempty"`

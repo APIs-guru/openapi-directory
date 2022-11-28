@@ -1,5 +1,7 @@
 package shared
 
+// CounterUpdate
+// An update to a Counter sent from a worker.
 type CounterUpdate struct {
 	Boolean                   *bool                             `json:"boolean,omitempty"`
 	Cumulative                *bool                             `json:"cumulative,omitempty"`

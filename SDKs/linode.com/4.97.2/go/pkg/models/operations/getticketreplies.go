@@ -13,23 +13,9 @@ type GetTicketRepliesQueryParams struct {
 	PageSize *int64 `queryParam:"style=form,explode=true,name=page_size"`
 }
 
-type GetTicketRepliesSecurityOption1 struct {
-	PersonalAccessToken shared.SchemePersonalAccessToken `security:"scheme,type=http,subtype=bearer"`
-}
-
-type GetTicketRepliesSecurityOption2 struct {
-	Oauth shared.SchemeOauth `security:"scheme,type=oauth2"`
-}
-
 type GetTicketRepliesSecurity struct {
-	Option1 *GetTicketRepliesSecurityOption1 `security:"option"`
-	Option2 *GetTicketRepliesSecurityOption2 `security:"option"`
-}
-
-type GetTicketRepliesRequest struct {
-	PathParams  GetTicketRepliesPathParams
-	QueryParams GetTicketRepliesQueryParams
-	Security    GetTicketRepliesSecurity
+	PersonalAccessToken *shared.SchemePersonalAccessToken `security:"scheme,type=http,subtype=bearer"`
+	Oauth               *shared.SchemeOauth               `security:"scheme,type=oauth2"`
 }
 
 type GetTicketReplies200ApplicationJSON struct {
@@ -41,6 +27,12 @@ type GetTicketReplies200ApplicationJSON struct {
 
 type GetTicketRepliesDefaultApplicationJSON struct {
 	Errors []shared.ErrorObject `json:"errors,omitempty"`
+}
+
+type GetTicketRepliesRequest struct {
+	PathParams  GetTicketRepliesPathParams
+	QueryParams GetTicketRepliesQueryParams
+	Security    GetTicketRepliesSecurity
 }
 
 type GetTicketRepliesResponse struct {

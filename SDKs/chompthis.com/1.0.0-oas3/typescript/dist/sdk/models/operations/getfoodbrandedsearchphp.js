@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export var GetFoodBrandedSearchPhpDietEnum;
 (function (GetFoodBrandedSearchPhpDietEnum) {
@@ -36,59 +36,59 @@ var GetFoodBrandedSearchPhpQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=allergen" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=allergen" }),
         __metadata("design:type", String)
     ], GetFoodBrandedSearchPhpQueryParams.prototype, "allergen", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=brand" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=brand" }),
         __metadata("design:type", String)
     ], GetFoodBrandedSearchPhpQueryParams.prototype, "brand", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=category" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=category" }),
         __metadata("design:type", String)
     ], GetFoodBrandedSearchPhpQueryParams.prototype, "category", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=country" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=country" }),
         __metadata("design:type", String)
     ], GetFoodBrandedSearchPhpQueryParams.prototype, "country", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=diet" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=diet" }),
         __metadata("design:type", String)
     ], GetFoodBrandedSearchPhpQueryParams.prototype, "diet", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=ingredient" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=ingredient" }),
         __metadata("design:type", String)
     ], GetFoodBrandedSearchPhpQueryParams.prototype, "ingredient", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=keyword" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=keyword" }),
         __metadata("design:type", String)
     ], GetFoodBrandedSearchPhpQueryParams.prototype, "keyword", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=limit" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=limit" }),
         __metadata("design:type", Number)
     ], GetFoodBrandedSearchPhpQueryParams.prototype, "limit", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=mineral" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=mineral" }),
         __metadata("design:type", String)
     ], GetFoodBrandedSearchPhpQueryParams.prototype, "mineral", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=nutrient" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=nutrient" }),
         __metadata("design:type", String)
     ], GetFoodBrandedSearchPhpQueryParams.prototype, "nutrient", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=page" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page" }),
         __metadata("design:type", Number)
     ], GetFoodBrandedSearchPhpQueryParams.prototype, "page", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=palm_oil" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=palm_oil" }),
         __metadata("design:type", String)
     ], GetFoodBrandedSearchPhpQueryParams.prototype, "palmOil", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=trace" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=trace" }),
         __metadata("design:type", String)
     ], GetFoodBrandedSearchPhpQueryParams.prototype, "trace", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=vitamin" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=vitamin" }),
         __metadata("design:type", String)
     ], GetFoodBrandedSearchPhpQueryParams.prototype, "vitamin", void 0);
     return GetFoodBrandedSearchPhpQueryParams;
@@ -100,7 +100,7 @@ var GetFoodBrandedSearchPhpSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=query" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=query" }),
         __metadata("design:type", shared.SchemeApiKeyAuth)
     ], GetFoodBrandedSearchPhpSecurity.prototype, "apiKeyAuth", void 0);
     return GetFoodBrandedSearchPhpSecurity;
@@ -112,11 +112,11 @@ var GetFoodBrandedSearchPhpRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetFoodBrandedSearchPhpQueryParams)
     ], GetFoodBrandedSearchPhpRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetFoodBrandedSearchPhpSecurity)
     ], GetFoodBrandedSearchPhpRequest.prototype, "security", void 0);
     return GetFoodBrandedSearchPhpRequest;
@@ -128,15 +128,15 @@ var GetFoodBrandedSearchPhpResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.BrandedFoodObject)
     ], GetFoodBrandedSearchPhpResponse.prototype, "brandedFoodObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetFoodBrandedSearchPhpResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetFoodBrandedSearchPhpResponse.prototype, "statusCode", void 0);
     return GetFoodBrandedSearchPhpResponse;

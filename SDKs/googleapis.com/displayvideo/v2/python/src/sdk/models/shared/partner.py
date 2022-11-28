@@ -1,10 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import partneradserverconfig
-from . import partnerdataaccessconfig
-from . import exchangeconfig
-from . import partnergeneralconfig
+from sdk import utils
+from . import *
 
 class PartnerEntityStatusEnum(str, Enum):
     ENTITY_STATUS_UNSPECIFIED = "ENTITY_STATUS_UNSPECIFIED"
@@ -18,13 +20,17 @@ class PartnerEntityStatusEnum(str, Enum):
 @dataclass_json
 @dataclass
 class Partner:
-    ad_server_config: Optional[partneradserverconfig.PartnerAdServerConfig] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'adServerConfig' }})
-    data_access_config: Optional[partnerdataaccessconfig.PartnerDataAccessConfig] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'dataAccessConfig' }})
-    display_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'displayName' }})
-    entity_status: Optional[PartnerEntityStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'entityStatus' }})
-    exchange_config: Optional[exchangeconfig.ExchangeConfig] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'exchangeConfig' }})
-    general_config: Optional[partnergeneralconfig.PartnerGeneralConfig] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'generalConfig' }})
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    partner_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'partnerId' }})
-    update_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'updateTime' }})
+    r"""Partner
+    A single partner in Display & Video 360 (DV360).
+    """
+    
+    ad_server_config: Optional[PartnerAdServerConfig] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('adServerConfig') }})
+    data_access_config: Optional[PartnerDataAccessConfig] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('dataAccessConfig') }})
+    display_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('displayName') }})
+    entity_status: Optional[PartnerEntityStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('entityStatus') }})
+    exchange_config: Optional[ExchangeConfig] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('exchangeConfig') }})
+    general_config: Optional[PartnerGeneralConfig] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('generalConfig') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    partner_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('partnerId') }})
+    update_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('updateTime') }})
     

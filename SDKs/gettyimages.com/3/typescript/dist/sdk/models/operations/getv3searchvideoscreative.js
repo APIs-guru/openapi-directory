@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetV3SearchVideosCreativeQueryParams = /** @class */ (function (_super) {
     __extends(GetV3SearchVideosCreativeQueryParams, _super);
@@ -30,119 +30,119 @@ var GetV3SearchVideosCreativeQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=false;name=age_of_people" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=age_of_people" }),
         __metadata("design:type", Array)
     ], GetV3SearchVideosCreativeQueryParams.prototype, "ageOfPeople", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=artists" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=artists" }),
         __metadata("design:type", String)
     ], GetV3SearchVideosCreativeQueryParams.prototype, "artists", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=false;name=aspect_ratios" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=aspect_ratios" }),
         __metadata("design:type", Array)
     ], GetV3SearchVideosCreativeQueryParams.prototype, "aspectRatios", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=false;name=collection_codes" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=collection_codes" }),
         __metadata("design:type", Array)
     ], GetV3SearchVideosCreativeQueryParams.prototype, "collectionCodes", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=collections_filter_type" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=collections_filter_type" }),
         __metadata("design:type", String)
     ], GetV3SearchVideosCreativeQueryParams.prototype, "collectionsFilterType", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=false;name=compositions" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=compositions" }),
         __metadata("design:type", Array)
     ], GetV3SearchVideosCreativeQueryParams.prototype, "compositions", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=download_product" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=download_product" }),
         __metadata("design:type", String)
     ], GetV3SearchVideosCreativeQueryParams.prototype, "downloadProduct", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=exclude_editorial_use_only" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=exclude_editorial_use_only" }),
         __metadata("design:type", Boolean)
     ], GetV3SearchVideosCreativeQueryParams.prototype, "excludeEditorialUseOnly", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=exclude_nudity" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=exclude_nudity" }),
         __metadata("design:type", Boolean)
     ], GetV3SearchVideosCreativeQueryParams.prototype, "excludeNudity", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=false;name=facet_fields" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=facet_fields" }),
         __metadata("design:type", Array)
     ], GetV3SearchVideosCreativeQueryParams.prototype, "facetFields", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=facet_max_count" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=facet_max_count" }),
         __metadata("design:type", Number)
     ], GetV3SearchVideosCreativeQueryParams.prototype, "facetMaxCount", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=false;name=fields" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=fields" }),
         __metadata("design:type", Array)
     ], GetV3SearchVideosCreativeQueryParams.prototype, "fields", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=format_available" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=format_available" }),
         __metadata("design:type", String)
     ], GetV3SearchVideosCreativeQueryParams.prototype, "formatAvailable", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=false;name=frame_rates" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=frame_rates" }),
         __metadata("design:type", Array)
     ], GetV3SearchVideosCreativeQueryParams.prototype, "frameRates", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=false;name=image_techniques" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=image_techniques" }),
         __metadata("design:type", Array)
     ], GetV3SearchVideosCreativeQueryParams.prototype, "imageTechniques", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=include_facets" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=include_facets" }),
         __metadata("design:type", Boolean)
     ], GetV3SearchVideosCreativeQueryParams.prototype, "includeFacets", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=include_related_searches" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=include_related_searches" }),
         __metadata("design:type", Boolean)
     ], GetV3SearchVideosCreativeQueryParams.prototype, "includeRelatedSearches", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=false;name=keyword_ids" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=keyword_ids" }),
         __metadata("design:type", Array)
     ], GetV3SearchVideosCreativeQueryParams.prototype, "keywordIds", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=false;name=license_models" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=license_models" }),
         __metadata("design:type", Array)
     ], GetV3SearchVideosCreativeQueryParams.prototype, "licenseModels", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=max_clip_length" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=max_clip_length" }),
         __metadata("design:type", Number)
     ], GetV3SearchVideosCreativeQueryParams.prototype, "maxClipLength", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=min_clip_length" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=min_clip_length" }),
         __metadata("design:type", Number)
     ], GetV3SearchVideosCreativeQueryParams.prototype, "minClipLength", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=false;name=orientations" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=orientations" }),
         __metadata("design:type", Array)
     ], GetV3SearchVideosCreativeQueryParams.prototype, "orientations", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=page" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page" }),
         __metadata("design:type", Number)
     ], GetV3SearchVideosCreativeQueryParams.prototype, "page", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=page_size" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page_size" }),
         __metadata("design:type", Number)
     ], GetV3SearchVideosCreativeQueryParams.prototype, "pageSize", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=phrase" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=phrase" }),
         __metadata("design:type", String)
     ], GetV3SearchVideosCreativeQueryParams.prototype, "phrase", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=release_status" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=release_status" }),
         __metadata("design:type", String)
     ], GetV3SearchVideosCreativeQueryParams.prototype, "releaseStatus", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=safe_search" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=safe_search" }),
         __metadata("design:type", Boolean)
     ], GetV3SearchVideosCreativeQueryParams.prototype, "safeSearch", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=sort_order" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sort_order" }),
         __metadata("design:type", String)
     ], GetV3SearchVideosCreativeQueryParams.prototype, "sortOrder", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=false;name=viewpoints" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=viewpoints" }),
         __metadata("design:type", Array)
     ], GetV3SearchVideosCreativeQueryParams.prototype, "viewpoints", void 0);
     return GetV3SearchVideosCreativeQueryParams;
@@ -154,11 +154,11 @@ var GetV3SearchVideosCreativeHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=Accept-Language" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Accept-Language" }),
         __metadata("design:type", String)
     ], GetV3SearchVideosCreativeHeaders.prototype, "acceptLanguage", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=GI-Country-Code" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=GI-Country-Code" }),
         __metadata("design:type", String)
     ], GetV3SearchVideosCreativeHeaders.prototype, "giCountryCode", void 0);
     return GetV3SearchVideosCreativeHeaders;
@@ -170,11 +170,11 @@ var GetV3SearchVideosCreativeRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetV3SearchVideosCreativeQueryParams)
     ], GetV3SearchVideosCreativeRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetV3SearchVideosCreativeHeaders)
     ], GetV3SearchVideosCreativeRequest.prototype, "headers", void 0);
     return GetV3SearchVideosCreativeRequest;
@@ -186,15 +186,15 @@ var GetV3SearchVideosCreativeResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetV3SearchVideosCreativeResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.CreativeVideoSearchResults)
     ], GetV3SearchVideosCreativeResponse.prototype, "creativeVideoSearchResults", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetV3SearchVideosCreativeResponse.prototype, "statusCode", void 0);
     return GetV3SearchVideosCreativeResponse;

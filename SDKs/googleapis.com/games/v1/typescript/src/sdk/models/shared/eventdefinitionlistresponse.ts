@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { EventDefinition } from "./eventdefinition";
+
 
 
 // EventDefinitionListResponse
@@ -8,12 +8,12 @@ import { EventDefinition } from "./eventdefinition";
  * A ListDefinitions response.
 **/
 export class EventDefinitionListResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=items", elemType: shared.EventDefinition })
+  @SpeakeasyMetadata({ data: "json, name=items", elemType: EventDefinition })
   items?: EventDefinition[];
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 }

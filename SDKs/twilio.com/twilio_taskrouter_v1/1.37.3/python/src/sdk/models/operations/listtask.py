@@ -1,0 +1,69 @@
+from dataclasses import dataclass, field
+from typing import List,Optional
+from dataclasses_json import dataclass_json
+from sdk import utils
+from sdk.models import shared
+
+
+LIST_TASK_SERVERS = [
+	"https://taskrouter.twilio.com",
+]
+
+
+@dataclass
+class ListTaskPathParams:
+    workspace_sid: str = field(metadata={'path_param': { 'field_name': 'WorkspaceSid', 'style': 'simple', 'explode': False }})
+    
+
+@dataclass
+class ListTaskQueryParams:
+    assignment_status: Optional[List[str]] = field(default=None, metadata={'query_param': { 'field_name': 'AssignmentStatus', 'style': 'form', 'explode': True }})
+    evaluate_task_attributes: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'EvaluateTaskAttributes', 'style': 'form', 'explode': True }})
+    has_addons: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'HasAddons', 'style': 'form', 'explode': True }})
+    ordering: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'Ordering', 'style': 'form', 'explode': True }})
+    page_size: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'PageSize', 'style': 'form', 'explode': True }})
+    priority: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'Priority', 'style': 'form', 'explode': True }})
+    task_queue_name: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'TaskQueueName', 'style': 'form', 'explode': True }})
+    task_queue_sid: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'TaskQueueSid', 'style': 'form', 'explode': True }})
+    workflow_name: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'WorkflowName', 'style': 'form', 'explode': True }})
+    workflow_sid: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'WorkflowSid', 'style': 'form', 'explode': True }})
+    
+
+@dataclass
+class ListTaskSecurity:
+    account_sid_auth_token: shared.SchemeAccountSidAuthToken = field(metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'basic' }})
+    
+
+@dataclass_json
+@dataclass
+class ListTaskListTaskResponseMeta:
+    first_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('first_page_url') }})
+    key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('key') }})
+    next_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('next_page_url') }})
+    page: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('page') }})
+    page_size: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('page_size') }})
+    previous_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('previous_page_url') }})
+    url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('url') }})
+    
+
+@dataclass_json
+@dataclass
+class ListTaskListTaskResponse:
+    meta: Optional[ListTaskListTaskResponseMeta] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('meta') }})
+    tasks: Optional[List[shared.TaskrouterV1WorkspaceTask]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('tasks') }})
+    
+
+@dataclass
+class ListTaskRequest:
+    path_params: ListTaskPathParams = field()
+    query_params: ListTaskQueryParams = field()
+    security: ListTaskSecurity = field()
+    server_url: Optional[str] = field(default=None)
+    
+
+@dataclass
+class ListTaskResponse:
+    content_type: str = field()
+    status_code: int = field()
+    list_task_response: Optional[ListTaskListTaskResponse] = field(default=None)
+    

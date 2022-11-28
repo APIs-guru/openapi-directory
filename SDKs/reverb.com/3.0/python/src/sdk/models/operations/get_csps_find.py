@@ -10,11 +10,11 @@ class GetCspsFindQueryParams:
 
 @dataclass
 class GetCspsFindRequest:
-    query_params: GetCspsFindQueryParams = field(default=None)
+    query_params: GetCspsFindQueryParams = field()
     
 
 @dataclass
 class GetCspsFindResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

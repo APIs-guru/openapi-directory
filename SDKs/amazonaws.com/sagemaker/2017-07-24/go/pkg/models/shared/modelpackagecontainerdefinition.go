@@ -1,5 +1,7 @@
 package shared
 
+// ModelPackageContainerDefinition
+// Describes the Docker container for the model package.
 type ModelPackageContainerDefinition struct {
 	ContainerHostname *string           `json:"ContainerHostname,omitempty"`
 	Environment       map[string]string `json:"Environment,omitempty"`

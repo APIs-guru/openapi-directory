@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetAssociateDhcpOptionsActionEnum(str, Enum):
     ASSOCIATE_DHCP_OPTIONS = "AssociateDhcpOptions"
@@ -10,11 +14,11 @@ class GetAssociateDhcpOptionsVersionEnum(str, Enum):
 
 @dataclass
 class GetAssociateDhcpOptionsQueryParams:
-    action: GetAssociateDhcpOptionsActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    dhcp_options_id: str = field(default=None, metadata={'query_param': { 'field_name': 'DhcpOptionsId', 'style': 'form', 'explode': True }})
+    action: GetAssociateDhcpOptionsActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    dhcp_options_id: str = field(metadata={'query_param': { 'field_name': 'DhcpOptionsId', 'style': 'form', 'explode': True }})
+    version: GetAssociateDhcpOptionsVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    vpc_id: str = field(metadata={'query_param': { 'field_name': 'VpcId', 'style': 'form', 'explode': True }})
     dry_run: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'DryRun', 'style': 'form', 'explode': True }})
-    version: GetAssociateDhcpOptionsVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
-    vpc_id: str = field(default=None, metadata={'query_param': { 'field_name': 'VpcId', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -30,12 +34,12 @@ class GetAssociateDhcpOptionsHeaders:
 
 @dataclass
 class GetAssociateDhcpOptionsRequest:
-    query_params: GetAssociateDhcpOptionsQueryParams = field(default=None)
-    headers: GetAssociateDhcpOptionsHeaders = field(default=None)
+    headers: GetAssociateDhcpOptionsHeaders = field()
+    query_params: GetAssociateDhcpOptionsQueryParams = field()
     
 
 @dataclass
 class GetAssociateDhcpOptionsResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

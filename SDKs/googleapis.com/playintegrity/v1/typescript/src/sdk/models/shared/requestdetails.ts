@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // RequestDetails
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Contains the integrity request information.
 **/
 export class RequestDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=nonce" })
+  @SpeakeasyMetadata({ data: "json, name=nonce" })
   nonce?: string;
 
-  @Metadata({ data: "json, name=requestPackageName" })
+  @SpeakeasyMetadata({ data: "json, name=requestPackageName" })
   requestPackageName?: string;
 
-  @Metadata({ data: "json, name=timestampMillis" })
+  @SpeakeasyMetadata({ data: "json, name=timestampMillis" })
   timestampMillis?: string;
 }

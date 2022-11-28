@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Delegate } from "./delegate";
+
 
 
 // ListDelegatesResponse
@@ -8,6 +8,6 @@ import { Delegate } from "./delegate";
  * Response for the ListDelegates method.
 **/
 export class ListDelegatesResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=delegates", elemType: shared.Delegate })
+  @SpeakeasyMetadata({ data: "json, name=delegates", elemType: Delegate })
   delegates?: Delegate[];
 }

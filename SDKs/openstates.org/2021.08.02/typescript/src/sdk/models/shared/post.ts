@@ -1,16 +1,17 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class Post extends SpeakeasyBase {
-  @Metadata({ data: "json, name=division_id" })
+  @SpeakeasyMetadata({ data: "json, name=division_id" })
   divisionId: string;
 
-  @Metadata({ data: "json, name=label" })
+  @SpeakeasyMetadata({ data: "json, name=label" })
   label: string;
 
-  @Metadata({ data: "json, name=maximum_memberships" })
+  @SpeakeasyMetadata({ data: "json, name=maximum_memberships" })
   maximumMemberships: number;
 
-  @Metadata({ data: "json, name=role" })
+  @SpeakeasyMetadata({ data: "json, name=role" })
   role: string;
 }

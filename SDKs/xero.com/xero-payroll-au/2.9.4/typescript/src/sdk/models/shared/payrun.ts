@@ -1,56 +1,105 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PayRunStatusEnum } from "./payrunstatusenum";
 import { PayslipSummary } from "./payslipsummary";
 import { ValidationError } from "./validationerror";
+import { PayslipSummaryInput } from "./payslipsummary";
+
 
 
 export class PayRun extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Deductions" })
+  @SpeakeasyMetadata({ data: "json, name=Deductions" })
   deductions?: number;
 
-  @Metadata({ data: "json, name=NetPay" })
+  @SpeakeasyMetadata({ data: "json, name=NetPay" })
   netPay?: number;
 
-  @Metadata({ data: "json, name=PayRunID" })
+  @SpeakeasyMetadata({ data: "json, name=PayRunID" })
   payRunId?: string;
 
-  @Metadata({ data: "json, name=PayRunPeriodEndDate" })
+  @SpeakeasyMetadata({ data: "json, name=PayRunPeriodEndDate" })
   payRunPeriodEndDate?: string;
 
-  @Metadata({ data: "json, name=PayRunPeriodStartDate" })
+  @SpeakeasyMetadata({ data: "json, name=PayRunPeriodStartDate" })
   payRunPeriodStartDate?: string;
 
-  @Metadata({ data: "json, name=PayRunStatus" })
+  @SpeakeasyMetadata({ data: "json, name=PayRunStatus" })
   payRunStatus?: PayRunStatusEnum;
 
-  @Metadata({ data: "json, name=PaymentDate" })
+  @SpeakeasyMetadata({ data: "json, name=PaymentDate" })
   paymentDate?: string;
 
-  @Metadata({ data: "json, name=PayrollCalendarID" })
+  @SpeakeasyMetadata({ data: "json, name=PayrollCalendarID" })
   payrollCalendarId: string;
 
-  @Metadata({ data: "json, name=PayslipMessage" })
+  @SpeakeasyMetadata({ data: "json, name=PayslipMessage" })
   payslipMessage?: string;
 
-  @Metadata({ data: "json, name=Payslips", elemType: shared.PayslipSummary })
+  @SpeakeasyMetadata({ data: "json, name=Payslips", elemType: PayslipSummary })
   payslips?: PayslipSummary[];
 
-  @Metadata({ data: "json, name=Reimbursement" })
+  @SpeakeasyMetadata({ data: "json, name=Reimbursement" })
   reimbursement?: number;
 
-  @Metadata({ data: "json, name=Super" })
+  @SpeakeasyMetadata({ data: "json, name=Super" })
   super?: number;
 
-  @Metadata({ data: "json, name=Tax" })
+  @SpeakeasyMetadata({ data: "json, name=Tax" })
   tax?: number;
 
-  @Metadata({ data: "json, name=UpdatedDateUTC" })
+  @SpeakeasyMetadata({ data: "json, name=UpdatedDateUTC" })
   updatedDateUtc?: string;
 
-  @Metadata({ data: "json, name=ValidationErrors", elemType: shared.ValidationError })
+  @SpeakeasyMetadata({ data: "json, name=ValidationErrors", elemType: ValidationError })
   validationErrors?: ValidationError[];
 
-  @Metadata({ data: "json, name=Wages" })
+  @SpeakeasyMetadata({ data: "json, name=Wages" })
+  wages?: number;
+}
+
+
+export class PayRunInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=Deductions" })
+  deductions?: number;
+
+  @SpeakeasyMetadata({ data: "json, name=NetPay" })
+  netPay?: number;
+
+  @SpeakeasyMetadata({ data: "json, name=PayRunID" })
+  payRunId?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=PayRunPeriodEndDate" })
+  payRunPeriodEndDate?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=PayRunPeriodStartDate" })
+  payRunPeriodStartDate?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=PayRunStatus" })
+  payRunStatus?: PayRunStatusEnum;
+
+  @SpeakeasyMetadata({ data: "json, name=PaymentDate" })
+  paymentDate?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=PayrollCalendarID" })
+  payrollCalendarId: string;
+
+  @SpeakeasyMetadata({ data: "json, name=PayslipMessage" })
+  payslipMessage?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=Payslips", elemType: PayslipSummaryInput })
+  payslips?: PayslipSummaryInput[];
+
+  @SpeakeasyMetadata({ data: "json, name=Reimbursement" })
+  reimbursement?: number;
+
+  @SpeakeasyMetadata({ data: "json, name=Super" })
+  super?: number;
+
+  @SpeakeasyMetadata({ data: "json, name=Tax" })
+  tax?: number;
+
+  @SpeakeasyMetadata({ data: "json, name=ValidationErrors", elemType: ValidationError })
+  validationErrors?: ValidationError[];
+
+  @SpeakeasyMetadata({ data: "json, name=Wages" })
   wages?: number;
 }

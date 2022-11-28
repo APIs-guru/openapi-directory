@@ -15,6 +15,8 @@ type CreateResourceDefinitionHeaders struct {
 	XAmznClientToken  *string `header:"style=simple,explode=false,name=X-Amzn-Client-Token"`
 }
 
+// CreateResourceDefinitionRequestBodyInitialVersion
+// Information about a resource definition version.
 type CreateResourceDefinitionRequestBodyInitialVersion struct {
 	Resources []shared.Resource `json:"Resources,omitempty"`
 }

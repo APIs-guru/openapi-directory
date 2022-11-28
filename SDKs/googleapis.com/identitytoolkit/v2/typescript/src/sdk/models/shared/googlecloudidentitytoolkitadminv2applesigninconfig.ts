@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudIdentitytoolkitAdminV2CodeFlowConfig } from "./googlecloudidentitytoolkitadminv2codeflowconfig";
+
 
 
 // GoogleCloudIdentitytoolkitAdminV2AppleSignInConfig
@@ -7,9 +8,9 @@ import { GoogleCloudIdentitytoolkitAdminV2CodeFlowConfig } from "./googlecloudid
  * Additional config for SignInWithApple.
 **/
 export class GoogleCloudIdentitytoolkitAdminV2AppleSignInConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=bundleIds" })
+  @SpeakeasyMetadata({ data: "json, name=bundleIds" })
   bundleIds?: string[];
 
-  @Metadata({ data: "json, name=codeFlowConfig" })
+  @SpeakeasyMetadata({ data: "json, name=codeFlowConfig" })
   codeFlowConfig?: GoogleCloudIdentitytoolkitAdminV2CodeFlowConfig;
 }

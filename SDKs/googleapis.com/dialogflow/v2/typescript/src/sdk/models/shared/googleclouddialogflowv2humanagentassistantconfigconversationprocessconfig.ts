@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudDialogflowV2HumanAgentAssistantConfigConversationProcessConfig
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Config to process conversation.
 **/
 export class GoogleCloudDialogflowV2HumanAgentAssistantConfigConversationProcessConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=recentSentencesCount" })
+  @SpeakeasyMetadata({ data: "json, name=recentSentencesCount" })
   recentSentencesCount?: number;
 }

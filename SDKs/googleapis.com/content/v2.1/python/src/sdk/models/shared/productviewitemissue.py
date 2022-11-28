@@ -1,8 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import productviewitemissueitemissuetype
-from . import productviewitemissueitemissueseverity
+from sdk import utils
+from . import *
 
 class ProductViewItemIssueResolutionEnum(str, Enum):
     UNKNOWN = "UNKNOWN"
@@ -13,7 +14,11 @@ class ProductViewItemIssueResolutionEnum(str, Enum):
 @dataclass_json
 @dataclass
 class ProductViewItemIssue:
-    issue_type: Optional[productviewitemissueitemissuetype.ProductViewItemIssueItemIssueType] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'issueType' }})
-    resolution: Optional[ProductViewItemIssueResolutionEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'resolution' }})
-    severity: Optional[productviewitemissueitemissueseverity.ProductViewItemIssueItemIssueSeverity] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'severity' }})
+    r"""ProductViewItemIssue
+    Item issue associated with the product.
+    """
+    
+    issue_type: Optional[ProductViewItemIssueItemIssueType] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('issueType') }})
+    resolution: Optional[ProductViewItemIssueResolutionEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('resolution') }})
+    severity: Optional[ProductViewItemIssueItemIssueSeverity] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('severity') }})
     

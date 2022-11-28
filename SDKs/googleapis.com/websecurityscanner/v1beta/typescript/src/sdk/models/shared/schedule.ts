@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Schedule
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Scan schedule configuration.
 **/
 export class Schedule extends SpeakeasyBase {
-  @Metadata({ data: "json, name=intervalDurationDays" })
+  @SpeakeasyMetadata({ data: "json, name=intervalDurationDays" })
   intervalDurationDays?: number;
 
-  @Metadata({ data: "json, name=scheduleTime" })
+  @SpeakeasyMetadata({ data: "json, name=scheduleTime" })
   scheduleTime?: string;
 }

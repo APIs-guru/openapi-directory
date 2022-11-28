@@ -22,14 +22,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var MediaSearchReadPathParams = /** @class */ (function (_super) {
     __extends(MediaSearchReadPathParams, _super);
     function MediaSearchReadPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=movie_title" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=movie_title" }),
         __metadata("design:type", String)
     ], MediaSearchReadPathParams.prototype, "movieTitle", void 0);
     return MediaSearchReadPathParams;
@@ -41,7 +41,7 @@ var MediaSearchReadRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", MediaSearchReadPathParams)
     ], MediaSearchReadRequest.prototype, "pathParams", void 0);
     return MediaSearchReadRequest;
@@ -53,11 +53,11 @@ var MediaSearchReadResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], MediaSearchReadResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], MediaSearchReadResponse.prototype, "statusCode", void 0);
     return MediaSearchReadResponse;

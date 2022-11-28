@@ -16,12 +16,6 @@ type GetReportPkLogSecurity struct {
 	Jwt shared.SchemeJwt `security:"scheme,type=http,subtype=bearer"`
 }
 
-type GetReportPkLogRequest struct {
-	PathParams  GetReportPkLogPathParams
-	QueryParams GetReportPkLogQueryParams
-	Security    GetReportPkLogSecurity
-}
-
 type GetReportPkLog200ApplicationJSON struct {
 	Count  *float64                                  `json:"count,omitempty"`
 	Ids    []string                                  `json:"ids,omitempty"`
@@ -42,6 +36,12 @@ type GetReportPkLog422ApplicationJSON struct {
 
 type GetReportPkLog500ApplicationJSON struct {
 	Message *string `json:"message,omitempty"`
+}
+
+type GetReportPkLogRequest struct {
+	PathParams  GetReportPkLogPathParams
+	QueryParams GetReportPkLogQueryParams
+	Security    GetReportPkLogSecurity
 }
 
 type GetReportPkLogResponse struct {

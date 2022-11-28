@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ElasticsearchDataSourceConfig
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Describes an Elasticsearch data source configuration.
 **/
 export class ElasticsearchDataSourceConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=awsRegion" })
+  @SpeakeasyMetadata({ data: "json, name=awsRegion" })
   awsRegion: string;
 
-  @Metadata({ data: "json, name=endpoint" })
+  @SpeakeasyMetadata({ data: "json, name=endpoint" })
   endpoint: string;
 }

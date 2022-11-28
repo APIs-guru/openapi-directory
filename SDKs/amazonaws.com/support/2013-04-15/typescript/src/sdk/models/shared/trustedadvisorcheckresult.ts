@@ -1,8 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TrustedAdvisorCategorySpecificSummary } from "./trustedadvisorcategoryspecificsummary";
 import { TrustedAdvisorResourceDetail } from "./trustedadvisorresourcedetail";
 import { TrustedAdvisorResourcesSummary } from "./trustedadvisorresourcessummary";
+
 
 
 // TrustedAdvisorCheckResult
@@ -10,21 +10,21 @@ import { TrustedAdvisorResourcesSummary } from "./trustedadvisorresourcessummary
  * The results of a Trusted Advisor check returned by <a>DescribeTrustedAdvisorCheckResult</a>.
 **/
 export class TrustedAdvisorCheckResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=categorySpecificSummary" })
+  @SpeakeasyMetadata({ data: "json, name=categorySpecificSummary" })
   categorySpecificSummary: TrustedAdvisorCategorySpecificSummary;
 
-  @Metadata({ data: "json, name=checkId" })
+  @SpeakeasyMetadata({ data: "json, name=checkId" })
   checkId: string;
 
-  @Metadata({ data: "json, name=flaggedResources", elemType: shared.TrustedAdvisorResourceDetail })
+  @SpeakeasyMetadata({ data: "json, name=flaggedResources", elemType: TrustedAdvisorResourceDetail })
   flaggedResources: TrustedAdvisorResourceDetail[];
 
-  @Metadata({ data: "json, name=resourcesSummary" })
+  @SpeakeasyMetadata({ data: "json, name=resourcesSummary" })
   resourcesSummary: TrustedAdvisorResourcesSummary;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status: string;
 
-  @Metadata({ data: "json, name=timestamp" })
+  @SpeakeasyMetadata({ data: "json, name=timestamp" })
   timestamp: string;
 }

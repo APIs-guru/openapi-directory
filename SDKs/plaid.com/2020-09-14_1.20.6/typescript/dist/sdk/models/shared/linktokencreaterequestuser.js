@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // LinkTokenCreateRequestUser
 /**
  * An object specifying information about the end user who will be linking their account.
@@ -33,35 +33,35 @@ var LinkTokenCreateRequestUser = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=client_user_id" }),
+        SpeakeasyMetadata({ data: "json, name=client_user_id" }),
         __metadata("design:type", String)
     ], LinkTokenCreateRequestUser.prototype, "clientUserId", void 0);
     __decorate([
-        Metadata({ data: "json, name=date_of_birth" }),
+        SpeakeasyMetadata({ data: "json, name=date_of_birth" }),
         __metadata("design:type", Date)
     ], LinkTokenCreateRequestUser.prototype, "dateOfBirth", void 0);
     __decorate([
-        Metadata({ data: "json, name=email_address" }),
+        SpeakeasyMetadata({ data: "json, name=email_address" }),
         __metadata("design:type", String)
     ], LinkTokenCreateRequestUser.prototype, "emailAddress", void 0);
     __decorate([
-        Metadata({ data: "json, name=email_address_verified_time" }),
+        SpeakeasyMetadata({ data: "json, name=email_address_verified_time" }),
         __metadata("design:type", Date)
     ], LinkTokenCreateRequestUser.prototype, "emailAddressVerifiedTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=legal_name" }),
+        SpeakeasyMetadata({ data: "json, name=legal_name" }),
         __metadata("design:type", String)
     ], LinkTokenCreateRequestUser.prototype, "legalName", void 0);
     __decorate([
-        Metadata({ data: "json, name=phone_number" }),
+        SpeakeasyMetadata({ data: "json, name=phone_number" }),
         __metadata("design:type", String)
     ], LinkTokenCreateRequestUser.prototype, "phoneNumber", void 0);
     __decorate([
-        Metadata({ data: "json, name=phone_number_verified_time" }),
+        SpeakeasyMetadata({ data: "json, name=phone_number_verified_time" }),
         __metadata("design:type", Date)
     ], LinkTokenCreateRequestUser.prototype, "phoneNumberVerifiedTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=ssn" }),
+        SpeakeasyMetadata({ data: "json, name=ssn" }),
         __metadata("design:type", String)
     ], LinkTokenCreateRequestUser.prototype, "ssn", void 0);
     return LinkTokenCreateRequestUser;

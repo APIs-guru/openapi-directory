@@ -1,11 +1,11 @@
 from dataclasses import dataclass, field
-from typing import List,Optional
+from typing import Optional
 from sdk.models import shared
 
 
 @dataclass
 class RequestGroupRolesPathParams:
-    group_id: int = field(default=None, metadata={'path_param': { 'field_name': 'group_id', 'style': 'simple', 'explode': False }})
+    group_id: int = field(metadata={'path_param': { 'field_name': 'group_id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -15,14 +15,14 @@ class RequestGroupRolesHeaders:
 
 @dataclass
 class RequestGroupRolesRequest:
-    path_params: RequestGroupRolesPathParams = field(default=None)
-    headers: RequestGroupRolesHeaders = field(default=None)
+    headers: RequestGroupRolesHeaders = field()
+    path_params: RequestGroupRolesPathParams = field()
     
 
 @dataclass
 class RequestGroupRolesResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error_response: Optional[shared.ErrorResponse] = field(default=None)
     role_list: Optional[shared.RoleList] = field(default=None)
-    status_code: int = field(default=None)
     

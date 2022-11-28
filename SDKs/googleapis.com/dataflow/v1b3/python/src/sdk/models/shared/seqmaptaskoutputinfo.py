@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import sink
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class SeqMapTaskOutputInfo:
-    sink: Optional[sink.Sink] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'sink' }})
-    tag: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tag' }})
+    r"""SeqMapTaskOutputInfo
+    Information about an output of a SeqMapTask.
+    """
+    
+    sink: Optional[Sink] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('sink') }})
+    tag: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('tag') }})
     

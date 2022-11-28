@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // ReportTaskRunnerHeartbeatInput
 /**
  * Contains the parameters for ReportTaskRunnerHeartbeat.
@@ -33,15 +33,15 @@ var ReportTaskRunnerHeartbeatInput = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=hostname" }),
+        SpeakeasyMetadata({ data: "json, name=hostname" }),
         __metadata("design:type", String)
     ], ReportTaskRunnerHeartbeatInput.prototype, "hostname", void 0);
     __decorate([
-        Metadata({ data: "json, name=taskrunnerId" }),
+        SpeakeasyMetadata({ data: "json, name=taskrunnerId" }),
         __metadata("design:type", String)
     ], ReportTaskRunnerHeartbeatInput.prototype, "taskrunnerId", void 0);
     __decorate([
-        Metadata({ data: "json, name=workerGroup" }),
+        SpeakeasyMetadata({ data: "json, name=workerGroup" }),
         __metadata("design:type", String)
     ], ReportTaskRunnerHeartbeatInput.prototype, "workerGroup", void 0);
     return ReportTaskRunnerHeartbeatInput;

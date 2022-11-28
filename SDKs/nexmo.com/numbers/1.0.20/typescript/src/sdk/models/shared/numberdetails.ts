@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class NumberDetails extends SpeakeasyBase {
-  @Metadata({ data: "form, name=country;" })
+  @SpeakeasyMetadata({ data: "form, name=country;" })
   country: string;
 
-  @Metadata({ data: "form, name=msisdn;" })
+  @SpeakeasyMetadata({ data: "form, name=msisdn;" })
   msisdn: string;
 
-  @Metadata({ data: "form, name=target_api_key;" })
+  @SpeakeasyMetadata({ data: "form, name=target_api_key;" })
   targetApiKey?: string;
 }

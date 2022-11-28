@@ -11,18 +11,18 @@ class ExportEventsJSONQueryParams:
 
 @dataclass
 class ExportEventsJSONSecurity:
-    bearer_auth: shared.SchemeBearerAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer' }})
+    bearer_auth: shared.SchemeBearerAuth = field(metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer' }})
     
 
 @dataclass
 class ExportEventsJSONRequest:
-    query_params: ExportEventsJSONQueryParams = field(default=None)
-    security: ExportEventsJSONSecurity = field(default=None)
+    query_params: ExportEventsJSONQueryParams = field()
+    security: ExportEventsJSONSecurity = field()
     
 
 @dataclass
 class ExportEventsJSONResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     events: Optional[List[shared.Event]] = field(default=None)
-    status_code: int = field(default=None)
     

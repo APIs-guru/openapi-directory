@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import airportresource
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class AirportResponse:
-    airport_resource: Optional[airportresource.AirportResource] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AirportResource' }})
+    airport_resource: Optional[AirportResource] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('AirportResource') }})
     

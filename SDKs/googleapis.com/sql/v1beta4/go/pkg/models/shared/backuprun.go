@@ -31,6 +31,8 @@ const (
 	BackupRunTypeEnumOnDemand                    BackupRunTypeEnum = "ON_DEMAND"
 )
 
+// BackupRun
+// A BackupRun resource.
 type BackupRun struct {
 	BackupKind                  *BackupRunBackupKindEnum     `json:"backupKind,omitempty"`
 	Description                 *string                      `json:"description,omitempty"`

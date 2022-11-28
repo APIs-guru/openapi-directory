@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { IdentityAwareProxyClient } from "./identityawareproxyclient";
+
 
 
 // ListIdentityAwareProxyClientsResponse
@@ -8,9 +8,9 @@ import { IdentityAwareProxyClient } from "./identityawareproxyclient";
  * Response message for ListIdentityAwareProxyClients.
 **/
 export class ListIdentityAwareProxyClientsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=identityAwareProxyClients", elemType: shared.IdentityAwareProxyClient })
+  @SpeakeasyMetadata({ data: "json, name=identityAwareProxyClients", elemType: IdentityAwareProxyClient })
   identityAwareProxyClients?: IdentityAwareProxyClient[];
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 }

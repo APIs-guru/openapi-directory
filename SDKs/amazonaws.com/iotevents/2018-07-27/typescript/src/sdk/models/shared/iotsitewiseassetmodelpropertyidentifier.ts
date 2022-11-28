@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // IotSiteWiseAssetModelPropertyIdentifier
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  *  The asset model property identifer of the input routed from AWS IoT SiteWise. 
 **/
 export class IotSiteWiseAssetModelPropertyIdentifier extends SpeakeasyBase {
-  @Metadata({ data: "json, name=assetModelId" })
+  @SpeakeasyMetadata({ data: "json, name=assetModelId" })
   assetModelId: string;
 
-  @Metadata({ data: "json, name=propertyId" })
+  @SpeakeasyMetadata({ data: "json, name=propertyId" })
   propertyId: string;
 }

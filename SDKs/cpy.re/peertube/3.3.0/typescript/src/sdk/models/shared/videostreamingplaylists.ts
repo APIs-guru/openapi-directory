@@ -1,29 +1,29 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class VideoStreamingPlaylistsRedundancies extends SpeakeasyBase {
-  @Metadata({ data: "json, name=baseUrl" })
+  @SpeakeasyMetadata({ data: "json, name=baseUrl" })
   baseUrl?: string;
 }
 
 
 export class VideoStreamingPlaylists extends SpeakeasyBase {
-  @Metadata({ data: "json, name=files" })
+  @SpeakeasyMetadata({ data: "json, name=files" })
   files?: any[];
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: number;
 
-  @Metadata({ data: "json, name=playlistUrl" })
+  @SpeakeasyMetadata({ data: "json, name=playlistUrl" })
   playlistUrl?: string;
 
-  @Metadata({ data: "json, name=redundancies", elemType: shared.VideoStreamingPlaylistsRedundancies })
+  @SpeakeasyMetadata({ data: "json, name=redundancies", elemType: VideoStreamingPlaylistsRedundancies })
   redundancies?: VideoStreamingPlaylistsRedundancies[];
 
-  @Metadata({ data: "json, name=segmentsSha256Url" })
+  @SpeakeasyMetadata({ data: "json, name=segmentsSha256Url" })
   segmentsSha256Url?: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: number;
 }

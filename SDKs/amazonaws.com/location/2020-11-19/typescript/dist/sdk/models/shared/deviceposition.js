@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // DevicePosition
 /**
  * Contains the device position details.
@@ -33,19 +33,19 @@ var DevicePosition = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=DeviceId" }),
+        SpeakeasyMetadata({ data: "json, name=DeviceId" }),
         __metadata("design:type", String)
     ], DevicePosition.prototype, "deviceId", void 0);
     __decorate([
-        Metadata({ data: "json, name=Position" }),
+        SpeakeasyMetadata({ data: "json, name=Position" }),
         __metadata("design:type", Array)
     ], DevicePosition.prototype, "position", void 0);
     __decorate([
-        Metadata({ data: "json, name=ReceivedTime" }),
+        SpeakeasyMetadata({ data: "json, name=ReceivedTime" }),
         __metadata("design:type", Date)
     ], DevicePosition.prototype, "receivedTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=SampleTime" }),
+        SpeakeasyMetadata({ data: "json, name=SampleTime" }),
         __metadata("design:type", Date)
     ], DevicePosition.prototype, "sampleTime", void 0);
     return DevicePosition;

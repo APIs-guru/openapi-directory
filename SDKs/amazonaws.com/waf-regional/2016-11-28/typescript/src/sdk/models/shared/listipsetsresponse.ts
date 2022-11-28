@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { IpSetSummary } from "./ipsetsummary";
 
 
+
 export class ListIpSetsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=IPSets", elemType: shared.IpSetSummary })
+  @SpeakeasyMetadata({ data: "json, name=IPSets", elemType: IpSetSummary })
   ipSets?: IpSetSummary[];
 
-  @Metadata({ data: "json, name=NextMarker" })
+  @SpeakeasyMetadata({ data: "json, name=NextMarker" })
   nextMarker?: string;
 }

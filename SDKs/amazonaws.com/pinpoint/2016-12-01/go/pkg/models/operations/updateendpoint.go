@@ -19,6 +19,8 @@ type UpdateEndpointHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// UpdateEndpointRequestBodyEndpointRequest
+// Specifies the channel type and other settings for an endpoint.
 type UpdateEndpointRequestBodyEndpointRequest struct {
 	Address        *string                     `json:"Address,omitempty"`
 	Attributes     map[string][]string         `json:"Attributes,omitempty"`

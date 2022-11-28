@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// DescribeEventsMessage
+// <p/>
 type DescribeEventsMessage struct {
 	Duration         *int64          `json:"Duration,omitempty"`
 	EndTime          *time.Time      `json:"EndTime,omitempty"`

@@ -5,9 +5,9 @@ from sdk.models import shared
 
 @dataclass
 class GetRealmClientsIDEvaluateScopesScopeMappingsRoleContainerIDNotGrantedPathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
-    realm: str = field(default=None, metadata={'path_param': { 'field_name': 'realm', 'style': 'simple', 'explode': False }})
-    role_container_id: str = field(default=None, metadata={'path_param': { 'field_name': 'roleContainerId', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    realm: str = field(metadata={'path_param': { 'field_name': 'realm', 'style': 'simple', 'explode': False }})
+    role_container_id: str = field(metadata={'path_param': { 'field_name': 'roleContainerId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -17,13 +17,13 @@ class GetRealmClientsIDEvaluateScopesScopeMappingsRoleContainerIDNotGrantedQuery
 
 @dataclass
 class GetRealmClientsIDEvaluateScopesScopeMappingsRoleContainerIDNotGrantedRequest:
-    path_params: GetRealmClientsIDEvaluateScopesScopeMappingsRoleContainerIDNotGrantedPathParams = field(default=None)
-    query_params: GetRealmClientsIDEvaluateScopesScopeMappingsRoleContainerIDNotGrantedQueryParams = field(default=None)
+    path_params: GetRealmClientsIDEvaluateScopesScopeMappingsRoleContainerIDNotGrantedPathParams = field()
+    query_params: GetRealmClientsIDEvaluateScopesScopeMappingsRoleContainerIDNotGrantedQueryParams = field()
     
 
 @dataclass
 class GetRealmClientsIDEvaluateScopesScopeMappingsRoleContainerIDNotGrantedResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     role_representations: Optional[List[shared.RoleRepresentation]] = field(default=None)
-    status_code: int = field(default=None)
     

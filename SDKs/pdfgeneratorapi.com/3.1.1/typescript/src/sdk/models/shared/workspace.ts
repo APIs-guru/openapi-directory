@@ -1,16 +1,17 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class Workspace extends SpeakeasyBase {
-  @Metadata({ data: "json, name=created_at" })
+  @SpeakeasyMetadata({ data: "json, name=created_at" })
   createdAt?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: number;
 
-  @Metadata({ data: "json, name=identifier" })
+  @SpeakeasyMetadata({ data: "json, name=identifier" })
   identifier?: string;
 
-  @Metadata({ data: "json, name=is_master_workspace" })
+  @SpeakeasyMetadata({ data: "json, name=is_master_workspace" })
   isMasterWorkspace?: boolean;
 }

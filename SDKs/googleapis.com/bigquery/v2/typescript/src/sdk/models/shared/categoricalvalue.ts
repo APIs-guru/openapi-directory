@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CategoryCount } from "./categorycount";
+
 
 
 // CategoricalValue
@@ -8,6 +8,6 @@ import { CategoryCount } from "./categorycount";
  * Representative value of a categorical feature.
 **/
 export class CategoricalValue extends SpeakeasyBase {
-  @Metadata({ data: "json, name=categoryCounts", elemType: shared.CategoryCount })
+  @SpeakeasyMetadata({ data: "json, name=categoryCounts", elemType: CategoryCount })
   categoryCounts?: CategoryCount[];
 }

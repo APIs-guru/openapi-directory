@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // InstanceMetadata
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Provides information about the SSO instance.
 **/
 export class InstanceMetadata extends SpeakeasyBase {
-  @Metadata({ data: "json, name=IdentityStoreId" })
+  @SpeakeasyMetadata({ data: "json, name=IdentityStoreId" })
   identityStoreId?: string;
 
-  @Metadata({ data: "json, name=InstanceArn" })
+  @SpeakeasyMetadata({ data: "json, name=InstanceArn" })
   instanceArn?: string;
 }

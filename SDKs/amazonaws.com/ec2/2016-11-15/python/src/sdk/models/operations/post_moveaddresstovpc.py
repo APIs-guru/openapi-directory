@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostMoveAddressToVpcActionEnum(str, Enum):
     MOVE_ADDRESS_TO_VPC = "MoveAddressToVpc"
@@ -10,8 +14,8 @@ class PostMoveAddressToVpcVersionEnum(str, Enum):
 
 @dataclass
 class PostMoveAddressToVpcQueryParams:
-    action: PostMoveAddressToVpcActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostMoveAddressToVpcVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostMoveAddressToVpcActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostMoveAddressToVpcVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostMoveAddressToVpcHeaders:
 
 @dataclass
 class PostMoveAddressToVpcRequest:
-    query_params: PostMoveAddressToVpcQueryParams = field(default=None)
-    headers: PostMoveAddressToVpcHeaders = field(default=None)
+    headers: PostMoveAddressToVpcHeaders = field()
+    query_params: PostMoveAddressToVpcQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostMoveAddressToVpcResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

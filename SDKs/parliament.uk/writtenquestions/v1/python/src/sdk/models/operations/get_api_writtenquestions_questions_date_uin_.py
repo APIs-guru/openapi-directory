@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
 from typing import Any,Optional
@@ -8,8 +8,8 @@ from sdk.models import shared
 
 @dataclass
 class GetAPIWrittenquestionsQuestionsDateUinPathParams:
-    date: datetime = field(default=None, metadata={'path_param': { 'field_name': 'date', 'style': 'simple', 'explode': False }})
-    uin: str = field(default=None, metadata={'path_param': { 'field_name': 'uin', 'style': 'simple', 'explode': False }})
+    date_: datetime = field(metadata={'path_param': { 'field_name': 'date', 'style': 'simple', 'explode': False }})
+    uin: str = field(metadata={'path_param': { 'field_name': 'uin', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -19,15 +19,15 @@ class GetAPIWrittenquestionsQuestionsDateUinQueryParams:
 
 @dataclass
 class GetAPIWrittenquestionsQuestionsDateUinRequest:
-    path_params: GetAPIWrittenquestionsQuestionsDateUinPathParams = field(default=None)
-    query_params: GetAPIWrittenquestionsQuestionsDateUinQueryParams = field(default=None)
+    path_params: GetAPIWrittenquestionsQuestionsDateUinPathParams = field()
+    query_params: GetAPIWrittenquestionsQuestionsDateUinQueryParams = field()
     
 
 @dataclass
 class GetAPIWrittenquestionsQuestionsDateUinResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     problem_details: Optional[dict[str, dict[str, Any]]] = field(default=None)
     questions_view_model_item: Optional[shared.QuestionsViewModelItem] = field(default=None)
-    status_code: int = field(default=None)
     

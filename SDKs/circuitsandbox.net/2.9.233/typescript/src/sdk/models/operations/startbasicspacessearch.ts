@@ -1,60 +1,61 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
+
 export enum StartBasicSpacesSearchScopeEnum {
-    All = "ALL"
-,    Spaces = "SPACES"
-,    Topicby = "TOPICBY"
-,    Files = "FILES"
-,    Tags = "TAGS"
-,    Labels = "LABELS"
-,    Date = "DATE"
+    All = "ALL",
+    Spaces = "SPACES",
+    Topicby = "TOPICBY",
+    Files = "FILES",
+    Tags = "TAGS",
+    Labels = "LABELS",
+    Date = "DATE"
 }
 
 
 export class StartBasicSpacesSearchQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=endTime" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=endTime" })
   endTime?: Date;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=prioritySpaces" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=prioritySpaces" })
   prioritySpaces?: string[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=scope" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=scope" })
   scope: StartBasicSpacesSearchScopeEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=searchTerm" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=searchTerm" })
   searchTerm: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=startTime" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=startTime" })
   startTime?: Date;
 }
 
 
 export class StartBasicSpacesSearchSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   oauth: shared.SchemeOauth;
 }
 
 
 export class StartBasicSpacesSearchRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: StartBasicSpacesSearchQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: StartBasicSpacesSearchSecurity;
 }
 
 
 export class StartBasicSpacesSearchResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   basicSearchResult?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

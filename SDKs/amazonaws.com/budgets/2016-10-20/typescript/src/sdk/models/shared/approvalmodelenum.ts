@@ -1,6 +1,7 @@
 
 
+
 export enum ApprovalModelEnum {
-    Automatic = "AUTOMATIC"
-,    Manual = "MANUAL"
+    Automatic = "AUTOMATIC",
+    Manual = "MANUAL"
 }

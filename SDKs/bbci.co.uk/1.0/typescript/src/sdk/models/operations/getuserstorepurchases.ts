@@ -1,35 +1,36 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetUserStorePurchasesQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=identity_cookie" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=identity_cookie" })
   identityCookie: number;
 }
 
 
 export class GetUserStorePurchasesSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=basic" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=basic" })
   basic: shared.SchemeBasic;
 }
 
 
 export class GetUserStorePurchasesRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetUserStorePurchasesQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: GetUserStorePurchasesSecurity;
 }
 
 
 export class GetUserStorePurchasesResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   ibl?: any;
 }

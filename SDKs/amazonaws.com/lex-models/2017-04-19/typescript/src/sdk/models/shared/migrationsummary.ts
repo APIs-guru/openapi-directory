@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { MigrationStatusEnum } from "./migrationstatusenum";
 import { MigrationStrategyEnum } from "./migrationstrategyenum";
 import { LocaleEnum } from "./localeenum";
+
 
 
 // MigrationSummary
@@ -9,30 +10,30 @@ import { LocaleEnum } from "./localeenum";
  * Provides information about migrating a bot from Amazon Lex V1 to Amazon Lex V2.
 **/
 export class MigrationSummary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=migrationId" })
+  @SpeakeasyMetadata({ data: "json, name=migrationId" })
   migrationId?: string;
 
-  @Metadata({ data: "json, name=migrationStatus" })
+  @SpeakeasyMetadata({ data: "json, name=migrationStatus" })
   migrationStatus?: MigrationStatusEnum;
 
-  @Metadata({ data: "json, name=migrationStrategy" })
+  @SpeakeasyMetadata({ data: "json, name=migrationStrategy" })
   migrationStrategy?: MigrationStrategyEnum;
 
-  @Metadata({ data: "json, name=migrationTimestamp" })
+  @SpeakeasyMetadata({ data: "json, name=migrationTimestamp" })
   migrationTimestamp?: Date;
 
-  @Metadata({ data: "json, name=v1BotLocale" })
+  @SpeakeasyMetadata({ data: "json, name=v1BotLocale" })
   v1BotLocale?: LocaleEnum;
 
-  @Metadata({ data: "json, name=v1BotName" })
+  @SpeakeasyMetadata({ data: "json, name=v1BotName" })
   v1BotName?: string;
 
-  @Metadata({ data: "json, name=v1BotVersion" })
+  @SpeakeasyMetadata({ data: "json, name=v1BotVersion" })
   v1BotVersion?: string;
 
-  @Metadata({ data: "json, name=v2BotId" })
+  @SpeakeasyMetadata({ data: "json, name=v2BotId" })
   v2BotId?: string;
 
-  @Metadata({ data: "json, name=v2BotRole" })
+  @SpeakeasyMetadata({ data: "json, name=v2BotRole" })
   v2BotRole?: string;
 }

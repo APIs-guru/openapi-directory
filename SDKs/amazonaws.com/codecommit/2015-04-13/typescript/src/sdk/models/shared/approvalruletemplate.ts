@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ApprovalRuleTemplate
@@ -6,27 +7,27 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Returns information about an approval rule template.
 **/
 export class ApprovalRuleTemplate extends SpeakeasyBase {
-  @Metadata({ data: "json, name=approvalRuleTemplateContent" })
+  @SpeakeasyMetadata({ data: "json, name=approvalRuleTemplateContent" })
   approvalRuleTemplateContent?: string;
 
-  @Metadata({ data: "json, name=approvalRuleTemplateDescription" })
+  @SpeakeasyMetadata({ data: "json, name=approvalRuleTemplateDescription" })
   approvalRuleTemplateDescription?: string;
 
-  @Metadata({ data: "json, name=approvalRuleTemplateId" })
+  @SpeakeasyMetadata({ data: "json, name=approvalRuleTemplateId" })
   approvalRuleTemplateId?: string;
 
-  @Metadata({ data: "json, name=approvalRuleTemplateName" })
+  @SpeakeasyMetadata({ data: "json, name=approvalRuleTemplateName" })
   approvalRuleTemplateName?: string;
 
-  @Metadata({ data: "json, name=creationDate" })
+  @SpeakeasyMetadata({ data: "json, name=creationDate" })
   creationDate?: Date;
 
-  @Metadata({ data: "json, name=lastModifiedDate" })
+  @SpeakeasyMetadata({ data: "json, name=lastModifiedDate" })
   lastModifiedDate?: Date;
 
-  @Metadata({ data: "json, name=lastModifiedUser" })
+  @SpeakeasyMetadata({ data: "json, name=lastModifiedUser" })
   lastModifiedUser?: string;
 
-  @Metadata({ data: "json, name=ruleContentSha256" })
+  @SpeakeasyMetadata({ data: "json, name=ruleContentSha256" })
   ruleContentSha256?: string;
 }

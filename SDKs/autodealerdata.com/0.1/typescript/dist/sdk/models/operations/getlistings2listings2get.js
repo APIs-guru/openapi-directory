@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetListings2Listings2GetQueryParams = /** @class */ (function (_super) {
     __extends(GetListings2Listings2GetQueryParams, _super);
@@ -30,55 +30,55 @@ var GetListings2Listings2GetQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=brandName" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=brandName" }),
         __metadata("design:type", String)
     ], GetListings2Listings2GetQueryParams.prototype, "brandName", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=daysBack" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=daysBack" }),
         __metadata("design:type", Number)
     ], GetListings2Listings2GetQueryParams.prototype, "daysBack", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=dealerID" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=dealerID" }),
         __metadata("design:type", Number)
     ], GetListings2Listings2GetQueryParams.prototype, "dealerId", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=endDate" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=endDate" }),
         __metadata("design:type", Date)
     ], GetListings2Listings2GetQueryParams.prototype, "endDate", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=extendedSearch" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=extendedSearch" }),
         __metadata("design:type", Boolean)
     ], GetListings2Listings2GetQueryParams.prototype, "extendedSearch", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=jwt" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=jwt" }),
         __metadata("design:type", String)
     ], GetListings2Listings2GetQueryParams.prototype, "jwt", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=modelName" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=modelName" }),
         __metadata("design:type", String)
     ], GetListings2Listings2GetQueryParams.prototype, "modelName", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=modelYear" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=modelYear" }),
         __metadata("design:type", Number)
     ], GetListings2Listings2GetQueryParams.prototype, "modelYear", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=newCars" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=newCars" }),
         __metadata("design:type", Boolean)
     ], GetListings2Listings2GetQueryParams.prototype, "newCars", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=page" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page" }),
         __metadata("design:type", Number)
     ], GetListings2Listings2GetQueryParams.prototype, "page", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=regionName" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=regionName" }),
         __metadata("design:type", String)
     ], GetListings2Listings2GetQueryParams.prototype, "regionName", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=startDate" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=startDate" }),
         __metadata("design:type", Date)
     ], GetListings2Listings2GetQueryParams.prototype, "startDate", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=zipCode" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=zipCode" }),
         __metadata("design:type", Number)
     ], GetListings2Listings2GetQueryParams.prototype, "zipCode", void 0);
     return GetListings2Listings2GetQueryParams;
@@ -90,7 +90,7 @@ var GetListings2Listings2GetRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetListings2Listings2GetQueryParams)
     ], GetListings2Listings2GetRequest.prototype, "queryParams", void 0);
     return GetListings2Listings2GetRequest;
@@ -102,19 +102,19 @@ var GetListings2Listings2GetResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetListings2Listings2GetResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.HttpValidationError)
     ], GetListings2Listings2GetResponse.prototype, "httpValidationError", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.ListingResp)
     ], GetListings2Listings2GetResponse.prototype, "listingResp", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetListings2Listings2GetResponse.prototype, "statusCode", void 0);
     return GetListings2Listings2GetResponse;

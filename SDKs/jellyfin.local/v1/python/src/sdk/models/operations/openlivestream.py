@@ -27,19 +27,19 @@ class OpenLiveStreamRequests:
 
 @dataclass
 class OpenLiveStreamSecurity:
-    custom_authentication: shared.SchemeCustomAuthentication = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    custom_authentication: shared.SchemeCustomAuthentication = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
     
 
 @dataclass
 class OpenLiveStreamRequest:
-    query_params: OpenLiveStreamQueryParams = field(default=None)
+    query_params: OpenLiveStreamQueryParams = field()
+    security: OpenLiveStreamSecurity = field()
     request: Optional[OpenLiveStreamRequests] = field(default=None)
-    security: OpenLiveStreamSecurity = field(default=None)
     
 
 @dataclass
 class OpenLiveStreamResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     live_stream_response: Optional[shared.LiveStreamResponse] = field(default=None)
-    status_code: int = field(default=None)
     

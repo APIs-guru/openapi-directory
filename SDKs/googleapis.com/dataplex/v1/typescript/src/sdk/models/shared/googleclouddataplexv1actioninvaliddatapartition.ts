@@ -1,9 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum GoogleCloudDataplexV1ActionInvalidDataPartitionExpectedStructureEnum {
-    PartitionStructureUnspecified = "PARTITION_STRUCTURE_UNSPECIFIED"
-,    ConsistentKeys = "CONSISTENT_KEYS"
-,    HiveStyleKeys = "HIVE_STYLE_KEYS"
+    PartitionStructureUnspecified = "PARTITION_STRUCTURE_UNSPECIFIED",
+    ConsistentKeys = "CONSISTENT_KEYS",
+    HiveStyleKeys = "HIVE_STYLE_KEYS"
 }
 
 
@@ -12,6 +13,6 @@ export enum GoogleCloudDataplexV1ActionInvalidDataPartitionExpectedStructureEnum
  * Action details for invalid or unsupported partitions detected by discovery.
 **/
 export class GoogleCloudDataplexV1ActionInvalidDataPartition extends SpeakeasyBase {
-  @Metadata({ data: "json, name=expectedStructure" })
+  @SpeakeasyMetadata({ data: "json, name=expectedStructure" })
   expectedStructure?: GoogleCloudDataplexV1ActionInvalidDataPartitionExpectedStructureEnum;
 }

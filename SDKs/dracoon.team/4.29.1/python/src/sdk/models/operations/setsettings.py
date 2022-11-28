@@ -10,14 +10,14 @@ class SetSettingsHeaders:
 
 @dataclass
 class SetSettingsRequest:
-    headers: SetSettingsHeaders = field(default=None)
-    request: shared.CustomerSettingsRequest = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: SetSettingsHeaders = field()
+    request: shared.CustomerSettingsRequest = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class SetSettingsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     customer_settings_response: Optional[shared.CustomerSettingsResponse] = field(default=None)
     error_response: Optional[shared.ErrorResponse] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetGetMetricWidgetImageActionEnum(str, Enum):
     GET_METRIC_WIDGET_IMAGE = "GetMetricWidgetImage"
@@ -10,10 +14,10 @@ class GetGetMetricWidgetImageVersionEnum(str, Enum):
 
 @dataclass
 class GetGetMetricWidgetImageQueryParams:
-    action: GetGetMetricWidgetImageActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    metric_widget: str = field(default=None, metadata={'query_param': { 'field_name': 'MetricWidget', 'style': 'form', 'explode': True }})
+    action: GetGetMetricWidgetImageActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    metric_widget: str = field(metadata={'query_param': { 'field_name': 'MetricWidget', 'style': 'form', 'explode': True }})
+    version: GetGetMetricWidgetImageVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     output_format: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'OutputFormat', 'style': 'form', 'explode': True }})
-    version: GetGetMetricWidgetImageVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -29,13 +33,13 @@ class GetGetMetricWidgetImageHeaders:
 
 @dataclass
 class GetGetMetricWidgetImageRequest:
-    query_params: GetGetMetricWidgetImageQueryParams = field(default=None)
-    headers: GetGetMetricWidgetImageHeaders = field(default=None)
+    headers: GetGetMetricWidgetImageHeaders = field()
+    query_params: GetGetMetricWidgetImageQueryParams = field()
     
 
 @dataclass
 class GetGetMetricWidgetImageResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

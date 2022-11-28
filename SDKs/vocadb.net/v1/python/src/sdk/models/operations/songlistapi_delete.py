@@ -1,10 +1,10 @@
 from dataclasses import dataclass, field
-from typing import List,Optional
+from typing import Optional
 
 
 @dataclass
 class SongListAPIDeletePathParams:
-    id: int = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: int = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -15,12 +15,12 @@ class SongListAPIDeleteQueryParams:
 
 @dataclass
 class SongListAPIDeleteRequest:
-    path_params: SongListAPIDeletePathParams = field(default=None)
-    query_params: SongListAPIDeleteQueryParams = field(default=None)
+    path_params: SongListAPIDeletePathParams = field()
+    query_params: SongListAPIDeleteQueryParams = field()
     
 
 @dataclass
 class SongListAPIDeleteResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

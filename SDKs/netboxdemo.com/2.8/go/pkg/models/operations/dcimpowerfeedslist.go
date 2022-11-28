@@ -72,15 +72,15 @@ type DcimPowerFeedsListQueryParams struct {
 	VoltageN          *string `queryParam:"style=form,explode=true,name=voltage__n"`
 }
 
-type DcimPowerFeedsListRequest struct {
-	QueryParams DcimPowerFeedsListQueryParams
-}
-
 type DcimPowerFeedsList200ApplicationJSON struct {
 	Count    int64              `json:"count"`
 	Next     *string            `json:"next,omitempty"`
 	Previous *string            `json:"previous,omitempty"`
 	Results  []shared.PowerFeed `json:"results"`
+}
+
+type DcimPowerFeedsListRequest struct {
+	QueryParams DcimPowerFeedsListQueryParams
 }
 
 type DcimPowerFeedsListResponse struct {

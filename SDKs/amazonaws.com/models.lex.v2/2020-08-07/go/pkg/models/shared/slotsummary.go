@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// SlotSummary
+// Summary information about a slot, a value that the bot elicits from the user.
 type SlotSummary struct {
 	Description                         *string              `json:"description,omitempty"`
 	LastUpdatedDateTime                 *time.Time           `json:"lastUpdatedDateTime,omitempty"`

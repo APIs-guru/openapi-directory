@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { Capabilities } from "./capabilities";
 export declare class DeviceInfo extends SpeakeasyBase {
     fourkBlocked: number;

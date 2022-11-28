@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class GetProjectUsernameProjectPathParams:
-    project: str = field(default=None, metadata={'path_param': { 'field_name': 'project', 'style': 'simple', 'explode': False }})
-    username: str = field(default=None, metadata={'path_param': { 'field_name': 'username', 'style': 'simple', 'explode': False }})
+    project: str = field(metadata={'path_param': { 'field_name': 'project', 'style': 'simple', 'explode': False }})
+    username: str = field(metadata={'path_param': { 'field_name': 'username', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -18,13 +19,13 @@ class GetProjectUsernameProjectQueryParams:
 
 @dataclass
 class GetProjectUsernameProjectRequest:
-    path_params: GetProjectUsernameProjectPathParams = field(default=None)
-    query_params: GetProjectUsernameProjectQueryParams = field(default=None)
+    path_params: GetProjectUsernameProjectPathParams = field()
+    query_params: GetProjectUsernameProjectQueryParams = field()
     
 
 @dataclass
 class GetProjectUsernameProjectResponse:
+    content_type: str = field()
+    status_code: int = field()
     builds: Optional[List[shared.Build]] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

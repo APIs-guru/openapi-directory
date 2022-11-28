@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudContactcenterinsightsV1ExportInsightsDataRequestBigQueryDestination
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A BigQuery Table Reference.
 **/
 export class GoogleCloudContactcenterinsightsV1ExportInsightsDataRequestBigQueryDestination extends SpeakeasyBase {
-  @Metadata({ data: "json, name=dataset" })
+  @SpeakeasyMetadata({ data: "json, name=dataset" })
   dataset?: string;
 
-  @Metadata({ data: "json, name=projectId" })
+  @SpeakeasyMetadata({ data: "json, name=projectId" })
   projectId?: string;
 
-  @Metadata({ data: "json, name=table" })
+  @SpeakeasyMetadata({ data: "json, name=table" })
   table?: string;
 }

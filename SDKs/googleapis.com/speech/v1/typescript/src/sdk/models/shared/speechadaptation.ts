@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CustomClass } from "./customclass";
 import { PhraseSet } from "./phraseset";
+
 
 
 // SpeechAdaptation
@@ -9,12 +9,12 @@ import { PhraseSet } from "./phraseset";
  * Speech adaptation configuration.
 **/
 export class SpeechAdaptation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=customClasses", elemType: shared.CustomClass })
+  @SpeakeasyMetadata({ data: "json, name=customClasses", elemType: CustomClass })
   customClasses?: CustomClass[];
 
-  @Metadata({ data: "json, name=phraseSetReferences" })
+  @SpeakeasyMetadata({ data: "json, name=phraseSetReferences" })
   phraseSetReferences?: string[];
 
-  @Metadata({ data: "json, name=phraseSets", elemType: shared.PhraseSet })
+  @SpeakeasyMetadata({ data: "json, name=phraseSets", elemType: PhraseSet })
   phraseSets?: PhraseSet[];
 }

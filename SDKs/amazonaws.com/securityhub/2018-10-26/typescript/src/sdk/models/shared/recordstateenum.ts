@@ -1,6 +1,7 @@
 
 
+
 export enum RecordStateEnum {
-    Active = "ACTIVE"
-,    Archived = "ARCHIVED"
+    Active = "ACTIVE",
+    Archived = "ARCHIVED"
 }

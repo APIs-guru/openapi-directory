@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GdataDiffVersionResponse
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * gdata
 **/
 export class GdataDiffVersionResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=objectSizeBytes" })
+  @SpeakeasyMetadata({ data: "json, name=objectSizeBytes" })
   objectSizeBytes?: string;
 
-  @Metadata({ data: "json, name=objectVersion" })
+  @SpeakeasyMetadata({ data: "json, name=objectVersion" })
   objectVersion?: string;
 }

@@ -13,24 +13,24 @@ class GetCharityOrgsQueryParams:
 
 @dataclass
 class GetCharityOrgsHeaders:
-    x_ebay_c_marketplace_id: str = field(default=None, metadata={'header': { 'field_name': 'X-EBAY-C-MARKETPLACE-ID', 'style': 'simple', 'explode': False }})
+    x_ebay_c_marketplace_id: str = field(metadata={'header': { 'field_name': 'X-EBAY-C-MARKETPLACE-ID', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetCharityOrgsSecurity:
-    api_auth: shared.SchemeAPIAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    api_auth: shared.SchemeAPIAuth = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class GetCharityOrgsRequest:
-    query_params: GetCharityOrgsQueryParams = field(default=None)
-    headers: GetCharityOrgsHeaders = field(default=None)
-    security: GetCharityOrgsSecurity = field(default=None)
+    headers: GetCharityOrgsHeaders = field()
+    query_params: GetCharityOrgsQueryParams = field()
+    security: GetCharityOrgsSecurity = field()
     
 
 @dataclass
 class GetCharityOrgsResponse:
+    content_type: str = field()
+    status_code: int = field()
     charity_search_response: Optional[shared.CharitySearchResponse] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

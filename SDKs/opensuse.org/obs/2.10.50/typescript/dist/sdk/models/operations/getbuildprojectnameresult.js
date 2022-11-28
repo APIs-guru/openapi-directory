@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetBuildProjectNameResultPathParams = /** @class */ (function (_super) {
     __extends(GetBuildProjectNameResultPathParams, _super);
@@ -30,7 +30,7 @@ var GetBuildProjectNameResultPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=project_name" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=project_name" }),
         __metadata("design:type", String)
     ], GetBuildProjectNameResultPathParams.prototype, "projectName", void 0);
     return GetBuildProjectNameResultPathParams;
@@ -48,31 +48,31 @@ var GetBuildProjectNameResultQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=arch" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=arch" }),
         __metadata("design:type", String)
     ], GetBuildProjectNameResultQueryParams.prototype, "arch", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=lastbuild" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=lastbuild" }),
         __metadata("design:type", Boolean)
     ], GetBuildProjectNameResultQueryParams.prototype, "lastbuild", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=locallink" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=locallink" }),
         __metadata("design:type", Boolean)
     ], GetBuildProjectNameResultQueryParams.prototype, "locallink", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=multibuild" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=multibuild" }),
         __metadata("design:type", Boolean)
     ], GetBuildProjectNameResultQueryParams.prototype, "multibuild", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=package" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=package" }),
         __metadata("design:type", String)
     ], GetBuildProjectNameResultQueryParams.prototype, "package", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=repository" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=repository" }),
         __metadata("design:type", String)
     ], GetBuildProjectNameResultQueryParams.prototype, "repository", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=view" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=view" }),
         __metadata("design:type", String)
     ], GetBuildProjectNameResultQueryParams.prototype, "view", void 0);
     return GetBuildProjectNameResultQueryParams;
@@ -84,7 +84,7 @@ var GetBuildProjectNameResultSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=http;subtype=basic" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=basic" }),
         __metadata("design:type", shared.SchemeBasicAuthentication)
     ], GetBuildProjectNameResultSecurity.prototype, "basicAuthentication", void 0);
     return GetBuildProjectNameResultSecurity;
@@ -96,15 +96,15 @@ var GetBuildProjectNameResultRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetBuildProjectNameResultPathParams)
     ], GetBuildProjectNameResultRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetBuildProjectNameResultQueryParams)
     ], GetBuildProjectNameResultRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetBuildProjectNameResultSecurity)
     ], GetBuildProjectNameResultRequest.prototype, "security", void 0);
     return GetBuildProjectNameResultRequest;
@@ -116,15 +116,15 @@ var GetBuildProjectNameResultResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], GetBuildProjectNameResultResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetBuildProjectNameResultResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetBuildProjectNameResultResponse.prototype, "statusCode", void 0);
     return GetBuildProjectNameResultResponse;

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // OidcConfigForResponse
@@ -6,24 +7,24 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Your OIDC IdP workforce configuration.
 **/
 export class OidcConfigForResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AuthorizationEndpoint" })
+  @SpeakeasyMetadata({ data: "json, name=AuthorizationEndpoint" })
   authorizationEndpoint?: string;
 
-  @Metadata({ data: "json, name=ClientId" })
+  @SpeakeasyMetadata({ data: "json, name=ClientId" })
   clientId?: string;
 
-  @Metadata({ data: "json, name=Issuer" })
+  @SpeakeasyMetadata({ data: "json, name=Issuer" })
   issuer?: string;
 
-  @Metadata({ data: "json, name=JwksUri" })
+  @SpeakeasyMetadata({ data: "json, name=JwksUri" })
   jwksUri?: string;
 
-  @Metadata({ data: "json, name=LogoutEndpoint" })
+  @SpeakeasyMetadata({ data: "json, name=LogoutEndpoint" })
   logoutEndpoint?: string;
 
-  @Metadata({ data: "json, name=TokenEndpoint" })
+  @SpeakeasyMetadata({ data: "json, name=TokenEndpoint" })
   tokenEndpoint?: string;
 
-  @Metadata({ data: "json, name=UserInfoEndpoint" })
+  @SpeakeasyMetadata({ data: "json, name=UserInfoEndpoint" })
   userInfoEndpoint?: string;
 }

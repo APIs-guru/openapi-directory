@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import serviceactionsummary
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ServiceActionDetail:
-    definition: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Definition' }})
-    service_action_summary: Optional[serviceactionsummary.ServiceActionSummary] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ServiceActionSummary' }})
+    r"""ServiceActionDetail
+    An object containing detailed information about the self-service action.
+    """
+    
+    definition: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Definition') }})
+    service_action_summary: Optional[ServiceActionSummary] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ServiceActionSummary') }})
     

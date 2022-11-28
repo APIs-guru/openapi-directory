@@ -1,5 +1,7 @@
 package shared
 
+// ServicePrincipalCreateParameters
+// Request parameters for creating a new service principal.
 type ServicePrincipalCreateParameters struct {
 	AccountEnabled            *bool                               `json:"accountEnabled,omitempty"`
 	AppID                     string                              `json:"appId"`

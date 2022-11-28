@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { Beacon } from "./beacon";
 /**
  * Response that contains list beacon results and pagination help.

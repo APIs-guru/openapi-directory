@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var SnsPostSnsPostHeaders = /** @class */ (function (_super) {
     __extends(SnsPostSnsPostHeaders, _super);
@@ -30,7 +30,7 @@ var SnsPostSnsPostHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=authorization" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=authorization" }),
         __metadata("design:type", String)
     ], SnsPostSnsPostHeaders.prototype, "authorization", void 0);
     return SnsPostSnsPostHeaders;
@@ -42,11 +42,11 @@ var SnsPostSnsPostRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", SnsPostSnsPostHeaders)
     ], SnsPostSnsPostRequest.prototype, "headers", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", shared.SnsMessageRequest)
     ], SnsPostSnsPostRequest.prototype, "request", void 0);
     return SnsPostSnsPostRequest;
@@ -58,19 +58,19 @@ var SnsPostSnsPostResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], SnsPostSnsPostResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.HttpValidationError)
     ], SnsPostSnsPostResponse.prototype, "httpValidationError", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], SnsPostSnsPostResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], SnsPostSnsPostResponse.prototype, "snsPostSnsPost200ApplicationJsonAny", void 0);
     return SnsPostSnsPostResponse;

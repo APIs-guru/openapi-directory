@@ -5,18 +5,18 @@ from sdk.models import shared
 
 @dataclass
 class VirtualTariffsForPropertyGetPathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class VirtualTariffsForPropertyGetRequest:
-    path_params: VirtualTariffsForPropertyGetPathParams = field(default=None)
+    path_params: VirtualTariffsForPropertyGetPathParams = field()
     
 
 @dataclass
 class VirtualTariffsForPropertyGetResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     virtual_tariffs_of_folders: Optional[List[shared.VirtualTariffsOfFolder]] = field(default=None)
     

@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AuthMethod } from "./authmethod";
+
 
 
 // SystemInfo
@@ -8,21 +8,21 @@ import { AuthMethod } from "./authmethod";
  * System information (default language and authentication methods)
 **/
 export class SystemInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=authMethods", elemType: shared.AuthMethod })
+  @SpeakeasyMetadata({ data: "json, name=authMethods", elemType: AuthMethod })
   authMethods: AuthMethod[];
 
-  @Metadata({ data: "json, name=hideLoginInputFields" })
+  @SpeakeasyMetadata({ data: "json, name=hideLoginInputFields" })
   hideLoginInputFields: boolean;
 
-  @Metadata({ data: "json, name=languageDefault" })
+  @SpeakeasyMetadata({ data: "json, name=languageDefault" })
   languageDefault: string;
 
-  @Metadata({ data: "json, name=s3EnforceDirectUpload" })
+  @SpeakeasyMetadata({ data: "json, name=s3EnforceDirectUpload" })
   s3EnforceDirectUpload: boolean;
 
-  @Metadata({ data: "json, name=s3Hosts" })
+  @SpeakeasyMetadata({ data: "json, name=s3Hosts" })
   s3Hosts: string[];
 
-  @Metadata({ data: "json, name=useS3Storage" })
+  @SpeakeasyMetadata({ data: "json, name=useS3Storage" })
   useS3Storage: boolean;
 }

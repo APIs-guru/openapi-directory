@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class IPAllocationPolicyIpv6AccessTypeEnum(str, Enum):
     IPV6_ACCESS_TYPE_UNSPECIFIED = "IPV6_ACCESS_TYPE_UNSPECIFIED"
@@ -16,19 +18,23 @@ class IPAllocationPolicyStackTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class IPAllocationPolicy:
-    cluster_ipv4_cidr: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'clusterIpv4Cidr' }})
-    cluster_ipv4_cidr_block: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'clusterIpv4CidrBlock' }})
-    cluster_secondary_range_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'clusterSecondaryRangeName' }})
-    create_subnetwork: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'createSubnetwork' }})
-    ipv6_access_type: Optional[IPAllocationPolicyIpv6AccessTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ipv6AccessType' }})
-    node_ipv4_cidr: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'nodeIpv4Cidr' }})
-    node_ipv4_cidr_block: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'nodeIpv4CidrBlock' }})
-    services_ipv4_cidr: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'servicesIpv4Cidr' }})
-    services_ipv4_cidr_block: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'servicesIpv4CidrBlock' }})
-    services_secondary_range_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'servicesSecondaryRangeName' }})
-    stack_type: Optional[IPAllocationPolicyStackTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'stackType' }})
-    subnetwork_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'subnetworkName' }})
-    tpu_ipv4_cidr_block: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tpuIpv4CidrBlock' }})
-    use_ip_aliases: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'useIpAliases' }})
-    use_routes: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'useRoutes' }})
+    r"""IPAllocationPolicy
+    Configuration for controlling how IPs are allocated in the cluster.
+    """
+    
+    cluster_ipv4_cidr: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('clusterIpv4Cidr') }})
+    cluster_ipv4_cidr_block: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('clusterIpv4CidrBlock') }})
+    cluster_secondary_range_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('clusterSecondaryRangeName') }})
+    create_subnetwork: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('createSubnetwork') }})
+    ipv6_access_type: Optional[IPAllocationPolicyIpv6AccessTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ipv6AccessType') }})
+    node_ipv4_cidr: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('nodeIpv4Cidr') }})
+    node_ipv4_cidr_block: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('nodeIpv4CidrBlock') }})
+    services_ipv4_cidr: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('servicesIpv4Cidr') }})
+    services_ipv4_cidr_block: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('servicesIpv4CidrBlock') }})
+    services_secondary_range_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('servicesSecondaryRangeName') }})
+    stack_type: Optional[IPAllocationPolicyStackTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('stackType') }})
+    subnetwork_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('subnetworkName') }})
+    tpu_ipv4_cidr_block: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('tpuIpv4CidrBlock') }})
+    use_ip_aliases: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('useIpAliases') }})
+    use_routes: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('useRoutes') }})
     

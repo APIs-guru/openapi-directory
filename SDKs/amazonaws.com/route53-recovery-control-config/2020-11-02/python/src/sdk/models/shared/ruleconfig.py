@@ -1,13 +1,18 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import ruletype_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class RuleConfig:
-    inverted: bool = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Inverted' }})
-    threshold: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Threshold' }})
-    type: ruletype_enum.RuleTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Type' }})
+    r"""RuleConfig
+    The rule configuration for an assertion rule. That is, the criteria that you set for specific assertion controls (routing controls) that specify how many controls must be enabled after a transaction completes.
+    """
+    
+    inverted: bool = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Inverted') }})
+    threshold: int = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Threshold') }})
+    type: RuleTypeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Type') }})
     

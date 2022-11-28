@@ -14,15 +14,15 @@ type DcimInterfaceConnectionsListQueryParams struct {
 	Site              *string `queryParam:"style=form,explode=true,name=site"`
 }
 
-type DcimInterfaceConnectionsListRequest struct {
-	QueryParams DcimInterfaceConnectionsListQueryParams
-}
-
 type DcimInterfaceConnectionsList200ApplicationJSON struct {
 	Count    int64                        `json:"count"`
 	Next     *string                      `json:"next,omitempty"`
 	Previous *string                      `json:"previous,omitempty"`
 	Results  []shared.InterfaceConnection `json:"results"`
+}
+
+type DcimInterfaceConnectionsListRequest struct {
+	QueryParams DcimInterfaceConnectionsListQueryParams
 }
 
 type DcimInterfaceConnectionsListResponse struct {

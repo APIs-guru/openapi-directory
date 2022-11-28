@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // IdentitytoolkitRelyingpartyGetAccountInfoRequest
@@ -6,18 +7,18 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Request to get the account information.
 **/
 export class IdentitytoolkitRelyingpartyGetAccountInfoRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=delegatedProjectNumber" })
+  @SpeakeasyMetadata({ data: "json, name=delegatedProjectNumber" })
   delegatedProjectNumber?: string;
 
-  @Metadata({ data: "json, name=email" })
+  @SpeakeasyMetadata({ data: "json, name=email" })
   email?: string[];
 
-  @Metadata({ data: "json, name=idToken" })
+  @SpeakeasyMetadata({ data: "json, name=idToken" })
   idToken?: string;
 
-  @Metadata({ data: "json, name=localId" })
+  @SpeakeasyMetadata({ data: "json, name=localId" })
   localId?: string[];
 
-  @Metadata({ data: "json, name=phoneNumber" })
+  @SpeakeasyMetadata({ data: "json, name=phoneNumber" })
   phoneNumber?: string[];
 }

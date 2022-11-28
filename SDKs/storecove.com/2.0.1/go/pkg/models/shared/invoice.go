@@ -30,6 +30,8 @@ const (
 	InvoicePaymentMeansCodeEnumFiftyEight           InvoicePaymentMeansCodeEnum = "58"
 )
 
+// InvoiceThePaymentTerms
+// The payment terms of the invoice.
 type InvoiceThePaymentTerms struct {
 	Note *string `json:"note,omitempty"`
 }
@@ -53,6 +55,8 @@ const (
 	InvoiceTaxSystemEnumTaxNoTax           InvoiceTaxSystemEnum = "tax_no_tax"
 )
 
+// Invoice
+// The invoice to send.  Provide either invoice, or invoiceData, but not both.
 type Invoice struct {
 	AccountingCost            *string                      `json:"accountingCost,omitempty"`
 	AccountingCustomerParty   AccountingCustomerParty      `json:"accountingCustomerParty"`

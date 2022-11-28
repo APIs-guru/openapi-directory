@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// ReplicationTaskIndividualAssessment
+// Provides information that describes an individual assessment from a premigration assessment run.
 type ReplicationTaskIndividualAssessment struct {
 	IndividualAssessmentName                     *string    `json:"IndividualAssessmentName,omitempty"`
 	ReplicationTaskAssessmentRunArn              *string    `json:"ReplicationTaskAssessmentRunArn,omitempty"`

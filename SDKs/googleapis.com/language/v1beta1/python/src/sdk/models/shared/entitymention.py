@@ -1,7 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import textspan
+from sdk import utils
+from . import *
 
 class EntityMentionTypeEnum(str, Enum):
     TYPE_UNKNOWN = "TYPE_UNKNOWN"
@@ -12,6 +14,10 @@ class EntityMentionTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class EntityMention:
-    text: Optional[textspan.TextSpan] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'text' }})
-    type: Optional[EntityMentionTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    r"""EntityMention
+    Represents a mention for an entity in the text. Currently, proper noun mentions are supported.
+    """
+    
+    text: Optional[TextSpan] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('text') }})
+    type: Optional[EntityMentionTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('type') }})
     

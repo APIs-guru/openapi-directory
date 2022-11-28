@@ -34,15 +34,15 @@ type IssuesUpdateRequestBody struct {
 	Title     *interface{}                      `json:"title,omitempty"`
 }
 
-type IssuesUpdateRequest struct {
-	PathParams IssuesUpdatePathParams
-	Request    *IssuesUpdateRequestBody `request:"mediaType=application/json"`
-}
-
 type IssuesUpdate503ApplicationJSON struct {
 	Code             *string `json:"code,omitempty"`
 	DocumentationURL *string `json:"documentation_url,omitempty"`
 	Message          *string `json:"message,omitempty"`
+}
+
+type IssuesUpdateRequest struct {
+	PathParams IssuesUpdatePathParams
+	Request    *IssuesUpdateRequestBody `request:"mediaType=application/json"`
 }
 
 type IssuesUpdateResponse struct {

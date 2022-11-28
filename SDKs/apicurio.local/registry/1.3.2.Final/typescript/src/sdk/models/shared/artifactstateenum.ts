@@ -1,8 +1,9 @@
 
 
+
 export enum ArtifactStateEnum {
-    Enabled = "ENABLED"
-,    Disabled = "DISABLED"
-,    Deprecated = "DEPRECATED"
-,    Deleted = "DELETED"
+    Enabled = "ENABLED",
+    Disabled = "DISABLED",
+    Deprecated = "DEPRECATED",
+    Deleted = "DELETED"
 }

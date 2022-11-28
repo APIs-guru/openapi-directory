@@ -1,7 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import googlecloudintegrationsv1alphaattemptstats
+from sdk import utils
+from . import *
 
 class GoogleCloudIntegrationsV1alphaTaskExecutionDetailsTaskExecutionStateEnum(str, Enum):
     TASK_EXECUTION_STATE_UNSPECIFIED = "TASK_EXECUTION_STATE_UNSPECIFIED"
@@ -22,7 +24,11 @@ class GoogleCloudIntegrationsV1alphaTaskExecutionDetailsTaskExecutionStateEnum(s
 @dataclass_json
 @dataclass
 class GoogleCloudIntegrationsV1alphaTaskExecutionDetails:
-    task_attempt_stats: Optional[List[googlecloudintegrationsv1alphaattemptstats.GoogleCloudIntegrationsV1alphaAttemptStats]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'taskAttemptStats' }})
-    task_execution_state: Optional[GoogleCloudIntegrationsV1alphaTaskExecutionDetailsTaskExecutionStateEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'taskExecutionState' }})
-    task_number: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'taskNumber' }})
+    r"""GoogleCloudIntegrationsV1alphaTaskExecutionDetails
+    Contains the details of the execution of this task.
+    """
+    
+    task_attempt_stats: Optional[List[GoogleCloudIntegrationsV1alphaAttemptStats]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('taskAttemptStats') }})
+    task_execution_state: Optional[GoogleCloudIntegrationsV1alphaTaskExecutionDetailsTaskExecutionStateEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('taskExecutionState') }})
+    task_number: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('taskNumber') }})
     

@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class GetMigrationPathParams:
-    migration_id: str = field(default=None, metadata={'path_param': { 'field_name': 'migrationId', 'style': 'simple', 'explode': False }})
+    migration_id: str = field(metadata={'path_param': { 'field_name': 'migrationId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -21,17 +24,17 @@ class GetMigrationHeaders:
 
 @dataclass
 class GetMigrationRequest:
-    path_params: GetMigrationPathParams = field(default=None)
-    headers: GetMigrationHeaders = field(default=None)
+    headers: GetMigrationHeaders = field()
+    path_params: GetMigrationPathParams = field()
     
 
 @dataclass
 class GetMigrationResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     get_migration_response: Optional[shared.GetMigrationResponse] = field(default=None)
     internal_failure_exception: Optional[Any] = field(default=None)
     limit_exceeded_exception: Optional[Any] = field(default=None)
     not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

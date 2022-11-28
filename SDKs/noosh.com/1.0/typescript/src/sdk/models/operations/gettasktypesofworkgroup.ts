@@ -1,31 +1,32 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetTaskTypesOfWorkgroupPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=workgroup_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=workgroup_id" })
   workgroupId: string;
 }
 
 
 export class GetTaskTypesOfWorkgroupRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetTaskTypesOfWorkgroupPathParams;
 }
 
 
 export class GetTaskTypesOfWorkgroupResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   httpStatusVo?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   taskTypeListVo?: any;
 }

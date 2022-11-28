@@ -12,12 +12,12 @@ class RetrieveSentryRiskDataQueryParams:
 
 @dataclass
 class RetrieveSentryRiskDataRequest:
-    query_params: RetrieveSentryRiskDataQueryParams = field(default=None)
+    query_params: RetrieveSentryRiskDataQueryParams = field()
     
 
 @dataclass
 class RetrieveSentryRiskDataResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     sentry_object_paging_dto: Optional[shared.SentryObjectPagingDto] = field(default=None)
-    status_code: int = field(default=None)
     

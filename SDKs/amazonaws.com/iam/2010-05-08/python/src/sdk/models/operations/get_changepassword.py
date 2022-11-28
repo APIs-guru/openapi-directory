@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetChangePasswordActionEnum(str, Enum):
     CHANGE_PASSWORD = "ChangePassword"
@@ -10,10 +14,10 @@ class GetChangePasswordVersionEnum(str, Enum):
 
 @dataclass
 class GetChangePasswordQueryParams:
-    action: GetChangePasswordActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    new_password: str = field(default=None, metadata={'query_param': { 'field_name': 'NewPassword', 'style': 'form', 'explode': True }})
-    old_password: str = field(default=None, metadata={'query_param': { 'field_name': 'OldPassword', 'style': 'form', 'explode': True }})
-    version: GetChangePasswordVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: GetChangePasswordActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    new_password: str = field(metadata={'query_param': { 'field_name': 'NewPassword', 'style': 'form', 'explode': True }})
+    old_password: str = field(metadata={'query_param': { 'field_name': 'OldPassword', 'style': 'form', 'explode': True }})
+    version: GetChangePasswordVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -29,13 +33,13 @@ class GetChangePasswordHeaders:
 
 @dataclass
 class GetChangePasswordRequest:
-    query_params: GetChangePasswordQueryParams = field(default=None)
-    headers: GetChangePasswordHeaders = field(default=None)
+    headers: GetChangePasswordHeaders = field()
+    query_params: GetChangePasswordQueryParams = field()
     
 
 @dataclass
 class GetChangePasswordResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

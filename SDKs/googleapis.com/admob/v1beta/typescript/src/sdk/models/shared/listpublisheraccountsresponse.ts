@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PublisherAccount } from "./publisheraccount";
+
 
 
 // ListPublisherAccountsResponse
@@ -8,9 +8,9 @@ import { PublisherAccount } from "./publisheraccount";
  * Response for the publisher account list request.
 **/
 export class ListPublisherAccountsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=account", elemType: shared.PublisherAccount })
+  @SpeakeasyMetadata({ data: "json, name=account", elemType: PublisherAccount })
   account?: PublisherAccount[];
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 }

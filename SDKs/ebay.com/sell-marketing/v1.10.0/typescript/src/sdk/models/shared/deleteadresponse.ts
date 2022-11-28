@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Error } from "./error";
+
 
 
 // DeleteAdResponse
@@ -8,15 +8,15 @@ import { Error } from "./error";
  * This type defines the fields returned in a delete-ad response.
 **/
 export class DeleteAdResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=adId" })
+  @SpeakeasyMetadata({ data: "json, name=adId" })
   adId?: string;
 
-  @Metadata({ data: "json, name=errors", elemType: shared.Error })
+  @SpeakeasyMetadata({ data: "json, name=errors", elemType: Error })
   errors?: Error[];
 
-  @Metadata({ data: "json, name=listingId" })
+  @SpeakeasyMetadata({ data: "json, name=listingId" })
   listingId?: string;
 
-  @Metadata({ data: "json, name=statusCode" })
+  @SpeakeasyMetadata({ data: "json, name=statusCode" })
   statusCode?: number;
 }

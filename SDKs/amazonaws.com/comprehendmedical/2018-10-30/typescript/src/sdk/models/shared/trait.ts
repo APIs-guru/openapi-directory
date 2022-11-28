@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AttributeNameEnum } from "./attributenameenum";
+
 
 
 // Trait
@@ -7,9 +8,9 @@ import { AttributeNameEnum } from "./attributenameenum";
  *  Provides contextual information about the extracted entity. 
 **/
 export class Trait extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name?: AttributeNameEnum;
 
-  @Metadata({ data: "json, name=Score" })
+  @SpeakeasyMetadata({ data: "json, name=Score" })
   score?: number;
 }

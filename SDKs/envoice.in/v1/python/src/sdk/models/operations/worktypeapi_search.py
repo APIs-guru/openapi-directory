@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 class WorkTypeAPISearchQueryOptionsOrderEnum(str, Enum):
@@ -19,20 +20,20 @@ class WorkTypeAPISearchQueryParams:
 
 @dataclass
 class WorkTypeAPISearchHeaders:
-    x_auth_key: str = field(default=None, metadata={'header': { 'field_name': 'x-auth-key', 'style': 'simple', 'explode': False }})
-    x_auth_secret: str = field(default=None, metadata={'header': { 'field_name': 'x-auth-secret', 'style': 'simple', 'explode': False }})
+    x_auth_key: str = field(metadata={'header': { 'field_name': 'x-auth-key', 'style': 'simple', 'explode': False }})
+    x_auth_secret: str = field(metadata={'header': { 'field_name': 'x-auth-secret', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class WorkTypeAPISearchRequest:
-    query_params: WorkTypeAPISearchQueryParams = field(default=None)
-    headers: WorkTypeAPISearchHeaders = field(default=None)
+    headers: WorkTypeAPISearchHeaders = field()
+    query_params: WorkTypeAPISearchQueryParams = field()
     
 
 @dataclass
 class WorkTypeAPISearchResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     work_type_details_api_models: Optional[List[shared.WorkTypeDetailsAPIModel]] = field(default=None)
     

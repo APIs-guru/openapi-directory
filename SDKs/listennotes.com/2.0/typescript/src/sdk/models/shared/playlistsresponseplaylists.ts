@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PlaylistVisibilityFieldEnum } from "./playlistvisibilityfieldenum";
+
 
 
 // PlaylistsResponsePlaylists
@@ -7,33 +8,33 @@ import { PlaylistVisibilityFieldEnum } from "./playlistvisibilityfieldenum";
  * A playlist
 **/
 export class PlaylistsResponsePlaylists extends SpeakeasyBase {
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=episode_count" })
+  @SpeakeasyMetadata({ data: "json, name=episode_count" })
   episodeCount?: number;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=image" })
+  @SpeakeasyMetadata({ data: "json, name=image" })
   image?: string;
 
-  @Metadata({ data: "json, name=last_timestamp_ms" })
+  @SpeakeasyMetadata({ data: "json, name=last_timestamp_ms" })
   lastTimestampMs?: number;
 
-  @Metadata({ data: "json, name=listennotes_url" })
+  @SpeakeasyMetadata({ data: "json, name=listennotes_url" })
   listennotesUrl?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=podcast_count" })
+  @SpeakeasyMetadata({ data: "json, name=podcast_count" })
   podcastCount?: number;
 
-  @Metadata({ data: "json, name=thumbnail" })
+  @SpeakeasyMetadata({ data: "json, name=thumbnail" })
   thumbnail?: string;
 
-  @Metadata({ data: "json, name=visibility" })
+  @SpeakeasyMetadata({ data: "json, name=visibility" })
   visibility?: PlaylistVisibilityFieldEnum;
 }

@@ -1,8 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudVisionV1p1beta1BoundingPoly } from "./googlecloudvisionv1p1beta1boundingpoly";
 import { GoogleCloudVisionV1p1beta1LocationInfo } from "./googlecloudvisionv1p1beta1locationinfo";
 import { GoogleCloudVisionV1p1beta1Property } from "./googlecloudvisionv1p1beta1property";
+
 
 
 // GoogleCloudVisionV1p1beta1EntityAnnotation
@@ -10,30 +10,30 @@ import { GoogleCloudVisionV1p1beta1Property } from "./googlecloudvisionv1p1beta1
  * Set of detected entity features.
 **/
 export class GoogleCloudVisionV1p1beta1EntityAnnotation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=boundingPoly" })
+  @SpeakeasyMetadata({ data: "json, name=boundingPoly" })
   boundingPoly?: GoogleCloudVisionV1p1beta1BoundingPoly;
 
-  @Metadata({ data: "json, name=confidence" })
+  @SpeakeasyMetadata({ data: "json, name=confidence" })
   confidence?: number;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=locale" })
+  @SpeakeasyMetadata({ data: "json, name=locale" })
   locale?: string;
 
-  @Metadata({ data: "json, name=locations", elemType: shared.GoogleCloudVisionV1p1beta1LocationInfo })
+  @SpeakeasyMetadata({ data: "json, name=locations", elemType: GoogleCloudVisionV1p1beta1LocationInfo })
   locations?: GoogleCloudVisionV1p1beta1LocationInfo[];
 
-  @Metadata({ data: "json, name=mid" })
+  @SpeakeasyMetadata({ data: "json, name=mid" })
   mid?: string;
 
-  @Metadata({ data: "json, name=properties", elemType: shared.GoogleCloudVisionV1p1beta1Property })
+  @SpeakeasyMetadata({ data: "json, name=properties", elemType: GoogleCloudVisionV1p1beta1Property })
   properties?: GoogleCloudVisionV1p1beta1Property[];
 
-  @Metadata({ data: "json, name=score" })
+  @SpeakeasyMetadata({ data: "json, name=score" })
   score?: number;
 
-  @Metadata({ data: "json, name=topicality" })
+  @SpeakeasyMetadata({ data: "json, name=topicality" })
   topicality?: number;
 }

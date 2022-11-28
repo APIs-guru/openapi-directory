@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Offset
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Offsets the position of an asset horizontally or vertically by a relative distance.
 **/
 export class Offset extends SpeakeasyBase {
-  @Metadata({ data: "json, name=x" })
+  @SpeakeasyMetadata({ data: "json, name=x" })
   x?: number;
 
-  @Metadata({ data: "json, name=y" })
+  @SpeakeasyMetadata({ data: "json, name=y" })
   y?: number;
 }

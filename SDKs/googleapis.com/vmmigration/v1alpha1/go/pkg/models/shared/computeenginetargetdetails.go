@@ -25,6 +25,8 @@ const (
 	ComputeEngineTargetDetailsLicenseTypeEnumComputeEngineLicenseTypeByol    ComputeEngineTargetDetailsLicenseTypeEnum = "COMPUTE_ENGINE_LICENSE_TYPE_BYOL"
 )
 
+// ComputeEngineTargetDetails
+// ComputeEngineTargetDetails is a collection of details for creating a VM in a target Compute Engine project.
 type ComputeEngineTargetDetails struct {
 	AdditionalLicenses []string                                   `json:"additionalLicenses,omitempty"`
 	AppliedLicense     *AppliedLicense                            `json:"appliedLicense,omitempty"`

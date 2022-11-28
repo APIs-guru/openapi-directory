@@ -1,8 +1,9 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 
@@ -14,19 +15,19 @@ class GetBookmarksQueryParams:
 
 @dataclass
 class GetBookmarksSecurity:
-    profile_auth: shared.SchemeProfileAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    profile_auth: shared.SchemeProfileAuth = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class GetBookmarksRequest:
-    query_params: GetBookmarksQueryParams = field(default=None)
-    security: GetBookmarksSecurity = field(default=None)
+    query_params: GetBookmarksQueryParams = field()
+    security: GetBookmarksSecurity = field()
     
 
 @dataclass
 class GetBookmarksResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     service_error: Optional[shared.ServiceError] = field(default=None)
-    status_code: int = field(default=None)
     get_bookmarks_200_application_json_object: Optional[dict[str, datetime]] = field(default=None)
     

@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
@@ -16,20 +17,20 @@ class AdexchangebuyerProposalsInsertQueryParams:
 
 @dataclass
 class AdexchangebuyerProposalsInsertSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class AdexchangebuyerProposalsInsertRequest:
-    query_params: AdexchangebuyerProposalsInsertQueryParams = field(default=None)
+    query_params: AdexchangebuyerProposalsInsertQueryParams = field()
+    security: AdexchangebuyerProposalsInsertSecurity = field()
     request: Optional[shared.CreateOrdersRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: AdexchangebuyerProposalsInsertSecurity = field(default=None)
     
 
 @dataclass
 class AdexchangebuyerProposalsInsertResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     create_orders_response: Optional[shared.CreateOrdersResponse] = field(default=None)
-    status_code: int = field(default=None)
     

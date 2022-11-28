@@ -1,10 +1,13 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 
 
 @dataclass
 class DeleteSuiteDefinitionPathParams:
-    suite_definition_id: str = field(default=None, metadata={'path_param': { 'field_name': 'suiteDefinitionId', 'style': 'simple', 'explode': False }})
+    suite_definition_id: str = field(metadata={'path_param': { 'field_name': 'suiteDefinitionId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -20,15 +23,15 @@ class DeleteSuiteDefinitionHeaders:
 
 @dataclass
 class DeleteSuiteDefinitionRequest:
-    path_params: DeleteSuiteDefinitionPathParams = field(default=None)
-    headers: DeleteSuiteDefinitionHeaders = field(default=None)
+    headers: DeleteSuiteDefinitionHeaders = field()
+    path_params: DeleteSuiteDefinitionPathParams = field()
     
 
 @dataclass
 class DeleteSuiteDefinitionResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     delete_suite_definition_response: Optional[dict[str, Any]] = field(default=None)
     internal_server_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     validation_exception: Optional[Any] = field(default=None)
     

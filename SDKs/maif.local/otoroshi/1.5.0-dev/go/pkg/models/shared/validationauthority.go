@@ -1,5 +1,7 @@
 package shared
 
+// ValidationAuthority
+// Settings to access a validation authority server
 type ValidationAuthority struct {
 	AlwaysValid bool              `json:"alwaysValid"`
 	BadTTL      int64             `json:"badTtl"`

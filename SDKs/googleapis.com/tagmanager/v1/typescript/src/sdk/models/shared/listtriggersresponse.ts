@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Trigger } from "./trigger";
+
 
 
 // ListTriggersResponse
@@ -8,6 +8,6 @@ import { Trigger } from "./trigger";
  * List triggers response.
 **/
 export class ListTriggersResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=triggers", elemType: shared.Trigger })
+  @SpeakeasyMetadata({ data: "json, name=triggers", elemType: Trigger })
   triggers?: Trigger[];
 }

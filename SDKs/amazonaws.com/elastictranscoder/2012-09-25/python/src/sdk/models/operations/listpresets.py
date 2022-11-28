@@ -1,5 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Any,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
 from sdk.models import shared
 
 
@@ -22,17 +25,17 @@ class ListPresetsHeaders:
 
 @dataclass
 class ListPresetsRequest:
-    query_params: ListPresetsQueryParams = field(default=None)
-    headers: ListPresetsHeaders = field(default=None)
+    headers: ListPresetsHeaders = field()
+    query_params: ListPresetsQueryParams = field()
     
 
 @dataclass
 class ListPresetsResponse:
+    content_type: str = field()
+    status_code: int = field()
     access_denied_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     incompatible_version_exception: Optional[Any] = field(default=None)
     internal_service_exception: Optional[Any] = field(default=None)
     list_presets_response: Optional[shared.ListPresetsResponse] = field(default=None)
-    status_code: int = field(default=None)
     validation_exception: Optional[Any] = field(default=None)
     

@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DatabaseRole } from "./databaserole";
+
 
 
 // ListDatabaseRolesResponse
@@ -8,9 +8,9 @@ import { DatabaseRole } from "./databaserole";
  * The response for ListDatabaseRoles.
 **/
 export class ListDatabaseRolesResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=databaseRoles", elemType: shared.DatabaseRole })
+  @SpeakeasyMetadata({ data: "json, name=databaseRoles", elemType: DatabaseRole })
   databaseRoles?: DatabaseRole[];
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 }

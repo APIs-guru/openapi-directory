@@ -1,5 +1,7 @@
 package shared
 
+// File
+// Files store content that is potentially associated with Packages or Versions.
 type File struct {
 	CreateTime *string `json:"createTime,omitempty"`
 	Hashes     []Hash  `json:"hashes,omitempty"`

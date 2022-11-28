@@ -1,31 +1,32 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetAddWordQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=author" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=author" })
   author?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=definition" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=definition" })
   definition?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=related" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=related" })
   related?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=word" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=word" })
   word?: string;
 }
 
 
 export class GetAddWordRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetAddWordQueryParams;
 }
 
 
 export class GetAddWordResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 
@@ -11,12 +12,12 @@ class SignOutQueryParams:
 
 @dataclass
 class SignOutRequest:
-    query_params: SignOutQueryParams = field(default=None)
+    query_params: SignOutQueryParams = field()
     
 
 @dataclass
 class SignOutResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     service_error: Optional[shared.ServiceError] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import program
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class Programs:
-    programs: Optional[List[program.Program]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'programs' }})
+    r"""Programs
+    A list of the supported seller programs.
+    """
+    
+    programs: Optional[List[Program]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('programs') }})
     

@@ -1,10 +1,15 @@
 from dataclasses import dataclass, field
 from dataclasses_json import dataclass_json
-from . import profilinggroupdescription
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class CreateProfilingGroupResponse:
-    profiling_group: profilinggroupdescription.ProfilingGroupDescription = field(default=None, metadata={'dataclasses_json': { 'field_name': 'profilingGroup' }})
+    r"""CreateProfilingGroupResponse
+    The structure representing the createProfilingGroupResponse.
+    """
+    
+    profiling_group: ProfilingGroupDescription = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('profilingGroup') }})
     

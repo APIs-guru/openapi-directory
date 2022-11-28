@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class QueryGrantableRolesRequestViewEnum(str, Enum):
     BASIC = "BASIC"
@@ -10,8 +12,12 @@ class QueryGrantableRolesRequestViewEnum(str, Enum):
 @dataclass_json
 @dataclass
 class QueryGrantableRolesRequest:
-    full_resource_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'fullResourceName' }})
-    page_size: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'pageSize' }})
-    page_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'pageToken' }})
-    view: Optional[QueryGrantableRolesRequestViewEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'view' }})
+    r"""QueryGrantableRolesRequest
+    The grantable role query request.
+    """
+    
+    full_resource_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('fullResourceName') }})
+    page_size: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('pageSize') }})
+    page_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('pageToken') }})
+    view: Optional[QueryGrantableRolesRequestViewEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('view') }})
     

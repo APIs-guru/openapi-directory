@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ImageSummary } from "./imagesummary";
 export declare class ListImagePipelineImagesResponse extends SpeakeasyBase {
     imageSummaryList?: ImageSummary[];

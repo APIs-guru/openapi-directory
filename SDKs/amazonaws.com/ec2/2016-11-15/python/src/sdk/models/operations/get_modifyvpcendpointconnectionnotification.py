@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 
 class GetModifyVpcEndpointConnectionNotificationActionEnum(str, Enum):
     MODIFY_VPC_ENDPOINT_CONNECTION_NOTIFICATION = "ModifyVpcEndpointConnectionNotification"
@@ -10,12 +14,12 @@ class GetModifyVpcEndpointConnectionNotificationVersionEnum(str, Enum):
 
 @dataclass
 class GetModifyVpcEndpointConnectionNotificationQueryParams:
-    action: GetModifyVpcEndpointConnectionNotificationActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetModifyVpcEndpointConnectionNotificationActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    connection_notification_id: str = field(metadata={'query_param': { 'field_name': 'ConnectionNotificationId', 'style': 'form', 'explode': True }})
+    version: GetModifyVpcEndpointConnectionNotificationVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     connection_events: Optional[List[str]] = field(default=None, metadata={'query_param': { 'field_name': 'ConnectionEvents', 'style': 'form', 'explode': True }})
     connection_notification_arn: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'ConnectionNotificationArn', 'style': 'form', 'explode': True }})
-    connection_notification_id: str = field(default=None, metadata={'query_param': { 'field_name': 'ConnectionNotificationId', 'style': 'form', 'explode': True }})
     dry_run: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'DryRun', 'style': 'form', 'explode': True }})
-    version: GetModifyVpcEndpointConnectionNotificationVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -31,13 +35,13 @@ class GetModifyVpcEndpointConnectionNotificationHeaders:
 
 @dataclass
 class GetModifyVpcEndpointConnectionNotificationRequest:
-    query_params: GetModifyVpcEndpointConnectionNotificationQueryParams = field(default=None)
-    headers: GetModifyVpcEndpointConnectionNotificationHeaders = field(default=None)
+    headers: GetModifyVpcEndpointConnectionNotificationHeaders = field()
+    query_params: GetModifyVpcEndpointConnectionNotificationQueryParams = field()
     
 
 @dataclass
 class GetModifyVpcEndpointConnectionNotificationResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

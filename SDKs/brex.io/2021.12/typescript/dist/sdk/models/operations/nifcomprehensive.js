@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var NifComprehensivePathParams = /** @class */ (function (_super) {
     __extends(NifComprehensivePathParams, _super);
@@ -30,7 +30,7 @@ var NifComprehensivePathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=country" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=country" }),
         __metadata("design:type", String)
     ], NifComprehensivePathParams.prototype, "country", void 0);
     return NifComprehensivePathParams;
@@ -42,15 +42,15 @@ var NifComprehensiveRequestBody = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "form, name=companyAddress;" }),
+        SpeakeasyMetadata({ data: "form, name=companyAddress;" }),
         __metadata("design:type", String)
     ], NifComprehensiveRequestBody.prototype, "companyAddress", void 0);
     __decorate([
-        Metadata({ data: "form, name=companyName;" }),
+        SpeakeasyMetadata({ data: "form, name=companyName;" }),
         __metadata("design:type", String)
     ], NifComprehensiveRequestBody.prototype, "companyName", void 0);
     __decorate([
-        Metadata({ data: "form, name=nifNumber;" }),
+        SpeakeasyMetadata({ data: "form, name=nifNumber;" }),
         __metadata("design:type", String)
     ], NifComprehensiveRequestBody.prototype, "nifNumber", void 0);
     return NifComprehensiveRequestBody;
@@ -62,7 +62,7 @@ var NifComprehensiveSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeUserKey)
     ], NifComprehensiveSecurity.prototype, "userKey", void 0);
     return NifComprehensiveSecurity;
@@ -74,15 +74,15 @@ var NifComprehensiveRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", NifComprehensivePathParams)
     ], NifComprehensiveRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/x-www-form-urlencoded" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/x-www-form-urlencoded" }),
         __metadata("design:type", NifComprehensiveRequestBody)
     ], NifComprehensiveRequest.prototype, "request", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", NifComprehensiveSecurity)
     ], NifComprehensiveRequest.prototype, "security", void 0);
     return NifComprehensiveRequest;
@@ -94,19 +94,19 @@ var NifComprehensiveResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], NifComprehensiveResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], NifComprehensiveResponse.prototype, "nifComprehensive200ApplicationJsonAny", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], NifComprehensiveResponse.prototype, "nifComprehensiveDefaultApplicationJsonAny", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], NifComprehensiveResponse.prototype, "statusCode", void 0);
     return NifComprehensiveResponse;

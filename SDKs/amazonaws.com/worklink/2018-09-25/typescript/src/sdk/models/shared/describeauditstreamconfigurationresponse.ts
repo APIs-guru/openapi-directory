@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DescribeAuditStreamConfigurationResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AuditStreamArn" })
+  @SpeakeasyMetadata({ data: "json, name=AuditStreamArn" })
   auditStreamArn?: string;
 }

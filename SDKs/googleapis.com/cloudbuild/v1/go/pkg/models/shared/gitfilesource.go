@@ -9,6 +9,8 @@ const (
 	GitFileSourceRepoTypeEnumBitbucketServer         GitFileSourceRepoTypeEnum = "BITBUCKET_SERVER"
 )
 
+// GitFileSource
+// GitFileSource describes a file within a (possibly remote) code repository.
 type GitFileSource struct {
 	BitbucketServerConfig  *string                    `json:"bitbucketServerConfig,omitempty"`
 	GithubEnterpriseConfig *string                    `json:"githubEnterpriseConfig,omitempty"`

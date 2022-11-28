@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
 from typing import Optional
@@ -27,7 +27,7 @@ class PostActionNotificationExportsRequest:
 
 @dataclass
 class PostActionNotificationExportsResponse:
+    content_type: str = field()
+    status_code: int = field()
     action_notification_export_entity: Optional[shared.ActionNotificationExportEntity] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

@@ -11,6 +11,8 @@ const (
 	CisBenchmarkSeverityEnumCritical            CisBenchmarkSeverityEnum = "CRITICAL"
 )
 
+// CisBenchmark
+// A compliance check that is a CIS benchmark.
 type CisBenchmark struct {
 	ProfileLevel *int32                    `json:"profileLevel,omitempty"`
 	Severity     *CisBenchmarkSeverityEnum `json:"severity,omitempty"`

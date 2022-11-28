@@ -9,7 +9,7 @@ import (
 	"strings"
 )
 
-var Servers = []string{
+var ServerList = []string{
 	"https://batch.core.windows.net",
 }
 
@@ -18,9 +18,13 @@ type HTTPClient interface {
 }
 
 type SDK struct {
-	defaultClient  HTTPClient
-	securityClient HTTPClient
-	serverURL      string
+	_defaultClient  HTTPClient
+	_securityClient HTTPClient
+
+	_serverURL  string
+	_language   string
+	_sdkVersion string
+	_genVersion string
 }
 
 type SDKOption func(*SDK)
@@ -31,27 +35,45 @@ func WithServerURL(serverURL string, params map[string]string) SDKOption {
 			serverURL = utils.ReplaceParameters(serverURL, params)
 		}
 
-		sdk.serverURL = serverURL
+		sdk._serverURL = serverURL
+	}
+}
+
+func WithClient(client HTTPClient) SDKOption {
+	return func(sdk *SDK) {
+		sdk._defaultClient = client
 	}
 }
 
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
-		defaultClient:  http.DefaultClient,
-		securityClient: http.DefaultClient,
+		_language:   "go",
+		_sdkVersion: "",
+		_genVersion: "internal",
 	}
 	for _, opt := range opts {
 		opt(sdk)
 	}
-	if sdk.serverURL == "" {
-		sdk.serverURL = Servers[0]
+
+	if sdk._defaultClient == nil {
+		sdk._defaultClient = http.DefaultClient
+	}
+	if sdk._securityClient == nil {
+
+		sdk._securityClient = sdk._defaultClient
+
+	}
+
+	if sdk._serverURL == "" {
+		sdk._serverURL = ServerList[0]
 	}
 
 	return sdk
 }
 
+// ApplicationGet - Gets information about the specified application.
 func (s *SDK) ApplicationGet(ctx context.Context, request operations.ApplicationGetRequest) (*operations.ApplicationGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/applications/{applicationId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -63,7 +85,7 @@ func (s *SDK) ApplicationGet(ctx context.Context, request operations.Application
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -105,8 +127,9 @@ func (s *SDK) ApplicationGet(ctx context.Context, request operations.Application
 	return res, nil
 }
 
+// ApplicationList - Lists all of the applications available in the specified account.
 func (s *SDK) ApplicationList(ctx context.Context, request operations.ApplicationListRequest) (*operations.ApplicationListResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/applications"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -118,7 +141,7 @@ func (s *SDK) ApplicationList(ctx context.Context, request operations.Applicatio
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -160,8 +183,9 @@ func (s *SDK) ApplicationList(ctx context.Context, request operations.Applicatio
 	return res, nil
 }
 
+// CertificateAdd - Adds a certificate to the specified account.
 func (s *SDK) CertificateAdd(ctx context.Context, request operations.CertificateAddRequest) (*operations.CertificateAddResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/certificates"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -183,7 +207,7 @@ func (s *SDK) CertificateAdd(ctx context.Context, request operations.Certificate
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -216,8 +240,9 @@ func (s *SDK) CertificateAdd(ctx context.Context, request operations.Certificate
 	return res, nil
 }
 
+// CertificateCancelDeletion - Cancels a failed deletion of a certificate from the specified account.
 func (s *SDK) CertificateCancelDeletion(ctx context.Context, request operations.CertificateCancelDeletionRequest) (*operations.CertificateCancelDeletionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/certificates(thumbprintAlgorithm={thumbprintAlgorithm},thumbprint={thumbprint})/canceldelete", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -229,7 +254,7 @@ func (s *SDK) CertificateCancelDeletion(ctx context.Context, request operations.
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -262,8 +287,9 @@ func (s *SDK) CertificateCancelDeletion(ctx context.Context, request operations.
 	return res, nil
 }
 
+// CertificateDelete - Deletes a certificate from the specified account.
 func (s *SDK) CertificateDelete(ctx context.Context, request operations.CertificateDeleteRequest) (*operations.CertificateDeleteResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/certificates(thumbprintAlgorithm={thumbprintAlgorithm},thumbprint={thumbprint})", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -275,7 +301,7 @@ func (s *SDK) CertificateDelete(ctx context.Context, request operations.Certific
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -308,8 +334,9 @@ func (s *SDK) CertificateDelete(ctx context.Context, request operations.Certific
 	return res, nil
 }
 
+// CertificateGet - Gets information about the specified certificate.
 func (s *SDK) CertificateGet(ctx context.Context, request operations.CertificateGetRequest) (*operations.CertificateGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/certificates(thumbprintAlgorithm={thumbprintAlgorithm},thumbprint={thumbprint})", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -321,7 +348,7 @@ func (s *SDK) CertificateGet(ctx context.Context, request operations.Certificate
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -363,8 +390,9 @@ func (s *SDK) CertificateGet(ctx context.Context, request operations.Certificate
 	return res, nil
 }
 
+// CertificateList - Lists all of the certificates that have been added to the specified account.
 func (s *SDK) CertificateList(ctx context.Context, request operations.CertificateListRequest) (*operations.CertificateListResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/certificates"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -376,7 +404,7 @@ func (s *SDK) CertificateList(ctx context.Context, request operations.Certificat
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -418,8 +446,9 @@ func (s *SDK) CertificateList(ctx context.Context, request operations.Certificat
 	return res, nil
 }
 
+// ComputeNodeAddUser - Adds a user account to the specified compute node.
 func (s *SDK) ComputeNodeAddUser(ctx context.Context, request operations.ComputeNodeAddUserRequest) (*operations.ComputeNodeAddUserResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/pools/{poolId}/nodes/{nodeId}/users", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -441,7 +470,7 @@ func (s *SDK) ComputeNodeAddUser(ctx context.Context, request operations.Compute
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -474,8 +503,9 @@ func (s *SDK) ComputeNodeAddUser(ctx context.Context, request operations.Compute
 	return res, nil
 }
 
+// ComputeNodeDeleteUser - Deletes a user account from the specified compute node.
 func (s *SDK) ComputeNodeDeleteUser(ctx context.Context, request operations.ComputeNodeDeleteUserRequest) (*operations.ComputeNodeDeleteUserResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/pools/{poolId}/nodes/{nodeId}/users/{userName}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -487,7 +517,7 @@ func (s *SDK) ComputeNodeDeleteUser(ctx context.Context, request operations.Comp
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -520,8 +550,9 @@ func (s *SDK) ComputeNodeDeleteUser(ctx context.Context, request operations.Comp
 	return res, nil
 }
 
+// ComputeNodeDisableScheduling - Disable task scheduling of the specified compute node.
 func (s *SDK) ComputeNodeDisableScheduling(ctx context.Context, request operations.ComputeNodeDisableSchedulingRequest) (*operations.ComputeNodeDisableSchedulingResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/pools/{poolId}/nodes/{nodeId}/disablescheduling", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -540,7 +571,7 @@ func (s *SDK) ComputeNodeDisableScheduling(ctx context.Context, request operatio
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -573,8 +604,9 @@ func (s *SDK) ComputeNodeDisableScheduling(ctx context.Context, request operatio
 	return res, nil
 }
 
+// ComputeNodeEnableScheduling - Enable task scheduling of the specified compute node.
 func (s *SDK) ComputeNodeEnableScheduling(ctx context.Context, request operations.ComputeNodeEnableSchedulingRequest) (*operations.ComputeNodeEnableSchedulingResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/pools/{poolId}/nodes/{nodeId}/enablescheduling", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -586,7 +618,7 @@ func (s *SDK) ComputeNodeEnableScheduling(ctx context.Context, request operation
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -619,8 +651,9 @@ func (s *SDK) ComputeNodeEnableScheduling(ctx context.Context, request operation
 	return res, nil
 }
 
+// ComputeNodeGet - Gets information about the specified compute node.
 func (s *SDK) ComputeNodeGet(ctx context.Context, request operations.ComputeNodeGetRequest) (*operations.ComputeNodeGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/pools/{poolId}/nodes/{nodeId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -632,7 +665,7 @@ func (s *SDK) ComputeNodeGet(ctx context.Context, request operations.ComputeNode
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -674,8 +707,9 @@ func (s *SDK) ComputeNodeGet(ctx context.Context, request operations.ComputeNode
 	return res, nil
 }
 
+// ComputeNodeGetRemoteDesktop - Gets the Remote Desktop Protocol file for the specified compute node.
 func (s *SDK) ComputeNodeGetRemoteDesktop(ctx context.Context, request operations.ComputeNodeGetRemoteDesktopRequest) (*operations.ComputeNodeGetRemoteDesktopResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/pools/{poolId}/nodes/{nodeId}/rdp", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -687,7 +721,7 @@ func (s *SDK) ComputeNodeGetRemoteDesktop(ctx context.Context, request operation
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -729,8 +763,9 @@ func (s *SDK) ComputeNodeGetRemoteDesktop(ctx context.Context, request operation
 	return res, nil
 }
 
+// ComputeNodeList - Lists the compute nodes in the specified pool.
 func (s *SDK) ComputeNodeList(ctx context.Context, request operations.ComputeNodeListRequest) (*operations.ComputeNodeListResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/pools/{poolId}/nodes", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -742,7 +777,7 @@ func (s *SDK) ComputeNodeList(ctx context.Context, request operations.ComputeNod
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -784,8 +819,9 @@ func (s *SDK) ComputeNodeList(ctx context.Context, request operations.ComputeNod
 	return res, nil
 }
 
+// ComputeNodeReboot - Restarts the specified compute node.
 func (s *SDK) ComputeNodeReboot(ctx context.Context, request operations.ComputeNodeRebootRequest) (*operations.ComputeNodeRebootResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/pools/{poolId}/nodes/{nodeId}/reboot", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -804,7 +840,7 @@ func (s *SDK) ComputeNodeReboot(ctx context.Context, request operations.ComputeN
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -837,8 +873,9 @@ func (s *SDK) ComputeNodeReboot(ctx context.Context, request operations.ComputeN
 	return res, nil
 }
 
+// ComputeNodeReimage - Reinstalls the operating system on the specified compute node.
 func (s *SDK) ComputeNodeReimage(ctx context.Context, request operations.ComputeNodeReimageRequest) (*operations.ComputeNodeReimageResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/pools/{poolId}/nodes/{nodeId}/reimage", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -857,7 +894,7 @@ func (s *SDK) ComputeNodeReimage(ctx context.Context, request operations.Compute
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -890,8 +927,9 @@ func (s *SDK) ComputeNodeReimage(ctx context.Context, request operations.Compute
 	return res, nil
 }
 
+// ComputeNodeUpdateUser - Updates the password or expiration time of a user account on the specified compute node.
 func (s *SDK) ComputeNodeUpdateUser(ctx context.Context, request operations.ComputeNodeUpdateUserRequest) (*operations.ComputeNodeUpdateUserResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/pools/{poolId}/nodes/{nodeId}/users/{userName}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -913,7 +951,7 @@ func (s *SDK) ComputeNodeUpdateUser(ctx context.Context, request operations.Comp
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -946,8 +984,9 @@ func (s *SDK) ComputeNodeUpdateUser(ctx context.Context, request operations.Comp
 	return res, nil
 }
 
+// FileDeleteFromComputeNode - Deletes the specified task file from the compute node.
 func (s *SDK) FileDeleteFromComputeNode(ctx context.Context, request operations.FileDeleteFromComputeNodeRequest) (*operations.FileDeleteFromComputeNodeResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/pools/{poolId}/nodes/{nodeId}/files/{fileName}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -959,7 +998,7 @@ func (s *SDK) FileDeleteFromComputeNode(ctx context.Context, request operations.
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -992,8 +1031,9 @@ func (s *SDK) FileDeleteFromComputeNode(ctx context.Context, request operations.
 	return res, nil
 }
 
+// FileDeleteFromTask - Deletes the specified task file from the compute node where the task ran.
 func (s *SDK) FileDeleteFromTask(ctx context.Context, request operations.FileDeleteFromTaskRequest) (*operations.FileDeleteFromTaskResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/jobs/{jobId}/tasks/{taskId}/files/{fileName}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -1005,7 +1045,7 @@ func (s *SDK) FileDeleteFromTask(ctx context.Context, request operations.FileDel
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1038,8 +1078,9 @@ func (s *SDK) FileDeleteFromTask(ctx context.Context, request operations.FileDel
 	return res, nil
 }
 
+// FileGetFromComputeNode - Gets the content of the specified task file.
 func (s *SDK) FileGetFromComputeNode(ctx context.Context, request operations.FileGetFromComputeNodeRequest) (*operations.FileGetFromComputeNodeResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/pools/{poolId}/nodes/{nodeId}/files/{fileName}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1051,7 +1092,7 @@ func (s *SDK) FileGetFromComputeNode(ctx context.Context, request operations.Fil
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1093,8 +1134,9 @@ func (s *SDK) FileGetFromComputeNode(ctx context.Context, request operations.Fil
 	return res, nil
 }
 
+// FileGetFromTask - Gets the content of the specified task file.
 func (s *SDK) FileGetFromTask(ctx context.Context, request operations.FileGetFromTaskRequest) (*operations.FileGetFromTaskResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/jobs/{jobId}/tasks/{taskId}/files/{fileName}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1106,7 +1148,7 @@ func (s *SDK) FileGetFromTask(ctx context.Context, request operations.FileGetFro
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1148,8 +1190,9 @@ func (s *SDK) FileGetFromTask(ctx context.Context, request operations.FileGetFro
 	return res, nil
 }
 
+// FileGetNodeFilePropertiesFromComputeNode - Gets the properties of the specified compute node file.
 func (s *SDK) FileGetNodeFilePropertiesFromComputeNode(ctx context.Context, request operations.FileGetNodeFilePropertiesFromComputeNodeRequest) (*operations.FileGetNodeFilePropertiesFromComputeNodeResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/pools/{poolId}/nodes/{nodeId}/files/{fileName}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "HEAD", url, nil)
@@ -1161,7 +1204,7 @@ func (s *SDK) FileGetNodeFilePropertiesFromComputeNode(ctx context.Context, requ
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1194,8 +1237,9 @@ func (s *SDK) FileGetNodeFilePropertiesFromComputeNode(ctx context.Context, requ
 	return res, nil
 }
 
+// FileGetNodeFilePropertiesFromTask - Gets the properties of the specified task file.
 func (s *SDK) FileGetNodeFilePropertiesFromTask(ctx context.Context, request operations.FileGetNodeFilePropertiesFromTaskRequest) (*operations.FileGetNodeFilePropertiesFromTaskResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/jobs/{jobId}/tasks/{taskId}/files/{fileName}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "HEAD", url, nil)
@@ -1207,7 +1251,7 @@ func (s *SDK) FileGetNodeFilePropertiesFromTask(ctx context.Context, request ope
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1240,8 +1284,9 @@ func (s *SDK) FileGetNodeFilePropertiesFromTask(ctx context.Context, request ope
 	return res, nil
 }
 
+// FileListFromComputeNode - Lists all of the files in task directories on the specified compute node.
 func (s *SDK) FileListFromComputeNode(ctx context.Context, request operations.FileListFromComputeNodeRequest) (*operations.FileListFromComputeNodeResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/pools/{poolId}/nodes/{nodeId}/files", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1253,7 +1298,7 @@ func (s *SDK) FileListFromComputeNode(ctx context.Context, request operations.Fi
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1295,8 +1340,9 @@ func (s *SDK) FileListFromComputeNode(ctx context.Context, request operations.Fi
 	return res, nil
 }
 
+// FileListFromTask - Lists the files in a task's directory on its compute node.
 func (s *SDK) FileListFromTask(ctx context.Context, request operations.FileListFromTaskRequest) (*operations.FileListFromTaskResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/jobs/{jobId}/tasks/{taskId}/files", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1308,7 +1354,7 @@ func (s *SDK) FileListFromTask(ctx context.Context, request operations.FileListF
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1350,8 +1396,9 @@ func (s *SDK) FileListFromTask(ctx context.Context, request operations.FileListF
 	return res, nil
 }
 
+// JobScheduleAdd - Adds a job schedule to the specified account.
 func (s *SDK) JobScheduleAdd(ctx context.Context, request operations.JobScheduleAddRequest) (*operations.JobScheduleAddResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/jobschedules"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1373,7 +1420,7 @@ func (s *SDK) JobScheduleAdd(ctx context.Context, request operations.JobSchedule
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1406,8 +1453,9 @@ func (s *SDK) JobScheduleAdd(ctx context.Context, request operations.JobSchedule
 	return res, nil
 }
 
+// JobScheduleDelete - Deletes a job schedule from the specified account.
 func (s *SDK) JobScheduleDelete(ctx context.Context, request operations.JobScheduleDeleteRequest) (*operations.JobScheduleDeleteResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/jobschedules/{jobScheduleId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -1419,7 +1467,7 @@ func (s *SDK) JobScheduleDelete(ctx context.Context, request operations.JobSched
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1452,8 +1500,9 @@ func (s *SDK) JobScheduleDelete(ctx context.Context, request operations.JobSched
 	return res, nil
 }
 
+// JobScheduleDisable - Disables a job schedule.
 func (s *SDK) JobScheduleDisable(ctx context.Context, request operations.JobScheduleDisableRequest) (*operations.JobScheduleDisableResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/jobschedules/{jobScheduleId}/disable", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -1465,7 +1514,7 @@ func (s *SDK) JobScheduleDisable(ctx context.Context, request operations.JobSche
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1498,8 +1547,9 @@ func (s *SDK) JobScheduleDisable(ctx context.Context, request operations.JobSche
 	return res, nil
 }
 
+// JobScheduleEnable - Enables a job schedule.
 func (s *SDK) JobScheduleEnable(ctx context.Context, request operations.JobScheduleEnableRequest) (*operations.JobScheduleEnableResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/jobschedules/{jobScheduleId}/enable", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -1511,7 +1561,7 @@ func (s *SDK) JobScheduleEnable(ctx context.Context, request operations.JobSched
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1544,8 +1594,9 @@ func (s *SDK) JobScheduleEnable(ctx context.Context, request operations.JobSched
 	return res, nil
 }
 
+// JobScheduleExists - Checks the specified job schedule exists.
 func (s *SDK) JobScheduleExists(ctx context.Context, request operations.JobScheduleExistsRequest) (*operations.JobScheduleExistsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/jobschedules/{jobScheduleId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "HEAD", url, nil)
@@ -1557,7 +1608,7 @@ func (s *SDK) JobScheduleExists(ctx context.Context, request operations.JobSched
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1591,8 +1642,9 @@ func (s *SDK) JobScheduleExists(ctx context.Context, request operations.JobSched
 	return res, nil
 }
 
+// JobScheduleGet - Gets information about the specified job schedule.
 func (s *SDK) JobScheduleGet(ctx context.Context, request operations.JobScheduleGetRequest) (*operations.JobScheduleGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/jobschedules/{jobScheduleId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1604,7 +1656,7 @@ func (s *SDK) JobScheduleGet(ctx context.Context, request operations.JobSchedule
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1646,8 +1698,9 @@ func (s *SDK) JobScheduleGet(ctx context.Context, request operations.JobSchedule
 	return res, nil
 }
 
+// JobScheduleList - Lists all of the job schedules in the specified account.
 func (s *SDK) JobScheduleList(ctx context.Context, request operations.JobScheduleListRequest) (*operations.JobScheduleListResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/jobschedules"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1659,7 +1712,7 @@ func (s *SDK) JobScheduleList(ctx context.Context, request operations.JobSchedul
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1701,8 +1754,9 @@ func (s *SDK) JobScheduleList(ctx context.Context, request operations.JobSchedul
 	return res, nil
 }
 
+// JobSchedulePatch - Updates the properties of the specified job schedule.
 func (s *SDK) JobSchedulePatch(ctx context.Context, request operations.JobSchedulePatchRequest) (*operations.JobSchedulePatchResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/jobschedules/{jobScheduleId}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1724,7 +1778,7 @@ func (s *SDK) JobSchedulePatch(ctx context.Context, request operations.JobSchedu
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1757,8 +1811,9 @@ func (s *SDK) JobSchedulePatch(ctx context.Context, request operations.JobSchedu
 	return res, nil
 }
 
+// JobScheduleTerminate - Terminates a job schedule.
 func (s *SDK) JobScheduleTerminate(ctx context.Context, request operations.JobScheduleTerminateRequest) (*operations.JobScheduleTerminateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/jobschedules/{jobScheduleId}/terminate", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -1770,7 +1825,7 @@ func (s *SDK) JobScheduleTerminate(ctx context.Context, request operations.JobSc
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1803,8 +1858,9 @@ func (s *SDK) JobScheduleTerminate(ctx context.Context, request operations.JobSc
 	return res, nil
 }
 
+// JobScheduleUpdate - Updates the properties of the specified job schedule.
 func (s *SDK) JobScheduleUpdate(ctx context.Context, request operations.JobScheduleUpdateRequest) (*operations.JobScheduleUpdateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/jobschedules/{jobScheduleId}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1826,7 +1882,7 @@ func (s *SDK) JobScheduleUpdate(ctx context.Context, request operations.JobSched
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1859,8 +1915,9 @@ func (s *SDK) JobScheduleUpdate(ctx context.Context, request operations.JobSched
 	return res, nil
 }
 
+// JobAdd - Adds a job to the specified account.
 func (s *SDK) JobAdd(ctx context.Context, request operations.JobAddRequest) (*operations.JobAddResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/jobs"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1882,7 +1939,7 @@ func (s *SDK) JobAdd(ctx context.Context, request operations.JobAddRequest) (*op
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1915,8 +1972,9 @@ func (s *SDK) JobAdd(ctx context.Context, request operations.JobAddRequest) (*op
 	return res, nil
 }
 
+// JobDelete - Deletes a job.
 func (s *SDK) JobDelete(ctx context.Context, request operations.JobDeleteRequest) (*operations.JobDeleteResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/jobs/{jobId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -1928,7 +1986,7 @@ func (s *SDK) JobDelete(ctx context.Context, request operations.JobDeleteRequest
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1961,8 +2019,9 @@ func (s *SDK) JobDelete(ctx context.Context, request operations.JobDeleteRequest
 	return res, nil
 }
 
+// JobDisable - Disables the specified job, preventing new tasks from running.
 func (s *SDK) JobDisable(ctx context.Context, request operations.JobDisableRequest) (*operations.JobDisableResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/jobs/{jobId}/disable", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1984,7 +2043,7 @@ func (s *SDK) JobDisable(ctx context.Context, request operations.JobDisableReque
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2017,8 +2076,9 @@ func (s *SDK) JobDisable(ctx context.Context, request operations.JobDisableReque
 	return res, nil
 }
 
+// JobEnable - Enables the specified job, allowing new tasks to run.
 func (s *SDK) JobEnable(ctx context.Context, request operations.JobEnableRequest) (*operations.JobEnableResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/jobs/{jobId}/enable", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -2030,7 +2090,7 @@ func (s *SDK) JobEnable(ctx context.Context, request operations.JobEnableRequest
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2063,8 +2123,9 @@ func (s *SDK) JobEnable(ctx context.Context, request operations.JobEnableRequest
 	return res, nil
 }
 
+// JobGet - Gets information about the specified job.
 func (s *SDK) JobGet(ctx context.Context, request operations.JobGetRequest) (*operations.JobGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/jobs/{jobId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2076,7 +2137,7 @@ func (s *SDK) JobGet(ctx context.Context, request operations.JobGetRequest) (*op
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2118,8 +2179,9 @@ func (s *SDK) JobGet(ctx context.Context, request operations.JobGetRequest) (*op
 	return res, nil
 }
 
+// JobGetAllJobsLifetimeStatistics - Gets lifetime summary statistics for all of the jobs in the specified account. Statistics are aggregated across all jobs that have ever existed in the account, from account creation to the last update time of the statistics.
 func (s *SDK) JobGetAllJobsLifetimeStatistics(ctx context.Context, request operations.JobGetAllJobsLifetimeStatisticsRequest) (*operations.JobGetAllJobsLifetimeStatisticsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/lifetimejobstats"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2131,7 +2193,7 @@ func (s *SDK) JobGetAllJobsLifetimeStatistics(ctx context.Context, request opera
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2173,8 +2235,9 @@ func (s *SDK) JobGetAllJobsLifetimeStatistics(ctx context.Context, request opera
 	return res, nil
 }
 
+// JobList - Lists all of the jobs in the specified account.
 func (s *SDK) JobList(ctx context.Context, request operations.JobListRequest) (*operations.JobListResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/jobs"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2186,7 +2249,7 @@ func (s *SDK) JobList(ctx context.Context, request operations.JobListRequest) (*
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2228,8 +2291,9 @@ func (s *SDK) JobList(ctx context.Context, request operations.JobListRequest) (*
 	return res, nil
 }
 
+// JobListFromJobSchedule - Lists the jobs that have been created under the specified job schedule.
 func (s *SDK) JobListFromJobSchedule(ctx context.Context, request operations.JobListFromJobScheduleRequest) (*operations.JobListFromJobScheduleResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/jobschedules/{jobScheduleId}/jobs", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2241,7 +2305,7 @@ func (s *SDK) JobListFromJobSchedule(ctx context.Context, request operations.Job
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2283,8 +2347,9 @@ func (s *SDK) JobListFromJobSchedule(ctx context.Context, request operations.Job
 	return res, nil
 }
 
+// JobListPreparationAndReleaseTaskStatus - Lists the execution status of the Job Preparation and Job Release task for the specified job across the compute nodes where the job has run.
 func (s *SDK) JobListPreparationAndReleaseTaskStatus(ctx context.Context, request operations.JobListPreparationAndReleaseTaskStatusRequest) (*operations.JobListPreparationAndReleaseTaskStatusResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/jobs/{jobId}/jobpreparationandreleasetaskstatus", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2296,7 +2361,7 @@ func (s *SDK) JobListPreparationAndReleaseTaskStatus(ctx context.Context, reques
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2338,8 +2403,9 @@ func (s *SDK) JobListPreparationAndReleaseTaskStatus(ctx context.Context, reques
 	return res, nil
 }
 
+// JobPatch - Updates the properties of a job.
 func (s *SDK) JobPatch(ctx context.Context, request operations.JobPatchRequest) (*operations.JobPatchResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/jobs/{jobId}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2361,7 +2427,7 @@ func (s *SDK) JobPatch(ctx context.Context, request operations.JobPatchRequest) 
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2394,8 +2460,9 @@ func (s *SDK) JobPatch(ctx context.Context, request operations.JobPatchRequest) 
 	return res, nil
 }
 
+// JobTerminate - Terminates the specified job, marking it as completed.
 func (s *SDK) JobTerminate(ctx context.Context, request operations.JobTerminateRequest) (*operations.JobTerminateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/jobs/{jobId}/terminate", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2414,7 +2481,7 @@ func (s *SDK) JobTerminate(ctx context.Context, request operations.JobTerminateR
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2447,8 +2514,9 @@ func (s *SDK) JobTerminate(ctx context.Context, request operations.JobTerminateR
 	return res, nil
 }
 
+// JobUpdate - Updates the properties of a job.
 func (s *SDK) JobUpdate(ctx context.Context, request operations.JobUpdateRequest) (*operations.JobUpdateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/jobs/{jobId}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2470,7 +2538,7 @@ func (s *SDK) JobUpdate(ctx context.Context, request operations.JobUpdateRequest
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2503,8 +2571,9 @@ func (s *SDK) JobUpdate(ctx context.Context, request operations.JobUpdateRequest
 	return res, nil
 }
 
+// PoolAdd - Adds a pool to the specified account.
 func (s *SDK) PoolAdd(ctx context.Context, request operations.PoolAddRequest) (*operations.PoolAddResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/pools"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2526,7 +2595,7 @@ func (s *SDK) PoolAdd(ctx context.Context, request operations.PoolAddRequest) (*
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2559,8 +2628,9 @@ func (s *SDK) PoolAdd(ctx context.Context, request operations.PoolAddRequest) (*
 	return res, nil
 }
 
+// PoolDelete - Deletes a pool from the specified account.
 func (s *SDK) PoolDelete(ctx context.Context, request operations.PoolDeleteRequest) (*operations.PoolDeleteResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/pools/{poolId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -2572,7 +2642,7 @@ func (s *SDK) PoolDelete(ctx context.Context, request operations.PoolDeleteReque
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2605,8 +2675,9 @@ func (s *SDK) PoolDelete(ctx context.Context, request operations.PoolDeleteReque
 	return res, nil
 }
 
+// PoolDisableAutoScale - Disables automatic scaling for a pool.
 func (s *SDK) PoolDisableAutoScale(ctx context.Context, request operations.PoolDisableAutoScaleRequest) (*operations.PoolDisableAutoScaleResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/pools/{poolId}/disableautoscale", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -2618,7 +2689,7 @@ func (s *SDK) PoolDisableAutoScale(ctx context.Context, request operations.PoolD
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2651,8 +2722,9 @@ func (s *SDK) PoolDisableAutoScale(ctx context.Context, request operations.PoolD
 	return res, nil
 }
 
+// PoolEnableAutoScale - Enables automatic scaling for a pool.
 func (s *SDK) PoolEnableAutoScale(ctx context.Context, request operations.PoolEnableAutoScaleRequest) (*operations.PoolEnableAutoScaleResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/pools/{poolId}/enableautoscale", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2674,7 +2746,7 @@ func (s *SDK) PoolEnableAutoScale(ctx context.Context, request operations.PoolEn
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2707,8 +2779,9 @@ func (s *SDK) PoolEnableAutoScale(ctx context.Context, request operations.PoolEn
 	return res, nil
 }
 
+// PoolEvaluateAutoScale - Gets the result of evaluating an automatic scaling formula on the pool.
 func (s *SDK) PoolEvaluateAutoScale(ctx context.Context, request operations.PoolEvaluateAutoScaleRequest) (*operations.PoolEvaluateAutoScaleResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/pools/{poolId}/evaluateautoscale", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2730,7 +2803,7 @@ func (s *SDK) PoolEvaluateAutoScale(ctx context.Context, request operations.Pool
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2772,8 +2845,9 @@ func (s *SDK) PoolEvaluateAutoScale(ctx context.Context, request operations.Pool
 	return res, nil
 }
 
+// PoolExists - Gets basic properties of a pool.
 func (s *SDK) PoolExists(ctx context.Context, request operations.PoolExistsRequest) (*operations.PoolExistsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/pools/{poolId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "HEAD", url, nil)
@@ -2785,7 +2859,7 @@ func (s *SDK) PoolExists(ctx context.Context, request operations.PoolExistsReque
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2819,8 +2893,9 @@ func (s *SDK) PoolExists(ctx context.Context, request operations.PoolExistsReque
 	return res, nil
 }
 
+// PoolGet - Gets information about the specified pool.
 func (s *SDK) PoolGet(ctx context.Context, request operations.PoolGetRequest) (*operations.PoolGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/pools/{poolId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2832,7 +2907,7 @@ func (s *SDK) PoolGet(ctx context.Context, request operations.PoolGetRequest) (*
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2874,8 +2949,9 @@ func (s *SDK) PoolGet(ctx context.Context, request operations.PoolGetRequest) (*
 	return res, nil
 }
 
+// PoolGetAllPoolsLifetimeStatistics - Gets lifetime summary statistics for all of the pools in the specified account. Statistics are aggregated across all pools that have ever existed in the account, from account creation to the last update time of the statistics.
 func (s *SDK) PoolGetAllPoolsLifetimeStatistics(ctx context.Context, request operations.PoolGetAllPoolsLifetimeStatisticsRequest) (*operations.PoolGetAllPoolsLifetimeStatisticsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/lifetimepoolstats"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2887,7 +2963,7 @@ func (s *SDK) PoolGetAllPoolsLifetimeStatistics(ctx context.Context, request ope
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2929,8 +3005,9 @@ func (s *SDK) PoolGetAllPoolsLifetimeStatistics(ctx context.Context, request ope
 	return res, nil
 }
 
+// PoolList - Lists all of the pools in the specified account.
 func (s *SDK) PoolList(ctx context.Context, request operations.PoolListRequest) (*operations.PoolListResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/pools"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2942,7 +3019,7 @@ func (s *SDK) PoolList(ctx context.Context, request operations.PoolListRequest) 
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2984,8 +3061,9 @@ func (s *SDK) PoolList(ctx context.Context, request operations.PoolListRequest) 
 	return res, nil
 }
 
+// PoolListPoolUsageMetrics - Lists the usage metrics, aggregated by pool across individual time intervals, for the specified account.
 func (s *SDK) PoolListPoolUsageMetrics(ctx context.Context, request operations.PoolListPoolUsageMetricsRequest) (*operations.PoolListPoolUsageMetricsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/poolusagemetrics"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2997,7 +3075,7 @@ func (s *SDK) PoolListPoolUsageMetrics(ctx context.Context, request operations.P
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3039,8 +3117,9 @@ func (s *SDK) PoolListPoolUsageMetrics(ctx context.Context, request operations.P
 	return res, nil
 }
 
+// PoolPatch - Updates the properties of a pool.
 func (s *SDK) PoolPatch(ctx context.Context, request operations.PoolPatchRequest) (*operations.PoolPatchResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/pools/{poolId}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3062,7 +3141,7 @@ func (s *SDK) PoolPatch(ctx context.Context, request operations.PoolPatchRequest
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3095,8 +3174,9 @@ func (s *SDK) PoolPatch(ctx context.Context, request operations.PoolPatchRequest
 	return res, nil
 }
 
+// PoolRemoveNodes - Removes compute nodes from the specified pool.
 func (s *SDK) PoolRemoveNodes(ctx context.Context, request operations.PoolRemoveNodesRequest) (*operations.PoolRemoveNodesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/pools/{poolId}/removenodes", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3118,7 +3198,7 @@ func (s *SDK) PoolRemoveNodes(ctx context.Context, request operations.PoolRemove
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3151,8 +3231,9 @@ func (s *SDK) PoolRemoveNodes(ctx context.Context, request operations.PoolRemove
 	return res, nil
 }
 
+// PoolResize - Changes the number of compute nodes that are assigned to a pool.
 func (s *SDK) PoolResize(ctx context.Context, request operations.PoolResizeRequest) (*operations.PoolResizeResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/pools/{poolId}/resize", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3174,7 +3255,7 @@ func (s *SDK) PoolResize(ctx context.Context, request operations.PoolResizeReque
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3207,8 +3288,9 @@ func (s *SDK) PoolResize(ctx context.Context, request operations.PoolResizeReque
 	return res, nil
 }
 
+// PoolStopResize - Stops an ongoing resize operation on the pool. This does not restore the pool to its previous state before the resize operation: it only stops any further changes being made, and the pool maintains its current state.
 func (s *SDK) PoolStopResize(ctx context.Context, request operations.PoolStopResizeRequest) (*operations.PoolStopResizeResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/pools/{poolId}/stopresize", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -3220,7 +3302,7 @@ func (s *SDK) PoolStopResize(ctx context.Context, request operations.PoolStopRes
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3253,8 +3335,9 @@ func (s *SDK) PoolStopResize(ctx context.Context, request operations.PoolStopRes
 	return res, nil
 }
 
+// PoolUpdateProperties - Updates the properties of a pool.
 func (s *SDK) PoolUpdateProperties(ctx context.Context, request operations.PoolUpdatePropertiesRequest) (*operations.PoolUpdatePropertiesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/pools/{poolId}/updateproperties", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3276,7 +3359,7 @@ func (s *SDK) PoolUpdateProperties(ctx context.Context, request operations.PoolU
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3309,8 +3392,9 @@ func (s *SDK) PoolUpdateProperties(ctx context.Context, request operations.PoolU
 	return res, nil
 }
 
+// PoolUpgradeOs - Upgrades the operating system of the specified pool.
 func (s *SDK) PoolUpgradeOs(ctx context.Context, request operations.PoolUpgradeOsRequest) (*operations.PoolUpgradeOsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/pools/{poolId}/upgradeos", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3332,7 +3416,7 @@ func (s *SDK) PoolUpgradeOs(ctx context.Context, request operations.PoolUpgradeO
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3365,8 +3449,9 @@ func (s *SDK) PoolUpgradeOs(ctx context.Context, request operations.PoolUpgradeO
 	return res, nil
 }
 
+// TaskAdd - Adds a task to the specified job.
 func (s *SDK) TaskAdd(ctx context.Context, request operations.TaskAddRequest) (*operations.TaskAddResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/jobs/{jobId}/tasks", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3388,7 +3473,7 @@ func (s *SDK) TaskAdd(ctx context.Context, request operations.TaskAddRequest) (*
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3421,8 +3506,9 @@ func (s *SDK) TaskAdd(ctx context.Context, request operations.TaskAddRequest) (*
 	return res, nil
 }
 
+// TaskDelete - Deletes a task from the specified job.
 func (s *SDK) TaskDelete(ctx context.Context, request operations.TaskDeleteRequest) (*operations.TaskDeleteResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/jobs/{jobId}/tasks/{taskId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -3434,7 +3520,7 @@ func (s *SDK) TaskDelete(ctx context.Context, request operations.TaskDeleteReque
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3467,8 +3553,9 @@ func (s *SDK) TaskDelete(ctx context.Context, request operations.TaskDeleteReque
 	return res, nil
 }
 
+// TaskGet - Gets information about the specified task.
 func (s *SDK) TaskGet(ctx context.Context, request operations.TaskGetRequest) (*operations.TaskGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/jobs/{jobId}/tasks/{taskId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3480,7 +3567,7 @@ func (s *SDK) TaskGet(ctx context.Context, request operations.TaskGetRequest) (*
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3522,8 +3609,9 @@ func (s *SDK) TaskGet(ctx context.Context, request operations.TaskGetRequest) (*
 	return res, nil
 }
 
+// TaskList - Lists all of the tasks that are associated with the specified job.
 func (s *SDK) TaskList(ctx context.Context, request operations.TaskListRequest) (*operations.TaskListResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/jobs/{jobId}/tasks", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3535,7 +3623,7 @@ func (s *SDK) TaskList(ctx context.Context, request operations.TaskListRequest) 
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3577,8 +3665,9 @@ func (s *SDK) TaskList(ctx context.Context, request operations.TaskListRequest) 
 	return res, nil
 }
 
+// TaskListSubtasks - Lists all of the subtasks that are associated with the specified multi-instance task.
 func (s *SDK) TaskListSubtasks(ctx context.Context, request operations.TaskListSubtasksRequest) (*operations.TaskListSubtasksResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/jobs/{jobId}/tasks/{taskId}/subtasksinfo", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3590,7 +3679,7 @@ func (s *SDK) TaskListSubtasks(ctx context.Context, request operations.TaskListS
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3632,8 +3721,9 @@ func (s *SDK) TaskListSubtasks(ctx context.Context, request operations.TaskListS
 	return res, nil
 }
 
+// TaskTerminate - Terminates the specified task.
 func (s *SDK) TaskTerminate(ctx context.Context, request operations.TaskTerminateRequest) (*operations.TaskTerminateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/jobs/{jobId}/tasks/{taskId}/terminate", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -3645,7 +3735,7 @@ func (s *SDK) TaskTerminate(ctx context.Context, request operations.TaskTerminat
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3678,8 +3768,9 @@ func (s *SDK) TaskTerminate(ctx context.Context, request operations.TaskTerminat
 	return res, nil
 }
 
+// TaskUpdate - Updates the properties of the specified task.
 func (s *SDK) TaskUpdate(ctx context.Context, request operations.TaskUpdateRequest) (*operations.TaskUpdateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/jobs/{jobId}/tasks/{taskId}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3701,7 +3792,7 @@ func (s *SDK) TaskUpdate(ctx context.Context, request operations.TaskUpdateReque
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {

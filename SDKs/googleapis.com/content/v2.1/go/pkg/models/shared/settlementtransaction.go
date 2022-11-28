@@ -1,5 +1,7 @@
 package shared
 
+// SettlementTransaction
+// Settlement transactions give a detailed breakdown of the settlement report.
 type SettlementTransaction struct {
 	Amount      *SettlementTransactionAmount      `json:"amount,omitempty"`
 	Identifiers *SettlementTransactionIdentifiers `json:"identifiers,omitempty"`

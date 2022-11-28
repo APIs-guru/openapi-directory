@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { CourseRosterChangesInfo } from "./courserosterchangesinfo";
 import { CourseWorkChangesInfo } from "./courseworkchangesinfo";
 export declare enum FeedFeedTypeEnum {

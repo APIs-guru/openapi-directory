@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Person } from "./person";
 import { Status } from "./status";
+
 
 
 // PersonResponse
@@ -8,15 +9,15 @@ import { Status } from "./status";
  * The response for a single person
 **/
 export class PersonResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=httpStatusCode" })
+  @SpeakeasyMetadata({ data: "json, name=httpStatusCode" })
   httpStatusCode?: number;
 
-  @Metadata({ data: "json, name=person" })
+  @SpeakeasyMetadata({ data: "json, name=person" })
   person?: Person;
 
-  @Metadata({ data: "json, name=requestedResourceName" })
+  @SpeakeasyMetadata({ data: "json, name=requestedResourceName" })
   requestedResourceName?: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: Status;
 }

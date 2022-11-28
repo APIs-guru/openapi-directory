@@ -12,11 +12,6 @@ type GetDashboardIDOrSlugSecurity struct {
 	Jwt shared.SchemeJwt `security:"scheme,type=http,subtype=bearer"`
 }
 
-type GetDashboardIDOrSlugRequest struct {
-	PathParams GetDashboardIDOrSlugPathParams
-	Security   GetDashboardIDOrSlugSecurity
-}
-
 type GetDashboardIDOrSlug200ApplicationJSON struct {
 	Result *shared.DashboardGetResponseSchema `json:"result,omitempty"`
 }
@@ -31,6 +26,11 @@ type GetDashboardIDOrSlug401ApplicationJSON struct {
 
 type GetDashboardIDOrSlug404ApplicationJSON struct {
 	Message *string `json:"message,omitempty"`
+}
+
+type GetDashboardIDOrSlugRequest struct {
+	PathParams GetDashboardIDOrSlugPathParams
+	Security   GetDashboardIDOrSlugSecurity
 }
 
 type GetDashboardIDOrSlugResponse struct {

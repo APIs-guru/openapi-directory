@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetApiNameQueryParams = /** @class */ (function (_super) {
     __extends(GetApiNameQueryParams, _super);
@@ -30,11 +30,11 @@ var GetApiNameQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=nameType" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=nameType" }),
         __metadata("design:type", String)
     ], GetApiNameQueryParams.prototype, "nameType", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=quantity" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=quantity" }),
         __metadata("design:type", Number)
     ], GetApiNameQueryParams.prototype, "quantity", void 0);
     return GetApiNameQueryParams;
@@ -46,7 +46,7 @@ var GetApiNameHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Api-Key" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Api-Key" }),
         __metadata("design:type", String)
     ], GetApiNameHeaders.prototype, "xApiKey", void 0);
     return GetApiNameHeaders;
@@ -58,11 +58,11 @@ var GetApiNameRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetApiNameQueryParams)
     ], GetApiNameRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetApiNameHeaders)
     ], GetApiNameRequest.prototype, "headers", void 0);
     return GetApiNameRequest;
@@ -74,11 +74,11 @@ var GetApiNameResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetApiNameResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetApiNameResponse.prototype, "statusCode", void 0);
     return GetApiNameResponse;

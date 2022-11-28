@@ -8,10 +8,6 @@ type GetWorkspaceQueryParams struct {
 	WorkspaceID string `queryParam:"style=form,explode=true,name=workspaceId"`
 }
 
-type GetWorkspaceRequest struct {
-	QueryParams GetWorkspaceQueryParams
-}
-
 type GetWorkspace200ApplicationJSON struct {
 	Response *shared.Workspace `json:"response,omitempty"`
 }
@@ -77,6 +73,10 @@ type GetWorkspace422ApplicationJSON struct {
 type GetWorkspace500ApplicationJSON struct {
 	Error  *string `json:"error,omitempty"`
 	Status *int64  `json:"status,omitempty"`
+}
+
+type GetWorkspaceRequest struct {
+	QueryParams GetWorkspaceQueryParams
 }
 
 type GetWorkspaceResponse struct {

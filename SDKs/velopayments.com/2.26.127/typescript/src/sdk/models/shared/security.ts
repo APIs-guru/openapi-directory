@@ -1,25 +1,29 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class SchemeOAuth2 extends SpeakeasyBase {
-  @Metadata({ data: "security, name=Authorization" })
-  authorization: string;
-}
-
-
-export class SchemeBasicAuth extends SpeakeasyBase {
-  @Metadata({ data: "security, name=Authorization" })
-  authorization: string;
-}
-
-
-export class SchemeOAuthVeloBackOffice extends SpeakeasyBase {
-  @Metadata({ data: "security, name=Authorization" })
+  @SpeakeasyMetadata({ data: "security, name=Authorization" })
   authorization: string;
 }
 
 
 export class Security extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   oAuth2: SchemeOAuth2;
+}
+
+
+export class SchemeBasicAuth extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "security, name=password" })
+  password: string;
+
+  @SpeakeasyMetadata({ data: "security, name=username" })
+  username: string;
+}
+
+
+export class SchemeOAuthVeloBackOffice extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "security, name=Authorization" })
+  authorization: string;
 }

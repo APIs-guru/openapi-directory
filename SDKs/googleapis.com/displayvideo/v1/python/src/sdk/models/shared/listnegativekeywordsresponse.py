@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import negativekeyword
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ListNegativeKeywordsResponse:
-    negative_keywords: Optional[List[negativekeyword.NegativeKeyword]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'negativeKeywords' }})
-    next_page_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'nextPageToken' }})
+    r"""ListNegativeKeywordsResponse
+    Response message for NegativeKeywordService.ListNegativeKeywords.
+    """
+    
+    negative_keywords: Optional[List[NegativeKeyword]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('negativeKeywords') }})
+    next_page_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('nextPageToken') }})
     

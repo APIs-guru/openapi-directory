@@ -4,8 +4,8 @@ from typing import List,Optional
 
 @dataclass
 class GetWellKnownMercureQueryParams:
+    topic: List[str] = field(metadata={'query_param': { 'field_name': 'topic', 'style': 'form', 'explode': True }})
     last_event_id: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'Last-Event-ID', 'style': 'form', 'explode': True }})
-    topic: List[str] = field(default=None, metadata={'query_param': { 'field_name': 'topic', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -15,12 +15,12 @@ class GetWellKnownMercureHeaders:
 
 @dataclass
 class GetWellKnownMercureRequest:
-    query_params: GetWellKnownMercureQueryParams = field(default=None)
-    headers: GetWellKnownMercureHeaders = field(default=None)
+    headers: GetWellKnownMercureHeaders = field()
+    query_params: GetWellKnownMercureQueryParams = field()
     
 
 @dataclass
 class GetWellKnownMercureResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

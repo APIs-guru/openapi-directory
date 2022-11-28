@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { PortForwardingConfig } from "./portforwardingconfig";
 /**
  * Information about a launch configuration.

@@ -5,7 +5,7 @@ import (
 )
 
 type AddKvPairsRequest struct {
-	Request shared.KeyValuePair `request:"mediaType=application/json"`
+	Request shared.KeyValuePairInput `request:"mediaType=application/json"`
 }
 
 type AddKvPairsResponse struct {

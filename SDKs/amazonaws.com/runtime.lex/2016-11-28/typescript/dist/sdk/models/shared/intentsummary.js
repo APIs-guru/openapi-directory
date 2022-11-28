@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ConfirmationStatusEnum } from "./confirmationstatusenum";
 import { DialogActionTypeEnum } from "./dialogactiontypeenum";
 import { FulfillmentStateEnum } from "./fulfillmentstateenum";
@@ -36,31 +36,31 @@ var IntentSummary = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=checkpointLabel" }),
+        SpeakeasyMetadata({ data: "json, name=checkpointLabel" }),
         __metadata("design:type", String)
     ], IntentSummary.prototype, "checkpointLabel", void 0);
     __decorate([
-        Metadata({ data: "json, name=confirmationStatus" }),
+        SpeakeasyMetadata({ data: "json, name=confirmationStatus" }),
         __metadata("design:type", String)
     ], IntentSummary.prototype, "confirmationStatus", void 0);
     __decorate([
-        Metadata({ data: "json, name=dialogActionType" }),
+        SpeakeasyMetadata({ data: "json, name=dialogActionType" }),
         __metadata("design:type", String)
     ], IntentSummary.prototype, "dialogActionType", void 0);
     __decorate([
-        Metadata({ data: "json, name=fulfillmentState" }),
+        SpeakeasyMetadata({ data: "json, name=fulfillmentState" }),
         __metadata("design:type", String)
     ], IntentSummary.prototype, "fulfillmentState", void 0);
     __decorate([
-        Metadata({ data: "json, name=intentName" }),
+        SpeakeasyMetadata({ data: "json, name=intentName" }),
         __metadata("design:type", String)
     ], IntentSummary.prototype, "intentName", void 0);
     __decorate([
-        Metadata({ data: "json, name=slotToElicit" }),
+        SpeakeasyMetadata({ data: "json, name=slotToElicit" }),
         __metadata("design:type", String)
     ], IntentSummary.prototype, "slotToElicit", void 0);
     __decorate([
-        Metadata({ data: "json, name=slots" }),
+        SpeakeasyMetadata({ data: "json, name=slots" }),
         __metadata("design:type", Map)
     ], IntentSummary.prototype, "slots", void 0);
     return IntentSummary;

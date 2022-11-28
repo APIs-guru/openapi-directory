@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DefaultActionEnum } from "./defaultactionenum";
+
 
 
 // UserPoolConfig
@@ -7,15 +8,15 @@ import { DefaultActionEnum } from "./defaultactionenum";
  * Describes an Amazon Cognito user pool configuration.
 **/
 export class UserPoolConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=appIdClientRegex" })
+  @SpeakeasyMetadata({ data: "json, name=appIdClientRegex" })
   appIdClientRegex?: string;
 
-  @Metadata({ data: "json, name=awsRegion" })
+  @SpeakeasyMetadata({ data: "json, name=awsRegion" })
   awsRegion: string;
 
-  @Metadata({ data: "json, name=defaultAction" })
+  @SpeakeasyMetadata({ data: "json, name=defaultAction" })
   defaultAction: DefaultActionEnum;
 
-  @Metadata({ data: "json, name=userPoolId" })
+  @SpeakeasyMetadata({ data: "json, name=userPoolId" })
   userPoolId: string;
 }

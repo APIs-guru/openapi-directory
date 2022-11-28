@@ -1,64 +1,65 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class CreateTextTrackPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=video_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=video_id" })
   videoId: number;
 }
 
 export enum CreateTextTrackRequestBodyTypeEnum {
-    Captions = "captions"
-,    Chapters = "chapters"
-,    Descriptions = "descriptions"
-,    Metadata = "metadata"
-,    Subtitles = "subtitles"
+    Captions = "captions",
+    Chapters = "chapters",
+    Descriptions = "descriptions",
+    Metadata = "metadata",
+    Subtitles = "subtitles"
 }
 
 
 export class CreateTextTrackRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=active" })
+  @SpeakeasyMetadata({ data: "json, name=active" })
   active?: boolean;
 
-  @Metadata({ data: "json, name=language" })
+  @SpeakeasyMetadata({ data: "json, name=language" })
   language: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type: CreateTextTrackRequestBodyTypeEnum;
 }
 
 
 export class CreateTextTrackSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   oauth2: shared.SchemeOauth2;
 }
 
 
 export class CreateTextTrackRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: CreateTextTrackPathParams;
 
-  @Metadata({ data: "request, media_type=application/vnd.vimeo.video.texttrack+json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/vnd.vimeo.video.texttrack+json" })
   request: CreateTextTrackRequestBody;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: CreateTextTrackSecurity;
 }
 
 
 export class CreateTextTrackResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   legacyError?: shared.LegacyError;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   textTrack?: shared.TextTrack;
 }

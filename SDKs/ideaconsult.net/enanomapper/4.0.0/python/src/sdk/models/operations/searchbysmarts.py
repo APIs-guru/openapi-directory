@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class SearchBySmartsPathParams:
-    db: shared.AmbitDatabaseIDEnum = field(default=None, metadata={'path_param': { 'field_name': 'db', 'style': 'simple', 'explode': False }})
+    db: shared.AmbitDatabaseIDEnum = field(metadata={'path_param': { 'field_name': 'db', 'style': 'simple', 'explode': False }})
     
 class SearchBySmartsTypeEnum(str, Enum):
     SMILES = "smiles"
@@ -29,13 +30,13 @@ class SearchBySmartsQueryParams:
 
 @dataclass
 class SearchBySmartsRequest:
-    path_params: SearchBySmartsPathParams = field(default=None)
-    query_params: SearchBySmartsQueryParams = field(default=None)
+    path_params: SearchBySmartsPathParams = field()
+    query_params: SearchBySmartsQueryParams = field()
     
 
 @dataclass
 class SearchBySmartsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     dataset: Optional[shared.Dataset] = field(default=None)
-    status_code: int = field(default=None)
     

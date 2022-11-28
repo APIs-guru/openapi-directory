@@ -1,12 +1,15 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class GetGeofencePathParams:
-    collection_name: str = field(default=None, metadata={'path_param': { 'field_name': 'CollectionName', 'style': 'simple', 'explode': False }})
-    geofence_id: str = field(default=None, metadata={'path_param': { 'field_name': 'GeofenceId', 'style': 'simple', 'explode': False }})
+    collection_name: str = field(metadata={'path_param': { 'field_name': 'CollectionName', 'style': 'simple', 'explode': False }})
+    geofence_id: str = field(metadata={'path_param': { 'field_name': 'GeofenceId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -22,18 +25,18 @@ class GetGeofenceHeaders:
 
 @dataclass
 class GetGeofenceRequest:
-    path_params: GetGeofencePathParams = field(default=None)
-    headers: GetGeofenceHeaders = field(default=None)
+    headers: GetGeofenceHeaders = field()
+    path_params: GetGeofencePathParams = field()
     
 
 @dataclass
 class GetGeofenceResponse:
+    content_type: str = field()
+    status_code: int = field()
     access_denied_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     get_geofence_response: Optional[shared.GetGeofenceResponse] = field(default=None)
     internal_server_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     validation_exception: Optional[Any] = field(default=None)
     

@@ -1,27 +1,28 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class SendBulkEmailHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
@@ -31,81 +32,81 @@ export class SendBulkEmailHeaders extends SpeakeasyBase {
  * An object that contains the body of the message. You can specify a template message.
 **/
 export class SendBulkEmailRequestBodyDefaultContent extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Template" })
+  @SpeakeasyMetadata({ data: "json, name=Template" })
   template?: shared.Template;
 }
 
 
 export class SendBulkEmailRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=BulkEmailEntries", elemType: shared.BulkEmailEntry })
+  @SpeakeasyMetadata({ data: "json, name=BulkEmailEntries", elemType: shared.BulkEmailEntry })
   bulkEmailEntries: shared.BulkEmailEntry[];
 
-  @Metadata({ data: "json, name=ConfigurationSetName" })
+  @SpeakeasyMetadata({ data: "json, name=ConfigurationSetName" })
   configurationSetName?: string;
 
-  @Metadata({ data: "json, name=DefaultContent" })
+  @SpeakeasyMetadata({ data: "json, name=DefaultContent" })
   defaultContent: SendBulkEmailRequestBodyDefaultContent;
 
-  @Metadata({ data: "json, name=DefaultEmailTags", elemType: shared.MessageTag })
+  @SpeakeasyMetadata({ data: "json, name=DefaultEmailTags", elemType: shared.MessageTag })
   defaultEmailTags?: shared.MessageTag[];
 
-  @Metadata({ data: "json, name=FeedbackForwardingEmailAddress" })
+  @SpeakeasyMetadata({ data: "json, name=FeedbackForwardingEmailAddress" })
   feedbackForwardingEmailAddress?: string;
 
-  @Metadata({ data: "json, name=FeedbackForwardingEmailAddressIdentityArn" })
+  @SpeakeasyMetadata({ data: "json, name=FeedbackForwardingEmailAddressIdentityArn" })
   feedbackForwardingEmailAddressIdentityArn?: string;
 
-  @Metadata({ data: "json, name=FromEmailAddress" })
+  @SpeakeasyMetadata({ data: "json, name=FromEmailAddress" })
   fromEmailAddress?: string;
 
-  @Metadata({ data: "json, name=FromEmailAddressIdentityArn" })
+  @SpeakeasyMetadata({ data: "json, name=FromEmailAddressIdentityArn" })
   fromEmailAddressIdentityArn?: string;
 
-  @Metadata({ data: "json, name=ReplyToAddresses" })
+  @SpeakeasyMetadata({ data: "json, name=ReplyToAddresses" })
   replyToAddresses?: string[];
 }
 
 
 export class SendBulkEmailRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: SendBulkEmailHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: SendBulkEmailRequestBody;
 }
 
 
 export class SendBulkEmailResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   accountSuspendedException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   badRequestException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   limitExceededException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   mailFromDomainNotVerifiedException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   messageRejected?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   notFoundException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   sendBulkEmailResponse?: shared.SendBulkEmailResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   sendingPausedException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   tooManyRequestsException?: any;
 }

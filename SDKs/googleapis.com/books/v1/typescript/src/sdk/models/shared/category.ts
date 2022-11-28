@@ -1,23 +1,23 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class CategoryItems extends SpeakeasyBase {
-  @Metadata({ data: "json, name=badgeUrl" })
+  @SpeakeasyMetadata({ data: "json, name=badgeUrl" })
   badgeUrl?: string;
 
-  @Metadata({ data: "json, name=categoryId" })
+  @SpeakeasyMetadata({ data: "json, name=categoryId" })
   categoryId?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 }
 
 
 export class Category extends SpeakeasyBase {
-  @Metadata({ data: "json, name=items", elemType: shared.CategoryItems })
+  @SpeakeasyMetadata({ data: "json, name=items", elemType: CategoryItems })
   items?: CategoryItems[];
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 }

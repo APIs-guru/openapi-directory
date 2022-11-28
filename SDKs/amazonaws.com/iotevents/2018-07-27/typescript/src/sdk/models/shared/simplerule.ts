@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ComparisonOperatorEnum } from "./comparisonoperatorenum";
+
 
 
 // SimpleRule
@@ -7,12 +8,12 @@ import { ComparisonOperatorEnum } from "./comparisonoperatorenum";
  * A rule that compares an input property value to a threshold value with a comparison operator.
 **/
 export class SimpleRule extends SpeakeasyBase {
-  @Metadata({ data: "json, name=comparisonOperator" })
+  @SpeakeasyMetadata({ data: "json, name=comparisonOperator" })
   comparisonOperator: ComparisonOperatorEnum;
 
-  @Metadata({ data: "json, name=inputProperty" })
+  @SpeakeasyMetadata({ data: "json, name=inputProperty" })
   inputProperty: string;
 
-  @Metadata({ data: "json, name=threshold" })
+  @SpeakeasyMetadata({ data: "json, name=threshold" })
   threshold: string;
 }

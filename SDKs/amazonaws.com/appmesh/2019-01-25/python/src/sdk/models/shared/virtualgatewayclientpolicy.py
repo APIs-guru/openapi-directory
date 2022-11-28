@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import virtualgatewayclientpolicytls
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class VirtualGatewayClientPolicy:
-    tls: Optional[virtualgatewayclientpolicytls.VirtualGatewayClientPolicyTLS] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tls' }})
+    r"""VirtualGatewayClientPolicy
+    An object that represents a client policy.
+    """
+    
+    tls: Optional[VirtualGatewayClientPolicyTLS] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('tls') }})
     

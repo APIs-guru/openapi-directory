@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleAnalyticsAdminV1alphaProvisionAccountTicketResponse
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Response message for ProvisionAccountTicket RPC.
 **/
 export class GoogleAnalyticsAdminV1alphaProvisionAccountTicketResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=accountTicketId" })
+  @SpeakeasyMetadata({ data: "json, name=accountTicketId" })
   accountTicketId?: string;
 }

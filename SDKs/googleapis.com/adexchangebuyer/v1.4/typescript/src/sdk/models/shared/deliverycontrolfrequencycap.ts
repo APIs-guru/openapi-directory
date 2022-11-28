@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DeliveryControlFrequencyCap extends SpeakeasyBase {
-  @Metadata({ data: "json, name=maxImpressions" })
+  @SpeakeasyMetadata({ data: "json, name=maxImpressions" })
   maxImpressions?: number;
 
-  @Metadata({ data: "json, name=numTimeUnits" })
+  @SpeakeasyMetadata({ data: "json, name=numTimeUnits" })
   numTimeUnits?: number;
 
-  @Metadata({ data: "json, name=timeUnitType" })
+  @SpeakeasyMetadata({ data: "json, name=timeUnitType" })
   timeUnitType?: string;
 }

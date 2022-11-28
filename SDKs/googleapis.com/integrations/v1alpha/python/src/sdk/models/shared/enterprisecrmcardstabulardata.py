@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import enterprisecrmcardsrow
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class EnterpriseCrmCardsTabularData:
-    headers: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'headers' }})
-    rows: Optional[List[enterprisecrmcardsrow.EnterpriseCrmCardsRow]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'rows' }})
+    r"""EnterpriseCrmCardsTabularData
+    The generic data format returned from all connectors.
+    """
+    
+    headers: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('headers') }})
+    rows: Optional[List[EnterpriseCrmCardsRow]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('rows') }})
     

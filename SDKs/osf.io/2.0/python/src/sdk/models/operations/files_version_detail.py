@@ -1,21 +1,21 @@
 from dataclasses import dataclass, field
-
+from typing import Optional
 
 
 @dataclass
 class FilesVersionDetailPathParams:
-    file_id: str = field(default=None, metadata={'path_param': { 'field_name': 'file_id', 'style': 'simple', 'explode': False }})
-    version_id: str = field(default=None, metadata={'path_param': { 'field_name': 'version_id', 'style': 'simple', 'explode': False }})
+    file_id: str = field(metadata={'path_param': { 'field_name': 'file_id', 'style': 'simple', 'explode': False }})
+    version_id: str = field(metadata={'path_param': { 'field_name': 'version_id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class FilesVersionDetailRequest:
-    path_params: FilesVersionDetailPathParams = field(default=None)
+    path_params: FilesVersionDetailPathParams = field()
     
 
 @dataclass
 class FilesVersionDetailResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from typing import Any,List,Optional
+from enum import Enum
 
 class PremiumNewsFormatEnum(str, Enum):
     XML = "xml"
@@ -8,17 +9,17 @@ class PremiumNewsFormatEnum(str, Enum):
 
 @dataclass
 class PremiumNewsPathParams:
-    format: PremiumNewsFormatEnum = field(default=None, metadata={'path_param': { 'field_name': 'format', 'style': 'simple', 'explode': False }})
+    format: PremiumNewsFormatEnum = field(metadata={'path_param': { 'field_name': 'format', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class PremiumNewsRequest:
-    path_params: PremiumNewsPathParams = field(default=None)
+    path_params: PremiumNewsPathParams = field()
     
 
 @dataclass
 class PremiumNewsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     news: Optional[List[Any]] = field(default=None)
-    status_code: int = field(default=None)
     

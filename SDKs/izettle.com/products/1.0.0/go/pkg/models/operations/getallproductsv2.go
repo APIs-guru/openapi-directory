@@ -12,17 +12,9 @@ type GetAllProductsV2QueryParams struct {
 	Sort *bool `queryParam:"style=form,explode=true,name=sort"`
 }
 
-type GetAllProductsV2SecurityOption1 struct {
-	ZettleAPIKey shared.SchemeZettleAPIKey `security:"scheme,type=apiKey,subtype=header"`
-}
-
-type GetAllProductsV2SecurityOption2 struct {
-	ZettleOauth shared.SchemeZettleOauth `security:"scheme,type=oauth2"`
-}
-
 type GetAllProductsV2Security struct {
-	Option1 *GetAllProductsV2SecurityOption1 `security:"option"`
-	Option2 *GetAllProductsV2SecurityOption2 `security:"option"`
+	ZettleAPIKey *shared.SchemeZettleAPIKey `security:"scheme,type=apiKey,subtype=header"`
+	ZettleOauth  *shared.SchemeZettleOauth  `security:"scheme,type=oauth2"`
 }
 
 type GetAllProductsV2Request struct {

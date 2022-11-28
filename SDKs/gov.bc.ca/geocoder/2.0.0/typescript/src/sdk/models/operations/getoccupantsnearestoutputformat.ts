@@ -1,68 +1,69 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum GetOccupantsNearestOutputFormatOutputFormatEnum {
-    Json = "json"
-,    Geojson = "geojson"
-,    Xhtml = "xhtml"
-,    Kml = "kml"
-,    Gml = "gml"
-,    Csv = "csv"
-,    Shpz = "shpz"
+    Json = "json",
+    Geojson = "geojson",
+    Xhtml = "xhtml",
+    Kml = "kml",
+    Gml = "gml",
+    Csv = "csv",
+    Shpz = "shpz"
 }
 
 
 export class GetOccupantsNearestOutputFormatPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=outputFormat" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=outputFormat" })
   outputFormat: GetOccupantsNearestOutputFormatOutputFormatEnum;
 }
 
 export enum GetOccupantsNearestOutputFormatLocationDescriptorEnum {
-    Any = "any"
-,    AccessPoint = "accessPoint"
-,    FrontDoorPoint = "frontDoorPoint"
-,    ParcelPoint = "parcelPoint"
-,    RooftopPoint = "rooftopPoint"
-,    RoutingPoint = "routingPoint"
+    Any = "any",
+    AccessPoint = "accessPoint",
+    FrontDoorPoint = "frontDoorPoint",
+    ParcelPoint = "parcelPoint",
+    RooftopPoint = "rooftopPoint",
+    RoutingPoint = "routingPoint"
 }
 
 
 export class GetOccupantsNearestOutputFormatQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=brief" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=brief" })
   brief?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=locationDescriptor" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=locationDescriptor" })
   locationDescriptor?: GetOccupantsNearestOutputFormatLocationDescriptorEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=maxDistance" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=maxDistance" })
   maxDistance?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=outputSRS" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=outputSRS" })
   outputSrs?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=point" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=point" })
   point: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=setBack" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=setBack" })
   setBack?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=tags" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=tags" })
   tags?: string;
 }
 
 
 export class GetOccupantsNearestOutputFormatRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetOccupantsNearestOutputFormatPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetOccupantsNearestOutputFormatQueryParams;
 }
 
 
 export class GetOccupantsNearestOutputFormatResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

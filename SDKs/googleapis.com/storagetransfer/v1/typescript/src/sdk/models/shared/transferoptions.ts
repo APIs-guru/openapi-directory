@@ -1,11 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { MetadataOptions } from "./metadataoptions";
 
+
 export enum TransferOptionsOverwriteWhenEnum {
-    OverwriteWhenUnspecified = "OVERWRITE_WHEN_UNSPECIFIED"
-,    Different = "DIFFERENT"
-,    Never = "NEVER"
-,    Always = "ALWAYS"
+    OverwriteWhenUnspecified = "OVERWRITE_WHEN_UNSPECIFIED",
+    Different = "DIFFERENT",
+    Never = "NEVER",
+    Always = "ALWAYS"
 }
 
 
@@ -14,18 +15,18 @@ export enum TransferOptionsOverwriteWhenEnum {
  * TransferOptions define the actions to be performed on objects in a transfer.
 **/
 export class TransferOptions extends SpeakeasyBase {
-  @Metadata({ data: "json, name=deleteObjectsFromSourceAfterTransfer" })
+  @SpeakeasyMetadata({ data: "json, name=deleteObjectsFromSourceAfterTransfer" })
   deleteObjectsFromSourceAfterTransfer?: boolean;
 
-  @Metadata({ data: "json, name=deleteObjectsUniqueInSink" })
+  @SpeakeasyMetadata({ data: "json, name=deleteObjectsUniqueInSink" })
   deleteObjectsUniqueInSink?: boolean;
 
-  @Metadata({ data: "json, name=metadataOptions" })
+  @SpeakeasyMetadata({ data: "json, name=metadataOptions" })
   metadataOptions?: MetadataOptions;
 
-  @Metadata({ data: "json, name=overwriteObjectsAlreadyExistingInSink" })
+  @SpeakeasyMetadata({ data: "json, name=overwriteObjectsAlreadyExistingInSink" })
   overwriteObjectsAlreadyExistingInSink?: boolean;
 
-  @Metadata({ data: "json, name=overwriteWhen" })
+  @SpeakeasyMetadata({ data: "json, name=overwriteWhen" })
   overwriteWhen?: TransferOptionsOverwriteWhenEnum;
 }

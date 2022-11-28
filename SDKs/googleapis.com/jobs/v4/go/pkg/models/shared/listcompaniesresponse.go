@@ -1,5 +1,7 @@
 package shared
 
+// ListCompaniesResponse
+// The List companies response object.
 type ListCompaniesResponse struct {
 	Companies     []Company         `json:"companies,omitempty"`
 	Metadata      *ResponseMetadata `json:"metadata,omitempty"`

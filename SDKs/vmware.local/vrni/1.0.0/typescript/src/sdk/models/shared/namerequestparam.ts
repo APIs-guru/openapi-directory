@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class NameRequestParam extends SpeakeasyBase {
-  @Metadata({ data: "json, name=entity_id" })
+  @SpeakeasyMetadata({ data: "json, name=entity_id" })
   entityId?: string;
 
-  @Metadata({ data: "json, name=time" })
+  @SpeakeasyMetadata({ data: "json, name=time" })
   time?: number;
 }

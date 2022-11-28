@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { FunctionCodeLocation } from "./functioncodelocation";
 import { FunctionConfiguration } from "./functionconfiguration";
+
 
 
 // GetFunctionResponse
@@ -8,9 +9,9 @@ import { FunctionConfiguration } from "./functionconfiguration";
  * This response contains the object for AWS Lambda function location (see <a>API_FunctionCodeLocation</a>
 **/
 export class GetFunctionResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Code" })
+  @SpeakeasyMetadata({ data: "json, name=Code" })
   code?: FunctionCodeLocation;
 
-  @Metadata({ data: "json, name=Configuration" })
+  @SpeakeasyMetadata({ data: "json, name=Configuration" })
   configuration?: FunctionConfiguration;
 }

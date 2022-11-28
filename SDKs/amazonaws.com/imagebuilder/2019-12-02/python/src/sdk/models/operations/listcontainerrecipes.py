@@ -1,6 +1,11 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -29,29 +34,29 @@ class ListContainerRecipesRequestBodyOwnerEnum(str, Enum):
 @dataclass_json
 @dataclass
 class ListContainerRecipesRequestBody:
-    filters: Optional[List[shared.Filter]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'filters' }})
-    max_results: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'maxResults' }})
-    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'nextToken' }})
-    owner: Optional[ListContainerRecipesRequestBodyOwnerEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'owner' }})
+    filters: Optional[List[shared.Filter]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('filters') }})
+    max_results: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('maxResults') }})
+    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('nextToken') }})
+    owner: Optional[ListContainerRecipesRequestBodyOwnerEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('owner') }})
     
 
 @dataclass
 class ListContainerRecipesRequest:
-    query_params: ListContainerRecipesQueryParams = field(default=None)
-    headers: ListContainerRecipesHeaders = field(default=None)
-    request: ListContainerRecipesRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: ListContainerRecipesHeaders = field()
+    query_params: ListContainerRecipesQueryParams = field()
+    request: ListContainerRecipesRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class ListContainerRecipesResponse:
+    content_type: str = field()
+    status_code: int = field()
     call_rate_limit_exceeded_exception: Optional[Any] = field(default=None)
     client_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     forbidden_exception: Optional[Any] = field(default=None)
     invalid_pagination_token_exception: Optional[Any] = field(default=None)
     invalid_request_exception: Optional[Any] = field(default=None)
     list_container_recipes_response: Optional[shared.ListContainerRecipesResponse] = field(default=None)
     service_exception: Optional[Any] = field(default=None)
     service_unavailable_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -13,18 +13,18 @@ type UpdateTaskQueryParams struct {
 	OptPretty *bool    `queryParam:"style=form,explode=true,name=opt_pretty"`
 }
 
-type UpdateTaskRequestBody struct {
-	Data *shared.TaskRequest `json:"data,omitempty"`
+type UpdateTaskRequestBodyInput struct {
+	Data *shared.TaskRequestInput `json:"data,omitempty"`
+}
+
+type UpdateTask200ApplicationJSON struct {
+	Data *shared.TaskResponse `json:"data,omitempty"`
 }
 
 type UpdateTaskRequest struct {
 	PathParams  UpdateTaskPathParams
 	QueryParams UpdateTaskQueryParams
-	Request     UpdateTaskRequestBody `request:"mediaType=application/json"`
-}
-
-type UpdateTask200ApplicationJSON struct {
-	Data *shared.TaskResponse `json:"data,omitempty"`
+	Request     UpdateTaskRequestBodyInput `request:"mediaType=application/json"`
 }
 
 type UpdateTaskResponse struct {

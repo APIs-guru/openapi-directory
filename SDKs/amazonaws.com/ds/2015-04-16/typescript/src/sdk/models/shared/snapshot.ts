@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SnapshotStatusEnum } from "./snapshotstatusenum";
 import { SnapshotTypeEnum } from "./snapshottypeenum";
+
 
 
 // Snapshot
@@ -8,21 +9,21 @@ import { SnapshotTypeEnum } from "./snapshottypeenum";
  * Describes a directory snapshot.
 **/
 export class Snapshot extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DirectoryId" })
+  @SpeakeasyMetadata({ data: "json, name=DirectoryId" })
   directoryId?: string;
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name?: string;
 
-  @Metadata({ data: "json, name=SnapshotId" })
+  @SpeakeasyMetadata({ data: "json, name=SnapshotId" })
   snapshotId?: string;
 
-  @Metadata({ data: "json, name=StartTime" })
+  @SpeakeasyMetadata({ data: "json, name=StartTime" })
   startTime?: Date;
 
-  @Metadata({ data: "json, name=Status" })
+  @SpeakeasyMetadata({ data: "json, name=Status" })
   status?: SnapshotStatusEnum;
 
-  @Metadata({ data: "json, name=Type" })
+  @SpeakeasyMetadata({ data: "json, name=Type" })
   type?: SnapshotTypeEnum;
 }

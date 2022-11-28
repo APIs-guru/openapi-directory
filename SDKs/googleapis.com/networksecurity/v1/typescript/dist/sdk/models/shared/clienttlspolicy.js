@@ -22,9 +22,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudNetworksecurityV1CertificateProvider } from "./googlecloudnetworksecurityv1certificateprovider";
+import { ValidationCa } from "./validationca";
 // ClientTlsPolicy
 /**
  * ClientTlsPolicy is a resource that specifies how a client should authenticate connections to backends of a service. This resource itself does not affect configuration unless it is attached to a backend service resource.
@@ -35,37 +35,73 @@ var ClientTlsPolicy = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=clientCertificate" }),
+        SpeakeasyMetadata({ data: "json, name=clientCertificate" }),
         __metadata("design:type", GoogleCloudNetworksecurityV1CertificateProvider)
     ], ClientTlsPolicy.prototype, "clientCertificate", void 0);
     __decorate([
-        Metadata({ data: "json, name=createTime" }),
+        SpeakeasyMetadata({ data: "json, name=createTime" }),
         __metadata("design:type", String)
     ], ClientTlsPolicy.prototype, "createTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=description" }),
+        SpeakeasyMetadata({ data: "json, name=description" }),
         __metadata("design:type", String)
     ], ClientTlsPolicy.prototype, "description", void 0);
     __decorate([
-        Metadata({ data: "json, name=labels" }),
+        SpeakeasyMetadata({ data: "json, name=labels" }),
         __metadata("design:type", Map)
     ], ClientTlsPolicy.prototype, "labels", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], ClientTlsPolicy.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=serverValidationCa", elemType: shared.ValidationCa }),
+        SpeakeasyMetadata({ data: "json, name=serverValidationCa", elemType: ValidationCa }),
         __metadata("design:type", Array)
     ], ClientTlsPolicy.prototype, "serverValidationCa", void 0);
     __decorate([
-        Metadata({ data: "json, name=sni" }),
+        SpeakeasyMetadata({ data: "json, name=sni" }),
         __metadata("design:type", String)
     ], ClientTlsPolicy.prototype, "sni", void 0);
     __decorate([
-        Metadata({ data: "json, name=updateTime" }),
+        SpeakeasyMetadata({ data: "json, name=updateTime" }),
         __metadata("design:type", String)
     ], ClientTlsPolicy.prototype, "updateTime", void 0);
     return ClientTlsPolicy;
 }(SpeakeasyBase));
 export { ClientTlsPolicy };
+// ClientTlsPolicyInput
+/**
+ * ClientTlsPolicy is a resource that specifies how a client should authenticate connections to backends of a service. This resource itself does not affect configuration unless it is attached to a backend service resource.
+**/
+var ClientTlsPolicyInput = /** @class */ (function (_super) {
+    __extends(ClientTlsPolicyInput, _super);
+    function ClientTlsPolicyInput() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=clientCertificate" }),
+        __metadata("design:type", GoogleCloudNetworksecurityV1CertificateProvider)
+    ], ClientTlsPolicyInput.prototype, "clientCertificate", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=description" }),
+        __metadata("design:type", String)
+    ], ClientTlsPolicyInput.prototype, "description", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=labels" }),
+        __metadata("design:type", Map)
+    ], ClientTlsPolicyInput.prototype, "labels", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=name" }),
+        __metadata("design:type", String)
+    ], ClientTlsPolicyInput.prototype, "name", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=serverValidationCa", elemType: ValidationCa }),
+        __metadata("design:type", Array)
+    ], ClientTlsPolicyInput.prototype, "serverValidationCa", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=sni" }),
+        __metadata("design:type", String)
+    ], ClientTlsPolicyInput.prototype, "sni", void 0);
+    return ClientTlsPolicyInput;
+}(SpeakeasyBase));
+export { ClientTlsPolicyInput };

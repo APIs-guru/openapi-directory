@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudRecommendationengineV1beta1PredictionApiKeyRegistration
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Registered Api Key.
 **/
 export class GoogleCloudRecommendationengineV1beta1PredictionApiKeyRegistration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=apiKey" })
+  @SpeakeasyMetadata({ data: "json, name=apiKey" })
   apiKey?: string;
 }

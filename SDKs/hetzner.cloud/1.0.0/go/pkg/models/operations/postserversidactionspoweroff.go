@@ -4,10 +4,8 @@ type PostServersIDActionsPoweroffPathParams struct {
 	ID int64 `pathParam:"style=simple,explode=false,name=id"`
 }
 
-type PostServersIDActionsPoweroffRequest struct {
-	PathParams PostServersIDActionsPoweroffPathParams
-}
-
+// PostServersIDActionsPoweroffActionResponseActionError
+// Error message for the Action if error occurred, otherwise null
 type PostServersIDActionsPoweroffActionResponseActionError struct {
 	Code    string `json:"code"`
 	Message string `json:"message"`
@@ -39,6 +37,10 @@ type PostServersIDActionsPoweroffActionResponseAction struct {
 
 type PostServersIDActionsPoweroffActionResponse struct {
 	Action PostServersIDActionsPoweroffActionResponseAction `json:"action"`
+}
+
+type PostServersIDActionsPoweroffRequest struct {
+	PathParams PostServersIDActionsPoweroffPathParams
 }
 
 type PostServersIDActionsPoweroffResponse struct {

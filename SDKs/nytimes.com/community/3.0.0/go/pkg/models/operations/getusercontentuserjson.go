@@ -12,11 +12,6 @@ type GetUserContentUserJSONSecurity struct {
 	APIKey shared.SchemeAPIKey `security:"scheme,type=apiKey,subtype=query"`
 }
 
-type GetUserContentUserJSONRequest struct {
-	QueryParams GetUserContentUserJSONQueryParams
-	Security    GetUserContentUserJSONSecurity
-}
-
 type GetUserContentUserJSON200ApplicationJSONDebug struct {
 	Version *float64 `json:"version,omitempty"`
 }
@@ -110,6 +105,11 @@ type GetUserContentUserJSON200ApplicationJSON struct {
 	Debug     *GetUserContentUserJSON200ApplicationJSONDebug   `json:"debug,omitempty"`
 	Results   *GetUserContentUserJSON200ApplicationJSONResults `json:"results,omitempty"`
 	Status    *string                                          `json:"status,omitempty"`
+}
+
+type GetUserContentUserJSONRequest struct {
+	QueryParams GetUserContentUserJSONQueryParams
+	Security    GetUserContentUserJSONSecurity
 }
 
 type GetUserContentUserJSONResponse struct {

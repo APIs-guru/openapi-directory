@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostDeleteTransitGatewayConnectActionEnum(str, Enum):
     DELETE_TRANSIT_GATEWAY_CONNECT = "DeleteTransitGatewayConnect"
@@ -10,8 +14,8 @@ class PostDeleteTransitGatewayConnectVersionEnum(str, Enum):
 
 @dataclass
 class PostDeleteTransitGatewayConnectQueryParams:
-    action: PostDeleteTransitGatewayConnectActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostDeleteTransitGatewayConnectVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostDeleteTransitGatewayConnectActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostDeleteTransitGatewayConnectVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostDeleteTransitGatewayConnectHeaders:
 
 @dataclass
 class PostDeleteTransitGatewayConnectRequest:
-    query_params: PostDeleteTransitGatewayConnectQueryParams = field(default=None)
-    headers: PostDeleteTransitGatewayConnectHeaders = field(default=None)
+    headers: PostDeleteTransitGatewayConnectHeaders = field()
+    query_params: PostDeleteTransitGatewayConnectQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostDeleteTransitGatewayConnectResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

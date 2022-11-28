@@ -14,6 +14,8 @@ const (
 	CreateConfigInputCountryEnumAr  CreateConfigInputCountryEnum = "AR"
 )
 
+// CreateConfigInput
+// Represents paramaters required to create a score configuration
 type CreateConfigInput struct {
 	Country                          CreateConfigInputCountryEnum `form:"name=country"`
 	DatasetAffiliationsAndInsurances *float32                     `form:"name=dataset_affiliations_and_insurances"`

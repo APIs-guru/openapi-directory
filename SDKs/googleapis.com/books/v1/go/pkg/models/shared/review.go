@@ -1,9 +1,13 @@
 package shared
 
+// ReviewAuthor
+// Author of this review.
 type ReviewAuthor struct {
 	DisplayName *string `json:"displayName,omitempty"`
 }
 
+// ReviewSource
+// Information regarding the source of this review, when the review is not from a Google Books user.
 type ReviewSource struct {
 	Description      *string `json:"description,omitempty"`
 	ExtraDescription *string `json:"extraDescription,omitempty"`

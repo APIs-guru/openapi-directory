@@ -1,7 +1,8 @@
 
 
+
 export enum ProjectSortByTypeEnum {
-    Name = "NAME"
-,    CreatedTime = "CREATED_TIME"
-,    LastModifiedTime = "LAST_MODIFIED_TIME"
+    Name = "NAME",
+    CreatedTime = "CREATED_TIME",
+    LastModifiedTime = "LAST_MODIFIED_TIME"
 }

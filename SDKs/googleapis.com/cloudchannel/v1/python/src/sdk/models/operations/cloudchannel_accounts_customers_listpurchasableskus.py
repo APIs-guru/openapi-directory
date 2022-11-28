@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class CloudchannelAccountsCustomersListPurchasableSkusPathParams:
-    customer: str = field(default=None, metadata={'path_param': { 'field_name': 'customer', 'style': 'simple', 'explode': False }})
+    customer: str = field(metadata={'path_param': { 'field_name': 'customer', 'style': 'simple', 'explode': False }})
     
 class CloudchannelAccountsCustomersListPurchasableSkusChangeOfferPurchaseChangeTypeEnum(str, Enum):
     CHANGE_TYPE_UNSPECIFIED = "CHANGE_TYPE_UNSPECIFIED"
@@ -36,20 +37,20 @@ class CloudchannelAccountsCustomersListPurchasableSkusQueryParams:
 
 @dataclass
 class CloudchannelAccountsCustomersListPurchasableSkusSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class CloudchannelAccountsCustomersListPurchasableSkusRequest:
-    path_params: CloudchannelAccountsCustomersListPurchasableSkusPathParams = field(default=None)
-    query_params: CloudchannelAccountsCustomersListPurchasableSkusQueryParams = field(default=None)
-    security: CloudchannelAccountsCustomersListPurchasableSkusSecurity = field(default=None)
+    path_params: CloudchannelAccountsCustomersListPurchasableSkusPathParams = field()
+    query_params: CloudchannelAccountsCustomersListPurchasableSkusQueryParams = field()
+    security: CloudchannelAccountsCustomersListPurchasableSkusSecurity = field()
     
 
 @dataclass
 class CloudchannelAccountsCustomersListPurchasableSkusResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_cloud_channel_v1_list_purchasable_skus_response: Optional[shared.GoogleCloudChannelV1ListPurchasableSkusResponse] = field(default=None)
-    status_code: int = field(default=None)
     

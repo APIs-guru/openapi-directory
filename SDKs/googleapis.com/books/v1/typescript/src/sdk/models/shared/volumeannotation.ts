@@ -1,7 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BooksAnnotationsRange } from "./booksannotationsrange";
-import { BooksAnnotationsRange } from "./booksannotationsrange";
-import { BooksAnnotationsRange } from "./booksannotationsrange";
+
 
 
 // VolumeannotationContentRanges
@@ -9,60 +8,60 @@ import { BooksAnnotationsRange } from "./booksannotationsrange";
  * The content ranges to identify the selected text.
 **/
 export class VolumeannotationContentRanges extends SpeakeasyBase {
-  @Metadata({ data: "json, name=cfiRange" })
+  @SpeakeasyMetadata({ data: "json, name=cfiRange" })
   cfiRange?: BooksAnnotationsRange;
 
-  @Metadata({ data: "json, name=contentVersion" })
+  @SpeakeasyMetadata({ data: "json, name=contentVersion" })
   contentVersion?: string;
 
-  @Metadata({ data: "json, name=gbImageRange" })
+  @SpeakeasyMetadata({ data: "json, name=gbImageRange" })
   gbImageRange?: BooksAnnotationsRange;
 
-  @Metadata({ data: "json, name=gbTextRange" })
+  @SpeakeasyMetadata({ data: "json, name=gbTextRange" })
   gbTextRange?: BooksAnnotationsRange;
 }
 
 
 export class Volumeannotation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=annotationDataId" })
+  @SpeakeasyMetadata({ data: "json, name=annotationDataId" })
   annotationDataId?: string;
 
-  @Metadata({ data: "json, name=annotationDataLink" })
+  @SpeakeasyMetadata({ data: "json, name=annotationDataLink" })
   annotationDataLink?: string;
 
-  @Metadata({ data: "json, name=annotationType" })
+  @SpeakeasyMetadata({ data: "json, name=annotationType" })
   annotationType?: string;
 
-  @Metadata({ data: "json, name=contentRanges" })
+  @SpeakeasyMetadata({ data: "json, name=contentRanges" })
   contentRanges?: VolumeannotationContentRanges;
 
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data?: string;
 
-  @Metadata({ data: "json, name=deleted" })
+  @SpeakeasyMetadata({ data: "json, name=deleted" })
   deleted?: boolean;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=layerId" })
+  @SpeakeasyMetadata({ data: "json, name=layerId" })
   layerId?: string;
 
-  @Metadata({ data: "json, name=pageIds" })
+  @SpeakeasyMetadata({ data: "json, name=pageIds" })
   pageIds?: string[];
 
-  @Metadata({ data: "json, name=selectedText" })
+  @SpeakeasyMetadata({ data: "json, name=selectedText" })
   selectedText?: string;
 
-  @Metadata({ data: "json, name=selfLink" })
+  @SpeakeasyMetadata({ data: "json, name=selfLink" })
   selfLink?: string;
 
-  @Metadata({ data: "json, name=updated" })
+  @SpeakeasyMetadata({ data: "json, name=updated" })
   updated?: string;
 
-  @Metadata({ data: "json, name=volumeId" })
+  @SpeakeasyMetadata({ data: "json, name=volumeId" })
   volumeId?: string;
 }

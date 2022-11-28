@@ -1,5 +1,7 @@
 package shared
 
+// InstancePortState
+// Describes open ports on an instance, the IP addresses allowed to connect to the instance through the ports, and the protocol.
 type InstancePortState struct {
 	CidrListAliases []string             `json:"cidrListAliases,omitempty"`
 	Cidrs           []string             `json:"cidrs,omitempty"`

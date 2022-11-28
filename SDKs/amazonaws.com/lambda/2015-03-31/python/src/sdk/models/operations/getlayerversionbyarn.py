@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 class GetLayerVersionByArnFindEnum(str, Enum):
@@ -8,8 +12,8 @@ class GetLayerVersionByArnFindEnum(str, Enum):
 
 @dataclass
 class GetLayerVersionByArnQueryParams:
-    arn: str = field(default=None, metadata={'query_param': { 'field_name': 'Arn', 'style': 'form', 'explode': True }})
-    find: GetLayerVersionByArnFindEnum = field(default=None, metadata={'query_param': { 'field_name': 'find', 'style': 'form', 'explode': True }})
+    arn: str = field(metadata={'query_param': { 'field_name': 'Arn', 'style': 'form', 'explode': True }})
+    find: GetLayerVersionByArnFindEnum = field(metadata={'query_param': { 'field_name': 'find', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -25,17 +29,17 @@ class GetLayerVersionByArnHeaders:
 
 @dataclass
 class GetLayerVersionByArnRequest:
-    query_params: GetLayerVersionByArnQueryParams = field(default=None)
-    headers: GetLayerVersionByArnHeaders = field(default=None)
+    headers: GetLayerVersionByArnHeaders = field()
+    query_params: GetLayerVersionByArnQueryParams = field()
     
 
 @dataclass
 class GetLayerVersionByArnResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     get_layer_version_response: Optional[shared.GetLayerVersionResponse] = field(default=None)
     invalid_parameter_value_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
     service_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     too_many_requests_exception: Optional[Any] = field(default=None)
     

@@ -1,5 +1,7 @@
 package shared
 
+// SoftwareInfo
+// Information about device software.
 type SoftwareInfo struct {
 	AndroidBuildNumber             *string           `json:"androidBuildNumber,omitempty"`
 	AndroidBuildTime               *string           `json:"androidBuildTime,omitempty"`

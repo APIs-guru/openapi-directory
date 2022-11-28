@@ -4,21 +4,9 @@ import (
 	"openapi/pkg/models/shared"
 )
 
-type GetPersonalAccessTokensSecurityOption1 struct {
-	PersonalAccessToken shared.SchemePersonalAccessToken `security:"scheme,type=http,subtype=bearer"`
-}
-
-type GetPersonalAccessTokensSecurityOption2 struct {
-	Oauth shared.SchemeOauth `security:"scheme,type=oauth2"`
-}
-
 type GetPersonalAccessTokensSecurity struct {
-	Option1 *GetPersonalAccessTokensSecurityOption1 `security:"option"`
-	Option2 *GetPersonalAccessTokensSecurityOption2 `security:"option"`
-}
-
-type GetPersonalAccessTokensRequest struct {
-	Security GetPersonalAccessTokensSecurity
+	PersonalAccessToken *shared.SchemePersonalAccessToken `security:"scheme,type=http,subtype=bearer"`
+	Oauth               *shared.SchemeOauth               `security:"scheme,type=oauth2"`
 }
 
 type GetPersonalAccessTokens200ApplicationJSON struct {
@@ -30,6 +18,10 @@ type GetPersonalAccessTokens200ApplicationJSON struct {
 
 type GetPersonalAccessTokensDefaultApplicationJSON struct {
 	Errors []shared.ErrorObject `json:"errors,omitempty"`
+}
+
+type GetPersonalAccessTokensRequest struct {
+	Security GetPersonalAccessTokensSecurity
 }
 
 type GetPersonalAccessTokensResponse struct {

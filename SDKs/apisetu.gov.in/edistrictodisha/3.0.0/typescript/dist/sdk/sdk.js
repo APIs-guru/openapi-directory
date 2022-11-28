@@ -10,13 +10,10 @@ var __assign = (this && this.__assign) || function () {
     return __assign.apply(this, arguments);
 };
 import axios from "axios";
-import { MatchContentType } from "../internal/utils/contenttype";
+import FormData from "form-data";
 import * as operations from "./models/operations";
-import { SerializeRequestBody } from "../internal/utils/requestbody";
-import FormData from 'form-data';
-import { CreateSecurityClient } from "../internal/utils/security";
-import * as utils from "../internal/utils/utils";
-var Servers = [
+import * as utils from "../internal/utils";
+export var ServerList = [
     "https://apisetu.gov.in/edistrictodisha/v3",
 ];
 export function WithServerURL(serverURL, params) {
@@ -24,12 +21,12 @@ export function WithServerURL(serverURL, params) {
         if (params != null) {
             serverURL = utils.ReplaceParameters(serverURL, params);
         }
-        sdk.serverURL = serverURL;
+        sdk._serverURL = serverURL;
     };
 }
 export function WithClient(client) {
     return function (sdk) {
-        sdk.defaultClient = client;
+        sdk._defaultClient = client;
     };
 }
 var SDK = /** @class */ (function () {
@@ -39,43 +36,42 @@ var SDK = /** @class */ (function () {
             opts[_i] = arguments[_i];
         }
         var _this = this;
+        this._language = "typescript";
+        this._sdkVersion = "0.0.1";
+        this._genVersion = "internal";
         opts.forEach(function (o) { return o(_this); });
-        if (this.serverURL == "") {
-            this.serverURL = Servers[0];
+        if (this._serverURL == "") {
+            this._serverURL = ServerList[0];
         }
-        if (!this.defaultClient) {
-            this.defaultClient = axios.create({ baseURL: this.serverURL });
+        if (!this._defaultClient) {
+            this._defaultClient = axios.create({ baseURL: this._serverURL });
         }
-        if (!this.securityClient) {
-            if (this.security) {
-                this.securityClient = CreateSecurityClient(this.defaultClient, this.security);
-            }
-            else {
-                this.securityClient = this.defaultClient;
-            }
+        if (!this._securityClient) {
+            this._securityClient = this._defaultClient;
         }
     }
-    // Ctcer - Caste Certificate
     /**
+     * ctcer - Caste Certificate
+     *
      * API to verify Caste Certificate.
     **/
-    SDK.prototype.Ctcer = function (req, config) {
+    SDK.prototype.ctcer = function (req, config) {
         var _a;
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.CtcerRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = baseURL.replace(/\/$/, "") + "/ctcer/certificate";
         var _b = [{}, {}], reqBodyHeaders = _b[0], reqBody = _b[1];
         try {
-            _a = SerializeRequestBody(req), reqBodyHeaders = _a[0], reqBody = _a[1];
+            _a = utils.SerializeRequestBody(req), reqBodyHeaders = _a[0], reqBody = _a[1];
         }
         catch (e) {
             if (e instanceof Error) {
                 throw new Error("Error serializing request body, cause: ".concat(e.message));
             }
         }
-        var client = CreateSecurityClient(this.defaultClient, req.security);
+        var client = utils.CreateSecurityClient(this._defaultClient, req.security);
         var headers = __assign(__assign({}, reqBodyHeaders), config === null || config === void 0 ? void 0 : config.headers);
         var body;
         if (reqBody instanceof FormData)
@@ -83,48 +79,47 @@ var SDK = /** @class */ (function () {
         else
             body = __assign({}, reqBody);
         return client
-            .post(url, body, __assign({ headers: headers }, config))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "post", headers: headers, data: body }, config)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
                     break;
-                case 400:
-                    if (MatchContentType(contentType, "application/json")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 400:
+                    if (utils.MatchContentType(contentType, "application/json")) {
                         res.ctcer400ApplicationJsonObject = httpRes === null || httpRes === void 0 ? void 0 : httpRes.data;
                     }
                     break;
-                case 401:
-                    if (MatchContentType(contentType, "application/json")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 401:
+                    if (utils.MatchContentType(contentType, "application/json")) {
                         res.ctcer401ApplicationJsonObject = httpRes === null || httpRes === void 0 ? void 0 : httpRes.data;
                     }
                     break;
-                case 404:
-                    if (MatchContentType(contentType, "application/json")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 404:
+                    if (utils.MatchContentType(contentType, "application/json")) {
                         res.ctcer404ApplicationJsonObject = httpRes === null || httpRes === void 0 ? void 0 : httpRes.data;
                     }
                     break;
-                case 500:
-                    if (MatchContentType(contentType, "application/json")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 500:
+                    if (utils.MatchContentType(contentType, "application/json")) {
                         res.ctcer500ApplicationJsonObject = httpRes === null || httpRes === void 0 ? void 0 : httpRes.data;
                     }
                     break;
-                case 502:
-                    if (MatchContentType(contentType, "application/json")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 502:
+                    if (utils.MatchContentType(contentType, "application/json")) {
                         res.ctcer502ApplicationJsonObject = httpRes === null || httpRes === void 0 ? void 0 : httpRes.data;
                     }
                     break;
-                case 503:
-                    if (MatchContentType(contentType, "application/json")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 503:
+                    if (utils.MatchContentType(contentType, "application/json")) {
                         res.ctcer503ApplicationJsonObject = httpRes === null || httpRes === void 0 ? void 0 : httpRes.data;
                     }
                     break;
-                case 504:
-                    if (MatchContentType(contentType, "application/json")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 504:
+                    if (utils.MatchContentType(contentType, "application/json")) {
                         res.ctcer504ApplicationJsonObject = httpRes === null || httpRes === void 0 ? void 0 : httpRes.data;
                     }
                     break;
@@ -133,27 +128,28 @@ var SDK = /** @class */ (function () {
         })
             .catch(function (error) { throw error; });
     };
-    // Ewcer - Economically Weaker Section Certificate
     /**
+     * ewcer - Economically Weaker Section Certificate
+     *
      * API to verify Economically Weaker Section Certificate.
     **/
-    SDK.prototype.Ewcer = function (req, config) {
+    SDK.prototype.ewcer = function (req, config) {
         var _a;
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.EwcerRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = baseURL.replace(/\/$/, "") + "/ewcer/certificate";
         var _b = [{}, {}], reqBodyHeaders = _b[0], reqBody = _b[1];
         try {
-            _a = SerializeRequestBody(req), reqBodyHeaders = _a[0], reqBody = _a[1];
+            _a = utils.SerializeRequestBody(req), reqBodyHeaders = _a[0], reqBody = _a[1];
         }
         catch (e) {
             if (e instanceof Error) {
                 throw new Error("Error serializing request body, cause: ".concat(e.message));
             }
         }
-        var client = CreateSecurityClient(this.defaultClient, req.security);
+        var client = utils.CreateSecurityClient(this._defaultClient, req.security);
         var headers = __assign(__assign({}, reqBodyHeaders), config === null || config === void 0 ? void 0 : config.headers);
         var body;
         if (reqBody instanceof FormData)
@@ -161,48 +157,47 @@ var SDK = /** @class */ (function () {
         else
             body = __assign({}, reqBody);
         return client
-            .post(url, body, __assign({ headers: headers }, config))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "post", headers: headers, data: body }, config)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
                     break;
-                case 400:
-                    if (MatchContentType(contentType, "application/json")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 400:
+                    if (utils.MatchContentType(contentType, "application/json")) {
                         res.ewcer400ApplicationJsonObject = httpRes === null || httpRes === void 0 ? void 0 : httpRes.data;
                     }
                     break;
-                case 401:
-                    if (MatchContentType(contentType, "application/json")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 401:
+                    if (utils.MatchContentType(contentType, "application/json")) {
                         res.ewcer401ApplicationJsonObject = httpRes === null || httpRes === void 0 ? void 0 : httpRes.data;
                     }
                     break;
-                case 404:
-                    if (MatchContentType(contentType, "application/json")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 404:
+                    if (utils.MatchContentType(contentType, "application/json")) {
                         res.ewcer404ApplicationJsonObject = httpRes === null || httpRes === void 0 ? void 0 : httpRes.data;
                     }
                     break;
-                case 500:
-                    if (MatchContentType(contentType, "application/json")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 500:
+                    if (utils.MatchContentType(contentType, "application/json")) {
                         res.ewcer500ApplicationJsonObject = httpRes === null || httpRes === void 0 ? void 0 : httpRes.data;
                     }
                     break;
-                case 502:
-                    if (MatchContentType(contentType, "application/json")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 502:
+                    if (utils.MatchContentType(contentType, "application/json")) {
                         res.ewcer502ApplicationJsonObject = httpRes === null || httpRes === void 0 ? void 0 : httpRes.data;
                     }
                     break;
-                case 503:
-                    if (MatchContentType(contentType, "application/json")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 503:
+                    if (utils.MatchContentType(contentType, "application/json")) {
                         res.ewcer503ApplicationJsonObject = httpRes === null || httpRes === void 0 ? void 0 : httpRes.data;
                     }
                     break;
-                case 504:
-                    if (MatchContentType(contentType, "application/json")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 504:
+                    if (utils.MatchContentType(contentType, "application/json")) {
                         res.ewcer504ApplicationJsonObject = httpRes === null || httpRes === void 0 ? void 0 : httpRes.data;
                     }
                     break;
@@ -211,27 +206,28 @@ var SDK = /** @class */ (function () {
         })
             .catch(function (error) { throw error; });
     };
-    // Lhcer - Legal Heir Certificate
     /**
+     * lhcer - Legal Heir Certificate
+     *
      * API to verify Legal Heir Certificate.
     **/
-    SDK.prototype.Lhcer = function (req, config) {
+    SDK.prototype.lhcer = function (req, config) {
         var _a;
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.LhcerRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = baseURL.replace(/\/$/, "") + "/lhcer/certificate";
         var _b = [{}, {}], reqBodyHeaders = _b[0], reqBody = _b[1];
         try {
-            _a = SerializeRequestBody(req), reqBodyHeaders = _a[0], reqBody = _a[1];
+            _a = utils.SerializeRequestBody(req), reqBodyHeaders = _a[0], reqBody = _a[1];
         }
         catch (e) {
             if (e instanceof Error) {
                 throw new Error("Error serializing request body, cause: ".concat(e.message));
             }
         }
-        var client = CreateSecurityClient(this.defaultClient, req.security);
+        var client = utils.CreateSecurityClient(this._defaultClient, req.security);
         var headers = __assign(__assign({}, reqBodyHeaders), config === null || config === void 0 ? void 0 : config.headers);
         var body;
         if (reqBody instanceof FormData)
@@ -239,48 +235,47 @@ var SDK = /** @class */ (function () {
         else
             body = __assign({}, reqBody);
         return client
-            .post(url, body, __assign({ headers: headers }, config))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "post", headers: headers, data: body }, config)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
                     break;
-                case 400:
-                    if (MatchContentType(contentType, "application/json")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 400:
+                    if (utils.MatchContentType(contentType, "application/json")) {
                         res.lhcer400ApplicationJsonObject = httpRes === null || httpRes === void 0 ? void 0 : httpRes.data;
                     }
                     break;
-                case 401:
-                    if (MatchContentType(contentType, "application/json")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 401:
+                    if (utils.MatchContentType(contentType, "application/json")) {
                         res.lhcer401ApplicationJsonObject = httpRes === null || httpRes === void 0 ? void 0 : httpRes.data;
                     }
                     break;
-                case 404:
-                    if (MatchContentType(contentType, "application/json")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 404:
+                    if (utils.MatchContentType(contentType, "application/json")) {
                         res.lhcer404ApplicationJsonObject = httpRes === null || httpRes === void 0 ? void 0 : httpRes.data;
                     }
                     break;
-                case 500:
-                    if (MatchContentType(contentType, "application/json")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 500:
+                    if (utils.MatchContentType(contentType, "application/json")) {
                         res.lhcer500ApplicationJsonObject = httpRes === null || httpRes === void 0 ? void 0 : httpRes.data;
                     }
                     break;
-                case 502:
-                    if (MatchContentType(contentType, "application/json")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 502:
+                    if (utils.MatchContentType(contentType, "application/json")) {
                         res.lhcer502ApplicationJsonObject = httpRes === null || httpRes === void 0 ? void 0 : httpRes.data;
                     }
                     break;
-                case 503:
-                    if (MatchContentType(contentType, "application/json")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 503:
+                    if (utils.MatchContentType(contentType, "application/json")) {
                         res.lhcer503ApplicationJsonObject = httpRes === null || httpRes === void 0 ? void 0 : httpRes.data;
                     }
                     break;
-                case 504:
-                    if (MatchContentType(contentType, "application/json")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 504:
+                    if (utils.MatchContentType(contentType, "application/json")) {
                         res.lhcer504ApplicationJsonObject = httpRes === null || httpRes === void 0 ? void 0 : httpRes.data;
                     }
                     break;
@@ -289,27 +284,28 @@ var SDK = /** @class */ (function () {
         })
             .catch(function (error) { throw error; });
     };
-    // Obcer - OBC Certificate
     /**
+     * obcer - OBC Certificate
+     *
      * API to verify OBC Certificate.
     **/
-    SDK.prototype.Obcer = function (req, config) {
+    SDK.prototype.obcer = function (req, config) {
         var _a;
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.ObcerRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = baseURL.replace(/\/$/, "") + "/obcer/certificate";
         var _b = [{}, {}], reqBodyHeaders = _b[0], reqBody = _b[1];
         try {
-            _a = SerializeRequestBody(req), reqBodyHeaders = _a[0], reqBody = _a[1];
+            _a = utils.SerializeRequestBody(req), reqBodyHeaders = _a[0], reqBody = _a[1];
         }
         catch (e) {
             if (e instanceof Error) {
                 throw new Error("Error serializing request body, cause: ".concat(e.message));
             }
         }
-        var client = CreateSecurityClient(this.defaultClient, req.security);
+        var client = utils.CreateSecurityClient(this._defaultClient, req.security);
         var headers = __assign(__assign({}, reqBodyHeaders), config === null || config === void 0 ? void 0 : config.headers);
         var body;
         if (reqBody instanceof FormData)
@@ -317,48 +313,47 @@ var SDK = /** @class */ (function () {
         else
             body = __assign({}, reqBody);
         return client
-            .post(url, body, __assign({ headers: headers }, config))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "post", headers: headers, data: body }, config)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
                     break;
-                case 400:
-                    if (MatchContentType(contentType, "application/json")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 400:
+                    if (utils.MatchContentType(contentType, "application/json")) {
                         res.obcer400ApplicationJsonObject = httpRes === null || httpRes === void 0 ? void 0 : httpRes.data;
                     }
                     break;
-                case 401:
-                    if (MatchContentType(contentType, "application/json")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 401:
+                    if (utils.MatchContentType(contentType, "application/json")) {
                         res.obcer401ApplicationJsonObject = httpRes === null || httpRes === void 0 ? void 0 : httpRes.data;
                     }
                     break;
-                case 404:
-                    if (MatchContentType(contentType, "application/json")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 404:
+                    if (utils.MatchContentType(contentType, "application/json")) {
                         res.obcer404ApplicationJsonObject = httpRes === null || httpRes === void 0 ? void 0 : httpRes.data;
                     }
                     break;
-                case 500:
-                    if (MatchContentType(contentType, "application/json")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 500:
+                    if (utils.MatchContentType(contentType, "application/json")) {
                         res.obcer500ApplicationJsonObject = httpRes === null || httpRes === void 0 ? void 0 : httpRes.data;
                     }
                     break;
-                case 502:
-                    if (MatchContentType(contentType, "application/json")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 502:
+                    if (utils.MatchContentType(contentType, "application/json")) {
                         res.obcer502ApplicationJsonObject = httpRes === null || httpRes === void 0 ? void 0 : httpRes.data;
                     }
                     break;
-                case 503:
-                    if (MatchContentType(contentType, "application/json")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 503:
+                    if (utils.MatchContentType(contentType, "application/json")) {
                         res.obcer503ApplicationJsonObject = httpRes === null || httpRes === void 0 ? void 0 : httpRes.data;
                     }
                     break;
-                case 504:
-                    if (MatchContentType(contentType, "application/json")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 504:
+                    if (utils.MatchContentType(contentType, "application/json")) {
                         res.obcer504ApplicationJsonObject = httpRes === null || httpRes === void 0 ? void 0 : httpRes.data;
                     }
                     break;
@@ -367,27 +362,28 @@ var SDK = /** @class */ (function () {
         })
             .catch(function (error) { throw error; });
     };
-    // Ror1b - Records of Rights
     /**
+     * ror1b - Records of Rights
+     *
      * API to verify Records of Rights.
     **/
-    SDK.prototype.Ror1b = function (req, config) {
+    SDK.prototype.ror1b = function (req, config) {
         var _a;
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.Ror1bRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = baseURL.replace(/\/$/, "") + "/ror1b/certificate";
         var _b = [{}, {}], reqBodyHeaders = _b[0], reqBody = _b[1];
         try {
-            _a = SerializeRequestBody(req), reqBodyHeaders = _a[0], reqBody = _a[1];
+            _a = utils.SerializeRequestBody(req), reqBodyHeaders = _a[0], reqBody = _a[1];
         }
         catch (e) {
             if (e instanceof Error) {
                 throw new Error("Error serializing request body, cause: ".concat(e.message));
             }
         }
-        var client = CreateSecurityClient(this.defaultClient, req.security);
+        var client = utils.CreateSecurityClient(this._defaultClient, req.security);
         var headers = __assign(__assign({}, reqBodyHeaders), config === null || config === void 0 ? void 0 : config.headers);
         var body;
         if (reqBody instanceof FormData)
@@ -395,48 +391,47 @@ var SDK = /** @class */ (function () {
         else
             body = __assign({}, reqBody);
         return client
-            .post(url, body, __assign({ headers: headers }, config))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "post", headers: headers, data: body }, config)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
                     break;
-                case 400:
-                    if (MatchContentType(contentType, "application/json")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 400:
+                    if (utils.MatchContentType(contentType, "application/json")) {
                         res.ror1b400ApplicationJsonObject = httpRes === null || httpRes === void 0 ? void 0 : httpRes.data;
                     }
                     break;
-                case 401:
-                    if (MatchContentType(contentType, "application/json")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 401:
+                    if (utils.MatchContentType(contentType, "application/json")) {
                         res.ror1b401ApplicationJsonObject = httpRes === null || httpRes === void 0 ? void 0 : httpRes.data;
                     }
                     break;
-                case 404:
-                    if (MatchContentType(contentType, "application/json")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 404:
+                    if (utils.MatchContentType(contentType, "application/json")) {
                         res.ror1b404ApplicationJsonObject = httpRes === null || httpRes === void 0 ? void 0 : httpRes.data;
                     }
                     break;
-                case 500:
-                    if (MatchContentType(contentType, "application/json")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 500:
+                    if (utils.MatchContentType(contentType, "application/json")) {
                         res.ror1b500ApplicationJsonObject = httpRes === null || httpRes === void 0 ? void 0 : httpRes.data;
                     }
                     break;
-                case 502:
-                    if (MatchContentType(contentType, "application/json")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 502:
+                    if (utils.MatchContentType(contentType, "application/json")) {
                         res.ror1b502ApplicationJsonObject = httpRes === null || httpRes === void 0 ? void 0 : httpRes.data;
                     }
                     break;
-                case 503:
-                    if (MatchContentType(contentType, "application/json")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 503:
+                    if (utils.MatchContentType(contentType, "application/json")) {
                         res.ror1b503ApplicationJsonObject = httpRes === null || httpRes === void 0 ? void 0 : httpRes.data;
                     }
                     break;
-                case 504:
-                    if (MatchContentType(contentType, "application/json")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 504:
+                    if (utils.MatchContentType(contentType, "application/json")) {
                         res.ror1b504ApplicationJsonObject = httpRes === null || httpRes === void 0 ? void 0 : httpRes.data;
                     }
                     break;
@@ -445,27 +440,28 @@ var SDK = /** @class */ (function () {
         })
             .catch(function (error) { throw error; });
     };
-    // Slcer - Solvency Certificate
     /**
+     * slcer - Solvency Certificate
+     *
      * API to verify Solvency Certificate.
     **/
-    SDK.prototype.Slcer = function (req, config) {
+    SDK.prototype.slcer = function (req, config) {
         var _a;
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.SlcerRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = baseURL.replace(/\/$/, "") + "/slcer/certificate";
         var _b = [{}, {}], reqBodyHeaders = _b[0], reqBody = _b[1];
         try {
-            _a = SerializeRequestBody(req), reqBodyHeaders = _a[0], reqBody = _a[1];
+            _a = utils.SerializeRequestBody(req), reqBodyHeaders = _a[0], reqBody = _a[1];
         }
         catch (e) {
             if (e instanceof Error) {
                 throw new Error("Error serializing request body, cause: ".concat(e.message));
             }
         }
-        var client = CreateSecurityClient(this.defaultClient, req.security);
+        var client = utils.CreateSecurityClient(this._defaultClient, req.security);
         var headers = __assign(__assign({}, reqBodyHeaders), config === null || config === void 0 ? void 0 : config.headers);
         var body;
         if (reqBody instanceof FormData)
@@ -473,48 +469,47 @@ var SDK = /** @class */ (function () {
         else
             body = __assign({}, reqBody);
         return client
-            .post(url, body, __assign({ headers: headers }, config))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "post", headers: headers, data: body }, config)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
                     break;
-                case 400:
-                    if (MatchContentType(contentType, "application/json")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 400:
+                    if (utils.MatchContentType(contentType, "application/json")) {
                         res.slcer400ApplicationJsonObject = httpRes === null || httpRes === void 0 ? void 0 : httpRes.data;
                     }
                     break;
-                case 401:
-                    if (MatchContentType(contentType, "application/json")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 401:
+                    if (utils.MatchContentType(contentType, "application/json")) {
                         res.slcer401ApplicationJsonObject = httpRes === null || httpRes === void 0 ? void 0 : httpRes.data;
                     }
                     break;
-                case 404:
-                    if (MatchContentType(contentType, "application/json")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 404:
+                    if (utils.MatchContentType(contentType, "application/json")) {
                         res.slcer404ApplicationJsonObject = httpRes === null || httpRes === void 0 ? void 0 : httpRes.data;
                     }
                     break;
-                case 500:
-                    if (MatchContentType(contentType, "application/json")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 500:
+                    if (utils.MatchContentType(contentType, "application/json")) {
                         res.slcer500ApplicationJsonObject = httpRes === null || httpRes === void 0 ? void 0 : httpRes.data;
                     }
                     break;
-                case 502:
-                    if (MatchContentType(contentType, "application/json")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 502:
+                    if (utils.MatchContentType(contentType, "application/json")) {
                         res.slcer502ApplicationJsonObject = httpRes === null || httpRes === void 0 ? void 0 : httpRes.data;
                     }
                     break;
-                case 503:
-                    if (MatchContentType(contentType, "application/json")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 503:
+                    if (utils.MatchContentType(contentType, "application/json")) {
                         res.slcer503ApplicationJsonObject = httpRes === null || httpRes === void 0 ? void 0 : httpRes.data;
                     }
                     break;
-                case 504:
-                    if (MatchContentType(contentType, "application/json")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 504:
+                    if (utils.MatchContentType(contentType, "application/json")) {
                         res.slcer504ApplicationJsonObject = httpRes === null || httpRes === void 0 ? void 0 : httpRes.data;
                     }
                     break;

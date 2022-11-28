@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DataExecutionStatus } from "./dataexecutionstatus";
 import { DataSource } from "./datasource";
+
 
 
 // AddDataSourceResponse
@@ -8,9 +9,9 @@ import { DataSource } from "./datasource";
  * The result of adding a data source.
 **/
 export class AddDataSourceResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=dataExecutionStatus" })
+  @SpeakeasyMetadata({ data: "json, name=dataExecutionStatus" })
   dataExecutionStatus?: DataExecutionStatus;
 
-  @Metadata({ data: "json, name=dataSource" })
+  @SpeakeasyMetadata({ data: "json, name=dataSource" })
   dataSource?: DataSource;
 }

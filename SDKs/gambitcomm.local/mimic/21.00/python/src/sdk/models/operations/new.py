@@ -5,19 +5,19 @@ from sdk.models import shared
 
 @dataclass
 class NewPathParams:
-    ip: str = field(default=None, metadata={'path_param': { 'field_name': 'IP', 'style': 'simple', 'explode': False }})
-    agent_num: int = field(default=None, metadata={'path_param': { 'field_name': 'agentNum', 'style': 'simple', 'explode': False }})
+    ip: str = field(metadata={'path_param': { 'field_name': 'IP', 'style': 'simple', 'explode': False }})
+    agent_num: int = field(metadata={'path_param': { 'field_name': 'agentNum', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class NewRequest:
-    path_params: NewPathParams = field(default=None)
-    request: List[shared.Triplet] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    path_params: NewPathParams = field()
+    request: List[shared.Triplet] = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class NewResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     new_200_application_json_string: Optional[str] = field(default=None)
     

@@ -42,7 +42,7 @@ type BigqueryreservationProjectsLocationsCapacityCommitmentsCreateSecurity struc
 type BigqueryreservationProjectsLocationsCapacityCommitmentsCreateRequest struct {
 	PathParams  BigqueryreservationProjectsLocationsCapacityCommitmentsCreatePathParams
 	QueryParams BigqueryreservationProjectsLocationsCapacityCommitmentsCreateQueryParams
-	Request     *shared.CapacityCommitment `request:"mediaType=application/json"`
+	Request     *shared.CapacityCommitmentInput `request:"mediaType=application/json"`
 	Security    BigqueryreservationProjectsLocationsCapacityCommitmentsCreateSecurity
 }
 

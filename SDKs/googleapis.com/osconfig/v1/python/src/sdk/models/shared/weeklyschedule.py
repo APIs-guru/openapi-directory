@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class WeeklyScheduleDayOfWeekEnum(str, Enum):
     DAY_OF_WEEK_UNSPECIFIED = "DAY_OF_WEEK_UNSPECIFIED"
@@ -16,5 +18,9 @@ class WeeklyScheduleDayOfWeekEnum(str, Enum):
 @dataclass_json
 @dataclass
 class WeeklySchedule:
-    day_of_week: Optional[WeeklyScheduleDayOfWeekEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'dayOfWeek' }})
+    r"""WeeklySchedule
+    Represents a weekly schedule.
+    """
+    
+    day_of_week: Optional[WeeklyScheduleDayOfWeekEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('dayOfWeek') }})
     

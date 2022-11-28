@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostDisassociateInstanceEventWindowActionEnum(str, Enum):
     DISASSOCIATE_INSTANCE_EVENT_WINDOW = "DisassociateInstanceEventWindow"
@@ -10,8 +14,8 @@ class PostDisassociateInstanceEventWindowVersionEnum(str, Enum):
 
 @dataclass
 class PostDisassociateInstanceEventWindowQueryParams:
-    action: PostDisassociateInstanceEventWindowActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostDisassociateInstanceEventWindowVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostDisassociateInstanceEventWindowActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostDisassociateInstanceEventWindowVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostDisassociateInstanceEventWindowHeaders:
 
 @dataclass
 class PostDisassociateInstanceEventWindowRequest:
-    query_params: PostDisassociateInstanceEventWindowQueryParams = field(default=None)
-    headers: PostDisassociateInstanceEventWindowHeaders = field(default=None)
+    headers: PostDisassociateInstanceEventWindowHeaders = field()
+    query_params: PostDisassociateInstanceEventWindowQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostDisassociateInstanceEventWindowResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

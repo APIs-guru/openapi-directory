@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DestinationUpdate extends SpeakeasyBase {
-  @Metadata({ data: "json, name=connectionConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=connectionConfiguration" })
   connectionConfiguration: any;
 
-  @Metadata({ data: "json, name=destinationId" })
+  @SpeakeasyMetadata({ data: "json, name=destinationId" })
   destinationId: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 }

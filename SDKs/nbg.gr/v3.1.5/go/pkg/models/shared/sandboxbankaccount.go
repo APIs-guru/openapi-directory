@@ -1,5 +1,7 @@
 package shared
 
+// SandboxBankAccount
+// Sandbox bank account
 type SandboxBankAccount struct {
 	Beneficiaries     []SandboxBeneficiary      `json:"beneficiaries,omitempty"`
 	Info              *SandboxBankAccountInfo   `json:"info,omitempty"`

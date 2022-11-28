@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class StudioStatusCodeEnum(str, Enum):
     STUDIO_CREATED = "STUDIO_CREATED"

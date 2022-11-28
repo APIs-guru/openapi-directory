@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// MigrationSummary
+// Provides information about migrating a bot from Amazon Lex V1 to Amazon Lex V2.
 type MigrationSummary struct {
 	MigrationID        *string                `json:"migrationId,omitempty"`
 	MigrationStatus    *MigrationStatusEnum   `json:"migrationStatus,omitempty"`

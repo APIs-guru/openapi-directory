@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum GoogleIamV1AuditLogConfigLogTypeEnum {
-    LogTypeUnspecified = "LOG_TYPE_UNSPECIFIED"
-,    AdminRead = "ADMIN_READ"
-,    DataWrite = "DATA_WRITE"
-,    DataRead = "DATA_READ"
+    LogTypeUnspecified = "LOG_TYPE_UNSPECIFIED",
+    AdminRead = "ADMIN_READ",
+    DataWrite = "DATA_WRITE",
+    DataRead = "DATA_READ"
 }
 
 
@@ -31,9 +32,9 @@ export enum GoogleIamV1AuditLogConfigLogTypeEnum {
  * jose@example.com from DATA_READ logging.
 **/
 export class GoogleIamV1AuditLogConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=exemptedMembers" })
+  @SpeakeasyMetadata({ data: "json, name=exemptedMembers" })
   exemptedMembers?: string[];
 
-  @Metadata({ data: "json, name=logType" })
+  @SpeakeasyMetadata({ data: "json, name=logType" })
   logType?: GoogleIamV1AuditLogConfigLogTypeEnum;
 }

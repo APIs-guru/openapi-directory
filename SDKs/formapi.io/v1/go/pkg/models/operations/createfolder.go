@@ -17,16 +17,16 @@ type CreateFolderSecurity struct {
 	APITokenBasic shared.SchemeAPITokenBasic `security:"scheme,type=http,subtype=basic"`
 }
 
-type CreateFolderRequest struct {
-	Request  CreateFolderCreateFolderData `request:"mediaType=application/json"`
-	Security CreateFolderSecurity
-}
-
 type CreateFolderFolder struct {
 	ID             *string `json:"id,omitempty"`
 	Name           *string `json:"name,omitempty"`
 	ParentFolderID *string `json:"parent_folder_id,omitempty"`
 	Path           *string `json:"path,omitempty"`
+}
+
+type CreateFolderRequest struct {
+	Request  CreateFolderCreateFolderData `request:"mediaType=application/json"`
+	Security CreateFolderSecurity
 }
 
 type CreateFolderResponse struct {

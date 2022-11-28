@@ -17,6 +17,8 @@ const (
 	ParametersTypeEnumPathAttribution               ParametersTypeEnum = "PATH_ATTRIBUTION"
 )
 
+// Parameters
+// Parameters of a query or report.
 type Parameters struct {
 	Filters  []FilterPair        `json:"filters,omitempty"`
 	GroupBys []string            `json:"groupBys,omitempty"`

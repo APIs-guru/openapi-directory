@@ -8,17 +8,9 @@ type GetV4LayersScoutingObservationsScoutingObservationIDPathParams struct {
 	ScoutingObservationID string `pathParam:"style=simple,explode=false,name=scoutingObservationId"`
 }
 
-type GetV4LayersScoutingObservationsScoutingObservationIDSecurityOption1 struct {
-	APIKey shared.SchemeAPIKey `security:"scheme,type=apiKey,subtype=header"`
-}
-
-type GetV4LayersScoutingObservationsScoutingObservationIDSecurityOption2 struct {
-	Oauth2AuthorizationCode shared.SchemeOauth2AuthorizationCode `security:"scheme,type=oauth2"`
-}
-
 type GetV4LayersScoutingObservationsScoutingObservationIDSecurity struct {
-	Option1 *GetV4LayersScoutingObservationsScoutingObservationIDSecurityOption1 `security:"option"`
-	Option2 *GetV4LayersScoutingObservationsScoutingObservationIDSecurityOption2 `security:"option"`
+	APIKey                  *shared.SchemeAPIKey                  `security:"scheme,type=apiKey,subtype=header"`
+	Oauth2AuthorizationCode *shared.SchemeOauth2AuthorizationCode `security:"scheme,type=oauth2"`
 }
 
 type GetV4LayersScoutingObservationsScoutingObservationIDRequest struct {

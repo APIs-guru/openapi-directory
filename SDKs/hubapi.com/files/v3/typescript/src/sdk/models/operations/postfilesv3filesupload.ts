@@ -1,47 +1,39 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
-export class PostFilesV3FilesUploadSecurityOption1 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=query" })
-  hapikey: shared.SchemeHapikey;
-}
-
-
-export class PostFilesV3FilesUploadSecurityOption2 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
-  oauth2Legacy: shared.SchemeOauth2Legacy;
-}
-
 
 export class PostFilesV3FilesUploadSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, option=true" })
-  option1?: PostFilesV3FilesUploadSecurityOption1;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=query" })
+  hapikey?: shared.SchemeHapikey;
 
-  @Metadata({ data: "security, option=true" })
-  option2?: PostFilesV3FilesUploadSecurityOption2;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  privateAppsLegacy?: shared.SchemePrivateAppsLegacy;
+
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
+  oauth2Legacy?: shared.SchemeOauth2Legacy;
 }
 
 
 export class PostFilesV3FilesUploadRequest extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=multipart/form-data" })
+  @SpeakeasyMetadata({ data: "request, media_type=multipart/form-data" })
   request?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: PostFilesV3FilesUploadSecurity;
 }
 
 
 export class PostFilesV3FilesUploadResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   file?: shared.File;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

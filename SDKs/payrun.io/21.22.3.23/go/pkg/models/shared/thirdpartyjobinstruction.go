@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// ThirdPartyJobInstructionThirdPartyJobInstructionEmployer
+// The third party job instructions' employer
 type ThirdPartyJobInstructionThirdPartyJobInstructionEmployer struct {
 	AtHref  *string `json:"@href,omitempty"`
 	AtRel   *string `json:"@rel,omitempty"`

@@ -1,48 +1,48 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Metric } from "./metric";
 import { FrequencyEnum } from "./frequencyenum";
 import { MetricSource } from "./metricsource";
 import { TimestampColumn } from "./timestampcolumn";
 
 
+
 export class DescribeMetricSetResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AnomalyDetectorArn" })
+  @SpeakeasyMetadata({ data: "json, name=AnomalyDetectorArn" })
   anomalyDetectorArn?: string;
 
-  @Metadata({ data: "json, name=CreationTime" })
+  @SpeakeasyMetadata({ data: "json, name=CreationTime" })
   creationTime?: Date;
 
-  @Metadata({ data: "json, name=DimensionList" })
+  @SpeakeasyMetadata({ data: "json, name=DimensionList" })
   dimensionList?: string[];
 
-  @Metadata({ data: "json, name=LastModificationTime" })
+  @SpeakeasyMetadata({ data: "json, name=LastModificationTime" })
   lastModificationTime?: Date;
 
-  @Metadata({ data: "json, name=MetricList", elemType: shared.Metric })
+  @SpeakeasyMetadata({ data: "json, name=MetricList", elemType: Metric })
   metricList?: Metric[];
 
-  @Metadata({ data: "json, name=MetricSetArn" })
+  @SpeakeasyMetadata({ data: "json, name=MetricSetArn" })
   metricSetArn?: string;
 
-  @Metadata({ data: "json, name=MetricSetDescription" })
+  @SpeakeasyMetadata({ data: "json, name=MetricSetDescription" })
   metricSetDescription?: string;
 
-  @Metadata({ data: "json, name=MetricSetFrequency" })
+  @SpeakeasyMetadata({ data: "json, name=MetricSetFrequency" })
   metricSetFrequency?: FrequencyEnum;
 
-  @Metadata({ data: "json, name=MetricSetName" })
+  @SpeakeasyMetadata({ data: "json, name=MetricSetName" })
   metricSetName?: string;
 
-  @Metadata({ data: "json, name=MetricSource" })
+  @SpeakeasyMetadata({ data: "json, name=MetricSource" })
   metricSource?: MetricSource;
 
-  @Metadata({ data: "json, name=Offset" })
+  @SpeakeasyMetadata({ data: "json, name=Offset" })
   offset?: number;
 
-  @Metadata({ data: "json, name=TimestampColumn" })
+  @SpeakeasyMetadata({ data: "json, name=TimestampColumn" })
   timestampColumn?: TimestampColumn;
 
-  @Metadata({ data: "json, name=Timezone" })
+  @SpeakeasyMetadata({ data: "json, name=Timezone" })
   timezone?: string;
 }

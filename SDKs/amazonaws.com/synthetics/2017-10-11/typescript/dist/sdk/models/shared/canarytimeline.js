@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // CanaryTimeline
 /**
  * This structure contains information about when the canary was created and modified.
@@ -33,19 +33,19 @@ var CanaryTimeline = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Created" }),
+        SpeakeasyMetadata({ data: "json, name=Created" }),
         __metadata("design:type", Date)
     ], CanaryTimeline.prototype, "created", void 0);
     __decorate([
-        Metadata({ data: "json, name=LastModified" }),
+        SpeakeasyMetadata({ data: "json, name=LastModified" }),
         __metadata("design:type", Date)
     ], CanaryTimeline.prototype, "lastModified", void 0);
     __decorate([
-        Metadata({ data: "json, name=LastStarted" }),
+        SpeakeasyMetadata({ data: "json, name=LastStarted" }),
         __metadata("design:type", Date)
     ], CanaryTimeline.prototype, "lastStarted", void 0);
     __decorate([
-        Metadata({ data: "json, name=LastStopped" }),
+        SpeakeasyMetadata({ data: "json, name=LastStopped" }),
         __metadata("design:type", Date)
     ], CanaryTimeline.prototype, "lastStopped", void 0);
     return CanaryTimeline;

@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import tablerange
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class UnmergeTableCellsRequest:
-    table_range: Optional[tablerange.TableRange] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tableRange' }})
+    r"""UnmergeTableCellsRequest
+    Unmerges cells in a Table.
+    """
+    
+    table_range: Optional[TableRange] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('tableRange') }})
     

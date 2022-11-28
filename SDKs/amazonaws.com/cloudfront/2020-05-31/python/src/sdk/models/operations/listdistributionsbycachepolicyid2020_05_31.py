@@ -1,10 +1,13 @@
 from dataclasses import dataclass, field
-from typing import List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
 
 
 @dataclass
 class ListDistributionsByCachePolicyId20200531PathParams:
-    cache_policy_id: str = field(default=None, metadata={'path_param': { 'field_name': 'CachePolicyId', 'style': 'simple', 'explode': False }})
+    cache_policy_id: str = field(metadata={'path_param': { 'field_name': 'CachePolicyId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,14 +29,14 @@ class ListDistributionsByCachePolicyId20200531Headers:
 
 @dataclass
 class ListDistributionsByCachePolicyId20200531Request:
-    path_params: ListDistributionsByCachePolicyId20200531PathParams = field(default=None)
-    query_params: ListDistributionsByCachePolicyId20200531QueryParams = field(default=None)
-    headers: ListDistributionsByCachePolicyId20200531Headers = field(default=None)
+    headers: ListDistributionsByCachePolicyId20200531Headers = field()
+    path_params: ListDistributionsByCachePolicyId20200531PathParams = field()
+    query_params: ListDistributionsByCachePolicyId20200531QueryParams = field()
     
 
 @dataclass
 class ListDistributionsByCachePolicyId20200531Response:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

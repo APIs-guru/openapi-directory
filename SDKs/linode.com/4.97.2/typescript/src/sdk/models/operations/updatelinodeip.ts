@@ -1,65 +1,54 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class UpdateLinodeIpPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=address" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=address" })
   address: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=linodeId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=linodeId" })
   linodeId: number;
 }
 
 
-export class UpdateLinodeIpSecurityOption1 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=bearer" })
-  personalAccessToken: shared.SchemePersonalAccessToken;
-}
-
-
-export class UpdateLinodeIpSecurityOption2 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
-  oauth: shared.SchemeOauth;
-}
-
-
 export class UpdateLinodeIpSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, option=true" })
-  option1?: UpdateLinodeIpSecurityOption1;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" })
+  personalAccessToken?: shared.SchemePersonalAccessToken;
 
-  @Metadata({ data: "security, option=true" })
-  option2?: UpdateLinodeIpSecurityOption2;
-}
-
-
-export class UpdateLinodeIpRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: UpdateLinodeIpPathParams;
-
-  @Metadata({ data: "request, media_type=application/json" })
-  request?: shared.IpAddress;
-
-  @Metadata()
-  security: UpdateLinodeIpSecurity;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
+  oauth?: shared.SchemeOauth;
 }
 
 
 export class UpdateLinodeIpDefaultApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=errors", elemType: shared.ErrorObject })
+  @SpeakeasyMetadata({ data: "json, name=errors", elemType: shared.ErrorObject })
   errors?: shared.ErrorObject[];
 }
 
 
+export class UpdateLinodeIpRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: UpdateLinodeIpPathParams;
+
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request?: shared.IpAddressInput;
+
+  @SpeakeasyMetadata()
+  security: UpdateLinodeIpSecurity;
+}
+
+
 export class UpdateLinodeIpResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   ipAddress?: shared.IpAddress;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   updateLinodeIpDefaultApplicationJsonObject?: UpdateLinodeIpDefaultApplicationJson;
 }

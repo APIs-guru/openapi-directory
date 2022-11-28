@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ComputePlatformEnum } from "./computeplatformenum";
 import { Tag } from "./tag";
+
 
 
 // CreateApplicationInput
@@ -9,12 +9,12 @@ import { Tag } from "./tag";
  * Represents the input of a <code>CreateApplication</code> operation.
 **/
 export class CreateApplicationInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=applicationName" })
+  @SpeakeasyMetadata({ data: "json, name=applicationName" })
   applicationName: string;
 
-  @Metadata({ data: "json, name=computePlatform" })
+  @SpeakeasyMetadata({ data: "json, name=computePlatform" })
   computePlatform?: ComputePlatformEnum;
 
-  @Metadata({ data: "json, name=tags", elemType: shared.Tag })
+  @SpeakeasyMetadata({ data: "json, name=tags", elemType: Tag })
   tags?: Tag[];
 }

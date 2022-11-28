@@ -10,6 +10,8 @@ const (
 	GoogleCloudDataplexV1LakeMetastoreStatusStateEnumError            GoogleCloudDataplexV1LakeMetastoreStatusStateEnum = "ERROR"
 )
 
+// GoogleCloudDataplexV1LakeMetastoreStatus
+// Status of Lake and Dataproc Metastore service instance association.
 type GoogleCloudDataplexV1LakeMetastoreStatus struct {
 	Endpoint   *string                                            `json:"endpoint,omitempty"`
 	Message    *string                                            `json:"message,omitempty"`

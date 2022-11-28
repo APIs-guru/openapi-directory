@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
@@ -29,19 +33,19 @@ class LocalservicesAccountReportsSearchQueryParams:
 
 @dataclass
 class LocalservicesAccountReportsSearchSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class LocalservicesAccountReportsSearchRequest:
-    query_params: LocalservicesAccountReportsSearchQueryParams = field(default=None)
-    security: LocalservicesAccountReportsSearchSecurity = field(default=None)
+    query_params: LocalservicesAccountReportsSearchQueryParams = field()
+    security: LocalservicesAccountReportsSearchSecurity = field()
     
 
 @dataclass
 class LocalservicesAccountReportsSearchResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_ads_homeservices_localservices_v1_search_account_reports_response: Optional[shared.GoogleAdsHomeservicesLocalservicesV1SearchAccountReportsResponse] = field(default=None)
-    status_code: int = field(default=None)
     

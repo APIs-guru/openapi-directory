@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class RecaptchaenterpriseProjectsKeysRetrieveLegacySecretKeyPathParams:
-    key: str = field(default=None, metadata={'path_param': { 'field_name': 'key', 'style': 'simple', 'explode': False }})
+    key: str = field(metadata={'path_param': { 'field_name': 'key', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -24,20 +25,20 @@ class RecaptchaenterpriseProjectsKeysRetrieveLegacySecretKeyQueryParams:
 
 @dataclass
 class RecaptchaenterpriseProjectsKeysRetrieveLegacySecretKeySecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class RecaptchaenterpriseProjectsKeysRetrieveLegacySecretKeyRequest:
-    path_params: RecaptchaenterpriseProjectsKeysRetrieveLegacySecretKeyPathParams = field(default=None)
-    query_params: RecaptchaenterpriseProjectsKeysRetrieveLegacySecretKeyQueryParams = field(default=None)
-    security: RecaptchaenterpriseProjectsKeysRetrieveLegacySecretKeySecurity = field(default=None)
+    path_params: RecaptchaenterpriseProjectsKeysRetrieveLegacySecretKeyPathParams = field()
+    query_params: RecaptchaenterpriseProjectsKeysRetrieveLegacySecretKeyQueryParams = field()
+    security: RecaptchaenterpriseProjectsKeysRetrieveLegacySecretKeySecurity = field()
     
 
 @dataclass
 class RecaptchaenterpriseProjectsKeysRetrieveLegacySecretKeyResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_cloud_recaptchaenterprise_v1_retrieve_legacy_secret_key_response: Optional[shared.GoogleCloudRecaptchaenterpriseV1RetrieveLegacySecretKeyResponse] = field(default=None)
-    status_code: int = field(default=None)
     

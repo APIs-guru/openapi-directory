@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
 from typing import List,Optional
@@ -8,7 +8,7 @@ from sdk.models import shared
 
 @dataclass
 class GistsListForUserPathParams:
-    username: str = field(default=None, metadata={'path_param': { 'field_name': 'username', 'style': 'simple', 'explode': False }})
+    username: str = field(metadata={'path_param': { 'field_name': 'username', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -20,15 +20,15 @@ class GistsListForUserQueryParams:
 
 @dataclass
 class GistsListForUserRequest:
-    path_params: GistsListForUserPathParams = field(default=None)
-    query_params: GistsListForUserQueryParams = field(default=None)
+    path_params: GistsListForUserPathParams = field()
+    query_params: GistsListForUserQueryParams = field()
     
 
 @dataclass
 class GistsListForUserResponse:
-    content_type: str = field(default=None)
-    headers: dict[str, List[str]] = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    headers: dict[str, List[str]] = field()
+    status_code: int = field()
     base_gists: Optional[List[shared.BaseGist]] = field(default=None)
     validation_error: Optional[shared.ValidationError] = field(default=None)
     

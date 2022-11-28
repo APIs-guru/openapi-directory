@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // KinesisStreamsInput
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  *  Identifies a Kinesis data stream as the streaming source. You provide the stream's Amazon Resource Name (ARN).
 **/
 export class KinesisStreamsInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ResourceARN" })
+  @SpeakeasyMetadata({ data: "json, name=ResourceARN" })
   resourceArn: string;
 }

@@ -1,17 +1,18 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { FundingEventTypeEnum } from "./fundingeventtypeenum";
 
 
+
 export class FundingEvent extends SpeakeasyBase {
-  @Metadata({ data: "json, name=eventDateTime" })
+  @SpeakeasyMetadata({ data: "json, name=eventDateTime" })
   eventDateTime?: Date;
 
-  @Metadata({ data: "json, name=eventId" })
+  @SpeakeasyMetadata({ data: "json, name=eventId" })
   eventId?: string;
 
-  @Metadata({ data: "json, name=fundingEventType" })
+  @SpeakeasyMetadata({ data: "json, name=fundingEventType" })
   fundingEventType?: FundingEventTypeEnum;
 
-  @Metadata({ data: "json, name=principal" })
+  @SpeakeasyMetadata({ data: "json, name=principal" })
   principal?: string;
 }

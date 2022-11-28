@@ -1,5 +1,7 @@
 package shared
 
+// CustomerData
+// Customer information
 type CustomerData struct {
 	AccountsLimit             int32  `json:"accountsLimit"`
 	AccountsUsed              int32  `json:"accountsUsed"`

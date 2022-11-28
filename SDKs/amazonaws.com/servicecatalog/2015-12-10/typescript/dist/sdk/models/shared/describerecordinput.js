@@ -22,26 +22,26 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var DescribeRecordInput = /** @class */ (function (_super) {
     __extends(DescribeRecordInput, _super);
     function DescribeRecordInput() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=AcceptLanguage" }),
+        SpeakeasyMetadata({ data: "json, name=AcceptLanguage" }),
         __metadata("design:type", String)
     ], DescribeRecordInput.prototype, "acceptLanguage", void 0);
     __decorate([
-        Metadata({ data: "json, name=Id" }),
+        SpeakeasyMetadata({ data: "json, name=Id" }),
         __metadata("design:type", String)
     ], DescribeRecordInput.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "json, name=PageSize" }),
+        SpeakeasyMetadata({ data: "json, name=PageSize" }),
         __metadata("design:type", Number)
     ], DescribeRecordInput.prototype, "pageSize", void 0);
     __decorate([
-        Metadata({ data: "json, name=PageToken" }),
+        SpeakeasyMetadata({ data: "json, name=PageToken" }),
         __metadata("design:type", String)
     ], DescribeRecordInput.prototype, "pageToken", void 0);
     return DescribeRecordInput;

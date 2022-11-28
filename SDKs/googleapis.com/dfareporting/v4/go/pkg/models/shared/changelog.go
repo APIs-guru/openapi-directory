@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// ChangeLog
+// Describes a change that a user has made to a resource.
 type ChangeLog struct {
 	AccountID       *string    `json:"accountId,omitempty"`
 	Action          *string    `json:"action,omitempty"`

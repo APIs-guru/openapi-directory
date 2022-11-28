@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Matter } from "./matter";
+
 
 
 // CloseMatterResponse
@@ -7,6 +8,6 @@ import { Matter } from "./matter";
  * Response to a CloseMatterRequest.
 **/
 export class CloseMatterResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=matter" })
+  @SpeakeasyMetadata({ data: "json, name=matter" })
   matter?: Matter;
 }

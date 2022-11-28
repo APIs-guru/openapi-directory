@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetSubUserKeysGetSubUserKeysGetQueryParams = /** @class */ (function (_super) {
     __extends(GetSubUserKeysGetSubUserKeysGetQueryParams, _super);
@@ -30,11 +30,11 @@ var GetSubUserKeysGetSubUserKeysGetQueryParams = /** @class */ (function (_super
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=apiID" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=apiID" }),
         __metadata("design:type", String)
     ], GetSubUserKeysGetSubUserKeysGetQueryParams.prototype, "apiId", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=apiKey" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=apiKey" }),
         __metadata("design:type", String)
     ], GetSubUserKeysGetSubUserKeysGetQueryParams.prototype, "apiKey", void 0);
     return GetSubUserKeysGetSubUserKeysGetQueryParams;
@@ -46,7 +46,7 @@ var GetSubUserKeysGetSubUserKeysGetRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetSubUserKeysGetSubUserKeysGetQueryParams)
     ], GetSubUserKeysGetSubUserKeysGetRequest.prototype, "queryParams", void 0);
     return GetSubUserKeysGetSubUserKeysGetRequest;
@@ -58,19 +58,19 @@ var GetSubUserKeysGetSubUserKeysGetResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetSubUserKeysGetSubUserKeysGetResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.GenericResponse)
     ], GetSubUserKeysGetSubUserKeysGetResponse.prototype, "genericResponse", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.HttpValidationError)
     ], GetSubUserKeysGetSubUserKeysGetResponse.prototype, "httpValidationError", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetSubUserKeysGetSubUserKeysGetResponse.prototype, "statusCode", void 0);
     return GetSubUserKeysGetSubUserKeysGetResponse;

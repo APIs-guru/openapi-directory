@@ -1,5 +1,8 @@
 package shared
 
+// PackageItemDto
+// The PackageItemDTO Class.
+// Contains relevant fields of PackageItem DTO by masking actual Package entity's fields in application.
 type PackageItemDto struct {
 	ArticleID                int32    `json:"articleId"`
 	ArticleName              *string  `json:"articleName,omitempty"`

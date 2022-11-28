@@ -1,9 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum TagSettingKeywordOptionEnum {
-    PlaceholderWithListOfKeywords = "PLACEHOLDER_WITH_LIST_OF_KEYWORDS"
-,    Ignore = "IGNORE"
-,    GenerateSeparateTagForEachKeyword = "GENERATE_SEPARATE_TAG_FOR_EACH_KEYWORD"
+    PlaceholderWithListOfKeywords = "PLACEHOLDER_WITH_LIST_OF_KEYWORDS",
+    Ignore = "IGNORE",
+    GenerateSeparateTagForEachKeyword = "GENERATE_SEPARATE_TAG_FOR_EACH_KEYWORD"
 }
 
 
@@ -12,15 +13,15 @@ export enum TagSettingKeywordOptionEnum {
  * Tag Settings
 **/
 export class TagSetting extends SpeakeasyBase {
-  @Metadata({ data: "json, name=additionalKeyValues" })
+  @SpeakeasyMetadata({ data: "json, name=additionalKeyValues" })
   additionalKeyValues?: string;
 
-  @Metadata({ data: "json, name=includeClickThroughUrls" })
+  @SpeakeasyMetadata({ data: "json, name=includeClickThroughUrls" })
   includeClickThroughUrls?: boolean;
 
-  @Metadata({ data: "json, name=includeClickTracking" })
+  @SpeakeasyMetadata({ data: "json, name=includeClickTracking" })
   includeClickTracking?: boolean;
 
-  @Metadata({ data: "json, name=keywordOption" })
+  @SpeakeasyMetadata({ data: "json, name=keywordOption" })
   keywordOption?: TagSettingKeywordOptionEnum;
 }

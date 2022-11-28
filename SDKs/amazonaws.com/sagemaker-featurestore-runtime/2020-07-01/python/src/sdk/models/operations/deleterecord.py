@@ -1,16 +1,19 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 
 
 @dataclass
 class DeleteRecordPathParams:
-    feature_group_name: str = field(default=None, metadata={'path_param': { 'field_name': 'FeatureGroupName', 'style': 'simple', 'explode': False }})
+    feature_group_name: str = field(metadata={'path_param': { 'field_name': 'FeatureGroupName', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class DeleteRecordQueryParams:
-    event_time: str = field(default=None, metadata={'query_param': { 'field_name': 'EventTime', 'style': 'form', 'explode': True }})
-    record_identifier_value_as_string: str = field(default=None, metadata={'query_param': { 'field_name': 'RecordIdentifierValueAsString', 'style': 'form', 'explode': True }})
+    event_time: str = field(metadata={'query_param': { 'field_name': 'EventTime', 'style': 'form', 'explode': True }})
+    record_identifier_value_as_string: str = field(metadata={'query_param': { 'field_name': 'RecordIdentifierValueAsString', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -26,17 +29,17 @@ class DeleteRecordHeaders:
 
 @dataclass
 class DeleteRecordRequest:
-    path_params: DeleteRecordPathParams = field(default=None)
-    query_params: DeleteRecordQueryParams = field(default=None)
-    headers: DeleteRecordHeaders = field(default=None)
+    headers: DeleteRecordHeaders = field()
+    path_params: DeleteRecordPathParams = field()
+    query_params: DeleteRecordQueryParams = field()
     
 
 @dataclass
 class DeleteRecordResponse:
+    content_type: str = field()
+    status_code: int = field()
     access_forbidden: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     internal_failure: Optional[Any] = field(default=None)
     service_unavailable: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     validation_error: Optional[Any] = field(default=None)
     

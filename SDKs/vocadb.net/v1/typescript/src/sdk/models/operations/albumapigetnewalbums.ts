@@ -1,55 +1,56 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
+
 export enum AlbumApiGetNewAlbumsFieldsEnum {
-    None = "None"
-,    AdditionalNames = "AdditionalNames"
-,    Artists = "Artists"
-,    Description = "Description"
-,    Discs = "Discs"
-,    Identifiers = "Identifiers"
-,    MainPicture = "MainPicture"
-,    Names = "Names"
-,    PVs = "PVs"
-,    ReleaseEvent = "ReleaseEvent"
-,    Tags = "Tags"
-,    Tracks = "Tracks"
-,    WebLinks = "WebLinks"
+    None = "None",
+    AdditionalNames = "AdditionalNames",
+    Artists = "Artists",
+    Description = "Description",
+    Discs = "Discs",
+    Identifiers = "Identifiers",
+    MainPicture = "MainPicture",
+    Names = "Names",
+    PVs = "PVs",
+    ReleaseEvent = "ReleaseEvent",
+    Tags = "Tags",
+    Tracks = "Tracks",
+    WebLinks = "WebLinks"
 }
 
 export enum AlbumApiGetNewAlbumsLanguagePreferenceEnum {
-    Default = "Default"
-,    Japanese = "Japanese"
-,    Romaji = "Romaji"
-,    English = "English"
+    Default = "Default",
+    Japanese = "Japanese",
+    Romaji = "Romaji",
+    English = "English"
 }
 
 
 export class AlbumApiGetNewAlbumsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=fields" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=fields" })
   fields?: AlbumApiGetNewAlbumsFieldsEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=languagePreference" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=languagePreference" })
   languagePreference?: AlbumApiGetNewAlbumsLanguagePreferenceEnum;
 }
 
 
 export class AlbumApiGetNewAlbumsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: AlbumApiGetNewAlbumsQueryParams;
 }
 
 
 export class AlbumApiGetNewAlbumsResponse extends SpeakeasyBase {
-  @Metadata({ elemType: shared.AlbumForApiContract })
+  @SpeakeasyMetadata({ elemType: shared.AlbumForApiContract })
   albumForApiContracts?: shared.AlbumForApiContract[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

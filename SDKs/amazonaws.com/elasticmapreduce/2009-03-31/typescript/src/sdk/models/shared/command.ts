@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Command
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * An entity describing an executable that runs on a cluster.
 **/
 export class Command extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Args" })
+  @SpeakeasyMetadata({ data: "json, name=Args" })
   args?: string[];
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name?: string;
 
-  @Metadata({ data: "json, name=ScriptPath" })
+  @SpeakeasyMetadata({ data: "json, name=ScriptPath" })
   scriptPath?: string;
 }

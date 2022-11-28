@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetOperationRequest = /** @class */ (function (_super) {
     __extends(GetOperationRequest, _super);
@@ -30,7 +30,7 @@ var GetOperationRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", shared.OperationIdRequestBody)
     ], GetOperationRequest.prototype, "request", void 0);
     return GetOperationRequest;
@@ -42,23 +42,23 @@ var GetOperationResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetOperationResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.InvalidInputExceptionInfo)
     ], GetOperationResponse.prototype, "invalidInputExceptionInfo", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.NotFoundKnownExceptionInfo)
     ], GetOperationResponse.prototype, "notFoundKnownExceptionInfo", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.OperationRead)
     ], GetOperationResponse.prototype, "operationRead", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetOperationResponse.prototype, "statusCode", void 0);
     return GetOperationResponse;

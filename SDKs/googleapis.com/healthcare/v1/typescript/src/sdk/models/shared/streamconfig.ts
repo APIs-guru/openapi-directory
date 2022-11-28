@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudHealthcareV1FhirBigQueryDestination } from "./googlecloudhealthcarev1fhirbigquerydestination";
 import { DeidentifiedStoreDestination } from "./deidentifiedstoredestination";
+
 
 
 // StreamConfig
@@ -8,12 +9,12 @@ import { DeidentifiedStoreDestination } from "./deidentifiedstoredestination";
  * Contains configuration for streaming FHIR export.
 **/
 export class StreamConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=bigqueryDestination" })
+  @SpeakeasyMetadata({ data: "json, name=bigqueryDestination" })
   bigqueryDestination?: GoogleCloudHealthcareV1FhirBigQueryDestination;
 
-  @Metadata({ data: "json, name=deidentifiedStoreDestination" })
+  @SpeakeasyMetadata({ data: "json, name=deidentifiedStoreDestination" })
   deidentifiedStoreDestination?: DeidentifiedStoreDestination;
 
-  @Metadata({ data: "json, name=resourceTypes" })
+  @SpeakeasyMetadata({ data: "json, name=resourceTypes" })
   resourceTypes?: string[];
 }

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudContactcenterinsightsV1SentimentData
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The data for a sentiment annotation.
 **/
 export class GoogleCloudContactcenterinsightsV1SentimentData extends SpeakeasyBase {
-  @Metadata({ data: "json, name=magnitude" })
+  @SpeakeasyMetadata({ data: "json, name=magnitude" })
   magnitude?: number;
 
-  @Metadata({ data: "json, name=score" })
+  @SpeakeasyMetadata({ data: "json, name=score" })
   score?: number;
 }

@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GcsSource } from "./gcssource";
+
 
 
 // InputConfig
@@ -7,6 +8,6 @@ import { GcsSource } from "./gcssource";
  * The input content
 **/
 export class InputConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=gcsSource" })
+  @SpeakeasyMetadata({ data: "json, name=gcsSource" })
   gcsSource?: GcsSource;
 }

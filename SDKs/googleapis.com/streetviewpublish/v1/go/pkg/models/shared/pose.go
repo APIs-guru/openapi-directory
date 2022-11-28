@@ -1,5 +1,7 @@
 package shared
 
+// Pose
+// Raw pose measurement for an entity.
 type Pose struct {
 	AccuracyMeters              *float32 `json:"accuracyMeters,omitempty"`
 	Altitude                    *float64 `json:"altitude,omitempty"`

@@ -1,33 +1,34 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class CreateDomainConfigurationPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=domainConfigurationName" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=domainConfigurationName" })
   domainConfigurationName: string;
 }
 
 
 export class CreateDomainConfigurationHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
@@ -37,84 +38,84 @@ export class CreateDomainConfigurationHeaders extends SpeakeasyBase {
  * An object that specifies the authorization service for a domain.
 **/
 export class CreateDomainConfigurationRequestBodyAuthorizerConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=allowAuthorizerOverride" })
+  @SpeakeasyMetadata({ data: "json, name=allowAuthorizerOverride" })
   allowAuthorizerOverride?: boolean;
 
-  @Metadata({ data: "json, name=defaultAuthorizerName" })
+  @SpeakeasyMetadata({ data: "json, name=defaultAuthorizerName" })
   defaultAuthorizerName?: string;
 }
 
 export enum CreateDomainConfigurationRequestBodyServiceTypeEnum {
-    Data = "DATA"
-,    CredentialProvider = "CREDENTIAL_PROVIDER"
-,    Jobs = "JOBS"
+    Data = "DATA",
+    CredentialProvider = "CREDENTIAL_PROVIDER",
+    Jobs = "JOBS"
 }
 
 
 export class CreateDomainConfigurationRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=authorizerConfig" })
+  @SpeakeasyMetadata({ data: "json, name=authorizerConfig" })
   authorizerConfig?: CreateDomainConfigurationRequestBodyAuthorizerConfig;
 
-  @Metadata({ data: "json, name=domainName" })
+  @SpeakeasyMetadata({ data: "json, name=domainName" })
   domainName?: string;
 
-  @Metadata({ data: "json, name=serverCertificateArns" })
+  @SpeakeasyMetadata({ data: "json, name=serverCertificateArns" })
   serverCertificateArns?: string[];
 
-  @Metadata({ data: "json, name=serviceType" })
+  @SpeakeasyMetadata({ data: "json, name=serviceType" })
   serviceType?: CreateDomainConfigurationRequestBodyServiceTypeEnum;
 
-  @Metadata({ data: "json, name=tags", elemType: shared.Tag })
+  @SpeakeasyMetadata({ data: "json, name=tags", elemType: shared.Tag })
   tags?: shared.Tag[];
 
-  @Metadata({ data: "json, name=validationCertificateArn" })
+  @SpeakeasyMetadata({ data: "json, name=validationCertificateArn" })
   validationCertificateArn?: string;
 }
 
 
 export class CreateDomainConfigurationRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: CreateDomainConfigurationPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: CreateDomainConfigurationHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: CreateDomainConfigurationRequestBody;
 }
 
 
 export class CreateDomainConfigurationResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   certificateValidationException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   createDomainConfigurationResponse?: shared.CreateDomainConfigurationResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   internalFailureException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidRequestException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   limitExceededException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   resourceAlreadyExistsException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   serviceUnavailableException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   throttlingException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   unauthorizedException?: any;
 }

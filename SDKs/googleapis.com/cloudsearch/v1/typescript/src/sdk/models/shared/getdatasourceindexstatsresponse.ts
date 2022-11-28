@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DataSourceIndexStats } from "./datasourceindexstats";
 
 
+
 export class GetDataSourceIndexStatsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=averageIndexedItemCount" })
+  @SpeakeasyMetadata({ data: "json, name=averageIndexedItemCount" })
   averageIndexedItemCount?: string;
 
-  @Metadata({ data: "json, name=stats", elemType: shared.DataSourceIndexStats })
+  @SpeakeasyMetadata({ data: "json, name=stats", elemType: DataSourceIndexStats })
   stats?: DataSourceIndexStats[];
 }

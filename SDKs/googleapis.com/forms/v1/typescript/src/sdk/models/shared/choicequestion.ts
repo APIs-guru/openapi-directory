@@ -1,12 +1,29 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { OptionInput } from "./option";
 import { Option } from "./option";
 
+
 export enum ChoiceQuestionTypeEnum {
-    ChoiceTypeUnspecified = "CHOICE_TYPE_UNSPECIFIED"
-,    Radio = "RADIO"
-,    Checkbox = "CHECKBOX"
-,    DropDown = "DROP_DOWN"
+    ChoiceTypeUnspecified = "CHOICE_TYPE_UNSPECIFIED",
+    Radio = "RADIO",
+    Checkbox = "CHECKBOX",
+    DropDown = "DROP_DOWN"
+}
+
+
+// ChoiceQuestionInput
+/** 
+ * A radio/checkbox/dropdown question.
+**/
+export class ChoiceQuestionInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=options", elemType: OptionInput })
+  options?: OptionInput[];
+
+  @SpeakeasyMetadata({ data: "json, name=shuffle" })
+  shuffle?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=type" })
+  type?: ChoiceQuestionTypeEnum;
 }
 
 
@@ -15,12 +32,12 @@ export enum ChoiceQuestionTypeEnum {
  * A radio/checkbox/dropdown question.
 **/
 export class ChoiceQuestion extends SpeakeasyBase {
-  @Metadata({ data: "json, name=options", elemType: shared.Option })
+  @SpeakeasyMetadata({ data: "json, name=options", elemType: Option })
   options?: Option[];
 
-  @Metadata({ data: "json, name=shuffle" })
+  @SpeakeasyMetadata({ data: "json, name=shuffle" })
   shuffle?: boolean;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: ChoiceQuestionTypeEnum;
 }

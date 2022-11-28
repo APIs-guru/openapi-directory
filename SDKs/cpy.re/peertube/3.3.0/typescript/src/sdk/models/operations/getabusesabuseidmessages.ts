@@ -1,44 +1,45 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetAbusesAbuseIdMessagesPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=abuseId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=abuseId" })
   abuseId: number;
 }
 
 
 export class GetAbusesAbuseIdMessagesSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   oAuth2: shared.SchemeOAuth2;
 }
 
 
-export class GetAbusesAbuseIdMessagesRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: GetAbusesAbuseIdMessagesPathParams;
-
-  @Metadata()
-  security: GetAbusesAbuseIdMessagesSecurity;
-}
-
-
 export class GetAbusesAbuseIdMessages200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data?: any[];
 
-  @Metadata({ data: "json, name=total" })
+  @SpeakeasyMetadata({ data: "json, name=total" })
   total?: number;
 }
 
 
+export class GetAbusesAbuseIdMessagesRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: GetAbusesAbuseIdMessagesPathParams;
+
+  @SpeakeasyMetadata()
+  security: GetAbusesAbuseIdMessagesSecurity;
+}
+
+
 export class GetAbusesAbuseIdMessagesResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getAbusesAbuseIdMessages200ApplicationJsonObject?: GetAbusesAbuseIdMessages200ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

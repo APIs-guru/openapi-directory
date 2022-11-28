@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import ipsetdescriptortype_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class IPSetDescriptor:
-    type: ipsetdescriptortype_enum.IPSetDescriptorTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Type' }})
-    value: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Value' }})
+    r"""IPSetDescriptor
+    <note> <p>This is <b>AWS WAF Classic</b> documentation. For more information, see <a href=\"https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html\">AWS WAF Classic</a> in the developer guide.</p> <p> <b>For the latest version of AWS WAF</b>, use the AWS WAFV2 API and see the <a href=\"https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html\">AWS WAF Developer Guide</a>. With the latest version, AWS WAF has a single set of endpoints for regional and global use. </p> </note> <p>Specifies the IP address type (<code>IPV4</code> or <code>IPV6</code>) and the IP address range (in CIDR format) that web requests originate from.</p>
+    """
+    
+    type: IPSetDescriptorTypeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Type') }})
+    value: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Value') }})
     

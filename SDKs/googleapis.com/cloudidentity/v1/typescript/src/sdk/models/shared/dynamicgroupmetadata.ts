@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DynamicGroupQuery } from "./dynamicgroupquery";
 import { DynamicGroupStatus } from "./dynamicgroupstatus";
+
 
 
 // DynamicGroupMetadata
@@ -9,9 +9,9 @@ import { DynamicGroupStatus } from "./dynamicgroupstatus";
  * Dynamic group metadata like queries and status.
 **/
 export class DynamicGroupMetadata extends SpeakeasyBase {
-  @Metadata({ data: "json, name=queries", elemType: shared.DynamicGroupQuery })
+  @SpeakeasyMetadata({ data: "json, name=queries", elemType: DynamicGroupQuery })
   queries?: DynamicGroupQuery[];
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: DynamicGroupStatus;
 }

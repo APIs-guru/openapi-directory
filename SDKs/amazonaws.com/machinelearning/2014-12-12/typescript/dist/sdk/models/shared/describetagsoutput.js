@@ -22,9 +22,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TaggableResourceTypeEnum } from "./taggableresourcetypeenum";
+import { Tag } from "./tag";
 // DescribeTagsOutput
 /**
  * Amazon ML returns the following elements.
@@ -35,15 +35,15 @@ var DescribeTagsOutput = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=ResourceId" }),
+        SpeakeasyMetadata({ data: "json, name=ResourceId" }),
         __metadata("design:type", String)
     ], DescribeTagsOutput.prototype, "resourceId", void 0);
     __decorate([
-        Metadata({ data: "json, name=ResourceType" }),
+        SpeakeasyMetadata({ data: "json, name=ResourceType" }),
         __metadata("design:type", String)
     ], DescribeTagsOutput.prototype, "resourceType", void 0);
     __decorate([
-        Metadata({ data: "json, name=Tags", elemType: shared.Tag }),
+        SpeakeasyMetadata({ data: "json, name=Tags", elemType: Tag }),
         __metadata("design:type", Array)
     ], DescribeTagsOutput.prototype, "tags", void 0);
     return DescribeTagsOutput;

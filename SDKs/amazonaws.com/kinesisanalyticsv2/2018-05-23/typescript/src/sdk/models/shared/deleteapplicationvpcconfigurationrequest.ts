@@ -1,16 +1,17 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DeleteApplicationVpcConfigurationRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ApplicationName" })
+  @SpeakeasyMetadata({ data: "json, name=ApplicationName" })
   applicationName: string;
 
-  @Metadata({ data: "json, name=ConditionalToken" })
+  @SpeakeasyMetadata({ data: "json, name=ConditionalToken" })
   conditionalToken?: string;
 
-  @Metadata({ data: "json, name=CurrentApplicationVersionId" })
+  @SpeakeasyMetadata({ data: "json, name=CurrentApplicationVersionId" })
   currentApplicationVersionId?: number;
 
-  @Metadata({ data: "json, name=VpcConfigurationId" })
+  @SpeakeasyMetadata({ data: "json, name=VpcConfigurationId" })
   vpcConfigurationId: string;
 }

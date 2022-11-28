@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class HealthcareProjectsLocationsDatasetsHl7V2StoresCreatePathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,21 +27,21 @@ class HealthcareProjectsLocationsDatasetsHl7V2StoresCreateQueryParams:
 
 @dataclass
 class HealthcareProjectsLocationsDatasetsHl7V2StoresCreateSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class HealthcareProjectsLocationsDatasetsHl7V2StoresCreateRequest:
-    path_params: HealthcareProjectsLocationsDatasetsHl7V2StoresCreatePathParams = field(default=None)
-    query_params: HealthcareProjectsLocationsDatasetsHl7V2StoresCreateQueryParams = field(default=None)
+    path_params: HealthcareProjectsLocationsDatasetsHl7V2StoresCreatePathParams = field()
+    query_params: HealthcareProjectsLocationsDatasetsHl7V2StoresCreateQueryParams = field()
+    security: HealthcareProjectsLocationsDatasetsHl7V2StoresCreateSecurity = field()
     request: Optional[shared.Hl7V2Store] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: HealthcareProjectsLocationsDatasetsHl7V2StoresCreateSecurity = field(default=None)
     
 
 @dataclass
 class HealthcareProjectsLocationsDatasetsHl7V2StoresCreateResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     hl7_v2_store: Optional[shared.Hl7V2Store] = field(default=None)
-    status_code: int = field(default=None)
     

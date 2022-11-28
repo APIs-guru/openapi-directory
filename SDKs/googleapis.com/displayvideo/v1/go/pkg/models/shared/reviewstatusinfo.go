@@ -28,6 +28,8 @@ const (
 	ReviewStatusInfoCreativeAndLandingPageReviewStatusEnumReviewStatusPending     ReviewStatusInfoCreativeAndLandingPageReviewStatusEnum = "REVIEW_STATUS_PENDING"
 )
 
+// ReviewStatusInfo
+// Review statuses for the creative.
 type ReviewStatusInfo struct {
 	ApprovalStatus                     *ReviewStatusInfoApprovalStatusEnum                     `json:"approvalStatus,omitempty"`
 	ContentAndPolicyReviewStatus       *ReviewStatusInfoContentAndPolicyReviewStatusEnum       `json:"contentAndPolicyReviewStatus,omitempty"`

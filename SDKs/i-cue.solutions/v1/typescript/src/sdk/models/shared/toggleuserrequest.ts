@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ToggleUserRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=entityId" })
+  @SpeakeasyMetadata({ data: "json, name=entityId" })
   entityId?: number;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: number;
 
-  @Metadata({ data: "json, name=isActive" })
+  @SpeakeasyMetadata({ data: "json, name=isActive" })
   isActive?: boolean;
 }

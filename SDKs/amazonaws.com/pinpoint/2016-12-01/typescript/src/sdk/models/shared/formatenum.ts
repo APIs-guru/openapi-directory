@@ -1,6 +1,7 @@
 
 
+
 export enum FormatEnum {
-    Csv = "CSV"
-,    Json = "JSON"
+    Csv = "CSV",
+    Json = "JSON"
 }

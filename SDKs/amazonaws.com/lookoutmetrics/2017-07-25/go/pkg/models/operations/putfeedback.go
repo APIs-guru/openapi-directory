@@ -10,6 +10,8 @@ type PutFeedbackHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// PutFeedbackRequestBodyAnomalyGroupTimeSeriesFeedback
+// Feedback for an anomalous metric.
 type PutFeedbackRequestBodyAnomalyGroupTimeSeriesFeedback struct {
 	AnomalyGroupID *string `json:"AnomalyGroupId,omitempty"`
 	IsAnomaly      *bool   `json:"IsAnomaly,omitempty"`

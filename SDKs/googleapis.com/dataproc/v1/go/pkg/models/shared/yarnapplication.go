@@ -14,6 +14,8 @@ const (
 	YarnApplicationStateEnumKilled           YarnApplicationStateEnum = "KILLED"
 )
 
+// YarnApplication
+// A YARN application created by a job. Application information is a subset of org.apache.hadoop.yarn.proto.YarnProtos.ApplicationReportProto.Beta Feature: This report is available for testing purposes only. It may be changed before final release.
 type YarnApplication struct {
 	Name        *string                   `json:"name,omitempty"`
 	Progress    *float32                  `json:"progress,omitempty"`

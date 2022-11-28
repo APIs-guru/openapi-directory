@@ -1,16 +1,15 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import configmodel
-from . import environmentmodel
-from . import configsettingvaluemodel
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ConfigSettingValuesModel:
-    config: Optional[configmodel.ConfigModel] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'config' }})
-    environment: Optional[environmentmodel.EnvironmentModel] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'environment' }})
-    read_only: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'readOnly' }})
-    setting_values: Optional[List[configsettingvaluemodel.ConfigSettingValueModel]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'settingValues' }})
+    config: Optional[ConfigModel] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('config') }})
+    environment: Optional[EnvironmentModel] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('environment') }})
+    read_only: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('readOnly') }})
+    setting_values: Optional[List[ConfigSettingValueModel]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('settingValues') }})
     

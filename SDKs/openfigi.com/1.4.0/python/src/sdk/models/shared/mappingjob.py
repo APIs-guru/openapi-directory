@@ -1,9 +1,11 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
-from typing import Any,Enum,List,Optional
+from typing import Any,List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class MappingJobIDTypeEnum(str, Enum):
     ID_ISIN = "ID_ISIN"
@@ -183,20 +185,24 @@ class MappingJobStateCodeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class MappingJob:
-    contract_size: Optional[List[float]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'contractSize' }})
-    coupon: Optional[List[float]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'coupon' }})
-    currency: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'currency' }})
-    exch_code: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'exchCode' }})
-    expiration: Optional[List[datetime]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'expiration' }})
-    id_type: MappingJobIDTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'idType' }})
-    id_value: Any = field(default=None, metadata={'dataclasses_json': { 'field_name': 'idValue' }})
-    include_unlisted_equities: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'includeUnlistedEquities' }})
-    market_sec_des: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'marketSecDes' }})
-    maturity: Optional[List[datetime]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'maturity' }})
-    mic_code: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'micCode' }})
-    option_type: Optional[MappingJobOptionTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'optionType' }})
-    security_type: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'securityType' }})
-    security_type2: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'securityType2' }})
-    state_code: Optional[MappingJobStateCodeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'stateCode' }})
-    strike: Optional[List[float]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'strike' }})
+    r"""MappingJob
+    For V3: securityType2 is required when idType is BASE_TICKER or ID_EXCH_SYMBOL.  expiration is required when securityType2 is Option or Warrant.  maturity is required when securityType2 is Pool.
+    """
+    
+    id_type: MappingJobIDTypeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('idType') }})
+    id_value: Any = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('idValue') }})
+    contract_size: Optional[List[float]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('contractSize') }})
+    coupon: Optional[List[float]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('coupon') }})
+    currency: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('currency') }})
+    exch_code: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('exchCode') }})
+    expiration: Optional[List[date]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('expiration') }})
+    include_unlisted_equities: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('includeUnlistedEquities') }})
+    market_sec_des: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('marketSecDes') }})
+    maturity: Optional[List[date]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('maturity') }})
+    mic_code: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('micCode') }})
+    option_type: Optional[MappingJobOptionTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('optionType') }})
+    security_type: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('securityType') }})
+    security_type2: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('securityType2') }})
+    state_code: Optional[MappingJobStateCodeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('stateCode') }})
+    strike: Optional[List[float]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('strike') }})
     

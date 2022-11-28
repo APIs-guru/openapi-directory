@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class FirebasemlOperationsListPathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -28,20 +29,20 @@ class FirebasemlOperationsListQueryParams:
 
 @dataclass
 class FirebasemlOperationsListSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class FirebasemlOperationsListRequest:
-    path_params: FirebasemlOperationsListPathParams = field(default=None)
-    query_params: FirebasemlOperationsListQueryParams = field(default=None)
-    security: FirebasemlOperationsListSecurity = field(default=None)
+    path_params: FirebasemlOperationsListPathParams = field()
+    query_params: FirebasemlOperationsListQueryParams = field()
+    security: FirebasemlOperationsListSecurity = field()
     
 
 @dataclass
 class FirebasemlOperationsListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     list_operations_response: Optional[shared.ListOperationsResponse] = field(default=None)
-    status_code: int = field(default=None)
     

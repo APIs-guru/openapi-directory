@@ -1,68 +1,69 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetNearbyFacilitiesQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=city" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=city" })
   city?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=drive_time" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=drive_time" })
   driveTime?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=lat" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=lat" })
   lat?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=lng" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=lng" })
   lng?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=page" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page" })
   page?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=per_page" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=per_page" })
   perPage?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=services[]" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=services[]" })
   services?: string[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=state" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=state" })
   state?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=street_address" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=street_address" })
   streetAddress?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=zip" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=zip" })
   zip?: string;
 }
 
 
 export class GetNearbyFacilitiesSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
   apikey: shared.SchemeApikey;
 }
 
 
 export class GetNearbyFacilitiesRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetNearbyFacilitiesQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: GetNearbyFacilitiesSecurity;
 }
 
 
 export class GetNearbyFacilitiesResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   apiError?: shared.ApiError;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   genericError?: shared.GenericError;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   nearbyResponse?: shared.NearbyResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

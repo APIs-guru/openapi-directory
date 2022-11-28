@@ -1,13 +1,13 @@
 import axios, { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
-import { MatchContentType } from "../internal/utils/contenttype";
 import * as operations from "./models/operations";
-import { CreateSecurityClient } from "../internal/utils/security";
-import * as utils from "../internal/utils/utils";
+import * as utils from "../internal/utils";
+
+
 
 type OptsFunc = (sdk: SDK) => void;
 
-const Servers = [
-  "https://mtaa-api.herokuapp.com/api",
+export const ServerList = [
+	"https://mtaa-api.herokuapp.com/api",
 ] as const;
 
 export function WithServerURL(
@@ -18,50 +18,49 @@ export function WithServerURL(
     if (params != null) {
       serverURL = utils.ReplaceParameters(serverURL, params);
     }
-    sdk.serverURL = serverURL;
+    sdk._serverURL = serverURL;
   };
 }
 
 export function WithClient(client: AxiosInstance): OptsFunc {
   return (sdk: SDK) => {
-    sdk.defaultClient = client;
+    sdk._defaultClient = client;
   };
 }
 
 
 export class SDK {
-  defaultClient?: AxiosInstance;
-  securityClient?: AxiosInstance;
-  security?: any;
-  serverURL: string;
+
+  public _defaultClient: AxiosInstance;
+  public _securityClient: AxiosInstance;
+  
+  public _serverURL: string;
+  private _language = "typescript";
+  private _sdkVersion = "0.0.1";
+  private _genVersion = "internal";
 
   constructor(...opts: OptsFunc[]) {
     opts.forEach((o) => o(this));
-    if (this.serverURL == "") {
-      this.serverURL = Servers[0];
+    if (this._serverURL == "") {
+      this._serverURL = ServerList[0];
     }
 
-    if (!this.defaultClient) {
-      this.defaultClient = axios.create({ baseURL: this.serverURL });
+    if (!this._defaultClient) {
+      this._defaultClient = axios.create({ baseURL: this._serverURL });
     }
 
-    if (!this.securityClient) {
-      if (this.security) {
-        this.securityClient = CreateSecurityClient(
-          this.defaultClient,
-          this.security
-        );
-      } else {
-        this.securityClient = this.defaultClient;
-      }
+    if (!this._securityClient) {
+      this._securityClient = this._defaultClient;
     }
+    
   }
   
-  // DistrictsInARegion - Returns all districts in region
-  /** 
+  /**
+   * districtsInARegion - Returns all districts in region
+   *
    * Returns a post code and all districts in a specified region
   **/
-  DistrictsInARegion(
+  districtsInARegion(
     req: operations.DistrictsInARegionRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DistrictsInARegionResponse> {
@@ -69,24 +68,24 @@ export class SDK {
       req = new operations.DistrictsInARegionRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/{country}/{region}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DistrictsInARegionResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.DistrictsInARegionResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
         }
 
@@ -96,11 +95,12 @@ export class SDK {
   }
 
   
-  // TanzaniaRegions - Returns all regions present in Tanzania
-  /** 
+  /**
+   * tanzaniaRegions - Returns all regions present in Tanzania
+   *
    * Fetches all regions present in Tanzania and then return a response as json
   **/
-  TanzaniaRegions(
+  tanzaniaRegions(
     req: operations.TanzaniaRegionsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.TanzaniaRegionsResponse> {
@@ -108,22 +108,22 @@ export class SDK {
       req = new operations.TanzaniaRegionsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/{country}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.TanzaniaRegionsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.TanzaniaRegionsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
         }
 
@@ -133,11 +133,12 @@ export class SDK {
   }
 
   
-  // WardsInADistrict - Returns all wards in a district
-  /** 
+  /**
+   * wardsInADistrict - Returns all wards in a district
+   *
    * Returns all wards in a  specified district and district postcode
   **/
-  WardsInADistrict(
+  wardsInADistrict(
     req: operations.WardsInADistrictRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.WardsInADistrictResponse> {
@@ -145,24 +146,24 @@ export class SDK {
       req = new operations.WardsInADistrictRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/{country}/{region}/{district}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.WardsInADistrictResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.WardsInADistrictResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
         }
 
@@ -172,11 +173,12 @@ export class SDK {
   }
 
   
-  // NeighborhoodInAStreet - Returns all neighborhood in a street
-  /** 
+  /**
+   * neighborhoodInAStreet - Returns all neighborhood in a street
+   *
    * Returns all neighborhood in a specified street
   **/
-  NeighborhoodInAStreet(
+  neighborhoodInAStreet(
     req: operations.NeighborhoodInAStreetRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.NeighborhoodInAStreetResponse> {
@@ -184,24 +186,24 @@ export class SDK {
       req = new operations.NeighborhoodInAStreetRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/{country}/{region}/{district}/{ward}/{street}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.NeighborhoodInAStreetResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.NeighborhoodInAStreetResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
         }
 
@@ -211,11 +213,12 @@ export class SDK {
   }
 
   
-  // StreetsInAWard - Returns all streets in a ward
-  /** 
+  /**
+   * streetsInAWard - Returns all streets in a ward
+   *
    * Returns all streets in a specified ward and ward postcode
   **/
-  StreetsInAWard(
+  streetsInAWard(
     req: operations.StreetsInAWardRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.StreetsInAWardResponse> {
@@ -223,24 +226,24 @@ export class SDK {
       req = new operations.StreetsInAWardRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/{country}/{region}/{district}/{ward}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.StreetsInAWardResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.StreetsInAWardResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
         }
 

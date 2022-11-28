@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TaskStateEnum } from "./taskstateenum";
+
 
 
 // TaskSummary
@@ -7,15 +8,15 @@ import { TaskStateEnum } from "./taskstateenum";
  * Information about the task assigned to one or many devices.
 **/
 export class TaskSummary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=state" })
+  @SpeakeasyMetadata({ data: "json, name=state" })
   state?: TaskStateEnum;
 
-  @Metadata({ data: "json, name=tags" })
+  @SpeakeasyMetadata({ data: "json, name=tags" })
   tags?: Map<string, string>;
 
-  @Metadata({ data: "json, name=taskArn" })
+  @SpeakeasyMetadata({ data: "json, name=taskArn" })
   taskArn?: string;
 
-  @Metadata({ data: "json, name=taskId" })
+  @SpeakeasyMetadata({ data: "json, name=taskId" })
   taskId: string;
 }

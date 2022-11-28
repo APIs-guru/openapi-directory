@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { FailureCodeEnum } from "./failurecodeenum";
 import { ChangeStatusEnum } from "./changestatusenum";
 // ChangeSetSummaryListItem
@@ -35,35 +35,35 @@ var ChangeSetSummaryListItem = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=ChangeSetArn" }),
+        SpeakeasyMetadata({ data: "json, name=ChangeSetArn" }),
         __metadata("design:type", String)
     ], ChangeSetSummaryListItem.prototype, "changeSetArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=ChangeSetId" }),
+        SpeakeasyMetadata({ data: "json, name=ChangeSetId" }),
         __metadata("design:type", String)
     ], ChangeSetSummaryListItem.prototype, "changeSetId", void 0);
     __decorate([
-        Metadata({ data: "json, name=ChangeSetName" }),
+        SpeakeasyMetadata({ data: "json, name=ChangeSetName" }),
         __metadata("design:type", String)
     ], ChangeSetSummaryListItem.prototype, "changeSetName", void 0);
     __decorate([
-        Metadata({ data: "json, name=EndTime" }),
+        SpeakeasyMetadata({ data: "json, name=EndTime" }),
         __metadata("design:type", String)
     ], ChangeSetSummaryListItem.prototype, "endTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=EntityIdList" }),
+        SpeakeasyMetadata({ data: "json, name=EntityIdList" }),
         __metadata("design:type", Array)
     ], ChangeSetSummaryListItem.prototype, "entityIdList", void 0);
     __decorate([
-        Metadata({ data: "json, name=FailureCode" }),
+        SpeakeasyMetadata({ data: "json, name=FailureCode" }),
         __metadata("design:type", String)
     ], ChangeSetSummaryListItem.prototype, "failureCode", void 0);
     __decorate([
-        Metadata({ data: "json, name=StartTime" }),
+        SpeakeasyMetadata({ data: "json, name=StartTime" }),
         __metadata("design:type", String)
     ], ChangeSetSummaryListItem.prototype, "startTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=Status" }),
+        SpeakeasyMetadata({ data: "json, name=Status" }),
         __metadata("design:type", String)
     ], ChangeSetSummaryListItem.prototype, "status", void 0);
     return ChangeSetSummaryListItem;

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // AccessLogSettings
 /**
  * Access log settings, including the access log format and access log destination ARN.
@@ -33,11 +33,11 @@ var AccessLogSettings = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=destinationArn" }),
+        SpeakeasyMetadata({ data: "json, name=destinationArn" }),
         __metadata("design:type", String)
     ], AccessLogSettings.prototype, "destinationArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=format" }),
+        SpeakeasyMetadata({ data: "json, name=format" }),
         __metadata("design:type", String)
     ], AccessLogSettings.prototype, "format", void 0);
     return AccessLogSettings;

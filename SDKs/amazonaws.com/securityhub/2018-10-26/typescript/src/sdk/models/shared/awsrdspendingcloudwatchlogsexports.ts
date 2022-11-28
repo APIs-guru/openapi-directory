@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AwsRdsPendingCloudWatchLogsExports
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Identifies the log types to enable and disable.
 **/
 export class AwsRdsPendingCloudWatchLogsExports extends SpeakeasyBase {
-  @Metadata({ data: "json, name=LogTypesToDisable" })
+  @SpeakeasyMetadata({ data: "json, name=LogTypesToDisable" })
   logTypesToDisable?: string[];
 
-  @Metadata({ data: "json, name=LogTypesToEnable" })
+  @SpeakeasyMetadata({ data: "json, name=LogTypesToEnable" })
   logTypesToEnable?: string[];
 }

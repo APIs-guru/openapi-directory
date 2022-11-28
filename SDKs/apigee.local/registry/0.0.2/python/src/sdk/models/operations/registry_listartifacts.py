@@ -1,10 +1,10 @@
 from dataclasses import dataclass, field
-from typing import Any,List,Optional
+from typing import Any,Optional
 
 
 @dataclass
 class RegistryListArtifactsPathParams:
-    project: str = field(default=None, metadata={'path_param': { 'field_name': 'project', 'style': 'simple', 'explode': False }})
+    project: str = field(metadata={'path_param': { 'field_name': 'project', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -16,13 +16,13 @@ class RegistryListArtifactsQueryParams:
 
 @dataclass
 class RegistryListArtifactsRequest:
-    path_params: RegistryListArtifactsPathParams = field(default=None)
-    query_params: RegistryListArtifactsQueryParams = field(default=None)
+    path_params: RegistryListArtifactsPathParams = field()
+    query_params: RegistryListArtifactsQueryParams = field()
     
 
 @dataclass
 class RegistryListArtifactsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     list_artifacts_response: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

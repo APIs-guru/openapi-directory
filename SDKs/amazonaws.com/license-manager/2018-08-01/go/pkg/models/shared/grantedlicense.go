@@ -1,5 +1,7 @@
 package shared
 
+// GrantedLicense
+// Describes a license that is granted to a grantee.
 type GrantedLicense struct {
 	Beneficiary              *string                   `json:"Beneficiary,omitempty"`
 	ConsumptionConfiguration *ConsumptionConfiguration `json:"ConsumptionConfiguration,omitempty"`

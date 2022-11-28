@@ -5,12 +5,12 @@ from sdk.models import shared
 
 @dataclass
 class DcimFrontPortsCreateRequest:
-    request: shared.WritableFrontPort = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    request: shared.WritableFrontPortInput = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class DcimFrontPortsCreateResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     front_port: Optional[shared.FrontPort] = field(default=None)
-    status_code: int = field(default=None)
     

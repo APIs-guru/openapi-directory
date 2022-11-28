@@ -1,46 +1,47 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetRealmUsersCountPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=realm" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=realm" })
   realm: string;
 }
 
 
 export class GetRealmUsersCountQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=email" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=email" })
   email?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=firstName" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=firstName" })
   firstName?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=lastName" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=lastName" })
   lastName?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=search" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=search" })
   search?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=username" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=username" })
   username?: string;
 }
 
 
 export class GetRealmUsersCountRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetRealmUsersCountPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetRealmUsersCountQueryParams;
 }
 
 
 export class GetRealmUsersCountResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getRealmUsersCount2XxApplicationJsonInt32Integer?: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

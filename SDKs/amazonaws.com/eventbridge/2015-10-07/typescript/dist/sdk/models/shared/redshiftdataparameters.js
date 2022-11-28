@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // RedshiftDataParameters
 /**
  * These are custom parameters to be used when the target is a Amazon Redshift cluster to invoke the Amazon Redshift Data API ExecuteStatement based on EventBridge events.
@@ -33,27 +33,27 @@ var RedshiftDataParameters = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Database" }),
+        SpeakeasyMetadata({ data: "json, name=Database" }),
         __metadata("design:type", String)
     ], RedshiftDataParameters.prototype, "database", void 0);
     __decorate([
-        Metadata({ data: "json, name=DbUser" }),
+        SpeakeasyMetadata({ data: "json, name=DbUser" }),
         __metadata("design:type", String)
     ], RedshiftDataParameters.prototype, "dbUser", void 0);
     __decorate([
-        Metadata({ data: "json, name=SecretManagerArn" }),
+        SpeakeasyMetadata({ data: "json, name=SecretManagerArn" }),
         __metadata("design:type", String)
     ], RedshiftDataParameters.prototype, "secretManagerArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=Sql" }),
+        SpeakeasyMetadata({ data: "json, name=Sql" }),
         __metadata("design:type", String)
     ], RedshiftDataParameters.prototype, "sql", void 0);
     __decorate([
-        Metadata({ data: "json, name=StatementName" }),
+        SpeakeasyMetadata({ data: "json, name=StatementName" }),
         __metadata("design:type", String)
     ], RedshiftDataParameters.prototype, "statementName", void 0);
     __decorate([
-        Metadata({ data: "json, name=WithEvent" }),
+        SpeakeasyMetadata({ data: "json, name=WithEvent" }),
         __metadata("design:type", Boolean)
     ], RedshiftDataParameters.prototype, "withEvent", void 0);
     return RedshiftDataParameters;

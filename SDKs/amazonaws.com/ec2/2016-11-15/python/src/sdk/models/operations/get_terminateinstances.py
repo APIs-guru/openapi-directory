@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 
 class GetTerminateInstancesActionEnum(str, Enum):
     TERMINATE_INSTANCES = "TerminateInstances"
@@ -10,10 +14,10 @@ class GetTerminateInstancesVersionEnum(str, Enum):
 
 @dataclass
 class GetTerminateInstancesQueryParams:
-    action: GetTerminateInstancesActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetTerminateInstancesActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    instance_id: List[str] = field(metadata={'query_param': { 'field_name': 'InstanceId', 'style': 'form', 'explode': True }})
+    version: GetTerminateInstancesVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     dry_run: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'DryRun', 'style': 'form', 'explode': True }})
-    instance_id: List[str] = field(default=None, metadata={'query_param': { 'field_name': 'InstanceId', 'style': 'form', 'explode': True }})
-    version: GetTerminateInstancesVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -29,13 +33,13 @@ class GetTerminateInstancesHeaders:
 
 @dataclass
 class GetTerminateInstancesRequest:
-    query_params: GetTerminateInstancesQueryParams = field(default=None)
-    headers: GetTerminateInstancesHeaders = field(default=None)
+    headers: GetTerminateInstancesHeaders = field()
+    query_params: GetTerminateInstancesQueryParams = field()
     
 
 @dataclass
 class GetTerminateInstancesResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

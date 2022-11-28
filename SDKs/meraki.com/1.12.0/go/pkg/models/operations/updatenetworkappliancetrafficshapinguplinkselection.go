@@ -31,6 +31,8 @@ const (
 	UpdateNetworkApplianceTrafficShapingUplinkSelectionRequestBodyVpnTrafficUplinkPreferencesPerformanceClassTypeEnumCustom  UpdateNetworkApplianceTrafficShapingUplinkSelectionRequestBodyVpnTrafficUplinkPreferencesPerformanceClassTypeEnum = "custom"
 )
 
+// UpdateNetworkApplianceTrafficShapingUplinkSelectionRequestBodyVpnTrafficUplinkPreferencesPerformanceClass
+// Performance class setting for this uplink preference rule
 type UpdateNetworkApplianceTrafficShapingUplinkSelectionRequestBodyVpnTrafficUplinkPreferencesPerformanceClass struct {
 	BuiltinPerformanceClassName *UpdateNetworkApplianceTrafficShapingUplinkSelectionRequestBodyVpnTrafficUplinkPreferencesPerformanceClassBuiltinPerformanceClassNameEnum `json:"builtinPerformanceClassName,omitempty"`
 	CustomPerformanceClassID    *string                                                                                                                                   `json:"customPerformanceClassId,omitempty"`
@@ -55,6 +57,8 @@ const (
 	UpdateNetworkApplianceTrafficShapingUplinkSelectionRequestBodyVpnTrafficUplinkPreferencesTrafficFiltersTypeEnumCustom              UpdateNetworkApplianceTrafficShapingUplinkSelectionRequestBodyVpnTrafficUplinkPreferencesTrafficFiltersTypeEnum = "custom"
 )
 
+// UpdateNetworkApplianceTrafficShapingUplinkSelectionRequestBodyVpnTrafficUplinkPreferencesTrafficFiltersValueDestination
+// Destination of this custom type traffic filter
 type UpdateNetworkApplianceTrafficShapingUplinkSelectionRequestBodyVpnTrafficUplinkPreferencesTrafficFiltersValueDestination struct {
 	Cidr    *string `json:"cidr,omitempty"`
 	Fqdn    *string `json:"fqdn,omitempty"`
@@ -73,6 +77,8 @@ const (
 	UpdateNetworkApplianceTrafficShapingUplinkSelectionRequestBodyVpnTrafficUplinkPreferencesTrafficFiltersValueProtocolEnumAny  UpdateNetworkApplianceTrafficShapingUplinkSelectionRequestBodyVpnTrafficUplinkPreferencesTrafficFiltersValueProtocolEnum = "any"
 )
 
+// UpdateNetworkApplianceTrafficShapingUplinkSelectionRequestBodyVpnTrafficUplinkPreferencesTrafficFiltersValueSource
+// Source of this custom type traffic filter
 type UpdateNetworkApplianceTrafficShapingUplinkSelectionRequestBodyVpnTrafficUplinkPreferencesTrafficFiltersValueSource struct {
 	Cidr    *string `json:"cidr,omitempty"`
 	Host    *int64  `json:"host,omitempty"`
@@ -81,6 +87,8 @@ type UpdateNetworkApplianceTrafficShapingUplinkSelectionRequestBodyVpnTrafficUpl
 	Vlan    *int64  `json:"vlan,omitempty"`
 }
 
+// UpdateNetworkApplianceTrafficShapingUplinkSelectionRequestBodyVpnTrafficUplinkPreferencesTrafficFiltersValue
+// Value object of this traffic filter
 type UpdateNetworkApplianceTrafficShapingUplinkSelectionRequestBodyVpnTrafficUplinkPreferencesTrafficFiltersValue struct {
 	Destination *UpdateNetworkApplianceTrafficShapingUplinkSelectionRequestBodyVpnTrafficUplinkPreferencesTrafficFiltersValueDestination  `json:"destination,omitempty"`
 	ID          *string                                                                                                                   `json:"id,omitempty"`
@@ -113,6 +121,8 @@ const (
 	UpdateNetworkApplianceTrafficShapingUplinkSelectionRequestBodyWanTrafficUplinkPreferencesTrafficFiltersTypeEnumCustom UpdateNetworkApplianceTrafficShapingUplinkSelectionRequestBodyWanTrafficUplinkPreferencesTrafficFiltersTypeEnum = "custom"
 )
 
+// UpdateNetworkApplianceTrafficShapingUplinkSelectionRequestBodyWanTrafficUplinkPreferencesTrafficFiltersValueDestination
+// Destination of this custom type traffic filter
 type UpdateNetworkApplianceTrafficShapingUplinkSelectionRequestBodyWanTrafficUplinkPreferencesTrafficFiltersValueDestination struct {
 	Cidr *string `json:"cidr,omitempty"`
 	Port *string `json:"port,omitempty"`
@@ -126,6 +136,8 @@ const (
 	UpdateNetworkApplianceTrafficShapingUplinkSelectionRequestBodyWanTrafficUplinkPreferencesTrafficFiltersValueProtocolEnumAny UpdateNetworkApplianceTrafficShapingUplinkSelectionRequestBodyWanTrafficUplinkPreferencesTrafficFiltersValueProtocolEnum = "any"
 )
 
+// UpdateNetworkApplianceTrafficShapingUplinkSelectionRequestBodyWanTrafficUplinkPreferencesTrafficFiltersValueSource
+// Source of this custom type traffic filter
 type UpdateNetworkApplianceTrafficShapingUplinkSelectionRequestBodyWanTrafficUplinkPreferencesTrafficFiltersValueSource struct {
 	Cidr *string `json:"cidr,omitempty"`
 	Host *int64  `json:"host,omitempty"`
@@ -133,6 +145,8 @@ type UpdateNetworkApplianceTrafficShapingUplinkSelectionRequestBodyWanTrafficUpl
 	Vlan *int64  `json:"vlan,omitempty"`
 }
 
+// UpdateNetworkApplianceTrafficShapingUplinkSelectionRequestBodyWanTrafficUplinkPreferencesTrafficFiltersValue
+// Value object of this traffic filter
 type UpdateNetworkApplianceTrafficShapingUplinkSelectionRequestBodyWanTrafficUplinkPreferencesTrafficFiltersValue struct {
 	Destination UpdateNetworkApplianceTrafficShapingUplinkSelectionRequestBodyWanTrafficUplinkPreferencesTrafficFiltersValueDestination   `json:"destination"`
 	Protocol    *UpdateNetworkApplianceTrafficShapingUplinkSelectionRequestBodyWanTrafficUplinkPreferencesTrafficFiltersValueProtocolEnum `json:"protocol,omitempty"`

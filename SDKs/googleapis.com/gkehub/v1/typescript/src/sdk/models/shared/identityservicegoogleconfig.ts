@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // IdentityServiceGoogleConfig
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Configuration for the Google Plugin Auth flow.
 **/
 export class IdentityServiceGoogleConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=disable" })
+  @SpeakeasyMetadata({ data: "json, name=disable" })
   disable?: boolean;
 }

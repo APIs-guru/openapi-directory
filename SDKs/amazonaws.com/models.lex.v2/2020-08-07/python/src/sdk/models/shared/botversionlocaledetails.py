@@ -1,9 +1,14 @@
 from dataclasses import dataclass, field
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass_json
 @dataclass
 class BotVersionLocaleDetails:
-    source_bot_version: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'sourceBotVersion' }})
+    r"""BotVersionLocaleDetails
+    The version of a bot used for a bot locale.
+    """
+    
+    source_bot_version: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('sourceBotVersion') }})
     

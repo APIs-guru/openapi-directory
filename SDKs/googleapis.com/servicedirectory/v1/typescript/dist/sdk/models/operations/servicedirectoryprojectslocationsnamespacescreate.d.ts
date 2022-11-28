@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class ServicedirectoryProjectsLocationsNamespacesCreatePathParams extends SpeakeasyBase {
     parent: string;
@@ -24,7 +24,7 @@ export declare class ServicedirectoryProjectsLocationsNamespacesCreateSecurity e
 export declare class ServicedirectoryProjectsLocationsNamespacesCreateRequest extends SpeakeasyBase {
     pathParams: ServicedirectoryProjectsLocationsNamespacesCreatePathParams;
     queryParams: ServicedirectoryProjectsLocationsNamespacesCreateQueryParams;
-    request?: shared.Namespace;
+    request?: shared.NamespaceInput;
     security: ServicedirectoryProjectsLocationsNamespacesCreateSecurity;
 }
 export declare class ServicedirectoryProjectsLocationsNamespacesCreateResponse extends SpeakeasyBase {

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var MailExportOptionsExportFormatEnum;
 (function (MailExportOptionsExportFormatEnum) {
     MailExportOptionsExportFormatEnum["ExportFormatUnspecified"] = "EXPORT_FORMAT_UNSPECIFIED";
@@ -39,15 +39,15 @@ var MailExportOptions = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=exportFormat" }),
+        SpeakeasyMetadata({ data: "json, name=exportFormat" }),
         __metadata("design:type", String)
     ], MailExportOptions.prototype, "exportFormat", void 0);
     __decorate([
-        Metadata({ data: "json, name=showConfidentialModeContent" }),
+        SpeakeasyMetadata({ data: "json, name=showConfidentialModeContent" }),
         __metadata("design:type", Boolean)
     ], MailExportOptions.prototype, "showConfidentialModeContent", void 0);
     __decorate([
-        Metadata({ data: "json, name=useNewExport" }),
+        SpeakeasyMetadata({ data: "json, name=useNewExport" }),
         __metadata("design:type", Boolean)
     ], MailExportOptions.prototype, "useNewExport", void 0);
     return MailExportOptions;

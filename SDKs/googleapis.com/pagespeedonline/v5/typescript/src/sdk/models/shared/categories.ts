@@ -1,9 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { LighthouseCategoryV5 } from "./lighthousecategoryv5";
-import { LighthouseCategoryV5 } from "./lighthousecategoryv5";
-import { LighthouseCategoryV5 } from "./lighthousecategoryv5";
-import { LighthouseCategoryV5 } from "./lighthousecategoryv5";
-import { LighthouseCategoryV5 } from "./lighthousecategoryv5";
+
 
 
 // Categories
@@ -11,18 +8,18 @@ import { LighthouseCategoryV5 } from "./lighthousecategoryv5";
  * The categories in a Lighthouse run.
 **/
 export class Categories extends SpeakeasyBase {
-  @Metadata({ data: "json, name=accessibility" })
+  @SpeakeasyMetadata({ data: "json, name=accessibility" })
   accessibility?: LighthouseCategoryV5;
 
-  @Metadata({ data: "json, name=best-practices" })
+  @SpeakeasyMetadata({ data: "json, name=best-practices" })
   bestPractices?: LighthouseCategoryV5;
 
-  @Metadata({ data: "json, name=performance" })
+  @SpeakeasyMetadata({ data: "json, name=performance" })
   performance?: LighthouseCategoryV5;
 
-  @Metadata({ data: "json, name=pwa" })
+  @SpeakeasyMetadata({ data: "json, name=pwa" })
   pwa?: LighthouseCategoryV5;
 
-  @Metadata({ data: "json, name=seo" })
+  @SpeakeasyMetadata({ data: "json, name=seo" })
   seo?: LighthouseCategoryV5;
 }

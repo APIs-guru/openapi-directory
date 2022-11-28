@@ -1,5 +1,7 @@
 package shared
 
+// SearchResult
+// Results containing indexed information for a document.
 type SearchResult struct {
 	ClusteredResults []SearchResult   `json:"clusteredResults,omitempty"`
 	DebugInfo        *ResultDebugInfo `json:"debugInfo,omitempty"`

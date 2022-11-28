@@ -11,7 +11,7 @@ import (
 	"strings"
 )
 
-var Servers = []string{
+var ServerList = []string{
 	"https://marketplace.walmartapis.com",
 	"https://sandbox.walmartapis.com",
 }
@@ -21,9 +21,13 @@ type HTTPClient interface {
 }
 
 type SDK struct {
-	defaultClient  HTTPClient
-	securityClient HTTPClient
-	serverURL      string
+	_defaultClient  HTTPClient
+	_securityClient HTTPClient
+	_security       *shared.Security
+	_serverURL      string
+	_language       string
+	_sdkVersion     string
+	_genVersion     string
 }
 
 type SDKOption func(*SDK)
@@ -34,33 +38,56 @@ func WithServerURL(serverURL string, params map[string]string) SDKOption {
 			serverURL = utils.ReplaceParameters(serverURL, params)
 		}
 
-		sdk.serverURL = serverURL
+		sdk._serverURL = serverURL
+	}
+}
+
+func WithClient(client HTTPClient) SDKOption {
+	return func(sdk *SDK) {
+		sdk._defaultClient = client
 	}
 }
 
 func WithSecurity(security shared.Security) SDKOption {
 	return func(sdk *SDK) {
-		sdk.securityClient = utils.CreateSecurityClient(security)
+		sdk._security = &security
 	}
 }
 
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
-		defaultClient:  http.DefaultClient,
-		securityClient: http.DefaultClient,
+		_language:   "go",
+		_sdkVersion: "",
+		_genVersion: "internal",
 	}
 	for _, opt := range opts {
 		opt(sdk)
 	}
-	if sdk.serverURL == "" {
-		sdk.serverURL = Servers[0]
+
+	if sdk._defaultClient == nil {
+		sdk._defaultClient = http.DefaultClient
+	}
+	if sdk._securityClient == nil {
+
+		if sdk._security != nil {
+			sdk._securityClient = utils.ConfigureSecurityClient(sdk._defaultClient, sdk._security)
+		} else {
+			sdk._securityClient = sdk._defaultClient
+		}
+
+	}
+
+	if sdk._serverURL == "" {
+		sdk._serverURL = ServerList[0]
 	}
 
 	return sdk
 }
 
+// GetInventory - Inventory
+// You can use this API to get the inventory for a given item.
 func (s *SDK) GetInventory(ctx context.Context, request operations.GetInventoryRequest) (*operations.GetInventoryResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v3/inventory"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -72,7 +99,7 @@ func (s *SDK) GetInventory(ctx context.Context, request operations.GetInventoryR
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -109,8 +136,10 @@ func (s *SDK) GetInventory(ctx context.Context, request operations.GetInventoryR
 	return res, nil
 }
 
+// GetMultiNodeInventoryForAllSkuAndAllShipNodes - Multiple Item Inventory for All Ship Nodes
+// This API will retrieve the inventory count for all of a seller's items across all ship nodes by item to ship node mapping. Inventory can be zero or non-zero.
 func (s *SDK) GetMultiNodeInventoryForAllSkuAndAllShipNodes(ctx context.Context, request operations.GetMultiNodeInventoryForAllSkuAndAllShipNodesRequest) (*operations.GetMultiNodeInventoryForAllSkuAndAllShipNodesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v3/inventories"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -122,7 +151,7 @@ func (s *SDK) GetMultiNodeInventoryForAllSkuAndAllShipNodes(ctx context.Context,
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -152,8 +181,10 @@ func (s *SDK) GetMultiNodeInventoryForAllSkuAndAllShipNodes(ctx context.Context,
 	return res, nil
 }
 
+// GetMultiNodeInventoryForSkuAndAllShipnodes - Single Item Inventory by Ship Node
+// This API will retrieve the inventory count for an item across all ship nodes or one specific ship node. You can specify the ship node for which you want to fetch the inventory
 func (s *SDK) GetMultiNodeInventoryForSkuAndAllShipnodes(ctx context.Context, request operations.GetMultiNodeInventoryForSkuAndAllShipnodesRequest) (*operations.GetMultiNodeInventoryForSkuAndAllShipnodesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v3/inventories/{sku}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -165,7 +196,7 @@ func (s *SDK) GetMultiNodeInventoryForSkuAndAllShipnodes(ctx context.Context, re
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -195,8 +226,10 @@ func (s *SDK) GetMultiNodeInventoryForSkuAndAllShipnodes(ctx context.Context, re
 	return res, nil
 }
 
+// GetWfsInventory - WFS Inventory
+// You can use this API to get the current Available to Sell inventory quantities for all WFS items in your catalog. You can also query specific SKUs or filter to only items updated after a specific date in order to reduce the response size.
 func (s *SDK) GetWfsInventory(ctx context.Context, request operations.GetWfsInventoryRequest) (*operations.GetWfsInventoryResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v3/fulfillment/inventory"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -208,7 +241,7 @@ func (s *SDK) GetWfsInventory(ctx context.Context, request operations.GetWfsInve
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -238,8 +271,10 @@ func (s *SDK) GetWfsInventory(ctx context.Context, request operations.GetWfsInve
 	return res, nil
 }
 
+// UpdateBulkInventory - Bulk Item Inventory Update
+// Updates inventory for items in bulk. Refer to the throttling limits before uploading the Feed files.
 func (s *SDK) UpdateBulkInventory(ctx context.Context, request operations.UpdateBulkInventoryRequest) (*operations.UpdateBulkInventoryResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v3/feeds"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -261,7 +296,7 @@ func (s *SDK) UpdateBulkInventory(ctx context.Context, request operations.Update
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -298,8 +333,10 @@ func (s *SDK) UpdateBulkInventory(ctx context.Context, request operations.Update
 	return res, nil
 }
 
+// UpdateInventoryForAnItem - Update inventory
+// Updates the inventory for a given item.
 func (s *SDK) UpdateInventoryForAnItem(ctx context.Context, request operations.UpdateInventoryForAnItemRequest) (*operations.UpdateInventoryForAnItemResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v3/inventory"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -321,7 +358,7 @@ func (s *SDK) UpdateInventoryForAnItem(ctx context.Context, request operations.U
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -358,8 +395,10 @@ func (s *SDK) UpdateInventoryForAnItem(ctx context.Context, request operations.U
 	return res, nil
 }
 
+// UpdateMultiNodeInventory - Update Item Inventory per Ship Node
+// This API will update the inventory for an item across one or more fulfillment centers, known as ship nodes.
 func (s *SDK) UpdateMultiNodeInventory(ctx context.Context, request operations.UpdateMultiNodeInventoryRequest) (*operations.UpdateMultiNodeInventoryResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v3/inventories/{sku}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -379,7 +418,7 @@ func (s *SDK) UpdateMultiNodeInventory(ctx context.Context, request operations.U
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {

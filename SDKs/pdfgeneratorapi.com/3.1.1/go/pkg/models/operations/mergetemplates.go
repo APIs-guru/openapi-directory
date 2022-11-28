@@ -10,11 +10,6 @@ type MergeTemplatesQueryParams struct {
 	Output *shared.OutputEnum `queryParam:"style=form,explode=true,name=output"`
 }
 
-type MergeTemplatesRequest struct {
-	QueryParams MergeTemplatesQueryParams
-	Request     []shared.BatchData `request:"mediaType=application/json"`
-}
-
 type MergeTemplates200ApplicationJSONMeta struct {
 	ContentType *string `json:"content-type,omitempty"`
 	DisplayName *string `json:"display_name,omitempty"`
@@ -88,6 +83,11 @@ type MergeTemplates422ApplicationJSON struct {
 type MergeTemplates500ApplicationJSON struct {
 	Error  *string `json:"error,omitempty"`
 	Status *int64  `json:"status,omitempty"`
+}
+
+type MergeTemplatesRequest struct {
+	QueryParams MergeTemplatesQueryParams
+	Request     []shared.BatchData `request:"mediaType=application/json"`
 }
 
 type MergeTemplatesResponse struct {

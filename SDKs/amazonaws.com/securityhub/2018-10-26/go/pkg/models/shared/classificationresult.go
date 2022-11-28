@@ -1,5 +1,7 @@
 package shared
 
+// ClassificationResult
+// Details about the sensitive data that was detected on the resource.
 type ClassificationResult struct {
 	AdditionalOccurrences *bool                        `json:"AdditionalOccurrences,omitempty"`
 	CustomDataIdentifiers *CustomDataIdentifiersResult `json:"CustomDataIdentifiers,omitempty"`

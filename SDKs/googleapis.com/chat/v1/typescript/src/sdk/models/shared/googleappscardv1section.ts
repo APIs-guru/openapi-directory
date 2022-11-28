@@ -1,22 +1,22 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleAppsCardV1Widget } from "./googleappscardv1widget";
+
 
 
 // GoogleAppsCardV1Section
 /** 
- * A section contains a collection of widgets that are rendered vertically in the order that they are specified. Across all platforms, cards have a narrow fixed width, so there is currently no need for layout properties, for example, float.
+ * A section contains a collection of widgets that are rendered vertically in the order that they are specified.
 **/
 export class GoogleAppsCardV1Section extends SpeakeasyBase {
-  @Metadata({ data: "json, name=collapsible" })
+  @SpeakeasyMetadata({ data: "json, name=collapsible" })
   collapsible?: boolean;
 
-  @Metadata({ data: "json, name=header" })
+  @SpeakeasyMetadata({ data: "json, name=header" })
   header?: string;
 
-  @Metadata({ data: "json, name=uncollapsibleWidgetsCount" })
+  @SpeakeasyMetadata({ data: "json, name=uncollapsibleWidgetsCount" })
   uncollapsibleWidgetsCount?: number;
 
-  @Metadata({ data: "json, name=widgets", elemType: shared.GoogleAppsCardV1Widget })
+  @SpeakeasyMetadata({ data: "json, name=widgets", elemType: GoogleAppsCardV1Widget })
   widgets?: GoogleAppsCardV1Widget[];
 }

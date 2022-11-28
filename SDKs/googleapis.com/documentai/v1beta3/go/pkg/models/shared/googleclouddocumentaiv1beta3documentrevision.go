@@ -1,5 +1,7 @@
 package shared
 
+// GoogleCloudDocumentaiV1beta3DocumentRevision
+// Contains past or forward revisions of this document.
 type GoogleCloudDocumentaiV1beta3DocumentRevision struct {
 	Agent       *string                                                  `json:"agent,omitempty"`
 	CreateTime  *string                                                  `json:"createTime,omitempty"`

@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { FilterView } from "./filterview";
+
 
 
 // AddFilterViewResponse
@@ -7,6 +8,6 @@ import { FilterView } from "./filterview";
  * The result of adding a filter view.
 **/
 export class AddFilterViewResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=filter" })
+  @SpeakeasyMetadata({ data: "json, name=filter" })
   filter?: FilterView;
 }

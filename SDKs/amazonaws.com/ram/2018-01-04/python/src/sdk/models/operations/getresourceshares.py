@@ -1,6 +1,11 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -35,32 +40,32 @@ class GetResourceSharesRequestBodyResourceShareStatusEnum(str, Enum):
 @dataclass_json
 @dataclass
 class GetResourceSharesRequestBody:
-    max_results: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'maxResults' }})
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'nextToken' }})
-    permission_arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'permissionArn' }})
-    resource_owner: GetResourceSharesRequestBodyResourceOwnerEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'resourceOwner' }})
-    resource_share_arns: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'resourceShareArns' }})
-    resource_share_status: Optional[GetResourceSharesRequestBodyResourceShareStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'resourceShareStatus' }})
-    tag_filters: Optional[List[shared.TagFilter]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tagFilters' }})
+    resource_owner: GetResourceSharesRequestBodyResourceOwnerEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('resourceOwner') }})
+    max_results: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('maxResults') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('nextToken') }})
+    permission_arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('permissionArn') }})
+    resource_share_arns: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('resourceShareArns') }})
+    resource_share_status: Optional[GetResourceSharesRequestBodyResourceShareStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('resourceShareStatus') }})
+    tag_filters: Optional[List[shared.TagFilter]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('tagFilters') }})
     
 
 @dataclass
 class GetResourceSharesRequest:
-    query_params: GetResourceSharesQueryParams = field(default=None)
-    headers: GetResourceSharesHeaders = field(default=None)
-    request: GetResourceSharesRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: GetResourceSharesHeaders = field()
+    query_params: GetResourceSharesQueryParams = field()
+    request: GetResourceSharesRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class GetResourceSharesResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     get_resource_shares_response: Optional[shared.GetResourceSharesResponse] = field(default=None)
     invalid_next_token_exception: Optional[Any] = field(default=None)
     invalid_parameter_exception: Optional[Any] = field(default=None)
     malformed_arn_exception: Optional[Any] = field(default=None)
     server_internal_exception: Optional[Any] = field(default=None)
     service_unavailable_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     unknown_resource_exception: Optional[Any] = field(default=None)
     

@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import dataset
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class DeleteDatasetResponse:
-    dataset: Optional[dataset.Dataset] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Dataset' }})
+    r"""DeleteDatasetResponse
+    Response to a successful DeleteDataset request.
+    """
+    
+    dataset: Optional[Dataset] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Dataset') }})
     

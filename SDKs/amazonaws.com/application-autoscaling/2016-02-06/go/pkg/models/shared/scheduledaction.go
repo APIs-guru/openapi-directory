@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// ScheduledAction
+// Represents a scheduled action.
 type ScheduledAction struct {
 	CreationTime         time.Time              `json:"CreationTime"`
 	EndTime              *time.Time             `json:"EndTime,omitempty"`

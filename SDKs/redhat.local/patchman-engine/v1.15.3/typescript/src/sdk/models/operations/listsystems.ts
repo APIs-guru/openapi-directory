@@ -1,115 +1,116 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
+
 export enum ListSystemsSortEnum {
-    Id = "id"
-,    DisplayName = "display_name"
-,    LastEvaluation = "last_evaluation"
-,    LastUpload = "last_upload"
-,    RhsaCount = "rhsa_count"
-,    RhbaCount = "rhba_count"
-,    RheaCount = "rhea_count"
-,    OtherCount = "other_count"
-,    Stale = "stale"
-,    PackagesInstalled = "packages_installed"
-,    PackagesUpdatable = "packages_updatable"
+    Id = "id",
+    DisplayName = "display_name",
+    LastEvaluation = "last_evaluation",
+    LastUpload = "last_upload",
+    RhsaCount = "rhsa_count",
+    RhbaCount = "rhba_count",
+    RheaCount = "rhea_count",
+    OtherCount = "other_count",
+    Stale = "stale",
+    PackagesInstalled = "packages_installed",
+    PackagesUpdatable = "packages_updatable"
 }
 
 
 export class ListSystemsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=filter[created]" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=filter[created]" })
   filterCreated?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=filter[culled_timestamp]" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=filter[culled_timestamp]" })
   filterCulledTimestamp?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=filter[display_name]" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=filter[display_name]" })
   filterDisplayName?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=filter[id]" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=filter[id]" })
   filterId?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=filter[insights_id]" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=filter[insights_id]" })
   filterInsightsId?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=filter[last_evaluation]" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=filter[last_evaluation]" })
   filterLastEvaluation?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=filter[last_upload]" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=filter[last_upload]" })
   filterLastUpload?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=filter[other_count]" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=filter[other_count]" })
   filterOtherCount?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=filter[packages_installed]" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=filter[packages_installed]" })
   filterPackagesInstalled?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=filter[packages_updatable]" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=filter[packages_updatable]" })
   filterPackagesUpdatable?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=filter[rhba_count]" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=filter[rhba_count]" })
   filterRhbaCount?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=filter[rhea_count]" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=filter[rhea_count]" })
   filterRheaCount?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=filter[rhsa_count]" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=filter[rhsa_count]" })
   filterRhsaCount?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=filter[stale]" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=filter[stale]" })
   filterStale?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=filter[stale_timestamp]" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=filter[stale_timestamp]" })
   filterStaleTimestamp?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=filter[stale_warning_timestamp]" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=filter[stale_warning_timestamp]" })
   filterStaleWarningTimestamp?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=filter[system_profile][sap_sids][in]" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=filter[system_profile][sap_sids][in]" })
   filterSystemProfileSapSidsIn?: string[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=filter[system_profile][sap_system]" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=filter[system_profile][sap_system]" })
   filterSystemProfileSapSystem?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=limit" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=limit" })
   limit?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=offset" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=offset" })
   offset?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=search" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=search" })
   search?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=sort" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sort" })
   sort?: ListSystemsSortEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=tags" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=tags" })
   tags?: string[];
 }
 
 
 export class ListSystemsSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
   rhIdentity: shared.SchemeRhIdentity;
 }
 
 
 export class ListSystemsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: ListSystemsQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: ListSystemsSecurity;
 }
 
 
 export class ListSystemsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   controllersSystemsResponse?: shared.ControllersSystemsResponse;
 }

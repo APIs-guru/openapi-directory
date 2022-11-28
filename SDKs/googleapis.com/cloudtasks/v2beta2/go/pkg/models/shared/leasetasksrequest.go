@@ -8,6 +8,8 @@ const (
 	LeaseTasksRequestResponseViewEnumFull            LeaseTasksRequestResponseViewEnum = "FULL"
 )
 
+// LeaseTasksRequest
+// Request message for leasing tasks using LeaseTasks.
 type LeaseTasksRequest struct {
 	Filter        *string                            `json:"filter,omitempty"`
 	LeaseDuration *string                            `json:"leaseDuration,omitempty"`

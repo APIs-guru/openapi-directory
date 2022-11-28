@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ValidationConfig
@@ -6,18 +7,18 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Contains the configuration for FHIR profiles and validation.
 **/
 export class ValidationConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=disableFhirpathValidation" })
+  @SpeakeasyMetadata({ data: "json, name=disableFhirpathValidation" })
   disableFhirpathValidation?: boolean;
 
-  @Metadata({ data: "json, name=disableProfileValidation" })
+  @SpeakeasyMetadata({ data: "json, name=disableProfileValidation" })
   disableProfileValidation?: boolean;
 
-  @Metadata({ data: "json, name=disableReferenceTypeValidation" })
+  @SpeakeasyMetadata({ data: "json, name=disableReferenceTypeValidation" })
   disableReferenceTypeValidation?: boolean;
 
-  @Metadata({ data: "json, name=disableRequiredFieldValidation" })
+  @SpeakeasyMetadata({ data: "json, name=disableRequiredFieldValidation" })
   disableRequiredFieldValidation?: boolean;
 
-  @Metadata({ data: "json, name=enabledImplementationGuides" })
+  @SpeakeasyMetadata({ data: "json, name=enabledImplementationGuides" })
   enabledImplementationGuides?: string[];
 }

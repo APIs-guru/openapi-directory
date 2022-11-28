@@ -9,6 +9,8 @@ const (
 	ProviderLaunchStageEnumDeprecated             ProviderLaunchStageEnum = "DEPRECATED"
 )
 
+// Provider
+// Provider indicates the owner who provides the connectors.
 type Provider struct {
 	CreateTime        *string                  `json:"createTime,omitempty"`
 	Description       *string                  `json:"description,omitempty"`

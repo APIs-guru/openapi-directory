@@ -1,5 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ApplicationCodeConfigurationUpdate } from "./applicationcodeconfigurationupdate";
 import { ApplicationSnapshotConfigurationUpdate } from "./applicationsnapshotconfigurationupdate";
 import { EnvironmentPropertyUpdates } from "./environmentpropertyupdates";
@@ -9,29 +8,30 @@ import { VpcConfigurationUpdate } from "./vpcconfigurationupdate";
 import { ZeppelinApplicationConfigurationUpdate } from "./zeppelinapplicationconfigurationupdate";
 
 
+
 // ApplicationConfigurationUpdate
 /** 
  * Describes updates to an application's configuration.
 **/
 export class ApplicationConfigurationUpdate extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ApplicationCodeConfigurationUpdate" })
+  @SpeakeasyMetadata({ data: "json, name=ApplicationCodeConfigurationUpdate" })
   applicationCodeConfigurationUpdate?: ApplicationCodeConfigurationUpdate;
 
-  @Metadata({ data: "json, name=ApplicationSnapshotConfigurationUpdate" })
+  @SpeakeasyMetadata({ data: "json, name=ApplicationSnapshotConfigurationUpdate" })
   applicationSnapshotConfigurationUpdate?: ApplicationSnapshotConfigurationUpdate;
 
-  @Metadata({ data: "json, name=EnvironmentPropertyUpdates" })
+  @SpeakeasyMetadata({ data: "json, name=EnvironmentPropertyUpdates" })
   environmentPropertyUpdates?: EnvironmentPropertyUpdates;
 
-  @Metadata({ data: "json, name=FlinkApplicationConfigurationUpdate" })
+  @SpeakeasyMetadata({ data: "json, name=FlinkApplicationConfigurationUpdate" })
   flinkApplicationConfigurationUpdate?: FlinkApplicationConfigurationUpdate;
 
-  @Metadata({ data: "json, name=SqlApplicationConfigurationUpdate" })
+  @SpeakeasyMetadata({ data: "json, name=SqlApplicationConfigurationUpdate" })
   sqlApplicationConfigurationUpdate?: SqlApplicationConfigurationUpdate;
 
-  @Metadata({ data: "json, name=VpcConfigurationUpdates", elemType: shared.VpcConfigurationUpdate })
+  @SpeakeasyMetadata({ data: "json, name=VpcConfigurationUpdates", elemType: VpcConfigurationUpdate })
   vpcConfigurationUpdates?: VpcConfigurationUpdate[];
 
-  @Metadata({ data: "json, name=ZeppelinApplicationConfigurationUpdate" })
+  @SpeakeasyMetadata({ data: "json, name=ZeppelinApplicationConfigurationUpdate" })
   zeppelinApplicationConfigurationUpdate?: ZeppelinApplicationConfigurationUpdate;
 }

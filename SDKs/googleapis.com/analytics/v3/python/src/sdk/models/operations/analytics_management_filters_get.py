@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class AnalyticsManagementFiltersGetPathParams:
-    account_id: str = field(default=None, metadata={'path_param': { 'field_name': 'accountId', 'style': 'simple', 'explode': False }})
-    filter_id: str = field(default=None, metadata={'path_param': { 'field_name': 'filterId', 'style': 'simple', 'explode': False }})
+    account_id: str = field(metadata={'path_param': { 'field_name': 'accountId', 'style': 'simple', 'explode': False }})
+    filter_id: str = field(metadata={'path_param': { 'field_name': 'filterId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -22,14 +23,14 @@ class AnalyticsManagementFiltersGetQueryParams:
 
 @dataclass
 class AnalyticsManagementFiltersGetSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class AnalyticsManagementFiltersGetSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -40,14 +41,14 @@ class AnalyticsManagementFiltersGetSecurity:
 
 @dataclass
 class AnalyticsManagementFiltersGetRequest:
-    path_params: AnalyticsManagementFiltersGetPathParams = field(default=None)
-    query_params: AnalyticsManagementFiltersGetQueryParams = field(default=None)
-    security: AnalyticsManagementFiltersGetSecurity = field(default=None)
+    path_params: AnalyticsManagementFiltersGetPathParams = field()
+    query_params: AnalyticsManagementFiltersGetQueryParams = field()
+    security: AnalyticsManagementFiltersGetSecurity = field()
     
 
 @dataclass
 class AnalyticsManagementFiltersGetResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     filter: Optional[shared.Filter] = field(default=None)
-    status_code: int = field(default=None)
     

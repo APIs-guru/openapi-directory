@@ -1,61 +1,61 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ApiCoreDtoTagsTag } from "./apicoredtotagstag";
 
+
 export enum ApiCoreDtoClickStreamHitDatapointInfoStatusEnum {
-    Active = "Active"
-,    Paused = "Paused"
-,    Abuse = "Abuse"
-,    Deleted = "Deleted"
+    Active = "Active",
+    Paused = "Paused",
+    Abuse = "Abuse",
+    Deleted = "Deleted"
 }
 
 
 export class ApiCoreDtoClickStreamHitDatapointInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=creationDate" })
+  @SpeakeasyMetadata({ data: "json, name=creationDate" })
   creationDate?: string;
 
-  @Metadata({ data: "json, name=datapointFavourite" })
+  @SpeakeasyMetadata({ data: "json, name=datapointFavourite" })
   datapointFavourite?: boolean;
 
-  @Metadata({ data: "json, name=datapointId" })
+  @SpeakeasyMetadata({ data: "json, name=datapointId" })
   datapointId?: number;
 
-  @Metadata({ data: "json, name=datapointName" })
+  @SpeakeasyMetadata({ data: "json, name=datapointName" })
   datapointName?: string;
 
-  @Metadata({ data: "json, name=datapointTitle" })
+  @SpeakeasyMetadata({ data: "json, name=datapointTitle" })
   datapointTitle?: string;
 
-  @Metadata({ data: "json, name=datapointType" })
+  @SpeakeasyMetadata({ data: "json, name=datapointType" })
   datapointType?: string;
 
-  @Metadata({ data: "json, name=destinationUrl" })
+  @SpeakeasyMetadata({ data: "json, name=destinationUrl" })
   destinationUrl?: string;
 
-  @Metadata({ data: "json, name=groupId" })
+  @SpeakeasyMetadata({ data: "json, name=groupId" })
   groupId?: number;
 
-  @Metadata({ data: "json, name=groupName" })
+  @SpeakeasyMetadata({ data: "json, name=groupName" })
   groupName?: string;
 
-  @Metadata({ data: "json, name=isABTest" })
+  @SpeakeasyMetadata({ data: "json, name=isABTest" })
   isAbTest?: boolean;
 
-  @Metadata({ data: "json, name=isPrivateShared" })
+  @SpeakeasyMetadata({ data: "json, name=isPrivateShared" })
   isPrivateShared?: boolean;
 
-  @Metadata({ data: "json, name=isPublic" })
+  @SpeakeasyMetadata({ data: "json, name=isPublic" })
   isPublic?: boolean;
 
-  @Metadata({ data: "json, name=notes" })
+  @SpeakeasyMetadata({ data: "json, name=notes" })
   notes?: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: ApiCoreDtoClickStreamHitDatapointInfoStatusEnum;
 
-  @Metadata({ data: "json, name=tags", elemType: shared.ApiCoreDtoTagsTag })
+  @SpeakeasyMetadata({ data: "json, name=tags", elemType: ApiCoreDtoTagsTag })
   tags?: ApiCoreDtoTagsTag[];
 
-  @Metadata({ data: "json, name=trackingCode" })
+  @SpeakeasyMetadata({ data: "json, name=trackingCode" })
   trackingCode?: string;
 }

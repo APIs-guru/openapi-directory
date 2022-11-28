@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // TestTargetsForShard
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Test targets for a shard.
 **/
 export class TestTargetsForShard extends SpeakeasyBase {
-  @Metadata({ data: "json, name=testTargets" })
+  @SpeakeasyMetadata({ data: "json, name=testTargets" })
   testTargets?: string[];
 }

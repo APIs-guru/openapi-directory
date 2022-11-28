@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { IpRuleItem } from "./ipruleitem";
 
 
+
 export class AuthorizeIpRulesRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=GroupId" })
+  @SpeakeasyMetadata({ data: "json, name=GroupId" })
   groupId: string;
 
-  @Metadata({ data: "json, name=UserRules", elemType: shared.IpRuleItem })
+  @SpeakeasyMetadata({ data: "json, name=UserRules", elemType: IpRuleItem })
   userRules: IpRuleItem[];
 }

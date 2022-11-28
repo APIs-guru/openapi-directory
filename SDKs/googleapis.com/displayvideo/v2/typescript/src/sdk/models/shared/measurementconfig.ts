@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // MeasurementConfig
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Measurement settings of a partner.
 **/
 export class MeasurementConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=dv360ToCmCostReportingEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=dv360ToCmCostReportingEnabled" })
   dv360ToCmCostReportingEnabled?: boolean;
 
-  @Metadata({ data: "json, name=dv360ToCmDataSharingEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=dv360ToCmDataSharingEnabled" })
   dv360ToCmDataSharingEnabled?: boolean;
 }

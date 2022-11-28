@@ -1,5 +1,7 @@
 package shared
 
+// ProductStatus
+// The status of a product, i.e., information about a product computed asynchronously.
 type ProductStatus struct {
 	CreationDate         *string                          `json:"creationDate,omitempty"`
 	DataQualityIssues    []ProductStatusDataQualityIssue  `json:"dataQualityIssues,omitempty"`

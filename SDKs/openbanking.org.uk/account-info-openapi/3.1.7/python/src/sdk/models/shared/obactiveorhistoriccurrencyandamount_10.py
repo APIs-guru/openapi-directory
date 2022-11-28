@@ -1,10 +1,15 @@
 from dataclasses import dataclass, field
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass_json
 @dataclass
 class ObActiveOrHistoricCurrencyAndAmount10:
-    amount: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Amount' }})
-    currency: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Currency' }})
+    r"""ObActiveOrHistoricCurrencyAndAmount10
+    Transaction charges to be paid by the charge bearer.
+    """
+    
+    amount: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Amount') }})
+    currency: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Currency') }})
     

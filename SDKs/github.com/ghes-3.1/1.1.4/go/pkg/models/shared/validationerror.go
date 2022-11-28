@@ -9,6 +9,8 @@ type ValidationErrorErrors struct {
 	Value    *interface{} `json:"value,omitempty"`
 }
 
+// ValidationError
+// Validation Error
 type ValidationError struct {
 	DocumentationURL string                  `json:"documentation_url"`
 	Errors           []ValidationErrorErrors `json:"errors,omitempty"`

@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostModifyInstanceCreditSpecificationActionEnum(str, Enum):
     MODIFY_INSTANCE_CREDIT_SPECIFICATION = "ModifyInstanceCreditSpecification"
@@ -10,8 +14,8 @@ class PostModifyInstanceCreditSpecificationVersionEnum(str, Enum):
 
 @dataclass
 class PostModifyInstanceCreditSpecificationQueryParams:
-    action: PostModifyInstanceCreditSpecificationActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostModifyInstanceCreditSpecificationVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostModifyInstanceCreditSpecificationActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostModifyInstanceCreditSpecificationVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostModifyInstanceCreditSpecificationHeaders:
 
 @dataclass
 class PostModifyInstanceCreditSpecificationRequest:
-    query_params: PostModifyInstanceCreditSpecificationQueryParams = field(default=None)
-    headers: PostModifyInstanceCreditSpecificationHeaders = field(default=None)
+    headers: PostModifyInstanceCreditSpecificationHeaders = field()
+    query_params: PostModifyInstanceCreditSpecificationQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostModifyInstanceCreditSpecificationResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

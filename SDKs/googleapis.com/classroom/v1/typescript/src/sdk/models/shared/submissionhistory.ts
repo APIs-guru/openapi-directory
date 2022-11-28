@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GradeHistory } from "./gradehistory";
 import { StateHistory } from "./statehistory";
+
 
 
 // SubmissionHistory
@@ -8,9 +9,9 @@ import { StateHistory } from "./statehistory";
  * The history of the submission. This currently includes state and grade histories.
 **/
 export class SubmissionHistory extends SpeakeasyBase {
-  @Metadata({ data: "json, name=gradeHistory" })
+  @SpeakeasyMetadata({ data: "json, name=gradeHistory" })
   gradeHistory?: GradeHistory;
 
-  @Metadata({ data: "json, name=stateHistory" })
+  @SpeakeasyMetadata({ data: "json, name=stateHistory" })
   stateHistory?: StateHistory;
 }

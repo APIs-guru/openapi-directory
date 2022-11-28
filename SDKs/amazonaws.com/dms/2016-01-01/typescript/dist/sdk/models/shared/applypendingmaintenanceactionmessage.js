@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // ApplyPendingMaintenanceActionMessage
 /**
  * <p/>
@@ -33,15 +33,15 @@ var ApplyPendingMaintenanceActionMessage = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=ApplyAction" }),
+        SpeakeasyMetadata({ data: "json, name=ApplyAction" }),
         __metadata("design:type", String)
     ], ApplyPendingMaintenanceActionMessage.prototype, "applyAction", void 0);
     __decorate([
-        Metadata({ data: "json, name=OptInType" }),
+        SpeakeasyMetadata({ data: "json, name=OptInType" }),
         __metadata("design:type", String)
     ], ApplyPendingMaintenanceActionMessage.prototype, "optInType", void 0);
     __decorate([
-        Metadata({ data: "json, name=ReplicationInstanceArn" }),
+        SpeakeasyMetadata({ data: "json, name=ReplicationInstanceArn" }),
         __metadata("design:type", String)
     ], ApplyPendingMaintenanceActionMessage.prototype, "replicationInstanceArn", void 0);
     return ApplyPendingMaintenanceActionMessage;

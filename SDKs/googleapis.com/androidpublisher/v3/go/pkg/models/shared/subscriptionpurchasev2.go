@@ -21,6 +21,8 @@ const (
 	SubscriptionPurchaseV2SubscriptionStateEnumSubscriptionStateExpired       SubscriptionPurchaseV2SubscriptionStateEnum = "SUBSCRIPTION_STATE_EXPIRED"
 )
 
+// SubscriptionPurchaseV2
+// Indicates the status of a user's subscription purchase.
 type SubscriptionPurchaseV2 struct {
 	AcknowledgementState       *SubscriptionPurchaseV2AcknowledgementStateEnum `json:"acknowledgementState,omitempty"`
 	CanceledStateContext       *CanceledStateContext                           `json:"canceledStateContext,omitempty"`

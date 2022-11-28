@@ -12,14 +12,14 @@ class OauthAuthorizationsListAuthorizationsQueryParams:
 
 @dataclass
 class OauthAuthorizationsListAuthorizationsRequest:
-    query_params: OauthAuthorizationsListAuthorizationsQueryParams = field(default=None)
+    query_params: OauthAuthorizationsListAuthorizationsQueryParams = field()
     
 
 @dataclass
 class OauthAuthorizationsListAuthorizationsResponse:
-    content_type: str = field(default=None)
-    headers: dict[str, List[str]] = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    headers: dict[str, List[str]] = field()
+    status_code: int = field()
     authorizations: Optional[List[shared.Authorization]] = field(default=None)
     basic_error: Optional[shared.BasicError] = field(default=None)
     

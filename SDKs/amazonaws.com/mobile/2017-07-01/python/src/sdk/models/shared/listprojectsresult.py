@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import projectsummary
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ListProjectsResult:
-    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'nextToken' }})
-    projects: Optional[List[projectsummary.ProjectSummary]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'projects' }})
+    r"""ListProjectsResult
+     Result structure used for requests to list projects in AWS Mobile Hub. 
+    """
+    
+    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('nextToken') }})
+    projects: Optional[List[ProjectSummary]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('projects') }})
     

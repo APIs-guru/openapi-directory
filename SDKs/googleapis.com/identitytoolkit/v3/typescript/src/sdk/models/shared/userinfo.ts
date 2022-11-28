@@ -1,30 +1,30 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class UserInfoProviderUserInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=displayName" })
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
   displayName?: string;
 
-  @Metadata({ data: "json, name=email" })
+  @SpeakeasyMetadata({ data: "json, name=email" })
   email?: string;
 
-  @Metadata({ data: "json, name=federatedId" })
+  @SpeakeasyMetadata({ data: "json, name=federatedId" })
   federatedId?: string;
 
-  @Metadata({ data: "json, name=phoneNumber" })
+  @SpeakeasyMetadata({ data: "json, name=phoneNumber" })
   phoneNumber?: string;
 
-  @Metadata({ data: "json, name=photoUrl" })
+  @SpeakeasyMetadata({ data: "json, name=photoUrl" })
   photoUrl?: string;
 
-  @Metadata({ data: "json, name=providerId" })
+  @SpeakeasyMetadata({ data: "json, name=providerId" })
   providerId?: string;
 
-  @Metadata({ data: "json, name=rawId" })
+  @SpeakeasyMetadata({ data: "json, name=rawId" })
   rawId?: string;
 
-  @Metadata({ data: "json, name=screenName" })
+  @SpeakeasyMetadata({ data: "json, name=screenName" })
   screenName?: string;
 }
 
@@ -34,60 +34,60 @@ export class UserInfoProviderUserInfo extends SpeakeasyBase {
  * Template for an individual account info.
 **/
 export class UserInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=createdAt" })
+  @SpeakeasyMetadata({ data: "json, name=createdAt" })
   createdAt?: string;
 
-  @Metadata({ data: "json, name=customAttributes" })
+  @SpeakeasyMetadata({ data: "json, name=customAttributes" })
   customAttributes?: string;
 
-  @Metadata({ data: "json, name=customAuth" })
+  @SpeakeasyMetadata({ data: "json, name=customAuth" })
   customAuth?: boolean;
 
-  @Metadata({ data: "json, name=disabled" })
+  @SpeakeasyMetadata({ data: "json, name=disabled" })
   disabled?: boolean;
 
-  @Metadata({ data: "json, name=displayName" })
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
   displayName?: string;
 
-  @Metadata({ data: "json, name=email" })
+  @SpeakeasyMetadata({ data: "json, name=email" })
   email?: string;
 
-  @Metadata({ data: "json, name=emailVerified" })
+  @SpeakeasyMetadata({ data: "json, name=emailVerified" })
   emailVerified?: boolean;
 
-  @Metadata({ data: "json, name=lastLoginAt" })
+  @SpeakeasyMetadata({ data: "json, name=lastLoginAt" })
   lastLoginAt?: string;
 
-  @Metadata({ data: "json, name=localId" })
+  @SpeakeasyMetadata({ data: "json, name=localId" })
   localId?: string;
 
-  @Metadata({ data: "json, name=passwordHash" })
+  @SpeakeasyMetadata({ data: "json, name=passwordHash" })
   passwordHash?: string;
 
-  @Metadata({ data: "json, name=passwordUpdatedAt" })
+  @SpeakeasyMetadata({ data: "json, name=passwordUpdatedAt" })
   passwordUpdatedAt?: number;
 
-  @Metadata({ data: "json, name=phoneNumber" })
+  @SpeakeasyMetadata({ data: "json, name=phoneNumber" })
   phoneNumber?: string;
 
-  @Metadata({ data: "json, name=photoUrl" })
+  @SpeakeasyMetadata({ data: "json, name=photoUrl" })
   photoUrl?: string;
 
-  @Metadata({ data: "json, name=providerUserInfo", elemType: shared.UserInfoProviderUserInfo })
+  @SpeakeasyMetadata({ data: "json, name=providerUserInfo", elemType: UserInfoProviderUserInfo })
   providerUserInfo?: UserInfoProviderUserInfo[];
 
-  @Metadata({ data: "json, name=rawPassword" })
+  @SpeakeasyMetadata({ data: "json, name=rawPassword" })
   rawPassword?: string;
 
-  @Metadata({ data: "json, name=salt" })
+  @SpeakeasyMetadata({ data: "json, name=salt" })
   salt?: string;
 
-  @Metadata({ data: "json, name=screenName" })
+  @SpeakeasyMetadata({ data: "json, name=screenName" })
   screenName?: string;
 
-  @Metadata({ data: "json, name=validSince" })
+  @SpeakeasyMetadata({ data: "json, name=validSince" })
   validSince?: string;
 
-  @Metadata({ data: "json, name=version" })
+  @SpeakeasyMetadata({ data: "json, name=version" })
   version?: number;
 }

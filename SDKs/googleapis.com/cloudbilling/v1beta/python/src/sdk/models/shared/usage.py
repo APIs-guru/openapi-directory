@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import usageratetimeline
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class Usage:
-    usage_rate_timeline: Optional[usageratetimeline.UsageRateTimeline] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'usageRateTimeline' }})
+    r"""Usage
+    An amount of usage over a time frame.
+    """
+    
+    usage_rate_timeline: Optional[UsageRateTimeline] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('usageRateTimeline') }})
     

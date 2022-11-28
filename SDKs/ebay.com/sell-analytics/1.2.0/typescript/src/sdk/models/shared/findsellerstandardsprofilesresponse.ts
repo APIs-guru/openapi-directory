@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { StandardsProfile } from "./standardsprofile";
+
 
 
 // FindSellerStandardsProfilesResponse
@@ -8,6 +8,6 @@ import { StandardsProfile } from "./standardsprofile";
  * The response container for a list of seller profiles.
 **/
 export class FindSellerStandardsProfilesResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=standardsProfiles", elemType: shared.StandardsProfile })
+  @SpeakeasyMetadata({ data: "json, name=standardsProfiles", elemType: StandardsProfile })
   standardsProfiles?: StandardsProfile[];
 }

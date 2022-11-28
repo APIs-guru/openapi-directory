@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetV3SearchEventsQueryParams = /** @class */ (function (_super) {
     __extends(GetV3SearchEventsQueryParams, _super);
@@ -30,31 +30,31 @@ var GetV3SearchEventsQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=date_from" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=date_from" }),
         __metadata("design:type", Date)
     ], GetV3SearchEventsQueryParams.prototype, "dateFrom", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=date_to" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=date_to" }),
         __metadata("design:type", Date)
     ], GetV3SearchEventsQueryParams.prototype, "dateTo", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=editorial_segment" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=editorial_segment" }),
         __metadata("design:type", String)
     ], GetV3SearchEventsQueryParams.prototype, "editorialSegment", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=false;name=fields" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=fields" }),
         __metadata("design:type", Array)
     ], GetV3SearchEventsQueryParams.prototype, "fields", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=page" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page" }),
         __metadata("design:type", Number)
     ], GetV3SearchEventsQueryParams.prototype, "page", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=page_size" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page_size" }),
         __metadata("design:type", Number)
     ], GetV3SearchEventsQueryParams.prototype, "pageSize", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=phrase" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=phrase" }),
         __metadata("design:type", String)
     ], GetV3SearchEventsQueryParams.prototype, "phrase", void 0);
     return GetV3SearchEventsQueryParams;
@@ -66,11 +66,11 @@ var GetV3SearchEventsHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=Accept-Language" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Accept-Language" }),
         __metadata("design:type", String)
     ], GetV3SearchEventsHeaders.prototype, "acceptLanguage", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=GI-Country-Code" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=GI-Country-Code" }),
         __metadata("design:type", String)
     ], GetV3SearchEventsHeaders.prototype, "giCountryCode", void 0);
     return GetV3SearchEventsHeaders;
@@ -82,11 +82,11 @@ var GetV3SearchEventsRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetV3SearchEventsQueryParams)
     ], GetV3SearchEventsRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetV3SearchEventsHeaders)
     ], GetV3SearchEventsRequest.prototype, "headers", void 0);
     return GetV3SearchEventsRequest;
@@ -98,15 +98,15 @@ var GetV3SearchEventsResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetV3SearchEventsResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.EventsSearchResult)
     ], GetV3SearchEventsResponse.prototype, "eventsSearchResult", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetV3SearchEventsResponse.prototype, "statusCode", void 0);
     return GetV3SearchEventsResponse;

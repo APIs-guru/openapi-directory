@@ -13,14 +13,14 @@ class PostAPIV1GenevaActionsPrivacyRefreshProfileTelemetryPropertiesRequests:
 
 @dataclass
 class PostAPIV1GenevaActionsPrivacyRefreshProfileTelemetryPropertiesRequest:
-    request: PostAPIV1GenevaActionsPrivacyRefreshProfileTelemetryPropertiesRequests = field(default=None)
+    request: PostAPIV1GenevaActionsPrivacyRefreshProfileTelemetryPropertiesRequests = field()
     
 
 @dataclass
 class PostAPIV1GenevaActionsPrivacyRefreshProfileTelemetryPropertiesResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     problem_details: Optional[dict[str, Any]] = field(default=None)
     refresh_profile_telemetry_properties_response: Optional[shared.RefreshProfileTelemetryPropertiesResponse] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { TenancyUnit } from "./tenancyunit";
 /**
  * Response for the search query.

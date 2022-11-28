@@ -1,16 +1,17 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ListTargetsByRuleRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=EventBusName" })
+  @SpeakeasyMetadata({ data: "json, name=EventBusName" })
   eventBusName?: string;
 
-  @Metadata({ data: "json, name=Limit" })
+  @SpeakeasyMetadata({ data: "json, name=Limit" })
   limit?: number;
 
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=Rule" })
+  @SpeakeasyMetadata({ data: "json, name=Rule" })
   rule: string;
 }

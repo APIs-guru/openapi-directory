@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // UpdateProvisioningParameter
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The parameter key-value pair used to update a provisioned product.
 **/
 export class UpdateProvisioningParameter extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Key" })
+  @SpeakeasyMetadata({ data: "json, name=Key" })
   key?: string;
 
-  @Metadata({ data: "json, name=UsePreviousValue" })
+  @SpeakeasyMetadata({ data: "json, name=UsePreviousValue" })
   usePreviousValue?: boolean;
 
-  @Metadata({ data: "json, name=Value" })
+  @SpeakeasyMetadata({ data: "json, name=Value" })
   value?: string;
 }

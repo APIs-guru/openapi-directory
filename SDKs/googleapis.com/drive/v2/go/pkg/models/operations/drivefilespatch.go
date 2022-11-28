@@ -89,7 +89,7 @@ type DriveFilesPatchSecurity struct {
 type DriveFilesPatchRequest struct {
 	PathParams  DriveFilesPatchPathParams
 	QueryParams DriveFilesPatchQueryParams
-	Request     *shared.File `request:"mediaType=application/json"`
+	Request     *shared.FileInput `request:"mediaType=application/json"`
 	Security    DriveFilesPatchSecurity
 }
 

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var ReferencesCitiesByCityCodeGetPathParams = /** @class */ (function (_super) {
     __extends(ReferencesCitiesByCityCodeGetPathParams, _super);
@@ -30,7 +30,7 @@ var ReferencesCitiesByCityCodeGetPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=cityCode" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=cityCode" }),
         __metadata("design:type", String)
     ], ReferencesCitiesByCityCodeGetPathParams.prototype, "cityCode", void 0);
     return ReferencesCitiesByCityCodeGetPathParams;
@@ -42,15 +42,15 @@ var ReferencesCitiesByCityCodeGetQueryParams = /** @class */ (function (_super) 
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=lang" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=lang" }),
         __metadata("design:type", String)
     ], ReferencesCitiesByCityCodeGetQueryParams.prototype, "lang", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=limit" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=limit" }),
         __metadata("design:type", String)
     ], ReferencesCitiesByCityCodeGetQueryParams.prototype, "limit", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=offset" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=offset" }),
         __metadata("design:type", String)
     ], ReferencesCitiesByCityCodeGetQueryParams.prototype, "offset", void 0);
     return ReferencesCitiesByCityCodeGetQueryParams;
@@ -62,7 +62,7 @@ var ReferencesCitiesByCityCodeGetHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=Accept" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Accept" }),
         __metadata("design:type", String)
     ], ReferencesCitiesByCityCodeGetHeaders.prototype, "accept", void 0);
     return ReferencesCitiesByCityCodeGetHeaders;
@@ -74,7 +74,7 @@ var ReferencesCitiesByCityCodeGetSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeAuth)
     ], ReferencesCitiesByCityCodeGetSecurity.prototype, "auth", void 0);
     return ReferencesCitiesByCityCodeGetSecurity;
@@ -86,19 +86,19 @@ var ReferencesCitiesByCityCodeGetRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ReferencesCitiesByCityCodeGetPathParams)
     ], ReferencesCitiesByCityCodeGetRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ReferencesCitiesByCityCodeGetQueryParams)
     ], ReferencesCitiesByCityCodeGetRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ReferencesCitiesByCityCodeGetHeaders)
     ], ReferencesCitiesByCityCodeGetRequest.prototype, "headers", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ReferencesCitiesByCityCodeGetSecurity)
     ], ReferencesCitiesByCityCodeGetRequest.prototype, "security", void 0);
     return ReferencesCitiesByCityCodeGetRequest;
@@ -110,15 +110,15 @@ var ReferencesCitiesByCityCodeGetResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], ReferencesCitiesByCityCodeGetResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Map)
     ], ReferencesCitiesByCityCodeGetResponse.prototype, "referencesCitiesByCityCodeGet200ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], ReferencesCitiesByCityCodeGetResponse.prototype, "statusCode", void 0);
     return ReferencesCitiesByCityCodeGetResponse;

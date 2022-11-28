@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Configuration } from "./configuration";
+
 
 
 // CustomerListConfigurationsResponse
@@ -8,6 +8,6 @@ import { Configuration } from "./configuration";
  * Response message of customer's listing configuration.
 **/
 export class CustomerListConfigurationsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=configurations", elemType: shared.Configuration })
+  @SpeakeasyMetadata({ data: "json, name=configurations", elemType: Configuration })
   configurations?: Configuration[];
 }

@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class LifesciencesProjectsLocationsPipelinesRunPathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,21 +26,21 @@ class LifesciencesProjectsLocationsPipelinesRunQueryParams:
 
 @dataclass
 class LifesciencesProjectsLocationsPipelinesRunSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class LifesciencesProjectsLocationsPipelinesRunRequest:
-    path_params: LifesciencesProjectsLocationsPipelinesRunPathParams = field(default=None)
-    query_params: LifesciencesProjectsLocationsPipelinesRunQueryParams = field(default=None)
+    path_params: LifesciencesProjectsLocationsPipelinesRunPathParams = field()
+    query_params: LifesciencesProjectsLocationsPipelinesRunQueryParams = field()
+    security: LifesciencesProjectsLocationsPipelinesRunSecurity = field()
     request: Optional[shared.RunPipelineRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: LifesciencesProjectsLocationsPipelinesRunSecurity = field(default=None)
     
 
 @dataclass
 class LifesciencesProjectsLocationsPipelinesRunResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     operation: Optional[shared.Operation] = field(default=None)
-    status_code: int = field(default=None)
     

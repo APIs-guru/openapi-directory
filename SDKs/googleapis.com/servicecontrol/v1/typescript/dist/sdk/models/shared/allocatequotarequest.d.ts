@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { QuotaOperation } from "./quotaoperation";
 /**
  * Request message for the AllocateQuota method.

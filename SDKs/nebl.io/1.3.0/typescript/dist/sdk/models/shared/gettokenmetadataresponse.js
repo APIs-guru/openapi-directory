@@ -22,19 +22,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var GetTokenMetadataResponseMetadataOfIssuanceDataUserDataMeta = /** @class */ (function (_super) {
     __extends(GetTokenMetadataResponseMetadataOfIssuanceDataUserDataMeta, _super);
     function GetTokenMetadataResponseMetadataOfIssuanceDataUserDataMeta() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=key" }),
+        SpeakeasyMetadata({ data: "json, name=key" }),
         __metadata("design:type", String)
     ], GetTokenMetadataResponseMetadataOfIssuanceDataUserDataMeta.prototype, "key", void 0);
     __decorate([
-        Metadata({ data: "json, name=value" }),
+        SpeakeasyMetadata({ data: "json, name=value" }),
         __metadata("design:type", String)
     ], GetTokenMetadataResponseMetadataOfIssuanceDataUserDataMeta.prototype, "value", void 0);
     return GetTokenMetadataResponseMetadataOfIssuanceDataUserDataMeta;
@@ -50,7 +49,7 @@ var GetTokenMetadataResponseMetadataOfIssuanceDataUserData = /** @class */ (func
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=meta", elemType: shared.GetTokenMetadataResponseMetadataOfIssuanceDataUserDataMeta }),
+        SpeakeasyMetadata({ data: "json, name=meta", elemType: GetTokenMetadataResponseMetadataOfIssuanceDataUserDataMeta }),
         __metadata("design:type", Array)
     ], GetTokenMetadataResponseMetadataOfIssuanceDataUserData.prototype, "meta", void 0);
     return GetTokenMetadataResponseMetadataOfIssuanceDataUserData;
@@ -62,19 +61,19 @@ var GetTokenMetadataResponseMetadataOfIssuanceData = /** @class */ (function (_s
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=description" }),
+        SpeakeasyMetadata({ data: "json, name=description" }),
         __metadata("design:type", String)
     ], GetTokenMetadataResponseMetadataOfIssuanceData.prototype, "description", void 0);
     __decorate([
-        Metadata({ data: "json, name=issuer" }),
+        SpeakeasyMetadata({ data: "json, name=issuer" }),
         __metadata("design:type", String)
     ], GetTokenMetadataResponseMetadataOfIssuanceData.prototype, "issuer", void 0);
     __decorate([
-        Metadata({ data: "json, name=tokenName" }),
+        SpeakeasyMetadata({ data: "json, name=tokenName" }),
         __metadata("design:type", String)
     ], GetTokenMetadataResponseMetadataOfIssuanceData.prototype, "tokenName", void 0);
     __decorate([
-        Metadata({ data: "json, name=userData" }),
+        SpeakeasyMetadata({ data: "json, name=userData" }),
         __metadata("design:type", GetTokenMetadataResponseMetadataOfIssuanceDataUserData)
     ], GetTokenMetadataResponseMetadataOfIssuanceData.prototype, "userData", void 0);
     return GetTokenMetadataResponseMetadataOfIssuanceData;
@@ -90,7 +89,7 @@ var GetTokenMetadataResponseMetadataOfIssuance = /** @class */ (function (_super
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=data" }),
+        SpeakeasyMetadata({ data: "json, name=data" }),
         __metadata("design:type", GetTokenMetadataResponseMetadataOfIssuanceData)
     ], GetTokenMetadataResponseMetadataOfIssuance.prototype, "data", void 0);
     return GetTokenMetadataResponseMetadataOfIssuance;
@@ -106,7 +105,7 @@ var GetTokenMetadataResponseMetadataOfUtxoUserData = /** @class */ (function (_s
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=meta" }),
+        SpeakeasyMetadata({ data: "json, name=meta" }),
         __metadata("design:type", Array)
     ], GetTokenMetadataResponseMetadataOfUtxoUserData.prototype, "meta", void 0);
     return GetTokenMetadataResponseMetadataOfUtxoUserData;
@@ -122,7 +121,7 @@ var GetTokenMetadataResponseMetadataOfUtxo = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=userData" }),
+        SpeakeasyMetadata({ data: "json, name=userData" }),
         __metadata("design:type", GetTokenMetadataResponseMetadataOfUtxoUserData)
     ], GetTokenMetadataResponseMetadataOfUtxo.prototype, "userData", void 0);
     return GetTokenMetadataResponseMetadataOfUtxo;
@@ -134,67 +133,67 @@ var GetTokenMetadataResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=aggregationPolicy" }),
+        SpeakeasyMetadata({ data: "json, name=aggregationPolicy" }),
         __metadata("design:type", String)
     ], GetTokenMetadataResponse.prototype, "aggregationPolicy", void 0);
     __decorate([
-        Metadata({ data: "json, name=divisibility" }),
+        SpeakeasyMetadata({ data: "json, name=divisibility" }),
         __metadata("design:type", Number)
     ], GetTokenMetadataResponse.prototype, "divisibility", void 0);
     __decorate([
-        Metadata({ data: "json, name=firstBlock" }),
+        SpeakeasyMetadata({ data: "json, name=firstBlock" }),
         __metadata("design:type", Number)
     ], GetTokenMetadataResponse.prototype, "firstBlock", void 0);
     __decorate([
-        Metadata({ data: "json, name=initialIssuanceAmount" }),
+        SpeakeasyMetadata({ data: "json, name=initialIssuanceAmount" }),
         __metadata("design:type", Number)
     ], GetTokenMetadataResponse.prototype, "initialIssuanceAmount", void 0);
     __decorate([
-        Metadata({ data: "json, name=issuanceTxid" }),
+        SpeakeasyMetadata({ data: "json, name=issuanceTxid" }),
         __metadata("design:type", String)
     ], GetTokenMetadataResponse.prototype, "issuanceTxid", void 0);
     __decorate([
-        Metadata({ data: "json, name=issueAddress" }),
+        SpeakeasyMetadata({ data: "json, name=issueAddress" }),
         __metadata("design:type", String)
     ], GetTokenMetadataResponse.prototype, "issueAddress", void 0);
     __decorate([
-        Metadata({ data: "json, name=lockStatus" }),
+        SpeakeasyMetadata({ data: "json, name=lockStatus" }),
         __metadata("design:type", Boolean)
     ], GetTokenMetadataResponse.prototype, "lockStatus", void 0);
     __decorate([
-        Metadata({ data: "json, name=metadataOfIssuance" }),
+        SpeakeasyMetadata({ data: "json, name=metadataOfIssuance" }),
         __metadata("design:type", GetTokenMetadataResponseMetadataOfIssuance)
     ], GetTokenMetadataResponse.prototype, "metadataOfIssuance", void 0);
     __decorate([
-        Metadata({ data: "json, name=metadataOfUtxo" }),
+        SpeakeasyMetadata({ data: "json, name=metadataOfUtxo" }),
         __metadata("design:type", GetTokenMetadataResponseMetadataOfUtxo)
     ], GetTokenMetadataResponse.prototype, "metadataOfUtxo", void 0);
     __decorate([
-        Metadata({ data: "json, name=numOfBurns" }),
+        SpeakeasyMetadata({ data: "json, name=numOfBurns" }),
         __metadata("design:type", Number)
     ], GetTokenMetadataResponse.prototype, "numOfBurns", void 0);
     __decorate([
-        Metadata({ data: "json, name=numOfHolders" }),
+        SpeakeasyMetadata({ data: "json, name=numOfHolders" }),
         __metadata("design:type", Number)
     ], GetTokenMetadataResponse.prototype, "numOfHolders", void 0);
     __decorate([
-        Metadata({ data: "json, name=numOfIssuance" }),
+        SpeakeasyMetadata({ data: "json, name=numOfIssuance" }),
         __metadata("design:type", Number)
     ], GetTokenMetadataResponse.prototype, "numOfIssuance", void 0);
     __decorate([
-        Metadata({ data: "json, name=numOfTransfers" }),
+        SpeakeasyMetadata({ data: "json, name=numOfTransfers" }),
         __metadata("design:type", Number)
     ], GetTokenMetadataResponse.prototype, "numOfTransfers", void 0);
     __decorate([
-        Metadata({ data: "json, name=someUtxo" }),
+        SpeakeasyMetadata({ data: "json, name=someUtxo" }),
         __metadata("design:type", String)
     ], GetTokenMetadataResponse.prototype, "someUtxo", void 0);
     __decorate([
-        Metadata({ data: "json, name=tokenId" }),
+        SpeakeasyMetadata({ data: "json, name=tokenId" }),
         __metadata("design:type", String)
     ], GetTokenMetadataResponse.prototype, "tokenId", void 0);
     __decorate([
-        Metadata({ data: "json, name=totalSupply" }),
+        SpeakeasyMetadata({ data: "json, name=totalSupply" }),
         __metadata("design:type", Number)
     ], GetTokenMetadataResponse.prototype, "totalSupply", void 0);
     return GetTokenMetadataResponse;

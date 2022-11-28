@@ -1,15 +1,16 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum CodeScanningSarifsStatusProcessingStatusEnum {
-    Pending = "pending"
-,    Complete = "complete"
+    Pending = "pending",
+    Complete = "complete"
 }
 
 
 export class CodeScanningSarifsStatus extends SpeakeasyBase {
-  @Metadata({ data: "json, name=analyses_url" })
+  @SpeakeasyMetadata({ data: "json, name=analyses_url" })
   analysesUrl?: string;
 
-  @Metadata({ data: "json, name=processing_status" })
+  @SpeakeasyMetadata({ data: "json, name=processing_status" })
   processingStatus?: CodeScanningSarifsStatusProcessingStatusEnum;
 }

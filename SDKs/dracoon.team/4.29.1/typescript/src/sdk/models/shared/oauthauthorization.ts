@@ -1,9 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum OAuthAuthorizationUserAgentCategoryEnum {
-    Browser = "browser"
-,    Native = "native"
-,    Unknown = "unknown"
+    Browser = "browser",
+    Native = "native",
+    Unknown = "unknown"
 }
 
 
@@ -12,39 +13,39 @@ export enum OAuthAuthorizationUserAgentCategoryEnum {
  * OAuth authorization
 **/
 export class OAuthAuthorization extends SpeakeasyBase {
-  @Metadata({ data: "json, name=clientId" })
+  @SpeakeasyMetadata({ data: "json, name=clientId" })
   clientId: string;
 
-  @Metadata({ data: "json, name=clientName" })
+  @SpeakeasyMetadata({ data: "json, name=clientName" })
   clientName: string;
 
-  @Metadata({ data: "json, name=createdAt" })
+  @SpeakeasyMetadata({ data: "json, name=createdAt" })
   createdAt?: Date;
 
-  @Metadata({ data: "json, name=expiresAt" })
+  @SpeakeasyMetadata({ data: "json, name=expiresAt" })
   expiresAt?: Date;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: number;
 
-  @Metadata({ data: "json, name=isCurrentAuthorization" })
+  @SpeakeasyMetadata({ data: "json, name=isCurrentAuthorization" })
   isCurrentAuthorization?: boolean;
 
-  @Metadata({ data: "json, name=isStandard" })
+  @SpeakeasyMetadata({ data: "json, name=isStandard" })
   isStandard?: boolean;
 
-  @Metadata({ data: "json, name=usedAt" })
+  @SpeakeasyMetadata({ data: "json, name=usedAt" })
   usedAt?: Date;
 
-  @Metadata({ data: "json, name=userAgentCategory" })
+  @SpeakeasyMetadata({ data: "json, name=userAgentCategory" })
   userAgentCategory: OAuthAuthorizationUserAgentCategoryEnum;
 
-  @Metadata({ data: "json, name=userAgentInfo" })
+  @SpeakeasyMetadata({ data: "json, name=userAgentInfo" })
   userAgentInfo?: string;
 
-  @Metadata({ data: "json, name=userAgentOs" })
+  @SpeakeasyMetadata({ data: "json, name=userAgentOs" })
   userAgentOs?: string;
 
-  @Metadata({ data: "json, name=userAgentType" })
+  @SpeakeasyMetadata({ data: "json, name=userAgentType" })
   userAgentType?: string;
 }

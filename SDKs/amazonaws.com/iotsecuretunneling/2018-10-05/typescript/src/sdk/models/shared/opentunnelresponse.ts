@@ -1,16 +1,17 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class OpenTunnelResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=destinationAccessToken" })
+  @SpeakeasyMetadata({ data: "json, name=destinationAccessToken" })
   destinationAccessToken?: string;
 
-  @Metadata({ data: "json, name=sourceAccessToken" })
+  @SpeakeasyMetadata({ data: "json, name=sourceAccessToken" })
   sourceAccessToken?: string;
 
-  @Metadata({ data: "json, name=tunnelArn" })
+  @SpeakeasyMetadata({ data: "json, name=tunnelArn" })
   tunnelArn?: string;
 
-  @Metadata({ data: "json, name=tunnelId" })
+  @SpeakeasyMetadata({ data: "json, name=tunnelId" })
   tunnelId?: string;
 }

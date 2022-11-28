@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 export declare enum WorkloadIdentityPoolStateEnum {
     StateUnspecified = "STATE_UNSPECIFIED",
     Active = "ACTIVE",
@@ -13,4 +13,12 @@ export declare class WorkloadIdentityPool extends SpeakeasyBase {
     displayName?: string;
     name?: string;
     state?: WorkloadIdentityPoolStateEnum;
+}
+/**
+ * Represents a collection of external workload identities. You can define IAM policies to grant these identities access to Google Cloud resources.
+**/
+export declare class WorkloadIdentityPoolInput extends SpeakeasyBase {
+    description?: string;
+    disabled?: boolean;
+    displayName?: string;
 }

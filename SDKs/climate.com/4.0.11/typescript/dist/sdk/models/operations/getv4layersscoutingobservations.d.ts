@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class GetV4LayersScoutingObservationsQueryParams extends SpeakeasyBase {
     occurredAfter?: Date;
@@ -8,15 +8,9 @@ export declare class GetV4LayersScoutingObservationsHeaders extends SpeakeasyBas
     xLimit?: number;
     xNextToken?: string;
 }
-export declare class GetV4LayersScoutingObservationsSecurityOption1 extends SpeakeasyBase {
-    apiKey: shared.SchemeApiKey;
-}
-export declare class GetV4LayersScoutingObservationsSecurityOption2 extends SpeakeasyBase {
-    oauth2AuthorizationCode: shared.SchemeOauth2AuthorizationCode;
-}
 export declare class GetV4LayersScoutingObservationsSecurity extends SpeakeasyBase {
-    option1?: GetV4LayersScoutingObservationsSecurityOption1;
-    option2?: GetV4LayersScoutingObservationsSecurityOption2;
+    apiKey?: shared.SchemeApiKey;
+    oauth2AuthorizationCode?: shared.SchemeOauth2AuthorizationCode;
 }
 export declare class GetV4LayersScoutingObservationsRequest extends SpeakeasyBase {
     queryParams: GetV4LayersScoutingObservationsQueryParams;

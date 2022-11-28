@@ -10,7 +10,7 @@ type VirtualizationClusterTypesUpdatePathParams struct {
 
 type VirtualizationClusterTypesUpdateRequest struct {
 	PathParams VirtualizationClusterTypesUpdatePathParams
-	Request    shared.ClusterType `request:"mediaType=application/json"`
+	Request    shared.ClusterTypeInput `request:"mediaType=application/json"`
 }
 
 type VirtualizationClusterTypesUpdateResponse struct {

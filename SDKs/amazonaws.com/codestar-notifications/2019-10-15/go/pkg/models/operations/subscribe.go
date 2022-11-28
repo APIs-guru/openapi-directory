@@ -14,6 +14,8 @@ type SubscribeHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// SubscribeRequestBodyTarget
+// Information about the SNS topics associated with a notification rule.
 type SubscribeRequestBodyTarget struct {
 	TargetAddress *string `json:"TargetAddress,omitempty"`
 	TargetType    *string `json:"TargetType,omitempty"`

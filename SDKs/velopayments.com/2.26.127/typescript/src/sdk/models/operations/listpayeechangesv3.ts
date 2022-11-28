@@ -1,35 +1,36 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class ListPayeeChangesV3QueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=page" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page" })
   page?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=pageSize" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=pageSize" })
   pageSize?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=payorId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=payorId" })
   payorId: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=updatedSince" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=updatedSince" })
   updatedSince: Date;
 }
 
 
 export class ListPayeeChangesV3Request extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: ListPayeeChangesV3QueryParams;
 }
 
 
 export class ListPayeeChangesV3Response extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   payeeDeltaResponse?: shared.PayeeDeltaResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

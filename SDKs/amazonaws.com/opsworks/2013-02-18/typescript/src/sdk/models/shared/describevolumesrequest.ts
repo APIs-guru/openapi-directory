@@ -1,16 +1,17 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DescribeVolumesRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=InstanceId" })
+  @SpeakeasyMetadata({ data: "json, name=InstanceId" })
   instanceId?: string;
 
-  @Metadata({ data: "json, name=RaidArrayId" })
+  @SpeakeasyMetadata({ data: "json, name=RaidArrayId" })
   raidArrayId?: string;
 
-  @Metadata({ data: "json, name=StackId" })
+  @SpeakeasyMetadata({ data: "json, name=StackId" })
   stackId?: string;
 
-  @Metadata({ data: "json, name=VolumeIds" })
+  @SpeakeasyMetadata({ data: "json, name=VolumeIds" })
   volumeIds?: string[];
 }

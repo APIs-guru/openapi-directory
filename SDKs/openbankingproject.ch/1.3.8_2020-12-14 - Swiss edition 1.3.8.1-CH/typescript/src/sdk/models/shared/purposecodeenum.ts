@@ -1,6 +1,7 @@
 
 
+
 export enum PurposeCodeEnum {
-    Sala = "SALA"
-,    Pens = "PENS"
+    Sala = "SALA",
+    Pens = "PENS"
 }

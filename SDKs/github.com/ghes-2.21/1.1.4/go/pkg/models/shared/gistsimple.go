@@ -44,6 +44,8 @@ type GistSimpleGistSimpleUser struct {
 	URL               string  `json:"url"`
 }
 
+// GistSimpleGist
+// Gist
 type GistSimpleGist struct {
 	Comments    int64                          `json:"comments"`
 	CommentsURL string                         `json:"comments_url"`
@@ -67,6 +69,8 @@ type GistSimpleGist struct {
 	User        GistSimpleGistSimpleUser       `json:"user"`
 }
 
+// GistSimple
+// Gist Simple
 type GistSimple struct {
 	Comments    *int64                     `json:"comments,omitempty"`
 	CommentsURL *string                    `json:"comments_url,omitempty"`

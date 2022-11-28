@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class AuthenticatorConfigRepresentation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=alias" })
+  @SpeakeasyMetadata({ data: "json, name=alias" })
   alias?: string;
 
-  @Metadata({ data: "json, name=config" })
+  @SpeakeasyMetadata({ data: "json, name=config" })
   config?: Map<string, any>;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 }

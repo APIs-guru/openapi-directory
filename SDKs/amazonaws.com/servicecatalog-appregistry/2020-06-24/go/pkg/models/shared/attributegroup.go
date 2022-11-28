@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// AttributeGroup
+// Represents a Amazon Web Services Service Catalog AppRegistry attribute group that is rich metadata which describes an application and its components.
 type AttributeGroup struct {
 	Arn            *string           `json:"arn,omitempty"`
 	CreationTime   *time.Time        `json:"creationTime,omitempty"`

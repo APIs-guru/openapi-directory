@@ -1,47 +1,48 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class UpdateLeaveApplicationPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=LeaveApplicationID" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=LeaveApplicationID" })
   leaveApplicationId: string;
 }
 
 
 export class UpdateLeaveApplicationHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=Xero-Tenant-Id" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Xero-Tenant-Id" })
   xeroTenantId: string;
 }
 
 
 export class UpdateLeaveApplicationSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   oAuth2: shared.SchemeOAuth2;
 }
 
 
 export class UpdateLeaveApplicationRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: UpdateLeaveApplicationPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: UpdateLeaveApplicationHeaders;
 
-  @Metadata({ data: "request, media_type=application/json", elemType: shared.LeaveApplication })
-  request: shared.LeaveApplication[];
+  @SpeakeasyMetadata({ data: "request, media_type=application/json", elemType: shared.LeaveApplicationInput })
+  request: shared.LeaveApplicationInput[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: UpdateLeaveApplicationSecurity;
 }
 
 
 export class UpdateLeaveApplicationResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   leaveApplications?: shared.LeaveApplications;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

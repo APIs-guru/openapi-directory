@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { JobFlowDetail } from "./jobflowdetail";
+
 
 
 // DescribeJobFlowsOutput
@@ -8,6 +8,6 @@ import { JobFlowDetail } from "./jobflowdetail";
  *  The output for the <a>DescribeJobFlows</a> operation. 
 **/
 export class DescribeJobFlowsOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=JobFlows", elemType: shared.JobFlowDetail })
+  @SpeakeasyMetadata({ data: "json, name=JobFlows", elemType: JobFlowDetail })
   jobFlows?: JobFlowDetail[];
 }

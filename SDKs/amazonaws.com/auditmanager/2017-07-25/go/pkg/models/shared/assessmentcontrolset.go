@@ -1,5 +1,8 @@
 package shared
 
+// AssessmentControlSet
+//
+//	Represents a set of controls in an Audit Manager assessment.
 type AssessmentControlSet struct {
 	Controls            []AssessmentControl   `json:"controls,omitempty"`
 	Delegations         []Delegation          `json:"delegations,omitempty"`

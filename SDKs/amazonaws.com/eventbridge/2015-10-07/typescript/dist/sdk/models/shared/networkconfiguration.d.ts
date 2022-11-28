@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { AwsVpcConfiguration } from "./awsvpcconfiguration";
 /**
  * This structure specifies the network configuration for an ECS task.

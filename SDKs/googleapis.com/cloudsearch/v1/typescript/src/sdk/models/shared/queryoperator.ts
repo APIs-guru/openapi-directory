@@ -1,15 +1,16 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum QueryOperatorTypeEnum {
-    Unknown = "UNKNOWN"
-,    Integer = "INTEGER"
-,    Double = "DOUBLE"
-,    Timestamp = "TIMESTAMP"
-,    Boolean = "BOOLEAN"
-,    Enum = "ENUM"
-,    Date = "DATE"
-,    Text = "TEXT"
-,    Html = "HTML"
+    Unknown = "UNKNOWN",
+    Integer = "INTEGER",
+    Double = "DOUBLE",
+    Timestamp = "TIMESTAMP",
+    Boolean = "BOOLEAN",
+    Enum = "ENUM",
+    Date = "DATE",
+    Text = "TEXT",
+    Html = "HTML"
 }
 
 
@@ -18,39 +19,39 @@ export enum QueryOperatorTypeEnum {
  * The definition of a operator that can be used in a Search/Suggest request.
 **/
 export class QueryOperator extends SpeakeasyBase {
-  @Metadata({ data: "json, name=displayName" })
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
   displayName?: string;
 
-  @Metadata({ data: "json, name=enumValues" })
+  @SpeakeasyMetadata({ data: "json, name=enumValues" })
   enumValues?: string[];
 
-  @Metadata({ data: "json, name=greaterThanOperatorName" })
+  @SpeakeasyMetadata({ data: "json, name=greaterThanOperatorName" })
   greaterThanOperatorName?: string;
 
-  @Metadata({ data: "json, name=isFacetable" })
+  @SpeakeasyMetadata({ data: "json, name=isFacetable" })
   isFacetable?: boolean;
 
-  @Metadata({ data: "json, name=isRepeatable" })
+  @SpeakeasyMetadata({ data: "json, name=isRepeatable" })
   isRepeatable?: boolean;
 
-  @Metadata({ data: "json, name=isReturnable" })
+  @SpeakeasyMetadata({ data: "json, name=isReturnable" })
   isReturnable?: boolean;
 
-  @Metadata({ data: "json, name=isSortable" })
+  @SpeakeasyMetadata({ data: "json, name=isSortable" })
   isSortable?: boolean;
 
-  @Metadata({ data: "json, name=isSuggestable" })
+  @SpeakeasyMetadata({ data: "json, name=isSuggestable" })
   isSuggestable?: boolean;
 
-  @Metadata({ data: "json, name=lessThanOperatorName" })
+  @SpeakeasyMetadata({ data: "json, name=lessThanOperatorName" })
   lessThanOperatorName?: string;
 
-  @Metadata({ data: "json, name=objectType" })
+  @SpeakeasyMetadata({ data: "json, name=objectType" })
   objectType?: string;
 
-  @Metadata({ data: "json, name=operatorName" })
+  @SpeakeasyMetadata({ data: "json, name=operatorName" })
   operatorName?: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: QueryOperatorTypeEnum;
 }

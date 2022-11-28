@@ -1,43 +1,44 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class Layersummary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=annotationCount" })
+  @SpeakeasyMetadata({ data: "json, name=annotationCount" })
   annotationCount?: number;
 
-  @Metadata({ data: "json, name=annotationTypes" })
+  @SpeakeasyMetadata({ data: "json, name=annotationTypes" })
   annotationTypes?: string[];
 
-  @Metadata({ data: "json, name=annotationsDataLink" })
+  @SpeakeasyMetadata({ data: "json, name=annotationsDataLink" })
   annotationsDataLink?: string;
 
-  @Metadata({ data: "json, name=annotationsLink" })
+  @SpeakeasyMetadata({ data: "json, name=annotationsLink" })
   annotationsLink?: string;
 
-  @Metadata({ data: "json, name=contentVersion" })
+  @SpeakeasyMetadata({ data: "json, name=contentVersion" })
   contentVersion?: string;
 
-  @Metadata({ data: "json, name=dataCount" })
+  @SpeakeasyMetadata({ data: "json, name=dataCount" })
   dataCount?: number;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=layerId" })
+  @SpeakeasyMetadata({ data: "json, name=layerId" })
   layerId?: string;
 
-  @Metadata({ data: "json, name=selfLink" })
+  @SpeakeasyMetadata({ data: "json, name=selfLink" })
   selfLink?: string;
 
-  @Metadata({ data: "json, name=updated" })
+  @SpeakeasyMetadata({ data: "json, name=updated" })
   updated?: string;
 
-  @Metadata({ data: "json, name=volumeAnnotationsVersion" })
+  @SpeakeasyMetadata({ data: "json, name=volumeAnnotationsVersion" })
   volumeAnnotationsVersion?: string;
 
-  @Metadata({ data: "json, name=volumeId" })
+  @SpeakeasyMetadata({ data: "json, name=volumeId" })
   volumeId?: string;
 }

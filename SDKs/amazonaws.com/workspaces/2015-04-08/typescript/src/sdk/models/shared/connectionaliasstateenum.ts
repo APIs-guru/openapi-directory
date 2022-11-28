@@ -1,7 +1,8 @@
 
 
+
 export enum ConnectionAliasStateEnum {
-    Creating = "CREATING"
-,    Created = "CREATED"
-,    Deleting = "DELETING"
+    Creating = "CREATING",
+    Created = "CREATED",
+    Deleting = "DELETING"
 }

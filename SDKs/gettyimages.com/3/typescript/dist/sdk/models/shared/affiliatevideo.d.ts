@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { AffiliateVideoUrls } from "./affiliatevideourls";
 export declare class AffiliateVideo extends SpeakeasyBase {
     caption?: string;

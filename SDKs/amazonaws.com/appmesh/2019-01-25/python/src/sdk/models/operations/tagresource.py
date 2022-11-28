@@ -1,12 +1,16 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,List,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
 @dataclass
 class TagResourceQueryParams:
-    resource_arn: str = field(default=None, metadata={'query_param': { 'field_name': 'resourceArn', 'style': 'form', 'explode': True }})
+    resource_arn: str = field(metadata={'query_param': { 'field_name': 'resourceArn', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -23,25 +27,25 @@ class TagResourceHeaders:
 @dataclass_json
 @dataclass
 class TagResourceRequestBody:
-    tags: List[shared.TagRef] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tags' }})
+    tags: List[shared.TagRef] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('tags') }})
     
 
 @dataclass
 class TagResourceRequest:
-    query_params: TagResourceQueryParams = field(default=None)
-    headers: TagResourceHeaders = field(default=None)
-    request: TagResourceRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: TagResourceHeaders = field()
+    query_params: TagResourceQueryParams = field()
+    request: TagResourceRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class TagResourceResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     forbidden_exception: Optional[Any] = field(default=None)
     internal_server_error_exception: Optional[Any] = field(default=None)
     not_found_exception: Optional[Any] = field(default=None)
     service_unavailable_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     tag_resource_output: Optional[dict[str, Any]] = field(default=None)
     too_many_requests_exception: Optional[Any] = field(default=None)
     too_many_tags_exception: Optional[Any] = field(default=None)

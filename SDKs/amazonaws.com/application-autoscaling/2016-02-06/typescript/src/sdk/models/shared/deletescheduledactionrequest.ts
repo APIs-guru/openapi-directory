@@ -1,18 +1,19 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ScalableDimensionEnum } from "./scalabledimensionenum";
 import { ServiceNamespaceEnum } from "./servicenamespaceenum";
 
 
+
 export class DeleteScheduledActionRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ResourceId" })
+  @SpeakeasyMetadata({ data: "json, name=ResourceId" })
   resourceId: string;
 
-  @Metadata({ data: "json, name=ScalableDimension" })
+  @SpeakeasyMetadata({ data: "json, name=ScalableDimension" })
   scalableDimension: ScalableDimensionEnum;
 
-  @Metadata({ data: "json, name=ScheduledActionName" })
+  @SpeakeasyMetadata({ data: "json, name=ScheduledActionName" })
   scheduledActionName: string;
 
-  @Metadata({ data: "json, name=ServiceNamespace" })
+  @SpeakeasyMetadata({ data: "json, name=ServiceNamespace" })
   serviceNamespace: ServiceNamespaceEnum;
 }

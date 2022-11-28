@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var OperationsFlightstatusByFlightNumberAndDateGetPathParams = /** @class */ (function (_super) {
     __extends(OperationsFlightstatusByFlightNumberAndDateGetPathParams, _super);
@@ -30,11 +30,11 @@ var OperationsFlightstatusByFlightNumberAndDateGetPathParams = /** @class */ (fu
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=date" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=date" }),
         __metadata("design:type", String)
     ], OperationsFlightstatusByFlightNumberAndDateGetPathParams.prototype, "date", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=flightNumber" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=flightNumber" }),
         __metadata("design:type", String)
     ], OperationsFlightstatusByFlightNumberAndDateGetPathParams.prototype, "flightNumber", void 0);
     return OperationsFlightstatusByFlightNumberAndDateGetPathParams;
@@ -46,11 +46,11 @@ var OperationsFlightstatusByFlightNumberAndDateGetQueryParams = /** @class */ (f
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=limit" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=limit" }),
         __metadata("design:type", String)
     ], OperationsFlightstatusByFlightNumberAndDateGetQueryParams.prototype, "limit", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=offset" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=offset" }),
         __metadata("design:type", String)
     ], OperationsFlightstatusByFlightNumberAndDateGetQueryParams.prototype, "offset", void 0);
     return OperationsFlightstatusByFlightNumberAndDateGetQueryParams;
@@ -62,7 +62,7 @@ var OperationsFlightstatusByFlightNumberAndDateGetHeaders = /** @class */ (funct
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=Accept" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Accept" }),
         __metadata("design:type", String)
     ], OperationsFlightstatusByFlightNumberAndDateGetHeaders.prototype, "accept", void 0);
     return OperationsFlightstatusByFlightNumberAndDateGetHeaders;
@@ -74,7 +74,7 @@ var OperationsFlightstatusByFlightNumberAndDateGetSecurity = /** @class */ (func
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeAuth)
     ], OperationsFlightstatusByFlightNumberAndDateGetSecurity.prototype, "auth", void 0);
     return OperationsFlightstatusByFlightNumberAndDateGetSecurity;
@@ -86,19 +86,19 @@ var OperationsFlightstatusByFlightNumberAndDateGetRequest = /** @class */ (funct
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", OperationsFlightstatusByFlightNumberAndDateGetPathParams)
     ], OperationsFlightstatusByFlightNumberAndDateGetRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", OperationsFlightstatusByFlightNumberAndDateGetQueryParams)
     ], OperationsFlightstatusByFlightNumberAndDateGetRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", OperationsFlightstatusByFlightNumberAndDateGetHeaders)
     ], OperationsFlightstatusByFlightNumberAndDateGetRequest.prototype, "headers", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", OperationsFlightstatusByFlightNumberAndDateGetSecurity)
     ], OperationsFlightstatusByFlightNumberAndDateGetRequest.prototype, "security", void 0);
     return OperationsFlightstatusByFlightNumberAndDateGetRequest;
@@ -110,15 +110,15 @@ var OperationsFlightstatusByFlightNumberAndDateGetResponse = /** @class */ (func
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], OperationsFlightstatusByFlightNumberAndDateGetResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Map)
     ], OperationsFlightstatusByFlightNumberAndDateGetResponse.prototype, "operationsFlightstatusByFlightNumberAndDateGet200ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], OperationsFlightstatusByFlightNumberAndDateGetResponse.prototype, "statusCode", void 0);
     return OperationsFlightstatusByFlightNumberAndDateGetResponse;

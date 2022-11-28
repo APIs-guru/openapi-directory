@@ -5,17 +5,17 @@ from sdk.models import shared
 
 @dataclass
 class GetSetupV1CompaniesDomainsIDPathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetSetupV1CompaniesDomainsIDRequest:
-    path_params: GetSetupV1CompaniesDomainsIDPathParams = field(default=None)
+    path_params: GetSetupV1CompaniesDomainsIDPathParams = field()
     
 
 @dataclass
 class GetSetupV1CompaniesDomainsIDResponse:
+    content_type: str = field()
+    status_code: int = field()
     company_domain_view_model: Optional[shared.CompanyDomainViewModel] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

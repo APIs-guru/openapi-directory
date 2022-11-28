@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class GetFeatureFlagPathParams:
-    feature: str = field(default=None, metadata={'path_param': { 'field_name': 'feature', 'style': 'simple', 'explode': False }})
+    feature: str = field(metadata={'path_param': { 'field_name': 'feature', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -15,14 +15,14 @@ class GetFeatureFlagQueryParams:
 
 @dataclass
 class GetFeatureFlagRequest:
-    path_params: GetFeatureFlagPathParams = field(default=None)
-    query_params: GetFeatureFlagQueryParams = field(default=None)
+    path_params: GetFeatureFlagPathParams = field()
+    query_params: GetFeatureFlagQueryParams = field()
     
 
 @dataclass
 class GetFeatureFlagResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     itv_feature_flag: Optional[shared.ItvFeatureFlag] = field(default=None)
     service_error: Optional[shared.ServiceError] = field(default=None)
-    status_code: int = field(default=None)
     

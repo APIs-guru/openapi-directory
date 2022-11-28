@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var ServiceconsumermanagementServicesTenancyUnitsDeleteProjectPathParams = /** @class */ (function (_super) {
     __extends(ServiceconsumermanagementServicesTenancyUnitsDeleteProjectPathParams, _super);
@@ -30,7 +30,7 @@ var ServiceconsumermanagementServicesTenancyUnitsDeleteProjectPathParams = /** @
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=name" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=name" }),
         __metadata("design:type", String)
     ], ServiceconsumermanagementServicesTenancyUnitsDeleteProjectPathParams.prototype, "name", void 0);
     return ServiceconsumermanagementServicesTenancyUnitsDeleteProjectPathParams;
@@ -42,47 +42,47 @@ var ServiceconsumermanagementServicesTenancyUnitsDeleteProjectQueryParams = /** 
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=$.xgafv" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=$.xgafv" }),
         __metadata("design:type", String)
     ], ServiceconsumermanagementServicesTenancyUnitsDeleteProjectQueryParams.prototype, "dollarXgafv", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=access_token" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=access_token" }),
         __metadata("design:type", String)
     ], ServiceconsumermanagementServicesTenancyUnitsDeleteProjectQueryParams.prototype, "accessToken", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=alt" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=alt" }),
         __metadata("design:type", String)
     ], ServiceconsumermanagementServicesTenancyUnitsDeleteProjectQueryParams.prototype, "alt", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=callback" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=callback" }),
         __metadata("design:type", String)
     ], ServiceconsumermanagementServicesTenancyUnitsDeleteProjectQueryParams.prototype, "callback", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=fields" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=fields" }),
         __metadata("design:type", String)
     ], ServiceconsumermanagementServicesTenancyUnitsDeleteProjectQueryParams.prototype, "fields", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=key" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=key" }),
         __metadata("design:type", String)
     ], ServiceconsumermanagementServicesTenancyUnitsDeleteProjectQueryParams.prototype, "key", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=oauth_token" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=oauth_token" }),
         __metadata("design:type", String)
     ], ServiceconsumermanagementServicesTenancyUnitsDeleteProjectQueryParams.prototype, "oauthToken", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=prettyPrint" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=prettyPrint" }),
         __metadata("design:type", Boolean)
     ], ServiceconsumermanagementServicesTenancyUnitsDeleteProjectQueryParams.prototype, "prettyPrint", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=quotaUser" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=quotaUser" }),
         __metadata("design:type", String)
     ], ServiceconsumermanagementServicesTenancyUnitsDeleteProjectQueryParams.prototype, "quotaUser", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=uploadType" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=uploadType" }),
         __metadata("design:type", String)
     ], ServiceconsumermanagementServicesTenancyUnitsDeleteProjectQueryParams.prototype, "uploadType", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=upload_protocol" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=upload_protocol" }),
         __metadata("design:type", String)
     ], ServiceconsumermanagementServicesTenancyUnitsDeleteProjectQueryParams.prototype, "uploadProtocol", void 0);
     return ServiceconsumermanagementServicesTenancyUnitsDeleteProjectQueryParams;
@@ -94,11 +94,11 @@ var ServiceconsumermanagementServicesTenancyUnitsDeleteProjectSecurity = /** @cl
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2)
     ], ServiceconsumermanagementServicesTenancyUnitsDeleteProjectSecurity.prototype, "oauth2", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2c)
     ], ServiceconsumermanagementServicesTenancyUnitsDeleteProjectSecurity.prototype, "oauth2c", void 0);
     return ServiceconsumermanagementServicesTenancyUnitsDeleteProjectSecurity;
@@ -110,19 +110,19 @@ var ServiceconsumermanagementServicesTenancyUnitsDeleteProjectRequest = /** @cla
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ServiceconsumermanagementServicesTenancyUnitsDeleteProjectPathParams)
     ], ServiceconsumermanagementServicesTenancyUnitsDeleteProjectRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ServiceconsumermanagementServicesTenancyUnitsDeleteProjectQueryParams)
     ], ServiceconsumermanagementServicesTenancyUnitsDeleteProjectRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", shared.DeleteTenantProjectRequest)
     ], ServiceconsumermanagementServicesTenancyUnitsDeleteProjectRequest.prototype, "request", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ServiceconsumermanagementServicesTenancyUnitsDeleteProjectSecurity)
     ], ServiceconsumermanagementServicesTenancyUnitsDeleteProjectRequest.prototype, "security", void 0);
     return ServiceconsumermanagementServicesTenancyUnitsDeleteProjectRequest;
@@ -134,15 +134,15 @@ var ServiceconsumermanagementServicesTenancyUnitsDeleteProjectResponse = /** @cl
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], ServiceconsumermanagementServicesTenancyUnitsDeleteProjectResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.Operation)
     ], ServiceconsumermanagementServicesTenancyUnitsDeleteProjectResponse.prototype, "operation", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], ServiceconsumermanagementServicesTenancyUnitsDeleteProjectResponse.prototype, "statusCode", void 0);
     return ServiceconsumermanagementServicesTenancyUnitsDeleteProjectResponse;

@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 class LineRouteSequenceDirectionEnum(str, Enum):
@@ -10,8 +11,8 @@ class LineRouteSequenceDirectionEnum(str, Enum):
 
 @dataclass
 class LineRouteSequencePathParams:
-    direction: LineRouteSequenceDirectionEnum = field(default=None, metadata={'path_param': { 'field_name': 'direction', 'style': 'simple', 'explode': False }})
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    direction: LineRouteSequenceDirectionEnum = field(metadata={'path_param': { 'field_name': 'direction', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 class LineRouteSequenceServiceTypesEnum(str, Enum):
     REGULAR = "Regular"
@@ -26,14 +27,14 @@ class LineRouteSequenceQueryParams:
 
 @dataclass
 class LineRouteSequenceRequest:
-    path_params: LineRouteSequencePathParams = field(default=None)
-    query_params: LineRouteSequenceQueryParams = field(default=None)
+    path_params: LineRouteSequencePathParams = field()
+    query_params: LineRouteSequenceQueryParams = field()
     
 
 @dataclass
 class LineRouteSequenceResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     tfl_api_presentation_entities_route_sequence: Optional[shared.TflAPIPresentationEntitiesRouteSequence] = field(default=None)
     

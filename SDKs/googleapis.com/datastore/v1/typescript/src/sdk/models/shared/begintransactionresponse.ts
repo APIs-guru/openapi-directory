@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // BeginTransactionResponse
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The response for Datastore.BeginTransaction.
 **/
 export class BeginTransactionResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=transaction" })
+  @SpeakeasyMetadata({ data: "json, name=transaction" })
   transaction?: string;
 }

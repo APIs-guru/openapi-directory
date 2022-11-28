@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DeviceIpBlock } from "./deviceipblock";
+
 
 
 // DeviceIpBlockCatalog
@@ -8,6 +8,6 @@ import { DeviceIpBlock } from "./deviceipblock";
  * List of IP blocks used by the Firebase Test Lab
 **/
 export class DeviceIpBlockCatalog extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ipBlocks", elemType: shared.DeviceIpBlock })
+  @SpeakeasyMetadata({ data: "json, name=ipBlocks", elemType: DeviceIpBlock })
   ipBlocks?: DeviceIpBlock[];
 }

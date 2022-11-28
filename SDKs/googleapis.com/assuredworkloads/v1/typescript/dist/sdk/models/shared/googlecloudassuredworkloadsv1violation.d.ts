@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudAssuredworkloadsV1ViolationRemediation } from "./googlecloudassuredworkloadsv1violationremediation";
 export declare enum GoogleCloudAssuredworkloadsV1ViolationStateEnum {
     StateUnspecified = "STATE_UNSPECIFIED",

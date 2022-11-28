@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ImageButton } from "./imagebutton";
 import { TextButton } from "./textbutton";
+
 
 
 // Button
@@ -8,9 +9,9 @@ import { TextButton } from "./textbutton";
  * A button. Can be a text button or an image button.
 **/
 export class Button extends SpeakeasyBase {
-  @Metadata({ data: "json, name=imageButton" })
+  @SpeakeasyMetadata({ data: "json, name=imageButton" })
   imageButton?: ImageButton;
 
-  @Metadata({ data: "json, name=textButton" })
+  @SpeakeasyMetadata({ data: "json, name=textButton" })
   textButton?: TextButton;
 }

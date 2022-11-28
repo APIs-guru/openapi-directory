@@ -16,6 +16,8 @@ const (
 	FieldFilterOpEnumNotIn               FieldFilterOpEnum = "NOT_IN"
 )
 
+// FieldFilter
+// A filter on a specific field.
 type FieldFilter struct {
 	Field *FieldReference    `json:"field,omitempty"`
 	Op    *FieldFilterOpEnum `json:"op,omitempty"`

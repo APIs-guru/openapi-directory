@@ -1,9 +1,6 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 export declare class PutBenefitsDocumentUploadHeaders extends SpeakeasyBase {
     contentMd5?: string;
-}
-export declare class PutBenefitsDocumentUploadRequest extends SpeakeasyBase {
-    headers: PutBenefitsDocumentUploadHeaders;
 }
 export declare class PutBenefitsDocumentUpload401ApplicationJson extends SpeakeasyBase {
     message?: string;
@@ -19,6 +16,9 @@ export declare class PutBenefitsDocumentUpload500ApplicationJson extends Speakea
     detail?: string;
     status?: string;
     title?: string;
+}
+export declare class PutBenefitsDocumentUploadRequest extends SpeakeasyBase {
+    headers: PutBenefitsDocumentUploadHeaders;
 }
 export declare class PutBenefitsDocumentUploadResponse extends SpeakeasyBase {
     body?: Uint8Array;

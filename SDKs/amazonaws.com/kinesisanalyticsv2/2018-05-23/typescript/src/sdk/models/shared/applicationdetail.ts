@@ -1,5 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ApplicationConfigurationDescription } from "./applicationconfigurationdescription";
 import { ApplicationMaintenanceConfigurationDescription } from "./applicationmaintenanceconfigurationdescription";
 import { ApplicationModeEnum } from "./applicationmodeenum";
@@ -8,59 +7,60 @@ import { CloudWatchLoggingOptionDescription } from "./cloudwatchloggingoptiondes
 import { RuntimeEnvironmentEnum } from "./runtimeenvironmentenum";
 
 
+
 // ApplicationDetail
 /** 
  * Describes the application, including the application Amazon Resource Name (ARN), status, latest version, and input and output configurations.
 **/
 export class ApplicationDetail extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ApplicationARN" })
+  @SpeakeasyMetadata({ data: "json, name=ApplicationARN" })
   applicationArn: string;
 
-  @Metadata({ data: "json, name=ApplicationConfigurationDescription" })
+  @SpeakeasyMetadata({ data: "json, name=ApplicationConfigurationDescription" })
   applicationConfigurationDescription?: ApplicationConfigurationDescription;
 
-  @Metadata({ data: "json, name=ApplicationDescription" })
+  @SpeakeasyMetadata({ data: "json, name=ApplicationDescription" })
   applicationDescription?: string;
 
-  @Metadata({ data: "json, name=ApplicationMaintenanceConfigurationDescription" })
+  @SpeakeasyMetadata({ data: "json, name=ApplicationMaintenanceConfigurationDescription" })
   applicationMaintenanceConfigurationDescription?: ApplicationMaintenanceConfigurationDescription;
 
-  @Metadata({ data: "json, name=ApplicationMode" })
+  @SpeakeasyMetadata({ data: "json, name=ApplicationMode" })
   applicationMode?: ApplicationModeEnum;
 
-  @Metadata({ data: "json, name=ApplicationName" })
+  @SpeakeasyMetadata({ data: "json, name=ApplicationName" })
   applicationName: string;
 
-  @Metadata({ data: "json, name=ApplicationStatus" })
+  @SpeakeasyMetadata({ data: "json, name=ApplicationStatus" })
   applicationStatus: ApplicationStatusEnum;
 
-  @Metadata({ data: "json, name=ApplicationVersionId" })
+  @SpeakeasyMetadata({ data: "json, name=ApplicationVersionId" })
   applicationVersionId: number;
 
-  @Metadata({ data: "json, name=ApplicationVersionRolledBackFrom" })
+  @SpeakeasyMetadata({ data: "json, name=ApplicationVersionRolledBackFrom" })
   applicationVersionRolledBackFrom?: number;
 
-  @Metadata({ data: "json, name=ApplicationVersionRolledBackTo" })
+  @SpeakeasyMetadata({ data: "json, name=ApplicationVersionRolledBackTo" })
   applicationVersionRolledBackTo?: number;
 
-  @Metadata({ data: "json, name=ApplicationVersionUpdatedFrom" })
+  @SpeakeasyMetadata({ data: "json, name=ApplicationVersionUpdatedFrom" })
   applicationVersionUpdatedFrom?: number;
 
-  @Metadata({ data: "json, name=CloudWatchLoggingOptionDescriptions", elemType: shared.CloudWatchLoggingOptionDescription })
+  @SpeakeasyMetadata({ data: "json, name=CloudWatchLoggingOptionDescriptions", elemType: CloudWatchLoggingOptionDescription })
   cloudWatchLoggingOptionDescriptions?: CloudWatchLoggingOptionDescription[];
 
-  @Metadata({ data: "json, name=ConditionalToken" })
+  @SpeakeasyMetadata({ data: "json, name=ConditionalToken" })
   conditionalToken?: string;
 
-  @Metadata({ data: "json, name=CreateTimestamp" })
+  @SpeakeasyMetadata({ data: "json, name=CreateTimestamp" })
   createTimestamp?: Date;
 
-  @Metadata({ data: "json, name=LastUpdateTimestamp" })
+  @SpeakeasyMetadata({ data: "json, name=LastUpdateTimestamp" })
   lastUpdateTimestamp?: Date;
 
-  @Metadata({ data: "json, name=RuntimeEnvironment" })
+  @SpeakeasyMetadata({ data: "json, name=RuntimeEnvironment" })
   runtimeEnvironment: RuntimeEnvironmentEnum;
 
-  @Metadata({ data: "json, name=ServiceExecutionRole" })
+  @SpeakeasyMetadata({ data: "json, name=ServiceExecutionRole" })
   serviceExecutionRole?: string;
 }

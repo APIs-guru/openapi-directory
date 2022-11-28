@@ -1,65 +1,66 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetNextUpQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=enableImageTypes" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=enableImageTypes" })
   enableImageTypes?: shared.ImageTypeEnum[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=enableImges" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=enableImges" })
   enableImges?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=enableTotalRecordCount" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=enableTotalRecordCount" })
   enableTotalRecordCount?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=enableUserData" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=enableUserData" })
   enableUserData?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=fields" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=fields" })
   fields?: shared.ItemFieldsEnum[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=imageTypeLimit" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=imageTypeLimit" })
   imageTypeLimit?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=limit" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=limit" })
   limit?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=parentId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=parentId" })
   parentId?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=seriesId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=seriesId" })
   seriesId?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=startIndex" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=startIndex" })
   startIndex?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=userId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=userId" })
   userId?: string;
 }
 
 
 export class GetNextUpSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
   customAuthentication: shared.SchemeCustomAuthentication;
 }
 
 
 export class GetNextUpRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetNextUpQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: GetNextUpSecurity;
 }
 
 
 export class GetNextUpResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   baseItemDtoQueryResult?: shared.BaseItemDtoQueryResult;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

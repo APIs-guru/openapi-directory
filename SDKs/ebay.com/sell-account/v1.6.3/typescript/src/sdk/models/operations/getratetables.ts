@@ -1,35 +1,36 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetRateTablesQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=country_code" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=country_code" })
   countryCode?: string;
 }
 
 
 export class GetRateTablesSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   apiAuth: shared.SchemeApiAuth;
 }
 
 
 export class GetRateTablesRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetRateTablesQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: GetRateTablesSecurity;
 }
 
 
 export class GetRateTablesResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   rateTableResponse?: shared.RateTableResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

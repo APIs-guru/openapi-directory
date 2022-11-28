@@ -1,4 +1,18 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
+
+
+// InfoInput
+/** 
+ * The general information for a form.
+**/
+export class InfoInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=description" })
+  description?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=title" })
+  title?: string;
+}
 
 
 // Info
@@ -6,12 +20,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The general information for a form.
 **/
 export class Info extends SpeakeasyBase {
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=documentTitle" })
+  @SpeakeasyMetadata({ data: "json, name=documentTitle" })
   documentTitle?: string;
 
-  @Metadata({ data: "json, name=title" })
+  @SpeakeasyMetadata({ data: "json, name=title" })
   title?: string;
 }

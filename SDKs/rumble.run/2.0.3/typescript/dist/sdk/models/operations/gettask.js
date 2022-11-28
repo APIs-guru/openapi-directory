@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetTaskPathParams = /** @class */ (function (_super) {
     __extends(GetTaskPathParams, _super);
@@ -30,7 +30,7 @@ var GetTaskPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=task_id" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=task_id" }),
         __metadata("design:type", String)
     ], GetTaskPathParams.prototype, "taskId", void 0);
     return GetTaskPathParams;
@@ -42,7 +42,7 @@ var GetTaskSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=http;subtype=bearer" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" }),
         __metadata("design:type", shared.SchemeBearerAuth)
     ], GetTaskSecurity.prototype, "bearerAuth", void 0);
     return GetTaskSecurity;
@@ -54,11 +54,11 @@ var GetTaskRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetTaskPathParams)
     ], GetTaskRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetTaskSecurity)
     ], GetTaskRequest.prototype, "security", void 0);
     return GetTaskRequest;
@@ -70,15 +70,15 @@ var GetTaskResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetTaskResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetTaskResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.Task)
     ], GetTaskResponse.prototype, "task", void 0);
     return GetTaskResponse;

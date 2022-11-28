@@ -1,17 +1,18 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum GoogleCloudRecaptchaenterpriseV1WebKeySettingsChallengeSecurityPreferenceEnum {
-    ChallengeSecurityPreferenceUnspecified = "CHALLENGE_SECURITY_PREFERENCE_UNSPECIFIED"
-,    Usability = "USABILITY"
-,    Balance = "BALANCE"
-,    Security = "SECURITY"
+    ChallengeSecurityPreferenceUnspecified = "CHALLENGE_SECURITY_PREFERENCE_UNSPECIFIED",
+    Usability = "USABILITY",
+    Balance = "BALANCE",
+    Security = "SECURITY"
 }
 
 export enum GoogleCloudRecaptchaenterpriseV1WebKeySettingsIntegrationTypeEnum {
-    IntegrationTypeUnspecified = "INTEGRATION_TYPE_UNSPECIFIED"
-,    Score = "SCORE"
-,    Checkbox = "CHECKBOX"
-,    Invisible = "INVISIBLE"
+    IntegrationTypeUnspecified = "INTEGRATION_TYPE_UNSPECIFIED",
+    Score = "SCORE",
+    Checkbox = "CHECKBOX",
+    Invisible = "INVISIBLE"
 }
 
 
@@ -20,18 +21,18 @@ export enum GoogleCloudRecaptchaenterpriseV1WebKeySettingsIntegrationTypeEnum {
  * Settings specific to keys that can be used by websites.
 **/
 export class GoogleCloudRecaptchaenterpriseV1WebKeySettings extends SpeakeasyBase {
-  @Metadata({ data: "json, name=allowAllDomains" })
+  @SpeakeasyMetadata({ data: "json, name=allowAllDomains" })
   allowAllDomains?: boolean;
 
-  @Metadata({ data: "json, name=allowAmpTraffic" })
+  @SpeakeasyMetadata({ data: "json, name=allowAmpTraffic" })
   allowAmpTraffic?: boolean;
 
-  @Metadata({ data: "json, name=allowedDomains" })
+  @SpeakeasyMetadata({ data: "json, name=allowedDomains" })
   allowedDomains?: string[];
 
-  @Metadata({ data: "json, name=challengeSecurityPreference" })
+  @SpeakeasyMetadata({ data: "json, name=challengeSecurityPreference" })
   challengeSecurityPreference?: GoogleCloudRecaptchaenterpriseV1WebKeySettingsChallengeSecurityPreferenceEnum;
 
-  @Metadata({ data: "json, name=integrationType" })
+  @SpeakeasyMetadata({ data: "json, name=integrationType" })
   integrationType?: GoogleCloudRecaptchaenterpriseV1WebKeySettingsIntegrationTypeEnum;
 }

@@ -10,6 +10,8 @@ const (
 	ReachabilityDetailsResultEnumUndetermined      ReachabilityDetailsResultEnum = "UNDETERMINED"
 )
 
+// ReachabilityDetails
+// Results of the configuration analysis from the last run of the test.
 type ReachabilityDetails struct {
 	Error      *Status                        `json:"error,omitempty"`
 	Result     *ReachabilityDetailsResultEnum `json:"result,omitempty"`

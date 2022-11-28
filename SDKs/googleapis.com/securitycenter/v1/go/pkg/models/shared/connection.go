@@ -11,6 +11,8 @@ const (
 	ConnectionProtocolEnumEsp                 ConnectionProtocolEnum = "ESP"
 )
 
+// Connection
+// Contains information about the IP connection associated with the finding.
 type Connection struct {
 	DestinationIP   *string                 `json:"destinationIp,omitempty"`
 	DestinationPort *int32                  `json:"destinationPort,omitempty"`

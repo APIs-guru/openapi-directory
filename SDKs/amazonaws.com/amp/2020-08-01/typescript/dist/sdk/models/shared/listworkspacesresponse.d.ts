@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { WorkspaceSummary } from "./workspacesummary";
 /**
  * Represents the output of a ListWorkspaces operation.

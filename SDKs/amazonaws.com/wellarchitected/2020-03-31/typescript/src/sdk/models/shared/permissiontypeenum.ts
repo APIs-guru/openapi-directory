@@ -1,6 +1,7 @@
 
 
+
 export enum PermissionTypeEnum {
-    Readonly = "READONLY"
-,    Contributor = "CONTRIBUTOR"
+    Readonly = "READONLY",
+    Contributor = "CONTRIBUTOR"
 }

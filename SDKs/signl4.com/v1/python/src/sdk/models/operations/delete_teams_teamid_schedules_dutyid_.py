@@ -5,19 +5,19 @@ from sdk.models import shared
 
 @dataclass
 class DeleteTeamsTeamIDSchedulesDutyIDPathParams:
-    duty_id: str = field(default=None, metadata={'path_param': { 'field_name': 'dutyId', 'style': 'simple', 'explode': False }})
-    team_id: str = field(default=None, metadata={'path_param': { 'field_name': 'teamId', 'style': 'simple', 'explode': False }})
+    duty_id: str = field(metadata={'path_param': { 'field_name': 'dutyId', 'style': 'simple', 'explode': False }})
+    team_id: str = field(metadata={'path_param': { 'field_name': 'teamId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class DeleteTeamsTeamIDSchedulesDutyIDRequest:
-    path_params: DeleteTeamsTeamIDSchedulesDutyIDPathParams = field(default=None)
+    path_params: DeleteTeamsTeamIDSchedulesDutyIDPathParams = field()
     
 
 @dataclass
 class DeleteTeamsTeamIDSchedulesDutyIDResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     error_response_content: Optional[shared.ErrorResponseContent] = field(default=None)
-    status_code: int = field(default=None)
     

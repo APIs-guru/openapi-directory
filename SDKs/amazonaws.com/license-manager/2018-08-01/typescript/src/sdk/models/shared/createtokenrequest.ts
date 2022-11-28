@@ -1,19 +1,20 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class CreateTokenRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ClientToken" })
+  @SpeakeasyMetadata({ data: "json, name=ClientToken" })
   clientToken: string;
 
-  @Metadata({ data: "json, name=ExpirationInDays" })
+  @SpeakeasyMetadata({ data: "json, name=ExpirationInDays" })
   expirationInDays?: number;
 
-  @Metadata({ data: "json, name=LicenseArn" })
+  @SpeakeasyMetadata({ data: "json, name=LicenseArn" })
   licenseArn: string;
 
-  @Metadata({ data: "json, name=RoleArns" })
+  @SpeakeasyMetadata({ data: "json, name=RoleArns" })
   roleArns?: string[];
 
-  @Metadata({ data: "json, name=TokenProperties" })
+  @SpeakeasyMetadata({ data: "json, name=TokenProperties" })
   tokenProperties?: string[];
 }

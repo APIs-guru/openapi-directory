@@ -1,6 +1,7 @@
 
 
+
 export enum FeatureTypeEnum {
-    Tables = "TABLES"
-,    Forms = "FORMS"
+    Tables = "TABLES",
+    Forms = "FORMS"
 }

@@ -29,11 +29,6 @@ type MicerSecurity struct {
 	ClientID shared.SchemeClientID `security:"scheme,type=apiKey,subtype=header"`
 }
 
-type MicerRequest struct {
-	Request  *MicerRequestBody `request:"mediaType=application/json"`
-	Security MicerSecurity
-}
-
 type Micer400ApplicationJSONErrorEnum string
 
 const (
@@ -163,6 +158,11 @@ const (
 type Micer504ApplicationJSON struct {
 	Error            *Micer504ApplicationJSONErrorEnum            `json:"error,omitempty"`
 	ErrorDescription *Micer504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
+}
+
+type MicerRequest struct {
+	Request  *MicerRequestBody `request:"mediaType=application/json"`
+	Security MicerSecurity
 }
 
 type MicerResponse struct {

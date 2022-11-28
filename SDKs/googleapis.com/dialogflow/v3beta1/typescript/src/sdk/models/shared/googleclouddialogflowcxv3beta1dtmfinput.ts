@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudDialogflowCxV3beta1DtmfInput
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Represents the input for dtmf event.
 **/
 export class GoogleCloudDialogflowCxV3beta1DtmfInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=digits" })
+  @SpeakeasyMetadata({ data: "json, name=digits" })
   digits?: string;
 
-  @Metadata({ data: "json, name=finishDigit" })
+  @SpeakeasyMetadata({ data: "json, name=finishDigit" })
   finishDigit?: string;
 }

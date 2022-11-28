@@ -22,26 +22,26 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var ListAutoScalingConfigurationsRequest = /** @class */ (function (_super) {
     __extends(ListAutoScalingConfigurationsRequest, _super);
     function ListAutoScalingConfigurationsRequest() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=AutoScalingConfigurationName" }),
+        SpeakeasyMetadata({ data: "json, name=AutoScalingConfigurationName" }),
         __metadata("design:type", String)
     ], ListAutoScalingConfigurationsRequest.prototype, "autoScalingConfigurationName", void 0);
     __decorate([
-        Metadata({ data: "json, name=LatestOnly" }),
+        SpeakeasyMetadata({ data: "json, name=LatestOnly" }),
         __metadata("design:type", Boolean)
     ], ListAutoScalingConfigurationsRequest.prototype, "latestOnly", void 0);
     __decorate([
-        Metadata({ data: "json, name=MaxResults" }),
+        SpeakeasyMetadata({ data: "json, name=MaxResults" }),
         __metadata("design:type", Number)
     ], ListAutoScalingConfigurationsRequest.prototype, "maxResults", void 0);
     __decorate([
-        Metadata({ data: "json, name=NextToken" }),
+        SpeakeasyMetadata({ data: "json, name=NextToken" }),
         __metadata("design:type", String)
     ], ListAutoScalingConfigurationsRequest.prototype, "nextToken", void 0);
     return ListAutoScalingConfigurationsRequest;

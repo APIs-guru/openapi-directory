@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AwsS3BucketWebsiteConfigurationRoutingRuleRedirect
@@ -6,18 +7,18 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The rules to redirect the request if the condition in <code>Condition</code> is met.
 **/
 export class AwsS3BucketWebsiteConfigurationRoutingRuleRedirect extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Hostname" })
+  @SpeakeasyMetadata({ data: "json, name=Hostname" })
   hostname?: string;
 
-  @Metadata({ data: "json, name=HttpRedirectCode" })
+  @SpeakeasyMetadata({ data: "json, name=HttpRedirectCode" })
   httpRedirectCode?: string;
 
-  @Metadata({ data: "json, name=Protocol" })
+  @SpeakeasyMetadata({ data: "json, name=Protocol" })
   protocol?: string;
 
-  @Metadata({ data: "json, name=ReplaceKeyPrefixWith" })
+  @SpeakeasyMetadata({ data: "json, name=ReplaceKeyPrefixWith" })
   replaceKeyPrefixWith?: string;
 
-  @Metadata({ data: "json, name=ReplaceKeyWith" })
+  @SpeakeasyMetadata({ data: "json, name=ReplaceKeyWith" })
   replaceKeyWith?: string;
 }

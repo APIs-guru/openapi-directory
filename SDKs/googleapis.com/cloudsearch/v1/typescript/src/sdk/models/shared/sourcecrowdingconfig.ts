@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // SourceCrowdingConfig
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Set search results crowding limits. Crowding is a situation in which multiple results from the same source or host "crowd out" other results, diminishing the quality of search for users. To foster better search quality and source diversity in search results, you can set a condition to reduce repetitive results by source.
 **/
 export class SourceCrowdingConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=numResults" })
+  @SpeakeasyMetadata({ data: "json, name=numResults" })
   numResults?: number;
 
-  @Metadata({ data: "json, name=numSuggestions" })
+  @SpeakeasyMetadata({ data: "json, name=numSuggestions" })
   numSuggestions?: number;
 }

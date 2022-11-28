@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PeriodicPaymentInitiationXmlPart2StandingorderTypeJson } from "./periodicpaymentinitiationxmlpart2standingordertypejson";
+
 
 
 // PeriodicPaymentInitiationMultipartBody
@@ -10,9 +11,9 @@ import { PeriodicPaymentInitiationXmlPart2StandingorderTypeJson } from "./period
  * 
 **/
 export class PeriodicPaymentInitiationMultipartBody extends SpeakeasyBase {
-  @Metadata({ data: "multipart_form, name=json_standingorderType;json=true" })
+  @SpeakeasyMetadata({ data: "multipart_form, name=json_standingorderType;json=true" })
   jsonStandingorderType?: PeriodicPaymentInitiationXmlPart2StandingorderTypeJson;
 
-  @Metadata({ data: "multipart_form, name=xml_sct;json=true" })
+  @SpeakeasyMetadata({ data: "multipart_form, name=xml_sct;json=true" })
   xmlSct?: any;
 }

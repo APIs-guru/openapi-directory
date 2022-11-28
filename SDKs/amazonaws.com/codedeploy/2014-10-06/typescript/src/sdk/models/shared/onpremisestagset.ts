@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TagFilter } from "./tagfilter";
+
 
 
 // OnPremisesTagSet
@@ -8,6 +8,6 @@ import { TagFilter } from "./tagfilter";
  * Information about groups of on-premises instance tags.
 **/
 export class OnPremisesTagSet extends SpeakeasyBase {
-  @Metadata({ data: "json, name=onPremisesTagSetList", elemType: shared.TagFilter, elemDepth: 2 })
+  @SpeakeasyMetadata({ data: "json, name=onPremisesTagSetList", elemType: TagFilter, elemDepth: 2 })
   onPremisesTagSetList?: TagFilter[][];
 }

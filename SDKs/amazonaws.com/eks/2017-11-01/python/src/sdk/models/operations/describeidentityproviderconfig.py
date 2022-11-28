@@ -1,12 +1,16 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
 @dataclass
 class DescribeIdentityProviderConfigPathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -23,31 +27,35 @@ class DescribeIdentityProviderConfigHeaders:
 @dataclass_json
 @dataclass
 class DescribeIdentityProviderConfigRequestBodyIdentityProviderConfig:
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    type: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    r"""DescribeIdentityProviderConfigRequestBodyIdentityProviderConfig
+    An object representing an identity provider configuration.
+    """
+    
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    type: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('type') }})
     
 
 @dataclass_json
 @dataclass
 class DescribeIdentityProviderConfigRequestBody:
-    identity_provider_config: DescribeIdentityProviderConfigRequestBodyIdentityProviderConfig = field(default=None, metadata={'dataclasses_json': { 'field_name': 'identityProviderConfig' }})
+    identity_provider_config: DescribeIdentityProviderConfigRequestBodyIdentityProviderConfig = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('identityProviderConfig') }})
     
 
 @dataclass
 class DescribeIdentityProviderConfigRequest:
-    path_params: DescribeIdentityProviderConfigPathParams = field(default=None)
-    headers: DescribeIdentityProviderConfigHeaders = field(default=None)
-    request: DescribeIdentityProviderConfigRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: DescribeIdentityProviderConfigHeaders = field()
+    path_params: DescribeIdentityProviderConfigPathParams = field()
+    request: DescribeIdentityProviderConfigRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class DescribeIdentityProviderConfigResponse:
+    content_type: str = field()
+    status_code: int = field()
     client_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     describe_identity_provider_config_response: Optional[shared.DescribeIdentityProviderConfigResponse] = field(default=None)
     invalid_parameter_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
     server_exception: Optional[Any] = field(default=None)
     service_unavailable_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

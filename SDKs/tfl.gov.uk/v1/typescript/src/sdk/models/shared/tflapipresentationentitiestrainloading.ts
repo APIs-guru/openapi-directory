@@ -1,25 +1,26 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class TflApiPresentationEntitiesTrainLoading extends SpeakeasyBase {
-  @Metadata({ data: "json, name=direction" })
+  @SpeakeasyMetadata({ data: "json, name=direction" })
   direction?: string;
 
-  @Metadata({ data: "json, name=line" })
+  @SpeakeasyMetadata({ data: "json, name=line" })
   line?: string;
 
-  @Metadata({ data: "json, name=lineDirection" })
+  @SpeakeasyMetadata({ data: "json, name=lineDirection" })
   lineDirection?: string;
 
-  @Metadata({ data: "json, name=naptanTo" })
+  @SpeakeasyMetadata({ data: "json, name=naptanTo" })
   naptanTo?: string;
 
-  @Metadata({ data: "json, name=platformDirection" })
+  @SpeakeasyMetadata({ data: "json, name=platformDirection" })
   platformDirection?: string;
 
-  @Metadata({ data: "json, name=timeSlice" })
+  @SpeakeasyMetadata({ data: "json, name=timeSlice" })
   timeSlice?: string;
 
-  @Metadata({ data: "json, name=value" })
+  @SpeakeasyMetadata({ data: "json, name=value" })
   value?: number;
 }

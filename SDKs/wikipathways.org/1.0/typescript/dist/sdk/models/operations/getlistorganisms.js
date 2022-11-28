@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var GetListOrganismsFormatEnum;
 (function (GetListOrganismsFormatEnum) {
     GetListOrganismsFormatEnum["Json"] = "json";
@@ -38,7 +38,7 @@ var GetListOrganismsQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=format" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=format" }),
         __metadata("design:type", String)
     ], GetListOrganismsQueryParams.prototype, "format", void 0);
     return GetListOrganismsQueryParams;
@@ -50,7 +50,7 @@ var GetListOrganismsRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetListOrganismsQueryParams)
     ], GetListOrganismsRequest.prototype, "queryParams", void 0);
     return GetListOrganismsRequest;
@@ -62,11 +62,11 @@ var GetListOrganismsResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetListOrganismsResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetListOrganismsResponse.prototype, "statusCode", void 0);
     return GetListOrganismsResponse;

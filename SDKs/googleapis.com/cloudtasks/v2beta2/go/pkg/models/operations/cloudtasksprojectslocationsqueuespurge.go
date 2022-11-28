@@ -36,6 +36,6 @@ type CloudtasksProjectsLocationsQueuesPurgeRequest struct {
 
 type CloudtasksProjectsLocationsQueuesPurgeResponse struct {
 	ContentType string
-	Queue       *shared.Queue
+	Queue       *shared.Queue1
 	StatusCode  int64
 }

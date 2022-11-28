@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { EnterpriseCrmCardsCellValue } from "./enterprisecrmcardscellvalue";
-import { EnterpriseCrmCardsCellValue } from "./enterprisecrmcardscellvalue";
+
 
 
 // EnterpriseCrmCardsTemplatesAplosSeriesDataRow
@@ -8,9 +8,9 @@ import { EnterpriseCrmCardsCellValue } from "./enterprisecrmcardscellvalue";
  * Aplos series row is exactly two columns labeled x and y.
 **/
 export class EnterpriseCrmCardsTemplatesAplosSeriesDataRow extends SpeakeasyBase {
-  @Metadata({ data: "json, name=x" })
+  @SpeakeasyMetadata({ data: "json, name=x" })
   x?: EnterpriseCrmCardsCellValue;
 
-  @Metadata({ data: "json, name=y" })
+  @SpeakeasyMetadata({ data: "json, name=y" })
   y?: EnterpriseCrmCardsCellValue;
 }

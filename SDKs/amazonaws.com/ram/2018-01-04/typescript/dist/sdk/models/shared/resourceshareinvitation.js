@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { ResourceShareAssociation } from "./resourceshareassociation";
 import { ResourceShareInvitationStatusEnum } from "./resourceshareinvitationstatusenum";
 // ResourceShareInvitation
 /**
@@ -35,39 +35,39 @@ var ResourceShareInvitation = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=invitationTimestamp" }),
+        SpeakeasyMetadata({ data: "json, name=invitationTimestamp" }),
         __metadata("design:type", Date)
     ], ResourceShareInvitation.prototype, "invitationTimestamp", void 0);
     __decorate([
-        Metadata({ data: "json, name=receiverAccountId" }),
+        SpeakeasyMetadata({ data: "json, name=receiverAccountId" }),
         __metadata("design:type", String)
     ], ResourceShareInvitation.prototype, "receiverAccountId", void 0);
     __decorate([
-        Metadata({ data: "json, name=receiverArn" }),
+        SpeakeasyMetadata({ data: "json, name=receiverArn" }),
         __metadata("design:type", String)
     ], ResourceShareInvitation.prototype, "receiverArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=resourceShareArn" }),
+        SpeakeasyMetadata({ data: "json, name=resourceShareArn" }),
         __metadata("design:type", String)
     ], ResourceShareInvitation.prototype, "resourceShareArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=resourceShareAssociations", elemType: shared.ResourceShareAssociation }),
+        SpeakeasyMetadata({ data: "json, name=resourceShareAssociations", elemType: ResourceShareAssociation }),
         __metadata("design:type", Array)
     ], ResourceShareInvitation.prototype, "resourceShareAssociations", void 0);
     __decorate([
-        Metadata({ data: "json, name=resourceShareInvitationArn" }),
+        SpeakeasyMetadata({ data: "json, name=resourceShareInvitationArn" }),
         __metadata("design:type", String)
     ], ResourceShareInvitation.prototype, "resourceShareInvitationArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=resourceShareName" }),
+        SpeakeasyMetadata({ data: "json, name=resourceShareName" }),
         __metadata("design:type", String)
     ], ResourceShareInvitation.prototype, "resourceShareName", void 0);
     __decorate([
-        Metadata({ data: "json, name=senderAccountId" }),
+        SpeakeasyMetadata({ data: "json, name=senderAccountId" }),
         __metadata("design:type", String)
     ], ResourceShareInvitation.prototype, "senderAccountId", void 0);
     __decorate([
-        Metadata({ data: "json, name=status" }),
+        SpeakeasyMetadata({ data: "json, name=status" }),
         __metadata("design:type", String)
     ], ResourceShareInvitation.prototype, "status", void 0);
     return ResourceShareInvitation;

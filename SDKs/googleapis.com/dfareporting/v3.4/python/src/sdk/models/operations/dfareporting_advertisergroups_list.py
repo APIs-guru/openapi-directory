@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DfareportingAdvertiserGroupsListPathParams:
-    profile_id: str = field(default=None, metadata={'path_param': { 'field_name': 'profileId', 'style': 'simple', 'explode': False }})
+    profile_id: str = field(metadata={'path_param': { 'field_name': 'profileId', 'style': 'simple', 'explode': False }})
     
 class DfareportingAdvertiserGroupsListSortFieldEnum(str, Enum):
     ID = "ID"
@@ -39,20 +40,20 @@ class DfareportingAdvertiserGroupsListQueryParams:
 
 @dataclass
 class DfareportingAdvertiserGroupsListSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DfareportingAdvertiserGroupsListRequest:
-    path_params: DfareportingAdvertiserGroupsListPathParams = field(default=None)
-    query_params: DfareportingAdvertiserGroupsListQueryParams = field(default=None)
-    security: DfareportingAdvertiserGroupsListSecurity = field(default=None)
+    path_params: DfareportingAdvertiserGroupsListPathParams = field()
+    query_params: DfareportingAdvertiserGroupsListQueryParams = field()
+    security: DfareportingAdvertiserGroupsListSecurity = field()
     
 
 @dataclass
 class DfareportingAdvertiserGroupsListResponse:
+    content_type: str = field()
+    status_code: int = field()
     advertiser_groups_list_response: Optional[shared.AdvertiserGroupsListResponse] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

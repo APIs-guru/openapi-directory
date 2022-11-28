@@ -1,12 +1,18 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import loacontenttype_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class Loa:
-    loa_content: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'loaContent' }})
-    loa_content_type: Optional[loacontenttype_enum.LoaContentTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'loaContentType' }})
+    r"""Loa
+    Information about a Letter of Authorization - Connecting Facility Assignment (LOA-CFA) for a connection.
+    """
+    
+    loa_content: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('loaContent') }})
+    loa_content_type: Optional[LoaContentTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('loaContentType') }})
     

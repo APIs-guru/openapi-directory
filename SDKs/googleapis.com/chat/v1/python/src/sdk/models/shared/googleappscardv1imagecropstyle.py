@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class GoogleAppsCardV1ImageCropStyleTypeEnum(str, Enum):
     IMAGE_CROP_TYPE_UNSPECIFIED = "IMAGE_CROP_TYPE_UNSPECIFIED"
@@ -13,6 +15,10 @@ class GoogleAppsCardV1ImageCropStyleTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class GoogleAppsCardV1ImageCropStyle:
-    aspect_ratio: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'aspectRatio' }})
-    type: Optional[GoogleAppsCardV1ImageCropStyleTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    r"""GoogleAppsCardV1ImageCropStyle
+    Represents the crop style applied to an image. For example, here's how to apply a 16 by 9 aspect ratio: ``` cropStyle { \"type\": \"RECTANGLE_CUSTOM\", \"aspectRatio\": 16/9 } ```
+    """
+    
+    aspect_ratio: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('aspectRatio') }})
+    type: Optional[GoogleAppsCardV1ImageCropStyleTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('type') }})
     

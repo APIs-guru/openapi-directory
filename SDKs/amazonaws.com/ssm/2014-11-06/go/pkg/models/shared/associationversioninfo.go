@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// AssociationVersionInfo
+// Information about the association version.
 type AssociationVersionInfo struct {
 	ApplyOnlyAtCronInterval *bool                              `json:"ApplyOnlyAtCronInterval,omitempty"`
 	AssociationID           *string                            `json:"AssociationId,omitempty"`

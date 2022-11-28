@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // InitializeHubResponse
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Response message for the InitializeHub method.
 **/
 export class InitializeHubResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=serviceIdentity" })
+  @SpeakeasyMetadata({ data: "json, name=serviceIdentity" })
   serviceIdentity?: string;
 
-  @Metadata({ data: "json, name=workloadIdentityPool" })
+  @SpeakeasyMetadata({ data: "json, name=workloadIdentityPool" })
   workloadIdentityPool?: string;
 }

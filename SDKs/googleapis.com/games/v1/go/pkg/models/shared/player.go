@@ -8,11 +8,15 @@ const (
 	PlayerFriendStatusEnumFriend                  PlayerFriendStatusEnum = "FRIEND"
 )
 
+// PlayerName
+// A representation of the individual components of the name.
 type PlayerName struct {
 	FamilyName *string `json:"familyName,omitempty"`
 	GivenName  *string `json:"givenName,omitempty"`
 }
 
+// Player
+// A Player resource.
 type Player struct {
 	AvatarImageURL     *string                 `json:"avatarImageUrl,omitempty"`
 	BannerURLLandscape *string                 `json:"bannerUrlLandscape,omitempty"`

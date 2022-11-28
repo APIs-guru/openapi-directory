@@ -1,12 +1,13 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import { Trust } from "./trust";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { TrustInput } from "./trust";
 
 
-// DetachTrustRequest
+
+// DetachTrustRequestInput
 /** 
  * Request message for DetachTrust
 **/
-export class DetachTrustRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=trust" })
-  trust?: Trust;
+export class DetachTrustRequestInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=trust" })
+  trust?: TrustInput;
 }

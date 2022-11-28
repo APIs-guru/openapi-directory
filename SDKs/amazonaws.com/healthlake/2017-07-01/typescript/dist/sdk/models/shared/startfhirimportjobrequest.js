@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { InputDataConfig } from "./inputdataconfig";
 import { OutputDataConfig } from "./outputdataconfig";
 var StartFhirImportJobRequest = /** @class */ (function (_super) {
@@ -31,27 +31,27 @@ var StartFhirImportJobRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=ClientToken" }),
+        SpeakeasyMetadata({ data: "json, name=ClientToken" }),
         __metadata("design:type", String)
     ], StartFhirImportJobRequest.prototype, "clientToken", void 0);
     __decorate([
-        Metadata({ data: "json, name=DataAccessRoleArn" }),
+        SpeakeasyMetadata({ data: "json, name=DataAccessRoleArn" }),
         __metadata("design:type", String)
     ], StartFhirImportJobRequest.prototype, "dataAccessRoleArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=DatastoreId" }),
+        SpeakeasyMetadata({ data: "json, name=DatastoreId" }),
         __metadata("design:type", String)
     ], StartFhirImportJobRequest.prototype, "datastoreId", void 0);
     __decorate([
-        Metadata({ data: "json, name=InputDataConfig" }),
+        SpeakeasyMetadata({ data: "json, name=InputDataConfig" }),
         __metadata("design:type", InputDataConfig)
     ], StartFhirImportJobRequest.prototype, "inputDataConfig", void 0);
     __decorate([
-        Metadata({ data: "json, name=JobName" }),
+        SpeakeasyMetadata({ data: "json, name=JobName" }),
         __metadata("design:type", String)
     ], StartFhirImportJobRequest.prototype, "jobName", void 0);
     __decorate([
-        Metadata({ data: "json, name=JobOutputDataConfig" }),
+        SpeakeasyMetadata({ data: "json, name=JobOutputDataConfig" }),
         __metadata("design:type", OutputDataConfig)
     ], StartFhirImportJobRequest.prototype, "jobOutputDataConfig", void 0);
     return StartFhirImportJobRequest;

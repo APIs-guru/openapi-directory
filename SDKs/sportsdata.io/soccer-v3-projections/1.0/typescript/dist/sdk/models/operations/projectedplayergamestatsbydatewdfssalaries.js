@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var ProjectedPlayerGameStatsByDateWDfsSalariesFormatEnum;
 (function (ProjectedPlayerGameStatsByDateWDfsSalariesFormatEnum) {
     ProjectedPlayerGameStatsByDateWDfsSalariesFormatEnum["Xml"] = "xml";
@@ -34,11 +34,11 @@ var ProjectedPlayerGameStatsByDateWDfsSalariesPathParams = /** @class */ (functi
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=date" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=date" }),
         __metadata("design:type", String)
     ], ProjectedPlayerGameStatsByDateWDfsSalariesPathParams.prototype, "date", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=format" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=format" }),
         __metadata("design:type", String)
     ], ProjectedPlayerGameStatsByDateWDfsSalariesPathParams.prototype, "format", void 0);
     return ProjectedPlayerGameStatsByDateWDfsSalariesPathParams;
@@ -50,7 +50,7 @@ var ProjectedPlayerGameStatsByDateWDfsSalariesRequest = /** @class */ (function 
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ProjectedPlayerGameStatsByDateWDfsSalariesPathParams)
     ], ProjectedPlayerGameStatsByDateWDfsSalariesRequest.prototype, "pathParams", void 0);
     return ProjectedPlayerGameStatsByDateWDfsSalariesRequest;
@@ -62,15 +62,15 @@ var ProjectedPlayerGameStatsByDateWDfsSalariesResponse = /** @class */ (function
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], ProjectedPlayerGameStatsByDateWDfsSalariesResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Array)
     ], ProjectedPlayerGameStatsByDateWDfsSalariesResponse.prototype, "playerGameProjections", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], ProjectedPlayerGameStatsByDateWDfsSalariesResponse.prototype, "statusCode", void 0);
     return ProjectedPlayerGameStatsByDateWDfsSalariesResponse;

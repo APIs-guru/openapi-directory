@@ -1,31 +1,32 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class RoadDisruptedStreetsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=endDate" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=endDate" })
   endDate: Date;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=startDate" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=startDate" })
   startDate: Date;
 }
 
 
 export class RoadDisruptedStreetsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: RoadDisruptedStreetsQueryParams;
 }
 
 
 export class RoadDisruptedStreetsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   systemObject?: Map<string, any>;
 }

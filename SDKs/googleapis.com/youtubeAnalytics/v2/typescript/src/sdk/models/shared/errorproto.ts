@@ -1,9 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum ErrorProtoLocationTypeEnum {
-    Path = "PATH"
-,    Other = "OTHER"
-,    Parameter = "PARAMETER"
+    Path = "PATH",
+    Other = "OTHER",
+    Parameter = "PARAMETER"
 }
 
 
@@ -12,24 +13,24 @@ export enum ErrorProtoLocationTypeEnum {
  * Describes one specific error.
 **/
 export class ErrorProto extends SpeakeasyBase {
-  @Metadata({ data: "json, name=argument" })
+  @SpeakeasyMetadata({ data: "json, name=argument" })
   argument?: string[];
 
-  @Metadata({ data: "json, name=code" })
+  @SpeakeasyMetadata({ data: "json, name=code" })
   code?: string;
 
-  @Metadata({ data: "json, name=debugInfo" })
+  @SpeakeasyMetadata({ data: "json, name=debugInfo" })
   debugInfo?: string;
 
-  @Metadata({ data: "json, name=domain" })
+  @SpeakeasyMetadata({ data: "json, name=domain" })
   domain?: string;
 
-  @Metadata({ data: "json, name=externalErrorMessage" })
+  @SpeakeasyMetadata({ data: "json, name=externalErrorMessage" })
   externalErrorMessage?: string;
 
-  @Metadata({ data: "json, name=location" })
+  @SpeakeasyMetadata({ data: "json, name=location" })
   location?: string;
 
-  @Metadata({ data: "json, name=locationType" })
+  @SpeakeasyMetadata({ data: "json, name=locationType" })
   locationType?: ErrorProtoLocationTypeEnum;
 }

@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Location } from "./location";
+
 
 
 // CompanyDerivedInfo
@@ -7,6 +8,6 @@ import { Location } from "./location";
  * Derived details about the company.
 **/
 export class CompanyDerivedInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=headquartersLocation" })
+  @SpeakeasyMetadata({ data: "json, name=headquartersLocation" })
   headquartersLocation?: Location;
 }

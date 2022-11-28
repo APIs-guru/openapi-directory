@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // CloudSqlConfig
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Cloud SQL configuration.
 **/
 export class CloudSqlConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=service" })
+  @SpeakeasyMetadata({ data: "json, name=service" })
   service?: string;
 
-  @Metadata({ data: "json, name=umbrellaNetwork" })
+  @SpeakeasyMetadata({ data: "json, name=umbrellaNetwork" })
   umbrellaNetwork?: string;
 
-  @Metadata({ data: "json, name=umbrellaProject" })
+  @SpeakeasyMetadata({ data: "json, name=umbrellaProject" })
   umbrellaProject?: string;
 }

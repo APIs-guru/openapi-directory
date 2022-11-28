@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DescribeDeviceFleetRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DeviceFleetName" })
+  @SpeakeasyMetadata({ data: "json, name=DeviceFleetName" })
   deviceFleetName: string;
 }

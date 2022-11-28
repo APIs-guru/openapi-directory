@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RoutingControl } from "./routingcontrol";
 
 
+
 export class ListRoutingControlsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=RoutingControls", elemType: shared.RoutingControl })
+  @SpeakeasyMetadata({ data: "json, name=RoutingControls", elemType: RoutingControl })
   routingControls?: RoutingControl[];
 }

@@ -4,7 +4,7 @@ from typing import Optional
 
 @dataclass
 class GetAppsBySafeNameSafeNamePathParams:
-    safe_name: str = field(default=None, metadata={'path_param': { 'field_name': 'safeName', 'style': 'simple', 'explode': False }})
+    safe_name: str = field(metadata={'path_param': { 'field_name': 'safeName', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -15,13 +15,13 @@ class GetAppsBySafeNameSafeNameQueryParams:
 
 @dataclass
 class GetAppsBySafeNameSafeNameRequest:
-    path_params: GetAppsBySafeNameSafeNamePathParams = field(default=None)
-    query_params: GetAppsBySafeNameSafeNameQueryParams = field(default=None)
+    path_params: GetAppsBySafeNameSafeNamePathParams = field()
+    query_params: GetAppsBySafeNameSafeNameQueryParams = field()
     
 
 @dataclass
 class GetAppsBySafeNameSafeNameResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

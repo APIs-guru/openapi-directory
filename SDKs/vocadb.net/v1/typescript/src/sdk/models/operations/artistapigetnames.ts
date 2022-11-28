@@ -1,48 +1,49 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum ArtistApiGetNamesNameMatchModeEnum {
-    Auto = "Auto"
-,    Partial = "Partial"
-,    StartsWith = "StartsWith"
-,    Exact = "Exact"
-,    Words = "Words"
+    Auto = "Auto",
+    Partial = "Partial",
+    StartsWith = "StartsWith",
+    Exact = "Exact",
+    Words = "Words"
 }
 
 
 export class ArtistApiGetNamesQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=maxResults" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=maxResults" })
   maxResults?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=nameMatchMode" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=nameMatchMode" })
   nameMatchMode?: ArtistApiGetNamesNameMatchModeEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=query" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=query" })
   query?: string;
 }
 
 
 export class ArtistApiGetNamesRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: ArtistApiGetNamesQueryParams;
 }
 
 
 export class ArtistApiGetNamesResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   artistApiGetNames200ApplicationJsonStrings?: string[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   artistApiGetNames200ApplicationJsonpStrings?: string[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   artistApiGetNames200TextJsonStrings?: string[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class CreateStudioLifecycleConfigResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=StudioLifecycleConfigArn" })
+  @SpeakeasyMetadata({ data: "json, name=StudioLifecycleConfigArn" })
   studioLifecycleConfigArn?: string;
 }

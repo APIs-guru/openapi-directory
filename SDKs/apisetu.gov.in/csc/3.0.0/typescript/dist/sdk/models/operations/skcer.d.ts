@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class SkcerRequestBodyCertificateParameters extends SpeakeasyBase {
     fullName: string;
@@ -17,10 +17,6 @@ export declare class SkcerRequestBody extends SpeakeasyBase {
 export declare class SkcerSecurity extends SpeakeasyBase {
     apiKey: shared.SchemeApiKey;
     clientId: shared.SchemeClientId;
-}
-export declare class SkcerRequest extends SpeakeasyBase {
-    request?: SkcerRequestBody;
-    security: SkcerSecurity;
 }
 export declare enum Skcer400ApplicationJsonErrorEnum {
     MissingParameter = "missing_parameter",
@@ -103,6 +99,10 @@ export declare enum Skcer504ApplicationJsonErrorDescriptionEnum {
 export declare class Skcer504ApplicationJson extends SpeakeasyBase {
     error?: Skcer504ApplicationJsonErrorEnum;
     errorDescription?: Skcer504ApplicationJsonErrorDescriptionEnum;
+}
+export declare class SkcerRequest extends SpeakeasyBase {
+    request?: SkcerRequestBody;
+    security: SkcerSecurity;
 }
 export declare class SkcerResponse extends SpeakeasyBase {
     contentType: string;

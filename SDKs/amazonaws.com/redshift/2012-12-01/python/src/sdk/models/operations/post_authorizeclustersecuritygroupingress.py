@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostAuthorizeClusterSecurityGroupIngressActionEnum(str, Enum):
     AUTHORIZE_CLUSTER_SECURITY_GROUP_INGRESS = "AuthorizeClusterSecurityGroupIngress"
@@ -10,8 +14,8 @@ class PostAuthorizeClusterSecurityGroupIngressVersionEnum(str, Enum):
 
 @dataclass
 class PostAuthorizeClusterSecurityGroupIngressQueryParams:
-    action: PostAuthorizeClusterSecurityGroupIngressActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostAuthorizeClusterSecurityGroupIngressVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostAuthorizeClusterSecurityGroupIngressActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostAuthorizeClusterSecurityGroupIngressVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostAuthorizeClusterSecurityGroupIngressHeaders:
 
 @dataclass
 class PostAuthorizeClusterSecurityGroupIngressRequest:
-    query_params: PostAuthorizeClusterSecurityGroupIngressQueryParams = field(default=None)
-    headers: PostAuthorizeClusterSecurityGroupIngressHeaders = field(default=None)
+    headers: PostAuthorizeClusterSecurityGroupIngressHeaders = field()
+    query_params: PostAuthorizeClusterSecurityGroupIngressQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostAuthorizeClusterSecurityGroupIngressResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

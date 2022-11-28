@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
-from typing import Any,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class ListAssociatedResourcesPathParams:
-    application: str = field(default=None, metadata={'path_param': { 'field_name': 'application', 'style': 'simple', 'explode': False }})
+    application: str = field(metadata={'path_param': { 'field_name': 'application', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -27,17 +30,17 @@ class ListAssociatedResourcesHeaders:
 
 @dataclass
 class ListAssociatedResourcesRequest:
-    path_params: ListAssociatedResourcesPathParams = field(default=None)
-    query_params: ListAssociatedResourcesQueryParams = field(default=None)
-    headers: ListAssociatedResourcesHeaders = field(default=None)
+    headers: ListAssociatedResourcesHeaders = field()
+    path_params: ListAssociatedResourcesPathParams = field()
+    query_params: ListAssociatedResourcesQueryParams = field()
     
 
 @dataclass
 class ListAssociatedResourcesResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     internal_server_exception: Optional[Any] = field(default=None)
     list_associated_resources_response: Optional[shared.ListAssociatedResourcesResponse] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     validation_exception: Optional[Any] = field(default=None)
     

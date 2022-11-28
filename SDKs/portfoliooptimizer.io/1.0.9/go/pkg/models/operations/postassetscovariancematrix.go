@@ -20,12 +20,12 @@ type PostAssetsCovarianceMatrixRequestBody3 struct {
 	AssetsVolatilities      []float64   `json:"assetsVolatilities"`
 }
 
-type PostAssetsCovarianceMatrixRequest struct {
-	Request interface{} `request:"mediaType=application/json"`
-}
-
 type PostAssetsCovarianceMatrix200ApplicationJSON struct {
 	AssetsCovarianceMatrix [][]float64 `json:"assetsCovarianceMatrix"`
+}
+
+type PostAssetsCovarianceMatrixRequest struct {
+	Request interface{} `request:"mediaType=application/json"`
 }
 
 type PostAssetsCovarianceMatrixResponse struct {

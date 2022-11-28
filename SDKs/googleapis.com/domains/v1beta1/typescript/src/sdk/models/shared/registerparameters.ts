@@ -1,24 +1,25 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Money } from "./money";
 
+
 export enum RegisterParametersAvailabilityEnum {
-    AvailabilityUnspecified = "AVAILABILITY_UNSPECIFIED"
-,    Available = "AVAILABLE"
-,    Unavailable = "UNAVAILABLE"
-,    Unsupported = "UNSUPPORTED"
-,    Unknown = "UNKNOWN"
+    AvailabilityUnspecified = "AVAILABILITY_UNSPECIFIED",
+    Available = "AVAILABLE",
+    Unavailable = "UNAVAILABLE",
+    Unsupported = "UNSUPPORTED",
+    Unknown = "UNKNOWN"
 }
 
 export enum RegisterParametersDomainNoticesEnum {
-    DomainNoticeUnspecified = "DOMAIN_NOTICE_UNSPECIFIED"
-,    HstsPreloaded = "HSTS_PRELOADED"
+    DomainNoticeUnspecified = "DOMAIN_NOTICE_UNSPECIFIED",
+    HstsPreloaded = "HSTS_PRELOADED"
 }
 
 export enum RegisterParametersSupportedPrivacyEnum {
-    ContactPrivacyUnspecified = "CONTACT_PRIVACY_UNSPECIFIED"
-,    PublicContactData = "PUBLIC_CONTACT_DATA"
-,    PrivateContactData = "PRIVATE_CONTACT_DATA"
-,    RedactedContactData = "REDACTED_CONTACT_DATA"
+    ContactPrivacyUnspecified = "CONTACT_PRIVACY_UNSPECIFIED",
+    PublicContactData = "PUBLIC_CONTACT_DATA",
+    PrivateContactData = "PRIVATE_CONTACT_DATA",
+    RedactedContactData = "REDACTED_CONTACT_DATA"
 }
 
 
@@ -27,18 +28,18 @@ export enum RegisterParametersSupportedPrivacyEnum {
  * Parameters required to register a new domain.
 **/
 export class RegisterParameters extends SpeakeasyBase {
-  @Metadata({ data: "json, name=availability" })
+  @SpeakeasyMetadata({ data: "json, name=availability" })
   availability?: RegisterParametersAvailabilityEnum;
 
-  @Metadata({ data: "json, name=domainName" })
+  @SpeakeasyMetadata({ data: "json, name=domainName" })
   domainName?: string;
 
-  @Metadata({ data: "json, name=domainNotices" })
+  @SpeakeasyMetadata({ data: "json, name=domainNotices" })
   domainNotices?: RegisterParametersDomainNoticesEnum[];
 
-  @Metadata({ data: "json, name=supportedPrivacy" })
+  @SpeakeasyMetadata({ data: "json, name=supportedPrivacy" })
   supportedPrivacy?: RegisterParametersSupportedPrivacyEnum[];
 
-  @Metadata({ data: "json, name=yearlyPrice" })
+  @SpeakeasyMetadata({ data: "json, name=yearlyPrice" })
   yearlyPrice?: Money;
 }

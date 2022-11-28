@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ConfigManagementConfigSyncDeploymentState } from "./configmanagementconfigsyncdeploymentstate";
 import { ConfigManagementSyncState } from "./configmanagementsyncstate";
 import { ConfigManagementConfigSyncVersion } from "./configmanagementconfigsyncversion";
@@ -36,15 +36,15 @@ var ConfigManagementConfigSyncState = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=deploymentState" }),
+        SpeakeasyMetadata({ data: "json, name=deploymentState" }),
         __metadata("design:type", ConfigManagementConfigSyncDeploymentState)
     ], ConfigManagementConfigSyncState.prototype, "deploymentState", void 0);
     __decorate([
-        Metadata({ data: "json, name=syncState" }),
+        SpeakeasyMetadata({ data: "json, name=syncState" }),
         __metadata("design:type", ConfigManagementSyncState)
     ], ConfigManagementConfigSyncState.prototype, "syncState", void 0);
     __decorate([
-        Metadata({ data: "json, name=version" }),
+        SpeakeasyMetadata({ data: "json, name=version" }),
         __metadata("design:type", ConfigManagementConfigSyncVersion)
     ], ConfigManagementConfigSyncState.prototype, "version", void 0);
     return ConfigManagementConfigSyncState;

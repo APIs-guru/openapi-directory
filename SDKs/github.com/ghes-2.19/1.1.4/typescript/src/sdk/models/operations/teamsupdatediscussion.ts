@@ -1,41 +1,42 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class TeamsUpdateDiscussionPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=discussion_number" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=discussion_number" })
   discussionNumber: number;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=team_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=team_id" })
   teamId: number;
 }
 
 
 export class TeamsUpdateDiscussionRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=body" })
+  @SpeakeasyMetadata({ data: "json, name=body" })
   body?: string;
 
-  @Metadata({ data: "json, name=title" })
+  @SpeakeasyMetadata({ data: "json, name=title" })
   title?: string;
 }
 
 
 export class TeamsUpdateDiscussionRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: TeamsUpdateDiscussionPathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request?: TeamsUpdateDiscussionRequestBody;
 }
 
 
 export class TeamsUpdateDiscussionResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   teamDiscussion?: shared.TeamDiscussion;
 }

@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DataSourceColumnReference } from "./datasourcecolumnreference";
 import { FilterCriteria } from "./filtercriteria";
+
 
 
 // FilterSpec
@@ -8,12 +9,12 @@ import { FilterCriteria } from "./filtercriteria";
  * The filter criteria associated with a specific column.
 **/
 export class FilterSpec extends SpeakeasyBase {
-  @Metadata({ data: "json, name=columnIndex" })
+  @SpeakeasyMetadata({ data: "json, name=columnIndex" })
   columnIndex?: number;
 
-  @Metadata({ data: "json, name=dataSourceColumnReference" })
+  @SpeakeasyMetadata({ data: "json, name=dataSourceColumnReference" })
   dataSourceColumnReference?: DataSourceColumnReference;
 
-  @Metadata({ data: "json, name=filterCriteria" })
+  @SpeakeasyMetadata({ data: "json, name=filterCriteria" })
   filterCriteria?: FilterCriteria;
 }

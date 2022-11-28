@@ -7,6 +7,8 @@ const (
 	VeteranStatusRequestGenderEnumF VeteranStatusRequestGenderEnum = "F"
 )
 
+// VeteranStatusRequest
+// Attributes required to retrieve a Veteran's status
 type VeteranStatusRequest struct {
 	BirthDate  string                          `json:"birth_date"`
 	FirstName  string                          `json:"first_name"`

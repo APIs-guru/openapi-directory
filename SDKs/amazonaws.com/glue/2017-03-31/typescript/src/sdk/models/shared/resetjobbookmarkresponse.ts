@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { JobBookmarkEntry } from "./jobbookmarkentry";
 
 
+
 export class ResetJobBookmarkResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=JobBookmarkEntry" })
+  @SpeakeasyMetadata({ data: "json, name=JobBookmarkEntry" })
   jobBookmarkEntry?: JobBookmarkEntry;
 }

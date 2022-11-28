@@ -1,35 +1,36 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class PostMappingRequest extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/json", elemType: shared.MappingJob })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json", elemType: shared.MappingJob })
   request?: shared.MappingJob[];
 }
 
 
 export class PostMappingResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   bulkMappingJobResult?: any[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   postMapping400WildcardString?: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   postMapping401WildcardString?: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   postMapping406WildcardString?: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   postMapping413WildcardString?: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   postMapping500WildcardString?: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

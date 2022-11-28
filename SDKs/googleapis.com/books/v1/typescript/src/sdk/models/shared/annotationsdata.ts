@@ -1,18 +1,18 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GeoAnnotationdata } from "./geoannotationdata";
 
 
+
 export class Annotationsdata extends SpeakeasyBase {
-  @Metadata({ data: "json, name=items", elemType: shared.GeoAnnotationdata })
+  @SpeakeasyMetadata({ data: "json, name=items", elemType: GeoAnnotationdata })
   items?: GeoAnnotationdata[];
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 
-  @Metadata({ data: "json, name=totalItems" })
+  @SpeakeasyMetadata({ data: "json, name=totalItems" })
   totalItems?: number;
 }

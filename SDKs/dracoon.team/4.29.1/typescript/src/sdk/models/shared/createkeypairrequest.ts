@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import { PrivateKeyContainer } from "./privatekeycontainer";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PrivateKeyContainer } from "./privatekeycontainer";
 import { PublicKeyContainer } from "./publickeycontainer";
+
 
 
 // CreateKeyPairRequest
@@ -9,12 +9,12 @@ import { PublicKeyContainer } from "./publickeycontainer";
  * Request model for creating a key pair
 **/
 export class CreateKeyPairRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=previousPrivateKey" })
+  @SpeakeasyMetadata({ data: "json, name=previousPrivateKey" })
   previousPrivateKey: PrivateKeyContainer;
 
-  @Metadata({ data: "json, name=privateKeyContainer" })
+  @SpeakeasyMetadata({ data: "json, name=privateKeyContainer" })
   privateKeyContainer: PrivateKeyContainer;
 
-  @Metadata({ data: "json, name=publicKeyContainer" })
+  @SpeakeasyMetadata({ data: "json, name=publicKeyContainer" })
   publicKeyContainer: PublicKeyContainer;
 }

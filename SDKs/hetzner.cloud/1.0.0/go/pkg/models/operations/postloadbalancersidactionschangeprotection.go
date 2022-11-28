@@ -8,11 +8,8 @@ type PostLoadBalancersIDActionsChangeProtectionRequestBody struct {
 	Delete *bool `json:"delete,omitempty"`
 }
 
-type PostLoadBalancersIDActionsChangeProtectionRequest struct {
-	PathParams PostLoadBalancersIDActionsChangeProtectionPathParams
-	Request    *PostLoadBalancersIDActionsChangeProtectionRequestBody `request:"mediaType=application/json"`
-}
-
+// PostLoadBalancersIDActionsChangeProtectionActionResponseActionError
+// Error message for the Action if error occurred, otherwise null
 type PostLoadBalancersIDActionsChangeProtectionActionResponseActionError struct {
 	Code    string `json:"code"`
 	Message string `json:"message"`
@@ -44,6 +41,11 @@ type PostLoadBalancersIDActionsChangeProtectionActionResponseAction struct {
 
 type PostLoadBalancersIDActionsChangeProtectionActionResponse struct {
 	Action PostLoadBalancersIDActionsChangeProtectionActionResponseAction `json:"action"`
+}
+
+type PostLoadBalancersIDActionsChangeProtectionRequest struct {
+	PathParams PostLoadBalancersIDActionsChangeProtectionPathParams
+	Request    *PostLoadBalancersIDActionsChangeProtectionRequestBody `request:"mediaType=application/json"`
 }
 
 type PostLoadBalancersIDActionsChangeProtectionResponse struct {

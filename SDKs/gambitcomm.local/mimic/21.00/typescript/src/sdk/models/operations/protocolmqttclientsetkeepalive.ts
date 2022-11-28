@@ -1,28 +1,29 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ProtocolMqttClientSetKeepalivePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=agentNum" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=agentNum" })
   agentNum: number;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=aliveTime" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=aliveTime" })
   aliveTime: number;
 }
 
 
 export class ProtocolMqttClientSetKeepaliveRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: ProtocolMqttClientSetKeepalivePathParams;
 }
 
 
 export class ProtocolMqttClientSetKeepaliveResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   protocolMqttClientSetKeepalive200ApplicationJsonInt32Integers?: number[];
 }

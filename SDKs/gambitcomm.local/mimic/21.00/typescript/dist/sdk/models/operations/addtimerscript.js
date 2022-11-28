@@ -22,26 +22,26 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var AddTimerScriptPathParams = /** @class */ (function (_super) {
     __extends(AddTimerScriptPathParams, _super);
     function AddTimerScriptPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=agentNum" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=agentNum" }),
         __metadata("design:type", Number)
     ], AddTimerScriptPathParams.prototype, "agentNum", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=arg" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=arg" }),
         __metadata("design:type", String)
     ], AddTimerScriptPathParams.prototype, "arg", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=interval" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=interval" }),
         __metadata("design:type", Number)
     ], AddTimerScriptPathParams.prototype, "interval", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=script" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=script" }),
         __metadata("design:type", String)
     ], AddTimerScriptPathParams.prototype, "script", void 0);
     return AddTimerScriptPathParams;
@@ -53,7 +53,7 @@ var AddTimerScriptRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", AddTimerScriptPathParams)
     ], AddTimerScriptRequest.prototype, "pathParams", void 0);
     return AddTimerScriptRequest;
@@ -65,15 +65,15 @@ var AddTimerScriptResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], AddTimerScriptResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], AddTimerScriptResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], AddTimerScriptResponse.prototype, "addTimerScript200ApplicationJsonString", void 0);
     return AddTimerScriptResponse;

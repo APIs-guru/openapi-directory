@@ -1,35 +1,36 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { NiCallerIdentity } from "./nicalleridentity";
 import { NiCurrentCarrierProperties } from "./nicurrentcarrierproperties";
 import { NiInitialCarrierProperties } from "./niinitialcarrierproperties";
 import { NiRealtimeData } from "./nirealtimedata";
 import { NiRoaming } from "./niroaming";
 
+
 export enum NiResponseJsonAdvancedSyncPortedEnum {
-    Unknown = "unknown"
-,    Ported = "ported"
-,    NotPorted = "not_ported"
-,    AssumedNotPorted = "assumed_not_ported"
-,    AssumedPorted = "assumed_ported"
-,    Null = "null"
+    Unknown = "unknown",
+    Ported = "ported",
+    NotPorted = "not_ported",
+    AssumedNotPorted = "assumed_not_ported",
+    AssumedPorted = "assumed_ported",
+    Null = "null"
 }
 
 export enum NiResponseJsonAdvancedSyncReachableEnum {
-    Unknown = "unknown"
-,    Reachable = "reachable"
-,    Undeliverable = "undeliverable"
-,    Absent = "absent"
-,    BadNumber = "bad_number"
-,    Blacklisted = "blacklisted"
-,    Null = "null"
+    Unknown = "unknown",
+    Reachable = "reachable",
+    Undeliverable = "undeliverable",
+    Absent = "absent",
+    BadNumber = "bad_number",
+    Blacklisted = "blacklisted",
+    Null = "null"
 }
 
 export enum NiResponseJsonAdvancedSyncValidNumberEnum {
-    Unknown = "unknown"
-,    Valid = "valid"
-,    NotValid = "not_valid"
-,    Inferred = "inferred"
-,    InferredNotValid = "inferred_not_valid"
+    Unknown = "unknown",
+    Valid = "valid",
+    NotValid = "not_valid",
+    Inferred = "inferred",
+    InferredNotValid = "inferred_not_valid"
 }
 
 
@@ -38,69 +39,69 @@ export enum NiResponseJsonAdvancedSyncValidNumberEnum {
  * Advanced Response (sync)
 **/
 export class NiResponseJsonAdvancedSync extends SpeakeasyBase {
-  @Metadata({ data: "json, name=caller_identity" })
+  @SpeakeasyMetadata({ data: "json, name=caller_identity" })
   callerIdentity?: NiCallerIdentity;
 
-  @Metadata({ data: "json, name=country_code" })
+  @SpeakeasyMetadata({ data: "json, name=country_code" })
   countryCode: string;
 
-  @Metadata({ data: "json, name=country_code_iso3" })
+  @SpeakeasyMetadata({ data: "json, name=country_code_iso3" })
   countryCodeIso3: string;
 
-  @Metadata({ data: "json, name=country_name" })
+  @SpeakeasyMetadata({ data: "json, name=country_name" })
   countryName: string;
 
-  @Metadata({ data: "json, name=country_prefix" })
+  @SpeakeasyMetadata({ data: "json, name=country_prefix" })
   countryPrefix: string;
 
-  @Metadata({ data: "json, name=current_carrier" })
+  @SpeakeasyMetadata({ data: "json, name=current_carrier" })
   currentCarrier?: NiCurrentCarrierProperties;
 
-  @Metadata({ data: "json, name=international_format_number" })
+  @SpeakeasyMetadata({ data: "json, name=international_format_number" })
   internationalFormatNumber: string;
 
-  @Metadata({ data: "json, name=lookup_outcome" })
+  @SpeakeasyMetadata({ data: "json, name=lookup_outcome" })
   lookupOutcome?: number;
 
-  @Metadata({ data: "json, name=lookup_outcome_message" })
+  @SpeakeasyMetadata({ data: "json, name=lookup_outcome_message" })
   lookupOutcomeMessage?: string;
 
-  @Metadata({ data: "json, name=national_format_number" })
+  @SpeakeasyMetadata({ data: "json, name=national_format_number" })
   nationalFormatNumber: string;
 
-  @Metadata({ data: "json, name=original_carrier" })
+  @SpeakeasyMetadata({ data: "json, name=original_carrier" })
   originalCarrier?: NiInitialCarrierProperties;
 
-  @Metadata({ data: "json, name=ported" })
+  @SpeakeasyMetadata({ data: "json, name=ported" })
   ported?: NiResponseJsonAdvancedSyncPortedEnum;
 
-  @Metadata({ data: "json, name=reachable" })
+  @SpeakeasyMetadata({ data: "json, name=reachable" })
   reachable?: NiResponseJsonAdvancedSyncReachableEnum;
 
-  @Metadata({ data: "json, name=real_time_data" })
+  @SpeakeasyMetadata({ data: "json, name=real_time_data" })
   realTimeData?: NiRealtimeData;
 
-  @Metadata({ data: "json, name=refund_price" })
+  @SpeakeasyMetadata({ data: "json, name=refund_price" })
   refundPrice?: string;
 
-  @Metadata({ data: "json, name=remaining_balance" })
+  @SpeakeasyMetadata({ data: "json, name=remaining_balance" })
   remainingBalance?: string;
 
-  @Metadata({ data: "json, name=request_id" })
+  @SpeakeasyMetadata({ data: "json, name=request_id" })
   requestId: string;
 
-  @Metadata({ data: "json, name=request_price" })
+  @SpeakeasyMetadata({ data: "json, name=request_price" })
   requestPrice?: string;
 
-  @Metadata({ data: "json, name=roaming" })
+  @SpeakeasyMetadata({ data: "json, name=roaming" })
   roaming?: NiRoaming;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status: number;
 
-  @Metadata({ data: "json, name=status_message" })
+  @SpeakeasyMetadata({ data: "json, name=status_message" })
   statusMessage: string;
 
-  @Metadata({ data: "json, name=valid_number" })
+  @SpeakeasyMetadata({ data: "json, name=valid_number" })
   validNumber?: NiResponseJsonAdvancedSyncValidNumberEnum;
 }

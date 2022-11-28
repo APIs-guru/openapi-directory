@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { EncodingTypeEnum } from "./encodingtypeenum";
 import { FunctionConfigurationEnvironment } from "./functionconfigurationenvironment";
 // FunctionConfiguration
@@ -35,31 +35,31 @@ var FunctionConfiguration = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=EncodingType" }),
+        SpeakeasyMetadata({ data: "json, name=EncodingType" }),
         __metadata("design:type", String)
     ], FunctionConfiguration.prototype, "encodingType", void 0);
     __decorate([
-        Metadata({ data: "json, name=Environment" }),
+        SpeakeasyMetadata({ data: "json, name=Environment" }),
         __metadata("design:type", FunctionConfigurationEnvironment)
     ], FunctionConfiguration.prototype, "environment", void 0);
     __decorate([
-        Metadata({ data: "json, name=ExecArgs" }),
+        SpeakeasyMetadata({ data: "json, name=ExecArgs" }),
         __metadata("design:type", String)
     ], FunctionConfiguration.prototype, "execArgs", void 0);
     __decorate([
-        Metadata({ data: "json, name=Executable" }),
+        SpeakeasyMetadata({ data: "json, name=Executable" }),
         __metadata("design:type", String)
     ], FunctionConfiguration.prototype, "executable", void 0);
     __decorate([
-        Metadata({ data: "json, name=MemorySize" }),
+        SpeakeasyMetadata({ data: "json, name=MemorySize" }),
         __metadata("design:type", Number)
     ], FunctionConfiguration.prototype, "memorySize", void 0);
     __decorate([
-        Metadata({ data: "json, name=Pinned" }),
+        SpeakeasyMetadata({ data: "json, name=Pinned" }),
         __metadata("design:type", Boolean)
     ], FunctionConfiguration.prototype, "pinned", void 0);
     __decorate([
-        Metadata({ data: "json, name=Timeout" }),
+        SpeakeasyMetadata({ data: "json, name=Timeout" }),
         __metadata("design:type", Number)
     ], FunctionConfiguration.prototype, "timeout", void 0);
     return FunctionConfiguration;

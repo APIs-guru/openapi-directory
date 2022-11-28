@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { BatchItemError } from "./batchitemerror";
 import { BatchDetectKeyPhrasesItemResult } from "./batchdetectkeyphrasesitemresult";
 export declare class BatchDetectKeyPhrasesResponse extends SpeakeasyBase {

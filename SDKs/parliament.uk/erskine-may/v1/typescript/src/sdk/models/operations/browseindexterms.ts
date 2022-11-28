@@ -1,35 +1,36 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class BrowseIndexTermsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=skip" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=skip" })
   skip?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=startLetter" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=startLetter" })
   startLetter?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=take" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=take" })
   take?: number;
 }
 
 
 export class BrowseIndexTermsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: BrowseIndexTermsQueryParams;
 }
 
 
 export class BrowseIndexTermsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   erskineMaySearchErskineMayIndexTermSearchResult?: shared.ErskineMaySearchErskineMayIndexTermSearchResult;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

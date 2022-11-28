@@ -1,35 +1,36 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetTeamPpaQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=conference" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=conference" })
   conference?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=excludeGarbageTime" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=excludeGarbageTime" })
   excludeGarbageTime?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=team" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=team" })
   team?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=year" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=year" })
   year?: number;
 }
 
 
 export class GetTeamPpaRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetTeamPpaQueryParams;
 }
 
 
 export class GetTeamPpaResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata({ elemType: shared.TeamPpa })
+  @SpeakeasyMetadata({ elemType: shared.TeamPpa })
   teamPpas?: shared.TeamPpa[];
 }

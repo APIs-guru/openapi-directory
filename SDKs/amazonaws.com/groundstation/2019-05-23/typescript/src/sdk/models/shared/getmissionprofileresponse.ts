@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GetMissionProfileResponse
@@ -6,33 +7,33 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * <p/>
 **/
 export class GetMissionProfileResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=contactPostPassDurationSeconds" })
+  @SpeakeasyMetadata({ data: "json, name=contactPostPassDurationSeconds" })
   contactPostPassDurationSeconds?: number;
 
-  @Metadata({ data: "json, name=contactPrePassDurationSeconds" })
+  @SpeakeasyMetadata({ data: "json, name=contactPrePassDurationSeconds" })
   contactPrePassDurationSeconds?: number;
 
-  @Metadata({ data: "json, name=dataflowEdges" })
+  @SpeakeasyMetadata({ data: "json, name=dataflowEdges" })
   dataflowEdges?: string[][];
 
-  @Metadata({ data: "json, name=minimumViableContactDurationSeconds" })
+  @SpeakeasyMetadata({ data: "json, name=minimumViableContactDurationSeconds" })
   minimumViableContactDurationSeconds?: number;
 
-  @Metadata({ data: "json, name=missionProfileArn" })
+  @SpeakeasyMetadata({ data: "json, name=missionProfileArn" })
   missionProfileArn?: string;
 
-  @Metadata({ data: "json, name=missionProfileId" })
+  @SpeakeasyMetadata({ data: "json, name=missionProfileId" })
   missionProfileId?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=region" })
+  @SpeakeasyMetadata({ data: "json, name=region" })
   region?: string;
 
-  @Metadata({ data: "json, name=tags" })
+  @SpeakeasyMetadata({ data: "json, name=tags" })
   tags?: Map<string, string>;
 
-  @Metadata({ data: "json, name=trackingConfigArn" })
+  @SpeakeasyMetadata({ data: "json, name=trackingConfigArn" })
   trackingConfigArn?: string;
 }

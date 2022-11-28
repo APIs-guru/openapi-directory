@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 
 class CreateConfigInputCountryEnum(str, Enum):
     ALL = "ALL"
@@ -15,7 +16,12 @@ class CreateConfigInputCountryEnum(str, Enum):
 
 @dataclass
 class CreateConfigInput:
-    country: CreateConfigInputCountryEnum = field(default=None, metadata={'form': { 'field_name': 'country' }})
+    r"""CreateConfigInput
+    Represents paramaters required to create a score configuration
+    """
+    
+    country: CreateConfigInputCountryEnum = field(metadata={'form': { 'field_name': 'country' }})
+    type: str = field(metadata={'form': { 'field_name': 'type' }})
     dataset_affiliations_and_insurances: Optional[float] = field(default=None, metadata={'form': { 'field_name': 'dataset_affiliations_and_insurances' }})
     dataset_alert_in_media: Optional[float] = field(default=None, metadata={'form': { 'field_name': 'dataset_alert_in_media' }})
     dataset_business_background: Optional[float] = field(default=None, metadata={'form': { 'field_name': 'dataset_business_background' }})
@@ -29,5 +35,4 @@ class CreateConfigInput:
     dataset_traffic_fines: Optional[float] = field(default=None, metadata={'form': { 'field_name': 'dataset_traffic_fines' }})
     dataset_vehicle_information: Optional[float] = field(default=None, metadata={'form': { 'field_name': 'dataset_vehicle_information' }})
     dataset_vehicle_permits: Optional[float] = field(default=None, metadata={'form': { 'field_name': 'dataset_vehicle_permits' }})
-    type: str = field(default=None, metadata={'form': { 'field_name': 'type' }})
     

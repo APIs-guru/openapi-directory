@@ -16,12 +16,6 @@ type MoveTemplateToFolderSecurity struct {
 	APITokenBasic shared.SchemeAPITokenBasic `security:"scheme,type=http,subtype=basic"`
 }
 
-type MoveTemplateToFolderRequest struct {
-	PathParams MoveTemplateToFolderPathParams
-	Request    MoveTemplateToFolderMoveTemplateData `request:"mediaType=application/json"`
-	Security   MoveTemplateToFolderSecurity
-}
-
 type MoveTemplateToFolderTemplateExpirationIntervalEnum string
 
 const (
@@ -51,6 +45,12 @@ type MoveTemplateToFolderTemplate struct {
 	SlackWebhookURL           string                                              `json:"slack_webhook_url"`
 	TemplateType              string                                              `json:"template_type"`
 	WebhookURL                string                                              `json:"webhook_url"`
+}
+
+type MoveTemplateToFolderRequest struct {
+	PathParams MoveTemplateToFolderPathParams
+	Request    MoveTemplateToFolderMoveTemplateData `request:"mediaType=application/json"`
+	Security   MoveTemplateToFolderSecurity
 }
 
 type MoveTemplateToFolderResponse struct {

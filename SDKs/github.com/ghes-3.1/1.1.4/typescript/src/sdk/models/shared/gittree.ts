@@ -1,24 +1,24 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GitTreeTree extends SpeakeasyBase {
-  @Metadata({ data: "json, name=mode" })
+  @SpeakeasyMetadata({ data: "json, name=mode" })
   mode?: string;
 
-  @Metadata({ data: "json, name=path" })
+  @SpeakeasyMetadata({ data: "json, name=path" })
   path?: string;
 
-  @Metadata({ data: "json, name=sha" })
+  @SpeakeasyMetadata({ data: "json, name=sha" })
   sha?: string;
 
-  @Metadata({ data: "json, name=size" })
+  @SpeakeasyMetadata({ data: "json, name=size" })
   size?: number;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: string;
 
-  @Metadata({ data: "json, name=url" })
+  @SpeakeasyMetadata({ data: "json, name=url" })
   url?: string;
 }
 
@@ -28,15 +28,15 @@ export class GitTreeTree extends SpeakeasyBase {
  * The hierarchy between files in a Git repository.
 **/
 export class GitTree extends SpeakeasyBase {
-  @Metadata({ data: "json, name=sha" })
+  @SpeakeasyMetadata({ data: "json, name=sha" })
   sha: string;
 
-  @Metadata({ data: "json, name=tree", elemType: shared.GitTreeTree })
+  @SpeakeasyMetadata({ data: "json, name=tree", elemType: GitTreeTree })
   tree: GitTreeTree[];
 
-  @Metadata({ data: "json, name=truncated" })
+  @SpeakeasyMetadata({ data: "json, name=truncated" })
   truncated: boolean;
 
-  @Metadata({ data: "json, name=url" })
+  @SpeakeasyMetadata({ data: "json, name=url" })
   url: string;
 }

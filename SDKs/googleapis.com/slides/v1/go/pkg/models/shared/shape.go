@@ -148,6 +148,8 @@ const (
 	ShapeShapeTypeEnumCustom                     ShapeShapeTypeEnum = "CUSTOM"
 )
 
+// Shape
+// A PageElement kind representing a generic shape that does not have a more specific classification.
 type Shape struct {
 	Placeholder     *Placeholder        `json:"placeholder,omitempty"`
 	ShapeProperties *ShapeProperties    `json:"shapeProperties,omitempty"`

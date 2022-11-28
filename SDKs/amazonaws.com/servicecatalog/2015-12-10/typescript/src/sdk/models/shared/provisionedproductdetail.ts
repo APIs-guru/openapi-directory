@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ProvisionedProductStatusEnum } from "./provisionedproductstatusenum";
+
 
 
 // ProvisionedProductDetail
@@ -7,45 +8,45 @@ import { ProvisionedProductStatusEnum } from "./provisionedproductstatusenum";
  * Information about a provisioned product.
 **/
 export class ProvisionedProductDetail extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Arn" })
+  @SpeakeasyMetadata({ data: "json, name=Arn" })
   arn?: string;
 
-  @Metadata({ data: "json, name=CreatedTime" })
+  @SpeakeasyMetadata({ data: "json, name=CreatedTime" })
   createdTime?: Date;
 
-  @Metadata({ data: "json, name=Id" })
+  @SpeakeasyMetadata({ data: "json, name=Id" })
   id?: string;
 
-  @Metadata({ data: "json, name=IdempotencyToken" })
+  @SpeakeasyMetadata({ data: "json, name=IdempotencyToken" })
   idempotencyToken?: string;
 
-  @Metadata({ data: "json, name=LastProvisioningRecordId" })
+  @SpeakeasyMetadata({ data: "json, name=LastProvisioningRecordId" })
   lastProvisioningRecordId?: string;
 
-  @Metadata({ data: "json, name=LastRecordId" })
+  @SpeakeasyMetadata({ data: "json, name=LastRecordId" })
   lastRecordId?: string;
 
-  @Metadata({ data: "json, name=LastSuccessfulProvisioningRecordId" })
+  @SpeakeasyMetadata({ data: "json, name=LastSuccessfulProvisioningRecordId" })
   lastSuccessfulProvisioningRecordId?: string;
 
-  @Metadata({ data: "json, name=LaunchRoleArn" })
+  @SpeakeasyMetadata({ data: "json, name=LaunchRoleArn" })
   launchRoleArn?: string;
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name?: string;
 
-  @Metadata({ data: "json, name=ProductId" })
+  @SpeakeasyMetadata({ data: "json, name=ProductId" })
   productId?: string;
 
-  @Metadata({ data: "json, name=ProvisioningArtifactId" })
+  @SpeakeasyMetadata({ data: "json, name=ProvisioningArtifactId" })
   provisioningArtifactId?: string;
 
-  @Metadata({ data: "json, name=Status" })
+  @SpeakeasyMetadata({ data: "json, name=Status" })
   status?: ProvisionedProductStatusEnum;
 
-  @Metadata({ data: "json, name=StatusMessage" })
+  @SpeakeasyMetadata({ data: "json, name=StatusMessage" })
   statusMessage?: string;
 
-  @Metadata({ data: "json, name=Type" })
+  @SpeakeasyMetadata({ data: "json, name=Type" })
   type?: string;
 }

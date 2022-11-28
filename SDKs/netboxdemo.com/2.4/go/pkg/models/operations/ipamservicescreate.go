@@ -5,7 +5,7 @@ import (
 )
 
 type IpamServicesCreateRequest struct {
-	Request shared.WritableService `request:"mediaType=application/json"`
+	Request shared.WritableServiceInput `request:"mediaType=application/json"`
 }
 
 type IpamServicesCreateResponse struct {

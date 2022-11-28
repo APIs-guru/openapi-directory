@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum SetMuteRequestMuteEnum {
-    MuteUnspecified = "MUTE_UNSPECIFIED"
-,    Muted = "MUTED"
-,    Unmuted = "UNMUTED"
-,    Undefined = "UNDEFINED"
+    MuteUnspecified = "MUTE_UNSPECIFIED",
+    Muted = "MUTED",
+    Unmuted = "UNMUTED",
+    Undefined = "UNDEFINED"
 }
 
 
@@ -13,6 +14,6 @@ export enum SetMuteRequestMuteEnum {
  * Request message for updating a finding's mute status.
 **/
 export class SetMuteRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=mute" })
+  @SpeakeasyMetadata({ data: "json, name=mute" })
   mute?: SetMuteRequestMuteEnum;
 }

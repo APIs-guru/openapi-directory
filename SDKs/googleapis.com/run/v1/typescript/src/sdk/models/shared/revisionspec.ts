@@ -1,8 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Container } from "./container";
 import { LocalObjectReference } from "./localobjectreference";
 import { Volume } from "./volume";
+
 
 
 // RevisionSpec
@@ -10,24 +10,24 @@ import { Volume } from "./volume";
  * RevisionSpec holds the desired state of the Revision (from the client).
 **/
 export class RevisionSpec extends SpeakeasyBase {
-  @Metadata({ data: "json, name=containerConcurrency" })
+  @SpeakeasyMetadata({ data: "json, name=containerConcurrency" })
   containerConcurrency?: number;
 
-  @Metadata({ data: "json, name=containers", elemType: shared.Container })
+  @SpeakeasyMetadata({ data: "json, name=containers", elemType: Container })
   containers?: Container[];
 
-  @Metadata({ data: "json, name=enableServiceLinks" })
+  @SpeakeasyMetadata({ data: "json, name=enableServiceLinks" })
   enableServiceLinks?: boolean;
 
-  @Metadata({ data: "json, name=imagePullSecrets", elemType: shared.LocalObjectReference })
+  @SpeakeasyMetadata({ data: "json, name=imagePullSecrets", elemType: LocalObjectReference })
   imagePullSecrets?: LocalObjectReference[];
 
-  @Metadata({ data: "json, name=serviceAccountName" })
+  @SpeakeasyMetadata({ data: "json, name=serviceAccountName" })
   serviceAccountName?: string;
 
-  @Metadata({ data: "json, name=timeoutSeconds" })
+  @SpeakeasyMetadata({ data: "json, name=timeoutSeconds" })
   timeoutSeconds?: number;
 
-  @Metadata({ data: "json, name=volumes", elemType: shared.Volume })
+  @SpeakeasyMetadata({ data: "json, name=volumes", elemType: Volume })
   volumes?: Volume[];
 }

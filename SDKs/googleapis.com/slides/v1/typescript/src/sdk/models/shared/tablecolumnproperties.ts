@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Dimension } from "./dimension";
+
 
 
 // TableColumnProperties
@@ -7,6 +8,6 @@ import { Dimension } from "./dimension";
  * Properties of each column in a table.
 **/
 export class TableColumnProperties extends SpeakeasyBase {
-  @Metadata({ data: "json, name=columnWidth" })
+  @SpeakeasyMetadata({ data: "json, name=columnWidth" })
   columnWidth?: Dimension;
 }

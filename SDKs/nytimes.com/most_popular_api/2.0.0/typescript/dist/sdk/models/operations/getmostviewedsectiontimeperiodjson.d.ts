@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class GetMostviewedSectionTimePeriodJsonPathParams extends SpeakeasyBase {
     section: shared.SectionEnum;
@@ -7,15 +7,15 @@ export declare class GetMostviewedSectionTimePeriodJsonPathParams extends Speake
 export declare class GetMostviewedSectionTimePeriodJsonSecurity extends SpeakeasyBase {
     apiKey: shared.SchemeApiKey;
 }
-export declare class GetMostviewedSectionTimePeriodJsonRequest extends SpeakeasyBase {
-    pathParams: GetMostviewedSectionTimePeriodJsonPathParams;
-    security: GetMostviewedSectionTimePeriodJsonSecurity;
-}
 export declare class GetMostviewedSectionTimePeriodJson200ApplicationJson extends SpeakeasyBase {
     copyright?: string;
     numResults?: number;
     results?: shared.Article[];
     status?: string;
+}
+export declare class GetMostviewedSectionTimePeriodJsonRequest extends SpeakeasyBase {
+    pathParams: GetMostviewedSectionTimePeriodJsonPathParams;
+    security: GetMostviewedSectionTimePeriodJsonSecurity;
 }
 export declare class GetMostviewedSectionTimePeriodJsonResponse extends SpeakeasyBase {
     contentType: string;

@@ -22,14 +22,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var GetTextPronunciationsPathParams = /** @class */ (function (_super) {
     __extends(GetTextPronunciationsPathParams, _super);
     function GetTextPronunciationsPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=word" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=word" }),
         __metadata("design:type", String)
     ], GetTextPronunciationsPathParams.prototype, "word", void 0);
     return GetTextPronunciationsPathParams;
@@ -63,19 +63,19 @@ var GetTextPronunciationsQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=limit" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=limit" }),
         __metadata("design:type", Number)
     ], GetTextPronunciationsQueryParams.prototype, "limit", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=sourceDictionary" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sourceDictionary" }),
         __metadata("design:type", String)
     ], GetTextPronunciationsQueryParams.prototype, "sourceDictionary", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=typeFormat" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=typeFormat" }),
         __metadata("design:type", String)
     ], GetTextPronunciationsQueryParams.prototype, "typeFormat", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=useCanonical" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=useCanonical" }),
         __metadata("design:type", String)
     ], GetTextPronunciationsQueryParams.prototype, "useCanonical", void 0);
     return GetTextPronunciationsQueryParams;
@@ -87,11 +87,11 @@ var GetTextPronunciationsRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetTextPronunciationsPathParams)
     ], GetTextPronunciationsRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetTextPronunciationsQueryParams)
     ], GetTextPronunciationsRequest.prototype, "queryParams", void 0);
     return GetTextPronunciationsRequest;
@@ -103,15 +103,15 @@ var GetTextPronunciationsResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], GetTextPronunciationsResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetTextPronunciationsResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetTextPronunciationsResponse.prototype, "statusCode", void 0);
     return GetTextPronunciationsResponse;

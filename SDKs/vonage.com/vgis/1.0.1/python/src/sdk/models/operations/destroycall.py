@@ -5,18 +5,18 @@ from sdk.models import shared
 
 @dataclass
 class DestroyCallPathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class DestroyCallRequest:
-    path_params: DestroyCallPathParams = field(default=None)
+    path_params: DestroyCallPathParams = field()
     
 
 @dataclass
 class DestroyCallResponse:
+    content_type: str = field()
+    status_code: int = field()
     calls: Optional[List[shared.Call]] = field(default=None)
-    content_type: str = field(default=None)
     error_response: Optional[shared.ErrorResponse] = field(default=None)
-    status_code: int = field(default=None)
     

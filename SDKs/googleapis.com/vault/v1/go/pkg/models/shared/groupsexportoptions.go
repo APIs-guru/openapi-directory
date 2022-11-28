@@ -8,6 +8,8 @@ const (
 	GroupsExportOptionsExportFormatEnumPst                     GroupsExportOptionsExportFormatEnum = "PST"
 )
 
+// GroupsExportOptions
+// Options for Groups exports.
 type GroupsExportOptions struct {
 	ExportFormat *GroupsExportOptionsExportFormatEnum `json:"exportFormat,omitempty"`
 }

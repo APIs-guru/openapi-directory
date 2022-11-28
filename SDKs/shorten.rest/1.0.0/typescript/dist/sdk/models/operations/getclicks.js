@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetClicksQueryParams = /** @class */ (function (_super) {
     __extends(GetClicksQueryParams, _super);
@@ -30,11 +30,11 @@ var GetClicksQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=continueFrom" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=continueFrom" }),
         __metadata("design:type", String)
     ], GetClicksQueryParams.prototype, "continueFrom", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=limit" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=limit" }),
         __metadata("design:type", Number)
     ], GetClicksQueryParams.prototype, "limit", void 0);
     return GetClicksQueryParams;
@@ -46,7 +46,7 @@ var GetClicksSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeApiKeyAuth)
     ], GetClicksSecurity.prototype, "apiKeyAuth", void 0);
     return GetClicksSecurity;
@@ -58,11 +58,11 @@ var GetClicksRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetClicksQueryParams)
     ], GetClicksRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetClicksSecurity)
     ], GetClicksRequest.prototype, "security", void 0);
     return GetClicksRequest;
@@ -74,15 +74,15 @@ var GetClicksResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetClicksResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.GetClicksModel)
     ], GetClicksResponse.prototype, "getClicksModel", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetClicksResponse.prototype, "statusCode", void 0);
     return GetClicksResponse;

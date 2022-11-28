@@ -16,12 +16,12 @@ type GetMappingValuesKeyPathParams struct {
 	Key GetMappingValuesKeyKeyEnum `pathParam:"style=simple,explode=false,name=key"`
 }
 
-type GetMappingValuesKeyRequest struct {
-	PathParams GetMappingValuesKeyPathParams
-}
-
 type GetMappingValuesKey200ApplicationJSON struct {
 	Values []string `json:"values,omitempty"`
+}
+
+type GetMappingValuesKeyRequest struct {
+	PathParams GetMappingValuesKeyPathParams
 }
 
 type GetMappingValuesKeyResponse struct {

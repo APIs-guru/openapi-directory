@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // VoidedPurchase
@@ -6,24 +7,24 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A VoidedPurchase resource indicates a purchase that was either canceled/refunded/charged-back.
 **/
 export class VoidedPurchase extends SpeakeasyBase {
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=orderId" })
+  @SpeakeasyMetadata({ data: "json, name=orderId" })
   orderId?: string;
 
-  @Metadata({ data: "json, name=purchaseTimeMillis" })
+  @SpeakeasyMetadata({ data: "json, name=purchaseTimeMillis" })
   purchaseTimeMillis?: string;
 
-  @Metadata({ data: "json, name=purchaseToken" })
+  @SpeakeasyMetadata({ data: "json, name=purchaseToken" })
   purchaseToken?: string;
 
-  @Metadata({ data: "json, name=voidedReason" })
+  @SpeakeasyMetadata({ data: "json, name=voidedReason" })
   voidedReason?: number;
 
-  @Metadata({ data: "json, name=voidedSource" })
+  @SpeakeasyMetadata({ data: "json, name=voidedSource" })
   voidedSource?: number;
 
-  @Metadata({ data: "json, name=voidedTimeMillis" })
+  @SpeakeasyMetadata({ data: "json, name=voidedTimeMillis" })
   voidedTimeMillis?: string;
 }

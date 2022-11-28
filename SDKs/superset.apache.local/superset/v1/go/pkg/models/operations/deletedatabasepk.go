@@ -12,11 +12,6 @@ type DeleteDatabasePkSecurity struct {
 	Jwt shared.SchemeJwt `security:"scheme,type=http,subtype=bearer"`
 }
 
-type DeleteDatabasePkRequest struct {
-	PathParams DeleteDatabasePkPathParams
-	Security   DeleteDatabasePkSecurity
-}
-
 type DeleteDatabasePk200ApplicationJSON struct {
 	Message *string `json:"message,omitempty"`
 }
@@ -39,6 +34,11 @@ type DeleteDatabasePk422ApplicationJSON struct {
 
 type DeleteDatabasePk500ApplicationJSON struct {
 	Message *string `json:"message,omitempty"`
+}
+
+type DeleteDatabasePkRequest struct {
+	PathParams DeleteDatabasePkPathParams
+	Security   DeleteDatabasePkSecurity
 }
 
 type DeleteDatabasePkResponse struct {

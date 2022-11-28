@@ -1,27 +1,25 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import dimensionheader
-from . import row
-from . import responsemetadata
-from . import metricheader
-from . import row
-from . import propertyquota
-from . import row
-from . import row
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class RunReportResponse:
-    dimension_headers: Optional[List[dimensionheader.DimensionHeader]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'dimensionHeaders' }})
-    kind: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'kind' }})
-    maximums: Optional[List[row.Row]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'maximums' }})
-    metadata: Optional[responsemetadata.ResponseMetaData] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'metadata' }})
-    metric_headers: Optional[List[metricheader.MetricHeader]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'metricHeaders' }})
-    minimums: Optional[List[row.Row]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'minimums' }})
-    property_quota: Optional[propertyquota.PropertyQuota] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'propertyQuota' }})
-    row_count: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'rowCount' }})
-    rows: Optional[List[row.Row]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'rows' }})
-    totals: Optional[List[row.Row]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'totals' }})
+    r"""RunReportResponse
+    The response report table corresponding to a request.
+    """
+    
+    dimension_headers: Optional[List[DimensionHeader]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('dimensionHeaders') }})
+    kind: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('kind') }})
+    maximums: Optional[List[Row]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('maximums') }})
+    metadata: Optional[ResponseMetaData] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('metadata') }})
+    metric_headers: Optional[List[MetricHeader]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('metricHeaders') }})
+    minimums: Optional[List[Row]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('minimums') }})
+    property_quota: Optional[PropertyQuota] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('propertyQuota') }})
+    row_count: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('rowCount') }})
+    rows: Optional[List[Row]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('rows') }})
+    totals: Optional[List[Row]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('totals') }})
     

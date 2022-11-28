@@ -16,6 +16,8 @@ const (
 	IPAllocationPolicyStackTypeEnumIpv4Ipv6             IPAllocationPolicyStackTypeEnum = "IPV4_IPV6"
 )
 
+// IPAllocationPolicy
+// Configuration for controlling how IPs are allocated in the cluster.
 type IPAllocationPolicy struct {
 	AllowRouteOverlap          *bool                                 `json:"allowRouteOverlap,omitempty"`
 	ClusterIpv4Cidr            *string                               `json:"clusterIpv4Cidr,omitempty"`
@@ -31,6 +33,27 @@ type IPAllocationPolicy struct {
 	ServicesSecondaryRangeName *string                               `json:"servicesSecondaryRangeName,omitempty"`
 	StackType                  *IPAllocationPolicyStackTypeEnum      `json:"stackType,omitempty"`
 	SubnetIpv6CidrBlock        *string                               `json:"subnetIpv6CidrBlock,omitempty"`
+	SubnetworkName             *string                               `json:"subnetworkName,omitempty"`
+	TpuIpv4CidrBlock           *string                               `json:"tpuIpv4CidrBlock,omitempty"`
+	UseIPAliases               *bool                                 `json:"useIpAliases,omitempty"`
+	UseRoutes                  *bool                                 `json:"useRoutes,omitempty"`
+}
+
+// IPAllocationPolicyInput
+// Configuration for controlling how IPs are allocated in the cluster.
+type IPAllocationPolicyInput struct {
+	AllowRouteOverlap          *bool                                 `json:"allowRouteOverlap,omitempty"`
+	ClusterIpv4Cidr            *string                               `json:"clusterIpv4Cidr,omitempty"`
+	ClusterIpv4CidrBlock       *string                               `json:"clusterIpv4CidrBlock,omitempty"`
+	ClusterSecondaryRangeName  *string                               `json:"clusterSecondaryRangeName,omitempty"`
+	CreateSubnetwork           *bool                                 `json:"createSubnetwork,omitempty"`
+	Ipv6AccessType             *IPAllocationPolicyIpv6AccessTypeEnum `json:"ipv6AccessType,omitempty"`
+	NodeIpv4Cidr               *string                               `json:"nodeIpv4Cidr,omitempty"`
+	NodeIpv4CidrBlock          *string                               `json:"nodeIpv4CidrBlock,omitempty"`
+	ServicesIpv4Cidr           *string                               `json:"servicesIpv4Cidr,omitempty"`
+	ServicesIpv4CidrBlock      *string                               `json:"servicesIpv4CidrBlock,omitempty"`
+	ServicesSecondaryRangeName *string                               `json:"servicesSecondaryRangeName,omitempty"`
+	StackType                  *IPAllocationPolicyStackTypeEnum      `json:"stackType,omitempty"`
 	SubnetworkName             *string                               `json:"subnetworkName,omitempty"`
 	TpuIpv4CidrBlock           *string                               `json:"tpuIpv4CidrBlock,omitempty"`
 	UseIPAliases               *bool                                 `json:"useIpAliases,omitempty"`

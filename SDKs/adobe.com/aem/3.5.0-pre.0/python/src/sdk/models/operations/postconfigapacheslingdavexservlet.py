@@ -12,11 +12,11 @@ class PostConfigApacheSlingDavExServletQueryParams:
 
 @dataclass
 class PostConfigApacheSlingDavExServletRequest:
-    query_params: PostConfigApacheSlingDavExServletQueryParams = field(default=None)
+    query_params: PostConfigApacheSlingDavExServletQueryParams = field()
     
 
 @dataclass
 class PostConfigApacheSlingDavExServletResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

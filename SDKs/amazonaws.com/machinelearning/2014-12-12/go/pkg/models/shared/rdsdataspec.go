@@ -1,5 +1,7 @@
 package shared
 
+// RdsDataSpec
+// The data specification of an Amazon Relational Database Service (Amazon RDS) <code>DataSource</code>.
 type RdsDataSpec struct {
 	DataRearrangement   *string                `json:"DataRearrangement,omitempty"`
 	DataSchema          *string                `json:"DataSchema,omitempty"`

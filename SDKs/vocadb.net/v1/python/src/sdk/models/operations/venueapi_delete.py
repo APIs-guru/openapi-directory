@@ -4,7 +4,7 @@ from typing import Optional
 
 @dataclass
 class VenueAPIDeletePathParams:
-    id: int = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: int = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -15,12 +15,12 @@ class VenueAPIDeleteQueryParams:
 
 @dataclass
 class VenueAPIDeleteRequest:
-    path_params: VenueAPIDeletePathParams = field(default=None)
-    query_params: VenueAPIDeleteQueryParams = field(default=None)
+    path_params: VenueAPIDeletePathParams = field()
+    query_params: VenueAPIDeleteQueryParams = field()
     
 
 @dataclass
 class VenueAPIDeleteResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

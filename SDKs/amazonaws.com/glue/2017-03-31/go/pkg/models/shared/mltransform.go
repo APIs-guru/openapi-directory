@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// MlTransform
+// A structure for a machine learning transform.
 type MlTransform struct {
 	CreatedOn           *time.Time               `json:"CreatedOn,omitempty"`
 	Description         *string                  `json:"Description,omitempty"`

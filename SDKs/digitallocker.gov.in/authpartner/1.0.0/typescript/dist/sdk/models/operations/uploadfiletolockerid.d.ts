@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class UploadFileToLockerIdHeaders extends SpeakeasyBase {
     hmac?: string;
@@ -14,11 +14,6 @@ export declare class UploadFileToLockerIdRequests extends SpeakeasyBase {
 export declare class UploadFileToLockerIdSecurity extends SpeakeasyBase {
     bearerAuth: shared.SchemeBearerAuth;
 }
-export declare class UploadFileToLockerIdRequest extends SpeakeasyBase {
-    headers: UploadFileToLockerIdHeaders;
-    request?: UploadFileToLockerIdRequests;
-    security: UploadFileToLockerIdSecurity;
-}
 export declare class UploadFileToLockerId400ApplicationJson extends SpeakeasyBase {
     error?: any;
     errorDescription?: any;
@@ -30,6 +25,11 @@ export declare class UploadFileToLockerId401ApplicationJson extends SpeakeasyBas
 export declare class UploadFileToLockerId500ApplicationJson extends SpeakeasyBase {
     error?: string;
     errorDescription?: string;
+}
+export declare class UploadFileToLockerIdRequest extends SpeakeasyBase {
+    headers: UploadFileToLockerIdHeaders;
+    request?: UploadFileToLockerIdRequests;
+    security: UploadFileToLockerIdSecurity;
 }
 export declare class UploadFileToLockerIdResponse extends SpeakeasyBase {
     contentType: string;

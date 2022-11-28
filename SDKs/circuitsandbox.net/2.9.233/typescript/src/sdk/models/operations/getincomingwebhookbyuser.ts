@@ -1,50 +1,51 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetIncomingWebhookByUserPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=userId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=userId" })
   userId: string;
 }
 
 
 export class GetIncomingWebhookByUserQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=pagesize" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=pagesize" })
   pagesize?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=searchpointer" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=searchpointer" })
   searchpointer?: string;
 }
 
 
 export class GetIncomingWebhookByUserSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   oauth: shared.SchemeOauth;
 }
 
 
 export class GetIncomingWebhookByUserRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetIncomingWebhookByUserPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetIncomingWebhookByUserQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: GetIncomingWebhookByUserSecurity;
 }
 
 
 export class GetIncomingWebhookByUserResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   incomingWebhooks?: any[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

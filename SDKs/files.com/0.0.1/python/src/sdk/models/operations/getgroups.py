@@ -19,12 +19,12 @@ class GetGroupsQueryParams:
 
 @dataclass
 class GetGroupsRequest:
-    query_params: GetGroupsQueryParams = field(default=None)
+    query_params: GetGroupsQueryParams = field()
     
 
 @dataclass
 class GetGroupsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     group_entities: Optional[List[shared.GroupEntity]] = field(default=None)
-    status_code: int = field(default=None)
     

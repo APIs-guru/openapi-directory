@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class GetReportPerformanceSkuRationalizationPlanningLevelIDPathParams:
-    planning_level_id: int = field(default=None, metadata={'path_param': { 'field_name': 'planningLevelId', 'style': 'simple', 'explode': False }})
+    planning_level_id: int = field(metadata={'path_param': { 'field_name': 'planningLevelId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -15,14 +15,14 @@ class GetReportPerformanceSkuRationalizationPlanningLevelIDHeaders:
 
 @dataclass
 class GetReportPerformanceSkuRationalizationPlanningLevelIDRequest:
-    path_params: GetReportPerformanceSkuRationalizationPlanningLevelIDPathParams = field(default=None)
-    headers: GetReportPerformanceSkuRationalizationPlanningLevelIDHeaders = field(default=None)
+    headers: GetReportPerformanceSkuRationalizationPlanningLevelIDHeaders = field()
+    path_params: GetReportPerformanceSkuRationalizationPlanningLevelIDPathParams = field()
     
 
 @dataclass
 class GetReportPerformanceSkuRationalizationPlanningLevelIDResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     portfolio_models: Optional[List[shared.PortfolioModel]] = field(default=None)
-    status_code: int = field(default=None)
     

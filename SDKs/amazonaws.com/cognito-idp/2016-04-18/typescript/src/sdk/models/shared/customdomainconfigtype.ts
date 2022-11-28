@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // CustomDomainConfigType
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The configuration for a custom domain that hosts the sign-up and sign-in webpages for your application.
 **/
 export class CustomDomainConfigType extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CertificateArn" })
+  @SpeakeasyMetadata({ data: "json, name=CertificateArn" })
   certificateArn: string;
 }

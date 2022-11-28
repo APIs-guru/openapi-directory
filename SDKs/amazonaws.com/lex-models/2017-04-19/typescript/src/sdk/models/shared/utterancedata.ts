@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // UtteranceData
@@ -6,18 +7,18 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Provides information about a single utterance that was made to your bot. 
 **/
 export class UtteranceData extends SpeakeasyBase {
-  @Metadata({ data: "json, name=count" })
+  @SpeakeasyMetadata({ data: "json, name=count" })
   count?: number;
 
-  @Metadata({ data: "json, name=distinctUsers" })
+  @SpeakeasyMetadata({ data: "json, name=distinctUsers" })
   distinctUsers?: number;
 
-  @Metadata({ data: "json, name=firstUtteredDate" })
+  @SpeakeasyMetadata({ data: "json, name=firstUtteredDate" })
   firstUtteredDate?: Date;
 
-  @Metadata({ data: "json, name=lastUtteredDate" })
+  @SpeakeasyMetadata({ data: "json, name=lastUtteredDate" })
   lastUtteredDate?: Date;
 
-  @Metadata({ data: "json, name=utteranceString" })
+  @SpeakeasyMetadata({ data: "json, name=utteranceString" })
   utteranceString?: string;
 }

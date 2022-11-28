@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class DoubleVerifyFraudInvalidTrafficAvoidedFraudOptionEnum(str, Enum):
     FRAUD_UNSPECIFIED = "FRAUD_UNSPECIFIED"
@@ -17,6 +19,10 @@ class DoubleVerifyFraudInvalidTrafficAvoidedFraudOptionEnum(str, Enum):
 @dataclass_json
 @dataclass
 class DoubleVerifyFraudInvalidTraffic:
-    avoid_insufficient_option: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'avoidInsufficientOption' }})
-    avoided_fraud_option: Optional[DoubleVerifyFraudInvalidTrafficAvoidedFraudOptionEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'avoidedFraudOption' }})
+    r"""DoubleVerifyFraudInvalidTraffic
+    DoubleVerify Fraud & Invalid Traffic settings.
+    """
+    
+    avoid_insufficient_option: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('avoidInsufficientOption') }})
+    avoided_fraud_option: Optional[DoubleVerifyFraudInvalidTrafficAvoidedFraudOptionEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('avoidedFraudOption') }})
     

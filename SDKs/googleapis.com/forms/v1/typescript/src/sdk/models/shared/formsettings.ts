@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { QuizSettings } from "./quizsettings";
+
 
 
 // FormSettings
@@ -7,6 +8,6 @@ import { QuizSettings } from "./quizsettings";
  * A form's settings.
 **/
 export class FormSettings extends SpeakeasyBase {
-  @Metadata({ data: "json, name=quizSettings" })
+  @SpeakeasyMetadata({ data: "json, name=quizSettings" })
   quizSettings?: QuizSettings;
 }

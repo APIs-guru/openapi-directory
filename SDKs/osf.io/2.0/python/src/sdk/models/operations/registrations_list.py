@@ -1,10 +1,10 @@
 from dataclasses import dataclass, field
-from typing import List
+from typing import Optional
 
 
 @dataclass
 class RegistrationsListResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

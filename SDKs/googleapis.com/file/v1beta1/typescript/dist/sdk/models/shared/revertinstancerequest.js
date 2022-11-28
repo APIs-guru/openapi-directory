@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // RevertInstanceRequest
 /**
  * RevertInstanceRequest reverts the given instance's file share to the specified snapshot.
@@ -33,7 +33,7 @@ var RevertInstanceRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=targetSnapshotId" }),
+        SpeakeasyMetadata({ data: "json, name=targetSnapshotId" }),
         __metadata("design:type", String)
     ], RevertInstanceRequest.prototype, "targetSnapshotId", void 0);
     return RevertInstanceRequest;

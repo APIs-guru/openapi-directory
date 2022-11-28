@@ -8,6 +8,8 @@ const (
 	GooglePlayDeveloperReportingV1beta1MetricsRowAggregationPeriodEnumDaily                        GooglePlayDeveloperReportingV1beta1MetricsRowAggregationPeriodEnum = "DAILY"
 )
 
+// GooglePlayDeveloperReportingV1beta1MetricsRow
+// Represents a row of dimensions and metrics.
 type GooglePlayDeveloperReportingV1beta1MetricsRow struct {
 	AggregationPeriod *GooglePlayDeveloperReportingV1beta1MetricsRowAggregationPeriodEnum `json:"aggregationPeriod,omitempty"`
 	Dimensions        []GooglePlayDeveloperReportingV1beta1DimensionValue                 `json:"dimensions,omitempty"`

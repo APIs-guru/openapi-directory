@@ -1,18 +1,22 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import oauthgranttype_enum
-from . import oauthscopeselement_enum
-from . import socialprovidersettings
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class CreateBackendAuthOAuthConfig:
-    domain_prefix: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'DomainPrefix' }})
-    o_auth_grant_type: oauthgranttype_enum.OAuthGrantTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'OAuthGrantType' }})
-    o_auth_scopes: List[oauthscopeselement_enum.OAuthScopesElementEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'OAuthScopes' }})
-    redirect_sign_in_ur_is: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'RedirectSignInURIs' }})
-    redirect_sign_out_ur_is: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'RedirectSignOutURIs' }})
-    social_provider_settings: Optional[socialprovidersettings.SocialProviderSettings] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'SocialProviderSettings' }})
+    r"""CreateBackendAuthOAuthConfig
+    Creates the OAuth configuration for your Amplify project.
+    """
+    
+    o_auth_grant_type: OAuthGrantTypeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('OAuthGrantType') }})
+    o_auth_scopes: List[OAuthScopesElementEnum] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('OAuthScopes') }})
+    redirect_sign_in_ur_is: List[str] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('RedirectSignInURIs') }})
+    redirect_sign_out_ur_is: List[str] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('RedirectSignOutURIs') }})
+    domain_prefix: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('DomainPrefix') }})
+    social_provider_settings: Optional[SocialProviderSettings] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('SocialProviderSettings') }})
     

@@ -12,12 +12,12 @@ class ForgotPasswordRequests:
 
 @dataclass
 class ForgotPasswordRequest:
-    request: ForgotPasswordRequests = field(default=None)
+    request: ForgotPasswordRequests = field()
     
 
 @dataclass
 class ForgotPasswordResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     forgot_password_result: Optional[shared.ForgotPasswordResult] = field(default=None)
-    status_code: int = field(default=None)
     

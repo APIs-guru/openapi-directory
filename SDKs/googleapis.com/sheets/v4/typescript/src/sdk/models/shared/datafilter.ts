@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DeveloperMetadataLookup } from "./developermetadatalookup";
 import { GridRange } from "./gridrange";
+
 
 
 // DataFilter
@@ -8,12 +9,12 @@ import { GridRange } from "./gridrange";
  * Filter that describes what data should be selected or returned from a request.
 **/
 export class DataFilter extends SpeakeasyBase {
-  @Metadata({ data: "json, name=a1Range" })
+  @SpeakeasyMetadata({ data: "json, name=a1Range" })
   a1Range?: string;
 
-  @Metadata({ data: "json, name=developerMetadataLookup" })
+  @SpeakeasyMetadata({ data: "json, name=developerMetadataLookup" })
   developerMetadataLookup?: DeveloperMetadataLookup;
 
-  @Metadata({ data: "json, name=gridRange" })
+  @SpeakeasyMetadata({ data: "json, name=gridRange" })
   gridRange?: GridRange;
 }

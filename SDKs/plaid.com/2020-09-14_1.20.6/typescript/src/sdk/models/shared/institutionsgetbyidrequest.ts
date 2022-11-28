@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CountryCodeEnum } from "./countrycodeenum";
 import { InstitutionsGetByIdRequestOptions } from "./institutionsgetbyidrequestoptions";
+
 
 
 // InstitutionsGetByIdRequest
@@ -8,18 +9,18 @@ import { InstitutionsGetByIdRequestOptions } from "./institutionsgetbyidrequesto
  * InstitutionsGetByIdRequest defines the request schema for `/institutions/get_by_id`
 **/
 export class InstitutionsGetByIdRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=client_id" })
+  @SpeakeasyMetadata({ data: "json, name=client_id" })
   clientId?: string;
 
-  @Metadata({ data: "json, name=country_codes" })
+  @SpeakeasyMetadata({ data: "json, name=country_codes" })
   countryCodes: CountryCodeEnum[];
 
-  @Metadata({ data: "json, name=institution_id" })
+  @SpeakeasyMetadata({ data: "json, name=institution_id" })
   institutionId: string;
 
-  @Metadata({ data: "json, name=options" })
+  @SpeakeasyMetadata({ data: "json, name=options" })
   options?: InstitutionsGetByIdRequestOptions;
 
-  @Metadata({ data: "json, name=secret" })
+  @SpeakeasyMetadata({ data: "json, name=secret" })
   secret?: string;
 }

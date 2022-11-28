@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ResourceServerScopeType
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A resource server scope.
 **/
 export class ResourceServerScopeType extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ScopeDescription" })
+  @SpeakeasyMetadata({ data: "json, name=ScopeDescription" })
   scopeDescription: string;
 
-  @Metadata({ data: "json, name=ScopeName" })
+  @SpeakeasyMetadata({ data: "json, name=ScopeName" })
   scopeName: string;
 }

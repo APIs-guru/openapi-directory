@@ -22,22 +22,22 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var EvalValuePathParams = /** @class */ (function (_super) {
     __extends(EvalValuePathParams, _super);
     function EvalValuePathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=agentNum" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=agentNum" }),
         __metadata("design:type", Number)
     ], EvalValuePathParams.prototype, "agentNum", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=instance" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=instance" }),
         __metadata("design:type", String)
     ], EvalValuePathParams.prototype, "instance", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=object" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=object" }),
         __metadata("design:type", String)
     ], EvalValuePathParams.prototype, "object", void 0);
     return EvalValuePathParams;
@@ -49,7 +49,7 @@ var EvalValueRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", EvalValuePathParams)
     ], EvalValueRequest.prototype, "pathParams", void 0);
     return EvalValueRequest;
@@ -61,15 +61,15 @@ var EvalValueResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], EvalValueResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], EvalValueResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], EvalValueResponse.prototype, "evalValue200ApplicationJsonString", void 0);
     return EvalValueResponse;

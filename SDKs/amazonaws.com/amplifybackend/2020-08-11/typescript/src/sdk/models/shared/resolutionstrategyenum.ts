@@ -1,8 +1,9 @@
 
 
+
 export enum ResolutionStrategyEnum {
-    OptimisticConcurrency = "OPTIMISTIC_CONCURRENCY"
-,    Lambda = "LAMBDA"
-,    Automerge = "AUTOMERGE"
-,    None = "NONE"
+    OptimisticConcurrency = "OPTIMISTIC_CONCURRENCY",
+    Lambda = "LAMBDA",
+    Automerge = "AUTOMERGE",
+    None = "NONE"
 }

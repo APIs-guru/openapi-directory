@@ -1,7 +1,8 @@
 
 
+
 export enum RuleTypeEnum {
-    Atleast = "ATLEAST"
-,    And = "AND"
-,    Or = "OR"
+    Atleast = "ATLEAST",
+    And = "AND",
+    Or = "OR"
 }

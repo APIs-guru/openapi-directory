@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class DimensionValueSourceEnum(str, Enum):
     MESSAGE_TAG = "MESSAGE_TAG"

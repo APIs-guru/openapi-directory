@@ -1,5 +1,7 @@
 package shared
 
+// PicoLoadmanagementGroupDto
+// DTO for the pico loadmanagement group
 type PicoLoadmanagementGroupDto struct {
 	ID               *string  `json:"Id,omitempty"`
 	MaxCurrent       *float64 `json:"MaxCurrent,omitempty"`

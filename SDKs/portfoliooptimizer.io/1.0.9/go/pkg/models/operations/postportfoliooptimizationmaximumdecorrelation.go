@@ -17,12 +17,12 @@ type PostPortfolioOptimizationMaximumDecorrelationRequestBody struct {
 	Constraints             *PostPortfolioOptimizationMaximumDecorrelationRequestBodyConstraints `json:"constraints,omitempty"`
 }
 
-type PostPortfolioOptimizationMaximumDecorrelationRequest struct {
-	Request PostPortfolioOptimizationMaximumDecorrelationRequestBody `request:"mediaType=application/json"`
-}
-
 type PostPortfolioOptimizationMaximumDecorrelation200ApplicationJSON struct {
 	AssetsWeights []float64 `json:"assetsWeights"`
+}
+
+type PostPortfolioOptimizationMaximumDecorrelationRequest struct {
+	Request PostPortfolioOptimizationMaximumDecorrelationRequestBody `request:"mediaType=application/json"`
 }
 
 type PostPortfolioOptimizationMaximumDecorrelationResponse struct {

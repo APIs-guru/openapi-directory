@@ -22,9 +22,10 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { KeyOperationAttestation } from "./keyoperationattestation";
 import { ExternalProtectionLevelOptions } from "./externalprotectionleveloptions";
+import { KeyOperationAttestationInput } from "./keyoperationattestation";
 export var CryptoKeyVersionAlgorithmEnum;
 (function (CryptoKeyVersionAlgorithmEnum) {
     CryptoKeyVersionAlgorithmEnum["CryptoKeyVersionAlgorithmUnspecified"] = "CRYPTO_KEY_VERSION_ALGORITHM_UNSPECIFIED";
@@ -51,6 +52,10 @@ export var CryptoKeyVersionAlgorithmEnum;
     CryptoKeyVersionAlgorithmEnum["EcSignP384Sha384"] = "EC_SIGN_P384_SHA384";
     CryptoKeyVersionAlgorithmEnum["EcSignSecp256K1Sha256"] = "EC_SIGN_SECP256K1_SHA256";
     CryptoKeyVersionAlgorithmEnum["HmacSha256"] = "HMAC_SHA256";
+    CryptoKeyVersionAlgorithmEnum["HmacSha1"] = "HMAC_SHA1";
+    CryptoKeyVersionAlgorithmEnum["HmacSha384"] = "HMAC_SHA384";
+    CryptoKeyVersionAlgorithmEnum["HmacSha512"] = "HMAC_SHA512";
+    CryptoKeyVersionAlgorithmEnum["HmacSha224"] = "HMAC_SHA224";
     CryptoKeyVersionAlgorithmEnum["ExternalSymmetricEncryption"] = "EXTERNAL_SYMMETRIC_ENCRYPTION";
 })(CryptoKeyVersionAlgorithmEnum || (CryptoKeyVersionAlgorithmEnum = {}));
 export var CryptoKeyVersionProtectionLevelEnum;
@@ -82,61 +87,85 @@ var CryptoKeyVersion = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=algorithm" }),
+        SpeakeasyMetadata({ data: "json, name=algorithm" }),
         __metadata("design:type", String)
     ], CryptoKeyVersion.prototype, "algorithm", void 0);
     __decorate([
-        Metadata({ data: "json, name=attestation" }),
+        SpeakeasyMetadata({ data: "json, name=attestation" }),
         __metadata("design:type", KeyOperationAttestation)
     ], CryptoKeyVersion.prototype, "attestation", void 0);
     __decorate([
-        Metadata({ data: "json, name=createTime" }),
+        SpeakeasyMetadata({ data: "json, name=createTime" }),
         __metadata("design:type", String)
     ], CryptoKeyVersion.prototype, "createTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=destroyEventTime" }),
+        SpeakeasyMetadata({ data: "json, name=destroyEventTime" }),
         __metadata("design:type", String)
     ], CryptoKeyVersion.prototype, "destroyEventTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=destroyTime" }),
+        SpeakeasyMetadata({ data: "json, name=destroyTime" }),
         __metadata("design:type", String)
     ], CryptoKeyVersion.prototype, "destroyTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=externalProtectionLevelOptions" }),
+        SpeakeasyMetadata({ data: "json, name=externalProtectionLevelOptions" }),
         __metadata("design:type", ExternalProtectionLevelOptions)
     ], CryptoKeyVersion.prototype, "externalProtectionLevelOptions", void 0);
     __decorate([
-        Metadata({ data: "json, name=generateTime" }),
+        SpeakeasyMetadata({ data: "json, name=generateTime" }),
         __metadata("design:type", String)
     ], CryptoKeyVersion.prototype, "generateTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=importFailureReason" }),
+        SpeakeasyMetadata({ data: "json, name=importFailureReason" }),
         __metadata("design:type", String)
     ], CryptoKeyVersion.prototype, "importFailureReason", void 0);
     __decorate([
-        Metadata({ data: "json, name=importJob" }),
+        SpeakeasyMetadata({ data: "json, name=importJob" }),
         __metadata("design:type", String)
     ], CryptoKeyVersion.prototype, "importJob", void 0);
     __decorate([
-        Metadata({ data: "json, name=importTime" }),
+        SpeakeasyMetadata({ data: "json, name=importTime" }),
         __metadata("design:type", String)
     ], CryptoKeyVersion.prototype, "importTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], CryptoKeyVersion.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=protectionLevel" }),
+        SpeakeasyMetadata({ data: "json, name=protectionLevel" }),
         __metadata("design:type", String)
     ], CryptoKeyVersion.prototype, "protectionLevel", void 0);
     __decorate([
-        Metadata({ data: "json, name=reimportEligible" }),
+        SpeakeasyMetadata({ data: "json, name=reimportEligible" }),
         __metadata("design:type", Boolean)
     ], CryptoKeyVersion.prototype, "reimportEligible", void 0);
     __decorate([
-        Metadata({ data: "json, name=state" }),
+        SpeakeasyMetadata({ data: "json, name=state" }),
         __metadata("design:type", String)
     ], CryptoKeyVersion.prototype, "state", void 0);
     return CryptoKeyVersion;
 }(SpeakeasyBase));
 export { CryptoKeyVersion };
+// CryptoKeyVersionInput
+/**
+ * A CryptoKeyVersion represents an individual cryptographic key, and the associated key material. An ENABLED version can be used for cryptographic operations. For security reasons, the raw cryptographic key material represented by a CryptoKeyVersion can never be viewed or exported. It can only be used to encrypt, decrypt, or sign data when an authorized user or application invokes Cloud KMS.
+**/
+var CryptoKeyVersionInput = /** @class */ (function (_super) {
+    __extends(CryptoKeyVersionInput, _super);
+    function CryptoKeyVersionInput() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=attestation" }),
+        __metadata("design:type", KeyOperationAttestationInput)
+    ], CryptoKeyVersionInput.prototype, "attestation", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=externalProtectionLevelOptions" }),
+        __metadata("design:type", ExternalProtectionLevelOptions)
+    ], CryptoKeyVersionInput.prototype, "externalProtectionLevelOptions", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=state" }),
+        __metadata("design:type", String)
+    ], CryptoKeyVersionInput.prototype, "state", void 0);
+    return CryptoKeyVersionInput;
+}(SpeakeasyBase));
+export { CryptoKeyVersionInput };

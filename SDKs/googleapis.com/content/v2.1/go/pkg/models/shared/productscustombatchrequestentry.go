@@ -1,5 +1,7 @@
 package shared
 
+// ProductsCustomBatchRequestEntry
+// A batch entry encoding a single non-batch products request.
 type ProductsCustomBatchRequestEntry struct {
 	BatchID    *int64   `json:"batchId,omitempty"`
 	FeedID     *string  `json:"feedId,omitempty"`

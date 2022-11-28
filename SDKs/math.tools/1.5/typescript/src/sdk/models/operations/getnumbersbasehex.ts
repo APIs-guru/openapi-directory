@@ -1,35 +1,36 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetNumbersBaseHexQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=from" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=from" })
   from?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=number" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=number" })
   number: number;
 }
 
 
 export class GetNumbersBaseHexSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
   xMathtoolsApiSecret: shared.SchemeXMathtoolsApiSecret;
 }
 
 
 export class GetNumbersBaseHexRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetNumbersBaseHexQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: GetNumbersBaseHexSecurity;
 }
 
 
 export class GetNumbersBaseHexResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

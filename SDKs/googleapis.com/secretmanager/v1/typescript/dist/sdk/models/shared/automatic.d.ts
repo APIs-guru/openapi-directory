@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { CustomerManagedEncryption } from "./customermanagedencryption";
 /**
  * A replication policy that replicates the Secret payload without any restrictions.

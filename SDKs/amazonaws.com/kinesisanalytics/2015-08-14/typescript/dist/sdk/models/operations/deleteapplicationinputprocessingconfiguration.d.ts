@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare enum DeleteApplicationInputProcessingConfigurationXAmzTargetEnum {
     KinesisAnalytics20150814DeleteApplicationInputProcessingConfiguration = "KinesisAnalytics_20150814.DeleteApplicationInputProcessingConfiguration"

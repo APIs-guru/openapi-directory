@@ -1,62 +1,63 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class UpdateTagPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=projectId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=projectId" })
   projectId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=tagId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=tagId" })
   tagId: string;
 }
 
 
 export class UpdateTagHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=Training-Key" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Training-Key" })
   trainingKey: string;
 }
 
 
-export class UpdateTagRequests extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/xml" })
+export class UpdateTagRequestsInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "request, media_type=application/xml" })
   applicationXml: Uint8Array;
 
-  @Metadata({ data: "request, media_type=application/json" })
-  tag?: shared.Tag;
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  tag?: shared.TagInput;
 
-  @Metadata({ data: "request, media_type=application/x-www-form-urlencoded" })
-  tag1?: shared.Tag;
+  @SpeakeasyMetadata({ data: "request, media_type=application/x-www-form-urlencoded" })
+  tag1?: shared.TagInput;
 
-  @Metadata({ data: "request, media_type=text/json" })
-  tag2?: shared.Tag;
+  @SpeakeasyMetadata({ data: "request, media_type=text/json" })
+  tag2?: shared.TagInput;
 
-  @Metadata({ data: "request, media_type=text/xml" })
+  @SpeakeasyMetadata({ data: "request, media_type=text/xml" })
   textXml: Uint8Array;
 }
 
 
 export class UpdateTagRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: UpdateTagPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: UpdateTagHeaders;
 
-  @Metadata()
-  request: UpdateTagRequests;
+  @SpeakeasyMetadata()
+  request: UpdateTagRequestsInput;
 }
 
 
 export class UpdateTagResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   tag?: shared.Tag;
 }

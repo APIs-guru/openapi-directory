@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PollingOptions } from "./pollingoptions";
+
 
 
 // AsyncOptions
@@ -7,9 +8,9 @@ import { PollingOptions } from "./pollingoptions";
  * Async options that determine when a resource should finish.
 **/
 export class AsyncOptions extends SpeakeasyBase {
-  @Metadata({ data: "json, name=methodMatch" })
+  @SpeakeasyMetadata({ data: "json, name=methodMatch" })
   methodMatch?: string;
 
-  @Metadata({ data: "json, name=pollingOptions" })
+  @SpeakeasyMetadata({ data: "json, name=pollingOptions" })
   pollingOptions?: PollingOptions;
 }

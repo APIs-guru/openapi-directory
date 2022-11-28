@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetSettingsByTagPathParams = /** @class */ (function (_super) {
     __extends(GetSettingsByTagPathParams, _super);
@@ -30,7 +30,7 @@ var GetSettingsByTagPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=tagId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=tagId" }),
         __metadata("design:type", Number)
     ], GetSettingsByTagPathParams.prototype, "tagId", void 0);
     return GetSettingsByTagPathParams;
@@ -42,7 +42,7 @@ var GetSettingsByTagRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetSettingsByTagPathParams)
     ], GetSettingsByTagRequest.prototype, "pathParams", void 0);
     return GetSettingsByTagRequest;
@@ -54,19 +54,19 @@ var GetSettingsByTagResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetSettingsByTagResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata({ elemType: shared.SettingModelHaljson }),
+        SpeakeasyMetadata({ elemType: shared.SettingModelHaljson }),
         __metadata("design:type", Array)
     ], GetSettingsByTagResponse.prototype, "settingModelHaljsons", void 0);
     __decorate([
-        Metadata({ elemType: shared.SettingModel }),
+        SpeakeasyMetadata({ elemType: shared.SettingModel }),
         __metadata("design:type", Array)
     ], GetSettingsByTagResponse.prototype, "settingModels", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetSettingsByTagResponse.prototype, "statusCode", void 0);
     return GetSettingsByTagResponse;

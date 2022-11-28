@@ -1,13 +1,18 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass_json
 @dataclass
 class Error:
-    detail: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'detail' }})
-    status: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
-    title: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'title' }})
-    type: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    r"""Error
+    See the [errors page](errors/) for more detail on what kind of errors you can get.
+    """
+    
+    status: int = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('status') }})
+    title: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('title') }})
+    type: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('type') }})
+    detail: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('detail') }})
     

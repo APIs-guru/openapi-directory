@@ -24,18 +24,24 @@ const (
 	CreateGraphqlAPIRequestBodyAuthenticationTypeEnumAwsLambda              CreateGraphqlAPIRequestBodyAuthenticationTypeEnum = "AWS_LAMBDA"
 )
 
+// CreateGraphqlAPIRequestBodyLambdaAuthorizerConfig
+// A <code>LambdaAuthorizerConfig</code> holds configuration on how to authorize AppSync API access when using the <code>AWS_LAMBDA</code> authorizer mode. Be aware that an AppSync API may have only one Lambda authorizer configured at a time.
 type CreateGraphqlAPIRequestBodyLambdaAuthorizerConfig struct {
 	AuthorizerResultTTLInSeconds *int64  `json:"authorizerResultTtlInSeconds,omitempty"`
 	AuthorizerURI                *string `json:"authorizerUri,omitempty"`
 	IdentityValidationExpression *string `json:"identityValidationExpression,omitempty"`
 }
 
+// CreateGraphqlAPIRequestBodyLogConfig
+// The CloudWatch Logs configuration.
 type CreateGraphqlAPIRequestBodyLogConfig struct {
 	CloudWatchLogsRoleArn *string                   `json:"cloudWatchLogsRoleArn,omitempty"`
 	ExcludeVerboseContent *bool                     `json:"excludeVerboseContent,omitempty"`
 	FieldLogLevel         *shared.FieldLogLevelEnum `json:"fieldLogLevel,omitempty"`
 }
 
+// CreateGraphqlAPIRequestBodyOpenIDConnectConfig
+// Describes an OpenID Connect configuration.
 type CreateGraphqlAPIRequestBodyOpenIDConnectConfig struct {
 	AuthTTL  *int64  `json:"authTTL,omitempty"`
 	ClientID *string `json:"clientId,omitempty"`
@@ -43,6 +49,8 @@ type CreateGraphqlAPIRequestBodyOpenIDConnectConfig struct {
 	Issuer   *string `json:"issuer,omitempty"`
 }
 
+// CreateGraphqlAPIRequestBodyUserPoolConfig
+// Describes an Amazon Cognito user pool configuration.
 type CreateGraphqlAPIRequestBodyUserPoolConfig struct {
 	AppIDClientRegex *string                   `json:"appIdClientRegex,omitempty"`
 	AwsRegion        *string                   `json:"awsRegion,omitempty"`

@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class GetFirewallPathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -15,20 +15,20 @@ class GetFirewallQueryParams:
 
 @dataclass
 class GetFirewallSecurity:
-    api_key_auth: shared.SchemeAPIKeyAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    api_key_auth: shared.SchemeAPIKeyAuth = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
     
 
 @dataclass
 class GetFirewallRequest:
-    path_params: GetFirewallPathParams = field(default=None)
-    query_params: GetFirewallQueryParams = field(default=None)
-    security: GetFirewallSecurity = field(default=None)
+    path_params: GetFirewallPathParams = field()
+    query_params: GetFirewallQueryParams = field()
+    security: GetFirewallSecurity = field()
     
 
 @dataclass
 class GetFirewallResponse:
+    content_type: str = field()
+    status_code: int = field()
     api_error: Optional[shared.APIError] = field(default=None)
     base_firewall_rule: Optional[shared.BaseFirewallRule] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

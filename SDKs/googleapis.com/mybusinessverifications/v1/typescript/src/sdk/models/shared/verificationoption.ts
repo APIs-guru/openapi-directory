@@ -1,15 +1,16 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AddressVerificationData } from "./addressverificationdata";
 import { EmailVerificationData } from "./emailverificationdata";
 
+
 export enum VerificationOptionVerificationMethodEnum {
-    VerificationMethodUnspecified = "VERIFICATION_METHOD_UNSPECIFIED"
-,    Address = "ADDRESS"
-,    Email = "EMAIL"
-,    PhoneCall = "PHONE_CALL"
-,    Sms = "SMS"
-,    Auto = "AUTO"
-,    VettedPartner = "VETTED_PARTNER"
+    VerificationMethodUnspecified = "VERIFICATION_METHOD_UNSPECIFIED",
+    Address = "ADDRESS",
+    Email = "EMAIL",
+    PhoneCall = "PHONE_CALL",
+    Sms = "SMS",
+    Auto = "AUTO",
+    VettedPartner = "VETTED_PARTNER"
 }
 
 
@@ -18,15 +19,15 @@ export enum VerificationOptionVerificationMethodEnum {
  * The verification option represents how to verify the location (indicated by verification method) and where the verification will be sent to (indicated by display data).
 **/
 export class VerificationOption extends SpeakeasyBase {
-  @Metadata({ data: "json, name=addressData" })
+  @SpeakeasyMetadata({ data: "json, name=addressData" })
   addressData?: AddressVerificationData;
 
-  @Metadata({ data: "json, name=emailData" })
+  @SpeakeasyMetadata({ data: "json, name=emailData" })
   emailData?: EmailVerificationData;
 
-  @Metadata({ data: "json, name=phoneNumber" })
+  @SpeakeasyMetadata({ data: "json, name=phoneNumber" })
   phoneNumber?: string;
 
-  @Metadata({ data: "json, name=verificationMethod" })
+  @SpeakeasyMetadata({ data: "json, name=verificationMethod" })
   verificationMethod?: VerificationOptionVerificationMethodEnum;
 }

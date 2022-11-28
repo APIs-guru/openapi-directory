@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // Digest
 /**
  * A Digest holds a cryptographic message digest.
@@ -33,15 +33,15 @@ var Digest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=sha256" }),
+        SpeakeasyMetadata({ data: "json, name=sha256" }),
         __metadata("design:type", String)
     ], Digest.prototype, "sha256", void 0);
     __decorate([
-        Metadata({ data: "json, name=sha384" }),
+        SpeakeasyMetadata({ data: "json, name=sha384" }),
         __metadata("design:type", String)
     ], Digest.prototype, "sha384", void 0);
     __decorate([
-        Metadata({ data: "json, name=sha512" }),
+        SpeakeasyMetadata({ data: "json, name=sha512" }),
         __metadata("design:type", String)
     ], Digest.prototype, "sha512", void 0);
     return Digest;

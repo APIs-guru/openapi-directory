@@ -1,31 +1,32 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class SamsungPreviewSectionTile extends SpeakeasyBase {
-  @Metadata({ data: "json, name=action_data" })
+  @SpeakeasyMetadata({ data: "json, name=action_data" })
   actionData: string;
 
-  @Metadata({ data: "json, name=display_from" })
+  @SpeakeasyMetadata({ data: "json, name=display_from" })
   displayFrom?: Date;
 
-  @Metadata({ data: "json, name=display_until" })
+  @SpeakeasyMetadata({ data: "json, name=display_until" })
   displayUntil?: Date;
 
-  @Metadata({ data: "json, name=image_ratio" })
+  @SpeakeasyMetadata({ data: "json, name=image_ratio" })
   imageRatio: string;
 
-  @Metadata({ data: "json, name=image_url" })
+  @SpeakeasyMetadata({ data: "json, name=image_url" })
   imageUrl: string;
 
-  @Metadata({ data: "json, name=is_playable" })
+  @SpeakeasyMetadata({ data: "json, name=is_playable" })
   isPlayable: boolean;
 
-  @Metadata({ data: "json, name=position" })
+  @SpeakeasyMetadata({ data: "json, name=position" })
   position?: number;
 
-  @Metadata({ data: "json, name=subtitle" })
+  @SpeakeasyMetadata({ data: "json, name=subtitle" })
   subtitle?: string;
 
-  @Metadata({ data: "json, name=title" })
+  @SpeakeasyMetadata({ data: "json, name=title" })
   title?: string;
 }

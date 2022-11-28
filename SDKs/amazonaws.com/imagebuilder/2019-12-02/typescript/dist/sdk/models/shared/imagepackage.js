@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // ImagePackage
 /**
  * Represents a package installed on an Image Builder image.
@@ -33,11 +33,11 @@ var ImagePackage = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=packageName" }),
+        SpeakeasyMetadata({ data: "json, name=packageName" }),
         __metadata("design:type", String)
     ], ImagePackage.prototype, "packageName", void 0);
     __decorate([
-        Metadata({ data: "json, name=packageVersion" }),
+        SpeakeasyMetadata({ data: "json, name=packageVersion" }),
         __metadata("design:type", String)
     ], ImagePackage.prototype, "packageVersion", void 0);
     return ImagePackage;

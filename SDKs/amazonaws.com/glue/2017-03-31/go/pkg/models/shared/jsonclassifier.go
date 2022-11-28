@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// JSONClassifier
+// A classifier for <code>JSON</code> content.
 type JSONClassifier struct {
 	CreationTime *time.Time `json:"CreationTime,omitempty"`
 	JSONPath     string     `json:"JsonPath"`

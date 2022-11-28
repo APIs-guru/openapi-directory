@@ -1,34 +1,35 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
+
 export enum LineRouteServiceTypesEnum {
-    Regular = "Regular"
-,    Night = "Night"
+    Regular = "Regular",
+    Night = "Night"
 }
 
 
 export class LineRouteQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=serviceTypes" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=serviceTypes" })
   serviceTypes?: LineRouteServiceTypesEnum[];
 }
 
 
 export class LineRouteRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: LineRouteQueryParams;
 }
 
 
 export class LineRouteResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata({ elemType: shared.TflApiPresentationEntitiesLine })
+  @SpeakeasyMetadata({ elemType: shared.TflApiPresentationEntitiesLine })
   tflApiPresentationEntitiesLines?: shared.TflApiPresentationEntitiesLine[];
 }

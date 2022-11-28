@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // FileSection
 /**
  * For files that are in a section, this field describes the section.
@@ -33,7 +33,7 @@ var FileSection = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=id" }),
+        SpeakeasyMetadata({ data: "json, name=id" }),
         __metadata("design:type", String)
     ], FileSection.prototype, "id", void 0);
     return FileSection;
@@ -45,29 +45,57 @@ var File = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=content" }),
+        SpeakeasyMetadata({ data: "json, name=content" }),
         __metadata("design:type", String)
     ], File.prototype, "content", void 0);
     __decorate([
-        Metadata({ data: "json, name=content_path" }),
+        SpeakeasyMetadata({ data: "json, name=content_path" }),
         __metadata("design:type", String)
     ], File.prototype, "contentPath", void 0);
     __decorate([
-        Metadata({ data: "json, name=id" }),
+        SpeakeasyMetadata({ data: "json, name=id" }),
         __metadata("design:type", String)
     ], File.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], File.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=section" }),
+        SpeakeasyMetadata({ data: "json, name=section" }),
         __metadata("design:type", FileSection)
     ], File.prototype, "section", void 0);
     __decorate([
-        Metadata({ data: "json, name=size" }),
+        SpeakeasyMetadata({ data: "json, name=size" }),
         __metadata("design:type", Number)
     ], File.prototype, "size", void 0);
     return File;
 }(SpeakeasyBase));
 export { File };
+var FileInput = /** @class */ (function (_super) {
+    __extends(FileInput, _super);
+    function FileInput() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=content" }),
+        __metadata("design:type", String)
+    ], FileInput.prototype, "content", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=id" }),
+        __metadata("design:type", String)
+    ], FileInput.prototype, "id", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=name" }),
+        __metadata("design:type", String)
+    ], FileInput.prototype, "name", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=section" }),
+        __metadata("design:type", FileSection)
+    ], FileInput.prototype, "section", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=size" }),
+        __metadata("design:type", Number)
+    ], FileInput.prototype, "size", void 0);
+    return FileInput;
+}(SpeakeasyBase));
+export { FileInput };

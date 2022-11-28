@@ -1,0 +1,32 @@
+import { SpeakeasyBase } from "../../../internal/utils";
+import { EftBankDto } from "./eftbankdto";
+import { OwnerOpeningBalanceInPeriodsDto } from "./owneropeningbalanceinperiodsdto";
+import { OwnerOpeningBalanceDto } from "./owneropeningbalancedto";
+export declare class SupplierDto extends SpeakeasyBase {
+    accountName?: string;
+    accountNumber?: string;
+    address?: string[];
+    authCode?: string;
+    bank?: EftBankDto;
+    businessIdentifierCode?: string;
+    code?: string;
+    contact?: string;
+    eFtReference?: string;
+    email?: string;
+    fax?: string;
+    id?: number;
+    internationalBankAccountNumber?: string;
+    ledgerBalance?: number;
+    mobile?: string;
+    name?: string;
+    openingBalance?: OwnerOpeningBalanceInPeriodsDto;
+    openingBalances?: OwnerOpeningBalanceDto[];
+    ourCode?: string;
+    ownerTypeId?: number;
+    phone?: string;
+    postponedAccounting?: boolean;
+    timestamp?: string;
+    vatAnalysisTypeId?: number;
+    vatReg?: string;
+    vatType?: number;
+}

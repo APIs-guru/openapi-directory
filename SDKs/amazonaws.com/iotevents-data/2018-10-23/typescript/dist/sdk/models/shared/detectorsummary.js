@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DetectorStateSummary } from "./detectorstatesummary";
 // DetectorSummary
 /**
@@ -34,27 +34,27 @@ var DetectorSummary = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=creationTime" }),
+        SpeakeasyMetadata({ data: "json, name=creationTime" }),
         __metadata("design:type", Date)
     ], DetectorSummary.prototype, "creationTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=detectorModelName" }),
+        SpeakeasyMetadata({ data: "json, name=detectorModelName" }),
         __metadata("design:type", String)
     ], DetectorSummary.prototype, "detectorModelName", void 0);
     __decorate([
-        Metadata({ data: "json, name=detectorModelVersion" }),
+        SpeakeasyMetadata({ data: "json, name=detectorModelVersion" }),
         __metadata("design:type", String)
     ], DetectorSummary.prototype, "detectorModelVersion", void 0);
     __decorate([
-        Metadata({ data: "json, name=keyValue" }),
+        SpeakeasyMetadata({ data: "json, name=keyValue" }),
         __metadata("design:type", String)
     ], DetectorSummary.prototype, "keyValue", void 0);
     __decorate([
-        Metadata({ data: "json, name=lastUpdateTime" }),
+        SpeakeasyMetadata({ data: "json, name=lastUpdateTime" }),
         __metadata("design:type", Date)
     ], DetectorSummary.prototype, "lastUpdateTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=state" }),
+        SpeakeasyMetadata({ data: "json, name=state" }),
         __metadata("design:type", DetectorStateSummary)
     ], DetectorSummary.prototype, "state", void 0);
     return DetectorSummary;

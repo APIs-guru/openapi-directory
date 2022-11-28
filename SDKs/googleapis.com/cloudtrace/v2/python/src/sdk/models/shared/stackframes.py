@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import stackframe
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class StackFrames:
-    dropped_frames_count: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'droppedFramesCount' }})
-    frame: Optional[List[stackframe.StackFrame]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'frame' }})
+    r"""StackFrames
+    A collection of stack frames, which can be truncated.
+    """
+    
+    dropped_frames_count: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('droppedFramesCount') }})
+    frame: Optional[List[StackFrame]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('frame') }})
     

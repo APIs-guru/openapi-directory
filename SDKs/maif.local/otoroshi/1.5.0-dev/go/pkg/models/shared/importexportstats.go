@@ -1,5 +1,7 @@
 package shared
 
+// ImportExportStats
+// Global stats for the current Otoroshi instances
 type ImportExportStats struct {
 	Calls   int64 `json:"calls"`
 	DataIn  int64 `json:"dataIn"`

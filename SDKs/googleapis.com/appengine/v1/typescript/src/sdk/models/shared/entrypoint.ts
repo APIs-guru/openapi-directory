@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Entrypoint
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The entrypoint for the application.
 **/
 export class Entrypoint extends SpeakeasyBase {
-  @Metadata({ data: "json, name=shell" })
+  @SpeakeasyMetadata({ data: "json, name=shell" })
   shell?: string;
 }

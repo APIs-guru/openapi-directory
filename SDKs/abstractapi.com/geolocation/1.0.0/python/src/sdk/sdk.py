@@ -1,8 +1,11 @@
-import warnings
+
+__doc__ = """ SDK Documentation: https://www.abstractapi.com/ip-geolocation-api#docs - API Documentation"""
 import requests
 from typing import Optional
-from sdk.models import operations, shared
+from sdk.models import shared, operations
 from . import utils
+
+
 
 
 SERVERS = [
@@ -11,30 +14,52 @@ SERVERS = [
 
 
 class SDK:
-    client = requests.Session()
-    server_url = SERVERS[0]
+    r"""SDK Documentation: https://www.abstractapi.com/ip-geolocation-api#docs - API Documentation"""
+
+    _client: requests.Session
+    _security_client: requests.Session
+    
+    _server_url: str = SERVERS[0]
+    _language: str = "python"
+    _sdk_version: str = "0.0.1"
+    _gen_version: str = "internal"
+
+    def __init__(self) -> None:
+        self._client = requests.Session()
+        self._security_client = requests.Session()
+        
+
 
     def config_server_url(self, server_url: str, params: dict[str, str]):
-        if not params is None:
-            self.server_url = utils.replace_parameters(server_url, params)
+        if params is not None:
+            self._server_url = utils.replace_parameters(server_url, params)
         else:
-            self.server_url = server_url
-            
+            self._server_url = server_url
+
+        
     
 
+    def config_client(self, client: requests.Session):
+        self._client = client
+        
+    
+    
     
     def get_v1_(self, request: operations.GetV1Request) -> operations.GetV1Response:
-        warnings.simplefilter("ignore")
-
+        r"""Retrieve the location of an IP address
+        """
+        
         base_url = operations.GET_V1__SERVERS[0]
-        if not request.server_url is None:
+        if request.server_url is not None:
             base_url = request.server_url
+        
+        
         url = base_url.removesuffix("/") + "/v1/"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 

@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class BackupSourceInstanceTierEnum(str, Enum):
     TIER_UNSPECIFIED = "TIER_UNSPECIFIED"
@@ -21,18 +23,36 @@ class BackupStateEnum(str, Enum):
 
 @dataclass_json
 @dataclass
+class BackupInput:
+    r"""BackupInput
+    A Filestore backup.
+    """
+    
+    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('description') }})
+    kms_key_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('kmsKeyName') }})
+    labels: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('labels') }})
+    source_file_share: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('sourceFileShare') }})
+    source_instance: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('sourceInstance') }})
+    
+
+@dataclass_json
+@dataclass
 class Backup:
-    capacity_gb: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'capacityGb' }})
-    create_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'createTime' }})
-    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
-    download_bytes: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'downloadBytes' }})
-    kms_key_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'kmsKeyName' }})
-    labels: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'labels' }})
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    satisfies_pzs: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'satisfiesPzs' }})
-    source_file_share: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'sourceFileShare' }})
-    source_instance: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'sourceInstance' }})
-    source_instance_tier: Optional[BackupSourceInstanceTierEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'sourceInstanceTier' }})
-    state: Optional[BackupStateEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'state' }})
-    storage_bytes: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'storageBytes' }})
+    r"""Backup
+    A Filestore backup.
+    """
+    
+    capacity_gb: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('capacityGb') }})
+    create_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('createTime') }})
+    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('description') }})
+    download_bytes: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('downloadBytes') }})
+    kms_key_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('kmsKeyName') }})
+    labels: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('labels') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    satisfies_pzs: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('satisfiesPzs') }})
+    source_file_share: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('sourceFileShare') }})
+    source_instance: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('sourceInstance') }})
+    source_instance_tier: Optional[BackupSourceInstanceTierEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('sourceInstanceTier') }})
+    state: Optional[BackupStateEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('state') }})
+    storage_bytes: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('storageBytes') }})
     

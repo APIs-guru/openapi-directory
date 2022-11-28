@@ -1,52 +1,53 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class PlaceGetAtPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=Lat" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=Lat" })
   lat: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=Lon" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=Lon" })
   lon: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=type" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=type" })
   type: string[];
 }
 
 
 export class PlaceGetAtQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=lat" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=lat" })
   lat: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=location.lat" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=location.lat" })
   locationLat: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=location.lon" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=location.lon" })
   locationLon: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=lon" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=lon" })
   lon: string;
 }
 
 
 export class PlaceGetAtRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: PlaceGetAtPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: PlaceGetAtQueryParams;
 }
 
 
 export class PlaceGetAtResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   systemObject?: Map<string, any>;
 }

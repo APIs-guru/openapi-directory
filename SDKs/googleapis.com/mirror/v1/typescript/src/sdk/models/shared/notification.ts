@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { UserAction } from "./useraction";
+
 
 
 // Notification
@@ -8,21 +8,21 @@ import { UserAction } from "./useraction";
  * A notification delivered by the API.
 **/
 export class Notification extends SpeakeasyBase {
-  @Metadata({ data: "json, name=collection" })
+  @SpeakeasyMetadata({ data: "json, name=collection" })
   collection?: string;
 
-  @Metadata({ data: "json, name=itemId" })
+  @SpeakeasyMetadata({ data: "json, name=itemId" })
   itemId?: string;
 
-  @Metadata({ data: "json, name=operation" })
+  @SpeakeasyMetadata({ data: "json, name=operation" })
   operation?: string;
 
-  @Metadata({ data: "json, name=userActions", elemType: shared.UserAction })
+  @SpeakeasyMetadata({ data: "json, name=userActions", elemType: UserAction })
   userActions?: UserAction[];
 
-  @Metadata({ data: "json, name=userToken" })
+  @SpeakeasyMetadata({ data: "json, name=userToken" })
   userToken?: string;
 
-  @Metadata({ data: "json, name=verifyToken" })
+  @SpeakeasyMetadata({ data: "json, name=verifyToken" })
   verifyToken?: string;
 }

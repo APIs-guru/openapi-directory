@@ -1,52 +1,53 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetExportThermalPrintBelegeBelegUuidPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=belegUuid" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=belegUuid" })
   belegUuid: string;
 }
 
 export enum GetExportThermalPrintBelegeBelegUuidDialectEnum {
-    Escpos = "escpos"
-,    Escposlite = "escposlite"
-,    Star = "star"
-,    Text = "text"
+    Escpos = "escpos",
+    Escposlite = "escposlite",
+    Star = "star",
+    Text = "text"
 }
 
 export enum GetExportThermalPrintBelegeBelegUuidEncodingEnum {
-    Raw = "raw"
-,    Base64 = "base64"
+    Raw = "raw",
+    Base64 = "base64"
 }
 
 
 export class GetExportThermalPrintBelegeBelegUuidQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=dialect" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=dialect" })
   dialect?: GetExportThermalPrintBelegeBelegUuidDialectEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=encoding" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=encoding" })
   encoding?: GetExportThermalPrintBelegeBelegUuidEncodingEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=qr" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=qr" })
   qr?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=width" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=width" })
   width?: number;
 }
 
 
 export class GetExportThermalPrintBelegeBelegUuidRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetExportThermalPrintBelegeBelegUuidPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetExportThermalPrintBelegeBelegUuidQueryParams;
 }
 
 
 export class GetExportThermalPrintBelegeBelegUuidResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

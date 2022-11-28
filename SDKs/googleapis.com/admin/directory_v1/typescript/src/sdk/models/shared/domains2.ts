@@ -1,15 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Domains } from "./domains";
 
 
+
 export class Domains2 extends SpeakeasyBase {
-  @Metadata({ data: "json, name=domains", elemType: shared.Domains })
+  @SpeakeasyMetadata({ data: "json, name=domains", elemType: Domains })
   domains?: Domains[];
 
-  @Metadata({ data: "json, name=etag" })
+  @SpeakeasyMetadata({ data: "json, name=etag" })
   etag?: string;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 }

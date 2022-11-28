@@ -1,42 +1,42 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
-export const CHANGEACCOUNTSETTINGS_SERVERS = [
-	"https://rest.nexmo.com",
-];
 
+export const ChangeAccountSettingsServerList = [
+	"https://rest.nexmo.com",
+] as const;
 
 
 export class ChangeAccountSettingsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=api_key" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=api_key" })
   apiKey: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=api_secret" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=api_secret" })
   apiSecret: string;
 }
 
 
 export class ChangeAccountSettingsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   serverUrl?: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: ChangeAccountSettingsQueryParams;
 
-  @Metadata({ data: "request, media_type=application/x-www-form-urlencoded" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/x-www-form-urlencoded" })
   request?: shared.AccountSettingsRequest;
 }
 
 
 export class ChangeAccountSettingsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   accountSettings?: shared.AccountSettings;
 }

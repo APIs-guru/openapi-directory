@@ -1,22 +1,23 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class PutAdminBackupsFilenamePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=filename" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=filename" })
   filename: string;
 }
 
 
 export class PutAdminBackupsFilenameRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: PutAdminBackupsFilenamePathParams;
 }
 
 
 export class PutAdminBackupsFilenameResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

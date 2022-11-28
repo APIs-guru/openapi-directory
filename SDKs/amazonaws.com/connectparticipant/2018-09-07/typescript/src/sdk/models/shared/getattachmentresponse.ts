@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetAttachmentResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Url" })
+  @SpeakeasyMetadata({ data: "json, name=Url" })
   url?: string;
 
-  @Metadata({ data: "json, name=UrlExpiry" })
+  @SpeakeasyMetadata({ data: "json, name=UrlExpiry" })
   urlExpiry?: string;
 }

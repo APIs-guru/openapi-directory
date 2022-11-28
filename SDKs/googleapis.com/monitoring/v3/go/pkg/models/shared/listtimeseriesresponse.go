@@ -1,5 +1,7 @@
 package shared
 
+// ListTimeSeriesResponse
+// The ListTimeSeries response.
 type ListTimeSeriesResponse struct {
 	ExecutionErrors []Status     `json:"executionErrors,omitempty"`
 	NextPageToken   *string      `json:"nextPageToken,omitempty"`

@@ -22,22 +22,22 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var InitializeClusterRequest = /** @class */ (function (_super) {
     __extends(InitializeClusterRequest, _super);
     function InitializeClusterRequest() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=ClusterId" }),
+        SpeakeasyMetadata({ data: "json, name=ClusterId" }),
         __metadata("design:type", String)
     ], InitializeClusterRequest.prototype, "clusterId", void 0);
     __decorate([
-        Metadata({ data: "json, name=SignedCert" }),
+        SpeakeasyMetadata({ data: "json, name=SignedCert" }),
         __metadata("design:type", String)
     ], InitializeClusterRequest.prototype, "signedCert", void 0);
     __decorate([
-        Metadata({ data: "json, name=TrustAnchor" }),
+        SpeakeasyMetadata({ data: "json, name=TrustAnchor" }),
         __metadata("design:type", String)
     ], InitializeClusterRequest.prototype, "trustAnchor", void 0);
     return InitializeClusterRequest;

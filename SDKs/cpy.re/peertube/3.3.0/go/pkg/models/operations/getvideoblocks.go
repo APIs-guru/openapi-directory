@@ -16,14 +16,14 @@ type GetVideoBlocksSecurity struct {
 	OAuth2 shared.SchemeOAuth2 `security:"scheme,type=oauth2"`
 }
 
-type GetVideoBlocksRequest struct {
-	QueryParams GetVideoBlocksQueryParams
-	Security    GetVideoBlocksSecurity
-}
-
 type GetVideoBlocks200ApplicationJSON struct {
 	Data  []interface{} `json:"data,omitempty"`
 	Total *int64        `json:"total,omitempty"`
+}
+
+type GetVideoBlocksRequest struct {
+	QueryParams GetVideoBlocksQueryParams
+	Security    GetVideoBlocksSecurity
 }
 
 type GetVideoBlocksResponse struct {

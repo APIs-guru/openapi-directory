@@ -22,7 +22,13 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+export var DeviceIdentifierDeviceTypeEnum;
+(function (DeviceIdentifierDeviceTypeEnum) {
+    DeviceIdentifierDeviceTypeEnum["DeviceTypeUnspecified"] = "DEVICE_TYPE_UNSPECIFIED";
+    DeviceIdentifierDeviceTypeEnum["DeviceTypeAndroid"] = "DEVICE_TYPE_ANDROID";
+    DeviceIdentifierDeviceTypeEnum["DeviceTypeChromeOs"] = "DEVICE_TYPE_CHROME_OS";
+})(DeviceIdentifierDeviceTypeEnum || (DeviceIdentifierDeviceTypeEnum = {}));
 // DeviceIdentifier
 /**
  * Encapsulates hardware and product IDs to identify a manufactured device. To understand requirements on identifier sets, read [Identifiers](https://developers.google.com/zero-touch/guides/identifiers).
@@ -33,23 +39,31 @@ var DeviceIdentifier = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=imei" }),
+        SpeakeasyMetadata({ data: "json, name=chromeOsAttestedDeviceId" }),
+        __metadata("design:type", String)
+    ], DeviceIdentifier.prototype, "chromeOsAttestedDeviceId", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=deviceType" }),
+        __metadata("design:type", String)
+    ], DeviceIdentifier.prototype, "deviceType", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=imei" }),
         __metadata("design:type", String)
     ], DeviceIdentifier.prototype, "imei", void 0);
     __decorate([
-        Metadata({ data: "json, name=manufacturer" }),
+        SpeakeasyMetadata({ data: "json, name=manufacturer" }),
         __metadata("design:type", String)
     ], DeviceIdentifier.prototype, "manufacturer", void 0);
     __decorate([
-        Metadata({ data: "json, name=meid" }),
+        SpeakeasyMetadata({ data: "json, name=meid" }),
         __metadata("design:type", String)
     ], DeviceIdentifier.prototype, "meid", void 0);
     __decorate([
-        Metadata({ data: "json, name=model" }),
+        SpeakeasyMetadata({ data: "json, name=model" }),
         __metadata("design:type", String)
     ], DeviceIdentifier.prototype, "model", void 0);
     __decorate([
-        Metadata({ data: "json, name=serialNumber" }),
+        SpeakeasyMetadata({ data: "json, name=serialNumber" }),
         __metadata("design:type", String)
     ], DeviceIdentifier.prototype, "serialNumber", void 0);
     return DeviceIdentifier;

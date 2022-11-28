@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ActionEnum } from "./actionenum";
+
 
 
 // Message
@@ -7,39 +8,39 @@ import { ActionEnum } from "./actionenum";
  * Specifies the content and settings for a push notification that's sent to recipients of a campaign.
 **/
 export class Message extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Action" })
+  @SpeakeasyMetadata({ data: "json, name=Action" })
   action?: ActionEnum;
 
-  @Metadata({ data: "json, name=Body" })
+  @SpeakeasyMetadata({ data: "json, name=Body" })
   body?: string;
 
-  @Metadata({ data: "json, name=ImageIconUrl" })
+  @SpeakeasyMetadata({ data: "json, name=ImageIconUrl" })
   imageIconUrl?: string;
 
-  @Metadata({ data: "json, name=ImageSmallIconUrl" })
+  @SpeakeasyMetadata({ data: "json, name=ImageSmallIconUrl" })
   imageSmallIconUrl?: string;
 
-  @Metadata({ data: "json, name=ImageUrl" })
+  @SpeakeasyMetadata({ data: "json, name=ImageUrl" })
   imageUrl?: string;
 
-  @Metadata({ data: "json, name=JsonBody" })
+  @SpeakeasyMetadata({ data: "json, name=JsonBody" })
   jsonBody?: string;
 
-  @Metadata({ data: "json, name=MediaUrl" })
+  @SpeakeasyMetadata({ data: "json, name=MediaUrl" })
   mediaUrl?: string;
 
-  @Metadata({ data: "json, name=RawContent" })
+  @SpeakeasyMetadata({ data: "json, name=RawContent" })
   rawContent?: string;
 
-  @Metadata({ data: "json, name=SilentPush" })
+  @SpeakeasyMetadata({ data: "json, name=SilentPush" })
   silentPush?: boolean;
 
-  @Metadata({ data: "json, name=TimeToLive" })
+  @SpeakeasyMetadata({ data: "json, name=TimeToLive" })
   timeToLive?: number;
 
-  @Metadata({ data: "json, name=Title" })
+  @SpeakeasyMetadata({ data: "json, name=Title" })
   title?: string;
 
-  @Metadata({ data: "json, name=Url" })
+  @SpeakeasyMetadata({ data: "json, name=Url" })
   url?: string;
 }

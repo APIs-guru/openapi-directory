@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { CloudComponentStateEnum } from "./cloudcomponentstateenum";
 /**
  * Contains the status of a component in the IoT Greengrass service.

@@ -1,4 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AppEngine } from "./appengine";
 import { BasicService } from "./basicservice";
 import { CloudEndpoints } from "./cloudendpoints";
@@ -10,6 +10,10 @@ import { GkeWorkload } from "./gkeworkload";
 import { IstioCanonicalService } from "./istiocanonicalservice";
 import { MeshIstio } from "./meshistio";
 import { Telemetry } from "./telemetry";
+import { GkeNamespaceInput } from "./gkenamespace";
+import { GkeServiceInput } from "./gkeservice";
+import { GkeWorkloadInput } from "./gkeworkload";
+
 
 
 // Service
@@ -17,48 +21,100 @@ import { Telemetry } from "./telemetry";
  * A Service is a discrete, autonomous, and network-accessible unit, designed to solve an individual concern (Wikipedia (https://en.wikipedia.org/wiki/Service-orientation)). In Cloud Monitoring, a Service acts as the root resource under which operational aspects of the service are accessible.
 **/
 export class Service extends SpeakeasyBase {
-  @Metadata({ data: "json, name=appEngine" })
+  @SpeakeasyMetadata({ data: "json, name=appEngine" })
   appEngine?: AppEngine;
 
-  @Metadata({ data: "json, name=basicService" })
+  @SpeakeasyMetadata({ data: "json, name=basicService" })
   basicService?: BasicService;
 
-  @Metadata({ data: "json, name=cloudEndpoints" })
+  @SpeakeasyMetadata({ data: "json, name=cloudEndpoints" })
   cloudEndpoints?: CloudEndpoints;
 
-  @Metadata({ data: "json, name=cloudRun" })
+  @SpeakeasyMetadata({ data: "json, name=cloudRun" })
   cloudRun?: CloudRun;
 
-  @Metadata({ data: "json, name=clusterIstio" })
+  @SpeakeasyMetadata({ data: "json, name=clusterIstio" })
   clusterIstio?: ClusterIstio;
 
-  @Metadata({ data: "json, name=custom" })
+  @SpeakeasyMetadata({ data: "json, name=custom" })
   custom?: Map<string, any>;
 
-  @Metadata({ data: "json, name=displayName" })
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
   displayName?: string;
 
-  @Metadata({ data: "json, name=gkeNamespace" })
+  @SpeakeasyMetadata({ data: "json, name=gkeNamespace" })
   gkeNamespace?: GkeNamespace;
 
-  @Metadata({ data: "json, name=gkeService" })
+  @SpeakeasyMetadata({ data: "json, name=gkeService" })
   gkeService?: GkeService;
 
-  @Metadata({ data: "json, name=gkeWorkload" })
+  @SpeakeasyMetadata({ data: "json, name=gkeWorkload" })
   gkeWorkload?: GkeWorkload;
 
-  @Metadata({ data: "json, name=istioCanonicalService" })
+  @SpeakeasyMetadata({ data: "json, name=istioCanonicalService" })
   istioCanonicalService?: IstioCanonicalService;
 
-  @Metadata({ data: "json, name=meshIstio" })
+  @SpeakeasyMetadata({ data: "json, name=meshIstio" })
   meshIstio?: MeshIstio;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=telemetry" })
+  @SpeakeasyMetadata({ data: "json, name=telemetry" })
   telemetry?: Telemetry;
 
-  @Metadata({ data: "json, name=userLabels" })
+  @SpeakeasyMetadata({ data: "json, name=userLabels" })
+  userLabels?: Map<string, string>;
+}
+
+
+// ServiceInput
+/** 
+ * A Service is a discrete, autonomous, and network-accessible unit, designed to solve an individual concern (Wikipedia (https://en.wikipedia.org/wiki/Service-orientation)). In Cloud Monitoring, a Service acts as the root resource under which operational aspects of the service are accessible.
+**/
+export class ServiceInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=appEngine" })
+  appEngine?: AppEngine;
+
+  @SpeakeasyMetadata({ data: "json, name=basicService" })
+  basicService?: BasicService;
+
+  @SpeakeasyMetadata({ data: "json, name=cloudEndpoints" })
+  cloudEndpoints?: CloudEndpoints;
+
+  @SpeakeasyMetadata({ data: "json, name=cloudRun" })
+  cloudRun?: CloudRun;
+
+  @SpeakeasyMetadata({ data: "json, name=clusterIstio" })
+  clusterIstio?: ClusterIstio;
+
+  @SpeakeasyMetadata({ data: "json, name=custom" })
+  custom?: Map<string, any>;
+
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
+  displayName?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=gkeNamespace" })
+  gkeNamespace?: GkeNamespaceInput;
+
+  @SpeakeasyMetadata({ data: "json, name=gkeService" })
+  gkeService?: GkeServiceInput;
+
+  @SpeakeasyMetadata({ data: "json, name=gkeWorkload" })
+  gkeWorkload?: GkeWorkloadInput;
+
+  @SpeakeasyMetadata({ data: "json, name=istioCanonicalService" })
+  istioCanonicalService?: IstioCanonicalService;
+
+  @SpeakeasyMetadata({ data: "json, name=meshIstio" })
+  meshIstio?: MeshIstio;
+
+  @SpeakeasyMetadata({ data: "json, name=name" })
+  name?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=telemetry" })
+  telemetry?: Telemetry;
+
+  @SpeakeasyMetadata({ data: "json, name=userLabels" })
   userLabels?: Map<string, string>;
 }

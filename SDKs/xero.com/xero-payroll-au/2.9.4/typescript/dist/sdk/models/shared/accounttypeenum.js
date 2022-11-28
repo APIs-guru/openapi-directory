@@ -1,0 +1,26 @@
+export var AccountTypeEnum;
+(function (AccountTypeEnum) {
+    AccountTypeEnum["Bank"] = "BANK";
+    AccountTypeEnum["Current"] = "CURRENT";
+    AccountTypeEnum["Currliab"] = "CURRLIAB";
+    AccountTypeEnum["Depreciatn"] = "DEPRECIATN";
+    AccountTypeEnum["Directcosts"] = "DIRECTCOSTS";
+    AccountTypeEnum["Equity"] = "EQUITY";
+    AccountTypeEnum["Expense"] = "EXPENSE";
+    AccountTypeEnum["Fixed"] = "FIXED";
+    AccountTypeEnum["Inventory"] = "INVENTORY";
+    AccountTypeEnum["Liability"] = "LIABILITY";
+    AccountTypeEnum["Noncurrent"] = "NONCURRENT";
+    AccountTypeEnum["Otherincome"] = "OTHERINCOME";
+    AccountTypeEnum["Overheads"] = "OVERHEADS";
+    AccountTypeEnum["Prepayment"] = "PREPAYMENT";
+    AccountTypeEnum["Revenue"] = "REVENUE";
+    AccountTypeEnum["Sales"] = "SALES";
+    AccountTypeEnum["Termliab"] = "TERMLIAB";
+    AccountTypeEnum["Paygliability"] = "PAYGLIABILITY";
+    AccountTypeEnum["Payg"] = "PAYG";
+    AccountTypeEnum["Superannuationexpense"] = "SUPERANNUATIONEXPENSE";
+    AccountTypeEnum["Superannuationliability"] = "SUPERANNUATIONLIABILITY";
+    AccountTypeEnum["Wagesexpense"] = "WAGESEXPENSE";
+    AccountTypeEnum["Wagespayableliability"] = "WAGESPAYABLELIABILITY";
+})(AccountTypeEnum || (AccountTypeEnum = {}));

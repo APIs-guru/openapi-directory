@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AuthorizationLoggingOptions } from "./authorizationloggingoptions";
 export var CloudAuditOptionsLogNameEnum;
 (function (CloudAuditOptionsLogNameEnum) {
@@ -40,11 +40,11 @@ var CloudAuditOptions = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=authorizationLoggingOptions" }),
+        SpeakeasyMetadata({ data: "json, name=authorizationLoggingOptions" }),
         __metadata("design:type", AuthorizationLoggingOptions)
     ], CloudAuditOptions.prototype, "authorizationLoggingOptions", void 0);
     __decorate([
-        Metadata({ data: "json, name=logName" }),
+        SpeakeasyMetadata({ data: "json, name=logName" }),
         __metadata("design:type", String)
     ], CloudAuditOptions.prototype, "logName", void 0);
     return CloudAuditOptions;

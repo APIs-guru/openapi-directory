@@ -1,120 +1,121 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
+
 export enum EntryApiGetListEntryTypesEnum {
-    Nothing = "Nothing"
-,    Album = "Album"
-,    Artist = "Artist"
-,    DiscussionTopic = "DiscussionTopic"
-,    Pv = "PV"
-,    ReleaseEvent = "ReleaseEvent"
-,    ReleaseEventSeries = "ReleaseEventSeries"
-,    Song = "Song"
-,    SongList = "SongList"
-,    Tag = "Tag"
-,    User = "User"
-,    Venue = "Venue"
+    Nothing = "Nothing",
+    Album = "Album",
+    Artist = "Artist",
+    DiscussionTopic = "DiscussionTopic",
+    Pv = "PV",
+    ReleaseEvent = "ReleaseEvent",
+    ReleaseEventSeries = "ReleaseEventSeries",
+    Song = "Song",
+    SongList = "SongList",
+    Tag = "Tag",
+    User = "User",
+    Venue = "Venue"
 }
 
 export enum EntryApiGetListFieldsEnum {
-    None = "None"
-,    AdditionalNames = "AdditionalNames"
-,    Description = "Description"
-,    MainPicture = "MainPicture"
-,    Names = "Names"
-,    PVs = "PVs"
-,    Tags = "Tags"
-,    WebLinks = "WebLinks"
+    None = "None",
+    AdditionalNames = "AdditionalNames",
+    Description = "Description",
+    MainPicture = "MainPicture",
+    Names = "Names",
+    PVs = "PVs",
+    Tags = "Tags",
+    WebLinks = "WebLinks"
 }
 
 export enum EntryApiGetListLangEnum {
-    Default = "Default"
-,    Japanese = "Japanese"
-,    Romaji = "Romaji"
-,    English = "English"
+    Default = "Default",
+    Japanese = "Japanese",
+    Romaji = "Romaji",
+    English = "English"
 }
 
 export enum EntryApiGetListNameMatchModeEnum {
-    Auto = "Auto"
-,    Partial = "Partial"
-,    StartsWith = "StartsWith"
-,    Exact = "Exact"
-,    Words = "Words"
+    Auto = "Auto",
+    Partial = "Partial",
+    StartsWith = "StartsWith",
+    Exact = "Exact",
+    Words = "Words"
 }
 
 export enum EntryApiGetListSortEnum {
-    None = "None"
-,    Name = "Name"
-,    AdditionDate = "AdditionDate"
-,    ActivityDate = "ActivityDate"
+    None = "None",
+    Name = "Name",
+    AdditionDate = "AdditionDate",
+    ActivityDate = "ActivityDate"
 }
 
 export enum EntryApiGetListStatusEnum {
-    Draft = "Draft"
-,    Finished = "Finished"
-,    Approved = "Approved"
-,    Locked = "Locked"
+    Draft = "Draft",
+    Finished = "Finished",
+    Approved = "Approved",
+    Locked = "Locked"
 }
 
 
 export class EntryApiGetListQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=childTags" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=childTags" })
   childTags?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=entryTypes" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=entryTypes" })
   entryTypes?: EntryApiGetListEntryTypesEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=fields" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=fields" })
   fields?: EntryApiGetListFieldsEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=getTotalCount" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=getTotalCount" })
   getTotalCount?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=lang" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=lang" })
   lang?: EntryApiGetListLangEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=maxResults" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=maxResults" })
   maxResults?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=nameMatchMode" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=nameMatchMode" })
   nameMatchMode?: EntryApiGetListNameMatchModeEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=query" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=query" })
   query?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=sort" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sort" })
   sort?: EntryApiGetListSortEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=start" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=start" })
   start?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=status" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=status" })
   status?: EntryApiGetListStatusEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=tagId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=tagId" })
   tagId?: number[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=tagName" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=tagName" })
   tagName?: string[];
 }
 
 
 export class EntryApiGetListRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: EntryApiGetListQueryParams;
 }
 
 
 export class EntryApiGetListResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   partialFindResultEntryForApiContract?: shared.PartialFindResultEntryForApiContract;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

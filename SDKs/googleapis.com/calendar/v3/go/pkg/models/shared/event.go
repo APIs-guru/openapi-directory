@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// EventCreator
+// The creator of the event. Read-only.
 type EventCreator struct {
 	DisplayName *string `json:"displayName,omitempty"`
 	Email       *string `json:"email,omitempty"`
@@ -11,11 +13,15 @@ type EventCreator struct {
 	Self        *bool   `json:"self,omitempty"`
 }
 
+// EventExtendedProperties
+// Extended properties of the event.
 type EventExtendedProperties struct {
 	Private map[string]string `json:"private,omitempty"`
 	Shared  map[string]string `json:"shared,omitempty"`
 }
 
+// EventGadget
+// A gadget that extends this event. Gadgets are deprecated; this structure is instead only used for returning birthday calendar metadata.
 type EventGadget struct {
 	Display     *string           `json:"display,omitempty"`
 	Height      *int32            `json:"height,omitempty"`
@@ -27,6 +33,8 @@ type EventGadget struct {
 	Width       *int32            `json:"width,omitempty"`
 }
 
+// EventOrganizer
+// The organizer of the event. If the organizer is also an attendee, this is indicated with a separate entry in attendees with the organizer field set to True. To change the organizer, use the move operation. Read-only, except when importing an event.
 type EventOrganizer struct {
 	DisplayName *string `json:"displayName,omitempty"`
 	Email       *string `json:"email,omitempty"`
@@ -34,11 +42,15 @@ type EventOrganizer struct {
 	Self        *bool   `json:"self,omitempty"`
 }
 
+// EventReminders
+// Information about the event's reminders for the authenticated user.
 type EventReminders struct {
 	Overrides  []EventReminder `json:"overrides,omitempty"`
 	UseDefault *bool           `json:"useDefault,omitempty"`
 }
 
+// EventSource
+// Source from which the event was created. For example, a web page, an email message or any document identifiable by an URL with HTTP or HTTPS scheme. Can only be seen or modified by the creator of the event.
 type EventSource struct {
 	Title *string `json:"title,omitempty"`
 	URL   *string `json:"url,omitempty"`

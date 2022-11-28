@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CompatibleEnvironmentTemplate } from "./compatibleenvironmenttemplate";
 import { TemplateVersionStatusEnum } from "./templateversionstatusenum";
+
 
 
 // ServiceTemplateVersion
@@ -9,39 +9,39 @@ import { TemplateVersionStatusEnum } from "./templateversionstatusenum";
  * The version of a service template detail data.
 **/
 export class ServiceTemplateVersion extends SpeakeasyBase {
-  @Metadata({ data: "json, name=arn" })
+  @SpeakeasyMetadata({ data: "json, name=arn" })
   arn: string;
 
-  @Metadata({ data: "json, name=compatibleEnvironmentTemplates", elemType: shared.CompatibleEnvironmentTemplate })
+  @SpeakeasyMetadata({ data: "json, name=compatibleEnvironmentTemplates", elemType: CompatibleEnvironmentTemplate })
   compatibleEnvironmentTemplates: CompatibleEnvironmentTemplate[];
 
-  @Metadata({ data: "json, name=createdAt" })
+  @SpeakeasyMetadata({ data: "json, name=createdAt" })
   createdAt: Date;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=lastModifiedAt" })
+  @SpeakeasyMetadata({ data: "json, name=lastModifiedAt" })
   lastModifiedAt: Date;
 
-  @Metadata({ data: "json, name=majorVersion" })
+  @SpeakeasyMetadata({ data: "json, name=majorVersion" })
   majorVersion: string;
 
-  @Metadata({ data: "json, name=minorVersion" })
+  @SpeakeasyMetadata({ data: "json, name=minorVersion" })
   minorVersion: string;
 
-  @Metadata({ data: "json, name=recommendedMinorVersion" })
+  @SpeakeasyMetadata({ data: "json, name=recommendedMinorVersion" })
   recommendedMinorVersion?: string;
 
-  @Metadata({ data: "json, name=schema" })
+  @SpeakeasyMetadata({ data: "json, name=schema" })
   schema?: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status: TemplateVersionStatusEnum;
 
-  @Metadata({ data: "json, name=statusMessage" })
+  @SpeakeasyMetadata({ data: "json, name=statusMessage" })
   statusMessage?: string;
 
-  @Metadata({ data: "json, name=templateName" })
+  @SpeakeasyMetadata({ data: "json, name=templateName" })
   templateName: string;
 }

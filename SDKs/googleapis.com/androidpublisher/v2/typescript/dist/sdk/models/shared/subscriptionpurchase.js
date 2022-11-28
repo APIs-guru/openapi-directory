@@ -1,0 +1,123 @@
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { SubscriptionCancelSurveyResult } from "./subscriptioncancelsurveyresult";
+import { SubscriptionPriceChange } from "./subscriptionpricechange";
+// SubscriptionPurchase
+/**
+ * A SubscriptionPurchase resource indicates the status of a user's subscription purchase.
+**/
+var SubscriptionPurchase = /** @class */ (function (_super) {
+    __extends(SubscriptionPurchase, _super);
+    function SubscriptionPurchase() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", Boolean)
+    ], SubscriptionPurchase.prototype, "autoRenewing", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", Number)
+    ], SubscriptionPurchase.prototype, "cancelReason", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", SubscriptionCancelSurveyResult)
+    ], SubscriptionPurchase.prototype, "cancelSurveyResult", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", String)
+    ], SubscriptionPurchase.prototype, "countryCode", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", String)
+    ], SubscriptionPurchase.prototype, "developerPayload", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", String)
+    ], SubscriptionPurchase.prototype, "emailAddress", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", String)
+    ], SubscriptionPurchase.prototype, "expiryTimeMillis", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", String)
+    ], SubscriptionPurchase.prototype, "familyName", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", String)
+    ], SubscriptionPurchase.prototype, "givenName", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", String)
+    ], SubscriptionPurchase.prototype, "kind", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", String)
+    ], SubscriptionPurchase.prototype, "linkedPurchaseToken", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", String)
+    ], SubscriptionPurchase.prototype, "orderId", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", Number)
+    ], SubscriptionPurchase.prototype, "paymentState", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", String)
+    ], SubscriptionPurchase.prototype, "priceAmountMicros", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", SubscriptionPriceChange)
+    ], SubscriptionPurchase.prototype, "priceChange", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", String)
+    ], SubscriptionPurchase.prototype, "priceCurrencyCode", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", String)
+    ], SubscriptionPurchase.prototype, "profileId", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", String)
+    ], SubscriptionPurchase.prototype, "profileName", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", Number)
+    ], SubscriptionPurchase.prototype, "purchaseType", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", String)
+    ], SubscriptionPurchase.prototype, "startTimeMillis", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", String)
+    ], SubscriptionPurchase.prototype, "userCancellationTimeMillis", void 0);
+    return SubscriptionPurchase;
+}(SpeakeasyBase));
+export { SubscriptionPurchase };

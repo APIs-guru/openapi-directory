@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AwsEcsTaskDefinitionContainerDefinitionsLogConfigurationSecretOptionsDetails
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A secret to pass to the log configuration.
 **/
 export class AwsEcsTaskDefinitionContainerDefinitionsLogConfigurationSecretOptionsDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name?: string;
 
-  @Metadata({ data: "json, name=ValueFrom" })
+  @SpeakeasyMetadata({ data: "json, name=ValueFrom" })
   valueFrom?: string;
 }

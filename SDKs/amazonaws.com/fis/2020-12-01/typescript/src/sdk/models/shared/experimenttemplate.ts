@@ -1,8 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ExperimentTemplateAction } from "./experimenttemplateaction";
 import { ExperimentTemplateStopCondition } from "./experimenttemplatestopcondition";
 import { ExperimentTemplateTarget } from "./experimenttemplatetarget";
+
 
 
 // ExperimentTemplate
@@ -10,30 +10,30 @@ import { ExperimentTemplateTarget } from "./experimenttemplatetarget";
  * Describes an experiment template.
 **/
 export class ExperimentTemplate extends SpeakeasyBase {
-  @Metadata({ data: "json, name=actions", elemType: shared.ExperimentTemplateAction })
+  @SpeakeasyMetadata({ data: "json, name=actions", elemType: ExperimentTemplateAction })
   actions?: Map<string, ExperimentTemplateAction>;
 
-  @Metadata({ data: "json, name=creationTime" })
+  @SpeakeasyMetadata({ data: "json, name=creationTime" })
   creationTime?: Date;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=lastUpdateTime" })
+  @SpeakeasyMetadata({ data: "json, name=lastUpdateTime" })
   lastUpdateTime?: Date;
 
-  @Metadata({ data: "json, name=roleArn" })
+  @SpeakeasyMetadata({ data: "json, name=roleArn" })
   roleArn?: string;
 
-  @Metadata({ data: "json, name=stopConditions", elemType: shared.ExperimentTemplateStopCondition })
+  @SpeakeasyMetadata({ data: "json, name=stopConditions", elemType: ExperimentTemplateStopCondition })
   stopConditions?: ExperimentTemplateStopCondition[];
 
-  @Metadata({ data: "json, name=tags" })
+  @SpeakeasyMetadata({ data: "json, name=tags" })
   tags?: Map<string, string>;
 
-  @Metadata({ data: "json, name=targets", elemType: shared.ExperimentTemplateTarget })
+  @SpeakeasyMetadata({ data: "json, name=targets", elemType: ExperimentTemplateTarget })
   targets?: Map<string, ExperimentTemplateTarget>;
 }

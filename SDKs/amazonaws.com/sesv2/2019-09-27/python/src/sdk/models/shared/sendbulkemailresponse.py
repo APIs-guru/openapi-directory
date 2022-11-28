@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import List
 from dataclasses_json import dataclass_json
-from . import bulkemailentryresult
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class SendBulkEmailResponse:
-    bulk_email_entry_results: List[bulkemailentryresult.BulkEmailEntryResult] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'BulkEmailEntryResults' }})
+    r"""SendBulkEmailResponse
+    The following data is returned in JSON format by the service.
+    """
+    
+    bulk_email_entry_results: List[BulkEmailEntryResult] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('BulkEmailEntryResults') }})
     

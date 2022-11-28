@@ -1,5 +1,7 @@
 package shared
 
+// ComponentVersion
+// The defining characteristics of a specific version of an Amazon Web Services TOE component.
 type ComponentVersion struct {
 	Arn                 *string            `json:"arn,omitempty"`
 	DateCreated         *string            `json:"dateCreated,omitempty"`

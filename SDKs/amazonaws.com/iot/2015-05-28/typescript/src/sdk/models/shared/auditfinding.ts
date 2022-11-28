@@ -1,8 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { NonCompliantResource } from "./noncompliantresource";
 import { RelatedResource } from "./relatedresource";
 import { AuditFindingSeverityEnum } from "./auditfindingseverityenum";
+
 
 
 // AuditFinding
@@ -10,36 +10,36 @@ import { AuditFindingSeverityEnum } from "./auditfindingseverityenum";
  * The findings (results) of the audit.
 **/
 export class AuditFinding extends SpeakeasyBase {
-  @Metadata({ data: "json, name=checkName" })
+  @SpeakeasyMetadata({ data: "json, name=checkName" })
   checkName?: string;
 
-  @Metadata({ data: "json, name=findingId" })
+  @SpeakeasyMetadata({ data: "json, name=findingId" })
   findingId?: string;
 
-  @Metadata({ data: "json, name=findingTime" })
+  @SpeakeasyMetadata({ data: "json, name=findingTime" })
   findingTime?: Date;
 
-  @Metadata({ data: "json, name=isSuppressed" })
+  @SpeakeasyMetadata({ data: "json, name=isSuppressed" })
   isSuppressed?: boolean;
 
-  @Metadata({ data: "json, name=nonCompliantResource" })
+  @SpeakeasyMetadata({ data: "json, name=nonCompliantResource" })
   nonCompliantResource?: NonCompliantResource;
 
-  @Metadata({ data: "json, name=reasonForNonCompliance" })
+  @SpeakeasyMetadata({ data: "json, name=reasonForNonCompliance" })
   reasonForNonCompliance?: string;
 
-  @Metadata({ data: "json, name=reasonForNonComplianceCode" })
+  @SpeakeasyMetadata({ data: "json, name=reasonForNonComplianceCode" })
   reasonForNonComplianceCode?: string;
 
-  @Metadata({ data: "json, name=relatedResources", elemType: shared.RelatedResource })
+  @SpeakeasyMetadata({ data: "json, name=relatedResources", elemType: RelatedResource })
   relatedResources?: RelatedResource[];
 
-  @Metadata({ data: "json, name=severity" })
+  @SpeakeasyMetadata({ data: "json, name=severity" })
   severity?: AuditFindingSeverityEnum;
 
-  @Metadata({ data: "json, name=taskId" })
+  @SpeakeasyMetadata({ data: "json, name=taskId" })
   taskId?: string;
 
-  @Metadata({ data: "json, name=taskStartTime" })
+  @SpeakeasyMetadata({ data: "json, name=taskStartTime" })
   taskStartTime?: Date;
 }

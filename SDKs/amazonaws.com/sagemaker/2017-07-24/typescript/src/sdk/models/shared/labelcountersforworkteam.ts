@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // LabelCountersForWorkteam
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Provides counts for human-labeled tasks in the labeling job.
 **/
 export class LabelCountersForWorkteam extends SpeakeasyBase {
-  @Metadata({ data: "json, name=HumanLabeled" })
+  @SpeakeasyMetadata({ data: "json, name=HumanLabeled" })
   humanLabeled?: number;
 
-  @Metadata({ data: "json, name=PendingHuman" })
+  @SpeakeasyMetadata({ data: "json, name=PendingHuman" })
   pendingHuman?: number;
 
-  @Metadata({ data: "json, name=Total" })
+  @SpeakeasyMetadata({ data: "json, name=Total" })
   total?: number;
 }

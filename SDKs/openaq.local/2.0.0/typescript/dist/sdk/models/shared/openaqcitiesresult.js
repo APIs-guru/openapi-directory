@@ -22,20 +22,20 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Meta } from "./meta";
+import { CitiesRow } from "./citiesrow";
 var OpenAqCitiesResult = /** @class */ (function (_super) {
     __extends(OpenAqCitiesResult, _super);
     function OpenAqCitiesResult() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=meta" }),
+        SpeakeasyMetadata({ data: "json, name=meta" }),
         __metadata("design:type", Meta)
     ], OpenAqCitiesResult.prototype, "meta", void 0);
     __decorate([
-        Metadata({ data: "json, name=results", elemType: shared.CitiesRow }),
+        SpeakeasyMetadata({ data: "json, name=results", elemType: CitiesRow }),
         __metadata("design:type", Array)
     ], OpenAqCitiesResult.prototype, "results", void 0);
     return OpenAqCitiesResult;

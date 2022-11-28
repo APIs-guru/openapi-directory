@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { SearchQuantumTasksFilterOperatorEnum } from "./searchquantumtasksfilteroperatorenum";
 /**
  * A filter to use to search for tasks.

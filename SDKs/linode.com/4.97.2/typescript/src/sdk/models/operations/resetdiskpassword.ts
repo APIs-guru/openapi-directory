@@ -1,65 +1,54 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class ResetDiskPasswordPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=diskId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=diskId" })
   diskId: number;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=linodeId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=linodeId" })
   linodeId: number;
 }
 
 
-export class ResetDiskPasswordSecurityOption1 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=bearer" })
-  personalAccessToken: shared.SchemePersonalAccessToken;
-}
-
-
-export class ResetDiskPasswordSecurityOption2 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
-  oauth: shared.SchemeOauth;
-}
-
-
 export class ResetDiskPasswordSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, option=true" })
-  option1?: ResetDiskPasswordSecurityOption1;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" })
+  personalAccessToken?: shared.SchemePersonalAccessToken;
 
-  @Metadata({ data: "security, option=true" })
-  option2?: ResetDiskPasswordSecurityOption2;
-}
-
-
-export class ResetDiskPasswordRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: ResetDiskPasswordPathParams;
-
-  @Metadata({ data: "request, media_type=application/json" })
-  request: any;
-
-  @Metadata()
-  security: ResetDiskPasswordSecurity;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
+  oauth?: shared.SchemeOauth;
 }
 
 
 export class ResetDiskPasswordDefaultApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=errors", elemType: shared.ErrorObject })
+  @SpeakeasyMetadata({ data: "json, name=errors", elemType: shared.ErrorObject })
   errors?: shared.ErrorObject[];
 }
 
 
+export class ResetDiskPasswordRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: ResetDiskPasswordPathParams;
+
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request: any;
+
+  @SpeakeasyMetadata()
+  security: ResetDiskPasswordSecurity;
+}
+
+
 export class ResetDiskPasswordResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   resetDiskPassword200ApplicationJsonObject?: Map<string, any>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   resetDiskPasswordDefaultApplicationJsonObject?: ResetDiskPasswordDefaultApplicationJson;
 }

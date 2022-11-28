@@ -30,7 +30,7 @@ type DlpProjectsLocationsJobTriggersCreateSecurity struct {
 type DlpProjectsLocationsJobTriggersCreateRequest struct {
 	PathParams  DlpProjectsLocationsJobTriggersCreatePathParams
 	QueryParams DlpProjectsLocationsJobTriggersCreateQueryParams
-	Request     *shared.GooglePrivacyDlpV2CreateJobTriggerRequest `request:"mediaType=application/json"`
+	Request     *shared.GooglePrivacyDlpV2CreateJobTriggerRequestInput `request:"mediaType=application/json"`
 	Security    DlpProjectsLocationsJobTriggersCreateSecurity
 }
 

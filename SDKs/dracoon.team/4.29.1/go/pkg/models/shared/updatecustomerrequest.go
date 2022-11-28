@@ -8,6 +8,8 @@ const (
 	UpdateCustomerRequestCustomerContractTypeEnumPay  UpdateCustomerRequestCustomerContractTypeEnum = "pay"
 )
 
+// UpdateCustomerRequest
+// Request model for updating a customer
 type UpdateCustomerRequest struct {
 	CompanyName          *string                                       `json:"companyName,omitempty"`
 	CustomerContractType UpdateCustomerRequestCustomerContractTypeEnum `json:"customerContractType"`

@@ -1,6 +1,7 @@
 
 
+
 export enum ManagedTerminationProtectionEnum {
-    Enabled = "ENABLED"
-,    Disabled = "DISABLED"
+    Enabled = "ENABLED",
+    Disabled = "DISABLED"
 }

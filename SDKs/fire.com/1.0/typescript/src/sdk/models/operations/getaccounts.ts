@@ -1,77 +1,78 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum GetAccountsAccountsAccountCurrencyCodeEnum {
-    Eur = "EUR"
-,    Gbp = "GBP"
+    Eur = "EUR",
+    Gbp = "GBP"
 }
 
 
 export class GetAccountsAccountsAccountCurrency extends SpeakeasyBase {
-  @Metadata({ data: "json, name=code" })
+  @SpeakeasyMetadata({ data: "json, name=code" })
   code?: GetAccountsAccountsAccountCurrencyCodeEnum;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 }
 
 export enum GetAccountsAccountsAccountStatusEnum {
-    Live = "LIVE"
-,    Migrated = "MIGRATED"
+    Live = "LIVE",
+    Migrated = "MIGRATED"
 }
 
 
 export class GetAccountsAccountsAccount extends SpeakeasyBase {
-  @Metadata({ data: "json, name=balance" })
+  @SpeakeasyMetadata({ data: "json, name=balance" })
   balance?: number;
 
-  @Metadata({ data: "json, name=cbic" })
+  @SpeakeasyMetadata({ data: "json, name=cbic" })
   cbic?: string;
 
-  @Metadata({ data: "json, name=ccan" })
+  @SpeakeasyMetadata({ data: "json, name=ccan" })
   ccan?: string;
 
-  @Metadata({ data: "json, name=ciban" })
+  @SpeakeasyMetadata({ data: "json, name=ciban" })
   ciban?: string;
 
-  @Metadata({ data: "json, name=cnsc" })
+  @SpeakeasyMetadata({ data: "json, name=cnsc" })
   cnsc?: string;
 
-  @Metadata({ data: "json, name=colour" })
+  @SpeakeasyMetadata({ data: "json, name=colour" })
   colour?: string;
 
-  @Metadata({ data: "json, name=currency" })
+  @SpeakeasyMetadata({ data: "json, name=currency" })
   currency?: GetAccountsAccountsAccountCurrency;
 
-  @Metadata({ data: "json, name=defaultAccount" })
+  @SpeakeasyMetadata({ data: "json, name=defaultAccount" })
   defaultAccount?: boolean;
 
-  @Metadata({ data: "json, name=directDebitsAllowed" })
+  @SpeakeasyMetadata({ data: "json, name=directDebitsAllowed" })
   directDebitsAllowed?: boolean;
 
-  @Metadata({ data: "json, name=ican" })
+  @SpeakeasyMetadata({ data: "json, name=ican" })
   ican?: number;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: GetAccountsAccountsAccountStatusEnum;
 }
 
 
 export class GetAccountsAccounts extends SpeakeasyBase {
-  @Metadata({ data: "json, name=accounts", elemType: operations.GetAccountsAccountsAccount })
+  @SpeakeasyMetadata({ data: "json, name=accounts", elemType: GetAccountsAccountsAccount })
   accounts?: GetAccountsAccountsAccount[];
 }
 
 
 export class GetAccountsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   accounts?: GetAccountsAccounts;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

@@ -17,18 +17,18 @@ class AddMediaPathRequests:
 
 @dataclass
 class AddMediaPathSecurity:
-    custom_authentication: shared.SchemeCustomAuthentication = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    custom_authentication: shared.SchemeCustomAuthentication = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
     
 
 @dataclass
 class AddMediaPathRequest:
-    query_params: AddMediaPathQueryParams = field(default=None)
-    request: AddMediaPathRequests = field(default=None)
-    security: AddMediaPathSecurity = field(default=None)
+    query_params: AddMediaPathQueryParams = field()
+    request: AddMediaPathRequests = field()
+    security: AddMediaPathSecurity = field()
     
 
 @dataclass
 class AddMediaPathResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // MemberAccount
 /**
  * Contains information about the Amazon Macie Classic member account.
@@ -33,7 +33,7 @@ var MemberAccount = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=accountId" }),
+        SpeakeasyMetadata({ data: "json, name=accountId" }),
         __metadata("design:type", String)
     ], MemberAccount.prototype, "accountId", void 0);
     return MemberAccount;

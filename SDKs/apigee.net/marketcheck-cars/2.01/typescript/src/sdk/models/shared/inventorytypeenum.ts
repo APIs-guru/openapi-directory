@@ -1,6 +1,7 @@
 
 
+
 export enum InventoryTypeEnum {
-    Used = "used"
-,    New = "new"
+    Used = "used",
+    New = "new"
 }

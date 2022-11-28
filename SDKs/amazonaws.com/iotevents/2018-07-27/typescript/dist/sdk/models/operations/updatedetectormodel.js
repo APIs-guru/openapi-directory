@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var UpdateDetectorModelPathParams = /** @class */ (function (_super) {
     __extends(UpdateDetectorModelPathParams, _super);
@@ -30,7 +30,7 @@ var UpdateDetectorModelPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=detectorModelName" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=detectorModelName" }),
         __metadata("design:type", String)
     ], UpdateDetectorModelPathParams.prototype, "detectorModelName", void 0);
     return UpdateDetectorModelPathParams;
@@ -42,31 +42,31 @@ var UpdateDetectorModelHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
         __metadata("design:type", String)
     ], UpdateDetectorModelHeaders.prototype, "xAmzAlgorithm", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
         __metadata("design:type", String)
     ], UpdateDetectorModelHeaders.prototype, "xAmzContentSha256", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
         __metadata("design:type", String)
     ], UpdateDetectorModelHeaders.prototype, "xAmzCredential", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
         __metadata("design:type", String)
     ], UpdateDetectorModelHeaders.prototype, "xAmzDate", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
         __metadata("design:type", String)
     ], UpdateDetectorModelHeaders.prototype, "xAmzSecurityToken", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
         __metadata("design:type", String)
     ], UpdateDetectorModelHeaders.prototype, "xAmzSignature", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
         __metadata("design:type", String)
     ], UpdateDetectorModelHeaders.prototype, "xAmzSignedHeaders", void 0);
     return UpdateDetectorModelHeaders;
@@ -82,11 +82,11 @@ var UpdateDetectorModelRequestBodyDetectorModelDefinition = /** @class */ (funct
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=initialStateName" }),
+        SpeakeasyMetadata({ data: "json, name=initialStateName" }),
         __metadata("design:type", String)
     ], UpdateDetectorModelRequestBodyDetectorModelDefinition.prototype, "initialStateName", void 0);
     __decorate([
-        Metadata({ data: "json, name=states", elemType: shared.State }),
+        SpeakeasyMetadata({ data: "json, name=states", elemType: shared.State }),
         __metadata("design:type", Array)
     ], UpdateDetectorModelRequestBodyDetectorModelDefinition.prototype, "states", void 0);
     return UpdateDetectorModelRequestBodyDetectorModelDefinition;
@@ -103,19 +103,19 @@ var UpdateDetectorModelRequestBody = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=detectorModelDefinition" }),
+        SpeakeasyMetadata({ data: "json, name=detectorModelDefinition" }),
         __metadata("design:type", UpdateDetectorModelRequestBodyDetectorModelDefinition)
     ], UpdateDetectorModelRequestBody.prototype, "detectorModelDefinition", void 0);
     __decorate([
-        Metadata({ data: "json, name=detectorModelDescription" }),
+        SpeakeasyMetadata({ data: "json, name=detectorModelDescription" }),
         __metadata("design:type", String)
     ], UpdateDetectorModelRequestBody.prototype, "detectorModelDescription", void 0);
     __decorate([
-        Metadata({ data: "json, name=evaluationMethod" }),
+        SpeakeasyMetadata({ data: "json, name=evaluationMethod" }),
         __metadata("design:type", String)
     ], UpdateDetectorModelRequestBody.prototype, "evaluationMethod", void 0);
     __decorate([
-        Metadata({ data: "json, name=roleArn" }),
+        SpeakeasyMetadata({ data: "json, name=roleArn" }),
         __metadata("design:type", String)
     ], UpdateDetectorModelRequestBody.prototype, "roleArn", void 0);
     return UpdateDetectorModelRequestBody;
@@ -127,15 +127,15 @@ var UpdateDetectorModelRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", UpdateDetectorModelPathParams)
     ], UpdateDetectorModelRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", UpdateDetectorModelHeaders)
     ], UpdateDetectorModelRequest.prototype, "headers", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", UpdateDetectorModelRequestBody)
     ], UpdateDetectorModelRequest.prototype, "request", void 0);
     return UpdateDetectorModelRequest;
@@ -147,39 +147,39 @@ var UpdateDetectorModelResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], UpdateDetectorModelResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], UpdateDetectorModelResponse.prototype, "internalFailureException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], UpdateDetectorModelResponse.prototype, "invalidRequestException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], UpdateDetectorModelResponse.prototype, "resourceInUseException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], UpdateDetectorModelResponse.prototype, "resourceNotFoundException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], UpdateDetectorModelResponse.prototype, "serviceUnavailableException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], UpdateDetectorModelResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], UpdateDetectorModelResponse.prototype, "throttlingException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.UpdateDetectorModelResponse)
     ], UpdateDetectorModelResponse.prototype, "updateDetectorModelResponse", void 0);
     return UpdateDetectorModelResponse;

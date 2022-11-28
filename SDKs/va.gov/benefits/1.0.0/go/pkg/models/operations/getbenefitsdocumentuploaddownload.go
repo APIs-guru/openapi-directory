@@ -12,11 +12,6 @@ type GetBenefitsDocumentUploadDownloadSecurity struct {
 	Apikey shared.SchemeApikey `security:"scheme,type=apiKey,subtype=header"`
 }
 
-type GetBenefitsDocumentUploadDownloadRequest struct {
-	PathParams GetBenefitsDocumentUploadDownloadPathParams
-	Security   GetBenefitsDocumentUploadDownloadSecurity
-}
-
 type GetBenefitsDocumentUploadDownload401ApplicationJSON struct {
 	Message *string `json:"Message,omitempty"`
 }
@@ -41,6 +36,11 @@ type GetBenefitsDocumentUploadDownload500ApplicationJSON struct {
 	Detail *string `json:"detail,omitempty"`
 	Status *string `json:"status,omitempty"`
 	Title  *string `json:"title,omitempty"`
+}
+
+type GetBenefitsDocumentUploadDownloadRequest struct {
+	PathParams GetBenefitsDocumentUploadDownloadPathParams
+	Security   GetBenefitsDocumentUploadDownloadSecurity
 }
 
 type GetBenefitsDocumentUploadDownloadResponse struct {

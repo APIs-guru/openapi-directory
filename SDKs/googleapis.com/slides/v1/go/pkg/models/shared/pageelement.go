@@ -1,5 +1,7 @@
 package shared
 
+// PageElement
+// A visual element rendered on a page.
 type PageElement struct {
 	Description  *string          `json:"description,omitempty"`
 	ElementGroup *Group           `json:"elementGroup,omitempty"`

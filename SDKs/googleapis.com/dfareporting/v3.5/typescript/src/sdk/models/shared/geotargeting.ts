@@ -1,5 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { City } from "./city";
 import { Country } from "./country";
 import { Metro } from "./metro";
@@ -7,26 +6,27 @@ import { PostalCode } from "./postalcode";
 import { Region } from "./region";
 
 
+
 // GeoTargeting
 /** 
  * Geographical Targeting.
 **/
 export class GeoTargeting extends SpeakeasyBase {
-  @Metadata({ data: "json, name=cities", elemType: shared.City })
+  @SpeakeasyMetadata({ data: "json, name=cities", elemType: City })
   cities?: City[];
 
-  @Metadata({ data: "json, name=countries", elemType: shared.Country })
+  @SpeakeasyMetadata({ data: "json, name=countries", elemType: Country })
   countries?: Country[];
 
-  @Metadata({ data: "json, name=excludeCountries" })
+  @SpeakeasyMetadata({ data: "json, name=excludeCountries" })
   excludeCountries?: boolean;
 
-  @Metadata({ data: "json, name=metros", elemType: shared.Metro })
+  @SpeakeasyMetadata({ data: "json, name=metros", elemType: Metro })
   metros?: Metro[];
 
-  @Metadata({ data: "json, name=postalCodes", elemType: shared.PostalCode })
+  @SpeakeasyMetadata({ data: "json, name=postalCodes", elemType: PostalCode })
   postalCodes?: PostalCode[];
 
-  @Metadata({ data: "json, name=regions", elemType: shared.Region })
+  @SpeakeasyMetadata({ data: "json, name=regions", elemType: Region })
   regions?: Region[];
 }

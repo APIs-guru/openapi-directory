@@ -17,6 +17,8 @@ const (
 	GoogleFirestoreAdminV1beta2IndexStateEnumNeedsRepair      GoogleFirestoreAdminV1beta2IndexStateEnum = "NEEDS_REPAIR"
 )
 
+// GoogleFirestoreAdminV1beta2Index
+// Cloud Firestore indexes enable simple and complex queries against documents in a database.
 type GoogleFirestoreAdminV1beta2Index struct {
 	Fields     []GoogleFirestoreAdminV1beta2IndexField         `json:"fields,omitempty"`
 	Name       *string                                         `json:"name,omitempty"`

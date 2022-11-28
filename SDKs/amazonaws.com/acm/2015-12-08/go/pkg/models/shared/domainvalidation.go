@@ -1,5 +1,7 @@
 package shared
 
+// DomainValidation
+// Contains information about the validation of each domain name in the certificate.
 type DomainValidation struct {
 	DomainName       string                `json:"DomainName"`
 	ResourceRecord   *ResourceRecord       `json:"ResourceRecord,omitempty"`

@@ -1,5 +1,7 @@
 package shared
 
+// FirstLastNamePhoneCodedOut
+// Represents the output of inferring the LIKELY country and phone code from a personal name and phone number.
 type FirstLastNamePhoneCodedOut struct {
 	CountryIso2                      *string  `json:"countryIso2,omitempty"`
 	FirstName                        *string  `json:"firstName,omitempty"`

@@ -1,12 +1,13 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { MysqlRdbms } from "./mysqlrdbms";
 import { OracleRdbms } from "./oraclerdbms";
 
 
+
 export class DiscoverConnectionProfileResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=mysqlRdbms" })
+  @SpeakeasyMetadata({ data: "json, name=mysqlRdbms" })
   mysqlRdbms?: MysqlRdbms;
 
-  @Metadata({ data: "json, name=oracleRdbms" })
+  @SpeakeasyMetadata({ data: "json, name=oracleRdbms" })
   oracleRdbms?: OracleRdbms;
 }

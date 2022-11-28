@@ -62,6 +62,8 @@ type FileCommitContent struct {
 	URL         *string                 `json:"url,omitempty"`
 }
 
+// FileCommit
+// File Commit
 type FileCommit struct {
 	Commit  FileCommitCommit  `json:"commit"`
 	Content FileCommitContent `json:"content"`

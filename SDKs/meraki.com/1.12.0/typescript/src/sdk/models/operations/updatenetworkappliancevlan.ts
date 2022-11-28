@@ -1,125 +1,126 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class UpdateNetworkApplianceVlanPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=networkId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=networkId" })
   networkId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=vlanId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=vlanId" })
   vlanId: string;
 }
 
 export enum UpdateNetworkApplianceVlanRequestBodyDhcpHandlingEnum {
-    RunADhcpServer = "Run a DHCP server"
-,    RelayDhcpToAnotherServer = "Relay DHCP to another server"
-,    DoNotRespondToDhcpRequests = "Do not respond to DHCP requests"
+    RunADhcpServer = "Run a DHCP server",
+    RelayDhcpToAnotherServer = "Relay DHCP to another server",
+    DoNotRespondToDhcpRequests = "Do not respond to DHCP requests"
 }
 
 export enum UpdateNetworkApplianceVlanRequestBodyDhcpLeaseTimeEnum {
-    ThirtyMinutes = "30 minutes"
-,    OneHour = "1 hour"
-,    FourHours = "4 hours"
-,    TwelveHours = "12 hours"
-,    OneDay = "1 day"
-,    OneWeek = "1 week"
+    ThirtyMinutes = "30 minutes",
+    OneHour = "1 hour",
+    FourHours = "4 hours",
+    TwelveHours = "12 hours",
+    OneDay = "1 day",
+    OneWeek = "1 week"
 }
 
 export enum UpdateNetworkApplianceVlanRequestBodyDhcpOptionsTypeEnum {
-    Text = "text"
-,    Ip = "ip"
-,    Hex = "hex"
-,    Integer = "integer"
+    Text = "text",
+    Ip = "ip",
+    Hex = "hex",
+    Integer = "integer"
 }
 
 
 export class UpdateNetworkApplianceVlanRequestBodyDhcpOptions extends SpeakeasyBase {
-  @Metadata({ data: "json, name=code" })
+  @SpeakeasyMetadata({ data: "json, name=code" })
   code: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type: UpdateNetworkApplianceVlanRequestBodyDhcpOptionsTypeEnum;
 
-  @Metadata({ data: "json, name=value" })
+  @SpeakeasyMetadata({ data: "json, name=value" })
   value: string;
 }
 
 
 export class UpdateNetworkApplianceVlanRequestBodyReservedIpRanges extends SpeakeasyBase {
-  @Metadata({ data: "json, name=comment" })
+  @SpeakeasyMetadata({ data: "json, name=comment" })
   comment: string;
 
-  @Metadata({ data: "json, name=end" })
+  @SpeakeasyMetadata({ data: "json, name=end" })
   end: string;
 
-  @Metadata({ data: "json, name=start" })
+  @SpeakeasyMetadata({ data: "json, name=start" })
   start: string;
 }
 
 
 export class UpdateNetworkApplianceVlanRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=applianceIp" })
+  @SpeakeasyMetadata({ data: "json, name=applianceIp" })
   applianceIp?: string;
 
-  @Metadata({ data: "json, name=dhcpBootFilename" })
+  @SpeakeasyMetadata({ data: "json, name=dhcpBootFilename" })
   dhcpBootFilename?: string;
 
-  @Metadata({ data: "json, name=dhcpBootNextServer" })
+  @SpeakeasyMetadata({ data: "json, name=dhcpBootNextServer" })
   dhcpBootNextServer?: string;
 
-  @Metadata({ data: "json, name=dhcpBootOptionsEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=dhcpBootOptionsEnabled" })
   dhcpBootOptionsEnabled?: boolean;
 
-  @Metadata({ data: "json, name=dhcpHandling" })
+  @SpeakeasyMetadata({ data: "json, name=dhcpHandling" })
   dhcpHandling?: UpdateNetworkApplianceVlanRequestBodyDhcpHandlingEnum;
 
-  @Metadata({ data: "json, name=dhcpLeaseTime" })
+  @SpeakeasyMetadata({ data: "json, name=dhcpLeaseTime" })
   dhcpLeaseTime?: UpdateNetworkApplianceVlanRequestBodyDhcpLeaseTimeEnum;
 
-  @Metadata({ data: "json, name=dhcpOptions", elemType: operations.UpdateNetworkApplianceVlanRequestBodyDhcpOptions })
+  @SpeakeasyMetadata({ data: "json, name=dhcpOptions", elemType: UpdateNetworkApplianceVlanRequestBodyDhcpOptions })
   dhcpOptions?: UpdateNetworkApplianceVlanRequestBodyDhcpOptions[];
 
-  @Metadata({ data: "json, name=dhcpRelayServerIps" })
+  @SpeakeasyMetadata({ data: "json, name=dhcpRelayServerIps" })
   dhcpRelayServerIps?: string[];
 
-  @Metadata({ data: "json, name=dnsNameservers" })
+  @SpeakeasyMetadata({ data: "json, name=dnsNameservers" })
   dnsNameservers?: string;
 
-  @Metadata({ data: "json, name=fixedIpAssignments" })
+  @SpeakeasyMetadata({ data: "json, name=fixedIpAssignments" })
   fixedIpAssignments?: Map<string, any>;
 
-  @Metadata({ data: "json, name=groupPolicyId" })
+  @SpeakeasyMetadata({ data: "json, name=groupPolicyId" })
   groupPolicyId?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=reservedIpRanges", elemType: operations.UpdateNetworkApplianceVlanRequestBodyReservedIpRanges })
+  @SpeakeasyMetadata({ data: "json, name=reservedIpRanges", elemType: UpdateNetworkApplianceVlanRequestBodyReservedIpRanges })
   reservedIpRanges?: UpdateNetworkApplianceVlanRequestBodyReservedIpRanges[];
 
-  @Metadata({ data: "json, name=subnet" })
+  @SpeakeasyMetadata({ data: "json, name=subnet" })
   subnet?: string;
 
-  @Metadata({ data: "json, name=vpnNatSubnet" })
+  @SpeakeasyMetadata({ data: "json, name=vpnNatSubnet" })
   vpnNatSubnet?: string;
 }
 
 
 export class UpdateNetworkApplianceVlanRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: UpdateNetworkApplianceVlanPathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request?: UpdateNetworkApplianceVlanRequestBody;
 }
 
 
 export class UpdateNetworkApplianceVlanResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   updateNetworkApplianceVlan200ApplicationJsonObject?: Map<string, any>;
 }

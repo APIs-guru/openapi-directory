@@ -1,5 +1,7 @@
 package shared
 
+// SmsMessage
+// Specifies the default settings for a one-time SMS message that's sent directly to an endpoint.
 type SmsMessage struct {
 	Body              *string             `json:"Body,omitempty"`
 	EntityID          *string             `json:"EntityId,omitempty"`

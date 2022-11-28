@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { AnalysisResultLevelEnum } from "./analysisresultlevelenum";
 import { AnalysisResultLocation } from "./analysisresultlocation";
 /**

@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class DiscoveryNoteAnalysisKindEnum(str, Enum):
     NOTE_KIND_UNSPECIFIED = "NOTE_KIND_UNSPECIFIED"
@@ -19,5 +21,9 @@ class DiscoveryNoteAnalysisKindEnum(str, Enum):
 @dataclass_json
 @dataclass
 class DiscoveryNote:
-    analysis_kind: Optional[DiscoveryNoteAnalysisKindEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'analysisKind' }})
+    r"""DiscoveryNote
+    A note that indicates a type of analysis a provider would perform. This note exists in a provider's project. A `Discovery` occurrence is created in a consumer's project at the start of analysis.
+    """
+    
+    analysis_kind: Optional[DiscoveryNoteAnalysisKindEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('analysisKind') }})
     

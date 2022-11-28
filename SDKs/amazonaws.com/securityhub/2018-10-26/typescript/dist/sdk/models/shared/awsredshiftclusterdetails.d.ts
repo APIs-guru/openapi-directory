@@ -1,0 +1,62 @@
+import { SpeakeasyBase } from "../../../internal/utils";
+import { AwsRedshiftClusterClusterNode } from "./awsredshiftclusterclusternode";
+import { AwsRedshiftClusterClusterParameterGroup } from "./awsredshiftclusterclusterparametergroup";
+import { AwsRedshiftClusterClusterSecurityGroup } from "./awsredshiftclusterclustersecuritygroup";
+import { AwsRedshiftClusterClusterSnapshotCopyStatus } from "./awsredshiftclusterclustersnapshotcopystatus";
+import { AwsRedshiftClusterDeferredMaintenanceWindow } from "./awsredshiftclusterdeferredmaintenancewindow";
+import { AwsRedshiftClusterElasticIpStatus } from "./awsredshiftclusterelasticipstatus";
+import { AwsRedshiftClusterEndpoint } from "./awsredshiftclusterendpoint";
+import { AwsRedshiftClusterHsmStatus } from "./awsredshiftclusterhsmstatus";
+import { AwsRedshiftClusterIamRole } from "./awsredshiftclusteriamrole";
+import { AwsRedshiftClusterPendingModifiedValues } from "./awsredshiftclusterpendingmodifiedvalues";
+import { AwsRedshiftClusterResizeInfo } from "./awsredshiftclusterresizeinfo";
+import { AwsRedshiftClusterRestoreStatus } from "./awsredshiftclusterrestorestatus";
+import { AwsRedshiftClusterVpcSecurityGroup } from "./awsredshiftclustervpcsecuritygroup";
+/**
+ * Details about an Amazon Redshift cluster.
+**/
+export declare class AwsRedshiftClusterDetails extends SpeakeasyBase {
+    allowVersionUpgrade?: boolean;
+    automatedSnapshotRetentionPeriod?: number;
+    availabilityZone?: string;
+    clusterAvailabilityStatus?: string;
+    clusterCreateTime?: string;
+    clusterIdentifier?: string;
+    clusterNodes?: AwsRedshiftClusterClusterNode[];
+    clusterParameterGroups?: AwsRedshiftClusterClusterParameterGroup[];
+    clusterPublicKey?: string;
+    clusterRevisionNumber?: string;
+    clusterSecurityGroups?: AwsRedshiftClusterClusterSecurityGroup[];
+    clusterSnapshotCopyStatus?: AwsRedshiftClusterClusterSnapshotCopyStatus;
+    clusterStatus?: string;
+    clusterSubnetGroupName?: string;
+    clusterVersion?: string;
+    dbName?: string;
+    deferredMaintenanceWindows?: AwsRedshiftClusterDeferredMaintenanceWindow[];
+    elasticIpStatus?: AwsRedshiftClusterElasticIpStatus;
+    elasticResizeNumberOfNodeOptions?: string;
+    encrypted?: boolean;
+    endpoint?: AwsRedshiftClusterEndpoint;
+    enhancedVpcRouting?: boolean;
+    expectedNextSnapshotScheduleTime?: string;
+    expectedNextSnapshotScheduleTimeStatus?: string;
+    hsmStatus?: AwsRedshiftClusterHsmStatus;
+    iamRoles?: AwsRedshiftClusterIamRole[];
+    kmsKeyId?: string;
+    maintenanceTrackName?: string;
+    manualSnapshotRetentionPeriod?: number;
+    masterUsername?: string;
+    nextMaintenanceWindowStartTime?: string;
+    nodeType?: string;
+    numberOfNodes?: number;
+    pendingActions?: string[];
+    pendingModifiedValues?: AwsRedshiftClusterPendingModifiedValues;
+    preferredMaintenanceWindow?: string;
+    publiclyAccessible?: boolean;
+    resizeInfo?: AwsRedshiftClusterResizeInfo;
+    restoreStatus?: AwsRedshiftClusterRestoreStatus;
+    snapshotScheduleIdentifier?: string;
+    snapshotScheduleState?: string;
+    vpcId?: string;
+    vpcSecurityGroups?: AwsRedshiftClusterVpcSecurityGroup[];
+}

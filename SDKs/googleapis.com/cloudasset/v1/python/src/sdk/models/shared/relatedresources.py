@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import relatedresource
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class RelatedResources:
-    related_resources: Optional[List[relatedresource.RelatedResource]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'relatedResources' }})
+    r"""RelatedResources
+    The related resources of the primary resource.
+    """
+    
+    related_resources: Optional[List[RelatedResource]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('relatedResources') }})
     

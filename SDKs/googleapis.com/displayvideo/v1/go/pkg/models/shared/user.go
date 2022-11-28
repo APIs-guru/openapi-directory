@@ -1,5 +1,15 @@
 package shared
 
+// UserInput
+// A single user in Display & Video 360.
+type UserInput struct {
+	AssignedUserRoles []AssignedUserRoleInput `json:"assignedUserRoles,omitempty"`
+	DisplayName       *string                 `json:"displayName,omitempty"`
+	Email             *string                 `json:"email,omitempty"`
+}
+
+// User
+// A single user in Display & Video 360.
 type User struct {
 	AssignedUserRoles []AssignedUserRole `json:"assignedUserRoles,omitempty"`
 	DisplayName       *string            `json:"displayName,omitempty"`

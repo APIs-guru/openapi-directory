@@ -1,5 +1,7 @@
 package shared
 
+// EventData
+// Represents all the details pertaining to an event.
 type EventData struct {
 	EventAction   *string `json:"eventAction,omitempty"`
 	EventCategory *string `json:"eventCategory,omitempty"`

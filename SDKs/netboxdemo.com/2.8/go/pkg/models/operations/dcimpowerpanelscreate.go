@@ -5,7 +5,7 @@ import (
 )
 
 type DcimPowerPanelsCreateRequest struct {
-	Request shared.WritablePowerPanel `request:"mediaType=application/json"`
+	Request shared.WritablePowerPanelInput `request:"mediaType=application/json"`
 }
 
 type DcimPowerPanelsCreateResponse struct {

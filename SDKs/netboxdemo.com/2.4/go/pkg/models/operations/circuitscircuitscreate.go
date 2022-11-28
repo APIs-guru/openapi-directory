@@ -5,7 +5,7 @@ import (
 )
 
 type CircuitsCircuitsCreateRequest struct {
-	Request shared.WritableCircuit `request:"mediaType=application/json"`
+	Request shared.WritableCircuitInput `request:"mediaType=application/json"`
 }
 
 type CircuitsCircuitsCreateResponse struct {

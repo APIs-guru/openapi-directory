@@ -1,16 +1,17 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ListGroupMembersRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=GroupId" })
+  @SpeakeasyMetadata({ data: "json, name=GroupId" })
   groupId: string;
 
-  @Metadata({ data: "json, name=MaxResults" })
+  @SpeakeasyMetadata({ data: "json, name=MaxResults" })
   maxResults?: number;
 
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=OrganizationId" })
+  @SpeakeasyMetadata({ data: "json, name=OrganizationId" })
   organizationId: string;
 }

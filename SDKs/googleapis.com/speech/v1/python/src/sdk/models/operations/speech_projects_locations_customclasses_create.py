@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class SpeechProjectsLocationsCustomClassesCreatePathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,21 +26,21 @@ class SpeechProjectsLocationsCustomClassesCreateQueryParams:
 
 @dataclass
 class SpeechProjectsLocationsCustomClassesCreateSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class SpeechProjectsLocationsCustomClassesCreateRequest:
-    path_params: SpeechProjectsLocationsCustomClassesCreatePathParams = field(default=None)
-    query_params: SpeechProjectsLocationsCustomClassesCreateQueryParams = field(default=None)
+    path_params: SpeechProjectsLocationsCustomClassesCreatePathParams = field()
+    query_params: SpeechProjectsLocationsCustomClassesCreateQueryParams = field()
+    security: SpeechProjectsLocationsCustomClassesCreateSecurity = field()
     request: Optional[shared.CreateCustomClassRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: SpeechProjectsLocationsCustomClassesCreateSecurity = field(default=None)
     
 
 @dataclass
 class SpeechProjectsLocationsCustomClassesCreateResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     custom_class: Optional[shared.CustomClass] = field(default=None)
-    status_code: int = field(default=None)
     

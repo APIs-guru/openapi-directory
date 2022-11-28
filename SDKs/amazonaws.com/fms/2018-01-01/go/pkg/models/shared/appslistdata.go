@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// AppsListData
+// An Firewall Manager applications list.
 type AppsListData struct {
 	AppsList         []App            `json:"AppsList"`
 	CreateTime       *time.Time       `json:"CreateTime,omitempty"`

@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class CustomBiddingModelDetailsReadinessStateEnum(str, Enum):
     READINESS_STATE_UNSPECIFIED = "READINESS_STATE_UNSPECIFIED"
@@ -19,7 +21,11 @@ class CustomBiddingModelDetailsSuspensionStateEnum(str, Enum):
 @dataclass_json
 @dataclass
 class CustomBiddingModelDetails:
-    advertiser_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'advertiserId' }})
-    readiness_state: Optional[CustomBiddingModelDetailsReadinessStateEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'readinessState' }})
-    suspension_state: Optional[CustomBiddingModelDetailsSuspensionStateEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'suspensionState' }})
+    r"""CustomBiddingModelDetails
+    The details of a custom bidding algorithm model for a single shared advertiser.
+    """
+    
+    advertiser_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('advertiserId') }})
+    readiness_state: Optional[CustomBiddingModelDetailsReadinessStateEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('readinessState') }})
+    suspension_state: Optional[CustomBiddingModelDetailsSuspensionStateEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('suspensionState') }})
     

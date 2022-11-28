@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CodeConfiguration } from "./codeconfiguration";
 import { SourceCodeVersion } from "./sourcecodeversion";
+
 
 
 // CodeRepository
@@ -8,12 +9,12 @@ import { SourceCodeVersion } from "./sourcecodeversion";
  * Describes a source code repository.
 **/
 export class CodeRepository extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CodeConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=CodeConfiguration" })
   codeConfiguration?: CodeConfiguration;
 
-  @Metadata({ data: "json, name=RepositoryUrl" })
+  @SpeakeasyMetadata({ data: "json, name=RepositoryUrl" })
   repositoryUrl: string;
 
-  @Metadata({ data: "json, name=SourceCodeVersion" })
+  @SpeakeasyMetadata({ data: "json, name=SourceCodeVersion" })
   sourceCodeVersion: SourceCodeVersion;
 }

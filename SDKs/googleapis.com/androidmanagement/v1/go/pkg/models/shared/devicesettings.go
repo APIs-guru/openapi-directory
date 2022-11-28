@@ -12,6 +12,8 @@ const (
 	DeviceSettingsEncryptionStatusEnumActivePerUser               DeviceSettingsEncryptionStatusEnum = "ACTIVE_PER_USER"
 )
 
+// DeviceSettings
+// Information about security related device settings on device.
 type DeviceSettings struct {
 	AdbEnabled                 *bool                               `json:"adbEnabled,omitempty"`
 	DevelopmentSettingsEnabled *bool                               `json:"developmentSettingsEnabled,omitempty"`

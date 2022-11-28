@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GooglePlayAnalytics } from "./googleplayanalytics";
 import { ITunesConnectAnalytics } from "./itunesconnectanalytics";
+
 
 
 // AnalyticsInfo
@@ -8,9 +9,9 @@ import { ITunesConnectAnalytics } from "./itunesconnectanalytics";
  * Tracking parameters supported by Dynamic Link.
 **/
 export class AnalyticsInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=googlePlayAnalytics" })
+  @SpeakeasyMetadata({ data: "json, name=googlePlayAnalytics" })
   googlePlayAnalytics?: GooglePlayAnalytics;
 
-  @Metadata({ data: "json, name=itunesConnectAnalytics" })
+  @SpeakeasyMetadata({ data: "json, name=itunesConnectAnalytics" })
   itunesConnectAnalytics?: ITunesConnectAnalytics;
 }

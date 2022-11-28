@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class SafebrowsingEncodedFullHashesGetPathParams:
-    encoded_request: str = field(default=None, metadata={'path_param': { 'field_name': 'encodedRequest', 'style': 'simple', 'explode': False }})
+    encoded_request: str = field(metadata={'path_param': { 'field_name': 'encodedRequest', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -27,13 +28,13 @@ class SafebrowsingEncodedFullHashesGetQueryParams:
 
 @dataclass
 class SafebrowsingEncodedFullHashesGetRequest:
-    path_params: SafebrowsingEncodedFullHashesGetPathParams = field(default=None)
-    query_params: SafebrowsingEncodedFullHashesGetQueryParams = field(default=None)
+    path_params: SafebrowsingEncodedFullHashesGetPathParams = field()
+    query_params: SafebrowsingEncodedFullHashesGetQueryParams = field()
     
 
 @dataclass
 class SafebrowsingEncodedFullHashesGetResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_security_safebrowsing_v4_find_full_hashes_response: Optional[shared.GoogleSecuritySafebrowsingV4FindFullHashesResponse] = field(default=None)
-    status_code: int = field(default=None)
     

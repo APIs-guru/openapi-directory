@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetGetGroupPolicyActionEnum(str, Enum):
     GET_GROUP_POLICY = "GetGroupPolicy"
@@ -10,10 +14,10 @@ class GetGetGroupPolicyVersionEnum(str, Enum):
 
 @dataclass
 class GetGetGroupPolicyQueryParams:
-    action: GetGetGroupPolicyActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    group_name: str = field(default=None, metadata={'query_param': { 'field_name': 'GroupName', 'style': 'form', 'explode': True }})
-    policy_name: str = field(default=None, metadata={'query_param': { 'field_name': 'PolicyName', 'style': 'form', 'explode': True }})
-    version: GetGetGroupPolicyVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: GetGetGroupPolicyActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    group_name: str = field(metadata={'query_param': { 'field_name': 'GroupName', 'style': 'form', 'explode': True }})
+    policy_name: str = field(metadata={'query_param': { 'field_name': 'PolicyName', 'style': 'form', 'explode': True }})
+    version: GetGetGroupPolicyVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -29,13 +33,13 @@ class GetGetGroupPolicyHeaders:
 
 @dataclass
 class GetGetGroupPolicyRequest:
-    query_params: GetGetGroupPolicyQueryParams = field(default=None)
-    headers: GetGetGroupPolicyHeaders = field(default=None)
+    headers: GetGetGroupPolicyHeaders = field()
+    query_params: GetGetGroupPolicyQueryParams = field()
     
 
 @dataclass
 class GetGetGroupPolicyResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

@@ -1,5 +1,7 @@
 package shared
 
+// LeaderboardScores
+// A ListScores response.
 type LeaderboardScores struct {
 	Items         []LeaderboardEntry `json:"items,omitempty"`
 	Kind          *string            `json:"kind,omitempty"`

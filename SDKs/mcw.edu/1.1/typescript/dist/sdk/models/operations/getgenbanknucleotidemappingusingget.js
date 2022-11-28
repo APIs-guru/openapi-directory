@@ -22,14 +22,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var GetGenBankNucleotideMappingUsingGetPathParams = /** @class */ (function (_super) {
     __extends(GetGenBankNucleotideMappingUsingGetPathParams, _super);
     function GetGenBankNucleotideMappingUsingGetPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=rgdId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=rgdId" }),
         __metadata("design:type", Number)
     ], GetGenBankNucleotideMappingUsingGetPathParams.prototype, "rgdId", void 0);
     return GetGenBankNucleotideMappingUsingGetPathParams;
@@ -41,7 +41,7 @@ var GetGenBankNucleotideMappingUsingGetRequest = /** @class */ (function (_super
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetGenBankNucleotideMappingUsingGetPathParams)
     ], GetGenBankNucleotideMappingUsingGetRequest.prototype, "pathParams", void 0);
     return GetGenBankNucleotideMappingUsingGetRequest;
@@ -53,15 +53,15 @@ var GetGenBankNucleotideMappingUsingGetResponse = /** @class */ (function (_supe
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], GetGenBankNucleotideMappingUsingGetResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetGenBankNucleotideMappingUsingGetResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetGenBankNucleotideMappingUsingGetResponse.prototype, "statusCode", void 0);
     return GetGenBankNucleotideMappingUsingGetResponse;

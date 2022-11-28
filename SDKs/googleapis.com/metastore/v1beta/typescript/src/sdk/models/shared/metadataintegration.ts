@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DataCatalogConfig } from "./datacatalogconfig";
 import { DataplexConfig } from "./dataplexconfig";
+
 
 
 // MetadataIntegration
@@ -8,9 +9,9 @@ import { DataplexConfig } from "./dataplexconfig";
  * Specifies how metastore metadata should be integrated with external services.
 **/
 export class MetadataIntegration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=dataCatalogConfig" })
+  @SpeakeasyMetadata({ data: "json, name=dataCatalogConfig" })
   dataCatalogConfig?: DataCatalogConfig;
 
-  @Metadata({ data: "json, name=dataplexConfig" })
+  @SpeakeasyMetadata({ data: "json, name=dataplexConfig" })
   dataplexConfig?: DataplexConfig;
 }

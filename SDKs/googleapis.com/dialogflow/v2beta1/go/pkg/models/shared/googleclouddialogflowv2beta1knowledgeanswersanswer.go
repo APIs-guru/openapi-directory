@@ -9,6 +9,8 @@ const (
 	GoogleCloudDialogflowV2beta1KnowledgeAnswersAnswerMatchConfidenceLevelEnumHigh                            GoogleCloudDialogflowV2beta1KnowledgeAnswersAnswerMatchConfidenceLevelEnum = "HIGH"
 )
 
+// GoogleCloudDialogflowV2beta1KnowledgeAnswersAnswer
+// An answer from Knowledge Connector.
 type GoogleCloudDialogflowV2beta1KnowledgeAnswersAnswer struct {
 	Answer               *string                                                                     `json:"answer,omitempty"`
 	FaqQuestion          *string                                                                     `json:"faqQuestion,omitempty"`

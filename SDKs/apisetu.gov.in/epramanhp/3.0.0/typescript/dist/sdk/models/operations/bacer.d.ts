@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class BacerRequestBodyCertificateParameters extends SpeakeasyBase {
     name: string;
@@ -16,10 +16,6 @@ export declare class BacerRequestBody extends SpeakeasyBase {
 export declare class BacerSecurity extends SpeakeasyBase {
     apiKey: shared.SchemeApiKey;
     clientId: shared.SchemeClientId;
-}
-export declare class BacerRequest extends SpeakeasyBase {
-    request?: BacerRequestBody;
-    security: BacerSecurity;
 }
 export declare enum Bacer400ApplicationJsonErrorEnum {
     MissingParameter = "missing_parameter",
@@ -102,6 +98,10 @@ export declare enum Bacer504ApplicationJsonErrorDescriptionEnum {
 export declare class Bacer504ApplicationJson extends SpeakeasyBase {
     error?: Bacer504ApplicationJsonErrorEnum;
     errorDescription?: Bacer504ApplicationJsonErrorDescriptionEnum;
+}
+export declare class BacerRequest extends SpeakeasyBase {
+    request?: BacerRequestBody;
+    security: BacerSecurity;
 }
 export declare class BacerResponse extends SpeakeasyBase {
     contentType: string;

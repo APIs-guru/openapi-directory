@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetProgrammesPopularQueryParams = /** @class */ (function (_super) {
     __extends(GetProgrammesPopularQueryParams, _super);
@@ -30,35 +30,35 @@ var GetProgrammesPopularQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=availability" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=availability" }),
         __metadata("design:type", String)
     ], GetProgrammesPopularQueryParams.prototype, "availability", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=initial_child_count" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=initial_child_count" }),
         __metadata("design:type", Number)
     ], GetProgrammesPopularQueryParams.prototype, "initialChildCount", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=mixin" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=mixin" }),
         __metadata("design:type", Array)
     ], GetProgrammesPopularQueryParams.prototype, "mixin", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=page" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page" }),
         __metadata("design:type", Number)
     ], GetProgrammesPopularQueryParams.prototype, "page", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=per_page" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=per_page" }),
         __metadata("design:type", Number)
     ], GetProgrammesPopularQueryParams.prototype, "perPage", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=rights" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=rights" }),
         __metadata("design:type", String)
     ], GetProgrammesPopularQueryParams.prototype, "rights", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=sort" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sort" }),
         __metadata("design:type", String)
     ], GetProgrammesPopularQueryParams.prototype, "sort", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=sort_direction" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sort_direction" }),
         __metadata("design:type", String)
     ], GetProgrammesPopularQueryParams.prototype, "sortDirection", void 0);
     return GetProgrammesPopularQueryParams;
@@ -70,7 +70,7 @@ var GetProgrammesPopularRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetProgrammesPopularQueryParams)
     ], GetProgrammesPopularRequest.prototype, "queryParams", void 0);
     return GetProgrammesPopularRequest;
@@ -82,15 +82,15 @@ var GetProgrammesPopularResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetProgrammesPopularResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetProgrammesPopularResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], GetProgrammesPopularResponse.prototype, "ibl", void 0);
     return GetProgrammesPopularResponse;

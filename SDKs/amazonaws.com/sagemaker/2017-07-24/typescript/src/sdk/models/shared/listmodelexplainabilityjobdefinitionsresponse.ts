@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { MonitoringJobDefinitionSummary } from "./monitoringjobdefinitionsummary";
 
 
+
 export class ListModelExplainabilityJobDefinitionsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=JobDefinitionSummaries", elemType: shared.MonitoringJobDefinitionSummary })
+  @SpeakeasyMetadata({ data: "json, name=JobDefinitionSummaries", elemType: MonitoringJobDefinitionSummary })
   jobDefinitionSummaries: MonitoringJobDefinitionSummary[];
 
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 }

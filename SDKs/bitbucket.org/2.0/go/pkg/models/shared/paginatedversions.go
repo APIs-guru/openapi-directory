@@ -1,5 +1,7 @@
 package shared
 
+// PaginatedVersions
+// A paginated list of issue tracker versions.
 type PaginatedVersions struct {
 	Next     *string                  `json:"next,omitempty"`
 	Page     *int64                   `json:"page,omitempty"`

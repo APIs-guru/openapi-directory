@@ -1,11 +1,11 @@
 from dataclasses import dataclass, field
-from typing import Any,List,Optional
+from typing import Any,Optional
 
 
 @dataclass
 class GroceryListDeleteResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     system_object: Optional[dict[str, Any]] = field(default=None)
     

@@ -1,5 +1,7 @@
 package shared
 
+// UpdateGameSessionInput
+// Represents the input for a request operation.
 type UpdateGameSessionInput struct {
 	GameSessionID               string                           `json:"GameSessionId"`
 	MaximumPlayerSessionCount   *int64                           `json:"MaximumPlayerSessionCount,omitempty"`

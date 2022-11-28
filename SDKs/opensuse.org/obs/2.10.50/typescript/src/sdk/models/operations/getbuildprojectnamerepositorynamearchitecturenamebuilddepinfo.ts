@@ -1,59 +1,60 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetBuildProjectNameRepositoryNameArchitectureNameBuilddepinfoPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=architecture_name" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=architecture_name" })
   architectureName: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=project_name" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=project_name" })
   projectName: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=repository_name" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=repository_name" })
   repositoryName: string;
 }
 
 export enum GetBuildProjectNameRepositoryNameArchitectureNameBuilddepinfoViewEnum {
-    Pkgnames = "pkgnames"
-,    Revpkgnames = "revpkgnames"
-,    Order = "order"
+    Pkgnames = "pkgnames",
+    Revpkgnames = "revpkgnames",
+    Order = "order"
 }
 
 
 export class GetBuildProjectNameRepositoryNameArchitectureNameBuilddepinfoQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=package" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=package" })
   package?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=view" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=view" })
   view?: GetBuildProjectNameRepositoryNameArchitectureNameBuilddepinfoViewEnum;
 }
 
 
 export class GetBuildProjectNameRepositoryNameArchitectureNameBuilddepinfoSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=basic" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=basic" })
   basicAuthentication: shared.SchemeBasicAuthentication;
 }
 
 
 export class GetBuildProjectNameRepositoryNameArchitectureNameBuilddepinfoRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetBuildProjectNameRepositoryNameArchitectureNameBuilddepinfoPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetBuildProjectNameRepositoryNameArchitectureNameBuilddepinfoQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: GetBuildProjectNameRepositoryNameArchitectureNameBuilddepinfoSecurity;
 }
 
 
 export class GetBuildProjectNameRepositoryNameArchitectureNameBuilddepinfoResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

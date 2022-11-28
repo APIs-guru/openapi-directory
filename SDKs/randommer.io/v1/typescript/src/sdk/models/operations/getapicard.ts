@@ -1,31 +1,32 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetApiCardQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=type" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=type" })
   type?: string;
 }
 
 
 export class GetApiCardHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Api-Key" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Api-Key" })
   xApiKey?: string;
 }
 
 
 export class GetApiCardRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetApiCardQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: GetApiCardHeaders;
 }
 
 
 export class GetApiCardResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

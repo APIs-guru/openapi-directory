@@ -1,34 +1,35 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ProtocolSnmpv3GroupAddPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=agentNum" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=agentNum" })
   agentNum: number;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=groupName" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=groupName" })
   groupName: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=securityModel" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=securityModel" })
   securityModel: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=securityName" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=securityName" })
   securityName: string;
 }
 
 
 export class ProtocolSnmpv3GroupAddRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: ProtocolSnmpv3GroupAddPathParams;
 }
 
 
 export class ProtocolSnmpv3GroupAddResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   protocolSnmpv3GroupAdd200ApplicationJsonString?: string;
 }

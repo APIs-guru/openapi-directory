@@ -10,7 +10,7 @@ import (
 	"strings"
 )
 
-var Servers = []string{
+var ServerList = []string{
 	"http://appflow.{region}.amazonaws.com",
 	"https://appflow.{region}.amazonaws.com",
 	"http://appflow.{region}.amazonaws.com.cn",
@@ -21,10 +21,15 @@ type HTTPClient interface {
 	Do(req *http.Request) (*http.Response, error)
 }
 
+// SDK Documentation: https://docs.aws.amazon.com/appflow/ - Amazon Web Services documentation
 type SDK struct {
-	defaultClient  HTTPClient
-	securityClient HTTPClient
-	serverURL      string
+	_defaultClient  HTTPClient
+	_securityClient HTTPClient
+	_security       *shared.Security
+	_serverURL      string
+	_language       string
+	_sdkVersion     string
+	_genVersion     string
 }
 
 type SDKOption func(*SDK)
@@ -35,33 +40,55 @@ func WithServerURL(serverURL string, params map[string]string) SDKOption {
 			serverURL = utils.ReplaceParameters(serverURL, params)
 		}
 
-		sdk.serverURL = serverURL
+		sdk._serverURL = serverURL
+	}
+}
+
+func WithClient(client HTTPClient) SDKOption {
+	return func(sdk *SDK) {
+		sdk._defaultClient = client
 	}
 }
 
 func WithSecurity(security shared.Security) SDKOption {
 	return func(sdk *SDK) {
-		sdk.securityClient = utils.CreateSecurityClient(security)
+		sdk._security = &security
 	}
 }
 
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
-		defaultClient:  http.DefaultClient,
-		securityClient: http.DefaultClient,
+		_language:   "go",
+		_sdkVersion: "",
+		_genVersion: "internal",
 	}
 	for _, opt := range opts {
 		opt(sdk)
 	}
-	if sdk.serverURL == "" {
-		sdk.serverURL = Servers[0]
+
+	if sdk._defaultClient == nil {
+		sdk._defaultClient = http.DefaultClient
+	}
+	if sdk._securityClient == nil {
+
+		if sdk._security != nil {
+			sdk._securityClient = utils.ConfigureSecurityClient(sdk._defaultClient, sdk._security)
+		} else {
+			sdk._securityClient = sdk._defaultClient
+		}
+
+	}
+
+	if sdk._serverURL == "" {
+		sdk._serverURL = ServerList[0]
 	}
 
 	return sdk
 }
 
+// CreateConnectorProfile -  Creates a new connector profile associated with your Amazon Web Services account. There is a soft quota of 100 connector profiles per Amazon Web Services account. If you need more connector profiles than this quota allows, you can submit a request to the Amazon AppFlow team through the Amazon AppFlow support channel.
 func (s *SDK) CreateConnectorProfile(ctx context.Context, request operations.CreateConnectorProfileRequest) (*operations.CreateConnectorProfileResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/create-connector-profile"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -81,7 +108,7 @@ func (s *SDK) CreateConnectorProfile(ctx context.Context, request operations.Cre
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -161,8 +188,9 @@ func (s *SDK) CreateConnectorProfile(ctx context.Context, request operations.Cre
 	return res, nil
 }
 
+// CreateFlow -  Enables your application to create a new flow using Amazon AppFlow. You must create a connector profile before calling this API. Please note that the Request Syntax below shows syntax for multiple destinations, however, you can only transfer data to one item in this list at a time. Amazon AppFlow does not currently support flows to multiple destinations at once.
 func (s *SDK) CreateFlow(ctx context.Context, request operations.CreateFlowRequest) (*operations.CreateFlowResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/create-flow"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -182,7 +210,7 @@ func (s *SDK) CreateFlow(ctx context.Context, request operations.CreateFlowReque
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -282,8 +310,9 @@ func (s *SDK) CreateFlow(ctx context.Context, request operations.CreateFlowReque
 	return res, nil
 }
 
+// DeleteConnectorProfile -  Enables you to delete an existing connector profile.
 func (s *SDK) DeleteConnectorProfile(ctx context.Context, request operations.DeleteConnectorProfileRequest) (*operations.DeleteConnectorProfileResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/delete-connector-profile"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -303,7 +332,7 @@ func (s *SDK) DeleteConnectorProfile(ctx context.Context, request operations.Del
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -363,8 +392,9 @@ func (s *SDK) DeleteConnectorProfile(ctx context.Context, request operations.Del
 	return res, nil
 }
 
+// DeleteFlow -  Enables your application to delete an existing flow. Before deleting the flow, Amazon AppFlow validates the request by checking the flow configuration and status. You can delete flows one at a time.
 func (s *SDK) DeleteFlow(ctx context.Context, request operations.DeleteFlowRequest) (*operations.DeleteFlowResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/delete-flow"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -384,7 +414,7 @@ func (s *SDK) DeleteFlow(ctx context.Context, request operations.DeleteFlowReque
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -444,8 +474,9 @@ func (s *SDK) DeleteFlow(ctx context.Context, request operations.DeleteFlowReque
 	return res, nil
 }
 
+// DescribeConnectorEntity -  Provides details regarding the entity used with the connector, with a description of the data model for each entity.
 func (s *SDK) DescribeConnectorEntity(ctx context.Context, request operations.DescribeConnectorEntityRequest) (*operations.DescribeConnectorEntityResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/describe-connector-entity"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -465,7 +496,7 @@ func (s *SDK) DescribeConnectorEntity(ctx context.Context, request operations.De
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -545,8 +576,9 @@ func (s *SDK) DescribeConnectorEntity(ctx context.Context, request operations.De
 	return res, nil
 }
 
+// DescribeConnectorProfiles - <p> Returns a list of <code>connector-profile</code> details matching the provided <code>connector-profile</code> names and <code>connector-types</code>. Both input lists are optional, and you can use them to filter the result. </p> <p>If no names or <code>connector-types</code> are provided, returns all connector profiles in a paginated form. If there is no match, this operation returns an empty list.</p>
 func (s *SDK) DescribeConnectorProfiles(ctx context.Context, request operations.DescribeConnectorProfilesRequest) (*operations.DescribeConnectorProfilesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/describe-connector-profiles"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -568,7 +600,7 @@ func (s *SDK) DescribeConnectorProfiles(ctx context.Context, request operations.
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -618,8 +650,9 @@ func (s *SDK) DescribeConnectorProfiles(ctx context.Context, request operations.
 	return res, nil
 }
 
+// DescribeConnectors -  Describes the connectors vended by Amazon AppFlow for specified connector types. If you don't specify a connector type, this operation describes all connectors vended by Amazon AppFlow. If there are more connectors than can be returned in one page, the response contains a <code>nextToken</code> object, which can be be passed in to the next call to the <code>DescribeConnectors</code> API operation to retrieve the next page.
 func (s *SDK) DescribeConnectors(ctx context.Context, request operations.DescribeConnectorsRequest) (*operations.DescribeConnectorsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/describe-connectors"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -641,7 +674,7 @@ func (s *SDK) DescribeConnectors(ctx context.Context, request operations.Describ
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -691,8 +724,9 @@ func (s *SDK) DescribeConnectors(ctx context.Context, request operations.Describ
 	return res, nil
 }
 
+// DescribeFlow -  Provides a description of the specified flow.
 func (s *SDK) DescribeFlow(ctx context.Context, request operations.DescribeFlowRequest) (*operations.DescribeFlowResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/describe-flow"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -712,7 +746,7 @@ func (s *SDK) DescribeFlow(ctx context.Context, request operations.DescribeFlowR
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -762,8 +796,9 @@ func (s *SDK) DescribeFlow(ctx context.Context, request operations.DescribeFlowR
 	return res, nil
 }
 
+// DescribeFlowExecutionRecords -  Fetches the execution history of the flow.
 func (s *SDK) DescribeFlowExecutionRecords(ctx context.Context, request operations.DescribeFlowExecutionRecordsRequest) (*operations.DescribeFlowExecutionRecordsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/describe-flow-execution-records"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -785,7 +820,7 @@ func (s *SDK) DescribeFlowExecutionRecords(ctx context.Context, request operatio
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -845,8 +880,9 @@ func (s *SDK) DescribeFlowExecutionRecords(ctx context.Context, request operatio
 	return res, nil
 }
 
+// ListConnectorEntities -  Returns the list of available connector entities supported by Amazon AppFlow. For example, you can query Salesforce for <i>Account</i> and <i>Opportunity</i> entities, or query ServiceNow for the <i>Incident</i> entity.
 func (s *SDK) ListConnectorEntities(ctx context.Context, request operations.ListConnectorEntitiesRequest) (*operations.ListConnectorEntitiesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/list-connector-entities"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -866,7 +902,7 @@ func (s *SDK) ListConnectorEntities(ctx context.Context, request operations.List
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -946,8 +982,9 @@ func (s *SDK) ListConnectorEntities(ctx context.Context, request operations.List
 	return res, nil
 }
 
+// ListFlows -  Lists all of the flows associated with your account.
 func (s *SDK) ListFlows(ctx context.Context, request operations.ListFlowsRequest) (*operations.ListFlowsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/list-flows"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -969,7 +1006,7 @@ func (s *SDK) ListFlows(ctx context.Context, request operations.ListFlowsRequest
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1019,8 +1056,9 @@ func (s *SDK) ListFlows(ctx context.Context, request operations.ListFlowsRequest
 	return res, nil
 }
 
+// ListTagsForResource -  Retrieves the tags that are associated with a specified flow.
 func (s *SDK) ListTagsForResource(ctx context.Context, request operations.ListTagsForResourceRequest) (*operations.ListTagsForResourceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/tags/{resourceArn}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1030,7 +1068,7 @@ func (s *SDK) ListTagsForResource(ctx context.Context, request operations.ListTa
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1090,8 +1128,9 @@ func (s *SDK) ListTagsForResource(ctx context.Context, request operations.ListTa
 	return res, nil
 }
 
+// StartFlow -  Activates an existing flow. For on-demand flows, this operation runs the flow immediately. For schedule and event-triggered flows, this operation activates the flow.
 func (s *SDK) StartFlow(ctx context.Context, request operations.StartFlowRequest) (*operations.StartFlowResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/start-flow"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1111,7 +1150,7 @@ func (s *SDK) StartFlow(ctx context.Context, request operations.StartFlowRequest
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1181,8 +1220,9 @@ func (s *SDK) StartFlow(ctx context.Context, request operations.StartFlowRequest
 	return res, nil
 }
 
+// StopFlow -  Deactivates the existing flow. For on-demand flows, this operation returns an <code>unsupportedOperationException</code> error message. For schedule and event-triggered flows, this operation deactivates the flow.
 func (s *SDK) StopFlow(ctx context.Context, request operations.StopFlowRequest) (*operations.StopFlowResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/stop-flow"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1202,7 +1242,7 @@ func (s *SDK) StopFlow(ctx context.Context, request operations.StopFlowRequest) 
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1272,8 +1312,9 @@ func (s *SDK) StopFlow(ctx context.Context, request operations.StopFlowRequest) 
 	return res, nil
 }
 
+// TagResource -  Applies a tag to the specified flow.
 func (s *SDK) TagResource(ctx context.Context, request operations.TagResourceRequest) (*operations.TagResourceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/tags/{resourceArn}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1293,7 +1334,7 @@ func (s *SDK) TagResource(ctx context.Context, request operations.TagResourceReq
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1353,8 +1394,9 @@ func (s *SDK) TagResource(ctx context.Context, request operations.TagResourceReq
 	return res, nil
 }
 
+// UntagResource -  Removes a tag from the specified flow.
 func (s *SDK) UntagResource(ctx context.Context, request operations.UntagResourceRequest) (*operations.UntagResourceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/tags/{resourceArn}#tagKeys", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -1366,7 +1408,7 @@ func (s *SDK) UntagResource(ctx context.Context, request operations.UntagResourc
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1426,8 +1468,9 @@ func (s *SDK) UntagResource(ctx context.Context, request operations.UntagResourc
 	return res, nil
 }
 
+// UpdateConnectorProfile -  Updates a given connector profile associated with your account.
 func (s *SDK) UpdateConnectorProfile(ctx context.Context, request operations.UpdateConnectorProfileRequest) (*operations.UpdateConnectorProfileResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/update-connector-profile"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1447,7 +1490,7 @@ func (s *SDK) UpdateConnectorProfile(ctx context.Context, request operations.Upd
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1527,8 +1570,9 @@ func (s *SDK) UpdateConnectorProfile(ctx context.Context, request operations.Upd
 	return res, nil
 }
 
+// UpdateFlow -  Updates an existing flow.
 func (s *SDK) UpdateFlow(ctx context.Context, request operations.UpdateFlowRequest) (*operations.UpdateFlowResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/update-flow"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1548,7 +1592,7 @@ func (s *SDK) UpdateFlow(ctx context.Context, request operations.UpdateFlowReque
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {

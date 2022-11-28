@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var PublicKeyAlgorithmEnum;
 (function (PublicKeyAlgorithmEnum) {
     PublicKeyAlgorithmEnum["CryptoKeyVersionAlgorithmUnspecified"] = "CRYPTO_KEY_VERSION_ALGORITHM_UNSPECIFIED";
@@ -49,6 +49,10 @@ export var PublicKeyAlgorithmEnum;
     PublicKeyAlgorithmEnum["EcSignP384Sha384"] = "EC_SIGN_P384_SHA384";
     PublicKeyAlgorithmEnum["EcSignSecp256K1Sha256"] = "EC_SIGN_SECP256K1_SHA256";
     PublicKeyAlgorithmEnum["HmacSha256"] = "HMAC_SHA256";
+    PublicKeyAlgorithmEnum["HmacSha1"] = "HMAC_SHA1";
+    PublicKeyAlgorithmEnum["HmacSha384"] = "HMAC_SHA384";
+    PublicKeyAlgorithmEnum["HmacSha512"] = "HMAC_SHA512";
+    PublicKeyAlgorithmEnum["HmacSha224"] = "HMAC_SHA224";
     PublicKeyAlgorithmEnum["ExternalSymmetricEncryption"] = "EXTERNAL_SYMMETRIC_ENCRYPTION";
 })(PublicKeyAlgorithmEnum || (PublicKeyAlgorithmEnum = {}));
 export var PublicKeyProtectionLevelEnum;
@@ -69,23 +73,23 @@ var PublicKey = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=algorithm" }),
+        SpeakeasyMetadata({ data: "json, name=algorithm" }),
         __metadata("design:type", String)
     ], PublicKey.prototype, "algorithm", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], PublicKey.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=pem" }),
+        SpeakeasyMetadata({ data: "json, name=pem" }),
         __metadata("design:type", String)
     ], PublicKey.prototype, "pem", void 0);
     __decorate([
-        Metadata({ data: "json, name=pemCrc32c" }),
+        SpeakeasyMetadata({ data: "json, name=pemCrc32c" }),
         __metadata("design:type", String)
     ], PublicKey.prototype, "pemCrc32c", void 0);
     __decorate([
-        Metadata({ data: "json, name=protectionLevel" }),
+        SpeakeasyMetadata({ data: "json, name=protectionLevel" }),
         __metadata("design:type", String)
     ], PublicKey.prototype, "protectionLevel", void 0);
     return PublicKey;

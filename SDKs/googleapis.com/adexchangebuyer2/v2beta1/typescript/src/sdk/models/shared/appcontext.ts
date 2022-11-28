@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum AppContextAppTypesEnum {
-    Native = "NATIVE"
-,    Web = "WEB"
+    Native = "NATIVE",
+    Web = "WEB"
 }
 
 
@@ -11,6 +12,6 @@ export enum AppContextAppTypesEnum {
  * Output only. The app type the restriction applies to for mobile device.
 **/
 export class AppContext extends SpeakeasyBase {
-  @Metadata({ data: "json, name=appTypes" })
+  @SpeakeasyMetadata({ data: "json, name=appTypes" })
   appTypes?: AppContextAppTypesEnum[];
 }

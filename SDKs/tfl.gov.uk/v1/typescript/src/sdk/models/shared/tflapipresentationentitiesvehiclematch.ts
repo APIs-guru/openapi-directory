@@ -1,29 +1,30 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum TflApiPresentationEntitiesVehicleMatchComplianceEnum {
-    NotAvailable = "NotAvailable"
-,    NotCompliant = "NotCompliant"
-,    Compliant = "Compliant"
-,    Exempt = "Exempt"
+    NotAvailable = "NotAvailable",
+    NotCompliant = "NotCompliant",
+    Compliant = "Compliant",
+    Exempt = "Exempt"
 }
 
 
 export class TflApiPresentationEntitiesVehicleMatch extends SpeakeasyBase {
-  @Metadata({ data: "json, name=colour" })
+  @SpeakeasyMetadata({ data: "json, name=colour" })
   colour?: string;
 
-  @Metadata({ data: "json, name=compliance" })
+  @SpeakeasyMetadata({ data: "json, name=compliance" })
   compliance?: TflApiPresentationEntitiesVehicleMatchComplianceEnum;
 
-  @Metadata({ data: "json, name=make" })
+  @SpeakeasyMetadata({ data: "json, name=make" })
   make?: string;
 
-  @Metadata({ data: "json, name=model" })
+  @SpeakeasyMetadata({ data: "json, name=model" })
   model?: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: string;
 
-  @Metadata({ data: "json, name=vrm" })
+  @SpeakeasyMetadata({ data: "json, name=vrm" })
   vrm?: string;
 }

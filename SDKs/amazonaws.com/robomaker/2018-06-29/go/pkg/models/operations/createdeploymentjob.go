@@ -14,6 +14,8 @@ type CreateDeploymentJobHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// CreateDeploymentJobRequestBodyDeploymentConfig
+// Information about a deployment configuration.
 type CreateDeploymentJobRequestBodyDeploymentConfig struct {
 	ConcurrentDeploymentPercentage  *int64           `json:"concurrentDeploymentPercentage,omitempty"`
 	DownloadConditionFile           *shared.S3Object `json:"downloadConditionFile,omitempty"`

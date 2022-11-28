@@ -22,14 +22,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var TestnetGetAddressBalancePathParams = /** @class */ (function (_super) {
     __extends(TestnetGetAddressBalancePathParams, _super);
     function TestnetGetAddressBalancePathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=address" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=address" }),
         __metadata("design:type", String)
     ], TestnetGetAddressBalancePathParams.prototype, "address", void 0);
     return TestnetGetAddressBalancePathParams;
@@ -41,7 +41,7 @@ var TestnetGetAddressBalanceRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", TestnetGetAddressBalancePathParams)
     ], TestnetGetAddressBalanceRequest.prototype, "pathParams", void 0);
     return TestnetGetAddressBalanceRequest;
@@ -53,15 +53,15 @@ var TestnetGetAddressBalanceResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], TestnetGetAddressBalanceResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], TestnetGetAddressBalanceResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], TestnetGetAddressBalanceResponse.prototype, "getAddressBalanceResponse", void 0);
     return TestnetGetAddressBalanceResponse;

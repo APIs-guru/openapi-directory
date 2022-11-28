@@ -1,13 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import { VersionedPackage } from "./versionedpackage";
-import { VersionedPackage } from "./versionedpackage";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { VersionedPackage } from "./versionedpackage";
 import { WindowsQuickFixEngineeringPackage } from "./windowsquickfixengineeringpackage";
 import { WindowsApplication } from "./windowsapplication";
 import { WindowsUpdatePackage } from "./windowsupdatepackage";
-import { VersionedPackage } from "./versionedpackage";
-import { VersionedPackage } from "./versionedpackage";
 import { ZypperPatch } from "./zypperpatch";
+
 
 
 // SoftwarePackage
@@ -15,30 +12,30 @@ import { ZypperPatch } from "./zypperpatch";
  * Software package information of the operating system.
 **/
 export class SoftwarePackage extends SpeakeasyBase {
-  @Metadata({ data: "json, name=aptPackage" })
+  @SpeakeasyMetadata({ data: "json, name=aptPackage" })
   aptPackage?: VersionedPackage;
 
-  @Metadata({ data: "json, name=cosPackage" })
+  @SpeakeasyMetadata({ data: "json, name=cosPackage" })
   cosPackage?: VersionedPackage;
 
-  @Metadata({ data: "json, name=googetPackage" })
+  @SpeakeasyMetadata({ data: "json, name=googetPackage" })
   googetPackage?: VersionedPackage;
 
-  @Metadata({ data: "json, name=qfePackage" })
+  @SpeakeasyMetadata({ data: "json, name=qfePackage" })
   qfePackage?: WindowsQuickFixEngineeringPackage;
 
-  @Metadata({ data: "json, name=windowsApplication" })
+  @SpeakeasyMetadata({ data: "json, name=windowsApplication" })
   windowsApplication?: WindowsApplication;
 
-  @Metadata({ data: "json, name=wuaPackage" })
+  @SpeakeasyMetadata({ data: "json, name=wuaPackage" })
   wuaPackage?: WindowsUpdatePackage;
 
-  @Metadata({ data: "json, name=yumPackage" })
+  @SpeakeasyMetadata({ data: "json, name=yumPackage" })
   yumPackage?: VersionedPackage;
 
-  @Metadata({ data: "json, name=zypperPackage" })
+  @SpeakeasyMetadata({ data: "json, name=zypperPackage" })
   zypperPackage?: VersionedPackage;
 
-  @Metadata({ data: "json, name=zypperPatch" })
+  @SpeakeasyMetadata({ data: "json, name=zypperPatch" })
   zypperPatch?: ZypperPatch;
 }

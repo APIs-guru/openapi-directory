@@ -1,5 +1,7 @@
 package shared
 
+// GoogleCloudRecommendationengineV1beta1InputConfig
+// The input config source.
 type GoogleCloudRecommendationengineV1beta1InputConfig struct {
 	BigQuerySource        *GoogleCloudRecommendationengineV1beta1BigQuerySource        `json:"bigQuerySource,omitempty"`
 	CatalogInlineSource   *GoogleCloudRecommendationengineV1beta1CatalogInlineSource   `json:"catalogInlineSource,omitempty"`

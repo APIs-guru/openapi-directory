@@ -13,18 +13,18 @@ type CreateStoryForTaskQueryParams struct {
 	OptPretty *bool    `queryParam:"style=form,explode=true,name=opt_pretty"`
 }
 
-type CreateStoryForTaskRequestBody struct {
-	Data *shared.StoryRequest `json:"data,omitempty"`
+type CreateStoryForTaskRequestBodyInput struct {
+	Data *shared.StoryRequestInput `json:"data,omitempty"`
+}
+
+type CreateStoryForTask201ApplicationJSON struct {
+	Data *shared.StoryResponse `json:"data,omitempty"`
 }
 
 type CreateStoryForTaskRequest struct {
 	PathParams  CreateStoryForTaskPathParams
 	QueryParams CreateStoryForTaskQueryParams
-	Request     CreateStoryForTaskRequestBody `request:"mediaType=application/json"`
-}
-
-type CreateStoryForTask201ApplicationJSON struct {
-	Data *shared.StoryResponse `json:"data,omitempty"`
+	Request     CreateStoryForTaskRequestBodyInput `request:"mediaType=application/json"`
 }
 
 type CreateStoryForTaskResponse struct {

@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class ApigeeOrganizationsDevelopersAppsCreatePathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,21 +26,21 @@ class ApigeeOrganizationsDevelopersAppsCreateQueryParams:
 
 @dataclass
 class ApigeeOrganizationsDevelopersAppsCreateSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class ApigeeOrganizationsDevelopersAppsCreateRequest:
-    path_params: ApigeeOrganizationsDevelopersAppsCreatePathParams = field(default=None)
-    query_params: ApigeeOrganizationsDevelopersAppsCreateQueryParams = field(default=None)
-    request: Optional[shared.GoogleCloudApigeeV1DeveloperApp] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: ApigeeOrganizationsDevelopersAppsCreateSecurity = field(default=None)
+    path_params: ApigeeOrganizationsDevelopersAppsCreatePathParams = field()
+    query_params: ApigeeOrganizationsDevelopersAppsCreateQueryParams = field()
+    security: ApigeeOrganizationsDevelopersAppsCreateSecurity = field()
+    request: Optional[shared.GoogleCloudApigeeV1DeveloperAppInput] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class ApigeeOrganizationsDevelopersAppsCreateResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_cloud_apigee_v1_developer_app: Optional[shared.GoogleCloudApigeeV1DeveloperApp] = field(default=None)
-    status_code: int = field(default=None)
     

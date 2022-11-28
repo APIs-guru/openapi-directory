@@ -40,7 +40,7 @@ type FirebaseProjectsIosAppsCreateSecurity struct {
 type FirebaseProjectsIosAppsCreateRequest struct {
 	PathParams  FirebaseProjectsIosAppsCreatePathParams
 	QueryParams FirebaseProjectsIosAppsCreateQueryParams
-	Request     *shared.IosApp `request:"mediaType=application/json"`
+	Request     *shared.IosAppInput `request:"mediaType=application/json"`
 	Security    FirebaseProjectsIosAppsCreateSecurity
 }
 

@@ -11,6 +11,8 @@ const (
 	NumericFilterOperationEnumGreaterThanOrEqual   NumericFilterOperationEnum = "GREATER_THAN_OR_EQUAL"
 )
 
+// NumericFilter
+// Filters for numeric or date values.
 type NumericFilter struct {
 	Operation *NumericFilterOperationEnum `json:"operation,omitempty"`
 	Value     *NumericValue               `json:"value,omitempty"`

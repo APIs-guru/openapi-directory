@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// DevicePosition
+// Contains the device position details.
 type DevicePosition struct {
 	DeviceID     *string   `json:"DeviceId,omitempty"`
 	Position     []float64 `json:"Position"`

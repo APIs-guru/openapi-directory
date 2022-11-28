@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // Destination
 /**
  * Represents a cross-account destination that receives subscription log events.
@@ -33,27 +33,27 @@ var Destination = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=accessPolicy" }),
+        SpeakeasyMetadata({ data: "json, name=accessPolicy" }),
         __metadata("design:type", String)
     ], Destination.prototype, "accessPolicy", void 0);
     __decorate([
-        Metadata({ data: "json, name=arn" }),
+        SpeakeasyMetadata({ data: "json, name=arn" }),
         __metadata("design:type", String)
     ], Destination.prototype, "arn", void 0);
     __decorate([
-        Metadata({ data: "json, name=creationTime" }),
+        SpeakeasyMetadata({ data: "json, name=creationTime" }),
         __metadata("design:type", Number)
     ], Destination.prototype, "creationTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=destinationName" }),
+        SpeakeasyMetadata({ data: "json, name=destinationName" }),
         __metadata("design:type", String)
     ], Destination.prototype, "destinationName", void 0);
     __decorate([
-        Metadata({ data: "json, name=roleArn" }),
+        SpeakeasyMetadata({ data: "json, name=roleArn" }),
         __metadata("design:type", String)
     ], Destination.prototype, "roleArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=targetArn" }),
+        SpeakeasyMetadata({ data: "json, name=targetArn" }),
         __metadata("design:type", String)
     ], Destination.prototype, "targetArn", void 0);
     return Destination;

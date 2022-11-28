@@ -1,32 +1,33 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class RevokeRefreshTokenV2PathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=token" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=token" })
   token: string;
 }
 
 
 export class RevokeRefreshTokenV2Security extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=bearer" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" })
   bearerToken: shared.SchemeBearerToken;
 }
 
 
 export class RevokeRefreshTokenV2Request extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: RevokeRefreshTokenV2PathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: RevokeRefreshTokenV2Security;
 }
 
 
 export class RevokeRefreshTokenV2Response extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

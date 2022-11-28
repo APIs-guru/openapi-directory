@@ -1,5 +1,7 @@
 package shared
 
+// MaintenanceWindowTask
+// Information about a task defined for a maintenance window.
 type MaintenanceWindowTask struct {
 	Description    *string                                                  `json:"Description,omitempty"`
 	LoggingInfo    *LoggingInfo                                             `json:"LoggingInfo,omitempty"`

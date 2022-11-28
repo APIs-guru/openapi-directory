@@ -15,6 +15,8 @@ type CreateObjectHeaders struct {
 	XAmzDataPartition string  `header:"style=simple,explode=false,name=x-amz-data-partition"`
 }
 
+// CreateObjectRequestBodyParentReference
+// The reference that identifies an object.
 type CreateObjectRequestBodyParentReference struct {
 	Selector *string `json:"Selector,omitempty"`
 }

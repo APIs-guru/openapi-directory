@@ -5,13 +5,13 @@ from sdk.models import shared
 
 @dataclass
 class CreateInvoiceSubmissionRequest:
-    request: shared.InvoiceSubmission = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    request: shared.InvoiceSubmission = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class CreateInvoiceSubmissionResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error_models: Optional[List[Any]] = field(default=None)
     invoice_submission_result: Optional[shared.InvoiceSubmissionResult] = field(default=None)
-    status_code: int = field(default=None)
     

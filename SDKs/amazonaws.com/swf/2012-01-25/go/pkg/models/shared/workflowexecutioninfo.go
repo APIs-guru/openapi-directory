@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// WorkflowExecutionInfo
+// Contains information about a workflow execution.
 type WorkflowExecutionInfo struct {
 	CancelRequested *bool               `json:"cancelRequested,omitempty"`
 	CloseStatus     *CloseStatusEnum    `json:"closeStatus,omitempty"`

@@ -1,20 +1,21 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { WorkflowExecution } from "./workflowexecution";
 
 
+
 export class GetWorkflowExecutionHistoryInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=domain" })
+  @SpeakeasyMetadata({ data: "json, name=domain" })
   domain: string;
 
-  @Metadata({ data: "json, name=execution" })
+  @SpeakeasyMetadata({ data: "json, name=execution" })
   execution: WorkflowExecution;
 
-  @Metadata({ data: "json, name=maximumPageSize" })
+  @SpeakeasyMetadata({ data: "json, name=maximumPageSize" })
   maximumPageSize?: number;
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 
-  @Metadata({ data: "json, name=reverseOrder" })
+  @SpeakeasyMetadata({ data: "json, name=reverseOrder" })
   reverseOrder?: boolean;
 }

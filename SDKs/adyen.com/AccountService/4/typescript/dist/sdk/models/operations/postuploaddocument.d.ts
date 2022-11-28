@@ -1,14 +1,8 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
-export declare class PostUploadDocumentSecurityOption1 extends SpeakeasyBase {
-    basicAuth: shared.SchemeBasicAuth;
-}
-export declare class PostUploadDocumentSecurityOption2 extends SpeakeasyBase {
-    apiKeyAuth: shared.SchemeApiKeyAuth;
-}
 export declare class PostUploadDocumentSecurity extends SpeakeasyBase {
-    option1?: PostUploadDocumentSecurityOption1;
-    option2?: PostUploadDocumentSecurityOption2;
+    basicAuth?: shared.SchemeBasicAuth;
+    apiKeyAuth?: shared.SchemeApiKeyAuth;
 }
 export declare class PostUploadDocumentRequest extends SpeakeasyBase {
     request?: any;

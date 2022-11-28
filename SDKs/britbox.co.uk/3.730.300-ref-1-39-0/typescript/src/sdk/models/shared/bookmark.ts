@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class Bookmark extends SpeakeasyBase {
-  @Metadata({ data: "json, name=creationDate" })
+  @SpeakeasyMetadata({ data: "json, name=creationDate" })
   creationDate: Date;
 
-  @Metadata({ data: "json, name=itemId" })
+  @SpeakeasyMetadata({ data: "json, name=itemId" })
   itemId: string;
 }

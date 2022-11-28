@@ -1,8 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import daterange
-from . import prismaconfig
+from sdk import utils
+from . import *
 
 class CampaignBudgetBudgetUnitEnum(str, Enum):
     BUDGET_UNIT_UNSPECIFIED = "BUDGET_UNIT_UNSPECIFIED"
@@ -18,13 +22,17 @@ class CampaignBudgetExternalBudgetSourceEnum(str, Enum):
 @dataclass_json
 @dataclass
 class CampaignBudget:
-    budget_amount_micros: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'budgetAmountMicros' }})
-    budget_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'budgetId' }})
-    budget_unit: Optional[CampaignBudgetBudgetUnitEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'budgetUnit' }})
-    date_range: Optional[daterange.DateRange] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'dateRange' }})
-    display_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'displayName' }})
-    external_budget_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'externalBudgetId' }})
-    external_budget_source: Optional[CampaignBudgetExternalBudgetSourceEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'externalBudgetSource' }})
-    invoice_grouping_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'invoiceGroupingId' }})
-    prisma_config: Optional[prismaconfig.PrismaConfig] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'prismaConfig' }})
+    r"""CampaignBudget
+    Settings that control how the campaign budget is allocated.
+    """
+    
+    budget_amount_micros: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('budgetAmountMicros') }})
+    budget_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('budgetId') }})
+    budget_unit: Optional[CampaignBudgetBudgetUnitEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('budgetUnit') }})
+    date_range: Optional[DateRange] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('dateRange') }})
+    display_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('displayName') }})
+    external_budget_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('externalBudgetId') }})
+    external_budget_source: Optional[CampaignBudgetExternalBudgetSourceEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('externalBudgetSource') }})
+    invoice_grouping_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('invoiceGroupingId') }})
+    prisma_config: Optional[PrismaConfig] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('prismaConfig') }})
     

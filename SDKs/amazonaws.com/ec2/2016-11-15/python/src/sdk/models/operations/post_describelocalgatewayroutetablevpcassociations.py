@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostDescribeLocalGatewayRouteTableVpcAssociationsActionEnum(str, Enum):
     DESCRIBE_LOCAL_GATEWAY_ROUTE_TABLE_VPC_ASSOCIATIONS = "DescribeLocalGatewayRouteTableVpcAssociations"
@@ -10,10 +14,10 @@ class PostDescribeLocalGatewayRouteTableVpcAssociationsVersionEnum(str, Enum):
 
 @dataclass
 class PostDescribeLocalGatewayRouteTableVpcAssociationsQueryParams:
-    action: PostDescribeLocalGatewayRouteTableVpcAssociationsActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: PostDescribeLocalGatewayRouteTableVpcAssociationsActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostDescribeLocalGatewayRouteTableVpcAssociationsVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     max_results: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'MaxResults', 'style': 'form', 'explode': True }})
     next_token: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'NextToken', 'style': 'form', 'explode': True }})
-    version: PostDescribeLocalGatewayRouteTableVpcAssociationsVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -29,14 +33,14 @@ class PostDescribeLocalGatewayRouteTableVpcAssociationsHeaders:
 
 @dataclass
 class PostDescribeLocalGatewayRouteTableVpcAssociationsRequest:
-    query_params: PostDescribeLocalGatewayRouteTableVpcAssociationsQueryParams = field(default=None)
-    headers: PostDescribeLocalGatewayRouteTableVpcAssociationsHeaders = field(default=None)
+    headers: PostDescribeLocalGatewayRouteTableVpcAssociationsHeaders = field()
+    query_params: PostDescribeLocalGatewayRouteTableVpcAssociationsQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostDescribeLocalGatewayRouteTableVpcAssociationsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

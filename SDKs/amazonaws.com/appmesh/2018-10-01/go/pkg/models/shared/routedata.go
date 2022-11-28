@@ -1,5 +1,7 @@
 package shared
 
+// RouteData
+// An object representing a route returned by a describe operation.
 type RouteData struct {
 	MeshName          string            `json:"meshName"`
 	Metadata          *ResourceMetadata `json:"metadata,omitempty"`

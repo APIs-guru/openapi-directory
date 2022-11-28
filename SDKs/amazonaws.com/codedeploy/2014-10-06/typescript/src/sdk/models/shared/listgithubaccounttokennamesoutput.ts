@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ListGitHubAccountTokenNamesOutput
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Represents the output of a <code>ListGitHubAccountTokenNames</code> operation.
 **/
 export class ListGitHubAccountTokenNamesOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=nextToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=tokenNameList" })
+  @SpeakeasyMetadata({ data: "json, name=tokenNameList" })
   tokenNameList?: string[];
 }

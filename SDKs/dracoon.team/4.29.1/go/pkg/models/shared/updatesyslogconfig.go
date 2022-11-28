@@ -7,6 +7,8 @@ const (
 	UpdateSyslogConfigProtocolEnumUDP UpdateSyslogConfigProtocolEnum = "UDP"
 )
 
+// UpdateSyslogConfig
+// Request model for updating syslog settings
 type UpdateSyslogConfig struct {
 	Enabled      *bool                           `json:"enabled,omitempty"`
 	Host         *string                         `json:"host,omitempty"`

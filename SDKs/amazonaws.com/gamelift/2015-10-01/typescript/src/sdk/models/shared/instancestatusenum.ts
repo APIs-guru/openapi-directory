@@ -1,7 +1,8 @@
 
 
+
 export enum InstanceStatusEnum {
-    Pending = "PENDING"
-,    Active = "ACTIVE"
-,    Terminating = "TERMINATING"
+    Pending = "PENDING",
+    Active = "ACTIVE",
+    Terminating = "TERMINATING"
 }

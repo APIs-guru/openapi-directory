@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { SqlParameter } from "./sqlparameter";
 export declare class ExecuteStatementInput extends SpeakeasyBase {
     clusterIdentifier: string;

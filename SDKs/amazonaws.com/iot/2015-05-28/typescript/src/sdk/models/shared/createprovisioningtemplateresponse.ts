@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class CreateProvisioningTemplateResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=defaultVersionId" })
+  @SpeakeasyMetadata({ data: "json, name=defaultVersionId" })
   defaultVersionId?: number;
 
-  @Metadata({ data: "json, name=templateArn" })
+  @SpeakeasyMetadata({ data: "json, name=templateArn" })
   templateArn?: string;
 
-  @Metadata({ data: "json, name=templateName" })
+  @SpeakeasyMetadata({ data: "json, name=templateName" })
   templateName?: string;
 }

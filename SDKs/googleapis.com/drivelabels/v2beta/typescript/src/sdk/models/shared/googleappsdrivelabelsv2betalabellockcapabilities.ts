@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleAppsDriveLabelsV2betaLabelLockCapabilities
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A description of a user's capabilities on a LabelLock.
 **/
 export class GoogleAppsDriveLabelsV2betaLabelLockCapabilities extends SpeakeasyBase {
-  @Metadata({ data: "json, name=canViewPolicy" })
+  @SpeakeasyMetadata({ data: "json, name=canViewPolicy" })
   canViewPolicy?: boolean;
 }

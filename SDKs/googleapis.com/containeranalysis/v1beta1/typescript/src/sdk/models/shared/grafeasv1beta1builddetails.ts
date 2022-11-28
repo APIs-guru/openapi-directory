@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BuildProvenance } from "./buildprovenance";
+
 
 
 // GrafeasV1beta1BuildDetails
@@ -7,9 +8,9 @@ import { BuildProvenance } from "./buildprovenance";
  * Details of a build occurrence.
 **/
 export class GrafeasV1beta1BuildDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=provenance" })
+  @SpeakeasyMetadata({ data: "json, name=provenance" })
   provenance?: BuildProvenance;
 
-  @Metadata({ data: "json, name=provenanceBytes" })
+  @SpeakeasyMetadata({ data: "json, name=provenanceBytes" })
   provenanceBytes?: string;
 }

@@ -1,6 +1,11 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -22,40 +27,44 @@ class CreateEnvironmentRequestBodyFederationModeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class CreateEnvironmentRequestBodyFederationParameters:
-    application_call_back_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'applicationCallBackURL' }})
-    attribute_map: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'attributeMap' }})
-    federation_provider_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'federationProviderName' }})
-    federation_urn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'federationURN' }})
-    saml_metadata_document: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'samlMetadataDocument' }})
-    saml_metadata_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'samlMetadataURL' }})
+    r"""CreateEnvironmentRequestBodyFederationParameters
+    Configuration information when authentication mode is FEDERATED.
+    """
+    
+    application_call_back_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('applicationCallBackURL') }})
+    attribute_map: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('attributeMap') }})
+    federation_provider_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('federationProviderName') }})
+    federation_urn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('federationURN') }})
+    saml_metadata_document: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('samlMetadataDocument') }})
+    saml_metadata_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('samlMetadataURL') }})
     
 
 @dataclass_json
 @dataclass
 class CreateEnvironmentRequestBody:
-    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
-    federation_mode: Optional[CreateEnvironmentRequestBodyFederationModeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'federationMode' }})
-    federation_parameters: Optional[CreateEnvironmentRequestBodyFederationParameters] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'federationParameters' }})
-    kms_key_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'kmsKeyId' }})
-    name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    tags: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tags' }})
+    name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('description') }})
+    federation_mode: Optional[CreateEnvironmentRequestBodyFederationModeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('federationMode') }})
+    federation_parameters: Optional[CreateEnvironmentRequestBodyFederationParameters] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('federationParameters') }})
+    kms_key_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('kmsKeyId') }})
+    tags: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('tags') }})
     
 
 @dataclass
 class CreateEnvironmentRequest:
-    headers: CreateEnvironmentHeaders = field(default=None)
-    request: CreateEnvironmentRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: CreateEnvironmentHeaders = field()
+    request: CreateEnvironmentRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class CreateEnvironmentResponse:
+    content_type: str = field()
+    status_code: int = field()
     access_denied_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     create_environment_response: Optional[shared.CreateEnvironmentResponse] = field(default=None)
     internal_server_exception: Optional[Any] = field(default=None)
     limit_exceeded_exception: Optional[Any] = field(default=None)
     service_quota_exceeded_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     validation_exception: Optional[Any] = field(default=None)
     

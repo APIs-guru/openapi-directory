@@ -1,9 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GooglePrivacyDlpV2Conditions } from "./googleprivacydlpv2conditions";
 
+
 export enum GooglePrivacyDlpV2ExpressionsLogicalOperatorEnum {
-    LogicalOperatorUnspecified = "LOGICAL_OPERATOR_UNSPECIFIED"
-,    And = "AND"
+    LogicalOperatorUnspecified = "LOGICAL_OPERATOR_UNSPECIFIED",
+    And = "AND"
 }
 
 
@@ -12,9 +13,9 @@ export enum GooglePrivacyDlpV2ExpressionsLogicalOperatorEnum {
  * An expression, consisting of an operator and conditions.
 **/
 export class GooglePrivacyDlpV2Expressions extends SpeakeasyBase {
-  @Metadata({ data: "json, name=conditions" })
+  @SpeakeasyMetadata({ data: "json, name=conditions" })
   conditions?: GooglePrivacyDlpV2Conditions;
 
-  @Metadata({ data: "json, name=logicalOperator" })
+  @SpeakeasyMetadata({ data: "json, name=logicalOperator" })
   logicalOperator?: GooglePrivacyDlpV2ExpressionsLogicalOperatorEnum;
 }

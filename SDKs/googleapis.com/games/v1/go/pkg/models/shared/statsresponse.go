@@ -1,5 +1,7 @@
 package shared
 
+// StatsResponse
+// A third party stats resource.
 type StatsResponse struct {
 	AvgSessionLengthMinutes *float32 `json:"avg_session_length_minutes,omitempty"`
 	ChurnProbability        *float32 `json:"churn_probability,omitempty"`

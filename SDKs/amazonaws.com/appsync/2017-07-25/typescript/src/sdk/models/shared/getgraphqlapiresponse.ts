@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GraphqlApi } from "./graphqlapi";
 
 
+
 export class GetGraphqlApiResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=graphqlApi" })
+  @SpeakeasyMetadata({ data: "json, name=graphqlApi" })
   graphqlApi?: GraphqlApi;
 }

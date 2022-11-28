@@ -1,29 +1,30 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class DcimPowerOutletTemplatesPartialUpdatePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" })
   id: number;
 }
 
 
 export class DcimPowerOutletTemplatesPartialUpdateRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: DcimPowerOutletTemplatesPartialUpdatePathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
-  request: shared.WritablePowerOutletTemplate;
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request: shared.WritablePowerOutletTemplateInput;
 }
 
 
 export class DcimPowerOutletTemplatesPartialUpdateResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   powerOutletTemplate?: shared.PowerOutletTemplate;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

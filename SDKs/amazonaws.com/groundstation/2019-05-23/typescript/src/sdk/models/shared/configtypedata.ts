@@ -1,4 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AntennaDownlinkConfig } from "./antennadownlinkconfig";
 import { AntennaDownlinkDemodDecodeConfig } from "./antennadownlinkdemoddecodeconfig";
 import { AntennaUplinkConfig } from "./antennauplinkconfig";
@@ -8,29 +8,30 @@ import { TrackingConfig } from "./trackingconfig";
 import { UplinkEchoConfig } from "./uplinkechoconfig";
 
 
+
 // ConfigTypeData
 /** 
  * <p>Object containing the parameters of a <code>Config</code>.</p> <p>See the subtype definitions for what each type of <code>Config</code> contains.</p>
 **/
 export class ConfigTypeData extends SpeakeasyBase {
-  @Metadata({ data: "json, name=antennaDownlinkConfig" })
+  @SpeakeasyMetadata({ data: "json, name=antennaDownlinkConfig" })
   antennaDownlinkConfig?: AntennaDownlinkConfig;
 
-  @Metadata({ data: "json, name=antennaDownlinkDemodDecodeConfig" })
+  @SpeakeasyMetadata({ data: "json, name=antennaDownlinkDemodDecodeConfig" })
   antennaDownlinkDemodDecodeConfig?: AntennaDownlinkDemodDecodeConfig;
 
-  @Metadata({ data: "json, name=antennaUplinkConfig" })
+  @SpeakeasyMetadata({ data: "json, name=antennaUplinkConfig" })
   antennaUplinkConfig?: AntennaUplinkConfig;
 
-  @Metadata({ data: "json, name=dataflowEndpointConfig" })
+  @SpeakeasyMetadata({ data: "json, name=dataflowEndpointConfig" })
   dataflowEndpointConfig?: DataflowEndpointConfig;
 
-  @Metadata({ data: "json, name=s3RecordingConfig" })
+  @SpeakeasyMetadata({ data: "json, name=s3RecordingConfig" })
   s3RecordingConfig?: S3RecordingConfig;
 
-  @Metadata({ data: "json, name=trackingConfig" })
+  @SpeakeasyMetadata({ data: "json, name=trackingConfig" })
   trackingConfig?: TrackingConfig;
 
-  @Metadata({ data: "json, name=uplinkEchoConfig" })
+  @SpeakeasyMetadata({ data: "json, name=uplinkEchoConfig" })
   uplinkEchoConfig?: UplinkEchoConfig;
 }

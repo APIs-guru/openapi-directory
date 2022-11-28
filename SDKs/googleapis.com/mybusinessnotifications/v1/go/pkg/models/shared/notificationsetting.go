@@ -17,6 +17,8 @@ const (
 	NotificationSettingNotificationTypesEnumVoiceOfMerchantUpdated      NotificationSettingNotificationTypesEnum = "VOICE_OF_MERCHANT_UPDATED"
 )
 
+// NotificationSetting
+// A Google Pub/Sub topic where notifications can be published when a location is updated or has a new review. There will be only one notification setting resource per-account.
 type NotificationSetting struct {
 	Name              *string                                    `json:"name,omitempty"`
 	NotificationTypes []NotificationSettingNotificationTypesEnum `json:"notificationTypes,omitempty"`

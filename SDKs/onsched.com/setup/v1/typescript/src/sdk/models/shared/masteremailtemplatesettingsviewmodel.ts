@@ -1,85 +1,86 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class MasterEmailTemplateSettingsViewModel extends SpeakeasyBase {
-  @Metadata({ data: "json, name=centerEmailContent" })
+  @SpeakeasyMetadata({ data: "json, name=centerEmailContent" })
   centerEmailContent?: boolean;
 
-  @Metadata({ data: "json, name=centerEmailContentPanel" })
+  @SpeakeasyMetadata({ data: "json, name=centerEmailContentPanel" })
   centerEmailContentPanel?: boolean;
 
-  @Metadata({ data: "json, name=centerEmailFooter" })
+  @SpeakeasyMetadata({ data: "json, name=centerEmailFooter" })
   centerEmailFooter?: boolean;
 
-  @Metadata({ data: "json, name=contentBackgroundColor" })
+  @SpeakeasyMetadata({ data: "json, name=contentBackgroundColor" })
   contentBackgroundColor?: string;
 
-  @Metadata({ data: "json, name=contentColor" })
+  @SpeakeasyMetadata({ data: "json, name=contentColor" })
   contentColor?: string;
 
-  @Metadata({ data: "json, name=contentLinkColor" })
+  @SpeakeasyMetadata({ data: "json, name=contentLinkColor" })
   contentLinkColor?: string;
 
-  @Metadata({ data: "json, name=emailBackgroundColor" })
+  @SpeakeasyMetadata({ data: "json, name=emailBackgroundColor" })
   emailBackgroundColor?: string;
 
-  @Metadata({ data: "json, name=emailColor" })
+  @SpeakeasyMetadata({ data: "json, name=emailColor" })
   emailColor?: string;
 
-  @Metadata({ data: "json, name=emailLinkColor" })
+  @SpeakeasyMetadata({ data: "json, name=emailLinkColor" })
   emailLinkColor?: string;
 
-  @Metadata({ data: "json, name=footerFontSize" })
+  @SpeakeasyMetadata({ data: "json, name=footerFontSize" })
   footerFontSize?: string;
 
-  @Metadata({ data: "json, name=footerLogoHeight" })
+  @SpeakeasyMetadata({ data: "json, name=footerLogoHeight" })
   footerLogoHeight?: string;
 
-  @Metadata({ data: "json, name=footerLogoPadding" })
+  @SpeakeasyMetadata({ data: "json, name=footerLogoPadding" })
   footerLogoPadding?: string;
 
-  @Metadata({ data: "json, name=footerPanelEmailContact" })
+  @SpeakeasyMetadata({ data: "json, name=footerPanelEmailContact" })
   footerPanelEmailContact?: boolean;
 
-  @Metadata({ data: "json, name=footerPanelPhoneContact" })
+  @SpeakeasyMetadata({ data: "json, name=footerPanelPhoneContact" })
   footerPanelPhoneContact?: boolean;
 
-  @Metadata({ data: "json, name=footerPanelWebsiteContact" })
+  @SpeakeasyMetadata({ data: "json, name=footerPanelWebsiteContact" })
   footerPanelWebsiteContact?: boolean;
 
-  @Metadata({ data: "json, name=headerLogoHeight" })
+  @SpeakeasyMetadata({ data: "json, name=headerLogoHeight" })
   headerLogoHeight?: string;
 
-  @Metadata({ data: "json, name=headerLogoPadding" })
+  @SpeakeasyMetadata({ data: "json, name=headerLogoPadding" })
   headerLogoPadding?: string;
 
-  @Metadata({ data: "json, name=panelBackgroundColor" })
+  @SpeakeasyMetadata({ data: "json, name=panelBackgroundColor" })
   panelBackgroundColor?: string;
 
-  @Metadata({ data: "json, name=panelColor" })
+  @SpeakeasyMetadata({ data: "json, name=panelColor" })
   panelColor?: string;
 
-  @Metadata({ data: "json, name=panelLinkColor" })
+  @SpeakeasyMetadata({ data: "json, name=panelLinkColor" })
   panelLinkColor?: string;
 
-  @Metadata({ data: "json, name=privacyPolicyLink" })
+  @SpeakeasyMetadata({ data: "json, name=privacyPolicyLink" })
   privacyPolicyLink?: string;
 
-  @Metadata({ data: "json, name=showContentPanel" })
+  @SpeakeasyMetadata({ data: "json, name=showContentPanel" })
   showContentPanel?: boolean;
 
-  @Metadata({ data: "json, name=showFooterLogo" })
+  @SpeakeasyMetadata({ data: "json, name=showFooterLogo" })
   showFooterLogo?: boolean;
 
-  @Metadata({ data: "json, name=showFooterPanel" })
+  @SpeakeasyMetadata({ data: "json, name=showFooterPanel" })
   showFooterPanel?: boolean;
 
-  @Metadata({ data: "json, name=showHeaderLogo" })
+  @SpeakeasyMetadata({ data: "json, name=showHeaderLogo" })
   showHeaderLogo?: boolean;
 
-  @Metadata({ data: "json, name=showHeaderPanel" })
+  @SpeakeasyMetadata({ data: "json, name=showHeaderPanel" })
   showHeaderPanel?: boolean;
 
-  @Metadata({ data: "json, name=version" })
+  @SpeakeasyMetadata({ data: "json, name=version" })
   version?: string;
 }

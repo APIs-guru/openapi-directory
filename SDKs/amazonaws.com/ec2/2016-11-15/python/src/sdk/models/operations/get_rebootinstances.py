@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 
 class GetRebootInstancesActionEnum(str, Enum):
     REBOOT_INSTANCES = "RebootInstances"
@@ -10,10 +14,10 @@ class GetRebootInstancesVersionEnum(str, Enum):
 
 @dataclass
 class GetRebootInstancesQueryParams:
-    action: GetRebootInstancesActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetRebootInstancesActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    instance_id: List[str] = field(metadata={'query_param': { 'field_name': 'InstanceId', 'style': 'form', 'explode': True }})
+    version: GetRebootInstancesVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     dry_run: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'DryRun', 'style': 'form', 'explode': True }})
-    instance_id: List[str] = field(default=None, metadata={'query_param': { 'field_name': 'InstanceId', 'style': 'form', 'explode': True }})
-    version: GetRebootInstancesVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -29,12 +33,12 @@ class GetRebootInstancesHeaders:
 
 @dataclass
 class GetRebootInstancesRequest:
-    query_params: GetRebootInstancesQueryParams = field(default=None)
-    headers: GetRebootInstancesHeaders = field(default=None)
+    headers: GetRebootInstancesHeaders = field()
+    query_params: GetRebootInstancesQueryParams = field()
     
 
 @dataclass
 class GetRebootInstancesResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

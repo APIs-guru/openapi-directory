@@ -1,9 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
-import { Dimension } from "./dimension";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Dimension } from "./dimension";
 import { Metric } from "./metric";
-import { Metric } from "./metric";
+
 
 
 // CrossDimensionReachReportCompatibleFields
@@ -11,18 +9,18 @@ import { Metric } from "./metric";
  * Represents fields that are compatible to be selected for a report of type "CROSS_DIMENSION_REACH".
 **/
 export class CrossDimensionReachReportCompatibleFields extends SpeakeasyBase {
-  @Metadata({ data: "json, name=breakdown", elemType: shared.Dimension })
+  @SpeakeasyMetadata({ data: "json, name=breakdown", elemType: Dimension })
   breakdown?: Dimension[];
 
-  @Metadata({ data: "json, name=dimensionFilters", elemType: shared.Dimension })
+  @SpeakeasyMetadata({ data: "json, name=dimensionFilters", elemType: Dimension })
   dimensionFilters?: Dimension[];
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=metrics", elemType: shared.Metric })
+  @SpeakeasyMetadata({ data: "json, name=metrics", elemType: Metric })
   metrics?: Metric[];
 
-  @Metadata({ data: "json, name=overlapMetrics", elemType: shared.Metric })
+  @SpeakeasyMetadata({ data: "json, name=overlapMetrics", elemType: Metric })
   overlapMetrics?: Metric[];
 }

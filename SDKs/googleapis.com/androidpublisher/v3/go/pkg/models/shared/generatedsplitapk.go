@@ -1,5 +1,7 @@
 package shared
 
+// GeneratedSplitApk
+// Download metadata for a split APK.
 type GeneratedSplitApk struct {
 	DownloadID *string `json:"downloadId,omitempty"`
 	ModuleName *string `json:"moduleName,omitempty"`

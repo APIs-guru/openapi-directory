@@ -1,8 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Dimension } from "./dimension";
 import { StatisticSet } from "./statisticset";
 import { UnitEnum } from "./unitenum";
+
 
 
 // MetricDatum
@@ -10,21 +10,21 @@ import { UnitEnum } from "./unitenum";
  * Internal only API.
 **/
 export class MetricDatum extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Dimensions", elemType: shared.Dimension })
+  @SpeakeasyMetadata({ data: "json, name=Dimensions", elemType: Dimension })
   dimensions?: Dimension[];
 
-  @Metadata({ data: "json, name=MetricName" })
+  @SpeakeasyMetadata({ data: "json, name=MetricName" })
   metricName: string;
 
-  @Metadata({ data: "json, name=StatisticValues" })
+  @SpeakeasyMetadata({ data: "json, name=StatisticValues" })
   statisticValues?: StatisticSet;
 
-  @Metadata({ data: "json, name=Timestamp" })
+  @SpeakeasyMetadata({ data: "json, name=Timestamp" })
   timestamp: Date;
 
-  @Metadata({ data: "json, name=Unit" })
+  @SpeakeasyMetadata({ data: "json, name=Unit" })
   unit?: UnitEnum;
 
-  @Metadata({ data: "json, name=Value" })
+  @SpeakeasyMetadata({ data: "json, name=Value" })
   value?: number;
 }

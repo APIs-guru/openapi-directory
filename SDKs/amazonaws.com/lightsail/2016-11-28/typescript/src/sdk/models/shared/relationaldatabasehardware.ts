@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // RelationalDatabaseHardware
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Describes the hardware of a database.
 **/
 export class RelationalDatabaseHardware extends SpeakeasyBase {
-  @Metadata({ data: "json, name=cpuCount" })
+  @SpeakeasyMetadata({ data: "json, name=cpuCount" })
   cpuCount?: number;
 
-  @Metadata({ data: "json, name=diskSizeInGb" })
+  @SpeakeasyMetadata({ data: "json, name=diskSizeInGb" })
   diskSizeInGb?: number;
 
-  @Metadata({ data: "json, name=ramSizeInGb" })
+  @SpeakeasyMetadata({ data: "json, name=ramSizeInGb" })
   ramSizeInGb?: number;
 }

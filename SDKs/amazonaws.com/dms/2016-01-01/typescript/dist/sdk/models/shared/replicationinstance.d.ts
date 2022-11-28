@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ReplicationPendingModifiedValues } from "./replicationpendingmodifiedvalues";
 import { ReplicationSubnetGroup } from "./replicationsubnetgroup";
 import { VpcSecurityGroupMembership } from "./vpcsecuritygroupmembership";

@@ -4,7 +4,7 @@ from typing import Any,List,Optional
 
 @dataclass
 class GetOrganizationApplianceVpnStatusesPathParams:
-    organization_id: str = field(default=None, metadata={'path_param': { 'field_name': 'organizationId', 'style': 'simple', 'explode': False }})
+    organization_id: str = field(metadata={'path_param': { 'field_name': 'organizationId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -17,14 +17,14 @@ class GetOrganizationApplianceVpnStatusesQueryParams:
 
 @dataclass
 class GetOrganizationApplianceVpnStatusesRequest:
-    path_params: GetOrganizationApplianceVpnStatusesPathParams = field(default=None)
-    query_params: GetOrganizationApplianceVpnStatusesQueryParams = field(default=None)
+    path_params: GetOrganizationApplianceVpnStatusesPathParams = field()
+    query_params: GetOrganizationApplianceVpnStatusesQueryParams = field()
     
 
 @dataclass
 class GetOrganizationApplianceVpnStatusesResponse:
-    content_type: str = field(default=None)
-    headers: dict[str, List[str]] = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    headers: dict[str, List[str]] = field()
+    status_code: int = field()
     get_organization_appliance_vpn_statuses_200_application_json_object: Optional[dict[str, Any]] = field(default=None)
     

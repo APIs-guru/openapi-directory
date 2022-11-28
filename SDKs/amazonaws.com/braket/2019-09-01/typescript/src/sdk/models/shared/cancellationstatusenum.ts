@@ -1,6 +1,7 @@
 
 
+
 export enum CancellationStatusEnum {
-    Cancelling = "CANCELLING"
-,    Cancelled = "CANCELLED"
+    Cancelling = "CANCELLING",
+    Cancelled = "CANCELLED"
 }

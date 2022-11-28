@@ -1,31 +1,32 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ProtocolMqttClientSubscribeGetPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=agentNum" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=agentNum" })
   agentNum: number;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=attr" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=attr" })
   attr: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=subNum" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=subNum" })
   subNum: number;
 }
 
 
 export class ProtocolMqttClientSubscribeGetRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: ProtocolMqttClientSubscribeGetPathParams;
 }
 
 
 export class ProtocolMqttClientSubscribeGetResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   protocolMqttClientSubscribeGet200ApplicationJsonStrings?: string[];
 }

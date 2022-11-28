@@ -10,11 +10,11 @@ class GetActionOrganizationAutocompleteQueryParams:
 
 @dataclass
 class GetActionOrganizationAutocompleteRequest:
-    query_params: GetActionOrganizationAutocompleteQueryParams = field(default=None)
+    query_params: GetActionOrganizationAutocompleteQueryParams = field()
     
 
 @dataclass
 class GetActionOrganizationAutocompleteResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

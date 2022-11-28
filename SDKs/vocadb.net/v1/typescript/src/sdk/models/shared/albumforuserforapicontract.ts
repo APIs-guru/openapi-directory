@@ -1,34 +1,35 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AlbumForApiContract } from "./albumforapicontract";
 import { UserForApiContract } from "./userforapicontract";
 
+
 export enum AlbumForUserForApiContractMediaTypeEnum {
-    PhysicalDisc = "PhysicalDisc"
-,    DigitalDownload = "DigitalDownload"
-,    Other = "Other"
+    PhysicalDisc = "PhysicalDisc",
+    DigitalDownload = "DigitalDownload",
+    Other = "Other"
 }
 
 export enum AlbumForUserForApiContractPurchaseStatusEnum {
-    Nothing = "Nothing"
-,    Wishlisted = "Wishlisted"
-,    Ordered = "Ordered"
-,    Owned = "Owned"
+    Nothing = "Nothing",
+    Wishlisted = "Wishlisted",
+    Ordered = "Ordered",
+    Owned = "Owned"
 }
 
 
 export class AlbumForUserForApiContract extends SpeakeasyBase {
-  @Metadata({ data: "json, name=album" })
+  @SpeakeasyMetadata({ data: "json, name=album" })
   album?: AlbumForApiContract;
 
-  @Metadata({ data: "json, name=mediaType" })
+  @SpeakeasyMetadata({ data: "json, name=mediaType" })
   mediaType?: AlbumForUserForApiContractMediaTypeEnum;
 
-  @Metadata({ data: "json, name=purchaseStatus" })
+  @SpeakeasyMetadata({ data: "json, name=purchaseStatus" })
   purchaseStatus?: AlbumForUserForApiContractPurchaseStatusEnum;
 
-  @Metadata({ data: "json, name=rating" })
+  @SpeakeasyMetadata({ data: "json, name=rating" })
   rating?: number;
 
-  @Metadata({ data: "json, name=user" })
+  @SpeakeasyMetadata({ data: "json, name=user" })
   user?: UserForApiContract;
 }

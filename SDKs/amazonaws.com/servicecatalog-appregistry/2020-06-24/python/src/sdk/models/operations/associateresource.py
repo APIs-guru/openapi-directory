@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 class AssociateResourceResourceTypeEnum(str, Enum):
@@ -8,9 +12,9 @@ class AssociateResourceResourceTypeEnum(str, Enum):
 
 @dataclass
 class AssociateResourcePathParams:
-    application: str = field(default=None, metadata={'path_param': { 'field_name': 'application', 'style': 'simple', 'explode': False }})
-    resource: str = field(default=None, metadata={'path_param': { 'field_name': 'resource', 'style': 'simple', 'explode': False }})
-    resource_type: AssociateResourceResourceTypeEnum = field(default=None, metadata={'path_param': { 'field_name': 'resourceType', 'style': 'simple', 'explode': False }})
+    application: str = field(metadata={'path_param': { 'field_name': 'application', 'style': 'simple', 'explode': False }})
+    resource: str = field(metadata={'path_param': { 'field_name': 'resource', 'style': 'simple', 'explode': False }})
+    resource_type: AssociateResourceResourceTypeEnum = field(metadata={'path_param': { 'field_name': 'resourceType', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,17 +30,17 @@ class AssociateResourceHeaders:
 
 @dataclass
 class AssociateResourceRequest:
-    path_params: AssociateResourcePathParams = field(default=None)
-    headers: AssociateResourceHeaders = field(default=None)
+    headers: AssociateResourceHeaders = field()
+    path_params: AssociateResourcePathParams = field()
     
 
 @dataclass
 class AssociateResourceResponse:
+    content_type: str = field()
+    status_code: int = field()
     associate_resource_response: Optional[shared.AssociateResourceResponse] = field(default=None)
     conflict_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     internal_server_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
     service_quota_exceeded_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

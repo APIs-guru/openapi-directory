@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass_json
 @dataclass
 class GoogleAppsDriveLabelsV2LifecycleDisabledPolicy:
-    hide_in_search: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'hideInSearch' }})
-    show_in_apply: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'showInApply' }})
+    r"""GoogleAppsDriveLabelsV2LifecycleDisabledPolicy
+    The policy that governs how to treat a disabled label, field, or selection choice in different contexts.
+    """
+    
+    hide_in_search: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('hideInSearch') }})
+    show_in_apply: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('showInApply') }})
     

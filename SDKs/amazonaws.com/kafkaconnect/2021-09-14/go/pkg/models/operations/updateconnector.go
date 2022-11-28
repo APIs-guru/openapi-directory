@@ -22,6 +22,8 @@ type UpdateConnectorHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// UpdateConnectorRequestBodyCapacity
+// The target capacity for the connector. The capacity can be auto scaled or provisioned.
 type UpdateConnectorRequestBodyCapacity struct {
 	AutoScaling         *shared.AutoScalingUpdate         `json:"autoScaling,omitempty"`
 	ProvisionedCapacity *shared.ProvisionedCapacityUpdate `json:"provisionedCapacity,omitempty"`

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var UpdateConfigPathParams = /** @class */ (function (_super) {
     __extends(UpdateConfigPathParams, _super);
@@ -30,7 +30,7 @@ var UpdateConfigPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=configId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=configId" }),
         __metadata("design:type", String)
     ], UpdateConfigPathParams.prototype, "configId", void 0);
     return UpdateConfigPathParams;
@@ -42,15 +42,15 @@ var UpdateConfigRequests = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "request, media_type=application/*+json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/*+json" }),
         __metadata("design:type", shared.UpdateConfigRequest)
     ], UpdateConfigRequests.prototype, "updateConfigRequest", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", shared.UpdateConfigRequest)
     ], UpdateConfigRequests.prototype, "updateConfigRequest1", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=text/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=text/json" }),
         __metadata("design:type", shared.UpdateConfigRequest)
     ], UpdateConfigRequests.prototype, "updateConfigRequest2", void 0);
     return UpdateConfigRequests;
@@ -62,11 +62,11 @@ var UpdateConfigRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", UpdateConfigPathParams)
     ], UpdateConfigRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", UpdateConfigRequests)
     ], UpdateConfigRequest.prototype, "request", void 0);
     return UpdateConfigRequest;
@@ -78,19 +78,19 @@ var UpdateConfigResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.ConfigModel)
     ], UpdateConfigResponse.prototype, "configModel", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.ConfigModelHaljson)
     ], UpdateConfigResponse.prototype, "configModelHaljson", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], UpdateConfigResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], UpdateConfigResponse.prototype, "statusCode", void 0);
     return UpdateConfigResponse;

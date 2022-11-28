@@ -7,6 +7,8 @@ const (
 	NodePoolRepairActionEnumDelete                  NodePoolRepairActionEnum = "DELETE"
 )
 
+// NodePool
+// indicating a list of workers of same type
 type NodePool struct {
 	ID            *string                   `json:"id,omitempty"`
 	InstanceNames []string                  `json:"instanceNames,omitempty"`

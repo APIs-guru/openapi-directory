@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DatasetContentDeliveryDestination } from "./datasetcontentdeliverydestination";
+
 
 
 // DatasetContentDeliveryRule
@@ -7,9 +8,9 @@ import { DatasetContentDeliveryDestination } from "./datasetcontentdeliverydesti
  * When dataset contents are created, they are delivered to destination specified here.
 **/
 export class DatasetContentDeliveryRule extends SpeakeasyBase {
-  @Metadata({ data: "json, name=destination" })
+  @SpeakeasyMetadata({ data: "json, name=destination" })
   destination: DatasetContentDeliveryDestination;
 
-  @Metadata({ data: "json, name=entryName" })
+  @SpeakeasyMetadata({ data: "json, name=entryName" })
   entryName?: string;
 }

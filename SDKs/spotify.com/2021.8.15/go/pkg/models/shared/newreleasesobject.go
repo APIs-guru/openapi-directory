@@ -1,5 +1,8 @@
 package shared
 
+// NewReleasesObjectAlbums
+
+// https://developer.spotify.com/documentation/web-api/reference/#object-pagingobject - Find more info on the official Spotify Web API Reference
 type NewReleasesObjectAlbums struct {
 	Href     *string                 `json:"href,omitempty"`
 	Items    []SimplifiedAlbumObject `json:"items,omitempty"`

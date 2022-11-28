@@ -27,11 +27,6 @@ type BhcerSecurity struct {
 	ClientID shared.SchemeClientID `security:"scheme,type=apiKey,subtype=header"`
 }
 
-type BhcerRequest struct {
-	Request  *BhcerRequestBody `request:"mediaType=application/json"`
-	Security BhcerSecurity
-}
-
 type Bhcer400ApplicationJSONErrorEnum string
 
 const (
@@ -161,6 +156,11 @@ const (
 type Bhcer504ApplicationJSON struct {
 	Error            *Bhcer504ApplicationJSONErrorEnum            `json:"error,omitempty"`
 	ErrorDescription *Bhcer504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
+}
+
+type BhcerRequest struct {
+	Request  *BhcerRequestBody `request:"mediaType=application/json"`
+	Security BhcerSecurity
 }
 
 type BhcerResponse struct {

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ApplicationStateEnum } from "./applicationstateenum";
 export declare class DescribeApplicationResponse extends SpeakeasyBase {
     applicationArn: string;

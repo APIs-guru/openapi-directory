@@ -1,27 +1,31 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from typing import Any,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import achclass_enum
-from . import banktransfernetwork_enum
-from . import banktransfertype_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class BankTransferCreateRequest:
-    access_token: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'access_token' }})
-    account_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'account_id' }})
-    ach_class: Optional[achclass_enum.AchClassEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ach_class' }})
-    amount: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'amount' }})
-    client_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'client_id' }})
-    custom_tag: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'custom_tag' }})
-    description: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
-    idempotency_key: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'idempotency_key' }})
-    iso_currency_code: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'iso_currency_code' }})
-    metadata: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'metadata' }})
-    network: banktransfernetwork_enum.BankTransferNetworkEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'network' }})
-    origination_account_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'origination_account_id' }})
-    secret: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'secret' }})
-    type: banktransfertype_enum.BankTransferTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
-    user: dict[str, Any] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'user' }})
+    r"""BankTransferCreateRequest
+    BankTransferCreateRequest defines the request schema for `/bank_transfer/create`
+    """
+    
+    access_token: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('access_token') }})
+    account_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('account_id') }})
+    amount: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('amount') }})
+    description: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('description') }})
+    idempotency_key: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('idempotency_key') }})
+    iso_currency_code: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('iso_currency_code') }})
+    network: BankTransferNetworkEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('network') }})
+    type: BankTransferTypeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('type') }})
+    user: dict[str, Any] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('user') }})
+    ach_class: Optional[AchClassEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ach_class') }})
+    client_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('client_id') }})
+    custom_tag: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('custom_tag') }})
+    metadata: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('metadata') }})
+    origination_account_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('origination_account_id') }})
+    secret: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('secret') }})
     

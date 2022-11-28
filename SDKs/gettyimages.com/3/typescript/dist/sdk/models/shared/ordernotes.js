@@ -22,26 +22,26 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var OrderNotes = /** @class */ (function (_super) {
     __extends(OrderNotes, _super);
     function OrderNotes() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=licensee_name" }),
+        SpeakeasyMetadata({ data: "json, name=licensee_name" }),
         __metadata("design:type", String)
     ], OrderNotes.prototype, "licenseeName", void 0);
     __decorate([
-        Metadata({ data: "json, name=ordered_by" }),
+        SpeakeasyMetadata({ data: "json, name=ordered_by" }),
         __metadata("design:type", String)
     ], OrderNotes.prototype, "orderedBy", void 0);
     __decorate([
-        Metadata({ data: "json, name=project_title" }),
+        SpeakeasyMetadata({ data: "json, name=project_title" }),
         __metadata("design:type", String)
     ], OrderNotes.prototype, "projectTitle", void 0);
     __decorate([
-        Metadata({ data: "json, name=purchase_order_number" }),
+        SpeakeasyMetadata({ data: "json, name=purchase_order_number" }),
         __metadata("design:type", String)
     ], OrderNotes.prototype, "purchaseOrderNumber", void 0);
     return OrderNotes;

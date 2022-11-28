@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// UICustomizationType
+// A container for the UI customization information for a user pool's built-in app UI.
 type UICustomizationType struct {
 	CSS              *string    `json:"CSS,omitempty"`
 	CSSVersion       *string    `json:"CSSVersion,omitempty"`

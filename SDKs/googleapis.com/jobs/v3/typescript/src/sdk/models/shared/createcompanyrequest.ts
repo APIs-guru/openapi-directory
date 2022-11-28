@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Company } from "./company";
+
 
 
 // CreateCompanyRequest
@@ -7,6 +8,6 @@ import { Company } from "./company";
  * Input only. The Request of the CreateCompany method.
 **/
 export class CreateCompanyRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=company" })
+  @SpeakeasyMetadata({ data: "json, name=company" })
   company?: Company;
 }

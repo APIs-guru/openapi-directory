@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ImageRecipe } from "./imagerecipe";
 export declare class GetImageRecipeResponse extends SpeakeasyBase {
     imageRecipe?: ImageRecipe;

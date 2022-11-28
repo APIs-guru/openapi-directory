@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // NeighborConnectionDetail
 /**
  * Details about neighboring servers.
@@ -33,23 +33,23 @@ var NeighborConnectionDetail = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=connectionsCount" }),
+        SpeakeasyMetadata({ data: "json, name=connectionsCount" }),
         __metadata("design:type", Number)
     ], NeighborConnectionDetail.prototype, "connectionsCount", void 0);
     __decorate([
-        Metadata({ data: "json, name=destinationPort" }),
+        SpeakeasyMetadata({ data: "json, name=destinationPort" }),
         __metadata("design:type", Number)
     ], NeighborConnectionDetail.prototype, "destinationPort", void 0);
     __decorate([
-        Metadata({ data: "json, name=destinationServerId" }),
+        SpeakeasyMetadata({ data: "json, name=destinationServerId" }),
         __metadata("design:type", String)
     ], NeighborConnectionDetail.prototype, "destinationServerId", void 0);
     __decorate([
-        Metadata({ data: "json, name=sourceServerId" }),
+        SpeakeasyMetadata({ data: "json, name=sourceServerId" }),
         __metadata("design:type", String)
     ], NeighborConnectionDetail.prototype, "sourceServerId", void 0);
     __decorate([
-        Metadata({ data: "json, name=transportProtocol" }),
+        SpeakeasyMetadata({ data: "json, name=transportProtocol" }),
         __metadata("design:type", String)
     ], NeighborConnectionDetail.prototype, "transportProtocol", void 0);
     return NeighborConnectionDetail;

@@ -1,35 +1,36 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetApiV1PublicationsPublicationIdDocumentsDocumentIdPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=documentId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=documentId" })
   documentId: number;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=publicationId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=publicationId" })
   publicationId: number;
 }
 
 
 export class GetApiV1PublicationsPublicationIdDocumentsDocumentIdRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetApiV1PublicationsPublicationIdDocumentsDocumentIdPathParams;
 }
 
 
 export class GetApiV1PublicationsPublicationIdDocumentsDocumentIdResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   problemDetails?: Map<string, any>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   publicationDocument?: shared.PublicationDocument;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

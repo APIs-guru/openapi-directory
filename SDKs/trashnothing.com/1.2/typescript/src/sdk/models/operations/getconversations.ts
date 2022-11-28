@@ -1,56 +1,57 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetConversationsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=category" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=category" })
   category?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=device_pixel_ratio" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=device_pixel_ratio" })
   devicePixelRatio?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=include_num_unread" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=include_num_unread" })
   includeNumUnread?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=num_messages" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=num_messages" })
   numMessages?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=page" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page" })
   page?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=per_page" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=per_page" })
+  perPage?: number;
+}
+
+
+export class GetConversations200ApplicationJson extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=conversations", elemType: shared.Conversation })
+  conversations?: shared.Conversation[];
+
+  @SpeakeasyMetadata({ data: "json, name=num_unread" })
+  numUnread?: number;
+
+  @SpeakeasyMetadata({ data: "json, name=page" })
+  page?: number;
+
+  @SpeakeasyMetadata({ data: "json, name=per_page" })
   perPage?: number;
 }
 
 
 export class GetConversationsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetConversationsQueryParams;
 }
 
 
-export class GetConversations200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=conversations", elemType: shared.Conversation })
-  conversations?: shared.Conversation[];
-
-  @Metadata({ data: "json, name=num_unread" })
-  numUnread?: number;
-
-  @Metadata({ data: "json, name=page" })
-  page?: number;
-
-  @Metadata({ data: "json, name=per_page" })
-  perPage?: number;
-}
-
-
 export class GetConversationsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getConversations200ApplicationJsonObject?: GetConversations200ApplicationJson;
 }

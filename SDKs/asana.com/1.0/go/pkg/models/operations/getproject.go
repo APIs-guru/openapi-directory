@@ -13,13 +13,13 @@ type GetProjectQueryParams struct {
 	OptPretty *bool    `queryParam:"style=form,explode=true,name=opt_pretty"`
 }
 
+type GetProject200ApplicationJSON struct {
+	Data *shared.ProjectResponse `json:"data,omitempty"`
+}
+
 type GetProjectRequest struct {
 	PathParams  GetProjectPathParams
 	QueryParams GetProjectQueryParams
-}
-
-type GetProject200ApplicationJSON struct {
-	Data *shared.ProjectResponse `json:"data,omitempty"`
 }
 
 type GetProjectResponse struct {

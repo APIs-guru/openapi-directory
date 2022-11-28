@@ -1,8 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PostalCodeGroup } from "./postalcodegroup";
 import { Service } from "./service";
 import { Warehouse } from "./warehouse";
+
 
 
 // ShippingSettings
@@ -10,15 +10,15 @@ import { Warehouse } from "./warehouse";
  * The merchant account's shipping settings. All methods except getsupportedcarriers and getsupportedholidays require the admin role.
 **/
 export class ShippingSettings extends SpeakeasyBase {
-  @Metadata({ data: "json, name=accountId" })
+  @SpeakeasyMetadata({ data: "json, name=accountId" })
   accountId?: string;
 
-  @Metadata({ data: "json, name=postalCodeGroups", elemType: shared.PostalCodeGroup })
+  @SpeakeasyMetadata({ data: "json, name=postalCodeGroups", elemType: PostalCodeGroup })
   postalCodeGroups?: PostalCodeGroup[];
 
-  @Metadata({ data: "json, name=services", elemType: shared.Service })
+  @SpeakeasyMetadata({ data: "json, name=services", elemType: Service })
   services?: Service[];
 
-  @Metadata({ data: "json, name=warehouses", elemType: shared.Warehouse })
+  @SpeakeasyMetadata({ data: "json, name=warehouses", elemType: Warehouse })
   warehouses?: Warehouse[];
 }

@@ -1,5 +1,7 @@
 package shared
 
+// ParallelismConfigurationDescription
+// Describes parameters for how a Flink-based Kinesis Data Analytics application executes multiple tasks simultaneously.
 type ParallelismConfigurationDescription struct {
 	AutoScalingEnabled *bool                  `json:"AutoScalingEnabled,omitempty"`
 	ConfigurationType  *ConfigurationTypeEnum `json:"ConfigurationType,omitempty"`

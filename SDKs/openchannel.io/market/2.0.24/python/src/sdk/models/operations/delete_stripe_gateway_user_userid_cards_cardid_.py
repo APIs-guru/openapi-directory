@@ -1,21 +1,21 @@
 from dataclasses import dataclass, field
-
+from typing import Optional
 
 
 @dataclass
 class DeleteStripeGatewayUserUserIDCardsCardIDPathParams:
-    card_id: str = field(default=None, metadata={'path_param': { 'field_name': 'cardId', 'style': 'simple', 'explode': False }})
-    user_id: str = field(default=None, metadata={'path_param': { 'field_name': 'userId', 'style': 'simple', 'explode': False }})
+    card_id: str = field(metadata={'path_param': { 'field_name': 'cardId', 'style': 'simple', 'explode': False }})
+    user_id: str = field(metadata={'path_param': { 'field_name': 'userId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class DeleteStripeGatewayUserUserIDCardsCardIDRequest:
-    path_params: DeleteStripeGatewayUserUserIDCardsCardIDPathParams = field(default=None)
+    path_params: DeleteStripeGatewayUserUserIDCardsCardIDPathParams = field()
     
 
 @dataclass
 class DeleteStripeGatewayUserUserIDCardsCardIDResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

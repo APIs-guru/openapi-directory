@@ -1,9 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ChoiceAnswer } from "./choiceanswer";
 import { Choice } from "./choice";
 import { AnswerReasonEnum } from "./answerreasonenum";
 import { RiskEnum } from "./riskenum";
+
 
 
 // Answer
@@ -11,42 +11,42 @@ import { RiskEnum } from "./riskenum";
  * An answer of the question.
 **/
 export class Answer extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ChoiceAnswers", elemType: shared.ChoiceAnswer })
+  @SpeakeasyMetadata({ data: "json, name=ChoiceAnswers", elemType: ChoiceAnswer })
   choiceAnswers?: ChoiceAnswer[];
 
-  @Metadata({ data: "json, name=Choices", elemType: shared.Choice })
+  @SpeakeasyMetadata({ data: "json, name=Choices", elemType: Choice })
   choices?: Choice[];
 
-  @Metadata({ data: "json, name=HelpfulResourceUrl" })
+  @SpeakeasyMetadata({ data: "json, name=HelpfulResourceUrl" })
   helpfulResourceUrl?: string;
 
-  @Metadata({ data: "json, name=ImprovementPlanUrl" })
+  @SpeakeasyMetadata({ data: "json, name=ImprovementPlanUrl" })
   improvementPlanUrl?: string;
 
-  @Metadata({ data: "json, name=IsApplicable" })
+  @SpeakeasyMetadata({ data: "json, name=IsApplicable" })
   isApplicable?: boolean;
 
-  @Metadata({ data: "json, name=Notes" })
+  @SpeakeasyMetadata({ data: "json, name=Notes" })
   notes?: string;
 
-  @Metadata({ data: "json, name=PillarId" })
+  @SpeakeasyMetadata({ data: "json, name=PillarId" })
   pillarId?: string;
 
-  @Metadata({ data: "json, name=QuestionDescription" })
+  @SpeakeasyMetadata({ data: "json, name=QuestionDescription" })
   questionDescription?: string;
 
-  @Metadata({ data: "json, name=QuestionId" })
+  @SpeakeasyMetadata({ data: "json, name=QuestionId" })
   questionId?: string;
 
-  @Metadata({ data: "json, name=QuestionTitle" })
+  @SpeakeasyMetadata({ data: "json, name=QuestionTitle" })
   questionTitle?: string;
 
-  @Metadata({ data: "json, name=Reason" })
+  @SpeakeasyMetadata({ data: "json, name=Reason" })
   reason?: AnswerReasonEnum;
 
-  @Metadata({ data: "json, name=Risk" })
+  @SpeakeasyMetadata({ data: "json, name=Risk" })
   risk?: RiskEnum;
 
-  @Metadata({ data: "json, name=SelectedChoices" })
+  @SpeakeasyMetadata({ data: "json, name=SelectedChoices" })
   selectedChoices?: string[];
 }

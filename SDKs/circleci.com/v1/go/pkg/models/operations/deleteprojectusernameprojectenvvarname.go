@@ -6,10 +6,6 @@ type DeleteProjectUsernameProjectEnvvarNamePathParams struct {
 	Username string `pathParam:"style=simple,explode=false,name=username"`
 }
 
-type DeleteProjectUsernameProjectEnvvarNameRequest struct {
-	PathParams DeleteProjectUsernameProjectEnvvarNamePathParams
-}
-
 type DeleteProjectUsernameProjectEnvvarName200ApplicationJSONMessageEnum string
 
 const (
@@ -18,6 +14,10 @@ const (
 
 type DeleteProjectUsernameProjectEnvvarName200ApplicationJSON struct {
 	Message *DeleteProjectUsernameProjectEnvvarName200ApplicationJSONMessageEnum `json:"message,omitempty"`
+}
+
+type DeleteProjectUsernameProjectEnvvarNameRequest struct {
+	PathParams DeleteProjectUsernameProjectEnvvarNamePathParams
 }
 
 type DeleteProjectUsernameProjectEnvvarNameResponse struct {

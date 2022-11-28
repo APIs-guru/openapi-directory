@@ -1,5 +1,8 @@
 package shared
 
+// CloudWatchMetricsDetail
+//
+//	Information about an Amazon CloudWatch metric.
 type CloudWatchMetricsDetail struct {
 	Dimensions []CloudWatchMetricsDimension `json:"Dimensions,omitempty"`
 	MetricName *string                      `json:"MetricName,omitempty"`

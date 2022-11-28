@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { IdentityTypeEnum } from "./identitytypeenum";
+
 
 
 // IdentityInfo
@@ -7,12 +8,12 @@ import { IdentityTypeEnum } from "./identitytypeenum";
  * Information about an email identity.
 **/
 export class IdentityInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=IdentityName" })
+  @SpeakeasyMetadata({ data: "json, name=IdentityName" })
   identityName?: string;
 
-  @Metadata({ data: "json, name=IdentityType" })
+  @SpeakeasyMetadata({ data: "json, name=IdentityType" })
   identityType?: IdentityTypeEnum;
 
-  @Metadata({ data: "json, name=SendingEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=SendingEnabled" })
   sendingEnabled?: boolean;
 }

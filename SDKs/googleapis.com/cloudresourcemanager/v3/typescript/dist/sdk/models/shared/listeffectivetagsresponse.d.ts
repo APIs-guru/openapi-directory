@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { EffectiveTag } from "./effectivetag";
 /**
  * The response of ListEffectiveTags.

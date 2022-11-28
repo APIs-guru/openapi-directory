@@ -7,6 +7,8 @@ const (
 	AdvertiserStatusEnumOnHold   AdvertiserStatusEnum = "ON_HOLD"
 )
 
+// Advertiser
+// Contains properties of a Campaign Manager advertiser.
 type Advertiser struct {
 	AccountID                               *string               `json:"accountId,omitempty"`
 	AdvertiserGroupID                       *string               `json:"advertiserGroupId,omitempty"`

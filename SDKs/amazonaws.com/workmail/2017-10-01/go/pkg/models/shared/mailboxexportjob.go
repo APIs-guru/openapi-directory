@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// MailboxExportJob
+// The details of a mailbox export job, including the user or resource ID associated with the mailbox and the S3 bucket that the mailbox contents are exported to.
 type MailboxExportJob struct {
 	Description       *string                    `json:"Description,omitempty"`
 	EndTime           *time.Time                 `json:"EndTime,omitempty"`

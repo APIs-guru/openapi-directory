@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 export declare enum PlaceActionLinkPlaceActionTypeEnum {
     PlaceActionTypeUnspecified = "PLACE_ACTION_TYPE_UNSPECIFIED",
     Appointment = "APPOINTMENT",
@@ -13,6 +13,15 @@ export declare enum PlaceActionLinkProviderTypeEnum {
     ProviderTypeUnspecified = "PROVIDER_TYPE_UNSPECIFIED",
     Merchant = "MERCHANT",
     Aggregator3P = "AGGREGATOR_3P"
+}
+/**
+ * Represents a place action link and its attributes.
+**/
+export declare class PlaceActionLinkInput extends SpeakeasyBase {
+    isPreferred?: boolean;
+    name?: string;
+    placeActionType?: PlaceActionLinkPlaceActionTypeEnum;
+    uri?: string;
 }
 /**
  * Represents a place action link and its attributes.

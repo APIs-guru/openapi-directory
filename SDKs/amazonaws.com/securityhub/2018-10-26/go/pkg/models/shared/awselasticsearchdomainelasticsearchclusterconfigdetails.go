@@ -1,5 +1,7 @@
 package shared
 
+// AwsElasticsearchDomainElasticsearchClusterConfigDetails
+// details about the configuration of an Elasticsearch cluster.
 type AwsElasticsearchDomainElasticsearchClusterConfigDetails struct {
 	DedicatedMasterCount   *int64                                                                      `json:"DedicatedMasterCount,omitempty"`
 	DedicatedMasterEnabled *bool                                                                       `json:"DedicatedMasterEnabled,omitempty"`

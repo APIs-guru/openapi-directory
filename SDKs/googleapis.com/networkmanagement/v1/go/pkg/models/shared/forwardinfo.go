@@ -10,8 +10,11 @@ const (
 	ForwardInfoTargetEnumGkeMaster                  ForwardInfoTargetEnum = "GKE_MASTER"
 	ForwardInfoTargetEnumImportedCustomRouteNextHop ForwardInfoTargetEnum = "IMPORTED_CUSTOM_ROUTE_NEXT_HOP"
 	ForwardInfoTargetEnumCloudSQLInstance           ForwardInfoTargetEnum = "CLOUD_SQL_INSTANCE"
+	ForwardInfoTargetEnumAnotherProject             ForwardInfoTargetEnum = "ANOTHER_PROJECT"
 )
 
+// ForwardInfo
+// Details of the final state "forward" and associated resource.
 type ForwardInfo struct {
 	ResourceURI *string                `json:"resourceUri,omitempty"`
 	Target      *ForwardInfoTargetEnum `json:"target,omitempty"`

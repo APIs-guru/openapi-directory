@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var SearchconsoleUrlInspectionIndexInspectQueryParams = /** @class */ (function (_super) {
     __extends(SearchconsoleUrlInspectionIndexInspectQueryParams, _super);
@@ -30,47 +30,47 @@ var SearchconsoleUrlInspectionIndexInspectQueryParams = /** @class */ (function 
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=$.xgafv" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=$.xgafv" }),
         __metadata("design:type", String)
     ], SearchconsoleUrlInspectionIndexInspectQueryParams.prototype, "dollarXgafv", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=access_token" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=access_token" }),
         __metadata("design:type", String)
     ], SearchconsoleUrlInspectionIndexInspectQueryParams.prototype, "accessToken", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=alt" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=alt" }),
         __metadata("design:type", String)
     ], SearchconsoleUrlInspectionIndexInspectQueryParams.prototype, "alt", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=callback" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=callback" }),
         __metadata("design:type", String)
     ], SearchconsoleUrlInspectionIndexInspectQueryParams.prototype, "callback", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=fields" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=fields" }),
         __metadata("design:type", String)
     ], SearchconsoleUrlInspectionIndexInspectQueryParams.prototype, "fields", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=key" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=key" }),
         __metadata("design:type", String)
     ], SearchconsoleUrlInspectionIndexInspectQueryParams.prototype, "key", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=oauth_token" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=oauth_token" }),
         __metadata("design:type", String)
     ], SearchconsoleUrlInspectionIndexInspectQueryParams.prototype, "oauthToken", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=prettyPrint" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=prettyPrint" }),
         __metadata("design:type", Boolean)
     ], SearchconsoleUrlInspectionIndexInspectQueryParams.prototype, "prettyPrint", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=quotaUser" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=quotaUser" }),
         __metadata("design:type", String)
     ], SearchconsoleUrlInspectionIndexInspectQueryParams.prototype, "quotaUser", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=uploadType" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=uploadType" }),
         __metadata("design:type", String)
     ], SearchconsoleUrlInspectionIndexInspectQueryParams.prototype, "uploadType", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=upload_protocol" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=upload_protocol" }),
         __metadata("design:type", String)
     ], SearchconsoleUrlInspectionIndexInspectQueryParams.prototype, "uploadProtocol", void 0);
     return SearchconsoleUrlInspectionIndexInspectQueryParams;
@@ -82,11 +82,11 @@ var SearchconsoleUrlInspectionIndexInspectSecurityOption1 = /** @class */ (funct
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2)
     ], SearchconsoleUrlInspectionIndexInspectSecurityOption1.prototype, "oauth2", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2c)
     ], SearchconsoleUrlInspectionIndexInspectSecurityOption1.prototype, "oauth2c", void 0);
     return SearchconsoleUrlInspectionIndexInspectSecurityOption1;
@@ -98,11 +98,11 @@ var SearchconsoleUrlInspectionIndexInspectSecurityOption2 = /** @class */ (funct
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2)
     ], SearchconsoleUrlInspectionIndexInspectSecurityOption2.prototype, "oauth2", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2c)
     ], SearchconsoleUrlInspectionIndexInspectSecurityOption2.prototype, "oauth2c", void 0);
     return SearchconsoleUrlInspectionIndexInspectSecurityOption2;
@@ -114,11 +114,11 @@ var SearchconsoleUrlInspectionIndexInspectSecurity = /** @class */ (function (_s
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, option=true" }),
+        SpeakeasyMetadata({ data: "security, option=true" }),
         __metadata("design:type", SearchconsoleUrlInspectionIndexInspectSecurityOption1)
     ], SearchconsoleUrlInspectionIndexInspectSecurity.prototype, "option1", void 0);
     __decorate([
-        Metadata({ data: "security, option=true" }),
+        SpeakeasyMetadata({ data: "security, option=true" }),
         __metadata("design:type", SearchconsoleUrlInspectionIndexInspectSecurityOption2)
     ], SearchconsoleUrlInspectionIndexInspectSecurity.prototype, "option2", void 0);
     return SearchconsoleUrlInspectionIndexInspectSecurity;
@@ -130,15 +130,15 @@ var SearchconsoleUrlInspectionIndexInspectRequest = /** @class */ (function (_su
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", SearchconsoleUrlInspectionIndexInspectQueryParams)
     ], SearchconsoleUrlInspectionIndexInspectRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", shared.InspectUrlIndexRequest)
     ], SearchconsoleUrlInspectionIndexInspectRequest.prototype, "request", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", SearchconsoleUrlInspectionIndexInspectSecurity)
     ], SearchconsoleUrlInspectionIndexInspectRequest.prototype, "security", void 0);
     return SearchconsoleUrlInspectionIndexInspectRequest;
@@ -150,15 +150,15 @@ var SearchconsoleUrlInspectionIndexInspectResponse = /** @class */ (function (_s
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], SearchconsoleUrlInspectionIndexInspectResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.InspectUrlIndexResponse)
     ], SearchconsoleUrlInspectionIndexInspectResponse.prototype, "inspectUrlIndexResponse", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], SearchconsoleUrlInspectionIndexInspectResponse.prototype, "statusCode", void 0);
     return SearchconsoleUrlInspectionIndexInspectResponse;

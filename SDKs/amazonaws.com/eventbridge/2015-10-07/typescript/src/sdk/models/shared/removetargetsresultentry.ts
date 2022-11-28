@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // RemoveTargetsResultEntry
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Represents a target that failed to be removed from a rule.
 **/
 export class RemoveTargetsResultEntry extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ErrorCode" })
+  @SpeakeasyMetadata({ data: "json, name=ErrorCode" })
   errorCode?: string;
 
-  @Metadata({ data: "json, name=ErrorMessage" })
+  @SpeakeasyMetadata({ data: "json, name=ErrorMessage" })
   errorMessage?: string;
 
-  @Metadata({ data: "json, name=TargetId" })
+  @SpeakeasyMetadata({ data: "json, name=TargetId" })
   targetId?: string;
 }

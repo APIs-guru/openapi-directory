@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // EntitySummary
 /**
  * This object is a container for common summary information about the entity. The summary doesn't contain the whole entity structure, but it does contain information common across all entities.
@@ -33,27 +33,27 @@ var EntitySummary = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=EntityArn" }),
+        SpeakeasyMetadata({ data: "json, name=EntityArn" }),
         __metadata("design:type", String)
     ], EntitySummary.prototype, "entityArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=EntityId" }),
+        SpeakeasyMetadata({ data: "json, name=EntityId" }),
         __metadata("design:type", String)
     ], EntitySummary.prototype, "entityId", void 0);
     __decorate([
-        Metadata({ data: "json, name=EntityType" }),
+        SpeakeasyMetadata({ data: "json, name=EntityType" }),
         __metadata("design:type", String)
     ], EntitySummary.prototype, "entityType", void 0);
     __decorate([
-        Metadata({ data: "json, name=LastModifiedDate" }),
+        SpeakeasyMetadata({ data: "json, name=LastModifiedDate" }),
         __metadata("design:type", String)
     ], EntitySummary.prototype, "lastModifiedDate", void 0);
     __decorate([
-        Metadata({ data: "json, name=Name" }),
+        SpeakeasyMetadata({ data: "json, name=Name" }),
         __metadata("design:type", String)
     ], EntitySummary.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=Visibility" }),
+        SpeakeasyMetadata({ data: "json, name=Visibility" }),
         __metadata("design:type", String)
     ], EntitySummary.prototype, "visibility", void 0);
     return EntitySummary;

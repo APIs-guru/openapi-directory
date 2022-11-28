@@ -18,6 +18,8 @@ type UpdateCanaryHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// UpdateCanaryRequestBodyCode
+// Use this structure to input your script code for the canary. This structure contains the Lambda handler with the location where the canary should start running the script. If the script is stored in an S3 bucket, the bucket name, key, and version are also included. If the script was passed into the canary directly, the script code is contained in the value of <code>Zipfile</code>.
 type UpdateCanaryRequestBodyCode struct {
 	Handler   *string `json:"Handler,omitempty"`
 	S3Bucket  *string `json:"S3Bucket,omitempty"`
@@ -26,6 +28,8 @@ type UpdateCanaryRequestBodyCode struct {
 	ZipFile   *string `json:"ZipFile,omitempty"`
 }
 
+// UpdateCanaryRequestBodyRunConfig
+// A structure that contains input information for a canary run.
 type UpdateCanaryRequestBodyRunConfig struct {
 	ActiveTracing        *bool             `json:"ActiveTracing,omitempty"`
 	EnvironmentVariables map[string]string `json:"EnvironmentVariables,omitempty"`
@@ -33,16 +37,22 @@ type UpdateCanaryRequestBodyRunConfig struct {
 	TimeoutInSeconds     *int64            `json:"TimeoutInSeconds,omitempty"`
 }
 
+// UpdateCanaryRequestBodySchedule
+// This structure specifies how often a canary is to make runs and the date and time when it should stop making runs.
 type UpdateCanaryRequestBodySchedule struct {
 	DurationInSeconds *int64  `json:"DurationInSeconds,omitempty"`
 	Expression        *string `json:"Expression,omitempty"`
 }
 
+// UpdateCanaryRequestBodyVisualReference
+// <p>An object that specifies what screenshots to use as a baseline for visual monitoring by this canary, and optionally the parts of the screenshots to ignore during the visual monitoring comparison.</p> <p>Visual monitoring is supported only on canaries running the <b>syn-puppeteer-node-3.2</b> runtime or later. For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Library_SyntheticsLogger_VisualTesting.html"> Visual monitoring</a> and <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_Blueprints_VisualTesting.html"> Visual monitoring blueprint</a> </p>
 type UpdateCanaryRequestBodyVisualReference struct {
 	BaseCanaryRunID *string                 `json:"BaseCanaryRunId,omitempty"`
 	BaseScreenshots []shared.BaseScreenshot `json:"BaseScreenshots,omitempty"`
 }
 
+// UpdateCanaryRequestBodyVpcConfig
+// If this canary is to test an endpoint in a VPC, this structure contains information about the subnets and security groups of the VPC endpoint. For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_VPC.html"> Running a Canary in a VPC</a>.
 type UpdateCanaryRequestBodyVpcConfig struct {
 	SecurityGroupIds []string `json:"SecurityGroupIds,omitempty"`
 	SubnetIds        []string `json:"SubnetIds,omitempty"`

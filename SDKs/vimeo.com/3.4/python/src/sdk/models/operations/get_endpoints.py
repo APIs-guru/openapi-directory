@@ -10,12 +10,12 @@ class GetEndpointsQueryParams:
 
 @dataclass
 class GetEndpointsRequest:
-    query_params: GetEndpointsQueryParams = field(default=None)
+    query_params: GetEndpointsQueryParams = field()
     
 
 @dataclass
 class GetEndpointsResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     endpoint: Optional[shared.Endpoint] = field(default=None)
     

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { InferenceSchedulerStatusEnum } from "./inferenceschedulerstatusenum";
 export declare class CreateInferenceSchedulerResponse extends SpeakeasyBase {
     inferenceSchedulerArn?: string;

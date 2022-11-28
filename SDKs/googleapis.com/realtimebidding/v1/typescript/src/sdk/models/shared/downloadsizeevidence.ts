@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { UrlDownloadSize } from "./urldownloadsize";
+
 
 
 // DownloadSizeEvidence
@@ -8,9 +8,9 @@ import { UrlDownloadSize } from "./urldownloadsize";
  * Total download size and URL-level download size breakdown for resources in a creative.
 **/
 export class DownloadSizeEvidence extends SpeakeasyBase {
-  @Metadata({ data: "json, name=topUrlDownloadSizeBreakdowns", elemType: shared.UrlDownloadSize })
+  @SpeakeasyMetadata({ data: "json, name=topUrlDownloadSizeBreakdowns", elemType: UrlDownloadSize })
   topUrlDownloadSizeBreakdowns?: UrlDownloadSize[];
 
-  @Metadata({ data: "json, name=totalDownloadSizeKb" })
+  @SpeakeasyMetadata({ data: "json, name=totalDownloadSizeKb" })
   totalDownloadSizeKb?: number;
 }

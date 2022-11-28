@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostDeleteRoleActionEnum(str, Enum):
     DELETE_ROLE = "DeleteRole"
@@ -10,8 +14,8 @@ class PostDeleteRoleVersionEnum(str, Enum):
 
 @dataclass
 class PostDeleteRoleQueryParams:
-    action: PostDeleteRoleActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostDeleteRoleVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostDeleteRoleActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostDeleteRoleVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostDeleteRoleHeaders:
 
 @dataclass
 class PostDeleteRoleRequest:
-    query_params: PostDeleteRoleQueryParams = field(default=None)
-    headers: PostDeleteRoleHeaders = field(default=None)
+    headers: PostDeleteRoleHeaders = field()
+    query_params: PostDeleteRoleQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostDeleteRoleResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

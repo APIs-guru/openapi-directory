@@ -22,13 +22,16 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { EncryptionConfig } from "./encryptionconfig";
 import { HiveMetastoreConfig } from "./hivemetastoreconfig";
 import { MaintenanceWindow } from "./maintenancewindow";
 import { MetadataIntegration } from "./metadataintegration";
 import { MetadataManagementActivity } from "./metadatamanagementactivity";
 import { NetworkConfig } from "./networkconfig";
+import { TelemetryConfig } from "./telemetryconfig";
+import { HiveMetastoreConfigInput } from "./hivemetastoreconfig";
+import { NetworkConfigInput } from "./networkconfig";
 export var ServiceDatabaseTypeEnum;
 (function (ServiceDatabaseTypeEnum) {
     ServiceDatabaseTypeEnum["DatabaseTypeUnspecified"] = "DATABASE_TYPE_UNSPECIFIED";
@@ -68,85 +71,153 @@ var Service = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=artifactGcsUri" }),
+        SpeakeasyMetadata({ data: "json, name=artifactGcsUri" }),
         __metadata("design:type", String)
     ], Service.prototype, "artifactGcsUri", void 0);
     __decorate([
-        Metadata({ data: "json, name=createTime" }),
+        SpeakeasyMetadata({ data: "json, name=createTime" }),
         __metadata("design:type", String)
     ], Service.prototype, "createTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=databaseType" }),
+        SpeakeasyMetadata({ data: "json, name=databaseType" }),
         __metadata("design:type", String)
     ], Service.prototype, "databaseType", void 0);
     __decorate([
-        Metadata({ data: "json, name=encryptionConfig" }),
+        SpeakeasyMetadata({ data: "json, name=encryptionConfig" }),
         __metadata("design:type", EncryptionConfig)
     ], Service.prototype, "encryptionConfig", void 0);
     __decorate([
-        Metadata({ data: "json, name=endpointUri" }),
+        SpeakeasyMetadata({ data: "json, name=endpointUri" }),
         __metadata("design:type", String)
     ], Service.prototype, "endpointUri", void 0);
     __decorate([
-        Metadata({ data: "json, name=hiveMetastoreConfig" }),
+        SpeakeasyMetadata({ data: "json, name=hiveMetastoreConfig" }),
         __metadata("design:type", HiveMetastoreConfig)
     ], Service.prototype, "hiveMetastoreConfig", void 0);
     __decorate([
-        Metadata({ data: "json, name=labels" }),
+        SpeakeasyMetadata({ data: "json, name=labels" }),
         __metadata("design:type", Map)
     ], Service.prototype, "labels", void 0);
     __decorate([
-        Metadata({ data: "json, name=maintenanceWindow" }),
+        SpeakeasyMetadata({ data: "json, name=maintenanceWindow" }),
         __metadata("design:type", MaintenanceWindow)
     ], Service.prototype, "maintenanceWindow", void 0);
     __decorate([
-        Metadata({ data: "json, name=metadataIntegration" }),
+        SpeakeasyMetadata({ data: "json, name=metadataIntegration" }),
         __metadata("design:type", MetadataIntegration)
     ], Service.prototype, "metadataIntegration", void 0);
     __decorate([
-        Metadata({ data: "json, name=metadataManagementActivity" }),
+        SpeakeasyMetadata({ data: "json, name=metadataManagementActivity" }),
         __metadata("design:type", MetadataManagementActivity)
     ], Service.prototype, "metadataManagementActivity", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], Service.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=network" }),
+        SpeakeasyMetadata({ data: "json, name=network" }),
         __metadata("design:type", String)
     ], Service.prototype, "network", void 0);
     __decorate([
-        Metadata({ data: "json, name=networkConfig" }),
+        SpeakeasyMetadata({ data: "json, name=networkConfig" }),
         __metadata("design:type", NetworkConfig)
     ], Service.prototype, "networkConfig", void 0);
     __decorate([
-        Metadata({ data: "json, name=port" }),
+        SpeakeasyMetadata({ data: "json, name=port" }),
         __metadata("design:type", Number)
     ], Service.prototype, "port", void 0);
     __decorate([
-        Metadata({ data: "json, name=releaseChannel" }),
+        SpeakeasyMetadata({ data: "json, name=releaseChannel" }),
         __metadata("design:type", String)
     ], Service.prototype, "releaseChannel", void 0);
     __decorate([
-        Metadata({ data: "json, name=state" }),
+        SpeakeasyMetadata({ data: "json, name=state" }),
         __metadata("design:type", String)
     ], Service.prototype, "state", void 0);
     __decorate([
-        Metadata({ data: "json, name=stateMessage" }),
+        SpeakeasyMetadata({ data: "json, name=stateMessage" }),
         __metadata("design:type", String)
     ], Service.prototype, "stateMessage", void 0);
     __decorate([
-        Metadata({ data: "json, name=tier" }),
+        SpeakeasyMetadata({ data: "json, name=telemetryConfig" }),
+        __metadata("design:type", TelemetryConfig)
+    ], Service.prototype, "telemetryConfig", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=tier" }),
         __metadata("design:type", String)
     ], Service.prototype, "tier", void 0);
     __decorate([
-        Metadata({ data: "json, name=uid" }),
+        SpeakeasyMetadata({ data: "json, name=uid" }),
         __metadata("design:type", String)
     ], Service.prototype, "uid", void 0);
     __decorate([
-        Metadata({ data: "json, name=updateTime" }),
+        SpeakeasyMetadata({ data: "json, name=updateTime" }),
         __metadata("design:type", String)
     ], Service.prototype, "updateTime", void 0);
     return Service;
 }(SpeakeasyBase));
 export { Service };
+// ServiceInput
+/**
+ * A managed metastore service that serves metadata queries.
+**/
+var ServiceInput = /** @class */ (function (_super) {
+    __extends(ServiceInput, _super);
+    function ServiceInput() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=databaseType" }),
+        __metadata("design:type", String)
+    ], ServiceInput.prototype, "databaseType", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=encryptionConfig" }),
+        __metadata("design:type", EncryptionConfig)
+    ], ServiceInput.prototype, "encryptionConfig", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=hiveMetastoreConfig" }),
+        __metadata("design:type", HiveMetastoreConfigInput)
+    ], ServiceInput.prototype, "hiveMetastoreConfig", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=labels" }),
+        __metadata("design:type", Map)
+    ], ServiceInput.prototype, "labels", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=maintenanceWindow" }),
+        __metadata("design:type", MaintenanceWindow)
+    ], ServiceInput.prototype, "maintenanceWindow", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=metadataIntegration" }),
+        __metadata("design:type", MetadataIntegration)
+    ], ServiceInput.prototype, "metadataIntegration", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=name" }),
+        __metadata("design:type", String)
+    ], ServiceInput.prototype, "name", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=network" }),
+        __metadata("design:type", String)
+    ], ServiceInput.prototype, "network", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=networkConfig" }),
+        __metadata("design:type", NetworkConfigInput)
+    ], ServiceInput.prototype, "networkConfig", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=port" }),
+        __metadata("design:type", Number)
+    ], ServiceInput.prototype, "port", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=releaseChannel" }),
+        __metadata("design:type", String)
+    ], ServiceInput.prototype, "releaseChannel", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=telemetryConfig" }),
+        __metadata("design:type", TelemetryConfig)
+    ], ServiceInput.prototype, "telemetryConfig", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=tier" }),
+        __metadata("design:type", String)
+    ], ServiceInput.prototype, "tier", void 0);
+    return ServiceInput;
+}(SpeakeasyBase));
+export { ServiceInput };

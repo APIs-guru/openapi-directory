@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import count
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class Aggregation:
-    alias: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'alias' }})
-    count: Optional[count.Count] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'count' }})
+    r"""Aggregation
+    Defines a aggregation that produces a single result.
+    """
+    
+    alias: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('alias') }})
+    count: Optional[Count] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('count') }})
     

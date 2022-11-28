@@ -1,9 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BackupInfo } from "./backupinfo";
 
+
 export enum RestoreInfoSourceTypeEnum {
-    TypeUnspecified = "TYPE_UNSPECIFIED"
-,    Backup = "BACKUP"
+    TypeUnspecified = "TYPE_UNSPECIFIED",
+    Backup = "BACKUP"
 }
 
 
@@ -12,9 +13,9 @@ export enum RestoreInfoSourceTypeEnum {
  * Information about the database restore.
 **/
 export class RestoreInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=backupInfo" })
+  @SpeakeasyMetadata({ data: "json, name=backupInfo" })
   backupInfo?: BackupInfo;
 
-  @Metadata({ data: "json, name=sourceType" })
+  @SpeakeasyMetadata({ data: "json, name=sourceType" })
   sourceType?: RestoreInfoSourceTypeEnum;
 }

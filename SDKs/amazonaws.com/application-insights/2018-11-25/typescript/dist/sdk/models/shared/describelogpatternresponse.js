@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { LogPattern } from "./logpattern";
 var DescribeLogPatternResponse = /** @class */ (function (_super) {
     __extends(DescribeLogPatternResponse, _super);
@@ -30,11 +30,11 @@ var DescribeLogPatternResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=LogPattern" }),
+        SpeakeasyMetadata({ data: "json, name=LogPattern" }),
         __metadata("design:type", LogPattern)
     ], DescribeLogPatternResponse.prototype, "logPattern", void 0);
     __decorate([
-        Metadata({ data: "json, name=ResourceGroupName" }),
+        SpeakeasyMetadata({ data: "json, name=ResourceGroupName" }),
         __metadata("design:type", String)
     ], DescribeLogPatternResponse.prototype, "resourceGroupName", void 0);
     return DescribeLogPatternResponse;

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // SubscriptionDeferralInfo
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A SubscriptionDeferralInfo contains the data needed to defer a subscription purchase to a future expiry time.
 **/
 export class SubscriptionDeferralInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=desiredExpiryTimeMillis" })
+  @SpeakeasyMetadata({ data: "json, name=desiredExpiryTimeMillis" })
   desiredExpiryTimeMillis?: string;
 
-  @Metadata({ data: "json, name=expectedExpiryTimeMillis" })
+  @SpeakeasyMetadata({ data: "json, name=expectedExpiryTimeMillis" })
   expectedExpiryTimeMillis?: string;
 }

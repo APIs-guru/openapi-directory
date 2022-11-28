@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Request } from "./request";
+
 
 
 // BatchUpdateSpreadsheetRequest
@@ -8,15 +8,15 @@ import { Request } from "./request";
  * The request for updating any aspect of a spreadsheet.
 **/
 export class BatchUpdateSpreadsheetRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=includeSpreadsheetInResponse" })
+  @SpeakeasyMetadata({ data: "json, name=includeSpreadsheetInResponse" })
   includeSpreadsheetInResponse?: boolean;
 
-  @Metadata({ data: "json, name=requests", elemType: shared.Request })
+  @SpeakeasyMetadata({ data: "json, name=requests", elemType: Request })
   requests?: Request[];
 
-  @Metadata({ data: "json, name=responseIncludeGridData" })
+  @SpeakeasyMetadata({ data: "json, name=responseIncludeGridData" })
   responseIncludeGridData?: boolean;
 
-  @Metadata({ data: "json, name=responseRanges" })
+  @SpeakeasyMetadata({ data: "json, name=responseRanges" })
   responseRanges?: string[];
 }

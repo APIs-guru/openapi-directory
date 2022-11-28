@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Proposal } from "./proposal";
 
 
+
 export class CreateOrdersRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=proposals", elemType: shared.Proposal })
+  @SpeakeasyMetadata({ data: "json, name=proposals", elemType: Proposal })
   proposals?: Proposal[];
 
-  @Metadata({ data: "json, name=webPropertyCode" })
+  @SpeakeasyMetadata({ data: "json, name=webPropertyCode" })
   webPropertyCode?: string;
 }

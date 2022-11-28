@@ -8,10 +8,6 @@ type TestAuthenticationSecurity struct {
 	APITokenBasic shared.SchemeAPITokenBasic `security:"scheme,type=http,subtype=basic"`
 }
 
-type TestAuthenticationRequest struct {
-	Security TestAuthenticationSecurity
-}
-
 type TestAuthenticationAuthenticationSuccessResponseStatusEnum string
 
 const (
@@ -20,6 +16,10 @@ const (
 
 type TestAuthenticationAuthenticationSuccessResponse struct {
 	Status TestAuthenticationAuthenticationSuccessResponseStatusEnum `json:"status"`
+}
+
+type TestAuthenticationRequest struct {
+	Security TestAuthenticationSecurity
 }
 
 type TestAuthenticationResponse struct {

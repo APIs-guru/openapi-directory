@@ -1,17 +1,17 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CodeGenEdge } from "./codegenedge";
 import { CodeGenNode } from "./codegennode";
 import { LanguageEnum } from "./languageenum";
 
 
+
 export class CreateScriptRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DagEdges", elemType: shared.CodeGenEdge })
+  @SpeakeasyMetadata({ data: "json, name=DagEdges", elemType: CodeGenEdge })
   dagEdges?: CodeGenEdge[];
 
-  @Metadata({ data: "json, name=DagNodes", elemType: shared.CodeGenNode })
+  @SpeakeasyMetadata({ data: "json, name=DagNodes", elemType: CodeGenNode })
   dagNodes?: CodeGenNode[];
 
-  @Metadata({ data: "json, name=Language" })
+  @SpeakeasyMetadata({ data: "json, name=Language" })
   language?: LanguageEnum;
 }

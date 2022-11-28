@@ -1,48 +1,48 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
-export const POSTV05PATIENTSONFIND_SERVERS = [
-	"https://dev.ndhm.gov.in/hiu",
-];
 
+export const PostV05PatientsOnFindServerList = [
+	"https://dev.ndhm.gov.in/hiu",
+] as const;
 
 
 export class PostV05PatientsOnFindHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=Authorization" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Authorization" })
   authorization: string;
 }
 
 
 export class PostV05PatientsOnFindRequests extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/xml" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/xml" })
   applicationXml: Uint8Array;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   patientIdentificationResponse?: shared.PatientIdentificationResponse;
 }
 
 
 export class PostV05PatientsOnFindRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   serverUrl?: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: PostV05PatientsOnFindHeaders;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   request: PostV05PatientsOnFindRequests;
 }
 
 
 export class PostV05PatientsOnFindResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   errorResponse?: shared.ErrorResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

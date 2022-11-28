@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DomainAvailabilityEnum } from "./domainavailabilityenum";
+
 
 
 // CheckDomainAvailabilityResponse
@@ -7,6 +8,6 @@ import { DomainAvailabilityEnum } from "./domainavailabilityenum";
  * The CheckDomainAvailability response includes the following elements.
 **/
 export class CheckDomainAvailabilityResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Availability" })
+  @SpeakeasyMetadata({ data: "json, name=Availability" })
   availability: DomainAvailabilityEnum;
 }

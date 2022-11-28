@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class ResultMetadataDataTypeEnum(str, Enum):
     DATA_TYPE_UNSPECIFIED = "DATA_TYPE_UNSPECIFIED"
@@ -53,7 +55,11 @@ class ResultMetadataDataTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class ResultMetadata:
-    data_type: Optional[ResultMetadataDataTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'dataType' }})
-    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
-    field: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'field' }})
+    r"""ResultMetadata
+    Metadata of result field.
+    """
+    
+    data_type: Optional[ResultMetadataDataTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('dataType') }})
+    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('description') }})
+    field: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('field') }})
     

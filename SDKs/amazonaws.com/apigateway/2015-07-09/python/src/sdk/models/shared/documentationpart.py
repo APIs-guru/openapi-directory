@@ -1,13 +1,18 @@
 from dataclasses import dataclass, field
 from typing import Any,Optional
 from dataclasses_json import dataclass_json
-from . import documentationpartlocation
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class DocumentationPart:
-    id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
-    location: Optional[documentationpartlocation.DocumentationPartLocation] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'location' }})
-    properties: Optional[Any] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'properties' }})
+    r"""DocumentationPart
+    <p>A documentation part for a targeted API entity.</p> <div class=\"remarks\"> <p>A documentation part consists of a content map (<code>properties</code>) and a target (<code>location</code>). The target specifies an API entity to which the documentation content applies. The supported API entity types are <code>API</code>, <code>AUTHORIZER</code>, <code>MODEL</code>, <code>RESOURCE</code>, <code>METHOD</code>, <code>PATH_PARAMETER</code>, <code>QUERY_PARAMETER</code>, <code>REQUEST_HEADER</code>, <code>REQUEST_BODY</code>, <code>RESPONSE</code>, <code>RESPONSE_HEADER</code>, and <code>RESPONSE_BODY</code>. Valid <code>location</code> fields depend on the API entity type. All valid fields are not required.</p> <p>The content map is a JSON string of API-specific key-value pairs. Although an API can use any shape for the content map, only the OpenAPI-compliant documentation fields will be injected into the associated API entity definition in the exported OpenAPI definition file.</p></div> <div class=\"seeAlso\"> <a href=\"https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-documenting-api.html\">Documenting an API</a>, <a>DocumentationParts</a> </div>
+    """
+    
+    id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('id') }})
+    location: Optional[DocumentationPartLocation] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('location') }})
+    properties: Optional[Any] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('properties') }})
     

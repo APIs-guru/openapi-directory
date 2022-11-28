@@ -1,0 +1,30 @@
+import { SpeakeasyBase } from "../../../internal/utils";
+import { CurrentRole } from "./currentrole";
+import { CompactJurisdiction } from "./compactjurisdiction";
+import { Link } from "./link";
+import { Office } from "./office";
+import { AltIdentifier } from "./altidentifier";
+import { AltName } from "./altname";
+export declare class Person extends SpeakeasyBase {
+    birthDate: string;
+    createdAt: Date;
+    currentRole?: CurrentRole;
+    deathDate: string;
+    email: string;
+    extras: Map<string, any>;
+    familyName: string;
+    gender: string;
+    givenName: string;
+    id: string;
+    image: string;
+    jurisdiction: CompactJurisdiction;
+    links?: Link[];
+    name: string;
+    offices?: Office[];
+    openstatesUrl: string;
+    otherIdentifiers?: AltIdentifier[];
+    otherNames?: AltName[];
+    party: string;
+    sources?: Link[];
+    updatedAt: Date;
+}

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetAllCompanyCodesAndDescriptionsByResourcePathParams = /** @class */ (function (_super) {
     __extends(GetAllCompanyCodesAndDescriptionsByResourcePathParams, _super);
@@ -30,11 +30,11 @@ var GetAllCompanyCodesAndDescriptionsByResourcePathParams = /** @class */ (funct
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=codeResource" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=codeResource" }),
         __metadata("design:type", String)
     ], GetAllCompanyCodesAndDescriptionsByResourcePathParams.prototype, "codeResource", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=companyId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=companyId" }),
         __metadata("design:type", String)
     ], GetAllCompanyCodesAndDescriptionsByResourcePathParams.prototype, "companyId", void 0);
     return GetAllCompanyCodesAndDescriptionsByResourcePathParams;
@@ -46,7 +46,7 @@ var GetAllCompanyCodesAndDescriptionsByResourceSecurity = /** @class */ (functio
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemePaylocityAuth)
     ], GetAllCompanyCodesAndDescriptionsByResourceSecurity.prototype, "paylocityAuth", void 0);
     return GetAllCompanyCodesAndDescriptionsByResourceSecurity;
@@ -58,11 +58,11 @@ var GetAllCompanyCodesAndDescriptionsByResourceRequest = /** @class */ (function
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetAllCompanyCodesAndDescriptionsByResourcePathParams)
     ], GetAllCompanyCodesAndDescriptionsByResourceRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetAllCompanyCodesAndDescriptionsByResourceSecurity)
     ], GetAllCompanyCodesAndDescriptionsByResourceRequest.prototype, "security", void 0);
     return GetAllCompanyCodesAndDescriptionsByResourceRequest;
@@ -74,19 +74,19 @@ var GetAllCompanyCodesAndDescriptionsByResourceResponse = /** @class */ (functio
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetAllCompanyCodesAndDescriptionsByResourceResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetAllCompanyCodesAndDescriptionsByResourceResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata({ elemType: shared.CompanyCodes }),
+        SpeakeasyMetadata({ elemType: shared.CompanyCodes }),
         __metadata("design:type", Array)
     ], GetAllCompanyCodesAndDescriptionsByResourceResponse.prototype, "companyCodes", void 0);
     __decorate([
-        Metadata({ elemType: shared.Error }),
+        SpeakeasyMetadata({ elemType: shared.Error }),
         __metadata("design:type", Array)
     ], GetAllCompanyCodesAndDescriptionsByResourceResponse.prototype, "errors", void 0);
     return GetAllCompanyCodesAndDescriptionsByResourceResponse;

@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Config } from "./config";
 
+
 export enum ContainerThreatDetectionSettingsServiceEnablementStateEnum {
-    EnablementStateUnspecified = "ENABLEMENT_STATE_UNSPECIFIED"
-,    Inherited = "INHERITED"
-,    Enabled = "ENABLED"
-,    Disabled = "DISABLED"
+    EnablementStateUnspecified = "ENABLEMENT_STATE_UNSPECIFIED",
+    Inherited = "INHERITED",
+    Enabled = "ENABLED",
+    Disabled = "DISABLED"
 }
 
 
@@ -15,18 +15,34 @@ export enum ContainerThreatDetectionSettingsServiceEnablementStateEnum {
  * Resource capturing the settings for the Container Threat Detection service.
 **/
 export class ContainerThreatDetectionSettings extends SpeakeasyBase {
-  @Metadata({ data: "json, name=modules", elemType: shared.Config })
+  @SpeakeasyMetadata({ data: "json, name=modules", elemType: Config })
   modules?: Map<string, Config>;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=serviceAccount" })
+  @SpeakeasyMetadata({ data: "json, name=serviceAccount" })
   serviceAccount?: string;
 
-  @Metadata({ data: "json, name=serviceEnablementState" })
+  @SpeakeasyMetadata({ data: "json, name=serviceEnablementState" })
   serviceEnablementState?: ContainerThreatDetectionSettingsServiceEnablementStateEnum;
 
-  @Metadata({ data: "json, name=updateTime" })
+  @SpeakeasyMetadata({ data: "json, name=updateTime" })
   updateTime?: string;
+}
+
+
+// ContainerThreatDetectionSettingsInput
+/** 
+ * Resource capturing the settings for the Container Threat Detection service.
+**/
+export class ContainerThreatDetectionSettingsInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=modules", elemType: Config })
+  modules?: Map<string, Config>;
+
+  @SpeakeasyMetadata({ data: "json, name=name" })
+  name?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=serviceEnablementState" })
+  serviceEnablementState?: ContainerThreatDetectionSettingsServiceEnablementStateEnum;
 }

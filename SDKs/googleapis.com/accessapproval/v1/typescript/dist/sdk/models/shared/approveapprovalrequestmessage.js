@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // ApproveApprovalRequestMessage
 /**
  * Request to approve an ApprovalRequest.
@@ -33,7 +33,7 @@ var ApproveApprovalRequestMessage = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=expireTime" }),
+        SpeakeasyMetadata({ data: "json, name=expireTime" }),
         __metadata("design:type", String)
     ], ApproveApprovalRequestMessage.prototype, "expireTime", void 0);
     return ApproveApprovalRequestMessage;

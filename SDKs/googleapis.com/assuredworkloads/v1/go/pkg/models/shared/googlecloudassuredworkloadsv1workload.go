@@ -14,7 +14,17 @@ const (
 	GoogleCloudAssuredworkloadsV1WorkloadComplianceRegimeEnumEuRegionsAndSupport         GoogleCloudAssuredworkloadsV1WorkloadComplianceRegimeEnum = "EU_REGIONS_AND_SUPPORT"
 	GoogleCloudAssuredworkloadsV1WorkloadComplianceRegimeEnumCaRegionsAndSupport         GoogleCloudAssuredworkloadsV1WorkloadComplianceRegimeEnum = "CA_REGIONS_AND_SUPPORT"
 	GoogleCloudAssuredworkloadsV1WorkloadComplianceRegimeEnumItar                        GoogleCloudAssuredworkloadsV1WorkloadComplianceRegimeEnum = "ITAR"
+	GoogleCloudAssuredworkloadsV1WorkloadComplianceRegimeEnumAuRegionsAndUsSupport       GoogleCloudAssuredworkloadsV1WorkloadComplianceRegimeEnum = "AU_REGIONS_AND_US_SUPPORT"
 	GoogleCloudAssuredworkloadsV1WorkloadComplianceRegimeEnumAssuredWorkloadsForPartners GoogleCloudAssuredworkloadsV1WorkloadComplianceRegimeEnum = "ASSURED_WORKLOADS_FOR_PARTNERS"
+	GoogleCloudAssuredworkloadsV1WorkloadComplianceRegimeEnumIsrRegions                  GoogleCloudAssuredworkloadsV1WorkloadComplianceRegimeEnum = "ISR_REGIONS"
+)
+
+type GoogleCloudAssuredworkloadsV1WorkloadPartnerEnum string
+
+const (
+	GoogleCloudAssuredworkloadsV1WorkloadPartnerEnumPartnerUnspecified          GoogleCloudAssuredworkloadsV1WorkloadPartnerEnum = "PARTNER_UNSPECIFIED"
+	GoogleCloudAssuredworkloadsV1WorkloadPartnerEnumLocalControlsByS3Ns         GoogleCloudAssuredworkloadsV1WorkloadPartnerEnum = "LOCAL_CONTROLS_BY_S3NS"
+	GoogleCloudAssuredworkloadsV1WorkloadPartnerEnumSovereignControlsByTSystems GoogleCloudAssuredworkloadsV1WorkloadPartnerEnum = "SOVEREIGN_CONTROLS_BY_T_SYSTEMS"
 )
 
 type GoogleCloudAssuredworkloadsV1WorkloadKajEnrollmentStateEnum string
@@ -25,16 +35,30 @@ const (
 	GoogleCloudAssuredworkloadsV1WorkloadKajEnrollmentStateEnumKajEnrollmentStateComplete    GoogleCloudAssuredworkloadsV1WorkloadKajEnrollmentStateEnum = "KAJ_ENROLLMENT_STATE_COMPLETE"
 )
 
-type GoogleCloudAssuredworkloadsV1WorkloadPartnerEnum string
+// GoogleCloudAssuredworkloadsV1WorkloadInput
+// A Workload object for managing highly regulated workloads of cloud customers.
+type GoogleCloudAssuredworkloadsV1WorkloadInput struct {
+	BillingAccount             *string                                                     `json:"billingAccount,omitempty"`
+	ComplianceRegime           *GoogleCloudAssuredworkloadsV1WorkloadComplianceRegimeEnum  `json:"complianceRegime,omitempty"`
+	ComplianceStatus           *GoogleCloudAssuredworkloadsV1WorkloadComplianceStatus      `json:"complianceStatus,omitempty"`
+	DisplayName                *string                                                     `json:"displayName,omitempty"`
+	EnableSovereignControls    *bool                                                       `json:"enableSovereignControls,omitempty"`
+	Etag                       *string                                                     `json:"etag,omitempty"`
+	KmsSettings                *GoogleCloudAssuredworkloadsV1WorkloadKmsSettings           `json:"kmsSettings,omitempty"`
+	Labels                     map[string]string                                           `json:"labels,omitempty"`
+	Name                       *string                                                     `json:"name,omitempty"`
+	Partner                    *GoogleCloudAssuredworkloadsV1WorkloadPartnerEnum           `json:"partner,omitempty"`
+	ProvisionedResourcesParent *string                                                     `json:"provisionedResourcesParent,omitempty"`
+	ResourceSettings           []GoogleCloudAssuredworkloadsV1WorkloadResourceSettings     `json:"resourceSettings,omitempty"`
+	SaaEnrollmentResponse      *GoogleCloudAssuredworkloadsV1WorkloadSaaEnrollmentResponse `json:"saaEnrollmentResponse,omitempty"`
+}
 
-const (
-	GoogleCloudAssuredworkloadsV1WorkloadPartnerEnumPartnerUnspecified  GoogleCloudAssuredworkloadsV1WorkloadPartnerEnum = "PARTNER_UNSPECIFIED"
-	GoogleCloudAssuredworkloadsV1WorkloadPartnerEnumLocalControlsByS3Ns GoogleCloudAssuredworkloadsV1WorkloadPartnerEnum = "LOCAL_CONTROLS_BY_S3NS"
-)
-
+// GoogleCloudAssuredworkloadsV1Workload
+// A Workload object for managing highly regulated workloads of cloud customers.
 type GoogleCloudAssuredworkloadsV1Workload struct {
 	BillingAccount                 *string                                                      `json:"billingAccount,omitempty"`
 	ComplianceRegime               *GoogleCloudAssuredworkloadsV1WorkloadComplianceRegimeEnum   `json:"complianceRegime,omitempty"`
+	ComplianceStatus               *GoogleCloudAssuredworkloadsV1WorkloadComplianceStatus       `json:"complianceStatus,omitempty"`
 	CompliantButDisallowedServices []string                                                     `json:"compliantButDisallowedServices,omitempty"`
 	CreateTime                     *string                                                      `json:"createTime,omitempty"`
 	DisplayName                    *string                                                      `json:"displayName,omitempty"`

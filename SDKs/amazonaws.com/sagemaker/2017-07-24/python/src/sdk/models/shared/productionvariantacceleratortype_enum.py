@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class ProductionVariantAcceleratorTypeEnum(str, Enum):
     ML_EIA1_MEDIUM = "ml.eia1.medium"

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleAudienceTargetingSetting
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Details of Google audience targeting setting.
 **/
 export class GoogleAudienceTargetingSetting extends SpeakeasyBase {
-  @Metadata({ data: "json, name=googleAudienceId" })
+  @SpeakeasyMetadata({ data: "json, name=googleAudienceId" })
   googleAudienceId?: string;
 }

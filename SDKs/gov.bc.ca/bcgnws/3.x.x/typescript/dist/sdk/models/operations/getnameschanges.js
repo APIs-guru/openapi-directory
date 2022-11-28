@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var GetNamesChangesOutputFormatEnum;
 (function (GetNamesChangesOutputFormatEnum) {
     GetNamesChangesOutputFormatEnum["Json"] = "json";
@@ -47,51 +47,51 @@ var GetNamesChangesQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=embed" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=embed" }),
         __metadata("design:type", Number)
     ], GetNamesChangesQueryParams.prototype, "embed", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=featureCategory" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=featureCategory" }),
         __metadata("design:type", String)
     ], GetNamesChangesQueryParams.prototype, "featureCategory", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=featureClass" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=featureClass" }),
         __metadata("design:type", String)
     ], GetNamesChangesQueryParams.prototype, "featureClass", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=featureType" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=featureType" }),
         __metadata("design:type", String)
     ], GetNamesChangesQueryParams.prototype, "featureType", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=fromDate" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=fromDate" }),
         __metadata("design:type", Number)
     ], GetNamesChangesQueryParams.prototype, "fromDate", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=itemsPerPage" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=itemsPerPage" }),
         __metadata("design:type", Number)
     ], GetNamesChangesQueryParams.prototype, "itemsPerPage", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=outputFormat" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=outputFormat" }),
         __metadata("design:type", String)
     ], GetNamesChangesQueryParams.prototype, "outputFormat", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=outputSRS" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=outputSRS" }),
         __metadata("design:type", Number)
     ], GetNamesChangesQueryParams.prototype, "outputSrs", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=outputStyle" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=outputStyle" }),
         __metadata("design:type", String)
     ], GetNamesChangesQueryParams.prototype, "outputStyle", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=sortBy" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sortBy" }),
         __metadata("design:type", String)
     ], GetNamesChangesQueryParams.prototype, "sortBy", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=startIndex" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=startIndex" }),
         __metadata("design:type", Number)
     ], GetNamesChangesQueryParams.prototype, "startIndex", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=toDate" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=toDate" }),
         __metadata("design:type", Number)
     ], GetNamesChangesQueryParams.prototype, "toDate", void 0);
     return GetNamesChangesQueryParams;
@@ -103,7 +103,7 @@ var GetNamesChangesRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetNamesChangesQueryParams)
     ], GetNamesChangesRequest.prototype, "queryParams", void 0);
     return GetNamesChangesRequest;
@@ -115,11 +115,11 @@ var GetNamesChangesResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetNamesChangesResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetNamesChangesResponse.prototype, "statusCode", void 0);
     return GetNamesChangesResponse;

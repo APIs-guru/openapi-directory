@@ -1,7 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TimeUnitsTypeEnum } from "./timeunitstypeenum";
-import { TimeUnitsTypeEnum } from "./timeunitstypeenum";
-import { TimeUnitsTypeEnum } from "./timeunitstypeenum";
+
 
 
 // TokenValidityUnitsType
@@ -9,12 +8,12 @@ import { TimeUnitsTypeEnum } from "./timeunitstypeenum";
  * The data type for TokenValidityUnits that specifics the time measurements for token validity.
 **/
 export class TokenValidityUnitsType extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AccessToken" })
+  @SpeakeasyMetadata({ data: "json, name=AccessToken" })
   accessToken?: TimeUnitsTypeEnum;
 
-  @Metadata({ data: "json, name=IdToken" })
+  @SpeakeasyMetadata({ data: "json, name=IdToken" })
   idToken?: TimeUnitsTypeEnum;
 
-  @Metadata({ data: "json, name=RefreshToken" })
+  @SpeakeasyMetadata({ data: "json, name=RefreshToken" })
   refreshToken?: TimeUnitsTypeEnum;
 }

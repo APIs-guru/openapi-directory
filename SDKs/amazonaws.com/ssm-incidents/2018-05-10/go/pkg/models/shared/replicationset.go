@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// ReplicationSet
+// The set of Regions that your Incident Manager data will be replicated to and the KMS key used to encrypt the data.
 type ReplicationSet struct {
 	Arn               *string                  `json:"arn,omitempty"`
 	CreatedBy         string                   `json:"createdBy"`

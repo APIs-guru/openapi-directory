@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// SchemaExtensionInfo
+// Information about a schema extension.
 type SchemaExtensionInfo struct {
 	Description                 *string                    `json:"Description,omitempty"`
 	DirectoryID                 *string                    `json:"DirectoryId,omitempty"`

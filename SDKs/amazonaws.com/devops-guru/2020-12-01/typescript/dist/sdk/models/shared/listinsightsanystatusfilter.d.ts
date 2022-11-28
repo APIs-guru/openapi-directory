@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { StartTimeRange } from "./starttimerange";
 import { InsightTypeEnum } from "./insighttypeenum";
 /**

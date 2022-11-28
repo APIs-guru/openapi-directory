@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class LoggingEntriesWriteQueryParams extends SpeakeasyBase {
     dollarXgafv?: shared.XgafvEnum;
@@ -32,7 +32,7 @@ export declare class LoggingEntriesWriteSecurity extends SpeakeasyBase {
 }
 export declare class LoggingEntriesWriteRequest extends SpeakeasyBase {
     queryParams: LoggingEntriesWriteQueryParams;
-    request?: shared.WriteLogEntriesRequest;
+    request?: shared.WriteLogEntriesRequestInput;
     security: LoggingEntriesWriteSecurity;
 }
 export declare class LoggingEntriesWriteResponse extends SpeakeasyBase {

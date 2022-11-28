@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// EventSourceConfiguration
+// Describes mapping between an Amazon Kinesis stream and a Lambda function.
 type EventSourceConfiguration struct {
 	BatchSize    *int64            `json:"BatchSize,omitempty"`
 	EventSource  *string           `json:"EventSource,omitempty"`

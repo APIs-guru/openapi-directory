@@ -1,5 +1,7 @@
 package shared
 
+// AnnotateTextResponse
+// The text annotations response message.
 type AnnotateTextResponse struct {
 	Categories        []ClassificationCategory `json:"categories,omitempty"`
 	DocumentSentiment *Sentiment               `json:"documentSentiment,omitempty"`

@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class EditDomainWillRenewRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=will_renew" })
+  @SpeakeasyMetadata({ data: "json, name=will_renew" })
   willRenew?: boolean;
 }

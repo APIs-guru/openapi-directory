@@ -1,34 +1,35 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DescribeEngagementResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ContactArn" })
+  @SpeakeasyMetadata({ data: "json, name=ContactArn" })
   contactArn: string;
 
-  @Metadata({ data: "json, name=Content" })
+  @SpeakeasyMetadata({ data: "json, name=Content" })
   content: string;
 
-  @Metadata({ data: "json, name=EngagementArn" })
+  @SpeakeasyMetadata({ data: "json, name=EngagementArn" })
   engagementArn: string;
 
-  @Metadata({ data: "json, name=IncidentId" })
+  @SpeakeasyMetadata({ data: "json, name=IncidentId" })
   incidentId?: string;
 
-  @Metadata({ data: "json, name=PublicContent" })
+  @SpeakeasyMetadata({ data: "json, name=PublicContent" })
   publicContent?: string;
 
-  @Metadata({ data: "json, name=PublicSubject" })
+  @SpeakeasyMetadata({ data: "json, name=PublicSubject" })
   publicSubject?: string;
 
-  @Metadata({ data: "json, name=Sender" })
+  @SpeakeasyMetadata({ data: "json, name=Sender" })
   sender: string;
 
-  @Metadata({ data: "json, name=StartTime" })
+  @SpeakeasyMetadata({ data: "json, name=StartTime" })
   startTime?: Date;
 
-  @Metadata({ data: "json, name=StopTime" })
+  @SpeakeasyMetadata({ data: "json, name=StopTime" })
   stopTime?: Date;
 
-  @Metadata({ data: "json, name=Subject" })
+  @SpeakeasyMetadata({ data: "json, name=Subject" })
   subject: string;
 }

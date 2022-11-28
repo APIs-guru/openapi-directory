@@ -18,6 +18,8 @@ type CreateProfileHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// CreateProfileRequestBodyAddress
+// A generic address associated with the customer that is not mailing, shipping, or billing.
 type CreateProfileRequestBodyAddress struct {
 	Address1   *string `json:"Address1,omitempty"`
 	Address2   *string `json:"Address2,omitempty"`
@@ -31,6 +33,8 @@ type CreateProfileRequestBodyAddress struct {
 	State      *string `json:"State,omitempty"`
 }
 
+// CreateProfileRequestBodyBillingAddress
+// A generic address associated with the customer that is not mailing, shipping, or billing.
 type CreateProfileRequestBodyBillingAddress struct {
 	Address1   *string `json:"Address1,omitempty"`
 	Address2   *string `json:"Address2,omitempty"`
@@ -52,6 +56,8 @@ const (
 	CreateProfileRequestBodyGenderEnumUnspecified CreateProfileRequestBodyGenderEnum = "UNSPECIFIED"
 )
 
+// CreateProfileRequestBodyMailingAddress
+// A generic address associated with the customer that is not mailing, shipping, or billing.
 type CreateProfileRequestBodyMailingAddress struct {
 	Address1   *string `json:"Address1,omitempty"`
 	Address2   *string `json:"Address2,omitempty"`
@@ -73,6 +79,8 @@ const (
 	CreateProfileRequestBodyPartyTypeEnumOther      CreateProfileRequestBodyPartyTypeEnum = "OTHER"
 )
 
+// CreateProfileRequestBodyShippingAddress
+// A generic address associated with the customer that is not mailing, shipping, or billing.
 type CreateProfileRequestBodyShippingAddress struct {
 	Address1   *string `json:"Address1,omitempty"`
 	Address2   *string `json:"Address2,omitempty"`

@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class GetAuditCategoryQueryParams:
-    api_key: str = field(default=None, metadata={'query_param': { 'field_name': 'api_key', 'style': 'form', 'explode': True }})
+    api_key: str = field(metadata={'query_param': { 'field_name': 'api_key', 'style': 'form', 'explode': True }})
     page: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'page', 'style': 'form', 'explode': True }})
     per_page: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'per_page', 'style': 'form', 'explode': True }})
     primary_category_id: Optional[List[str]] = field(default=None, metadata={'query_param': { 'field_name': 'primary_category_id', 'style': 'form', 'explode': True }})
@@ -18,12 +18,12 @@ class GetAuditCategoryQueryParams:
 
 @dataclass
 class GetAuditCategoryRequest:
-    query_params: GetAuditCategoryQueryParams = field(default=None)
+    query_params: GetAuditCategoryQueryParams = field()
     
 
 @dataclass
 class GetAuditCategoryResponse:
+    content_type: str = field()
+    status_code: int = field()
     audit_category_page: Optional[shared.AuditCategoryPage] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

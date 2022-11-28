@@ -4,10 +4,6 @@ type DeleteCollectionPathParams struct {
 	CollectionUID string `pathParam:"style=simple,explode=false,name=collection_uid"`
 }
 
-type DeleteCollectionRequest struct {
-	PathParams DeleteCollectionPathParams
-}
-
 type DeleteCollection200ApplicationJSONCollection struct {
 	ID  *string `json:"id,omitempty"`
 	UID *string `json:"uid,omitempty"`
@@ -30,6 +26,10 @@ type DeleteCollection404ApplicationJSONError struct {
 
 type DeleteCollection404ApplicationJSON struct {
 	Error *DeleteCollection404ApplicationJSONError `json:"error,omitempty"`
+}
+
+type DeleteCollectionRequest struct {
+	PathParams DeleteCollectionPathParams
 }
 
 type DeleteCollectionResponse struct {

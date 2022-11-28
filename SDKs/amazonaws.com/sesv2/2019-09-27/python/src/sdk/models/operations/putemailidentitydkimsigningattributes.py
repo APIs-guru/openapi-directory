@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
 @dataclass
 class PutEmailIdentityDkimSigningAttributesPathParams:
-    email_identity: str = field(default=None, metadata={'path_param': { 'field_name': 'EmailIdentity', 'style': 'simple', 'explode': False }})
+    email_identity: str = field(metadata={'path_param': { 'field_name': 'EmailIdentity', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -23,8 +28,12 @@ class PutEmailIdentityDkimSigningAttributesHeaders:
 @dataclass_json
 @dataclass
 class PutEmailIdentityDkimSigningAttributesRequestBodySigningAttributes:
-    domain_signing_private_key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'DomainSigningPrivateKey' }})
-    domain_signing_selector: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'DomainSigningSelector' }})
+    r"""PutEmailIdentityDkimSigningAttributesRequestBodySigningAttributes
+    An object that contains information about the tokens used for setting up Bring Your Own DKIM (BYODKIM).
+    """
+    
+    domain_signing_private_key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('DomainSigningPrivateKey') }})
+    domain_signing_selector: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('DomainSigningSelector') }})
     
 class PutEmailIdentityDkimSigningAttributesRequestBodySigningAttributesOriginEnum(str, Enum):
     AWS_SES = "AWS_SES"
@@ -34,23 +43,23 @@ class PutEmailIdentityDkimSigningAttributesRequestBodySigningAttributesOriginEnu
 @dataclass_json
 @dataclass
 class PutEmailIdentityDkimSigningAttributesRequestBody:
-    signing_attributes: Optional[PutEmailIdentityDkimSigningAttributesRequestBodySigningAttributes] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'SigningAttributes' }})
-    signing_attributes_origin: PutEmailIdentityDkimSigningAttributesRequestBodySigningAttributesOriginEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'SigningAttributesOrigin' }})
+    signing_attributes_origin: PutEmailIdentityDkimSigningAttributesRequestBodySigningAttributesOriginEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('SigningAttributesOrigin') }})
+    signing_attributes: Optional[PutEmailIdentityDkimSigningAttributesRequestBodySigningAttributes] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('SigningAttributes') }})
     
 
 @dataclass
 class PutEmailIdentityDkimSigningAttributesRequest:
-    path_params: PutEmailIdentityDkimSigningAttributesPathParams = field(default=None)
-    headers: PutEmailIdentityDkimSigningAttributesHeaders = field(default=None)
-    request: PutEmailIdentityDkimSigningAttributesRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: PutEmailIdentityDkimSigningAttributesHeaders = field()
+    path_params: PutEmailIdentityDkimSigningAttributesPathParams = field()
+    request: PutEmailIdentityDkimSigningAttributesRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class PutEmailIdentityDkimSigningAttributesResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     not_found_exception: Optional[Any] = field(default=None)
     put_email_identity_dkim_signing_attributes_response: Optional[shared.PutEmailIdentityDkimSigningAttributesResponse] = field(default=None)
-    status_code: int = field(default=None)
     too_many_requests_exception: Optional[Any] = field(default=None)
     

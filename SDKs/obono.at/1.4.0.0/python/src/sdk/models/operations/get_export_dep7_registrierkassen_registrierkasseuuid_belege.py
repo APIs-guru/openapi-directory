@@ -4,7 +4,7 @@ from typing import Optional
 
 @dataclass
 class GetExportDep7RegistrierkassenRegistrierkasseUUIDBelegePathParams:
-    registrierkasse_uuid: str = field(default=None, metadata={'path_param': { 'field_name': 'registrierkasseUuid', 'style': 'simple', 'explode': False }})
+    registrierkasse_uuid: str = field(metadata={'path_param': { 'field_name': 'registrierkasseUuid', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -15,12 +15,12 @@ class GetExportDep7RegistrierkassenRegistrierkasseUUIDBelegeQueryParams:
 
 @dataclass
 class GetExportDep7RegistrierkassenRegistrierkasseUUIDBelegeRequest:
-    path_params: GetExportDep7RegistrierkassenRegistrierkasseUUIDBelegePathParams = field(default=None)
-    query_params: GetExportDep7RegistrierkassenRegistrierkasseUUIDBelegeQueryParams = field(default=None)
+    path_params: GetExportDep7RegistrierkassenRegistrierkasseUUIDBelegePathParams = field()
+    query_params: GetExportDep7RegistrierkassenRegistrierkasseUUIDBelegeQueryParams = field()
     
 
 @dataclass
 class GetExportDep7RegistrierkassenRegistrierkasseUUIDBelegeResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

@@ -4,6 +4,9 @@ import (
 	"time"
 )
 
+// ProfilingGroupDescription
+//
+//	Contains information about a profiling group.
 type ProfilingGroupDescription struct {
 	AgentOrchestrationConfig *AgentOrchestrationConfig `json:"agentOrchestrationConfig,omitempty"`
 	Arn                      *string                   `json:"arn,omitempty"`

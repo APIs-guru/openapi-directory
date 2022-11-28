@@ -1,5 +1,7 @@
 package shared
 
+// DistributionConfigurationSummary
+// A high-level overview of a distribution configuration.
 type DistributionConfigurationSummary struct {
 	Arn         *string           `json:"arn,omitempty"`
 	DateCreated *string           `json:"dateCreated,omitempty"`

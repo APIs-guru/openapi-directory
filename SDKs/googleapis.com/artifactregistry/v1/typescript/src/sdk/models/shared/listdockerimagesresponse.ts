@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DockerImage } from "./dockerimage";
+
 
 
 // ListDockerImagesResponse
@@ -8,9 +8,9 @@ import { DockerImage } from "./dockerimage";
  * The response from listing docker images.
 **/
 export class ListDockerImagesResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=dockerImages", elemType: shared.DockerImage })
+  @SpeakeasyMetadata({ data: "json, name=dockerImages", elemType: DockerImage })
   dockerImages?: DockerImage[];
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 }

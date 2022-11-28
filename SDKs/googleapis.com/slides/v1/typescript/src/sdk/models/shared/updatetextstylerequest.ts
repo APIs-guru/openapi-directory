@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TableCellLocation } from "./tablecelllocation";
 import { TextStyle } from "./textstyle";
 import { Range } from "./range";
+
 
 
 // UpdateTextStyleRequest
@@ -9,18 +10,18 @@ import { Range } from "./range";
  * Update the styling of text in a Shape or Table.
 **/
 export class UpdateTextStyleRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=cellLocation" })
+  @SpeakeasyMetadata({ data: "json, name=cellLocation" })
   cellLocation?: TableCellLocation;
 
-  @Metadata({ data: "json, name=fields" })
+  @SpeakeasyMetadata({ data: "json, name=fields" })
   fields?: string;
 
-  @Metadata({ data: "json, name=objectId" })
+  @SpeakeasyMetadata({ data: "json, name=objectId" })
   objectId?: string;
 
-  @Metadata({ data: "json, name=style" })
+  @SpeakeasyMetadata({ data: "json, name=style" })
   style?: TextStyle;
 
-  @Metadata({ data: "json, name=textRange" })
+  @SpeakeasyMetadata({ data: "json, name=textRange" })
   textRange?: Range;
 }

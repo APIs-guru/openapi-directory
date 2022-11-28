@@ -31,7 +31,7 @@ type DisplayvideoAdvertisersLocationListsAssignedLocationsCreateSecurity struct 
 type DisplayvideoAdvertisersLocationListsAssignedLocationsCreateRequest struct {
 	PathParams  DisplayvideoAdvertisersLocationListsAssignedLocationsCreatePathParams
 	QueryParams DisplayvideoAdvertisersLocationListsAssignedLocationsCreateQueryParams
-	Request     *shared.AssignedLocation `request:"mediaType=application/json"`
+	Request     *shared.AssignedLocationInput `request:"mediaType=application/json"`
 	Security    DisplayvideoAdvertisersLocationListsAssignedLocationsCreateSecurity
 }
 

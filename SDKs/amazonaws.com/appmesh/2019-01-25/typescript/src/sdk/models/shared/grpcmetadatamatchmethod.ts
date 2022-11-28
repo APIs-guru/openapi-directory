@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { MatchRange } from "./matchrange";
+
 
 
 // GrpcMetadataMatchMethod
@@ -7,18 +8,18 @@ import { MatchRange } from "./matchrange";
  * An object representing the method header to be matched.
 **/
 export class GrpcMetadataMatchMethod extends SpeakeasyBase {
-  @Metadata({ data: "json, name=exact" })
+  @SpeakeasyMetadata({ data: "json, name=exact" })
   exact?: string;
 
-  @Metadata({ data: "json, name=prefix" })
+  @SpeakeasyMetadata({ data: "json, name=prefix" })
   prefix?: string;
 
-  @Metadata({ data: "json, name=range" })
+  @SpeakeasyMetadata({ data: "json, name=range" })
   range?: MatchRange;
 
-  @Metadata({ data: "json, name=regex" })
+  @SpeakeasyMetadata({ data: "json, name=regex" })
   regex?: string;
 
-  @Metadata({ data: "json, name=suffix" })
+  @SpeakeasyMetadata({ data: "json, name=suffix" })
   suffix?: string;
 }

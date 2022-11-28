@@ -22,10 +22,10 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { User } from "./user";
 import { TimeDuration } from "./timeduration";
+import { OfferedItem } from "./offereditem";
 // Offer
 /**
  * A complex type that defines an offer that a seller makes to eligible buyers.
@@ -36,51 +36,51 @@ var Offer = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=allowCounterOffer" }),
+        SpeakeasyMetadata({ data: "json, name=allowCounterOffer" }),
         __metadata("design:type", Boolean)
     ], Offer.prototype, "allowCounterOffer", void 0);
     __decorate([
-        Metadata({ data: "json, name=buyer" }),
+        SpeakeasyMetadata({ data: "json, name=buyer" }),
         __metadata("design:type", User)
     ], Offer.prototype, "buyer", void 0);
     __decorate([
-        Metadata({ data: "json, name=creationDate" }),
+        SpeakeasyMetadata({ data: "json, name=creationDate" }),
         __metadata("design:type", String)
     ], Offer.prototype, "creationDate", void 0);
     __decorate([
-        Metadata({ data: "json, name=initiatedBy" }),
+        SpeakeasyMetadata({ data: "json, name=initiatedBy" }),
         __metadata("design:type", String)
     ], Offer.prototype, "initiatedBy", void 0);
     __decorate([
-        Metadata({ data: "json, name=lastModifiedDate" }),
+        SpeakeasyMetadata({ data: "json, name=lastModifiedDate" }),
         __metadata("design:type", String)
     ], Offer.prototype, "lastModifiedDate", void 0);
     __decorate([
-        Metadata({ data: "json, name=message" }),
+        SpeakeasyMetadata({ data: "json, name=message" }),
         __metadata("design:type", String)
     ], Offer.prototype, "message", void 0);
     __decorate([
-        Metadata({ data: "json, name=offerDuration" }),
+        SpeakeasyMetadata({ data: "json, name=offerDuration" }),
         __metadata("design:type", TimeDuration)
     ], Offer.prototype, "offerDuration", void 0);
     __decorate([
-        Metadata({ data: "json, name=offerId" }),
+        SpeakeasyMetadata({ data: "json, name=offerId" }),
         __metadata("design:type", String)
     ], Offer.prototype, "offerId", void 0);
     __decorate([
-        Metadata({ data: "json, name=offerStatus" }),
+        SpeakeasyMetadata({ data: "json, name=offerStatus" }),
         __metadata("design:type", String)
     ], Offer.prototype, "offerStatus", void 0);
     __decorate([
-        Metadata({ data: "json, name=offerType" }),
+        SpeakeasyMetadata({ data: "json, name=offerType" }),
         __metadata("design:type", String)
     ], Offer.prototype, "offerType", void 0);
     __decorate([
-        Metadata({ data: "json, name=offeredItems", elemType: shared.OfferedItem }),
+        SpeakeasyMetadata({ data: "json, name=offeredItems", elemType: OfferedItem }),
         __metadata("design:type", Array)
     ], Offer.prototype, "offeredItems", void 0);
     __decorate([
-        Metadata({ data: "json, name=revision" }),
+        SpeakeasyMetadata({ data: "json, name=revision" }),
         __metadata("design:type", String)
     ], Offer.prototype, "revision", void 0);
     return Offer;

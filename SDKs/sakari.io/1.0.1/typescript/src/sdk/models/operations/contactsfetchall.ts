@@ -1,65 +1,66 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class ContactsFetchAllPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=accountId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=accountId" })
   accountId: string;
 }
 
 
 export class ContactsFetchAllQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=email" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=email" })
   email?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=firstName" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=firstName" })
   firstName?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=lastName" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=lastName" })
   lastName?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=limit" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=limit" })
   limit?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=mobile" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=mobile" })
   mobile?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=offset" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=offset" })
   offset?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=tags" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=tags" })
   tags?: string;
 }
 
 
 export class ContactsFetchAllSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   sakariAuth: shared.SchemeSakariAuth;
 }
 
 
 export class ContactsFetchAllRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: ContactsFetchAllPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: ContactsFetchAllQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: ContactsFetchAllSecurity;
 }
 
 
 export class ContactsFetchAllResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contactsResponse?: shared.ContactsResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   errorResponse?: shared.ErrorResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

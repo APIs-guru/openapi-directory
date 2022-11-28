@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class NearEarthObjectList extends SpeakeasyBase {
-  @Metadata({ data: "json, name=element_count" })
+  @SpeakeasyMetadata({ data: "json, name=element_count" })
   elementCount?: number;
 
-  @Metadata({ data: "json, name=links" })
+  @SpeakeasyMetadata({ data: "json, name=links" })
   links?: Map<string, any>;
 
-  @Metadata({ data: "json, name=near_earth_objects" })
+  @SpeakeasyMetadata({ data: "json, name=near_earth_objects" })
   nearEarthObjects?: any;
 }

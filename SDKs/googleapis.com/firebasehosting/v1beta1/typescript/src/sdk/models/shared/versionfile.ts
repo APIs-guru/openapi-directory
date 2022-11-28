@@ -1,9 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum VersionFileStatusEnum {
-    StatusUnspecified = "STATUS_UNSPECIFIED"
-,    Expected = "EXPECTED"
-,    Active = "ACTIVE"
+    StatusUnspecified = "STATUS_UNSPECIFIED",
+    Expected = "EXPECTED",
+    Active = "ACTIVE"
 }
 
 
@@ -12,12 +13,12 @@ export enum VersionFileStatusEnum {
  * A static content file that is part of a version.
 **/
 export class VersionFile extends SpeakeasyBase {
-  @Metadata({ data: "json, name=hash" })
+  @SpeakeasyMetadata({ data: "json, name=hash" })
   hash?: string;
 
-  @Metadata({ data: "json, name=path" })
+  @SpeakeasyMetadata({ data: "json, name=path" })
   path?: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: VersionFileStatusEnum;
 }

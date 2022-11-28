@@ -1,27 +1,28 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class CreateDatasetHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
@@ -31,10 +32,10 @@ export class CreateDatasetHeaders extends SpeakeasyBase {
  * How long, in days, message data is kept.
 **/
 export class CreateDatasetRequestBodyRetentionPeriod extends SpeakeasyBase {
-  @Metadata({ data: "json, name=numberOfDays" })
+  @SpeakeasyMetadata({ data: "json, name=numberOfDays" })
   numberOfDays?: number;
 
-  @Metadata({ data: "json, name=unlimited" })
+  @SpeakeasyMetadata({ data: "json, name=unlimited" })
   unlimited?: boolean;
 }
 
@@ -44,75 +45,75 @@ export class CreateDatasetRequestBodyRetentionPeriod extends SpeakeasyBase {
  * Information about the versioning of dataset contents.
 **/
 export class CreateDatasetRequestBodyVersioningConfiguration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=maxVersions" })
+  @SpeakeasyMetadata({ data: "json, name=maxVersions" })
   maxVersions?: number;
 
-  @Metadata({ data: "json, name=unlimited" })
+  @SpeakeasyMetadata({ data: "json, name=unlimited" })
   unlimited?: boolean;
 }
 
 
 export class CreateDatasetRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=actions", elemType: shared.DatasetAction })
+  @SpeakeasyMetadata({ data: "json, name=actions", elemType: shared.DatasetAction })
   actions: shared.DatasetAction[];
 
-  @Metadata({ data: "json, name=contentDeliveryRules", elemType: shared.DatasetContentDeliveryRule })
+  @SpeakeasyMetadata({ data: "json, name=contentDeliveryRules", elemType: shared.DatasetContentDeliveryRule })
   contentDeliveryRules?: shared.DatasetContentDeliveryRule[];
 
-  @Metadata({ data: "json, name=datasetName" })
+  @SpeakeasyMetadata({ data: "json, name=datasetName" })
   datasetName: string;
 
-  @Metadata({ data: "json, name=lateDataRules", elemType: shared.LateDataRule })
+  @SpeakeasyMetadata({ data: "json, name=lateDataRules", elemType: shared.LateDataRule })
   lateDataRules?: shared.LateDataRule[];
 
-  @Metadata({ data: "json, name=retentionPeriod" })
+  @SpeakeasyMetadata({ data: "json, name=retentionPeriod" })
   retentionPeriod?: CreateDatasetRequestBodyRetentionPeriod;
 
-  @Metadata({ data: "json, name=tags", elemType: shared.Tag })
+  @SpeakeasyMetadata({ data: "json, name=tags", elemType: shared.Tag })
   tags?: shared.Tag[];
 
-  @Metadata({ data: "json, name=triggers", elemType: shared.DatasetTrigger })
+  @SpeakeasyMetadata({ data: "json, name=triggers", elemType: shared.DatasetTrigger })
   triggers?: shared.DatasetTrigger[];
 
-  @Metadata({ data: "json, name=versioningConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=versioningConfiguration" })
   versioningConfiguration?: CreateDatasetRequestBodyVersioningConfiguration;
 }
 
 
 export class CreateDatasetRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: CreateDatasetHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: CreateDatasetRequestBody;
 }
 
 
 export class CreateDatasetResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   createDatasetResponse?: shared.CreateDatasetResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   internalFailureException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidRequestException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   limitExceededException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   resourceAlreadyExistsException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   serviceUnavailableException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   throttlingException?: any;
 }

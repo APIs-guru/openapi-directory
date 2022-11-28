@@ -10,7 +10,7 @@ import (
 	"strings"
 )
 
-var Servers = []string{
+var ServerList = []string{
 	"http://memory-db.{region}.amazonaws.com",
 	"https://memory-db.{region}.amazonaws.com",
 	"http://memory-db.{region}.amazonaws.com.cn",
@@ -21,10 +21,15 @@ type HTTPClient interface {
 	Do(req *http.Request) (*http.Response, error)
 }
 
+// SDK Documentation: https://docs.aws.amazon.com/memory-db/ - Amazon Web Services documentation
 type SDK struct {
-	defaultClient  HTTPClient
-	securityClient HTTPClient
-	serverURL      string
+	_defaultClient  HTTPClient
+	_securityClient HTTPClient
+	_security       *shared.Security
+	_serverURL      string
+	_language       string
+	_sdkVersion     string
+	_genVersion     string
 }
 
 type SDKOption func(*SDK)
@@ -35,33 +40,55 @@ func WithServerURL(serverURL string, params map[string]string) SDKOption {
 			serverURL = utils.ReplaceParameters(serverURL, params)
 		}
 
-		sdk.serverURL = serverURL
+		sdk._serverURL = serverURL
+	}
+}
+
+func WithClient(client HTTPClient) SDKOption {
+	return func(sdk *SDK) {
+		sdk._defaultClient = client
 	}
 }
 
 func WithSecurity(security shared.Security) SDKOption {
 	return func(sdk *SDK) {
-		sdk.securityClient = utils.CreateSecurityClient(security)
+		sdk._security = &security
 	}
 }
 
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
-		defaultClient:  http.DefaultClient,
-		securityClient: http.DefaultClient,
+		_language:   "go",
+		_sdkVersion: "",
+		_genVersion: "internal",
 	}
 	for _, opt := range opts {
 		opt(sdk)
 	}
-	if sdk.serverURL == "" {
-		sdk.serverURL = Servers[0]
+
+	if sdk._defaultClient == nil {
+		sdk._defaultClient = http.DefaultClient
+	}
+	if sdk._securityClient == nil {
+
+		if sdk._security != nil {
+			sdk._securityClient = utils.ConfigureSecurityClient(sdk._defaultClient, sdk._security)
+		} else {
+			sdk._securityClient = sdk._defaultClient
+		}
+
+	}
+
+	if sdk._serverURL == "" {
+		sdk._serverURL = ServerList[0]
 	}
 
 	return sdk
 }
 
+// BatchUpdateCluster - Apply the service update to a list of clusters supplied. For more information on service updates and applying them, see <a href="https://docs.aws.amazon.com/MemoryDB/latest/devguide/managing-updates.html#applying-updates">Applying the service updates</a>.
 func (s *SDK) BatchUpdateCluster(ctx context.Context, request operations.BatchUpdateClusterRequest) (*operations.BatchUpdateClusterResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonMemoryDB.BatchUpdateCluster"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -81,7 +108,7 @@ func (s *SDK) BatchUpdateCluster(ctx context.Context, request operations.BatchUp
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -131,8 +158,9 @@ func (s *SDK) BatchUpdateCluster(ctx context.Context, request operations.BatchUp
 	return res, nil
 }
 
+// CopySnapshot - Makes a copy of an existing snapshot.
 func (s *SDK) CopySnapshot(ctx context.Context, request operations.CopySnapshotRequest) (*operations.CopySnapshotResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonMemoryDB.CopySnapshot"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -152,7 +180,7 @@ func (s *SDK) CopySnapshot(ctx context.Context, request operations.CopySnapshotR
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -262,8 +290,9 @@ func (s *SDK) CopySnapshot(ctx context.Context, request operations.CopySnapshotR
 	return res, nil
 }
 
+// CreateACL - Creates an Access Control List. For more information, see <a href="https://docs.aws.amazon.com/MemoryDB/latest/devguide/clusters.acls.html">Authenticating users with Access Contol Lists (ACLs)</a>.
 func (s *SDK) CreateACL(ctx context.Context, request operations.CreateACLRequest) (*operations.CreateACLResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonMemoryDB.CreateACL"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -283,7 +312,7 @@ func (s *SDK) CreateACL(ctx context.Context, request operations.CreateACLRequest
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -383,8 +412,9 @@ func (s *SDK) CreateACL(ctx context.Context, request operations.CreateACLRequest
 	return res, nil
 }
 
+// CreateCluster - Creates a cluster. All nodes in the cluster run the same protocol-compliant engine software.
 func (s *SDK) CreateCluster(ctx context.Context, request operations.CreateClusterRequest) (*operations.CreateClusterResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonMemoryDB.CreateCluster"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -404,7 +434,7 @@ func (s *SDK) CreateCluster(ctx context.Context, request operations.CreateCluste
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -594,8 +624,9 @@ func (s *SDK) CreateCluster(ctx context.Context, request operations.CreateCluste
 	return res, nil
 }
 
+// CreateParameterGroup - Creates a new MemoryDB parameter group. A parameter group is a collection of parameters and their values that are applied to all of the nodes in any cluster. For more information, see <a href="https://docs.aws.amazon.com/MemoryDB/latest/devguide/parametergroups.html">Configuring engine parameters using parameter groups</a>.
 func (s *SDK) CreateParameterGroup(ctx context.Context, request operations.CreateParameterGroupRequest) (*operations.CreateParameterGroupResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonMemoryDB.CreateParameterGroup"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -615,7 +646,7 @@ func (s *SDK) CreateParameterGroup(ctx context.Context, request operations.Creat
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -715,8 +746,9 @@ func (s *SDK) CreateParameterGroup(ctx context.Context, request operations.Creat
 	return res, nil
 }
 
+// CreateSnapshot - Creates a copy of an entire cluster at a specific moment in time.
 func (s *SDK) CreateSnapshot(ctx context.Context, request operations.CreateSnapshotRequest) (*operations.CreateSnapshotResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonMemoryDB.CreateSnapshot"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -736,7 +768,7 @@ func (s *SDK) CreateSnapshot(ctx context.Context, request operations.CreateSnaps
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -846,8 +878,9 @@ func (s *SDK) CreateSnapshot(ctx context.Context, request operations.CreateSnaps
 	return res, nil
 }
 
+// CreateSubnetGroup - Creates a subnet group. A subnet group is a collection of subnets (typically private) that you can designate for your clusters running in an Amazon Virtual Private Cloud (VPC) environment. When you create a cluster in an Amazon VPC, you must specify a subnet group. MemoryDB uses that subnet group to choose a subnet and IP addresses within that subnet to associate with your nodes. For more information, see <a href="https://docs.aws.amazon.com/MemoryDB/latest/devguide/subnetgroups.html">Subnets and subnet groups</a>.
 func (s *SDK) CreateSubnetGroup(ctx context.Context, request operations.CreateSubnetGroupRequest) (*operations.CreateSubnetGroupResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonMemoryDB.CreateSubnetGroup"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -867,7 +900,7 @@ func (s *SDK) CreateSubnetGroup(ctx context.Context, request operations.CreateSu
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -967,8 +1000,9 @@ func (s *SDK) CreateSubnetGroup(ctx context.Context, request operations.CreateSu
 	return res, nil
 }
 
+// CreateUser - Creates a MemoryDB user. For more information, see <a href="https://docs.aws.amazon.com/MemoryDB/latest/devguide/clusters.acls.html">Authenticating users with Access Contol Lists (ACLs)</a>.
 func (s *SDK) CreateUser(ctx context.Context, request operations.CreateUserRequest) (*operations.CreateUserResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonMemoryDB.CreateUser"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -988,7 +1022,7 @@ func (s *SDK) CreateUser(ctx context.Context, request operations.CreateUserReque
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1078,8 +1112,9 @@ func (s *SDK) CreateUser(ctx context.Context, request operations.CreateUserReque
 	return res, nil
 }
 
+// DeleteACL - Deletes an Access Control List. The ACL must first be disassociated from the cluster before it can be deleted. For more information, see <a href="https://docs.aws.amazon.com/MemoryDB/latest/devguide/clusters.acls.html">Authenticating users with Access Contol Lists (ACLs)</a>.
 func (s *SDK) DeleteACL(ctx context.Context, request operations.DeleteACLRequest) (*operations.DeleteACLResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonMemoryDB.DeleteACL"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1099,7 +1134,7 @@ func (s *SDK) DeleteACL(ctx context.Context, request operations.DeleteACLRequest
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1159,8 +1194,9 @@ func (s *SDK) DeleteACL(ctx context.Context, request operations.DeleteACLRequest
 	return res, nil
 }
 
+// DeleteCluster - Deletes a cluster. It also deletes all associated nodes and node endpoints
 func (s *SDK) DeleteCluster(ctx context.Context, request operations.DeleteClusterRequest) (*operations.DeleteClusterResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonMemoryDB.DeleteCluster"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1180,7 +1216,7 @@ func (s *SDK) DeleteCluster(ctx context.Context, request operations.DeleteCluste
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1270,8 +1306,9 @@ func (s *SDK) DeleteCluster(ctx context.Context, request operations.DeleteCluste
 	return res, nil
 }
 
+// DeleteParameterGroup - Deletes the specified parameter group. You cannot delete a parameter group if it is associated with any clusters. You cannot delete the default parameter groups in your account.
 func (s *SDK) DeleteParameterGroup(ctx context.Context, request operations.DeleteParameterGroupRequest) (*operations.DeleteParameterGroupResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonMemoryDB.DeleteParameterGroup"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1291,7 +1328,7 @@ func (s *SDK) DeleteParameterGroup(ctx context.Context, request operations.Delet
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1371,8 +1408,9 @@ func (s *SDK) DeleteParameterGroup(ctx context.Context, request operations.Delet
 	return res, nil
 }
 
+// DeleteSnapshot - Deletes an existing snapshot. When you receive a successful response from this operation, MemoryDB immediately begins deleting the snapshot; you cannot cancel or revert this operation.
 func (s *SDK) DeleteSnapshot(ctx context.Context, request operations.DeleteSnapshotRequest) (*operations.DeleteSnapshotResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonMemoryDB.DeleteSnapshot"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1392,7 +1430,7 @@ func (s *SDK) DeleteSnapshot(ctx context.Context, request operations.DeleteSnaps
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1472,8 +1510,9 @@ func (s *SDK) DeleteSnapshot(ctx context.Context, request operations.DeleteSnaps
 	return res, nil
 }
 
+// DeleteSubnetGroup - Deletes a subnet group. You cannot delete a default subnet group or one that is associated with any clusters.
 func (s *SDK) DeleteSubnetGroup(ctx context.Context, request operations.DeleteSubnetGroupRequest) (*operations.DeleteSubnetGroupResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonMemoryDB.DeleteSubnetGroup"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1493,7 +1532,7 @@ func (s *SDK) DeleteSubnetGroup(ctx context.Context, request operations.DeleteSu
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1553,8 +1592,9 @@ func (s *SDK) DeleteSubnetGroup(ctx context.Context, request operations.DeleteSu
 	return res, nil
 }
 
+// DeleteUser - Deletes a user. The user will be removed from all ACLs and in turn removed from all clusters.
 func (s *SDK) DeleteUser(ctx context.Context, request operations.DeleteUserRequest) (*operations.DeleteUserResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonMemoryDB.DeleteUser"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1574,7 +1614,7 @@ func (s *SDK) DeleteUser(ctx context.Context, request operations.DeleteUserReque
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1634,8 +1674,9 @@ func (s *SDK) DeleteUser(ctx context.Context, request operations.DeleteUserReque
 	return res, nil
 }
 
+// DescribeAcLs - Returns a list of ACLs
 func (s *SDK) DescribeAcLs(ctx context.Context, request operations.DescribeAcLsRequest) (*operations.DescribeAcLsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonMemoryDB.DescribeACLs"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1655,7 +1696,7 @@ func (s *SDK) DescribeAcLs(ctx context.Context, request operations.DescribeAcLsR
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1705,8 +1746,9 @@ func (s *SDK) DescribeAcLs(ctx context.Context, request operations.DescribeAcLsR
 	return res, nil
 }
 
+// DescribeClusters - Returns information about all provisioned clusters if no cluster identifier is specified, or about a specific cluster if a cluster name is supplied.
 func (s *SDK) DescribeClusters(ctx context.Context, request operations.DescribeClustersRequest) (*operations.DescribeClustersResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonMemoryDB.DescribeClusters"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1726,7 +1768,7 @@ func (s *SDK) DescribeClusters(ctx context.Context, request operations.DescribeC
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1796,8 +1838,9 @@ func (s *SDK) DescribeClusters(ctx context.Context, request operations.DescribeC
 	return res, nil
 }
 
+// DescribeEngineVersions - Returns a list of the available Redis engine versions.
 func (s *SDK) DescribeEngineVersions(ctx context.Context, request operations.DescribeEngineVersionsRequest) (*operations.DescribeEngineVersionsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonMemoryDB.DescribeEngineVersions"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1817,7 +1860,7 @@ func (s *SDK) DescribeEngineVersions(ctx context.Context, request operations.Des
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1877,8 +1920,9 @@ func (s *SDK) DescribeEngineVersions(ctx context.Context, request operations.Des
 	return res, nil
 }
 
+// DescribeEvents - Returns events related to clusters, security groups, and parameter groups. You can obtain events specific to a particular cluster, security group, or parameter group by providing the name as a parameter. By default, only the events occurring within the last hour are returned; however, you can retrieve up to 14 days' worth of events if necessary.
 func (s *SDK) DescribeEvents(ctx context.Context, request operations.DescribeEventsRequest) (*operations.DescribeEventsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonMemoryDB.DescribeEvents"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1898,7 +1942,7 @@ func (s *SDK) DescribeEvents(ctx context.Context, request operations.DescribeEve
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1958,8 +2002,9 @@ func (s *SDK) DescribeEvents(ctx context.Context, request operations.DescribeEve
 	return res, nil
 }
 
+// DescribeParameterGroups - Returns a list of parameter group descriptions. If a parameter group name is specified, the list contains only the descriptions for that group.
 func (s *SDK) DescribeParameterGroups(ctx context.Context, request operations.DescribeParameterGroupsRequest) (*operations.DescribeParameterGroupsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonMemoryDB.DescribeParameterGroups"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1979,7 +2024,7 @@ func (s *SDK) DescribeParameterGroups(ctx context.Context, request operations.De
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2049,8 +2094,9 @@ func (s *SDK) DescribeParameterGroups(ctx context.Context, request operations.De
 	return res, nil
 }
 
+// DescribeParameters - Returns the detailed parameter list for a particular parameter group.
 func (s *SDK) DescribeParameters(ctx context.Context, request operations.DescribeParametersRequest) (*operations.DescribeParametersResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonMemoryDB.DescribeParameters"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2070,7 +2116,7 @@ func (s *SDK) DescribeParameters(ctx context.Context, request operations.Describ
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2140,8 +2186,9 @@ func (s *SDK) DescribeParameters(ctx context.Context, request operations.Describ
 	return res, nil
 }
 
+// DescribeServiceUpdates - Returns details of the service updates
 func (s *SDK) DescribeServiceUpdates(ctx context.Context, request operations.DescribeServiceUpdatesRequest) (*operations.DescribeServiceUpdatesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonMemoryDB.DescribeServiceUpdates"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2161,7 +2208,7 @@ func (s *SDK) DescribeServiceUpdates(ctx context.Context, request operations.Des
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2211,8 +2258,9 @@ func (s *SDK) DescribeServiceUpdates(ctx context.Context, request operations.Des
 	return res, nil
 }
 
+// DescribeSnapshots - Returns information about cluster snapshots. By default, DescribeSnapshots lists all of your snapshots; it can optionally describe a single snapshot, or just the snapshots associated with a particular cluster.
 func (s *SDK) DescribeSnapshots(ctx context.Context, request operations.DescribeSnapshotsRequest) (*operations.DescribeSnapshotsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonMemoryDB.DescribeSnapshots"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2232,7 +2280,7 @@ func (s *SDK) DescribeSnapshots(ctx context.Context, request operations.Describe
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2302,8 +2350,9 @@ func (s *SDK) DescribeSnapshots(ctx context.Context, request operations.Describe
 	return res, nil
 }
 
+// DescribeSubnetGroups - Returns a list of subnet group descriptions. If a subnet group name is specified, the list contains only the description of that group.
 func (s *SDK) DescribeSubnetGroups(ctx context.Context, request operations.DescribeSubnetGroupsRequest) (*operations.DescribeSubnetGroupsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonMemoryDB.DescribeSubnetGroups"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2323,7 +2372,7 @@ func (s *SDK) DescribeSubnetGroups(ctx context.Context, request operations.Descr
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2373,8 +2422,9 @@ func (s *SDK) DescribeSubnetGroups(ctx context.Context, request operations.Descr
 	return res, nil
 }
 
+// DescribeUsers - Returns a list of users.
 func (s *SDK) DescribeUsers(ctx context.Context, request operations.DescribeUsersRequest) (*operations.DescribeUsersResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonMemoryDB.DescribeUsers"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2394,7 +2444,7 @@ func (s *SDK) DescribeUsers(ctx context.Context, request operations.DescribeUser
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2444,8 +2494,9 @@ func (s *SDK) DescribeUsers(ctx context.Context, request operations.DescribeUser
 	return res, nil
 }
 
+// FailoverShard - Used to failover a shard
 func (s *SDK) FailoverShard(ctx context.Context, request operations.FailoverShardRequest) (*operations.FailoverShardResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonMemoryDB.FailoverShard"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2465,7 +2516,7 @@ func (s *SDK) FailoverShard(ctx context.Context, request operations.FailoverShar
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2575,8 +2626,9 @@ func (s *SDK) FailoverShard(ctx context.Context, request operations.FailoverShar
 	return res, nil
 }
 
+// ListAllowedNodeTypeUpdates - Lists all available node types that you can scale to from your cluster's current node type. When you use the UpdateCluster operation to scale your cluster, the value of the NodeType parameter must be one of the node types returned by this operation.
 func (s *SDK) ListAllowedNodeTypeUpdates(ctx context.Context, request operations.ListAllowedNodeTypeUpdatesRequest) (*operations.ListAllowedNodeTypeUpdatesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonMemoryDB.ListAllowedNodeTypeUpdates"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2596,7 +2648,7 @@ func (s *SDK) ListAllowedNodeTypeUpdates(ctx context.Context, request operations
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2666,8 +2718,9 @@ func (s *SDK) ListAllowedNodeTypeUpdates(ctx context.Context, request operations
 	return res, nil
 }
 
+// ListTags - Lists all tags currently on a named resource. A tag is a key-value pair where the key and value are case-sensitive. You can use tags to categorize and track your MemoryDB resources. For more information, see <a href="https://docs.aws.amazon.com/MemoryDB/latest/devguide/Tagging-Resources.html">Tagging your MemoryDB resources</a>
 func (s *SDK) ListTags(ctx context.Context, request operations.ListTagsRequest) (*operations.ListTagsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonMemoryDB.ListTags"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2687,7 +2740,7 @@ func (s *SDK) ListTags(ctx context.Context, request operations.ListTagsRequest) 
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2807,8 +2860,9 @@ func (s *SDK) ListTags(ctx context.Context, request operations.ListTagsRequest) 
 	return res, nil
 }
 
+// ResetParameterGroup - Modifies the parameters of a parameter group to the engine or system default value. You can reset specific parameters by submitting a list of parameter names. To reset the entire parameter group, specify the AllParameters and ParameterGroupName parameters.
 func (s *SDK) ResetParameterGroup(ctx context.Context, request operations.ResetParameterGroupRequest) (*operations.ResetParameterGroupResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonMemoryDB.ResetParameterGroup"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2828,7 +2882,7 @@ func (s *SDK) ResetParameterGroup(ctx context.Context, request operations.ResetP
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2908,8 +2962,9 @@ func (s *SDK) ResetParameterGroup(ctx context.Context, request operations.ResetP
 	return res, nil
 }
 
+// TagResource - <p>A tag is a key-value pair where the key and value are case-sensitive. You can use tags to categorize and track all your MemoryDB resources. When you add or remove tags on clusters, those actions will be replicated to all nodes in the cluster. For more information, see <a href="https://docs.aws.amazon.com/MemoryDB/latest/devguide/iam.resourcelevelpermissions.html">Resource-level permissions</a>.</p> <p>For example, you can use cost-allocation tags to your MemoryDB resources, Amazon generates a cost allocation report as a comma-separated value (CSV) file with your usage and costs aggregated by your tags. You can apply tags that represent business categories (such as cost centers, application names, or owners) to organize your costs across multiple services. For more information, see <a href="https://docs.aws.amazon.com/MemoryDB/latest/devguide/tagging.html">Using Cost Allocation Tags</a>.</p>
 func (s *SDK) TagResource(ctx context.Context, request operations.TagResourceRequest) (*operations.TagResourceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonMemoryDB.TagResource"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2929,7 +2984,7 @@ func (s *SDK) TagResource(ctx context.Context, request operations.TagResourceReq
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3059,8 +3114,9 @@ func (s *SDK) TagResource(ctx context.Context, request operations.TagResourceReq
 	return res, nil
 }
 
+// UntagResource - Use this operation to remove tags on a resource
 func (s *SDK) UntagResource(ctx context.Context, request operations.UntagResourceRequest) (*operations.UntagResourceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonMemoryDB.UntagResource"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3080,7 +3136,7 @@ func (s *SDK) UntagResource(ctx context.Context, request operations.UntagResourc
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3210,8 +3266,9 @@ func (s *SDK) UntagResource(ctx context.Context, request operations.UntagResourc
 	return res, nil
 }
 
+// UpdateACL - Changes the list of users that belong to the Access Control List.
 func (s *SDK) UpdateACL(ctx context.Context, request operations.UpdateACLRequest) (*operations.UpdateACLResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonMemoryDB.UpdateACL"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3231,7 +3288,7 @@ func (s *SDK) UpdateACL(ctx context.Context, request operations.UpdateACLRequest
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3331,8 +3388,9 @@ func (s *SDK) UpdateACL(ctx context.Context, request operations.UpdateACLRequest
 	return res, nil
 }
 
+// UpdateCluster - Modifies the settings for a cluster. You can use this operation to change one or more cluster configuration settings by specifying the settings and the new values.
 func (s *SDK) UpdateCluster(ctx context.Context, request operations.UpdateClusterRequest) (*operations.UpdateClusterResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonMemoryDB.UpdateCluster"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3352,7 +3410,7 @@ func (s *SDK) UpdateCluster(ctx context.Context, request operations.UpdateCluste
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3542,8 +3600,9 @@ func (s *SDK) UpdateCluster(ctx context.Context, request operations.UpdateCluste
 	return res, nil
 }
 
+// UpdateParameterGroup - Updates the parameters of a parameter group. You can modify up to 20 parameters in a single request by submitting a list parameter name and value pairs.
 func (s *SDK) UpdateParameterGroup(ctx context.Context, request operations.UpdateParameterGroupRequest) (*operations.UpdateParameterGroupResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonMemoryDB.UpdateParameterGroup"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3563,7 +3622,7 @@ func (s *SDK) UpdateParameterGroup(ctx context.Context, request operations.Updat
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3643,8 +3702,9 @@ func (s *SDK) UpdateParameterGroup(ctx context.Context, request operations.Updat
 	return res, nil
 }
 
+// UpdateSubnetGroup - Updates a subnet group. For more information, see <a href="https://docs.aws.amazon.com/MemoryDB/latest/devguide/ubnetGroups.Modifying.html">Updating a subnet group</a>
 func (s *SDK) UpdateSubnetGroup(ctx context.Context, request operations.UpdateSubnetGroupRequest) (*operations.UpdateSubnetGroupResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonMemoryDB.UpdateSubnetGroup"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3664,7 +3724,7 @@ func (s *SDK) UpdateSubnetGroup(ctx context.Context, request operations.UpdateSu
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3754,8 +3814,9 @@ func (s *SDK) UpdateSubnetGroup(ctx context.Context, request operations.UpdateSu
 	return res, nil
 }
 
+// UpdateUser - Changes user password(s) and/or access string.
 func (s *SDK) UpdateUser(ctx context.Context, request operations.UpdateUserRequest) (*operations.UpdateUserResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonMemoryDB.UpdateUser"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3775,7 +3836,7 @@ func (s *SDK) UpdateUser(ctx context.Context, request operations.UpdateUserReque
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {

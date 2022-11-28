@@ -8,6 +8,8 @@ const (
 	OsPolicyModeEnumEnforcement     OsPolicyModeEnum = "ENFORCEMENT"
 )
 
+// OsPolicy
+// An OS policy defines the desired state configuration for a VM.
 type OsPolicy struct {
 	AllowNoResourceGroupMatch *bool                   `json:"allowNoResourceGroupMatch,omitempty"`
 	Description               *string                 `json:"description,omitempty"`

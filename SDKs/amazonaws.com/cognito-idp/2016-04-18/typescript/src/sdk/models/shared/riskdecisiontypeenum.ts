@@ -1,7 +1,8 @@
 
 
+
 export enum RiskDecisionTypeEnum {
-    NoRisk = "NoRisk"
-,    AccountTakeover = "AccountTakeover"
-,    Block = "Block"
+    NoRisk = "NoRisk",
+    AccountTakeover = "AccountTakeover",
+    Block = "Block"
 }

@@ -51,6 +51,8 @@ const (
 	UpdateIntegrationRequestBodyPassthroughBehaviorEnumWhenNoTemplates UpdateIntegrationRequestBodyPassthroughBehaviorEnum = "WHEN_NO_TEMPLATES"
 )
 
+// UpdateIntegrationRequestBodyTLSConfig
+// The TLS configuration for a private integration. If you specify a TLS configuration, private integration traffic uses the HTTPS protocol. Supported only for HTTP APIs.
 type UpdateIntegrationRequestBodyTLSConfig struct {
 	ServerNameToVerify *string `json:"ServerNameToVerify,omitempty"`
 }

@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import certificateorkeygetschema
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class Certs:
-    keys: Optional[List[certificateorkeygetschema.CertificateOrKeyGetSchema]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'keys' }})
+    keys: Optional[List[CertificateOrKeyGetSchema]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('keys') }})
     

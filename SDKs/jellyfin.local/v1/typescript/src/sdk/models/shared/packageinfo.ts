@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { VersionInfo } from "./versioninfo";
+
 
 
 // PackageInfo
@@ -8,27 +8,27 @@ import { VersionInfo } from "./versioninfo";
  * Class PackageInfo.
 **/
 export class PackageInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=category" })
+  @SpeakeasyMetadata({ data: "json, name=category" })
   category?: string;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=guid" })
+  @SpeakeasyMetadata({ data: "json, name=guid" })
   guid?: string;
 
-  @Metadata({ data: "json, name=imageUrl" })
+  @SpeakeasyMetadata({ data: "json, name=imageUrl" })
   imageUrl?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=overview" })
+  @SpeakeasyMetadata({ data: "json, name=overview" })
   overview?: string;
 
-  @Metadata({ data: "json, name=owner" })
+  @SpeakeasyMetadata({ data: "json, name=owner" })
   owner?: string;
 
-  @Metadata({ data: "json, name=versions", elemType: shared.VersionInfo })
+  @SpeakeasyMetadata({ data: "json, name=versions", elemType: VersionInfo })
   versions?: VersionInfo[];
 }

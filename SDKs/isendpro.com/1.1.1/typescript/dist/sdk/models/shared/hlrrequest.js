@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var HlRrequestGetHlrEnum;
 (function (HlRrequestGetHlrEnum) {
     HlRrequestGetHlrEnum["One"] = "1";
@@ -33,15 +33,15 @@ var HlRrequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=getHLR" }),
+        SpeakeasyMetadata({ data: "json, name=getHLR" }),
         __metadata("design:type", String)
     ], HlRrequest.prototype, "getHlr", void 0);
     __decorate([
-        Metadata({ data: "json, name=keyid" }),
+        SpeakeasyMetadata({ data: "json, name=keyid" }),
         __metadata("design:type", String)
     ], HlRrequest.prototype, "keyid", void 0);
     __decorate([
-        Metadata({ data: "json, name=num" }),
+        SpeakeasyMetadata({ data: "json, name=num" }),
         __metadata("design:type", Array)
     ], HlRrequest.prototype, "num", void 0);
     return HlRrequest;

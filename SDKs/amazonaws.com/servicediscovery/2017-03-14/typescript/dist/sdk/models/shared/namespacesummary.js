@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { NamespaceProperties } from "./namespaceproperties";
 import { NamespaceTypeEnum } from "./namespacetypeenum";
 // NamespaceSummary
@@ -35,35 +35,35 @@ var NamespaceSummary = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Arn" }),
+        SpeakeasyMetadata({ data: "json, name=Arn" }),
         __metadata("design:type", String)
     ], NamespaceSummary.prototype, "arn", void 0);
     __decorate([
-        Metadata({ data: "json, name=CreateDate" }),
+        SpeakeasyMetadata({ data: "json, name=CreateDate" }),
         __metadata("design:type", Date)
     ], NamespaceSummary.prototype, "createDate", void 0);
     __decorate([
-        Metadata({ data: "json, name=Description" }),
+        SpeakeasyMetadata({ data: "json, name=Description" }),
         __metadata("design:type", String)
     ], NamespaceSummary.prototype, "description", void 0);
     __decorate([
-        Metadata({ data: "json, name=Id" }),
+        SpeakeasyMetadata({ data: "json, name=Id" }),
         __metadata("design:type", String)
     ], NamespaceSummary.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "json, name=Name" }),
+        SpeakeasyMetadata({ data: "json, name=Name" }),
         __metadata("design:type", String)
     ], NamespaceSummary.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=Properties" }),
+        SpeakeasyMetadata({ data: "json, name=Properties" }),
         __metadata("design:type", NamespaceProperties)
     ], NamespaceSummary.prototype, "properties", void 0);
     __decorate([
-        Metadata({ data: "json, name=ServiceCount" }),
+        SpeakeasyMetadata({ data: "json, name=ServiceCount" }),
         __metadata("design:type", Number)
     ], NamespaceSummary.prototype, "serviceCount", void 0);
     __decorate([
-        Metadata({ data: "json, name=Type" }),
+        SpeakeasyMetadata({ data: "json, name=Type" }),
         __metadata("design:type", String)
     ], NamespaceSummary.prototype, "type", void 0);
     return NamespaceSummary;

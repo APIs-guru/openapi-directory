@@ -1,6 +1,10 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,List,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -19,27 +23,31 @@ class CreateResourceDefinitionHeaders:
 @dataclass_json
 @dataclass
 class CreateResourceDefinitionRequestBodyInitialVersion:
-    resources: Optional[List[shared.Resource]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Resources' }})
+    r"""CreateResourceDefinitionRequestBodyInitialVersion
+    Information about a resource definition version.
+    """
+    
+    resources: Optional[List[shared.Resource]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Resources') }})
     
 
 @dataclass_json
 @dataclass
 class CreateResourceDefinitionRequestBody:
-    initial_version: Optional[CreateResourceDefinitionRequestBodyInitialVersion] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'InitialVersion' }})
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Name' }})
-    tags: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tags' }})
+    initial_version: Optional[CreateResourceDefinitionRequestBodyInitialVersion] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('InitialVersion') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Name') }})
+    tags: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('tags') }})
     
 
 @dataclass
 class CreateResourceDefinitionRequest:
-    headers: CreateResourceDefinitionHeaders = field(default=None)
-    request: CreateResourceDefinitionRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: CreateResourceDefinitionHeaders = field()
+    request: CreateResourceDefinitionRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class CreateResourceDefinitionResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     create_resource_definition_response: Optional[shared.CreateResourceDefinitionResponse] = field(default=None)
-    status_code: int = field(default=None)
     

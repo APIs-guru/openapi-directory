@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TextPosition } from "./textposition";
 import { TextFormat } from "./textformat";
+
 
 
 // KeyValueFormat
@@ -8,9 +9,9 @@ import { TextFormat } from "./textformat";
  * Formatting options for key value.
 **/
 export class KeyValueFormat extends SpeakeasyBase {
-  @Metadata({ data: "json, name=position" })
+  @SpeakeasyMetadata({ data: "json, name=position" })
   position?: TextPosition;
 
-  @Metadata({ data: "json, name=textFormat" })
+  @SpeakeasyMetadata({ data: "json, name=textFormat" })
   textFormat?: TextFormat;
 }

@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { MonitorErrorDetails } from "./monitorerrordetails";
 import { PortalStateEnum } from "./portalstateenum";
+
 
 
 // PortalStatus
@@ -8,9 +9,9 @@ import { PortalStateEnum } from "./portalstateenum";
  * Contains information about the current status of a portal.
 **/
 export class PortalStatus extends SpeakeasyBase {
-  @Metadata({ data: "json, name=error" })
+  @SpeakeasyMetadata({ data: "json, name=error" })
   error?: MonitorErrorDetails;
 
-  @Metadata({ data: "json, name=state" })
+  @SpeakeasyMetadata({ data: "json, name=state" })
   state: PortalStateEnum;
 }

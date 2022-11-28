@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// Workload
+// A workload return object.
 type Workload struct {
 	AccountIds                      []string                       `json:"AccountIds,omitempty"`
 	ArchitecturalDesign             *string                        `json:"ArchitecturalDesign,omitempty"`

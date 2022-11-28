@@ -1,0 +1,32 @@
+import { AxiosInstance } from "axios";
+import { Security } from "./models/shared";
+import { Groups } from "./groups";
+import { Messages } from "./messages";
+import { Misc } from "./misc";
+import { Photos } from "./photos";
+import { Posts } from "./posts";
+import { Stories } from "./stories";
+import { Users } from "./users";
+type OptsFunc = (sdk: SDK) => void;
+export declare const ServerList: readonly ["https://trashnothing.com/api/v1.2"];
+export declare function WithServerURL(serverURL: string, params?: Map<string, string>): OptsFunc;
+export declare function WithClient(client: AxiosInstance): OptsFunc;
+export declare function WithSecurity(security: Security): OptsFunc;
+export declare class SDK {
+    groups: Groups;
+    messages: Messages;
+    misc: Misc;
+    photos: Photos;
+    posts: Posts;
+    stories: Stories;
+    users: Users;
+    _defaultClient: AxiosInstance;
+    _securityClient: AxiosInstance;
+    _security?: Security;
+    _serverURL: string;
+    private _language;
+    private _sdkVersion;
+    private _genVersion;
+    constructor(...opts: OptsFunc[]);
+}
+export {};

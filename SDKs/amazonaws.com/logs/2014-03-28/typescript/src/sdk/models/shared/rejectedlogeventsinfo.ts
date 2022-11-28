@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // RejectedLogEventsInfo
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Represents the rejected events.
 **/
 export class RejectedLogEventsInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=expiredLogEventEndIndex" })
+  @SpeakeasyMetadata({ data: "json, name=expiredLogEventEndIndex" })
   expiredLogEventEndIndex?: number;
 
-  @Metadata({ data: "json, name=tooNewLogEventStartIndex" })
+  @SpeakeasyMetadata({ data: "json, name=tooNewLogEventStartIndex" })
   tooNewLogEventStartIndex?: number;
 
-  @Metadata({ data: "json, name=tooOldLogEventEndIndex" })
+  @SpeakeasyMetadata({ data: "json, name=tooOldLogEventEndIndex" })
   tooOldLogEventEndIndex?: number;
 }

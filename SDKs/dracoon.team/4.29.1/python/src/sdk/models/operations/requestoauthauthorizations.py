@@ -1,4 +1,7 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,List,Optional
 from sdk.models import shared
 
@@ -17,14 +20,14 @@ class RequestOAuthAuthorizationsHeaders:
 
 @dataclass
 class RequestOAuthAuthorizationsRequest:
-    query_params: RequestOAuthAuthorizationsQueryParams = field(default=None)
-    headers: RequestOAuthAuthorizationsHeaders = field(default=None)
+    headers: RequestOAuthAuthorizationsHeaders = field()
+    query_params: RequestOAuthAuthorizationsQueryParams = field()
     
 
 @dataclass
 class RequestOAuthAuthorizationsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error_response: Optional[shared.ErrorResponse] = field(default=None)
     o_auth_authorizations: Optional[List[shared.OAuthAuthorization]] = field(default=None)
-    status_code: int = field(default=None)
     

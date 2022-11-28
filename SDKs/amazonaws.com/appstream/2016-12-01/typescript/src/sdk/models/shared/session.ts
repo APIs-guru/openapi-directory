@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AuthenticationTypeEnum } from "./authenticationtypeenum";
 import { SessionConnectionStateEnum } from "./sessionconnectionstateenum";
 import { NetworkAccessConfiguration } from "./networkaccessconfiguration";
 import { SessionStateEnum } from "./sessionstateenum";
+
 
 
 // Session
@@ -10,33 +11,33 @@ import { SessionStateEnum } from "./sessionstateenum";
  * Describes a streaming session.
 **/
 export class Session extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AuthenticationType" })
+  @SpeakeasyMetadata({ data: "json, name=AuthenticationType" })
   authenticationType?: AuthenticationTypeEnum;
 
-  @Metadata({ data: "json, name=ConnectionState" })
+  @SpeakeasyMetadata({ data: "json, name=ConnectionState" })
   connectionState?: SessionConnectionStateEnum;
 
-  @Metadata({ data: "json, name=FleetName" })
+  @SpeakeasyMetadata({ data: "json, name=FleetName" })
   fleetName: string;
 
-  @Metadata({ data: "json, name=Id" })
+  @SpeakeasyMetadata({ data: "json, name=Id" })
   id: string;
 
-  @Metadata({ data: "json, name=MaxExpirationTime" })
+  @SpeakeasyMetadata({ data: "json, name=MaxExpirationTime" })
   maxExpirationTime?: Date;
 
-  @Metadata({ data: "json, name=NetworkAccessConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=NetworkAccessConfiguration" })
   networkAccessConfiguration?: NetworkAccessConfiguration;
 
-  @Metadata({ data: "json, name=StackName" })
+  @SpeakeasyMetadata({ data: "json, name=StackName" })
   stackName: string;
 
-  @Metadata({ data: "json, name=StartTime" })
+  @SpeakeasyMetadata({ data: "json, name=StartTime" })
   startTime?: Date;
 
-  @Metadata({ data: "json, name=State" })
+  @SpeakeasyMetadata({ data: "json, name=State" })
   state: SessionStateEnum;
 
-  @Metadata({ data: "json, name=UserId" })
+  @SpeakeasyMetadata({ data: "json, name=UserId" })
   userId: string;
 }

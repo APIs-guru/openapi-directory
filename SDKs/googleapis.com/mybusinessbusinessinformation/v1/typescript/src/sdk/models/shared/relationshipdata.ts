@@ -1,7 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RelevantLocation } from "./relevantlocation";
-import { RelevantLocation } from "./relevantlocation";
+
 
 
 // RelationshipData
@@ -9,12 +8,12 @@ import { RelevantLocation } from "./relevantlocation";
  * Information of all parent and children locations related to this one.
 **/
 export class RelationshipData extends SpeakeasyBase {
-  @Metadata({ data: "json, name=childrenLocations", elemType: shared.RelevantLocation })
+  @SpeakeasyMetadata({ data: "json, name=childrenLocations", elemType: RelevantLocation })
   childrenLocations?: RelevantLocation[];
 
-  @Metadata({ data: "json, name=parentChain" })
+  @SpeakeasyMetadata({ data: "json, name=parentChain" })
   parentChain?: string;
 
-  @Metadata({ data: "json, name=parentLocation" })
+  @SpeakeasyMetadata({ data: "json, name=parentLocation" })
   parentLocation?: RelevantLocation;
 }

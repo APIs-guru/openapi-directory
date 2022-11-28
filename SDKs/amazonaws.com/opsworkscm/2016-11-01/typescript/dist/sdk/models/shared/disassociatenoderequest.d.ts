@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { EngineAttribute } from "./engineattribute";
 export declare class DisassociateNodeRequest extends SpeakeasyBase {
     engineAttributes?: EngineAttribute[];

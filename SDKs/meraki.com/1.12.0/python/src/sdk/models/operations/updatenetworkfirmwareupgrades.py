@@ -1,177 +1,282 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass
 class UpdateNetworkFirmwareUpgradesPathParams:
-    network_id: str = field(default=None, metadata={'path_param': { 'field_name': 'networkId', 'style': 'simple', 'explode': False }})
+    network_id: str = field(metadata={'path_param': { 'field_name': 'networkId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass_json
 @dataclass
 class UpdateNetworkFirmwareUpgradesRequestBodyProductsApplianceNextUpgradeToVersion:
-    id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
+    r"""UpdateNetworkFirmwareUpgradesRequestBodyProductsApplianceNextUpgradeToVersion
+    The version to be updated to
+    """
+    
+    id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('id') }})
     
 
 @dataclass_json
 @dataclass
 class UpdateNetworkFirmwareUpgradesRequestBodyProductsApplianceNextUpgrade:
-    time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'time' }})
-    to_version: Optional[UpdateNetworkFirmwareUpgradesRequestBodyProductsApplianceNextUpgradeToVersion] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'toVersion' }})
+    r"""UpdateNetworkFirmwareUpgradesRequestBodyProductsApplianceNextUpgrade
+    The pending firmware upgrade if it exists
+    """
+    
+    time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('time') }})
+    to_version: Optional[UpdateNetworkFirmwareUpgradesRequestBodyProductsApplianceNextUpgradeToVersion] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('toVersion') }})
     
 
 @dataclass_json
 @dataclass
 class UpdateNetworkFirmwareUpgradesRequestBodyProductsAppliance:
-    next_upgrade: Optional[UpdateNetworkFirmwareUpgradesRequestBodyProductsApplianceNextUpgrade] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'nextUpgrade' }})
+    r"""UpdateNetworkFirmwareUpgradesRequestBodyProductsAppliance
+    The network device to be updated
+    """
+    
+    next_upgrade: Optional[UpdateNetworkFirmwareUpgradesRequestBodyProductsApplianceNextUpgrade] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('nextUpgrade') }})
     
 
 @dataclass_json
 @dataclass
 class UpdateNetworkFirmwareUpgradesRequestBodyProductsCameraNextUpgradeToVersion:
-    id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
+    r"""UpdateNetworkFirmwareUpgradesRequestBodyProductsCameraNextUpgradeToVersion
+    The version to be updated to
+    """
+    
+    id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('id') }})
     
 
 @dataclass_json
 @dataclass
 class UpdateNetworkFirmwareUpgradesRequestBodyProductsCameraNextUpgrade:
-    time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'time' }})
-    to_version: Optional[UpdateNetworkFirmwareUpgradesRequestBodyProductsCameraNextUpgradeToVersion] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'toVersion' }})
+    r"""UpdateNetworkFirmwareUpgradesRequestBodyProductsCameraNextUpgrade
+    The pending firmware upgrade if it exists
+    """
+    
+    time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('time') }})
+    to_version: Optional[UpdateNetworkFirmwareUpgradesRequestBodyProductsCameraNextUpgradeToVersion] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('toVersion') }})
     
 
 @dataclass_json
 @dataclass
 class UpdateNetworkFirmwareUpgradesRequestBodyProductsCamera:
-    next_upgrade: Optional[UpdateNetworkFirmwareUpgradesRequestBodyProductsCameraNextUpgrade] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'nextUpgrade' }})
+    r"""UpdateNetworkFirmwareUpgradesRequestBodyProductsCamera
+    The network device to be updated
+    """
+    
+    next_upgrade: Optional[UpdateNetworkFirmwareUpgradesRequestBodyProductsCameraNextUpgrade] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('nextUpgrade') }})
     
 
 @dataclass_json
 @dataclass
 class UpdateNetworkFirmwareUpgradesRequestBodyProductsCellularGatewayNextUpgradeToVersion:
-    id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
+    r"""UpdateNetworkFirmwareUpgradesRequestBodyProductsCellularGatewayNextUpgradeToVersion
+    The version to be updated to
+    """
+    
+    id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('id') }})
     
 
 @dataclass_json
 @dataclass
 class UpdateNetworkFirmwareUpgradesRequestBodyProductsCellularGatewayNextUpgrade:
-    time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'time' }})
-    to_version: Optional[UpdateNetworkFirmwareUpgradesRequestBodyProductsCellularGatewayNextUpgradeToVersion] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'toVersion' }})
+    r"""UpdateNetworkFirmwareUpgradesRequestBodyProductsCellularGatewayNextUpgrade
+    The pending firmware upgrade if it exists
+    """
+    
+    time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('time') }})
+    to_version: Optional[UpdateNetworkFirmwareUpgradesRequestBodyProductsCellularGatewayNextUpgradeToVersion] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('toVersion') }})
     
 
 @dataclass_json
 @dataclass
 class UpdateNetworkFirmwareUpgradesRequestBodyProductsCellularGateway:
-    next_upgrade: Optional[UpdateNetworkFirmwareUpgradesRequestBodyProductsCellularGatewayNextUpgrade] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'nextUpgrade' }})
+    r"""UpdateNetworkFirmwareUpgradesRequestBodyProductsCellularGateway
+    The network device to be updated
+    """
+    
+    next_upgrade: Optional[UpdateNetworkFirmwareUpgradesRequestBodyProductsCellularGatewayNextUpgrade] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('nextUpgrade') }})
     
 
 @dataclass_json
 @dataclass
 class UpdateNetworkFirmwareUpgradesRequestBodyProductsEnvironmentalNextUpgradeToVersion:
-    id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
+    r"""UpdateNetworkFirmwareUpgradesRequestBodyProductsEnvironmentalNextUpgradeToVersion
+    The version to be updated to
+    """
+    
+    id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('id') }})
     
 
 @dataclass_json
 @dataclass
 class UpdateNetworkFirmwareUpgradesRequestBodyProductsEnvironmentalNextUpgrade:
-    time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'time' }})
-    to_version: Optional[UpdateNetworkFirmwareUpgradesRequestBodyProductsEnvironmentalNextUpgradeToVersion] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'toVersion' }})
+    r"""UpdateNetworkFirmwareUpgradesRequestBodyProductsEnvironmentalNextUpgrade
+    The pending firmware upgrade if it exists
+    """
+    
+    time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('time') }})
+    to_version: Optional[UpdateNetworkFirmwareUpgradesRequestBodyProductsEnvironmentalNextUpgradeToVersion] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('toVersion') }})
     
 
 @dataclass_json
 @dataclass
 class UpdateNetworkFirmwareUpgradesRequestBodyProductsEnvironmental:
-    next_upgrade: Optional[UpdateNetworkFirmwareUpgradesRequestBodyProductsEnvironmentalNextUpgrade] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'nextUpgrade' }})
+    r"""UpdateNetworkFirmwareUpgradesRequestBodyProductsEnvironmental
+    The network device to be updated
+    """
+    
+    next_upgrade: Optional[UpdateNetworkFirmwareUpgradesRequestBodyProductsEnvironmentalNextUpgrade] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('nextUpgrade') }})
     
 
 @dataclass_json
 @dataclass
 class UpdateNetworkFirmwareUpgradesRequestBodyProductsSensorNextUpgradeToVersion:
-    id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
+    r"""UpdateNetworkFirmwareUpgradesRequestBodyProductsSensorNextUpgradeToVersion
+    The version to be updated to
+    """
+    
+    id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('id') }})
     
 
 @dataclass_json
 @dataclass
 class UpdateNetworkFirmwareUpgradesRequestBodyProductsSensorNextUpgrade:
-    time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'time' }})
-    to_version: Optional[UpdateNetworkFirmwareUpgradesRequestBodyProductsSensorNextUpgradeToVersion] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'toVersion' }})
+    r"""UpdateNetworkFirmwareUpgradesRequestBodyProductsSensorNextUpgrade
+    The pending firmware upgrade if it exists
+    """
+    
+    time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('time') }})
+    to_version: Optional[UpdateNetworkFirmwareUpgradesRequestBodyProductsSensorNextUpgradeToVersion] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('toVersion') }})
     
 
 @dataclass_json
 @dataclass
 class UpdateNetworkFirmwareUpgradesRequestBodyProductsSensor:
-    next_upgrade: Optional[UpdateNetworkFirmwareUpgradesRequestBodyProductsSensorNextUpgrade] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'nextUpgrade' }})
+    r"""UpdateNetworkFirmwareUpgradesRequestBodyProductsSensor
+    The network device to be updated
+    """
+    
+    next_upgrade: Optional[UpdateNetworkFirmwareUpgradesRequestBodyProductsSensorNextUpgrade] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('nextUpgrade') }})
     
 
 @dataclass_json
 @dataclass
 class UpdateNetworkFirmwareUpgradesRequestBodyProductsSwitchNextUpgradeToVersion:
-    id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
+    r"""UpdateNetworkFirmwareUpgradesRequestBodyProductsSwitchNextUpgradeToVersion
+    The version to be updated to
+    """
+    
+    id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('id') }})
     
 
 @dataclass_json
 @dataclass
 class UpdateNetworkFirmwareUpgradesRequestBodyProductsSwitchNextUpgrade:
-    time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'time' }})
-    to_version: Optional[UpdateNetworkFirmwareUpgradesRequestBodyProductsSwitchNextUpgradeToVersion] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'toVersion' }})
+    r"""UpdateNetworkFirmwareUpgradesRequestBodyProductsSwitchNextUpgrade
+    The pending firmware upgrade if it exists
+    """
+    
+    time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('time') }})
+    to_version: Optional[UpdateNetworkFirmwareUpgradesRequestBodyProductsSwitchNextUpgradeToVersion] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('toVersion') }})
     
 
 @dataclass_json
 @dataclass
 class UpdateNetworkFirmwareUpgradesRequestBodyProductsSwitch:
-    next_upgrade: Optional[UpdateNetworkFirmwareUpgradesRequestBodyProductsSwitchNextUpgrade] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'nextUpgrade' }})
-    participate_in_next_beta_release: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'participateInNextBetaRelease' }})
+    r"""UpdateNetworkFirmwareUpgradesRequestBodyProductsSwitch
+    The network device to be updated
+    """
+    
+    next_upgrade: Optional[UpdateNetworkFirmwareUpgradesRequestBodyProductsSwitchNextUpgrade] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('nextUpgrade') }})
+    participate_in_next_beta_release: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('participateInNextBetaRelease') }})
     
 
 @dataclass_json
 @dataclass
 class UpdateNetworkFirmwareUpgradesRequestBodyProductsVmxHostNextUpgradeToVersion:
-    id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
+    r"""UpdateNetworkFirmwareUpgradesRequestBodyProductsVmxHostNextUpgradeToVersion
+    The version to be updated to
+    """
+    
+    id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('id') }})
     
 
 @dataclass_json
 @dataclass
 class UpdateNetworkFirmwareUpgradesRequestBodyProductsVmxHostNextUpgrade:
-    time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'time' }})
-    to_version: Optional[UpdateNetworkFirmwareUpgradesRequestBodyProductsVmxHostNextUpgradeToVersion] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'toVersion' }})
+    r"""UpdateNetworkFirmwareUpgradesRequestBodyProductsVmxHostNextUpgrade
+    The pending firmware upgrade if it exists
+    """
+    
+    time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('time') }})
+    to_version: Optional[UpdateNetworkFirmwareUpgradesRequestBodyProductsVmxHostNextUpgradeToVersion] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('toVersion') }})
     
 
 @dataclass_json
 @dataclass
 class UpdateNetworkFirmwareUpgradesRequestBodyProductsVmxHost:
-    next_upgrade: Optional[UpdateNetworkFirmwareUpgradesRequestBodyProductsVmxHostNextUpgrade] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'nextUpgrade' }})
+    r"""UpdateNetworkFirmwareUpgradesRequestBodyProductsVmxHost
+    The network device to be updated
+    """
+    
+    next_upgrade: Optional[UpdateNetworkFirmwareUpgradesRequestBodyProductsVmxHostNextUpgrade] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('nextUpgrade') }})
     
 
 @dataclass_json
 @dataclass
 class UpdateNetworkFirmwareUpgradesRequestBodyProductsWirelessNextUpgradeToVersion:
-    id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
+    r"""UpdateNetworkFirmwareUpgradesRequestBodyProductsWirelessNextUpgradeToVersion
+    The version to be updated to
+    """
+    
+    id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('id') }})
     
 
 @dataclass_json
 @dataclass
 class UpdateNetworkFirmwareUpgradesRequestBodyProductsWirelessNextUpgrade:
-    time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'time' }})
-    to_version: Optional[UpdateNetworkFirmwareUpgradesRequestBodyProductsWirelessNextUpgradeToVersion] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'toVersion' }})
+    r"""UpdateNetworkFirmwareUpgradesRequestBodyProductsWirelessNextUpgrade
+    The pending firmware upgrade if it exists
+    """
+    
+    time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('time') }})
+    to_version: Optional[UpdateNetworkFirmwareUpgradesRequestBodyProductsWirelessNextUpgradeToVersion] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('toVersion') }})
     
 
 @dataclass_json
 @dataclass
 class UpdateNetworkFirmwareUpgradesRequestBodyProductsWireless:
-    next_upgrade: Optional[UpdateNetworkFirmwareUpgradesRequestBodyProductsWirelessNextUpgrade] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'nextUpgrade' }})
+    r"""UpdateNetworkFirmwareUpgradesRequestBodyProductsWireless
+    The network device to be updated
+    """
+    
+    next_upgrade: Optional[UpdateNetworkFirmwareUpgradesRequestBodyProductsWirelessNextUpgrade] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('nextUpgrade') }})
     
 
 @dataclass_json
 @dataclass
 class UpdateNetworkFirmwareUpgradesRequestBodyProducts:
-    appliance: Optional[UpdateNetworkFirmwareUpgradesRequestBodyProductsAppliance] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'appliance' }})
-    camera: Optional[UpdateNetworkFirmwareUpgradesRequestBodyProductsCamera] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'camera' }})
-    cellular_gateway: Optional[UpdateNetworkFirmwareUpgradesRequestBodyProductsCellularGateway] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'cellularGateway' }})
-    environmental: Optional[UpdateNetworkFirmwareUpgradesRequestBodyProductsEnvironmental] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'environmental' }})
-    sensor: Optional[UpdateNetworkFirmwareUpgradesRequestBodyProductsSensor] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'sensor' }})
-    switch: Optional[UpdateNetworkFirmwareUpgradesRequestBodyProductsSwitch] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'switch' }})
-    vmx_host: Optional[UpdateNetworkFirmwareUpgradesRequestBodyProductsVmxHost] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'vmxHost' }})
-    wireless: Optional[UpdateNetworkFirmwareUpgradesRequestBodyProductsWireless] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'wireless' }})
+    r"""UpdateNetworkFirmwareUpgradesRequestBodyProducts
+    Contains information about the network to update
+    """
+    
+    appliance: Optional[UpdateNetworkFirmwareUpgradesRequestBodyProductsAppliance] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('appliance') }})
+    camera: Optional[UpdateNetworkFirmwareUpgradesRequestBodyProductsCamera] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('camera') }})
+    cellular_gateway: Optional[UpdateNetworkFirmwareUpgradesRequestBodyProductsCellularGateway] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('cellularGateway') }})
+    environmental: Optional[UpdateNetworkFirmwareUpgradesRequestBodyProductsEnvironmental] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('environmental') }})
+    sensor: Optional[UpdateNetworkFirmwareUpgradesRequestBodyProductsSensor] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('sensor') }})
+    switch: Optional[UpdateNetworkFirmwareUpgradesRequestBodyProductsSwitch] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('switch') }})
+    vmx_host: Optional[UpdateNetworkFirmwareUpgradesRequestBodyProductsVmxHost] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('vmxHost') }})
+    wireless: Optional[UpdateNetworkFirmwareUpgradesRequestBodyProductsWireless] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('wireless') }})
     
 class UpdateNetworkFirmwareUpgradesRequestBodyUpgradeWindowDayOfWeekEnum(str, Enum):
     SUN = "sun"
@@ -219,27 +324,31 @@ class UpdateNetworkFirmwareUpgradesRequestBodyUpgradeWindowHourOfDayEnum(str, En
 @dataclass_json
 @dataclass
 class UpdateNetworkFirmwareUpgradesRequestBodyUpgradeWindow:
-    day_of_week: Optional[UpdateNetworkFirmwareUpgradesRequestBodyUpgradeWindowDayOfWeekEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'dayOfWeek' }})
-    hour_of_day: Optional[UpdateNetworkFirmwareUpgradesRequestBodyUpgradeWindowHourOfDayEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'hourOfDay' }})
+    r"""UpdateNetworkFirmwareUpgradesRequestBodyUpgradeWindow
+    Upgrade window for devices in network
+    """
+    
+    day_of_week: Optional[UpdateNetworkFirmwareUpgradesRequestBodyUpgradeWindowDayOfWeekEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('dayOfWeek') }})
+    hour_of_day: Optional[UpdateNetworkFirmwareUpgradesRequestBodyUpgradeWindowHourOfDayEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('hourOfDay') }})
     
 
 @dataclass_json
 @dataclass
 class UpdateNetworkFirmwareUpgradesRequestBody:
-    products: Optional[UpdateNetworkFirmwareUpgradesRequestBodyProducts] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'products' }})
-    timezone: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'timezone' }})
-    upgrade_window: Optional[UpdateNetworkFirmwareUpgradesRequestBodyUpgradeWindow] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'upgradeWindow' }})
+    products: Optional[UpdateNetworkFirmwareUpgradesRequestBodyProducts] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('products') }})
+    timezone: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('timezone') }})
+    upgrade_window: Optional[UpdateNetworkFirmwareUpgradesRequestBodyUpgradeWindow] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('upgradeWindow') }})
     
 
 @dataclass
 class UpdateNetworkFirmwareUpgradesRequest:
-    path_params: UpdateNetworkFirmwareUpgradesPathParams = field(default=None)
+    path_params: UpdateNetworkFirmwareUpgradesPathParams = field()
     request: Optional[UpdateNetworkFirmwareUpgradesRequestBody] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class UpdateNetworkFirmwareUpgradesResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     update_network_firmware_upgrades_200_application_json_object: Optional[dict[str, Any]] = field(default=None)
     

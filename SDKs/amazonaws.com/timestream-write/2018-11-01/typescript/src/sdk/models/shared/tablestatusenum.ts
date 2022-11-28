@@ -1,6 +1,7 @@
 
 
+
 export enum TableStatusEnum {
-    Active = "ACTIVE"
-,    Deleting = "DELETING"
+    Active = "ACTIVE",
+    Deleting = "DELETING"
 }

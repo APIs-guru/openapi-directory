@@ -1,5 +1,7 @@
 package shared
 
+// UserRole
+// Contains properties of auser role, which is used to manage user access.
 type UserRole struct {
 	AccountID        *string              `json:"accountId,omitempty"`
 	DefaultUserRole  *bool                `json:"defaultUserRole,omitempty"`

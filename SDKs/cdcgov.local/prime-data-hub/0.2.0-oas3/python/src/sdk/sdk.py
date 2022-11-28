@@ -1,8 +1,11 @@
-import warnings
+
+
 import requests
 from typing import List,Optional
-from sdk.models import operations, shared
+from sdk.models import shared, operations
 from . import utils
+
+
 
 
 SERVERS = [
@@ -11,26 +14,48 @@ SERVERS = [
 
 
 class SDK:
-    client = requests.Session()
-    server_url = SERVERS[0]
+    
+
+    _client: requests.Session
+    _security_client: requests.Session
+    
+    _server_url: str = SERVERS[0]
+    _language: str = "python"
+    _sdk_version: str = "0.0.1"
+    _gen_version: str = "internal"
+
+    def __init__(self) -> None:
+        self._client = requests.Session()
+        self._security_client = requests.Session()
+        
+
 
     def config_server_url(self, server_url: str, params: dict[str, str]):
-        if not params is None:
-            self.server_url = utils.replace_parameters(server_url, params)
+        if params is not None:
+            self._server_url = utils.replace_parameters(server_url, params)
         else:
-            self.server_url = server_url
-            
+            self._server_url = server_url
+
+        
     
 
+    def config_client(self, client: requests.Session):
+        self._client = client
+        
+    
+    
     
     def delete_settings_organizations_organization_name_(self, request: operations.DeleteSettingsOrganizationsOrganizationNameRequest) -> operations.DeleteSettingsOrganizationsOrganizationNameResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Delete an organization (and the associated receivers and senders)
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/settings/organizations/{organizationName}", request.path_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
@@ -49,13 +74,16 @@ class SDK:
 
     
     def delete_settings_organizations_organization_name_receivers_receiver_name_(self, request: operations.DeleteSettingsOrganizationsOrganizationNameReceiversReceiverNameRequest) -> operations.DeleteSettingsOrganizationsOrganizationNameReceiversReceiverNameResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Delete a receiver
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/settings/organizations/{organizationName}/receivers/{receiverName}", request.path_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
@@ -74,13 +102,16 @@ class SDK:
 
     
     def delete_settings_organizations_organization_name_senders_sender_name_(self, request: operations.DeleteSettingsOrganizationsOrganizationNameSendersSenderNameRequest) -> operations.DeleteSettingsOrganizationsOrganizationNameSendersSenderNameResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Delete a sender
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/settings/organizations/{organizationName}/senders/{senderName}", request.path_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
@@ -99,13 +130,16 @@ class SDK:
 
     
     def get_settings_organizations(self, request: operations.GetSettingsOrganizationsRequest) -> operations.GetSettingsOrganizationsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""The settings for all organizations of the system. Must have admin access.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/settings/organizations"
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -122,13 +156,16 @@ class SDK:
 
     
     def get_settings_organizations_organization_name_(self, request: operations.GetSettingsOrganizationsOrganizationNameRequest) -> operations.GetSettingsOrganizationsOrganizationNameResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""A single organization settings
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/settings/organizations/{organizationName}", request.path_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -143,13 +180,16 @@ class SDK:
 
     
     def get_settings_organizations_organization_name_receivers(self, request: operations.GetSettingsOrganizationsOrganizationNameReceiversRequest) -> operations.GetSettingsOrganizationsOrganizationNameReceiversResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""A list of receivers and their current settings
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/settings/organizations/{organizationName}/receivers", request.path_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -168,13 +208,16 @@ class SDK:
 
     
     def get_settings_organizations_organization_name_receivers_receiver_name_(self, request: operations.GetSettingsOrganizationsOrganizationNameReceiversReceiverNameRequest) -> operations.GetSettingsOrganizationsOrganizationNameReceiversReceiverNameResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""The settings of a single of receiver
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/settings/organizations/{organizationName}/receivers/{receiverName}", request.path_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -193,13 +236,16 @@ class SDK:
 
     
     def get_settings_organizations_organization_name_senders(self, request: operations.GetSettingsOrganizationsOrganizationNameSendersRequest) -> operations.GetSettingsOrganizationsOrganizationNameSendersResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""A list of senders
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/settings/organizations/{organizationName}/senders", request.path_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -218,13 +264,16 @@ class SDK:
 
     
     def get_settings_organizations_organization_name_senders_sender_name_(self, request: operations.GetSettingsOrganizationsOrganizationNameSendersSenderNameRequest) -> operations.GetSettingsOrganizationsOrganizationNameSendersSenderNameResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""The settings of a single of sender
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/settings/organizations/{organizationName}/senders/{senderName}", request.path_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -243,13 +292,16 @@ class SDK:
 
     
     def head_settings_organizations(self, request: operations.HeadSettingsOrganizationsRequest) -> operations.HeadSettingsOrganizationsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrived the last modified for all settings of the system. Must have admin access.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/settings/organizations"
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("HEAD", url)
         content_type = r.headers.get("Content-Type")
 
@@ -263,24 +315,23 @@ class SDK:
 
     
     def post_reports(self, request: operations.PostReportsRequest) -> operations.PostReportsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Post a report to the data hub
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/reports"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -305,19 +356,20 @@ class SDK:
 
     
     def put_settings_organizations_organization_name_(self, request: operations.PutSettingsOrganizationsOrganizationNameRequest) -> operations.PutSettingsOrganizationsOrganizationNameResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Create or update the direct settings associated with an organization
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/settings/organizations/{organizationName}", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -340,19 +392,20 @@ class SDK:
 
     
     def put_settings_organizations_organization_name_receivers_receiver_name_(self, request: operations.PutSettingsOrganizationsOrganizationNameReceiversReceiverNameRequest) -> operations.PutSettingsOrganizationsOrganizationNameReceiversReceiverNameResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Update a single reciever
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/settings/organizations/{organizationName}/receivers/{receiverName}", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -375,19 +428,20 @@ class SDK:
 
     
     def put_settings_organizations_organization_name_senders_sender_name_(self, request: operations.PutSettingsOrganizationsOrganizationNameSendersSenderNameRequest) -> operations.PutSettingsOrganizationsOrganizationNameSendersSenderNameResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Update a single sender
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/settings/organizations/{organizationName}/senders/{senderName}", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 

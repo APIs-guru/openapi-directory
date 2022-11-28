@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ProjectStatusEnum } from "./projectstatusenum";
+
 
 
 // ProjectSummary
@@ -7,21 +8,21 @@ import { ProjectStatusEnum } from "./projectstatusenum";
  * Information about a project.
 **/
 export class ProjectSummary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CreationTime" })
+  @SpeakeasyMetadata({ data: "json, name=CreationTime" })
   creationTime: Date;
 
-  @Metadata({ data: "json, name=ProjectArn" })
+  @SpeakeasyMetadata({ data: "json, name=ProjectArn" })
   projectArn: string;
 
-  @Metadata({ data: "json, name=ProjectDescription" })
+  @SpeakeasyMetadata({ data: "json, name=ProjectDescription" })
   projectDescription?: string;
 
-  @Metadata({ data: "json, name=ProjectId" })
+  @SpeakeasyMetadata({ data: "json, name=ProjectId" })
   projectId: string;
 
-  @Metadata({ data: "json, name=ProjectName" })
+  @SpeakeasyMetadata({ data: "json, name=ProjectName" })
   projectName: string;
 
-  @Metadata({ data: "json, name=ProjectStatus" })
+  @SpeakeasyMetadata({ data: "json, name=ProjectStatus" })
   projectStatus: ProjectStatusEnum;
 }

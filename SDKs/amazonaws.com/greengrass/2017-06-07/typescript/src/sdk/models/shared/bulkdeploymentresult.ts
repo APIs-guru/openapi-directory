@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DeploymentTypeEnum } from "./deploymenttypeenum";
 import { ErrorDetail } from "./errordetail";
+
 
 
 // BulkDeploymentResult
@@ -9,27 +9,27 @@ import { ErrorDetail } from "./errordetail";
  * Information about an individual group deployment in a bulk deployment operation.
 **/
 export class BulkDeploymentResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CreatedAt" })
+  @SpeakeasyMetadata({ data: "json, name=CreatedAt" })
   createdAt?: string;
 
-  @Metadata({ data: "json, name=DeploymentArn" })
+  @SpeakeasyMetadata({ data: "json, name=DeploymentArn" })
   deploymentArn?: string;
 
-  @Metadata({ data: "json, name=DeploymentId" })
+  @SpeakeasyMetadata({ data: "json, name=DeploymentId" })
   deploymentId?: string;
 
-  @Metadata({ data: "json, name=DeploymentStatus" })
+  @SpeakeasyMetadata({ data: "json, name=DeploymentStatus" })
   deploymentStatus?: string;
 
-  @Metadata({ data: "json, name=DeploymentType" })
+  @SpeakeasyMetadata({ data: "json, name=DeploymentType" })
   deploymentType?: DeploymentTypeEnum;
 
-  @Metadata({ data: "json, name=ErrorDetails", elemType: shared.ErrorDetail })
+  @SpeakeasyMetadata({ data: "json, name=ErrorDetails", elemType: ErrorDetail })
   errorDetails?: ErrorDetail[];
 
-  @Metadata({ data: "json, name=ErrorMessage" })
+  @SpeakeasyMetadata({ data: "json, name=ErrorMessage" })
   errorMessage?: string;
 
-  @Metadata({ data: "json, name=GroupArn" })
+  @SpeakeasyMetadata({ data: "json, name=GroupArn" })
   groupArn?: string;
 }

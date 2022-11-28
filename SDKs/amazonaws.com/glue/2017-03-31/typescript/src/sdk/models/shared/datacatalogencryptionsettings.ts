@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ConnectionPasswordEncryption } from "./connectionpasswordencryption";
 import { EncryptionAtRest } from "./encryptionatrest";
+
 
 
 // DataCatalogEncryptionSettings
@@ -8,9 +9,9 @@ import { EncryptionAtRest } from "./encryptionatrest";
  * Contains configuration information for maintaining Data Catalog security.
 **/
 export class DataCatalogEncryptionSettings extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ConnectionPasswordEncryption" })
+  @SpeakeasyMetadata({ data: "json, name=ConnectionPasswordEncryption" })
   connectionPasswordEncryption?: ConnectionPasswordEncryption;
 
-  @Metadata({ data: "json, name=EncryptionAtRest" })
+  @SpeakeasyMetadata({ data: "json, name=EncryptionAtRest" })
   encryptionAtRest?: EncryptionAtRest;
 }

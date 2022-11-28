@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudDialogflowV2beta1OutputAudioConfig } from "./googleclouddialogflowv2beta1outputaudioconfig";
 import { GoogleCloudDialogflowV2beta1QueryInput } from "./googleclouddialogflowv2beta1queryinput";
 import { GoogleCloudDialogflowV2beta1QueryParameters } from "./googleclouddialogflowv2beta1queryparameters";
+
 
 
 // GoogleCloudDialogflowV2beta1DetectIntentRequest
@@ -9,18 +10,18 @@ import { GoogleCloudDialogflowV2beta1QueryParameters } from "./googleclouddialog
  * The request to detect user's intent.
 **/
 export class GoogleCloudDialogflowV2beta1DetectIntentRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=inputAudio" })
+  @SpeakeasyMetadata({ data: "json, name=inputAudio" })
   inputAudio?: string;
 
-  @Metadata({ data: "json, name=outputAudioConfig" })
+  @SpeakeasyMetadata({ data: "json, name=outputAudioConfig" })
   outputAudioConfig?: GoogleCloudDialogflowV2beta1OutputAudioConfig;
 
-  @Metadata({ data: "json, name=outputAudioConfigMask" })
+  @SpeakeasyMetadata({ data: "json, name=outputAudioConfigMask" })
   outputAudioConfigMask?: string;
 
-  @Metadata({ data: "json, name=queryInput" })
+  @SpeakeasyMetadata({ data: "json, name=queryInput" })
   queryInput?: GoogleCloudDialogflowV2beta1QueryInput;
 
-  @Metadata({ data: "json, name=queryParams" })
+  @SpeakeasyMetadata({ data: "json, name=queryParams" })
   queryParams?: GoogleCloudDialogflowV2beta1QueryParameters;
 }

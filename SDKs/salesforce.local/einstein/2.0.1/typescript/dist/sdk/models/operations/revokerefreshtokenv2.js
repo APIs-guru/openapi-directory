@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var RevokeRefreshTokenV2PathParams = /** @class */ (function (_super) {
     __extends(RevokeRefreshTokenV2PathParams, _super);
@@ -30,7 +30,7 @@ var RevokeRefreshTokenV2PathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=token" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=token" }),
         __metadata("design:type", String)
     ], RevokeRefreshTokenV2PathParams.prototype, "token", void 0);
     return RevokeRefreshTokenV2PathParams;
@@ -42,7 +42,7 @@ var RevokeRefreshTokenV2Security = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=http;subtype=bearer" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" }),
         __metadata("design:type", shared.SchemeBearerToken)
     ], RevokeRefreshTokenV2Security.prototype, "bearerToken", void 0);
     return RevokeRefreshTokenV2Security;
@@ -54,11 +54,11 @@ var RevokeRefreshTokenV2Request = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", RevokeRefreshTokenV2PathParams)
     ], RevokeRefreshTokenV2Request.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", RevokeRefreshTokenV2Security)
     ], RevokeRefreshTokenV2Request.prototype, "security", void 0);
     return RevokeRefreshTokenV2Request;
@@ -70,11 +70,11 @@ var RevokeRefreshTokenV2Response = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], RevokeRefreshTokenV2Response.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], RevokeRefreshTokenV2Response.prototype, "statusCode", void 0);
     return RevokeRefreshTokenV2Response;

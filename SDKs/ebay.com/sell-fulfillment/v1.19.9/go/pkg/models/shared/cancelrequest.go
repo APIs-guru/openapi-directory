@@ -1,5 +1,7 @@
 package shared
 
+// CancelRequest
+// This type contains information about a buyer request to cancel an order.
 type CancelRequest struct {
 	CancelCompletedDate *string `json:"cancelCompletedDate,omitempty"`
 	CancelInitiator     *string `json:"cancelInitiator,omitempty"`

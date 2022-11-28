@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetGetAssociatedIpv6PoolCidrsActionEnum(str, Enum):
     GET_ASSOCIATED_IPV6_POOL_CIDRS = "GetAssociatedIpv6PoolCidrs"
@@ -10,12 +14,12 @@ class GetGetAssociatedIpv6PoolCidrsVersionEnum(str, Enum):
 
 @dataclass
 class GetGetAssociatedIpv6PoolCidrsQueryParams:
-    action: GetGetAssociatedIpv6PoolCidrsActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetGetAssociatedIpv6PoolCidrsActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    pool_id: str = field(metadata={'query_param': { 'field_name': 'PoolId', 'style': 'form', 'explode': True }})
+    version: GetGetAssociatedIpv6PoolCidrsVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     dry_run: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'DryRun', 'style': 'form', 'explode': True }})
     max_results: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'MaxResults', 'style': 'form', 'explode': True }})
     next_token: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'NextToken', 'style': 'form', 'explode': True }})
-    pool_id: str = field(default=None, metadata={'query_param': { 'field_name': 'PoolId', 'style': 'form', 'explode': True }})
-    version: GetGetAssociatedIpv6PoolCidrsVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -31,13 +35,13 @@ class GetGetAssociatedIpv6PoolCidrsHeaders:
 
 @dataclass
 class GetGetAssociatedIpv6PoolCidrsRequest:
-    query_params: GetGetAssociatedIpv6PoolCidrsQueryParams = field(default=None)
-    headers: GetGetAssociatedIpv6PoolCidrsHeaders = field(default=None)
+    headers: GetGetAssociatedIpv6PoolCidrsHeaders = field()
+    query_params: GetGetAssociatedIpv6PoolCidrsQueryParams = field()
     
 
 @dataclass
 class GetGetAssociatedIpv6PoolCidrsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

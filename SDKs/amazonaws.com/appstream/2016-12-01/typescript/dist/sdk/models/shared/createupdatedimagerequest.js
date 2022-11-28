@@ -22,34 +22,34 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var CreateUpdatedImageRequest = /** @class */ (function (_super) {
     __extends(CreateUpdatedImageRequest, _super);
     function CreateUpdatedImageRequest() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=dryRun" }),
+        SpeakeasyMetadata({ data: "json, name=dryRun" }),
         __metadata("design:type", Boolean)
     ], CreateUpdatedImageRequest.prototype, "dryRun", void 0);
     __decorate([
-        Metadata({ data: "json, name=existingImageName" }),
+        SpeakeasyMetadata({ data: "json, name=existingImageName" }),
         __metadata("design:type", String)
     ], CreateUpdatedImageRequest.prototype, "existingImageName", void 0);
     __decorate([
-        Metadata({ data: "json, name=newImageDescription" }),
+        SpeakeasyMetadata({ data: "json, name=newImageDescription" }),
         __metadata("design:type", String)
     ], CreateUpdatedImageRequest.prototype, "newImageDescription", void 0);
     __decorate([
-        Metadata({ data: "json, name=newImageDisplayName" }),
+        SpeakeasyMetadata({ data: "json, name=newImageDisplayName" }),
         __metadata("design:type", String)
     ], CreateUpdatedImageRequest.prototype, "newImageDisplayName", void 0);
     __decorate([
-        Metadata({ data: "json, name=newImageName" }),
+        SpeakeasyMetadata({ data: "json, name=newImageName" }),
         __metadata("design:type", String)
     ], CreateUpdatedImageRequest.prototype, "newImageName", void 0);
     __decorate([
-        Metadata({ data: "json, name=newImageTags" }),
+        SpeakeasyMetadata({ data: "json, name=newImageTags" }),
         __metadata("design:type", Map)
     ], CreateUpdatedImageRequest.prototype, "newImageTags", void 0);
     return CreateUpdatedImageRequest;

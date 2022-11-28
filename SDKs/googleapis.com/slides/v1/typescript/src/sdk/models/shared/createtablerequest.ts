@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PageElementProperties } from "./pageelementproperties";
+
 
 
 // CreateTableRequest
@@ -7,15 +8,15 @@ import { PageElementProperties } from "./pageelementproperties";
  * Creates a new table.
 **/
 export class CreateTableRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=columns" })
+  @SpeakeasyMetadata({ data: "json, name=columns" })
   columns?: number;
 
-  @Metadata({ data: "json, name=elementProperties" })
+  @SpeakeasyMetadata({ data: "json, name=elementProperties" })
   elementProperties?: PageElementProperties;
 
-  @Metadata({ data: "json, name=objectId" })
+  @SpeakeasyMetadata({ data: "json, name=objectId" })
   objectId?: string;
 
-  @Metadata({ data: "json, name=rows" })
+  @SpeakeasyMetadata({ data: "json, name=rows" })
   rows?: number;
 }

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { UserInvitation } from "./userinvitation";
 /**
  * Response message for UserInvitation listing request.

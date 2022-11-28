@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 /**
  * Specifies optional parameters for `/institutions/get_by_id`. If provided, must not be `null`.
 **/

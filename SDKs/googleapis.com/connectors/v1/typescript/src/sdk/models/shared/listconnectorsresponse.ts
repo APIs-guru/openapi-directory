@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Connector } from "./connector";
+
 
 
 // ListConnectorsResponse
@@ -8,12 +8,12 @@ import { Connector } from "./connector";
  * Response message for Connectors.ListConnectors.
 **/
 export class ListConnectorsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=connectors", elemType: shared.Connector })
+  @SpeakeasyMetadata({ data: "json, name=connectors", elemType: Connector })
   connectors?: Connector[];
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 
-  @Metadata({ data: "json, name=unreachable" })
+  @SpeakeasyMetadata({ data: "json, name=unreachable" })
   unreachable?: string[];
 }

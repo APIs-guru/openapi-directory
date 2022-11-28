@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { StandingOrderDetails } from "./standingorderdetails";
+
 
 
 // AdditionalInformationStructured
@@ -9,6 +10,6 @@ import { StandingOrderDetails } from "./standingorderdetails";
  * 
 **/
 export class AdditionalInformationStructured extends SpeakeasyBase {
-  @Metadata({ data: "json, name=standingOrderDetails" })
+  @SpeakeasyMetadata({ data: "json, name=standingOrderDetails" })
   standingOrderDetails: StandingOrderDetails;
 }

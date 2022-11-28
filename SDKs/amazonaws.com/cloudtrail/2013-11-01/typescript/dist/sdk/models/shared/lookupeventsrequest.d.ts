@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { EventCategoryEnum } from "./eventcategoryenum";
 import { LookupAttribute } from "./lookupattribute";
 /**

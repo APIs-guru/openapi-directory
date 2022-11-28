@@ -1,14 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudDialogflowCxV3Intent } from "./googleclouddialogflowcxv3intent";
 
+
 export enum GoogleCloudDialogflowCxV3MatchMatchTypeEnum {
-    MatchTypeUnspecified = "MATCH_TYPE_UNSPECIFIED"
-,    Intent = "INTENT"
-,    DirectIntent = "DIRECT_INTENT"
-,    ParameterFilling = "PARAMETER_FILLING"
-,    NoMatch = "NO_MATCH"
-,    NoInput = "NO_INPUT"
-,    Event = "EVENT"
+    MatchTypeUnspecified = "MATCH_TYPE_UNSPECIFIED",
+    Intent = "INTENT",
+    DirectIntent = "DIRECT_INTENT",
+    ParameterFilling = "PARAMETER_FILLING",
+    NoMatch = "NO_MATCH",
+    NoInput = "NO_INPUT",
+    Event = "EVENT"
 }
 
 
@@ -17,21 +18,21 @@ export enum GoogleCloudDialogflowCxV3MatchMatchTypeEnum {
  * Represents one match result of MatchIntent.
 **/
 export class GoogleCloudDialogflowCxV3Match extends SpeakeasyBase {
-  @Metadata({ data: "json, name=confidence" })
+  @SpeakeasyMetadata({ data: "json, name=confidence" })
   confidence?: number;
 
-  @Metadata({ data: "json, name=event" })
+  @SpeakeasyMetadata({ data: "json, name=event" })
   event?: string;
 
-  @Metadata({ data: "json, name=intent" })
+  @SpeakeasyMetadata({ data: "json, name=intent" })
   intent?: GoogleCloudDialogflowCxV3Intent;
 
-  @Metadata({ data: "json, name=matchType" })
+  @SpeakeasyMetadata({ data: "json, name=matchType" })
   matchType?: GoogleCloudDialogflowCxV3MatchMatchTypeEnum;
 
-  @Metadata({ data: "json, name=parameters" })
+  @SpeakeasyMetadata({ data: "json, name=parameters" })
   parameters?: Map<string, any>;
 
-  @Metadata({ data: "json, name=resolvedInput" })
+  @SpeakeasyMetadata({ data: "json, name=resolvedInput" })
   resolvedInput?: string;
 }

@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class AssetDownloadHistoryResults extends SpeakeasyBase {
-  @Metadata({ data: "json, name=downloads" })
+  @SpeakeasyMetadata({ data: "json, name=downloads" })
   downloads?: any;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 }

@@ -1,69 +1,57 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
-export const UPDATEFIREWALLRULES_SERVERS = [
-	"https://api.linode.com/v4",
-];
 
+export const UpdateFirewallRulesServerList = [
+	"https://api.linode.com/v4",
+] as const;
 
 
 export class UpdateFirewallRulesPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=firewallId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=firewallId" })
   firewallId: number;
 }
 
 
-export class UpdateFirewallRulesSecurityOption1 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=bearer" })
-  personalAccessToken: shared.SchemePersonalAccessToken;
-}
-
-
-export class UpdateFirewallRulesSecurityOption2 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
-  oauth: shared.SchemeOauth;
-}
-
-
 export class UpdateFirewallRulesSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, option=true" })
-  option1?: UpdateFirewallRulesSecurityOption1;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" })
+  personalAccessToken?: shared.SchemePersonalAccessToken;
 
-  @Metadata({ data: "security, option=true" })
-  option2?: UpdateFirewallRulesSecurityOption2;
-}
-
-
-export class UpdateFirewallRulesRequest extends SpeakeasyBase {
-  @Metadata()
-  serverUrl?: string;
-
-  @Metadata()
-  pathParams: UpdateFirewallRulesPathParams;
-
-  @Metadata({ data: "request, media_type=application/json" })
-  request?: shared.Rules;
-
-  @Metadata()
-  security: UpdateFirewallRulesSecurity;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
+  oauth?: shared.SchemeOauth;
 }
 
 
 export class UpdateFirewallRulesDefaultApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=errors", elemType: shared.ErrorObject })
+  @SpeakeasyMetadata({ data: "json, name=errors", elemType: shared.ErrorObject })
   errors?: shared.ErrorObject[];
 }
 
 
+export class UpdateFirewallRulesRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  serverUrl?: string;
+
+  @SpeakeasyMetadata()
+  pathParams: UpdateFirewallRulesPathParams;
+
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request?: shared.Rules;
+
+  @SpeakeasyMetadata()
+  security: UpdateFirewallRulesSecurity;
+}
+
+
 export class UpdateFirewallRulesResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   rules?: shared.Rules;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   updateFirewallRulesDefaultApplicationJsonObject?: UpdateFirewallRulesDefaultApplicationJson;
 }

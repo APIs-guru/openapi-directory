@@ -1,14 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SyncActionEnum } from "./syncactionenum";
 
 
+
 export class SyncResourceResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=actionTaken" })
+  @SpeakeasyMetadata({ data: "json, name=actionTaken" })
   actionTaken?: SyncActionEnum;
 
-  @Metadata({ data: "json, name=applicationArn" })
+  @SpeakeasyMetadata({ data: "json, name=applicationArn" })
   applicationArn?: string;
 
-  @Metadata({ data: "json, name=resourceArn" })
+  @SpeakeasyMetadata({ data: "json, name=resourceArn" })
   resourceArn?: string;
 }

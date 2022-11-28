@@ -1,31 +1,32 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 
-
-export class PostPortfolioAnalysisSharpeRatioRequest extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/json" })
-  request: Map<string, any>;
-}
 
 
 export class PostPortfolioAnalysisSharpeRatio200ApplicationJsonPortfolios extends SpeakeasyBase {
-  @Metadata({ data: "json, name=portfolioSharpeRatio" })
+  @SpeakeasyMetadata({ data: "json, name=portfolioSharpeRatio" })
   portfolioSharpeRatio: number;
 }
 
 
 export class PostPortfolioAnalysisSharpeRatio200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=portfolios", elemType: operations.PostPortfolioAnalysisSharpeRatio200ApplicationJsonPortfolios })
+  @SpeakeasyMetadata({ data: "json, name=portfolios", elemType: PostPortfolioAnalysisSharpeRatio200ApplicationJsonPortfolios })
   portfolios: PostPortfolioAnalysisSharpeRatio200ApplicationJsonPortfolios[];
 }
 
 
+export class PostPortfolioAnalysisSharpeRatioRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request: Map<string, any>;
+}
+
+
 export class PostPortfolioAnalysisSharpeRatioResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   postPortfolioAnalysisSharpeRatio200ApplicationJsonObject?: PostPortfolioAnalysisSharpeRatio200ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

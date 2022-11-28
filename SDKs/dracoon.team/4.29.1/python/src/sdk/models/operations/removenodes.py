@@ -10,13 +10,13 @@ class RemoveNodesHeaders:
 
 @dataclass
 class RemoveNodesRequest:
-    headers: RemoveNodesHeaders = field(default=None)
-    request: shared.DeleteNodesRequest = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: RemoveNodesHeaders = field()
+    request: shared.DeleteNodesRequest = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class RemoveNodesResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error_response: Optional[shared.ErrorResponse] = field(default=None)
-    status_code: int = field(default=None)
     

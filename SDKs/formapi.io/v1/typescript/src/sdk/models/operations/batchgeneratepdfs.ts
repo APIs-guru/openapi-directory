@@ -1,148 +1,149 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class BatchGeneratePdfsSubmissionBatchDataSubmissionDataBatchRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=css" })
+  @SpeakeasyMetadata({ data: "json, name=css" })
   css?: string;
 
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data: Map<string, any>;
 
-  @Metadata({ data: "json, name=html" })
+  @SpeakeasyMetadata({ data: "json, name=html" })
   html?: string;
 
-  @Metadata({ data: "json, name=metadata" })
+  @SpeakeasyMetadata({ data: "json, name=metadata" })
   metadata?: Map<string, any>;
 
-  @Metadata({ data: "json, name=template_id" })
+  @SpeakeasyMetadata({ data: "json, name=template_id" })
   templateId: string;
 
-  @Metadata({ data: "json, name=test" })
+  @SpeakeasyMetadata({ data: "json, name=test" })
   test?: boolean;
 }
 
 
 export class BatchGeneratePdfsSubmissionBatchData extends SpeakeasyBase {
-  @Metadata({ data: "json, name=metadata" })
+  @SpeakeasyMetadata({ data: "json, name=metadata" })
   metadata?: Map<string, any>;
 
-  @Metadata({ data: "json, name=submissions", elemType: operations.BatchGeneratePdfsSubmissionBatchDataSubmissionDataBatchRequest })
+  @SpeakeasyMetadata({ data: "json, name=submissions", elemType: BatchGeneratePdfsSubmissionBatchDataSubmissionDataBatchRequest })
   submissions: BatchGeneratePdfsSubmissionBatchDataSubmissionDataBatchRequest[];
 
-  @Metadata({ data: "json, name=template_id" })
+  @SpeakeasyMetadata({ data: "json, name=template_id" })
   templateId?: string;
 
-  @Metadata({ data: "json, name=test" })
+  @SpeakeasyMetadata({ data: "json, name=test" })
   test?: boolean;
 }
 
 
 export class BatchGeneratePdfsSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=basic" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=basic" })
   apiTokenBasic: shared.SchemeApiTokenBasic;
 }
 
-
-export class BatchGeneratePdfsRequest extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/json" })
-  request: BatchGeneratePdfsSubmissionBatchData;
-
-  @Metadata()
-  security: BatchGeneratePdfsSecurity;
-}
-
 export enum BatchGeneratePdfsCreateSubmissionBatchResponseStatusEnum {
-    Success = "success"
-,    Error = "error"
+    Success = "success",
+    Error = "error"
 }
 
 export enum BatchGeneratePdfsCreateSubmissionBatchResponseSubmissionBatchStateEnum {
-    Pending = "pending"
-,    Processed = "processed"
-,    Error = "error"
+    Pending = "pending",
+    Processed = "processed",
+    Error = "error"
 }
 
 
 export class BatchGeneratePdfsCreateSubmissionBatchResponseSubmissionBatch extends SpeakeasyBase {
-  @Metadata({ data: "json, name=completion_percentage" })
+  @SpeakeasyMetadata({ data: "json, name=completion_percentage" })
   completionPercentage: number;
 
-  @Metadata({ data: "json, name=error_count" })
+  @SpeakeasyMetadata({ data: "json, name=error_count" })
   errorCount: number;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: string;
 
-  @Metadata({ data: "json, name=metadata" })
+  @SpeakeasyMetadata({ data: "json, name=metadata" })
   metadata: Map<string, any>;
 
-  @Metadata({ data: "json, name=pending_count" })
+  @SpeakeasyMetadata({ data: "json, name=pending_count" })
   pendingCount: number;
 
-  @Metadata({ data: "json, name=processed_at" })
+  @SpeakeasyMetadata({ data: "json, name=processed_at" })
   processedAt: string;
 
-  @Metadata({ data: "json, name=state" })
+  @SpeakeasyMetadata({ data: "json, name=state" })
   state: BatchGeneratePdfsCreateSubmissionBatchResponseSubmissionBatchStateEnum;
 
-  @Metadata({ data: "json, name=submissions", elemType: shared.Submission })
+  @SpeakeasyMetadata({ data: "json, name=submissions", elemType: shared.Submission })
   submissions?: shared.Submission[];
 
-  @Metadata({ data: "json, name=total_count" })
+  @SpeakeasyMetadata({ data: "json, name=total_count" })
   totalCount: number;
 }
 
 export enum BatchGeneratePdfsCreateSubmissionBatchResponseCreateSubmissionBatchSubmissionsResponseStatusEnum {
-    Success = "success"
-,    Error = "error"
-,    ValidButNotSaved = "valid_but_not_saved"
+    Success = "success",
+    Error = "error",
+    ValidButNotSaved = "valid_but_not_saved"
 }
 
 
 export class BatchGeneratePdfsCreateSubmissionBatchResponseCreateSubmissionBatchSubmissionsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=errors" })
+  @SpeakeasyMetadata({ data: "json, name=errors" })
   errors?: string[];
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status: BatchGeneratePdfsCreateSubmissionBatchResponseCreateSubmissionBatchSubmissionsResponseStatusEnum;
 
-  @Metadata({ data: "json, name=submission" })
+  @SpeakeasyMetadata({ data: "json, name=submission" })
   submission?: shared.Submission;
 }
 
 
 export class BatchGeneratePdfsCreateSubmissionBatchResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=error" })
+  @SpeakeasyMetadata({ data: "json, name=error" })
   error?: string;
 
-  @Metadata({ data: "json, name=errors" })
+  @SpeakeasyMetadata({ data: "json, name=errors" })
   errors?: string[];
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status: BatchGeneratePdfsCreateSubmissionBatchResponseStatusEnum;
 
-  @Metadata({ data: "json, name=submission_batch" })
+  @SpeakeasyMetadata({ data: "json, name=submission_batch" })
   submissionBatch: BatchGeneratePdfsCreateSubmissionBatchResponseSubmissionBatch;
 
-  @Metadata({ data: "json, name=submissions", elemType: operations.BatchGeneratePdfsCreateSubmissionBatchResponseCreateSubmissionBatchSubmissionsResponse })
+  @SpeakeasyMetadata({ data: "json, name=submissions", elemType: BatchGeneratePdfsCreateSubmissionBatchResponseCreateSubmissionBatchSubmissionsResponse })
   submissions: BatchGeneratePdfsCreateSubmissionBatchResponseCreateSubmissionBatchSubmissionsResponse[];
 }
 
 
+export class BatchGeneratePdfsRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request: BatchGeneratePdfsSubmissionBatchData;
+
+  @SpeakeasyMetadata()
+  security: BatchGeneratePdfsSecurity;
+}
+
+
 export class BatchGeneratePdfsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   authenticationError?: shared.AuthenticationError;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   createSubmissionBatchResponse?: BatchGeneratePdfsCreateSubmissionBatchResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   error?: shared.Error;
 }

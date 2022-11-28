@@ -5,23 +5,23 @@ from sdk.models import shared
 
 @dataclass
 class GetCodeReviewPathParams:
-    review_id: str = field(default=None, metadata={'path_param': { 'field_name': 'review-id', 'style': 'simple', 'explode': False }})
+    review_id: str = field(metadata={'path_param': { 'field_name': 'review-id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetCodeReviewSecurity:
-    access_token: shared.SchemeAccessToken = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer' }})
+    access_token: shared.SchemeAccessToken = field(metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer' }})
     
 
 @dataclass
 class GetCodeReviewRequest:
-    path_params: GetCodeReviewPathParams = field(default=None)
-    security: GetCodeReviewSecurity = field(default=None)
+    path_params: GetCodeReviewPathParams = field()
+    security: GetCodeReviewSecurity = field()
     
 
 @dataclass
 class GetCodeReviewResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     code_reviews: Optional[List[shared.CodeReview]] = field(default=None)
     

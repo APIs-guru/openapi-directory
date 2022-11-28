@@ -4,12 +4,16 @@ import (
 	"time"
 )
 
+// ObWriteDomesticStandingOrderResponse6DataCharges
+// Set of elements used to provide details of a charge for the payment initiation.
 type ObWriteDomesticStandingOrderResponse6DataCharges struct {
 	Amount       ObActiveOrHistoricCurrencyAndAmount `json:"Amount"`
 	ChargeBearer ObChargeBearerType1CodeEnum         `json:"ChargeBearer"`
 	Type         string                              `json:"Type"`
 }
 
+// ObWriteDomesticStandingOrderResponse6DataInitiationCreditorAccount
+// Identification assigned by an institution to identify an account. This identification is known by the account owner.
 type ObWriteDomesticStandingOrderResponse6DataInitiationCreditorAccount struct {
 	Identification          string  `json:"Identification"`
 	Name                    string  `json:"Name"`
@@ -17,6 +21,8 @@ type ObWriteDomesticStandingOrderResponse6DataInitiationCreditorAccount struct {
 	SecondaryIdentification *string `json:"SecondaryIdentification,omitempty"`
 }
 
+// ObWriteDomesticStandingOrderResponse6DataInitiationDebtorAccount
+// Unambiguous identification of the account of the debtor to which a debit entry will be made as a result of the transaction.
 type ObWriteDomesticStandingOrderResponse6DataInitiationDebtorAccount struct {
 	Identification          string  `json:"Identification"`
 	Name                    *string `json:"Name,omitempty"`
@@ -24,21 +30,29 @@ type ObWriteDomesticStandingOrderResponse6DataInitiationDebtorAccount struct {
 	SecondaryIdentification *string `json:"SecondaryIdentification,omitempty"`
 }
 
+// ObWriteDomesticStandingOrderResponse6DataInitiationFinalPaymentAmount
+// The amount of the final Standing Order
 type ObWriteDomesticStandingOrderResponse6DataInitiationFinalPaymentAmount struct {
 	Amount   string `json:"Amount"`
 	Currency string `json:"Currency"`
 }
 
+// ObWriteDomesticStandingOrderResponse6DataInitiationFirstPaymentAmount
+// The amount of the first Standing Order
 type ObWriteDomesticStandingOrderResponse6DataInitiationFirstPaymentAmount struct {
 	Amount   string `json:"Amount"`
 	Currency string `json:"Currency"`
 }
 
+// ObWriteDomesticStandingOrderResponse6DataInitiationRecurringPaymentAmount
+// The amount of the recurring Standing Order
 type ObWriteDomesticStandingOrderResponse6DataInitiationRecurringPaymentAmount struct {
 	Amount   string `json:"Amount"`
 	Currency string `json:"Currency"`
 }
 
+// ObWriteDomesticStandingOrderResponse6DataInitiation
+// The Initiation payload is sent by the initiating party to the ASPSP. It is used to request movement of funds from the debtor account to a creditor for a domestic standing order.
 type ObWriteDomesticStandingOrderResponse6DataInitiation struct {
 	CreditorAccount          ObWriteDomesticStandingOrderResponse6DataInitiationCreditorAccount         `json:"CreditorAccount"`
 	DebtorAccount            *ObWriteDomesticStandingOrderResponse6DataInitiationDebtorAccount          `json:"DebtorAccount,omitempty"`
@@ -62,6 +76,8 @@ const (
 	ObWriteDomesticStandingOrderResponse6DataMultiAuthorisationStatusEnumRejected                     ObWriteDomesticStandingOrderResponse6DataMultiAuthorisationStatusEnum = "Rejected"
 )
 
+// ObWriteDomesticStandingOrderResponse6DataMultiAuthorisation
+// The multiple authorisation flow response from the ASPSP.
 type ObWriteDomesticStandingOrderResponse6DataMultiAuthorisation struct {
 	ExpirationDateTime *time.Time                                                            `json:"ExpirationDateTime,omitempty"`
 	LastUpdateDateTime *time.Time                                                            `json:"LastUpdateDateTime,omitempty"`
@@ -70,6 +86,8 @@ type ObWriteDomesticStandingOrderResponse6DataMultiAuthorisation struct {
 	Status             ObWriteDomesticStandingOrderResponse6DataMultiAuthorisationStatusEnum `json:"Status"`
 }
 
+// ObWriteDomesticStandingOrderResponse6DataRefundAccount
+// Provides the details to identify an account.
 type ObWriteDomesticStandingOrderResponse6DataRefundAccount struct {
 	Identification          string  `json:"Identification"`
 	Name                    string  `json:"Name"`
@@ -77,6 +95,8 @@ type ObWriteDomesticStandingOrderResponse6DataRefundAccount struct {
 	SecondaryIdentification *string `json:"SecondaryIdentification,omitempty"`
 }
 
+// ObWriteDomesticStandingOrderResponse6DataRefund
+// Unambiguous identification of the refund account to which a refund will be made as a result of the transaction.
 type ObWriteDomesticStandingOrderResponse6DataRefund struct {
 	Account ObWriteDomesticStandingOrderResponse6DataRefundAccount `json:"Account"`
 }

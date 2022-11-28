@@ -1,7 +1,8 @@
 
 
+
 export enum ChangeTypeEnum {
-    Replace = "REPLACE"
-,    Append = "APPEND"
-,    Modify = "MODIFY"
+    Replace = "REPLACE",
+    Append = "APPEND",
+    Modify = "MODIFY"
 }

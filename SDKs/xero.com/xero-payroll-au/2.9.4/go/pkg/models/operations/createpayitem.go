@@ -14,7 +14,7 @@ type CreatePayItemSecurity struct {
 
 type CreatePayItemRequest struct {
 	Headers  CreatePayItemHeaders
-	Request  shared.PayItem `request:"mediaType=application/json"`
+	Request  shared.PayItemInput `request:"mediaType=application/json"`
 	Security CreatePayItemSecurity
 }
 

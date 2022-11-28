@@ -1,40 +1,32 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class SchemeBasicAuth extends SpeakeasyBase {
-  @Metadata({ data: "security, name=Authorization" })
-  authorization: string;
+  @SpeakeasyMetadata({ data: "security, name=password" })
+  password: string;
+
+  @SpeakeasyMetadata({ data: "security, name=username" })
+  username: string;
 }
 
 
 export class SchemeOAuth2 extends SpeakeasyBase {
-  @Metadata({ data: "security, name=Authorization" })
+  @SpeakeasyMetadata({ data: "security, name=Authorization" })
   authorization: string;
-}
-
-
-export class SchemeOpenIdConnect extends SpeakeasyBase {
-  @Metadata({ data: "security, name=Authorization" })
-  authorization: string;
-}
-
-
-export class SecurityOption1 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=basic" })
-  basicAuth: SchemeBasicAuth;
-}
-
-
-export class SecurityOption2 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
-  oAuth2: SchemeOAuth2;
 }
 
 
 export class Security extends SpeakeasyBase {
-  @Metadata({ data: "security, option=true" })
-  option1?: SecurityOption1;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=basic" })
+  basicAuth?: SchemeBasicAuth;
 
-  @Metadata({ data: "security, option=true" })
-  option2?: SecurityOption2;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
+  oAuth2?: SchemeOAuth2;
+}
+
+
+export class SchemeOpenIdConnect extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "security, name=Authorization" })
+  authorization: string;
 }

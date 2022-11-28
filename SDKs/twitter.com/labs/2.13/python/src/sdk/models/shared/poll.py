@@ -1,10 +1,12 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import polloption
+from sdk import utils
+from . import *
 
 class PollVotingStatusEnum(str, Enum):
     OPEN = "open"
@@ -14,9 +16,13 @@ class PollVotingStatusEnum(str, Enum):
 @dataclass_json
 @dataclass
 class Poll:
-    duration_minutes: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'duration_minutes' }})
-    end_datetime: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'end_datetime', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
-    options: List[polloption.PollOption] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'options' }})
-    voting_status: Optional[PollVotingStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'voting_status' }})
+    r"""Poll
+    Represent a Poll attached to a Tweet
+    """
+    
+    id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('id') }})
+    options: List[PollOption] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('options') }})
+    duration_minutes: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('duration_minutes') }})
+    end_datetime: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('end_datetime'), 'encoder': utils.datetimeisoformat(True), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    voting_status: Optional[PollVotingStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('voting_status') }})
     

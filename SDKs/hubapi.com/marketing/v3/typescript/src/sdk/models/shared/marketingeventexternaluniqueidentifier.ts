@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class MarketingEventExternalUniqueIdentifier extends SpeakeasyBase {
-  @Metadata({ data: "json, name=appId" })
+  @SpeakeasyMetadata({ data: "json, name=appId" })
   appId: number;
 
-  @Metadata({ data: "json, name=externalAccountId" })
+  @SpeakeasyMetadata({ data: "json, name=externalAccountId" })
   externalAccountId: string;
 
-  @Metadata({ data: "json, name=externalEventId" })
+  @SpeakeasyMetadata({ data: "json, name=externalEventId" })
   externalEventId: string;
 }

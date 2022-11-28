@@ -1,0 +1,34 @@
+import { SpeakeasyBase } from "../../../internal/utils";
+import { DnsRuleDescriptor } from "./dnsruledescriptor";
+import { AppExternalCpd } from "./appexternalcpd";
+import { FeatureDependency } from "./featuredependency";
+import { LatencyDescriptor } from "./latencydescriptor";
+import { ServiceDependency } from "./servicedependency";
+import { ServiceDescriptor } from "./servicedescriptor";
+import { TrafficRuleDescriptor } from "./trafficruledescriptor";
+import { TransportDependency } from "./transportdependency";
+export declare class AppD extends SpeakeasyBase {
+    appDId: string;
+    appDnsRule?: DnsRuleDescriptor[];
+    appDVersion: string;
+    appDescription: string;
+    appExtCpd?: AppExternalCpd[];
+    appFeatureOptional?: FeatureDependency[];
+    appFeatureRequired?: FeatureDependency[];
+    appInfoName?: string;
+    appLatency?: LatencyDescriptor;
+    appName: string;
+    appProvider: string;
+    appServiceOptional?: ServiceDependency[];
+    appServiceProduced?: ServiceDescriptor[];
+    appServiceRequired?: ServiceDependency[];
+    appSoftVersion: string;
+    appTrafficRule?: TrafficRuleDescriptor[];
+    changeAppInstanceStateOpConfig?: string;
+    mecVersion: string[];
+    swImageDescriptor: string;
+    terminateAppInstanceOpConfig?: string;
+    transportDependencies?: TransportDependency[];
+    virtualComputeDescriptor: string;
+    virtualStorageDescriptor?: string[];
+}

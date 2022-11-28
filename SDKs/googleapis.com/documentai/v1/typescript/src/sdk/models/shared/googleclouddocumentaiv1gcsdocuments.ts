@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudDocumentaiV1GcsDocument } from "./googleclouddocumentaiv1gcsdocument";
+
 
 
 // GoogleCloudDocumentaiV1GcsDocuments
@@ -8,6 +8,6 @@ import { GoogleCloudDocumentaiV1GcsDocument } from "./googleclouddocumentaiv1gcs
  * Specifies a set of documents on Cloud Storage.
 **/
 export class GoogleCloudDocumentaiV1GcsDocuments extends SpeakeasyBase {
-  @Metadata({ data: "json, name=documents", elemType: shared.GoogleCloudDocumentaiV1GcsDocument })
+  @SpeakeasyMetadata({ data: "json, name=documents", elemType: GoogleCloudDocumentaiV1GcsDocument })
   documents?: GoogleCloudDocumentaiV1GcsDocument[];
 }

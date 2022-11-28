@@ -1,12 +1,15 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class GetComponentVersionArtifactPathParams:
-    arn: str = field(default=None, metadata={'path_param': { 'field_name': 'arn', 'style': 'simple', 'explode': False }})
-    artifact_name: str = field(default=None, metadata={'path_param': { 'field_name': 'artifactName', 'style': 'simple', 'explode': False }})
+    arn: str = field(metadata={'path_param': { 'field_name': 'arn', 'style': 'simple', 'explode': False }})
+    artifact_name: str = field(metadata={'path_param': { 'field_name': 'artifactName', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -22,18 +25,18 @@ class GetComponentVersionArtifactHeaders:
 
 @dataclass
 class GetComponentVersionArtifactRequest:
-    path_params: GetComponentVersionArtifactPathParams = field(default=None)
-    headers: GetComponentVersionArtifactHeaders = field(default=None)
+    headers: GetComponentVersionArtifactHeaders = field()
+    path_params: GetComponentVersionArtifactPathParams = field()
     
 
 @dataclass
 class GetComponentVersionArtifactResponse:
+    content_type: str = field()
+    status_code: int = field()
     access_denied_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     get_component_version_artifact_response: Optional[shared.GetComponentVersionArtifactResponse] = field(default=None)
     internal_server_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     validation_exception: Optional[Any] = field(default=None)
     

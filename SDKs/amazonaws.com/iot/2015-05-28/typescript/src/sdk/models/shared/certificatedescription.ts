@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CertificateModeEnum } from "./certificatemodeenum";
 import { CertificateStatusEnum } from "./certificatestatusenum";
 import { TransferData } from "./transferdata";
 import { CertificateValidity } from "./certificatevalidity";
+
 
 
 // CertificateDescription
@@ -10,45 +11,45 @@ import { CertificateValidity } from "./certificatevalidity";
  * Describes a certificate.
 **/
 export class CertificateDescription extends SpeakeasyBase {
-  @Metadata({ data: "json, name=caCertificateId" })
+  @SpeakeasyMetadata({ data: "json, name=caCertificateId" })
   caCertificateId?: string;
 
-  @Metadata({ data: "json, name=certificateArn" })
+  @SpeakeasyMetadata({ data: "json, name=certificateArn" })
   certificateArn?: string;
 
-  @Metadata({ data: "json, name=certificateId" })
+  @SpeakeasyMetadata({ data: "json, name=certificateId" })
   certificateId?: string;
 
-  @Metadata({ data: "json, name=certificateMode" })
+  @SpeakeasyMetadata({ data: "json, name=certificateMode" })
   certificateMode?: CertificateModeEnum;
 
-  @Metadata({ data: "json, name=certificatePem" })
+  @SpeakeasyMetadata({ data: "json, name=certificatePem" })
   certificatePem?: string;
 
-  @Metadata({ data: "json, name=creationDate" })
+  @SpeakeasyMetadata({ data: "json, name=creationDate" })
   creationDate?: Date;
 
-  @Metadata({ data: "json, name=customerVersion" })
+  @SpeakeasyMetadata({ data: "json, name=customerVersion" })
   customerVersion?: number;
 
-  @Metadata({ data: "json, name=generationId" })
+  @SpeakeasyMetadata({ data: "json, name=generationId" })
   generationId?: string;
 
-  @Metadata({ data: "json, name=lastModifiedDate" })
+  @SpeakeasyMetadata({ data: "json, name=lastModifiedDate" })
   lastModifiedDate?: Date;
 
-  @Metadata({ data: "json, name=ownedBy" })
+  @SpeakeasyMetadata({ data: "json, name=ownedBy" })
   ownedBy?: string;
 
-  @Metadata({ data: "json, name=previousOwnedBy" })
+  @SpeakeasyMetadata({ data: "json, name=previousOwnedBy" })
   previousOwnedBy?: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: CertificateStatusEnum;
 
-  @Metadata({ data: "json, name=transferData" })
+  @SpeakeasyMetadata({ data: "json, name=transferData" })
   transferData?: TransferData;
 
-  @Metadata({ data: "json, name=validity" })
+  @SpeakeasyMetadata({ data: "json, name=validity" })
   validity?: CertificateValidity;
 }

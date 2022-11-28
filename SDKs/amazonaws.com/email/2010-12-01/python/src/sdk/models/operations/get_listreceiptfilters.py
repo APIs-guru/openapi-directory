@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetListReceiptFiltersActionEnum(str, Enum):
     LIST_RECEIPT_FILTERS = "ListReceiptFilters"
@@ -10,8 +14,8 @@ class GetListReceiptFiltersVersionEnum(str, Enum):
 
 @dataclass
 class GetListReceiptFiltersQueryParams:
-    action: GetListReceiptFiltersActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: GetListReceiptFiltersVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: GetListReceiptFiltersActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: GetListReceiptFiltersVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,13 +31,13 @@ class GetListReceiptFiltersHeaders:
 
 @dataclass
 class GetListReceiptFiltersRequest:
-    query_params: GetListReceiptFiltersQueryParams = field(default=None)
-    headers: GetListReceiptFiltersHeaders = field(default=None)
+    headers: GetListReceiptFiltersHeaders = field()
+    query_params: GetListReceiptFiltersQueryParams = field()
     
 
 @dataclass
 class GetListReceiptFiltersResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

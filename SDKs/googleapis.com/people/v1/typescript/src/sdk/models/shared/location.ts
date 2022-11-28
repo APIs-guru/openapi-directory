@@ -1,5 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { FieldMetadata } from "./fieldmetadata";
+import { FieldMetadataInput } from "./fieldmetadata";
+
 
 
 // Location
@@ -7,27 +9,58 @@ import { FieldMetadata } from "./fieldmetadata";
  * A person's location.
 **/
 export class Location extends SpeakeasyBase {
-  @Metadata({ data: "json, name=buildingId" })
+  @SpeakeasyMetadata({ data: "json, name=buildingId" })
   buildingId?: string;
 
-  @Metadata({ data: "json, name=current" })
+  @SpeakeasyMetadata({ data: "json, name=current" })
   current?: boolean;
 
-  @Metadata({ data: "json, name=deskCode" })
+  @SpeakeasyMetadata({ data: "json, name=deskCode" })
   deskCode?: string;
 
-  @Metadata({ data: "json, name=floor" })
+  @SpeakeasyMetadata({ data: "json, name=floor" })
   floor?: string;
 
-  @Metadata({ data: "json, name=floorSection" })
+  @SpeakeasyMetadata({ data: "json, name=floorSection" })
   floorSection?: string;
 
-  @Metadata({ data: "json, name=metadata" })
+  @SpeakeasyMetadata({ data: "json, name=metadata" })
   metadata?: FieldMetadata;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: string;
 
-  @Metadata({ data: "json, name=value" })
+  @SpeakeasyMetadata({ data: "json, name=value" })
+  value?: string;
+}
+
+
+// LocationInput
+/** 
+ * A person's location.
+**/
+export class LocationInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=buildingId" })
+  buildingId?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=current" })
+  current?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=deskCode" })
+  deskCode?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=floor" })
+  floor?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=floorSection" })
+  floorSection?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=metadata" })
+  metadata?: FieldMetadataInput;
+
+  @SpeakeasyMetadata({ data: "json, name=type" })
+  type?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=value" })
   value?: string;
 }

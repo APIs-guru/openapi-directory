@@ -1,6 +1,7 @@
 
 
+
 export enum RuleStateEnum {
-    Enabled = "ENABLED"
-,    Disabled = "DISABLED"
+    Enabled = "ENABLED",
+    Disabled = "DISABLED"
 }

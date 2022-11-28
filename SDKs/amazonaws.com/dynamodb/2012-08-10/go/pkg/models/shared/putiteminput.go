@@ -1,5 +1,7 @@
 package shared
 
+// PutItemInput
+// Represents the input of a <code>PutItem</code> operation.
 type PutItemInput struct {
 	ConditionExpression         *string                           `json:"ConditionExpression,omitempty"`
 	ConditionalOperator         *ConditionalOperatorEnum          `json:"ConditionalOperator,omitempty"`

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetSettingsPathParams = /** @class */ (function (_super) {
     __extends(GetSettingsPathParams, _super);
@@ -30,7 +30,7 @@ var GetSettingsPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=configId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=configId" }),
         __metadata("design:type", String)
     ], GetSettingsPathParams.prototype, "configId", void 0);
     return GetSettingsPathParams;
@@ -42,7 +42,7 @@ var GetSettingsRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetSettingsPathParams)
     ], GetSettingsRequest.prototype, "pathParams", void 0);
     return GetSettingsRequest;
@@ -54,19 +54,19 @@ var GetSettingsResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetSettingsResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata({ elemType: shared.SettingModelHaljson }),
+        SpeakeasyMetadata({ elemType: shared.SettingModelHaljson }),
         __metadata("design:type", Array)
     ], GetSettingsResponse.prototype, "settingModelHaljsons", void 0);
     __decorate([
-        Metadata({ elemType: shared.SettingModel }),
+        SpeakeasyMetadata({ elemType: shared.SettingModel }),
         __metadata("design:type", Array)
     ], GetSettingsResponse.prototype, "settingModels", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetSettingsResponse.prototype, "statusCode", void 0);
     return GetSettingsResponse;

@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetDescribeAggregateIDFormatActionEnum(str, Enum):
     DESCRIBE_AGGREGATE_ID_FORMAT = "DescribeAggregateIdFormat"
@@ -10,9 +14,9 @@ class GetDescribeAggregateIDFormatVersionEnum(str, Enum):
 
 @dataclass
 class GetDescribeAggregateIDFormatQueryParams:
-    action: GetDescribeAggregateIDFormatActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetDescribeAggregateIDFormatActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: GetDescribeAggregateIDFormatVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     dry_run: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'DryRun', 'style': 'form', 'explode': True }})
-    version: GetDescribeAggregateIDFormatVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -28,13 +32,13 @@ class GetDescribeAggregateIDFormatHeaders:
 
 @dataclass
 class GetDescribeAggregateIDFormatRequest:
-    query_params: GetDescribeAggregateIDFormatQueryParams = field(default=None)
-    headers: GetDescribeAggregateIDFormatHeaders = field(default=None)
+    headers: GetDescribeAggregateIDFormatHeaders = field()
+    query_params: GetDescribeAggregateIDFormatQueryParams = field()
     
 
 @dataclass
 class GetDescribeAggregateIDFormatResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

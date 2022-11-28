@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ProjectParameterDetails } from "./projectparameterdetails";
 export declare class ProjectsRow extends SpeakeasyBase {
     bbox?: number[];

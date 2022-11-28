@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class PutTeamsTeamIDProfilePathParams:
-    team_id: str = field(default=None, metadata={'path_param': { 'field_name': 'teamId', 'style': 'simple', 'explode': False }})
+    team_id: str = field(metadata={'path_param': { 'field_name': 'teamId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -18,15 +18,15 @@ class PutTeamsTeamIDProfileRequests:
 
 @dataclass
 class PutTeamsTeamIDProfileRequest:
-    path_params: PutTeamsTeamIDProfilePathParams = field(default=None)
+    path_params: PutTeamsTeamIDProfilePathParams = field()
     request: Optional[PutTeamsTeamIDProfileRequests] = field(default=None)
     
 
 @dataclass
 class PutTeamsTeamIDProfileResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     error_response_content: Optional[shared.ErrorResponseContent] = field(default=None)
-    status_code: int = field(default=None)
     team_info: Optional[shared.TeamInfo] = field(default=None)
     

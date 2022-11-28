@@ -1,53 +1,54 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class PublishedOralQuestionTimeGetQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=parameters.answeringBodyIds" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=parameters.answeringBodyIds" })
   parametersAnsweringBodyIds?: number[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=parameters.answeringDateEnd" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=parameters.answeringDateEnd" })
   parametersAnsweringDateEnd?: Date;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=parameters.answeringDateStart" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=parameters.answeringDateStart" })
   parametersAnsweringDateStart?: Date;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=parameters.deadlineDateEnd" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=parameters.deadlineDateEnd" })
   parametersDeadlineDateEnd?: Date;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=parameters.deadlineDateStart" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=parameters.deadlineDateStart" })
   parametersDeadlineDateStart?: Date;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=parameters.oralQuestionTimeId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=parameters.oralQuestionTimeId" })
   parametersOralQuestionTimeId?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=parameters.skip" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=parameters.skip" })
   parametersSkip?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=parameters.take" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=parameters.take" })
   parametersTake?: number;
 }
 
 
 export class PublishedOralQuestionTimeGetRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: PublishedOralQuestionTimeGetQueryParams;
 }
 
 
 export class PublishedOralQuestionTimeGetResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   apiResponseListPublishedWrittenQuestion?: shared.ApiResponseListPublishedWrittenQuestion;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   apiResponseObject?: shared.ApiResponseObject;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

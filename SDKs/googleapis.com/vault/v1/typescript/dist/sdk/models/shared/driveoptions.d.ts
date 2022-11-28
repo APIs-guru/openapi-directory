@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 export declare enum DriveOptionsClientSideEncryptedOptionEnum {
     ClientSideEncryptedOptionUnspecified = "CLIENT_SIDE_ENCRYPTED_OPTION_UNSPECIFIED",
     ClientSideEncryptedOptionAny = "CLIENT_SIDE_ENCRYPTED_OPTION_ANY",

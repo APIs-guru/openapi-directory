@@ -1,61 +1,62 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetAnApiVersionPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=apiId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=apiId" })
   apiId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=apiVersionId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=apiVersionId" })
   apiVersionId: string;
 }
 
 
-export class GetAnApiVersionRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: GetAnApiVersionPathParams;
-}
-
-
 export class GetAnApiVersion200ApplicationJsonVersion extends SpeakeasyBase {
-  @Metadata({ data: "json, name=api" })
+  @SpeakeasyMetadata({ data: "json, name=api" })
   api?: string;
 
-  @Metadata({ data: "json, name=createdAt" })
+  @SpeakeasyMetadata({ data: "json, name=createdAt" })
   createdAt?: string;
 
-  @Metadata({ data: "json, name=createdBy" })
+  @SpeakeasyMetadata({ data: "json, name=createdBy" })
   createdBy?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=schema" })
+  @SpeakeasyMetadata({ data: "json, name=schema" })
   schema?: string[];
 
-  @Metadata({ data: "json, name=updatedAt" })
+  @SpeakeasyMetadata({ data: "json, name=updatedAt" })
   updatedAt?: string;
 
-  @Metadata({ data: "json, name=updatedBy" })
+  @SpeakeasyMetadata({ data: "json, name=updatedBy" })
   updatedBy?: string;
 }
 
 
 export class GetAnApiVersion200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=version" })
+  @SpeakeasyMetadata({ data: "json, name=version" })
   version?: GetAnApiVersion200ApplicationJsonVersion;
 }
 
 
+export class GetAnApiVersionRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: GetAnApiVersionPathParams;
+}
+
+
 export class GetAnApiVersionResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getAnApiVersion200ApplicationJsonObject?: GetAnApiVersion200ApplicationJson;
 }

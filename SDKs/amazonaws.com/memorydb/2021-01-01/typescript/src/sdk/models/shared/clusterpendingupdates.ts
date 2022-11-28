@@ -1,8 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AcLsUpdateStatus } from "./aclsupdatestatus";
 import { ReshardingStatus } from "./reshardingstatus";
 import { PendingModifiedServiceUpdate } from "./pendingmodifiedserviceupdate";
+
 
 
 // ClusterPendingUpdates
@@ -10,12 +10,12 @@ import { PendingModifiedServiceUpdate } from "./pendingmodifiedserviceupdate";
  * A list of updates being applied to the cluster
 **/
 export class ClusterPendingUpdates extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ACLs" })
+  @SpeakeasyMetadata({ data: "json, name=ACLs" })
   acLs?: AcLsUpdateStatus;
 
-  @Metadata({ data: "json, name=Resharding" })
+  @SpeakeasyMetadata({ data: "json, name=Resharding" })
   resharding?: ReshardingStatus;
 
-  @Metadata({ data: "json, name=ServiceUpdates", elemType: shared.PendingModifiedServiceUpdate })
+  @SpeakeasyMetadata({ data: "json, name=ServiceUpdates", elemType: PendingModifiedServiceUpdate })
   serviceUpdates?: PendingModifiedServiceUpdate[];
 }

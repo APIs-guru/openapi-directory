@@ -22,9 +22,10 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { LambdaFunctionRecommendationFindingEnum } from "./lambdafunctionrecommendationfindingenum";
+import { LambdaFunctionMemoryRecommendationOption } from "./lambdafunctionmemoryrecommendationoption";
+import { LambdaFunctionUtilizationMetric } from "./lambdafunctionutilizationmetric";
 // LambdaFunctionRecommendation
 /**
  * Describes an Lambda function recommendation.
@@ -35,47 +36,47 @@ var LambdaFunctionRecommendation = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=accountId" }),
+        SpeakeasyMetadata({ data: "json, name=accountId" }),
         __metadata("design:type", String)
     ], LambdaFunctionRecommendation.prototype, "accountId", void 0);
     __decorate([
-        Metadata({ data: "json, name=currentMemorySize" }),
+        SpeakeasyMetadata({ data: "json, name=currentMemorySize" }),
         __metadata("design:type", Number)
     ], LambdaFunctionRecommendation.prototype, "currentMemorySize", void 0);
     __decorate([
-        Metadata({ data: "json, name=finding" }),
+        SpeakeasyMetadata({ data: "json, name=finding" }),
         __metadata("design:type", String)
     ], LambdaFunctionRecommendation.prototype, "finding", void 0);
     __decorate([
-        Metadata({ data: "json, name=findingReasonCodes" }),
+        SpeakeasyMetadata({ data: "json, name=findingReasonCodes" }),
         __metadata("design:type", Array)
     ], LambdaFunctionRecommendation.prototype, "findingReasonCodes", void 0);
     __decorate([
-        Metadata({ data: "json, name=functionArn" }),
+        SpeakeasyMetadata({ data: "json, name=functionArn" }),
         __metadata("design:type", String)
     ], LambdaFunctionRecommendation.prototype, "functionArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=functionVersion" }),
+        SpeakeasyMetadata({ data: "json, name=functionVersion" }),
         __metadata("design:type", String)
     ], LambdaFunctionRecommendation.prototype, "functionVersion", void 0);
     __decorate([
-        Metadata({ data: "json, name=lastRefreshTimestamp" }),
+        SpeakeasyMetadata({ data: "json, name=lastRefreshTimestamp" }),
         __metadata("design:type", Date)
     ], LambdaFunctionRecommendation.prototype, "lastRefreshTimestamp", void 0);
     __decorate([
-        Metadata({ data: "json, name=lookbackPeriodInDays" }),
+        SpeakeasyMetadata({ data: "json, name=lookbackPeriodInDays" }),
         __metadata("design:type", Number)
     ], LambdaFunctionRecommendation.prototype, "lookbackPeriodInDays", void 0);
     __decorate([
-        Metadata({ data: "json, name=memorySizeRecommendationOptions", elemType: shared.LambdaFunctionMemoryRecommendationOption }),
+        SpeakeasyMetadata({ data: "json, name=memorySizeRecommendationOptions", elemType: LambdaFunctionMemoryRecommendationOption }),
         __metadata("design:type", Array)
     ], LambdaFunctionRecommendation.prototype, "memorySizeRecommendationOptions", void 0);
     __decorate([
-        Metadata({ data: "json, name=numberOfInvocations" }),
+        SpeakeasyMetadata({ data: "json, name=numberOfInvocations" }),
         __metadata("design:type", Number)
     ], LambdaFunctionRecommendation.prototype, "numberOfInvocations", void 0);
     __decorate([
-        Metadata({ data: "json, name=utilizationMetrics", elemType: shared.LambdaFunctionUtilizationMetric }),
+        SpeakeasyMetadata({ data: "json, name=utilizationMetrics", elemType: LambdaFunctionUtilizationMetric }),
         __metadata("design:type", Array)
     ], LambdaFunctionRecommendation.prototype, "utilizationMetrics", void 0);
     return LambdaFunctionRecommendation;

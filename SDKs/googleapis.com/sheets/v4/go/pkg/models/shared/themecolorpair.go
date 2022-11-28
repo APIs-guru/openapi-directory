@@ -15,6 +15,8 @@ const (
 	ThemeColorPairColorTypeEnumLink                      ThemeColorPairColorTypeEnum = "LINK"
 )
 
+// ThemeColorPair
+// A pair mapping a spreadsheet theme color type to the concrete color it represents.
 type ThemeColorPair struct {
 	Color     *ColorStyle                  `json:"color,omitempty"`
 	ColorType *ThemeColorPairColorTypeEnum `json:"colorType,omitempty"`

@@ -1,15 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ImportFindingsError } from "./importfindingserror";
 
 
+
 export class BatchImportFindingsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=FailedCount" })
+  @SpeakeasyMetadata({ data: "json, name=FailedCount" })
   failedCount: number;
 
-  @Metadata({ data: "json, name=FailedFindings", elemType: shared.ImportFindingsError })
+  @SpeakeasyMetadata({ data: "json, name=FailedFindings", elemType: ImportFindingsError })
   failedFindings?: ImportFindingsError[];
 
-  @Metadata({ data: "json, name=SuccessCount" })
+  @SpeakeasyMetadata({ data: "json, name=SuccessCount" })
   successCount: number;
 }

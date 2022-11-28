@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DeviceFilter } from "./devicefilter";
+
 
 
 // ListDevicesRequest
@@ -8,12 +8,12 @@ import { DeviceFilter } from "./devicefilter";
  * Represents the result of a list devices request.
 **/
 export class ListDevicesRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=arn" })
+  @SpeakeasyMetadata({ data: "json, name=arn" })
   arn?: string;
 
-  @Metadata({ data: "json, name=filters", elemType: shared.DeviceFilter })
+  @SpeakeasyMetadata({ data: "json, name=filters", elemType: DeviceFilter })
   filters?: DeviceFilter[];
 
-  @Metadata({ data: "json, name=nextToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextToken" })
   nextToken?: string;
 }

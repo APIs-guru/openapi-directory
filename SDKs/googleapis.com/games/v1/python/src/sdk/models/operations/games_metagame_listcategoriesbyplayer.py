@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 class GamesMetagameListCategoriesByPlayerCollectionEnum(str, Enum):
@@ -9,8 +10,8 @@ class GamesMetagameListCategoriesByPlayerCollectionEnum(str, Enum):
 
 @dataclass
 class GamesMetagameListCategoriesByPlayerPathParams:
-    collection: GamesMetagameListCategoriesByPlayerCollectionEnum = field(default=None, metadata={'path_param': { 'field_name': 'collection', 'style': 'simple', 'explode': False }})
-    player_id: str = field(default=None, metadata={'path_param': { 'field_name': 'playerId', 'style': 'simple', 'explode': False }})
+    collection: GamesMetagameListCategoriesByPlayerCollectionEnum = field(metadata={'path_param': { 'field_name': 'collection', 'style': 'simple', 'explode': False }})
+    player_id: str = field(metadata={'path_param': { 'field_name': 'playerId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -33,20 +34,20 @@ class GamesMetagameListCategoriesByPlayerQueryParams:
 
 @dataclass
 class GamesMetagameListCategoriesByPlayerSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class GamesMetagameListCategoriesByPlayerRequest:
-    path_params: GamesMetagameListCategoriesByPlayerPathParams = field(default=None)
-    query_params: GamesMetagameListCategoriesByPlayerQueryParams = field(default=None)
-    security: GamesMetagameListCategoriesByPlayerSecurity = field(default=None)
+    path_params: GamesMetagameListCategoriesByPlayerPathParams = field()
+    query_params: GamesMetagameListCategoriesByPlayerQueryParams = field()
+    security: GamesMetagameListCategoriesByPlayerSecurity = field()
     
 
 @dataclass
 class GamesMetagameListCategoriesByPlayerResponse:
+    content_type: str = field()
+    status_code: int = field()
     category_list_response: Optional[shared.CategoryListResponse] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

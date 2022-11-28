@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class CopyBackupEncryptionConfigEncryptionTypeEnum(str, Enum):
     ENCRYPTION_TYPE_UNSPECIFIED = "ENCRYPTION_TYPE_UNSPECIFIED"
@@ -12,6 +14,10 @@ class CopyBackupEncryptionConfigEncryptionTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class CopyBackupEncryptionConfig:
-    encryption_type: Optional[CopyBackupEncryptionConfigEncryptionTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'encryptionType' }})
-    kms_key_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'kmsKeyName' }})
+    r"""CopyBackupEncryptionConfig
+    Encryption configuration for the copied backup.
+    """
+    
+    encryption_type: Optional[CopyBackupEncryptionConfigEncryptionTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('encryptionType') }})
+    kms_key_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('kmsKeyName') }})
     

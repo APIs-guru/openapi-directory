@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Page
@@ -6,27 +7,27 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Incident Manager engaging a contact's contact channel.
 **/
 export class Page extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ContactArn" })
+  @SpeakeasyMetadata({ data: "json, name=ContactArn" })
   contactArn: string;
 
-  @Metadata({ data: "json, name=DeliveryTime" })
+  @SpeakeasyMetadata({ data: "json, name=DeliveryTime" })
   deliveryTime?: Date;
 
-  @Metadata({ data: "json, name=EngagementArn" })
+  @SpeakeasyMetadata({ data: "json, name=EngagementArn" })
   engagementArn: string;
 
-  @Metadata({ data: "json, name=IncidentId" })
+  @SpeakeasyMetadata({ data: "json, name=IncidentId" })
   incidentId?: string;
 
-  @Metadata({ data: "json, name=PageArn" })
+  @SpeakeasyMetadata({ data: "json, name=PageArn" })
   pageArn: string;
 
-  @Metadata({ data: "json, name=ReadTime" })
+  @SpeakeasyMetadata({ data: "json, name=ReadTime" })
   readTime?: Date;
 
-  @Metadata({ data: "json, name=Sender" })
+  @SpeakeasyMetadata({ data: "json, name=Sender" })
   sender: string;
 
-  @Metadata({ data: "json, name=SentTime" })
+  @SpeakeasyMetadata({ data: "json, name=SentTime" })
   sentTime?: Date;
 }

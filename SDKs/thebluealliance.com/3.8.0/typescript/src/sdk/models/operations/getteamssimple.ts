@@ -1,47 +1,48 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetTeamsSimplePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=page_num" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=page_num" })
   pageNum: number;
 }
 
 
 export class GetTeamsSimpleHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=If-Modified-Since" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=If-Modified-Since" })
   ifModifiedSince?: string;
 }
 
 
 export class GetTeamsSimpleSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
   apiKey: shared.SchemeApiKey;
 }
 
 
 export class GetTeamsSimpleRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetTeamsSimplePathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: GetTeamsSimpleHeaders;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: GetTeamsSimpleSecurity;
 }
 
 
 export class GetTeamsSimpleResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: Map<string, string[]>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata({ elemType: shared.TeamSimple })
+  @SpeakeasyMetadata({ elemType: shared.TeamSimple })
   teamSimples?: shared.TeamSimple[];
 }

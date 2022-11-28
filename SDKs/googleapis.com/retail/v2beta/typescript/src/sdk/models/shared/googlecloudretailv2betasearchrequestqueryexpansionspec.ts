@@ -1,9 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum GoogleCloudRetailV2betaSearchRequestQueryExpansionSpecConditionEnum {
-    ConditionUnspecified = "CONDITION_UNSPECIFIED"
-,    Disabled = "DISABLED"
-,    Auto = "AUTO"
+    ConditionUnspecified = "CONDITION_UNSPECIFIED",
+    Disabled = "DISABLED",
+    Auto = "AUTO"
 }
 
 
@@ -12,9 +13,9 @@ export enum GoogleCloudRetailV2betaSearchRequestQueryExpansionSpecConditionEnum 
  * Specification to determine under which conditions query expansion should occur.
 **/
 export class GoogleCloudRetailV2betaSearchRequestQueryExpansionSpec extends SpeakeasyBase {
-  @Metadata({ data: "json, name=condition" })
+  @SpeakeasyMetadata({ data: "json, name=condition" })
   condition?: GoogleCloudRetailV2betaSearchRequestQueryExpansionSpecConditionEnum;
 
-  @Metadata({ data: "json, name=pinUnexpandedResults" })
+  @SpeakeasyMetadata({ data: "json, name=pinUnexpandedResults" })
   pinUnexpandedResults?: boolean;
 }

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // S3ReferenceDataSourceUpdate
 /**
  * For a SQL-based Kinesis Data Analytics application, describes the Amazon S3 bucket name and object key name for an in-application reference table.
@@ -33,11 +33,11 @@ var S3ReferenceDataSourceUpdate = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=BucketARNUpdate" }),
+        SpeakeasyMetadata({ data: "json, name=BucketARNUpdate" }),
         __metadata("design:type", String)
     ], S3ReferenceDataSourceUpdate.prototype, "bucketArnUpdate", void 0);
     __decorate([
-        Metadata({ data: "json, name=FileKeyUpdate" }),
+        SpeakeasyMetadata({ data: "json, name=FileKeyUpdate" }),
         __metadata("design:type", String)
     ], S3ReferenceDataSourceUpdate.prototype, "fileKeyUpdate", void 0);
     return S3ReferenceDataSourceUpdate;

@@ -1,21 +1,21 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ParameterConstraints } from "./parameterconstraints";
 
 
+
 export class CreateRouteResponseResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ModelSelectionExpression" })
+  @SpeakeasyMetadata({ data: "json, name=ModelSelectionExpression" })
   modelSelectionExpression?: string;
 
-  @Metadata({ data: "json, name=ResponseModels" })
+  @SpeakeasyMetadata({ data: "json, name=ResponseModels" })
   responseModels?: Map<string, string>;
 
-  @Metadata({ data: "json, name=ResponseParameters", elemType: shared.ParameterConstraints })
+  @SpeakeasyMetadata({ data: "json, name=ResponseParameters", elemType: ParameterConstraints })
   responseParameters?: Map<string, ParameterConstraints>;
 
-  @Metadata({ data: "json, name=RouteResponseId" })
+  @SpeakeasyMetadata({ data: "json, name=RouteResponseId" })
   routeResponseId?: string;
 
-  @Metadata({ data: "json, name=RouteResponseKey" })
+  @SpeakeasyMetadata({ data: "json, name=RouteResponseKey" })
   routeResponseKey?: string;
 }

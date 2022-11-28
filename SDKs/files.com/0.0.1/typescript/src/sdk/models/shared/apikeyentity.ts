@@ -1,12 +1,13 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum ApiKeyEntityPermissionSetEnum {
-    None = "none"
-,    Full = "full"
-,    DesktopApp = "desktop_app"
-,    SyncApp = "sync_app"
-,    OfficeIntegration = "office_integration"
-,    MobileApp = "mobile_app"
+    None = "none",
+    Full = "full",
+    DesktopApp = "desktop_app",
+    SyncApp = "sync_app",
+    OfficeIntegration = "office_integration",
+    MobileApp = "mobile_app"
 }
 
 
@@ -15,36 +16,36 @@ export enum ApiKeyEntityPermissionSetEnum {
  * List Api Keys
 **/
 export class ApiKeyEntity extends SpeakeasyBase {
-  @Metadata({ data: "json, name=created_at" })
+  @SpeakeasyMetadata({ data: "json, name=created_at" })
   createdAt?: Date;
 
-  @Metadata({ data: "json, name=descriptive_label" })
+  @SpeakeasyMetadata({ data: "json, name=descriptive_label" })
   descriptiveLabel?: string;
 
-  @Metadata({ data: "json, name=expires_at" })
+  @SpeakeasyMetadata({ data: "json, name=expires_at" })
   expiresAt?: Date;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: number;
 
-  @Metadata({ data: "json, name=key" })
+  @SpeakeasyMetadata({ data: "json, name=key" })
   key?: string;
 
-  @Metadata({ data: "json, name=last_use_at" })
+  @SpeakeasyMetadata({ data: "json, name=last_use_at" })
   lastUseAt?: Date;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=path" })
+  @SpeakeasyMetadata({ data: "json, name=path" })
   path?: string;
 
-  @Metadata({ data: "json, name=permission_set" })
+  @SpeakeasyMetadata({ data: "json, name=permission_set" })
   permissionSet?: ApiKeyEntityPermissionSetEnum;
 
-  @Metadata({ data: "json, name=platform" })
+  @SpeakeasyMetadata({ data: "json, name=platform" })
   platform?: string;
 
-  @Metadata({ data: "json, name=user_id" })
+  @SpeakeasyMetadata({ data: "json, name=user_id" })
   userId?: number;
 }

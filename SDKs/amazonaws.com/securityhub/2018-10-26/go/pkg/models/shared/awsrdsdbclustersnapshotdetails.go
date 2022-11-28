@@ -1,5 +1,7 @@
 package shared
 
+// AwsRdsDbClusterSnapshotDetails
+// Information about an Amazon RDS DB cluster snapshot.
 type AwsRdsDbClusterSnapshotDetails struct {
 	AllocatedStorage                 *int64   `json:"AllocatedStorage,omitempty"`
 	AvailabilityZones                []string `json:"AvailabilityZones,omitempty"`

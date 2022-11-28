@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// ExportDescription
+// Represents the properties of the exported table.
 type ExportDescription struct {
 	BilledSizeBytes *int64              `json:"BilledSizeBytes,omitempty"`
 	ClientToken     *string             `json:"ClientToken,omitempty"`

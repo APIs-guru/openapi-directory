@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ExecutionTemplate } from "./executiontemplate";
 import { Execution } from "./execution";
 export declare enum ScheduleStateEnum {
@@ -9,6 +9,16 @@ export declare enum ScheduleStateEnum {
     UpdateFailed = "UPDATE_FAILED",
     Initializing = "INITIALIZING",
     Deleting = "DELETING"
+}
+/**
+ * The definition of a schedule.
+**/
+export declare class ScheduleInput extends SpeakeasyBase {
+    cronSchedule?: string;
+    description?: string;
+    executionTemplate?: ExecutionTemplate;
+    state?: ScheduleStateEnum;
+    timeZone?: string;
 }
 /**
  * The definition of a schedule.

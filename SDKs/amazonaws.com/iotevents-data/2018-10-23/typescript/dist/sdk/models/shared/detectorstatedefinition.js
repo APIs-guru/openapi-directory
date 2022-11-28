@@ -22,8 +22,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { TimerDefinition } from "./timerdefinition";
+import { VariableDefinition } from "./variabledefinition";
 // DetectorStateDefinition
 /**
  * The new state, variable values, and timer settings of the detector (instance).
@@ -34,15 +35,15 @@ var DetectorStateDefinition = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=stateName" }),
+        SpeakeasyMetadata({ data: "json, name=stateName" }),
         __metadata("design:type", String)
     ], DetectorStateDefinition.prototype, "stateName", void 0);
     __decorate([
-        Metadata({ data: "json, name=timers", elemType: shared.TimerDefinition }),
+        SpeakeasyMetadata({ data: "json, name=timers", elemType: TimerDefinition }),
         __metadata("design:type", Array)
     ], DetectorStateDefinition.prototype, "timers", void 0);
     __decorate([
-        Metadata({ data: "json, name=variables", elemType: shared.VariableDefinition }),
+        SpeakeasyMetadata({ data: "json, name=variables", elemType: VariableDefinition }),
         __metadata("design:type", Array)
     ], DetectorStateDefinition.prototype, "variables", void 0);
     return DetectorStateDefinition;

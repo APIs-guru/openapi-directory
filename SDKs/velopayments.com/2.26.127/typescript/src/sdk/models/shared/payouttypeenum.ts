@@ -1,7 +1,8 @@
 
 
+
 export enum PayoutTypeEnum {
-    Standard = "STANDARD"
-,    As = "AS"
-,    OnBehalfOf = "ON_BEHALF_OF"
+    Standard = "STANDARD",
+    As = "AS",
+    OnBehalfOf = "ON_BEHALF_OF"
 }

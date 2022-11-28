@@ -1,0 +1,61 @@
+import { SpeakeasyBase } from "../../../internal/utils";
+import { Canary } from "./canary";
+import { ExposedApi } from "./exposedapi";
+import { ChaosConfig } from "./chaosconfig";
+import { ClientConfig } from "./clientconfig";
+import { CorsSettings } from "./corssettings";
+import { Gzip } from "./gzip";
+import { HealthCheck } from "./healthcheck";
+import { IpFiltering } from "./ipfiltering";
+import { RedirectionSettings } from "./redirectionsettings";
+import { StatsdConfig } from "./statsdconfig";
+import { Target } from "./target";
+/**
+ * An otoroshi service descriptor. Represent a forward HTTP call on a domain to another location with some optional api management mecanism
+**/
+export declare class Service extends SpeakeasyBase {
+    canary?: Canary;
+    additionalHeaders?: Map<string, string>;
+    api?: ExposedApi;
+    authConfigRef?: string;
+    buildMode: boolean;
+    chaosConfig?: ChaosConfig;
+    clientConfig?: ClientConfig;
+    clientValidatorRef?: string;
+    cors?: CorsSettings;
+    domain: string;
+    enabled: boolean;
+    enforceSecureCommunication: boolean;
+    env: string;
+    forceHttps: boolean;
+    groups: string[];
+    gzip?: Gzip;
+    headersVerification?: Map<string, string>;
+    healthCheck?: HealthCheck;
+    id: string;
+    ipFiltering?: IpFiltering;
+    jwtVerifier?: any;
+    localHost?: string;
+    localScheme?: string;
+    maintenanceMode: boolean;
+    matchingHeaders?: Map<string, string>;
+    matchingRoot?: string;
+    metadata?: Map<string, string>;
+    name: string;
+    overrideHost?: boolean;
+    privateApp: boolean;
+    privatePatterns?: string[];
+    publicPatterns?: string[];
+    redirectToLocal?: boolean;
+    redirection?: RedirectionSettings;
+    root: string;
+    secComExcludedPatterns?: string[];
+    secComSettings?: any;
+    sendOtoroshiHeadersBack?: boolean;
+    statsdConfig?: StatsdConfig;
+    subdomain: string;
+    targets: Target[];
+    transformerRef?: string;
+    userFacing?: boolean;
+    xForwardedHeaders?: boolean;
+}

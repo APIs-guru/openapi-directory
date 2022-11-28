@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Money } from "./money";
 
+
 export enum PricePricingTypeEnum {
-    PricingTypeUnspecified = "PRICING_TYPE_UNSPECIFIED"
-,    CostPerMille = "COST_PER_MILLE"
-,    CostPerDay = "COST_PER_DAY"
+    PricingTypeUnspecified = "PRICING_TYPE_UNSPECIFIED",
+    CostPerMille = "COST_PER_MILLE",
+    CostPerDay = "COST_PER_DAY"
 }
 
 
@@ -13,9 +14,9 @@ export enum PricePricingTypeEnum {
  * Represents a price and a pricing type for a product / deal.
 **/
 export class Price extends SpeakeasyBase {
-  @Metadata({ data: "json, name=amount" })
+  @SpeakeasyMetadata({ data: "json, name=amount" })
   amount?: Money;
 
-  @Metadata({ data: "json, name=pricingType" })
+  @SpeakeasyMetadata({ data: "json, name=pricingType" })
   pricingType?: PricePricingTypeEnum;
 }

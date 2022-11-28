@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { UpdateBackendAuthForgotPasswordConfig } from "./updatebackendauthforgotpasswordconfig";
 import { UpdateBackendAuthMfaConfig } from "./updatebackendauthmfaconfig";
 import { UpdateBackendAuthOAuthConfig } from "./updatebackendauthoauthconfig";
 import { UpdateBackendAuthPasswordPolicyConfig } from "./updatebackendauthpasswordpolicyconfig";
+
 
 
 // UpdateBackendAuthUserPoolConfig
@@ -10,15 +11,15 @@ import { UpdateBackendAuthPasswordPolicyConfig } from "./updatebackendauthpasswo
  * Describes the Amazon Cognito user pool configuration for the authorization resource to be configured for your Amplify project on an update.
 **/
 export class UpdateBackendAuthUserPoolConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ForgotPassword" })
+  @SpeakeasyMetadata({ data: "json, name=ForgotPassword" })
   forgotPassword?: UpdateBackendAuthForgotPasswordConfig;
 
-  @Metadata({ data: "json, name=Mfa" })
+  @SpeakeasyMetadata({ data: "json, name=Mfa" })
   mfa?: UpdateBackendAuthMfaConfig;
 
-  @Metadata({ data: "json, name=OAuth" })
+  @SpeakeasyMetadata({ data: "json, name=OAuth" })
   oAuth?: UpdateBackendAuthOAuthConfig;
 
-  @Metadata({ data: "json, name=PasswordPolicy" })
+  @SpeakeasyMetadata({ data: "json, name=PasswordPolicy" })
   passwordPolicy?: UpdateBackendAuthPasswordPolicyConfig;
 }

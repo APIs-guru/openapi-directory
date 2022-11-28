@@ -1,15 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SimplifiedApplication } from "./simplifiedapplication";
 
 
+
 export class DescribeReleaseLabelOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Applications", elemType: shared.SimplifiedApplication })
+  @SpeakeasyMetadata({ data: "json, name=Applications", elemType: SimplifiedApplication })
   applications?: SimplifiedApplication[];
 
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=ReleaseLabel" })
+  @SpeakeasyMetadata({ data: "json, name=ReleaseLabel" })
   releaseLabel?: string;
 }

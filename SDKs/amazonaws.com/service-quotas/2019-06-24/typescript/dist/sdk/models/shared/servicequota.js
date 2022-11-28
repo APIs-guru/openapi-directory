@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ErrorReason } from "./errorreason";
 import { QuotaPeriod } from "./quotaperiod";
 import { MetricInfo } from "./metricinfo";
@@ -36,51 +36,51 @@ var ServiceQuota = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Adjustable" }),
+        SpeakeasyMetadata({ data: "json, name=Adjustable" }),
         __metadata("design:type", Boolean)
     ], ServiceQuota.prototype, "adjustable", void 0);
     __decorate([
-        Metadata({ data: "json, name=ErrorReason" }),
+        SpeakeasyMetadata({ data: "json, name=ErrorReason" }),
         __metadata("design:type", ErrorReason)
     ], ServiceQuota.prototype, "errorReason", void 0);
     __decorate([
-        Metadata({ data: "json, name=GlobalQuota" }),
+        SpeakeasyMetadata({ data: "json, name=GlobalQuota" }),
         __metadata("design:type", Boolean)
     ], ServiceQuota.prototype, "globalQuota", void 0);
     __decorate([
-        Metadata({ data: "json, name=Period" }),
+        SpeakeasyMetadata({ data: "json, name=Period" }),
         __metadata("design:type", QuotaPeriod)
     ], ServiceQuota.prototype, "period", void 0);
     __decorate([
-        Metadata({ data: "json, name=QuotaArn" }),
+        SpeakeasyMetadata({ data: "json, name=QuotaArn" }),
         __metadata("design:type", String)
     ], ServiceQuota.prototype, "quotaArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=QuotaCode" }),
+        SpeakeasyMetadata({ data: "json, name=QuotaCode" }),
         __metadata("design:type", String)
     ], ServiceQuota.prototype, "quotaCode", void 0);
     __decorate([
-        Metadata({ data: "json, name=QuotaName" }),
+        SpeakeasyMetadata({ data: "json, name=QuotaName" }),
         __metadata("design:type", String)
     ], ServiceQuota.prototype, "quotaName", void 0);
     __decorate([
-        Metadata({ data: "json, name=ServiceCode" }),
+        SpeakeasyMetadata({ data: "json, name=ServiceCode" }),
         __metadata("design:type", String)
     ], ServiceQuota.prototype, "serviceCode", void 0);
     __decorate([
-        Metadata({ data: "json, name=ServiceName" }),
+        SpeakeasyMetadata({ data: "json, name=ServiceName" }),
         __metadata("design:type", String)
     ], ServiceQuota.prototype, "serviceName", void 0);
     __decorate([
-        Metadata({ data: "json, name=Unit" }),
+        SpeakeasyMetadata({ data: "json, name=Unit" }),
         __metadata("design:type", String)
     ], ServiceQuota.prototype, "unit", void 0);
     __decorate([
-        Metadata({ data: "json, name=UsageMetric" }),
+        SpeakeasyMetadata({ data: "json, name=UsageMetric" }),
         __metadata("design:type", MetricInfo)
     ], ServiceQuota.prototype, "usageMetric", void 0);
     __decorate([
-        Metadata({ data: "json, name=Value" }),
+        SpeakeasyMetadata({ data: "json, name=Value" }),
         __metadata("design:type", Number)
     ], ServiceQuota.prototype, "value", void 0);
     return ServiceQuota;

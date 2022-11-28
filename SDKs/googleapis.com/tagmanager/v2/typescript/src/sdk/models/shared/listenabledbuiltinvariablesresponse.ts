@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BuiltInVariable } from "./builtinvariable";
+
 
 
 // ListEnabledBuiltInVariablesResponse
@@ -8,9 +8,9 @@ import { BuiltInVariable } from "./builtinvariable";
  * A list of enabled built-in variables.
 **/
 export class ListEnabledBuiltInVariablesResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=builtInVariable", elemType: shared.BuiltInVariable })
+  @SpeakeasyMetadata({ data: "json, name=builtInVariable", elemType: BuiltInVariable })
   builtInVariable?: BuiltInVariable[];
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 }

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { PermissionTypeEnum } from "./permissiontypeenum";
 /**
  * A share invitation summary return object.

@@ -5,9 +5,9 @@ from sdk.models import shared
 
 @dataclass
 class GetRealmClientsIDRolesRoleNameUsersPathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
-    realm: str = field(default=None, metadata={'path_param': { 'field_name': 'realm', 'style': 'simple', 'explode': False }})
-    role_name: str = field(default=None, metadata={'path_param': { 'field_name': 'role-name', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    realm: str = field(metadata={'path_param': { 'field_name': 'realm', 'style': 'simple', 'explode': False }})
+    role_name: str = field(metadata={'path_param': { 'field_name': 'role-name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -18,13 +18,13 @@ class GetRealmClientsIDRolesRoleNameUsersQueryParams:
 
 @dataclass
 class GetRealmClientsIDRolesRoleNameUsersRequest:
-    path_params: GetRealmClientsIDRolesRoleNameUsersPathParams = field(default=None)
-    query_params: GetRealmClientsIDRolesRoleNameUsersQueryParams = field(default=None)
+    path_params: GetRealmClientsIDRolesRoleNameUsersPathParams = field()
+    query_params: GetRealmClientsIDRolesRoleNameUsersQueryParams = field()
     
 
 @dataclass
 class GetRealmClientsIDRolesRoleNameUsersResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     user_representations: Optional[List[shared.UserRepresentation]] = field(default=None)
     

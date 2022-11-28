@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GitConfig
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Specifies configuration details for a Git repository in your Amazon Web Services account.
 **/
 export class GitConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Branch" })
+  @SpeakeasyMetadata({ data: "json, name=Branch" })
   branch?: string;
 
-  @Metadata({ data: "json, name=RepositoryUrl" })
+  @SpeakeasyMetadata({ data: "json, name=RepositoryUrl" })
   repositoryUrl: string;
 
-  @Metadata({ data: "json, name=SecretArn" })
+  @SpeakeasyMetadata({ data: "json, name=SecretArn" })
   secretArn?: string;
 }

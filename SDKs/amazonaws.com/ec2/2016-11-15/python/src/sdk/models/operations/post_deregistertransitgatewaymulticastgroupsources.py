@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostDeregisterTransitGatewayMulticastGroupSourcesActionEnum(str, Enum):
     DEREGISTER_TRANSIT_GATEWAY_MULTICAST_GROUP_SOURCES = "DeregisterTransitGatewayMulticastGroupSources"
@@ -10,8 +14,8 @@ class PostDeregisterTransitGatewayMulticastGroupSourcesVersionEnum(str, Enum):
 
 @dataclass
 class PostDeregisterTransitGatewayMulticastGroupSourcesQueryParams:
-    action: PostDeregisterTransitGatewayMulticastGroupSourcesActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostDeregisterTransitGatewayMulticastGroupSourcesVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostDeregisterTransitGatewayMulticastGroupSourcesActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostDeregisterTransitGatewayMulticastGroupSourcesVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostDeregisterTransitGatewayMulticastGroupSourcesHeaders:
 
 @dataclass
 class PostDeregisterTransitGatewayMulticastGroupSourcesRequest:
-    query_params: PostDeregisterTransitGatewayMulticastGroupSourcesQueryParams = field(default=None)
-    headers: PostDeregisterTransitGatewayMulticastGroupSourcesHeaders = field(default=None)
+    headers: PostDeregisterTransitGatewayMulticastGroupSourcesHeaders = field()
+    query_params: PostDeregisterTransitGatewayMulticastGroupSourcesQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostDeregisterTransitGatewayMulticastGroupSourcesResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

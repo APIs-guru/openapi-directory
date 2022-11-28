@@ -1,10 +1,11 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from typing import Any,Optional
+from enum import Enum
 
 
 @dataclass
 class GetDeviceWirelessConnectionStatsPathParams:
-    serial: str = field(default=None, metadata={'path_param': { 'field_name': 'serial', 'style': 'simple', 'explode': False }})
+    serial: str = field(metadata={'path_param': { 'field_name': 'serial', 'style': 'simple', 'explode': False }})
     
 class GetDeviceWirelessConnectionStatsBandEnum(str, Enum):
     TWO_4 = "2.4"
@@ -24,13 +25,13 @@ class GetDeviceWirelessConnectionStatsQueryParams:
 
 @dataclass
 class GetDeviceWirelessConnectionStatsRequest:
-    path_params: GetDeviceWirelessConnectionStatsPathParams = field(default=None)
-    query_params: GetDeviceWirelessConnectionStatsQueryParams = field(default=None)
+    path_params: GetDeviceWirelessConnectionStatsPathParams = field()
+    query_params: GetDeviceWirelessConnectionStatsQueryParams = field()
     
 
 @dataclass
 class GetDeviceWirelessConnectionStatsResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     get_device_wireless_connection_stats_200_application_json_object: Optional[dict[str, Any]] = field(default=None)
     

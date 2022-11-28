@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Comment } from "./comment";
+
 
 
 // CommentList
@@ -8,12 +8,12 @@ import { Comment } from "./comment";
  * A list of comments on a file.
 **/
 export class CommentList extends SpeakeasyBase {
-  @Metadata({ data: "json, name=comments", elemType: shared.Comment })
+  @SpeakeasyMetadata({ data: "json, name=comments", elemType: Comment })
   comments?: Comment[];
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 }

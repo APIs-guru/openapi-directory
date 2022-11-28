@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // StartupRemoteAccessDto
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Startup remote access dto.
 **/
 export class StartupRemoteAccessDto extends SpeakeasyBase {
-  @Metadata({ data: "json, name=EnableAutomaticPortMapping" })
+  @SpeakeasyMetadata({ data: "json, name=EnableAutomaticPortMapping" })
   enableAutomaticPortMapping: boolean;
 
-  @Metadata({ data: "json, name=EnableRemoteAccess" })
+  @SpeakeasyMetadata({ data: "json, name=EnableRemoteAccess" })
   enableRemoteAccess: boolean;
 }

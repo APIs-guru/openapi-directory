@@ -1,12 +1,13 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum MetricFormattingTypeEnum {
-    MetricTypeUnspecified = "METRIC_TYPE_UNSPECIFIED"
-,    Integer = "INTEGER"
-,    Float = "FLOAT"
-,    Currency = "CURRENCY"
-,    Percent = "PERCENT"
-,    Time = "TIME"
+    MetricTypeUnspecified = "METRIC_TYPE_UNSPECIFIED",
+    Integer = "INTEGER",
+    Float = "FLOAT",
+    Currency = "CURRENCY",
+    Percent = "PERCENT",
+    Time = "TIME"
 }
 
 
@@ -15,12 +16,12 @@ export enum MetricFormattingTypeEnum {
  * [Metrics](https://support.google.com/analytics/answer/1033861) are the quantitative measurements. For example, the metric `ga:users` indicates the total number of users for the requested time period.
 **/
 export class Metric extends SpeakeasyBase {
-  @Metadata({ data: "json, name=alias" })
+  @SpeakeasyMetadata({ data: "json, name=alias" })
   alias?: string;
 
-  @Metadata({ data: "json, name=expression" })
+  @SpeakeasyMetadata({ data: "json, name=expression" })
   expression?: string;
 
-  @Metadata({ data: "json, name=formattingType" })
+  @SpeakeasyMetadata({ data: "json, name=formattingType" })
   formattingType?: MetricFormattingTypeEnum;
 }

@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class NotifyWorkersRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=MessageText" })
+  @SpeakeasyMetadata({ data: "json, name=MessageText" })
   messageText: string;
 
-  @Metadata({ data: "json, name=Subject" })
+  @SpeakeasyMetadata({ data: "json, name=Subject" })
   subject: string;
 
-  @Metadata({ data: "json, name=WorkerIds" })
+  @SpeakeasyMetadata({ data: "json, name=WorkerIds" })
   workerIds: string[];
 }

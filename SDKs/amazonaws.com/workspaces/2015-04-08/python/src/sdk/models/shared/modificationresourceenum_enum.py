@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class ModificationResourceEnumEnum(str, Enum):
     ROOT_VOLUME = "ROOT_VOLUME"

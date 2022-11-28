@@ -83,6 +83,8 @@ type BranchRestrictionPolicyUsers struct {
 	URL               *string `json:"url,omitempty"`
 }
 
+// BranchRestrictionPolicy
+// Branch Restriction Policy
 type BranchRestrictionPolicy struct {
 	Apps     []BranchRestrictionPolicyApps  `json:"apps"`
 	AppsURL  string                         `json:"apps_url"`

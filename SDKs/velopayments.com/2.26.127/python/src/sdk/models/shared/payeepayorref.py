@@ -1,21 +1,22 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import invitationstatus_enum
-from . import payableissue_2
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class PayeePayorRef:
-    invitation_status: Optional[invitationstatus_enum.InvitationStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'invitationStatus' }})
-    invitation_status_timestamp: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'invitationStatusTimestamp', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    payable_issues: Optional[List[payableissue_2.PayableIssue2]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'payableIssues' }})
-    payable_status: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'payableStatus' }})
-    payment_channel_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'paymentChannelId' }})
-    payor_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'payorId' }})
-    remote_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'remoteId' }})
+    invitation_status: Optional[InvitationStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('invitationStatus') }})
+    invitation_status_timestamp: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('invitationStatusTimestamp'), 'encoder': utils.datetimeisoformat(True), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    payable_issues: Optional[List[PayableIssue2]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('payableIssues') }})
+    payable_status: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('payableStatus') }})
+    payment_channel_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('paymentChannelId') }})
+    payor_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('payorId') }})
+    remote_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('remoteId') }})
     

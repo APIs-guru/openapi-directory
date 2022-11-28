@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// Story
+// A user story
 type Story struct {
 	Content   *string    `json:"content,omitempty"`
 	Date      *time.Time `json:"date,omitempty"`

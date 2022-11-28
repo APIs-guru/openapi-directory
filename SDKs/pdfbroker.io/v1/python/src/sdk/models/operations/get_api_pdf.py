@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class GetAPIPdfResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error_response_dto: Optional[shared.ErrorResponseDto] = field(default=None)
-    status_code: int = field(default=None)
     

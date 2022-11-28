@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class StopSolutionVersionCreationRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=solutionVersionArn" })
+  @SpeakeasyMetadata({ data: "json, name=solutionVersionArn" })
   solutionVersionArn: string;
 }

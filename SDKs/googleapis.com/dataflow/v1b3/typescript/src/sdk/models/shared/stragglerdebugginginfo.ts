@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { HotKeyDebuggingInfo } from "./hotkeydebugginginfo";
+
 
 
 // StragglerDebuggingInfo
@@ -7,6 +8,6 @@ import { HotKeyDebuggingInfo } from "./hotkeydebugginginfo";
  * Information useful for debugging a straggler. Each type will provide specialized debugging information relevant for a particular cause. The StragglerDebuggingInfo will be 1:1 mapping to the StragglerCause enum.
 **/
 export class StragglerDebuggingInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=hotKey" })
+  @SpeakeasyMetadata({ data: "json, name=hotKey" })
   hotKey?: HotKeyDebuggingInfo;
 }

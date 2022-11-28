@@ -1,5 +1,17 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { ImageInput } from "./image";
 import { Image } from "./image";
+
+
+
+// ImageItemInput
+/** 
+ * An item containing an image.
+**/
+export class ImageItemInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=image" })
+  image?: ImageInput;
+}
 
 
 // ImageItem
@@ -7,6 +19,6 @@ import { Image } from "./image";
  * An item containing an image.
 **/
 export class ImageItem extends SpeakeasyBase {
-  @Metadata({ data: "json, name=image" })
+  @SpeakeasyMetadata({ data: "json, name=image" })
   image?: Image;
 }

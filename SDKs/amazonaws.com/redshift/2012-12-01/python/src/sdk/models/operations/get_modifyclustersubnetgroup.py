@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 
 class GetModifyClusterSubnetGroupActionEnum(str, Enum):
     MODIFY_CLUSTER_SUBNET_GROUP = "ModifyClusterSubnetGroup"
@@ -10,11 +14,11 @@ class GetModifyClusterSubnetGroupVersionEnum(str, Enum):
 
 @dataclass
 class GetModifyClusterSubnetGroupQueryParams:
-    action: GetModifyClusterSubnetGroupActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    cluster_subnet_group_name: str = field(default=None, metadata={'query_param': { 'field_name': 'ClusterSubnetGroupName', 'style': 'form', 'explode': True }})
+    action: GetModifyClusterSubnetGroupActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    cluster_subnet_group_name: str = field(metadata={'query_param': { 'field_name': 'ClusterSubnetGroupName', 'style': 'form', 'explode': True }})
+    subnet_ids: List[str] = field(metadata={'query_param': { 'field_name': 'SubnetIds', 'style': 'form', 'explode': True }})
+    version: GetModifyClusterSubnetGroupVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     description: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'Description', 'style': 'form', 'explode': True }})
-    subnet_ids: List[str] = field(default=None, metadata={'query_param': { 'field_name': 'SubnetIds', 'style': 'form', 'explode': True }})
-    version: GetModifyClusterSubnetGroupVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -30,13 +34,13 @@ class GetModifyClusterSubnetGroupHeaders:
 
 @dataclass
 class GetModifyClusterSubnetGroupRequest:
-    query_params: GetModifyClusterSubnetGroupQueryParams = field(default=None)
-    headers: GetModifyClusterSubnetGroupHeaders = field(default=None)
+    headers: GetModifyClusterSubnetGroupHeaders = field()
+    query_params: GetModifyClusterSubnetGroupQueryParams = field()
     
 
 @dataclass
 class GetModifyClusterSubnetGroupResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

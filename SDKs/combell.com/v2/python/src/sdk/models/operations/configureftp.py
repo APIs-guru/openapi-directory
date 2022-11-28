@@ -5,23 +5,23 @@ from sdk.models import shared
 
 @dataclass
 class ConfigureFtpPathParams:
-    domain_name: str = field(default=None, metadata={'path_param': { 'field_name': 'domainName', 'style': 'simple', 'explode': False }})
+    domain_name: str = field(metadata={'path_param': { 'field_name': 'domainName', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class ConfigureFtpQueryParams:
-    domain_name: str = field(default=None, metadata={'query_param': { 'field_name': 'domain_name', 'style': 'form', 'explode': True }})
+    domain_name: str = field(metadata={'query_param': { 'field_name': 'domain_name', 'style': 'form', 'explode': True }})
     
 
 @dataclass
 class ConfigureFtpRequest:
-    path_params: ConfigureFtpPathParams = field(default=None)
-    query_params: ConfigureFtpQueryParams = field(default=None)
+    path_params: ConfigureFtpPathParams = field()
+    query_params: ConfigureFtpQueryParams = field()
     request: Optional[shared.FtpConfiguration] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class ConfigureFtpResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

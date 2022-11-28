@@ -1,8 +1,9 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
-from typing import Any,Enum,List,Optional
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 class ListPaymentsAuditV3StatusEnum(str, Enum):
@@ -38,20 +39,20 @@ class ListPaymentsAuditV3QueryParams:
     source_amount_to: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'sourceAmountTo', 'style': 'form', 'explode': True }})
     source_currency: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'sourceCurrency', 'style': 'form', 'explode': True }})
     status: Optional[ListPaymentsAuditV3StatusEnum] = field(default=None, metadata={'query_param': { 'field_name': 'status', 'style': 'form', 'explode': True }})
-    submitted_date_from: Optional[datetime] = field(default=None, metadata={'query_param': { 'field_name': 'submittedDateFrom', 'style': 'form', 'explode': True }})
-    submitted_date_to: Optional[datetime] = field(default=None, metadata={'query_param': { 'field_name': 'submittedDateTo', 'style': 'form', 'explode': True }})
+    submitted_date_from: Optional[date] = field(default=None, metadata={'query_param': { 'field_name': 'submittedDateFrom', 'style': 'form', 'explode': True }})
+    submitted_date_to: Optional[date] = field(default=None, metadata={'query_param': { 'field_name': 'submittedDateTo', 'style': 'form', 'explode': True }})
     
 
 @dataclass
 class ListPaymentsAuditV3Request:
-    query_params: ListPaymentsAuditV3QueryParams = field(default=None)
+    query_params: ListPaymentsAuditV3QueryParams = field()
     
 
 @dataclass
 class ListPaymentsAuditV3Response:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     list_payments_response_v3: Optional[shared.ListPaymentsResponseV3] = field(default=None)
-    status_code: int = field(default=None)
     inline_response_400: Optional[Any] = field(default=None)
     inline_response_401: Optional[Any] = field(default=None)
     inline_response_403: Optional[Any] = field(default=None)

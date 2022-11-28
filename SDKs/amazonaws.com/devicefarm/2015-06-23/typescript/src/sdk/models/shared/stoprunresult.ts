@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Run } from "./run";
+
 
 
 // StopRunResult
@@ -7,6 +8,6 @@ import { Run } from "./run";
  * Represents the results of your stop run attempt.
 **/
 export class StopRunResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=run" })
+  @SpeakeasyMetadata({ data: "json, name=run" })
   run?: Run;
 }

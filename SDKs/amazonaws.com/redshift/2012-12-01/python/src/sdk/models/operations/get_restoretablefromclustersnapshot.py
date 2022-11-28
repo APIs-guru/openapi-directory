@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetRestoreTableFromClusterSnapshotActionEnum(str, Enum):
     RESTORE_TABLE_FROM_CLUSTER_SNAPSHOT = "RestoreTableFromClusterSnapshot"
@@ -10,17 +14,17 @@ class GetRestoreTableFromClusterSnapshotVersionEnum(str, Enum):
 
 @dataclass
 class GetRestoreTableFromClusterSnapshotQueryParams:
-    action: GetRestoreTableFromClusterSnapshotActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    cluster_identifier: str = field(default=None, metadata={'query_param': { 'field_name': 'ClusterIdentifier', 'style': 'form', 'explode': True }})
+    action: GetRestoreTableFromClusterSnapshotActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    cluster_identifier: str = field(metadata={'query_param': { 'field_name': 'ClusterIdentifier', 'style': 'form', 'explode': True }})
+    new_table_name: str = field(metadata={'query_param': { 'field_name': 'NewTableName', 'style': 'form', 'explode': True }})
+    snapshot_identifier: str = field(metadata={'query_param': { 'field_name': 'SnapshotIdentifier', 'style': 'form', 'explode': True }})
+    source_database_name: str = field(metadata={'query_param': { 'field_name': 'SourceDatabaseName', 'style': 'form', 'explode': True }})
+    source_table_name: str = field(metadata={'query_param': { 'field_name': 'SourceTableName', 'style': 'form', 'explode': True }})
+    version: GetRestoreTableFromClusterSnapshotVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     enable_case_sensitive_identifier: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'EnableCaseSensitiveIdentifier', 'style': 'form', 'explode': True }})
-    new_table_name: str = field(default=None, metadata={'query_param': { 'field_name': 'NewTableName', 'style': 'form', 'explode': True }})
-    snapshot_identifier: str = field(default=None, metadata={'query_param': { 'field_name': 'SnapshotIdentifier', 'style': 'form', 'explode': True }})
-    source_database_name: str = field(default=None, metadata={'query_param': { 'field_name': 'SourceDatabaseName', 'style': 'form', 'explode': True }})
     source_schema_name: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'SourceSchemaName', 'style': 'form', 'explode': True }})
-    source_table_name: str = field(default=None, metadata={'query_param': { 'field_name': 'SourceTableName', 'style': 'form', 'explode': True }})
     target_database_name: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'TargetDatabaseName', 'style': 'form', 'explode': True }})
     target_schema_name: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'TargetSchemaName', 'style': 'form', 'explode': True }})
-    version: GetRestoreTableFromClusterSnapshotVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -36,13 +40,13 @@ class GetRestoreTableFromClusterSnapshotHeaders:
 
 @dataclass
 class GetRestoreTableFromClusterSnapshotRequest:
-    query_params: GetRestoreTableFromClusterSnapshotQueryParams = field(default=None)
-    headers: GetRestoreTableFromClusterSnapshotHeaders = field(default=None)
+    headers: GetRestoreTableFromClusterSnapshotHeaders = field()
+    query_params: GetRestoreTableFromClusterSnapshotQueryParams = field()
     
 
 @dataclass
 class GetRestoreTableFromClusterSnapshotResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

@@ -1,50 +1,50 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-export const URBANDELIVERY_SERVERS = [
-	"http://api.climatekuul.com:8000/footprint",
-];
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 
+export const UrbanDeliveryServerList = [
+	"http://api.climatekuul.com:8000/footprint",
+] as const;
 
 
 export class UrbanDeliveryRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "form, name=apiKey_l1;" })
+  @SpeakeasyMetadata({ data: "form, name=apiKey_l1;" })
   apiKeyL1: string;
 
-  @Metadata({ data: "form, name=apiKey_l2;" })
+  @SpeakeasyMetadata({ data: "form, name=apiKey_l2;" })
   apiKeyL2: string;
 
-  @Metadata({ data: "form, name=destination_latitude;" })
+  @SpeakeasyMetadata({ data: "form, name=destination_latitude;" })
   destinationLatitude: number;
 
-  @Metadata({ data: "form, name=destination_longitude;" })
+  @SpeakeasyMetadata({ data: "form, name=destination_longitude;" })
   destinationLongitude: number;
 
-  @Metadata({ data: "form, name=item_count;" })
+  @SpeakeasyMetadata({ data: "form, name=item_count;" })
   itemCount: number;
 
-  @Metadata({ data: "form, name=origin_latitude;" })
+  @SpeakeasyMetadata({ data: "form, name=origin_latitude;" })
   originLatitude: number;
 
-  @Metadata({ data: "form, name=origin_longitude;" })
+  @SpeakeasyMetadata({ data: "form, name=origin_longitude;" })
   originLongitude: number;
 
-  @Metadata({ data: "form, name=vehicle_type;" })
+  @SpeakeasyMetadata({ data: "form, name=vehicle_type;" })
   vehicleType: string;
 }
 
 
 export class UrbanDeliveryRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   serverUrl?: string;
 
-  @Metadata({ data: "request, media_type=application/x-www-form-urlencoded" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/x-www-form-urlencoded" })
   request?: UrbanDeliveryRequestBody;
 }
 
 
 export class UrbanDeliveryResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

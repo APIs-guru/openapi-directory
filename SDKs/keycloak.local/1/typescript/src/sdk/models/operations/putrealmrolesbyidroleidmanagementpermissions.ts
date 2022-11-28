@@ -1,32 +1,33 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class PutRealmRolesByIdRoleIdManagementPermissionsPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=realm" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=realm" })
   realm: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=role-id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=role-id" })
   roleId: string;
 }
 
 
 export class PutRealmRolesByIdRoleIdManagementPermissionsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: PutRealmRolesByIdRoleIdManagementPermissionsPathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: shared.ManagementPermissionReference;
 }
 
 
 export class PutRealmRolesByIdRoleIdManagementPermissionsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   managementPermissionReference?: shared.ManagementPermissionReference;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

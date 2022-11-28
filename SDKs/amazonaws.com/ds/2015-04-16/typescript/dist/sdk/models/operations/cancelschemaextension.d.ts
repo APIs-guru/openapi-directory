@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare enum CancelSchemaExtensionXAmzTargetEnum {
     DirectoryService20150416CancelSchemaExtension = "DirectoryService_20150416.CancelSchemaExtension"

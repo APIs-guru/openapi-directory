@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum TextPositionHorizontalAlignmentEnum {
-    HorizontalAlignUnspecified = "HORIZONTAL_ALIGN_UNSPECIFIED"
-,    Left = "LEFT"
-,    Center = "CENTER"
-,    Right = "RIGHT"
+    HorizontalAlignUnspecified = "HORIZONTAL_ALIGN_UNSPECIFIED",
+    Left = "LEFT",
+    Center = "CENTER",
+    Right = "RIGHT"
 }
 
 
@@ -13,6 +14,6 @@ export enum TextPositionHorizontalAlignmentEnum {
  * Position settings for text.
 **/
 export class TextPosition extends SpeakeasyBase {
-  @Metadata({ data: "json, name=horizontalAlignment" })
+  @SpeakeasyMetadata({ data: "json, name=horizontalAlignment" })
   horizontalAlignment?: TextPositionHorizontalAlignmentEnum;
 }

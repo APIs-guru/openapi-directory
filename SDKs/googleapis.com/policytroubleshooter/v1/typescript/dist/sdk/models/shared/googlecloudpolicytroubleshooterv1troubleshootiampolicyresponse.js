@@ -22,8 +22,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { GoogleRpcStatus } from "./googlerpcstatus";
+import { GoogleCloudPolicytroubleshooterV1ExplainedPolicy } from "./googlecloudpolicytroubleshooterv1explainedpolicy";
 export var GoogleCloudPolicytroubleshooterV1TroubleshootIamPolicyResponseAccessEnum;
 (function (GoogleCloudPolicytroubleshooterV1TroubleshootIamPolicyResponseAccessEnum) {
     GoogleCloudPolicytroubleshooterV1TroubleshootIamPolicyResponseAccessEnum["AccessStateUnspecified"] = "ACCESS_STATE_UNSPECIFIED";
@@ -42,15 +43,15 @@ var GoogleCloudPolicytroubleshooterV1TroubleshootIamPolicyResponse = /** @class 
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=access" }),
+        SpeakeasyMetadata({ data: "json, name=access" }),
         __metadata("design:type", String)
     ], GoogleCloudPolicytroubleshooterV1TroubleshootIamPolicyResponse.prototype, "access", void 0);
     __decorate([
-        Metadata({ data: "json, name=errors", elemType: shared.GoogleRpcStatus }),
+        SpeakeasyMetadata({ data: "json, name=errors", elemType: GoogleRpcStatus }),
         __metadata("design:type", Array)
     ], GoogleCloudPolicytroubleshooterV1TroubleshootIamPolicyResponse.prototype, "errors", void 0);
     __decorate([
-        Metadata({ data: "json, name=explainedPolicies", elemType: shared.GoogleCloudPolicytroubleshooterV1ExplainedPolicy }),
+        SpeakeasyMetadata({ data: "json, name=explainedPolicies", elemType: GoogleCloudPolicytroubleshooterV1ExplainedPolicy }),
         __metadata("design:type", Array)
     ], GoogleCloudPolicytroubleshooterV1TroubleshootIamPolicyResponse.prototype, "explainedPolicies", void 0);
     return GoogleCloudPolicytroubleshooterV1TroubleshootIamPolicyResponse;

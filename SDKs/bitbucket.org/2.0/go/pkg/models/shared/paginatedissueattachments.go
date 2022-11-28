@@ -1,5 +1,7 @@
 package shared
 
+// PaginatedIssueAttachments
+// A paginated list of issue attachments.
 type PaginatedIssueAttachments struct {
 	Next     *string                  `json:"next,omitempty"`
 	Page     *int64                   `json:"page,omitempty"`

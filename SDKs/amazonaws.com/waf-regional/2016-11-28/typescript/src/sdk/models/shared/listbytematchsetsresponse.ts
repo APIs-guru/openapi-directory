@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ByteMatchSetSummary } from "./bytematchsetsummary";
 
 
+
 export class ListByteMatchSetsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ByteMatchSets", elemType: shared.ByteMatchSetSummary })
+  @SpeakeasyMetadata({ data: "json, name=ByteMatchSets", elemType: ByteMatchSetSummary })
   byteMatchSets?: ByteMatchSetSummary[];
 
-  @Metadata({ data: "json, name=NextMarker" })
+  @SpeakeasyMetadata({ data: "json, name=NextMarker" })
   nextMarker?: string;
 }

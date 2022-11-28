@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { WeightedTarget } from "./weightedtarget";
+
 
 
 // GrpcRouteAction
@@ -8,6 +8,6 @@ import { WeightedTarget } from "./weightedtarget";
  * An object that represents the action to take if a match is determined.
 **/
 export class GrpcRouteAction extends SpeakeasyBase {
-  @Metadata({ data: "json, name=weightedTargets", elemType: shared.WeightedTarget })
+  @SpeakeasyMetadata({ data: "json, name=weightedTargets", elemType: WeightedTarget })
   weightedTargets: WeightedTarget[];
 }

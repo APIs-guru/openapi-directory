@@ -1,61 +1,62 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class PoolListPoolUsageMetricsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=$filter" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=$filter" })
   dollarFilter?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=api-version" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=api-version" })
   apiVersion: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=endtime" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=endtime" })
   endtime?: Date;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=maxresults" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=maxresults" })
   maxresults?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=starttime" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=starttime" })
   starttime?: Date;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=timeout" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=timeout" })
   timeout?: number;
 }
 
 
 export class PoolListPoolUsageMetricsHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=client-request-id" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=client-request-id" })
   clientRequestId?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=ocp-date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=ocp-date" })
   ocpDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=return-client-request-id" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=return-client-request-id" })
   returnClientRequestId?: boolean;
 }
 
 
 export class PoolListPoolUsageMetricsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: PoolListPoolUsageMetricsQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: PoolListPoolUsageMetricsHeaders;
 }
 
 
 export class PoolListPoolUsageMetricsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   batchError?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: Map<string, string[]>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   poolListPoolUsageMetricsResult?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

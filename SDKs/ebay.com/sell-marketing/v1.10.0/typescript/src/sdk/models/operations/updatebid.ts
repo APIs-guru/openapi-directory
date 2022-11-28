@@ -1,38 +1,39 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class UpdateBidPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=ad_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=ad_id" })
   adId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=campaign_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=campaign_id" })
   campaignId: string;
 }
 
 
 export class UpdateBidSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   apiAuth: shared.SchemeApiAuth;
 }
 
 
 export class UpdateBidRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: UpdateBidPathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: shared.UpdateBidPercentageRequest;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: UpdateBidSecurity;
 }
 
 
 export class UpdateBidResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

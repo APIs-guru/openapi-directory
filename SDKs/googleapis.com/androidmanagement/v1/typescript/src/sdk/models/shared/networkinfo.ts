@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TelephonyInfo } from "./telephonyinfo";
+
 
 
 // NetworkInfo
@@ -8,18 +8,18 @@ import { TelephonyInfo } from "./telephonyinfo";
  * Device network info.
 **/
 export class NetworkInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=imei" })
+  @SpeakeasyMetadata({ data: "json, name=imei" })
   imei?: string;
 
-  @Metadata({ data: "json, name=meid" })
+  @SpeakeasyMetadata({ data: "json, name=meid" })
   meid?: string;
 
-  @Metadata({ data: "json, name=networkOperatorName" })
+  @SpeakeasyMetadata({ data: "json, name=networkOperatorName" })
   networkOperatorName?: string;
 
-  @Metadata({ data: "json, name=telephonyInfos", elemType: shared.TelephonyInfo })
+  @SpeakeasyMetadata({ data: "json, name=telephonyInfos", elemType: TelephonyInfo })
   telephonyInfos?: TelephonyInfo[];
 
-  @Metadata({ data: "json, name=wifiMacAddress" })
+  @SpeakeasyMetadata({ data: "json, name=wifiMacAddress" })
   wifiMacAddress?: string;
 }

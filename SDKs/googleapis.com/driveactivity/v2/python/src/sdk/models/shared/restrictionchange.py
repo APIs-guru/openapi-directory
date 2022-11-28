@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class RestrictionChangeFeatureEnum(str, Enum):
     FEATURE_UNSPECIFIED = "FEATURE_UNSPECIFIED"
@@ -18,6 +20,10 @@ class RestrictionChangeNewRestrictionEnum(str, Enum):
 @dataclass_json
 @dataclass
 class RestrictionChange:
-    feature: Optional[RestrictionChangeFeatureEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'feature' }})
-    new_restriction: Optional[RestrictionChangeNewRestrictionEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'newRestriction' }})
+    r"""RestrictionChange
+    Information about restriction policy changes to a feature.
+    """
+    
+    feature: Optional[RestrictionChangeFeatureEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('feature') }})
+    new_restriction: Optional[RestrictionChangeNewRestrictionEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('newRestriction') }})
     

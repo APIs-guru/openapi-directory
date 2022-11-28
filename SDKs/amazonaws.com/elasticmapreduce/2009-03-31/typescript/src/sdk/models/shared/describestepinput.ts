@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // DescribeStepInput
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * This input determines which step to describe.
 **/
 export class DescribeStepInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ClusterId" })
+  @SpeakeasyMetadata({ data: "json, name=ClusterId" })
   clusterId: string;
 
-  @Metadata({ data: "json, name=StepId" })
+  @SpeakeasyMetadata({ data: "json, name=StepId" })
   stepId: string;
 }

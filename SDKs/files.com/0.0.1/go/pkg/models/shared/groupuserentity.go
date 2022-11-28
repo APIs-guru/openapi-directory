@@ -1,5 +1,7 @@
 package shared
 
+// GroupUserEntity
+// Create Group User
 type GroupUserEntity struct {
 	Admin     *bool    `json:"admin,omitempty"`
 	GroupID   *int32   `json:"group_id,omitempty"`

@@ -33,7 +33,7 @@ type BeyondcorpProjectsLocationsAppConnectorsCreateSecurity struct {
 type BeyondcorpProjectsLocationsAppConnectorsCreateRequest struct {
 	PathParams  BeyondcorpProjectsLocationsAppConnectorsCreatePathParams
 	QueryParams BeyondcorpProjectsLocationsAppConnectorsCreateQueryParams
-	Request     *shared.GoogleCloudBeyondcorpAppconnectorsV1AppConnector `request:"mediaType=application/json"`
+	Request     *shared.GoogleCloudBeyondcorpAppconnectorsV1AppConnectorInput `request:"mediaType=application/json"`
 	Security    BeyondcorpProjectsLocationsAppConnectorsCreateSecurity
 }
 

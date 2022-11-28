@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DevicePolicy } from "./devicepolicy";
 // Condition
 /**
@@ -34,27 +34,27 @@ var Condition = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=devicePolicy" }),
+        SpeakeasyMetadata({ data: "json, name=devicePolicy" }),
         __metadata("design:type", DevicePolicy)
     ], Condition.prototype, "devicePolicy", void 0);
     __decorate([
-        Metadata({ data: "json, name=ipSubnetworks" }),
+        SpeakeasyMetadata({ data: "json, name=ipSubnetworks" }),
         __metadata("design:type", Array)
     ], Condition.prototype, "ipSubnetworks", void 0);
     __decorate([
-        Metadata({ data: "json, name=members" }),
+        SpeakeasyMetadata({ data: "json, name=members" }),
         __metadata("design:type", Array)
     ], Condition.prototype, "members", void 0);
     __decorate([
-        Metadata({ data: "json, name=negate" }),
+        SpeakeasyMetadata({ data: "json, name=negate" }),
         __metadata("design:type", Boolean)
     ], Condition.prototype, "negate", void 0);
     __decorate([
-        Metadata({ data: "json, name=regions" }),
+        SpeakeasyMetadata({ data: "json, name=regions" }),
         __metadata("design:type", Array)
     ], Condition.prototype, "regions", void 0);
     __decorate([
-        Metadata({ data: "json, name=requiredAccessLevels" }),
+        SpeakeasyMetadata({ data: "json, name=requiredAccessLevels" }),
         __metadata("design:type", Array)
     ], Condition.prototype, "requiredAccessLevels", void 0);
     return Condition;

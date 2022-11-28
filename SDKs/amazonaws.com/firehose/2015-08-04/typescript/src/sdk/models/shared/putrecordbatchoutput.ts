@@ -1,15 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PutRecordBatchResponseEntry } from "./putrecordbatchresponseentry";
 
 
+
 export class PutRecordBatchOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Encrypted" })
+  @SpeakeasyMetadata({ data: "json, name=Encrypted" })
   encrypted?: boolean;
 
-  @Metadata({ data: "json, name=FailedPutCount" })
+  @SpeakeasyMetadata({ data: "json, name=FailedPutCount" })
   failedPutCount: number;
 
-  @Metadata({ data: "json, name=RequestResponses", elemType: shared.PutRecordBatchResponseEntry })
+  @SpeakeasyMetadata({ data: "json, name=RequestResponses", elemType: PutRecordBatchResponseEntry })
   requestResponses: PutRecordBatchResponseEntry[];
 }

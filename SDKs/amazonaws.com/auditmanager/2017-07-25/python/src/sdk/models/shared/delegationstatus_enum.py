@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class DelegationStatusEnum(str, Enum):
     IN_PROGRESS = "IN_PROGRESS"

@@ -1,6 +1,7 @@
 
 
+
 export enum CommitteeClassificationEnum {
-    Committee = "committee"
-,    Subcommittee = "subcommittee"
+    Committee = "committee",
+    Subcommittee = "subcommittee"
 }

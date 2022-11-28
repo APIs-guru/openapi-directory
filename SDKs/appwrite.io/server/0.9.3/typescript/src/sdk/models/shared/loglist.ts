@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Log } from "./log";
+
 
 
 // LogList
@@ -8,6 +8,6 @@ import { Log } from "./log";
  * Logs List
 **/
 export class LogList extends SpeakeasyBase {
-  @Metadata({ data: "json, name=logs", elemType: shared.Log })
+  @SpeakeasyMetadata({ data: "json, name=logs", elemType: Log })
   logs: Log[];
 }

@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ResourceKey } from "./resourcekey";
 
 
+
 export class StartRemediationExecutionResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=FailedItems", elemType: shared.ResourceKey })
+  @SpeakeasyMetadata({ data: "json, name=FailedItems", elemType: ResourceKey })
   failedItems?: ResourceKey[];
 
-  @Metadata({ data: "json, name=FailureMessage" })
+  @SpeakeasyMetadata({ data: "json, name=FailureMessage" })
   failureMessage?: string;
 }

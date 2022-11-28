@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Object } from "./object";
+
 
 
 // ComposeRequestSourceObjectsObjectPreconditions
@@ -8,19 +8,19 @@ import { Object } from "./object";
  * Conditions that must be met for this operation to execute.
 **/
 export class ComposeRequestSourceObjectsObjectPreconditions extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ifGenerationMatch" })
+  @SpeakeasyMetadata({ data: "json, name=ifGenerationMatch" })
   ifGenerationMatch?: string;
 }
 
 
 export class ComposeRequestSourceObjects extends SpeakeasyBase {
-  @Metadata({ data: "json, name=generation" })
+  @SpeakeasyMetadata({ data: "json, name=generation" })
   generation?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=objectPreconditions" })
+  @SpeakeasyMetadata({ data: "json, name=objectPreconditions" })
   objectPreconditions?: ComposeRequestSourceObjectsObjectPreconditions;
 }
 
@@ -30,12 +30,12 @@ export class ComposeRequestSourceObjects extends SpeakeasyBase {
  * A Compose request.
 **/
 export class ComposeRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=destination" })
+  @SpeakeasyMetadata({ data: "json, name=destination" })
   destination?: Object;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=sourceObjects", elemType: shared.ComposeRequestSourceObjects })
+  @SpeakeasyMetadata({ data: "json, name=sourceObjects", elemType: ComposeRequestSourceObjects })
   sourceObjects?: ComposeRequestSourceObjects[];
 }

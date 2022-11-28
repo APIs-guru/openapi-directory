@@ -1,15 +1,18 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import backupdetails
-from . import sourcetabledetails
-from . import sourcetablefeaturedetails
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class BackupDescription:
-    backup_details: Optional[backupdetails.BackupDetails] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'BackupDetails' }})
-    source_table_details: Optional[sourcetabledetails.SourceTableDetails] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'SourceTableDetails' }})
-    source_table_feature_details: Optional[sourcetablefeaturedetails.SourceTableFeatureDetails] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'SourceTableFeatureDetails' }})
+    r"""BackupDescription
+    Contains the description of the backup created for the table.
+    """
+    
+    backup_details: Optional[BackupDetails] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('BackupDetails') }})
+    source_table_details: Optional[SourceTableDetails] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('SourceTableDetails') }})
+    source_table_feature_details: Optional[SourceTableFeatureDetails] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('SourceTableFeatureDetails') }})
     

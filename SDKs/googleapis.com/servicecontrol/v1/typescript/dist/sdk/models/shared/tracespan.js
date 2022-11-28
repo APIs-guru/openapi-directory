@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Attributes } from "./attributes";
 import { TruncatableString } from "./truncatablestring";
 import { Status } from "./status";
@@ -45,47 +45,47 @@ var TraceSpan = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=attributes" }),
+        SpeakeasyMetadata({ data: "json, name=attributes" }),
         __metadata("design:type", Attributes)
     ], TraceSpan.prototype, "attributes", void 0);
     __decorate([
-        Metadata({ data: "json, name=childSpanCount" }),
+        SpeakeasyMetadata({ data: "json, name=childSpanCount" }),
         __metadata("design:type", Number)
     ], TraceSpan.prototype, "childSpanCount", void 0);
     __decorate([
-        Metadata({ data: "json, name=displayName" }),
+        SpeakeasyMetadata({ data: "json, name=displayName" }),
         __metadata("design:type", TruncatableString)
     ], TraceSpan.prototype, "displayName", void 0);
     __decorate([
-        Metadata({ data: "json, name=endTime" }),
+        SpeakeasyMetadata({ data: "json, name=endTime" }),
         __metadata("design:type", String)
     ], TraceSpan.prototype, "endTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], TraceSpan.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=parentSpanId" }),
+        SpeakeasyMetadata({ data: "json, name=parentSpanId" }),
         __metadata("design:type", String)
     ], TraceSpan.prototype, "parentSpanId", void 0);
     __decorate([
-        Metadata({ data: "json, name=sameProcessAsParentSpan" }),
+        SpeakeasyMetadata({ data: "json, name=sameProcessAsParentSpan" }),
         __metadata("design:type", Boolean)
     ], TraceSpan.prototype, "sameProcessAsParentSpan", void 0);
     __decorate([
-        Metadata({ data: "json, name=spanId" }),
+        SpeakeasyMetadata({ data: "json, name=spanId" }),
         __metadata("design:type", String)
     ], TraceSpan.prototype, "spanId", void 0);
     __decorate([
-        Metadata({ data: "json, name=spanKind" }),
+        SpeakeasyMetadata({ data: "json, name=spanKind" }),
         __metadata("design:type", String)
     ], TraceSpan.prototype, "spanKind", void 0);
     __decorate([
-        Metadata({ data: "json, name=startTime" }),
+        SpeakeasyMetadata({ data: "json, name=startTime" }),
         __metadata("design:type", String)
     ], TraceSpan.prototype, "startTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=status" }),
+        SpeakeasyMetadata({ data: "json, name=status" }),
         __metadata("design:type", Status)
     ], TraceSpan.prototype, "status", void 0);
     return TraceSpan;

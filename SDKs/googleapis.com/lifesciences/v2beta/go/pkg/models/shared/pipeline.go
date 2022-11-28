@@ -1,5 +1,7 @@
 package shared
 
+// Pipeline
+// Specifies a series of actions to execute, expressed as Docker containers.
 type Pipeline struct {
 	Actions              []Action          `json:"actions,omitempty"`
 	EncryptedEnvironment *Secret           `json:"encryptedEnvironment,omitempty"`

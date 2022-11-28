@@ -1,12 +1,16 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import List
 from dataclasses_json import dataclass_json
-from . import desiredweightandcapacity
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class UpdateEndpointWeightsAndCapacitiesInput:
-    desired_weights_and_capacities: List[desiredweightandcapacity.DesiredWeightAndCapacity] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'DesiredWeightsAndCapacities' }})
-    endpoint_name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'EndpointName' }})
+    desired_weights_and_capacities: List[DesiredWeightAndCapacity] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('DesiredWeightsAndCapacities') }})
+    endpoint_name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('EndpointName') }})
     

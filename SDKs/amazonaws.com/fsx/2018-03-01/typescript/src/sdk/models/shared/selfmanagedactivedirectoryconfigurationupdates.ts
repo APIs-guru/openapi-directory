@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // SelfManagedActiveDirectoryConfigurationUpdates
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The configuration that Amazon FSx uses to join the Windows File Server instance to a self-managed Microsoft Active Directory (AD) directory.
 **/
 export class SelfManagedActiveDirectoryConfigurationUpdates extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DnsIps" })
+  @SpeakeasyMetadata({ data: "json, name=DnsIps" })
   dnsIps?: string[];
 
-  @Metadata({ data: "json, name=Password" })
+  @SpeakeasyMetadata({ data: "json, name=Password" })
   password?: string;
 
-  @Metadata({ data: "json, name=UserName" })
+  @SpeakeasyMetadata({ data: "json, name=UserName" })
   userName?: string;
 }

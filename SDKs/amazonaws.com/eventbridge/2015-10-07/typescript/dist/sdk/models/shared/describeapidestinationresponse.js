@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ApiDestinationStateEnum } from "./apidestinationstateenum";
 import { ApiDestinationHttpMethodEnum } from "./apidestinationhttpmethodenum";
 var DescribeApiDestinationResponse = /** @class */ (function (_super) {
@@ -31,43 +31,43 @@ var DescribeApiDestinationResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=ApiDestinationArn" }),
+        SpeakeasyMetadata({ data: "json, name=ApiDestinationArn" }),
         __metadata("design:type", String)
     ], DescribeApiDestinationResponse.prototype, "apiDestinationArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=ApiDestinationState" }),
+        SpeakeasyMetadata({ data: "json, name=ApiDestinationState" }),
         __metadata("design:type", String)
     ], DescribeApiDestinationResponse.prototype, "apiDestinationState", void 0);
     __decorate([
-        Metadata({ data: "json, name=ConnectionArn" }),
+        SpeakeasyMetadata({ data: "json, name=ConnectionArn" }),
         __metadata("design:type", String)
     ], DescribeApiDestinationResponse.prototype, "connectionArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=CreationTime" }),
+        SpeakeasyMetadata({ data: "json, name=CreationTime" }),
         __metadata("design:type", Date)
     ], DescribeApiDestinationResponse.prototype, "creationTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=Description" }),
+        SpeakeasyMetadata({ data: "json, name=Description" }),
         __metadata("design:type", String)
     ], DescribeApiDestinationResponse.prototype, "description", void 0);
     __decorate([
-        Metadata({ data: "json, name=HttpMethod" }),
+        SpeakeasyMetadata({ data: "json, name=HttpMethod" }),
         __metadata("design:type", String)
     ], DescribeApiDestinationResponse.prototype, "httpMethod", void 0);
     __decorate([
-        Metadata({ data: "json, name=InvocationEndpoint" }),
+        SpeakeasyMetadata({ data: "json, name=InvocationEndpoint" }),
         __metadata("design:type", String)
     ], DescribeApiDestinationResponse.prototype, "invocationEndpoint", void 0);
     __decorate([
-        Metadata({ data: "json, name=InvocationRateLimitPerSecond" }),
+        SpeakeasyMetadata({ data: "json, name=InvocationRateLimitPerSecond" }),
         __metadata("design:type", Number)
     ], DescribeApiDestinationResponse.prototype, "invocationRateLimitPerSecond", void 0);
     __decorate([
-        Metadata({ data: "json, name=LastModifiedTime" }),
+        SpeakeasyMetadata({ data: "json, name=LastModifiedTime" }),
         __metadata("design:type", Date)
     ], DescribeApiDestinationResponse.prototype, "lastModifiedTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=Name" }),
+        SpeakeasyMetadata({ data: "json, name=Name" }),
         __metadata("design:type", String)
     ], DescribeApiDestinationResponse.prototype, "name", void 0);
     return DescribeApiDestinationResponse;

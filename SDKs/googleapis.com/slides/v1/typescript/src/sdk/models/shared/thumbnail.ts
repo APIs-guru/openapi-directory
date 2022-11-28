@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Thumbnail
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The thumbnail of a page.
 **/
 export class Thumbnail extends SpeakeasyBase {
-  @Metadata({ data: "json, name=contentUrl" })
+  @SpeakeasyMetadata({ data: "json, name=contentUrl" })
   contentUrl?: string;
 
-  @Metadata({ data: "json, name=height" })
+  @SpeakeasyMetadata({ data: "json, name=height" })
   height?: number;
 
-  @Metadata({ data: "json, name=width" })
+  @SpeakeasyMetadata({ data: "json, name=width" })
   width?: number;
 }

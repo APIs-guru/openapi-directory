@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class GetStudioPathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -15,19 +15,19 @@ class GetStudioQueryParams:
 
 @dataclass
 class GetStudioSecurity:
-    custom_authentication: shared.SchemeCustomAuthentication = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    custom_authentication: shared.SchemeCustomAuthentication = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
     
 
 @dataclass
 class GetStudioRequest:
-    path_params: GetStudioPathParams = field(default=None)
-    query_params: GetStudioQueryParams = field(default=None)
-    security: GetStudioSecurity = field(default=None)
+    path_params: GetStudioPathParams = field()
+    query_params: GetStudioQueryParams = field()
+    security: GetStudioSecurity = field()
     
 
 @dataclass
 class GetStudioResponse:
+    content_type: str = field()
+    status_code: int = field()
     base_item_dto: Optional[shared.BaseItemDto] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

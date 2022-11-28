@@ -1,32 +1,33 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class WorkflowUsageBillableMacos extends SpeakeasyBase {
-  @Metadata({ data: "json, name=total_ms" })
+  @SpeakeasyMetadata({ data: "json, name=total_ms" })
   totalMs?: number;
 }
 
 
 export class WorkflowUsageBillableUbuntu extends SpeakeasyBase {
-  @Metadata({ data: "json, name=total_ms" })
+  @SpeakeasyMetadata({ data: "json, name=total_ms" })
   totalMs?: number;
 }
 
 
 export class WorkflowUsageBillableWindows extends SpeakeasyBase {
-  @Metadata({ data: "json, name=total_ms" })
+  @SpeakeasyMetadata({ data: "json, name=total_ms" })
   totalMs?: number;
 }
 
 
 export class WorkflowUsageBillable extends SpeakeasyBase {
-  @Metadata({ data: "json, name=MACOS" })
+  @SpeakeasyMetadata({ data: "json, name=MACOS" })
   macos?: WorkflowUsageBillableMacos;
 
-  @Metadata({ data: "json, name=UBUNTU" })
+  @SpeakeasyMetadata({ data: "json, name=UBUNTU" })
   ubuntu?: WorkflowUsageBillableUbuntu;
 
-  @Metadata({ data: "json, name=WINDOWS" })
+  @SpeakeasyMetadata({ data: "json, name=WINDOWS" })
   windows?: WorkflowUsageBillableWindows;
 }
 
@@ -36,6 +37,6 @@ export class WorkflowUsageBillable extends SpeakeasyBase {
  * Workflow Usage
 **/
 export class WorkflowUsage extends SpeakeasyBase {
-  @Metadata({ data: "json, name=billable" })
+  @SpeakeasyMetadata({ data: "json, name=billable" })
   billable: WorkflowUsageBillable;
 }

@@ -1,41 +1,42 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
+
 export enum ReportingCurrentPackagesInUpdateGroupSubscriptionTypeFilterEnum {
-    RequiredOnly = "RequiredOnly"
-,    Default = "Default"
-,    All = "All"
+    RequiredOnly = "RequiredOnly",
+    Default = "Default",
+    All = "All"
 }
 
 
 export class ReportingCurrentPackagesInUpdateGroupQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=ID" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=ID" })
   id: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=SubscriptionTypeFilter" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=SubscriptionTypeFilter" })
   subscriptionTypeFilter?: ReportingCurrentPackagesInUpdateGroupSubscriptionTypeFilterEnum;
 }
 
 
 export class ReportingCurrentPackagesInUpdateGroupRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: ReportingCurrentPackagesInUpdateGroupQueryParams;
 }
 
 
 export class ReportingCurrentPackagesInUpdateGroupResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   apiModelsApiError?: shared.ApiModelsApiError;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata({ elemType: shared.UpdateSystemModelsPackage })
+  @SpeakeasyMetadata({ elemType: shared.UpdateSystemModelsPackage })
   updateSystemModelsPackages?: shared.UpdateSystemModelsPackage[];
 }

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class RfcerRequestBodyCertificateParameters extends SpeakeasyBase {
     certType: string;
@@ -18,10 +18,6 @@ export declare class RfcerRequestBody extends SpeakeasyBase {
 export declare class RfcerSecurity extends SpeakeasyBase {
     apiKey: shared.SchemeApiKey;
     clientId: shared.SchemeClientId;
-}
-export declare class RfcerRequest extends SpeakeasyBase {
-    request?: RfcerRequestBody;
-    security: RfcerSecurity;
 }
 export declare enum Rfcer400ApplicationJsonErrorEnum {
     MissingParameter = "missing_parameter",
@@ -104,6 +100,10 @@ export declare enum Rfcer504ApplicationJsonErrorDescriptionEnum {
 export declare class Rfcer504ApplicationJson extends SpeakeasyBase {
     error?: Rfcer504ApplicationJsonErrorEnum;
     errorDescription?: Rfcer504ApplicationJsonErrorDescriptionEnum;
+}
+export declare class RfcerRequest extends SpeakeasyBase {
+    request?: RfcerRequestBody;
+    security: RfcerSecurity;
 }
 export declare class RfcerResponse extends SpeakeasyBase {
     contentType: string;

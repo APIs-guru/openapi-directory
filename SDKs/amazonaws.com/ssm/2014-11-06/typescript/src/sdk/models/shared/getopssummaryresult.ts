@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { OpsEntity } from "./opsentity";
 
 
+
 export class GetOpsSummaryResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Entities", elemType: shared.OpsEntity })
+  @SpeakeasyMetadata({ data: "json, name=Entities", elemType: OpsEntity })
   entities?: OpsEntity[];
 
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 }

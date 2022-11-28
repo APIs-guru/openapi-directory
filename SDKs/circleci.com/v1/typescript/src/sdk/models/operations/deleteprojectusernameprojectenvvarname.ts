@@ -1,21 +1,16 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DeleteProjectUsernameProjectEnvvarNamePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=name" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=name" })
   name: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=project" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=project" })
   project: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=username" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=username" })
   username: string;
-}
-
-
-export class DeleteProjectUsernameProjectEnvvarNameRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: DeleteProjectUsernameProjectEnvvarNamePathParams;
 }
 
 export enum DeleteProjectUsernameProjectEnvvarName200ApplicationJsonMessageEnum {
@@ -24,18 +19,24 @@ export enum DeleteProjectUsernameProjectEnvvarName200ApplicationJsonMessageEnum 
 
 
 export class DeleteProjectUsernameProjectEnvvarName200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: DeleteProjectUsernameProjectEnvvarName200ApplicationJsonMessageEnum;
 }
 
 
+export class DeleteProjectUsernameProjectEnvvarNameRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: DeleteProjectUsernameProjectEnvvarNamePathParams;
+}
+
+
 export class DeleteProjectUsernameProjectEnvvarNameResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   deleteProjectUsernameProjectEnvvarName200ApplicationJsonObject?: DeleteProjectUsernameProjectEnvvarName200ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

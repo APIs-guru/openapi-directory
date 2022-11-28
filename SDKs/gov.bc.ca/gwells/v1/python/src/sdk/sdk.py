@@ -1,8 +1,11 @@
-import warnings
+
+
 import requests
 from typing import List,Optional
-from sdk.models import operations, shared
+from sdk.models import shared, operations
 from . import utils
+
+
 
 
 SERVERS = [
@@ -11,30 +14,58 @@ SERVERS = [
 
 
 class SDK:
-    client = requests.Session()
-    server_url = SERVERS[0]
+    
+
+    _client: requests.Session
+    _security_client: requests.Session
+    _security: shared.Security
+    _server_url: str = SERVERS[0]
+    _language: str = "python"
+    _sdk_version: str = "0.0.1"
+    _gen_version: str = "internal"
+
+    def __init__(self) -> None:
+        self._client = requests.Session()
+        self._security_client = requests.Session()
+        
+
 
     def config_server_url(self, server_url: str, params: dict[str, str]):
-        if not params is None:
-            self.server_url = utils.replace_parameters(server_url, params)
+        if params is not None:
+            self._server_url = utils.replace_parameters(server_url, params)
         else:
-            self.server_url = server_url
-            
-    
-    def config_security(self, security: shared.Security):
-        self.client = utils.configure_security_client(security)
+            self._server_url = server_url
 
+        
+    
+
+    def config_client(self, client: requests.Session):
+        self._client = client
+        
+        if self._security is not None:
+            self._security_client = utils.configure_security_client(self._client, self._security)
+        
+    
+
+    def config_security(self, security: shared.Security):
+        self._security = security
+        self._security_client = utils.configure_security_client(self._client, security)
+        
+    
+    
     
     def aquifer_codes_demand_list(self, request: operations.AquiferCodesDemandListRequest) -> operations.AquiferCodesDemandListResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""return a list of aquifer demand codes
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/aquifer-codes/demand/"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -49,15 +80,17 @@ class SDK:
 
     
     def aquifer_codes_materials_list(self, request: operations.AquiferCodesMaterialsListRequest) -> operations.AquiferCodesMaterialsListResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""return a list of aquifer material codes
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/aquifer-codes/materials/"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -72,15 +105,17 @@ class SDK:
 
     
     def aquifer_codes_productivity_list(self, request: operations.AquiferCodesProductivityListRequest) -> operations.AquiferCodesProductivityListResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""return a list of aquifer productivity codes
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/aquifer-codes/productivity/"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -95,15 +130,17 @@ class SDK:
 
     
     def aquifer_codes_quality_concerns_list(self, request: operations.AquiferCodesQualityConcernsListRequest) -> operations.AquiferCodesQualityConcernsListResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""return a list of quality concern codes
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/aquifer-codes/quality-concerns/"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -118,15 +155,17 @@ class SDK:
 
     
     def aquifer_codes_subtypes_list(self, request: operations.AquiferCodesSubtypesListRequest) -> operations.AquiferCodesSubtypesListResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""return a list of aquifer subtype codes
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/aquifer-codes/subtypes/"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -141,15 +180,17 @@ class SDK:
 
     
     def aquifer_codes_vulnerability_list(self, request: operations.AquiferCodesVulnerabilityListRequest) -> operations.AquiferCodesVulnerabilityListResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""return a list of aquifer vulnerability codes
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/aquifer-codes/vulnerability/"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -164,15 +205,17 @@ class SDK:
 
     
     def aquifer_codes_water_use_list(self, request: operations.AquiferCodesWaterUseListRequest) -> operations.AquiferCodesWaterUseListResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""return a list of water use codes
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/aquifer-codes/water-use/"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -187,13 +230,16 @@ class SDK:
 
     
     def aquifers_files_list(self, request: operations.AquifersFilesListRequest) -> operations.AquifersFilesListResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""list files found for the aquifer identified in the uri
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/aquifers/{aquifer_id}/files", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -208,15 +254,17 @@ class SDK:
 
     
     def aquifers_list(self, request: operations.AquifersListRequest) -> operations.AquifersListResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""return a list of aquifers
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/aquifers/"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -231,15 +279,17 @@ class SDK:
 
     
     def aquifers_names_list(self, request: operations.AquifersNamesListRequest) -> operations.AquifersNamesListResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""List all aquifers in a simplified format
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/aquifers/names/"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -254,13 +304,16 @@ class SDK:
 
     
     def aquifers_read(self, request: operations.AquifersReadRequest) -> operations.AquifersReadResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""return details of aquifers
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/aquifers/{aquifer_id}/", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -275,13 +328,16 @@ class SDK:
 
     
     def cities_drillers_list(self) -> operations.CitiesDrillersListResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""returns a list of cities with a qualified, registered operator (driller or installer)
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/cities/drillers/"
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -296,13 +352,16 @@ class SDK:
 
     
     def cities_installers_list(self) -> operations.CitiesInstallersListResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""returns a list of cities with a qualified, registered operator (driller or installer)
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/cities/installers/"
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -317,13 +376,16 @@ class SDK:
 
     
     def config_list(self) -> operations.ConfigListResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""serves general configuration
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/config"
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -336,13 +398,16 @@ class SDK:
 
     
     def drillers_files_list(self, request: operations.DrillersFilesListRequest) -> operations.DrillersFilesListResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""list files found for the aquifer identified in the uri
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/drillers/{person_guid}/files/", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -357,15 +422,17 @@ class SDK:
 
     
     def drillers_list(self, request: operations.DrillersListRequest) -> operations.DrillersListResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns a list of all person records
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/drillers/"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -380,15 +447,17 @@ class SDK:
 
     
     def drillers_names_list(self, request: operations.DrillersNamesListRequest) -> operations.DrillersNamesListResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Search for a person in the Register
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/drillers/names/"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -403,13 +472,16 @@ class SDK:
 
     
     def keycloak_list(self) -> operations.KeycloakListResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""serves keycloak config
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/keycloak"
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -422,13 +494,16 @@ class SDK:
 
     
     def submissions_options_list(self) -> operations.SubmissionsOptionsListResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Options required for submitting activity report forms
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/submissions/options/"
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -441,13 +516,16 @@ class SDK:
 
     
     def surveys_list(self) -> operations.SurveysListResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""returns a list of active surveys
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/surveys/"
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -462,13 +540,16 @@ class SDK:
 
     
     def wells_files_list(self, request: operations.WellsFilesListRequest) -> operations.WellsFilesListResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""list files found for the well identified in the uri
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/wells/{tag}/files", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -483,15 +564,17 @@ class SDK:
 
     
     def wells_list(self, request: operations.WellsListRequest) -> operations.WellsListResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""returns a list of wells
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/wells/"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -506,13 +589,17 @@ class SDK:
 
     
     def wells_read(self, request: operations.WellsReadRequest) -> operations.WellsReadResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Return well detail.
+        This view is open to all, and has no permissions.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/wells/{well_tag_number}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -527,15 +614,17 @@ class SDK:
 
     
     def wells_tags_list(self, request: operations.WellsTagsListRequest) -> operations.WellsTagsListResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""seach for wells by tag or owner
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/wells/tags/"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 

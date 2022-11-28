@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CustomEventStatus } from "./customeventstatus";
+
 
 
 // CustomEventsBatchInsertResponse
@@ -8,12 +8,12 @@ import { CustomEventStatus } from "./customeventstatus";
  * Insert Custom Events Response.
 **/
 export class CustomEventsBatchInsertResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=hasFailures" })
+  @SpeakeasyMetadata({ data: "json, name=hasFailures" })
   hasFailures?: boolean;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=status", elemType: shared.CustomEventStatus })
+  @SpeakeasyMetadata({ data: "json, name=status", elemType: CustomEventStatus })
   status?: CustomEventStatus[];
 }

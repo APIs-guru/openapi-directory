@@ -1,55 +1,56 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class UpdateNetworkSwitchSettingsPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=networkId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=networkId" })
   networkId: string;
 }
 
 export enum UpdateNetworkSwitchSettingsRequestBodyPowerExceptionsPowerTypeEnum {
-    Combined = "combined"
-,    Redundant = "redundant"
-,    UseNetworkSetting = "useNetworkSetting"
+    Combined = "combined",
+    Redundant = "redundant",
+    UseNetworkSetting = "useNetworkSetting"
 }
 
 
 export class UpdateNetworkSwitchSettingsRequestBodyPowerExceptions extends SpeakeasyBase {
-  @Metadata({ data: "json, name=powerType" })
+  @SpeakeasyMetadata({ data: "json, name=powerType" })
   powerType: UpdateNetworkSwitchSettingsRequestBodyPowerExceptionsPowerTypeEnum;
 
-  @Metadata({ data: "json, name=serial" })
+  @SpeakeasyMetadata({ data: "json, name=serial" })
   serial: string;
 }
 
 
 export class UpdateNetworkSwitchSettingsRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=powerExceptions", elemType: operations.UpdateNetworkSwitchSettingsRequestBodyPowerExceptions })
+  @SpeakeasyMetadata({ data: "json, name=powerExceptions", elemType: UpdateNetworkSwitchSettingsRequestBodyPowerExceptions })
   powerExceptions?: UpdateNetworkSwitchSettingsRequestBodyPowerExceptions[];
 
-  @Metadata({ data: "json, name=useCombinedPower" })
+  @SpeakeasyMetadata({ data: "json, name=useCombinedPower" })
   useCombinedPower?: boolean;
 
-  @Metadata({ data: "json, name=vlan" })
+  @SpeakeasyMetadata({ data: "json, name=vlan" })
   vlan?: number;
 }
 
 
 export class UpdateNetworkSwitchSettingsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: UpdateNetworkSwitchSettingsPathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request?: UpdateNetworkSwitchSettingsRequestBody;
 }
 
 
 export class UpdateNetworkSwitchSettingsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   updateNetworkSwitchSettings200ApplicationJsonObject?: Map<string, any>;
 }

@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum ChannelStateEnum {
-    StateUnspecified = "STATE_UNSPECIFIED"
-,    Pending = "PENDING"
-,    Active = "ACTIVE"
-,    Inactive = "INACTIVE"
+    StateUnspecified = "STATE_UNSPECIFIED",
+    Pending = "PENDING",
+    Active = "ACTIVE",
+    Inactive = "INACTIVE"
 }
 
 
@@ -13,30 +14,46 @@ export enum ChannelStateEnum {
  * A representation of the Channel resource. A Channel is a resource on which event providers publish their events. The published events are delivered through the transport associated with the channel. Note that a channel is associated with exactly one event provider.
 **/
 export class Channel extends SpeakeasyBase {
-  @Metadata({ data: "json, name=activationToken" })
+  @SpeakeasyMetadata({ data: "json, name=activationToken" })
   activationToken?: string;
 
-  @Metadata({ data: "json, name=createTime" })
+  @SpeakeasyMetadata({ data: "json, name=createTime" })
   createTime?: string;
 
-  @Metadata({ data: "json, name=cryptoKeyName" })
+  @SpeakeasyMetadata({ data: "json, name=cryptoKeyName" })
   cryptoKeyName?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=provider" })
+  @SpeakeasyMetadata({ data: "json, name=provider" })
   provider?: string;
 
-  @Metadata({ data: "json, name=pubsubTopic" })
+  @SpeakeasyMetadata({ data: "json, name=pubsubTopic" })
   pubsubTopic?: string;
 
-  @Metadata({ data: "json, name=state" })
+  @SpeakeasyMetadata({ data: "json, name=state" })
   state?: ChannelStateEnum;
 
-  @Metadata({ data: "json, name=uid" })
+  @SpeakeasyMetadata({ data: "json, name=uid" })
   uid?: string;
 
-  @Metadata({ data: "json, name=updateTime" })
+  @SpeakeasyMetadata({ data: "json, name=updateTime" })
   updateTime?: string;
+}
+
+
+// ChannelInput
+/** 
+ * A representation of the Channel resource. A Channel is a resource on which event providers publish their events. The published events are delivered through the transport associated with the channel. Note that a channel is associated with exactly one event provider.
+**/
+export class ChannelInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=cryptoKeyName" })
+  cryptoKeyName?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=name" })
+  name?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=provider" })
+  provider?: string;
 }

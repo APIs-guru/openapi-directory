@@ -86,8 +86,9 @@ function ParseSecurityOption(
     const securityDecorator: SecurityDecorator =
       ParseSecurityDecorator(securityAnn);
     if (securityDecorator != null && securityDecorator.Scheme) return;
-    if (securityDecorator.Scheme)
+    if (securityDecorator.Scheme) {
       return ParseSecurityScheme(client, securityDecorator, optionType[fname]);
+    }
   });
 
   return client;
@@ -98,6 +99,10 @@ function ParseSecurityScheme(
   schemeDecorator: SecurityDecorator,
   scheme: any
 ): AxiosInstance {
+  if (schemeDecorator.Type === "http" && schemeDecorator.SubType === "basic") {
+    return ParseBasicAuthScheme(client, scheme);
+  }
+
   const fieldNames: string[] = Object.getOwnPropertyNames(scheme);
   fieldNames.forEach((fname) => {
     const securityAnn: string = Reflect.getMetadata(
@@ -153,6 +158,42 @@ function ParseSecurityScheme(
         throw new Error("not supported");
     }
   });
+
+  return client;
+}
+
+function ParseBasicAuthScheme(
+  client: AxiosInstance,
+  scheme: any
+): AxiosInstance {
+  let username,
+    password = "";
+
+  const fieldNames: string[] = Object.getOwnPropertyNames(scheme);
+  fieldNames.forEach((fname) => {
+    const securityAnn: string = Reflect.getMetadata(
+      securityMetadataKey,
+      scheme,
+      fname
+    );
+    if (securityAnn == null) return;
+    const securityDecorator: SecurityDecorator =
+      ParseSecurityDecorator(securityAnn);
+    if (securityDecorator == null || securityDecorator.Name === "") return;
+
+    switch (securityDecorator.Name) {
+      case "username":
+        username = scheme[fname];
+        break;
+      case "password":
+        password = scheme[fname];
+        break;
+    }
+  });
+
+  client.defaults.headers.common["Authorization"] = `Basic ${Buffer.from(
+    `${username}:${password}`
+  ).toString("base64")}`;
 
   return client;
 }

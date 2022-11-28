@@ -22,38 +22,38 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var UpdateAMediaItemRequestBody = /** @class */ (function (_super) {
     __extends(UpdateAMediaItemRequestBody, _super);
     function UpdateAMediaItemRequestBody() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "multipart_form, name=description" }),
+        SpeakeasyMetadata({ data: "multipart_form, name=description" }),
         __metadata("design:type", String)
     ], UpdateAMediaItemRequestBody.prototype, "description", void 0);
     __decorate([
-        Metadata({ data: "multipart_form, name=max_downloads_allowed" }),
+        SpeakeasyMetadata({ data: "multipart_form, name=max_downloads_allowed" }),
         __metadata("design:type", Number)
     ], UpdateAMediaItemRequestBody.prototype, "maxDownloadsAllowed", void 0);
     __decorate([
-        Metadata({ data: "multipart_form, name=metadata_primary" }),
+        SpeakeasyMetadata({ data: "multipart_form, name=metadata_primary" }),
         __metadata("design:type", String)
     ], UpdateAMediaItemRequestBody.prototype, "metadataPrimary", void 0);
     __decorate([
-        Metadata({ data: "multipart_form, name=metadata_secondary" }),
+        SpeakeasyMetadata({ data: "multipart_form, name=metadata_secondary" }),
         __metadata("design:type", String)
     ], UpdateAMediaItemRequestBody.prototype, "metadataSecondary", void 0);
     __decorate([
-        Metadata({ data: "multipart_form, name=mime_type" }),
+        SpeakeasyMetadata({ data: "multipart_form, name=mime_type" }),
         __metadata("design:type", String)
     ], UpdateAMediaItemRequestBody.prototype, "mimeType", void 0);
     __decorate([
-        Metadata({ data: "multipart_form, name=public" }),
+        SpeakeasyMetadata({ data: "multipart_form, name=public" }),
         __metadata("design:type", Boolean)
     ], UpdateAMediaItemRequestBody.prototype, "public", void 0);
     __decorate([
-        Metadata({ data: "multipart_form, name=title" }),
+        SpeakeasyMetadata({ data: "multipart_form, name=title" }),
         __metadata("design:type", String)
     ], UpdateAMediaItemRequestBody.prototype, "title", void 0);
     return UpdateAMediaItemRequestBody;
@@ -65,7 +65,7 @@ var UpdateAMediaItemRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "request, media_type=multipart/form-data" }),
+        SpeakeasyMetadata({ data: "request, media_type=multipart/form-data" }),
         __metadata("design:type", UpdateAMediaItemRequestBody)
     ], UpdateAMediaItemRequest.prototype, "request", void 0);
     return UpdateAMediaItemRequest;
@@ -77,11 +77,11 @@ var UpdateAMediaItemResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], UpdateAMediaItemResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], UpdateAMediaItemResponse.prototype, "statusCode", void 0);
     return UpdateAMediaItemResponse;

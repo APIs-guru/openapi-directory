@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // GroupCertificateAuthorityProperties
 /**
  * Information about a certificate authority for a group.
@@ -33,11 +33,11 @@ var GroupCertificateAuthorityProperties = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=GroupCertificateAuthorityArn" }),
+        SpeakeasyMetadata({ data: "json, name=GroupCertificateAuthorityArn" }),
         __metadata("design:type", String)
     ], GroupCertificateAuthorityProperties.prototype, "groupCertificateAuthorityArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=GroupCertificateAuthorityId" }),
+        SpeakeasyMetadata({ data: "json, name=GroupCertificateAuthorityId" }),
         __metadata("design:type", String)
     ], GroupCertificateAuthorityProperties.prototype, "groupCertificateAuthorityId", void 0);
     return GroupCertificateAuthorityProperties;

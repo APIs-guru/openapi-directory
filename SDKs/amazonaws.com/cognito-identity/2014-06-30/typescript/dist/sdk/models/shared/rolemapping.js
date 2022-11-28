@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AmbiguousRoleResolutionTypeEnum } from "./ambiguousroleresolutiontypeenum";
 import { RulesConfigurationType } from "./rulesconfigurationtype";
 import { RoleMappingTypeEnum } from "./rolemappingtypeenum";
@@ -36,15 +36,15 @@ var RoleMapping = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=AmbiguousRoleResolution" }),
+        SpeakeasyMetadata({ data: "json, name=AmbiguousRoleResolution" }),
         __metadata("design:type", String)
     ], RoleMapping.prototype, "ambiguousRoleResolution", void 0);
     __decorate([
-        Metadata({ data: "json, name=RulesConfiguration" }),
+        SpeakeasyMetadata({ data: "json, name=RulesConfiguration" }),
         __metadata("design:type", RulesConfigurationType)
     ], RoleMapping.prototype, "rulesConfiguration", void 0);
     __decorate([
-        Metadata({ data: "json, name=Type" }),
+        SpeakeasyMetadata({ data: "json, name=Type" }),
         __metadata("design:type", String)
     ], RoleMapping.prototype, "type", void 0);
     return RoleMapping;

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // SuppressViolationRequest
 /**
  * This is the base request type of the suppressViolation method, and is used to identify the listing violation that the seller wishes to suppress.
@@ -33,11 +33,11 @@ var SuppressViolationRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=complianceType" }),
+        SpeakeasyMetadata({ data: "json, name=complianceType" }),
         __metadata("design:type", String)
     ], SuppressViolationRequest.prototype, "complianceType", void 0);
     __decorate([
-        Metadata({ data: "json, name=listingId" }),
+        SpeakeasyMetadata({ data: "json, name=listingId" }),
         __metadata("design:type", String)
     ], SuppressViolationRequest.prototype, "listingId", void 0);
     return SuppressViolationRequest;

@@ -10,13 +10,13 @@ class RequestAuthConfigHeaders:
 
 @dataclass
 class RequestAuthConfigRequest:
-    headers: RequestAuthConfigHeaders = field(default=None)
+    headers: RequestAuthConfigHeaders = field()
     
 
 @dataclass
 class RequestAuthConfigResponse:
+    content_type: str = field()
+    status_code: int = field()
     auth_config: Optional[shared.AuthConfig] = field(default=None)
-    content_type: str = field(default=None)
     error_response: Optional[shared.ErrorResponse] = field(default=None)
-    status_code: int = field(default=None)
     

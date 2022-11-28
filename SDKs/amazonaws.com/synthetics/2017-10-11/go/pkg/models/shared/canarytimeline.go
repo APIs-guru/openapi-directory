@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// CanaryTimeline
+// This structure contains information about when the canary was created and modified.
 type CanaryTimeline struct {
 	Created      *time.Time `json:"Created,omitempty"`
 	LastModified *time.Time `json:"LastModified,omitempty"`

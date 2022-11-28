@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { WorkflowExecutionConfiguration } from "./workflowexecutionconfiguration";
 import { WorkflowExecutionInfo } from "./workflowexecutioninfo";
 import { WorkflowExecutionOpenCounts } from "./workflowexecutionopencounts";
+
 
 
 // WorkflowExecutionDetail
@@ -9,18 +10,18 @@ import { WorkflowExecutionOpenCounts } from "./workflowexecutionopencounts";
  * Contains details about a workflow execution.
 **/
 export class WorkflowExecutionDetail extends SpeakeasyBase {
-  @Metadata({ data: "json, name=executionConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=executionConfiguration" })
   executionConfiguration: WorkflowExecutionConfiguration;
 
-  @Metadata({ data: "json, name=executionInfo" })
+  @SpeakeasyMetadata({ data: "json, name=executionInfo" })
   executionInfo: WorkflowExecutionInfo;
 
-  @Metadata({ data: "json, name=latestActivityTaskTimestamp" })
+  @SpeakeasyMetadata({ data: "json, name=latestActivityTaskTimestamp" })
   latestActivityTaskTimestamp?: Date;
 
-  @Metadata({ data: "json, name=latestExecutionContext" })
+  @SpeakeasyMetadata({ data: "json, name=latestExecutionContext" })
   latestExecutionContext?: string;
 
-  @Metadata({ data: "json, name=openCounts" })
+  @SpeakeasyMetadata({ data: "json, name=openCounts" })
   openCounts: WorkflowExecutionOpenCounts;
 }

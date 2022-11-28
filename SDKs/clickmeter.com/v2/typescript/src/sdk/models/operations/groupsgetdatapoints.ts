@@ -1,82 +1,83 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GroupsGetDatapointsPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" })
   id: number;
 }
 
 export enum GroupsGetDatapointsSortDirectionEnum {
-    Asc = "asc"
-,    Desc = "desc"
+    Asc = "asc",
+    Desc = "desc"
 }
 
 export enum GroupsGetDatapointsStatusEnum {
-    Deleted = "deleted"
-,    Active = "active"
-,    Paused = "paused"
-,    Spam = "spam"
+    Deleted = "deleted",
+    Active = "active",
+    Paused = "paused",
+    Spam = "spam"
 }
 
 export enum GroupsGetDatapointsTypeEnum {
-    Tp = "tp"
-,    Tl = "tl"
+    Tp = "tp",
+    Tl = "tl"
 }
 
 
 export class GroupsGetDatapointsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=createdAfter" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=createdAfter" })
   createdAfter?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=createdBefore" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=createdBefore" })
   createdBefore?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=limit" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=limit" })
   limit?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=offset" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=offset" })
   offset?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=onlyFavorites" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=onlyFavorites" })
   onlyFavorites?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=sortBy" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sortBy" })
   sortBy?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=sortDirection" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sortDirection" })
   sortDirection?: GroupsGetDatapointsSortDirectionEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=status" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=status" })
   status?: GroupsGetDatapointsStatusEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=tags" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=tags" })
   tags?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=textSearch" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=textSearch" })
   textSearch?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=type" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=type" })
   type?: GroupsGetDatapointsTypeEnum;
 }
 
 
 export class GroupsGetDatapointsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GroupsGetDatapointsPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GroupsGetDatapointsQueryParams;
 }
 
 
 export class GroupsGetDatapointsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   apiCoreResponsesEntitiesResponseApiCoreResponsesEntityUriSystemInt64?: shared.ApiCoreResponsesEntitiesResponseApiCoreResponsesEntityUriSystemInt64;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

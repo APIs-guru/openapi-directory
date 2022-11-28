@@ -22,14 +22,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var DeleteOauthV1RefreshTokensTokenArchiveRefreshTokenPathParams = /** @class */ (function (_super) {
     __extends(DeleteOauthV1RefreshTokensTokenArchiveRefreshTokenPathParams, _super);
     function DeleteOauthV1RefreshTokensTokenArchiveRefreshTokenPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=token" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=token" }),
         __metadata("design:type", String)
     ], DeleteOauthV1RefreshTokensTokenArchiveRefreshTokenPathParams.prototype, "token", void 0);
     return DeleteOauthV1RefreshTokensTokenArchiveRefreshTokenPathParams;
@@ -41,7 +41,7 @@ var DeleteOauthV1RefreshTokensTokenArchiveRefreshTokenRequest = /** @class */ (f
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", DeleteOauthV1RefreshTokensTokenArchiveRefreshTokenPathParams)
     ], DeleteOauthV1RefreshTokensTokenArchiveRefreshTokenRequest.prototype, "pathParams", void 0);
     return DeleteOauthV1RefreshTokensTokenArchiveRefreshTokenRequest;
@@ -53,15 +53,15 @@ var DeleteOauthV1RefreshTokensTokenArchiveRefreshTokenResponse = /** @class */ (
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], DeleteOauthV1RefreshTokensTokenArchiveRefreshTokenResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], DeleteOauthV1RefreshTokensTokenArchiveRefreshTokenResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], DeleteOauthV1RefreshTokensTokenArchiveRefreshTokenResponse.prototype, "statusCode", void 0);
     return DeleteOauthV1RefreshTokensTokenArchiveRefreshTokenResponse;

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // CropPropertiesSuggestionState
@@ -6,18 +7,18 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A mask that indicates which of the fields on the base CropProperties have been changed in this suggestion. For any field set to true, there's a new suggested value.
 **/
 export class CropPropertiesSuggestionState extends SpeakeasyBase {
-  @Metadata({ data: "json, name=angleSuggested" })
+  @SpeakeasyMetadata({ data: "json, name=angleSuggested" })
   angleSuggested?: boolean;
 
-  @Metadata({ data: "json, name=offsetBottomSuggested" })
+  @SpeakeasyMetadata({ data: "json, name=offsetBottomSuggested" })
   offsetBottomSuggested?: boolean;
 
-  @Metadata({ data: "json, name=offsetLeftSuggested" })
+  @SpeakeasyMetadata({ data: "json, name=offsetLeftSuggested" })
   offsetLeftSuggested?: boolean;
 
-  @Metadata({ data: "json, name=offsetRightSuggested" })
+  @SpeakeasyMetadata({ data: "json, name=offsetRightSuggested" })
   offsetRightSuggested?: boolean;
 
-  @Metadata({ data: "json, name=offsetTopSuggested" })
+  @SpeakeasyMetadata({ data: "json, name=offsetTopSuggested" })
   offsetTopSuggested?: boolean;
 }

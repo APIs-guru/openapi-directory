@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
 from typing import Any,List,Optional
@@ -18,12 +18,12 @@ class HistoryListLoginsQueryParams:
 
 @dataclass
 class HistoryListLoginsRequest:
-    query_params: HistoryListLoginsQueryParams = field(default=None)
+    query_params: HistoryListLoginsQueryParams = field()
     
 
 @dataclass
 class HistoryListLoginsResponse:
+    content_type: str = field()
+    status_code: int = field()
     action_entities: Optional[List[shared.ActionEntity]] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

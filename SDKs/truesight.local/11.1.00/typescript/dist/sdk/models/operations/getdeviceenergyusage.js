@@ -22,14 +22,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var GetDeviceEnergyUsagePathParams = /** @class */ (function (_super) {
     __extends(GetDeviceEnergyUsagePathParams, _super);
     function GetDeviceEnergyUsagePathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=deviceId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=deviceId" }),
         __metadata("design:type", Number)
     ], GetDeviceEnergyUsagePathParams.prototype, "deviceId", void 0);
     return GetDeviceEnergyUsagePathParams;
@@ -55,11 +55,11 @@ var GetDeviceEnergyUsageQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=basis" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=basis" }),
         __metadata("design:type", String)
     ], GetDeviceEnergyUsageQueryParams.prototype, "basis", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=rollPeriod" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=rollPeriod" }),
         __metadata("design:type", String)
     ], GetDeviceEnergyUsageQueryParams.prototype, "rollPeriod", void 0);
     return GetDeviceEnergyUsageQueryParams;
@@ -71,11 +71,11 @@ var GetDeviceEnergyUsageRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetDeviceEnergyUsagePathParams)
     ], GetDeviceEnergyUsageRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetDeviceEnergyUsageQueryParams)
     ], GetDeviceEnergyUsageRequest.prototype, "queryParams", void 0);
     return GetDeviceEnergyUsageRequest;
@@ -87,15 +87,15 @@ var GetDeviceEnergyUsageResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], GetDeviceEnergyUsageResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetDeviceEnergyUsageResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetDeviceEnergyUsageResponse.prototype, "statusCode", void 0);
     return GetDeviceEnergyUsageResponse;

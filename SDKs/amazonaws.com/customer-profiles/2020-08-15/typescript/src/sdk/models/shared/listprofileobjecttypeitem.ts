@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ListProfileObjectTypeItem
@@ -6,18 +7,18 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A ProfileObjectType instance.
 **/
 export class ListProfileObjectTypeItem extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CreatedAt" })
+  @SpeakeasyMetadata({ data: "json, name=CreatedAt" })
   createdAt?: Date;
 
-  @Metadata({ data: "json, name=Description" })
+  @SpeakeasyMetadata({ data: "json, name=Description" })
   description: string;
 
-  @Metadata({ data: "json, name=LastUpdatedAt" })
+  @SpeakeasyMetadata({ data: "json, name=LastUpdatedAt" })
   lastUpdatedAt?: Date;
 
-  @Metadata({ data: "json, name=ObjectTypeName" })
+  @SpeakeasyMetadata({ data: "json, name=ObjectTypeName" })
   objectTypeName: string;
 
-  @Metadata({ data: "json, name=Tags" })
+  @SpeakeasyMetadata({ data: "json, name=Tags" })
   tags?: Map<string, string>;
 }

@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SuggestionMatch } from "./suggestionmatch";
+
 
 
 // SuggestModel
@@ -8,12 +8,12 @@ import { SuggestionMatch } from "./suggestionmatch";
  * Container for the suggestion information returned in a <code>SuggestResponse</code>.
 **/
 export class SuggestModel extends SpeakeasyBase {
-  @Metadata({ data: "json, name=found" })
+  @SpeakeasyMetadata({ data: "json, name=found" })
   found?: number;
 
-  @Metadata({ data: "json, name=query" })
+  @SpeakeasyMetadata({ data: "json, name=query" })
   query?: string;
 
-  @Metadata({ data: "json, name=suggestions", elemType: shared.SuggestionMatch })
+  @SpeakeasyMetadata({ data: "json, name=suggestions", elemType: SuggestionMatch })
   suggestions?: SuggestionMatch[];
 }

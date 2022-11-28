@@ -8,14 +8,14 @@ type CrawlPathParams struct {
 	Query string `pathParam:"style=simple,explode=false,name=query"`
 }
 
-type CrawlRequest struct {
-	PathParams CrawlPathParams
-}
-
 type Crawl200ApplicationJSON struct {
 	Answer  *string  `json:"answer,omitempty"`
 	Results []string `json:"results,omitempty"`
 	Total   *string  `json:"total,omitempty"`
+}
+
+type CrawlRequest struct {
+	PathParams CrawlPathParams
 }
 
 type CrawlResponse struct {

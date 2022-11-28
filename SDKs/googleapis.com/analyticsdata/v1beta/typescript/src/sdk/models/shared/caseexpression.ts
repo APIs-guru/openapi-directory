@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // CaseExpression
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Used to convert a dimension value to a single case.
 **/
 export class CaseExpression extends SpeakeasyBase {
-  @Metadata({ data: "json, name=dimensionName" })
+  @SpeakeasyMetadata({ data: "json, name=dimensionName" })
   dimensionName?: string;
 }

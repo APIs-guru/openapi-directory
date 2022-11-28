@@ -14,6 +14,8 @@ type ResolveComponentCandidatesHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// ResolveComponentCandidatesRequestBodyPlatform
+// Contains information about a platform that a component supports.
 type ResolveComponentCandidatesRequestBodyPlatform struct {
 	Attributes map[string]string `json:"attributes,omitempty"`
 	Name       *string           `json:"name,omitempty"`

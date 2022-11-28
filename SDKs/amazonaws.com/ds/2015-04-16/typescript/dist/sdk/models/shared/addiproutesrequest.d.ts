@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { IpRoute } from "./iproute";
 export declare class AddIpRoutesRequest extends SpeakeasyBase {
     directoryId: string;

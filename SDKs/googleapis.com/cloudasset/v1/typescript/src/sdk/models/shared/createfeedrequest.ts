@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Feed } from "./feed";
+
 
 
 // CreateFeedRequest
@@ -7,9 +8,9 @@ import { Feed } from "./feed";
  * Create asset feed request.
 **/
 export class CreateFeedRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=feed" })
+  @SpeakeasyMetadata({ data: "json, name=feed" })
   feed?: Feed;
 
-  @Metadata({ data: "json, name=feedId" })
+  @SpeakeasyMetadata({ data: "json, name=feedId" })
   feedId?: string;
 }

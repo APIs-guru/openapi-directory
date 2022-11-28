@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class AnalyticsadminPropertiesDisplayVideo360AdvertiserLinkProposalsApprovePathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,21 +26,21 @@ class AnalyticsadminPropertiesDisplayVideo360AdvertiserLinkProposalsApproveQuery
 
 @dataclass
 class AnalyticsadminPropertiesDisplayVideo360AdvertiserLinkProposalsApproveSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class AnalyticsadminPropertiesDisplayVideo360AdvertiserLinkProposalsApproveRequest:
-    path_params: AnalyticsadminPropertiesDisplayVideo360AdvertiserLinkProposalsApprovePathParams = field(default=None)
-    query_params: AnalyticsadminPropertiesDisplayVideo360AdvertiserLinkProposalsApproveQueryParams = field(default=None)
+    path_params: AnalyticsadminPropertiesDisplayVideo360AdvertiserLinkProposalsApprovePathParams = field()
+    query_params: AnalyticsadminPropertiesDisplayVideo360AdvertiserLinkProposalsApproveQueryParams = field()
+    security: AnalyticsadminPropertiesDisplayVideo360AdvertiserLinkProposalsApproveSecurity = field()
     request: Optional[dict[str, Any]] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: AnalyticsadminPropertiesDisplayVideo360AdvertiserLinkProposalsApproveSecurity = field(default=None)
     
 
 @dataclass
 class AnalyticsadminPropertiesDisplayVideo360AdvertiserLinkProposalsApproveResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_analytics_admin_v1alpha_approve_display_video360_advertiser_link_proposal_response: Optional[shared.GoogleAnalyticsAdminV1alphaApproveDisplayVideo360AdvertiserLinkProposalResponse] = field(default=None)
-    status_code: int = field(default=None)
     

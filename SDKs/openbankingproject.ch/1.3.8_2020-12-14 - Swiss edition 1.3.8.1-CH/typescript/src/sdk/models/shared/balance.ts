@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Amount } from "./amount";
 import { BalanceTypeEnum } from "./balancetypeenum";
+
 
 
 // Balance
@@ -9,21 +10,21 @@ import { BalanceTypeEnum } from "./balancetypeenum";
  * 
 **/
 export class Balance extends SpeakeasyBase {
-  @Metadata({ data: "json, name=balanceAmount" })
+  @SpeakeasyMetadata({ data: "json, name=balanceAmount" })
   balanceAmount: Amount;
 
-  @Metadata({ data: "json, name=balanceType" })
+  @SpeakeasyMetadata({ data: "json, name=balanceType" })
   balanceType: BalanceTypeEnum;
 
-  @Metadata({ data: "json, name=creditLimitIncluded" })
+  @SpeakeasyMetadata({ data: "json, name=creditLimitIncluded" })
   creditLimitIncluded?: boolean;
 
-  @Metadata({ data: "json, name=lastChangeDateTime" })
+  @SpeakeasyMetadata({ data: "json, name=lastChangeDateTime" })
   lastChangeDateTime?: Date;
 
-  @Metadata({ data: "json, name=lastCommittedTransaction" })
+  @SpeakeasyMetadata({ data: "json, name=lastCommittedTransaction" })
   lastCommittedTransaction?: string;
 
-  @Metadata({ data: "json, name=referenceDate" })
+  @SpeakeasyMetadata({ data: "json, name=referenceDate" })
   referenceDate?: Date;
 }

@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ServerCertificateStatusEnum } from "./servercertificatestatusenum";
+
 
 
 // ServerCertificateSummary
@@ -7,12 +8,12 @@ import { ServerCertificateStatusEnum } from "./servercertificatestatusenum";
  * An object that contains information about a server certificate.
 **/
 export class ServerCertificateSummary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=serverCertificateArn" })
+  @SpeakeasyMetadata({ data: "json, name=serverCertificateArn" })
   serverCertificateArn?: string;
 
-  @Metadata({ data: "json, name=serverCertificateStatus" })
+  @SpeakeasyMetadata({ data: "json, name=serverCertificateStatus" })
   serverCertificateStatus?: ServerCertificateStatusEnum;
 
-  @Metadata({ data: "json, name=serverCertificateStatusDetail" })
+  @SpeakeasyMetadata({ data: "json, name=serverCertificateStatusDetail" })
   serverCertificateStatusDetail?: string;
 }

@@ -1,42 +1,42 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
-export const DELETEFAXMEDIA_SERVERS = [
-	"https://fax.twilio.com",
-];
 
+export const DeleteFaxMediaServerList = [
+	"https://fax.twilio.com",
+] as const;
 
 
 export class DeleteFaxMediaPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=FaxSid" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=FaxSid" })
   faxSid: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=Sid" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=Sid" })
   sid: string;
 }
 
 
 export class DeleteFaxMediaSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=basic" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=basic" })
   accountSidAuthToken: shared.SchemeAccountSidAuthToken;
 }
 
 
 export class DeleteFaxMediaRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   serverUrl?: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: DeleteFaxMediaPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: DeleteFaxMediaSecurity;
 }
 
 
 export class DeleteFaxMediaResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // HistoryEventExecutionDataDetails
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Provides details about input or output in an execution history event.
 **/
 export class HistoryEventExecutionDataDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=truncated" })
+  @SpeakeasyMetadata({ data: "json, name=truncated" })
   truncated?: boolean;
 }

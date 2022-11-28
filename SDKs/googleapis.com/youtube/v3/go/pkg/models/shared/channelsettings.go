@@ -1,5 +1,7 @@
 package shared
 
+// ChannelSettings
+// Branding properties for the channel view.
 type ChannelSettings struct {
 	Country                    *string  `json:"country,omitempty"`
 	DefaultLanguage            *string  `json:"defaultLanguage,omitempty"`

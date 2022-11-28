@@ -1,50 +1,51 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetLikesPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=itemId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=itemId" })
   itemId: string;
 }
 
 
 export class GetLikesQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=numberOfResults" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=numberOfResults" })
   numberOfResults?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=searchPointer" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=searchPointer" })
   searchPointer?: string;
 }
 
 
 export class GetLikesSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   oauth: shared.SchemeOauth;
 }
 
 
 export class GetLikesRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetLikesPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetLikesQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: GetLikesSecurity;
 }
 
 
 export class GetLikesResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   participantsLikeResult?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

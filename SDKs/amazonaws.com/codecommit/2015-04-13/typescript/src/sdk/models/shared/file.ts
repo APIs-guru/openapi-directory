@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { FileModeTypeEnumEnum } from "./filemodetypeenumenum";
+
 
 
 // File
@@ -7,15 +8,15 @@ import { FileModeTypeEnumEnum } from "./filemodetypeenumenum";
  * Returns information about a file in a repository.
 **/
 export class File extends SpeakeasyBase {
-  @Metadata({ data: "json, name=absolutePath" })
+  @SpeakeasyMetadata({ data: "json, name=absolutePath" })
   absolutePath?: string;
 
-  @Metadata({ data: "json, name=blobId" })
+  @SpeakeasyMetadata({ data: "json, name=blobId" })
   blobId?: string;
 
-  @Metadata({ data: "json, name=fileMode" })
+  @SpeakeasyMetadata({ data: "json, name=fileMode" })
   fileMode?: FileModeTypeEnumEnum;
 
-  @Metadata({ data: "json, name=relativePath" })
+  @SpeakeasyMetadata({ data: "json, name=relativePath" })
   relativePath?: string;
 }

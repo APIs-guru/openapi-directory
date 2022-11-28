@@ -1,15 +1,19 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import videooffset
-from . import videooffset
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class SkippableSetting:
-    kind: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'kind' }})
-    progress_offset: Optional[videooffset.VideoOffset] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'progressOffset' }})
-    skip_offset: Optional[videooffset.VideoOffset] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'skipOffset' }})
-    skippable: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'skippable' }})
+    r"""SkippableSetting
+    Skippable Settings
+    """
+    
+    kind: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('kind') }})
+    progress_offset: Optional[VideoOffset] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('progressOffset') }})
+    skip_offset: Optional[VideoOffset] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('skipOffset') }})
+    skippable: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('skippable') }})
     

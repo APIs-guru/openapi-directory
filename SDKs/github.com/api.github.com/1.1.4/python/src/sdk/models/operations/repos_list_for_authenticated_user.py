@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 class ReposListForAuthenticatedUserDirectionEnum(str, Enum):
@@ -40,13 +44,13 @@ class ReposListForAuthenticatedUserQueryParams:
 
 @dataclass
 class ReposListForAuthenticatedUserRequest:
-    query_params: ReposListForAuthenticatedUserQueryParams = field(default=None)
+    query_params: ReposListForAuthenticatedUserQueryParams = field()
     
 
 @dataclass
 class ReposListForAuthenticatedUserResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     basic_error: Optional[shared.BasicError] = field(default=None)
     repositories: Optional[List[shared.Repository]] = field(default=None)
     validation_error: Optional[shared.ValidationError] = field(default=None)

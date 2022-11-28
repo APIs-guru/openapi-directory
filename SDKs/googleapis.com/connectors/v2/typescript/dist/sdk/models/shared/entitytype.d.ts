@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { Field } from "./field";
 /**
  * EntityType message contains metadata information about a single entity type present in the external system.

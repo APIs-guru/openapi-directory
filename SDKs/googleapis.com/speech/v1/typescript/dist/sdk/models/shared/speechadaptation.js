@@ -22,8 +22,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { CustomClass } from "./customclass";
+import { PhraseSet } from "./phraseset";
 // SpeechAdaptation
 /**
  * Speech adaptation configuration.
@@ -34,15 +35,15 @@ var SpeechAdaptation = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=customClasses", elemType: shared.CustomClass }),
+        SpeakeasyMetadata({ data: "json, name=customClasses", elemType: CustomClass }),
         __metadata("design:type", Array)
     ], SpeechAdaptation.prototype, "customClasses", void 0);
     __decorate([
-        Metadata({ data: "json, name=phraseSetReferences" }),
+        SpeakeasyMetadata({ data: "json, name=phraseSetReferences" }),
         __metadata("design:type", Array)
     ], SpeechAdaptation.prototype, "phraseSetReferences", void 0);
     __decorate([
-        Metadata({ data: "json, name=phraseSets", elemType: shared.PhraseSet }),
+        SpeakeasyMetadata({ data: "json, name=phraseSets", elemType: PhraseSet }),
         __metadata("design:type", Array)
     ], SpeechAdaptation.prototype, "phraseSets", void 0);
     return SpeechAdaptation;

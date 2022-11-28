@@ -1,10 +1,13 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 
 
 @dataclass
 class DeleteEnvironmentPathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'Name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'Name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -20,16 +23,16 @@ class DeleteEnvironmentHeaders:
 
 @dataclass
 class DeleteEnvironmentRequest:
-    path_params: DeleteEnvironmentPathParams = field(default=None)
-    headers: DeleteEnvironmentHeaders = field(default=None)
+    headers: DeleteEnvironmentHeaders = field()
+    path_params: DeleteEnvironmentPathParams = field()
     
 
 @dataclass
 class DeleteEnvironmentResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     delete_environment_output: Optional[dict[str, Any]] = field(default=None)
     internal_server_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     validation_exception: Optional[Any] = field(default=None)
     

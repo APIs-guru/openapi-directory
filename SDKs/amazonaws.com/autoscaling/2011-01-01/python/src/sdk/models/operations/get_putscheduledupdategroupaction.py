@@ -1,8 +1,9 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 
 class GetPutScheduledUpdateGroupActionActionEnum(str, Enum):
     PUT_SCHEDULED_UPDATE_GROUP_ACTION = "PutScheduledUpdateGroupAction"
@@ -13,18 +14,18 @@ class GetPutScheduledUpdateGroupActionVersionEnum(str, Enum):
 
 @dataclass
 class GetPutScheduledUpdateGroupActionQueryParams:
-    action: GetPutScheduledUpdateGroupActionActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    auto_scaling_group_name: str = field(default=None, metadata={'query_param': { 'field_name': 'AutoScalingGroupName', 'style': 'form', 'explode': True }})
+    action: GetPutScheduledUpdateGroupActionActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    auto_scaling_group_name: str = field(metadata={'query_param': { 'field_name': 'AutoScalingGroupName', 'style': 'form', 'explode': True }})
+    scheduled_action_name: str = field(metadata={'query_param': { 'field_name': 'ScheduledActionName', 'style': 'form', 'explode': True }})
+    version: GetPutScheduledUpdateGroupActionVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     desired_capacity: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'DesiredCapacity', 'style': 'form', 'explode': True }})
     end_time: Optional[datetime] = field(default=None, metadata={'query_param': { 'field_name': 'EndTime', 'style': 'form', 'explode': True }})
     max_size: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'MaxSize', 'style': 'form', 'explode': True }})
     min_size: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'MinSize', 'style': 'form', 'explode': True }})
     recurrence: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'Recurrence', 'style': 'form', 'explode': True }})
-    scheduled_action_name: str = field(default=None, metadata={'query_param': { 'field_name': 'ScheduledActionName', 'style': 'form', 'explode': True }})
     start_time: Optional[datetime] = field(default=None, metadata={'query_param': { 'field_name': 'StartTime', 'style': 'form', 'explode': True }})
     time: Optional[datetime] = field(default=None, metadata={'query_param': { 'field_name': 'Time', 'style': 'form', 'explode': True }})
     time_zone: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'TimeZone', 'style': 'form', 'explode': True }})
-    version: GetPutScheduledUpdateGroupActionVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -40,13 +41,13 @@ class GetPutScheduledUpdateGroupActionHeaders:
 
 @dataclass
 class GetPutScheduledUpdateGroupActionRequest:
-    query_params: GetPutScheduledUpdateGroupActionQueryParams = field(default=None)
-    headers: GetPutScheduledUpdateGroupActionHeaders = field(default=None)
+    headers: GetPutScheduledUpdateGroupActionHeaders = field()
+    query_params: GetPutScheduledUpdateGroupActionQueryParams = field()
     
 
 @dataclass
 class GetPutScheduledUpdateGroupActionResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

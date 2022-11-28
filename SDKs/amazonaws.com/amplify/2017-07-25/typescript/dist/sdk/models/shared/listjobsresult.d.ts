@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { JobSummary } from "./jobsummary";
 /**
  *  The maximum number of records to list in a single response.

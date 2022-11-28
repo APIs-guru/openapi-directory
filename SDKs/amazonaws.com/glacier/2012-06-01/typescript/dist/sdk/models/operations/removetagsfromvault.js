@@ -22,18 +22,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var RemoveTagsFromVaultPathParams = /** @class */ (function (_super) {
     __extends(RemoveTagsFromVaultPathParams, _super);
     function RemoveTagsFromVaultPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=accountId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=accountId" }),
         __metadata("design:type", String)
     ], RemoveTagsFromVaultPathParams.prototype, "accountId", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=vaultName" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=vaultName" }),
         __metadata("design:type", String)
     ], RemoveTagsFromVaultPathParams.prototype, "vaultName", void 0);
     return RemoveTagsFromVaultPathParams;
@@ -49,7 +49,7 @@ var RemoveTagsFromVaultQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=operation" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=operation" }),
         __metadata("design:type", String)
     ], RemoveTagsFromVaultQueryParams.prototype, "operation", void 0);
     return RemoveTagsFromVaultQueryParams;
@@ -61,31 +61,31 @@ var RemoveTagsFromVaultHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
         __metadata("design:type", String)
     ], RemoveTagsFromVaultHeaders.prototype, "xAmzAlgorithm", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
         __metadata("design:type", String)
     ], RemoveTagsFromVaultHeaders.prototype, "xAmzContentSha256", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
         __metadata("design:type", String)
     ], RemoveTagsFromVaultHeaders.prototype, "xAmzCredential", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
         __metadata("design:type", String)
     ], RemoveTagsFromVaultHeaders.prototype, "xAmzDate", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
         __metadata("design:type", String)
     ], RemoveTagsFromVaultHeaders.prototype, "xAmzSecurityToken", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
         __metadata("design:type", String)
     ], RemoveTagsFromVaultHeaders.prototype, "xAmzSignature", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
         __metadata("design:type", String)
     ], RemoveTagsFromVaultHeaders.prototype, "xAmzSignedHeaders", void 0);
     return RemoveTagsFromVaultHeaders;
@@ -97,7 +97,7 @@ var RemoveTagsFromVaultRequestBody = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=TagKeys" }),
+        SpeakeasyMetadata({ data: "json, name=TagKeys" }),
         __metadata("design:type", Array)
     ], RemoveTagsFromVaultRequestBody.prototype, "tagKeys", void 0);
     return RemoveTagsFromVaultRequestBody;
@@ -109,19 +109,19 @@ var RemoveTagsFromVaultRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", RemoveTagsFromVaultPathParams)
     ], RemoveTagsFromVaultRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", RemoveTagsFromVaultQueryParams)
     ], RemoveTagsFromVaultRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", RemoveTagsFromVaultHeaders)
     ], RemoveTagsFromVaultRequest.prototype, "headers", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", RemoveTagsFromVaultRequestBody)
     ], RemoveTagsFromVaultRequest.prototype, "request", void 0);
     return RemoveTagsFromVaultRequest;
@@ -133,27 +133,27 @@ var RemoveTagsFromVaultResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], RemoveTagsFromVaultResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], RemoveTagsFromVaultResponse.prototype, "invalidParameterValueException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], RemoveTagsFromVaultResponse.prototype, "missingParameterValueException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], RemoveTagsFromVaultResponse.prototype, "resourceNotFoundException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], RemoveTagsFromVaultResponse.prototype, "serviceUnavailableException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], RemoveTagsFromVaultResponse.prototype, "statusCode", void 0);
     return RemoveTagsFromVaultResponse;

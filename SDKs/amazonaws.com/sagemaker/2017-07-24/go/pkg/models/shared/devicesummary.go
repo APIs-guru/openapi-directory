@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// DeviceSummary
+// Summary of the device.
 type DeviceSummary struct {
 	Description      *string            `json:"Description,omitempty"`
 	DeviceArn        string             `json:"DeviceArn"`

@@ -1,12 +1,16 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import List,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
 @dataclass
 class UpdateGoalPathParams:
-    goal_gid: str = field(default=None, metadata={'path_param': { 'field_name': 'goal_gid', 'style': 'simple', 'explode': False }})
+    goal_gid: str = field(metadata={'path_param': { 'field_name': 'goal_gid', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -17,27 +21,27 @@ class UpdateGoalQueryParams:
 
 @dataclass_json
 @dataclass
-class UpdateGoalRequestBody:
-    data: Optional[shared.GoalRequest] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'data' }})
-    
-
-@dataclass
-class UpdateGoalRequest:
-    path_params: UpdateGoalPathParams = field(default=None)
-    query_params: UpdateGoalQueryParams = field(default=None)
-    request: UpdateGoalRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+class UpdateGoalRequestBodyInput:
+    data: Optional[shared.GoalRequestInput] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('data') }})
     
 
 @dataclass_json
 @dataclass
 class UpdateGoal200ApplicationJSON:
-    data: Optional[shared.GoalResponse] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'data' }})
+    data: Optional[shared.GoalResponse] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('data') }})
+    
+
+@dataclass
+class UpdateGoalRequest:
+    path_params: UpdateGoalPathParams = field()
+    query_params: UpdateGoalQueryParams = field()
+    request: UpdateGoalRequestBodyInput = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class UpdateGoalResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error_response: Optional[shared.ErrorResponse] = field(default=None)
-    status_code: int = field(default=None)
     update_goal_200_application_json_object: Optional[UpdateGoal200ApplicationJSON] = field(default=None)
     

@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RelationalDatabaseEngineEnum } from "./relationaldatabaseengineenum";
+
 
 
 // RelationalDatabaseBlueprint
@@ -7,21 +8,21 @@ import { RelationalDatabaseEngineEnum } from "./relationaldatabaseengineenum";
  * Describes a database image, or blueprint. A blueprint describes the major engine version of a database.
 **/
 export class RelationalDatabaseBlueprint extends SpeakeasyBase {
-  @Metadata({ data: "json, name=blueprintId" })
+  @SpeakeasyMetadata({ data: "json, name=blueprintId" })
   blueprintId?: string;
 
-  @Metadata({ data: "json, name=engine" })
+  @SpeakeasyMetadata({ data: "json, name=engine" })
   engine?: RelationalDatabaseEngineEnum;
 
-  @Metadata({ data: "json, name=engineDescription" })
+  @SpeakeasyMetadata({ data: "json, name=engineDescription" })
   engineDescription?: string;
 
-  @Metadata({ data: "json, name=engineVersion" })
+  @SpeakeasyMetadata({ data: "json, name=engineVersion" })
   engineVersion?: string;
 
-  @Metadata({ data: "json, name=engineVersionDescription" })
+  @SpeakeasyMetadata({ data: "json, name=engineVersionDescription" })
   engineVersionDescription?: string;
 
-  @Metadata({ data: "json, name=isEngineDefault" })
+  @SpeakeasyMetadata({ data: "json, name=isEngineDefault" })
   isEngineDefault?: boolean;
 }

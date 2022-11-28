@@ -4,12 +4,16 @@ import (
 	"time"
 )
 
+// CommentaryCommentaryEmployee
+// The commentarys' employee
 type CommentaryCommentaryEmployee struct {
 	AtHref  *string `json:"@href,omitempty"`
 	AtRel   *string `json:"@rel,omitempty"`
 	AtTitle *string `json:"@title,omitempty"`
 }
 
+// CommentaryCommentaryPayRun
+// The commentarys' pay run
 type CommentaryCommentaryPayRun struct {
 	AtHref  *string `json:"@href,omitempty"`
 	AtRel   *string `json:"@rel,omitempty"`

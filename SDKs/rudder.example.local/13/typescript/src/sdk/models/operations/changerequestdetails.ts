@@ -1,16 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class ChangeRequestDetailsPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=changeRequestId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=changeRequestId" })
   changeRequestId: number;
-}
-
-
-export class ChangeRequestDetailsRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: ChangeRequestDetailsPathParams;
 }
 
 export enum ChangeRequestDetails200ApplicationJsonActionEnum {
@@ -19,35 +14,41 @@ export enum ChangeRequestDetails200ApplicationJsonActionEnum {
 
 
 export class ChangeRequestDetails200ApplicationJsonData extends SpeakeasyBase {
-  @Metadata({ data: "json, name=rules", elemType: shared.ChangeRequest })
+  @SpeakeasyMetadata({ data: "json, name=rules", elemType: shared.ChangeRequest })
   rules: shared.ChangeRequest[];
 }
 
 export enum ChangeRequestDetails200ApplicationJsonResultEnum {
-    Success = "success"
-,    Error = "error"
+    Success = "success",
+    Error = "error"
 }
 
 
 export class ChangeRequestDetails200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=action" })
+  @SpeakeasyMetadata({ data: "json, name=action" })
   action: ChangeRequestDetails200ApplicationJsonActionEnum;
 
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data: ChangeRequestDetails200ApplicationJsonData;
 
-  @Metadata({ data: "json, name=result" })
+  @SpeakeasyMetadata({ data: "json, name=result" })
   result: ChangeRequestDetails200ApplicationJsonResultEnum;
 }
 
 
+export class ChangeRequestDetailsRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: ChangeRequestDetailsPathParams;
+}
+
+
 export class ChangeRequestDetailsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   changeRequestDetails200ApplicationJsonObject?: ChangeRequestDetails200ApplicationJson;
 }

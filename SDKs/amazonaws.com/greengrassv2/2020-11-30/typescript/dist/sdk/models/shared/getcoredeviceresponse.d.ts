@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { CoreDeviceStatusEnum } from "./coredevicestatusenum";
 export declare class GetCoreDeviceResponse extends SpeakeasyBase {
     architecture?: string;

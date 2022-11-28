@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { Lake } from "./lake";
 // DataplexConfig
 /**
  * Specifies how metastore metadata should be integrated with the Dataplex service.
@@ -34,7 +34,7 @@ var DataplexConfig = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=lakeResources", elemType: shared.Lake }),
+        SpeakeasyMetadata({ data: "json, name=lakeResources", elemType: Lake }),
         __metadata("design:type", Map)
     ], DataplexConfig.prototype, "lakeResources", void 0);
     return DataplexConfig;

@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Membership } from "./membership";
+
 
 
 // ListMembershipsResponse
@@ -8,9 +8,9 @@ import { Membership } from "./membership";
  * The response message for MembershipsService.ListMemberships.
 **/
 export class ListMembershipsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=memberships", elemType: shared.Membership })
+  @SpeakeasyMetadata({ data: "json, name=memberships", elemType: Membership })
   memberships?: Membership[];
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 }

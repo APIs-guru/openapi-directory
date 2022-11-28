@@ -1,5 +1,7 @@
 package shared
 
+// LookupDeveloperIdentityInput
+// Input to the <code>LookupDeveloperIdentityInput</code> action.
 type LookupDeveloperIdentityInput struct {
 	DeveloperUserIdentifier *string `json:"DeveloperUserIdentifier,omitempty"`
 	IdentityID              *string `json:"IdentityId,omitempty"`

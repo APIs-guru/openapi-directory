@@ -28,11 +28,6 @@ type EpfscSecurity struct {
 	ClientID shared.SchemeClientID `security:"scheme,type=apiKey,subtype=header"`
 }
 
-type EpfscRequest struct {
-	Request  *EpfscRequestBody `request:"mediaType=application/json"`
-	Security EpfscSecurity
-}
-
 type Epfsc400ApplicationJSONErrorEnum string
 
 const (
@@ -162,6 +157,11 @@ const (
 type Epfsc504ApplicationJSON struct {
 	Error            *Epfsc504ApplicationJSONErrorEnum            `json:"error,omitempty"`
 	ErrorDescription *Epfsc504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
+}
+
+type EpfscRequest struct {
+	Request  *EpfscRequestBody `request:"mediaType=application/json"`
+	Security EpfscSecurity
 }
 
 type EpfscResponse struct {

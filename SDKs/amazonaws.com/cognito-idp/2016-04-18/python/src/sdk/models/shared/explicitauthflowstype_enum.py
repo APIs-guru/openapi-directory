@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class ExplicitAuthFlowsTypeEnum(str, Enum):
     ADMIN_NO_SRP_AUTH = "ADMIN_NO_SRP_AUTH"

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // DataflowEndpointConfig
 /**
  * Information about the dataflow endpoint <code>Config</code>.
@@ -33,11 +33,11 @@ var DataflowEndpointConfig = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=dataflowEndpointName" }),
+        SpeakeasyMetadata({ data: "json, name=dataflowEndpointName" }),
         __metadata("design:type", String)
     ], DataflowEndpointConfig.prototype, "dataflowEndpointName", void 0);
     __decorate([
-        Metadata({ data: "json, name=dataflowEndpointRegion" }),
+        SpeakeasyMetadata({ data: "json, name=dataflowEndpointRegion" }),
         __metadata("design:type", String)
     ], DataflowEndpointConfig.prototype, "dataflowEndpointRegion", void 0);
     return DataflowEndpointConfig;

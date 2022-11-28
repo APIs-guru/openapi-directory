@@ -1,25 +1,20 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetEventsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=false;name=opt_fields" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=opt_fields" })
   optFields?: string[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=opt_pretty" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=opt_pretty" })
   optPretty?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=resource" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=resource" })
   resource: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=sync" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sync" })
   sync?: string;
-}
-
-
-export class GetEventsRequest extends SpeakeasyBase {
-  @Metadata()
-  queryParams: GetEventsQueryParams;
 }
 
 
@@ -28,24 +23,30 @@ export class GetEventsRequest extends SpeakeasyBase {
  * The full record for all events that have occurred since the sync token was created.
 **/
 export class GetEvents200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=data", elemType: shared.EventResponse })
+  @SpeakeasyMetadata({ data: "json, name=data", elemType: shared.EventResponse })
   data?: shared.EventResponse[];
 
-  @Metadata({ data: "json, name=sync" })
+  @SpeakeasyMetadata({ data: "json, name=sync" })
   sync?: string;
 }
 
 
+export class GetEventsRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  queryParams: GetEventsQueryParams;
+}
+
+
 export class GetEventsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   errorResponse?: shared.ErrorResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getEvents200ApplicationJsonObject?: GetEvents200ApplicationJson;
 }

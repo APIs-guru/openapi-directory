@@ -18,6 +18,8 @@ const (
 	ConfigManagementHierarchyControllerDeploymentStateHncEnumError                      ConfigManagementHierarchyControllerDeploymentStateHncEnum = "ERROR"
 )
 
+// ConfigManagementHierarchyControllerDeploymentState
+// Deployment state for Hierarchy Controller
 type ConfigManagementHierarchyControllerDeploymentState struct {
 	Extension *ConfigManagementHierarchyControllerDeploymentStateExtensionEnum `json:"extension,omitempty"`
 	Hnc       *ConfigManagementHierarchyControllerDeploymentStateHncEnum       `json:"hnc,omitempty"`

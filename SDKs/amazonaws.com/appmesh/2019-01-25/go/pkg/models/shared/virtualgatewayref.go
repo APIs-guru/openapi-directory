@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// VirtualGatewayRef
+// An object that represents a virtual gateway returned by a list operation.
 type VirtualGatewayRef struct {
 	Arn                string    `json:"arn"`
 	CreatedAt          time.Time `json:"createdAt"`

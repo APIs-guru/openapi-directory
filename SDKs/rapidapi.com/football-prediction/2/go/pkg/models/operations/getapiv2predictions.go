@@ -4,12 +4,12 @@ type GetAPIV2PredictionsHeaders struct {
 	XRapidAPIKey *string `header:"style=simple,explode=false,name=X-RapidApi-Key"`
 }
 
-type GetAPIV2PredictionsRequest struct {
-	Headers GetAPIV2PredictionsHeaders
-}
-
 type GetAPIV2Predictions404ApplicationJSON struct {
 	Errors map[string]interface{} `json:"errors,omitempty"`
+}
+
+type GetAPIV2PredictionsRequest struct {
+	Headers GetAPIV2PredictionsHeaders
 }
 
 type GetAPIV2PredictionsResponse struct {

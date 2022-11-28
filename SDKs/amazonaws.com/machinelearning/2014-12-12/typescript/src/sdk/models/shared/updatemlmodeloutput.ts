@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // UpdateMlModelOutput
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * <p>Represents the output of an <code>UpdateMLModel</code> operation.</p> <p>You can see the updated content by using the <code>GetMLModel</code> operation.</p>
 **/
 export class UpdateMlModelOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=MLModelId" })
+  @SpeakeasyMetadata({ data: "json, name=MLModelId" })
   mlModelId?: string;
 }

@@ -12,6 +12,8 @@ const (
 	ArimaSingleModelForecastingMetricsSeasonalPeriodsEnumYearly                        ArimaSingleModelForecastingMetricsSeasonalPeriodsEnum = "YEARLY"
 )
 
+// ArimaSingleModelForecastingMetrics
+// Model evaluation metrics for a single ARIMA forecasting model.
 type ArimaSingleModelForecastingMetrics struct {
 	ArimaFittingMetrics *ArimaFittingMetrics                                    `json:"arimaFittingMetrics,omitempty"`
 	HasDrift            *bool                                                   `json:"hasDrift,omitempty"`

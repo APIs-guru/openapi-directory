@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 
 class GetGetIdentityNotificationAttributesActionEnum(str, Enum):
     GET_IDENTITY_NOTIFICATION_ATTRIBUTES = "GetIdentityNotificationAttributes"
@@ -10,9 +14,9 @@ class GetGetIdentityNotificationAttributesVersionEnum(str, Enum):
 
 @dataclass
 class GetGetIdentityNotificationAttributesQueryParams:
-    action: GetGetIdentityNotificationAttributesActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    identities: List[str] = field(default=None, metadata={'query_param': { 'field_name': 'Identities', 'style': 'form', 'explode': True }})
-    version: GetGetIdentityNotificationAttributesVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: GetGetIdentityNotificationAttributesActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    identities: List[str] = field(metadata={'query_param': { 'field_name': 'Identities', 'style': 'form', 'explode': True }})
+    version: GetGetIdentityNotificationAttributesVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -28,13 +32,13 @@ class GetGetIdentityNotificationAttributesHeaders:
 
 @dataclass
 class GetGetIdentityNotificationAttributesRequest:
-    query_params: GetGetIdentityNotificationAttributesQueryParams = field(default=None)
-    headers: GetGetIdentityNotificationAttributesHeaders = field(default=None)
+    headers: GetGetIdentityNotificationAttributesHeaders = field()
+    query_params: GetGetIdentityNotificationAttributesQueryParams = field()
     
 
 @dataclass
 class GetGetIdentityNotificationAttributesResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

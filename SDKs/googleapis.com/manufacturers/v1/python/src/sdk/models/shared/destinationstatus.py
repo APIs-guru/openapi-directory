@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class DestinationStatusStatusEnum(str, Enum):
     UNKNOWN = "UNKNOWN"
@@ -12,6 +14,10 @@ class DestinationStatusStatusEnum(str, Enum):
 @dataclass_json
 @dataclass
 class DestinationStatus:
-    destination: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'destination' }})
-    status: Optional[DestinationStatusStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+    r"""DestinationStatus
+    The destination status.
+    """
+    
+    destination: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('destination') }})
+    status: Optional[DestinationStatusStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('status') }})
     

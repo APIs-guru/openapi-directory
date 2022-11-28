@@ -4,17 +4,9 @@ import (
 	"openapi/pkg/models/shared"
 )
 
-type UploadBoundarySecurityOption1 struct {
-	APIKey shared.SchemeAPIKey `security:"scheme,type=apiKey,subtype=header"`
-}
-
-type UploadBoundarySecurityOption2 struct {
-	Oauth2AuthorizationCode shared.SchemeOauth2AuthorizationCode `security:"scheme,type=oauth2"`
-}
-
 type UploadBoundarySecurity struct {
-	Option1 *UploadBoundarySecurityOption1 `security:"option"`
-	Option2 *UploadBoundarySecurityOption2 `security:"option"`
+	APIKey                  *shared.SchemeAPIKey                  `security:"scheme,type=apiKey,subtype=header"`
+	Oauth2AuthorizationCode *shared.SchemeOauth2AuthorizationCode `security:"scheme,type=oauth2"`
 }
 
 type UploadBoundaryRequest struct {

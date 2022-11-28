@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var SetIdentityPoolConfigurationPathParams = /** @class */ (function (_super) {
     __extends(SetIdentityPoolConfigurationPathParams, _super);
@@ -30,7 +30,7 @@ var SetIdentityPoolConfigurationPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=IdentityPoolId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=IdentityPoolId" }),
         __metadata("design:type", String)
     ], SetIdentityPoolConfigurationPathParams.prototype, "identityPoolId", void 0);
     return SetIdentityPoolConfigurationPathParams;
@@ -42,31 +42,31 @@ var SetIdentityPoolConfigurationHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
         __metadata("design:type", String)
     ], SetIdentityPoolConfigurationHeaders.prototype, "xAmzAlgorithm", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
         __metadata("design:type", String)
     ], SetIdentityPoolConfigurationHeaders.prototype, "xAmzContentSha256", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
         __metadata("design:type", String)
     ], SetIdentityPoolConfigurationHeaders.prototype, "xAmzCredential", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
         __metadata("design:type", String)
     ], SetIdentityPoolConfigurationHeaders.prototype, "xAmzDate", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
         __metadata("design:type", String)
     ], SetIdentityPoolConfigurationHeaders.prototype, "xAmzSecurityToken", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
         __metadata("design:type", String)
     ], SetIdentityPoolConfigurationHeaders.prototype, "xAmzSignature", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
         __metadata("design:type", String)
     ], SetIdentityPoolConfigurationHeaders.prototype, "xAmzSignedHeaders", void 0);
     return SetIdentityPoolConfigurationHeaders;
@@ -82,15 +82,15 @@ var SetIdentityPoolConfigurationRequestBodyCognitoStreams = /** @class */ (funct
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=RoleArn" }),
+        SpeakeasyMetadata({ data: "json, name=RoleArn" }),
         __metadata("design:type", String)
     ], SetIdentityPoolConfigurationRequestBodyCognitoStreams.prototype, "roleArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=StreamName" }),
+        SpeakeasyMetadata({ data: "json, name=StreamName" }),
         __metadata("design:type", String)
     ], SetIdentityPoolConfigurationRequestBodyCognitoStreams.prototype, "streamName", void 0);
     __decorate([
-        Metadata({ data: "json, name=StreamingStatus" }),
+        SpeakeasyMetadata({ data: "json, name=StreamingStatus" }),
         __metadata("design:type", String)
     ], SetIdentityPoolConfigurationRequestBodyCognitoStreams.prototype, "streamingStatus", void 0);
     return SetIdentityPoolConfigurationRequestBodyCognitoStreams;
@@ -106,11 +106,11 @@ var SetIdentityPoolConfigurationRequestBodyPushSync = /** @class */ (function (_
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=ApplicationArns" }),
+        SpeakeasyMetadata({ data: "json, name=ApplicationArns" }),
         __metadata("design:type", Array)
     ], SetIdentityPoolConfigurationRequestBodyPushSync.prototype, "applicationArns", void 0);
     __decorate([
-        Metadata({ data: "json, name=RoleArn" }),
+        SpeakeasyMetadata({ data: "json, name=RoleArn" }),
         __metadata("design:type", String)
     ], SetIdentityPoolConfigurationRequestBodyPushSync.prototype, "roleArn", void 0);
     return SetIdentityPoolConfigurationRequestBodyPushSync;
@@ -122,11 +122,11 @@ var SetIdentityPoolConfigurationRequestBody = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=CognitoStreams" }),
+        SpeakeasyMetadata({ data: "json, name=CognitoStreams" }),
         __metadata("design:type", SetIdentityPoolConfigurationRequestBodyCognitoStreams)
     ], SetIdentityPoolConfigurationRequestBody.prototype, "cognitoStreams", void 0);
     __decorate([
-        Metadata({ data: "json, name=PushSync" }),
+        SpeakeasyMetadata({ data: "json, name=PushSync" }),
         __metadata("design:type", SetIdentityPoolConfigurationRequestBodyPushSync)
     ], SetIdentityPoolConfigurationRequestBody.prototype, "pushSync", void 0);
     return SetIdentityPoolConfigurationRequestBody;
@@ -138,15 +138,15 @@ var SetIdentityPoolConfigurationRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", SetIdentityPoolConfigurationPathParams)
     ], SetIdentityPoolConfigurationRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", SetIdentityPoolConfigurationHeaders)
     ], SetIdentityPoolConfigurationRequest.prototype, "headers", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", SetIdentityPoolConfigurationRequestBody)
     ], SetIdentityPoolConfigurationRequest.prototype, "request", void 0);
     return SetIdentityPoolConfigurationRequest;
@@ -158,39 +158,39 @@ var SetIdentityPoolConfigurationResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], SetIdentityPoolConfigurationResponse.prototype, "concurrentModificationException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], SetIdentityPoolConfigurationResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], SetIdentityPoolConfigurationResponse.prototype, "internalErrorException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], SetIdentityPoolConfigurationResponse.prototype, "invalidParameterException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], SetIdentityPoolConfigurationResponse.prototype, "notAuthorizedException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], SetIdentityPoolConfigurationResponse.prototype, "resourceNotFoundException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.SetIdentityPoolConfigurationResponse)
     ], SetIdentityPoolConfigurationResponse.prototype, "setIdentityPoolConfigurationResponse", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], SetIdentityPoolConfigurationResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], SetIdentityPoolConfigurationResponse.prototype, "tooManyRequestsException", void 0);
     return SetIdentityPoolConfigurationResponse;

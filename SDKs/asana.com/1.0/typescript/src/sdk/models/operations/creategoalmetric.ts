@@ -1,56 +1,57 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class CreateGoalMetricPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=goal_gid" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=goal_gid" })
   goalGid: string;
 }
 
 
 export class CreateGoalMetricQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=false;name=opt_fields" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=opt_fields" })
   optFields?: string[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=opt_pretty" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=opt_pretty" })
   optPretty?: boolean;
 }
 
 
-export class CreateGoalMetricRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=data" })
-  data?: shared.GoalMetricRequest;
-}
-
-
-export class CreateGoalMetricRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: CreateGoalMetricPathParams;
-
-  @Metadata()
-  queryParams: CreateGoalMetricQueryParams;
-
-  @Metadata({ data: "request, media_type=application/json" })
-  request: CreateGoalMetricRequestBody;
+export class CreateGoalMetricRequestBodyInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=data" })
+  data?: shared.GoalMetricRequestInput;
 }
 
 
 export class CreateGoalMetric200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data?: shared.GoalResponse;
 }
 
 
+export class CreateGoalMetricRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: CreateGoalMetricPathParams;
+
+  @SpeakeasyMetadata()
+  queryParams: CreateGoalMetricQueryParams;
+
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request: CreateGoalMetricRequestBodyInput;
+}
+
+
 export class CreateGoalMetricResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   errorResponse?: shared.ErrorResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   createGoalMetric200ApplicationJsonObject?: CreateGoalMetric200ApplicationJson;
 }

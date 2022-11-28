@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostUpdateRoleActionEnum(str, Enum):
     UPDATE_ROLE = "UpdateRole"
@@ -10,8 +14,8 @@ class PostUpdateRoleVersionEnum(str, Enum):
 
 @dataclass
 class PostUpdateRoleQueryParams:
-    action: PostUpdateRoleActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostUpdateRoleVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostUpdateRoleActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostUpdateRoleVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostUpdateRoleHeaders:
 
 @dataclass
 class PostUpdateRoleRequest:
-    query_params: PostUpdateRoleQueryParams = field(default=None)
-    headers: PostUpdateRoleHeaders = field(default=None)
+    headers: PostUpdateRoleHeaders = field()
+    query_params: PostUpdateRoleQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostUpdateRoleResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

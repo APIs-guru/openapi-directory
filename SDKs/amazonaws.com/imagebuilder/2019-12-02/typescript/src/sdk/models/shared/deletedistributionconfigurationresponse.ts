@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DeleteDistributionConfigurationResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=distributionConfigurationArn" })
+  @SpeakeasyMetadata({ data: "json, name=distributionConfigurationArn" })
   distributionConfigurationArn?: string;
 
-  @Metadata({ data: "json, name=requestId" })
+  @SpeakeasyMetadata({ data: "json, name=requestId" })
   requestId?: string;
 }

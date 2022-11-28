@@ -1,5 +1,7 @@
 package shared
 
+// Report
+// A report's metadata including the URL from which the report itself can be downloaded.
 type Report struct {
 	CreateTime    *string `json:"createTime,omitempty"`
 	DownloadURL   *string `json:"downloadUrl,omitempty"`

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // OasSupportSharedModelsTranslationKey
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A translation key to map the relationship of keyNames, usually for ODX, and string Ids
 **/
 export class OasSupportSharedModelsTranslationKey extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ID, form, name=ID;" })
+  @SpeakeasyMetadata({ data: "json, name=ID, form, name=ID;" })
   id?: number;
 
-  @Metadata({ data: "json, name=KeyName, form, name=KeyName;" })
+  @SpeakeasyMetadata({ data: "json, name=KeyName, form, name=KeyName;" })
   keyName: string;
 
-  @Metadata({ data: "json, name=StringID, form, name=StringID;" })
+  @SpeakeasyMetadata({ data: "json, name=StringID, form, name=StringID;" })
   stringId: string;
 }

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var PutJournalInstructionTemplatePathParams = /** @class */ (function (_super) {
     __extends(PutJournalInstructionTemplatePathParams, _super);
@@ -30,7 +30,7 @@ var PutJournalInstructionTemplatePathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=JournalInstructionId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=JournalInstructionId" }),
         __metadata("design:type", String)
     ], PutJournalInstructionTemplatePathParams.prototype, "journalInstructionId", void 0);
     return PutJournalInstructionTemplatePathParams;
@@ -42,11 +42,11 @@ var PutJournalInstructionTemplateHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=Api-Version" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Api-Version" }),
         __metadata("design:type", String)
     ], PutJournalInstructionTemplateHeaders.prototype, "apiVersion", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=Authorization" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Authorization" }),
         __metadata("design:type", String)
     ], PutJournalInstructionTemplateHeaders.prototype, "authorization", void 0);
     return PutJournalInstructionTemplateHeaders;
@@ -58,11 +58,11 @@ var PutJournalInstructionTemplateRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PutJournalInstructionTemplatePathParams)
     ], PutJournalInstructionTemplateRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PutJournalInstructionTemplateHeaders)
     ], PutJournalInstructionTemplateRequest.prototype, "headers", void 0);
     return PutJournalInstructionTemplateRequest;
@@ -74,19 +74,19 @@ var PutJournalInstructionTemplateResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], PutJournalInstructionTemplateResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.ErrorModel)
     ], PutJournalInstructionTemplateResponse.prototype, "errorModel", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.JournalInstruction)
     ], PutJournalInstructionTemplateResponse.prototype, "journalInstruction", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], PutJournalInstructionTemplateResponse.prototype, "statusCode", void 0);
     return PutJournalInstructionTemplateResponse;

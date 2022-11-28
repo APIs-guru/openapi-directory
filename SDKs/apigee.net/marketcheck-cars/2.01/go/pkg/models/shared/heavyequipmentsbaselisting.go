@@ -1,5 +1,7 @@
 package shared
 
+// HeavyEquipmentsBaseListing
+// Base heavy equipment listing
 type HeavyEquipmentsBaseListing struct {
 	Build           *HeavyEquipmentsBuild `json:"build,omitempty"`
 	Dealer          *NestDealer           `json:"dealer,omitempty"`

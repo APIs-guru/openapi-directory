@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TaskTemplateSpec } from "./tasktemplatespec";
+
 
 
 // ExecutionSpec
@@ -7,12 +8,12 @@ import { TaskTemplateSpec } from "./tasktemplatespec";
  * ExecutionSpec describes how the execution will look.
 **/
 export class ExecutionSpec extends SpeakeasyBase {
-  @Metadata({ data: "json, name=parallelism" })
+  @SpeakeasyMetadata({ data: "json, name=parallelism" })
   parallelism?: number;
 
-  @Metadata({ data: "json, name=taskCount" })
+  @SpeakeasyMetadata({ data: "json, name=taskCount" })
   taskCount?: number;
 
-  @Metadata({ data: "json, name=template" })
+  @SpeakeasyMetadata({ data: "json, name=template" })
   template?: TaskTemplateSpec;
 }

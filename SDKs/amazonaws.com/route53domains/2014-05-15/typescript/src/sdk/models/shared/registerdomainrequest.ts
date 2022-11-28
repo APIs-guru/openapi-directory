@@ -1,7 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ContactDetail } from "./contactdetail";
-import { ContactDetail } from "./contactdetail";
-import { ContactDetail } from "./contactdetail";
+
 
 
 // RegisterDomainRequest
@@ -9,33 +8,33 @@ import { ContactDetail } from "./contactdetail";
  * The RegisterDomain request includes the following elements.
 **/
 export class RegisterDomainRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AdminContact" })
+  @SpeakeasyMetadata({ data: "json, name=AdminContact" })
   adminContact: ContactDetail;
 
-  @Metadata({ data: "json, name=AutoRenew" })
+  @SpeakeasyMetadata({ data: "json, name=AutoRenew" })
   autoRenew?: boolean;
 
-  @Metadata({ data: "json, name=DomainName" })
+  @SpeakeasyMetadata({ data: "json, name=DomainName" })
   domainName: string;
 
-  @Metadata({ data: "json, name=DurationInYears" })
+  @SpeakeasyMetadata({ data: "json, name=DurationInYears" })
   durationInYears: number;
 
-  @Metadata({ data: "json, name=IdnLangCode" })
+  @SpeakeasyMetadata({ data: "json, name=IdnLangCode" })
   idnLangCode?: string;
 
-  @Metadata({ data: "json, name=PrivacyProtectAdminContact" })
+  @SpeakeasyMetadata({ data: "json, name=PrivacyProtectAdminContact" })
   privacyProtectAdminContact?: boolean;
 
-  @Metadata({ data: "json, name=PrivacyProtectRegistrantContact" })
+  @SpeakeasyMetadata({ data: "json, name=PrivacyProtectRegistrantContact" })
   privacyProtectRegistrantContact?: boolean;
 
-  @Metadata({ data: "json, name=PrivacyProtectTechContact" })
+  @SpeakeasyMetadata({ data: "json, name=PrivacyProtectTechContact" })
   privacyProtectTechContact?: boolean;
 
-  @Metadata({ data: "json, name=RegistrantContact" })
+  @SpeakeasyMetadata({ data: "json, name=RegistrantContact" })
   registrantContact: ContactDetail;
 
-  @Metadata({ data: "json, name=TechContact" })
+  @SpeakeasyMetadata({ data: "json, name=TechContact" })
   techContact: ContactDetail;
 }

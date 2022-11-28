@@ -18,10 +18,6 @@ type PostPortfolioAnalysisMeanVarianceEfficientFrontierRequestBody struct {
 	Portfolios             *int64                                                                    `json:"portfolios,omitempty"`
 }
 
-type PostPortfolioAnalysisMeanVarianceEfficientFrontierRequest struct {
-	Request PostPortfolioAnalysisMeanVarianceEfficientFrontierRequestBody `request:"mediaType=application/json"`
-}
-
 type PostPortfolioAnalysisMeanVarianceEfficientFrontier200ApplicationJSONPortfolios struct {
 	AssetsWeights       []float64 `json:"assetsWeights"`
 	PortfolioReturn     float64   `json:"portfolioReturn"`
@@ -30,6 +26,10 @@ type PostPortfolioAnalysisMeanVarianceEfficientFrontier200ApplicationJSONPortfol
 
 type PostPortfolioAnalysisMeanVarianceEfficientFrontier200ApplicationJSON struct {
 	Portfolios []PostPortfolioAnalysisMeanVarianceEfficientFrontier200ApplicationJSONPortfolios `json:"portfolios"`
+}
+
+type PostPortfolioAnalysisMeanVarianceEfficientFrontierRequest struct {
+	Request PostPortfolioAnalysisMeanVarianceEfficientFrontierRequestBody `request:"mediaType=application/json"`
 }
 
 type PostPortfolioAnalysisMeanVarianceEfficientFrontierResponse struct {

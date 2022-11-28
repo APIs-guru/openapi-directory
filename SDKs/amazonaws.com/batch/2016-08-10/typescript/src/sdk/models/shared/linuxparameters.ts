@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Device } from "./device";
 import { Tmpfs } from "./tmpfs";
+
 
 
 // LinuxParameters
@@ -9,21 +9,21 @@ import { Tmpfs } from "./tmpfs";
  * Linux-specific modifications that are applied to the container, such as details for device mappings.
 **/
 export class LinuxParameters extends SpeakeasyBase {
-  @Metadata({ data: "json, name=devices", elemType: shared.Device })
+  @SpeakeasyMetadata({ data: "json, name=devices", elemType: Device })
   devices?: Device[];
 
-  @Metadata({ data: "json, name=initProcessEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=initProcessEnabled" })
   initProcessEnabled?: boolean;
 
-  @Metadata({ data: "json, name=maxSwap" })
+  @SpeakeasyMetadata({ data: "json, name=maxSwap" })
   maxSwap?: number;
 
-  @Metadata({ data: "json, name=sharedMemorySize" })
+  @SpeakeasyMetadata({ data: "json, name=sharedMemorySize" })
   sharedMemorySize?: number;
 
-  @Metadata({ data: "json, name=swappiness" })
+  @SpeakeasyMetadata({ data: "json, name=swappiness" })
   swappiness?: number;
 
-  @Metadata({ data: "json, name=tmpfs", elemType: shared.Tmpfs })
+  @SpeakeasyMetadata({ data: "json, name=tmpfs", elemType: Tmpfs })
   tmpfs?: Tmpfs[];
 }

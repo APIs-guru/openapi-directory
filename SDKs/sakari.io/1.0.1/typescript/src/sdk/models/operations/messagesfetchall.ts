@@ -1,53 +1,54 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class MessagesFetchAllPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=accountId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=accountId" })
   accountId: string;
 }
 
 
 export class MessagesFetchAllQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=contactId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=contactId" })
   contactId?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=conversationId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=conversationId" })
   conversationId?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=limit" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=limit" })
   limit?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=offset" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=offset" })
   offset?: number;
 }
 
 
 export class MessagesFetchAllSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   sakariAuth: shared.SchemeSakariAuth;
 }
 
 
 export class MessagesFetchAllRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: MessagesFetchAllPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: MessagesFetchAllQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: MessagesFetchAllSecurity;
 }
 
 
 export class MessagesFetchAllResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   messagesResponse?: shared.MessagesResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

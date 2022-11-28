@@ -1,79 +1,80 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class CreateEnvironmentRequestBodyEnvironmentValues extends SpeakeasyBase {
-  @Metadata({ data: "json, name=key" })
+  @SpeakeasyMetadata({ data: "json, name=key" })
   key?: string;
 
-  @Metadata({ data: "json, name=value" })
+  @SpeakeasyMetadata({ data: "json, name=value" })
   value?: string;
 }
 
 
 export class CreateEnvironmentRequestBodyEnvironment extends SpeakeasyBase {
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=values", elemType: operations.CreateEnvironmentRequestBodyEnvironmentValues })
+  @SpeakeasyMetadata({ data: "json, name=values", elemType: CreateEnvironmentRequestBodyEnvironmentValues })
   values?: CreateEnvironmentRequestBodyEnvironmentValues[];
 }
 
 
 export class CreateEnvironmentRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=environment" })
+  @SpeakeasyMetadata({ data: "json, name=environment" })
   environment?: CreateEnvironmentRequestBodyEnvironment;
 }
 
 
-export class CreateEnvironmentRequest extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/json" })
-  request?: CreateEnvironmentRequestBody;
-}
-
-
 export class CreateEnvironment200ApplicationJsonEnvironment extends SpeakeasyBase {
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=uid" })
+  @SpeakeasyMetadata({ data: "json, name=uid" })
   uid?: string;
 }
 
 
 export class CreateEnvironment200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=environment" })
+  @SpeakeasyMetadata({ data: "json, name=environment" })
   environment?: CreateEnvironment200ApplicationJsonEnvironment;
 }
 
 
 export class CreateEnvironment400ApplicationJsonError extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 }
 
 
 export class CreateEnvironment400ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=error" })
+  @SpeakeasyMetadata({ data: "json, name=error" })
   error?: CreateEnvironment400ApplicationJsonError;
 }
 
 
+export class CreateEnvironmentRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request?: CreateEnvironmentRequestBody;
+}
+
+
 export class CreateEnvironmentResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   createEnvironment200ApplicationJsonObject?: CreateEnvironment200ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   createEnvironment400ApplicationJsonObject?: CreateEnvironment400ApplicationJson;
 }

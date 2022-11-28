@@ -1,9 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import histogramfacets
-from . import jobquery
-from . import requestmetadata
+from sdk import utils
+from . import *
 
 class SearchJobsRequestDiversificationLevelEnum(str, Enum):
     DIVERSIFICATION_LEVEL_UNSPECIFIED = "DIVERSIFICATION_LEVEL_UNSPECIFIED"
@@ -26,17 +26,21 @@ class SearchJobsRequestSearchModeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class SearchJobsRequest:
-    disable_keyword_match: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'disableKeywordMatch' }})
-    diversification_level: Optional[SearchJobsRequestDiversificationLevelEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'diversificationLevel' }})
-    enable_broadening: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'enableBroadening' }})
-    histogram_facets: Optional[histogramfacets.HistogramFacets] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'histogramFacets' }})
-    job_query: Optional[jobquery.JobQuery] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'jobQuery' }})
-    job_view: Optional[SearchJobsRequestJobViewEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'jobView' }})
-    offset: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'offset' }})
-    order_by: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'orderBy' }})
-    page_size: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'pageSize' }})
-    page_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'pageToken' }})
-    request_metadata: Optional[requestmetadata.RequestMetadata] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'requestMetadata' }})
-    require_precise_result_size: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'requirePreciseResultSize' }})
-    search_mode: Optional[SearchJobsRequestSearchModeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'searchMode' }})
+    r"""SearchJobsRequest
+    Input only. The Request body of the `SearchJobs` call.
+    """
+    
+    disable_keyword_match: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('disableKeywordMatch') }})
+    diversification_level: Optional[SearchJobsRequestDiversificationLevelEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('diversificationLevel') }})
+    enable_broadening: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('enableBroadening') }})
+    histogram_facets: Optional[HistogramFacets] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('histogramFacets') }})
+    job_query: Optional[JobQuery] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('jobQuery') }})
+    job_view: Optional[SearchJobsRequestJobViewEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('jobView') }})
+    offset: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('offset') }})
+    order_by: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('orderBy') }})
+    page_size: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('pageSize') }})
+    page_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('pageToken') }})
+    request_metadata: Optional[RequestMetadata] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('requestMetadata') }})
+    require_precise_result_size: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('requirePreciseResultSize') }})
+    search_mode: Optional[SearchJobsRequestSearchModeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('searchMode') }})
     

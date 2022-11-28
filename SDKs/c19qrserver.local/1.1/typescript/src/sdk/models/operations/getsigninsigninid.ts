@@ -1,29 +1,30 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetSigninSigninIdPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=signinId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=signinId" })
   signinId: number;
 }
 
 
 export class GetSigninSigninIdRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetSigninSigninIdPathParams;
 }
 
 
 export class GetSigninSigninIdResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidToken?: shared.InvalidToken;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   signin?: shared.Signin;
 }

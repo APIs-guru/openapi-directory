@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { DataDestination } from "./datadestination";
 export declare class DescribePredictorBacktestExportJobResponse extends SpeakeasyBase {
     creationTime?: Date;

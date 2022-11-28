@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class GrredRequestBodyCertificateParameters extends SpeakeasyBase {
     refNo: string;
@@ -16,10 +16,6 @@ export declare class GrredRequestBody extends SpeakeasyBase {
 export declare class GrredSecurity extends SpeakeasyBase {
     apiKey: shared.SchemeApiKey;
     clientId: shared.SchemeClientId;
-}
-export declare class GrredRequest extends SpeakeasyBase {
-    request?: GrredRequestBody;
-    security: GrredSecurity;
 }
 export declare enum Grred400ApplicationJsonErrorEnum {
     MissingParameter = "missing_parameter",
@@ -102,6 +98,10 @@ export declare enum Grred504ApplicationJsonErrorDescriptionEnum {
 export declare class Grred504ApplicationJson extends SpeakeasyBase {
     error?: Grred504ApplicationJsonErrorEnum;
     errorDescription?: Grred504ApplicationJsonErrorDescriptionEnum;
+}
+export declare class GrredRequest extends SpeakeasyBase {
+    request?: GrredRequestBody;
+    security: GrredSecurity;
 }
 export declare class GrredResponse extends SpeakeasyBase {
     contentType: string;

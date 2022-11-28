@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class ResellerSubscriptionsActivatePathParams:
-    customer_id: str = field(default=None, metadata={'path_param': { 'field_name': 'customerId', 'style': 'simple', 'explode': False }})
-    subscription_id: str = field(default=None, metadata={'path_param': { 'field_name': 'subscriptionId', 'style': 'simple', 'explode': False }})
+    customer_id: str = field(metadata={'path_param': { 'field_name': 'customerId', 'style': 'simple', 'explode': False }})
+    subscription_id: str = field(metadata={'path_param': { 'field_name': 'subscriptionId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,20 +27,20 @@ class ResellerSubscriptionsActivateQueryParams:
 
 @dataclass
 class ResellerSubscriptionsActivateSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class ResellerSubscriptionsActivateRequest:
-    path_params: ResellerSubscriptionsActivatePathParams = field(default=None)
-    query_params: ResellerSubscriptionsActivateQueryParams = field(default=None)
-    security: ResellerSubscriptionsActivateSecurity = field(default=None)
+    path_params: ResellerSubscriptionsActivatePathParams = field()
+    query_params: ResellerSubscriptionsActivateQueryParams = field()
+    security: ResellerSubscriptionsActivateSecurity = field()
     
 
 @dataclass
 class ResellerSubscriptionsActivateResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     subscription: Optional[shared.Subscription] = field(default=None)
     

@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class ContainerProjectsLocationsClustersWellKnownGetOpenidConfigurationPathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,13 +26,13 @@ class ContainerProjectsLocationsClustersWellKnownGetOpenidConfigurationQueryPara
 
 @dataclass
 class ContainerProjectsLocationsClustersWellKnownGetOpenidConfigurationRequest:
-    path_params: ContainerProjectsLocationsClustersWellKnownGetOpenidConfigurationPathParams = field(default=None)
-    query_params: ContainerProjectsLocationsClustersWellKnownGetOpenidConfigurationQueryParams = field(default=None)
+    path_params: ContainerProjectsLocationsClustersWellKnownGetOpenidConfigurationPathParams = field()
+    query_params: ContainerProjectsLocationsClustersWellKnownGetOpenidConfigurationQueryParams = field()
     
 
 @dataclass
 class ContainerProjectsLocationsClustersWellKnownGetOpenidConfigurationResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     get_open_id_config_response: Optional[shared.GetOpenIDConfigResponse] = field(default=None)
-    status_code: int = field(default=None)
     

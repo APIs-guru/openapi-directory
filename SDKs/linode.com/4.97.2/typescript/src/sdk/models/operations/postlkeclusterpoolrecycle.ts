@@ -1,62 +1,51 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class PostLkeClusterPoolRecyclePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=clusterId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=clusterId" })
   clusterId: number;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=poolId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=poolId" })
   poolId: number;
 }
 
 
-export class PostLkeClusterPoolRecycleSecurityOption1 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=bearer" })
-  personalAccessToken: shared.SchemePersonalAccessToken;
-}
-
-
-export class PostLkeClusterPoolRecycleSecurityOption2 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
-  oauth: shared.SchemeOauth;
-}
-
-
 export class PostLkeClusterPoolRecycleSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, option=true" })
-  option1?: PostLkeClusterPoolRecycleSecurityOption1;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" })
+  personalAccessToken?: shared.SchemePersonalAccessToken;
 
-  @Metadata({ data: "security, option=true" })
-  option2?: PostLkeClusterPoolRecycleSecurityOption2;
-}
-
-
-export class PostLkeClusterPoolRecycleRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: PostLkeClusterPoolRecyclePathParams;
-
-  @Metadata()
-  security: PostLkeClusterPoolRecycleSecurity;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
+  oauth?: shared.SchemeOauth;
 }
 
 
 export class PostLkeClusterPoolRecycleDefaultApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=errors", elemType: shared.ErrorObject })
+  @SpeakeasyMetadata({ data: "json, name=errors", elemType: shared.ErrorObject })
   errors?: shared.ErrorObject[];
 }
 
 
+export class PostLkeClusterPoolRecycleRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: PostLkeClusterPoolRecyclePathParams;
+
+  @SpeakeasyMetadata()
+  security: PostLkeClusterPoolRecycleSecurity;
+}
+
+
 export class PostLkeClusterPoolRecycleResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   postLkeClusterPoolRecycle200ApplicationJsonObject?: Map<string, any>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   postLkeClusterPoolRecycleDefaultApplicationJsonObject?: PostLkeClusterPoolRecycleDefaultApplicationJson;
 }

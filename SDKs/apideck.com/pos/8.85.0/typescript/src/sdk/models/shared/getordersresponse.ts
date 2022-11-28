@@ -1,0 +1,32 @@
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { Order } from "./order";
+import { Links } from "./links";
+import { Meta } from "./meta";
+
+
+
+export class GetOrdersResponse extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=data", elemType: Order })
+  data: Order[];
+
+  @SpeakeasyMetadata({ data: "json, name=links" })
+  links?: Links;
+
+  @SpeakeasyMetadata({ data: "json, name=meta" })
+  meta?: Meta;
+
+  @SpeakeasyMetadata({ data: "json, name=operation" })
+  operation: string;
+
+  @SpeakeasyMetadata({ data: "json, name=resource" })
+  resource: string;
+
+  @SpeakeasyMetadata({ data: "json, name=service" })
+  service: string;
+
+  @SpeakeasyMetadata({ data: "json, name=status" })
+  status: string;
+
+  @SpeakeasyMetadata({ data: "json, name=status_code" })
+  statusCode: number;
+}

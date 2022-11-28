@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // S3ObjectSource
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Template bundle S3 bucket data.
 **/
 export class S3ObjectSource extends SpeakeasyBase {
-  @Metadata({ data: "json, name=bucket" })
+  @SpeakeasyMetadata({ data: "json, name=bucket" })
   bucket: string;
 
-  @Metadata({ data: "json, name=key" })
+  @SpeakeasyMetadata({ data: "json, name=key" })
   key: string;
 }

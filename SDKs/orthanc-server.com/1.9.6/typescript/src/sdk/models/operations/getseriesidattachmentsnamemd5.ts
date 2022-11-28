@@ -1,40 +1,41 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetSeriesIdAttachmentsNameMd5PathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" })
   id: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=name" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=name" })
   name: string;
 }
 
 
 export class GetSeriesIdAttachmentsNameMd5Headers extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=If-None-Match" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=If-None-Match" })
   ifNoneMatch?: string;
 }
 
 
 export class GetSeriesIdAttachmentsNameMd5Request extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetSeriesIdAttachmentsNameMd5PathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: GetSeriesIdAttachmentsNameMd5Headers;
 }
 
 
 export class GetSeriesIdAttachmentsNameMd5Response extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: Map<string, string[]>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

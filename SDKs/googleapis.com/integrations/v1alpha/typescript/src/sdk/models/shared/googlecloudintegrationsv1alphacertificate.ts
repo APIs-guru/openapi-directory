@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudIntegrationsV1alphaClientCertificate } from "./googlecloudintegrationsv1alphaclientcertificate";
 
+
 export enum GoogleCloudIntegrationsV1alphaCertificateCertificateStatusEnum {
-    StateUnspecified = "STATE_UNSPECIFIED"
-,    Active = "ACTIVE"
-,    Expired = "EXPIRED"
+    StateUnspecified = "STATE_UNSPECIFIED",
+    Active = "ACTIVE",
+    Expired = "EXPIRED"
 }
 
 
@@ -13,30 +14,55 @@ export enum GoogleCloudIntegrationsV1alphaCertificateCertificateStatusEnum {
  * The certificate definition
 **/
 export class GoogleCloudIntegrationsV1alphaCertificate extends SpeakeasyBase {
-  @Metadata({ data: "json, name=certificateStatus" })
+  @SpeakeasyMetadata({ data: "json, name=certificateStatus" })
   certificateStatus?: GoogleCloudIntegrationsV1alphaCertificateCertificateStatusEnum;
 
-  @Metadata({ data: "json, name=credentialId" })
+  @SpeakeasyMetadata({ data: "json, name=credentialId" })
   credentialId?: string;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=displayName" })
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
   displayName?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=rawCertificate" })
+  @SpeakeasyMetadata({ data: "json, name=rawCertificate" })
   rawCertificate?: GoogleCloudIntegrationsV1alphaClientCertificate;
 
-  @Metadata({ data: "json, name=requestorId" })
+  @SpeakeasyMetadata({ data: "json, name=requestorId" })
   requestorId?: string;
 
-  @Metadata({ data: "json, name=validEndTime" })
+  @SpeakeasyMetadata({ data: "json, name=validEndTime" })
   validEndTime?: string;
 
-  @Metadata({ data: "json, name=validStartTime" })
+  @SpeakeasyMetadata({ data: "json, name=validStartTime" })
   validStartTime?: string;
+}
+
+
+// GoogleCloudIntegrationsV1alphaCertificateInput
+/** 
+ * The certificate definition
+**/
+export class GoogleCloudIntegrationsV1alphaCertificateInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=certificateStatus" })
+  certificateStatus?: GoogleCloudIntegrationsV1alphaCertificateCertificateStatusEnum;
+
+  @SpeakeasyMetadata({ data: "json, name=credentialId" })
+  credentialId?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=description" })
+  description?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
+  displayName?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=rawCertificate" })
+  rawCertificate?: GoogleCloudIntegrationsV1alphaClientCertificate;
+
+  @SpeakeasyMetadata({ data: "json, name=requestorId" })
+  requestorId?: string;
 }

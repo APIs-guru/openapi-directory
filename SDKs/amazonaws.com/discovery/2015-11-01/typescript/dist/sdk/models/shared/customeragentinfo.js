@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // CustomerAgentInfo
 /**
  * Inventory data for installed discovery agents.
@@ -33,31 +33,31 @@ var CustomerAgentInfo = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=activeAgents" }),
+        SpeakeasyMetadata({ data: "json, name=activeAgents" }),
         __metadata("design:type", Number)
     ], CustomerAgentInfo.prototype, "activeAgents", void 0);
     __decorate([
-        Metadata({ data: "json, name=blackListedAgents" }),
+        SpeakeasyMetadata({ data: "json, name=blackListedAgents" }),
         __metadata("design:type", Number)
     ], CustomerAgentInfo.prototype, "blackListedAgents", void 0);
     __decorate([
-        Metadata({ data: "json, name=healthyAgents" }),
+        SpeakeasyMetadata({ data: "json, name=healthyAgents" }),
         __metadata("design:type", Number)
     ], CustomerAgentInfo.prototype, "healthyAgents", void 0);
     __decorate([
-        Metadata({ data: "json, name=shutdownAgents" }),
+        SpeakeasyMetadata({ data: "json, name=shutdownAgents" }),
         __metadata("design:type", Number)
     ], CustomerAgentInfo.prototype, "shutdownAgents", void 0);
     __decorate([
-        Metadata({ data: "json, name=totalAgents" }),
+        SpeakeasyMetadata({ data: "json, name=totalAgents" }),
         __metadata("design:type", Number)
     ], CustomerAgentInfo.prototype, "totalAgents", void 0);
     __decorate([
-        Metadata({ data: "json, name=unhealthyAgents" }),
+        SpeakeasyMetadata({ data: "json, name=unhealthyAgents" }),
         __metadata("design:type", Number)
     ], CustomerAgentInfo.prototype, "unhealthyAgents", void 0);
     __decorate([
-        Metadata({ data: "json, name=unknownAgents" }),
+        SpeakeasyMetadata({ data: "json, name=unknownAgents" }),
         __metadata("design:type", Number)
     ], CustomerAgentInfo.prototype, "unknownAgents", void 0);
     return CustomerAgentInfo;

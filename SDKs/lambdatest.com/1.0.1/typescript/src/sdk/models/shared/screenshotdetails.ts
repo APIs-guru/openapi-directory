@@ -1,24 +1,24 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ScreenshotType } from "./screenshottype";
 
 
+
 export class ScreenshotDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=callback_url" })
+  @SpeakeasyMetadata({ data: "json, name=callback_url" })
   callbackUrl?: string;
 
-  @Metadata({ data: "json, name=defer_time" })
+  @SpeakeasyMetadata({ data: "json, name=defer_time" })
   deferTime?: number;
 
-  @Metadata({ data: "json, name=screenshots", elemType: shared.ScreenshotType })
+  @SpeakeasyMetadata({ data: "json, name=screenshots", elemType: ScreenshotType })
   screenshots?: ScreenshotType[];
 
-  @Metadata({ data: "json, name=test_id" })
+  @SpeakeasyMetadata({ data: "json, name=test_id" })
   testId?: string;
 
-  @Metadata({ data: "json, name=test_status" })
+  @SpeakeasyMetadata({ data: "json, name=test_status" })
   testStatus?: string;
 
-  @Metadata({ data: "json, name=url" })
+  @SpeakeasyMetadata({ data: "json, name=url" })
   url?: string;
 }

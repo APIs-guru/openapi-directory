@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// BaseItem
+// Class BaseItem.
 type BaseItem struct {
 	Container                *string    `json:"Container,omitempty"`
 	DateLastSaved            *time.Time `json:"DateLastSaved,omitempty"`

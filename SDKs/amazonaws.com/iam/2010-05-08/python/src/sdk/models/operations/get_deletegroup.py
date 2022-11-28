@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetDeleteGroupActionEnum(str, Enum):
     DELETE_GROUP = "DeleteGroup"
@@ -10,9 +14,9 @@ class GetDeleteGroupVersionEnum(str, Enum):
 
 @dataclass
 class GetDeleteGroupQueryParams:
-    action: GetDeleteGroupActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    group_name: str = field(default=None, metadata={'query_param': { 'field_name': 'GroupName', 'style': 'form', 'explode': True }})
-    version: GetDeleteGroupVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: GetDeleteGroupActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    group_name: str = field(metadata={'query_param': { 'field_name': 'GroupName', 'style': 'form', 'explode': True }})
+    version: GetDeleteGroupVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -28,13 +32,13 @@ class GetDeleteGroupHeaders:
 
 @dataclass
 class GetDeleteGroupRequest:
-    query_params: GetDeleteGroupQueryParams = field(default=None)
-    headers: GetDeleteGroupHeaders = field(default=None)
+    headers: GetDeleteGroupHeaders = field()
+    query_params: GetDeleteGroupQueryParams = field()
     
 
 @dataclass
 class GetDeleteGroupResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

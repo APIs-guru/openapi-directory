@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class GetModelsPathParams:
-    api_id: str = field(default=None, metadata={'path_param': { 'field_name': 'apiId', 'style': 'simple', 'explode': False }})
+    api_id: str = field(metadata={'path_param': { 'field_name': 'apiId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -27,17 +30,17 @@ class GetModelsHeaders:
 
 @dataclass
 class GetModelsRequest:
-    path_params: GetModelsPathParams = field(default=None)
-    query_params: GetModelsQueryParams = field(default=None)
-    headers: GetModelsHeaders = field(default=None)
+    headers: GetModelsHeaders = field()
+    path_params: GetModelsPathParams = field()
+    query_params: GetModelsQueryParams = field()
     
 
 @dataclass
 class GetModelsResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     get_models_response: Optional[shared.GetModelsResponse] = field(default=None)
     not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     too_many_requests_exception: Optional[Any] = field(default=None)
     

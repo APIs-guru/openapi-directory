@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum GetGlobalCompliance200ApplicationJsonActionEnum {
     GetGlobalCompliance = "getGlobalCompliance"
@@ -6,68 +7,68 @@ export enum GetGlobalCompliance200ApplicationJsonActionEnum {
 
 
 export class GetGlobalCompliance200ApplicationJsonDataGlobalComplianceComplianceDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=error" })
+  @SpeakeasyMetadata({ data: "json, name=error" })
   error?: number;
 
-  @Metadata({ data: "json, name=noReport" })
+  @SpeakeasyMetadata({ data: "json, name=noReport" })
   noReport?: number;
 
-  @Metadata({ data: "json, name=successAlreadyOK" })
+  @SpeakeasyMetadata({ data: "json, name=successAlreadyOK" })
   successAlreadyOk?: number;
 
-  @Metadata({ data: "json, name=successNotApplicable" })
+  @SpeakeasyMetadata({ data: "json, name=successNotApplicable" })
   successNotApplicable?: number;
 
-  @Metadata({ data: "json, name=successRepaired" })
+  @SpeakeasyMetadata({ data: "json, name=successRepaired" })
   successRepaired?: number;
 
-  @Metadata({ data: "json, name=unexpectedMissingComponent" })
+  @SpeakeasyMetadata({ data: "json, name=unexpectedMissingComponent" })
   unexpectedMissingComponent?: number;
 
-  @Metadata({ data: "json, name=unexpectedUnknownComponent" })
+  @SpeakeasyMetadata({ data: "json, name=unexpectedUnknownComponent" })
   unexpectedUnknownComponent?: number;
 }
 
 
 export class GetGlobalCompliance200ApplicationJsonDataGlobalCompliance extends SpeakeasyBase {
-  @Metadata({ data: "json, name=compliance" })
+  @SpeakeasyMetadata({ data: "json, name=compliance" })
   compliance: number;
 
-  @Metadata({ data: "json, name=complianceDetails" })
+  @SpeakeasyMetadata({ data: "json, name=complianceDetails" })
   complianceDetails?: GetGlobalCompliance200ApplicationJsonDataGlobalComplianceComplianceDetails;
 }
 
 
 export class GetGlobalCompliance200ApplicationJsonData extends SpeakeasyBase {
-  @Metadata({ data: "json, name=globalCompliance" })
+  @SpeakeasyMetadata({ data: "json, name=globalCompliance" })
   globalCompliance: GetGlobalCompliance200ApplicationJsonDataGlobalCompliance;
 }
 
 export enum GetGlobalCompliance200ApplicationJsonResultEnum {
-    Success = "success"
-,    Error = "error"
+    Success = "success",
+    Error = "error"
 }
 
 
 export class GetGlobalCompliance200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=action" })
+  @SpeakeasyMetadata({ data: "json, name=action" })
   action: GetGlobalCompliance200ApplicationJsonActionEnum;
 
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data: GetGlobalCompliance200ApplicationJsonData;
 
-  @Metadata({ data: "json, name=result" })
+  @SpeakeasyMetadata({ data: "json, name=result" })
   result: GetGlobalCompliance200ApplicationJsonResultEnum;
 }
 
 
 export class GetGlobalComplianceResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getGlobalCompliance200ApplicationJsonObject?: GetGlobalCompliance200ApplicationJson;
 }

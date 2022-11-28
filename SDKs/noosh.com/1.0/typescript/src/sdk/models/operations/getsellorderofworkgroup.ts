@@ -1,34 +1,35 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetSellOrderOfWorkgroupPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=order_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=order_id" })
   orderId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=workgroup_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=workgroup_id" })
   workgroupId: string;
 }
 
 
 export class GetSellOrderOfWorkgroupRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetSellOrderOfWorkgroupPathParams;
 }
 
 
 export class GetSellOrderOfWorkgroupResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   httpStatusVo?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   orderExpandWorkgroupLevelVo?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { FormTableDefinition } from "./formtabledefinition";
 import { TableRowResult } from "./tablerowresult";
 /**

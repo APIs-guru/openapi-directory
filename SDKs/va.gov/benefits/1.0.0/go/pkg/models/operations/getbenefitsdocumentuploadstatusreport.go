@@ -8,11 +8,6 @@ type GetBenefitsDocumentUploadStatusReportSecurity struct {
 	Apikey shared.SchemeApikey `security:"scheme,type=apiKey,subtype=header"`
 }
 
-type GetBenefitsDocumentUploadStatusReportRequest struct {
-	Request  shared.DocumentUploadStatusGUIDList `request:"mediaType=application/json"`
-	Security GetBenefitsDocumentUploadStatusReportSecurity
-}
-
 type GetBenefitsDocumentUploadStatusReport200ApplicationJSON struct {
 	Data []interface{} `json:"data"`
 }
@@ -38,6 +33,11 @@ type GetBenefitsDocumentUploadStatusReport500ApplicationJSON struct {
 	Detail *string `json:"detail,omitempty"`
 	Status *string `json:"status,omitempty"`
 	Title  *string `json:"title,omitempty"`
+}
+
+type GetBenefitsDocumentUploadStatusReportRequest struct {
+	Request  shared.DocumentUploadStatusGUIDList `request:"mediaType=application/json"`
+	Security GetBenefitsDocumentUploadStatusReportSecurity
 }
 
 type GetBenefitsDocumentUploadStatusReportResponse struct {

@@ -1,40 +1,41 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AppTypeEnum } from "./apptypeenum";
 import { ResourceSpec } from "./resourcespec";
 import { AppStatusEnum } from "./appstatusenum";
 
 
+
 export class DescribeAppResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AppArn" })
+  @SpeakeasyMetadata({ data: "json, name=AppArn" })
   appArn?: string;
 
-  @Metadata({ data: "json, name=AppName" })
+  @SpeakeasyMetadata({ data: "json, name=AppName" })
   appName?: string;
 
-  @Metadata({ data: "json, name=AppType" })
+  @SpeakeasyMetadata({ data: "json, name=AppType" })
   appType?: AppTypeEnum;
 
-  @Metadata({ data: "json, name=CreationTime" })
+  @SpeakeasyMetadata({ data: "json, name=CreationTime" })
   creationTime?: Date;
 
-  @Metadata({ data: "json, name=DomainId" })
+  @SpeakeasyMetadata({ data: "json, name=DomainId" })
   domainId?: string;
 
-  @Metadata({ data: "json, name=FailureReason" })
+  @SpeakeasyMetadata({ data: "json, name=FailureReason" })
   failureReason?: string;
 
-  @Metadata({ data: "json, name=LastHealthCheckTimestamp" })
+  @SpeakeasyMetadata({ data: "json, name=LastHealthCheckTimestamp" })
   lastHealthCheckTimestamp?: Date;
 
-  @Metadata({ data: "json, name=LastUserActivityTimestamp" })
+  @SpeakeasyMetadata({ data: "json, name=LastUserActivityTimestamp" })
   lastUserActivityTimestamp?: Date;
 
-  @Metadata({ data: "json, name=ResourceSpec" })
+  @SpeakeasyMetadata({ data: "json, name=ResourceSpec" })
   resourceSpec?: ResourceSpec;
 
-  @Metadata({ data: "json, name=Status" })
+  @SpeakeasyMetadata({ data: "json, name=Status" })
   status?: AppStatusEnum;
 
-  @Metadata({ data: "json, name=UserProfileName" })
+  @SpeakeasyMetadata({ data: "json, name=UserProfileName" })
   userProfileName?: string;
 }

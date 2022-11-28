@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RestoreConfig } from "./restoreconfig";
+
 
 
 // RestorePlan
@@ -7,33 +8,55 @@ import { RestoreConfig } from "./restoreconfig";
  * The configuration of a potential series of Restore operations to be performed against Backups belong to a particular BackupPlan. Next id: 11
 **/
 export class RestorePlan extends SpeakeasyBase {
-  @Metadata({ data: "json, name=backupPlan" })
+  @SpeakeasyMetadata({ data: "json, name=backupPlan" })
   backupPlan?: string;
 
-  @Metadata({ data: "json, name=cluster" })
+  @SpeakeasyMetadata({ data: "json, name=cluster" })
   cluster?: string;
 
-  @Metadata({ data: "json, name=createTime" })
+  @SpeakeasyMetadata({ data: "json, name=createTime" })
   createTime?: string;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=etag" })
+  @SpeakeasyMetadata({ data: "json, name=etag" })
   etag?: string;
 
-  @Metadata({ data: "json, name=labels" })
+  @SpeakeasyMetadata({ data: "json, name=labels" })
   labels?: Map<string, string>;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=restoreConfig" })
+  @SpeakeasyMetadata({ data: "json, name=restoreConfig" })
   restoreConfig?: RestoreConfig;
 
-  @Metadata({ data: "json, name=uid" })
+  @SpeakeasyMetadata({ data: "json, name=uid" })
   uid?: string;
 
-  @Metadata({ data: "json, name=updateTime" })
+  @SpeakeasyMetadata({ data: "json, name=updateTime" })
   updateTime?: string;
+}
+
+
+// RestorePlanInput
+/** 
+ * The configuration of a potential series of Restore operations to be performed against Backups belong to a particular BackupPlan. Next id: 11
+**/
+export class RestorePlanInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=backupPlan" })
+  backupPlan?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=cluster" })
+  cluster?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=description" })
+  description?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=labels" })
+  labels?: Map<string, string>;
+
+  @SpeakeasyMetadata({ data: "json, name=restoreConfig" })
+  restoreConfig?: RestoreConfig;
 }

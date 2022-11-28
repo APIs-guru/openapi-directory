@@ -1,4 +1,7 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
@@ -16,19 +19,19 @@ class DescribeOrganizationConfigurationHeaders:
 
 @dataclass
 class DescribeOrganizationConfigurationRequest:
-    headers: DescribeOrganizationConfigurationHeaders = field(default=None)
+    headers: DescribeOrganizationConfigurationHeaders = field()
     
 
 @dataclass
 class DescribeOrganizationConfigurationResponse:
+    content_type: str = field()
+    status_code: int = field()
     access_denied_exception: Optional[Any] = field(default=None)
     conflict_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     describe_organization_configuration_response: Optional[shared.DescribeOrganizationConfigurationResponse] = field(default=None)
     internal_server_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
     service_quota_exceeded_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     validation_exception: Optional[Any] = field(default=None)
     

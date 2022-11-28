@@ -13,12 +13,12 @@ class GetUserGroupsQueryParams:
 
 @dataclass
 class GetUserGroupsRequest:
-    query_params: GetUserGroupsQueryParams = field(default=None)
+    query_params: GetUserGroupsQueryParams = field()
     
 
 @dataclass
 class GetUserGroupsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     group_user_entities: Optional[List[shared.GroupUserEntity]] = field(default=None)
-    status_code: int = field(default=None)
     

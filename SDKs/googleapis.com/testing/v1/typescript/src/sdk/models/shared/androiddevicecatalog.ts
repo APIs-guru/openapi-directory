@@ -1,8 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AndroidModel } from "./androidmodel";
 import { AndroidRuntimeConfiguration } from "./androidruntimeconfiguration";
 import { AndroidVersion } from "./androidversion";
+
 
 
 // AndroidDeviceCatalog
@@ -10,12 +10,12 @@ import { AndroidVersion } from "./androidversion";
  * The currently supported Android devices.
 **/
 export class AndroidDeviceCatalog extends SpeakeasyBase {
-  @Metadata({ data: "json, name=models", elemType: shared.AndroidModel })
+  @SpeakeasyMetadata({ data: "json, name=models", elemType: AndroidModel })
   models?: AndroidModel[];
 
-  @Metadata({ data: "json, name=runtimeConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=runtimeConfiguration" })
   runtimeConfiguration?: AndroidRuntimeConfiguration;
 
-  @Metadata({ data: "json, name=versions", elemType: shared.AndroidVersion })
+  @SpeakeasyMetadata({ data: "json, name=versions", elemType: AndroidVersion })
   versions?: AndroidVersion[];
 }

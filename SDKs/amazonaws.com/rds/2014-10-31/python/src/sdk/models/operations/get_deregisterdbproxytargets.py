@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 
 class GetDeregisterDbProxyTargetsActionEnum(str, Enum):
     DEREGISTER_DB_PROXY_TARGETS = "DeregisterDBProxyTargets"
@@ -10,12 +14,12 @@ class GetDeregisterDbProxyTargetsVersionEnum(str, Enum):
 
 @dataclass
 class GetDeregisterDbProxyTargetsQueryParams:
-    action: GetDeregisterDbProxyTargetsActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetDeregisterDbProxyTargetsActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    db_proxy_name: str = field(metadata={'query_param': { 'field_name': 'DBProxyName', 'style': 'form', 'explode': True }})
+    version: GetDeregisterDbProxyTargetsVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     db_cluster_identifiers: Optional[List[str]] = field(default=None, metadata={'query_param': { 'field_name': 'DBClusterIdentifiers', 'style': 'form', 'explode': True }})
     db_instance_identifiers: Optional[List[str]] = field(default=None, metadata={'query_param': { 'field_name': 'DBInstanceIdentifiers', 'style': 'form', 'explode': True }})
-    db_proxy_name: str = field(default=None, metadata={'query_param': { 'field_name': 'DBProxyName', 'style': 'form', 'explode': True }})
     target_group_name: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'TargetGroupName', 'style': 'form', 'explode': True }})
-    version: GetDeregisterDbProxyTargetsVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -31,13 +35,13 @@ class GetDeregisterDbProxyTargetsHeaders:
 
 @dataclass
 class GetDeregisterDbProxyTargetsRequest:
-    query_params: GetDeregisterDbProxyTargetsQueryParams = field(default=None)
-    headers: GetDeregisterDbProxyTargetsHeaders = field(default=None)
+    headers: GetDeregisterDbProxyTargetsHeaders = field()
+    query_params: GetDeregisterDbProxyTargetsQueryParams = field()
     
 
 @dataclass
 class GetDeregisterDbProxyTargetsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

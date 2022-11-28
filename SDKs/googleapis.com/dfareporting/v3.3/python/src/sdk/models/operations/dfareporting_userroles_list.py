@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DfareportingUserRolesListPathParams:
-    profile_id: str = field(default=None, metadata={'path_param': { 'field_name': 'profileId', 'style': 'simple', 'explode': False }})
+    profile_id: str = field(metadata={'path_param': { 'field_name': 'profileId', 'style': 'simple', 'explode': False }})
     
 class DfareportingUserRolesListSortFieldEnum(str, Enum):
     ID = "ID"
@@ -41,20 +42,20 @@ class DfareportingUserRolesListQueryParams:
 
 @dataclass
 class DfareportingUserRolesListSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DfareportingUserRolesListRequest:
-    path_params: DfareportingUserRolesListPathParams = field(default=None)
-    query_params: DfareportingUserRolesListQueryParams = field(default=None)
-    security: DfareportingUserRolesListSecurity = field(default=None)
+    path_params: DfareportingUserRolesListPathParams = field()
+    query_params: DfareportingUserRolesListQueryParams = field()
+    security: DfareportingUserRolesListSecurity = field()
     
 
 @dataclass
 class DfareportingUserRolesListResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     user_roles_list_response: Optional[shared.UserRolesListResponse] = field(default=None)
     

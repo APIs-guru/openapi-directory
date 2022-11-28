@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { EndpointStatusEnum } from "./endpointstatusenum";
+
 
 
 // EndpointProperties
@@ -7,30 +8,30 @@ import { EndpointStatusEnum } from "./endpointstatusenum";
  * Specifies information about the specified endpoint.
 **/
 export class EndpointProperties extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CreationTime" })
+  @SpeakeasyMetadata({ data: "json, name=CreationTime" })
   creationTime?: Date;
 
-  @Metadata({ data: "json, name=CurrentInferenceUnits" })
+  @SpeakeasyMetadata({ data: "json, name=CurrentInferenceUnits" })
   currentInferenceUnits?: number;
 
-  @Metadata({ data: "json, name=DataAccessRoleArn" })
+  @SpeakeasyMetadata({ data: "json, name=DataAccessRoleArn" })
   dataAccessRoleArn?: string;
 
-  @Metadata({ data: "json, name=DesiredInferenceUnits" })
+  @SpeakeasyMetadata({ data: "json, name=DesiredInferenceUnits" })
   desiredInferenceUnits?: number;
 
-  @Metadata({ data: "json, name=EndpointArn" })
+  @SpeakeasyMetadata({ data: "json, name=EndpointArn" })
   endpointArn?: string;
 
-  @Metadata({ data: "json, name=LastModifiedTime" })
+  @SpeakeasyMetadata({ data: "json, name=LastModifiedTime" })
   lastModifiedTime?: Date;
 
-  @Metadata({ data: "json, name=Message" })
+  @SpeakeasyMetadata({ data: "json, name=Message" })
   message?: string;
 
-  @Metadata({ data: "json, name=ModelArn" })
+  @SpeakeasyMetadata({ data: "json, name=ModelArn" })
   modelArn?: string;
 
-  @Metadata({ data: "json, name=Status" })
+  @SpeakeasyMetadata({ data: "json, name=Status" })
   status?: EndpointStatusEnum;
 }

@@ -1,0 +1,9 @@
+import { SpeakeasyBase } from "../../../internal/utils";
+/**
+ * A custom SageMaker image. For more information, see <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/studio-byoi.html">Bring your own SageMaker image</a>.
+**/
+export declare class CustomImage extends SpeakeasyBase {
+    appImageConfigName: string;
+    imageName: string;
+    imageVersionNumber?: number;
+}

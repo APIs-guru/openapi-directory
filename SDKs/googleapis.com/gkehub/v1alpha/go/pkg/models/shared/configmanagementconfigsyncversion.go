@@ -1,5 +1,7 @@
 package shared
 
+// ConfigManagementConfigSyncVersion
+// Specific versioning information pertaining to ConfigSync's Pods
 type ConfigManagementConfigSyncVersion struct {
 	AdmissionWebhook  *string `json:"admissionWebhook,omitempty"`
 	GitSync           *string `json:"gitSync,omitempty"`

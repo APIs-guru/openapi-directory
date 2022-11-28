@@ -5,20 +5,20 @@ from sdk.models import shared
 
 @dataclass
 class PostNewBatchJobHeaders:
-    api_version: str = field(default=None, metadata={'header': { 'field_name': 'Api-Version', 'style': 'simple', 'explode': False }})
-    authorization: str = field(default=None, metadata={'header': { 'field_name': 'Authorization', 'style': 'simple', 'explode': False }})
+    api_version: str = field(metadata={'header': { 'field_name': 'Api-Version', 'style': 'simple', 'explode': False }})
+    authorization: str = field(metadata={'header': { 'field_name': 'Authorization', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class PostNewBatchJobRequest:
-    headers: PostNewBatchJobHeaders = field(default=None)
-    request: shared.BatchJobInstruction = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: PostNewBatchJobHeaders = field()
+    request: shared.BatchJobInstruction = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class PostNewBatchJobResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error_model: Optional[shared.ErrorModel] = field(default=None)
     link: Optional[shared.Link] = field(default=None)
-    status_code: int = field(default=None)
     

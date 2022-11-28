@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ApplicationSettings
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The persistent application settings for users of a stack.
 **/
 export class ApplicationSettings extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Enabled" })
+  @SpeakeasyMetadata({ data: "json, name=Enabled" })
   enabled: boolean;
 
-  @Metadata({ data: "json, name=SettingsGroup" })
+  @SpeakeasyMetadata({ data: "json, name=SettingsGroup" })
   settingsGroup?: string;
 }

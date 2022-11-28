@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PhraseSet } from "./phraseset";
+
 
 
 // ListPhraseSetResponse
@@ -8,9 +8,9 @@ import { PhraseSet } from "./phraseset";
  * Message returned to the client by the `ListPhraseSet` method.
 **/
 export class ListPhraseSetResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 
-  @Metadata({ data: "json, name=phraseSets", elemType: shared.PhraseSet })
+  @SpeakeasyMetadata({ data: "json, name=phraseSets", elemType: PhraseSet })
   phraseSets?: PhraseSet[];
 }

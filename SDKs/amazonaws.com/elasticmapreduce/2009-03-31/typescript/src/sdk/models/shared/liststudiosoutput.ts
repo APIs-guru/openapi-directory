@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { StudioSummary } from "./studiosummary";
 
 
+
 export class ListStudiosOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Marker" })
+  @SpeakeasyMetadata({ data: "json, name=Marker" })
   marker?: string;
 
-  @Metadata({ data: "json, name=Studios", elemType: shared.StudioSummary })
+  @SpeakeasyMetadata({ data: "json, name=Studios", elemType: StudioSummary })
   studios?: StudioSummary[];
 }

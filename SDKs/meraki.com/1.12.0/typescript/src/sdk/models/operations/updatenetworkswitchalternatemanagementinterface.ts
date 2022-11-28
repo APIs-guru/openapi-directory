@@ -1,58 +1,59 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class UpdateNetworkSwitchAlternateManagementInterfacePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=networkId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=networkId" })
   networkId: string;
 }
 
 export enum UpdateNetworkSwitchAlternateManagementInterfaceRequestBodyProtocolsEnum {
-    Radius = "radius"
-,    Snmp = "snmp"
-,    Syslog = "syslog"
+    Radius = "radius",
+    Snmp = "snmp",
+    Syslog = "syslog"
 }
 
 
 export class UpdateNetworkSwitchAlternateManagementInterfaceRequestBodySwitches extends SpeakeasyBase {
-  @Metadata({ data: "json, name=alternateManagementIp" })
+  @SpeakeasyMetadata({ data: "json, name=alternateManagementIp" })
   alternateManagementIp: string;
 
-  @Metadata({ data: "json, name=serial" })
+  @SpeakeasyMetadata({ data: "json, name=serial" })
   serial: string;
 }
 
 
 export class UpdateNetworkSwitchAlternateManagementInterfaceRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=enabled" })
+  @SpeakeasyMetadata({ data: "json, name=enabled" })
   enabled?: boolean;
 
-  @Metadata({ data: "json, name=protocols" })
+  @SpeakeasyMetadata({ data: "json, name=protocols" })
   protocols?: UpdateNetworkSwitchAlternateManagementInterfaceRequestBodyProtocolsEnum[];
 
-  @Metadata({ data: "json, name=switches", elemType: operations.UpdateNetworkSwitchAlternateManagementInterfaceRequestBodySwitches })
+  @SpeakeasyMetadata({ data: "json, name=switches", elemType: UpdateNetworkSwitchAlternateManagementInterfaceRequestBodySwitches })
   switches?: UpdateNetworkSwitchAlternateManagementInterfaceRequestBodySwitches[];
 
-  @Metadata({ data: "json, name=vlanId" })
+  @SpeakeasyMetadata({ data: "json, name=vlanId" })
   vlanId?: number;
 }
 
 
 export class UpdateNetworkSwitchAlternateManagementInterfaceRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: UpdateNetworkSwitchAlternateManagementInterfacePathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request?: UpdateNetworkSwitchAlternateManagementInterfaceRequestBody;
 }
 
 
 export class UpdateNetworkSwitchAlternateManagementInterfaceResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   updateNetworkSwitchAlternateManagementInterface200ApplicationJsonObject?: Map<string, any>;
 }

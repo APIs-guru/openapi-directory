@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class EnrichmentRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=aspect" })
+  @SpeakeasyMetadata({ data: "json, name=aspect" })
   aspect?: string;
 
-  @Metadata({ data: "json, name=genes" })
+  @SpeakeasyMetadata({ data: "json, name=genes" })
   genes?: string[];
 
-  @Metadata({ data: "json, name=species" })
+  @SpeakeasyMetadata({ data: "json, name=species" })
   species?: string;
 }

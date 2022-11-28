@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DialogflowProjectsLocationsAgentsFlowsExportPathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,14 +26,14 @@ class DialogflowProjectsLocationsAgentsFlowsExportQueryParams:
 
 @dataclass
 class DialogflowProjectsLocationsAgentsFlowsExportSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DialogflowProjectsLocationsAgentsFlowsExportSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -43,15 +44,15 @@ class DialogflowProjectsLocationsAgentsFlowsExportSecurity:
 
 @dataclass
 class DialogflowProjectsLocationsAgentsFlowsExportRequest:
-    path_params: DialogflowProjectsLocationsAgentsFlowsExportPathParams = field(default=None)
-    query_params: DialogflowProjectsLocationsAgentsFlowsExportQueryParams = field(default=None)
+    path_params: DialogflowProjectsLocationsAgentsFlowsExportPathParams = field()
+    query_params: DialogflowProjectsLocationsAgentsFlowsExportQueryParams = field()
+    security: DialogflowProjectsLocationsAgentsFlowsExportSecurity = field()
     request: Optional[shared.GoogleCloudDialogflowCxV3beta1ExportFlowRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: DialogflowProjectsLocationsAgentsFlowsExportSecurity = field(default=None)
     
 
 @dataclass
 class DialogflowProjectsLocationsAgentsFlowsExportResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_longrunning_operation: Optional[shared.GoogleLongrunningOperation] = field(default=None)
-    status_code: int = field(default=None)
     

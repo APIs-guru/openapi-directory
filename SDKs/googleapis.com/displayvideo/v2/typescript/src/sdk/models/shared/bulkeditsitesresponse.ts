@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Site } from "./site";
+
 
 
 // BulkEditSitesResponse
@@ -8,6 +8,6 @@ import { Site } from "./site";
  * Response message for SiteService.BulkEditSites.
 **/
 export class BulkEditSitesResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=sites", elemType: shared.Site })
+  @SpeakeasyMetadata({ data: "json, name=sites", elemType: Site })
   sites?: Site[];
 }

@@ -4,6 +4,8 @@ type UpdateNetworkSwitchRoutingMulticastPathParams struct {
 	NetworkID string `pathParam:"style=simple,explode=false,name=networkId"`
 }
 
+// UpdateNetworkSwitchRoutingMulticastRequestBodyDefaultSettings
+// Default multicast setting for entire network. IGMP snooping and Flood unknown multicast traffic settings are enabled by default.
 type UpdateNetworkSwitchRoutingMulticastRequestBodyDefaultSettings struct {
 	FloodUnknownMulticastTrafficEnabled *bool `json:"floodUnknownMulticastTrafficEnabled,omitempty"`
 	IgmpSnoopingEnabled                 *bool `json:"igmpSnoopingEnabled,omitempty"`

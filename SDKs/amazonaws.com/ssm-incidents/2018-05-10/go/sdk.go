@@ -10,7 +10,7 @@ import (
 	"strings"
 )
 
-var Servers = []string{
+var ServerList = []string{
 	"http://ssm-incidents.{region}.amazonaws.com",
 	"https://ssm-incidents.{region}.amazonaws.com",
 	"http://ssm-incidents.{region}.amazonaws.com.cn",
@@ -21,10 +21,15 @@ type HTTPClient interface {
 	Do(req *http.Request) (*http.Response, error)
 }
 
+// SDK Documentation: https://docs.aws.amazon.com/ssm-incidents/ - Amazon Web Services documentation
 type SDK struct {
-	defaultClient  HTTPClient
-	securityClient HTTPClient
-	serverURL      string
+	_defaultClient  HTTPClient
+	_securityClient HTTPClient
+	_security       *shared.Security
+	_serverURL      string
+	_language       string
+	_sdkVersion     string
+	_genVersion     string
 }
 
 type SDKOption func(*SDK)
@@ -35,33 +40,55 @@ func WithServerURL(serverURL string, params map[string]string) SDKOption {
 			serverURL = utils.ReplaceParameters(serverURL, params)
 		}
 
-		sdk.serverURL = serverURL
+		sdk._serverURL = serverURL
+	}
+}
+
+func WithClient(client HTTPClient) SDKOption {
+	return func(sdk *SDK) {
+		sdk._defaultClient = client
 	}
 }
 
 func WithSecurity(security shared.Security) SDKOption {
 	return func(sdk *SDK) {
-		sdk.securityClient = utils.CreateSecurityClient(security)
+		sdk._security = &security
 	}
 }
 
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
-		defaultClient:  http.DefaultClient,
-		securityClient: http.DefaultClient,
+		_language:   "go",
+		_sdkVersion: "",
+		_genVersion: "internal",
 	}
 	for _, opt := range opts {
 		opt(sdk)
 	}
-	if sdk.serverURL == "" {
-		sdk.serverURL = Servers[0]
+
+	if sdk._defaultClient == nil {
+		sdk._defaultClient = http.DefaultClient
+	}
+	if sdk._securityClient == nil {
+
+		if sdk._security != nil {
+			sdk._securityClient = utils.ConfigureSecurityClient(sdk._defaultClient, sdk._security)
+		} else {
+			sdk._securityClient = sdk._defaultClient
+		}
+
+	}
+
+	if sdk._serverURL == "" {
+		sdk._serverURL = ServerList[0]
 	}
 
 	return sdk
 }
 
+// CreateReplicationSet - A replication set replicates and encrypts your data to the provided Regions with the provided KMS key.
 func (s *SDK) CreateReplicationSet(ctx context.Context, request operations.CreateReplicationSetRequest) (*operations.CreateReplicationSetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/createReplicationSet"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -81,7 +108,7 @@ func (s *SDK) CreateReplicationSet(ctx context.Context, request operations.Creat
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -171,8 +198,9 @@ func (s *SDK) CreateReplicationSet(ctx context.Context, request operations.Creat
 	return res, nil
 }
 
+// CreateResponsePlan - Creates a response plan that automates the initial response to incidents. A response plan engages contacts, starts chat channel collaboration, and initiates runbooks at the beginning of an incident.
 func (s *SDK) CreateResponsePlan(ctx context.Context, request operations.CreateResponsePlanRequest) (*operations.CreateResponsePlanResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/createResponsePlan"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -192,7 +220,7 @@ func (s *SDK) CreateResponsePlan(ctx context.Context, request operations.CreateR
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -282,8 +310,9 @@ func (s *SDK) CreateResponsePlan(ctx context.Context, request operations.CreateR
 	return res, nil
 }
 
+// CreateTimelineEvent - Creates a custom timeline event on the incident details page of an incident record. Timeline events are automatically created by Incident Manager, marking key moment during an incident. You can create custom timeline events to mark important events that are automatically detected by Incident Manager.
 func (s *SDK) CreateTimelineEvent(ctx context.Context, request operations.CreateTimelineEventRequest) (*operations.CreateTimelineEventResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/createTimelineEvent"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -303,7 +332,7 @@ func (s *SDK) CreateTimelineEvent(ctx context.Context, request operations.Create
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -393,8 +422,9 @@ func (s *SDK) CreateTimelineEvent(ctx context.Context, request operations.Create
 	return res, nil
 }
 
+// DeleteIncidentRecord - Delete an incident record from Incident Manager.
 func (s *SDK) DeleteIncidentRecord(ctx context.Context, request operations.DeleteIncidentRecordRequest) (*operations.DeleteIncidentRecordResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/deleteIncidentRecord"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -414,7 +444,7 @@ func (s *SDK) DeleteIncidentRecord(ctx context.Context, request operations.Delet
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -484,8 +514,9 @@ func (s *SDK) DeleteIncidentRecord(ctx context.Context, request operations.Delet
 	return res, nil
 }
 
+// DeleteReplicationSet - Deletes all Regions in your replication set. Deleting the replication set deletes all Incident Manager data.
 func (s *SDK) DeleteReplicationSet(ctx context.Context, request operations.DeleteReplicationSetRequest) (*operations.DeleteReplicationSetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/deleteReplicationSet#arn"
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -497,7 +528,7 @@ func (s *SDK) DeleteReplicationSet(ctx context.Context, request operations.Delet
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -577,8 +608,9 @@ func (s *SDK) DeleteReplicationSet(ctx context.Context, request operations.Delet
 	return res, nil
 }
 
+// DeleteResourcePolicy - Deletes the resource policy that AWS Resource Access Manager uses to share your Incident Manager resource.
 func (s *SDK) DeleteResourcePolicy(ctx context.Context, request operations.DeleteResourcePolicyRequest) (*operations.DeleteResourcePolicyResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/deleteResourcePolicy"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -598,7 +630,7 @@ func (s *SDK) DeleteResourcePolicy(ctx context.Context, request operations.Delet
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -678,8 +710,9 @@ func (s *SDK) DeleteResourcePolicy(ctx context.Context, request operations.Delet
 	return res, nil
 }
 
+// DeleteResponsePlan - Deletes the specified response plan. Deleting a response plan stops all linked CloudWatch alarms and EventBridge events from creating an incident with this response plan.
 func (s *SDK) DeleteResponsePlan(ctx context.Context, request operations.DeleteResponsePlanRequest) (*operations.DeleteResponsePlanResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/deleteResponsePlan"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -699,7 +732,7 @@ func (s *SDK) DeleteResponsePlan(ctx context.Context, request operations.DeleteR
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -769,8 +802,9 @@ func (s *SDK) DeleteResponsePlan(ctx context.Context, request operations.DeleteR
 	return res, nil
 }
 
+// DeleteTimelineEvent - Deletes a timeline event from an incident.
 func (s *SDK) DeleteTimelineEvent(ctx context.Context, request operations.DeleteTimelineEventRequest) (*operations.DeleteTimelineEventResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/deleteTimelineEvent"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -790,7 +824,7 @@ func (s *SDK) DeleteTimelineEvent(ctx context.Context, request operations.Delete
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -860,8 +894,9 @@ func (s *SDK) DeleteTimelineEvent(ctx context.Context, request operations.Delete
 	return res, nil
 }
 
+// GetIncidentRecord - Returns the details of the specified incident record.
 func (s *SDK) GetIncidentRecord(ctx context.Context, request operations.GetIncidentRecordRequest) (*operations.GetIncidentRecordResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/getIncidentRecord#arn"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -873,7 +908,7 @@ func (s *SDK) GetIncidentRecord(ctx context.Context, request operations.GetIncid
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -953,8 +988,9 @@ func (s *SDK) GetIncidentRecord(ctx context.Context, request operations.GetIncid
 	return res, nil
 }
 
+// GetReplicationSet - Retrieve your Incident Manager replication set.
 func (s *SDK) GetReplicationSet(ctx context.Context, request operations.GetReplicationSetRequest) (*operations.GetReplicationSetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/getReplicationSet#arn"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -966,7 +1002,7 @@ func (s *SDK) GetReplicationSet(ctx context.Context, request operations.GetRepli
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1046,8 +1082,9 @@ func (s *SDK) GetReplicationSet(ctx context.Context, request operations.GetRepli
 	return res, nil
 }
 
+// GetResourcePolicies - Retrieves the resource policies attached to the specified response plan.
 func (s *SDK) GetResourcePolicies(ctx context.Context, request operations.GetResourcePoliciesRequest) (*operations.GetResourcePoliciesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/getResourcePolicies#resourceArn"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1069,7 +1106,7 @@ func (s *SDK) GetResourcePolicies(ctx context.Context, request operations.GetRes
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1149,8 +1186,9 @@ func (s *SDK) GetResourcePolicies(ctx context.Context, request operations.GetRes
 	return res, nil
 }
 
+// GetResponsePlan - Retrieves the details of the specified response plan.
 func (s *SDK) GetResponsePlan(ctx context.Context, request operations.GetResponsePlanRequest) (*operations.GetResponsePlanResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/getResponsePlan#arn"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1162,7 +1200,7 @@ func (s *SDK) GetResponsePlan(ctx context.Context, request operations.GetRespons
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1242,8 +1280,9 @@ func (s *SDK) GetResponsePlan(ctx context.Context, request operations.GetRespons
 	return res, nil
 }
 
+// GetTimelineEvent - Retrieves a timeline event based on its ID and incident record.
 func (s *SDK) GetTimelineEvent(ctx context.Context, request operations.GetTimelineEventRequest) (*operations.GetTimelineEventResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/getTimelineEvent#eventId&incidentRecordArn"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1255,7 +1294,7 @@ func (s *SDK) GetTimelineEvent(ctx context.Context, request operations.GetTimeli
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1335,8 +1374,9 @@ func (s *SDK) GetTimelineEvent(ctx context.Context, request operations.GetTimeli
 	return res, nil
 }
 
+// ListIncidentRecords - Lists all incident records in your account. Use this command to retrieve the Amazon Resource Name (ARN) of the incident record you want to update.
 func (s *SDK) ListIncidentRecords(ctx context.Context, request operations.ListIncidentRecordsRequest) (*operations.ListIncidentRecordsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/listIncidentRecords"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1358,7 +1398,7 @@ func (s *SDK) ListIncidentRecords(ctx context.Context, request operations.ListIn
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1428,8 +1468,9 @@ func (s *SDK) ListIncidentRecords(ctx context.Context, request operations.ListIn
 	return res, nil
 }
 
+// ListRelatedItems - List all related items for an incident record.
 func (s *SDK) ListRelatedItems(ctx context.Context, request operations.ListRelatedItemsRequest) (*operations.ListRelatedItemsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/listRelatedItems"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1451,7 +1492,7 @@ func (s *SDK) ListRelatedItems(ctx context.Context, request operations.ListRelat
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1521,8 +1562,9 @@ func (s *SDK) ListRelatedItems(ctx context.Context, request operations.ListRelat
 	return res, nil
 }
 
+// ListReplicationSets - Lists details about the replication set configured in your account.
 func (s *SDK) ListReplicationSets(ctx context.Context, request operations.ListReplicationSetsRequest) (*operations.ListReplicationSetsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/listReplicationSets"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1544,7 +1586,7 @@ func (s *SDK) ListReplicationSets(ctx context.Context, request operations.ListRe
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1614,8 +1656,9 @@ func (s *SDK) ListReplicationSets(ctx context.Context, request operations.ListRe
 	return res, nil
 }
 
+// ListResponsePlans - Lists all response plans in your account.
 func (s *SDK) ListResponsePlans(ctx context.Context, request operations.ListResponsePlansRequest) (*operations.ListResponsePlansResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/listResponsePlans"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1637,7 +1680,7 @@ func (s *SDK) ListResponsePlans(ctx context.Context, request operations.ListResp
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1707,8 +1750,9 @@ func (s *SDK) ListResponsePlans(ctx context.Context, request operations.ListResp
 	return res, nil
 }
 
+// ListTagsForResource - Lists the tags that are attached to the specified response plan.
 func (s *SDK) ListTagsForResource(ctx context.Context, request operations.ListTagsForResourceRequest) (*operations.ListTagsForResourceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/tags/{resourceArn}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1718,7 +1762,7 @@ func (s *SDK) ListTagsForResource(ctx context.Context, request operations.ListTa
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1798,8 +1842,9 @@ func (s *SDK) ListTagsForResource(ctx context.Context, request operations.ListTa
 	return res, nil
 }
 
+// ListTimelineEvents - Lists timeline events of the specified incident record.
 func (s *SDK) ListTimelineEvents(ctx context.Context, request operations.ListTimelineEventsRequest) (*operations.ListTimelineEventsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/listTimelineEvents"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1821,7 +1866,7 @@ func (s *SDK) ListTimelineEvents(ctx context.Context, request operations.ListTim
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1891,8 +1936,9 @@ func (s *SDK) ListTimelineEvents(ctx context.Context, request operations.ListTim
 	return res, nil
 }
 
+// PutResourcePolicy - Adds a resource policy to the specified response plan.
 func (s *SDK) PutResourcePolicy(ctx context.Context, request operations.PutResourcePolicyRequest) (*operations.PutResourcePolicyResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/putResourcePolicy"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1912,7 +1958,7 @@ func (s *SDK) PutResourcePolicy(ctx context.Context, request operations.PutResou
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1992,8 +2038,9 @@ func (s *SDK) PutResourcePolicy(ctx context.Context, request operations.PutResou
 	return res, nil
 }
 
+// StartIncident - Used to start an incident from CloudWatch alarms, EventBridge events, or manually.
 func (s *SDK) StartIncident(ctx context.Context, request operations.StartIncidentRequest) (*operations.StartIncidentResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/startIncident"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2013,7 +2060,7 @@ func (s *SDK) StartIncident(ctx context.Context, request operations.StartInciden
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2103,8 +2150,9 @@ func (s *SDK) StartIncident(ctx context.Context, request operations.StartInciden
 	return res, nil
 }
 
+// TagResource - Adds a tag to a response plan.
 func (s *SDK) TagResource(ctx context.Context, request operations.TagResourceRequest) (*operations.TagResourceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/tags/{resourceArn}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2124,7 +2172,7 @@ func (s *SDK) TagResource(ctx context.Context, request operations.TagResourceReq
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2224,8 +2272,9 @@ func (s *SDK) TagResource(ctx context.Context, request operations.TagResourceReq
 	return res, nil
 }
 
+// UntagResource - Removes a tag from a resource.
 func (s *SDK) UntagResource(ctx context.Context, request operations.UntagResourceRequest) (*operations.UntagResourceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/tags/{resourceArn}#tagKeys", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -2237,7 +2286,7 @@ func (s *SDK) UntagResource(ctx context.Context, request operations.UntagResourc
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2327,8 +2376,9 @@ func (s *SDK) UntagResource(ctx context.Context, request operations.UntagResourc
 	return res, nil
 }
 
+// UpdateDeletionProtection - Update deletion protection to either allow or deny deletion of the final Region in a replication set.
 func (s *SDK) UpdateDeletionProtection(ctx context.Context, request operations.UpdateDeletionProtectionRequest) (*operations.UpdateDeletionProtectionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/updateDeletionProtection"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2348,7 +2398,7 @@ func (s *SDK) UpdateDeletionProtection(ctx context.Context, request operations.U
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2428,8 +2478,9 @@ func (s *SDK) UpdateDeletionProtection(ctx context.Context, request operations.U
 	return res, nil
 }
 
+// UpdateIncidentRecord - Update the details of an incident record. You can use this action to update an incident record from the defined chat channel. For more information about using actions in chat channels, see <a href="https://docs.aws.amazon.com/incident-manager/latest/userguide/chat.html#chat-interact">Interacting through chat</a>.
 func (s *SDK) UpdateIncidentRecord(ctx context.Context, request operations.UpdateIncidentRecordRequest) (*operations.UpdateIncidentRecordResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/updateIncidentRecord"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2449,7 +2500,7 @@ func (s *SDK) UpdateIncidentRecord(ctx context.Context, request operations.Updat
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2539,8 +2590,9 @@ func (s *SDK) UpdateIncidentRecord(ctx context.Context, request operations.Updat
 	return res, nil
 }
 
+// UpdateRelatedItems - Add or remove related items from the related items tab of an incident record.
 func (s *SDK) UpdateRelatedItems(ctx context.Context, request operations.UpdateRelatedItemsRequest) (*operations.UpdateRelatedItemsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/updateRelatedItems"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2560,7 +2612,7 @@ func (s *SDK) UpdateRelatedItems(ctx context.Context, request operations.UpdateR
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2650,8 +2702,9 @@ func (s *SDK) UpdateRelatedItems(ctx context.Context, request operations.UpdateR
 	return res, nil
 }
 
+// UpdateReplicationSet - Add or delete Regions from your replication set.
 func (s *SDK) UpdateReplicationSet(ctx context.Context, request operations.UpdateReplicationSetRequest) (*operations.UpdateReplicationSetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/updateReplicationSet"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2671,7 +2724,7 @@ func (s *SDK) UpdateReplicationSet(ctx context.Context, request operations.Updat
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2751,8 +2804,9 @@ func (s *SDK) UpdateReplicationSet(ctx context.Context, request operations.Updat
 	return res, nil
 }
 
+// UpdateResponsePlan - Updates the specified response plan.
 func (s *SDK) UpdateResponsePlan(ctx context.Context, request operations.UpdateResponsePlanRequest) (*operations.UpdateResponsePlanResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/updateResponsePlan"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2772,7 +2826,7 @@ func (s *SDK) UpdateResponsePlan(ctx context.Context, request operations.UpdateR
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2862,8 +2916,9 @@ func (s *SDK) UpdateResponsePlan(ctx context.Context, request operations.UpdateR
 	return res, nil
 }
 
+// UpdateTimelineEvent - Updates a timeline event. You can update events of type <code>Custom Event</code>.
 func (s *SDK) UpdateTimelineEvent(ctx context.Context, request operations.UpdateTimelineEventRequest) (*operations.UpdateTimelineEventResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/updateTimelineEvent"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2883,7 +2938,7 @@ func (s *SDK) UpdateTimelineEvent(ctx context.Context, request operations.Update
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {

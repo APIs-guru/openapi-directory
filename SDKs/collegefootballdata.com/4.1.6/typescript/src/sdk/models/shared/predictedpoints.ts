@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class PredictedPoints extends SpeakeasyBase {
-  @Metadata({ data: "json, name=predictedPoints" })
+  @SpeakeasyMetadata({ data: "json, name=predictedPoints" })
   predictedPoints?: number;
 
-  @Metadata({ data: "json, name=yardLine" })
+  @SpeakeasyMetadata({ data: "json, name=yardLine" })
   yardLine?: number;
 }

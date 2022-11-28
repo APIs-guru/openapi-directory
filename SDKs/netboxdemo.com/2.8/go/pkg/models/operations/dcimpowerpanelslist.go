@@ -36,15 +36,15 @@ type DcimPowerPanelsListQueryParams struct {
 	SiteIDN      *string `queryParam:"style=form,explode=true,name=site_id__n"`
 }
 
-type DcimPowerPanelsListRequest struct {
-	QueryParams DcimPowerPanelsListQueryParams
-}
-
 type DcimPowerPanelsList200ApplicationJSON struct {
 	Count    int64               `json:"count"`
 	Next     *string             `json:"next,omitempty"`
 	Previous *string             `json:"previous,omitempty"`
 	Results  []shared.PowerPanel `json:"results"`
+}
+
+type DcimPowerPanelsListRequest struct {
+	QueryParams DcimPowerPanelsListQueryParams
 }
 
 type DcimPowerPanelsListResponse struct {

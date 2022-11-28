@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { JobStatusEnum } from "./jobstatusenum";
 /**
  *  Describes an execution step, for an execution job, for an Amplify app.

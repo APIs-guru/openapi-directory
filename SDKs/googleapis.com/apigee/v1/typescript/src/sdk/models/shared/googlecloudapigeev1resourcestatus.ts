@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudApigeeV1RevisionStatus } from "./googlecloudapigeev1revisionstatus";
+
 
 
 // GoogleCloudApigeeV1ResourceStatus
@@ -8,15 +8,15 @@ import { GoogleCloudApigeeV1RevisionStatus } from "./googlecloudapigeev1revision
  * The status of a resource loaded in the runtime.
 **/
 export class GoogleCloudApigeeV1ResourceStatus extends SpeakeasyBase {
-  @Metadata({ data: "json, name=resource" })
+  @SpeakeasyMetadata({ data: "json, name=resource" })
   resource?: string;
 
-  @Metadata({ data: "json, name=revisions", elemType: shared.GoogleCloudApigeeV1RevisionStatus })
+  @SpeakeasyMetadata({ data: "json, name=revisions", elemType: GoogleCloudApigeeV1RevisionStatus })
   revisions?: GoogleCloudApigeeV1RevisionStatus[];
 
-  @Metadata({ data: "json, name=totalReplicas" })
+  @SpeakeasyMetadata({ data: "json, name=totalReplicas" })
   totalReplicas?: number;
 
-  @Metadata({ data: "json, name=uid" })
+  @SpeakeasyMetadata({ data: "json, name=uid" })
   uid?: string;
 }

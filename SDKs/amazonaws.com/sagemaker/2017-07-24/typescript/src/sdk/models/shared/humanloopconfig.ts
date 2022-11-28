@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PublicWorkforceTaskPrice } from "./publicworkforcetaskprice";
+
 
 
 // HumanLoopConfig
@@ -7,30 +8,30 @@ import { PublicWorkforceTaskPrice } from "./publicworkforcetaskprice";
  * Describes the work to be performed by human workers.
 **/
 export class HumanLoopConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=HumanTaskUiArn" })
+  @SpeakeasyMetadata({ data: "json, name=HumanTaskUiArn" })
   humanTaskUiArn: string;
 
-  @Metadata({ data: "json, name=PublicWorkforceTaskPrice" })
+  @SpeakeasyMetadata({ data: "json, name=PublicWorkforceTaskPrice" })
   publicWorkforceTaskPrice?: PublicWorkforceTaskPrice;
 
-  @Metadata({ data: "json, name=TaskAvailabilityLifetimeInSeconds" })
+  @SpeakeasyMetadata({ data: "json, name=TaskAvailabilityLifetimeInSeconds" })
   taskAvailabilityLifetimeInSeconds?: number;
 
-  @Metadata({ data: "json, name=TaskCount" })
+  @SpeakeasyMetadata({ data: "json, name=TaskCount" })
   taskCount: number;
 
-  @Metadata({ data: "json, name=TaskDescription" })
+  @SpeakeasyMetadata({ data: "json, name=TaskDescription" })
   taskDescription: string;
 
-  @Metadata({ data: "json, name=TaskKeywords" })
+  @SpeakeasyMetadata({ data: "json, name=TaskKeywords" })
   taskKeywords?: string[];
 
-  @Metadata({ data: "json, name=TaskTimeLimitInSeconds" })
+  @SpeakeasyMetadata({ data: "json, name=TaskTimeLimitInSeconds" })
   taskTimeLimitInSeconds?: number;
 
-  @Metadata({ data: "json, name=TaskTitle" })
+  @SpeakeasyMetadata({ data: "json, name=TaskTitle" })
   taskTitle: string;
 
-  @Metadata({ data: "json, name=WorkteamArn" })
+  @SpeakeasyMetadata({ data: "json, name=WorkteamArn" })
   workteamArn: string;
 }

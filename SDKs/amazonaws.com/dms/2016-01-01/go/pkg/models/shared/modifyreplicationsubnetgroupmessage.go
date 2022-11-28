@@ -1,5 +1,7 @@
 package shared
 
+// ModifyReplicationSubnetGroupMessage
+// <p/>
 type ModifyReplicationSubnetGroupMessage struct {
 	ReplicationSubnetGroupDescription *string  `json:"ReplicationSubnetGroupDescription,omitempty"`
 	ReplicationSubnetGroupIdentifier  string   `json:"ReplicationSubnetGroupIdentifier"`

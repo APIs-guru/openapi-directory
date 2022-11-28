@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // FilterAction
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A set of actions to perform on a message.
 **/
 export class FilterAction extends SpeakeasyBase {
-  @Metadata({ data: "json, name=addLabelIds" })
+  @SpeakeasyMetadata({ data: "json, name=addLabelIds" })
   addLabelIds?: string[];
 
-  @Metadata({ data: "json, name=forward" })
+  @SpeakeasyMetadata({ data: "json, name=forward" })
   forward?: string;
 
-  @Metadata({ data: "json, name=removeLabelIds" })
+  @SpeakeasyMetadata({ data: "json, name=removeLabelIds" })
   removeLabelIds?: string[];
 }

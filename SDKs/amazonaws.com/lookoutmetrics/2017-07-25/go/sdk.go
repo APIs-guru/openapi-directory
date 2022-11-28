@@ -10,7 +10,7 @@ import (
 	"strings"
 )
 
-var Servers = []string{
+var ServerList = []string{
 	"http://lookoutmetrics.{region}.amazonaws.com",
 	"https://lookoutmetrics.{region}.amazonaws.com",
 	"http://lookoutmetrics.{region}.amazonaws.com.cn",
@@ -21,10 +21,15 @@ type HTTPClient interface {
 	Do(req *http.Request) (*http.Response, error)
 }
 
+// SDK Documentation: https://docs.aws.amazon.com/lookoutmetrics/ - Amazon Web Services documentation
 type SDK struct {
-	defaultClient  HTTPClient
-	securityClient HTTPClient
-	serverURL      string
+	_defaultClient  HTTPClient
+	_securityClient HTTPClient
+	_security       *shared.Security
+	_serverURL      string
+	_language       string
+	_sdkVersion     string
+	_genVersion     string
 }
 
 type SDKOption func(*SDK)
@@ -35,33 +40,55 @@ func WithServerURL(serverURL string, params map[string]string) SDKOption {
 			serverURL = utils.ReplaceParameters(serverURL, params)
 		}
 
-		sdk.serverURL = serverURL
+		sdk._serverURL = serverURL
+	}
+}
+
+func WithClient(client HTTPClient) SDKOption {
+	return func(sdk *SDK) {
+		sdk._defaultClient = client
 	}
 }
 
 func WithSecurity(security shared.Security) SDKOption {
 	return func(sdk *SDK) {
-		sdk.securityClient = utils.CreateSecurityClient(security)
+		sdk._security = &security
 	}
 }
 
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
-		defaultClient:  http.DefaultClient,
-		securityClient: http.DefaultClient,
+		_language:   "go",
+		_sdkVersion: "",
+		_genVersion: "internal",
 	}
 	for _, opt := range opts {
 		opt(sdk)
 	}
-	if sdk.serverURL == "" {
-		sdk.serverURL = Servers[0]
+
+	if sdk._defaultClient == nil {
+		sdk._defaultClient = http.DefaultClient
+	}
+	if sdk._securityClient == nil {
+
+		if sdk._security != nil {
+			sdk._securityClient = utils.ConfigureSecurityClient(sdk._defaultClient, sdk._security)
+		} else {
+			sdk._securityClient = sdk._defaultClient
+		}
+
+	}
+
+	if sdk._serverURL == "" {
+		sdk._serverURL = ServerList[0]
 	}
 
 	return sdk
 }
 
+// ActivateAnomalyDetector - Activates an anomaly detector.
 func (s *SDK) ActivateAnomalyDetector(ctx context.Context, request operations.ActivateAnomalyDetectorRequest) (*operations.ActivateAnomalyDetectorResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/ActivateAnomalyDetector"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -81,7 +108,7 @@ func (s *SDK) ActivateAnomalyDetector(ctx context.Context, request operations.Ac
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -171,8 +198,9 @@ func (s *SDK) ActivateAnomalyDetector(ctx context.Context, request operations.Ac
 	return res, nil
 }
 
+// BackTestAnomalyDetector - Runs a backtest for anomaly detection for the specified resource.
 func (s *SDK) BackTestAnomalyDetector(ctx context.Context, request operations.BackTestAnomalyDetectorRequest) (*operations.BackTestAnomalyDetectorResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/BackTestAnomalyDetector"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -192,7 +220,7 @@ func (s *SDK) BackTestAnomalyDetector(ctx context.Context, request operations.Ba
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -272,8 +300,9 @@ func (s *SDK) BackTestAnomalyDetector(ctx context.Context, request operations.Ba
 	return res, nil
 }
 
+// CreateAlert - Creates an alert for an anomaly detector.
 func (s *SDK) CreateAlert(ctx context.Context, request operations.CreateAlertRequest) (*operations.CreateAlertResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/CreateAlert"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -293,7 +322,7 @@ func (s *SDK) CreateAlert(ctx context.Context, request operations.CreateAlertReq
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -393,8 +422,9 @@ func (s *SDK) CreateAlert(ctx context.Context, request operations.CreateAlertReq
 	return res, nil
 }
 
+// CreateAnomalyDetector - Creates an anomaly detector.
 func (s *SDK) CreateAnomalyDetector(ctx context.Context, request operations.CreateAnomalyDetectorRequest) (*operations.CreateAnomalyDetectorResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/CreateAnomalyDetector"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -414,7 +444,7 @@ func (s *SDK) CreateAnomalyDetector(ctx context.Context, request operations.Crea
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -514,8 +544,9 @@ func (s *SDK) CreateAnomalyDetector(ctx context.Context, request operations.Crea
 	return res, nil
 }
 
+// CreateMetricSet - Creates a dataset.
 func (s *SDK) CreateMetricSet(ctx context.Context, request operations.CreateMetricSetRequest) (*operations.CreateMetricSetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/CreateMetricSet"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -535,7 +566,7 @@ func (s *SDK) CreateMetricSet(ctx context.Context, request operations.CreateMetr
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -635,8 +666,9 @@ func (s *SDK) CreateMetricSet(ctx context.Context, request operations.CreateMetr
 	return res, nil
 }
 
+// DeleteAlert - Deletes an alert.
 func (s *SDK) DeleteAlert(ctx context.Context, request operations.DeleteAlertRequest) (*operations.DeleteAlertResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/DeleteAlert"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -656,7 +688,7 @@ func (s *SDK) DeleteAlert(ctx context.Context, request operations.DeleteAlertReq
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -736,8 +768,9 @@ func (s *SDK) DeleteAlert(ctx context.Context, request operations.DeleteAlertReq
 	return res, nil
 }
 
+// DeleteAnomalyDetector - Deletes a detector. Deleting an anomaly detector will delete all of its corresponding resources including any configured datasets and alerts.
 func (s *SDK) DeleteAnomalyDetector(ctx context.Context, request operations.DeleteAnomalyDetectorRequest) (*operations.DeleteAnomalyDetectorResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/DeleteAnomalyDetector"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -757,7 +790,7 @@ func (s *SDK) DeleteAnomalyDetector(ctx context.Context, request operations.Dele
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -847,8 +880,9 @@ func (s *SDK) DeleteAnomalyDetector(ctx context.Context, request operations.Dele
 	return res, nil
 }
 
+// DescribeAlert - <p>Describes an alert.</p> <p>Amazon Lookout for Metrics API actions are eventually consistent. If you do a read operation on a resource immediately after creating or modifying it, use retries to allow time for the write operation to complete.</p>
 func (s *SDK) DescribeAlert(ctx context.Context, request operations.DescribeAlertRequest) (*operations.DescribeAlertResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/DescribeAlert"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -868,7 +902,7 @@ func (s *SDK) DescribeAlert(ctx context.Context, request operations.DescribeAler
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -948,8 +982,9 @@ func (s *SDK) DescribeAlert(ctx context.Context, request operations.DescribeAler
 	return res, nil
 }
 
+// DescribeAnomalyDetectionExecutions - Returns information about the status of the specified anomaly detection jobs.
 func (s *SDK) DescribeAnomalyDetectionExecutions(ctx context.Context, request operations.DescribeAnomalyDetectionExecutionsRequest) (*operations.DescribeAnomalyDetectionExecutionsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/DescribeAnomalyDetectionExecutions"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -971,7 +1006,7 @@ func (s *SDK) DescribeAnomalyDetectionExecutions(ctx context.Context, request op
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1051,8 +1086,9 @@ func (s *SDK) DescribeAnomalyDetectionExecutions(ctx context.Context, request op
 	return res, nil
 }
 
+// DescribeAnomalyDetector - <p>Describes a detector.</p> <p>Amazon Lookout for Metrics API actions are eventually consistent. If you do a read operation on a resource immediately after creating or modifying it, use retries to allow time for the write operation to complete.</p>
 func (s *SDK) DescribeAnomalyDetector(ctx context.Context, request operations.DescribeAnomalyDetectorRequest) (*operations.DescribeAnomalyDetectorResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/DescribeAnomalyDetector"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1072,7 +1108,7 @@ func (s *SDK) DescribeAnomalyDetector(ctx context.Context, request operations.De
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1152,8 +1188,9 @@ func (s *SDK) DescribeAnomalyDetector(ctx context.Context, request operations.De
 	return res, nil
 }
 
+// DescribeMetricSet - <p>Describes a dataset.</p> <p>Amazon Lookout for Metrics API actions are eventually consistent. If you do a read operation on a resource immediately after creating or modifying it, use retries to allow time for the write operation to complete.</p>
 func (s *SDK) DescribeMetricSet(ctx context.Context, request operations.DescribeMetricSetRequest) (*operations.DescribeMetricSetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/DescribeMetricSet"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1173,7 +1210,7 @@ func (s *SDK) DescribeMetricSet(ctx context.Context, request operations.Describe
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1253,8 +1290,9 @@ func (s *SDK) DescribeMetricSet(ctx context.Context, request operations.Describe
 	return res, nil
 }
 
+// GetAnomalyGroup - Returns details about a group of anomalous metrics.
 func (s *SDK) GetAnomalyGroup(ctx context.Context, request operations.GetAnomalyGroupRequest) (*operations.GetAnomalyGroupResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/GetAnomalyGroup"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1274,7 +1312,7 @@ func (s *SDK) GetAnomalyGroup(ctx context.Context, request operations.GetAnomaly
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1354,8 +1392,9 @@ func (s *SDK) GetAnomalyGroup(ctx context.Context, request operations.GetAnomaly
 	return res, nil
 }
 
+// GetFeedback - Get feedback for an anomaly group.
 func (s *SDK) GetFeedback(ctx context.Context, request operations.GetFeedbackRequest) (*operations.GetFeedbackResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/GetFeedback"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1377,7 +1416,7 @@ func (s *SDK) GetFeedback(ctx context.Context, request operations.GetFeedbackReq
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1457,8 +1496,9 @@ func (s *SDK) GetFeedback(ctx context.Context, request operations.GetFeedbackReq
 	return res, nil
 }
 
+// GetSampleData - Returns a selection of sample records from an Amazon S3 datasource.
 func (s *SDK) GetSampleData(ctx context.Context, request operations.GetSampleDataRequest) (*operations.GetSampleDataResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/GetSampleData"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1478,7 +1518,7 @@ func (s *SDK) GetSampleData(ctx context.Context, request operations.GetSampleDat
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1558,8 +1598,9 @@ func (s *SDK) GetSampleData(ctx context.Context, request operations.GetSampleDat
 	return res, nil
 }
 
+// ListAlerts - <p>Lists the alerts attached to a detector.</p> <p>Amazon Lookout for Metrics API actions are eventually consistent. If you do a read operation on a resource immediately after creating or modifying it, use retries to allow time for the write operation to complete.</p>
 func (s *SDK) ListAlerts(ctx context.Context, request operations.ListAlertsRequest) (*operations.ListAlertsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/ListAlerts"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1581,7 +1622,7 @@ func (s *SDK) ListAlerts(ctx context.Context, request operations.ListAlertsReque
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1661,8 +1702,9 @@ func (s *SDK) ListAlerts(ctx context.Context, request operations.ListAlertsReque
 	return res, nil
 }
 
+// ListAnomalyDetectors - <p>Lists the detectors in the current AWS Region.</p> <p>Amazon Lookout for Metrics API actions are eventually consistent. If you do a read operation on a resource immediately after creating or modifying it, use retries to allow time for the write operation to complete.</p>
 func (s *SDK) ListAnomalyDetectors(ctx context.Context, request operations.ListAnomalyDetectorsRequest) (*operations.ListAnomalyDetectorsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/ListAnomalyDetectors"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1684,7 +1726,7 @@ func (s *SDK) ListAnomalyDetectors(ctx context.Context, request operations.ListA
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1764,8 +1806,9 @@ func (s *SDK) ListAnomalyDetectors(ctx context.Context, request operations.ListA
 	return res, nil
 }
 
+// ListAnomalyGroupSummaries - Returns a list of anomaly groups.
 func (s *SDK) ListAnomalyGroupSummaries(ctx context.Context, request operations.ListAnomalyGroupSummariesRequest) (*operations.ListAnomalyGroupSummariesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/ListAnomalyGroupSummaries"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1787,7 +1830,7 @@ func (s *SDK) ListAnomalyGroupSummaries(ctx context.Context, request operations.
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1867,8 +1910,9 @@ func (s *SDK) ListAnomalyGroupSummaries(ctx context.Context, request operations.
 	return res, nil
 }
 
+// ListAnomalyGroupTimeSeries - Gets a list of anomalous metrics for a measure in an anomaly group.
 func (s *SDK) ListAnomalyGroupTimeSeries(ctx context.Context, request operations.ListAnomalyGroupTimeSeriesRequest) (*operations.ListAnomalyGroupTimeSeriesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/ListAnomalyGroupTimeSeries"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1890,7 +1934,7 @@ func (s *SDK) ListAnomalyGroupTimeSeries(ctx context.Context, request operations
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1970,8 +2014,9 @@ func (s *SDK) ListAnomalyGroupTimeSeries(ctx context.Context, request operations
 	return res, nil
 }
 
+// ListMetricSets - <p>Lists the datasets in the current AWS Region.</p> <p>Amazon Lookout for Metrics API actions are eventually consistent. If you do a read operation on a resource immediately after creating or modifying it, use retries to allow time for the write operation to complete.</p>
 func (s *SDK) ListMetricSets(ctx context.Context, request operations.ListMetricSetsRequest) (*operations.ListMetricSetsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/ListMetricSets"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1993,7 +2038,7 @@ func (s *SDK) ListMetricSets(ctx context.Context, request operations.ListMetricS
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2073,8 +2118,9 @@ func (s *SDK) ListMetricSets(ctx context.Context, request operations.ListMetricS
 	return res, nil
 }
 
+// ListTagsForResource - Gets a list of <a href="https://docs.aws.amazon.com/lookoutmetrics/latest/dev/detectors-tags.html">tags</a> for a detector, dataset, or alert.
 func (s *SDK) ListTagsForResource(ctx context.Context, request operations.ListTagsForResourceRequest) (*operations.ListTagsForResourceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/tags/{resourceArn}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2084,7 +2130,7 @@ func (s *SDK) ListTagsForResource(ctx context.Context, request operations.ListTa
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2144,8 +2190,9 @@ func (s *SDK) ListTagsForResource(ctx context.Context, request operations.ListTa
 	return res, nil
 }
 
+// PutFeedback - Add feedback for an anomalous metric.
 func (s *SDK) PutFeedback(ctx context.Context, request operations.PutFeedbackRequest) (*operations.PutFeedbackResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/PutFeedback"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2165,7 +2212,7 @@ func (s *SDK) PutFeedback(ctx context.Context, request operations.PutFeedbackReq
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2245,8 +2292,9 @@ func (s *SDK) PutFeedback(ctx context.Context, request operations.PutFeedbackReq
 	return res, nil
 }
 
+// TagResource - Adds <a href="https://docs.aws.amazon.com/lookoutmetrics/latest/dev/detectors-tags.html">tags</a> to a detector, dataset, or alert.
 func (s *SDK) TagResource(ctx context.Context, request operations.TagResourceRequest) (*operations.TagResourceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/tags/{resourceArn}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2266,7 +2314,7 @@ func (s *SDK) TagResource(ctx context.Context, request operations.TagResourceReq
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2326,8 +2374,9 @@ func (s *SDK) TagResource(ctx context.Context, request operations.TagResourceReq
 	return res, nil
 }
 
+// UntagResource - Removes <a href="https://docs.aws.amazon.com/lookoutmetrics/latest/dev/detectors-tags.html">tags</a> from a detector, dataset, or alert.
 func (s *SDK) UntagResource(ctx context.Context, request operations.UntagResourceRequest) (*operations.UntagResourceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/tags/{resourceArn}#tagKeys", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -2339,7 +2388,7 @@ func (s *SDK) UntagResource(ctx context.Context, request operations.UntagResourc
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2399,8 +2448,9 @@ func (s *SDK) UntagResource(ctx context.Context, request operations.UntagResourc
 	return res, nil
 }
 
+// UpdateAnomalyDetector - Updates a detector. After activation, you can only change a detector's ingestion delay and description.
 func (s *SDK) UpdateAnomalyDetector(ctx context.Context, request operations.UpdateAnomalyDetectorRequest) (*operations.UpdateAnomalyDetectorResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/UpdateAnomalyDetector"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2420,7 +2470,7 @@ func (s *SDK) UpdateAnomalyDetector(ctx context.Context, request operations.Upda
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2500,8 +2550,9 @@ func (s *SDK) UpdateAnomalyDetector(ctx context.Context, request operations.Upda
 	return res, nil
 }
 
+// UpdateMetricSet - Updates a dataset.
 func (s *SDK) UpdateMetricSet(ctx context.Context, request operations.UpdateMetricSetRequest) (*operations.UpdateMetricSetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/UpdateMetricSet"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2521,7 +2572,7 @@ func (s *SDK) UpdateMetricSet(ctx context.Context, request operations.UpdateMetr
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {

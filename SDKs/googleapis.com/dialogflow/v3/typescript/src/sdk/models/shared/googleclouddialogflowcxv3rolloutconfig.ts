@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudDialogflowCxV3RolloutConfigRolloutStep } from "./googleclouddialogflowcxv3rolloutconfigrolloutstep";
+
 
 
 // GoogleCloudDialogflowCxV3RolloutConfig
@@ -8,12 +8,12 @@ import { GoogleCloudDialogflowCxV3RolloutConfigRolloutStep } from "./googlecloud
  * The configuration for auto rollout.
 **/
 export class GoogleCloudDialogflowCxV3RolloutConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=failureCondition" })
+  @SpeakeasyMetadata({ data: "json, name=failureCondition" })
   failureCondition?: string;
 
-  @Metadata({ data: "json, name=rolloutCondition" })
+  @SpeakeasyMetadata({ data: "json, name=rolloutCondition" })
   rolloutCondition?: string;
 
-  @Metadata({ data: "json, name=rolloutSteps", elemType: shared.GoogleCloudDialogflowCxV3RolloutConfigRolloutStep })
+  @SpeakeasyMetadata({ data: "json, name=rolloutSteps", elemType: GoogleCloudDialogflowCxV3RolloutConfigRolloutStep })
   rolloutSteps?: GoogleCloudDialogflowCxV3RolloutConfigRolloutStep[];
 }

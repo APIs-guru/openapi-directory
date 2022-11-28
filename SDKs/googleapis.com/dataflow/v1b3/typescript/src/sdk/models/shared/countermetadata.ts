@@ -1,27 +1,28 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum CounterMetadataKindEnum {
-    Invalid = "INVALID"
-,    Sum = "SUM"
-,    Max = "MAX"
-,    Min = "MIN"
-,    Mean = "MEAN"
-,    Or = "OR"
-,    And = "AND"
-,    Set = "SET"
-,    Distribution = "DISTRIBUTION"
-,    LatestValue = "LATEST_VALUE"
+    Invalid = "INVALID",
+    Sum = "SUM",
+    Max = "MAX",
+    Min = "MIN",
+    Mean = "MEAN",
+    Or = "OR",
+    And = "AND",
+    Set = "SET",
+    Distribution = "DISTRIBUTION",
+    LatestValue = "LATEST_VALUE"
 }
 
 export enum CounterMetadataStandardUnitsEnum {
-    Bytes = "BYTES"
-,    BytesPerSec = "BYTES_PER_SEC"
-,    Milliseconds = "MILLISECONDS"
-,    Microseconds = "MICROSECONDS"
-,    Nanoseconds = "NANOSECONDS"
-,    TimestampMsec = "TIMESTAMP_MSEC"
-,    TimestampUsec = "TIMESTAMP_USEC"
-,    TimestampNsec = "TIMESTAMP_NSEC"
+    Bytes = "BYTES",
+    BytesPerSec = "BYTES_PER_SEC",
+    Milliseconds = "MILLISECONDS",
+    Microseconds = "MICROSECONDS",
+    Nanoseconds = "NANOSECONDS",
+    TimestampMsec = "TIMESTAMP_MSEC",
+    TimestampUsec = "TIMESTAMP_USEC",
+    TimestampNsec = "TIMESTAMP_NSEC"
 }
 
 
@@ -30,15 +31,15 @@ export enum CounterMetadataStandardUnitsEnum {
  * CounterMetadata includes all static non-name non-value counter attributes.
 **/
 export class CounterMetadata extends SpeakeasyBase {
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: CounterMetadataKindEnum;
 
-  @Metadata({ data: "json, name=otherUnits" })
+  @SpeakeasyMetadata({ data: "json, name=otherUnits" })
   otherUnits?: string;
 
-  @Metadata({ data: "json, name=standardUnits" })
+  @SpeakeasyMetadata({ data: "json, name=standardUnits" })
   standardUnits?: CounterMetadataStandardUnitsEnum;
 }

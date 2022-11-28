@@ -5,17 +5,17 @@ from sdk.models import shared
 
 @dataclass
 class GetServerLogsSecurity:
-    custom_authentication: shared.SchemeCustomAuthentication = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    custom_authentication: shared.SchemeCustomAuthentication = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
     
 
 @dataclass
 class GetServerLogsRequest:
-    security: GetServerLogsSecurity = field(default=None)
+    security: GetServerLogsSecurity = field()
     
 
 @dataclass
 class GetServerLogsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     log_files: Optional[List[shared.LogFile]] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,5 +1,7 @@
 package shared
 
+// SoftwareRecipeStepInstallMsi
+// Installs an MSI file.
 type SoftwareRecipeStepInstallMsi struct {
 	AllowedExitCodes []int32  `json:"allowedExitCodes,omitempty"`
 	ArtifactID       *string  `json:"artifactId,omitempty"`

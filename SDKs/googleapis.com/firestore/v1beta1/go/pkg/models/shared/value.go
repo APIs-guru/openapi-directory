@@ -6,6 +6,8 @@ const (
 	ValueNullValueEnumNullValue ValueNullValueEnum = "NULL_VALUE"
 )
 
+// Value
+// A message that can hold any of the supported value types.
 type Value struct {
 	ArrayValue     *ArrayValue         `json:"arrayValue,omitempty"`
 	BooleanValue   *bool               `json:"booleanValue,omitempty"`

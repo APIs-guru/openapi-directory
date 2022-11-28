@@ -1,42 +1,43 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { MoneyObject } from "./moneyobject";
 
 
+
 export class AccountResourceAttributes extends SpeakeasyBase {
-  @Metadata({ data: "json, name=accountType" })
+  @SpeakeasyMetadata({ data: "json, name=accountType" })
   accountType: any;
 
-  @Metadata({ data: "json, name=balance" })
+  @SpeakeasyMetadata({ data: "json, name=balance" })
   balance: MoneyObject;
 
-  @Metadata({ data: "json, name=createdAt" })
+  @SpeakeasyMetadata({ data: "json, name=createdAt" })
   createdAt: Date;
 
-  @Metadata({ data: "json, name=displayName" })
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
   displayName: string;
 }
 
 
 export class AccountResourceLinks extends SpeakeasyBase {
-  @Metadata({ data: "json, name=self" })
+  @SpeakeasyMetadata({ data: "json, name=self" })
   self: string;
 }
 
 
 export class AccountResourceRelationshipsTransactionsLinks extends SpeakeasyBase {
-  @Metadata({ data: "json, name=related" })
+  @SpeakeasyMetadata({ data: "json, name=related" })
   related: string;
 }
 
 
 export class AccountResourceRelationshipsTransactions extends SpeakeasyBase {
-  @Metadata({ data: "json, name=links" })
+  @SpeakeasyMetadata({ data: "json, name=links" })
   links?: AccountResourceRelationshipsTransactionsLinks;
 }
 
 
 export class AccountResourceRelationships extends SpeakeasyBase {
-  @Metadata({ data: "json, name=transactions" })
+  @SpeakeasyMetadata({ data: "json, name=transactions" })
   transactions: AccountResourceRelationshipsTransactions;
 }
 
@@ -47,18 +48,18 @@ export class AccountResourceRelationships extends SpeakeasyBase {
  * 
 **/
 export class AccountResource extends SpeakeasyBase {
-  @Metadata({ data: "json, name=attributes" })
+  @SpeakeasyMetadata({ data: "json, name=attributes" })
   attributes: AccountResourceAttributes;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: string;
 
-  @Metadata({ data: "json, name=links" })
+  @SpeakeasyMetadata({ data: "json, name=links" })
   links?: AccountResourceLinks;
 
-  @Metadata({ data: "json, name=relationships" })
+  @SpeakeasyMetadata({ data: "json, name=relationships" })
   relationships: AccountResourceRelationships;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type: string;
 }

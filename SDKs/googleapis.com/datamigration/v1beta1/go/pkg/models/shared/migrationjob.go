@@ -40,6 +40,8 @@ const (
 	MigrationJobTypeEnumContinuous      MigrationJobTypeEnum = "CONTINUOUS"
 )
 
+// MigrationJob
+// Represents a Database Migration Service migration job object.
 type MigrationJob struct {
 	CreateTime             *string                 `json:"createTime,omitempty"`
 	Destination            *string                 `json:"destination,omitempty"`
@@ -59,5 +61,24 @@ type MigrationJob struct {
 	StaticIPConnectivity   map[string]interface{}  `json:"staticIpConnectivity,omitempty"`
 	Type                   *MigrationJobTypeEnum   `json:"type,omitempty"`
 	UpdateTime             *string                 `json:"updateTime,omitempty"`
+	VpcPeeringConnectivity *VpcPeeringConnectivity `json:"vpcPeeringConnectivity,omitempty"`
+}
+
+// MigrationJobInput
+// Represents a Database Migration Service migration job object.
+type MigrationJobInput struct {
+	Destination            *string                 `json:"destination,omitempty"`
+	DestinationDatabase    *DatabaseType           `json:"destinationDatabase,omitempty"`
+	DisplayName            *string                 `json:"displayName,omitempty"`
+	DumpPath               *string                 `json:"dumpPath,omitempty"`
+	Error                  *Status                 `json:"error,omitempty"`
+	Labels                 map[string]string       `json:"labels,omitempty"`
+	Name                   *string                 `json:"name,omitempty"`
+	ReverseSSHConnectivity *ReverseSSHConnectivity `json:"reverseSshConnectivity,omitempty"`
+	Source                 *string                 `json:"source,omitempty"`
+	SourceDatabase         *DatabaseType           `json:"sourceDatabase,omitempty"`
+	State                  *MigrationJobStateEnum  `json:"state,omitempty"`
+	StaticIPConnectivity   map[string]interface{}  `json:"staticIpConnectivity,omitempty"`
+	Type                   *MigrationJobTypeEnum   `json:"type,omitempty"`
 	VpcPeeringConnectivity *VpcPeeringConnectivity `json:"vpcPeeringConnectivity,omitempty"`
 }

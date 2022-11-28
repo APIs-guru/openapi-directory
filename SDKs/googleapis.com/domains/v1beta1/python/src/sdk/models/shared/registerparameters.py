@@ -1,7 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import money
+from sdk import utils
+from . import *
 
 class RegisterParametersAvailabilityEnum(str, Enum):
     AVAILABILITY_UNSPECIFIED = "AVAILABILITY_UNSPECIFIED"
@@ -24,9 +26,13 @@ class RegisterParametersSupportedPrivacyEnum(str, Enum):
 @dataclass_json
 @dataclass
 class RegisterParameters:
-    availability: Optional[RegisterParametersAvailabilityEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'availability' }})
-    domain_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'domainName' }})
-    domain_notices: Optional[List[RegisterParametersDomainNoticesEnum]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'domainNotices' }})
-    supported_privacy: Optional[List[RegisterParametersSupportedPrivacyEnum]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'supportedPrivacy' }})
-    yearly_price: Optional[money.Money] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'yearlyPrice' }})
+    r"""RegisterParameters
+    Parameters required to register a new domain.
+    """
+    
+    availability: Optional[RegisterParametersAvailabilityEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('availability') }})
+    domain_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('domainName') }})
+    domain_notices: Optional[List[RegisterParametersDomainNoticesEnum]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('domainNotices') }})
+    supported_privacy: Optional[List[RegisterParametersSupportedPrivacyEnum]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('supportedPrivacy') }})
+    yearly_price: Optional[Money] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('yearlyPrice') }})
     

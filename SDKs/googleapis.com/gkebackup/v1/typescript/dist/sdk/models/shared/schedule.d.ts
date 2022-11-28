@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 /**
  * Schedule defines scheduling parameters for automatically creating Backups via this BackupPlan.
 **/

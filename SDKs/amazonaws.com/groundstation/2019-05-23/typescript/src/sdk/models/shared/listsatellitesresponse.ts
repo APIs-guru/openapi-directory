@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SatelliteListItem } from "./satellitelistitem";
+
 
 
 // ListSatellitesResponse
@@ -8,9 +8,9 @@ import { SatelliteListItem } from "./satellitelistitem";
  * <p/>
 **/
 export class ListSatellitesResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=nextToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=satellites", elemType: shared.SatelliteListItem })
+  @SpeakeasyMetadata({ data: "json, name=satellites", elemType: SatelliteListItem })
   satellites?: SatelliteListItem[];
 }

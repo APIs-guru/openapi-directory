@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class SchemeApikey extends SpeakeasyBase {
-  @Metadata({ data: "security, name=circle-token" })
+  @SpeakeasyMetadata({ data: "security, name=circle-token" })
   apiKey: string;
 }
 
 
 export class Security extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=query" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=query" })
   apikey: SchemeApikey;
 }

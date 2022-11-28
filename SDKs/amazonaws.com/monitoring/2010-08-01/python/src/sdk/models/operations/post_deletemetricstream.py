@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostDeleteMetricStreamActionEnum(str, Enum):
     DELETE_METRIC_STREAM = "DeleteMetricStream"
@@ -10,8 +14,8 @@ class PostDeleteMetricStreamVersionEnum(str, Enum):
 
 @dataclass
 class PostDeleteMetricStreamQueryParams:
-    action: PostDeleteMetricStreamActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostDeleteMetricStreamVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostDeleteMetricStreamActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostDeleteMetricStreamVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostDeleteMetricStreamHeaders:
 
 @dataclass
 class PostDeleteMetricStreamRequest:
-    query_params: PostDeleteMetricStreamQueryParams = field(default=None)
-    headers: PostDeleteMetricStreamHeaders = field(default=None)
+    headers: PostDeleteMetricStreamHeaders = field()
+    query_params: PostDeleteMetricStreamQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostDeleteMetricStreamResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

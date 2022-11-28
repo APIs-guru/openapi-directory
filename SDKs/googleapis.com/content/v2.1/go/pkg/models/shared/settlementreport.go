@@ -1,5 +1,8 @@
 package shared
 
+// SettlementReport
+//
+//	Settlement reports detail order-level and item-level credits and debits between you and Google.
 type SettlementReport struct {
 	EndDate         *string  `json:"endDate,omitempty"`
 	Kind            *string  `json:"kind,omitempty"`

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Categories } from "./categories";
 import { Transcript } from "./transcript";
 // RealtimeContactAnalysisSegment
@@ -35,11 +35,11 @@ var RealtimeContactAnalysisSegment = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Categories" }),
+        SpeakeasyMetadata({ data: "json, name=Categories" }),
         __metadata("design:type", Categories)
     ], RealtimeContactAnalysisSegment.prototype, "categories", void 0);
     __decorate([
-        Metadata({ data: "json, name=Transcript" }),
+        SpeakeasyMetadata({ data: "json, name=Transcript" }),
         __metadata("design:type", Transcript)
     ], RealtimeContactAnalysisSegment.prototype, "transcript", void 0);
     return RealtimeContactAnalysisSegment;

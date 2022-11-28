@@ -9,11 +9,11 @@ class DeleteAPIV1UserSubscriptionsQueryParams:
 
 @dataclass
 class DeleteAPIV1UserSubscriptionsRequest:
-    query_params: DeleteAPIV1UserSubscriptionsQueryParams = field(default=None)
+    query_params: DeleteAPIV1UserSubscriptionsQueryParams = field()
     
 
 @dataclass
 class DeleteAPIV1UserSubscriptionsResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

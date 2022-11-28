@@ -11,6 +11,8 @@ const (
 	GooglePrivacyDlpV2CharsToIgnoreCommonCharactersToIgnoreEnumWhitespace                     GooglePrivacyDlpV2CharsToIgnoreCommonCharactersToIgnoreEnum = "WHITESPACE"
 )
 
+// GooglePrivacyDlpV2CharsToIgnore
+// Characters to skip when doing deidentification of a value. These will be left alone and skipped.
 type GooglePrivacyDlpV2CharsToIgnore struct {
 	CharactersToSkip         *string                                                      `json:"charactersToSkip,omitempty"`
 	CommonCharactersToIgnore *GooglePrivacyDlpV2CharsToIgnoreCommonCharactersToIgnoreEnum `json:"commonCharactersToIgnore,omitempty"`

@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import List,Optional
+from typing import Optional
 from sdk.models import shared
 
 
@@ -10,13 +10,13 @@ class RequestAlgorithmsHeaders:
 
 @dataclass
 class RequestAlgorithmsRequest:
-    headers: RequestAlgorithmsHeaders = field(default=None)
+    headers: RequestAlgorithmsHeaders = field()
     
 
 @dataclass
 class RequestAlgorithmsResponse:
+    content_type: str = field()
+    status_code: int = field()
     algorithm_version_info_list: Optional[shared.AlgorithmVersionInfoList] = field(default=None)
-    content_type: str = field(default=None)
     error_response: Optional[shared.ErrorResponse] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -10,6 +10,8 @@ const (
 	GoogleCloudDataplexV1TaskStateEnumActionRequired   GoogleCloudDataplexV1TaskStateEnum = "ACTION_REQUIRED"
 )
 
+// GoogleCloudDataplexV1Task
+// A task represents a user-visible job.
 type GoogleCloudDataplexV1Task struct {
 	CreateTime      *string                                      `json:"createTime,omitempty"`
 	Description     *string                                      `json:"description,omitempty"`
@@ -24,4 +26,16 @@ type GoogleCloudDataplexV1Task struct {
 	TriggerSpec     *GoogleCloudDataplexV1TaskTriggerSpec        `json:"triggerSpec,omitempty"`
 	UID             *string                                      `json:"uid,omitempty"`
 	UpdateTime      *string                                      `json:"updateTime,omitempty"`
+}
+
+// GoogleCloudDataplexV1TaskInput
+// A task represents a user-visible job.
+type GoogleCloudDataplexV1TaskInput struct {
+	Description   *string                                      `json:"description,omitempty"`
+	DisplayName   *string                                      `json:"displayName,omitempty"`
+	ExecutionSpec *GoogleCloudDataplexV1TaskExecutionSpec      `json:"executionSpec,omitempty"`
+	Labels        map[string]string                            `json:"labels,omitempty"`
+	Notebook      *GoogleCloudDataplexV1TaskNotebookTaskConfig `json:"notebook,omitempty"`
+	Spark         *GoogleCloudDataplexV1TaskSparkTaskConfig    `json:"spark,omitempty"`
+	TriggerSpec   *GoogleCloudDataplexV1TaskTriggerSpec        `json:"triggerSpec,omitempty"`
 }

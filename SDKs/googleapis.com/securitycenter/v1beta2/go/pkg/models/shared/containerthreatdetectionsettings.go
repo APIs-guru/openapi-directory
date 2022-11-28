@@ -9,10 +9,20 @@ const (
 	ContainerThreatDetectionSettingsServiceEnablementStateEnumDisabled                   ContainerThreatDetectionSettingsServiceEnablementStateEnum = "DISABLED"
 )
 
+// ContainerThreatDetectionSettings
+// Resource capturing the settings for the Container Threat Detection service.
 type ContainerThreatDetectionSettings struct {
 	Modules                map[string]Config                                           `json:"modules,omitempty"`
 	Name                   *string                                                     `json:"name,omitempty"`
 	ServiceAccount         *string                                                     `json:"serviceAccount,omitempty"`
 	ServiceEnablementState *ContainerThreatDetectionSettingsServiceEnablementStateEnum `json:"serviceEnablementState,omitempty"`
 	UpdateTime             *string                                                     `json:"updateTime,omitempty"`
+}
+
+// ContainerThreatDetectionSettingsInput
+// Resource capturing the settings for the Container Threat Detection service.
+type ContainerThreatDetectionSettingsInput struct {
+	Modules                map[string]Config                                           `json:"modules,omitempty"`
+	Name                   *string                                                     `json:"name,omitempty"`
+	ServiceEnablementState *ContainerThreatDetectionSettingsServiceEnablementStateEnum `json:"serviceEnablementState,omitempty"`
 }

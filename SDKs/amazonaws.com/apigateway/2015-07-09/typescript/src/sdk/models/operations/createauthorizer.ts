@@ -1,110 +1,111 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class CreateAuthorizerPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=restapi_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=restapi_id" })
   restapiId: string;
 }
 
 
 export class CreateAuthorizerHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
 export enum CreateAuthorizerRequestBodyTypeEnum {
-    Token = "TOKEN"
-,    Request = "REQUEST"
-,    CognitoUserPools = "COGNITO_USER_POOLS"
+    Token = "TOKEN",
+    Request = "REQUEST",
+    CognitoUserPools = "COGNITO_USER_POOLS"
 }
 
 
 export class CreateAuthorizerRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=authType" })
+  @SpeakeasyMetadata({ data: "json, name=authType" })
   authType?: string;
 
-  @Metadata({ data: "json, name=authorizerCredentials" })
+  @SpeakeasyMetadata({ data: "json, name=authorizerCredentials" })
   authorizerCredentials?: string;
 
-  @Metadata({ data: "json, name=authorizerResultTtlInSeconds" })
+  @SpeakeasyMetadata({ data: "json, name=authorizerResultTtlInSeconds" })
   authorizerResultTtlInSeconds?: number;
 
-  @Metadata({ data: "json, name=authorizerUri" })
+  @SpeakeasyMetadata({ data: "json, name=authorizerUri" })
   authorizerUri?: string;
 
-  @Metadata({ data: "json, name=identitySource" })
+  @SpeakeasyMetadata({ data: "json, name=identitySource" })
   identitySource?: string;
 
-  @Metadata({ data: "json, name=identityValidationExpression" })
+  @SpeakeasyMetadata({ data: "json, name=identityValidationExpression" })
   identityValidationExpression?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 
-  @Metadata({ data: "json, name=providerARNs" })
+  @SpeakeasyMetadata({ data: "json, name=providerARNs" })
   providerArNs?: string[];
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type: CreateAuthorizerRequestBodyTypeEnum;
 }
 
 
 export class CreateAuthorizerRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: CreateAuthorizerPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: CreateAuthorizerHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: CreateAuthorizerRequestBody;
 }
 
 
 export class CreateAuthorizerResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   authorizer?: shared.Authorizer;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   badRequestException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   conflictException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   limitExceededException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   notFoundException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   tooManyRequestsException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   unauthorizedException?: any;
 }

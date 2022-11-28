@@ -1,16 +1,16 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { KeyMetadata } from "./keymetadata";
 import { Tag } from "./tag";
 
 
+
 export class ReplicateKeyResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ReplicaKeyMetadata" })
+  @SpeakeasyMetadata({ data: "json, name=ReplicaKeyMetadata" })
   replicaKeyMetadata?: KeyMetadata;
 
-  @Metadata({ data: "json, name=ReplicaPolicy" })
+  @SpeakeasyMetadata({ data: "json, name=ReplicaPolicy" })
   replicaPolicy?: string;
 
-  @Metadata({ data: "json, name=ReplicaTags", elemType: shared.Tag })
+  @SpeakeasyMetadata({ data: "json, name=ReplicaTags", elemType: Tag })
   replicaTags?: Tag[];
 }

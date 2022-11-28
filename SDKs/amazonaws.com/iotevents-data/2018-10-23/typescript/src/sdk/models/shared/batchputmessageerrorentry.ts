@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ErrorCodeEnum } from "./errorcodeenum";
+
 
 
 // BatchPutMessageErrorEntry
@@ -7,12 +8,12 @@ import { ErrorCodeEnum } from "./errorcodeenum";
  * Contains information about the errors encountered.
 **/
 export class BatchPutMessageErrorEntry extends SpeakeasyBase {
-  @Metadata({ data: "json, name=errorCode" })
+  @SpeakeasyMetadata({ data: "json, name=errorCode" })
   errorCode?: ErrorCodeEnum;
 
-  @Metadata({ data: "json, name=errorMessage" })
+  @SpeakeasyMetadata({ data: "json, name=errorMessage" })
   errorMessage?: string;
 
-  @Metadata({ data: "json, name=messageId" })
+  @SpeakeasyMetadata({ data: "json, name=messageId" })
   messageId?: string;
 }

@@ -1,113 +1,114 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class UpdateFunctionCodePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=FunctionName" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=FunctionName" })
   functionName: string;
 }
 
 
 export class UpdateFunctionCodeHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
 
 export class UpdateFunctionCodeRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DryRun" })
+  @SpeakeasyMetadata({ data: "json, name=DryRun" })
   dryRun?: boolean;
 
-  @Metadata({ data: "json, name=ImageUri" })
+  @SpeakeasyMetadata({ data: "json, name=ImageUri" })
   imageUri?: string;
 
-  @Metadata({ data: "json, name=Publish" })
+  @SpeakeasyMetadata({ data: "json, name=Publish" })
   publish?: boolean;
 
-  @Metadata({ data: "json, name=RevisionId" })
+  @SpeakeasyMetadata({ data: "json, name=RevisionId" })
   revisionId?: string;
 
-  @Metadata({ data: "json, name=S3Bucket" })
+  @SpeakeasyMetadata({ data: "json, name=S3Bucket" })
   s3Bucket?: string;
 
-  @Metadata({ data: "json, name=S3Key" })
+  @SpeakeasyMetadata({ data: "json, name=S3Key" })
   s3Key?: string;
 
-  @Metadata({ data: "json, name=S3ObjectVersion" })
+  @SpeakeasyMetadata({ data: "json, name=S3ObjectVersion" })
   s3ObjectVersion?: string;
 
-  @Metadata({ data: "json, name=ZipFile" })
+  @SpeakeasyMetadata({ data: "json, name=ZipFile" })
   zipFile?: string;
 }
 
 
 export class UpdateFunctionCodeRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: UpdateFunctionCodePathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: UpdateFunctionCodeHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: UpdateFunctionCodeRequestBody;
 }
 
 
 export class UpdateFunctionCodeResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   codeSigningConfigNotFoundException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   codeStorageExceededException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   codeVerificationFailedException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   functionConfiguration?: shared.FunctionConfiguration;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidCodeSignatureException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidParameterValueException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   preconditionFailedException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   resourceConflictException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   resourceNotFoundException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   serviceException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   tooManyRequestsException?: any;
 }

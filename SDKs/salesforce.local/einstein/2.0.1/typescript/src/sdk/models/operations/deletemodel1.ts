@@ -1,35 +1,36 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class DeleteModel1PathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=modelId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=modelId" })
   modelId: string;
 }
 
 
 export class DeleteModel1Security extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=bearer" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" })
   bearerToken: shared.SchemeBearerToken;
 }
 
 
 export class DeleteModel1Request extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: DeleteModel1PathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: DeleteModel1Security;
 }
 
 
 export class DeleteModel1Response extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   deletionResponse?: shared.DeletionResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

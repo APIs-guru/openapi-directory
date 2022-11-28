@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // CheckValidCredsResponse
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A response indicating whether the credentials exist and are valid.
 **/
 export class CheckValidCredsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=hasValidCreds" })
+  @SpeakeasyMetadata({ data: "json, name=hasValidCreds" })
   hasValidCreds?: boolean;
 }

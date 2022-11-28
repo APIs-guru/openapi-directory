@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { StudentSubmission } from "./studentsubmission";
 /**
  * Response when listing student submissions.

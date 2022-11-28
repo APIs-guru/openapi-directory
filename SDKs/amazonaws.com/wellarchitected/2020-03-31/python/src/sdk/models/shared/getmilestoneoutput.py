@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import milestone
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class GetMilestoneOutput:
-    milestone: Optional[milestone.Milestone] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Milestone' }})
-    workload_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'WorkloadId' }})
+    r"""GetMilestoneOutput
+    Output of a get milestone call.
+    """
+    
+    milestone: Optional[Milestone] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Milestone') }})
+    workload_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('WorkloadId') }})
     

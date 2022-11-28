@@ -9,6 +9,8 @@ const (
 	GoogleCloudAssuredworkloadsV1beta1ViolationStateEnumException        GoogleCloudAssuredworkloadsV1beta1ViolationStateEnum = "EXCEPTION"
 )
 
+// GoogleCloudAssuredworkloadsV1beta1Violation
+// Workload monitoring Violation.
 type GoogleCloudAssuredworkloadsV1beta1Violation struct {
 	Acknowledged          *bool                                                   `json:"acknowledged,omitempty"`
 	AcknowledgementTime   *string                                                 `json:"acknowledgementTime,omitempty"`

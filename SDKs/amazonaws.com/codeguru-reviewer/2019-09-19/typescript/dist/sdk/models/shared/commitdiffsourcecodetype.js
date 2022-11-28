@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // CommitDiffSourceCodeType
 /**
  *  A type of <a href="https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_SourceCodeType"> <code>SourceCodeType</code> </a> that specifies the commit diff for a pull request on an associated repository. The <code>SourceCommit</code> and <code>DestinationCommit</code> fields are required to do a pull request code review.
@@ -33,15 +33,15 @@ var CommitDiffSourceCodeType = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=DestinationCommit" }),
+        SpeakeasyMetadata({ data: "json, name=DestinationCommit" }),
         __metadata("design:type", String)
     ], CommitDiffSourceCodeType.prototype, "destinationCommit", void 0);
     __decorate([
-        Metadata({ data: "json, name=MergeBaseCommit" }),
+        SpeakeasyMetadata({ data: "json, name=MergeBaseCommit" }),
         __metadata("design:type", String)
     ], CommitDiffSourceCodeType.prototype, "mergeBaseCommit", void 0);
     __decorate([
-        Metadata({ data: "json, name=SourceCommit" }),
+        SpeakeasyMetadata({ data: "json, name=SourceCommit" }),
         __metadata("design:type", String)
     ], CommitDiffSourceCodeType.prototype, "sourceCommit", void 0);
     return CommitDiffSourceCodeType;

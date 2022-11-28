@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { EfsFileLocation } from "./efsfilelocation";
 import { S3InputFileLocation } from "./s3inputfilelocation";
+
 
 
 // InputFileLocation
@@ -8,9 +9,9 @@ import { S3InputFileLocation } from "./s3inputfilelocation";
  * Specifies the location for the file being copied. Only applicable for the Copy type of workflow steps.
 **/
 export class InputFileLocation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=EfsFileLocation" })
+  @SpeakeasyMetadata({ data: "json, name=EfsFileLocation" })
   efsFileLocation?: EfsFileLocation;
 
-  @Metadata({ data: "json, name=S3FileLocation" })
+  @SpeakeasyMetadata({ data: "json, name=S3FileLocation" })
   s3FileLocation?: S3InputFileLocation;
 }

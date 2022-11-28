@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // CloudWatchLoggingOption
 /**
  * Provides a description of Amazon CloudWatch logging options, including the log stream Amazon Resource Name (ARN).
@@ -33,7 +33,7 @@ var CloudWatchLoggingOption = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=LogStreamARN" }),
+        SpeakeasyMetadata({ data: "json, name=LogStreamARN" }),
         __metadata("design:type", String)
     ], CloudWatchLoggingOption.prototype, "logStreamArn", void 0);
     return CloudWatchLoggingOption;

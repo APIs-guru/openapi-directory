@@ -8,6 +8,8 @@ type ChannelContentDetailsRelatedPlaylists struct {
 	WatchLater   *string `json:"watchLater,omitempty"`
 }
 
+// ChannelContentDetails
+// Details about the content of a channel.
 type ChannelContentDetails struct {
 	RelatedPlaylists *ChannelContentDetailsRelatedPlaylists `json:"relatedPlaylists,omitempty"`
 }

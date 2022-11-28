@@ -22,6 +22,8 @@ const (
 	ThemeColorPairTypeEnumBackground2               ThemeColorPairTypeEnum = "BACKGROUND2"
 )
 
+// ThemeColorPair
+// A pair mapping a theme color type to the concrete color it represents.
 type ThemeColorPair struct {
 	Color *RgbColor               `json:"color,omitempty"`
 	Type  *ThemeColorPairTypeEnum `json:"type,omitempty"`

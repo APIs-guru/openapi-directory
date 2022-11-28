@@ -1,4 +1,7 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
@@ -16,15 +19,15 @@ class GetDeliverabilityDashboardOptionsHeaders:
 
 @dataclass
 class GetDeliverabilityDashboardOptionsRequest:
-    headers: GetDeliverabilityDashboardOptionsHeaders = field(default=None)
+    headers: GetDeliverabilityDashboardOptionsHeaders = field()
     
 
 @dataclass
 class GetDeliverabilityDashboardOptionsResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     get_deliverability_dashboard_options_response: Optional[shared.GetDeliverabilityDashboardOptionsResponse] = field(default=None)
     limit_exceeded_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     too_many_requests_exception: Optional[Any] = field(default=None)
     

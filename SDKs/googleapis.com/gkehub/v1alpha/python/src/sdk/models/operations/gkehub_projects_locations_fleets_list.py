@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class GkehubProjectsLocationsFleetsListPathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -27,20 +28,20 @@ class GkehubProjectsLocationsFleetsListQueryParams:
 
 @dataclass
 class GkehubProjectsLocationsFleetsListSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class GkehubProjectsLocationsFleetsListRequest:
-    path_params: GkehubProjectsLocationsFleetsListPathParams = field(default=None)
-    query_params: GkehubProjectsLocationsFleetsListQueryParams = field(default=None)
-    security: GkehubProjectsLocationsFleetsListSecurity = field(default=None)
+    path_params: GkehubProjectsLocationsFleetsListPathParams = field()
+    query_params: GkehubProjectsLocationsFleetsListQueryParams = field()
+    security: GkehubProjectsLocationsFleetsListSecurity = field()
     
 
 @dataclass
 class GkehubProjectsLocationsFleetsListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     list_fleets_response: Optional[shared.ListFleetsResponse] = field(default=None)
-    status_code: int = field(default=None)
     

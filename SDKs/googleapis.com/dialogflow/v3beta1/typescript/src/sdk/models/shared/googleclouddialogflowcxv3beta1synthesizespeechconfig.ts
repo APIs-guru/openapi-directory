@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudDialogflowCxV3beta1VoiceSelectionParams } from "./googleclouddialogflowcxv3beta1voiceselectionparams";
+
 
 
 // GoogleCloudDialogflowCxV3beta1SynthesizeSpeechConfig
@@ -7,18 +8,18 @@ import { GoogleCloudDialogflowCxV3beta1VoiceSelectionParams } from "./googleclou
  * Configuration of how speech should be synthesized.
 **/
 export class GoogleCloudDialogflowCxV3beta1SynthesizeSpeechConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=effectsProfileId" })
+  @SpeakeasyMetadata({ data: "json, name=effectsProfileId" })
   effectsProfileId?: string[];
 
-  @Metadata({ data: "json, name=pitch" })
+  @SpeakeasyMetadata({ data: "json, name=pitch" })
   pitch?: number;
 
-  @Metadata({ data: "json, name=speakingRate" })
+  @SpeakeasyMetadata({ data: "json, name=speakingRate" })
   speakingRate?: number;
 
-  @Metadata({ data: "json, name=voice" })
+  @SpeakeasyMetadata({ data: "json, name=voice" })
   voice?: GoogleCloudDialogflowCxV3beta1VoiceSelectionParams;
 
-  @Metadata({ data: "json, name=volumeGainDb" })
+  @SpeakeasyMetadata({ data: "json, name=volumeGainDb" })
   volumeGainDb?: number;
 }

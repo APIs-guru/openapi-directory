@@ -19,6 +19,8 @@ const (
 	WebTokenPermissionsEnumApproveApps                   WebTokenPermissionsEnum = "APPROVE_APPS"
 )
 
+// WebToken
+// A web token used to access the managed Google Play iframe.
 type WebToken struct {
 	EnabledFeatures []WebTokenEnabledFeaturesEnum `json:"enabledFeatures,omitempty"`
 	Name            *string                       `json:"name,omitempty"`

@@ -1,8 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SimpleAddressType } from "./simpleaddresstype";
 import { ElectionOfficial } from "./electionofficial";
-import { SimpleAddressType } from "./simpleaddresstype";
+
 
 
 // AdministrativeBody
@@ -10,48 +9,48 @@ import { SimpleAddressType } from "./simpleaddresstype";
  * Information about an election administrative body (e.g. County Board of Elections).
 **/
 export class AdministrativeBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=absenteeVotingInfoUrl" })
+  @SpeakeasyMetadata({ data: "json, name=absenteeVotingInfoUrl" })
   absenteeVotingInfoUrl?: string;
 
-  @Metadata({ data: "json, name=ballotInfoUrl" })
+  @SpeakeasyMetadata({ data: "json, name=ballotInfoUrl" })
   ballotInfoUrl?: string;
 
-  @Metadata({ data: "json, name=correspondenceAddress" })
+  @SpeakeasyMetadata({ data: "json, name=correspondenceAddress" })
   correspondenceAddress?: SimpleAddressType;
 
-  @Metadata({ data: "json, name=electionInfoUrl" })
+  @SpeakeasyMetadata({ data: "json, name=electionInfoUrl" })
   electionInfoUrl?: string;
 
-  @Metadata({ data: "json, name=electionNoticeText" })
+  @SpeakeasyMetadata({ data: "json, name=electionNoticeText" })
   electionNoticeText?: string;
 
-  @Metadata({ data: "json, name=electionNoticeUrl" })
+  @SpeakeasyMetadata({ data: "json, name=electionNoticeUrl" })
   electionNoticeUrl?: string;
 
-  @Metadata({ data: "json, name=electionOfficials", elemType: shared.ElectionOfficial })
+  @SpeakeasyMetadata({ data: "json, name=electionOfficials", elemType: ElectionOfficial })
   electionOfficials?: ElectionOfficial[];
 
-  @Metadata({ data: "json, name=electionRegistrationConfirmationUrl" })
+  @SpeakeasyMetadata({ data: "json, name=electionRegistrationConfirmationUrl" })
   electionRegistrationConfirmationUrl?: string;
 
-  @Metadata({ data: "json, name=electionRegistrationUrl" })
+  @SpeakeasyMetadata({ data: "json, name=electionRegistrationUrl" })
   electionRegistrationUrl?: string;
 
-  @Metadata({ data: "json, name=electionRulesUrl" })
+  @SpeakeasyMetadata({ data: "json, name=electionRulesUrl" })
   electionRulesUrl?: string;
 
-  @Metadata({ data: "json, name=hoursOfOperation" })
+  @SpeakeasyMetadata({ data: "json, name=hoursOfOperation" })
   hoursOfOperation?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=physicalAddress" })
+  @SpeakeasyMetadata({ data: "json, name=physicalAddress" })
   physicalAddress?: SimpleAddressType;
 
-  @Metadata({ data: "json, name=voter_services" })
+  @SpeakeasyMetadata({ data: "json, name=voter_services" })
   voterServices?: string[];
 
-  @Metadata({ data: "json, name=votingLocationFinderUrl" })
+  @SpeakeasyMetadata({ data: "json, name=votingLocationFinderUrl" })
   votingLocationFinderUrl?: string;
 }

@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class AnalyticsadminPropertiesUserLinksBatchGetPathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,14 +27,14 @@ class AnalyticsadminPropertiesUserLinksBatchGetQueryParams:
 
 @dataclass
 class AnalyticsadminPropertiesUserLinksBatchGetSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class AnalyticsadminPropertiesUserLinksBatchGetSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -44,14 +45,14 @@ class AnalyticsadminPropertiesUserLinksBatchGetSecurity:
 
 @dataclass
 class AnalyticsadminPropertiesUserLinksBatchGetRequest:
-    path_params: AnalyticsadminPropertiesUserLinksBatchGetPathParams = field(default=None)
-    query_params: AnalyticsadminPropertiesUserLinksBatchGetQueryParams = field(default=None)
-    security: AnalyticsadminPropertiesUserLinksBatchGetSecurity = field(default=None)
+    path_params: AnalyticsadminPropertiesUserLinksBatchGetPathParams = field()
+    query_params: AnalyticsadminPropertiesUserLinksBatchGetQueryParams = field()
+    security: AnalyticsadminPropertiesUserLinksBatchGetSecurity = field()
     
 
 @dataclass
 class AnalyticsadminPropertiesUserLinksBatchGetResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_analytics_admin_v1alpha_batch_get_user_links_response: Optional[shared.GoogleAnalyticsAdminV1alphaBatchGetUserLinksResponse] = field(default=None)
-    status_code: int = field(default=None)
     

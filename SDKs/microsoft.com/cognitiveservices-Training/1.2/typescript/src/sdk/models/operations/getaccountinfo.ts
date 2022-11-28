@@ -1,29 +1,30 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetAccountInfoHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=Training-Key" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Training-Key" })
   trainingKey: string;
 }
 
 
 export class GetAccountInfoRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: GetAccountInfoHeaders;
 }
 
 
 export class GetAccountInfoResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   account?: shared.Account;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

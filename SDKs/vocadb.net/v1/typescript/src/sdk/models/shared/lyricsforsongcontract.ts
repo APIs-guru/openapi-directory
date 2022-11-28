@@ -1,28 +1,29 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum LyricsForSongContractTranslationTypeEnum {
-    Original = "Original"
-,    Romanized = "Romanized"
-,    Translation = "Translation"
+    Original = "Original",
+    Romanized = "Romanized",
+    Translation = "Translation"
 }
 
 
 export class LyricsForSongContract extends SpeakeasyBase {
-  @Metadata({ data: "json, name=cultureCode" })
+  @SpeakeasyMetadata({ data: "json, name=cultureCode" })
   cultureCode?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: number;
 
-  @Metadata({ data: "json, name=source" })
+  @SpeakeasyMetadata({ data: "json, name=source" })
   source?: string;
 
-  @Metadata({ data: "json, name=translationType" })
+  @SpeakeasyMetadata({ data: "json, name=translationType" })
   translationType?: LyricsForSongContractTranslationTypeEnum;
 
-  @Metadata({ data: "json, name=url" })
+  @SpeakeasyMetadata({ data: "json, name=url" })
   url?: string;
 
-  @Metadata({ data: "json, name=value" })
+  @SpeakeasyMetadata({ data: "json, name=value" })
   value?: string;
 }

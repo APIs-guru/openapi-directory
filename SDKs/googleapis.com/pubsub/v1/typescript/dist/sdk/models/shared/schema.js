@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var SchemaTypeEnum;
 (function (SchemaTypeEnum) {
     SchemaTypeEnum["TypeUnspecified"] = "TYPE_UNSPECIFIED";
@@ -39,25 +39,49 @@ var Schema = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=definition" }),
+        SpeakeasyMetadata({ data: "json, name=definition" }),
         __metadata("design:type", String)
     ], Schema.prototype, "definition", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], Schema.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=revisionCreateTime" }),
+        SpeakeasyMetadata({ data: "json, name=revisionCreateTime" }),
         __metadata("design:type", String)
     ], Schema.prototype, "revisionCreateTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=revisionId" }),
+        SpeakeasyMetadata({ data: "json, name=revisionId" }),
         __metadata("design:type", String)
     ], Schema.prototype, "revisionId", void 0);
     __decorate([
-        Metadata({ data: "json, name=type" }),
+        SpeakeasyMetadata({ data: "json, name=type" }),
         __metadata("design:type", String)
     ], Schema.prototype, "type", void 0);
     return Schema;
 }(SpeakeasyBase));
 export { Schema };
+// SchemaInput
+/**
+ * A schema resource.
+**/
+var SchemaInput = /** @class */ (function (_super) {
+    __extends(SchemaInput, _super);
+    function SchemaInput() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=definition" }),
+        __metadata("design:type", String)
+    ], SchemaInput.prototype, "definition", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=name" }),
+        __metadata("design:type", String)
+    ], SchemaInput.prototype, "name", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=type" }),
+        __metadata("design:type", String)
+    ], SchemaInput.prototype, "type", void 0);
+    return SchemaInput;
+}(SpeakeasyBase));
+export { SchemaInput };

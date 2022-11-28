@@ -1,29 +1,30 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetApiIndexTermIndexTermIdPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=indexTermId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=indexTermId" })
   indexTermId: number;
 }
 
 
 export class GetApiIndexTermIndexTermIdRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetApiIndexTermIndexTermIdPathParams;
 }
 
 
 export class GetApiIndexTermIndexTermIdResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   erskineMayIndexTerm?: shared.ErskineMayIndexTerm;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

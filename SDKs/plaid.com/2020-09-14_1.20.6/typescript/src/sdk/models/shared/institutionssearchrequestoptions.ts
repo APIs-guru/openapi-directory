@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // InstitutionsSearchRequestOptions
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * An optional object to filter `/institutions/search` results.
 **/
 export class InstitutionsSearchRequestOptions extends SpeakeasyBase {
-  @Metadata({ data: "json, name=include_optional_metadata" })
+  @SpeakeasyMetadata({ data: "json, name=include_optional_metadata" })
   includeOptionalMetadata?: boolean;
 
-  @Metadata({ data: "json, name=include_payment_initiation_metadata" })
+  @SpeakeasyMetadata({ data: "json, name=include_payment_initiation_metadata" })
   includePaymentInitiationMetadata?: boolean;
 
-  @Metadata({ data: "json, name=oauth" })
+  @SpeakeasyMetadata({ data: "json, name=oauth" })
   oauth?: boolean;
 
-  @Metadata({ data: "json, name=payment_initiation" })
+  @SpeakeasyMetadata({ data: "json, name=payment_initiation" })
   paymentInitiation?: Map<string, any>;
 }

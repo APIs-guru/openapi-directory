@@ -1,5 +1,7 @@
 package shared
 
+// Encryption
+// Encryption settings.
 type Encryption struct {
 	Aes128    *Aes128Encryption     `json:"aes128,omitempty"`
 	Iv        *string               `json:"iv,omitempty"`

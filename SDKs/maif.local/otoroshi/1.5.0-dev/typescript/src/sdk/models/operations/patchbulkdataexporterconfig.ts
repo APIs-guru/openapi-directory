@@ -1,19 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class PatchBulkDataExporterConfigSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=basic" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=basic" })
   otoroshiAuth: shared.SchemeOtoroshiAuth;
-}
-
-
-export class PatchBulkDataExporterConfigRequest extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/ndjson", elemType: shared.Patch })
-  request?: shared.Patch[];
-
-  @Metadata()
-  security: PatchBulkDataExporterConfigSecurity;
 }
 
 export enum PatchBulkDataExporterConfig200ApplicationJsonStatusEnum {
@@ -26,24 +18,33 @@ export enum PatchBulkDataExporterConfig200ApplicationJsonStatusEnum {
  * The bulk response
 **/
 export class PatchBulkDataExporterConfig200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: boolean;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: PatchBulkDataExporterConfig200ApplicationJsonStatusEnum;
 
-  @Metadata({ data: "json, name=updated" })
+  @SpeakeasyMetadata({ data: "json, name=updated" })
   updated?: boolean;
 }
 
 
+export class PatchBulkDataExporterConfigRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "request, media_type=application/ndjson", elemType: shared.Patch })
+  request?: shared.Patch[];
+
+  @SpeakeasyMetadata()
+  security: PatchBulkDataExporterConfigSecurity;
+}
+
+
 export class PatchBulkDataExporterConfigResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata({ elemType: operations.PatchBulkDataExporterConfig200ApplicationJson })
+  @SpeakeasyMetadata({ elemType: PatchBulkDataExporterConfig200ApplicationJson })
   patchBulkDataExporterConfig200ApplicationJsonObjects?: PatchBulkDataExporterConfig200ApplicationJson[];
 }

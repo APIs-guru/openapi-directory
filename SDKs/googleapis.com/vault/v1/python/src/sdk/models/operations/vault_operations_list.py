@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class VaultOperationsListPathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -28,13 +29,13 @@ class VaultOperationsListQueryParams:
 
 @dataclass
 class VaultOperationsListRequest:
-    path_params: VaultOperationsListPathParams = field(default=None)
-    query_params: VaultOperationsListQueryParams = field(default=None)
+    path_params: VaultOperationsListPathParams = field()
+    query_params: VaultOperationsListQueryParams = field()
     
 
 @dataclass
 class VaultOperationsListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     list_operations_response: Optional[shared.ListOperationsResponse] = field(default=None)
-    status_code: int = field(default=None)
     

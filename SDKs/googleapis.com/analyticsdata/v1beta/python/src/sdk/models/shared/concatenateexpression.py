@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass_json
 @dataclass
 class ConcatenateExpression:
-    delimiter: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'delimiter' }})
-    dimension_names: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'dimensionNames' }})
+    r"""ConcatenateExpression
+    Used to combine dimension values to a single dimension.
+    """
+    
+    delimiter: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('delimiter') }})
+    dimension_names: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('dimensionNames') }})
     

@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import packagerepository
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class EffectiveGuestPolicySourcedPackageRepository:
-    package_repository: Optional[packagerepository.PackageRepository] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'packageRepository' }})
-    source: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'source' }})
+    r"""EffectiveGuestPolicySourcedPackageRepository
+    A guest policy package repository including its source.
+    """
+    
+    package_repository: Optional[PackageRepository] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('packageRepository') }})
+    source: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('source') }})
     

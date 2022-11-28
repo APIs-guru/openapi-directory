@@ -1,11 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
-
-export class CreateGroupCategoryRequest extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/json" })
-  request: shared.GroupCategory;
-}
 
 export enum CreateGroupCategory200ApplicationJsonActionEnum {
     CreateGroupCategory = "CreateGroupCategory"
@@ -13,35 +8,41 @@ export enum CreateGroupCategory200ApplicationJsonActionEnum {
 
 
 export class CreateGroupCategory200ApplicationJsonData extends SpeakeasyBase {
-  @Metadata({ data: "json, name=groupCategories", elemType: shared.GroupCategory })
+  @SpeakeasyMetadata({ data: "json, name=groupCategories", elemType: shared.GroupCategory })
   groupCategories: shared.GroupCategory[];
 }
 
 export enum CreateGroupCategory200ApplicationJsonResultEnum {
-    Success = "success"
-,    Error = "error"
+    Success = "success",
+    Error = "error"
 }
 
 
 export class CreateGroupCategory200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=action" })
+  @SpeakeasyMetadata({ data: "json, name=action" })
   action: CreateGroupCategory200ApplicationJsonActionEnum;
 
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data: CreateGroupCategory200ApplicationJsonData;
 
-  @Metadata({ data: "json, name=result" })
+  @SpeakeasyMetadata({ data: "json, name=result" })
   result: CreateGroupCategory200ApplicationJsonResultEnum;
 }
 
 
+export class CreateGroupCategoryRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request: shared.GroupCategory;
+}
+
+
 export class CreateGroupCategoryResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   createGroupCategory200ApplicationJsonObject?: CreateGroupCategory200ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // RemoveTagsInput
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Contains the parameters for RemoveTags.
 **/
 export class RemoveTagsInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=pipelineId" })
+  @SpeakeasyMetadata({ data: "json, name=pipelineId" })
   pipelineId: string;
 
-  @Metadata({ data: "json, name=tagKeys" })
+  @SpeakeasyMetadata({ data: "json, name=tagKeys" })
   tagKeys: string[];
 }

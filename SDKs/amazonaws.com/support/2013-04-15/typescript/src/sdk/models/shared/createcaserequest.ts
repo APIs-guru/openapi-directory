@@ -1,31 +1,32 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class CreateCaseRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=attachmentSetId" })
+  @SpeakeasyMetadata({ data: "json, name=attachmentSetId" })
   attachmentSetId?: string;
 
-  @Metadata({ data: "json, name=categoryCode" })
+  @SpeakeasyMetadata({ data: "json, name=categoryCode" })
   categoryCode?: string;
 
-  @Metadata({ data: "json, name=ccEmailAddresses" })
+  @SpeakeasyMetadata({ data: "json, name=ccEmailAddresses" })
   ccEmailAddresses?: string[];
 
-  @Metadata({ data: "json, name=communicationBody" })
+  @SpeakeasyMetadata({ data: "json, name=communicationBody" })
   communicationBody: string;
 
-  @Metadata({ data: "json, name=issueType" })
+  @SpeakeasyMetadata({ data: "json, name=issueType" })
   issueType?: string;
 
-  @Metadata({ data: "json, name=language" })
+  @SpeakeasyMetadata({ data: "json, name=language" })
   language?: string;
 
-  @Metadata({ data: "json, name=serviceCode" })
+  @SpeakeasyMetadata({ data: "json, name=serviceCode" })
   serviceCode?: string;
 
-  @Metadata({ data: "json, name=severityCode" })
+  @SpeakeasyMetadata({ data: "json, name=severityCode" })
   severityCode?: string;
 
-  @Metadata({ data: "json, name=subject" })
+  @SpeakeasyMetadata({ data: "json, name=subject" })
   subject: string;
 }

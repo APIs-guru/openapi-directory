@@ -1,8 +1,8 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
-from typing import Enum
+from enum import Enum
 
 class PollFieldsParameterEnum(str, Enum):
     ID = "id"

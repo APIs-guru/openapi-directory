@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // QueryStatistics
 /**
  * Contains the number of log events scanned by the query, the number of log events that matched the query criteria, and the total number of bytes in the log events that were scanned.
@@ -33,15 +33,15 @@ var QueryStatistics = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=bytesScanned" }),
+        SpeakeasyMetadata({ data: "json, name=bytesScanned" }),
         __metadata("design:type", Number)
     ], QueryStatistics.prototype, "bytesScanned", void 0);
     __decorate([
-        Metadata({ data: "json, name=recordsMatched" }),
+        SpeakeasyMetadata({ data: "json, name=recordsMatched" }),
         __metadata("design:type", Number)
     ], QueryStatistics.prototype, "recordsMatched", void 0);
     __decorate([
-        Metadata({ data: "json, name=recordsScanned" }),
+        SpeakeasyMetadata({ data: "json, name=recordsScanned" }),
         __metadata("design:type", Number)
     ], QueryStatistics.prototype, "recordsScanned", void 0);
     return QueryStatistics;

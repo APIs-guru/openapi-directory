@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ScalableDimensionEnum } from "./scalabledimensionenum";
 import { ServiceNamespaceEnum } from "./servicenamespaceenum";
 var DescribeScalableTargetsRequest = /** @class */ (function (_super) {
@@ -31,23 +31,23 @@ var DescribeScalableTargetsRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=MaxResults" }),
+        SpeakeasyMetadata({ data: "json, name=MaxResults" }),
         __metadata("design:type", Number)
     ], DescribeScalableTargetsRequest.prototype, "maxResults", void 0);
     __decorate([
-        Metadata({ data: "json, name=NextToken" }),
+        SpeakeasyMetadata({ data: "json, name=NextToken" }),
         __metadata("design:type", String)
     ], DescribeScalableTargetsRequest.prototype, "nextToken", void 0);
     __decorate([
-        Metadata({ data: "json, name=ResourceIds" }),
+        SpeakeasyMetadata({ data: "json, name=ResourceIds" }),
         __metadata("design:type", Array)
     ], DescribeScalableTargetsRequest.prototype, "resourceIds", void 0);
     __decorate([
-        Metadata({ data: "json, name=ScalableDimension" }),
+        SpeakeasyMetadata({ data: "json, name=ScalableDimension" }),
         __metadata("design:type", String)
     ], DescribeScalableTargetsRequest.prototype, "scalableDimension", void 0);
     __decorate([
-        Metadata({ data: "json, name=ServiceNamespace" }),
+        SpeakeasyMetadata({ data: "json, name=ServiceNamespace" }),
         __metadata("design:type", String)
     ], DescribeScalableTargetsRequest.prototype, "serviceNamespace", void 0);
     return DescribeScalableTargetsRequest;

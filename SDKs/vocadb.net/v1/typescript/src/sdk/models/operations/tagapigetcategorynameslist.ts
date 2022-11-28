@@ -1,45 +1,46 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum TagApiGetCategoryNamesListNameMatchModeEnum {
-    Auto = "Auto"
-,    Partial = "Partial"
-,    StartsWith = "StartsWith"
-,    Exact = "Exact"
-,    Words = "Words"
+    Auto = "Auto",
+    Partial = "Partial",
+    StartsWith = "StartsWith",
+    Exact = "Exact",
+    Words = "Words"
 }
 
 
 export class TagApiGetCategoryNamesListQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=nameMatchMode" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=nameMatchMode" })
   nameMatchMode?: TagApiGetCategoryNamesListNameMatchModeEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=query" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=query" })
   query?: string;
 }
 
 
 export class TagApiGetCategoryNamesListRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: TagApiGetCategoryNamesListQueryParams;
 }
 
 
 export class TagApiGetCategoryNamesListResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   tagApiGetCategoryNamesList200ApplicationJsonStrings?: string[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   tagApiGetCategoryNamesList200ApplicationJsonpStrings?: string[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   tagApiGetCategoryNamesList200TextJsonStrings?: string[];
 }

@@ -1,80 +1,81 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetGenresQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=enableImageTypes" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=enableImageTypes" })
   enableImageTypes?: shared.ImageTypeEnum[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=enableImages" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=enableImages" })
   enableImages?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=enableTotalRecordCount" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=enableTotalRecordCount" })
   enableTotalRecordCount?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=excludeItemTypes" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=excludeItemTypes" })
   excludeItemTypes?: string[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=fields" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=fields" })
   fields?: shared.ItemFieldsEnum[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=imageTypeLimit" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=imageTypeLimit" })
   imageTypeLimit?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=includeItemTypes" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=includeItemTypes" })
   includeItemTypes?: string[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=isFavorite" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=isFavorite" })
   isFavorite?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=limit" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=limit" })
   limit?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=nameLessThan" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=nameLessThan" })
   nameLessThan?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=nameStartsWith" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=nameStartsWith" })
   nameStartsWith?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=nameStartsWithOrGreater" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=nameStartsWithOrGreater" })
   nameStartsWithOrGreater?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=parentId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=parentId" })
   parentId?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=searchTerm" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=searchTerm" })
   searchTerm?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=startIndex" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=startIndex" })
   startIndex?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=userId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=userId" })
   userId?: string;
 }
 
 
 export class GetGenresSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
   customAuthentication: shared.SchemeCustomAuthentication;
 }
 
 
 export class GetGenresRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetGenresQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: GetGenresSecurity;
 }
 
 
 export class GetGenresResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   baseItemDtoQueryResult?: shared.BaseItemDtoQueryResult;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

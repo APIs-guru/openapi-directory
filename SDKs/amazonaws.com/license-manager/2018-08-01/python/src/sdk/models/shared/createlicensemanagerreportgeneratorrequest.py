@@ -1,20 +1,19 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import reportcontext
-from . import reportfrequency
-from . import tag
-from . import reporttype_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class CreateLicenseManagerReportGeneratorRequest:
-    client_token: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ClientToken' }})
-    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Description' }})
-    report_context: reportcontext.ReportContext = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ReportContext' }})
-    report_frequency: reportfrequency.ReportFrequency = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ReportFrequency' }})
-    report_generator_name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ReportGeneratorName' }})
-    tags: Optional[List[tag.Tag]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Tags' }})
-    type: List[reporttype_enum.ReportTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Type' }})
+    client_token: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('ClientToken') }})
+    report_context: ReportContext = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('ReportContext') }})
+    report_frequency: ReportFrequency = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('ReportFrequency') }})
+    report_generator_name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('ReportGeneratorName') }})
+    type: List[ReportTypeEnum] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Type') }})
+    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Description') }})
+    tags: Optional[List[Tag]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Tags') }})
     

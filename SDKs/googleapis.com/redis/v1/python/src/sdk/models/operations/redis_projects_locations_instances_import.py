@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class RedisProjectsLocationsInstancesImportPathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,21 +26,21 @@ class RedisProjectsLocationsInstancesImportQueryParams:
 
 @dataclass
 class RedisProjectsLocationsInstancesImportSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class RedisProjectsLocationsInstancesImportRequest:
-    path_params: RedisProjectsLocationsInstancesImportPathParams = field(default=None)
-    query_params: RedisProjectsLocationsInstancesImportQueryParams = field(default=None)
+    path_params: RedisProjectsLocationsInstancesImportPathParams = field()
+    query_params: RedisProjectsLocationsInstancesImportQueryParams = field()
+    security: RedisProjectsLocationsInstancesImportSecurity = field()
     request: Optional[shared.ImportInstanceRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: RedisProjectsLocationsInstancesImportSecurity = field(default=None)
     
 
 @dataclass
 class RedisProjectsLocationsInstancesImportResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     operation: Optional[shared.Operation] = field(default=None)
-    status_code: int = field(default=None)
     

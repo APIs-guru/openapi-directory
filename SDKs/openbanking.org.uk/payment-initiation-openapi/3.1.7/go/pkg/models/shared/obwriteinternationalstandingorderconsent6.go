@@ -11,16 +11,22 @@ const (
 	ObWriteInternationalStandingOrderConsent6DataAuthorisationAuthorisationTypeEnumSingle ObWriteInternationalStandingOrderConsent6DataAuthorisationAuthorisationTypeEnum = "Single"
 )
 
+// ObWriteInternationalStandingOrderConsent6DataAuthorisation
+// The authorisation type request from the TPP.
 type ObWriteInternationalStandingOrderConsent6DataAuthorisation struct {
 	AuthorisationType  ObWriteInternationalStandingOrderConsent6DataAuthorisationAuthorisationTypeEnum `json:"AuthorisationType"`
 	CompletionDateTime *time.Time                                                                      `json:"CompletionDateTime,omitempty"`
 }
 
+// ObWriteInternationalStandingOrderConsent6DataInitiationCreditor
+// Party to which an amount of money is due.
 type ObWriteInternationalStandingOrderConsent6DataInitiationCreditor struct {
 	Name          *string           `json:"Name,omitempty"`
 	PostalAddress *ObPostalAddress6 `json:"PostalAddress,omitempty"`
 }
 
+// ObWriteInternationalStandingOrderConsent6DataInitiationCreditorAccount
+// Provides the details to identify the beneficiary account.
 type ObWriteInternationalStandingOrderConsent6DataInitiationCreditorAccount struct {
 	Identification          string  `json:"Identification"`
 	Name                    string  `json:"Name"`
@@ -28,6 +34,9 @@ type ObWriteInternationalStandingOrderConsent6DataInitiationCreditorAccount stru
 	SecondaryIdentification *string `json:"SecondaryIdentification,omitempty"`
 }
 
+// ObWriteInternationalStandingOrderConsent6DataInitiationCreditorAgent
+// Party that manages the account on behalf of the account owner, that is manages the registration and booking of entries on the account, calculates balances on the account and provides information about the account.
+// This is the servicer of the beneficiary account.
 type ObWriteInternationalStandingOrderConsent6DataInitiationCreditorAgent struct {
 	Identification *string           `json:"Identification,omitempty"`
 	Name           *string           `json:"Name,omitempty"`
@@ -35,6 +44,8 @@ type ObWriteInternationalStandingOrderConsent6DataInitiationCreditorAgent struct
 	SchemeName     *string           `json:"SchemeName,omitempty"`
 }
 
+// ObWriteInternationalStandingOrderConsent6DataInitiationDebtorAccount
+// Provides the details to identify the debtor account.
 type ObWriteInternationalStandingOrderConsent6DataInitiationDebtorAccount struct {
 	Identification          string  `json:"Identification"`
 	Name                    *string `json:"Name,omitempty"`
@@ -42,11 +53,16 @@ type ObWriteInternationalStandingOrderConsent6DataInitiationDebtorAccount struct
 	SecondaryIdentification *string `json:"SecondaryIdentification,omitempty"`
 }
 
+// ObWriteInternationalStandingOrderConsent6DataInitiationInstructedAmount
+// Amount of money to be moved between the debtor and creditor, before deduction of charges, expressed in the currency as ordered by the initiating party.
+// Usage: This amount has to be transported unchanged through the transaction chain.
 type ObWriteInternationalStandingOrderConsent6DataInitiationInstructedAmount struct {
 	Amount   string `json:"Amount"`
 	Currency string `json:"Currency"`
 }
 
+// ObWriteInternationalStandingOrderConsent6DataInitiation
+// The Initiation payload is sent by the initiating party to the ASPSP. It is used to request movement of funds from the debtor account to a creditor for an international standing order.
 type ObWriteInternationalStandingOrderConsent6DataInitiation struct {
 	ChargeBearer           *ObChargeBearerType1CodeEnum                                            `json:"ChargeBearer,omitempty"`
 	Creditor               *ObWriteInternationalStandingOrderConsent6DataInitiationCreditor        `json:"Creditor,omitempty"`

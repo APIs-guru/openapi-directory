@@ -8,26 +8,18 @@ type DeleteUserPathParams struct {
 	Username string `pathParam:"style=simple,explode=false,name=username"`
 }
 
-type DeleteUserSecurityOption1 struct {
-	PersonalAccessToken shared.SchemePersonalAccessToken `security:"scheme,type=http,subtype=bearer"`
-}
-
-type DeleteUserSecurityOption2 struct {
-	Oauth shared.SchemeOauth `security:"scheme,type=oauth2"`
-}
-
 type DeleteUserSecurity struct {
-	Option1 *DeleteUserSecurityOption1 `security:"option"`
-	Option2 *DeleteUserSecurityOption2 `security:"option"`
+	PersonalAccessToken *shared.SchemePersonalAccessToken `security:"scheme,type=http,subtype=bearer"`
+	Oauth               *shared.SchemeOauth               `security:"scheme,type=oauth2"`
+}
+
+type DeleteUserDefaultApplicationJSON struct {
+	Errors []shared.ErrorObject `json:"errors,omitempty"`
 }
 
 type DeleteUserRequest struct {
 	PathParams DeleteUserPathParams
 	Security   DeleteUserSecurity
-}
-
-type DeleteUserDefaultApplicationJSON struct {
-	Errors []shared.ErrorObject `json:"errors,omitempty"`
 }
 
 type DeleteUserResponse struct {

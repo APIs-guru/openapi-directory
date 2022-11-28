@@ -1,15 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DeliveryError } from "./deliveryerror";
 import { IpReputation } from "./ipreputation";
 import { FeedbackLoop } from "./feedbackloop";
 
+
 export enum TrafficStatsDomainReputationEnum {
-    ReputationCategoryUnspecified = "REPUTATION_CATEGORY_UNSPECIFIED"
-,    High = "HIGH"
-,    Medium = "MEDIUM"
-,    Low = "LOW"
-,    Bad = "BAD"
+    ReputationCategoryUnspecified = "REPUTATION_CATEGORY_UNSPECIFIED",
+    High = "HIGH",
+    Medium = "MEDIUM",
+    Low = "LOW",
+    Bad = "BAD"
 }
 
 
@@ -18,36 +18,36 @@ export enum TrafficStatsDomainReputationEnum {
  * Email traffic statistics pertaining to a specific date.
 **/
 export class TrafficStats extends SpeakeasyBase {
-  @Metadata({ data: "json, name=deliveryErrors", elemType: shared.DeliveryError })
+  @SpeakeasyMetadata({ data: "json, name=deliveryErrors", elemType: DeliveryError })
   deliveryErrors?: DeliveryError[];
 
-  @Metadata({ data: "json, name=dkimSuccessRatio" })
+  @SpeakeasyMetadata({ data: "json, name=dkimSuccessRatio" })
   dkimSuccessRatio?: number;
 
-  @Metadata({ data: "json, name=dmarcSuccessRatio" })
+  @SpeakeasyMetadata({ data: "json, name=dmarcSuccessRatio" })
   dmarcSuccessRatio?: number;
 
-  @Metadata({ data: "json, name=domainReputation" })
+  @SpeakeasyMetadata({ data: "json, name=domainReputation" })
   domainReputation?: TrafficStatsDomainReputationEnum;
 
-  @Metadata({ data: "json, name=inboundEncryptionRatio" })
+  @SpeakeasyMetadata({ data: "json, name=inboundEncryptionRatio" })
   inboundEncryptionRatio?: number;
 
-  @Metadata({ data: "json, name=ipReputations", elemType: shared.IpReputation })
+  @SpeakeasyMetadata({ data: "json, name=ipReputations", elemType: IpReputation })
   ipReputations?: IpReputation[];
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=outboundEncryptionRatio" })
+  @SpeakeasyMetadata({ data: "json, name=outboundEncryptionRatio" })
   outboundEncryptionRatio?: number;
 
-  @Metadata({ data: "json, name=spammyFeedbackLoops", elemType: shared.FeedbackLoop })
+  @SpeakeasyMetadata({ data: "json, name=spammyFeedbackLoops", elemType: FeedbackLoop })
   spammyFeedbackLoops?: FeedbackLoop[];
 
-  @Metadata({ data: "json, name=spfSuccessRatio" })
+  @SpeakeasyMetadata({ data: "json, name=spfSuccessRatio" })
   spfSuccessRatio?: number;
 
-  @Metadata({ data: "json, name=userReportedSpamRatio" })
+  @SpeakeasyMetadata({ data: "json, name=userReportedSpamRatio" })
   userReportedSpamRatio?: number;
 }

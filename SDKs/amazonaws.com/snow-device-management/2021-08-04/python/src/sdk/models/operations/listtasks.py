@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 class ListTasksStateEnum(str, Enum):
@@ -28,17 +32,17 @@ class ListTasksHeaders:
 
 @dataclass
 class ListTasksRequest:
-    query_params: ListTasksQueryParams = field(default=None)
-    headers: ListTasksHeaders = field(default=None)
+    headers: ListTasksHeaders = field()
+    query_params: ListTasksQueryParams = field()
     
 
 @dataclass
 class ListTasksResponse:
+    content_type: str = field()
+    status_code: int = field()
     access_denied_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     internal_server_exception: Optional[Any] = field(default=None)
     list_tasks_output: Optional[shared.ListTasksOutput] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     validation_exception: Optional[Any] = field(default=None)
     

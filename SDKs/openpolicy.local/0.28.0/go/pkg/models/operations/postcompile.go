@@ -11,11 +11,6 @@ type PostCompileQueryParams struct {
 	Pretty     *bool   `queryParam:"style=form,explode=true,name=pretty"`
 }
 
-type PostCompileRequest struct {
-	QueryParams PostCompileQueryParams
-	Request     map[string]interface{} `request:"mediaType=application/json"`
-}
-
 type PostCompile200ApplicationJSONExplanationLocalsKey struct {
 	Type  *string `json:"type,omitempty"`
 	Value *string `json:"value,omitempty"`
@@ -36,6 +31,9 @@ type PostCompile200ApplicationJSONExplanationNodeTerms struct {
 	Value *string `json:"value,omitempty"`
 }
 
+// PostCompile200ApplicationJSONExplanationNode
+// The AST element associated with the evaluation step.
+// https://godoc.org/github.com/open-policy-agent/opa/ast - AST
 type PostCompile200ApplicationJSONExplanationNode struct {
 	Index *float64                                            `json:"index,omitempty"`
 	Terms []PostCompile200ApplicationJSONExplanationNodeTerms `json:"terms,omitempty"`
@@ -96,6 +94,11 @@ type PostCompile200ApplicationJSON struct {
 	Explanation []PostCompile200ApplicationJSONExplanation `json:"explanation,omitempty"`
 	Metrics     *PostCompile200ApplicationJSONMetrics      `json:"metrics,omitempty"`
 	Result      []interface{}                              `json:"result,omitempty"`
+}
+
+type PostCompileRequest struct {
+	QueryParams PostCompileQueryParams
+	Request     map[string]interface{} `request:"mediaType=application/json"`
 }
 
 type PostCompileResponse struct {

@@ -1,17 +1,16 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Location } from "./location";
 import { CatalogEntry } from "./catalogentry";
-import { CatalogEntry } from "./catalogentry";
+
 
 
 export class GetMappingRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Location" })
+  @SpeakeasyMetadata({ data: "json, name=Location" })
   location?: Location;
 
-  @Metadata({ data: "json, name=Sinks", elemType: shared.CatalogEntry })
+  @SpeakeasyMetadata({ data: "json, name=Sinks", elemType: CatalogEntry })
   sinks?: CatalogEntry[];
 
-  @Metadata({ data: "json, name=Source" })
+  @SpeakeasyMetadata({ data: "json, name=Source" })
   source: CatalogEntry;
 }

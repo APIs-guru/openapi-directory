@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var GetNamesDecisionsYearOutputFormatEnum;
 (function (GetNamesDecisionsYearOutputFormatEnum) {
     GetNamesDecisionsYearOutputFormatEnum["Json"] = "json";
@@ -47,47 +47,47 @@ var GetNamesDecisionsYearQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=embed" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=embed" }),
         __metadata("design:type", Number)
     ], GetNamesDecisionsYearQueryParams.prototype, "embed", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=featureCategory" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=featureCategory" }),
         __metadata("design:type", String)
     ], GetNamesDecisionsYearQueryParams.prototype, "featureCategory", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=featureClass" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=featureClass" }),
         __metadata("design:type", String)
     ], GetNamesDecisionsYearQueryParams.prototype, "featureClass", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=featureType" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=featureType" }),
         __metadata("design:type", String)
     ], GetNamesDecisionsYearQueryParams.prototype, "featureType", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=itemsPerPage" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=itemsPerPage" }),
         __metadata("design:type", Number)
     ], GetNamesDecisionsYearQueryParams.prototype, "itemsPerPage", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=outputFormat" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=outputFormat" }),
         __metadata("design:type", String)
     ], GetNamesDecisionsYearQueryParams.prototype, "outputFormat", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=outputSRS" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=outputSRS" }),
         __metadata("design:type", Number)
     ], GetNamesDecisionsYearQueryParams.prototype, "outputSrs", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=outputStyle" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=outputStyle" }),
         __metadata("design:type", String)
     ], GetNamesDecisionsYearQueryParams.prototype, "outputStyle", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=sortBy" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sortBy" }),
         __metadata("design:type", String)
     ], GetNamesDecisionsYearQueryParams.prototype, "sortBy", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=startIndex" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=startIndex" }),
         __metadata("design:type", Number)
     ], GetNamesDecisionsYearQueryParams.prototype, "startIndex", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=year" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=year" }),
         __metadata("design:type", Number)
     ], GetNamesDecisionsYearQueryParams.prototype, "year", void 0);
     return GetNamesDecisionsYearQueryParams;
@@ -99,7 +99,7 @@ var GetNamesDecisionsYearRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetNamesDecisionsYearQueryParams)
     ], GetNamesDecisionsYearRequest.prototype, "queryParams", void 0);
     return GetNamesDecisionsYearRequest;
@@ -111,11 +111,11 @@ var GetNamesDecisionsYearResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetNamesDecisionsYearResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetNamesDecisionsYearResponse.prototype, "statusCode", void 0);
     return GetNamesDecisionsYearResponse;

@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class Endpoint extends SpeakeasyBase {
-  @Metadata({ data: "json, name=address" })
+  @SpeakeasyMetadata({ data: "json, name=address" })
   address?: string;
 
-  @Metadata({ data: "json, name=connectionType" })
+  @SpeakeasyMetadata({ data: "json, name=connectionType" })
   connectionType?: string;
 
-  @Metadata({ data: "json, name=use" })
+  @SpeakeasyMetadata({ data: "json, name=use" })
   use?: string;
 }

@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { DataResource } from "./dataresource";
 import { ReadWriteTypeEnum } from "./readwritetypeenum";
 // EventSelector
 /**
@@ -35,19 +35,19 @@ var EventSelector = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=DataResources", elemType: shared.DataResource }),
+        SpeakeasyMetadata({ data: "json, name=DataResources", elemType: DataResource }),
         __metadata("design:type", Array)
     ], EventSelector.prototype, "dataResources", void 0);
     __decorate([
-        Metadata({ data: "json, name=ExcludeManagementEventSources" }),
+        SpeakeasyMetadata({ data: "json, name=ExcludeManagementEventSources" }),
         __metadata("design:type", Array)
     ], EventSelector.prototype, "excludeManagementEventSources", void 0);
     __decorate([
-        Metadata({ data: "json, name=IncludeManagementEvents" }),
+        SpeakeasyMetadata({ data: "json, name=IncludeManagementEvents" }),
         __metadata("design:type", Boolean)
     ], EventSelector.prototype, "includeManagementEvents", void 0);
     __decorate([
-        Metadata({ data: "json, name=ReadWriteType" }),
+        SpeakeasyMetadata({ data: "json, name=ReadWriteType" }),
         __metadata("design:type", String)
     ], EventSelector.prototype, "readWriteType", void 0);
     return EventSelector;

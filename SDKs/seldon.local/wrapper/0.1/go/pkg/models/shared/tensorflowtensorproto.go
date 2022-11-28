@@ -1,5 +1,7 @@
 package shared
 
+// TensorflowTensorProto
+// Protocol buffer representing a tensor.
 type TensorflowTensorProto struct {
 	BoolVal           []bool                             `json:"bool_val,omitempty"`
 	DcomplexVal       []float64                          `json:"dcomplex_val,omitempty"`

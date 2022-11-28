@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Tag } from "./tag";
+
 
 
 // UpdateTagsForDomainRequest
@@ -8,9 +8,9 @@ import { Tag } from "./tag";
  * The UpdateTagsForDomainRequest includes the following elements.
 **/
 export class UpdateTagsForDomainRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DomainName" })
+  @SpeakeasyMetadata({ data: "json, name=DomainName" })
   domainName: string;
 
-  @Metadata({ data: "json, name=TagsToUpdate", elemType: shared.Tag })
+  @SpeakeasyMetadata({ data: "json, name=TagsToUpdate", elemType: Tag })
   tagsToUpdate?: Tag[];
 }

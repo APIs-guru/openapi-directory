@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class AssociateHostedConnectionRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=connectionId" })
+  @SpeakeasyMetadata({ data: "json, name=connectionId" })
   connectionId: string;
 
-  @Metadata({ data: "json, name=parentConnectionId" })
+  @SpeakeasyMetadata({ data: "json, name=parentConnectionId" })
   parentConnectionId: string;
 }

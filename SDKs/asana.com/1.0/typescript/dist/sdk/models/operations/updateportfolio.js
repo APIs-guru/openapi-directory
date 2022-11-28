@@ -1,0 +1,122 @@
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import * as shared from "../shared";
+var UpdatePortfolioPathParams = /** @class */ (function (_super) {
+    __extends(UpdatePortfolioPathParams, _super);
+    function UpdatePortfolioPathParams() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=portfolio_gid" }),
+        __metadata("design:type", String)
+    ], UpdatePortfolioPathParams.prototype, "portfolioGid", void 0);
+    return UpdatePortfolioPathParams;
+}(SpeakeasyBase));
+export { UpdatePortfolioPathParams };
+var UpdatePortfolioQueryParams = /** @class */ (function (_super) {
+    __extends(UpdatePortfolioQueryParams, _super);
+    function UpdatePortfolioQueryParams() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=opt_fields" }),
+        __metadata("design:type", Array)
+    ], UpdatePortfolioQueryParams.prototype, "optFields", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=opt_pretty" }),
+        __metadata("design:type", Boolean)
+    ], UpdatePortfolioQueryParams.prototype, "optPretty", void 0);
+    return UpdatePortfolioQueryParams;
+}(SpeakeasyBase));
+export { UpdatePortfolioQueryParams };
+var UpdatePortfolioRequestBodyInput = /** @class */ (function (_super) {
+    __extends(UpdatePortfolioRequestBodyInput, _super);
+    function UpdatePortfolioRequestBodyInput() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=data" }),
+        __metadata("design:type", shared.PortfolioRequestInput)
+    ], UpdatePortfolioRequestBodyInput.prototype, "data", void 0);
+    return UpdatePortfolioRequestBodyInput;
+}(SpeakeasyBase));
+export { UpdatePortfolioRequestBodyInput };
+var UpdatePortfolio200ApplicationJson = /** @class */ (function (_super) {
+    __extends(UpdatePortfolio200ApplicationJson, _super);
+    function UpdatePortfolio200ApplicationJson() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=data" }),
+        __metadata("design:type", shared.PortfolioResponse)
+    ], UpdatePortfolio200ApplicationJson.prototype, "data", void 0);
+    return UpdatePortfolio200ApplicationJson;
+}(SpeakeasyBase));
+export { UpdatePortfolio200ApplicationJson };
+var UpdatePortfolioRequest = /** @class */ (function (_super) {
+    __extends(UpdatePortfolioRequest, _super);
+    function UpdatePortfolioRequest() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", UpdatePortfolioPathParams)
+    ], UpdatePortfolioRequest.prototype, "pathParams", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", UpdatePortfolioQueryParams)
+    ], UpdatePortfolioRequest.prototype, "queryParams", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
+        __metadata("design:type", UpdatePortfolioRequestBodyInput)
+    ], UpdatePortfolioRequest.prototype, "request", void 0);
+    return UpdatePortfolioRequest;
+}(SpeakeasyBase));
+export { UpdatePortfolioRequest };
+var UpdatePortfolioResponse = /** @class */ (function (_super) {
+    __extends(UpdatePortfolioResponse, _super);
+    function UpdatePortfolioResponse() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", String)
+    ], UpdatePortfolioResponse.prototype, "contentType", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", shared.ErrorResponse)
+    ], UpdatePortfolioResponse.prototype, "errorResponse", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", Number)
+    ], UpdatePortfolioResponse.prototype, "statusCode", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", UpdatePortfolio200ApplicationJson)
+    ], UpdatePortfolioResponse.prototype, "updatePortfolio200ApplicationJsonObject", void 0);
+    return UpdatePortfolioResponse;
+}(SpeakeasyBase));
+export { UpdatePortfolioResponse };

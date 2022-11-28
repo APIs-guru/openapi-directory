@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // SshKey
@@ -7,15 +8,26 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * 
 **/
 export class SshKey extends SpeakeasyBase {
-  @Metadata({ data: "json, name=created" })
+  @SpeakeasyMetadata({ data: "json, name=created" })
   created?: Date;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: number;
 
-  @Metadata({ data: "json, name=label" })
+  @SpeakeasyMetadata({ data: "json, name=label" })
   label?: string;
 
-  @Metadata({ data: "json, name=ssh_key" })
+  @SpeakeasyMetadata({ data: "json, name=ssh_key" })
   sshKey?: string;
+}
+
+
+// SshKeyInput
+/** 
+ * A credential object for authenticating a User's secure shell connection to a Linode.
+ * 
+**/
+export class SshKeyInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=label" })
+  label?: string;
 }

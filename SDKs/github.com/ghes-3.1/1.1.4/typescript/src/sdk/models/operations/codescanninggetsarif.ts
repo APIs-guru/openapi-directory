@@ -1,50 +1,51 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class CodeScanningGetSarifPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=owner" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=owner" })
   owner: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=repo" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=repo" })
   repo: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=sarif_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=sarif_id" })
   sarifId: string;
 }
 
 
-export class CodeScanningGetSarifRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: CodeScanningGetSarifPathParams;
-}
-
-
 export class CodeScanningGetSarif503ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=code" })
+  @SpeakeasyMetadata({ data: "json, name=code" })
   code?: string;
 
-  @Metadata({ data: "json, name=documentation_url" })
+  @SpeakeasyMetadata({ data: "json, name=documentation_url" })
   documentationUrl?: string;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
+export class CodeScanningGetSarifRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: CodeScanningGetSarifPathParams;
+}
+
+
 export class CodeScanningGetSarifResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   basicError?: shared.BasicError;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   codeScanningSarifsStatus?: shared.CodeScanningSarifsStatus;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   codeScanningGetSarif503ApplicationJsonObject?: CodeScanningGetSarif503ApplicationJson;
 }

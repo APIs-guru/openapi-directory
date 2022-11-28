@@ -1,6 +1,7 @@
 
 
+
 export enum EvaluationMethodEnum {
-    Batch = "BATCH"
-,    Serial = "SERIAL"
+    Batch = "BATCH",
+    Serial = "SERIAL"
 }

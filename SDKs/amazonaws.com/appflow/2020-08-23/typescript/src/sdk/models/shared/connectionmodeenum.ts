@@ -1,6 +1,7 @@
 
 
+
 export enum ConnectionModeEnum {
-    Public = "Public"
-,    Private = "Private"
+    Public = "Public",
+    Private = "Private"
 }

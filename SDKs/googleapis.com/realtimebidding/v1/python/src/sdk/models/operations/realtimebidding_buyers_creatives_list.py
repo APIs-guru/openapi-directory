@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class RealtimebiddingBuyersCreativesListPathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 class RealtimebiddingBuyersCreativesListViewEnum(str, Enum):
     CREATIVE_VIEW_UNSPECIFIED = "CREATIVE_VIEW_UNSPECIFIED"
@@ -34,20 +35,20 @@ class RealtimebiddingBuyersCreativesListQueryParams:
 
 @dataclass
 class RealtimebiddingBuyersCreativesListSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class RealtimebiddingBuyersCreativesListRequest:
-    path_params: RealtimebiddingBuyersCreativesListPathParams = field(default=None)
-    query_params: RealtimebiddingBuyersCreativesListQueryParams = field(default=None)
-    security: RealtimebiddingBuyersCreativesListSecurity = field(default=None)
+    path_params: RealtimebiddingBuyersCreativesListPathParams = field()
+    query_params: RealtimebiddingBuyersCreativesListQueryParams = field()
+    security: RealtimebiddingBuyersCreativesListSecurity = field()
     
 
 @dataclass
 class RealtimebiddingBuyersCreativesListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     list_creatives_response: Optional[shared.ListCreativesResponse] = field(default=None)
-    status_code: int = field(default=None)
     

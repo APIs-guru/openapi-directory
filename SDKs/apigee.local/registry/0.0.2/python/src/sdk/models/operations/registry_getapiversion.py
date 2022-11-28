@@ -4,19 +4,19 @@ from typing import Any,Optional
 
 @dataclass
 class RegistryGetAPIVersionPathParams:
-    api: str = field(default=None, metadata={'path_param': { 'field_name': 'api', 'style': 'simple', 'explode': False }})
-    project: str = field(default=None, metadata={'path_param': { 'field_name': 'project', 'style': 'simple', 'explode': False }})
-    version: str = field(default=None, metadata={'path_param': { 'field_name': 'version', 'style': 'simple', 'explode': False }})
+    api: str = field(metadata={'path_param': { 'field_name': 'api', 'style': 'simple', 'explode': False }})
+    project: str = field(metadata={'path_param': { 'field_name': 'project', 'style': 'simple', 'explode': False }})
+    version: str = field(metadata={'path_param': { 'field_name': 'version', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class RegistryGetAPIVersionRequest:
-    path_params: RegistryGetAPIVersionPathParams = field(default=None)
+    path_params: RegistryGetAPIVersionPathParams = field()
     
 
 @dataclass
 class RegistryGetAPIVersionResponse:
+    content_type: str = field()
+    status_code: int = field()
     api_version: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

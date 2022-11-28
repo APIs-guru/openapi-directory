@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ListDeploymentInstancesOutput
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Represents the output of a <code>ListDeploymentInstances</code> operation.
 **/
 export class ListDeploymentInstancesOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=instancesList" })
+  @SpeakeasyMetadata({ data: "json, name=instancesList" })
   instancesList?: string[];
 
-  @Metadata({ data: "json, name=nextToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextToken" })
   nextToken?: string;
 }

@@ -1,15 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class PostServersIdActionsRemoveFromPlacementGroupPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" })
   id: number;
-}
-
-
-export class PostServersIdActionsRemoveFromPlacementGroupRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: PostServersIdActionsRemoveFromPlacementGroupPathParams;
 }
 
 
@@ -18,69 +13,75 @@ export class PostServersIdActionsRemoveFromPlacementGroupRequest extends Speakea
  * Error message for the Action if error occurred, otherwise null
 **/
 export class PostServersIdActionsRemoveFromPlacementGroupActionResponseActionError extends SpeakeasyBase {
-  @Metadata({ data: "json, name=code" })
+  @SpeakeasyMetadata({ data: "json, name=code" })
   code: string;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message: string;
 }
 
 
 export class PostServersIdActionsRemoveFromPlacementGroupActionResponseActionResources extends SpeakeasyBase {
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: number;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type: string;
 }
 
 export enum PostServersIdActionsRemoveFromPlacementGroupActionResponseActionStatusEnum {
-    Success = "success"
-,    Running = "running"
-,    Error = "error"
+    Success = "success",
+    Running = "running",
+    Error = "error"
 }
 
 
 export class PostServersIdActionsRemoveFromPlacementGroupActionResponseAction extends SpeakeasyBase {
-  @Metadata({ data: "json, name=command" })
+  @SpeakeasyMetadata({ data: "json, name=command" })
   command: string;
 
-  @Metadata({ data: "json, name=error" })
+  @SpeakeasyMetadata({ data: "json, name=error" })
   error: PostServersIdActionsRemoveFromPlacementGroupActionResponseActionError;
 
-  @Metadata({ data: "json, name=finished" })
+  @SpeakeasyMetadata({ data: "json, name=finished" })
   finished: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: number;
 
-  @Metadata({ data: "json, name=progress" })
+  @SpeakeasyMetadata({ data: "json, name=progress" })
   progress: number;
 
-  @Metadata({ data: "json, name=resources", elemType: operations.PostServersIdActionsRemoveFromPlacementGroupActionResponseActionResources })
+  @SpeakeasyMetadata({ data: "json, name=resources", elemType: PostServersIdActionsRemoveFromPlacementGroupActionResponseActionResources })
   resources: PostServersIdActionsRemoveFromPlacementGroupActionResponseActionResources[];
 
-  @Metadata({ data: "json, name=started" })
+  @SpeakeasyMetadata({ data: "json, name=started" })
   started: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status: PostServersIdActionsRemoveFromPlacementGroupActionResponseActionStatusEnum;
 }
 
 
 export class PostServersIdActionsRemoveFromPlacementGroupActionResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=action" })
+  @SpeakeasyMetadata({ data: "json, name=action" })
   action: PostServersIdActionsRemoveFromPlacementGroupActionResponseAction;
 }
 
 
+export class PostServersIdActionsRemoveFromPlacementGroupRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: PostServersIdActionsRemoveFromPlacementGroupPathParams;
+}
+
+
 export class PostServersIdActionsRemoveFromPlacementGroupResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   actionResponse?: PostServersIdActionsRemoveFromPlacementGroupActionResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

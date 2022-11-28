@@ -1,11 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { WorkflowExecution } from "./workflowexecution";
 
 
+
 export class DescribeWorkflowExecutionInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=domain" })
+  @SpeakeasyMetadata({ data: "json, name=domain" })
   domain: string;
 
-  @Metadata({ data: "json, name=execution" })
+  @SpeakeasyMetadata({ data: "json, name=execution" })
   execution: WorkflowExecution;
 }

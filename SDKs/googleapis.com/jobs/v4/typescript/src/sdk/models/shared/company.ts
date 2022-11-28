@@ -1,15 +1,16 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CompanyDerivedInfo } from "./companyderivedinfo";
 
+
 export enum CompanySizeEnum {
-    CompanySizeUnspecified = "COMPANY_SIZE_UNSPECIFIED"
-,    Mini = "MINI"
-,    Small = "SMALL"
-,    Smedium = "SMEDIUM"
-,    Medium = "MEDIUM"
-,    Big = "BIG"
-,    Bigger = "BIGGER"
-,    Giant = "GIANT"
+    CompanySizeUnspecified = "COMPANY_SIZE_UNSPECIFIED",
+    Mini = "MINI",
+    Small = "SMALL",
+    Smedium = "SMEDIUM",
+    Medium = "MEDIUM",
+    Big = "BIG",
+    Bigger = "BIGGER",
+    Giant = "GIANT"
 }
 
 
@@ -18,42 +19,85 @@ export enum CompanySizeEnum {
  * A Company resource represents a company in the service. A company is the entity that owns job postings, that is, the hiring entity responsible for employing applicants for the job position.
 **/
 export class Company extends SpeakeasyBase {
-  @Metadata({ data: "json, name=careerSiteUri" })
+  @SpeakeasyMetadata({ data: "json, name=careerSiteUri" })
   careerSiteUri?: string;
 
-  @Metadata({ data: "json, name=derivedInfo" })
+  @SpeakeasyMetadata({ data: "json, name=derivedInfo" })
   derivedInfo?: CompanyDerivedInfo;
 
-  @Metadata({ data: "json, name=displayName" })
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
   displayName?: string;
 
-  @Metadata({ data: "json, name=eeoText" })
+  @SpeakeasyMetadata({ data: "json, name=eeoText" })
   eeoText?: string;
 
-  @Metadata({ data: "json, name=externalId" })
+  @SpeakeasyMetadata({ data: "json, name=externalId" })
   externalId?: string;
 
-  @Metadata({ data: "json, name=headquartersAddress" })
+  @SpeakeasyMetadata({ data: "json, name=headquartersAddress" })
   headquartersAddress?: string;
 
-  @Metadata({ data: "json, name=hiringAgency" })
+  @SpeakeasyMetadata({ data: "json, name=hiringAgency" })
   hiringAgency?: boolean;
 
-  @Metadata({ data: "json, name=imageUri" })
+  @SpeakeasyMetadata({ data: "json, name=imageUri" })
   imageUri?: string;
 
-  @Metadata({ data: "json, name=keywordSearchableJobCustomAttributes" })
+  @SpeakeasyMetadata({ data: "json, name=keywordSearchableJobCustomAttributes" })
   keywordSearchableJobCustomAttributes?: string[];
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=size" })
+  @SpeakeasyMetadata({ data: "json, name=size" })
   size?: CompanySizeEnum;
 
-  @Metadata({ data: "json, name=suspended" })
+  @SpeakeasyMetadata({ data: "json, name=suspended" })
   suspended?: boolean;
 
-  @Metadata({ data: "json, name=websiteUri" })
+  @SpeakeasyMetadata({ data: "json, name=websiteUri" })
+  websiteUri?: string;
+}
+
+
+// CompanyInput
+/** 
+ * A Company resource represents a company in the service. A company is the entity that owns job postings, that is, the hiring entity responsible for employing applicants for the job position.
+**/
+export class CompanyInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=careerSiteUri" })
+  careerSiteUri?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=derivedInfo" })
+  derivedInfo?: CompanyDerivedInfo;
+
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
+  displayName?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=eeoText" })
+  eeoText?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=externalId" })
+  externalId?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=headquartersAddress" })
+  headquartersAddress?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=hiringAgency" })
+  hiringAgency?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=imageUri" })
+  imageUri?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=keywordSearchableJobCustomAttributes" })
+  keywordSearchableJobCustomAttributes?: string[];
+
+  @SpeakeasyMetadata({ data: "json, name=name" })
+  name?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=size" })
+  size?: CompanySizeEnum;
+
+  @SpeakeasyMetadata({ data: "json, name=websiteUri" })
   websiteUri?: string;
 }

@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Repository } from "./repository";
+
 
 
 // ListRepositoriesResponse
@@ -8,9 +8,9 @@ import { Repository } from "./repository";
  * The response from listing repositories.
 **/
 export class ListRepositoriesResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 
-  @Metadata({ data: "json, name=repositories", elemType: shared.Repository })
+  @SpeakeasyMetadata({ data: "json, name=repositories", elemType: Repository })
   repositories?: Repository[];
 }

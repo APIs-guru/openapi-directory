@@ -1,6 +1,7 @@
 
 
+
 export enum ExecutionStatusEnum {
-    Open = "OPEN"
-,    Closed = "CLOSED"
+    Open = "OPEN",
+    Closed = "CLOSED"
 }

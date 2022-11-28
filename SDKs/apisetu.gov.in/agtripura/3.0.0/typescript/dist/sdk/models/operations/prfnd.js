@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var PrfndRequestBodyCertificateParameters = /** @class */ (function (_super) {
     __extends(PrfndRequestBodyCertificateParameters, _super);
@@ -30,11 +30,11 @@ var PrfndRequestBodyCertificateParameters = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=AC_NO" }),
+        SpeakeasyMetadata({ data: "json, name=AC_NO" }),
         __metadata("design:type", String)
     ], PrfndRequestBodyCertificateParameters.prototype, "acNo", void 0);
     __decorate([
-        Metadata({ data: "json, name=DOB" }),
+        SpeakeasyMetadata({ data: "json, name=DOB" }),
         __metadata("design:type", String)
     ], PrfndRequestBodyCertificateParameters.prototype, "dob", void 0);
     return PrfndRequestBodyCertificateParameters;
@@ -50,19 +50,19 @@ var PrfndRequestBody = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=certificateParameters" }),
+        SpeakeasyMetadata({ data: "json, name=certificateParameters" }),
         __metadata("design:type", PrfndRequestBodyCertificateParameters)
     ], PrfndRequestBody.prototype, "certificateParameters", void 0);
     __decorate([
-        Metadata({ data: "json, name=consentArtifact" }),
+        SpeakeasyMetadata({ data: "json, name=consentArtifact" }),
         __metadata("design:type", Object)
     ], PrfndRequestBody.prototype, "consentArtifact", void 0);
     __decorate([
-        Metadata({ data: "json, name=format" }),
+        SpeakeasyMetadata({ data: "json, name=format" }),
         __metadata("design:type", String)
     ], PrfndRequestBody.prototype, "format", void 0);
     __decorate([
-        Metadata({ data: "json, name=txnId" }),
+        SpeakeasyMetadata({ data: "json, name=txnId" }),
         __metadata("design:type", String)
     ], PrfndRequestBody.prototype, "txnId", void 0);
     return PrfndRequestBody;
@@ -74,32 +74,16 @@ var PrfndSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeApiKey)
     ], PrfndSecurity.prototype, "apiKey", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeClientId)
     ], PrfndSecurity.prototype, "clientId", void 0);
     return PrfndSecurity;
 }(SpeakeasyBase));
 export { PrfndSecurity };
-var PrfndRequest = /** @class */ (function (_super) {
-    __extends(PrfndRequest, _super);
-    function PrfndRequest() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
-        __metadata("design:type", PrfndRequestBody)
-    ], PrfndRequest.prototype, "request", void 0);
-    __decorate([
-        Metadata(),
-        __metadata("design:type", PrfndSecurity)
-    ], PrfndRequest.prototype, "security", void 0);
-    return PrfndRequest;
-}(SpeakeasyBase));
-export { PrfndRequest };
 export var Prfnd400ApplicationJsonErrorEnum;
 (function (Prfnd400ApplicationJsonErrorEnum) {
     Prfnd400ApplicationJsonErrorEnum["MissingParameter"] = "missing_parameter";
@@ -122,11 +106,11 @@ var Prfnd400ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Prfnd400ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Prfnd400ApplicationJson.prototype, "errorDescription", void 0);
     return Prfnd400ApplicationJson;
@@ -148,11 +132,11 @@ var Prfnd401ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Prfnd401ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Prfnd401ApplicationJson.prototype, "errorDescription", void 0);
     return Prfnd401ApplicationJson;
@@ -174,11 +158,11 @@ var Prfnd404ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Prfnd404ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Prfnd404ApplicationJson.prototype, "errorDescription", void 0);
     return Prfnd404ApplicationJson;
@@ -198,11 +182,11 @@ var Prfnd500ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Prfnd500ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Prfnd500ApplicationJson.prototype, "errorDescription", void 0);
     return Prfnd500ApplicationJson;
@@ -222,11 +206,11 @@ var Prfnd502ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Prfnd502ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Prfnd502ApplicationJson.prototype, "errorDescription", void 0);
     return Prfnd502ApplicationJson;
@@ -246,11 +230,11 @@ var Prfnd503ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Prfnd503ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Prfnd503ApplicationJson.prototype, "errorDescription", void 0);
     return Prfnd503ApplicationJson;
@@ -270,55 +254,71 @@ var Prfnd504ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Prfnd504ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Prfnd504ApplicationJson.prototype, "errorDescription", void 0);
     return Prfnd504ApplicationJson;
 }(SpeakeasyBase));
 export { Prfnd504ApplicationJson };
+var PrfndRequest = /** @class */ (function (_super) {
+    __extends(PrfndRequest, _super);
+    function PrfndRequest() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
+        __metadata("design:type", PrfndRequestBody)
+    ], PrfndRequest.prototype, "request", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", PrfndSecurity)
+    ], PrfndRequest.prototype, "security", void 0);
+    return PrfndRequest;
+}(SpeakeasyBase));
+export { PrfndRequest };
 var PrfndResponse = /** @class */ (function (_super) {
     __extends(PrfndResponse, _super);
     function PrfndResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], PrfndResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], PrfndResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Prfnd400ApplicationJson)
     ], PrfndResponse.prototype, "prfnd400ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Prfnd401ApplicationJson)
     ], PrfndResponse.prototype, "prfnd401ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Prfnd404ApplicationJson)
     ], PrfndResponse.prototype, "prfnd404ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Prfnd500ApplicationJson)
     ], PrfndResponse.prototype, "prfnd500ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Prfnd502ApplicationJson)
     ], PrfndResponse.prototype, "prfnd502ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Prfnd503ApplicationJson)
     ], PrfndResponse.prototype, "prfnd503ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Prfnd504ApplicationJson)
     ], PrfndResponse.prototype, "prfnd504ApplicationJsonObject", void 0);
     return PrfndResponse;

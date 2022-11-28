@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // DirectDeal
 /**
  * The configuration data for an Ad Exchange direct deal.
@@ -33,63 +33,63 @@ var DirectDeal = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=accountId" }),
+        SpeakeasyMetadata({ data: "json, name=accountId" }),
         __metadata("design:type", Number)
     ], DirectDeal.prototype, "accountId", void 0);
     __decorate([
-        Metadata({ data: "json, name=advertiser" }),
+        SpeakeasyMetadata({ data: "json, name=advertiser" }),
         __metadata("design:type", String)
     ], DirectDeal.prototype, "advertiser", void 0);
     __decorate([
-        Metadata({ data: "json, name=allowsAlcohol" }),
+        SpeakeasyMetadata({ data: "json, name=allowsAlcohol" }),
         __metadata("design:type", Boolean)
     ], DirectDeal.prototype, "allowsAlcohol", void 0);
     __decorate([
-        Metadata({ data: "json, name=buyerAccountId" }),
+        SpeakeasyMetadata({ data: "json, name=buyerAccountId" }),
         __metadata("design:type", String)
     ], DirectDeal.prototype, "buyerAccountId", void 0);
     __decorate([
-        Metadata({ data: "json, name=currencyCode" }),
+        SpeakeasyMetadata({ data: "json, name=currencyCode" }),
         __metadata("design:type", String)
     ], DirectDeal.prototype, "currencyCode", void 0);
     __decorate([
-        Metadata({ data: "json, name=dealTier" }),
+        SpeakeasyMetadata({ data: "json, name=dealTier" }),
         __metadata("design:type", String)
     ], DirectDeal.prototype, "dealTier", void 0);
     __decorate([
-        Metadata({ data: "json, name=endTime" }),
+        SpeakeasyMetadata({ data: "json, name=endTime" }),
         __metadata("design:type", String)
     ], DirectDeal.prototype, "endTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=fixedCpm" }),
+        SpeakeasyMetadata({ data: "json, name=fixedCpm" }),
         __metadata("design:type", String)
     ], DirectDeal.prototype, "fixedCpm", void 0);
     __decorate([
-        Metadata({ data: "json, name=id" }),
+        SpeakeasyMetadata({ data: "json, name=id" }),
         __metadata("design:type", String)
     ], DirectDeal.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "json, name=kind" }),
+        SpeakeasyMetadata({ data: "json, name=kind" }),
         __metadata("design:type", String)
     ], DirectDeal.prototype, "kind", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], DirectDeal.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=privateExchangeMinCpm" }),
+        SpeakeasyMetadata({ data: "json, name=privateExchangeMinCpm" }),
         __metadata("design:type", String)
     ], DirectDeal.prototype, "privateExchangeMinCpm", void 0);
     __decorate([
-        Metadata({ data: "json, name=publisherBlocksOverriden" }),
+        SpeakeasyMetadata({ data: "json, name=publisherBlocksOverriden" }),
         __metadata("design:type", Boolean)
     ], DirectDeal.prototype, "publisherBlocksOverriden", void 0);
     __decorate([
-        Metadata({ data: "json, name=sellerNetwork" }),
+        SpeakeasyMetadata({ data: "json, name=sellerNetwork" }),
         __metadata("design:type", String)
     ], DirectDeal.prototype, "sellerNetwork", void 0);
     __decorate([
-        Metadata({ data: "json, name=startTime" }),
+        SpeakeasyMetadata({ data: "json, name=startTime" }),
         __metadata("design:type", String)
     ], DirectDeal.prototype, "startTime", void 0);
     return DirectDeal;

@@ -1,9 +1,10 @@
 
 
+
 export enum EndpointStatusEnum {
-    Created = "created"
-,    Creating = "creating"
-,    Deleted = "deleted"
-,    Deleting = "deleting"
-,    Failed = "failed"
+    Created = "created",
+    Creating = "creating",
+    Deleted = "deleted",
+    Deleting = "deleting",
+    Failed = "failed"
 }

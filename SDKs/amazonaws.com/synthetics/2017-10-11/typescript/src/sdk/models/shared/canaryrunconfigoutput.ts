@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // CanaryRunConfigOutput
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A structure that contains information about a canary run.
 **/
 export class CanaryRunConfigOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ActiveTracing" })
+  @SpeakeasyMetadata({ data: "json, name=ActiveTracing" })
   activeTracing?: boolean;
 
-  @Metadata({ data: "json, name=MemoryInMB" })
+  @SpeakeasyMetadata({ data: "json, name=MemoryInMB" })
   memoryInMb?: number;
 
-  @Metadata({ data: "json, name=TimeoutInSeconds" })
+  @SpeakeasyMetadata({ data: "json, name=TimeoutInSeconds" })
   timeoutInSeconds?: number;
 }

@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PipelineDescription } from "./pipelinedescription";
+
 
 
 // DescribePipelinesOutput
@@ -8,6 +8,6 @@ import { PipelineDescription } from "./pipelinedescription";
  * Contains the output of DescribePipelines.
 **/
 export class DescribePipelinesOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=pipelineDescriptionList", elemType: shared.PipelineDescription })
+  @SpeakeasyMetadata({ data: "json, name=pipelineDescriptionList", elemType: PipelineDescription })
   pipelineDescriptionList: PipelineDescription[];
 }

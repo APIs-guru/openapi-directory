@@ -1,21 +1,21 @@
 from dataclasses import dataclass, field
-
+from typing import Optional
 
 
 @dataclass
 class GetAnnotationCountByAccIDUsingGetPathParams:
-    acc_id: str = field(default=None, metadata={'path_param': { 'field_name': 'accId', 'style': 'simple', 'explode': False }})
-    include_children: bool = field(default=None, metadata={'path_param': { 'field_name': 'includeChildren', 'style': 'simple', 'explode': False }})
+    acc_id: str = field(metadata={'path_param': { 'field_name': 'accId', 'style': 'simple', 'explode': False }})
+    include_children: bool = field(metadata={'path_param': { 'field_name': 'includeChildren', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetAnnotationCountByAccIDUsingGetRequest:
-    path_params: GetAnnotationCountByAccIDUsingGetPathParams = field(default=None)
+    path_params: GetAnnotationCountByAccIDUsingGetPathParams = field()
     
 
 @dataclass
 class GetAnnotationCountByAccIDUsingGetResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

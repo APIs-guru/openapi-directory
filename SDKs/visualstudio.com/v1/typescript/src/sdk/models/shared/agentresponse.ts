@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class AgentResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=assetUri" })
+  @SpeakeasyMetadata({ data: "json, name=assetUri" })
   assetUri?: string;
 
-  @Metadata({ data: "json, name=family" })
+  @SpeakeasyMetadata({ data: "json, name=family" })
   family?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 }

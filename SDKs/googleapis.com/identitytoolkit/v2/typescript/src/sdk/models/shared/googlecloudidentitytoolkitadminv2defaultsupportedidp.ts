@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudIdentitytoolkitAdminV2DefaultSupportedIdp
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Standard Identity Toolkit-trusted IDPs.
 **/
 export class GoogleCloudIdentitytoolkitAdminV2DefaultSupportedIdp extends SpeakeasyBase {
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=idpId" })
+  @SpeakeasyMetadata({ data: "json, name=idpId" })
   idpId?: string;
 }

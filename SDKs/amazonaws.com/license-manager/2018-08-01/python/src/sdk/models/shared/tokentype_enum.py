@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class TokenTypeEnum(str, Enum):
     REFRESH_TOKEN = "REFRESH_TOKEN"

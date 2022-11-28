@@ -1,52 +1,53 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class BankAccountQueryDto extends SpeakeasyBase {
-  @Metadata({ data: "json, name=acCode" })
+  @SpeakeasyMetadata({ data: "json, name=acCode" })
   acCode?: string;
 
-  @Metadata({ data: "json, name=accountName" })
+  @SpeakeasyMetadata({ data: "json, name=accountName" })
   accountName?: string;
 
-  @Metadata({ data: "json, name=accountNumber" })
+  @SpeakeasyMetadata({ data: "json, name=accountNumber" })
   accountNumber?: string;
 
-  @Metadata({ data: "json, name=address" })
+  @SpeakeasyMetadata({ data: "json, name=address" })
   address?: string[];
 
-  @Metadata({ data: "json, name=bankFeedSource" })
+  @SpeakeasyMetadata({ data: "json, name=bankFeedSource" })
   bankFeedSource?: number;
 
-  @Metadata({ data: "json, name=businessIdentifierCodes" })
+  @SpeakeasyMetadata({ data: "json, name=businessIdentifierCodes" })
   businessIdentifierCodes?: string;
 
-  @Metadata({ data: "json, name=categoryId" })
+  @SpeakeasyMetadata({ data: "json, name=categoryId" })
   categoryId?: number;
 
-  @Metadata({ data: "json, name=creditorScheme" })
+  @SpeakeasyMetadata({ data: "json, name=creditorScheme" })
   creditorScheme?: string;
 
-  @Metadata({ data: "json, name=details" })
+  @SpeakeasyMetadata({ data: "json, name=details" })
   details?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: number;
 
-  @Metadata({ data: "json, name=internationalBankAccountNumber" })
+  @SpeakeasyMetadata({ data: "json, name=internationalBankAccountNumber" })
   internationalBankAccountNumber?: string;
 
-  @Metadata({ data: "json, name=isDefaultBank" })
+  @SpeakeasyMetadata({ data: "json, name=isDefaultBank" })
   isDefaultBank?: boolean;
 
-  @Metadata({ data: "json, name=lastChq" })
+  @SpeakeasyMetadata({ data: "json, name=lastChq" })
   lastChq?: string;
 
-  @Metadata({ data: "json, name=nominalAcCode" })
+  @SpeakeasyMetadata({ data: "json, name=nominalAcCode" })
   nominalAcCode?: string;
 
-  @Metadata({ data: "json, name=sortCode" })
+  @SpeakeasyMetadata({ data: "json, name=sortCode" })
   sortCode?: string;
 
-  @Metadata({ data: "json, name=timestamp" })
+  @SpeakeasyMetadata({ data: "json, name=timestamp" })
   timestamp?: string;
 }

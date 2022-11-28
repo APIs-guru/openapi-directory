@@ -17,12 +17,12 @@ class GetPlayStatsQueryParams:
 
 @dataclass
 class GetPlayStatsRequest:
-    query_params: GetPlayStatsQueryParams = field(default=None)
+    query_params: GetPlayStatsQueryParams = field()
     
 
 @dataclass
 class GetPlayStatsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     play_stats: Optional[List[shared.PlayStat]] = field(default=None)
-    status_code: int = field(default=None)
     

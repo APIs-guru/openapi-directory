@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Key } from "./key";
+
 
 
 // AllocateIdsResponse
@@ -8,6 +8,6 @@ import { Key } from "./key";
  * The response for Datastore.AllocateIds.
 **/
 export class AllocateIdsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=keys", elemType: shared.Key })
+  @SpeakeasyMetadata({ data: "json, name=keys", elemType: Key })
   keys?: Key[];
 }

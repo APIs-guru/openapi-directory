@@ -1,7 +1,8 @@
 
 
+
 export enum DeliverabilityDashboardAccountStatusEnum {
-    Active = "ACTIVE"
-,    PendingExpiration = "PENDING_EXPIRATION"
-,    Disabled = "DISABLED"
+    Active = "ACTIVE",
+    PendingExpiration = "PENDING_EXPIRATION",
+    Disabled = "DISABLED"
 }

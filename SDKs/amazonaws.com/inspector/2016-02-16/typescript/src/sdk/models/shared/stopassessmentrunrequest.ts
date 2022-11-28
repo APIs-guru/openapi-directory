@@ -1,11 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { StopActionEnum } from "./stopactionenum";
 
 
+
 export class StopAssessmentRunRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=assessmentRunArn" })
+  @SpeakeasyMetadata({ data: "json, name=assessmentRunArn" })
   assessmentRunArn: string;
 
-  @Metadata({ data: "json, name=stopAction" })
+  @SpeakeasyMetadata({ data: "json, name=stopAction" })
   stopAction?: StopActionEnum;
 }

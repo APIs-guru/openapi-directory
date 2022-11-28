@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleTypeMoney } from "./googletypemoney";
-import { GoogleTypeMoney } from "./googletypemoney";
+
 
 
 // GoogleCloudChannelV1Price
@@ -8,15 +8,15 @@ import { GoogleTypeMoney } from "./googletypemoney";
  * Represents the price of the Offer.
 **/
 export class GoogleCloudChannelV1Price extends SpeakeasyBase {
-  @Metadata({ data: "json, name=basePrice" })
+  @SpeakeasyMetadata({ data: "json, name=basePrice" })
   basePrice?: GoogleTypeMoney;
 
-  @Metadata({ data: "json, name=discount" })
+  @SpeakeasyMetadata({ data: "json, name=discount" })
   discount?: number;
 
-  @Metadata({ data: "json, name=effectivePrice" })
+  @SpeakeasyMetadata({ data: "json, name=effectivePrice" })
   effectivePrice?: GoogleTypeMoney;
 
-  @Metadata({ data: "json, name=externalPriceUri" })
+  @SpeakeasyMetadata({ data: "json, name=externalPriceUri" })
   externalPriceUri?: string;
 }

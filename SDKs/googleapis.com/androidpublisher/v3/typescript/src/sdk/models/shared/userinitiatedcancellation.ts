@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CancelSurveyResult } from "./cancelsurveyresult";
+
 
 
 // UserInitiatedCancellation
@@ -7,9 +8,9 @@ import { CancelSurveyResult } from "./cancelsurveyresult";
  * Information specific to cancellations initiated by users.
 **/
 export class UserInitiatedCancellation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=cancelSurveyResult" })
+  @SpeakeasyMetadata({ data: "json, name=cancelSurveyResult" })
   cancelSurveyResult?: CancelSurveyResult;
 
-  @Metadata({ data: "json, name=cancelTime" })
+  @SpeakeasyMetadata({ data: "json, name=cancelTime" })
   cancelTime?: string;
 }

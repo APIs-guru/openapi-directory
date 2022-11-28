@@ -7,6 +7,8 @@ const (
 	FloodlightActivityGroupTypeEnumSale    FloodlightActivityGroupTypeEnum = "SALE"
 )
 
+// FloodlightActivityGroup
+// Contains properties of a Floodlight activity group.
 type FloodlightActivityGroup struct {
 	AccountID                               *string                          `json:"accountId,omitempty"`
 	AdvertiserID                            *string                          `json:"advertiserId,omitempty"`

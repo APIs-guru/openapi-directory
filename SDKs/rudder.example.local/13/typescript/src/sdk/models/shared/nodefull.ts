@@ -1,5 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // NodeFullBios
@@ -7,76 +7,76 @@ import * as shared from "../shared";
  * BIOS information
 **/
 export class NodeFullBios extends SpeakeasyBase {
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=editor" })
+  @SpeakeasyMetadata({ data: "json, name=editor" })
   editor?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=quantity" })
+  @SpeakeasyMetadata({ data: "json, name=quantity" })
   quantity?: number;
 
-  @Metadata({ data: "json, name=releaseDate" })
+  @SpeakeasyMetadata({ data: "json, name=releaseDate" })
   releaseDate?: string;
 
-  @Metadata({ data: "json, name=version" })
+  @SpeakeasyMetadata({ data: "json, name=version" })
   version?: string;
 }
 
 
 export class NodeFullControllers extends SpeakeasyBase {
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=manufacturer" })
+  @SpeakeasyMetadata({ data: "json, name=manufacturer" })
   manufacturer?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=quantity" })
+  @SpeakeasyMetadata({ data: "json, name=quantity" })
   quantity?: number;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: string;
 }
 
 
 export class NodeFullEnvironmentVariables extends SpeakeasyBase {
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=value" })
+  @SpeakeasyMetadata({ data: "json, name=value" })
   value?: string;
 }
 
 
 export class NodeFullFileSystems extends SpeakeasyBase {
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=fileCount" })
+  @SpeakeasyMetadata({ data: "json, name=fileCount" })
   fileCount?: number;
 
-  @Metadata({ data: "json, name=freeSpace" })
+  @SpeakeasyMetadata({ data: "json, name=freeSpace" })
   freeSpace?: number;
 
-  @Metadata({ data: "json, name=mountPoint" })
+  @SpeakeasyMetadata({ data: "json, name=mountPoint" })
   mountPoint?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=totalSpace" })
+  @SpeakeasyMetadata({ data: "json, name=totalSpace" })
   totalSpace?: number;
 }
 
 export enum NodeFullMachineTypeEnum {
-    Physical = "Physical"
-,    Virtual = "Virtual"
+    Physical = "Physical",
+    Virtual = "Virtual"
 }
 
 
@@ -85,37 +85,37 @@ export enum NodeFullMachineTypeEnum {
  * Information about the underlying machine
 **/
 export class NodeFullMachine extends SpeakeasyBase {
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=manufacturer" })
+  @SpeakeasyMetadata({ data: "json, name=manufacturer" })
   manufacturer?: string;
 
-  @Metadata({ data: "json, name=provider" })
+  @SpeakeasyMetadata({ data: "json, name=provider" })
   provider?: string;
 
-  @Metadata({ data: "json, name=serialNumber" })
+  @SpeakeasyMetadata({ data: "json, name=serialNumber" })
   serialNumber?: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: NodeFullMachineTypeEnum;
 }
 
 
 export class NodeFullManagementTechnology extends SpeakeasyBase {
-  @Metadata({ data: "json, name=capabilities" })
+  @SpeakeasyMetadata({ data: "json, name=capabilities" })
   capabilities?: string[];
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 
-  @Metadata({ data: "json, name=nodeKind" })
+  @SpeakeasyMetadata({ data: "json, name=nodeKind" })
   nodeKind?: string;
 
-  @Metadata({ data: "json, name=rootComponents" })
+  @SpeakeasyMetadata({ data: "json, name=rootComponents" })
   rootComponents?: string[];
 
-  @Metadata({ data: "json, name=version" })
+  @SpeakeasyMetadata({ data: "json, name=version" })
   version?: string;
 }
 
@@ -125,10 +125,10 @@ export class NodeFullManagementTechnology extends SpeakeasyBase {
  * Additional information about management technology
 **/
 export class NodeFullManagementTechnologyDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=cfengineKeys" })
+  @SpeakeasyMetadata({ data: "json, name=cfengineKeys" })
   cfengineKeys?: string[];
 
-  @Metadata({ data: "json, name=cfengineUser" })
+  @SpeakeasyMetadata({ data: "json, name=cfengineUser" })
   cfengineUser?: string;
 }
 
@@ -138,66 +138,66 @@ export class NodeFullManagementTechnologyDetails extends SpeakeasyBase {
  * Memory slots
 **/
 export class NodeFullMemories extends SpeakeasyBase {
-  @Metadata({ data: "json, name=capacity" })
+  @SpeakeasyMetadata({ data: "json, name=capacity" })
   capacity?: number;
 
-  @Metadata({ data: "json, name=caption" })
+  @SpeakeasyMetadata({ data: "json, name=caption" })
   caption?: string;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=quantity" })
+  @SpeakeasyMetadata({ data: "json, name=quantity" })
   quantity?: string;
 
-  @Metadata({ data: "json, name=serialNumber" })
+  @SpeakeasyMetadata({ data: "json, name=serialNumber" })
   serialNumber?: string;
 
-  @Metadata({ data: "json, name=slotNumber" })
+  @SpeakeasyMetadata({ data: "json, name=slotNumber" })
   slotNumber?: number;
 
-  @Metadata({ data: "json, name=speed" })
+  @SpeakeasyMetadata({ data: "json, name=speed" })
   speed?: number;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: string;
 }
 
 
 export class NodeFullNetworkInterfaces extends SpeakeasyBase {
-  @Metadata({ data: "json, name=dhcpServer" })
+  @SpeakeasyMetadata({ data: "json, name=dhcpServer" })
   dhcpServer?: string;
 
-  @Metadata({ data: "json, name=ipAddresses" })
+  @SpeakeasyMetadata({ data: "json, name=ipAddresses" })
   ipAddresses?: string[];
 
-  @Metadata({ data: "json, name=macAddress" })
+  @SpeakeasyMetadata({ data: "json, name=macAddress" })
   macAddress?: string;
 
-  @Metadata({ data: "json, name=mask" })
+  @SpeakeasyMetadata({ data: "json, name=mask" })
   mask?: string[];
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=speed" })
+  @SpeakeasyMetadata({ data: "json, name=speed" })
   speed?: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: string;
 }
 
 export enum NodeFullOsTypeEnum {
-    Windows = "Windows"
-,    Linux = "Linux"
-,    Aix = "AIX"
-,    FreeBsd = "FreeBSD"
+    Windows = "Windows",
+    Linux = "Linux",
+    Aix = "AIX",
+    FreeBsd = "FreeBSD"
 }
 
 
@@ -206,43 +206,43 @@ export enum NodeFullOsTypeEnum {
  * Information about the operating system
 **/
 export class NodeFullOs extends SpeakeasyBase {
-  @Metadata({ data: "json, name=fullName" })
+  @SpeakeasyMetadata({ data: "json, name=fullName" })
   fullName: string;
 
-  @Metadata({ data: "json, name=kernelVersion" })
+  @SpeakeasyMetadata({ data: "json, name=kernelVersion" })
   kernelVersion: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 
-  @Metadata({ data: "json, name=servicePack" })
+  @SpeakeasyMetadata({ data: "json, name=servicePack" })
   servicePack?: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type: NodeFullOsTypeEnum;
 
-  @Metadata({ data: "json, name=version" })
+  @SpeakeasyMetadata({ data: "json, name=version" })
   version: string;
 }
 
 export enum NodeFullPolicyModeEnum {
-    Enforce = "enforce"
-,    Audit = "audit"
-,    Default = "default"
+    Enforce = "enforce",
+    Audit = "audit",
+    Default = "default"
 }
 
 
 export class NodeFullPorts extends SpeakeasyBase {
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=quantity" })
+  @SpeakeasyMetadata({ data: "json, name=quantity" })
   quantity?: number;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: string;
 }
 
@@ -252,97 +252,97 @@ export class NodeFullPorts extends SpeakeasyBase {
  * Process information
 **/
 export class NodeFullProcesses extends SpeakeasyBase {
-  @Metadata({ data: "json, name=cpuUsage" })
+  @SpeakeasyMetadata({ data: "json, name=cpuUsage" })
   cpuUsage?: number;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=memory" })
+  @SpeakeasyMetadata({ data: "json, name=memory" })
   memory?: number;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=pid" })
+  @SpeakeasyMetadata({ data: "json, name=pid" })
   pid?: number;
 
-  @Metadata({ data: "json, name=started" })
+  @SpeakeasyMetadata({ data: "json, name=started" })
   started?: Date;
 
-  @Metadata({ data: "json, name=tty" })
+  @SpeakeasyMetadata({ data: "json, name=tty" })
   tty?: string;
 
-  @Metadata({ data: "json, name=user" })
+  @SpeakeasyMetadata({ data: "json, name=user" })
   user?: string;
 
-  @Metadata({ data: "json, name=virtualMemory" })
+  @SpeakeasyMetadata({ data: "json, name=virtualMemory" })
   virtualMemory?: number;
 }
 
 
 export class NodeFullProcessors extends SpeakeasyBase {
-  @Metadata({ data: "json, name=arch" })
+  @SpeakeasyMetadata({ data: "json, name=arch" })
   arch?: string;
 
-  @Metadata({ data: "json, name=core" })
+  @SpeakeasyMetadata({ data: "json, name=core" })
   core?: number;
 
-  @Metadata({ data: "json, name=cpuid" })
+  @SpeakeasyMetadata({ data: "json, name=cpuid" })
   cpuid?: string;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=externalClock" })
+  @SpeakeasyMetadata({ data: "json, name=externalClock" })
   externalClock?: string;
 
-  @Metadata({ data: "json, name=familyName" })
+  @SpeakeasyMetadata({ data: "json, name=familyName" })
   familyName?: string;
 
-  @Metadata({ data: "json, name=manufacturer" })
+  @SpeakeasyMetadata({ data: "json, name=manufacturer" })
   manufacturer?: string;
 
-  @Metadata({ data: "json, name=model" })
+  @SpeakeasyMetadata({ data: "json, name=model" })
   model?: number;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=quantity" })
+  @SpeakeasyMetadata({ data: "json, name=quantity" })
   quantity?: number;
 
-  @Metadata({ data: "json, name=speed" })
+  @SpeakeasyMetadata({ data: "json, name=speed" })
   speed?: number;
 
-  @Metadata({ data: "json, name=stepping" })
+  @SpeakeasyMetadata({ data: "json, name=stepping" })
   stepping?: number;
 
-  @Metadata({ data: "json, name=thread" })
+  @SpeakeasyMetadata({ data: "json, name=thread" })
   thread?: number;
 }
 
 
 export class NodeFullProperties extends SpeakeasyBase {
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 
-  @Metadata({ data: "json, name=value" })
+  @SpeakeasyMetadata({ data: "json, name=value" })
   value: any;
 }
 
 
 export class NodeFullSlots extends SpeakeasyBase {
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=quantity" })
+  @SpeakeasyMetadata({ data: "json, name=quantity" })
   quantity?: number;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: string;
 }
 
@@ -352,252 +352,252 @@ export class NodeFullSlots extends SpeakeasyBase {
  * Information about the license
 **/
 export class NodeFullSoftwareLicense extends SpeakeasyBase {
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=expirationDate" })
+  @SpeakeasyMetadata({ data: "json, name=expirationDate" })
   expirationDate?: Date;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=oem" })
+  @SpeakeasyMetadata({ data: "json, name=oem" })
   oem?: string;
 
-  @Metadata({ data: "json, name=productId" })
+  @SpeakeasyMetadata({ data: "json, name=productId" })
   productId?: string;
 
-  @Metadata({ data: "json, name=productKey" })
+  @SpeakeasyMetadata({ data: "json, name=productKey" })
   productKey?: string;
 }
 
 
 export class NodeFullSoftware extends SpeakeasyBase {
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=editor" })
+  @SpeakeasyMetadata({ data: "json, name=editor" })
   editor?: string;
 
-  @Metadata({ data: "json, name=license" })
+  @SpeakeasyMetadata({ data: "json, name=license" })
   license?: NodeFullSoftwareLicense;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=releaseDate" })
+  @SpeakeasyMetadata({ data: "json, name=releaseDate" })
   releaseDate?: Date;
 
-  @Metadata({ data: "json, name=version" })
+  @SpeakeasyMetadata({ data: "json, name=version" })
   version?: string;
 }
 
 
 export class NodeFullSound extends SpeakeasyBase {
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=quantity" })
+  @SpeakeasyMetadata({ data: "json, name=quantity" })
   quantity?: number;
 }
 
 export enum NodeFullStatusEnum {
-    Pending = "pending"
-,    Accepted = "accepted"
-,    Deleted = "deleted"
+    Pending = "pending",
+    Accepted = "accepted",
+    Deleted = "deleted"
 }
 
 
 export class NodeFullStorage extends SpeakeasyBase {
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=firmware" })
+  @SpeakeasyMetadata({ data: "json, name=firmware" })
   firmware?: string;
 
-  @Metadata({ data: "json, name=manufacturer" })
+  @SpeakeasyMetadata({ data: "json, name=manufacturer" })
   manufacturer?: string;
 
-  @Metadata({ data: "json, name=model" })
+  @SpeakeasyMetadata({ data: "json, name=model" })
   model?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=quantity" })
+  @SpeakeasyMetadata({ data: "json, name=quantity" })
   quantity?: number;
 
-  @Metadata({ data: "json, name=serialNumber" })
+  @SpeakeasyMetadata({ data: "json, name=serialNumber" })
   serialNumber?: string;
 
-  @Metadata({ data: "json, name=size" })
+  @SpeakeasyMetadata({ data: "json, name=size" })
   size?: number;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: string;
 }
 
 
 export class NodeFullTimezone extends SpeakeasyBase {
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 
-  @Metadata({ data: "json, name=offset" })
+  @SpeakeasyMetadata({ data: "json, name=offset" })
   offset?: string;
 }
 
 
 export class NodeFullVideos extends SpeakeasyBase {
-  @Metadata({ data: "json, name=chipset" })
+  @SpeakeasyMetadata({ data: "json, name=chipset" })
   chipset?: string;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=memory" })
+  @SpeakeasyMetadata({ data: "json, name=memory" })
   memory?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=quantity" })
+  @SpeakeasyMetadata({ data: "json, name=quantity" })
   quantity?: number;
 
-  @Metadata({ data: "json, name=resolution" })
+  @SpeakeasyMetadata({ data: "json, name=resolution" })
   resolution?: string;
 }
 
 
 export class NodeFullVirtualMachines extends SpeakeasyBase {
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=memory" })
+  @SpeakeasyMetadata({ data: "json, name=memory" })
   memory?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=owner" })
+  @SpeakeasyMetadata({ data: "json, name=owner" })
   owner?: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: string;
 
-  @Metadata({ data: "json, name=subsystem" })
+  @SpeakeasyMetadata({ data: "json, name=subsystem" })
   subsystem?: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: string;
 
-  @Metadata({ data: "json, name=uuid" })
+  @SpeakeasyMetadata({ data: "json, name=uuid" })
   uuid?: string;
 
-  @Metadata({ data: "json, name=vcpu" })
+  @SpeakeasyMetadata({ data: "json, name=vcpu" })
   vcpu?: string;
 }
 
 
 export class NodeFull extends SpeakeasyBase {
-  @Metadata({ data: "json, name=accounts" })
+  @SpeakeasyMetadata({ data: "json, name=accounts" })
   accounts?: string[];
 
-  @Metadata({ data: "json, name=architectureDescription" })
+  @SpeakeasyMetadata({ data: "json, name=architectureDescription" })
   architectureDescription?: string;
 
-  @Metadata({ data: "json, name=bios" })
+  @SpeakeasyMetadata({ data: "json, name=bios" })
   bios?: NodeFullBios;
 
-  @Metadata({ data: "json, name=controllers", elemType: shared.NodeFullControllers })
+  @SpeakeasyMetadata({ data: "json, name=controllers", elemType: NodeFullControllers })
   controllers?: NodeFullControllers[];
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=environmentVariables", elemType: shared.NodeFullEnvironmentVariables })
+  @SpeakeasyMetadata({ data: "json, name=environmentVariables", elemType: NodeFullEnvironmentVariables })
   environmentVariables?: NodeFullEnvironmentVariables[];
 
-  @Metadata({ data: "json, name=fileSystems", elemType: shared.NodeFullFileSystems })
+  @SpeakeasyMetadata({ data: "json, name=fileSystems", elemType: NodeFullFileSystems })
   fileSystems?: NodeFullFileSystems[];
 
-  @Metadata({ data: "json, name=hostname" })
+  @SpeakeasyMetadata({ data: "json, name=hostname" })
   hostname: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: string;
 
-  @Metadata({ data: "json, name=ipAddresses" })
+  @SpeakeasyMetadata({ data: "json, name=ipAddresses" })
   ipAddresses: string[];
 
-  @Metadata({ data: "json, name=lastInventoryDate" })
+  @SpeakeasyMetadata({ data: "json, name=lastInventoryDate" })
   lastInventoryDate?: Date;
 
-  @Metadata({ data: "json, name=lastRunDate" })
+  @SpeakeasyMetadata({ data: "json, name=lastRunDate" })
   lastRunDate?: Date;
 
-  @Metadata({ data: "json, name=machine" })
+  @SpeakeasyMetadata({ data: "json, name=machine" })
   machine?: NodeFullMachine;
 
-  @Metadata({ data: "json, name=managementTechnology", elemType: shared.NodeFullManagementTechnology })
+  @SpeakeasyMetadata({ data: "json, name=managementTechnology", elemType: NodeFullManagementTechnology })
   managementTechnology: NodeFullManagementTechnology[];
 
-  @Metadata({ data: "json, name=managementTechnologyDetails" })
+  @SpeakeasyMetadata({ data: "json, name=managementTechnologyDetails" })
   managementTechnologyDetails?: NodeFullManagementTechnologyDetails;
 
-  @Metadata({ data: "json, name=memories", elemType: shared.NodeFullMemories })
+  @SpeakeasyMetadata({ data: "json, name=memories", elemType: NodeFullMemories })
   memories?: NodeFullMemories[];
 
-  @Metadata({ data: "json, name=networkInterfaces", elemType: shared.NodeFullNetworkInterfaces })
+  @SpeakeasyMetadata({ data: "json, name=networkInterfaces", elemType: NodeFullNetworkInterfaces })
   networkInterfaces?: NodeFullNetworkInterfaces[];
 
-  @Metadata({ data: "json, name=os" })
+  @SpeakeasyMetadata({ data: "json, name=os" })
   os?: NodeFullOs;
 
-  @Metadata({ data: "json, name=policyMode" })
+  @SpeakeasyMetadata({ data: "json, name=policyMode" })
   policyMode?: NodeFullPolicyModeEnum;
 
-  @Metadata({ data: "json, name=policyServerId" })
+  @SpeakeasyMetadata({ data: "json, name=policyServerId" })
   policyServerId: string;
 
-  @Metadata({ data: "json, name=ports", elemType: shared.NodeFullPorts })
+  @SpeakeasyMetadata({ data: "json, name=ports", elemType: NodeFullPorts })
   ports?: NodeFullPorts[];
 
-  @Metadata({ data: "json, name=processes", elemType: shared.NodeFullProcesses })
+  @SpeakeasyMetadata({ data: "json, name=processes", elemType: NodeFullProcesses })
   processes?: NodeFullProcesses[];
 
-  @Metadata({ data: "json, name=processors", elemType: shared.NodeFullProcessors })
+  @SpeakeasyMetadata({ data: "json, name=processors", elemType: NodeFullProcessors })
   processors?: NodeFullProcessors[];
 
-  @Metadata({ data: "json, name=properties", elemType: shared.NodeFullProperties })
+  @SpeakeasyMetadata({ data: "json, name=properties", elemType: NodeFullProperties })
   properties: NodeFullProperties[];
 
-  @Metadata({ data: "json, name=ram" })
+  @SpeakeasyMetadata({ data: "json, name=ram" })
   ram?: number;
 
-  @Metadata({ data: "json, name=slots", elemType: shared.NodeFullSlots })
+  @SpeakeasyMetadata({ data: "json, name=slots", elemType: NodeFullSlots })
   slots?: NodeFullSlots[];
 
-  @Metadata({ data: "json, name=software", elemType: shared.NodeFullSoftware })
+  @SpeakeasyMetadata({ data: "json, name=software", elemType: NodeFullSoftware })
   software?: NodeFullSoftware[];
 
-  @Metadata({ data: "json, name=sound", elemType: shared.NodeFullSound })
+  @SpeakeasyMetadata({ data: "json, name=sound", elemType: NodeFullSound })
   sound?: NodeFullSound[];
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status: NodeFullStatusEnum;
 
-  @Metadata({ data: "json, name=storage", elemType: shared.NodeFullStorage })
+  @SpeakeasyMetadata({ data: "json, name=storage", elemType: NodeFullStorage })
   storage?: NodeFullStorage[];
 
-  @Metadata({ data: "json, name=timezone" })
+  @SpeakeasyMetadata({ data: "json, name=timezone" })
   timezone?: NodeFullTimezone;
 
-  @Metadata({ data: "json, name=videos", elemType: shared.NodeFullVideos })
+  @SpeakeasyMetadata({ data: "json, name=videos", elemType: NodeFullVideos })
   videos?: NodeFullVideos[];
 
-  @Metadata({ data: "json, name=virtualMachines", elemType: shared.NodeFullVirtualMachines })
+  @SpeakeasyMetadata({ data: "json, name=virtualMachines", elemType: NodeFullVirtualMachines })
   virtualMachines?: NodeFullVirtualMachines[];
 }

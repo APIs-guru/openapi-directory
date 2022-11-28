@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ErrorDetail } from "./errordetail";
+
 
 
 // BatchUpdatePartitionFailureEntry
@@ -7,9 +8,9 @@ import { ErrorDetail } from "./errordetail";
  * Contains information about a batch update partition error.
 **/
 export class BatchUpdatePartitionFailureEntry extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ErrorDetail" })
+  @SpeakeasyMetadata({ data: "json, name=ErrorDetail" })
   errorDetail?: ErrorDetail;
 
-  @Metadata({ data: "json, name=PartitionValueList" })
+  @SpeakeasyMetadata({ data: "json, name=PartitionValueList" })
   partitionValueList?: string[];
 }

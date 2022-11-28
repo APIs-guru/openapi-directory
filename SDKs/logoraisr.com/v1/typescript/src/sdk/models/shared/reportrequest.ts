@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ReportRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=file_id" })
+  @SpeakeasyMetadata({ data: "json, name=file_id" })
   fileId: string;
 
-  @Metadata({ data: "json, name=process" })
+  @SpeakeasyMetadata({ data: "json, name=process" })
   process: string;
 }

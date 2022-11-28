@@ -1,10 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RuleSource } from "./rulesource";
 
+
 export enum CloudflareWorkerRulePostRequestModeEnum {
-    Single = "single"
-,    Batch = "batch"
+    Single = "single",
+    Batch = "batch"
 }
 
 export enum CloudflareWorkerRulePostRuleTypeEnum {
@@ -12,45 +12,45 @@ export enum CloudflareWorkerRulePostRuleTypeEnum {
 }
 
 export enum CloudflareWorkerRulePostStatusEnum {
-    Enabled = "enabled"
-,    Disabled = "disabled"
+    Enabled = "enabled",
+    Disabled = "disabled"
 }
 
 
 export class CloudflareWorkerRulePostTargetHeaders extends SpeakeasyBase {
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=value" })
+  @SpeakeasyMetadata({ data: "json, name=value" })
   value?: string;
 }
 
 
 export class CloudflareWorkerRulePostTarget extends SpeakeasyBase {
-  @Metadata({ data: "json, name=headers", elemType: shared.CloudflareWorkerRulePostTargetHeaders })
+  @SpeakeasyMetadata({ data: "json, name=headers", elemType: CloudflareWorkerRulePostTargetHeaders })
   headers?: CloudflareWorkerRulePostTargetHeaders[];
 
-  @Metadata({ data: "json, name=signingKeyId" })
+  @SpeakeasyMetadata({ data: "json, name=signingKeyId" })
   signingKeyId?: string;
 
-  @Metadata({ data: "json, name=url" })
+  @SpeakeasyMetadata({ data: "json, name=url" })
   url: string;
 }
 
 
 export class CloudflareWorkerRulePost extends SpeakeasyBase {
-  @Metadata({ data: "json, name=requestMode" })
+  @SpeakeasyMetadata({ data: "json, name=requestMode" })
   requestMode: CloudflareWorkerRulePostRequestModeEnum;
 
-  @Metadata({ data: "json, name=ruleType" })
+  @SpeakeasyMetadata({ data: "json, name=ruleType" })
   ruleType: CloudflareWorkerRulePostRuleTypeEnum;
 
-  @Metadata({ data: "json, name=source" })
+  @SpeakeasyMetadata({ data: "json, name=source" })
   source: RuleSource;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: CloudflareWorkerRulePostStatusEnum;
 
-  @Metadata({ data: "json, name=target" })
+  @SpeakeasyMetadata({ data: "json, name=target" })
   target: CloudflareWorkerRulePostTarget;
 }

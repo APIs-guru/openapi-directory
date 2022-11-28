@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import List
 from dataclasses_json import dataclass_json
-from . import pointofinterest
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class CategoryDetails:
-    points_of_interest: List[pointofinterest.PointOfInterest] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'PointsOfInterest' }})
+    r"""CategoryDetails
+    Provides information about the category rule that was matched.
+    """
+    
+    points_of_interest: List[PointOfInterest] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('PointsOfInterest') }})
     

@@ -11,6 +11,8 @@ const (
 	BlockBlockTypeEnumBarcode BlockBlockTypeEnum = "BARCODE"
 )
 
+// Block
+// Logical element on the page.
 type Block struct {
 	BlockType   *BlockBlockTypeEnum `json:"blockType,omitempty"`
 	BoundingBox *BoundingPoly       `json:"boundingBox,omitempty"`

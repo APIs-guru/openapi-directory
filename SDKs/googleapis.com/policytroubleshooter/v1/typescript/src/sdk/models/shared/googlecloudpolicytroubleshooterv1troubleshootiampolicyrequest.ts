@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudPolicytroubleshooterV1AccessTuple } from "./googlecloudpolicytroubleshooterv1accesstuple";
+
 
 
 // GoogleCloudPolicytroubleshooterV1TroubleshootIamPolicyRequest
@@ -7,6 +8,6 @@ import { GoogleCloudPolicytroubleshooterV1AccessTuple } from "./googlecloudpolic
  * Request for TroubleshootIamPolicy.
 **/
 export class GoogleCloudPolicytroubleshooterV1TroubleshootIamPolicyRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=accessTuple" })
+  @SpeakeasyMetadata({ data: "json, name=accessTuple" })
   accessTuple?: GoogleCloudPolicytroubleshooterV1AccessTuple;
 }

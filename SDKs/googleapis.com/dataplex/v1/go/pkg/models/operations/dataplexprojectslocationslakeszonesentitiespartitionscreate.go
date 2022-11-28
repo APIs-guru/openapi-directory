@@ -31,7 +31,7 @@ type DataplexProjectsLocationsLakesZonesEntitiesPartitionsCreateSecurity struct 
 type DataplexProjectsLocationsLakesZonesEntitiesPartitionsCreateRequest struct {
 	PathParams  DataplexProjectsLocationsLakesZonesEntitiesPartitionsCreatePathParams
 	QueryParams DataplexProjectsLocationsLakesZonesEntitiesPartitionsCreateQueryParams
-	Request     *shared.GoogleCloudDataplexV1Partition `request:"mediaType=application/json"`
+	Request     *shared.GoogleCloudDataplexV1PartitionInput `request:"mediaType=application/json"`
 	Security    DataplexProjectsLocationsLakesZonesEntitiesPartitionsCreateSecurity
 }
 

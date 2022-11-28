@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ReviewObject
@@ -6,51 +7,51 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * **object** containing a single user review
 **/
 export class ReviewObject extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ownerAvatarURL" })
+  @SpeakeasyMetadata({ data: "json, name=ownerAvatarURL" })
   ownerAvatarUrl?: string;
 
-  @Metadata({ data: "json, name=ownerCountry" })
+  @SpeakeasyMetadata({ data: "json, name=ownerCountry" })
   ownerCountry?: string;
 
-  @Metadata({ data: "json, name=ownerId" })
+  @SpeakeasyMetadata({ data: "json, name=ownerId" })
   ownerId?: number;
 
-  @Metadata({ data: "json, name=ownerName" })
+  @SpeakeasyMetadata({ data: "json, name=ownerName" })
   ownerName?: string;
 
-  @Metadata({ data: "json, name=productCode" })
+  @SpeakeasyMetadata({ data: "json, name=productCode" })
   productCode?: string;
 
-  @Metadata({ data: "json, name=productTitle" })
+  @SpeakeasyMetadata({ data: "json, name=productTitle" })
   productTitle?: string;
 
-  @Metadata({ data: "json, name=productUrlName" })
+  @SpeakeasyMetadata({ data: "json, name=productUrlName" })
   productUrlName?: string;
 
-  @Metadata({ data: "json, name=publishedDate" })
+  @SpeakeasyMetadata({ data: "json, name=publishedDate" })
   publishedDate?: string;
 
-  @Metadata({ data: "json, name=rating" })
+  @SpeakeasyMetadata({ data: "json, name=rating" })
   rating?: number;
 
-  @Metadata({ data: "json, name=review" })
+  @SpeakeasyMetadata({ data: "json, name=review" })
   review?: string;
 
-  @Metadata({ data: "json, name=reviewId" })
+  @SpeakeasyMetadata({ data: "json, name=reviewId" })
   reviewId?: number;
 
-  @Metadata({ data: "json, name=sortOrder" })
+  @SpeakeasyMetadata({ data: "json, name=sortOrder" })
   sortOrder?: number;
 
-  @Metadata({ data: "json, name=sslSupported" })
+  @SpeakeasyMetadata({ data: "json, name=sslSupported" })
   sslSupported?: boolean;
 
-  @Metadata({ data: "json, name=submissionDate" })
+  @SpeakeasyMetadata({ data: "json, name=submissionDate" })
   submissionDate?: string;
 
-  @Metadata({ data: "json, name=viatorFeedback" })
+  @SpeakeasyMetadata({ data: "json, name=viatorFeedback" })
   viatorFeedback?: string;
 
-  @Metadata({ data: "json, name=viatorNotes" })
+  @SpeakeasyMetadata({ data: "json, name=viatorNotes" })
   viatorNotes?: string;
 }

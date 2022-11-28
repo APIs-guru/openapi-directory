@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 export declare class GetExchangeRate extends SpeakeasyBase {
     currency: string;
     ok: boolean;

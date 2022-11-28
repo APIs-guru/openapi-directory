@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { WorkflowRun } from "./workflowrun";
 
 
+
 export class GetWorkflowRunResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Run" })
+  @SpeakeasyMetadata({ data: "json, name=Run" })
   run?: WorkflowRun;
 }

@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Picture } from "./picture";
 import { User } from "./user";
+
 
 
 // OnDemandVideoBuy
@@ -8,13 +9,13 @@ import { User } from "./user";
  * Information about purchasing this video.
 **/
 export class OnDemandVideoBuy extends SpeakeasyBase {
-  @Metadata({ data: "json, name=active" })
+  @SpeakeasyMetadata({ data: "json, name=active" })
   active: boolean;
 
-  @Metadata({ data: "json, name=price" })
+  @SpeakeasyMetadata({ data: "json, name=price" })
   price: Map<string, any>;
 
-  @Metadata({ data: "json, name=purchased" })
+  @SpeakeasyMetadata({ data: "json, name=purchased" })
   purchased?: boolean;
 }
 
@@ -24,13 +25,13 @@ export class OnDemandVideoBuy extends SpeakeasyBase {
  * Information about how the authenticated user can interact with the connection to the video's On Demand page.
 **/
 export class OnDemandVideoInteractionsPage extends SpeakeasyBase {
-  @Metadata({ data: "json, name=added" })
+  @SpeakeasyMetadata({ data: "json, name=added" })
   added: boolean;
 
-  @Metadata({ data: "json, name=options" })
+  @SpeakeasyMetadata({ data: "json, name=options" })
   options: string[];
 
-  @Metadata({ data: "json, name=uri" })
+  @SpeakeasyMetadata({ data: "json, name=uri" })
   uri: string;
 }
 
@@ -40,7 +41,7 @@ export class OnDemandVideoInteractionsPage extends SpeakeasyBase {
  * An object containing information about how the authenticated user can interact with this On Demand page.
 **/
 export class OnDemandVideoInteractions extends SpeakeasyBase {
-  @Metadata({ data: "json, name=page" })
+  @SpeakeasyMetadata({ data: "json, name=page" })
   page: OnDemandVideoInteractionsPage;
 }
 
@@ -50,19 +51,19 @@ export class OnDemandVideoInteractions extends SpeakeasyBase {
  * Information about this season.
 **/
 export class OnDemandVideoMetadataConnectionsSeason extends SpeakeasyBase {
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 
-  @Metadata({ data: "json, name=options" })
+  @SpeakeasyMetadata({ data: "json, name=options" })
   options: string[];
 
-  @Metadata({ data: "json, name=uri" })
+  @SpeakeasyMetadata({ data: "json, name=uri" })
   uri: string;
 }
 
 
 export class OnDemandVideoMetadataConnections extends SpeakeasyBase {
-  @Metadata({ data: "json, name=season" })
+  @SpeakeasyMetadata({ data: "json, name=season" })
   season: OnDemandVideoMetadataConnectionsSeason;
 }
 
@@ -72,13 +73,13 @@ export class OnDemandVideoMetadataConnections extends SpeakeasyBase {
  * Information about the user's Like interactions with this video.
 **/
 export class OnDemandVideoMetadataInteractionsLikes extends SpeakeasyBase {
-  @Metadata({ data: "json, name=added" })
+  @SpeakeasyMetadata({ data: "json, name=added" })
   added: boolean;
 
-  @Metadata({ data: "json, name=added_time" })
+  @SpeakeasyMetadata({ data: "json, name=added_time" })
   addedTime: string;
 
-  @Metadata({ data: "json, name=uri" })
+  @SpeakeasyMetadata({ data: "json, name=uri" })
   uri: string;
 }
 
@@ -88,22 +89,22 @@ export class OnDemandVideoMetadataInteractionsLikes extends SpeakeasyBase {
  * Information about the user's Watch Later interactions with this video.
 **/
 export class OnDemandVideoMetadataInteractionsWatchlater extends SpeakeasyBase {
-  @Metadata({ data: "json, name=added" })
+  @SpeakeasyMetadata({ data: "json, name=added" })
   added: boolean;
 
-  @Metadata({ data: "json, name=added_time" })
+  @SpeakeasyMetadata({ data: "json, name=added_time" })
   addedTime: string;
 
-  @Metadata({ data: "json, name=uri" })
+  @SpeakeasyMetadata({ data: "json, name=uri" })
   uri: string;
 }
 
 
 export class OnDemandVideoMetadataInteractions extends SpeakeasyBase {
-  @Metadata({ data: "json, name=likes" })
+  @SpeakeasyMetadata({ data: "json, name=likes" })
   likes: OnDemandVideoMetadataInteractionsLikes;
 
-  @Metadata({ data: "json, name=watchlater" })
+  @SpeakeasyMetadata({ data: "json, name=watchlater" })
   watchlater: OnDemandVideoMetadataInteractionsWatchlater;
 }
 
@@ -113,10 +114,10 @@ export class OnDemandVideoMetadataInteractions extends SpeakeasyBase {
  * Metadata information about this video.
 **/
 export class OnDemandVideoMetadata extends SpeakeasyBase {
-  @Metadata({ data: "json, name=connections" })
+  @SpeakeasyMetadata({ data: "json, name=connections" })
   connections: OnDemandVideoMetadataConnections;
 
-  @Metadata({ data: "json, name=interactions" })
+  @SpeakeasyMetadata({ data: "json, name=interactions" })
   interactions: OnDemandVideoMetadataInteractions;
 }
 
@@ -126,75 +127,75 @@ export class OnDemandVideoMetadata extends SpeakeasyBase {
  * Information about renting this video.
 **/
 export class OnDemandVideoRent extends SpeakeasyBase {
-  @Metadata({ data: "json, name=active" })
+  @SpeakeasyMetadata({ data: "json, name=active" })
   active: boolean;
 
-  @Metadata({ data: "json, name=price" })
+  @SpeakeasyMetadata({ data: "json, name=price" })
   price: Map<string, any>;
 
-  @Metadata({ data: "json, name=purchased" })
+  @SpeakeasyMetadata({ data: "json, name=purchased" })
   purchased?: boolean;
 }
 
 export enum OnDemandVideoTypeEnum {
-    Extra = "extra"
-,    Main = "main"
-,    Trailer = "trailer"
+    Extra = "extra",
+    Main = "main",
+    Trailer = "trailer"
 }
 
 
 export class OnDemandVideo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=buy" })
+  @SpeakeasyMetadata({ data: "json, name=buy" })
   buy: OnDemandVideoBuy;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=duration" })
+  @SpeakeasyMetadata({ data: "json, name=duration" })
   duration?: string;
 
-  @Metadata({ data: "json, name=episode" })
+  @SpeakeasyMetadata({ data: "json, name=episode" })
   episode?: number;
 
-  @Metadata({ data: "json, name=interactions" })
+  @SpeakeasyMetadata({ data: "json, name=interactions" })
   interactions: OnDemandVideoInteractions;
 
-  @Metadata({ data: "json, name=link" })
+  @SpeakeasyMetadata({ data: "json, name=link" })
   link: string;
 
-  @Metadata({ data: "json, name=metadata" })
+  @SpeakeasyMetadata({ data: "json, name=metadata" })
   metadata: OnDemandVideoMetadata;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=options" })
+  @SpeakeasyMetadata({ data: "json, name=options" })
   options?: string[];
 
-  @Metadata({ data: "json, name=pictures" })
+  @SpeakeasyMetadata({ data: "json, name=pictures" })
   pictures?: Picture;
 
-  @Metadata({ data: "json, name=play_progress" })
+  @SpeakeasyMetadata({ data: "json, name=play_progress" })
   playProgress: number;
 
-  @Metadata({ data: "json, name=position" })
+  @SpeakeasyMetadata({ data: "json, name=position" })
   position?: number;
 
-  @Metadata({ data: "json, name=release_date" })
+  @SpeakeasyMetadata({ data: "json, name=release_date" })
   releaseDate?: string;
 
-  @Metadata({ data: "json, name=release_year" })
+  @SpeakeasyMetadata({ data: "json, name=release_year" })
   releaseYear: number;
 
-  @Metadata({ data: "json, name=rent" })
+  @SpeakeasyMetadata({ data: "json, name=rent" })
   rent: OnDemandVideoRent;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type: OnDemandVideoTypeEnum;
 
-  @Metadata({ data: "json, name=uri" })
+  @SpeakeasyMetadata({ data: "json, name=uri" })
   uri: string;
 
-  @Metadata({ data: "json, name=user" })
+  @SpeakeasyMetadata({ data: "json, name=user" })
   user?: User;
 }

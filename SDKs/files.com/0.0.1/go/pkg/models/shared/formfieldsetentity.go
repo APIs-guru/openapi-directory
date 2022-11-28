@@ -1,5 +1,7 @@
 package shared
 
+// FormFieldSetEntity
+// Create Form Field Set
 type FormFieldSetEntity struct {
 	FormFields  *FormFieldEntity `json:"form_fields,omitempty"`
 	FormLayout  *int32           `json:"form_layout,omitempty"`

@@ -1,8 +1,9 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 
 class GetModifyInstanceEventStartTimeActionEnum(str, Enum):
     MODIFY_INSTANCE_EVENT_START_TIME = "ModifyInstanceEventStartTime"
@@ -13,12 +14,12 @@ class GetModifyInstanceEventStartTimeVersionEnum(str, Enum):
 
 @dataclass
 class GetModifyInstanceEventStartTimeQueryParams:
-    action: GetModifyInstanceEventStartTimeActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetModifyInstanceEventStartTimeActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    instance_event_id: str = field(metadata={'query_param': { 'field_name': 'InstanceEventId', 'style': 'form', 'explode': True }})
+    instance_id: str = field(metadata={'query_param': { 'field_name': 'InstanceId', 'style': 'form', 'explode': True }})
+    not_before: datetime = field(metadata={'query_param': { 'field_name': 'NotBefore', 'style': 'form', 'explode': True }})
+    version: GetModifyInstanceEventStartTimeVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     dry_run: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'DryRun', 'style': 'form', 'explode': True }})
-    instance_event_id: str = field(default=None, metadata={'query_param': { 'field_name': 'InstanceEventId', 'style': 'form', 'explode': True }})
-    instance_id: str = field(default=None, metadata={'query_param': { 'field_name': 'InstanceId', 'style': 'form', 'explode': True }})
-    not_before: datetime = field(default=None, metadata={'query_param': { 'field_name': 'NotBefore', 'style': 'form', 'explode': True }})
-    version: GetModifyInstanceEventStartTimeVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -34,13 +35,13 @@ class GetModifyInstanceEventStartTimeHeaders:
 
 @dataclass
 class GetModifyInstanceEventStartTimeRequest:
-    query_params: GetModifyInstanceEventStartTimeQueryParams = field(default=None)
-    headers: GetModifyInstanceEventStartTimeHeaders = field(default=None)
+    headers: GetModifyInstanceEventStartTimeHeaders = field()
+    query_params: GetModifyInstanceEventStartTimeQueryParams = field()
     
 
 @dataclass
 class GetModifyInstanceEventStartTimeResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

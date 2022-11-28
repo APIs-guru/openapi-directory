@@ -1,6 +1,7 @@
 
 
+
 export enum LoggerTypeEnum {
-    FileSystem = "FileSystem"
-,    AwsCloudWatch = "AWSCloudWatch"
+    FileSystem = "FileSystem",
+    AwsCloudWatch = "AWSCloudWatch"
 }

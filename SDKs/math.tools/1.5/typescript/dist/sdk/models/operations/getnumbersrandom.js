@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetNumbersRandomQueryParams = /** @class */ (function (_super) {
     __extends(GetNumbersRandomQueryParams, _super);
@@ -30,15 +30,15 @@ var GetNumbersRandomQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=max" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=max" }),
         __metadata("design:type", Number)
     ], GetNumbersRandomQueryParams.prototype, "max", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=min" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=min" }),
         __metadata("design:type", Number)
     ], GetNumbersRandomQueryParams.prototype, "min", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=total" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=total" }),
         __metadata("design:type", Number)
     ], GetNumbersRandomQueryParams.prototype, "total", void 0);
     return GetNumbersRandomQueryParams;
@@ -50,7 +50,7 @@ var GetNumbersRandomSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeXMathtoolsApiSecret)
     ], GetNumbersRandomSecurity.prototype, "xMathtoolsApiSecret", void 0);
     return GetNumbersRandomSecurity;
@@ -62,11 +62,11 @@ var GetNumbersRandomRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetNumbersRandomQueryParams)
     ], GetNumbersRandomRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetNumbersRandomSecurity)
     ], GetNumbersRandomRequest.prototype, "security", void 0);
     return GetNumbersRandomRequest;
@@ -78,11 +78,11 @@ var GetNumbersRandomResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetNumbersRandomResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetNumbersRandomResponse.prototype, "statusCode", void 0);
     return GetNumbersRandomResponse;

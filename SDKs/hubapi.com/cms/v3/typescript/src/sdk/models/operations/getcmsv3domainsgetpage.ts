@@ -1,71 +1,66 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetCmsV3DomainsGetPageQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=after" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=after" })
   after?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=archived" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=archived" })
   archived?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=before" })
-  before?: string;
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=createdAfter" })
+  createdAfter?: Date;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=createdAfter" })
-  createdAfter?: number;
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=createdAt" })
+  createdAt?: Date;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=createdAt" })
-  createdAt?: number;
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=createdBefore" })
+  createdBefore?: Date;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=createdBefore" })
-  createdBefore?: number;
-
-  @Metadata({ data: "queryParam, style=form;explode=true;name=limit" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=limit" })
   limit?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=properties" })
-  properties?: string[];
-
-  @Metadata({ data: "queryParam, style=form;explode=true;name=sort" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sort" })
   sort?: string[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=updatedAfter" })
-  updatedAfter?: number;
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=updatedAfter" })
+  updatedAfter?: Date;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=updatedAt" })
-  updatedAt?: number;
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=updatedAt" })
+  updatedAt?: Date;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=updatedBefore" })
-  updatedBefore?: number;
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=updatedBefore" })
+  updatedBefore?: Date;
 }
 
 
 export class GetCmsV3DomainsGetPageSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=query" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=query" })
   hapikey: shared.SchemeHapikey;
 }
 
 
 export class GetCmsV3DomainsGetPageRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetCmsV3DomainsGetPageQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: GetCmsV3DomainsGetPageSecurity;
 }
 
 
 export class GetCmsV3DomainsGetPageResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
-  collectionResponseWithTotalDomain?: shared.CollectionResponseWithTotalDomain;
+  @SpeakeasyMetadata()
+  collectionResponseWithTotalDomainForwardPaging?: shared.CollectionResponseWithTotalDomainForwardPaging;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostPromoteReadReplicaActionEnum(str, Enum):
     PROMOTE_READ_REPLICA = "PromoteReadReplica"
@@ -10,8 +14,8 @@ class PostPromoteReadReplicaVersionEnum(str, Enum):
 
 @dataclass
 class PostPromoteReadReplicaQueryParams:
-    action: PostPromoteReadReplicaActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostPromoteReadReplicaVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostPromoteReadReplicaActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostPromoteReadReplicaVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostPromoteReadReplicaHeaders:
 
 @dataclass
 class PostPromoteReadReplicaRequest:
-    query_params: PostPromoteReadReplicaQueryParams = field(default=None)
-    headers: PostPromoteReadReplicaHeaders = field(default=None)
+    headers: PostPromoteReadReplicaHeaders = field()
+    query_params: PostPromoteReadReplicaQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostPromoteReadReplicaResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

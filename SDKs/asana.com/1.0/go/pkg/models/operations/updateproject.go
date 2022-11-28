@@ -13,18 +13,18 @@ type UpdateProjectQueryParams struct {
 	OptPretty *bool    `queryParam:"style=form,explode=true,name=opt_pretty"`
 }
 
-type UpdateProjectRequestBody struct {
-	Data *shared.ProjectRequest `json:"data,omitempty"`
+type UpdateProjectRequestBodyInput struct {
+	Data *shared.ProjectRequestInput `json:"data,omitempty"`
+}
+
+type UpdateProject200ApplicationJSON struct {
+	Data *shared.ProjectResponse `json:"data,omitempty"`
 }
 
 type UpdateProjectRequest struct {
 	PathParams  UpdateProjectPathParams
 	QueryParams UpdateProjectQueryParams
-	Request     UpdateProjectRequestBody `request:"mediaType=application/json"`
-}
-
-type UpdateProject200ApplicationJSON struct {
-	Data *shared.ProjectResponse `json:"data,omitempty"`
+	Request     UpdateProjectRequestBodyInput `request:"mediaType=application/json"`
 }
 
 type UpdateProjectResponse struct {

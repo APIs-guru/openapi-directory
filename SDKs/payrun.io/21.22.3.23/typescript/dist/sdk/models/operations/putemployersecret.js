@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var PutEmployerSecretPathParams = /** @class */ (function (_super) {
     __extends(PutEmployerSecretPathParams, _super);
@@ -30,11 +30,11 @@ var PutEmployerSecretPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=EmployerId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=EmployerId" }),
         __metadata("design:type", String)
     ], PutEmployerSecretPathParams.prototype, "employerId", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=SecretId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=SecretId" }),
         __metadata("design:type", String)
     ], PutEmployerSecretPathParams.prototype, "secretId", void 0);
     return PutEmployerSecretPathParams;
@@ -46,11 +46,11 @@ var PutEmployerSecretHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=Api-Version" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Api-Version" }),
         __metadata("design:type", String)
     ], PutEmployerSecretHeaders.prototype, "apiVersion", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=Authorization" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Authorization" }),
         __metadata("design:type", String)
     ], PutEmployerSecretHeaders.prototype, "authorization", void 0);
     return PutEmployerSecretHeaders;
@@ -62,11 +62,11 @@ var PutEmployerSecretRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PutEmployerSecretPathParams)
     ], PutEmployerSecretRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PutEmployerSecretHeaders)
     ], PutEmployerSecretRequest.prototype, "headers", void 0);
     return PutEmployerSecretRequest;
@@ -78,19 +78,19 @@ var PutEmployerSecretResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], PutEmployerSecretResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.EmployerSecret)
     ], PutEmployerSecretResponse.prototype, "employerSecret", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.ErrorModel)
     ], PutEmployerSecretResponse.prototype, "errorModel", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], PutEmployerSecretResponse.prototype, "statusCode", void 0);
     return PutEmployerSecretResponse;

@@ -1,6 +1,11 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -18,10 +23,14 @@ class CreateAccessPolicyHeaders:
 @dataclass_json
 @dataclass
 class CreateAccessPolicyRequestBodyAccessPolicyIdentity:
-    group: Optional[shared.GroupIdentity] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'group' }})
-    iam_role: Optional[shared.IamRoleIdentity] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'iamRole' }})
-    iam_user: Optional[shared.IamUserIdentity] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'iamUser' }})
-    user: Optional[shared.UserIdentity] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'user' }})
+    r"""CreateAccessPolicyRequestBodyAccessPolicyIdentity
+    <p>Contains an identity that can access an IoT SiteWise Monitor resource.</p> <note> <p>Currently, you can't use Amazon Web Services APIs to retrieve Amazon Web Services SSO identity IDs. You can find the Amazon Web Services SSO identity IDs in the URL of user and group pages in the <a href=\"https://console.aws.amazon.com/singlesignon\">Amazon Web Services SSO console</a>.</p> </note>
+    """
+    
+    group: Optional[shared.GroupIdentity] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('group') }})
+    iam_role: Optional[shared.IamRoleIdentity] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('iamRole') }})
+    iam_user: Optional[shared.IamUserIdentity] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('iamUser') }})
+    user: Optional[shared.UserIdentity] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('user') }})
     
 class CreateAccessPolicyRequestBodyAccessPolicyPermissionEnum(str, Enum):
     ADMINISTRATOR = "ADMINISTRATOR"
@@ -31,34 +40,38 @@ class CreateAccessPolicyRequestBodyAccessPolicyPermissionEnum(str, Enum):
 @dataclass_json
 @dataclass
 class CreateAccessPolicyRequestBodyAccessPolicyResource:
-    portal: Optional[shared.PortalResource] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'portal' }})
-    project: Optional[shared.ProjectResource] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'project' }})
+    r"""CreateAccessPolicyRequestBodyAccessPolicyResource
+    Contains an IoT SiteWise Monitor resource ID for a portal or project.
+    """
+    
+    portal: Optional[shared.PortalResource] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('portal') }})
+    project: Optional[shared.ProjectResource] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('project') }})
     
 
 @dataclass_json
 @dataclass
 class CreateAccessPolicyRequestBody:
-    access_policy_identity: CreateAccessPolicyRequestBodyAccessPolicyIdentity = field(default=None, metadata={'dataclasses_json': { 'field_name': 'accessPolicyIdentity' }})
-    access_policy_permission: CreateAccessPolicyRequestBodyAccessPolicyPermissionEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'accessPolicyPermission' }})
-    access_policy_resource: CreateAccessPolicyRequestBodyAccessPolicyResource = field(default=None, metadata={'dataclasses_json': { 'field_name': 'accessPolicyResource' }})
-    client_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'clientToken' }})
-    tags: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tags' }})
+    access_policy_identity: CreateAccessPolicyRequestBodyAccessPolicyIdentity = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('accessPolicyIdentity') }})
+    access_policy_permission: CreateAccessPolicyRequestBodyAccessPolicyPermissionEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('accessPolicyPermission') }})
+    access_policy_resource: CreateAccessPolicyRequestBodyAccessPolicyResource = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('accessPolicyResource') }})
+    client_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('clientToken') }})
+    tags: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('tags') }})
     
 
 @dataclass
 class CreateAccessPolicyRequest:
-    headers: CreateAccessPolicyHeaders = field(default=None)
-    request: CreateAccessPolicyRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: CreateAccessPolicyHeaders = field()
+    request: CreateAccessPolicyRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class CreateAccessPolicyResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     create_access_policy_response: Optional[shared.CreateAccessPolicyResponse] = field(default=None)
     internal_failure_exception: Optional[Any] = field(default=None)
     invalid_request_exception: Optional[Any] = field(default=None)
     limit_exceeded_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     

@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 
@@ -16,12 +17,12 @@ class GetV3VideosHeaders:
 
 @dataclass
 class GetV3VideosRequest:
-    query_params: GetV3VideosQueryParams = field(default=None)
-    headers: GetV3VideosHeaders = field(default=None)
+    headers: GetV3VideosHeaders = field()
+    query_params: GetV3VideosQueryParams = field()
     
 
 @dataclass
 class GetV3VideosResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

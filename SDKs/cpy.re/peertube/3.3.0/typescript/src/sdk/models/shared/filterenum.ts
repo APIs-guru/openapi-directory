@@ -1,6 +1,7 @@
 
 
+
 export enum FilterEnum {
-    Local = "local"
-,    AllLocal = "all-local"
+    Local = "local",
+    AllLocal = "all-local"
 }

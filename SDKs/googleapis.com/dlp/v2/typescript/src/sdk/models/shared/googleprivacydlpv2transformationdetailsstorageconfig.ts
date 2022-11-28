@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GooglePrivacyDlpV2BigQueryTable } from "./googleprivacydlpv2bigquerytable";
+
 
 
 // GooglePrivacyDlpV2TransformationDetailsStorageConfig
@@ -7,6 +8,6 @@ import { GooglePrivacyDlpV2BigQueryTable } from "./googleprivacydlpv2bigquerytab
  * Config for storing transformation details.
 **/
 export class GooglePrivacyDlpV2TransformationDetailsStorageConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=table" })
+  @SpeakeasyMetadata({ data: "json, name=table" })
   table?: GooglePrivacyDlpV2BigQueryTable;
 }

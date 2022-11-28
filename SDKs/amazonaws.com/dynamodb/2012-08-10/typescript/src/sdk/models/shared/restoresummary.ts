@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // RestoreSummary
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Contains details for the restore.
 **/
 export class RestoreSummary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=RestoreDateTime" })
+  @SpeakeasyMetadata({ data: "json, name=RestoreDateTime" })
   restoreDateTime: Date;
 
-  @Metadata({ data: "json, name=RestoreInProgress" })
+  @SpeakeasyMetadata({ data: "json, name=RestoreInProgress" })
   restoreInProgress: boolean;
 
-  @Metadata({ data: "json, name=SourceBackupArn" })
+  @SpeakeasyMetadata({ data: "json, name=SourceBackupArn" })
   sourceBackupArn?: string;
 
-  @Metadata({ data: "json, name=SourceTableArn" })
+  @SpeakeasyMetadata({ data: "json, name=SourceTableArn" })
   sourceTableArn?: string;
 }

@@ -41,7 +41,7 @@ type CloudkmsProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsPatchSecurity s
 type CloudkmsProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsPatchRequest struct {
 	PathParams  CloudkmsProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsPatchPathParams
 	QueryParams CloudkmsProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsPatchQueryParams
-	Request     *shared.CryptoKeyVersion `request:"mediaType=application/json"`
+	Request     *shared.CryptoKeyVersionInput `request:"mediaType=application/json"`
 	Security    CloudkmsProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsPatchSecurity
 }
 

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // InstitutionsGetByIdRequestOptions
 /**
  * Specifies optional parameters for `/institutions/get_by_id`. If provided, must not be `null`.
@@ -33,15 +33,15 @@ var InstitutionsGetByIdRequestOptions = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=include_optional_metadata" }),
+        SpeakeasyMetadata({ data: "json, name=include_optional_metadata" }),
         __metadata("design:type", Boolean)
     ], InstitutionsGetByIdRequestOptions.prototype, "includeOptionalMetadata", void 0);
     __decorate([
-        Metadata({ data: "json, name=include_payment_initiation_metadata" }),
+        SpeakeasyMetadata({ data: "json, name=include_payment_initiation_metadata" }),
         __metadata("design:type", Boolean)
     ], InstitutionsGetByIdRequestOptions.prototype, "includePaymentInitiationMetadata", void 0);
     __decorate([
-        Metadata({ data: "json, name=include_status" }),
+        SpeakeasyMetadata({ data: "json, name=include_status" }),
         __metadata("design:type", Boolean)
     ], InstitutionsGetByIdRequestOptions.prototype, "includeStatus", void 0);
     return InstitutionsGetByIdRequestOptions;

@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
-from typing import Any,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class ListNamedShadowsForThingPathParams:
-    thing_name: str = field(default=None, metadata={'path_param': { 'field_name': 'thingName', 'style': 'simple', 'explode': False }})
+    thing_name: str = field(metadata={'path_param': { 'field_name': 'thingName', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -27,21 +30,21 @@ class ListNamedShadowsForThingHeaders:
 
 @dataclass
 class ListNamedShadowsForThingRequest:
-    path_params: ListNamedShadowsForThingPathParams = field(default=None)
-    query_params: ListNamedShadowsForThingQueryParams = field(default=None)
-    headers: ListNamedShadowsForThingHeaders = field(default=None)
+    headers: ListNamedShadowsForThingHeaders = field()
+    path_params: ListNamedShadowsForThingPathParams = field()
+    query_params: ListNamedShadowsForThingQueryParams = field()
     
 
 @dataclass
 class ListNamedShadowsForThingResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     internal_failure_exception: Optional[Any] = field(default=None)
     invalid_request_exception: Optional[Any] = field(default=None)
     list_named_shadows_for_thing_response: Optional[shared.ListNamedShadowsForThingResponse] = field(default=None)
     method_not_allowed_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
     service_unavailable_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     unauthorized_exception: Optional[Any] = field(default=None)
     

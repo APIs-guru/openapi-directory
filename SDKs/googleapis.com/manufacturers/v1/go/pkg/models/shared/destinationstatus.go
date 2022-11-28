@@ -9,6 +9,8 @@ const (
 	DestinationStatusStatusEnumDisapproved DestinationStatusStatusEnum = "DISAPPROVED"
 )
 
+// DestinationStatus
+// The destination status.
 type DestinationStatus struct {
 	Destination *string                      `json:"destination,omitempty"`
 	Status      *DestinationStatusStatusEnum `json:"status,omitempty"`

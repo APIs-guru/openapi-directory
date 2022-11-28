@@ -1,28 +1,29 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class AccountTranDto extends SpeakeasyBase {
-  @Metadata({ data: "json, name=bookTranId" })
+  @SpeakeasyMetadata({ data: "json, name=bookTranId" })
   bookTranId?: number;
 
-  @Metadata({ data: "json, name=bookTranTypeId" })
+  @SpeakeasyMetadata({ data: "json, name=bookTranTypeId" })
   bookTranTypeId?: number;
 
-  @Metadata({ data: "json, name=bookTransactionReference" })
+  @SpeakeasyMetadata({ data: "json, name=bookTransactionReference" })
   bookTransactionReference?: string;
 
-  @Metadata({ data: "json, name=bookTypeDesc" })
+  @SpeakeasyMetadata({ data: "json, name=bookTypeDesc" })
   bookTypeDesc?: string;
 
-  @Metadata({ data: "json, name=credit" })
+  @SpeakeasyMetadata({ data: "json, name=credit" })
   credit?: number;
 
-  @Metadata({ data: "json, name=debit" })
+  @SpeakeasyMetadata({ data: "json, name=debit" })
   debit?: number;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: number;
 
-  @Metadata({ data: "json, name=procDate" })
+  @SpeakeasyMetadata({ data: "json, name=procDate" })
   procDate?: Date;
 }

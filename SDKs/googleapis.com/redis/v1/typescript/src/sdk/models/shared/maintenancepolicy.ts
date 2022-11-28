@@ -1,6 +1,20 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { WeeklyMaintenanceWindowInput } from "./weeklymaintenancewindow";
 import { WeeklyMaintenanceWindow } from "./weeklymaintenancewindow";
+
+
+
+// MaintenancePolicyInput
+/** 
+ * Maintenance policy for an instance.
+**/
+export class MaintenancePolicyInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=description" })
+  description?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=weeklyMaintenanceWindow", elemType: WeeklyMaintenanceWindowInput })
+  weeklyMaintenanceWindow?: WeeklyMaintenanceWindowInput[];
+}
 
 
 // MaintenancePolicy
@@ -8,15 +22,15 @@ import { WeeklyMaintenanceWindow } from "./weeklymaintenancewindow";
  * Maintenance policy for an instance.
 **/
 export class MaintenancePolicy extends SpeakeasyBase {
-  @Metadata({ data: "json, name=createTime" })
+  @SpeakeasyMetadata({ data: "json, name=createTime" })
   createTime?: string;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=updateTime" })
+  @SpeakeasyMetadata({ data: "json, name=updateTime" })
   updateTime?: string;
 
-  @Metadata({ data: "json, name=weeklyMaintenanceWindow", elemType: shared.WeeklyMaintenanceWindow })
+  @SpeakeasyMetadata({ data: "json, name=weeklyMaintenanceWindow", elemType: WeeklyMaintenanceWindow })
   weeklyMaintenanceWindow?: WeeklyMaintenanceWindow[];
 }

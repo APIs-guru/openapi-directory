@@ -1,5 +1,7 @@
 package shared
 
+// Settings
+// Provides optional settings for the <code>StartTranscriptionJob</code> operation.
 type Settings struct {
 	ChannelIdentification  *bool                       `json:"ChannelIdentification,omitempty"`
 	MaxAlternatives        *int64                      `json:"MaxAlternatives,omitempty"`

@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import continuouscheckentry
-from . import check
+from sdk import utils
+from . import *
 
 class ContinuousCheckContinuousCheckStatusEnum(str, Enum):
     NEW = "new"
@@ -17,14 +18,18 @@ class ContinuousCheckContinuousCheckStatusEnum(str, Enum):
 @dataclass_json
 @dataclass
 class ContinuousCheck:
-    continuous_check_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ContinuousCheckID' }})
-    continuous_check_status: ContinuousCheckContinuousCheckStatusEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ContinuousCheckStatus' }})
-    creation_date: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'CreationDate', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    enabled: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Enabled' }})
-    frequency: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Frequency' }})
-    history: Optional[continuouscheckentry.ContinuousCheckEntry] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'History' }})
-    last_check_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'LastCheckID' }})
-    next_run_date: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'NextRunDate', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    original_check: Optional[check.Check] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'OriginalCheck' }})
-    update_date: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'UpdateDate', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    r"""ContinuousCheck
+    Continuous check allows for background checks to be performed on the same people or vehicles periodically and notifies if new information is found. Allowing companies to keep an eye on their workforce or vehicle fleet for any recent wrongdoing they might be involved in.
+    """
+    
+    continuous_check_status: ContinuousCheckContinuousCheckStatusEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('ContinuousCheckStatus') }})
+    frequency: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Frequency') }})
+    last_check_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('LastCheckID') }})
+    continuous_check_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ContinuousCheckID') }})
+    creation_date: Optional[date] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('CreationDate'), 'encoder': utils.dateisoformat(True), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    enabled: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Enabled') }})
+    history: Optional[ContinuousCheckEntry] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('History') }})
+    next_run_date: Optional[date] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('NextRunDate'), 'encoder': utils.dateisoformat(True), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    original_check: Optional[Check] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('OriginalCheck') }})
+    update_date: Optional[date] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('UpdateDate'), 'encoder': utils.dateisoformat(True), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
     

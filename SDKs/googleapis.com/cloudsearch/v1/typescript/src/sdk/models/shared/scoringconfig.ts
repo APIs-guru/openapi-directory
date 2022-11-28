@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ScoringConfig
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Scoring configurations for a source while processing a Search or Suggest request.
 **/
 export class ScoringConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=disableFreshness" })
+  @SpeakeasyMetadata({ data: "json, name=disableFreshness" })
   disableFreshness?: boolean;
 
-  @Metadata({ data: "json, name=disablePersonalization" })
+  @SpeakeasyMetadata({ data: "json, name=disablePersonalization" })
   disablePersonalization?: boolean;
 }

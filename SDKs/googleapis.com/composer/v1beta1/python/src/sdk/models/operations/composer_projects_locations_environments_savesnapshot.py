@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class ComposerProjectsLocationsEnvironmentsSaveSnapshotPathParams:
-    environment: str = field(default=None, metadata={'path_param': { 'field_name': 'environment', 'style': 'simple', 'explode': False }})
+    environment: str = field(metadata={'path_param': { 'field_name': 'environment', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,21 +26,21 @@ class ComposerProjectsLocationsEnvironmentsSaveSnapshotQueryParams:
 
 @dataclass
 class ComposerProjectsLocationsEnvironmentsSaveSnapshotSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class ComposerProjectsLocationsEnvironmentsSaveSnapshotRequest:
-    path_params: ComposerProjectsLocationsEnvironmentsSaveSnapshotPathParams = field(default=None)
-    query_params: ComposerProjectsLocationsEnvironmentsSaveSnapshotQueryParams = field(default=None)
+    path_params: ComposerProjectsLocationsEnvironmentsSaveSnapshotPathParams = field()
+    query_params: ComposerProjectsLocationsEnvironmentsSaveSnapshotQueryParams = field()
+    security: ComposerProjectsLocationsEnvironmentsSaveSnapshotSecurity = field()
     request: Optional[shared.SaveSnapshotRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: ComposerProjectsLocationsEnvironmentsSaveSnapshotSecurity = field(default=None)
     
 
 @dataclass
 class ComposerProjectsLocationsEnvironmentsSaveSnapshotResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     operation: Optional[shared.Operation] = field(default=None)
-    status_code: int = field(default=None)
     

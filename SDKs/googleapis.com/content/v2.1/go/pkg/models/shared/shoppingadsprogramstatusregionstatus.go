@@ -34,6 +34,8 @@ const (
 	ShoppingAdsProgramStatusRegionStatusReviewIneligibilityReasonEnumAlreadyReviewed                      ShoppingAdsProgramStatusRegionStatusReviewIneligibilityReasonEnum = "ALREADY_REVIEWED"
 )
 
+// ShoppingAdsProgramStatusRegionStatus
+// Status of program and region.
 type ShoppingAdsProgramStatusRegionStatus struct {
 	DisapprovalDate                      *string                                                            `json:"disapprovalDate,omitempty"`
 	EligibilityStatus                    *ShoppingAdsProgramStatusRegionStatusEligibilityStatusEnum         `json:"eligibilityStatus,omitempty"`

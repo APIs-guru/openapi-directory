@@ -22,19 +22,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var CustomFieldDefinitionValues = /** @class */ (function (_super) {
     __extends(CustomFieldDefinitionValues, _super);
     function CustomFieldDefinitionValues() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=code" }),
+        SpeakeasyMetadata({ data: "json, name=code" }),
         __metadata("design:type", String)
     ], CustomFieldDefinitionValues.prototype, "code", void 0);
     __decorate([
-        Metadata({ data: "json, name=description" }),
+        SpeakeasyMetadata({ data: "json, name=description" }),
         __metadata("design:type", String)
     ], CustomFieldDefinitionValues.prototype, "description", void 0);
     return CustomFieldDefinitionValues;
@@ -46,27 +45,27 @@ var CustomFieldDefinition = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=category" }),
+        SpeakeasyMetadata({ data: "json, name=category" }),
         __metadata("design:type", String)
     ], CustomFieldDefinition.prototype, "category", void 0);
     __decorate([
-        Metadata({ data: "json, name=defaultValue" }),
+        SpeakeasyMetadata({ data: "json, name=defaultValue" }),
         __metadata("design:type", String)
     ], CustomFieldDefinition.prototype, "defaultValue", void 0);
     __decorate([
-        Metadata({ data: "json, name=isRequired" }),
+        SpeakeasyMetadata({ data: "json, name=isRequired" }),
         __metadata("design:type", Boolean)
     ], CustomFieldDefinition.prototype, "isRequired", void 0);
     __decorate([
-        Metadata({ data: "json, name=label" }),
+        SpeakeasyMetadata({ data: "json, name=label" }),
         __metadata("design:type", String)
     ], CustomFieldDefinition.prototype, "label", void 0);
     __decorate([
-        Metadata({ data: "json, name=type" }),
+        SpeakeasyMetadata({ data: "json, name=type" }),
         __metadata("design:type", String)
     ], CustomFieldDefinition.prototype, "type", void 0);
     __decorate([
-        Metadata({ data: "json, name=values", elemType: shared.CustomFieldDefinitionValues }),
+        SpeakeasyMetadata({ data: "json, name=values", elemType: CustomFieldDefinitionValues }),
         __metadata("design:type", Array)
     ], CustomFieldDefinition.prototype, "values", void 0);
     return CustomFieldDefinition;

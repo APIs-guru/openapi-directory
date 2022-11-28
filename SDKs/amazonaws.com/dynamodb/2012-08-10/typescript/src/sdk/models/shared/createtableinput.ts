@@ -1,5 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AttributeDefinition } from "./attributedefinition";
 import { BillingModeEnum } from "./billingmodeenum";
 import { GlobalSecondaryIndex } from "./globalsecondaryindex";
@@ -11,38 +10,39 @@ import { StreamSpecification } from "./streamspecification";
 import { Tag } from "./tag";
 
 
+
 // CreateTableInput
 /** 
  * Represents the input of a <code>CreateTable</code> operation.
 **/
 export class CreateTableInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AttributeDefinitions", elemType: shared.AttributeDefinition })
+  @SpeakeasyMetadata({ data: "json, name=AttributeDefinitions", elemType: AttributeDefinition })
   attributeDefinitions: AttributeDefinition[];
 
-  @Metadata({ data: "json, name=BillingMode" })
+  @SpeakeasyMetadata({ data: "json, name=BillingMode" })
   billingMode?: BillingModeEnum;
 
-  @Metadata({ data: "json, name=GlobalSecondaryIndexes", elemType: shared.GlobalSecondaryIndex })
+  @SpeakeasyMetadata({ data: "json, name=GlobalSecondaryIndexes", elemType: GlobalSecondaryIndex })
   globalSecondaryIndexes?: GlobalSecondaryIndex[];
 
-  @Metadata({ data: "json, name=KeySchema", elemType: shared.KeySchemaElement })
+  @SpeakeasyMetadata({ data: "json, name=KeySchema", elemType: KeySchemaElement })
   keySchema: KeySchemaElement[];
 
-  @Metadata({ data: "json, name=LocalSecondaryIndexes", elemType: shared.LocalSecondaryIndex })
+  @SpeakeasyMetadata({ data: "json, name=LocalSecondaryIndexes", elemType: LocalSecondaryIndex })
   localSecondaryIndexes?: LocalSecondaryIndex[];
 
-  @Metadata({ data: "json, name=ProvisionedThroughput" })
+  @SpeakeasyMetadata({ data: "json, name=ProvisionedThroughput" })
   provisionedThroughput?: ProvisionedThroughput;
 
-  @Metadata({ data: "json, name=SSESpecification" })
+  @SpeakeasyMetadata({ data: "json, name=SSESpecification" })
   sseSpecification?: SseSpecification;
 
-  @Metadata({ data: "json, name=StreamSpecification" })
+  @SpeakeasyMetadata({ data: "json, name=StreamSpecification" })
   streamSpecification?: StreamSpecification;
 
-  @Metadata({ data: "json, name=TableName" })
+  @SpeakeasyMetadata({ data: "json, name=TableName" })
   tableName: string;
 
-  @Metadata({ data: "json, name=Tags", elemType: shared.Tag })
+  @SpeakeasyMetadata({ data: "json, name=Tags", elemType: Tag })
   tags?: Tag[];
 }

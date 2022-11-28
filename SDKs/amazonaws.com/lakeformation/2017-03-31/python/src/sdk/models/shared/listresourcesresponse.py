@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import resourceinfo
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ListResourcesResponse:
-    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'NextToken' }})
-    resource_info_list: Optional[List[resourceinfo.ResourceInfo]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ResourceInfoList' }})
+    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('NextToken') }})
+    resource_info_list: Optional[List[ResourceInfo]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ResourceInfoList') }})
     

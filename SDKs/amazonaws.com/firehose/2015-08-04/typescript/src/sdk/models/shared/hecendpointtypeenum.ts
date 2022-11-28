@@ -1,6 +1,7 @@
 
 
+
 export enum HecEndpointTypeEnum {
-    Raw = "Raw"
-,    Event = "Event"
+    Raw = "Raw",
+    Event = "Event"
 }

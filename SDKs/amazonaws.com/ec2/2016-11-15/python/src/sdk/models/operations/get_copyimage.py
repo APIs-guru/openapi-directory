@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetCopyImageActionEnum(str, Enum):
     COPY_IMAGE = "CopyImage"
@@ -10,17 +14,17 @@ class GetCopyImageVersionEnum(str, Enum):
 
 @dataclass
 class GetCopyImageQueryParams:
-    action: GetCopyImageActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetCopyImageActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    name: str = field(metadata={'query_param': { 'field_name': 'Name', 'style': 'form', 'explode': True }})
+    source_image_id: str = field(metadata={'query_param': { 'field_name': 'SourceImageId', 'style': 'form', 'explode': True }})
+    source_region: str = field(metadata={'query_param': { 'field_name': 'SourceRegion', 'style': 'form', 'explode': True }})
+    version: GetCopyImageVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     client_token: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'ClientToken', 'style': 'form', 'explode': True }})
     description: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'Description', 'style': 'form', 'explode': True }})
     destination_outpost_arn: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'DestinationOutpostArn', 'style': 'form', 'explode': True }})
     dry_run: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'DryRun', 'style': 'form', 'explode': True }})
     encrypted: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'Encrypted', 'style': 'form', 'explode': True }})
     kms_key_id: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'KmsKeyId', 'style': 'form', 'explode': True }})
-    name: str = field(default=None, metadata={'query_param': { 'field_name': 'Name', 'style': 'form', 'explode': True }})
-    source_image_id: str = field(default=None, metadata={'query_param': { 'field_name': 'SourceImageId', 'style': 'form', 'explode': True }})
-    source_region: str = field(default=None, metadata={'query_param': { 'field_name': 'SourceRegion', 'style': 'form', 'explode': True }})
-    version: GetCopyImageVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -36,13 +40,13 @@ class GetCopyImageHeaders:
 
 @dataclass
 class GetCopyImageRequest:
-    query_params: GetCopyImageQueryParams = field(default=None)
-    headers: GetCopyImageHeaders = field(default=None)
+    headers: GetCopyImageHeaders = field()
+    query_params: GetCopyImageQueryParams = field()
     
 
 @dataclass
 class GetCopyImageResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

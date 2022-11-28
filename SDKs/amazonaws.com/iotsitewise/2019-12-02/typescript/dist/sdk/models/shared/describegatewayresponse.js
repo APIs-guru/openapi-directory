@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { GatewayCapabilitySummary } from "./gatewaycapabilitysummary";
 import { GatewayPlatform } from "./gatewayplatform";
 var DescribeGatewayResponse = /** @class */ (function (_super) {
     __extends(DescribeGatewayResponse, _super);
@@ -31,31 +31,31 @@ var DescribeGatewayResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=creationDate" }),
+        SpeakeasyMetadata({ data: "json, name=creationDate" }),
         __metadata("design:type", Date)
     ], DescribeGatewayResponse.prototype, "creationDate", void 0);
     __decorate([
-        Metadata({ data: "json, name=gatewayArn" }),
+        SpeakeasyMetadata({ data: "json, name=gatewayArn" }),
         __metadata("design:type", String)
     ], DescribeGatewayResponse.prototype, "gatewayArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=gatewayCapabilitySummaries", elemType: shared.GatewayCapabilitySummary }),
+        SpeakeasyMetadata({ data: "json, name=gatewayCapabilitySummaries", elemType: GatewayCapabilitySummary }),
         __metadata("design:type", Array)
     ], DescribeGatewayResponse.prototype, "gatewayCapabilitySummaries", void 0);
     __decorate([
-        Metadata({ data: "json, name=gatewayId" }),
+        SpeakeasyMetadata({ data: "json, name=gatewayId" }),
         __metadata("design:type", String)
     ], DescribeGatewayResponse.prototype, "gatewayId", void 0);
     __decorate([
-        Metadata({ data: "json, name=gatewayName" }),
+        SpeakeasyMetadata({ data: "json, name=gatewayName" }),
         __metadata("design:type", String)
     ], DescribeGatewayResponse.prototype, "gatewayName", void 0);
     __decorate([
-        Metadata({ data: "json, name=gatewayPlatform" }),
+        SpeakeasyMetadata({ data: "json, name=gatewayPlatform" }),
         __metadata("design:type", GatewayPlatform)
     ], DescribeGatewayResponse.prototype, "gatewayPlatform", void 0);
     __decorate([
-        Metadata({ data: "json, name=lastUpdateDate" }),
+        SpeakeasyMetadata({ data: "json, name=lastUpdateDate" }),
         __metadata("design:type", Date)
     ], DescribeGatewayResponse.prototype, "lastUpdateDate", void 0);
     return DescribeGatewayResponse;

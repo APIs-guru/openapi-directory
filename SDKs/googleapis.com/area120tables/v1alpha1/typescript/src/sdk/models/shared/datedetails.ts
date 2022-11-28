@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // DateDetails
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Details about a date column.
 **/
 export class DateDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=hasTime" })
+  @SpeakeasyMetadata({ data: "json, name=hasTime" })
   hasTime?: boolean;
 }

@@ -1,41 +1,42 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetAlbumVideoAlt1PathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=album_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=album_id" })
   albumId: number;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=video_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=video_id" })
   videoId: number;
 }
 
 
 export class GetAlbumVideoAlt1QueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=password" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=password" })
   password?: string;
 }
 
 
 export class GetAlbumVideoAlt1Request extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetAlbumVideoAlt1PathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetAlbumVideoAlt1QueryParams;
 }
 
 
 export class GetAlbumVideoAlt1Response extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   legacyError?: shared.LegacyError;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   video?: shared.Video;
 }

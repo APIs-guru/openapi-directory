@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DomainNameStatusEnum } from "./domainnamestatusenum";
 import { EndpointTypeEnum } from "./endpointtypeenum";
 import { SecurityPolicyEnum } from "./securitypolicyenum";
+
 
 
 // DomainNameConfiguration
@@ -9,33 +10,33 @@ import { SecurityPolicyEnum } from "./securitypolicyenum";
  * The domain name configuration.
 **/
 export class DomainNameConfiguration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ApiGatewayDomainName" })
+  @SpeakeasyMetadata({ data: "json, name=ApiGatewayDomainName" })
   apiGatewayDomainName?: string;
 
-  @Metadata({ data: "json, name=CertificateArn" })
+  @SpeakeasyMetadata({ data: "json, name=CertificateArn" })
   certificateArn?: string;
 
-  @Metadata({ data: "json, name=CertificateName" })
+  @SpeakeasyMetadata({ data: "json, name=CertificateName" })
   certificateName?: string;
 
-  @Metadata({ data: "json, name=CertificateUploadDate" })
+  @SpeakeasyMetadata({ data: "json, name=CertificateUploadDate" })
   certificateUploadDate?: Date;
 
-  @Metadata({ data: "json, name=DomainNameStatus" })
+  @SpeakeasyMetadata({ data: "json, name=DomainNameStatus" })
   domainNameStatus?: DomainNameStatusEnum;
 
-  @Metadata({ data: "json, name=DomainNameStatusMessage" })
+  @SpeakeasyMetadata({ data: "json, name=DomainNameStatusMessage" })
   domainNameStatusMessage?: string;
 
-  @Metadata({ data: "json, name=EndpointType" })
+  @SpeakeasyMetadata({ data: "json, name=EndpointType" })
   endpointType?: EndpointTypeEnum;
 
-  @Metadata({ data: "json, name=HostedZoneId" })
+  @SpeakeasyMetadata({ data: "json, name=HostedZoneId" })
   hostedZoneId?: string;
 
-  @Metadata({ data: "json, name=OwnershipVerificationCertificateArn" })
+  @SpeakeasyMetadata({ data: "json, name=OwnershipVerificationCertificateArn" })
   ownershipVerificationCertificateArn?: string;
 
-  @Metadata({ data: "json, name=SecurityPolicy" })
+  @SpeakeasyMetadata({ data: "json, name=SecurityPolicy" })
   securityPolicy?: SecurityPolicyEnum;
 }

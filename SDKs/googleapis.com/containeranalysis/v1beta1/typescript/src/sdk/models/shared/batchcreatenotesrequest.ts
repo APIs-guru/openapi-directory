@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Note } from "./note";
+
 
 
 // BatchCreateNotesRequest
@@ -8,6 +8,6 @@ import { Note } from "./note";
  * Request to create notes in batch.
 **/
 export class BatchCreateNotesRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=notes", elemType: shared.Note })
+  @SpeakeasyMetadata({ data: "json, name=notes", elemType: Note })
   notes?: Map<string, Note>;
 }

@@ -20,6 +20,8 @@ const (
 	RuntimeStageEnumDecommissioned          RuntimeStageEnum = "DECOMMISSIONED"
 )
 
+// Runtime
+// Describes a runtime and any special information (e.g., deprecation status) related to it.
 type Runtime struct {
 	DisplayName *string                 `json:"displayName,omitempty"`
 	Environment *RuntimeEnvironmentEnum `json:"environment,omitempty"`

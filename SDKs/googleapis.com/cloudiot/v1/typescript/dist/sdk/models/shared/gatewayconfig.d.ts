@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 export declare enum GatewayConfigGatewayAuthMethodEnum {
     GatewayAuthMethodUnspecified = "GATEWAY_AUTH_METHOD_UNSPECIFIED",
     AssociationOnly = "ASSOCIATION_ONLY",

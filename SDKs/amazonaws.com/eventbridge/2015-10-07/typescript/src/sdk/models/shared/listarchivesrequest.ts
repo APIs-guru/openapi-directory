@@ -1,20 +1,21 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ArchiveStateEnum } from "./archivestateenum";
 
 
+
 export class ListArchivesRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=EventSourceArn" })
+  @SpeakeasyMetadata({ data: "json, name=EventSourceArn" })
   eventSourceArn?: string;
 
-  @Metadata({ data: "json, name=Limit" })
+  @SpeakeasyMetadata({ data: "json, name=Limit" })
   limit?: number;
 
-  @Metadata({ data: "json, name=NamePrefix" })
+  @SpeakeasyMetadata({ data: "json, name=NamePrefix" })
   namePrefix?: string;
 
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=State" })
+  @SpeakeasyMetadata({ data: "json, name=State" })
   state?: ArchiveStateEnum;
 }

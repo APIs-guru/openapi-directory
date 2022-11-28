@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class SecuritycenterOrganizationsSourcesGetPathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -28,20 +29,20 @@ class SecuritycenterOrganizationsSourcesGetQueryParams:
 
 @dataclass
 class SecuritycenterOrganizationsSourcesGetSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class SecuritycenterOrganizationsSourcesGetRequest:
-    path_params: SecuritycenterOrganizationsSourcesGetPathParams = field(default=None)
-    query_params: SecuritycenterOrganizationsSourcesGetQueryParams = field(default=None)
-    security: SecuritycenterOrganizationsSourcesGetSecurity = field(default=None)
+    path_params: SecuritycenterOrganizationsSourcesGetPathParams = field()
+    query_params: SecuritycenterOrganizationsSourcesGetQueryParams = field()
+    security: SecuritycenterOrganizationsSourcesGetSecurity = field()
     
 
 @dataclass
 class SecuritycenterOrganizationsSourcesGetResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     source: Optional[shared.Source] = field(default=None)
-    status_code: int = field(default=None)
     

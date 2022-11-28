@@ -1,5 +1,8 @@
 package shared
 
+// ConnectorMetadata
+//
+//	A structure to specify connector-specific metadata such as <code>oAuthScopes</code>, <code>supportedRegions</code>, <code>privateLinkServiceUrl</code>, and so on.
 type ConnectorMetadata struct {
 	Amplitude        map[string]interface{}   `json:"Amplitude,omitempty"`
 	CustomerProfiles map[string]interface{}   `json:"CustomerProfiles,omitempty"`

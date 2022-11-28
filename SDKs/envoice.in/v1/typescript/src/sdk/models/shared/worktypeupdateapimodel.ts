@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class WorkTypeUpdateApiModel extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Id, form, name=Id;" })
+  @SpeakeasyMetadata({ data: "json, name=Id, form, name=Id;" })
   id?: number;
 
-  @Metadata({ data: "json, name=Title, form, name=Title;" })
+  @SpeakeasyMetadata({ data: "json, name=Title, form, name=Title;" })
   title?: string;
 }

@@ -1,13 +1,13 @@
 import axios, { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
-import { MatchContentType } from "../internal/utils/contenttype";
 import * as operations from "./models/operations";
-import { CreateSecurityClient } from "../internal/utils/security";
-import * as utils from "../internal/utils/utils";
+import * as utils from "../internal/utils";
+
+
 
 type OptsFunc = (sdk: SDK) => void;
 
-const Servers = [
-  "https://apisetu.gov.in/dgft",
+export const ServerList = [
+	"https://apisetu.gov.in/dgft",
 ] as const;
 
 export function WithServerURL(
@@ -18,50 +18,49 @@ export function WithServerURL(
     if (params != null) {
       serverURL = utils.ReplaceParameters(serverURL, params);
     }
-    sdk.serverURL = serverURL;
+    sdk._serverURL = serverURL;
   };
 }
 
 export function WithClient(client: AxiosInstance): OptsFunc {
   return (sdk: SDK) => {
-    sdk.defaultClient = client;
+    sdk._defaultClient = client;
   };
 }
 
 
 export class SDK {
-  defaultClient?: AxiosInstance;
-  securityClient?: AxiosInstance;
-  security?: any;
-  serverURL: string;
+
+  public _defaultClient: AxiosInstance;
+  public _securityClient: AxiosInstance;
+  
+  public _serverURL: string;
+  private _language = "typescript";
+  private _sdkVersion = "0.0.1";
+  private _genVersion = "internal";
 
   constructor(...opts: OptsFunc[]) {
     opts.forEach((o) => o(this));
-    if (this.serverURL == "") {
-      this.serverURL = Servers[0];
+    if (this._serverURL == "") {
+      this._serverURL = ServerList[0];
     }
 
-    if (!this.defaultClient) {
-      this.defaultClient = axios.create({ baseURL: this.serverURL });
+    if (!this._defaultClient) {
+      this._defaultClient = axios.create({ baseURL: this._serverURL });
     }
 
-    if (!this.securityClient) {
-      if (this.security) {
-        this.securityClient = CreateSecurityClient(
-          this.defaultClient,
-          this.security
-        );
-      } else {
-        this.securityClient = this.defaultClient;
-      }
+    if (!this._securityClient) {
+      this._securityClient = this._defaultClient;
     }
+    
   }
   
-  // ImporterExporterCodeVerificationApi - Importer-Exporter Code (IEC) Verification API.
-  /** 
+  /**
+   * importerExporterCodeVerificationApi - Importer-Exporter Code (IEC) Verification API.
+   *
    * Description of Importer-Exporter Code (IEC) Verification API.
   **/
-  ImporterExporterCodeVerificationApi(
+  importerExporterCodeVerificationApi(
     req: operations.ImporterExporterCodeVerificationApiRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.ImporterExporterCodeVerificationApiResponse> {
@@ -69,57 +68,59 @@ export class SDK {
       req = new operations.ImporterExporterCodeVerificationApiRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/v1/iec/{iec}", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.ImporterExporterCodeVerificationApiResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.ImporterExporterCodeVerificationApiResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.importerExporterCodeVerificationApi200ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.importerExporterCodeVerificationApi400ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.importerExporterCodeVerificationApi401ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.importerExporterCodeVerificationApi404ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.importerExporterCodeVerificationApi500ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 502:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 502:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.importerExporterCodeVerificationApi502ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 503:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 503:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.importerExporterCodeVerificationApi503ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 504:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 504:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.importerExporterCodeVerificationApi504ApplicationJsonObject = httpRes?.data;
             }
             break;

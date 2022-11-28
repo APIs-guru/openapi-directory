@@ -1,22 +1,17 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 
 
-export class WritableVlanGroup extends SpeakeasyBase {
-  @Metadata({ data: "json, name=description" })
+
+export class WritableVlanGroupInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=id" })
-  id?: number;
-
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 
-  @Metadata({ data: "json, name=site" })
+  @SpeakeasyMetadata({ data: "json, name=site" })
   site?: number;
 
-  @Metadata({ data: "json, name=slug" })
+  @SpeakeasyMetadata({ data: "json, name=slug" })
   slug: string;
-
-  @Metadata({ data: "json, name=vlan_count" })
-  vlanCount?: number;
 }

@@ -1,6 +1,7 @@
 
 
+
 export enum DurationUnitEnum {
-    S = "s"
-,    Ms = "ms"
+    S = "s",
+    Ms = "ms"
 }

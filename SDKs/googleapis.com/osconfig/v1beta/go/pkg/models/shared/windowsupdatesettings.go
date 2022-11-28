@@ -15,6 +15,8 @@ const (
 	WindowsUpdateSettingsClassificationsEnumUpdate                    WindowsUpdateSettingsClassificationsEnum = "UPDATE"
 )
 
+// WindowsUpdateSettings
+// Windows patching is performed using the Windows Update Agent.
 type WindowsUpdateSettings struct {
 	Classifications  []WindowsUpdateSettingsClassificationsEnum `json:"classifications,omitempty"`
 	Excludes         []string                                   `json:"excludes,omitempty"`

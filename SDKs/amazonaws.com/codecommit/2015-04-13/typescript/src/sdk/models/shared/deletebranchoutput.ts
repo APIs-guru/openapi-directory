@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BranchInfo } from "./branchinfo";
+
 
 
 // DeleteBranchOutput
@@ -7,6 +8,6 @@ import { BranchInfo } from "./branchinfo";
  * Represents the output of a delete branch operation.
 **/
 export class DeleteBranchOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=deletedBranch" })
+  @SpeakeasyMetadata({ data: "json, name=deletedBranch" })
   deletedBranch?: BranchInfo;
 }

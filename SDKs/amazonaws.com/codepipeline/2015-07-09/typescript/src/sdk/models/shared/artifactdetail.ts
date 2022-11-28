@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { S3Location } from "./s3location";
+
 
 
 // ArtifactDetail
@@ -7,9 +8,9 @@ import { S3Location } from "./s3location";
  * Artifact details for the action execution, such as the artifact location.
 **/
 export class ArtifactDetail extends SpeakeasyBase {
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=s3location" })
+  @SpeakeasyMetadata({ data: "json, name=s3location" })
   s3location?: S3Location;
 }

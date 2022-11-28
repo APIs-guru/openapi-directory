@@ -9,6 +9,8 @@ const (
 	CopyBackupEncryptionConfigEncryptionTypeEnumCustomerManagedEncryption          CopyBackupEncryptionConfigEncryptionTypeEnum = "CUSTOMER_MANAGED_ENCRYPTION"
 )
 
+// CopyBackupEncryptionConfig
+// Encryption configuration for the copied backup.
 type CopyBackupEncryptionConfig struct {
 	EncryptionType *CopyBackupEncryptionConfigEncryptionTypeEnum `json:"encryptionType,omitempty"`
 	KmsKeyName     *string                                       `json:"kmsKeyName,omitempty"`

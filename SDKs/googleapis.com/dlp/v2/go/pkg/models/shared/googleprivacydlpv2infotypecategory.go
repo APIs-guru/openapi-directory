@@ -53,6 +53,7 @@ const (
 	GooglePrivacyDlpV2InfoTypeCategoryLocationCategoryEnumUruguay             GooglePrivacyDlpV2InfoTypeCategoryLocationCategoryEnum = "URUGUAY"
 	GooglePrivacyDlpV2InfoTypeCategoryLocationCategoryEnumVenezuela           GooglePrivacyDlpV2InfoTypeCategoryLocationCategoryEnum = "VENEZUELA"
 	GooglePrivacyDlpV2InfoTypeCategoryLocationCategoryEnumInternal            GooglePrivacyDlpV2InfoTypeCategoryLocationCategoryEnum = "INTERNAL"
+	GooglePrivacyDlpV2InfoTypeCategoryLocationCategoryEnumNewZealand          GooglePrivacyDlpV2InfoTypeCategoryLocationCategoryEnum = "NEW_ZEALAND"
 )
 
 type GooglePrivacyDlpV2InfoTypeCategoryTypeCategoryEnum string
@@ -68,6 +69,8 @@ const (
 	GooglePrivacyDlpV2InfoTypeCategoryTypeCategoryEnumContextualInformation GooglePrivacyDlpV2InfoTypeCategoryTypeCategoryEnum = "CONTEXTUAL_INFORMATION"
 )
 
+// GooglePrivacyDlpV2InfoTypeCategory
+// Classification of infoTypes to organize them according to geographic location, industry, and data type.
 type GooglePrivacyDlpV2InfoTypeCategory struct {
 	IndustryCategory *GooglePrivacyDlpV2InfoTypeCategoryIndustryCategoryEnum `json:"industryCategory,omitempty"`
 	LocationCategory *GooglePrivacyDlpV2InfoTypeCategoryLocationCategoryEnum `json:"locationCategory,omitempty"`

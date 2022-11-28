@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class UptimeCheckIPRegionEnum(str, Enum):
     REGION_UNSPECIFIED = "REGION_UNSPECIFIED"
@@ -13,7 +15,11 @@ class UptimeCheckIPRegionEnum(str, Enum):
 @dataclass_json
 @dataclass
 class UptimeCheckIP:
-    ip_address: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ipAddress' }})
-    location: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'location' }})
-    region: Optional[UptimeCheckIPRegionEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'region' }})
+    r"""UptimeCheckIP
+    Contains the region, location, and list of IP addresses where checkers in the location run from.
+    """
+    
+    ip_address: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ipAddress') }})
+    location: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('location') }})
+    region: Optional[UptimeCheckIPRegionEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('region') }})
     

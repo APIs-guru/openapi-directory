@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Optional
 from sdk.models import shared
 
 
 @dataclass
 class PutSetupV1CalendarsIDPathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -18,13 +21,13 @@ class PutSetupV1CalendarsIDRequests:
 
 @dataclass
 class PutSetupV1CalendarsIDRequest:
-    path_params: PutSetupV1CalendarsIDPathParams = field(default=None)
+    path_params: PutSetupV1CalendarsIDPathParams = field()
     request: Optional[PutSetupV1CalendarsIDRequests] = field(default=None)
     
 
 @dataclass
 class PutSetupV1CalendarsIDResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     schedule_view_model: Optional[shared.ScheduleViewModel] = field(default=None)
-    status_code: int = field(default=None)
     

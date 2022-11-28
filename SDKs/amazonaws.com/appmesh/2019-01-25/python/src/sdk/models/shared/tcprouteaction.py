@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import List
 from dataclasses_json import dataclass_json
-from . import weightedtarget
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class TCPRouteAction:
-    weighted_targets: List[weightedtarget.WeightedTarget] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'weightedTargets' }})
+    r"""TCPRouteAction
+    An object that represents the action to take if a match is determined.
+    """
+    
+    weighted_targets: List[WeightedTarget] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('weightedTargets') }})
     

@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AnnotateImageResponse } from "./annotateimageresponse";
+
 
 
 // BatchAnnotateImagesResponse
@@ -8,6 +8,6 @@ import { AnnotateImageResponse } from "./annotateimageresponse";
  * Response to a batch image annotation request.
 **/
 export class BatchAnnotateImagesResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=responses", elemType: shared.AnnotateImageResponse })
+  @SpeakeasyMetadata({ data: "json, name=responses", elemType: AnnotateImageResponse })
   responses?: AnnotateImageResponse[];
 }

@@ -1,29 +1,30 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class DcimRackRolesPartialUpdatePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" })
   id: number;
 }
 
 
 export class DcimRackRolesPartialUpdateRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: DcimRackRolesPartialUpdatePathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
-  request: shared.RackRole;
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request: shared.RackRoleInput;
 }
 
 
 export class DcimRackRolesPartialUpdateResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   rackRole?: shared.RackRole;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

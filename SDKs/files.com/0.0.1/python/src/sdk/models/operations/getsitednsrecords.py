@@ -11,12 +11,12 @@ class GetSiteDNSRecordsQueryParams:
 
 @dataclass
 class GetSiteDNSRecordsRequest:
-    query_params: GetSiteDNSRecordsQueryParams = field(default=None)
+    query_params: GetSiteDNSRecordsQueryParams = field()
     
 
 @dataclass
 class GetSiteDNSRecordsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     dns_record_entities: Optional[List[shared.DNSRecordEntity]] = field(default=None)
-    status_code: int = field(default=None)
     

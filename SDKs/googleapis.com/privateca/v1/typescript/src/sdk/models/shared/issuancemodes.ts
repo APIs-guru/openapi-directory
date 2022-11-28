@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // IssuanceModes
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * IssuanceModes specifies the allowed ways in which Certificates may be requested from this CaPool.
 **/
 export class IssuanceModes extends SpeakeasyBase {
-  @Metadata({ data: "json, name=allowConfigBasedIssuance" })
+  @SpeakeasyMetadata({ data: "json, name=allowConfigBasedIssuance" })
   allowConfigBasedIssuance?: boolean;
 
-  @Metadata({ data: "json, name=allowCsrBasedIssuance" })
+  @SpeakeasyMetadata({ data: "json, name=allowCsrBasedIssuance" })
   allowCsrBasedIssuance?: boolean;
 }

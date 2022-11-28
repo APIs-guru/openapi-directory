@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TagListEntry } from "./taglistentry";
+
 
 
 // CreateAgentRequest
@@ -8,21 +8,21 @@ import { TagListEntry } from "./taglistentry";
  * CreateAgentRequest
 **/
 export class CreateAgentRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ActivationKey" })
+  @SpeakeasyMetadata({ data: "json, name=ActivationKey" })
   activationKey: string;
 
-  @Metadata({ data: "json, name=AgentName" })
+  @SpeakeasyMetadata({ data: "json, name=AgentName" })
   agentName?: string;
 
-  @Metadata({ data: "json, name=SecurityGroupArns" })
+  @SpeakeasyMetadata({ data: "json, name=SecurityGroupArns" })
   securityGroupArns?: string[];
 
-  @Metadata({ data: "json, name=SubnetArns" })
+  @SpeakeasyMetadata({ data: "json, name=SubnetArns" })
   subnetArns?: string[];
 
-  @Metadata({ data: "json, name=Tags", elemType: shared.TagListEntry })
+  @SpeakeasyMetadata({ data: "json, name=Tags", elemType: TagListEntry })
   tags?: TagListEntry[];
 
-  @Metadata({ data: "json, name=VpcEndpointId" })
+  @SpeakeasyMetadata({ data: "json, name=VpcEndpointId" })
   vpcEndpointId?: string;
 }

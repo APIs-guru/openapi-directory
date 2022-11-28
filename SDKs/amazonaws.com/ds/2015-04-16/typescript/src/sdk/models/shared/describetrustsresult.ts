@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Trust } from "./trust";
+
 
 
 // DescribeTrustsResult
@@ -8,9 +8,9 @@ import { Trust } from "./trust";
  * The result of a DescribeTrust request.
 **/
 export class DescribeTrustsResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=Trusts", elemType: shared.Trust })
+  @SpeakeasyMetadata({ data: "json, name=Trusts", elemType: Trust })
   trusts?: Trust[];
 }

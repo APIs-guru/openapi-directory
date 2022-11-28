@@ -22,22 +22,22 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var CreateComponentRequest = /** @class */ (function (_super) {
     __extends(CreateComponentRequest, _super);
     function CreateComponentRequest() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=ComponentName" }),
+        SpeakeasyMetadata({ data: "json, name=ComponentName" }),
         __metadata("design:type", String)
     ], CreateComponentRequest.prototype, "componentName", void 0);
     __decorate([
-        Metadata({ data: "json, name=ResourceGroupName" }),
+        SpeakeasyMetadata({ data: "json, name=ResourceGroupName" }),
         __metadata("design:type", String)
     ], CreateComponentRequest.prototype, "resourceGroupName", void 0);
     __decorate([
-        Metadata({ data: "json, name=ResourceList" }),
+        SpeakeasyMetadata({ data: "json, name=ResourceList" }),
         __metadata("design:type", Array)
     ], CreateComponentRequest.prototype, "resourceList", void 0);
     return CreateComponentRequest;

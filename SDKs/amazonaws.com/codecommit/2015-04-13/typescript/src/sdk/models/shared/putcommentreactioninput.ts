@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class PutCommentReactionInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=commentId" })
+  @SpeakeasyMetadata({ data: "json, name=commentId" })
   commentId: string;
 
-  @Metadata({ data: "json, name=reactionValue" })
+  @SpeakeasyMetadata({ data: "json, name=reactionValue" })
   reactionValue: string;
 }

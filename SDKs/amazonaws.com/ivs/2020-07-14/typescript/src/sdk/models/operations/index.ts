@@ -18,7 +18,6 @@ export * from "./listplaybackkeypairs";
 export * from "./listrecordingconfigurations";
 export * from "./liststreamkeys";
 export * from "./liststreams";
-export * from "./listtagsforresource";
 export * from "./putmetadata";
 export * from "./stopstream";
 export * from "./tagresource";

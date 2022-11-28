@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// LicenseConfigurationUsage
+// Details about the usage of a resource associated with a license configuration.
 type LicenseConfigurationUsage struct {
 	AssociationTime  *time.Time        `json:"AssociationTime,omitempty"`
 	ConsumedLicenses *int64            `json:"ConsumedLicenses,omitempty"`

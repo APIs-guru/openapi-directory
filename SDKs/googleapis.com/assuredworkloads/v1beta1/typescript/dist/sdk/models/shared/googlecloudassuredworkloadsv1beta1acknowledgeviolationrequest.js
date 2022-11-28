@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // GoogleCloudAssuredworkloadsV1beta1AcknowledgeViolationRequest
 /**
  * Request for acknowledging the violation Next Id: 4
@@ -33,9 +33,13 @@ var GoogleCloudAssuredworkloadsV1beta1AcknowledgeViolationRequest = /** @class *
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=comment" }),
+        SpeakeasyMetadata({ data: "json, name=comment" }),
         __metadata("design:type", String)
     ], GoogleCloudAssuredworkloadsV1beta1AcknowledgeViolationRequest.prototype, "comment", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=nonCompliantOrgPolicy" }),
+        __metadata("design:type", String)
+    ], GoogleCloudAssuredworkloadsV1beta1AcknowledgeViolationRequest.prototype, "nonCompliantOrgPolicy", void 0);
     return GoogleCloudAssuredworkloadsV1beta1AcknowledgeViolationRequest;
 }(SpeakeasyBase));
 export { GoogleCloudAssuredworkloadsV1beta1AcknowledgeViolationRequest };

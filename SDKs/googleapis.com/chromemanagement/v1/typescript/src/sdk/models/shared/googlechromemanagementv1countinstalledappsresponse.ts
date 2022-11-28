@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleChromeManagementV1InstalledApp } from "./googlechromemanagementv1installedapp";
+
 
 
 // GoogleChromeManagementV1CountInstalledAppsResponse
@@ -8,12 +8,12 @@ import { GoogleChromeManagementV1InstalledApp } from "./googlechromemanagementv1
  * Response containing details of queried installed apps.
 **/
 export class GoogleChromeManagementV1CountInstalledAppsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=installedApps", elemType: shared.GoogleChromeManagementV1InstalledApp })
+  @SpeakeasyMetadata({ data: "json, name=installedApps", elemType: GoogleChromeManagementV1InstalledApp })
   installedApps?: GoogleChromeManagementV1InstalledApp[];
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 
-  @Metadata({ data: "json, name=totalSize" })
+  @SpeakeasyMetadata({ data: "json, name=totalSize" })
   totalSize?: number;
 }

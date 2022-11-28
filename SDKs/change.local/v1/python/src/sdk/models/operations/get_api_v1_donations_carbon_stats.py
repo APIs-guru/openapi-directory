@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
 from typing import Optional
+from sdk.models import shared
 
 
 @dataclass
@@ -9,17 +10,17 @@ class GetAPIV1DonationsCarbonStatsQueryParams:
 
 @dataclass
 class GetAPIV1DonationsCarbonStatsSecurity:
-    basic_auth: shared.SchemeBasicAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'basic' }})
+    basic_auth: shared.SchemeBasicAuth = field(metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'basic' }})
     
 
 @dataclass
 class GetAPIV1DonationsCarbonStatsRequest:
-    query_params: GetAPIV1DonationsCarbonStatsQueryParams = field(default=None)
-    security: GetAPIV1DonationsCarbonStatsSecurity = field(default=None)
+    query_params: GetAPIV1DonationsCarbonStatsQueryParams = field()
+    security: GetAPIV1DonationsCarbonStatsSecurity = field()
     
 
 @dataclass
 class GetAPIV1DonationsCarbonStatsResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

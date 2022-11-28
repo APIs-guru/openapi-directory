@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var SubaccountRequestSubAccountEditEnum;
 (function (SubaccountRequestSubAccountEditEnum) {
     SubaccountRequestSubAccountEditEnum["SetPrice"] = "setPrice";
@@ -45,35 +45,35 @@ var SubaccountRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=keyid" }),
+        SpeakeasyMetadata({ data: "json, name=keyid" }),
         __metadata("design:type", String)
     ], SubaccountRequest.prototype, "keyid", void 0);
     __decorate([
-        Metadata({ data: "json, name=subAccountAddCredit" }),
+        SpeakeasyMetadata({ data: "json, name=subAccountAddCredit" }),
         __metadata("design:type", String)
     ], SubaccountRequest.prototype, "subAccountAddCredit", void 0);
     __decorate([
-        Metadata({ data: "json, name=subAccountCountryCode" }),
+        SpeakeasyMetadata({ data: "json, name=subAccountCountryCode" }),
         __metadata("design:type", String)
     ], SubaccountRequest.prototype, "subAccountCountryCode", void 0);
     __decorate([
-        Metadata({ data: "json, name=subAccountEdit" }),
+        SpeakeasyMetadata({ data: "json, name=subAccountEdit" }),
         __metadata("design:type", String)
     ], SubaccountRequest.prototype, "subAccountEdit", void 0);
     __decorate([
-        Metadata({ data: "json, name=subAccountKeyId" }),
+        SpeakeasyMetadata({ data: "json, name=subAccountKeyId" }),
         __metadata("design:type", String)
     ], SubaccountRequest.prototype, "subAccountKeyId", void 0);
     __decorate([
-        Metadata({ data: "json, name=subAccountPrice" }),
+        SpeakeasyMetadata({ data: "json, name=subAccountPrice" }),
         __metadata("design:type", String)
     ], SubaccountRequest.prototype, "subAccountPrice", void 0);
     __decorate([
-        Metadata({ data: "json, name=subAccountRestrictionStop" }),
+        SpeakeasyMetadata({ data: "json, name=subAccountRestrictionStop" }),
         __metadata("design:type", String)
     ], SubaccountRequest.prototype, "subAccountRestrictionStop", void 0);
     __decorate([
-        Metadata({ data: "json, name=subAccountRestrictionTime" }),
+        SpeakeasyMetadata({ data: "json, name=subAccountRestrictionTime" }),
         __metadata("design:type", String)
     ], SubaccountRequest.prototype, "subAccountRestrictionTime", void 0);
     return SubaccountRequest;

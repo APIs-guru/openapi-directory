@@ -1,6 +1,10 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -18,20 +22,21 @@ class DisassociateResourceSharePermissionHeaders:
 @dataclass_json
 @dataclass
 class DisassociateResourceSharePermissionRequestBody:
-    client_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'clientToken' }})
-    permission_arn: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'permissionArn' }})
-    resource_share_arn: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'resourceShareArn' }})
+    permission_arn: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('permissionArn') }})
+    resource_share_arn: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('resourceShareArn') }})
+    client_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('clientToken') }})
     
 
 @dataclass
 class DisassociateResourceSharePermissionRequest:
-    headers: DisassociateResourceSharePermissionHeaders = field(default=None)
-    request: DisassociateResourceSharePermissionRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: DisassociateResourceSharePermissionHeaders = field()
+    request: DisassociateResourceSharePermissionRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class DisassociateResourceSharePermissionResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     disassociate_resource_share_permission_response: Optional[shared.DisassociateResourceSharePermissionResponse] = field(default=None)
     invalid_client_token_exception: Optional[Any] = field(default=None)
     invalid_parameter_exception: Optional[Any] = field(default=None)
@@ -40,6 +45,5 @@ class DisassociateResourceSharePermissionResponse:
     operation_not_permitted_exception: Optional[Any] = field(default=None)
     server_internal_exception: Optional[Any] = field(default=None)
     service_unavailable_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     unknown_resource_exception: Optional[Any] = field(default=None)
     

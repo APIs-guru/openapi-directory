@@ -22,98 +22,98 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var SearchTypeGtfsStopQueryParams = /** @class */ (function (_super) {
     __extends(SearchTypeGtfsStopQueryParams, _super);
     function SearchTypeGtfsStopQueryParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=changedate.from" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=changedate.from" }),
         __metadata("design:type", Date)
     ], SearchTypeGtfsStopQueryParams.prototype, "changedateFrom", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=changedate.to" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=changedate.to" }),
         __metadata("design:type", Date)
     ], SearchTypeGtfsStopQueryParams.prototype, "changedateTo", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=createdate.from" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=createdate.from" }),
         __metadata("design:type", Date)
     ], SearchTypeGtfsStopQueryParams.prototype, "createdateFrom", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=createdate.to" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=createdate.to" }),
         __metadata("design:type", Date)
     ], SearchTypeGtfsStopQueryParams.prototype, "createdateTo", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=description" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=description" }),
         __metadata("design:type", String)
     ], SearchTypeGtfsStopQueryParams.prototype, "description", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=filesuffix" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=filesuffix" }),
         __metadata("design:type", String)
     ], SearchTypeGtfsStopQueryParams.prototype, "filesuffix", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=fromdate" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=fromdate" }),
         __metadata("design:type", Date)
     ], SearchTypeGtfsStopQueryParams.prototype, "fromdate", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=group" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=group" }),
         __metadata("design:type", String)
     ], SearchTypeGtfsStopQueryParams.prototype, "group", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=max" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=max" }),
         __metadata("design:type", Number)
     ], SearchTypeGtfsStopQueryParams.prototype, "max", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=maxlatitude" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=maxlatitude" }),
         __metadata("design:type", Number)
     ], SearchTypeGtfsStopQueryParams.prototype, "maxlatitude", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=maxlongitude" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=maxlongitude" }),
         __metadata("design:type", Number)
     ], SearchTypeGtfsStopQueryParams.prototype, "maxlongitude", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=minlatitude" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=minlatitude" }),
         __metadata("design:type", Number)
     ], SearchTypeGtfsStopQueryParams.prototype, "minlatitude", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=minlongitude" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=minlongitude" }),
         __metadata("design:type", Number)
     ], SearchTypeGtfsStopQueryParams.prototype, "minlongitude", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=name" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=name" }),
         __metadata("design:type", String)
     ], SearchTypeGtfsStopQueryParams.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=search.type_gtfs_stop.location_type" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=search.type_gtfs_stop.location_type" }),
         __metadata("design:type", String)
     ], SearchTypeGtfsStopQueryParams.prototype, "searchTypeGtfsStopLocationType", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=search.type_gtfs_stop.stop_code" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=search.type_gtfs_stop.stop_code" }),
         __metadata("design:type", String)
     ], SearchTypeGtfsStopQueryParams.prototype, "searchTypeGtfsStopStopCode", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=search.type_gtfs_stop.stop_id" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=search.type_gtfs_stop.stop_id" }),
         __metadata("design:type", String)
     ], SearchTypeGtfsStopQueryParams.prototype, "searchTypeGtfsStopStopId", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=search.type_gtfs_stop.wheelchair_boarding" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=search.type_gtfs_stop.wheelchair_boarding" }),
         __metadata("design:type", String)
     ], SearchTypeGtfsStopQueryParams.prototype, "searchTypeGtfsStopWheelchairBoarding", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=search.type_gtfs_stop.zone_id" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=search.type_gtfs_stop.zone_id" }),
         __metadata("design:type", String)
     ], SearchTypeGtfsStopQueryParams.prototype, "searchTypeGtfsStopZoneId", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=skip" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=skip" }),
         __metadata("design:type", Number)
     ], SearchTypeGtfsStopQueryParams.prototype, "skip", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=text" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=text" }),
         __metadata("design:type", String)
     ], SearchTypeGtfsStopQueryParams.prototype, "text", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=todate" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=todate" }),
         __metadata("design:type", Date)
     ], SearchTypeGtfsStopQueryParams.prototype, "todate", void 0);
     return SearchTypeGtfsStopQueryParams;
@@ -125,7 +125,7 @@ var SearchTypeGtfsStopRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", SearchTypeGtfsStopQueryParams)
     ], SearchTypeGtfsStopRequest.prototype, "queryParams", void 0);
     return SearchTypeGtfsStopRequest;
@@ -137,11 +137,11 @@ var SearchTypeGtfsStopResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], SearchTypeGtfsStopResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], SearchTypeGtfsStopResponse.prototype, "statusCode", void 0);
     return SearchTypeGtfsStopResponse;

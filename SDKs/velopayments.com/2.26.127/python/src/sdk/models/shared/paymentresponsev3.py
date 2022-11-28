@@ -1,12 +1,12 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import paymenteventresponsev3
-from . import paymentauditcurrencyv3_enum
-from . import paymentauditcurrencyv3_enum
+from sdk import utils
+from . import *
 
 class PaymentResponseV3FundingStatusEnum(str, Enum):
     FUNDED = "FUNDED"
@@ -29,40 +29,40 @@ class PaymentResponseV3StatusEnum(str, Enum):
 @dataclass_json
 @dataclass
 class PaymentResponseV3:
-    account_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'accountName' }})
-    account_number: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'accountNumber' }})
-    country_code: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'countryCode' }})
-    events: List[paymenteventresponsev3.PaymentEventResponseV3] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'events' }})
-    filename_reference: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'filenameReference' }})
-    funding_status: PaymentResponseV3FundingStatusEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'fundingStatus' }})
-    iban: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'iban' }})
-    individual_identification_number: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'individualIdentificationNumber' }})
-    inverted_rate: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'invertedRate' }})
-    payee_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'payeeId' }})
-    payment_amount: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'paymentAmount' }})
-    payment_channel_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'paymentChannelId' }})
-    payment_channel_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'paymentChannelName' }})
-    payment_currency: Optional[paymentauditcurrencyv3_enum.PaymentAuditCurrencyV3Enum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'paymentCurrency' }})
-    payment_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'paymentId' }})
-    payment_memo: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'paymentMemo' }})
-    payor_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'payorId' }})
-    payor_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'payorName' }})
-    payor_payment_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'payorPaymentId' }})
-    quote_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'quoteId' }})
-    rails_batch_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'railsBatchId' }})
-    rails_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'railsId' }})
-    rails_payment_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'railsPaymentId' }})
-    rate: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'rate' }})
-    rejection_reason: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'rejectionReason' }})
-    remote_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'remoteId' }})
-    return_cost: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'returnCost' }})
-    return_reason: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'returnReason' }})
-    routing_number: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'routingNumber' }})
-    source_account_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'sourceAccountId' }})
-    source_account_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'sourceAccountName' }})
-    source_amount: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'sourceAmount' }})
-    source_currency: Optional[paymentauditcurrencyv3_enum.PaymentAuditCurrencyV3Enum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'sourceCurrency' }})
-    status: PaymentResponseV3StatusEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
-    submitted_date_time: datetime = field(default=None, metadata={'dataclasses_json': { 'field_name': 'submittedDateTime', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    trace_number: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'traceNumber' }})
+    events: List[PaymentEventResponseV3] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('events') }})
+    funding_status: PaymentResponseV3FundingStatusEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('fundingStatus') }})
+    payee_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('payeeId') }})
+    payment_amount: int = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('paymentAmount') }})
+    payment_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('paymentId') }})
+    payor_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('payorId') }})
+    quote_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('quoteId') }})
+    rails_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('railsId') }})
+    source_account_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('sourceAccountId') }})
+    status: PaymentResponseV3StatusEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('status') }})
+    submitted_date_time: datetime = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('submittedDateTime'), 'encoder': utils.datetimeisoformat(False), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    account_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('accountName') }})
+    account_number: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('accountNumber') }})
+    country_code: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('countryCode') }})
+    filename_reference: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('filenameReference') }})
+    iban: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('iban') }})
+    individual_identification_number: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('individualIdentificationNumber') }})
+    inverted_rate: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('invertedRate') }})
+    payment_channel_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('paymentChannelId') }})
+    payment_channel_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('paymentChannelName') }})
+    payment_currency: Optional[PaymentAuditCurrencyV3Enum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('paymentCurrency') }})
+    payment_memo: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('paymentMemo') }})
+    payor_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('payorName') }})
+    payor_payment_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('payorPaymentId') }})
+    rails_batch_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('railsBatchId') }})
+    rails_payment_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('railsPaymentId') }})
+    rate: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('rate') }})
+    rejection_reason: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('rejectionReason') }})
+    remote_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('remoteId') }})
+    return_cost: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('returnCost') }})
+    return_reason: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('returnReason') }})
+    routing_number: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('routingNumber') }})
+    source_account_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('sourceAccountName') }})
+    source_amount: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('sourceAmount') }})
+    source_currency: Optional[PaymentAuditCurrencyV3Enum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('sourceCurrency') }})
+    trace_number: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('traceNumber') }})
     

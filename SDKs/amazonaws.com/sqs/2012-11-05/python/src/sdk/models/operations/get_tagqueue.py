@@ -1,11 +1,15 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 
 @dataclass
 class GetTagQueuePathParams:
-    account_number: int = field(default=None, metadata={'path_param': { 'field_name': 'AccountNumber', 'style': 'simple', 'explode': False }})
-    queue_name: str = field(default=None, metadata={'path_param': { 'field_name': 'QueueName', 'style': 'simple', 'explode': False }})
+    account_number: int = field(metadata={'path_param': { 'field_name': 'AccountNumber', 'style': 'simple', 'explode': False }})
+    queue_name: str = field(metadata={'path_param': { 'field_name': 'QueueName', 'style': 'simple', 'explode': False }})
     
 class GetTagQueueActionEnum(str, Enum):
     TAG_QUEUE = "TagQueue"
@@ -16,9 +20,9 @@ class GetTagQueueVersionEnum(str, Enum):
 
 @dataclass
 class GetTagQueueQueryParams:
-    action: GetTagQueueActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    tags: dict[str, str] = field(default=None, metadata={'query_param': { 'field_name': 'Tags', 'style': 'form', 'explode': True }})
-    version: GetTagQueueVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: GetTagQueueActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    tags: dict[str, str] = field(metadata={'query_param': { 'field_name': 'Tags', 'style': 'form', 'explode': True }})
+    version: GetTagQueueVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -34,13 +38,13 @@ class GetTagQueueHeaders:
 
 @dataclass
 class GetTagQueueRequest:
-    path_params: GetTagQueuePathParams = field(default=None)
-    query_params: GetTagQueueQueryParams = field(default=None)
-    headers: GetTagQueueHeaders = field(default=None)
+    headers: GetTagQueueHeaders = field()
+    path_params: GetTagQueuePathParams = field()
+    query_params: GetTagQueueQueryParams = field()
     
 
 @dataclass
 class GetTagQueueResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

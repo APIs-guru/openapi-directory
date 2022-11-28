@@ -1,99 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
-import { StringFilter } from "./stringfilter";
-import { StringFilter } from "./stringfilter";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { StringFilter } from "./stringfilter";
 import { NumberFilter } from "./numberfilter";
 import { DateFilter } from "./datefilter";
-import { NumberFilter } from "./numberfilter";
-import { StringFilter } from "./stringfilter";
-import { NumberFilter } from "./numberfilter";
-import { NumberFilter } from "./numberfilter";
-import { StringFilter } from "./stringfilter";
-import { StringFilter } from "./stringfilter";
-import { StringFilter } from "./stringfilter";
-import { StringFilter } from "./stringfilter";
-import { StringFilter } from "./stringfilter";
-import { DateFilter } from "./datefilter";
-import { StringFilter } from "./stringfilter";
-import { StringFilter } from "./stringfilter";
 import { KeywordFilter } from "./keywordfilter";
-import { DateFilter } from "./datefilter";
-import { StringFilter } from "./stringfilter";
-import { StringFilter } from "./stringfilter";
-import { StringFilter } from "./stringfilter";
-import { StringFilter } from "./stringfilter";
-import { StringFilter } from "./stringfilter";
 import { IpFilter } from "./ipfilter";
-import { IpFilter } from "./ipfilter";
-import { NumberFilter } from "./numberfilter";
-import { StringFilter } from "./stringfilter";
-import { StringFilter } from "./stringfilter";
-import { StringFilter } from "./stringfilter";
-import { IpFilter } from "./ipfilter";
-import { IpFilter } from "./ipfilter";
-import { StringFilter } from "./stringfilter";
-import { NumberFilter } from "./numberfilter";
-import { StringFilter } from "./stringfilter";
-import { DateFilter } from "./datefilter";
-import { StringFilter } from "./stringfilter";
-import { DateFilter } from "./datefilter";
-import { StringFilter } from "./stringfilter";
-import { NumberFilter } from "./numberfilter";
-import { StringFilter } from "./stringfilter";
-import { NumberFilter } from "./numberfilter";
-import { DateFilter } from "./datefilter";
-import { StringFilter } from "./stringfilter";
 import { MapFilter } from "./mapfilter";
-import { StringFilter } from "./stringfilter";
-import { StringFilter } from "./stringfilter";
-import { StringFilter } from "./stringfilter";
-import { StringFilter } from "./stringfilter";
-import { StringFilter } from "./stringfilter";
-import { StringFilter } from "./stringfilter";
-import { StringFilter } from "./stringfilter";
-import { StringFilter } from "./stringfilter";
-import { IpFilter } from "./ipfilter";
-import { IpFilter } from "./ipfilter";
-import { StringFilter } from "./stringfilter";
-import { DateFilter } from "./datefilter";
-import { StringFilter } from "./stringfilter";
-import { StringFilter } from "./stringfilter";
-import { StringFilter } from "./stringfilter";
-import { DateFilter } from "./datefilter";
-import { StringFilter } from "./stringfilter";
-import { StringFilter } from "./stringfilter";
-import { StringFilter } from "./stringfilter";
-import { StringFilter } from "./stringfilter";
-import { StringFilter } from "./stringfilter";
-import { StringFilter } from "./stringfilter";
-import { StringFilter } from "./stringfilter";
-import { StringFilter } from "./stringfilter";
-import { DateFilter } from "./datefilter";
-import { StringFilter } from "./stringfilter";
-import { MapFilter } from "./mapfilter";
-import { StringFilter } from "./stringfilter";
-import { StringFilter } from "./stringfilter";
-import { StringFilter } from "./stringfilter";
-import { MapFilter } from "./mapfilter";
-import { StringFilter } from "./stringfilter";
-import { StringFilter } from "./stringfilter";
-import { NumberFilter } from "./numberfilter";
-import { NumberFilter } from "./numberfilter";
-import { StringFilter } from "./stringfilter";
-import { StringFilter } from "./stringfilter";
-import { DateFilter } from "./datefilter";
-import { StringFilter } from "./stringfilter";
-import { StringFilter } from "./stringfilter";
-import { StringFilter } from "./stringfilter";
-import { StringFilter } from "./stringfilter";
-import { StringFilter } from "./stringfilter";
-import { StringFilter } from "./stringfilter";
-import { DateFilter } from "./datefilter";
-import { MapFilter } from "./mapfilter";
-import { StringFilter } from "./stringfilter";
-import { StringFilter } from "./stringfilter";
-import { StringFilter } from "./stringfilter";
+
 
 
 // AwsSecurityFindingFilters
@@ -101,285 +13,285 @@ import { StringFilter } from "./stringfilter";
  * <p>A collection of attributes that are applied to all active Security Hub-aggregated findings and that result in a subset of findings that are included in this insight.</p> <p>You can filter by up to 10 finding attributes. For each attribute, you can provide up to 20 filter values.</p>
 **/
 export class AwsSecurityFindingFilters extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AwsAccountId", elemType: shared.StringFilter })
+  @SpeakeasyMetadata({ data: "json, name=AwsAccountId", elemType: StringFilter })
   awsAccountId?: StringFilter[];
 
-  @Metadata({ data: "json, name=CompanyName", elemType: shared.StringFilter })
+  @SpeakeasyMetadata({ data: "json, name=CompanyName", elemType: StringFilter })
   companyName?: StringFilter[];
 
-  @Metadata({ data: "json, name=ComplianceStatus", elemType: shared.StringFilter })
+  @SpeakeasyMetadata({ data: "json, name=ComplianceStatus", elemType: StringFilter })
   complianceStatus?: StringFilter[];
 
-  @Metadata({ data: "json, name=Confidence", elemType: shared.NumberFilter })
+  @SpeakeasyMetadata({ data: "json, name=Confidence", elemType: NumberFilter })
   confidence?: NumberFilter[];
 
-  @Metadata({ data: "json, name=CreatedAt", elemType: shared.DateFilter })
+  @SpeakeasyMetadata({ data: "json, name=CreatedAt", elemType: DateFilter })
   createdAt?: DateFilter[];
 
-  @Metadata({ data: "json, name=Criticality", elemType: shared.NumberFilter })
+  @SpeakeasyMetadata({ data: "json, name=Criticality", elemType: NumberFilter })
   criticality?: NumberFilter[];
 
-  @Metadata({ data: "json, name=Description", elemType: shared.StringFilter })
+  @SpeakeasyMetadata({ data: "json, name=Description", elemType: StringFilter })
   description?: StringFilter[];
 
-  @Metadata({ data: "json, name=FindingProviderFieldsConfidence", elemType: shared.NumberFilter })
+  @SpeakeasyMetadata({ data: "json, name=FindingProviderFieldsConfidence", elemType: NumberFilter })
   findingProviderFieldsConfidence?: NumberFilter[];
 
-  @Metadata({ data: "json, name=FindingProviderFieldsCriticality", elemType: shared.NumberFilter })
+  @SpeakeasyMetadata({ data: "json, name=FindingProviderFieldsCriticality", elemType: NumberFilter })
   findingProviderFieldsCriticality?: NumberFilter[];
 
-  @Metadata({ data: "json, name=FindingProviderFieldsRelatedFindingsId", elemType: shared.StringFilter })
+  @SpeakeasyMetadata({ data: "json, name=FindingProviderFieldsRelatedFindingsId", elemType: StringFilter })
   findingProviderFieldsRelatedFindingsId?: StringFilter[];
 
-  @Metadata({ data: "json, name=FindingProviderFieldsRelatedFindingsProductArn", elemType: shared.StringFilter })
+  @SpeakeasyMetadata({ data: "json, name=FindingProviderFieldsRelatedFindingsProductArn", elemType: StringFilter })
   findingProviderFieldsRelatedFindingsProductArn?: StringFilter[];
 
-  @Metadata({ data: "json, name=FindingProviderFieldsSeverityLabel", elemType: shared.StringFilter })
+  @SpeakeasyMetadata({ data: "json, name=FindingProviderFieldsSeverityLabel", elemType: StringFilter })
   findingProviderFieldsSeverityLabel?: StringFilter[];
 
-  @Metadata({ data: "json, name=FindingProviderFieldsSeverityOriginal", elemType: shared.StringFilter })
+  @SpeakeasyMetadata({ data: "json, name=FindingProviderFieldsSeverityOriginal", elemType: StringFilter })
   findingProviderFieldsSeverityOriginal?: StringFilter[];
 
-  @Metadata({ data: "json, name=FindingProviderFieldsTypes", elemType: shared.StringFilter })
+  @SpeakeasyMetadata({ data: "json, name=FindingProviderFieldsTypes", elemType: StringFilter })
   findingProviderFieldsTypes?: StringFilter[];
 
-  @Metadata({ data: "json, name=FirstObservedAt", elemType: shared.DateFilter })
+  @SpeakeasyMetadata({ data: "json, name=FirstObservedAt", elemType: DateFilter })
   firstObservedAt?: DateFilter[];
 
-  @Metadata({ data: "json, name=GeneratorId", elemType: shared.StringFilter })
+  @SpeakeasyMetadata({ data: "json, name=GeneratorId", elemType: StringFilter })
   generatorId?: StringFilter[];
 
-  @Metadata({ data: "json, name=Id", elemType: shared.StringFilter })
+  @SpeakeasyMetadata({ data: "json, name=Id", elemType: StringFilter })
   id?: StringFilter[];
 
-  @Metadata({ data: "json, name=Keyword", elemType: shared.KeywordFilter })
+  @SpeakeasyMetadata({ data: "json, name=Keyword", elemType: KeywordFilter })
   keyword?: KeywordFilter[];
 
-  @Metadata({ data: "json, name=LastObservedAt", elemType: shared.DateFilter })
+  @SpeakeasyMetadata({ data: "json, name=LastObservedAt", elemType: DateFilter })
   lastObservedAt?: DateFilter[];
 
-  @Metadata({ data: "json, name=MalwareName", elemType: shared.StringFilter })
+  @SpeakeasyMetadata({ data: "json, name=MalwareName", elemType: StringFilter })
   malwareName?: StringFilter[];
 
-  @Metadata({ data: "json, name=MalwarePath", elemType: shared.StringFilter })
+  @SpeakeasyMetadata({ data: "json, name=MalwarePath", elemType: StringFilter })
   malwarePath?: StringFilter[];
 
-  @Metadata({ data: "json, name=MalwareState", elemType: shared.StringFilter })
+  @SpeakeasyMetadata({ data: "json, name=MalwareState", elemType: StringFilter })
   malwareState?: StringFilter[];
 
-  @Metadata({ data: "json, name=MalwareType", elemType: shared.StringFilter })
+  @SpeakeasyMetadata({ data: "json, name=MalwareType", elemType: StringFilter })
   malwareType?: StringFilter[];
 
-  @Metadata({ data: "json, name=NetworkDestinationDomain", elemType: shared.StringFilter })
+  @SpeakeasyMetadata({ data: "json, name=NetworkDestinationDomain", elemType: StringFilter })
   networkDestinationDomain?: StringFilter[];
 
-  @Metadata({ data: "json, name=NetworkDestinationIpV4", elemType: shared.IpFilter })
+  @SpeakeasyMetadata({ data: "json, name=NetworkDestinationIpV4", elemType: IpFilter })
   networkDestinationIpV4?: IpFilter[];
 
-  @Metadata({ data: "json, name=NetworkDestinationIpV6", elemType: shared.IpFilter })
+  @SpeakeasyMetadata({ data: "json, name=NetworkDestinationIpV6", elemType: IpFilter })
   networkDestinationIpV6?: IpFilter[];
 
-  @Metadata({ data: "json, name=NetworkDestinationPort", elemType: shared.NumberFilter })
+  @SpeakeasyMetadata({ data: "json, name=NetworkDestinationPort", elemType: NumberFilter })
   networkDestinationPort?: NumberFilter[];
 
-  @Metadata({ data: "json, name=NetworkDirection", elemType: shared.StringFilter })
+  @SpeakeasyMetadata({ data: "json, name=NetworkDirection", elemType: StringFilter })
   networkDirection?: StringFilter[];
 
-  @Metadata({ data: "json, name=NetworkProtocol", elemType: shared.StringFilter })
+  @SpeakeasyMetadata({ data: "json, name=NetworkProtocol", elemType: StringFilter })
   networkProtocol?: StringFilter[];
 
-  @Metadata({ data: "json, name=NetworkSourceDomain", elemType: shared.StringFilter })
+  @SpeakeasyMetadata({ data: "json, name=NetworkSourceDomain", elemType: StringFilter })
   networkSourceDomain?: StringFilter[];
 
-  @Metadata({ data: "json, name=NetworkSourceIpV4", elemType: shared.IpFilter })
+  @SpeakeasyMetadata({ data: "json, name=NetworkSourceIpV4", elemType: IpFilter })
   networkSourceIpV4?: IpFilter[];
 
-  @Metadata({ data: "json, name=NetworkSourceIpV6", elemType: shared.IpFilter })
+  @SpeakeasyMetadata({ data: "json, name=NetworkSourceIpV6", elemType: IpFilter })
   networkSourceIpV6?: IpFilter[];
 
-  @Metadata({ data: "json, name=NetworkSourceMac", elemType: shared.StringFilter })
+  @SpeakeasyMetadata({ data: "json, name=NetworkSourceMac", elemType: StringFilter })
   networkSourceMac?: StringFilter[];
 
-  @Metadata({ data: "json, name=NetworkSourcePort", elemType: shared.NumberFilter })
+  @SpeakeasyMetadata({ data: "json, name=NetworkSourcePort", elemType: NumberFilter })
   networkSourcePort?: NumberFilter[];
 
-  @Metadata({ data: "json, name=NoteText", elemType: shared.StringFilter })
+  @SpeakeasyMetadata({ data: "json, name=NoteText", elemType: StringFilter })
   noteText?: StringFilter[];
 
-  @Metadata({ data: "json, name=NoteUpdatedAt", elemType: shared.DateFilter })
+  @SpeakeasyMetadata({ data: "json, name=NoteUpdatedAt", elemType: DateFilter })
   noteUpdatedAt?: DateFilter[];
 
-  @Metadata({ data: "json, name=NoteUpdatedBy", elemType: shared.StringFilter })
+  @SpeakeasyMetadata({ data: "json, name=NoteUpdatedBy", elemType: StringFilter })
   noteUpdatedBy?: StringFilter[];
 
-  @Metadata({ data: "json, name=ProcessLaunchedAt", elemType: shared.DateFilter })
+  @SpeakeasyMetadata({ data: "json, name=ProcessLaunchedAt", elemType: DateFilter })
   processLaunchedAt?: DateFilter[];
 
-  @Metadata({ data: "json, name=ProcessName", elemType: shared.StringFilter })
+  @SpeakeasyMetadata({ data: "json, name=ProcessName", elemType: StringFilter })
   processName?: StringFilter[];
 
-  @Metadata({ data: "json, name=ProcessParentPid", elemType: shared.NumberFilter })
+  @SpeakeasyMetadata({ data: "json, name=ProcessParentPid", elemType: NumberFilter })
   processParentPid?: NumberFilter[];
 
-  @Metadata({ data: "json, name=ProcessPath", elemType: shared.StringFilter })
+  @SpeakeasyMetadata({ data: "json, name=ProcessPath", elemType: StringFilter })
   processPath?: StringFilter[];
 
-  @Metadata({ data: "json, name=ProcessPid", elemType: shared.NumberFilter })
+  @SpeakeasyMetadata({ data: "json, name=ProcessPid", elemType: NumberFilter })
   processPid?: NumberFilter[];
 
-  @Metadata({ data: "json, name=ProcessTerminatedAt", elemType: shared.DateFilter })
+  @SpeakeasyMetadata({ data: "json, name=ProcessTerminatedAt", elemType: DateFilter })
   processTerminatedAt?: DateFilter[];
 
-  @Metadata({ data: "json, name=ProductArn", elemType: shared.StringFilter })
+  @SpeakeasyMetadata({ data: "json, name=ProductArn", elemType: StringFilter })
   productArn?: StringFilter[];
 
-  @Metadata({ data: "json, name=ProductFields", elemType: shared.MapFilter })
+  @SpeakeasyMetadata({ data: "json, name=ProductFields", elemType: MapFilter })
   productFields?: MapFilter[];
 
-  @Metadata({ data: "json, name=ProductName", elemType: shared.StringFilter })
+  @SpeakeasyMetadata({ data: "json, name=ProductName", elemType: StringFilter })
   productName?: StringFilter[];
 
-  @Metadata({ data: "json, name=RecommendationText", elemType: shared.StringFilter })
+  @SpeakeasyMetadata({ data: "json, name=RecommendationText", elemType: StringFilter })
   recommendationText?: StringFilter[];
 
-  @Metadata({ data: "json, name=RecordState", elemType: shared.StringFilter })
+  @SpeakeasyMetadata({ data: "json, name=RecordState", elemType: StringFilter })
   recordState?: StringFilter[];
 
-  @Metadata({ data: "json, name=Region", elemType: shared.StringFilter })
+  @SpeakeasyMetadata({ data: "json, name=Region", elemType: StringFilter })
   region?: StringFilter[];
 
-  @Metadata({ data: "json, name=RelatedFindingsId", elemType: shared.StringFilter })
+  @SpeakeasyMetadata({ data: "json, name=RelatedFindingsId", elemType: StringFilter })
   relatedFindingsId?: StringFilter[];
 
-  @Metadata({ data: "json, name=RelatedFindingsProductArn", elemType: shared.StringFilter })
+  @SpeakeasyMetadata({ data: "json, name=RelatedFindingsProductArn", elemType: StringFilter })
   relatedFindingsProductArn?: StringFilter[];
 
-  @Metadata({ data: "json, name=ResourceAwsEc2InstanceIamInstanceProfileArn", elemType: shared.StringFilter })
+  @SpeakeasyMetadata({ data: "json, name=ResourceAwsEc2InstanceIamInstanceProfileArn", elemType: StringFilter })
   resourceAwsEc2InstanceIamInstanceProfileArn?: StringFilter[];
 
-  @Metadata({ data: "json, name=ResourceAwsEc2InstanceImageId", elemType: shared.StringFilter })
+  @SpeakeasyMetadata({ data: "json, name=ResourceAwsEc2InstanceImageId", elemType: StringFilter })
   resourceAwsEc2InstanceImageId?: StringFilter[];
 
-  @Metadata({ data: "json, name=ResourceAwsEc2InstanceIpV4Addresses", elemType: shared.IpFilter })
+  @SpeakeasyMetadata({ data: "json, name=ResourceAwsEc2InstanceIpV4Addresses", elemType: IpFilter })
   resourceAwsEc2InstanceIpV4Addresses?: IpFilter[];
 
-  @Metadata({ data: "json, name=ResourceAwsEc2InstanceIpV6Addresses", elemType: shared.IpFilter })
+  @SpeakeasyMetadata({ data: "json, name=ResourceAwsEc2InstanceIpV6Addresses", elemType: IpFilter })
   resourceAwsEc2InstanceIpV6Addresses?: IpFilter[];
 
-  @Metadata({ data: "json, name=ResourceAwsEc2InstanceKeyName", elemType: shared.StringFilter })
+  @SpeakeasyMetadata({ data: "json, name=ResourceAwsEc2InstanceKeyName", elemType: StringFilter })
   resourceAwsEc2InstanceKeyName?: StringFilter[];
 
-  @Metadata({ data: "json, name=ResourceAwsEc2InstanceLaunchedAt", elemType: shared.DateFilter })
+  @SpeakeasyMetadata({ data: "json, name=ResourceAwsEc2InstanceLaunchedAt", elemType: DateFilter })
   resourceAwsEc2InstanceLaunchedAt?: DateFilter[];
 
-  @Metadata({ data: "json, name=ResourceAwsEc2InstanceSubnetId", elemType: shared.StringFilter })
+  @SpeakeasyMetadata({ data: "json, name=ResourceAwsEc2InstanceSubnetId", elemType: StringFilter })
   resourceAwsEc2InstanceSubnetId?: StringFilter[];
 
-  @Metadata({ data: "json, name=ResourceAwsEc2InstanceType", elemType: shared.StringFilter })
+  @SpeakeasyMetadata({ data: "json, name=ResourceAwsEc2InstanceType", elemType: StringFilter })
   resourceAwsEc2InstanceType?: StringFilter[];
 
-  @Metadata({ data: "json, name=ResourceAwsEc2InstanceVpcId", elemType: shared.StringFilter })
+  @SpeakeasyMetadata({ data: "json, name=ResourceAwsEc2InstanceVpcId", elemType: StringFilter })
   resourceAwsEc2InstanceVpcId?: StringFilter[];
 
-  @Metadata({ data: "json, name=ResourceAwsIamAccessKeyCreatedAt", elemType: shared.DateFilter })
+  @SpeakeasyMetadata({ data: "json, name=ResourceAwsIamAccessKeyCreatedAt", elemType: DateFilter })
   resourceAwsIamAccessKeyCreatedAt?: DateFilter[];
 
-  @Metadata({ data: "json, name=ResourceAwsIamAccessKeyPrincipalName", elemType: shared.StringFilter })
+  @SpeakeasyMetadata({ data: "json, name=ResourceAwsIamAccessKeyPrincipalName", elemType: StringFilter })
   resourceAwsIamAccessKeyPrincipalName?: StringFilter[];
 
-  @Metadata({ data: "json, name=ResourceAwsIamAccessKeyStatus", elemType: shared.StringFilter })
+  @SpeakeasyMetadata({ data: "json, name=ResourceAwsIamAccessKeyStatus", elemType: StringFilter })
   resourceAwsIamAccessKeyStatus?: StringFilter[];
 
-  @Metadata({ data: "json, name=ResourceAwsIamAccessKeyUserName", elemType: shared.StringFilter })
+  @SpeakeasyMetadata({ data: "json, name=ResourceAwsIamAccessKeyUserName", elemType: StringFilter })
   resourceAwsIamAccessKeyUserName?: StringFilter[];
 
-  @Metadata({ data: "json, name=ResourceAwsIamUserUserName", elemType: shared.StringFilter })
+  @SpeakeasyMetadata({ data: "json, name=ResourceAwsIamUserUserName", elemType: StringFilter })
   resourceAwsIamUserUserName?: StringFilter[];
 
-  @Metadata({ data: "json, name=ResourceAwsS3BucketOwnerId", elemType: shared.StringFilter })
+  @SpeakeasyMetadata({ data: "json, name=ResourceAwsS3BucketOwnerId", elemType: StringFilter })
   resourceAwsS3BucketOwnerId?: StringFilter[];
 
-  @Metadata({ data: "json, name=ResourceAwsS3BucketOwnerName", elemType: shared.StringFilter })
+  @SpeakeasyMetadata({ data: "json, name=ResourceAwsS3BucketOwnerName", elemType: StringFilter })
   resourceAwsS3BucketOwnerName?: StringFilter[];
 
-  @Metadata({ data: "json, name=ResourceContainerImageId", elemType: shared.StringFilter })
+  @SpeakeasyMetadata({ data: "json, name=ResourceContainerImageId", elemType: StringFilter })
   resourceContainerImageId?: StringFilter[];
 
-  @Metadata({ data: "json, name=ResourceContainerImageName", elemType: shared.StringFilter })
+  @SpeakeasyMetadata({ data: "json, name=ResourceContainerImageName", elemType: StringFilter })
   resourceContainerImageName?: StringFilter[];
 
-  @Metadata({ data: "json, name=ResourceContainerLaunchedAt", elemType: shared.DateFilter })
+  @SpeakeasyMetadata({ data: "json, name=ResourceContainerLaunchedAt", elemType: DateFilter })
   resourceContainerLaunchedAt?: DateFilter[];
 
-  @Metadata({ data: "json, name=ResourceContainerName", elemType: shared.StringFilter })
+  @SpeakeasyMetadata({ data: "json, name=ResourceContainerName", elemType: StringFilter })
   resourceContainerName?: StringFilter[];
 
-  @Metadata({ data: "json, name=ResourceDetailsOther", elemType: shared.MapFilter })
+  @SpeakeasyMetadata({ data: "json, name=ResourceDetailsOther", elemType: MapFilter })
   resourceDetailsOther?: MapFilter[];
 
-  @Metadata({ data: "json, name=ResourceId", elemType: shared.StringFilter })
+  @SpeakeasyMetadata({ data: "json, name=ResourceId", elemType: StringFilter })
   resourceId?: StringFilter[];
 
-  @Metadata({ data: "json, name=ResourcePartition", elemType: shared.StringFilter })
+  @SpeakeasyMetadata({ data: "json, name=ResourcePartition", elemType: StringFilter })
   resourcePartition?: StringFilter[];
 
-  @Metadata({ data: "json, name=ResourceRegion", elemType: shared.StringFilter })
+  @SpeakeasyMetadata({ data: "json, name=ResourceRegion", elemType: StringFilter })
   resourceRegion?: StringFilter[];
 
-  @Metadata({ data: "json, name=ResourceTags", elemType: shared.MapFilter })
+  @SpeakeasyMetadata({ data: "json, name=ResourceTags", elemType: MapFilter })
   resourceTags?: MapFilter[];
 
-  @Metadata({ data: "json, name=ResourceType", elemType: shared.StringFilter })
+  @SpeakeasyMetadata({ data: "json, name=ResourceType", elemType: StringFilter })
   resourceType?: StringFilter[];
 
-  @Metadata({ data: "json, name=SeverityLabel", elemType: shared.StringFilter })
+  @SpeakeasyMetadata({ data: "json, name=SeverityLabel", elemType: StringFilter })
   severityLabel?: StringFilter[];
 
-  @Metadata({ data: "json, name=SeverityNormalized", elemType: shared.NumberFilter })
+  @SpeakeasyMetadata({ data: "json, name=SeverityNormalized", elemType: NumberFilter })
   severityNormalized?: NumberFilter[];
 
-  @Metadata({ data: "json, name=SeverityProduct", elemType: shared.NumberFilter })
+  @SpeakeasyMetadata({ data: "json, name=SeverityProduct", elemType: NumberFilter })
   severityProduct?: NumberFilter[];
 
-  @Metadata({ data: "json, name=SourceUrl", elemType: shared.StringFilter })
+  @SpeakeasyMetadata({ data: "json, name=SourceUrl", elemType: StringFilter })
   sourceUrl?: StringFilter[];
 
-  @Metadata({ data: "json, name=ThreatIntelIndicatorCategory", elemType: shared.StringFilter })
+  @SpeakeasyMetadata({ data: "json, name=ThreatIntelIndicatorCategory", elemType: StringFilter })
   threatIntelIndicatorCategory?: StringFilter[];
 
-  @Metadata({ data: "json, name=ThreatIntelIndicatorLastObservedAt", elemType: shared.DateFilter })
+  @SpeakeasyMetadata({ data: "json, name=ThreatIntelIndicatorLastObservedAt", elemType: DateFilter })
   threatIntelIndicatorLastObservedAt?: DateFilter[];
 
-  @Metadata({ data: "json, name=ThreatIntelIndicatorSource", elemType: shared.StringFilter })
+  @SpeakeasyMetadata({ data: "json, name=ThreatIntelIndicatorSource", elemType: StringFilter })
   threatIntelIndicatorSource?: StringFilter[];
 
-  @Metadata({ data: "json, name=ThreatIntelIndicatorSourceUrl", elemType: shared.StringFilter })
+  @SpeakeasyMetadata({ data: "json, name=ThreatIntelIndicatorSourceUrl", elemType: StringFilter })
   threatIntelIndicatorSourceUrl?: StringFilter[];
 
-  @Metadata({ data: "json, name=ThreatIntelIndicatorType", elemType: shared.StringFilter })
+  @SpeakeasyMetadata({ data: "json, name=ThreatIntelIndicatorType", elemType: StringFilter })
   threatIntelIndicatorType?: StringFilter[];
 
-  @Metadata({ data: "json, name=ThreatIntelIndicatorValue", elemType: shared.StringFilter })
+  @SpeakeasyMetadata({ data: "json, name=ThreatIntelIndicatorValue", elemType: StringFilter })
   threatIntelIndicatorValue?: StringFilter[];
 
-  @Metadata({ data: "json, name=Title", elemType: shared.StringFilter })
+  @SpeakeasyMetadata({ data: "json, name=Title", elemType: StringFilter })
   title?: StringFilter[];
 
-  @Metadata({ data: "json, name=Type", elemType: shared.StringFilter })
+  @SpeakeasyMetadata({ data: "json, name=Type", elemType: StringFilter })
   type?: StringFilter[];
 
-  @Metadata({ data: "json, name=UpdatedAt", elemType: shared.DateFilter })
+  @SpeakeasyMetadata({ data: "json, name=UpdatedAt", elemType: DateFilter })
   updatedAt?: DateFilter[];
 
-  @Metadata({ data: "json, name=UserDefinedFields", elemType: shared.MapFilter })
+  @SpeakeasyMetadata({ data: "json, name=UserDefinedFields", elemType: MapFilter })
   userDefinedFields?: MapFilter[];
 
-  @Metadata({ data: "json, name=VerificationState", elemType: shared.StringFilter })
+  @SpeakeasyMetadata({ data: "json, name=VerificationState", elemType: StringFilter })
   verificationState?: StringFilter[];
 
-  @Metadata({ data: "json, name=WorkflowState", elemType: shared.StringFilter })
+  @SpeakeasyMetadata({ data: "json, name=WorkflowState", elemType: StringFilter })
   workflowState?: StringFilter[];
 
-  @Metadata({ data: "json, name=WorkflowStatus", elemType: shared.StringFilter })
+  @SpeakeasyMetadata({ data: "json, name=WorkflowStatus", elemType: StringFilter })
   workflowStatus?: StringFilter[];
 }

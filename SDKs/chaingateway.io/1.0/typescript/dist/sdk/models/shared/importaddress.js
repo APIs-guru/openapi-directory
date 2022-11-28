@@ -22,22 +22,22 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var ImportAddress = /** @class */ (function (_super) {
     __extends(ImportAddress, _super);
     function ImportAddress() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=ethaddress" }),
+        SpeakeasyMetadata({ data: "json, name=ethaddress" }),
         __metadata("design:type", String)
     ], ImportAddress.prototype, "ethaddress", void 0);
     __decorate([
-        Metadata({ data: "json, name=filename" }),
+        SpeakeasyMetadata({ data: "json, name=filename" }),
         __metadata("design:type", String)
     ], ImportAddress.prototype, "filename", void 0);
     __decorate([
-        Metadata({ data: "json, name=ok" }),
+        SpeakeasyMetadata({ data: "json, name=ok" }),
         __metadata("design:type", Boolean)
     ], ImportAddress.prototype, "ok", void 0);
     return ImportAddress;

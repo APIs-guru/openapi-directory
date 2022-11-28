@@ -1,41 +1,42 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetMusicArtistRemoteSearchResultsRequests extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/*+json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/*+json" })
   artistInfoRemoteSearchQuery?: shared.ArtistInfoRemoteSearchQuery;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   artistInfoRemoteSearchQuery1?: shared.ArtistInfoRemoteSearchQuery;
 
-  @Metadata({ data: "request, media_type=text/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=text/json" })
   artistInfoRemoteSearchQuery2?: shared.ArtistInfoRemoteSearchQuery;
 }
 
 
 export class GetMusicArtistRemoteSearchResultsSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
   customAuthentication: shared.SchemeCustomAuthentication;
 }
 
 
 export class GetMusicArtistRemoteSearchResultsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   request: GetMusicArtistRemoteSearchResultsRequests;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: GetMusicArtistRemoteSearchResultsSecurity;
 }
 
 
 export class GetMusicArtistRemoteSearchResultsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata({ elemType: shared.RemoteSearchResult })
+  @SpeakeasyMetadata({ elemType: shared.RemoteSearchResult })
   remoteSearchResults?: shared.RemoteSearchResult[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

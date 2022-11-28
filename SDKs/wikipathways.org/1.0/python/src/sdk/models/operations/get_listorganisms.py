@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 
 class GetListOrganismsFormatEnum(str, Enum):
     JSON = "json"
@@ -17,11 +18,11 @@ class GetListOrganismsQueryParams:
 
 @dataclass
 class GetListOrganismsRequest:
-    query_params: GetListOrganismsQueryParams = field(default=None)
+    query_params: GetListOrganismsQueryParams = field()
     
 
 @dataclass
 class GetListOrganismsResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

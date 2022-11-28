@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// AppDetails
+// Details about an Amazon SageMaker app.
 type AppDetails struct {
 	AppName         *string        `json:"AppName,omitempty"`
 	AppType         *AppTypeEnum   `json:"AppType,omitempty"`

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // AgentConfigurationStatus
 /**
  * Information about agents or connectors that were instructed to start collecting data. Information includes the agent/connector ID, a description of the operation, and whether the agent/connector configuration was updated.
@@ -33,15 +33,15 @@ var AgentConfigurationStatus = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=agentId" }),
+        SpeakeasyMetadata({ data: "json, name=agentId" }),
         __metadata("design:type", String)
     ], AgentConfigurationStatus.prototype, "agentId", void 0);
     __decorate([
-        Metadata({ data: "json, name=description" }),
+        SpeakeasyMetadata({ data: "json, name=description" }),
         __metadata("design:type", String)
     ], AgentConfigurationStatus.prototype, "description", void 0);
     __decorate([
-        Metadata({ data: "json, name=operationSucceeded" }),
+        SpeakeasyMetadata({ data: "json, name=operationSucceeded" }),
         __metadata("design:type", Boolean)
     ], AgentConfigurationStatus.prototype, "operationSucceeded", void 0);
     return AgentConfigurationStatus;

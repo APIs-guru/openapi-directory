@@ -1,11 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum SystemUpdateInfoUpdateStatusEnum {
-    UpdateStatusUnknown = "UPDATE_STATUS_UNKNOWN"
-,    UpToDate = "UP_TO_DATE"
-,    UnknownUpdateAvailable = "UNKNOWN_UPDATE_AVAILABLE"
-,    SecurityUpdateAvailable = "SECURITY_UPDATE_AVAILABLE"
-,    OsUpdateAvailable = "OS_UPDATE_AVAILABLE"
+    UpdateStatusUnknown = "UPDATE_STATUS_UNKNOWN",
+    UpToDate = "UP_TO_DATE",
+    UnknownUpdateAvailable = "UNKNOWN_UPDATE_AVAILABLE",
+    SecurityUpdateAvailable = "SECURITY_UPDATE_AVAILABLE",
+    OsUpdateAvailable = "OS_UPDATE_AVAILABLE"
 }
 
 
@@ -14,9 +15,9 @@ export enum SystemUpdateInfoUpdateStatusEnum {
  * Information about a potential pending system update.
 **/
 export class SystemUpdateInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=updateReceivedTime" })
+  @SpeakeasyMetadata({ data: "json, name=updateReceivedTime" })
   updateReceivedTime?: string;
 
-  @Metadata({ data: "json, name=updateStatus" })
+  @SpeakeasyMetadata({ data: "json, name=updateStatus" })
   updateStatus?: SystemUpdateInfoUpdateStatusEnum;
 }

@@ -1,16 +1,17 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class StopPipelineExecutionInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=abandon" })
+  @SpeakeasyMetadata({ data: "json, name=abandon" })
   abandon?: boolean;
 
-  @Metadata({ data: "json, name=pipelineExecutionId" })
+  @SpeakeasyMetadata({ data: "json, name=pipelineExecutionId" })
   pipelineExecutionId: string;
 
-  @Metadata({ data: "json, name=pipelineName" })
+  @SpeakeasyMetadata({ data: "json, name=pipelineName" })
   pipelineName: string;
 
-  @Metadata({ data: "json, name=reason" })
+  @SpeakeasyMetadata({ data: "json, name=reason" })
   reason?: string;
 }

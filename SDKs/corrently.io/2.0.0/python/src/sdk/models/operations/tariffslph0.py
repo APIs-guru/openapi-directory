@@ -10,12 +10,12 @@ class TariffSlph0QueryParams:
 
 @dataclass
 class TariffSlph0Request:
-    query_params: TariffSlph0QueryParams = field(default=None)
+    query_params: TariffSlph0QueryParams = field()
     
 
 @dataclass
 class TariffSlph0Response:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     tariffh0s: Optional[List[shared.Tariffh0]] = field(default=None)
     

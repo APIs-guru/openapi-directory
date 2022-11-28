@@ -1,11 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum BuildSystemSharedDtoActivityRunStatusStatusEnum {
-    Ready = "Ready"
-,    InProgress = "InProgress"
-,    Succeeded = "Succeeded"
-,    Cancelled = "Cancelled"
-,    Failed = "Failed"
+    Ready = "Ready",
+    InProgress = "InProgress",
+    Succeeded = "Succeeded",
+    Cancelled = "Cancelled",
+    Failed = "Failed"
 }
 
 
@@ -14,15 +15,15 @@ export enum BuildSystemSharedDtoActivityRunStatusStatusEnum {
  * A DTO for an IActivityRunStatus
 **/
 export class BuildSystemSharedDtoActivityRunStatus extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CurrentStep, form, name=CurrentStep;" })
+  @SpeakeasyMetadata({ data: "json, name=CurrentStep, form, name=CurrentStep;" })
   currentStep?: number;
 
-  @Metadata({ data: "json, name=Status, form, name=Status;" })
+  @SpeakeasyMetadata({ data: "json, name=Status, form, name=Status;" })
   status?: BuildSystemSharedDtoActivityRunStatusStatusEnum;
 
-  @Metadata({ data: "json, name=StepProgress, form, name=StepProgress;" })
+  @SpeakeasyMetadata({ data: "json, name=StepProgress, form, name=StepProgress;" })
   stepProgress?: number;
 
-  @Metadata({ data: "json, name=StepStatus, form, name=StepStatus;" })
+  @SpeakeasyMetadata({ data: "json, name=StepStatus, form, name=StepStatus;" })
   stepStatus?: string;
 }

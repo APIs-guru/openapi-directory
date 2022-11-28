@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { PropertyValue } from "./propertyvalue";
 export declare class MarketingEventUpdateRequestParams extends SpeakeasyBase {
     customProperties?: PropertyValue[];

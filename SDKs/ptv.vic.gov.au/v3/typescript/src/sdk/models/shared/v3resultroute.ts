@@ -1,23 +1,24 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { V3RouteServiceStatus } from "./v3routeservicestatus";
 
 
+
 export class V3ResultRoute extends SpeakeasyBase {
-  @Metadata({ data: "json, name=route_gtfs_id" })
+  @SpeakeasyMetadata({ data: "json, name=route_gtfs_id" })
   routeGtfsId?: string;
 
-  @Metadata({ data: "json, name=route_id" })
+  @SpeakeasyMetadata({ data: "json, name=route_id" })
   routeId?: number;
 
-  @Metadata({ data: "json, name=route_name" })
+  @SpeakeasyMetadata({ data: "json, name=route_name" })
   routeName?: string;
 
-  @Metadata({ data: "json, name=route_number" })
+  @SpeakeasyMetadata({ data: "json, name=route_number" })
   routeNumber?: string;
 
-  @Metadata({ data: "json, name=route_service_status" })
+  @SpeakeasyMetadata({ data: "json, name=route_service_status" })
   routeServiceStatus?: V3RouteServiceStatus;
 
-  @Metadata({ data: "json, name=route_type" })
+  @SpeakeasyMetadata({ data: "json, name=route_type" })
   routeType?: number;
 }

@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// MlModel
+// <p> Represents the output of a <code>GetMLModel</code> operation. </p> <p>The content consists of the detailed metadata and the current status of the <code>MLModel</code>.</p>
 type MlModel struct {
 	Algorithm                   *AlgorithmEnum        `json:"Algorithm,omitempty"`
 	ComputeTime                 *int64                `json:"ComputeTime,omitempty"`

@@ -28,6 +28,8 @@ const (
 	CounterMetadataStandardUnitsEnumTimestampNsec CounterMetadataStandardUnitsEnum = "TIMESTAMP_NSEC"
 )
 
+// CounterMetadata
+// CounterMetadata includes all static non-name non-value counter attributes.
 type CounterMetadata struct {
 	Description   *string                           `json:"description,omitempty"`
 	Kind          *CounterMetadataKindEnum          `json:"kind,omitempty"`

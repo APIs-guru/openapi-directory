@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { LearningCurve } from "./learningcurve";
 
 
+
 export class LearningCurveList extends SpeakeasyBase {
-  @Metadata({ data: "json, name=data", elemType: shared.LearningCurve })
+  @SpeakeasyMetadata({ data: "json, name=data", elemType: LearningCurve })
   data?: LearningCurve[];
 
-  @Metadata({ data: "json, name=object" })
+  @SpeakeasyMetadata({ data: "json, name=object" })
   object?: string;
 }

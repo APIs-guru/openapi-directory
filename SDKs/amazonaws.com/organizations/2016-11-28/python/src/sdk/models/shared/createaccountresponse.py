@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import createaccountstatus
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class CreateAccountResponse:
-    create_account_status: Optional[createaccountstatus.CreateAccountStatus] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'CreateAccountStatus' }})
+    create_account_status: Optional[CreateAccountStatus] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('CreateAccountStatus') }})
     

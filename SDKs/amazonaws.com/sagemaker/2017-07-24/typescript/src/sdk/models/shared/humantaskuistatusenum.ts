@@ -1,6 +1,7 @@
 
 
+
 export enum HumanTaskUiStatusEnum {
-    Active = "Active"
-,    Deleting = "Deleting"
+    Active = "Active",
+    Deleting = "Deleting"
 }

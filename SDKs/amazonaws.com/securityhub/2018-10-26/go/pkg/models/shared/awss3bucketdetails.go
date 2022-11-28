@@ -1,5 +1,7 @@
 package shared
 
+// AwsS3BucketDetails
+// The details of an Amazon S3 bucket.
 type AwsS3BucketDetails struct {
 	AccessControlList                 *string                                         `json:"AccessControlList,omitempty"`
 	BucketLifecycleConfiguration      *AwsS3BucketBucketLifecycleConfigurationDetails `json:"BucketLifecycleConfiguration,omitempty"`

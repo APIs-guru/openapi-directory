@@ -1,11 +1,15 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DrivelabelsLabelsRevisionsPermissionsBatchUpdatePathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,14 +29,14 @@ class DrivelabelsLabelsRevisionsPermissionsBatchUpdateQueryParams:
 
 @dataclass
 class DrivelabelsLabelsRevisionsPermissionsBatchUpdateRequest:
-    path_params: DrivelabelsLabelsRevisionsPermissionsBatchUpdatePathParams = field(default=None)
-    query_params: DrivelabelsLabelsRevisionsPermissionsBatchUpdateQueryParams = field(default=None)
+    path_params: DrivelabelsLabelsRevisionsPermissionsBatchUpdatePathParams = field()
+    query_params: DrivelabelsLabelsRevisionsPermissionsBatchUpdateQueryParams = field()
     request: Optional[shared.GoogleAppsDriveLabelsV2betaBatchUpdateLabelPermissionsRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class DrivelabelsLabelsRevisionsPermissionsBatchUpdateResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_apps_drive_labels_v2beta_batch_update_label_permissions_response: Optional[shared.GoogleAppsDriveLabelsV2betaBatchUpdateLabelPermissionsResponse] = field(default=None)
-    status_code: int = field(default=None)
     

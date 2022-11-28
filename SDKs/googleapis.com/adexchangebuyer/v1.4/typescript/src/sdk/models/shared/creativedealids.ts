@@ -1,15 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class CreativeDealIdsDealStatuses extends SpeakeasyBase {
-  @Metadata({ data: "json, name=arcStatus" })
+  @SpeakeasyMetadata({ data: "json, name=arcStatus" })
   arcStatus?: string;
 
-  @Metadata({ data: "json, name=dealId" })
+  @SpeakeasyMetadata({ data: "json, name=dealId" })
   dealId?: string;
 
-  @Metadata({ data: "json, name=webPropertyId" })
+  @SpeakeasyMetadata({ data: "json, name=webPropertyId" })
   webPropertyId?: number;
 }
 
@@ -19,9 +19,9 @@ export class CreativeDealIdsDealStatuses extends SpeakeasyBase {
  * The external deal ids associated with a creative.
 **/
 export class CreativeDealIds extends SpeakeasyBase {
-  @Metadata({ data: "json, name=dealStatuses", elemType: shared.CreativeDealIdsDealStatuses })
+  @SpeakeasyMetadata({ data: "json, name=dealStatuses", elemType: CreativeDealIdsDealStatuses })
   dealStatuses?: CreativeDealIdsDealStatuses[];
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 }

@@ -8,17 +8,14 @@ type ModifySettingRequestBody struct {
 	Value *string `json:"value,omitempty"`
 }
 
-type ModifySettingRequest struct {
-	PathParams ModifySettingPathParams
-	Request    ModifySettingRequestBody `request:"mediaType=application/json"`
-}
-
 type ModifySetting200ApplicationJSONActionEnum string
 
 const (
 	ModifySetting200ApplicationJSONActionEnumModifySetting ModifySetting200ApplicationJSONActionEnum = "modifySetting"
 )
 
+// ModifySetting200ApplicationJSONData
+// Information about the setting
 type ModifySetting200ApplicationJSONData struct {
 	SettingID *string `json:"settingId,omitempty"`
 }
@@ -35,6 +32,11 @@ type ModifySetting200ApplicationJSON struct {
 	Data   ModifySetting200ApplicationJSONData       `json:"data"`
 	ID     string                                    `json:"id"`
 	Result ModifySetting200ApplicationJSONResultEnum `json:"result"`
+}
+
+type ModifySettingRequest struct {
+	PathParams ModifySettingPathParams
+	Request    ModifySettingRequestBody `request:"mediaType=application/json"`
 }
 
 type ModifySettingResponse struct {

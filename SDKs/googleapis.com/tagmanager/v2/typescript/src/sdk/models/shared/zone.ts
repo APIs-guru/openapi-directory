@@ -1,8 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ZoneBoundary } from "./zoneboundary";
 import { ZoneChildContainer } from "./zonechildcontainer";
 import { ZoneTypeRestriction } from "./zonetyperestriction";
+
 
 
 // Zone
@@ -10,39 +10,39 @@ import { ZoneTypeRestriction } from "./zonetyperestriction";
  * Represents a Google Tag Manager Zone's contents.
 **/
 export class Zone extends SpeakeasyBase {
-  @Metadata({ data: "json, name=accountId" })
+  @SpeakeasyMetadata({ data: "json, name=accountId" })
   accountId?: string;
 
-  @Metadata({ data: "json, name=boundary" })
+  @SpeakeasyMetadata({ data: "json, name=boundary" })
   boundary?: ZoneBoundary;
 
-  @Metadata({ data: "json, name=childContainer", elemType: shared.ZoneChildContainer })
+  @SpeakeasyMetadata({ data: "json, name=childContainer", elemType: ZoneChildContainer })
   childContainer?: ZoneChildContainer[];
 
-  @Metadata({ data: "json, name=containerId" })
+  @SpeakeasyMetadata({ data: "json, name=containerId" })
   containerId?: string;
 
-  @Metadata({ data: "json, name=fingerprint" })
+  @SpeakeasyMetadata({ data: "json, name=fingerprint" })
   fingerprint?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=notes" })
+  @SpeakeasyMetadata({ data: "json, name=notes" })
   notes?: string;
 
-  @Metadata({ data: "json, name=path" })
+  @SpeakeasyMetadata({ data: "json, name=path" })
   path?: string;
 
-  @Metadata({ data: "json, name=tagManagerUrl" })
+  @SpeakeasyMetadata({ data: "json, name=tagManagerUrl" })
   tagManagerUrl?: string;
 
-  @Metadata({ data: "json, name=typeRestriction" })
+  @SpeakeasyMetadata({ data: "json, name=typeRestriction" })
   typeRestriction?: ZoneTypeRestriction;
 
-  @Metadata({ data: "json, name=workspaceId" })
+  @SpeakeasyMetadata({ data: "json, name=workspaceId" })
   workspaceId?: string;
 
-  @Metadata({ data: "json, name=zoneId" })
+  @SpeakeasyMetadata({ data: "json, name=zoneId" })
   zoneId?: string;
 }

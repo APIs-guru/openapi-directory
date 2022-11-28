@@ -1,26 +1,27 @@
 from dataclasses import dataclass, field
-
+from typing import Optional
+from sdk.models import shared
 
 
 @dataclass
 class GroupV2ApproveAllPendingPathParams:
-    group_id: int = field(default=None, metadata={'path_param': { 'field_name': 'groupId', 'style': 'simple', 'explode': False }})
+    group_id: int = field(metadata={'path_param': { 'field_name': 'groupId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GroupV2ApproveAllPendingSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class GroupV2ApproveAllPendingRequest:
-    path_params: GroupV2ApproveAllPendingPathParams = field(default=None)
-    security: GroupV2ApproveAllPendingSecurity = field(default=None)
+    path_params: GroupV2ApproveAllPendingPathParams = field()
+    security: GroupV2ApproveAllPendingSecurity = field()
     
 
 @dataclass
 class GroupV2ApproveAllPendingResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

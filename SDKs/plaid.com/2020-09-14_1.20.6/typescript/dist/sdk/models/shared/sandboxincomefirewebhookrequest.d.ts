@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 export declare enum SandboxIncomeFireWebhookRequestVerificationStatusEnum {
     VerificationStatusProcessingComplete = "VERIFICATION_STATUS_PROCESSING_COMPLETE",
     VerificationStatusDocumentRejected = "VERIFICATION_STATUS_DOCUMENT_REJECTED",

@@ -1,5 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Any,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
 from sdk.models import shared
 
 
@@ -22,16 +25,16 @@ class ListAssetModelsHeaders:
 
 @dataclass
 class ListAssetModelsRequest:
-    query_params: ListAssetModelsQueryParams = field(default=None)
-    headers: ListAssetModelsHeaders = field(default=None)
+    headers: ListAssetModelsHeaders = field()
+    query_params: ListAssetModelsQueryParams = field()
     
 
 @dataclass
 class ListAssetModelsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     internal_failure_exception: Optional[Any] = field(default=None)
     invalid_request_exception: Optional[Any] = field(default=None)
     list_asset_models_response: Optional[shared.ListAssetModelsResponse] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     

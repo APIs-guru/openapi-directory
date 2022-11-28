@@ -1,24 +1,24 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ChangeRequestChangesRules extends SpeakeasyBase {
-  @Metadata({ data: "json, name=action" })
+  @SpeakeasyMetadata({ data: "json, name=action" })
   action?: string;
 }
 
 
 export class ChangeRequestChanges extends SpeakeasyBase {
-  @Metadata({ data: "json, name=rules", elemType: shared.ChangeRequestChangesRules })
+  @SpeakeasyMetadata({ data: "json, name=rules", elemType: ChangeRequestChangesRules })
   rules?: ChangeRequestChangesRules[];
 }
 
 export enum ChangeRequestStatusEnum {
-    Deployed = "Deployed"
-,    PendingDeployment = "Pending deployment"
-,    Cancelled = "Cancelled"
-,    PendingValidation = "Pending validation"
-,    Open = "Open"
+    Deployed = "Deployed",
+    PendingDeployment = "Pending deployment",
+    Cancelled = "Cancelled",
+    PendingValidation = "Pending validation",
+    Open = "Open"
 }
 
 
@@ -27,24 +27,24 @@ export enum ChangeRequestStatusEnum {
  * Content of the change request
 **/
 export class ChangeRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=acceptable" })
+  @SpeakeasyMetadata({ data: "json, name=acceptable" })
   acceptable?: boolean;
 
-  @Metadata({ data: "json, name=changes" })
+  @SpeakeasyMetadata({ data: "json, name=changes" })
   changes?: ChangeRequestChanges;
 
-  @Metadata({ data: "json, name=created by" })
+  @SpeakeasyMetadata({ data: "json, name=created by" })
   createdBy?: string;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: number;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: ChangeRequestStatusEnum;
 }

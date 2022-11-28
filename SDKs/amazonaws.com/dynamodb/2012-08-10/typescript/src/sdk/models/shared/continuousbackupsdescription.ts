@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ContinuousBackupsStatusEnum } from "./continuousbackupsstatusenum";
 import { PointInTimeRecoveryDescription } from "./pointintimerecoverydescription";
+
 
 
 // ContinuousBackupsDescription
@@ -8,9 +9,9 @@ import { PointInTimeRecoveryDescription } from "./pointintimerecoverydescription
  * Represents the continuous backups and point in time recovery settings on the table.
 **/
 export class ContinuousBackupsDescription extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ContinuousBackupsStatus" })
+  @SpeakeasyMetadata({ data: "json, name=ContinuousBackupsStatus" })
   continuousBackupsStatus: ContinuousBackupsStatusEnum;
 
-  @Metadata({ data: "json, name=PointInTimeRecoveryDescription" })
+  @SpeakeasyMetadata({ data: "json, name=PointInTimeRecoveryDescription" })
   pointInTimeRecoveryDescription?: PointInTimeRecoveryDescription;
 }

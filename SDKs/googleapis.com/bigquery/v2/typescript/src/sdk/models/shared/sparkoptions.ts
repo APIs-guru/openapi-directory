@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // SparkOptions
@@ -6,30 +7,30 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Options for a user-defined Spark routine.
 **/
 export class SparkOptions extends SpeakeasyBase {
-  @Metadata({ data: "json, name=archiveUris" })
+  @SpeakeasyMetadata({ data: "json, name=archiveUris" })
   archiveUris?: string[];
 
-  @Metadata({ data: "json, name=connection" })
+  @SpeakeasyMetadata({ data: "json, name=connection" })
   connection?: string;
 
-  @Metadata({ data: "json, name=containerImage" })
+  @SpeakeasyMetadata({ data: "json, name=containerImage" })
   containerImage?: string;
 
-  @Metadata({ data: "json, name=fileUris" })
+  @SpeakeasyMetadata({ data: "json, name=fileUris" })
   fileUris?: string[];
 
-  @Metadata({ data: "json, name=jarUris" })
+  @SpeakeasyMetadata({ data: "json, name=jarUris" })
   jarUris?: string[];
 
-  @Metadata({ data: "json, name=mainFileUri" })
+  @SpeakeasyMetadata({ data: "json, name=mainFileUri" })
   mainFileUri?: string;
 
-  @Metadata({ data: "json, name=properties" })
+  @SpeakeasyMetadata({ data: "json, name=properties" })
   properties?: Map<string, string>;
 
-  @Metadata({ data: "json, name=pyFileUris" })
+  @SpeakeasyMetadata({ data: "json, name=pyFileUris" })
   pyFileUris?: string[];
 
-  @Metadata({ data: "json, name=runtimeVersion" })
+  @SpeakeasyMetadata({ data: "json, name=runtimeVersion" })
   runtimeVersion?: string;
 }

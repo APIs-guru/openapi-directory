@@ -1,0 +1,25 @@
+import { SpeakeasyBase } from "../../../internal/utils";
+import { LatLng } from "./latlng";
+import { PostalAddress } from "./postaladdress";
+export declare enum LocationLocationTypeEnum {
+    LocationTypeUnspecified = "LOCATION_TYPE_UNSPECIFIED",
+    Country = "COUNTRY",
+    AdministrativeArea = "ADMINISTRATIVE_AREA",
+    SubAdministrativeArea = "SUB_ADMINISTRATIVE_AREA",
+    Locality = "LOCALITY",
+    PostalCode = "POSTAL_CODE",
+    SubLocality = "SUB_LOCALITY",
+    SubLocality1 = "SUB_LOCALITY_1",
+    SubLocality2 = "SUB_LOCALITY_2",
+    Neighborhood = "NEIGHBORHOOD",
+    StreetAddress = "STREET_ADDRESS"
+}
+/**
+ * Output only. A resource that represents a location with full geographic information.
+**/
+export declare class Location extends SpeakeasyBase {
+    latLng?: LatLng;
+    locationType?: LocationLocationTypeEnum;
+    postalAddress?: PostalAddress;
+    radiusInMiles?: number;
+}

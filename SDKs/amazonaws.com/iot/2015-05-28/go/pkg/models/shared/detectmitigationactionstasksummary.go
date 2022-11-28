@@ -4,6 +4,9 @@ import (
 	"time"
 )
 
+// DetectMitigationActionsTaskSummary
+//
+//	The summary of the mitigation action tasks.
 type DetectMitigationActionsTaskSummary struct {
 	ActionsDefinition             []MitigationAction                     `json:"actionsDefinition,omitempty"`
 	OnlyActiveViolationsIncluded  *bool                                  `json:"onlyActiveViolationsIncluded,omitempty"`

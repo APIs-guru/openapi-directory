@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // PaymentInitiationPaymentListRequest
 /**
  * PaymentInitiationPaymentListRequest defines the request schema for `/payment_initiation/payment/list`
@@ -33,19 +33,19 @@ var PaymentInitiationPaymentListRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=client_id" }),
+        SpeakeasyMetadata({ data: "json, name=client_id" }),
         __metadata("design:type", String)
     ], PaymentInitiationPaymentListRequest.prototype, "clientId", void 0);
     __decorate([
-        Metadata({ data: "json, name=count" }),
+        SpeakeasyMetadata({ data: "json, name=count" }),
         __metadata("design:type", Number)
     ], PaymentInitiationPaymentListRequest.prototype, "count", void 0);
     __decorate([
-        Metadata({ data: "json, name=cursor" }),
+        SpeakeasyMetadata({ data: "json, name=cursor" }),
         __metadata("design:type", String)
     ], PaymentInitiationPaymentListRequest.prototype, "cursor", void 0);
     __decorate([
-        Metadata({ data: "json, name=secret" }),
+        SpeakeasyMetadata({ data: "json, name=secret" }),
         __metadata("design:type", String)
     ], PaymentInitiationPaymentListRequest.prototype, "secret", void 0);
     return PaymentInitiationPaymentListRequest;

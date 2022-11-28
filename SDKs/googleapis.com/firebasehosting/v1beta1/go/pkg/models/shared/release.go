@@ -9,6 +9,9 @@ const (
 	ReleaseTypeEnumSiteDisable     ReleaseTypeEnum = "SITE_DISABLE"
 )
 
+// Release
+//
+//	A `Release` is a particular [collection of configurations and files](sites.versions) that is set to be public at a particular time.
 type Release struct {
 	Message     *string          `json:"message,omitempty"`
 	Name        *string          `json:"name,omitempty"`

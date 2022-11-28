@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { StatusEnum } from "./statusenum";
 // StreamInfo
 /**
@@ -34,39 +34,39 @@ var StreamInfo = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=CreationTime" }),
+        SpeakeasyMetadata({ data: "json, name=CreationTime" }),
         __metadata("design:type", Date)
     ], StreamInfo.prototype, "creationTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=DataRetentionInHours" }),
+        SpeakeasyMetadata({ data: "json, name=DataRetentionInHours" }),
         __metadata("design:type", Number)
     ], StreamInfo.prototype, "dataRetentionInHours", void 0);
     __decorate([
-        Metadata({ data: "json, name=DeviceName" }),
+        SpeakeasyMetadata({ data: "json, name=DeviceName" }),
         __metadata("design:type", String)
     ], StreamInfo.prototype, "deviceName", void 0);
     __decorate([
-        Metadata({ data: "json, name=KmsKeyId" }),
+        SpeakeasyMetadata({ data: "json, name=KmsKeyId" }),
         __metadata("design:type", String)
     ], StreamInfo.prototype, "kmsKeyId", void 0);
     __decorate([
-        Metadata({ data: "json, name=MediaType" }),
+        SpeakeasyMetadata({ data: "json, name=MediaType" }),
         __metadata("design:type", String)
     ], StreamInfo.prototype, "mediaType", void 0);
     __decorate([
-        Metadata({ data: "json, name=Status" }),
+        SpeakeasyMetadata({ data: "json, name=Status" }),
         __metadata("design:type", String)
     ], StreamInfo.prototype, "status", void 0);
     __decorate([
-        Metadata({ data: "json, name=StreamARN" }),
+        SpeakeasyMetadata({ data: "json, name=StreamARN" }),
         __metadata("design:type", String)
     ], StreamInfo.prototype, "streamArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=StreamName" }),
+        SpeakeasyMetadata({ data: "json, name=StreamName" }),
         __metadata("design:type", String)
     ], StreamInfo.prototype, "streamName", void 0);
     __decorate([
-        Metadata({ data: "json, name=Version" }),
+        SpeakeasyMetadata({ data: "json, name=Version" }),
         __metadata("design:type", String)
     ], StreamInfo.prototype, "version", void 0);
     return StreamInfo;

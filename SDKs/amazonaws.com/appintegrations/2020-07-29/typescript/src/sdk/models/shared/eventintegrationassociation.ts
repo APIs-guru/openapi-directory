@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // EventIntegrationAssociation
@@ -6,21 +7,21 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The event integration association.
 **/
 export class EventIntegrationAssociation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ClientAssociationMetadata" })
+  @SpeakeasyMetadata({ data: "json, name=ClientAssociationMetadata" })
   clientAssociationMetadata?: Map<string, string>;
 
-  @Metadata({ data: "json, name=ClientId" })
+  @SpeakeasyMetadata({ data: "json, name=ClientId" })
   clientId?: string;
 
-  @Metadata({ data: "json, name=EventBridgeRuleName" })
+  @SpeakeasyMetadata({ data: "json, name=EventBridgeRuleName" })
   eventBridgeRuleName?: string;
 
-  @Metadata({ data: "json, name=EventIntegrationAssociationArn" })
+  @SpeakeasyMetadata({ data: "json, name=EventIntegrationAssociationArn" })
   eventIntegrationAssociationArn?: string;
 
-  @Metadata({ data: "json, name=EventIntegrationAssociationId" })
+  @SpeakeasyMetadata({ data: "json, name=EventIntegrationAssociationId" })
   eventIntegrationAssociationId?: string;
 
-  @Metadata({ data: "json, name=EventIntegrationName" })
+  @SpeakeasyMetadata({ data: "json, name=EventIntegrationName" })
   eventIntegrationName?: string;
 }

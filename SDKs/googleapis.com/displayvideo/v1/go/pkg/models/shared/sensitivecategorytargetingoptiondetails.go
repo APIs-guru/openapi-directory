@@ -23,6 +23,8 @@ const (
 	SensitiveCategoryTargetingOptionDetailsSensitiveCategoryEnumSensitiveCategoryShocking                SensitiveCategoryTargetingOptionDetailsSensitiveCategoryEnum = "SENSITIVE_CATEGORY_SHOCKING"
 )
 
+// SensitiveCategoryTargetingOptionDetails
+// Represents a targetable sensitive category. This will be populated in the sensitive_category_details field of the TargetingOption when targeting_type is `TARGETING_TYPE_SENSITIVE_CATEGORY_EXCLUSION`.
 type SensitiveCategoryTargetingOptionDetails struct {
 	SensitiveCategory *SensitiveCategoryTargetingOptionDetailsSensitiveCategoryEnum `json:"sensitiveCategory,omitempty"`
 }

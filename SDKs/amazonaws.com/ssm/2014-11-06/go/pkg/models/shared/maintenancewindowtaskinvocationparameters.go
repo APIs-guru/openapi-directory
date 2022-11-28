@@ -1,5 +1,7 @@
 package shared
 
+// MaintenanceWindowTaskInvocationParameters
+// The parameters for task execution.
 type MaintenanceWindowTaskInvocationParameters struct {
 	Automation    *MaintenanceWindowAutomationParameters    `json:"Automation,omitempty"`
 	Lambda        *MaintenanceWindowLambdaParameters        `json:"Lambda,omitempty"`

@@ -22,11 +22,11 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RuleTypeOptionEnum } from "./ruletypeoptionenum";
 import { ShareStatusEnum } from "./sharestatusenum";
 import { ResolverRuleStatusEnum } from "./resolverrulestatusenum";
+import { TargetAddress } from "./targetaddress";
 // ResolverRule
 /**
  * For queries that originate in your VPC, detailed information about a Resolver rule, which specifies how to route DNS queries out of the VPC. The <code>ResolverRule</code> parameter appears in the response to a <a href="https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_CreateResolverRule.html">CreateResolverRule</a>, <a href="https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_DeleteResolverRule.html">DeleteResolverRule</a>, <a href="https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_GetResolverRule.html">GetResolverRule</a>, <a href="https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_ListResolverRules.html">ListResolverRules</a>, or <a href="https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_UpdateResolverRule.html">UpdateResolverRule</a> request.
@@ -37,59 +37,59 @@ var ResolverRule = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Arn" }),
+        SpeakeasyMetadata({ data: "json, name=Arn" }),
         __metadata("design:type", String)
     ], ResolverRule.prototype, "arn", void 0);
     __decorate([
-        Metadata({ data: "json, name=CreationTime" }),
+        SpeakeasyMetadata({ data: "json, name=CreationTime" }),
         __metadata("design:type", String)
     ], ResolverRule.prototype, "creationTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=CreatorRequestId" }),
+        SpeakeasyMetadata({ data: "json, name=CreatorRequestId" }),
         __metadata("design:type", String)
     ], ResolverRule.prototype, "creatorRequestId", void 0);
     __decorate([
-        Metadata({ data: "json, name=DomainName" }),
+        SpeakeasyMetadata({ data: "json, name=DomainName" }),
         __metadata("design:type", String)
     ], ResolverRule.prototype, "domainName", void 0);
     __decorate([
-        Metadata({ data: "json, name=Id" }),
+        SpeakeasyMetadata({ data: "json, name=Id" }),
         __metadata("design:type", String)
     ], ResolverRule.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "json, name=ModificationTime" }),
+        SpeakeasyMetadata({ data: "json, name=ModificationTime" }),
         __metadata("design:type", String)
     ], ResolverRule.prototype, "modificationTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=Name" }),
+        SpeakeasyMetadata({ data: "json, name=Name" }),
         __metadata("design:type", String)
     ], ResolverRule.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=OwnerId" }),
+        SpeakeasyMetadata({ data: "json, name=OwnerId" }),
         __metadata("design:type", String)
     ], ResolverRule.prototype, "ownerId", void 0);
     __decorate([
-        Metadata({ data: "json, name=ResolverEndpointId" }),
+        SpeakeasyMetadata({ data: "json, name=ResolverEndpointId" }),
         __metadata("design:type", String)
     ], ResolverRule.prototype, "resolverEndpointId", void 0);
     __decorate([
-        Metadata({ data: "json, name=RuleType" }),
+        SpeakeasyMetadata({ data: "json, name=RuleType" }),
         __metadata("design:type", String)
     ], ResolverRule.prototype, "ruleType", void 0);
     __decorate([
-        Metadata({ data: "json, name=ShareStatus" }),
+        SpeakeasyMetadata({ data: "json, name=ShareStatus" }),
         __metadata("design:type", String)
     ], ResolverRule.prototype, "shareStatus", void 0);
     __decorate([
-        Metadata({ data: "json, name=Status" }),
+        SpeakeasyMetadata({ data: "json, name=Status" }),
         __metadata("design:type", String)
     ], ResolverRule.prototype, "status", void 0);
     __decorate([
-        Metadata({ data: "json, name=StatusMessage" }),
+        SpeakeasyMetadata({ data: "json, name=StatusMessage" }),
         __metadata("design:type", String)
     ], ResolverRule.prototype, "statusMessage", void 0);
     __decorate([
-        Metadata({ data: "json, name=TargetIps", elemType: shared.TargetAddress }),
+        SpeakeasyMetadata({ data: "json, name=TargetIps", elemType: TargetAddress }),
         __metadata("design:type", Array)
     ], ResolverRule.prototype, "targetIps", void 0);
     return ResolverRule;

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ChannelSettings
@@ -6,45 +7,45 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Branding properties for the channel view.
 **/
 export class ChannelSettings extends SpeakeasyBase {
-  @Metadata({ data: "json, name=country" })
+  @SpeakeasyMetadata({ data: "json, name=country" })
   country?: string;
 
-  @Metadata({ data: "json, name=defaultLanguage" })
+  @SpeakeasyMetadata({ data: "json, name=defaultLanguage" })
   defaultLanguage?: string;
 
-  @Metadata({ data: "json, name=defaultTab" })
+  @SpeakeasyMetadata({ data: "json, name=defaultTab" })
   defaultTab?: string;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=featuredChannelsTitle" })
+  @SpeakeasyMetadata({ data: "json, name=featuredChannelsTitle" })
   featuredChannelsTitle?: string;
 
-  @Metadata({ data: "json, name=featuredChannelsUrls" })
+  @SpeakeasyMetadata({ data: "json, name=featuredChannelsUrls" })
   featuredChannelsUrls?: string[];
 
-  @Metadata({ data: "json, name=keywords" })
+  @SpeakeasyMetadata({ data: "json, name=keywords" })
   keywords?: string;
 
-  @Metadata({ data: "json, name=moderateComments" })
+  @SpeakeasyMetadata({ data: "json, name=moderateComments" })
   moderateComments?: boolean;
 
-  @Metadata({ data: "json, name=profileColor" })
+  @SpeakeasyMetadata({ data: "json, name=profileColor" })
   profileColor?: string;
 
-  @Metadata({ data: "json, name=showBrowseView" })
+  @SpeakeasyMetadata({ data: "json, name=showBrowseView" })
   showBrowseView?: boolean;
 
-  @Metadata({ data: "json, name=showRelatedChannels" })
+  @SpeakeasyMetadata({ data: "json, name=showRelatedChannels" })
   showRelatedChannels?: boolean;
 
-  @Metadata({ data: "json, name=title" })
+  @SpeakeasyMetadata({ data: "json, name=title" })
   title?: string;
 
-  @Metadata({ data: "json, name=trackingAnalyticsAccountId" })
+  @SpeakeasyMetadata({ data: "json, name=trackingAnalyticsAccountId" })
   trackingAnalyticsAccountId?: string;
 
-  @Metadata({ data: "json, name=unsubscribedTrailer" })
+  @SpeakeasyMetadata({ data: "json, name=unsubscribedTrailer" })
   unsubscribedTrailer?: string;
 }

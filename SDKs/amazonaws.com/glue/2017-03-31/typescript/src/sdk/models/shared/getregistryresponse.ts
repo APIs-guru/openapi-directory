@@ -1,23 +1,24 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RegistryStatusEnum } from "./registrystatusenum";
 
 
+
 export class GetRegistryResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CreatedTime" })
+  @SpeakeasyMetadata({ data: "json, name=CreatedTime" })
   createdTime?: string;
 
-  @Metadata({ data: "json, name=Description" })
+  @SpeakeasyMetadata({ data: "json, name=Description" })
   description?: string;
 
-  @Metadata({ data: "json, name=RegistryArn" })
+  @SpeakeasyMetadata({ data: "json, name=RegistryArn" })
   registryArn?: string;
 
-  @Metadata({ data: "json, name=RegistryName" })
+  @SpeakeasyMetadata({ data: "json, name=RegistryName" })
   registryName?: string;
 
-  @Metadata({ data: "json, name=Status" })
+  @SpeakeasyMetadata({ data: "json, name=Status" })
   status?: RegistryStatusEnum;
 
-  @Metadata({ data: "json, name=UpdatedTime" })
+  @SpeakeasyMetadata({ data: "json, name=UpdatedTime" })
   updatedTime?: string;
 }

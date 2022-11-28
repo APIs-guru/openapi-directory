@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GrpcGatewayRouteAction } from "./grpcgatewayrouteaction";
 import { GrpcGatewayRouteMatch } from "./grpcgatewayroutematch";
+
 
 
 // GrpcGatewayRoute
@@ -8,9 +9,9 @@ import { GrpcGatewayRouteMatch } from "./grpcgatewayroutematch";
  * An object that represents a gRPC gateway route.
 **/
 export class GrpcGatewayRoute extends SpeakeasyBase {
-  @Metadata({ data: "json, name=action" })
+  @SpeakeasyMetadata({ data: "json, name=action" })
   action: GrpcGatewayRouteAction;
 
-  @Metadata({ data: "json, name=match" })
+  @SpeakeasyMetadata({ data: "json, name=match" })
   match: GrpcGatewayRouteMatch;
 }

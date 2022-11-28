@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ExfilResource
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Resource that has been exfiltrated or exfiltrated_to.
 **/
 export class ExfilResource extends SpeakeasyBase {
-  @Metadata({ data: "json, name=components" })
+  @SpeakeasyMetadata({ data: "json, name=components" })
   components?: string[];
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 }

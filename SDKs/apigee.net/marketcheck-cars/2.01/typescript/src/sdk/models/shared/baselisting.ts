@@ -1,5 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Build } from "./build";
 import { NestDealer } from "./nestdealer";
 import { ListingFinance } from "./listingfinance";
@@ -7,119 +6,120 @@ import { ListingLease } from "./listinglease";
 import { ListingNestMedia } from "./listingnestmedia";
 
 
+
 // BaseListing
 /** 
  * Minimal set of attributes describing a listing
 **/
 export class BaseListing extends SpeakeasyBase {
-  @Metadata({ data: "json, name=build" })
+  @SpeakeasyMetadata({ data: "json, name=build" })
   build?: Build;
 
-  @Metadata({ data: "json, name=carfax_1_owner" })
+  @SpeakeasyMetadata({ data: "json, name=carfax_1_owner" })
   carfax1Owner?: boolean;
 
-  @Metadata({ data: "json, name=carfax_clean_title" })
+  @SpeakeasyMetadata({ data: "json, name=carfax_clean_title" })
   carfaxCleanTitle?: boolean;
 
-  @Metadata({ data: "json, name=data_source" })
+  @SpeakeasyMetadata({ data: "json, name=data_source" })
   dataSource?: string;
 
-  @Metadata({ data: "json, name=dealer" })
+  @SpeakeasyMetadata({ data: "json, name=dealer" })
   dealer?: NestDealer;
 
-  @Metadata({ data: "json, name=dist" })
+  @SpeakeasyMetadata({ data: "json, name=dist" })
   dist?: number;
 
-  @Metadata({ data: "json, name=dom" })
+  @SpeakeasyMetadata({ data: "json, name=dom" })
   dom?: number;
 
-  @Metadata({ data: "json, name=dom_180" })
+  @SpeakeasyMetadata({ data: "json, name=dom_180" })
   dom180?: number;
 
-  @Metadata({ data: "json, name=dom_active" })
+  @SpeakeasyMetadata({ data: "json, name=dom_active" })
   domActive?: number;
 
-  @Metadata({ data: "json, name=exterior_color" })
+  @SpeakeasyMetadata({ data: "json, name=exterior_color" })
   exteriorColor?: string;
 
-  @Metadata({ data: "json, name=financing_options", elemType: shared.ListingFinance })
+  @SpeakeasyMetadata({ data: "json, name=financing_options", elemType: ListingFinance })
   financingOptions?: ListingFinance[];
 
-  @Metadata({ data: "json, name=first_seen_at" })
+  @SpeakeasyMetadata({ data: "json, name=first_seen_at" })
   firstSeenAt?: number;
 
-  @Metadata({ data: "json, name=first_seen_at_date" })
+  @SpeakeasyMetadata({ data: "json, name=first_seen_at_date" })
   firstSeenAtDate?: string;
 
-  @Metadata({ data: "json, name=heading" })
+  @SpeakeasyMetadata({ data: "json, name=heading" })
   heading?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=interior_color" })
+  @SpeakeasyMetadata({ data: "json, name=interior_color" })
   interiorColor?: string;
 
-  @Metadata({ data: "json, name=inventory_type" })
+  @SpeakeasyMetadata({ data: "json, name=inventory_type" })
   inventoryType?: string;
 
-  @Metadata({ data: "json, name=is_certified" })
+  @SpeakeasyMetadata({ data: "json, name=is_certified" })
   isCertified?: number;
 
-  @Metadata({ data: "json, name=last_seen_at" })
+  @SpeakeasyMetadata({ data: "json, name=last_seen_at" })
   lastSeenAt?: number;
 
-  @Metadata({ data: "json, name=last_seen_at_date" })
+  @SpeakeasyMetadata({ data: "json, name=last_seen_at_date" })
   lastSeenAtDate?: string;
 
-  @Metadata({ data: "json, name=leasing_options", elemType: shared.ListingLease })
+  @SpeakeasyMetadata({ data: "json, name=leasing_options", elemType: ListingLease })
   leasingOptions?: ListingLease[];
 
-  @Metadata({ data: "json, name=media" })
+  @SpeakeasyMetadata({ data: "json, name=media" })
   media?: ListingNestMedia;
 
-  @Metadata({ data: "json, name=miles" })
+  @SpeakeasyMetadata({ data: "json, name=miles" })
   miles?: number;
 
-  @Metadata({ data: "json, name=model_code" })
+  @SpeakeasyMetadata({ data: "json, name=model_code" })
   modelCode?: string;
 
-  @Metadata({ data: "json, name=msrp" })
+  @SpeakeasyMetadata({ data: "json, name=msrp" })
   msrp?: number;
 
-  @Metadata({ data: "json, name=price" })
+  @SpeakeasyMetadata({ data: "json, name=price" })
   price?: number;
 
-  @Metadata({ data: "json, name=ref_miles" })
+  @SpeakeasyMetadata({ data: "json, name=ref_miles" })
   refMiles?: string;
 
-  @Metadata({ data: "json, name=ref_miles_dt" })
+  @SpeakeasyMetadata({ data: "json, name=ref_miles_dt" })
   refMilesDt?: number;
 
-  @Metadata({ data: "json, name=ref_price" })
+  @SpeakeasyMetadata({ data: "json, name=ref_price" })
   refPrice?: string;
 
-  @Metadata({ data: "json, name=ref_price_dt" })
+  @SpeakeasyMetadata({ data: "json, name=ref_price_dt" })
   refPriceDt?: number;
 
-  @Metadata({ data: "json, name=scraped_at" })
+  @SpeakeasyMetadata({ data: "json, name=scraped_at" })
   scrapedAt?: number;
 
-  @Metadata({ data: "json, name=scraped_at_date" })
+  @SpeakeasyMetadata({ data: "json, name=scraped_at_date" })
   scrapedAtDate?: string;
 
-  @Metadata({ data: "json, name=seller_type" })
+  @SpeakeasyMetadata({ data: "json, name=seller_type" })
   sellerType?: string;
 
-  @Metadata({ data: "json, name=source" })
+  @SpeakeasyMetadata({ data: "json, name=source" })
   source?: string;
 
-  @Metadata({ data: "json, name=stock_no" })
+  @SpeakeasyMetadata({ data: "json, name=stock_no" })
   stockNo?: string;
 
-  @Metadata({ data: "json, name=vdp_url" })
+  @SpeakeasyMetadata({ data: "json, name=vdp_url" })
   vdpUrl?: string;
 
-  @Metadata({ data: "json, name=vin" })
+  @SpeakeasyMetadata({ data: "json, name=vin" })
   vin?: string;
 }

@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BoundingPoly } from "./boundingpoly";
+
 
 
 // ProductSearchParams
@@ -7,15 +8,15 @@ import { BoundingPoly } from "./boundingpoly";
  * Parameters for a product search request.
 **/
 export class ProductSearchParams extends SpeakeasyBase {
-  @Metadata({ data: "json, name=boundingPoly" })
+  @SpeakeasyMetadata({ data: "json, name=boundingPoly" })
   boundingPoly?: BoundingPoly;
 
-  @Metadata({ data: "json, name=filter" })
+  @SpeakeasyMetadata({ data: "json, name=filter" })
   filter?: string;
 
-  @Metadata({ data: "json, name=productCategories" })
+  @SpeakeasyMetadata({ data: "json, name=productCategories" })
   productCategories?: string[];
 
-  @Metadata({ data: "json, name=productSet" })
+  @SpeakeasyMetadata({ data: "json, name=productSet" })
   productSet?: string;
 }

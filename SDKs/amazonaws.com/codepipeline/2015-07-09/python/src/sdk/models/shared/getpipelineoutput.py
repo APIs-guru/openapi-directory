@@ -1,13 +1,17 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import pipelinemetadata
-from . import pipelinedeclaration
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class GetPipelineOutput:
-    metadata: Optional[pipelinemetadata.PipelineMetadata] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'metadata' }})
-    pipeline: Optional[pipelinedeclaration.PipelineDeclaration] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'pipeline' }})
+    r"""GetPipelineOutput
+    Represents the output of a <code>GetPipeline</code> action.
+    """
+    
+    metadata: Optional[PipelineMetadata] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('metadata') }})
+    pipeline: Optional[PipelineDeclaration] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('pipeline') }})
     

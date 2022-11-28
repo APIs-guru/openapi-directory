@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { Hit } from "./hit";
 // Hits
 /**
  * The collection of documents that match the search request.
@@ -34,19 +34,19 @@ var Hits = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=cursor" }),
+        SpeakeasyMetadata({ data: "json, name=cursor" }),
         __metadata("design:type", String)
     ], Hits.prototype, "cursor", void 0);
     __decorate([
-        Metadata({ data: "json, name=found" }),
+        SpeakeasyMetadata({ data: "json, name=found" }),
         __metadata("design:type", Number)
     ], Hits.prototype, "found", void 0);
     __decorate([
-        Metadata({ data: "json, name=hit", elemType: shared.Hit }),
+        SpeakeasyMetadata({ data: "json, name=hit", elemType: Hit }),
         __metadata("design:type", Array)
     ], Hits.prototype, "hit", void 0);
     __decorate([
-        Metadata({ data: "json, name=start" }),
+        SpeakeasyMetadata({ data: "json, name=start" }),
         __metadata("design:type", Number)
     ], Hits.prototype, "start", void 0);
     return Hits;

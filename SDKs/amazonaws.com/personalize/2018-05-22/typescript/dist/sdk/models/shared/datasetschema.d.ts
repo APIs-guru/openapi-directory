@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 /**
  * Describes the schema for a dataset. For more information on schemas, see <a>CreateSchema</a>.
 **/

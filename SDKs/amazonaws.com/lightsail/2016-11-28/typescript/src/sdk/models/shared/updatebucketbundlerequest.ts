@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class UpdateBucketBundleRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=bucketName" })
+  @SpeakeasyMetadata({ data: "json, name=bucketName" })
   bucketName: string;
 
-  @Metadata({ data: "json, name=bundleId" })
+  @SpeakeasyMetadata({ data: "json, name=bundleId" })
   bundleId: string;
 }

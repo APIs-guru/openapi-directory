@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import List
 from dataclasses_json import dataclass_json
-from . import propertygroup
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class EnvironmentProperties:
-    property_groups: List[propertygroup.PropertyGroup] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'PropertyGroups' }})
+    r"""EnvironmentProperties
+    Describes execution properties for a Flink-based Kinesis Data Analytics application.
+    """
+    
+    property_groups: List[PropertyGroup] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('PropertyGroups') }})
     

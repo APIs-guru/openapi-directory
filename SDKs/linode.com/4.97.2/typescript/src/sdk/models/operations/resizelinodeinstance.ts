@@ -1,71 +1,60 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class ResizeLinodeInstancePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=linodeId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=linodeId" })
   linodeId: number;
 }
 
 
 export class ResizeLinodeInstanceRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=allow_auto_disk_resize" })
+  @SpeakeasyMetadata({ data: "json, name=allow_auto_disk_resize" })
   allowAutoDiskResize?: boolean;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type: string;
 }
 
 
-export class ResizeLinodeInstanceSecurityOption1 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=bearer" })
-  personalAccessToken: shared.SchemePersonalAccessToken;
-}
-
-
-export class ResizeLinodeInstanceSecurityOption2 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
-  oauth: shared.SchemeOauth;
-}
-
-
 export class ResizeLinodeInstanceSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, option=true" })
-  option1?: ResizeLinodeInstanceSecurityOption1;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" })
+  personalAccessToken?: shared.SchemePersonalAccessToken;
 
-  @Metadata({ data: "security, option=true" })
-  option2?: ResizeLinodeInstanceSecurityOption2;
-}
-
-
-export class ResizeLinodeInstanceRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: ResizeLinodeInstancePathParams;
-
-  @Metadata({ data: "request, media_type=application/json" })
-  request: ResizeLinodeInstanceRequestBody;
-
-  @Metadata()
-  security: ResizeLinodeInstanceSecurity;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
+  oauth?: shared.SchemeOauth;
 }
 
 
 export class ResizeLinodeInstanceDefaultApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=errors", elemType: shared.ErrorObject })
+  @SpeakeasyMetadata({ data: "json, name=errors", elemType: shared.ErrorObject })
   errors?: shared.ErrorObject[];
 }
 
 
+export class ResizeLinodeInstanceRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: ResizeLinodeInstancePathParams;
+
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request: ResizeLinodeInstanceRequestBody;
+
+  @SpeakeasyMetadata()
+  security: ResizeLinodeInstanceSecurity;
+}
+
+
 export class ResizeLinodeInstanceResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   resizeLinodeInstance200ApplicationJsonObject?: Map<string, any>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   resizeLinodeInstanceDefaultApplicationJsonObject?: ResizeLinodeInstanceDefaultApplicationJson;
 }

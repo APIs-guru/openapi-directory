@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { ReplicaStatus } from "./replicastatus";
 // UserManagedStatus
 /**
  * The replication status of a SecretVersion using user-managed replication. Only populated if the parent Secret has a user-managed replication policy.
@@ -34,7 +34,7 @@ var UserManagedStatus = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=replicas", elemType: shared.ReplicaStatus }),
+        SpeakeasyMetadata({ data: "json, name=replicas", elemType: ReplicaStatus }),
         __metadata("design:type", Array)
     ], UserManagedStatus.prototype, "replicas", void 0);
     return UserManagedStatus;

@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetModifyAquaConfigurationActionEnum(str, Enum):
     MODIFY_AQUA_CONFIGURATION = "ModifyAquaConfiguration"
@@ -15,10 +19,10 @@ class GetModifyAquaConfigurationVersionEnum(str, Enum):
 
 @dataclass
 class GetModifyAquaConfigurationQueryParams:
-    action: GetModifyAquaConfigurationActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetModifyAquaConfigurationActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    cluster_identifier: str = field(metadata={'query_param': { 'field_name': 'ClusterIdentifier', 'style': 'form', 'explode': True }})
+    version: GetModifyAquaConfigurationVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     aqua_configuration_status: Optional[GetModifyAquaConfigurationAquaConfigurationStatusEnum] = field(default=None, metadata={'query_param': { 'field_name': 'AquaConfigurationStatus', 'style': 'form', 'explode': True }})
-    cluster_identifier: str = field(default=None, metadata={'query_param': { 'field_name': 'ClusterIdentifier', 'style': 'form', 'explode': True }})
-    version: GetModifyAquaConfigurationVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -34,13 +38,13 @@ class GetModifyAquaConfigurationHeaders:
 
 @dataclass
 class GetModifyAquaConfigurationRequest:
-    query_params: GetModifyAquaConfigurationQueryParams = field(default=None)
-    headers: GetModifyAquaConfigurationHeaders = field(default=None)
+    headers: GetModifyAquaConfigurationHeaders = field()
+    query_params: GetModifyAquaConfigurationQueryParams = field()
     
 
 @dataclass
 class GetModifyAquaConfigurationResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

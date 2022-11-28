@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ApplicationDetail } from "./applicationdetail";
+
 
 
 // DescribeApplicationResponse
@@ -7,6 +8,6 @@ import { ApplicationDetail } from "./applicationdetail";
  * <p/>
 **/
 export class DescribeApplicationResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ApplicationDetail" })
+  @SpeakeasyMetadata({ data: "json, name=ApplicationDetail" })
   applicationDetail: ApplicationDetail;
 }

@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ResultRow } from "./resultrow";
+
 
 
 // BaseKpiResult
@@ -8,6 +8,6 @@ import { ResultRow } from "./resultrow";
  * Provides the results of a query that retrieved the data for a standard metric that applies to an application, campaign, or journey.
 **/
 export class BaseKpiResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Rows", elemType: shared.ResultRow })
+  @SpeakeasyMetadata({ data: "json, name=Rows", elemType: ResultRow })
   rows: ResultRow[];
 }

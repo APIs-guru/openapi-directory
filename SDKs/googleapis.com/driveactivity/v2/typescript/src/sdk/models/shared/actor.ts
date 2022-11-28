@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Impersonation } from "./impersonation";
 import { SystemEvent } from "./systemevent";
 import { User } from "./user";
+
 
 
 // Actor
@@ -9,18 +10,18 @@ import { User } from "./user";
  * The actor of a Drive activity.
 **/
 export class Actor extends SpeakeasyBase {
-  @Metadata({ data: "json, name=administrator" })
+  @SpeakeasyMetadata({ data: "json, name=administrator" })
   administrator?: Map<string, any>;
 
-  @Metadata({ data: "json, name=anonymous" })
+  @SpeakeasyMetadata({ data: "json, name=anonymous" })
   anonymous?: Map<string, any>;
 
-  @Metadata({ data: "json, name=impersonation" })
+  @SpeakeasyMetadata({ data: "json, name=impersonation" })
   impersonation?: Impersonation;
 
-  @Metadata({ data: "json, name=system" })
+  @SpeakeasyMetadata({ data: "json, name=system" })
   system?: SystemEvent;
 
-  @Metadata({ data: "json, name=user" })
+  @SpeakeasyMetadata({ data: "json, name=user" })
   user?: User;
 }

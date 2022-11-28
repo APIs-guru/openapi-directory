@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetGetCustomVerificationEmailTemplateActionEnum(str, Enum):
     GET_CUSTOM_VERIFICATION_EMAIL_TEMPLATE = "GetCustomVerificationEmailTemplate"
@@ -10,9 +14,9 @@ class GetGetCustomVerificationEmailTemplateVersionEnum(str, Enum):
 
 @dataclass
 class GetGetCustomVerificationEmailTemplateQueryParams:
-    action: GetGetCustomVerificationEmailTemplateActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    template_name: str = field(default=None, metadata={'query_param': { 'field_name': 'TemplateName', 'style': 'form', 'explode': True }})
-    version: GetGetCustomVerificationEmailTemplateVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: GetGetCustomVerificationEmailTemplateActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    template_name: str = field(metadata={'query_param': { 'field_name': 'TemplateName', 'style': 'form', 'explode': True }})
+    version: GetGetCustomVerificationEmailTemplateVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -28,13 +32,13 @@ class GetGetCustomVerificationEmailTemplateHeaders:
 
 @dataclass
 class GetGetCustomVerificationEmailTemplateRequest:
-    query_params: GetGetCustomVerificationEmailTemplateQueryParams = field(default=None)
-    headers: GetGetCustomVerificationEmailTemplateHeaders = field(default=None)
+    headers: GetGetCustomVerificationEmailTemplateHeaders = field()
+    query_params: GetGetCustomVerificationEmailTemplateQueryParams = field()
     
 
 @dataclass
 class GetGetCustomVerificationEmailTemplateResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

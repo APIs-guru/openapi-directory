@@ -20,6 +20,9 @@ type SearchInsightsHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// SearchInsightsRequestBodyFilters
+//
+//	Specifies one or more severity values and one or more status values that are used to search for insights.
 type SearchInsightsRequestBodyFilters struct {
 	ResourceCollection *shared.ResourceCollection   `json:"ResourceCollection,omitempty"`
 	ServiceCollection  *shared.ServiceCollection    `json:"ServiceCollection,omitempty"`
@@ -27,6 +30,9 @@ type SearchInsightsRequestBodyFilters struct {
 	Statuses           []shared.InsightStatusEnum   `json:"Statuses,omitempty"`
 }
 
+// SearchInsightsRequestBodyStartTimeRange
+//
+//	A time range used to specify when the behavior of an insight or anomaly started.
 type SearchInsightsRequestBodyStartTimeRange struct {
 	FromTime *time.Time `json:"FromTime,omitempty"`
 	ToTime   *time.Time `json:"ToTime,omitempty"`

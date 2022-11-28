@@ -22,14 +22,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var DeleteV3BoardsBoardIdAssetsPathParams = /** @class */ (function (_super) {
     __extends(DeleteV3BoardsBoardIdAssetsPathParams, _super);
     function DeleteV3BoardsBoardIdAssetsPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=board_id" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=board_id" }),
         __metadata("design:type", String)
     ], DeleteV3BoardsBoardIdAssetsPathParams.prototype, "boardId", void 0);
     return DeleteV3BoardsBoardIdAssetsPathParams;
@@ -41,7 +41,7 @@ var DeleteV3BoardsBoardIdAssetsQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=asset_ids" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=asset_ids" }),
         __metadata("design:type", Array)
     ], DeleteV3BoardsBoardIdAssetsQueryParams.prototype, "assetIds", void 0);
     return DeleteV3BoardsBoardIdAssetsQueryParams;
@@ -53,11 +53,11 @@ var DeleteV3BoardsBoardIdAssetsRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", DeleteV3BoardsBoardIdAssetsPathParams)
     ], DeleteV3BoardsBoardIdAssetsRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", DeleteV3BoardsBoardIdAssetsQueryParams)
     ], DeleteV3BoardsBoardIdAssetsRequest.prototype, "queryParams", void 0);
     return DeleteV3BoardsBoardIdAssetsRequest;
@@ -69,11 +69,11 @@ var DeleteV3BoardsBoardIdAssetsResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], DeleteV3BoardsBoardIdAssetsResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], DeleteV3BoardsBoardIdAssetsResponse.prototype, "statusCode", void 0);
     return DeleteV3BoardsBoardIdAssetsResponse;

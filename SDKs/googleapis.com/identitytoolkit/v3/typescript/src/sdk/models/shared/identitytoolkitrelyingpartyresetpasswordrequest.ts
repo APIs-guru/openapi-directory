@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // IdentitytoolkitRelyingpartyResetPasswordRequest
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Request to reset the password.
 **/
 export class IdentitytoolkitRelyingpartyResetPasswordRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=email" })
+  @SpeakeasyMetadata({ data: "json, name=email" })
   email?: string;
 
-  @Metadata({ data: "json, name=newPassword" })
+  @SpeakeasyMetadata({ data: "json, name=newPassword" })
   newPassword?: string;
 
-  @Metadata({ data: "json, name=oldPassword" })
+  @SpeakeasyMetadata({ data: "json, name=oldPassword" })
   oldPassword?: string;
 
-  @Metadata({ data: "json, name=oobCode" })
+  @SpeakeasyMetadata({ data: "json, name=oobCode" })
   oobCode?: string;
 }

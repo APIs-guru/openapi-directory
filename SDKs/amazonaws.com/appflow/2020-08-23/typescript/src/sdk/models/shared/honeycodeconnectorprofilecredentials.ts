@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ConnectorOAuthRequest } from "./connectoroauthrequest";
+
 
 
 // HoneycodeConnectorProfileCredentials
@@ -7,12 +8,12 @@ import { ConnectorOAuthRequest } from "./connectoroauthrequest";
  *  The connector-specific credentials required when using Amazon Honeycode. 
 **/
 export class HoneycodeConnectorProfileCredentials extends SpeakeasyBase {
-  @Metadata({ data: "json, name=accessToken" })
+  @SpeakeasyMetadata({ data: "json, name=accessToken" })
   accessToken?: string;
 
-  @Metadata({ data: "json, name=oAuthRequest" })
+  @SpeakeasyMetadata({ data: "json, name=oAuthRequest" })
   oAuthRequest?: ConnectorOAuthRequest;
 
-  @Metadata({ data: "json, name=refreshToken" })
+  @SpeakeasyMetadata({ data: "json, name=refreshToken" })
   refreshToken?: string;
 }

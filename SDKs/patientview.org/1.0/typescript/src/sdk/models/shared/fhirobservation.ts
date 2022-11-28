@@ -1,44 +1,45 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Group } from "./group";
 
 
+
 export class FhirObservation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=applies" })
+  @SpeakeasyMetadata({ data: "json, name=applies" })
   applies?: Date;
 
-  @Metadata({ data: "json, name=bodySite" })
+  @SpeakeasyMetadata({ data: "json, name=bodySite" })
   bodySite?: string;
 
-  @Metadata({ data: "json, name=comments" })
+  @SpeakeasyMetadata({ data: "json, name=comments" })
   comments?: string;
 
-  @Metadata({ data: "json, name=comparator" })
+  @SpeakeasyMetadata({ data: "json, name=comparator" })
   comparator?: string;
 
-  @Metadata({ data: "json, name=diagram" })
+  @SpeakeasyMetadata({ data: "json, name=diagram" })
   diagram?: string;
 
-  @Metadata({ data: "json, name=group" })
+  @SpeakeasyMetadata({ data: "json, name=group" })
   group?: Group;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: number;
 
-  @Metadata({ data: "json, name=identifier" })
+  @SpeakeasyMetadata({ data: "json, name=identifier" })
   identifier?: string;
 
-  @Metadata({ data: "json, name=location" })
+  @SpeakeasyMetadata({ data: "json, name=location" })
   location?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=temporaryUuid" })
+  @SpeakeasyMetadata({ data: "json, name=temporaryUuid" })
   temporaryUuid?: string;
 
-  @Metadata({ data: "json, name=units" })
+  @SpeakeasyMetadata({ data: "json, name=units" })
   units?: string;
 
-  @Metadata({ data: "json, name=value" })
+  @SpeakeasyMetadata({ data: "json, name=value" })
   value?: string;
 }

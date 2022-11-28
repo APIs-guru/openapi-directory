@@ -1,6 +1,10 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -18,25 +22,25 @@ class ImportPlaybackKeyPairHeaders:
 @dataclass_json
 @dataclass
 class ImportPlaybackKeyPairRequestBody:
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    public_key_material: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'publicKeyMaterial' }})
-    tags: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tags' }})
+    public_key_material: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('publicKeyMaterial') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    tags: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('tags') }})
     
 
 @dataclass
 class ImportPlaybackKeyPairRequest:
-    headers: ImportPlaybackKeyPairHeaders = field(default=None)
-    request: ImportPlaybackKeyPairRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: ImportPlaybackKeyPairHeaders = field()
+    request: ImportPlaybackKeyPairRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class ImportPlaybackKeyPairResponse:
+    content_type: str = field()
+    status_code: int = field()
     access_denied_exception: Optional[Any] = field(default=None)
     conflict_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     import_playback_key_pair_response: Optional[shared.ImportPlaybackKeyPairResponse] = field(default=None)
     pending_verification: Optional[Any] = field(default=None)
     service_quota_exceeded_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     validation_exception: Optional[Any] = field(default=None)
     

@@ -1,5 +1,7 @@
 package shared
 
+// LinkCollectionLinkCollectionLink
+// The link collections' links
 type LinkCollectionLinkCollectionLink struct {
 	Link []interface{} `json:"Link,omitempty"`
 }

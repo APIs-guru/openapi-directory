@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BoundingBox } from "./boundingbox";
+
 
 
 // DetectionResult
@@ -7,12 +8,12 @@ import { BoundingBox } from "./boundingbox";
  * label
 **/
 export class DetectionResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=boundingBox" })
+  @SpeakeasyMetadata({ data: "json, name=boundingBox" })
   boundingBox?: BoundingBox;
 
-  @Metadata({ data: "json, name=label" })
+  @SpeakeasyMetadata({ data: "json, name=label" })
   label?: string;
 
-  @Metadata({ data: "json, name=probability" })
+  @SpeakeasyMetadata({ data: "json, name=probability" })
   probability?: number;
 }

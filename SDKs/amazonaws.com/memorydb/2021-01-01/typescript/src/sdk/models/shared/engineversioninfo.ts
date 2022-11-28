@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // EngineVersionInfo
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Provides details of the Redis engine version
 **/
 export class EngineVersionInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=EnginePatchVersion" })
+  @SpeakeasyMetadata({ data: "json, name=EnginePatchVersion" })
   enginePatchVersion?: string;
 
-  @Metadata({ data: "json, name=EngineVersion" })
+  @SpeakeasyMetadata({ data: "json, name=EngineVersion" })
   engineVersion?: string;
 
-  @Metadata({ data: "json, name=ParameterGroupFamily" })
+  @SpeakeasyMetadata({ data: "json, name=ParameterGroupFamily" })
   parameterGroupFamily?: string;
 }

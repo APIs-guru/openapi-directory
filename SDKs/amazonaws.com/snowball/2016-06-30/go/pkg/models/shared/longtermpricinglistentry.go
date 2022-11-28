@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// LongTermPricingListEntry
+// Each <code>LongTermPricingListEntry</code> object contains information about a long-term pricing type.
 type LongTermPricingListEntry struct {
 	CurrentActiveJob           *string                  `json:"CurrentActiveJob,omitempty"`
 	IsLongTermPricingAutoRenew *bool                    `json:"IsLongTermPricingAutoRenew,omitempty"`

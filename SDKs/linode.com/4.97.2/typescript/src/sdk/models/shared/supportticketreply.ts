@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // SupportTicketReply
@@ -7,21 +8,21 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * 
 **/
 export class SupportTicketReply extends SpeakeasyBase {
-  @Metadata({ data: "json, name=created" })
+  @SpeakeasyMetadata({ data: "json, name=created" })
   created?: Date;
 
-  @Metadata({ data: "json, name=created_by" })
+  @SpeakeasyMetadata({ data: "json, name=created_by" })
   createdBy?: string;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=from_linode" })
+  @SpeakeasyMetadata({ data: "json, name=from_linode" })
   fromLinode?: boolean;
 
-  @Metadata({ data: "json, name=gravatar_id" })
+  @SpeakeasyMetadata({ data: "json, name=gravatar_id" })
   gravatarId?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: number;
 }

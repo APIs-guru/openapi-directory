@@ -1,7 +1,8 @@
 
 
+
 export enum ExecuteCommandLoggingEnum {
-    None = "NONE"
-,    Default = "DEFAULT"
-,    Override = "OVERRIDE"
+    None = "NONE",
+    Default = "DEFAULT",
+    Override = "OVERRIDE"
 }

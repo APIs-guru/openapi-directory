@@ -10,7 +10,7 @@ type DcimPowerOutletsPartialUpdatePathParams struct {
 
 type DcimPowerOutletsPartialUpdateRequest struct {
 	PathParams DcimPowerOutletsPartialUpdatePathParams
-	Request    shared.WritablePowerOutlet `request:"mediaType=application/json"`
+	Request    shared.WritablePowerOutletInput `request:"mediaType=application/json"`
 }
 
 type DcimPowerOutletsPartialUpdateResponse struct {

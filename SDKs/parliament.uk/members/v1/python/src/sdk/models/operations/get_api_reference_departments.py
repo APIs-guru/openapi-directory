@@ -11,13 +11,13 @@ class GetAPIReferenceDepartmentsQueryParams:
 
 @dataclass
 class GetAPIReferenceDepartmentsRequest:
-    query_params: GetAPIReferenceDepartmentsQueryParams = field(default=None)
+    query_params: GetAPIReferenceDepartmentsQueryParams = field()
     
 
 @dataclass
 class GetAPIReferenceDepartmentsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     government_departments: Optional[List[shared.GovernmentDepartment]] = field(default=None)
-    status_code: int = field(default=None)
     

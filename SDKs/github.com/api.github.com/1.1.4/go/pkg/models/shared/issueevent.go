@@ -26,6 +26,8 @@ type IssueEventSimpleUser struct {
 	URL               string  `json:"url"`
 }
 
+// IssueEvent
+// Issue Event
 type IssueEvent struct {
 	Actor             IssueEventSimpleUser       `json:"actor"`
 	Assignee          *IssueEventSimpleUser      `json:"assignee,omitempty"`

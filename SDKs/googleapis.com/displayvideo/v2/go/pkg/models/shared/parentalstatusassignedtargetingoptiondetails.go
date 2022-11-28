@@ -9,6 +9,8 @@ const (
 	ParentalStatusAssignedTargetingOptionDetailsParentalStatusEnumParentalStatusUnknown     ParentalStatusAssignedTargetingOptionDetailsParentalStatusEnum = "PARENTAL_STATUS_UNKNOWN"
 )
 
+// ParentalStatusAssignedTargetingOptionDetails
+// Details for assigned parental status targeting option. This will be populated in the details field of an AssignedTargetingOption when targeting_type is `TARGETING_TYPE_PARENTAL_STATUS`.
 type ParentalStatusAssignedTargetingOptionDetails struct {
 	ParentalStatus *ParentalStatusAssignedTargetingOptionDetailsParentalStatusEnum `json:"parentalStatus,omitempty"`
 }

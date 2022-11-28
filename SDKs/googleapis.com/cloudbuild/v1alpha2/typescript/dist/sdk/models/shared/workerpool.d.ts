@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { NetworkConfig } from "./networkconfig";
 import { WorkerConfig } from "./workerconfig";
 export declare enum WorkerPoolStateEnum {
@@ -19,5 +19,13 @@ export declare class WorkerPool extends SpeakeasyBase {
     region?: string;
     state?: WorkerPoolStateEnum;
     updateTime?: string;
+    workerConfig?: WorkerConfig;
+}
+/**
+ * Configuration for a WorkerPool to run the builds. Workers are machines that Cloud Build uses to run your builds. By default, all workers run in a project owned by Cloud Build. To have full control over the workers that execute your builds -- such as enabling them to access private resources on your private network -- you can request Cloud Build to run the workers in your own project by creating a custom workers pool.
+**/
+export declare class WorkerPoolInput extends SpeakeasyBase {
+    networkConfig?: NetworkConfig;
+    region?: string;
     workerConfig?: WorkerConfig;
 }

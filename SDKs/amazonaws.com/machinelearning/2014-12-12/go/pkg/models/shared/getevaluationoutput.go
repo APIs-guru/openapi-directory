@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// GetEvaluationOutput
+// Represents the output of a <code>GetEvaluation</code> operation and describes an <code>Evaluation</code>.
 type GetEvaluationOutput struct {
 	ComputeTime            *int64              `json:"ComputeTime,omitempty"`
 	CreatedAt              *time.Time          `json:"CreatedAt,omitempty"`

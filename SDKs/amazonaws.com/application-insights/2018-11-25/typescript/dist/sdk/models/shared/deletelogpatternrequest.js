@@ -22,22 +22,22 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var DeleteLogPatternRequest = /** @class */ (function (_super) {
     __extends(DeleteLogPatternRequest, _super);
     function DeleteLogPatternRequest() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=PatternName" }),
+        SpeakeasyMetadata({ data: "json, name=PatternName" }),
         __metadata("design:type", String)
     ], DeleteLogPatternRequest.prototype, "patternName", void 0);
     __decorate([
-        Metadata({ data: "json, name=PatternSetName" }),
+        SpeakeasyMetadata({ data: "json, name=PatternSetName" }),
         __metadata("design:type", String)
     ], DeleteLogPatternRequest.prototype, "patternSetName", void 0);
     __decorate([
-        Metadata({ data: "json, name=ResourceGroupName" }),
+        SpeakeasyMetadata({ data: "json, name=ResourceGroupName" }),
         __metadata("design:type", String)
     ], DeleteLogPatternRequest.prototype, "resourceGroupName", void 0);
     return DeleteLogPatternRequest;

@@ -10,12 +10,16 @@ type ReposCreateOrUpdateFileContentsPathParams struct {
 	Repo  string `pathParam:"style=simple,explode=false,name=repo"`
 }
 
+// ReposCreateOrUpdateFileContentsRequestBodyAuthor
+// The author of the file. Default: The `committer` or the authenticated user if you omit `committer`.
 type ReposCreateOrUpdateFileContentsRequestBodyAuthor struct {
 	Date  *string `json:"date,omitempty"`
 	Email string  `json:"email"`
 	Name  string  `json:"name"`
 }
 
+// ReposCreateOrUpdateFileContentsRequestBodyCommitter
+// The person that committed the file. Default: the authenticated user.
 type ReposCreateOrUpdateFileContentsRequestBodyCommitter struct {
 	Date  *string `json:"date,omitempty"`
 	Email string  `json:"email"`

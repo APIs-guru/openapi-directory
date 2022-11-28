@@ -1,6 +1,7 @@
 
 
+
 export enum CsvFileCompressionEnum {
-    None = "NONE"
-,    Gzip = "GZIP"
+    None = "NONE",
+    Gzip = "GZIP"
 }

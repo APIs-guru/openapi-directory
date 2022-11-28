@@ -1,7 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import autoinstallconstraint
+from sdk import utils
+from . import *
 
 class AutoInstallPolicyAutoInstallModeEnum(str, Enum):
     AUTO_INSTALL_MODE_UNSPECIFIED = "autoInstallModeUnspecified"
@@ -13,8 +15,8 @@ class AutoInstallPolicyAutoInstallModeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class AutoInstallPolicy:
-    auto_install_constraint: Optional[List[autoinstallconstraint.AutoInstallConstraint]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'autoInstallConstraint' }})
-    auto_install_mode: Optional[AutoInstallPolicyAutoInstallModeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'autoInstallMode' }})
-    auto_install_priority: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'autoInstallPriority' }})
-    minimum_version_code: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'minimumVersionCode' }})
+    auto_install_constraint: Optional[List[AutoInstallConstraint]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('autoInstallConstraint') }})
+    auto_install_mode: Optional[AutoInstallPolicyAutoInstallModeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('autoInstallMode') }})
+    auto_install_priority: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('autoInstallPriority') }})
+    minimum_version_code: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('minimumVersionCode') }})
     

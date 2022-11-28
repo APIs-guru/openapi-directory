@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 
 class GetListPathwaysFormatEnum(str, Enum):
     JSON = "json"
@@ -18,11 +19,11 @@ class GetListPathwaysQueryParams:
 
 @dataclass
 class GetListPathwaysRequest:
-    query_params: GetListPathwaysQueryParams = field(default=None)
+    query_params: GetListPathwaysQueryParams = field()
     
 
 @dataclass
 class GetListPathwaysResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

@@ -1,27 +1,27 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AuthenticationExecutionExportRepresentation } from "./authenticationexecutionexportrepresentation";
 
 
+
 export class AuthenticationFlowRepresentation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=alias" })
+  @SpeakeasyMetadata({ data: "json, name=alias" })
   alias?: string;
 
-  @Metadata({ data: "json, name=authenticationExecutions", elemType: shared.AuthenticationExecutionExportRepresentation })
+  @SpeakeasyMetadata({ data: "json, name=authenticationExecutions", elemType: AuthenticationExecutionExportRepresentation })
   authenticationExecutions?: AuthenticationExecutionExportRepresentation[];
 
-  @Metadata({ data: "json, name=builtIn" })
+  @SpeakeasyMetadata({ data: "json, name=builtIn" })
   builtIn?: boolean;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=providerId" })
+  @SpeakeasyMetadata({ data: "json, name=providerId" })
   providerId?: string;
 
-  @Metadata({ data: "json, name=topLevel" })
+  @SpeakeasyMetadata({ data: "json, name=topLevel" })
   topLevel?: boolean;
 }

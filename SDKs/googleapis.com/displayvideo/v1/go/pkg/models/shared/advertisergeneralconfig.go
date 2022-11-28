@@ -1,5 +1,14 @@
 package shared
 
+// AdvertiserGeneralConfigInput
+// General settings of an advertiser.
+type AdvertiserGeneralConfigInput struct {
+	CurrencyCode *string `json:"currencyCode,omitempty"`
+	DomainURL    *string `json:"domainUrl,omitempty"`
+}
+
+// AdvertiserGeneralConfig
+// General settings of an advertiser.
 type AdvertiserGeneralConfig struct {
 	CurrencyCode *string `json:"currencyCode,omitempty"`
 	DomainURL    *string `json:"domainUrl,omitempty"`

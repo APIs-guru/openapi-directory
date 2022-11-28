@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Money
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Represents an amount of money with its currency type.
 **/
 export class Money extends SpeakeasyBase {
-  @Metadata({ data: "json, name=currencyCode" })
+  @SpeakeasyMetadata({ data: "json, name=currencyCode" })
   currencyCode?: string;
 
-  @Metadata({ data: "json, name=nanos" })
+  @SpeakeasyMetadata({ data: "json, name=nanos" })
   nanos?: number;
 
-  @Metadata({ data: "json, name=units" })
+  @SpeakeasyMetadata({ data: "json, name=units" })
   units?: string;
 }

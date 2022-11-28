@@ -22,14 +22,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var GroupV2GetGroupPathParams = /** @class */ (function (_super) {
     __extends(GroupV2GetGroupPathParams, _super);
     function GroupV2GetGroupPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=groupId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=groupId" }),
         __metadata("design:type", Number)
     ], GroupV2GetGroupPathParams.prototype, "groupId", void 0);
     return GroupV2GetGroupPathParams;
@@ -41,7 +41,7 @@ var GroupV2GetGroupRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GroupV2GetGroupPathParams)
     ], GroupV2GetGroupRequest.prototype, "pathParams", void 0);
     return GroupV2GetGroupRequest;
@@ -53,15 +53,15 @@ var GroupV2GetGroupResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], GroupV2GetGroupResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GroupV2GetGroupResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GroupV2GetGroupResponse.prototype, "statusCode", void 0);
     return GroupV2GetGroupResponse;

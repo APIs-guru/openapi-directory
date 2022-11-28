@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class GetWorkspacesWorkspacePermissionsPathParams:
-    workspace: str = field(default=None, metadata={'path_param': { 'field_name': 'workspace', 'style': 'simple', 'explode': False }})
+    workspace: str = field(metadata={'path_param': { 'field_name': 'workspace', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -14,38 +14,23 @@ class GetWorkspacesWorkspacePermissionsQueryParams:
     
 
 @dataclass
-class GetWorkspacesWorkspacePermissionsSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    
-
-@dataclass
-class GetWorkspacesWorkspacePermissionsSecurityOption2:
-    basic: shared.SchemeBasic = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'basic' }})
-    
-
-@dataclass
-class GetWorkspacesWorkspacePermissionsSecurityOption3:
-    api_key: shared.SchemeAPIKey = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
-    
-
-@dataclass
 class GetWorkspacesWorkspacePermissionsSecurity:
-    option1: Optional[GetWorkspacesWorkspacePermissionsSecurityOption1] = field(default=None, metadata={'security': { 'option': True }})
-    option2: Optional[GetWorkspacesWorkspacePermissionsSecurityOption2] = field(default=None, metadata={'security': { 'option': True }})
-    option3: Optional[GetWorkspacesWorkspacePermissionsSecurityOption3] = field(default=None, metadata={'security': { 'option': True }})
+    api_key: Optional[shared.SchemeAPIKey] = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    basic: Optional[shared.SchemeBasic] = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'basic' }})
+    oauth2: Optional[shared.SchemeOauth2] = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class GetWorkspacesWorkspacePermissionsRequest:
-    path_params: GetWorkspacesWorkspacePermissionsPathParams = field(default=None)
-    query_params: GetWorkspacesWorkspacePermissionsQueryParams = field(default=None)
-    security: GetWorkspacesWorkspacePermissionsSecurity = field(default=None)
+    path_params: GetWorkspacesWorkspacePermissionsPathParams = field()
+    query_params: GetWorkspacesWorkspacePermissionsQueryParams = field()
+    security: GetWorkspacesWorkspacePermissionsSecurity = field()
     
 
 @dataclass
 class GetWorkspacesWorkspacePermissionsResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error: Optional[dict[str, Any]] = field(default=None)
     paginated_workspace_memberships: Optional[shared.PaginatedWorkspaceMemberships] = field(default=None)
     

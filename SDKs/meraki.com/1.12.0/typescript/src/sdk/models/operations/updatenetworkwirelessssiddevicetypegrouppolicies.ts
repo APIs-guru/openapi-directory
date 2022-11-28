@@ -1,72 +1,73 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class UpdateNetworkWirelessSsidDeviceTypeGroupPoliciesPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=networkId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=networkId" })
   networkId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=number" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=number" })
   number: string;
 }
 
 export enum UpdateNetworkWirelessSsidDeviceTypeGroupPoliciesRequestBodyDeviceTypePoliciesDevicePolicyEnum {
-    Allowed = "Allowed"
-,    Blocked = "Blocked"
-,    GroupPolicy = "Group policy"
+    Allowed = "Allowed",
+    Blocked = "Blocked",
+    GroupPolicy = "Group policy"
 }
 
 export enum UpdateNetworkWirelessSsidDeviceTypeGroupPoliciesRequestBodyDeviceTypePoliciesDeviceTypeEnum {
-    Android = "Android"
-,    BlackBerry = "BlackBerry"
-,    ChromeOs = "Chrome OS"
-,    IPad = "iPad"
-,    IPhone = "iPhone"
-,    IPod = "iPod"
-,    MacOsX = "Mac OS X"
-,    Windows = "Windows"
-,    WindowsPhone = "Windows Phone"
-,    BAndNNook = "B&N Nook"
-,    OtherOs = "Other OS"
+    Android = "Android",
+    BlackBerry = "BlackBerry",
+    ChromeOs = "Chrome OS",
+    IPad = "iPad",
+    IPhone = "iPhone",
+    IPod = "iPod",
+    MacOsX = "Mac OS X",
+    Windows = "Windows",
+    WindowsPhone = "Windows Phone",
+    BAndNNook = "B&N Nook",
+    OtherOs = "Other OS"
 }
 
 
 export class UpdateNetworkWirelessSsidDeviceTypeGroupPoliciesRequestBodyDeviceTypePolicies extends SpeakeasyBase {
-  @Metadata({ data: "json, name=devicePolicy" })
+  @SpeakeasyMetadata({ data: "json, name=devicePolicy" })
   devicePolicy: UpdateNetworkWirelessSsidDeviceTypeGroupPoliciesRequestBodyDeviceTypePoliciesDevicePolicyEnum;
 
-  @Metadata({ data: "json, name=deviceType" })
+  @SpeakeasyMetadata({ data: "json, name=deviceType" })
   deviceType: UpdateNetworkWirelessSsidDeviceTypeGroupPoliciesRequestBodyDeviceTypePoliciesDeviceTypeEnum;
 
-  @Metadata({ data: "json, name=groupPolicyId" })
+  @SpeakeasyMetadata({ data: "json, name=groupPolicyId" })
   groupPolicyId?: number;
 }
 
 
 export class UpdateNetworkWirelessSsidDeviceTypeGroupPoliciesRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=deviceTypePolicies", elemType: operations.UpdateNetworkWirelessSsidDeviceTypeGroupPoliciesRequestBodyDeviceTypePolicies })
+  @SpeakeasyMetadata({ data: "json, name=deviceTypePolicies", elemType: UpdateNetworkWirelessSsidDeviceTypeGroupPoliciesRequestBodyDeviceTypePolicies })
   deviceTypePolicies?: UpdateNetworkWirelessSsidDeviceTypeGroupPoliciesRequestBodyDeviceTypePolicies[];
 
-  @Metadata({ data: "json, name=enabled" })
+  @SpeakeasyMetadata({ data: "json, name=enabled" })
   enabled?: boolean;
 }
 
 
 export class UpdateNetworkWirelessSsidDeviceTypeGroupPoliciesRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: UpdateNetworkWirelessSsidDeviceTypeGroupPoliciesPathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request?: UpdateNetworkWirelessSsidDeviceTypeGroupPoliciesRequestBody;
 }
 
 
 export class UpdateNetworkWirelessSsidDeviceTypeGroupPoliciesResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   updateNetworkWirelessSsidDeviceTypeGroupPolicies200ApplicationJsonObject?: Map<string, any>;
 }

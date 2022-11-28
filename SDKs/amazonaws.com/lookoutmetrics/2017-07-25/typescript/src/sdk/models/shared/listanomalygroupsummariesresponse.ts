@@ -1,16 +1,16 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AnomalyGroupStatistics } from "./anomalygroupstatistics";
 import { AnomalyGroupSummary } from "./anomalygroupsummary";
 
 
+
 export class ListAnomalyGroupSummariesResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AnomalyGroupStatistics" })
+  @SpeakeasyMetadata({ data: "json, name=AnomalyGroupStatistics" })
   anomalyGroupStatistics?: AnomalyGroupStatistics;
 
-  @Metadata({ data: "json, name=AnomalyGroupSummaryList", elemType: shared.AnomalyGroupSummary })
+  @SpeakeasyMetadata({ data: "json, name=AnomalyGroupSummaryList", elemType: AnomalyGroupSummary })
   anomalyGroupSummaryList?: AnomalyGroupSummary[];
 
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 }

@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 class GetWatchLaterQueueAlt1DirectionEnum(str, Enum):
@@ -31,18 +35,18 @@ class GetWatchLaterQueueAlt1QueryParams:
 
 @dataclass
 class GetWatchLaterQueueAlt1Security:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class GetWatchLaterQueueAlt1Request:
-    query_params: GetWatchLaterQueueAlt1QueryParams = field(default=None)
-    security: GetWatchLaterQueueAlt1Security = field(default=None)
+    query_params: GetWatchLaterQueueAlt1QueryParams = field()
+    security: GetWatchLaterQueueAlt1Security = field()
     
 
 @dataclass
 class GetWatchLaterQueueAlt1Response:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     videos: Optional[List[shared.Video]] = field(default=None)
     

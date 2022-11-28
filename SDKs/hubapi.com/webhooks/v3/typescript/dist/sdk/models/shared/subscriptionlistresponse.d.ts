@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { SubscriptionResponse } from "./subscriptionresponse";
 /**
  * List of event subscriptions for your app

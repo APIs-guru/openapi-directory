@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { KeyRangeInfo } from "./keyrangeinfo";
+
 
 
 // KeyRangeInfos
@@ -8,9 +8,9 @@ import { KeyRangeInfo } from "./keyrangeinfo";
  * A message representing a list of specific information for multiple key ranges.
 **/
 export class KeyRangeInfos extends SpeakeasyBase {
-  @Metadata({ data: "json, name=infos", elemType: shared.KeyRangeInfo })
+  @SpeakeasyMetadata({ data: "json, name=infos", elemType: KeyRangeInfo })
   infos?: KeyRangeInfo[];
 
-  @Metadata({ data: "json, name=totalSize" })
+  @SpeakeasyMetadata({ data: "json, name=totalSize" })
   totalSize?: number;
 }

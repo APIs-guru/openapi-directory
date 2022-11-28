@@ -18,6 +18,8 @@ const (
 	VideoProcessingDetailsProcessingStatusEnumTerminated VideoProcessingDetailsProcessingStatusEnum = "terminated"
 )
 
+// VideoProcessingDetails
+// Describes processing status and progress and availability of some other Video resource parts.
 type VideoProcessingDetails struct {
 	EditorSuggestionsAvailability *string                                            `json:"editorSuggestionsAvailability,omitempty"`
 	FileDetailsAvailability       *string                                            `json:"fileDetailsAvailability,omitempty"`

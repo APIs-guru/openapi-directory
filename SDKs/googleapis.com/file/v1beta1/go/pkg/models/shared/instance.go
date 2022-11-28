@@ -12,6 +12,8 @@ const (
 	InstanceStateEnumRestoring        InstanceStateEnum = "RESTORING"
 	InstanceStateEnumSuspended        InstanceStateEnum = "SUSPENDED"
 	InstanceStateEnumReverting        InstanceStateEnum = "REVERTING"
+	InstanceStateEnumSuspending       InstanceStateEnum = "SUSPENDING"
+	InstanceStateEnumResuming         InstanceStateEnum = "RESUMING"
 )
 
 type InstanceSuspensionReasonsEnum string
@@ -33,6 +35,22 @@ const (
 	InstanceTierEnumEnterprise      InstanceTierEnum = "ENTERPRISE"
 )
 
+// InstanceInput
+// A Filestore instance.
+type InstanceInput struct {
+	CapacityGb        *string              `json:"capacityGb,omitempty"`
+	Description       *string              `json:"description,omitempty"`
+	Etag              *string              `json:"etag,omitempty"`
+	FileShares        []FileShareConfig    `json:"fileShares,omitempty"`
+	KmsKeyName        *string              `json:"kmsKeyName,omitempty"`
+	Labels            map[string]string    `json:"labels,omitempty"`
+	MultiShareEnabled *bool                `json:"multiShareEnabled,omitempty"`
+	Networks          []NetworkConfigInput `json:"networks,omitempty"`
+	Tier              *InstanceTierEnum    `json:"tier,omitempty"`
+}
+
+// Instance
+// A Filestore instance.
 type Instance struct {
 	CapacityGb         *string                         `json:"capacityGb,omitempty"`
 	CapacityStepSizeGb *string                         `json:"capacityStepSizeGb,omitempty"`

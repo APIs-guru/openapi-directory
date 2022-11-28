@@ -5,12 +5,12 @@ from sdk.models import shared
 
 @dataclass
 class SecretsSecretRolesCreateRequest:
-    request: shared.SecretRole = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    request: shared.SecretRoleInput = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class SecretsSecretRolesCreateResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     secret_role: Optional[shared.SecretRole] = field(default=None)
-    status_code: int = field(default=None)
     

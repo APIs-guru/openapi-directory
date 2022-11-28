@@ -1,21 +1,21 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Parameter } from "./parameter";
 
 
+
 export class StartPipelineExecutionRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ClientRequestToken" })
+  @SpeakeasyMetadata({ data: "json, name=ClientRequestToken" })
   clientRequestToken: string;
 
-  @Metadata({ data: "json, name=PipelineExecutionDescription" })
+  @SpeakeasyMetadata({ data: "json, name=PipelineExecutionDescription" })
   pipelineExecutionDescription?: string;
 
-  @Metadata({ data: "json, name=PipelineExecutionDisplayName" })
+  @SpeakeasyMetadata({ data: "json, name=PipelineExecutionDisplayName" })
   pipelineExecutionDisplayName?: string;
 
-  @Metadata({ data: "json, name=PipelineName" })
+  @SpeakeasyMetadata({ data: "json, name=PipelineName" })
   pipelineName: string;
 
-  @Metadata({ data: "json, name=PipelineParameters", elemType: shared.Parameter })
+  @SpeakeasyMetadata({ data: "json, name=PipelineParameters", elemType: Parameter })
   pipelineParameters?: Parameter[];
 }

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // InputDataConfig
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The input configuration properties for requesting a batch translation job.
 **/
 export class InputDataConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ContentType" })
+  @SpeakeasyMetadata({ data: "json, name=ContentType" })
   contentType: string;
 
-  @Metadata({ data: "json, name=S3Uri" })
+  @SpeakeasyMetadata({ data: "json, name=S3Uri" })
   s3Uri: string;
 }

@@ -34,7 +34,7 @@ type ClouddeployProjectsLocationsTargetsPatchSecurity struct {
 type ClouddeployProjectsLocationsTargetsPatchRequest struct {
 	PathParams  ClouddeployProjectsLocationsTargetsPatchPathParams
 	QueryParams ClouddeployProjectsLocationsTargetsPatchQueryParams
-	Request     *shared.Target `request:"mediaType=application/json"`
+	Request     *shared.TargetInput `request:"mediaType=application/json"`
 	Security    ClouddeployProjectsLocationsTargetsPatchSecurity
 }
 

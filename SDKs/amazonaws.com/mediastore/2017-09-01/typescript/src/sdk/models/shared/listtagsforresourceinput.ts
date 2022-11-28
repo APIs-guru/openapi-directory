@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ListTagsForResourceInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Resource" })
+  @SpeakeasyMetadata({ data: "json, name=Resource" })
   resource: string;
 }

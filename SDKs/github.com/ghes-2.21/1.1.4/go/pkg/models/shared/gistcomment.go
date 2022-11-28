@@ -26,6 +26,8 @@ type GistCommentSimpleUser struct {
 	URL               string  `json:"url"`
 }
 
+// GistComment
+// A comment made to a gist.
 type GistComment struct {
 	AuthorAssociation AuthorAssociationEnum `json:"author_association"`
 	Body              string                `json:"body"`

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { TagFilter } from "./tagfilter";
 export declare class GetResourcesInput extends SpeakeasyBase {
     excludeCompliantResources?: boolean;

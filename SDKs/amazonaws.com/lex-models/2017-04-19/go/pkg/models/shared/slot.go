@@ -1,5 +1,7 @@
 package shared
 
+// Slot
+// Identifies the version of a specific slot.
 type Slot struct {
 	DefaultValueSpec       *SlotDefaultValueSpec   `json:"defaultValueSpec,omitempty"`
 	Description            *string                 `json:"description,omitempty"`

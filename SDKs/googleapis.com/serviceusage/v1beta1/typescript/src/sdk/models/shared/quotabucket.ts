@@ -1,7 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { QuotaOverride } from "./quotaoverride";
-import { QuotaOverride } from "./quotaoverride";
-import { QuotaOverride } from "./quotaoverride";
+
 
 
 // QuotaBucket
@@ -9,21 +8,21 @@ import { QuotaOverride } from "./quotaoverride";
  * A quota bucket is a quota provisioning unit for a specific set of dimensions.
 **/
 export class QuotaBucket extends SpeakeasyBase {
-  @Metadata({ data: "json, name=adminOverride" })
+  @SpeakeasyMetadata({ data: "json, name=adminOverride" })
   adminOverride?: QuotaOverride;
 
-  @Metadata({ data: "json, name=consumerOverride" })
+  @SpeakeasyMetadata({ data: "json, name=consumerOverride" })
   consumerOverride?: QuotaOverride;
 
-  @Metadata({ data: "json, name=defaultLimit" })
+  @SpeakeasyMetadata({ data: "json, name=defaultLimit" })
   defaultLimit?: string;
 
-  @Metadata({ data: "json, name=dimensions" })
+  @SpeakeasyMetadata({ data: "json, name=dimensions" })
   dimensions?: Map<string, string>;
 
-  @Metadata({ data: "json, name=effectiveLimit" })
+  @SpeakeasyMetadata({ data: "json, name=effectiveLimit" })
   effectiveLimit?: string;
 
-  @Metadata({ data: "json, name=producerOverride" })
+  @SpeakeasyMetadata({ data: "json, name=producerOverride" })
   producerOverride?: QuotaOverride;
 }

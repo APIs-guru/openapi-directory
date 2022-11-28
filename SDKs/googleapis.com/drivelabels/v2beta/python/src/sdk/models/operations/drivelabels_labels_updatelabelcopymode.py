@@ -1,11 +1,15 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DrivelabelsLabelsUpdateLabelCopyModePathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,14 +29,14 @@ class DrivelabelsLabelsUpdateLabelCopyModeQueryParams:
 
 @dataclass
 class DrivelabelsLabelsUpdateLabelCopyModeRequest:
-    path_params: DrivelabelsLabelsUpdateLabelCopyModePathParams = field(default=None)
-    query_params: DrivelabelsLabelsUpdateLabelCopyModeQueryParams = field(default=None)
+    path_params: DrivelabelsLabelsUpdateLabelCopyModePathParams = field()
+    query_params: DrivelabelsLabelsUpdateLabelCopyModeQueryParams = field()
     request: Optional[shared.GoogleAppsDriveLabelsV2betaUpdateLabelCopyModeRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class DrivelabelsLabelsUpdateLabelCopyModeResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_apps_drive_labels_v2beta_label: Optional[shared.GoogleAppsDriveLabelsV2betaLabel] = field(default=None)
-    status_code: int = field(default=None)
     

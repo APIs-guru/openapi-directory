@@ -1,49 +1,50 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetcurrencyrateQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=license" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=license" })
   license: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=symbol" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=symbol" })
   symbol: string;
 }
 
 
-export class GetcurrencyrateRequest extends SpeakeasyBase {
-  @Metadata()
-  queryParams: GetcurrencyrateQueryParams;
-}
-
-
 export class Getcurrencyrate200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Code" })
+  @SpeakeasyMetadata({ data: "json, name=Code" })
   code?: string;
 
-  @Metadata({ data: "json, name=Country" })
+  @SpeakeasyMetadata({ data: "json, name=Country" })
   country?: string;
 
-  @Metadata({ data: "json, name=Credits" })
+  @SpeakeasyMetadata({ data: "json, name=Credits" })
   credits?: string;
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name?: string;
 
-  @Metadata({ data: "json, name=Rate" })
+  @SpeakeasyMetadata({ data: "json, name=Rate" })
   rate?: string;
 
-  @Metadata({ data: "json, name=Symbol" })
+  @SpeakeasyMetadata({ data: "json, name=Symbol" })
   symbol?: string;
 }
 
 
+export class GetcurrencyrateRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  queryParams: GetcurrencyrateQueryParams;
+}
+
+
 export class GetcurrencyrateResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getcurrencyrate200ApplicationJsonObject?: Getcurrencyrate200ApplicationJson;
 }

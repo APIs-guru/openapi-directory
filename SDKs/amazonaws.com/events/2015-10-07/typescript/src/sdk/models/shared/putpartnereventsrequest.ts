@@ -1,9 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PutPartnerEventsRequestEntry } from "./putpartnereventsrequestentry";
 
 
+
 export class PutPartnerEventsRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Entries", elemType: shared.PutPartnerEventsRequestEntry })
+  @SpeakeasyMetadata({ data: "json, name=Entries", elemType: PutPartnerEventsRequestEntry })
   entries: PutPartnerEventsRequestEntry[];
 }

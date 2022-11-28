@@ -1,29 +1,30 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetRecruitingTeamsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=team" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=team" })
   team?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=year" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=year" })
   year?: number;
 }
 
 
 export class GetRecruitingTeamsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetRecruitingTeamsQueryParams;
 }
 
 
 export class GetRecruitingTeamsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata({ elemType: shared.TeamRecruitingRank })
+  @SpeakeasyMetadata({ elemType: shared.TeamRecruitingRank })
   teamRecruitingRanks?: shared.TeamRecruitingRank[];
 }

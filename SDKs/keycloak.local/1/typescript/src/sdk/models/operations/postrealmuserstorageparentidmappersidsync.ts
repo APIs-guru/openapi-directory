@@ -1,41 +1,42 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class PostRealmUserStorageParentIdMappersIdSyncPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" })
   id: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=parentId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=parentId" })
   parentId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=realm" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=realm" })
   realm: string;
 }
 
 
 export class PostRealmUserStorageParentIdMappersIdSyncQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=direction" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=direction" })
   direction?: string;
 }
 
 
 export class PostRealmUserStorageParentIdMappersIdSyncRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: PostRealmUserStorageParentIdMappersIdSyncPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: PostRealmUserStorageParentIdMappersIdSyncQueryParams;
 }
 
 
 export class PostRealmUserStorageParentIdMappersIdSyncResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   synchronizationResult?: shared.SynchronizationResult;
 }

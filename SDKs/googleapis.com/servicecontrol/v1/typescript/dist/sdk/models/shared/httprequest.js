@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // HttpRequest
 /**
  * A common proto for logging HTTP requests. Only contains semantics defined by the HTTP specification. Product-specific logging information MUST be defined in a separate message.
@@ -33,63 +33,63 @@ var HttpRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=cacheFillBytes" }),
+        SpeakeasyMetadata({ data: "json, name=cacheFillBytes" }),
         __metadata("design:type", String)
     ], HttpRequest.prototype, "cacheFillBytes", void 0);
     __decorate([
-        Metadata({ data: "json, name=cacheHit" }),
+        SpeakeasyMetadata({ data: "json, name=cacheHit" }),
         __metadata("design:type", Boolean)
     ], HttpRequest.prototype, "cacheHit", void 0);
     __decorate([
-        Metadata({ data: "json, name=cacheLookup" }),
+        SpeakeasyMetadata({ data: "json, name=cacheLookup" }),
         __metadata("design:type", Boolean)
     ], HttpRequest.prototype, "cacheLookup", void 0);
     __decorate([
-        Metadata({ data: "json, name=cacheValidatedWithOriginServer" }),
+        SpeakeasyMetadata({ data: "json, name=cacheValidatedWithOriginServer" }),
         __metadata("design:type", Boolean)
     ], HttpRequest.prototype, "cacheValidatedWithOriginServer", void 0);
     __decorate([
-        Metadata({ data: "json, name=latency" }),
+        SpeakeasyMetadata({ data: "json, name=latency" }),
         __metadata("design:type", String)
     ], HttpRequest.prototype, "latency", void 0);
     __decorate([
-        Metadata({ data: "json, name=protocol" }),
+        SpeakeasyMetadata({ data: "json, name=protocol" }),
         __metadata("design:type", String)
     ], HttpRequest.prototype, "protocol", void 0);
     __decorate([
-        Metadata({ data: "json, name=referer" }),
+        SpeakeasyMetadata({ data: "json, name=referer" }),
         __metadata("design:type", String)
     ], HttpRequest.prototype, "referer", void 0);
     __decorate([
-        Metadata({ data: "json, name=remoteIp" }),
+        SpeakeasyMetadata({ data: "json, name=remoteIp" }),
         __metadata("design:type", String)
     ], HttpRequest.prototype, "remoteIp", void 0);
     __decorate([
-        Metadata({ data: "json, name=requestMethod" }),
+        SpeakeasyMetadata({ data: "json, name=requestMethod" }),
         __metadata("design:type", String)
     ], HttpRequest.prototype, "requestMethod", void 0);
     __decorate([
-        Metadata({ data: "json, name=requestSize" }),
+        SpeakeasyMetadata({ data: "json, name=requestSize" }),
         __metadata("design:type", String)
     ], HttpRequest.prototype, "requestSize", void 0);
     __decorate([
-        Metadata({ data: "json, name=requestUrl" }),
+        SpeakeasyMetadata({ data: "json, name=requestUrl" }),
         __metadata("design:type", String)
     ], HttpRequest.prototype, "requestUrl", void 0);
     __decorate([
-        Metadata({ data: "json, name=responseSize" }),
+        SpeakeasyMetadata({ data: "json, name=responseSize" }),
         __metadata("design:type", String)
     ], HttpRequest.prototype, "responseSize", void 0);
     __decorate([
-        Metadata({ data: "json, name=serverIp" }),
+        SpeakeasyMetadata({ data: "json, name=serverIp" }),
         __metadata("design:type", String)
     ], HttpRequest.prototype, "serverIp", void 0);
     __decorate([
-        Metadata({ data: "json, name=status" }),
+        SpeakeasyMetadata({ data: "json, name=status" }),
         __metadata("design:type", Number)
     ], HttpRequest.prototype, "status", void 0);
     __decorate([
-        Metadata({ data: "json, name=userAgent" }),
+        SpeakeasyMetadata({ data: "json, name=userAgent" }),
         __metadata("design:type", String)
     ], HttpRequest.prototype, "userAgent", void 0);
     return HttpRequest;

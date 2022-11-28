@@ -9,7 +9,7 @@ import (
 	"strings"
 )
 
-var Servers = []string{
+var ServerList = []string{
 	"https://apisetu.gov.in/kiadb/v3",
 }
 
@@ -18,9 +18,13 @@ type HTTPClient interface {
 }
 
 type SDK struct {
-	defaultClient  HTTPClient
-	securityClient HTTPClient
-	serverURL      string
+	_defaultClient  HTTPClient
+	_securityClient HTTPClient
+
+	_serverURL  string
+	_language   string
+	_sdkVersion string
+	_genVersion string
 }
 
 type SDKOption func(*SDK)
@@ -31,27 +35,46 @@ func WithServerURL(serverURL string, params map[string]string) SDKOption {
 			serverURL = utils.ReplaceParameters(serverURL, params)
 		}
 
-		sdk.serverURL = serverURL
+		sdk._serverURL = serverURL
+	}
+}
+
+func WithClient(client HTTPClient) SDKOption {
+	return func(sdk *SDK) {
+		sdk._defaultClient = client
 	}
 }
 
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
-		defaultClient:  http.DefaultClient,
-		securityClient: http.DefaultClient,
+		_language:   "go",
+		_sdkVersion: "",
+		_genVersion: "internal",
 	}
 	for _, opt := range opts {
 		opt(sdk)
 	}
-	if sdk.serverURL == "" {
-		sdk.serverURL = Servers[0]
+
+	if sdk._defaultClient == nil {
+		sdk._defaultClient = http.DefaultClient
+	}
+	if sdk._securityClient == nil {
+
+		sdk._securityClient = sdk._defaultClient
+
+	}
+
+	if sdk._serverURL == "" {
+		sdk._serverURL = ServerList[0]
 	}
 
 	return sdk
 }
 
+// Alltr - Allotment Letter
+// API to verify Allotment Letter.
 func (s *SDK) Alltr(ctx context.Context, request operations.AlltrRequest) (*operations.AlltrResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/alltr/certificate"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -66,7 +89,7 @@ func (s *SDK) Alltr(ctx context.Context, request operations.AlltrRequest) (*oper
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -157,8 +180,10 @@ func (s *SDK) Alltr(ctx context.Context, request operations.AlltrRequest) (*oper
 	return res, nil
 }
 
+// Bknoc - NOC For Banks
+// API to verify NOC For Banks.
 func (s *SDK) Bknoc(ctx context.Context, request operations.BknocRequest) (*operations.BknocResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/bknoc/certificate"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -173,7 +198,7 @@ func (s *SDK) Bknoc(ctx context.Context, request operations.BknocRequest) (*oper
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -264,8 +289,10 @@ func (s *SDK) Bknoc(ctx context.Context, request operations.BknocRequest) (*oper
 	return res, nil
 }
 
+// Bpcer - Building Plan
+// API to verify Building Plan.
 func (s *SDK) Bpcer(ctx context.Context, request operations.BpcerRequest) (*operations.BpcerResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/bpcer/certificate"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -280,7 +307,7 @@ func (s *SDK) Bpcer(ctx context.Context, request operations.BpcerRequest) (*oper
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -371,8 +398,10 @@ func (s *SDK) Bpcer(ctx context.Context, request operations.BpcerRequest) (*oper
 	return res, nil
 }
 
+// Cfltr - Confirmatory Letter
+// API to verify Confirmatory Letter.
 func (s *SDK) Cfltr(ctx context.Context, request operations.CfltrRequest) (*operations.CfltrResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/cfltr/certificate"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -387,7 +416,7 @@ func (s *SDK) Cfltr(ctx context.Context, request operations.CfltrRequest) (*oper
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -478,8 +507,10 @@ func (s *SDK) Cfltr(ctx context.Context, request operations.CfltrRequest) (*oper
 	return res, nil
 }
 
+// Lcsag - Lease cum Sale Agreement
+// API to verify Lease cum Sale Agreement.
 func (s *SDK) Lcsag(ctx context.Context, request operations.LcsagRequest) (*operations.LcsagResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/lcsag/certificate"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -494,7 +525,7 @@ func (s *SDK) Lcsag(ctx context.Context, request operations.LcsagRequest) (*oper
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -585,8 +616,10 @@ func (s *SDK) Lcsag(ctx context.Context, request operations.LcsagRequest) (*oper
 	return res, nil
 }
 
+// Pscer - Possession Certificate
+// API to verify Possession Certificate.
 func (s *SDK) Pscer(ctx context.Context, request operations.PscerRequest) (*operations.PscerResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/pscer/certificate"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -601,7 +634,7 @@ func (s *SDK) Pscer(ctx context.Context, request operations.PscerRequest) (*oper
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -692,8 +725,10 @@ func (s *SDK) Pscer(ctx context.Context, request operations.PscerRequest) (*oper
 	return res, nil
 }
 
+// Psnoc - NOC for New Power Supply
+// API to verify NOC for New Power Supply.
 func (s *SDK) Psnoc(ctx context.Context, request operations.PsnocRequest) (*operations.PsnocResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/psnoc/certificate"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -708,7 +743,7 @@ func (s *SDK) Psnoc(ctx context.Context, request operations.PsnocRequest) (*oper
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -799,8 +834,10 @@ func (s *SDK) Psnoc(ctx context.Context, request operations.PsnocRequest) (*oper
 	return res, nil
 }
 
+// Wtrbl - Water Bill/ Connection
+// API to verify Water Bill/ Connection.
 func (s *SDK) Wtrbl(ctx context.Context, request operations.WtrblRequest) (*operations.WtrblResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/wtrbl/certificate"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -815,7 +852,7 @@ func (s *SDK) Wtrbl(ctx context.Context, request operations.WtrblRequest) (*oper
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {

@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class SubscriberVidResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=vid" })
+  @SpeakeasyMetadata({ data: "json, name=vid" })
   vid: number;
 }

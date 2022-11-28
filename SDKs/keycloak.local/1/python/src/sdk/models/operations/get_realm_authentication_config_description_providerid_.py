@@ -5,18 +5,18 @@ from sdk.models import shared
 
 @dataclass
 class GetRealmAuthenticationConfigDescriptionProviderIDPathParams:
-    provider_id: str = field(default=None, metadata={'path_param': { 'field_name': 'providerId', 'style': 'simple', 'explode': False }})
-    realm: str = field(default=None, metadata={'path_param': { 'field_name': 'realm', 'style': 'simple', 'explode': False }})
+    provider_id: str = field(metadata={'path_param': { 'field_name': 'providerId', 'style': 'simple', 'explode': False }})
+    realm: str = field(metadata={'path_param': { 'field_name': 'realm', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetRealmAuthenticationConfigDescriptionProviderIDRequest:
-    path_params: GetRealmAuthenticationConfigDescriptionProviderIDPathParams = field(default=None)
+    path_params: GetRealmAuthenticationConfigDescriptionProviderIDPathParams = field()
     
 
 @dataclass
 class GetRealmAuthenticationConfigDescriptionProviderIDResponse:
+    content_type: str = field()
+    status_code: int = field()
     authenticator_config_info_representation: Optional[shared.AuthenticatorConfigInfoRepresentation] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

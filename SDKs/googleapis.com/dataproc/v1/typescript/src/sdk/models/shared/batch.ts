@@ -1,5 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { EnvironmentConfig } from "./environmentconfig";
 import { PySparkBatch } from "./pysparkbatch";
 import { RuntimeConfig } from "./runtimeconfig";
@@ -8,15 +7,17 @@ import { SparkBatch } from "./sparkbatch";
 import { SparkRBatch } from "./sparkrbatch";
 import { SparkSqlBatch } from "./sparksqlbatch";
 import { StateHistory } from "./statehistory";
+import { RuntimeInfoInput } from "./runtimeinfo";
+
 
 export enum BatchStateEnum {
-    StateUnspecified = "STATE_UNSPECIFIED"
-,    Pending = "PENDING"
-,    Running = "RUNNING"
-,    Cancelling = "CANCELLING"
-,    Cancelled = "CANCELLED"
-,    Succeeded = "SUCCEEDED"
-,    Failed = "FAILED"
+    StateUnspecified = "STATE_UNSPECIFIED",
+    Pending = "PENDING",
+    Running = "RUNNING",
+    Cancelling = "CANCELLING",
+    Cancelled = "CANCELLED",
+    Succeeded = "SUCCEEDED",
+    Failed = "FAILED"
 }
 
 
@@ -25,54 +26,85 @@ export enum BatchStateEnum {
  * A representation of a batch workload in the service.
 **/
 export class Batch extends SpeakeasyBase {
-  @Metadata({ data: "json, name=createTime" })
+  @SpeakeasyMetadata({ data: "json, name=createTime" })
   createTime?: string;
 
-  @Metadata({ data: "json, name=creator" })
+  @SpeakeasyMetadata({ data: "json, name=creator" })
   creator?: string;
 
-  @Metadata({ data: "json, name=environmentConfig" })
+  @SpeakeasyMetadata({ data: "json, name=environmentConfig" })
   environmentConfig?: EnvironmentConfig;
 
-  @Metadata({ data: "json, name=labels" })
+  @SpeakeasyMetadata({ data: "json, name=labels" })
   labels?: Map<string, string>;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=operation" })
+  @SpeakeasyMetadata({ data: "json, name=operation" })
   operation?: string;
 
-  @Metadata({ data: "json, name=pysparkBatch" })
+  @SpeakeasyMetadata({ data: "json, name=pysparkBatch" })
   pysparkBatch?: PySparkBatch;
 
-  @Metadata({ data: "json, name=runtimeConfig" })
+  @SpeakeasyMetadata({ data: "json, name=runtimeConfig" })
   runtimeConfig?: RuntimeConfig;
 
-  @Metadata({ data: "json, name=runtimeInfo" })
+  @SpeakeasyMetadata({ data: "json, name=runtimeInfo" })
   runtimeInfo?: RuntimeInfo;
 
-  @Metadata({ data: "json, name=sparkBatch" })
+  @SpeakeasyMetadata({ data: "json, name=sparkBatch" })
   sparkBatch?: SparkBatch;
 
-  @Metadata({ data: "json, name=sparkRBatch" })
+  @SpeakeasyMetadata({ data: "json, name=sparkRBatch" })
   sparkRBatch?: SparkRBatch;
 
-  @Metadata({ data: "json, name=sparkSqlBatch" })
+  @SpeakeasyMetadata({ data: "json, name=sparkSqlBatch" })
   sparkSqlBatch?: SparkSqlBatch;
 
-  @Metadata({ data: "json, name=state" })
+  @SpeakeasyMetadata({ data: "json, name=state" })
   state?: BatchStateEnum;
 
-  @Metadata({ data: "json, name=stateHistory", elemType: shared.StateHistory })
+  @SpeakeasyMetadata({ data: "json, name=stateHistory", elemType: StateHistory })
   stateHistory?: StateHistory[];
 
-  @Metadata({ data: "json, name=stateMessage" })
+  @SpeakeasyMetadata({ data: "json, name=stateMessage" })
   stateMessage?: string;
 
-  @Metadata({ data: "json, name=stateTime" })
+  @SpeakeasyMetadata({ data: "json, name=stateTime" })
   stateTime?: string;
 
-  @Metadata({ data: "json, name=uuid" })
+  @SpeakeasyMetadata({ data: "json, name=uuid" })
   uuid?: string;
+}
+
+
+// BatchInput
+/** 
+ * A representation of a batch workload in the service.
+**/
+export class BatchInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=environmentConfig" })
+  environmentConfig?: EnvironmentConfig;
+
+  @SpeakeasyMetadata({ data: "json, name=labels" })
+  labels?: Map<string, string>;
+
+  @SpeakeasyMetadata({ data: "json, name=pysparkBatch" })
+  pysparkBatch?: PySparkBatch;
+
+  @SpeakeasyMetadata({ data: "json, name=runtimeConfig" })
+  runtimeConfig?: RuntimeConfig;
+
+  @SpeakeasyMetadata({ data: "json, name=runtimeInfo" })
+  runtimeInfo?: RuntimeInfoInput;
+
+  @SpeakeasyMetadata({ data: "json, name=sparkBatch" })
+  sparkBatch?: SparkBatch;
+
+  @SpeakeasyMetadata({ data: "json, name=sparkRBatch" })
+  sparkRBatch?: SparkRBatch;
+
+  @SpeakeasyMetadata({ data: "json, name=sparkSqlBatch" })
+  sparkSqlBatch?: SparkSqlBatch;
 }

@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import carrierscarrier
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ShippingsettingsGetSupportedCarriersResponse:
-    carriers: Optional[List[carrierscarrier.CarriersCarrier]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'carriers' }})
-    kind: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'kind' }})
+    carriers: Optional[List[CarriersCarrier]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('carriers') }})
+    kind: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('kind') }})
     

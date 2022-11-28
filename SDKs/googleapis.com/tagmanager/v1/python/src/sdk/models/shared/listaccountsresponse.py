@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import account
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ListAccountsResponse:
-    accounts: Optional[List[account.Account]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'accounts' }})
+    r"""ListAccountsResponse
+    List Accounts Response.
+    """
+    
+    accounts: Optional[List[Account]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('accounts') }})
     

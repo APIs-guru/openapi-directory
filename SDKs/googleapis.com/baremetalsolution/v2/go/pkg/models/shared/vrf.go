@@ -8,6 +8,8 @@ const (
 	VrfStateEnumProvisioned      VrfStateEnum = "PROVISIONED"
 )
 
+// Vrf
+// A network VRF.
 type Vrf struct {
 	Name            *string          `json:"name,omitempty"`
 	QosPolicy       *QosPolicy       `json:"qosPolicy,omitempty"`

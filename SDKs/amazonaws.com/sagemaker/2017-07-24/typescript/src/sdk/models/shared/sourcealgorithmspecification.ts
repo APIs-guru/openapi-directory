@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SourceAlgorithm } from "./sourcealgorithm";
+
 
 
 // SourceAlgorithmSpecification
@@ -8,6 +8,6 @@ import { SourceAlgorithm } from "./sourcealgorithm";
  * A list of algorithms that were used to create a model package.
 **/
 export class SourceAlgorithmSpecification extends SpeakeasyBase {
-  @Metadata({ data: "json, name=SourceAlgorithms", elemType: shared.SourceAlgorithm })
+  @SpeakeasyMetadata({ data: "json, name=SourceAlgorithms", elemType: SourceAlgorithm })
   sourceAlgorithms: SourceAlgorithm[];
 }

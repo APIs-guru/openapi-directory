@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { KmsEncryptionConfig } from "./kmsencryptionconfig";
 import { NoEncryptionConfigEnum } from "./noencryptionconfigenum";
+
 
 
 // EncryptionConfiguration
@@ -8,9 +9,9 @@ import { NoEncryptionConfigEnum } from "./noencryptionconfigenum";
  * Describes the encryption for a destination in Amazon S3.
 **/
 export class EncryptionConfiguration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=KMSEncryptionConfig" })
+  @SpeakeasyMetadata({ data: "json, name=KMSEncryptionConfig" })
   kmsEncryptionConfig?: KmsEncryptionConfig;
 
-  @Metadata({ data: "json, name=NoEncryptionConfig" })
+  @SpeakeasyMetadata({ data: "json, name=NoEncryptionConfig" })
   noEncryptionConfig?: NoEncryptionConfigEnum;
 }

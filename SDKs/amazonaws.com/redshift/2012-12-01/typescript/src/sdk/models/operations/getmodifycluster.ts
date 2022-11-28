@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum GetModifyClusterActionEnum {
     ModifyCluster = "ModifyCluster"
@@ -10,129 +11,129 @@ export enum GetModifyClusterVersionEnum {
 
 
 export class GetModifyClusterQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Action" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Action" })
   action: GetModifyClusterActionEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=AllowVersionUpgrade" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=AllowVersionUpgrade" })
   allowVersionUpgrade?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=AutomatedSnapshotRetentionPeriod" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=AutomatedSnapshotRetentionPeriod" })
   automatedSnapshotRetentionPeriod?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=AvailabilityZone" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=AvailabilityZone" })
   availabilityZone?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=AvailabilityZoneRelocation" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=AvailabilityZoneRelocation" })
   availabilityZoneRelocation?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=ClusterIdentifier" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=ClusterIdentifier" })
   clusterIdentifier: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=ClusterParameterGroupName" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=ClusterParameterGroupName" })
   clusterParameterGroupName?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=ClusterSecurityGroups" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=ClusterSecurityGroups" })
   clusterSecurityGroups?: string[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=ClusterType" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=ClusterType" })
   clusterType?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=ClusterVersion" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=ClusterVersion" })
   clusterVersion?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=ElasticIp" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=ElasticIp" })
   elasticIp?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Encrypted" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Encrypted" })
   encrypted?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=EnhancedVpcRouting" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=EnhancedVpcRouting" })
   enhancedVpcRouting?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=HsmClientCertificateIdentifier" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=HsmClientCertificateIdentifier" })
   hsmClientCertificateIdentifier?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=HsmConfigurationIdentifier" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=HsmConfigurationIdentifier" })
   hsmConfigurationIdentifier?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=KmsKeyId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=KmsKeyId" })
   kmsKeyId?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=MaintenanceTrackName" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=MaintenanceTrackName" })
   maintenanceTrackName?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=ManualSnapshotRetentionPeriod" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=ManualSnapshotRetentionPeriod" })
   manualSnapshotRetentionPeriod?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=MasterUserPassword" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=MasterUserPassword" })
   masterUserPassword?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=NewClusterIdentifier" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=NewClusterIdentifier" })
   newClusterIdentifier?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=NodeType" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=NodeType" })
   nodeType?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=NumberOfNodes" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=NumberOfNodes" })
   numberOfNodes?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Port" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Port" })
   port?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=PreferredMaintenanceWindow" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=PreferredMaintenanceWindow" })
   preferredMaintenanceWindow?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=PubliclyAccessible" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=PubliclyAccessible" })
   publiclyAccessible?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Version" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Version" })
   version: GetModifyClusterVersionEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=VpcSecurityGroupIds" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=VpcSecurityGroupIds" })
   vpcSecurityGroupIds?: string[];
 }
 
 
 export class GetModifyClusterHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
 
 export class GetModifyClusterRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetModifyClusterQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: GetModifyClusterHeaders;
 }
 
 
 export class GetModifyClusterResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

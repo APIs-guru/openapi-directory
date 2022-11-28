@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { FilterPair } from "./filterpair";
 import { Options } from "./options";
 export var ParametersGroupBysEnum;
 (function (ParametersGroupBysEnum) {
@@ -836,27 +836,27 @@ var Parameters = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=filters", elemType: shared.FilterPair }),
+        SpeakeasyMetadata({ data: "json, name=filters", elemType: FilterPair }),
         __metadata("design:type", Array)
     ], Parameters.prototype, "filters", void 0);
     __decorate([
-        Metadata({ data: "json, name=groupBys" }),
+        SpeakeasyMetadata({ data: "json, name=groupBys" }),
         __metadata("design:type", Array)
     ], Parameters.prototype, "groupBys", void 0);
     __decorate([
-        Metadata({ data: "json, name=includeInviteData" }),
+        SpeakeasyMetadata({ data: "json, name=includeInviteData" }),
         __metadata("design:type", Boolean)
     ], Parameters.prototype, "includeInviteData", void 0);
     __decorate([
-        Metadata({ data: "json, name=metrics" }),
+        SpeakeasyMetadata({ data: "json, name=metrics" }),
         __metadata("design:type", Array)
     ], Parameters.prototype, "metrics", void 0);
     __decorate([
-        Metadata({ data: "json, name=options" }),
+        SpeakeasyMetadata({ data: "json, name=options" }),
         __metadata("design:type", Options)
     ], Parameters.prototype, "options", void 0);
     __decorate([
-        Metadata({ data: "json, name=type" }),
+        SpeakeasyMetadata({ data: "json, name=type" }),
         __metadata("design:type", String)
     ], Parameters.prototype, "type", void 0);
     return Parameters;

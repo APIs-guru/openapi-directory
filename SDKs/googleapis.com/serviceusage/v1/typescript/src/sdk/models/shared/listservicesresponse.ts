@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleApiServiceusageV1Service } from "./googleapiserviceusagev1service";
+
 
 
 // ListServicesResponse
@@ -8,9 +8,9 @@ import { GoogleApiServiceusageV1Service } from "./googleapiserviceusagev1service
  * Response message for the `ListServices` method.
 **/
 export class ListServicesResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 
-  @Metadata({ data: "json, name=services", elemType: shared.GoogleApiServiceusageV1Service })
+  @SpeakeasyMetadata({ data: "json, name=services", elemType: GoogleApiServiceusageV1Service })
   services?: GoogleApiServiceusageV1Service[];
 }

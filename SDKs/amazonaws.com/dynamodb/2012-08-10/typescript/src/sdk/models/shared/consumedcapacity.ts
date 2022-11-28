@@ -1,8 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Capacity } from "./capacity";
-import { Capacity } from "./capacity";
-import { Capacity } from "./capacity";
+
 
 
 // ConsumedCapacity
@@ -10,24 +8,24 @@ import { Capacity } from "./capacity";
  * The capacity units consumed by an operation. The data returned includes the total provisioned throughput consumed, along with statistics for the table and any indexes involved in the operation. <code>ConsumedCapacity</code> is only returned if the request asked for it. For more information, see <a href="https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ProvisionedThroughputIntro.html">Provisioned Throughput</a> in the <i>Amazon DynamoDB Developer Guide</i>.
 **/
 export class ConsumedCapacity extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CapacityUnits" })
+  @SpeakeasyMetadata({ data: "json, name=CapacityUnits" })
   capacityUnits?: number;
 
-  @Metadata({ data: "json, name=GlobalSecondaryIndexes", elemType: shared.Capacity })
+  @SpeakeasyMetadata({ data: "json, name=GlobalSecondaryIndexes", elemType: Capacity })
   globalSecondaryIndexes?: Map<string, Capacity>;
 
-  @Metadata({ data: "json, name=LocalSecondaryIndexes", elemType: shared.Capacity })
+  @SpeakeasyMetadata({ data: "json, name=LocalSecondaryIndexes", elemType: Capacity })
   localSecondaryIndexes?: Map<string, Capacity>;
 
-  @Metadata({ data: "json, name=ReadCapacityUnits" })
+  @SpeakeasyMetadata({ data: "json, name=ReadCapacityUnits" })
   readCapacityUnits?: number;
 
-  @Metadata({ data: "json, name=Table" })
+  @SpeakeasyMetadata({ data: "json, name=Table" })
   table?: Capacity;
 
-  @Metadata({ data: "json, name=TableName" })
+  @SpeakeasyMetadata({ data: "json, name=TableName" })
   tableName?: string;
 
-  @Metadata({ data: "json, name=WriteCapacityUnits" })
+  @SpeakeasyMetadata({ data: "json, name=WriteCapacityUnits" })
   writeCapacityUnits?: number;
 }

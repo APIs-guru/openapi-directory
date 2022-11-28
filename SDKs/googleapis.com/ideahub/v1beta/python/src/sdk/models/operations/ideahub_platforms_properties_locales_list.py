@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class IdeahubPlatformsPropertiesLocalesListPathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -27,13 +28,13 @@ class IdeahubPlatformsPropertiesLocalesListQueryParams:
 
 @dataclass
 class IdeahubPlatformsPropertiesLocalesListRequest:
-    path_params: IdeahubPlatformsPropertiesLocalesListPathParams = field(default=None)
-    query_params: IdeahubPlatformsPropertiesLocalesListQueryParams = field(default=None)
+    path_params: IdeahubPlatformsPropertiesLocalesListPathParams = field()
+    query_params: IdeahubPlatformsPropertiesLocalesListQueryParams = field()
     
 
 @dataclass
 class IdeahubPlatformsPropertiesLocalesListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_search_ideahub_v1beta_list_available_locales_response: Optional[shared.GoogleSearchIdeahubV1betaListAvailableLocalesResponse] = field(default=None)
-    status_code: int = field(default=None)
     

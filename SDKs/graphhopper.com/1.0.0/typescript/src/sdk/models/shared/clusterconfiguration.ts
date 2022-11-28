@@ -1,15 +1,16 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ClusterConfigurationClustering } from "./clusterconfigurationclustering";
 import { ClusterConfigurationRouting } from "./clusterconfigurationrouting";
 
 
+
 export class ClusterConfiguration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=clustering" })
+  @SpeakeasyMetadata({ data: "json, name=clustering" })
   clustering?: ClusterConfigurationClustering;
 
-  @Metadata({ data: "json, name=response_type" })
+  @SpeakeasyMetadata({ data: "json, name=response_type" })
   responseType?: string;
 
-  @Metadata({ data: "json, name=routing" })
+  @SpeakeasyMetadata({ data: "json, name=routing" })
   routing?: ClusterConfigurationRouting;
 }

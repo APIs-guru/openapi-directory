@@ -1,30 +1,22 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class AcceptChangeRequestPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=changeRequestId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=changeRequestId" })
   changeRequestId: number;
 }
 
 export enum AcceptChangeRequestRequestBodyStatusEnum {
-    PendingDeployment = "pending deployment"
-,    Deployed = "deployed"
+    PendingDeployment = "pending deployment",
+    Deployed = "deployed"
 }
 
 
 export class AcceptChangeRequestRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: AcceptChangeRequestRequestBodyStatusEnum;
-}
-
-
-export class AcceptChangeRequestRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: AcceptChangeRequestPathParams;
-
-  @Metadata({ data: "request, media_type=application/json" })
-  request: AcceptChangeRequestRequestBody;
 }
 
 export enum AcceptChangeRequest200ApplicationJsonActionEnum {
@@ -33,35 +25,44 @@ export enum AcceptChangeRequest200ApplicationJsonActionEnum {
 
 
 export class AcceptChangeRequest200ApplicationJsonData extends SpeakeasyBase {
-  @Metadata({ data: "json, name=rules", elemType: shared.ChangeRequest })
+  @SpeakeasyMetadata({ data: "json, name=rules", elemType: shared.ChangeRequest })
   rules: shared.ChangeRequest[];
 }
 
 export enum AcceptChangeRequest200ApplicationJsonResultEnum {
-    Success = "success"
-,    Error = "error"
+    Success = "success",
+    Error = "error"
 }
 
 
 export class AcceptChangeRequest200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=action" })
+  @SpeakeasyMetadata({ data: "json, name=action" })
   action: AcceptChangeRequest200ApplicationJsonActionEnum;
 
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data: AcceptChangeRequest200ApplicationJsonData;
 
-  @Metadata({ data: "json, name=result" })
+  @SpeakeasyMetadata({ data: "json, name=result" })
   result: AcceptChangeRequest200ApplicationJsonResultEnum;
 }
 
 
+export class AcceptChangeRequestRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: AcceptChangeRequestPathParams;
+
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request: AcceptChangeRequestRequestBody;
+}
+
+
 export class AcceptChangeRequestResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   acceptChangeRequest200ApplicationJsonObject?: AcceptChangeRequest200ApplicationJson;
 }

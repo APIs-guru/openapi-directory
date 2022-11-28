@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetDeleteNetworkACLActionEnum(str, Enum):
     DELETE_NETWORK_ACL = "DeleteNetworkAcl"
@@ -10,10 +14,10 @@ class GetDeleteNetworkACLVersionEnum(str, Enum):
 
 @dataclass
 class GetDeleteNetworkACLQueryParams:
-    action: GetDeleteNetworkACLActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetDeleteNetworkACLActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    network_acl_id: str = field(metadata={'query_param': { 'field_name': 'NetworkAclId', 'style': 'form', 'explode': True }})
+    version: GetDeleteNetworkACLVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     dry_run: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'DryRun', 'style': 'form', 'explode': True }})
-    network_acl_id: str = field(default=None, metadata={'query_param': { 'field_name': 'NetworkAclId', 'style': 'form', 'explode': True }})
-    version: GetDeleteNetworkACLVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -29,12 +33,12 @@ class GetDeleteNetworkACLHeaders:
 
 @dataclass
 class GetDeleteNetworkACLRequest:
-    query_params: GetDeleteNetworkACLQueryParams = field(default=None)
-    headers: GetDeleteNetworkACLHeaders = field(default=None)
+    headers: GetDeleteNetworkACLHeaders = field()
+    query_params: GetDeleteNetworkACLQueryParams = field()
     
 
 @dataclass
 class GetDeleteNetworkACLResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

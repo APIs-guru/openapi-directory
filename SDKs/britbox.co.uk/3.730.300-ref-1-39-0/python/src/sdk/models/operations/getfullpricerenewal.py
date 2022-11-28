@@ -10,18 +10,18 @@ class GetFullPriceRenewalQueryParams:
 
 @dataclass
 class GetFullPriceRenewalSecurity:
-    account_auth: shared.SchemeAccountAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    account_auth: shared.SchemeAccountAuth = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class GetFullPriceRenewalRequest:
-    query_params: GetFullPriceRenewalQueryParams = field(default=None)
-    security: GetFullPriceRenewalSecurity = field(default=None)
+    query_params: GetFullPriceRenewalQueryParams = field()
+    security: GetFullPriceRenewalSecurity = field()
     
 
 @dataclass
 class GetFullPriceRenewalResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     itv_subscription_full_price_renewal: Optional[shared.ItvSubscriptionFullPriceRenewal] = field(default=None)
-    status_code: int = field(default=None)
     

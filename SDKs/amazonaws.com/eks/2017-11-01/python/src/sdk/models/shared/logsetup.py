@@ -1,12 +1,18 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import logtype_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class LogSetup:
-    enabled: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'enabled' }})
-    types: Optional[List[logtype_enum.LogTypeEnum]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'types' }})
+    r"""LogSetup
+    An object representing the enabled or disabled Kubernetes control plane logs for your cluster.
+    """
+    
+    enabled: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('enabled') }})
+    types: Optional[List[LogTypeEnum]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('types') }})
     

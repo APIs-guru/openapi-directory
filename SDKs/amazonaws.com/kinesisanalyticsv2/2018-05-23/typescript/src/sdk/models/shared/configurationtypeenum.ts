@@ -1,6 +1,7 @@
 
 
+
 export enum ConfigurationTypeEnum {
-    Default = "DEFAULT"
-,    Custom = "CUSTOM"
+    Default = "DEFAULT",
+    Custom = "CUSTOM"
 }

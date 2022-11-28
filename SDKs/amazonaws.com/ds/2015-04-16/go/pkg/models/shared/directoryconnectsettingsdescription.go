@@ -1,5 +1,7 @@
 package shared
 
+// DirectoryConnectSettingsDescription
+// Contains information about an AD Connector directory.
 type DirectoryConnectSettingsDescription struct {
 	AvailabilityZones []string `json:"AvailabilityZones,omitempty"`
 	ConnectIps        []string `json:"ConnectIps,omitempty"`

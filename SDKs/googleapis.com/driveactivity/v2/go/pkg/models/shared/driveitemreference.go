@@ -1,5 +1,7 @@
 package shared
 
+// DriveItemReference
+// A lightweight reference to a Drive item, such as a file or folder.
 type DriveItemReference struct {
 	DriveFile   map[string]interface{} `json:"driveFile,omitempty"`
 	DriveFolder *DriveFolder           `json:"driveFolder,omitempty"`

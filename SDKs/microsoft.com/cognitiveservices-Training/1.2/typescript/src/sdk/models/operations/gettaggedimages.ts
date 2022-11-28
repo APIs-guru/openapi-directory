@@ -1,64 +1,65 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetTaggedImagesPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=projectId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=projectId" })
   projectId: string;
 }
 
 export enum GetTaggedImagesOrderByEnum {
-    Newest = "Newest"
-,    Oldest = "Oldest"
+    Newest = "Newest",
+    Oldest = "Oldest"
 }
 
 
 export class GetTaggedImagesQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=iterationId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=iterationId" })
   iterationId?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=orderBy" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=orderBy" })
   orderBy?: GetTaggedImagesOrderByEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=skip" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=skip" })
   skip?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=false;name=tagIds" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=tagIds" })
   tagIds?: string[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=take" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=take" })
   take?: number;
 }
 
 
 export class GetTaggedImagesHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=Training-Key" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Training-Key" })
   trainingKey: string;
 }
 
 
 export class GetTaggedImagesRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetTaggedImagesPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetTaggedImagesQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: GetTaggedImagesHeaders;
 }
 
 
 export class GetTaggedImagesResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata({ elemType: shared.Image })
+  @SpeakeasyMetadata({ elemType: shared.Image })
   images?: shared.Image[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

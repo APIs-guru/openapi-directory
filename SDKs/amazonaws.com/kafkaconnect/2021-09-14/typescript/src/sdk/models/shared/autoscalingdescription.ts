@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ScaleInPolicyDescription } from "./scaleinpolicydescription";
 import { ScaleOutPolicyDescription } from "./scaleoutpolicydescription";
+
 
 
 // AutoScalingDescription
@@ -8,18 +9,18 @@ import { ScaleOutPolicyDescription } from "./scaleoutpolicydescription";
  * Information about the auto scaling parameters for the connector.
 **/
 export class AutoScalingDescription extends SpeakeasyBase {
-  @Metadata({ data: "json, name=maxWorkerCount" })
+  @SpeakeasyMetadata({ data: "json, name=maxWorkerCount" })
   maxWorkerCount?: number;
 
-  @Metadata({ data: "json, name=mcuCount" })
+  @SpeakeasyMetadata({ data: "json, name=mcuCount" })
   mcuCount?: number;
 
-  @Metadata({ data: "json, name=minWorkerCount" })
+  @SpeakeasyMetadata({ data: "json, name=minWorkerCount" })
   minWorkerCount?: number;
 
-  @Metadata({ data: "json, name=scaleInPolicy" })
+  @SpeakeasyMetadata({ data: "json, name=scaleInPolicy" })
   scaleInPolicy?: ScaleInPolicyDescription;
 
-  @Metadata({ data: "json, name=scaleOutPolicy" })
+  @SpeakeasyMetadata({ data: "json, name=scaleOutPolicy" })
   scaleOutPolicy?: ScaleOutPolicyDescription;
 }

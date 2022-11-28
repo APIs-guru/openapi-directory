@@ -9,6 +9,8 @@ const (
 	GoogleAnalyticsAdminV1alphaPropertySummaryPropertyTypeEnumPropertyTypeRollup      GoogleAnalyticsAdminV1alphaPropertySummaryPropertyTypeEnum = "PROPERTY_TYPE_ROLLUP"
 )
 
+// GoogleAnalyticsAdminV1alphaPropertySummary
+// A virtual resource representing metadata for a GA4 property.
 type GoogleAnalyticsAdminV1alphaPropertySummary struct {
 	DisplayName  *string                                                     `json:"displayName,omitempty"`
 	Parent       *string                                                     `json:"parent,omitempty"`

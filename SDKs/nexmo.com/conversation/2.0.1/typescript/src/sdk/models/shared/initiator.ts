@@ -1,19 +1,20 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class InitiatorJoined extends SpeakeasyBase {
-  @Metadata({ data: "json, name=isSystem" })
+  @SpeakeasyMetadata({ data: "json, name=isSystem" })
   isSystem?: boolean;
 
-  @Metadata({ data: "json, name=member_id" })
+  @SpeakeasyMetadata({ data: "json, name=member_id" })
   memberId?: string;
 
-  @Metadata({ data: "json, name=user_id" })
+  @SpeakeasyMetadata({ data: "json, name=user_id" })
   userId?: string;
 }
 
 
 export class Initiator extends SpeakeasyBase {
-  @Metadata({ data: "json, name=joined" })
+  @SpeakeasyMetadata({ data: "json, name=joined" })
   joined?: InitiatorJoined;
 }

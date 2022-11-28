@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 export declare enum GlobalPermissionPermissionEnum {
     PermissionUnspecified = "PERMISSION_UNSPECIFIED",
     CreateCourse = "CREATE_COURSE"

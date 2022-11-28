@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ImageSearchItem } from "./imagesearchitem";
 import { RelatedSearch } from "./relatedsearch";
 export declare class ImageSearchItemSearchResults extends SpeakeasyBase {

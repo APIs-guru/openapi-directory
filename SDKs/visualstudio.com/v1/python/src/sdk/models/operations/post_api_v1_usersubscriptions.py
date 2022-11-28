@@ -9,11 +9,11 @@ class PostAPIV1UserSubscriptionsQueryParams:
 
 @dataclass
 class PostAPIV1UserSubscriptionsRequest:
-    query_params: PostAPIV1UserSubscriptionsQueryParams = field(default=None)
+    query_params: PostAPIV1UserSubscriptionsQueryParams = field()
     
 
 @dataclass
 class PostAPIV1UserSubscriptionsResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

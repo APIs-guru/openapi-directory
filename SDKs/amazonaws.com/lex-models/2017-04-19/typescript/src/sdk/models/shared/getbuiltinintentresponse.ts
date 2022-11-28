@@ -1,16 +1,16 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BuiltinIntentSlot } from "./builtinintentslot";
 import { LocaleEnum } from "./localeenum";
 
 
+
 export class GetBuiltinIntentResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=signature" })
+  @SpeakeasyMetadata({ data: "json, name=signature" })
   signature?: string;
 
-  @Metadata({ data: "json, name=slots", elemType: shared.BuiltinIntentSlot })
+  @SpeakeasyMetadata({ data: "json, name=slots", elemType: BuiltinIntentSlot })
   slots?: BuiltinIntentSlot[];
 
-  @Metadata({ data: "json, name=supportedLocales" })
+  @SpeakeasyMetadata({ data: "json, name=supportedLocales" })
   supportedLocales?: LocaleEnum[];
 }

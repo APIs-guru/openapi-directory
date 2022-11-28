@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ImageSource } from "./imagesource";
+
 
 
 // Image
@@ -7,9 +8,9 @@ import { ImageSource } from "./imagesource";
  * Client image to perform Google Cloud Vision API tasks over.
 **/
 export class Image extends SpeakeasyBase {
-  @Metadata({ data: "json, name=content" })
+  @SpeakeasyMetadata({ data: "json, name=content" })
   content?: string;
 
-  @Metadata({ data: "json, name=source" })
+  @SpeakeasyMetadata({ data: "json, name=source" })
   source?: ImageSource;
 }

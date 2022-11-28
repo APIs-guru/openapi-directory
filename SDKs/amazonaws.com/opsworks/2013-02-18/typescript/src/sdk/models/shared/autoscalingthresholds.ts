@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AutoScalingThresholds
@@ -6,24 +7,24 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Describes a load-based auto scaling upscaling or downscaling threshold configuration, which specifies when AWS OpsWorks Stacks starts or stops load-based instances.
 **/
 export class AutoScalingThresholds extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Alarms" })
+  @SpeakeasyMetadata({ data: "json, name=Alarms" })
   alarms?: string[];
 
-  @Metadata({ data: "json, name=CpuThreshold" })
+  @SpeakeasyMetadata({ data: "json, name=CpuThreshold" })
   cpuThreshold?: number;
 
-  @Metadata({ data: "json, name=IgnoreMetricsTime" })
+  @SpeakeasyMetadata({ data: "json, name=IgnoreMetricsTime" })
   ignoreMetricsTime?: number;
 
-  @Metadata({ data: "json, name=InstanceCount" })
+  @SpeakeasyMetadata({ data: "json, name=InstanceCount" })
   instanceCount?: number;
 
-  @Metadata({ data: "json, name=LoadThreshold" })
+  @SpeakeasyMetadata({ data: "json, name=LoadThreshold" })
   loadThreshold?: number;
 
-  @Metadata({ data: "json, name=MemoryThreshold" })
+  @SpeakeasyMetadata({ data: "json, name=MemoryThreshold" })
   memoryThreshold?: number;
 
-  @Metadata({ data: "json, name=ThresholdsWaitTime" })
+  @SpeakeasyMetadata({ data: "json, name=ThresholdsWaitTime" })
   thresholdsWaitTime?: number;
 }

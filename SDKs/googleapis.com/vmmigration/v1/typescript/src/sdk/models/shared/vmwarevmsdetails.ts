@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { VmwareVmDetails } from "./vmwarevmdetails";
+
 
 
 // VmwareVmsDetails
@@ -8,6 +8,6 @@ import { VmwareVmDetails } from "./vmwarevmdetails";
  * VmwareVmsDetails describes VMs in vCenter.
 **/
 export class VmwareVmsDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=details", elemType: shared.VmwareVmDetails })
+  @SpeakeasyMetadata({ data: "json, name=details", elemType: VmwareVmDetails })
   details?: VmwareVmDetails[];
 }

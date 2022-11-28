@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export var AdsensehostAssociationsessionsStartProductCodeEnum;
 (function (AdsensehostAssociationsessionsStartProductCodeEnum) {
@@ -38,51 +38,51 @@ var AdsensehostAssociationsessionsStartQueryParams = /** @class */ (function (_s
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=alt" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=alt" }),
         __metadata("design:type", String)
     ], AdsensehostAssociationsessionsStartQueryParams.prototype, "alt", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=callbackUrl" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=callbackUrl" }),
         __metadata("design:type", String)
     ], AdsensehostAssociationsessionsStartQueryParams.prototype, "callbackUrl", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=fields" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=fields" }),
         __metadata("design:type", String)
     ], AdsensehostAssociationsessionsStartQueryParams.prototype, "fields", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=key" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=key" }),
         __metadata("design:type", String)
     ], AdsensehostAssociationsessionsStartQueryParams.prototype, "key", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=oauth_token" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=oauth_token" }),
         __metadata("design:type", String)
     ], AdsensehostAssociationsessionsStartQueryParams.prototype, "oauthToken", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=prettyPrint" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=prettyPrint" }),
         __metadata("design:type", Boolean)
     ], AdsensehostAssociationsessionsStartQueryParams.prototype, "prettyPrint", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=productCode" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=productCode" }),
         __metadata("design:type", Array)
     ], AdsensehostAssociationsessionsStartQueryParams.prototype, "productCode", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=quotaUser" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=quotaUser" }),
         __metadata("design:type", String)
     ], AdsensehostAssociationsessionsStartQueryParams.prototype, "quotaUser", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=userIp" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=userIp" }),
         __metadata("design:type", String)
     ], AdsensehostAssociationsessionsStartQueryParams.prototype, "userIp", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=userLocale" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=userLocale" }),
         __metadata("design:type", String)
     ], AdsensehostAssociationsessionsStartQueryParams.prototype, "userLocale", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=websiteLocale" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=websiteLocale" }),
         __metadata("design:type", String)
     ], AdsensehostAssociationsessionsStartQueryParams.prototype, "websiteLocale", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=websiteUrl" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=websiteUrl" }),
         __metadata("design:type", String)
     ], AdsensehostAssociationsessionsStartQueryParams.prototype, "websiteUrl", void 0);
     return AdsensehostAssociationsessionsStartQueryParams;
@@ -94,11 +94,11 @@ var AdsensehostAssociationsessionsStartSecurity = /** @class */ (function (_supe
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2)
     ], AdsensehostAssociationsessionsStartSecurity.prototype, "oauth2", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2c)
     ], AdsensehostAssociationsessionsStartSecurity.prototype, "oauth2c", void 0);
     return AdsensehostAssociationsessionsStartSecurity;
@@ -110,11 +110,11 @@ var AdsensehostAssociationsessionsStartRequest = /** @class */ (function (_super
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", AdsensehostAssociationsessionsStartQueryParams)
     ], AdsensehostAssociationsessionsStartRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", AdsensehostAssociationsessionsStartSecurity)
     ], AdsensehostAssociationsessionsStartRequest.prototype, "security", void 0);
     return AdsensehostAssociationsessionsStartRequest;
@@ -126,15 +126,15 @@ var AdsensehostAssociationsessionsStartResponse = /** @class */ (function (_supe
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.AssociationSession)
     ], AdsensehostAssociationsessionsStartResponse.prototype, "associationSession", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], AdsensehostAssociationsessionsStartResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], AdsensehostAssociationsessionsStartResponse.prototype, "statusCode", void 0);
     return AdsensehostAssociationsessionsStartResponse;

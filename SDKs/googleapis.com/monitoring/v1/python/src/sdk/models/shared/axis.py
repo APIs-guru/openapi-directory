@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class AxisScaleEnum(str, Enum):
     SCALE_UNSPECIFIED = "SCALE_UNSPECIFIED"
@@ -11,6 +13,10 @@ class AxisScaleEnum(str, Enum):
 @dataclass_json
 @dataclass
 class Axis:
-    label: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'label' }})
-    scale: Optional[AxisScaleEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'scale' }})
+    r"""Axis
+    A chart axis.
+    """
+    
+    label: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('label') }})
+    scale: Optional[AxisScaleEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('scale') }})
     

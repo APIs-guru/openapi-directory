@@ -27,6 +27,8 @@ const (
 	ImportStatusEnumDetectionNeedsAuth     ImportStatusEnum = "detection_needs_auth"
 )
 
+// Import
+// A repository import from an external source.
 type Import struct {
 	AuthorsCount    *int64                 `json:"authors_count,omitempty"`
 	AuthorsURL      string                 `json:"authors_url"`

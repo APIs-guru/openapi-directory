@@ -1,16 +1,17 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class OwnerOpeningBalanceInPeriodsDto extends SpeakeasyBase {
-  @Metadata({ data: "json, name=currentMonth" })
+  @SpeakeasyMetadata({ data: "json, name=currentMonth" })
   currentMonth?: number;
 
-  @Metadata({ data: "json, name=oneMonthOld" })
+  @SpeakeasyMetadata({ data: "json, name=oneMonthOld" })
   oneMonthOld?: number;
 
-  @Metadata({ data: "json, name=threeMonthsOld" })
+  @SpeakeasyMetadata({ data: "json, name=threeMonthsOld" })
   threeMonthsOld?: number;
 
-  @Metadata({ data: "json, name=twoMonthsOld" })
+  @SpeakeasyMetadata({ data: "json, name=twoMonthsOld" })
   twoMonthsOld?: number;
 }

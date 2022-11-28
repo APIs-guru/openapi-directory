@@ -6,3 +6,9 @@ type Role struct {
 	Slug   string `json:"slug"`
 	Weight *int64 `json:"weight,omitempty"`
 }
+
+type RoleInput struct {
+	Name   string `json:"name"`
+	Slug   string `json:"slug"`
+	Weight *int64 `json:"weight,omitempty"`
+}

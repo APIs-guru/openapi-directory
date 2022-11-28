@@ -1,7 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import term
+from sdk import utils
+from . import *
 
 class SectionGradeEnum(str, Enum):
     ONE = "1"
@@ -38,22 +40,22 @@ class SectionSubjectEnum(str, Enum):
 @dataclass_json
 @dataclass
 class Section:
-    course_description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'course_description' }})
-    course_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'course_name' }})
-    course_number: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'course_number' }})
-    created: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'created' }})
-    district: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'district' }})
-    grade: Optional[SectionGradeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'grade' }})
-    id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
-    last_modified: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'last_modified' }})
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    period: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'period' }})
-    school: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'school' }})
-    section_number: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'section_number' }})
-    sis_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'sis_id' }})
-    students: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'students' }})
-    subject: Optional[SectionSubjectEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'subject' }})
-    teacher: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'teacher' }})
-    teachers: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'teachers' }})
-    term: Optional[term.Term] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'term' }})
+    course_description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('course_description') }})
+    course_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('course_name') }})
+    course_number: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('course_number') }})
+    created: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('created') }})
+    district: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('district') }})
+    grade: Optional[SectionGradeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('grade') }})
+    id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('id') }})
+    last_modified: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('last_modified') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    period: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('period') }})
+    school: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('school') }})
+    section_number: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('section_number') }})
+    sis_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('sis_id') }})
+    students: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('students') }})
+    subject: Optional[SectionSubjectEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('subject') }})
+    teacher: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('teacher') }})
+    teachers: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('teachers') }})
+    term: Optional[Term] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('term') }})
     

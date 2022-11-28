@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // DeviceInfo
@@ -6,24 +7,24 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Signals associated with the device making the request.
 **/
 export class DeviceInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=deviceModelName" })
+  @SpeakeasyMetadata({ data: "json, name=deviceModelName" })
   deviceModelName?: string;
 
-  @Metadata({ data: "json, name=languageCode" })
+  @SpeakeasyMetadata({ data: "json, name=languageCode" })
   languageCode?: string;
 
-  @Metadata({ data: "json, name=languageCodeFromWebview" })
+  @SpeakeasyMetadata({ data: "json, name=languageCodeFromWebview" })
   languageCodeFromWebview?: string;
 
-  @Metadata({ data: "json, name=languageCodeRaw" })
+  @SpeakeasyMetadata({ data: "json, name=languageCodeRaw" })
   languageCodeRaw?: string;
 
-  @Metadata({ data: "json, name=screenResolutionHeight" })
+  @SpeakeasyMetadata({ data: "json, name=screenResolutionHeight" })
   screenResolutionHeight?: string;
 
-  @Metadata({ data: "json, name=screenResolutionWidth" })
+  @SpeakeasyMetadata({ data: "json, name=screenResolutionWidth" })
   screenResolutionWidth?: string;
 
-  @Metadata({ data: "json, name=timezone" })
+  @SpeakeasyMetadata({ data: "json, name=timezone" })
   timezone?: string;
 }

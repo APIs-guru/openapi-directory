@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DutySummaryInfo } from "./dutysummaryinfo";
 
 
+
 export class TeamDutySummaryInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=dutyAssistEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=dutyAssistEnabled" })
   dutyAssistEnabled?: boolean;
 
-  @Metadata({ data: "json, name=dutySummaries", elemType: shared.DutySummaryInfo })
+  @SpeakeasyMetadata({ data: "json, name=dutySummaries", elemType: DutySummaryInfo })
   dutySummaries?: DutySummaryInfo[];
 }

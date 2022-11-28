@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ProductViewSortByEnum } from "./productviewsortbyenum";
 import { SortOrderEnum } from "./sortorderenum";
 export declare class SearchProductsInput extends SpeakeasyBase {

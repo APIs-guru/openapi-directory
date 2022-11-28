@@ -1,5 +1,7 @@
 package shared
 
+// NetworkMountPoint
+// Mount point for a network.
 type NetworkMountPoint struct {
 	DefaultGateway   *bool   `json:"defaultGateway,omitempty"`
 	Instance         *string `json:"instance,omitempty"`

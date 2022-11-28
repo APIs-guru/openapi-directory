@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Listing } from "./listing";
+
 
 
 // ListingsListResponse
@@ -8,9 +8,9 @@ import { Listing } from "./listing";
  * Response listing all localized listings.
 **/
 export class ListingsListResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=listings", elemType: shared.Listing })
+  @SpeakeasyMetadata({ data: "json, name=listings", elemType: Listing })
   listings?: Listing[];
 }

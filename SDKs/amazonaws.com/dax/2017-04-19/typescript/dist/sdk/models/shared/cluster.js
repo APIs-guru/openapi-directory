@@ -22,13 +22,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Endpoint } from "./endpoint";
 import { ClusterEndpointEncryptionTypeEnum } from "./clusterendpointencryptiontypeenum";
+import { Node } from "./node";
 import { NotificationConfiguration } from "./notificationconfiguration";
 import { ParameterGroupStatus } from "./parametergroupstatus";
 import { SseDescription } from "./ssedescription";
+import { SecurityGroupMembership } from "./securitygroupmembership";
 // Cluster
 /**
  * Contains all of the attributes of a specific DAX cluster.
@@ -39,75 +40,75 @@ var Cluster = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=ActiveNodes" }),
+        SpeakeasyMetadata({ data: "json, name=ActiveNodes" }),
         __metadata("design:type", Number)
     ], Cluster.prototype, "activeNodes", void 0);
     __decorate([
-        Metadata({ data: "json, name=ClusterArn" }),
+        SpeakeasyMetadata({ data: "json, name=ClusterArn" }),
         __metadata("design:type", String)
     ], Cluster.prototype, "clusterArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=ClusterDiscoveryEndpoint" }),
+        SpeakeasyMetadata({ data: "json, name=ClusterDiscoveryEndpoint" }),
         __metadata("design:type", Endpoint)
     ], Cluster.prototype, "clusterDiscoveryEndpoint", void 0);
     __decorate([
-        Metadata({ data: "json, name=ClusterEndpointEncryptionType" }),
+        SpeakeasyMetadata({ data: "json, name=ClusterEndpointEncryptionType" }),
         __metadata("design:type", String)
     ], Cluster.prototype, "clusterEndpointEncryptionType", void 0);
     __decorate([
-        Metadata({ data: "json, name=ClusterName" }),
+        SpeakeasyMetadata({ data: "json, name=ClusterName" }),
         __metadata("design:type", String)
     ], Cluster.prototype, "clusterName", void 0);
     __decorate([
-        Metadata({ data: "json, name=Description" }),
+        SpeakeasyMetadata({ data: "json, name=Description" }),
         __metadata("design:type", String)
     ], Cluster.prototype, "description", void 0);
     __decorate([
-        Metadata({ data: "json, name=IamRoleArn" }),
+        SpeakeasyMetadata({ data: "json, name=IamRoleArn" }),
         __metadata("design:type", String)
     ], Cluster.prototype, "iamRoleArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=NodeIdsToRemove" }),
+        SpeakeasyMetadata({ data: "json, name=NodeIdsToRemove" }),
         __metadata("design:type", Array)
     ], Cluster.prototype, "nodeIdsToRemove", void 0);
     __decorate([
-        Metadata({ data: "json, name=NodeType" }),
+        SpeakeasyMetadata({ data: "json, name=NodeType" }),
         __metadata("design:type", String)
     ], Cluster.prototype, "nodeType", void 0);
     __decorate([
-        Metadata({ data: "json, name=Nodes", elemType: shared.Node }),
+        SpeakeasyMetadata({ data: "json, name=Nodes", elemType: Node }),
         __metadata("design:type", Array)
     ], Cluster.prototype, "nodes", void 0);
     __decorate([
-        Metadata({ data: "json, name=NotificationConfiguration" }),
+        SpeakeasyMetadata({ data: "json, name=NotificationConfiguration" }),
         __metadata("design:type", NotificationConfiguration)
     ], Cluster.prototype, "notificationConfiguration", void 0);
     __decorate([
-        Metadata({ data: "json, name=ParameterGroup" }),
+        SpeakeasyMetadata({ data: "json, name=ParameterGroup" }),
         __metadata("design:type", ParameterGroupStatus)
     ], Cluster.prototype, "parameterGroup", void 0);
     __decorate([
-        Metadata({ data: "json, name=PreferredMaintenanceWindow" }),
+        SpeakeasyMetadata({ data: "json, name=PreferredMaintenanceWindow" }),
         __metadata("design:type", String)
     ], Cluster.prototype, "preferredMaintenanceWindow", void 0);
     __decorate([
-        Metadata({ data: "json, name=SSEDescription" }),
+        SpeakeasyMetadata({ data: "json, name=SSEDescription" }),
         __metadata("design:type", SseDescription)
     ], Cluster.prototype, "sseDescription", void 0);
     __decorate([
-        Metadata({ data: "json, name=SecurityGroups", elemType: shared.SecurityGroupMembership }),
+        SpeakeasyMetadata({ data: "json, name=SecurityGroups", elemType: SecurityGroupMembership }),
         __metadata("design:type", Array)
     ], Cluster.prototype, "securityGroups", void 0);
     __decorate([
-        Metadata({ data: "json, name=Status" }),
+        SpeakeasyMetadata({ data: "json, name=Status" }),
         __metadata("design:type", String)
     ], Cluster.prototype, "status", void 0);
     __decorate([
-        Metadata({ data: "json, name=SubnetGroup" }),
+        SpeakeasyMetadata({ data: "json, name=SubnetGroup" }),
         __metadata("design:type", String)
     ], Cluster.prototype, "subnetGroup", void 0);
     __decorate([
-        Metadata({ data: "json, name=TotalNodes" }),
+        SpeakeasyMetadata({ data: "json, name=TotalNodes" }),
         __metadata("design:type", Number)
     ], Cluster.prototype, "totalNodes", void 0);
     return Cluster;

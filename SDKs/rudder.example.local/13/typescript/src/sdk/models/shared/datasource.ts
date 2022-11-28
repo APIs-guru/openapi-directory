@@ -1,9 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum DatasourceRunParametersScheduleTypeEnum {
-    Scheduled = "scheduled"
-,    Notscheduled = "notscheduled"
+    Scheduled = "scheduled",
+    Notscheduled = "notscheduled"
 }
 
 
@@ -12,7 +12,7 @@ export enum DatasourceRunParametersScheduleTypeEnum {
  * Configure if data source should be fetch periodically
 **/
 export class DatasourceRunParametersSchedule extends SpeakeasyBase {
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: DatasourceRunParametersScheduleTypeEnum;
 }
 
@@ -22,13 +22,13 @@ export class DatasourceRunParametersSchedule extends SpeakeasyBase {
  * Parameters to configure when the data source is fetched to update node properties.
 **/
 export class DatasourceRunParameters extends SpeakeasyBase {
-  @Metadata({ data: "json, name=onGeneration" })
+  @SpeakeasyMetadata({ data: "json, name=onGeneration" })
   onGeneration?: boolean;
 
-  @Metadata({ data: "json, name=onNewNode" })
+  @SpeakeasyMetadata({ data: "json, name=onNewNode" })
   onNewNode?: boolean;
 
-  @Metadata({ data: "json, name=schedule" })
+  @SpeakeasyMetadata({ data: "json, name=schedule" })
   schedule?: DatasourceRunParametersSchedule;
 }
 
@@ -38,16 +38,16 @@ export enum DatasourceTypeNameEnum {
 
 
 export class DatasourceTypeParametersHeaders extends SpeakeasyBase {
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=value" })
+  @SpeakeasyMetadata({ data: "json, name=value" })
   value?: string;
 }
 
 export enum DatasourceTypeParametersRequestMethodEnum {
-    Get = "GET"
-,    Post = "POST"
+    Get = "GET",
+    Post = "POST"
 }
 
 export enum DatasourceTypeParametersRequestModeNameEnum {
@@ -60,7 +60,7 @@ export enum DatasourceTypeParametersRequestModeNameEnum {
  * Configure the strategy used to query the HTTP data source.
 **/
 export class DatasourceTypeParametersRequestMode extends SpeakeasyBase {
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: DatasourceTypeParametersRequestModeNameEnum;
 }
 
@@ -70,25 +70,25 @@ export class DatasourceTypeParametersRequestMode extends SpeakeasyBase {
  * You can use Rudder variable expansion (`${rudder.node`, `${node.properties...}`)
 **/
 export class DatasourceTypeParameters extends SpeakeasyBase {
-  @Metadata({ data: "json, name=checkSsl" })
+  @SpeakeasyMetadata({ data: "json, name=checkSsl" })
   checkSsl?: boolean;
 
-  @Metadata({ data: "json, name=headers", elemType: shared.DatasourceTypeParametersHeaders })
+  @SpeakeasyMetadata({ data: "json, name=headers", elemType: DatasourceTypeParametersHeaders })
   headers?: DatasourceTypeParametersHeaders[];
 
-  @Metadata({ data: "json, name=path" })
+  @SpeakeasyMetadata({ data: "json, name=path" })
   path?: string;
 
-  @Metadata({ data: "json, name=requestMethod" })
+  @SpeakeasyMetadata({ data: "json, name=requestMethod" })
   requestMethod?: DatasourceTypeParametersRequestMethodEnum;
 
-  @Metadata({ data: "json, name=requestMode" })
+  @SpeakeasyMetadata({ data: "json, name=requestMode" })
   requestMode?: DatasourceTypeParametersRequestMode;
 
-  @Metadata({ data: "json, name=requestTimeout" })
+  @SpeakeasyMetadata({ data: "json, name=requestTimeout" })
   requestTimeout?: number;
 
-  @Metadata({ data: "json, name=url" })
+  @SpeakeasyMetadata({ data: "json, name=url" })
   url?: string;
 }
 
@@ -98,33 +98,33 @@ export class DatasourceTypeParameters extends SpeakeasyBase {
  * Define and configure data source type.
 **/
 export class DatasourceType extends SpeakeasyBase {
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: DatasourceTypeNameEnum;
 
-  @Metadata({ data: "json, name=parameters" })
+  @SpeakeasyMetadata({ data: "json, name=parameters" })
   parameters?: DatasourceTypeParameters;
 }
 
 
 export class Datasource extends SpeakeasyBase {
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=enabled" })
+  @SpeakeasyMetadata({ data: "json, name=enabled" })
   enabled?: boolean;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=runParameters" })
+  @SpeakeasyMetadata({ data: "json, name=runParameters" })
   runParameters?: DatasourceRunParameters;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: DatasourceType;
 
-  @Metadata({ data: "json, name=updateTimeout" })
+  @SpeakeasyMetadata({ data: "json, name=updateTimeout" })
   updateTimeout?: number;
 }

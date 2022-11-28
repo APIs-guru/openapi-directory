@@ -30,7 +30,7 @@ type IamProjectsServiceAccountsUpdateSecurity struct {
 type IamProjectsServiceAccountsUpdateRequest struct {
 	PathParams  IamProjectsServiceAccountsUpdatePathParams
 	QueryParams IamProjectsServiceAccountsUpdateQueryParams
-	Request     *shared.ServiceAccount `request:"mediaType=application/json"`
+	Request     *shared.ServiceAccountInput `request:"mediaType=application/json"`
 	Security    IamProjectsServiceAccountsUpdateSecurity
 }
 

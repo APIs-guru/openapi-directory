@@ -25,13 +25,6 @@ type CreateUsageChargeSecurity struct {
 	OAuth2 shared.SchemeOAuth2 `security:"scheme,type=oauth2"`
 }
 
-type CreateUsageChargeRequest struct {
-	PathParams CreateUsageChargePathParams
-	Headers    CreateUsageChargeHeaders
-	Request    CreateUsageChargeRequestBody `request:"mediaType=application/json"`
-	Security   CreateUsageChargeSecurity
-}
-
 type CreateUsageCharge201ApplicationJSONUsageCharge struct {
 	Description *string `json:"description,omitempty"`
 	ID          *string `json:"id,omitempty"`
@@ -42,6 +35,13 @@ type CreateUsageCharge201ApplicationJSONUsageCharge struct {
 
 type CreateUsageCharge201ApplicationJSON struct {
 	UsageCharge *CreateUsageCharge201ApplicationJSONUsageCharge `json:"usage_charge,omitempty"`
+}
+
+type CreateUsageChargeRequest struct {
+	PathParams CreateUsageChargePathParams
+	Headers    CreateUsageChargeHeaders
+	Request    CreateUsageChargeRequestBody `request:"mediaType=application/json"`
+	Security   CreateUsageChargeSecurity
 }
 
 type CreateUsageChargeResponse struct {

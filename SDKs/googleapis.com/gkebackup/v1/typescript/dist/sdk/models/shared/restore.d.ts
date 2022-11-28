@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { RestoreConfig } from "./restoreconfig";
 export declare enum RestoreStateEnum {
     StateUnspecified = "STATE_UNSPECIFIED",
@@ -7,6 +7,15 @@ export declare enum RestoreStateEnum {
     Succeeded = "SUCCEEDED",
     Failed = "FAILED",
     Deleting = "DELETING"
+}
+/**
+ * Represents both a request to Restore some portion of a Backup into a target GKE cluster and a record of the restore operation itself. Next id: 18
+**/
+export declare class RestoreInput extends SpeakeasyBase {
+    backup?: string;
+    description?: string;
+    labels?: Map<string, string>;
+    restoreConfig?: RestoreConfig;
 }
 /**
  * Represents both a request to Restore some portion of a Backup into a target GKE cluster and a record of the restore operation itself. Next id: 18

@@ -1,7 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { NestedParameter } from "./nestedparameter";
-import { NestedParameter } from "./nestedparameter";
+
 
 
 // ActivityActor
@@ -9,16 +8,16 @@ import { NestedParameter } from "./nestedparameter";
  * User doing the action.
 **/
 export class ActivityActor extends SpeakeasyBase {
-  @Metadata({ data: "json, name=callerType" })
+  @SpeakeasyMetadata({ data: "json, name=callerType" })
   callerType?: string;
 
-  @Metadata({ data: "json, name=email" })
+  @SpeakeasyMetadata({ data: "json, name=email" })
   email?: string;
 
-  @Metadata({ data: "json, name=key" })
+  @SpeakeasyMetadata({ data: "json, name=key" })
   key?: string;
 
-  @Metadata({ data: "json, name=profileId" })
+  @SpeakeasyMetadata({ data: "json, name=profileId" })
   profileId?: string;
 }
 
@@ -28,52 +27,52 @@ export class ActivityActor extends SpeakeasyBase {
  * Nested parameter value pairs associated with this parameter. Complex value type for a parameter are returned as a list of parameter values. For example, the address parameter may have a value as `[{parameter: [{name: city, value: abc}]}]`
 **/
 export class ActivityEventsParametersMessageValue extends SpeakeasyBase {
-  @Metadata({ data: "json, name=parameter", elemType: shared.NestedParameter })
+  @SpeakeasyMetadata({ data: "json, name=parameter", elemType: NestedParameter })
   parameter?: NestedParameter[];
 }
 
 
 export class ActivityEventsParametersMultiMessageValue extends SpeakeasyBase {
-  @Metadata({ data: "json, name=parameter", elemType: shared.NestedParameter })
+  @SpeakeasyMetadata({ data: "json, name=parameter", elemType: NestedParameter })
   parameter?: NestedParameter[];
 }
 
 
 export class ActivityEventsParameters extends SpeakeasyBase {
-  @Metadata({ data: "json, name=boolValue" })
+  @SpeakeasyMetadata({ data: "json, name=boolValue" })
   boolValue?: boolean;
 
-  @Metadata({ data: "json, name=intValue" })
+  @SpeakeasyMetadata({ data: "json, name=intValue" })
   intValue?: string;
 
-  @Metadata({ data: "json, name=messageValue" })
+  @SpeakeasyMetadata({ data: "json, name=messageValue" })
   messageValue?: ActivityEventsParametersMessageValue;
 
-  @Metadata({ data: "json, name=multiIntValue" })
+  @SpeakeasyMetadata({ data: "json, name=multiIntValue" })
   multiIntValue?: string[];
 
-  @Metadata({ data: "json, name=multiMessageValue", elemType: shared.ActivityEventsParametersMultiMessageValue })
+  @SpeakeasyMetadata({ data: "json, name=multiMessageValue", elemType: ActivityEventsParametersMultiMessageValue })
   multiMessageValue?: ActivityEventsParametersMultiMessageValue[];
 
-  @Metadata({ data: "json, name=multiValue" })
+  @SpeakeasyMetadata({ data: "json, name=multiValue" })
   multiValue?: string[];
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=value" })
+  @SpeakeasyMetadata({ data: "json, name=value" })
   value?: string;
 }
 
 
 export class ActivityEvents extends SpeakeasyBase {
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=parameters", elemType: shared.ActivityEventsParameters })
+  @SpeakeasyMetadata({ data: "json, name=parameters", elemType: ActivityEventsParameters })
   parameters?: ActivityEventsParameters[];
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: string;
 }
 
@@ -83,16 +82,16 @@ export class ActivityEvents extends SpeakeasyBase {
  * Unique identifier for each activity record.
 **/
 export class ActivityId extends SpeakeasyBase {
-  @Metadata({ data: "json, name=applicationName" })
+  @SpeakeasyMetadata({ data: "json, name=applicationName" })
   applicationName?: string;
 
-  @Metadata({ data: "json, name=customerId" })
+  @SpeakeasyMetadata({ data: "json, name=customerId" })
   customerId?: string;
 
-  @Metadata({ data: "json, name=time" })
+  @SpeakeasyMetadata({ data: "json, name=time" })
   time?: Date;
 
-  @Metadata({ data: "json, name=uniqueQualifier" })
+  @SpeakeasyMetadata({ data: "json, name=uniqueQualifier" })
   uniqueQualifier?: string;
 }
 
@@ -102,24 +101,24 @@ export class ActivityId extends SpeakeasyBase {
  * JSON template for the activity resource.
 **/
 export class Activity extends SpeakeasyBase {
-  @Metadata({ data: "json, name=actor" })
+  @SpeakeasyMetadata({ data: "json, name=actor" })
   actor?: ActivityActor;
 
-  @Metadata({ data: "json, name=etag" })
+  @SpeakeasyMetadata({ data: "json, name=etag" })
   etag?: string;
 
-  @Metadata({ data: "json, name=events", elemType: shared.ActivityEvents })
+  @SpeakeasyMetadata({ data: "json, name=events", elemType: ActivityEvents })
   events?: ActivityEvents[];
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: ActivityId;
 
-  @Metadata({ data: "json, name=ipAddress" })
+  @SpeakeasyMetadata({ data: "json, name=ipAddress" })
   ipAddress?: string;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=ownerDomain" })
+  @SpeakeasyMetadata({ data: "json, name=ownerDomain" })
   ownerDomain?: string;
 }

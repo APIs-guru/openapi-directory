@@ -1,66 +1,67 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class UpdateNetworkWirelessSsidBonjourForwardingPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=networkId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=networkId" })
   networkId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=number" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=number" })
   number: string;
 }
 
 export enum UpdateNetworkWirelessSsidBonjourForwardingRequestBodyRulesServicesEnum {
-    AllServices = "All Services"
-,    AirPlay = "AirPlay"
-,    Afp = "AFP"
-,    BitTorrent = "BitTorrent"
-,    Ftp = "FTP"
-,    IChat = "iChat"
-,    ITunes = "iTunes"
-,    Printers = "Printers"
-,    Samba = "Samba"
-,    Scanners = "Scanners"
-,    Ssh = "SSH"
+    AllServices = "All Services",
+    AirPlay = "AirPlay",
+    Afp = "AFP",
+    BitTorrent = "BitTorrent",
+    Ftp = "FTP",
+    IChat = "iChat",
+    ITunes = "iTunes",
+    Printers = "Printers",
+    Samba = "Samba",
+    Scanners = "Scanners",
+    Ssh = "SSH"
 }
 
 
 export class UpdateNetworkWirelessSsidBonjourForwardingRequestBodyRules extends SpeakeasyBase {
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=services" })
+  @SpeakeasyMetadata({ data: "json, name=services" })
   services: UpdateNetworkWirelessSsidBonjourForwardingRequestBodyRulesServicesEnum[];
 
-  @Metadata({ data: "json, name=vlanId" })
+  @SpeakeasyMetadata({ data: "json, name=vlanId" })
   vlanId: string;
 }
 
 
 export class UpdateNetworkWirelessSsidBonjourForwardingRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=enabled" })
+  @SpeakeasyMetadata({ data: "json, name=enabled" })
   enabled?: boolean;
 
-  @Metadata({ data: "json, name=rules", elemType: operations.UpdateNetworkWirelessSsidBonjourForwardingRequestBodyRules })
+  @SpeakeasyMetadata({ data: "json, name=rules", elemType: UpdateNetworkWirelessSsidBonjourForwardingRequestBodyRules })
   rules?: UpdateNetworkWirelessSsidBonjourForwardingRequestBodyRules[];
 }
 
 
 export class UpdateNetworkWirelessSsidBonjourForwardingRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: UpdateNetworkWirelessSsidBonjourForwardingPathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request?: UpdateNetworkWirelessSsidBonjourForwardingRequestBody;
 }
 
 
 export class UpdateNetworkWirelessSsidBonjourForwardingResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   updateNetworkWirelessSsidBonjourForwarding200ApplicationJsonObject?: Map<string, any>;
 }

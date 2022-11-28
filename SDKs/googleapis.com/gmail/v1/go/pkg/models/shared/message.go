@@ -1,5 +1,7 @@
 package shared
 
+// Message
+// An email message.
 type Message struct {
 	HistoryID    *string      `json:"historyId,omitempty"`
 	ID           *string      `json:"id,omitempty"`

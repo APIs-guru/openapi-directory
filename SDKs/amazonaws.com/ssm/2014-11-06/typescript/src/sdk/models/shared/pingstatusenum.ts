@@ -1,7 +1,8 @@
 
 
+
 export enum PingStatusEnum {
-    Online = "Online"
-,    ConnectionLost = "ConnectionLost"
-,    Inactive = "Inactive"
+    Online = "Online",
+    ConnectionLost = "ConnectionLost",
+    Inactive = "Inactive"
 }

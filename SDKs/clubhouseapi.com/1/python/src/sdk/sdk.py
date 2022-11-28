@@ -1,7 +1,10 @@
-import warnings
+
+
 import requests
 from sdk.models import operations
 from . import utils
+
+
 
 
 SERVERS = [
@@ -10,28 +13,49 @@ SERVERS = [
 
 
 class SDK:
-    client = requests.Session()
-    server_url = SERVERS[0]
+    
+
+    _client: requests.Session
+    _security_client: requests.Session
+    
+    _server_url: str = SERVERS[0]
+    _language: str = "python"
+    _sdk_version: str = "0.0.1"
+    _gen_version: str = "internal"
+
+    def __init__(self) -> None:
+        self._client = requests.Session()
+        self._security_client = requests.Session()
+        
+
 
     def config_server_url(self, server_url: str, params: dict[str, str]):
-        if not params is None:
-            self.server_url = utils.replace_parameters(server_url, params)
+        if params is not None:
+            self._server_url = utils.replace_parameters(server_url, params)
         else:
-            self.server_url = server_url
-            
+            self._server_url = server_url
+
+        
     
 
+    def config_client(self, client: requests.Session):
+        self._client = client
+        
+    
+    
     
     def get_check_for_update(self, request: operations.GetCheckForUpdateRequest) -> operations.GetCheckForUpdateResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Clubhouse uses this to check for updates when app is not installed from App Store (eg TestFlight)
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/check_for_update"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -44,13 +68,16 @@ class SDK:
 
     
     def get_get_actionable_notifications(self) -> operations.GetGetActionableNotificationsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""get actionable notifications (the bell again)
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/get_actionable_notifications"
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -63,13 +90,16 @@ class SDK:
 
     
     def get_get_all_topics(self) -> operations.GetGetAllTopicsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""gets all topics.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/get_all_topics"
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -82,13 +112,16 @@ class SDK:
 
     
     def get_get_channels(self) -> operations.GetGetChannelsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""get all channels
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/get_channels"
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -101,15 +134,17 @@ class SDK:
 
     
     def get_get_events(self, request: operations.GetGetEventsRequest) -> operations.GetGetEventsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""the Upcoming for You page
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/get_events"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -122,15 +157,17 @@ class SDK:
 
     
     def get_get_notifications(self, request: operations.GetGetNotificationsRequest) -> operations.GetGetNotificationsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""get notifications (the bell icon)
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/get_notifications"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -143,13 +180,16 @@ class SDK:
 
     
     def get_get_settings(self) -> operations.GetGetSettingsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""get notification settings
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/get_settings"
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -162,15 +202,17 @@ class SDK:
 
     
     def get_get_suggested_follows_all(self, request: operations.GetGetSuggestedFollowsAllRequest) -> operations.GetGetSuggestedFollowsAllResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""gets suggested follows during signup
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/get_suggested_follows_all"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -183,15 +225,17 @@ class SDK:
 
     
     def get_get_users_for_topic(self, request: operations.GetGetUsersForTopicRequest) -> operations.GetGetUsersForTopicResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""looks up users by topic.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/get_users_for_topic"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -204,13 +248,16 @@ class SDK:
 
     
     def get_get_welcome_channel(self) -> operations.GetGetWelcomeChannelResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""called during signup
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/get_welcome_channel"
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -223,19 +270,20 @@ class SDK:
 
     
     def post_call_phone_number_auth(self, request: operations.PostCallPhoneNumberAuthRequest) -> operations.PostCallPhoneNumberAuthResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Call phone number auth.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/call_phone_number_auth"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -248,13 +296,16 @@ class SDK:
 
     
     def post_check_waitlist_status(self) -> operations.PostCheckWaitlistStatusResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""checks waitlist status.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/check_waitlist_status"
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("POST", url)
         content_type = r.headers.get("Content-Type")
 
@@ -269,19 +320,20 @@ class SDK:
 
     
     def post_complete_phone_number_auth(self, request: operations.PostCompletePhoneNumberAuthRequest) -> operations.PostCompletePhoneNumberAuthResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Call phone number auth.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/complete_phone_number_auth"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -294,19 +346,20 @@ class SDK:
 
     
     def post_create_channel(self, request: operations.PostCreateChannelRequest) -> operations.PostCreateChannelResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""creates a channel
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/create_channel"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -319,19 +372,20 @@ class SDK:
 
     
     def post_follow(self, request: operations.PostFollowRequest) -> operations.PostFollowResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""follows a user
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/follow"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -344,19 +398,20 @@ class SDK:
 
     
     def post_get_club(self, request: operations.PostGetClubRequest) -> operations.PostGetClubResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""gets club by id
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/get_club"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -369,19 +424,20 @@ class SDK:
 
     
     def post_get_clubs_for_topic(self, request: operations.PostGetClubsForTopicRequest) -> operations.PostGetClubsForTopicResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""looks up clubs by topic.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/get_clubs_for_topic"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -394,19 +450,20 @@ class SDK:
 
     
     def post_get_create_channel_targets(self, request: operations.PostGetCreateChannelTargetsRequest) -> operations.PostGetCreateChannelTargetsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""is fetched when you tap Create Room
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/get_create_channel_targets"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -419,19 +476,20 @@ class SDK:
 
     
     def post_get_following(self, request: operations.PostGetFollowingRequest) -> operations.PostGetFollowingResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""get a list of the users and clubs that this user is following. Returned users have bios truncated to ~80 characters.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/get_following"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -444,19 +502,20 @@ class SDK:
 
     
     def post_get_online_friends(self, request: operations.PostGetOnlineFriendsRequest) -> operations.PostGetOnlineFriendsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""gets online friends on the app homepage.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/get_online_friends"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -469,19 +528,20 @@ class SDK:
 
     
     def post_get_profile(self, request: operations.PostGetProfileRequest) -> operations.PostGetProfileResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""looks up user profile by ID.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/get_profile"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -494,13 +554,16 @@ class SDK:
 
     
     def post_get_release_notes(self) -> operations.PostGetReleaseNotesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""gets release notes.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/get_release_notes"
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("POST", url)
         content_type = r.headers.get("Content-Type")
 
@@ -513,19 +576,20 @@ class SDK:
 
     
     def post_get_suggested_club_invites(self, request: operations.PostGetSuggestedClubInvitesRequest) -> operations.PostGetSuggestedClubInvitesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""find users to invite to clubs based on phone number
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/get_suggested_club_invites"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -538,19 +602,20 @@ class SDK:
 
     
     def post_get_suggested_follows_friends_only(self, request: operations.PostGetSuggestedFollowsFriendsOnlyRequest) -> operations.PostGetSuggestedFollowsFriendsOnlyResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""find people to follow by uploading contacts during signup
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/get_suggested_follows_friends_only"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -563,19 +628,20 @@ class SDK:
 
     
     def post_get_suggested_follows_similar(self, request: operations.PostGetSuggestedFollowsSimilarRequest) -> operations.PostGetSuggestedFollowsSimilarResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""find similar users. (The Sparkles button on Clubhouse's profile page)
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/get_suggested_follows_similar"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -588,19 +654,21 @@ class SDK:
 
     
     def post_get_suggested_invites(self, request: operations.PostGetSuggestedInvitesRequest) -> operations.PostGetSuggestedInvitesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""find users to invite based on phone number.
+        (also see https://zerforschung.org/posts/clubhouse-telefonnummern-en/ for @zerforschung's analysis of the privacy implications of this API)
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/get_suggested_invites"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -613,19 +681,20 @@ class SDK:
 
     
     def post_get_suggested_speakers(self, request: operations.PostGetSuggestedSpeakersRequest) -> operations.PostGetSuggestedSpeakersResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""gets suggested users when you start a private room
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/get_suggested_speakers"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -638,19 +707,20 @@ class SDK:
 
     
     def post_get_topic(self, request: operations.PostGetTopicRequest) -> operations.PostGetTopicResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""looks up topic by ID.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/get_topic"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -663,19 +733,20 @@ class SDK:
 
     
     def post_invite_from_waitlist(self, request: operations.PostInviteFromWaitlistRequest) -> operations.PostInviteFromWaitlistResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""wave to another user on the waitlist to give them access
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/invite_from_waitlist"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -688,19 +759,20 @@ class SDK:
 
     
     def post_invite_to_app(self, request: operations.PostInviteToAppRequest) -> operations.PostInviteToAppResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""invite a user to the app, using one of your invites
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/invite_to_app"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -713,19 +785,20 @@ class SDK:
 
     
     def post_join_channel(self, request: operations.PostJoinChannelRequest) -> operations.PostJoinChannelResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""join a channel.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/join_channel"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -740,19 +813,20 @@ class SDK:
 
     
     def post_leave_channel(self, request: operations.PostLeaveChannelRequest) -> operations.PostLeaveChannelResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""leave a channel.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/leave_channel"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -765,19 +839,20 @@ class SDK:
 
     
     def post_me(self, request: operations.PostMeRequest) -> operations.PostMeResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""gets user
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/me"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -792,19 +867,20 @@ class SDK:
 
     
     def post_record_action_trails(self, request: operations.PostRecordActionTrailsRequest) -> operations.PostRecordActionTrailsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""analytics
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/record_action_trails"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -817,19 +893,20 @@ class SDK:
 
     
     def post_refresh_token(self, request: operations.PostRefreshTokenRequest) -> operations.PostRefreshTokenResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""gets an access_token from a refresh_token.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/refresh_token"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -844,19 +921,20 @@ class SDK:
 
     
     def post_resend_phone_number_auth(self, request: operations.PostResendPhoneNumberAuthRequest) -> operations.PostResendPhoneNumberAuthResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Resend phone number auth.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/resend_phone_number_auth"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -869,19 +947,20 @@ class SDK:
 
     
     def post_search_clubs(self, request: operations.PostSearchClubsRequest) -> operations.PostSearchClubsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""search clubs.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/search_clubs"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -894,19 +973,20 @@ class SDK:
 
     
     def post_search_users(self, request: operations.PostSearchUsersRequest) -> operations.PostSearchUsersResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""search for users
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/search_users"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -919,19 +999,20 @@ class SDK:
 
     
     def post_start_phone_number_auth(self, request: operations.PostStartPhoneNumberAuthRequest) -> operations.PostStartPhoneNumberAuthResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Starts phone number auth.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/start_phone_number_auth"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -944,19 +1025,20 @@ class SDK:
 
     
     def post_update_notifications(self, request: operations.PostUpdateNotificationsRequest) -> operations.PostUpdateNotificationsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""updates notification during signup.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/update_notifications"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -969,19 +1051,20 @@ class SDK:
 
     
     def post_update_username(self, request: operations.PostUpdateUsernameRequest) -> operations.PostUpdateUsernameResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""edits username.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/update_username"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 

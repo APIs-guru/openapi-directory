@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DisplayvideoAdvertisersLineItemsGetPathParams:
-    advertiser_id: str = field(default=None, metadata={'path_param': { 'field_name': 'advertiserId', 'style': 'simple', 'explode': False }})
-    line_item_id: str = field(default=None, metadata={'path_param': { 'field_name': 'lineItemId', 'style': 'simple', 'explode': False }})
+    advertiser_id: str = field(metadata={'path_param': { 'field_name': 'advertiserId', 'style': 'simple', 'explode': False }})
+    line_item_id: str = field(metadata={'path_param': { 'field_name': 'lineItemId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,20 +27,20 @@ class DisplayvideoAdvertisersLineItemsGetQueryParams:
 
 @dataclass
 class DisplayvideoAdvertisersLineItemsGetSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DisplayvideoAdvertisersLineItemsGetRequest:
-    path_params: DisplayvideoAdvertisersLineItemsGetPathParams = field(default=None)
-    query_params: DisplayvideoAdvertisersLineItemsGetQueryParams = field(default=None)
-    security: DisplayvideoAdvertisersLineItemsGetSecurity = field(default=None)
+    path_params: DisplayvideoAdvertisersLineItemsGetPathParams = field()
+    query_params: DisplayvideoAdvertisersLineItemsGetQueryParams = field()
+    security: DisplayvideoAdvertisersLineItemsGetSecurity = field()
     
 
 @dataclass
 class DisplayvideoAdvertisersLineItemsGetResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     line_item: Optional[shared.LineItem] = field(default=None)
-    status_code: int = field(default=None)
     

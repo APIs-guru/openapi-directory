@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { InterruptionFilter } from "./interruptionfilter";
 import { NonTalkTimeFilter } from "./nontalktimefilter";
 import { SentimentFilter } from "./sentimentfilter";
 import { TranscriptFilter } from "./transcriptfilter";
+
 
 
 // Rule
@@ -10,15 +11,15 @@ import { TranscriptFilter } from "./transcriptfilter";
  * A condition in the call between the customer and the agent that you want to filter for.
 **/
 export class Rule extends SpeakeasyBase {
-  @Metadata({ data: "json, name=InterruptionFilter" })
+  @SpeakeasyMetadata({ data: "json, name=InterruptionFilter" })
   interruptionFilter?: InterruptionFilter;
 
-  @Metadata({ data: "json, name=NonTalkTimeFilter" })
+  @SpeakeasyMetadata({ data: "json, name=NonTalkTimeFilter" })
   nonTalkTimeFilter?: NonTalkTimeFilter;
 
-  @Metadata({ data: "json, name=SentimentFilter" })
+  @SpeakeasyMetadata({ data: "json, name=SentimentFilter" })
   sentimentFilter?: SentimentFilter;
 
-  @Metadata({ data: "json, name=TranscriptFilter" })
+  @SpeakeasyMetadata({ data: "json, name=TranscriptFilter" })
   transcriptFilter?: TranscriptFilter;
 }

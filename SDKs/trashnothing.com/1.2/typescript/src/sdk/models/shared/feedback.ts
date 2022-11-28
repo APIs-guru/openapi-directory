@@ -1,19 +1,20 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class Feedback extends SpeakeasyBase {
-  @Metadata({ data: "json, name=content" })
+  @SpeakeasyMetadata({ data: "json, name=content" })
   content?: string;
 
-  @Metadata({ data: "json, name=date" })
+  @SpeakeasyMetadata({ data: "json, name=date" })
   date?: Date;
 
-  @Metadata({ data: "json, name=positive" })
+  @SpeakeasyMetadata({ data: "json, name=positive" })
   positive?: boolean;
 
-  @Metadata({ data: "json, name=reviewer_user_id" })
+  @SpeakeasyMetadata({ data: "json, name=reviewer_user_id" })
   reviewerUserId?: string;
 
-  @Metadata({ data: "json, name=user_id" })
+  @SpeakeasyMetadata({ data: "json, name=user_id" })
   userId?: string;
 }

@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class SubmissionEntryDeliveryReportsEnum(str, Enum):
     ALL = "ALL"
@@ -22,8 +24,16 @@ class SubmissionEntryFromTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class SubmissionEntryFrom:
-    address: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'address' }})
-    type: SubmissionEntryFromTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    r"""SubmissionEntryFrom
+    Identifies the sender.
+    
+    Instead of a structured object, you can supply a string value here. 
+    If you do this, the `type` of the sender is derived to be either INTERNATIONAL or ALPHANUMERIC.  If the value does not begin with a `+` and it contains at least one character that is not a digit, the type is detected as ALPHANUMERIC. Otherwise, the type is detected as INTERNATIONAL.
+    
+    """
+    
+    type: SubmissionEntryFromTypeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('type') }})
+    address: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('address') }})
     
 class SubmissionEntryMessageClassEnum(str, Enum):
     FLASH_SMS = "FLASH_SMS"
@@ -59,24 +69,28 @@ class SubmissionEntryToTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class SubmissionEntryTo:
-    address: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'address' }})
-    fields: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'fields' }})
-    id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    type: Optional[SubmissionEntryToTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    address: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('address') }})
+    fields: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('fields') }})
+    id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('id') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    type: Optional[SubmissionEntryToTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('type') }})
     
 
 @dataclass_json
 @dataclass
 class SubmissionEntry:
-    body: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'body' }})
-    delivery_reports: Optional[SubmissionEntryDeliveryReportsEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'deliveryReports' }})
-    encoding: Optional[SubmissionEntryEncodingEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'encoding' }})
-    from_: Optional[SubmissionEntryFrom] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'from' }})
-    long_message_max_parts: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'longMessageMaxParts' }})
-    message_class: Optional[SubmissionEntryMessageClassEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'messageClass' }})
-    protocol_id: Optional[SubmissionEntryProtocolIDEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'protocolId' }})
-    routing_group: Optional[SubmissionEntryRoutingGroupEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'routingGroup' }})
-    to: List[SubmissionEntryTo] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'to' }})
-    user_supplied_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'userSuppliedId' }})
+    r"""SubmissionEntry
+    An object that you use when posting messages.
+    """
+    
+    body: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('body') }})
+    to: List[SubmissionEntryTo] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('to') }})
+    delivery_reports: Optional[SubmissionEntryDeliveryReportsEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('deliveryReports') }})
+    encoding: Optional[SubmissionEntryEncodingEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('encoding') }})
+    from_: Optional[SubmissionEntryFrom] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('from') }})
+    long_message_max_parts: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('longMessageMaxParts') }})
+    message_class: Optional[SubmissionEntryMessageClassEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('messageClass') }})
+    protocol_id: Optional[SubmissionEntryProtocolIDEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('protocolId') }})
+    routing_group: Optional[SubmissionEntryRoutingGroupEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('routingGroup') }})
+    user_supplied_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('userSuppliedId') }})
     

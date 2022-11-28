@@ -34,6 +34,7 @@ export * from "./lookupselfdeviceusersresponse";
 export * from "./memberrelation";
 export * from "./membership";
 export * from "./membershiprole";
+export * from "./membershiprole1";
 export * from "./membershiprolerestrictionevaluation";
 export * from "./modifymembershiprolesrequest";
 export * from "./modifymembershiprolesresponse";

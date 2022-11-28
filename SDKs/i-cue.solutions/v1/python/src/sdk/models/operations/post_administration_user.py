@@ -9,23 +9,23 @@ class PostAdministrationUserHeaders:
     
 
 @dataclass
-class PostAdministrationUserRequests:
-    new_user_request: Optional[shared.NewUserRequest] = field(default=None, metadata={'request': { 'media_type': 'application/*+json' }})
-    new_user_request1: Optional[shared.NewUserRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    new_user_request2: Optional[shared.NewUserRequest] = field(default=None, metadata={'request': { 'media_type': 'text/json' }})
+class PostAdministrationUserRequestsInput:
+    new_user_request: Optional[shared.NewUserRequestInput] = field(default=None, metadata={'request': { 'media_type': 'application/*+json' }})
+    new_user_request1: Optional[shared.NewUserRequestInput] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    new_user_request2: Optional[shared.NewUserRequestInput] = field(default=None, metadata={'request': { 'media_type': 'text/json' }})
     
 
 @dataclass
 class PostAdministrationUserRequest:
-    headers: PostAdministrationUserHeaders = field(default=None)
-    request: Optional[PostAdministrationUserRequests] = field(default=None)
+    headers: PostAdministrationUserHeaders = field()
+    request: Optional[PostAdministrationUserRequestsInput] = field(default=None)
     
 
 @dataclass
 class PostAdministrationUserResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     post_administration_user_200_application_json_uuid_string: Optional[str] = field(default=None)
     post_administration_user_200_text_json_uuid_string: Optional[str] = field(default=None)
     post_administration_user_200_text_plain_uuid_string: Optional[str] = field(default=None)
-    status_code: int = field(default=None)
     

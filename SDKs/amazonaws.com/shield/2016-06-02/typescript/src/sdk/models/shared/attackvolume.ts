@@ -1,7 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AttackVolumeStatistics } from "./attackvolumestatistics";
-import { AttackVolumeStatistics } from "./attackvolumestatistics";
-import { AttackVolumeStatistics } from "./attackvolumestatistics";
+
 
 
 // AttackVolume
@@ -9,12 +8,12 @@ import { AttackVolumeStatistics } from "./attackvolumestatistics";
  * Information about the volume of attacks during the time period, included in an <a>AttackStatisticsDataItem</a>. If the accompanying <code>AttackCount</code> in the statistics object is zero, this setting might be empty.
 **/
 export class AttackVolume extends SpeakeasyBase {
-  @Metadata({ data: "json, name=BitsPerSecond" })
+  @SpeakeasyMetadata({ data: "json, name=BitsPerSecond" })
   bitsPerSecond?: AttackVolumeStatistics;
 
-  @Metadata({ data: "json, name=PacketsPerSecond" })
+  @SpeakeasyMetadata({ data: "json, name=PacketsPerSecond" })
   packetsPerSecond?: AttackVolumeStatistics;
 
-  @Metadata({ data: "json, name=RequestsPerSecond" })
+  @SpeakeasyMetadata({ data: "json, name=RequestsPerSecond" })
   requestsPerSecond?: AttackVolumeStatistics;
 }

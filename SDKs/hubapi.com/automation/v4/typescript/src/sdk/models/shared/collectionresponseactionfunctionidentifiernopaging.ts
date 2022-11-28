@@ -1,9 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ActionFunctionIdentifier } from "./actionfunctionidentifier";
 
 
+
 export class CollectionResponseActionFunctionIdentifierNoPaging extends SpeakeasyBase {
-  @Metadata({ data: "json, name=results", elemType: shared.ActionFunctionIdentifier })
+  @SpeakeasyMetadata({ data: "json, name=results", elemType: ActionFunctionIdentifier })
   results: ActionFunctionIdentifier[];
 }

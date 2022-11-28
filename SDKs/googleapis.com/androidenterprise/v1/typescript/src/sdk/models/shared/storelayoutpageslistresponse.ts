@@ -1,9 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { StorePage } from "./storepage";
 
 
+
 export class StoreLayoutPagesListResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=page", elemType: shared.StorePage })
+  @SpeakeasyMetadata({ data: "json, name=page", elemType: StorePage })
   page?: StorePage[];
 }

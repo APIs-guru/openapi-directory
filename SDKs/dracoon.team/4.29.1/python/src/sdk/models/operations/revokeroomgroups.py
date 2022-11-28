@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class RevokeRoomGroupsPathParams:
-    room_id: int = field(default=None, metadata={'path_param': { 'field_name': 'room_id', 'style': 'simple', 'explode': False }})
+    room_id: int = field(metadata={'path_param': { 'field_name': 'room_id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -16,14 +19,14 @@ class RevokeRoomGroupsHeaders:
 
 @dataclass
 class RevokeRoomGroupsRequest:
-    path_params: RevokeRoomGroupsPathParams = field(default=None)
-    headers: RevokeRoomGroupsHeaders = field(default=None)
-    request: shared.RoomGroupsDeleteBatchRequest = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: RevokeRoomGroupsHeaders = field()
+    path_params: RevokeRoomGroupsPathParams = field()
+    request: shared.RoomGroupsDeleteBatchRequest = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class RevokeRoomGroupsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error_response: Optional[shared.ErrorResponse] = field(default=None)
-    status_code: int = field(default=None)
     

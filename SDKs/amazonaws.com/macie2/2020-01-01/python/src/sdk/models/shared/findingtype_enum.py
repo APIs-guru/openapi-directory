@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class FindingTypeEnum(str, Enum):
     SENSITIVE_DATA_S3_OBJECT_MULTIPLE = "SensitiveData:S3Object/Multiple"

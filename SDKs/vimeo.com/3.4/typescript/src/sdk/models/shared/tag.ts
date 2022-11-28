@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // TagMetadataConnectionsVideos
@@ -6,13 +7,13 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Information about the videos related to this tag.
 **/
 export class TagMetadataConnectionsVideos extends SpeakeasyBase {
-  @Metadata({ data: "json, name=options" })
+  @SpeakeasyMetadata({ data: "json, name=options" })
   options: string[];
 
-  @Metadata({ data: "json, name=total" })
+  @SpeakeasyMetadata({ data: "json, name=total" })
   total: number;
 
-  @Metadata({ data: "json, name=uri" })
+  @SpeakeasyMetadata({ data: "json, name=uri" })
   uri: string;
 }
 
@@ -22,7 +23,7 @@ export class TagMetadataConnectionsVideos extends SpeakeasyBase {
  * A collection of information that is connected to this resource.
 **/
 export class TagMetadataConnections extends SpeakeasyBase {
-  @Metadata({ data: "json, name=videos" })
+  @SpeakeasyMetadata({ data: "json, name=videos" })
   videos: TagMetadataConnectionsVideos;
 }
 
@@ -32,24 +33,24 @@ export class TagMetadataConnections extends SpeakeasyBase {
  * Metadata about the group.
 **/
 export class TagMetadata extends SpeakeasyBase {
-  @Metadata({ data: "json, name=connections" })
+  @SpeakeasyMetadata({ data: "json, name=connections" })
   connections: TagMetadataConnections;
 }
 
 
 export class Tag extends SpeakeasyBase {
-  @Metadata({ data: "json, name=canonical" })
+  @SpeakeasyMetadata({ data: "json, name=canonical" })
   canonical: string;
 
-  @Metadata({ data: "json, name=metadata" })
+  @SpeakeasyMetadata({ data: "json, name=metadata" })
   metadata: TagMetadata;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 
-  @Metadata({ data: "json, name=resource_key" })
+  @SpeakeasyMetadata({ data: "json, name=resource_key" })
   resourceKey: string;
 
-  @Metadata({ data: "json, name=uri" })
+  @SpeakeasyMetadata({ data: "json, name=uri" })
   uri: string;
 }

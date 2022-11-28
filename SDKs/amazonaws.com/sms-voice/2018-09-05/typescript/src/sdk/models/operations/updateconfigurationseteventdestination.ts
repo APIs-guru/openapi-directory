@@ -1,36 +1,37 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class UpdateConfigurationSetEventDestinationPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=ConfigurationSetName" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=ConfigurationSetName" })
   configurationSetName: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=EventDestinationName" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=EventDestinationName" })
   eventDestinationName: string;
 }
 
 
 export class UpdateConfigurationSetEventDestinationHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
@@ -40,60 +41,60 @@ export class UpdateConfigurationSetEventDestinationHeaders extends SpeakeasyBase
  * An object that defines a single event destination.
 **/
 export class UpdateConfigurationSetEventDestinationRequestBodyEventDestination extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CloudWatchLogsDestination" })
+  @SpeakeasyMetadata({ data: "json, name=CloudWatchLogsDestination" })
   cloudWatchLogsDestination?: shared.CloudWatchLogsDestination;
 
-  @Metadata({ data: "json, name=Enabled" })
+  @SpeakeasyMetadata({ data: "json, name=Enabled" })
   enabled?: boolean;
 
-  @Metadata({ data: "json, name=KinesisFirehoseDestination" })
+  @SpeakeasyMetadata({ data: "json, name=KinesisFirehoseDestination" })
   kinesisFirehoseDestination?: shared.KinesisFirehoseDestination;
 
-  @Metadata({ data: "json, name=MatchingEventTypes" })
+  @SpeakeasyMetadata({ data: "json, name=MatchingEventTypes" })
   matchingEventTypes?: shared.EventTypeEnum[];
 
-  @Metadata({ data: "json, name=SnsDestination" })
+  @SpeakeasyMetadata({ data: "json, name=SnsDestination" })
   snsDestination?: shared.SnsDestination;
 }
 
 
 export class UpdateConfigurationSetEventDestinationRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=EventDestination" })
+  @SpeakeasyMetadata({ data: "json, name=EventDestination" })
   eventDestination?: UpdateConfigurationSetEventDestinationRequestBodyEventDestination;
 }
 
 
 export class UpdateConfigurationSetEventDestinationRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: UpdateConfigurationSetEventDestinationPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: UpdateConfigurationSetEventDestinationHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: UpdateConfigurationSetEventDestinationRequestBody;
 }
 
 
 export class UpdateConfigurationSetEventDestinationResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   badRequestException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   internalServiceErrorException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   notFoundException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   tooManyRequestsException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   updateConfigurationSetEventDestinationResponse?: Map<string, any>;
 }

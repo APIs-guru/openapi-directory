@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CrawledUrl } from "./crawledurl";
+
 
 
 // ListCrawledUrlsResponse
@@ -8,9 +8,9 @@ import { CrawledUrl } from "./crawledurl";
  * Response for the `ListCrawledUrls` method.
 **/
 export class ListCrawledUrlsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=crawledUrls", elemType: shared.CrawledUrl })
+  @SpeakeasyMetadata({ data: "json, name=crawledUrls", elemType: CrawledUrl })
   crawledUrls?: CrawledUrl[];
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 }

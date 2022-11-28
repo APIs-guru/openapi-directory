@@ -1,33 +1,34 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class StartDetectMitigationActionsTaskPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=taskId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=taskId" })
   taskId: string;
 }
 
 
 export class StartDetectMitigationActionsTaskHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
@@ -37,13 +38,13 @@ export class StartDetectMitigationActionsTaskHeaders extends SpeakeasyBase {
  *  The target of a mitigation action task. 
 **/
 export class StartDetectMitigationActionsTaskRequestBodyTarget extends SpeakeasyBase {
-  @Metadata({ data: "json, name=behaviorName" })
+  @SpeakeasyMetadata({ data: "json, name=behaviorName" })
   behaviorName?: string;
 
-  @Metadata({ data: "json, name=securityProfileName" })
+  @SpeakeasyMetadata({ data: "json, name=securityProfileName" })
   securityProfileName?: string;
 
-  @Metadata({ data: "json, name=violationIds" })
+  @SpeakeasyMetadata({ data: "json, name=violationIds" })
   violationIds?: string[];
 }
 
@@ -53,69 +54,69 @@ export class StartDetectMitigationActionsTaskRequestBodyTarget extends Speakeasy
  *  Specifies the time period of which violation events occurred between. 
 **/
 export class StartDetectMitigationActionsTaskRequestBodyViolationEventOccurrenceRange extends SpeakeasyBase {
-  @Metadata({ data: "json, name=endTime" })
+  @SpeakeasyMetadata({ data: "json, name=endTime" })
   endTime?: Date;
 
-  @Metadata({ data: "json, name=startTime" })
+  @SpeakeasyMetadata({ data: "json, name=startTime" })
   startTime?: Date;
 }
 
 
 export class StartDetectMitigationActionsTaskRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=actions" })
+  @SpeakeasyMetadata({ data: "json, name=actions" })
   actions: string[];
 
-  @Metadata({ data: "json, name=clientRequestToken" })
+  @SpeakeasyMetadata({ data: "json, name=clientRequestToken" })
   clientRequestToken: string;
 
-  @Metadata({ data: "json, name=includeOnlyActiveViolations" })
+  @SpeakeasyMetadata({ data: "json, name=includeOnlyActiveViolations" })
   includeOnlyActiveViolations?: boolean;
 
-  @Metadata({ data: "json, name=includeSuppressedAlerts" })
+  @SpeakeasyMetadata({ data: "json, name=includeSuppressedAlerts" })
   includeSuppressedAlerts?: boolean;
 
-  @Metadata({ data: "json, name=target" })
+  @SpeakeasyMetadata({ data: "json, name=target" })
   target: StartDetectMitigationActionsTaskRequestBodyTarget;
 
-  @Metadata({ data: "json, name=violationEventOccurrenceRange" })
+  @SpeakeasyMetadata({ data: "json, name=violationEventOccurrenceRange" })
   violationEventOccurrenceRange?: StartDetectMitigationActionsTaskRequestBodyViolationEventOccurrenceRange;
 }
 
 
 export class StartDetectMitigationActionsTaskRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: StartDetectMitigationActionsTaskPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: StartDetectMitigationActionsTaskHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: StartDetectMitigationActionsTaskRequestBody;
 }
 
 
 export class StartDetectMitigationActionsTaskResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   internalFailureException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidRequestException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   limitExceededException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   startDetectMitigationActionsTaskResponse?: shared.StartDetectMitigationActionsTaskResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   taskAlreadyExistsException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   throttlingException?: any;
 }

@@ -1,47 +1,39 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetDomainPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=name" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=name" })
   name: string;
 }
 
 
 export class GetDomainQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=teamId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=teamId" })
   teamId?: string;
 }
 
 
-export class GetDomainRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: GetDomainPathParams;
-
-  @Metadata()
-  queryParams: GetDomainQueryParams;
-}
-
-
 export class GetDomain200ApplicationJsonDomainAliases extends SpeakeasyBase {
-  @Metadata({ data: "json, name=alias" })
+  @SpeakeasyMetadata({ data: "json, name=alias" })
   alias: string;
 
-  @Metadata({ data: "json, name=created" })
+  @SpeakeasyMetadata({ data: "json, name=created" })
   created: number;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: string;
 }
 
 
 export class GetDomain200ApplicationJsonDomainCerts extends SpeakeasyBase {
-  @Metadata({ data: "json, name=cns" })
+  @SpeakeasyMetadata({ data: "json, name=cns" })
   cns: string[];
 
-  @Metadata({ data: "json, name=created" })
+  @SpeakeasyMetadata({ data: "json, name=created" })
   created: number;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: string;
 }
 
@@ -51,26 +43,26 @@ export class GetDomain200ApplicationJsonDomainCerts extends SpeakeasyBase {
  * Information about who added the domain
 **/
 export class GetDomain200ApplicationJsonDomainCreator extends SpeakeasyBase {
-  @Metadata({ data: "json, name=customerId" })
+  @SpeakeasyMetadata({ data: "json, name=customerId" })
   customerId?: string;
 
-  @Metadata({ data: "json, name=email" })
+  @SpeakeasyMetadata({ data: "json, name=email" })
   email: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: string;
 
-  @Metadata({ data: "json, name=isDomainReseller" })
+  @SpeakeasyMetadata({ data: "json, name=isDomainReseller" })
   isDomainReseller?: boolean;
 
-  @Metadata({ data: "json, name=username" })
+  @SpeakeasyMetadata({ data: "json, name=username" })
   username: string;
 }
 
 export enum GetDomain200ApplicationJsonDomainServiceTypeEnum {
-    ZeitWorld = "zeit.world"
-,    External = "external"
-,    Na = "na"
+    ZeitWorld = "zeit.world",
+    External = "external",
+    Na = "na"
 }
 
 
@@ -79,67 +71,67 @@ export enum GetDomain200ApplicationJsonDomainServiceTypeEnum {
  * The domain information
 **/
 export class GetDomain200ApplicationJsonDomain extends SpeakeasyBase {
-  @Metadata({ data: "json, name=aliases", elemType: operations.GetDomain200ApplicationJsonDomainAliases })
+  @SpeakeasyMetadata({ data: "json, name=aliases", elemType: GetDomain200ApplicationJsonDomainAliases })
   aliases: GetDomain200ApplicationJsonDomainAliases[];
 
-  @Metadata({ data: "json, name=boughtAt" })
+  @SpeakeasyMetadata({ data: "json, name=boughtAt" })
   boughtAt: number;
 
-  @Metadata({ data: "json, name=cdnEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=cdnEnabled" })
   cdnEnabled: boolean;
 
-  @Metadata({ data: "json, name=certs", elemType: operations.GetDomain200ApplicationJsonDomainCerts })
+  @SpeakeasyMetadata({ data: "json, name=certs", elemType: GetDomain200ApplicationJsonDomainCerts })
   certs: GetDomain200ApplicationJsonDomainCerts[];
 
-  @Metadata({ data: "json, name=createdAt" })
+  @SpeakeasyMetadata({ data: "json, name=createdAt" })
   createdAt: number;
 
-  @Metadata({ data: "json, name=creator" })
+  @SpeakeasyMetadata({ data: "json, name=creator" })
   creator: GetDomain200ApplicationJsonDomainCreator;
 
-  @Metadata({ data: "json, name=expiresAt" })
+  @SpeakeasyMetadata({ data: "json, name=expiresAt" })
   expiresAt: number;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: string;
 
-  @Metadata({ data: "json, name=intendedNameservers" })
+  @SpeakeasyMetadata({ data: "json, name=intendedNameservers" })
   intendedNameservers: string[];
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 
-  @Metadata({ data: "json, name=nameservers" })
+  @SpeakeasyMetadata({ data: "json, name=nameservers" })
   nameservers: string[];
 
-  @Metadata({ data: "json, name=nsVerifiedAt" })
+  @SpeakeasyMetadata({ data: "json, name=nsVerifiedAt" })
   nsVerifiedAt: number;
 
-  @Metadata({ data: "json, name=orderedAt" })
+  @SpeakeasyMetadata({ data: "json, name=orderedAt" })
   orderedAt?: number;
 
-  @Metadata({ data: "json, name=serviceType" })
+  @SpeakeasyMetadata({ data: "json, name=serviceType" })
   serviceType: GetDomain200ApplicationJsonDomainServiceTypeEnum;
 
-  @Metadata({ data: "json, name=suffix" })
+  @SpeakeasyMetadata({ data: "json, name=suffix" })
   suffix: boolean;
 
-  @Metadata({ data: "json, name=transferredAt" })
+  @SpeakeasyMetadata({ data: "json, name=transferredAt" })
   transferredAt?: number;
 
-  @Metadata({ data: "json, name=txtVerifiedAt" })
+  @SpeakeasyMetadata({ data: "json, name=txtVerifiedAt" })
   txtVerifiedAt: number;
 
-  @Metadata({ data: "json, name=verificationRecord" })
+  @SpeakeasyMetadata({ data: "json, name=verificationRecord" })
   verificationRecord: string;
 
-  @Metadata({ data: "json, name=verified" })
+  @SpeakeasyMetadata({ data: "json, name=verified" })
   verified: boolean;
 }
 
 
 export class GetDomain200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=domain" })
+  @SpeakeasyMetadata({ data: "json, name=domain" })
   domain: GetDomain200ApplicationJsonDomain;
 }
 
@@ -149,33 +141,42 @@ export enum GetDomain404ApplicationJsonErrorCodeEnum {
 
 
 export class GetDomain404ApplicationJsonError extends SpeakeasyBase {
-  @Metadata({ data: "json, name=code" })
+  @SpeakeasyMetadata({ data: "json, name=code" })
   code: GetDomain404ApplicationJsonErrorCodeEnum;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 }
 
 
 export class GetDomain404ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=error" })
+  @SpeakeasyMetadata({ data: "json, name=error" })
   error: GetDomain404ApplicationJsonError;
 }
 
 
+export class GetDomainRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: GetDomainPathParams;
+
+  @SpeakeasyMetadata()
+  queryParams: GetDomainQueryParams;
+}
+
+
 export class GetDomainResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getDomain200ApplicationJsonObject?: GetDomain200ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getDomain404ApplicationJsonObject?: GetDomain404ApplicationJson;
 }

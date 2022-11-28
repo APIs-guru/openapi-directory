@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Runtime } from "./runtime";
+
 
 
 // ListRuntimesResponse
@@ -8,12 +8,12 @@ import { Runtime } from "./runtime";
  * Response for listing Managed Notebook Runtimes.
 **/
 export class ListRuntimesResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 
-  @Metadata({ data: "json, name=runtimes", elemType: shared.Runtime })
+  @SpeakeasyMetadata({ data: "json, name=runtimes", elemType: Runtime })
   runtimes?: Runtime[];
 
-  @Metadata({ data: "json, name=unreachable" })
+  @SpeakeasyMetadata({ data: "json, name=unreachable" })
   unreachable?: string[];
 }

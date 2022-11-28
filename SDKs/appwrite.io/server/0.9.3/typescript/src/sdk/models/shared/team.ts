@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Team
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Team
 **/
 export class Team extends SpeakeasyBase {
-  @Metadata({ data: "json, name=$id" })
+  @SpeakeasyMetadata({ data: "json, name=$id" })
   dollarId: string;
 
-  @Metadata({ data: "json, name=dateCreated" })
+  @SpeakeasyMetadata({ data: "json, name=dateCreated" })
   dateCreated: number;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 
-  @Metadata({ data: "json, name=sum" })
+  @SpeakeasyMetadata({ data: "json, name=sum" })
   sum: number;
 }

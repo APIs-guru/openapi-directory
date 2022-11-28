@@ -1,19 +1,20 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class UpdateServerRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=BackupRetentionCount" })
+  @SpeakeasyMetadata({ data: "json, name=BackupRetentionCount" })
   backupRetentionCount?: number;
 
-  @Metadata({ data: "json, name=DisableAutomatedBackup" })
+  @SpeakeasyMetadata({ data: "json, name=DisableAutomatedBackup" })
   disableAutomatedBackup?: boolean;
 
-  @Metadata({ data: "json, name=PreferredBackupWindow" })
+  @SpeakeasyMetadata({ data: "json, name=PreferredBackupWindow" })
   preferredBackupWindow?: string;
 
-  @Metadata({ data: "json, name=PreferredMaintenanceWindow" })
+  @SpeakeasyMetadata({ data: "json, name=PreferredMaintenanceWindow" })
   preferredMaintenanceWindow?: string;
 
-  @Metadata({ data: "json, name=ServerName" })
+  @SpeakeasyMetadata({ data: "json, name=ServerName" })
   serverName: string;
 }

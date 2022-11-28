@@ -1,21 +1,22 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum CallDirectionEnum {
-    Inbound = "INBOUND"
-,    Outbound = "OUTBOUND"
+    Inbound = "INBOUND",
+    Outbound = "OUTBOUND"
 }
 
 export enum CallStateEnum {
-    Initializing = "INITIALIZING"
-,    Ringing = "RINGING"
-,    Active = "ACTIVE"
-,    Held = "HELD"
-,    RemoteHeld = "REMOTE_HELD"
-,    Detached = "DETACHED"
-,    Rejected = "REJECTED"
-,    Cancelled = "CANCELLED"
-,    Answered = "ANSWERED"
-,    Missed = "MISSED"
+    Initializing = "INITIALIZING",
+    Ringing = "RINGING",
+    Active = "ACTIVE",
+    Held = "HELD",
+    RemoteHeld = "REMOTE_HELD",
+    Detached = "DETACHED",
+    Rejected = "REJECTED",
+    Cancelled = "CANCELLED",
+    Answered = "ANSWERED",
+    Missed = "MISSED"
 }
 
 export enum CallTypeEnum {
@@ -24,45 +25,45 @@ export enum CallTypeEnum {
 
 
 export class Call extends SpeakeasyBase {
-  @Metadata({ data: "json, name=accountId" })
+  @SpeakeasyMetadata({ data: "json, name=accountId" })
   accountId: number;
 
-  @Metadata({ data: "json, name=answerTime" })
+  @SpeakeasyMetadata({ data: "json, name=answerTime" })
   answerTime?: Date;
 
-  @Metadata({ data: "json, name=callerId" })
+  @SpeakeasyMetadata({ data: "json, name=callerId" })
   callerId?: string;
 
-  @Metadata({ data: "json, name=direction" })
+  @SpeakeasyMetadata({ data: "json, name=direction" })
   direction: CallDirectionEnum;
 
-  @Metadata({ data: "json, name=duration" })
+  @SpeakeasyMetadata({ data: "json, name=duration" })
   duration: number;
 
-  @Metadata({ data: "json, name=endTime" })
+  @SpeakeasyMetadata({ data: "json, name=endTime" })
   endTime?: Date;
 
-  @Metadata({ data: "json, name=externalId" })
+  @SpeakeasyMetadata({ data: "json, name=externalId" })
   externalId?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: number;
 
-  @Metadata({ data: "json, name=phoneNumber" })
+  @SpeakeasyMetadata({ data: "json, name=phoneNumber" })
   phoneNumber: string;
 
-  @Metadata({ data: "json, name=startTime" })
+  @SpeakeasyMetadata({ data: "json, name=startTime" })
   startTime: Date;
 
-  @Metadata({ data: "json, name=state" })
+  @SpeakeasyMetadata({ data: "json, name=state" })
   state: CallStateEnum;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type: CallTypeEnum;
 
-  @Metadata({ data: "json, name=uciId" })
+  @SpeakeasyMetadata({ data: "json, name=uciId" })
   uciId: number;
 
-  @Metadata({ data: "json, name=userId" })
+  @SpeakeasyMetadata({ data: "json, name=userId" })
   userId: number;
 }

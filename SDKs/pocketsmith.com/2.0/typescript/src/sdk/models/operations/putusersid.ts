@@ -1,56 +1,57 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class PutUsersIdPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" })
   id: number;
 }
 
 
 export class PutUsersIdRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=always_show_base_currency" })
+  @SpeakeasyMetadata({ data: "json, name=always_show_base_currency" })
   alwaysShowBaseCurrency?: boolean;
 
-  @Metadata({ data: "json, name=base_currency_code" })
+  @SpeakeasyMetadata({ data: "json, name=base_currency_code" })
   baseCurrencyCode?: string;
 
-  @Metadata({ data: "json, name=beta_user" })
+  @SpeakeasyMetadata({ data: "json, name=beta_user" })
   betaUser?: boolean;
 
-  @Metadata({ data: "json, name=email" })
+  @SpeakeasyMetadata({ data: "json, name=email" })
   email?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=time_zone" })
+  @SpeakeasyMetadata({ data: "json, name=time_zone" })
   timeZone?: string;
 
-  @Metadata({ data: "json, name=week_start_day" })
+  @SpeakeasyMetadata({ data: "json, name=week_start_day" })
   weekStartDay?: number;
 }
 
 
 export class PutUsersIdRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: PutUsersIdPathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request?: PutUsersIdRequestBody;
 }
 
 
 export class PutUsersIdResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   error?: shared.Error;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   user?: shared.User;
 }

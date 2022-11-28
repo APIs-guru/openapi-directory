@@ -8,6 +8,8 @@ const (
 	GoogleCloudApigeeV1TargetServerProtocolEnumGrpc                GoogleCloudApigeeV1TargetServerProtocolEnum = "GRPC"
 )
 
+// GoogleCloudApigeeV1TargetServer
+// TargetServer configuration. TargetServers are used to decouple a proxy's TargetEndpoint HTTPTargetConnections from concrete URLs for backend services.
 type GoogleCloudApigeeV1TargetServer struct {
 	Description *string                                      `json:"description,omitempty"`
 	Host        *string                                      `json:"host,omitempty"`

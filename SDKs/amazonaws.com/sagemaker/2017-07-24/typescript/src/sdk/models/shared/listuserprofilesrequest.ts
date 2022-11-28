@@ -1,24 +1,25 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { UserProfileSortKeyEnum } from "./userprofilesortkeyenum";
 import { SortOrderEnum } from "./sortorderenum";
 
 
+
 export class ListUserProfilesRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DomainIdEquals" })
+  @SpeakeasyMetadata({ data: "json, name=DomainIdEquals" })
   domainIdEquals?: string;
 
-  @Metadata({ data: "json, name=MaxResults" })
+  @SpeakeasyMetadata({ data: "json, name=MaxResults" })
   maxResults?: number;
 
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=SortBy" })
+  @SpeakeasyMetadata({ data: "json, name=SortBy" })
   sortBy?: UserProfileSortKeyEnum;
 
-  @Metadata({ data: "json, name=SortOrder" })
+  @SpeakeasyMetadata({ data: "json, name=SortOrder" })
   sortOrder?: SortOrderEnum;
 
-  @Metadata({ data: "json, name=UserProfileNameContains" })
+  @SpeakeasyMetadata({ data: "json, name=UserProfileNameContains" })
   userProfileNameContains?: string;
 }

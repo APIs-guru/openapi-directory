@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { OpsCenterIntegration } from "./opscenterintegration";
 /**
  *  Information about the integration of DevOps Guru with another AWS service, such as AWS Systems Manager.

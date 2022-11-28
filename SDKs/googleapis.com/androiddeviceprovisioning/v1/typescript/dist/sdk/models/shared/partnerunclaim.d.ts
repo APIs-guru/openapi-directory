@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { DeviceIdentifier } from "./deviceidentifier";
 export declare enum PartnerUnclaimSectionTypeEnum {
     SectionTypeUnspecified = "SECTION_TYPE_UNSPECIFIED",

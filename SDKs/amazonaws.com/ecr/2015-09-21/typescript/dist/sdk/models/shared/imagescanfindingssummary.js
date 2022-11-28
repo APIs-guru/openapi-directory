@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // ImageScanFindingsSummary
 /**
  * A summary of the last completed image scan.
@@ -33,15 +33,15 @@ var ImageScanFindingsSummary = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=findingSeverityCounts" }),
+        SpeakeasyMetadata({ data: "json, name=findingSeverityCounts" }),
         __metadata("design:type", Map)
     ], ImageScanFindingsSummary.prototype, "findingSeverityCounts", void 0);
     __decorate([
-        Metadata({ data: "json, name=imageScanCompletedAt" }),
+        SpeakeasyMetadata({ data: "json, name=imageScanCompletedAt" }),
         __metadata("design:type", Date)
     ], ImageScanFindingsSummary.prototype, "imageScanCompletedAt", void 0);
     __decorate([
-        Metadata({ data: "json, name=vulnerabilitySourceUpdatedAt" }),
+        SpeakeasyMetadata({ data: "json, name=vulnerabilitySourceUpdatedAt" }),
         __metadata("design:type", Date)
     ], ImageScanFindingsSummary.prototype, "vulnerabilitySourceUpdatedAt", void 0);
     return ImageScanFindingsSummary;

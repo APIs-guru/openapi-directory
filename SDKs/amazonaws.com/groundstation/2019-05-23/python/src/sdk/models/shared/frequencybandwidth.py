@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import bandwidthunits_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class FrequencyBandwidth:
-    units: bandwidthunits_enum.BandwidthUnitsEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'units' }})
-    value: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'value' }})
+    r"""FrequencyBandwidth
+    Object that describes the frequency bandwidth. 
+    """
+    
+    units: BandwidthUnitsEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('units') }})
+    value: float = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('value') }})
     

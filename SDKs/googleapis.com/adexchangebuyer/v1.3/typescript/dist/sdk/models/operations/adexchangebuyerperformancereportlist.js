@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var AdexchangebuyerPerformanceReportListQueryParams = /** @class */ (function (_super) {
     __extends(AdexchangebuyerPerformanceReportListQueryParams, _super);
@@ -30,51 +30,51 @@ var AdexchangebuyerPerformanceReportListQueryParams = /** @class */ (function (_
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=accountId" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=accountId" }),
         __metadata("design:type", String)
     ], AdexchangebuyerPerformanceReportListQueryParams.prototype, "accountId", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=alt" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=alt" }),
         __metadata("design:type", String)
     ], AdexchangebuyerPerformanceReportListQueryParams.prototype, "alt", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=endDateTime" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=endDateTime" }),
         __metadata("design:type", String)
     ], AdexchangebuyerPerformanceReportListQueryParams.prototype, "endDateTime", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=fields" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=fields" }),
         __metadata("design:type", String)
     ], AdexchangebuyerPerformanceReportListQueryParams.prototype, "fields", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=key" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=key" }),
         __metadata("design:type", String)
     ], AdexchangebuyerPerformanceReportListQueryParams.prototype, "key", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=maxResults" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=maxResults" }),
         __metadata("design:type", Number)
     ], AdexchangebuyerPerformanceReportListQueryParams.prototype, "maxResults", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=oauth_token" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=oauth_token" }),
         __metadata("design:type", String)
     ], AdexchangebuyerPerformanceReportListQueryParams.prototype, "oauthToken", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=pageToken" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=pageToken" }),
         __metadata("design:type", String)
     ], AdexchangebuyerPerformanceReportListQueryParams.prototype, "pageToken", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=prettyPrint" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=prettyPrint" }),
         __metadata("design:type", Boolean)
     ], AdexchangebuyerPerformanceReportListQueryParams.prototype, "prettyPrint", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=quotaUser" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=quotaUser" }),
         __metadata("design:type", String)
     ], AdexchangebuyerPerformanceReportListQueryParams.prototype, "quotaUser", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=startDateTime" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=startDateTime" }),
         __metadata("design:type", String)
     ], AdexchangebuyerPerformanceReportListQueryParams.prototype, "startDateTime", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=userIp" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=userIp" }),
         __metadata("design:type", String)
     ], AdexchangebuyerPerformanceReportListQueryParams.prototype, "userIp", void 0);
     return AdexchangebuyerPerformanceReportListQueryParams;
@@ -86,11 +86,11 @@ var AdexchangebuyerPerformanceReportListSecurity = /** @class */ (function (_sup
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2)
     ], AdexchangebuyerPerformanceReportListSecurity.prototype, "oauth2", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2c)
     ], AdexchangebuyerPerformanceReportListSecurity.prototype, "oauth2c", void 0);
     return AdexchangebuyerPerformanceReportListSecurity;
@@ -102,11 +102,11 @@ var AdexchangebuyerPerformanceReportListRequest = /** @class */ (function (_supe
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", AdexchangebuyerPerformanceReportListQueryParams)
     ], AdexchangebuyerPerformanceReportListRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", AdexchangebuyerPerformanceReportListSecurity)
     ], AdexchangebuyerPerformanceReportListRequest.prototype, "security", void 0);
     return AdexchangebuyerPerformanceReportListRequest;
@@ -118,15 +118,15 @@ var AdexchangebuyerPerformanceReportListResponse = /** @class */ (function (_sup
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], AdexchangebuyerPerformanceReportListResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.PerformanceReportList)
     ], AdexchangebuyerPerformanceReportListResponse.prototype, "performanceReportList", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], AdexchangebuyerPerformanceReportListResponse.prototype, "statusCode", void 0);
     return AdexchangebuyerPerformanceReportListResponse;

@@ -10,6 +10,8 @@ const (
 	GooglePrivacyDlpV2StoredInfoTypeVersionStateEnumInvalid                        GooglePrivacyDlpV2StoredInfoTypeVersionStateEnum = "INVALID"
 )
 
+// GooglePrivacyDlpV2StoredInfoTypeVersion
+// Version of a StoredInfoType, including the configuration used to build it, create timestamp, and current state.
 type GooglePrivacyDlpV2StoredInfoTypeVersion struct {
 	Config     *GooglePrivacyDlpV2StoredInfoTypeConfig           `json:"config,omitempty"`
 	CreateTime *string                                           `json:"createTime,omitempty"`

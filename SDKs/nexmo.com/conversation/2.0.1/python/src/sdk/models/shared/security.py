@@ -4,10 +4,10 @@ from dataclasses import dataclass, field
 
 @dataclass
 class SchemeBearerAuth:
-    authorization: str = field(default=None, metadata={'security': { 'field_name': 'Authorization' }})
+    authorization: str = field(metadata={'security': { 'field_name': 'Authorization' }})
     
 
 @dataclass
 class Security:
-    bearer_auth: SchemeBearerAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer' }})
+    bearer_auth: SchemeBearerAuth = field(metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer' }})
     

@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SensitiveDataDetections } from "./sensitivedatadetections";
+
 
 
 // SensitiveDataResult
@@ -8,12 +8,12 @@ import { SensitiveDataDetections } from "./sensitivedatadetections";
  * Contains a detected instance of sensitive data that are based on built-in identifiers.
 **/
 export class SensitiveDataResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Category" })
+  @SpeakeasyMetadata({ data: "json, name=Category" })
   category?: string;
 
-  @Metadata({ data: "json, name=Detections", elemType: shared.SensitiveDataDetections })
+  @SpeakeasyMetadata({ data: "json, name=Detections", elemType: SensitiveDataDetections })
   detections?: SensitiveDataDetections[];
 
-  @Metadata({ data: "json, name=TotalCount" })
+  @SpeakeasyMetadata({ data: "json, name=TotalCount" })
   totalCount?: number;
 }

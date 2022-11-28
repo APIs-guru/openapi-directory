@@ -1,19 +1,19 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Filter } from "./filter";
 import { SortOrderTypeEnum } from "./sortordertypeenum";
 
 
+
 export class ListSecretsRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Filters", elemType: shared.Filter })
+  @SpeakeasyMetadata({ data: "json, name=Filters", elemType: Filter })
   filters?: Filter[];
 
-  @Metadata({ data: "json, name=MaxResults" })
+  @SpeakeasyMetadata({ data: "json, name=MaxResults" })
   maxResults?: number;
 
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=SortOrder" })
+  @SpeakeasyMetadata({ data: "json, name=SortOrder" })
   sortOrder?: SortOrderTypeEnum;
 }

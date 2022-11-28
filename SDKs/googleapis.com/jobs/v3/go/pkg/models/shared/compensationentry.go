@@ -27,6 +27,8 @@ const (
 	CompensationEntryUnitEnumOtherCompensationUnit       CompensationEntryUnitEnum = "OTHER_COMPENSATION_UNIT"
 )
 
+// CompensationEntry
+// A compensation entry that represents one component of compensation, such as base pay, bonus, or other compensation type. Annualization: One compensation entry can be annualized if - it contains valid amount or range. - and its expected_units_per_year is set or can be derived. Its annualized range is determined as (amount or range) times expected_units_per_year.
 type CompensationEntry struct {
 	Amount               *Money                     `json:"amount,omitempty"`
 	Description          *string                    `json:"description,omitempty"`

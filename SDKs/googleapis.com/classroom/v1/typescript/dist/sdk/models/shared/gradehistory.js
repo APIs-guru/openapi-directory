@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var GradeHistoryGradeChangeTypeEnum;
 (function (GradeHistoryGradeChangeTypeEnum) {
     GradeHistoryGradeChangeTypeEnum["UnknownGradeChangeType"] = "UNKNOWN_GRADE_CHANGE_TYPE";
@@ -40,23 +40,23 @@ var GradeHistory = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=actorUserId" }),
+        SpeakeasyMetadata({ data: "json, name=actorUserId" }),
         __metadata("design:type", String)
     ], GradeHistory.prototype, "actorUserId", void 0);
     __decorate([
-        Metadata({ data: "json, name=gradeChangeType" }),
+        SpeakeasyMetadata({ data: "json, name=gradeChangeType" }),
         __metadata("design:type", String)
     ], GradeHistory.prototype, "gradeChangeType", void 0);
     __decorate([
-        Metadata({ data: "json, name=gradeTimestamp" }),
+        SpeakeasyMetadata({ data: "json, name=gradeTimestamp" }),
         __metadata("design:type", String)
     ], GradeHistory.prototype, "gradeTimestamp", void 0);
     __decorate([
-        Metadata({ data: "json, name=maxPoints" }),
+        SpeakeasyMetadata({ data: "json, name=maxPoints" }),
         __metadata("design:type", Number)
     ], GradeHistory.prototype, "maxPoints", void 0);
     __decorate([
-        Metadata({ data: "json, name=pointsEarned" }),
+        SpeakeasyMetadata({ data: "json, name=pointsEarned" }),
         __metadata("design:type", Number)
     ], GradeHistory.prototype, "pointsEarned", void 0);
     return GradeHistory;

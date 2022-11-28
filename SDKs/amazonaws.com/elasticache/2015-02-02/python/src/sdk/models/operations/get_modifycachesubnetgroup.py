@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 
 class GetModifyCacheSubnetGroupActionEnum(str, Enum):
     MODIFY_CACHE_SUBNET_GROUP = "ModifyCacheSubnetGroup"
@@ -10,11 +14,11 @@ class GetModifyCacheSubnetGroupVersionEnum(str, Enum):
 
 @dataclass
 class GetModifyCacheSubnetGroupQueryParams:
-    action: GetModifyCacheSubnetGroupActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetModifyCacheSubnetGroupActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    cache_subnet_group_name: str = field(metadata={'query_param': { 'field_name': 'CacheSubnetGroupName', 'style': 'form', 'explode': True }})
+    version: GetModifyCacheSubnetGroupVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     cache_subnet_group_description: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'CacheSubnetGroupDescription', 'style': 'form', 'explode': True }})
-    cache_subnet_group_name: str = field(default=None, metadata={'query_param': { 'field_name': 'CacheSubnetGroupName', 'style': 'form', 'explode': True }})
     subnet_ids: Optional[List[str]] = field(default=None, metadata={'query_param': { 'field_name': 'SubnetIds', 'style': 'form', 'explode': True }})
-    version: GetModifyCacheSubnetGroupVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -30,13 +34,13 @@ class GetModifyCacheSubnetGroupHeaders:
 
 @dataclass
 class GetModifyCacheSubnetGroupRequest:
-    query_params: GetModifyCacheSubnetGroupQueryParams = field(default=None)
-    headers: GetModifyCacheSubnetGroupHeaders = field(default=None)
+    headers: GetModifyCacheSubnetGroupHeaders = field()
+    query_params: GetModifyCacheSubnetGroupQueryParams = field()
     
 
 @dataclass
 class GetModifyCacheSubnetGroupResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

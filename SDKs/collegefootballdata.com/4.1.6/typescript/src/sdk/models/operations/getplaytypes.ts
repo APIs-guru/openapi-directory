@@ -1,14 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetPlayTypesResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata({ elemType: shared.PlayType })
+  @SpeakeasyMetadata({ elemType: shared.PlayType })
   playTypes?: shared.PlayType[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

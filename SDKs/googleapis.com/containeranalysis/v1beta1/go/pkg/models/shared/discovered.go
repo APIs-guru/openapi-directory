@@ -20,6 +20,8 @@ const (
 	DiscoveredContinuousAnalysisEnumInactive                      DiscoveredContinuousAnalysisEnum = "INACTIVE"
 )
 
+// Discovered
+// Provides information about the analysis status of a discovered resource.
 type Discovered struct {
 	AnalysisCompleted   *AnalysisCompleted                `json:"analysisCompleted,omitempty"`
 	AnalysisError       []Status                          `json:"analysisError,omitempty"`

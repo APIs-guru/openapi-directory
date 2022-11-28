@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { StandardResourceMetadata } from "./standardresourcemetadata";
+
 
 
 // SearchAllResourcesResponse
@@ -8,9 +8,9 @@ import { StandardResourceMetadata } from "./standardresourcemetadata";
  * Search all resources response.
 **/
 export class SearchAllResourcesResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 
-  @Metadata({ data: "json, name=results", elemType: shared.StandardResourceMetadata })
+  @SpeakeasyMetadata({ data: "json, name=results", elemType: StandardResourceMetadata })
   results?: StandardResourceMetadata[];
 }

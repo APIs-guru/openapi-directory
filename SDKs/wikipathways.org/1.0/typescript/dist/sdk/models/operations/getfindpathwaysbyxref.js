@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var GetFindPathwaysByXrefFormatEnum;
 (function (GetFindPathwaysByXrefFormatEnum) {
     GetFindPathwaysByXrefFormatEnum["Json"] = "json";
@@ -38,15 +38,15 @@ var GetFindPathwaysByXrefQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=false;name=codes" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=codes" }),
         __metadata("design:type", Array)
     ], GetFindPathwaysByXrefQueryParams.prototype, "codes", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=format" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=format" }),
         __metadata("design:type", String)
     ], GetFindPathwaysByXrefQueryParams.prototype, "format", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=false;name=ids" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=ids" }),
         __metadata("design:type", Array)
     ], GetFindPathwaysByXrefQueryParams.prototype, "ids", void 0);
     return GetFindPathwaysByXrefQueryParams;
@@ -58,7 +58,7 @@ var GetFindPathwaysByXrefRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetFindPathwaysByXrefQueryParams)
     ], GetFindPathwaysByXrefRequest.prototype, "queryParams", void 0);
     return GetFindPathwaysByXrefRequest;
@@ -70,11 +70,11 @@ var GetFindPathwaysByXrefResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetFindPathwaysByXrefResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetFindPathwaysByXrefResponse.prototype, "statusCode", void 0);
     return GetFindPathwaysByXrefResponse;

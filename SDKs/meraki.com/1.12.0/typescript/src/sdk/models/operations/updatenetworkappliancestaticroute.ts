@@ -1,64 +1,65 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class UpdateNetworkApplianceStaticRoutePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=networkId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=networkId" })
   networkId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=staticRouteId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=staticRouteId" })
   staticRouteId: string;
 }
 
 
 export class UpdateNetworkApplianceStaticRouteRequestBodyReservedIpRanges extends SpeakeasyBase {
-  @Metadata({ data: "json, name=comment" })
+  @SpeakeasyMetadata({ data: "json, name=comment" })
   comment: string;
 
-  @Metadata({ data: "json, name=end" })
+  @SpeakeasyMetadata({ data: "json, name=end" })
   end: string;
 
-  @Metadata({ data: "json, name=start" })
+  @SpeakeasyMetadata({ data: "json, name=start" })
   start: string;
 }
 
 
 export class UpdateNetworkApplianceStaticRouteRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=enabled" })
+  @SpeakeasyMetadata({ data: "json, name=enabled" })
   enabled?: boolean;
 
-  @Metadata({ data: "json, name=fixedIpAssignments" })
+  @SpeakeasyMetadata({ data: "json, name=fixedIpAssignments" })
   fixedIpAssignments?: Map<string, any>;
 
-  @Metadata({ data: "json, name=gatewayIp" })
+  @SpeakeasyMetadata({ data: "json, name=gatewayIp" })
   gatewayIp?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=reservedIpRanges", elemType: operations.UpdateNetworkApplianceStaticRouteRequestBodyReservedIpRanges })
+  @SpeakeasyMetadata({ data: "json, name=reservedIpRanges", elemType: UpdateNetworkApplianceStaticRouteRequestBodyReservedIpRanges })
   reservedIpRanges?: UpdateNetworkApplianceStaticRouteRequestBodyReservedIpRanges[];
 
-  @Metadata({ data: "json, name=subnet" })
+  @SpeakeasyMetadata({ data: "json, name=subnet" })
   subnet?: string;
 }
 
 
 export class UpdateNetworkApplianceStaticRouteRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: UpdateNetworkApplianceStaticRoutePathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request?: UpdateNetworkApplianceStaticRouteRequestBody;
 }
 
 
 export class UpdateNetworkApplianceStaticRouteResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   updateNetworkApplianceStaticRoute200ApplicationJsonObject?: Map<string, any>;
 }

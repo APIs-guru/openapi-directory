@@ -22,27 +22,27 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { MetricTransformation } from "./metrictransformation";
 var PutMetricFilterRequest = /** @class */ (function (_super) {
     __extends(PutMetricFilterRequest, _super);
     function PutMetricFilterRequest() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=filterName" }),
+        SpeakeasyMetadata({ data: "json, name=filterName" }),
         __metadata("design:type", String)
     ], PutMetricFilterRequest.prototype, "filterName", void 0);
     __decorate([
-        Metadata({ data: "json, name=filterPattern" }),
+        SpeakeasyMetadata({ data: "json, name=filterPattern" }),
         __metadata("design:type", String)
     ], PutMetricFilterRequest.prototype, "filterPattern", void 0);
     __decorate([
-        Metadata({ data: "json, name=logGroupName" }),
+        SpeakeasyMetadata({ data: "json, name=logGroupName" }),
         __metadata("design:type", String)
     ], PutMetricFilterRequest.prototype, "logGroupName", void 0);
     __decorate([
-        Metadata({ data: "json, name=metricTransformations", elemType: shared.MetricTransformation }),
+        SpeakeasyMetadata({ data: "json, name=metricTransformations", elemType: MetricTransformation }),
         __metadata("design:type", Array)
     ], PutMetricFilterRequest.prototype, "metricTransformations", void 0);
     return PutMetricFilterRequest;

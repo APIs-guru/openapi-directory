@@ -22,34 +22,34 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var AddressInputModel = /** @class */ (function (_super) {
     __extends(AddressInputModel, _super);
     function AddressInputModel() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=addressLine1" }),
+        SpeakeasyMetadata({ data: "json, name=addressLine1" }),
         __metadata("design:type", String)
     ], AddressInputModel.prototype, "addressLine1", void 0);
     __decorate([
-        Metadata({ data: "json, name=addressLine2" }),
+        SpeakeasyMetadata({ data: "json, name=addressLine2" }),
         __metadata("design:type", String)
     ], AddressInputModel.prototype, "addressLine2", void 0);
     __decorate([
-        Metadata({ data: "json, name=city" }),
+        SpeakeasyMetadata({ data: "json, name=city" }),
         __metadata("design:type", String)
     ], AddressInputModel.prototype, "city", void 0);
     __decorate([
-        Metadata({ data: "json, name=country" }),
+        SpeakeasyMetadata({ data: "json, name=country" }),
         __metadata("design:type", String)
     ], AddressInputModel.prototype, "country", void 0);
     __decorate([
-        Metadata({ data: "json, name=postalCode" }),
+        SpeakeasyMetadata({ data: "json, name=postalCode" }),
         __metadata("design:type", String)
     ], AddressInputModel.prototype, "postalCode", void 0);
     __decorate([
-        Metadata({ data: "json, name=state" }),
+        SpeakeasyMetadata({ data: "json, name=state" }),
         __metadata("design:type", String)
     ], AddressInputModel.prototype, "state", void 0);
     return AddressInputModel;

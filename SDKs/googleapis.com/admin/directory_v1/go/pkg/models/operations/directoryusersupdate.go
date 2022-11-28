@@ -30,7 +30,7 @@ type DirectoryUsersUpdateSecurity struct {
 type DirectoryUsersUpdateRequest struct {
 	PathParams  DirectoryUsersUpdatePathParams
 	QueryParams DirectoryUsersUpdateQueryParams
-	Request     *shared.User `request:"mediaType=application/json"`
+	Request     *shared.UserInput `request:"mediaType=application/json"`
 	Security    DirectoryUsersUpdateSecurity
 }
 

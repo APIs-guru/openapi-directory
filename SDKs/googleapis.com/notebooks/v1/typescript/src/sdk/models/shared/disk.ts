@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GuestOsFeature } from "./guestosfeature";
+
 
 
 // Disk
@@ -8,39 +8,39 @@ import { GuestOsFeature } from "./guestosfeature";
  * An instance-attached disk resource.
 **/
 export class Disk extends SpeakeasyBase {
-  @Metadata({ data: "json, name=autoDelete" })
+  @SpeakeasyMetadata({ data: "json, name=autoDelete" })
   autoDelete?: boolean;
 
-  @Metadata({ data: "json, name=boot" })
+  @SpeakeasyMetadata({ data: "json, name=boot" })
   boot?: boolean;
 
-  @Metadata({ data: "json, name=deviceName" })
+  @SpeakeasyMetadata({ data: "json, name=deviceName" })
   deviceName?: string;
 
-  @Metadata({ data: "json, name=diskSizeGb" })
+  @SpeakeasyMetadata({ data: "json, name=diskSizeGb" })
   diskSizeGb?: string;
 
-  @Metadata({ data: "json, name=guestOsFeatures", elemType: shared.GuestOsFeature })
+  @SpeakeasyMetadata({ data: "json, name=guestOsFeatures", elemType: GuestOsFeature })
   guestOsFeatures?: GuestOsFeature[];
 
-  @Metadata({ data: "json, name=index" })
+  @SpeakeasyMetadata({ data: "json, name=index" })
   index?: string;
 
-  @Metadata({ data: "json, name=interface" })
+  @SpeakeasyMetadata({ data: "json, name=interface" })
   interface?: string;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=licenses" })
+  @SpeakeasyMetadata({ data: "json, name=licenses" })
   licenses?: string[];
 
-  @Metadata({ data: "json, name=mode" })
+  @SpeakeasyMetadata({ data: "json, name=mode" })
   mode?: string;
 
-  @Metadata({ data: "json, name=source" })
+  @SpeakeasyMetadata({ data: "json, name=source" })
   source?: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: string;
 }

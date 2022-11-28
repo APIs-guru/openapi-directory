@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // GoogleFirebaseAppcheckV1ExchangeDeviceCheckTokenRequest
 /**
  * Request message for the ExchangeDeviceCheckToken method.
@@ -33,7 +33,7 @@ var GoogleFirebaseAppcheckV1ExchangeDeviceCheckTokenRequest = /** @class */ (fun
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=deviceToken" }),
+        SpeakeasyMetadata({ data: "json, name=deviceToken" }),
         __metadata("design:type", String)
     ], GoogleFirebaseAppcheckV1ExchangeDeviceCheckTokenRequest.prototype, "deviceToken", void 0);
     return GoogleFirebaseAppcheckV1ExchangeDeviceCheckTokenRequest;

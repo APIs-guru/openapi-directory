@@ -1,12 +1,18 @@
 from dataclasses import dataclass, field
-from typing import Enum,List
+from typing import List
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import metricsname_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class EnableEnhancedMonitoringInput:
-    shard_level_metrics: List[metricsname_enum.MetricsNameEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ShardLevelMetrics' }})
-    stream_name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'StreamName' }})
+    r"""EnableEnhancedMonitoringInput
+    Represents the input for <a>EnableEnhancedMonitoring</a>.
+    """
+    
+    shard_level_metrics: List[MetricsNameEnum] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('ShardLevelMetrics') }})
+    stream_name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('StreamName') }})
     

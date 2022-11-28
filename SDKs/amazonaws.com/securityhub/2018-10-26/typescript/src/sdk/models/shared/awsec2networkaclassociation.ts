@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AwsEc2NetworkAclAssociation
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * An association between the network ACL and a subnet.
 **/
 export class AwsEc2NetworkAclAssociation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=NetworkAclAssociationId" })
+  @SpeakeasyMetadata({ data: "json, name=NetworkAclAssociationId" })
   networkAclAssociationId?: string;
 
-  @Metadata({ data: "json, name=NetworkAclId" })
+  @SpeakeasyMetadata({ data: "json, name=NetworkAclId" })
   networkAclId?: string;
 
-  @Metadata({ data: "json, name=SubnetId" })
+  @SpeakeasyMetadata({ data: "json, name=SubnetId" })
   subnetId?: string;
 }

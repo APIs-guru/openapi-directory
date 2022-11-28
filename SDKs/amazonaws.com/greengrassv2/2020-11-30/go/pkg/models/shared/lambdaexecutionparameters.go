@@ -1,5 +1,7 @@
 package shared
 
+// LambdaExecutionParameters
+// Contains parameters for a Lambda function that runs on IoT Greengrass.
 type LambdaExecutionParameters struct {
 	EnvironmentVariables     map[string]string                   `json:"environmentVariables,omitempty"`
 	EventSources             []LambdaEventSource                 `json:"eventSources,omitempty"`

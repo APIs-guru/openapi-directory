@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
+
 
 export enum GetUserFollowsPeopleEmbedEnum {
     Person = "person"
@@ -7,24 +8,24 @@ export enum GetUserFollowsPeopleEmbedEnum {
 
 
 export class GetUserFollowsPeopleQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=embed" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=embed" })
   embed?: GetUserFollowsPeopleEmbedEnum;
 }
 
 
 export class GetUserFollowsPeopleRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetUserFollowsPeopleQueryParams;
 }
 
 
 export class GetUserFollowsPeopleResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata({ elemType: shared.PersonFollow })
+  @SpeakeasyMetadata({ elemType: shared.PersonFollow })
   personFollows?: shared.PersonFollow[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

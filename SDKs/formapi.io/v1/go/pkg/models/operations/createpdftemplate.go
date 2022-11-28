@@ -19,11 +19,6 @@ type CreatePdfTemplateSecurity struct {
 	APITokenBasic shared.SchemeAPITokenBasic `security:"scheme,type=http,subtype=basic"`
 }
 
-type CreatePdfTemplateRequest struct {
-	Request  CreatePdfTemplateRequestBody `request:"mediaType=multipart/form-data"`
-	Security CreatePdfTemplateSecurity
-}
-
 type CreatePdfTemplatePendingTemplateExpirationIntervalEnum string
 
 const (
@@ -50,6 +45,11 @@ type CreatePdfTemplatePendingTemplate struct {
 	SlackWebhookURL           string                                                  `json:"slack_webhook_url"`
 	TemplateType              string                                                  `json:"template_type"`
 	WebhookURL                string                                                  `json:"webhook_url"`
+}
+
+type CreatePdfTemplateRequest struct {
+	Request  CreatePdfTemplateRequestBody `request:"mediaType=multipart/form-data"`
+	Security CreatePdfTemplateSecurity
 }
 
 type CreatePdfTemplateResponse struct {

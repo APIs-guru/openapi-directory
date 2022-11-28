@@ -5,24 +5,24 @@ from sdk.models import shared
 
 @dataclass
 class DeleteJournalInstructionTemplatePathParams:
-    journal_instruction_id: str = field(default=None, metadata={'path_param': { 'field_name': 'JournalInstructionId', 'style': 'simple', 'explode': False }})
+    journal_instruction_id: str = field(metadata={'path_param': { 'field_name': 'JournalInstructionId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class DeleteJournalInstructionTemplateHeaders:
-    api_version: str = field(default=None, metadata={'header': { 'field_name': 'Api-Version', 'style': 'simple', 'explode': False }})
-    authorization: str = field(default=None, metadata={'header': { 'field_name': 'Authorization', 'style': 'simple', 'explode': False }})
+    api_version: str = field(metadata={'header': { 'field_name': 'Api-Version', 'style': 'simple', 'explode': False }})
+    authorization: str = field(metadata={'header': { 'field_name': 'Authorization', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class DeleteJournalInstructionTemplateRequest:
-    path_params: DeleteJournalInstructionTemplatePathParams = field(default=None)
-    headers: DeleteJournalInstructionTemplateHeaders = field(default=None)
+    headers: DeleteJournalInstructionTemplateHeaders = field()
+    path_params: DeleteJournalInstructionTemplatePathParams = field()
     
 
 @dataclass
 class DeleteJournalInstructionTemplateResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error_model: Optional[shared.ErrorModel] = field(default=None)
-    status_code: int = field(default=None)
     

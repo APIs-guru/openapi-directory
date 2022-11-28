@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // DynatraceConnectorProfileCredentials
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  *  The connector-specific profile credentials required by Dynatrace. 
 **/
 export class DynatraceConnectorProfileCredentials extends SpeakeasyBase {
-  @Metadata({ data: "json, name=apiToken" })
+  @SpeakeasyMetadata({ data: "json, name=apiToken" })
   apiToken: string;
 }

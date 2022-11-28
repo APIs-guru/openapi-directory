@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GrpcRouteHeaderMatch } from "./grpcrouteheadermatch";
 import { GrpcRouteMethodMatch } from "./grpcroutemethodmatch";
+
 
 
 // GrpcRouteRouteMatch
@@ -9,9 +9,9 @@ import { GrpcRouteMethodMatch } from "./grpcroutemethodmatch";
  * Criteria for matching traffic. A RouteMatch will be considered to match when all supplied fields match.
 **/
 export class GrpcRouteRouteMatch extends SpeakeasyBase {
-  @Metadata({ data: "json, name=headers", elemType: shared.GrpcRouteHeaderMatch })
+  @SpeakeasyMetadata({ data: "json, name=headers", elemType: GrpcRouteHeaderMatch })
   headers?: GrpcRouteHeaderMatch[];
 
-  @Metadata({ data: "json, name=method" })
+  @SpeakeasyMetadata({ data: "json, name=method" })
   method?: GrpcRouteMethodMatch;
 }

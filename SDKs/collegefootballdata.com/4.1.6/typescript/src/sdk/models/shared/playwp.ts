@@ -1,55 +1,56 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class PlayWp extends SpeakeasyBase {
-  @Metadata({ data: "json, name=away" })
+  @SpeakeasyMetadata({ data: "json, name=away" })
   away?: string;
 
-  @Metadata({ data: "json, name=awayId" })
+  @SpeakeasyMetadata({ data: "json, name=awayId" })
   awayId?: number;
 
-  @Metadata({ data: "json, name=awayScore" })
+  @SpeakeasyMetadata({ data: "json, name=awayScore" })
   awayScore?: number;
 
-  @Metadata({ data: "json, name=distance" })
+  @SpeakeasyMetadata({ data: "json, name=distance" })
   distance?: number;
 
-  @Metadata({ data: "json, name=down" })
+  @SpeakeasyMetadata({ data: "json, name=down" })
   down?: number;
 
-  @Metadata({ data: "json, name=gamesId" })
+  @SpeakeasyMetadata({ data: "json, name=gamesId" })
   gamesId?: number;
 
-  @Metadata({ data: "json, name=home" })
+  @SpeakeasyMetadata({ data: "json, name=home" })
   home?: string;
 
-  @Metadata({ data: "json, name=homeBall" })
+  @SpeakeasyMetadata({ data: "json, name=homeBall" })
   homeBall?: boolean;
 
-  @Metadata({ data: "json, name=homeId" })
+  @SpeakeasyMetadata({ data: "json, name=homeId" })
   homeId?: number;
 
-  @Metadata({ data: "json, name=homeScore" })
+  @SpeakeasyMetadata({ data: "json, name=homeScore" })
   homeScore?: number;
 
-  @Metadata({ data: "json, name=homeWinProb" })
+  @SpeakeasyMetadata({ data: "json, name=homeWinProb" })
   homeWinProb?: number;
 
-  @Metadata({ data: "json, name=playId" })
+  @SpeakeasyMetadata({ data: "json, name=playId" })
   playId?: number;
 
-  @Metadata({ data: "json, name=playNumber" })
+  @SpeakeasyMetadata({ data: "json, name=playNumber" })
   playNumber?: number;
 
-  @Metadata({ data: "json, name=playText" })
+  @SpeakeasyMetadata({ data: "json, name=playText" })
   playText?: string;
 
-  @Metadata({ data: "json, name=spread" })
+  @SpeakeasyMetadata({ data: "json, name=spread" })
   spread?: number;
 
-  @Metadata({ data: "json, name=timeRemaining" })
+  @SpeakeasyMetadata({ data: "json, name=timeRemaining" })
   timeRemaining?: number;
 
-  @Metadata({ data: "json, name=yardLine" })
+  @SpeakeasyMetadata({ data: "json, name=yardLine" })
   yardLine?: number;
 }

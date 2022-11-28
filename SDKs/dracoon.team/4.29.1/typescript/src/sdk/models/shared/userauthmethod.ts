@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { KeyValueEntry } from "./keyvalueentry";
+
 
 
 // UserAuthMethod
@@ -8,12 +8,12 @@ import { KeyValueEntry } from "./keyvalueentry";
  * Authentication method
 **/
 export class UserAuthMethod extends SpeakeasyBase {
-  @Metadata({ data: "json, name=authId" })
+  @SpeakeasyMetadata({ data: "json, name=authId" })
   authId: string;
 
-  @Metadata({ data: "json, name=isEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=isEnabled" })
   isEnabled: boolean;
 
-  @Metadata({ data: "json, name=options", elemType: shared.KeyValueEntry })
+  @SpeakeasyMetadata({ data: "json, name=options", elemType: KeyValueEntry })
   options?: KeyValueEntry[];
 }

@@ -1,5 +1,7 @@
 package shared
 
+// TrafficRule
+// Network emulation parameters.
 type TrafficRule struct {
 	Bandwidth              *float32 `json:"bandwidth,omitempty"`
 	Burst                  *float32 `json:"burst,omitempty"`

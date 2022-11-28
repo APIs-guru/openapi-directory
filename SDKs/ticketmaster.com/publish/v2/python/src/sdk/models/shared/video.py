@@ -1,15 +1,19 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import licensinginformation
-from . import source
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class Video:
-    embed_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'embedUrl' }})
-    licensing_information: licensinginformation.LicensingInformation = field(default=None, metadata={'dataclasses_json': { 'field_name': 'licensingInformation' }})
-    source: source.Source = field(default=None, metadata={'dataclasses_json': { 'field_name': 'source' }})
-    url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'url' }})
+    r"""Video
+    This class defines an entitlement data on the Publish API
+    """
+    
+    licensing_information: LicensingInformation = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('licensingInformation') }})
+    source: Source = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('source') }})
+    url: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('url') }})
+    embed_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('embedUrl') }})
     

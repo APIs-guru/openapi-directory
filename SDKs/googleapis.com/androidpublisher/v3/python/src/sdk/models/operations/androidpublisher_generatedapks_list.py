@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class AndroidpublisherGeneratedapksListPathParams:
-    package_name: str = field(default=None, metadata={'path_param': { 'field_name': 'packageName', 'style': 'simple', 'explode': False }})
-    version_code: int = field(default=None, metadata={'path_param': { 'field_name': 'versionCode', 'style': 'simple', 'explode': False }})
+    package_name: str = field(metadata={'path_param': { 'field_name': 'packageName', 'style': 'simple', 'explode': False }})
+    version_code: int = field(metadata={'path_param': { 'field_name': 'versionCode', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,20 +27,20 @@ class AndroidpublisherGeneratedapksListQueryParams:
 
 @dataclass
 class AndroidpublisherGeneratedapksListSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class AndroidpublisherGeneratedapksListRequest:
-    path_params: AndroidpublisherGeneratedapksListPathParams = field(default=None)
-    query_params: AndroidpublisherGeneratedapksListQueryParams = field(default=None)
-    security: AndroidpublisherGeneratedapksListSecurity = field(default=None)
+    path_params: AndroidpublisherGeneratedapksListPathParams = field()
+    query_params: AndroidpublisherGeneratedapksListQueryParams = field()
+    security: AndroidpublisherGeneratedapksListSecurity = field()
     
 
 @dataclass
 class AndroidpublisherGeneratedapksListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     generated_apks_list_response: Optional[shared.GeneratedApksListResponse] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,58 +1,59 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class UpdateDeviceCellularGatewayPortForwardingRulesPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=serial" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=serial" })
   serial: string;
 }
 
 
 export class UpdateDeviceCellularGatewayPortForwardingRulesRequestBodyRules extends SpeakeasyBase {
-  @Metadata({ data: "json, name=access" })
+  @SpeakeasyMetadata({ data: "json, name=access" })
   access: string;
 
-  @Metadata({ data: "json, name=allowedIps" })
+  @SpeakeasyMetadata({ data: "json, name=allowedIps" })
   allowedIps?: string[];
 
-  @Metadata({ data: "json, name=lanIp" })
+  @SpeakeasyMetadata({ data: "json, name=lanIp" })
   lanIp: string;
 
-  @Metadata({ data: "json, name=localPort" })
+  @SpeakeasyMetadata({ data: "json, name=localPort" })
   localPort: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=protocol" })
+  @SpeakeasyMetadata({ data: "json, name=protocol" })
   protocol: string;
 
-  @Metadata({ data: "json, name=publicPort" })
+  @SpeakeasyMetadata({ data: "json, name=publicPort" })
   publicPort: string;
 }
 
 
 export class UpdateDeviceCellularGatewayPortForwardingRulesRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=rules", elemType: operations.UpdateDeviceCellularGatewayPortForwardingRulesRequestBodyRules })
+  @SpeakeasyMetadata({ data: "json, name=rules", elemType: UpdateDeviceCellularGatewayPortForwardingRulesRequestBodyRules })
   rules?: UpdateDeviceCellularGatewayPortForwardingRulesRequestBodyRules[];
 }
 
 
 export class UpdateDeviceCellularGatewayPortForwardingRulesRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: UpdateDeviceCellularGatewayPortForwardingRulesPathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request?: UpdateDeviceCellularGatewayPortForwardingRulesRequestBody;
 }
 
 
 export class UpdateDeviceCellularGatewayPortForwardingRulesResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   updateDeviceCellularGatewayPortForwardingRules200ApplicationJsonObject?: Map<string, any>;
 }

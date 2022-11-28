@@ -1,17 +1,17 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ErrorNotFoundErrors extends SpeakeasyBase {
-  @Metadata({ data: "json, name=detail" })
+  @SpeakeasyMetadata({ data: "json, name=detail" })
   detail?: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: string;
 }
 
 
 export class ErrorNotFound extends SpeakeasyBase {
-  @Metadata({ data: "json, name=errors", elemType: shared.ErrorNotFoundErrors })
+  @SpeakeasyMetadata({ data: "json, name=errors", elemType: ErrorNotFoundErrors })
   errors?: ErrorNotFoundErrors[];
 }

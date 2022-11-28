@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudIdentitytoolkitV2StartMfaPhoneRequestInfo } from "./googlecloudidentitytoolkitv2startmfaphonerequestinfo";
+
 
 
 // GoogleCloudIdentitytoolkitV2StartMfaEnrollmentRequest
@@ -7,12 +8,12 @@ import { GoogleCloudIdentitytoolkitV2StartMfaPhoneRequestInfo } from "./googlecl
  * Sends MFA enrollment verification SMS for a user.
 **/
 export class GoogleCloudIdentitytoolkitV2StartMfaEnrollmentRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=idToken" })
+  @SpeakeasyMetadata({ data: "json, name=idToken" })
   idToken?: string;
 
-  @Metadata({ data: "json, name=phoneEnrollmentInfo" })
+  @SpeakeasyMetadata({ data: "json, name=phoneEnrollmentInfo" })
   phoneEnrollmentInfo?: GoogleCloudIdentitytoolkitV2StartMfaPhoneRequestInfo;
 
-  @Metadata({ data: "json, name=tenantId" })
+  @SpeakeasyMetadata({ data: "json, name=tenantId" })
   tenantId?: string;
 }

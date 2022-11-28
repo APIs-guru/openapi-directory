@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import streamingimage
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class DeleteStreamingImageResponse:
-    streaming_image: Optional[streamingimage.StreamingImage] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'streamingImage' }})
+    streaming_image: Optional[StreamingImage] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('streamingImage') }})
     

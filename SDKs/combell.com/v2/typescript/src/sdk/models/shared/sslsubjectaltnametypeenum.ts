@@ -1,6 +1,7 @@
 
 
+
 export enum SslSubjectAltNameTypeEnum {
-    Dns = "dns"
-,    Ip = "ip"
+    Dns = "dns",
+    Ip = "ip"
 }

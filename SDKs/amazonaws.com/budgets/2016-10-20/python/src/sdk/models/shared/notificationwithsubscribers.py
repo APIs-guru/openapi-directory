@@ -1,13 +1,17 @@
 from dataclasses import dataclass, field
 from typing import List
 from dataclasses_json import dataclass_json
-from . import notification
-from . import subscriber
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class NotificationWithSubscribers:
-    notification: notification.Notification = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Notification' }})
-    subscribers: List[subscriber.Subscriber] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Subscribers' }})
+    r"""NotificationWithSubscribers
+    A notification with subscribers. A notification can have one SNS subscriber and up to 10 email subscribers, for a total of 11 subscribers.
+    """
+    
+    notification: Notification = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Notification') }})
+    subscribers: List[Subscriber] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Subscribers') }})
     

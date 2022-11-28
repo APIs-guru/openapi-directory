@@ -1,0 +1,8 @@
+from dataclasses import dataclass, field
+from enum import Enum
+
+class ComputeTypeEnum(str, Enum):
+    BUILD_GENERAL1_SMALL = "BUILD_GENERAL1_SMALL"
+    BUILD_GENERAL1_MEDIUM = "BUILD_GENERAL1_MEDIUM"
+    BUILD_GENERAL1_LARGE = "BUILD_GENERAL1_LARGE"
+

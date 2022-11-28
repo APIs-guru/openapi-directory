@@ -1,7 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import date
+from sdk import utils
+from . import *
 
 class DiagnosticsAlertsEnum(str, Enum):
     ALERT_UNSPECIFIED = "ALERT_UNSPECIFIED"
@@ -13,7 +18,11 @@ class DiagnosticsAlertsEnum(str, Enum):
 @dataclass_json
 @dataclass
 class Diagnostics:
-    alerts: Optional[List[DiagnosticsAlertsEnum]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'alerts' }})
-    beacon_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'beaconName' }})
-    estimated_low_battery_date: Optional[date.Date] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'estimatedLowBatteryDate' }})
+    r"""Diagnostics
+    Diagnostics for a single beacon.
+    """
+    
+    alerts: Optional[List[DiagnosticsAlertsEnum]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('alerts') }})
+    beacon_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('beaconName') }})
+    estimated_low_battery_date: Optional[Date] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('estimatedLowBatteryDate') }})
     

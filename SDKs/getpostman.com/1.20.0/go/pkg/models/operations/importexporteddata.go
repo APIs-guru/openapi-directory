@@ -1,9 +1,5 @@
 package operations
 
-type ImportExportedDataRequest struct {
-	Request []byte `request:"mediaType=application/octet-stream"`
-}
-
 type ImportExportedData200ApplicationJSONCollections struct {
 	ID   *string `json:"id,omitempty"`
 	Name *string `json:"name,omitempty"`
@@ -26,6 +22,10 @@ type ImportExportedData400ApplicationJSONError struct {
 
 type ImportExportedData400ApplicationJSON struct {
 	Error *ImportExportedData400ApplicationJSONError `json:"error,omitempty"`
+}
+
+type ImportExportedDataRequest struct {
+	Request []byte `request:"mediaType=application/octet-stream"`
 }
 
 type ImportExportedDataResponse struct {

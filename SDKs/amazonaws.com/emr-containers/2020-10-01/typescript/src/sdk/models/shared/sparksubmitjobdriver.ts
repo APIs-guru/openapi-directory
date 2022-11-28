@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // SparkSubmitJobDriver
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The information about job driver for Spark submit.
 **/
 export class SparkSubmitJobDriver extends SpeakeasyBase {
-  @Metadata({ data: "json, name=entryPoint" })
+  @SpeakeasyMetadata({ data: "json, name=entryPoint" })
   entryPoint: string;
 
-  @Metadata({ data: "json, name=entryPointArguments" })
+  @SpeakeasyMetadata({ data: "json, name=entryPointArguments" })
   entryPointArguments?: string[];
 
-  @Metadata({ data: "json, name=sparkSubmitParameters" })
+  @SpeakeasyMetadata({ data: "json, name=sparkSubmitParameters" })
   sparkSubmitParameters?: string;
 }

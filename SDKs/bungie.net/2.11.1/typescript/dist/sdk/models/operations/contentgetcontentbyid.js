@@ -22,18 +22,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var ContentGetContentByIdPathParams = /** @class */ (function (_super) {
     __extends(ContentGetContentByIdPathParams, _super);
     function ContentGetContentByIdPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=id" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" }),
         __metadata("design:type", Number)
     ], ContentGetContentByIdPathParams.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=locale" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=locale" }),
         __metadata("design:type", String)
     ], ContentGetContentByIdPathParams.prototype, "locale", void 0);
     return ContentGetContentByIdPathParams;
@@ -45,7 +45,7 @@ var ContentGetContentByIdQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=head" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=head" }),
         __metadata("design:type", Boolean)
     ], ContentGetContentByIdQueryParams.prototype, "head", void 0);
     return ContentGetContentByIdQueryParams;
@@ -57,11 +57,11 @@ var ContentGetContentByIdRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ContentGetContentByIdPathParams)
     ], ContentGetContentByIdRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ContentGetContentByIdQueryParams)
     ], ContentGetContentByIdRequest.prototype, "queryParams", void 0);
     return ContentGetContentByIdRequest;
@@ -73,15 +73,15 @@ var ContentGetContentByIdResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], ContentGetContentByIdResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], ContentGetContentByIdResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], ContentGetContentByIdResponse.prototype, "statusCode", void 0);
     return ContentGetContentByIdResponse;

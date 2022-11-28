@@ -22,86 +22,86 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var GlobalpageloadQueryParams = /** @class */ (function (_super) {
     __extends(GlobalpageloadQueryParams, _super);
     function GlobalpageloadQueryParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=license" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=license" }),
         __metadata("design:type", String)
     ], GlobalpageloadQueryParams.prototype, "license", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=origin" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=origin" }),
         __metadata("design:type", String)
     ], GlobalpageloadQueryParams.prototype, "origin", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=url" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=url" }),
         __metadata("design:type", String)
     ], GlobalpageloadQueryParams.prototype, "url", void 0);
     return GlobalpageloadQueryParams;
 }(SpeakeasyBase));
 export { GlobalpageloadQueryParams };
-var GlobalpageloadRequest = /** @class */ (function (_super) {
-    __extends(GlobalpageloadRequest, _super);
-    function GlobalpageloadRequest() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    __decorate([
-        Metadata(),
-        __metadata("design:type", GlobalpageloadQueryParams)
-    ], GlobalpageloadRequest.prototype, "queryParams", void 0);
-    return GlobalpageloadRequest;
-}(SpeakeasyBase));
-export { GlobalpageloadRequest };
 var Globalpageload200ApplicationJson = /** @class */ (function (_super) {
     __extends(Globalpageload200ApplicationJson, _super);
     function Globalpageload200ApplicationJson() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Code" }),
+        SpeakeasyMetadata({ data: "json, name=Code" }),
         __metadata("design:type", String)
     ], Globalpageload200ApplicationJson.prototype, "code", void 0);
     __decorate([
-        Metadata({ data: "json, name=Contents" }),
+        SpeakeasyMetadata({ data: "json, name=Contents" }),
         __metadata("design:type", String)
     ], Globalpageload200ApplicationJson.prototype, "contents", void 0);
     __decorate([
-        Metadata({ data: "json, name=Credits" }),
+        SpeakeasyMetadata({ data: "json, name=Credits" }),
         __metadata("design:type", String)
     ], Globalpageload200ApplicationJson.prototype, "credits", void 0);
     __decorate([
-        Metadata({ data: "json, name=Origin" }),
+        SpeakeasyMetadata({ data: "json, name=Origin" }),
         __metadata("design:type", String)
     ], Globalpageload200ApplicationJson.prototype, "origin", void 0);
     __decorate([
-        Metadata({ data: "json, name=PageResponseStatus" }),
+        SpeakeasyMetadata({ data: "json, name=PageResponseStatus" }),
         __metadata("design:type", String)
     ], Globalpageload200ApplicationJson.prototype, "pageResponseStatus", void 0);
     __decorate([
-        Metadata({ data: "json, name=Seconds" }),
+        SpeakeasyMetadata({ data: "json, name=Seconds" }),
         __metadata("design:type", String)
     ], Globalpageload200ApplicationJson.prototype, "seconds", void 0);
     return Globalpageload200ApplicationJson;
 }(SpeakeasyBase));
 export { Globalpageload200ApplicationJson };
+var GlobalpageloadRequest = /** @class */ (function (_super) {
+    __extends(GlobalpageloadRequest, _super);
+    function GlobalpageloadRequest() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", GlobalpageloadQueryParams)
+    ], GlobalpageloadRequest.prototype, "queryParams", void 0);
+    return GlobalpageloadRequest;
+}(SpeakeasyBase));
+export { GlobalpageloadRequest };
 var GlobalpageloadResponse = /** @class */ (function (_super) {
     __extends(GlobalpageloadResponse, _super);
     function GlobalpageloadResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GlobalpageloadResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GlobalpageloadResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Globalpageload200ApplicationJson)
     ], GlobalpageloadResponse.prototype, "globalpageload200ApplicationJsonObject", void 0);
     return GlobalpageloadResponse;

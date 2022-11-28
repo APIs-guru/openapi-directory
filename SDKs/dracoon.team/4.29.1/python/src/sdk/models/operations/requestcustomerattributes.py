@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class RequestCustomerAttributesPathParams:
-    customer_id: int = field(default=None, metadata={'path_param': { 'field_name': 'customer_id', 'style': 'simple', 'explode': False }})
+    customer_id: int = field(metadata={'path_param': { 'field_name': 'customer_id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -23,15 +23,15 @@ class RequestCustomerAttributesHeaders:
 
 @dataclass
 class RequestCustomerAttributesRequest:
-    path_params: RequestCustomerAttributesPathParams = field(default=None)
-    query_params: RequestCustomerAttributesQueryParams = field(default=None)
-    headers: RequestCustomerAttributesHeaders = field(default=None)
+    headers: RequestCustomerAttributesHeaders = field()
+    path_params: RequestCustomerAttributesPathParams = field()
+    query_params: RequestCustomerAttributesQueryParams = field()
     
 
 @dataclass
 class RequestCustomerAttributesResponse:
+    content_type: str = field()
+    status_code: int = field()
     attributes_response: Optional[shared.AttributesResponse] = field(default=None)
-    content_type: str = field(default=None)
     error_response: Optional[shared.ErrorResponse] = field(default=None)
-    status_code: int = field(default=None)
     

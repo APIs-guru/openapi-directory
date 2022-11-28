@@ -1,6 +1,10 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,List,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -18,43 +22,51 @@ class CreateAccessPointHeaders:
 @dataclass_json
 @dataclass
 class CreateAccessPointRequestBodyPosixUser:
-    gid: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Gid' }})
-    secondary_gids: Optional[List[int]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'SecondaryGids' }})
-    uid: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Uid' }})
+    r"""CreateAccessPointRequestBodyPosixUser
+    The full POSIX identity, including the user ID, group ID, and any secondary group IDs, on the access point that is used for all file system operations performed by NFS clients using the access point.
+    """
+    
+    gid: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Gid') }})
+    secondary_gids: Optional[List[int]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('SecondaryGids') }})
+    uid: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Uid') }})
     
 
 @dataclass_json
 @dataclass
 class CreateAccessPointRequestBodyRootDirectory:
-    creation_info: Optional[shared.CreationInfo] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'CreationInfo' }})
-    path: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Path' }})
+    r"""CreateAccessPointRequestBodyRootDirectory
+    Specifies the directory on the Amazon EFS file system that the access point provides access to. The access point exposes the specified file system path as the root directory of your file system to applications using the access point. NFS clients using the access point can only access data in the access point's <code>RootDirectory</code> and it's subdirectories.
+    """
+    
+    creation_info: Optional[shared.CreationInfo] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('CreationInfo') }})
+    path: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Path') }})
     
 
 @dataclass_json
 @dataclass
 class CreateAccessPointRequestBody:
-    client_token: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ClientToken' }})
-    file_system_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FileSystemId' }})
-    posix_user: Optional[CreateAccessPointRequestBodyPosixUser] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'PosixUser' }})
-    root_directory: Optional[CreateAccessPointRequestBodyRootDirectory] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'RootDirectory' }})
-    tags: Optional[List[shared.Tag]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Tags' }})
+    client_token: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('ClientToken') }})
+    file_system_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('FileSystemId') }})
+    posix_user: Optional[CreateAccessPointRequestBodyPosixUser] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('PosixUser') }})
+    root_directory: Optional[CreateAccessPointRequestBodyRootDirectory] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('RootDirectory') }})
+    tags: Optional[List[shared.Tag]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Tags') }})
     
 
 @dataclass
 class CreateAccessPointRequest:
-    headers: CreateAccessPointHeaders = field(default=None)
-    request: CreateAccessPointRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: CreateAccessPointHeaders = field()
+    request: CreateAccessPointRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class CreateAccessPointResponse:
+    content_type: str = field()
+    status_code: int = field()
     access_point_already_exists: Optional[Any] = field(default=None)
     access_point_description: Optional[shared.AccessPointDescription] = field(default=None)
     access_point_limit_exceeded: Optional[Any] = field(default=None)
     bad_request: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     file_system_not_found: Optional[Any] = field(default=None)
     incorrect_file_system_life_cycle_state: Optional[Any] = field(default=None)
     internal_server_error: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

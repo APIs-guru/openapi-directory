@@ -1,8 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
-import { WorkflowStep } from "./workflowstep";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { WorkflowStep } from "./workflowstep";
 import { Tag } from "./tag";
+
 
 
 // DescribedWorkflow
@@ -10,21 +9,21 @@ import { Tag } from "./tag";
  * Describes the properties of the specified workflow
 **/
 export class DescribedWorkflow extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Arn" })
+  @SpeakeasyMetadata({ data: "json, name=Arn" })
   arn: string;
 
-  @Metadata({ data: "json, name=Description" })
+  @SpeakeasyMetadata({ data: "json, name=Description" })
   description?: string;
 
-  @Metadata({ data: "json, name=OnExceptionSteps", elemType: shared.WorkflowStep })
+  @SpeakeasyMetadata({ data: "json, name=OnExceptionSteps", elemType: WorkflowStep })
   onExceptionSteps?: WorkflowStep[];
 
-  @Metadata({ data: "json, name=Steps", elemType: shared.WorkflowStep })
+  @SpeakeasyMetadata({ data: "json, name=Steps", elemType: WorkflowStep })
   steps?: WorkflowStep[];
 
-  @Metadata({ data: "json, name=Tags", elemType: shared.Tag })
+  @SpeakeasyMetadata({ data: "json, name=Tags", elemType: Tag })
   tags?: Tag[];
 
-  @Metadata({ data: "json, name=WorkflowId" })
+  @SpeakeasyMetadata({ data: "json, name=WorkflowId" })
   workflowId?: string;
 }

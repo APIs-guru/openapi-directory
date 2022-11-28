@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // IotSiteWiseAssetModelPropertyIdentifier
 /**
  *  The asset model property identifer of the input routed from AWS IoT SiteWise.
@@ -33,11 +33,11 @@ var IotSiteWiseAssetModelPropertyIdentifier = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=assetModelId" }),
+        SpeakeasyMetadata({ data: "json, name=assetModelId" }),
         __metadata("design:type", String)
     ], IotSiteWiseAssetModelPropertyIdentifier.prototype, "assetModelId", void 0);
     __decorate([
-        Metadata({ data: "json, name=propertyId" }),
+        SpeakeasyMetadata({ data: "json, name=propertyId" }),
         __metadata("design:type", String)
     ], IotSiteWiseAssetModelPropertyIdentifier.prototype, "propertyId", void 0);
     return IotSiteWiseAssetModelPropertyIdentifier;

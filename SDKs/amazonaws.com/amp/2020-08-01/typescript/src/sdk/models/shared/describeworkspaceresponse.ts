@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { WorkspaceDescription } from "./workspacedescription";
+
 
 
 // DescribeWorkspaceResponse
@@ -7,6 +8,6 @@ import { WorkspaceDescription } from "./workspacedescription";
  * Represents the output of a DescribeWorkspace operation.
 **/
 export class DescribeWorkspaceResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=workspace" })
+  @SpeakeasyMetadata({ data: "json, name=workspace" })
   workspace: WorkspaceDescription;
 }

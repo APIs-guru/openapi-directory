@@ -11,9 +11,8 @@ var __assign = (this && this.__assign) || function () {
 };
 import axios from "axios";
 import * as operations from "./models/operations";
-import { CreateSecurityClient } from "../internal/utils/security";
-import * as utils from "../internal/utils/utils";
-var Servers = [
+import * as utils from "../internal/utils";
+export var ServerList = [
     "https://etmdb.com",
 ];
 export function WithServerURL(serverURL, params) {
@@ -21,12 +20,12 @@ export function WithServerURL(serverURL, params) {
         if (params != null) {
             serverURL = utils.ReplaceParameters(serverURL, params);
         }
-        sdk.serverURL = serverURL;
+        sdk._serverURL = serverURL;
     };
 }
 export function WithClient(client) {
     return function (sdk) {
-        sdk.defaultClient = client;
+        sdk._defaultClient = client;
     };
 }
 var SDK = /** @class */ (function () {
@@ -36,24 +35,23 @@ var SDK = /** @class */ (function () {
             opts[_i] = arguments[_i];
         }
         var _this = this;
+        this._language = "typescript";
+        this._sdkVersion = "0.0.1";
+        this._genVersion = "internal";
         opts.forEach(function (o) { return o(_this); });
-        if (this.serverURL == "") {
-            this.serverURL = Servers[0];
+        if (this._serverURL == "") {
+            this._serverURL = ServerList[0];
         }
-        if (!this.defaultClient) {
-            this.defaultClient = axios.create({ baseURL: this.serverURL });
+        if (!this._defaultClient) {
+            this._defaultClient = axios.create({ baseURL: this._serverURL });
         }
-        if (!this.securityClient) {
-            if (this.security) {
-                this.securityClient = CreateSecurityClient(this.defaultClient, this.security);
-            }
-            else {
-                this.securityClient = this.defaultClient;
-            }
+        if (!this._securityClient) {
+            this._securityClient = this._defaultClient;
         }
     }
-    // CinemaDetailSearchRead - Return cinema details search result
     /**
+     * cinemaDetailSearchRead - Return cinema details search result
+     *
      * Return cinema details search result
      *
      * ### Response Class (Status 200)
@@ -63,31 +61,31 @@ var SDK = /** @class */ (function () {
      * For more details on how cinemas are listed [see here][ref].
      * [ref]: https://etmdb.com/en/cinema-list/-updated_date
     **/
-    SDK.prototype.CinemaDetailSearchRead = function (req, config) {
+    SDK.prototype.cinemaDetailSearchRead = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.CinemaDetailSearchReadRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = utils.GenerateURL(baseURL, "/api/v1/cinema-detail/search/{cinema_name}", req.pathParams);
-        var client = this.defaultClient;
+        var client = this._defaultClient;
         return client
-            .get(url, __assign({}, config))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get" }, config)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
                     break;
             }
             return res;
         })
             .catch(function (error) { throw error; });
     };
-    // CinemaScheduleSearchRead - Return cinema schedule search result
     /**
+     * cinemaScheduleSearchRead - Return cinema schedule search result
+     *
      * Return cinema schedule search result
      *
      * ### Response Class (Status 200)
@@ -98,31 +96,31 @@ var SDK = /** @class */ (function () {
      * For more details about cinema schedule, check each cinema from the cinema list [see here][ref].
      * [ref]: https://etmdb.com/en/movie-list/-updated_date
     **/
-    SDK.prototype.CinemaScheduleSearchRead = function (req, config) {
+    SDK.prototype.cinemaScheduleSearchRead = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.CinemaScheduleSearchReadRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = utils.GenerateURL(baseURL, "/api/v1/cinema-schedule/search/{movie_title}", req.pathParams);
-        var client = this.defaultClient;
+        var client = this._defaultClient;
         return client
-            .get(url, __assign({}, config))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get" }, config)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
                     break;
             }
             return res;
         })
             .catch(function (error) { throw error; });
     };
-    // CinemaScheduleSearchallRead - Return cinema schedule search result
     /**
+     * cinemaScheduleSearchallRead - Return cinema schedule search result
+     *
      * Return cinema schedule search result
      *
      * ### Response Class (Status 200)
@@ -135,31 +133,31 @@ var SDK = /** @class */ (function () {
      * For more details about cinema schedule, check each cinema from the cinema list [see here][ref].
      * [ref]: https://etmdb.com/en/movie-list/-updated_date
     **/
-    SDK.prototype.CinemaScheduleSearchallRead = function (req, config) {
+    SDK.prototype.cinemaScheduleSearchallRead = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.CinemaScheduleSearchallReadRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = utils.GenerateURL(baseURL, "/api/v1/cinema-schedule/searchall/{param}", req.pathParams);
-        var client = this.defaultClient;
+        var client = this._defaultClient;
         return client
-            .get(url, __assign({}, config))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get" }, config)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
                     break;
             }
             return res;
         })
             .catch(function (error) { throw error; });
     };
-    // CinemaSheduleShowtimeSearchRead - Return cinema schedule and showtime search result
     /**
+     * cinemaSheduleShowtimeSearchRead - Return cinema schedule and showtime search result
+     *
      * Return cinema schedule and showtime search result
      *
      * ### Response Class (Status 200)
@@ -169,31 +167,31 @@ var SDK = /** @class */ (function () {
      * For more details about cinema schedule showtime, check each cinema from the cinema list [see here][ref].
      * [ref]: https://etmdb.com/en/movie-list/-updated_date
     **/
-    SDK.prototype.CinemaSheduleShowtimeSearchRead = function (req, config) {
+    SDK.prototype.cinemaSheduleShowtimeSearchRead = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.CinemaSheduleShowtimeSearchReadRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = utils.GenerateURL(baseURL, "/api/v1/cinema-shedule-showtime/search/{movie_title}", req.pathParams);
-        var client = this.defaultClient;
+        var client = this._defaultClient;
         return client
-            .get(url, __assign({}, config))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get" }, config)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
                     break;
             }
             return res;
         })
             .catch(function (error) { throw error; });
     };
-    // CinemaSheduleShowtimeSearchallRead - Return cinema schedule and showtime search result
     /**
+     * cinemaSheduleShowtimeSearchallRead - Return cinema schedule and showtime search result
+     *
      * Return cinema schedule and showtime search result
      *
      * ### Response Class (Status 200)
@@ -208,31 +206,31 @@ var SDK = /** @class */ (function () {
      * For more details about cinema schedule, check each cinema from the cinema list [see here][ref].
      * [ref]: https://etmdb.com/en/movie-list/-updated_date
     **/
-    SDK.prototype.CinemaSheduleShowtimeSearchallRead = function (req, config) {
+    SDK.prototype.cinemaSheduleShowtimeSearchallRead = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.CinemaSheduleShowtimeSearchallReadRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = utils.GenerateURL(baseURL, "/api/v1/cinema-shedule-showtime/searchall/{param}", req.pathParams);
-        var client = this.defaultClient;
+        var client = this._defaultClient;
         return client
-            .get(url, __assign({}, config))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get" }, config)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
                     break;
             }
             return res;
         })
             .catch(function (error) { throw error; });
     };
-    // CinemaSearchRead - Return cinema search result
     /**
+     * cinemaSearchRead - Return cinema search result
+     *
      * Return cinema search result
      *
      * ### Response Class (Status 200)
@@ -242,31 +240,31 @@ var SDK = /** @class */ (function () {
      * For more details on how cinemas are listed [see here][ref].
      * [ref]: https://etmdb.com/en/cinema-list/-updated_date
     **/
-    SDK.prototype.CinemaSearchRead = function (req, config) {
+    SDK.prototype.cinemaSearchRead = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.CinemaSearchReadRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = utils.GenerateURL(baseURL, "/api/v1/cinema/search/{id}", req.pathParams);
-        var client = this.defaultClient;
+        var client = this._defaultClient;
         return client
-            .get(url, __assign({}, config))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get" }, config)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
                     break;
             }
             return res;
         })
             .catch(function (error) { throw error; });
     };
-    // CompanyCreditsSearchRead - Return company credits search result
     /**
+     * companyCreditsSearchRead - Return company credits search result
+     *
      * Return company credits search result
      *
      * ### Response Class (Status 200)
@@ -277,31 +275,31 @@ var SDK = /** @class */ (function () {
      * For more details on how company credits are listed [see here][ref].
      * [ref]: https://etmdb.com/en/movie-list/-updated_date
     **/
-    SDK.prototype.CompanyCreditsSearchRead = function (req, config) {
+    SDK.prototype.companyCreditsSearchRead = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.CompanyCreditsSearchReadRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = utils.GenerateURL(baseURL, "/api/v1/company-credits/search/{movie_title}", req.pathParams);
-        var client = this.defaultClient;
+        var client = this._defaultClient;
         return client
-            .get(url, __assign({}, config))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get" }, config)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
                     break;
             }
             return res;
         })
             .catch(function (error) { throw error; });
     };
-    // CompanyCreditsSearchallRead - Return company credits search result
     /**
+     * companyCreditsSearchallRead - Return company credits search result
+     *
      * Return company credits search result
      *
      * ### Response Class (Status 200)
@@ -313,31 +311,31 @@ var SDK = /** @class */ (function () {
      * For more details on how company credits are listed [see here][ref].
      * [ref]: https://etmdb.com/en/company-list/company_name
     **/
-    SDK.prototype.CompanyCreditsSearchallRead = function (req, config) {
+    SDK.prototype.companyCreditsSearchallRead = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.CompanyCreditsSearchallReadRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = utils.GenerateURL(baseURL, "/api/v1/company-credits/searchall/{param}", req.pathParams);
-        var client = this.defaultClient;
+        var client = this._defaultClient;
         return client
-            .get(url, __assign({}, config))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get" }, config)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
                     break;
             }
             return res;
         })
             .catch(function (error) { throw error; });
     };
-    // CompanySearchRead - Return company search result
     /**
+     * companySearchRead - Return company search result
+     *
      * Return company search result
      *
      * ### Response Class (Status 200)
@@ -347,31 +345,31 @@ var SDK = /** @class */ (function () {
      * For more details on how companies are listed [see here][ref].
      * [ref]: https://etmdb.com/en/company-list/-updated_date
     **/
-    SDK.prototype.CompanySearchRead = function (req, config) {
+    SDK.prototype.companySearchRead = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.CompanySearchReadRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = utils.GenerateURL(baseURL, "/api/v1/company/search/{company_name}", req.pathParams);
-        var client = this.defaultClient;
+        var client = this._defaultClient;
         return client
-            .get(url, __assign({}, config))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get" }, config)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
                     break;
             }
             return res;
         })
             .catch(function (error) { throw error; });
     };
-    // FilmographyTypeSearchRead - Return filmography type search result
     /**
+     * filmographyTypeSearchRead - Return filmography type search result
+     *
      * Return filmography type search result
      *
      * ### Response Class (Status 200)
@@ -381,31 +379,31 @@ var SDK = /** @class */ (function () {
      * For more details on how filmography types are listed [see here][ref].
      * [ref]: https://etmdb.com/en/movie-list/-updated_date
     **/
-    SDK.prototype.FilmographyTypeSearchRead = function (req, config) {
+    SDK.prototype.filmographyTypeSearchRead = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.FilmographyTypeSearchReadRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = utils.GenerateURL(baseURL, "/api/v1/filmography-type/search/{filmography_description}", req.pathParams);
-        var client = this.defaultClient;
+        var client = this._defaultClient;
         return client
-            .get(url, __assign({}, config))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get" }, config)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
                     break;
             }
             return res;
         })
             .catch(function (error) { throw error; });
     };
-    // FilmographySearchRead - Return filmography search result
     /**
+     * filmographySearchRead - Return filmography search result
+     *
      * Return filmography search result
      *
      * ### Response Class (Status 200)
@@ -416,31 +414,31 @@ var SDK = /** @class */ (function () {
      * For more details on how filmographies are listed [see here][ref].
      * [ref]: https://etmdb.com/en/movie-list/-updated_date
     **/
-    SDK.prototype.FilmographySearchRead = function (req, config) {
+    SDK.prototype.filmographySearchRead = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.FilmographySearchReadRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = utils.GenerateURL(baseURL, "/api/v1/filmography/search/{movie_title}", req.pathParams);
-        var client = this.defaultClient;
+        var client = this._defaultClient;
         return client
-            .get(url, __assign({}, config))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get" }, config)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
                     break;
             }
             return res;
         })
             .catch(function (error) { throw error; });
     };
-    // FilmographySearchallRead - Return filmography search result
     /**
+     * filmographySearchallRead - Return filmography search result
+     *
      * Return filmography search result
      *
      * ### Response Class (Status 200)
@@ -454,31 +452,31 @@ var SDK = /** @class */ (function () {
      * For more details on how filmographies are listed [see here][ref].
      * [ref]: https://etmdb.com/en/movie-list/-updated_date
     **/
-    SDK.prototype.FilmographySearchallRead = function (req, config) {
+    SDK.prototype.filmographySearchallRead = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.FilmographySearchallReadRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = utils.GenerateURL(baseURL, "/api/v1/filmography/searchall/{param}", req.pathParams);
-        var client = this.defaultClient;
+        var client = this._defaultClient;
         return client
-            .get(url, __assign({}, config))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get" }, config)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
                     break;
             }
             return res;
         })
             .catch(function (error) { throw error; });
     };
-    // GenreTypeSearchRead - Return genre type search result
     /**
+     * genreTypeSearchRead - Return genre type search result
+     *
      * Return genre type search result
      *
      * ### Response Class (Status 200)
@@ -488,31 +486,31 @@ var SDK = /** @class */ (function () {
      * For more details on how genre types are listed [see here][ref].
      * [ref]: https://etmdb.com/en/movie-list/-updated_date
     **/
-    SDK.prototype.GenreTypeSearchRead = function (req, config) {
+    SDK.prototype.genreTypeSearchRead = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.GenreTypeSearchReadRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = utils.GenerateURL(baseURL, "/api/v1/genre-type/search/{genre_description}", req.pathParams);
-        var client = this.defaultClient;
+        var client = this._defaultClient;
         return client
-            .get(url, __assign({}, config))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get" }, config)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
                     break;
             }
             return res;
         })
             .catch(function (error) { throw error; });
     };
-    // GenreSearchRead - Return movie genre search result
     /**
+     * genreSearchRead - Return movie genre search result
+     *
      * Return movie genre search result
      *
      * ### Response Class (Status 200)
@@ -523,31 +521,31 @@ var SDK = /** @class */ (function () {
      * For more details on how movies are listed [see here][ref].
      * [ref]: https://etmdb.com/en/movie-list/-updated_date
     **/
-    SDK.prototype.GenreSearchRead = function (req, config) {
+    SDK.prototype.genreSearchRead = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.GenreSearchReadRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = utils.GenerateURL(baseURL, "/api/v1/genre/search/{movie_title}", req.pathParams);
-        var client = this.defaultClient;
+        var client = this._defaultClient;
         return client
-            .get(url, __assign({}, config))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get" }, config)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
                     break;
             }
             return res;
         })
             .catch(function (error) { throw error; });
     };
-    // GenreSearchallRead - Return movie genre search result
     /**
+     * genreSearchallRead - Return movie genre search result
+     *
      * Return movie genre search result
      *
      * ### Response Class (Status 200)
@@ -557,31 +555,31 @@ var SDK = /** @class */ (function () {
      * For more details on how movies are listed [see here][ref].
      * [ref]: https://etmdb.com/en/movie-list/-updated_date
     **/
-    SDK.prototype.GenreSearchallRead = function (req, config) {
+    SDK.prototype.genreSearchallRead = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.GenreSearchallReadRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = utils.GenerateURL(baseURL, "/api/v1/genre/searchall/{movie_genre_type}", req.pathParams);
-        var client = this.defaultClient;
+        var client = this._defaultClient;
         return client
-            .get(url, __assign({}, config))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get" }, config)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
                     break;
             }
             return res;
         })
             .catch(function (error) { throw error; });
     };
-    // JobSearchRead - Return job details search result
     /**
+     * jobSearchRead - Return job details search result
+     *
      * Return job details search result
      *
      * ### Response Class (Status 200)
@@ -591,31 +589,31 @@ var SDK = /** @class */ (function () {
      * For more details on how job are listed [see here][ref].
      * [ref]: https://etmdb.com/en/job-list/-updated_date
     **/
-    SDK.prototype.JobSearchRead = function (req, config) {
+    SDK.prototype.jobSearchRead = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.JobSearchReadRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = utils.GenerateURL(baseURL, "/api/v1/job/search/{job_title}", req.pathParams);
-        var client = this.defaultClient;
+        var client = this._defaultClient;
         return client
-            .get(url, __assign({}, config))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get" }, config)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
                     break;
             }
             return res;
         })
             .catch(function (error) { throw error; });
     };
-    // JobSearchallRead - Return job details search result
     /**
+     * jobSearchallRead - Return job details search result
+     *
      * Return job details search result
      *
      * ### Response Class (Status 200)
@@ -625,31 +623,31 @@ var SDK = /** @class */ (function () {
      * For more details on how job are listed [see here][ref].
      * [ref]: https://etmdb.com/en/job-list/-updated_date
     **/
-    SDK.prototype.JobSearchallRead = function (req, config) {
+    SDK.prototype.jobSearchallRead = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.JobSearchallReadRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = utils.GenerateURL(baseURL, "/api/v1/job/searchall/{company_name}", req.pathParams);
-        var client = this.defaultClient;
+        var client = this._defaultClient;
         return client
-            .get(url, __assign({}, config))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get" }, config)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
                     break;
             }
             return res;
         })
             .catch(function (error) { throw error; });
     };
-    // MediaSearchRead - Return movie media search result
     /**
+     * mediaSearchRead - Return movie media search result
+     *
      * Return movie media search result
      *
      * ### Response Class (Status 200)
@@ -660,31 +658,31 @@ var SDK = /** @class */ (function () {
      * For more details on how media is listed [see here][ref].
      * [ref]: https://etmdb.com/en/movie-list/-updated_date
     **/
-    SDK.prototype.MediaSearchRead = function (req, config) {
+    SDK.prototype.mediaSearchRead = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.MediaSearchReadRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = utils.GenerateURL(baseURL, "/api/v1/media/search/{movie_title}", req.pathParams);
-        var client = this.defaultClient;
+        var client = this._defaultClient;
         return client
-            .get(url, __assign({}, config))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get" }, config)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
                     break;
             }
             return res;
         })
             .catch(function (error) { throw error; });
     };
-    // MediaSearchallRead - Return cast media search result
     /**
+     * mediaSearchallRead - Return cast media search result
+     *
      * Return cast media search result
      *
      * ### Response Class (Status 200)
@@ -696,31 +694,31 @@ var SDK = /** @class */ (function () {
      * For more details on how cast media is listed [see here][ref].
      * [ref]: https://etmdb.com/en/cast-list/-updated_date
     **/
-    SDK.prototype.MediaSearchallRead = function (req, config) {
+    SDK.prototype.mediaSearchallRead = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.MediaSearchallReadRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = utils.GenerateURL(baseURL, "/api/v1/media/searchall/{user}", req.pathParams);
-        var client = this.defaultClient;
+        var client = this._defaultClient;
         return client
-            .get(url, __assign({}, config))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get" }, config)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
                     break;
             }
             return res;
         })
             .catch(function (error) { throw error; });
     };
-    // MovieCastSearchRead - Return movie cast search result
     /**
+     * movieCastSearchRead - Return movie cast search result
+     *
      * Return movie cast search result
      *
      * ### Response Class (Status 200)
@@ -731,31 +729,31 @@ var SDK = /** @class */ (function () {
      * For more details on how movie casts are listed [see here][ref].
      * [ref]: https://etmdb.com/en/movie-list/-updated_date
     **/
-    SDK.prototype.MovieCastSearchRead = function (req, config) {
+    SDK.prototype.movieCastSearchRead = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.MovieCastSearchReadRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = utils.GenerateURL(baseURL, "/api/v1/movie-cast/search/{movie_title}", req.pathParams);
-        var client = this.defaultClient;
+        var client = this._defaultClient;
         return client
-            .get(url, __assign({}, config))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get" }, config)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
                     break;
             }
             return res;
         })
             .catch(function (error) { throw error; });
     };
-    // MovieCastSearchallRead - Return movie cast search result
     /**
+     * movieCastSearchallRead - Return movie cast search result
+     *
      * Return movie cast search result
      *
      * ### Response Class (Status 200)
@@ -769,31 +767,31 @@ var SDK = /** @class */ (function () {
      * For more details on how movie casts are listed [see here][ref].
      * [ref]: https://etmdb.com/en/movie-list/-updated_date
     **/
-    SDK.prototype.MovieCastSearchallRead = function (req, config) {
+    SDK.prototype.movieCastSearchallRead = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.MovieCastSearchallReadRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = utils.GenerateURL(baseURL, "/api/v1/movie-cast/searchall/{param}", req.pathParams);
-        var client = this.defaultClient;
+        var client = this._defaultClient;
         return client
-            .get(url, __assign({}, config))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get" }, config)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
                     break;
             }
             return res;
         })
             .catch(function (error) { throw error; });
     };
-    // MovieSearchRead - Return movie search result
     /**
+     * movieSearchRead - Return movie search result
+     *
      * Return movie search result
      *
      * ### Response Class (Status 200)
@@ -804,31 +802,31 @@ var SDK = /** @class */ (function () {
      * For more details on how movies are listed [see here][ref].
      * [ref]: https://etmdb.com/en/movie-list/-updated_date
     **/
-    SDK.prototype.MovieSearchRead = function (req, config) {
+    SDK.prototype.movieSearchRead = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.MovieSearchReadRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = utils.GenerateURL(baseURL, "/api/v1/movie/search/{movie_title}", req.pathParams);
-        var client = this.defaultClient;
+        var client = this._defaultClient;
         return client
-            .get(url, __assign({}, config))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get" }, config)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
                     break;
             }
             return res;
         })
             .catch(function (error) { throw error; });
     };
-    // NewsSearchRead - Return news or article search result
     /**
+     * newsSearchRead - Return news or article search result
+     *
      * Return news or article search result
      *
      * ### Response Class (Status 200)
@@ -838,31 +836,31 @@ var SDK = /** @class */ (function () {
      * For more details on how news & articles are listed [see here][ref].
      * [ref]: https://etmdb.com/en/news-list/-updated_date
     **/
-    SDK.prototype.NewsSearchRead = function (req, config) {
+    SDK.prototype.newsSearchRead = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.NewsSearchReadRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = utils.GenerateURL(baseURL, "/api/v1/news/search/{title}", req.pathParams);
-        var client = this.defaultClient;
+        var client = this._defaultClient;
         return client
-            .get(url, __assign({}, config))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get" }, config)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
                     break;
             }
             return res;
         })
             .catch(function (error) { throw error; });
     };
-    // PeopleSearchRead - Return cast search result
     /**
+     * peopleSearchRead - Return cast search result
+     *
      * Return cast search result
      *
      * ### Response Class (Status 200)
@@ -874,31 +872,31 @@ var SDK = /** @class */ (function () {
      * For more details on how cast are listed [see here][ref].
      * [ref]: https://etmdb.com/en/cast-list/-updated_date
     **/
-    SDK.prototype.PeopleSearchRead = function (req, config) {
+    SDK.prototype.peopleSearchRead = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.PeopleSearchReadRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = utils.GenerateURL(baseURL, "/api/v1/people/search/{user}", req.pathParams);
-        var client = this.defaultClient;
+        var client = this._defaultClient;
         return client
-            .get(url, __assign({}, config))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get" }, config)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
                     break;
             }
             return res;
         })
             .catch(function (error) { throw error; });
     };
-    // ShowtimeSearchallRead - Return showtime search result
     /**
+     * showtimeSearchallRead - Return showtime search result
+     *
      * Return showtime search result
      *
      * ### Response Class (Status 200)
@@ -909,31 +907,31 @@ var SDK = /** @class */ (function () {
      * For more details about showtime, check each cinema from the cinema list [see here][ref].
      * [ref]: https://etmdb.com/en/movie-list/-updated_date
     **/
-    SDK.prototype.ShowtimeSearchallRead = function (req, config) {
+    SDK.prototype.showtimeSearchallRead = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.ShowtimeSearchallReadRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = utils.GenerateURL(baseURL, "/api/v1/showtime/searchall/{param}", req.pathParams);
-        var client = this.defaultClient;
+        var client = this._defaultClient;
         return client
-            .get(url, __assign({}, config))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get" }, config)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
                     break;
             }
             return res;
         })
             .catch(function (error) { throw error; });
     };
-    // WatchlistSearchRead - Return watchlist search result
     /**
+     * watchlistSearchRead - Return watchlist search result
+     *
      * Return watchlist search result
      *
      * ### Response Class (Status 200)
@@ -944,31 +942,31 @@ var SDK = /** @class */ (function () {
      * For more details on how watchlist are listed [see here][ref].
      * [ref]: https://etmdb.com/en/movies/watchlist/id
     **/
-    SDK.prototype.WatchlistSearchRead = function (req, config) {
+    SDK.prototype.watchlistSearchRead = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.WatchlistSearchReadRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = utils.GenerateURL(baseURL, "/api/v1/watchlist/search/{movie_title}", req.pathParams);
-        var client = this.defaultClient;
+        var client = this._defaultClient;
         return client
-            .get(url, __assign({}, config))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get" }, config)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
                     break;
             }
             return res;
         })
             .catch(function (error) { throw error; });
     };
-    // WatchlistSearchallRead - Return watchlist search result
     /**
+     * watchlistSearchallRead - Return watchlist search result
+     *
      * Return watchlist search result
      *
      * ### Response Class (Status 200)
@@ -981,23 +979,22 @@ var SDK = /** @class */ (function () {
      * For more details on how watchlist are listed [see here][ref].
      * [ref]: https://etmdb.com/en/movies/watchlist/id
     **/
-    SDK.prototype.WatchlistSearchallRead = function (req, config) {
+    SDK.prototype.watchlistSearchallRead = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.WatchlistSearchallReadRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = utils.GenerateURL(baseURL, "/api/v1/watchlist/searchall/{param}", req.pathParams);
-        var client = this.defaultClient;
+        var client = this._defaultClient;
         return client
-            .get(url, __assign({}, config))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get" }, config)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
                     break;
             }
             return res;

@@ -1,22 +1,38 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class Rir extends SpeakeasyBase {
-  @Metadata({ data: "json, name=aggregate_count" })
+  @SpeakeasyMetadata({ data: "json, name=aggregate_count" })
   aggregateCount?: number;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: number;
 
-  @Metadata({ data: "json, name=is_private" })
+  @SpeakeasyMetadata({ data: "json, name=is_private" })
   isPrivate?: boolean;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 
-  @Metadata({ data: "json, name=slug" })
+  @SpeakeasyMetadata({ data: "json, name=slug" })
+  slug: string;
+}
+
+
+export class RirInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=description" })
+  description?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=is_private" })
+  isPrivate?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=name" })
+  name: string;
+
+  @SpeakeasyMetadata({ data: "json, name=slug" })
   slug: string;
 }

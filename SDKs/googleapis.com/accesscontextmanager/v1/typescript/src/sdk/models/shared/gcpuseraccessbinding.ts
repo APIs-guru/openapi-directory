@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GcpUserAccessBinding
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Restricts access to Cloud Console and Google Cloud APIs for a set of users using Context-Aware Access.
 **/
 export class GcpUserAccessBinding extends SpeakeasyBase {
-  @Metadata({ data: "json, name=accessLevels" })
+  @SpeakeasyMetadata({ data: "json, name=accessLevels" })
   accessLevels?: string[];
 
-  @Metadata({ data: "json, name=groupKey" })
+  @SpeakeasyMetadata({ data: "json, name=groupKey" })
   groupKey?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 }

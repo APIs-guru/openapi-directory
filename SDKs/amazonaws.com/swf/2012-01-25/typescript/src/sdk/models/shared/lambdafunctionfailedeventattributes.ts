@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // LambdaFunctionFailedEventAttributes
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Provides the details of the <code>LambdaFunctionFailed</code> event. It isn't set for other event types.
 **/
 export class LambdaFunctionFailedEventAttributes extends SpeakeasyBase {
-  @Metadata({ data: "json, name=details" })
+  @SpeakeasyMetadata({ data: "json, name=details" })
   details?: string;
 
-  @Metadata({ data: "json, name=reason" })
+  @SpeakeasyMetadata({ data: "json, name=reason" })
   reason?: string;
 
-  @Metadata({ data: "json, name=scheduledEventId" })
+  @SpeakeasyMetadata({ data: "json, name=scheduledEventId" })
   scheduledEventId: number;
 
-  @Metadata({ data: "json, name=startedEventId" })
+  @SpeakeasyMetadata({ data: "json, name=startedEventId" })
   startedEventId: number;
 }

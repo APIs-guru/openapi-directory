@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var CreateSoftwareUpdateJobHeaders = /** @class */ (function (_super) {
     __extends(CreateSoftwareUpdateJobHeaders, _super);
@@ -30,35 +30,35 @@ var CreateSoftwareUpdateJobHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
         __metadata("design:type", String)
     ], CreateSoftwareUpdateJobHeaders.prototype, "xAmzAlgorithm", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
         __metadata("design:type", String)
     ], CreateSoftwareUpdateJobHeaders.prototype, "xAmzContentSha256", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
         __metadata("design:type", String)
     ], CreateSoftwareUpdateJobHeaders.prototype, "xAmzCredential", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
         __metadata("design:type", String)
     ], CreateSoftwareUpdateJobHeaders.prototype, "xAmzDate", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
         __metadata("design:type", String)
     ], CreateSoftwareUpdateJobHeaders.prototype, "xAmzSecurityToken", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
         __metadata("design:type", String)
     ], CreateSoftwareUpdateJobHeaders.prototype, "xAmzSignature", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
         __metadata("design:type", String)
     ], CreateSoftwareUpdateJobHeaders.prototype, "xAmzSignedHeaders", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amzn-Client-Token" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amzn-Client-Token" }),
         __metadata("design:type", String)
     ], CreateSoftwareUpdateJobHeaders.prototype, "xAmznClientToken", void 0);
     return CreateSoftwareUpdateJobHeaders;
@@ -100,27 +100,27 @@ var CreateSoftwareUpdateJobRequestBody = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=S3UrlSignerRole" }),
+        SpeakeasyMetadata({ data: "json, name=S3UrlSignerRole" }),
         __metadata("design:type", String)
     ], CreateSoftwareUpdateJobRequestBody.prototype, "s3UrlSignerRole", void 0);
     __decorate([
-        Metadata({ data: "json, name=SoftwareToUpdate" }),
+        SpeakeasyMetadata({ data: "json, name=SoftwareToUpdate" }),
         __metadata("design:type", String)
     ], CreateSoftwareUpdateJobRequestBody.prototype, "softwareToUpdate", void 0);
     __decorate([
-        Metadata({ data: "json, name=UpdateAgentLogLevel" }),
+        SpeakeasyMetadata({ data: "json, name=UpdateAgentLogLevel" }),
         __metadata("design:type", String)
     ], CreateSoftwareUpdateJobRequestBody.prototype, "updateAgentLogLevel", void 0);
     __decorate([
-        Metadata({ data: "json, name=UpdateTargets" }),
+        SpeakeasyMetadata({ data: "json, name=UpdateTargets" }),
         __metadata("design:type", Array)
     ], CreateSoftwareUpdateJobRequestBody.prototype, "updateTargets", void 0);
     __decorate([
-        Metadata({ data: "json, name=UpdateTargetsArchitecture" }),
+        SpeakeasyMetadata({ data: "json, name=UpdateTargetsArchitecture" }),
         __metadata("design:type", String)
     ], CreateSoftwareUpdateJobRequestBody.prototype, "updateTargetsArchitecture", void 0);
     __decorate([
-        Metadata({ data: "json, name=UpdateTargetsOperatingSystem" }),
+        SpeakeasyMetadata({ data: "json, name=UpdateTargetsOperatingSystem" }),
         __metadata("design:type", String)
     ], CreateSoftwareUpdateJobRequestBody.prototype, "updateTargetsOperatingSystem", void 0);
     return CreateSoftwareUpdateJobRequestBody;
@@ -132,11 +132,11 @@ var CreateSoftwareUpdateJobRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", CreateSoftwareUpdateJobHeaders)
     ], CreateSoftwareUpdateJobRequest.prototype, "headers", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", CreateSoftwareUpdateJobRequestBody)
     ], CreateSoftwareUpdateJobRequest.prototype, "request", void 0);
     return CreateSoftwareUpdateJobRequest;
@@ -148,23 +148,23 @@ var CreateSoftwareUpdateJobResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], CreateSoftwareUpdateJobResponse.prototype, "badRequestException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], CreateSoftwareUpdateJobResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.CreateSoftwareUpdateJobResponse)
     ], CreateSoftwareUpdateJobResponse.prototype, "createSoftwareUpdateJobResponse", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], CreateSoftwareUpdateJobResponse.prototype, "internalServerErrorException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], CreateSoftwareUpdateJobResponse.prototype, "statusCode", void 0);
     return CreateSoftwareUpdateJobResponse;

@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class Tag extends SpeakeasyBase {
-  @Metadata({ data: "json, name=tag" })
+  @SpeakeasyMetadata({ data: "json, name=tag" })
   tag?: string;
 
-  @Metadata({ data: "json, name=visible" })
+  @SpeakeasyMetadata({ data: "json, name=visible" })
   visible?: boolean;
 }

@@ -4,7 +4,7 @@ import (
 	"openapi/pkg/models/shared"
 )
 
-var PostV05HealthInformationHipRequestServers = []string{
+var PostV05HealthInformationHipRequestServerList = []string{
 	"https://your-hrp-server.com",
 }
 

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // CmTrackingAd
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A Campaign Manager 360 tracking ad.
 **/
 export class CmTrackingAd extends SpeakeasyBase {
-  @Metadata({ data: "json, name=cmAdId" })
+  @SpeakeasyMetadata({ data: "json, name=cmAdId" })
   cmAdId?: string;
 
-  @Metadata({ data: "json, name=cmCreativeId" })
+  @SpeakeasyMetadata({ data: "json, name=cmCreativeId" })
   cmCreativeId?: string;
 
-  @Metadata({ data: "json, name=cmPlacementId" })
+  @SpeakeasyMetadata({ data: "json, name=cmPlacementId" })
   cmPlacementId?: string;
 }

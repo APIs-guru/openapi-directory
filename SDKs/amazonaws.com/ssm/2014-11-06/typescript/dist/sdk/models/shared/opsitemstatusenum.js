@@ -1,0 +1,22 @@
+export var OpsItemStatusEnum;
+(function (OpsItemStatusEnum) {
+    OpsItemStatusEnum["Open"] = "Open";
+    OpsItemStatusEnum["InProgress"] = "InProgress";
+    OpsItemStatusEnum["Resolved"] = "Resolved";
+    OpsItemStatusEnum["Pending"] = "Pending";
+    OpsItemStatusEnum["TimedOut"] = "TimedOut";
+    OpsItemStatusEnum["Cancelling"] = "Cancelling";
+    OpsItemStatusEnum["Cancelled"] = "Cancelled";
+    OpsItemStatusEnum["Failed"] = "Failed";
+    OpsItemStatusEnum["CompletedWithSuccess"] = "CompletedWithSuccess";
+    OpsItemStatusEnum["CompletedWithFailure"] = "CompletedWithFailure";
+    OpsItemStatusEnum["Scheduled"] = "Scheduled";
+    OpsItemStatusEnum["RunbookInProgress"] = "RunbookInProgress";
+    OpsItemStatusEnum["PendingChangeCalendarOverride"] = "PendingChangeCalendarOverride";
+    OpsItemStatusEnum["ChangeCalendarOverrideApproved"] = "ChangeCalendarOverrideApproved";
+    OpsItemStatusEnum["ChangeCalendarOverrideRejected"] = "ChangeCalendarOverrideRejected";
+    OpsItemStatusEnum["PendingApproval"] = "PendingApproval";
+    OpsItemStatusEnum["Approved"] = "Approved";
+    OpsItemStatusEnum["Rejected"] = "Rejected";
+    OpsItemStatusEnum["Closed"] = "Closed";
+})(OpsItemStatusEnum || (OpsItemStatusEnum = {}));

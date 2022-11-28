@@ -1,11 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CloudWatchLoggingOptions } from "./cloudwatchloggingoptions";
 import { CopyCommand } from "./copycommand";
 import { ProcessingConfiguration } from "./processingconfiguration";
 import { RedshiftRetryOptions } from "./redshiftretryoptions";
 import { RedshiftS3BackupModeEnum } from "./redshifts3backupmodeenum";
 import { S3DestinationUpdate } from "./s3destinationupdate";
-import { S3DestinationUpdate } from "./s3destinationupdate";
+
 
 
 // RedshiftDestinationUpdate
@@ -13,36 +13,36 @@ import { S3DestinationUpdate } from "./s3destinationupdate";
  * Describes an update for a destination in Amazon Redshift.
 **/
 export class RedshiftDestinationUpdate extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CloudWatchLoggingOptions" })
+  @SpeakeasyMetadata({ data: "json, name=CloudWatchLoggingOptions" })
   cloudWatchLoggingOptions?: CloudWatchLoggingOptions;
 
-  @Metadata({ data: "json, name=ClusterJDBCURL" })
+  @SpeakeasyMetadata({ data: "json, name=ClusterJDBCURL" })
   clusterJdbcurl?: string;
 
-  @Metadata({ data: "json, name=CopyCommand" })
+  @SpeakeasyMetadata({ data: "json, name=CopyCommand" })
   copyCommand?: CopyCommand;
 
-  @Metadata({ data: "json, name=Password" })
+  @SpeakeasyMetadata({ data: "json, name=Password" })
   password?: string;
 
-  @Metadata({ data: "json, name=ProcessingConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=ProcessingConfiguration" })
   processingConfiguration?: ProcessingConfiguration;
 
-  @Metadata({ data: "json, name=RetryOptions" })
+  @SpeakeasyMetadata({ data: "json, name=RetryOptions" })
   retryOptions?: RedshiftRetryOptions;
 
-  @Metadata({ data: "json, name=RoleARN" })
+  @SpeakeasyMetadata({ data: "json, name=RoleARN" })
   roleArn?: string;
 
-  @Metadata({ data: "json, name=S3BackupMode" })
+  @SpeakeasyMetadata({ data: "json, name=S3BackupMode" })
   s3BackupMode?: RedshiftS3BackupModeEnum;
 
-  @Metadata({ data: "json, name=S3BackupUpdate" })
+  @SpeakeasyMetadata({ data: "json, name=S3BackupUpdate" })
   s3BackupUpdate?: S3DestinationUpdate;
 
-  @Metadata({ data: "json, name=S3Update" })
+  @SpeakeasyMetadata({ data: "json, name=S3Update" })
   s3Update?: S3DestinationUpdate;
 
-  @Metadata({ data: "json, name=Username" })
+  @SpeakeasyMetadata({ data: "json, name=Username" })
   username?: string;
 }

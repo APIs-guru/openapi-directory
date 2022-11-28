@@ -1,5 +1,7 @@
 package shared
 
+// Attributes
+// Attributes of the product. For more information, see https://support.google.com/manufacturers/answer/6124116.
 type Attributes struct {
 	AdditionalImageLink  []Image              `json:"additionalImageLink,omitempty"`
 	AgeGroup             *string              `json:"ageGroup,omitempty"`

@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from typing import Any,List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 class GetJobsStateEnum(str, Enum):
@@ -14,7 +16,7 @@ class GetJobsStateEnum(str, Enum):
 
 @dataclass
 class GetJobsPathParams:
-    state: GetJobsStateEnum = field(default=None, metadata={'path_param': { 'field_name': 'state', 'style': 'simple', 'explode': False }})
+    state: GetJobsStateEnum = field(metadata={'path_param': { 'field_name': 'state', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -27,26 +29,26 @@ class GetJobsQueryParams:
 
 @dataclass
 class GetJobsSecurity:
-    o_auth2: shared.SchemeOAuth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    
-
-@dataclass
-class GetJobsRequest:
-    path_params: GetJobsPathParams = field(default=None)
-    query_params: GetJobsQueryParams = field(default=None)
-    security: GetJobsSecurity = field(default=None)
+    o_auth2: shared.SchemeOAuth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass_json
 @dataclass
 class GetJobs200ApplicationJSON:
-    data: Optional[List[Any]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'data' }})
-    total: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'total' }})
+    data: Optional[List[Any]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('data') }})
+    total: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('total') }})
+    
+
+@dataclass
+class GetJobsRequest:
+    path_params: GetJobsPathParams = field()
+    query_params: GetJobsQueryParams = field()
+    security: GetJobsSecurity = field()
     
 
 @dataclass
 class GetJobsResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     get_jobs_200_application_json_object: Optional[GetJobs200ApplicationJSON] = field(default=None)
     

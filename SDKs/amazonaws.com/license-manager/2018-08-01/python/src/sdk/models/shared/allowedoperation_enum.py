@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum,List
+from enum import Enum
 
 class AllowedOperationEnum(str, Enum):
     CREATE_GRANT = "CreateGrant"

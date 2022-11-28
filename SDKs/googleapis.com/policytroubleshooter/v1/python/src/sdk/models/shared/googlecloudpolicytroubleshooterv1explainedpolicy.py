@@ -1,8 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import googlecloudpolicytroubleshooterv1bindingexplanation
-from . import googleiamv1policy
+from sdk import utils
+from . import *
 
 class GoogleCloudPolicytroubleshooterV1ExplainedPolicyAccessEnum(str, Enum):
     ACCESS_STATE_UNSPECIFIED = "ACCESS_STATE_UNSPECIFIED"
@@ -20,9 +21,13 @@ class GoogleCloudPolicytroubleshooterV1ExplainedPolicyRelevanceEnum(str, Enum):
 @dataclass_json
 @dataclass
 class GoogleCloudPolicytroubleshooterV1ExplainedPolicy:
-    access: Optional[GoogleCloudPolicytroubleshooterV1ExplainedPolicyAccessEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'access' }})
-    binding_explanations: Optional[List[googlecloudpolicytroubleshooterv1bindingexplanation.GoogleCloudPolicytroubleshooterV1BindingExplanation]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'bindingExplanations' }})
-    full_resource_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'fullResourceName' }})
-    policy: Optional[googleiamv1policy.GoogleIamV1Policy] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'policy' }})
-    relevance: Optional[GoogleCloudPolicytroubleshooterV1ExplainedPolicyRelevanceEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'relevance' }})
+    r"""GoogleCloudPolicytroubleshooterV1ExplainedPolicy
+    Details about how a specific IAM Policy contributed to the access check.
+    """
+    
+    access: Optional[GoogleCloudPolicytroubleshooterV1ExplainedPolicyAccessEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('access') }})
+    binding_explanations: Optional[List[GoogleCloudPolicytroubleshooterV1BindingExplanation]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('bindingExplanations') }})
+    full_resource_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('fullResourceName') }})
+    policy: Optional[GoogleIamV1Policy] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('policy') }})
+    relevance: Optional[GoogleCloudPolicytroubleshooterV1ExplainedPolicyRelevanceEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('relevance') }})
     

@@ -1,14 +1,20 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import resourcetype_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class Relationship:
-    relationship_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'relationshipName' }})
-    resource_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'resourceId' }})
-    resource_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'resourceName' }})
-    resource_type: Optional[resourcetype_enum.ResourceTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'resourceType' }})
+    r"""Relationship
+    The relationship of the related resource to the main resource.
+    """
+    
+    relationship_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('relationshipName') }})
+    resource_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('resourceId') }})
+    resource_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('resourceName') }})
+    resource_type: Optional[ResourceTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('resourceType') }})
     

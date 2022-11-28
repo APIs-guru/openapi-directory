@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class GetCoreDefinitionPathParams:
-    core_definition_id: str = field(default=None, metadata={'path_param': { 'field_name': 'CoreDefinitionId', 'style': 'simple', 'explode': False }})
+    core_definition_id: str = field(metadata={'path_param': { 'field_name': 'CoreDefinitionId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -21,14 +24,14 @@ class GetCoreDefinitionHeaders:
 
 @dataclass
 class GetCoreDefinitionRequest:
-    path_params: GetCoreDefinitionPathParams = field(default=None)
-    headers: GetCoreDefinitionHeaders = field(default=None)
+    headers: GetCoreDefinitionHeaders = field()
+    path_params: GetCoreDefinitionPathParams = field()
     
 
 @dataclass
 class GetCoreDefinitionResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     get_core_definition_response: Optional[shared.GetCoreDefinitionResponse] = field(default=None)
-    status_code: int = field(default=None)
     

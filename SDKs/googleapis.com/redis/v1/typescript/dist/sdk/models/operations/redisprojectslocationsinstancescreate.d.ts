@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class RedisProjectsLocationsInstancesCreatePathParams extends SpeakeasyBase {
     parent: string;
@@ -24,7 +24,7 @@ export declare class RedisProjectsLocationsInstancesCreateSecurity extends Speak
 export declare class RedisProjectsLocationsInstancesCreateRequest extends SpeakeasyBase {
     pathParams: RedisProjectsLocationsInstancesCreatePathParams;
     queryParams: RedisProjectsLocationsInstancesCreateQueryParams;
-    request?: shared.Instance;
+    request?: shared.InstanceInput;
     security: RedisProjectsLocationsInstancesCreateSecurity;
 }
 export declare class RedisProjectsLocationsInstancesCreateResponse extends SpeakeasyBase {

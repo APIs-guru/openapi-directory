@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class CloudprofilerProjectsProfilesCreateOfflinePathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,20 +26,20 @@ class CloudprofilerProjectsProfilesCreateOfflineQueryParams:
 
 @dataclass
 class CloudprofilerProjectsProfilesCreateOfflineSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class CloudprofilerProjectsProfilesCreateOfflineSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class CloudprofilerProjectsProfilesCreateOfflineSecurityOption3:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -50,15 +51,15 @@ class CloudprofilerProjectsProfilesCreateOfflineSecurity:
 
 @dataclass
 class CloudprofilerProjectsProfilesCreateOfflineRequest:
-    path_params: CloudprofilerProjectsProfilesCreateOfflinePathParams = field(default=None)
-    query_params: CloudprofilerProjectsProfilesCreateOfflineQueryParams = field(default=None)
-    request: Optional[shared.Profile] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: CloudprofilerProjectsProfilesCreateOfflineSecurity = field(default=None)
+    path_params: CloudprofilerProjectsProfilesCreateOfflinePathParams = field()
+    query_params: CloudprofilerProjectsProfilesCreateOfflineQueryParams = field()
+    security: CloudprofilerProjectsProfilesCreateOfflineSecurity = field()
+    request: Optional[shared.ProfileInput] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class CloudprofilerProjectsProfilesCreateOfflineResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     profile: Optional[shared.Profile] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -14,7 +14,7 @@ type CreateEmployeeSecurity struct {
 
 type CreateEmployeeRequest struct {
 	Headers  CreateEmployeeHeaders
-	Request  []shared.Employee `request:"mediaType=application/json"`
+	Request  []shared.EmployeeInput `request:"mediaType=application/json"`
 	Security CreateEmployeeSecurity
 }
 

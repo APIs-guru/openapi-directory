@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DialogflowProjectsLocationsAgentSessionsDeleteContextsPathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,14 +26,14 @@ class DialogflowProjectsLocationsAgentSessionsDeleteContextsQueryParams:
 
 @dataclass
 class DialogflowProjectsLocationsAgentSessionsDeleteContextsSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DialogflowProjectsLocationsAgentSessionsDeleteContextsSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -43,14 +44,14 @@ class DialogflowProjectsLocationsAgentSessionsDeleteContextsSecurity:
 
 @dataclass
 class DialogflowProjectsLocationsAgentSessionsDeleteContextsRequest:
-    path_params: DialogflowProjectsLocationsAgentSessionsDeleteContextsPathParams = field(default=None)
-    query_params: DialogflowProjectsLocationsAgentSessionsDeleteContextsQueryParams = field(default=None)
-    security: DialogflowProjectsLocationsAgentSessionsDeleteContextsSecurity = field(default=None)
+    path_params: DialogflowProjectsLocationsAgentSessionsDeleteContextsPathParams = field()
+    query_params: DialogflowProjectsLocationsAgentSessionsDeleteContextsQueryParams = field()
+    security: DialogflowProjectsLocationsAgentSessionsDeleteContextsSecurity = field()
     
 
 @dataclass
 class DialogflowProjectsLocationsAgentSessionsDeleteContextsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_protobuf_empty: Optional[dict[str, Any]] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var GetIntersectionsWithinOutputFormatOutputFormatEnum;
 (function (GetIntersectionsWithinOutputFormatOutputFormatEnum) {
     GetIntersectionsWithinOutputFormatOutputFormatEnum["Json"] = "json";
@@ -39,7 +39,7 @@ var GetIntersectionsWithinOutputFormatPathParams = /** @class */ (function (_sup
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=outputFormat" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=outputFormat" }),
         __metadata("design:type", String)
     ], GetIntersectionsWithinOutputFormatPathParams.prototype, "outputFormat", void 0);
     return GetIntersectionsWithinOutputFormatPathParams;
@@ -51,23 +51,23 @@ var GetIntersectionsWithinOutputFormatQueryParams = /** @class */ (function (_su
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=bbox" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=bbox" }),
         __metadata("design:type", String)
     ], GetIntersectionsWithinOutputFormatQueryParams.prototype, "bbox", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=maxDegree" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=maxDegree" }),
         __metadata("design:type", Number)
     ], GetIntersectionsWithinOutputFormatQueryParams.prototype, "maxDegree", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=maxResults" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=maxResults" }),
         __metadata("design:type", Number)
     ], GetIntersectionsWithinOutputFormatQueryParams.prototype, "maxResults", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=minDegree" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=minDegree" }),
         __metadata("design:type", Number)
     ], GetIntersectionsWithinOutputFormatQueryParams.prototype, "minDegree", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=outputSRS" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=outputSRS" }),
         __metadata("design:type", Number)
     ], GetIntersectionsWithinOutputFormatQueryParams.prototype, "outputSrs", void 0);
     return GetIntersectionsWithinOutputFormatQueryParams;
@@ -79,11 +79,11 @@ var GetIntersectionsWithinOutputFormatRequest = /** @class */ (function (_super)
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetIntersectionsWithinOutputFormatPathParams)
     ], GetIntersectionsWithinOutputFormatRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetIntersectionsWithinOutputFormatQueryParams)
     ], GetIntersectionsWithinOutputFormatRequest.prototype, "queryParams", void 0);
     return GetIntersectionsWithinOutputFormatRequest;
@@ -95,11 +95,11 @@ var GetIntersectionsWithinOutputFormatResponse = /** @class */ (function (_super
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetIntersectionsWithinOutputFormatResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetIntersectionsWithinOutputFormatResponse.prototype, "statusCode", void 0);
     return GetIntersectionsWithinOutputFormatResponse;

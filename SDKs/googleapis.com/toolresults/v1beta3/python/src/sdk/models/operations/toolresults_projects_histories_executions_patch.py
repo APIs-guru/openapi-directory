@@ -1,13 +1,14 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class ToolresultsProjectsHistoriesExecutionsPatchPathParams:
-    execution_id: str = field(default=None, metadata={'path_param': { 'field_name': 'executionId', 'style': 'simple', 'explode': False }})
-    history_id: str = field(default=None, metadata={'path_param': { 'field_name': 'historyId', 'style': 'simple', 'explode': False }})
-    project_id: str = field(default=None, metadata={'path_param': { 'field_name': 'projectId', 'style': 'simple', 'explode': False }})
+    execution_id: str = field(metadata={'path_param': { 'field_name': 'executionId', 'style': 'simple', 'explode': False }})
+    history_id: str = field(metadata={'path_param': { 'field_name': 'historyId', 'style': 'simple', 'explode': False }})
+    project_id: str = field(metadata={'path_param': { 'field_name': 'projectId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -28,21 +29,21 @@ class ToolresultsProjectsHistoriesExecutionsPatchQueryParams:
 
 @dataclass
 class ToolresultsProjectsHistoriesExecutionsPatchSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class ToolresultsProjectsHistoriesExecutionsPatchRequest:
-    path_params: ToolresultsProjectsHistoriesExecutionsPatchPathParams = field(default=None)
-    query_params: ToolresultsProjectsHistoriesExecutionsPatchQueryParams = field(default=None)
+    path_params: ToolresultsProjectsHistoriesExecutionsPatchPathParams = field()
+    query_params: ToolresultsProjectsHistoriesExecutionsPatchQueryParams = field()
+    security: ToolresultsProjectsHistoriesExecutionsPatchSecurity = field()
     request: Optional[shared.Execution] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: ToolresultsProjectsHistoriesExecutionsPatchSecurity = field(default=None)
     
 
 @dataclass
 class ToolresultsProjectsHistoriesExecutionsPatchResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     execution: Optional[shared.Execution] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,13 +1,17 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import List,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
 @dataclass
 class GetMediaBySearchQueryParams:
+    api_key: str = field(metadata={'query_param': { 'field_name': 'api_key', 'style': 'form', 'explode': True }})
     accuracy: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'accuracy', 'style': 'form', 'explode': True }})
-    api_key: str = field(default=None, metadata={'query_param': { 'field_name': 'api_key', 'style': 'form', 'explode': True }})
     bbox: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'bbox', 'style': 'form', 'explode': True }})
     contacts: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'contacts', 'style': 'form', 'explode': True }})
     content_type: Optional[float] = field(default=None, metadata={'query_param': { 'field_name': 'content_type', 'style': 'form', 'explode': True }})
@@ -41,24 +45,24 @@ class GetMediaBySearchQueryParams:
     woe_id: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'woe_id', 'style': 'form', 'explode': True }})
     
 
-@dataclass
-class GetMediaBySearchRequest:
-    query_params: GetMediaBySearchQueryParams = field(default=None)
-    
-
 @dataclass_json
 @dataclass
 class GetMediaBySearch200ApplicationJSON:
-    page: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'page' }})
-    pages: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'pages' }})
-    perpage: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'perpage' }})
-    photos: Optional[List[shared.Photo]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'photos' }})
-    total: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'total' }})
+    page: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('page') }})
+    pages: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('pages') }})
+    perpage: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('perpage') }})
+    photos: Optional[List[shared.Photo]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('photos') }})
+    total: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('total') }})
+    
+
+@dataclass
+class GetMediaBySearchRequest:
+    query_params: GetMediaBySearchQueryParams = field()
     
 
 @dataclass
 class GetMediaBySearchResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     get_media_by_search_200_application_json_object: Optional[GetMediaBySearch200ApplicationJSON] = field(default=None)
     

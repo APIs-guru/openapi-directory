@@ -1,37 +1,38 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class UpdateNetworkCellularGatewaySubnetPoolPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=networkId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=networkId" })
   networkId: string;
 }
 
 
 export class UpdateNetworkCellularGatewaySubnetPoolRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=cidr" })
+  @SpeakeasyMetadata({ data: "json, name=cidr" })
   cidr?: string;
 
-  @Metadata({ data: "json, name=mask" })
+  @SpeakeasyMetadata({ data: "json, name=mask" })
   mask?: number;
 }
 
 
 export class UpdateNetworkCellularGatewaySubnetPoolRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: UpdateNetworkCellularGatewaySubnetPoolPathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request?: UpdateNetworkCellularGatewaySubnetPoolRequestBody;
 }
 
 
 export class UpdateNetworkCellularGatewaySubnetPoolResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   updateNetworkCellularGatewaySubnetPool200ApplicationJsonObject?: Map<string, any>;
 }

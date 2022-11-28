@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostReplaceRouteTableAssociationActionEnum(str, Enum):
     REPLACE_ROUTE_TABLE_ASSOCIATION = "ReplaceRouteTableAssociation"
@@ -10,8 +14,8 @@ class PostReplaceRouteTableAssociationVersionEnum(str, Enum):
 
 @dataclass
 class PostReplaceRouteTableAssociationQueryParams:
-    action: PostReplaceRouteTableAssociationActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostReplaceRouteTableAssociationVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostReplaceRouteTableAssociationActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostReplaceRouteTableAssociationVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostReplaceRouteTableAssociationHeaders:
 
 @dataclass
 class PostReplaceRouteTableAssociationRequest:
-    query_params: PostReplaceRouteTableAssociationQueryParams = field(default=None)
-    headers: PostReplaceRouteTableAssociationHeaders = field(default=None)
+    headers: PostReplaceRouteTableAssociationHeaders = field()
+    query_params: PostReplaceRouteTableAssociationQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostReplaceRouteTableAssociationResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

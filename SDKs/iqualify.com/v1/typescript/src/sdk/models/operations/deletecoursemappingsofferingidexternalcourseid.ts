@@ -1,32 +1,33 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class DeleteCourseMappingsOfferingIdExternalCourseIdPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=externalCourseId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=externalCourseId" })
   externalCourseId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=offeringId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=offeringId" })
   offeringId: string;
 }
 
 
 export class DeleteCourseMappingsOfferingIdExternalCourseIdRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: DeleteCourseMappingsOfferingIdExternalCourseIdPathParams;
 }
 
 
 export class DeleteCourseMappingsOfferingIdExternalCourseIdResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   deleteCourseMappingsOfferingIdExternalCourseId200ApplicationJsonStrings?: string[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   error?: shared.Error;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

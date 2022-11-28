@@ -1,70 +1,71 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class AddImageWatermarkV1RequestBodyFile extends SpeakeasyBase {
-  @Metadata({ data: "multipart_form, content=true" })
+  @SpeakeasyMetadata({ data: "multipart_form, content=true" })
   content: Uint8Array;
 
-  @Metadata({ data: "multipart_form, name=file" })
+  @SpeakeasyMetadata({ data: "multipart_form, name=file" })
   file: string;
 }
 
 
 export class AddImageWatermarkV1RequestBodyImage extends SpeakeasyBase {
-  @Metadata({ data: "multipart_form, content=true" })
+  @SpeakeasyMetadata({ data: "multipart_form, content=true" })
   content: Uint8Array;
 
-  @Metadata({ data: "multipart_form, name=image" })
+  @SpeakeasyMetadata({ data: "multipart_form, name=image" })
   image: string;
 }
 
 
 export class AddImageWatermarkV1RequestBody extends SpeakeasyBase {
-  @Metadata({ data: "multipart_form, file=true" })
+  @SpeakeasyMetadata({ data: "multipart_form, file=true" })
   file: AddImageWatermarkV1RequestBodyFile;
 
-  @Metadata({ data: "multipart_form, file=true" })
+  @SpeakeasyMetadata({ data: "multipart_form, file=true" })
   image: AddImageWatermarkV1RequestBodyImage;
 
-  @Metadata({ data: "multipart_form, name=margin" })
+  @SpeakeasyMetadata({ data: "multipart_form, name=margin" })
   margin?: number;
 
-  @Metadata({ data: "multipart_form, name=transparency" })
+  @SpeakeasyMetadata({ data: "multipart_form, name=transparency" })
   transparency?: number;
 }
 
 
-export class AddImageWatermarkV1Request extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=multipart/form-data" })
-  request: AddImageWatermarkV1RequestBody;
-}
-
-
 export class AddImageWatermarkV14XxApplicationProblemPlusJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=errors" })
+  @SpeakeasyMetadata({ data: "json, name=errors" })
   errors?: Map<string, any>;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: number;
 
-  @Metadata({ data: "json, name=title" })
+  @SpeakeasyMetadata({ data: "json, name=title" })
   title?: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: string;
 }
 
 
+export class AddImageWatermarkV1Request extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "request, media_type=multipart/form-data" })
+  request: AddImageWatermarkV1RequestBody;
+}
+
+
 export class AddImageWatermarkV1Response extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   addImageWatermarkV1200ApplicationPdfBinaryString?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   addImageWatermarkV14XxApplicationProblemPlusJsonObject?: AddImageWatermarkV14XxApplicationProblemPlusJson;
 }

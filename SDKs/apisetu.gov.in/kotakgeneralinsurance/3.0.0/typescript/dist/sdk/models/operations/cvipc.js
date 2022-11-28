@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var CvipcRequestBodyCertificateParameters = /** @class */ (function (_super) {
     __extends(CvipcRequestBodyCertificateParameters, _super);
@@ -30,15 +30,15 @@ var CvipcRequestBodyCertificateParameters = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=PolicyNo" }),
+        SpeakeasyMetadata({ data: "json, name=PolicyNo" }),
         __metadata("design:type", String)
     ], CvipcRequestBodyCertificateParameters.prototype, "policyNo", void 0);
     __decorate([
-        Metadata({ data: "json, name=Val" }),
+        SpeakeasyMetadata({ data: "json, name=Val" }),
         __metadata("design:type", String)
     ], CvipcRequestBodyCertificateParameters.prototype, "val", void 0);
     __decorate([
-        Metadata({ data: "json, name=Verification" }),
+        SpeakeasyMetadata({ data: "json, name=Verification" }),
         __metadata("design:type", String)
     ], CvipcRequestBodyCertificateParameters.prototype, "verification", void 0);
     return CvipcRequestBodyCertificateParameters;
@@ -54,19 +54,19 @@ var CvipcRequestBody = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=certificateParameters" }),
+        SpeakeasyMetadata({ data: "json, name=certificateParameters" }),
         __metadata("design:type", CvipcRequestBodyCertificateParameters)
     ], CvipcRequestBody.prototype, "certificateParameters", void 0);
     __decorate([
-        Metadata({ data: "json, name=consentArtifact" }),
+        SpeakeasyMetadata({ data: "json, name=consentArtifact" }),
         __metadata("design:type", Object)
     ], CvipcRequestBody.prototype, "consentArtifact", void 0);
     __decorate([
-        Metadata({ data: "json, name=format" }),
+        SpeakeasyMetadata({ data: "json, name=format" }),
         __metadata("design:type", String)
     ], CvipcRequestBody.prototype, "format", void 0);
     __decorate([
-        Metadata({ data: "json, name=txnId" }),
+        SpeakeasyMetadata({ data: "json, name=txnId" }),
         __metadata("design:type", String)
     ], CvipcRequestBody.prototype, "txnId", void 0);
     return CvipcRequestBody;
@@ -78,32 +78,16 @@ var CvipcSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeApiKey)
     ], CvipcSecurity.prototype, "apiKey", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeClientId)
     ], CvipcSecurity.prototype, "clientId", void 0);
     return CvipcSecurity;
 }(SpeakeasyBase));
 export { CvipcSecurity };
-var CvipcRequest = /** @class */ (function (_super) {
-    __extends(CvipcRequest, _super);
-    function CvipcRequest() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
-        __metadata("design:type", CvipcRequestBody)
-    ], CvipcRequest.prototype, "request", void 0);
-    __decorate([
-        Metadata(),
-        __metadata("design:type", CvipcSecurity)
-    ], CvipcRequest.prototype, "security", void 0);
-    return CvipcRequest;
-}(SpeakeasyBase));
-export { CvipcRequest };
 export var Cvipc400ApplicationJsonErrorEnum;
 (function (Cvipc400ApplicationJsonErrorEnum) {
     Cvipc400ApplicationJsonErrorEnum["MissingParameter"] = "missing_parameter";
@@ -126,11 +110,11 @@ var Cvipc400ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Cvipc400ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Cvipc400ApplicationJson.prototype, "errorDescription", void 0);
     return Cvipc400ApplicationJson;
@@ -152,11 +136,11 @@ var Cvipc401ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Cvipc401ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Cvipc401ApplicationJson.prototype, "errorDescription", void 0);
     return Cvipc401ApplicationJson;
@@ -178,11 +162,11 @@ var Cvipc404ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Cvipc404ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Cvipc404ApplicationJson.prototype, "errorDescription", void 0);
     return Cvipc404ApplicationJson;
@@ -202,11 +186,11 @@ var Cvipc500ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Cvipc500ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Cvipc500ApplicationJson.prototype, "errorDescription", void 0);
     return Cvipc500ApplicationJson;
@@ -226,11 +210,11 @@ var Cvipc502ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Cvipc502ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Cvipc502ApplicationJson.prototype, "errorDescription", void 0);
     return Cvipc502ApplicationJson;
@@ -250,11 +234,11 @@ var Cvipc503ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Cvipc503ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Cvipc503ApplicationJson.prototype, "errorDescription", void 0);
     return Cvipc503ApplicationJson;
@@ -274,55 +258,71 @@ var Cvipc504ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Cvipc504ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Cvipc504ApplicationJson.prototype, "errorDescription", void 0);
     return Cvipc504ApplicationJson;
 }(SpeakeasyBase));
 export { Cvipc504ApplicationJson };
+var CvipcRequest = /** @class */ (function (_super) {
+    __extends(CvipcRequest, _super);
+    function CvipcRequest() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
+        __metadata("design:type", CvipcRequestBody)
+    ], CvipcRequest.prototype, "request", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", CvipcSecurity)
+    ], CvipcRequest.prototype, "security", void 0);
+    return CvipcRequest;
+}(SpeakeasyBase));
+export { CvipcRequest };
 var CvipcResponse = /** @class */ (function (_super) {
     __extends(CvipcResponse, _super);
     function CvipcResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], CvipcResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], CvipcResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Cvipc400ApplicationJson)
     ], CvipcResponse.prototype, "cvipc400ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Cvipc401ApplicationJson)
     ], CvipcResponse.prototype, "cvipc401ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Cvipc404ApplicationJson)
     ], CvipcResponse.prototype, "cvipc404ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Cvipc500ApplicationJson)
     ], CvipcResponse.prototype, "cvipc500ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Cvipc502ApplicationJson)
     ], CvipcResponse.prototype, "cvipc502ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Cvipc503ApplicationJson)
     ], CvipcResponse.prototype, "cvipc503ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Cvipc504ApplicationJson)
     ], CvipcResponse.prototype, "cvipc504ApplicationJsonObject", void 0);
     return CvipcResponse;

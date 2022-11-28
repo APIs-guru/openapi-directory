@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DescribeEndpointSettingsMessage extends SpeakeasyBase {
-  @Metadata({ data: "json, name=EngineName" })
+  @SpeakeasyMetadata({ data: "json, name=EngineName" })
   engineName: string;
 
-  @Metadata({ data: "json, name=Marker" })
+  @SpeakeasyMetadata({ data: "json, name=Marker" })
   marker?: string;
 
-  @Metadata({ data: "json, name=MaxRecords" })
+  @SpeakeasyMetadata({ data: "json, name=MaxRecords" })
   maxRecords?: number;
 }

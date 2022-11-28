@@ -1,73 +1,74 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class FileGetFromTaskPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=fileName" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=fileName" })
   fileName: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=jobId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=jobId" })
   jobId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=taskId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=taskId" })
   taskId: string;
 }
 
 
 export class FileGetFromTaskQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=api-version" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=api-version" })
   apiVersion: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=timeout" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=timeout" })
   timeout?: number;
 }
 
 
 export class FileGetFromTaskHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=If-Modified-Since" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=If-Modified-Since" })
   ifModifiedSince?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=If-Unmodified-Since" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=If-Unmodified-Since" })
   ifUnmodifiedSince?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=client-request-id" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=client-request-id" })
   clientRequestId?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=ocp-date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=ocp-date" })
   ocpDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=ocp-range" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=ocp-range" })
   ocpRange?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=return-client-request-id" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=return-client-request-id" })
   returnClientRequestId?: boolean;
 }
 
 
 export class FileGetFromTaskRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: FileGetFromTaskPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: FileGetFromTaskQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: FileGetFromTaskHeaders;
 }
 
 
 export class FileGetFromTaskResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   batchError?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   fileGetFromTask200ApplicationJsonBinaryString?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: Map<string, string[]>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

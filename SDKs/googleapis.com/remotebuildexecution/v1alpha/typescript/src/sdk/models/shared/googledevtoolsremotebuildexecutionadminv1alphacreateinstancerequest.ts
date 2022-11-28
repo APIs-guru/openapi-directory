@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleDevtoolsRemotebuildexecutionAdminV1alphaInstance } from "./googledevtoolsremotebuildexecutionadminv1alphainstance";
+
 
 
 // GoogleDevtoolsRemotebuildexecutionAdminV1alphaCreateInstanceRequest
@@ -7,12 +8,12 @@ import { GoogleDevtoolsRemotebuildexecutionAdminV1alphaInstance } from "./google
  * The request used for `CreateInstance`.
 **/
 export class GoogleDevtoolsRemotebuildexecutionAdminV1alphaCreateInstanceRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=instance" })
+  @SpeakeasyMetadata({ data: "json, name=instance" })
   instance?: GoogleDevtoolsRemotebuildexecutionAdminV1alphaInstance;
 
-  @Metadata({ data: "json, name=instanceId" })
+  @SpeakeasyMetadata({ data: "json, name=instanceId" })
   instanceId?: string;
 
-  @Metadata({ data: "json, name=parent" })
+  @SpeakeasyMetadata({ data: "json, name=parent" })
   parent?: string;
 }

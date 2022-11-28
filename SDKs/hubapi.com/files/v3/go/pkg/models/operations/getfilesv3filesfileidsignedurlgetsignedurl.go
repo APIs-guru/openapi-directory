@@ -23,22 +23,12 @@ type GetFilesV3FilesFileIDSignedURLGetSignedURLQueryParams struct {
 	Upscale           *bool                                               `queryParam:"style=form,explode=true,name=upscale"`
 }
 
-type GetFilesV3FilesFileIDSignedURLGetSignedURLSecurityOption1 struct {
-	Oauth2Legacy shared.SchemeOauth2Legacy `security:"scheme,type=oauth2"`
-}
-
-type GetFilesV3FilesFileIDSignedURLGetSignedURLSecurityOption2 struct {
-	Hapikey shared.SchemeHapikey `security:"scheme,type=apiKey,subtype=query"`
-}
-
-type GetFilesV3FilesFileIDSignedURLGetSignedURLSecurityOption3 struct {
-	Oauth2Legacy shared.SchemeOauth2Legacy `security:"scheme,type=oauth2"`
-}
-
 type GetFilesV3FilesFileIDSignedURLGetSignedURLSecurity struct {
-	Option1 *GetFilesV3FilesFileIDSignedURLGetSignedURLSecurityOption1 `security:"option"`
-	Option2 *GetFilesV3FilesFileIDSignedURLGetSignedURLSecurityOption2 `security:"option"`
-	Option3 *GetFilesV3FilesFileIDSignedURLGetSignedURLSecurityOption3 `security:"option"`
+	PrivateAppsLegacy  *shared.SchemePrivateAppsLegacy `security:"scheme,type=apiKey,subtype=header"`
+	Oauth2Legacy       *shared.SchemeOauth2Legacy      `security:"scheme,type=oauth2"`
+	Hapikey            *shared.SchemeHapikey           `security:"scheme,type=apiKey,subtype=query"`
+	PrivateAppsLegacy1 *shared.SchemePrivateAppsLegacy `security:"scheme,type=apiKey,subtype=header"`
+	Oauth2Legacy1      *shared.SchemeOauth2Legacy      `security:"scheme,type=oauth2"`
 }
 
 type GetFilesV3FilesFileIDSignedURLGetSignedURLRequest struct {

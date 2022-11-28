@@ -1,5 +1,7 @@
 package shared
 
+// LensUpgradeSummary
+// Lens upgrade summary return object.
 type LensUpgradeSummary struct {
 	CurrentLensVersion *string `json:"CurrentLensVersion,omitempty"`
 	LatestLensVersion  *string `json:"LatestLensVersion,omitempty"`

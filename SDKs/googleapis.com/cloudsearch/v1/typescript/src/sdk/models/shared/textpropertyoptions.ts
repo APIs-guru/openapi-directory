@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TextOperatorOptions } from "./textoperatoroptions";
 import { RetrievalImportance } from "./retrievalimportance";
+
 
 
 // TextPropertyOptions
@@ -8,9 +9,9 @@ import { RetrievalImportance } from "./retrievalimportance";
  * The options for text properties.
 **/
 export class TextPropertyOptions extends SpeakeasyBase {
-  @Metadata({ data: "json, name=operatorOptions" })
+  @SpeakeasyMetadata({ data: "json, name=operatorOptions" })
   operatorOptions?: TextOperatorOptions;
 
-  @Metadata({ data: "json, name=retrievalImportance" })
+  @SpeakeasyMetadata({ data: "json, name=retrievalImportance" })
   retrievalImportance?: RetrievalImportance;
 }

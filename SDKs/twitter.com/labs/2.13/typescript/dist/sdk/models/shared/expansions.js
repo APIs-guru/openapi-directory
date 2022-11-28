@@ -22,31 +22,31 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { Poll } from "./poll";
 var Expansions = /** @class */ (function (_super) {
     __extends(Expansions, _super);
     function Expansions() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=media" }),
+        SpeakeasyMetadata({ data: "json, name=media" }),
         __metadata("design:type", Array)
     ], Expansions.prototype, "media", void 0);
     __decorate([
-        Metadata({ data: "json, name=places" }),
+        SpeakeasyMetadata({ data: "json, name=places" }),
         __metadata("design:type", Array)
     ], Expansions.prototype, "places", void 0);
     __decorate([
-        Metadata({ data: "json, name=polls", elemType: shared.Poll }),
+        SpeakeasyMetadata({ data: "json, name=polls", elemType: Poll }),
         __metadata("design:type", Array)
     ], Expansions.prototype, "polls", void 0);
     __decorate([
-        Metadata({ data: "json, name=tweets" }),
+        SpeakeasyMetadata({ data: "json, name=tweets" }),
         __metadata("design:type", Array)
     ], Expansions.prototype, "tweets", void 0);
     __decorate([
-        Metadata({ data: "json, name=users" }),
+        SpeakeasyMetadata({ data: "json, name=users" }),
         __metadata("design:type", Array)
     ], Expansions.prototype, "users", void 0);
     return Expansions;

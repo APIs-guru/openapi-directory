@@ -1,10 +1,11 @@
 from dataclasses import dataclass, field
 from dataclasses_json import dataclass_json
-from . import channelsresponse
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class GetChannelsResponse:
-    channels_response: channelsresponse.ChannelsResponse = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ChannelsResponse' }})
+    channels_response: ChannelsResponse = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('ChannelsResponse') }})
     

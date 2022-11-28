@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var CreateAlertHeaders = /** @class */ (function (_super) {
     __extends(CreateAlertHeaders, _super);
@@ -30,31 +30,31 @@ var CreateAlertHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
         __metadata("design:type", String)
     ], CreateAlertHeaders.prototype, "xAmzAlgorithm", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
         __metadata("design:type", String)
     ], CreateAlertHeaders.prototype, "xAmzContentSha256", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
         __metadata("design:type", String)
     ], CreateAlertHeaders.prototype, "xAmzCredential", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
         __metadata("design:type", String)
     ], CreateAlertHeaders.prototype, "xAmzDate", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
         __metadata("design:type", String)
     ], CreateAlertHeaders.prototype, "xAmzSecurityToken", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
         __metadata("design:type", String)
     ], CreateAlertHeaders.prototype, "xAmzSignature", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
         __metadata("design:type", String)
     ], CreateAlertHeaders.prototype, "xAmzSignedHeaders", void 0);
     return CreateAlertHeaders;
@@ -70,11 +70,11 @@ var CreateAlertRequestBodyAction = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=LambdaConfiguration" }),
+        SpeakeasyMetadata({ data: "json, name=LambdaConfiguration" }),
         __metadata("design:type", shared.LambdaConfiguration)
     ], CreateAlertRequestBodyAction.prototype, "lambdaConfiguration", void 0);
     __decorate([
-        Metadata({ data: "json, name=SNSConfiguration" }),
+        SpeakeasyMetadata({ data: "json, name=SNSConfiguration" }),
         __metadata("design:type", shared.SnsConfiguration)
     ], CreateAlertRequestBodyAction.prototype, "snsConfiguration", void 0);
     return CreateAlertRequestBodyAction;
@@ -86,27 +86,27 @@ var CreateAlertRequestBody = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Action" }),
+        SpeakeasyMetadata({ data: "json, name=Action" }),
         __metadata("design:type", CreateAlertRequestBodyAction)
     ], CreateAlertRequestBody.prototype, "action", void 0);
     __decorate([
-        Metadata({ data: "json, name=AlertDescription" }),
+        SpeakeasyMetadata({ data: "json, name=AlertDescription" }),
         __metadata("design:type", String)
     ], CreateAlertRequestBody.prototype, "alertDescription", void 0);
     __decorate([
-        Metadata({ data: "json, name=AlertName" }),
+        SpeakeasyMetadata({ data: "json, name=AlertName" }),
         __metadata("design:type", String)
     ], CreateAlertRequestBody.prototype, "alertName", void 0);
     __decorate([
-        Metadata({ data: "json, name=AlertSensitivityThreshold" }),
+        SpeakeasyMetadata({ data: "json, name=AlertSensitivityThreshold" }),
         __metadata("design:type", Number)
     ], CreateAlertRequestBody.prototype, "alertSensitivityThreshold", void 0);
     __decorate([
-        Metadata({ data: "json, name=AnomalyDetectorArn" }),
+        SpeakeasyMetadata({ data: "json, name=AnomalyDetectorArn" }),
         __metadata("design:type", String)
     ], CreateAlertRequestBody.prototype, "anomalyDetectorArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=Tags" }),
+        SpeakeasyMetadata({ data: "json, name=Tags" }),
         __metadata("design:type", Map)
     ], CreateAlertRequestBody.prototype, "tags", void 0);
     return CreateAlertRequestBody;
@@ -118,11 +118,11 @@ var CreateAlertRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", CreateAlertHeaders)
     ], CreateAlertRequest.prototype, "headers", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", CreateAlertRequestBody)
     ], CreateAlertRequest.prototype, "request", void 0);
     return CreateAlertRequest;
@@ -134,43 +134,43 @@ var CreateAlertResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], CreateAlertResponse.prototype, "accessDeniedException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], CreateAlertResponse.prototype, "conflictException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], CreateAlertResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.CreateAlertResponse)
     ], CreateAlertResponse.prototype, "createAlertResponse", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], CreateAlertResponse.prototype, "internalServerException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], CreateAlertResponse.prototype, "resourceNotFoundException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], CreateAlertResponse.prototype, "serviceQuotaExceededException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], CreateAlertResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], CreateAlertResponse.prototype, "tooManyRequestsException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], CreateAlertResponse.prototype, "validationException", void 0);
     return CreateAlertResponse;

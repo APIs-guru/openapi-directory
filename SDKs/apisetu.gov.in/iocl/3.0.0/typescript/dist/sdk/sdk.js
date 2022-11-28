@@ -10,13 +10,10 @@ var __assign = (this && this.__assign) || function () {
     return __assign.apply(this, arguments);
 };
 import axios from "axios";
-import { MatchContentType } from "../internal/utils/contenttype";
+import FormData from "form-data";
 import * as operations from "./models/operations";
-import { SerializeRequestBody } from "../internal/utils/requestbody";
-import FormData from 'form-data';
-import { CreateSecurityClient } from "../internal/utils/security";
-import * as utils from "../internal/utils/utils";
-var Servers = [
+import * as utils from "../internal/utils";
+export var ServerList = [
     "https://apisetu.gov.in/iocl/v3",
 ];
 export function WithServerURL(serverURL, params) {
@@ -24,12 +21,12 @@ export function WithServerURL(serverURL, params) {
         if (params != null) {
             serverURL = utils.ReplaceParameters(serverURL, params);
         }
-        sdk.serverURL = serverURL;
+        sdk._serverURL = serverURL;
     };
 }
 export function WithClient(client) {
     return function (sdk) {
-        sdk.defaultClient = client;
+        sdk._defaultClient = client;
     };
 }
 var SDK = /** @class */ (function () {
@@ -39,43 +36,42 @@ var SDK = /** @class */ (function () {
             opts[_i] = arguments[_i];
         }
         var _this = this;
+        this._language = "typescript";
+        this._sdkVersion = "0.0.1";
+        this._genVersion = "internal";
         opts.forEach(function (o) { return o(_this); });
-        if (this.serverURL == "") {
-            this.serverURL = Servers[0];
+        if (this._serverURL == "") {
+            this._serverURL = ServerList[0];
         }
-        if (!this.defaultClient) {
-            this.defaultClient = axios.create({ baseURL: this.serverURL });
+        if (!this._defaultClient) {
+            this._defaultClient = axios.create({ baseURL: this._serverURL });
         }
-        if (!this.securityClient) {
-            if (this.security) {
-                this.securityClient = CreateSecurityClient(this.defaultClient, this.security);
-            }
-            else {
-                this.securityClient = this.defaultClient;
-            }
+        if (!this._securityClient) {
+            this._securityClient = this._defaultClient;
         }
     }
-    // Lpgsv - LPG Subscription Voucher
     /**
+     * lpgsv - LPG Subscription Voucher
+     *
      * API to verify LPG Subscription Voucher.
     **/
-    SDK.prototype.Lpgsv = function (req, config) {
+    SDK.prototype.lpgsv = function (req, config) {
         var _a;
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.LpgsvRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = baseURL.replace(/\/$/, "") + "/lpgsv/certificate";
         var _b = [{}, {}], reqBodyHeaders = _b[0], reqBody = _b[1];
         try {
-            _a = SerializeRequestBody(req), reqBodyHeaders = _a[0], reqBody = _a[1];
+            _a = utils.SerializeRequestBody(req), reqBodyHeaders = _a[0], reqBody = _a[1];
         }
         catch (e) {
             if (e instanceof Error) {
                 throw new Error("Error serializing request body, cause: ".concat(e.message));
             }
         }
-        var client = CreateSecurityClient(this.defaultClient, req.security);
+        var client = utils.CreateSecurityClient(this._defaultClient, req.security);
         var headers = __assign(__assign({}, reqBodyHeaders), config === null || config === void 0 ? void 0 : config.headers);
         var body;
         if (reqBody instanceof FormData)
@@ -83,48 +79,47 @@ var SDK = /** @class */ (function () {
         else
             body = __assign({}, reqBody);
         return client
-            .post(url, body, __assign({ headers: headers }, config))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "post", headers: headers, data: body }, config)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
                     break;
-                case 400:
-                    if (MatchContentType(contentType, "application/json")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 400:
+                    if (utils.MatchContentType(contentType, "application/json")) {
                         res.lpgsv400ApplicationJsonObject = httpRes === null || httpRes === void 0 ? void 0 : httpRes.data;
                     }
                     break;
-                case 401:
-                    if (MatchContentType(contentType, "application/json")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 401:
+                    if (utils.MatchContentType(contentType, "application/json")) {
                         res.lpgsv401ApplicationJsonObject = httpRes === null || httpRes === void 0 ? void 0 : httpRes.data;
                     }
                     break;
-                case 404:
-                    if (MatchContentType(contentType, "application/json")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 404:
+                    if (utils.MatchContentType(contentType, "application/json")) {
                         res.lpgsv404ApplicationJsonObject = httpRes === null || httpRes === void 0 ? void 0 : httpRes.data;
                     }
                     break;
-                case 500:
-                    if (MatchContentType(contentType, "application/json")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 500:
+                    if (utils.MatchContentType(contentType, "application/json")) {
                         res.lpgsv500ApplicationJsonObject = httpRes === null || httpRes === void 0 ? void 0 : httpRes.data;
                     }
                     break;
-                case 502:
-                    if (MatchContentType(contentType, "application/json")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 502:
+                    if (utils.MatchContentType(contentType, "application/json")) {
                         res.lpgsv502ApplicationJsonObject = httpRes === null || httpRes === void 0 ? void 0 : httpRes.data;
                     }
                     break;
-                case 503:
-                    if (MatchContentType(contentType, "application/json")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 503:
+                    if (utils.MatchContentType(contentType, "application/json")) {
                         res.lpgsv503ApplicationJsonObject = httpRes === null || httpRes === void 0 ? void 0 : httpRes.data;
                     }
                     break;
-                case 504:
-                    if (MatchContentType(contentType, "application/json")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 504:
+                    if (utils.MatchContentType(contentType, "application/json")) {
                         res.lpgsv504ApplicationJsonObject = httpRes === null || httpRes === void 0 ? void 0 : httpRes.data;
                     }
                     break;
@@ -133,27 +128,28 @@ var SDK = /** @class */ (function () {
         })
             .catch(function (error) { throw error; });
     };
-    // Lpgtv - Termination Voucher
     /**
+     * lpgtv - Termination Voucher
+     *
      * API to verify Termination Voucher.
     **/
-    SDK.prototype.Lpgtv = function (req, config) {
+    SDK.prototype.lpgtv = function (req, config) {
         var _a;
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.LpgtvRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = baseURL.replace(/\/$/, "") + "/lpgtv/certificate";
         var _b = [{}, {}], reqBodyHeaders = _b[0], reqBody = _b[1];
         try {
-            _a = SerializeRequestBody(req), reqBodyHeaders = _a[0], reqBody = _a[1];
+            _a = utils.SerializeRequestBody(req), reqBodyHeaders = _a[0], reqBody = _a[1];
         }
         catch (e) {
             if (e instanceof Error) {
                 throw new Error("Error serializing request body, cause: ".concat(e.message));
             }
         }
-        var client = CreateSecurityClient(this.defaultClient, req.security);
+        var client = utils.CreateSecurityClient(this._defaultClient, req.security);
         var headers = __assign(__assign({}, reqBodyHeaders), config === null || config === void 0 ? void 0 : config.headers);
         var body;
         if (reqBody instanceof FormData)
@@ -161,48 +157,47 @@ var SDK = /** @class */ (function () {
         else
             body = __assign({}, reqBody);
         return client
-            .post(url, body, __assign({ headers: headers }, config))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "post", headers: headers, data: body }, config)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
                     break;
-                case 400:
-                    if (MatchContentType(contentType, "application/json")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 400:
+                    if (utils.MatchContentType(contentType, "application/json")) {
                         res.lpgtv400ApplicationJsonObject = httpRes === null || httpRes === void 0 ? void 0 : httpRes.data;
                     }
                     break;
-                case 401:
-                    if (MatchContentType(contentType, "application/json")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 401:
+                    if (utils.MatchContentType(contentType, "application/json")) {
                         res.lpgtv401ApplicationJsonObject = httpRes === null || httpRes === void 0 ? void 0 : httpRes.data;
                     }
                     break;
-                case 404:
-                    if (MatchContentType(contentType, "application/json")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 404:
+                    if (utils.MatchContentType(contentType, "application/json")) {
                         res.lpgtv404ApplicationJsonObject = httpRes === null || httpRes === void 0 ? void 0 : httpRes.data;
                     }
                     break;
-                case 500:
-                    if (MatchContentType(contentType, "application/json")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 500:
+                    if (utils.MatchContentType(contentType, "application/json")) {
                         res.lpgtv500ApplicationJsonObject = httpRes === null || httpRes === void 0 ? void 0 : httpRes.data;
                     }
                     break;
-                case 502:
-                    if (MatchContentType(contentType, "application/json")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 502:
+                    if (utils.MatchContentType(contentType, "application/json")) {
                         res.lpgtv502ApplicationJsonObject = httpRes === null || httpRes === void 0 ? void 0 : httpRes.data;
                     }
                     break;
-                case 503:
-                    if (MatchContentType(contentType, "application/json")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 503:
+                    if (utils.MatchContentType(contentType, "application/json")) {
                         res.lpgtv503ApplicationJsonObject = httpRes === null || httpRes === void 0 ? void 0 : httpRes.data;
                     }
                     break;
-                case 504:
-                    if (MatchContentType(contentType, "application/json")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 504:
+                    if (utils.MatchContentType(contentType, "application/json")) {
                         res.lpgtv504ApplicationJsonObject = httpRes === null || httpRes === void 0 ? void 0 : httpRes.data;
                     }
                     break;

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudRecommendationengineV1beta1BigQuerySource
@@ -6,18 +7,18 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * BigQuery source import data from.
 **/
 export class GoogleCloudRecommendationengineV1beta1BigQuerySource extends SpeakeasyBase {
-  @Metadata({ data: "json, name=dataSchema" })
+  @SpeakeasyMetadata({ data: "json, name=dataSchema" })
   dataSchema?: string;
 
-  @Metadata({ data: "json, name=datasetId" })
+  @SpeakeasyMetadata({ data: "json, name=datasetId" })
   datasetId?: string;
 
-  @Metadata({ data: "json, name=gcsStagingDir" })
+  @SpeakeasyMetadata({ data: "json, name=gcsStagingDir" })
   gcsStagingDir?: string;
 
-  @Metadata({ data: "json, name=projectId" })
+  @SpeakeasyMetadata({ data: "json, name=projectId" })
   projectId?: string;
 
-  @Metadata({ data: "json, name=tableId" })
+  @SpeakeasyMetadata({ data: "json, name=tableId" })
   tableId?: string;
 }

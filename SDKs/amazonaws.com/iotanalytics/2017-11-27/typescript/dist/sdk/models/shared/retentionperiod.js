@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // RetentionPeriod
 /**
  * How long, in days, message data is kept.
@@ -33,11 +33,11 @@ var RetentionPeriod = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=numberOfDays" }),
+        SpeakeasyMetadata({ data: "json, name=numberOfDays" }),
         __metadata("design:type", Number)
     ], RetentionPeriod.prototype, "numberOfDays", void 0);
     __decorate([
-        Metadata({ data: "json, name=unlimited" }),
+        SpeakeasyMetadata({ data: "json, name=unlimited" }),
         __metadata("design:type", Boolean)
     ], RetentionPeriod.prototype, "unlimited", void 0);
     return RetentionPeriod;

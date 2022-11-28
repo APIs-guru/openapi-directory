@@ -1,0 +1,33 @@
+import { AxiosInstance } from "axios";
+import { Changes } from "./changes";
+import { DnsKeys } from "./dnskeys";
+import { ManagedZoneOperations } from "./managedzoneoperations";
+import { ManagedZones } from "./managedzones";
+import { Policies } from "./policies";
+import { Projects } from "./projects";
+import { ResourceRecordSets } from "./resourcerecordsets";
+import { ResponsePolicies } from "./responsepolicies";
+import { ResponsePolicyRules } from "./responsepolicyrules";
+type OptsFunc = (sdk: SDK) => void;
+export declare const ServerList: readonly ["https://dns.googleapis.com/"];
+export declare function WithServerURL(serverURL: string, params?: Map<string, string>): OptsFunc;
+export declare function WithClient(client: AxiosInstance): OptsFunc;
+export declare class SDK {
+    changes: Changes;
+    dnsKeys: DnsKeys;
+    managedZoneOperations: ManagedZoneOperations;
+    managedZones: ManagedZones;
+    policies: Policies;
+    projects: Projects;
+    resourceRecordSets: ResourceRecordSets;
+    responsePolicies: ResponsePolicies;
+    responsePolicyRules: ResponsePolicyRules;
+    _defaultClient: AxiosInstance;
+    _securityClient: AxiosInstance;
+    _serverURL: string;
+    private _language;
+    private _sdkVersion;
+    private _genVersion;
+    constructor(...opts: OptsFunc[]);
+}
+export {};

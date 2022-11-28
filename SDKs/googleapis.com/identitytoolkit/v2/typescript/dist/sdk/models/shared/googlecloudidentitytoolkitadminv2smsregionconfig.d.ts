@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudIdentitytoolkitAdminV2AllowByDefault } from "./googlecloudidentitytoolkitadminv2allowbydefault";
 import { GoogleCloudIdentitytoolkitAdminV2AllowlistOnly } from "./googlecloudidentitytoolkitadminv2allowlistonly";
 /**

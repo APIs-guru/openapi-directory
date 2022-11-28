@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { MemcacheParameters } from "./memcacheparameters";
 export var NodeStateEnum;
 (function (NodeStateEnum) {
@@ -38,31 +38,31 @@ var Node = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=host" }),
+        SpeakeasyMetadata({ data: "json, name=host" }),
         __metadata("design:type", String)
     ], Node.prototype, "host", void 0);
     __decorate([
-        Metadata({ data: "json, name=nodeId" }),
+        SpeakeasyMetadata({ data: "json, name=nodeId" }),
         __metadata("design:type", String)
     ], Node.prototype, "nodeId", void 0);
     __decorate([
-        Metadata({ data: "json, name=parameters" }),
+        SpeakeasyMetadata({ data: "json, name=parameters" }),
         __metadata("design:type", MemcacheParameters)
     ], Node.prototype, "parameters", void 0);
     __decorate([
-        Metadata({ data: "json, name=port" }),
+        SpeakeasyMetadata({ data: "json, name=port" }),
         __metadata("design:type", Number)
     ], Node.prototype, "port", void 0);
     __decorate([
-        Metadata({ data: "json, name=state" }),
+        SpeakeasyMetadata({ data: "json, name=state" }),
         __metadata("design:type", String)
     ], Node.prototype, "state", void 0);
     __decorate([
-        Metadata({ data: "json, name=updateAvailable" }),
+        SpeakeasyMetadata({ data: "json, name=updateAvailable" }),
         __metadata("design:type", Boolean)
     ], Node.prototype, "updateAvailable", void 0);
     __decorate([
-        Metadata({ data: "json, name=zone" }),
+        SpeakeasyMetadata({ data: "json, name=zone" }),
         __metadata("design:type", String)
     ], Node.prototype, "zone", void 0);
     return Node;

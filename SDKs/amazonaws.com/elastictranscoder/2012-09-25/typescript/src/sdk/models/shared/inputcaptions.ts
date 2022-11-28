@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CaptionSource } from "./captionsource";
+
 
 
 // InputCaptions
@@ -8,9 +8,9 @@ import { CaptionSource } from "./captionsource";
  * The captions to be created, if any.
 **/
 export class InputCaptions extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CaptionSources", elemType: shared.CaptionSource })
+  @SpeakeasyMetadata({ data: "json, name=CaptionSources", elemType: CaptionSource })
   captionSources?: CaptionSource[];
 
-  @Metadata({ data: "json, name=MergePolicy" })
+  @SpeakeasyMetadata({ data: "json, name=MergePolicy" })
   mergePolicy?: string;
 }

@@ -1,18 +1,19 @@
-import { AxiosInstance, AxiosRequestConfig } from "axios";
-import * as operations from "./models/operations";
-declare type OptsFunc = (sdk: SDK) => void;
+import { AxiosInstance } from "axios";
+import { Applications } from "./applications";
+import { Transfers } from "./transfers";
+type OptsFunc = (sdk: SDK) => void;
+export declare const ServerList: readonly ["https://admin.googleapis.com/"];
 export declare function WithServerURL(serverURL: string, params?: Map<string, string>): OptsFunc;
 export declare function WithClient(client: AxiosInstance): OptsFunc;
 export declare class SDK {
-    defaultClient?: AxiosInstance;
-    securityClient?: AxiosInstance;
-    security?: any;
-    serverURL: string;
+    applications: Applications;
+    transfers: Transfers;
+    _defaultClient: AxiosInstance;
+    _securityClient: AxiosInstance;
+    _serverURL: string;
+    private _language;
+    private _sdkVersion;
+    private _genVersion;
     constructor(...opts: OptsFunc[]);
-    DatatransferApplicationsGet(req: operations.DatatransferApplicationsGetRequest, config?: AxiosRequestConfig): Promise<operations.DatatransferApplicationsGetResponse>;
-    DatatransferApplicationsList(req: operations.DatatransferApplicationsListRequest, config?: AxiosRequestConfig): Promise<operations.DatatransferApplicationsListResponse>;
-    DatatransferTransfersGet(req: operations.DatatransferTransfersGetRequest, config?: AxiosRequestConfig): Promise<operations.DatatransferTransfersGetResponse>;
-    DatatransferTransfersInsert(req: operations.DatatransferTransfersInsertRequest, config?: AxiosRequestConfig): Promise<operations.DatatransferTransfersInsertResponse>;
-    DatatransferTransfersList(req: operations.DatatransferTransfersListRequest, config?: AxiosRequestConfig): Promise<operations.DatatransferTransfersListResponse>;
 }
 export {};

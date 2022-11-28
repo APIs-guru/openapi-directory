@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 class DisruptionsGetAllDisruptionsDisruptionStatusEnum(str, Enum):
@@ -19,14 +20,14 @@ class DisruptionsGetAllDisruptionsQueryParams:
 
 @dataclass
 class DisruptionsGetAllDisruptionsRequest:
-    query_params: DisruptionsGetAllDisruptionsQueryParams = field(default=None)
+    query_params: DisruptionsGetAllDisruptionsQueryParams = field()
     
 
 @dataclass
 class DisruptionsGetAllDisruptionsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     v3_disruptions_response: Optional[shared.V3DisruptionsResponse] = field(default=None)
     v3_error_response: Optional[shared.V3ErrorResponse] = field(default=None)
     

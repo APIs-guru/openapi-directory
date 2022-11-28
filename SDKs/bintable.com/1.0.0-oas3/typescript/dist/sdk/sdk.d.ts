@@ -1,23 +1,19 @@
-import { AxiosInstance, AxiosRequestConfig } from "axios";
-import * as operations from "./models/operations";
-declare type OptsFunc = (sdk: SDK) => void;
+import { AxiosInstance } from "axios";
+import { Balance } from "./balance";
+import { Lookup } from "./lookup";
+type OptsFunc = (sdk: SDK) => void;
+export declare const ServerList: readonly ["https://api.bintable.com/v1"];
 export declare function WithServerURL(serverURL: string, params?: Map<string, string>): OptsFunc;
 export declare function WithClient(client: AxiosInstance): OptsFunc;
 export declare class SDK {
-    defaultClient?: AxiosInstance;
-    securityClient?: AxiosInstance;
-    security?: any;
-    serverURL: string;
+    balance: Balance;
+    lookup: Lookup;
+    _defaultClient: AxiosInstance;
+    _securityClient: AxiosInstance;
+    _serverURL: string;
+    private _language;
+    private _sdkVersion;
+    private _genVersion;
     constructor(...opts: OptsFunc[]);
-    /**
-     * Get Account balance and expiry
-    **/
-    BalanceLookup(req: operations.BalanceLookupRequest, config?: AxiosRequestConfig): Promise<operations.BalanceLookupResponse>;
-    /**
-     * By passing in the appropriate BIN, you can lookup for
-     * card meta data in bintable.com API
-     *
-    **/
-    BinLookup(req: operations.BinLookupRequest, config?: AxiosRequestConfig): Promise<operations.BinLookupResponse>;
 }
 export {};

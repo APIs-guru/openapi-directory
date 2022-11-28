@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // CisLineTypeCisLineTypeNominalCode
 /**
  * The cis line types' nominal code
@@ -33,15 +33,15 @@ var CisLineTypeCisLineTypeNominalCode = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=@href" }),
+        SpeakeasyMetadata({ data: "json, name=@href" }),
         __metadata("design:type", String)
     ], CisLineTypeCisLineTypeNominalCode.prototype, "atHref", void 0);
     __decorate([
-        Metadata({ data: "json, name=@rel" }),
+        SpeakeasyMetadata({ data: "json, name=@rel" }),
         __metadata("design:type", String)
     ], CisLineTypeCisLineTypeNominalCode.prototype, "atRel", void 0);
     __decorate([
-        Metadata({ data: "json, name=@title" }),
+        SpeakeasyMetadata({ data: "json, name=@title" }),
         __metadata("design:type", String)
     ], CisLineTypeCisLineTypeNominalCode.prototype, "atTitle", void 0);
     return CisLineTypeCisLineTypeNominalCode;
@@ -60,19 +60,19 @@ var CisLineTypeCisLineType = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Description" }),
+        SpeakeasyMetadata({ data: "json, name=Description" }),
         __metadata("design:type", String)
     ], CisLineTypeCisLineType.prototype, "description", void 0);
     __decorate([
-        Metadata({ data: "json, name=LineType" }),
+        SpeakeasyMetadata({ data: "json, name=LineType" }),
         __metadata("design:type", String)
     ], CisLineTypeCisLineType.prototype, "lineType", void 0);
     __decorate([
-        Metadata({ data: "json, name=NominalCode" }),
+        SpeakeasyMetadata({ data: "json, name=NominalCode" }),
         __metadata("design:type", CisLineTypeCisLineTypeNominalCode)
     ], CisLineTypeCisLineType.prototype, "nominalCode", void 0);
     __decorate([
-        Metadata({ data: "json, name=TaxTreatment" }),
+        SpeakeasyMetadata({ data: "json, name=TaxTreatment" }),
         __metadata("design:type", String)
     ], CisLineTypeCisLineType.prototype, "taxTreatment", void 0);
     return CisLineTypeCisLineType;
@@ -84,7 +84,7 @@ var CisLineType = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=CisLineType" }),
+        SpeakeasyMetadata({ data: "json, name=CisLineType" }),
         __metadata("design:type", CisLineTypeCisLineType)
     ], CisLineType.prototype, "cisLineType", void 0);
     return CisLineType;

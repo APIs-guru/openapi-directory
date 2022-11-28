@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class UpdateLongTermPricingRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=IsLongTermPricingAutoRenew" })
+  @SpeakeasyMetadata({ data: "json, name=IsLongTermPricingAutoRenew" })
   isLongTermPricingAutoRenew?: boolean;
 
-  @Metadata({ data: "json, name=LongTermPricingId" })
+  @SpeakeasyMetadata({ data: "json, name=LongTermPricingId" })
   longTermPricingId: string;
 
-  @Metadata({ data: "json, name=ReplacementJob" })
+  @SpeakeasyMetadata({ data: "json, name=ReplacementJob" })
   replacementJob?: string;
 }

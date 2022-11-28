@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AccessDeniedPageSettings } from "./accessdeniedpagesettings";
 import { AttributePropagationSettings } from "./attributepropagationsettings";
 import { CsmSettings } from "./csmsettings";
@@ -36,19 +36,19 @@ var ApplicationSettings = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=accessDeniedPageSettings" }),
+        SpeakeasyMetadata({ data: "json, name=accessDeniedPageSettings" }),
         __metadata("design:type", AccessDeniedPageSettings)
     ], ApplicationSettings.prototype, "accessDeniedPageSettings", void 0);
     __decorate([
-        Metadata({ data: "json, name=attributePropagationSettings" }),
+        SpeakeasyMetadata({ data: "json, name=attributePropagationSettings" }),
         __metadata("design:type", AttributePropagationSettings)
     ], ApplicationSettings.prototype, "attributePropagationSettings", void 0);
     __decorate([
-        Metadata({ data: "json, name=cookieDomain" }),
+        SpeakeasyMetadata({ data: "json, name=cookieDomain" }),
         __metadata("design:type", String)
     ], ApplicationSettings.prototype, "cookieDomain", void 0);
     __decorate([
-        Metadata({ data: "json, name=csmSettings" }),
+        SpeakeasyMetadata({ data: "json, name=csmSettings" }),
         __metadata("design:type", CsmSettings)
     ], ApplicationSettings.prototype, "csmSettings", void 0);
     return ApplicationSettings;

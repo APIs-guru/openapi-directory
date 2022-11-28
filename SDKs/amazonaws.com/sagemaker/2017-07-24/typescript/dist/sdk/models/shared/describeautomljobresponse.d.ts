@@ -1,0 +1,37 @@
+import { SpeakeasyBase } from "../../../internal/utils";
+import { AutoMlJobArtifacts } from "./automljobartifacts";
+import { AutoMlJobConfig } from "./automljobconfig";
+import { AutoMlJobObjective } from "./automljobobjective";
+import { AutoMlJobSecondaryStatusEnum } from "./automljobsecondarystatusenum";
+import { AutoMlJobStatusEnum } from "./automljobstatusenum";
+import { AutoMlCandidate } from "./automlcandidate";
+import { AutoMlChannel } from "./automlchannel";
+import { ModelDeployConfig } from "./modeldeployconfig";
+import { ModelDeployResult } from "./modeldeployresult";
+import { AutoMlOutputDataConfig } from "./automloutputdataconfig";
+import { AutoMlPartialFailureReason } from "./automlpartialfailurereason";
+import { ProblemTypeEnum } from "./problemtypeenum";
+import { ResolvedAttributes } from "./resolvedattributes";
+export declare class DescribeAutoMlJobResponse extends SpeakeasyBase {
+    autoMlJobArn: string;
+    autoMlJobArtifacts?: AutoMlJobArtifacts;
+    autoMlJobConfig?: AutoMlJobConfig;
+    autoMlJobName: string;
+    autoMlJobObjective?: AutoMlJobObjective;
+    autoMlJobSecondaryStatus: AutoMlJobSecondaryStatusEnum;
+    autoMlJobStatus: AutoMlJobStatusEnum;
+    bestCandidate?: AutoMlCandidate;
+    creationTime: Date;
+    endTime?: Date;
+    failureReason?: string;
+    generateCandidateDefinitionsOnly?: boolean;
+    inputDataConfig: AutoMlChannel[];
+    lastModifiedTime: Date;
+    modelDeployConfig?: ModelDeployConfig;
+    modelDeployResult?: ModelDeployResult;
+    outputDataConfig: AutoMlOutputDataConfig;
+    partialFailureReasons?: AutoMlPartialFailureReason[];
+    problemType?: ProblemTypeEnum;
+    resolvedAttributes?: ResolvedAttributes;
+    roleArn: string;
+}

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 /**
  * The pipeline configuration for a resolver of kind <code>PIPELINE</code>.
 **/

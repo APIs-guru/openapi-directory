@@ -1,27 +1,31 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
 from sdk.models import shared
 
 
 @dataclass
 class UpdateAccountUserPathParams:
-    user_id: str = field(default=None, metadata={'path_param': { 'field_name': 'user_id', 'style': 'simple', 'explode': False }})
+    user_id: str = field(metadata={'path_param': { 'field_name': 'user_id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class UpdateAccountUserSecurity:
-    bearer_auth: shared.SchemeBearerAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer' }})
+    bearer_auth: shared.SchemeBearerAuth = field(metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer' }})
     
 
 @dataclass
 class UpdateAccountUserRequest:
-    path_params: UpdateAccountUserPathParams = field(default=None)
-    request: shared.UserOptions = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: UpdateAccountUserSecurity = field(default=None)
+    path_params: UpdateAccountUserPathParams = field()
+    request: shared.UserOptions = field(metadata={'request': { 'media_type': 'application/json' }})
+    security: UpdateAccountUserSecurity = field()
     
 
 @dataclass
 class UpdateAccountUserResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

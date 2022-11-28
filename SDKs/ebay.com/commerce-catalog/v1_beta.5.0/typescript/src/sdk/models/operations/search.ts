@@ -1,56 +1,57 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class SearchQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=aspect_filter" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=aspect_filter" })
   aspectFilter?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=category_ids" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=category_ids" })
   categoryIds?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=fieldgroups" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=fieldgroups" })
   fieldgroups?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=gtin" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=gtin" })
   gtin?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=limit" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=limit" })
   limit?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=mpn" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=mpn" })
   mpn?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=offset" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=offset" })
   offset?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=q" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=q" })
   q?: string;
 }
 
 
 export class SearchSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   apiAuth: shared.SchemeApiAuth;
 }
 
 
 export class SearchRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: SearchQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: SearchSecurity;
 }
 
 
 export class SearchResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   productSearchResponse?: shared.ProductSearchResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

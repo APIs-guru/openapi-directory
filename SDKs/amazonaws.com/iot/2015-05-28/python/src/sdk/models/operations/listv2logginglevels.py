@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 class ListV2LoggingLevelsTargetTypeEnum(str, Enum):
@@ -27,17 +31,17 @@ class ListV2LoggingLevelsHeaders:
 
 @dataclass
 class ListV2LoggingLevelsRequest:
-    query_params: ListV2LoggingLevelsQueryParams = field(default=None)
-    headers: ListV2LoggingLevelsHeaders = field(default=None)
+    headers: ListV2LoggingLevelsHeaders = field()
+    query_params: ListV2LoggingLevelsQueryParams = field()
     
 
 @dataclass
 class ListV2LoggingLevelsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     internal_exception: Optional[Any] = field(default=None)
     invalid_request_exception: Optional[Any] = field(default=None)
     list_v2_logging_levels_response: Optional[shared.ListV2LoggingLevelsResponse] = field(default=None)
     not_configured_exception: Optional[Any] = field(default=None)
     service_unavailable_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

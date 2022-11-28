@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GridRange } from "./gridrange";
 
+
 export enum DeleteRangeRequestShiftDimensionEnum {
-    DimensionUnspecified = "DIMENSION_UNSPECIFIED"
-,    Rows = "ROWS"
-,    Columns = "COLUMNS"
+    DimensionUnspecified = "DIMENSION_UNSPECIFIED",
+    Rows = "ROWS",
+    Columns = "COLUMNS"
 }
 
 
@@ -13,9 +14,9 @@ export enum DeleteRangeRequestShiftDimensionEnum {
  * Deletes a range of cells, shifting other cells into the deleted area.
 **/
 export class DeleteRangeRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=range" })
+  @SpeakeasyMetadata({ data: "json, name=range" })
   range?: GridRange;
 
-  @Metadata({ data: "json, name=shiftDimension" })
+  @SpeakeasyMetadata({ data: "json, name=shiftDimension" })
   shiftDimension?: DeleteRangeRequestShiftDimensionEnum;
 }

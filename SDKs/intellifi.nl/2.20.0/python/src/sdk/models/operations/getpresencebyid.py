@@ -5,17 +5,17 @@ from sdk.models import shared
 
 @dataclass
 class GetPresenceByIDPathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetPresenceByIDRequest:
-    path_params: GetPresenceByIDPathParams = field(default=None)
+    path_params: GetPresenceByIDPathParams = field()
     
 
 @dataclass
 class GetPresenceByIDResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     presence: Optional[shared.Presence] = field(default=None)
-    status_code: int = field(default=None)
     

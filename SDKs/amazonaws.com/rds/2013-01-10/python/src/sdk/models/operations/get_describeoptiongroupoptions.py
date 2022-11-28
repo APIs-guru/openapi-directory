@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetDescribeOptionGroupOptionsActionEnum(str, Enum):
     DESCRIBE_OPTION_GROUP_OPTIONS = "DescribeOptionGroupOptions"
@@ -10,12 +14,12 @@ class GetDescribeOptionGroupOptionsVersionEnum(str, Enum):
 
 @dataclass
 class GetDescribeOptionGroupOptionsQueryParams:
-    action: GetDescribeOptionGroupOptionsActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    engine_name: str = field(default=None, metadata={'query_param': { 'field_name': 'EngineName', 'style': 'form', 'explode': True }})
+    action: GetDescribeOptionGroupOptionsActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    engine_name: str = field(metadata={'query_param': { 'field_name': 'EngineName', 'style': 'form', 'explode': True }})
+    version: GetDescribeOptionGroupOptionsVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     major_engine_version: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'MajorEngineVersion', 'style': 'form', 'explode': True }})
     marker: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'Marker', 'style': 'form', 'explode': True }})
     max_records: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'MaxRecords', 'style': 'form', 'explode': True }})
-    version: GetDescribeOptionGroupOptionsVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -31,13 +35,13 @@ class GetDescribeOptionGroupOptionsHeaders:
 
 @dataclass
 class GetDescribeOptionGroupOptionsRequest:
-    query_params: GetDescribeOptionGroupOptionsQueryParams = field(default=None)
-    headers: GetDescribeOptionGroupOptionsHeaders = field(default=None)
+    headers: GetDescribeOptionGroupOptionsHeaders = field()
+    query_params: GetDescribeOptionGroupOptionsQueryParams = field()
     
 
 @dataclass
 class GetDescribeOptionGroupOptionsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

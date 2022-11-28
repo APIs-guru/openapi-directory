@@ -26,7 +26,7 @@ type PaymentsresellersubscriptionPartnersSubscriptionsProvisionQueryParams struc
 type PaymentsresellersubscriptionPartnersSubscriptionsProvisionRequest struct {
 	PathParams  PaymentsresellersubscriptionPartnersSubscriptionsProvisionPathParams
 	QueryParams PaymentsresellersubscriptionPartnersSubscriptionsProvisionQueryParams
-	Request     *shared.GoogleCloudPaymentsResellerSubscriptionV1Subscription `request:"mediaType=application/json"`
+	Request     *shared.GoogleCloudPaymentsResellerSubscriptionV1SubscriptionInput `request:"mediaType=application/json"`
 }
 
 type PaymentsresellersubscriptionPartnersSubscriptionsProvisionResponse struct {

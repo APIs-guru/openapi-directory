@@ -1,34 +1,35 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class AllCollections200ApplicationJsonCollections extends SpeakeasyBase {
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=owner" })
+  @SpeakeasyMetadata({ data: "json, name=owner" })
   owner?: string;
 
-  @Metadata({ data: "json, name=uid" })
+  @SpeakeasyMetadata({ data: "json, name=uid" })
   uid?: string;
 }
 
 
 export class AllCollections200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=collections", elemType: operations.AllCollections200ApplicationJsonCollections })
+  @SpeakeasyMetadata({ data: "json, name=collections", elemType: AllCollections200ApplicationJsonCollections })
   collections?: AllCollections200ApplicationJsonCollections[];
 }
 
 
 export class AllCollectionsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   allCollections200ApplicationJsonObject?: AllCollections200ApplicationJson;
 }

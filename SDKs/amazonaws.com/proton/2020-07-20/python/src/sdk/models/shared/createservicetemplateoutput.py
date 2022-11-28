@@ -1,10 +1,11 @@
 from dataclasses import dataclass, field
 from dataclasses_json import dataclass_json
-from . import servicetemplate
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class CreateServiceTemplateOutput:
-    service_template: servicetemplate.ServiceTemplate = field(default=None, metadata={'dataclasses_json': { 'field_name': 'serviceTemplate' }})
+    service_template: ServiceTemplate = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('serviceTemplate') }})
     

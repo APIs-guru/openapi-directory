@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { EnterpriseCrmEventbusProtoEventExecutionSnapshot } from "./enterprisecrmeventbusprotoeventexecutionsnapshot";
+
 
 
 // GoogleCloudIntegrationsV1alphaListExecutionSnapshotsResponse
@@ -8,9 +8,9 @@ import { EnterpriseCrmEventbusProtoEventExecutionSnapshot } from "./enterprisecr
  * Response for listing the integration execution snapshot.
 **/
 export class GoogleCloudIntegrationsV1alphaListExecutionSnapshotsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=executionSnapshots", elemType: shared.EnterpriseCrmEventbusProtoEventExecutionSnapshot })
+  @SpeakeasyMetadata({ data: "json, name=executionSnapshots", elemType: EnterpriseCrmEventbusProtoEventExecutionSnapshot })
   executionSnapshots?: EnterpriseCrmEventbusProtoEventExecutionSnapshot[];
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 }

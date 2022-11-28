@@ -40,7 +40,7 @@ type BillingbudgetsBillingAccountsBudgetsCreateSecurity struct {
 type BillingbudgetsBillingAccountsBudgetsCreateRequest struct {
 	PathParams  BillingbudgetsBillingAccountsBudgetsCreatePathParams
 	QueryParams BillingbudgetsBillingAccountsBudgetsCreateQueryParams
-	Request     *shared.GoogleCloudBillingBudgetsV1Budget `request:"mediaType=application/json"`
+	Request     *shared.GoogleCloudBillingBudgetsV1BudgetInput `request:"mediaType=application/json"`
 	Security    BillingbudgetsBillingAccountsBudgetsCreateSecurity
 }
 

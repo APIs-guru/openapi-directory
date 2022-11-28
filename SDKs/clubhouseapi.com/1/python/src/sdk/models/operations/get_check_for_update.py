@@ -1,4 +1,7 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Optional
 
 
@@ -9,11 +12,11 @@ class GetCheckForUpdateQueryParams:
 
 @dataclass
 class GetCheckForUpdateRequest:
-    query_params: GetCheckForUpdateQueryParams = field(default=None)
+    query_params: GetCheckForUpdateQueryParams = field()
     
 
 @dataclass
 class GetCheckForUpdateResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

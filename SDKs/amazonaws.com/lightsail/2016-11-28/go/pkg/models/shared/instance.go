@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// Instance
+// Describes an instance (a virtual private server).
 type Instance struct {
 	AddOns           []AddOn             `json:"addOns,omitempty"`
 	Arn              *string             `json:"arn,omitempty"`

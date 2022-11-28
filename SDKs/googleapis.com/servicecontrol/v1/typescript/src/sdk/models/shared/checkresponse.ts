@@ -1,8 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CheckError } from "./checkerror";
 import { CheckInfo } from "./checkinfo";
 import { QuotaInfo } from "./quotainfo";
+
 
 
 // CheckResponse
@@ -10,21 +10,21 @@ import { QuotaInfo } from "./quotainfo";
  * Response message for the Check method.
 **/
 export class CheckResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=checkErrors", elemType: shared.CheckError })
+  @SpeakeasyMetadata({ data: "json, name=checkErrors", elemType: CheckError })
   checkErrors?: CheckError[];
 
-  @Metadata({ data: "json, name=checkInfo" })
+  @SpeakeasyMetadata({ data: "json, name=checkInfo" })
   checkInfo?: CheckInfo;
 
-  @Metadata({ data: "json, name=operationId" })
+  @SpeakeasyMetadata({ data: "json, name=operationId" })
   operationId?: string;
 
-  @Metadata({ data: "json, name=quotaInfo" })
+  @SpeakeasyMetadata({ data: "json, name=quotaInfo" })
   quotaInfo?: QuotaInfo;
 
-  @Metadata({ data: "json, name=serviceConfigId" })
+  @SpeakeasyMetadata({ data: "json, name=serviceConfigId" })
   serviceConfigId?: string;
 
-  @Metadata({ data: "json, name=serviceRolloutId" })
+  @SpeakeasyMetadata({ data: "json, name=serviceRolloutId" })
   serviceRolloutId?: string;
 }

@@ -1,35 +1,36 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class PostMessagesRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "multipart_form, name=body" })
+  @SpeakeasyMetadata({ data: "multipart_form, name=body" })
   body: string;
 
-  @Metadata({ data: "multipart_form, name=project_id" })
+  @SpeakeasyMetadata({ data: "multipart_form, name=project_id" })
   projectId: number;
 
-  @Metadata({ data: "multipart_form, name=subject" })
+  @SpeakeasyMetadata({ data: "multipart_form, name=subject" })
   subject: string;
 
-  @Metadata({ data: "multipart_form, name=user_id" })
+  @SpeakeasyMetadata({ data: "multipart_form, name=user_id" })
   userId?: number;
 }
 
 
 export class PostMessagesRequest extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=multipart/form-data" })
+  @SpeakeasyMetadata({ data: "request, media_type=multipart/form-data" })
   request?: PostMessagesRequestBody;
 }
 
 
 export class PostMessagesResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   messageEntity?: shared.MessageEntity;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

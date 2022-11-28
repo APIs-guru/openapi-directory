@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PaymentChannelRule } from "./paymentchannelrule";
 
 
+
 export class PaymentChannelCountry extends SpeakeasyBase {
-  @Metadata({ data: "json, name=isoCountryCode" })
+  @SpeakeasyMetadata({ data: "json, name=isoCountryCode" })
   isoCountryCode: string;
 
-  @Metadata({ data: "json, name=rules", elemType: shared.PaymentChannelRule })
+  @SpeakeasyMetadata({ data: "json, name=rules", elemType: PaymentChannelRule })
   rules: PaymentChannelRule[];
 }

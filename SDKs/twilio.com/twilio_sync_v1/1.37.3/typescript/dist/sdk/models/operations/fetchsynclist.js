@@ -1,0 +1,97 @@
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import * as shared from "../shared";
+export var FetchSyncListServerList = [
+    "https://sync.twilio.com",
+];
+var FetchSyncListPathParams = /** @class */ (function (_super) {
+    __extends(FetchSyncListPathParams, _super);
+    function FetchSyncListPathParams() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=ServiceSid" }),
+        __metadata("design:type", String)
+    ], FetchSyncListPathParams.prototype, "serviceSid", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=Sid" }),
+        __metadata("design:type", String)
+    ], FetchSyncListPathParams.prototype, "sid", void 0);
+    return FetchSyncListPathParams;
+}(SpeakeasyBase));
+export { FetchSyncListPathParams };
+var FetchSyncListSecurity = /** @class */ (function (_super) {
+    __extends(FetchSyncListSecurity, _super);
+    function FetchSyncListSecurity() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=basic" }),
+        __metadata("design:type", shared.SchemeAccountSidAuthToken)
+    ], FetchSyncListSecurity.prototype, "accountSidAuthToken", void 0);
+    return FetchSyncListSecurity;
+}(SpeakeasyBase));
+export { FetchSyncListSecurity };
+var FetchSyncListRequest = /** @class */ (function (_super) {
+    __extends(FetchSyncListRequest, _super);
+    function FetchSyncListRequest() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", String)
+    ], FetchSyncListRequest.prototype, "serverUrl", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", FetchSyncListPathParams)
+    ], FetchSyncListRequest.prototype, "pathParams", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", FetchSyncListSecurity)
+    ], FetchSyncListRequest.prototype, "security", void 0);
+    return FetchSyncListRequest;
+}(SpeakeasyBase));
+export { FetchSyncListRequest };
+var FetchSyncListResponse = /** @class */ (function (_super) {
+    __extends(FetchSyncListResponse, _super);
+    function FetchSyncListResponse() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", String)
+    ], FetchSyncListResponse.prototype, "contentType", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", Number)
+    ], FetchSyncListResponse.prototype, "statusCode", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", shared.SyncV1ServiceSyncList)
+    ], FetchSyncListResponse.prototype, "syncV1ServiceSyncList", void 0);
+    return FetchSyncListResponse;
+}(SpeakeasyBase));
+export { FetchSyncListResponse };

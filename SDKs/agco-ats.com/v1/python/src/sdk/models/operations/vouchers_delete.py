@@ -4,16 +4,16 @@ from dataclasses import dataclass, field
 
 @dataclass
 class VouchersDeletePathParams:
-    voucher_code: str = field(default=None, metadata={'path_param': { 'field_name': 'VoucherCode', 'style': 'simple', 'explode': False }})
+    voucher_code: str = field(metadata={'path_param': { 'field_name': 'VoucherCode', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class VouchersDeleteRequest:
-    path_params: VouchersDeletePathParams = field(default=None)
+    path_params: VouchersDeletePathParams = field()
     
 
 @dataclass
 class VouchersDeleteResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

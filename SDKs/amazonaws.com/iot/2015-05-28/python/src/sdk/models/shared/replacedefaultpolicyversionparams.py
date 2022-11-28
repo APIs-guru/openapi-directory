@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import policytemplatename_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ReplaceDefaultPolicyVersionParams:
-    template_name: policytemplatename_enum.PolicyTemplateNameEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'templateName' }})
+    r"""ReplaceDefaultPolicyVersionParams
+    Parameters to define a mitigation action that adds a blank policy to restrict permissions.
+    """
+    
+    template_name: PolicyTemplateNameEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('templateName') }})
     

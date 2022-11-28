@@ -1,68 +1,69 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class RequestCustomerUsersPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=customer_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=customer_id" })
   customerId: number;
 }
 
 
 export class RequestCustomerUsersQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=filter" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=filter" })
   filter?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=include_attributes" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=include_attributes" })
   includeAttributes?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=include_manageable_rooms" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=include_manageable_rooms" })
   includeManageableRooms?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=include_roles" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=include_roles" })
   includeRoles?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=limit" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=limit" })
   limit?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=offset" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=offset" })
   offset?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=sort" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sort" })
   sort?: string;
 }
 
 
 export class RequestCustomerUsersHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Sds-Date-Format" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Sds-Date-Format" })
   xSdsDateFormat?: any;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Sds-Service-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Sds-Service-Token" })
   xSdsServiceToken?: string;
 }
 
 
 export class RequestCustomerUsersRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: RequestCustomerUsersPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: RequestCustomerUsersQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: RequestCustomerUsersHeaders;
 }
 
 
 export class RequestCustomerUsersResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   errorResponse?: shared.ErrorResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   userList?: shared.UserList;
 }

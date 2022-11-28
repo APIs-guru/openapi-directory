@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
 from dataclasses_json import dataclass_json
-from . import property
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class CompositeModelProperty:
-    asset_property: property.Property = field(default=None, metadata={'dataclasses_json': { 'field_name': 'assetProperty' }})
-    name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    type: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    r"""CompositeModelProperty
+    Contains information about a composite model property on an asset.
+    """
+    
+    asset_property: Property = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('assetProperty') }})
+    name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    type: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('type') }})
     

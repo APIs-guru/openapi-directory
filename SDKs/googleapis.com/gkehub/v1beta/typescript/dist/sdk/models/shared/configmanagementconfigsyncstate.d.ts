@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ConfigManagementConfigSyncDeploymentState } from "./configmanagementconfigsyncdeploymentstate";
 import { ConfigManagementSyncState } from "./configmanagementsyncstate";
 import { ConfigManagementConfigSyncVersion } from "./configmanagementconfigsyncversion";

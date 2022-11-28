@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DynamicGroupMetadata } from "./dynamicgroupmetadata";
 import { EntityKey } from "./entitykey";
 // Group
@@ -35,41 +35,77 @@ var Group = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=createTime" }),
+        SpeakeasyMetadata({ data: "json, name=createTime" }),
         __metadata("design:type", String)
     ], Group.prototype, "createTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=description" }),
+        SpeakeasyMetadata({ data: "json, name=description" }),
         __metadata("design:type", String)
     ], Group.prototype, "description", void 0);
     __decorate([
-        Metadata({ data: "json, name=displayName" }),
+        SpeakeasyMetadata({ data: "json, name=displayName" }),
         __metadata("design:type", String)
     ], Group.prototype, "displayName", void 0);
     __decorate([
-        Metadata({ data: "json, name=dynamicGroupMetadata" }),
+        SpeakeasyMetadata({ data: "json, name=dynamicGroupMetadata" }),
         __metadata("design:type", DynamicGroupMetadata)
     ], Group.prototype, "dynamicGroupMetadata", void 0);
     __decorate([
-        Metadata({ data: "json, name=groupKey" }),
+        SpeakeasyMetadata({ data: "json, name=groupKey" }),
         __metadata("design:type", EntityKey)
     ], Group.prototype, "groupKey", void 0);
     __decorate([
-        Metadata({ data: "json, name=labels" }),
+        SpeakeasyMetadata({ data: "json, name=labels" }),
         __metadata("design:type", Map)
     ], Group.prototype, "labels", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], Group.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=parent" }),
+        SpeakeasyMetadata({ data: "json, name=parent" }),
         __metadata("design:type", String)
     ], Group.prototype, "parent", void 0);
     __decorate([
-        Metadata({ data: "json, name=updateTime" }),
+        SpeakeasyMetadata({ data: "json, name=updateTime" }),
         __metadata("design:type", String)
     ], Group.prototype, "updateTime", void 0);
     return Group;
 }(SpeakeasyBase));
 export { Group };
+// GroupInput
+/**
+ * A group within the Cloud Identity Groups API. A `Group` is a collection of entities, where each entity is either a user, another group, or a service account.
+**/
+var GroupInput = /** @class */ (function (_super) {
+    __extends(GroupInput, _super);
+    function GroupInput() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=description" }),
+        __metadata("design:type", String)
+    ], GroupInput.prototype, "description", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=displayName" }),
+        __metadata("design:type", String)
+    ], GroupInput.prototype, "displayName", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=dynamicGroupMetadata" }),
+        __metadata("design:type", DynamicGroupMetadata)
+    ], GroupInput.prototype, "dynamicGroupMetadata", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=groupKey" }),
+        __metadata("design:type", EntityKey)
+    ], GroupInput.prototype, "groupKey", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=labels" }),
+        __metadata("design:type", Map)
+    ], GroupInput.prototype, "labels", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=parent" }),
+        __metadata("design:type", String)
+    ], GroupInput.prototype, "parent", void 0);
+    return GroupInput;
+}(SpeakeasyBase));
+export { GroupInput };

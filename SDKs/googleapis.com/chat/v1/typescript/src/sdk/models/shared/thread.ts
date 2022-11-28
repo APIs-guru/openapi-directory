@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Thread
@@ -6,6 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A thread in Google Chat.
 **/
 export class Thread extends SpeakeasyBase {
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=threadKey" })
+  threadKey?: string;
 }

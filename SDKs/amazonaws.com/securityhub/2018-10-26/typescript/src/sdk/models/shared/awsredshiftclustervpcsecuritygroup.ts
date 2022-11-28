@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AwsRedshiftClusterVpcSecurityGroup
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A VPC security group that the cluster belongs to, if the cluster is in a VPC.
 **/
 export class AwsRedshiftClusterVpcSecurityGroup extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Status" })
+  @SpeakeasyMetadata({ data: "json, name=Status" })
   status?: string;
 
-  @Metadata({ data: "json, name=VpcSecurityGroupId" })
+  @SpeakeasyMetadata({ data: "json, name=VpcSecurityGroupId" })
   vpcSecurityGroupId?: string;
 }

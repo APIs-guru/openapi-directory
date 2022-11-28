@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostCreateDbClusterParameterGroupActionEnum(str, Enum):
     CREATE_DB_CLUSTER_PARAMETER_GROUP = "CreateDBClusterParameterGroup"
@@ -10,8 +14,8 @@ class PostCreateDbClusterParameterGroupVersionEnum(str, Enum):
 
 @dataclass
 class PostCreateDbClusterParameterGroupQueryParams:
-    action: PostCreateDbClusterParameterGroupActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostCreateDbClusterParameterGroupVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostCreateDbClusterParameterGroupActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostCreateDbClusterParameterGroupVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostCreateDbClusterParameterGroupHeaders:
 
 @dataclass
 class PostCreateDbClusterParameterGroupRequest:
-    query_params: PostCreateDbClusterParameterGroupQueryParams = field(default=None)
-    headers: PostCreateDbClusterParameterGroupHeaders = field(default=None)
+    headers: PostCreateDbClusterParameterGroupHeaders = field()
+    query_params: PostCreateDbClusterParameterGroupQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostCreateDbClusterParameterGroupResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

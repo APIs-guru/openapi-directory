@@ -59,15 +59,15 @@ type DcimRearPortsListQueryParams struct {
 	TypeN           *string `queryParam:"style=form,explode=true,name=type__n"`
 }
 
-type DcimRearPortsListRequest struct {
-	QueryParams DcimRearPortsListQueryParams
-}
-
 type DcimRearPortsList200ApplicationJSON struct {
 	Count    int64             `json:"count"`
 	Next     *string           `json:"next,omitempty"`
 	Previous *string           `json:"previous,omitempty"`
 	Results  []shared.RearPort `json:"results"`
+}
+
+type DcimRearPortsListRequest struct {
+	QueryParams DcimRearPortsListQueryParams
 }
 
 type DcimRearPortsListResponse struct {

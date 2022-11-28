@@ -8,8 +8,7 @@ const (
 	WritablePlatformLegacyRPCClientEnumOpengear     WritablePlatformLegacyRPCClientEnum = "opengear"
 )
 
-type WritablePlatform struct {
-	ID           *int64                               `json:"id,omitempty"`
+type WritablePlatformInput struct {
 	Manufacturer *int64                               `json:"manufacturer,omitempty"`
 	Name         string                               `json:"name"`
 	NapalmArgs   *string                              `json:"napalm_args,omitempty"`

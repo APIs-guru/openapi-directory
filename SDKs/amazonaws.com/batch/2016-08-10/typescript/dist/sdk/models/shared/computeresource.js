@@ -22,9 +22,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CrAllocationStrategyEnum } from "./crallocationstrategyenum";
+import { Ec2Configuration } from "./ec2configuration";
 import { LaunchTemplateSpecification } from "./launchtemplatespecification";
 import { CrTypeEnum } from "./crtypeenum";
 // ComputeResource
@@ -37,71 +37,71 @@ var ComputeResource = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=allocationStrategy" }),
+        SpeakeasyMetadata({ data: "json, name=allocationStrategy" }),
         __metadata("design:type", String)
     ], ComputeResource.prototype, "allocationStrategy", void 0);
     __decorate([
-        Metadata({ data: "json, name=bidPercentage" }),
+        SpeakeasyMetadata({ data: "json, name=bidPercentage" }),
         __metadata("design:type", Number)
     ], ComputeResource.prototype, "bidPercentage", void 0);
     __decorate([
-        Metadata({ data: "json, name=desiredvCpus" }),
+        SpeakeasyMetadata({ data: "json, name=desiredvCpus" }),
         __metadata("design:type", Number)
     ], ComputeResource.prototype, "desiredvCpus", void 0);
     __decorate([
-        Metadata({ data: "json, name=ec2Configuration", elemType: shared.Ec2Configuration }),
+        SpeakeasyMetadata({ data: "json, name=ec2Configuration", elemType: Ec2Configuration }),
         __metadata("design:type", Array)
     ], ComputeResource.prototype, "ec2Configuration", void 0);
     __decorate([
-        Metadata({ data: "json, name=ec2KeyPair" }),
+        SpeakeasyMetadata({ data: "json, name=ec2KeyPair" }),
         __metadata("design:type", String)
     ], ComputeResource.prototype, "ec2KeyPair", void 0);
     __decorate([
-        Metadata({ data: "json, name=imageId" }),
+        SpeakeasyMetadata({ data: "json, name=imageId" }),
         __metadata("design:type", String)
     ], ComputeResource.prototype, "imageId", void 0);
     __decorate([
-        Metadata({ data: "json, name=instanceRole" }),
+        SpeakeasyMetadata({ data: "json, name=instanceRole" }),
         __metadata("design:type", String)
     ], ComputeResource.prototype, "instanceRole", void 0);
     __decorate([
-        Metadata({ data: "json, name=instanceTypes" }),
+        SpeakeasyMetadata({ data: "json, name=instanceTypes" }),
         __metadata("design:type", Array)
     ], ComputeResource.prototype, "instanceTypes", void 0);
     __decorate([
-        Metadata({ data: "json, name=launchTemplate" }),
+        SpeakeasyMetadata({ data: "json, name=launchTemplate" }),
         __metadata("design:type", LaunchTemplateSpecification)
     ], ComputeResource.prototype, "launchTemplate", void 0);
     __decorate([
-        Metadata({ data: "json, name=maxvCpus" }),
+        SpeakeasyMetadata({ data: "json, name=maxvCpus" }),
         __metadata("design:type", Number)
     ], ComputeResource.prototype, "maxvCpus", void 0);
     __decorate([
-        Metadata({ data: "json, name=minvCpus" }),
+        SpeakeasyMetadata({ data: "json, name=minvCpus" }),
         __metadata("design:type", Number)
     ], ComputeResource.prototype, "minvCpus", void 0);
     __decorate([
-        Metadata({ data: "json, name=placementGroup" }),
+        SpeakeasyMetadata({ data: "json, name=placementGroup" }),
         __metadata("design:type", String)
     ], ComputeResource.prototype, "placementGroup", void 0);
     __decorate([
-        Metadata({ data: "json, name=securityGroupIds" }),
+        SpeakeasyMetadata({ data: "json, name=securityGroupIds" }),
         __metadata("design:type", Array)
     ], ComputeResource.prototype, "securityGroupIds", void 0);
     __decorate([
-        Metadata({ data: "json, name=spotIamFleetRole" }),
+        SpeakeasyMetadata({ data: "json, name=spotIamFleetRole" }),
         __metadata("design:type", String)
     ], ComputeResource.prototype, "spotIamFleetRole", void 0);
     __decorate([
-        Metadata({ data: "json, name=subnets" }),
+        SpeakeasyMetadata({ data: "json, name=subnets" }),
         __metadata("design:type", Array)
     ], ComputeResource.prototype, "subnets", void 0);
     __decorate([
-        Metadata({ data: "json, name=tags" }),
+        SpeakeasyMetadata({ data: "json, name=tags" }),
         __metadata("design:type", Map)
     ], ComputeResource.prototype, "tags", void 0);
     __decorate([
-        Metadata({ data: "json, name=type" }),
+        SpeakeasyMetadata({ data: "json, name=type" }),
         __metadata("design:type", String)
     ], ComputeResource.prototype, "type", void 0);
     return ComputeResource;

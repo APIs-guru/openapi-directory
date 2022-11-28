@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var FitcerRequestBodyCertificateParameters = /** @class */ (function (_super) {
     __extends(FitcerRequestBodyCertificateParameters, _super);
@@ -30,23 +30,23 @@ var FitcerRequestBodyCertificateParameters = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=FullName" }),
+        SpeakeasyMetadata({ data: "json, name=FullName" }),
         __metadata("design:type", String)
     ], FitcerRequestBodyCertificateParameters.prototype, "fullName", void 0);
     __decorate([
-        Metadata({ data: "json, name=UID" }),
+        SpeakeasyMetadata({ data: "json, name=UID" }),
         __metadata("design:type", String)
     ], FitcerRequestBodyCertificateParameters.prototype, "uid", void 0);
     __decorate([
-        Metadata({ data: "json, name=chasis_no" }),
+        SpeakeasyMetadata({ data: "json, name=chasis_no" }),
         __metadata("design:type", String)
     ], FitcerRequestBodyCertificateParameters.prototype, "chasisNo", void 0);
     __decorate([
-        Metadata({ data: "json, name=reg_no" }),
+        SpeakeasyMetadata({ data: "json, name=reg_no" }),
         __metadata("design:type", String)
     ], FitcerRequestBodyCertificateParameters.prototype, "regNo", void 0);
     __decorate([
-        Metadata({ data: "json, name=swd_name" }),
+        SpeakeasyMetadata({ data: "json, name=swd_name" }),
         __metadata("design:type", String)
     ], FitcerRequestBodyCertificateParameters.prototype, "swdName", void 0);
     return FitcerRequestBodyCertificateParameters;
@@ -63,19 +63,19 @@ var FitcerRequestBody = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=certificateParameters" }),
+        SpeakeasyMetadata({ data: "json, name=certificateParameters" }),
         __metadata("design:type", FitcerRequestBodyCertificateParameters)
     ], FitcerRequestBody.prototype, "certificateParameters", void 0);
     __decorate([
-        Metadata({ data: "json, name=consentArtifact" }),
+        SpeakeasyMetadata({ data: "json, name=consentArtifact" }),
         __metadata("design:type", Object)
     ], FitcerRequestBody.prototype, "consentArtifact", void 0);
     __decorate([
-        Metadata({ data: "json, name=format" }),
+        SpeakeasyMetadata({ data: "json, name=format" }),
         __metadata("design:type", String)
     ], FitcerRequestBody.prototype, "format", void 0);
     __decorate([
-        Metadata({ data: "json, name=txnId" }),
+        SpeakeasyMetadata({ data: "json, name=txnId" }),
         __metadata("design:type", String)
     ], FitcerRequestBody.prototype, "txnId", void 0);
     return FitcerRequestBody;
@@ -87,32 +87,16 @@ var FitcerSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeApiKey)
     ], FitcerSecurity.prototype, "apiKey", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeClientId)
     ], FitcerSecurity.prototype, "clientId", void 0);
     return FitcerSecurity;
 }(SpeakeasyBase));
 export { FitcerSecurity };
-var FitcerRequest = /** @class */ (function (_super) {
-    __extends(FitcerRequest, _super);
-    function FitcerRequest() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
-        __metadata("design:type", FitcerRequestBody)
-    ], FitcerRequest.prototype, "request", void 0);
-    __decorate([
-        Metadata(),
-        __metadata("design:type", FitcerSecurity)
-    ], FitcerRequest.prototype, "security", void 0);
-    return FitcerRequest;
-}(SpeakeasyBase));
-export { FitcerRequest };
 export var Fitcer400ApplicationJsonErrorEnum;
 (function (Fitcer400ApplicationJsonErrorEnum) {
     Fitcer400ApplicationJsonErrorEnum["MissingParameter"] = "missing_parameter";
@@ -135,11 +119,11 @@ var Fitcer400ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Fitcer400ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Fitcer400ApplicationJson.prototype, "errorDescription", void 0);
     return Fitcer400ApplicationJson;
@@ -161,11 +145,11 @@ var Fitcer401ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Fitcer401ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Fitcer401ApplicationJson.prototype, "errorDescription", void 0);
     return Fitcer401ApplicationJson;
@@ -187,11 +171,11 @@ var Fitcer404ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Fitcer404ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Fitcer404ApplicationJson.prototype, "errorDescription", void 0);
     return Fitcer404ApplicationJson;
@@ -211,11 +195,11 @@ var Fitcer500ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Fitcer500ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Fitcer500ApplicationJson.prototype, "errorDescription", void 0);
     return Fitcer500ApplicationJson;
@@ -235,11 +219,11 @@ var Fitcer502ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Fitcer502ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Fitcer502ApplicationJson.prototype, "errorDescription", void 0);
     return Fitcer502ApplicationJson;
@@ -259,11 +243,11 @@ var Fitcer503ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Fitcer503ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Fitcer503ApplicationJson.prototype, "errorDescription", void 0);
     return Fitcer503ApplicationJson;
@@ -283,59 +267,75 @@ var Fitcer504ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Fitcer504ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Fitcer504ApplicationJson.prototype, "errorDescription", void 0);
     return Fitcer504ApplicationJson;
 }(SpeakeasyBase));
 export { Fitcer504ApplicationJson };
+var FitcerRequest = /** @class */ (function (_super) {
+    __extends(FitcerRequest, _super);
+    function FitcerRequest() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
+        __metadata("design:type", FitcerRequestBody)
+    ], FitcerRequest.prototype, "request", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", FitcerSecurity)
+    ], FitcerRequest.prototype, "security", void 0);
+    return FitcerRequest;
+}(SpeakeasyBase));
+export { FitcerRequest };
 var FitcerResponse = /** @class */ (function (_super) {
     __extends(FitcerResponse, _super);
     function FitcerResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], FitcerResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], FitcerResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], FitcerResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Fitcer400ApplicationJson)
     ], FitcerResponse.prototype, "fitcer400ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Fitcer401ApplicationJson)
     ], FitcerResponse.prototype, "fitcer401ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Fitcer404ApplicationJson)
     ], FitcerResponse.prototype, "fitcer404ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Fitcer500ApplicationJson)
     ], FitcerResponse.prototype, "fitcer500ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Fitcer502ApplicationJson)
     ], FitcerResponse.prototype, "fitcer502ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Fitcer503ApplicationJson)
     ], FitcerResponse.prototype, "fitcer503ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Fitcer504ApplicationJson)
     ], FitcerResponse.prototype, "fitcer504ApplicationJsonObject", void 0);
     return FitcerResponse;

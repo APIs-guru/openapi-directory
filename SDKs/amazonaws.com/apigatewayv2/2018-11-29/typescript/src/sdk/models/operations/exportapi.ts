@@ -1,83 +1,84 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class ExportApiPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=apiId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=apiId" })
   apiId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=specification" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=specification" })
   specification: string;
 }
 
 
 export class ExportApiQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=exportVersion" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=exportVersion" })
   exportVersion?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=includeExtensions" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=includeExtensions" })
   includeExtensions?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=outputType" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=outputType" })
   outputType: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=stageName" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=stageName" })
   stageName?: string;
 }
 
 
 export class ExportApiHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
 
 export class ExportApiRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: ExportApiPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: ExportApiQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: ExportApiHeaders;
 }
 
 
 export class ExportApiResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   badRequestException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   exportApiResponse?: shared.ExportApiResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   notFoundException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   tooManyRequestsException?: any;
 }

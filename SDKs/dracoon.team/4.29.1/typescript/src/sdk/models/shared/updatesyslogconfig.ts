@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum UpdateSyslogConfigProtocolEnum {
-    Tcp = "TCP"
-,    Udp = "UDP"
+    Tcp = "TCP",
+    Udp = "UDP"
 }
 
 
@@ -11,18 +12,18 @@ export enum UpdateSyslogConfigProtocolEnum {
  * Request model for updating syslog settings
 **/
 export class UpdateSyslogConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=enabled" })
+  @SpeakeasyMetadata({ data: "json, name=enabled" })
   enabled?: boolean;
 
-  @Metadata({ data: "json, name=host" })
+  @SpeakeasyMetadata({ data: "json, name=host" })
   host?: string;
 
-  @Metadata({ data: "json, name=logIpEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=logIpEnabled" })
   logIpEnabled?: boolean;
 
-  @Metadata({ data: "json, name=port" })
+  @SpeakeasyMetadata({ data: "json, name=port" })
   port?: number;
 
-  @Metadata({ data: "json, name=protocol" })
+  @SpeakeasyMetadata({ data: "json, name=protocol" })
   protocol?: UpdateSyslogConfigProtocolEnum;
 }

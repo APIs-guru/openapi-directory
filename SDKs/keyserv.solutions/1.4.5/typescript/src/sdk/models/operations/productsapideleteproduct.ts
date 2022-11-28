@@ -1,31 +1,32 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ProductsApiDeleteProductPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=serial" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=serial" })
   serial: string;
 }
 
 
 export class ProductsApiDeleteProductHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Api-Key" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Api-Key" })
   xApiKey: string;
 }
 
 
 export class ProductsApiDeleteProductRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: ProductsApiDeleteProductPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: ProductsApiDeleteProductHeaders;
 }
 
 
 export class ProductsApiDeleteProductResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

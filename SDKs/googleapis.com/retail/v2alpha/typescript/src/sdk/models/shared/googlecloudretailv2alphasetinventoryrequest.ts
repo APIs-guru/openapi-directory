@@ -1,21 +1,22 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import { GoogleCloudRetailV2alphaProduct } from "./googlecloudretailv2alphaproduct";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { GoogleCloudRetailV2alphaProductInput } from "./googlecloudretailv2alphaproduct";
 
 
-// GoogleCloudRetailV2alphaSetInventoryRequest
+
+// GoogleCloudRetailV2alphaSetInventoryRequestInput
 /** 
  * Request message for ProductService.SetInventory method.
 **/
-export class GoogleCloudRetailV2alphaSetInventoryRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=allowMissing" })
+export class GoogleCloudRetailV2alphaSetInventoryRequestInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=allowMissing" })
   allowMissing?: boolean;
 
-  @Metadata({ data: "json, name=inventory" })
-  inventory?: GoogleCloudRetailV2alphaProduct;
+  @SpeakeasyMetadata({ data: "json, name=inventory" })
+  inventory?: GoogleCloudRetailV2alphaProductInput;
 
-  @Metadata({ data: "json, name=setMask" })
+  @SpeakeasyMetadata({ data: "json, name=setMask" })
   setMask?: string;
 
-  @Metadata({ data: "json, name=setTime" })
+  @SpeakeasyMetadata({ data: "json, name=setTime" })
   setTime?: string;
 }

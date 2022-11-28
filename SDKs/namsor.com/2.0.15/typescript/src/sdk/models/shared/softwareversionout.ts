@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // SoftwareVersionOut
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The software version.
 **/
 export class SoftwareVersionOut extends SpeakeasyBase {
-  @Metadata({ data: "json, name=softwareNameAndVersion" })
+  @SpeakeasyMetadata({ data: "json, name=softwareNameAndVersion" })
   softwareNameAndVersion?: string;
 
-  @Metadata({ data: "json, name=softwareVersion" })
+  @SpeakeasyMetadata({ data: "json, name=softwareVersion" })
   softwareVersion?: number[];
 }

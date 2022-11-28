@@ -1,49 +1,50 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class UpdateSystemModelsPackage extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Autorun, form, name=Autorun;" })
+  @SpeakeasyMetadata({ data: "json, name=Autorun, form, name=Autorun;" })
   autorun?: boolean;
 
-  @Metadata({ data: "json, name=CRC, form, name=CRC;" })
+  @SpeakeasyMetadata({ data: "json, name=CRC, form, name=CRC;" })
   crc: string;
 
-  @Metadata({ data: "json, name=Description, form, name=Description;" })
+  @SpeakeasyMetadata({ data: "json, name=Description, form, name=Description;" })
   description: string;
 
-  @Metadata({ data: "json, name=LocalizedName, form, name=LocalizedName;" })
+  @SpeakeasyMetadata({ data: "json, name=LocalizedName, form, name=LocalizedName;" })
   localizedName?: string;
 
-  @Metadata({ data: "json, name=Notes, form, name=Notes;" })
+  @SpeakeasyMetadata({ data: "json, name=Notes, form, name=Notes;" })
   notes?: string;
 
-  @Metadata({ data: "json, name=PackageID, form, name=PackageID;" })
+  @SpeakeasyMetadata({ data: "json, name=PackageID, form, name=PackageID;" })
   packageId?: string;
 
-  @Metadata({ data: "json, name=PackageTypeID, form, name=PackageTypeID;" })
+  @SpeakeasyMetadata({ data: "json, name=PackageTypeID, form, name=PackageTypeID;" })
   packageTypeId: string;
 
-  @Metadata({ data: "json, name=PreviousVersion, form, name=PreviousVersion;" })
+  @SpeakeasyMetadata({ data: "json, name=PreviousVersion, form, name=PreviousVersion;" })
   previousVersion?: number;
 
-  @Metadata({ data: "json, name=ReleaseDate, form, name=ReleaseDate;" })
+  @SpeakeasyMetadata({ data: "json, name=ReleaseDate, form, name=ReleaseDate;" })
   releaseDate: Date;
 
-  @Metadata({ data: "json, name=Released, form, name=Released;" })
+  @SpeakeasyMetadata({ data: "json, name=Released, form, name=Released;" })
   released?: boolean;
 
-  @Metadata({ data: "json, name=RemoveOnSuccess, form, name=RemoveOnSuccess;" })
+  @SpeakeasyMetadata({ data: "json, name=RemoveOnSuccess, form, name=RemoveOnSuccess;" })
   removeOnSuccess?: boolean;
 
-  @Metadata({ data: "json, name=Size, form, name=Size;" })
+  @SpeakeasyMetadata({ data: "json, name=Size, form, name=Size;" })
   size?: number;
 
-  @Metadata({ data: "json, name=Switches, form, name=Switches;" })
+  @SpeakeasyMetadata({ data: "json, name=Switches, form, name=Switches;" })
   switches?: string;
 
-  @Metadata({ data: "json, name=Url, form, name=Url;" })
+  @SpeakeasyMetadata({ data: "json, name=Url, form, name=Url;" })
   url: string;
 
-  @Metadata({ data: "json, name=Version, form, name=Version;" })
+  @SpeakeasyMetadata({ data: "json, name=Version, form, name=Version;" })
   version: number;
 }

@@ -43,6 +43,8 @@ const (
 	NonComplianceDetailSpecificNonComplianceReasonEnumOncWifiAPILevel                                     NonComplianceDetailSpecificNonComplianceReasonEnum = "ONC_WIFI_API_LEVEL"
 )
 
+// NonComplianceDetail
+// Provides detail about non-compliance with a policy setting.
 type NonComplianceDetail struct {
 	CurrentValue                 *interface{}                                        `json:"currentValue,omitempty"`
 	FieldPath                    *string                                             `json:"fieldPath,omitempty"`

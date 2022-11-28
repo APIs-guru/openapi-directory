@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { NfsExportOptions } from "./nfsexportoptions";
 
+
 export enum ShareStateEnum {
-    StateUnspecified = "STATE_UNSPECIFIED"
-,    Creating = "CREATING"
-,    Ready = "READY"
-,    Deleting = "DELETING"
+    StateUnspecified = "STATE_UNSPECIFIED",
+    Creating = "CREATING",
+    Ready = "READY",
+    Deleting = "DELETING"
 }
 
 
@@ -15,27 +15,49 @@ export enum ShareStateEnum {
  * A Filestore share.
 **/
 export class Share extends SpeakeasyBase {
-  @Metadata({ data: "json, name=capacityGb" })
+  @SpeakeasyMetadata({ data: "json, name=capacityGb" })
   capacityGb?: string;
 
-  @Metadata({ data: "json, name=createTime" })
+  @SpeakeasyMetadata({ data: "json, name=createTime" })
   createTime?: string;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=labels" })
+  @SpeakeasyMetadata({ data: "json, name=labels" })
   labels?: Map<string, string>;
 
-  @Metadata({ data: "json, name=mountName" })
+  @SpeakeasyMetadata({ data: "json, name=mountName" })
   mountName?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=nfsExportOptions", elemType: shared.NfsExportOptions })
+  @SpeakeasyMetadata({ data: "json, name=nfsExportOptions", elemType: NfsExportOptions })
   nfsExportOptions?: NfsExportOptions[];
 
-  @Metadata({ data: "json, name=state" })
+  @SpeakeasyMetadata({ data: "json, name=state" })
   state?: ShareStateEnum;
+}
+
+
+// ShareInput
+/** 
+ * A Filestore share.
+**/
+export class ShareInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=capacityGb" })
+  capacityGb?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=description" })
+  description?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=labels" })
+  labels?: Map<string, string>;
+
+  @SpeakeasyMetadata({ data: "json, name=mountName" })
+  mountName?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=nfsExportOptions", elemType: NfsExportOptions })
+  nfsExportOptions?: NfsExportOptions[];
 }

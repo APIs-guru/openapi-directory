@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { LintResult } from "./lintresult";
+
 
 
 // LintPolicyResponse
@@ -8,6 +8,6 @@ import { LintResult } from "./lintresult";
  * The response of a lint operation. An empty response indicates the operation was able to fully execute and no lint issue was found.
 **/
 export class LintPolicyResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=lintResults", elemType: shared.LintResult })
+  @SpeakeasyMetadata({ data: "json, name=lintResults", elemType: LintResult })
   lintResults?: LintResult[];
 }

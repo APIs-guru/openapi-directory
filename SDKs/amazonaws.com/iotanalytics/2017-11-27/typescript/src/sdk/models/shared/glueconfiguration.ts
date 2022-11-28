@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GlueConfiguration
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Configuration information for coordination with Glue, a fully managed extract, transform and load (ETL) service.
 **/
 export class GlueConfiguration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=databaseName" })
+  @SpeakeasyMetadata({ data: "json, name=databaseName" })
   databaseName: string;
 
-  @Metadata({ data: "json, name=tableName" })
+  @SpeakeasyMetadata({ data: "json, name=tableName" })
   tableName: string;
 }

@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { User } from "./user";
+
 
 
 // Revision
@@ -7,45 +8,45 @@ import { User } from "./user";
  * The metadata for a revision to a file.
 **/
 export class Revision extends SpeakeasyBase {
-  @Metadata({ data: "json, name=exportLinks" })
+  @SpeakeasyMetadata({ data: "json, name=exportLinks" })
   exportLinks?: Map<string, string>;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=keepForever" })
+  @SpeakeasyMetadata({ data: "json, name=keepForever" })
   keepForever?: boolean;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=lastModifyingUser" })
+  @SpeakeasyMetadata({ data: "json, name=lastModifyingUser" })
   lastModifyingUser?: User;
 
-  @Metadata({ data: "json, name=md5Checksum" })
+  @SpeakeasyMetadata({ data: "json, name=md5Checksum" })
   md5Checksum?: string;
 
-  @Metadata({ data: "json, name=mimeType" })
+  @SpeakeasyMetadata({ data: "json, name=mimeType" })
   mimeType?: string;
 
-  @Metadata({ data: "json, name=modifiedTime" })
+  @SpeakeasyMetadata({ data: "json, name=modifiedTime" })
   modifiedTime?: Date;
 
-  @Metadata({ data: "json, name=originalFilename" })
+  @SpeakeasyMetadata({ data: "json, name=originalFilename" })
   originalFilename?: string;
 
-  @Metadata({ data: "json, name=publishAuto" })
+  @SpeakeasyMetadata({ data: "json, name=publishAuto" })
   publishAuto?: boolean;
 
-  @Metadata({ data: "json, name=published" })
+  @SpeakeasyMetadata({ data: "json, name=published" })
   published?: boolean;
 
-  @Metadata({ data: "json, name=publishedLink" })
+  @SpeakeasyMetadata({ data: "json, name=publishedLink" })
   publishedLink?: string;
 
-  @Metadata({ data: "json, name=publishedOutsideDomain" })
+  @SpeakeasyMetadata({ data: "json, name=publishedOutsideDomain" })
   publishedOutsideDomain?: boolean;
 
-  @Metadata({ data: "json, name=size" })
+  @SpeakeasyMetadata({ data: "json, name=size" })
   size?: string;
 }

@@ -1,31 +1,23 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 
 
-export class WritablePlatform extends SpeakeasyBase {
-  @Metadata({ data: "json, name=description" })
+
+export class WritablePlatformInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=device_count" })
-  deviceCount?: number;
-
-  @Metadata({ data: "json, name=id" })
-  id?: number;
-
-  @Metadata({ data: "json, name=manufacturer" })
+  @SpeakeasyMetadata({ data: "json, name=manufacturer" })
   manufacturer?: number;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 
-  @Metadata({ data: "json, name=napalm_args" })
+  @SpeakeasyMetadata({ data: "json, name=napalm_args" })
   napalmArgs?: string;
 
-  @Metadata({ data: "json, name=napalm_driver" })
+  @SpeakeasyMetadata({ data: "json, name=napalm_driver" })
   napalmDriver?: string;
 
-  @Metadata({ data: "json, name=slug" })
+  @SpeakeasyMetadata({ data: "json, name=slug" })
   slug: string;
-
-  @Metadata({ data: "json, name=virtualmachine_count" })
-  virtualmachineCount?: number;
 }

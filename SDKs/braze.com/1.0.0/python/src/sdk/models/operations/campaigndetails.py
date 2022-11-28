@@ -9,11 +9,11 @@ class CampaignDetailsQueryParams:
 
 @dataclass
 class CampaignDetailsRequest:
-    query_params: CampaignDetailsQueryParams = field(default=None)
+    query_params: CampaignDetailsQueryParams = field()
     
 
 @dataclass
 class CampaignDetailsResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

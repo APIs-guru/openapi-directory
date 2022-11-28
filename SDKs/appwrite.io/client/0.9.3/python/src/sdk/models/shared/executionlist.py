@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
 from typing import List
 from dataclasses_json import dataclass_json
-from . import execution
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ExecutionList:
-    executions: List[execution.Execution] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'executions' }})
-    sum: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'sum' }})
+    r"""ExecutionList
+    Executions List
+    """
+    
+    executions: List[Execution] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('executions') }})
+    sum: int = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('sum') }})
     

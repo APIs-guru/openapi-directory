@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from typing import Any,List,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class GetEpisodesPathParams:
-    series_id: str = field(default=None, metadata={'path_param': { 'field_name': 'seriesId', 'style': 'simple', 'explode': False }})
+    series_id: str = field(metadata={'path_param': { 'field_name': 'seriesId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -28,20 +29,20 @@ class GetEpisodesQueryParams:
 
 @dataclass
 class GetEpisodesSecurity:
-    custom_authentication: shared.SchemeCustomAuthentication = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    custom_authentication: shared.SchemeCustomAuthentication = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
     
 
 @dataclass
 class GetEpisodesRequest:
-    path_params: GetEpisodesPathParams = field(default=None)
-    query_params: GetEpisodesQueryParams = field(default=None)
-    security: GetEpisodesSecurity = field(default=None)
+    path_params: GetEpisodesPathParams = field()
+    query_params: GetEpisodesQueryParams = field()
+    security: GetEpisodesSecurity = field()
     
 
 @dataclass
 class GetEpisodesResponse:
+    content_type: str = field()
+    status_code: int = field()
     base_item_dto_query_result: Optional[shared.BaseItemDtoQueryResult] = field(default=None)
-    content_type: str = field(default=None)
     problem_details: Optional[dict[str, Any]] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ComputePlatformEnum } from "./computeplatformenum";
 import { MinimumHealthyHosts } from "./minimumhealthyhosts";
 import { TrafficRoutingConfig } from "./trafficroutingconfig";
+
 
 
 // DeploymentConfigInfo
@@ -9,21 +10,21 @@ import { TrafficRoutingConfig } from "./trafficroutingconfig";
  * Information about a deployment configuration.
 **/
 export class DeploymentConfigInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=computePlatform" })
+  @SpeakeasyMetadata({ data: "json, name=computePlatform" })
   computePlatform?: ComputePlatformEnum;
 
-  @Metadata({ data: "json, name=createTime" })
+  @SpeakeasyMetadata({ data: "json, name=createTime" })
   createTime?: Date;
 
-  @Metadata({ data: "json, name=deploymentConfigId" })
+  @SpeakeasyMetadata({ data: "json, name=deploymentConfigId" })
   deploymentConfigId?: string;
 
-  @Metadata({ data: "json, name=deploymentConfigName" })
+  @SpeakeasyMetadata({ data: "json, name=deploymentConfigName" })
   deploymentConfigName?: string;
 
-  @Metadata({ data: "json, name=minimumHealthyHosts" })
+  @SpeakeasyMetadata({ data: "json, name=minimumHealthyHosts" })
   minimumHealthyHosts?: MinimumHealthyHosts;
 
-  @Metadata({ data: "json, name=trafficRoutingConfig" })
+  @SpeakeasyMetadata({ data: "json, name=trafficRoutingConfig" })
   trafficRoutingConfig?: TrafficRoutingConfig;
 }

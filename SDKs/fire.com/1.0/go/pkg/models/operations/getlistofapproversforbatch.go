@@ -8,10 +8,6 @@ type GetListofApproversForBatchPathParams struct {
 	BatchUUID string `pathParam:"style=simple,explode=false,name=batchUuid"`
 }
 
-type GetListofApproversForBatchRequest struct {
-	PathParams GetListofApproversForBatchPathParams
-}
-
 type GetListofApproversForBatchBatchApproversApprovals struct {
 	EmailAddress *string    `json:"emailAddress,omitempty"`
 	FirstName    *string    `json:"firstName,omitempty"`
@@ -24,6 +20,10 @@ type GetListofApproversForBatchBatchApproversApprovals struct {
 
 type GetListofApproversForBatchBatchApprovers struct {
 	Approvals []GetListofApproversForBatchBatchApproversApprovals `json:"approvals,omitempty"`
+}
+
+type GetListofApproversForBatchRequest struct {
+	PathParams GetListofApproversForBatchPathParams
 }
 
 type GetListofApproversForBatchResponse struct {

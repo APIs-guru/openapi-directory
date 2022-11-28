@@ -5,17 +5,17 @@ from sdk.models import shared
 
 @dataclass
 class GetDatapointsIDPathParams:
-    id: int = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: int = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetDatapointsIDRequest:
-    path_params: GetDatapointsIDPathParams = field(default=None)
+    path_params: GetDatapointsIDPathParams = field()
     
 
 @dataclass
 class GetDatapointsIDResponse:
+    content_type: str = field()
+    status_code: int = field()
     api_core_dto_datapoints_datapoint: Optional[shared.APICoreDtoDatapointsDatapoint] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

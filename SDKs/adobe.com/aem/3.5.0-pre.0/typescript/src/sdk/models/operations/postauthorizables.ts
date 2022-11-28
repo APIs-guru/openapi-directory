@@ -1,40 +1,41 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class PostAuthorizablesQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=authorizableId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=authorizableId" })
   authorizableId: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=createGroup" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=createGroup" })
   createGroup?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=createUser" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=createUser" })
   createUser?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=intermediatePath" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=intermediatePath" })
   intermediatePath: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=profile/givenName" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=profile/givenName" })
   profileGivenName?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=rep:password" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=rep:password" })
   repPassword?: string;
 }
 
 
 export class PostAuthorizablesRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: PostAuthorizablesQueryParams;
 }
 
 
 export class PostAuthorizablesResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   postAuthorizablesDefaultTextHtmlString?: string;
 }

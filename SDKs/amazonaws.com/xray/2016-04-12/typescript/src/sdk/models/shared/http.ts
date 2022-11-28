@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Http
@@ -6,18 +7,18 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Information about an HTTP request.
 **/
 export class Http extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ClientIp" })
+  @SpeakeasyMetadata({ data: "json, name=ClientIp" })
   clientIp?: string;
 
-  @Metadata({ data: "json, name=HttpMethod" })
+  @SpeakeasyMetadata({ data: "json, name=HttpMethod" })
   httpMethod?: string;
 
-  @Metadata({ data: "json, name=HttpStatus" })
+  @SpeakeasyMetadata({ data: "json, name=HttpStatus" })
   httpStatus?: number;
 
-  @Metadata({ data: "json, name=HttpURL" })
+  @SpeakeasyMetadata({ data: "json, name=HttpURL" })
   httpUrl?: string;
 
-  @Metadata({ data: "json, name=UserAgent" })
+  @SpeakeasyMetadata({ data: "json, name=UserAgent" })
   userAgent?: string;
 }

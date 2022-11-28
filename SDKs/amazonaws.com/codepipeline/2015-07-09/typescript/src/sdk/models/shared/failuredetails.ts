@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { FailureTypeEnum } from "./failuretypeenum";
+
 
 
 // FailureDetails
@@ -7,12 +8,12 @@ import { FailureTypeEnum } from "./failuretypeenum";
  * Represents information about failure details.
 **/
 export class FailureDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=externalExecutionId" })
+  @SpeakeasyMetadata({ data: "json, name=externalExecutionId" })
   externalExecutionId?: string;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type: FailureTypeEnum;
 }

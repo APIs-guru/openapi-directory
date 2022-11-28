@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // ApplicationInfo
 /**
  * Describes the status of the application.
@@ -33,27 +33,27 @@ var ApplicationInfo = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=CWEMonitorEnabled" }),
+        SpeakeasyMetadata({ data: "json, name=CWEMonitorEnabled" }),
         __metadata("design:type", Boolean)
     ], ApplicationInfo.prototype, "cweMonitorEnabled", void 0);
     __decorate([
-        Metadata({ data: "json, name=LifeCycle" }),
+        SpeakeasyMetadata({ data: "json, name=LifeCycle" }),
         __metadata("design:type", String)
     ], ApplicationInfo.prototype, "lifeCycle", void 0);
     __decorate([
-        Metadata({ data: "json, name=OpsCenterEnabled" }),
+        SpeakeasyMetadata({ data: "json, name=OpsCenterEnabled" }),
         __metadata("design:type", Boolean)
     ], ApplicationInfo.prototype, "opsCenterEnabled", void 0);
     __decorate([
-        Metadata({ data: "json, name=OpsItemSNSTopicArn" }),
+        SpeakeasyMetadata({ data: "json, name=OpsItemSNSTopicArn" }),
         __metadata("design:type", String)
     ], ApplicationInfo.prototype, "opsItemSnsTopicArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=Remarks" }),
+        SpeakeasyMetadata({ data: "json, name=Remarks" }),
         __metadata("design:type", String)
     ], ApplicationInfo.prototype, "remarks", void 0);
     __decorate([
-        Metadata({ data: "json, name=ResourceGroupName" }),
+        SpeakeasyMetadata({ data: "json, name=ResourceGroupName" }),
         __metadata("design:type", String)
     ], ApplicationInfo.prototype, "resourceGroupName", void 0);
     return ApplicationInfo;

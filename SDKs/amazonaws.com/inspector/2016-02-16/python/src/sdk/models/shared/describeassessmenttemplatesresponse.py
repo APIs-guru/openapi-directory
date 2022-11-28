@@ -1,13 +1,13 @@
 from dataclasses import dataclass, field
 from typing import List
 from dataclasses_json import dataclass_json
-from . import assessmenttemplate
-from . import faileditemdetails
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class DescribeAssessmentTemplatesResponse:
-    assessment_templates: List[assessmenttemplate.AssessmentTemplate] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'assessmentTemplates' }})
-    failed_items: dict[str, faileditemdetails.FailedItemDetails] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'failedItems' }})
+    assessment_templates: List[AssessmentTemplate] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('assessmentTemplates') }})
+    failed_items: dict[str, FailedItemDetails] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('failedItems') }})
     

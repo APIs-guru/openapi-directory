@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class MitigationActionTypeEnum(str, Enum):
     UPDATE_DEVICE_CERTIFICATE = "UPDATE_DEVICE_CERTIFICATE"

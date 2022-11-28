@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import appenginehttptarget
-from . import httptarget
-from . import pubsubtarget
-from . import retryconfig
-from . import status
+from sdk import utils
+from . import *
 
 class JobStateEnum(str, Enum):
     STATE_UNSPECIFIED = "STATE_UNSPECIFIED"
@@ -18,19 +19,23 @@ class JobStateEnum(str, Enum):
 @dataclass_json
 @dataclass
 class Job:
-    app_engine_http_target: Optional[appenginehttptarget.AppEngineHTTPTarget] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'appEngineHttpTarget' }})
-    attempt_deadline: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'attemptDeadline' }})
-    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
-    http_target: Optional[httptarget.HTTPTarget] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'httpTarget' }})
-    last_attempt_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'lastAttemptTime' }})
-    legacy_app_engine_cron: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'legacyAppEngineCron' }})
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    pubsub_target: Optional[pubsubtarget.PubsubTarget] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'pubsubTarget' }})
-    retry_config: Optional[retryconfig.RetryConfig] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'retryConfig' }})
-    schedule: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'schedule' }})
-    schedule_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'scheduleTime' }})
-    state: Optional[JobStateEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'state' }})
-    status: Optional[status.Status] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
-    time_zone: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'timeZone' }})
-    user_update_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'userUpdateTime' }})
+    r"""Job
+    Configuration for a job. The maximum allowed size for a job is 1MB.
+    """
+    
+    app_engine_http_target: Optional[AppEngineHTTPTarget] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('appEngineHttpTarget') }})
+    attempt_deadline: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('attemptDeadline') }})
+    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('description') }})
+    http_target: Optional[HTTPTarget] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('httpTarget') }})
+    last_attempt_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('lastAttemptTime') }})
+    legacy_app_engine_cron: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('legacyAppEngineCron') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    pubsub_target: Optional[PubsubTarget] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('pubsubTarget') }})
+    retry_config: Optional[RetryConfig] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('retryConfig') }})
+    schedule: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('schedule') }})
+    schedule_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('scheduleTime') }})
+    state: Optional[JobStateEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('state') }})
+    status: Optional[Status] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('status') }})
+    time_zone: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('timeZone') }})
+    user_update_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('userUpdateTime') }})
     

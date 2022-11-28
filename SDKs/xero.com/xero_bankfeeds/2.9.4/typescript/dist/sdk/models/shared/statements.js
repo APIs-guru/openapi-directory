@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { Statement } from "./statement";
 import { Pagination } from "./pagination";
 // Statements
 /**
@@ -35,11 +35,11 @@ var Statements = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=items", elemType: shared.Statement }),
+        SpeakeasyMetadata({ data: "json, name=items", elemType: Statement }),
         __metadata("design:type", Array)
     ], Statements.prototype, "items", void 0);
     __decorate([
-        Metadata({ data: "json, name=pagination" }),
+        SpeakeasyMetadata({ data: "json, name=pagination" }),
         __metadata("design:type", Pagination)
     ], Statements.prototype, "pagination", void 0);
     return Statements;

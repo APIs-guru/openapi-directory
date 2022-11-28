@@ -1,7 +1,8 @@
 
 
+
 export enum RouteStatusCodeEnum {
-    Active = "ACTIVE"
-,    Deleted = "DELETED"
-,    Inactive = "INACTIVE"
+    Active = "ACTIVE",
+    Deleted = "DELETED",
+    Inactive = "INACTIVE"
 }

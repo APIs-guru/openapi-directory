@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AwsRedshiftClusterClusterParameterStatus
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The status of a parameter in a cluster parameter group for an Amazon Redshift cluster.
 **/
 export class AwsRedshiftClusterClusterParameterStatus extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ParameterApplyErrorDescription" })
+  @SpeakeasyMetadata({ data: "json, name=ParameterApplyErrorDescription" })
   parameterApplyErrorDescription?: string;
 
-  @Metadata({ data: "json, name=ParameterApplyStatus" })
+  @SpeakeasyMetadata({ data: "json, name=ParameterApplyStatus" })
   parameterApplyStatus?: string;
 
-  @Metadata({ data: "json, name=ParameterName" })
+  @SpeakeasyMetadata({ data: "json, name=ParameterName" })
   parameterName?: string;
 }

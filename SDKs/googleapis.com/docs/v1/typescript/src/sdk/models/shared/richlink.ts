@@ -1,8 +1,27 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
-import { RichLinkProperties } from "./richlinkproperties";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SuggestedTextStyle } from "./suggestedtextstyle";
 import { TextStyle } from "./textstyle";
+import { RichLinkProperties } from "./richlinkproperties";
+
+
+
+// RichLinkInput
+/** 
+ * A link to a Google resource (such as a file in Drive, a YouTube video, or a Calendar event).
+**/
+export class RichLinkInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=suggestedDeletionIds" })
+  suggestedDeletionIds?: string[];
+
+  @SpeakeasyMetadata({ data: "json, name=suggestedInsertionIds" })
+  suggestedInsertionIds?: string[];
+
+  @SpeakeasyMetadata({ data: "json, name=suggestedTextStyleChanges", elemType: SuggestedTextStyle })
+  suggestedTextStyleChanges?: Map<string, SuggestedTextStyle>;
+
+  @SpeakeasyMetadata({ data: "json, name=textStyle" })
+  textStyle?: TextStyle;
+}
 
 
 // RichLink
@@ -10,21 +29,21 @@ import { TextStyle } from "./textstyle";
  * A link to a Google resource (such as a file in Drive, a YouTube video, or a Calendar event).
 **/
 export class RichLink extends SpeakeasyBase {
-  @Metadata({ data: "json, name=richLinkId" })
+  @SpeakeasyMetadata({ data: "json, name=richLinkId" })
   richLinkId?: string;
 
-  @Metadata({ data: "json, name=richLinkProperties" })
+  @SpeakeasyMetadata({ data: "json, name=richLinkProperties" })
   richLinkProperties?: RichLinkProperties;
 
-  @Metadata({ data: "json, name=suggestedDeletionIds" })
+  @SpeakeasyMetadata({ data: "json, name=suggestedDeletionIds" })
   suggestedDeletionIds?: string[];
 
-  @Metadata({ data: "json, name=suggestedInsertionIds" })
+  @SpeakeasyMetadata({ data: "json, name=suggestedInsertionIds" })
   suggestedInsertionIds?: string[];
 
-  @Metadata({ data: "json, name=suggestedTextStyleChanges", elemType: shared.SuggestedTextStyle })
+  @SpeakeasyMetadata({ data: "json, name=suggestedTextStyleChanges", elemType: SuggestedTextStyle })
   suggestedTextStyleChanges?: Map<string, SuggestedTextStyle>;
 
-  @Metadata({ data: "json, name=textStyle" })
+  @SpeakeasyMetadata({ data: "json, name=textStyle" })
   textStyle?: TextStyle;
 }

@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { WorkflowStatusEnum } from "./workflowstatusenum";
+
 
 
 // Workflow
@@ -7,6 +8,6 @@ import { WorkflowStatusEnum } from "./workflowstatusenum";
  * Provides information about the status of the investigation into a finding.
 **/
 export class Workflow extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Status" })
+  @SpeakeasyMetadata({ data: "json, name=Status" })
   status?: WorkflowStatusEnum;
 }

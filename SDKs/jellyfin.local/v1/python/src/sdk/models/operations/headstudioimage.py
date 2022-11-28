@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class HeadStudioImagePathParams:
-    image_type: shared.ImageTypeEnum = field(default=None, metadata={'path_param': { 'field_name': 'imageType', 'style': 'simple', 'explode': False }})
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    image_type: shared.ImageTypeEnum = field(metadata={'path_param': { 'field_name': 'imageType', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -30,14 +31,14 @@ class HeadStudioImageQueryParams:
 
 @dataclass
 class HeadStudioImageRequest:
-    path_params: HeadStudioImagePathParams = field(default=None)
-    query_params: HeadStudioImageQueryParams = field(default=None)
+    path_params: HeadStudioImagePathParams = field()
+    query_params: HeadStudioImageQueryParams = field()
     
 
 @dataclass
 class HeadStudioImageResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     head_studio_image_200_image_wildcard_binary_string: Optional[bytes] = field(default=None)
     problem_details: Optional[dict[str, Any]] = field(default=None)
-    status_code: int = field(default=None)
     

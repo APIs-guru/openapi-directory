@@ -1,25 +1,26 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ApiCoreDtoAccountingConversionOptions extends SpeakeasyBase {
-  @Metadata({ data: "json, name=hideComCost, form, name=hideComCost;" })
+  @SpeakeasyMetadata({ data: "json, name=hideComCost, form, name=hideComCost;" })
   hideComCost?: boolean;
 
-  @Metadata({ data: "json, name=hideCost, form, name=hideCost;" })
+  @SpeakeasyMetadata({ data: "json, name=hideCost, form, name=hideCost;" })
   hideCost?: boolean;
 
-  @Metadata({ data: "json, name=hideCount, form, name=hideCount;" })
+  @SpeakeasyMetadata({ data: "json, name=hideCount, form, name=hideCount;" })
   hideCount?: boolean;
 
-  @Metadata({ data: "json, name=hideParams, form, name=hideParams;" })
+  @SpeakeasyMetadata({ data: "json, name=hideParams, form, name=hideParams;" })
   hideParams?: boolean;
 
-  @Metadata({ data: "json, name=hideValue, form, name=hideValue;" })
+  @SpeakeasyMetadata({ data: "json, name=hideValue, form, name=hideValue;" })
   hideValue?: boolean;
 
-  @Metadata({ data: "json, name=percentCommission, form, name=percentCommission;" })
+  @SpeakeasyMetadata({ data: "json, name=percentCommission, form, name=percentCommission;" })
   percentCommission?: number;
 
-  @Metadata({ data: "json, name=percentValue, form, name=percentValue;" })
+  @SpeakeasyMetadata({ data: "json, name=percentValue, form, name=percentValue;" })
   percentValue?: number;
 }

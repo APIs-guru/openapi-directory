@@ -1,13 +1,14 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import encryptiontype_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class StartStreamEncryptionInput:
-    encryption_type: encryptiontype_enum.EncryptionTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'EncryptionType' }})
-    key_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'KeyId' }})
-    stream_name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'StreamName' }})
+    encryption_type: EncryptionTypeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('EncryptionType') }})
+    key_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('KeyId') }})
+    stream_name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('StreamName') }})
     

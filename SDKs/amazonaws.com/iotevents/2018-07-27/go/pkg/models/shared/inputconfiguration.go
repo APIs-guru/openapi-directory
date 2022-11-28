@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// InputConfiguration
+// Information about the configuration of an input.
 type InputConfiguration struct {
 	CreationTime     time.Time       `json:"creationTime"`
 	InputArn         string          `json:"inputArn"`

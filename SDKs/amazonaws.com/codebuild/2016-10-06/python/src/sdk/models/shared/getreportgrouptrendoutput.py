@@ -1,13 +1,13 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import reportwithrawdata
-from . import reportgrouptrendstats
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class GetReportGroupTrendOutput:
-    raw_data: Optional[List[reportwithrawdata.ReportWithRawData]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'rawData' }})
-    stats: Optional[reportgrouptrendstats.ReportGroupTrendStats] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'stats' }})
+    raw_data: Optional[List[ReportWithRawData]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('rawData') }})
+    stats: Optional[ReportGroupTrendStats] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('stats') }})
     

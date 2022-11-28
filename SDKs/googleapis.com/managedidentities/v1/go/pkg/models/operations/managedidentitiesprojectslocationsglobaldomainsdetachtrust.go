@@ -30,7 +30,7 @@ type ManagedidentitiesProjectsLocationsGlobalDomainsDetachTrustSecurity struct {
 type ManagedidentitiesProjectsLocationsGlobalDomainsDetachTrustRequest struct {
 	PathParams  ManagedidentitiesProjectsLocationsGlobalDomainsDetachTrustPathParams
 	QueryParams ManagedidentitiesProjectsLocationsGlobalDomainsDetachTrustQueryParams
-	Request     *shared.DetachTrustRequest `request:"mediaType=application/json"`
+	Request     *shared.DetachTrustRequestInput `request:"mediaType=application/json"`
 	Security    ManagedidentitiesProjectsLocationsGlobalDomainsDetachTrustSecurity
 }
 

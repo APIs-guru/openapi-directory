@@ -1,14 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Type } from "./type";
 import { QueryOptions } from "./queryoptions";
 import { RequestOptions } from "./requestoptions";
 import { TransactionSelector } from "./transactionselector";
 
+
 export enum ExecuteSqlRequestQueryModeEnum {
-    Normal = "NORMAL"
-,    Plan = "PLAN"
-,    Profile = "PROFILE"
+    Normal = "NORMAL",
+    Plan = "PLAN",
+    Profile = "PROFILE"
 }
 
 
@@ -17,33 +17,33 @@ export enum ExecuteSqlRequestQueryModeEnum {
  * The request for ExecuteSql and ExecuteStreamingSql.
 **/
 export class ExecuteSqlRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=paramTypes", elemType: shared.Type })
+  @SpeakeasyMetadata({ data: "json, name=paramTypes", elemType: Type })
   paramTypes?: Map<string, Type>;
 
-  @Metadata({ data: "json, name=params" })
+  @SpeakeasyMetadata({ data: "json, name=params" })
   params?: Map<string, any>;
 
-  @Metadata({ data: "json, name=partitionToken" })
+  @SpeakeasyMetadata({ data: "json, name=partitionToken" })
   partitionToken?: string;
 
-  @Metadata({ data: "json, name=queryMode" })
+  @SpeakeasyMetadata({ data: "json, name=queryMode" })
   queryMode?: ExecuteSqlRequestQueryModeEnum;
 
-  @Metadata({ data: "json, name=queryOptions" })
+  @SpeakeasyMetadata({ data: "json, name=queryOptions" })
   queryOptions?: QueryOptions;
 
-  @Metadata({ data: "json, name=requestOptions" })
+  @SpeakeasyMetadata({ data: "json, name=requestOptions" })
   requestOptions?: RequestOptions;
 
-  @Metadata({ data: "json, name=resumeToken" })
+  @SpeakeasyMetadata({ data: "json, name=resumeToken" })
   resumeToken?: string;
 
-  @Metadata({ data: "json, name=seqno" })
+  @SpeakeasyMetadata({ data: "json, name=seqno" })
   seqno?: string;
 
-  @Metadata({ data: "json, name=sql" })
+  @SpeakeasyMetadata({ data: "json, name=sql" })
   sql?: string;
 
-  @Metadata({ data: "json, name=transaction" })
+  @SpeakeasyMetadata({ data: "json, name=transaction" })
   transaction?: TransactionSelector;
 }

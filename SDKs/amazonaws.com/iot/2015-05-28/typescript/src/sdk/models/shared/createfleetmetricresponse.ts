@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class CreateFleetMetricResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=metricArn" })
+  @SpeakeasyMetadata({ data: "json, name=metricArn" })
   metricArn?: string;
 
-  @Metadata({ data: "json, name=metricName" })
+  @SpeakeasyMetadata({ data: "json, name=metricName" })
   metricName?: string;
 }

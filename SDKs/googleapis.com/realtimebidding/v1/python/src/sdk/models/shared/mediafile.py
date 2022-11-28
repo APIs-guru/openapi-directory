@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class MediaFileMimeTypeEnum(str, Enum):
     VIDEO_MIME_TYPE_UNSPECIFIED = "VIDEO_MIME_TYPE_UNSPECIFIED"
@@ -26,6 +28,10 @@ class MediaFileMimeTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class MediaFile:
-    bitrate: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'bitrate' }})
-    mime_type: Optional[MediaFileMimeTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'mimeType' }})
+    r"""MediaFile
+    Information about each media file in the VAST.
+    """
+    
+    bitrate: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('bitrate') }})
+    mime_type: Optional[MediaFileMimeTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('mimeType') }})
     

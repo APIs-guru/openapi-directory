@@ -22,22 +22,22 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var Destiny2GetCharacterPathParams = /** @class */ (function (_super) {
     __extends(Destiny2GetCharacterPathParams, _super);
     function Destiny2GetCharacterPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=characterId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=characterId" }),
         __metadata("design:type", Number)
     ], Destiny2GetCharacterPathParams.prototype, "characterId", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=destinyMembershipId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=destinyMembershipId" }),
         __metadata("design:type", Number)
     ], Destiny2GetCharacterPathParams.prototype, "destinyMembershipId", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=membershipType" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=membershipType" }),
         __metadata("design:type", Number)
     ], Destiny2GetCharacterPathParams.prototype, "membershipType", void 0);
     return Destiny2GetCharacterPathParams;
@@ -49,7 +49,7 @@ var Destiny2GetCharacterQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=false;name=components" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=components" }),
         __metadata("design:type", Array)
     ], Destiny2GetCharacterQueryParams.prototype, "components", void 0);
     return Destiny2GetCharacterQueryParams;
@@ -61,11 +61,11 @@ var Destiny2GetCharacterRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Destiny2GetCharacterPathParams)
     ], Destiny2GetCharacterRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Destiny2GetCharacterQueryParams)
     ], Destiny2GetCharacterRequest.prototype, "queryParams", void 0);
     return Destiny2GetCharacterRequest;
@@ -77,15 +77,15 @@ var Destiny2GetCharacterResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], Destiny2GetCharacterResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], Destiny2GetCharacterResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], Destiny2GetCharacterResponse.prototype, "statusCode", void 0);
     return Destiny2GetCharacterResponse;

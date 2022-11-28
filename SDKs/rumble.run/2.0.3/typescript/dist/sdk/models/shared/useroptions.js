@@ -22,34 +22,34 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var UserOptions = /** @class */ (function (_super) {
     __extends(UserOptions, _super);
     function UserOptions() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=client_admin" }),
+        SpeakeasyMetadata({ data: "json, name=client_admin" }),
         __metadata("design:type", Boolean)
     ], UserOptions.prototype, "clientAdmin", void 0);
     __decorate([
-        Metadata({ data: "json, name=email" }),
+        SpeakeasyMetadata({ data: "json, name=email" }),
         __metadata("design:type", String)
     ], UserOptions.prototype, "email", void 0);
     __decorate([
-        Metadata({ data: "json, name=first_name" }),
+        SpeakeasyMetadata({ data: "json, name=first_name" }),
         __metadata("design:type", String)
     ], UserOptions.prototype, "firstName", void 0);
     __decorate([
-        Metadata({ data: "json, name=last_name" }),
+        SpeakeasyMetadata({ data: "json, name=last_name" }),
         __metadata("design:type", String)
     ], UserOptions.prototype, "lastName", void 0);
     __decorate([
-        Metadata({ data: "json, name=org_default_role" }),
+        SpeakeasyMetadata({ data: "json, name=org_default_role" }),
         __metadata("design:type", String)
     ], UserOptions.prototype, "orgDefaultRole", void 0);
     __decorate([
-        Metadata({ data: "json, name=org_roles" }),
+        SpeakeasyMetadata({ data: "json, name=org_roles" }),
         __metadata("design:type", Map)
     ], UserOptions.prototype, "orgRoles", void 0);
     return UserOptions;

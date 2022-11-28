@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Budget } from "./budget";
 import { NotificationWithSubscribers } from "./notificationwithsubscribers";
+
 
 
 // CreateBudgetRequest
@@ -9,12 +9,12 @@ import { NotificationWithSubscribers } from "./notificationwithsubscribers";
  *  Request of CreateBudget 
 **/
 export class CreateBudgetRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AccountId" })
+  @SpeakeasyMetadata({ data: "json, name=AccountId" })
   accountId: string;
 
-  @Metadata({ data: "json, name=Budget" })
+  @SpeakeasyMetadata({ data: "json, name=Budget" })
   budget: Budget;
 
-  @Metadata({ data: "json, name=NotificationsWithSubscribers", elemType: shared.NotificationWithSubscribers })
+  @SpeakeasyMetadata({ data: "json, name=NotificationsWithSubscribers", elemType: NotificationWithSubscribers })
   notificationsWithSubscribers?: NotificationWithSubscribers[];
 }

@@ -1,5 +1,7 @@
 package shared
 
+// DatastoreStorageSummary
+// Contains information about your data store.
 type DatastoreStorageSummary struct {
 	CustomerManagedS3            *CustomerManagedDatastoreS3StorageSummary     `json:"customerManagedS3,omitempty"`
 	IotSiteWiseMultiLayerStorage *DatastoreIotSiteWiseMultiLayerStorageSummary `json:"iotSiteWiseMultiLayerStorage,omitempty"`

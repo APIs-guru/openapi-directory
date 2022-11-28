@@ -1,11 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TagInfoForResource } from "./taginfoforresource";
 
 
+
 export class ListTagsForResourceResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=NextMarker" })
+  @SpeakeasyMetadata({ data: "json, name=NextMarker" })
   nextMarker?: string;
 
-  @Metadata({ data: "json, name=TagInfoForResource" })
+  @SpeakeasyMetadata({ data: "json, name=TagInfoForResource" })
   tagInfoForResource?: TagInfoForResource;
 }

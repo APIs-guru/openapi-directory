@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // DesiredPlayerSession
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Player information for use when creating player sessions using a game session placement request with <a>StartGameSessionPlacement</a>.
 **/
 export class DesiredPlayerSession extends SpeakeasyBase {
-  @Metadata({ data: "json, name=PlayerData" })
+  @SpeakeasyMetadata({ data: "json, name=PlayerData" })
   playerData?: string;
 
-  @Metadata({ data: "json, name=PlayerId" })
+  @SpeakeasyMetadata({ data: "json, name=PlayerId" })
   playerId?: string;
 }

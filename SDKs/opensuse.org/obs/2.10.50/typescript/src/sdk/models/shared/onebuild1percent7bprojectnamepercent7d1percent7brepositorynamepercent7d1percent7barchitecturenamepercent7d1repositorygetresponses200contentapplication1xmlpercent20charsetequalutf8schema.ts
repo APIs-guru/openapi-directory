@@ -1,0 +1,20 @@
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
+
+
+export class Onebuild1Percent7BprojectNamePercent7D1Percent7BrepositoryNamePercent7D1Percent7BarchitectureNamePercent7D1RepositoryGetResponses200ContentApplication1xmlPercent20charsetEqualUtf8SchemaBinary extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  filename?: string;
+
+  @SpeakeasyMetadata()
+  mtime?: string;
+
+  @SpeakeasyMetadata()
+  size?: string;
+}
+
+
+export class Onebuild1Percent7BprojectNamePercent7D1Percent7BrepositoryNamePercent7D1Percent7BarchitectureNamePercent7D1RepositoryGetResponses200ContentApplication1xmlPercent20charsetEqualUtf8Schema extends SpeakeasyBase {
+  @SpeakeasyMetadata({ elemType: Onebuild1Percent7BprojectNamePercent7D1Percent7BrepositoryNamePercent7D1Percent7BarchitectureNamePercent7D1RepositoryGetResponses200ContentApplication1xmlPercent20charsetEqualUtf8SchemaBinary })
+  binary?: Onebuild1Percent7BprojectNamePercent7D1Percent7BrepositoryNamePercent7D1Percent7BarchitectureNamePercent7D1RepositoryGetResponses200ContentApplication1xmlPercent20charsetEqualUtf8SchemaBinary[];
+}

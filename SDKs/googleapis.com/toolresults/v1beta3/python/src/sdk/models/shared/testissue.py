@@ -1,8 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from typing import Any,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import stacktrace
-from . import any
+from sdk import utils
+from . import *
 
 class TestIssueCategoryEnum(str, Enum):
     UNSPECIFIED_CATEGORY = "unspecifiedCategory"
@@ -54,10 +55,14 @@ class TestIssueTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class TestIssue:
-    category: Optional[TestIssueCategoryEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'category' }})
-    error_message: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'errorMessage' }})
-    severity: Optional[TestIssueSeverityEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'severity' }})
-    stack_trace: Optional[stacktrace.StackTrace] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'stackTrace' }})
-    type: Optional[TestIssueTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
-    warning: Optional[any.Any] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'warning' }})
+    r"""TestIssue
+    An issue detected occurring during a test execution.
+    """
+    
+    category: Optional[TestIssueCategoryEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('category') }})
+    error_message: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('errorMessage') }})
+    severity: Optional[TestIssueSeverityEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('severity') }})
+    stack_trace: Optional[StackTrace] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('stackTrace') }})
+    type: Optional[TestIssueTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('type') }})
+    warning: Optional[Any] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('warning') }})
     

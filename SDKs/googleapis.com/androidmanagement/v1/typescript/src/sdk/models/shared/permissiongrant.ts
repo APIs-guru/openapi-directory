@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum PermissionGrantPolicyEnum {
-    PermissionPolicyUnspecified = "PERMISSION_POLICY_UNSPECIFIED"
-,    Prompt = "PROMPT"
-,    Grant = "GRANT"
-,    Deny = "DENY"
+    PermissionPolicyUnspecified = "PERMISSION_POLICY_UNSPECIFIED",
+    Prompt = "PROMPT",
+    Grant = "GRANT",
+    Deny = "DENY"
 }
 
 
@@ -13,9 +14,9 @@ export enum PermissionGrantPolicyEnum {
  * Configuration for an Android permission and its grant state.
 **/
 export class PermissionGrant extends SpeakeasyBase {
-  @Metadata({ data: "json, name=permission" })
+  @SpeakeasyMetadata({ data: "json, name=permission" })
   permission?: string;
 
-  @Metadata({ data: "json, name=policy" })
+  @SpeakeasyMetadata({ data: "json, name=policy" })
   policy?: PermissionGrantPolicyEnum;
 }

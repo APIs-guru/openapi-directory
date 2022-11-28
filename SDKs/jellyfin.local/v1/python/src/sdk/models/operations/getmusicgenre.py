@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class GetMusicGenrePathParams:
-    genre_name: str = field(default=None, metadata={'path_param': { 'field_name': 'genreName', 'style': 'simple', 'explode': False }})
+    genre_name: str = field(metadata={'path_param': { 'field_name': 'genreName', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -15,19 +15,19 @@ class GetMusicGenreQueryParams:
 
 @dataclass
 class GetMusicGenreSecurity:
-    custom_authentication: shared.SchemeCustomAuthentication = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    custom_authentication: shared.SchemeCustomAuthentication = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
     
 
 @dataclass
 class GetMusicGenreRequest:
-    path_params: GetMusicGenrePathParams = field(default=None)
-    query_params: GetMusicGenreQueryParams = field(default=None)
-    security: GetMusicGenreSecurity = field(default=None)
+    path_params: GetMusicGenrePathParams = field()
+    query_params: GetMusicGenreQueryParams = field()
+    security: GetMusicGenreSecurity = field()
     
 
 @dataclass
 class GetMusicGenreResponse:
+    content_type: str = field()
+    status_code: int = field()
     base_item_dto: Optional[shared.BaseItemDto] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

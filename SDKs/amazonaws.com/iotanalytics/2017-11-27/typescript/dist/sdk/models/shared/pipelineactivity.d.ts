@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { AddAttributesActivity } from "./addattributesactivity";
 import { ChannelActivity } from "./channelactivity";
 import { DatastoreActivity } from "./datastoreactivity";

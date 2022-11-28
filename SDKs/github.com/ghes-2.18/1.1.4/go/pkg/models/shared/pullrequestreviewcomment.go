@@ -22,6 +22,8 @@ type PullRequestReviewCommentLinks struct {
 	Self        PullRequestReviewCommentLinksSelf        `json:"self"`
 }
 
+// PullRequestReviewComment
+// Pull Request Review Comments are comments on a portion of the Pull Request's diff.
 type PullRequestReviewComment struct {
 	Links               PullRequestReviewCommentLinks `json:"_links"`
 	AuthorAssociation   AuthorAssociationEnum         `json:"author_association"`

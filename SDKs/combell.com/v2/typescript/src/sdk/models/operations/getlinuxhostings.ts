@@ -1,32 +1,33 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetLinuxHostingsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=skip" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=skip" })
   skip?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=take" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=take" })
   take?: number;
 }
 
 
 export class GetLinuxHostingsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetLinuxHostingsQueryParams;
 }
 
 
 export class GetLinuxHostingsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: Map<string, string[]>;
 
-  @Metadata({ elemType: shared.LinuxHosting })
+  @SpeakeasyMetadata({ elemType: shared.LinuxHosting })
   linuxHostings?: shared.LinuxHosting[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

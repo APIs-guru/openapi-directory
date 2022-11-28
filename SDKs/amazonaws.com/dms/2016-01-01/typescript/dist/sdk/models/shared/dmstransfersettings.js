@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // DmsTransferSettings
 /**
  *  The settings in JSON format for the DMS Transfer type source endpoint.
@@ -33,11 +33,11 @@ var DmsTransferSettings = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=BucketName" }),
+        SpeakeasyMetadata({ data: "json, name=BucketName" }),
         __metadata("design:type", String)
     ], DmsTransferSettings.prototype, "bucketName", void 0);
     __decorate([
-        Metadata({ data: "json, name=ServiceAccessRoleArn" }),
+        SpeakeasyMetadata({ data: "json, name=ServiceAccessRoleArn" }),
         __metadata("design:type", String)
     ], DmsTransferSettings.prototype, "serviceAccessRoleArn", void 0);
     return DmsTransferSettings;

@@ -11,14 +11,14 @@ class RankCarQueryParams:
 
 @dataclass
 class RankCarRequest:
-    query_params: RankCarQueryParams = field(default=None)
-    request: shared.CarRankRequest = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    query_params: RankCarQueryParams = field()
+    request: shared.CarRankRequest = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class RankCarResponse:
+    content_type: str = field()
+    status_code: int = field()
     car_rank_response: Optional[shared.CarRankResponse] = field(default=None)
-    content_type: str = field(default=None)
     error: Optional[shared.Error] = field(default=None)
-    status_code: int = field(default=None)
     

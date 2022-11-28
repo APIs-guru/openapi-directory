@@ -1,19 +1,20 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class UserFederationMapperRepresentation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=config" })
+  @SpeakeasyMetadata({ data: "json, name=config" })
   config?: Map<string, any>;
 
-  @Metadata({ data: "json, name=federationMapperType" })
+  @SpeakeasyMetadata({ data: "json, name=federationMapperType" })
   federationMapperType?: string;
 
-  @Metadata({ data: "json, name=federationProviderDisplayName" })
+  @SpeakeasyMetadata({ data: "json, name=federationProviderDisplayName" })
   federationProviderDisplayName?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 }

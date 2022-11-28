@@ -1,36 +1,36 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
-export const GETSERVERHEALTH_SERVERS = [
+
+export const GetServerHealthServerList = [
 	"http://localhost:8080",
-];
-
-
-
-export class GetServerHealthRequest extends SpeakeasyBase {
-  @Metadata()
-  serverUrl?: string;
-}
+] as const;
 
 
 export class GetServerHealth200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=dependencies", elemType: shared.ServiceDependency })
+  @SpeakeasyMetadata({ data: "json, name=dependencies", elemType: shared.ServiceDependency })
   dependencies?: shared.ServiceDependency[];
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 
-  @Metadata({ data: "json, name=version" })
+  @SpeakeasyMetadata({ data: "json, name=version" })
   version: string;
 }
 
 
+export class GetServerHealthRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  serverUrl?: string;
+}
+
+
 export class GetServerHealthResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getServerHealth200ApplicationJsonObject?: GetServerHealth200ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

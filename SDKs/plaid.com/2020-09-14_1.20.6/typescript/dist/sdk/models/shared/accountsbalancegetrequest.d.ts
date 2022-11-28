@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { AccountsBalanceGetRequestOptions } from "./accountsbalancegetrequestoptions";
 /**
  * AccountsBalanceGetRequest defines the request schema for `/accounts/balance/get`

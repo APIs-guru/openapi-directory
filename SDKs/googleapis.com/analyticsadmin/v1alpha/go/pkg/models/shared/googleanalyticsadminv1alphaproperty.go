@@ -49,6 +49,20 @@ const (
 	GoogleAnalyticsAdminV1alphaPropertyServiceLevelEnumGoogleAnalytics360      GoogleAnalyticsAdminV1alphaPropertyServiceLevelEnum = "GOOGLE_ANALYTICS_360"
 )
 
+// GoogleAnalyticsAdminV1alphaPropertyInput
+// A resource message representing a Google Analytics GA4 property.
+type GoogleAnalyticsAdminV1alphaPropertyInput struct {
+	Account          *string                                                  `json:"account,omitempty"`
+	CurrencyCode     *string                                                  `json:"currencyCode,omitempty"`
+	DisplayName      *string                                                  `json:"displayName,omitempty"`
+	IndustryCategory *GoogleAnalyticsAdminV1alphaPropertyIndustryCategoryEnum `json:"industryCategory,omitempty"`
+	Parent           *string                                                  `json:"parent,omitempty"`
+	PropertyType     *GoogleAnalyticsAdminV1alphaPropertyPropertyTypeEnum     `json:"propertyType,omitempty"`
+	TimeZone         *string                                                  `json:"timeZone,omitempty"`
+}
+
+// GoogleAnalyticsAdminV1alphaProperty
+// A resource message representing a Google Analytics GA4 property.
 type GoogleAnalyticsAdminV1alphaProperty struct {
 	Account          *string                                                  `json:"account,omitempty"`
 	CreateTime       *string                                                  `json:"createTime,omitempty"`

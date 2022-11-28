@@ -1,34 +1,35 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetNetworkSmTargetGroupsPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=networkId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=networkId" })
   networkId: string;
 }
 
 
 export class GetNetworkSmTargetGroupsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=withDetails" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=withDetails" })
   withDetails?: boolean;
 }
 
 
 export class GetNetworkSmTargetGroupsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetNetworkSmTargetGroupsPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetNetworkSmTargetGroupsQueryParams;
 }
 
 
 export class GetNetworkSmTargetGroupsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getNetworkSmTargetGroups200ApplicationJsonObject?: Map<string, any>;
 }

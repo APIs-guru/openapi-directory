@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class ReadPipelinePathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'Id', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'Id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -21,18 +24,18 @@ class ReadPipelineHeaders:
 
 @dataclass
 class ReadPipelineRequest:
-    path_params: ReadPipelinePathParams = field(default=None)
-    headers: ReadPipelineHeaders = field(default=None)
+    headers: ReadPipelineHeaders = field()
+    path_params: ReadPipelinePathParams = field()
     
 
 @dataclass
 class ReadPipelineResponse:
+    content_type: str = field()
+    status_code: int = field()
     access_denied_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     incompatible_version_exception: Optional[Any] = field(default=None)
     internal_service_exception: Optional[Any] = field(default=None)
     read_pipeline_response: Optional[shared.ReadPipelineResponse] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     validation_exception: Optional[Any] = field(default=None)
     

@@ -1,5 +1,7 @@
 package shared
 
+// AutoScalingDescription
+// Information about the auto scaling parameters for the connector.
 type AutoScalingDescription struct {
 	MaxWorkerCount *int64                     `json:"maxWorkerCount,omitempty"`
 	McuCount       *int64                     `json:"mcuCount,omitempty"`

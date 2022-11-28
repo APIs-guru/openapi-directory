@@ -18,15 +18,15 @@ type CodeScanningListAlertsForRepoQueryParams struct {
 	ToolName *string                            `queryParam:"style=form,explode=true,name=tool_name"`
 }
 
-type CodeScanningListAlertsForRepoRequest struct {
-	PathParams  CodeScanningListAlertsForRepoPathParams
-	QueryParams CodeScanningListAlertsForRepoQueryParams
-}
-
 type CodeScanningListAlertsForRepo503ApplicationJSON struct {
 	Code             *string `json:"code,omitempty"`
 	DocumentationURL *string `json:"documentation_url,omitempty"`
 	Message          *string `json:"message,omitempty"`
+}
+
+type CodeScanningListAlertsForRepoRequest struct {
+	PathParams  CodeScanningListAlertsForRepoPathParams
+	QueryParams CodeScanningListAlertsForRepoQueryParams
 }
 
 type CodeScanningListAlertsForRepoResponse struct {

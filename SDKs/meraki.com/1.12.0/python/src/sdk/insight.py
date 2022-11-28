@@ -1,0 +1,206 @@
+import requests
+from typing import Any,Optional
+from sdk.models import operations
+from . import utils
+
+class Insight:
+    _client: requests.Session
+    _security_client: requests.Session
+    _server_url: str
+    _language: str
+    _sdk_version: str
+    _gen_version: str
+
+    def __init__(self, client: requests.Session, security_client: requests.Session, server_url: str, language: str, sdk_version: str, gen_version: str) -> None:
+        self._client = client
+        self._security_client = security_client
+        self._server_url = server_url
+        self._language = language
+        self._sdk_version = sdk_version
+        self._gen_version = gen_version
+
+    
+    def create_organization_insight_monitored_media_server(self, request: operations.CreateOrganizationInsightMonitoredMediaServerRequest) -> operations.CreateOrganizationInsightMonitoredMediaServerResponse:
+        r"""Add a media server to be monitored for this organization
+        Add a media server to be monitored for this organization. Only valid for organizations with Meraki Insight.
+        """
+        
+        base_url = self._server_url
+        
+        url = utils.generate_url(base_url, "/organizations/{organizationId}/insight/monitoredMediaServers", request.path_params)
+        
+        headers = {}
+        req_content_type, data, form = utils.serialize_request_body(request)
+        if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
+            headers["content-type"] = req_content_type
+        if data is None and form is None:
+           raise Exception('request body is required')
+        
+        client = self._security_client
+        
+        r = client.request("POST", url, data=data, files=form, headers=headers)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.CreateOrganizationInsightMonitoredMediaServerResponse(status_code=r.status_code, content_type=content_type)
+        
+        if r.status_code == 201:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[dict[str, Any]])
+                res.create_organization_insight_monitored_media_server_201_application_json_object = out
+
+        return res
+
+    
+    def delete_organization_insight_monitored_media_server(self, request: operations.DeleteOrganizationInsightMonitoredMediaServerRequest) -> operations.DeleteOrganizationInsightMonitoredMediaServerResponse:
+        r"""Delete a monitored media server from this organization
+        Delete a monitored media server from this organization. Only valid for organizations with Meraki Insight.
+        """
+        
+        base_url = self._server_url
+        
+        url = utils.generate_url(base_url, "/organizations/{organizationId}/insight/monitoredMediaServers/{monitoredMediaServerId}", request.path_params)
+        
+        
+        client = self._security_client
+        
+        r = client.request("DELETE", url)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.DeleteOrganizationInsightMonitoredMediaServerResponse(status_code=r.status_code, content_type=content_type)
+        
+        if r.status_code == 204:
+            pass
+
+        return res
+
+    
+    def get_network_insight_application_health_by_time(self, request: operations.GetNetworkInsightApplicationHealthByTimeRequest) -> operations.GetNetworkInsightApplicationHealthByTimeResponse:
+        r"""Get application health by time
+        Get application health by time
+        """
+        
+        base_url = self._server_url
+        
+        url = utils.generate_url(base_url, "/networks/{networkId}/insight/applications/{applicationId}/healthByTime", request.path_params)
+        
+        query_params = utils.get_query_params(request.query_params)
+        
+        client = self._security_client
+        
+        r = client.request("GET", url, params=query_params)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.GetNetworkInsightApplicationHealthByTimeResponse(status_code=r.status_code, content_type=content_type)
+        
+        if r.status_code == 200:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[dict[str, Any]])
+                res.get_network_insight_application_health_by_time_200_application_json_object = out
+
+        return res
+
+    
+    def get_organization_insight_applications(self, request: operations.GetOrganizationInsightApplicationsRequest) -> operations.GetOrganizationInsightApplicationsResponse:
+        r"""List all Insight tracked applications
+        List all Insight tracked applications
+        """
+        
+        base_url = self._server_url
+        
+        url = utils.generate_url(base_url, "/organizations/{organizationId}/insight/applications", request.path_params)
+        
+        
+        client = self._security_client
+        
+        r = client.request("GET", url)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.GetOrganizationInsightApplicationsResponse(status_code=r.status_code, content_type=content_type)
+        
+        if r.status_code == 200:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[dict[str, Any]])
+                res.get_organization_insight_applications_200_application_json_object = out
+
+        return res
+
+    
+    def get_organization_insight_monitored_media_server(self, request: operations.GetOrganizationInsightMonitoredMediaServerRequest) -> operations.GetOrganizationInsightMonitoredMediaServerResponse:
+        r"""Return a monitored media server for this organization
+        Return a monitored media server for this organization. Only valid for organizations with Meraki Insight.
+        """
+        
+        base_url = self._server_url
+        
+        url = utils.generate_url(base_url, "/organizations/{organizationId}/insight/monitoredMediaServers/{monitoredMediaServerId}", request.path_params)
+        
+        
+        client = self._security_client
+        
+        r = client.request("GET", url)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.GetOrganizationInsightMonitoredMediaServerResponse(status_code=r.status_code, content_type=content_type)
+        
+        if r.status_code == 200:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[dict[str, Any]])
+                res.get_organization_insight_monitored_media_server_200_application_json_object = out
+
+        return res
+
+    
+    def get_organization_insight_monitored_media_servers(self, request: operations.GetOrganizationInsightMonitoredMediaServersRequest) -> operations.GetOrganizationInsightMonitoredMediaServersResponse:
+        r"""List the monitored media servers for this organization
+        List the monitored media servers for this organization. Only valid for organizations with Meraki Insight.
+        """
+        
+        base_url = self._server_url
+        
+        url = utils.generate_url(base_url, "/organizations/{organizationId}/insight/monitoredMediaServers", request.path_params)
+        
+        
+        client = self._security_client
+        
+        r = client.request("GET", url)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.GetOrganizationInsightMonitoredMediaServersResponse(status_code=r.status_code, content_type=content_type)
+        
+        if r.status_code == 200:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[dict[str, Any]])
+                res.get_organization_insight_monitored_media_servers_200_application_json_object = out
+
+        return res
+
+    
+    def update_organization_insight_monitored_media_server(self, request: operations.UpdateOrganizationInsightMonitoredMediaServerRequest) -> operations.UpdateOrganizationInsightMonitoredMediaServerResponse:
+        r"""Update a monitored media server for this organization
+        Update a monitored media server for this organization. Only valid for organizations with Meraki Insight.
+        """
+        
+        base_url = self._server_url
+        
+        url = utils.generate_url(base_url, "/organizations/{organizationId}/insight/monitoredMediaServers/{monitoredMediaServerId}", request.path_params)
+        
+        headers = {}
+        req_content_type, data, form = utils.serialize_request_body(request)
+        if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
+            headers["content-type"] = req_content_type
+        
+        client = self._security_client
+        
+        r = client.request("PUT", url, data=data, files=form, headers=headers)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.UpdateOrganizationInsightMonitoredMediaServerResponse(status_code=r.status_code, content_type=content_type)
+        
+        if r.status_code == 200:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[dict[str, Any]])
+                res.update_organization_insight_monitored_media_server_200_application_json_object = out
+
+        return res
+
+    

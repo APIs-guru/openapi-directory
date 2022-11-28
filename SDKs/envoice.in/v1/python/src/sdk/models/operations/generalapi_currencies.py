@@ -5,19 +5,19 @@ from sdk.models import shared
 
 @dataclass
 class GeneralAPICurrenciesHeaders:
-    x_auth_key: str = field(default=None, metadata={'header': { 'field_name': 'x-auth-key', 'style': 'simple', 'explode': False }})
-    x_auth_secret: str = field(default=None, metadata={'header': { 'field_name': 'x-auth-secret', 'style': 'simple', 'explode': False }})
+    x_auth_key: str = field(metadata={'header': { 'field_name': 'x-auth-key', 'style': 'simple', 'explode': False }})
+    x_auth_secret: str = field(metadata={'header': { 'field_name': 'x-auth-secret', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GeneralAPICurrenciesRequest:
-    headers: GeneralAPICurrenciesHeaders = field(default=None)
+    headers: GeneralAPICurrenciesHeaders = field()
     
 
 @dataclass
 class GeneralAPICurrenciesResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     currency_details_api_models: Optional[List[shared.CurrencyDetailsAPIModel]] = field(default=None)
-    status_code: int = field(default=None)
     

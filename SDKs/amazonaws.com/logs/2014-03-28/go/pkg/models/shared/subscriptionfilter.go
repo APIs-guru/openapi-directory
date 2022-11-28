@@ -1,5 +1,7 @@
 package shared
 
+// SubscriptionFilter
+// Represents a subscription filter.
 type SubscriptionFilter struct {
 	CreationTime   *int64            `json:"creationTime,omitempty"`
 	DestinationArn *string           `json:"destinationArn,omitempty"`

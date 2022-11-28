@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { FileFormatDescriptor } from "./fileformatdescriptor";
 /**
  * Contains information about the configuration of the S3 bucket that contains source files.

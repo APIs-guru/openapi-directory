@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ComputePlatformEnum } from "./computeplatformenum";
+
 
 
 // ApplicationInfo
@@ -7,21 +8,21 @@ import { ComputePlatformEnum } from "./computeplatformenum";
  * Information about an application.
 **/
 export class ApplicationInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=applicationId" })
+  @SpeakeasyMetadata({ data: "json, name=applicationId" })
   applicationId?: string;
 
-  @Metadata({ data: "json, name=applicationName" })
+  @SpeakeasyMetadata({ data: "json, name=applicationName" })
   applicationName?: string;
 
-  @Metadata({ data: "json, name=computePlatform" })
+  @SpeakeasyMetadata({ data: "json, name=computePlatform" })
   computePlatform?: ComputePlatformEnum;
 
-  @Metadata({ data: "json, name=createTime" })
+  @SpeakeasyMetadata({ data: "json, name=createTime" })
   createTime?: Date;
 
-  @Metadata({ data: "json, name=gitHubAccountName" })
+  @SpeakeasyMetadata({ data: "json, name=gitHubAccountName" })
   gitHubAccountName?: string;
 
-  @Metadata({ data: "json, name=linkedToGitHub" })
+  @SpeakeasyMetadata({ data: "json, name=linkedToGitHub" })
   linkedToGitHub?: boolean;
 }

@@ -27,6 +27,17 @@ const (
 	FamiliesKidsClubExceptionEnumDependentOnDayOfWeek FamiliesKidsClubExceptionEnum = "DEPENDENT_ON_DAY_OF_WEEK"
 )
 
+type FamiliesKidsFriendlyExceptionEnum string
+
+const (
+	FamiliesKidsFriendlyExceptionEnumExceptionUnspecified FamiliesKidsFriendlyExceptionEnum = "EXCEPTION_UNSPECIFIED"
+	FamiliesKidsFriendlyExceptionEnumUnderConstruction    FamiliesKidsFriendlyExceptionEnum = "UNDER_CONSTRUCTION"
+	FamiliesKidsFriendlyExceptionEnumDependentOnSeason    FamiliesKidsFriendlyExceptionEnum = "DEPENDENT_ON_SEASON"
+	FamiliesKidsFriendlyExceptionEnumDependentOnDayOfWeek FamiliesKidsFriendlyExceptionEnum = "DEPENDENT_ON_DAY_OF_WEEK"
+)
+
+// Families
+// Services and amenities for families and young guests.
 type Families struct {
 	Babysitting             *bool                                `json:"babysitting,omitempty"`
 	BabysittingException    *FamiliesBabysittingExceptionEnum    `json:"babysittingException,omitempty"`
@@ -34,4 +45,6 @@ type Families struct {
 	KidsActivitiesException *FamiliesKidsActivitiesExceptionEnum `json:"kidsActivitiesException,omitempty"`
 	KidsClub                *bool                                `json:"kidsClub,omitempty"`
 	KidsClubException       *FamiliesKidsClubExceptionEnum       `json:"kidsClubException,omitempty"`
+	KidsFriendly            *bool                                `json:"kidsFriendly,omitempty"`
+	KidsFriendlyException   *FamiliesKidsFriendlyExceptionEnum   `json:"kidsFriendlyException,omitempty"`
 }

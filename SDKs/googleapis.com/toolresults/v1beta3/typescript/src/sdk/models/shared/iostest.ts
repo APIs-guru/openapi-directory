@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { IosAppInfo } from "./iosappinfo";
 import { IosTestLoop } from "./iostestloop";
 import { IosXcTest } from "./iosxctest";
 import { Duration } from "./duration";
+
 
 
 // IosTest
@@ -10,18 +11,18 @@ import { Duration } from "./duration";
  * A iOS mobile test specification
 **/
 export class IosTest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=iosAppInfo" })
+  @SpeakeasyMetadata({ data: "json, name=iosAppInfo" })
   iosAppInfo?: IosAppInfo;
 
-  @Metadata({ data: "json, name=iosRoboTest" })
+  @SpeakeasyMetadata({ data: "json, name=iosRoboTest" })
   iosRoboTest?: Map<string, any>;
 
-  @Metadata({ data: "json, name=iosTestLoop" })
+  @SpeakeasyMetadata({ data: "json, name=iosTestLoop" })
   iosTestLoop?: IosTestLoop;
 
-  @Metadata({ data: "json, name=iosXcTest" })
+  @SpeakeasyMetadata({ data: "json, name=iosXcTest" })
   iosXcTest?: IosXcTest;
 
-  @Metadata({ data: "json, name=testTimeout" })
+  @SpeakeasyMetadata({ data: "json, name=testTimeout" })
   testTimeout?: Duration;
 }

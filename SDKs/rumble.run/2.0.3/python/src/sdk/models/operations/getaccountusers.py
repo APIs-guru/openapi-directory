@@ -5,17 +5,17 @@ from sdk.models import shared
 
 @dataclass
 class GetAccountUsersSecurity:
-    bearer_auth: shared.SchemeBearerAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer' }})
+    bearer_auth: shared.SchemeBearerAuth = field(metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer' }})
     
 
 @dataclass
 class GetAccountUsersRequest:
-    security: GetAccountUsersSecurity = field(default=None)
+    security: GetAccountUsersSecurity = field()
     
 
 @dataclass
 class GetAccountUsersResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     users: Optional[List[shared.User]] = field(default=None)
     

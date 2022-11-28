@@ -10,7 +10,7 @@ import (
 	"strings"
 )
 
-var Servers = []string{
+var ServerList = []string{
 	"http://cloud9.{region}.amazonaws.com",
 	"https://cloud9.{region}.amazonaws.com",
 	"http://cloud9.{region}.amazonaws.com.cn",
@@ -21,10 +21,15 @@ type HTTPClient interface {
 	Do(req *http.Request) (*http.Response, error)
 }
 
+// SDK Documentation: https://docs.aws.amazon.com/cloud9/ - Amazon Web Services documentation
 type SDK struct {
-	defaultClient  HTTPClient
-	securityClient HTTPClient
-	serverURL      string
+	_defaultClient  HTTPClient
+	_securityClient HTTPClient
+	_security       *shared.Security
+	_serverURL      string
+	_language       string
+	_sdkVersion     string
+	_genVersion     string
 }
 
 type SDKOption func(*SDK)
@@ -35,33 +40,55 @@ func WithServerURL(serverURL string, params map[string]string) SDKOption {
 			serverURL = utils.ReplaceParameters(serverURL, params)
 		}
 
-		sdk.serverURL = serverURL
+		sdk._serverURL = serverURL
+	}
+}
+
+func WithClient(client HTTPClient) SDKOption {
+	return func(sdk *SDK) {
+		sdk._defaultClient = client
 	}
 }
 
 func WithSecurity(security shared.Security) SDKOption {
 	return func(sdk *SDK) {
-		sdk.securityClient = utils.CreateSecurityClient(security)
+		sdk._security = &security
 	}
 }
 
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
-		defaultClient:  http.DefaultClient,
-		securityClient: http.DefaultClient,
+		_language:   "go",
+		_sdkVersion: "",
+		_genVersion: "internal",
 	}
 	for _, opt := range opts {
 		opt(sdk)
 	}
-	if sdk.serverURL == "" {
-		sdk.serverURL = Servers[0]
+
+	if sdk._defaultClient == nil {
+		sdk._defaultClient = http.DefaultClient
+	}
+	if sdk._securityClient == nil {
+
+		if sdk._security != nil {
+			sdk._securityClient = utils.ConfigureSecurityClient(sdk._defaultClient, sdk._security)
+		} else {
+			sdk._securityClient = sdk._defaultClient
+		}
+
+	}
+
+	if sdk._serverURL == "" {
+		sdk._serverURL = ServerList[0]
 	}
 
 	return sdk
 }
 
+// CreateEnvironmentEc2 - Creates an Cloud9 development environment, launches an Amazon Elastic Compute Cloud (Amazon EC2) instance, and then connects from the instance to the environment.
 func (s *SDK) CreateEnvironmentEc2(ctx context.Context, request operations.CreateEnvironmentEc2Request) (*operations.CreateEnvironmentEc2Response, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AWSCloud9WorkspaceManagementService.CreateEnvironmentEC2"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -81,7 +108,7 @@ func (s *SDK) CreateEnvironmentEc2(ctx context.Context, request operations.Creat
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -181,8 +208,9 @@ func (s *SDK) CreateEnvironmentEc2(ctx context.Context, request operations.Creat
 	return res, nil
 }
 
+// CreateEnvironmentMembership - Adds an environment member to an Cloud9 development environment.
 func (s *SDK) CreateEnvironmentMembership(ctx context.Context, request operations.CreateEnvironmentMembershipRequest) (*operations.CreateEnvironmentMembershipResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AWSCloud9WorkspaceManagementService.CreateEnvironmentMembership"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -202,7 +230,7 @@ func (s *SDK) CreateEnvironmentMembership(ctx context.Context, request operation
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -302,8 +330,9 @@ func (s *SDK) CreateEnvironmentMembership(ctx context.Context, request operation
 	return res, nil
 }
 
+// DeleteEnvironment - Deletes an Cloud9 development environment. If an Amazon EC2 instance is connected to the environment, also terminates the instance.
 func (s *SDK) DeleteEnvironment(ctx context.Context, request operations.DeleteEnvironmentRequest) (*operations.DeleteEnvironmentResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AWSCloud9WorkspaceManagementService.DeleteEnvironment"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -323,7 +352,7 @@ func (s *SDK) DeleteEnvironment(ctx context.Context, request operations.DeleteEn
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -423,8 +452,9 @@ func (s *SDK) DeleteEnvironment(ctx context.Context, request operations.DeleteEn
 	return res, nil
 }
 
+// DeleteEnvironmentMembership - Deletes an environment member from an Cloud9 development environment.
 func (s *SDK) DeleteEnvironmentMembership(ctx context.Context, request operations.DeleteEnvironmentMembershipRequest) (*operations.DeleteEnvironmentMembershipResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AWSCloud9WorkspaceManagementService.DeleteEnvironmentMembership"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -444,7 +474,7 @@ func (s *SDK) DeleteEnvironmentMembership(ctx context.Context, request operation
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -544,8 +574,9 @@ func (s *SDK) DeleteEnvironmentMembership(ctx context.Context, request operation
 	return res, nil
 }
 
+// DescribeEnvironmentMemberships - Gets information about environment members for an Cloud9 development environment.
 func (s *SDK) DescribeEnvironmentMemberships(ctx context.Context, request operations.DescribeEnvironmentMembershipsRequest) (*operations.DescribeEnvironmentMembershipsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AWSCloud9WorkspaceManagementService.DescribeEnvironmentMemberships"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -567,7 +598,7 @@ func (s *SDK) DescribeEnvironmentMemberships(ctx context.Context, request operat
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -667,8 +698,9 @@ func (s *SDK) DescribeEnvironmentMemberships(ctx context.Context, request operat
 	return res, nil
 }
 
+// DescribeEnvironmentStatus - Gets status information for an Cloud9 development environment.
 func (s *SDK) DescribeEnvironmentStatus(ctx context.Context, request operations.DescribeEnvironmentStatusRequest) (*operations.DescribeEnvironmentStatusResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AWSCloud9WorkspaceManagementService.DescribeEnvironmentStatus"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -688,7 +720,7 @@ func (s *SDK) DescribeEnvironmentStatus(ctx context.Context, request operations.
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -788,8 +820,9 @@ func (s *SDK) DescribeEnvironmentStatus(ctx context.Context, request operations.
 	return res, nil
 }
 
+// DescribeEnvironments - Gets information about Cloud9 development environments.
 func (s *SDK) DescribeEnvironments(ctx context.Context, request operations.DescribeEnvironmentsRequest) (*operations.DescribeEnvironmentsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AWSCloud9WorkspaceManagementService.DescribeEnvironments"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -809,7 +842,7 @@ func (s *SDK) DescribeEnvironments(ctx context.Context, request operations.Descr
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -909,8 +942,9 @@ func (s *SDK) DescribeEnvironments(ctx context.Context, request operations.Descr
 	return res, nil
 }
 
+// ListEnvironments - Gets a list of Cloud9 development environment identifiers.
 func (s *SDK) ListEnvironments(ctx context.Context, request operations.ListEnvironmentsRequest) (*operations.ListEnvironmentsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AWSCloud9WorkspaceManagementService.ListEnvironments"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -932,7 +966,7 @@ func (s *SDK) ListEnvironments(ctx context.Context, request operations.ListEnvir
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1032,8 +1066,9 @@ func (s *SDK) ListEnvironments(ctx context.Context, request operations.ListEnvir
 	return res, nil
 }
 
+// ListTagsForResource - Gets a list of the tags associated with an Cloud9 development environment.
 func (s *SDK) ListTagsForResource(ctx context.Context, request operations.ListTagsForResourceRequest) (*operations.ListTagsForResourceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AWSCloud9WorkspaceManagementService.ListTagsForResource"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1053,7 +1088,7 @@ func (s *SDK) ListTagsForResource(ctx context.Context, request operations.ListTa
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1113,8 +1148,9 @@ func (s *SDK) ListTagsForResource(ctx context.Context, request operations.ListTa
 	return res, nil
 }
 
+// TagResource - <p>Adds tags to an Cloud9 development environment.</p> <important> <p>Tags that you add to an Cloud9 environment by using this method will NOT be automatically propagated to underlying resources.</p> </important>
 func (s *SDK) TagResource(ctx context.Context, request operations.TagResourceRequest) (*operations.TagResourceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AWSCloud9WorkspaceManagementService.TagResource"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1134,7 +1170,7 @@ func (s *SDK) TagResource(ctx context.Context, request operations.TagResourceReq
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1204,8 +1240,9 @@ func (s *SDK) TagResource(ctx context.Context, request operations.TagResourceReq
 	return res, nil
 }
 
+// UntagResource - Removes tags from an Cloud9 development environment.
 func (s *SDK) UntagResource(ctx context.Context, request operations.UntagResourceRequest) (*operations.UntagResourceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AWSCloud9WorkspaceManagementService.UntagResource"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1225,7 +1262,7 @@ func (s *SDK) UntagResource(ctx context.Context, request operations.UntagResourc
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1295,8 +1332,9 @@ func (s *SDK) UntagResource(ctx context.Context, request operations.UntagResourc
 	return res, nil
 }
 
+// UpdateEnvironment - Changes the settings of an existing Cloud9 development environment.
 func (s *SDK) UpdateEnvironment(ctx context.Context, request operations.UpdateEnvironmentRequest) (*operations.UpdateEnvironmentResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AWSCloud9WorkspaceManagementService.UpdateEnvironment"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1316,7 +1354,7 @@ func (s *SDK) UpdateEnvironment(ctx context.Context, request operations.UpdateEn
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1416,8 +1454,9 @@ func (s *SDK) UpdateEnvironment(ctx context.Context, request operations.UpdateEn
 	return res, nil
 }
 
+// UpdateEnvironmentMembership - Changes the settings of an existing environment member for an Cloud9 development environment.
 func (s *SDK) UpdateEnvironmentMembership(ctx context.Context, request operations.UpdateEnvironmentMembershipRequest) (*operations.UpdateEnvironmentMembershipResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AWSCloud9WorkspaceManagementService.UpdateEnvironmentMembership"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1437,7 +1476,7 @@ func (s *SDK) UpdateEnvironmentMembership(ctx context.Context, request operation
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {

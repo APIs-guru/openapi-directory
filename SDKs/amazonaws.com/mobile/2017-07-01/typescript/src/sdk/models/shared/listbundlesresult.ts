@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BundleDetails } from "./bundledetails";
+
 
 
 // ListBundlesResult
@@ -8,9 +8,9 @@ import { BundleDetails } from "./bundledetails";
  *  Result structure contains a list of all available bundles with details. 
 **/
 export class ListBundlesResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=bundleList", elemType: shared.BundleDetails })
+  @SpeakeasyMetadata({ data: "json, name=bundleList", elemType: BundleDetails })
   bundleList?: BundleDetails[];
 
-  @Metadata({ data: "json, name=nextToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextToken" })
   nextToken?: string;
 }

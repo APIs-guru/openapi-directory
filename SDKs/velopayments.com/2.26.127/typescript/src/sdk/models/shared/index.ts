@@ -127,6 +127,8 @@ export * from "./paymentresponsev4";
 export * from "./paymentv3";
 export * from "./payoraddress";
 export * from "./payoraddressv2";
+export * from "./payoramltransaction";
+export * from "./payoramltransactionv3";
 export * from "./payorbrandingresponse";
 export * from "./payorcreateapikeyrequest";
 export * from "./payorcreateapikeyresponse";

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // UpdateFavoritesBulkRequest
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Request model for updating favorites
 **/
 export class UpdateFavoritesBulkRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=isFavorite" })
+  @SpeakeasyMetadata({ data: "json, name=isFavorite" })
   isFavorite: boolean;
 
-  @Metadata({ data: "json, name=objectIds" })
+  @SpeakeasyMetadata({ data: "json, name=objectIds" })
   objectIds: number[];
 }

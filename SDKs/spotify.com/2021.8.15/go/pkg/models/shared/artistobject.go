@@ -1,5 +1,8 @@
 package shared
 
+// ArtistObject
+
+// https://developer.spotify.com/documentation/web-api/reference/#object-artistobject - Find more info on the official Spotify Web API Reference
 type ArtistObject struct {
 	ExternalUrls *ExternalURLObject `json:"external_urls,omitempty"`
 	Followers    *FollowersObject   `json:"followers,omitempty"`

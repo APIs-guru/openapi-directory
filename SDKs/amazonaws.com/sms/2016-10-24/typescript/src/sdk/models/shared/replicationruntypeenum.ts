@@ -1,6 +1,7 @@
 
 
+
 export enum ReplicationRunTypeEnum {
-    OnDemand = "ON_DEMAND"
-,    Automatic = "AUTOMATIC"
+    OnDemand = "ON_DEMAND",
+    Automatic = "AUTOMATIC"
 }

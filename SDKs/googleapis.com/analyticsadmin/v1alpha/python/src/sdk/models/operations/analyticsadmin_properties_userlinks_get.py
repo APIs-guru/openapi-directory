@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class AnalyticsadminPropertiesUserLinksGetPathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,14 +26,14 @@ class AnalyticsadminPropertiesUserLinksGetQueryParams:
 
 @dataclass
 class AnalyticsadminPropertiesUserLinksGetSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class AnalyticsadminPropertiesUserLinksGetSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -43,14 +44,14 @@ class AnalyticsadminPropertiesUserLinksGetSecurity:
 
 @dataclass
 class AnalyticsadminPropertiesUserLinksGetRequest:
-    path_params: AnalyticsadminPropertiesUserLinksGetPathParams = field(default=None)
-    query_params: AnalyticsadminPropertiesUserLinksGetQueryParams = field(default=None)
-    security: AnalyticsadminPropertiesUserLinksGetSecurity = field(default=None)
+    path_params: AnalyticsadminPropertiesUserLinksGetPathParams = field()
+    query_params: AnalyticsadminPropertiesUserLinksGetQueryParams = field()
+    security: AnalyticsadminPropertiesUserLinksGetSecurity = field()
     
 
 @dataclass
 class AnalyticsadminPropertiesUserLinksGetResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_analytics_admin_v1alpha_user_link: Optional[shared.GoogleAnalyticsAdminV1alphaUserLink] = field(default=None)
-    status_code: int = field(default=None)
     

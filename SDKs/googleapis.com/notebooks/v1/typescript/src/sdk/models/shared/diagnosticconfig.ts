@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // DiagnosticConfig
@@ -6,18 +7,18 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Defines flags that are used to run the diagnostic tool
 **/
 export class DiagnosticConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=copyHomeFilesFlagEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=copyHomeFilesFlagEnabled" })
   copyHomeFilesFlagEnabled?: boolean;
 
-  @Metadata({ data: "json, name=gcsBucket" })
+  @SpeakeasyMetadata({ data: "json, name=gcsBucket" })
   gcsBucket?: string;
 
-  @Metadata({ data: "json, name=packetCaptureFlagEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=packetCaptureFlagEnabled" })
   packetCaptureFlagEnabled?: boolean;
 
-  @Metadata({ data: "json, name=relativePath" })
+  @SpeakeasyMetadata({ data: "json, name=relativePath" })
   relativePath?: string;
 
-  @Metadata({ data: "json, name=repairFlagEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=repairFlagEnabled" })
   repairFlagEnabled?: boolean;
 }

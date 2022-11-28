@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { NonCompliantFile } from "./noncompliantfile";
+
 
 
 // ComplianceOccurrence
@@ -8,9 +8,9 @@ import { NonCompliantFile } from "./noncompliantfile";
  * An indication that the compliance checks in the associated ComplianceNote were not satisfied for particular resources or a specified reason.
 **/
 export class ComplianceOccurrence extends SpeakeasyBase {
-  @Metadata({ data: "json, name=nonComplianceReason" })
+  @SpeakeasyMetadata({ data: "json, name=nonComplianceReason" })
   nonComplianceReason?: string;
 
-  @Metadata({ data: "json, name=nonCompliantFiles", elemType: shared.NonCompliantFile })
+  @SpeakeasyMetadata({ data: "json, name=nonCompliantFiles", elemType: NonCompliantFile })
   nonCompliantFiles?: NonCompliantFile[];
 }

@@ -1,5 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Actor } from "./actor";
+import { ActorInput } from "./actor";
+
 
 
 // Comment
@@ -7,18 +9,31 @@ import { Actor } from "./actor";
  * A comment associated with a support case.
 **/
 export class Comment extends SpeakeasyBase {
-  @Metadata({ data: "json, name=body" })
+  @SpeakeasyMetadata({ data: "json, name=body" })
   body?: string;
 
-  @Metadata({ data: "json, name=createTime" })
+  @SpeakeasyMetadata({ data: "json, name=createTime" })
   createTime?: string;
 
-  @Metadata({ data: "json, name=creator" })
+  @SpeakeasyMetadata({ data: "json, name=creator" })
   creator?: Actor;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=plainTextBody" })
+  @SpeakeasyMetadata({ data: "json, name=plainTextBody" })
   plainTextBody?: string;
+}
+
+
+// CommentInput
+/** 
+ * A comment associated with a support case.
+**/
+export class CommentInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=body" })
+  body?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=creator" })
+  creator?: ActorInput;
 }

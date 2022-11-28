@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AntennaDemodDecodeDetails } from "./antennademoddecodedetails";
 import { EndpointDetails } from "./endpointdetails";
 import { S3RecordingDetails } from "./s3recordingdetails";
@@ -36,15 +36,15 @@ var ConfigDetails = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=antennaDemodDecodeDetails" }),
+        SpeakeasyMetadata({ data: "json, name=antennaDemodDecodeDetails" }),
         __metadata("design:type", AntennaDemodDecodeDetails)
     ], ConfigDetails.prototype, "antennaDemodDecodeDetails", void 0);
     __decorate([
-        Metadata({ data: "json, name=endpointDetails" }),
+        SpeakeasyMetadata({ data: "json, name=endpointDetails" }),
         __metadata("design:type", EndpointDetails)
     ], ConfigDetails.prototype, "endpointDetails", void 0);
     __decorate([
-        Metadata({ data: "json, name=s3RecordingDetails" }),
+        SpeakeasyMetadata({ data: "json, name=s3RecordingDetails" }),
         __metadata("design:type", S3RecordingDetails)
     ], ConfigDetails.prototype, "s3RecordingDetails", void 0);
     return ConfigDetails;

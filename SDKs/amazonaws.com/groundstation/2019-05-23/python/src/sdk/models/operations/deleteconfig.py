@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 class DeleteConfigConfigTypeEnum(str, Enum):
@@ -14,8 +18,8 @@ class DeleteConfigConfigTypeEnum(str, Enum):
 
 @dataclass
 class DeleteConfigPathParams:
-    config_id: str = field(default=None, metadata={'path_param': { 'field_name': 'configId', 'style': 'simple', 'explode': False }})
-    config_type: DeleteConfigConfigTypeEnum = field(default=None, metadata={'path_param': { 'field_name': 'configType', 'style': 'simple', 'explode': False }})
+    config_id: str = field(metadata={'path_param': { 'field_name': 'configId', 'style': 'simple', 'explode': False }})
+    config_type: DeleteConfigConfigTypeEnum = field(metadata={'path_param': { 'field_name': 'configType', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -31,16 +35,16 @@ class DeleteConfigHeaders:
 
 @dataclass
 class DeleteConfigRequest:
-    path_params: DeleteConfigPathParams = field(default=None)
-    headers: DeleteConfigHeaders = field(default=None)
+    headers: DeleteConfigHeaders = field()
+    path_params: DeleteConfigPathParams = field()
     
 
 @dataclass
 class DeleteConfigResponse:
+    content_type: str = field()
+    status_code: int = field()
     config_id_response: Optional[shared.ConfigIDResponse] = field(default=None)
-    content_type: str = field(default=None)
     dependency_exception: Optional[Any] = field(default=None)
     invalid_parameter_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

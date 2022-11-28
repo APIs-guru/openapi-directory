@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Suite } from "./suite";
+
 
 
 // ListSuitesResult
@@ -8,9 +8,9 @@ import { Suite } from "./suite";
  * Represents the result of a list suites request.
 **/
 export class ListSuitesResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=nextToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=suites", elemType: shared.Suite })
+  @SpeakeasyMetadata({ data: "json, name=suites", elemType: Suite })
   suites?: Suite[];
 }

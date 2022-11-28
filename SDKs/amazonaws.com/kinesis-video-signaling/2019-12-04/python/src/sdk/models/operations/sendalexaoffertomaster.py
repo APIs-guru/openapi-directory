@@ -1,6 +1,10 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -18,24 +22,24 @@ class SendAlexaOfferToMasterHeaders:
 @dataclass_json
 @dataclass
 class SendAlexaOfferToMasterRequestBody:
-    channel_arn: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ChannelARN' }})
-    message_payload: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'MessagePayload' }})
-    sender_client_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'SenderClientId' }})
+    channel_arn: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('ChannelARN') }})
+    message_payload: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('MessagePayload') }})
+    sender_client_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('SenderClientId') }})
     
 
 @dataclass
 class SendAlexaOfferToMasterRequest:
-    headers: SendAlexaOfferToMasterHeaders = field(default=None)
-    request: SendAlexaOfferToMasterRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: SendAlexaOfferToMasterHeaders = field()
+    request: SendAlexaOfferToMasterRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class SendAlexaOfferToMasterResponse:
+    content_type: str = field()
+    status_code: int = field()
     client_limit_exceeded_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     invalid_argument_exception: Optional[Any] = field(default=None)
     not_authorized_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
     send_alexa_offer_to_master_response: Optional[shared.SendAlexaOfferToMasterResponse] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // UpdateCloudFormationCollectionFilter
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  *  Contains the names of AWS CloudFormation stacks used to update a collection of stacks. You can specify up to 500 AWS CloudFormation stacks.
 **/
 export class UpdateCloudFormationCollectionFilter extends SpeakeasyBase {
-  @Metadata({ data: "json, name=StackNames" })
+  @SpeakeasyMetadata({ data: "json, name=StackNames" })
   stackNames?: string[];
 }

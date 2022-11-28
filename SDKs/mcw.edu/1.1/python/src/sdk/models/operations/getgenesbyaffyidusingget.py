@@ -1,21 +1,21 @@
 from dataclasses import dataclass, field
-
+from typing import Optional
 
 
 @dataclass
 class GetGenesByAffyIDUsingGetPathParams:
-    affy_id: str = field(default=None, metadata={'path_param': { 'field_name': 'affyId', 'style': 'simple', 'explode': False }})
-    species_type_key: int = field(default=None, metadata={'path_param': { 'field_name': 'speciesTypeKey', 'style': 'simple', 'explode': False }})
+    affy_id: str = field(metadata={'path_param': { 'field_name': 'affyId', 'style': 'simple', 'explode': False }})
+    species_type_key: int = field(metadata={'path_param': { 'field_name': 'speciesTypeKey', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetGenesByAffyIDUsingGetRequest:
-    path_params: GetGenesByAffyIDUsingGetPathParams = field(default=None)
+    path_params: GetGenesByAffyIDUsingGetPathParams = field()
     
 
 @dataclass
 class GetGenesByAffyIDUsingGetResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

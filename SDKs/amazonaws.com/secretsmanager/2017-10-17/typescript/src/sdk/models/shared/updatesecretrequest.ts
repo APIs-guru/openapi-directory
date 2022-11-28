@@ -1,22 +1,23 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class UpdateSecretRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ClientRequestToken" })
+  @SpeakeasyMetadata({ data: "json, name=ClientRequestToken" })
   clientRequestToken?: string;
 
-  @Metadata({ data: "json, name=Description" })
+  @SpeakeasyMetadata({ data: "json, name=Description" })
   description?: string;
 
-  @Metadata({ data: "json, name=KmsKeyId" })
+  @SpeakeasyMetadata({ data: "json, name=KmsKeyId" })
   kmsKeyId?: string;
 
-  @Metadata({ data: "json, name=SecretBinary" })
+  @SpeakeasyMetadata({ data: "json, name=SecretBinary" })
   secretBinary?: string;
 
-  @Metadata({ data: "json, name=SecretId" })
+  @SpeakeasyMetadata({ data: "json, name=SecretId" })
   secretId: string;
 
-  @Metadata({ data: "json, name=SecretString" })
+  @SpeakeasyMetadata({ data: "json, name=SecretString" })
   secretString?: string;
 }

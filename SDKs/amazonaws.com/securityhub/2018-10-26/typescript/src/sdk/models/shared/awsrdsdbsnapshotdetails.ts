@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AwsRdsDbProcessorFeature } from "./awsrdsdbprocessorfeature";
+
 
 
 // AwsRdsDbSnapshotDetails
@@ -8,84 +8,84 @@ import { AwsRdsDbProcessorFeature } from "./awsrdsdbprocessorfeature";
  * Provides details about an Amazon RDS DB cluster snapshot.
 **/
 export class AwsRdsDbSnapshotDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AllocatedStorage" })
+  @SpeakeasyMetadata({ data: "json, name=AllocatedStorage" })
   allocatedStorage?: number;
 
-  @Metadata({ data: "json, name=AvailabilityZone" })
+  @SpeakeasyMetadata({ data: "json, name=AvailabilityZone" })
   availabilityZone?: string;
 
-  @Metadata({ data: "json, name=DbInstanceIdentifier" })
+  @SpeakeasyMetadata({ data: "json, name=DbInstanceIdentifier" })
   dbInstanceIdentifier?: string;
 
-  @Metadata({ data: "json, name=DbSnapshotIdentifier" })
+  @SpeakeasyMetadata({ data: "json, name=DbSnapshotIdentifier" })
   dbSnapshotIdentifier?: string;
 
-  @Metadata({ data: "json, name=DbiResourceId" })
+  @SpeakeasyMetadata({ data: "json, name=DbiResourceId" })
   dbiResourceId?: string;
 
-  @Metadata({ data: "json, name=Encrypted" })
+  @SpeakeasyMetadata({ data: "json, name=Encrypted" })
   encrypted?: boolean;
 
-  @Metadata({ data: "json, name=Engine" })
+  @SpeakeasyMetadata({ data: "json, name=Engine" })
   engine?: string;
 
-  @Metadata({ data: "json, name=EngineVersion" })
+  @SpeakeasyMetadata({ data: "json, name=EngineVersion" })
   engineVersion?: string;
 
-  @Metadata({ data: "json, name=IamDatabaseAuthenticationEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=IamDatabaseAuthenticationEnabled" })
   iamDatabaseAuthenticationEnabled?: boolean;
 
-  @Metadata({ data: "json, name=InstanceCreateTime" })
+  @SpeakeasyMetadata({ data: "json, name=InstanceCreateTime" })
   instanceCreateTime?: string;
 
-  @Metadata({ data: "json, name=Iops" })
+  @SpeakeasyMetadata({ data: "json, name=Iops" })
   iops?: number;
 
-  @Metadata({ data: "json, name=KmsKeyId" })
+  @SpeakeasyMetadata({ data: "json, name=KmsKeyId" })
   kmsKeyId?: string;
 
-  @Metadata({ data: "json, name=LicenseModel" })
+  @SpeakeasyMetadata({ data: "json, name=LicenseModel" })
   licenseModel?: string;
 
-  @Metadata({ data: "json, name=MasterUsername" })
+  @SpeakeasyMetadata({ data: "json, name=MasterUsername" })
   masterUsername?: string;
 
-  @Metadata({ data: "json, name=OptionGroupName" })
+  @SpeakeasyMetadata({ data: "json, name=OptionGroupName" })
   optionGroupName?: string;
 
-  @Metadata({ data: "json, name=PercentProgress" })
+  @SpeakeasyMetadata({ data: "json, name=PercentProgress" })
   percentProgress?: number;
 
-  @Metadata({ data: "json, name=Port" })
+  @SpeakeasyMetadata({ data: "json, name=Port" })
   port?: number;
 
-  @Metadata({ data: "json, name=ProcessorFeatures", elemType: shared.AwsRdsDbProcessorFeature })
+  @SpeakeasyMetadata({ data: "json, name=ProcessorFeatures", elemType: AwsRdsDbProcessorFeature })
   processorFeatures?: AwsRdsDbProcessorFeature[];
 
-  @Metadata({ data: "json, name=SnapshotCreateTime" })
+  @SpeakeasyMetadata({ data: "json, name=SnapshotCreateTime" })
   snapshotCreateTime?: string;
 
-  @Metadata({ data: "json, name=SnapshotType" })
+  @SpeakeasyMetadata({ data: "json, name=SnapshotType" })
   snapshotType?: string;
 
-  @Metadata({ data: "json, name=SourceDbSnapshotIdentifier" })
+  @SpeakeasyMetadata({ data: "json, name=SourceDbSnapshotIdentifier" })
   sourceDbSnapshotIdentifier?: string;
 
-  @Metadata({ data: "json, name=SourceRegion" })
+  @SpeakeasyMetadata({ data: "json, name=SourceRegion" })
   sourceRegion?: string;
 
-  @Metadata({ data: "json, name=Status" })
+  @SpeakeasyMetadata({ data: "json, name=Status" })
   status?: string;
 
-  @Metadata({ data: "json, name=StorageType" })
+  @SpeakeasyMetadata({ data: "json, name=StorageType" })
   storageType?: string;
 
-  @Metadata({ data: "json, name=TdeCredentialArn" })
+  @SpeakeasyMetadata({ data: "json, name=TdeCredentialArn" })
   tdeCredentialArn?: string;
 
-  @Metadata({ data: "json, name=Timezone" })
+  @SpeakeasyMetadata({ data: "json, name=Timezone" })
   timezone?: string;
 
-  @Metadata({ data: "json, name=VpcId" })
+  @SpeakeasyMetadata({ data: "json, name=VpcId" })
   vpcId?: string;
 }

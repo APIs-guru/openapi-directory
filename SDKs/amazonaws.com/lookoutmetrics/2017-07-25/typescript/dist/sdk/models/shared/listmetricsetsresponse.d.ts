@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { MetricSetSummary } from "./metricsetsummary";
 export declare class ListMetricSetsResponse extends SpeakeasyBase {
     metricSetSummaryList?: MetricSetSummary[];

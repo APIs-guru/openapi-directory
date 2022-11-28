@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ExpiryEventsConfiguration } from "./expiryeventsconfiguration";
 
 
+
 export class GetAccountConfigurationResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ExpiryEvents" })
+  @SpeakeasyMetadata({ data: "json, name=ExpiryEvents" })
   expiryEvents?: ExpiryEventsConfiguration;
 }

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class MybusinessplaceactionsLocationsPlaceActionLinksPatchPathParams extends SpeakeasyBase {
     name: string;
@@ -20,7 +20,7 @@ export declare class MybusinessplaceactionsLocationsPlaceActionLinksPatchQueryPa
 export declare class MybusinessplaceactionsLocationsPlaceActionLinksPatchRequest extends SpeakeasyBase {
     pathParams: MybusinessplaceactionsLocationsPlaceActionLinksPatchPathParams;
     queryParams: MybusinessplaceactionsLocationsPlaceActionLinksPatchQueryParams;
-    request?: shared.PlaceActionLink;
+    request?: shared.PlaceActionLinkInput;
 }
 export declare class MybusinessplaceactionsLocationsPlaceActionLinksPatchResponse extends SpeakeasyBase {
     contentType: string;

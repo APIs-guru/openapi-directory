@@ -9,6 +9,8 @@ const (
 	RangeTypeEnumAll                  RangeTypeEnum = "ALL"
 )
 
+// Range
+// Specifies a contiguous range of an indexed collection, such as characters in text.
 type Range struct {
 	EndIndex   *int32         `json:"endIndex,omitempty"`
 	StartIndex *int32         `json:"startIndex,omitempty"`

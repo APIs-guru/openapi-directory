@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// EntityRecognizerProperties
+// Describes information about an entity recognizer.
 type EntityRecognizerProperties struct {
 	DataAccessRoleArn   *string                          `json:"DataAccessRoleArn,omitempty"`
 	EndTime             *time.Time                       `json:"EndTime,omitempty"`

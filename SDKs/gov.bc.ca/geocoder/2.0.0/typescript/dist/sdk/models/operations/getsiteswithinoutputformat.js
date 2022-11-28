@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var GetSitesWithinOutputFormatOutputFormatEnum;
 (function (GetSitesWithinOutputFormatOutputFormatEnum) {
     GetSitesWithinOutputFormatOutputFormatEnum["Json"] = "json";
@@ -39,7 +39,7 @@ var GetSitesWithinOutputFormatPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=outputFormat" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=outputFormat" }),
         __metadata("design:type", String)
     ], GetSitesWithinOutputFormatPathParams.prototype, "outputFormat", void 0);
     return GetSitesWithinOutputFormatPathParams;
@@ -60,35 +60,35 @@ var GetSitesWithinOutputFormatQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=bbox" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=bbox" }),
         __metadata("design:type", String)
     ], GetSitesWithinOutputFormatQueryParams.prototype, "bbox", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=brief" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=brief" }),
         __metadata("design:type", Boolean)
     ], GetSitesWithinOutputFormatQueryParams.prototype, "brief", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=excludeUnits" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=excludeUnits" }),
         __metadata("design:type", Boolean)
     ], GetSitesWithinOutputFormatQueryParams.prototype, "excludeUnits", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=locationDescriptor" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=locationDescriptor" }),
         __metadata("design:type", String)
     ], GetSitesWithinOutputFormatQueryParams.prototype, "locationDescriptor", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=maxResults" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=maxResults" }),
         __metadata("design:type", Number)
     ], GetSitesWithinOutputFormatQueryParams.prototype, "maxResults", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=onlyCivic" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=onlyCivic" }),
         __metadata("design:type", Boolean)
     ], GetSitesWithinOutputFormatQueryParams.prototype, "onlyCivic", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=outputSRS" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=outputSRS" }),
         __metadata("design:type", Number)
     ], GetSitesWithinOutputFormatQueryParams.prototype, "outputSrs", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=setBack" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=setBack" }),
         __metadata("design:type", Number)
     ], GetSitesWithinOutputFormatQueryParams.prototype, "setBack", void 0);
     return GetSitesWithinOutputFormatQueryParams;
@@ -100,11 +100,11 @@ var GetSitesWithinOutputFormatRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetSitesWithinOutputFormatPathParams)
     ], GetSitesWithinOutputFormatRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetSitesWithinOutputFormatQueryParams)
     ], GetSitesWithinOutputFormatRequest.prototype, "queryParams", void 0);
     return GetSitesWithinOutputFormatRequest;
@@ -116,11 +116,11 @@ var GetSitesWithinOutputFormatResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetSitesWithinOutputFormatResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetSitesWithinOutputFormatResponse.prototype, "statusCode", void 0);
     return GetSitesWithinOutputFormatResponse;

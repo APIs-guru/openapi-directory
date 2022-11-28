@@ -1,9 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PublisherProfileApiProto } from "./publisherprofileapiproto";
 
 
+
 export class GetPublisherProfilesByAccountIdResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=profiles", elemType: shared.PublisherProfileApiProto })
+  @SpeakeasyMetadata({ data: "json, name=profiles", elemType: PublisherProfileApiProto })
   profiles?: PublisherProfileApiProto[];
 }

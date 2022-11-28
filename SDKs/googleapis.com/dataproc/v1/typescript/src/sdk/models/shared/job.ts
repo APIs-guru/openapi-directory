@@ -1,5 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { HadoopJob } from "./hadoopjob";
 import { HiveJob } from "./hivejob";
 import { PigJob } from "./pigjob";
@@ -12,9 +11,10 @@ import { SparkJob } from "./sparkjob";
 import { SparkRJob } from "./sparkrjob";
 import { SparkSqlJob } from "./sparksqljob";
 import { JobStatus } from "./jobstatus";
-import { JobStatus } from "./jobstatus";
 import { TrinoJob } from "./trinojob";
 import { YarnApplication } from "./yarnapplication";
+import { JobPlacementInput } from "./jobplacement";
+
 
 
 // Job
@@ -22,63 +22,109 @@ import { YarnApplication } from "./yarnapplication";
  * A Dataproc job resource.
 **/
 export class Job extends SpeakeasyBase {
-  @Metadata({ data: "json, name=done" })
+  @SpeakeasyMetadata({ data: "json, name=done" })
   done?: boolean;
 
-  @Metadata({ data: "json, name=driverControlFilesUri" })
+  @SpeakeasyMetadata({ data: "json, name=driverControlFilesUri" })
   driverControlFilesUri?: string;
 
-  @Metadata({ data: "json, name=driverOutputResourceUri" })
+  @SpeakeasyMetadata({ data: "json, name=driverOutputResourceUri" })
   driverOutputResourceUri?: string;
 
-  @Metadata({ data: "json, name=hadoopJob" })
+  @SpeakeasyMetadata({ data: "json, name=hadoopJob" })
   hadoopJob?: HadoopJob;
 
-  @Metadata({ data: "json, name=hiveJob" })
+  @SpeakeasyMetadata({ data: "json, name=hiveJob" })
   hiveJob?: HiveJob;
 
-  @Metadata({ data: "json, name=jobUuid" })
+  @SpeakeasyMetadata({ data: "json, name=jobUuid" })
   jobUuid?: string;
 
-  @Metadata({ data: "json, name=labels" })
+  @SpeakeasyMetadata({ data: "json, name=labels" })
   labels?: Map<string, string>;
 
-  @Metadata({ data: "json, name=pigJob" })
+  @SpeakeasyMetadata({ data: "json, name=pigJob" })
   pigJob?: PigJob;
 
-  @Metadata({ data: "json, name=placement" })
+  @SpeakeasyMetadata({ data: "json, name=placement" })
   placement?: JobPlacement;
 
-  @Metadata({ data: "json, name=prestoJob" })
+  @SpeakeasyMetadata({ data: "json, name=prestoJob" })
   prestoJob?: PrestoJob;
 
-  @Metadata({ data: "json, name=pysparkJob" })
+  @SpeakeasyMetadata({ data: "json, name=pysparkJob" })
   pysparkJob?: PySparkJob;
 
-  @Metadata({ data: "json, name=reference" })
+  @SpeakeasyMetadata({ data: "json, name=reference" })
   reference?: JobReference;
 
-  @Metadata({ data: "json, name=scheduling" })
+  @SpeakeasyMetadata({ data: "json, name=scheduling" })
   scheduling?: JobScheduling;
 
-  @Metadata({ data: "json, name=sparkJob" })
+  @SpeakeasyMetadata({ data: "json, name=sparkJob" })
   sparkJob?: SparkJob;
 
-  @Metadata({ data: "json, name=sparkRJob" })
+  @SpeakeasyMetadata({ data: "json, name=sparkRJob" })
   sparkRJob?: SparkRJob;
 
-  @Metadata({ data: "json, name=sparkSqlJob" })
+  @SpeakeasyMetadata({ data: "json, name=sparkSqlJob" })
   sparkSqlJob?: SparkSqlJob;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: JobStatus;
 
-  @Metadata({ data: "json, name=statusHistory", elemType: shared.JobStatus })
+  @SpeakeasyMetadata({ data: "json, name=statusHistory", elemType: JobStatus })
   statusHistory?: JobStatus[];
 
-  @Metadata({ data: "json, name=trinoJob" })
+  @SpeakeasyMetadata({ data: "json, name=trinoJob" })
   trinoJob?: TrinoJob;
 
-  @Metadata({ data: "json, name=yarnApplications", elemType: shared.YarnApplication })
+  @SpeakeasyMetadata({ data: "json, name=yarnApplications", elemType: YarnApplication })
   yarnApplications?: YarnApplication[];
+}
+
+
+// JobInput
+/** 
+ * A Dataproc job resource.
+**/
+export class JobInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=hadoopJob" })
+  hadoopJob?: HadoopJob;
+
+  @SpeakeasyMetadata({ data: "json, name=hiveJob" })
+  hiveJob?: HiveJob;
+
+  @SpeakeasyMetadata({ data: "json, name=labels" })
+  labels?: Map<string, string>;
+
+  @SpeakeasyMetadata({ data: "json, name=pigJob" })
+  pigJob?: PigJob;
+
+  @SpeakeasyMetadata({ data: "json, name=placement" })
+  placement?: JobPlacementInput;
+
+  @SpeakeasyMetadata({ data: "json, name=prestoJob" })
+  prestoJob?: PrestoJob;
+
+  @SpeakeasyMetadata({ data: "json, name=pysparkJob" })
+  pysparkJob?: PySparkJob;
+
+  @SpeakeasyMetadata({ data: "json, name=reference" })
+  reference?: JobReference;
+
+  @SpeakeasyMetadata({ data: "json, name=scheduling" })
+  scheduling?: JobScheduling;
+
+  @SpeakeasyMetadata({ data: "json, name=sparkJob" })
+  sparkJob?: SparkJob;
+
+  @SpeakeasyMetadata({ data: "json, name=sparkRJob" })
+  sparkRJob?: SparkRJob;
+
+  @SpeakeasyMetadata({ data: "json, name=sparkSqlJob" })
+  sparkSqlJob?: SparkSqlJob;
+
+  @SpeakeasyMetadata({ data: "json, name=trinoJob" })
+  trinoJob?: TrinoJob;
 }

@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 class DisplayvideoAdvertisersTargetingTypesAssignedTargetingOptionsListTargetingTypeEnum(str, Enum):
@@ -53,8 +54,8 @@ class DisplayvideoAdvertisersTargetingTypesAssignedTargetingOptionsListTargeting
 
 @dataclass
 class DisplayvideoAdvertisersTargetingTypesAssignedTargetingOptionsListPathParams:
-    advertiser_id: str = field(default=None, metadata={'path_param': { 'field_name': 'advertiserId', 'style': 'simple', 'explode': False }})
-    targeting_type: DisplayvideoAdvertisersTargetingTypesAssignedTargetingOptionsListTargetingTypeEnum = field(default=None, metadata={'path_param': { 'field_name': 'targetingType', 'style': 'simple', 'explode': False }})
+    advertiser_id: str = field(metadata={'path_param': { 'field_name': 'advertiserId', 'style': 'simple', 'explode': False }})
+    targeting_type: DisplayvideoAdvertisersTargetingTypesAssignedTargetingOptionsListTargetingTypeEnum = field(metadata={'path_param': { 'field_name': 'targetingType', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -78,20 +79,20 @@ class DisplayvideoAdvertisersTargetingTypesAssignedTargetingOptionsListQueryPara
 
 @dataclass
 class DisplayvideoAdvertisersTargetingTypesAssignedTargetingOptionsListSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DisplayvideoAdvertisersTargetingTypesAssignedTargetingOptionsListRequest:
-    path_params: DisplayvideoAdvertisersTargetingTypesAssignedTargetingOptionsListPathParams = field(default=None)
-    query_params: DisplayvideoAdvertisersTargetingTypesAssignedTargetingOptionsListQueryParams = field(default=None)
-    security: DisplayvideoAdvertisersTargetingTypesAssignedTargetingOptionsListSecurity = field(default=None)
+    path_params: DisplayvideoAdvertisersTargetingTypesAssignedTargetingOptionsListPathParams = field()
+    query_params: DisplayvideoAdvertisersTargetingTypesAssignedTargetingOptionsListQueryParams = field()
+    security: DisplayvideoAdvertisersTargetingTypesAssignedTargetingOptionsListSecurity = field()
     
 
 @dataclass
 class DisplayvideoAdvertisersTargetingTypesAssignedTargetingOptionsListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     list_advertiser_assigned_targeting_options_response: Optional[shared.ListAdvertiserAssignedTargetingOptionsResponse] = field(default=None)
-    status_code: int = field(default=None)
     

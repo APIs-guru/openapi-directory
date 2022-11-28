@@ -1,15 +1,18 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 
 
 @dataclass
 class DeleteProvisionedConcurrencyConfigPathParams:
-    function_name: str = field(default=None, metadata={'path_param': { 'field_name': 'FunctionName', 'style': 'simple', 'explode': False }})
+    function_name: str = field(metadata={'path_param': { 'field_name': 'FunctionName', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class DeleteProvisionedConcurrencyConfigQueryParams:
-    qualifier: str = field(default=None, metadata={'query_param': { 'field_name': 'Qualifier', 'style': 'form', 'explode': True }})
+    qualifier: str = field(metadata={'query_param': { 'field_name': 'Qualifier', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -25,18 +28,18 @@ class DeleteProvisionedConcurrencyConfigHeaders:
 
 @dataclass
 class DeleteProvisionedConcurrencyConfigRequest:
-    path_params: DeleteProvisionedConcurrencyConfigPathParams = field(default=None)
-    query_params: DeleteProvisionedConcurrencyConfigQueryParams = field(default=None)
-    headers: DeleteProvisionedConcurrencyConfigHeaders = field(default=None)
+    headers: DeleteProvisionedConcurrencyConfigHeaders = field()
+    path_params: DeleteProvisionedConcurrencyConfigPathParams = field()
+    query_params: DeleteProvisionedConcurrencyConfigQueryParams = field()
     
 
 @dataclass
 class DeleteProvisionedConcurrencyConfigResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     invalid_parameter_value_exception: Optional[Any] = field(default=None)
     resource_conflict_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
     service_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     too_many_requests_exception: Optional[Any] = field(default=None)
     

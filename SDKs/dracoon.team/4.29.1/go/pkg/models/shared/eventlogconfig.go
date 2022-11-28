@@ -1,5 +1,7 @@
 package shared
 
+// EventlogConfig
+// Eventlog settings
 type EventlogConfig struct {
 	Enabled         *bool  `json:"enabled,omitempty"`
 	LogIPEnabled    *bool  `json:"logIpEnabled,omitempty"`

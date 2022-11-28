@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostCopyDbClusterSnapshotActionEnum(str, Enum):
     COPY_DB_CLUSTER_SNAPSHOT = "CopyDBClusterSnapshot"
@@ -10,8 +14,8 @@ class PostCopyDbClusterSnapshotVersionEnum(str, Enum):
 
 @dataclass
 class PostCopyDbClusterSnapshotQueryParams:
-    action: PostCopyDbClusterSnapshotActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostCopyDbClusterSnapshotVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostCopyDbClusterSnapshotActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostCopyDbClusterSnapshotVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostCopyDbClusterSnapshotHeaders:
 
 @dataclass
 class PostCopyDbClusterSnapshotRequest:
-    query_params: PostCopyDbClusterSnapshotQueryParams = field(default=None)
-    headers: PostCopyDbClusterSnapshotHeaders = field(default=None)
+    headers: PostCopyDbClusterSnapshotHeaders = field()
+    query_params: PostCopyDbClusterSnapshotQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostCopyDbClusterSnapshotResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

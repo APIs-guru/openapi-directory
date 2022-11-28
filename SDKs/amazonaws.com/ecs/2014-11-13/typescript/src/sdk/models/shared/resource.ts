@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Resource
@@ -6,21 +7,21 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Describes the resources available for a container instance.
 **/
 export class Resource extends SpeakeasyBase {
-  @Metadata({ data: "json, name=doubleValue" })
+  @SpeakeasyMetadata({ data: "json, name=doubleValue" })
   doubleValue?: number;
 
-  @Metadata({ data: "json, name=integerValue" })
+  @SpeakeasyMetadata({ data: "json, name=integerValue" })
   integerValue?: number;
 
-  @Metadata({ data: "json, name=longValue" })
+  @SpeakeasyMetadata({ data: "json, name=longValue" })
   longValue?: number;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=stringSetValue" })
+  @SpeakeasyMetadata({ data: "json, name=stringSetValue" })
   stringSetValue?: string[];
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: string;
 }

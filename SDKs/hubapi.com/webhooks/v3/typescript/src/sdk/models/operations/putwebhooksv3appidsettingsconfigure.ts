@@ -1,41 +1,42 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class PutWebhooksV3AppIdSettingsConfigurePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=appId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=appId" })
   appId: number;
 }
 
 
 export class PutWebhooksV3AppIdSettingsConfigureSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=query" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=query" })
   developerHapikey: shared.SchemeDeveloperHapikey;
 }
 
 
 export class PutWebhooksV3AppIdSettingsConfigureRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: PutWebhooksV3AppIdSettingsConfigurePathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: shared.SettingsChangeRequest;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: PutWebhooksV3AppIdSettingsConfigureSecurity;
 }
 
 
 export class PutWebhooksV3AppIdSettingsConfigureResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   settingsResponse?: shared.SettingsResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

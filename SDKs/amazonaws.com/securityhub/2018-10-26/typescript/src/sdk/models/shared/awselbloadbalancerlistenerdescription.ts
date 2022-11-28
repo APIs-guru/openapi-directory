@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AwsElbLoadBalancerListener } from "./awselbloadbalancerlistener";
+
 
 
 // AwsElbLoadBalancerListenerDescription
@@ -7,9 +8,9 @@ import { AwsElbLoadBalancerListener } from "./awselbloadbalancerlistener";
  * Lists the policies that are enabled for a load balancer listener.
 **/
 export class AwsElbLoadBalancerListenerDescription extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Listener" })
+  @SpeakeasyMetadata({ data: "json, name=Listener" })
   listener?: AwsElbLoadBalancerListener;
 
-  @Metadata({ data: "json, name=PolicyNames" })
+  @SpeakeasyMetadata({ data: "json, name=PolicyNames" })
   policyNames?: string[];
 }

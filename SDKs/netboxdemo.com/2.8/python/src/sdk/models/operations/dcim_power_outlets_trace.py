@@ -5,17 +5,17 @@ from sdk.models import shared
 
 @dataclass
 class DcimPowerOutletsTracePathParams:
-    id: int = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: int = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class DcimPowerOutletsTraceRequest:
-    path_params: DcimPowerOutletsTracePathParams = field(default=None)
+    path_params: DcimPowerOutletsTracePathParams = field()
     
 
 @dataclass
 class DcimPowerOutletsTraceResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     power_outlet: Optional[shared.PowerOutlet] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -22,14 +22,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var SchemeApiKey = /** @class */ (function (_super) {
     __extends(SchemeApiKey, _super);
     function SchemeApiKey() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, name=api_key" }),
+        SpeakeasyMetadata({ data: "security, name=api_key" }),
         __metadata("design:type", String)
     ], SchemeApiKey.prototype, "apiKey", void 0);
     return SchemeApiKey;
@@ -41,7 +41,7 @@ var SchemeUserToken = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, name=user_token" }),
+        SpeakeasyMetadata({ data: "security, name=user_token" }),
         __metadata("design:type", String)
     ], SchemeUserToken.prototype, "apiKey", void 0);
     return SchemeUserToken;
@@ -53,11 +53,11 @@ var Security = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=query" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=query" }),
         __metadata("design:type", SchemeApiKey)
     ], Security.prototype, "apiKey", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=query" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=query" }),
         __metadata("design:type", SchemeUserToken)
     ], Security.prototype, "userToken", void 0);
     return Security;

@@ -1,12 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ClusterState } from "./clusterstate";
 import { ColumnFamily } from "./columnfamily";
+import { RestoreInfo1 } from "./restoreinfo1";
+import { TableStats } from "./tablestats";
 import { RestoreInfo } from "./restoreinfo";
 
+
 export enum TableGranularityEnum {
-    TimestampGranularityUnspecified = "TIMESTAMP_GRANULARITY_UNSPECIFIED"
-,    Millis = "MILLIS"
+    TimestampGranularityUnspecified = "TIMESTAMP_GRANULARITY_UNSPECIFIED",
+    Millis = "MILLIS"
 }
 
 
@@ -15,18 +17,49 @@ export enum TableGranularityEnum {
  * A collection of user data indexed by row, column, and timestamp. Each table is served using the resources of its parent cluster.
 **/
 export class Table extends SpeakeasyBase {
-  @Metadata({ data: "json, name=clusterStates", elemType: shared.ClusterState })
+  @SpeakeasyMetadata({ data: "json, name=clusterStates", elemType: ClusterState })
   clusterStates?: Map<string, ClusterState>;
 
-  @Metadata({ data: "json, name=columnFamilies", elemType: shared.ColumnFamily })
+  @SpeakeasyMetadata({ data: "json, name=columnFamilies", elemType: ColumnFamily })
   columnFamilies?: Map<string, ColumnFamily>;
 
-  @Metadata({ data: "json, name=granularity" })
+  @SpeakeasyMetadata({ data: "json, name=deletionProtection" })
+  deletionProtection?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=granularity" })
   granularity?: TableGranularityEnum;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=restoreInfo" })
+  @SpeakeasyMetadata({ data: "json, name=restoreInfo" })
+  restoreInfo?: RestoreInfo1;
+
+  @SpeakeasyMetadata({ data: "json, name=stats" })
+  stats?: TableStats;
+}
+
+
+// TableInput
+/** 
+ * A collection of user data indexed by row, column, and timestamp. Each table is served using the resources of its parent cluster.
+**/
+export class TableInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=columnFamilies", elemType: ColumnFamily })
+  columnFamilies?: Map<string, ColumnFamily>;
+
+  @SpeakeasyMetadata({ data: "json, name=deletionProtection" })
+  deletionProtection?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=granularity" })
+  granularity?: TableGranularityEnum;
+
+  @SpeakeasyMetadata({ data: "json, name=name" })
+  name?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=restoreInfo" })
   restoreInfo?: RestoreInfo;
+
+  @SpeakeasyMetadata({ data: "json, name=stats" })
+  stats?: TableStats;
 }

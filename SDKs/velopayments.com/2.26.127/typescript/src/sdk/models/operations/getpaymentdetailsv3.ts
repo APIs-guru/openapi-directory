@@ -1,47 +1,48 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetPaymentDetailsV3PathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=paymentId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=paymentId" })
   paymentId: string;
 }
 
 
 export class GetPaymentDetailsV3QueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=sensitive" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sensitive" })
   sensitive?: boolean;
 }
 
 
 export class GetPaymentDetailsV3Request extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetPaymentDetailsV3PathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetPaymentDetailsV3QueryParams;
 }
 
 
 export class GetPaymentDetailsV3Response extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   paymentResponseV3?: shared.PaymentResponseV3;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   inlineResponse400?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   inlineResponse401?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   inlineResponse403?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   inlineResponse404?: any;
 }

@@ -1,47 +1,48 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetRateLimitsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=api_context" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=api_context" })
   apiContext?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=api_name" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=api_name" })
   apiName?: string;
 }
 
 
 export class GetRateLimitsSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   apiAuth: shared.SchemeApiAuth;
 }
 
 
-export class GetRateLimitsRequest extends SpeakeasyBase {
-  @Metadata()
-  queryParams: GetRateLimitsQueryParams;
-
-  @Metadata()
-  security: GetRateLimitsSecurity;
-}
-
-
 export class GetRateLimits500ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=errors", elemType: shared.Error })
+  @SpeakeasyMetadata({ data: "json, name=errors", elemType: shared.Error })
   errors?: shared.Error[];
 }
 
 
+export class GetRateLimitsRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  queryParams: GetRateLimitsQueryParams;
+
+  @SpeakeasyMetadata()
+  security: GetRateLimitsSecurity;
+}
+
+
 export class GetRateLimitsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   rateLimitsResponse?: shared.RateLimitsResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getRateLimits500ApplicationJsonObject?: GetRateLimits500ApplicationJson;
 }

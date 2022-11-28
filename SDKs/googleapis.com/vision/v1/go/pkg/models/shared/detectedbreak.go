@@ -11,6 +11,8 @@ const (
 	DetectedBreakTypeEnumLineBreak    DetectedBreakTypeEnum = "LINE_BREAK"
 )
 
+// DetectedBreak
+// Detected start or end of a structural component.
 type DetectedBreak struct {
 	IsPrefix *bool                  `json:"isPrefix,omitempty"`
 	Type     *DetectedBreakTypeEnum `json:"type,omitempty"`

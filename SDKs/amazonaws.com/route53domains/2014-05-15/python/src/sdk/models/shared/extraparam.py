@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import extraparamname_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ExtraParam:
-    name: extraparamname_enum.ExtraParamNameEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Name' }})
-    value: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Value' }})
+    r"""ExtraParam
+    ExtraParam includes the following elements.
+    """
+    
+    name: ExtraParamNameEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Name') }})
+    value: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Value') }})
     

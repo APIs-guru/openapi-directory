@@ -1,54 +1,54 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ProjectParameterDetails } from "./projectparameterdetails";
 
 
+
 export class ProjectsRow extends SpeakeasyBase {
-  @Metadata({ data: "json, name=bbox" })
+  @SpeakeasyMetadata({ data: "json, name=bbox" })
   bbox?: number[];
 
-  @Metadata({ data: "json, name=countries" })
+  @SpeakeasyMetadata({ data: "json, name=countries" })
   countries?: string[];
 
-  @Metadata({ data: "json, name=entity" })
+  @SpeakeasyMetadata({ data: "json, name=entity" })
   entity?: string;
 
-  @Metadata({ data: "json, name=firstUpdated" })
+  @SpeakeasyMetadata({ data: "json, name=firstUpdated" })
   firstUpdated: Date;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: number;
 
-  @Metadata({ data: "json, name=isAnalysis" })
+  @SpeakeasyMetadata({ data: "json, name=isAnalysis" })
   isAnalysis?: boolean;
 
-  @Metadata({ data: "json, name=isMobile" })
+  @SpeakeasyMetadata({ data: "json, name=isMobile" })
   isMobile?: boolean;
 
-  @Metadata({ data: "json, name=lastUpdated" })
+  @SpeakeasyMetadata({ data: "json, name=lastUpdated" })
   lastUpdated: Date;
 
-  @Metadata({ data: "json, name=locationIds" })
+  @SpeakeasyMetadata({ data: "json, name=locationIds" })
   locationIds: number[];
 
-  @Metadata({ data: "json, name=locations" })
+  @SpeakeasyMetadata({ data: "json, name=locations" })
   locations: number;
 
-  @Metadata({ data: "json, name=measurements" })
+  @SpeakeasyMetadata({ data: "json, name=measurements" })
   measurements: number;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 
-  @Metadata({ data: "json, name=parameters", elemType: shared.ProjectParameterDetails })
+  @SpeakeasyMetadata({ data: "json, name=parameters", elemType: ProjectParameterDetails })
   parameters: ProjectParameterDetails[];
 
-  @Metadata({ data: "json, name=sensorType" })
+  @SpeakeasyMetadata({ data: "json, name=sensorType" })
   sensorType?: string;
 
-  @Metadata({ data: "json, name=sources" })
+  @SpeakeasyMetadata({ data: "json, name=sources" })
   sources?: any[];
 
-  @Metadata({ data: "json, name=subtitle" })
+  @SpeakeasyMetadata({ data: "json, name=subtitle" })
   subtitle: string;
 }

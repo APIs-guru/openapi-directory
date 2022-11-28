@@ -1,10 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import monthlyschedule
-from . import timeofday
-from . import timezone
-from . import weeklyschedule
+from sdk import utils
+from . import *
 
 class RecurringScheduleFrequencyEnum(str, Enum):
     FREQUENCY_UNSPECIFIED = "FREQUENCY_UNSPECIFIED"
@@ -15,14 +14,34 @@ class RecurringScheduleFrequencyEnum(str, Enum):
 
 @dataclass_json
 @dataclass
+class RecurringScheduleInput:
+    r"""RecurringScheduleInput
+    Sets the time for recurring patch deployments.
+    """
+    
+    end_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('endTime') }})
+    frequency: Optional[RecurringScheduleFrequencyEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('frequency') }})
+    monthly: Optional[MonthlySchedule] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('monthly') }})
+    start_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('startTime') }})
+    time_of_day: Optional[TimeOfDay] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('timeOfDay') }})
+    time_zone: Optional[TimeZone] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('timeZone') }})
+    weekly: Optional[WeeklySchedule] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('weekly') }})
+    
+
+@dataclass_json
+@dataclass
 class RecurringSchedule:
-    end_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'endTime' }})
-    frequency: Optional[RecurringScheduleFrequencyEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'frequency' }})
-    last_execute_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'lastExecuteTime' }})
-    monthly: Optional[monthlyschedule.MonthlySchedule] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'monthly' }})
-    next_execute_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'nextExecuteTime' }})
-    start_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'startTime' }})
-    time_of_day: Optional[timeofday.TimeOfDay] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'timeOfDay' }})
-    time_zone: Optional[timezone.TimeZone] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'timeZone' }})
-    weekly: Optional[weeklyschedule.WeeklySchedule] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'weekly' }})
+    r"""RecurringSchedule
+    Sets the time for recurring patch deployments.
+    """
+    
+    end_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('endTime') }})
+    frequency: Optional[RecurringScheduleFrequencyEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('frequency') }})
+    last_execute_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('lastExecuteTime') }})
+    monthly: Optional[MonthlySchedule] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('monthly') }})
+    next_execute_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('nextExecuteTime') }})
+    start_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('startTime') }})
+    time_of_day: Optional[TimeOfDay] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('timeOfDay') }})
+    time_zone: Optional[TimeZone] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('timeZone') }})
+    weekly: Optional[WeeklySchedule] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('weekly') }})
     

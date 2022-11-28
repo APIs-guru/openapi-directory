@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostDescribeSpotDatafeedSubscriptionActionEnum(str, Enum):
     DESCRIBE_SPOT_DATAFEED_SUBSCRIPTION = "DescribeSpotDatafeedSubscription"
@@ -10,8 +14,8 @@ class PostDescribeSpotDatafeedSubscriptionVersionEnum(str, Enum):
 
 @dataclass
 class PostDescribeSpotDatafeedSubscriptionQueryParams:
-    action: PostDescribeSpotDatafeedSubscriptionActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostDescribeSpotDatafeedSubscriptionVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostDescribeSpotDatafeedSubscriptionActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostDescribeSpotDatafeedSubscriptionVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostDescribeSpotDatafeedSubscriptionHeaders:
 
 @dataclass
 class PostDescribeSpotDatafeedSubscriptionRequest:
-    query_params: PostDescribeSpotDatafeedSubscriptionQueryParams = field(default=None)
-    headers: PostDescribeSpotDatafeedSubscriptionHeaders = field(default=None)
+    headers: PostDescribeSpotDatafeedSubscriptionHeaders = field()
+    query_params: PostDescribeSpotDatafeedSubscriptionQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostDescribeSpotDatafeedSubscriptionResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

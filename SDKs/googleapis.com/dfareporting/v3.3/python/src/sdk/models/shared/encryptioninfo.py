@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class EncryptionInfoEncryptionEntityTypeEnum(str, Enum):
     ENCRYPTION_ENTITY_TYPE_UNKNOWN = "ENCRYPTION_ENTITY_TYPE_UNKNOWN"
@@ -20,8 +22,12 @@ class EncryptionInfoEncryptionSourceEnum(str, Enum):
 @dataclass_json
 @dataclass
 class EncryptionInfo:
-    encryption_entity_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'encryptionEntityId' }})
-    encryption_entity_type: Optional[EncryptionInfoEncryptionEntityTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'encryptionEntityType' }})
-    encryption_source: Optional[EncryptionInfoEncryptionSourceEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'encryptionSource' }})
-    kind: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'kind' }})
+    r"""EncryptionInfo
+    A description of how user IDs are encrypted.
+    """
+    
+    encryption_entity_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('encryptionEntityId') }})
+    encryption_entity_type: Optional[EncryptionInfoEncryptionEntityTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('encryptionEntityType') }})
+    encryption_source: Optional[EncryptionInfoEncryptionSourceEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('encryptionSource') }})
+    kind: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('kind') }})
     

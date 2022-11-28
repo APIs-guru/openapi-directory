@@ -1,49 +1,50 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class RegistryUpdateApiSpecPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=api" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=api" })
   api: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=project" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=project" })
   project: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=spec" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=spec" })
   spec: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=version" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=version" })
   version: string;
 }
 
 
 export class RegistryUpdateApiSpecQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=allow_missing" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=allow_missing" })
   allowMissing?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=update_mask" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=update_mask" })
   updateMask?: string;
 }
 
 
 export class RegistryUpdateApiSpecRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: RegistryUpdateApiSpecPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: RegistryUpdateApiSpecQueryParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: any;
 }
 
 
 export class RegistryUpdateApiSpecResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   apiSpec?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

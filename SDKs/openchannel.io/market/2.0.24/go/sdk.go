@@ -11,7 +11,7 @@ import (
 	"strings"
 )
 
-var Servers = []string{
+var ServerList = []string{
 	"https://market.openchannel.io/v2",
 }
 
@@ -20,9 +20,13 @@ type HTTPClient interface {
 }
 
 type SDK struct {
-	defaultClient  HTTPClient
-	securityClient HTTPClient
-	serverURL      string
+	_defaultClient  HTTPClient
+	_securityClient HTTPClient
+	_security       *shared.Security
+	_serverURL      string
+	_language       string
+	_sdkVersion     string
+	_genVersion     string
 }
 
 type SDKOption func(*SDK)
@@ -33,33 +37,56 @@ func WithServerURL(serverURL string, params map[string]string) SDKOption {
 			serverURL = utils.ReplaceParameters(serverURL, params)
 		}
 
-		sdk.serverURL = serverURL
+		sdk._serverURL = serverURL
+	}
+}
+
+func WithClient(client HTTPClient) SDKOption {
+	return func(sdk *SDK) {
+		sdk._defaultClient = client
 	}
 }
 
 func WithSecurity(security shared.Security) SDKOption {
 	return func(sdk *SDK) {
-		sdk.securityClient = utils.CreateSecurityClient(security)
+		sdk._security = &security
 	}
 }
 
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
-		defaultClient:  http.DefaultClient,
-		securityClient: http.DefaultClient,
+		_language:   "go",
+		_sdkVersion: "",
+		_genVersion: "internal",
 	}
 	for _, opt := range opts {
 		opt(sdk)
 	}
-	if sdk.serverURL == "" {
-		sdk.serverURL = Servers[0]
+
+	if sdk._defaultClient == nil {
+		sdk._defaultClient = http.DefaultClient
+	}
+	if sdk._securityClient == nil {
+
+		if sdk._security != nil {
+			sdk._securityClient = utils.ConfigureSecurityClient(sdk._defaultClient, sdk._security)
+		} else {
+			sdk._securityClient = sdk._defaultClient
+		}
+
+	}
+
+	if sdk._serverURL == "" {
+		sdk._serverURL = ServerList[0]
 	}
 
 	return sdk
 }
 
+// DeleteAppsAppID - Removes app and all versions
+// - This method is called on behalf of a developer.
 func (s *SDK) DeleteAppsAppID(ctx context.Context, request operations.DeleteAppsAppIDRequest) (*operations.DeleteAppsAppIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/apps/{appId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -69,7 +96,7 @@ func (s *SDK) DeleteAppsAppID(ctx context.Context, request operations.DeleteApps
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -90,8 +117,10 @@ func (s *SDK) DeleteAppsAppID(ctx context.Context, request operations.DeleteApps
 	return res, nil
 }
 
+// DeleteAppsAppIDVersionsVersion - Removes AppVersion
+// - This method is called on behalf of a developer.
 func (s *SDK) DeleteAppsAppIDVersionsVersion(ctx context.Context, request operations.DeleteAppsAppIDVersionsVersionRequest) (*operations.DeleteAppsAppIDVersionsVersionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/apps/{appId}/versions/{version}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -101,7 +130,7 @@ func (s *SDK) DeleteAppsAppIDVersionsVersion(ctx context.Context, request operat
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -122,8 +151,9 @@ func (s *SDK) DeleteAppsAppIDVersionsVersion(ctx context.Context, request operat
 	return res, nil
 }
 
+// DeleteDeveloperAccountsDeveloperAccountID - Removes the developer account
 func (s *SDK) DeleteDeveloperAccountsDeveloperAccountID(ctx context.Context, request operations.DeleteDeveloperAccountsDeveloperAccountIDRequest) (*operations.DeleteDeveloperAccountsDeveloperAccountIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/developerAccounts/{developerAccountId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -131,7 +161,7 @@ func (s *SDK) DeleteDeveloperAccountsDeveloperAccountID(ctx context.Context, req
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -153,8 +183,9 @@ func (s *SDK) DeleteDeveloperAccountsDeveloperAccountID(ctx context.Context, req
 	return res, nil
 }
 
+// DeleteDevelopersDeveloperID - Removes a single developer
 func (s *SDK) DeleteDevelopersDeveloperID(ctx context.Context, request operations.DeleteDevelopersDeveloperIDRequest) (*operations.DeleteDevelopersDeveloperIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/developers/{developerId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -162,7 +193,7 @@ func (s *SDK) DeleteDevelopersDeveloperID(ctx context.Context, request operation
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -185,8 +216,9 @@ func (s *SDK) DeleteDevelopersDeveloperID(ctx context.Context, request operation
 	return res, nil
 }
 
+// DeletePermissionAppsAppID - Removes permission that allows the app to access this user's data
 func (s *SDK) DeletePermissionAppsAppID(ctx context.Context, request operations.DeletePermissionAppsAppIDRequest) (*operations.DeletePermissionAppsAppIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/permission/apps/{appId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -196,7 +228,7 @@ func (s *SDK) DeletePermissionAppsAppID(ctx context.Context, request operations.
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -218,8 +250,10 @@ func (s *SDK) DeletePermissionAppsAppID(ctx context.Context, request operations.
 	return res, nil
 }
 
+// DeleteReviewsReviewID - Remove a review
+// - Only the review author is able to remove their review
 func (s *SDK) DeleteReviewsReviewID(ctx context.Context, request operations.DeleteReviewsReviewIDRequest) (*operations.DeleteReviewsReviewIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/reviews/{reviewId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -229,7 +263,7 @@ func (s *SDK) DeleteReviewsReviewID(ctx context.Context, request operations.Dele
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -250,8 +284,11 @@ func (s *SDK) DeleteReviewsReviewID(ctx context.Context, request operations.Dele
 	return res, nil
 }
 
+// DeleteStripeGatewayDeveloperDeveloperIDAccountsStripeID - Disconnects a developer's Stripe account
+//
+// - Results are returned for the market provided within the basic authentication credentials
 func (s *SDK) DeleteStripeGatewayDeveloperDeveloperIDAccountsStripeID(ctx context.Context, request operations.DeleteStripeGatewayDeveloperDeveloperIDAccountsStripeIDRequest) (*operations.DeleteStripeGatewayDeveloperDeveloperIDAccountsStripeIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/stripe-gateway/developer/{developerId}/accounts/{stripeId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -259,7 +296,7 @@ func (s *SDK) DeleteStripeGatewayDeveloperDeveloperIDAccountsStripeID(ctx contex
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -291,8 +328,9 @@ func (s *SDK) DeleteStripeGatewayDeveloperDeveloperIDAccountsStripeID(ctx contex
 	return res, nil
 }
 
+// DeleteStripeGatewayUserUserIDCardsCardID - Removes a credit card for a user
 func (s *SDK) DeleteStripeGatewayUserUserIDCardsCardID(ctx context.Context, request operations.DeleteStripeGatewayUserUserIDCardsCardIDRequest) (*operations.DeleteStripeGatewayUserUserIDCardsCardIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/stripe-gateway/user/{userId}/cards/{cardId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -300,7 +338,7 @@ func (s *SDK) DeleteStripeGatewayUserUserIDCardsCardID(ctx context.Context, requ
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -332,8 +370,10 @@ func (s *SDK) DeleteStripeGatewayUserUserIDCardsCardID(ctx context.Context, requ
 	return res, nil
 }
 
+// DeleteTransactionsTransactionID - Deleted a transaction
+// - Results are returned for the market provided within the basic authentication credentials
 func (s *SDK) DeleteTransactionsTransactionID(ctx context.Context, request operations.DeleteTransactionsTransactionIDRequest) (*operations.DeleteTransactionsTransactionIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/transactions/{transactionId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -341,7 +381,7 @@ func (s *SDK) DeleteTransactionsTransactionID(ctx context.Context, request opera
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -362,8 +402,9 @@ func (s *SDK) DeleteTransactionsTransactionID(ctx context.Context, request opera
 	return res, nil
 }
 
+// DeleteUserAccountsUserAccountID - Removes the user account
 func (s *SDK) DeleteUserAccountsUserAccountID(ctx context.Context, request operations.DeleteUserAccountsUserAccountIDRequest) (*operations.DeleteUserAccountsUserAccountIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/userAccounts/{userAccountId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -371,7 +412,7 @@ func (s *SDK) DeleteUserAccountsUserAccountID(ctx context.Context, request opera
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -393,8 +434,10 @@ func (s *SDK) DeleteUserAccountsUserAccountID(ctx context.Context, request opera
 	return res, nil
 }
 
+// DeleteUsersUserID - Removes a single user
+// - Results are returned for the market provided within the basic authentication credentials
 func (s *SDK) DeleteUsersUserID(ctx context.Context, request operations.DeleteUsersUserIDRequest) (*operations.DeleteUsersUserIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/users/{userId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -402,7 +445,7 @@ func (s *SDK) DeleteUsersUserID(ctx context.Context, request operations.DeleteUs
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -425,8 +468,11 @@ func (s *SDK) DeleteUsersUserID(ctx context.Context, request operations.DeleteUs
 	return res, nil
 }
 
+// GetApps - Returns a paginated list of APPROVED or SUSPENDED apps
+// - Results are paginated and the default is value is 1000 if no limit is provided
+// - If no query is specified, returns all APPROVED or SUSPENDED apps within the marketplace
 func (s *SDK) GetApps(ctx context.Context, request operations.GetAppsRequest) (*operations.GetAppsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/apps"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -436,7 +482,7 @@ func (s *SDK) GetApps(ctx context.Context, request operations.GetAppsRequest) (*
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -467,8 +513,10 @@ func (s *SDK) GetApps(ctx context.Context, request operations.GetAppsRequest) (*
 	return res, nil
 }
 
+// GetAppsAppID - Returns a single APPROVED or SUSPENDED app
+// - A 'view' event is recorded when trackViews is set to true
 func (s *SDK) GetAppsAppID(ctx context.Context, request operations.GetAppsAppIDRequest) (*operations.GetAppsAppIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/apps/{appId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -478,7 +526,7 @@ func (s *SDK) GetAppsAppID(ctx context.Context, request operations.GetAppsAppIDR
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -510,8 +558,10 @@ func (s *SDK) GetAppsAppID(ctx context.Context, request operations.GetAppsAppIDR
 	return res, nil
 }
 
+// GetAppsAppIDVersionsVersion - Returns a single AppVersion
+// - Only returns AppVersions owned by this developer
 func (s *SDK) GetAppsAppIDVersionsVersion(ctx context.Context, request operations.GetAppsAppIDVersionsVersionRequest) (*operations.GetAppsAppIDVersionsVersionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/apps/{appId}/versions/{version}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -521,7 +571,7 @@ func (s *SDK) GetAppsAppIDVersionsVersion(ctx context.Context, request operation
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -553,8 +603,10 @@ func (s *SDK) GetAppsAppIDVersionsVersion(ctx context.Context, request operation
 	return res, nil
 }
 
+// GetAppsBySafeNameSafeName - Returns a single APPROVED or SUSPENDED app
+// - A 'view' event is recorded when trackViews is set to true
 func (s *SDK) GetAppsBySafeNameSafeName(ctx context.Context, request operations.GetAppsBySafeNameSafeNameRequest) (*operations.GetAppsBySafeNameSafeNameResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/apps/bySafeName/{safeName}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -564,7 +616,7 @@ func (s *SDK) GetAppsBySafeNameSafeName(ctx context.Context, request operations.
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -596,8 +648,10 @@ func (s *SDK) GetAppsBySafeNameSafeName(ctx context.Context, request operations.
 	return res, nil
 }
 
+// GetAppsTextSearch - Searches through the text of fields to find APPROVED or SUSPENDED apps
+// - Results are returned for the market provided within the basic authentication credentials
 func (s *SDK) GetAppsTextSearch(ctx context.Context, request operations.GetAppsTextSearchRequest) (*operations.GetAppsTextSearchResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/apps/textSearch"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -607,7 +661,7 @@ func (s *SDK) GetAppsTextSearch(ctx context.Context, request operations.GetAppsT
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -638,8 +692,12 @@ func (s *SDK) GetAppsTextSearch(ctx context.Context, request operations.GetAppsT
 	return res, nil
 }
 
+// GetAppsVersions - Returns a paginated list of AppVersions
+// - Results are paginated when limit is set, otherwise all results are returned
+// - If no query is specified, returns all AppVersions within the marketplace
+// - Only returns AppVersions owned by this developer
 func (s *SDK) GetAppsVersions(ctx context.Context, request operations.GetAppsVersionsRequest) (*operations.GetAppsVersionsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/apps/versions"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -649,7 +707,7 @@ func (s *SDK) GetAppsVersions(ctx context.Context, request operations.GetAppsVer
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -680,8 +738,10 @@ func (s *SDK) GetAppsVersions(ctx context.Context, request operations.GetAppsVer
 	return res, nil
 }
 
+// GetDeveloperAccounts - Returns a paginated list of developerAccounts
+// - Results are paginated and the default is value is 1000 if no limit is provided
 func (s *SDK) GetDeveloperAccounts(ctx context.Context, request operations.GetDeveloperAccountsRequest) (*operations.GetDeveloperAccountsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/developerAccounts"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -691,7 +751,7 @@ func (s *SDK) GetDeveloperAccounts(ctx context.Context, request operations.GetDe
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -722,8 +782,9 @@ func (s *SDK) GetDeveloperAccounts(ctx context.Context, request operations.GetDe
 	return res, nil
 }
 
+// GetDeveloperAccountsDeveloperAccountID - Returns a single developer account
 func (s *SDK) GetDeveloperAccountsDeveloperAccountID(ctx context.Context, request operations.GetDeveloperAccountsDeveloperAccountIDRequest) (*operations.GetDeveloperAccountsDeveloperAccountIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/developerAccounts/{developerAccountId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -731,7 +792,7 @@ func (s *SDK) GetDeveloperAccountsDeveloperAccountID(ctx context.Context, reques
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -763,8 +824,10 @@ func (s *SDK) GetDeveloperAccountsDeveloperAccountID(ctx context.Context, reques
 	return res, nil
 }
 
+// GetDevelopers - Returns a paginated list of developers
+// - Results are paginated and the default is value is 100 if no limit is provided
 func (s *SDK) GetDevelopers(ctx context.Context, request operations.GetDevelopersRequest) (*operations.GetDevelopersResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/developers"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -774,7 +837,7 @@ func (s *SDK) GetDevelopers(ctx context.Context, request operations.GetDeveloper
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -805,8 +868,9 @@ func (s *SDK) GetDevelopers(ctx context.Context, request operations.GetDeveloper
 	return res, nil
 }
 
+// GetDevelopersDeveloperID - Returns a single developer
 func (s *SDK) GetDevelopersDeveloperID(ctx context.Context, request operations.GetDevelopersDeveloperIDRequest) (*operations.GetDevelopersDeveloperIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/developers/{developerId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -814,7 +878,7 @@ func (s *SDK) GetDevelopersDeveloperID(ctx context.Context, request operations.G
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -846,8 +910,10 @@ func (s *SDK) GetDevelopersDeveloperID(ctx context.Context, request operations.G
 	return res, nil
 }
 
+// GetEventsEventID - Returns an event
+// - Results are returned for the market provided within the basic authentication credentials
 func (s *SDK) GetEventsEventID(ctx context.Context, request operations.GetEventsEventIDRequest) (*operations.GetEventsEventIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/events/{eventId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -855,7 +921,7 @@ func (s *SDK) GetEventsEventID(ctx context.Context, request operations.GetEvents
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -887,8 +953,9 @@ func (s *SDK) GetEventsEventID(ctx context.Context, request operations.GetEvents
 	return res, nil
 }
 
+// GetFiles - Returns a paginated list of files
 func (s *SDK) GetFiles(ctx context.Context, request operations.GetFilesRequest) (*operations.GetFilesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/files"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -898,7 +965,7 @@ func (s *SDK) GetFiles(ctx context.Context, request operations.GetFilesRequest) 
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -929,8 +996,9 @@ func (s *SDK) GetFiles(ctx context.Context, request operations.GetFilesRequest) 
 	return res, nil
 }
 
+// GetFilesByIDOrURL - Get the details for a file.
 func (s *SDK) GetFilesByIDOrURL(ctx context.Context, request operations.GetFilesByIDOrURLRequest) (*operations.GetFilesByIDOrURLResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/files/byIdOrUrl"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -940,7 +1008,7 @@ func (s *SDK) GetFilesByIDOrURL(ctx context.Context, request operations.GetFiles
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -971,8 +1039,9 @@ func (s *SDK) GetFilesByIDOrURL(ctx context.Context, request operations.GetFiles
 	return res, nil
 }
 
+// GetFilesDownload - A signed URL for downloading a private file can be returned by providing the fileId.
 func (s *SDK) GetFilesDownload(ctx context.Context, request operations.GetFilesDownloadRequest) (*operations.GetFilesDownloadResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/files/download"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -982,7 +1051,7 @@ func (s *SDK) GetFilesDownload(ctx context.Context, request operations.GetFilesD
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1014,8 +1083,9 @@ func (s *SDK) GetFilesDownload(ctx context.Context, request operations.GetFilesD
 	return res, nil
 }
 
+// GetMarketsThis - Returns the current marketplace
 func (s *SDK) GetMarketsThis(ctx context.Context) (*operations.GetMarketsThisResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/markets/this"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1023,7 +1093,7 @@ func (s *SDK) GetMarketsThis(ctx context.Context) (*operations.GetMarketsThisRes
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1054,8 +1124,10 @@ func (s *SDK) GetMarketsThis(ctx context.Context) (*operations.GetMarketsThisRes
 	return res, nil
 }
 
+// GetOwnership - Returns a paginated list of app licenses
+//   - Results are returned for the market provided within the basic authentication credentials
 func (s *SDK) GetOwnership(ctx context.Context, request operations.GetOwnershipRequest) (*operations.GetOwnershipResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/ownership"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1065,7 +1137,7 @@ func (s *SDK) GetOwnership(ctx context.Context, request operations.GetOwnershipR
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1096,8 +1168,10 @@ func (s *SDK) GetOwnership(ctx context.Context, request operations.GetOwnershipR
 	return res, nil
 }
 
+// GetOwnershipOwnershipID - Returns an ownership record
+//   - Results are returned for the market provided within the basic authentication credentials
 func (s *SDK) GetOwnershipOwnershipID(ctx context.Context, request operations.GetOwnershipOwnershipIDRequest) (*operations.GetOwnershipOwnershipIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/ownership/{ownershipId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1105,7 +1179,7 @@ func (s *SDK) GetOwnershipOwnershipID(ctx context.Context, request operations.Ge
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1136,8 +1210,9 @@ func (s *SDK) GetOwnershipOwnershipID(ctx context.Context, request operations.Ge
 	return res, nil
 }
 
+// GetPermissionAppsAppID - Returns permission that allows the app to access this user's data
 func (s *SDK) GetPermissionAppsAppID(ctx context.Context, request operations.GetPermissionAppsAppIDRequest) (*operations.GetPermissionAppsAppIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/permission/apps/{appId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1147,7 +1222,7 @@ func (s *SDK) GetPermissionAppsAppID(ctx context.Context, request operations.Get
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1179,8 +1254,10 @@ func (s *SDK) GetPermissionAppsAppID(ctx context.Context, request operations.Get
 	return res, nil
 }
 
+// GetReviews - Find reviews for a particular App and marketplace. Results are automatically paginated when limit is set
+// - Results are paginated and the default is value is 100 if no limit is provided
 func (s *SDK) GetReviews(ctx context.Context, request operations.GetReviewsRequest) (*operations.GetReviewsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/reviews"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1190,7 +1267,7 @@ func (s *SDK) GetReviews(ctx context.Context, request operations.GetReviewsReque
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1221,8 +1298,9 @@ func (s *SDK) GetReviews(ctx context.Context, request operations.GetReviewsReque
 	return res, nil
 }
 
+// GetReviewsReviewID - Find a Review within a particular App and marketplace
 func (s *SDK) GetReviewsReviewID(ctx context.Context, request operations.GetReviewsReviewIDRequest) (*operations.GetReviewsReviewIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/reviews/{reviewId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1230,7 +1308,7 @@ func (s *SDK) GetReviewsReviewID(ctx context.Context, request operations.GetRevi
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1262,8 +1340,10 @@ func (s *SDK) GetReviewsReviewID(ctx context.Context, request operations.GetRevi
 	return res, nil
 }
 
+// GetStatsSeriesPeriodFields - Return a timeseries for a particular field
+// Return a timeseries nested array containing date and value. Example: [[1406520000000,2],[1406606400000,34],[1406692800000,245],...]
 func (s *SDK) GetStatsSeriesPeriodFields(ctx context.Context, request operations.GetStatsSeriesPeriodFieldsRequest) (*operations.GetStatsSeriesPeriodFieldsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/stats/series/{period}/{fields}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1273,7 +1353,7 @@ func (s *SDK) GetStatsSeriesPeriodFields(ctx context.Context, request operations
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1303,8 +1383,9 @@ func (s *SDK) GetStatsSeriesPeriodFields(ctx context.Context, request operations
 	return res, nil
 }
 
+// GetStatsTotal - Returns the total number of events for a particular field.
 func (s *SDK) GetStatsTotal(ctx context.Context, request operations.GetStatsTotalRequest) (*operations.GetStatsTotalResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/stats/total"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1314,7 +1395,7 @@ func (s *SDK) GetStatsTotal(ctx context.Context, request operations.GetStatsTota
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1344,8 +1425,10 @@ func (s *SDK) GetStatsTotal(ctx context.Context, request operations.GetStatsTota
 	return res, nil
 }
 
+// GetStripeGatewayDeveloperDeveloperIDAccounts - Returns a developers connected Stripe accounts
+// - Results are returned for the market provided within the basic authentication credentials
 func (s *SDK) GetStripeGatewayDeveloperDeveloperIDAccounts(ctx context.Context, request operations.GetStripeGatewayDeveloperDeveloperIDAccountsRequest) (*operations.GetStripeGatewayDeveloperDeveloperIDAccountsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/stripe-gateway/developer/{developerId}/accounts", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1353,7 +1436,7 @@ func (s *SDK) GetStripeGatewayDeveloperDeveloperIDAccounts(ctx context.Context, 
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1385,8 +1468,10 @@ func (s *SDK) GetStripeGatewayDeveloperDeveloperIDAccounts(ctx context.Context, 
 	return res, nil
 }
 
+// GetStripeGatewayUserUserIDCards - Returns credit cards for this user
+// - Results are returned for the market provided within the basic authentication credentials
 func (s *SDK) GetStripeGatewayUserUserIDCards(ctx context.Context, request operations.GetStripeGatewayUserUserIDCardsRequest) (*operations.GetStripeGatewayUserUserIDCardsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/stripe-gateway/user/{userId}/cards", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1394,7 +1479,7 @@ func (s *SDK) GetStripeGatewayUserUserIDCards(ctx context.Context, request opera
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1426,8 +1511,10 @@ func (s *SDK) GetStripeGatewayUserUserIDCards(ctx context.Context, request opera
 	return res, nil
 }
 
+// GetTransactions - Returns a paginated list of transactions
+// - Results are paginated and the default is value is 100 if no limit is provided
 func (s *SDK) GetTransactions(ctx context.Context, request operations.GetTransactionsRequest) (*operations.GetTransactionsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/transactions"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1437,7 +1524,7 @@ func (s *SDK) GetTransactions(ctx context.Context, request operations.GetTransac
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1468,8 +1555,10 @@ func (s *SDK) GetTransactions(ctx context.Context, request operations.GetTransac
 	return res, nil
 }
 
+// GetTransactionsTransactionID - Returns a transaction
+// - Results are returned for the market provided within the basic authentication credentials
 func (s *SDK) GetTransactionsTransactionID(ctx context.Context, request operations.GetTransactionsTransactionIDRequest) (*operations.GetTransactionsTransactionIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/transactions/{transactionId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1477,7 +1566,7 @@ func (s *SDK) GetTransactionsTransactionID(ctx context.Context, request operatio
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1498,8 +1587,10 @@ func (s *SDK) GetTransactionsTransactionID(ctx context.Context, request operatio
 	return res, nil
 }
 
+// GetUserAccounts - Returns a paginated list of userAccounts
+// - Results are paginated and the default is value is 1000 if no limit is provided
 func (s *SDK) GetUserAccounts(ctx context.Context, request operations.GetUserAccountsRequest) (*operations.GetUserAccountsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/userAccounts"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1509,7 +1600,7 @@ func (s *SDK) GetUserAccounts(ctx context.Context, request operations.GetUserAcc
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1540,8 +1631,9 @@ func (s *SDK) GetUserAccounts(ctx context.Context, request operations.GetUserAcc
 	return res, nil
 }
 
+// GetUserAccountsUserAccountID - Returns a single user account
 func (s *SDK) GetUserAccountsUserAccountID(ctx context.Context, request operations.GetUserAccountsUserAccountIDRequest) (*operations.GetUserAccountsUserAccountIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/userAccounts/{userAccountId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1549,7 +1641,7 @@ func (s *SDK) GetUserAccountsUserAccountID(ctx context.Context, request operatio
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1581,8 +1673,10 @@ func (s *SDK) GetUserAccountsUserAccountID(ctx context.Context, request operatio
 	return res, nil
 }
 
+// GetUsers - Returns a paginated list of users
+// - Results are paginated and the default is value is 100 if no limit is provided
 func (s *SDK) GetUsers(ctx context.Context, request operations.GetUsersRequest) (*operations.GetUsersResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/users"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1592,7 +1686,7 @@ func (s *SDK) GetUsers(ctx context.Context, request operations.GetUsersRequest) 
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1623,8 +1717,10 @@ func (s *SDK) GetUsers(ctx context.Context, request operations.GetUsersRequest) 
 	return res, nil
 }
 
+// GetUsersUserID - Return a single user
+// - Results are returned for the market provided within the basic authentication credentials
 func (s *SDK) GetUsersUserID(ctx context.Context, request operations.GetUsersUserIDRequest) (*operations.GetUsersUserIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/users/{userId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1632,7 +1728,7 @@ func (s *SDK) GetUsersUserID(ctx context.Context, request operations.GetUsersUse
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1664,8 +1760,13 @@ func (s *SDK) GetUsersUserID(ctx context.Context, request operations.GetUsersUse
 	return res, nil
 }
 
+// PatchAppsAppIDVersionsVersion - Updates the app fields or creates a new version
+// - This method is called on behalf of a developer.
+// - Price and is required if the model is 'single' or 'recurring'
+// - Returns the newly updated app
+// - This endpoint updates only the fields provided in the request (relative update). In contrast, the POST version of this method replaces the entire object to match the request (absolute update).
 func (s *SDK) PatchAppsAppIDVersionsVersion(ctx context.Context, request operations.PatchAppsAppIDVersionsVersionRequest) (*operations.PatchAppsAppIDVersionsVersionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/apps/{appId}/versions/{version}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "PATCH", url, nil)
@@ -1675,7 +1776,7 @@ func (s *SDK) PatchAppsAppIDVersionsVersion(ctx context.Context, request operati
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1708,8 +1809,9 @@ func (s *SDK) PatchAppsAppIDVersionsVersion(ctx context.Context, request operati
 	return res, nil
 }
 
+// PatchDeveloperAccountsDeveloperAccountID - Updates the developer account fields
 func (s *SDK) PatchDeveloperAccountsDeveloperAccountID(ctx context.Context, request operations.PatchDeveloperAccountsDeveloperAccountIDRequest) (*operations.PatchDeveloperAccountsDeveloperAccountIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/developerAccounts/{developerAccountId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "PATCH", url, nil)
@@ -1719,7 +1821,7 @@ func (s *SDK) PatchDeveloperAccountsDeveloperAccountID(ctx context.Context, requ
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1751,8 +1853,9 @@ func (s *SDK) PatchDeveloperAccountsDeveloperAccountID(ctx context.Context, requ
 	return res, nil
 }
 
+// PatchDevelopersDeveloperID - Updates the developer fields
 func (s *SDK) PatchDevelopersDeveloperID(ctx context.Context, request operations.PatchDevelopersDeveloperIDRequest) (*operations.PatchDevelopersDeveloperIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/developers/{developerId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "PATCH", url, nil)
@@ -1762,7 +1865,7 @@ func (s *SDK) PatchDevelopersDeveloperID(ctx context.Context, request operations
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1794,8 +1897,10 @@ func (s *SDK) PatchDevelopersDeveloperID(ctx context.Context, request operations
 	return res, nil
 }
 
+// PatchOwnershipOwnershipID - Updates ownership fields
+//   - Results are returned for the market provided within the basic authentication credentials
 func (s *SDK) PatchOwnershipOwnershipID(ctx context.Context, request operations.PatchOwnershipOwnershipIDRequest) (*operations.PatchOwnershipOwnershipIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/ownership/{ownershipId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "PATCH", url, nil)
@@ -1805,7 +1910,7 @@ func (s *SDK) PatchOwnershipOwnershipID(ctx context.Context, request operations.
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1837,8 +1942,11 @@ func (s *SDK) PatchOwnershipOwnershipID(ctx context.Context, request operations.
 	return res, nil
 }
 
+// PatchReviewsReviewID - Update a review fields
+// - Only the review author is able to update their review
+// - Returns the newly updated review
 func (s *SDK) PatchReviewsReviewID(ctx context.Context, request operations.PatchReviewsReviewIDRequest) (*operations.PatchReviewsReviewIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/reviews/{reviewId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "PATCH", url, nil)
@@ -1848,7 +1956,7 @@ func (s *SDK) PatchReviewsReviewID(ctx context.Context, request operations.Patch
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1881,8 +1989,9 @@ func (s *SDK) PatchReviewsReviewID(ctx context.Context, request operations.Patch
 	return res, nil
 }
 
+// PatchUserAccountsUserAccountID - Updates the user account fields
 func (s *SDK) PatchUserAccountsUserAccountID(ctx context.Context, request operations.PatchUserAccountsUserAccountIDRequest) (*operations.PatchUserAccountsUserAccountIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/userAccounts/{userAccountId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "PATCH", url, nil)
@@ -1892,7 +2001,7 @@ func (s *SDK) PatchUserAccountsUserAccountID(ctx context.Context, request operat
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1924,8 +2033,9 @@ func (s *SDK) PatchUserAccountsUserAccountID(ctx context.Context, request operat
 	return res, nil
 }
 
+// PatchUsersUserID - Updates user fields
 func (s *SDK) PatchUsersUserID(ctx context.Context, request operations.PatchUsersUserIDRequest) (*operations.PatchUsersUserIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/users/{userId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "PATCH", url, nil)
@@ -1935,7 +2045,7 @@ func (s *SDK) PatchUsersUserID(ctx context.Context, request operations.PatchUser
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1967,8 +2077,12 @@ func (s *SDK) PatchUsersUserID(ctx context.Context, request operations.PatchUser
 	return res, nil
 }
 
+// PostApps - Adds a new app for this developer
+// - This method is called on behalf of a developer.
+// - Price is required if the model is 'single' or 'recurring'
+// - Returns the newly created app
 func (s *SDK) PostApps(ctx context.Context, request operations.PostAppsRequest) (*operations.PostAppsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/apps"
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -1978,7 +2092,7 @@ func (s *SDK) PostApps(ctx context.Context, request operations.PostAppsRequest) 
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2010,8 +2124,10 @@ func (s *SDK) PostApps(ctx context.Context, request operations.PostAppsRequest) 
 	return res, nil
 }
 
+// PostAppsAppIDLive - Change the live app to another, previously approved version
+// - This method is called on behalf of a developer.
 func (s *SDK) PostAppsAppIDLive(ctx context.Context, request operations.PostAppsAppIDLiveRequest) (*operations.PostAppsAppIDLiveResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/apps/{appId}/live", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -2021,7 +2137,7 @@ func (s *SDK) PostAppsAppIDLive(ctx context.Context, request operations.PostApps
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2043,8 +2159,11 @@ func (s *SDK) PostAppsAppIDLive(ctx context.Context, request operations.PostApps
 	return res, nil
 }
 
+// PostAppsAppIDPublish - Publishes the current working version of the app to the marketplace
+// - This method is called on behalf of a developer.
+// - Only effects the current working version of the app.
 func (s *SDK) PostAppsAppIDPublish(ctx context.Context, request operations.PostAppsAppIDPublishRequest) (*operations.PostAppsAppIDPublishResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/apps/{appId}/publish", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -2054,7 +2173,7 @@ func (s *SDK) PostAppsAppIDPublish(ctx context.Context, request operations.PostA
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2078,8 +2197,13 @@ func (s *SDK) PostAppsAppIDPublish(ctx context.Context, request operations.PostA
 	return res, nil
 }
 
+// PostAppsAppIDVersionsVersion - Updates the app or creates a new version
+// - This method is called on behalf of a developer.
+// - Price and is required if the model is 'single' or 'recurring'
+// - Returns the newly updated app
+// - This endpoint replaces the entire object to match the request (absolute update). In contrast, the PATCH version of this endpoint updates only the fields provided in the request (relative update).
 func (s *SDK) PostAppsAppIDVersionsVersion(ctx context.Context, request operations.PostAppsAppIDVersionsVersionRequest) (*operations.PostAppsAppIDVersionsVersionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/apps/{appId}/versions/{version}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -2089,7 +2213,7 @@ func (s *SDK) PostAppsAppIDVersionsVersion(ctx context.Context, request operatio
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2122,8 +2246,10 @@ func (s *SDK) PostAppsAppIDVersionsVersion(ctx context.Context, request operatio
 	return res, nil
 }
 
+// PostAppsAppIDVersionsVersionStatus - Allows a developer or administrator to change the status of apps
+// Only certain status changes are allowed. For instance, a developer is only able to suspend and unsuspend their app (which must already be approved). See here for a state change diagram of allowed status changes for administrators: https://support.openchannel.io/documentation/api/#415-apps-status-change
 func (s *SDK) PostAppsAppIDVersionsVersionStatus(ctx context.Context, request operations.PostAppsAppIDVersionsVersionStatusRequest) (*operations.PostAppsAppIDVersionsVersionStatusResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/apps/{appId}/versions/{version}/status", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -2133,7 +2259,7 @@ func (s *SDK) PostAppsAppIDVersionsVersionStatus(ctx context.Context, request op
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2156,8 +2282,11 @@ func (s *SDK) PostAppsAppIDVersionsVersionStatus(ctx context.Context, request op
 	return res, nil
 }
 
+// PostCustomGatewayPaymentOwnershipID - Adds a payment for an app on behalf of a user
+// - Results are returned for the market provided within the basic authentication credentials
+// - Payments must be enabled and 'Custom' must be selected as the gateway in order to use this API endpoint
 func (s *SDK) PostCustomGatewayPaymentOwnershipID(ctx context.Context, request operations.PostCustomGatewayPaymentOwnershipIDRequest) (*operations.PostCustomGatewayPaymentOwnershipIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/custom-gateway/payment/{ownershipId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -2167,7 +2296,7 @@ func (s *SDK) PostCustomGatewayPaymentOwnershipID(ctx context.Context, request o
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2199,8 +2328,11 @@ func (s *SDK) PostCustomGatewayPaymentOwnershipID(ctx context.Context, request o
 	return res, nil
 }
 
+// PostCustomGatewayRefundOwnershipID - Fully or partially refund payment for an app on behalf of a user
+// - Results are returned for the market provided within the basic authentication credentials
+// - Payments must be enabled and 'Custom' must be selected as the gateway in order to use this API endpoint
 func (s *SDK) PostCustomGatewayRefundOwnershipID(ctx context.Context, request operations.PostCustomGatewayRefundOwnershipIDRequest) (*operations.PostCustomGatewayRefundOwnershipIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/custom-gateway/refund/{ownershipId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -2210,7 +2342,7 @@ func (s *SDK) PostCustomGatewayRefundOwnershipID(ctx context.Context, request op
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2242,8 +2374,9 @@ func (s *SDK) PostCustomGatewayRefundOwnershipID(ctx context.Context, request op
 	return res, nil
 }
 
+// PostDeveloperAccountsDeveloperAccountID - Updates the developer account or adds the developer account if it doesn't exist
 func (s *SDK) PostDeveloperAccountsDeveloperAccountID(ctx context.Context, request operations.PostDeveloperAccountsDeveloperAccountIDRequest) (*operations.PostDeveloperAccountsDeveloperAccountIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/developerAccounts/{developerAccountId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -2253,7 +2386,7 @@ func (s *SDK) PostDeveloperAccountsDeveloperAccountID(ctx context.Context, reque
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2284,8 +2417,9 @@ func (s *SDK) PostDeveloperAccountsDeveloperAccountID(ctx context.Context, reque
 	return res, nil
 }
 
+// PostDevelopersDeveloperID - Updates the developer record or adds the developer if it doesn't exist
 func (s *SDK) PostDevelopersDeveloperID(ctx context.Context, request operations.PostDevelopersDeveloperIDRequest) (*operations.PostDevelopersDeveloperIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/developers/{developerId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -2295,7 +2429,7 @@ func (s *SDK) PostDevelopersDeveloperID(ctx context.Context, request operations.
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2326,8 +2460,11 @@ func (s *SDK) PostDevelopersDeveloperID(ctx context.Context, request operations.
 	return res, nil
 }
 
+// PostFiles - Uploads a file.
+// - WARNING: File URLs or fileIds must be stored somewhere within the customData field for an app, review, developer or user. Unused files will be removed after a few days.
+// - This method is called on behalf of a developer.
 func (s *SDK) PostFiles(ctx context.Context, request operations.PostFilesRequest) (*operations.PostFilesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/files"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2347,7 +2484,7 @@ func (s *SDK) PostFiles(ctx context.Context, request operations.PostFilesRequest
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2378,8 +2515,11 @@ func (s *SDK) PostFiles(ctx context.Context, request operations.PostFilesRequest
 	return res, nil
 }
 
+// PostFilesURL - Uploads a file from a URL
+// - WARNING: File URLs or fileIds must be stored somewhere within the customData field for an app, review, developer or user. Unused files will be removed after a few days.
+// - This method is called on behalf of a developer.
 func (s *SDK) PostFilesURL(ctx context.Context, request operations.PostFilesURLRequest) (*operations.PostFilesURLResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/files/url"
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -2389,7 +2529,7 @@ func (s *SDK) PostFilesURL(ctx context.Context, request operations.PostFilesURLR
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2420,8 +2560,10 @@ func (s *SDK) PostFilesURL(ctx context.Context, request operations.PostFilesURLR
 	return res, nil
 }
 
+// PostOwnershipInstall - Aquires an app license for a user (installs app)
+//   - This method is called on behalf of a user - This method requires either a modelId from the app or a custom model - User data and statistics are recorded when this method is called
 func (s *SDK) PostOwnershipInstall(ctx context.Context, request operations.PostOwnershipInstallRequest) (*operations.PostOwnershipInstallResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/ownership/install"
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -2431,7 +2573,7 @@ func (s *SDK) PostOwnershipInstall(ctx context.Context, request operations.PostO
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2466,8 +2608,10 @@ func (s *SDK) PostOwnershipInstall(ctx context.Context, request operations.PostO
 	return res, nil
 }
 
+// PostOwnershipOwnershipID - Updates an ownership record
+//   - Results are returned for the market provided within the basic authentication credentials
 func (s *SDK) PostOwnershipOwnershipID(ctx context.Context, request operations.PostOwnershipOwnershipIDRequest) (*operations.PostOwnershipOwnershipIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/ownership/{ownershipId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -2477,7 +2621,7 @@ func (s *SDK) PostOwnershipOwnershipID(ctx context.Context, request operations.P
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2508,8 +2652,10 @@ func (s *SDK) PostOwnershipOwnershipID(ctx context.Context, request operations.P
 	return res, nil
 }
 
+// PostOwnershipUninstallOwnershipID - Uninstalls a license for a particular user and app (uninstalls app)
+//   - This method is called on behalf of a user - User data and statistics are recorded when this method is called
 func (s *SDK) PostOwnershipUninstallOwnershipID(ctx context.Context, request operations.PostOwnershipUninstallOwnershipIDRequest) (*operations.PostOwnershipUninstallOwnershipIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/ownership/uninstall/{ownershipId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -2519,7 +2665,7 @@ func (s *SDK) PostOwnershipUninstallOwnershipID(ctx context.Context, request ope
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2552,8 +2698,9 @@ func (s *SDK) PostOwnershipUninstallOwnershipID(ctx context.Context, request ope
 	return res, nil
 }
 
+// PostPermissionAppsAppID - Adds permission to allow the app to access this user's data
 func (s *SDK) PostPermissionAppsAppID(ctx context.Context, request operations.PostPermissionAppsAppIDRequest) (*operations.PostPermissionAppsAppIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/permission/apps/{appId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -2563,7 +2710,7 @@ func (s *SDK) PostPermissionAppsAppID(ctx context.Context, request operations.Po
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2595,8 +2742,11 @@ func (s *SDK) PostPermissionAppsAppID(ctx context.Context, request operations.Po
 	return res, nil
 }
 
+// PostReviews - Post a review from a User and returns the new post
+// - Only authenticated users are able to post reviews
+// - Returns the newly created review
 func (s *SDK) PostReviews(ctx context.Context, request operations.PostReviewsRequest) (*operations.PostReviewsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/reviews"
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -2606,7 +2756,7 @@ func (s *SDK) PostReviews(ctx context.Context, request operations.PostReviewsReq
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2639,8 +2789,11 @@ func (s *SDK) PostReviews(ctx context.Context, request operations.PostReviewsReq
 	return res, nil
 }
 
+// PostReviewsReviewID - Update a review from a User and returns the new post
+// - Only the review author is able to update their review
+// - Returns the newly updated review
 func (s *SDK) PostReviewsReviewID(ctx context.Context, request operations.PostReviewsReviewIDRequest) (*operations.PostReviewsReviewIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/reviews/{reviewId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -2650,7 +2803,7 @@ func (s *SDK) PostReviewsReviewID(ctx context.Context, request operations.PostRe
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2683,8 +2836,10 @@ func (s *SDK) PostReviewsReviewID(ctx context.Context, request operations.PostRe
 	return res, nil
 }
 
+// PostStatsIncrementField - Increments a statistics field
+// increment a statistics field
 func (s *SDK) PostStatsIncrementField(ctx context.Context, request operations.PostStatsIncrementFieldRequest) (*operations.PostStatsIncrementFieldResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/stats/increment/{field}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -2694,7 +2849,7 @@ func (s *SDK) PostStatsIncrementField(ctx context.Context, request operations.Po
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2715,8 +2870,11 @@ func (s *SDK) PostStatsIncrementField(ctx context.Context, request operations.Po
 	return res, nil
 }
 
+// PostStripeGatewayDeveloperDeveloperIDAccounts - Generate a temporary URL to allow a developer to connect their Stripe account
+// - Results are returned for the market provided within the basic authentication credentials
+// - The URL generated by this method is only valid for 48 hours.
 func (s *SDK) PostStripeGatewayDeveloperDeveloperIDAccounts(ctx context.Context, request operations.PostStripeGatewayDeveloperDeveloperIDAccountsRequest) (*operations.PostStripeGatewayDeveloperDeveloperIDAccountsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/stripe-gateway/developer/{developerId}/accounts", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -2726,7 +2884,7 @@ func (s *SDK) PostStripeGatewayDeveloperDeveloperIDAccounts(ctx context.Context,
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2758,8 +2916,10 @@ func (s *SDK) PostStripeGatewayDeveloperDeveloperIDAccounts(ctx context.Context,
 	return res, nil
 }
 
+// PostStripeGatewayUserUserIDCards - Adds credit card for this user
+// - Results are returned for the market provided within the basic authentication credentials
 func (s *SDK) PostStripeGatewayUserUserIDCards(ctx context.Context, request operations.PostStripeGatewayUserUserIDCardsRequest) (*operations.PostStripeGatewayUserUserIDCardsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/stripe-gateway/user/{userId}/cards", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -2769,7 +2929,7 @@ func (s *SDK) PostStripeGatewayUserUserIDCards(ctx context.Context, request oper
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2801,8 +2961,11 @@ func (s *SDK) PostStripeGatewayUserUserIDCards(ctx context.Context, request oper
 	return res, nil
 }
 
+// PostStripeGatewayUserUserIDCardsCardID - Updates a credit card for this user
+//
+// - Results are returned for the market provided within the basic authentication credentials
 func (s *SDK) PostStripeGatewayUserUserIDCardsCardID(ctx context.Context, request operations.PostStripeGatewayUserUserIDCardsCardIDRequest) (*operations.PostStripeGatewayUserUserIDCardsCardIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/stripe-gateway/user/{userId}/cards/{cardId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -2812,7 +2975,7 @@ func (s *SDK) PostStripeGatewayUserUserIDCardsCardID(ctx context.Context, reques
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2844,8 +3007,10 @@ func (s *SDK) PostStripeGatewayUserUserIDCardsCardID(ctx context.Context, reques
 	return res, nil
 }
 
+// PostTransactionsTransactionID - Updates a transaction
+// - Results are returned for the market provided within the basic authentication credentials
 func (s *SDK) PostTransactionsTransactionID(ctx context.Context, request operations.PostTransactionsTransactionIDRequest) (*operations.PostTransactionsTransactionIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/transactions/{transactionId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -2855,7 +3020,7 @@ func (s *SDK) PostTransactionsTransactionID(ctx context.Context, request operati
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2886,8 +3051,9 @@ func (s *SDK) PostTransactionsTransactionID(ctx context.Context, request operati
 	return res, nil
 }
 
+// PostUserAccountsUserAccountID - Updates the user account or adds the user account if it doesn't exist
 func (s *SDK) PostUserAccountsUserAccountID(ctx context.Context, request operations.PostUserAccountsUserAccountIDRequest) (*operations.PostUserAccountsUserAccountIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/userAccounts/{userAccountId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -2897,7 +3063,7 @@ func (s *SDK) PostUserAccountsUserAccountID(ctx context.Context, request operati
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2928,8 +3094,9 @@ func (s *SDK) PostUserAccountsUserAccountID(ctx context.Context, request operati
 	return res, nil
 }
 
+// PostUsersUserID - Updates a single user or adds the user if they don't exist
 func (s *SDK) PostUsersUserID(ctx context.Context, request operations.PostUsersUserIDRequest) (*operations.PostUsersUserIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/users/{userId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -2939,7 +3106,7 @@ func (s *SDK) PostUsersUserID(ctx context.Context, request operations.PostUsersU
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {

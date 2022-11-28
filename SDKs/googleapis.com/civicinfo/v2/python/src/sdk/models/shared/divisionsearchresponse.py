@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import divisionsearchresult
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class DivisionSearchResponse:
-    kind: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'kind' }})
-    results: Optional[List[divisionsearchresult.DivisionSearchResult]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'results' }})
+    r"""DivisionSearchResponse
+    The result of a division search query.
+    """
+    
+    kind: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('kind') }})
+    results: Optional[List[DivisionSearchResult]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('results') }})
     

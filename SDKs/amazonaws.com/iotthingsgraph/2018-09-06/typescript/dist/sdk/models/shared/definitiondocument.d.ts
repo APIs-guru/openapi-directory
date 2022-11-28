@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { DefinitionLanguageEnum } from "./definitionlanguageenum";
 /**
  * A document that defines an entity.

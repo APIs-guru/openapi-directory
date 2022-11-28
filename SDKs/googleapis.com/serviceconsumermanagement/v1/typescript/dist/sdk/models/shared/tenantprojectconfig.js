@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BillingConfig } from "./billingconfig";
 import { ServiceAccountConfig } from "./serviceaccountconfig";
 import { TenantProjectPolicy } from "./tenantprojectpolicy";
@@ -36,27 +36,27 @@ var TenantProjectConfig = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=billingConfig" }),
+        SpeakeasyMetadata({ data: "json, name=billingConfig" }),
         __metadata("design:type", BillingConfig)
     ], TenantProjectConfig.prototype, "billingConfig", void 0);
     __decorate([
-        Metadata({ data: "json, name=folder" }),
+        SpeakeasyMetadata({ data: "json, name=folder" }),
         __metadata("design:type", String)
     ], TenantProjectConfig.prototype, "folder", void 0);
     __decorate([
-        Metadata({ data: "json, name=labels" }),
+        SpeakeasyMetadata({ data: "json, name=labels" }),
         __metadata("design:type", Map)
     ], TenantProjectConfig.prototype, "labels", void 0);
     __decorate([
-        Metadata({ data: "json, name=serviceAccountConfig" }),
+        SpeakeasyMetadata({ data: "json, name=serviceAccountConfig" }),
         __metadata("design:type", ServiceAccountConfig)
     ], TenantProjectConfig.prototype, "serviceAccountConfig", void 0);
     __decorate([
-        Metadata({ data: "json, name=services" }),
+        SpeakeasyMetadata({ data: "json, name=services" }),
         __metadata("design:type", Array)
     ], TenantProjectConfig.prototype, "services", void 0);
     __decorate([
-        Metadata({ data: "json, name=tenantProjectPolicy" }),
+        SpeakeasyMetadata({ data: "json, name=tenantProjectPolicy" }),
         __metadata("design:type", TenantProjectPolicy)
     ], TenantProjectConfig.prototype, "tenantProjectPolicy", void 0);
     return TenantProjectConfig;

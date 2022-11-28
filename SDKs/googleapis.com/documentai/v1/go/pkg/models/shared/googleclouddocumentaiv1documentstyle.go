@@ -1,5 +1,7 @@
 package shared
 
+// GoogleCloudDocumentaiV1DocumentStyle
+// Annotation for common text style attributes. This adheres to CSS conventions as much as possible.
 type GoogleCloudDocumentaiV1DocumentStyle struct {
 	BackgroundColor *GoogleTypeColor                              `json:"backgroundColor,omitempty"`
 	Color           *GoogleTypeColor                              `json:"color,omitempty"`

@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { WriteResult } from "./writeresult";
+
 
 
 // CommitResponse
@@ -8,9 +8,9 @@ import { WriteResult } from "./writeresult";
  * The response for Firestore.Commit.
 **/
 export class CommitResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=commitTime" })
+  @SpeakeasyMetadata({ data: "json, name=commitTime" })
   commitTime?: string;
 
-  @Metadata({ data: "json, name=writeResults", elemType: shared.WriteResult })
+  @SpeakeasyMetadata({ data: "json, name=writeResults", elemType: WriteResult })
   writeResults?: WriteResult[];
 }

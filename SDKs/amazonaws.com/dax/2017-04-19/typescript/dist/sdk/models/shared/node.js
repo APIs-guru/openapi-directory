@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Endpoint } from "./endpoint";
 // Node
 /**
@@ -34,27 +34,27 @@ var Node = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=AvailabilityZone" }),
+        SpeakeasyMetadata({ data: "json, name=AvailabilityZone" }),
         __metadata("design:type", String)
     ], Node.prototype, "availabilityZone", void 0);
     __decorate([
-        Metadata({ data: "json, name=Endpoint" }),
+        SpeakeasyMetadata({ data: "json, name=Endpoint" }),
         __metadata("design:type", Endpoint)
     ], Node.prototype, "endpoint", void 0);
     __decorate([
-        Metadata({ data: "json, name=NodeCreateTime" }),
+        SpeakeasyMetadata({ data: "json, name=NodeCreateTime" }),
         __metadata("design:type", Date)
     ], Node.prototype, "nodeCreateTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=NodeId" }),
+        SpeakeasyMetadata({ data: "json, name=NodeId" }),
         __metadata("design:type", String)
     ], Node.prototype, "nodeId", void 0);
     __decorate([
-        Metadata({ data: "json, name=NodeStatus" }),
+        SpeakeasyMetadata({ data: "json, name=NodeStatus" }),
         __metadata("design:type", String)
     ], Node.prototype, "nodeStatus", void 0);
     __decorate([
-        Metadata({ data: "json, name=ParameterGroupStatus" }),
+        SpeakeasyMetadata({ data: "json, name=ParameterGroupStatus" }),
         __metadata("design:type", String)
     ], Node.prototype, "parameterGroupStatus", void 0);
     return Node;

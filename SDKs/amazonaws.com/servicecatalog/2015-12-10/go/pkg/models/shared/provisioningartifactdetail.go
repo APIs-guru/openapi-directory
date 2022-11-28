@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// ProvisioningArtifactDetail
+// Information about a provisioning artifact (also known as a version) for a product.
 type ProvisioningArtifactDetail struct {
 	Active      *bool                             `json:"Active,omitempty"`
 	CreatedTime *time.Time                        `json:"CreatedTime,omitempty"`

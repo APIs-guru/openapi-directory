@@ -21,9 +21,19 @@ type CloudresourcemanagerProjectsSearchQueryParams struct {
 	UploadProtocol *string           `queryParam:"style=form,explode=true,name=upload_protocol"`
 }
 
-type CloudresourcemanagerProjectsSearchSecurity struct {
+type CloudresourcemanagerProjectsSearchSecurityOption1 struct {
 	Oauth2  shared.SchemeOauth2  `security:"scheme,type=oauth2"`
 	Oauth2c shared.SchemeOauth2c `security:"scheme,type=oauth2"`
+}
+
+type CloudresourcemanagerProjectsSearchSecurityOption2 struct {
+	Oauth2  shared.SchemeOauth2  `security:"scheme,type=oauth2"`
+	Oauth2c shared.SchemeOauth2c `security:"scheme,type=oauth2"`
+}
+
+type CloudresourcemanagerProjectsSearchSecurity struct {
+	Option1 *CloudresourcemanagerProjectsSearchSecurityOption1 `security:"option"`
+	Option2 *CloudresourcemanagerProjectsSearchSecurityOption2 `security:"option"`
 }
 
 type CloudresourcemanagerProjectsSearchRequest struct {

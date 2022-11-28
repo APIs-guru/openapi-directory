@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { VehHistory } from "./vehhistory";
 
 
+
 export class VehHistoryData extends SpeakeasyBase {
-  @Metadata({ data: "json, name=data", elemType: shared.VehHistory })
+  @SpeakeasyMetadata({ data: "json, name=data", elemType: VehHistory })
   data: VehHistory[];
 
-  @Metadata({ data: "json, name=vin" })
+  @SpeakeasyMetadata({ data: "json, name=vin" })
   vin: string;
 }

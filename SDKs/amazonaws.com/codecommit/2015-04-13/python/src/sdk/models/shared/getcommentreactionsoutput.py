@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import reactionforcomment
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class GetCommentReactionsOutput:
-    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'nextToken' }})
-    reactions_for_comment: List[reactionforcomment.ReactionForComment] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'reactionsForComment' }})
+    reactions_for_comment: List[ReactionForComment] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('reactionsForComment') }})
+    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('nextToken') }})
     

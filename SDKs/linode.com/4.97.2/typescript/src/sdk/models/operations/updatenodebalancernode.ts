@@ -1,68 +1,57 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class UpdateNodeBalancerNodePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=configId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=configId" })
   configId: number;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=nodeBalancerId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=nodeBalancerId" })
   nodeBalancerId: number;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=nodeId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=nodeId" })
   nodeId: number;
 }
 
 
-export class UpdateNodeBalancerNodeSecurityOption1 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=bearer" })
-  personalAccessToken: shared.SchemePersonalAccessToken;
-}
-
-
-export class UpdateNodeBalancerNodeSecurityOption2 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
-  oauth: shared.SchemeOauth;
-}
-
-
 export class UpdateNodeBalancerNodeSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, option=true" })
-  option1?: UpdateNodeBalancerNodeSecurityOption1;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" })
+  personalAccessToken?: shared.SchemePersonalAccessToken;
 
-  @Metadata({ data: "security, option=true" })
-  option2?: UpdateNodeBalancerNodeSecurityOption2;
-}
-
-
-export class UpdateNodeBalancerNodeRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: UpdateNodeBalancerNodePathParams;
-
-  @Metadata({ data: "request, media_type=application/json" })
-  request: shared.NodeBalancerNode;
-
-  @Metadata()
-  security: UpdateNodeBalancerNodeSecurity;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
+  oauth?: shared.SchemeOauth;
 }
 
 
 export class UpdateNodeBalancerNodeDefaultApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=errors", elemType: shared.ErrorObject })
+  @SpeakeasyMetadata({ data: "json, name=errors", elemType: shared.ErrorObject })
   errors?: shared.ErrorObject[];
 }
 
 
+export class UpdateNodeBalancerNodeRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: UpdateNodeBalancerNodePathParams;
+
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request: shared.NodeBalancerNodeInput;
+
+  @SpeakeasyMetadata()
+  security: UpdateNodeBalancerNodeSecurity;
+}
+
+
 export class UpdateNodeBalancerNodeResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   nodeBalancerNode?: shared.NodeBalancerNode;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   updateNodeBalancerNodeDefaultApplicationJsonObject?: UpdateNodeBalancerNodeDefaultApplicationJson;
 }

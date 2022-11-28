@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var UpdateApplicationPathParams = /** @class */ (function (_super) {
     __extends(UpdateApplicationPathParams, _super);
@@ -30,7 +30,7 @@ var UpdateApplicationPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=app_id" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=app_id" }),
         __metadata("design:type", String)
     ], UpdateApplicationPathParams.prototype, "appId", void 0);
     return UpdateApplicationPathParams;
@@ -47,35 +47,35 @@ var UpdateApplicationRequestBody = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=answer_method" }),
+        SpeakeasyMetadata({ data: "json, name=answer_method" }),
         __metadata("design:type", String)
     ], UpdateApplicationRequestBody.prototype, "answerMethod", void 0);
     __decorate([
-        Metadata({ data: "json, name=answer_url" }),
+        SpeakeasyMetadata({ data: "json, name=answer_url" }),
         __metadata("design:type", String)
     ], UpdateApplicationRequestBody.prototype, "answerUrl", void 0);
     __decorate([
-        Metadata({ data: "json, name=api_key" }),
+        SpeakeasyMetadata({ data: "json, name=api_key" }),
         __metadata("design:type", String)
     ], UpdateApplicationRequestBody.prototype, "apiKey", void 0);
     __decorate([
-        Metadata({ data: "json, name=api_secret" }),
+        SpeakeasyMetadata({ data: "json, name=api_secret" }),
         __metadata("design:type", String)
     ], UpdateApplicationRequestBody.prototype, "apiSecret", void 0);
     __decorate([
-        Metadata({ data: "json, name=event_method" }),
+        SpeakeasyMetadata({ data: "json, name=event_method" }),
         __metadata("design:type", String)
     ], UpdateApplicationRequestBody.prototype, "eventMethod", void 0);
     __decorate([
-        Metadata({ data: "json, name=event_url" }),
+        SpeakeasyMetadata({ data: "json, name=event_url" }),
         __metadata("design:type", String)
     ], UpdateApplicationRequestBody.prototype, "eventUrl", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], UpdateApplicationRequestBody.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=type" }),
+        SpeakeasyMetadata({ data: "json, name=type" }),
         __metadata("design:type", String)
     ], UpdateApplicationRequestBody.prototype, "type", void 0);
     return UpdateApplicationRequestBody;
@@ -87,11 +87,11 @@ var UpdateApplicationRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", UpdateApplicationPathParams)
     ], UpdateApplicationRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", UpdateApplicationRequestBody)
     ], UpdateApplicationRequest.prototype, "request", void 0);
     return UpdateApplicationRequest;
@@ -103,15 +103,15 @@ var UpdateApplicationResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], UpdateApplicationResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], UpdateApplicationResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.Application)
     ], UpdateApplicationResponse.prototype, "application", void 0);
     return UpdateApplicationResponse;

@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Type } from "./type";
+
 
 
 // TypesListResponse
@@ -8,9 +8,9 @@ import { Type } from "./type";
  * A response that returns all Types supported by Deployment Manager
 **/
 export class TypesListResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 
-  @Metadata({ data: "json, name=types", elemType: shared.Type })
+  @SpeakeasyMetadata({ data: "json, name=types", elemType: Type })
   types?: Type[];
 }

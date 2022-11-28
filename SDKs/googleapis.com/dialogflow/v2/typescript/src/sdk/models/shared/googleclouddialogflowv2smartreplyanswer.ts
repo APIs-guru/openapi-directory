@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudDialogflowV2SmartReplyAnswer
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Represents a smart reply answer.
 **/
 export class GoogleCloudDialogflowV2SmartReplyAnswer extends SpeakeasyBase {
-  @Metadata({ data: "json, name=answerRecord" })
+  @SpeakeasyMetadata({ data: "json, name=answerRecord" })
   answerRecord?: string;
 
-  @Metadata({ data: "json, name=confidence" })
+  @SpeakeasyMetadata({ data: "json, name=confidence" })
   confidence?: number;
 
-  @Metadata({ data: "json, name=reply" })
+  @SpeakeasyMetadata({ data: "json, name=reply" })
   reply?: string;
 }

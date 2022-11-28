@@ -9,7 +9,7 @@ import (
 	"openapi/pkg/models/shared"
 )
 
-var Servers = []string{
+var ServerList = []string{
 	"https://webtris.highwaysengland.co.uk/api",
 }
 
@@ -18,9 +18,13 @@ type HTTPClient interface {
 }
 
 type SDK struct {
-	defaultClient  HTTPClient
-	securityClient HTTPClient
-	serverURL      string
+	_defaultClient  HTTPClient
+	_securityClient HTTPClient
+
+	_serverURL  string
+	_language   string
+	_sdkVersion string
+	_genVersion string
 }
 
 type SDKOption func(*SDK)
@@ -31,27 +35,45 @@ func WithServerURL(serverURL string, params map[string]string) SDKOption {
 			serverURL = utils.ReplaceParameters(serverURL, params)
 		}
 
-		sdk.serverURL = serverURL
+		sdk._serverURL = serverURL
+	}
+}
+
+func WithClient(client HTTPClient) SDKOption {
+	return func(sdk *SDK) {
+		sdk._defaultClient = client
 	}
 }
 
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
-		defaultClient:  http.DefaultClient,
-		securityClient: http.DefaultClient,
+		_language:   "go",
+		_sdkVersion: "",
+		_genVersion: "internal",
 	}
 	for _, opt := range opts {
 		opt(sdk)
 	}
-	if sdk.serverURL == "" {
-		sdk.serverURL = Servers[0]
+
+	if sdk._defaultClient == nil {
+		sdk._defaultClient = http.DefaultClient
+	}
+	if sdk._securityClient == nil {
+
+		sdk._securityClient = sdk._defaultClient
+
+	}
+
+	if sdk._serverURL == "" {
+		sdk._serverURL = ServerList[0]
 	}
 
 	return sdk
 }
 
+// AreasGet - Returns list of areas
 func (s *SDK) AreasGet(ctx context.Context, request operations.AreasGetRequest) (*operations.AreasGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v{version}/areas", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -59,7 +81,7 @@ func (s *SDK) AreasGet(ctx context.Context, request operations.AreasGetRequest) 
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -91,8 +113,9 @@ func (s *SDK) AreasGet(ctx context.Context, request operations.AreasGetRequest) 
 	return res, nil
 }
 
+// GetVVersionAreasAreaIds - Returns details of selected area
 func (s *SDK) GetVVersionAreasAreaIds(ctx context.Context, request operations.GetVVersionAreasAreaIdsRequest) (*operations.GetVVersionAreasAreaIdsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v{version}/areas/{area_Ids}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -100,7 +123,7 @@ func (s *SDK) GetVVersionAreasAreaIds(ctx context.Context, request operations.Ge
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -132,8 +155,10 @@ func (s *SDK) GetVVersionAreasAreaIds(ctx context.Context, request operations.Ge
 	return res, nil
 }
 
+// GetVVersionReportsStartDateToEndDateReportType - Gets the daily report.
+// Get's the report.
 func (s *SDK) GetVVersionReportsStartDateToEndDateReportType(ctx context.Context, request operations.GetVVersionReportsStartDateToEndDateReportTypeRequest) (*operations.GetVVersionReportsStartDateToEndDateReportTypeResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v{version}/reports/{start_date}/to/{end_date}/{report_type}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -143,7 +168,7 @@ func (s *SDK) GetVVersionReportsStartDateToEndDateReportType(ctx context.Context
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -175,8 +200,9 @@ func (s *SDK) GetVVersionReportsStartDateToEndDateReportType(ctx context.Context
 	return res, nil
 }
 
+// GetVVersionSitesSiteIds - Get selected sites
 func (s *SDK) GetVVersionSitesSiteIds(ctx context.Context, request operations.GetVVersionSitesSiteIdsRequest) (*operations.GetVVersionSitesSiteIdsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v{version}/sites/{site_Ids}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -184,7 +210,7 @@ func (s *SDK) GetVVersionSitesSiteIds(ctx context.Context, request operations.Ge
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -216,8 +242,9 @@ func (s *SDK) GetVVersionSitesSiteIds(ctx context.Context, request operations.Ge
 	return res, nil
 }
 
+// QualityGetDailyDataQualityForSite - Get Site DailyQuality
 func (s *SDK) QualityGetDailyDataQualityForSite(ctx context.Context, request operations.QualityGetDailyDataQualityForSiteRequest) (*operations.QualityGetDailyDataQualityForSiteResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v{version}/quality/daily", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -227,7 +254,7 @@ func (s *SDK) QualityGetDailyDataQualityForSite(ctx context.Context, request ope
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -259,8 +286,9 @@ func (s *SDK) QualityGetDailyDataQualityForSite(ctx context.Context, request ope
 	return res, nil
 }
 
+// QualityGetOverallDataQualityForSites - Get Site OverallQuality
 func (s *SDK) QualityGetOverallDataQualityForSites(ctx context.Context, request operations.QualityGetOverallDataQualityForSitesRequest) (*operations.QualityGetOverallDataQualityForSitesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v{version}/quality/overall", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -270,7 +298,7 @@ func (s *SDK) QualityGetOverallDataQualityForSites(ctx context.Context, request 
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -302,8 +330,10 @@ func (s *SDK) QualityGetOverallDataQualityForSites(ctx context.Context, request 
 	return res, nil
 }
 
+// ReportsIndex - Gets the daily report.
+// Get's the report.
 func (s *SDK) ReportsIndex(ctx context.Context, request operations.ReportsIndexRequest) (*operations.ReportsIndexResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v{version}/reports/{report_type}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -313,7 +343,7 @@ func (s *SDK) ReportsIndex(ctx context.Context, request operations.ReportsIndexR
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -345,8 +375,9 @@ func (s *SDK) ReportsIndex(ctx context.Context, request operations.ReportsIndexR
 	return res, nil
 }
 
+// SiteTypesGetSitesForPublicFacingAPI - Returns the layer metadata for the LayerId specified.
 func (s *SDK) SiteTypesGetSitesForPublicFacingAPI(ctx context.Context, request operations.SiteTypesGetSitesForPublicFacingAPIRequest) (*operations.SiteTypesGetSitesForPublicFacingAPIResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v{version}/sitetypes/{siteType_Id}/sites", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -354,7 +385,7 @@ func (s *SDK) SiteTypesGetSitesForPublicFacingAPI(ctx context.Context, request o
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -387,8 +418,9 @@ func (s *SDK) SiteTypesGetSitesForPublicFacingAPI(ctx context.Context, request o
 	return res, nil
 }
 
+// SiteTypesIndex - Return list of site types
 func (s *SDK) SiteTypesIndex(ctx context.Context, request operations.SiteTypesIndexRequest) (*operations.SiteTypesIndexResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v{version}/sitetypes", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -396,7 +428,7 @@ func (s *SDK) SiteTypesIndex(ctx context.Context, request operations.SiteTypesIn
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -428,8 +460,9 @@ func (s *SDK) SiteTypesIndex(ctx context.Context, request operations.SiteTypesIn
 	return res, nil
 }
 
+// SitesIndex - Get a list of sites
 func (s *SDK) SitesIndex(ctx context.Context, request operations.SitesIndexRequest) (*operations.SitesIndexResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v{version}/sites", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -437,7 +470,7 @@ func (s *SDK) SitesIndex(ctx context.Context, request operations.SitesIndexReque
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {

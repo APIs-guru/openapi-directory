@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var PutAttributeNamespaceAttributeNameMetaPathParams = /** @class */ (function (_super) {
     __extends(PutAttributeNamespaceAttributeNameMetaPathParams, _super);
@@ -30,11 +30,11 @@ var PutAttributeNamespaceAttributeNameMetaPathParams = /** @class */ (function (
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=attribute_name" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=attribute_name" }),
         __metadata("design:type", String)
     ], PutAttributeNamespaceAttributeNameMetaPathParams.prototype, "attributeName", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=namespace" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=namespace" }),
         __metadata("design:type", String)
     ], PutAttributeNamespaceAttributeNameMetaPathParams.prototype, "namespace", void 0);
     return PutAttributeNamespaceAttributeNameMetaPathParams;
@@ -46,7 +46,7 @@ var PutAttributeNamespaceAttributeNameMetaSecurity = /** @class */ (function (_s
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=http;subtype=basic" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=basic" }),
         __metadata("design:type", shared.SchemeBasicAuthentication)
     ], PutAttributeNamespaceAttributeNameMetaSecurity.prototype, "basicAuthentication", void 0);
     return PutAttributeNamespaceAttributeNameMetaSecurity;
@@ -58,15 +58,15 @@ var PutAttributeNamespaceAttributeNameMetaRequest = /** @class */ (function (_su
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PutAttributeNamespaceAttributeNameMetaPathParams)
     ], PutAttributeNamespaceAttributeNameMetaRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/xml" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/xml" }),
         __metadata("design:type", Uint8Array)
     ], PutAttributeNamespaceAttributeNameMetaRequest.prototype, "request", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PutAttributeNamespaceAttributeNameMetaSecurity)
     ], PutAttributeNamespaceAttributeNameMetaRequest.prototype, "security", void 0);
     return PutAttributeNamespaceAttributeNameMetaRequest;
@@ -78,15 +78,15 @@ var PutAttributeNamespaceAttributeNameMetaResponse = /** @class */ (function (_s
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], PutAttributeNamespaceAttributeNameMetaResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], PutAttributeNamespaceAttributeNameMetaResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], PutAttributeNamespaceAttributeNameMetaResponse.prototype, "statusCode", void 0);
     return PutAttributeNamespaceAttributeNameMetaResponse;

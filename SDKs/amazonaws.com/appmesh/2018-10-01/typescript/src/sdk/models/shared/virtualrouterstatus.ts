@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { VirtualRouterStatusCodeEnum } from "./virtualrouterstatuscodeenum";
+
 
 
 // VirtualRouterStatus
@@ -7,6 +8,6 @@ import { VirtualRouterStatusCodeEnum } from "./virtualrouterstatuscodeenum";
  * An object representing the status of a virtual router. 
 **/
 export class VirtualRouterStatus extends SpeakeasyBase {
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: VirtualRouterStatusCodeEnum;
 }

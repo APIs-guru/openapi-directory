@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SourceSchema } from "./sourceschema";
 import { S3ReferenceDataSource } from "./s3referencedatasource";
 // ReferenceDataSource
@@ -35,15 +35,15 @@ var ReferenceDataSource = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=ReferenceSchema" }),
+        SpeakeasyMetadata({ data: "json, name=ReferenceSchema" }),
         __metadata("design:type", SourceSchema)
     ], ReferenceDataSource.prototype, "referenceSchema", void 0);
     __decorate([
-        Metadata({ data: "json, name=S3ReferenceDataSource" }),
+        SpeakeasyMetadata({ data: "json, name=S3ReferenceDataSource" }),
         __metadata("design:type", S3ReferenceDataSource)
     ], ReferenceDataSource.prototype, "s3ReferenceDataSource", void 0);
     __decorate([
-        Metadata({ data: "json, name=TableName" }),
+        SpeakeasyMetadata({ data: "json, name=TableName" }),
         __metadata("design:type", String)
     ], ReferenceDataSource.prototype, "tableName", void 0);
     return ReferenceDataSource;

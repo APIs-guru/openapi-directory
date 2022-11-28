@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // AddSubnetworkRequest
 /**
  * Request to create a subnetwork in a previously peered service network.
@@ -33,35 +33,35 @@ var AddSubnetworkRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=consumer" }),
+        SpeakeasyMetadata({ data: "json, name=consumer" }),
         __metadata("design:type", String)
     ], AddSubnetworkRequest.prototype, "consumer", void 0);
     __decorate([
-        Metadata({ data: "json, name=consumerNetwork" }),
+        SpeakeasyMetadata({ data: "json, name=consumerNetwork" }),
         __metadata("design:type", String)
     ], AddSubnetworkRequest.prototype, "consumerNetwork", void 0);
     __decorate([
-        Metadata({ data: "json, name=description" }),
+        SpeakeasyMetadata({ data: "json, name=description" }),
         __metadata("design:type", String)
     ], AddSubnetworkRequest.prototype, "description", void 0);
     __decorate([
-        Metadata({ data: "json, name=ipPrefixLength" }),
+        SpeakeasyMetadata({ data: "json, name=ipPrefixLength" }),
         __metadata("design:type", Number)
     ], AddSubnetworkRequest.prototype, "ipPrefixLength", void 0);
     __decorate([
-        Metadata({ data: "json, name=region" }),
+        SpeakeasyMetadata({ data: "json, name=region" }),
         __metadata("design:type", String)
     ], AddSubnetworkRequest.prototype, "region", void 0);
     __decorate([
-        Metadata({ data: "json, name=requestedAddress" }),
+        SpeakeasyMetadata({ data: "json, name=requestedAddress" }),
         __metadata("design:type", String)
     ], AddSubnetworkRequest.prototype, "requestedAddress", void 0);
     __decorate([
-        Metadata({ data: "json, name=subnetwork" }),
+        SpeakeasyMetadata({ data: "json, name=subnetwork" }),
         __metadata("design:type", String)
     ], AddSubnetworkRequest.prototype, "subnetwork", void 0);
     __decorate([
-        Metadata({ data: "json, name=subnetworkUsers" }),
+        SpeakeasyMetadata({ data: "json, name=subnetworkUsers" }),
         __metadata("design:type", Array)
     ], AddSubnetworkRequest.prototype, "subnetworkUsers", void 0);
     return AddSubnetworkRequest;

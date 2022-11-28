@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { LandingPage } from "./landingpage";
+
 
 
 // AdvertiserLandingPagesListResponse
@@ -8,12 +8,12 @@ import { LandingPage } from "./landingpage";
  * Landing Page List Response
 **/
 export class AdvertiserLandingPagesListResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=landingPages", elemType: shared.LandingPage })
+  @SpeakeasyMetadata({ data: "json, name=landingPages", elemType: LandingPage })
   landingPages?: LandingPage[];
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 }

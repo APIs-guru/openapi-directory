@@ -10,6 +10,8 @@ const (
 	WmxSitePermissionLevelEnumSiteUnverifiedUser             WmxSitePermissionLevelEnum = "SITE_UNVERIFIED_USER"
 )
 
+// WmxSite
+// Contains permission level information about a Search Console site. For more information, see [Permissions in Search Console](https://support.google.com/webmasters/answer/2451999).
 type WmxSite struct {
 	PermissionLevel *WmxSitePermissionLevelEnum `json:"permissionLevel,omitempty"`
 	SiteURL         *string                     `json:"siteUrl,omitempty"`

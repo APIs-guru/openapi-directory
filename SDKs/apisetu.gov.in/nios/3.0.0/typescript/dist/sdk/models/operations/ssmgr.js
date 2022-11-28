@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var SsmgrRequestBodyCertificateParameters = /** @class */ (function (_super) {
     __extends(SsmgrRequestBodyCertificateParameters, _super);
@@ -30,15 +30,15 @@ var SsmgrRequestBodyCertificateParameters = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=FullName" }),
+        SpeakeasyMetadata({ data: "json, name=FullName" }),
         __metadata("design:type", String)
     ], SsmgrRequestBodyCertificateParameters.prototype, "fullName", void 0);
     __decorate([
-        Metadata({ data: "json, name=RROLL" }),
+        SpeakeasyMetadata({ data: "json, name=RROLL" }),
         __metadata("design:type", String)
     ], SsmgrRequestBodyCertificateParameters.prototype, "rroll", void 0);
     __decorate([
-        Metadata({ data: "json, name=YEAR" }),
+        SpeakeasyMetadata({ data: "json, name=YEAR" }),
         __metadata("design:type", String)
     ], SsmgrRequestBodyCertificateParameters.prototype, "year", void 0);
     return SsmgrRequestBodyCertificateParameters;
@@ -54,19 +54,19 @@ var SsmgrRequestBody = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=certificateParameters" }),
+        SpeakeasyMetadata({ data: "json, name=certificateParameters" }),
         __metadata("design:type", SsmgrRequestBodyCertificateParameters)
     ], SsmgrRequestBody.prototype, "certificateParameters", void 0);
     __decorate([
-        Metadata({ data: "json, name=consentArtifact" }),
+        SpeakeasyMetadata({ data: "json, name=consentArtifact" }),
         __metadata("design:type", Object)
     ], SsmgrRequestBody.prototype, "consentArtifact", void 0);
     __decorate([
-        Metadata({ data: "json, name=format" }),
+        SpeakeasyMetadata({ data: "json, name=format" }),
         __metadata("design:type", String)
     ], SsmgrRequestBody.prototype, "format", void 0);
     __decorate([
-        Metadata({ data: "json, name=txnId" }),
+        SpeakeasyMetadata({ data: "json, name=txnId" }),
         __metadata("design:type", String)
     ], SsmgrRequestBody.prototype, "txnId", void 0);
     return SsmgrRequestBody;
@@ -78,32 +78,16 @@ var SsmgrSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeApiKey)
     ], SsmgrSecurity.prototype, "apiKey", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeClientId)
     ], SsmgrSecurity.prototype, "clientId", void 0);
     return SsmgrSecurity;
 }(SpeakeasyBase));
 export { SsmgrSecurity };
-var SsmgrRequest = /** @class */ (function (_super) {
-    __extends(SsmgrRequest, _super);
-    function SsmgrRequest() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
-        __metadata("design:type", SsmgrRequestBody)
-    ], SsmgrRequest.prototype, "request", void 0);
-    __decorate([
-        Metadata(),
-        __metadata("design:type", SsmgrSecurity)
-    ], SsmgrRequest.prototype, "security", void 0);
-    return SsmgrRequest;
-}(SpeakeasyBase));
-export { SsmgrRequest };
 export var Ssmgr400ApplicationJsonErrorEnum;
 (function (Ssmgr400ApplicationJsonErrorEnum) {
     Ssmgr400ApplicationJsonErrorEnum["MissingParameter"] = "missing_parameter";
@@ -126,11 +110,11 @@ var Ssmgr400ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Ssmgr400ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Ssmgr400ApplicationJson.prototype, "errorDescription", void 0);
     return Ssmgr400ApplicationJson;
@@ -152,11 +136,11 @@ var Ssmgr401ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Ssmgr401ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Ssmgr401ApplicationJson.prototype, "errorDescription", void 0);
     return Ssmgr401ApplicationJson;
@@ -178,11 +162,11 @@ var Ssmgr404ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Ssmgr404ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Ssmgr404ApplicationJson.prototype, "errorDescription", void 0);
     return Ssmgr404ApplicationJson;
@@ -202,11 +186,11 @@ var Ssmgr500ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Ssmgr500ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Ssmgr500ApplicationJson.prototype, "errorDescription", void 0);
     return Ssmgr500ApplicationJson;
@@ -226,11 +210,11 @@ var Ssmgr502ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Ssmgr502ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Ssmgr502ApplicationJson.prototype, "errorDescription", void 0);
     return Ssmgr502ApplicationJson;
@@ -250,11 +234,11 @@ var Ssmgr503ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Ssmgr503ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Ssmgr503ApplicationJson.prototype, "errorDescription", void 0);
     return Ssmgr503ApplicationJson;
@@ -274,55 +258,71 @@ var Ssmgr504ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Ssmgr504ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Ssmgr504ApplicationJson.prototype, "errorDescription", void 0);
     return Ssmgr504ApplicationJson;
 }(SpeakeasyBase));
 export { Ssmgr504ApplicationJson };
+var SsmgrRequest = /** @class */ (function (_super) {
+    __extends(SsmgrRequest, _super);
+    function SsmgrRequest() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
+        __metadata("design:type", SsmgrRequestBody)
+    ], SsmgrRequest.prototype, "request", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", SsmgrSecurity)
+    ], SsmgrRequest.prototype, "security", void 0);
+    return SsmgrRequest;
+}(SpeakeasyBase));
+export { SsmgrRequest };
 var SsmgrResponse = /** @class */ (function (_super) {
     __extends(SsmgrResponse, _super);
     function SsmgrResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], SsmgrResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], SsmgrResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Ssmgr400ApplicationJson)
     ], SsmgrResponse.prototype, "ssmgr400ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Ssmgr401ApplicationJson)
     ], SsmgrResponse.prototype, "ssmgr401ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Ssmgr404ApplicationJson)
     ], SsmgrResponse.prototype, "ssmgr404ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Ssmgr500ApplicationJson)
     ], SsmgrResponse.prototype, "ssmgr500ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Ssmgr502ApplicationJson)
     ], SsmgrResponse.prototype, "ssmgr502ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Ssmgr503ApplicationJson)
     ], SsmgrResponse.prototype, "ssmgr503ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Ssmgr504ApplicationJson)
     ], SsmgrResponse.prototype, "ssmgr504ApplicationJsonObject", void 0);
     return SsmgrResponse;

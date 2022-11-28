@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// InstanceRecommendation
+// Describes an Amazon EC2 instance recommendation.
 type InstanceRecommendation struct {
 	AccountID             *string                                       `json:"accountId,omitempty"`
 	CurrentInstanceType   *string                                       `json:"currentInstanceType,omitempty"`

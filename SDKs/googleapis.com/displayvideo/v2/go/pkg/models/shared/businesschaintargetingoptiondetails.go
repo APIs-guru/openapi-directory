@@ -34,6 +34,8 @@ const (
 	BusinessChainTargetingOptionDetailsGeoRegionTypeEnumGeoRegionTypeDistrict              BusinessChainTargetingOptionDetailsGeoRegionTypeEnum = "GEO_REGION_TYPE_DISTRICT"
 )
 
+// BusinessChainTargetingOptionDetails
+// Represents a targetable business chain within a geo region. This will be populated in the business_chain_details field when targeting_type is `TARGETING_TYPE_BUSINESS_CHAIN`.
 type BusinessChainTargetingOptionDetails struct {
 	BusinessChain *string                                               `json:"businessChain,omitempty"`
 	GeoRegion     *string                                               `json:"geoRegion,omitempty"`

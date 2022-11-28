@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class VmmigrationProjectsLocationsSourcesMigratingVmsPauseMigrationPathParams:
-    migrating_vm: str = field(default=None, metadata={'path_param': { 'field_name': 'migratingVm', 'style': 'simple', 'explode': False }})
+    migrating_vm: str = field(metadata={'path_param': { 'field_name': 'migratingVm', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,21 +26,21 @@ class VmmigrationProjectsLocationsSourcesMigratingVmsPauseMigrationQueryParams:
 
 @dataclass
 class VmmigrationProjectsLocationsSourcesMigratingVmsPauseMigrationSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class VmmigrationProjectsLocationsSourcesMigratingVmsPauseMigrationRequest:
-    path_params: VmmigrationProjectsLocationsSourcesMigratingVmsPauseMigrationPathParams = field(default=None)
-    query_params: VmmigrationProjectsLocationsSourcesMigratingVmsPauseMigrationQueryParams = field(default=None)
+    path_params: VmmigrationProjectsLocationsSourcesMigratingVmsPauseMigrationPathParams = field()
+    query_params: VmmigrationProjectsLocationsSourcesMigratingVmsPauseMigrationQueryParams = field()
+    security: VmmigrationProjectsLocationsSourcesMigratingVmsPauseMigrationSecurity = field()
     request: Optional[dict[str, Any]] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: VmmigrationProjectsLocationsSourcesMigratingVmsPauseMigrationSecurity = field(default=None)
     
 
 @dataclass
 class VmmigrationProjectsLocationsSourcesMigratingVmsPauseMigrationResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     operation: Optional[shared.Operation] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,5 +1,7 @@
 package shared
 
+// Notification
+// A subscription to receive Google PubSub notifications.
 type Notification struct {
 	CustomAttributes map[string]string `json:"custom_attributes,omitempty"`
 	Etag             *string           `json:"etag,omitempty"`

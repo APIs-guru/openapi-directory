@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 /**
  * The <code>LambdaConflictHandlerConfig</code> object when configuring LAMBDA as the Conflict Handler.
 **/

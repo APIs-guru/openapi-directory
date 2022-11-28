@@ -16,6 +16,8 @@ const (
 	SdfConfigVersionEnumSdfVersion55          SdfConfigVersionEnum = "SDF_VERSION_5_5"
 )
 
+// SdfConfig
+// Structured Data File (SDF) related settings.
 type SdfConfig struct {
 	AdminEmail *string               `json:"adminEmail,omitempty"`
 	Version    *SdfConfigVersionEnum `json:"version,omitempty"`

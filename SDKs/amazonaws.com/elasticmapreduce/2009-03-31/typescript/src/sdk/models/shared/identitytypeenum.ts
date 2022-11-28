@@ -1,6 +1,7 @@
 
 
+
 export enum IdentityTypeEnum {
-    User = "USER"
-,    Group = "GROUP"
+    User = "USER",
+    Group = "GROUP"
 }

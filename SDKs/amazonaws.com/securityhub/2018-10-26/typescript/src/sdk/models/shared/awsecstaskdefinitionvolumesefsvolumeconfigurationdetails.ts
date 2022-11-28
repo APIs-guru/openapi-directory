@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AwsEcsTaskDefinitionVolumesEfsVolumeConfigurationAuthorizationConfigDetails } from "./awsecstaskdefinitionvolumesefsvolumeconfigurationauthorizationconfigdetails";
+
 
 
 // AwsEcsTaskDefinitionVolumesEfsVolumeConfigurationDetails
@@ -7,18 +8,18 @@ import { AwsEcsTaskDefinitionVolumesEfsVolumeConfigurationAuthorizationConfigDet
  * Information about the Amazon Elastic File System file system that is used for task storage.
 **/
 export class AwsEcsTaskDefinitionVolumesEfsVolumeConfigurationDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AuthorizationConfig" })
+  @SpeakeasyMetadata({ data: "json, name=AuthorizationConfig" })
   authorizationConfig?: AwsEcsTaskDefinitionVolumesEfsVolumeConfigurationAuthorizationConfigDetails;
 
-  @Metadata({ data: "json, name=FilesystemId" })
+  @SpeakeasyMetadata({ data: "json, name=FilesystemId" })
   filesystemId?: string;
 
-  @Metadata({ data: "json, name=RootDirectory" })
+  @SpeakeasyMetadata({ data: "json, name=RootDirectory" })
   rootDirectory?: string;
 
-  @Metadata({ data: "json, name=TransitEncryption" })
+  @SpeakeasyMetadata({ data: "json, name=TransitEncryption" })
   transitEncryption?: string;
 
-  @Metadata({ data: "json, name=TransitEncryptionPort" })
+  @SpeakeasyMetadata({ data: "json, name=TransitEncryptionPort" })
   transitEncryptionPort?: number;
 }

@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TaskFilter } from "./taskfilter";
+
 
 
 // ListTasksRequest
@@ -8,12 +8,12 @@ import { TaskFilter } from "./taskfilter";
  * ListTasksRequest
 **/
 export class ListTasksRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Filters", elemType: shared.TaskFilter })
+  @SpeakeasyMetadata({ data: "json, name=Filters", elemType: TaskFilter })
   filters?: TaskFilter[];
 
-  @Metadata({ data: "json, name=MaxResults" })
+  @SpeakeasyMetadata({ data: "json, name=MaxResults" })
   maxResults?: number;
 
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 }

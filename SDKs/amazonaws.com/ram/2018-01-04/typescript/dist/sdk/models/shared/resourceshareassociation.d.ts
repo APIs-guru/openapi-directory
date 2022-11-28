@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ResourceShareAssociationTypeEnum } from "./resourceshareassociationtypeenum";
 import { ResourceShareAssociationStatusEnum } from "./resourceshareassociationstatusenum";
 /**

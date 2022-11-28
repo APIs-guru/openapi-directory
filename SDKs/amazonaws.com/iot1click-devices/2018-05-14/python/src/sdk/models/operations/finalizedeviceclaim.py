@@ -1,12 +1,16 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
 @dataclass
 class FinalizeDeviceClaimPathParams:
-    device_id: str = field(default=None, metadata={'path_param': { 'field_name': 'deviceId', 'style': 'simple', 'explode': False }})
+    device_id: str = field(metadata={'path_param': { 'field_name': 'deviceId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -23,24 +27,24 @@ class FinalizeDeviceClaimHeaders:
 @dataclass_json
 @dataclass
 class FinalizeDeviceClaimRequestBody:
-    tags: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tags' }})
+    tags: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('tags') }})
     
 
 @dataclass
 class FinalizeDeviceClaimRequest:
-    path_params: FinalizeDeviceClaimPathParams = field(default=None)
-    headers: FinalizeDeviceClaimHeaders = field(default=None)
-    request: FinalizeDeviceClaimRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: FinalizeDeviceClaimHeaders = field()
+    path_params: FinalizeDeviceClaimPathParams = field()
+    request: FinalizeDeviceClaimRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class FinalizeDeviceClaimResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     finalize_device_claim_response: Optional[shared.FinalizeDeviceClaimResponse] = field(default=None)
     internal_failure_exception: Optional[Any] = field(default=None)
     invalid_request_exception: Optional[Any] = field(default=None)
     precondition_failed_exception: Optional[Any] = field(default=None)
     resource_conflict_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

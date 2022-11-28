@@ -6,10 +6,14 @@ type ImportContextBakImportOptionsEncryptionOptions struct {
 	PvkPath     *string `json:"pvkPath,omitempty"`
 }
 
+// ImportContextBakImportOptions
+// Import parameters specific to SQL Server .BAK files
 type ImportContextBakImportOptions struct {
 	EncryptionOptions *ImportContextBakImportOptionsEncryptionOptions `json:"encryptionOptions,omitempty"`
 }
 
+// ImportContextCsvImportOptions
+// Options for importing data as CSV.
 type ImportContextCsvImportOptions struct {
 	Columns            []string `json:"columns,omitempty"`
 	EscapeCharacter    *string  `json:"escapeCharacter,omitempty"`
@@ -28,6 +32,8 @@ const (
 	ImportContextFileTypeEnumBak                    ImportContextFileTypeEnum = "BAK"
 )
 
+// ImportContext
+// Database instance import context.
 type ImportContext struct {
 	BakImportOptions *ImportContextBakImportOptions `json:"bakImportOptions,omitempty"`
 	CsvImportOptions *ImportContextCsvImportOptions `json:"csvImportOptions,omitempty"`

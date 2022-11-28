@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var TestnetGetFaucetQueryParams = /** @class */ (function (_super) {
     __extends(TestnetGetFaucetQueryParams, _super);
@@ -30,11 +30,11 @@ var TestnetGetFaucetQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=address" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=address" }),
         __metadata("design:type", String)
     ], TestnetGetFaucetQueryParams.prototype, "address", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=amount" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=amount" }),
         __metadata("design:type", Number)
     ], TestnetGetFaucetQueryParams.prototype, "amount", void 0);
     return TestnetGetFaucetQueryParams;
@@ -46,7 +46,7 @@ var TestnetGetFaucetRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", TestnetGetFaucetQueryParams)
     ], TestnetGetFaucetRequest.prototype, "queryParams", void 0);
     return TestnetGetFaucetRequest;
@@ -58,15 +58,15 @@ var TestnetGetFaucetResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], TestnetGetFaucetResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], TestnetGetFaucetResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.GetFaucetResponse)
     ], TestnetGetFaucetResponse.prototype, "getFaucetResponse", void 0);
     return TestnetGetFaucetResponse;

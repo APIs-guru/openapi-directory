@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // MemoryInfo
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Information about device memory and storage.
 **/
 export class MemoryInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=totalInternalStorage" })
+  @SpeakeasyMetadata({ data: "json, name=totalInternalStorage" })
   totalInternalStorage?: string;
 
-  @Metadata({ data: "json, name=totalRam" })
+  @SpeakeasyMetadata({ data: "json, name=totalRam" })
   totalRam?: string;
 }

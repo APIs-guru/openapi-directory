@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // WeightedTarget
@@ -9,9 +10,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  *          10.
 **/
 export class WeightedTarget extends SpeakeasyBase {
-  @Metadata({ data: "json, name=virtualNode" })
+  @SpeakeasyMetadata({ data: "json, name=virtualNode" })
   virtualNode?: string;
 
-  @Metadata({ data: "json, name=weight" })
+  @SpeakeasyMetadata({ data: "json, name=weight" })
   weight?: number;
 }

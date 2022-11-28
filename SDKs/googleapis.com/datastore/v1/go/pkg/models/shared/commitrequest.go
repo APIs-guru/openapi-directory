@@ -8,6 +8,8 @@ const (
 	CommitRequestModeEnumNonTransactional CommitRequestModeEnum = "NON_TRANSACTIONAL"
 )
 
+// CommitRequest
+// The request for Datastore.Commit.
 type CommitRequest struct {
 	DatabaseID  *string                `json:"databaseId,omitempty"`
 	Mode        *CommitRequestModeEnum `json:"mode,omitempty"`

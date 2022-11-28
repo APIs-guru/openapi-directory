@@ -1,18 +1,20 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import dimension
-from . import dimension
-from . import metric
-from . import metric
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class CrossDimensionReachReportCompatibleFields:
-    breakdown: Optional[List[dimension.Dimension]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'breakdown' }})
-    dimension_filters: Optional[List[dimension.Dimension]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'dimensionFilters' }})
-    kind: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'kind' }})
-    metrics: Optional[List[metric.Metric]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'metrics' }})
-    overlap_metrics: Optional[List[metric.Metric]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'overlapMetrics' }})
+    r"""CrossDimensionReachReportCompatibleFields
+    Represents fields that are compatible to be selected for a report of type \"CROSS_DIMENSION_REACH\".
+    """
+    
+    breakdown: Optional[List[Dimension]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('breakdown') }})
+    dimension_filters: Optional[List[Dimension]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('dimensionFilters') }})
+    kind: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('kind') }})
+    metrics: Optional[List[Metric]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('metrics') }})
+    overlap_metrics: Optional[List[Metric]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('overlapMetrics') }})
     

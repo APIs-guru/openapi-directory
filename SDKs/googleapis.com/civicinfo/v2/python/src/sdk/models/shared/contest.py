@@ -1,9 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import candidate
-from . import electoraldistrict
-from . import source
+from sdk import utils
+from . import *
 
 class ContestLevelEnum(str, Enum):
     INTERNATIONAL = "international"
@@ -34,29 +37,33 @@ class ContestRolesEnum(str, Enum):
 @dataclass_json
 @dataclass
 class Contest:
-    ballot_placement: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ballotPlacement' }})
-    ballot_title: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ballotTitle' }})
-    candidates: Optional[List[candidate.Candidate]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'candidates' }})
-    district: Optional[electoraldistrict.ElectoralDistrict] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'district' }})
-    electorate_specifications: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'electorateSpecifications' }})
-    level: Optional[List[ContestLevelEnum]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'level' }})
-    number_elected: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'numberElected' }})
-    number_voting_for: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'numberVotingFor' }})
-    office: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'office' }})
-    primary_parties: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'primaryParties' }})
-    primary_party: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'primaryParty' }})
-    referendum_ballot_responses: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'referendumBallotResponses' }})
-    referendum_brief: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'referendumBrief' }})
-    referendum_con_statement: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'referendumConStatement' }})
-    referendum_effect_of_abstain: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'referendumEffectOfAbstain' }})
-    referendum_passage_threshold: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'referendumPassageThreshold' }})
-    referendum_pro_statement: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'referendumProStatement' }})
-    referendum_subtitle: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'referendumSubtitle' }})
-    referendum_text: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'referendumText' }})
-    referendum_title: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'referendumTitle' }})
-    referendum_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'referendumUrl' }})
-    roles: Optional[List[ContestRolesEnum]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'roles' }})
-    sources: Optional[List[source.Source]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'sources' }})
-    special: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'special' }})
-    type: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    r"""Contest
+    Information about a contest that appears on a voter's ballot.
+    """
+    
+    ballot_placement: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ballotPlacement') }})
+    ballot_title: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ballotTitle') }})
+    candidates: Optional[List[Candidate]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('candidates') }})
+    district: Optional[ElectoralDistrict] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('district') }})
+    electorate_specifications: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('electorateSpecifications') }})
+    level: Optional[List[ContestLevelEnum]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('level') }})
+    number_elected: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('numberElected') }})
+    number_voting_for: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('numberVotingFor') }})
+    office: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('office') }})
+    primary_parties: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('primaryParties') }})
+    primary_party: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('primaryParty') }})
+    referendum_ballot_responses: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('referendumBallotResponses') }})
+    referendum_brief: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('referendumBrief') }})
+    referendum_con_statement: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('referendumConStatement') }})
+    referendum_effect_of_abstain: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('referendumEffectOfAbstain') }})
+    referendum_passage_threshold: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('referendumPassageThreshold') }})
+    referendum_pro_statement: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('referendumProStatement') }})
+    referendum_subtitle: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('referendumSubtitle') }})
+    referendum_text: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('referendumText') }})
+    referendum_title: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('referendumTitle') }})
+    referendum_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('referendumUrl') }})
+    roles: Optional[List[ContestRolesEnum]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('roles') }})
+    sources: Optional[List[Source]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('sources') }})
+    special: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('special') }})
+    type: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('type') }})
     

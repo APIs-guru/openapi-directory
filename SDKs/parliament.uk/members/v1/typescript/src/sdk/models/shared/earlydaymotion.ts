@@ -1,25 +1,26 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class EarlyDayMotion extends SpeakeasyBase {
-  @Metadata({ data: "json, name=dateTabled" })
+  @SpeakeasyMetadata({ data: "json, name=dateTabled" })
   dateTabled?: Date;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: number;
 
-  @Metadata({ data: "json, name=isAmendment" })
+  @SpeakeasyMetadata({ data: "json, name=isAmendment" })
   isAmendment?: boolean;
 
-  @Metadata({ data: "json, name=isPrayer" })
+  @SpeakeasyMetadata({ data: "json, name=isPrayer" })
   isPrayer?: boolean;
 
-  @Metadata({ data: "json, name=number" })
+  @SpeakeasyMetadata({ data: "json, name=number" })
   number?: string;
 
-  @Metadata({ data: "json, name=sponsorsCount" })
+  @SpeakeasyMetadata({ data: "json, name=sponsorsCount" })
   sponsorsCount?: number;
 
-  @Metadata({ data: "json, name=title" })
+  @SpeakeasyMetadata({ data: "json, name=title" })
   title?: string;
 }

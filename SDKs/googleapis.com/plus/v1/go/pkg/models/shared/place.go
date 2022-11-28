@@ -1,9 +1,13 @@
 package shared
 
+// PlaceAddress
+// The physical address of the place.
 type PlaceAddress struct {
 	Formatted *string `json:"formatted,omitempty"`
 }
 
+// PlacePosition
+// The position of the place.
 type PlacePosition struct {
 	Latitude  *float64 `json:"latitude,omitempty"`
 	Longitude *float64 `json:"longitude,omitempty"`

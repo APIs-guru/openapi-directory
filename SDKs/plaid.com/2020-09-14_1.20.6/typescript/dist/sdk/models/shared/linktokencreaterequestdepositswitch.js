@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // LinkTokenCreateRequestDepositSwitch
 /**
  * Specifies options for initializing Link for use with the Deposit Switch (beta) product. This field is required if `deposit_switch` is included in the `products` array.
@@ -33,7 +33,7 @@ var LinkTokenCreateRequestDepositSwitch = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=deposit_switch_id" }),
+        SpeakeasyMetadata({ data: "json, name=deposit_switch_id" }),
         __metadata("design:type", String)
     ], LinkTokenCreateRequestDepositSwitch.prototype, "depositSwitchId", void 0);
     return LinkTokenCreateRequestDepositSwitch;

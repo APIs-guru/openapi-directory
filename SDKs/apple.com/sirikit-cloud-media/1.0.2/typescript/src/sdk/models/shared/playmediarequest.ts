@@ -1,15 +1,16 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Constraints } from "./constraints";
 import { UserActivity } from "./useractivity";
 
 
+
 export class PlayMediaRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=constraints" })
+  @SpeakeasyMetadata({ data: "json, name=constraints" })
   constraints: Constraints;
 
-  @Metadata({ data: "json, name=userActivity" })
+  @SpeakeasyMetadata({ data: "json, name=userActivity" })
   userActivity: UserActivity;
 
-  @Metadata({ data: "json, name=version" })
+  @SpeakeasyMetadata({ data: "json, name=version" })
   version: string;
 }

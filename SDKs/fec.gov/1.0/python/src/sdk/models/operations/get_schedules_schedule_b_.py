@@ -1,8 +1,9 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 class GetSchedulesScheduleBSpenderCommitteeDesignationEnum(str, Enum):
@@ -45,20 +46,20 @@ class GetSchedulesScheduleBSpenderCommitteeTypeEnum(str, Enum):
 
 @dataclass
 class GetSchedulesScheduleBQueryParams:
-    api_key: str = field(default=None, metadata={'query_param': { 'field_name': 'api_key', 'style': 'form', 'explode': True }})
+    api_key: str = field(metadata={'query_param': { 'field_name': 'api_key', 'style': 'form', 'explode': True }})
     committee_id: Optional[List[str]] = field(default=None, metadata={'query_param': { 'field_name': 'committee_id', 'style': 'form', 'explode': True }})
     disbursement_description: Optional[List[str]] = field(default=None, metadata={'query_param': { 'field_name': 'disbursement_description', 'style': 'form', 'explode': True }})
     disbursement_purpose_category: Optional[List[str]] = field(default=None, metadata={'query_param': { 'field_name': 'disbursement_purpose_category', 'style': 'form', 'explode': True }})
     image_number: Optional[List[str]] = field(default=None, metadata={'query_param': { 'field_name': 'image_number', 'style': 'form', 'explode': True }})
     last_disbursement_amount: Optional[float] = field(default=None, metadata={'query_param': { 'field_name': 'last_disbursement_amount', 'style': 'form', 'explode': True }})
-    last_disbursement_date: Optional[datetime] = field(default=None, metadata={'query_param': { 'field_name': 'last_disbursement_date', 'style': 'form', 'explode': True }})
+    last_disbursement_date: Optional[date] = field(default=None, metadata={'query_param': { 'field_name': 'last_disbursement_date', 'style': 'form', 'explode': True }})
     last_index: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'last_index', 'style': 'form', 'explode': True }})
     line_number: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'line_number', 'style': 'form', 'explode': True }})
     max_amount: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'max_amount', 'style': 'form', 'explode': True }})
-    max_date: Optional[datetime] = field(default=None, metadata={'query_param': { 'field_name': 'max_date', 'style': 'form', 'explode': True }})
+    max_date: Optional[date] = field(default=None, metadata={'query_param': { 'field_name': 'max_date', 'style': 'form', 'explode': True }})
     max_image_number: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'max_image_number', 'style': 'form', 'explode': True }})
     min_amount: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'min_amount', 'style': 'form', 'explode': True }})
-    min_date: Optional[datetime] = field(default=None, metadata={'query_param': { 'field_name': 'min_date', 'style': 'form', 'explode': True }})
+    min_date: Optional[date] = field(default=None, metadata={'query_param': { 'field_name': 'min_date', 'style': 'form', 'explode': True }})
     min_image_number: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'min_image_number', 'style': 'form', 'explode': True }})
     per_page: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'per_page', 'style': 'form', 'explode': True }})
     recipient_city: Optional[List[str]] = field(default=None, metadata={'query_param': { 'field_name': 'recipient_city', 'style': 'form', 'explode': True }})
@@ -76,12 +77,12 @@ class GetSchedulesScheduleBQueryParams:
 
 @dataclass
 class GetSchedulesScheduleBRequest:
-    query_params: GetSchedulesScheduleBQueryParams = field(default=None)
+    query_params: GetSchedulesScheduleBQueryParams = field()
     
 
 @dataclass
 class GetSchedulesScheduleBResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     schedule_b_page: Optional[shared.ScheduleBPage] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -17,14 +17,14 @@ class PostForecastForecastBottomUpRequests:
 
 @dataclass
 class PostForecastForecastBottomUpRequest:
-    headers: PostForecastForecastBottomUpHeaders = field(default=None)
+    headers: PostForecastForecastBottomUpHeaders = field()
     request: Optional[PostForecastForecastBottomUpRequests] = field(default=None)
     
 
 @dataclass
 class PostForecastForecastBottomUpResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     forecast_bottom_up_response: Optional[shared.ForecastBottomUpResponse] = field(default=None)
-    status_code: int = field(default=None)
     

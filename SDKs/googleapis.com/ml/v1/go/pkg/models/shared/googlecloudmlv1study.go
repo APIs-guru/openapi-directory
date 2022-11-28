@@ -9,6 +9,14 @@ const (
 	GoogleCloudMlV1StudyStateEnumCompleted        GoogleCloudMlV1StudyStateEnum = "COMPLETED"
 )
 
+// GoogleCloudMlV1StudyInput
+// A message representing a Study.
+type GoogleCloudMlV1StudyInput struct {
+	StudyConfig *GoogleCloudMlV1StudyConfig `json:"studyConfig,omitempty"`
+}
+
+// GoogleCloudMlV1Study
+// A message representing a Study.
 type GoogleCloudMlV1Study struct {
 	CreateTime     *string                        `json:"createTime,omitempty"`
 	InactiveReason *string                        `json:"inactiveReason,omitempty"`

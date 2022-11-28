@@ -1,35 +1,36 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetArchitecturesArchitectureNamePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=architecture_name" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=architecture_name" })
   architectureName: string;
 }
 
 
 export class GetArchitecturesArchitectureNameSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=basic" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=basic" })
   basicAuthentication: shared.SchemeBasicAuthentication;
 }
 
 
 export class GetArchitecturesArchitectureNameRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetArchitecturesArchitectureNamePathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: GetArchitecturesArchitectureNameSecurity;
 }
 
 
 export class GetArchitecturesArchitectureNameResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

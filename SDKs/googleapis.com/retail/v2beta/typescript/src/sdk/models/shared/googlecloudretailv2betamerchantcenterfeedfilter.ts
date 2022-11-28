@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudRetailV2betaMerchantCenterFeedFilter
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Merchant Center Feed filter criterion.
 **/
 export class GoogleCloudRetailV2betaMerchantCenterFeedFilter extends SpeakeasyBase {
-  @Metadata({ data: "json, name=primaryFeedId" })
+  @SpeakeasyMetadata({ data: "json, name=primaryFeedId" })
   primaryFeedId?: string;
 
-  @Metadata({ data: "json, name=primaryFeedName" })
+  @SpeakeasyMetadata({ data: "json, name=primaryFeedName" })
   primaryFeedName?: string;
 }

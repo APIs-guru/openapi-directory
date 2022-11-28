@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { KeySet } from "./keyset";
+
 
 
 // Delete
@@ -7,9 +8,9 @@ import { KeySet } from "./keyset";
  * Arguments to delete operations.
 **/
 export class Delete extends SpeakeasyBase {
-  @Metadata({ data: "json, name=keySet" })
+  @SpeakeasyMetadata({ data: "json, name=keySet" })
   keySet?: KeySet;
 
-  @Metadata({ data: "json, name=table" })
+  @SpeakeasyMetadata({ data: "json, name=table" })
   table?: string;
 }

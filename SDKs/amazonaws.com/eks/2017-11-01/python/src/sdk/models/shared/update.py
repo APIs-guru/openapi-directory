@@ -1,22 +1,25 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import errordetail
-from . import updateparam
-from . import updatestatus_enum
-from . import updatetype_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class Update:
-    created_at: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'createdAt', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    errors: Optional[List[errordetail.ErrorDetail]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'errors' }})
-    id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
-    params: Optional[List[updateparam.UpdateParam]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'params' }})
-    status: Optional[updatestatus_enum.UpdateStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
-    type: Optional[updatetype_enum.UpdateTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    r"""Update
+    An object representing an asynchronous update.
+    """
+    
+    created_at: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('createdAt'), 'encoder': utils.datetimeisoformat(True), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    errors: Optional[List[ErrorDetail]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('errors') }})
+    id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('id') }})
+    params: Optional[List[UpdateParam]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('params') }})
+    status: Optional[UpdateStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('status') }})
+    type: Optional[UpdateTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('type') }})
     

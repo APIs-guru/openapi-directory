@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { FailoverServer } from "./failoverserver";
+
 
 
 // RadiusConfigUpdateRequest
@@ -7,18 +8,18 @@ import { FailoverServer } from "./failoverserver";
  * Request model for updating a RADIUS configuration
 **/
 export class RadiusConfigUpdateRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=failoverServer" })
+  @SpeakeasyMetadata({ data: "json, name=failoverServer" })
   failoverServer?: FailoverServer;
 
-  @Metadata({ data: "json, name=ipAddress" })
+  @SpeakeasyMetadata({ data: "json, name=ipAddress" })
   ipAddress?: string;
 
-  @Metadata({ data: "json, name=otpPinFirst" })
+  @SpeakeasyMetadata({ data: "json, name=otpPinFirst" })
   otpPinFirst?: boolean;
 
-  @Metadata({ data: "json, name=port" })
+  @SpeakeasyMetadata({ data: "json, name=port" })
   port?: number;
 
-  @Metadata({ data: "json, name=sharedSecret" })
+  @SpeakeasyMetadata({ data: "json, name=sharedSecret" })
   sharedSecret?: string;
 }

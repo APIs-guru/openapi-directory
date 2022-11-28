@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // HttpRequestContext
 /**
  * HTTP request data that is related to a reported error. This data should be provided by the application when reporting an error, unless the error report has been generated automatically from Google App Engine logs.
@@ -33,27 +33,27 @@ var HttpRequestContext = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=method" }),
+        SpeakeasyMetadata({ data: "json, name=method" }),
         __metadata("design:type", String)
     ], HttpRequestContext.prototype, "method", void 0);
     __decorate([
-        Metadata({ data: "json, name=referrer" }),
+        SpeakeasyMetadata({ data: "json, name=referrer" }),
         __metadata("design:type", String)
     ], HttpRequestContext.prototype, "referrer", void 0);
     __decorate([
-        Metadata({ data: "json, name=remoteIp" }),
+        SpeakeasyMetadata({ data: "json, name=remoteIp" }),
         __metadata("design:type", String)
     ], HttpRequestContext.prototype, "remoteIp", void 0);
     __decorate([
-        Metadata({ data: "json, name=responseStatusCode" }),
+        SpeakeasyMetadata({ data: "json, name=responseStatusCode" }),
         __metadata("design:type", Number)
     ], HttpRequestContext.prototype, "responseStatusCode", void 0);
     __decorate([
-        Metadata({ data: "json, name=url" }),
+        SpeakeasyMetadata({ data: "json, name=url" }),
         __metadata("design:type", String)
     ], HttpRequestContext.prototype, "url", void 0);
     __decorate([
-        Metadata({ data: "json, name=userAgent" }),
+        SpeakeasyMetadata({ data: "json, name=userAgent" }),
         __metadata("design:type", String)
     ], HttpRequestContext.prototype, "userAgent", void 0);
     return HttpRequestContext;

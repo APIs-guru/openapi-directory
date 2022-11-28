@@ -22,8 +22,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { Destination } from "./destination";
+import { Source } from "./source";
 // Rule
 /**
  * Specification of rules.
@@ -34,11 +35,11 @@ var Rule = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=destinations", elemType: shared.Destination }),
+        SpeakeasyMetadata({ data: "json, name=destinations", elemType: Destination }),
         __metadata("design:type", Array)
     ], Rule.prototype, "destinations", void 0);
     __decorate([
-        Metadata({ data: "json, name=sources", elemType: shared.Source }),
+        SpeakeasyMetadata({ data: "json, name=sources", elemType: Source }),
         __metadata("design:type", Array)
     ], Rule.prototype, "sources", void 0);
     return Rule;

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AssetModelHierarchyDefinition
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Contains an asset model hierarchy used in asset model creation. An asset model hierarchy determines the kind (or type) of asset that can belong to a hierarchy.
 **/
 export class AssetModelHierarchyDefinition extends SpeakeasyBase {
-  @Metadata({ data: "json, name=childAssetModelId" })
+  @SpeakeasyMetadata({ data: "json, name=childAssetModelId" })
   childAssetModelId: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 }

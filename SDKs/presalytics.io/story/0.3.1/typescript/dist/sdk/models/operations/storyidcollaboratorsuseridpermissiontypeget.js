@@ -22,22 +22,22 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var StoryIdCollaboratorsUseridPermissiontypeGetPathParams = /** @class */ (function (_super) {
     __extends(StoryIdCollaboratorsUseridPermissiontypeGetPathParams, _super);
     function StoryIdCollaboratorsUseridPermissiontypeGetPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=id" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" }),
         __metadata("design:type", String)
     ], StoryIdCollaboratorsUseridPermissiontypeGetPathParams.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=permissiontype" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=permissiontype" }),
         __metadata("design:type", String)
     ], StoryIdCollaboratorsUseridPermissiontypeGetPathParams.prototype, "permissiontype", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=story_collaborator_userid" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=story_collaborator_userid" }),
         __metadata("design:type", String)
     ], StoryIdCollaboratorsUseridPermissiontypeGetPathParams.prototype, "storyCollaboratorUserid", void 0);
     return StoryIdCollaboratorsUseridPermissiontypeGetPathParams;
@@ -49,7 +49,7 @@ var StoryIdCollaboratorsUseridPermissiontypeGetRequest = /** @class */ (function
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", StoryIdCollaboratorsUseridPermissiontypeGetPathParams)
     ], StoryIdCollaboratorsUseridPermissiontypeGetRequest.prototype, "pathParams", void 0);
     return StoryIdCollaboratorsUseridPermissiontypeGetRequest;
@@ -61,15 +61,15 @@ var StoryIdCollaboratorsUseridPermissiontypeGetResponse = /** @class */ (functio
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], StoryIdCollaboratorsUseridPermissiontypeGetResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], StoryIdCollaboratorsUseridPermissiontypeGetResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], StoryIdCollaboratorsUseridPermissiontypeGetResponse.prototype, "problemDetail", void 0);
     return StoryIdCollaboratorsUseridPermissiontypeGetResponse;

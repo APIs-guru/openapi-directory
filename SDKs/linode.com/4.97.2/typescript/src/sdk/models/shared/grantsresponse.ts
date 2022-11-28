@@ -1,16 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
-import { Grant } from "./grant";
-import { Grant } from "./grant";
-import { Grant } from "./grant";
-import { Grant } from "./grant";
-import { Grant } from "./grant";
-import { Grant } from "./grant";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { GrantInput } from "./grant";
 import { Grant } from "./grant";
 
+
 export enum GrantsResponseGlobalAccountAccessEnum {
-    ReadOnly = "read_only"
-,    ReadWrite = "read_write"
+    ReadOnly = "read_only",
+    ReadWrite = "read_write"
 }
 
 
@@ -20,35 +15,67 @@ export enum GrantsResponseGlobalAccountAccessEnum {
  * 
 **/
 export class GrantsResponseGlobal extends SpeakeasyBase {
-  @Metadata({ data: "json, name=account_access" })
+  @SpeakeasyMetadata({ data: "json, name=account_access" })
   accountAccess?: GrantsResponseGlobalAccountAccessEnum;
 
-  @Metadata({ data: "json, name=add_domains" })
+  @SpeakeasyMetadata({ data: "json, name=add_domains" })
   addDomains?: boolean;
 
-  @Metadata({ data: "json, name=add_images" })
+  @SpeakeasyMetadata({ data: "json, name=add_images" })
   addImages?: boolean;
 
-  @Metadata({ data: "json, name=add_linodes" })
+  @SpeakeasyMetadata({ data: "json, name=add_linodes" })
   addLinodes?: boolean;
 
-  @Metadata({ data: "json, name=add_longview" })
+  @SpeakeasyMetadata({ data: "json, name=add_longview" })
   addLongview?: boolean;
 
-  @Metadata({ data: "json, name=add_nodebalancers" })
+  @SpeakeasyMetadata({ data: "json, name=add_nodebalancers" })
   addNodebalancers?: boolean;
 
-  @Metadata({ data: "json, name=add_stackscripts" })
+  @SpeakeasyMetadata({ data: "json, name=add_stackscripts" })
   addStackscripts?: boolean;
 
-  @Metadata({ data: "json, name=add_volumes" })
+  @SpeakeasyMetadata({ data: "json, name=add_volumes" })
   addVolumes?: boolean;
 
-  @Metadata({ data: "json, name=cancel_account" })
+  @SpeakeasyMetadata({ data: "json, name=cancel_account" })
   cancelAccount?: boolean;
 
-  @Metadata({ data: "json, name=longview_subscription" })
+  @SpeakeasyMetadata({ data: "json, name=longview_subscription" })
   longviewSubscription?: boolean;
+}
+
+
+// GrantsResponseInput
+/** 
+ * A structure representing all grants a restricted User has on the Account. Not available for unrestricted users, as they have access to everything without grants. If retrieved from the `/profile/grants` endpoint, entities to which a User has no access will be omitted.
+ * 
+**/
+export class GrantsResponseInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=domain", elemType: GrantInput })
+  domain?: GrantInput[];
+
+  @SpeakeasyMetadata({ data: "json, name=global" })
+  global?: GrantsResponseGlobal;
+
+  @SpeakeasyMetadata({ data: "json, name=image", elemType: GrantInput })
+  image?: GrantInput[];
+
+  @SpeakeasyMetadata({ data: "json, name=linode", elemType: GrantInput })
+  linode?: GrantInput[];
+
+  @SpeakeasyMetadata({ data: "json, name=longview", elemType: GrantInput })
+  longview?: GrantInput[];
+
+  @SpeakeasyMetadata({ data: "json, name=nodebalancer", elemType: GrantInput })
+  nodebalancer?: GrantInput[];
+
+  @SpeakeasyMetadata({ data: "json, name=stackscript", elemType: GrantInput })
+  stackscript?: GrantInput[];
+
+  @SpeakeasyMetadata({ data: "json, name=volume", elemType: GrantInput })
+  volume?: GrantInput[];
 }
 
 
@@ -58,27 +85,27 @@ export class GrantsResponseGlobal extends SpeakeasyBase {
  * 
 **/
 export class GrantsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=domain", elemType: shared.Grant })
+  @SpeakeasyMetadata({ data: "json, name=domain", elemType: Grant })
   domain?: Grant[];
 
-  @Metadata({ data: "json, name=global" })
+  @SpeakeasyMetadata({ data: "json, name=global" })
   global?: GrantsResponseGlobal;
 
-  @Metadata({ data: "json, name=image", elemType: shared.Grant })
+  @SpeakeasyMetadata({ data: "json, name=image", elemType: Grant })
   image?: Grant[];
 
-  @Metadata({ data: "json, name=linode", elemType: shared.Grant })
+  @SpeakeasyMetadata({ data: "json, name=linode", elemType: Grant })
   linode?: Grant[];
 
-  @Metadata({ data: "json, name=longview", elemType: shared.Grant })
+  @SpeakeasyMetadata({ data: "json, name=longview", elemType: Grant })
   longview?: Grant[];
 
-  @Metadata({ data: "json, name=nodebalancer", elemType: shared.Grant })
+  @SpeakeasyMetadata({ data: "json, name=nodebalancer", elemType: Grant })
   nodebalancer?: Grant[];
 
-  @Metadata({ data: "json, name=stackscript", elemType: shared.Grant })
+  @SpeakeasyMetadata({ data: "json, name=stackscript", elemType: Grant })
   stackscript?: Grant[];
 
-  @Metadata({ data: "json, name=volume", elemType: shared.Grant })
+  @SpeakeasyMetadata({ data: "json, name=volume", elemType: Grant })
   volume?: Grant[];
 }

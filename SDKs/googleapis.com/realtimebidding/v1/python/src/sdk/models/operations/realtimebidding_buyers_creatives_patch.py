@@ -1,11 +1,15 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class RealtimebiddingBuyersCreativesPatchPathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,21 +30,21 @@ class RealtimebiddingBuyersCreativesPatchQueryParams:
 
 @dataclass
 class RealtimebiddingBuyersCreativesPatchSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class RealtimebiddingBuyersCreativesPatchRequest:
-    path_params: RealtimebiddingBuyersCreativesPatchPathParams = field(default=None)
-    query_params: RealtimebiddingBuyersCreativesPatchQueryParams = field(default=None)
-    request: Optional[shared.Creative] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: RealtimebiddingBuyersCreativesPatchSecurity = field(default=None)
+    path_params: RealtimebiddingBuyersCreativesPatchPathParams = field()
+    query_params: RealtimebiddingBuyersCreativesPatchQueryParams = field()
+    security: RealtimebiddingBuyersCreativesPatchSecurity = field()
+    request: Optional[shared.CreativeInput] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class RealtimebiddingBuyersCreativesPatchResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     creative: Optional[shared.Creative] = field(default=None)
-    status_code: int = field(default=None)
     

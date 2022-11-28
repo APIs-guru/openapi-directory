@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ValueHolder } from "./valueholder";
 /**
  * Contains details of the fetched page.

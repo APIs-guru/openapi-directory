@@ -1,5 +1,7 @@
 package shared
 
+// CreateAssociationBatchRequestEntry
+// Describes the association of a Amazon Web Services Systems Manager document (SSM document) and an instance.
 type CreateAssociationBatchRequestEntry struct {
 	ApplyOnlyAtCronInterval       *bool                              `json:"ApplyOnlyAtCronInterval,omitempty"`
 	AssociationName               *string                            `json:"AssociationName,omitempty"`

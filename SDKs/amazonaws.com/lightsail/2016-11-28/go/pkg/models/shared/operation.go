@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// Operation
+// Describes the API operation.
 type Operation struct {
 	CreatedAt        *time.Time           `json:"createdAt,omitempty"`
 	ErrorCode        *string              `json:"errorCode,omitempty"`

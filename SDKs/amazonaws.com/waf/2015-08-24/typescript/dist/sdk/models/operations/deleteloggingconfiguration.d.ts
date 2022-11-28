@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare enum DeleteLoggingConfigurationXAmzTargetEnum {
     Awswaf20150824DeleteLoggingConfiguration = "AWSWAF_20150824.DeleteLoggingConfiguration"

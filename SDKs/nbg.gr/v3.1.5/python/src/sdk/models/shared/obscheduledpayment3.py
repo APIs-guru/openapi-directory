@@ -1,23 +1,23 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import obcashaccount5
-from . import obactiveorhistoriccurrencyandamount
-from . import obexternalscheduletype1code_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ObScheduledPayment3:
-    account_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AccountId' }})
-    creditor_account: Optional[obcashaccount5.ObCashAccount5] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'CreditorAccount' }})
-    debtor_reference: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'DebtorReference' }})
-    instructed_amount: obactiveorhistoriccurrencyandamount.ObActiveOrHistoricCurrencyAndAmount = field(default=None, metadata={'dataclasses_json': { 'field_name': 'InstructedAmount' }})
-    reference: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Reference' }})
-    scheduled_payment_date_time: datetime = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ScheduledPaymentDateTime', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    scheduled_payment_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ScheduledPaymentId' }})
-    scheduled_type: obexternalscheduletype1code_enum.ObExternalScheduleType1CodeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ScheduledType' }})
+    account_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('AccountId') }})
+    instructed_amount: ObActiveOrHistoricCurrencyAndAmount = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('InstructedAmount') }})
+    scheduled_payment_date_time: datetime = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('ScheduledPaymentDateTime'), 'encoder': utils.datetimeisoformat(False), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    scheduled_type: ObExternalScheduleType1CodeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('ScheduledType') }})
+    creditor_account: Optional[ObCashAccount5] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('CreditorAccount') }})
+    debtor_reference: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('DebtorReference') }})
+    reference: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Reference') }})
+    scheduled_payment_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ScheduledPaymentId') }})
     

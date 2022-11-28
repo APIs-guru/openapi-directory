@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // UtcTimeResponse
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Class UtcTimeResponse.
 **/
 export class UtcTimeResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=RequestReceptionTime" })
+  @SpeakeasyMetadata({ data: "json, name=RequestReceptionTime" })
   requestReceptionTime?: Date;
 
-  @Metadata({ data: "json, name=ResponseTransmissionTime" })
+  @SpeakeasyMetadata({ data: "json, name=ResponseTransmissionTime" })
   responseTransmissionTime?: Date;
 }

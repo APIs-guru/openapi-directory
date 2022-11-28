@@ -10,6 +10,8 @@ const (
 	GoogleSecuritySafebrowsingV4ThreatHitThreatSourceTypeEnumTabResource                 GoogleSecuritySafebrowsingV4ThreatHitThreatSourceTypeEnum = "TAB_RESOURCE"
 )
 
+// GoogleSecuritySafebrowsingV4ThreatHitThreatSource
+// A single resource related to a threat hit.
 type GoogleSecuritySafebrowsingV4ThreatHitThreatSource struct {
 	Referrer *string                                                    `json:"referrer,omitempty"`
 	RemoteIP *string                                                    `json:"remoteIp,omitempty"`

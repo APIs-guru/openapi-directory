@@ -1,16 +1,17 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class AddCustomFieldSettingRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=custom_field" })
+  @SpeakeasyMetadata({ data: "json, name=custom_field" })
   customField: string;
 
-  @Metadata({ data: "json, name=insert_after" })
+  @SpeakeasyMetadata({ data: "json, name=insert_after" })
   insertAfter?: string;
 
-  @Metadata({ data: "json, name=insert_before" })
+  @SpeakeasyMetadata({ data: "json, name=insert_before" })
   insertBefore?: string;
 
-  @Metadata({ data: "json, name=is_important" })
+  @SpeakeasyMetadata({ data: "json, name=is_important" })
   isImportant?: boolean;
 }

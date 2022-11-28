@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 
@@ -11,14 +12,14 @@ class CreatePinRequestQueryParams:
 
 @dataclass
 class CreatePinRequestRequest:
-    query_params: CreatePinRequestQueryParams = field(default=None)
-    request: shared.EeCreatePinRequest = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    query_params: CreatePinRequestQueryParams = field()
+    request: shared.EeCreatePinRequest = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class CreatePinRequestResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     ee_create_pin_response: Optional[shared.EeCreatePinResponse] = field(default=None)
     service_error: Optional[shared.ServiceError] = field(default=None)
-    status_code: int = field(default=None)
     

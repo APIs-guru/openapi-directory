@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 /**
  * Request type for the [`Sync`](#google.home.graph.v1.HomeGraphApiService.Sync) call.
 **/

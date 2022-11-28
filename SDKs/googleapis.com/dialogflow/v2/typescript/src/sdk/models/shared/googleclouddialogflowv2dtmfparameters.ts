@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudDialogflowV2DtmfParameters
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The message in the response that indicates the parameters of DTMF.
 **/
 export class GoogleCloudDialogflowV2DtmfParameters extends SpeakeasyBase {
-  @Metadata({ data: "json, name=acceptsDtmfInput" })
+  @SpeakeasyMetadata({ data: "json, name=acceptsDtmfInput" })
   acceptsDtmfInput?: boolean;
 }

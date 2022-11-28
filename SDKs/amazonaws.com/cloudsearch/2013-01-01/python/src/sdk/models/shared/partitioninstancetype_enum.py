@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class PartitionInstanceTypeEnum(str, Enum):
     SEARCH_M1_SMALL = "search.m1.small"

@@ -5,24 +5,24 @@ from sdk.models import shared
 
 @dataclass
 class EndpointGetCurrentUsersProfileHeaders:
-    authorization: str = field(default=None, metadata={'header': { 'field_name': 'Authorization', 'style': 'simple', 'explode': False }})
+    authorization: str = field(metadata={'header': { 'field_name': 'Authorization', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class EndpointGetCurrentUsersProfileSecurity:
-    spotify_auth: shared.SchemeSpotifyAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    spotify_auth: shared.SchemeSpotifyAuth = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class EndpointGetCurrentUsersProfileRequest:
-    headers: EndpointGetCurrentUsersProfileHeaders = field(default=None)
-    security: EndpointGetCurrentUsersProfileSecurity = field(default=None)
+    headers: EndpointGetCurrentUsersProfileHeaders = field()
+    security: EndpointGetCurrentUsersProfileSecurity = field()
     
 
 @dataclass
 class EndpointGetCurrentUsersProfileResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error_response_object: Optional[shared.ErrorResponseObject] = field(default=None)
     private_user_object: Optional[shared.PrivateUserObject] = field(default=None)
-    status_code: int = field(default=None)
     

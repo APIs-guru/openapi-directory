@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var UpdatePermissionGroupPathParams = /** @class */ (function (_super) {
     __extends(UpdatePermissionGroupPathParams, _super);
@@ -30,7 +30,7 @@ var UpdatePermissionGroupPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=permissionGroupId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=permissionGroupId" }),
         __metadata("design:type", Number)
     ], UpdatePermissionGroupPathParams.prototype, "permissionGroupId", void 0);
     return UpdatePermissionGroupPathParams;
@@ -42,15 +42,15 @@ var UpdatePermissionGroupRequests = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "request, media_type=application/*+json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/*+json" }),
         __metadata("design:type", shared.UpdatePermissionGroupRequest)
     ], UpdatePermissionGroupRequests.prototype, "updatePermissionGroupRequest", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", shared.UpdatePermissionGroupRequest)
     ], UpdatePermissionGroupRequests.prototype, "updatePermissionGroupRequest1", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=text/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=text/json" }),
         __metadata("design:type", shared.UpdatePermissionGroupRequest)
     ], UpdatePermissionGroupRequests.prototype, "updatePermissionGroupRequest2", void 0);
     return UpdatePermissionGroupRequests;
@@ -62,11 +62,11 @@ var UpdatePermissionGroupRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", UpdatePermissionGroupPathParams)
     ], UpdatePermissionGroupRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", UpdatePermissionGroupRequests)
     ], UpdatePermissionGroupRequest.prototype, "request", void 0);
     return UpdatePermissionGroupRequest;
@@ -78,15 +78,15 @@ var UpdatePermissionGroupResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], UpdatePermissionGroupResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.PermissionGroupModel)
     ], UpdatePermissionGroupResponse.prototype, "permissionGroupModel", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], UpdatePermissionGroupResponse.prototype, "statusCode", void 0);
     return UpdatePermissionGroupResponse;

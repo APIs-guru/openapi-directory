@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import containerservicedeployment
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class GetContainerServiceDeploymentsResult:
-    deployments: Optional[List[containerservicedeployment.ContainerServiceDeployment]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'deployments' }})
+    deployments: Optional[List[ContainerServiceDeployment]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('deployments') }})
     

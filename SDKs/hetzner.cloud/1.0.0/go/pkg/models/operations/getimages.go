@@ -40,10 +40,8 @@ type GetImagesQueryParams struct {
 	Type              *GetImagesTypeEnum   `queryParam:"style=form,explode=true,name=type"`
 }
 
-type GetImagesRequest struct {
-	QueryParams GetImagesQueryParams
-}
-
+// GetImages200ApplicationJSONImagesCreatedFrom
+// Information about the Server the Image was created from
 type GetImages200ApplicationJSONImagesCreatedFrom struct {
 	ID   int64  `json:"id"`
 	Name string `json:"name"`
@@ -59,6 +57,8 @@ const (
 	GetImages200ApplicationJSONImagesOsFlavorEnumUnknown GetImages200ApplicationJSONImagesOsFlavorEnum = "unknown"
 )
 
+// GetImages200ApplicationJSONImagesProtection
+// Protection configuration for the Resource
 type GetImages200ApplicationJSONImagesProtection struct {
 	Delete bool `json:"delete"`
 }
@@ -118,6 +118,10 @@ type GetImages200ApplicationJSONMeta struct {
 type GetImages200ApplicationJSON struct {
 	Images []GetImages200ApplicationJSONImages `json:"images"`
 	Meta   *GetImages200ApplicationJSONMeta    `json:"meta,omitempty"`
+}
+
+type GetImagesRequest struct {
+	QueryParams GetImagesQueryParams
 }
 
 type GetImagesResponse struct {

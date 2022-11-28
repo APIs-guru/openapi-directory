@@ -1,5 +1,7 @@
 package shared
 
+// ApplicationInfo
+// Describes the status of the application.
 type ApplicationInfo struct {
 	CweMonitorEnabled  *bool   `json:"CWEMonitorEnabled,omitempty"`
 	LifeCycle          *string `json:"LifeCycle,omitempty"`

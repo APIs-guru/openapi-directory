@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import List,Optional
 from sdk.models import shared
 
 
 @dataclass
 class GetPresidentialContributionsByStateQueryParams:
-    api_key: str = field(default=None, metadata={'query_param': { 'field_name': 'api_key', 'style': 'form', 'explode': True }})
+    api_key: str = field(metadata={'query_param': { 'field_name': 'api_key', 'style': 'form', 'explode': True }})
     candidate_id: Optional[List[str]] = field(default=None, metadata={'query_param': { 'field_name': 'candidate_id', 'style': 'form', 'explode': True }})
     election_year: Optional[List[int]] = field(default=None, metadata={'query_param': { 'field_name': 'election_year', 'style': 'form', 'explode': True }})
     page: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'page', 'style': 'form', 'explode': True }})
@@ -18,12 +21,12 @@ class GetPresidentialContributionsByStateQueryParams:
 
 @dataclass
 class GetPresidentialContributionsByStateRequest:
-    query_params: GetPresidentialContributionsByStateQueryParams = field(default=None)
+    query_params: GetPresidentialContributionsByStateQueryParams = field()
     
 
 @dataclass
 class GetPresidentialContributionsByStateResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     presidential_by_state_page: Optional[shared.PresidentialByStatePage] = field(default=None)
-    status_code: int = field(default=None)
     

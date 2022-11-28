@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var WkhtmltopdfFromUrlGetQueryParams = /** @class */ (function (_super) {
     __extends(WkhtmltopdfFromUrlGetQueryParams, _super);
@@ -30,11 +30,11 @@ var WkhtmltopdfFromUrlGetQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=output" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=output" }),
         __metadata("design:type", String)
     ], WkhtmltopdfFromUrlGetQueryParams.prototype, "output", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=url" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=url" }),
         __metadata("design:type", String)
     ], WkhtmltopdfFromUrlGetQueryParams.prototype, "url", void 0);
     return WkhtmltopdfFromUrlGetQueryParams;
@@ -46,7 +46,7 @@ var WkhtmltopdfFromUrlGetSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=query" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=query" }),
         __metadata("design:type", shared.SchemeQueryApiKey)
     ], WkhtmltopdfFromUrlGetSecurity.prototype, "queryApiKey", void 0);
     return WkhtmltopdfFromUrlGetSecurity;
@@ -58,11 +58,11 @@ var WkhtmltopdfFromUrlGetRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", WkhtmltopdfFromUrlGetQueryParams)
     ], WkhtmltopdfFromUrlGetRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", WkhtmltopdfFromUrlGetSecurity)
     ], WkhtmltopdfFromUrlGetRequest.prototype, "security", void 0);
     return WkhtmltopdfFromUrlGetRequest;
@@ -74,23 +74,23 @@ var WkhtmltopdfFromUrlGetResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.ApiResponseFailure)
     ], WkhtmltopdfFromUrlGetResponse.prototype, "apiResponseFailure", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.ApiResponseSuccess)
     ], WkhtmltopdfFromUrlGetResponse.prototype, "apiResponseSuccess", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], WkhtmltopdfFromUrlGetResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], WkhtmltopdfFromUrlGetResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], WkhtmltopdfFromUrlGetResponse.prototype, "wkhtmltopdfFromUrlGet200ApplicationPdfBinaryString", void 0);
     return WkhtmltopdfFromUrlGetResponse;

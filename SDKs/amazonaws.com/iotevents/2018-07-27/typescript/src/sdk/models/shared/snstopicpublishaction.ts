@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Payload } from "./payload";
+
 
 
 // SnsTopicPublishAction
@@ -7,9 +8,9 @@ import { Payload } from "./payload";
  * Information required to publish the Amazon SNS message.
 **/
 export class SnsTopicPublishAction extends SpeakeasyBase {
-  @Metadata({ data: "json, name=payload" })
+  @SpeakeasyMetadata({ data: "json, name=payload" })
   payload?: Payload;
 
-  @Metadata({ data: "json, name=targetArn" })
+  @SpeakeasyMetadata({ data: "json, name=targetArn" })
   targetArn: string;
 }

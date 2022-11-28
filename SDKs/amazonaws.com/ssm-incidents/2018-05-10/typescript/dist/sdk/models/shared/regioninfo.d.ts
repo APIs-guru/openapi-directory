@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { RegionStatusEnum } from "./regionstatusenum";
 /**
  * Information about a Region in your replication set.

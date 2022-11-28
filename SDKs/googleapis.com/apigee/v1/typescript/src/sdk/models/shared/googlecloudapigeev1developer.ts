@@ -1,48 +1,81 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudApigeeV1Attribute } from "./googlecloudapigeev1attribute";
 
 
+
 export class GoogleCloudApigeeV1Developer extends SpeakeasyBase {
-  @Metadata({ data: "json, name=accessType" })
+  @SpeakeasyMetadata({ data: "json, name=accessType" })
   accessType?: string;
 
-  @Metadata({ data: "json, name=appFamily" })
+  @SpeakeasyMetadata({ data: "json, name=appFamily" })
   appFamily?: string;
 
-  @Metadata({ data: "json, name=apps" })
+  @SpeakeasyMetadata({ data: "json, name=apps" })
   apps?: string[];
 
-  @Metadata({ data: "json, name=attributes", elemType: shared.GoogleCloudApigeeV1Attribute })
+  @SpeakeasyMetadata({ data: "json, name=attributes", elemType: GoogleCloudApigeeV1Attribute })
   attributes?: GoogleCloudApigeeV1Attribute[];
 
-  @Metadata({ data: "json, name=companies" })
+  @SpeakeasyMetadata({ data: "json, name=companies" })
   companies?: string[];
 
-  @Metadata({ data: "json, name=createdAt" })
+  @SpeakeasyMetadata({ data: "json, name=createdAt" })
   createdAt?: string;
 
-  @Metadata({ data: "json, name=developerId" })
+  @SpeakeasyMetadata({ data: "json, name=developerId" })
   developerId?: string;
 
-  @Metadata({ data: "json, name=email" })
+  @SpeakeasyMetadata({ data: "json, name=email" })
   email?: string;
 
-  @Metadata({ data: "json, name=firstName" })
+  @SpeakeasyMetadata({ data: "json, name=firstName" })
   firstName?: string;
 
-  @Metadata({ data: "json, name=lastModifiedAt" })
+  @SpeakeasyMetadata({ data: "json, name=lastModifiedAt" })
   lastModifiedAt?: string;
 
-  @Metadata({ data: "json, name=lastName" })
+  @SpeakeasyMetadata({ data: "json, name=lastName" })
   lastName?: string;
 
-  @Metadata({ data: "json, name=organizationName" })
+  @SpeakeasyMetadata({ data: "json, name=organizationName" })
   organizationName?: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: string;
 
-  @Metadata({ data: "json, name=userName" })
+  @SpeakeasyMetadata({ data: "json, name=userName" })
+  userName?: string;
+}
+
+
+export class GoogleCloudApigeeV1DeveloperInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=accessType" })
+  accessType?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=appFamily" })
+  appFamily?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=apps" })
+  apps?: string[];
+
+  @SpeakeasyMetadata({ data: "json, name=attributes", elemType: GoogleCloudApigeeV1Attribute })
+  attributes?: GoogleCloudApigeeV1Attribute[];
+
+  @SpeakeasyMetadata({ data: "json, name=companies" })
+  companies?: string[];
+
+  @SpeakeasyMetadata({ data: "json, name=developerId" })
+  developerId?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=email" })
+  email?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=firstName" })
+  firstName?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=lastName" })
+  lastName?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=userName" })
   userName?: string;
 }

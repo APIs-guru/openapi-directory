@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleAppsCloudidentityDevicesV1Device } from "./googleappscloudidentitydevicesv1device";
+
 
 
 // GoogleAppsCloudidentityDevicesV1ListDevicesResponse
@@ -8,9 +8,9 @@ import { GoogleAppsCloudidentityDevicesV1Device } from "./googleappscloudidentit
  * Response message that is returned from the ListDevices method.
 **/
 export class GoogleAppsCloudidentityDevicesV1ListDevicesResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=devices", elemType: shared.GoogleAppsCloudidentityDevicesV1Device })
+  @SpeakeasyMetadata({ data: "json, name=devices", elemType: GoogleAppsCloudidentityDevicesV1Device })
   devices?: GoogleAppsCloudidentityDevicesV1Device[];
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 }

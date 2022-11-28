@@ -36,6 +36,8 @@ const (
 	PetsPetsAllowedFreeExceptionEnumDependentOnDayOfWeek PetsPetsAllowedFreeExceptionEnum = "DEPENDENT_ON_DAY_OF_WEEK"
 )
 
+// Pets
+// Policies regarding guest-owned animals.
 type Pets struct {
 	CatsAllowed              *bool                             `json:"catsAllowed,omitempty"`
 	CatsAllowedException     *PetsCatsAllowedExceptionEnum     `json:"catsAllowedException,omitempty"`

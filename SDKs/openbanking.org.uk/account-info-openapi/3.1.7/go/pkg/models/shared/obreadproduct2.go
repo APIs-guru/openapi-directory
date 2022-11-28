@@ -55,12 +55,16 @@ const (
 	ObReadProduct2DataProductOtherProductTypeCreditInterestTierBandSetTierBandDepositInterestAppliedCoverageEnumInwh ObReadProduct2DataProductOtherProductTypeCreditInterestTierBandSetTierBandDepositInterestAppliedCoverageEnum = "INWH"
 )
 
+// ObReadProduct2DataProductOtherProductTypeCreditInterestTierBandSetTierBandOtherBankInterestType
+// Other interest rate types which are not available in the standard code list
 type ObReadProduct2DataProductOtherProductTypeCreditInterestTierBandSetTierBandOtherBankInterestType struct {
 	Code        *string `json:"Code,omitempty"`
 	Description string  `json:"Description"`
 	Name        string  `json:"Name"`
 }
 
+// ObReadProduct2DataProductOtherProductTypeCreditInterestTierBandSetTierBand
+// Tier Band Details
 type ObReadProduct2DataProductOtherProductTypeCreditInterestTierBandSetTierBand struct {
 	Aer                            string                                                                                                        `json:"AER"`
 	ApplicationFrequency           ObReadProduct2DataProductOtherProductTypeCreditInterestTierBandSetTierBandApplicationFrequencyEnum            `json:"ApplicationFrequency"`
@@ -86,6 +90,8 @@ const (
 	ObReadProduct2DataProductOtherProductTypeCreditInterestTierBandSetTierBandMethodEnumInwh ObReadProduct2DataProductOtherProductTypeCreditInterestTierBandSetTierBandMethodEnum = "INWH"
 )
 
+// ObReadProduct2DataProductOtherProductTypeCreditInterestTierBandSet
+// The group of tiers or bands for which credit interest can be applied.
 type ObReadProduct2DataProductOtherProductTypeCreditInterestTierBandSet struct {
 	CalculationMethod      *ObInterestCalculationMethod1CodeEnum                                                `json:"CalculationMethod,omitempty"`
 	Destination            ObReadProduct2DataProductOtherProductTypeCreditInterestTierBandSetDestinationEnum    `json:"Destination"`
@@ -96,6 +102,8 @@ type ObReadProduct2DataProductOtherProductTypeCreditInterestTierBandSet struct {
 	TierBandMethod         ObReadProduct2DataProductOtherProductTypeCreditInterestTierBandSetTierBandMethodEnum `json:"TierBandMethod"`
 }
 
+// ObReadProduct2DataProductOtherProductTypeCreditInterest
+// Details about the interest that may be payable to the Account holders
 type ObReadProduct2DataProductOtherProductTypeCreditInterest struct {
 	TierBandSet []ObReadProduct2DataProductOtherProductTypeCreditInterestTierBandSet `json:"TierBandSet"`
 }
@@ -114,12 +122,16 @@ const (
 	ObReadProduct2DataProductOtherProductTypeLoanInterestLoanInterestTierBandSetLoanInterestFeesChargesLoanInterestFeeChargeCapFeeTypeEnumFyxx ObReadProduct2DataProductOtherProductTypeLoanInterestLoanInterestTierBandSetLoanInterestFeesChargesLoanInterestFeeChargeCapFeeTypeEnum = "FYXX"
 )
 
+// ObReadProduct2DataProductOtherProductTypeLoanInterestLoanInterestTierBandSetLoanInterestFeesChargesLoanInterestFeeChargeCapOtherFeeType
+// Other fee type code which is not available in the standard code set
 type ObReadProduct2DataProductOtherProductTypeLoanInterestLoanInterestTierBandSetLoanInterestFeesChargesLoanInterestFeeChargeCapOtherFeeType struct {
 	Code        *string `json:"Code,omitempty"`
 	Description string  `json:"Description"`
 	Name        string  `json:"Name"`
 }
 
+// ObReadProduct2DataProductOtherProductTypeLoanInterestLoanInterestTierBandSetLoanInterestFeesChargesLoanInterestFeeChargeCap
+// Details about any caps (minimum/maximum charges) that apply to a particular fee/charge
 type ObReadProduct2DataProductOtherProductTypeLoanInterestLoanInterestTierBandSetLoanInterestFeesChargesLoanInterestFeeChargeCap struct {
 	CappingPeriod    *ObFeeFrequency1Code4Enum                                                                                                                 `json:"CappingPeriod,omitempty"`
 	FeeCapAmount     *string                                                                                                                                   `json:"FeeCapAmount,omitempty"`
@@ -130,6 +142,8 @@ type ObReadProduct2DataProductOtherProductTypeLoanInterestLoanInterestTierBandSe
 	OtherFeeType     []ObReadProduct2DataProductOtherProductTypeLoanInterestLoanInterestTierBandSetLoanInterestFeesChargesLoanInterestFeeChargeCapOtherFeeType `json:"OtherFeeType,omitempty"`
 }
 
+// ObReadProduct2DataProductOtherProductTypeLoanInterestLoanInterestTierBandSetLoanInterestFeesChargesLoanInterestFeeChargeDetail
+// Other fees/charges details
 type ObReadProduct2DataProductOtherProductTypeLoanInterestLoanInterestTierBandSetLoanInterestFeesChargesLoanInterestFeeChargeDetail struct {
 	ApplicationFrequency      ObFeeFrequency1Code2Enum      `json:"ApplicationFrequency"`
 	CalculationFrequency      ObFeeFrequency1Code3Enum      `json:"CalculationFrequency"`
@@ -145,6 +159,8 @@ type ObReadProduct2DataProductOtherProductTypeLoanInterestLoanInterestTierBandSe
 	OtherFeeType              *ObOtherFeeChargeDetailType   `json:"OtherFeeType,omitempty"`
 }
 
+// ObReadProduct2DataProductOtherProductTypeLoanInterestLoanInterestTierBandSetLoanInterestFeesCharges
+// Contains details of fees and charges which are not associated with either LoanRepayment or features/benefits
 type ObReadProduct2DataProductOtherProductTypeLoanInterestLoanInterestTierBandSetLoanInterestFeesCharges struct {
 	LoanInterestFeeChargeCap    []ObReadProduct2DataProductOtherProductTypeLoanInterestLoanInterestTierBandSetLoanInterestFeesChargesLoanInterestFeeChargeCap    `json:"LoanInterestFeeChargeCap,omitempty"`
 	LoanInterestFeeChargeDetail []ObReadProduct2DataProductOtherProductTypeLoanInterestLoanInterestTierBandSetLoanInterestFeesChargesLoanInterestFeeChargeDetail `json:"LoanInterestFeeChargeDetail"`
@@ -164,12 +180,16 @@ const (
 	ObReadProduct2DataProductOtherProductTypeLoanInterestLoanInterestTierBandSetLoanInterestTierBandLoanInterestFeesChargesLoanInterestFeeChargeCapFeeTypeEnumFyxx ObReadProduct2DataProductOtherProductTypeLoanInterestLoanInterestTierBandSetLoanInterestTierBandLoanInterestFeesChargesLoanInterestFeeChargeCapFeeTypeEnum = "FYXX"
 )
 
+// ObReadProduct2DataProductOtherProductTypeLoanInterestLoanInterestTierBandSetLoanInterestTierBandLoanInterestFeesChargesLoanInterestFeeChargeCapOtherFeeType
+// Other fee type code which is not available in the standard code set
 type ObReadProduct2DataProductOtherProductTypeLoanInterestLoanInterestTierBandSetLoanInterestTierBandLoanInterestFeesChargesLoanInterestFeeChargeCapOtherFeeType struct {
 	Code        *string `json:"Code,omitempty"`
 	Description string  `json:"Description"`
 	Name        string  `json:"Name"`
 }
 
+// ObReadProduct2DataProductOtherProductTypeLoanInterestLoanInterestTierBandSetLoanInterestTierBandLoanInterestFeesChargesLoanInterestFeeChargeCap
+// Details about any caps (minimum/maximum charges) that apply to a particular fee/charge
 type ObReadProduct2DataProductOtherProductTypeLoanInterestLoanInterestTierBandSetLoanInterestTierBandLoanInterestFeesChargesLoanInterestFeeChargeCap struct {
 	CappingPeriod    *ObFeeFrequency1Code4Enum                                                                                                                                     `json:"CappingPeriod,omitempty"`
 	FeeCapAmount     *string                                                                                                                                                       `json:"FeeCapAmount,omitempty"`
@@ -180,6 +200,8 @@ type ObReadProduct2DataProductOtherProductTypeLoanInterestLoanInterestTierBandSe
 	OtherFeeType     []ObReadProduct2DataProductOtherProductTypeLoanInterestLoanInterestTierBandSetLoanInterestTierBandLoanInterestFeesChargesLoanInterestFeeChargeCapOtherFeeType `json:"OtherFeeType,omitempty"`
 }
 
+// ObReadProduct2DataProductOtherProductTypeLoanInterestLoanInterestTierBandSetLoanInterestTierBandLoanInterestFeesChargesLoanInterestFeeChargeDetail
+// Other fees/charges details
 type ObReadProduct2DataProductOtherProductTypeLoanInterestLoanInterestTierBandSetLoanInterestTierBandLoanInterestFeesChargesLoanInterestFeeChargeDetail struct {
 	ApplicationFrequency      ObFeeFrequency1Code2Enum      `json:"ApplicationFrequency"`
 	CalculationFrequency      ObFeeFrequency1Code3Enum      `json:"CalculationFrequency"`
@@ -195,6 +217,8 @@ type ObReadProduct2DataProductOtherProductTypeLoanInterestLoanInterestTierBandSe
 	OtherFeeType              *ObOtherFeeChargeDetailType   `json:"OtherFeeType,omitempty"`
 }
 
+// ObReadProduct2DataProductOtherProductTypeLoanInterestLoanInterestTierBandSetLoanInterestTierBandLoanInterestFeesCharges
+// Contains details of fees and charges which are not associated with either LoanRepayment or features/benefits
 type ObReadProduct2DataProductOtherProductTypeLoanInterestLoanInterestTierBandSetLoanInterestTierBandLoanInterestFeesCharges struct {
 	LoanInterestFeeChargeCap    []ObReadProduct2DataProductOtherProductTypeLoanInterestLoanInterestTierBandSetLoanInterestTierBandLoanInterestFeesChargesLoanInterestFeeChargeCap    `json:"LoanInterestFeeChargeCap,omitempty"`
 	LoanInterestFeeChargeDetail []ObReadProduct2DataProductOtherProductTypeLoanInterestLoanInterestTierBandSetLoanInterestTierBandLoanInterestFeesChargesLoanInterestFeeChargeDetail `json:"LoanInterestFeeChargeDetail"`
@@ -235,12 +259,16 @@ const (
 	ObReadProduct2DataProductOtherProductTypeLoanInterestLoanInterestTierBandSetLoanInterestTierBandMinTermPeriodEnumPyer ObReadProduct2DataProductOtherProductTypeLoanInterestLoanInterestTierBandSetLoanInterestTierBandMinTermPeriodEnum = "PYER"
 )
 
+// ObReadProduct2DataProductOtherProductTypeLoanInterestLoanInterestTierBandSetLoanInterestTierBandOtherLoanProviderInterestRateType
+// Other loan interest rate types which are not available in the standard code list
 type ObReadProduct2DataProductOtherProductTypeLoanInterestLoanInterestTierBandSetLoanInterestTierBandOtherLoanProviderInterestRateType struct {
 	Code        *string `json:"Code,omitempty"`
 	Description string  `json:"Description"`
 	Name        string  `json:"Name"`
 }
 
+// ObReadProduct2DataProductOtherProductTypeLoanInterestLoanInterestTierBandSetLoanInterestTierBand
+// Tier Band Details
 type ObReadProduct2DataProductOtherProductTypeLoanInterestLoanInterestTierBandSetLoanInterestTierBand struct {
 	FixedVariableInterestRateType     ObInterestFixedVariableType1CodeEnum                                                                                               `json:"FixedVariableInterestRateType"`
 	Identification                    *string                                                                                                                            `json:"Identification,omitempty"`
@@ -266,6 +294,8 @@ const (
 	ObReadProduct2DataProductOtherProductTypeLoanInterestLoanInterestTierBandSetTierBandMethodEnumInwh ObReadProduct2DataProductOtherProductTypeLoanInterestLoanInterestTierBandSetTierBandMethodEnum = "INWH"
 )
 
+// ObReadProduct2DataProductOtherProductTypeLoanInterestLoanInterestTierBandSet
+// The group of tiers or bands for which debit interest can be applied.
 type ObReadProduct2DataProductOtherProductTypeLoanInterestLoanInterestTierBandSet struct {
 	CalculationMethod       ObInterestCalculationMethod1CodeEnum                                                                  `json:"CalculationMethod"`
 	Identification          *string                                                                                               `json:"Identification,omitempty"`
@@ -276,6 +306,8 @@ type ObReadProduct2DataProductOtherProductTypeLoanInterestLoanInterestTierBandSe
 	TierBandMethod          ObReadProduct2DataProductOtherProductTypeLoanInterestLoanInterestTierBandSetTierBandMethodEnum        `json:"TierBandMethod"`
 }
 
+// ObReadProduct2DataProductOtherProductTypeLoanInterest
+// Details about the interest that may be payable to the SME Loan holders
 type ObReadProduct2DataProductOtherProductTypeLoanInterest struct {
 	LoanInterestTierBandSet []ObReadProduct2DataProductOtherProductTypeLoanInterestLoanInterestTierBandSet `json:"LoanInterestTierBandSet"`
 	Notes                   []string                                                                       `json:"Notes,omitempty"`
@@ -295,12 +327,16 @@ const (
 	ObReadProduct2DataProductOtherProductTypeOtherFeesChargesFeeChargeCapFeeTypeEnumFyxx ObReadProduct2DataProductOtherProductTypeOtherFeesChargesFeeChargeCapFeeTypeEnum = "FYXX"
 )
 
+// ObReadProduct2DataProductOtherProductTypeOtherFeesChargesFeeChargeCapOtherFeeType
+// Other fee type code which is not available in the standard code set
 type ObReadProduct2DataProductOtherProductTypeOtherFeesChargesFeeChargeCapOtherFeeType struct {
 	Code        *string `json:"Code,omitempty"`
 	Description string  `json:"Description"`
 	Name        string  `json:"Name"`
 }
 
+// ObReadProduct2DataProductOtherProductTypeOtherFeesChargesFeeChargeCap
+// Details about any caps (maximum charges) that apply to a particular or group of fee/charge
 type ObReadProduct2DataProductOtherProductTypeOtherFeesChargesFeeChargeCap struct {
 	CappingPeriod    *ObPeriod1CodeEnum                                                                  `json:"CappingPeriod,omitempty"`
 	FeeCapAmount     *string                                                                             `json:"FeeCapAmount,omitempty"`
@@ -311,6 +347,8 @@ type ObReadProduct2DataProductOtherProductTypeOtherFeesChargesFeeChargeCap struc
 	OtherFeeType     []ObReadProduct2DataProductOtherProductTypeOtherFeesChargesFeeChargeCapOtherFeeType `json:"OtherFeeType,omitempty"`
 }
 
+// ObReadProduct2DataProductOtherProductTypeOtherFeesChargesFeeChargeDetailFeeApplicableRange
+// Range or amounts or rates for which the fee/charge applies
 type ObReadProduct2DataProductOtherProductTypeOtherFeesChargesFeeChargeDetailFeeApplicableRange struct {
 	MaximumAmount *string `json:"MaximumAmount,omitempty"`
 	MaximumRate   *string `json:"MaximumRate,omitempty"`
@@ -332,12 +370,16 @@ const (
 	ObReadProduct2DataProductOtherProductTypeOtherFeesChargesFeeChargeDetailFeeChargeCapFeeTypeEnumFyxx ObReadProduct2DataProductOtherProductTypeOtherFeesChargesFeeChargeDetailFeeChargeCapFeeTypeEnum = "FYXX"
 )
 
+// ObReadProduct2DataProductOtherProductTypeOtherFeesChargesFeeChargeDetailFeeChargeCapOtherFeeType
+// Other fee type code which is not available in the standard code set
 type ObReadProduct2DataProductOtherProductTypeOtherFeesChargesFeeChargeDetailFeeChargeCapOtherFeeType struct {
 	Code        *string `json:"Code,omitempty"`
 	Description string  `json:"Description"`
 	Name        string  `json:"Name"`
 }
 
+// ObReadProduct2DataProductOtherProductTypeOtherFeesChargesFeeChargeDetailFeeChargeCap
+// Details about any caps (maximum charges) that apply to a particular or group of fee/charge
 type ObReadProduct2DataProductOtherProductTypeOtherFeesChargesFeeChargeDetailFeeChargeCap struct {
 	CappingPeriod    *ObPeriod1CodeEnum                                                                                 `json:"CappingPeriod,omitempty"`
 	FeeCapAmount     *string                                                                                            `json:"FeeCapAmount,omitempty"`
@@ -348,6 +390,8 @@ type ObReadProduct2DataProductOtherProductTypeOtherFeesChargesFeeChargeDetailFee
 	OtherFeeType     []ObReadProduct2DataProductOtherProductTypeOtherFeesChargesFeeChargeDetailFeeChargeCapOtherFeeType `json:"OtherFeeType,omitempty"`
 }
 
+// ObReadProduct2DataProductOtherProductTypeOtherFeesChargesFeeChargeDetail
+// Other fees/charges details
 type ObReadProduct2DataProductOtherProductTypeOtherFeesChargesFeeChargeDetail struct {
 	ApplicationFrequency      ObFeeFrequency1Code2Enum                                                                    `json:"ApplicationFrequency"`
 	CalculationFrequency      *ObFeeFrequency1Code3Enum                                                                   `json:"CalculationFrequency,omitempty"`
@@ -367,6 +411,8 @@ type ObReadProduct2DataProductOtherProductTypeOtherFeesChargesFeeChargeDetail st
 	OtherFeeType              *ObOtherFeeChargeDetailType                                                                 `json:"OtherFeeType,omitempty"`
 }
 
+// ObReadProduct2DataProductOtherProductTypeOtherFeesChargesOtherTariffType
+// Other tariff type which is not in the standard list.
 type ObReadProduct2DataProductOtherProductTypeOtherFeesChargesOtherTariffType struct {
 	Code        *string `json:"Code,omitempty"`
 	Description string  `json:"Description"`
@@ -381,6 +427,8 @@ const (
 	ObReadProduct2DataProductOtherProductTypeOtherFeesChargesTariffTypeEnumTtot ObReadProduct2DataProductOtherProductTypeOtherFeesChargesTariffTypeEnum = "TTOT"
 )
 
+// ObReadProduct2DataProductOtherProductTypeOtherFeesCharges
+// Contains details of fees and charges which are not associated with either Overdraft or features/benefits
 type ObReadProduct2DataProductOtherProductTypeOtherFeesCharges struct {
 	FeeChargeCap    []ObReadProduct2DataProductOtherProductTypeOtherFeesChargesFeeChargeCap    `json:"FeeChargeCap,omitempty"`
 	FeeChargeDetail []ObReadProduct2DataProductOtherProductTypeOtherFeesChargesFeeChargeDetail `json:"FeeChargeDetail"`
@@ -406,12 +454,16 @@ const (
 	ObReadProduct2DataProductOtherProductTypeOverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeCapFeeTypeEnumFtut ObReadProduct2DataProductOtherProductTypeOverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeCapFeeTypeEnum = "FTUT"
 )
 
+// ObReadProduct2DataProductOtherProductTypeOverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeCapOtherFeeType
+// Other fee type code which is not available in the standard code set
 type ObReadProduct2DataProductOtherProductTypeOverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeCapOtherFeeType struct {
 	Code        *string `json:"Code,omitempty"`
 	Description string  `json:"Description"`
 	Name        string  `json:"Name"`
 }
 
+// ObReadProduct2DataProductOtherProductTypeOverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeCap
+// Details about any caps (maximum charges) that apply to a particular fee/charge. Capping can either be based on an amount (in gbp), an amount (in items) or a rate.
 type ObReadProduct2DataProductOtherProductTypeOverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeCap struct {
 	CappingPeriod    *ObPeriod1CodeEnum                                                                                                            `json:"CappingPeriod,omitempty"`
 	FeeCapAmount     *string                                                                                                                       `json:"FeeCapAmount,omitempty"`
@@ -439,12 +491,16 @@ const (
 	ObReadProduct2DataProductOtherProductTypeOverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapFeeTypeEnumFtut ObReadProduct2DataProductOtherProductTypeOverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapFeeTypeEnum = "FTUT"
 )
 
+// ObReadProduct2DataProductOtherProductTypeOverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapOtherFeeType
+// Other fee type code which is not available in the standard code set
 type ObReadProduct2DataProductOtherProductTypeOverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapOtherFeeType struct {
 	Code        *string `json:"Code,omitempty"`
 	Description string  `json:"Description"`
 	Name        string  `json:"Name"`
 }
 
+// ObReadProduct2DataProductOtherProductTypeOverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCap
+// Details about any caps (maximum charges) that apply to a particular fee/charge. Capping can either be based on an amount (in gbp), an amount (in items) or a rate.
 type ObReadProduct2DataProductOtherProductTypeOverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCap struct {
 	CappingPeriod    *ObPeriod1CodeEnum                                                                                                                                    `json:"CappingPeriod,omitempty"`
 	FeeCapAmount     *string                                                                                                                                               `json:"FeeCapAmount,omitempty"`
@@ -455,6 +511,8 @@ type ObReadProduct2DataProductOtherProductTypeOverdraftOverdraftTierBandSetOverd
 	OtherFeeType     []ObReadProduct2DataProductOtherProductTypeOverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapOtherFeeType `json:"OtherFeeType,omitempty"`
 }
 
+// ObReadProduct2DataProductOtherProductTypeOverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetail
+// Details about the fees/charges
 type ObReadProduct2DataProductOtherProductTypeOverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetail struct {
 	ApplicationFrequency       ObFeeFrequency1Code0Enum                                                                                                                  `json:"ApplicationFrequency"`
 	CalculationFrequency       *ObFeeFrequency1Code1Enum                                                                                                                 `json:"CalculationFrequency,omitempty"`
@@ -473,6 +531,8 @@ type ObReadProduct2DataProductOtherProductTypeOverdraftOverdraftTierBandSetOverd
 	OverdraftFeeChargeCap      []ObReadProduct2DataProductOtherProductTypeOverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCap `json:"OverdraftFeeChargeCap,omitempty"`
 }
 
+// ObReadProduct2DataProductOtherProductTypeOverdraftOverdraftTierBandSetOverdraftFeesCharges
+// Overdraft fees and charges details
 type ObReadProduct2DataProductOtherProductTypeOverdraftOverdraftTierBandSetOverdraftFeesCharges struct {
 	OverdraftFeeChargeCap    []ObReadProduct2DataProductOtherProductTypeOverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeCap    `json:"OverdraftFeeChargeCap,omitempty"`
 	OverdraftFeeChargeDetail []ObReadProduct2DataProductOtherProductTypeOverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetail `json:"OverdraftFeeChargeDetail"`
@@ -507,12 +567,16 @@ const (
 	ObReadProduct2DataProductOtherProductTypeOverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeCapFeeTypeEnumFtut ObReadProduct2DataProductOtherProductTypeOverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeCapFeeTypeEnum = "FTUT"
 )
 
+// ObReadProduct2DataProductOtherProductTypeOverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeCapOtherFeeType
+// Other fee type code which is not available in the standard code set
 type ObReadProduct2DataProductOtherProductTypeOverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeCapOtherFeeType struct {
 	Code        *string `json:"Code,omitempty"`
 	Description string  `json:"Description"`
 	Name        string  `json:"Name"`
 }
 
+// ObReadProduct2DataProductOtherProductTypeOverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeCap
+// Details about any caps (maximum charges) that apply to a particular fee/charge. Capping can either be based on an amount (in gbp), an amount (in items) or a rate.
 type ObReadProduct2DataProductOtherProductTypeOverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeCap struct {
 	CappingPeriod    *ObPeriod1CodeEnum                                                                                                                             `json:"CappingPeriod,omitempty"`
 	FeeCapAmount     *string                                                                                                                                        `json:"FeeCapAmount,omitempty"`
@@ -540,12 +604,16 @@ const (
 	ObReadProduct2DataProductOtherProductTypeOverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapFeeTypeEnumFtut ObReadProduct2DataProductOtherProductTypeOverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapFeeTypeEnum = "FTUT"
 )
 
+// ObReadProduct2DataProductOtherProductTypeOverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapOtherFeeType
+// Other fee type code which is not available in the standard code set
 type ObReadProduct2DataProductOtherProductTypeOverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapOtherFeeType struct {
 	Code        *string `json:"Code,omitempty"`
 	Description string  `json:"Description"`
 	Name        string  `json:"Name"`
 }
 
+// ObReadProduct2DataProductOtherProductTypeOverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCap
+// Details about any caps (maximum charges) that apply to a particular fee/charge. Capping can either be based on an amount (in gbp), an amount (in items) or a rate.
 type ObReadProduct2DataProductOtherProductTypeOverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCap struct {
 	CappingPeriod    *ObPeriod1CodeEnum                                                                                                                                                     `json:"CappingPeriod,omitempty"`
 	FeeCapAmount     *string                                                                                                                                                                `json:"FeeCapAmount,omitempty"`
@@ -556,6 +624,8 @@ type ObReadProduct2DataProductOtherProductTypeOverdraftOverdraftTierBandSetOverd
 	OtherFeeType     []ObReadProduct2DataProductOtherProductTypeOverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapOtherFeeType `json:"OtherFeeType,omitempty"`
 }
 
+// ObReadProduct2DataProductOtherProductTypeOverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetail
+// Details about the fees/charges
 type ObReadProduct2DataProductOtherProductTypeOverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetail struct {
 	ApplicationFrequency       ObFeeFrequency1Code0Enum                                                                                                                                   `json:"ApplicationFrequency"`
 	CalculationFrequency       *ObFeeFrequency1Code1Enum                                                                                                                                  `json:"CalculationFrequency,omitempty"`
@@ -574,6 +644,8 @@ type ObReadProduct2DataProductOtherProductTypeOverdraftOverdraftTierBandSetOverd
 	OverdraftFeeChargeCap      []ObReadProduct2DataProductOtherProductTypeOverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCap `json:"OverdraftFeeChargeCap,omitempty"`
 }
 
+// ObReadProduct2DataProductOtherProductTypeOverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesCharges
+// Overdraft fees and charges
 type ObReadProduct2DataProductOtherProductTypeOverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesCharges struct {
 	OverdraftFeeChargeCap    []ObReadProduct2DataProductOtherProductTypeOverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeCap    `json:"OverdraftFeeChargeCap,omitempty"`
 	OverdraftFeeChargeDetail []ObReadProduct2DataProductOtherProductTypeOverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetail `json:"OverdraftFeeChargeDetail"`
@@ -587,6 +659,8 @@ const (
 	ObReadProduct2DataProductOtherProductTypeOverdraftOverdraftTierBandSetOverdraftTierBandOverdraftInterestChargingCoverageEnumInwh ObReadProduct2DataProductOtherProductTypeOverdraftOverdraftTierBandSetOverdraftTierBandOverdraftInterestChargingCoverageEnum = "INWH"
 )
 
+// ObReadProduct2DataProductOtherProductTypeOverdraftOverdraftTierBandSetOverdraftTierBand
+// Provides overdraft details for a specific tier or band
 type ObReadProduct2DataProductOtherProductTypeOverdraftOverdraftTierBandSetOverdraftTierBand struct {
 	AgreementLengthMax                *int64                                                                                                                        `json:"AgreementLengthMax,omitempty"`
 	AgreementLengthMin                *int64                                                                                                                        `json:"AgreementLengthMin,omitempty"`
@@ -617,6 +691,8 @@ const (
 	ObReadProduct2DataProductOtherProductTypeOverdraftOverdraftTierBandSetTierBandMethodEnumInwh ObReadProduct2DataProductOtherProductTypeOverdraftOverdraftTierBandSetTierBandMethodEnum = "INWH"
 )
 
+// ObReadProduct2DataProductOtherProductTypeOverdraftOverdraftTierBandSet
+// Tier band set details
 type ObReadProduct2DataProductOtherProductTypeOverdraftOverdraftTierBandSet struct {
 	AuthorisedIndicator  *bool                                                                                        `json:"AuthorisedIndicator,omitempty"`
 	BufferAmount         *string                                                                                      `json:"BufferAmount,omitempty"`
@@ -628,6 +704,8 @@ type ObReadProduct2DataProductOtherProductTypeOverdraftOverdraftTierBandSet stru
 	TierBandMethod       ObReadProduct2DataProductOtherProductTypeOverdraftOverdraftTierBandSetTierBandMethodEnum     `json:"TierBandMethod"`
 }
 
+// ObReadProduct2DataProductOtherProductTypeOverdraft
+// Borrowing details
 type ObReadProduct2DataProductOtherProductTypeOverdraft struct {
 	Notes                []string                                                                 `json:"Notes,omitempty"`
 	OverdraftTierBandSet []ObReadProduct2DataProductOtherProductTypeOverdraftOverdraftTierBandSet `json:"OverdraftTierBandSet"`
@@ -698,18 +776,24 @@ const (
 	ObReadProduct2DataProductOtherProductTypeRepaymentAmountTypeEnumUsot ObReadProduct2DataProductOtherProductTypeRepaymentAmountTypeEnum = "USOT"
 )
 
+// ObReadProduct2DataProductOtherProductTypeRepaymentOtherAmountType
+// Other amount type which is not in the standard code list
 type ObReadProduct2DataProductOtherProductTypeRepaymentOtherAmountType struct {
 	Code        *string `json:"Code,omitempty"`
 	Description string  `json:"Description"`
 	Name        string  `json:"Name"`
 }
 
+// ObReadProduct2DataProductOtherProductTypeRepaymentOtherRepaymentFrequency
+// Other repayment frequency which is not in the standard code list
 type ObReadProduct2DataProductOtherProductTypeRepaymentOtherRepaymentFrequency struct {
 	Code        *string `json:"Code,omitempty"`
 	Description string  `json:"Description"`
 	Name        string  `json:"Name"`
 }
 
+// ObReadProduct2DataProductOtherProductTypeRepaymentOtherRepaymentType
+// Other repayment type which is not in the standard code list
 type ObReadProduct2DataProductOtherProductTypeRepaymentOtherRepaymentType struct {
 	Code        *string `json:"Code,omitempty"`
 	Description string  `json:"Description"`
@@ -730,12 +814,16 @@ const (
 	ObReadProduct2DataProductOtherProductTypeRepaymentRepaymentFeeChargesRepaymentFeeChargeCapFeeTypeEnumFyxx ObReadProduct2DataProductOtherProductTypeRepaymentRepaymentFeeChargesRepaymentFeeChargeCapFeeTypeEnum = "FYXX"
 )
 
+// ObReadProduct2DataProductOtherProductTypeRepaymentRepaymentFeeChargesRepaymentFeeChargeCapOtherFeeType
+// Other fee type code which is not available in the standard code set
 type ObReadProduct2DataProductOtherProductTypeRepaymentRepaymentFeeChargesRepaymentFeeChargeCapOtherFeeType struct {
 	Code        *string `json:"Code,omitempty"`
 	Description string  `json:"Description"`
 	Name        string  `json:"Name"`
 }
 
+// ObReadProduct2DataProductOtherProductTypeRepaymentRepaymentFeeChargesRepaymentFeeChargeCap
+// RepaymentFeeChargeCap sets daily, weekly, monthly, yearly limits on the fees that are charged
 type ObReadProduct2DataProductOtherProductTypeRepaymentRepaymentFeeChargesRepaymentFeeChargeCap struct {
 	CappingPeriod    *ObPeriod1CodeEnum                                                                                       `json:"CappingPeriod,omitempty"`
 	FeeCapAmount     *string                                                                                                  `json:"FeeCapAmount,omitempty"`
@@ -746,6 +834,8 @@ type ObReadProduct2DataProductOtherProductTypeRepaymentRepaymentFeeChargesRepaym
 	OtherFeeType     []ObReadProduct2DataProductOtherProductTypeRepaymentRepaymentFeeChargesRepaymentFeeChargeCapOtherFeeType `json:"OtherFeeType,omitempty"`
 }
 
+// ObReadProduct2DataProductOtherProductTypeRepaymentRepaymentFeeChargesRepaymentFeeChargeDetail
+// Details about specific fees/charges that are applied for repayment
 type ObReadProduct2DataProductOtherProductTypeRepaymentRepaymentFeeChargesRepaymentFeeChargeDetail struct {
 	ApplicationFrequency      ObFeeFrequency1Code2Enum      `json:"ApplicationFrequency"`
 	CalculationFrequency      ObFeeFrequency1Code3Enum      `json:"CalculationFrequency"`
@@ -761,6 +851,8 @@ type ObReadProduct2DataProductOtherProductTypeRepaymentRepaymentFeeChargesRepaym
 	OtherFeeType              *ObOtherFeeChargeDetailType   `json:"OtherFeeType,omitempty"`
 }
 
+// ObReadProduct2DataProductOtherProductTypeRepaymentRepaymentFeeCharges
+// Applicable fee/charges for repayment such as prepayment, full early repayment or non repayment.
 type ObReadProduct2DataProductOtherProductTypeRepaymentRepaymentFeeCharges struct {
 	RepaymentFeeChargeCap    []ObReadProduct2DataProductOtherProductTypeRepaymentRepaymentFeeChargesRepaymentFeeChargeCap    `json:"RepaymentFeeChargeCap,omitempty"`
 	RepaymentFeeChargeDetail []ObReadProduct2DataProductOtherProductTypeRepaymentRepaymentFeeChargesRepaymentFeeChargeDetail `json:"RepaymentFeeChargeDetail"`
@@ -792,6 +884,8 @@ const (
 	ObReadProduct2DataProductOtherProductTypeRepaymentRepaymentHolidayMaxHolidayPeriodEnumPyer ObReadProduct2DataProductOtherProductTypeRepaymentRepaymentHolidayMaxHolidayPeriodEnum = "PYER"
 )
 
+// ObReadProduct2DataProductOtherProductTypeRepaymentRepaymentHoliday
+// Details of capital repayment holiday if any
 type ObReadProduct2DataProductOtherProductTypeRepaymentRepaymentHoliday struct {
 	MaxHolidayLength *int64                                                                                  `json:"MaxHolidayLength,omitempty"`
 	MaxHolidayPeriod *ObReadProduct2DataProductOtherProductTypeRepaymentRepaymentHolidayMaxHolidayPeriodEnum `json:"MaxHolidayPeriod,omitempty"`
@@ -816,6 +910,8 @@ const (
 	ObReadProduct2DataProductOtherProductTypeRepaymentRepaymentTypeEnumUssl ObReadProduct2DataProductOtherProductTypeRepaymentRepaymentTypeEnum = "USSL"
 )
 
+// ObReadProduct2DataProductOtherProductTypeRepayment
+// Repayment details of the Loan product
 type ObReadProduct2DataProductOtherProductTypeRepayment struct {
 	AmountType              *ObReadProduct2DataProductOtherProductTypeRepaymentAmountTypeEnum          `json:"AmountType,omitempty"`
 	Notes                   []string                                                                   `json:"Notes,omitempty"`
@@ -828,6 +924,8 @@ type ObReadProduct2DataProductOtherProductTypeRepayment struct {
 	RepaymentType           *ObReadProduct2DataProductOtherProductTypeRepaymentRepaymentTypeEnum       `json:"RepaymentType,omitempty"`
 }
 
+// ObReadProduct2DataProductOtherProductType
+// Other product type details associated with the account.
 type ObReadProduct2DataProductOtherProductType struct {
 	CreditInterest    *ObReadProduct2DataProductOtherProductTypeCreditInterest    `json:"CreditInterest,omitempty"`
 	Description       string                                                      `json:"Description"`
@@ -850,6 +948,8 @@ const (
 	ObReadProduct2DataProductProductTypeEnumSmeLoan                ObReadProduct2DataProductProductTypeEnum = "SMELoan"
 )
 
+// ObReadProduct2DataProduct
+// Product details associated with the Account
 type ObReadProduct2DataProduct struct {
 	AccountID          string                                     `json:"AccountId"`
 	Bca                *ObbcaData1                                `json:"BCA,omitempty"`
@@ -862,10 +962,14 @@ type ObReadProduct2DataProduct struct {
 	SecondaryProductID *string                                    `json:"SecondaryProductId,omitempty"`
 }
 
+// ObReadProduct2Data
+// Aligning with the read write specs structure.
 type ObReadProduct2Data struct {
 	Product []ObReadProduct2DataProduct `json:"Product,omitempty"`
 }
 
+// ObReadProduct2
+// Product details of Other Product which is not avaiable in the standard list
 type ObReadProduct2 struct {
 	Data  ObReadProduct2Data `json:"Data"`
 	Links *Links             `json:"Links,omitempty"`

@@ -6,6 +6,8 @@ const (
 	GetAssociateIamInstanceProfileActionEnumAssociateIamInstanceProfile GetAssociateIamInstanceProfileActionEnum = "AssociateIamInstanceProfile"
 )
 
+// GetAssociateIamInstanceProfileIamInstanceProfile
+// Describes an IAM instance profile.
 type GetAssociateIamInstanceProfileIamInstanceProfile struct {
 	Arn  *string `queryParam:"name=Arn"`
 	Name *string `queryParam:"name=Name"`

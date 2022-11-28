@@ -4,10 +4,6 @@ type SingleCollectionPathParams struct {
 	CollectionUID string `pathParam:"style=simple,explode=false,name=collection_uid"`
 }
 
-type SingleCollectionRequest struct {
-	PathParams SingleCollectionPathParams
-}
-
 type SingleCollection200ApplicationJSONCollectionInfo struct {
 	PostmanID   *string `json:"_postman_id,omitempty"`
 	Description *string `json:"description,omitempty"`
@@ -60,6 +56,10 @@ type SingleCollection200ApplicationJSONCollection struct {
 
 type SingleCollection200ApplicationJSON struct {
 	Collection *SingleCollection200ApplicationJSONCollection `json:"collection,omitempty"`
+}
+
+type SingleCollectionRequest struct {
+	PathParams SingleCollectionPathParams
 }
 
 type SingleCollectionResponse struct {

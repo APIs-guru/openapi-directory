@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class LambdaFunctionMemoryMetricStatisticEnum(str, Enum):
     LOWER_BOUND = "LowerBound"

@@ -4,10 +4,6 @@ type SingleMonitorPathParams struct {
 	MonitorUID string `pathParam:"style=simple,explode=false,name=monitor_uid"`
 }
 
-type SingleMonitorRequest struct {
-	PathParams SingleMonitorPathParams
-}
-
 type SingleMonitor200ApplicationJSONMonitorLastRunStatsAssertions struct {
 	Failed *float64 `json:"failed,omitempty"`
 	Total  *float64 `json:"total,omitempty"`
@@ -80,6 +76,10 @@ type SingleMonitor404ApplicationJSONError struct {
 
 type SingleMonitor404ApplicationJSON struct {
 	Error *SingleMonitor404ApplicationJSONError `json:"error,omitempty"`
+}
+
+type SingleMonitorRequest struct {
+	PathParams SingleMonitorPathParams
 }
 
 type SingleMonitorResponse struct {

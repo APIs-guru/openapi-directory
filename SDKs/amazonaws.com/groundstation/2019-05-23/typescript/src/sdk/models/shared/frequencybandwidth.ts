@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BandwidthUnitsEnum } from "./bandwidthunitsenum";
+
 
 
 // FrequencyBandwidth
@@ -7,9 +8,9 @@ import { BandwidthUnitsEnum } from "./bandwidthunitsenum";
  * Object that describes the frequency bandwidth. 
 **/
 export class FrequencyBandwidth extends SpeakeasyBase {
-  @Metadata({ data: "json, name=units" })
+  @SpeakeasyMetadata({ data: "json, name=units" })
   units: BandwidthUnitsEnum;
 
-  @Metadata({ data: "json, name=value" })
+  @SpeakeasyMetadata({ data: "json, name=value" })
   value: number;
 }

@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CatalogEncryptionModeEnum } from "./catalogencryptionmodeenum";
+
 
 
 // EncryptionAtRest
@@ -7,9 +8,9 @@ import { CatalogEncryptionModeEnum } from "./catalogencryptionmodeenum";
  * Specifies the encryption-at-rest configuration for the Data Catalog.
 **/
 export class EncryptionAtRest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CatalogEncryptionMode" })
+  @SpeakeasyMetadata({ data: "json, name=CatalogEncryptionMode" })
   catalogEncryptionMode: CatalogEncryptionModeEnum;
 
-  @Metadata({ data: "json, name=SseAwsKmsKeyId" })
+  @SpeakeasyMetadata({ data: "json, name=SseAwsKmsKeyId" })
   sseAwsKmsKeyId?: string;
 }

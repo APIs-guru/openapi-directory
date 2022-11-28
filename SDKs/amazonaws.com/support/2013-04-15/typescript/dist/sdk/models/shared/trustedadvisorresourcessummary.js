@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // TrustedAdvisorResourcesSummary
 /**
  * Details about AWS resources that were analyzed in a call to Trusted Advisor <a>DescribeTrustedAdvisorCheckSummaries</a>.
@@ -33,19 +33,19 @@ var TrustedAdvisorResourcesSummary = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=resourcesFlagged" }),
+        SpeakeasyMetadata({ data: "json, name=resourcesFlagged" }),
         __metadata("design:type", Number)
     ], TrustedAdvisorResourcesSummary.prototype, "resourcesFlagged", void 0);
     __decorate([
-        Metadata({ data: "json, name=resourcesIgnored" }),
+        SpeakeasyMetadata({ data: "json, name=resourcesIgnored" }),
         __metadata("design:type", Number)
     ], TrustedAdvisorResourcesSummary.prototype, "resourcesIgnored", void 0);
     __decorate([
-        Metadata({ data: "json, name=resourcesProcessed" }),
+        SpeakeasyMetadata({ data: "json, name=resourcesProcessed" }),
         __metadata("design:type", Number)
     ], TrustedAdvisorResourcesSummary.prototype, "resourcesProcessed", void 0);
     __decorate([
-        Metadata({ data: "json, name=resourcesSuppressed" }),
+        SpeakeasyMetadata({ data: "json, name=resourcesSuppressed" }),
         __metadata("design:type", Number)
     ], TrustedAdvisorResourcesSummary.prototype, "resourcesSuppressed", void 0);
     return TrustedAdvisorResourcesSummary;

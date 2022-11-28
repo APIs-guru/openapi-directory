@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 export declare enum AllStarsFormatEnum {
     Xml = "XML",
     Json = "JSON"

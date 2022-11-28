@@ -5,8 +5,8 @@ from sdk.models import shared
 
 @dataclass
 class RemoveUserAttributePathParams:
-    key: str = field(default=None, metadata={'path_param': { 'field_name': 'key', 'style': 'simple', 'explode': False }})
-    user_id: int = field(default=None, metadata={'path_param': { 'field_name': 'user_id', 'style': 'simple', 'explode': False }})
+    key: str = field(metadata={'path_param': { 'field_name': 'key', 'style': 'simple', 'explode': False }})
+    user_id: int = field(metadata={'path_param': { 'field_name': 'user_id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -16,13 +16,13 @@ class RemoveUserAttributeHeaders:
 
 @dataclass
 class RemoveUserAttributeRequest:
-    path_params: RemoveUserAttributePathParams = field(default=None)
-    headers: RemoveUserAttributeHeaders = field(default=None)
+    headers: RemoveUserAttributeHeaders = field()
+    path_params: RemoveUserAttributePathParams = field()
     
 
 @dataclass
 class RemoveUserAttributeResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error_response: Optional[shared.ErrorResponse] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,17 +1,18 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PermissionTypeEnum } from "./permissiontypeenum";
 
 
+
 export class PutMailboxPermissionsRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=EntityId" })
+  @SpeakeasyMetadata({ data: "json, name=EntityId" })
   entityId: string;
 
-  @Metadata({ data: "json, name=GranteeId" })
+  @SpeakeasyMetadata({ data: "json, name=GranteeId" })
   granteeId: string;
 
-  @Metadata({ data: "json, name=OrganizationId" })
+  @SpeakeasyMetadata({ data: "json, name=OrganizationId" })
   organizationId: string;
 
-  @Metadata({ data: "json, name=PermissionValues" })
+  @SpeakeasyMetadata({ data: "json, name=PermissionValues" })
   permissionValues: PermissionTypeEnum[];
 }

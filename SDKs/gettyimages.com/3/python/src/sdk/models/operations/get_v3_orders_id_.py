@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class GetV3OrdersIDPathParams:
-    id: int = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: int = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -15,13 +15,13 @@ class GetV3OrdersIDHeaders:
 
 @dataclass
 class GetV3OrdersIDRequest:
-    path_params: GetV3OrdersIDPathParams = field(default=None)
-    headers: GetV3OrdersIDHeaders = field(default=None)
+    headers: GetV3OrdersIDHeaders = field()
+    path_params: GetV3OrdersIDPathParams = field()
     
 
 @dataclass
 class GetV3OrdersIDResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     order_detail: Optional[shared.OrderDetail] = field(default=None)
-    status_code: int = field(default=None)
     

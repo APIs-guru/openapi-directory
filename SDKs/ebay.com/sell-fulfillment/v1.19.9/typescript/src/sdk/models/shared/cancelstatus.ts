@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CancelRequest } from "./cancelrequest";
+
 
 
 // CancelStatus
@@ -8,12 +8,12 @@ import { CancelRequest } from "./cancelrequest";
  * This type contains information about any requests that have been made to cancel an order.
 **/
 export class CancelStatus extends SpeakeasyBase {
-  @Metadata({ data: "json, name=cancelRequests", elemType: shared.CancelRequest })
+  @SpeakeasyMetadata({ data: "json, name=cancelRequests", elemType: CancelRequest })
   cancelRequests?: CancelRequest[];
 
-  @Metadata({ data: "json, name=cancelState" })
+  @SpeakeasyMetadata({ data: "json, name=cancelState" })
   cancelState?: string;
 
-  @Metadata({ data: "json, name=cancelledDate" })
+  @SpeakeasyMetadata({ data: "json, name=cancelledDate" })
   cancelledDate?: string;
 }

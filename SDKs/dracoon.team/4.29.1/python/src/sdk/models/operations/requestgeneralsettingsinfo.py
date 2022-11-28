@@ -10,13 +10,13 @@ class RequestGeneralSettingsInfoHeaders:
 
 @dataclass
 class RequestGeneralSettingsInfoRequest:
-    headers: RequestGeneralSettingsInfoHeaders = field(default=None)
+    headers: RequestGeneralSettingsInfoHeaders = field()
     
 
 @dataclass
 class RequestGeneralSettingsInfoResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error_response: Optional[shared.ErrorResponse] = field(default=None)
     general_settings_info: Optional[shared.GeneralSettingsInfo] = field(default=None)
-    status_code: int = field(default=None)
     

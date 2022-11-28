@@ -1,6 +1,5 @@
 export * from "./accountactivity";
 export * from "./accountdetails";
-export * from "./accountriskverdict";
 export * from "./altenum";
 export * from "./appintegrity";
 export * from "./decodeintegritytokenrequest";

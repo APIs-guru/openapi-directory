@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// EnvironmentMember
+// Information about an environment member for an Cloud9 development environment.
 type EnvironmentMember struct {
 	EnvironmentID string          `json:"environmentId"`
 	LastAccess    *time.Time      `json:"lastAccess,omitempty"`

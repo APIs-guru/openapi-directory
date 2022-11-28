@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Ancestor } from "./ancestor";
+
 
 
 // GetAncestryResponse
@@ -8,6 +8,6 @@ import { Ancestor } from "./ancestor";
  * Response from the projects.getAncestry method.
 **/
 export class GetAncestryResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ancestor", elemType: shared.Ancestor })
+  @SpeakeasyMetadata({ data: "json, name=ancestor", elemType: Ancestor })
   ancestor?: Ancestor[];
 }

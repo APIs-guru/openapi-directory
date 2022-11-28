@@ -1,15 +1,17 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import servicetype_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class GetDimensionKeyDetailsRequest:
-    group: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Group' }})
-    group_identifier: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'GroupIdentifier' }})
-    identifier: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Identifier' }})
-    requested_dimensions: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'RequestedDimensions' }})
-    service_type: servicetype_enum.ServiceTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ServiceType' }})
+    group: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Group') }})
+    group_identifier: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('GroupIdentifier') }})
+    identifier: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Identifier') }})
+    service_type: ServiceTypeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('ServiceType') }})
+    requested_dimensions: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('RequestedDimensions') }})
     

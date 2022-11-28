@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum DuplicateAccessEnum {
-    AccessUnspecified = "ACCESS_UNSPECIFIED"
-,    AccessUnknown = "ACCESS_UNKNOWN"
-,    Allowed = "ALLOWED"
-,    Insufficient = "INSUFFICIENT"
+    AccessUnspecified = "ACCESS_UNSPECIFIED",
+    AccessUnknown = "ACCESS_UNKNOWN",
+    Allowed = "ALLOWED",
+    Insufficient = "INSUFFICIENT"
 }
 
 
@@ -13,12 +14,12 @@ export enum DuplicateAccessEnum {
  * Information about the location that this location duplicates.
 **/
 export class Duplicate extends SpeakeasyBase {
-  @Metadata({ data: "json, name=access" })
+  @SpeakeasyMetadata({ data: "json, name=access" })
   access?: DuplicateAccessEnum;
 
-  @Metadata({ data: "json, name=locationName" })
+  @SpeakeasyMetadata({ data: "json, name=locationName" })
   locationName?: string;
 
-  @Metadata({ data: "json, name=placeId" })
+  @SpeakeasyMetadata({ data: "json, name=placeId" })
   placeId?: string;
 }

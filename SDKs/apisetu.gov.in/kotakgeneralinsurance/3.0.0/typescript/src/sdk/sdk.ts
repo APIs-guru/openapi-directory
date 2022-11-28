@@ -1,15 +1,14 @@
 import axios, { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
-import { MatchContentType } from "../internal/utils/contenttype";
+import FormData from "form-data";
 import * as operations from "./models/operations";
-import { SerializeRequestBody } from "../internal/utils/requestbody";
-import FormData from 'form-data';
-import { CreateSecurityClient } from "../internal/utils/security";
-import * as utils from "../internal/utils/utils";
+import * as utils from "../internal/utils";
+
+
 
 type OptsFunc = (sdk: SDK) => void;
 
-const Servers = [
-  "https://apisetu.gov.in/kotakgeneralinsurance/v3",
+export const ServerList = [
+	"https://apisetu.gov.in/kotakgeneralinsurance/v3",
 ] as const;
 
 export function WithServerURL(
@@ -20,50 +19,49 @@ export function WithServerURL(
     if (params != null) {
       serverURL = utils.ReplaceParameters(serverURL, params);
     }
-    sdk.serverURL = serverURL;
+    sdk._serverURL = serverURL;
   };
 }
 
 export function WithClient(client: AxiosInstance): OptsFunc {
   return (sdk: SDK) => {
-    sdk.defaultClient = client;
+    sdk._defaultClient = client;
   };
 }
 
 
 export class SDK {
-  defaultClient?: AxiosInstance;
-  securityClient?: AxiosInstance;
-  security?: any;
-  serverURL: string;
+
+  public _defaultClient: AxiosInstance;
+  public _securityClient: AxiosInstance;
+  
+  public _serverURL: string;
+  private _language = "typescript";
+  private _sdkVersion = "0.0.1";
+  private _genVersion = "internal";
 
   constructor(...opts: OptsFunc[]) {
     opts.forEach((o) => o(this));
-    if (this.serverURL == "") {
-      this.serverURL = Servers[0];
+    if (this._serverURL == "") {
+      this._serverURL = ServerList[0];
     }
 
-    if (!this.defaultClient) {
-      this.defaultClient = axios.create({ baseURL: this.serverURL });
+    if (!this._defaultClient) {
+      this._defaultClient = axios.create({ baseURL: this._serverURL });
     }
 
-    if (!this.securityClient) {
-      if (this.security) {
-        this.securityClient = CreateSecurityClient(
-          this.defaultClient,
-          this.security
-        );
-      } else {
-        this.securityClient = this.defaultClient;
-      }
+    if (!this._securityClient) {
+      this._securityClient = this._defaultClient;
     }
+    
   }
   
-  // Cripc - Insurance Policy - Car
-  /** 
+  /**
+   * cripc - Insurance Policy - Car
+   *
    * API to verify Insurance Policy - Car.
   **/
-  Cripc(
+  cripc(
     req: operations.CripcRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.CripcResponse> {
@@ -71,70 +69,71 @@ export class SDK {
       req = new operations.CripcRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/cripc/certificate";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CripcResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.CripcResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.cripc400ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.cripc401ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.cripc404ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.cripc500ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 502:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 502:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.cripc502ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 503:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 503:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.cripc503ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 504:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 504:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.cripc504ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -146,11 +145,12 @@ export class SDK {
   }
 
   
-  // Cvipc - Insurance Policy - Commercial Vehicle
-  /** 
+  /**
+   * cvipc - Insurance Policy - Commercial Vehicle
+   *
    * API to verify Insurance Policy - Commercial Vehicle.
   **/
-  Cvipc(
+  cvipc(
     req: operations.CvipcRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.CvipcResponse> {
@@ -158,70 +158,71 @@ export class SDK {
       req = new operations.CvipcRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/cvipc/certificate";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CvipcResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.CvipcResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.cvipc400ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.cvipc401ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.cvipc404ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.cvipc500ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 502:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 502:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.cvipc502ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 503:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 503:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.cvipc503ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 504:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 504:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.cvipc504ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -233,11 +234,12 @@ export class SDK {
   }
 
   
-  // Gicer - Insurance Policy - Group
-  /** 
+  /**
+   * gicer - Insurance Policy - Group
+   *
    * API to verify Insurance Policy - Group.
   **/
-  Gicer(
+  gicer(
     req: operations.GicerRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GicerResponse> {
@@ -245,70 +247,71 @@ export class SDK {
       req = new operations.GicerRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/gicer/certificate";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GicerResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.GicerResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.gicer400ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.gicer401ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.gicer404ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.gicer500ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 502:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 502:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.gicer502ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 503:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 503:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.gicer503ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 504:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 504:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.gicer504ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -320,11 +323,12 @@ export class SDK {
   }
 
   
-  // Hlipc - Insurance Policy - Health
-  /** 
+  /**
+   * hlipc - Insurance Policy - Health
+   *
    * API to verify Insurance Policy - Health.
   **/
-  Hlipc(
+  hlipc(
     req: operations.HlipcRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.HlipcResponse> {
@@ -332,70 +336,71 @@ export class SDK {
       req = new operations.HlipcRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/hlipc/certificate";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.HlipcResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.HlipcResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.hlipc400ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.hlipc401ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.hlipc404ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.hlipc500ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 502:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 502:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.hlipc502ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 503:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 503:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.hlipc503ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 504:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 504:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.hlipc504ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -407,11 +412,12 @@ export class SDK {
   }
 
   
-  // Hmipc - Insurance Policy - Home
-  /** 
+  /**
+   * hmipc - Insurance Policy - Home
+   *
    * API to verify Insurance Policy - Home.
   **/
-  Hmipc(
+  hmipc(
     req: operations.HmipcRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.HmipcResponse> {
@@ -419,70 +425,71 @@ export class SDK {
       req = new operations.HmipcRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/hmipc/certificate";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.HmipcResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.HmipcResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.hmipc400ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.hmipc401ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.hmipc404ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.hmipc500ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 502:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 502:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.hmipc502ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 503:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 503:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.hmipc503ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 504:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 504:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.hmipc504ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -494,11 +501,12 @@ export class SDK {
   }
 
   
-  // Twipc - Insurance Policy - Two Wheeler
-  /** 
+  /**
+   * twipc - Insurance Policy - Two Wheeler
+   *
    * API to verify Insurance Policy - Two Wheeler.
   **/
-  Twipc(
+  twipc(
     req: operations.TwipcRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.TwipcResponse> {
@@ -506,70 +514,71 @@ export class SDK {
       req = new operations.TwipcRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/twipc/certificate";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.TwipcResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.TwipcResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.twipc400ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.twipc401ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.twipc404ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.twipc500ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 502:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 502:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.twipc502ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 503:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 503:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.twipc503ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 504:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 504:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.twipc504ApplicationJsonObject = httpRes?.data;
             }
             break;

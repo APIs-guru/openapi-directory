@@ -1,16 +1,17 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class CreatePreparedStatementInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Description" })
+  @SpeakeasyMetadata({ data: "json, name=Description" })
   description?: string;
 
-  @Metadata({ data: "json, name=QueryStatement" })
+  @SpeakeasyMetadata({ data: "json, name=QueryStatement" })
   queryStatement: string;
 
-  @Metadata({ data: "json, name=StatementName" })
+  @SpeakeasyMetadata({ data: "json, name=StatementName" })
   statementName: string;
 
-  @Metadata({ data: "json, name=WorkGroup" })
+  @SpeakeasyMetadata({ data: "json, name=WorkGroup" })
   workGroup: string;
 }

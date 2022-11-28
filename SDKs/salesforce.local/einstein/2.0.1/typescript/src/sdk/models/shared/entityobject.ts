@@ -1,14 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BoundingBox } from "./boundingbox";
 
 
+
 export class EntityObject extends SpeakeasyBase {
-  @Metadata({ data: "json, name=boundingBox" })
+  @SpeakeasyMetadata({ data: "json, name=boundingBox" })
   boundingBox?: BoundingBox;
 
-  @Metadata({ data: "json, name=entity" })
+  @SpeakeasyMetadata({ data: "json, name=entity" })
   entity?: string;
 
-  @Metadata({ data: "json, name=text" })
+  @SpeakeasyMetadata({ data: "json, name=text" })
   text?: string;
 }

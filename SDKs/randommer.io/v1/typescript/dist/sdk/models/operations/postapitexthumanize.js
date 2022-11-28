@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var PostApiTextHumanizeHeaders = /** @class */ (function (_super) {
     __extends(PostApiTextHumanizeHeaders, _super);
@@ -30,7 +30,7 @@ var PostApiTextHumanizeHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Api-Key" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Api-Key" }),
         __metadata("design:type", String)
     ], PostApiTextHumanizeHeaders.prototype, "xApiKey", void 0);
     return PostApiTextHumanizeHeaders;
@@ -42,19 +42,19 @@ var PostApiTextHumanizeRequests = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "request, media_type=application/*+json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/*+json" }),
         __metadata("design:type", shared.TextDto)
     ], PostApiTextHumanizeRequests.prototype, "textDto", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", shared.TextDto)
     ], PostApiTextHumanizeRequests.prototype, "textDto1", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json-patch+json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json-patch+json" }),
         __metadata("design:type", shared.TextDto)
     ], PostApiTextHumanizeRequests.prototype, "textDto2", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=text/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=text/json" }),
         __metadata("design:type", shared.TextDto)
     ], PostApiTextHumanizeRequests.prototype, "textDto3", void 0);
     return PostApiTextHumanizeRequests;
@@ -66,11 +66,11 @@ var PostApiTextHumanizeRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PostApiTextHumanizeHeaders)
     ], PostApiTextHumanizeRequest.prototype, "headers", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PostApiTextHumanizeRequests)
     ], PostApiTextHumanizeRequest.prototype, "request", void 0);
     return PostApiTextHumanizeRequest;
@@ -82,11 +82,11 @@ var PostApiTextHumanizeResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], PostApiTextHumanizeResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], PostApiTextHumanizeResponse.prototype, "statusCode", void 0);
     return PostApiTextHumanizeResponse;

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var TeamsCreateMembershipPathParams = /** @class */ (function (_super) {
     __extends(TeamsCreateMembershipPathParams, _super);
@@ -30,7 +30,7 @@ var TeamsCreateMembershipPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=teamId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=teamId" }),
         __metadata("design:type", String)
     ], TeamsCreateMembershipPathParams.prototype, "teamId", void 0);
     return TeamsCreateMembershipPathParams;
@@ -42,19 +42,19 @@ var TeamsCreateMembershipRequestBody = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=email" }),
+        SpeakeasyMetadata({ data: "json, name=email" }),
         __metadata("design:type", String)
     ], TeamsCreateMembershipRequestBody.prototype, "email", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], TeamsCreateMembershipRequestBody.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=roles" }),
+        SpeakeasyMetadata({ data: "json, name=roles" }),
         __metadata("design:type", Array)
     ], TeamsCreateMembershipRequestBody.prototype, "roles", void 0);
     __decorate([
-        Metadata({ data: "json, name=url" }),
+        SpeakeasyMetadata({ data: "json, name=url" }),
         __metadata("design:type", String)
     ], TeamsCreateMembershipRequestBody.prototype, "url", void 0);
     return TeamsCreateMembershipRequestBody;
@@ -66,11 +66,11 @@ var TeamsCreateMembershipSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeJwt)
     ], TeamsCreateMembershipSecurity.prototype, "jwt", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeProject)
     ], TeamsCreateMembershipSecurity.prototype, "project", void 0);
     return TeamsCreateMembershipSecurity;
@@ -82,15 +82,15 @@ var TeamsCreateMembershipRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", TeamsCreateMembershipPathParams)
     ], TeamsCreateMembershipRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", TeamsCreateMembershipRequestBody)
     ], TeamsCreateMembershipRequest.prototype, "request", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", TeamsCreateMembershipSecurity)
     ], TeamsCreateMembershipRequest.prototype, "security", void 0);
     return TeamsCreateMembershipRequest;
@@ -102,15 +102,15 @@ var TeamsCreateMembershipResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], TeamsCreateMembershipResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], TeamsCreateMembershipResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.Membership)
     ], TeamsCreateMembershipResponse.prototype, "membership", void 0);
     return TeamsCreateMembershipResponse;

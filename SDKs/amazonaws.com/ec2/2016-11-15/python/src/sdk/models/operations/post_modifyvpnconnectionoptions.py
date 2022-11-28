@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostModifyVpnConnectionOptionsActionEnum(str, Enum):
     MODIFY_VPN_CONNECTION_OPTIONS = "ModifyVpnConnectionOptions"
@@ -10,8 +14,8 @@ class PostModifyVpnConnectionOptionsVersionEnum(str, Enum):
 
 @dataclass
 class PostModifyVpnConnectionOptionsQueryParams:
-    action: PostModifyVpnConnectionOptionsActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostModifyVpnConnectionOptionsVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostModifyVpnConnectionOptionsActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostModifyVpnConnectionOptionsVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostModifyVpnConnectionOptionsHeaders:
 
 @dataclass
 class PostModifyVpnConnectionOptionsRequest:
-    query_params: PostModifyVpnConnectionOptionsQueryParams = field(default=None)
-    headers: PostModifyVpnConnectionOptionsHeaders = field(default=None)
+    headers: PostModifyVpnConnectionOptionsHeaders = field()
+    query_params: PostModifyVpnConnectionOptionsQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostModifyVpnConnectionOptionsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

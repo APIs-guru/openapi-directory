@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var PostV3BoardsBoardIdCommentsPathParams = /** @class */ (function (_super) {
     __extends(PostV3BoardsBoardIdCommentsPathParams, _super);
@@ -30,7 +30,7 @@ var PostV3BoardsBoardIdCommentsPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=board_id" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=board_id" }),
         __metadata("design:type", String)
     ], PostV3BoardsBoardIdCommentsPathParams.prototype, "boardId", void 0);
     return PostV3BoardsBoardIdCommentsPathParams;
@@ -42,11 +42,11 @@ var PostV3BoardsBoardIdCommentsRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PostV3BoardsBoardIdCommentsPathParams)
     ], PostV3BoardsBoardIdCommentsRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", shared.CommentRequest)
     ], PostV3BoardsBoardIdCommentsRequest.prototype, "request", void 0);
     return PostV3BoardsBoardIdCommentsRequest;
@@ -58,15 +58,15 @@ var PostV3BoardsBoardIdCommentsResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.CommentCreated)
     ], PostV3BoardsBoardIdCommentsResponse.prototype, "commentCreated", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], PostV3BoardsBoardIdCommentsResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], PostV3BoardsBoardIdCommentsResponse.prototype, "statusCode", void 0);
     return PostV3BoardsBoardIdCommentsResponse;

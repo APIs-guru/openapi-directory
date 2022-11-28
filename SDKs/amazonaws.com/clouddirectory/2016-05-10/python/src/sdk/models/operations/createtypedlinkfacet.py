@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,List,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
 @dataclass
 class CreateTypedLinkFacetHeaders:
+    x_amz_data_partition: str = field(metadata={'header': { 'field_name': 'x-amz-data-partition', 'style': 'simple', 'explode': False }})
     x_amz_algorithm: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Algorithm', 'style': 'simple', 'explode': False }})
     x_amz_content_sha256: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Content-Sha256', 'style': 'simple', 'explode': False }})
     x_amz_credential: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Credential', 'style': 'simple', 'explode': False }})
@@ -13,33 +18,37 @@ class CreateTypedLinkFacetHeaders:
     x_amz_security_token: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Security-Token', 'style': 'simple', 'explode': False }})
     x_amz_signature: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Signature', 'style': 'simple', 'explode': False }})
     x_amz_signed_headers: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-SignedHeaders', 'style': 'simple', 'explode': False }})
-    x_amz_data_partition: str = field(default=None, metadata={'header': { 'field_name': 'x-amz-data-partition', 'style': 'simple', 'explode': False }})
     
 
 @dataclass_json
 @dataclass
 class CreateTypedLinkFacetRequestBodyFacet:
-    attributes: Optional[List[shared.TypedLinkAttributeDefinition]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Attributes' }})
-    identity_attribute_order: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'IdentityAttributeOrder' }})
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Name' }})
+    r"""CreateTypedLinkFacetRequestBodyFacet
+    Defines the typed links structure and its attributes. To create a typed link facet, use the <a>CreateTypedLinkFacet</a> API.
+    """
+    
+    attributes: Optional[List[shared.TypedLinkAttributeDefinition]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Attributes') }})
+    identity_attribute_order: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('IdentityAttributeOrder') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Name') }})
     
 
 @dataclass_json
 @dataclass
 class CreateTypedLinkFacetRequestBody:
-    facet: CreateTypedLinkFacetRequestBodyFacet = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Facet' }})
+    facet: CreateTypedLinkFacetRequestBodyFacet = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Facet') }})
     
 
 @dataclass
 class CreateTypedLinkFacetRequest:
-    headers: CreateTypedLinkFacetHeaders = field(default=None)
-    request: CreateTypedLinkFacetRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: CreateTypedLinkFacetHeaders = field()
+    request: CreateTypedLinkFacetRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class CreateTypedLinkFacetResponse:
+    content_type: str = field()
+    status_code: int = field()
     access_denied_exception: Optional[shared.AccessDeniedException] = field(default=None)
-    content_type: str = field(default=None)
     create_typed_link_facet_response: Optional[dict[str, Any]] = field(default=None)
     facet_already_exists_exception: Optional[shared.FacetAlreadyExistsException] = field(default=None)
     facet_validation_exception: Optional[shared.FacetValidationException] = field(default=None)
@@ -49,6 +58,5 @@ class CreateTypedLinkFacetResponse:
     limit_exceeded_exception: Optional[shared.LimitExceededException] = field(default=None)
     resource_not_found_exception: Optional[shared.ResourceNotFoundException] = field(default=None)
     retryable_conflict_exception: Optional[shared.RetryableConflictException] = field(default=None)
-    status_code: int = field(default=None)
     validation_exception: Optional[shared.ValidationException] = field(default=None)
     

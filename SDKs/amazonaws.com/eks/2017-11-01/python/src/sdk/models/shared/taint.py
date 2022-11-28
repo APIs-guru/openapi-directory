@@ -1,13 +1,19 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import tainteffect_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class Taint:
-    effect: Optional[tainteffect_enum.TaintEffectEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'effect' }})
-    key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
-    value: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'value' }})
+    r"""Taint
+    A property that allows a node to repel a set of pods.
+    """
+    
+    effect: Optional[TaintEffectEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('effect') }})
+    key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('key') }})
+    value: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('value') }})
     

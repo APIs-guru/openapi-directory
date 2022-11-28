@@ -1,6 +1,7 @@
 
 
+
 export enum TransferModeEnum {
-    Changed = "CHANGED"
-,    All = "ALL"
+    Changed = "CHANGED",
+    All = "ALL"
 }

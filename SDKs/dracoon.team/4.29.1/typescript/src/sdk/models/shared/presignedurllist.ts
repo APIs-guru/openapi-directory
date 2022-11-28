@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PresignedUrl } from "./presignedurl";
+
 
 
 // PresignedUrlList
@@ -8,6 +8,6 @@ import { PresignedUrl } from "./presignedurl";
  * List of generated presigned URLs
 **/
 export class PresignedUrlList extends SpeakeasyBase {
-  @Metadata({ data: "json, name=urls", elemType: shared.PresignedUrl })
+  @SpeakeasyMetadata({ data: "json, name=urls", elemType: PresignedUrl })
   urls: PresignedUrl[];
 }

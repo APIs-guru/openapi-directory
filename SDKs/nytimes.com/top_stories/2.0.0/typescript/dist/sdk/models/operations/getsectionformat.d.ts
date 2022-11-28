@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare enum GetSectionFormatFormatEnum {
     Json = "json",
@@ -39,12 +39,12 @@ export declare class GetSectionFormatPathParams extends SpeakeasyBase {
 export declare class GetSectionFormatQueryParams extends SpeakeasyBase {
     callback?: string;
 }
+export declare class GetSectionFormat200ApplicationJson extends SpeakeasyBase {
+    results?: shared.Article[];
+}
 export declare class GetSectionFormatRequest extends SpeakeasyBase {
     pathParams: GetSectionFormatPathParams;
     queryParams: GetSectionFormatQueryParams;
-}
-export declare class GetSectionFormat200ApplicationJson extends SpeakeasyBase {
-    results?: shared.Article[];
 }
 export declare class GetSectionFormatResponse extends SpeakeasyBase {
     contentType: string;

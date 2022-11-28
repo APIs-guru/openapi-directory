@@ -1,19 +1,19 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { WafAction } from "./wafaction";
 import { WebAclUpdate } from "./webaclupdate";
 
 
+
 export class UpdateWebAclRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ChangeToken" })
+  @SpeakeasyMetadata({ data: "json, name=ChangeToken" })
   changeToken: string;
 
-  @Metadata({ data: "json, name=DefaultAction" })
+  @SpeakeasyMetadata({ data: "json, name=DefaultAction" })
   defaultAction?: WafAction;
 
-  @Metadata({ data: "json, name=Updates", elemType: shared.WebAclUpdate })
+  @SpeakeasyMetadata({ data: "json, name=Updates", elemType: WebAclUpdate })
   updates?: WebAclUpdate[];
 
-  @Metadata({ data: "json, name=WebACLId" })
+  @SpeakeasyMetadata({ data: "json, name=WebACLId" })
   webAclId: string;
 }

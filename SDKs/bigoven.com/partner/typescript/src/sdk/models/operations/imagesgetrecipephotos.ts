@@ -1,41 +1,42 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class ImagesGetRecipePhotosPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=recipeId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=recipeId" })
   recipeId: number;
 }
 
 
 export class ImagesGetRecipePhotosQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=pg" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=pg" })
   pg?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=rpp" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=rpp" })
   rpp?: number;
 }
 
 
 export class ImagesGetRecipePhotosRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: ImagesGetRecipePhotosPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: ImagesGetRecipePhotosQueryParams;
 }
 
 
 export class ImagesGetRecipePhotosResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   api2ControllersWebApiImagesControllerRecipePhotosResponse?: shared.Api2ControllersWebApiImagesControllerRecipePhotosResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class DescribeResourcePolicyPathParams:
-    resource_arn: str = field(default=None, metadata={'path_param': { 'field_name': 'resourceArn', 'style': 'simple', 'explode': False }})
+    resource_arn: str = field(metadata={'path_param': { 'field_name': 'resourceArn', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -21,16 +24,16 @@ class DescribeResourcePolicyHeaders:
 
 @dataclass
 class DescribeResourcePolicyRequest:
-    path_params: DescribeResourcePolicyPathParams = field(default=None)
-    headers: DescribeResourcePolicyHeaders = field(default=None)
+    headers: DescribeResourcePolicyHeaders = field()
+    path_params: DescribeResourcePolicyPathParams = field()
     
 
 @dataclass
 class DescribeResourcePolicyResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     describe_resource_policy_response: Optional[shared.DescribeResourcePolicyResponse] = field(default=None)
     internal_server_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     

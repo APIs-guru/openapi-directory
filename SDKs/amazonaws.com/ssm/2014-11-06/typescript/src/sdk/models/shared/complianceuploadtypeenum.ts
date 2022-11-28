@@ -1,6 +1,7 @@
 
 
+
 export enum ComplianceUploadTypeEnum {
-    Complete = "COMPLETE"
-,    Partial = "PARTIAL"
+    Complete = "COMPLETE",
+    Partial = "PARTIAL"
 }

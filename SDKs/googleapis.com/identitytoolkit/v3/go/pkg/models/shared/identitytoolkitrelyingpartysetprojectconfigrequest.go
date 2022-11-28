@@ -1,5 +1,7 @@
 package shared
 
+// IdentitytoolkitRelyingpartySetProjectConfigRequest
+// Request to set the project configuration.
 type IdentitytoolkitRelyingpartySetProjectConfigRequest struct {
 	AllowPasswordUser           *bool          `json:"allowPasswordUser,omitempty"`
 	APIKey                      *string        `json:"apiKey,omitempty"`

@@ -1,16 +1,17 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DatasetRestApiPost extends SpeakeasyBase {
-  @Metadata({ data: "json, name=database" })
+  @SpeakeasyMetadata({ data: "json, name=database" })
   database: number;
 
-  @Metadata({ data: "json, name=owners" })
+  @SpeakeasyMetadata({ data: "json, name=owners" })
   owners?: number[];
 
-  @Metadata({ data: "json, name=schema" })
+  @SpeakeasyMetadata({ data: "json, name=schema" })
   schema?: string;
 
-  @Metadata({ data: "json, name=table_name" })
+  @SpeakeasyMetadata({ data: "json, name=table_name" })
   tableName: string;
 }

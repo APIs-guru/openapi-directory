@@ -1,4 +1,7 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Optional
 from sdk.models import shared
 
@@ -15,18 +18,18 @@ class GetCampaignsQueryParams:
 
 @dataclass
 class GetCampaignsSecurity:
-    api_auth: shared.SchemeAPIAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    api_auth: shared.SchemeAPIAuth = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class GetCampaignsRequest:
-    query_params: GetCampaignsQueryParams = field(default=None)
-    security: GetCampaignsSecurity = field(default=None)
+    query_params: GetCampaignsQueryParams = field()
+    security: GetCampaignsSecurity = field()
     
 
 @dataclass
 class GetCampaignsResponse:
+    content_type: str = field()
+    status_code: int = field()
     campaign_paged_collection: Optional[shared.CampaignPagedCollection] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

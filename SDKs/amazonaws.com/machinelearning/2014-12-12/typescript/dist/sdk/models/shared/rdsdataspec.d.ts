@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { RdsDatabaseCredentials } from "./rdsdatabasecredentials";
 import { RdsDatabase } from "./rdsdatabase";
 /**

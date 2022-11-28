@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { GoogleIamV1GetPolicyOptions } from "./googleiamv1getpolicyoptions";
 /**
  * Request message for `GetIamPolicy` method.

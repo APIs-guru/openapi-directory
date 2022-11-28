@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// TimelineItem
+// Each item in the user's timeline is represented as a TimelineItem JSON structure, described below.
 type TimelineItem struct {
 	Attachments   []Attachment        `json:"attachments,omitempty"`
 	BundleID      *string             `json:"bundleId,omitempty"`

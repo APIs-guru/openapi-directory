@@ -1,9 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum DeliveryConfigDeliveryRequirementEnum {
-    DeliveryRequirementUnspecified = "DELIVERY_REQUIREMENT_UNSPECIFIED"
-,    DeliverImmediately = "DELIVER_IMMEDIATELY"
-,    DeliverAfterStored = "DELIVER_AFTER_STORED"
+    DeliveryRequirementUnspecified = "DELIVERY_REQUIREMENT_UNSPECIFIED",
+    DeliverImmediately = "DELIVER_IMMEDIATELY",
+    DeliverAfterStored = "DELIVER_AFTER_STORED"
 }
 
 
@@ -12,6 +13,6 @@ export enum DeliveryConfigDeliveryRequirementEnum {
  * The settings for a subscription's message delivery.
 **/
 export class DeliveryConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=deliveryRequirement" })
+  @SpeakeasyMetadata({ data: "json, name=deliveryRequirement" })
   deliveryRequirement?: DeliveryConfigDeliveryRequirementEnum;
 }

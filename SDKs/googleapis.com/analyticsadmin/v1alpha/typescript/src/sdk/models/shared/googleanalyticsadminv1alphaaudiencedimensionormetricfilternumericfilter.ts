@@ -1,11 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleAnalyticsAdminV1alphaAudienceDimensionOrMetricFilterNumericValue } from "./googleanalyticsadminv1alphaaudiencedimensionormetricfilternumericvalue";
 
+
 export enum GoogleAnalyticsAdminV1alphaAudienceDimensionOrMetricFilterNumericFilterOperationEnum {
-    OperationUnspecified = "OPERATION_UNSPECIFIED"
-,    Equal = "EQUAL"
-,    LessThan = "LESS_THAN"
-,    GreaterThan = "GREATER_THAN"
+    OperationUnspecified = "OPERATION_UNSPECIFIED",
+    Equal = "EQUAL",
+    LessThan = "LESS_THAN",
+    GreaterThan = "GREATER_THAN"
 }
 
 
@@ -14,9 +15,9 @@ export enum GoogleAnalyticsAdminV1alphaAudienceDimensionOrMetricFilterNumericFil
  * A filter for numeric or date values on a dimension or metric.
 **/
 export class GoogleAnalyticsAdminV1alphaAudienceDimensionOrMetricFilterNumericFilter extends SpeakeasyBase {
-  @Metadata({ data: "json, name=operation" })
+  @SpeakeasyMetadata({ data: "json, name=operation" })
   operation?: GoogleAnalyticsAdminV1alphaAudienceDimensionOrMetricFilterNumericFilterOperationEnum;
 
-  @Metadata({ data: "json, name=value" })
+  @SpeakeasyMetadata({ data: "json, name=value" })
   value?: GoogleAnalyticsAdminV1alphaAudienceDimensionOrMetricFilterNumericValue;
 }

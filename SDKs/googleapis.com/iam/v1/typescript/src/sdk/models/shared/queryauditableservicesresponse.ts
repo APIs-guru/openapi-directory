@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AuditableService } from "./auditableservice";
+
 
 
 // QueryAuditableServicesResponse
@@ -8,6 +8,6 @@ import { AuditableService } from "./auditableservice";
  * A response containing a list of auditable services for a resource.
 **/
 export class QueryAuditableServicesResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=services", elemType: shared.AuditableService })
+  @SpeakeasyMetadata({ data: "json, name=services", elemType: AuditableService })
   services?: AuditableService[];
 }

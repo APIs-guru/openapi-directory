@@ -1,16 +1,17 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class SourceAccountV3 extends SpeakeasyBase {
-  @Metadata({ data: "json, name=currency" })
+  @SpeakeasyMetadata({ data: "json, name=currency" })
   currency: string;
 
-  @Metadata({ data: "json, name=sourceAccountId" })
+  @SpeakeasyMetadata({ data: "json, name=sourceAccountId" })
   sourceAccountId: string;
 
-  @Metadata({ data: "json, name=sourceAccountName" })
+  @SpeakeasyMetadata({ data: "json, name=sourceAccountName" })
   sourceAccountName: string;
 
-  @Metadata({ data: "json, name=totalPayoutCost" })
+  @SpeakeasyMetadata({ data: "json, name=totalPayoutCost" })
   totalPayoutCost: number;
 }

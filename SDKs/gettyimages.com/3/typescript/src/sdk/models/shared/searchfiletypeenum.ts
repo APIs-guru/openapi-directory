@@ -1,6 +1,7 @@
 
 
+
 export enum SearchFileTypeEnum {
-    Eps = "eps"
-,    Jpg = "jpg"
+    Eps = "eps",
+    Jpg = "jpg"
 }

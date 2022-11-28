@@ -8,6 +8,8 @@ const (
 	ConnectedApplicationProductDataTypesEnumAccountTransactions ConnectedApplicationProductDataTypesEnum = "ACCOUNT_TRANSACTIONS"
 )
 
+// ConnectedApplication
+// Describes the connected application for a particular end user.
 type ConnectedApplication struct {
 	ApplicationID    string                                     `json:"application_id"`
 	ApplicationURL   string                                     `json:"application_url"`

@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class AddressCurbsideEnum(str, Enum):
     RIGHT = "right"
@@ -11,10 +13,10 @@ class AddressCurbsideEnum(str, Enum):
 @dataclass_json
 @dataclass
 class Address:
-    curbside: Optional[AddressCurbsideEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'curbside' }})
-    lat: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'lat' }})
-    location_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'location_id' }})
-    lon: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'lon' }})
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    street_hint: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'street_hint' }})
+    lat: float = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('lat') }})
+    location_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('location_id') }})
+    lon: float = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('lon') }})
+    curbside: Optional[AddressCurbsideEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('curbside') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    street_hint: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('street_hint') }})
     

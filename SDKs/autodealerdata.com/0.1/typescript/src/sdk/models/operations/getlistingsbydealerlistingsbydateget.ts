@@ -1,44 +1,45 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetListingsByDealerListingsByDateGetQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=dealerID" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=dealerID" })
   dealerId: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=endDate" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=endDate" })
   endDate: Date;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=jwt" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=jwt" })
   jwt: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=newCars" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=newCars" })
   newCars?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=page" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page" })
   page?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=startDate" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=startDate" })
   startDate: Date;
 }
 
 
 export class GetListingsByDealerListingsByDateGetRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetListingsByDealerListingsByDateGetQueryParams;
 }
 
 
 export class GetListingsByDealerListingsByDateGetResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   httpValidationError?: shared.HttpValidationError;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   listingResp?: shared.ListingResp;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

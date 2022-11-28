@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CreateGlobalSecondaryIndexAction } from "./createglobalsecondaryindexaction";
 import { DeleteGlobalSecondaryIndexAction } from "./deleteglobalsecondaryindexaction";
 import { UpdateGlobalSecondaryIndexAction } from "./updateglobalsecondaryindexaction";
+
 
 
 // GlobalSecondaryIndexUpdate
@@ -9,12 +10,12 @@ import { UpdateGlobalSecondaryIndexAction } from "./updateglobalsecondaryindexac
  * <p>Represents one of the following:</p> <ul> <li> <p>A new global secondary index to be added to an existing table.</p> </li> <li> <p>New provisioned throughput parameters for an existing global secondary index.</p> </li> <li> <p>An existing global secondary index to be removed from an existing table.</p> </li> </ul>
 **/
 export class GlobalSecondaryIndexUpdate extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Create" })
+  @SpeakeasyMetadata({ data: "json, name=Create" })
   create?: CreateGlobalSecondaryIndexAction;
 
-  @Metadata({ data: "json, name=Delete" })
+  @SpeakeasyMetadata({ data: "json, name=Delete" })
   delete?: DeleteGlobalSecondaryIndexAction;
 
-  @Metadata({ data: "json, name=Update" })
+  @SpeakeasyMetadata({ data: "json, name=Update" })
   update?: UpdateGlobalSecondaryIndexAction;
 }

@@ -1,7 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import frequencycap
+from sdk import utils
+from . import *
 
 class DeliveryControlCompanionDeliveryTypeEnum(str, Enum):
     COMPANION_DELIVERY_TYPE_UNSPECIFIED = "COMPANION_DELIVERY_TYPE_UNSPECIFIED"
@@ -34,9 +36,13 @@ class DeliveryControlRoadblockingTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class DeliveryControl:
-    companion_delivery_type: Optional[DeliveryControlCompanionDeliveryTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'companionDeliveryType' }})
-    creative_rotation_type: Optional[DeliveryControlCreativeRotationTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'creativeRotationType' }})
-    delivery_rate_type: Optional[DeliveryControlDeliveryRateTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'deliveryRateType' }})
-    frequency_cap: Optional[List[frequencycap.FrequencyCap]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'frequencyCap' }})
-    roadblocking_type: Optional[DeliveryControlRoadblockingTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'roadblockingType' }})
+    r"""DeliveryControl
+    Message contains details about how the deal will be paced.
+    """
+    
+    companion_delivery_type: Optional[DeliveryControlCompanionDeliveryTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('companionDeliveryType') }})
+    creative_rotation_type: Optional[DeliveryControlCreativeRotationTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('creativeRotationType') }})
+    delivery_rate_type: Optional[DeliveryControlDeliveryRateTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('deliveryRateType') }})
+    frequency_cap: Optional[List[FrequencyCap]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('frequencyCap') }})
+    roadblocking_type: Optional[DeliveryControlRoadblockingTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('roadblockingType') }})
     

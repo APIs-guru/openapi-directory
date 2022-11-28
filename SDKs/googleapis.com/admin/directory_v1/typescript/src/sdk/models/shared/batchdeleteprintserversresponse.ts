@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PrintServerFailureInfo } from "./printserverfailureinfo";
 
 
+
 export class BatchDeletePrintServersResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=failedPrintServers", elemType: shared.PrintServerFailureInfo })
+  @SpeakeasyMetadata({ data: "json, name=failedPrintServers", elemType: PrintServerFailureInfo })
   failedPrintServers?: PrintServerFailureInfo[];
 
-  @Metadata({ data: "json, name=printServerIds" })
+  @SpeakeasyMetadata({ data: "json, name=printServerIds" })
   printServerIds?: string[];
 }

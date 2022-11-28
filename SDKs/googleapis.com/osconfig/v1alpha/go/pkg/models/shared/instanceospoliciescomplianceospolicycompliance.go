@@ -10,6 +10,8 @@ const (
 	InstanceOsPoliciesComplianceOsPolicyComplianceStateEnumNoOsPoliciesApplicable             InstanceOsPoliciesComplianceOsPolicyComplianceStateEnum = "NO_OS_POLICIES_APPLICABLE"
 )
 
+// InstanceOsPoliciesComplianceOsPolicyCompliance
+// Compliance data for an OS policy
 type InstanceOsPoliciesComplianceOsPolicyCompliance struct {
 	OsPolicyAssignment          *string                                                  `json:"osPolicyAssignment,omitempty"`
 	OsPolicyID                  *string                                                  `json:"osPolicyId,omitempty"`

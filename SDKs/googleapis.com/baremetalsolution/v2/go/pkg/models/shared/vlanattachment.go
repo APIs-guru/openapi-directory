@@ -1,5 +1,7 @@
 package shared
 
+// VlanAttachment
+// VLAN attachment details.
 type VlanAttachment struct {
 	ID         *string    `json:"id,omitempty"`
 	PairingKey *string    `json:"pairingKey,omitempty"`

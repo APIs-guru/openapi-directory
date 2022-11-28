@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // EmergencyContact
@@ -6,63 +7,63 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The emergency contact model
 **/
 export class EmergencyContact extends SpeakeasyBase {
-  @Metadata({ data: "json, name=address1" })
+  @SpeakeasyMetadata({ data: "json, name=address1" })
   address1?: string;
 
-  @Metadata({ data: "json, name=address2" })
+  @SpeakeasyMetadata({ data: "json, name=address2" })
   address2?: string;
 
-  @Metadata({ data: "json, name=city" })
+  @SpeakeasyMetadata({ data: "json, name=city" })
   city?: string;
 
-  @Metadata({ data: "json, name=country" })
+  @SpeakeasyMetadata({ data: "json, name=country" })
   country?: string;
 
-  @Metadata({ data: "json, name=county" })
+  @SpeakeasyMetadata({ data: "json, name=county" })
   county?: string;
 
-  @Metadata({ data: "json, name=email" })
+  @SpeakeasyMetadata({ data: "json, name=email" })
   email?: string;
 
-  @Metadata({ data: "json, name=firstName" })
+  @SpeakeasyMetadata({ data: "json, name=firstName" })
   firstName: string;
 
-  @Metadata({ data: "json, name=homePhone" })
+  @SpeakeasyMetadata({ data: "json, name=homePhone" })
   homePhone?: string;
 
-  @Metadata({ data: "json, name=lastName" })
+  @SpeakeasyMetadata({ data: "json, name=lastName" })
   lastName: string;
 
-  @Metadata({ data: "json, name=mobilePhone" })
+  @SpeakeasyMetadata({ data: "json, name=mobilePhone" })
   mobilePhone?: string;
 
-  @Metadata({ data: "json, name=notes" })
+  @SpeakeasyMetadata({ data: "json, name=notes" })
   notes?: string;
 
-  @Metadata({ data: "json, name=pager" })
+  @SpeakeasyMetadata({ data: "json, name=pager" })
   pager?: string;
 
-  @Metadata({ data: "json, name=primaryPhone" })
+  @SpeakeasyMetadata({ data: "json, name=primaryPhone" })
   primaryPhone?: string;
 
-  @Metadata({ data: "json, name=priority" })
+  @SpeakeasyMetadata({ data: "json, name=priority" })
   priority?: string;
 
-  @Metadata({ data: "json, name=relationship" })
+  @SpeakeasyMetadata({ data: "json, name=relationship" })
   relationship?: string;
 
-  @Metadata({ data: "json, name=state" })
+  @SpeakeasyMetadata({ data: "json, name=state" })
   state?: string;
 
-  @Metadata({ data: "json, name=syncEmployeeInfo" })
+  @SpeakeasyMetadata({ data: "json, name=syncEmployeeInfo" })
   syncEmployeeInfo?: boolean;
 
-  @Metadata({ data: "json, name=workExtension" })
+  @SpeakeasyMetadata({ data: "json, name=workExtension" })
   workExtension?: string;
 
-  @Metadata({ data: "json, name=workPhone" })
+  @SpeakeasyMetadata({ data: "json, name=workPhone" })
   workPhone?: string;
 
-  @Metadata({ data: "json, name=zip" })
+  @SpeakeasyMetadata({ data: "json, name=zip" })
   zip?: string;
 }

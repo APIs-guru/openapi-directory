@@ -1,16 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
-import { Parameter } from "./parameter";
-import { Parameter } from "./parameter";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum ParameterTypeEnum {
-    Template = "template"
-,    Integer = "integer"
-,    Boolean = "boolean"
-,    List = "list"
-,    Map = "map"
-,    TriggerReference = "triggerReference"
-,    TagReference = "tagReference"
+    Template = "template",
+    Integer = "integer",
+    Boolean = "boolean",
+    List = "list",
+    Map = "map",
+    TriggerReference = "triggerReference",
+    TagReference = "tagReference"
 }
 
 
@@ -19,18 +17,18 @@ export enum ParameterTypeEnum {
  * Represents a Google Tag Manager Parameter.
 **/
 export class Parameter extends SpeakeasyBase {
-  @Metadata({ data: "json, name=key" })
+  @SpeakeasyMetadata({ data: "json, name=key" })
   key?: string;
 
-  @Metadata({ data: "json, name=list", elemType: shared.Parameter })
+  @SpeakeasyMetadata({ data: "json, name=list", elemType: Parameter })
   list?: Parameter[];
 
-  @Metadata({ data: "json, name=map", elemType: shared.Parameter })
+  @SpeakeasyMetadata({ data: "json, name=map", elemType: Parameter })
   map?: Parameter[];
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: ParameterTypeEnum;
 
-  @Metadata({ data: "json, name=value" })
+  @SpeakeasyMetadata({ data: "json, name=value" })
   value?: string;
 }

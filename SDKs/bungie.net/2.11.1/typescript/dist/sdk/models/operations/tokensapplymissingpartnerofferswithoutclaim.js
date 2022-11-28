@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var TokensApplyMissingPartnerOffersWithoutClaimPathParams = /** @class */ (function (_super) {
     __extends(TokensApplyMissingPartnerOffersWithoutClaimPathParams, _super);
@@ -30,11 +30,11 @@ var TokensApplyMissingPartnerOffersWithoutClaimPathParams = /** @class */ (funct
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=partnerApplicationId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=partnerApplicationId" }),
         __metadata("design:type", Number)
     ], TokensApplyMissingPartnerOffersWithoutClaimPathParams.prototype, "partnerApplicationId", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=targetBnetMembershipId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=targetBnetMembershipId" }),
         __metadata("design:type", Number)
     ], TokensApplyMissingPartnerOffersWithoutClaimPathParams.prototype, "targetBnetMembershipId", void 0);
     return TokensApplyMissingPartnerOffersWithoutClaimPathParams;
@@ -46,7 +46,7 @@ var TokensApplyMissingPartnerOffersWithoutClaimSecurity = /** @class */ (functio
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2)
     ], TokensApplyMissingPartnerOffersWithoutClaimSecurity.prototype, "oauth2", void 0);
     return TokensApplyMissingPartnerOffersWithoutClaimSecurity;
@@ -58,11 +58,11 @@ var TokensApplyMissingPartnerOffersWithoutClaimRequest = /** @class */ (function
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", TokensApplyMissingPartnerOffersWithoutClaimPathParams)
     ], TokensApplyMissingPartnerOffersWithoutClaimRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", TokensApplyMissingPartnerOffersWithoutClaimSecurity)
     ], TokensApplyMissingPartnerOffersWithoutClaimRequest.prototype, "security", void 0);
     return TokensApplyMissingPartnerOffersWithoutClaimRequest;
@@ -74,15 +74,15 @@ var TokensApplyMissingPartnerOffersWithoutClaimResponse = /** @class */ (functio
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], TokensApplyMissingPartnerOffersWithoutClaimResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], TokensApplyMissingPartnerOffersWithoutClaimResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], TokensApplyMissingPartnerOffersWithoutClaimResponse.prototype, "statusCode", void 0);
     return TokensApplyMissingPartnerOffersWithoutClaimResponse;

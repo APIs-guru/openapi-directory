@@ -9,6 +9,8 @@ const (
 	DeviceIPBlockFormEnumEmulator              DeviceIPBlockFormEnum = "EMULATOR"
 )
 
+// DeviceIPBlock
+// A single device IP block
 type DeviceIPBlock struct {
 	AddedDate *Date                  `json:"addedDate,omitempty"`
 	Block     *string                `json:"block,omitempty"`

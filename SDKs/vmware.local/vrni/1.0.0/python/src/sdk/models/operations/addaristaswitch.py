@@ -5,19 +5,19 @@ from sdk.models import shared
 
 @dataclass
 class AddAristaSwitchSecurity:
-    api_key_auth: shared.SchemeAPIKeyAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    api_key_auth: shared.SchemeAPIKeyAuth = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
     
 
 @dataclass
 class AddAristaSwitchRequest:
+    security: AddAristaSwitchSecurity = field()
     request: Optional[shared.SwitchDataSourceRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: AddAristaSwitchSecurity = field(default=None)
     
 
 @dataclass
 class AddAristaSwitchResponse:
+    content_type: str = field()
+    status_code: int = field()
     api_error: Optional[shared.APIError] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     switch_data_source: Optional[shared.SwitchDataSource] = field(default=None)
     

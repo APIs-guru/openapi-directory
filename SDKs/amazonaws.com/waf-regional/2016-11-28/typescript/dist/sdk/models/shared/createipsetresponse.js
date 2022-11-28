@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { IpSet } from "./ipset";
 var CreateIpSetResponse = /** @class */ (function (_super) {
     __extends(CreateIpSetResponse, _super);
@@ -30,11 +30,11 @@ var CreateIpSetResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=ChangeToken" }),
+        SpeakeasyMetadata({ data: "json, name=ChangeToken" }),
         __metadata("design:type", String)
     ], CreateIpSetResponse.prototype, "changeToken", void 0);
     __decorate([
-        Metadata({ data: "json, name=IPSet" }),
+        SpeakeasyMetadata({ data: "json, name=IPSet" }),
         __metadata("design:type", IpSet)
     ], CreateIpSetResponse.prototype, "ipSet", void 0);
     return CreateIpSetResponse;

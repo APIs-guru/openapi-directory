@@ -1,41 +1,40 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TrialComponentArtifact } from "./trialcomponentartifact";
 import { MetadataProperties } from "./metadataproperties";
-import { TrialComponentArtifact } from "./trialcomponentartifact";
 import { TrialComponentParameterValue } from "./trialcomponentparametervalue";
 import { TrialComponentStatus } from "./trialcomponentstatus";
 import { Tag } from "./tag";
 
 
+
 export class CreateTrialComponentRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DisplayName" })
+  @SpeakeasyMetadata({ data: "json, name=DisplayName" })
   displayName?: string;
 
-  @Metadata({ data: "json, name=EndTime" })
+  @SpeakeasyMetadata({ data: "json, name=EndTime" })
   endTime?: Date;
 
-  @Metadata({ data: "json, name=InputArtifacts", elemType: shared.TrialComponentArtifact })
+  @SpeakeasyMetadata({ data: "json, name=InputArtifacts", elemType: TrialComponentArtifact })
   inputArtifacts?: Map<string, TrialComponentArtifact>;
 
-  @Metadata({ data: "json, name=MetadataProperties" })
+  @SpeakeasyMetadata({ data: "json, name=MetadataProperties" })
   metadataProperties?: MetadataProperties;
 
-  @Metadata({ data: "json, name=OutputArtifacts", elemType: shared.TrialComponentArtifact })
+  @SpeakeasyMetadata({ data: "json, name=OutputArtifacts", elemType: TrialComponentArtifact })
   outputArtifacts?: Map<string, TrialComponentArtifact>;
 
-  @Metadata({ data: "json, name=Parameters", elemType: shared.TrialComponentParameterValue })
+  @SpeakeasyMetadata({ data: "json, name=Parameters", elemType: TrialComponentParameterValue })
   parameters?: Map<string, TrialComponentParameterValue>;
 
-  @Metadata({ data: "json, name=StartTime" })
+  @SpeakeasyMetadata({ data: "json, name=StartTime" })
   startTime?: Date;
 
-  @Metadata({ data: "json, name=Status" })
+  @SpeakeasyMetadata({ data: "json, name=Status" })
   status?: TrialComponentStatus;
 
-  @Metadata({ data: "json, name=Tags", elemType: shared.Tag })
+  @SpeakeasyMetadata({ data: "json, name=Tags", elemType: Tag })
   tags?: Tag[];
 
-  @Metadata({ data: "json, name=TrialComponentName" })
+  @SpeakeasyMetadata({ data: "json, name=TrialComponentName" })
   trialComponentName: string;
 }

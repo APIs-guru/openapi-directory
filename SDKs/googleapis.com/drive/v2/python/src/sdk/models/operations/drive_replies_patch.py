@@ -1,13 +1,14 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DriveRepliesPatchPathParams:
-    comment_id: str = field(default=None, metadata={'path_param': { 'field_name': 'commentId', 'style': 'simple', 'explode': False }})
-    file_id: str = field(default=None, metadata={'path_param': { 'field_name': 'fileId', 'style': 'simple', 'explode': False }})
-    reply_id: str = field(default=None, metadata={'path_param': { 'field_name': 'replyId', 'style': 'simple', 'explode': False }})
+    comment_id: str = field(metadata={'path_param': { 'field_name': 'commentId', 'style': 'simple', 'explode': False }})
+    file_id: str = field(metadata={'path_param': { 'field_name': 'fileId', 'style': 'simple', 'explode': False }})
+    reply_id: str = field(metadata={'path_param': { 'field_name': 'replyId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -23,14 +24,14 @@ class DriveRepliesPatchQueryParams:
 
 @dataclass
 class DriveRepliesPatchSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DriveRepliesPatchSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -41,15 +42,15 @@ class DriveRepliesPatchSecurity:
 
 @dataclass
 class DriveRepliesPatchRequest:
-    path_params: DriveRepliesPatchPathParams = field(default=None)
-    query_params: DriveRepliesPatchQueryParams = field(default=None)
+    path_params: DriveRepliesPatchPathParams = field()
+    query_params: DriveRepliesPatchQueryParams = field()
+    security: DriveRepliesPatchSecurity = field()
     request: Optional[shared.CommentReply] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: DriveRepliesPatchSecurity = field(default=None)
     
 
 @dataclass
 class DriveRepliesPatchResponse:
+    content_type: str = field()
+    status_code: int = field()
     comment_reply: Optional[shared.CommentReply] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

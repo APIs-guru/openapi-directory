@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // MitigationActionIdentifier
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Information that identifies a mitigation action. This information is returned by ListMitigationActions.
 **/
 export class MitigationActionIdentifier extends SpeakeasyBase {
-  @Metadata({ data: "json, name=actionArn" })
+  @SpeakeasyMetadata({ data: "json, name=actionArn" })
   actionArn?: string;
 
-  @Metadata({ data: "json, name=actionName" })
+  @SpeakeasyMetadata({ data: "json, name=actionName" })
   actionName?: string;
 
-  @Metadata({ data: "json, name=creationDate" })
+  @SpeakeasyMetadata({ data: "json, name=creationDate" })
   creationDate?: Date;
 }

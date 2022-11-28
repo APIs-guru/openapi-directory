@@ -1,10 +1,7 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 export declare class GetemailinfoQueryParams extends SpeakeasyBase {
     email: string;
     license: string;
-}
-export declare class GetemailinfoRequest extends SpeakeasyBase {
-    queryParams: GetemailinfoQueryParams;
 }
 export declare class Getemailinfo200ApplicationJson extends SpeakeasyBase {
     code?: string;
@@ -19,6 +16,9 @@ export declare class Getemailinfo200ApplicationJson extends SpeakeasyBase {
     isOrganizational?: string;
     isVulgar?: string;
     response?: string;
+}
+export declare class GetemailinfoRequest extends SpeakeasyBase {
+    queryParams: GetemailinfoQueryParams;
 }
 export declare class GetemailinfoResponse extends SpeakeasyBase {
     contentType: string;

@@ -1,5 +1,7 @@
 package shared
 
+// AdmMessage
+// Specifies the settings for a one-time message that's sent directly to an endpoint through the ADM (Amazon Device Messaging) channel.
 type AdmMessage struct {
 	Action            *ActionEnum         `json:"Action,omitempty"`
 	Body              *string             `json:"Body,omitempty"`

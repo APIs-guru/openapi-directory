@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { LineItemFields } from "./lineitemfields";
+
 
 
 // LineItemGroup
@@ -8,9 +8,9 @@ import { LineItemFields } from "./lineitemfields";
  * A grouping of tables which contain LineItems, with each table identified by the table's <code>LineItemGroupIndex</code>.
 **/
 export class LineItemGroup extends SpeakeasyBase {
-  @Metadata({ data: "json, name=LineItemGroupIndex" })
+  @SpeakeasyMetadata({ data: "json, name=LineItemGroupIndex" })
   lineItemGroupIndex?: number;
 
-  @Metadata({ data: "json, name=LineItems", elemType: shared.LineItemFields })
+  @SpeakeasyMetadata({ data: "json, name=LineItems", elemType: LineItemFields })
   lineItems?: LineItemFields[];
 }

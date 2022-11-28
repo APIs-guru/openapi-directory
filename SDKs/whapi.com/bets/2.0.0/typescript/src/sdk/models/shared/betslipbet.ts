@@ -1,34 +1,34 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { FreeBetDetail } from "./freebetdetail";
 import { Betslipleg } from "./betslipleg";
 
 
+
 export class Betslipbet extends SpeakeasyBase {
-  @Metadata({ data: "json, name=betMultiplier" })
+  @SpeakeasyMetadata({ data: "json, name=betMultiplier" })
   betMultiplier?: number;
 
-  @Metadata({ data: "json, name=freeBets", elemType: shared.FreeBetDetail })
+  @SpeakeasyMetadata({ data: "json, name=freeBets", elemType: FreeBetDetail })
   freeBets?: FreeBetDetail[];
 
-  @Metadata({ data: "json, name=legs", elemType: shared.Betslipleg })
+  @SpeakeasyMetadata({ data: "json, name=legs", elemType: Betslipleg })
   legs: Betslipleg[];
 
-  @Metadata({ data: "json, name=maxStake" })
+  @SpeakeasyMetadata({ data: "json, name=maxStake" })
   maxStake?: number;
 
-  @Metadata({ data: "json, name=minStake" })
+  @SpeakeasyMetadata({ data: "json, name=minStake" })
   minStake?: number;
 
-  @Metadata({ data: "json, name=numLines" })
+  @SpeakeasyMetadata({ data: "json, name=numLines" })
   numLines?: number;
 
-  @Metadata({ data: "json, name=number" })
+  @SpeakeasyMetadata({ data: "json, name=number" })
   number: number;
 
-  @Metadata({ data: "json, name=typeCode" })
+  @SpeakeasyMetadata({ data: "json, name=typeCode" })
   typeCode: string;
 
-  @Metadata({ data: "json, name=typeName" })
+  @SpeakeasyMetadata({ data: "json, name=typeName" })
   typeName?: string;
 }

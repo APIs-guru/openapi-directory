@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CourseAlias } from "./coursealias";
+
 
 
 // ListCourseAliasesResponse
@@ -8,9 +8,9 @@ import { CourseAlias } from "./coursealias";
  * Response when listing course aliases.
 **/
 export class ListCourseAliasesResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=aliases", elemType: shared.CourseAlias })
+  @SpeakeasyMetadata({ data: "json, name=aliases", elemType: CourseAlias })
   aliases?: CourseAlias[];
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 }

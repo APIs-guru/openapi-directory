@@ -1,15 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ImagePipeline } from "./imagepipeline";
 
 
+
 export class ListImagePipelinesResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=imagePipelineList", elemType: shared.ImagePipeline })
+  @SpeakeasyMetadata({ data: "json, name=imagePipelineList", elemType: ImagePipeline })
   imagePipelineList?: ImagePipeline[];
 
-  @Metadata({ data: "json, name=nextToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=requestId" })
+  @SpeakeasyMetadata({ data: "json, name=requestId" })
   requestId?: string;
 }

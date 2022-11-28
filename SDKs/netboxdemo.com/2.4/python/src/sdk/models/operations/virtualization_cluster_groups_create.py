@@ -5,12 +5,12 @@ from sdk.models import shared
 
 @dataclass
 class VirtualizationClusterGroupsCreateRequest:
-    request: shared.ClusterGroup = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    request: shared.ClusterGroupInput = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class VirtualizationClusterGroupsCreateResponse:
+    content_type: str = field()
+    status_code: int = field()
     cluster_group: Optional[shared.ClusterGroup] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

@@ -28,15 +28,15 @@ type PatchDriverRequestBody struct {
 	Tokens    []interface{}                  `json:"tokens,omitempty"`
 }
 
-type PatchDriverRequest struct {
-	PathParams PatchDriverPathParams
-	Request    PatchDriverRequestBody `request:"mediaType=application/json"`
-}
-
 type PatchDriver200ApplicationJSON struct {
 	Message *string       `json:"message,omitempty"`
 	Ok      *bool         `json:"ok,omitempty"`
 	Result  []interface{} `json:"result,omitempty"`
+}
+
+type PatchDriverRequest struct {
+	PathParams PatchDriverPathParams
+	Request    PatchDriverRequestBody `request:"mediaType=application/json"`
 }
 
 type PatchDriverResponse struct {

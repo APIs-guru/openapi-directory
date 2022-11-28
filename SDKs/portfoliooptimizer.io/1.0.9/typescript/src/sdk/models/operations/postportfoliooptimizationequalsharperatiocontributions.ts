@@ -1,40 +1,41 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class PostPortfolioOptimizationEqualSharpeRatioContributionsRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=assets" })
+  @SpeakeasyMetadata({ data: "json, name=assets" })
   assets: number;
 
-  @Metadata({ data: "json, name=assetsCovarianceMatrix" })
+  @SpeakeasyMetadata({ data: "json, name=assetsCovarianceMatrix" })
   assetsCovarianceMatrix: number[][];
 
-  @Metadata({ data: "json, name=assetsReturns" })
+  @SpeakeasyMetadata({ data: "json, name=assetsReturns" })
   assetsReturns: number[];
 
-  @Metadata({ data: "json, name=riskFreeRate" })
+  @SpeakeasyMetadata({ data: "json, name=riskFreeRate" })
   riskFreeRate: number;
 }
 
 
-export class PostPortfolioOptimizationEqualSharpeRatioContributionsRequest extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/json" })
-  request: PostPortfolioOptimizationEqualSharpeRatioContributionsRequestBody;
-}
-
-
 export class PostPortfolioOptimizationEqualSharpeRatioContributions200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=assetsWeights" })
+  @SpeakeasyMetadata({ data: "json, name=assetsWeights" })
   assetsWeights: number[];
 }
 
 
+export class PostPortfolioOptimizationEqualSharpeRatioContributionsRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request: PostPortfolioOptimizationEqualSharpeRatioContributionsRequestBody;
+}
+
+
 export class PostPortfolioOptimizationEqualSharpeRatioContributionsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   postPortfolioOptimizationEqualSharpeRatioContributions200ApplicationJsonObject?: PostPortfolioOptimizationEqualSharpeRatioContributions200ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

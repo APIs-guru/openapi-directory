@@ -1,53 +1,54 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetAutomationV4ActionsAppIdDefinitionIdRevisionsGetPagePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=appId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=appId" })
   appId: number;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=definitionId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=definitionId" })
   definitionId: string;
 }
 
 
 export class GetAutomationV4ActionsAppIdDefinitionIdRevisionsGetPageQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=after" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=after" })
   after?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=limit" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=limit" })
   limit?: number;
 }
 
 
 export class GetAutomationV4ActionsAppIdDefinitionIdRevisionsGetPageSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=query" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=query" })
   developerHapikey: shared.SchemeDeveloperHapikey;
 }
 
 
 export class GetAutomationV4ActionsAppIdDefinitionIdRevisionsGetPageRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetAutomationV4ActionsAppIdDefinitionIdRevisionsGetPagePathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetAutomationV4ActionsAppIdDefinitionIdRevisionsGetPageQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: GetAutomationV4ActionsAppIdDefinitionIdRevisionsGetPageSecurity;
 }
 
 
 export class GetAutomationV4ActionsAppIdDefinitionIdRevisionsGetPageResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   collectionResponseActionRevisionForwardPaging?: shared.CollectionResponseActionRevisionForwardPaging;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

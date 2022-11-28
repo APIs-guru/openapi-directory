@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var GetSitesSiteIdSubsitesOutputFormatOutputFormatEnum;
 (function (GetSitesSiteIdSubsitesOutputFormatOutputFormatEnum) {
     GetSitesSiteIdSubsitesOutputFormatOutputFormatEnum["Json"] = "json";
@@ -39,11 +39,11 @@ var GetSitesSiteIdSubsitesOutputFormatPathParams = /** @class */ (function (_sup
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=outputFormat" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=outputFormat" }),
         __metadata("design:type", String)
     ], GetSitesSiteIdSubsitesOutputFormatPathParams.prototype, "outputFormat", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=siteID" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=siteID" }),
         __metadata("design:type", String)
     ], GetSitesSiteIdSubsitesOutputFormatPathParams.prototype, "siteId", void 0);
     return GetSitesSiteIdSubsitesOutputFormatPathParams;
@@ -64,19 +64,19 @@ var GetSitesSiteIdSubsitesOutputFormatQueryParams = /** @class */ (function (_su
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=brief" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=brief" }),
         __metadata("design:type", Boolean)
     ], GetSitesSiteIdSubsitesOutputFormatQueryParams.prototype, "brief", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=locationDescriptor" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=locationDescriptor" }),
         __metadata("design:type", String)
     ], GetSitesSiteIdSubsitesOutputFormatQueryParams.prototype, "locationDescriptor", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=outputSRS" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=outputSRS" }),
         __metadata("design:type", Number)
     ], GetSitesSiteIdSubsitesOutputFormatQueryParams.prototype, "outputSrs", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=setBack" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=setBack" }),
         __metadata("design:type", Number)
     ], GetSitesSiteIdSubsitesOutputFormatQueryParams.prototype, "setBack", void 0);
     return GetSitesSiteIdSubsitesOutputFormatQueryParams;
@@ -88,11 +88,11 @@ var GetSitesSiteIdSubsitesOutputFormatRequest = /** @class */ (function (_super)
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetSitesSiteIdSubsitesOutputFormatPathParams)
     ], GetSitesSiteIdSubsitesOutputFormatRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetSitesSiteIdSubsitesOutputFormatQueryParams)
     ], GetSitesSiteIdSubsitesOutputFormatRequest.prototype, "queryParams", void 0);
     return GetSitesSiteIdSubsitesOutputFormatRequest;
@@ -104,11 +104,11 @@ var GetSitesSiteIdSubsitesOutputFormatResponse = /** @class */ (function (_super
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetSitesSiteIdSubsitesOutputFormatResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetSitesSiteIdSubsitesOutputFormatResponse.prototype, "statusCode", void 0);
     return GetSitesSiteIdSubsitesOutputFormatResponse;

@@ -1,44 +1,45 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class SlackGetSlackGetQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=base64_message" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=base64_message" })
   base64Message?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=channel" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=channel" })
   channel: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=message" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=message" })
   message?: string;
 }
 
 
 export class SlackGetSlackGetHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=authorization" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=authorization" })
   authorization?: string;
 }
 
 
 export class SlackGetSlackGetRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: SlackGetSlackGetQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: SlackGetSlackGetHeaders;
 }
 
 
 export class SlackGetSlackGetResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   httpValidationError?: shared.HttpValidationError;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   slackGetSlackGet200ApplicationJsonAny?: any;
 }

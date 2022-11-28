@@ -13,17 +13,9 @@ type UpdateProductHeaders struct {
 	IfMatch *string `header:"style=simple,explode=false,name=If-Match"`
 }
 
-type UpdateProductSecurityOption1 struct {
-	ZettleAPIKey shared.SchemeZettleAPIKey `security:"scheme,type=apiKey,subtype=header"`
-}
-
-type UpdateProductSecurityOption2 struct {
-	ZettleOauth shared.SchemeZettleOauth `security:"scheme,type=oauth2"`
-}
-
 type UpdateProductSecurity struct {
-	Option1 *UpdateProductSecurityOption1 `security:"option"`
-	Option2 *UpdateProductSecurityOption2 `security:"option"`
+	ZettleAPIKey *shared.SchemeZettleAPIKey `security:"scheme,type=apiKey,subtype=header"`
+	ZettleOauth  *shared.SchemeZettleOauth  `security:"scheme,type=oauth2"`
 }
 
 type UpdateProductRequest struct {

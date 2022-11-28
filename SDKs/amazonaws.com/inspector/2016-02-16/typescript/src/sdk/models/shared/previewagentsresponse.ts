@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AgentPreview } from "./agentpreview";
 
 
+
 export class PreviewAgentsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=agentPreviews", elemType: shared.AgentPreview })
+  @SpeakeasyMetadata({ data: "json, name=agentPreviews", elemType: AgentPreview })
   agentPreviews: AgentPreview[];
 
-  @Metadata({ data: "json, name=nextToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextToken" })
   nextToken?: string;
 }

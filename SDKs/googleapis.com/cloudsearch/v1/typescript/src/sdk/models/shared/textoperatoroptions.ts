@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // TextOperatorOptions
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Used to provide a search operator for text properties. This is optional. Search operators let users restrict the query to specific fields relevant to the type of item being searched.
 **/
 export class TextOperatorOptions extends SpeakeasyBase {
-  @Metadata({ data: "json, name=exactMatchWithOperator" })
+  @SpeakeasyMetadata({ data: "json, name=exactMatchWithOperator" })
   exactMatchWithOperator?: boolean;
 
-  @Metadata({ data: "json, name=operatorName" })
+  @SpeakeasyMetadata({ data: "json, name=operatorName" })
   operatorName?: string;
 }

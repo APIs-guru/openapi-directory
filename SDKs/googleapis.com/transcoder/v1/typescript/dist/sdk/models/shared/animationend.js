@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // AnimationEnd
 /**
  * End previous overlay animation from the video. Without AnimationEnd, the overlay object will keep the state of previous animation until the end of the video.
@@ -33,7 +33,7 @@ var AnimationEnd = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=startTimeOffset" }),
+        SpeakeasyMetadata({ data: "json, name=startTimeOffset" }),
         __metadata("design:type", String)
     ], AnimationEnd.prototype, "startTimeOffset", void 0);
     return AnimationEnd;

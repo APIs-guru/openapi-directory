@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // JobPlacement
@@ -6,12 +7,25 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Dataproc job config.
 **/
 export class JobPlacement extends SpeakeasyBase {
-  @Metadata({ data: "json, name=clusterLabels" })
+  @SpeakeasyMetadata({ data: "json, name=clusterLabels" })
   clusterLabels?: Map<string, string>;
 
-  @Metadata({ data: "json, name=clusterName" })
+  @SpeakeasyMetadata({ data: "json, name=clusterName" })
   clusterName?: string;
 
-  @Metadata({ data: "json, name=clusterUuid" })
+  @SpeakeasyMetadata({ data: "json, name=clusterUuid" })
   clusterUuid?: string;
+}
+
+
+// JobPlacementInput
+/** 
+ * Dataproc job config.
+**/
+export class JobPlacementInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=clusterLabels" })
+  clusterLabels?: Map<string, string>;
+
+  @SpeakeasyMetadata({ data: "json, name=clusterName" })
+  clusterName?: string;
 }

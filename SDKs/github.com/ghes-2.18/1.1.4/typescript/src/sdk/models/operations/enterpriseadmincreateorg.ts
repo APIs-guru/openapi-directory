@@ -1,32 +1,33 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class EnterpriseAdminCreateOrgRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=admin" })
+  @SpeakeasyMetadata({ data: "json, name=admin" })
   admin: string;
 
-  @Metadata({ data: "json, name=login" })
+  @SpeakeasyMetadata({ data: "json, name=login" })
   login: string;
 
-  @Metadata({ data: "json, name=profile_name" })
+  @SpeakeasyMetadata({ data: "json, name=profile_name" })
   profileName?: string;
 }
 
 
 export class EnterpriseAdminCreateOrgRequest extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request?: EnterpriseAdminCreateOrgRequestBody;
 }
 
 
 export class EnterpriseAdminCreateOrgResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   organizationSimple?: shared.OrganizationSimple;
 }

@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ImageVersionStatusEnum } from "./imageversionstatusenum";
+
 
 
 // ImageVersion
@@ -7,24 +8,24 @@ import { ImageVersionStatusEnum } from "./imageversionstatusenum";
  * A version of a SageMaker <code>Image</code>. A version represents an existing container image.
 **/
 export class ImageVersion extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CreationTime" })
+  @SpeakeasyMetadata({ data: "json, name=CreationTime" })
   creationTime: Date;
 
-  @Metadata({ data: "json, name=FailureReason" })
+  @SpeakeasyMetadata({ data: "json, name=FailureReason" })
   failureReason?: string;
 
-  @Metadata({ data: "json, name=ImageArn" })
+  @SpeakeasyMetadata({ data: "json, name=ImageArn" })
   imageArn: string;
 
-  @Metadata({ data: "json, name=ImageVersionArn" })
+  @SpeakeasyMetadata({ data: "json, name=ImageVersionArn" })
   imageVersionArn: string;
 
-  @Metadata({ data: "json, name=ImageVersionStatus" })
+  @SpeakeasyMetadata({ data: "json, name=ImageVersionStatus" })
   imageVersionStatus: ImageVersionStatusEnum;
 
-  @Metadata({ data: "json, name=LastModifiedTime" })
+  @SpeakeasyMetadata({ data: "json, name=LastModifiedTime" })
   lastModifiedTime: Date;
 
-  @Metadata({ data: "json, name=Version" })
+  @SpeakeasyMetadata({ data: "json, name=Version" })
   version: number;
 }

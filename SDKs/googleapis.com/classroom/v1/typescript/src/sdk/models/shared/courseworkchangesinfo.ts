@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // CourseWorkChangesInfo
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Information about a `Feed` with a `feed_type` of `COURSE_WORK_CHANGES`.
 **/
 export class CourseWorkChangesInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=courseId" })
+  @SpeakeasyMetadata({ data: "json, name=courseId" })
   courseId?: string;
 }

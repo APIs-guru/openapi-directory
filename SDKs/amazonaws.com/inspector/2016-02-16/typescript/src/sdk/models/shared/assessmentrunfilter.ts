@@ -1,9 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TimestampRange } from "./timestamprange";
 import { DurationRange } from "./durationrange";
-import { TimestampRange } from "./timestamprange";
-import { TimestampRange } from "./timestamprange";
 import { AssessmentRunStateEnum } from "./assessmentrunstateenum";
+
 
 
 // AssessmentRunFilter
@@ -11,24 +10,24 @@ import { AssessmentRunStateEnum } from "./assessmentrunstateenum";
  * Used as the request parameter in the <a>ListAssessmentRuns</a> action.
 **/
 export class AssessmentRunFilter extends SpeakeasyBase {
-  @Metadata({ data: "json, name=completionTimeRange" })
+  @SpeakeasyMetadata({ data: "json, name=completionTimeRange" })
   completionTimeRange?: TimestampRange;
 
-  @Metadata({ data: "json, name=durationRange" })
+  @SpeakeasyMetadata({ data: "json, name=durationRange" })
   durationRange?: DurationRange;
 
-  @Metadata({ data: "json, name=namePattern" })
+  @SpeakeasyMetadata({ data: "json, name=namePattern" })
   namePattern?: string;
 
-  @Metadata({ data: "json, name=rulesPackageArns" })
+  @SpeakeasyMetadata({ data: "json, name=rulesPackageArns" })
   rulesPackageArns?: string[];
 
-  @Metadata({ data: "json, name=startTimeRange" })
+  @SpeakeasyMetadata({ data: "json, name=startTimeRange" })
   startTimeRange?: TimestampRange;
 
-  @Metadata({ data: "json, name=stateChangeTimeRange" })
+  @SpeakeasyMetadata({ data: "json, name=stateChangeTimeRange" })
   stateChangeTimeRange?: TimestampRange;
 
-  @Metadata({ data: "json, name=states" })
+  @SpeakeasyMetadata({ data: "json, name=states" })
   states?: AssessmentRunStateEnum[];
 }

@@ -1,5 +1,7 @@
 package shared
 
+// DockerImage
+// DockerImage represents a docker artifact. The following fields are returned as untyped metadata in the Version resource, using camelcase keys (i.e. metadata.imageSizeBytes): * imageSizeBytes * mediaType * buildTime
 type DockerImage struct {
 	BuildTime      *string  `json:"buildTime,omitempty"`
 	ImageSizeBytes *string  `json:"imageSizeBytes,omitempty"`

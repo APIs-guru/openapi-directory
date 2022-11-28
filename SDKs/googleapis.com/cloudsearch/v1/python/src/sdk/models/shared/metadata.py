@@ -1,22 +1,27 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import resultdisplaymetadata
-from . import namedproperty
-from . import person
-from . import source
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class Metadata:
-    create_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'createTime' }})
-    display_options: Optional[resultdisplaymetadata.ResultDisplayMetadata] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'displayOptions' }})
-    fields: Optional[List[namedproperty.NamedProperty]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'fields' }})
-    mime_type: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'mimeType' }})
-    object_type: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'objectType' }})
-    owner: Optional[person.Person] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'owner' }})
-    source: Optional[source.Source] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'source' }})
-    thumbnail_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'thumbnailUrl' }})
-    update_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'updateTime' }})
+    r"""Metadata
+    Metadata of a matched search result.
+    """
+    
+    create_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('createTime') }})
+    display_options: Optional[ResultDisplayMetadata] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('displayOptions') }})
+    fields: Optional[List[NamedProperty]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('fields') }})
+    mime_type: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('mimeType') }})
+    object_type: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('objectType') }})
+    owner: Optional[Person] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('owner') }})
+    source: Optional[Source] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('source') }})
+    thumbnail_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('thumbnailUrl') }})
+    update_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('updateTime') }})
     

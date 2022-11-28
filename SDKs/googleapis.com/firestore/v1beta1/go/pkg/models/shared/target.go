@@ -1,5 +1,7 @@
 package shared
 
+// Target
+// A specification of a set of documents to listen to.
 type Target struct {
 	Documents   *DocumentsTarget `json:"documents,omitempty"`
 	Once        *bool            `json:"once,omitempty"`

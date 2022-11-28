@@ -17,6 +17,8 @@ const (
 	CreateLineRequestLineCategoryEnumCurved   CreateLineRequestLineCategoryEnum = "CURVED"
 )
 
+// CreateLineRequest
+// Creates a line.
 type CreateLineRequest struct {
 	Category          *CreateLineRequestCategoryEnum     `json:"category,omitempty"`
 	ElementProperties *PageElementProperties             `json:"elementProperties,omitempty"`

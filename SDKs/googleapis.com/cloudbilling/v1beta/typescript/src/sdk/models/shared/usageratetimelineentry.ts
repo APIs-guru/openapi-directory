@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { EstimationTimePoint } from "./estimationtimepoint";
+
 
 
 // UsageRateTimelineEntry
@@ -7,9 +8,9 @@ import { EstimationTimePoint } from "./estimationtimepoint";
  * A usage rate timeline entry. Each entry specifies a constant usage rate during a time interval.
 **/
 export class UsageRateTimelineEntry extends SpeakeasyBase {
-  @Metadata({ data: "json, name=effectiveTime" })
+  @SpeakeasyMetadata({ data: "json, name=effectiveTime" })
   effectiveTime?: EstimationTimePoint;
 
-  @Metadata({ data: "json, name=usageRate" })
+  @SpeakeasyMetadata({ data: "json, name=usageRate" })
   usageRate?: number;
 }

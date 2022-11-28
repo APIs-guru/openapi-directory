@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ResourceTypeEnum } from "./resourcetypeenum";
 export declare class ListResourcesForWebAclRequest extends SpeakeasyBase {
     resourceType?: ResourceTypeEnum;

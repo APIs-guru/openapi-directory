@@ -1,5 +1,7 @@
 package shared
 
+// DeviceInfo
+// Signals associated with the device making the request.
 type DeviceInfo struct {
 	DeviceModelName         *string `json:"deviceModelName,omitempty"`
 	LanguageCode            *string `json:"languageCode,omitempty"`

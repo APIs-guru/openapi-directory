@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // IbmDb2Settings
 /**
  * Provides information that defines an IBM Db2 LUW endpoint.
@@ -33,43 +33,43 @@ var IbmDb2Settings = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=CurrentLsn" }),
+        SpeakeasyMetadata({ data: "json, name=CurrentLsn" }),
         __metadata("design:type", String)
     ], IbmDb2Settings.prototype, "currentLsn", void 0);
     __decorate([
-        Metadata({ data: "json, name=DatabaseName" }),
+        SpeakeasyMetadata({ data: "json, name=DatabaseName" }),
         __metadata("design:type", String)
     ], IbmDb2Settings.prototype, "databaseName", void 0);
     __decorate([
-        Metadata({ data: "json, name=MaxKBytesPerRead" }),
+        SpeakeasyMetadata({ data: "json, name=MaxKBytesPerRead" }),
         __metadata("design:type", Number)
     ], IbmDb2Settings.prototype, "maxKBytesPerRead", void 0);
     __decorate([
-        Metadata({ data: "json, name=Password" }),
+        SpeakeasyMetadata({ data: "json, name=Password" }),
         __metadata("design:type", String)
     ], IbmDb2Settings.prototype, "password", void 0);
     __decorate([
-        Metadata({ data: "json, name=Port" }),
+        SpeakeasyMetadata({ data: "json, name=Port" }),
         __metadata("design:type", Number)
     ], IbmDb2Settings.prototype, "port", void 0);
     __decorate([
-        Metadata({ data: "json, name=SecretsManagerAccessRoleArn" }),
+        SpeakeasyMetadata({ data: "json, name=SecretsManagerAccessRoleArn" }),
         __metadata("design:type", String)
     ], IbmDb2Settings.prototype, "secretsManagerAccessRoleArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=SecretsManagerSecretId" }),
+        SpeakeasyMetadata({ data: "json, name=SecretsManagerSecretId" }),
         __metadata("design:type", String)
     ], IbmDb2Settings.prototype, "secretsManagerSecretId", void 0);
     __decorate([
-        Metadata({ data: "json, name=ServerName" }),
+        SpeakeasyMetadata({ data: "json, name=ServerName" }),
         __metadata("design:type", String)
     ], IbmDb2Settings.prototype, "serverName", void 0);
     __decorate([
-        Metadata({ data: "json, name=SetDataCaptureChanges" }),
+        SpeakeasyMetadata({ data: "json, name=SetDataCaptureChanges" }),
         __metadata("design:type", Boolean)
     ], IbmDb2Settings.prototype, "setDataCaptureChanges", void 0);
     __decorate([
-        Metadata({ data: "json, name=Username" }),
+        SpeakeasyMetadata({ data: "json, name=Username" }),
         __metadata("design:type", String)
     ], IbmDb2Settings.prototype, "username", void 0);
     return IbmDb2Settings;

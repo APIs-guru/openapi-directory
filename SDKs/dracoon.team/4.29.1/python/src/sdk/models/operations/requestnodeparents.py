@@ -1,11 +1,11 @@
 from dataclasses import dataclass, field
-from typing import List,Optional
+from typing import Optional
 from sdk.models import shared
 
 
 @dataclass
 class RequestNodeParentsPathParams:
-    node_id: int = field(default=None, metadata={'path_param': { 'field_name': 'node_id', 'style': 'simple', 'explode': False }})
+    node_id: int = field(metadata={'path_param': { 'field_name': 'node_id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -15,14 +15,14 @@ class RequestNodeParentsHeaders:
 
 @dataclass
 class RequestNodeParentsRequest:
-    path_params: RequestNodeParentsPathParams = field(default=None)
-    headers: RequestNodeParentsHeaders = field(default=None)
+    headers: RequestNodeParentsHeaders = field()
+    path_params: RequestNodeParentsPathParams = field()
     
 
 @dataclass
 class RequestNodeParentsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error_response: Optional[shared.ErrorResponse] = field(default=None)
     node_parent_list: Optional[shared.NodeParentList] = field(default=None)
-    status_code: int = field(default=None)
     

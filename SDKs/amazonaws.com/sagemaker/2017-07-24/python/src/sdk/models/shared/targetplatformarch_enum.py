@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class TargetPlatformArchEnum(str, Enum):
     X86_64 = "X86_64"

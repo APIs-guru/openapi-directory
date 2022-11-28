@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class AssuredworkloadsOrganizationsLocationsWorkloadsViolationsGetPathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,20 +26,20 @@ class AssuredworkloadsOrganizationsLocationsWorkloadsViolationsGetQueryParams:
 
 @dataclass
 class AssuredworkloadsOrganizationsLocationsWorkloadsViolationsGetSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class AssuredworkloadsOrganizationsLocationsWorkloadsViolationsGetRequest:
-    path_params: AssuredworkloadsOrganizationsLocationsWorkloadsViolationsGetPathParams = field(default=None)
-    query_params: AssuredworkloadsOrganizationsLocationsWorkloadsViolationsGetQueryParams = field(default=None)
-    security: AssuredworkloadsOrganizationsLocationsWorkloadsViolationsGetSecurity = field(default=None)
+    path_params: AssuredworkloadsOrganizationsLocationsWorkloadsViolationsGetPathParams = field()
+    query_params: AssuredworkloadsOrganizationsLocationsWorkloadsViolationsGetQueryParams = field()
+    security: AssuredworkloadsOrganizationsLocationsWorkloadsViolationsGetSecurity = field()
     
 
 @dataclass
 class AssuredworkloadsOrganizationsLocationsWorkloadsViolationsGetResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_cloud_assuredworkloads_v1_violation: Optional[shared.GoogleCloudAssuredworkloadsV1Violation] = field(default=None)
-    status_code: int = field(default=None)
     

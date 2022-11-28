@@ -1,8 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PageInfo } from "./pageinfo";
 import { Review } from "./review";
 import { TokenPagination } from "./tokenpagination";
+
 
 
 // ReviewsListResponse
@@ -10,12 +10,12 @@ import { TokenPagination } from "./tokenpagination";
  * Response listing reviews.
 **/
 export class ReviewsListResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=pageInfo" })
+  @SpeakeasyMetadata({ data: "json, name=pageInfo" })
   pageInfo?: PageInfo;
 
-  @Metadata({ data: "json, name=reviews", elemType: shared.Review })
+  @SpeakeasyMetadata({ data: "json, name=reviews", elemType: Review })
   reviews?: Review[];
 
-  @Metadata({ data: "json, name=tokenPagination" })
+  @SpeakeasyMetadata({ data: "json, name=tokenPagination" })
   tokenPagination?: TokenPagination;
 }

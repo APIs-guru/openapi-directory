@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import googlecloudapigeev1customreport
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class GoogleCloudApigeeV1ListCustomReportsResponse:
-    qualifier: Optional[List[googlecloudapigeev1customreport.GoogleCloudApigeeV1CustomReport]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'qualifier' }})
+    r"""GoogleCloudApigeeV1ListCustomReportsResponse
+    This message encapsulates a list of custom report definitions
+    """
+    
+    qualifier: Optional[List[GoogleCloudApigeeV1CustomReport]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('qualifier') }})
     

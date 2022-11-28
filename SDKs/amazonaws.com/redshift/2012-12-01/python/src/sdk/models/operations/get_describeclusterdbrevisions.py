@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetDescribeClusterDbRevisionsActionEnum(str, Enum):
     DESCRIBE_CLUSTER_DB_REVISIONS = "DescribeClusterDbRevisions"
@@ -10,11 +14,11 @@ class GetDescribeClusterDbRevisionsVersionEnum(str, Enum):
 
 @dataclass
 class GetDescribeClusterDbRevisionsQueryParams:
-    action: GetDescribeClusterDbRevisionsActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetDescribeClusterDbRevisionsActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: GetDescribeClusterDbRevisionsVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     cluster_identifier: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'ClusterIdentifier', 'style': 'form', 'explode': True }})
     marker: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'Marker', 'style': 'form', 'explode': True }})
     max_records: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'MaxRecords', 'style': 'form', 'explode': True }})
-    version: GetDescribeClusterDbRevisionsVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -30,13 +34,13 @@ class GetDescribeClusterDbRevisionsHeaders:
 
 @dataclass
 class GetDescribeClusterDbRevisionsRequest:
-    query_params: GetDescribeClusterDbRevisionsQueryParams = field(default=None)
-    headers: GetDescribeClusterDbRevisionsHeaders = field(default=None)
+    headers: GetDescribeClusterDbRevisionsHeaders = field()
+    query_params: GetDescribeClusterDbRevisionsQueryParams = field()
     
 
 @dataclass
 class GetDescribeClusterDbRevisionsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

@@ -5,42 +5,27 @@ from sdk.models import shared
 
 @dataclass
 class GetRepositoriesWorkspaceRepoSlugMilestonesPathParams:
-    repo_slug: str = field(default=None, metadata={'path_param': { 'field_name': 'repo_slug', 'style': 'simple', 'explode': False }})
-    workspace: str = field(default=None, metadata={'path_param': { 'field_name': 'workspace', 'style': 'simple', 'explode': False }})
-    
-
-@dataclass
-class GetRepositoriesWorkspaceRepoSlugMilestonesSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    
-
-@dataclass
-class GetRepositoriesWorkspaceRepoSlugMilestonesSecurityOption2:
-    basic: shared.SchemeBasic = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'basic' }})
-    
-
-@dataclass
-class GetRepositoriesWorkspaceRepoSlugMilestonesSecurityOption3:
-    api_key: shared.SchemeAPIKey = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    repo_slug: str = field(metadata={'path_param': { 'field_name': 'repo_slug', 'style': 'simple', 'explode': False }})
+    workspace: str = field(metadata={'path_param': { 'field_name': 'workspace', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetRepositoriesWorkspaceRepoSlugMilestonesSecurity:
-    option1: Optional[GetRepositoriesWorkspaceRepoSlugMilestonesSecurityOption1] = field(default=None, metadata={'security': { 'option': True }})
-    option2: Optional[GetRepositoriesWorkspaceRepoSlugMilestonesSecurityOption2] = field(default=None, metadata={'security': { 'option': True }})
-    option3: Optional[GetRepositoriesWorkspaceRepoSlugMilestonesSecurityOption3] = field(default=None, metadata={'security': { 'option': True }})
+    api_key: Optional[shared.SchemeAPIKey] = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    basic: Optional[shared.SchemeBasic] = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'basic' }})
+    oauth2: Optional[shared.SchemeOauth2] = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class GetRepositoriesWorkspaceRepoSlugMilestonesRequest:
-    path_params: GetRepositoriesWorkspaceRepoSlugMilestonesPathParams = field(default=None)
-    security: GetRepositoriesWorkspaceRepoSlugMilestonesSecurity = field(default=None)
+    path_params: GetRepositoriesWorkspaceRepoSlugMilestonesPathParams = field()
+    security: GetRepositoriesWorkspaceRepoSlugMilestonesSecurity = field()
     
 
 @dataclass
 class GetRepositoriesWorkspaceRepoSlugMilestonesResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error: Optional[dict[str, Any]] = field(default=None)
     paginated_milestones: Optional[shared.PaginatedMilestones] = field(default=None)
     

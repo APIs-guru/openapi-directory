@@ -1,14 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { OverrideStatusEnum } from "./overridestatusenum";
 
 
+
 export class OverridePullRequestApprovalRulesInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=overrideStatus" })
+  @SpeakeasyMetadata({ data: "json, name=overrideStatus" })
   overrideStatus: OverrideStatusEnum;
 
-  @Metadata({ data: "json, name=pullRequestId" })
+  @SpeakeasyMetadata({ data: "json, name=pullRequestId" })
   pullRequestId: string;
 
-  @Metadata({ data: "json, name=revisionId" })
+  @SpeakeasyMetadata({ data: "json, name=revisionId" })
   revisionId: string;
 }

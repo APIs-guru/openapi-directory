@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 class GetModifyTrafficMirrorFilterNetworkServicesActionEnum(str, Enum):
@@ -11,12 +15,12 @@ class GetModifyTrafficMirrorFilterNetworkServicesVersionEnum(str, Enum):
 
 @dataclass
 class GetModifyTrafficMirrorFilterNetworkServicesQueryParams:
-    action: GetModifyTrafficMirrorFilterNetworkServicesActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetModifyTrafficMirrorFilterNetworkServicesActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    traffic_mirror_filter_id: str = field(metadata={'query_param': { 'field_name': 'TrafficMirrorFilterId', 'style': 'form', 'explode': True }})
+    version: GetModifyTrafficMirrorFilterNetworkServicesVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     add_network_service: Optional[List[shared.TrafficMirrorNetworkServiceEnum]] = field(default=None, metadata={'query_param': { 'field_name': 'AddNetworkService', 'style': 'form', 'explode': True }})
     dry_run: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'DryRun', 'style': 'form', 'explode': True }})
     remove_network_service: Optional[List[shared.TrafficMirrorNetworkServiceEnum]] = field(default=None, metadata={'query_param': { 'field_name': 'RemoveNetworkService', 'style': 'form', 'explode': True }})
-    traffic_mirror_filter_id: str = field(default=None, metadata={'query_param': { 'field_name': 'TrafficMirrorFilterId', 'style': 'form', 'explode': True }})
-    version: GetModifyTrafficMirrorFilterNetworkServicesVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -32,13 +36,13 @@ class GetModifyTrafficMirrorFilterNetworkServicesHeaders:
 
 @dataclass
 class GetModifyTrafficMirrorFilterNetworkServicesRequest:
-    query_params: GetModifyTrafficMirrorFilterNetworkServicesQueryParams = field(default=None)
-    headers: GetModifyTrafficMirrorFilterNetworkServicesHeaders = field(default=None)
+    headers: GetModifyTrafficMirrorFilterNetworkServicesHeaders = field()
+    query_params: GetModifyTrafficMirrorFilterNetworkServicesQueryParams = field()
     
 
 @dataclass
 class GetModifyTrafficMirrorFilterNetworkServicesResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

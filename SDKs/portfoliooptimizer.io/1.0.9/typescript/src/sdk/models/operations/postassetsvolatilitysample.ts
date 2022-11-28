@@ -1,43 +1,44 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class PostAssetsVolatilitySampleRequestBodyAssets extends SpeakeasyBase {
-  @Metadata({ data: "json, name=assetReturns" })
+  @SpeakeasyMetadata({ data: "json, name=assetReturns" })
   assetReturns: number[];
 }
 
 
 export class PostAssetsVolatilitySampleRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=assets", elemType: operations.PostAssetsVolatilitySampleRequestBodyAssets })
+  @SpeakeasyMetadata({ data: "json, name=assets", elemType: PostAssetsVolatilitySampleRequestBodyAssets })
   assets: PostAssetsVolatilitySampleRequestBodyAssets[];
 }
 
 
-export class PostAssetsVolatilitySampleRequest extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/json" })
-  request: PostAssetsVolatilitySampleRequestBody;
-}
-
-
 export class PostAssetsVolatilitySample200ApplicationJsonAssets extends SpeakeasyBase {
-  @Metadata({ data: "json, name=assetVolatility" })
+  @SpeakeasyMetadata({ data: "json, name=assetVolatility" })
   assetVolatility: number;
 }
 
 
 export class PostAssetsVolatilitySample200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=assets", elemType: operations.PostAssetsVolatilitySample200ApplicationJsonAssets })
+  @SpeakeasyMetadata({ data: "json, name=assets", elemType: PostAssetsVolatilitySample200ApplicationJsonAssets })
   assets: PostAssetsVolatilitySample200ApplicationJsonAssets[];
 }
 
 
+export class PostAssetsVolatilitySampleRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request: PostAssetsVolatilitySampleRequestBody;
+}
+
+
 export class PostAssetsVolatilitySampleResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   postAssetsVolatilitySample200ApplicationJsonObject?: PostAssetsVolatilitySample200ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

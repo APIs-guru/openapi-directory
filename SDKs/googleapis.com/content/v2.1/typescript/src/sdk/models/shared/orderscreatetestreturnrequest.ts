@@ -1,9 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { OrdersCustomBatchRequestEntryCreateTestReturnReturnItem } from "./orderscustombatchrequestentrycreatetestreturnreturnitem";
 
 
+
 export class OrdersCreateTestReturnRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=items", elemType: shared.OrdersCustomBatchRequestEntryCreateTestReturnReturnItem })
+  @SpeakeasyMetadata({ data: "json, name=items", elemType: OrdersCustomBatchRequestEntryCreateTestReturnReturnItem })
   items?: OrdersCustomBatchRequestEntryCreateTestReturnReturnItem[];
 }

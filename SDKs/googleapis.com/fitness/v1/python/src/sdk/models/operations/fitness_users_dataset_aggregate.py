@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class FitnessUsersDatasetAggregatePathParams:
-    user_id: str = field(default=None, metadata={'path_param': { 'field_name': 'userId', 'style': 'simple', 'explode': False }})
+    user_id: str = field(metadata={'path_param': { 'field_name': 'userId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,147 +26,139 @@ class FitnessUsersDatasetAggregateQueryParams:
 
 @dataclass
 class FitnessUsersDatasetAggregateSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class FitnessUsersDatasetAggregateSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class FitnessUsersDatasetAggregateSecurityOption3:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class FitnessUsersDatasetAggregateSecurityOption4:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class FitnessUsersDatasetAggregateSecurityOption5:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class FitnessUsersDatasetAggregateSecurityOption6:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class FitnessUsersDatasetAggregateSecurityOption7:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class FitnessUsersDatasetAggregateSecurityOption8:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class FitnessUsersDatasetAggregateSecurityOption9:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class FitnessUsersDatasetAggregateSecurityOption10:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class FitnessUsersDatasetAggregateSecurityOption11:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class FitnessUsersDatasetAggregateSecurityOption12:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class FitnessUsersDatasetAggregateSecurityOption13:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class FitnessUsersDatasetAggregateSecurityOption14:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class FitnessUsersDatasetAggregateSecurityOption15:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class FitnessUsersDatasetAggregateSecurityOption16:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class FitnessUsersDatasetAggregateSecurityOption17:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class FitnessUsersDatasetAggregateSecurityOption18:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class FitnessUsersDatasetAggregateSecurityOption19:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class FitnessUsersDatasetAggregateSecurityOption20:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class FitnessUsersDatasetAggregateSecurityOption21:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class FitnessUsersDatasetAggregateSecurityOption22:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class FitnessUsersDatasetAggregateSecurity:
     option1: Optional[FitnessUsersDatasetAggregateSecurityOption1] = field(default=None, metadata={'security': { 'option': True }})
-    option2: Optional[FitnessUsersDatasetAggregateSecurityOption2] = field(default=None, metadata={'security': { 'option': True }})
-    option3: Optional[FitnessUsersDatasetAggregateSecurityOption3] = field(default=None, metadata={'security': { 'option': True }})
-    option4: Optional[FitnessUsersDatasetAggregateSecurityOption4] = field(default=None, metadata={'security': { 'option': True }})
-    option5: Optional[FitnessUsersDatasetAggregateSecurityOption5] = field(default=None, metadata={'security': { 'option': True }})
-    option6: Optional[FitnessUsersDatasetAggregateSecurityOption6] = field(default=None, metadata={'security': { 'option': True }})
-    option7: Optional[FitnessUsersDatasetAggregateSecurityOption7] = field(default=None, metadata={'security': { 'option': True }})
-    option8: Optional[FitnessUsersDatasetAggregateSecurityOption8] = field(default=None, metadata={'security': { 'option': True }})
-    option9: Optional[FitnessUsersDatasetAggregateSecurityOption9] = field(default=None, metadata={'security': { 'option': True }})
     option10: Optional[FitnessUsersDatasetAggregateSecurityOption10] = field(default=None, metadata={'security': { 'option': True }})
     option11: Optional[FitnessUsersDatasetAggregateSecurityOption11] = field(default=None, metadata={'security': { 'option': True }})
     option12: Optional[FitnessUsersDatasetAggregateSecurityOption12] = field(default=None, metadata={'security': { 'option': True }})
@@ -176,22 +169,30 @@ class FitnessUsersDatasetAggregateSecurity:
     option17: Optional[FitnessUsersDatasetAggregateSecurityOption17] = field(default=None, metadata={'security': { 'option': True }})
     option18: Optional[FitnessUsersDatasetAggregateSecurityOption18] = field(default=None, metadata={'security': { 'option': True }})
     option19: Optional[FitnessUsersDatasetAggregateSecurityOption19] = field(default=None, metadata={'security': { 'option': True }})
+    option2: Optional[FitnessUsersDatasetAggregateSecurityOption2] = field(default=None, metadata={'security': { 'option': True }})
     option20: Optional[FitnessUsersDatasetAggregateSecurityOption20] = field(default=None, metadata={'security': { 'option': True }})
     option21: Optional[FitnessUsersDatasetAggregateSecurityOption21] = field(default=None, metadata={'security': { 'option': True }})
     option22: Optional[FitnessUsersDatasetAggregateSecurityOption22] = field(default=None, metadata={'security': { 'option': True }})
+    option3: Optional[FitnessUsersDatasetAggregateSecurityOption3] = field(default=None, metadata={'security': { 'option': True }})
+    option4: Optional[FitnessUsersDatasetAggregateSecurityOption4] = field(default=None, metadata={'security': { 'option': True }})
+    option5: Optional[FitnessUsersDatasetAggregateSecurityOption5] = field(default=None, metadata={'security': { 'option': True }})
+    option6: Optional[FitnessUsersDatasetAggregateSecurityOption6] = field(default=None, metadata={'security': { 'option': True }})
+    option7: Optional[FitnessUsersDatasetAggregateSecurityOption7] = field(default=None, metadata={'security': { 'option': True }})
+    option8: Optional[FitnessUsersDatasetAggregateSecurityOption8] = field(default=None, metadata={'security': { 'option': True }})
+    option9: Optional[FitnessUsersDatasetAggregateSecurityOption9] = field(default=None, metadata={'security': { 'option': True }})
     
 
 @dataclass
 class FitnessUsersDatasetAggregateRequest:
-    path_params: FitnessUsersDatasetAggregatePathParams = field(default=None)
-    query_params: FitnessUsersDatasetAggregateQueryParams = field(default=None)
+    path_params: FitnessUsersDatasetAggregatePathParams = field()
+    query_params: FitnessUsersDatasetAggregateQueryParams = field()
+    security: FitnessUsersDatasetAggregateSecurity = field()
     request: Optional[shared.AggregateRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: FitnessUsersDatasetAggregateSecurity = field(default=None)
     
 
 @dataclass
 class FitnessUsersDatasetAggregateResponse:
+    content_type: str = field()
+    status_code: int = field()
     aggregate_response: Optional[shared.AggregateResponse] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

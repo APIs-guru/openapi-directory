@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ExecutionMetrics extends SpeakeasyBase {
-  @Metadata({ data: "json, name=completed" })
+  @SpeakeasyMetadata({ data: "json, name=completed" })
   completed?: Date;
 
-  @Metadata({ data: "json, name=duration" })
+  @SpeakeasyMetadata({ data: "json, name=duration" })
   duration?: number;
 
-  @Metadata({ data: "json, name=received" })
+  @SpeakeasyMetadata({ data: "json, name=received" })
   received?: Date;
 }

@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { Action } from "./action";
 import { ChatChannel } from "./chatchannel";
 import { IncidentTemplate } from "./incidenttemplate";
 var GetResponsePlanOutput = /** @class */ (function (_super) {
@@ -32,31 +32,31 @@ var GetResponsePlanOutput = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=actions", elemType: shared.Action }),
+        SpeakeasyMetadata({ data: "json, name=actions", elemType: Action }),
         __metadata("design:type", Array)
     ], GetResponsePlanOutput.prototype, "actions", void 0);
     __decorate([
-        Metadata({ data: "json, name=arn" }),
+        SpeakeasyMetadata({ data: "json, name=arn" }),
         __metadata("design:type", String)
     ], GetResponsePlanOutput.prototype, "arn", void 0);
     __decorate([
-        Metadata({ data: "json, name=chatChannel" }),
+        SpeakeasyMetadata({ data: "json, name=chatChannel" }),
         __metadata("design:type", ChatChannel)
     ], GetResponsePlanOutput.prototype, "chatChannel", void 0);
     __decorate([
-        Metadata({ data: "json, name=displayName" }),
+        SpeakeasyMetadata({ data: "json, name=displayName" }),
         __metadata("design:type", String)
     ], GetResponsePlanOutput.prototype, "displayName", void 0);
     __decorate([
-        Metadata({ data: "json, name=engagements" }),
+        SpeakeasyMetadata({ data: "json, name=engagements" }),
         __metadata("design:type", Array)
     ], GetResponsePlanOutput.prototype, "engagements", void 0);
     __decorate([
-        Metadata({ data: "json, name=incidentTemplate" }),
+        SpeakeasyMetadata({ data: "json, name=incidentTemplate" }),
         __metadata("design:type", IncidentTemplate)
     ], GetResponsePlanOutput.prototype, "incidentTemplate", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], GetResponsePlanOutput.prototype, "name", void 0);
     return GetResponsePlanOutput;

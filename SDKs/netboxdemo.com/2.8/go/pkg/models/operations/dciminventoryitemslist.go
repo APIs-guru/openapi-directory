@@ -68,15 +68,15 @@ type DcimInventoryItemsListQueryParams struct {
 	TagN            *string `queryParam:"style=form,explode=true,name=tag__n"`
 }
 
-type DcimInventoryItemsListRequest struct {
-	QueryParams DcimInventoryItemsListQueryParams
-}
-
 type DcimInventoryItemsList200ApplicationJSON struct {
 	Count    int64                  `json:"count"`
 	Next     *string                `json:"next,omitempty"`
 	Previous *string                `json:"previous,omitempty"`
 	Results  []shared.InventoryItem `json:"results"`
+}
+
+type DcimInventoryItemsListRequest struct {
+	QueryParams DcimInventoryItemsListQueryParams
 }
 
 type DcimInventoryItemsListResponse struct {

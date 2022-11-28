@@ -4,7 +4,7 @@ from typing import Any,List,Optional
 
 @dataclass
 class GetOrganizationWebhooksLogsPathParams:
-    organization_id: str = field(default=None, metadata={'path_param': { 'field_name': 'organizationId', 'style': 'simple', 'explode': False }})
+    organization_id: str = field(metadata={'path_param': { 'field_name': 'organizationId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -20,14 +20,14 @@ class GetOrganizationWebhooksLogsQueryParams:
 
 @dataclass
 class GetOrganizationWebhooksLogsRequest:
-    path_params: GetOrganizationWebhooksLogsPathParams = field(default=None)
-    query_params: GetOrganizationWebhooksLogsQueryParams = field(default=None)
+    path_params: GetOrganizationWebhooksLogsPathParams = field()
+    query_params: GetOrganizationWebhooksLogsQueryParams = field()
     
 
 @dataclass
 class GetOrganizationWebhooksLogsResponse:
-    content_type: str = field(default=None)
-    headers: dict[str, List[str]] = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    headers: dict[str, List[str]] = field()
+    status_code: int = field()
     get_organization_webhooks_logs_200_application_json_object: Optional[dict[str, Any]] = field(default=None)
     

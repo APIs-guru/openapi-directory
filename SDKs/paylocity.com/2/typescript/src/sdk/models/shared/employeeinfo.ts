@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // EmployeeInfo
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The employee info model
 **/
 export class EmployeeInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=employeeId" })
+  @SpeakeasyMetadata({ data: "json, name=employeeId" })
   employeeId?: string;
 
-  @Metadata({ data: "json, name=statusCode" })
+  @SpeakeasyMetadata({ data: "json, name=statusCode" })
   statusCode?: string;
 
-  @Metadata({ data: "json, name=statusTypeCode" })
+  @SpeakeasyMetadata({ data: "json, name=statusTypeCode" })
   statusTypeCode?: string;
 }

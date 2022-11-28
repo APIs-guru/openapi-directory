@@ -128,15 +128,15 @@ type DcimDevicesListQueryParams struct {
 	VirtualChassisMember *string `queryParam:"style=form,explode=true,name=virtual_chassis_member"`
 }
 
-type DcimDevicesListRequest struct {
-	QueryParams DcimDevicesListQueryParams
-}
-
 type DcimDevicesList200ApplicationJSON struct {
 	Count    int64                            `json:"count"`
 	Next     *string                          `json:"next,omitempty"`
 	Previous *string                          `json:"previous,omitempty"`
 	Results  []shared.DeviceWithConfigContext `json:"results"`
+}
+
+type DcimDevicesListRequest struct {
+	QueryParams DcimDevicesListQueryParams
 }
 
 type DcimDevicesListResponse struct {

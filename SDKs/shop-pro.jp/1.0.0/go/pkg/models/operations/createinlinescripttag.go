@@ -32,11 +32,6 @@ type CreateInlineScriptTagSecurity struct {
 	OAuth2 shared.SchemeOAuth2 `security:"scheme,type=oauth2"`
 }
 
-type CreateInlineScriptTagRequest struct {
-	Request  *CreateInlineScriptTagRequestBody `request:"mediaType=application/json"`
-	Security CreateInlineScriptTagSecurity
-}
-
 type CreateInlineScriptTag201ApplicationJSONInlineScriptTagDisplayScopeEnum string
 
 const (
@@ -64,6 +59,11 @@ type CreateInlineScriptTag201ApplicationJSONInlineScriptTag struct {
 
 type CreateInlineScriptTag201ApplicationJSON struct {
 	InlineScriptTag *CreateInlineScriptTag201ApplicationJSONInlineScriptTag `json:"inline_script_tag,omitempty"`
+}
+
+type CreateInlineScriptTagRequest struct {
+	Request  *CreateInlineScriptTagRequestBody `request:"mediaType=application/json"`
+	Security CreateInlineScriptTagSecurity
 }
 
 type CreateInlineScriptTagResponse struct {

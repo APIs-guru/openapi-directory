@@ -1,13 +1,13 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BatchStopJobRunError } from "./batchstopjobrunerror";
 import { BatchStopJobRunSuccessfulSubmission } from "./batchstopjobrunsuccessfulsubmission";
 
 
+
 export class BatchStopJobRunResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Errors", elemType: shared.BatchStopJobRunError })
+  @SpeakeasyMetadata({ data: "json, name=Errors", elemType: BatchStopJobRunError })
   errors?: BatchStopJobRunError[];
 
-  @Metadata({ data: "json, name=SuccessfulSubmissions", elemType: shared.BatchStopJobRunSuccessfulSubmission })
+  @SpeakeasyMetadata({ data: "json, name=SuccessfulSubmissions", elemType: BatchStopJobRunSuccessfulSubmission })
   successfulSubmissions?: BatchStopJobRunSuccessfulSubmission[];
 }

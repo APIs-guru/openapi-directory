@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class MemcacheProjectsLocationsInstancesListPathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -29,20 +30,20 @@ class MemcacheProjectsLocationsInstancesListQueryParams:
 
 @dataclass
 class MemcacheProjectsLocationsInstancesListSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class MemcacheProjectsLocationsInstancesListRequest:
-    path_params: MemcacheProjectsLocationsInstancesListPathParams = field(default=None)
-    query_params: MemcacheProjectsLocationsInstancesListQueryParams = field(default=None)
-    security: MemcacheProjectsLocationsInstancesListSecurity = field(default=None)
+    path_params: MemcacheProjectsLocationsInstancesListPathParams = field()
+    query_params: MemcacheProjectsLocationsInstancesListQueryParams = field()
+    security: MemcacheProjectsLocationsInstancesListSecurity = field()
     
 
 @dataclass
 class MemcacheProjectsLocationsInstancesListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     list_instances_response: Optional[shared.ListInstancesResponse] = field(default=None)
-    status_code: int = field(default=None)
     

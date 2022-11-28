@@ -29,11 +29,6 @@ type IlpmtSecurity struct {
 	ClientID shared.SchemeClientID `security:"scheme,type=apiKey,subtype=header"`
 }
 
-type IlpmtRequest struct {
-	Request  *IlpmtRequestBody `request:"mediaType=application/json"`
-	Security IlpmtSecurity
-}
-
 type Ilpmt400ApplicationJSONErrorEnum string
 
 const (
@@ -163,6 +158,11 @@ const (
 type Ilpmt504ApplicationJSON struct {
 	Error            *Ilpmt504ApplicationJSONErrorEnum            `json:"error,omitempty"`
 	ErrorDescription *Ilpmt504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
+}
+
+type IlpmtRequest struct {
+	Request  *IlpmtRequestBody `request:"mediaType=application/json"`
+	Security IlpmtSecurity
 }
 
 type IlpmtResponse struct {

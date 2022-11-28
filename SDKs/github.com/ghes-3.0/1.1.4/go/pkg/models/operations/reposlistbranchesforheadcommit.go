@@ -10,13 +10,13 @@ type ReposListBranchesForHeadCommitPathParams struct {
 	Repo      string `pathParam:"style=simple,explode=false,name=repo"`
 }
 
-type ReposListBranchesForHeadCommitRequest struct {
-	PathParams ReposListBranchesForHeadCommitPathParams
-}
-
 type ReposListBranchesForHeadCommit415ApplicationJSON struct {
 	DocumentationURL string `json:"documentation_url"`
 	Message          string `json:"message"`
+}
+
+type ReposListBranchesForHeadCommitRequest struct {
+	PathParams ReposListBranchesForHeadCommitPathParams
 }
 
 type ReposListBranchesForHeadCommitResponse struct {

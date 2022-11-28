@@ -8,6 +8,8 @@ const (
 	VMResourceBasedCudPlanEnumThirtySixMonth            VMResourceBasedCudPlanEnum = "THIRTY_SIX_MONTH"
 )
 
+// VMResourceBasedCud
+// Specifies a resource-based committed use discount (CUD).
 type VMResourceBasedCud struct {
 	GuestAccelerator *GuestAccelerator           `json:"guestAccelerator,omitempty"`
 	MachineSeries    *string                     `json:"machineSeries,omitempty"`

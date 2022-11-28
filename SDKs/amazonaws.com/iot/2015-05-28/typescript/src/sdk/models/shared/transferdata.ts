@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // TransferData
@@ -6,18 +7,18 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Data used to transfer a certificate to an Amazon Web Services account.
 **/
 export class TransferData extends SpeakeasyBase {
-  @Metadata({ data: "json, name=acceptDate" })
+  @SpeakeasyMetadata({ data: "json, name=acceptDate" })
   acceptDate?: Date;
 
-  @Metadata({ data: "json, name=rejectDate" })
+  @SpeakeasyMetadata({ data: "json, name=rejectDate" })
   rejectDate?: Date;
 
-  @Metadata({ data: "json, name=rejectReason" })
+  @SpeakeasyMetadata({ data: "json, name=rejectReason" })
   rejectReason?: string;
 
-  @Metadata({ data: "json, name=transferDate" })
+  @SpeakeasyMetadata({ data: "json, name=transferDate" })
   transferDate?: Date;
 
-  @Metadata({ data: "json, name=transferMessage" })
+  @SpeakeasyMetadata({ data: "json, name=transferMessage" })
   transferMessage?: string;
 }

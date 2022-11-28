@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BidPercentages } from "./bidpercentages";
+
 
 
 // Ad
@@ -8,9 +8,9 @@ import { BidPercentages } from "./bidpercentages";
  * A complex type that contains recommendations and information on how to configure Promoted Listings ad campaigns.
 **/
 export class Ad extends SpeakeasyBase {
-  @Metadata({ data: "json, name=bidPercentages", elemType: shared.BidPercentages })
+  @SpeakeasyMetadata({ data: "json, name=bidPercentages", elemType: BidPercentages })
   bidPercentages?: BidPercentages[];
 
-  @Metadata({ data: "json, name=promoteWithAd" })
+  @SpeakeasyMetadata({ data: "json, name=promoteWithAd" })
   promoteWithAd?: string;
 }

@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class AppLaunchStatusEnum(str, Enum):
     READY_FOR_CONFIGURATION = "READY_FOR_CONFIGURATION"

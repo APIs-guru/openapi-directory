@@ -1,10 +1,11 @@
 from dataclasses import dataclass, field
 from typing import Any,Optional
+from sdk.models import shared
 
 
 @dataclass
 class GetLikesPathParams:
-    item_id: str = field(default=None, metadata={'path_param': { 'field_name': 'itemId', 'style': 'simple', 'explode': False }})
+    item_id: str = field(metadata={'path_param': { 'field_name': 'itemId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -15,20 +16,20 @@ class GetLikesQueryParams:
 
 @dataclass
 class GetLikesSecurity:
-    oauth: shared.SchemeOauth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth: shared.SchemeOauth = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class GetLikesRequest:
-    path_params: GetLikesPathParams = field(default=None)
-    query_params: GetLikesQueryParams = field(default=None)
-    security: GetLikesSecurity = field(default=None)
+    path_params: GetLikesPathParams = field()
+    query_params: GetLikesQueryParams = field()
+    security: GetLikesSecurity = field()
     
 
 @dataclass
 class GetLikesResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     participants_like_result: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

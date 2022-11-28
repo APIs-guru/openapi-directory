@@ -1,5 +1,7 @@
 package shared
 
+// SybaseSettings
+// Provides information that defines a SAP ASE endpoint.
 type SybaseSettings struct {
 	DatabaseName                *string `json:"DatabaseName,omitempty"`
 	Password                    *string `json:"Password,omitempty"`

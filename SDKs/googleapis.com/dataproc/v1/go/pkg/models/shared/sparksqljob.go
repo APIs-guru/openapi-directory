@@ -1,5 +1,7 @@
 package shared
 
+// SparkSQLJob
+// A Dataproc job for running Apache Spark SQL (https://spark.apache.org/sql/) queries.
 type SparkSQLJob struct {
 	JarFileUris     []string          `json:"jarFileUris,omitempty"`
 	LoggingConfig   *LoggingConfig    `json:"loggingConfig,omitempty"`

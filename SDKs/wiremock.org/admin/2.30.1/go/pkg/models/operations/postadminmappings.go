@@ -1,5 +1,7 @@
 package operations
 
+// PostAdminMappingsRequestBodyRequestBasicAuthCredentials
+// Pre-emptive basic auth credentials to match against
 type PostAdminMappingsRequestBodyRequestBasicAuthCredentials struct {
 	Password string `json:"password"`
 	Username string `json:"username"`
@@ -59,10 +61,8 @@ type PostAdminMappingsRequestBody struct {
 	UUID                  *string                               `json:"uuid,omitempty"`
 }
 
-type PostAdminMappingsRequest struct {
-	Request *PostAdminMappingsRequestBody `request:"mediaType=application/json"`
-}
-
+// PostAdminMappings201ApplicationJSONRequestBasicAuthCredentials
+// Pre-emptive basic auth credentials to match against
 type PostAdminMappings201ApplicationJSONRequestBasicAuthCredentials struct {
 	Password string `json:"password"`
 	Username string `json:"username"`
@@ -120,6 +120,10 @@ type PostAdminMappings201ApplicationJSON struct {
 	Response              *PostAdminMappings201ApplicationJSONResponse `json:"response,omitempty"`
 	ScenarioName          *string                                      `json:"scenarioName,omitempty"`
 	UUID                  *string                                      `json:"uuid,omitempty"`
+}
+
+type PostAdminMappingsRequest struct {
+	Request *PostAdminMappingsRequestBody `request:"mediaType=application/json"`
 }
 
 type PostAdminMappingsResponse struct {

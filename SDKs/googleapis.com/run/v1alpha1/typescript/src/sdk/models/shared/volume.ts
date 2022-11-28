@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ConfigMapVolumeSource } from "./configmapvolumesource";
 import { SecretVolumeSource } from "./secretvolumesource";
+
 
 
 // Volume
@@ -8,12 +9,12 @@ import { SecretVolumeSource } from "./secretvolumesource";
  * Volume represents a named volume in a container.
 **/
 export class Volume extends SpeakeasyBase {
-  @Metadata({ data: "json, name=configMap" })
+  @SpeakeasyMetadata({ data: "json, name=configMap" })
   configMap?: ConfigMapVolumeSource;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=secret" })
+  @SpeakeasyMetadata({ data: "json, name=secret" })
   secret?: SecretVolumeSource;
 }

@@ -41,15 +41,15 @@ type DcimDevicesListQueryParams struct {
 	VirtualChassisID *string  `queryParam:"style=form,explode=true,name=virtual_chassis_id"`
 }
 
-type DcimDevicesListRequest struct {
-	QueryParams DcimDevicesListQueryParams
-}
-
 type DcimDevicesList200ApplicationJSON struct {
 	Count    int64           `json:"count"`
 	Next     *string         `json:"next,omitempty"`
 	Previous *string         `json:"previous,omitempty"`
 	Results  []shared.Device `json:"results"`
+}
+
+type DcimDevicesListRequest struct {
+	QueryParams DcimDevicesListQueryParams
 }
 
 type DcimDevicesListResponse struct {

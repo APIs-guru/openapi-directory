@@ -9,6 +9,8 @@ const (
 	OsUpdateStatusStateEnumUpdateStateNeedReboot         OsUpdateStatusStateEnum = "updateStateNeedReboot"
 )
 
+// OsUpdateStatus
+// Contains information regarding the current OS update status.
 type OsUpdateStatus struct {
 	RebootTime            *string                  `json:"rebootTime,omitempty"`
 	State                 *OsUpdateStatusStateEnum `json:"state,omitempty"`

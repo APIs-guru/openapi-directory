@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 export declare enum TaskStateEnum {
     Pending = "pending",
     Queued = "queued",
@@ -11,6 +11,17 @@ export declare enum TaskStatusEnum {
     Warn = "warn",
     Unchanged = "unchanged",
     Error = "error"
+}
+export declare class TaskInput extends SpeakeasyBase {
+    completedAt?: Date;
+    message?: string;
+    name?: string;
+    output?: Map<string, any>;
+    state?: TaskStateEnum;
+    status?: TaskStatusEnum;
+    targetSourceRef?: string;
+    targetType?: string;
+    type?: string;
 }
 export declare class Task extends SpeakeasyBase {
     archivedAt?: Date;

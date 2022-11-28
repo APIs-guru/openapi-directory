@@ -1,64 +1,65 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 
-
-export class ImportExportedDataRequest extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/octet-stream" })
-  request?: Uint8Array;
-}
 
 
 export class ImportExportedData200ApplicationJsonCollections extends SpeakeasyBase {
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=uid" })
+  @SpeakeasyMetadata({ data: "json, name=uid" })
   uid?: string;
 }
 
 
 export class ImportExportedData200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=collections", elemType: operations.ImportExportedData200ApplicationJsonCollections })
+  @SpeakeasyMetadata({ data: "json, name=collections", elemType: ImportExportedData200ApplicationJsonCollections })
   collections?: ImportExportedData200ApplicationJsonCollections[];
 }
 
 
 export class ImportExportedData400ApplicationJsonErrorDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=param" })
+  @SpeakeasyMetadata({ data: "json, name=param" })
   param?: string;
 }
 
 
 export class ImportExportedData400ApplicationJsonError extends SpeakeasyBase {
-  @Metadata({ data: "json, name=details" })
+  @SpeakeasyMetadata({ data: "json, name=details" })
   details?: ImportExportedData400ApplicationJsonErrorDetails;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 }
 
 
 export class ImportExportedData400ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=error" })
+  @SpeakeasyMetadata({ data: "json, name=error" })
   error?: ImportExportedData400ApplicationJsonError;
 }
 
 
+export class ImportExportedDataRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "request, media_type=application/octet-stream" })
+  request?: Uint8Array;
+}
+
+
 export class ImportExportedDataResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   importExportedData200ApplicationJsonObject?: ImportExportedData200ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   importExportedData400ApplicationJsonObject?: ImportExportedData400ApplicationJson;
 }

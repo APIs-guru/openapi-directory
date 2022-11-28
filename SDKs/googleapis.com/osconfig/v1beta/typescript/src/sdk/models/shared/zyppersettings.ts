@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ZypperSettings
@@ -6,21 +7,21 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Zypper patching is performed by running `zypper patch`. See also https://en.opensuse.org/SDB:Zypper_manual.
 **/
 export class ZypperSettings extends SpeakeasyBase {
-  @Metadata({ data: "json, name=categories" })
+  @SpeakeasyMetadata({ data: "json, name=categories" })
   categories?: string[];
 
-  @Metadata({ data: "json, name=excludes" })
+  @SpeakeasyMetadata({ data: "json, name=excludes" })
   excludes?: string[];
 
-  @Metadata({ data: "json, name=exclusivePatches" })
+  @SpeakeasyMetadata({ data: "json, name=exclusivePatches" })
   exclusivePatches?: string[];
 
-  @Metadata({ data: "json, name=severities" })
+  @SpeakeasyMetadata({ data: "json, name=severities" })
   severities?: string[];
 
-  @Metadata({ data: "json, name=withOptional" })
+  @SpeakeasyMetadata({ data: "json, name=withOptional" })
   withOptional?: boolean;
 
-  @Metadata({ data: "json, name=withUpdate" })
+  @SpeakeasyMetadata({ data: "json, name=withUpdate" })
   withUpdate?: boolean;
 }

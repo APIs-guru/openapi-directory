@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DatatransferApplicationsGetPathParams:
-    application_id: str = field(default=None, metadata={'path_param': { 'field_name': 'applicationId', 'style': 'simple', 'explode': False }})
+    application_id: str = field(metadata={'path_param': { 'field_name': 'applicationId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,14 +26,14 @@ class DatatransferApplicationsGetQueryParams:
 
 @dataclass
 class DatatransferApplicationsGetSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DatatransferApplicationsGetSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -43,14 +44,14 @@ class DatatransferApplicationsGetSecurity:
 
 @dataclass
 class DatatransferApplicationsGetRequest:
-    path_params: DatatransferApplicationsGetPathParams = field(default=None)
-    query_params: DatatransferApplicationsGetQueryParams = field(default=None)
-    security: DatatransferApplicationsGetSecurity = field(default=None)
+    path_params: DatatransferApplicationsGetPathParams = field()
+    query_params: DatatransferApplicationsGetQueryParams = field()
+    security: DatatransferApplicationsGetSecurity = field()
     
 
 @dataclass
 class DatatransferApplicationsGetResponse:
+    content_type: str = field()
+    status_code: int = field()
     application: Optional[shared.Application] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

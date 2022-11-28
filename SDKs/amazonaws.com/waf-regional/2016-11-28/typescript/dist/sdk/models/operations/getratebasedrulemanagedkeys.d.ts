@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare enum GetRateBasedRuleManagedKeysXAmzTargetEnum {
     AwswafRegional20161128GetRateBasedRuleManagedKeys = "AWSWAF_Regional_20161128.GetRateBasedRuleManagedKeys"

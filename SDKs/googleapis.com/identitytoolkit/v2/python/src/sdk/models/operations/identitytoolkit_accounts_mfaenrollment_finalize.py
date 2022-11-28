@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
@@ -20,20 +21,20 @@ class IdentitytoolkitAccountsMfaEnrollmentFinalizeQueryParams:
 
 @dataclass
 class IdentitytoolkitAccountsMfaEnrollmentFinalizeSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class IdentitytoolkitAccountsMfaEnrollmentFinalizeRequest:
-    query_params: IdentitytoolkitAccountsMfaEnrollmentFinalizeQueryParams = field(default=None)
+    query_params: IdentitytoolkitAccountsMfaEnrollmentFinalizeQueryParams = field()
+    security: IdentitytoolkitAccountsMfaEnrollmentFinalizeSecurity = field()
     request: Optional[shared.GoogleCloudIdentitytoolkitV2FinalizeMfaEnrollmentRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: IdentitytoolkitAccountsMfaEnrollmentFinalizeSecurity = field(default=None)
     
 
 @dataclass
 class IdentitytoolkitAccountsMfaEnrollmentFinalizeResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_cloud_identitytoolkit_v2_finalize_mfa_enrollment_response: Optional[shared.GoogleCloudIdentitytoolkitV2FinalizeMfaEnrollmentResponse] = field(default=None)
-    status_code: int = field(default=None)
     

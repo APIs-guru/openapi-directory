@@ -5,8 +5,8 @@ from sdk.models import shared
 
 @dataclass
 class UsersGetCurrentUserResponse:
+    content_type: str = field()
+    status_code: int = field()
     api_models_user: Optional[shared.APIModelsUser] = field(default=None)
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    body: Optional[bytes] = field(default=None)
     

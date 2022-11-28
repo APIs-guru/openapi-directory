@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // CharacterOffsets
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * For characters that were detected as issues, where they occur in the transcript.
 **/
 export class CharacterOffsets extends SpeakeasyBase {
-  @Metadata({ data: "json, name=BeginOffsetChar" })
+  @SpeakeasyMetadata({ data: "json, name=BeginOffsetChar" })
   beginOffsetChar: number;
 
-  @Metadata({ data: "json, name=EndOffsetChar" })
+  @SpeakeasyMetadata({ data: "json, name=EndOffsetChar" })
   endOffsetChar: number;
 }

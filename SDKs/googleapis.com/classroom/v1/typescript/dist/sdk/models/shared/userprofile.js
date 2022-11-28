@@ -22,9 +22,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Name } from "./name";
+import { GlobalPermission } from "./globalpermission";
 // UserProfile
 /**
  * Global information for a user.
@@ -35,27 +35,27 @@ var UserProfile = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=emailAddress" }),
+        SpeakeasyMetadata({ data: "json, name=emailAddress" }),
         __metadata("design:type", String)
     ], UserProfile.prototype, "emailAddress", void 0);
     __decorate([
-        Metadata({ data: "json, name=id" }),
+        SpeakeasyMetadata({ data: "json, name=id" }),
         __metadata("design:type", String)
     ], UserProfile.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", Name)
     ], UserProfile.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=permissions", elemType: shared.GlobalPermission }),
+        SpeakeasyMetadata({ data: "json, name=permissions", elemType: GlobalPermission }),
         __metadata("design:type", Array)
     ], UserProfile.prototype, "permissions", void 0);
     __decorate([
-        Metadata({ data: "json, name=photoUrl" }),
+        SpeakeasyMetadata({ data: "json, name=photoUrl" }),
         __metadata("design:type", String)
     ], UserProfile.prototype, "photoUrl", void 0);
     __decorate([
-        Metadata({ data: "json, name=verifiedTeacher" }),
+        SpeakeasyMetadata({ data: "json, name=verifiedTeacher" }),
         __metadata("design:type", Boolean)
     ], UserProfile.prototype, "verifiedTeacher", void 0);
     return UserProfile;

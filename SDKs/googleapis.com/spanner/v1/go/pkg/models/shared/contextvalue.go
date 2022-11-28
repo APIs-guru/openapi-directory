@@ -10,6 +10,8 @@ const (
 	ContextValueSeverityEnumFatal               ContextValueSeverityEnum = "FATAL"
 )
 
+// ContextValue
+// A message representing context for a KeyRangeInfo, including a label, value, unit, and severity.
 type ContextValue struct {
 	Label    *LocalizedString          `json:"label,omitempty"`
 	Severity *ContextValueSeverityEnum `json:"severity,omitempty"`

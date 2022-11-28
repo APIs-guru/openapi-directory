@@ -8,6 +8,8 @@ const (
 	ElectionShapeLookupBehaviorEnumShapeLookupEnabled  ElectionShapeLookupBehaviorEnum = "shapeLookupEnabled"
 )
 
+// Election
+// Information about the election that was queried.
 type Election struct {
 	ElectionDay         *string                          `json:"electionDay,omitempty"`
 	ID                  *string                          `json:"id,omitempty"`

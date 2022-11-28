@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostAuthorizeDataShareActionEnum(str, Enum):
     AUTHORIZE_DATA_SHARE = "AuthorizeDataShare"
@@ -10,8 +14,8 @@ class PostAuthorizeDataShareVersionEnum(str, Enum):
 
 @dataclass
 class PostAuthorizeDataShareQueryParams:
-    action: PostAuthorizeDataShareActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostAuthorizeDataShareVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostAuthorizeDataShareActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostAuthorizeDataShareVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostAuthorizeDataShareHeaders:
 
 @dataclass
 class PostAuthorizeDataShareRequest:
-    query_params: PostAuthorizeDataShareQueryParams = field(default=None)
-    headers: PostAuthorizeDataShareHeaders = field(default=None)
+    headers: PostAuthorizeDataShareHeaders = field()
+    query_params: PostAuthorizeDataShareQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostAuthorizeDataShareResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

@@ -1,6 +1,10 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,List,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -18,30 +22,34 @@ class CreateGroupHeaders:
 @dataclass_json
 @dataclass
 class CreateGroupRequestBodyInsightsConfiguration:
-    insights_enabled: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'InsightsEnabled' }})
-    notifications_enabled: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'NotificationsEnabled' }})
+    r"""CreateGroupRequestBodyInsightsConfiguration
+    The structure containing configurations related to insights.
+    """
+    
+    insights_enabled: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('InsightsEnabled') }})
+    notifications_enabled: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('NotificationsEnabled') }})
     
 
 @dataclass_json
 @dataclass
 class CreateGroupRequestBody:
-    filter_expression: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FilterExpression' }})
-    group_name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'GroupName' }})
-    insights_configuration: Optional[CreateGroupRequestBodyInsightsConfiguration] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'InsightsConfiguration' }})
-    tags: Optional[List[shared.Tag]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Tags' }})
+    group_name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('GroupName') }})
+    filter_expression: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('FilterExpression') }})
+    insights_configuration: Optional[CreateGroupRequestBodyInsightsConfiguration] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('InsightsConfiguration') }})
+    tags: Optional[List[shared.Tag]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Tags') }})
     
 
 @dataclass
 class CreateGroupRequest:
-    headers: CreateGroupHeaders = field(default=None)
-    request: CreateGroupRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: CreateGroupHeaders = field()
+    request: CreateGroupRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class CreateGroupResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     create_group_result: Optional[shared.CreateGroupResult] = field(default=None)
     invalid_request_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttled_exception: Optional[Any] = field(default=None)
     

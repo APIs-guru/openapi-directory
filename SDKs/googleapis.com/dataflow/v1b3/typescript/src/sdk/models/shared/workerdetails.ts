@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { WorkItemDetails } from "./workitemdetails";
+
 
 
 // WorkerDetails
@@ -8,9 +8,9 @@ import { WorkItemDetails } from "./workitemdetails";
  * Information about a worker
 **/
 export class WorkerDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=workItems", elemType: shared.WorkItemDetails })
+  @SpeakeasyMetadata({ data: "json, name=workItems", elemType: WorkItemDetails })
   workItems?: WorkItemDetails[];
 
-  @Metadata({ data: "json, name=workerName" })
+  @SpeakeasyMetadata({ data: "json, name=workerName" })
   workerName?: string;
 }

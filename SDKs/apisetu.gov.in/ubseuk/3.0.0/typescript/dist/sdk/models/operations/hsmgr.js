@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var HsmgrRequestBodyCertificateParameters = /** @class */ (function (_super) {
     __extends(HsmgrRequestBodyCertificateParameters, _super);
@@ -30,23 +30,23 @@ var HsmgrRequestBodyCertificateParameters = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=DOB" }),
+        SpeakeasyMetadata({ data: "json, name=DOB" }),
         __metadata("design:type", String)
     ], HsmgrRequestBodyCertificateParameters.prototype, "dob", void 0);
     __decorate([
-        Metadata({ data: "json, name=FullName" }),
+        SpeakeasyMetadata({ data: "json, name=FullName" }),
         __metadata("design:type", String)
     ], HsmgrRequestBodyCertificateParameters.prototype, "fullName", void 0);
     __decorate([
-        Metadata({ data: "json, name=RROLL" }),
+        SpeakeasyMetadata({ data: "json, name=RROLL" }),
         __metadata("design:type", String)
     ], HsmgrRequestBodyCertificateParameters.prototype, "rroll", void 0);
     __decorate([
-        Metadata({ data: "json, name=UID" }),
+        SpeakeasyMetadata({ data: "json, name=UID" }),
         __metadata("design:type", String)
     ], HsmgrRequestBodyCertificateParameters.prototype, "uid", void 0);
     __decorate([
-        Metadata({ data: "json, name=YEAR" }),
+        SpeakeasyMetadata({ data: "json, name=YEAR" }),
         __metadata("design:type", String)
     ], HsmgrRequestBodyCertificateParameters.prototype, "year", void 0);
     return HsmgrRequestBodyCertificateParameters;
@@ -62,19 +62,19 @@ var HsmgrRequestBody = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=certificateParameters" }),
+        SpeakeasyMetadata({ data: "json, name=certificateParameters" }),
         __metadata("design:type", HsmgrRequestBodyCertificateParameters)
     ], HsmgrRequestBody.prototype, "certificateParameters", void 0);
     __decorate([
-        Metadata({ data: "json, name=consentArtifact" }),
+        SpeakeasyMetadata({ data: "json, name=consentArtifact" }),
         __metadata("design:type", Object)
     ], HsmgrRequestBody.prototype, "consentArtifact", void 0);
     __decorate([
-        Metadata({ data: "json, name=format" }),
+        SpeakeasyMetadata({ data: "json, name=format" }),
         __metadata("design:type", String)
     ], HsmgrRequestBody.prototype, "format", void 0);
     __decorate([
-        Metadata({ data: "json, name=txnId" }),
+        SpeakeasyMetadata({ data: "json, name=txnId" }),
         __metadata("design:type", String)
     ], HsmgrRequestBody.prototype, "txnId", void 0);
     return HsmgrRequestBody;
@@ -86,32 +86,16 @@ var HsmgrSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeApiKey)
     ], HsmgrSecurity.prototype, "apiKey", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeClientId)
     ], HsmgrSecurity.prototype, "clientId", void 0);
     return HsmgrSecurity;
 }(SpeakeasyBase));
 export { HsmgrSecurity };
-var HsmgrRequest = /** @class */ (function (_super) {
-    __extends(HsmgrRequest, _super);
-    function HsmgrRequest() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
-        __metadata("design:type", HsmgrRequestBody)
-    ], HsmgrRequest.prototype, "request", void 0);
-    __decorate([
-        Metadata(),
-        __metadata("design:type", HsmgrSecurity)
-    ], HsmgrRequest.prototype, "security", void 0);
-    return HsmgrRequest;
-}(SpeakeasyBase));
-export { HsmgrRequest };
 export var Hsmgr400ApplicationJsonErrorEnum;
 (function (Hsmgr400ApplicationJsonErrorEnum) {
     Hsmgr400ApplicationJsonErrorEnum["MissingParameter"] = "missing_parameter";
@@ -134,11 +118,11 @@ var Hsmgr400ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Hsmgr400ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Hsmgr400ApplicationJson.prototype, "errorDescription", void 0);
     return Hsmgr400ApplicationJson;
@@ -160,11 +144,11 @@ var Hsmgr401ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Hsmgr401ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Hsmgr401ApplicationJson.prototype, "errorDescription", void 0);
     return Hsmgr401ApplicationJson;
@@ -186,11 +170,11 @@ var Hsmgr404ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Hsmgr404ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Hsmgr404ApplicationJson.prototype, "errorDescription", void 0);
     return Hsmgr404ApplicationJson;
@@ -210,11 +194,11 @@ var Hsmgr500ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Hsmgr500ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Hsmgr500ApplicationJson.prototype, "errorDescription", void 0);
     return Hsmgr500ApplicationJson;
@@ -234,11 +218,11 @@ var Hsmgr502ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Hsmgr502ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Hsmgr502ApplicationJson.prototype, "errorDescription", void 0);
     return Hsmgr502ApplicationJson;
@@ -258,11 +242,11 @@ var Hsmgr503ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Hsmgr503ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Hsmgr503ApplicationJson.prototype, "errorDescription", void 0);
     return Hsmgr503ApplicationJson;
@@ -282,55 +266,71 @@ var Hsmgr504ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Hsmgr504ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Hsmgr504ApplicationJson.prototype, "errorDescription", void 0);
     return Hsmgr504ApplicationJson;
 }(SpeakeasyBase));
 export { Hsmgr504ApplicationJson };
+var HsmgrRequest = /** @class */ (function (_super) {
+    __extends(HsmgrRequest, _super);
+    function HsmgrRequest() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
+        __metadata("design:type", HsmgrRequestBody)
+    ], HsmgrRequest.prototype, "request", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", HsmgrSecurity)
+    ], HsmgrRequest.prototype, "security", void 0);
+    return HsmgrRequest;
+}(SpeakeasyBase));
+export { HsmgrRequest };
 var HsmgrResponse = /** @class */ (function (_super) {
     __extends(HsmgrResponse, _super);
     function HsmgrResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], HsmgrResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], HsmgrResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Hsmgr400ApplicationJson)
     ], HsmgrResponse.prototype, "hsmgr400ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Hsmgr401ApplicationJson)
     ], HsmgrResponse.prototype, "hsmgr401ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Hsmgr404ApplicationJson)
     ], HsmgrResponse.prototype, "hsmgr404ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Hsmgr500ApplicationJson)
     ], HsmgrResponse.prototype, "hsmgr500ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Hsmgr502ApplicationJson)
     ], HsmgrResponse.prototype, "hsmgr502ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Hsmgr503ApplicationJson)
     ], HsmgrResponse.prototype, "hsmgr503ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Hsmgr504ApplicationJson)
     ], HsmgrResponse.prototype, "hsmgr504ApplicationJsonObject", void 0);
     return HsmgrResponse;

@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ResetParameterGroupRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AllParameters" })
+  @SpeakeasyMetadata({ data: "json, name=AllParameters" })
   allParameters?: boolean;
 
-  @Metadata({ data: "json, name=ParameterGroupName" })
+  @SpeakeasyMetadata({ data: "json, name=ParameterGroupName" })
   parameterGroupName: string;
 
-  @Metadata({ data: "json, name=ParameterNames" })
+  @SpeakeasyMetadata({ data: "json, name=ParameterNames" })
   parameterNames?: string[];
 }

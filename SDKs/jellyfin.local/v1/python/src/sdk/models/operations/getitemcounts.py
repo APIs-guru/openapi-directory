@@ -11,18 +11,18 @@ class GetItemCountsQueryParams:
 
 @dataclass
 class GetItemCountsSecurity:
-    custom_authentication: shared.SchemeCustomAuthentication = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    custom_authentication: shared.SchemeCustomAuthentication = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
     
 
 @dataclass
 class GetItemCountsRequest:
-    query_params: GetItemCountsQueryParams = field(default=None)
-    security: GetItemCountsSecurity = field(default=None)
+    query_params: GetItemCountsQueryParams = field()
+    security: GetItemCountsSecurity = field()
     
 
 @dataclass
 class GetItemCountsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     item_counts: Optional[shared.ItemCounts] = field(default=None)
-    status_code: int = field(default=None)
     

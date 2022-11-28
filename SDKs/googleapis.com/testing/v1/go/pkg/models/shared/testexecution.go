@@ -16,6 +16,8 @@ const (
 	TestExecutionStateEnumInvalid                  TestExecutionStateEnum = "INVALID"
 )
 
+// TestExecution
+// A single test executed in a single environment.
 type TestExecution struct {
 	Environment       *Environment            `json:"environment,omitempty"`
 	ID                *string                 `json:"id,omitempty"`

@@ -5,8 +5,8 @@ from sdk.models import shared
 
 @dataclass
 class GetCustomLogosAlt1Response:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     legacy_error: Optional[shared.LegacyError] = field(default=None)
     pictures: Optional[List[shared.Picture]] = field(default=None)
     

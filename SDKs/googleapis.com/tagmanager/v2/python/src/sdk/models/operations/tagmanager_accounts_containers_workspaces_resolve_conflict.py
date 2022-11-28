@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class TagmanagerAccountsContainersWorkspacesResolveConflictPathParams:
-    path: str = field(default=None, metadata={'path_param': { 'field_name': 'path', 'style': 'simple', 'explode': False }})
+    path: str = field(metadata={'path_param': { 'field_name': 'path', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,20 +27,20 @@ class TagmanagerAccountsContainersWorkspacesResolveConflictQueryParams:
 
 @dataclass
 class TagmanagerAccountsContainersWorkspacesResolveConflictSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class TagmanagerAccountsContainersWorkspacesResolveConflictRequest:
-    path_params: TagmanagerAccountsContainersWorkspacesResolveConflictPathParams = field(default=None)
-    query_params: TagmanagerAccountsContainersWorkspacesResolveConflictQueryParams = field(default=None)
+    path_params: TagmanagerAccountsContainersWorkspacesResolveConflictPathParams = field()
+    query_params: TagmanagerAccountsContainersWorkspacesResolveConflictQueryParams = field()
+    security: TagmanagerAccountsContainersWorkspacesResolveConflictSecurity = field()
     request: Optional[shared.Entity] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: TagmanagerAccountsContainersWorkspacesResolveConflictSecurity = field(default=None)
     
 
 @dataclass
 class TagmanagerAccountsContainersWorkspacesResolveConflictResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { StackTraceElement } from "./stacktraceelement";
+
 
 
 // StackTrace
@@ -8,6 +8,6 @@ import { StackTraceElement } from "./stacktraceelement";
  * A collection of stack elements (frames) where an error occurred.
 **/
 export class StackTrace extends SpeakeasyBase {
-  @Metadata({ data: "json, name=elements", elemType: shared.StackTraceElement })
+  @SpeakeasyMetadata({ data: "json, name=elements", elemType: StackTraceElement })
   elements?: StackTraceElement[];
 }

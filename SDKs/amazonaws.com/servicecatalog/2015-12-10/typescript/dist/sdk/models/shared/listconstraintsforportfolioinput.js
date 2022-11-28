@@ -22,30 +22,30 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var ListConstraintsForPortfolioInput = /** @class */ (function (_super) {
     __extends(ListConstraintsForPortfolioInput, _super);
     function ListConstraintsForPortfolioInput() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=AcceptLanguage" }),
+        SpeakeasyMetadata({ data: "json, name=AcceptLanguage" }),
         __metadata("design:type", String)
     ], ListConstraintsForPortfolioInput.prototype, "acceptLanguage", void 0);
     __decorate([
-        Metadata({ data: "json, name=PageSize" }),
+        SpeakeasyMetadata({ data: "json, name=PageSize" }),
         __metadata("design:type", Number)
     ], ListConstraintsForPortfolioInput.prototype, "pageSize", void 0);
     __decorate([
-        Metadata({ data: "json, name=PageToken" }),
+        SpeakeasyMetadata({ data: "json, name=PageToken" }),
         __metadata("design:type", String)
     ], ListConstraintsForPortfolioInput.prototype, "pageToken", void 0);
     __decorate([
-        Metadata({ data: "json, name=PortfolioId" }),
+        SpeakeasyMetadata({ data: "json, name=PortfolioId" }),
         __metadata("design:type", String)
     ], ListConstraintsForPortfolioInput.prototype, "portfolioId", void 0);
     __decorate([
-        Metadata({ data: "json, name=ProductId" }),
+        SpeakeasyMetadata({ data: "json, name=ProductId" }),
         __metadata("design:type", String)
     ], ListConstraintsForPortfolioInput.prototype, "productId", void 0);
     return ListConstraintsForPortfolioInput;

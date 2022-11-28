@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// EnvironmentTemplateVersion
+// The environment template version data.
 type EnvironmentTemplateVersion struct {
 	Arn                     string                    `json:"arn"`
 	CreatedAt               time.Time                 `json:"createdAt"`

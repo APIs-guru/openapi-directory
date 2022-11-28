@@ -1,29 +1,30 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class DeviceBySerialGetQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=serial" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=serial" })
   serial: number;
 }
 
 
 export class DeviceBySerialGetRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: DeviceBySerialGetQueryParams;
 }
 
 
 export class DeviceBySerialGetResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   device?: shared.Device;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

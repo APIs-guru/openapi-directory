@@ -23,6 +23,8 @@ type ListBotVersionsHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// ListBotVersionsRequestBodySortBy
+// Specifies attributes for sorting a list of bot versions.
 type ListBotVersionsRequestBodySortBy struct {
 	Attribute *shared.BotVersionSortAttributeEnum `json:"attribute,omitempty"`
 	Order     *shared.SortOrderEnum               `json:"order,omitempty"`

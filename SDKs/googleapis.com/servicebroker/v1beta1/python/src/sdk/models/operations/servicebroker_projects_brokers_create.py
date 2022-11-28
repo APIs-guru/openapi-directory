@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class ServicebrokerProjectsBrokersCreatePathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,21 +26,21 @@ class ServicebrokerProjectsBrokersCreateQueryParams:
 
 @dataclass
 class ServicebrokerProjectsBrokersCreateSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class ServicebrokerProjectsBrokersCreateRequest:
-    path_params: ServicebrokerProjectsBrokersCreatePathParams = field(default=None)
-    query_params: ServicebrokerProjectsBrokersCreateQueryParams = field(default=None)
+    path_params: ServicebrokerProjectsBrokersCreatePathParams = field()
+    query_params: ServicebrokerProjectsBrokersCreateQueryParams = field()
+    security: ServicebrokerProjectsBrokersCreateSecurity = field()
     request: Optional[shared.GoogleCloudServicebrokerV1beta1Broker] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: ServicebrokerProjectsBrokersCreateSecurity = field(default=None)
     
 
 @dataclass
 class ServicebrokerProjectsBrokersCreateResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

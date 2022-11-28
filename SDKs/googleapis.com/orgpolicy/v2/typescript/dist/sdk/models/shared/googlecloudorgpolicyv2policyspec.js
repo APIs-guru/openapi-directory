@@ -22,8 +22,36 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { GoogleCloudOrgpolicyV2PolicySpecPolicyRule } from "./googlecloudorgpolicyv2policyspecpolicyrule";
+// GoogleCloudOrgpolicyV2PolicySpecInput
+/**
+ * Defines a Cloud Organization `PolicySpec` which is used to specify `Constraints` for configurations of Cloud Platform resources.
+**/
+var GoogleCloudOrgpolicyV2PolicySpecInput = /** @class */ (function (_super) {
+    __extends(GoogleCloudOrgpolicyV2PolicySpecInput, _super);
+    function GoogleCloudOrgpolicyV2PolicySpecInput() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=etag" }),
+        __metadata("design:type", String)
+    ], GoogleCloudOrgpolicyV2PolicySpecInput.prototype, "etag", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=inheritFromParent" }),
+        __metadata("design:type", Boolean)
+    ], GoogleCloudOrgpolicyV2PolicySpecInput.prototype, "inheritFromParent", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=reset" }),
+        __metadata("design:type", Boolean)
+    ], GoogleCloudOrgpolicyV2PolicySpecInput.prototype, "reset", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=rules", elemType: GoogleCloudOrgpolicyV2PolicySpecPolicyRule }),
+        __metadata("design:type", Array)
+    ], GoogleCloudOrgpolicyV2PolicySpecInput.prototype, "rules", void 0);
+    return GoogleCloudOrgpolicyV2PolicySpecInput;
+}(SpeakeasyBase));
+export { GoogleCloudOrgpolicyV2PolicySpecInput };
 // GoogleCloudOrgpolicyV2PolicySpec
 /**
  * Defines a Cloud Organization `PolicySpec` which is used to specify `Constraints` for configurations of Cloud Platform resources.
@@ -34,23 +62,23 @@ var GoogleCloudOrgpolicyV2PolicySpec = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=etag" }),
+        SpeakeasyMetadata({ data: "json, name=etag" }),
         __metadata("design:type", String)
     ], GoogleCloudOrgpolicyV2PolicySpec.prototype, "etag", void 0);
     __decorate([
-        Metadata({ data: "json, name=inheritFromParent" }),
+        SpeakeasyMetadata({ data: "json, name=inheritFromParent" }),
         __metadata("design:type", Boolean)
     ], GoogleCloudOrgpolicyV2PolicySpec.prototype, "inheritFromParent", void 0);
     __decorate([
-        Metadata({ data: "json, name=reset" }),
+        SpeakeasyMetadata({ data: "json, name=reset" }),
         __metadata("design:type", Boolean)
     ], GoogleCloudOrgpolicyV2PolicySpec.prototype, "reset", void 0);
     __decorate([
-        Metadata({ data: "json, name=rules", elemType: shared.GoogleCloudOrgpolicyV2PolicySpecPolicyRule }),
+        SpeakeasyMetadata({ data: "json, name=rules", elemType: GoogleCloudOrgpolicyV2PolicySpecPolicyRule }),
         __metadata("design:type", Array)
     ], GoogleCloudOrgpolicyV2PolicySpec.prototype, "rules", void 0);
     __decorate([
-        Metadata({ data: "json, name=updateTime" }),
+        SpeakeasyMetadata({ data: "json, name=updateTime" }),
         __metadata("design:type", String)
     ], GoogleCloudOrgpolicyV2PolicySpec.prototype, "updateTime", void 0);
     return GoogleCloudOrgpolicyV2PolicySpec;

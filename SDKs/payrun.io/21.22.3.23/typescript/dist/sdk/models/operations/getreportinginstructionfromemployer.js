@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetReportingInstructionFromEmployerPathParams = /** @class */ (function (_super) {
     __extends(GetReportingInstructionFromEmployerPathParams, _super);
@@ -30,11 +30,11 @@ var GetReportingInstructionFromEmployerPathParams = /** @class */ (function (_su
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=EmployerId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=EmployerId" }),
         __metadata("design:type", String)
     ], GetReportingInstructionFromEmployerPathParams.prototype, "employerId", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=ReportingInstructionId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=ReportingInstructionId" }),
         __metadata("design:type", String)
     ], GetReportingInstructionFromEmployerPathParams.prototype, "reportingInstructionId", void 0);
     return GetReportingInstructionFromEmployerPathParams;
@@ -46,11 +46,11 @@ var GetReportingInstructionFromEmployerHeaders = /** @class */ (function (_super
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=Api-Version" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Api-Version" }),
         __metadata("design:type", String)
     ], GetReportingInstructionFromEmployerHeaders.prototype, "apiVersion", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=Authorization" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Authorization" }),
         __metadata("design:type", String)
     ], GetReportingInstructionFromEmployerHeaders.prototype, "authorization", void 0);
     return GetReportingInstructionFromEmployerHeaders;
@@ -62,11 +62,11 @@ var GetReportingInstructionFromEmployerRequest = /** @class */ (function (_super
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetReportingInstructionFromEmployerPathParams)
     ], GetReportingInstructionFromEmployerRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetReportingInstructionFromEmployerHeaders)
     ], GetReportingInstructionFromEmployerRequest.prototype, "headers", void 0);
     return GetReportingInstructionFromEmployerRequest;
@@ -78,19 +78,19 @@ var GetReportingInstructionFromEmployerResponse = /** @class */ (function (_supe
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetReportingInstructionFromEmployerResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.ErrorModel)
     ], GetReportingInstructionFromEmployerResponse.prototype, "errorModel", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.ReportingInstruction)
     ], GetReportingInstructionFromEmployerResponse.prototype, "reportingInstruction", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetReportingInstructionFromEmployerResponse.prototype, "statusCode", void 0);
     return GetReportingInstructionFromEmployerResponse;

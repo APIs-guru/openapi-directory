@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class LabrpRequestBodyCertificateParameters extends SpeakeasyBase {
     fullName: string;
@@ -17,10 +17,6 @@ export declare class LabrpRequestBody extends SpeakeasyBase {
 export declare class LabrpSecurity extends SpeakeasyBase {
     apiKey: shared.SchemeApiKey;
     clientId: shared.SchemeClientId;
-}
-export declare class LabrpRequest extends SpeakeasyBase {
-    request?: LabrpRequestBody;
-    security: LabrpSecurity;
 }
 export declare enum Labrp400ApplicationJsonErrorEnum {
     MissingParameter = "missing_parameter",
@@ -103,6 +99,10 @@ export declare enum Labrp504ApplicationJsonErrorDescriptionEnum {
 export declare class Labrp504ApplicationJson extends SpeakeasyBase {
     error?: Labrp504ApplicationJsonErrorEnum;
     errorDescription?: Labrp504ApplicationJsonErrorDescriptionEnum;
+}
+export declare class LabrpRequest extends SpeakeasyBase {
+    request?: LabrpRequestBody;
+    security: LabrpSecurity;
 }
 export declare class LabrpResponse extends SpeakeasyBase {
     contentType: string;

@@ -5,18 +5,18 @@ from sdk.models import shared
 
 @dataclass
 class GetLanguagesHeaders:
-    x_listen_api_key: str = field(default=None, metadata={'header': { 'field_name': 'X-ListenAPI-Key', 'style': 'simple', 'explode': False }})
+    x_listen_api_key: str = field(metadata={'header': { 'field_name': 'X-ListenAPI-Key', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetLanguagesRequest:
-    headers: GetLanguagesHeaders = field(default=None)
+    headers: GetLanguagesHeaders = field()
     
 
 @dataclass
 class GetLanguagesResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    headers: dict[str, List[str]] = field()
+    status_code: int = field()
     get_languages_response: Optional[shared.GetLanguagesResponse] = field(default=None)
-    headers: dict[str, List[str]] = field(default=None)
-    status_code: int = field(default=None)
     

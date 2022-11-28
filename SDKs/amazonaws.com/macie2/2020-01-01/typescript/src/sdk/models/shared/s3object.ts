@@ -1,8 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ServerSideEncryption } from "./serversideencryption";
 import { StorageClassEnum } from "./storageclassenum";
 import { KeyValuePair } from "./keyvaluepair";
+
 
 
 // S3Object
@@ -10,39 +10,39 @@ import { KeyValuePair } from "./keyvaluepair";
  * Provides information about the S3 object that a finding applies to.
 **/
 export class S3Object extends SpeakeasyBase {
-  @Metadata({ data: "json, name=bucketArn" })
+  @SpeakeasyMetadata({ data: "json, name=bucketArn" })
   bucketArn?: string;
 
-  @Metadata({ data: "json, name=eTag" })
+  @SpeakeasyMetadata({ data: "json, name=eTag" })
   eTag?: string;
 
-  @Metadata({ data: "json, name=extension" })
+  @SpeakeasyMetadata({ data: "json, name=extension" })
   extension?: string;
 
-  @Metadata({ data: "json, name=key" })
+  @SpeakeasyMetadata({ data: "json, name=key" })
   key?: string;
 
-  @Metadata({ data: "json, name=lastModified" })
+  @SpeakeasyMetadata({ data: "json, name=lastModified" })
   lastModified?: Date;
 
-  @Metadata({ data: "json, name=path" })
+  @SpeakeasyMetadata({ data: "json, name=path" })
   path?: string;
 
-  @Metadata({ data: "json, name=publicAccess" })
+  @SpeakeasyMetadata({ data: "json, name=publicAccess" })
   publicAccess?: boolean;
 
-  @Metadata({ data: "json, name=serverSideEncryption" })
+  @SpeakeasyMetadata({ data: "json, name=serverSideEncryption" })
   serverSideEncryption?: ServerSideEncryption;
 
-  @Metadata({ data: "json, name=size" })
+  @SpeakeasyMetadata({ data: "json, name=size" })
   size?: number;
 
-  @Metadata({ data: "json, name=storageClass" })
+  @SpeakeasyMetadata({ data: "json, name=storageClass" })
   storageClass?: StorageClassEnum;
 
-  @Metadata({ data: "json, name=tags", elemType: shared.KeyValuePair })
+  @SpeakeasyMetadata({ data: "json, name=tags", elemType: KeyValuePair })
   tags?: KeyValuePair[];
 
-  @Metadata({ data: "json, name=versionId" })
+  @SpeakeasyMetadata({ data: "json, name=versionId" })
   versionId?: string;
 }

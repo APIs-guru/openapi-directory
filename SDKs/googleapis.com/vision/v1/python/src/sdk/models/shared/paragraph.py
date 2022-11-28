@@ -1,16 +1,19 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import boundingpoly
-from . import textproperty
-from . import word
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class Paragraph:
-    bounding_box: Optional[boundingpoly.BoundingPoly] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'boundingBox' }})
-    confidence: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'confidence' }})
-    property: Optional[textproperty.TextProperty] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'property' }})
-    words: Optional[List[word.Word]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'words' }})
+    r"""Paragraph
+    Structural unit of text representing a number of words in certain order.
+    """
+    
+    bounding_box: Optional[BoundingPoly] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('boundingBox') }})
+    confidence: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('confidence') }})
+    property: Optional[TextProperty] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('property') }})
+    words: Optional[List[Word]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('words') }})
     

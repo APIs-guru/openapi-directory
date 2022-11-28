@@ -5,17 +5,17 @@ from sdk.models import shared
 
 @dataclass
 class GetDistributionsQueryParams:
-    survey_id: str = field(default=None, metadata={'query_param': { 'field_name': 'surveyId', 'style': 'form', 'explode': True }})
+    survey_id: str = field(metadata={'query_param': { 'field_name': 'surveyId', 'style': 'form', 'explode': True }})
     
 
 @dataclass
 class GetDistributionsRequest:
-    query_params: GetDistributionsQueryParams = field(default=None)
+    query_params: GetDistributionsQueryParams = field()
     
 
 @dataclass
 class GetDistributionsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     distributions_response: Optional[shared.DistributionsResponse] = field(default=None)
-    status_code: int = field(default=None)
     

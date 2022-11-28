@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum OsUpdateStatusStateEnum {
-    UpdateStateUnspecified = "updateStateUnspecified"
-,    UpdateStateNotStarted = "updateStateNotStarted"
-,    UpdateStateDownloadInProgress = "updateStateDownloadInProgress"
-,    UpdateStateNeedReboot = "updateStateNeedReboot"
+    UpdateStateUnspecified = "updateStateUnspecified",
+    UpdateStateNotStarted = "updateStateNotStarted",
+    UpdateStateDownloadInProgress = "updateStateDownloadInProgress",
+    UpdateStateNeedReboot = "updateStateNeedReboot"
 }
 
 
@@ -13,21 +14,21 @@ export enum OsUpdateStatusStateEnum {
  * Contains information regarding the current OS update status.
 **/
 export class OsUpdateStatus extends SpeakeasyBase {
-  @Metadata({ data: "json, name=rebootTime" })
+  @SpeakeasyMetadata({ data: "json, name=rebootTime" })
   rebootTime?: string;
 
-  @Metadata({ data: "json, name=state" })
+  @SpeakeasyMetadata({ data: "json, name=state" })
   state?: OsUpdateStatusStateEnum;
 
-  @Metadata({ data: "json, name=targetKioskAppVersion" })
+  @SpeakeasyMetadata({ data: "json, name=targetKioskAppVersion" })
   targetKioskAppVersion?: string;
 
-  @Metadata({ data: "json, name=targetOsVersion" })
+  @SpeakeasyMetadata({ data: "json, name=targetOsVersion" })
   targetOsVersion?: string;
 
-  @Metadata({ data: "json, name=updateCheckTime" })
+  @SpeakeasyMetadata({ data: "json, name=updateCheckTime" })
   updateCheckTime?: string;
 
-  @Metadata({ data: "json, name=updateTime" })
+  @SpeakeasyMetadata({ data: "json, name=updateTime" })
   updateTime?: string;
 }

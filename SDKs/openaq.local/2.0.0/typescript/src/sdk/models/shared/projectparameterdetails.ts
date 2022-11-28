@@ -1,34 +1,35 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ProjectParameterDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=average" })
+  @SpeakeasyMetadata({ data: "json, name=average" })
   average: number;
 
-  @Metadata({ data: "json, name=count" })
+  @SpeakeasyMetadata({ data: "json, name=count" })
   count: number;
 
-  @Metadata({ data: "json, name=displayName" })
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
   displayName?: string;
 
-  @Metadata({ data: "json, name=firstUpdated" })
+  @SpeakeasyMetadata({ data: "json, name=firstUpdated" })
   firstUpdated: Date;
 
-  @Metadata({ data: "json, name=lastUpdated" })
+  @SpeakeasyMetadata({ data: "json, name=lastUpdated" })
   lastUpdated: Date;
 
-  @Metadata({ data: "json, name=lastValue" })
+  @SpeakeasyMetadata({ data: "json, name=lastValue" })
   lastValue: number;
 
-  @Metadata({ data: "json, name=locations" })
+  @SpeakeasyMetadata({ data: "json, name=locations" })
   locations: number;
 
-  @Metadata({ data: "json, name=parameter" })
+  @SpeakeasyMetadata({ data: "json, name=parameter" })
   parameter: string;
 
-  @Metadata({ data: "json, name=parameterId" })
+  @SpeakeasyMetadata({ data: "json, name=parameterId" })
   parameterId: number;
 
-  @Metadata({ data: "json, name=unit" })
+  @SpeakeasyMetadata({ data: "json, name=unit" })
   unit: string;
 }

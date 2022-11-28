@@ -5,18 +5,18 @@ from sdk.models import shared
 
 @dataclass
 class GetRolesPathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetRolesRequest:
-    path_params: GetRolesPathParams = field(default=None)
+    path_params: GetRolesPathParams = field()
     
 
 @dataclass
 class GetRolesResponse:
+    content_type: str = field()
+    status_code: int = field()
     calls: Optional[List[shared.Call]] = field(default=None)
-    content_type: str = field(default=None)
     error_response: Optional[shared.ErrorResponse] = field(default=None)
-    status_code: int = field(default=None)
     

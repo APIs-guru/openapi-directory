@@ -1,25 +1,25 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { EdgeOutputConfig } from "./edgeoutputconfig";
 import { Tag } from "./tag";
 
 
+
 export class CreateDeviceFleetRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Description" })
+  @SpeakeasyMetadata({ data: "json, name=Description" })
   description?: string;
 
-  @Metadata({ data: "json, name=DeviceFleetName" })
+  @SpeakeasyMetadata({ data: "json, name=DeviceFleetName" })
   deviceFleetName: string;
 
-  @Metadata({ data: "json, name=EnableIotRoleAlias" })
+  @SpeakeasyMetadata({ data: "json, name=EnableIotRoleAlias" })
   enableIotRoleAlias?: boolean;
 
-  @Metadata({ data: "json, name=OutputConfig" })
+  @SpeakeasyMetadata({ data: "json, name=OutputConfig" })
   outputConfig: EdgeOutputConfig;
 
-  @Metadata({ data: "json, name=RoleArn" })
+  @SpeakeasyMetadata({ data: "json, name=RoleArn" })
   roleArn?: string;
 
-  @Metadata({ data: "json, name=Tags", elemType: shared.Tag })
+  @SpeakeasyMetadata({ data: "json, name=Tags", elemType: Tag })
   tags?: Tag[];
 }

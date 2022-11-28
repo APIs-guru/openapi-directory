@@ -1,10 +1,15 @@
 from dataclasses import dataclass, field
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass_json
 @dataclass
 class DeleteVpcPeeringConnectionInput:
-    fleet_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FleetId' }})
-    vpc_peering_connection_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'VpcPeeringConnectionId' }})
+    r"""DeleteVpcPeeringConnectionInput
+    Represents the input for a request operation.
+    """
+    
+    fleet_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('FleetId') }})
+    vpc_peering_connection_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('VpcPeeringConnectionId') }})
     

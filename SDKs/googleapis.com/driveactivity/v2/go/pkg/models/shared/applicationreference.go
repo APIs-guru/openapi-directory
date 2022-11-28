@@ -8,6 +8,8 @@ const (
 	ApplicationReferenceTypeEnumDiscuss                  ApplicationReferenceTypeEnum = "DISCUSS"
 )
 
+// ApplicationReference
+// Activity in applications other than Drive.
 type ApplicationReference struct {
 	Type *ApplicationReferenceTypeEnum `json:"type,omitempty"`
 }

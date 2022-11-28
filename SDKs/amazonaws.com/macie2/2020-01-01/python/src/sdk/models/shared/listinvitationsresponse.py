@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import invitation
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ListInvitationsResponse:
-    invitations: Optional[List[invitation.Invitation]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'invitations' }})
-    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'nextToken' }})
+    invitations: Optional[List[Invitation]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('invitations') }})
+    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('nextToken') }})
     

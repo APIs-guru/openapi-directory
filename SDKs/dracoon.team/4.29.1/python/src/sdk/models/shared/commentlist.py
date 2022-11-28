@@ -1,13 +1,17 @@
 from dataclasses import dataclass, field
 from typing import List
 from dataclasses_json import dataclass_json
-from . import comment
-from . import range
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class CommentList:
-    items: List[comment.Comment] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'items' }})
-    range: range.Range = field(default=None, metadata={'dataclasses_json': { 'field_name': 'range' }})
+    r"""CommentList
+    List of node comments
+    """
+    
+    items: List[Comment] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('items') }})
+    range: Range = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('range') }})
     

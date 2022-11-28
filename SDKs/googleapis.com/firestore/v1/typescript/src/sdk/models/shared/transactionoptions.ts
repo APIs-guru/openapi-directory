@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ReadOnly } from "./readonly";
 import { ReadWrite } from "./readwrite";
+
 
 
 // TransactionOptions
@@ -8,9 +9,9 @@ import { ReadWrite } from "./readwrite";
  * Options for creating a new transaction.
 **/
 export class TransactionOptions extends SpeakeasyBase {
-  @Metadata({ data: "json, name=readOnly" })
+  @SpeakeasyMetadata({ data: "json, name=readOnly" })
   readOnly?: ReadOnly;
 
-  @Metadata({ data: "json, name=readWrite" })
+  @SpeakeasyMetadata({ data: "json, name=readWrite" })
   readWrite?: ReadWrite;
 }

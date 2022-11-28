@@ -1,41 +1,42 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class PatchVideosVideoIdThumbnailPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=videoId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=videoId" })
   videoId: string;
 }
 
 
 export class PatchVideosVideoIdThumbnailSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=bearer" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" })
   bearerAuth: shared.SchemeBearerAuth;
 }
 
 
 export class PatchVideosVideoIdThumbnailRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: PatchVideosVideoIdThumbnailPathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request?: shared.VideoThumbnailPickPayload;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: PatchVideosVideoIdThumbnailSecurity;
 }
 
 
 export class PatchVideosVideoIdThumbnailResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   notFound?: shared.NotFound;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   video?: shared.Video;
 }

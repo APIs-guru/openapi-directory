@@ -40,7 +40,7 @@ type FirebaserulesProjectsReleasesCreateSecurity struct {
 type FirebaserulesProjectsReleasesCreateRequest struct {
 	PathParams  FirebaserulesProjectsReleasesCreatePathParams
 	QueryParams FirebaserulesProjectsReleasesCreateQueryParams
-	Request     *shared.Release `request:"mediaType=application/json"`
+	Request     *shared.ReleaseInput `request:"mediaType=application/json"`
 	Security    FirebaserulesProjectsReleasesCreateSecurity
 }
 

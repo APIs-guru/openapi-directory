@@ -1,5 +1,7 @@
 package shared
 
+// OpenLiveStreamDto
+// Open live stream dto.
 type OpenLiveStreamDto struct {
 	AudioStreamIndex    *int32              `json:"AudioStreamIndex,omitempty"`
 	DeviceProfile       *DeviceProfile      `json:"DeviceProfile,omitempty"`

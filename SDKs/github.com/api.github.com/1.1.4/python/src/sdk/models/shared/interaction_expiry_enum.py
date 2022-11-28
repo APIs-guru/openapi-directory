@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class InteractionExpiryEnum(str, Enum):
     ONE_DAY = "one_day"

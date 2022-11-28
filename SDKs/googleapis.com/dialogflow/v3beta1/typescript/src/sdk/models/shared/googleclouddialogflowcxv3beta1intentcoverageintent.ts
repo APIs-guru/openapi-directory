@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudDialogflowCxV3beta1IntentCoverageIntent
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The agent's intent.
 **/
 export class GoogleCloudDialogflowCxV3beta1IntentCoverageIntent extends SpeakeasyBase {
-  @Metadata({ data: "json, name=covered" })
+  @SpeakeasyMetadata({ data: "json, name=covered" })
   covered?: boolean;
 
-  @Metadata({ data: "json, name=intent" })
+  @SpeakeasyMetadata({ data: "json, name=intent" })
   intent?: string;
 }

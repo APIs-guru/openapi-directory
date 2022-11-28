@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var GetInstanceHealthResponseHealthStateEnum;
 (function (GetInstanceHealthResponseHealthStateEnum) {
     GetInstanceHealthResponseHealthStateEnum["HealthStateUnspecified"] = "HEALTH_STATE_UNSPECIFIED";
@@ -41,11 +41,11 @@ var GetInstanceHealthResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=healthInfo" }),
+        SpeakeasyMetadata({ data: "json, name=healthInfo" }),
         __metadata("design:type", Map)
     ], GetInstanceHealthResponse.prototype, "healthInfo", void 0);
     __decorate([
-        Metadata({ data: "json, name=healthState" }),
+        SpeakeasyMetadata({ data: "json, name=healthState" }),
         __metadata("design:type", String)
     ], GetInstanceHealthResponse.prototype, "healthState", void 0);
     return GetInstanceHealthResponse;

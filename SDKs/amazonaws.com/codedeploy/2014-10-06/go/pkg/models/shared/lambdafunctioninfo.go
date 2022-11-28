@@ -1,5 +1,8 @@
 package shared
 
+// LambdaFunctionInfo
+//
+//	Information about a Lambda function specified in a deployment.
 type LambdaFunctionInfo struct {
 	CurrentVersion      *string  `json:"currentVersion,omitempty"`
 	FunctionAlias       *string  `json:"functionAlias,omitempty"`

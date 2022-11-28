@@ -1,8 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DataStats } from "./datastats";
 import { DataType } from "./datatype";
 import { CorrelatedColumn } from "./correlatedcolumn";
+
 
 
 // ColumnSpec
@@ -10,21 +10,21 @@ import { CorrelatedColumn } from "./correlatedcolumn";
  * A representation of a column in a relational table. When listing them, column specs are returned in the same order in which they were given on import . Used by: * Tables
 **/
 export class ColumnSpec extends SpeakeasyBase {
-  @Metadata({ data: "json, name=dataStats" })
+  @SpeakeasyMetadata({ data: "json, name=dataStats" })
   dataStats?: DataStats;
 
-  @Metadata({ data: "json, name=dataType" })
+  @SpeakeasyMetadata({ data: "json, name=dataType" })
   dataType?: DataType;
 
-  @Metadata({ data: "json, name=displayName" })
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
   displayName?: string;
 
-  @Metadata({ data: "json, name=etag" })
+  @SpeakeasyMetadata({ data: "json, name=etag" })
   etag?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=topCorrelatedColumns", elemType: shared.CorrelatedColumn })
+  @SpeakeasyMetadata({ data: "json, name=topCorrelatedColumns", elemType: CorrelatedColumn })
   topCorrelatedColumns?: CorrelatedColumn[];
 }

@@ -1,14 +1,16 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import callanalyticsjobstatus_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ListCallAnalyticsJobsRequest:
-    job_name_contains: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'JobNameContains' }})
-    max_results: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'MaxResults' }})
-    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'NextToken' }})
-    status: Optional[callanalyticsjobstatus_enum.CallAnalyticsJobStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Status' }})
+    job_name_contains: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('JobNameContains') }})
+    max_results: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('MaxResults') }})
+    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('NextToken') }})
+    status: Optional[CallAnalyticsJobStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Status') }})
     

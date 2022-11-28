@@ -1,5 +1,7 @@
 package shared
 
+// VirtualInterface
+// Information about a virtual interface.
 type VirtualInterface struct {
 	AddressFamily          *AddressFamilyEnum         `json:"addressFamily,omitempty"`
 	AmazonAddress          *string                    `json:"amazonAddress,omitempty"`

@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { DeviceUnderTest } from "./deviceundertest";
 // SuiteDefinitionConfiguration
 /**
  * Gets Suite Definition Configuration.
@@ -34,23 +34,23 @@ var SuiteDefinitionConfiguration = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=devicePermissionRoleArn" }),
+        SpeakeasyMetadata({ data: "json, name=devicePermissionRoleArn" }),
         __metadata("design:type", String)
     ], SuiteDefinitionConfiguration.prototype, "devicePermissionRoleArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=devices", elemType: shared.DeviceUnderTest }),
+        SpeakeasyMetadata({ data: "json, name=devices", elemType: DeviceUnderTest }),
         __metadata("design:type", Array)
     ], SuiteDefinitionConfiguration.prototype, "devices", void 0);
     __decorate([
-        Metadata({ data: "json, name=intendedForQualification" }),
+        SpeakeasyMetadata({ data: "json, name=intendedForQualification" }),
         __metadata("design:type", Boolean)
     ], SuiteDefinitionConfiguration.prototype, "intendedForQualification", void 0);
     __decorate([
-        Metadata({ data: "json, name=rootGroup" }),
+        SpeakeasyMetadata({ data: "json, name=rootGroup" }),
         __metadata("design:type", String)
     ], SuiteDefinitionConfiguration.prototype, "rootGroup", void 0);
     __decorate([
-        Metadata({ data: "json, name=suiteDefinitionName" }),
+        SpeakeasyMetadata({ data: "json, name=suiteDefinitionName" }),
         __metadata("design:type", String)
     ], SuiteDefinitionConfiguration.prototype, "suiteDefinitionName", void 0);
     return SuiteDefinitionConfiguration;

@@ -10,6 +10,8 @@ const (
 	ReplicationCycleStateEnumSucceeded        ReplicationCycleStateEnum = "SUCCEEDED"
 )
 
+// ReplicationCycle
+// ReplicationCycle contains information about the current replication cycle status.
 type ReplicationCycle struct {
 	CycleNumber        *int32                     `json:"cycleNumber,omitempty"`
 	EndTime            *string                    `json:"endTime,omitempty"`

@@ -1,14 +1,18 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import blockaction
-from . import wipeaction
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class PolicyEnforcementRule:
-    block_action: Optional[blockaction.BlockAction] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'blockAction' }})
-    setting_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'settingName' }})
-    wipe_action: Optional[wipeaction.WipeAction] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'wipeAction' }})
+    r"""PolicyEnforcementRule
+    A rule that defines the actions to take if a device or work profile is not compliant with the policy specified in settingName.
+    """
+    
+    block_action: Optional[BlockAction] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('blockAction') }})
+    setting_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('settingName') }})
+    wipe_action: Optional[WipeAction] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('wipeAction') }})
     

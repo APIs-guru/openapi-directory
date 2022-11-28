@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { CreateRowRequest } from "./createrowrequest";
 // BatchCreateRowsRequest
 /**
  * Request message for TablesService.BatchCreateRows.
@@ -34,7 +34,7 @@ var BatchCreateRowsRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=requests", elemType: shared.CreateRowRequest }),
+        SpeakeasyMetadata({ data: "json, name=requests", elemType: CreateRowRequest }),
         __metadata("design:type", Array)
     ], BatchCreateRowsRequest.prototype, "requests", void 0);
     return BatchCreateRowsRequest;

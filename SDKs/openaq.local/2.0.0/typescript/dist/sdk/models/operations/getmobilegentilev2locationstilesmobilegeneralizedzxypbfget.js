@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetMobilegentileV2LocationsTilesMobileGeneralizedZXYPbfGetPathParams = /** @class */ (function (_super) {
     __extends(GetMobilegentileV2LocationsTilesMobileGeneralizedZXYPbfGetPathParams, _super);
@@ -30,15 +30,15 @@ var GetMobilegentileV2LocationsTilesMobileGeneralizedZXYPbfGetPathParams = /** @
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=x" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=x" }),
         __metadata("design:type", Number)
     ], GetMobilegentileV2LocationsTilesMobileGeneralizedZXYPbfGetPathParams.prototype, "x", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=y" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=y" }),
         __metadata("design:type", Number)
     ], GetMobilegentileV2LocationsTilesMobileGeneralizedZXYPbfGetPathParams.prototype, "y", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=z" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=z" }),
         __metadata("design:type", Number)
     ], GetMobilegentileV2LocationsTilesMobileGeneralizedZXYPbfGetPathParams.prototype, "z", void 0);
     return GetMobilegentileV2LocationsTilesMobileGeneralizedZXYPbfGetPathParams;
@@ -50,31 +50,31 @@ var GetMobilegentileV2LocationsTilesMobileGeneralizedZXYPbfGetQueryParams = /** 
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=isAnalysis" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=isAnalysis" }),
         __metadata("design:type", Boolean)
     ], GetMobilegentileV2LocationsTilesMobileGeneralizedZXYPbfGetQueryParams.prototype, "isAnalysis", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=isMobile" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=isMobile" }),
         __metadata("design:type", Boolean)
     ], GetMobilegentileV2LocationsTilesMobileGeneralizedZXYPbfGetQueryParams.prototype, "isMobile", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=lastUpdatedFrom" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=lastUpdatedFrom" }),
         __metadata("design:type", Object)
     ], GetMobilegentileV2LocationsTilesMobileGeneralizedZXYPbfGetQueryParams.prototype, "lastUpdatedFrom", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=lastUpdatedTo" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=lastUpdatedTo" }),
         __metadata("design:type", Object)
     ], GetMobilegentileV2LocationsTilesMobileGeneralizedZXYPbfGetQueryParams.prototype, "lastUpdatedTo", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=location" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=location" }),
         __metadata("design:type", Array)
     ], GetMobilegentileV2LocationsTilesMobileGeneralizedZXYPbfGetQueryParams.prototype, "location", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=parameter" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=parameter" }),
         __metadata("design:type", Object)
     ], GetMobilegentileV2LocationsTilesMobileGeneralizedZXYPbfGetQueryParams.prototype, "parameter", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=project" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=project" }),
         __metadata("design:type", Number)
     ], GetMobilegentileV2LocationsTilesMobileGeneralizedZXYPbfGetQueryParams.prototype, "project", void 0);
     return GetMobilegentileV2LocationsTilesMobileGeneralizedZXYPbfGetQueryParams;
@@ -86,11 +86,11 @@ var GetMobilegentileV2LocationsTilesMobileGeneralizedZXYPbfGetRequest = /** @cla
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetMobilegentileV2LocationsTilesMobileGeneralizedZXYPbfGetPathParams)
     ], GetMobilegentileV2LocationsTilesMobileGeneralizedZXYPbfGetRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetMobilegentileV2LocationsTilesMobileGeneralizedZXYPbfGetQueryParams)
     ], GetMobilegentileV2LocationsTilesMobileGeneralizedZXYPbfGetRequest.prototype, "queryParams", void 0);
     return GetMobilegentileV2LocationsTilesMobileGeneralizedZXYPbfGetRequest;
@@ -102,15 +102,15 @@ var GetMobilegentileV2LocationsTilesMobileGeneralizedZXYPbfGetResponse = /** @cl
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetMobilegentileV2LocationsTilesMobileGeneralizedZXYPbfGetResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.HttpValidationError)
     ], GetMobilegentileV2LocationsTilesMobileGeneralizedZXYPbfGetResponse.prototype, "httpValidationError", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetMobilegentileV2LocationsTilesMobileGeneralizedZXYPbfGetResponse.prototype, "statusCode", void 0);
     return GetMobilegentileV2LocationsTilesMobileGeneralizedZXYPbfGetResponse;

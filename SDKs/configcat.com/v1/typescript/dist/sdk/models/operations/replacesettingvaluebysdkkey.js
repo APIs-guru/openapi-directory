@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var ReplaceSettingValueBySdkkeyPathParams = /** @class */ (function (_super) {
     __extends(ReplaceSettingValueBySdkkeyPathParams, _super);
@@ -30,7 +30,7 @@ var ReplaceSettingValueBySdkkeyPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=settingKeyOrId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=settingKeyOrId" }),
         __metadata("design:type", String)
     ], ReplaceSettingValueBySdkkeyPathParams.prototype, "settingKeyOrId", void 0);
     return ReplaceSettingValueBySdkkeyPathParams;
@@ -42,7 +42,7 @@ var ReplaceSettingValueBySdkkeyQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=reason" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=reason" }),
         __metadata("design:type", String)
     ], ReplaceSettingValueBySdkkeyQueryParams.prototype, "reason", void 0);
     return ReplaceSettingValueBySdkkeyQueryParams;
@@ -54,7 +54,7 @@ var ReplaceSettingValueBySdkkeyHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-CONFIGCAT-SDKKEY" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-CONFIGCAT-SDKKEY" }),
         __metadata("design:type", String)
     ], ReplaceSettingValueBySdkkeyHeaders.prototype, "xConfigcatSdkkey", void 0);
     return ReplaceSettingValueBySdkkeyHeaders;
@@ -66,15 +66,15 @@ var ReplaceSettingValueBySdkkeyRequests = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "request, media_type=application/*+json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/*+json" }),
         __metadata("design:type", shared.UpdateSettingValueModel)
     ], ReplaceSettingValueBySdkkeyRequests.prototype, "updateSettingValueModel", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", shared.UpdateSettingValueModel)
     ], ReplaceSettingValueBySdkkeyRequests.prototype, "updateSettingValueModel1", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=text/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=text/json" }),
         __metadata("design:type", shared.UpdateSettingValueModel)
     ], ReplaceSettingValueBySdkkeyRequests.prototype, "updateSettingValueModel2", void 0);
     return ReplaceSettingValueBySdkkeyRequests;
@@ -86,19 +86,19 @@ var ReplaceSettingValueBySdkkeyRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ReplaceSettingValueBySdkkeyPathParams)
     ], ReplaceSettingValueBySdkkeyRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ReplaceSettingValueBySdkkeyQueryParams)
     ], ReplaceSettingValueBySdkkeyRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ReplaceSettingValueBySdkkeyHeaders)
     ], ReplaceSettingValueBySdkkeyRequest.prototype, "headers", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ReplaceSettingValueBySdkkeyRequests)
     ], ReplaceSettingValueBySdkkeyRequest.prototype, "request", void 0);
     return ReplaceSettingValueBySdkkeyRequest;
@@ -110,19 +110,19 @@ var ReplaceSettingValueBySdkkeyResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], ReplaceSettingValueBySdkkeyResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.SettingValueModel)
     ], ReplaceSettingValueBySdkkeyResponse.prototype, "settingValueModel", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.SettingValueModelHaljson)
     ], ReplaceSettingValueBySdkkeyResponse.prototype, "settingValueModelHaljson", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], ReplaceSettingValueBySdkkeyResponse.prototype, "statusCode", void 0);
     return ReplaceSettingValueBySdkkeyResponse;

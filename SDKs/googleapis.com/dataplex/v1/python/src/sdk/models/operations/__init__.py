@@ -1,3 +1,6 @@
+from .dataplex_projects_locations_datascans_create import *
+from .dataplex_projects_locations_datascans_list import *
+from .dataplex_projects_locations_datascans_run import *
 from .dataplex_projects_locations_lakes_content_create import *
 from .dataplex_projects_locations_lakes_content_list import *
 from .dataplex_projects_locations_lakes_contentitems_create import *

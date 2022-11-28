@@ -25,6 +25,8 @@ const (
 	LineLineTypeEnumStraightLine       LineLineTypeEnum = "STRAIGHT_LINE"
 )
 
+// Line
+// A PageElement kind representing a non-connector line, straight connector, curved connector, or bent connector.
 type Line struct {
 	LineCategory   *LineLineCategoryEnum `json:"lineCategory,omitempty"`
 	LineProperties *LineProperties       `json:"lineProperties,omitempty"`

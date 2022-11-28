@@ -1,8 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { UpdateSystemModelsUpdateMetricsDataActiveVersionByClientRecord } from "./updatesystemmodelsupdatemetricsdataactiveversionbyclientrecord";
 import { UpdateSystemModelsUpdateMetricsDataCurrentStateByClientRecord } from "./updatesystemmodelsupdatemetricsdatacurrentstatebyclientrecord";
 import { UpdateSystemModelsUpdateMetricsDataPackageErrorsRecord } from "./updatesystemmodelsupdatemetricsdatapackageerrorsrecord";
+
 
 
 // UpdateSystemModelsUpdateMetricsData
@@ -10,27 +10,27 @@ import { UpdateSystemModelsUpdateMetricsDataPackageErrorsRecord } from "./update
  * Model that retrieves the data for UpdateMetrics
 **/
 export class UpdateSystemModelsUpdateMetricsData extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ActiveVersion" })
+  @SpeakeasyMetadata({ data: "json, name=ActiveVersion" })
   activeVersion?: string;
 
-  @Metadata({ data: "json, name=ActiveVersionByClient", elemType: shared.UpdateSystemModelsUpdateMetricsDataActiveVersionByClientRecord })
+  @SpeakeasyMetadata({ data: "json, name=ActiveVersionByClient", elemType: UpdateSystemModelsUpdateMetricsDataActiveVersionByClientRecord })
   activeVersionByClient?: UpdateSystemModelsUpdateMetricsDataActiveVersionByClientRecord[];
 
-  @Metadata({ data: "json, name=CurrentStateByClient", elemType: shared.UpdateSystemModelsUpdateMetricsDataCurrentStateByClientRecord })
+  @SpeakeasyMetadata({ data: "json, name=CurrentStateByClient", elemType: UpdateSystemModelsUpdateMetricsDataCurrentStateByClientRecord })
   currentStateByClient?: UpdateSystemModelsUpdateMetricsDataCurrentStateByClientRecord[];
 
-  @Metadata({ data: "json, name=CutOffDate" })
+  @SpeakeasyMetadata({ data: "json, name=CutOffDate" })
   cutOffDate?: Date;
 
-  @Metadata({ data: "json, name=DataRefreshed" })
+  @SpeakeasyMetadata({ data: "json, name=DataRefreshed" })
   dataRefreshed?: Date;
 
-  @Metadata({ data: "json, name=FilteredClientCount" })
+  @SpeakeasyMetadata({ data: "json, name=FilteredClientCount" })
   filteredClientCount?: number;
 
-  @Metadata({ data: "json, name=PackageErrors", elemType: shared.UpdateSystemModelsUpdateMetricsDataPackageErrorsRecord })
+  @SpeakeasyMetadata({ data: "json, name=PackageErrors", elemType: UpdateSystemModelsUpdateMetricsDataPackageErrorsRecord })
   packageErrors?: UpdateSystemModelsUpdateMetricsDataPackageErrorsRecord[];
 
-  @Metadata({ data: "json, name=TotalClientCount" })
+  @SpeakeasyMetadata({ data: "json, name=TotalClientCount" })
   totalClientCount?: number;
 }

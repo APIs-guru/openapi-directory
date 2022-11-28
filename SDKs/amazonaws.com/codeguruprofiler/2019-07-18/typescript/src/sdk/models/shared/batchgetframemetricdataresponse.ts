@@ -1,9 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TimestampStructure } from "./timestampstructure";
 import { FrameMetricDatum } from "./framemetricdatum";
 import { AggregationPeriodEnum } from "./aggregationperiodenum";
-import { TimestampStructure } from "./timestampstructure";
+
 
 
 // BatchGetFrameMetricDataResponse
@@ -11,21 +10,21 @@ import { TimestampStructure } from "./timestampstructure";
  * The structure representing the BatchGetFrameMetricDataResponse.
 **/
 export class BatchGetFrameMetricDataResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=endTime" })
+  @SpeakeasyMetadata({ data: "json, name=endTime" })
   endTime: Date;
 
-  @Metadata({ data: "json, name=endTimes", elemType: shared.TimestampStructure })
+  @SpeakeasyMetadata({ data: "json, name=endTimes", elemType: TimestampStructure })
   endTimes: TimestampStructure[];
 
-  @Metadata({ data: "json, name=frameMetricData", elemType: shared.FrameMetricDatum })
+  @SpeakeasyMetadata({ data: "json, name=frameMetricData", elemType: FrameMetricDatum })
   frameMetricData: FrameMetricDatum[];
 
-  @Metadata({ data: "json, name=resolution" })
+  @SpeakeasyMetadata({ data: "json, name=resolution" })
   resolution: AggregationPeriodEnum;
 
-  @Metadata({ data: "json, name=startTime" })
+  @SpeakeasyMetadata({ data: "json, name=startTime" })
   startTime: Date;
 
-  @Metadata({ data: "json, name=unprocessedEndTimes", elemType: shared.TimestampStructure, elemDepth: 2 })
+  @SpeakeasyMetadata({ data: "json, name=unprocessedEndTimes", elemType: TimestampStructure, elemDepth: 2 })
   unprocessedEndTimes: Map<string, TimestampStructure[]>;
 }

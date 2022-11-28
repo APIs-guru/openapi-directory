@@ -1,38 +1,39 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetResourcesMediaIdYoutubeMetaDataJsonPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" })
   id: number;
 }
 
 
-export class GetResourcesMediaIdYoutubeMetaDataJsonRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: GetResourcesMediaIdYoutubeMetaDataJsonPathParams;
-}
-
-
 export class GetResourcesMediaIdYoutubeMetaDataJson200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=callback" })
+  @SpeakeasyMetadata({ data: "json, name=callback" })
   callback?: string;
 
-  @Metadata({ data: "json, name=meta" })
+  @SpeakeasyMetadata({ data: "json, name=meta" })
   meta?: shared.Meta;
 
-  @Metadata({ data: "json, name=results" })
+  @SpeakeasyMetadata({ data: "json, name=results" })
   results?: Map<string, any>[];
 }
 
 
+export class GetResourcesMediaIdYoutubeMetaDataJsonRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: GetResourcesMediaIdYoutubeMetaDataJsonPathParams;
+}
+
+
 export class GetResourcesMediaIdYoutubeMetaDataJsonResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getResourcesMediaIdYoutubeMetaDataJson200ApplicationJsonObject?: GetResourcesMediaIdYoutubeMetaDataJson200ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

@@ -4,6 +4,9 @@ import (
 	"time"
 )
 
+// Step
+//
+//	Describes an execution step, for an execution job, for an Amplify app.
 type Step struct {
 	ArtifactsURL     *string           `json:"artifactsUrl,omitempty"`
 	Context          *string           `json:"context,omitempty"`

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { Repo } from "./repo";
 /**
  * Response for ListRepos. The size is not set in the returned repositories.

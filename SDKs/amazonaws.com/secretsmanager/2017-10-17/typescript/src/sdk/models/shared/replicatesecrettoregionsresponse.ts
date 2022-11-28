@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ReplicationStatusType } from "./replicationstatustype";
 
 
+
 export class ReplicateSecretToRegionsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ARN" })
+  @SpeakeasyMetadata({ data: "json, name=ARN" })
   arn?: string;
 
-  @Metadata({ data: "json, name=ReplicationStatus", elemType: shared.ReplicationStatusType })
+  @SpeakeasyMetadata({ data: "json, name=ReplicationStatus", elemType: ReplicationStatusType })
   replicationStatus?: ReplicationStatusType[];
 }

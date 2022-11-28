@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class TasksTasksPatchPathParams:
-    task: str = field(default=None, metadata={'path_param': { 'field_name': 'task', 'style': 'simple', 'explode': False }})
-    tasklist: str = field(default=None, metadata={'path_param': { 'field_name': 'tasklist', 'style': 'simple', 'explode': False }})
+    task: str = field(metadata={'path_param': { 'field_name': 'task', 'style': 'simple', 'explode': False }})
+    tasklist: str = field(metadata={'path_param': { 'field_name': 'tasklist', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,21 +27,21 @@ class TasksTasksPatchQueryParams:
 
 @dataclass
 class TasksTasksPatchSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class TasksTasksPatchRequest:
-    path_params: TasksTasksPatchPathParams = field(default=None)
-    query_params: TasksTasksPatchQueryParams = field(default=None)
+    path_params: TasksTasksPatchPathParams = field()
+    query_params: TasksTasksPatchQueryParams = field()
+    security: TasksTasksPatchSecurity = field()
     request: Optional[shared.Task] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: TasksTasksPatchSecurity = field(default=None)
     
 
 @dataclass
 class TasksTasksPatchResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     task: Optional[shared.Task] = field(default=None)
     

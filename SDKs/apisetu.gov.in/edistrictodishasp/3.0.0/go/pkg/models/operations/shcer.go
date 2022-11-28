@@ -29,11 +29,6 @@ type ShcerSecurity struct {
 	ClientID shared.SchemeClientID `security:"scheme,type=apiKey,subtype=header"`
 }
 
-type ShcerRequest struct {
-	Request  *ShcerRequestBody `request:"mediaType=application/json"`
-	Security ShcerSecurity
-}
-
 type Shcer400ApplicationJSONErrorEnum string
 
 const (
@@ -163,6 +158,11 @@ const (
 type Shcer504ApplicationJSON struct {
 	Error            *Shcer504ApplicationJSONErrorEnum            `json:"error,omitempty"`
 	ErrorDescription *Shcer504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
+}
+
+type ShcerRequest struct {
+	Request  *ShcerRequestBody `request:"mediaType=application/json"`
+	Security ShcerSecurity
 }
 
 type ShcerResponse struct {

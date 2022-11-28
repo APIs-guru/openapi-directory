@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class OsconfigProjectsLocationsOsPolicyAssignmentsListPathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -27,20 +28,20 @@ class OsconfigProjectsLocationsOsPolicyAssignmentsListQueryParams:
 
 @dataclass
 class OsconfigProjectsLocationsOsPolicyAssignmentsListSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class OsconfigProjectsLocationsOsPolicyAssignmentsListRequest:
-    path_params: OsconfigProjectsLocationsOsPolicyAssignmentsListPathParams = field(default=None)
-    query_params: OsconfigProjectsLocationsOsPolicyAssignmentsListQueryParams = field(default=None)
-    security: OsconfigProjectsLocationsOsPolicyAssignmentsListSecurity = field(default=None)
+    path_params: OsconfigProjectsLocationsOsPolicyAssignmentsListPathParams = field()
+    query_params: OsconfigProjectsLocationsOsPolicyAssignmentsListQueryParams = field()
+    security: OsconfigProjectsLocationsOsPolicyAssignmentsListSecurity = field()
     
 
 @dataclass
 class OsconfigProjectsLocationsOsPolicyAssignmentsListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     list_os_policy_assignments_response: Optional[shared.ListOsPolicyAssignmentsResponse] = field(default=None)
-    status_code: int = field(default=None)
     

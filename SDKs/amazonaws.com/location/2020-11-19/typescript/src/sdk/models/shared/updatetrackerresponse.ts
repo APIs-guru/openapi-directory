@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class UpdateTrackerResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=TrackerArn" })
+  @SpeakeasyMetadata({ data: "json, name=TrackerArn" })
   trackerArn: string;
 
-  @Metadata({ data: "json, name=TrackerName" })
+  @SpeakeasyMetadata({ data: "json, name=TrackerName" })
   trackerName: string;
 
-  @Metadata({ data: "json, name=UpdateTime" })
+  @SpeakeasyMetadata({ data: "json, name=UpdateTime" })
   updateTime: Date;
 }

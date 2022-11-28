@@ -10,7 +10,7 @@ import (
 	"strings"
 )
 
-var Servers = []string{
+var ServerList = []string{
 	"http://athena.{region}.amazonaws.com",
 	"https://athena.{region}.amazonaws.com",
 	"http://athena.{region}.amazonaws.com.cn",
@@ -21,10 +21,15 @@ type HTTPClient interface {
 	Do(req *http.Request) (*http.Response, error)
 }
 
+// SDK Documentation: https://docs.aws.amazon.com/athena/ - Amazon Web Services documentation
 type SDK struct {
-	defaultClient  HTTPClient
-	securityClient HTTPClient
-	serverURL      string
+	_defaultClient  HTTPClient
+	_securityClient HTTPClient
+	_security       *shared.Security
+	_serverURL      string
+	_language       string
+	_sdkVersion     string
+	_genVersion     string
 }
 
 type SDKOption func(*SDK)
@@ -35,33 +40,55 @@ func WithServerURL(serverURL string, params map[string]string) SDKOption {
 			serverURL = utils.ReplaceParameters(serverURL, params)
 		}
 
-		sdk.serverURL = serverURL
+		sdk._serverURL = serverURL
+	}
+}
+
+func WithClient(client HTTPClient) SDKOption {
+	return func(sdk *SDK) {
+		sdk._defaultClient = client
 	}
 }
 
 func WithSecurity(security shared.Security) SDKOption {
 	return func(sdk *SDK) {
-		sdk.securityClient = utils.CreateSecurityClient(security)
+		sdk._security = &security
 	}
 }
 
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
-		defaultClient:  http.DefaultClient,
-		securityClient: http.DefaultClient,
+		_language:   "go",
+		_sdkVersion: "",
+		_genVersion: "internal",
 	}
 	for _, opt := range opts {
 		opt(sdk)
 	}
-	if sdk.serverURL == "" {
-		sdk.serverURL = Servers[0]
+
+	if sdk._defaultClient == nil {
+		sdk._defaultClient = http.DefaultClient
+	}
+	if sdk._securityClient == nil {
+
+		if sdk._security != nil {
+			sdk._securityClient = utils.ConfigureSecurityClient(sdk._defaultClient, sdk._security)
+		} else {
+			sdk._securityClient = sdk._defaultClient
+		}
+
+	}
+
+	if sdk._serverURL == "" {
+		sdk._serverURL = ServerList[0]
 	}
 
 	return sdk
 }
 
+// BatchGetNamedQuery - Returns the details of a single named query or a list of up to 50 queries, which you provide as an array of query ID strings. Requires you to have access to the workgroup in which the queries were saved. Use <a>ListNamedQueriesInput</a> to get the list of named query IDs in the specified workgroup. If information could not be retrieved for a submitted query ID, information about the query ID submitted is listed under <a>UnprocessedNamedQueryId</a>. Named queries differ from executed queries. Use <a>BatchGetQueryExecutionInput</a> to get details about each unique query execution, and <a>ListQueryExecutionsInput</a> to get a list of query execution IDs.
 func (s *SDK) BatchGetNamedQuery(ctx context.Context, request operations.BatchGetNamedQueryRequest) (*operations.BatchGetNamedQueryResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonAthena.BatchGetNamedQuery"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -81,7 +108,7 @@ func (s *SDK) BatchGetNamedQuery(ctx context.Context, request operations.BatchGe
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -131,8 +158,9 @@ func (s *SDK) BatchGetNamedQuery(ctx context.Context, request operations.BatchGe
 	return res, nil
 }
 
+// BatchGetQueryExecution - Returns the details of a single query execution or a list of up to 50 query executions, which you provide as an array of query execution ID strings. Requires you to have access to the workgroup in which the queries ran. To get a list of query execution IDs, use <a>ListQueryExecutionsInput$WorkGroup</a>. Query executions differ from named (saved) queries. Use <a>BatchGetNamedQueryInput</a> to get details about named queries.
 func (s *SDK) BatchGetQueryExecution(ctx context.Context, request operations.BatchGetQueryExecutionRequest) (*operations.BatchGetQueryExecutionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonAthena.BatchGetQueryExecution"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -152,7 +180,7 @@ func (s *SDK) BatchGetQueryExecution(ctx context.Context, request operations.Bat
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -202,8 +230,9 @@ func (s *SDK) BatchGetQueryExecution(ctx context.Context, request operations.Bat
 	return res, nil
 }
 
+// CreateDataCatalog - Creates (registers) a data catalog with the specified name and properties. Catalogs created are visible to all users of the same Amazon Web Services account.
 func (s *SDK) CreateDataCatalog(ctx context.Context, request operations.CreateDataCatalogRequest) (*operations.CreateDataCatalogResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonAthena.CreateDataCatalog"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -223,7 +252,7 @@ func (s *SDK) CreateDataCatalog(ctx context.Context, request operations.CreateDa
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -273,8 +302,9 @@ func (s *SDK) CreateDataCatalog(ctx context.Context, request operations.CreateDa
 	return res, nil
 }
 
+// CreateNamedQuery - <p>Creates a named query in the specified workgroup. Requires that you have access to the workgroup.</p> <p>For code samples using the Amazon Web Services SDK for Java, see <a href="http://docs.aws.amazon.com/athena/latest/ug/code-samples.html">Examples and Code Samples</a> in the <i>Amazon Athena User Guide</i>.</p>
 func (s *SDK) CreateNamedQuery(ctx context.Context, request operations.CreateNamedQueryRequest) (*operations.CreateNamedQueryResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonAthena.CreateNamedQuery"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -294,7 +324,7 @@ func (s *SDK) CreateNamedQuery(ctx context.Context, request operations.CreateNam
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -344,8 +374,9 @@ func (s *SDK) CreateNamedQuery(ctx context.Context, request operations.CreateNam
 	return res, nil
 }
 
+// CreatePreparedStatement - Creates a prepared statement for use with SQL queries in Athena.
 func (s *SDK) CreatePreparedStatement(ctx context.Context, request operations.CreatePreparedStatementRequest) (*operations.CreatePreparedStatementResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonAthena.CreatePreparedStatement"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -365,7 +396,7 @@ func (s *SDK) CreatePreparedStatement(ctx context.Context, request operations.Cr
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -415,8 +446,9 @@ func (s *SDK) CreatePreparedStatement(ctx context.Context, request operations.Cr
 	return res, nil
 }
 
+// CreateWorkGroup - Creates a workgroup with the specified name.
 func (s *SDK) CreateWorkGroup(ctx context.Context, request operations.CreateWorkGroupRequest) (*operations.CreateWorkGroupResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonAthena.CreateWorkGroup"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -436,7 +468,7 @@ func (s *SDK) CreateWorkGroup(ctx context.Context, request operations.CreateWork
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -486,8 +518,9 @@ func (s *SDK) CreateWorkGroup(ctx context.Context, request operations.CreateWork
 	return res, nil
 }
 
+// DeleteDataCatalog - Deletes a data catalog.
 func (s *SDK) DeleteDataCatalog(ctx context.Context, request operations.DeleteDataCatalogRequest) (*operations.DeleteDataCatalogResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonAthena.DeleteDataCatalog"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -507,7 +540,7 @@ func (s *SDK) DeleteDataCatalog(ctx context.Context, request operations.DeleteDa
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -557,8 +590,9 @@ func (s *SDK) DeleteDataCatalog(ctx context.Context, request operations.DeleteDa
 	return res, nil
 }
 
+// DeleteNamedQuery - <p>Deletes the named query if you have access to the workgroup in which the query was saved.</p> <p>For code samples using the Amazon Web Services SDK for Java, see <a href="http://docs.aws.amazon.com/athena/latest/ug/code-samples.html">Examples and Code Samples</a> in the <i>Amazon Athena User Guide</i>.</p>
 func (s *SDK) DeleteNamedQuery(ctx context.Context, request operations.DeleteNamedQueryRequest) (*operations.DeleteNamedQueryResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonAthena.DeleteNamedQuery"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -578,7 +612,7 @@ func (s *SDK) DeleteNamedQuery(ctx context.Context, request operations.DeleteNam
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -628,8 +662,9 @@ func (s *SDK) DeleteNamedQuery(ctx context.Context, request operations.DeleteNam
 	return res, nil
 }
 
+// DeletePreparedStatement - Deletes the prepared statement with the specified name from the specified workgroup.
 func (s *SDK) DeletePreparedStatement(ctx context.Context, request operations.DeletePreparedStatementRequest) (*operations.DeletePreparedStatementResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonAthena.DeletePreparedStatement"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -649,7 +684,7 @@ func (s *SDK) DeletePreparedStatement(ctx context.Context, request operations.De
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -709,8 +744,9 @@ func (s *SDK) DeletePreparedStatement(ctx context.Context, request operations.De
 	return res, nil
 }
 
+// DeleteWorkGroup - Deletes the workgroup with the specified name. The primary workgroup cannot be deleted.
 func (s *SDK) DeleteWorkGroup(ctx context.Context, request operations.DeleteWorkGroupRequest) (*operations.DeleteWorkGroupResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonAthena.DeleteWorkGroup"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -730,7 +766,7 @@ func (s *SDK) DeleteWorkGroup(ctx context.Context, request operations.DeleteWork
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -780,8 +816,9 @@ func (s *SDK) DeleteWorkGroup(ctx context.Context, request operations.DeleteWork
 	return res, nil
 }
 
+// GetDataCatalog - Returns the specified data catalog.
 func (s *SDK) GetDataCatalog(ctx context.Context, request operations.GetDataCatalogRequest) (*operations.GetDataCatalogResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonAthena.GetDataCatalog"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -801,7 +838,7 @@ func (s *SDK) GetDataCatalog(ctx context.Context, request operations.GetDataCata
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -851,8 +888,9 @@ func (s *SDK) GetDataCatalog(ctx context.Context, request operations.GetDataCata
 	return res, nil
 }
 
+// GetDatabase - Returns a database object for the specified database and data catalog.
 func (s *SDK) GetDatabase(ctx context.Context, request operations.GetDatabaseRequest) (*operations.GetDatabaseResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonAthena.GetDatabase"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -872,7 +910,7 @@ func (s *SDK) GetDatabase(ctx context.Context, request operations.GetDatabaseReq
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -932,8 +970,9 @@ func (s *SDK) GetDatabase(ctx context.Context, request operations.GetDatabaseReq
 	return res, nil
 }
 
+// GetNamedQuery - Returns information about a single query. Requires that you have access to the workgroup in which the query was saved.
 func (s *SDK) GetNamedQuery(ctx context.Context, request operations.GetNamedQueryRequest) (*operations.GetNamedQueryResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonAthena.GetNamedQuery"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -953,7 +992,7 @@ func (s *SDK) GetNamedQuery(ctx context.Context, request operations.GetNamedQuer
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1003,8 +1042,9 @@ func (s *SDK) GetNamedQuery(ctx context.Context, request operations.GetNamedQuer
 	return res, nil
 }
 
+// GetPreparedStatement - Retrieves the prepared statement with the specified name from the specified workgroup.
 func (s *SDK) GetPreparedStatement(ctx context.Context, request operations.GetPreparedStatementRequest) (*operations.GetPreparedStatementResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonAthena.GetPreparedStatement"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1024,7 +1064,7 @@ func (s *SDK) GetPreparedStatement(ctx context.Context, request operations.GetPr
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1084,8 +1124,9 @@ func (s *SDK) GetPreparedStatement(ctx context.Context, request operations.GetPr
 	return res, nil
 }
 
+// GetQueryExecution - Returns information about a single execution of a query if you have access to the workgroup in which the query ran. Each time a query executes, information about the query execution is saved with a unique ID.
 func (s *SDK) GetQueryExecution(ctx context.Context, request operations.GetQueryExecutionRequest) (*operations.GetQueryExecutionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonAthena.GetQueryExecution"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1105,7 +1146,7 @@ func (s *SDK) GetQueryExecution(ctx context.Context, request operations.GetQuery
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1155,8 +1196,9 @@ func (s *SDK) GetQueryExecution(ctx context.Context, request operations.GetQuery
 	return res, nil
 }
 
+// GetQueryResults - <p>Streams the results of a single query execution specified by <code>QueryExecutionId</code> from the Athena query results location in Amazon S3. For more information, see <a href="https://docs.aws.amazon.com/athena/latest/ug/querying.html">Query Results</a> in the <i>Amazon Athena User Guide</i>. This request does not execute the query but returns results. Use <a>StartQueryExecution</a> to run a query.</p> <p>To stream query results successfully, the IAM principal with permission to call <code>GetQueryResults</code> also must have permissions to the Amazon S3 <code>GetObject</code> action for the Athena query results location.</p> <important> <p>IAM principals with permission to the Amazon S3 <code>GetObject</code> action for the query results location are able to retrieve query results from Amazon S3 even if permission to the <code>GetQueryResults</code> action is denied. To restrict user or role access, ensure that Amazon S3 permissions to the Athena query location are denied.</p> </important>
 func (s *SDK) GetQueryResults(ctx context.Context, request operations.GetQueryResultsRequest) (*operations.GetQueryResultsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonAthena.GetQueryResults"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1178,7 +1220,7 @@ func (s *SDK) GetQueryResults(ctx context.Context, request operations.GetQueryRe
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1228,8 +1270,9 @@ func (s *SDK) GetQueryResults(ctx context.Context, request operations.GetQueryRe
 	return res, nil
 }
 
+// GetTableMetadata - Returns table metadata for the specified catalog, database, and table.
 func (s *SDK) GetTableMetadata(ctx context.Context, request operations.GetTableMetadataRequest) (*operations.GetTableMetadataResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonAthena.GetTableMetadata"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1249,7 +1292,7 @@ func (s *SDK) GetTableMetadata(ctx context.Context, request operations.GetTableM
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1309,8 +1352,9 @@ func (s *SDK) GetTableMetadata(ctx context.Context, request operations.GetTableM
 	return res, nil
 }
 
+// GetWorkGroup - Returns information about the workgroup with the specified name.
 func (s *SDK) GetWorkGroup(ctx context.Context, request operations.GetWorkGroupRequest) (*operations.GetWorkGroupResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonAthena.GetWorkGroup"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1330,7 +1374,7 @@ func (s *SDK) GetWorkGroup(ctx context.Context, request operations.GetWorkGroupR
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1380,8 +1424,9 @@ func (s *SDK) GetWorkGroup(ctx context.Context, request operations.GetWorkGroupR
 	return res, nil
 }
 
+// ListDataCatalogs - Lists the data catalogs in the current Amazon Web Services account.
 func (s *SDK) ListDataCatalogs(ctx context.Context, request operations.ListDataCatalogsRequest) (*operations.ListDataCatalogsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonAthena.ListDataCatalogs"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1403,7 +1448,7 @@ func (s *SDK) ListDataCatalogs(ctx context.Context, request operations.ListDataC
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1453,8 +1498,9 @@ func (s *SDK) ListDataCatalogs(ctx context.Context, request operations.ListDataC
 	return res, nil
 }
 
+// ListDatabases - Lists the databases in the specified data catalog.
 func (s *SDK) ListDatabases(ctx context.Context, request operations.ListDatabasesRequest) (*operations.ListDatabasesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonAthena.ListDatabases"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1476,7 +1522,7 @@ func (s *SDK) ListDatabases(ctx context.Context, request operations.ListDatabase
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1536,8 +1582,9 @@ func (s *SDK) ListDatabases(ctx context.Context, request operations.ListDatabase
 	return res, nil
 }
 
+// ListEngineVersions - Returns a list of engine versions that are available to choose from, including the Auto option.
 func (s *SDK) ListEngineVersions(ctx context.Context, request operations.ListEngineVersionsRequest) (*operations.ListEngineVersionsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonAthena.ListEngineVersions"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1557,7 +1604,7 @@ func (s *SDK) ListEngineVersions(ctx context.Context, request operations.ListEng
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1607,8 +1654,9 @@ func (s *SDK) ListEngineVersions(ctx context.Context, request operations.ListEng
 	return res, nil
 }
 
+// ListNamedQueries - <p>Provides a list of available query IDs only for queries saved in the specified workgroup. Requires that you have access to the specified workgroup. If a workgroup is not specified, lists the saved queries for the primary workgroup.</p> <p>For code samples using the Amazon Web Services SDK for Java, see <a href="http://docs.aws.amazon.com/athena/latest/ug/code-samples.html">Examples and Code Samples</a> in the <i>Amazon Athena User Guide</i>.</p>
 func (s *SDK) ListNamedQueries(ctx context.Context, request operations.ListNamedQueriesRequest) (*operations.ListNamedQueriesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonAthena.ListNamedQueries"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1630,7 +1678,7 @@ func (s *SDK) ListNamedQueries(ctx context.Context, request operations.ListNamed
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1680,8 +1728,9 @@ func (s *SDK) ListNamedQueries(ctx context.Context, request operations.ListNamed
 	return res, nil
 }
 
+// ListPreparedStatements - Lists the prepared statements in the specfied workgroup.
 func (s *SDK) ListPreparedStatements(ctx context.Context, request operations.ListPreparedStatementsRequest) (*operations.ListPreparedStatementsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonAthena.ListPreparedStatements"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1703,7 +1752,7 @@ func (s *SDK) ListPreparedStatements(ctx context.Context, request operations.Lis
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1753,8 +1802,9 @@ func (s *SDK) ListPreparedStatements(ctx context.Context, request operations.Lis
 	return res, nil
 }
 
+// ListQueryExecutions - <p>Provides a list of available query execution IDs for the queries in the specified workgroup. If a workgroup is not specified, returns a list of query execution IDs for the primary workgroup. Requires you to have access to the workgroup in which the queries ran.</p> <p>For code samples using the Amazon Web Services SDK for Java, see <a href="http://docs.aws.amazon.com/athena/latest/ug/code-samples.html">Examples and Code Samples</a> in the <i>Amazon Athena User Guide</i>.</p>
 func (s *SDK) ListQueryExecutions(ctx context.Context, request operations.ListQueryExecutionsRequest) (*operations.ListQueryExecutionsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonAthena.ListQueryExecutions"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1776,7 +1826,7 @@ func (s *SDK) ListQueryExecutions(ctx context.Context, request operations.ListQu
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1826,8 +1876,9 @@ func (s *SDK) ListQueryExecutions(ctx context.Context, request operations.ListQu
 	return res, nil
 }
 
+// ListTableMetadata - Lists the metadata for the tables in the specified data catalog database.
 func (s *SDK) ListTableMetadata(ctx context.Context, request operations.ListTableMetadataRequest) (*operations.ListTableMetadataResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonAthena.ListTableMetadata"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1849,7 +1900,7 @@ func (s *SDK) ListTableMetadata(ctx context.Context, request operations.ListTabl
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1909,8 +1960,9 @@ func (s *SDK) ListTableMetadata(ctx context.Context, request operations.ListTabl
 	return res, nil
 }
 
+// ListTagsForResource - Lists the tags associated with an Athena workgroup or data catalog resource.
 func (s *SDK) ListTagsForResource(ctx context.Context, request operations.ListTagsForResourceRequest) (*operations.ListTagsForResourceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonAthena.ListTagsForResource"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1932,7 +1984,7 @@ func (s *SDK) ListTagsForResource(ctx context.Context, request operations.ListTa
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1992,8 +2044,9 @@ func (s *SDK) ListTagsForResource(ctx context.Context, request operations.ListTa
 	return res, nil
 }
 
+// ListWorkGroups - Lists available workgroups for the account.
 func (s *SDK) ListWorkGroups(ctx context.Context, request operations.ListWorkGroupsRequest) (*operations.ListWorkGroupsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonAthena.ListWorkGroups"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2015,7 +2068,7 @@ func (s *SDK) ListWorkGroups(ctx context.Context, request operations.ListWorkGro
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2065,8 +2118,9 @@ func (s *SDK) ListWorkGroups(ctx context.Context, request operations.ListWorkGro
 	return res, nil
 }
 
+// StartQueryExecution - Runs the SQL query statements contained in the <code>Query</code>. Requires you to have access to the workgroup in which the query ran. Running queries against an external catalog requires <a>GetDataCatalog</a> permission to the catalog. For code samples using the Amazon Web Services SDK for Java, see <a href="http://docs.aws.amazon.com/athena/latest/ug/code-samples.html">Examples and Code Samples</a> in the <i>Amazon Athena User Guide</i>.
 func (s *SDK) StartQueryExecution(ctx context.Context, request operations.StartQueryExecutionRequest) (*operations.StartQueryExecutionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonAthena.StartQueryExecution"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2086,7 +2140,7 @@ func (s *SDK) StartQueryExecution(ctx context.Context, request operations.StartQ
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2146,8 +2200,9 @@ func (s *SDK) StartQueryExecution(ctx context.Context, request operations.StartQ
 	return res, nil
 }
 
+// StopQueryExecution - <p>Stops a query execution. Requires you to have access to the workgroup in which the query ran.</p> <p>For code samples using the Amazon Web Services SDK for Java, see <a href="http://docs.aws.amazon.com/athena/latest/ug/code-samples.html">Examples and Code Samples</a> in the <i>Amazon Athena User Guide</i>.</p>
 func (s *SDK) StopQueryExecution(ctx context.Context, request operations.StopQueryExecutionRequest) (*operations.StopQueryExecutionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonAthena.StopQueryExecution"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2167,7 +2222,7 @@ func (s *SDK) StopQueryExecution(ctx context.Context, request operations.StopQue
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2217,8 +2272,9 @@ func (s *SDK) StopQueryExecution(ctx context.Context, request operations.StopQue
 	return res, nil
 }
 
+// TagResource - Adds one or more tags to an Athena resource. A tag is a label that you assign to a resource. In Athena, a resource can be a workgroup or data catalog. Each tag consists of a key and an optional value, both of which you define. For example, you can use tags to categorize Athena workgroups or data catalogs by purpose, owner, or environment. Use a consistent set of tag keys to make it easier to search and filter workgroups or data catalogs in your account. For best practices, see <a href="https://aws.amazon.com/answers/account-management/aws-tagging-strategies/">Tagging Best Practices</a>. Tag keys can be from 1 to 128 UTF-8 Unicode characters, and tag values can be from 0 to 256 UTF-8 Unicode characters. Tags can use letters and numbers representable in UTF-8, and the following characters: + - = . _ : / @. Tag keys and values are case-sensitive. Tag keys must be unique per resource. If you specify more than one tag, separate them by commas.
 func (s *SDK) TagResource(ctx context.Context, request operations.TagResourceRequest) (*operations.TagResourceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonAthena.TagResource"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2238,7 +2294,7 @@ func (s *SDK) TagResource(ctx context.Context, request operations.TagResourceReq
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2298,8 +2354,9 @@ func (s *SDK) TagResource(ctx context.Context, request operations.TagResourceReq
 	return res, nil
 }
 
+// UntagResource - Removes one or more tags from a data catalog or workgroup resource.
 func (s *SDK) UntagResource(ctx context.Context, request operations.UntagResourceRequest) (*operations.UntagResourceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonAthena.UntagResource"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2319,7 +2376,7 @@ func (s *SDK) UntagResource(ctx context.Context, request operations.UntagResourc
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2379,8 +2436,9 @@ func (s *SDK) UntagResource(ctx context.Context, request operations.UntagResourc
 	return res, nil
 }
 
+// UpdateDataCatalog - Updates the data catalog that has the specified name.
 func (s *SDK) UpdateDataCatalog(ctx context.Context, request operations.UpdateDataCatalogRequest) (*operations.UpdateDataCatalogResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonAthena.UpdateDataCatalog"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2400,7 +2458,7 @@ func (s *SDK) UpdateDataCatalog(ctx context.Context, request operations.UpdateDa
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2450,8 +2508,9 @@ func (s *SDK) UpdateDataCatalog(ctx context.Context, request operations.UpdateDa
 	return res, nil
 }
 
+// UpdatePreparedStatement - Updates a prepared statement.
 func (s *SDK) UpdatePreparedStatement(ctx context.Context, request operations.UpdatePreparedStatementRequest) (*operations.UpdatePreparedStatementResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonAthena.UpdatePreparedStatement"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2471,7 +2530,7 @@ func (s *SDK) UpdatePreparedStatement(ctx context.Context, request operations.Up
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2531,8 +2590,9 @@ func (s *SDK) UpdatePreparedStatement(ctx context.Context, request operations.Up
 	return res, nil
 }
 
+// UpdateWorkGroup - Updates the workgroup with the specified name. The workgroup's name cannot be changed.
 func (s *SDK) UpdateWorkGroup(ctx context.Context, request operations.UpdateWorkGroupRequest) (*operations.UpdateWorkGroupResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonAthena.UpdateWorkGroup"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2552,7 +2612,7 @@ func (s *SDK) UpdateWorkGroup(ctx context.Context, request operations.UpdateWork
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {

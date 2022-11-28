@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudVideointelligenceV1p3beta1VideoContext } from "./googlecloudvideointelligencev1p3beta1videocontext";
 export declare enum GoogleCloudVideointelligenceV1p3beta1AnnotateVideoRequestFeaturesEnum {
     FeatureUnspecified = "FEATURE_UNSPECIFIED",

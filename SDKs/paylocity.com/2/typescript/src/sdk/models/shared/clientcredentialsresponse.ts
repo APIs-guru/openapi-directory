@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ClientCredentialsResponse
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The Client Credentials Response Model
 **/
 export class ClientCredentialsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=clientSecret" })
+  @SpeakeasyMetadata({ data: "json, name=clientSecret" })
   clientSecret?: string;
 
-  @Metadata({ data: "json, name=clientSecretExpirationDate" })
+  @SpeakeasyMetadata({ data: "json, name=clientSecretExpirationDate" })
   clientSecretExpirationDate?: string;
 }

@@ -1,6 +1,7 @@
 
 
+
 export enum ProvisioningArtifactGuidanceEnum {
-    Default = "DEFAULT"
-,    Deprecated = "DEPRECATED"
+    Default = "DEFAULT",
+    Deprecated = "DEPRECATED"
 }

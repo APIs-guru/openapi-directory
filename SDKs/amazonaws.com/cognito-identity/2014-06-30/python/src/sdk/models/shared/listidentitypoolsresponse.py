@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import identitypoolshortdescription
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ListIdentityPoolsResponse:
-    identity_pools: Optional[List[identitypoolshortdescription.IdentityPoolShortDescription]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'IdentityPools' }})
-    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'NextToken' }})
+    r"""ListIdentityPoolsResponse
+    The result of a successful ListIdentityPools action.
+    """
+    
+    identity_pools: Optional[List[IdentityPoolShortDescription]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('IdentityPools') }})
+    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('NextToken') }})
     

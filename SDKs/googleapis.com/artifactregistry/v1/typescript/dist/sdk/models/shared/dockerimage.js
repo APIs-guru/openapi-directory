@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // DockerImage
 /**
  * DockerImage represents a docker artifact. The following fields are returned as untyped metadata in the Version resource, using camelcase keys (i.e. metadata.imageSizeBytes): * imageSizeBytes * mediaType * buildTime
@@ -33,35 +33,35 @@ var DockerImage = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=buildTime" }),
+        SpeakeasyMetadata({ data: "json, name=buildTime" }),
         __metadata("design:type", String)
     ], DockerImage.prototype, "buildTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=imageSizeBytes" }),
+        SpeakeasyMetadata({ data: "json, name=imageSizeBytes" }),
         __metadata("design:type", String)
     ], DockerImage.prototype, "imageSizeBytes", void 0);
     __decorate([
-        Metadata({ data: "json, name=mediaType" }),
+        SpeakeasyMetadata({ data: "json, name=mediaType" }),
         __metadata("design:type", String)
     ], DockerImage.prototype, "mediaType", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], DockerImage.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=tags" }),
+        SpeakeasyMetadata({ data: "json, name=tags" }),
         __metadata("design:type", Array)
     ], DockerImage.prototype, "tags", void 0);
     __decorate([
-        Metadata({ data: "json, name=updateTime" }),
+        SpeakeasyMetadata({ data: "json, name=updateTime" }),
         __metadata("design:type", String)
     ], DockerImage.prototype, "updateTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=uploadTime" }),
+        SpeakeasyMetadata({ data: "json, name=uploadTime" }),
         __metadata("design:type", String)
     ], DockerImage.prototype, "uploadTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=uri" }),
+        SpeakeasyMetadata({ data: "json, name=uri" }),
         __metadata("design:type", String)
     ], DockerImage.prototype, "uri", void 0);
     return DockerImage;

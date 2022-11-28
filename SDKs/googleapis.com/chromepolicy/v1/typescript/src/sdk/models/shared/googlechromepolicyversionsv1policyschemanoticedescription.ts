@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleChromePolicyVersionsV1PolicySchemaNoticeDescription
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Provides special notice messages related to a particular value in a field that is part of a PolicySchema.
 **/
 export class GoogleChromePolicyVersionsV1PolicySchemaNoticeDescription extends SpeakeasyBase {
-  @Metadata({ data: "json, name=acknowledgementRequired" })
+  @SpeakeasyMetadata({ data: "json, name=acknowledgementRequired" })
   acknowledgementRequired?: boolean;
 
-  @Metadata({ data: "json, name=field" })
+  @SpeakeasyMetadata({ data: "json, name=field" })
   field?: string;
 
-  @Metadata({ data: "json, name=noticeMessage" })
+  @SpeakeasyMetadata({ data: "json, name=noticeMessage" })
   noticeMessage?: string;
 
-  @Metadata({ data: "json, name=noticeValue" })
+  @SpeakeasyMetadata({ data: "json, name=noticeValue" })
   noticeValue?: string;
 }

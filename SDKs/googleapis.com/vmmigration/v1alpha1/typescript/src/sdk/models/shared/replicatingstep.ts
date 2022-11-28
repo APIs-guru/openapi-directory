@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ReplicatingStep
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * ReplicatingStep contains specific step details.
 **/
 export class ReplicatingStep extends SpeakeasyBase {
-  @Metadata({ data: "json, name=lastThirtyMinutesAverageBytesPerSecond" })
+  @SpeakeasyMetadata({ data: "json, name=lastThirtyMinutesAverageBytesPerSecond" })
   lastThirtyMinutesAverageBytesPerSecond?: string;
 
-  @Metadata({ data: "json, name=lastTwoMinutesAverageBytesPerSecond" })
+  @SpeakeasyMetadata({ data: "json, name=lastTwoMinutesAverageBytesPerSecond" })
   lastTwoMinutesAverageBytesPerSecond?: string;
 
-  @Metadata({ data: "json, name=replicatedBytes" })
+  @SpeakeasyMetadata({ data: "json, name=replicatedBytes" })
   replicatedBytes?: string;
 
-  @Metadata({ data: "json, name=totalBytes" })
+  @SpeakeasyMetadata({ data: "json, name=totalBytes" })
   totalBytes?: string;
 }

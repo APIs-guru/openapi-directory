@@ -1,5 +1,7 @@
 package shared
 
+// SearchPlaceIndexForTextSummary
+// A summary of the geocoding request sent using <code>SearchPlaceIndexForText</code>.
 type SearchPlaceIndexForTextSummary struct {
 	BiasPosition    []float64 `json:"BiasPosition,omitempty"`
 	DataSource      string    `json:"DataSource"`

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Percentiles
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Percentiles contains synthetic values of a metric at a given statistical percentile. These are used for estimating a metric's value as experienced by a percentage of users out of the total number of users.
 **/
 export class Percentiles extends SpeakeasyBase {
-  @Metadata({ data: "json, name=p75" })
+  @SpeakeasyMetadata({ data: "json, name=p75" })
   p75?: any;
 }

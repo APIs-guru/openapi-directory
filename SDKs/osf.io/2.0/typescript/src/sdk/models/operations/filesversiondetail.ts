@@ -1,28 +1,29 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class FilesVersionDetailPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=file_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=file_id" })
   fileId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=version_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=version_id" })
   versionId: string;
 }
 
 
 export class FilesVersionDetailRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: FilesVersionDetailPathParams;
 }
 
 
 export class FilesVersionDetailResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

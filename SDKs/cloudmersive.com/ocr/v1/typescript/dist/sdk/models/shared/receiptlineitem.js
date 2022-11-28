@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // ReceiptLineItem
 /**
  * Receipt line item, comprised of a product or item and a price (if available)
@@ -33,11 +33,11 @@ var ReceiptLineItem = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=ItemDescription" }),
+        SpeakeasyMetadata({ data: "json, name=ItemDescription" }),
         __metadata("design:type", String)
     ], ReceiptLineItem.prototype, "itemDescription", void 0);
     __decorate([
-        Metadata({ data: "json, name=ItemPrice" }),
+        SpeakeasyMetadata({ data: "json, name=ItemPrice" }),
         __metadata("design:type", Number)
     ], ReceiptLineItem.prototype, "itemPrice", void 0);
     return ReceiptLineItem;

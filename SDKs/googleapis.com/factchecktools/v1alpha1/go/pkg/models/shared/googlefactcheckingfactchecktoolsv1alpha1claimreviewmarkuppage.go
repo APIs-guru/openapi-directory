@@ -1,5 +1,7 @@
 package shared
 
+// GoogleFactcheckingFactchecktoolsV1alpha1ClaimReviewMarkupPage
+// Holds one or more instances of `ClaimReview` markup for a webpage.
 type GoogleFactcheckingFactchecktoolsV1alpha1ClaimReviewMarkupPage struct {
 	ClaimReviewAuthor  *GoogleFactcheckingFactchecktoolsV1alpha1ClaimReviewAuthor  `json:"claimReviewAuthor,omitempty"`
 	ClaimReviewMarkups []GoogleFactcheckingFactchecktoolsV1alpha1ClaimReviewMarkup `json:"claimReviewMarkups,omitempty"`

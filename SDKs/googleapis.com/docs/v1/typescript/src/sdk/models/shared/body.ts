@@ -1,6 +1,17 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { StructuralElementInput } from "./structuralelement";
 import { StructuralElement } from "./structuralelement";
+
+
+
+// BodyInput
+/** 
+ * The document body. The body typically contains the full document contents except for headers, footers, and footnotes.
+**/
+export class BodyInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=content", elemType: StructuralElementInput })
+  content?: StructuralElementInput[];
+}
 
 
 // Body
@@ -8,6 +19,6 @@ import { StructuralElement } from "./structuralelement";
  * The document body. The body typically contains the full document contents except for headers, footers, and footnotes.
 **/
 export class Body extends SpeakeasyBase {
-  @Metadata({ data: "json, name=content", elemType: shared.StructuralElement })
+  @SpeakeasyMetadata({ data: "json, name=content", elemType: StructuralElement })
   content?: StructuralElement[];
 }

@@ -1,40 +1,41 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetAddressResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=addrStr" })
+  @SpeakeasyMetadata({ data: "json, name=addrStr" })
   addrStr?: string;
 
-  @Metadata({ data: "json, name=balance" })
+  @SpeakeasyMetadata({ data: "json, name=balance" })
   balance?: number;
 
-  @Metadata({ data: "json, name=balanceSat" })
+  @SpeakeasyMetadata({ data: "json, name=balanceSat" })
   balanceSat?: number;
 
-  @Metadata({ data: "json, name=totalReceived" })
+  @SpeakeasyMetadata({ data: "json, name=totalReceived" })
   totalReceived?: number;
 
-  @Metadata({ data: "json, name=totalReceivedSat" })
+  @SpeakeasyMetadata({ data: "json, name=totalReceivedSat" })
   totalReceivedSat?: number;
 
-  @Metadata({ data: "json, name=totalSent" })
+  @SpeakeasyMetadata({ data: "json, name=totalSent" })
   totalSent?: number;
 
-  @Metadata({ data: "json, name=totalSentSat" })
+  @SpeakeasyMetadata({ data: "json, name=totalSentSat" })
   totalSentSat?: number;
 
-  @Metadata({ data: "json, name=transactions" })
+  @SpeakeasyMetadata({ data: "json, name=transactions" })
   transactions?: string[];
 
-  @Metadata({ data: "json, name=txAppearances" })
+  @SpeakeasyMetadata({ data: "json, name=txAppearances" })
   txAppearances?: number;
 
-  @Metadata({ data: "json, name=unconfirmedBalance" })
+  @SpeakeasyMetadata({ data: "json, name=unconfirmedBalance" })
   unconfirmedBalance?: number;
 
-  @Metadata({ data: "json, name=unconfirmedBalanceSat" })
+  @SpeakeasyMetadata({ data: "json, name=unconfirmedBalanceSat" })
   unconfirmedBalanceSat?: number;
 
-  @Metadata({ data: "json, name=unconfirmedTxAppearances" })
+  @SpeakeasyMetadata({ data: "json, name=unconfirmedTxAppearances" })
   unconfirmedTxAppearances?: number;
 }

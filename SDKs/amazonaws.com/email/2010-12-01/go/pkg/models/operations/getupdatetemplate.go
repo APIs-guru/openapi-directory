@@ -6,6 +6,8 @@ const (
 	GetUpdateTemplateActionEnumUpdateTemplate GetUpdateTemplateActionEnum = "UpdateTemplate"
 )
 
+// GetUpdateTemplateTemplate
+// The content of the email, composed of a subject line, an HTML part, and a text-only part.
 type GetUpdateTemplateTemplate struct {
 	HTMLPart     *string `queryParam:"name=HtmlPart"`
 	SubjectPart  *string `queryParam:"name=SubjectPart"`

@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PullRequest } from "./pullrequest";
 
 
+
 export class MergePullRequestByThreeWayOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=pullRequest" })
+  @SpeakeasyMetadata({ data: "json, name=pullRequest" })
   pullRequest?: PullRequest;
 }

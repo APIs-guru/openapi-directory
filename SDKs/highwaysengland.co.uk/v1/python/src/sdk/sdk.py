@@ -1,8 +1,11 @@
-import warnings
+
+
 import requests
 from typing import Any,Optional
-from sdk.models import operations, shared
+from sdk.models import shared, operations
 from . import utils
+
+
 
 
 SERVERS = [
@@ -11,26 +14,48 @@ SERVERS = [
 
 
 class SDK:
-    client = requests.Session()
-    server_url = SERVERS[0]
+    
+
+    _client: requests.Session
+    _security_client: requests.Session
+    
+    _server_url: str = SERVERS[0]
+    _language: str = "python"
+    _sdk_version: str = "0.0.1"
+    _gen_version: str = "internal"
+
+    def __init__(self) -> None:
+        self._client = requests.Session()
+        self._security_client = requests.Session()
+        
+
 
     def config_server_url(self, server_url: str, params: dict[str, str]):
-        if not params is None:
-            self.server_url = utils.replace_parameters(server_url, params)
+        if params is not None:
+            self._server_url = utils.replace_parameters(server_url, params)
         else:
-            self.server_url = server_url
-            
+            self._server_url = server_url
+
+        
     
 
+    def config_client(self, client: requests.Session):
+        self._client = client
+        
+    
+    
     
     def areas_get(self, request: operations.AreasGetRequest) -> operations.AreasGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns list of areas
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v{version}/areas", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -49,13 +74,16 @@ class SDK:
 
     
     def get_v_version_areas_area_ids_(self, request: operations.GetVVersionAreasAreaIdsRequest) -> operations.GetVVersionAreasAreaIdsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns details of selected area
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v{version}/areas/{area_Ids}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -74,15 +102,18 @@ class SDK:
 
     
     def get_v_version_reports_start_date_to_end_date_report_type_(self, request: operations.GetVVersionReportsStartDateToEndDateReportTypeRequest) -> operations.GetVVersionReportsStartDateToEndDateReportTypeResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Gets the daily report.
+        Get's the report.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v{version}/reports/{start_date}/to/{end_date}/{report_type}", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -101,13 +132,16 @@ class SDK:
 
     
     def get_v_version_sites_site_ids_(self, request: operations.GetVVersionSitesSiteIdsRequest) -> operations.GetVVersionSitesSiteIdsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get selected sites
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v{version}/sites/{site_Ids}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -126,15 +160,17 @@ class SDK:
 
     
     def quality_get_daily_data_quality_for_site(self, request: operations.QualityGetDailyDataQualityForSiteRequest) -> operations.QualityGetDailyDataQualityForSiteResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get Site DailyQuality
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v{version}/quality/daily", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -153,15 +189,17 @@ class SDK:
 
     
     def quality_get_overall_data_quality_for_sites(self, request: operations.QualityGetOverallDataQualityForSitesRequest) -> operations.QualityGetOverallDataQualityForSitesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get Site OverallQuality
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v{version}/quality/overall", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -180,15 +218,18 @@ class SDK:
 
     
     def reports_index(self, request: operations.ReportsIndexRequest) -> operations.ReportsIndexResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Gets the daily report.
+        Get's the report.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v{version}/reports/{report_type}", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -207,13 +248,16 @@ class SDK:
 
     
     def site_types_get_sites_for_public_facing_api(self, request: operations.SiteTypesGetSitesForPublicFacingAPIRequest) -> operations.SiteTypesGetSitesForPublicFacingAPIResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns the layer metadata for the LayerId specified.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v{version}/sitetypes/{siteType_Id}/sites", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -234,13 +278,16 @@ class SDK:
 
     
     def site_types_index(self, request: operations.SiteTypesIndexRequest) -> operations.SiteTypesIndexResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Return list of site types
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v{version}/sitetypes", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -259,13 +306,16 @@ class SDK:
 
     
     def sites_index(self, request: operations.SitesIndexRequest) -> operations.SitesIndexResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get a list of sites
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v{version}/sites", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 

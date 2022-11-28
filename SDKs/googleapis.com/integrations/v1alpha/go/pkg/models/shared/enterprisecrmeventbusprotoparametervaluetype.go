@@ -1,5 +1,7 @@
 package shared
 
+// EnterpriseCrmEventbusProtoParameterValueType
+// LINT.IfChange To support various types of parameter values. Next available id: 14
 type EnterpriseCrmEventbusProtoParameterValueType struct {
 	BooleanArray          *EnterpriseCrmEventbusProtoBooleanParameterArray     `json:"booleanArray,omitempty"`
 	BooleanValue          *bool                                                `json:"booleanValue,omitempty"`

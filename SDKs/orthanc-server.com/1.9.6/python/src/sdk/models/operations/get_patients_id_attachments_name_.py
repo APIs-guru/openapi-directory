@@ -4,8 +4,8 @@ from typing import Any,List,Optional
 
 @dataclass
 class GetPatientsIDAttachmentsNamePathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -15,14 +15,14 @@ class GetPatientsIDAttachmentsNameHeaders:
 
 @dataclass
 class GetPatientsIDAttachmentsNameRequest:
-    path_params: GetPatientsIDAttachmentsNamePathParams = field(default=None)
-    headers: GetPatientsIDAttachmentsNameHeaders = field(default=None)
+    headers: GetPatientsIDAttachmentsNameHeaders = field()
+    path_params: GetPatientsIDAttachmentsNamePathParams = field()
     
 
 @dataclass
 class GetPatientsIDAttachmentsNameResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    headers: dict[str, List[str]] = field()
+    status_code: int = field()
     get_patients_id_attachments_name_200_application_json_any: Optional[Any] = field(default=None)
-    headers: dict[str, List[str]] = field(default=None)
-    status_code: int = field(default=None)
     

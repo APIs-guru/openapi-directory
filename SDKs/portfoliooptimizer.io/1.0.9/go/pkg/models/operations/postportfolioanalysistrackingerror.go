@@ -9,16 +9,16 @@ type PostPortfolioAnalysisTrackingErrorRequestBody struct {
 	Portfolios       []PostPortfolioAnalysisTrackingErrorRequestBodyPortfolios `json:"portfolios"`
 }
 
-type PostPortfolioAnalysisTrackingErrorRequest struct {
-	Request PostPortfolioAnalysisTrackingErrorRequestBody `request:"mediaType=application/json"`
-}
-
 type PostPortfolioAnalysisTrackingError200ApplicationJSONPortfolios struct {
 	PortfolioTrackingError float64 `json:"portfolioTrackingError"`
 }
 
 type PostPortfolioAnalysisTrackingError200ApplicationJSON struct {
 	Portfolios []PostPortfolioAnalysisTrackingError200ApplicationJSONPortfolios `json:"portfolios"`
+}
+
+type PostPortfolioAnalysisTrackingErrorRequest struct {
+	Request PostPortfolioAnalysisTrackingErrorRequestBody `request:"mediaType=application/json"`
 }
 
 type PostPortfolioAnalysisTrackingErrorResponse struct {

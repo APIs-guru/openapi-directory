@@ -22,14 +22,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var GetTransactionsTransactionIdPathParams = /** @class */ (function (_super) {
     __extends(GetTransactionsTransactionIdPathParams, _super);
     function GetTransactionsTransactionIdPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=transactionId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=transactionId" }),
         __metadata("design:type", String)
     ], GetTransactionsTransactionIdPathParams.prototype, "transactionId", void 0);
     return GetTransactionsTransactionIdPathParams;
@@ -41,7 +41,7 @@ var GetTransactionsTransactionIdRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetTransactionsTransactionIdPathParams)
     ], GetTransactionsTransactionIdRequest.prototype, "pathParams", void 0);
     return GetTransactionsTransactionIdRequest;
@@ -53,11 +53,11 @@ var GetTransactionsTransactionIdResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetTransactionsTransactionIdResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetTransactionsTransactionIdResponse.prototype, "statusCode", void 0);
     return GetTransactionsTransactionIdResponse;

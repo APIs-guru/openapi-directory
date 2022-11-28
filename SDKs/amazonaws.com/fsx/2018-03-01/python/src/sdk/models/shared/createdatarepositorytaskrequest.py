@@ -1,18 +1,18 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import completionreport
-from . import tag
-from . import datarepositorytasktype_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class CreateDataRepositoryTaskRequest:
-    client_request_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ClientRequestToken' }})
-    file_system_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FileSystemId' }})
-    paths: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Paths' }})
-    report: completionreport.CompletionReport = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Report' }})
-    tags: Optional[List[tag.Tag]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Tags' }})
-    type: datarepositorytasktype_enum.DataRepositoryTaskTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Type' }})
+    file_system_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('FileSystemId') }})
+    report: CompletionReport = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Report') }})
+    type: DataRepositoryTaskTypeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Type') }})
+    client_request_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ClientRequestToken') }})
+    paths: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Paths') }})
+    tags: Optional[List[Tag]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Tags') }})
     

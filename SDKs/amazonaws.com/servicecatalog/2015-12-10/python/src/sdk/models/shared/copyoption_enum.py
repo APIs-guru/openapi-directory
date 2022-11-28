@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class CopyOptionEnum(str, Enum):
     COPY_TAGS = "CopyTags"

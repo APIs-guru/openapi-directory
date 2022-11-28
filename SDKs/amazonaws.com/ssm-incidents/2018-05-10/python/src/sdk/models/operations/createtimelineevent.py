@@ -1,9 +1,10 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
 from typing import Any,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -21,28 +22,28 @@ class CreateTimelineEventHeaders:
 @dataclass_json
 @dataclass
 class CreateTimelineEventRequestBody:
-    client_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'clientToken' }})
-    event_data: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'eventData' }})
-    event_time: datetime = field(default=None, metadata={'dataclasses_json': { 'field_name': 'eventTime', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    event_type: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'eventType' }})
-    incident_record_arn: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'incidentRecordArn' }})
+    event_data: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('eventData') }})
+    event_time: datetime = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('eventTime'), 'encoder': utils.datetimeisoformat(False), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    event_type: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('eventType') }})
+    incident_record_arn: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('incidentRecordArn') }})
+    client_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('clientToken') }})
     
 
 @dataclass
 class CreateTimelineEventRequest:
-    headers: CreateTimelineEventHeaders = field(default=None)
-    request: CreateTimelineEventRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: CreateTimelineEventHeaders = field()
+    request: CreateTimelineEventRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class CreateTimelineEventResponse:
+    content_type: str = field()
+    status_code: int = field()
     access_denied_exception: Optional[Any] = field(default=None)
     conflict_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     create_timeline_event_output: Optional[shared.CreateTimelineEventOutput] = field(default=None)
     internal_server_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     validation_exception: Optional[Any] = field(default=None)
     

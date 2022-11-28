@@ -1,11 +1,15 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class GamesConfigurationLeaderboardConfigurationsUpdatePathParams:
-    leaderboard_id: str = field(default=None, metadata={'path_param': { 'field_name': 'leaderboardId', 'style': 'simple', 'explode': False }})
+    leaderboard_id: str = field(metadata={'path_param': { 'field_name': 'leaderboardId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,21 +29,21 @@ class GamesConfigurationLeaderboardConfigurationsUpdateQueryParams:
 
 @dataclass
 class GamesConfigurationLeaderboardConfigurationsUpdateSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class GamesConfigurationLeaderboardConfigurationsUpdateRequest:
-    path_params: GamesConfigurationLeaderboardConfigurationsUpdatePathParams = field(default=None)
-    query_params: GamesConfigurationLeaderboardConfigurationsUpdateQueryParams = field(default=None)
+    path_params: GamesConfigurationLeaderboardConfigurationsUpdatePathParams = field()
+    query_params: GamesConfigurationLeaderboardConfigurationsUpdateQueryParams = field()
+    security: GamesConfigurationLeaderboardConfigurationsUpdateSecurity = field()
     request: Optional[shared.LeaderboardConfiguration] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: GamesConfigurationLeaderboardConfigurationsUpdateSecurity = field(default=None)
     
 
 @dataclass
 class GamesConfigurationLeaderboardConfigurationsUpdateResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     leaderboard_configuration: Optional[shared.LeaderboardConfiguration] = field(default=None)
-    status_code: int = field(default=None)
     

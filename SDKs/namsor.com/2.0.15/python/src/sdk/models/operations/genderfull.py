@@ -5,23 +5,23 @@ from sdk.models import shared
 
 @dataclass
 class GenderFullPathParams:
-    full_name: str = field(default=None, metadata={'path_param': { 'field_name': 'fullName', 'style': 'simple', 'explode': False }})
+    full_name: str = field(metadata={'path_param': { 'field_name': 'fullName', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GenderFullSecurity:
-    api_key: shared.SchemeAPIKey = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    api_key: shared.SchemeAPIKey = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
     
 
 @dataclass
 class GenderFullRequest:
-    path_params: GenderFullPathParams = field(default=None)
-    security: GenderFullSecurity = field(default=None)
+    path_params: GenderFullPathParams = field()
+    security: GenderFullSecurity = field()
     
 
 @dataclass
 class GenderFullResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     personal_name_gendered_out: Optional[shared.PersonalNameGenderedOut] = field(default=None)
-    status_code: int = field(default=None)
     

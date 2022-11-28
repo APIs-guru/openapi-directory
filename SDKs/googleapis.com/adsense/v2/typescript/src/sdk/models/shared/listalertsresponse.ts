@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Alert } from "./alert";
+
 
 
 // ListAlertsResponse
@@ -8,6 +8,6 @@ import { Alert } from "./alert";
  * Response definition for the alerts list rpc.
 **/
 export class ListAlertsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=alerts", elemType: shared.Alert })
+  @SpeakeasyMetadata({ data: "json, name=alerts", elemType: Alert })
   alerts?: Alert[];
 }

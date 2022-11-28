@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ObjectExpiration } from "./objectexpiration";
+
 
 
 // CreateUploadShareRequest
@@ -7,69 +8,69 @@ import { ObjectExpiration } from "./objectexpiration";
  * Request model for creating an Upload Share
 **/
 export class CreateUploadShareRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=creatorLanguage" })
+  @SpeakeasyMetadata({ data: "json, name=creatorLanguage" })
   creatorLanguage?: string;
 
-  @Metadata({ data: "json, name=expiration" })
+  @SpeakeasyMetadata({ data: "json, name=expiration" })
   expiration?: ObjectExpiration;
 
-  @Metadata({ data: "json, name=filesExpiryPeriod" })
+  @SpeakeasyMetadata({ data: "json, name=filesExpiryPeriod" })
   filesExpiryPeriod?: number;
 
-  @Metadata({ data: "json, name=internalNotes" })
+  @SpeakeasyMetadata({ data: "json, name=internalNotes" })
   internalNotes?: string;
 
-  @Metadata({ data: "json, name=mailBody" })
+  @SpeakeasyMetadata({ data: "json, name=mailBody" })
   mailBody?: string;
 
-  @Metadata({ data: "json, name=mailRecipients" })
+  @SpeakeasyMetadata({ data: "json, name=mailRecipients" })
   mailRecipients?: string;
 
-  @Metadata({ data: "json, name=mailSubject" })
+  @SpeakeasyMetadata({ data: "json, name=mailSubject" })
   mailSubject?: string;
 
-  @Metadata({ data: "json, name=maxSize" })
+  @SpeakeasyMetadata({ data: "json, name=maxSize" })
   maxSize?: number;
 
-  @Metadata({ data: "json, name=maxSlots" })
+  @SpeakeasyMetadata({ data: "json, name=maxSlots" })
   maxSlots?: number;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=notes" })
+  @SpeakeasyMetadata({ data: "json, name=notes" })
   notes?: string;
 
-  @Metadata({ data: "json, name=notifyCreator" })
+  @SpeakeasyMetadata({ data: "json, name=notifyCreator" })
   notifyCreator?: boolean;
 
-  @Metadata({ data: "json, name=password" })
+  @SpeakeasyMetadata({ data: "json, name=password" })
   password?: string;
 
-  @Metadata({ data: "json, name=receiverLanguage" })
+  @SpeakeasyMetadata({ data: "json, name=receiverLanguage" })
   receiverLanguage?: string;
 
-  @Metadata({ data: "json, name=sendMail" })
+  @SpeakeasyMetadata({ data: "json, name=sendMail" })
   sendMail?: boolean;
 
-  @Metadata({ data: "json, name=sendSms" })
+  @SpeakeasyMetadata({ data: "json, name=sendSms" })
   sendSms?: boolean;
 
-  @Metadata({ data: "json, name=showCreatorName" })
+  @SpeakeasyMetadata({ data: "json, name=showCreatorName" })
   showCreatorName?: boolean;
 
-  @Metadata({ data: "json, name=showCreatorUsername" })
+  @SpeakeasyMetadata({ data: "json, name=showCreatorUsername" })
   showCreatorUsername?: boolean;
 
-  @Metadata({ data: "json, name=showUploadedFiles" })
+  @SpeakeasyMetadata({ data: "json, name=showUploadedFiles" })
   showUploadedFiles?: boolean;
 
-  @Metadata({ data: "json, name=smsRecipients" })
+  @SpeakeasyMetadata({ data: "json, name=smsRecipients" })
   smsRecipients?: string;
 
-  @Metadata({ data: "json, name=targetId" })
+  @SpeakeasyMetadata({ data: "json, name=targetId" })
   targetId: number;
 
-  @Metadata({ data: "json, name=textMessageRecipients" })
+  @SpeakeasyMetadata({ data: "json, name=textMessageRecipients" })
   textMessageRecipients?: string[];
 }

@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CustomRoutingProtocolEnum } from "./customroutingprotocolenum";
+
 
 
 // CustomRoutingDestinationConfiguration
@@ -7,12 +8,12 @@ import { CustomRoutingProtocolEnum } from "./customroutingprotocolenum";
  * For a custom routing accelerator, sets the port range and protocol for all endpoints (virtual private cloud subnets) in an endpoint group to accept client traffic on.
 **/
 export class CustomRoutingDestinationConfiguration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=FromPort" })
+  @SpeakeasyMetadata({ data: "json, name=FromPort" })
   fromPort: number;
 
-  @Metadata({ data: "json, name=Protocols" })
+  @SpeakeasyMetadata({ data: "json, name=Protocols" })
   protocols: CustomRoutingProtocolEnum[];
 
-  @Metadata({ data: "json, name=ToPort" })
+  @SpeakeasyMetadata({ data: "json, name=ToPort" })
   toPort: number;
 }

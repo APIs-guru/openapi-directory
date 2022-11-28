@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudDatacatalogV1SearchCatalogRequestScope
@@ -6,21 +7,21 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The criteria that select the subspace used for query matching.
 **/
 export class GoogleCloudDatacatalogV1SearchCatalogRequestScope extends SpeakeasyBase {
-  @Metadata({ data: "json, name=includeGcpPublicDatasets" })
+  @SpeakeasyMetadata({ data: "json, name=includeGcpPublicDatasets" })
   includeGcpPublicDatasets?: boolean;
 
-  @Metadata({ data: "json, name=includeOrgIds" })
+  @SpeakeasyMetadata({ data: "json, name=includeOrgIds" })
   includeOrgIds?: string[];
 
-  @Metadata({ data: "json, name=includeProjectIds" })
+  @SpeakeasyMetadata({ data: "json, name=includeProjectIds" })
   includeProjectIds?: string[];
 
-  @Metadata({ data: "json, name=includePublicTagTemplates" })
+  @SpeakeasyMetadata({ data: "json, name=includePublicTagTemplates" })
   includePublicTagTemplates?: boolean;
 
-  @Metadata({ data: "json, name=restrictedLocations" })
+  @SpeakeasyMetadata({ data: "json, name=restrictedLocations" })
   restrictedLocations?: string[];
 
-  @Metadata({ data: "json, name=starredOnly" })
+  @SpeakeasyMetadata({ data: "json, name=starredOnly" })
   starredOnly?: boolean;
 }

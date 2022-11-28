@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SsmTargetAccountEnum } from "./ssmtargetaccountenum";
 // SsmAutomation
 /**
@@ -34,23 +34,23 @@ var SsmAutomation = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=documentName" }),
+        SpeakeasyMetadata({ data: "json, name=documentName" }),
         __metadata("design:type", String)
     ], SsmAutomation.prototype, "documentName", void 0);
     __decorate([
-        Metadata({ data: "json, name=documentVersion" }),
+        SpeakeasyMetadata({ data: "json, name=documentVersion" }),
         __metadata("design:type", String)
     ], SsmAutomation.prototype, "documentVersion", void 0);
     __decorate([
-        Metadata({ data: "json, name=parameters" }),
+        SpeakeasyMetadata({ data: "json, name=parameters" }),
         __metadata("design:type", Map)
     ], SsmAutomation.prototype, "parameters", void 0);
     __decorate([
-        Metadata({ data: "json, name=roleArn" }),
+        SpeakeasyMetadata({ data: "json, name=roleArn" }),
         __metadata("design:type", String)
     ], SsmAutomation.prototype, "roleArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=targetAccount" }),
+        SpeakeasyMetadata({ data: "json, name=targetAccount" }),
         __metadata("design:type", String)
     ], SsmAutomation.prototype, "targetAccount", void 0);
     return SsmAutomation;

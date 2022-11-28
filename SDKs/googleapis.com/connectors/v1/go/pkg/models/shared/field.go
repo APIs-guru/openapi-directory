@@ -50,6 +50,8 @@ const (
 	FieldDataTypeEnumDataTypeTimestampWithTimezone FieldDataTypeEnum = "DATA_TYPE_TIMESTAMP_WITH_TIMEZONE"
 )
 
+// Field
+// Metadata of an entity field.
 type Field struct {
 	AdditionalDetails map[string]interface{} `json:"additionalDetails,omitempty"`
 	DataType          *FieldDataTypeEnum     `json:"dataType,omitempty"`

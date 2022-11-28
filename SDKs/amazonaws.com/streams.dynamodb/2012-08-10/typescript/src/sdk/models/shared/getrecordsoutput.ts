@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Record } from "./record";
+
 
 
 // GetRecordsOutput
@@ -8,9 +8,9 @@ import { Record } from "./record";
  * Represents the output of a <code>GetRecords</code> operation.
 **/
 export class GetRecordsOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=NextShardIterator" })
+  @SpeakeasyMetadata({ data: "json, name=NextShardIterator" })
   nextShardIterator?: string;
 
-  @Metadata({ data: "json, name=Records", elemType: shared.Record })
+  @SpeakeasyMetadata({ data: "json, name=Records", elemType: Record })
   records?: Record[];
 }

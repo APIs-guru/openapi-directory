@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ImageIdentifier
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * An object with identifying information for an Amazon ECR image.
 **/
 export class ImageIdentifier extends SpeakeasyBase {
-  @Metadata({ data: "json, name=imageDigest" })
+  @SpeakeasyMetadata({ data: "json, name=imageDigest" })
   imageDigest?: string;
 
-  @Metadata({ data: "json, name=imageTag" })
+  @SpeakeasyMetadata({ data: "json, name=imageTag" })
   imageTag?: string;
 }

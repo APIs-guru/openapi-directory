@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GooglePrivacyDlpV2KAnonymityHistogramBucket } from "./googleprivacydlpv2kanonymityhistogrambucket";
+
 
 
 // GooglePrivacyDlpV2KAnonymityResult
@@ -8,6 +8,6 @@ import { GooglePrivacyDlpV2KAnonymityHistogramBucket } from "./googleprivacydlpv
  * Result of the k-anonymity computation.
 **/
 export class GooglePrivacyDlpV2KAnonymityResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=equivalenceClassHistogramBuckets", elemType: shared.GooglePrivacyDlpV2KAnonymityHistogramBucket })
+  @SpeakeasyMetadata({ data: "json, name=equivalenceClassHistogramBuckets", elemType: GooglePrivacyDlpV2KAnonymityHistogramBucket })
   equivalenceClassHistogramBuckets?: GooglePrivacyDlpV2KAnonymityHistogramBucket[];
 }

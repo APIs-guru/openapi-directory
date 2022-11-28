@@ -4,7 +4,7 @@ from typing import Optional
 
 @dataclass
 class GetInstancesIDRenderedPathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -24,14 +24,14 @@ class GetInstancesIDRenderedHeaders:
 
 @dataclass
 class GetInstancesIDRenderedRequest:
-    path_params: GetInstancesIDRenderedPathParams = field(default=None)
-    query_params: GetInstancesIDRenderedQueryParams = field(default=None)
-    headers: GetInstancesIDRenderedHeaders = field(default=None)
+    headers: GetInstancesIDRenderedHeaders = field()
+    path_params: GetInstancesIDRenderedPathParams = field()
+    query_params: GetInstancesIDRenderedQueryParams = field()
     
 
 @dataclass
 class GetInstancesIDRenderedResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

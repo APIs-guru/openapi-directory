@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetMarket3SimilarSalePriceGetQueryParams = /** @class */ (function (_super) {
     __extends(GetMarket3SimilarSalePriceGetQueryParams, _super);
@@ -30,23 +30,23 @@ var GetMarket3SimilarSalePriceGetQueryParams = /** @class */ (function (_super) 
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=daysBack" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=daysBack" }),
         __metadata("design:type", Number)
     ], GetMarket3SimilarSalePriceGetQueryParams.prototype, "daysBack", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=jwt" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=jwt" }),
         __metadata("design:type", String)
     ], GetMarket3SimilarSalePriceGetQueryParams.prototype, "jwt", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=regionName" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=regionName" }),
         __metadata("design:type", String)
     ], GetMarket3SimilarSalePriceGetQueryParams.prototype, "regionName", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=sameYear" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sameYear" }),
         __metadata("design:type", Boolean)
     ], GetMarket3SimilarSalePriceGetQueryParams.prototype, "sameYear", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=vin" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=vin" }),
         __metadata("design:type", String)
     ], GetMarket3SimilarSalePriceGetQueryParams.prototype, "vin", void 0);
     return GetMarket3SimilarSalePriceGetQueryParams;
@@ -58,7 +58,7 @@ var GetMarket3SimilarSalePriceGetRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetMarket3SimilarSalePriceGetQueryParams)
     ], GetMarket3SimilarSalePriceGetRequest.prototype, "queryParams", void 0);
     return GetMarket3SimilarSalePriceGetRequest;
@@ -70,19 +70,19 @@ var GetMarket3SimilarSalePriceGetResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetMarket3SimilarSalePriceGetResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.HttpValidationError)
     ], GetMarket3SimilarSalePriceGetResponse.prototype, "httpValidationError", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.SimilarSalePriceResp)
     ], GetMarket3SimilarSalePriceGetResponse.prototype, "similarSalePriceResp", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetMarket3SimilarSalePriceGetResponse.prototype, "statusCode", void 0);
     return GetMarket3SimilarSalePriceGetResponse;

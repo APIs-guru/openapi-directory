@@ -1,9 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum BackendRulePathTranslationEnum {
-    PathTranslationUnspecified = "PATH_TRANSLATION_UNSPECIFIED"
-,    ConstantAddress = "CONSTANT_ADDRESS"
-,    AppendPathToAddress = "APPEND_PATH_TO_ADDRESS"
+    PathTranslationUnspecified = "PATH_TRANSLATION_UNSPECIFIED",
+    ConstantAddress = "CONSTANT_ADDRESS",
+    AppendPathToAddress = "APPEND_PATH_TO_ADDRESS"
 }
 
 
@@ -12,27 +13,27 @@ export enum BackendRulePathTranslationEnum {
  * A backend rule provides configuration for an individual API element.
 **/
 export class BackendRule extends SpeakeasyBase {
-  @Metadata({ data: "json, name=address" })
+  @SpeakeasyMetadata({ data: "json, name=address" })
   address?: string;
 
-  @Metadata({ data: "json, name=deadline" })
+  @SpeakeasyMetadata({ data: "json, name=deadline" })
   deadline?: number;
 
-  @Metadata({ data: "json, name=disableAuth" })
+  @SpeakeasyMetadata({ data: "json, name=disableAuth" })
   disableAuth?: boolean;
 
-  @Metadata({ data: "json, name=jwtAudience" })
+  @SpeakeasyMetadata({ data: "json, name=jwtAudience" })
   jwtAudience?: string;
 
-  @Metadata({ data: "json, name=operationDeadline" })
+  @SpeakeasyMetadata({ data: "json, name=operationDeadline" })
   operationDeadline?: number;
 
-  @Metadata({ data: "json, name=pathTranslation" })
+  @SpeakeasyMetadata({ data: "json, name=pathTranslation" })
   pathTranslation?: BackendRulePathTranslationEnum;
 
-  @Metadata({ data: "json, name=protocol" })
+  @SpeakeasyMetadata({ data: "json, name=protocol" })
   protocol?: string;
 
-  @Metadata({ data: "json, name=selector" })
+  @SpeakeasyMetadata({ data: "json, name=selector" })
   selector?: string;
 }

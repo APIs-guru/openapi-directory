@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import reference
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class MicroSecGroup:
-    entity: Optional[reference.Reference] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'entity' }})
+    entity: Optional[Reference] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('entity') }})
     

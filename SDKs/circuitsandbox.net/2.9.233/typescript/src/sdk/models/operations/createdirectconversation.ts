@@ -1,38 +1,39 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class CreateDirectConversationRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "form, name=participant;" })
+  @SpeakeasyMetadata({ data: "form, name=participant;" })
   participant: string;
 }
 
 
 export class CreateDirectConversationSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   oauth: shared.SchemeOauth;
 }
 
 
 export class CreateDirectConversationRequest extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/x-www-form-urlencoded" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/x-www-form-urlencoded" })
   request: CreateDirectConversationRequestBody;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: CreateDirectConversationSecurity;
 }
 
 
 export class CreateDirectConversationResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   conversation?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

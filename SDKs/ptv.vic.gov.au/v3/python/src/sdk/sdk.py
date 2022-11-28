@@ -1,8 +1,11 @@
-import warnings
+
+
 import requests
 from typing import Any,Optional
-from sdk.models import operations, shared
+from sdk.models import shared, operations
 from . import utils
+
+
 
 
 SERVERS = [
@@ -12,28 +15,49 @@ SERVERS = [
 
 
 class SDK:
-    client = requests.Session()
-    server_url = SERVERS[0]
+    
+
+    _client: requests.Session
+    _security_client: requests.Session
+    
+    _server_url: str = SERVERS[0]
+    _language: str = "python"
+    _sdk_version: str = "0.0.1"
+    _gen_version: str = "internal"
+
+    def __init__(self) -> None:
+        self._client = requests.Session()
+        self._security_client = requests.Session()
+        
+
 
     def config_server_url(self, server_url: str, params: dict[str, str]):
-        if not params is None:
-            self.server_url = utils.replace_parameters(server_url, params)
+        if params is not None:
+            self._server_url = utils.replace_parameters(server_url, params)
         else:
-            self.server_url = server_url
-            
+            self._server_url = server_url
+
+        
     
 
+    def config_client(self, client: requests.Session):
+        self._client = client
+        
+    
+    
     
     def departures_get_for_stop(self, request: operations.DeparturesGetForStopRequest) -> operations.DeparturesGetForStopResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""View departures for all routes from a stop
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v3/departures/route_type/{route_type}/stop/{stop_id}", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -71,15 +95,17 @@ class SDK:
 
     
     def departures_get_for_stop_and_route(self, request: operations.DeparturesGetForStopAndRouteRequest) -> operations.DeparturesGetForStopAndRouteResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""View departures for a specific route from a stop
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v3/departures/route_type/{route_type}/stop/{stop_id}/route/{route_id}", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -117,15 +143,17 @@ class SDK:
 
     
     def directions_for_direction(self, request: operations.DirectionsForDirectionRequest) -> operations.DirectionsForDirectionResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""View all routes for a direction of travel
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v3/directions/{direction_id}", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -163,15 +191,17 @@ class SDK:
 
     
     def directions_for_direction_and_type(self, request: operations.DirectionsForDirectionAndTypeRequest) -> operations.DirectionsForDirectionAndTypeResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""View all routes of a particular type for a direction of travel
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v3/directions/{direction_id}/route_type/{route_type}", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -209,15 +239,17 @@ class SDK:
 
     
     def directions_for_route(self, request: operations.DirectionsForRouteRequest) -> operations.DirectionsForRouteResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""View directions that a route travels in
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v3/directions/route/{route_id}", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -255,15 +287,17 @@ class SDK:
 
     
     def disruptions_get_all_disruptions(self, request: operations.DisruptionsGetAllDisruptionsRequest) -> operations.DisruptionsGetAllDisruptionsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""View all disruptions for all route types
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/v3/disruptions"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -301,15 +335,17 @@ class SDK:
 
     
     def disruptions_get_disruption_by_id(self, request: operations.DisruptionsGetDisruptionByIDRequest) -> operations.DisruptionsGetDisruptionByIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""View a specific disruption
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v3/disruptions/{disruption_id}", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -347,15 +383,17 @@ class SDK:
 
     
     def disruptions_get_disruption_modes(self, request: operations.DisruptionsGetDisruptionModesRequest) -> operations.DisruptionsGetDisruptionModesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get all disruption modes
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/v3/disruptions/modes"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -393,15 +431,17 @@ class SDK:
 
     
     def disruptions_get_disruptions_by_route(self, request: operations.DisruptionsGetDisruptionsByRouteRequest) -> operations.DisruptionsGetDisruptionsByRouteResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""View all disruptions for a particular route
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v3/disruptions/route/{route_id}", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -439,15 +479,17 @@ class SDK:
 
     
     def disruptions_get_disruptions_by_route_and_stop(self, request: operations.DisruptionsGetDisruptionsByRouteAndStopRequest) -> operations.DisruptionsGetDisruptionsByRouteAndStopResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""View all disruptions for a particular route and stop
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v3/disruptions/route/{route_id}/stop/{stop_id}", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -485,15 +527,17 @@ class SDK:
 
     
     def disruptions_get_disruptions_by_stop(self, request: operations.DisruptionsGetDisruptionsByStopRequest) -> operations.DisruptionsGetDisruptionsByStopResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""View all disruptions for a particular stop
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v3/disruptions/stop/{stop_id}", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -531,15 +575,17 @@ class SDK:
 
     
     def fare_estimate_get_fare_estimate_by_zone(self, request: operations.FareEstimateGetFareEstimateByZoneRequest) -> operations.FareEstimateGetFareEstimateByZoneResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Estimate a fare by zone
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v3/fare_estimate/min_zone/{minZone}/max_zone/{maxZone}", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -577,15 +623,17 @@ class SDK:
 
     
     def outlets_get_all_outlets(self, request: operations.OutletsGetAllOutletsRequest) -> operations.OutletsGetAllOutletsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""List all ticket outlets
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/v3/outlets"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -623,15 +671,17 @@ class SDK:
 
     
     def outlets_get_outlets_by_geolocation(self, request: operations.OutletsGetOutletsByGeolocationRequest) -> operations.OutletsGetOutletsByGeolocationResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""List ticket outlets near a specific location
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v3/outlets/location/{latitude},{longitude}", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -669,15 +719,17 @@ class SDK:
 
     
     def patterns_get_pattern_by_run(self, request: operations.PatternsGetPatternByRunRequest) -> operations.PatternsGetPatternByRunResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""View the stopping pattern for a specific trip/service run
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v3/pattern/run/{run_ref}/route_type/{route_type}", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -715,15 +767,17 @@ class SDK:
 
     
     def route_types_get_route_types(self, request: operations.RouteTypesGetRouteTypesRequest) -> operations.RouteTypesGetRouteTypesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""View all route types and their names
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/v3/route_types"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -761,15 +815,17 @@ class SDK:
 
     
     def routes_one_or_more_routes(self, request: operations.RoutesOneOrMoreRoutesRequest) -> operations.RoutesOneOrMoreRoutesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""View route names and numbers for all routes
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/v3/routes"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -807,15 +863,17 @@ class SDK:
 
     
     def routes_route_from_id(self, request: operations.RoutesRouteFromIDRequest) -> operations.RoutesRouteFromIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""View route name and number for specific route ID
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v3/routes/{route_id}", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -853,15 +911,17 @@ class SDK:
 
     
     def runs_for_route(self, request: operations.RunsForRouteRequest) -> operations.RunsForRouteResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""View all trip/service runs for a specific route ID
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v3/runs/route/{route_id}", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -899,15 +959,17 @@ class SDK:
 
     
     def runs_for_route_and_route_type(self, request: operations.RunsForRouteAndRouteTypeRequest) -> operations.RunsForRouteAndRouteTypeResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""View all trip/service runs for a specific route ID and route type
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v3/runs/route/{route_id}/route_type/{route_type}", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -945,15 +1007,17 @@ class SDK:
 
     
     def runs_for_run(self, request: operations.RunsForRunRequest) -> operations.RunsForRunResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""View all trip/service runs for a specific run_ref
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v3/runs/{run_ref}", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -991,15 +1055,17 @@ class SDK:
 
     
     def runs_for_run_and_route_type(self, request: operations.RunsForRunAndRouteTypeRequest) -> operations.RunsForRunAndRouteTypeResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""View the trip/service run for a specific run_ref and route type
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v3/runs/{run_ref}/route_type/{route_type}", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1037,15 +1103,17 @@ class SDK:
 
     
     def search_search(self, request: operations.SearchSearchRequest) -> operations.SearchSearchResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""View stops, routes and myki ticket outlets that match the search term
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v3/search/{search_term}", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1083,15 +1151,17 @@ class SDK:
 
     
     def stops_stop_details(self, request: operations.StopsStopDetailsRequest) -> operations.StopsStopDetailsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""View facilities at a specific stop (Metro and V/Line stations only)
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v3/stops/{stop_id}/route_type/{route_type}", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1129,15 +1199,17 @@ class SDK:
 
     
     def stops_stops_by_geolocation(self, request: operations.StopsStopsByGeolocationRequest) -> operations.StopsStopsByGeolocationResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""View all stops near a specific location
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v3/stops/location/{latitude},{longitude}", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1175,15 +1247,17 @@ class SDK:
 
     
     def stops_stops_for_route(self, request: operations.StopsStopsForRouteRequest) -> operations.StopsStopsForRouteResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""View all stops on a specific route
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v3/stops/route/{route_id}/route_type/{route_type}", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 

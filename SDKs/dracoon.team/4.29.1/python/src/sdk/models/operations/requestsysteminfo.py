@@ -10,13 +10,13 @@ class RequestSystemInfoQueryParams:
 
 @dataclass
 class RequestSystemInfoRequest:
-    query_params: RequestSystemInfoQueryParams = field(default=None)
+    query_params: RequestSystemInfoQueryParams = field()
     
 
 @dataclass
 class RequestSystemInfoResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error_response: Optional[shared.ErrorResponse] = field(default=None)
-    status_code: int = field(default=None)
     system_info: Optional[shared.SystemInfo] = field(default=None)
     

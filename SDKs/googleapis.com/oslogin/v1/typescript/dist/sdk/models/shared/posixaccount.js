@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var PosixAccountOperatingSystemTypeEnum;
 (function (PosixAccountOperatingSystemTypeEnum) {
     PosixAccountOperatingSystemTypeEnum["OperatingSystemTypeUnspecified"] = "OPERATING_SYSTEM_TYPE_UNSPECIFIED";
@@ -39,47 +39,47 @@ var PosixAccount = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=accountId" }),
+        SpeakeasyMetadata({ data: "json, name=accountId" }),
         __metadata("design:type", String)
     ], PosixAccount.prototype, "accountId", void 0);
     __decorate([
-        Metadata({ data: "json, name=gecos" }),
+        SpeakeasyMetadata({ data: "json, name=gecos" }),
         __metadata("design:type", String)
     ], PosixAccount.prototype, "gecos", void 0);
     __decorate([
-        Metadata({ data: "json, name=gid" }),
+        SpeakeasyMetadata({ data: "json, name=gid" }),
         __metadata("design:type", String)
     ], PosixAccount.prototype, "gid", void 0);
     __decorate([
-        Metadata({ data: "json, name=homeDirectory" }),
+        SpeakeasyMetadata({ data: "json, name=homeDirectory" }),
         __metadata("design:type", String)
     ], PosixAccount.prototype, "homeDirectory", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], PosixAccount.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=operatingSystemType" }),
+        SpeakeasyMetadata({ data: "json, name=operatingSystemType" }),
         __metadata("design:type", String)
     ], PosixAccount.prototype, "operatingSystemType", void 0);
     __decorate([
-        Metadata({ data: "json, name=primary" }),
+        SpeakeasyMetadata({ data: "json, name=primary" }),
         __metadata("design:type", Boolean)
     ], PosixAccount.prototype, "primary", void 0);
     __decorate([
-        Metadata({ data: "json, name=shell" }),
+        SpeakeasyMetadata({ data: "json, name=shell" }),
         __metadata("design:type", String)
     ], PosixAccount.prototype, "shell", void 0);
     __decorate([
-        Metadata({ data: "json, name=systemId" }),
+        SpeakeasyMetadata({ data: "json, name=systemId" }),
         __metadata("design:type", String)
     ], PosixAccount.prototype, "systemId", void 0);
     __decorate([
-        Metadata({ data: "json, name=uid" }),
+        SpeakeasyMetadata({ data: "json, name=uid" }),
         __metadata("design:type", String)
     ], PosixAccount.prototype, "uid", void 0);
     __decorate([
-        Metadata({ data: "json, name=username" }),
+        SpeakeasyMetadata({ data: "json, name=username" }),
         __metadata("design:type", String)
     ], PosixAccount.prototype, "username", void 0);
     return PosixAccount;

@@ -1,0 +1,10 @@
+package shared
+
+type TransitGatewayPrefixListReferenceStateEnum string
+
+const (
+	TransitGatewayPrefixListReferenceStateEnumPending   TransitGatewayPrefixListReferenceStateEnum = "pending"
+	TransitGatewayPrefixListReferenceStateEnumAvailable TransitGatewayPrefixListReferenceStateEnum = "available"
+	TransitGatewayPrefixListReferenceStateEnumModifying TransitGatewayPrefixListReferenceStateEnum = "modifying"
+	TransitGatewayPrefixListReferenceStateEnumDeleting  TransitGatewayPrefixListReferenceStateEnum = "deleting"
+)

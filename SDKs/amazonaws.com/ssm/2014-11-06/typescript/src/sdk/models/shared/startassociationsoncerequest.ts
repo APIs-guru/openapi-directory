@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class StartAssociationsOnceRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AssociationIds" })
+  @SpeakeasyMetadata({ data: "json, name=AssociationIds" })
   associationIds: string[];
 }

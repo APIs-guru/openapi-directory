@@ -1,17 +1,19 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import googlechromemanagementv1devicehardwarecountreport
-from . import googlechromemanagementv1devicehardwarecountreport
-from . import googlechromemanagementv1devicehardwarecountreport
-from . import googlechromemanagementv1devicehardwarecountreport
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class GoogleChromeManagementV1CountChromeHardwareFleetDevicesResponse:
-    cpu_reports: Optional[List[googlechromemanagementv1devicehardwarecountreport.GoogleChromeManagementV1DeviceHardwareCountReport]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'cpuReports' }})
-    memory_reports: Optional[List[googlechromemanagementv1devicehardwarecountreport.GoogleChromeManagementV1DeviceHardwareCountReport]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'memoryReports' }})
-    model_reports: Optional[List[googlechromemanagementv1devicehardwarecountreport.GoogleChromeManagementV1DeviceHardwareCountReport]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'modelReports' }})
-    storage_reports: Optional[List[googlechromemanagementv1devicehardwarecountreport.GoogleChromeManagementV1DeviceHardwareCountReport]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'storageReports' }})
+    r"""GoogleChromeManagementV1CountChromeHardwareFleetDevicesResponse
+    Response containing a list of devices with a specific type of hardware specification from the requested hardware type.
+    """
+    
+    cpu_reports: Optional[List[GoogleChromeManagementV1DeviceHardwareCountReport]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('cpuReports') }})
+    memory_reports: Optional[List[GoogleChromeManagementV1DeviceHardwareCountReport]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('memoryReports') }})
+    model_reports: Optional[List[GoogleChromeManagementV1DeviceHardwareCountReport]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('modelReports') }})
+    storage_reports: Optional[List[GoogleChromeManagementV1DeviceHardwareCountReport]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('storageReports') }})
     

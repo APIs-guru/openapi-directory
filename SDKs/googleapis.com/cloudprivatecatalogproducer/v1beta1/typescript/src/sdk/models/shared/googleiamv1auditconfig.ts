@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleIamV1AuditLogConfig } from "./googleiamv1auditlogconfig";
+
 
 
 // GoogleIamV1AuditConfig
@@ -58,9 +58,9 @@ import { GoogleIamV1AuditLogConfig } from "./googleiamv1auditlogconfig";
  * aliya@example.com from DATA_WRITE logging.
 **/
 export class GoogleIamV1AuditConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=auditLogConfigs", elemType: shared.GoogleIamV1AuditLogConfig })
+  @SpeakeasyMetadata({ data: "json, name=auditLogConfigs", elemType: GoogleIamV1AuditLogConfig })
   auditLogConfigs?: GoogleIamV1AuditLogConfig[];
 
-  @Metadata({ data: "json, name=service" })
+  @SpeakeasyMetadata({ data: "json, name=service" })
   service?: string;
 }

@@ -1,5 +1,7 @@
 package shared
 
+// CustomMetrics
+// A custom metric collection lists Analytics custom metrics to which the user has access. Each resource in the collection corresponds to a single Analytics custom metric.
 type CustomMetrics struct {
 	Items        []CustomMetric `json:"items,omitempty"`
 	ItemsPerPage *int32         `json:"itemsPerPage,omitempty"`

@@ -1,5 +1,7 @@
 package shared
 
+// Video
+// A *video* resource represents a YouTube video.
 type Video struct {
 	AgeGating            *VideoAgeGating              `json:"ageGating,omitempty"`
 	ContentDetails       *VideoContentDetails         `json:"contentDetails,omitempty"`

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AddInstanceGroupsOutput
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Output from an AddInstanceGroups call.
 **/
 export class AddInstanceGroupsOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ClusterArn" })
+  @SpeakeasyMetadata({ data: "json, name=ClusterArn" })
   clusterArn?: string;
 
-  @Metadata({ data: "json, name=InstanceGroupIds" })
+  @SpeakeasyMetadata({ data: "json, name=InstanceGroupIds" })
   instanceGroupIds?: string[];
 
-  @Metadata({ data: "json, name=JobFlowId" })
+  @SpeakeasyMetadata({ data: "json, name=JobFlowId" })
   jobFlowId?: string;
 }

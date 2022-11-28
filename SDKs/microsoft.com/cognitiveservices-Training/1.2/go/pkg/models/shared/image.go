@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// Image
+// Image model to be sent as JSON
 type Image struct {
 	Created      *time.Time      `json:"Created,omitempty"`
 	Height       *int32          `json:"Height,omitempty"`

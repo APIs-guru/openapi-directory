@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BatchItemError } from "./batchitemerror";
+
 
 
 // BatchDeleteDevicePositionHistoryError
@@ -7,9 +8,9 @@ import { BatchItemError } from "./batchitemerror";
  * Contains the tracker resource details.
 **/
 export class BatchDeleteDevicePositionHistoryError extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DeviceId" })
+  @SpeakeasyMetadata({ data: "json, name=DeviceId" })
   deviceId: string;
 
-  @Metadata({ data: "json, name=Error" })
+  @SpeakeasyMetadata({ data: "json, name=Error" })
   error: BatchItemError;
 }

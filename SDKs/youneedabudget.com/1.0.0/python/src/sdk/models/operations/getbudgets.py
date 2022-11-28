@@ -10,13 +10,13 @@ class GetBudgetsQueryParams:
 
 @dataclass
 class GetBudgetsRequest:
-    query_params: GetBudgetsQueryParams = field(default=None)
+    query_params: GetBudgetsQueryParams = field()
     
 
 @dataclass
 class GetBudgetsResponse:
+    content_type: str = field()
+    status_code: int = field()
     budget_summary_response: Optional[shared.BudgetSummaryResponse] = field(default=None)
-    content_type: str = field(default=None)
     error_response: Optional[shared.ErrorResponse] = field(default=None)
-    status_code: int = field(default=None)
     

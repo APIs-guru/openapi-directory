@@ -1,5 +1,7 @@
 package shared
 
+// Certificates
+// Contains one or more certificates or a certificate signing request (CSR).
 type Certificates struct {
 	AwsHardwareCertificate          *string `json:"AwsHardwareCertificate,omitempty"`
 	ClusterCertificate              *string `json:"ClusterCertificate,omitempty"`

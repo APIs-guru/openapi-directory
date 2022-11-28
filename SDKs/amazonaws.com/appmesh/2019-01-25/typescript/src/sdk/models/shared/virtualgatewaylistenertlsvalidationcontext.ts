@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SubjectAlternativeNames } from "./subjectalternativenames";
 import { VirtualGatewayListenerTlsValidationContextTrust } from "./virtualgatewaylistenertlsvalidationcontexttrust";
+
 
 
 // VirtualGatewayListenerTlsValidationContext
@@ -8,9 +9,9 @@ import { VirtualGatewayListenerTlsValidationContextTrust } from "./virtualgatewa
  * An object that represents a virtual gateway's listener's Transport Layer Security (TLS) validation context.
 **/
 export class VirtualGatewayListenerTlsValidationContext extends SpeakeasyBase {
-  @Metadata({ data: "json, name=subjectAlternativeNames" })
+  @SpeakeasyMetadata({ data: "json, name=subjectAlternativeNames" })
   subjectAlternativeNames?: SubjectAlternativeNames;
 
-  @Metadata({ data: "json, name=trust" })
+  @SpeakeasyMetadata({ data: "json, name=trust" })
   trust: VirtualGatewayListenerTlsValidationContextTrust;
 }

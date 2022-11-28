@@ -37,6 +37,8 @@ const (
 	GoogleCloudIntegrationsV1alphaIntegrationVersionStatusEnumSnapshot GoogleCloudIntegrationsV1alphaIntegrationVersionStatusEnum = "SNAPSHOT"
 )
 
+// GoogleCloudIntegrationsV1alphaIntegrationVersion
+// The integration version definition.
 type GoogleCloudIntegrationsV1alphaIntegrationVersion struct {
 	CreateTime                    *string                                                                        `json:"createTime,omitempty"`
 	DatabasePersistencePolicy     *GoogleCloudIntegrationsV1alphaIntegrationVersionDatabasePersistencePolicyEnum `json:"databasePersistencePolicy,omitempty"`

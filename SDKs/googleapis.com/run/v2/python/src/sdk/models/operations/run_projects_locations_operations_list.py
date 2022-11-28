@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class RunProjectsLocationsOperationsListPathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -28,20 +29,20 @@ class RunProjectsLocationsOperationsListQueryParams:
 
 @dataclass
 class RunProjectsLocationsOperationsListSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class RunProjectsLocationsOperationsListRequest:
-    path_params: RunProjectsLocationsOperationsListPathParams = field(default=None)
-    query_params: RunProjectsLocationsOperationsListQueryParams = field(default=None)
-    security: RunProjectsLocationsOperationsListSecurity = field(default=None)
+    path_params: RunProjectsLocationsOperationsListPathParams = field()
+    query_params: RunProjectsLocationsOperationsListQueryParams = field()
+    security: RunProjectsLocationsOperationsListSecurity = field()
     
 
 @dataclass
 class RunProjectsLocationsOperationsListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_longrunning_list_operations_response: Optional[shared.GoogleLongrunningListOperationsResponse] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -83,6 +83,8 @@ const (
 	ExchangeReviewStatusStatusEnumReviewStatusPending     ExchangeReviewStatusStatusEnum = "REVIEW_STATUS_PENDING"
 )
 
+// ExchangeReviewStatus
+// Exchange review status for the creative.
 type ExchangeReviewStatus struct {
 	Exchange *ExchangeReviewStatusExchangeEnum `json:"exchange,omitempty"`
 	Status   *ExchangeReviewStatusStatusEnum   `json:"status,omitempty"`

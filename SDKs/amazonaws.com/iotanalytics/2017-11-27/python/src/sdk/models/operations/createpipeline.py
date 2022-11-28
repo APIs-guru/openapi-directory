@@ -1,6 +1,10 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,List,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -18,26 +22,26 @@ class CreatePipelineHeaders:
 @dataclass_json
 @dataclass
 class CreatePipelineRequestBody:
-    pipeline_activities: List[shared.PipelineActivity] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'pipelineActivities' }})
-    pipeline_name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'pipelineName' }})
-    tags: Optional[List[shared.Tag]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tags' }})
+    pipeline_activities: List[shared.PipelineActivity] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('pipelineActivities') }})
+    pipeline_name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('pipelineName') }})
+    tags: Optional[List[shared.Tag]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('tags') }})
     
 
 @dataclass
 class CreatePipelineRequest:
-    headers: CreatePipelineHeaders = field(default=None)
-    request: CreatePipelineRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: CreatePipelineHeaders = field()
+    request: CreatePipelineRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class CreatePipelineResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     create_pipeline_response: Optional[shared.CreatePipelineResponse] = field(default=None)
     internal_failure_exception: Optional[Any] = field(default=None)
     invalid_request_exception: Optional[Any] = field(default=None)
     limit_exceeded_exception: Optional[Any] = field(default=None)
     resource_already_exists_exception: Optional[Any] = field(default=None)
     service_unavailable_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     

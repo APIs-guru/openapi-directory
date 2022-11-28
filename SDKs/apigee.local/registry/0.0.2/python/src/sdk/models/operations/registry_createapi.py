@@ -4,7 +4,7 @@ from typing import Any,Optional
 
 @dataclass
 class RegistryCreateAPIPathParams:
-    project: str = field(default=None, metadata={'path_param': { 'field_name': 'project', 'style': 'simple', 'explode': False }})
+    project: str = field(metadata={'path_param': { 'field_name': 'project', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -14,14 +14,14 @@ class RegistryCreateAPIQueryParams:
 
 @dataclass
 class RegistryCreateAPIRequest:
-    path_params: RegistryCreateAPIPathParams = field(default=None)
-    query_params: RegistryCreateAPIQueryParams = field(default=None)
-    request: Any = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    path_params: RegistryCreateAPIPathParams = field()
+    query_params: RegistryCreateAPIQueryParams = field()
+    request: Any = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class RegistryCreateAPIResponse:
+    content_type: str = field()
+    status_code: int = field()
     api: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

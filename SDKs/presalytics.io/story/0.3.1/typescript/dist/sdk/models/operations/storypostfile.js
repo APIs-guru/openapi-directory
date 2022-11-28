@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var StoryPostFileQueryParams = /** @class */ (function (_super) {
     __extends(StoryPostFileQueryParams, _super);
@@ -30,7 +30,7 @@ var StoryPostFileQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=include_outline" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=include_outline" }),
         __metadata("design:type", Boolean)
     ], StoryPostFileQueryParams.prototype, "includeOutline", void 0);
     return StoryPostFileQueryParams;
@@ -42,11 +42,11 @@ var StoryPostFileRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", StoryPostFileQueryParams)
     ], StoryPostFileRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=multipart/form-data" }),
+        SpeakeasyMetadata({ data: "request, media_type=multipart/form-data" }),
         __metadata("design:type", Object)
     ], StoryPostFileRequest.prototype, "request", void 0);
     return StoryPostFileRequest;
@@ -58,19 +58,19 @@ var StoryPostFileResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], StoryPostFileResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], StoryPostFileResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], StoryPostFileResponse.prototype, "problemDetail", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.Story)
     ], StoryPostFileResponse.prototype, "story", void 0);
     return StoryPostFileResponse;

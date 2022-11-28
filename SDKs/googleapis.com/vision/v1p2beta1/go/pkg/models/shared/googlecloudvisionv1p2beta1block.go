@@ -11,6 +11,8 @@ const (
 	GoogleCloudVisionV1p2beta1BlockBlockTypeEnumBarcode GoogleCloudVisionV1p2beta1BlockBlockTypeEnum = "BARCODE"
 )
 
+// GoogleCloudVisionV1p2beta1Block
+// Logical element on the page.
 type GoogleCloudVisionV1p2beta1Block struct {
 	BlockType   *GoogleCloudVisionV1p2beta1BlockBlockTypeEnum         `json:"blockType,omitempty"`
 	BoundingBox *GoogleCloudVisionV1p2beta1BoundingPoly               `json:"boundingBox,omitempty"`

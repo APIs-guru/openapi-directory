@@ -1,6 +1,7 @@
 
 
+
 export enum EvaluationTypeEnum {
-    Static = "STATIC"
-,    Dynamic = "DYNAMIC"
+    Static = "STATIC",
+    Dynamic = "DYNAMIC"
 }

@@ -1,5 +1,7 @@
 package shared
 
+// ServicePerimeterConfig
+// `ServicePerimeterConfig` specifies a set of Google Cloud resources that describe specific Service Perimeter configuration.
 type ServicePerimeterConfig struct {
 	AccessLevels          []string               `json:"accessLevels,omitempty"`
 	EgressPolicies        []EgressPolicy         `json:"egressPolicies,omitempty"`

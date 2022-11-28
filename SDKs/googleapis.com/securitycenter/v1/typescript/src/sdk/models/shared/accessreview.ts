@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AccessReview
@@ -6,24 +7,24 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Conveys information about a Kubernetes access review (e.g. kubectl auth can-i ...) that was involved in a finding.
 **/
 export class AccessReview extends SpeakeasyBase {
-  @Metadata({ data: "json, name=group" })
+  @SpeakeasyMetadata({ data: "json, name=group" })
   group?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=ns" })
+  @SpeakeasyMetadata({ data: "json, name=ns" })
   ns?: string;
 
-  @Metadata({ data: "json, name=resource" })
+  @SpeakeasyMetadata({ data: "json, name=resource" })
   resource?: string;
 
-  @Metadata({ data: "json, name=subresource" })
+  @SpeakeasyMetadata({ data: "json, name=subresource" })
   subresource?: string;
 
-  @Metadata({ data: "json, name=verb" })
+  @SpeakeasyMetadata({ data: "json, name=verb" })
   verb?: string;
 
-  @Metadata({ data: "json, name=version" })
+  @SpeakeasyMetadata({ data: "json, name=version" })
   version?: string;
 }

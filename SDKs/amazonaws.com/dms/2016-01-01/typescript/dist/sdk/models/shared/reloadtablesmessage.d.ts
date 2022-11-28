@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ReloadOptionValueEnum } from "./reloadoptionvalueenum";
 import { TableToReload } from "./tabletoreload";
 export declare class ReloadTablesMessage extends SpeakeasyBase {

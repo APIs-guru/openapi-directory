@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass_json
 @dataclass
 class ImageSource:
-    gcs_image_uri: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'gcsImageUri' }})
-    image_uri: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'imageUri' }})
+    r"""ImageSource
+    External image source (Google Cloud Storage or web URL image location).
+    """
+    
+    gcs_image_uri: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('gcsImageUri') }})
+    image_uri: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('imageUri') }})
     

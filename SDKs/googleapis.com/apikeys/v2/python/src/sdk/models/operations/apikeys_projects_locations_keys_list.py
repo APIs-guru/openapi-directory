@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class ApikeysProjectsLocationsKeysListPathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -28,14 +29,14 @@ class ApikeysProjectsLocationsKeysListQueryParams:
 
 @dataclass
 class ApikeysProjectsLocationsKeysListSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class ApikeysProjectsLocationsKeysListSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -46,14 +47,14 @@ class ApikeysProjectsLocationsKeysListSecurity:
 
 @dataclass
 class ApikeysProjectsLocationsKeysListRequest:
-    path_params: ApikeysProjectsLocationsKeysListPathParams = field(default=None)
-    query_params: ApikeysProjectsLocationsKeysListQueryParams = field(default=None)
-    security: ApikeysProjectsLocationsKeysListSecurity = field(default=None)
+    path_params: ApikeysProjectsLocationsKeysListPathParams = field()
+    query_params: ApikeysProjectsLocationsKeysListQueryParams = field()
+    security: ApikeysProjectsLocationsKeysListSecurity = field()
     
 
 @dataclass
 class ApikeysProjectsLocationsKeysListResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     v2_list_keys_response: Optional[shared.V2ListKeysResponse] = field(default=None)
     

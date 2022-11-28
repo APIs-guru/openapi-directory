@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ResourceAttributeEnum } from "./resourceattributeenum";
 import { RequiresRecreationEnum } from "./requiresrecreationenum";
 // ResourceTargetDefinition
@@ -35,15 +35,15 @@ var ResourceTargetDefinition = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Attribute" }),
+        SpeakeasyMetadata({ data: "json, name=Attribute" }),
         __metadata("design:type", String)
     ], ResourceTargetDefinition.prototype, "attribute", void 0);
     __decorate([
-        Metadata({ data: "json, name=Name" }),
+        SpeakeasyMetadata({ data: "json, name=Name" }),
         __metadata("design:type", String)
     ], ResourceTargetDefinition.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=RequiresRecreation" }),
+        SpeakeasyMetadata({ data: "json, name=RequiresRecreation" }),
         __metadata("design:type", String)
     ], ResourceTargetDefinition.prototype, "requiresRecreation", void 0);
     return ResourceTargetDefinition;

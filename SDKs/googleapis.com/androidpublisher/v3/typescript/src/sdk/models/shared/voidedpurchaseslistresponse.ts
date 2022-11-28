@@ -1,8 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PageInfo } from "./pageinfo";
 import { TokenPagination } from "./tokenpagination";
 import { VoidedPurchase } from "./voidedpurchase";
+
 
 
 // VoidedPurchasesListResponse
@@ -10,12 +10,12 @@ import { VoidedPurchase } from "./voidedpurchase";
  * Response for the voidedpurchases.list API.
 **/
 export class VoidedPurchasesListResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=pageInfo" })
+  @SpeakeasyMetadata({ data: "json, name=pageInfo" })
   pageInfo?: PageInfo;
 
-  @Metadata({ data: "json, name=tokenPagination" })
+  @SpeakeasyMetadata({ data: "json, name=tokenPagination" })
   tokenPagination?: TokenPagination;
 
-  @Metadata({ data: "json, name=voidedPurchases", elemType: shared.VoidedPurchase })
+  @SpeakeasyMetadata({ data: "json, name=voidedPurchases", elemType: VoidedPurchase })
   voidedPurchases?: VoidedPurchase[];
 }

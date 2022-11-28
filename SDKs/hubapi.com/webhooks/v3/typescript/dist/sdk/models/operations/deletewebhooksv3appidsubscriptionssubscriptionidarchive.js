@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var DeleteWebhooksV3AppIdSubscriptionsSubscriptionIdArchivePathParams = /** @class */ (function (_super) {
     __extends(DeleteWebhooksV3AppIdSubscriptionsSubscriptionIdArchivePathParams, _super);
@@ -30,11 +30,11 @@ var DeleteWebhooksV3AppIdSubscriptionsSubscriptionIdArchivePathParams = /** @cla
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=appId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=appId" }),
         __metadata("design:type", Number)
     ], DeleteWebhooksV3AppIdSubscriptionsSubscriptionIdArchivePathParams.prototype, "appId", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=subscriptionId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=subscriptionId" }),
         __metadata("design:type", Number)
     ], DeleteWebhooksV3AppIdSubscriptionsSubscriptionIdArchivePathParams.prototype, "subscriptionId", void 0);
     return DeleteWebhooksV3AppIdSubscriptionsSubscriptionIdArchivePathParams;
@@ -46,7 +46,7 @@ var DeleteWebhooksV3AppIdSubscriptionsSubscriptionIdArchiveSecurity = /** @class
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=query" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=query" }),
         __metadata("design:type", shared.SchemeDeveloperHapikey)
     ], DeleteWebhooksV3AppIdSubscriptionsSubscriptionIdArchiveSecurity.prototype, "developerHapikey", void 0);
     return DeleteWebhooksV3AppIdSubscriptionsSubscriptionIdArchiveSecurity;
@@ -58,11 +58,11 @@ var DeleteWebhooksV3AppIdSubscriptionsSubscriptionIdArchiveRequest = /** @class 
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", DeleteWebhooksV3AppIdSubscriptionsSubscriptionIdArchivePathParams)
     ], DeleteWebhooksV3AppIdSubscriptionsSubscriptionIdArchiveRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", DeleteWebhooksV3AppIdSubscriptionsSubscriptionIdArchiveSecurity)
     ], DeleteWebhooksV3AppIdSubscriptionsSubscriptionIdArchiveRequest.prototype, "security", void 0);
     return DeleteWebhooksV3AppIdSubscriptionsSubscriptionIdArchiveRequest;
@@ -74,15 +74,15 @@ var DeleteWebhooksV3AppIdSubscriptionsSubscriptionIdArchiveResponse = /** @class
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], DeleteWebhooksV3AppIdSubscriptionsSubscriptionIdArchiveResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], DeleteWebhooksV3AppIdSubscriptionsSubscriptionIdArchiveResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], DeleteWebhooksV3AppIdSubscriptionsSubscriptionIdArchiveResponse.prototype, "statusCode", void 0);
     return DeleteWebhooksV3AppIdSubscriptionsSubscriptionIdArchiveResponse;

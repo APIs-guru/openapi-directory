@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class GmailpostmastertoolsDomainsTrafficStatsGetPathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,20 +26,20 @@ class GmailpostmastertoolsDomainsTrafficStatsGetQueryParams:
 
 @dataclass
 class GmailpostmastertoolsDomainsTrafficStatsGetSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class GmailpostmastertoolsDomainsTrafficStatsGetRequest:
-    path_params: GmailpostmastertoolsDomainsTrafficStatsGetPathParams = field(default=None)
-    query_params: GmailpostmastertoolsDomainsTrafficStatsGetQueryParams = field(default=None)
-    security: GmailpostmastertoolsDomainsTrafficStatsGetSecurity = field(default=None)
+    path_params: GmailpostmastertoolsDomainsTrafficStatsGetPathParams = field()
+    query_params: GmailpostmastertoolsDomainsTrafficStatsGetQueryParams = field()
+    security: GmailpostmastertoolsDomainsTrafficStatsGetSecurity = field()
     
 
 @dataclass
 class GmailpostmastertoolsDomainsTrafficStatsGetResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     traffic_stats: Optional[shared.TrafficStats] = field(default=None)
     

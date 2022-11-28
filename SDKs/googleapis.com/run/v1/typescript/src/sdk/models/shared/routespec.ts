@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TrafficTarget } from "./traffictarget";
+
 
 
 // RouteSpec
@@ -8,6 +8,6 @@ import { TrafficTarget } from "./traffictarget";
  * RouteSpec holds the desired state of the Route (from the client).
 **/
 export class RouteSpec extends SpeakeasyBase {
-  @Metadata({ data: "json, name=traffic", elemType: shared.TrafficTarget })
+  @SpeakeasyMetadata({ data: "json, name=traffic", elemType: TrafficTarget })
   traffic?: TrafficTarget[];
 }

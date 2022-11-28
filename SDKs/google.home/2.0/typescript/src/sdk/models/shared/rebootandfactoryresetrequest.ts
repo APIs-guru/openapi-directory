@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class RebootandFactoryResetRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=params" })
+  @SpeakeasyMetadata({ data: "json, name=params" })
   params: string;
 }

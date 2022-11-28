@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class ClouddeployProjectsLocationsDeliveryPipelinesReleasesAbandonPathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,21 +26,21 @@ class ClouddeployProjectsLocationsDeliveryPipelinesReleasesAbandonQueryParams:
 
 @dataclass
 class ClouddeployProjectsLocationsDeliveryPipelinesReleasesAbandonSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class ClouddeployProjectsLocationsDeliveryPipelinesReleasesAbandonRequest:
-    path_params: ClouddeployProjectsLocationsDeliveryPipelinesReleasesAbandonPathParams = field(default=None)
-    query_params: ClouddeployProjectsLocationsDeliveryPipelinesReleasesAbandonQueryParams = field(default=None)
+    path_params: ClouddeployProjectsLocationsDeliveryPipelinesReleasesAbandonPathParams = field()
+    query_params: ClouddeployProjectsLocationsDeliveryPipelinesReleasesAbandonQueryParams = field()
+    security: ClouddeployProjectsLocationsDeliveryPipelinesReleasesAbandonSecurity = field()
     request: Optional[dict[str, Any]] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: ClouddeployProjectsLocationsDeliveryPipelinesReleasesAbandonSecurity = field(default=None)
     
 
 @dataclass
 class ClouddeployProjectsLocationsDeliveryPipelinesReleasesAbandonResponse:
+    content_type: str = field()
+    status_code: int = field()
     abandon_release_response: Optional[dict[str, Any]] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

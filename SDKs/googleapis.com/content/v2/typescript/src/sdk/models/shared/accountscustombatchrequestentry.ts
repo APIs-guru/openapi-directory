@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Account } from "./account";
 import { AccountsCustomBatchRequestEntryLinkRequest } from "./accountscustombatchrequestentrylinkrequest";
+
 
 
 // AccountsCustomBatchRequestEntry
@@ -8,30 +9,30 @@ import { AccountsCustomBatchRequestEntryLinkRequest } from "./accountscustombatc
  * A batch entry encoding a single non-batch accounts request.
 **/
 export class AccountsCustomBatchRequestEntry extends SpeakeasyBase {
-  @Metadata({ data: "json, name=account" })
+  @SpeakeasyMetadata({ data: "json, name=account" })
   account?: Account;
 
-  @Metadata({ data: "json, name=accountId" })
+  @SpeakeasyMetadata({ data: "json, name=accountId" })
   accountId?: string;
 
-  @Metadata({ data: "json, name=batchId" })
+  @SpeakeasyMetadata({ data: "json, name=batchId" })
   batchId?: number;
 
-  @Metadata({ data: "json, name=force" })
+  @SpeakeasyMetadata({ data: "json, name=force" })
   force?: boolean;
 
-  @Metadata({ data: "json, name=labelIds" })
+  @SpeakeasyMetadata({ data: "json, name=labelIds" })
   labelIds?: string[];
 
-  @Metadata({ data: "json, name=linkRequest" })
+  @SpeakeasyMetadata({ data: "json, name=linkRequest" })
   linkRequest?: AccountsCustomBatchRequestEntryLinkRequest;
 
-  @Metadata({ data: "json, name=merchantId" })
+  @SpeakeasyMetadata({ data: "json, name=merchantId" })
   merchantId?: string;
 
-  @Metadata({ data: "json, name=method" })
+  @SpeakeasyMetadata({ data: "json, name=method" })
   method?: string;
 
-  @Metadata({ data: "json, name=overwrite" })
+  @SpeakeasyMetadata({ data: "json, name=overwrite" })
   overwrite?: boolean;
 }

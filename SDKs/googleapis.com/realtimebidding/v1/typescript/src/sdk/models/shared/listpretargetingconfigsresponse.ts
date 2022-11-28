@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PretargetingConfig } from "./pretargetingconfig";
+
 
 
 // ListPretargetingConfigsResponse
@@ -8,9 +8,9 @@ import { PretargetingConfig } from "./pretargetingconfig";
  * A response containing pretargeting configurations.
 **/
 export class ListPretargetingConfigsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 
-  @Metadata({ data: "json, name=pretargetingConfigs", elemType: shared.PretargetingConfig })
+  @SpeakeasyMetadata({ data: "json, name=pretargetingConfigs", elemType: PretargetingConfig })
   pretargetingConfigs?: PretargetingConfig[];
 }

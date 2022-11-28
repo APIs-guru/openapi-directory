@@ -1,7 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TargetReference } from "./targetreference";
-import { TargetReference } from "./targetreference";
+
 
 
 // Move
@@ -9,9 +8,9 @@ import { TargetReference } from "./targetreference";
  * An object was moved.
 **/
 export class Move extends SpeakeasyBase {
-  @Metadata({ data: "json, name=addedParents", elemType: shared.TargetReference })
+  @SpeakeasyMetadata({ data: "json, name=addedParents", elemType: TargetReference })
   addedParents?: TargetReference[];
 
-  @Metadata({ data: "json, name=removedParents", elemType: shared.TargetReference })
+  @SpeakeasyMetadata({ data: "json, name=removedParents", elemType: TargetReference })
   removedParents?: TargetReference[];
 }

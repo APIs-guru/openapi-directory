@@ -1,35 +1,36 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class TranslateGifQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=s" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=s" })
   s: string;
 }
 
 
-export class TranslateGifRequest extends SpeakeasyBase {
-  @Metadata()
-  queryParams: TranslateGifQueryParams;
-}
-
-
 export class TranslateGif200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data?: shared.Gif;
 
-  @Metadata({ data: "json, name=meta" })
+  @SpeakeasyMetadata({ data: "json, name=meta" })
   meta?: shared.Meta;
 }
 
 
+export class TranslateGifRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  queryParams: TranslateGifQueryParams;
+}
+
+
 export class TranslateGifResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   translateGif200ApplicationJsonObject?: TranslateGif200ApplicationJson;
 }

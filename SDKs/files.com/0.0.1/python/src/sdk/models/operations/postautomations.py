@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from typing import Any,List,Optional
+from enum import Enum
 from sdk.models import shared
 
 class PostAutomationsRequestBodyAutomationEnum(str, Enum):
@@ -22,7 +23,7 @@ class PostAutomationsRequestBodyTriggerEnum(str, Enum):
 
 @dataclass
 class PostAutomationsRequestBody:
-    automation: PostAutomationsRequestBodyAutomationEnum = field(default=None, metadata={'multipart_form': { 'field_name': 'automation' }})
+    automation: PostAutomationsRequestBodyAutomationEnum = field(metadata={'multipart_form': { 'field_name': 'automation' }})
     destination: Optional[str] = field(default=None, metadata={'multipart_form': { 'field_name': 'destination' }})
     destination_replace_from: Optional[str] = field(default=None, metadata={'multipart_form': { 'field_name': 'destination_replace_from' }})
     destination_replace_to: Optional[str] = field(default=None, metadata={'multipart_form': { 'field_name': 'destination_replace_to' }})
@@ -41,12 +42,12 @@ class PostAutomationsRequestBody:
 
 @dataclass
 class PostAutomationsRequest:
-    request: PostAutomationsRequestBody = field(default=None, metadata={'request': { 'media_type': 'multipart/form-data' }})
+    request: PostAutomationsRequestBody = field(metadata={'request': { 'media_type': 'multipart/form-data' }})
     
 
 @dataclass
 class PostAutomationsResponse:
+    content_type: str = field()
+    status_code: int = field()
     automation_entity: Optional[shared.AutomationEntity] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

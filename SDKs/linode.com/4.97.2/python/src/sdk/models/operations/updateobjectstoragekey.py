@@ -1,7 +1,13 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import List,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
+
+
 UPDATE_OBJECT_STORAGE_KEY_SERVERS = [
 	"https://api.linode.com/v4",
 ]
@@ -9,49 +15,39 @@ UPDATE_OBJECT_STORAGE_KEY_SERVERS = [
 
 @dataclass
 class UpdateObjectStorageKeyPathParams:
-    key_id: int = field(default=None, metadata={'path_param': { 'field_name': 'keyId', 'style': 'simple', 'explode': False }})
+    key_id: int = field(metadata={'path_param': { 'field_name': 'keyId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass_json
 @dataclass
 class UpdateObjectStorageKeyRequestBody:
-    label: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'label' }})
-    
-
-@dataclass
-class UpdateObjectStorageKeySecurityOption1:
-    personal_access_token: shared.SchemePersonalAccessToken = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer' }})
-    
-
-@dataclass
-class UpdateObjectStorageKeySecurityOption2:
-    oauth: shared.SchemeOauth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    label: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('label') }})
     
 
 @dataclass
 class UpdateObjectStorageKeySecurity:
-    option1: Optional[UpdateObjectStorageKeySecurityOption1] = field(default=None, metadata={'security': { 'option': True }})
-    option2: Optional[UpdateObjectStorageKeySecurityOption2] = field(default=None, metadata={'security': { 'option': True }})
-    
-
-@dataclass
-class UpdateObjectStorageKeyRequest:
-    server_url: Optional[str] = field(default=None)
-    path_params: UpdateObjectStorageKeyPathParams = field(default=None)
-    request: Optional[UpdateObjectStorageKeyRequestBody] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: UpdateObjectStorageKeySecurity = field(default=None)
+    oauth: Optional[shared.SchemeOauth] = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    personal_access_token: Optional[shared.SchemePersonalAccessToken] = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer' }})
     
 
 @dataclass_json
 @dataclass
 class UpdateObjectStorageKeyDefaultApplicationJSON:
-    errors: Optional[List[shared.ErrorObject]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'errors' }})
+    errors: Optional[List[shared.ErrorObject]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('errors') }})
+    
+
+@dataclass
+class UpdateObjectStorageKeyRequest:
+    path_params: UpdateObjectStorageKeyPathParams = field()
+    security: UpdateObjectStorageKeySecurity = field()
+    request: Optional[UpdateObjectStorageKeyRequestBody] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    server_url: Optional[str] = field(default=None)
     
 
 @dataclass
 class UpdateObjectStorageKeyResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     object_storage_key: Optional[shared.ObjectStorageKey] = field(default=None)
-    status_code: int = field(default=None)
     update_object_storage_key_default_application_json_object: Optional[UpdateObjectStorageKeyDefaultApplicationJSON] = field(default=None)
     

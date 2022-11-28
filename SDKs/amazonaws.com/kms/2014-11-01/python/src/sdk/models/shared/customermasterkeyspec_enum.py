@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class CustomerMasterKeySpecEnum(str, Enum):
     RSA_2048 = "RSA_2048"

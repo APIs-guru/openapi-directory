@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudDialogflowV2EnvironmentHistoryEntry } from "./googleclouddialogflowv2environmenthistoryentry";
+
 
 
 // GoogleCloudDialogflowV2EnvironmentHistory
@@ -8,12 +8,12 @@ import { GoogleCloudDialogflowV2EnvironmentHistoryEntry } from "./googleclouddia
  * The response message for Environments.GetEnvironmentHistory.
 **/
 export class GoogleCloudDialogflowV2EnvironmentHistory extends SpeakeasyBase {
-  @Metadata({ data: "json, name=entries", elemType: shared.GoogleCloudDialogflowV2EnvironmentHistoryEntry })
+  @SpeakeasyMetadata({ data: "json, name=entries", elemType: GoogleCloudDialogflowV2EnvironmentHistoryEntry })
   entries?: GoogleCloudDialogflowV2EnvironmentHistoryEntry[];
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 
-  @Metadata({ data: "json, name=parent" })
+  @SpeakeasyMetadata({ data: "json, name=parent" })
   parent?: string;
 }

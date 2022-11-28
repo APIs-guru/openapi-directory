@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DisplayvideoAdvertisersLocationListsAssignedLocationsListPathParams:
-    advertiser_id: str = field(default=None, metadata={'path_param': { 'field_name': 'advertiserId', 'style': 'simple', 'explode': False }})
-    location_list_id: str = field(default=None, metadata={'path_param': { 'field_name': 'locationListId', 'style': 'simple', 'explode': False }})
+    advertiser_id: str = field(metadata={'path_param': { 'field_name': 'advertiserId', 'style': 'simple', 'explode': False }})
+    location_list_id: str = field(metadata={'path_param': { 'field_name': 'locationListId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -30,20 +31,20 @@ class DisplayvideoAdvertisersLocationListsAssignedLocationsListQueryParams:
 
 @dataclass
 class DisplayvideoAdvertisersLocationListsAssignedLocationsListSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DisplayvideoAdvertisersLocationListsAssignedLocationsListRequest:
-    path_params: DisplayvideoAdvertisersLocationListsAssignedLocationsListPathParams = field(default=None)
-    query_params: DisplayvideoAdvertisersLocationListsAssignedLocationsListQueryParams = field(default=None)
-    security: DisplayvideoAdvertisersLocationListsAssignedLocationsListSecurity = field(default=None)
+    path_params: DisplayvideoAdvertisersLocationListsAssignedLocationsListPathParams = field()
+    query_params: DisplayvideoAdvertisersLocationListsAssignedLocationsListQueryParams = field()
+    security: DisplayvideoAdvertisersLocationListsAssignedLocationsListSecurity = field()
     
 
 @dataclass
 class DisplayvideoAdvertisersLocationListsAssignedLocationsListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     list_assigned_locations_response: Optional[shared.ListAssignedLocationsResponse] = field(default=None)
-    status_code: int = field(default=None)
     

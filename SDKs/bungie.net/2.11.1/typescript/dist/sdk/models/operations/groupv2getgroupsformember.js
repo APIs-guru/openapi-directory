@@ -22,26 +22,26 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var GroupV2GetGroupsForMemberPathParams = /** @class */ (function (_super) {
     __extends(GroupV2GetGroupsForMemberPathParams, _super);
     function GroupV2GetGroupsForMemberPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=filter" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=filter" }),
         __metadata("design:type", Number)
     ], GroupV2GetGroupsForMemberPathParams.prototype, "filter", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=groupType" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=groupType" }),
         __metadata("design:type", Number)
     ], GroupV2GetGroupsForMemberPathParams.prototype, "groupType", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=membershipId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=membershipId" }),
         __metadata("design:type", Number)
     ], GroupV2GetGroupsForMemberPathParams.prototype, "membershipId", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=membershipType" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=membershipType" }),
         __metadata("design:type", Number)
     ], GroupV2GetGroupsForMemberPathParams.prototype, "membershipType", void 0);
     return GroupV2GetGroupsForMemberPathParams;
@@ -53,7 +53,7 @@ var GroupV2GetGroupsForMemberRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GroupV2GetGroupsForMemberPathParams)
     ], GroupV2GetGroupsForMemberRequest.prototype, "pathParams", void 0);
     return GroupV2GetGroupsForMemberRequest;
@@ -65,15 +65,15 @@ var GroupV2GetGroupsForMemberResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], GroupV2GetGroupsForMemberResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GroupV2GetGroupsForMemberResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GroupV2GetGroupsForMemberResponse.prototype, "statusCode", void 0);
     return GroupV2GetGroupsForMemberResponse;

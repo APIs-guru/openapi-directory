@@ -1,38 +1,39 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetDistrictPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" })
   id: string;
 }
 
 
 export class GetDistrictQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=include" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=include" })
   include?: string;
 }
 
 
 export class GetDistrictRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetDistrictPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetDistrictQueryParams;
 }
 
 
 export class GetDistrictResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   districtResponse?: shared.DistrictResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   notFound?: shared.NotFound;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

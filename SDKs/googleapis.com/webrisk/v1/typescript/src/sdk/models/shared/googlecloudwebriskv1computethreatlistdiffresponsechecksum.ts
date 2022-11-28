@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudWebriskV1ComputeThreatListDiffResponseChecksum
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The expected state of a client's local database.
 **/
 export class GoogleCloudWebriskV1ComputeThreatListDiffResponseChecksum extends SpeakeasyBase {
-  @Metadata({ data: "json, name=sha256" })
+  @SpeakeasyMetadata({ data: "json, name=sha256" })
   sha256?: string;
 }

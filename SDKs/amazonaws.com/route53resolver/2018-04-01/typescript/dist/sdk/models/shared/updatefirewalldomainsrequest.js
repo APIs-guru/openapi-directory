@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { FirewallDomainUpdateOperationEnum } from "./firewalldomainupdateoperationenum";
 var UpdateFirewallDomainsRequest = /** @class */ (function (_super) {
     __extends(UpdateFirewallDomainsRequest, _super);
@@ -30,15 +30,15 @@ var UpdateFirewallDomainsRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Domains" }),
+        SpeakeasyMetadata({ data: "json, name=Domains" }),
         __metadata("design:type", Array)
     ], UpdateFirewallDomainsRequest.prototype, "domains", void 0);
     __decorate([
-        Metadata({ data: "json, name=FirewallDomainListId" }),
+        SpeakeasyMetadata({ data: "json, name=FirewallDomainListId" }),
         __metadata("design:type", String)
     ], UpdateFirewallDomainsRequest.prototype, "firewallDomainListId", void 0);
     __decorate([
-        Metadata({ data: "json, name=Operation" }),
+        SpeakeasyMetadata({ data: "json, name=Operation" }),
         __metadata("design:type", String)
     ], UpdateFirewallDomainsRequest.prototype, "operation", void 0);
     return UpdateFirewallDomainsRequest;

@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// StorageVirtualMachine
+// Describes the Amazon FSx for NetApp ONTAP storage virtual machine (SVM) configuraton.
 type StorageVirtualMachine struct {
 	ActiveDirectoryConfiguration *SvmActiveDirectoryConfiguration                  `json:"ActiveDirectoryConfiguration,omitempty"`
 	CreationTime                 *time.Time                                        `json:"CreationTime,omitempty"`

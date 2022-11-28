@@ -1,5 +1,7 @@
 package shared
 
+// DistributionConfiguration
+// A distribution configuration.
 type DistributionConfiguration struct {
 	Arn            *string           `json:"arn,omitempty"`
 	DateCreated    *string           `json:"dateCreated,omitempty"`

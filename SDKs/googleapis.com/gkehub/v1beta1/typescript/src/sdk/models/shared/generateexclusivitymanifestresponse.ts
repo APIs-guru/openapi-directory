@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GenerateExclusivityManifestResponse
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The response of the exclusivity artifacts manifests for the client to apply.
 **/
 export class GenerateExclusivityManifestResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=crManifest" })
+  @SpeakeasyMetadata({ data: "json, name=crManifest" })
   crManifest?: string;
 
-  @Metadata({ data: "json, name=crdManifest" })
+  @SpeakeasyMetadata({ data: "json, name=crdManifest" })
   crdManifest?: string;
 }

@@ -1,5 +1,7 @@
 package shared
 
+// ProductDeliveryTimeAreaDeliveryTimeDeliveryTime
+// A delivery time for this product.
 type ProductDeliveryTimeAreaDeliveryTimeDeliveryTime struct {
 	MaxHandlingTimeDays *int32 `json:"maxHandlingTimeDays,omitempty"`
 	MaxTransitTimeDays  *int32 `json:"maxTransitTimeDays,omitempty"`

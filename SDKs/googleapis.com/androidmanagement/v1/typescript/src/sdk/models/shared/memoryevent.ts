@@ -1,12 +1,13 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum MemoryEventEventTypeEnum {
-    MemoryEventTypeUnspecified = "MEMORY_EVENT_TYPE_UNSPECIFIED"
-,    RamMeasured = "RAM_MEASURED"
-,    InternalStorageMeasured = "INTERNAL_STORAGE_MEASURED"
-,    ExternalStorageDetected = "EXTERNAL_STORAGE_DETECTED"
-,    ExternalStorageRemoved = "EXTERNAL_STORAGE_REMOVED"
-,    ExternalStorageMeasured = "EXTERNAL_STORAGE_MEASURED"
+    MemoryEventTypeUnspecified = "MEMORY_EVENT_TYPE_UNSPECIFIED",
+    RamMeasured = "RAM_MEASURED",
+    InternalStorageMeasured = "INTERNAL_STORAGE_MEASURED",
+    ExternalStorageDetected = "EXTERNAL_STORAGE_DETECTED",
+    ExternalStorageRemoved = "EXTERNAL_STORAGE_REMOVED",
+    ExternalStorageMeasured = "EXTERNAL_STORAGE_MEASURED"
 }
 
 
@@ -15,12 +16,12 @@ export enum MemoryEventEventTypeEnum {
  * An event related to memory and storage measurements.
 **/
 export class MemoryEvent extends SpeakeasyBase {
-  @Metadata({ data: "json, name=byteCount" })
+  @SpeakeasyMetadata({ data: "json, name=byteCount" })
   byteCount?: string;
 
-  @Metadata({ data: "json, name=createTime" })
+  @SpeakeasyMetadata({ data: "json, name=createTime" })
   createTime?: string;
 
-  @Metadata({ data: "json, name=eventType" })
+  @SpeakeasyMetadata({ data: "json, name=eventType" })
   eventType?: MemoryEventEventTypeEnum;
 }

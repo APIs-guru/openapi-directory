@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var GetCreateNetworkAclEntryActionEnum;
 (function (GetCreateNetworkAclEntryActionEnum) {
     GetCreateNetworkAclEntryActionEnum["CreateNetworkAclEntry"] = "CreateNetworkAclEntry";
@@ -37,11 +37,11 @@ var GetCreateNetworkAclEntryIcmp = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, name=Code" }),
+        SpeakeasyMetadata({ data: "queryParam, name=Code" }),
         __metadata("design:type", Number)
     ], GetCreateNetworkAclEntryIcmp.prototype, "code", void 0);
     __decorate([
-        Metadata({ data: "queryParam, name=Type" }),
+        SpeakeasyMetadata({ data: "queryParam, name=Type" }),
         __metadata("design:type", Number)
     ], GetCreateNetworkAclEntryIcmp.prototype, "type", void 0);
     return GetCreateNetworkAclEntryIcmp;
@@ -57,11 +57,11 @@ var GetCreateNetworkAclEntryPortRange = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, name=From" }),
+        SpeakeasyMetadata({ data: "queryParam, name=From" }),
         __metadata("design:type", Number)
     ], GetCreateNetworkAclEntryPortRange.prototype, "from", void 0);
     __decorate([
-        Metadata({ data: "queryParam, name=To" }),
+        SpeakeasyMetadata({ data: "queryParam, name=To" }),
         __metadata("design:type", Number)
     ], GetCreateNetworkAclEntryPortRange.prototype, "to", void 0);
     return GetCreateNetworkAclEntryPortRange;
@@ -82,51 +82,51 @@ var GetCreateNetworkAclEntryQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=Action" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Action" }),
         __metadata("design:type", String)
     ], GetCreateNetworkAclEntryQueryParams.prototype, "action", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=CidrBlock" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=CidrBlock" }),
         __metadata("design:type", String)
     ], GetCreateNetworkAclEntryQueryParams.prototype, "cidrBlock", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=DryRun" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=DryRun" }),
         __metadata("design:type", Boolean)
     ], GetCreateNetworkAclEntryQueryParams.prototype, "dryRun", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=Egress" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Egress" }),
         __metadata("design:type", Boolean)
     ], GetCreateNetworkAclEntryQueryParams.prototype, "egress", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=Icmp" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Icmp" }),
         __metadata("design:type", GetCreateNetworkAclEntryIcmp)
     ], GetCreateNetworkAclEntryQueryParams.prototype, "icmp", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=Ipv6CidrBlock" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Ipv6CidrBlock" }),
         __metadata("design:type", String)
     ], GetCreateNetworkAclEntryQueryParams.prototype, "ipv6CidrBlock", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=NetworkAclId" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=NetworkAclId" }),
         __metadata("design:type", String)
     ], GetCreateNetworkAclEntryQueryParams.prototype, "networkAclId", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=PortRange" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=PortRange" }),
         __metadata("design:type", GetCreateNetworkAclEntryPortRange)
     ], GetCreateNetworkAclEntryQueryParams.prototype, "portRange", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=Protocol" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Protocol" }),
         __metadata("design:type", String)
     ], GetCreateNetworkAclEntryQueryParams.prototype, "protocol", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=RuleAction" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=RuleAction" }),
         __metadata("design:type", String)
     ], GetCreateNetworkAclEntryQueryParams.prototype, "ruleAction", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=RuleNumber" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=RuleNumber" }),
         __metadata("design:type", Number)
     ], GetCreateNetworkAclEntryQueryParams.prototype, "ruleNumber", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=Version" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Version" }),
         __metadata("design:type", String)
     ], GetCreateNetworkAclEntryQueryParams.prototype, "version", void 0);
     return GetCreateNetworkAclEntryQueryParams;
@@ -138,31 +138,31 @@ var GetCreateNetworkAclEntryHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
         __metadata("design:type", String)
     ], GetCreateNetworkAclEntryHeaders.prototype, "xAmzAlgorithm", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
         __metadata("design:type", String)
     ], GetCreateNetworkAclEntryHeaders.prototype, "xAmzContentSha256", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
         __metadata("design:type", String)
     ], GetCreateNetworkAclEntryHeaders.prototype, "xAmzCredential", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
         __metadata("design:type", String)
     ], GetCreateNetworkAclEntryHeaders.prototype, "xAmzDate", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
         __metadata("design:type", String)
     ], GetCreateNetworkAclEntryHeaders.prototype, "xAmzSecurityToken", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
         __metadata("design:type", String)
     ], GetCreateNetworkAclEntryHeaders.prototype, "xAmzSignature", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
         __metadata("design:type", String)
     ], GetCreateNetworkAclEntryHeaders.prototype, "xAmzSignedHeaders", void 0);
     return GetCreateNetworkAclEntryHeaders;
@@ -174,11 +174,11 @@ var GetCreateNetworkAclEntryRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetCreateNetworkAclEntryQueryParams)
     ], GetCreateNetworkAclEntryRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetCreateNetworkAclEntryHeaders)
     ], GetCreateNetworkAclEntryRequest.prototype, "headers", void 0);
     return GetCreateNetworkAclEntryRequest;
@@ -190,11 +190,11 @@ var GetCreateNetworkAclEntryResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetCreateNetworkAclEntryResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetCreateNetworkAclEntryResponse.prototype, "statusCode", void 0);
     return GetCreateNetworkAclEntryResponse;

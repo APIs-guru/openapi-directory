@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class RedisProjectsLocationsInstancesPatchPathParams extends SpeakeasyBase {
     name: string;
@@ -24,7 +24,7 @@ export declare class RedisProjectsLocationsInstancesPatchSecurity extends Speake
 export declare class RedisProjectsLocationsInstancesPatchRequest extends SpeakeasyBase {
     pathParams: RedisProjectsLocationsInstancesPatchPathParams;
     queryParams: RedisProjectsLocationsInstancesPatchQueryParams;
-    request?: shared.Instance;
+    request?: shared.InstanceInput;
     security: RedisProjectsLocationsInstancesPatchSecurity;
 }
 export declare class RedisProjectsLocationsInstancesPatchResponse extends SpeakeasyBase {

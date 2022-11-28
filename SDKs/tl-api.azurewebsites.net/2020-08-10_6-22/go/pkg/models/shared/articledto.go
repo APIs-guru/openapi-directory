@@ -4,6 +4,9 @@ import (
 	"time"
 )
 
+// ArticleDto
+// The ArticleDTO Class.
+// Contains relevant fields of Article DTO by masking actual Article entity's fields in application.
 type ArticleDto struct {
 	ActiveStatus     *bool                  `json:"activeStatus,omitempty"`
 	ApplyForAllGyms  *bool                  `json:"applyForAllGyms,omitempty"`

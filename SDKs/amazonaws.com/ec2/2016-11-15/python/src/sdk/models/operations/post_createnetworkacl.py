@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostCreateNetworkACLActionEnum(str, Enum):
     CREATE_NETWORK_ACL = "CreateNetworkAcl"
@@ -10,8 +14,8 @@ class PostCreateNetworkACLVersionEnum(str, Enum):
 
 @dataclass
 class PostCreateNetworkACLQueryParams:
-    action: PostCreateNetworkACLActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostCreateNetworkACLVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostCreateNetworkACLActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostCreateNetworkACLVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostCreateNetworkACLHeaders:
 
 @dataclass
 class PostCreateNetworkACLRequest:
-    query_params: PostCreateNetworkACLQueryParams = field(default=None)
-    headers: PostCreateNetworkACLHeaders = field(default=None)
+    headers: PostCreateNetworkACLHeaders = field()
+    query_params: PostCreateNetworkACLQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostCreateNetworkACLResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

@@ -1,74 +1,75 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class ReposCreateDeploymentPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=owner" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=owner" })
   owner: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=repo" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=repo" })
   repo: string;
 }
 
 
 export class ReposCreateDeploymentRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=auto_merge" })
+  @SpeakeasyMetadata({ data: "json, name=auto_merge" })
   autoMerge?: boolean;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=environment" })
+  @SpeakeasyMetadata({ data: "json, name=environment" })
   environment?: string;
 
-  @Metadata({ data: "json, name=payload" })
+  @SpeakeasyMetadata({ data: "json, name=payload" })
   payload?: any;
 
-  @Metadata({ data: "json, name=production_environment" })
+  @SpeakeasyMetadata({ data: "json, name=production_environment" })
   productionEnvironment?: boolean;
 
-  @Metadata({ data: "json, name=ref" })
+  @SpeakeasyMetadata({ data: "json, name=ref" })
   ref: string;
 
-  @Metadata({ data: "json, name=required_contexts" })
+  @SpeakeasyMetadata({ data: "json, name=required_contexts" })
   requiredContexts?: string[];
 
-  @Metadata({ data: "json, name=task" })
+  @SpeakeasyMetadata({ data: "json, name=task" })
   task?: string;
 
-  @Metadata({ data: "json, name=transient_environment" })
+  @SpeakeasyMetadata({ data: "json, name=transient_environment" })
   transientEnvironment?: boolean;
 }
 
 
-export class ReposCreateDeploymentRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: ReposCreateDeploymentPathParams;
-
-  @Metadata({ data: "request, media_type=application/json" })
-  request?: ReposCreateDeploymentRequestBody;
-}
-
-
 export class ReposCreateDeployment202ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
+export class ReposCreateDeploymentRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: ReposCreateDeploymentPathParams;
+
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request?: ReposCreateDeploymentRequestBody;
+}
+
+
 export class ReposCreateDeploymentResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   deployment?: shared.Deployment;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   reposCreateDeployment202ApplicationJsonObject?: ReposCreateDeployment202ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   validationError?: shared.ValidationError;
 }

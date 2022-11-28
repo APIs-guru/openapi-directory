@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetDeleteVpnConnectionRouteActionEnum(str, Enum):
     DELETE_VPN_CONNECTION_ROUTE = "DeleteVpnConnectionRoute"
@@ -10,10 +14,10 @@ class GetDeleteVpnConnectionRouteVersionEnum(str, Enum):
 
 @dataclass
 class GetDeleteVpnConnectionRouteQueryParams:
-    action: GetDeleteVpnConnectionRouteActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    destination_cidr_block: str = field(default=None, metadata={'query_param': { 'field_name': 'DestinationCidrBlock', 'style': 'form', 'explode': True }})
-    version: GetDeleteVpnConnectionRouteVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
-    vpn_connection_id: str = field(default=None, metadata={'query_param': { 'field_name': 'VpnConnectionId', 'style': 'form', 'explode': True }})
+    action: GetDeleteVpnConnectionRouteActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    destination_cidr_block: str = field(metadata={'query_param': { 'field_name': 'DestinationCidrBlock', 'style': 'form', 'explode': True }})
+    version: GetDeleteVpnConnectionRouteVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    vpn_connection_id: str = field(metadata={'query_param': { 'field_name': 'VpnConnectionId', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -29,12 +33,12 @@ class GetDeleteVpnConnectionRouteHeaders:
 
 @dataclass
 class GetDeleteVpnConnectionRouteRequest:
-    query_params: GetDeleteVpnConnectionRouteQueryParams = field(default=None)
-    headers: GetDeleteVpnConnectionRouteHeaders = field(default=None)
+    headers: GetDeleteVpnConnectionRouteHeaders = field()
+    query_params: GetDeleteVpnConnectionRouteQueryParams = field()
     
 
 @dataclass
 class GetDeleteVpnConnectionRouteResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

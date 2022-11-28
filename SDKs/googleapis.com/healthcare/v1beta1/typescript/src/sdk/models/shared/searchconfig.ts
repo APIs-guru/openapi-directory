@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SearchParameter } from "./searchparameter";
+
 
 
 // SearchConfig
@@ -8,6 +8,6 @@ import { SearchParameter } from "./searchparameter";
  * Contains the configuration for FHIR search.
 **/
 export class SearchConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=searchParameters", elemType: shared.SearchParameter })
+  @SpeakeasyMetadata({ data: "json, name=searchParameters", elemType: SearchParameter })
   searchParameters?: SearchParameter[];
 }

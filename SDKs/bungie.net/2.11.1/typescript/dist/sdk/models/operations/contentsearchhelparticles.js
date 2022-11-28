@@ -22,18 +22,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var ContentSearchHelpArticlesPathParams = /** @class */ (function (_super) {
     __extends(ContentSearchHelpArticlesPathParams, _super);
     function ContentSearchHelpArticlesPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=searchtext" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=searchtext" }),
         __metadata("design:type", String)
     ], ContentSearchHelpArticlesPathParams.prototype, "searchtext", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=size" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=size" }),
         __metadata("design:type", String)
     ], ContentSearchHelpArticlesPathParams.prototype, "size", void 0);
     return ContentSearchHelpArticlesPathParams;
@@ -45,7 +45,7 @@ var ContentSearchHelpArticlesRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ContentSearchHelpArticlesPathParams)
     ], ContentSearchHelpArticlesRequest.prototype, "pathParams", void 0);
     return ContentSearchHelpArticlesRequest;
@@ -57,15 +57,15 @@ var ContentSearchHelpArticlesResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], ContentSearchHelpArticlesResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], ContentSearchHelpArticlesResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], ContentSearchHelpArticlesResponse.prototype, "statusCode", void 0);
     return ContentSearchHelpArticlesResponse;

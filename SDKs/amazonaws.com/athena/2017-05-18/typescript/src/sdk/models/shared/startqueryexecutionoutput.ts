@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class StartQueryExecutionOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=QueryExecutionId" })
+  @SpeakeasyMetadata({ data: "json, name=QueryExecutionId" })
   queryExecutionId?: string;
 }

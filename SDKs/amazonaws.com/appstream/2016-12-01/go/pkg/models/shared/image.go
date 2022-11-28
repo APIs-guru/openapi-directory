@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// Image
+// Describes an image.
 type Image struct {
 	Applications                []Application           `json:"Applications,omitempty"`
 	AppstreamAgentVersion       *string                 `json:"AppstreamAgentVersion,omitempty"`

@@ -1,47 +1,48 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class AuthorizationContactInformationGetQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=afterDate" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=afterDate" })
   afterDate?: Date;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=authorizationCode" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=authorizationCode" })
   authorizationCode?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=beforeDate" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=beforeDate" })
   beforeDate?: Date;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=dealerCode" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=dealerCode" })
   dealerCode?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=limit" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=limit" })
   limit?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=offset" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=offset" })
   offset?: number;
 }
 
 
 export class AuthorizationContactInformationGetRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: AuthorizationContactInformationGetQueryParams;
 }
 
 
 export class AuthorizationContactInformationGetResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   apiIPagedResponseAuthorizationCodesSharedModelsAuthorizationContactInformation?: shared.ApiIPagedResponseAuthorizationCodesSharedModelsAuthorizationContactInformation;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   apiModelsApiError?: shared.ApiModelsApiError;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

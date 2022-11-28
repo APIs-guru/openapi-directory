@@ -15,13 +15,13 @@ class RemoveSystemRescueKeyPairHeaders:
 
 @dataclass
 class RemoveSystemRescueKeyPairRequest:
-    query_params: RemoveSystemRescueKeyPairQueryParams = field(default=None)
-    headers: RemoveSystemRescueKeyPairHeaders = field(default=None)
+    headers: RemoveSystemRescueKeyPairHeaders = field()
+    query_params: RemoveSystemRescueKeyPairQueryParams = field()
     
 
 @dataclass
 class RemoveSystemRescueKeyPairResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error_response: Optional[shared.ErrorResponse] = field(default=None)
-    status_code: int = field(default=None)
     

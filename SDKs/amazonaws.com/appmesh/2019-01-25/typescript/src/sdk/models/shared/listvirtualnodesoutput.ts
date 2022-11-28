@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { VirtualNodeRef } from "./virtualnoderef";
+
 
 
 // ListVirtualNodesOutput
@@ -8,9 +8,9 @@ import { VirtualNodeRef } from "./virtualnoderef";
  * <zonbook></zonbook><xhtml></xhtml>
 **/
 export class ListVirtualNodesOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=nextToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=virtualNodes", elemType: shared.VirtualNodeRef })
+  @SpeakeasyMetadata({ data: "json, name=virtualNodes", elemType: VirtualNodeRef })
   virtualNodes: VirtualNodeRef[];
 }

@@ -22,8 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var AccountStatusEnum;
 (function (AccountStatusEnum) {
     AccountStatusEnum["Pending"] = "PENDING";
@@ -37,11 +36,11 @@ var AccountUcisHealth = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=message" }),
+        SpeakeasyMetadata({ data: "json, name=message" }),
         __metadata("design:type", String)
     ], AccountUcisHealth.prototype, "message", void 0);
     __decorate([
-        Metadata({ data: "json, name=status" }),
+        SpeakeasyMetadata({ data: "json, name=status" }),
         __metadata("design:type", String)
     ], AccountUcisHealth.prototype, "status", void 0);
     return AccountUcisHealth;
@@ -53,23 +52,23 @@ var AccountUcis = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=health" }),
+        SpeakeasyMetadata({ data: "json, name=health" }),
         __metadata("design:type", AccountUcisHealth)
     ], AccountUcis.prototype, "health", void 0);
     __decorate([
-        Metadata({ data: "json, name=id" }),
+        SpeakeasyMetadata({ data: "json, name=id" }),
         __metadata("design:type", Number)
     ], AccountUcis.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "json, name=type" }),
+        SpeakeasyMetadata({ data: "json, name=type" }),
         __metadata("design:type", String)
     ], AccountUcis.prototype, "type", void 0);
     __decorate([
-        Metadata({ data: "json, name=ucpAccountId" }),
+        SpeakeasyMetadata({ data: "json, name=ucpAccountId" }),
         __metadata("design:type", String)
     ], AccountUcis.prototype, "ucpAccountId", void 0);
     __decorate([
-        Metadata({ data: "json, name=ucpLabel" }),
+        SpeakeasyMetadata({ data: "json, name=ucpLabel" }),
         __metadata("design:type", String)
     ], AccountUcis.prototype, "ucpLabel", void 0);
     return AccountUcis;
@@ -81,23 +80,23 @@ var Account = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=id" }),
+        SpeakeasyMetadata({ data: "json, name=id" }),
         __metadata("design:type", Number)
     ], Account.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], Account.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=org" }),
+        SpeakeasyMetadata({ data: "json, name=org" }),
         __metadata("design:type", String)
     ], Account.prototype, "org", void 0);
     __decorate([
-        Metadata({ data: "json, name=status" }),
+        SpeakeasyMetadata({ data: "json, name=status" }),
         __metadata("design:type", String)
     ], Account.prototype, "status", void 0);
     __decorate([
-        Metadata({ data: "json, name=ucis", elemType: shared.AccountUcis }),
+        SpeakeasyMetadata({ data: "json, name=ucis", elemType: AccountUcis }),
         __metadata("design:type", Array)
     ], Account.prototype, "ucis", void 0);
     return Account;

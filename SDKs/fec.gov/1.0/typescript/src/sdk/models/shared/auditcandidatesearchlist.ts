@@ -1,9 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AuditCandidateSearch } from "./auditcandidatesearch";
 
 
+
 export class AuditCandidateSearchList extends SpeakeasyBase {
-  @Metadata({ data: "json, name=results", elemType: shared.AuditCandidateSearch })
+  @SpeakeasyMetadata({ data: "json, name=results", elemType: AuditCandidateSearch })
   results?: AuditCandidateSearch[];
 }

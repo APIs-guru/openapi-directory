@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
+
 
 export enum GetUpdateScalingParametersActionEnum {
     UpdateScalingParameters = "UpdateScalingParameters"
@@ -11,13 +12,13 @@ export enum GetUpdateScalingParametersActionEnum {
  * The desired instance type and desired number of replicas of each index partition.
 **/
 export class GetUpdateScalingParametersScalingParameters extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, name=DesiredInstanceType" })
+  @SpeakeasyMetadata({ data: "queryParam, name=DesiredInstanceType" })
   desiredInstanceType?: shared.PartitionInstanceTypeEnum;
 
-  @Metadata({ data: "queryParam, name=DesiredPartitionCount" })
+  @SpeakeasyMetadata({ data: "queryParam, name=DesiredPartitionCount" })
   desiredPartitionCount?: number;
 
-  @Metadata({ data: "queryParam, name=DesiredReplicationCount" })
+  @SpeakeasyMetadata({ data: "queryParam, name=DesiredReplicationCount" })
   desiredReplicationCount?: number;
 }
 
@@ -27,60 +28,60 @@ export enum GetUpdateScalingParametersVersionEnum {
 
 
 export class GetUpdateScalingParametersQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Action" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Action" })
   action: GetUpdateScalingParametersActionEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=DomainName" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=DomainName" })
   domainName: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=ScalingParameters" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=ScalingParameters" })
   scalingParameters: GetUpdateScalingParametersScalingParameters;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Version" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Version" })
   version: GetUpdateScalingParametersVersionEnum;
 }
 
 
 export class GetUpdateScalingParametersHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
 
 export class GetUpdateScalingParametersRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetUpdateScalingParametersQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: GetUpdateScalingParametersHeaders;
 }
 
 
 export class GetUpdateScalingParametersResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

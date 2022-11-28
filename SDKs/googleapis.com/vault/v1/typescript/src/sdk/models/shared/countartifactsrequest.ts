@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Query } from "./query";
 
+
 export enum CountArtifactsRequestViewEnum {
-    CountResultViewUnspecified = "COUNT_RESULT_VIEW_UNSPECIFIED"
-,    TotalCount = "TOTAL_COUNT"
-,    All = "ALL"
+    CountResultViewUnspecified = "COUNT_RESULT_VIEW_UNSPECIFIED",
+    TotalCount = "TOTAL_COUNT",
+    All = "ALL"
 }
 
 
@@ -13,9 +14,9 @@ export enum CountArtifactsRequestViewEnum {
  * Count artifacts request.
 **/
 export class CountArtifactsRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=query" })
+  @SpeakeasyMetadata({ data: "json, name=query" })
   query?: Query;
 
-  @Metadata({ data: "json, name=view" })
+  @SpeakeasyMetadata({ data: "json, name=view" })
   view?: CountArtifactsRequestViewEnum;
 }

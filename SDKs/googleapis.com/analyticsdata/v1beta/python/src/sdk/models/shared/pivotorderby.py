@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import pivotselection
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class PivotOrderBy:
-    metric_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'metricName' }})
-    pivot_selections: Optional[List[pivotselection.PivotSelection]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'pivotSelections' }})
+    r"""PivotOrderBy
+    Sorts by a pivot column group.
+    """
+    
+    metric_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('metricName') }})
+    pivot_selections: Optional[List[PivotSelection]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('pivotSelections') }})
     

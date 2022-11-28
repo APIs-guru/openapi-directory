@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class FirestoreProjectsDatabasesIndexesListPathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -28,14 +29,14 @@ class FirestoreProjectsDatabasesIndexesListQueryParams:
 
 @dataclass
 class FirestoreProjectsDatabasesIndexesListSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class FirestoreProjectsDatabasesIndexesListSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -46,14 +47,14 @@ class FirestoreProjectsDatabasesIndexesListSecurity:
 
 @dataclass
 class FirestoreProjectsDatabasesIndexesListRequest:
-    path_params: FirestoreProjectsDatabasesIndexesListPathParams = field(default=None)
-    query_params: FirestoreProjectsDatabasesIndexesListQueryParams = field(default=None)
-    security: FirestoreProjectsDatabasesIndexesListSecurity = field(default=None)
+    path_params: FirestoreProjectsDatabasesIndexesListPathParams = field()
+    query_params: FirestoreProjectsDatabasesIndexesListQueryParams = field()
+    security: FirestoreProjectsDatabasesIndexesListSecurity = field()
     
 
 @dataclass
 class FirestoreProjectsDatabasesIndexesListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_firestore_admin_v1beta1_list_indexes_response: Optional[shared.GoogleFirestoreAdminV1beta1ListIndexesResponse] = field(default=None)
-    status_code: int = field(default=None)
     

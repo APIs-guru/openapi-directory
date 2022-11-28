@@ -5,36 +5,36 @@ from sdk.models import shared
 
 @dataclass
 class EndpointGetAnArtistsTopTracksPathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class EndpointGetAnArtistsTopTracksQueryParams:
-    market: str = field(default=None, metadata={'query_param': { 'field_name': 'market', 'style': 'form', 'explode': True }})
+    market: str = field(metadata={'query_param': { 'field_name': 'market', 'style': 'form', 'explode': True }})
     
 
 @dataclass
 class EndpointGetAnArtistsTopTracksHeaders:
-    authorization: str = field(default=None, metadata={'header': { 'field_name': 'Authorization', 'style': 'simple', 'explode': False }})
+    authorization: str = field(metadata={'header': { 'field_name': 'Authorization', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class EndpointGetAnArtistsTopTracksSecurity:
-    spotify_auth: shared.SchemeSpotifyAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    spotify_auth: shared.SchemeSpotifyAuth = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class EndpointGetAnArtistsTopTracksRequest:
-    path_params: EndpointGetAnArtistsTopTracksPathParams = field(default=None)
-    query_params: EndpointGetAnArtistsTopTracksQueryParams = field(default=None)
-    headers: EndpointGetAnArtistsTopTracksHeaders = field(default=None)
-    security: EndpointGetAnArtistsTopTracksSecurity = field(default=None)
+    headers: EndpointGetAnArtistsTopTracksHeaders = field()
+    path_params: EndpointGetAnArtistsTopTracksPathParams = field()
+    query_params: EndpointGetAnArtistsTopTracksQueryParams = field()
+    security: EndpointGetAnArtistsTopTracksSecurity = field()
     
 
 @dataclass
 class EndpointGetAnArtistsTopTracksResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error_response_object: Optional[shared.ErrorResponseObject] = field(default=None)
-    status_code: int = field(default=None)
     tracks_object: Optional[shared.TracksObject] = field(default=None)
     

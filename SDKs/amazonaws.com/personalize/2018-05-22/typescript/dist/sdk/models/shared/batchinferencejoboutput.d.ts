@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { S3DataConfig } from "./s3dataconfig";
 /**
  * The output configuration parameters of a batch inference job.

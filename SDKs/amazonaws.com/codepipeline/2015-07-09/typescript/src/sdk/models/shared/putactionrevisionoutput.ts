@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // PutActionRevisionOutput
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Represents the output of a <code>PutActionRevision</code> action.
 **/
 export class PutActionRevisionOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=newRevision" })
+  @SpeakeasyMetadata({ data: "json, name=newRevision" })
   newRevision?: boolean;
 
-  @Metadata({ data: "json, name=pipelineExecutionId" })
+  @SpeakeasyMetadata({ data: "json, name=pipelineExecutionId" })
   pipelineExecutionId?: string;
 }

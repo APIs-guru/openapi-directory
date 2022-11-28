@@ -1,5 +1,7 @@
 package shared
 
+// DescribedServer
+// Describes the properties of a file transfer protocol-enabled server that was specified.
 type DescribedServer struct {
 	Arn                     string                    `json:"Arn"`
 	Certificate             *string                   `json:"Certificate,omitempty"`

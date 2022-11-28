@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { User } from "./user";
 
+
 export enum UserMentionMetadataTypeEnum {
-    TypeUnspecified = "TYPE_UNSPECIFIED"
-,    Add = "ADD"
-,    Mention = "MENTION"
+    TypeUnspecified = "TYPE_UNSPECIFIED",
+    Add = "ADD",
+    Mention = "MENTION"
 }
 
 
@@ -13,9 +14,9 @@ export enum UserMentionMetadataTypeEnum {
  * Annotation metadata for user mentions (@).
 **/
 export class UserMentionMetadata extends SpeakeasyBase {
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: UserMentionMetadataTypeEnum;
 
-  @Metadata({ data: "json, name=user" })
+  @SpeakeasyMetadata({ data: "json, name=user" })
   user?: User;
 }

@@ -1,6 +1,7 @@
 
 
+
 export enum HttpSchemeEnum {
-    Http = "http"
-,    Https = "https"
+    Http = "http",
+    Https = "https"
 }

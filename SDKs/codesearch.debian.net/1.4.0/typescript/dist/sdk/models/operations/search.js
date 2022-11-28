@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export var SearchMatchModeEnum;
 (function (SearchMatchModeEnum) {
@@ -35,11 +35,11 @@ var SearchQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=match_mode" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=match_mode" }),
         __metadata("design:type", String)
     ], SearchQueryParams.prototype, "matchMode", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=query" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=query" }),
         __metadata("design:type", String)
     ], SearchQueryParams.prototype, "query", void 0);
     return SearchQueryParams;
@@ -51,7 +51,7 @@ var SearchSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeApiKey)
     ], SearchSecurity.prototype, "apiKey", void 0);
     return SearchSecurity;
@@ -63,11 +63,11 @@ var SearchRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", SearchQueryParams)
     ], SearchRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", SearchSecurity)
     ], SearchRequest.prototype, "security", void 0);
     return SearchRequest;
@@ -79,15 +79,15 @@ var SearchResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], SearchResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata({ elemType: shared.SearchResult }),
+        SpeakeasyMetadata({ elemType: shared.SearchResult }),
         __metadata("design:type", Array)
     ], SearchResponse.prototype, "searchResults", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], SearchResponse.prototype, "statusCode", void 0);
     return SearchResponse;

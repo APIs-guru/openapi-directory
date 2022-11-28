@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // DeviceTemplate
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * An object representing a device for a placement template (see <a>PlacementTemplate</a>).
 **/
 export class DeviceTemplate extends SpeakeasyBase {
-  @Metadata({ data: "json, name=callbackOverrides" })
+  @SpeakeasyMetadata({ data: "json, name=callbackOverrides" })
   callbackOverrides?: Map<string, string>;
 
-  @Metadata({ data: "json, name=deviceType" })
+  @SpeakeasyMetadata({ data: "json, name=deviceType" })
   deviceType?: string;
 }

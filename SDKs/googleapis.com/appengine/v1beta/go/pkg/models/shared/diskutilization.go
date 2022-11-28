@@ -1,5 +1,7 @@
 package shared
 
+// DiskUtilization
+// Target scaling by disk usage. Only applicable in the App Engine flexible environment.
 type DiskUtilization struct {
 	TargetReadBytesPerSecond  *int32 `json:"targetReadBytesPerSecond,omitempty"`
 	TargetReadOpsPerSecond    *int32 `json:"targetReadOpsPerSecond,omitempty"`

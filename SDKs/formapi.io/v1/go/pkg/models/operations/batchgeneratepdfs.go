@@ -24,11 +24,6 @@ type BatchGeneratePdfsSecurity struct {
 	APITokenBasic shared.SchemeAPITokenBasic `security:"scheme,type=http,subtype=basic"`
 }
 
-type BatchGeneratePdfsRequest struct {
-	Request  BatchGeneratePdfsSubmissionBatchData `request:"mediaType=application/json"`
-	Security BatchGeneratePdfsSecurity
-}
-
 type BatchGeneratePdfsCreateSubmissionBatchResponseStatusEnum string
 
 const (
@@ -76,6 +71,11 @@ type BatchGeneratePdfsCreateSubmissionBatchResponse struct {
 	Status          BatchGeneratePdfsCreateSubmissionBatchResponseStatusEnum                                 `json:"status"`
 	SubmissionBatch BatchGeneratePdfsCreateSubmissionBatchResponseSubmissionBatch                            `json:"submission_batch"`
 	Submissions     []BatchGeneratePdfsCreateSubmissionBatchResponseCreateSubmissionBatchSubmissionsResponse `json:"submissions"`
+}
+
+type BatchGeneratePdfsRequest struct {
+	Request  BatchGeneratePdfsSubmissionBatchData `request:"mediaType=application/json"`
+	Security BatchGeneratePdfsSecurity
 }
 
 type BatchGeneratePdfsResponse struct {

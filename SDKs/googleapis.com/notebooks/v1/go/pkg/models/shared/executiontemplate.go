@@ -20,6 +20,8 @@ const (
 	ExecutionTemplateScaleTierEnumCustom               ExecutionTemplateScaleTierEnum = "CUSTOM"
 )
 
+// ExecutionTemplate
+// The description a notebook execution workload.
 type ExecutionTemplate struct {
 	AcceleratorConfig    *SchedulerAcceleratorConfig     `json:"acceleratorConfig,omitempty"`
 	ContainerImageURI    *string                         `json:"containerImageUri,omitempty"`

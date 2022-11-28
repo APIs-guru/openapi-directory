@@ -1,20 +1,20 @@
 from dataclasses import dataclass, field
-
+from typing import Optional
 
 
 @dataclass
 class GetLoggedInUserHeaders:
-    auth_token: str = field(default=None, metadata={'header': { 'field_name': 'auth_token', 'style': 'simple', 'explode': False }})
+    auth_token: str = field(metadata={'header': { 'field_name': 'auth_token', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetLoggedInUserRequest:
-    headers: GetLoggedInUserHeaders = field(default=None)
+    headers: GetLoggedInUserHeaders = field()
     
 
 @dataclass
 class GetLoggedInUserResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

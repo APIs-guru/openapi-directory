@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ReinitializeActionConfiguration
@@ -6,30 +7,30 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The deserialized form of the <b>Reinitialize</b> service's request payload.
 **/
 export class ReinitializeActionConfiguration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=resetAlertActions" })
+  @SpeakeasyMetadata({ data: "json, name=resetAlertActions" })
   resetAlertActions?: number;
 
-  @Metadata({ data: "json, name=resetAlertAfterNTimes" })
+  @SpeakeasyMetadata({ data: "json, name=resetAlertAfterNTimes" })
   resetAlertAfterNTimes?: number;
 
-  @Metadata({ data: "json, name=resetDebugMode" })
+  @SpeakeasyMetadata({ data: "json, name=resetDebugMode" })
   resetDebugMode?: number;
 
-  @Metadata({ data: "json, name=resetDiscoveryAndPollingIntervals" })
+  @SpeakeasyMetadata({ data: "json, name=resetDiscoveryAndPollingIntervals" })
   resetDiscoveryAndPollingIntervals?: number;
 
-  @Metadata({ data: "json, name=resetJavaSettings" })
+  @SpeakeasyMetadata({ data: "json, name=resetJavaSettings" })
   resetJavaSettings?: number;
 
-  @Metadata({ data: "json, name=resetOtherAlertSettings" })
+  @SpeakeasyMetadata({ data: "json, name=resetOtherAlertSettings" })
   resetOtherAlertSettings?: number;
 
-  @Metadata({ data: "json, name=resetRemovedPausedObjectList" })
+  @SpeakeasyMetadata({ data: "json, name=resetRemovedPausedObjectList" })
   resetRemovedPausedObjectList?: number;
 
-  @Metadata({ data: "json, name=resetReportSettings" })
+  @SpeakeasyMetadata({ data: "json, name=resetReportSettings" })
   resetReportSettings?: number;
 
-  @Metadata({ data: "json, name=resetThresholds" })
+  @SpeakeasyMetadata({ data: "json, name=resetThresholds" })
   resetThresholds?: number;
 }

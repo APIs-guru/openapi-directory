@@ -5,18 +5,18 @@ from sdk.models import shared
 
 @dataclass
 class CallVMTransferPathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class CallVMTransferRequest:
-    path_params: CallVMTransferPathParams = field(default=None)
+    path_params: CallVMTransferPathParams = field()
     
 
 @dataclass
 class CallVMTransferResponse:
+    content_type: str = field()
+    status_code: int = field()
     call: Optional[shared.Call] = field(default=None)
-    content_type: str = field(default=None)
     error_response: Optional[shared.ErrorResponse] = field(default=None)
-    status_code: int = field(default=None)
     

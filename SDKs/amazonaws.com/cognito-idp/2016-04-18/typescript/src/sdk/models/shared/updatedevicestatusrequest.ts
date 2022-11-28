@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DeviceRememberedStatusTypeEnum } from "./devicerememberedstatustypeenum";
+
 
 
 // UpdateDeviceStatusRequest
@@ -7,12 +8,12 @@ import { DeviceRememberedStatusTypeEnum } from "./devicerememberedstatustypeenum
  * Represents the request to update the device status.
 **/
 export class UpdateDeviceStatusRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AccessToken" })
+  @SpeakeasyMetadata({ data: "json, name=AccessToken" })
   accessToken: string;
 
-  @Metadata({ data: "json, name=DeviceKey" })
+  @SpeakeasyMetadata({ data: "json, name=DeviceKey" })
   deviceKey: string;
 
-  @Metadata({ data: "json, name=DeviceRememberedStatus" })
+  @SpeakeasyMetadata({ data: "json, name=DeviceRememberedStatus" })
   deviceRememberedStatus?: DeviceRememberedStatusTypeEnum;
 }

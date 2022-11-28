@@ -1,4 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { NotebookInstanceAcceleratorTypeEnum } from "./notebookinstanceacceleratortypeenum";
 import { DirectInternetAccessEnum } from "./directinternetaccessenum";
 import { InstanceTypeEnum } from "./instancetypeenum";
@@ -6,67 +6,68 @@ import { NotebookInstanceStatusEnum } from "./notebookinstancestatusenum";
 import { RootAccessEnum } from "./rootaccessenum";
 
 
+
 export class DescribeNotebookInstanceOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AcceleratorTypes" })
+  @SpeakeasyMetadata({ data: "json, name=AcceleratorTypes" })
   acceleratorTypes?: NotebookInstanceAcceleratorTypeEnum[];
 
-  @Metadata({ data: "json, name=AdditionalCodeRepositories" })
+  @SpeakeasyMetadata({ data: "json, name=AdditionalCodeRepositories" })
   additionalCodeRepositories?: string[];
 
-  @Metadata({ data: "json, name=CreationTime" })
+  @SpeakeasyMetadata({ data: "json, name=CreationTime" })
   creationTime?: Date;
 
-  @Metadata({ data: "json, name=DefaultCodeRepository" })
+  @SpeakeasyMetadata({ data: "json, name=DefaultCodeRepository" })
   defaultCodeRepository?: string;
 
-  @Metadata({ data: "json, name=DirectInternetAccess" })
+  @SpeakeasyMetadata({ data: "json, name=DirectInternetAccess" })
   directInternetAccess?: DirectInternetAccessEnum;
 
-  @Metadata({ data: "json, name=FailureReason" })
+  @SpeakeasyMetadata({ data: "json, name=FailureReason" })
   failureReason?: string;
 
-  @Metadata({ data: "json, name=InstanceType" })
+  @SpeakeasyMetadata({ data: "json, name=InstanceType" })
   instanceType?: InstanceTypeEnum;
 
-  @Metadata({ data: "json, name=KmsKeyId" })
+  @SpeakeasyMetadata({ data: "json, name=KmsKeyId" })
   kmsKeyId?: string;
 
-  @Metadata({ data: "json, name=LastModifiedTime" })
+  @SpeakeasyMetadata({ data: "json, name=LastModifiedTime" })
   lastModifiedTime?: Date;
 
-  @Metadata({ data: "json, name=NetworkInterfaceId" })
+  @SpeakeasyMetadata({ data: "json, name=NetworkInterfaceId" })
   networkInterfaceId?: string;
 
-  @Metadata({ data: "json, name=NotebookInstanceArn" })
+  @SpeakeasyMetadata({ data: "json, name=NotebookInstanceArn" })
   notebookInstanceArn?: string;
 
-  @Metadata({ data: "json, name=NotebookInstanceLifecycleConfigName" })
+  @SpeakeasyMetadata({ data: "json, name=NotebookInstanceLifecycleConfigName" })
   notebookInstanceLifecycleConfigName?: string;
 
-  @Metadata({ data: "json, name=NotebookInstanceName" })
+  @SpeakeasyMetadata({ data: "json, name=NotebookInstanceName" })
   notebookInstanceName?: string;
 
-  @Metadata({ data: "json, name=NotebookInstanceStatus" })
+  @SpeakeasyMetadata({ data: "json, name=NotebookInstanceStatus" })
   notebookInstanceStatus?: NotebookInstanceStatusEnum;
 
-  @Metadata({ data: "json, name=PlatformIdentifier" })
+  @SpeakeasyMetadata({ data: "json, name=PlatformIdentifier" })
   platformIdentifier?: string;
 
-  @Metadata({ data: "json, name=RoleArn" })
+  @SpeakeasyMetadata({ data: "json, name=RoleArn" })
   roleArn?: string;
 
-  @Metadata({ data: "json, name=RootAccess" })
+  @SpeakeasyMetadata({ data: "json, name=RootAccess" })
   rootAccess?: RootAccessEnum;
 
-  @Metadata({ data: "json, name=SecurityGroups" })
+  @SpeakeasyMetadata({ data: "json, name=SecurityGroups" })
   securityGroups?: string[];
 
-  @Metadata({ data: "json, name=SubnetId" })
+  @SpeakeasyMetadata({ data: "json, name=SubnetId" })
   subnetId?: string;
 
-  @Metadata({ data: "json, name=Url" })
+  @SpeakeasyMetadata({ data: "json, name=Url" })
   url?: string;
 
-  @Metadata({ data: "json, name=VolumeSizeInGB" })
+  @SpeakeasyMetadata({ data: "json, name=VolumeSizeInGB" })
   volumeSizeInGb?: number;
 }

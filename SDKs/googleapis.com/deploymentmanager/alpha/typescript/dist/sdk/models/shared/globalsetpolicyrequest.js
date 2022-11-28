@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { Binding } from "./binding";
 import { Policy } from "./policy";
 var GlobalSetPolicyRequest = /** @class */ (function (_super) {
     __extends(GlobalSetPolicyRequest, _super);
@@ -31,15 +31,15 @@ var GlobalSetPolicyRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=bindings", elemType: shared.Binding }),
+        SpeakeasyMetadata({ data: "json, name=bindings", elemType: Binding }),
         __metadata("design:type", Array)
     ], GlobalSetPolicyRequest.prototype, "bindings", void 0);
     __decorate([
-        Metadata({ data: "json, name=etag" }),
+        SpeakeasyMetadata({ data: "json, name=etag" }),
         __metadata("design:type", String)
     ], GlobalSetPolicyRequest.prototype, "etag", void 0);
     __decorate([
-        Metadata({ data: "json, name=policy" }),
+        SpeakeasyMetadata({ data: "json, name=policy" }),
         __metadata("design:type", Policy)
     ], GlobalSetPolicyRequest.prototype, "policy", void 0);
     return GlobalSetPolicyRequest;

@@ -1,5 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // PromotionBodyLines
@@ -7,16 +7,16 @@ import * as shared from "../shared";
  * Block object belonging to a promotion.
 **/
 export class PromotionBodyLines extends SpeakeasyBase {
-  @Metadata({ data: "json, name=htmlTitle" })
+  @SpeakeasyMetadata({ data: "json, name=htmlTitle" })
   htmlTitle?: string;
 
-  @Metadata({ data: "json, name=link" })
+  @SpeakeasyMetadata({ data: "json, name=link" })
   link?: string;
 
-  @Metadata({ data: "json, name=title" })
+  @SpeakeasyMetadata({ data: "json, name=title" })
   title?: string;
 
-  @Metadata({ data: "json, name=url" })
+  @SpeakeasyMetadata({ data: "json, name=url" })
   url?: string;
 }
 
@@ -26,13 +26,13 @@ export class PromotionBodyLines extends SpeakeasyBase {
  * Image belonging to a promotion.
 **/
 export class PromotionImage extends SpeakeasyBase {
-  @Metadata({ data: "json, name=height" })
+  @SpeakeasyMetadata({ data: "json, name=height" })
   height?: number;
 
-  @Metadata({ data: "json, name=source" })
+  @SpeakeasyMetadata({ data: "json, name=source" })
   source?: string;
 
-  @Metadata({ data: "json, name=width" })
+  @SpeakeasyMetadata({ data: "json, name=width" })
   width?: number;
 }
 
@@ -42,21 +42,21 @@ export class PromotionImage extends SpeakeasyBase {
  * Promotion result.
 **/
 export class Promotion extends SpeakeasyBase {
-  @Metadata({ data: "json, name=bodyLines", elemType: shared.PromotionBodyLines })
+  @SpeakeasyMetadata({ data: "json, name=bodyLines", elemType: PromotionBodyLines })
   bodyLines?: PromotionBodyLines[];
 
-  @Metadata({ data: "json, name=displayLink" })
+  @SpeakeasyMetadata({ data: "json, name=displayLink" })
   displayLink?: string;
 
-  @Metadata({ data: "json, name=htmlTitle" })
+  @SpeakeasyMetadata({ data: "json, name=htmlTitle" })
   htmlTitle?: string;
 
-  @Metadata({ data: "json, name=image" })
+  @SpeakeasyMetadata({ data: "json, name=image" })
   image?: PromotionImage;
 
-  @Metadata({ data: "json, name=link" })
+  @SpeakeasyMetadata({ data: "json, name=link" })
   link?: string;
 
-  @Metadata({ data: "json, name=title" })
+  @SpeakeasyMetadata({ data: "json, name=title" })
   title?: string;
 }

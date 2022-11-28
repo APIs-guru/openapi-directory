@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetUploadStatusRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=uploadId" })
+  @SpeakeasyMetadata({ data: "json, name=uploadId" })
   uploadId: string;
 }

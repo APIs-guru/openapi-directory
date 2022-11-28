@@ -12,17 +12,17 @@ class CreateProfileRequests:
 
 @dataclass
 class CreateProfileSecurity:
-    custom_authentication: shared.SchemeCustomAuthentication = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    custom_authentication: shared.SchemeCustomAuthentication = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
     
 
 @dataclass
 class CreateProfileRequest:
+    security: CreateProfileSecurity = field()
     request: Optional[CreateProfileRequests] = field(default=None)
-    security: CreateProfileSecurity = field(default=None)
     
 
 @dataclass
 class CreateProfileResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

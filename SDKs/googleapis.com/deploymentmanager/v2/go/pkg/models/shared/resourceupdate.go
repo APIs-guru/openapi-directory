@@ -6,6 +6,8 @@ type ResourceUpdateErrorErrors struct {
 	Message  *string `json:"message,omitempty"`
 }
 
+// ResourceUpdateError
+// Output only. If errors are generated during update of the resource, this field will be populated.
 type ResourceUpdateError struct {
 	Errors []ResourceUpdateErrorErrors `json:"errors,omitempty"`
 }

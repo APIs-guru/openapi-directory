@@ -1,5 +1,7 @@
 package shared
 
+// ServiceQuotaIncreaseRequestInTemplate
+// Information about a quota increase request.
 type ServiceQuotaIncreaseRequestInTemplate struct {
 	AwsRegion    *string  `json:"AwsRegion,omitempty"`
 	DesiredValue *float64 `json:"DesiredValue,omitempty"`

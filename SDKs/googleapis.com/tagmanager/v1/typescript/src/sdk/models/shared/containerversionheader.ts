@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ContainerVersionHeader
@@ -6,33 +7,33 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Represents a Google Tag Manager Container Version Header.
 **/
 export class ContainerVersionHeader extends SpeakeasyBase {
-  @Metadata({ data: "json, name=accountId" })
+  @SpeakeasyMetadata({ data: "json, name=accountId" })
   accountId?: string;
 
-  @Metadata({ data: "json, name=containerId" })
+  @SpeakeasyMetadata({ data: "json, name=containerId" })
   containerId?: string;
 
-  @Metadata({ data: "json, name=containerVersionId" })
+  @SpeakeasyMetadata({ data: "json, name=containerVersionId" })
   containerVersionId?: string;
 
-  @Metadata({ data: "json, name=deleted" })
+  @SpeakeasyMetadata({ data: "json, name=deleted" })
   deleted?: boolean;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=numMacros" })
+  @SpeakeasyMetadata({ data: "json, name=numMacros" })
   numMacros?: string;
 
-  @Metadata({ data: "json, name=numRules" })
+  @SpeakeasyMetadata({ data: "json, name=numRules" })
   numRules?: string;
 
-  @Metadata({ data: "json, name=numTags" })
+  @SpeakeasyMetadata({ data: "json, name=numTags" })
   numTags?: string;
 
-  @Metadata({ data: "json, name=numTriggers" })
+  @SpeakeasyMetadata({ data: "json, name=numTriggers" })
   numTriggers?: string;
 
-  @Metadata({ data: "json, name=numVariables" })
+  @SpeakeasyMetadata({ data: "json, name=numVariables" })
   numVariables?: string;
 }

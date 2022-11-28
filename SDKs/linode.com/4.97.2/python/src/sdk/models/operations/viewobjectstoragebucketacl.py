@@ -1,7 +1,11 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
+
+
 VIEW_OBJECT_STORAGE_BUCKET_ACL_SERVERS = [
 	"https://api.linode.com/v4",
 ]
@@ -9,37 +13,19 @@ VIEW_OBJECT_STORAGE_BUCKET_ACL_SERVERS = [
 
 @dataclass
 class ViewObjectStorageBucketACLPathParams:
-    bucket: str = field(default=None, metadata={'path_param': { 'field_name': 'bucket', 'style': 'simple', 'explode': False }})
-    cluster_id: str = field(default=None, metadata={'path_param': { 'field_name': 'clusterId', 'style': 'simple', 'explode': False }})
+    bucket: str = field(metadata={'path_param': { 'field_name': 'bucket', 'style': 'simple', 'explode': False }})
+    cluster_id: str = field(metadata={'path_param': { 'field_name': 'clusterId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class ViewObjectStorageBucketACLQueryParams:
-    name: str = field(default=None, metadata={'query_param': { 'field_name': 'name', 'style': 'form', 'explode': True }})
-    
-
-@dataclass
-class ViewObjectStorageBucketACLSecurityOption1:
-    personal_access_token: shared.SchemePersonalAccessToken = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer' }})
-    
-
-@dataclass
-class ViewObjectStorageBucketACLSecurityOption2:
-    oauth: shared.SchemeOauth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    name: str = field(metadata={'query_param': { 'field_name': 'name', 'style': 'form', 'explode': True }})
     
 
 @dataclass
 class ViewObjectStorageBucketACLSecurity:
-    option1: Optional[ViewObjectStorageBucketACLSecurityOption1] = field(default=None, metadata={'security': { 'option': True }})
-    option2: Optional[ViewObjectStorageBucketACLSecurityOption2] = field(default=None, metadata={'security': { 'option': True }})
-    
-
-@dataclass
-class ViewObjectStorageBucketACLRequest:
-    server_url: Optional[str] = field(default=None)
-    path_params: ViewObjectStorageBucketACLPathParams = field(default=None)
-    query_params: ViewObjectStorageBucketACLQueryParams = field(default=None)
-    security: ViewObjectStorageBucketACLSecurity = field(default=None)
+    oauth: Optional[shared.SchemeOauth] = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    personal_access_token: Optional[shared.SchemePersonalAccessToken] = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer' }})
     
 class ViewObjectStorageBucketACL200ApplicationJSONACLEnum(str, Enum):
     PRIVATE = "private"
@@ -52,20 +38,28 @@ class ViewObjectStorageBucketACL200ApplicationJSONACLEnum(str, Enum):
 @dataclass_json
 @dataclass
 class ViewObjectStorageBucketACL200ApplicationJSON:
-    acl: Optional[ViewObjectStorageBucketACL200ApplicationJSONACLEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'acl' }})
-    acl_xml: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'acl_xml' }})
+    acl: Optional[ViewObjectStorageBucketACL200ApplicationJSONACLEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('acl') }})
+    acl_xml: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('acl_xml') }})
     
 
 @dataclass_json
 @dataclass
 class ViewObjectStorageBucketACLDefaultApplicationJSON:
-    errors: Optional[List[shared.ErrorObject]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'errors' }})
+    errors: Optional[List[shared.ErrorObject]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('errors') }})
+    
+
+@dataclass
+class ViewObjectStorageBucketACLRequest:
+    path_params: ViewObjectStorageBucketACLPathParams = field()
+    query_params: ViewObjectStorageBucketACLQueryParams = field()
+    security: ViewObjectStorageBucketACLSecurity = field()
+    server_url: Optional[str] = field(default=None)
     
 
 @dataclass
 class ViewObjectStorageBucketACLResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     view_object_storage_bucket_acl_200_application_json_object: Optional[ViewObjectStorageBucketACL200ApplicationJSON] = field(default=None)
     view_object_storage_bucket_acl_default_application_json_object: Optional[ViewObjectStorageBucketACLDefaultApplicationJSON] = field(default=None)
     

@@ -17,6 +17,8 @@ const (
 	ChannelStatusPrivacyStatusEnumPrivate  ChannelStatusPrivacyStatusEnum = "private"
 )
 
+// ChannelStatus
+// JSON template for the status part of a channel.
 type ChannelStatus struct {
 	IsLinked                *bool                               `json:"isLinked,omitempty"`
 	LongUploadsStatus       *ChannelStatusLongUploadsStatusEnum `json:"longUploadsStatus,omitempty"`

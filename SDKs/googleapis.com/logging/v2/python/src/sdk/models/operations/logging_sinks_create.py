@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class LoggingSinksCreatePathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,14 +27,14 @@ class LoggingSinksCreateQueryParams:
 
 @dataclass
 class LoggingSinksCreateSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class LoggingSinksCreateSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -44,15 +45,15 @@ class LoggingSinksCreateSecurity:
 
 @dataclass
 class LoggingSinksCreateRequest:
-    path_params: LoggingSinksCreatePathParams = field(default=None)
-    query_params: LoggingSinksCreateQueryParams = field(default=None)
-    request: Optional[shared.LogSink] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: LoggingSinksCreateSecurity = field(default=None)
+    path_params: LoggingSinksCreatePathParams = field()
+    query_params: LoggingSinksCreateQueryParams = field()
+    security: LoggingSinksCreateSecurity = field()
+    request: Optional[shared.LogSinkInput] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class LoggingSinksCreateResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     log_sink: Optional[shared.LogSink] = field(default=None)
-    status_code: int = field(default=None)
     

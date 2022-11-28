@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var ProductSearchPathParams = /** @class */ (function (_super) {
     __extends(ProductSearchPathParams, _super);
@@ -30,7 +30,7 @@ var ProductSearchPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=subjectId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=subjectId" }),
         __metadata("design:type", String)
     ], ProductSearchPathParams.prototype, "subjectId", void 0);
     return ProductSearchPathParams;
@@ -42,7 +42,7 @@ var ProductSearchSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeUserKey)
     ], ProductSearchSecurity.prototype, "userKey", void 0);
     return ProductSearchSecurity;
@@ -54,11 +54,11 @@ var ProductSearchRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ProductSearchPathParams)
     ], ProductSearchRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ProductSearchSecurity)
     ], ProductSearchRequest.prototype, "security", void 0);
     return ProductSearchRequest;
@@ -70,19 +70,19 @@ var ProductSearchResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], ProductSearchResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Array)
     ], ProductSearchResponse.prototype, "productSearch200ApplicationJsonAnies", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], ProductSearchResponse.prototype, "productSearchDefaultApplicationJsonAny", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], ProductSearchResponse.prototype, "statusCode", void 0);
     return ProductSearchResponse;

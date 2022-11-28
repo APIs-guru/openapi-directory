@@ -1,9 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum AddTargetedPublishersRequestTargetingModeEnum {
-    TargetingModeUnspecified = "TARGETING_MODE_UNSPECIFIED"
-,    Inclusive = "INCLUSIVE"
-,    Exclusive = "EXCLUSIVE"
+    TargetingModeUnspecified = "TARGETING_MODE_UNSPECIFIED",
+    Inclusive = "INCLUSIVE",
+    Exclusive = "EXCLUSIVE"
 }
 
 
@@ -12,9 +13,9 @@ export enum AddTargetedPublishersRequestTargetingModeEnum {
  * A request to start targeting the provided publishers in a specific pretargeting configuration. The pretargeting configuration itself specifies how these publishers are targeted in PretargetingConfig.publisherTargeting.
 **/
 export class AddTargetedPublishersRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=publisherIds" })
+  @SpeakeasyMetadata({ data: "json, name=publisherIds" })
   publisherIds?: string[];
 
-  @Metadata({ data: "json, name=targetingMode" })
+  @SpeakeasyMetadata({ data: "json, name=targetingMode" })
   targetingMode?: AddTargetedPublishersRequestTargetingModeEnum;
 }

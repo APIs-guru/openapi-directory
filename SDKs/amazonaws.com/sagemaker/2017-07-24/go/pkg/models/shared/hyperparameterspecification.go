@@ -1,5 +1,7 @@
 package shared
 
+// HyperParameterSpecification
+// Defines a hyperparameter to be used by an algorithm.
 type HyperParameterSpecification struct {
 	DefaultValue *string           `json:"DefaultValue,omitempty"`
 	Description  *string           `json:"Description,omitempty"`

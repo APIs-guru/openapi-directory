@@ -1,5 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from enum import Enum
 
 class UpdateContinuousCheckInputStatusEnum(str, Enum):
     ENABLED = "enabled"
@@ -8,6 +11,10 @@ class UpdateContinuousCheckInputStatusEnum(str, Enum):
 
 @dataclass
 class UpdateContinuousCheckInput:
-    frequency: str = field(default=None, metadata={'form': { 'field_name': 'frequency' }})
-    status: UpdateContinuousCheckInputStatusEnum = field(default=None, metadata={'form': { 'field_name': 'status' }})
+    r"""UpdateContinuousCheckInput
+     Represents to UpdateContinuousCheckInput
+    """
+    
+    frequency: str = field(metadata={'form': { 'field_name': 'frequency' }})
+    status: UpdateContinuousCheckInputStatusEnum = field(metadata={'form': { 'field_name': 'status' }})
     

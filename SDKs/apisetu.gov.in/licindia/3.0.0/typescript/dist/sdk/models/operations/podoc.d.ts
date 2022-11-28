@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class PodocRequestBodyCertificateParameters extends SpeakeasyBase {
     dob: string;
@@ -18,10 +18,6 @@ export declare class PodocRequestBody extends SpeakeasyBase {
 export declare class PodocSecurity extends SpeakeasyBase {
     apiKey: shared.SchemeApiKey;
     clientId: shared.SchemeClientId;
-}
-export declare class PodocRequest extends SpeakeasyBase {
-    request?: PodocRequestBody;
-    security: PodocSecurity;
 }
 export declare enum Podoc400ApplicationJsonErrorEnum {
     MissingParameter = "missing_parameter",
@@ -104,6 +100,10 @@ export declare enum Podoc504ApplicationJsonErrorDescriptionEnum {
 export declare class Podoc504ApplicationJson extends SpeakeasyBase {
     error?: Podoc504ApplicationJsonErrorEnum;
     errorDescription?: Podoc504ApplicationJsonErrorDescriptionEnum;
+}
+export declare class PodocRequest extends SpeakeasyBase {
+    request?: PodocRequestBody;
+    security: PodocSecurity;
 }
 export declare class PodocResponse extends SpeakeasyBase {
     contentType: string;

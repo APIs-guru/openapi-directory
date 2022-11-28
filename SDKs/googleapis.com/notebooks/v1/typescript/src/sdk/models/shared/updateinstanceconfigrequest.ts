@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { InstanceConfig } from "./instanceconfig";
+
 
 
 // UpdateInstanceConfigRequest
@@ -7,6 +8,6 @@ import { InstanceConfig } from "./instanceconfig";
  * Request for updating instance configurations.
 **/
 export class UpdateInstanceConfigRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=config" })
+  @SpeakeasyMetadata({ data: "json, name=config" })
   config?: InstanceConfig;
 }

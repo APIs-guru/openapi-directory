@@ -1,10 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import clustersconfigdump
-from . import listenersconfigdump
-from . import routesconfigdump
-from . import scopedroutesconfigdump
+from sdk import utils
+from . import *
 
 class PerXdsConfigStatusEnum(str, Enum):
     UNKNOWN = "UNKNOWN"
@@ -17,9 +16,13 @@ class PerXdsConfigStatusEnum(str, Enum):
 @dataclass_json
 @dataclass
 class PerXdsConfig:
-    cluster_config: Optional[clustersconfigdump.ClustersConfigDump] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'clusterConfig' }})
-    listener_config: Optional[listenersconfigdump.ListenersConfigDump] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'listenerConfig' }})
-    route_config: Optional[routesconfigdump.RoutesConfigDump] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'routeConfig' }})
-    scoped_route_config: Optional[scopedroutesconfigdump.ScopedRoutesConfigDump] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'scopedRouteConfig' }})
-    status: Optional[PerXdsConfigStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+    r"""PerXdsConfig
+    Detailed config (per xDS) with status. [#next-free-field: 6]
+    """
+    
+    cluster_config: Optional[ClustersConfigDump] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('clusterConfig') }})
+    listener_config: Optional[ListenersConfigDump] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('listenerConfig') }})
+    route_config: Optional[RoutesConfigDump] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('routeConfig') }})
+    scoped_route_config: Optional[ScopedRoutesConfigDump] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('scopedRouteConfig') }})
+    status: Optional[PerXdsConfigStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('status') }})
     

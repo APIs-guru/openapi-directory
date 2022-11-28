@@ -1,5 +1,8 @@
 package shared
 
+// ServiceMetadata
+//
+//	The metadata associated with the specified Amazon Web Service.
 type ServiceMetadata struct {
 	Category    *string `json:"category,omitempty"`
 	Description *string `json:"description,omitempty"`

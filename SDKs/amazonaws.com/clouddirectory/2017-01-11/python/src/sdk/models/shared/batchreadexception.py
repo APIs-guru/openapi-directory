@@ -1,12 +1,18 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import batchreadexceptiontype_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class BatchReadException:
-    message: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Message' }})
-    type: Optional[batchreadexceptiontype_enum.BatchReadExceptionTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Type' }})
+    r"""BatchReadException
+    The batch read exception structure, which contains the exception type and message.
+    """
+    
+    message: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Message') }})
+    type: Optional[BatchReadExceptionTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Type') }})
     

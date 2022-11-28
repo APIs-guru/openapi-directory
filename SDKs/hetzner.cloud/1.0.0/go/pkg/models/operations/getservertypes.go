@@ -4,10 +4,6 @@ type GetServerTypesQueryParams struct {
 	Name *string `queryParam:"style=form,explode=true,name=name"`
 }
 
-type GetServerTypesRequest struct {
-	QueryParams GetServerTypesQueryParams
-}
-
 type GetServerTypes200ApplicationJSONServerTypesCPUTypeEnum string
 
 const (
@@ -15,11 +11,15 @@ const (
 	GetServerTypes200ApplicationJSONServerTypesCPUTypeEnumDedicated GetServerTypes200ApplicationJSONServerTypesCPUTypeEnum = "dedicated"
 )
 
+// GetServerTypes200ApplicationJSONServerTypesPricesPriceHourly
+// Hourly costs for a Server type in this Location
 type GetServerTypes200ApplicationJSONServerTypesPricesPriceHourly struct {
 	Gross string `json:"gross"`
 	Net   string `json:"net"`
 }
 
+// GetServerTypes200ApplicationJSONServerTypesPricesPriceMonthly
+// Monthly costs for a Server type in this Location
 type GetServerTypes200ApplicationJSONServerTypesPricesPriceMonthly struct {
 	Gross string `json:"gross"`
 	Net   string `json:"net"`
@@ -53,6 +53,10 @@ type GetServerTypes200ApplicationJSONServerTypes struct {
 
 type GetServerTypes200ApplicationJSON struct {
 	ServerTypes []GetServerTypes200ApplicationJSONServerTypes `json:"server_types"`
+}
+
+type GetServerTypesRequest struct {
+	QueryParams GetServerTypesQueryParams
 }
 
 type GetServerTypesResponse struct {

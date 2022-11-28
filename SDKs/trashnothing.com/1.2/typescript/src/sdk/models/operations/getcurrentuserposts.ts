@@ -1,95 +1,96 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetCurrentUserPostsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=date_max" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=date_max" })
   dateMax?: Date;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=date_min" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=date_min" })
   dateMin?: Date;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=device_pixel_ratio" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=device_pixel_ratio" })
   devicePixelRatio?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=group_ids" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=group_ids" })
   groupIds?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=latitude" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=latitude" })
   latitude?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=longitude" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=longitude" })
   longitude?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=outcomes" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=outcomes" })
   outcomes?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=page" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page" })
   page?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=per_page" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=per_page" })
   perPage?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=radius" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=radius" })
   radius?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=sort_by" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sort_by" })
   sortBy?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=sources" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sources" })
   sources: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=types" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=types" })
   types: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=user_state" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=user_state" })
   userState?: string;
 }
 
 
-export class GetCurrentUserPostsRequest extends SpeakeasyBase {
-  @Metadata()
-  queryParams: GetCurrentUserPostsQueryParams;
-}
-
-
 export class GetCurrentUserPosts200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=end_index" })
+  @SpeakeasyMetadata({ data: "json, name=end_index" })
   endIndex?: number;
 
-  @Metadata({ data: "json, name=group_ids" })
+  @SpeakeasyMetadata({ data: "json, name=group_ids" })
   groupIds?: string[];
 
-  @Metadata({ data: "json, name=last_listings_view" })
+  @SpeakeasyMetadata({ data: "json, name=last_listings_view" })
   lastListingsView?: Date;
 
-  @Metadata({ data: "json, name=num_pages" })
+  @SpeakeasyMetadata({ data: "json, name=num_pages" })
   numPages?: number;
 
-  @Metadata({ data: "json, name=num_posts" })
+  @SpeakeasyMetadata({ data: "json, name=num_posts" })
   numPosts?: number;
 
-  @Metadata({ data: "json, name=page" })
+  @SpeakeasyMetadata({ data: "json, name=page" })
   page?: number;
 
-  @Metadata({ data: "json, name=per_page" })
+  @SpeakeasyMetadata({ data: "json, name=per_page" })
   perPage?: number;
 
-  @Metadata({ data: "json, name=posts", elemType: shared.Post })
+  @SpeakeasyMetadata({ data: "json, name=posts", elemType: shared.Post })
   posts?: shared.Post[];
 
-  @Metadata({ data: "json, name=start_index" })
+  @SpeakeasyMetadata({ data: "json, name=start_index" })
   startIndex?: number;
 }
 
 
+export class GetCurrentUserPostsRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  queryParams: GetCurrentUserPostsQueryParams;
+}
+
+
 export class GetCurrentUserPostsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getCurrentUserPosts200ApplicationJsonObject?: GetCurrentUserPosts200ApplicationJson;
 }

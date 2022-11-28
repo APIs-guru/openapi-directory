@@ -1,9 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { InitiatedByEnum } from "./initiatedbyenum";
 import { ParticipatingServer } from "./participatingserver";
 import { JobStatusEnum } from "./jobstatusenum";
 import { JobTypeEnum } from "./jobtypeenum";
+
 
 
 // Job
@@ -11,30 +11,30 @@ import { JobTypeEnum } from "./jobtypeenum";
  * Job.
 **/
 export class Job extends SpeakeasyBase {
-  @Metadata({ data: "json, name=arn" })
+  @SpeakeasyMetadata({ data: "json, name=arn" })
   arn?: string;
 
-  @Metadata({ data: "json, name=creationDateTime" })
+  @SpeakeasyMetadata({ data: "json, name=creationDateTime" })
   creationDateTime?: string;
 
-  @Metadata({ data: "json, name=endDateTime" })
+  @SpeakeasyMetadata({ data: "json, name=endDateTime" })
   endDateTime?: string;
 
-  @Metadata({ data: "json, name=initiatedBy" })
+  @SpeakeasyMetadata({ data: "json, name=initiatedBy" })
   initiatedBy?: InitiatedByEnum;
 
-  @Metadata({ data: "json, name=jobID" })
+  @SpeakeasyMetadata({ data: "json, name=jobID" })
   jobId: string;
 
-  @Metadata({ data: "json, name=participatingServers", elemType: shared.ParticipatingServer })
+  @SpeakeasyMetadata({ data: "json, name=participatingServers", elemType: ParticipatingServer })
   participatingServers?: ParticipatingServer[];
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: JobStatusEnum;
 
-  @Metadata({ data: "json, name=tags" })
+  @SpeakeasyMetadata({ data: "json, name=tags" })
   tags?: Map<string, string>;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: JobTypeEnum;
 }

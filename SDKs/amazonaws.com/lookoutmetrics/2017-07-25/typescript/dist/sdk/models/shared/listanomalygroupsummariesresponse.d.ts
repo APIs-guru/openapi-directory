@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { AnomalyGroupStatistics } from "./anomalygroupstatistics";
 import { AnomalyGroupSummary } from "./anomalygroupsummary";
 export declare class ListAnomalyGroupSummariesResponse extends SpeakeasyBase {

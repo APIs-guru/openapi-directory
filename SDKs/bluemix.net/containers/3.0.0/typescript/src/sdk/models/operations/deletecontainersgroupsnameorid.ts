@@ -1,43 +1,44 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DeleteContainersGroupsNameOrIdPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=name_or_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=name_or_id" })
   nameOrId: string;
 }
 
 
 export class DeleteContainersGroupsNameOrIdQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=force" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=force" })
   force?: string;
 }
 
 
 export class DeleteContainersGroupsNameOrIdHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Auth-Project-Id" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Auth-Project-Id" })
   xAuthProjectId: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Auth-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Auth-Token" })
   xAuthToken: string;
 }
 
 
 export class DeleteContainersGroupsNameOrIdRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: DeleteContainersGroupsNameOrIdPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: DeleteContainersGroupsNameOrIdQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: DeleteContainersGroupsNameOrIdHeaders;
 }
 
 
 export class DeleteContainersGroupsNameOrIdResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

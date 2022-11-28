@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class AdsenseAdunitsGetAdCodePathParams:
-    ad_client_id: str = field(default=None, metadata={'path_param': { 'field_name': 'adClientId', 'style': 'simple', 'explode': False }})
-    ad_unit_id: str = field(default=None, metadata={'path_param': { 'field_name': 'adUnitId', 'style': 'simple', 'explode': False }})
+    ad_client_id: str = field(metadata={'path_param': { 'field_name': 'adClientId', 'style': 'simple', 'explode': False }})
+    ad_unit_id: str = field(metadata={'path_param': { 'field_name': 'adUnitId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -22,14 +23,14 @@ class AdsenseAdunitsGetAdCodeQueryParams:
 
 @dataclass
 class AdsenseAdunitsGetAdCodeSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class AdsenseAdunitsGetAdCodeSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -40,14 +41,14 @@ class AdsenseAdunitsGetAdCodeSecurity:
 
 @dataclass
 class AdsenseAdunitsGetAdCodeRequest:
-    path_params: AdsenseAdunitsGetAdCodePathParams = field(default=None)
-    query_params: AdsenseAdunitsGetAdCodeQueryParams = field(default=None)
-    security: AdsenseAdunitsGetAdCodeSecurity = field(default=None)
+    path_params: AdsenseAdunitsGetAdCodePathParams = field()
+    query_params: AdsenseAdunitsGetAdCodeQueryParams = field()
+    security: AdsenseAdunitsGetAdCodeSecurity = field()
     
 
 @dataclass
 class AdsenseAdunitsGetAdCodeResponse:
+    content_type: str = field()
+    status_code: int = field()
     ad_code: Optional[shared.AdCode] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

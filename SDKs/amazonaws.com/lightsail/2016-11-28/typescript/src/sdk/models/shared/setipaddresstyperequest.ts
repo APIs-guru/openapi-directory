@@ -1,15 +1,16 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { IpAddressTypeEnum } from "./ipaddresstypeenum";
 import { ResourceTypeEnum } from "./resourcetypeenum";
 
 
+
 export class SetIpAddressTypeRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ipAddressType" })
+  @SpeakeasyMetadata({ data: "json, name=ipAddressType" })
   ipAddressType: IpAddressTypeEnum;
 
-  @Metadata({ data: "json, name=resourceName" })
+  @SpeakeasyMetadata({ data: "json, name=resourceName" })
   resourceName: string;
 
-  @Metadata({ data: "json, name=resourceType" })
+  @SpeakeasyMetadata({ data: "json, name=resourceType" })
   resourceType: ResourceTypeEnum;
 }

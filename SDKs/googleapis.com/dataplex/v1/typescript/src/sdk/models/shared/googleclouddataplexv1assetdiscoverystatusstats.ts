@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudDataplexV1AssetDiscoveryStatusStats
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The aggregated data statistics for the asset reported by discovery.
 **/
 export class GoogleCloudDataplexV1AssetDiscoveryStatusStats extends SpeakeasyBase {
-  @Metadata({ data: "json, name=dataItems" })
+  @SpeakeasyMetadata({ data: "json, name=dataItems" })
   dataItems?: string;
 
-  @Metadata({ data: "json, name=dataSize" })
+  @SpeakeasyMetadata({ data: "json, name=dataSize" })
   dataSize?: string;
 
-  @Metadata({ data: "json, name=filesets" })
+  @SpeakeasyMetadata({ data: "json, name=filesets" })
   filesets?: string;
 
-  @Metadata({ data: "json, name=tables" })
+  @SpeakeasyMetadata({ data: "json, name=tables" })
   tables?: string;
 }

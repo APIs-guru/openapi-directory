@@ -1,6 +1,7 @@
 
 
+
 export enum ScopeEnum {
-    Task = "task"
-,    Shared = "shared"
+    Task = "task",
+    Shared = "shared"
 }

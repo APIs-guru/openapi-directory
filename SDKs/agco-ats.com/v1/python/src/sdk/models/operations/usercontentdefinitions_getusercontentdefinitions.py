@@ -13,13 +13,13 @@ class UserContentDefinitionsGetUserContentDefinitionsQueryParams:
 
 @dataclass
 class UserContentDefinitionsGetUserContentDefinitionsRequest:
-    query_params: UserContentDefinitionsGetUserContentDefinitionsQueryParams = field(default=None)
+    query_params: UserContentDefinitionsGetUserContentDefinitionsQueryParams = field()
     
 
 @dataclass
 class UserContentDefinitionsGetUserContentDefinitionsResponse:
+    content_type: str = field()
+    status_code: int = field()
     api_models_api_error: Optional[shared.APIModelsAPIError] = field(default=None)
     api_paged_response_content_submission_shared_business_entities_user_content_definition_: Optional[shared.APIPagedResponseContentSubmissionSharedBusinessEntitiesUserContentDefinition] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

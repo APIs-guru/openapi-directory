@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // UpdateRoomRequest
@@ -6,18 +7,18 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Request model for updating room's metadata
 **/
 export class UpdateRoomRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=notes" })
+  @SpeakeasyMetadata({ data: "json, name=notes" })
   notes?: string;
 
-  @Metadata({ data: "json, name=quota" })
+  @SpeakeasyMetadata({ data: "json, name=quota" })
   quota?: number;
 
-  @Metadata({ data: "json, name=timestampCreation" })
+  @SpeakeasyMetadata({ data: "json, name=timestampCreation" })
   timestampCreation?: Date;
 
-  @Metadata({ data: "json, name=timestampModification" })
+  @SpeakeasyMetadata({ data: "json, name=timestampModification" })
   timestampModification?: Date;
 }

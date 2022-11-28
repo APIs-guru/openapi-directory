@@ -1,5 +1,7 @@
 package shared
 
+// ScheduledAuditMetadata
+// Information about the scheduled audit.
 type ScheduledAuditMetadata struct {
 	DayOfMonth         *string             `json:"dayOfMonth,omitempty"`
 	DayOfWeek          *DayOfWeekEnum      `json:"dayOfWeek,omitempty"`

@@ -1,117 +1,118 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetResourceSharesQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=maxResults" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=maxResults" })
   maxResults?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=nextToken" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=nextToken" })
   nextToken?: string;
 }
 
 
 export class GetResourceSharesHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
 export enum GetResourceSharesRequestBodyResourceOwnerEnum {
-    Self = "SELF"
-,    OtherAccounts = "OTHER-ACCOUNTS"
+    Self = "SELF",
+    OtherAccounts = "OTHER-ACCOUNTS"
 }
 
 export enum GetResourceSharesRequestBodyResourceShareStatusEnum {
-    Pending = "PENDING"
-,    Active = "ACTIVE"
-,    Failed = "FAILED"
-,    Deleting = "DELETING"
-,    Deleted = "DELETED"
+    Pending = "PENDING",
+    Active = "ACTIVE",
+    Failed = "FAILED",
+    Deleting = "DELETING",
+    Deleted = "DELETED"
 }
 
 
 export class GetResourceSharesRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=maxResults" })
+  @SpeakeasyMetadata({ data: "json, name=maxResults" })
   maxResults?: number;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=nextToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=permissionArn" })
+  @SpeakeasyMetadata({ data: "json, name=permissionArn" })
   permissionArn?: string;
 
-  @Metadata({ data: "json, name=resourceOwner" })
+  @SpeakeasyMetadata({ data: "json, name=resourceOwner" })
   resourceOwner: GetResourceSharesRequestBodyResourceOwnerEnum;
 
-  @Metadata({ data: "json, name=resourceShareArns" })
+  @SpeakeasyMetadata({ data: "json, name=resourceShareArns" })
   resourceShareArns?: string[];
 
-  @Metadata({ data: "json, name=resourceShareStatus" })
+  @SpeakeasyMetadata({ data: "json, name=resourceShareStatus" })
   resourceShareStatus?: GetResourceSharesRequestBodyResourceShareStatusEnum;
 
-  @Metadata({ data: "json, name=tagFilters", elemType: shared.TagFilter })
+  @SpeakeasyMetadata({ data: "json, name=tagFilters", elemType: shared.TagFilter })
   tagFilters?: shared.TagFilter[];
 }
 
 
 export class GetResourceSharesRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetResourceSharesQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: GetResourceSharesHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: GetResourceSharesRequestBody;
 }
 
 
 export class GetResourceSharesResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getResourceSharesResponse?: shared.GetResourceSharesResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidNextTokenException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidParameterException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   malformedArnException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   serverInternalException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   serviceUnavailableException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   unknownResourceException?: any;
 }

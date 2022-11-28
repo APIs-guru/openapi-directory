@@ -23,6 +23,8 @@ type UpdateVirtualRouterHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// UpdateVirtualRouterRequestBodySpec
+// An object that represents the specification of a virtual router.
 type UpdateVirtualRouterRequestBodySpec struct {
 	Listeners []shared.VirtualRouterListener `json:"listeners,omitempty"`
 }

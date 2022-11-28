@@ -1,13 +1,17 @@
 from dataclasses import dataclass, field
 from typing import List
 from dataclasses_json import dataclass_json
-from . import resultrowvalue
-from . import resultrowvalue
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ResultRow:
-    grouped_bys: List[resultrowvalue.ResultRowValue] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'GroupedBys' }})
-    values: List[resultrowvalue.ResultRowValue] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Values' }})
+    r"""ResultRow
+    Provides the results of a query that retrieved the data for a standard metric that applies to an application, campaign, or journey.
+    """
+    
+    grouped_bys: List[ResultRowValue] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('GroupedBys') }})
+    values: List[ResultRowValue] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Values') }})
     

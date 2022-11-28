@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DisplayvideoAdvertisersManualTriggersDeactivatePathParams:
-    advertiser_id: str = field(default=None, metadata={'path_param': { 'field_name': 'advertiserId', 'style': 'simple', 'explode': False }})
-    trigger_id: str = field(default=None, metadata={'path_param': { 'field_name': 'triggerId', 'style': 'simple', 'explode': False }})
+    advertiser_id: str = field(metadata={'path_param': { 'field_name': 'advertiserId', 'style': 'simple', 'explode': False }})
+    trigger_id: str = field(metadata={'path_param': { 'field_name': 'triggerId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,21 +27,21 @@ class DisplayvideoAdvertisersManualTriggersDeactivateQueryParams:
 
 @dataclass
 class DisplayvideoAdvertisersManualTriggersDeactivateSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DisplayvideoAdvertisersManualTriggersDeactivateRequest:
-    path_params: DisplayvideoAdvertisersManualTriggersDeactivatePathParams = field(default=None)
-    query_params: DisplayvideoAdvertisersManualTriggersDeactivateQueryParams = field(default=None)
+    path_params: DisplayvideoAdvertisersManualTriggersDeactivatePathParams = field()
+    query_params: DisplayvideoAdvertisersManualTriggersDeactivateQueryParams = field()
+    security: DisplayvideoAdvertisersManualTriggersDeactivateSecurity = field()
     request: Optional[dict[str, Any]] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: DisplayvideoAdvertisersManualTriggersDeactivateSecurity = field(default=None)
     
 
 @dataclass
 class DisplayvideoAdvertisersManualTriggersDeactivateResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     manual_trigger: Optional[shared.ManualTrigger] = field(default=None)
-    status_code: int = field(default=None)
     

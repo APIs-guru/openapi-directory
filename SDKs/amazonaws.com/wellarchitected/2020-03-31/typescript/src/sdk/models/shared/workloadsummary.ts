@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { WorkloadImprovementStatusEnum } from "./workloadimprovementstatusenum";
+
 
 
 // WorkloadSummary
@@ -7,27 +8,27 @@ import { WorkloadImprovementStatusEnum } from "./workloadimprovementstatusenum";
  * A workload summary return object.
 **/
 export class WorkloadSummary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ImprovementStatus" })
+  @SpeakeasyMetadata({ data: "json, name=ImprovementStatus" })
   improvementStatus?: WorkloadImprovementStatusEnum;
 
-  @Metadata({ data: "json, name=Lenses" })
+  @SpeakeasyMetadata({ data: "json, name=Lenses" })
   lenses?: string[];
 
-  @Metadata({ data: "json, name=Owner" })
+  @SpeakeasyMetadata({ data: "json, name=Owner" })
   owner?: string;
 
-  @Metadata({ data: "json, name=RiskCounts" })
+  @SpeakeasyMetadata({ data: "json, name=RiskCounts" })
   riskCounts?: Map<string, number>;
 
-  @Metadata({ data: "json, name=UpdatedAt" })
+  @SpeakeasyMetadata({ data: "json, name=UpdatedAt" })
   updatedAt?: Date;
 
-  @Metadata({ data: "json, name=WorkloadArn" })
+  @SpeakeasyMetadata({ data: "json, name=WorkloadArn" })
   workloadArn?: string;
 
-  @Metadata({ data: "json, name=WorkloadId" })
+  @SpeakeasyMetadata({ data: "json, name=WorkloadId" })
   workloadId?: string;
 
-  @Metadata({ data: "json, name=WorkloadName" })
+  @SpeakeasyMetadata({ data: "json, name=WorkloadName" })
   workloadName?: string;
 }

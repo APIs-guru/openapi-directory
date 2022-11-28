@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // GetIosReopenAttributionRequest
 /**
  * Request for iSDK to get reopen attribution for app universal link open deeplinking. This endpoint is meant for only iOS requests.
@@ -33,15 +33,15 @@ var GetIosReopenAttributionRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=bundleId" }),
+        SpeakeasyMetadata({ data: "json, name=bundleId" }),
         __metadata("design:type", String)
     ], GetIosReopenAttributionRequest.prototype, "bundleId", void 0);
     __decorate([
-        Metadata({ data: "json, name=requestedLink" }),
+        SpeakeasyMetadata({ data: "json, name=requestedLink" }),
         __metadata("design:type", String)
     ], GetIosReopenAttributionRequest.prototype, "requestedLink", void 0);
     __decorate([
-        Metadata({ data: "json, name=sdkVersion" }),
+        SpeakeasyMetadata({ data: "json, name=sdkVersion" }),
         __metadata("design:type", String)
     ], GetIosReopenAttributionRequest.prototype, "sdkVersion", void 0);
     return GetIosReopenAttributionRequest;

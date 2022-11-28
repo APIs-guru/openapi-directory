@@ -31,6 +31,8 @@ const (
 	Proto2FieldDescriptorProtoTypeEnumTypeSint64   Proto2FieldDescriptorProtoTypeEnum = "TYPE_SINT64"
 )
 
+// Proto2FieldDescriptorProto
+// Describes a field within a message.
 type Proto2FieldDescriptorProto struct {
 	DefaultValue   *string                              `json:"defaultValue,omitempty"`
 	JSONName       *string                              `json:"jsonName,omitempty"`

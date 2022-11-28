@@ -1,31 +1,32 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Consent } from "./consent";
 import { DateRange } from "./daterange";
 import { KeyMaterial } from "./keymaterial";
 
 
+
 export class HiRequestHiRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=consent" })
+  @SpeakeasyMetadata({ data: "json, name=consent" })
   consent: Consent;
 
-  @Metadata({ data: "json, name=dataPushUrl" })
+  @SpeakeasyMetadata({ data: "json, name=dataPushUrl" })
   dataPushUrl: string;
 
-  @Metadata({ data: "json, name=dateRange" })
+  @SpeakeasyMetadata({ data: "json, name=dateRange" })
   dateRange: DateRange;
 
-  @Metadata({ data: "json, name=keyMaterial" })
+  @SpeakeasyMetadata({ data: "json, name=keyMaterial" })
   keyMaterial: KeyMaterial;
 }
 
 
 export class HiRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=hiRequest" })
+  @SpeakeasyMetadata({ data: "json, name=hiRequest" })
   hiRequest: HiRequestHiRequest;
 
-  @Metadata({ data: "json, name=requestId" })
+  @SpeakeasyMetadata({ data: "json, name=requestId" })
   requestId: string;
 
-  @Metadata({ data: "json, name=timestamp" })
+  @SpeakeasyMetadata({ data: "json, name=timestamp" })
   timestamp: Date;
 }

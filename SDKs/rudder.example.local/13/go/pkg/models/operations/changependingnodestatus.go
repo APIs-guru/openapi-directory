@@ -19,17 +19,14 @@ type ChangePendingNodeStatusRequestBody struct {
 	Status *ChangePendingNodeStatusRequestBodyStatusEnum `json:"status,omitempty"`
 }
 
-type ChangePendingNodeStatusRequest struct {
-	PathParams ChangePendingNodeStatusPathParams
-	Request    *ChangePendingNodeStatusRequestBody `request:"mediaType=application/json"`
-}
-
 type ChangePendingNodeStatus200ApplicationJSONActionEnum string
 
 const (
 	ChangePendingNodeStatus200ApplicationJSONActionEnumChangePendingNodeStatus ChangePendingNodeStatus200ApplicationJSONActionEnum = "changePendingNodeStatus"
 )
 
+// ChangePendingNodeStatus200ApplicationJSONData
+// Information about the node
 type ChangePendingNodeStatus200ApplicationJSONData struct {
 	Nodes []shared.NodeFull `json:"nodes"`
 }
@@ -45,6 +42,11 @@ type ChangePendingNodeStatus200ApplicationJSON struct {
 	Action ChangePendingNodeStatus200ApplicationJSONActionEnum `json:"action"`
 	Data   ChangePendingNodeStatus200ApplicationJSONData       `json:"data"`
 	Result ChangePendingNodeStatus200ApplicationJSONResultEnum `json:"result"`
+}
+
+type ChangePendingNodeStatusRequest struct {
+	PathParams ChangePendingNodeStatusPathParams
+	Request    *ChangePendingNodeStatusRequestBody `request:"mediaType=application/json"`
 }
 
 type ChangePendingNodeStatusResponse struct {

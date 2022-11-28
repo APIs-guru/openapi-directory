@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { EvaluationMethodEnum } from "./evaluationmethodenum";
 import { DetectorModelVersionStatusEnum } from "./detectormodelversionstatusenum";
+
 
 
 // DetectorModelVersionSummary
@@ -8,27 +9,27 @@ import { DetectorModelVersionStatusEnum } from "./detectormodelversionstatusenum
  * Information about the detector model version.
 **/
 export class DetectorModelVersionSummary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=creationTime" })
+  @SpeakeasyMetadata({ data: "json, name=creationTime" })
   creationTime?: Date;
 
-  @Metadata({ data: "json, name=detectorModelArn" })
+  @SpeakeasyMetadata({ data: "json, name=detectorModelArn" })
   detectorModelArn?: string;
 
-  @Metadata({ data: "json, name=detectorModelName" })
+  @SpeakeasyMetadata({ data: "json, name=detectorModelName" })
   detectorModelName?: string;
 
-  @Metadata({ data: "json, name=detectorModelVersion" })
+  @SpeakeasyMetadata({ data: "json, name=detectorModelVersion" })
   detectorModelVersion?: string;
 
-  @Metadata({ data: "json, name=evaluationMethod" })
+  @SpeakeasyMetadata({ data: "json, name=evaluationMethod" })
   evaluationMethod?: EvaluationMethodEnum;
 
-  @Metadata({ data: "json, name=lastUpdateTime" })
+  @SpeakeasyMetadata({ data: "json, name=lastUpdateTime" })
   lastUpdateTime?: Date;
 
-  @Metadata({ data: "json, name=roleArn" })
+  @SpeakeasyMetadata({ data: "json, name=roleArn" })
   roleArn?: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: DetectorModelVersionStatusEnum;
 }

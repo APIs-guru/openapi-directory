@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class RegisterUsageRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Nonce" })
+  @SpeakeasyMetadata({ data: "json, name=Nonce" })
   nonce?: string;
 
-  @Metadata({ data: "json, name=ProductCode" })
+  @SpeakeasyMetadata({ data: "json, name=ProductCode" })
   productCode: string;
 
-  @Metadata({ data: "json, name=PublicKeyVersion" })
+  @SpeakeasyMetadata({ data: "json, name=PublicKeyVersion" })
   publicKeyVersion: number;
 }

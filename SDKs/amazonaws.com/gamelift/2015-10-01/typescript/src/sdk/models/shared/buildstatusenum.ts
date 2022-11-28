@@ -1,7 +1,8 @@
 
 
+
 export enum BuildStatusEnum {
-    Initialized = "INITIALIZED"
-,    Ready = "READY"
-,    Failed = "FAILED"
+    Initialized = "INITIALIZED",
+    Ready = "READY",
+    Failed = "FAILED"
 }

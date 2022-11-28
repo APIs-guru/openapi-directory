@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { NetworkUsage } from "./networkusage";
+
 
 
 // ListNetworkUsageResponse
@@ -8,6 +8,6 @@ import { NetworkUsage } from "./networkusage";
  * Response with Networks with IPs
 **/
 export class ListNetworkUsageResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=networks", elemType: shared.NetworkUsage })
+  @SpeakeasyMetadata({ data: "json, name=networks", elemType: NetworkUsage })
   networks?: NetworkUsage[];
 }

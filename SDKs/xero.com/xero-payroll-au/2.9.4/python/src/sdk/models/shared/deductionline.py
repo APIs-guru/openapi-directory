@@ -1,15 +1,17 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import deductiontypecalculationtype_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class DeductionLine:
-    amount: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Amount' }})
-    calculation_type: deductiontypecalculationtype_enum.DeductionTypeCalculationTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'CalculationType' }})
-    deduction_type_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'DeductionTypeID' }})
-    number_of_units: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'NumberOfUnits' }})
-    percentage: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Percentage' }})
+    calculation_type: DeductionTypeCalculationTypeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('CalculationType') }})
+    deduction_type_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('DeductionTypeID') }})
+    amount: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Amount') }})
+    number_of_units: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('NumberOfUnits') }})
+    percentage: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Percentage') }})
     

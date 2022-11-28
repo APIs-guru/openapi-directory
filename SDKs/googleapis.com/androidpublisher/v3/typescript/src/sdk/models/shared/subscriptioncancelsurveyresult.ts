@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // SubscriptionCancelSurveyResult
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Information provided by the user when they complete the subscription cancellation flow (cancellation reason survey).
 **/
 export class SubscriptionCancelSurveyResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=cancelSurveyReason" })
+  @SpeakeasyMetadata({ data: "json, name=cancelSurveyReason" })
   cancelSurveyReason?: number;
 
-  @Metadata({ data: "json, name=userInputCancelReason" })
+  @SpeakeasyMetadata({ data: "json, name=userInputCancelReason" })
   userInputCancelReason?: string;
 }

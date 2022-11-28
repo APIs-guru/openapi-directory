@@ -1,33 +1,34 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class CreateDataSourcePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=apiId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=apiId" })
   apiId: string;
 }
 
 
 export class CreateDataSourceHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
@@ -37,19 +38,19 @@ export class CreateDataSourceHeaders extends SpeakeasyBase {
  * Describes an Amazon DynamoDB data source configuration.
 **/
 export class CreateDataSourceRequestBodyDynamodbConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=awsRegion" })
+  @SpeakeasyMetadata({ data: "json, name=awsRegion" })
   awsRegion?: string;
 
-  @Metadata({ data: "json, name=deltaSyncConfig" })
+  @SpeakeasyMetadata({ data: "json, name=deltaSyncConfig" })
   deltaSyncConfig?: shared.DeltaSyncConfig;
 
-  @Metadata({ data: "json, name=tableName" })
+  @SpeakeasyMetadata({ data: "json, name=tableName" })
   tableName?: string;
 
-  @Metadata({ data: "json, name=useCallerCredentials" })
+  @SpeakeasyMetadata({ data: "json, name=useCallerCredentials" })
   useCallerCredentials?: boolean;
 
-  @Metadata({ data: "json, name=versioned" })
+  @SpeakeasyMetadata({ data: "json, name=versioned" })
   versioned?: boolean;
 }
 
@@ -59,10 +60,10 @@ export class CreateDataSourceRequestBodyDynamodbConfig extends SpeakeasyBase {
  * Describes an Elasticsearch data source configuration.
 **/
 export class CreateDataSourceRequestBodyElasticsearchConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=awsRegion" })
+  @SpeakeasyMetadata({ data: "json, name=awsRegion" })
   awsRegion?: string;
 
-  @Metadata({ data: "json, name=endpoint" })
+  @SpeakeasyMetadata({ data: "json, name=endpoint" })
   endpoint?: string;
 }
 
@@ -72,10 +73,10 @@ export class CreateDataSourceRequestBodyElasticsearchConfig extends SpeakeasyBas
  * Describes an HTTP data source configuration.
 **/
 export class CreateDataSourceRequestBodyHttpConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=authorizationConfig" })
+  @SpeakeasyMetadata({ data: "json, name=authorizationConfig" })
   authorizationConfig?: shared.AuthorizationConfig;
 
-  @Metadata({ data: "json, name=endpoint" })
+  @SpeakeasyMetadata({ data: "json, name=endpoint" })
   endpoint?: string;
 }
 
@@ -85,7 +86,7 @@ export class CreateDataSourceRequestBodyHttpConfig extends SpeakeasyBase {
  * Describes an Amazon Web Services Lambda data source configuration.
 **/
 export class CreateDataSourceRequestBodyLambdaConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=lambdaFunctionArn" })
+  @SpeakeasyMetadata({ data: "json, name=lambdaFunctionArn" })
   lambdaFunctionArn?: string;
 }
 
@@ -95,87 +96,87 @@ export class CreateDataSourceRequestBodyLambdaConfig extends SpeakeasyBase {
  * Describes a relational database data source configuration.
 **/
 export class CreateDataSourceRequestBodyRelationalDatabaseConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=rdsHttpEndpointConfig" })
+  @SpeakeasyMetadata({ data: "json, name=rdsHttpEndpointConfig" })
   rdsHttpEndpointConfig?: shared.RdsHttpEndpointConfig;
 
-  @Metadata({ data: "json, name=relationalDatabaseSourceType" })
+  @SpeakeasyMetadata({ data: "json, name=relationalDatabaseSourceType" })
   relationalDatabaseSourceType?: shared.RelationalDatabaseSourceTypeEnum;
 }
 
 export enum CreateDataSourceRequestBodyTypeEnum {
-    AwsLambda = "AWS_LAMBDA"
-,    AmazonDynamodb = "AMAZON_DYNAMODB"
-,    AmazonElasticsearch = "AMAZON_ELASTICSEARCH"
-,    None = "NONE"
-,    Http = "HTTP"
-,    RelationalDatabase = "RELATIONAL_DATABASE"
+    AwsLambda = "AWS_LAMBDA",
+    AmazonDynamodb = "AMAZON_DYNAMODB",
+    AmazonElasticsearch = "AMAZON_ELASTICSEARCH",
+    None = "NONE",
+    Http = "HTTP",
+    RelationalDatabase = "RELATIONAL_DATABASE"
 }
 
 
 export class CreateDataSourceRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=dynamodbConfig" })
+  @SpeakeasyMetadata({ data: "json, name=dynamodbConfig" })
   dynamodbConfig?: CreateDataSourceRequestBodyDynamodbConfig;
 
-  @Metadata({ data: "json, name=elasticsearchConfig" })
+  @SpeakeasyMetadata({ data: "json, name=elasticsearchConfig" })
   elasticsearchConfig?: CreateDataSourceRequestBodyElasticsearchConfig;
 
-  @Metadata({ data: "json, name=httpConfig" })
+  @SpeakeasyMetadata({ data: "json, name=httpConfig" })
   httpConfig?: CreateDataSourceRequestBodyHttpConfig;
 
-  @Metadata({ data: "json, name=lambdaConfig" })
+  @SpeakeasyMetadata({ data: "json, name=lambdaConfig" })
   lambdaConfig?: CreateDataSourceRequestBodyLambdaConfig;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 
-  @Metadata({ data: "json, name=relationalDatabaseConfig" })
+  @SpeakeasyMetadata({ data: "json, name=relationalDatabaseConfig" })
   relationalDatabaseConfig?: CreateDataSourceRequestBodyRelationalDatabaseConfig;
 
-  @Metadata({ data: "json, name=serviceRoleArn" })
+  @SpeakeasyMetadata({ data: "json, name=serviceRoleArn" })
   serviceRoleArn?: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type: CreateDataSourceRequestBodyTypeEnum;
 }
 
 
 export class CreateDataSourceRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: CreateDataSourcePathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: CreateDataSourceHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: CreateDataSourceRequestBody;
 }
 
 
 export class CreateDataSourceResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   badRequestException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   concurrentModificationException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   createDataSourceResponse?: shared.CreateDataSourceResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   internalFailureException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   notFoundException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   unauthorizedException?: any;
 }

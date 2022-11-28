@@ -1,0 +1,19 @@
+export var MessageCode401PisEnum;
+(function (MessageCode401PisEnum) {
+    MessageCode401PisEnum["CertificateInvalid"] = "CERTIFICATE_INVALID";
+    MessageCode401PisEnum["RoleInvalid"] = "ROLE_INVALID";
+    MessageCode401PisEnum["CertificateExpired"] = "CERTIFICATE_EXPIRED";
+    MessageCode401PisEnum["CertificateBlocked"] = "CERTIFICATE_BLOCKED";
+    MessageCode401PisEnum["CertificateRevoke"] = "CERTIFICATE_REVOKE";
+    MessageCode401PisEnum["CertificateMissing"] = "CERTIFICATE_MISSING";
+    MessageCode401PisEnum["SignatureInvalid"] = "SIGNATURE_INVALID";
+    MessageCode401PisEnum["SignatureMissing"] = "SIGNATURE_MISSING";
+    MessageCode401PisEnum["CorporateIdInvalid"] = "CORPORATE_ID_INVALID";
+    MessageCode401PisEnum["PsuCredentialsInvalid"] = "PSU_CREDENTIALS_INVALID";
+    MessageCode401PisEnum["ConsentInvalid"] = "CONSENT_INVALID";
+    MessageCode401PisEnum["ConsentExpired"] = "CONSENT_EXPIRED";
+    MessageCode401PisEnum["TokenUnknown"] = "TOKEN_UNKNOWN";
+    MessageCode401PisEnum["TokenInvalid"] = "TOKEN_INVALID";
+    MessageCode401PisEnum["TokenExpired"] = "TOKEN_EXPIRED";
+    MessageCode401PisEnum["RequiredKidMissing"] = "REQUIRED_KID_MISSING";
+})(MessageCode401PisEnum || (MessageCode401PisEnum = {}));

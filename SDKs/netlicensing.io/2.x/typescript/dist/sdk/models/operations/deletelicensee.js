@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var DeleteLicenseePathParams = /** @class */ (function (_super) {
     __extends(DeleteLicenseePathParams, _super);
@@ -30,7 +30,7 @@ var DeleteLicenseePathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=licenseeNumber" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=licenseeNumber" }),
         __metadata("design:type", String)
     ], DeleteLicenseePathParams.prototype, "licenseeNumber", void 0);
     return DeleteLicenseePathParams;
@@ -42,7 +42,7 @@ var DeleteLicenseeQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=forceCascade" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=forceCascade" }),
         __metadata("design:type", Boolean)
     ], DeleteLicenseeQueryParams.prototype, "forceCascade", void 0);
     return DeleteLicenseeQueryParams;
@@ -54,7 +54,7 @@ var DeleteLicenseeSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=http;subtype=basic" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=basic" }),
         __metadata("design:type", shared.SchemeBasicAuth)
     ], DeleteLicenseeSecurity.prototype, "basicAuth", void 0);
     return DeleteLicenseeSecurity;
@@ -66,15 +66,15 @@ var DeleteLicenseeRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", DeleteLicenseePathParams)
     ], DeleteLicenseeRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", DeleteLicenseeQueryParams)
     ], DeleteLicenseeRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", DeleteLicenseeSecurity)
     ], DeleteLicenseeRequest.prototype, "security", void 0);
     return DeleteLicenseeRequest;
@@ -86,19 +86,19 @@ var DeleteLicenseeResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], DeleteLicenseeResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], DeleteLicenseeResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], DeleteLicenseeResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], DeleteLicenseeResponse.prototype, "netlicensing", void 0);
     return DeleteLicenseeResponse;

@@ -1,40 +1,41 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class QuittungTseQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=account" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=account" })
   account?: string;
 }
 
 
-export class QuittungTseRequest extends SpeakeasyBase {
-  @Metadata()
-  queryParams: QuittungTseQueryParams;
-}
-
-
 export class QuittungTse200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data?: any;
 
-  @Metadata({ data: "json, name=publickey" })
+  @SpeakeasyMetadata({ data: "json, name=publickey" })
   publickey?: string;
 
-  @Metadata({ data: "json, name=raw" })
+  @SpeakeasyMetadata({ data: "json, name=raw" })
   raw?: string;
 
-  @Metadata({ data: "json, name=signature" })
+  @SpeakeasyMetadata({ data: "json, name=signature" })
   signature?: string;
 }
 
 
+export class QuittungTseRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  queryParams: QuittungTseQueryParams;
+}
+
+
 export class QuittungTseResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   quittungTse200ApplicationJsonObject?: QuittungTse200ApplicationJson;
 }

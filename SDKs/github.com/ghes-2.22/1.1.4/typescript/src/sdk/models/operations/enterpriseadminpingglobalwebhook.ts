@@ -1,31 +1,32 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class EnterpriseAdminPingGlobalWebhookPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=hook_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=hook_id" })
   hookId: number;
 }
 
 
 export class EnterpriseAdminPingGlobalWebhookHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=accept" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=accept" })
   accept: string;
 }
 
 
 export class EnterpriseAdminPingGlobalWebhookRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: EnterpriseAdminPingGlobalWebhookPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: EnterpriseAdminPingGlobalWebhookHeaders;
 }
 
 
 export class EnterpriseAdminPingGlobalWebhookResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

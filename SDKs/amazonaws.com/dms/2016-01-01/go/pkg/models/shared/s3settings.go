@@ -1,5 +1,7 @@
 package shared
 
+// S3Settings
+// Settings for exporting data to Amazon S3.
 type S3Settings struct {
 	AddColumnName                 *bool                            `json:"AddColumnName,omitempty"`
 	BucketFolder                  *string                          `json:"BucketFolder,omitempty"`

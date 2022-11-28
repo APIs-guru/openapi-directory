@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Dimension } from "./dimension";
+
 
 
 // TableRowProperties
@@ -7,6 +8,6 @@ import { Dimension } from "./dimension";
  * Properties of each row in a table.
 **/
 export class TableRowProperties extends SpeakeasyBase {
-  @Metadata({ data: "json, name=minRowHeight" })
+  @SpeakeasyMetadata({ data: "json, name=minRowHeight" })
   minRowHeight?: Dimension;
 }

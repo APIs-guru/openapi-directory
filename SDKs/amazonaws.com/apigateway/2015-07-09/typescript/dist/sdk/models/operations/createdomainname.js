@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var CreateDomainNameHeaders = /** @class */ (function (_super) {
     __extends(CreateDomainNameHeaders, _super);
@@ -30,31 +30,31 @@ var CreateDomainNameHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
         __metadata("design:type", String)
     ], CreateDomainNameHeaders.prototype, "xAmzAlgorithm", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
         __metadata("design:type", String)
     ], CreateDomainNameHeaders.prototype, "xAmzContentSha256", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
         __metadata("design:type", String)
     ], CreateDomainNameHeaders.prototype, "xAmzCredential", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
         __metadata("design:type", String)
     ], CreateDomainNameHeaders.prototype, "xAmzDate", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
         __metadata("design:type", String)
     ], CreateDomainNameHeaders.prototype, "xAmzSecurityToken", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
         __metadata("design:type", String)
     ], CreateDomainNameHeaders.prototype, "xAmzSignature", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
         __metadata("design:type", String)
     ], CreateDomainNameHeaders.prototype, "xAmzSignedHeaders", void 0);
     return CreateDomainNameHeaders;
@@ -70,11 +70,11 @@ var CreateDomainNameRequestBodyEndpointConfiguration = /** @class */ (function (
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=types" }),
+        SpeakeasyMetadata({ data: "json, name=types" }),
         __metadata("design:type", Array)
     ], CreateDomainNameRequestBodyEndpointConfiguration.prototype, "types", void 0);
     __decorate([
-        Metadata({ data: "json, name=vpcEndpointIds" }),
+        SpeakeasyMetadata({ data: "json, name=vpcEndpointIds" }),
         __metadata("design:type", Array)
     ], CreateDomainNameRequestBodyEndpointConfiguration.prototype, "vpcEndpointIds", void 0);
     return CreateDomainNameRequestBodyEndpointConfiguration;
@@ -90,11 +90,11 @@ var CreateDomainNameRequestBodyMutualTlsAuthentication = /** @class */ (function
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=truststoreUri" }),
+        SpeakeasyMetadata({ data: "json, name=truststoreUri" }),
         __metadata("design:type", String)
     ], CreateDomainNameRequestBodyMutualTlsAuthentication.prototype, "truststoreUri", void 0);
     __decorate([
-        Metadata({ data: "json, name=truststoreVersion" }),
+        SpeakeasyMetadata({ data: "json, name=truststoreVersion" }),
         __metadata("design:type", String)
     ], CreateDomainNameRequestBodyMutualTlsAuthentication.prototype, "truststoreVersion", void 0);
     return CreateDomainNameRequestBodyMutualTlsAuthentication;
@@ -111,55 +111,55 @@ var CreateDomainNameRequestBody = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=certificateArn" }),
+        SpeakeasyMetadata({ data: "json, name=certificateArn" }),
         __metadata("design:type", String)
     ], CreateDomainNameRequestBody.prototype, "certificateArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=certificateBody" }),
+        SpeakeasyMetadata({ data: "json, name=certificateBody" }),
         __metadata("design:type", String)
     ], CreateDomainNameRequestBody.prototype, "certificateBody", void 0);
     __decorate([
-        Metadata({ data: "json, name=certificateChain" }),
+        SpeakeasyMetadata({ data: "json, name=certificateChain" }),
         __metadata("design:type", String)
     ], CreateDomainNameRequestBody.prototype, "certificateChain", void 0);
     __decorate([
-        Metadata({ data: "json, name=certificateName" }),
+        SpeakeasyMetadata({ data: "json, name=certificateName" }),
         __metadata("design:type", String)
     ], CreateDomainNameRequestBody.prototype, "certificateName", void 0);
     __decorate([
-        Metadata({ data: "json, name=certificatePrivateKey" }),
+        SpeakeasyMetadata({ data: "json, name=certificatePrivateKey" }),
         __metadata("design:type", String)
     ], CreateDomainNameRequestBody.prototype, "certificatePrivateKey", void 0);
     __decorate([
-        Metadata({ data: "json, name=domainName" }),
+        SpeakeasyMetadata({ data: "json, name=domainName" }),
         __metadata("design:type", String)
     ], CreateDomainNameRequestBody.prototype, "domainName", void 0);
     __decorate([
-        Metadata({ data: "json, name=endpointConfiguration" }),
+        SpeakeasyMetadata({ data: "json, name=endpointConfiguration" }),
         __metadata("design:type", CreateDomainNameRequestBodyEndpointConfiguration)
     ], CreateDomainNameRequestBody.prototype, "endpointConfiguration", void 0);
     __decorate([
-        Metadata({ data: "json, name=mutualTlsAuthentication" }),
+        SpeakeasyMetadata({ data: "json, name=mutualTlsAuthentication" }),
         __metadata("design:type", CreateDomainNameRequestBodyMutualTlsAuthentication)
     ], CreateDomainNameRequestBody.prototype, "mutualTlsAuthentication", void 0);
     __decorate([
-        Metadata({ data: "json, name=ownershipVerificationCertificateArn" }),
+        SpeakeasyMetadata({ data: "json, name=ownershipVerificationCertificateArn" }),
         __metadata("design:type", String)
     ], CreateDomainNameRequestBody.prototype, "ownershipVerificationCertificateArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=regionalCertificateArn" }),
+        SpeakeasyMetadata({ data: "json, name=regionalCertificateArn" }),
         __metadata("design:type", String)
     ], CreateDomainNameRequestBody.prototype, "regionalCertificateArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=regionalCertificateName" }),
+        SpeakeasyMetadata({ data: "json, name=regionalCertificateName" }),
         __metadata("design:type", String)
     ], CreateDomainNameRequestBody.prototype, "regionalCertificateName", void 0);
     __decorate([
-        Metadata({ data: "json, name=securityPolicy" }),
+        SpeakeasyMetadata({ data: "json, name=securityPolicy" }),
         __metadata("design:type", String)
     ], CreateDomainNameRequestBody.prototype, "securityPolicy", void 0);
     __decorate([
-        Metadata({ data: "json, name=tags" }),
+        SpeakeasyMetadata({ data: "json, name=tags" }),
         __metadata("design:type", Map)
     ], CreateDomainNameRequestBody.prototype, "tags", void 0);
     return CreateDomainNameRequestBody;
@@ -171,11 +171,11 @@ var CreateDomainNameRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", CreateDomainNameHeaders)
     ], CreateDomainNameRequest.prototype, "headers", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", CreateDomainNameRequestBody)
     ], CreateDomainNameRequest.prototype, "request", void 0);
     return CreateDomainNameRequest;
@@ -187,35 +187,35 @@ var CreateDomainNameResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], CreateDomainNameResponse.prototype, "badRequestException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], CreateDomainNameResponse.prototype, "conflictException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], CreateDomainNameResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.DomainName)
     ], CreateDomainNameResponse.prototype, "domainName", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], CreateDomainNameResponse.prototype, "limitExceededException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], CreateDomainNameResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], CreateDomainNameResponse.prototype, "tooManyRequestsException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], CreateDomainNameResponse.prototype, "unauthorizedException", void 0);
     return CreateDomainNameResponse;

@@ -1,5 +1,7 @@
 package shared
 
+// TypeInfo
+// Type Information. Contains detailed information about a composite type, base type, or base type with specific collection.
 type TypeInfo struct {
 	Description       *string             `json:"description,omitempty"`
 	DocumentationLink *string             `json:"documentationLink,omitempty"`

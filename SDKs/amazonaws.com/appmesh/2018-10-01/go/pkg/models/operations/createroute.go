@@ -19,6 +19,8 @@ type CreateRouteHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// CreateRouteRequestBodySpec
+// An object representing the specification of a route.
 type CreateRouteRequestBodySpec struct {
 	HTTPRoute *shared.HTTPRoute `json:"httpRoute,omitempty"`
 }

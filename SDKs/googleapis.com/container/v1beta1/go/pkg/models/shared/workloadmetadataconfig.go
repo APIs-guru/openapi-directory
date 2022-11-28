@@ -17,6 +17,8 @@ const (
 	WorkloadMetadataConfigNodeMetadataEnumGkeMetadataServer WorkloadMetadataConfigNodeMetadataEnum = "GKE_METADATA_SERVER"
 )
 
+// WorkloadMetadataConfig
+// WorkloadMetadataConfig defines the metadata configuration to expose to workloads on the node pool.
 type WorkloadMetadataConfig struct {
 	Mode         *WorkloadMetadataConfigModeEnum         `json:"mode,omitempty"`
 	NodeMetadata *WorkloadMetadataConfigNodeMetadataEnum `json:"nodeMetadata,omitempty"`

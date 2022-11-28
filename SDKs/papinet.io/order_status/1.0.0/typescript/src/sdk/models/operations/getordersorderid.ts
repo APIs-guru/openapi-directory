@@ -1,26 +1,27 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetOrdersOrderIdPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=orderId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=orderId" })
   orderId: string;
 }
 
 
 export class GetOrdersOrderIdRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetOrdersOrderIdPathParams;
 }
 
 
 export class GetOrdersOrderIdResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getOrder?: shared.GetOrder;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

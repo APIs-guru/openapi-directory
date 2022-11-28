@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ConfigFile } from "./configfile";
 import { ImportFile } from "./importfile";
 export declare class Manifest extends SpeakeasyBase {

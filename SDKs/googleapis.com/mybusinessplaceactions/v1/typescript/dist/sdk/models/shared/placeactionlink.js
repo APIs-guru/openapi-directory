@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var PlaceActionLinkPlaceActionTypeEnum;
 (function (PlaceActionLinkPlaceActionTypeEnum) {
     PlaceActionLinkPlaceActionTypeEnum["PlaceActionTypeUnspecified"] = "PLACE_ACTION_TYPE_UNSPECIFIED";
@@ -40,6 +40,34 @@ export var PlaceActionLinkProviderTypeEnum;
     PlaceActionLinkProviderTypeEnum["Merchant"] = "MERCHANT";
     PlaceActionLinkProviderTypeEnum["Aggregator3P"] = "AGGREGATOR_3P";
 })(PlaceActionLinkProviderTypeEnum || (PlaceActionLinkProviderTypeEnum = {}));
+// PlaceActionLinkInput
+/**
+ * Represents a place action link and its attributes.
+**/
+var PlaceActionLinkInput = /** @class */ (function (_super) {
+    __extends(PlaceActionLinkInput, _super);
+    function PlaceActionLinkInput() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=isPreferred" }),
+        __metadata("design:type", Boolean)
+    ], PlaceActionLinkInput.prototype, "isPreferred", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=name" }),
+        __metadata("design:type", String)
+    ], PlaceActionLinkInput.prototype, "name", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=placeActionType" }),
+        __metadata("design:type", String)
+    ], PlaceActionLinkInput.prototype, "placeActionType", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=uri" }),
+        __metadata("design:type", String)
+    ], PlaceActionLinkInput.prototype, "uri", void 0);
+    return PlaceActionLinkInput;
+}(SpeakeasyBase));
+export { PlaceActionLinkInput };
 // PlaceActionLink
 /**
  * Represents a place action link and its attributes.
@@ -50,35 +78,35 @@ var PlaceActionLink = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=createTime" }),
+        SpeakeasyMetadata({ data: "json, name=createTime" }),
         __metadata("design:type", String)
     ], PlaceActionLink.prototype, "createTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=isEditable" }),
+        SpeakeasyMetadata({ data: "json, name=isEditable" }),
         __metadata("design:type", Boolean)
     ], PlaceActionLink.prototype, "isEditable", void 0);
     __decorate([
-        Metadata({ data: "json, name=isPreferred" }),
+        SpeakeasyMetadata({ data: "json, name=isPreferred" }),
         __metadata("design:type", Boolean)
     ], PlaceActionLink.prototype, "isPreferred", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], PlaceActionLink.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=placeActionType" }),
+        SpeakeasyMetadata({ data: "json, name=placeActionType" }),
         __metadata("design:type", String)
     ], PlaceActionLink.prototype, "placeActionType", void 0);
     __decorate([
-        Metadata({ data: "json, name=providerType" }),
+        SpeakeasyMetadata({ data: "json, name=providerType" }),
         __metadata("design:type", String)
     ], PlaceActionLink.prototype, "providerType", void 0);
     __decorate([
-        Metadata({ data: "json, name=updateTime" }),
+        SpeakeasyMetadata({ data: "json, name=updateTime" }),
         __metadata("design:type", String)
     ], PlaceActionLink.prototype, "updateTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=uri" }),
+        SpeakeasyMetadata({ data: "json, name=uri" }),
         __metadata("design:type", String)
     ], PlaceActionLink.prototype, "uri", void 0);
     return PlaceActionLink;

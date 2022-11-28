@@ -24,6 +24,8 @@ const (
 	FlexTemplateRuntimeEnvironmentIPConfigurationEnumWorkerIPPrivate     FlexTemplateRuntimeEnvironmentIPConfigurationEnum = "WORKER_IP_PRIVATE"
 )
 
+// FlexTemplateRuntimeEnvironment
+// The environment values to be set at runtime for flex template.
 type FlexTemplateRuntimeEnvironment struct {
 	AdditionalExperiments             []string                                                `json:"additionalExperiments,omitempty"`
 	AdditionalUserLabels              map[string]string                                       `json:"additionalUserLabels,omitempty"`

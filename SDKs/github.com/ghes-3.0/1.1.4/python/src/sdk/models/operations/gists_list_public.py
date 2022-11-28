@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
 from typing import List,Optional
@@ -15,14 +15,14 @@ class GistsListPublicQueryParams:
 
 @dataclass
 class GistsListPublicRequest:
-    query_params: GistsListPublicQueryParams = field(default=None)
+    query_params: GistsListPublicQueryParams = field()
     
 
 @dataclass
 class GistsListPublicResponse:
-    content_type: str = field(default=None)
-    headers: dict[str, List[str]] = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    headers: dict[str, List[str]] = field()
+    status_code: int = field()
     base_gists: Optional[List[shared.BaseGist]] = field(default=None)
     basic_error: Optional[shared.BasicError] = field(default=None)
     validation_error: Optional[shared.ValidationError] = field(default=None)

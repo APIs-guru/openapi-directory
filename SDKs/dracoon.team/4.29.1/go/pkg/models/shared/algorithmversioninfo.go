@@ -7,6 +7,8 @@ const (
 	AlgorithmVersionInfoStatusEnumDiscouraged AlgorithmVersionInfoStatusEnum = "DISCOURAGED"
 )
 
+// AlgorithmVersionInfo
+// Algorithm information
 type AlgorithmVersionInfo struct {
 	Description string                         `json:"description"`
 	Status      AlgorithmVersionInfoStatusEnum `json:"status"`

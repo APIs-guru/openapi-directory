@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AdReference } from "./adreference";
 import { Error } from "./error";
+
 
 
 // CreateAdsByInventoryReferenceResponse
@@ -9,18 +9,18 @@ import { Error } from "./error";
  * This type defines the fields returned when you create an ad by inventory reference ID.
 **/
 export class CreateAdsByInventoryReferenceResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ads", elemType: shared.AdReference })
+  @SpeakeasyMetadata({ data: "json, name=ads", elemType: AdReference })
   ads?: AdReference[];
 
-  @Metadata({ data: "json, name=errors", elemType: shared.Error })
+  @SpeakeasyMetadata({ data: "json, name=errors", elemType: Error })
   errors?: Error[];
 
-  @Metadata({ data: "json, name=inventoryReferenceId" })
+  @SpeakeasyMetadata({ data: "json, name=inventoryReferenceId" })
   inventoryReferenceId?: string;
 
-  @Metadata({ data: "json, name=inventoryReferenceType" })
+  @SpeakeasyMetadata({ data: "json, name=inventoryReferenceType" })
   inventoryReferenceType?: string;
 
-  @Metadata({ data: "json, name=statusCode" })
+  @SpeakeasyMetadata({ data: "json, name=statusCode" })
   statusCode?: number;
 }

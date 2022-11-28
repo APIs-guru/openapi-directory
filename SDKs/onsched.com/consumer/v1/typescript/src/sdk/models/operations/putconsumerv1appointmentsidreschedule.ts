@@ -1,44 +1,45 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class PutConsumerV1AppointmentsIdReschedulePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" })
   id: string;
 }
 
 
 export class PutConsumerV1AppointmentsIdRescheduleRequests extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/*+json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/*+json" })
   appointmentRescheduleModel?: shared.AppointmentRescheduleModel;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   appointmentRescheduleModel1?: shared.AppointmentRescheduleModel;
 
-  @Metadata({ data: "request, media_type=application/json-patch+json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json-patch+json" })
   appointmentRescheduleModel2?: shared.AppointmentRescheduleModel;
 
-  @Metadata({ data: "request, media_type=text/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=text/json" })
   appointmentRescheduleModel3?: shared.AppointmentRescheduleModel;
 }
 
 
 export class PutConsumerV1AppointmentsIdRescheduleRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: PutConsumerV1AppointmentsIdReschedulePathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   request?: PutConsumerV1AppointmentsIdRescheduleRequests;
 }
 
 
 export class PutConsumerV1AppointmentsIdRescheduleResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   appointmentViewModel?: shared.AppointmentViewModel;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

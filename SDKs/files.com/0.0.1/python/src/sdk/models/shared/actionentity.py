@@ -1,9 +1,11 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class ActionEntityActionEnum(str, Enum):
     CREATE = "create"
@@ -68,17 +70,21 @@ class ActionEntityInterfaceEnum(str, Enum):
 @dataclass_json
 @dataclass
 class ActionEntity:
-    action: Optional[ActionEntityActionEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'action' }})
-    destination: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'destination' }})
-    display: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'display' }})
-    failure_type: Optional[ActionEntityFailureTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'failure_type' }})
-    id: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
-    interface: Optional[ActionEntityInterfaceEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'interface' }})
-    ip: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ip' }})
-    path: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'path' }})
-    source: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'source' }})
-    targets: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'targets' }})
-    user_id: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'user_id' }})
-    username: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'username' }})
-    when: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'when', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    r"""ActionEntity
+    List site full action history.
+    """
+    
+    action: Optional[ActionEntityActionEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('action') }})
+    destination: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('destination') }})
+    display: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('display') }})
+    failure_type: Optional[ActionEntityFailureTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('failure_type') }})
+    id: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('id') }})
+    interface: Optional[ActionEntityInterfaceEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('interface') }})
+    ip: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ip') }})
+    path: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('path') }})
+    source: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('source') }})
+    targets: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('targets') }})
+    user_id: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('user_id') }})
+    username: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('username') }})
+    when: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('when'), 'encoder': utils.datetimeisoformat(True), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
     

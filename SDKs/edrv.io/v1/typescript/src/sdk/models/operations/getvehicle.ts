@@ -1,37 +1,38 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetVehiclePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" })
   id: string;
 }
 
 
 export class GetVehicleQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=include_driver" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=include_driver" })
   includeDriver?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=include_organization" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=include_organization" })
   includeOrganization?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=include_token" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=include_token" })
   includeToken?: boolean;
 }
 
 
 export class GetVehicleRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetVehiclePathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetVehicleQueryParams;
 }
 
 
 export class GetVehicleResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

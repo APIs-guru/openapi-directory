@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudDialogflowV2IntentTrainingPhrasePart
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Represents a part of a training phrase.
 **/
 export class GoogleCloudDialogflowV2IntentTrainingPhrasePart extends SpeakeasyBase {
-  @Metadata({ data: "json, name=alias" })
+  @SpeakeasyMetadata({ data: "json, name=alias" })
   alias?: string;
 
-  @Metadata({ data: "json, name=entityType" })
+  @SpeakeasyMetadata({ data: "json, name=entityType" })
   entityType?: string;
 
-  @Metadata({ data: "json, name=text" })
+  @SpeakeasyMetadata({ data: "json, name=text" })
   text?: string;
 
-  @Metadata({ data: "json, name=userDefined" })
+  @SpeakeasyMetadata({ data: "json, name=userDefined" })
   userDefined?: boolean;
 }

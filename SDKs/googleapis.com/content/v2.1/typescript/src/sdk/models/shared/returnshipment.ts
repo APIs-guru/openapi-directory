@@ -1,27 +1,27 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ShipmentTrackingInfo } from "./shipmenttrackinginfo";
 
 
+
 export class ReturnShipment extends SpeakeasyBase {
-  @Metadata({ data: "json, name=creationDate" })
+  @SpeakeasyMetadata({ data: "json, name=creationDate" })
   creationDate?: string;
 
-  @Metadata({ data: "json, name=deliveryDate" })
+  @SpeakeasyMetadata({ data: "json, name=deliveryDate" })
   deliveryDate?: string;
 
-  @Metadata({ data: "json, name=returnMethodType" })
+  @SpeakeasyMetadata({ data: "json, name=returnMethodType" })
   returnMethodType?: string;
 
-  @Metadata({ data: "json, name=shipmentId" })
+  @SpeakeasyMetadata({ data: "json, name=shipmentId" })
   shipmentId?: string;
 
-  @Metadata({ data: "json, name=shipmentTrackingInfos", elemType: shared.ShipmentTrackingInfo })
+  @SpeakeasyMetadata({ data: "json, name=shipmentTrackingInfos", elemType: ShipmentTrackingInfo })
   shipmentTrackingInfos?: ShipmentTrackingInfo[];
 
-  @Metadata({ data: "json, name=shippingDate" })
+  @SpeakeasyMetadata({ data: "json, name=shippingDate" })
   shippingDate?: string;
 
-  @Metadata({ data: "json, name=state" })
+  @SpeakeasyMetadata({ data: "json, name=state" })
   state?: string;
 }

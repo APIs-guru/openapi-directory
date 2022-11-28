@@ -69,6 +69,8 @@ type CommitStats struct {
 	Total     *int64 `json:"total,omitempty"`
 }
 
+// Commit
+// Commit
 type Commit struct {
 	Author      CommitSimpleUser `json:"author"`
 	CommentsURL string           `json:"comments_url"`

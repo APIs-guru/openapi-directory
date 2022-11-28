@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // FirstPartyMobileApplicationTargeting
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Represents a list of targeted and excluded mobile application IDs that publishers own. Android App ID, for example, com.google.android.apps.maps, can be found in Google Play Store URL. iOS App ID (which is a number) can be found at the end of iTunes store URL. First party mobile applications is either included or excluded.
 **/
 export class FirstPartyMobileApplicationTargeting extends SpeakeasyBase {
-  @Metadata({ data: "json, name=excludedAppIds" })
+  @SpeakeasyMetadata({ data: "json, name=excludedAppIds" })
   excludedAppIds?: string[];
 
-  @Metadata({ data: "json, name=targetedAppIds" })
+  @SpeakeasyMetadata({ data: "json, name=targetedAppIds" })
   targetedAppIds?: string[];
 }

@@ -1,52 +1,53 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
+
 export enum GroupsGetStatusEnum {
-    Deleted = "deleted"
-,    Active = "active"
+    Deleted = "deleted",
+    Active = "active"
 }
 
 
 export class GroupsGetQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=createdAfter" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=createdAfter" })
   createdAfter?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=createdBefore" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=createdBefore" })
   createdBefore?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=limit" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=limit" })
   limit?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=offset" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=offset" })
   offset?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=status" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=status" })
   status?: GroupsGetStatusEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=tags" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=tags" })
   tags?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=textSearch" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=textSearch" })
   textSearch?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=write" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=write" })
   write?: boolean;
 }
 
 
 export class GroupsGetRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GroupsGetQueryParams;
 }
 
 
 export class GroupsGetResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   apiCoreResponsesEntitiesResponseApiCoreResponsesEntityUriSystemInt64?: shared.ApiCoreResponsesEntitiesResponseApiCoreResponsesEntityUriSystemInt64;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

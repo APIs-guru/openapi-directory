@@ -1,7 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import creativeassignment
+from sdk import utils
+from . import *
 
 class CreativeRotationTypeEnum(str, Enum):
     CREATIVE_ROTATION_TYPE_SEQUENTIAL = "CREATIVE_ROTATION_TYPE_SEQUENTIAL"
@@ -17,8 +19,12 @@ class CreativeRotationWeightCalculationStrategyEnum(str, Enum):
 @dataclass_json
 @dataclass
 class CreativeRotation:
-    creative_assignments: Optional[List[creativeassignment.CreativeAssignment]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'creativeAssignments' }})
-    creative_optimization_configuration_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'creativeOptimizationConfigurationId' }})
-    type: Optional[CreativeRotationTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
-    weight_calculation_strategy: Optional[CreativeRotationWeightCalculationStrategyEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'weightCalculationStrategy' }})
+    r"""CreativeRotation
+    Creative Rotation.
+    """
+    
+    creative_assignments: Optional[List[CreativeAssignment]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('creativeAssignments') }})
+    creative_optimization_configuration_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('creativeOptimizationConfigurationId') }})
+    type: Optional[CreativeRotationTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('type') }})
+    weight_calculation_strategy: Optional[CreativeRotationWeightCalculationStrategyEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('weightCalculationStrategy') }})
     

@@ -5,7 +5,7 @@ type GetV1WorkgroupsWorkgroupIDQuotesPathParams struct {
 }
 
 type GetV1WorkgroupsWorkgroupIDQuotesQueryParams struct {
-	QuoteStateIDUseFiltersEqualQuoteStateID111111 *string `queryParam:"style=form,explode=true,name=quote_state_id, use filters={"quote_state_id":111111}"`
+	QuoteStateIDUseFiltersEqualQuoteStateID111111 *string `queryParam:"style=form,explode=true,name=quote_state_id, use filters={\"quote_state_id\":111111}"`
 }
 
 type GetV1WorkgroupsWorkgroupIDQuotesRequest struct {

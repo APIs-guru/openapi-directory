@@ -5,19 +5,19 @@ from sdk.models import shared
 
 @dataclass
 class AuthorizationCodesGetContactInformationPathParams:
-    id: int = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: int = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class AuthorizationCodesGetContactInformationRequest:
-    path_params: AuthorizationCodesGetContactInformationPathParams = field(default=None)
+    path_params: AuthorizationCodesGetContactInformationPathParams = field()
     
 
 @dataclass
 class AuthorizationCodesGetContactInformationResponse:
+    content_type: str = field()
+    status_code: int = field()
     api_models_api_error: Optional[shared.APIModelsAPIError] = field(default=None)
     authorization_codes_shared_models_authorization_contact_information: Optional[shared.AuthorizationCodesSharedModelsAuthorizationContactInformation] = field(default=None)
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    body: Optional[bytes] = field(default=None)
     

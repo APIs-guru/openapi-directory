@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Attachment } from "./attachment";
+
 
 
 // DescribeAttachmentResponse
@@ -7,6 +8,6 @@ import { Attachment } from "./attachment";
  * The content and file name of the attachment returned by the <a>DescribeAttachment</a> operation.
 **/
 export class DescribeAttachmentResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=attachment" })
+  @SpeakeasyMetadata({ data: "json, name=attachment" })
   attachment?: Attachment;
 }

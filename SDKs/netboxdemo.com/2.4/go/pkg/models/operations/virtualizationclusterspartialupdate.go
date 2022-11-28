@@ -10,7 +10,7 @@ type VirtualizationClustersPartialUpdatePathParams struct {
 
 type VirtualizationClustersPartialUpdateRequest struct {
 	PathParams VirtualizationClustersPartialUpdatePathParams
-	Request    shared.WritableCluster `request:"mediaType=application/json"`
+	Request    shared.WritableClusterInput `request:"mediaType=application/json"`
 }
 
 type VirtualizationClustersPartialUpdateResponse struct {

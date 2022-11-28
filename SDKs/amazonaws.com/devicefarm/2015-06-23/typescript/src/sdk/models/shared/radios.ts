@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Radios
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Represents the set of radios and their states on a device. Examples of radios include Wi-Fi, GPS, Bluetooth, and NFC.
 **/
 export class Radios extends SpeakeasyBase {
-  @Metadata({ data: "json, name=bluetooth" })
+  @SpeakeasyMetadata({ data: "json, name=bluetooth" })
   bluetooth?: boolean;
 
-  @Metadata({ data: "json, name=gps" })
+  @SpeakeasyMetadata({ data: "json, name=gps" })
   gps?: boolean;
 
-  @Metadata({ data: "json, name=nfc" })
+  @SpeakeasyMetadata({ data: "json, name=nfc" })
   nfc?: boolean;
 
-  @Metadata({ data: "json, name=wifi" })
+  @SpeakeasyMetadata({ data: "json, name=wifi" })
   wifi?: boolean;
 }

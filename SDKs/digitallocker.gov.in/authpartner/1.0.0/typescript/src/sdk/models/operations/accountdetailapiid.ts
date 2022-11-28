@@ -1,50 +1,51 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class AccountDetailApiIdSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=bearer" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" })
   bearerAuth: shared.SchemeBearerAuth;
 }
 
 
-export class AccountDetailApiIdRequest extends SpeakeasyBase {
-  @Metadata()
-  security: AccountDetailApiIdSecurity;
-}
-
-
 export class AccountDetailApiId401ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=error" })
+  @SpeakeasyMetadata({ data: "json, name=error" })
   error?: string;
 
-  @Metadata({ data: "json, name=error_description" })
+  @SpeakeasyMetadata({ data: "json, name=error_description" })
   errorDescription?: string;
 }
 
 
 export class AccountDetailApiId500ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=error" })
+  @SpeakeasyMetadata({ data: "json, name=error" })
   error?: string;
 
-  @Metadata({ data: "json, name=error_description" })
+  @SpeakeasyMetadata({ data: "json, name=error_description" })
   errorDescription?: string;
 }
 
 
+export class AccountDetailApiIdRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  security: AccountDetailApiIdSecurity;
+}
+
+
 export class AccountDetailApiIdResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   accountDetailApiId401ApplicationJsonObject?: AccountDetailApiId401ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   accountDetailApiId500ApplicationJsonObject?: AccountDetailApiId500ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   sample?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

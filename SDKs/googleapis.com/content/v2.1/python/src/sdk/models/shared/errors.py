@@ -1,13 +1,18 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import error
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class Errors:
-    code: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'code' }})
-    errors: Optional[List[error.Error]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'errors' }})
-    message: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'message' }})
+    r"""Errors
+    A list of errors returned by a failed batch entry.
+    """
+    
+    code: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('code') }})
+    errors: Optional[List[Error]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('errors') }})
+    message: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('message') }})
     

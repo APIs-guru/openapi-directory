@@ -1,14 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PubsubSnapshotMetadata } from "./pubsubsnapshotmetadata";
 
+
 export enum SnapshotStateEnum {
-    UnknownSnapshotState = "UNKNOWN_SNAPSHOT_STATE"
-,    Pending = "PENDING"
-,    Running = "RUNNING"
-,    Ready = "READY"
-,    Failed = "FAILED"
-,    Deleted = "DELETED"
+    UnknownSnapshotState = "UNKNOWN_SNAPSHOT_STATE",
+    Pending = "PENDING",
+    Running = "RUNNING",
+    Ready = "READY",
+    Failed = "FAILED",
+    Deleted = "DELETED"
 }
 
 
@@ -17,33 +17,33 @@ export enum SnapshotStateEnum {
  * Represents a snapshot of a job.
 **/
 export class Snapshot extends SpeakeasyBase {
-  @Metadata({ data: "json, name=creationTime" })
+  @SpeakeasyMetadata({ data: "json, name=creationTime" })
   creationTime?: string;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=diskSizeBytes" })
+  @SpeakeasyMetadata({ data: "json, name=diskSizeBytes" })
   diskSizeBytes?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=projectId" })
+  @SpeakeasyMetadata({ data: "json, name=projectId" })
   projectId?: string;
 
-  @Metadata({ data: "json, name=pubsubMetadata", elemType: shared.PubsubSnapshotMetadata })
+  @SpeakeasyMetadata({ data: "json, name=pubsubMetadata", elemType: PubsubSnapshotMetadata })
   pubsubMetadata?: PubsubSnapshotMetadata[];
 
-  @Metadata({ data: "json, name=region" })
+  @SpeakeasyMetadata({ data: "json, name=region" })
   region?: string;
 
-  @Metadata({ data: "json, name=sourceJobId" })
+  @SpeakeasyMetadata({ data: "json, name=sourceJobId" })
   sourceJobId?: string;
 
-  @Metadata({ data: "json, name=state" })
+  @SpeakeasyMetadata({ data: "json, name=state" })
   state?: SnapshotStateEnum;
 
-  @Metadata({ data: "json, name=ttl" })
+  @SpeakeasyMetadata({ data: "json, name=ttl" })
   ttl?: string;
 }

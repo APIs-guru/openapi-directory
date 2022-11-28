@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 class IntegrationsCallbackGenerateTokenProductEnum(str, Enum):
@@ -31,19 +32,19 @@ class IntegrationsCallbackGenerateTokenQueryParams:
 
 @dataclass
 class IntegrationsCallbackGenerateTokenSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class IntegrationsCallbackGenerateTokenRequest:
-    query_params: IntegrationsCallbackGenerateTokenQueryParams = field(default=None)
-    security: IntegrationsCallbackGenerateTokenSecurity = field(default=None)
+    query_params: IntegrationsCallbackGenerateTokenQueryParams = field()
+    security: IntegrationsCallbackGenerateTokenSecurity = field()
     
 
 @dataclass
 class IntegrationsCallbackGenerateTokenResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_cloud_integrations_v1alpha_generate_token_response: Optional[shared.GoogleCloudIntegrationsV1alphaGenerateTokenResponse] = field(default=None)
-    status_code: int = field(default=None)
     

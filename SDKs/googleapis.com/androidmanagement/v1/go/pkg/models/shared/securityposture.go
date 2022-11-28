@@ -9,6 +9,8 @@ const (
 	SecurityPostureDevicePostureEnumPotentiallyCompromised SecurityPostureDevicePostureEnum = "POTENTIALLY_COMPROMISED"
 )
 
+// SecurityPosture
+// The security posture of the device, as determined by the current device state and the policies applied.
 type SecurityPosture struct {
 	DevicePosture  *SecurityPostureDevicePostureEnum `json:"devicePosture,omitempty"`
 	PostureDetails []PostureDetail                   `json:"postureDetails,omitempty"`

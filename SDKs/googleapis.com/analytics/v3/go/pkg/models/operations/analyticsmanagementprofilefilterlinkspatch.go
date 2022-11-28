@@ -29,7 +29,7 @@ type AnalyticsManagementProfileFilterLinksPatchSecurity struct {
 type AnalyticsManagementProfileFilterLinksPatchRequest struct {
 	PathParams  AnalyticsManagementProfileFilterLinksPatchPathParams
 	QueryParams AnalyticsManagementProfileFilterLinksPatchQueryParams
-	Request     *shared.ProfileFilterLink `request:"mediaType=application/json"`
+	Request     *shared.ProfileFilterLinkInput `request:"mediaType=application/json"`
 	Security    AnalyticsManagementProfileFilterLinksPatchSecurity
 }
 

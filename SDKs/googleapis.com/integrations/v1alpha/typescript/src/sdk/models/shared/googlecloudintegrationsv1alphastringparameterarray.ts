@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudIntegrationsV1alphaStringParameterArray
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * This message only contains a field of string array.
 **/
 export class GoogleCloudIntegrationsV1alphaStringParameterArray extends SpeakeasyBase {
-  @Metadata({ data: "json, name=stringValues" })
+  @SpeakeasyMetadata({ data: "json, name=stringValues" })
   stringValues?: string[];
 }

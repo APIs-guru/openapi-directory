@@ -1,116 +1,115 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { UserCompact } from "./usercompact";
 import { EnumOption } from "./enumoption";
-import { EnumOption } from "./enumoption";
+
 
 export enum CustomFieldResponseCustomLabelPositionEnum {
-    Prefix = "prefix"
-,    Suffix = "suffix"
+    Prefix = "prefix",
+    Suffix = "suffix"
 }
 
 
 export class CustomFieldResponseEnumValue extends SpeakeasyBase {
-  @Metadata({ data: "json, name=color" })
+  @SpeakeasyMetadata({ data: "json, name=color" })
   color?: string;
 
-  @Metadata({ data: "json, name=enabled" })
+  @SpeakeasyMetadata({ data: "json, name=enabled" })
   enabled?: boolean;
 
-  @Metadata({ data: "json, name=gid" })
+  @SpeakeasyMetadata({ data: "json, name=gid" })
   gid?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=resource_type" })
+  @SpeakeasyMetadata({ data: "json, name=resource_type" })
   resourceType?: string;
 }
 
 export enum CustomFieldResponseFormatEnum {
-    Currency = "currency"
-,    Identifier = "identifier"
-,    Percentage = "percentage"
-,    Custom = "custom"
-,    None = "none"
+    Currency = "currency",
+    Identifier = "identifier",
+    Percentage = "percentage",
+    Custom = "custom",
+    None = "none"
 }
 
 export enum CustomFieldResponseResourceSubtypeEnum {
-    Text = "text"
-,    Enum = "enum"
-,    MultiEnum = "multi_enum"
-,    Number = "number"
+    Text = "text",
+    Enum = "enum",
+    MultiEnum = "multi_enum",
+    Number = "number"
 }
 
 export enum CustomFieldResponseTypeEnum {
-    Text = "text"
-,    Enum = "enum"
-,    MultiEnum = "multi_enum"
-,    Number = "number"
+    Text = "text",
+    Enum = "enum",
+    MultiEnum = "multi_enum",
+    Number = "number"
 }
 
 
 export class CustomFieldResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=created_by" })
+  @SpeakeasyMetadata({ data: "json, name=created_by" })
   createdBy?: UserCompact;
 
-  @Metadata({ data: "json, name=currency_code" })
+  @SpeakeasyMetadata({ data: "json, name=currency_code" })
   currencyCode?: string;
 
-  @Metadata({ data: "json, name=custom_label" })
+  @SpeakeasyMetadata({ data: "json, name=custom_label" })
   customLabel?: string;
 
-  @Metadata({ data: "json, name=custom_label_position" })
+  @SpeakeasyMetadata({ data: "json, name=custom_label_position" })
   customLabelPosition?: CustomFieldResponseCustomLabelPositionEnum;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=display_value" })
+  @SpeakeasyMetadata({ data: "json, name=display_value" })
   displayValue?: string;
 
-  @Metadata({ data: "json, name=enabled" })
+  @SpeakeasyMetadata({ data: "json, name=enabled" })
   enabled?: boolean;
 
-  @Metadata({ data: "json, name=enum_options", elemType: shared.EnumOption })
+  @SpeakeasyMetadata({ data: "json, name=enum_options", elemType: EnumOption })
   enumOptions?: EnumOption[];
 
-  @Metadata({ data: "json, name=enum_value" })
+  @SpeakeasyMetadata({ data: "json, name=enum_value" })
   enumValue?: CustomFieldResponseEnumValue;
 
-  @Metadata({ data: "json, name=format" })
+  @SpeakeasyMetadata({ data: "json, name=format" })
   format?: CustomFieldResponseFormatEnum;
 
-  @Metadata({ data: "json, name=gid" })
+  @SpeakeasyMetadata({ data: "json, name=gid" })
   gid?: string;
 
-  @Metadata({ data: "json, name=has_notifications_enabled" })
+  @SpeakeasyMetadata({ data: "json, name=has_notifications_enabled" })
   hasNotificationsEnabled?: boolean;
 
-  @Metadata({ data: "json, name=is_global_to_workspace" })
+  @SpeakeasyMetadata({ data: "json, name=is_global_to_workspace" })
   isGlobalToWorkspace?: boolean;
 
-  @Metadata({ data: "json, name=multi_enum_values", elemType: shared.EnumOption })
+  @SpeakeasyMetadata({ data: "json, name=multi_enum_values", elemType: EnumOption })
   multiEnumValues?: EnumOption[];
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=number_value" })
+  @SpeakeasyMetadata({ data: "json, name=number_value" })
   numberValue?: number;
 
-  @Metadata({ data: "json, name=precision" })
+  @SpeakeasyMetadata({ data: "json, name=precision" })
   precision?: number;
 
-  @Metadata({ data: "json, name=resource_subtype" })
+  @SpeakeasyMetadata({ data: "json, name=resource_subtype" })
   resourceSubtype?: CustomFieldResponseResourceSubtypeEnum;
 
-  @Metadata({ data: "json, name=resource_type" })
+  @SpeakeasyMetadata({ data: "json, name=resource_type" })
   resourceType?: string;
 
-  @Metadata({ data: "json, name=text_value" })
+  @SpeakeasyMetadata({ data: "json, name=text_value" })
   textValue?: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: CustomFieldResponseTypeEnum;
 }

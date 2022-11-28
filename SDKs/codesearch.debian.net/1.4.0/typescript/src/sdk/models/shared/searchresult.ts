@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // SearchResult
@@ -6,21 +7,21 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A search result matching the specified query. You can use sources.debian.org to view the file contents. See https://github.com/Debian/dcs/blob/master/cmd/dcs-web/show/show.go for how to construct a sources.debian.org URL from a search result.
 **/
 export class SearchResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=context" })
+  @SpeakeasyMetadata({ data: "json, name=context" })
   context: string;
 
-  @Metadata({ data: "json, name=context_after" })
+  @SpeakeasyMetadata({ data: "json, name=context_after" })
   contextAfter?: string[];
 
-  @Metadata({ data: "json, name=context_before" })
+  @SpeakeasyMetadata({ data: "json, name=context_before" })
   contextBefore?: string[];
 
-  @Metadata({ data: "json, name=line" })
+  @SpeakeasyMetadata({ data: "json, name=line" })
   line: number;
 
-  @Metadata({ data: "json, name=package" })
+  @SpeakeasyMetadata({ data: "json, name=package" })
   package: string;
 
-  @Metadata({ data: "json, name=path" })
+  @SpeakeasyMetadata({ data: "json, name=path" })
   path: string;
 }

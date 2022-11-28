@@ -12,12 +12,12 @@ class AuthenticateUserByNameRequests:
 
 @dataclass
 class AuthenticateUserByNameRequest:
-    request: AuthenticateUserByNameRequests = field(default=None)
+    request: AuthenticateUserByNameRequests = field()
     
 
 @dataclass
 class AuthenticateUserByNameResponse:
+    content_type: str = field()
+    status_code: int = field()
     authentication_result: Optional[shared.AuthenticationResult] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

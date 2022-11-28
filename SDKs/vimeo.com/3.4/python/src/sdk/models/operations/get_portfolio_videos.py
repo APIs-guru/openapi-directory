@@ -1,12 +1,16 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class GetPortfolioVideosPathParams:
-    portfolio_id: float = field(default=None, metadata={'path_param': { 'field_name': 'portfolio_id', 'style': 'simple', 'explode': False }})
-    user_id: float = field(default=None, metadata={'path_param': { 'field_name': 'user_id', 'style': 'simple', 'explode': False }})
+    portfolio_id: float = field(metadata={'path_param': { 'field_name': 'portfolio_id', 'style': 'simple', 'explode': False }})
+    user_id: float = field(metadata={'path_param': { 'field_name': 'user_id', 'style': 'simple', 'explode': False }})
     
 class GetPortfolioVideosFilterEnum(str, Enum):
     EMBEDDABLE = "embeddable"
@@ -33,13 +37,13 @@ class GetPortfolioVideosQueryParams:
 
 @dataclass
 class GetPortfolioVideosRequest:
-    path_params: GetPortfolioVideosPathParams = field(default=None)
-    query_params: GetPortfolioVideosQueryParams = field(default=None)
+    path_params: GetPortfolioVideosPathParams = field()
+    query_params: GetPortfolioVideosQueryParams = field()
     
 
 @dataclass
 class GetPortfolioVideosResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     videos: Optional[List[shared.Video]] = field(default=None)
     

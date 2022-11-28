@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var PancrRequestBodyCertificateParameters = /** @class */ (function (_super) {
     __extends(PancrRequestBodyCertificateParameters, _super);
@@ -30,27 +30,27 @@ var PancrRequestBodyCertificateParameters = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=DOB" }),
+        SpeakeasyMetadata({ data: "json, name=DOB" }),
         __metadata("design:type", String)
     ], PancrRequestBodyCertificateParameters.prototype, "dob", void 0);
     __decorate([
-        Metadata({ data: "json, name=FullName" }),
+        SpeakeasyMetadata({ data: "json, name=FullName" }),
         __metadata("design:type", String)
     ], PancrRequestBodyCertificateParameters.prototype, "fullName", void 0);
     __decorate([
-        Metadata({ data: "json, name=GENDER" }),
+        SpeakeasyMetadata({ data: "json, name=GENDER" }),
         __metadata("design:type", String)
     ], PancrRequestBodyCertificateParameters.prototype, "gender", void 0);
     __decorate([
-        Metadata({ data: "json, name=PANFullName" }),
+        SpeakeasyMetadata({ data: "json, name=PANFullName" }),
         __metadata("design:type", String)
     ], PancrRequestBodyCertificateParameters.prototype, "panFullName", void 0);
     __decorate([
-        Metadata({ data: "json, name=UID" }),
+        SpeakeasyMetadata({ data: "json, name=UID" }),
         __metadata("design:type", String)
     ], PancrRequestBodyCertificateParameters.prototype, "uid", void 0);
     __decorate([
-        Metadata({ data: "json, name=panno" }),
+        SpeakeasyMetadata({ data: "json, name=panno" }),
         __metadata("design:type", String)
     ], PancrRequestBodyCertificateParameters.prototype, "panno", void 0);
     return PancrRequestBodyCertificateParameters;
@@ -67,19 +67,19 @@ var PancrRequestBody = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=certificateParameters" }),
+        SpeakeasyMetadata({ data: "json, name=certificateParameters" }),
         __metadata("design:type", PancrRequestBodyCertificateParameters)
     ], PancrRequestBody.prototype, "certificateParameters", void 0);
     __decorate([
-        Metadata({ data: "json, name=consentArtifact" }),
+        SpeakeasyMetadata({ data: "json, name=consentArtifact" }),
         __metadata("design:type", Object)
     ], PancrRequestBody.prototype, "consentArtifact", void 0);
     __decorate([
-        Metadata({ data: "json, name=format" }),
+        SpeakeasyMetadata({ data: "json, name=format" }),
         __metadata("design:type", String)
     ], PancrRequestBody.prototype, "format", void 0);
     __decorate([
-        Metadata({ data: "json, name=txnId" }),
+        SpeakeasyMetadata({ data: "json, name=txnId" }),
         __metadata("design:type", String)
     ], PancrRequestBody.prototype, "txnId", void 0);
     return PancrRequestBody;
@@ -91,32 +91,16 @@ var PancrSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeApiKey)
     ], PancrSecurity.prototype, "apiKey", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeClientId)
     ], PancrSecurity.prototype, "clientId", void 0);
     return PancrSecurity;
 }(SpeakeasyBase));
 export { PancrSecurity };
-var PancrRequest = /** @class */ (function (_super) {
-    __extends(PancrRequest, _super);
-    function PancrRequest() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
-        __metadata("design:type", PancrRequestBody)
-    ], PancrRequest.prototype, "request", void 0);
-    __decorate([
-        Metadata(),
-        __metadata("design:type", PancrSecurity)
-    ], PancrRequest.prototype, "security", void 0);
-    return PancrRequest;
-}(SpeakeasyBase));
-export { PancrRequest };
 export var Pancr400ApplicationJsonErrorEnum;
 (function (Pancr400ApplicationJsonErrorEnum) {
     Pancr400ApplicationJsonErrorEnum["MissingParameter"] = "missing_parameter";
@@ -139,11 +123,11 @@ var Pancr400ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Pancr400ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Pancr400ApplicationJson.prototype, "errorDescription", void 0);
     return Pancr400ApplicationJson;
@@ -165,11 +149,11 @@ var Pancr401ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Pancr401ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Pancr401ApplicationJson.prototype, "errorDescription", void 0);
     return Pancr401ApplicationJson;
@@ -191,11 +175,11 @@ var Pancr404ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Pancr404ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Pancr404ApplicationJson.prototype, "errorDescription", void 0);
     return Pancr404ApplicationJson;
@@ -215,11 +199,11 @@ var Pancr500ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Pancr500ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Pancr500ApplicationJson.prototype, "errorDescription", void 0);
     return Pancr500ApplicationJson;
@@ -239,11 +223,11 @@ var Pancr502ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Pancr502ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Pancr502ApplicationJson.prototype, "errorDescription", void 0);
     return Pancr502ApplicationJson;
@@ -263,11 +247,11 @@ var Pancr503ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Pancr503ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Pancr503ApplicationJson.prototype, "errorDescription", void 0);
     return Pancr503ApplicationJson;
@@ -287,59 +271,75 @@ var Pancr504ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Pancr504ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Pancr504ApplicationJson.prototype, "errorDescription", void 0);
     return Pancr504ApplicationJson;
 }(SpeakeasyBase));
 export { Pancr504ApplicationJson };
+var PancrRequest = /** @class */ (function (_super) {
+    __extends(PancrRequest, _super);
+    function PancrRequest() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
+        __metadata("design:type", PancrRequestBody)
+    ], PancrRequest.prototype, "request", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", PancrSecurity)
+    ], PancrRequest.prototype, "security", void 0);
+    return PancrRequest;
+}(SpeakeasyBase));
+export { PancrRequest };
 var PancrResponse = /** @class */ (function (_super) {
     __extends(PancrResponse, _super);
     function PancrResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], PancrResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], PancrResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], PancrResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Pancr400ApplicationJson)
     ], PancrResponse.prototype, "pancr400ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Pancr401ApplicationJson)
     ], PancrResponse.prototype, "pancr401ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Pancr404ApplicationJson)
     ], PancrResponse.prototype, "pancr404ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Pancr500ApplicationJson)
     ], PancrResponse.prototype, "pancr500ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Pancr502ApplicationJson)
     ], PancrResponse.prototype, "pancr502ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Pancr503ApplicationJson)
     ], PancrResponse.prototype, "pancr503ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Pancr504ApplicationJson)
     ], PancrResponse.prototype, "pancr504ApplicationJsonObject", void 0);
     return PancrResponse;

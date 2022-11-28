@@ -1,10 +1,13 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class CreateSigningBasketHeaders:
+    psu_ip_address: str = field(metadata={'header': { 'field_name': 'PSU-IP-Address', 'style': 'simple', 'explode': False }})
+    x_request_id: str = field(metadata={'header': { 'field_name': 'X-Request-ID', 'style': 'simple', 'explode': False }})
     consent_id: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'Consent-ID', 'style': 'simple', 'explode': False }})
     digest: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'Digest', 'style': 'simple', 'explode': False }})
     psu_accept: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'PSU-Accept', 'style': 'simple', 'explode': False }})
@@ -18,7 +21,6 @@ class CreateSigningBasketHeaders:
     psu_http_method: Optional[shared.PsuHTTPMethodEnum] = field(default=None, metadata={'header': { 'field_name': 'PSU-Http-Method', 'style': 'simple', 'explode': False }})
     psu_id: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'PSU-ID', 'style': 'simple', 'explode': False }})
     psu_id_type: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'PSU-ID-Type', 'style': 'simple', 'explode': False }})
-    psu_ip_address: str = field(default=None, metadata={'header': { 'field_name': 'PSU-IP-Address', 'style': 'simple', 'explode': False }})
     psu_ip_port: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'PSU-IP-Port', 'style': 'simple', 'explode': False }})
     psu_user_agent: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'PSU-User-Agent', 'style': 'simple', 'explode': False }})
     signature: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'Signature', 'style': 'simple', 'explode': False }})
@@ -29,7 +31,6 @@ class CreateSigningBasketHeaders:
     tpp_redirect_preferred: Optional[bool] = field(default=None, metadata={'header': { 'field_name': 'TPP-Redirect-Preferred', 'style': 'simple', 'explode': False }})
     tpp_redirect_uri: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'TPP-Redirect-URI', 'style': 'simple', 'explode': False }})
     tpp_signature_certificate: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'TPP-Signature-Certificate', 'style': 'simple', 'explode': False }})
-    x_request_id: str = field(default=None, metadata={'header': { 'field_name': 'X-Request-ID', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -39,14 +40,16 @@ class CreateSigningBasketSecurity:
 
 @dataclass
 class CreateSigningBasketRequest:
-    headers: CreateSigningBasketHeaders = field(default=None)
+    headers: CreateSigningBasketHeaders = field()
+    security: CreateSigningBasketSecurity = field()
     request: Optional[shared.SigningBasket] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: CreateSigningBasketSecurity = field(default=None)
     
 
 @dataclass
 class CreateSigningBasketResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    headers: dict[str, List[str]] = field()
+    status_code: int = field()
     error400_ng_sbs: Optional[shared.Error400NgSbs] = field(default=None)
     error400_sbs: Optional[shared.Error400Sbs] = field(default=None)
     error401_ng_sbs: Optional[shared.Error401NgSbs] = field(default=None)
@@ -59,7 +62,5 @@ class CreateSigningBasketResponse:
     error405_sbs: Optional[shared.Error405Sbs] = field(default=None)
     error409_ng_sbs: Optional[shared.Error409NgSbs] = field(default=None)
     error409_sbs: Optional[shared.Error409Sbs] = field(default=None)
-    headers: dict[str, List[str]] = field(default=None)
-    status_code: int = field(default=None)
     signing_basket_response_201: Optional[shared.SigningBasketResponse201] = field(default=None)
     

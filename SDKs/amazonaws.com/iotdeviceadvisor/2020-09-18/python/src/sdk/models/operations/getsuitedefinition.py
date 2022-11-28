@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class GetSuiteDefinitionPathParams:
-    suite_definition_id: str = field(default=None, metadata={'path_param': { 'field_name': 'suiteDefinitionId', 'style': 'simple', 'explode': False }})
+    suite_definition_id: str = field(metadata={'path_param': { 'field_name': 'suiteDefinitionId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,17 +29,17 @@ class GetSuiteDefinitionHeaders:
 
 @dataclass
 class GetSuiteDefinitionRequest:
-    path_params: GetSuiteDefinitionPathParams = field(default=None)
-    query_params: GetSuiteDefinitionQueryParams = field(default=None)
-    headers: GetSuiteDefinitionHeaders = field(default=None)
+    headers: GetSuiteDefinitionHeaders = field()
+    path_params: GetSuiteDefinitionPathParams = field()
+    query_params: GetSuiteDefinitionQueryParams = field()
     
 
 @dataclass
 class GetSuiteDefinitionResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     get_suite_definition_response: Optional[shared.GetSuiteDefinitionResponse] = field(default=None)
     internal_server_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     validation_exception: Optional[Any] = field(default=None)
     

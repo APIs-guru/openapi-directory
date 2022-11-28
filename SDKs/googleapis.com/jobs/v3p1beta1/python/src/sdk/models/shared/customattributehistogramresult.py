@@ -1,13 +1,18 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import numericbucketingresult
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class CustomAttributeHistogramResult:
-    key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
-    long_value_histogram_result: Optional[numericbucketingresult.NumericBucketingResult] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'longValueHistogramResult' }})
-    string_value_histogram_result: Optional[dict[str, int]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'stringValueHistogramResult' }})
+    r"""CustomAttributeHistogramResult
+    Output only. Custom attribute histogram result.
+    """
+    
+    key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('key') }})
+    long_value_histogram_result: Optional[NumericBucketingResult] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('longValueHistogramResult') }})
+    string_value_histogram_result: Optional[dict[str, int]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('stringValueHistogramResult') }})
     

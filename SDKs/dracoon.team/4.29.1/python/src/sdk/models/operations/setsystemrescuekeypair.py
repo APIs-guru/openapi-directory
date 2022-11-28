@@ -10,13 +10,13 @@ class SetSystemRescueKeyPairHeaders:
 
 @dataclass
 class SetSystemRescueKeyPairRequest:
-    headers: SetSystemRescueKeyPairHeaders = field(default=None)
-    request: shared.UserKeyPairContainer = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: SetSystemRescueKeyPairHeaders = field()
+    request: shared.UserKeyPairContainer = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class SetSystemRescueKeyPairResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error_response: Optional[shared.ErrorResponse] = field(default=None)
-    status_code: int = field(default=None)
     

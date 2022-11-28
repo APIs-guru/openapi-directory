@@ -1,7 +1,8 @@
 
 
+
 export enum CommitteeIncludeEnum {
-    Memberships = "memberships"
-,    Links = "links"
-,    Sources = "sources"
+    Memberships = "memberships",
+    Links = "links",
+    Sources = "sources"
 }

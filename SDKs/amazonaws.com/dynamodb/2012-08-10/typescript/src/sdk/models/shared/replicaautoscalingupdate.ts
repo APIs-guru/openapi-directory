@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ReplicaGlobalSecondaryIndexAutoScalingUpdate } from "./replicaglobalsecondaryindexautoscalingupdate";
 import { AutoScalingSettingsUpdate } from "./autoscalingsettingsupdate";
+
 
 
 // ReplicaAutoScalingUpdate
@@ -9,12 +9,12 @@ import { AutoScalingSettingsUpdate } from "./autoscalingsettingsupdate";
  * Represents the auto scaling settings of a replica that will be modified.
 **/
 export class ReplicaAutoScalingUpdate extends SpeakeasyBase {
-  @Metadata({ data: "json, name=RegionName" })
+  @SpeakeasyMetadata({ data: "json, name=RegionName" })
   regionName: string;
 
-  @Metadata({ data: "json, name=ReplicaGlobalSecondaryIndexUpdates", elemType: shared.ReplicaGlobalSecondaryIndexAutoScalingUpdate })
+  @SpeakeasyMetadata({ data: "json, name=ReplicaGlobalSecondaryIndexUpdates", elemType: ReplicaGlobalSecondaryIndexAutoScalingUpdate })
   replicaGlobalSecondaryIndexUpdates?: ReplicaGlobalSecondaryIndexAutoScalingUpdate[];
 
-  @Metadata({ data: "json, name=ReplicaProvisionedReadCapacityAutoScalingUpdate" })
+  @SpeakeasyMetadata({ data: "json, name=ReplicaProvisionedReadCapacityAutoScalingUpdate" })
   replicaProvisionedReadCapacityAutoScalingUpdate?: AutoScalingSettingsUpdate;
 }

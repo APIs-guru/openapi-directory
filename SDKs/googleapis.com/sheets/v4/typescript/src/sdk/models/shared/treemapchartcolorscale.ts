@@ -1,12 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Color } from "./color";
 import { ColorStyle } from "./colorstyle";
-import { Color } from "./color";
-import { ColorStyle } from "./colorstyle";
-import { Color } from "./color";
-import { ColorStyle } from "./colorstyle";
-import { Color } from "./color";
-import { ColorStyle } from "./colorstyle";
+
 
 
 // TreemapChartColorScale
@@ -14,27 +9,27 @@ import { ColorStyle } from "./colorstyle";
  * A color scale for a treemap chart.
 **/
 export class TreemapChartColorScale extends SpeakeasyBase {
-  @Metadata({ data: "json, name=maxValueColor" })
+  @SpeakeasyMetadata({ data: "json, name=maxValueColor" })
   maxValueColor?: Color;
 
-  @Metadata({ data: "json, name=maxValueColorStyle" })
+  @SpeakeasyMetadata({ data: "json, name=maxValueColorStyle" })
   maxValueColorStyle?: ColorStyle;
 
-  @Metadata({ data: "json, name=midValueColor" })
+  @SpeakeasyMetadata({ data: "json, name=midValueColor" })
   midValueColor?: Color;
 
-  @Metadata({ data: "json, name=midValueColorStyle" })
+  @SpeakeasyMetadata({ data: "json, name=midValueColorStyle" })
   midValueColorStyle?: ColorStyle;
 
-  @Metadata({ data: "json, name=minValueColor" })
+  @SpeakeasyMetadata({ data: "json, name=minValueColor" })
   minValueColor?: Color;
 
-  @Metadata({ data: "json, name=minValueColorStyle" })
+  @SpeakeasyMetadata({ data: "json, name=minValueColorStyle" })
   minValueColorStyle?: ColorStyle;
 
-  @Metadata({ data: "json, name=noDataColor" })
+  @SpeakeasyMetadata({ data: "json, name=noDataColor" })
   noDataColor?: Color;
 
-  @Metadata({ data: "json, name=noDataColorStyle" })
+  @SpeakeasyMetadata({ data: "json, name=noDataColorStyle" })
   noDataColorStyle?: ColorStyle;
 }

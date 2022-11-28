@@ -1,11 +1,7 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class VerifyOtpIdSecurity extends SpeakeasyBase {
     oauthsecurity: shared.SchemeOauthsecurity;
-}
-export declare class VerifyOtpIdRequest extends SpeakeasyBase {
-    request?: any;
-    security: VerifyOtpIdSecurity;
 }
 export declare class VerifyOtpId401ApplicationJson extends SpeakeasyBase {
     error?: string;
@@ -14,6 +10,10 @@ export declare class VerifyOtpId401ApplicationJson extends SpeakeasyBase {
 export declare class VerifyOtpId500ApplicationJson extends SpeakeasyBase {
     error?: any;
     errorDescription?: any;
+}
+export declare class VerifyOtpIdRequest extends SpeakeasyBase {
+    request?: any;
+    security: VerifyOtpIdSecurity;
 }
 export declare class VerifyOtpIdResponse extends SpeakeasyBase {
     contentType: string;

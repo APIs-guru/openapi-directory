@@ -1,17 +1,18 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AccountTypeEnum } from "./accounttypeenum";
 
 
+
 export class Account extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AccountID" })
+  @SpeakeasyMetadata({ data: "json, name=AccountID" })
   accountId?: string;
 
-  @Metadata({ data: "json, name=Code" })
+  @SpeakeasyMetadata({ data: "json, name=Code" })
   code?: string;
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name?: string;
 
-  @Metadata({ data: "json, name=Type" })
+  @SpeakeasyMetadata({ data: "json, name=Type" })
   type?: AccountTypeEnum;
 }

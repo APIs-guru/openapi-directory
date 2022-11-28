@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ConnectionErrorCodeTypeEnum } from "./connectionerrorcodetypeenum";
 import { ConnectionStateTypeEnum } from "./connectionstatetypeenum";
+
 
 
 // CustomKeyStoresListEntry
@@ -8,24 +9,24 @@ import { ConnectionStateTypeEnum } from "./connectionstatetypeenum";
  * Contains information about each custom key store in the custom key store list.
 **/
 export class CustomKeyStoresListEntry extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CloudHsmClusterId" })
+  @SpeakeasyMetadata({ data: "json, name=CloudHsmClusterId" })
   cloudHsmClusterId?: string;
 
-  @Metadata({ data: "json, name=ConnectionErrorCode" })
+  @SpeakeasyMetadata({ data: "json, name=ConnectionErrorCode" })
   connectionErrorCode?: ConnectionErrorCodeTypeEnum;
 
-  @Metadata({ data: "json, name=ConnectionState" })
+  @SpeakeasyMetadata({ data: "json, name=ConnectionState" })
   connectionState?: ConnectionStateTypeEnum;
 
-  @Metadata({ data: "json, name=CreationDate" })
+  @SpeakeasyMetadata({ data: "json, name=CreationDate" })
   creationDate?: Date;
 
-  @Metadata({ data: "json, name=CustomKeyStoreId" })
+  @SpeakeasyMetadata({ data: "json, name=CustomKeyStoreId" })
   customKeyStoreId?: string;
 
-  @Metadata({ data: "json, name=CustomKeyStoreName" })
+  @SpeakeasyMetadata({ data: "json, name=CustomKeyStoreName" })
   customKeyStoreName?: string;
 
-  @Metadata({ data: "json, name=TrustAnchorCertificate" })
+  @SpeakeasyMetadata({ data: "json, name=TrustAnchorCertificate" })
   trustAnchorCertificate?: string;
 }

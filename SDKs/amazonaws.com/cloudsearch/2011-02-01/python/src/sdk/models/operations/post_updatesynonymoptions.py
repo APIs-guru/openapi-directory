@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostUpdateSynonymOptionsActionEnum(str, Enum):
     UPDATE_SYNONYM_OPTIONS = "UpdateSynonymOptions"
@@ -10,8 +14,8 @@ class PostUpdateSynonymOptionsVersionEnum(str, Enum):
 
 @dataclass
 class PostUpdateSynonymOptionsQueryParams:
-    action: PostUpdateSynonymOptionsActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostUpdateSynonymOptionsVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostUpdateSynonymOptionsActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostUpdateSynonymOptionsVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostUpdateSynonymOptionsHeaders:
 
 @dataclass
 class PostUpdateSynonymOptionsRequest:
-    query_params: PostUpdateSynonymOptionsQueryParams = field(default=None)
-    headers: PostUpdateSynonymOptionsHeaders = field(default=None)
+    headers: PostUpdateSynonymOptionsHeaders = field()
+    query_params: PostUpdateSynonymOptionsQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostUpdateSynonymOptionsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

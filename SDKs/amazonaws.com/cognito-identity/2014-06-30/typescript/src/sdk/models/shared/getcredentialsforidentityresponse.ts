@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Credentials } from "./credentials";
+
 
 
 // GetCredentialsForIdentityResponse
@@ -7,9 +8,9 @@ import { Credentials } from "./credentials";
  * Returned in response to a successful <code>GetCredentialsForIdentity</code> operation.
 **/
 export class GetCredentialsForIdentityResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Credentials" })
+  @SpeakeasyMetadata({ data: "json, name=Credentials" })
   credentials?: Credentials;
 
-  @Metadata({ data: "json, name=IdentityId" })
+  @SpeakeasyMetadata({ data: "json, name=IdentityId" })
   identityId?: string;
 }

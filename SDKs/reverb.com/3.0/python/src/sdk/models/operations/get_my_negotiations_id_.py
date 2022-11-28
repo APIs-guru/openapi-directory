@@ -1,25 +1,25 @@
 from dataclasses import dataclass, field
-
+from sdk.models import shared
 
 
 @dataclass
 class GetMyNegotiationsIDPathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetMyNegotiationsIDSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class GetMyNegotiationsIDRequest:
-    path_params: GetMyNegotiationsIDPathParams = field(default=None)
-    security: GetMyNegotiationsIDSecurity = field(default=None)
+    path_params: GetMyNegotiationsIDPathParams = field()
+    security: GetMyNegotiationsIDSecurity = field()
     
 
 @dataclass
 class GetMyNegotiationsIDResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

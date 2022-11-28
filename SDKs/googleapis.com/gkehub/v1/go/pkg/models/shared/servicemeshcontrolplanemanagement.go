@@ -13,6 +13,8 @@ const (
 	ServiceMeshControlPlaneManagementStateEnumDegraded                  ServiceMeshControlPlaneManagementStateEnum = "DEGRADED"
 )
 
+// ServiceMeshControlPlaneManagement
+// Status of control plane management.
 type ServiceMeshControlPlaneManagement struct {
 	Details []ServiceMeshStatusDetails                  `json:"details,omitempty"`
 	State   *ServiceMeshControlPlaneManagementStateEnum `json:"state,omitempty"`

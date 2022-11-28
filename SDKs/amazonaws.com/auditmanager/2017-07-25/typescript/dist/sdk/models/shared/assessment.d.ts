@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { AwsAccount } from "./awsaccount";
 import { AssessmentFramework } from "./assessmentframework";
 import { AssessmentMetadata } from "./assessmentmetadata";

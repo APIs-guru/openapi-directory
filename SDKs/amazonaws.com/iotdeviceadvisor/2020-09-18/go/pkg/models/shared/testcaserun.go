@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// TestCaseRun
+// Provides test case run.
 type TestCaseRun struct {
 	EndTime                *time.Time  `json:"endTime,omitempty"`
 	Failure                *string     `json:"failure,omitempty"`

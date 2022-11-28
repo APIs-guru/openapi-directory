@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostListReceiptRuleSetsActionEnum(str, Enum):
     LIST_RECEIPT_RULE_SETS = "ListReceiptRuleSets"
@@ -10,8 +14,8 @@ class PostListReceiptRuleSetsVersionEnum(str, Enum):
 
 @dataclass
 class PostListReceiptRuleSetsQueryParams:
-    action: PostListReceiptRuleSetsActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostListReceiptRuleSetsVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostListReceiptRuleSetsActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostListReceiptRuleSetsVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostListReceiptRuleSetsHeaders:
 
 @dataclass
 class PostListReceiptRuleSetsRequest:
-    query_params: PostListReceiptRuleSetsQueryParams = field(default=None)
-    headers: PostListReceiptRuleSetsHeaders = field(default=None)
+    headers: PostListReceiptRuleSetsHeaders = field()
+    query_params: PostListReceiptRuleSetsQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostListReceiptRuleSetsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

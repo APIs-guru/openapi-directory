@@ -1,6 +1,7 @@
 
 
+
 export enum CelebrityRecognitionSortByEnum {
-    Id = "ID"
-,    Timestamp = "TIMESTAMP"
+    Id = "ID",
+    Timestamp = "TIMESTAMP"
 }

@@ -1,5 +1,7 @@
 package shared
 
+// Cvss
+// CVSS scores from the advisory related to the vulnerability.
 type Cvss struct {
 	Adjustments []Adjustment `json:"Adjustments,omitempty"`
 	BaseScore   *float64     `json:"BaseScore,omitempty"`

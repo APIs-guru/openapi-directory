@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { BillingConfig } from "./billingconfig";
 import { ServiceAccountConfig } from "./serviceaccountconfig";
 import { TenantProjectPolicy } from "./tenantprojectpolicy";

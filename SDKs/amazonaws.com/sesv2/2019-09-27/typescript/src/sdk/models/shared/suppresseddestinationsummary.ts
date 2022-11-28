@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SuppressionListReasonEnum } from "./suppressionlistreasonenum";
+
 
 
 // SuppressedDestinationSummary
@@ -7,12 +8,12 @@ import { SuppressionListReasonEnum } from "./suppressionlistreasonenum";
  * A summary that describes the suppressed email address.
 **/
 export class SuppressedDestinationSummary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=EmailAddress" })
+  @SpeakeasyMetadata({ data: "json, name=EmailAddress" })
   emailAddress: string;
 
-  @Metadata({ data: "json, name=LastUpdateTime" })
+  @SpeakeasyMetadata({ data: "json, name=LastUpdateTime" })
   lastUpdateTime: Date;
 
-  @Metadata({ data: "json, name=Reason" })
+  @SpeakeasyMetadata({ data: "json, name=Reason" })
   reason: SuppressionListReasonEnum;
 }

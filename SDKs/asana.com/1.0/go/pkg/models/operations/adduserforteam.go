@@ -17,14 +17,14 @@ type AddUserForTeamRequestBody struct {
 	Data *shared.TeamAddUserRequest `json:"data,omitempty"`
 }
 
+type AddUserForTeam200ApplicationJSON struct {
+	Data *shared.UserResponse `json:"data,omitempty"`
+}
+
 type AddUserForTeamRequest struct {
 	PathParams  AddUserForTeamPathParams
 	QueryParams AddUserForTeamQueryParams
 	Request     AddUserForTeamRequestBody `request:"mediaType=application/json"`
-}
-
-type AddUserForTeam200ApplicationJSON struct {
-	Data *shared.UserResponse `json:"data,omitempty"`
 }
 
 type AddUserForTeamResponse struct {

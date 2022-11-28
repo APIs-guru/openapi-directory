@@ -1,6 +1,7 @@
 
 
+
 export enum PipelineStatusEnum {
-    Disabled = "DISABLED"
-,    Enabled = "ENABLED"
+    Disabled = "DISABLED",
+    Enabled = "ENABLED"
 }

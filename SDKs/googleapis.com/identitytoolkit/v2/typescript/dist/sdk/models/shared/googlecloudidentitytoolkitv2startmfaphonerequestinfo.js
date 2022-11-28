@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudIdentitytoolkitV2AutoRetrievalInfo } from "./googlecloudidentitytoolkitv2autoretrievalinfo";
 // GoogleCloudIdentitytoolkitV2StartMfaPhoneRequestInfo
 /**
@@ -34,27 +34,27 @@ var GoogleCloudIdentitytoolkitV2StartMfaPhoneRequestInfo = /** @class */ (functi
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=autoRetrievalInfo" }),
+        SpeakeasyMetadata({ data: "json, name=autoRetrievalInfo" }),
         __metadata("design:type", GoogleCloudIdentitytoolkitV2AutoRetrievalInfo)
     ], GoogleCloudIdentitytoolkitV2StartMfaPhoneRequestInfo.prototype, "autoRetrievalInfo", void 0);
     __decorate([
-        Metadata({ data: "json, name=iosReceipt" }),
+        SpeakeasyMetadata({ data: "json, name=iosReceipt" }),
         __metadata("design:type", String)
     ], GoogleCloudIdentitytoolkitV2StartMfaPhoneRequestInfo.prototype, "iosReceipt", void 0);
     __decorate([
-        Metadata({ data: "json, name=iosSecret" }),
+        SpeakeasyMetadata({ data: "json, name=iosSecret" }),
         __metadata("design:type", String)
     ], GoogleCloudIdentitytoolkitV2StartMfaPhoneRequestInfo.prototype, "iosSecret", void 0);
     __decorate([
-        Metadata({ data: "json, name=phoneNumber" }),
+        SpeakeasyMetadata({ data: "json, name=phoneNumber" }),
         __metadata("design:type", String)
     ], GoogleCloudIdentitytoolkitV2StartMfaPhoneRequestInfo.prototype, "phoneNumber", void 0);
     __decorate([
-        Metadata({ data: "json, name=recaptchaToken" }),
+        SpeakeasyMetadata({ data: "json, name=recaptchaToken" }),
         __metadata("design:type", String)
     ], GoogleCloudIdentitytoolkitV2StartMfaPhoneRequestInfo.prototype, "recaptchaToken", void 0);
     __decorate([
-        Metadata({ data: "json, name=safetyNetToken" }),
+        SpeakeasyMetadata({ data: "json, name=safetyNetToken" }),
         __metadata("design:type", String)
     ], GoogleCloudIdentitytoolkitV2StartMfaPhoneRequestInfo.prototype, "safetyNetToken", void 0);
     return GoogleCloudIdentitytoolkitV2StartMfaPhoneRequestInfo;

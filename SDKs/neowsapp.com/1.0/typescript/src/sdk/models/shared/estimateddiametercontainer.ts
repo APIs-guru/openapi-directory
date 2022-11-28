@@ -1,20 +1,18 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { EstimatedDiameter } from "./estimateddiameter";
-import { EstimatedDiameter } from "./estimateddiameter";
-import { EstimatedDiameter } from "./estimateddiameter";
-import { EstimatedDiameter } from "./estimateddiameter";
+
 
 
 export class EstimatedDiameterContainer extends SpeakeasyBase {
-  @Metadata({ data: "json, name=feet" })
+  @SpeakeasyMetadata({ data: "json, name=feet" })
   feet?: EstimatedDiameter;
 
-  @Metadata({ data: "json, name=kilometers" })
+  @SpeakeasyMetadata({ data: "json, name=kilometers" })
   kilometers?: EstimatedDiameter;
 
-  @Metadata({ data: "json, name=meters" })
+  @SpeakeasyMetadata({ data: "json, name=meters" })
   meters?: EstimatedDiameter;
 
-  @Metadata({ data: "json, name=miles" })
+  @SpeakeasyMetadata({ data: "json, name=miles" })
   miles?: EstimatedDiameter;
 }

@@ -10,18 +10,18 @@ class GetDefaultTimerQueryParams:
 
 @dataclass
 class GetDefaultTimerSecurity:
-    custom_authentication: shared.SchemeCustomAuthentication = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    custom_authentication: shared.SchemeCustomAuthentication = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
     
 
 @dataclass
 class GetDefaultTimerRequest:
-    query_params: GetDefaultTimerQueryParams = field(default=None)
-    security: GetDefaultTimerSecurity = field(default=None)
+    query_params: GetDefaultTimerQueryParams = field()
+    security: GetDefaultTimerSecurity = field()
     
 
 @dataclass
 class GetDefaultTimerResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     series_timer_info_dto: Optional[shared.SeriesTimerInfoDto] = field(default=None)
-    status_code: int = field(default=None)
     

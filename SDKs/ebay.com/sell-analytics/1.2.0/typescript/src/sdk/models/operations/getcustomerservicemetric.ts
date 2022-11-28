@@ -1,47 +1,48 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetCustomerServiceMetricPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=customer_service_metric_type" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=customer_service_metric_type" })
   customerServiceMetricType: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=evaluation_type" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=evaluation_type" })
   evaluationType: string;
 }
 
 
 export class GetCustomerServiceMetricQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=evaluation_marketplace_id" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=evaluation_marketplace_id" })
   evaluationMarketplaceId: string;
 }
 
 
 export class GetCustomerServiceMetricSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   apiAuth: shared.SchemeApiAuth;
 }
 
 
 export class GetCustomerServiceMetricRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetCustomerServiceMetricPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetCustomerServiceMetricQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: GetCustomerServiceMetricSecurity;
 }
 
 
 export class GetCustomerServiceMetricResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getCustomerServiceMetricResponse?: shared.GetCustomerServiceMetricResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

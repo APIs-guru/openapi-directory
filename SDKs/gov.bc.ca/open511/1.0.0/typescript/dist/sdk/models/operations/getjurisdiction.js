@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var GetJurisdictionFormatEnum;
 (function (GetJurisdictionFormatEnum) {
     GetJurisdictionFormatEnum["Json"] = "json";
@@ -34,7 +34,7 @@ var GetJurisdictionQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=format" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=format" }),
         __metadata("design:type", String)
     ], GetJurisdictionQueryParams.prototype, "format", void 0);
     return GetJurisdictionQueryParams;
@@ -46,7 +46,7 @@ var GetJurisdictionRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetJurisdictionQueryParams)
     ], GetJurisdictionRequest.prototype, "queryParams", void 0);
     return GetJurisdictionRequest;
@@ -58,11 +58,11 @@ var GetJurisdictionResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetJurisdictionResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetJurisdictionResponse.prototype, "statusCode", void 0);
     return GetJurisdictionResponse;

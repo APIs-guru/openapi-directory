@@ -1,34 +1,35 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class AllEnvironments200ApplicationJsonEnvironments extends SpeakeasyBase {
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=owner" })
+  @SpeakeasyMetadata({ data: "json, name=owner" })
   owner?: string;
 
-  @Metadata({ data: "json, name=uid" })
+  @SpeakeasyMetadata({ data: "json, name=uid" })
   uid?: string;
 }
 
 
 export class AllEnvironments200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=environments", elemType: operations.AllEnvironments200ApplicationJsonEnvironments })
+  @SpeakeasyMetadata({ data: "json, name=environments", elemType: AllEnvironments200ApplicationJsonEnvironments })
   environments?: AllEnvironments200ApplicationJsonEnvironments[];
 }
 
 
 export class AllEnvironmentsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   allEnvironments200ApplicationJsonObject?: AllEnvironments200ApplicationJson;
 }

@@ -1,10 +1,13 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 
 
 @dataclass
 class DeletePipelinePathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'Id', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'Id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -20,19 +23,19 @@ class DeletePipelineHeaders:
 
 @dataclass
 class DeletePipelineRequest:
-    path_params: DeletePipelinePathParams = field(default=None)
-    headers: DeletePipelineHeaders = field(default=None)
+    headers: DeletePipelineHeaders = field()
+    path_params: DeletePipelinePathParams = field()
     
 
 @dataclass
 class DeletePipelineResponse:
+    content_type: str = field()
+    status_code: int = field()
     access_denied_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     delete_pipeline_response: Optional[dict[str, Any]] = field(default=None)
     incompatible_version_exception: Optional[Any] = field(default=None)
     internal_service_exception: Optional[Any] = field(default=None)
     resource_in_use_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     validation_exception: Optional[Any] = field(default=None)
     

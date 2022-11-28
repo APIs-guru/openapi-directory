@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Version } from "./version";
+
 
 
 // ListAvailableVersionsResponse
@@ -8,9 +8,9 @@ import { Version } from "./version";
  * Response message for the list available versions request.
 **/
 export class ListAvailableVersionsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=availableVersions", elemType: shared.Version })
+  @SpeakeasyMetadata({ data: "json, name=availableVersions", elemType: Version })
   availableVersions?: Version[];
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 }

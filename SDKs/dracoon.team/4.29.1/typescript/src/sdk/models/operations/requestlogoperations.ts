@@ -1,38 +1,39 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class RequestLogOperationsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=is_deprecated" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=is_deprecated" })
   isDeprecated?: boolean;
 }
 
 
 export class RequestLogOperationsHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Sds-Auth-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Sds-Auth-Token" })
   xSdsAuthToken?: string;
 }
 
 
 export class RequestLogOperationsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: RequestLogOperationsQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: RequestLogOperationsHeaders;
 }
 
 
 export class RequestLogOperationsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   errorResponse?: shared.ErrorResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   logOperationList?: shared.LogOperationList;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

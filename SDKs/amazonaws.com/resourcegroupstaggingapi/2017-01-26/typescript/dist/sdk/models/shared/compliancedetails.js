@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // ComplianceDetails
 /**
  * Information that shows whether a resource is compliant with the effective tag policy, including details on any noncompliant tag keys.
@@ -33,15 +33,15 @@ var ComplianceDetails = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=ComplianceStatus" }),
+        SpeakeasyMetadata({ data: "json, name=ComplianceStatus" }),
         __metadata("design:type", Boolean)
     ], ComplianceDetails.prototype, "complianceStatus", void 0);
     __decorate([
-        Metadata({ data: "json, name=KeysWithNoncompliantValues" }),
+        SpeakeasyMetadata({ data: "json, name=KeysWithNoncompliantValues" }),
         __metadata("design:type", Array)
     ], ComplianceDetails.prototype, "keysWithNoncompliantValues", void 0);
     __decorate([
-        Metadata({ data: "json, name=NoncompliantKeys" }),
+        SpeakeasyMetadata({ data: "json, name=NoncompliantKeys" }),
         __metadata("design:type", Array)
     ], ComplianceDetails.prototype, "noncompliantKeys", void 0);
     return ComplianceDetails;

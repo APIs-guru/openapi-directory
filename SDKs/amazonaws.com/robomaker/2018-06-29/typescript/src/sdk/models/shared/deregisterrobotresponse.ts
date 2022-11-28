@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DeregisterRobotResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=fleet" })
+  @SpeakeasyMetadata({ data: "json, name=fleet" })
   fleet?: string;
 
-  @Metadata({ data: "json, name=robot" })
+  @SpeakeasyMetadata({ data: "json, name=robot" })
   robot?: string;
 }

@@ -33,6 +33,8 @@ const (
 	AdvancedSecurityOverridesUntrustedAppsPolicyEnumAllowInstallDeviceWide            AdvancedSecurityOverridesUntrustedAppsPolicyEnum = "ALLOW_INSTALL_DEVICE_WIDE"
 )
 
+// AdvancedSecurityOverrides
+// Security policies set to secure values by default. To maintain the security posture of a device, we don't recommend overriding any of the default values.
 type AdvancedSecurityOverrides struct {
 	CommonCriteriaMode                       *AdvancedSecurityOverridesCommonCriteriaModeEnum          `json:"commonCriteriaMode,omitempty"`
 	DeveloperSettings                        *AdvancedSecurityOverridesDeveloperSettingsEnum           `json:"developerSettings,omitempty"`

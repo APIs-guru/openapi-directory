@@ -1,38 +1,39 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetReportsRouteQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=deviceId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=deviceId" })
   deviceId?: number[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=from" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=from" })
   from: Date;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=groupId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=groupId" })
   groupId?: number[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=to" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=to" })
   to: Date;
 }
 
 
 export class GetReportsRouteRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetReportsRouteQueryParams;
 }
 
 
 export class GetReportsRouteResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata({ elemType: shared.Position })
+  @SpeakeasyMetadata({ elemType: shared.Position })
   positions?: shared.Position[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

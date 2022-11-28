@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // PolicyControllerTemplateLibraryConfig
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The config specifying which default library templates to install.
 **/
 export class PolicyControllerTemplateLibraryConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=included" })
+  @SpeakeasyMetadata({ data: "json, name=included" })
   included?: boolean;
 }

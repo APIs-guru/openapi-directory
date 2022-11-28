@@ -1,31 +1,32 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DeleteMailboxPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=mailboxName" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=mailboxName" })
   mailboxName: string;
 }
 
 
 export class DeleteMailboxQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=mailbox_name" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=mailbox_name" })
   mailboxName: string;
 }
 
 
 export class DeleteMailboxRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: DeleteMailboxPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: DeleteMailboxQueryParams;
 }
 
 
 export class DeleteMailboxResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

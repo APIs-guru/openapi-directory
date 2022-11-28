@@ -1,17 +1,14 @@
-import axios, { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
-import { MatchContentType } from "../internal/utils/contenttype";
+import axios, { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse, ParamsSerializerOptions } from "axios";
+import FormData from "form-data";
 import * as operations from "./models/operations";
-import { ParamsSerializerOptions } from "axios";
-import { GetQueryParamSerializer } from "../internal/utils/queryparams";
-import { SerializeRequestBody } from "../internal/utils/requestbody";
-import FormData from 'form-data';
-import { CreateSecurityClient } from "../internal/utils/security";
-import * as utils from "../internal/utils/utils";
+import * as utils from "../internal/utils";
+
+
 
 type OptsFunc = (sdk: SDK) => void;
 
-const Servers = [
-  "https://6-dot-authentiqio.appspot.com",
+export const ServerList = [
+	"https://6-dot-authentiqio.appspot.com",
 ] as const;
 
 export function WithServerURL(
@@ -22,48 +19,48 @@ export function WithServerURL(
     if (params != null) {
       serverURL = utils.ReplaceParameters(serverURL, params);
     }
-    sdk.serverURL = serverURL;
+    sdk._serverURL = serverURL;
   };
 }
 
 export function WithClient(client: AxiosInstance): OptsFunc {
   return (sdk: SDK) => {
-    sdk.defaultClient = client;
+    sdk._defaultClient = client;
   };
 }
 
 
 export class SDK {
-  defaultClient?: AxiosInstance;
-  securityClient?: AxiosInstance;
-  security?: any;
-  serverURL: string;
+
+  public _defaultClient: AxiosInstance;
+  public _securityClient: AxiosInstance;
+  
+  public _serverURL: string;
+  private _language = "typescript";
+  private _sdkVersion = "0.0.1";
+  private _genVersion = "internal";
 
   constructor(...opts: OptsFunc[]) {
     opts.forEach((o) => o(this));
-    if (this.serverURL == "") {
-      this.serverURL = Servers[0];
+    if (this._serverURL == "") {
+      this._serverURL = ServerList[0];
     }
 
-    if (!this.defaultClient) {
-      this.defaultClient = axios.create({ baseURL: this.serverURL });
+    if (!this._defaultClient) {
+      this._defaultClient = axios.create({ baseURL: this._serverURL });
     }
 
-    if (!this.securityClient) {
-      if (this.security) {
-        this.securityClient = CreateSecurityClient(
-          this.defaultClient,
-          this.security
-        );
-      } else {
-        this.securityClient = this.defaultClient;
-      }
+    if (!this._securityClient) {
+      this._securityClient = this._defaultClient;
     }
+    
   }
   
-  // HeadKeyPk - HEAD info on Authentiq ID
-
-  HeadKeyPk(
+  /**
+   * headKeyPk - HEAD info on Authentiq ID
+   * 
+  **/
+  headKeyPk(
     req: operations.HeadKeyPkRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.HeadKeyPkResponse> {
@@ -71,33 +68,33 @@ export class SDK {
       req = new operations.HeadKeyPkRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/key/{PK}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .head(url, {
+      .request({
+        url: url,
+        method: "head",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.HeadKeyPkResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.HeadKeyPkResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
-          case 404:
-            if (MatchContentType(contentType, `*/*`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 410:
-            if (MatchContentType(contentType, `*/*`)) {
+          case httpRes?.status == 410:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
@@ -105,7 +102,7 @@ export class SDK {
             }
             break;
           default:
-            if (MatchContentType(contentType, `*/*`)) {
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
@@ -120,16 +117,18 @@ export class SDK {
   }
 
   
-  // KeyBind - Update Authentiq ID by replacing the object.
-
-v4: `JWT(sub,email,phone)` to bind email/phone hash; 
-
-v5: POST issuer-signed email & phone scopes
-and PUT to update registration `JWT(sub, pk, devtoken, ...)`
-
-See: https://github.com/skion/authentiq/wiki/JWT-Examples
-
-  KeyBind(
+  /**
+   * keyBind - Update Authentiq ID by replacing the object.
+   * 
+   * v4: `JWT(sub,email,phone)` to bind email/phone hash; 
+   * 
+   * v5: POST issuer-signed email & phone scopes
+   * and PUT to update registration `JWT(sub, pk, devtoken, ...)`
+   * 
+   * See: https://github.com/skion/authentiq/wiki/JWT-Examples
+   * 
+  **/
+  keyBind(
     req: operations.KeyBindRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.KeyBindResponse> {
@@ -137,56 +136,54 @@ See: https://github.com/skion/authentiq/wiki/JWT-Examples
       req = new operations.KeyBindRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/key/{PK}", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._defaultClient!;const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .put(url, body, {
+      .request({
+        url: url,
+        method: "put",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.KeyBindResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.KeyBindResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.keyBind200ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
-          case 409:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 409:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `*/*`)) {
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
@@ -201,13 +198,15 @@ See: https://github.com/skion/authentiq/wiki/JWT-Examples
   }
 
   
-  // KeyRegister - Register a new ID `JWT(sub, devtoken)`
-
-v5: `JWT(sub, pk, devtoken, ...)`
-
-See: https://github.com/skion/authentiq/wiki/JWT-Examples
-
-  KeyRegister(
+  /**
+   * keyRegister - Register a new ID `JWT(sub, devtoken)`
+   * 
+   * v5: `JWT(sub, pk, devtoken, ...)`
+   * 
+   * See: https://github.com/skion/authentiq/wiki/JWT-Examples
+   * 
+  **/
+  keyRegister(
     req: operations.KeyRegisterRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.KeyRegisterResponse> {
@@ -215,51 +214,49 @@ See: https://github.com/skion/authentiq/wiki/JWT-Examples
       req = new operations.KeyRegisterRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/key";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._defaultClient!;const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.KeyRegisterResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 201:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.KeyRegisterResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 201:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.keyRegister201ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 409:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 409:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `*/*`)) {
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
@@ -274,9 +271,11 @@ See: https://github.com/skion/authentiq/wiki/JWT-Examples
   }
 
   
-  // KeyRetrieve - Get public details of an Authentiq ID.
-
-  KeyRetrieve(
+  /**
+   * keyRetrieve - Get public details of an Authentiq ID.
+   * 
+  **/
+  keyRetrieve(
     req: operations.KeyRetrieveRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.KeyRetrieveResponse> {
@@ -284,38 +283,38 @@ See: https://github.com/skion/authentiq/wiki/JWT-Examples
       req = new operations.KeyRetrieveRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/key/{PK}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.KeyRetrieveResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.KeyRetrieveResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.jwt = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
-          case 410:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 410:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `*/*`)) {
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
@@ -330,8 +329,10 @@ See: https://github.com/skion/authentiq/wiki/JWT-Examples
   }
 
   
-  // KeyRevoke - Revoke an Identity (Key) with a revocation secret
-  KeyRevoke(
+  /**
+   * keyRevoke - Revoke an Identity (Key) with a revocation secret
+  **/
+  keyRevoke(
     req: operations.KeyRevokeRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.KeyRevokeResponse> {
@@ -339,12 +340,11 @@ See: https://github.com/skion/authentiq/wiki/JWT-Examples
       req = new operations.KeyRevokeRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/key/{PK}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -353,32 +353,33 @@ See: https://github.com/skion/authentiq/wiki/JWT-Examples
     };
     
     return client
-      .delete(url, {
+      .request({
+        url: url,
+        method: "delete",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.KeyRevokeResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.KeyRevokeResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.keyRevoke200ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `*/*`)) {
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
@@ -393,13 +394,15 @@ See: https://github.com/skion/authentiq/wiki/JWT-Examples
   }
 
   
-  // KeyRevokeNosecret - Revoke an Authentiq ID using email & phone.
-
-If called with `email` and `phone` only, a verification code 
-will be sent by email. Do a second call adding `code` to 
-complete the revocation.
-
-  KeyRevokeNosecret(
+  /**
+   * keyRevokeNosecret - Revoke an Authentiq ID using email & phone.
+   * 
+   * If called with `email` and `phone` only, a verification code 
+   * will be sent by email. Do a second call adding `code` to 
+   * complete the revocation.
+   * 
+  **/
+  keyRevokeNosecret(
     req: operations.KeyRevokeNosecretRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.KeyRevokeNosecretResponse> {
@@ -407,12 +410,11 @@ complete the revocation.
       req = new operations.KeyRevokeNosecretRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/key";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -421,37 +423,38 @@ complete the revocation.
     };
     
     return client
-      .delete(url, {
+      .request({
+        url: url,
+        method: "delete",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.KeyRevokeNosecretResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.KeyRevokeNosecretResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.keyRevokeNosecret200ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
-          case 409:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 409:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `*/*`)) {
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
@@ -466,15 +469,17 @@ complete the revocation.
   }
 
   
-  // KeyUpdate - update properties of an Authentiq ID.
-(not operational in v4; use PUT for now)
-
-v5: POST issuer-signed email & phone scopes in
-a self-signed JWT
-
-See: https://github.com/skion/authentiq/wiki/JWT-Examples
-
-  KeyUpdate(
+  /**
+   * keyUpdate - update properties of an Authentiq ID.
+   * (not operational in v4; use PUT for now)
+   * 
+   * v5: POST issuer-signed email & phone scopes in
+   * a self-signed JWT
+   * 
+   * See: https://github.com/skion/authentiq/wiki/JWT-Examples
+   * 
+  **/
+  keyUpdate(
     req: operations.KeyUpdateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.KeyUpdateResponse> {
@@ -482,51 +487,49 @@ See: https://github.com/skion/authentiq/wiki/JWT-Examples
       req = new operations.KeyUpdateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/key/{PK}", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._defaultClient!;const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.KeyUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.KeyUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.keyUpdate200ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `*/*`)) {
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
@@ -541,10 +544,12 @@ See: https://github.com/skion/authentiq/wiki/JWT-Examples
   }
 
   
-  // PushLoginRequest - push sign-in request
-See: https://github.com/skion/authentiq/wiki/JWT-Examples
-
-  PushLoginRequest(
+  /**
+   * pushLoginRequest - push sign-in request
+   * See: https://github.com/skion/authentiq/wiki/JWT-Examples
+   * 
+  **/
+  pushLoginRequest(
     req: operations.PushLoginRequestRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PushLoginRequestResponse> {
@@ -552,23 +557,21 @@ See: https://github.com/skion/authentiq/wiki/JWT-Examples
       req = new operations.PushLoginRequestRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/login";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...reqBodyHeaders, ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;const headers = {...reqBodyHeaders, ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -579,32 +582,32 @@ See: https://github.com/skion/authentiq/wiki/JWT-Examples
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PushLoginRequestResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.PushLoginRequestResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.pushLoginRequest200ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `*/*`)) {
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
@@ -619,8 +622,10 @@ See: https://github.com/skion/authentiq/wiki/JWT-Examples
   }
 
   
-  // SignConfirm - this is a scope confirmation
-  SignConfirm(
+  /**
+   * signConfirm - this is a scope confirmation
+  **/
+  signConfirm(
     req: operations.SignConfirmRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.SignConfirmResponse> {
@@ -628,43 +633,43 @@ See: https://github.com/skion/authentiq/wiki/JWT-Examples
       req = new operations.SignConfirmRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/scope/{job}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .post(url, {
+      .request({
+        url: url,
+        method: "post",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.SignConfirmResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 202:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.SignConfirmResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 202:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.signConfirm202ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
-          case 405:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 405:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `*/*`)) {
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
@@ -679,8 +684,10 @@ See: https://github.com/skion/authentiq/wiki/JWT-Examples
   }
 
   
-  // SignDelete - delete a verification job
-  SignDelete(
+  /**
+   * signDelete - delete a verification job
+  **/
+  signDelete(
     req: operations.SignDeleteRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.SignDeleteResponse> {
@@ -688,33 +695,33 @@ See: https://github.com/skion/authentiq/wiki/JWT-Examples
       req = new operations.SignDeleteRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/scope/{job}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .delete(url, {
+      .request({
+        url: url,
+        method: "delete",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.SignDeleteResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.SignDeleteResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.signDelete200ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `*/*`)) {
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
@@ -729,10 +736,12 @@ See: https://github.com/skion/authentiq/wiki/JWT-Examples
   }
 
   
-  // SignRequest - scope verification request
-See: https://github.com/skion/authentiq/wiki/JWT-Examples
-
-  SignRequest(
+  /**
+   * signRequest - scope verification request
+   * See: https://github.com/skion/authentiq/wiki/JWT-Examples
+   * 
+  **/
+  signRequest(
     req: operations.SignRequestRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.SignRequestResponse> {
@@ -740,23 +749,21 @@ See: https://github.com/skion/authentiq/wiki/JWT-Examples
       req = new operations.SignRequestRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/scope";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...reqBodyHeaders, ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;const headers = {...reqBodyHeaders, ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -767,32 +774,32 @@ See: https://github.com/skion/authentiq/wiki/JWT-Examples
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.SignRequestResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 201:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.SignRequestResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 201:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.signRequest201ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 429:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 429:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `*/*`)) {
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
@@ -807,8 +814,10 @@ See: https://github.com/skion/authentiq/wiki/JWT-Examples
   }
 
   
-  // SignRetrieve - get the status / current content of a verification job
-  SignRetrieve(
+  /**
+   * signRetrieve - get the status / current content of a verification job
+  **/
+  signRetrieve(
     req: operations.SignRetrieveRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.SignRetrieveResponse> {
@@ -816,47 +825,47 @@ See: https://github.com/skion/authentiq/wiki/JWT-Examples
       req = new operations.SignRetrieveRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/scope/{job}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.SignRetrieveResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.SignRetrieveResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.jwt = httpRes?.data;
             }
-            if (MatchContentType(contentType, `application/jwt`)) {
+            if (utils.MatchContentType(contentType, `application/jwt`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 204:
+          case httpRes?.status == 204:
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/jwt`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/jwt`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `*/*`)) {
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
@@ -871,8 +880,10 @@ See: https://github.com/skion/authentiq/wiki/JWT-Examples
   }
 
   
-  // SignRetrieveHead - HEAD to get the status of a verification job
-  SignRetrieveHead(
+  /**
+   * signRetrieveHead - HEAD to get the status of a verification job
+  **/
+  signRetrieveHead(
     req: operations.SignRetrieveHeadRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.SignRetrieveHeadResponse> {
@@ -880,32 +891,32 @@ See: https://github.com/skion/authentiq/wiki/JWT-Examples
       req = new operations.SignRetrieveHeadRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/scope/{job}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .head(url, {
+      .request({
+        url: url,
+        method: "head",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.SignRetrieveHeadResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.SignRetrieveHeadResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
-          case 204:
+          case httpRes?.status == 204:
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `*/*`)) {
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
@@ -920,10 +931,12 @@ See: https://github.com/skion/authentiq/wiki/JWT-Examples
   }
 
   
-  // SignUpdate - authority updates a JWT with its signature
-See: https://github.com/skion/authentiq/wiki/JWT-Examples
-
-  SignUpdate(
+  /**
+   * signUpdate - authority updates a JWT with its signature
+   * See: https://github.com/skion/authentiq/wiki/JWT-Examples
+   * 
+  **/
+  signUpdate(
     req: operations.SignUpdateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.SignUpdateResponse> {
@@ -931,39 +944,39 @@ See: https://github.com/skion/authentiq/wiki/JWT-Examples
       req = new operations.SignUpdateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/scope/{job}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .put(url, {
+      .request({
+        url: url,
+        method: "put",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.SignUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/jwt`)) {
+        const res: operations.SignUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/jwt`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/jwt`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/jwt`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 409:
-            if (MatchContentType(contentType, `application/jwt`)) {
+          case httpRes?.status == 409:
+            if (utils.MatchContentType(contentType, `application/jwt`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
@@ -971,7 +984,7 @@ See: https://github.com/skion/authentiq/wiki/JWT-Examples
             }
             break;
           default:
-            if (MatchContentType(contentType, `*/*`)) {
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);

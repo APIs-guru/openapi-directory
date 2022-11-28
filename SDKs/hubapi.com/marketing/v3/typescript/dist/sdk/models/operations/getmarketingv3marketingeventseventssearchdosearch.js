@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetMarketingV3MarketingEventsEventsSearchDoSearchQueryParams = /** @class */ (function (_super) {
     __extends(GetMarketingV3MarketingEventsEventsSearchDoSearchQueryParams, _super);
@@ -30,49 +30,29 @@ var GetMarketingV3MarketingEventsEventsSearchDoSearchQueryParams = /** @class */
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=q" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=q" }),
         __metadata("design:type", String)
     ], GetMarketingV3MarketingEventsEventsSearchDoSearchQueryParams.prototype, "q", void 0);
     return GetMarketingV3MarketingEventsEventsSearchDoSearchQueryParams;
 }(SpeakeasyBase));
 export { GetMarketingV3MarketingEventsEventsSearchDoSearchQueryParams };
-var GetMarketingV3MarketingEventsEventsSearchDoSearchSecurityOption1 = /** @class */ (function (_super) {
-    __extends(GetMarketingV3MarketingEventsEventsSearchDoSearchSecurityOption1, _super);
-    function GetMarketingV3MarketingEventsEventsSearchDoSearchSecurityOption1() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=query" }),
-        __metadata("design:type", shared.SchemeHapikey)
-    ], GetMarketingV3MarketingEventsEventsSearchDoSearchSecurityOption1.prototype, "hapikey", void 0);
-    return GetMarketingV3MarketingEventsEventsSearchDoSearchSecurityOption1;
-}(SpeakeasyBase));
-export { GetMarketingV3MarketingEventsEventsSearchDoSearchSecurityOption1 };
-var GetMarketingV3MarketingEventsEventsSearchDoSearchSecurityOption2 = /** @class */ (function (_super) {
-    __extends(GetMarketingV3MarketingEventsEventsSearchDoSearchSecurityOption2, _super);
-    function GetMarketingV3MarketingEventsEventsSearchDoSearchSecurityOption2() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
-        __metadata("design:type", shared.SchemeOauth2Legacy)
-    ], GetMarketingV3MarketingEventsEventsSearchDoSearchSecurityOption2.prototype, "oauth2Legacy", void 0);
-    return GetMarketingV3MarketingEventsEventsSearchDoSearchSecurityOption2;
-}(SpeakeasyBase));
-export { GetMarketingV3MarketingEventsEventsSearchDoSearchSecurityOption2 };
 var GetMarketingV3MarketingEventsEventsSearchDoSearchSecurity = /** @class */ (function (_super) {
     __extends(GetMarketingV3MarketingEventsEventsSearchDoSearchSecurity, _super);
     function GetMarketingV3MarketingEventsEventsSearchDoSearchSecurity() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, option=true" }),
-        __metadata("design:type", GetMarketingV3MarketingEventsEventsSearchDoSearchSecurityOption1)
-    ], GetMarketingV3MarketingEventsEventsSearchDoSearchSecurity.prototype, "option1", void 0);
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=query" }),
+        __metadata("design:type", shared.SchemeHapikey)
+    ], GetMarketingV3MarketingEventsEventsSearchDoSearchSecurity.prototype, "hapikey", void 0);
     __decorate([
-        Metadata({ data: "security, option=true" }),
-        __metadata("design:type", GetMarketingV3MarketingEventsEventsSearchDoSearchSecurityOption2)
-    ], GetMarketingV3MarketingEventsEventsSearchDoSearchSecurity.prototype, "option2", void 0);
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
+        __metadata("design:type", shared.SchemeOauth2Legacy)
+    ], GetMarketingV3MarketingEventsEventsSearchDoSearchSecurity.prototype, "oauth2Legacy", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        __metadata("design:type", shared.SchemePrivateAppsLegacy)
+    ], GetMarketingV3MarketingEventsEventsSearchDoSearchSecurity.prototype, "privateAppsLegacy", void 0);
     return GetMarketingV3MarketingEventsEventsSearchDoSearchSecurity;
 }(SpeakeasyBase));
 export { GetMarketingV3MarketingEventsEventsSearchDoSearchSecurity };
@@ -82,11 +62,11 @@ var GetMarketingV3MarketingEventsEventsSearchDoSearchRequest = /** @class */ (fu
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetMarketingV3MarketingEventsEventsSearchDoSearchQueryParams)
     ], GetMarketingV3MarketingEventsEventsSearchDoSearchRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetMarketingV3MarketingEventsEventsSearchDoSearchSecurity)
     ], GetMarketingV3MarketingEventsEventsSearchDoSearchRequest.prototype, "security", void 0);
     return GetMarketingV3MarketingEventsEventsSearchDoSearchRequest;
@@ -98,19 +78,19 @@ var GetMarketingV3MarketingEventsEventsSearchDoSearchResponse = /** @class */ (f
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], GetMarketingV3MarketingEventsEventsSearchDoSearchResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.CollectionResponseMarketingEventExternalUniqueIdentifierNoPaging)
     ], GetMarketingV3MarketingEventsEventsSearchDoSearchResponse.prototype, "collectionResponseMarketingEventExternalUniqueIdentifierNoPaging", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetMarketingV3MarketingEventsEventsSearchDoSearchResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetMarketingV3MarketingEventsEventsSearchDoSearchResponse.prototype, "statusCode", void 0);
     return GetMarketingV3MarketingEventsEventsSearchDoSearchResponse;

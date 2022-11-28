@@ -1,31 +1,32 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DeleteRepositoryPipelineKnownHostPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=known_host_uuid" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=known_host_uuid" })
   knownHostUuid: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=repo_slug" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=repo_slug" })
   repoSlug: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=workspace" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=workspace" })
   workspace: string;
 }
 
 
 export class DeleteRepositoryPipelineKnownHostRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: DeleteRepositoryPipelineKnownHostPathParams;
 }
 
 
 export class DeleteRepositoryPipelineKnownHostResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   error?: Map<string, any>;
 }

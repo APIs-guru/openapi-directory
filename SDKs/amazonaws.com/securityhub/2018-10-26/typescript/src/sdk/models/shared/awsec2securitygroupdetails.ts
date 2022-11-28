@@ -1,7 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AwsEc2SecurityGroupIpPermission } from "./awsec2securitygroupippermission";
-import { AwsEc2SecurityGroupIpPermission } from "./awsec2securitygroupippermission";
+
 
 
 // AwsEc2SecurityGroupDetails
@@ -9,21 +8,21 @@ import { AwsEc2SecurityGroupIpPermission } from "./awsec2securitygroupippermissi
  * Details about an EC2 security group.
 **/
 export class AwsEc2SecurityGroupDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=GroupId" })
+  @SpeakeasyMetadata({ data: "json, name=GroupId" })
   groupId?: string;
 
-  @Metadata({ data: "json, name=GroupName" })
+  @SpeakeasyMetadata({ data: "json, name=GroupName" })
   groupName?: string;
 
-  @Metadata({ data: "json, name=IpPermissions", elemType: shared.AwsEc2SecurityGroupIpPermission })
+  @SpeakeasyMetadata({ data: "json, name=IpPermissions", elemType: AwsEc2SecurityGroupIpPermission })
   ipPermissions?: AwsEc2SecurityGroupIpPermission[];
 
-  @Metadata({ data: "json, name=IpPermissionsEgress", elemType: shared.AwsEc2SecurityGroupIpPermission })
+  @SpeakeasyMetadata({ data: "json, name=IpPermissionsEgress", elemType: AwsEc2SecurityGroupIpPermission })
   ipPermissionsEgress?: AwsEc2SecurityGroupIpPermission[];
 
-  @Metadata({ data: "json, name=OwnerId" })
+  @SpeakeasyMetadata({ data: "json, name=OwnerId" })
   ownerId?: string;
 
-  @Metadata({ data: "json, name=VpcId" })
+  @SpeakeasyMetadata({ data: "json, name=VpcId" })
   vpcId?: string;
 }

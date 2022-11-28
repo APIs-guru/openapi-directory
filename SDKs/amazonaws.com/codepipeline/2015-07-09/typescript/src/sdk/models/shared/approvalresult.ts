@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ApprovalStatusEnum } from "./approvalstatusenum";
+
 
 
 // ApprovalResult
@@ -7,9 +8,9 @@ import { ApprovalStatusEnum } from "./approvalstatusenum";
  * Represents information about the result of an approval request.
 **/
 export class ApprovalResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status: ApprovalStatusEnum;
 
-  @Metadata({ data: "json, name=summary" })
+  @SpeakeasyMetadata({ data: "json, name=summary" })
   summary: string;
 }

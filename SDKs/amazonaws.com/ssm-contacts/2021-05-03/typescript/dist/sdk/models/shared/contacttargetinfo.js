@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // ContactTargetInfo
 /**
  * The contact that Incident Manager is engaging during an incident.
@@ -33,11 +33,11 @@ var ContactTargetInfo = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=ContactId" }),
+        SpeakeasyMetadata({ data: "json, name=ContactId" }),
         __metadata("design:type", String)
     ], ContactTargetInfo.prototype, "contactId", void 0);
     __decorate([
-        Metadata({ data: "json, name=IsEssential" }),
+        SpeakeasyMetadata({ data: "json, name=IsEssential" }),
         __metadata("design:type", Boolean)
     ], ContactTargetInfo.prototype, "isEssential", void 0);
     return ContactTargetInfo;

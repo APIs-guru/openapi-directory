@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var GetModifyVpcAttributeActionEnum;
 (function (GetModifyVpcAttributeActionEnum) {
     GetModifyVpcAttributeActionEnum["ModifyVpcAttribute"] = "ModifyVpcAttribute";
@@ -37,7 +37,7 @@ var GetModifyVpcAttributeEnableDnsHostnames = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, name=Value" }),
+        SpeakeasyMetadata({ data: "queryParam, name=Value" }),
         __metadata("design:type", Boolean)
     ], GetModifyVpcAttributeEnableDnsHostnames.prototype, "value", void 0);
     return GetModifyVpcAttributeEnableDnsHostnames;
@@ -53,7 +53,7 @@ var GetModifyVpcAttributeEnableDnsSupport = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, name=Value" }),
+        SpeakeasyMetadata({ data: "queryParam, name=Value" }),
         __metadata("design:type", Boolean)
     ], GetModifyVpcAttributeEnableDnsSupport.prototype, "value", void 0);
     return GetModifyVpcAttributeEnableDnsSupport;
@@ -69,23 +69,23 @@ var GetModifyVpcAttributeQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=Action" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Action" }),
         __metadata("design:type", String)
     ], GetModifyVpcAttributeQueryParams.prototype, "action", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=EnableDnsHostnames" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=EnableDnsHostnames" }),
         __metadata("design:type", GetModifyVpcAttributeEnableDnsHostnames)
     ], GetModifyVpcAttributeQueryParams.prototype, "enableDnsHostnames", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=EnableDnsSupport" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=EnableDnsSupport" }),
         __metadata("design:type", GetModifyVpcAttributeEnableDnsSupport)
     ], GetModifyVpcAttributeQueryParams.prototype, "enableDnsSupport", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=Version" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Version" }),
         __metadata("design:type", String)
     ], GetModifyVpcAttributeQueryParams.prototype, "version", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=VpcId" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=VpcId" }),
         __metadata("design:type", String)
     ], GetModifyVpcAttributeQueryParams.prototype, "vpcId", void 0);
     return GetModifyVpcAttributeQueryParams;
@@ -97,31 +97,31 @@ var GetModifyVpcAttributeHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
         __metadata("design:type", String)
     ], GetModifyVpcAttributeHeaders.prototype, "xAmzAlgorithm", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
         __metadata("design:type", String)
     ], GetModifyVpcAttributeHeaders.prototype, "xAmzContentSha256", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
         __metadata("design:type", String)
     ], GetModifyVpcAttributeHeaders.prototype, "xAmzCredential", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
         __metadata("design:type", String)
     ], GetModifyVpcAttributeHeaders.prototype, "xAmzDate", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
         __metadata("design:type", String)
     ], GetModifyVpcAttributeHeaders.prototype, "xAmzSecurityToken", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
         __metadata("design:type", String)
     ], GetModifyVpcAttributeHeaders.prototype, "xAmzSignature", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
         __metadata("design:type", String)
     ], GetModifyVpcAttributeHeaders.prototype, "xAmzSignedHeaders", void 0);
     return GetModifyVpcAttributeHeaders;
@@ -133,11 +133,11 @@ var GetModifyVpcAttributeRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetModifyVpcAttributeQueryParams)
     ], GetModifyVpcAttributeRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetModifyVpcAttributeHeaders)
     ], GetModifyVpcAttributeRequest.prototype, "headers", void 0);
     return GetModifyVpcAttributeRequest;
@@ -149,11 +149,11 @@ var GetModifyVpcAttributeResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetModifyVpcAttributeResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetModifyVpcAttributeResponse.prototype, "statusCode", void 0);
     return GetModifyVpcAttributeResponse;

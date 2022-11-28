@@ -1,20 +1,21 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class DcimDevicesCreateRequest extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/json" })
-  request: shared.WritableDeviceWithConfigContext;
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request: shared.WritableDeviceWithConfigContextInput;
 }
 
 
 export class DcimDevicesCreateResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   deviceWithConfigContext?: shared.DeviceWithConfigContext;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

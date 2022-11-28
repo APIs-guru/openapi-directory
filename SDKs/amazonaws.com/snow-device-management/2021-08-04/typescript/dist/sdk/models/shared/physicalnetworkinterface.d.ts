@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { IpAddressAssignmentEnum } from "./ipaddressassignmentenum";
 import { PhysicalConnectorTypeEnum } from "./physicalconnectortypeenum";
 /**

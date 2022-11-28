@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { FailureInfo } from "./failureinfo";
 import { Printer } from "./printer";
+
 
 
 // BatchCreatePrintersResponse
@@ -9,9 +9,9 @@ import { Printer } from "./printer";
  * Response for adding new printers in batch.
 **/
 export class BatchCreatePrintersResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=failures", elemType: shared.FailureInfo })
+  @SpeakeasyMetadata({ data: "json, name=failures", elemType: FailureInfo })
   failures?: FailureInfo[];
 
-  @Metadata({ data: "json, name=printers", elemType: shared.Printer })
+  @SpeakeasyMetadata({ data: "json, name=printers", elemType: Printer })
   printers?: Printer[];
 }

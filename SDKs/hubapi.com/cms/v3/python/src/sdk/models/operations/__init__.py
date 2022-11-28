@@ -1,2 +1,2 @@
-from .get__cms_v3_domains__domainid__getbyid import *
-from .get__cms_v3_domains__getpage import *
+from .get_cms_v3_domains_domainid_getbyid import *
+from .get_cms_v3_domains_getpage import *

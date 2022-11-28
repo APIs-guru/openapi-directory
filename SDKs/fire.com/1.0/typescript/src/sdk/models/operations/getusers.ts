@@ -1,104 +1,105 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum GetUsersUserMobileApplicationOsEnum {
-    Android = "Android"
-,    Ios = "IOS"
-,    Other = "OTHER"
+    Android = "Android",
+    Ios = "IOS",
+    Other = "OTHER"
 }
 
 export enum GetUsersUserMobileApplicationDeviceNameEnum {
-    IPhone = "iPhone"
-,    Android = "Android"
-,    Other = "Other"
+    IPhone = "iPhone",
+    Android = "Android",
+    Other = "Other"
 }
 
 export enum GetUsersUserMobileApplicationStatusEnum {
-    Live = "LIVE"
-,    Closed = "CLOSED"
-,    Locked = "LOCKED"
-,    SmsSent = "SMS_SENT"
+    Live = "LIVE",
+    Closed = "CLOSED",
+    Locked = "LOCKED",
+    SmsSent = "SMS_SENT"
 }
 
 
 export class GetUsersUserMobileApplication extends SpeakeasyBase {
-  @Metadata({ data: "json, name=OS" })
+  @SpeakeasyMetadata({ data: "json, name=OS" })
   os?: GetUsersUserMobileApplicationOsEnum;
 
-  @Metadata({ data: "json, name=businessUserId" })
+  @SpeakeasyMetadata({ data: "json, name=businessUserId" })
   businessUserId?: number;
 
-  @Metadata({ data: "json, name=clientID" })
+  @SpeakeasyMetadata({ data: "json, name=clientID" })
   clientId?: string;
 
-  @Metadata({ data: "json, name=deviceName" })
+  @SpeakeasyMetadata({ data: "json, name=deviceName" })
   deviceName?: GetUsersUserMobileApplicationDeviceNameEnum;
 
-  @Metadata({ data: "json, name=deviceOSVersion" })
+  @SpeakeasyMetadata({ data: "json, name=deviceOSVersion" })
   deviceOsVersion?: string;
 
-  @Metadata({ data: "json, name=mobileApplicationId" })
+  @SpeakeasyMetadata({ data: "json, name=mobileApplicationId" })
   mobileApplicationId?: number;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: GetUsersUserMobileApplicationStatusEnum;
 }
 
 export enum GetUsersUserRoleEnum {
-    Admin = "ADMIN"
-,    FullUser = "FULL_USER"
-,    ReadOnly = "READ_ONLY"
-,    CardOnly = "CARD_ONLY"
+    Admin = "ADMIN",
+    FullUser = "FULL_USER",
+    ReadOnly = "READ_ONLY",
+    CardOnly = "CARD_ONLY"
 }
 
 export enum GetUsersUserStatusEnum {
-    Live = "LIVE"
-,    Closed = "CLOSED"
-,    Frozen = "FROZEN"
-,    InviteSent = "INVITE_SENT"
-,    SmsCodeSent = "SMS_CODE_SENT"
+    Live = "LIVE",
+    Closed = "CLOSED",
+    Frozen = "FROZEN",
+    InviteSent = "INVITE_SENT",
+    SmsCodeSent = "SMS_CODE_SENT"
 }
 
 
 export class GetUsersUser extends SpeakeasyBase {
-  @Metadata({ data: "json, name=emailAddress" })
+  @SpeakeasyMetadata({ data: "json, name=emailAddress" })
   emailAddress?: string;
 
-  @Metadata({ data: "json, name=firstName" })
+  @SpeakeasyMetadata({ data: "json, name=firstName" })
   firstName?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: number;
 
-  @Metadata({ data: "json, name=lastName" })
+  @SpeakeasyMetadata({ data: "json, name=lastName" })
   lastName?: string;
 
-  @Metadata({ data: "json, name=lastlogin" })
+  @SpeakeasyMetadata({ data: "json, name=lastlogin" })
   lastlogin?: string;
 
-  @Metadata({ data: "json, name=mobileApplicationDetails" })
+  @SpeakeasyMetadata({ data: "json, name=mobileApplicationDetails" })
   mobileApplicationDetails?: GetUsersUserMobileApplication;
 
-  @Metadata({ data: "json, name=mobileNumber" })
+  @SpeakeasyMetadata({ data: "json, name=mobileNumber" })
   mobileNumber?: string;
 
-  @Metadata({ data: "json, name=role" })
+  @SpeakeasyMetadata({ data: "json, name=role" })
   role?: GetUsersUserRoleEnum;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: GetUsersUserStatusEnum;
 
-  @Metadata({ data: "json, name=userCvl" })
+  @SpeakeasyMetadata({ data: "json, name=userCvl" })
   userCvl?: string;
 }
 
 
 export class GetUsersResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata({ elemType: operations.GetUsersUser })
+  @SpeakeasyMetadata({ elemType: GetUsersUser })
   users?: GetUsersUser[];
 }

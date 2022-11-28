@@ -1,16 +1,17 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum GoogleCloudChannelV1CustomerConstraintsAllowedCustomerTypesEnum {
-    CustomerTypeUnspecified = "CUSTOMER_TYPE_UNSPECIFIED"
-,    Domain = "DOMAIN"
-,    Team = "TEAM"
+    CustomerTypeUnspecified = "CUSTOMER_TYPE_UNSPECIFIED",
+    Domain = "DOMAIN",
+    Team = "TEAM"
 }
 
 export enum GoogleCloudChannelV1CustomerConstraintsPromotionalOrderTypesEnum {
-    PromotionalTypeUnspecified = "PROMOTIONAL_TYPE_UNSPECIFIED"
-,    NewUpgrade = "NEW_UPGRADE"
-,    Transfer = "TRANSFER"
-,    PromotionSwitch = "PROMOTION_SWITCH"
+    PromotionalTypeUnspecified = "PROMOTIONAL_TYPE_UNSPECIFIED",
+    NewUpgrade = "NEW_UPGRADE",
+    Transfer = "TRANSFER",
+    PromotionSwitch = "PROMOTION_SWITCH"
 }
 
 
@@ -19,12 +20,12 @@ export enum GoogleCloudChannelV1CustomerConstraintsPromotionalOrderTypesEnum {
  * Represents constraints required to purchase the Offer for a customer.
 **/
 export class GoogleCloudChannelV1CustomerConstraints extends SpeakeasyBase {
-  @Metadata({ data: "json, name=allowedCustomerTypes" })
+  @SpeakeasyMetadata({ data: "json, name=allowedCustomerTypes" })
   allowedCustomerTypes?: GoogleCloudChannelV1CustomerConstraintsAllowedCustomerTypesEnum[];
 
-  @Metadata({ data: "json, name=allowedRegions" })
+  @SpeakeasyMetadata({ data: "json, name=allowedRegions" })
   allowedRegions?: string[];
 
-  @Metadata({ data: "json, name=promotionalOrderTypes" })
+  @SpeakeasyMetadata({ data: "json, name=promotionalOrderTypes" })
   promotionalOrderTypes?: GoogleCloudChannelV1CustomerConstraintsPromotionalOrderTypesEnum[];
 }

@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class DescribeRouteCalculatorPathParams:
-    calculator_name: str = field(default=None, metadata={'path_param': { 'field_name': 'CalculatorName', 'style': 'simple', 'explode': False }})
+    calculator_name: str = field(metadata={'path_param': { 'field_name': 'CalculatorName', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -21,18 +24,18 @@ class DescribeRouteCalculatorHeaders:
 
 @dataclass
 class DescribeRouteCalculatorRequest:
-    path_params: DescribeRouteCalculatorPathParams = field(default=None)
-    headers: DescribeRouteCalculatorHeaders = field(default=None)
+    headers: DescribeRouteCalculatorHeaders = field()
+    path_params: DescribeRouteCalculatorPathParams = field()
     
 
 @dataclass
 class DescribeRouteCalculatorResponse:
+    content_type: str = field()
+    status_code: int = field()
     access_denied_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     describe_route_calculator_response: Optional[shared.DescribeRouteCalculatorResponse] = field(default=None)
     internal_server_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     validation_exception: Optional[Any] = field(default=None)
     

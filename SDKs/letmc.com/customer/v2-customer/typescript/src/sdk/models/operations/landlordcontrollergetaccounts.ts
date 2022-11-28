@@ -1,35 +1,36 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class LandlordControllerGetAccountsPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=shortName" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=shortName" })
   shortName: string;
 }
 
 
 export class LandlordControllerGetAccountsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=token" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=token" })
   token: string;
 }
 
 
 export class LandlordControllerGetAccountsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: LandlordControllerGetAccountsPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: LandlordControllerGetAccountsQueryParams;
 }
 
 
 export class LandlordControllerGetAccountsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   landlordAccountingModel?: shared.LandlordAccountingModel;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

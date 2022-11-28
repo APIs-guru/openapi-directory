@@ -1,5 +1,7 @@
 package shared
 
+// CheckResponse
+// Success
 type CheckResponse struct {
 	Currency                   *string `json:"currency,omitempty"`
 	EstimatedPriceMessagesSent *string `json:"estimated_price_messages_sent,omitempty"`

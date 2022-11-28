@@ -18,6 +18,8 @@ const (
 	GdataMediaReferenceTypeEnumArbitraryBytes        GdataMediaReferenceTypeEnum = "ARBITRARY_BYTES"
 )
 
+// GdataMedia
+// gdata
 type GdataMedia struct {
 	Algorithm             *string                      `json:"algorithm,omitempty"`
 	BigstoreObjectRef     *string                      `json:"bigstoreObjectRef,omitempty"`

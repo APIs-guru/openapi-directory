@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleLocation } from "./googlelocation";
+
 
 
 // SearchGoogleLocationsResponse
@@ -8,6 +8,6 @@ import { GoogleLocation } from "./googlelocation";
  * Response message for GoogleLocations.SearchGoogleLocations.
 **/
 export class SearchGoogleLocationsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=googleLocations", elemType: shared.GoogleLocation })
+  @SpeakeasyMetadata({ data: "json, name=googleLocations", elemType: GoogleLocation })
   googleLocations?: GoogleLocation[];
 }

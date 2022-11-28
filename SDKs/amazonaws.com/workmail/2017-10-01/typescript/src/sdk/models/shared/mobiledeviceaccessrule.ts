@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { MobileDeviceAccessRuleEffectEnum } from "./mobiledeviceaccessruleeffectenum";
+
 
 
 // MobileDeviceAccessRule
@@ -7,45 +8,45 @@ import { MobileDeviceAccessRuleEffectEnum } from "./mobiledeviceaccessruleeffect
  * A rule that controls access to mobile devices for an Amazon WorkMail group.
 **/
 export class MobileDeviceAccessRule extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DateCreated" })
+  @SpeakeasyMetadata({ data: "json, name=DateCreated" })
   dateCreated?: Date;
 
-  @Metadata({ data: "json, name=DateModified" })
+  @SpeakeasyMetadata({ data: "json, name=DateModified" })
   dateModified?: Date;
 
-  @Metadata({ data: "json, name=Description" })
+  @SpeakeasyMetadata({ data: "json, name=Description" })
   description?: string;
 
-  @Metadata({ data: "json, name=DeviceModels" })
+  @SpeakeasyMetadata({ data: "json, name=DeviceModels" })
   deviceModels?: string[];
 
-  @Metadata({ data: "json, name=DeviceOperatingSystems" })
+  @SpeakeasyMetadata({ data: "json, name=DeviceOperatingSystems" })
   deviceOperatingSystems?: string[];
 
-  @Metadata({ data: "json, name=DeviceTypes" })
+  @SpeakeasyMetadata({ data: "json, name=DeviceTypes" })
   deviceTypes?: string[];
 
-  @Metadata({ data: "json, name=DeviceUserAgents" })
+  @SpeakeasyMetadata({ data: "json, name=DeviceUserAgents" })
   deviceUserAgents?: string[];
 
-  @Metadata({ data: "json, name=Effect" })
+  @SpeakeasyMetadata({ data: "json, name=Effect" })
   effect?: MobileDeviceAccessRuleEffectEnum;
 
-  @Metadata({ data: "json, name=MobileDeviceAccessRuleId" })
+  @SpeakeasyMetadata({ data: "json, name=MobileDeviceAccessRuleId" })
   mobileDeviceAccessRuleId?: string;
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name?: string;
 
-  @Metadata({ data: "json, name=NotDeviceModels" })
+  @SpeakeasyMetadata({ data: "json, name=NotDeviceModels" })
   notDeviceModels?: string[];
 
-  @Metadata({ data: "json, name=NotDeviceOperatingSystems" })
+  @SpeakeasyMetadata({ data: "json, name=NotDeviceOperatingSystems" })
   notDeviceOperatingSystems?: string[];
 
-  @Metadata({ data: "json, name=NotDeviceTypes" })
+  @SpeakeasyMetadata({ data: "json, name=NotDeviceTypes" })
   notDeviceTypes?: string[];
 
-  @Metadata({ data: "json, name=NotDeviceUserAgents" })
+  @SpeakeasyMetadata({ data: "json, name=NotDeviceUserAgents" })
   notDeviceUserAgents?: string[];
 }

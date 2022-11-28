@@ -5,13 +5,13 @@ from sdk.models import shared
 
 @dataclass
 class CheckOperationRequest:
-    request: shared.OperatorConfiguration = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    request: shared.OperatorConfiguration = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class CheckOperationResponse:
+    content_type: str = field()
+    status_code: int = field()
     check_operation_read: Optional[shared.CheckOperationRead] = field(default=None)
-    content_type: str = field(default=None)
     invalid_input_exception_info: Optional[shared.InvalidInputExceptionInfo] = field(default=None)
-    status_code: int = field(default=None)
     

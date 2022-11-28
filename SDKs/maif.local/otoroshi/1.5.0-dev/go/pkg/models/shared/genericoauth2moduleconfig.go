@@ -1,5 +1,7 @@
 package shared
 
+// GenericOauth2ModuleConfig
+// Settings to authenticate users using a generic OAuth2 provider
 type GenericOauth2ModuleConfig struct {
 	AccessTokenField     string       `json:"accessTokenField"`
 	AuthorizeURL         string       `json:"authorizeUrl"`

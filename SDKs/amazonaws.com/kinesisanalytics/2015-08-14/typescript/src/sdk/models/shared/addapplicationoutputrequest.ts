@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Output } from "./output";
+
 
 
 // AddApplicationOutputRequest
@@ -7,12 +8,12 @@ import { Output } from "./output";
  * <p/>
 **/
 export class AddApplicationOutputRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ApplicationName" })
+  @SpeakeasyMetadata({ data: "json, name=ApplicationName" })
   applicationName: string;
 
-  @Metadata({ data: "json, name=CurrentApplicationVersionId" })
+  @SpeakeasyMetadata({ data: "json, name=CurrentApplicationVersionId" })
   currentApplicationVersionId: number;
 
-  @Metadata({ data: "json, name=Output" })
+  @SpeakeasyMetadata({ data: "json, name=Output" })
   output: Output;
 }

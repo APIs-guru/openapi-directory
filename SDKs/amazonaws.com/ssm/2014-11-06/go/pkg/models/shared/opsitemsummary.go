@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// OpsItemSummary
+// A count of OpsItems.
 type OpsItemSummary struct {
 	ActualEndTime    *time.Time                  `json:"ActualEndTime,omitempty"`
 	ActualStartTime  *time.Time                  `json:"ActualStartTime,omitempty"`

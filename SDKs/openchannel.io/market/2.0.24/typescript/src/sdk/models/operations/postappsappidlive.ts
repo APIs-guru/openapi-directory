@@ -1,34 +1,35 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class PostAppsAppIdLivePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=appId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=appId" })
   appId: string;
 }
 
 
 export class PostAppsAppIdLiveQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=developerId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=developerId" })
   developerId: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=version" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=version" })
   version: string;
 }
 
 
 export class PostAppsAppIdLiveRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: PostAppsAppIdLivePathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: PostAppsAppIdLiveQueryParams;
 }
 
 
 export class PostAppsAppIdLiveResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SubscribedUploadShare } from "./subscribeduploadshare";
 import { Range } from "./range";
+
 
 
 // SubscribedUploadShareList
@@ -9,9 +9,9 @@ import { Range } from "./range";
  * List of subscribed upload shares
 **/
 export class SubscribedUploadShareList extends SpeakeasyBase {
-  @Metadata({ data: "json, name=items", elemType: shared.SubscribedUploadShare })
+  @SpeakeasyMetadata({ data: "json, name=items", elemType: SubscribedUploadShare })
   items: SubscribedUploadShare[];
 
-  @Metadata({ data: "json, name=range" })
+  @SpeakeasyMetadata({ data: "json, name=range" })
   range: Range;
 }

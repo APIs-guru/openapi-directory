@@ -1,122 +1,123 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetCssTemplatePkPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=pk" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=pk" })
   pk: number;
 }
 
 
 export class GetCssTemplatePkQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, serialization=json;name=q" })
+  @SpeakeasyMetadata({ data: "queryParam, serialization=json;name=q" })
   q?: shared.GetItemSchema;
 }
 
 
 export class GetCssTemplatePkSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=bearer" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" })
   jwt: shared.SchemeJwt;
 }
 
 
-export class GetCssTemplatePkRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: GetCssTemplatePkPathParams;
-
-  @Metadata()
-  queryParams: GetCssTemplatePkQueryParams;
-
-  @Metadata()
-  security: GetCssTemplatePkSecurity;
-}
-
-
 export class GetCssTemplatePk200ApplicationJsonDescriptionColumns extends SpeakeasyBase {
-  @Metadata({ data: "json, name=column_name" })
+  @SpeakeasyMetadata({ data: "json, name=column_name" })
   columnName?: string;
 }
 
 
 export class GetCssTemplatePk200ApplicationJsonLabelColumns extends SpeakeasyBase {
-  @Metadata({ data: "json, name=column_name" })
+  @SpeakeasyMetadata({ data: "json, name=column_name" })
   columnName?: string;
 }
 
 
 export class GetCssTemplatePk200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=description_columns" })
+  @SpeakeasyMetadata({ data: "json, name=description_columns" })
   descriptionColumns?: GetCssTemplatePk200ApplicationJsonDescriptionColumns;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=label_columns" })
+  @SpeakeasyMetadata({ data: "json, name=label_columns" })
   labelColumns?: GetCssTemplatePk200ApplicationJsonLabelColumns;
 
-  @Metadata({ data: "json, name=result" })
+  @SpeakeasyMetadata({ data: "json, name=result" })
   result?: shared.CssTemplateRestApiGet;
 
-  @Metadata({ data: "json, name=show_columns" })
+  @SpeakeasyMetadata({ data: "json, name=show_columns" })
   showColumns?: string[];
 
-  @Metadata({ data: "json, name=show_title" })
+  @SpeakeasyMetadata({ data: "json, name=show_title" })
   showTitle?: string;
 }
 
 
 export class GetCssTemplatePk400ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class GetCssTemplatePk401ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class GetCssTemplatePk404ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class GetCssTemplatePk422ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class GetCssTemplatePk500ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
+export class GetCssTemplatePkRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: GetCssTemplatePkPathParams;
+
+  @SpeakeasyMetadata()
+  queryParams: GetCssTemplatePkQueryParams;
+
+  @SpeakeasyMetadata()
+  security: GetCssTemplatePkSecurity;
+}
+
+
 export class GetCssTemplatePkResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getCssTemplatePk200ApplicationJsonObject?: GetCssTemplatePk200ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getCssTemplatePk400ApplicationJsonObject?: GetCssTemplatePk400ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getCssTemplatePk401ApplicationJsonObject?: GetCssTemplatePk401ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getCssTemplatePk404ApplicationJsonObject?: GetCssTemplatePk404ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getCssTemplatePk422ApplicationJsonObject?: GetCssTemplatePk422ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getCssTemplatePk500ApplicationJsonObject?: GetCssTemplatePk500ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

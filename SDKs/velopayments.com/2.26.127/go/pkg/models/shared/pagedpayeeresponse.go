@@ -1,5 +1,7 @@
 package shared
 
+// PagedPayeeResponse
+// List Payees Response Object
 type PagedPayeeResponse struct {
 	Content []GetPayeeListResponse `json:"content,omitempty"`
 	Links   []interface{}          `json:"links,omitempty"`

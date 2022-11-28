@@ -1,27 +1,28 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class CreateDeliverabilityTestReportHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
@@ -31,75 +32,75 @@ export class CreateDeliverabilityTestReportHeaders extends SpeakeasyBase {
  * An object that defines the entire content of the email, including the message headers and the body content. You can create a simple email message, in which you specify the subject and the text and HTML versions of the message body. You can also create raw messages, in which you specify a complete MIME-formatted message. Raw messages can include attachments and custom headers.
 **/
 export class CreateDeliverabilityTestReportRequestBodyContent extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Raw" })
+  @SpeakeasyMetadata({ data: "json, name=Raw" })
   raw?: shared.RawMessage;
 
-  @Metadata({ data: "json, name=Simple" })
+  @SpeakeasyMetadata({ data: "json, name=Simple" })
   simple?: shared.Message;
 
-  @Metadata({ data: "json, name=Template" })
+  @SpeakeasyMetadata({ data: "json, name=Template" })
   template?: shared.Template;
 }
 
 
 export class CreateDeliverabilityTestReportRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Content" })
+  @SpeakeasyMetadata({ data: "json, name=Content" })
   content: CreateDeliverabilityTestReportRequestBodyContent;
 
-  @Metadata({ data: "json, name=FromEmailAddress" })
+  @SpeakeasyMetadata({ data: "json, name=FromEmailAddress" })
   fromEmailAddress: string;
 
-  @Metadata({ data: "json, name=ReportName" })
+  @SpeakeasyMetadata({ data: "json, name=ReportName" })
   reportName?: string;
 
-  @Metadata({ data: "json, name=Tags", elemType: shared.Tag })
+  @SpeakeasyMetadata({ data: "json, name=Tags", elemType: shared.Tag })
   tags?: shared.Tag[];
 }
 
 
 export class CreateDeliverabilityTestReportRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: CreateDeliverabilityTestReportHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: CreateDeliverabilityTestReportRequestBody;
 }
 
 
 export class CreateDeliverabilityTestReportResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   accountSuspendedException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   badRequestException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   concurrentModificationException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   createDeliverabilityTestReportResponse?: shared.CreateDeliverabilityTestReportResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   limitExceededException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   mailFromDomainNotVerifiedException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   messageRejected?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   notFoundException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   sendingPausedException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   tooManyRequestsException?: any;
 }

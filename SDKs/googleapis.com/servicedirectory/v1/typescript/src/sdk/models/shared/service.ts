@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Endpoint } from "./endpoint";
+
 
 
 // Service
@@ -8,12 +8,28 @@ import { Endpoint } from "./endpoint";
  * An individual service. A service contains a name and optional metadata. A service must exist before endpoints can be added to it.
 **/
 export class Service extends SpeakeasyBase {
-  @Metadata({ data: "json, name=annotations" })
+  @SpeakeasyMetadata({ data: "json, name=annotations" })
   annotations?: Map<string, string>;
 
-  @Metadata({ data: "json, name=endpoints", elemType: shared.Endpoint })
+  @SpeakeasyMetadata({ data: "json, name=endpoints", elemType: Endpoint })
   endpoints?: Endpoint[];
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
+  name?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=uid" })
+  uid?: string;
+}
+
+
+// ServiceInput
+/** 
+ * An individual service. A service contains a name and optional metadata. A service must exist before endpoints can be added to it.
+**/
+export class ServiceInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=annotations" })
+  annotations?: Map<string, string>;
+
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 }

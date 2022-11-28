@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { LogEvent } from "./logevent";
 import { Range } from "./range";
+
 
 
 // LogEventList
@@ -9,9 +9,9 @@ import { Range } from "./range";
  * List of log events
 **/
 export class LogEventList extends SpeakeasyBase {
-  @Metadata({ data: "json, name=items", elemType: shared.LogEvent })
+  @SpeakeasyMetadata({ data: "json, name=items", elemType: LogEvent })
   items: LogEvent[];
 
-  @Metadata({ data: "json, name=range" })
+  @SpeakeasyMetadata({ data: "json, name=range" })
   range: Range;
 }

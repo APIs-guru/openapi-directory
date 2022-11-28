@@ -30,7 +30,7 @@ type AdsenseAccountsAdclientsAdunitsCreateSecurity struct {
 type AdsenseAccountsAdclientsAdunitsCreateRequest struct {
 	PathParams  AdsenseAccountsAdclientsAdunitsCreatePathParams
 	QueryParams AdsenseAccountsAdclientsAdunitsCreateQueryParams
-	Request     *shared.AdUnit `request:"mediaType=application/json"`
+	Request     *shared.AdUnitInput `request:"mediaType=application/json"`
 	Security    AdsenseAccountsAdclientsAdunitsCreateSecurity
 }
 

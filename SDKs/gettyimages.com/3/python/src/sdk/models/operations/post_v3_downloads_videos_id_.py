@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class PostV3DownloadsVideosIDPathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -31,14 +31,14 @@ class PostV3DownloadsVideosIDRequests:
 
 @dataclass
 class PostV3DownloadsVideosIDRequest:
-    path_params: PostV3DownloadsVideosIDPathParams = field(default=None)
-    query_params: PostV3DownloadsVideosIDQueryParams = field(default=None)
-    headers: PostV3DownloadsVideosIDHeaders = field(default=None)
+    headers: PostV3DownloadsVideosIDHeaders = field()
+    path_params: PostV3DownloadsVideosIDPathParams = field()
+    query_params: PostV3DownloadsVideosIDQueryParams = field()
     request: Optional[PostV3DownloadsVideosIDRequests] = field(default=None)
     
 
 @dataclass
 class PostV3DownloadsVideosIDResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

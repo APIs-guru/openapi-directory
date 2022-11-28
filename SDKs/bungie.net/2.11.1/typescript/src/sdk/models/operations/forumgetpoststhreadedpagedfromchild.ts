@@ -1,49 +1,50 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ForumGetPostsThreadedPagedFromChildPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=childPostId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=childPostId" })
   childPostId: number;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=page" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=page" })
   page: number;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=pageSize" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=pageSize" })
   pageSize: number;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=replySize" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=replySize" })
   replySize: number;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=rootThreadMode" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=rootThreadMode" })
   rootThreadMode: boolean;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=sortMode" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=sortMode" })
   sortMode: number;
 }
 
 
 export class ForumGetPostsThreadedPagedFromChildQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=showbanned" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=showbanned" })
   showbanned?: string;
 }
 
 
 export class ForumGetPostsThreadedPagedFromChildRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: ForumGetPostsThreadedPagedFromChildPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: ForumGetPostsThreadedPagedFromChildQueryParams;
 }
 
 
 export class ForumGetPostsThreadedPagedFromChildResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

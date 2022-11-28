@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // LfTag
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A structure that allows an admin to grant user permissions on certain conditions. For example, granting a role access to all columns not tagged 'PII' of tables tagged 'Prod'.
 **/
 export class LfTag extends SpeakeasyBase {
-  @Metadata({ data: "json, name=TagKey" })
+  @SpeakeasyMetadata({ data: "json, name=TagKey" })
   tagKey: string;
 
-  @Metadata({ data: "json, name=TagValues" })
+  @SpeakeasyMetadata({ data: "json, name=TagValues" })
   tagValues: string[];
 }

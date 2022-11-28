@@ -1,20 +1,20 @@
 from dataclasses import dataclass, field
-
+from typing import Optional
 
 
 @dataclass
 class ContentDefinitionsDeleteContentDefinitionPathParams:
-    content_definition_id: int = field(default=None, metadata={'path_param': { 'field_name': 'contentDefinitionID', 'style': 'simple', 'explode': False }})
+    content_definition_id: int = field(metadata={'path_param': { 'field_name': 'contentDefinitionID', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class ContentDefinitionsDeleteContentDefinitionRequest:
-    path_params: ContentDefinitionsDeleteContentDefinitionPathParams = field(default=None)
+    path_params: ContentDefinitionsDeleteContentDefinitionPathParams = field()
     
 
 @dataclass
 class ContentDefinitionsDeleteContentDefinitionResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

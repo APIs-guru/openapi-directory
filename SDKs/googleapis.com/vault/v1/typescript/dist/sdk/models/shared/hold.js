@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { HeldAccount } from "./heldaccount";
 import { HeldOrgUnit } from "./heldorgunit";
 import { CorpusQuery } from "./corpusquery";
 export var HoldCorpusEnum;
@@ -45,31 +45,31 @@ var Hold = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=accounts", elemType: shared.HeldAccount }),
+        SpeakeasyMetadata({ data: "json, name=accounts", elemType: HeldAccount }),
         __metadata("design:type", Array)
     ], Hold.prototype, "accounts", void 0);
     __decorate([
-        Metadata({ data: "json, name=corpus" }),
+        SpeakeasyMetadata({ data: "json, name=corpus" }),
         __metadata("design:type", String)
     ], Hold.prototype, "corpus", void 0);
     __decorate([
-        Metadata({ data: "json, name=holdId" }),
+        SpeakeasyMetadata({ data: "json, name=holdId" }),
         __metadata("design:type", String)
     ], Hold.prototype, "holdId", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], Hold.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=orgUnit" }),
+        SpeakeasyMetadata({ data: "json, name=orgUnit" }),
         __metadata("design:type", HeldOrgUnit)
     ], Hold.prototype, "orgUnit", void 0);
     __decorate([
-        Metadata({ data: "json, name=query" }),
+        SpeakeasyMetadata({ data: "json, name=query" }),
         __metadata("design:type", CorpusQuery)
     ], Hold.prototype, "query", void 0);
     __decorate([
-        Metadata({ data: "json, name=updateTime" }),
+        SpeakeasyMetadata({ data: "json, name=updateTime" }),
         __metadata("design:type", String)
     ], Hold.prototype, "updateTime", void 0);
     return Hold;

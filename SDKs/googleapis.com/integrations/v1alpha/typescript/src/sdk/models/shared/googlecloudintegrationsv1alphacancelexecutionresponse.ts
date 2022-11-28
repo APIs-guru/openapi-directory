@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudIntegrationsV1alphaCancelExecutionResponse
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Response for cancelling an execution.
 **/
 export class GoogleCloudIntegrationsV1alphaCancelExecutionResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=isCanceled" })
+  @SpeakeasyMetadata({ data: "json, name=isCanceled" })
   isCanceled?: boolean;
 }

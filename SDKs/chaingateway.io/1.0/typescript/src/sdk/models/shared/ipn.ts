@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class Ipn extends SpeakeasyBase {
-  @Metadata({ data: "json, name=contractaddress" })
+  @SpeakeasyMetadata({ data: "json, name=contractaddress" })
   contractaddress: string;
 
-  @Metadata({ data: "json, name=ethereumaddress" })
+  @SpeakeasyMetadata({ data: "json, name=ethereumaddress" })
   ethereumaddress: string;
 
-  @Metadata({ data: "json, name=url" })
+  @SpeakeasyMetadata({ data: "json, name=url" })
   url: string;
 }

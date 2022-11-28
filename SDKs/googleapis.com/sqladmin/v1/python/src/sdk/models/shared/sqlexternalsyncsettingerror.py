@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class SQLExternalSyncSettingErrorTypeEnum(str, Enum):
     SQL_EXTERNAL_SYNC_SETTING_ERROR_TYPE_UNSPECIFIED = "SQL_EXTERNAL_SYNC_SETTING_ERROR_TYPE_UNSPECIFIED"
@@ -36,7 +38,11 @@ class SQLExternalSyncSettingErrorTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class SQLExternalSyncSettingError:
-    detail: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'detail' }})
-    kind: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'kind' }})
-    type: Optional[SQLExternalSyncSettingErrorTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    r"""SQLExternalSyncSettingError
+    External primary instance migration setting error/warning.
+    """
+    
+    detail: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('detail') }})
+    kind: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('kind') }})
+    type: Optional[SQLExternalSyncSettingErrorTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('type') }})
     

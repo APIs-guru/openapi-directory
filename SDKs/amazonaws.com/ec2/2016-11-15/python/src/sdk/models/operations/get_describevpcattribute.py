@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetDescribeVpcAttributeActionEnum(str, Enum):
     DESCRIBE_VPC_ATTRIBUTE = "DescribeVpcAttribute"
@@ -14,11 +18,11 @@ class GetDescribeVpcAttributeVersionEnum(str, Enum):
 
 @dataclass
 class GetDescribeVpcAttributeQueryParams:
-    action: GetDescribeVpcAttributeActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    attribute: GetDescribeVpcAttributeAttributeEnum = field(default=None, metadata={'query_param': { 'field_name': 'Attribute', 'style': 'form', 'explode': True }})
+    action: GetDescribeVpcAttributeActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    attribute: GetDescribeVpcAttributeAttributeEnum = field(metadata={'query_param': { 'field_name': 'Attribute', 'style': 'form', 'explode': True }})
+    version: GetDescribeVpcAttributeVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    vpc_id: str = field(metadata={'query_param': { 'field_name': 'VpcId', 'style': 'form', 'explode': True }})
     dry_run: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'DryRun', 'style': 'form', 'explode': True }})
-    version: GetDescribeVpcAttributeVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
-    vpc_id: str = field(default=None, metadata={'query_param': { 'field_name': 'VpcId', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -34,13 +38,13 @@ class GetDescribeVpcAttributeHeaders:
 
 @dataclass
 class GetDescribeVpcAttributeRequest:
-    query_params: GetDescribeVpcAttributeQueryParams = field(default=None)
-    headers: GetDescribeVpcAttributeHeaders = field(default=None)
+    headers: GetDescribeVpcAttributeHeaders = field()
+    query_params: GetDescribeVpcAttributeQueryParams = field()
     
 
 @dataclass
 class GetDescribeVpcAttributeResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

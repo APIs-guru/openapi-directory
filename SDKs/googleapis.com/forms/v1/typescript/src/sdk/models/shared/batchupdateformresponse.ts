@@ -1,8 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Form } from "./form";
 import { Response } from "./response";
 import { WriteControl } from "./writecontrol";
+
 
 
 // BatchUpdateFormResponse
@@ -10,12 +10,12 @@ import { WriteControl } from "./writecontrol";
  * Response to a BatchUpdateFormRequest.
 **/
 export class BatchUpdateFormResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=form" })
+  @SpeakeasyMetadata({ data: "json, name=form" })
   form?: Form;
 
-  @Metadata({ data: "json, name=replies", elemType: shared.Response })
+  @SpeakeasyMetadata({ data: "json, name=replies", elemType: Response })
   replies?: Response[];
 
-  @Metadata({ data: "json, name=writeControl" })
+  @SpeakeasyMetadata({ data: "json, name=writeControl" })
   writeControl?: WriteControl;
 }

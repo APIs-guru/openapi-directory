@@ -16,6 +16,8 @@ const (
 	InAppProductStatusEnumInactive          InAppProductStatusEnum = "inactive"
 )
 
+// InAppProduct
+// An in-app product. The resource for InappproductsService.
 type InAppProduct struct {
 	DefaultLanguage                          *string                                 `json:"defaultLanguage,omitempty"`
 	DefaultPrice                             *Price                                  `json:"defaultPrice,omitempty"`

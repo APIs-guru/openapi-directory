@@ -1,46 +1,47 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetNetworkInsightApplicationHealthByTimePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=applicationId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=applicationId" })
   applicationId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=networkId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=networkId" })
   networkId: string;
 }
 
 
 export class GetNetworkInsightApplicationHealthByTimeQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=resolution" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=resolution" })
   resolution?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=t0" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=t0" })
   t0?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=t1" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=t1" })
   t1?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=timespan" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=timespan" })
   timespan?: number;
 }
 
 
 export class GetNetworkInsightApplicationHealthByTimeRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetNetworkInsightApplicationHealthByTimePathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetNetworkInsightApplicationHealthByTimeQueryParams;
 }
 
 
 export class GetNetworkInsightApplicationHealthByTimeResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getNetworkInsightApplicationHealthByTime200ApplicationJsonObject?: Map<string, any>;
 }

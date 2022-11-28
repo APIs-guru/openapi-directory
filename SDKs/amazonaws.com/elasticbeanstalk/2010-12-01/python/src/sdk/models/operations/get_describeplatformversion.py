@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetDescribePlatformVersionActionEnum(str, Enum):
     DESCRIBE_PLATFORM_VERSION = "DescribePlatformVersion"
@@ -10,9 +14,9 @@ class GetDescribePlatformVersionVersionEnum(str, Enum):
 
 @dataclass
 class GetDescribePlatformVersionQueryParams:
-    action: GetDescribePlatformVersionActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetDescribePlatformVersionActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: GetDescribePlatformVersionVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     platform_arn: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'PlatformArn', 'style': 'form', 'explode': True }})
-    version: GetDescribePlatformVersionVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -28,13 +32,13 @@ class GetDescribePlatformVersionHeaders:
 
 @dataclass
 class GetDescribePlatformVersionRequest:
-    query_params: GetDescribePlatformVersionQueryParams = field(default=None)
-    headers: GetDescribePlatformVersionHeaders = field(default=None)
+    headers: GetDescribePlatformVersionHeaders = field()
+    query_params: GetDescribePlatformVersionQueryParams = field()
     
 
 @dataclass
 class GetDescribePlatformVersionResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

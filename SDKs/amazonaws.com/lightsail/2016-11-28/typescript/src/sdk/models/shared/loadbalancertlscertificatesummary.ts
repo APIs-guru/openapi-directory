@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // LoadBalancerTlsCertificateSummary
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Provides a summary of SSL/TLS certificate metadata.
 **/
 export class LoadBalancerTlsCertificateSummary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=isAttached" })
+  @SpeakeasyMetadata({ data: "json, name=isAttached" })
   isAttached?: boolean;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 }

@@ -1,6 +1,7 @@
 
 
+
 export enum RetryActionEnum {
-    Retry = "RETRY"
-,    Exit = "EXIT"
+    Retry = "RETRY",
+    Exit = "EXIT"
 }

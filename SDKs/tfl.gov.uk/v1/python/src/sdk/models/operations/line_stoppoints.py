@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class LineStopPointsPathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -15,14 +15,14 @@ class LineStopPointsQueryParams:
 
 @dataclass
 class LineStopPointsRequest:
-    path_params: LineStopPointsPathParams = field(default=None)
-    query_params: LineStopPointsQueryParams = field(default=None)
+    path_params: LineStopPointsPathParams = field()
+    query_params: LineStopPointsQueryParams = field()
     
 
 @dataclass
 class LineStopPointsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     tfl_api_presentation_entities_stop_points: Optional[List[shared.TflAPIPresentationEntitiesStopPoint]] = field(default=None)
     

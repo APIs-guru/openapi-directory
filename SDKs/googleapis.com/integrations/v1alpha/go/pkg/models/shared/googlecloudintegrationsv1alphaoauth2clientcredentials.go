@@ -9,6 +9,8 @@ const (
 	GoogleCloudIntegrationsV1alphaOAuth2ClientCredentialsRequestTypeEnumEncodedHeader          GoogleCloudIntegrationsV1alphaOAuth2ClientCredentialsRequestTypeEnum = "ENCODED_HEADER"
 )
 
+// GoogleCloudIntegrationsV1alphaOAuth2ClientCredentials
+// For client credentials grant, the client sends a POST request with grant_type as 'client_credentials' to the authorization server. The authorization server will respond with a JSON object containing the access token.
 type GoogleCloudIntegrationsV1alphaOAuth2ClientCredentials struct {
 	AccessToken   *GoogleCloudIntegrationsV1alphaAccessToken                            `json:"accessToken,omitempty"`
 	ClientID      *string                                                               `json:"clientId,omitempty"`

@@ -1,20 +1,21 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { NotebookExecutionStatusEnum } from "./notebookexecutionstatusenum";
 
 
+
 export class ListNotebookExecutionsInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=EditorId" })
+  @SpeakeasyMetadata({ data: "json, name=EditorId" })
   editorId?: string;
 
-  @Metadata({ data: "json, name=From" })
+  @SpeakeasyMetadata({ data: "json, name=From" })
   from?: Date;
 
-  @Metadata({ data: "json, name=Marker" })
+  @SpeakeasyMetadata({ data: "json, name=Marker" })
   marker?: string;
 
-  @Metadata({ data: "json, name=Status" })
+  @SpeakeasyMetadata({ data: "json, name=Status" })
   status?: NotebookExecutionStatusEnum;
 
-  @Metadata({ data: "json, name=To" })
+  @SpeakeasyMetadata({ data: "json, name=To" })
   to?: Date;
 }

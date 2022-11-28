@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { SafeguardPolicyEnum } from "./safeguardpolicyenum";
 /**
  * Provides information that defines a Microsoft SQL Server endpoint.

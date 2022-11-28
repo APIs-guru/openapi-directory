@@ -30,7 +30,7 @@ type ContainerProjectsLocationsClustersCreateSecurity struct {
 type ContainerProjectsLocationsClustersCreateRequest struct {
 	PathParams  ContainerProjectsLocationsClustersCreatePathParams
 	QueryParams ContainerProjectsLocationsClustersCreateQueryParams
-	Request     *shared.CreateClusterRequest `request:"mediaType=application/json"`
+	Request     *shared.CreateClusterRequestInput `request:"mediaType=application/json"`
 	Security    ContainerProjectsLocationsClustersCreateSecurity
 }
 

@@ -1,5 +1,7 @@
 package shared
 
+// GetCallsResponseEmbedded
+// A list of call objects. See the [get details of a specific call](#getCall) response fields for a description of the nested objects
 type GetCallsResponseEmbedded struct {
 	Calls []GetCallResponse `json:"calls,omitempty"`
 }

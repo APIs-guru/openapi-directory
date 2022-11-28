@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleLocation } from "./googlelocation";
+
 
 
 // ListRecommendedGoogleLocationsResponse
@@ -8,12 +8,12 @@ import { GoogleLocation } from "./googlelocation";
  * Response message for GoogleLocations.ListRecommendedGoogleLocations. It also contains some locations that have been claimed by other Business Profile users since the last time they were recommended to this Business Profile account.
 **/
 export class ListRecommendedGoogleLocationsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=googleLocations", elemType: shared.GoogleLocation })
+  @SpeakeasyMetadata({ data: "json, name=googleLocations", elemType: GoogleLocation })
   googleLocations?: GoogleLocation[];
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 
-  @Metadata({ data: "json, name=totalSize" })
+  @SpeakeasyMetadata({ data: "json, name=totalSize" })
   totalSize?: number;
 }

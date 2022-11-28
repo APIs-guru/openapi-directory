@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GluePolicy } from "./gluepolicy";
 
 
+
 export class GetResourcePoliciesResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=GetResourcePoliciesResponseList", elemType: shared.GluePolicy })
+  @SpeakeasyMetadata({ data: "json, name=GetResourcePoliciesResponseList", elemType: GluePolicy })
   getResourcePoliciesResponseList?: GluePolicy[];
 
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 }

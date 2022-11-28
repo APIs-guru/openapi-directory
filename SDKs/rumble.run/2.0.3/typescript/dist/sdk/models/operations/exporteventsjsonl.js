@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var ExportEventsJsonlQueryParams = /** @class */ (function (_super) {
     __extends(ExportEventsJsonlQueryParams, _super);
@@ -30,11 +30,11 @@ var ExportEventsJsonlQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=fields" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=fields" }),
         __metadata("design:type", String)
     ], ExportEventsJsonlQueryParams.prototype, "fields", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=search" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=search" }),
         __metadata("design:type", String)
     ], ExportEventsJsonlQueryParams.prototype, "search", void 0);
     return ExportEventsJsonlQueryParams;
@@ -46,7 +46,7 @@ var ExportEventsJsonlSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=http;subtype=bearer" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" }),
         __metadata("design:type", shared.SchemeBearerAuth)
     ], ExportEventsJsonlSecurity.prototype, "bearerAuth", void 0);
     return ExportEventsJsonlSecurity;
@@ -58,11 +58,11 @@ var ExportEventsJsonlRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ExportEventsJsonlQueryParams)
     ], ExportEventsJsonlRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ExportEventsJsonlSecurity)
     ], ExportEventsJsonlRequest.prototype, "security", void 0);
     return ExportEventsJsonlRequest;
@@ -74,15 +74,15 @@ var ExportEventsJsonlResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], ExportEventsJsonlResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata({ elemType: shared.Event }),
+        SpeakeasyMetadata({ elemType: shared.Event }),
         __metadata("design:type", Array)
     ], ExportEventsJsonlResponse.prototype, "events", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], ExportEventsJsonlResponse.prototype, "statusCode", void 0);
     return ExportEventsJsonlResponse;

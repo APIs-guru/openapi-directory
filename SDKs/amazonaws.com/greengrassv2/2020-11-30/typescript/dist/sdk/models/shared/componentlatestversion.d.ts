@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ComponentPlatform } from "./componentplatform";
 /**
  * Contains information about the latest version of a component.

@@ -1,13 +1,18 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import checkdetails
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class CheckDetailsOutput:
-    details: List[checkdetails.CheckDetails] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'details' }})
-    next: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next' }})
-    self: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'self' }})
+    r"""CheckDetailsOutput
+    Represents a list of background check details
+    """
+    
+    details: List[CheckDetails] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('details') }})
+    self: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('self') }})
+    next: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('next') }})
     

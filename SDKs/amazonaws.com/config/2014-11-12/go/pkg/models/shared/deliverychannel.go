@@ -1,5 +1,7 @@
 package shared
 
+// DeliveryChannel
+// The channel through which Config delivers notifications and updated configuration states.
 type DeliveryChannel struct {
 	ConfigSnapshotDeliveryProperties *ConfigSnapshotDeliveryProperties `json:"configSnapshotDeliveryProperties,omitempty"`
 	Name                             *string                           `json:"name,omitempty"`

@@ -1,5 +1,7 @@
 package shared
 
-type AddNoteRequest struct {
-	Note *Note `json:"note,omitempty"`
+// AddNoteRequestInput
+// Request to add a note.
+type AddNoteRequestInput struct {
+	Note *NoteInput `json:"note,omitempty"`
 }

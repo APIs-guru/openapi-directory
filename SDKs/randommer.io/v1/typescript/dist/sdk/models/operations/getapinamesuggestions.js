@@ -22,14 +22,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var GetApiNameSuggestionsQueryParams = /** @class */ (function (_super) {
     __extends(GetApiNameSuggestionsQueryParams, _super);
     function GetApiNameSuggestionsQueryParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=startingWords" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=startingWords" }),
         __metadata("design:type", String)
     ], GetApiNameSuggestionsQueryParams.prototype, "startingWords", void 0);
     return GetApiNameSuggestionsQueryParams;
@@ -41,7 +41,7 @@ var GetApiNameSuggestionsHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Api-Key" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Api-Key" }),
         __metadata("design:type", String)
     ], GetApiNameSuggestionsHeaders.prototype, "xApiKey", void 0);
     return GetApiNameSuggestionsHeaders;
@@ -53,11 +53,11 @@ var GetApiNameSuggestionsRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetApiNameSuggestionsQueryParams)
     ], GetApiNameSuggestionsRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetApiNameSuggestionsHeaders)
     ], GetApiNameSuggestionsRequest.prototype, "headers", void 0);
     return GetApiNameSuggestionsRequest;
@@ -69,11 +69,11 @@ var GetApiNameSuggestionsResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetApiNameSuggestionsResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetApiNameSuggestionsResponse.prototype, "statusCode", void 0);
     return GetApiNameSuggestionsResponse;

@@ -5,18 +5,18 @@ from sdk.models import shared
 
 @dataclass
 class TestnetGetTokenHoldersPathParams:
-    tokenid: str = field(default=None, metadata={'path_param': { 'field_name': 'tokenid', 'style': 'simple', 'explode': False }})
+    tokenid: str = field(metadata={'path_param': { 'field_name': 'tokenid', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class TestnetGetTokenHoldersRequest:
-    path_params: TestnetGetTokenHoldersPathParams = field(default=None)
+    path_params: TestnetGetTokenHoldersPathParams = field()
     
 
 @dataclass
 class TestnetGetTokenHoldersResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error: Optional[shared.Error] = field(default=None)
-    status_code: int = field(default=None)
     get_token_holders_response: Optional[shared.GetTokenHoldersResponse] = field(default=None)
     

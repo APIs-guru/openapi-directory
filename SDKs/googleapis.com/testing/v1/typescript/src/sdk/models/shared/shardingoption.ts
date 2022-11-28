@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ManualSharding } from "./manualsharding";
 import { UniformSharding } from "./uniformsharding";
+
 
 
 // ShardingOption
@@ -8,9 +9,9 @@ import { UniformSharding } from "./uniformsharding";
  * Options for enabling sharding.
 **/
 export class ShardingOption extends SpeakeasyBase {
-  @Metadata({ data: "json, name=manualSharding" })
+  @SpeakeasyMetadata({ data: "json, name=manualSharding" })
   manualSharding?: ManualSharding;
 
-  @Metadata({ data: "json, name=uniformSharding" })
+  @SpeakeasyMetadata({ data: "json, name=uniformSharding" })
   uniformSharding?: UniformSharding;
 }

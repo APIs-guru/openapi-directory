@@ -28,6 +28,8 @@ const (
 	NetworkConfigTypeEnumPrivate         NetworkConfigTypeEnum = "PRIVATE"
 )
 
+// NetworkConfig
+// Configuration parameters for a new network.
 type NetworkConfig struct {
 	Bandwidth       *NetworkConfigBandwidthEnum   `json:"bandwidth,omitempty"`
 	Cidr            *string                       `json:"cidr,omitempty"`

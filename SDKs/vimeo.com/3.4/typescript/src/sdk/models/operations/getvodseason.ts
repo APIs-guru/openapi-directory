@@ -1,32 +1,33 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetVodSeasonPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=ondemand_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=ondemand_id" })
   ondemandId: number;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=season_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=season_id" })
   seasonId: number;
 }
 
 
 export class GetVodSeasonRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetVodSeasonPathParams;
 }
 
 
 export class GetVodSeasonResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   legacyError?: shared.LegacyError;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   onDemandSeason?: shared.OnDemandSeason;
 }

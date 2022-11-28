@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 export declare class ListConflictingAliases20200531QueryParams extends SpeakeasyBase {
     alias: string;
     distributionId: string;

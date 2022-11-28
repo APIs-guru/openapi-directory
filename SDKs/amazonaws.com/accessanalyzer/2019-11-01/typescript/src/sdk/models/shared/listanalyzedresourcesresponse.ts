@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AnalyzedResourceSummary } from "./analyzedresourcesummary";
+
 
 
 // ListAnalyzedResourcesResponse
@@ -8,9 +8,9 @@ import { AnalyzedResourceSummary } from "./analyzedresourcesummary";
  * The response to the request.
 **/
 export class ListAnalyzedResourcesResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=analyzedResources", elemType: shared.AnalyzedResourceSummary })
+  @SpeakeasyMetadata({ data: "json, name=analyzedResources", elemType: AnalyzedResourceSummary })
   analyzedResources: AnalyzedResourceSummary[];
 
-  @Metadata({ data: "json, name=nextToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextToken" })
   nextToken?: string;
 }

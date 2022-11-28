@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum ErrorModelErrorModelErrorCategoryEnum {
-    General = "General"
-,    NotFound = "NotFound"
-,    NotAuthorised = "NotAuthorised"
-,    ValidationFailure = "ValidationFailure"
+    General = "General",
+    NotFound = "NotFound",
+    NotAuthorised = "NotAuthorised",
+    ValidationFailure = "ValidationFailure"
 }
 
 
@@ -13,24 +14,24 @@ export enum ErrorModelErrorModelErrorCategoryEnum {
  * The error models' errors
 **/
 export class ErrorModelErrorModelErrors extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Error" })
+  @SpeakeasyMetadata({ data: "json, name=Error" })
   error?: string[];
 }
 
 
 export class ErrorModelErrorModel extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Description" })
+  @SpeakeasyMetadata({ data: "json, name=Description" })
   description?: string;
 
-  @Metadata({ data: "json, name=ErrorCategory" })
+  @SpeakeasyMetadata({ data: "json, name=ErrorCategory" })
   errorCategory?: ErrorModelErrorModelErrorCategoryEnum;
 
-  @Metadata({ data: "json, name=Errors" })
+  @SpeakeasyMetadata({ data: "json, name=Errors" })
   errors?: ErrorModelErrorModelErrors;
 }
 
 
 export class ErrorModel extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ErrorModel" })
+  @SpeakeasyMetadata({ data: "json, name=ErrorModel" })
   errorModel?: ErrorModelErrorModel;
 }

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // MathActivity
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * An activity that computes an arithmetic expression using the message's attributes.
 **/
 export class MathActivity extends SpeakeasyBase {
-  @Metadata({ data: "json, name=attribute" })
+  @SpeakeasyMetadata({ data: "json, name=attribute" })
   attribute: string;
 
-  @Metadata({ data: "json, name=math" })
+  @SpeakeasyMetadata({ data: "json, name=math" })
   math: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 
-  @Metadata({ data: "json, name=next" })
+  @SpeakeasyMetadata({ data: "json, name=next" })
   next?: string;
 }

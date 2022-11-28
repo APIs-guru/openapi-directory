@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class VerifyAccountResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=digilockerid" })
+  @SpeakeasyMetadata({ data: "json, name=digilockerid" })
   digilockerid: string;
 
-  @Metadata({ data: "json, name=registered" })
+  @SpeakeasyMetadata({ data: "json, name=registered" })
   registered: string;
 }

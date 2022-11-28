@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { IngestionInputConfiguration } from "./ingestioninputconfiguration";
 import { DatasetStatusEnum } from "./datasetstatusenum";
 var DescribeDatasetResponse = /** @class */ (function (_super) {
@@ -31,35 +31,35 @@ var DescribeDatasetResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=CreatedAt" }),
+        SpeakeasyMetadata({ data: "json, name=CreatedAt" }),
         __metadata("design:type", Date)
     ], DescribeDatasetResponse.prototype, "createdAt", void 0);
     __decorate([
-        Metadata({ data: "json, name=DatasetArn" }),
+        SpeakeasyMetadata({ data: "json, name=DatasetArn" }),
         __metadata("design:type", String)
     ], DescribeDatasetResponse.prototype, "datasetArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=DatasetName" }),
+        SpeakeasyMetadata({ data: "json, name=DatasetName" }),
         __metadata("design:type", String)
     ], DescribeDatasetResponse.prototype, "datasetName", void 0);
     __decorate([
-        Metadata({ data: "json, name=IngestionInputConfiguration" }),
+        SpeakeasyMetadata({ data: "json, name=IngestionInputConfiguration" }),
         __metadata("design:type", IngestionInputConfiguration)
     ], DescribeDatasetResponse.prototype, "ingestionInputConfiguration", void 0);
     __decorate([
-        Metadata({ data: "json, name=LastUpdatedAt" }),
+        SpeakeasyMetadata({ data: "json, name=LastUpdatedAt" }),
         __metadata("design:type", Date)
     ], DescribeDatasetResponse.prototype, "lastUpdatedAt", void 0);
     __decorate([
-        Metadata({ data: "json, name=Schema" }),
+        SpeakeasyMetadata({ data: "json, name=Schema" }),
         __metadata("design:type", String)
     ], DescribeDatasetResponse.prototype, "schema", void 0);
     __decorate([
-        Metadata({ data: "json, name=ServerSideKmsKeyId" }),
+        SpeakeasyMetadata({ data: "json, name=ServerSideKmsKeyId" }),
         __metadata("design:type", String)
     ], DescribeDatasetResponse.prototype, "serverSideKmsKeyId", void 0);
     __decorate([
-        Metadata({ data: "json, name=Status" }),
+        SpeakeasyMetadata({ data: "json, name=Status" }),
         __metadata("design:type", String)
     ], DescribeDatasetResponse.prototype, "status", void 0);
     return DescribeDatasetResponse;

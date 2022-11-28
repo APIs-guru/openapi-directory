@@ -22,26 +22,26 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var PayInstructionPayInstruction = /** @class */ (function (_super) {
     __extends(PayInstructionPayInstruction, _super);
     function PayInstructionPayInstruction() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Description" }),
+        SpeakeasyMetadata({ data: "json, name=Description" }),
         __metadata("design:type", String)
     ], PayInstructionPayInstruction.prototype, "description", void 0);
     __decorate([
-        Metadata({ data: "json, name=EndDate" }),
+        SpeakeasyMetadata({ data: "json, name=EndDate" }),
         __metadata("design:type", Date)
     ], PayInstructionPayInstruction.prototype, "endDate", void 0);
     __decorate([
-        Metadata({ data: "json, name=PayLineTag" }),
+        SpeakeasyMetadata({ data: "json, name=PayLineTag" }),
         __metadata("design:type", String)
     ], PayInstructionPayInstruction.prototype, "payLineTag", void 0);
     __decorate([
-        Metadata({ data: "json, name=StartDate" }),
+        SpeakeasyMetadata({ data: "json, name=StartDate" }),
         __metadata("design:type", Date)
     ], PayInstructionPayInstruction.prototype, "startDate", void 0);
     return PayInstructionPayInstruction;
@@ -53,7 +53,7 @@ var PayInstruction = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=PayInstruction" }),
+        SpeakeasyMetadata({ data: "json, name=PayInstruction" }),
         __metadata("design:type", PayInstructionPayInstruction)
     ], PayInstruction.prototype, "payInstruction", void 0);
     return PayInstruction;

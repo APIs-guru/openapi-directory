@@ -1,5 +1,7 @@
 package shared
 
+// TransferSpec
+// Configuration for running a transfer.
 type TransferSpec struct {
 	AwsS3CompatibleDataSource   *AwsS3CompatibleData  `json:"awsS3CompatibleDataSource,omitempty"`
 	AwsS3DataSource             *AwsS3Data            `json:"awsS3DataSource,omitempty"`

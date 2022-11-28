@@ -1,11 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AudioConfig } from "./audioconfig";
 import { SynthesisInput } from "./synthesisinput";
 import { VoiceSelectionParams } from "./voiceselectionparams";
 
+
 export enum SynthesizeSpeechRequestEnableTimePointingEnum {
-    TimepointTypeUnspecified = "TIMEPOINT_TYPE_UNSPECIFIED"
-,    SsmlMark = "SSML_MARK"
+    TimepointTypeUnspecified = "TIMEPOINT_TYPE_UNSPECIFIED",
+    SsmlMark = "SSML_MARK"
 }
 
 
@@ -14,15 +15,15 @@ export enum SynthesizeSpeechRequestEnableTimePointingEnum {
  * The top-level message sent by the client for the `SynthesizeSpeech` method.
 **/
 export class SynthesizeSpeechRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=audioConfig" })
+  @SpeakeasyMetadata({ data: "json, name=audioConfig" })
   audioConfig?: AudioConfig;
 
-  @Metadata({ data: "json, name=enableTimePointing" })
+  @SpeakeasyMetadata({ data: "json, name=enableTimePointing" })
   enableTimePointing?: SynthesizeSpeechRequestEnableTimePointingEnum[];
 
-  @Metadata({ data: "json, name=input" })
+  @SpeakeasyMetadata({ data: "json, name=input" })
   input?: SynthesisInput;
 
-  @Metadata({ data: "json, name=voice" })
+  @SpeakeasyMetadata({ data: "json, name=voice" })
   voice?: VoiceSelectionParams;
 }

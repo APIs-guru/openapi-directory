@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SslCertDetail } from "./sslcertdetail";
 import { Operation } from "./operation";
 import { SslCert } from "./sslcert";
+
 
 
 // SslCertsInsertResponse
@@ -9,15 +10,15 @@ import { SslCert } from "./sslcert";
  * SslCert insert response.
 **/
 export class SslCertsInsertResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=clientCert" })
+  @SpeakeasyMetadata({ data: "json, name=clientCert" })
   clientCert?: SslCertDetail;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=operation" })
+  @SpeakeasyMetadata({ data: "json, name=operation" })
   operation?: Operation;
 
-  @Metadata({ data: "json, name=serverCaCert" })
+  @SpeakeasyMetadata({ data: "json, name=serverCaCert" })
   serverCaCert?: SslCert;
 }

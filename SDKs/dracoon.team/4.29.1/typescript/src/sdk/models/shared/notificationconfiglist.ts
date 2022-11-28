@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { NotificationConfig } from "./notificationconfig";
+
 
 
 // NotificationConfigList
@@ -8,6 +8,6 @@ import { NotificationConfig } from "./notificationconfig";
  * List of notification configurations
 **/
 export class NotificationConfigList extends SpeakeasyBase {
-  @Metadata({ data: "json, name=items", elemType: shared.NotificationConfig })
+  @SpeakeasyMetadata({ data: "json, name=items", elemType: NotificationConfig })
   items: NotificationConfig[];
 }

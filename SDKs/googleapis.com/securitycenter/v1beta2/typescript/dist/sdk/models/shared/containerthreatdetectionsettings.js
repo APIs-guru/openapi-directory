@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { Config } from "./config";
 export var ContainerThreatDetectionSettingsServiceEnablementStateEnum;
 (function (ContainerThreatDetectionSettingsServiceEnablementStateEnum) {
     ContainerThreatDetectionSettingsServiceEnablementStateEnum["EnablementStateUnspecified"] = "ENABLEMENT_STATE_UNSPECIFIED";
@@ -41,25 +41,49 @@ var ContainerThreatDetectionSettings = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=modules", elemType: shared.Config }),
+        SpeakeasyMetadata({ data: "json, name=modules", elemType: Config }),
         __metadata("design:type", Map)
     ], ContainerThreatDetectionSettings.prototype, "modules", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], ContainerThreatDetectionSettings.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=serviceAccount" }),
+        SpeakeasyMetadata({ data: "json, name=serviceAccount" }),
         __metadata("design:type", String)
     ], ContainerThreatDetectionSettings.prototype, "serviceAccount", void 0);
     __decorate([
-        Metadata({ data: "json, name=serviceEnablementState" }),
+        SpeakeasyMetadata({ data: "json, name=serviceEnablementState" }),
         __metadata("design:type", String)
     ], ContainerThreatDetectionSettings.prototype, "serviceEnablementState", void 0);
     __decorate([
-        Metadata({ data: "json, name=updateTime" }),
+        SpeakeasyMetadata({ data: "json, name=updateTime" }),
         __metadata("design:type", String)
     ], ContainerThreatDetectionSettings.prototype, "updateTime", void 0);
     return ContainerThreatDetectionSettings;
 }(SpeakeasyBase));
 export { ContainerThreatDetectionSettings };
+// ContainerThreatDetectionSettingsInput
+/**
+ * Resource capturing the settings for the Container Threat Detection service.
+**/
+var ContainerThreatDetectionSettingsInput = /** @class */ (function (_super) {
+    __extends(ContainerThreatDetectionSettingsInput, _super);
+    function ContainerThreatDetectionSettingsInput() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=modules", elemType: Config }),
+        __metadata("design:type", Map)
+    ], ContainerThreatDetectionSettingsInput.prototype, "modules", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=name" }),
+        __metadata("design:type", String)
+    ], ContainerThreatDetectionSettingsInput.prototype, "name", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=serviceEnablementState" }),
+        __metadata("design:type", String)
+    ], ContainerThreatDetectionSettingsInput.prototype, "serviceEnablementState", void 0);
+    return ContainerThreatDetectionSettingsInput;
+}(SpeakeasyBase));
+export { ContainerThreatDetectionSettingsInput };

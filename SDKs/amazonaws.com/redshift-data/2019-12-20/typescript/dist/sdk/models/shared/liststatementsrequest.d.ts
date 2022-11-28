@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { StatusStringEnum } from "./statusstringenum";
 export declare class ListStatementsRequest extends SpeakeasyBase {
     maxResults?: number;

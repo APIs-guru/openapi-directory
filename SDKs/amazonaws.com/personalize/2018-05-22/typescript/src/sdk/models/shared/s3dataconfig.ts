@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // S3DataConfig
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The configuration details of an Amazon S3 input or output bucket.
 **/
 export class S3DataConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=kmsKeyArn" })
+  @SpeakeasyMetadata({ data: "json, name=kmsKeyArn" })
   kmsKeyArn?: string;
 
-  @Metadata({ data: "json, name=path" })
+  @SpeakeasyMetadata({ data: "json, name=path" })
   path: string;
 }

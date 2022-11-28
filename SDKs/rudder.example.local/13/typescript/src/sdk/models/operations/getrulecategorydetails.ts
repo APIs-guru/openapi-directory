@@ -1,16 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetRuleCategoryDetailsPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=ruleCategoryId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=ruleCategoryId" })
   ruleCategoryId: string;
-}
-
-
-export class GetRuleCategoryDetailsRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: GetRuleCategoryDetailsPathParams;
 }
 
 export enum GetRuleCategoryDetails200ApplicationJsonActionEnum {
@@ -19,35 +14,41 @@ export enum GetRuleCategoryDetails200ApplicationJsonActionEnum {
 
 
 export class GetRuleCategoryDetails200ApplicationJsonData extends SpeakeasyBase {
-  @Metadata({ data: "json, name=rulesCategories", elemType: shared.RuleCategory })
+  @SpeakeasyMetadata({ data: "json, name=rulesCategories", elemType: shared.RuleCategory })
   rulesCategories: shared.RuleCategory[];
 }
 
 export enum GetRuleCategoryDetails200ApplicationJsonResultEnum {
-    Success = "success"
-,    Error = "error"
+    Success = "success",
+    Error = "error"
 }
 
 
 export class GetRuleCategoryDetails200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=action" })
+  @SpeakeasyMetadata({ data: "json, name=action" })
   action: GetRuleCategoryDetails200ApplicationJsonActionEnum;
 
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data: GetRuleCategoryDetails200ApplicationJsonData;
 
-  @Metadata({ data: "json, name=result" })
+  @SpeakeasyMetadata({ data: "json, name=result" })
   result: GetRuleCategoryDetails200ApplicationJsonResultEnum;
 }
 
 
+export class GetRuleCategoryDetailsRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: GetRuleCategoryDetailsPathParams;
+}
+
+
 export class GetRuleCategoryDetailsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getRuleCategoryDetails200ApplicationJsonObject?: GetRuleCategoryDetails200ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Optional
 from sdk.models import shared
 
 
 @dataclass
 class GetEventSourcePathParams:
-    uuid: str = field(default=None, metadata={'path_param': { 'field_name': 'UUID', 'style': 'simple', 'explode': False }})
+    uuid: str = field(metadata={'path_param': { 'field_name': 'UUID', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -21,16 +24,16 @@ class GetEventSourceHeaders:
 
 @dataclass
 class GetEventSourceRequest:
-    path_params: GetEventSourcePathParams = field(default=None)
-    headers: GetEventSourceHeaders = field(default=None)
+    headers: GetEventSourceHeaders = field()
+    path_params: GetEventSourcePathParams = field()
     
 
 @dataclass
 class GetEventSourceResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     event_source_configuration: Optional[shared.EventSourceConfiguration] = field(default=None)
     invalid_parameter_value_exception: Optional[shared.InvalidParameterValueException] = field(default=None)
     resource_not_found_exception: Optional[shared.ResourceNotFoundException] = field(default=None)
     service_exception: Optional[shared.ServiceException] = field(default=None)
-    status_code: int = field(default=None)
     

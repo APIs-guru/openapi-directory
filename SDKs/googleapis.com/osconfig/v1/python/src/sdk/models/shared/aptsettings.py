@@ -1,6 +1,11 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class AptSettingsTypeEnum(str, Enum):
     TYPE_UNSPECIFIED = "TYPE_UNSPECIFIED"
@@ -11,7 +16,11 @@ class AptSettingsTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class AptSettings:
-    excludes: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'excludes' }})
-    exclusive_packages: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'exclusivePackages' }})
-    type: Optional[AptSettingsTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    r"""AptSettings
+    Apt patching is completed by executing `apt-get update && apt-get upgrade`. Additional options can be set to control how this is executed.
+    """
+    
+    excludes: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('excludes') }})
+    exclusive_packages: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('exclusivePackages') }})
+    type: Optional[AptSettingsTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('type') }})
     

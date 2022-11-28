@@ -31,7 +31,7 @@ type BinaryauthorizationProjectsAttestorsCreateSecurity struct {
 type BinaryauthorizationProjectsAttestorsCreateRequest struct {
 	PathParams  BinaryauthorizationProjectsAttestorsCreatePathParams
 	QueryParams BinaryauthorizationProjectsAttestorsCreateQueryParams
-	Request     *shared.Attestor `request:"mediaType=application/json"`
+	Request     *shared.AttestorInput `request:"mediaType=application/json"`
 	Security    BinaryauthorizationProjectsAttestorsCreateSecurity
 }
 

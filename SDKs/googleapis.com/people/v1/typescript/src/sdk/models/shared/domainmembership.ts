@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // DomainMembership
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A Google Workspace Domain membership.
 **/
 export class DomainMembership extends SpeakeasyBase {
-  @Metadata({ data: "json, name=inViewerDomain" })
+  @SpeakeasyMetadata({ data: "json, name=inViewerDomain" })
   inViewerDomain?: boolean;
 }

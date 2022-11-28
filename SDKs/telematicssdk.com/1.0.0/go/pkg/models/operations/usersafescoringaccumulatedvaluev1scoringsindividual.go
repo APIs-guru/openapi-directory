@@ -5,10 +5,6 @@ type UserSafeScoringAccumulatedValueV1ScoringsIndividualQueryParams struct {
 	StartDate *string `queryParam:"style=form,explode=true,name=startDate"`
 }
 
-type UserSafeScoringAccumulatedValueV1ScoringsIndividualRequest struct {
-	QueryParams UserSafeScoringAccumulatedValueV1ScoringsIndividualQueryParams
-}
-
 type UserSafeScoringAccumulatedValueV1ScoringsIndividual200ApplicationJSONResult struct {
 	AccelerationScore *float64 `json:"AccelerationScore,omitempty"`
 	AppID             *string  `json:"AppId,omitempty"`
@@ -27,6 +23,10 @@ type UserSafeScoringAccumulatedValueV1ScoringsIndividual200ApplicationJSON struc
 	Result *UserSafeScoringAccumulatedValueV1ScoringsIndividual200ApplicationJSONResult `json:"Result,omitempty"`
 	Status *float64                                                                     `json:"Status,omitempty"`
 	Title  *string                                                                      `json:"Title,omitempty"`
+}
+
+type UserSafeScoringAccumulatedValueV1ScoringsIndividualRequest struct {
+	QueryParams UserSafeScoringAccumulatedValueV1ScoringsIndividualQueryParams
 }
 
 type UserSafeScoringAccumulatedValueV1ScoringsIndividualResponse struct {

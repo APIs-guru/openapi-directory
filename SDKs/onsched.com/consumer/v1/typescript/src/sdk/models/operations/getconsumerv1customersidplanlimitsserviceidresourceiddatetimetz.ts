@@ -1,34 +1,35 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetConsumerV1CustomersIdPlanlimitsServiceIdResourceIdDateTimeTzPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=dateTimeTz" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=dateTimeTz" })
   dateTimeTz: Date;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" })
   id: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=resourceId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=resourceId" })
   resourceId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=serviceId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=serviceId" })
   serviceId: string;
 }
 
 
 export class GetConsumerV1CustomersIdPlanlimitsServiceIdResourceIdDateTimeTzRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetConsumerV1CustomersIdPlanlimitsServiceIdResourceIdDateTimeTzPathParams;
 }
 
 
 export class GetConsumerV1CustomersIdPlanlimitsServiceIdResourceIdDateTimeTzResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   planLimitListViewModel?: Map<string, any>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

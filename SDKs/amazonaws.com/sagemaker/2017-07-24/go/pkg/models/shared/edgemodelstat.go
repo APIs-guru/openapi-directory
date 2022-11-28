@@ -1,5 +1,7 @@
 package shared
 
+// EdgeModelStat
+// Status of edge devices with this model.
 type EdgeModelStat struct {
 	ActiveDeviceCount    int64  `json:"ActiveDeviceCount"`
 	ConnectedDeviceCount int64  `json:"ConnectedDeviceCount"`

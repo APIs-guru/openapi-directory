@@ -1,13 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Translation } from "./translation";
-import { Translation } from "./translation";
+
 
 
 export class TranslateTextResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=glossaryTranslations", elemType: shared.Translation })
+  @SpeakeasyMetadata({ data: "json, name=glossaryTranslations", elemType: Translation })
   glossaryTranslations?: Translation[];
 
-  @Metadata({ data: "json, name=translations", elemType: shared.Translation })
+  @SpeakeasyMetadata({ data: "json, name=translations", elemType: Translation })
   translations?: Translation[];
 }

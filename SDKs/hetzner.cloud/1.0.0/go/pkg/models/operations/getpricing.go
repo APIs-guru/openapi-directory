@@ -5,10 +5,14 @@ type GetPricing200ApplicationJSONPricingFloatingIPPriceMonthly struct {
 	Net   string `json:"net"`
 }
 
+// GetPricing200ApplicationJSONPricingFloatingIP
+// The cost of one Floating IP per month
 type GetPricing200ApplicationJSONPricingFloatingIP struct {
 	PriceMonthly GetPricing200ApplicationJSONPricingFloatingIPPriceMonthly `json:"price_monthly"`
 }
 
+// GetPricing200ApplicationJSONPricingFloatingIpsPricesPriceMonthly
+// Monthly costs for a Floating IP type in this Location
 type GetPricing200ApplicationJSONPricingFloatingIpsPricesPriceMonthly struct {
 	Gross string `json:"gross"`
 	Net   string `json:"net"`
@@ -36,15 +40,21 @@ type GetPricing200ApplicationJSONPricingImagePricePerGbMonth struct {
 	Net   string `json:"net"`
 }
 
+// GetPricing200ApplicationJSONPricingImage
+// The cost of Image per GB/month
 type GetPricing200ApplicationJSONPricingImage struct {
 	PricePerGbMonth GetPricing200ApplicationJSONPricingImagePricePerGbMonth `json:"price_per_gb_month"`
 }
 
+// GetPricing200ApplicationJSONPricingLoadBalancerTypesPricesPriceHourly
+// Hourly costs for a Load Balancer type in this network zone
 type GetPricing200ApplicationJSONPricingLoadBalancerTypesPricesPriceHourly struct {
 	Gross string `json:"gross"`
 	Net   string `json:"net"`
 }
 
+// GetPricing200ApplicationJSONPricingLoadBalancerTypesPricesPriceMonthly
+// Monthly costs for a Load Balancer type in this network zone
 type GetPricing200ApplicationJSONPricingLoadBalancerTypesPricesPriceMonthly struct {
 	Gross string `json:"gross"`
 	Net   string `json:"net"`
@@ -62,15 +72,21 @@ type GetPricing200ApplicationJSONPricingLoadBalancerTypes struct {
 	Prices []GetPricing200ApplicationJSONPricingLoadBalancerTypesPrices `json:"prices"`
 }
 
+// GetPricing200ApplicationJSONPricingServerBackup
+// Will increase base Server costs by specific percentage
 type GetPricing200ApplicationJSONPricingServerBackup struct {
 	Percentage string `json:"percentage"`
 }
 
+// GetPricing200ApplicationJSONPricingServerTypesPricesPriceHourly
+// Hourly costs for a Server type in this Location
 type GetPricing200ApplicationJSONPricingServerTypesPricesPriceHourly struct {
 	Gross string `json:"gross"`
 	Net   string `json:"net"`
 }
 
+// GetPricing200ApplicationJSONPricingServerTypesPricesPriceMonthly
+// Monthly costs for a Server type in this Location
 type GetPricing200ApplicationJSONPricingServerTypesPricesPriceMonthly struct {
 	Gross string `json:"gross"`
 	Net   string `json:"net"`
@@ -93,6 +109,8 @@ type GetPricing200ApplicationJSONPricingTrafficPricePerTb struct {
 	Net   string `json:"net"`
 }
 
+// GetPricing200ApplicationJSONPricingTraffic
+// The cost of additional traffic per TB
 type GetPricing200ApplicationJSONPricingTraffic struct {
 	PricePerTb GetPricing200ApplicationJSONPricingTrafficPricePerTb `json:"price_per_tb"`
 }
@@ -102,6 +120,8 @@ type GetPricing200ApplicationJSONPricingVolumePricePerGbMonth struct {
 	Net   string `json:"net"`
 }
 
+// GetPricing200ApplicationJSONPricingVolume
+// The cost of Volume per GB/month
 type GetPricing200ApplicationJSONPricingVolume struct {
 	PricePerGbMonth GetPricing200ApplicationJSONPricingVolumePricePerGbMonth `json:"price_per_gb_month"`
 }

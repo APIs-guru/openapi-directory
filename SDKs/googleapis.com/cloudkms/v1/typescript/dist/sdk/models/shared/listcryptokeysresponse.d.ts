@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { CryptoKey } from "./cryptokey";
 /**
  * Response message for KeyManagementService.ListCryptoKeys.

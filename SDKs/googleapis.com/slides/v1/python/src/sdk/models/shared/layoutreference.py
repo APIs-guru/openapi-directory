@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class LayoutReferencePredefinedLayoutEnum(str, Enum):
     PREDEFINED_LAYOUT_UNSPECIFIED = "PREDEFINED_LAYOUT_UNSPECIFIED"
@@ -20,6 +22,10 @@ class LayoutReferencePredefinedLayoutEnum(str, Enum):
 @dataclass_json
 @dataclass
 class LayoutReference:
-    layout_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'layoutId' }})
-    predefined_layout: Optional[LayoutReferencePredefinedLayoutEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'predefinedLayout' }})
+    r"""LayoutReference
+    Slide layout reference. This may reference either: - A predefined layout - One of the layouts in the presentation.
+    """
+    
+    layout_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('layoutId') }})
+    predefined_layout: Optional[LayoutReferencePredefinedLayoutEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('predefinedLayout') }})
     

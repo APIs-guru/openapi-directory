@@ -11,10 +11,6 @@ type PostPortfolioAnalysisContributionsRiskRequestBody struct {
 	Portfolios             []PostPortfolioAnalysisContributionsRiskRequestBodyPortfolios `json:"portfolios"`
 }
 
-type PostPortfolioAnalysisContributionsRiskRequest struct {
-	Request PostPortfolioAnalysisContributionsRiskRequestBody `request:"mediaType=application/json"`
-}
-
 type PostPortfolioAnalysisContributionsRisk200ApplicationJSONPortfolios struct {
 	AssetsGroupsRiskContributions []float64 `json:"assetsGroupsRiskContributions,omitempty"`
 	AssetsRiskContributions       []float64 `json:"assetsRiskContributions"`
@@ -22,6 +18,10 @@ type PostPortfolioAnalysisContributionsRisk200ApplicationJSONPortfolios struct {
 
 type PostPortfolioAnalysisContributionsRisk200ApplicationJSON struct {
 	Portfolios []PostPortfolioAnalysisContributionsRisk200ApplicationJSONPortfolios `json:"portfolios"`
+}
+
+type PostPortfolioAnalysisContributionsRiskRequest struct {
+	Request PostPortfolioAnalysisContributionsRiskRequestBody `request:"mediaType=application/json"`
 }
 
 type PostPortfolioAnalysisContributionsRiskResponse struct {

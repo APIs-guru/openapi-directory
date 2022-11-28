@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// ServiceInstance
+// The service instance detail data.
 type ServiceInstance struct {
 	Arn                       string               `json:"arn"`
 	CreatedAt                 time.Time            `json:"createdAt"`

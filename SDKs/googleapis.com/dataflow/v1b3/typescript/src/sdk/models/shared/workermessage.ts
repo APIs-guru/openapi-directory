@@ -1,4 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { WorkerHealthReport } from "./workerhealthreport";
 import { WorkerLifecycleEvent } from "./workerlifecycleevent";
 import { WorkerMessageCode } from "./workermessagecode";
@@ -6,29 +6,30 @@ import { ResourceUtilizationReport } from "./resourceutilizationreport";
 import { WorkerShutdownNotice } from "./workershutdownnotice";
 
 
+
 // WorkerMessage
 /** 
  * WorkerMessage provides information to the backend about a worker.
 **/
 export class WorkerMessage extends SpeakeasyBase {
-  @Metadata({ data: "json, name=labels" })
+  @SpeakeasyMetadata({ data: "json, name=labels" })
   labels?: Map<string, string>;
 
-  @Metadata({ data: "json, name=time" })
+  @SpeakeasyMetadata({ data: "json, name=time" })
   time?: string;
 
-  @Metadata({ data: "json, name=workerHealthReport" })
+  @SpeakeasyMetadata({ data: "json, name=workerHealthReport" })
   workerHealthReport?: WorkerHealthReport;
 
-  @Metadata({ data: "json, name=workerLifecycleEvent" })
+  @SpeakeasyMetadata({ data: "json, name=workerLifecycleEvent" })
   workerLifecycleEvent?: WorkerLifecycleEvent;
 
-  @Metadata({ data: "json, name=workerMessageCode" })
+  @SpeakeasyMetadata({ data: "json, name=workerMessageCode" })
   workerMessageCode?: WorkerMessageCode;
 
-  @Metadata({ data: "json, name=workerMetrics" })
+  @SpeakeasyMetadata({ data: "json, name=workerMetrics" })
   workerMetrics?: ResourceUtilizationReport;
 
-  @Metadata({ data: "json, name=workerShutdownNotice" })
+  @SpeakeasyMetadata({ data: "json, name=workerShutdownNotice" })
   workerShutdownNotice?: WorkerShutdownNotice;
 }

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // CommentaryCommentaryEmployee
 /**
  * The commentarys' employee
@@ -33,15 +33,15 @@ var CommentaryCommentaryEmployee = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=@href" }),
+        SpeakeasyMetadata({ data: "json, name=@href" }),
         __metadata("design:type", String)
     ], CommentaryCommentaryEmployee.prototype, "atHref", void 0);
     __decorate([
-        Metadata({ data: "json, name=@rel" }),
+        SpeakeasyMetadata({ data: "json, name=@rel" }),
         __metadata("design:type", String)
     ], CommentaryCommentaryEmployee.prototype, "atRel", void 0);
     __decorate([
-        Metadata({ data: "json, name=@title" }),
+        SpeakeasyMetadata({ data: "json, name=@title" }),
         __metadata("design:type", String)
     ], CommentaryCommentaryEmployee.prototype, "atTitle", void 0);
     return CommentaryCommentaryEmployee;
@@ -57,15 +57,15 @@ var CommentaryCommentaryPayRun = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=@href" }),
+        SpeakeasyMetadata({ data: "json, name=@href" }),
         __metadata("design:type", String)
     ], CommentaryCommentaryPayRun.prototype, "atHref", void 0);
     __decorate([
-        Metadata({ data: "json, name=@rel" }),
+        SpeakeasyMetadata({ data: "json, name=@rel" }),
         __metadata("design:type", String)
     ], CommentaryCommentaryPayRun.prototype, "atRel", void 0);
     __decorate([
-        Metadata({ data: "json, name=@title" }),
+        SpeakeasyMetadata({ data: "json, name=@title" }),
         __metadata("design:type", String)
     ], CommentaryCommentaryPayRun.prototype, "atTitle", void 0);
     return CommentaryCommentaryPayRun;
@@ -77,19 +77,19 @@ var CommentaryCommentary = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Created" }),
+        SpeakeasyMetadata({ data: "json, name=Created" }),
         __metadata("design:type", Date)
     ], CommentaryCommentary.prototype, "created", void 0);
     __decorate([
-        Metadata({ data: "json, name=Detail" }),
+        SpeakeasyMetadata({ data: "json, name=Detail" }),
         __metadata("design:type", String)
     ], CommentaryCommentary.prototype, "detail", void 0);
     __decorate([
-        Metadata({ data: "json, name=Employee" }),
+        SpeakeasyMetadata({ data: "json, name=Employee" }),
         __metadata("design:type", CommentaryCommentaryEmployee)
     ], CommentaryCommentary.prototype, "employee", void 0);
     __decorate([
-        Metadata({ data: "json, name=PayRun" }),
+        SpeakeasyMetadata({ data: "json, name=PayRun" }),
         __metadata("design:type", CommentaryCommentaryPayRun)
     ], CommentaryCommentary.prototype, "payRun", void 0);
     return CommentaryCommentary;
@@ -101,7 +101,7 @@ var Commentary = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Commentary" }),
+        SpeakeasyMetadata({ data: "json, name=Commentary" }),
         __metadata("design:type", CommentaryCommentary)
     ], Commentary.prototype, "commentary", void 0);
     return Commentary;

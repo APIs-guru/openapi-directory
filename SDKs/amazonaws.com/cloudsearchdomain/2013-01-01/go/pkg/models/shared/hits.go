@@ -1,5 +1,7 @@
 package shared
 
+// Hits
+// The collection of documents that match the search request.
 type Hits struct {
 	Cursor *string `json:"cursor,omitempty"`
 	Found  *int64  `json:"found,omitempty"`

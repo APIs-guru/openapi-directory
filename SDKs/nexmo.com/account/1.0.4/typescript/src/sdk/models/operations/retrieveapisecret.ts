@@ -1,44 +1,45 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class RetrieveApiSecretPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=api_key" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=api_key" })
   apiKey: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=secret_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=secret_id" })
   secretId: string;
 }
 
 
 export class RetrieveApiSecretSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=basic" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=basic" })
   basicAuth: shared.SchemeBasicAuth;
 }
 
 
 export class RetrieveApiSecretRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: RetrieveApiSecretPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: RetrieveApiSecretSecurity;
 }
 
 
 export class RetrieveApiSecretResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   retrieveApiSecret401ApplicationJsonAny?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   retrieveApiSecret404ApplicationJsonOneOf?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   secretInfo?: shared.SecretInfo;
 }

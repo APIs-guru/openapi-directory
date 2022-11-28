@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AutoScalingConfigurationSummary } from "./autoscalingconfigurationsummary";
 
 
+
 export class ListAutoScalingConfigurationsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AutoScalingConfigurationSummaryList", elemType: shared.AutoScalingConfigurationSummary })
+  @SpeakeasyMetadata({ data: "json, name=AutoScalingConfigurationSummaryList", elemType: AutoScalingConfigurationSummary })
   autoScalingConfigurationSummaryList: AutoScalingConfigurationSummary[];
 
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 }

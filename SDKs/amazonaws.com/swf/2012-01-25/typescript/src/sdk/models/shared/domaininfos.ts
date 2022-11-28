@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DomainInfo } from "./domaininfo";
+
 
 
 // DomainInfos
@@ -8,9 +8,9 @@ import { DomainInfo } from "./domaininfo";
  * Contains a paginated collection of DomainInfo structures.
 **/
 export class DomainInfos extends SpeakeasyBase {
-  @Metadata({ data: "json, name=domainInfos", elemType: shared.DomainInfo })
+  @SpeakeasyMetadata({ data: "json, name=domainInfos", elemType: DomainInfo })
   domainInfos: DomainInfo[];
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 }

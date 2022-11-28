@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AutoMlMetricEnumEnum } from "./automlmetricenumenum";
 import { AutoMlJobObjectiveTypeEnum } from "./automljobobjectivetypeenum";
+
 
 
 // FinalAutoMlJobObjectiveMetric
@@ -8,12 +9,12 @@ import { AutoMlJobObjectiveTypeEnum } from "./automljobobjectivetypeenum";
  * The best candidate result from an AutoML training job.
 **/
 export class FinalAutoMlJobObjectiveMetric extends SpeakeasyBase {
-  @Metadata({ data: "json, name=MetricName" })
+  @SpeakeasyMetadata({ data: "json, name=MetricName" })
   metricName: AutoMlMetricEnumEnum;
 
-  @Metadata({ data: "json, name=Type" })
+  @SpeakeasyMetadata({ data: "json, name=Type" })
   type?: AutoMlJobObjectiveTypeEnum;
 
-  @Metadata({ data: "json, name=Value" })
+  @SpeakeasyMetadata({ data: "json, name=Value" })
   value: number;
 }

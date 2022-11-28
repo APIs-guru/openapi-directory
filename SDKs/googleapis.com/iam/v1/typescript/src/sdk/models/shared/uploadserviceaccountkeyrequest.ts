@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // UploadServiceAccountKeyRequest
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The service account key upload request.
 **/
 export class UploadServiceAccountKeyRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=publicKeyData" })
+  @SpeakeasyMetadata({ data: "json, name=publicKeyData" })
   publicKeyData?: string;
 }

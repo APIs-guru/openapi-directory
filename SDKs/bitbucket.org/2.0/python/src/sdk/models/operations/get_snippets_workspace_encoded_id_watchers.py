@@ -5,42 +5,27 @@ from sdk.models import shared
 
 @dataclass
 class GetSnippetsWorkspaceEncodedIDWatchersPathParams:
-    encoded_id: str = field(default=None, metadata={'path_param': { 'field_name': 'encoded_id', 'style': 'simple', 'explode': False }})
-    workspace: str = field(default=None, metadata={'path_param': { 'field_name': 'workspace', 'style': 'simple', 'explode': False }})
-    
-
-@dataclass
-class GetSnippetsWorkspaceEncodedIDWatchersSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    
-
-@dataclass
-class GetSnippetsWorkspaceEncodedIDWatchersSecurityOption2:
-    basic: shared.SchemeBasic = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'basic' }})
-    
-
-@dataclass
-class GetSnippetsWorkspaceEncodedIDWatchersSecurityOption3:
-    api_key: shared.SchemeAPIKey = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    encoded_id: str = field(metadata={'path_param': { 'field_name': 'encoded_id', 'style': 'simple', 'explode': False }})
+    workspace: str = field(metadata={'path_param': { 'field_name': 'workspace', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetSnippetsWorkspaceEncodedIDWatchersSecurity:
-    option1: Optional[GetSnippetsWorkspaceEncodedIDWatchersSecurityOption1] = field(default=None, metadata={'security': { 'option': True }})
-    option2: Optional[GetSnippetsWorkspaceEncodedIDWatchersSecurityOption2] = field(default=None, metadata={'security': { 'option': True }})
-    option3: Optional[GetSnippetsWorkspaceEncodedIDWatchersSecurityOption3] = field(default=None, metadata={'security': { 'option': True }})
+    api_key: Optional[shared.SchemeAPIKey] = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    basic: Optional[shared.SchemeBasic] = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'basic' }})
+    oauth2: Optional[shared.SchemeOauth2] = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class GetSnippetsWorkspaceEncodedIDWatchersRequest:
-    path_params: GetSnippetsWorkspaceEncodedIDWatchersPathParams = field(default=None)
-    security: GetSnippetsWorkspaceEncodedIDWatchersSecurity = field(default=None)
+    path_params: GetSnippetsWorkspaceEncodedIDWatchersPathParams = field()
+    security: GetSnippetsWorkspaceEncodedIDWatchersSecurity = field()
     
 
 @dataclass
 class GetSnippetsWorkspaceEncodedIDWatchersResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error: Optional[dict[str, Any]] = field(default=None)
     paginated_users: Optional[shared.PaginatedUsers] = field(default=None)
     

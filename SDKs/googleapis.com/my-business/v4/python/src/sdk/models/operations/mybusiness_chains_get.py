@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class MybusinessChainsGetPathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,13 +26,13 @@ class MybusinessChainsGetQueryParams:
 
 @dataclass
 class MybusinessChainsGetRequest:
-    path_params: MybusinessChainsGetPathParams = field(default=None)
-    query_params: MybusinessChainsGetQueryParams = field(default=None)
+    path_params: MybusinessChainsGetPathParams = field()
+    query_params: MybusinessChainsGetQueryParams = field()
     
 
 @dataclass
 class MybusinessChainsGetResponse:
+    content_type: str = field()
+    status_code: int = field()
     chain: Optional[shared.Chain] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

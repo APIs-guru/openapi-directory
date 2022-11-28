@@ -1,6 +1,7 @@
 
 
+
 export enum IdTypeEnum {
-    Vat = "VAT"
-,    Ssn = "SSN"
+    Vat = "VAT",
+    Ssn = "SSN"
 }

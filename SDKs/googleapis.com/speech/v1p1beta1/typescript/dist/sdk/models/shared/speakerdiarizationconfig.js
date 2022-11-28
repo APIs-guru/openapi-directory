@@ -22,32 +22,28 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-// SpeakerDiarizationConfig
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+// SpeakerDiarizationConfigInput
 /**
  * Config to enable speaker diarization.
 **/
-var SpeakerDiarizationConfig = /** @class */ (function (_super) {
-    __extends(SpeakerDiarizationConfig, _super);
-    function SpeakerDiarizationConfig() {
+var SpeakerDiarizationConfigInput = /** @class */ (function (_super) {
+    __extends(SpeakerDiarizationConfigInput, _super);
+    function SpeakerDiarizationConfigInput() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=enableSpeakerDiarization" }),
+        SpeakeasyMetadata({ data: "json, name=enableSpeakerDiarization" }),
         __metadata("design:type", Boolean)
-    ], SpeakerDiarizationConfig.prototype, "enableSpeakerDiarization", void 0);
+    ], SpeakerDiarizationConfigInput.prototype, "enableSpeakerDiarization", void 0);
     __decorate([
-        Metadata({ data: "json, name=maxSpeakerCount" }),
+        SpeakeasyMetadata({ data: "json, name=maxSpeakerCount" }),
         __metadata("design:type", Number)
-    ], SpeakerDiarizationConfig.prototype, "maxSpeakerCount", void 0);
+    ], SpeakerDiarizationConfigInput.prototype, "maxSpeakerCount", void 0);
     __decorate([
-        Metadata({ data: "json, name=minSpeakerCount" }),
+        SpeakeasyMetadata({ data: "json, name=minSpeakerCount" }),
         __metadata("design:type", Number)
-    ], SpeakerDiarizationConfig.prototype, "minSpeakerCount", void 0);
-    __decorate([
-        Metadata({ data: "json, name=speakerTag" }),
-        __metadata("design:type", Number)
-    ], SpeakerDiarizationConfig.prototype, "speakerTag", void 0);
-    return SpeakerDiarizationConfig;
+    ], SpeakerDiarizationConfigInput.prototype, "minSpeakerCount", void 0);
+    return SpeakerDiarizationConfigInput;
 }(SpeakeasyBase));
-export { SpeakerDiarizationConfig };
+export { SpeakerDiarizationConfigInput };

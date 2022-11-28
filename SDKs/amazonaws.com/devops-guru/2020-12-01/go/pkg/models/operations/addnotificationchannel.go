@@ -14,6 +14,9 @@ type AddNotificationChannelHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// AddNotificationChannelRequestBodyConfig
+//
+//	Information about notification channels you have configured with DevOps Guru. The one supported notification channel is Amazon Simple Notification Service (Amazon SNS).
 type AddNotificationChannelRequestBodyConfig struct {
 	Sns *shared.SnsChannelConfig `json:"Sns,omitempty"`
 }

@@ -31,7 +31,7 @@ type IamPoliciesCreatePolicySecurity struct {
 type IamPoliciesCreatePolicyRequest struct {
 	PathParams  IamPoliciesCreatePolicyPathParams
 	QueryParams IamPoliciesCreatePolicyQueryParams
-	Request     *shared.GoogleIamV2betaPolicy `request:"mediaType=application/json"`
+	Request     *shared.GoogleIamV2betaPolicyInput `request:"mediaType=application/json"`
 	Security    IamPoliciesCreatePolicySecurity
 }
 

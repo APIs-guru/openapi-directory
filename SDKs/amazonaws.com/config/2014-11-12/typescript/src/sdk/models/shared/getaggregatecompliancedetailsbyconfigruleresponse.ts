@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AggregateEvaluationResult } from "./aggregateevaluationresult";
 
 
+
 export class GetAggregateComplianceDetailsByConfigRuleResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AggregateEvaluationResults", elemType: shared.AggregateEvaluationResult })
+  @SpeakeasyMetadata({ data: "json, name=AggregateEvaluationResults", elemType: AggregateEvaluationResult })
   aggregateEvaluationResults?: AggregateEvaluationResult[];
 
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 }

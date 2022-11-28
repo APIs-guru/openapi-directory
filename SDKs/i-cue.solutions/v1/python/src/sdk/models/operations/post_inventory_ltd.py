@@ -9,11 +9,11 @@ class PostInventoryLtdHeaders:
 
 @dataclass
 class PostInventoryLtdRequest:
-    headers: PostInventoryLtdHeaders = field(default=None)
+    headers: PostInventoryLtdHeaders = field()
     
 
 @dataclass
 class PostInventoryLtdResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

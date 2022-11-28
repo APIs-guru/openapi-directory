@@ -22,19 +22,19 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { ComputeEnvironmentDetail } from "./computeenvironmentdetail";
 var DescribeComputeEnvironmentsResponse = /** @class */ (function (_super) {
     __extends(DescribeComputeEnvironmentsResponse, _super);
     function DescribeComputeEnvironmentsResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=computeEnvironments", elemType: shared.ComputeEnvironmentDetail }),
+        SpeakeasyMetadata({ data: "json, name=computeEnvironments", elemType: ComputeEnvironmentDetail }),
         __metadata("design:type", Array)
     ], DescribeComputeEnvironmentsResponse.prototype, "computeEnvironments", void 0);
     __decorate([
-        Metadata({ data: "json, name=nextToken" }),
+        SpeakeasyMetadata({ data: "json, name=nextToken" }),
         __metadata("design:type", String)
     ], DescribeComputeEnvironmentsResponse.prototype, "nextToken", void 0);
     return DescribeComputeEnvironmentsResponse;

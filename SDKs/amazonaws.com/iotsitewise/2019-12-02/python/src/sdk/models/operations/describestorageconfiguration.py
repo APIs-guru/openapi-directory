@@ -1,4 +1,7 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
@@ -16,18 +19,18 @@ class DescribeStorageConfigurationHeaders:
 
 @dataclass
 class DescribeStorageConfigurationRequest:
-    headers: DescribeStorageConfigurationHeaders = field(default=None)
+    headers: DescribeStorageConfigurationHeaders = field()
     
 
 @dataclass
 class DescribeStorageConfigurationResponse:
+    content_type: str = field()
+    status_code: int = field()
     conflicting_operation_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     describe_storage_configuration_response: Optional[shared.DescribeStorageConfigurationResponse] = field(default=None)
     internal_failure_exception: Optional[Any] = field(default=None)
     invalid_request_exception: Optional[Any] = field(default=None)
     limit_exceeded_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     

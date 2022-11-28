@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TransactionOptions } from "./transactionoptions";
 import { StructuredQuery } from "./structuredquery";
+
 
 
 // RunQueryRequest
@@ -8,15 +9,15 @@ import { StructuredQuery } from "./structuredquery";
  * The request for Firestore.RunQuery.
 **/
 export class RunQueryRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=newTransaction" })
+  @SpeakeasyMetadata({ data: "json, name=newTransaction" })
   newTransaction?: TransactionOptions;
 
-  @Metadata({ data: "json, name=readTime" })
+  @SpeakeasyMetadata({ data: "json, name=readTime" })
   readTime?: string;
 
-  @Metadata({ data: "json, name=structuredQuery" })
+  @SpeakeasyMetadata({ data: "json, name=structuredQuery" })
   structuredQuery?: StructuredQuery;
 
-  @Metadata({ data: "json, name=transaction" })
+  @SpeakeasyMetadata({ data: "json, name=transaction" })
   transaction?: string;
 }

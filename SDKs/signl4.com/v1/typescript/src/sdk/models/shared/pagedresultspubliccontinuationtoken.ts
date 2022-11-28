@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class PagedResultsPublicContinuationToken extends SpeakeasyBase {
-  @Metadata({ data: "json, name=nextPartitionKey" })
+  @SpeakeasyMetadata({ data: "json, name=nextPartitionKey" })
   nextPartitionKey?: string;
 
-  @Metadata({ data: "json, name=nextRowKey" })
+  @SpeakeasyMetadata({ data: "json, name=nextRowKey" })
   nextRowKey?: string;
 
-  @Metadata({ data: "json, name=nextTableName" })
+  @SpeakeasyMetadata({ data: "json, name=nextTableName" })
   nextTableName?: string;
 }

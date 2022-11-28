@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // StringHparamSearchSpace
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Search space for string and enum.
 **/
 export class StringHparamSearchSpace extends SpeakeasyBase {
-  @Metadata({ data: "json, name=candidates" })
+  @SpeakeasyMetadata({ data: "json, name=candidates" })
   candidates?: string[];
 }

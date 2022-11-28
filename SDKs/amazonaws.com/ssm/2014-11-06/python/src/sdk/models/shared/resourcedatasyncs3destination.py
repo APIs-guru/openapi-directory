@@ -1,17 +1,22 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import resourcedatasyncdestinationdatasharing
-from . import resourcedatasyncs3format_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ResourceDataSyncS3Destination:
-    awskms_key_arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AWSKMSKeyARN' }})
-    bucket_name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'BucketName' }})
-    destination_data_sharing: Optional[resourcedatasyncdestinationdatasharing.ResourceDataSyncDestinationDataSharing] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'DestinationDataSharing' }})
-    prefix: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Prefix' }})
-    region: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Region' }})
-    sync_format: resourcedatasyncs3format_enum.ResourceDataSyncS3FormatEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'SyncFormat' }})
+    r"""ResourceDataSyncS3Destination
+    Information about the target S3 bucket for the resource data sync.
+    """
+    
+    bucket_name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('BucketName') }})
+    region: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Region') }})
+    sync_format: ResourceDataSyncS3FormatEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('SyncFormat') }})
+    awskms_key_arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('AWSKMSKeyARN') }})
+    destination_data_sharing: Optional[ResourceDataSyncDestinationDataSharing] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('DestinationDataSharing') }})
+    prefix: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Prefix') }})
     

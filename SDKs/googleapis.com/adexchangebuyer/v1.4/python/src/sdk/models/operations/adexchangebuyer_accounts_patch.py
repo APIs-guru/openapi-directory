@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class AdexchangebuyerAccountsPatchPathParams:
-    id: int = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: int = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -22,21 +23,21 @@ class AdexchangebuyerAccountsPatchQueryParams:
 
 @dataclass
 class AdexchangebuyerAccountsPatchSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class AdexchangebuyerAccountsPatchRequest:
-    path_params: AdexchangebuyerAccountsPatchPathParams = field(default=None)
-    query_params: AdexchangebuyerAccountsPatchQueryParams = field(default=None)
+    path_params: AdexchangebuyerAccountsPatchPathParams = field()
+    query_params: AdexchangebuyerAccountsPatchQueryParams = field()
+    security: AdexchangebuyerAccountsPatchSecurity = field()
     request: Optional[shared.Account] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: AdexchangebuyerAccountsPatchSecurity = field(default=None)
     
 
 @dataclass
 class AdexchangebuyerAccountsPatchResponse:
+    content_type: str = field()
+    status_code: int = field()
     account: Optional[shared.Account] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

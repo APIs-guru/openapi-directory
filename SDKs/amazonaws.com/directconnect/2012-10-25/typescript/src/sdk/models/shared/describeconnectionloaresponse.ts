@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Loa } from "./loa";
 
 
+
 export class DescribeConnectionLoaResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=loa" })
+  @SpeakeasyMetadata({ data: "json, name=loa" })
   loa?: Loa;
 }

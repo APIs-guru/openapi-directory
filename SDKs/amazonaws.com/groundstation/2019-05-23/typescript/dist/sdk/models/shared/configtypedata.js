@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AntennaDownlinkConfig } from "./antennadownlinkconfig";
 import { AntennaDownlinkDemodDecodeConfig } from "./antennadownlinkdemoddecodeconfig";
 import { AntennaUplinkConfig } from "./antennauplinkconfig";
@@ -40,31 +40,31 @@ var ConfigTypeData = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=antennaDownlinkConfig" }),
+        SpeakeasyMetadata({ data: "json, name=antennaDownlinkConfig" }),
         __metadata("design:type", AntennaDownlinkConfig)
     ], ConfigTypeData.prototype, "antennaDownlinkConfig", void 0);
     __decorate([
-        Metadata({ data: "json, name=antennaDownlinkDemodDecodeConfig" }),
+        SpeakeasyMetadata({ data: "json, name=antennaDownlinkDemodDecodeConfig" }),
         __metadata("design:type", AntennaDownlinkDemodDecodeConfig)
     ], ConfigTypeData.prototype, "antennaDownlinkDemodDecodeConfig", void 0);
     __decorate([
-        Metadata({ data: "json, name=antennaUplinkConfig" }),
+        SpeakeasyMetadata({ data: "json, name=antennaUplinkConfig" }),
         __metadata("design:type", AntennaUplinkConfig)
     ], ConfigTypeData.prototype, "antennaUplinkConfig", void 0);
     __decorate([
-        Metadata({ data: "json, name=dataflowEndpointConfig" }),
+        SpeakeasyMetadata({ data: "json, name=dataflowEndpointConfig" }),
         __metadata("design:type", DataflowEndpointConfig)
     ], ConfigTypeData.prototype, "dataflowEndpointConfig", void 0);
     __decorate([
-        Metadata({ data: "json, name=s3RecordingConfig" }),
+        SpeakeasyMetadata({ data: "json, name=s3RecordingConfig" }),
         __metadata("design:type", S3RecordingConfig)
     ], ConfigTypeData.prototype, "s3RecordingConfig", void 0);
     __decorate([
-        Metadata({ data: "json, name=trackingConfig" }),
+        SpeakeasyMetadata({ data: "json, name=trackingConfig" }),
         __metadata("design:type", TrackingConfig)
     ], ConfigTypeData.prototype, "trackingConfig", void 0);
     __decorate([
-        Metadata({ data: "json, name=uplinkEchoConfig" }),
+        SpeakeasyMetadata({ data: "json, name=uplinkEchoConfig" }),
         __metadata("design:type", UplinkEchoConfig)
     ], ConfigTypeData.prototype, "uplinkEchoConfig", void 0);
     return ConfigTypeData;

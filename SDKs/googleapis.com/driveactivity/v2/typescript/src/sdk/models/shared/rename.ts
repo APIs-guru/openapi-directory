@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Rename
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * An object was renamed.
 **/
 export class Rename extends SpeakeasyBase {
-  @Metadata({ data: "json, name=newTitle" })
+  @SpeakeasyMetadata({ data: "json, name=newTitle" })
   newTitle?: string;
 
-  @Metadata({ data: "json, name=oldTitle" })
+  @SpeakeasyMetadata({ data: "json, name=oldTitle" })
   oldTitle?: string;
 }

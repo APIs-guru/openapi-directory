@@ -1,7 +1,8 @@
 
 
+
 export enum CandidateSortByEnum {
-    CreationTime = "CreationTime"
-,    Status = "Status"
-,    FinalObjectiveMetricValue = "FinalObjectiveMetricValue"
+    CreationTime = "CreationTime",
+    Status = "Status",
+    FinalObjectiveMetricValue = "FinalObjectiveMetricValue"
 }

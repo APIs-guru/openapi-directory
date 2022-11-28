@@ -1,14 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { IdentityTypeEnum } from "./identitytypeenum";
 
 
+
 export class ListStudioSessionMappingsInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=IdentityType" })
+  @SpeakeasyMetadata({ data: "json, name=IdentityType" })
   identityType?: IdentityTypeEnum;
 
-  @Metadata({ data: "json, name=Marker" })
+  @SpeakeasyMetadata({ data: "json, name=Marker" })
   marker?: string;
 
-  @Metadata({ data: "json, name=StudioId" })
+  @SpeakeasyMetadata({ data: "json, name=StudioId" })
   studioId?: string;
 }

@@ -30,7 +30,7 @@ type HealthcareProjectsLocationsDatasetsConsentStoresConsentsCreateSecurity stru
 type HealthcareProjectsLocationsDatasetsConsentStoresConsentsCreateRequest struct {
 	PathParams  HealthcareProjectsLocationsDatasetsConsentStoresConsentsCreatePathParams
 	QueryParams HealthcareProjectsLocationsDatasetsConsentStoresConsentsCreateQueryParams
-	Request     *shared.Consent `request:"mediaType=application/json"`
+	Request     *shared.ConsentInput `request:"mediaType=application/json"`
 	Security    HealthcareProjectsLocationsDatasetsConsentStoresConsentsCreateSecurity
 }
 

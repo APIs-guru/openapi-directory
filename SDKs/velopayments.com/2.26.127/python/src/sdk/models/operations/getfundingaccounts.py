@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Any,List,Optional
+from typing import Any,Optional
 from sdk.models import shared
 
 
@@ -15,14 +15,14 @@ class GetFundingAccountsQueryParams:
 
 @dataclass
 class GetFundingAccountsRequest:
-    query_params: GetFundingAccountsQueryParams = field(default=None)
+    query_params: GetFundingAccountsQueryParams = field()
     
 
 @dataclass
 class GetFundingAccountsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     list_funding_accounts_response: Optional[shared.ListFundingAccountsResponse] = field(default=None)
-    status_code: int = field(default=None)
     inline_response_400: Optional[Any] = field(default=None)
     inline_response_403: Optional[Any] = field(default=None)
     

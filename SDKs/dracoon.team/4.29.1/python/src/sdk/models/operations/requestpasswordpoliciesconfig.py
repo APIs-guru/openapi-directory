@@ -10,13 +10,13 @@ class RequestPasswordPoliciesConfigHeaders:
 
 @dataclass
 class RequestPasswordPoliciesConfigRequest:
-    headers: RequestPasswordPoliciesConfigHeaders = field(default=None)
+    headers: RequestPasswordPoliciesConfigHeaders = field()
     
 
 @dataclass
 class RequestPasswordPoliciesConfigResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error_response: Optional[shared.ErrorResponse] = field(default=None)
     password_policies_config: Optional[shared.PasswordPoliciesConfig] = field(default=None)
-    status_code: int = field(default=None)
     

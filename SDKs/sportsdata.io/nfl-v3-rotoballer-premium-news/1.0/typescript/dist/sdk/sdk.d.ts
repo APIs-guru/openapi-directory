@@ -1,19 +1,35 @@
 import { AxiosInstance, AxiosRequestConfig } from "axios";
 import * as operations from "./models/operations";
 import { Security } from "./models/shared";
-declare type OptsFunc = (sdk: SDK) => void;
+type OptsFunc = (sdk: SDK) => void;
+export declare const ServerList: readonly ["http://api.sportsdata.io", "https://api.sportsdata.io", "http://azure-api.sportsdata.io", "https://azure-api.sportsdata.io"];
 export declare function WithServerURL(serverURL: string, params?: Map<string, string>): OptsFunc;
 export declare function WithClient(client: AxiosInstance): OptsFunc;
 export declare function WithSecurity(security: Security): OptsFunc;
 export declare class SDK {
-    defaultClient?: AxiosInstance;
-    securityClient?: AxiosInstance;
-    security?: any;
-    serverURL: string;
+    _defaultClient: AxiosInstance;
+    _securityClient: AxiosInstance;
+    _security?: Security;
+    _serverURL: string;
+    private _language;
+    private _sdkVersion;
+    private _genVersion;
     constructor(...opts: OptsFunc[]);
-    PremiumNews(req: operations.PremiumNewsRequest, config?: AxiosRequestConfig): Promise<operations.PremiumNewsResponse>;
-    PremiumNewsByDate(req: operations.PremiumNewsByDateRequest, config?: AxiosRequestConfig): Promise<operations.PremiumNewsByDateResponse>;
-    PremiumNewsByPlayer(req: operations.PremiumNewsByPlayerRequest, config?: AxiosRequestConfig): Promise<operations.PremiumNewsByPlayerResponse>;
-    PremiumNewsByTeam(req: operations.PremiumNewsByTeamRequest, config?: AxiosRequestConfig): Promise<operations.PremiumNewsByTeamResponse>;
+    /**
+     * premiumNews - Premium News
+    **/
+    premiumNews(req: operations.PremiumNewsRequest, config?: AxiosRequestConfig): Promise<operations.PremiumNewsResponse>;
+    /**
+     * premiumNewsByDate - Premium News by Date
+    **/
+    premiumNewsByDate(req: operations.PremiumNewsByDateRequest, config?: AxiosRequestConfig): Promise<operations.PremiumNewsByDateResponse>;
+    /**
+     * premiumNewsByPlayer - Premium News by Player
+    **/
+    premiumNewsByPlayer(req: operations.PremiumNewsByPlayerRequest, config?: AxiosRequestConfig): Promise<operations.PremiumNewsByPlayerResponse>;
+    /**
+     * premiumNewsByTeam - Premium News by Team
+    **/
+    premiumNewsByTeam(req: operations.PremiumNewsByTeamRequest, config?: AxiosRequestConfig): Promise<operations.PremiumNewsByTeamResponse>;
 }
 export {};

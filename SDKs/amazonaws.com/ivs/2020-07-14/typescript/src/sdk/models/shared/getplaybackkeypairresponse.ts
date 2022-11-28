@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PlaybackKeyPair } from "./playbackkeypair";
 
 
+
 export class GetPlaybackKeyPairResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=keyPair" })
+  @SpeakeasyMetadata({ data: "json, name=keyPair" })
   keyPair?: PlaybackKeyPair;
 }

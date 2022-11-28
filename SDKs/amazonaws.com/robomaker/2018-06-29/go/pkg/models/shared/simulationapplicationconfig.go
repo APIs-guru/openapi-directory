@@ -1,5 +1,7 @@
 package shared
 
+// SimulationApplicationConfig
+// Information about a simulation application configuration.
 type SimulationApplicationConfig struct {
 	Application                    string                `json:"application"`
 	ApplicationVersion             *string               `json:"applicationVersion,omitempty"`

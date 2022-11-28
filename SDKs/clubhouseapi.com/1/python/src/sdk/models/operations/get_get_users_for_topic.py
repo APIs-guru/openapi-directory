@@ -11,11 +11,11 @@ class GetGetUsersForTopicQueryParams:
 
 @dataclass
 class GetGetUsersForTopicRequest:
-    query_params: GetGetUsersForTopicQueryParams = field(default=None)
+    query_params: GetGetUsersForTopicQueryParams = field()
     
 
 @dataclass
 class GetGetUsersForTopicResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

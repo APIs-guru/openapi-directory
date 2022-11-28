@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// PublicKey
+// Contains information about a returned public key.
 type PublicKey struct {
 	Fingerprint       *string    `json:"Fingerprint,omitempty"`
 	ValidityEndTime   *time.Time `json:"ValidityEndTime,omitempty"`

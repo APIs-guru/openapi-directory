@@ -74,6 +74,8 @@ const (
 	ExchangeConfigEnabledExchangeExchangeEnumExchangeDax               ExchangeConfigEnabledExchangeExchangeEnum = "EXCHANGE_DAX"
 )
 
+// ExchangeConfigEnabledExchange
+// An enabled exchange in the partner.
 type ExchangeConfigEnabledExchange struct {
 	Exchange                      *ExchangeConfigEnabledExchangeExchangeEnum `json:"exchange,omitempty"`
 	GoogleAdManagerAgencyID       *string                                    `json:"googleAdManagerAgencyId,omitempty"`

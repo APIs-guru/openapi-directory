@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { IpAllocationPolicy } from "./ipallocationpolicy";
 // NodeConfig
 /**
@@ -34,47 +34,47 @@ var NodeConfig = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=diskSizeGb" }),
+        SpeakeasyMetadata({ data: "json, name=diskSizeGb" }),
         __metadata("design:type", Number)
     ], NodeConfig.prototype, "diskSizeGb", void 0);
     __decorate([
-        Metadata({ data: "json, name=enableIpMasqAgent" }),
+        SpeakeasyMetadata({ data: "json, name=enableIpMasqAgent" }),
         __metadata("design:type", Boolean)
     ], NodeConfig.prototype, "enableIpMasqAgent", void 0);
     __decorate([
-        Metadata({ data: "json, name=ipAllocationPolicy" }),
+        SpeakeasyMetadata({ data: "json, name=ipAllocationPolicy" }),
         __metadata("design:type", IpAllocationPolicy)
     ], NodeConfig.prototype, "ipAllocationPolicy", void 0);
     __decorate([
-        Metadata({ data: "json, name=location" }),
+        SpeakeasyMetadata({ data: "json, name=location" }),
         __metadata("design:type", String)
     ], NodeConfig.prototype, "location", void 0);
     __decorate([
-        Metadata({ data: "json, name=machineType" }),
+        SpeakeasyMetadata({ data: "json, name=machineType" }),
         __metadata("design:type", String)
     ], NodeConfig.prototype, "machineType", void 0);
     __decorate([
-        Metadata({ data: "json, name=maxPodsPerNode" }),
+        SpeakeasyMetadata({ data: "json, name=maxPodsPerNode" }),
         __metadata("design:type", Number)
     ], NodeConfig.prototype, "maxPodsPerNode", void 0);
     __decorate([
-        Metadata({ data: "json, name=network" }),
+        SpeakeasyMetadata({ data: "json, name=network" }),
         __metadata("design:type", String)
     ], NodeConfig.prototype, "network", void 0);
     __decorate([
-        Metadata({ data: "json, name=oauthScopes" }),
+        SpeakeasyMetadata({ data: "json, name=oauthScopes" }),
         __metadata("design:type", Array)
     ], NodeConfig.prototype, "oauthScopes", void 0);
     __decorate([
-        Metadata({ data: "json, name=serviceAccount" }),
+        SpeakeasyMetadata({ data: "json, name=serviceAccount" }),
         __metadata("design:type", String)
     ], NodeConfig.prototype, "serviceAccount", void 0);
     __decorate([
-        Metadata({ data: "json, name=subnetwork" }),
+        SpeakeasyMetadata({ data: "json, name=subnetwork" }),
         __metadata("design:type", String)
     ], NodeConfig.prototype, "subnetwork", void 0);
     __decorate([
-        Metadata({ data: "json, name=tags" }),
+        SpeakeasyMetadata({ data: "json, name=tags" }),
         __metadata("design:type", Array)
     ], NodeConfig.prototype, "tags", void 0);
     return NodeConfig;

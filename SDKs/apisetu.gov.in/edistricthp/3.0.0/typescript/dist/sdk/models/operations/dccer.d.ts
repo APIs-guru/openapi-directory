@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class DccerRequestBodyCertificateParameters extends SpeakeasyBase {
     udf1: string;
@@ -15,10 +15,6 @@ export declare class DccerRequestBody extends SpeakeasyBase {
 export declare class DccerSecurity extends SpeakeasyBase {
     apiKey: shared.SchemeApiKey;
     clientId: shared.SchemeClientId;
-}
-export declare class DccerRequest extends SpeakeasyBase {
-    request?: DccerRequestBody;
-    security: DccerSecurity;
 }
 export declare enum Dccer400ApplicationJsonErrorEnum {
     MissingParameter = "missing_parameter",
@@ -101,6 +97,10 @@ export declare enum Dccer504ApplicationJsonErrorDescriptionEnum {
 export declare class Dccer504ApplicationJson extends SpeakeasyBase {
     error?: Dccer504ApplicationJsonErrorEnum;
     errorDescription?: Dccer504ApplicationJsonErrorDescriptionEnum;
+}
+export declare class DccerRequest extends SpeakeasyBase {
+    request?: DccerRequestBody;
+    security: DccerSecurity;
 }
 export declare class DccerResponse extends SpeakeasyBase {
     contentType: string;

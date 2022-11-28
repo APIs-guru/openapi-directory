@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Jwt
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * JWT
 **/
 export class Jwt extends SpeakeasyBase {
-  @Metadata({ data: "json, name=jwt" })
+  @SpeakeasyMetadata({ data: "json, name=jwt" })
   jwt: string;
 }

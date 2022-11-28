@@ -1,6 +1,7 @@
 
 
+
 export enum StateMachineTypeEnum {
-    Standard = "STANDARD"
-,    Express = "EXPRESS"
+    Standard = "STANDARD",
+    Express = "EXPRESS"
 }

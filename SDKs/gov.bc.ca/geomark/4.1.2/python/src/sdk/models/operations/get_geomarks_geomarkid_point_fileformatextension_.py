@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 
 class GetGeomarksGeomarkIDPointFileFormatExtensionFileFormatExtensionEnum(str, Enum):
     JSON = "json"
@@ -15,8 +16,8 @@ class GetGeomarksGeomarkIDPointFileFormatExtensionFileFormatExtensionEnum(str, E
 
 @dataclass
 class GetGeomarksGeomarkIDPointFileFormatExtensionPathParams:
-    file_format_extension: GetGeomarksGeomarkIDPointFileFormatExtensionFileFormatExtensionEnum = field(default=None, metadata={'path_param': { 'field_name': 'fileFormatExtension', 'style': 'simple', 'explode': False }})
-    geomark_id: str = field(default=None, metadata={'path_param': { 'field_name': 'geomarkId', 'style': 'simple', 'explode': False }})
+    file_format_extension: GetGeomarksGeomarkIDPointFileFormatExtensionFileFormatExtensionEnum = field(metadata={'path_param': { 'field_name': 'fileFormatExtension', 'style': 'simple', 'explode': False }})
+    geomark_id: str = field(metadata={'path_param': { 'field_name': 'geomarkId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,12 +27,12 @@ class GetGeomarksGeomarkIDPointFileFormatExtensionQueryParams:
 
 @dataclass
 class GetGeomarksGeomarkIDPointFileFormatExtensionRequest:
-    path_params: GetGeomarksGeomarkIDPointFileFormatExtensionPathParams = field(default=None)
-    query_params: GetGeomarksGeomarkIDPointFileFormatExtensionQueryParams = field(default=None)
+    path_params: GetGeomarksGeomarkIDPointFileFormatExtensionPathParams = field()
+    query_params: GetGeomarksGeomarkIDPointFileFormatExtensionQueryParams = field()
     
 
 @dataclass
 class GetGeomarksGeomarkIDPointFileFormatExtensionResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

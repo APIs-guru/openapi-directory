@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Sink } from "./sink";
+
 
 
 // SeqMapTaskOutputInfo
@@ -7,9 +8,9 @@ import { Sink } from "./sink";
  * Information about an output of a SeqMapTask.
 **/
 export class SeqMapTaskOutputInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=sink" })
+  @SpeakeasyMetadata({ data: "json, name=sink" })
   sink?: Sink;
 
-  @Metadata({ data: "json, name=tag" })
+  @SpeakeasyMetadata({ data: "json, name=tag" })
   tag?: string;
 }

@@ -1,12 +1,16 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,List,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
 @dataclass
 class UpdateControlPathParams:
-    control_id: str = field(default=None, metadata={'path_param': { 'field_name': 'controlId', 'style': 'simple', 'explode': False }})
+    control_id: str = field(metadata={'path_param': { 'field_name': 'controlId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -23,28 +27,28 @@ class UpdateControlHeaders:
 @dataclass_json
 @dataclass
 class UpdateControlRequestBody:
-    action_plan_instructions: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'actionPlanInstructions' }})
-    action_plan_title: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'actionPlanTitle' }})
-    control_mapping_sources: List[shared.ControlMappingSource] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'controlMappingSources' }})
-    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
-    name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    testing_information: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'testingInformation' }})
+    control_mapping_sources: List[shared.ControlMappingSource] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('controlMappingSources') }})
+    name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    action_plan_instructions: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('actionPlanInstructions') }})
+    action_plan_title: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('actionPlanTitle') }})
+    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('description') }})
+    testing_information: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('testingInformation') }})
     
 
 @dataclass
 class UpdateControlRequest:
-    path_params: UpdateControlPathParams = field(default=None)
-    headers: UpdateControlHeaders = field(default=None)
-    request: UpdateControlRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: UpdateControlHeaders = field()
+    path_params: UpdateControlPathParams = field()
+    request: UpdateControlRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class UpdateControlResponse:
+    content_type: str = field()
+    status_code: int = field()
     access_denied_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     internal_server_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     update_control_response: Optional[shared.UpdateControlResponse] = field(default=None)
     validation_exception: Optional[Any] = field(default=None)
     

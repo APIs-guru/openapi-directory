@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class BaremetalsolutionProjectsLocationsProvisioningConfigsCreatePathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,21 +27,21 @@ class BaremetalsolutionProjectsLocationsProvisioningConfigsCreateQueryParams:
 
 @dataclass
 class BaremetalsolutionProjectsLocationsProvisioningConfigsCreateSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class BaremetalsolutionProjectsLocationsProvisioningConfigsCreateRequest:
-    path_params: BaremetalsolutionProjectsLocationsProvisioningConfigsCreatePathParams = field(default=None)
-    query_params: BaremetalsolutionProjectsLocationsProvisioningConfigsCreateQueryParams = field(default=None)
-    request: Optional[shared.ProvisioningConfig] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: BaremetalsolutionProjectsLocationsProvisioningConfigsCreateSecurity = field(default=None)
+    path_params: BaremetalsolutionProjectsLocationsProvisioningConfigsCreatePathParams = field()
+    query_params: BaremetalsolutionProjectsLocationsProvisioningConfigsCreateQueryParams = field()
+    security: BaremetalsolutionProjectsLocationsProvisioningConfigsCreateSecurity = field()
+    request: Optional[shared.ProvisioningConfigInput] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class BaremetalsolutionProjectsLocationsProvisioningConfigsCreateResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     provisioning_config: Optional[shared.ProvisioningConfig] = field(default=None)
-    status_code: int = field(default=None)
     

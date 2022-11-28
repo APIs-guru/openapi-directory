@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostGetCapacityReservationUsageActionEnum(str, Enum):
     GET_CAPACITY_RESERVATION_USAGE = "GetCapacityReservationUsage"
@@ -10,8 +14,8 @@ class PostGetCapacityReservationUsageVersionEnum(str, Enum):
 
 @dataclass
 class PostGetCapacityReservationUsageQueryParams:
-    action: PostGetCapacityReservationUsageActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostGetCapacityReservationUsageVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostGetCapacityReservationUsageActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostGetCapacityReservationUsageVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostGetCapacityReservationUsageHeaders:
 
 @dataclass
 class PostGetCapacityReservationUsageRequest:
-    query_params: PostGetCapacityReservationUsageQueryParams = field(default=None)
-    headers: PostGetCapacityReservationUsageHeaders = field(default=None)
+    headers: PostGetCapacityReservationUsageHeaders = field()
+    query_params: PostGetCapacityReservationUsageQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostGetCapacityReservationUsageResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

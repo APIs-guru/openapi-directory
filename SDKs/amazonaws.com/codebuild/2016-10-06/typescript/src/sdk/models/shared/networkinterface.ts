@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // NetworkInterface
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Describes a network interface.
 **/
 export class NetworkInterface extends SpeakeasyBase {
-  @Metadata({ data: "json, name=networkInterfaceId" })
+  @SpeakeasyMetadata({ data: "json, name=networkInterfaceId" })
   networkInterfaceId?: string;
 
-  @Metadata({ data: "json, name=subnetId" })
+  @SpeakeasyMetadata({ data: "json, name=subnetId" })
   subnetId?: string;
 }

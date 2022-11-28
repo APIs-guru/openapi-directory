@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 class PeoplePeopleCreateContactSourcesEnum(str, Enum):
@@ -28,20 +29,20 @@ class PeoplePeopleCreateContactQueryParams:
 
 @dataclass
 class PeoplePeopleCreateContactSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class PeoplePeopleCreateContactRequest:
-    query_params: PeoplePeopleCreateContactQueryParams = field(default=None)
-    request: Optional[shared.Person] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: PeoplePeopleCreateContactSecurity = field(default=None)
+    query_params: PeoplePeopleCreateContactQueryParams = field()
+    security: PeoplePeopleCreateContactSecurity = field()
+    request: Optional[shared.PersonInput] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class PeoplePeopleCreateContactResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     person: Optional[shared.Person] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var GetPutLifecycleHookActionEnum;
 (function (GetPutLifecycleHookActionEnum) {
     GetPutLifecycleHookActionEnum["PutLifecycleHook"] = "PutLifecycleHook";
@@ -37,43 +37,43 @@ var GetPutLifecycleHookQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=Action" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Action" }),
         __metadata("design:type", String)
     ], GetPutLifecycleHookQueryParams.prototype, "action", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=AutoScalingGroupName" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=AutoScalingGroupName" }),
         __metadata("design:type", String)
     ], GetPutLifecycleHookQueryParams.prototype, "autoScalingGroupName", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=DefaultResult" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=DefaultResult" }),
         __metadata("design:type", String)
     ], GetPutLifecycleHookQueryParams.prototype, "defaultResult", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=HeartbeatTimeout" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=HeartbeatTimeout" }),
         __metadata("design:type", Number)
     ], GetPutLifecycleHookQueryParams.prototype, "heartbeatTimeout", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=LifecycleHookName" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=LifecycleHookName" }),
         __metadata("design:type", String)
     ], GetPutLifecycleHookQueryParams.prototype, "lifecycleHookName", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=LifecycleTransition" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=LifecycleTransition" }),
         __metadata("design:type", String)
     ], GetPutLifecycleHookQueryParams.prototype, "lifecycleTransition", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=NotificationMetadata" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=NotificationMetadata" }),
         __metadata("design:type", String)
     ], GetPutLifecycleHookQueryParams.prototype, "notificationMetadata", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=NotificationTargetARN" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=NotificationTargetARN" }),
         __metadata("design:type", String)
     ], GetPutLifecycleHookQueryParams.prototype, "notificationTargetArn", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=RoleARN" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=RoleARN" }),
         __metadata("design:type", String)
     ], GetPutLifecycleHookQueryParams.prototype, "roleArn", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=Version" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Version" }),
         __metadata("design:type", String)
     ], GetPutLifecycleHookQueryParams.prototype, "version", void 0);
     return GetPutLifecycleHookQueryParams;
@@ -85,31 +85,31 @@ var GetPutLifecycleHookHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
         __metadata("design:type", String)
     ], GetPutLifecycleHookHeaders.prototype, "xAmzAlgorithm", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
         __metadata("design:type", String)
     ], GetPutLifecycleHookHeaders.prototype, "xAmzContentSha256", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
         __metadata("design:type", String)
     ], GetPutLifecycleHookHeaders.prototype, "xAmzCredential", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
         __metadata("design:type", String)
     ], GetPutLifecycleHookHeaders.prototype, "xAmzDate", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
         __metadata("design:type", String)
     ], GetPutLifecycleHookHeaders.prototype, "xAmzSecurityToken", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
         __metadata("design:type", String)
     ], GetPutLifecycleHookHeaders.prototype, "xAmzSignature", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
         __metadata("design:type", String)
     ], GetPutLifecycleHookHeaders.prototype, "xAmzSignedHeaders", void 0);
     return GetPutLifecycleHookHeaders;
@@ -121,11 +121,11 @@ var GetPutLifecycleHookRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetPutLifecycleHookQueryParams)
     ], GetPutLifecycleHookRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetPutLifecycleHookHeaders)
     ], GetPutLifecycleHookRequest.prototype, "headers", void 0);
     return GetPutLifecycleHookRequest;
@@ -137,15 +137,15 @@ var GetPutLifecycleHookResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], GetPutLifecycleHookResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetPutLifecycleHookResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetPutLifecycleHookResponse.prototype, "statusCode", void 0);
     return GetPutLifecycleHookResponse;

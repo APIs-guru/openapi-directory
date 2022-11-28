@@ -1,25 +1,47 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
+
+
+export class ExportTemplateInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=content_type" })
+  contentType: number;
+
+  @SpeakeasyMetadata({ data: "json, name=description" })
+  description?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=file_extension" })
+  fileExtension?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=mime_type" })
+  mimeType?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=name" })
+  name: string;
+
+  @SpeakeasyMetadata({ data: "json, name=template_code" })
+  templateCode: string;
+}
 
 
 export class ExportTemplate extends SpeakeasyBase {
-  @Metadata({ data: "json, name=content_type" })
+  @SpeakeasyMetadata({ data: "json, name=content_type" })
   contentType: number;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=file_extension" })
+  @SpeakeasyMetadata({ data: "json, name=file_extension" })
   fileExtension?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: number;
 
-  @Metadata({ data: "json, name=mime_type" })
+  @SpeakeasyMetadata({ data: "json, name=mime_type" })
   mimeType?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 
-  @Metadata({ data: "json, name=template_code" })
+  @SpeakeasyMetadata({ data: "json, name=template_code" })
   templateCode: string;
 }

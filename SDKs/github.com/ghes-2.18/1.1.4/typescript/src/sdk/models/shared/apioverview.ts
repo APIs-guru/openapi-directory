@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ApiOverview
@@ -6,18 +7,18 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Api Overview
 **/
 export class ApiOverview extends SpeakeasyBase {
-  @Metadata({ data: "json, name=dependabot" })
+  @SpeakeasyMetadata({ data: "json, name=dependabot" })
   dependabot?: string[];
 
-  @Metadata({ data: "json, name=github_services_sha" })
+  @SpeakeasyMetadata({ data: "json, name=github_services_sha" })
   githubServicesSha?: string;
 
-  @Metadata({ data: "json, name=installed_version" })
+  @SpeakeasyMetadata({ data: "json, name=installed_version" })
   installedVersion?: string;
 
-  @Metadata({ data: "json, name=packages" })
+  @SpeakeasyMetadata({ data: "json, name=packages" })
   packages?: string[];
 
-  @Metadata({ data: "json, name=verifiable_password_authentication" })
+  @SpeakeasyMetadata({ data: "json, name=verifiable_password_authentication" })
   verifiablePasswordAuthentication: boolean;
 }

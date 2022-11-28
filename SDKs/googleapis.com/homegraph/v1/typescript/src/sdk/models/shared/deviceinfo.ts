@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // DeviceInfo
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Device information.
 **/
 export class DeviceInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=hwVersion" })
+  @SpeakeasyMetadata({ data: "json, name=hwVersion" })
   hwVersion?: string;
 
-  @Metadata({ data: "json, name=manufacturer" })
+  @SpeakeasyMetadata({ data: "json, name=manufacturer" })
   manufacturer?: string;
 
-  @Metadata({ data: "json, name=model" })
+  @SpeakeasyMetadata({ data: "json, name=model" })
   model?: string;
 
-  @Metadata({ data: "json, name=swVersion" })
+  @SpeakeasyMetadata({ data: "json, name=swVersion" })
   swVersion?: string;
 }

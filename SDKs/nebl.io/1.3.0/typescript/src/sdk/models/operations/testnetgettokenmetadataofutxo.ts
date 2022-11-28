@@ -1,41 +1,42 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class TestnetGetTokenMetadataOfUtxoPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=tokenid" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=tokenid" })
   tokenid: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=utxo" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=utxo" })
   utxo: string;
 }
 
 
 export class TestnetGetTokenMetadataOfUtxoQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=verbosity" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=verbosity" })
   verbosity?: number;
 }
 
 
 export class TestnetGetTokenMetadataOfUtxoRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: TestnetGetTokenMetadataOfUtxoPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: TestnetGetTokenMetadataOfUtxoQueryParams;
 }
 
 
 export class TestnetGetTokenMetadataOfUtxoResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   error?: shared.Error;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getTokenMetadataResponse?: shared.GetTokenMetadataResponse;
 }

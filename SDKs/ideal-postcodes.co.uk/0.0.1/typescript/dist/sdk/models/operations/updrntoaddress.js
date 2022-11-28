@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var UpdrnToAddressPathParams = /** @class */ (function (_super) {
     __extends(UpdrnToAddressPathParams, _super);
@@ -30,7 +30,7 @@ var UpdrnToAddressPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=udprn" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=udprn" }),
         __metadata("design:type", String)
     ], UpdrnToAddressPathParams.prototype, "udprn", void 0);
     return UpdrnToAddressPathParams;
@@ -42,11 +42,11 @@ var UpdrnToAddressQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=filter" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=filter" }),
         __metadata("design:type", String)
     ], UpdrnToAddressQueryParams.prototype, "filter", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=licensee" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=licensee" }),
         __metadata("design:type", String)
     ], UpdrnToAddressQueryParams.prototype, "licensee", void 0);
     return UpdrnToAddressQueryParams;
@@ -58,11 +58,11 @@ var UpdrnToAddressSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=query" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=query" }),
         __metadata("design:type", shared.SchemeApiKey)
     ], UpdrnToAddressSecurity.prototype, "apiKey", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=query" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=query" }),
         __metadata("design:type", shared.SchemeUserToken)
     ], UpdrnToAddressSecurity.prototype, "userToken", void 0);
     return UpdrnToAddressSecurity;
@@ -74,15 +74,15 @@ var UpdrnToAddressRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", UpdrnToAddressPathParams)
     ], UpdrnToAddressRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", UpdrnToAddressQueryParams)
     ], UpdrnToAddressRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", UpdrnToAddressSecurity)
     ], UpdrnToAddressRequest.prototype, "security", void 0);
     return UpdrnToAddressRequest;
@@ -94,19 +94,19 @@ var UpdrnToAddressResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], UpdrnToAddressResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.ErrorResponseSchema)
     ], UpdrnToAddressResponse.prototype, "errorResponseSchema", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], UpdrnToAddressResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.UdprnToAddressResponseSchema)
     ], UpdrnToAddressResponse.prototype, "udprnToAddressResponseSchema", void 0);
     return UpdrnToAddressResponse;

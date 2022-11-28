@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetPullRequestApprovalStatesInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=pullRequestId" })
+  @SpeakeasyMetadata({ data: "json, name=pullRequestId" })
   pullRequestId: string;
 
-  @Metadata({ data: "json, name=revisionId" })
+  @SpeakeasyMetadata({ data: "json, name=revisionId" })
   revisionId: string;
 }

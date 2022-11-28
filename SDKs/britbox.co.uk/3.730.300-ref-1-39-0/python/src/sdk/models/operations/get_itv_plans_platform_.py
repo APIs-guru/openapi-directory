@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class GetItvPlansPlatformPathParams:
-    platform: str = field(default=None, metadata={'path_param': { 'field_name': 'platform', 'style': 'simple', 'explode': False }})
+    platform: str = field(metadata={'path_param': { 'field_name': 'platform', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -15,20 +15,20 @@ class GetItvPlansPlatformQueryParams:
 
 @dataclass
 class GetItvPlansPlatformSecurity:
-    account_auth: shared.SchemeAccountAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    account_auth: shared.SchemeAccountAuth = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class GetItvPlansPlatformRequest:
-    path_params: GetItvPlansPlatformPathParams = field(default=None)
-    query_params: GetItvPlansPlatformQueryParams = field(default=None)
-    security: GetItvPlansPlatformSecurity = field(default=None)
+    path_params: GetItvPlansPlatformPathParams = field()
+    query_params: GetItvPlansPlatformQueryParams = field()
+    security: GetItvPlansPlatformSecurity = field()
     
 
 @dataclass
 class GetItvPlansPlatformResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     itv_plans: Optional[shared.ItvPlans] = field(default=None)
     service_error: Optional[shared.ServiceError] = field(default=None)
-    status_code: int = field(default=None)
     

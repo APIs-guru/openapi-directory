@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class ActionSubTypeEnum(str, Enum):
     STOP_EC2_INSTANCES = "STOP_EC2_INSTANCES"

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SourceFrequencyEnum } from "./sourcefrequencyenum";
 import { SourceKeyword } from "./sourcekeyword";
 import { SourceSetUpOptionEnum } from "./sourcesetupoptionenum";
@@ -37,35 +37,35 @@ var ControlMappingSource = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=sourceDescription" }),
+        SpeakeasyMetadata({ data: "json, name=sourceDescription" }),
         __metadata("design:type", String)
     ], ControlMappingSource.prototype, "sourceDescription", void 0);
     __decorate([
-        Metadata({ data: "json, name=sourceFrequency" }),
+        SpeakeasyMetadata({ data: "json, name=sourceFrequency" }),
         __metadata("design:type", String)
     ], ControlMappingSource.prototype, "sourceFrequency", void 0);
     __decorate([
-        Metadata({ data: "json, name=sourceId" }),
+        SpeakeasyMetadata({ data: "json, name=sourceId" }),
         __metadata("design:type", String)
     ], ControlMappingSource.prototype, "sourceId", void 0);
     __decorate([
-        Metadata({ data: "json, name=sourceKeyword" }),
+        SpeakeasyMetadata({ data: "json, name=sourceKeyword" }),
         __metadata("design:type", SourceKeyword)
     ], ControlMappingSource.prototype, "sourceKeyword", void 0);
     __decorate([
-        Metadata({ data: "json, name=sourceName" }),
+        SpeakeasyMetadata({ data: "json, name=sourceName" }),
         __metadata("design:type", String)
     ], ControlMappingSource.prototype, "sourceName", void 0);
     __decorate([
-        Metadata({ data: "json, name=sourceSetUpOption" }),
+        SpeakeasyMetadata({ data: "json, name=sourceSetUpOption" }),
         __metadata("design:type", String)
     ], ControlMappingSource.prototype, "sourceSetUpOption", void 0);
     __decorate([
-        Metadata({ data: "json, name=sourceType" }),
+        SpeakeasyMetadata({ data: "json, name=sourceType" }),
         __metadata("design:type", String)
     ], ControlMappingSource.prototype, "sourceType", void 0);
     __decorate([
-        Metadata({ data: "json, name=troubleshootingText" }),
+        SpeakeasyMetadata({ data: "json, name=troubleshootingText" }),
         __metadata("design:type", String)
     ], ControlMappingSource.prototype, "troubleshootingText", void 0);
     return ControlMappingSource;

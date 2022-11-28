@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PubsubMessage } from "./pubsubmessage";
+
 
 
 // ReceivedMessage
@@ -7,9 +8,9 @@ import { PubsubMessage } from "./pubsubmessage";
  * A message and its corresponding acknowledgment ID.
 **/
 export class ReceivedMessage extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ackId" })
+  @SpeakeasyMetadata({ data: "json, name=ackId" })
   ackId?: string;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: PubsubMessage;
 }

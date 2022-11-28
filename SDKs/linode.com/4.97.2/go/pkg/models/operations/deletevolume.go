@@ -8,26 +8,18 @@ type DeleteVolumePathParams struct {
 	VolumeID int64 `pathParam:"style=simple,explode=false,name=volumeId"`
 }
 
-type DeleteVolumeSecurityOption1 struct {
-	PersonalAccessToken shared.SchemePersonalAccessToken `security:"scheme,type=http,subtype=bearer"`
-}
-
-type DeleteVolumeSecurityOption2 struct {
-	Oauth shared.SchemeOauth `security:"scheme,type=oauth2"`
-}
-
 type DeleteVolumeSecurity struct {
-	Option1 *DeleteVolumeSecurityOption1 `security:"option"`
-	Option2 *DeleteVolumeSecurityOption2 `security:"option"`
+	PersonalAccessToken *shared.SchemePersonalAccessToken `security:"scheme,type=http,subtype=bearer"`
+	Oauth               *shared.SchemeOauth               `security:"scheme,type=oauth2"`
+}
+
+type DeleteVolumeDefaultApplicationJSON struct {
+	Errors []shared.ErrorObject `json:"errors,omitempty"`
 }
 
 type DeleteVolumeRequest struct {
 	PathParams DeleteVolumePathParams
 	Security   DeleteVolumeSecurity
-}
-
-type DeleteVolumeDefaultApplicationJSON struct {
-	Errors []shared.ErrorObject `json:"errors,omitempty"`
 }
 
 type DeleteVolumeResponse struct {

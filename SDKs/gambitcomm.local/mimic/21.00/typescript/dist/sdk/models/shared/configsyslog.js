@@ -22,42 +22,42 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var ConfigSyslog = /** @class */ (function (_super) {
     __extends(ConfigSyslog, _super);
     function ConfigSyslog() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=client" }),
+        SpeakeasyMetadata({ data: "json, name=client" }),
         __metadata("design:type", String)
     ], ConfigSyslog.prototype, "client", void 0);
     __decorate([
-        Metadata({ data: "json, name=hostname" }),
+        SpeakeasyMetadata({ data: "json, name=hostname" }),
         __metadata("design:type", String)
     ], ConfigSyslog.prototype, "hostname", void 0);
     __decorate([
-        Metadata({ data: "json, name=localport" }),
+        SpeakeasyMetadata({ data: "json, name=localport" }),
         __metadata("design:type", Number)
     ], ConfigSyslog.prototype, "localport", void 0);
     __decorate([
-        Metadata({ data: "json, name=separator" }),
+        SpeakeasyMetadata({ data: "json, name=separator" }),
         __metadata("design:type", String)
     ], ConfigSyslog.prototype, "separator", void 0);
     __decorate([
-        Metadata({ data: "json, name=sequence" }),
+        SpeakeasyMetadata({ data: "json, name=sequence" }),
         __metadata("design:type", Number)
     ], ConfigSyslog.prototype, "sequence", void 0);
     __decorate([
-        Metadata({ data: "json, name=server" }),
+        SpeakeasyMetadata({ data: "json, name=server" }),
         __metadata("design:type", String)
     ], ConfigSyslog.prototype, "server", void 0);
     __decorate([
-        Metadata({ data: "json, name=serverport" }),
+        SpeakeasyMetadata({ data: "json, name=serverport" }),
         __metadata("design:type", Number)
     ], ConfigSyslog.prototype, "serverport", void 0);
     __decorate([
-        Metadata({ data: "json, name=timestamp" }),
+        SpeakeasyMetadata({ data: "json, name=timestamp" }),
         __metadata("design:type", String)
     ], ConfigSyslog.prototype, "timestamp", void 0);
     return ConfigSyslog;

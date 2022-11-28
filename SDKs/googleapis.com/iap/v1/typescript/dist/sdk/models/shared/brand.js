@@ -22,7 +22,27 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+// BrandInput
+/**
+ * OAuth brand data. NOTE: Only contains a portion of the data that describes a brand.
+**/
+var BrandInput = /** @class */ (function (_super) {
+    __extends(BrandInput, _super);
+    function BrandInput() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=applicationTitle" }),
+        __metadata("design:type", String)
+    ], BrandInput.prototype, "applicationTitle", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=supportEmail" }),
+        __metadata("design:type", String)
+    ], BrandInput.prototype, "supportEmail", void 0);
+    return BrandInput;
+}(SpeakeasyBase));
+export { BrandInput };
 // Brand
 /**
  * OAuth brand data. NOTE: Only contains a portion of the data that describes a brand.
@@ -33,19 +53,19 @@ var Brand = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=applicationTitle" }),
+        SpeakeasyMetadata({ data: "json, name=applicationTitle" }),
         __metadata("design:type", String)
     ], Brand.prototype, "applicationTitle", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], Brand.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=orgInternalOnly" }),
+        SpeakeasyMetadata({ data: "json, name=orgInternalOnly" }),
         __metadata("design:type", Boolean)
     ], Brand.prototype, "orgInternalOnly", void 0);
     __decorate([
-        Metadata({ data: "json, name=supportEmail" }),
+        SpeakeasyMetadata({ data: "json, name=supportEmail" }),
         __metadata("design:type", String)
     ], Brand.prototype, "supportEmail", void 0);
     return Brand;

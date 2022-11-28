@@ -1,12 +1,15 @@
 from dataclasses import dataclass, field
-from typing import Any,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class ListResolversPathParams:
-    api_id: str = field(default=None, metadata={'path_param': { 'field_name': 'apiId', 'style': 'simple', 'explode': False }})
-    type_name: str = field(default=None, metadata={'path_param': { 'field_name': 'typeName', 'style': 'simple', 'explode': False }})
+    api_id: str = field(metadata={'path_param': { 'field_name': 'apiId', 'style': 'simple', 'explode': False }})
+    type_name: str = field(metadata={'path_param': { 'field_name': 'typeName', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -28,18 +31,18 @@ class ListResolversHeaders:
 
 @dataclass
 class ListResolversRequest:
-    path_params: ListResolversPathParams = field(default=None)
-    query_params: ListResolversQueryParams = field(default=None)
-    headers: ListResolversHeaders = field(default=None)
+    headers: ListResolversHeaders = field()
+    path_params: ListResolversPathParams = field()
+    query_params: ListResolversQueryParams = field()
     
 
 @dataclass
 class ListResolversResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     internal_failure_exception: Optional[Any] = field(default=None)
     list_resolvers_response: Optional[shared.ListResolversResponse] = field(default=None)
     not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     unauthorized_exception: Optional[Any] = field(default=None)
     

@@ -1,5 +1,7 @@
 package shared
 
+// GetOpenIDConfigResponse
+// GetOpenIDConfigResponse is an OIDC discovery document for the cluster. See the OpenID Connect Discovery 1.0 specification for details.
 type GetOpenIDConfigResponse struct {
 	CacheHeader                      *HTTPCacheControlResponseHeader `json:"cacheHeader,omitempty"`
 	ClaimsSupported                  []string                        `json:"claims_supported,omitempty"`

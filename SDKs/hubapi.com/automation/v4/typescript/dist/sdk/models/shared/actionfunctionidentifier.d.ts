@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 export declare enum ActionFunctionIdentifierFunctionTypeEnum {
     PreActionExecution = "PRE_ACTION_EXECUTION",
     PreFetchOptions = "PRE_FETCH_OPTIONS",

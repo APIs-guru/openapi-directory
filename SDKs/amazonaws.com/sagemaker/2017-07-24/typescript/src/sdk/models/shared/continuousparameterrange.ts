@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { HyperParameterScalingTypeEnum } from "./hyperparameterscalingtypeenum";
+
 
 
 // ContinuousParameterRange
@@ -7,15 +8,15 @@ import { HyperParameterScalingTypeEnum } from "./hyperparameterscalingtypeenum";
  * A list of continuous hyperparameters to tune.
 **/
 export class ContinuousParameterRange extends SpeakeasyBase {
-  @Metadata({ data: "json, name=MaxValue" })
+  @SpeakeasyMetadata({ data: "json, name=MaxValue" })
   maxValue: string;
 
-  @Metadata({ data: "json, name=MinValue" })
+  @SpeakeasyMetadata({ data: "json, name=MinValue" })
   minValue: string;
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name: string;
 
-  @Metadata({ data: "json, name=ScalingType" })
+  @SpeakeasyMetadata({ data: "json, name=ScalingType" })
   scalingType?: HyperParameterScalingTypeEnum;
 }

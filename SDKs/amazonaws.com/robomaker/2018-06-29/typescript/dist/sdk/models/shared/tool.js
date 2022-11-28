@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ExitBehaviorEnum } from "./exitbehaviorenum";
 // Tool
 /**
@@ -34,23 +34,23 @@ var Tool = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=command" }),
+        SpeakeasyMetadata({ data: "json, name=command" }),
         __metadata("design:type", String)
     ], Tool.prototype, "command", void 0);
     __decorate([
-        Metadata({ data: "json, name=exitBehavior" }),
+        SpeakeasyMetadata({ data: "json, name=exitBehavior" }),
         __metadata("design:type", String)
     ], Tool.prototype, "exitBehavior", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], Tool.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=streamOutputToCloudWatch" }),
+        SpeakeasyMetadata({ data: "json, name=streamOutputToCloudWatch" }),
         __metadata("design:type", Boolean)
     ], Tool.prototype, "streamOutputToCloudWatch", void 0);
     __decorate([
-        Metadata({ data: "json, name=streamUI" }),
+        SpeakeasyMetadata({ data: "json, name=streamUI" }),
         __metadata("design:type", Boolean)
     ], Tool.prototype, "streamUi", void 0);
     return Tool;

@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleFirebaseAppcheckV1betaPlayIntegrityConfig } from "./googlefirebaseappcheckv1betaplayintegrityconfig";
+
 
 
 // GoogleFirebaseAppcheckV1betaBatchGetPlayIntegrityConfigsResponse
@@ -8,6 +8,6 @@ import { GoogleFirebaseAppcheckV1betaPlayIntegrityConfig } from "./googlefirebas
  * Response message for the BatchGetPlayIntegrityConfigs method.
 **/
 export class GoogleFirebaseAppcheckV1betaBatchGetPlayIntegrityConfigsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=configs", elemType: shared.GoogleFirebaseAppcheckV1betaPlayIntegrityConfig })
+  @SpeakeasyMetadata({ data: "json, name=configs", elemType: GoogleFirebaseAppcheckV1betaPlayIntegrityConfig })
   configs?: GoogleFirebaseAppcheckV1betaPlayIntegrityConfig[];
 }

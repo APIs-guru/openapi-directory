@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class ManifestTypeEnum(str, Enum):
     MANIFEST_TYPE_UNSPECIFIED = "MANIFEST_TYPE_UNSPECIFIED"
@@ -11,7 +13,11 @@ class ManifestTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class Manifest:
-    file_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'fileName' }})
-    mux_streams: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'muxStreams' }})
-    type: Optional[ManifestTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    r"""Manifest
+    Manifest configuration.
+    """
+    
+    file_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('fileName') }})
+    mux_streams: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('muxStreams') }})
+    type: Optional[ManifestTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('type') }})
     

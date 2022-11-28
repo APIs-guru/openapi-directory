@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // VolumeConfiguration
 /**
  * Describes the configuration of an Amazon Elastic Block Store (Amazon EBS) volume.
@@ -33,27 +33,27 @@ var VolumeConfiguration = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=volumeBaselineIOPS" }),
+        SpeakeasyMetadata({ data: "json, name=volumeBaselineIOPS" }),
         __metadata("design:type", Number)
     ], VolumeConfiguration.prototype, "volumeBaselineIops", void 0);
     __decorate([
-        Metadata({ data: "json, name=volumeBaselineThroughput" }),
+        SpeakeasyMetadata({ data: "json, name=volumeBaselineThroughput" }),
         __metadata("design:type", Number)
     ], VolumeConfiguration.prototype, "volumeBaselineThroughput", void 0);
     __decorate([
-        Metadata({ data: "json, name=volumeBurstIOPS" }),
+        SpeakeasyMetadata({ data: "json, name=volumeBurstIOPS" }),
         __metadata("design:type", Number)
     ], VolumeConfiguration.prototype, "volumeBurstIops", void 0);
     __decorate([
-        Metadata({ data: "json, name=volumeBurstThroughput" }),
+        SpeakeasyMetadata({ data: "json, name=volumeBurstThroughput" }),
         __metadata("design:type", Number)
     ], VolumeConfiguration.prototype, "volumeBurstThroughput", void 0);
     __decorate([
-        Metadata({ data: "json, name=volumeSize" }),
+        SpeakeasyMetadata({ data: "json, name=volumeSize" }),
         __metadata("design:type", Number)
     ], VolumeConfiguration.prototype, "volumeSize", void 0);
     __decorate([
-        Metadata({ data: "json, name=volumeType" }),
+        SpeakeasyMetadata({ data: "json, name=volumeType" }),
         __metadata("design:type", String)
     ], VolumeConfiguration.prototype, "volumeType", void 0);
     return VolumeConfiguration;

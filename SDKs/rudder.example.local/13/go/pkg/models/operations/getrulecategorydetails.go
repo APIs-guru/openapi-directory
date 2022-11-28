@@ -8,10 +8,6 @@ type GetRuleCategoryDetailsPathParams struct {
 	RuleCategoryID string `pathParam:"style=simple,explode=false,name=ruleCategoryId"`
 }
 
-type GetRuleCategoryDetailsRequest struct {
-	PathParams GetRuleCategoryDetailsPathParams
-}
-
 type GetRuleCategoryDetails200ApplicationJSONActionEnum string
 
 const (
@@ -33,6 +29,10 @@ type GetRuleCategoryDetails200ApplicationJSON struct {
 	Action GetRuleCategoryDetails200ApplicationJSONActionEnum `json:"action"`
 	Data   GetRuleCategoryDetails200ApplicationJSONData       `json:"data"`
 	Result GetRuleCategoryDetails200ApplicationJSONResultEnum `json:"result"`
+}
+
+type GetRuleCategoryDetailsRequest struct {
+	PathParams GetRuleCategoryDetailsPathParams
 }
 
 type GetRuleCategoryDetailsResponse struct {

@@ -1,5 +1,7 @@
 package shared
 
+// SetMaintenancePolicyRequest
+// SetMaintenancePolicyRequest sets the maintenance policy for a cluster.
 type SetMaintenancePolicyRequest struct {
 	ClusterID         *string            `json:"clusterId,omitempty"`
 	MaintenancePolicy *MaintenancePolicy `json:"maintenancePolicy,omitempty"`

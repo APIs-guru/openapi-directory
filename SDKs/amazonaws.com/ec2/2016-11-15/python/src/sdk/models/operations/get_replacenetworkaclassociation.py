@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetReplaceNetworkACLAssociationActionEnum(str, Enum):
     REPLACE_NETWORK_ACL_ASSOCIATION = "ReplaceNetworkAclAssociation"
@@ -10,11 +14,11 @@ class GetReplaceNetworkACLAssociationVersionEnum(str, Enum):
 
 @dataclass
 class GetReplaceNetworkACLAssociationQueryParams:
-    action: GetReplaceNetworkACLAssociationActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    association_id: str = field(default=None, metadata={'query_param': { 'field_name': 'AssociationId', 'style': 'form', 'explode': True }})
+    action: GetReplaceNetworkACLAssociationActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    association_id: str = field(metadata={'query_param': { 'field_name': 'AssociationId', 'style': 'form', 'explode': True }})
+    network_acl_id: str = field(metadata={'query_param': { 'field_name': 'NetworkAclId', 'style': 'form', 'explode': True }})
+    version: GetReplaceNetworkACLAssociationVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     dry_run: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'DryRun', 'style': 'form', 'explode': True }})
-    network_acl_id: str = field(default=None, metadata={'query_param': { 'field_name': 'NetworkAclId', 'style': 'form', 'explode': True }})
-    version: GetReplaceNetworkACLAssociationVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -30,13 +34,13 @@ class GetReplaceNetworkACLAssociationHeaders:
 
 @dataclass
 class GetReplaceNetworkACLAssociationRequest:
-    query_params: GetReplaceNetworkACLAssociationQueryParams = field(default=None)
-    headers: GetReplaceNetworkACLAssociationHeaders = field(default=None)
+    headers: GetReplaceNetworkACLAssociationHeaders = field()
+    query_params: GetReplaceNetworkACLAssociationQueryParams = field()
     
 
 @dataclass
 class GetReplaceNetworkACLAssociationResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

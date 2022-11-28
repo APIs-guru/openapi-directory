@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // NodegroupScalingConfig
 /**
  * An object representing the scaling configuration details for the Auto Scaling group that is associated with your node group. When creating a node group, you must specify all or none of the properties. When updating a node group, you can specify any or none of the properties.
@@ -33,15 +33,15 @@ var NodegroupScalingConfig = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=desiredSize" }),
+        SpeakeasyMetadata({ data: "json, name=desiredSize" }),
         __metadata("design:type", Number)
     ], NodegroupScalingConfig.prototype, "desiredSize", void 0);
     __decorate([
-        Metadata({ data: "json, name=maxSize" }),
+        SpeakeasyMetadata({ data: "json, name=maxSize" }),
         __metadata("design:type", Number)
     ], NodegroupScalingConfig.prototype, "maxSize", void 0);
     __decorate([
-        Metadata({ data: "json, name=minSize" }),
+        SpeakeasyMetadata({ data: "json, name=minSize" }),
         __metadata("design:type", Number)
     ], NodegroupScalingConfig.prototype, "minSize", void 0);
     return NodegroupScalingConfig;

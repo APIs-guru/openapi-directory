@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // TrialComponentMetricSummary
@@ -6,30 +7,30 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A summary of the metrics of a trial component.
 **/
 export class TrialComponentMetricSummary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Avg" })
+  @SpeakeasyMetadata({ data: "json, name=Avg" })
   avg?: number;
 
-  @Metadata({ data: "json, name=Count" })
+  @SpeakeasyMetadata({ data: "json, name=Count" })
   count?: number;
 
-  @Metadata({ data: "json, name=Last" })
+  @SpeakeasyMetadata({ data: "json, name=Last" })
   last?: number;
 
-  @Metadata({ data: "json, name=Max" })
+  @SpeakeasyMetadata({ data: "json, name=Max" })
   max?: number;
 
-  @Metadata({ data: "json, name=MetricName" })
+  @SpeakeasyMetadata({ data: "json, name=MetricName" })
   metricName?: string;
 
-  @Metadata({ data: "json, name=Min" })
+  @SpeakeasyMetadata({ data: "json, name=Min" })
   min?: number;
 
-  @Metadata({ data: "json, name=SourceArn" })
+  @SpeakeasyMetadata({ data: "json, name=SourceArn" })
   sourceArn?: string;
 
-  @Metadata({ data: "json, name=StdDev" })
+  @SpeakeasyMetadata({ data: "json, name=StdDev" })
   stdDev?: number;
 
-  @Metadata({ data: "json, name=TimeStamp" })
+  @SpeakeasyMetadata({ data: "json, name=TimeStamp" })
   timeStamp?: Date;
 }

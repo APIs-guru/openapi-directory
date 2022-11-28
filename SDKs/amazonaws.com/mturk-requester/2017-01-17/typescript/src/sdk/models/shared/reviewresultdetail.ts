@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ReviewResultDetail
@@ -6,21 +7,21 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  *  This data structure is returned multiple times for each result specified in the Review Policy. 
 **/
 export class ReviewResultDetail extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ActionId" })
+  @SpeakeasyMetadata({ data: "json, name=ActionId" })
   actionId?: string;
 
-  @Metadata({ data: "json, name=Key" })
+  @SpeakeasyMetadata({ data: "json, name=Key" })
   key?: string;
 
-  @Metadata({ data: "json, name=QuestionId" })
+  @SpeakeasyMetadata({ data: "json, name=QuestionId" })
   questionId?: string;
 
-  @Metadata({ data: "json, name=SubjectId" })
+  @SpeakeasyMetadata({ data: "json, name=SubjectId" })
   subjectId?: string;
 
-  @Metadata({ data: "json, name=SubjectType" })
+  @SpeakeasyMetadata({ data: "json, name=SubjectType" })
   subjectType?: string;
 
-  @Metadata({ data: "json, name=Value" })
+  @SpeakeasyMetadata({ data: "json, name=Value" })
   value?: string;
 }

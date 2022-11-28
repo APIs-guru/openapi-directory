@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AwsIamAttachedManagedPolicy } from "./awsiamattachedmanagedpolicy";
 import { AwsIamGroupPolicy } from "./awsiamgrouppolicy";
+
 
 
 // AwsIamGroupDetails
@@ -9,21 +9,21 @@ import { AwsIamGroupPolicy } from "./awsiamgrouppolicy";
  * Contains details about an IAM group.
 **/
 export class AwsIamGroupDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AttachedManagedPolicies", elemType: shared.AwsIamAttachedManagedPolicy })
+  @SpeakeasyMetadata({ data: "json, name=AttachedManagedPolicies", elemType: AwsIamAttachedManagedPolicy })
   attachedManagedPolicies?: AwsIamAttachedManagedPolicy[];
 
-  @Metadata({ data: "json, name=CreateDate" })
+  @SpeakeasyMetadata({ data: "json, name=CreateDate" })
   createDate?: string;
 
-  @Metadata({ data: "json, name=GroupId" })
+  @SpeakeasyMetadata({ data: "json, name=GroupId" })
   groupId?: string;
 
-  @Metadata({ data: "json, name=GroupName" })
+  @SpeakeasyMetadata({ data: "json, name=GroupName" })
   groupName?: string;
 
-  @Metadata({ data: "json, name=GroupPolicyList", elemType: shared.AwsIamGroupPolicy })
+  @SpeakeasyMetadata({ data: "json, name=GroupPolicyList", elemType: AwsIamGroupPolicy })
   groupPolicyList?: AwsIamGroupPolicy[];
 
-  @Metadata({ data: "json, name=Path" })
+  @SpeakeasyMetadata({ data: "json, name=Path" })
   path?: string;
 }

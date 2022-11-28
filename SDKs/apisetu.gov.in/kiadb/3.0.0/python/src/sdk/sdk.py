@@ -1,8 +1,11 @@
-import warnings
+
+
 import requests
 from typing import Optional
 from sdk.models import operations
 from . import utils
+
+
 
 
 SERVERS = [
@@ -11,32 +14,53 @@ SERVERS = [
 
 
 class SDK:
-    client = requests.Session()
-    server_url = SERVERS[0]
+    
+
+    _client: requests.Session
+    _security_client: requests.Session
+    
+    _server_url: str = SERVERS[0]
+    _language: str = "python"
+    _sdk_version: str = "0.0.1"
+    _gen_version: str = "internal"
+
+    def __init__(self) -> None:
+        self._client = requests.Session()
+        self._security_client = requests.Session()
+        
+
 
     def config_server_url(self, server_url: str, params: dict[str, str]):
-        if not params is None:
-            self.server_url = utils.replace_parameters(server_url, params)
+        if params is not None:
+            self._server_url = utils.replace_parameters(server_url, params)
         else:
-            self.server_url = server_url
-            
+            self._server_url = server_url
+
+        
     
 
+    def config_client(self, client: requests.Session):
+        self._client = client
+        
+    
+    
     
     def alltr(self, request: operations.AlltrRequest) -> operations.AlltrResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Allotment Letter
+        API to verify Allotment Letter.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/alltr/certificate"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -77,19 +101,21 @@ class SDK:
 
     
     def bknoc(self, request: operations.BknocRequest) -> operations.BknocResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""NOC For Banks
+        API to verify NOC For Banks.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/bknoc/certificate"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -130,19 +156,21 @@ class SDK:
 
     
     def bpcer(self, request: operations.BpcerRequest) -> operations.BpcerResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Building Plan
+        API to verify Building Plan.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/bpcer/certificate"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -183,19 +211,21 @@ class SDK:
 
     
     def cfltr(self, request: operations.CfltrRequest) -> operations.CfltrResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Confirmatory Letter
+        API to verify Confirmatory Letter.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/cfltr/certificate"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -236,19 +266,21 @@ class SDK:
 
     
     def lcsag(self, request: operations.LcsagRequest) -> operations.LcsagResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Lease cum Sale Agreement
+        API to verify Lease cum Sale Agreement.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/lcsag/certificate"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -289,19 +321,21 @@ class SDK:
 
     
     def pscer(self, request: operations.PscerRequest) -> operations.PscerResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Possession Certificate
+        API to verify Possession Certificate.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/pscer/certificate"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -342,19 +376,21 @@ class SDK:
 
     
     def psnoc(self, request: operations.PsnocRequest) -> operations.PsnocResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""NOC for New Power Supply
+        API to verify NOC for New Power Supply.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/psnoc/certificate"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -395,19 +431,21 @@ class SDK:
 
     
     def wtrbl(self, request: operations.WtrblRequest) -> operations.WtrblResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Water Bill/ Connection
+        API to verify Water Bill/ Connection.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/wtrbl/certificate"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 

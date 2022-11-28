@@ -1,18 +1,22 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import currencycode_enum
-from . import savingsplanpaymentoption_enum
-from . import savingsplantype_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ParentSavingsPlanOffering:
-    currency: Optional[currencycode_enum.CurrencyCodeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'currency' }})
-    duration_seconds: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'durationSeconds' }})
-    offering_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'offeringId' }})
-    payment_option: Optional[savingsplanpaymentoption_enum.SavingsPlanPaymentOptionEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'paymentOption' }})
-    plan_description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'planDescription' }})
-    plan_type: Optional[savingsplantype_enum.SavingsPlanTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'planType' }})
+    r"""ParentSavingsPlanOffering
+    Information about a Savings Plan offering.
+    """
+    
+    currency: Optional[CurrencyCodeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('currency') }})
+    duration_seconds: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('durationSeconds') }})
+    offering_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('offeringId') }})
+    payment_option: Optional[SavingsPlanPaymentOptionEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('paymentOption') }})
+    plan_description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('planDescription') }})
+    plan_type: Optional[SavingsPlanTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('planType') }})
     

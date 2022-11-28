@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// TestGridSessionAction
+// An action taken by a <a>TestGridSession</a> browser instance.
 type TestGridSessionAction struct {
 	Action        *string    `json:"action,omitempty"`
 	Duration      *int64     `json:"duration,omitempty"`

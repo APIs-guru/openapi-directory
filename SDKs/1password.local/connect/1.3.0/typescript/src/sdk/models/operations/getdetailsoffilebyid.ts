@@ -1,53 +1,54 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetDetailsOfFileByIdPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=fileUuid" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=fileUuid" })
   fileUuid: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=itemUuid" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=itemUuid" })
   itemUuid: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=vaultUuid" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=vaultUuid" })
   vaultUuid: string;
 }
 
 
 export class GetDetailsOfFileByIdQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=inline_files" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=inline_files" })
   inlineFiles?: boolean;
 }
 
 
 export class GetDetailsOfFileByIdSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=bearer" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" })
   connectToken: shared.SchemeConnectToken;
 }
 
 
 export class GetDetailsOfFileByIdRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetDetailsOfFileByIdPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetDetailsOfFileByIdQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: GetDetailsOfFileByIdSecurity;
 }
 
 
 export class GetDetailsOfFileByIdResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   errorResponse?: shared.ErrorResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   file?: shared.File;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

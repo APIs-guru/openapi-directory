@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { LiveBroadcastContentDetails } from "./livebroadcastcontentdetails";
 import { LiveBroadcastSnippet } from "./livebroadcastsnippet";
 import { LiveBroadcastStatistics } from "./livebroadcaststatistics";
 import { LiveBroadcastStatus } from "./livebroadcaststatus";
+
 
 
 // LiveBroadcast
@@ -10,24 +11,24 @@ import { LiveBroadcastStatus } from "./livebroadcaststatus";
  * A *liveBroadcast* resource represents an event that will be streamed, via live video, on YouTube.
 **/
 export class LiveBroadcast extends SpeakeasyBase {
-  @Metadata({ data: "json, name=contentDetails" })
+  @SpeakeasyMetadata({ data: "json, name=contentDetails" })
   contentDetails?: LiveBroadcastContentDetails;
 
-  @Metadata({ data: "json, name=etag" })
+  @SpeakeasyMetadata({ data: "json, name=etag" })
   etag?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=snippet" })
+  @SpeakeasyMetadata({ data: "json, name=snippet" })
   snippet?: LiveBroadcastSnippet;
 
-  @Metadata({ data: "json, name=statistics" })
+  @SpeakeasyMetadata({ data: "json, name=statistics" })
   statistics?: LiveBroadcastStatistics;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: LiveBroadcastStatus;
 }

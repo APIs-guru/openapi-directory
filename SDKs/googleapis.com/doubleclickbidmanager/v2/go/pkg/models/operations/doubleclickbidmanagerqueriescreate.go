@@ -25,7 +25,7 @@ type DoubleclickbidmanagerQueriesCreateSecurity struct {
 
 type DoubleclickbidmanagerQueriesCreateRequest struct {
 	QueryParams DoubleclickbidmanagerQueriesCreateQueryParams
-	Request     *shared.Query `request:"mediaType=application/json"`
+	Request     *shared.QueryInput `request:"mediaType=application/json"`
 	Security    DoubleclickbidmanagerQueriesCreateSecurity
 }
 

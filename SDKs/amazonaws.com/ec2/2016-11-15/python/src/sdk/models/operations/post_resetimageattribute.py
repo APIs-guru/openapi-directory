@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostResetImageAttributeActionEnum(str, Enum):
     RESET_IMAGE_ATTRIBUTE = "ResetImageAttribute"
@@ -10,8 +14,8 @@ class PostResetImageAttributeVersionEnum(str, Enum):
 
 @dataclass
 class PostResetImageAttributeQueryParams:
-    action: PostResetImageAttributeActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostResetImageAttributeVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostResetImageAttributeActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostResetImageAttributeVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,13 +31,13 @@ class PostResetImageAttributeHeaders:
 
 @dataclass
 class PostResetImageAttributeRequest:
-    query_params: PostResetImageAttributeQueryParams = field(default=None)
-    headers: PostResetImageAttributeHeaders = field(default=None)
+    headers: PostResetImageAttributeHeaders = field()
+    query_params: PostResetImageAttributeQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostResetImageAttributeResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

@@ -10,12 +10,12 @@ class RemoveRadiusConfigHeaders:
 
 @dataclass
 class RemoveRadiusConfigRequest:
-    headers: RemoveRadiusConfigHeaders = field(default=None)
+    headers: RemoveRadiusConfigHeaders = field()
     
 
 @dataclass
 class RemoveRadiusConfigResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error_response: Optional[shared.ErrorResponse] = field(default=None)
-    status_code: int = field(default=None)
     

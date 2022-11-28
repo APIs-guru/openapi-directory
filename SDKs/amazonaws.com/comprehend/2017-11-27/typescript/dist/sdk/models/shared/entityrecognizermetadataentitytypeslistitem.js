@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { EntityTypesEvaluationMetrics } from "./entitytypesevaluationmetrics";
 // EntityRecognizerMetadataEntityTypesListItem
 /**
@@ -34,15 +34,15 @@ var EntityRecognizerMetadataEntityTypesListItem = /** @class */ (function (_supe
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=EvaluationMetrics" }),
+        SpeakeasyMetadata({ data: "json, name=EvaluationMetrics" }),
         __metadata("design:type", EntityTypesEvaluationMetrics)
     ], EntityRecognizerMetadataEntityTypesListItem.prototype, "evaluationMetrics", void 0);
     __decorate([
-        Metadata({ data: "json, name=NumberOfTrainMentions" }),
+        SpeakeasyMetadata({ data: "json, name=NumberOfTrainMentions" }),
         __metadata("design:type", Number)
     ], EntityRecognizerMetadataEntityTypesListItem.prototype, "numberOfTrainMentions", void 0);
     __decorate([
-        Metadata({ data: "json, name=Type" }),
+        SpeakeasyMetadata({ data: "json, name=Type" }),
         __metadata("design:type", String)
     ], EntityRecognizerMetadataEntityTypesListItem.prototype, "type", void 0);
     return EntityRecognizerMetadataEntityTypesListItem;

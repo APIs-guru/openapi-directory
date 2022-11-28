@@ -1,33 +1,34 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum ProjectedPlayerGameStatsByDateWDfsSalariesFormatEnum {
-    Xml = "xml"
-,    Json = "json"
+    Xml = "xml",
+    Json = "json"
 }
 
 
 export class ProjectedPlayerGameStatsByDateWDfsSalariesPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=date" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=date" })
   date: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=format" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=format" })
   format: ProjectedPlayerGameStatsByDateWDfsSalariesFormatEnum;
 }
 
 
 export class ProjectedPlayerGameStatsByDateWDfsSalariesRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: ProjectedPlayerGameStatsByDateWDfsSalariesPathParams;
 }
 
 
 export class ProjectedPlayerGameStatsByDateWDfsSalariesResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   playerGameProjections?: any[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

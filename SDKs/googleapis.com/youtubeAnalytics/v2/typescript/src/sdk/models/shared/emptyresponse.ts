@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Errors } from "./errors";
+
 
 
 // EmptyResponse
@@ -7,6 +8,6 @@ import { Errors } from "./errors";
  * Empty response.
 **/
 export class EmptyResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=errors" })
+  @SpeakeasyMetadata({ data: "json, name=errors" })
   errors?: Errors;
 }

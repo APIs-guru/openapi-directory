@@ -1,7 +1,8 @@
 
 
+
 export enum ConnectionStatusEnum {
-    Active = "active"
-,    Inactive = "inactive"
-,    Deprecated = "deprecated"
+    Active = "active",
+    Inactive = "inactive",
+    Deprecated = "deprecated"
 }

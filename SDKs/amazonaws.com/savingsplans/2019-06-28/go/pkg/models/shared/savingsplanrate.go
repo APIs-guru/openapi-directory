@@ -1,5 +1,7 @@
 package shared
 
+// SavingsPlanRate
+// Information about a Savings Plan rate.
 type SavingsPlanRate struct {
 	Currency    *CurrencyCodeEnum               `json:"currency,omitempty"`
 	Operation   *string                         `json:"operation,omitempty"`

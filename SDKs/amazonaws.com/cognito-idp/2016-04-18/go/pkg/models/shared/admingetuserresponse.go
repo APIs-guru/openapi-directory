@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// AdminGetUserResponse
+// Represents the response from the server from the request to get the specified user as an administrator.
 type AdminGetUserResponse struct {
 	Enabled              *bool               `json:"Enabled,omitempty"`
 	MfaOptions           []MfaOptionType     `json:"MFAOptions,omitempty"`

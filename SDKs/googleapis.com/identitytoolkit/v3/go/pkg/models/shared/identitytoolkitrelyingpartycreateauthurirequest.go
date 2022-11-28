@@ -1,5 +1,7 @@
 package shared
 
+// IdentitytoolkitRelyingpartyCreateAuthURIRequest
+// Request to get the IDP authentication URL.
 type IdentitytoolkitRelyingpartyCreateAuthURIRequest struct {
 	AppID               *string           `json:"appId,omitempty"`
 	AuthFlowType        *string           `json:"authFlowType,omitempty"`

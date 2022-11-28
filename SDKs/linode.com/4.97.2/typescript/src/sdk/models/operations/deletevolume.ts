@@ -1,59 +1,48 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class DeleteVolumePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=volumeId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=volumeId" })
   volumeId: number;
 }
 
 
-export class DeleteVolumeSecurityOption1 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=bearer" })
-  personalAccessToken: shared.SchemePersonalAccessToken;
-}
-
-
-export class DeleteVolumeSecurityOption2 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
-  oauth: shared.SchemeOauth;
-}
-
-
 export class DeleteVolumeSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, option=true" })
-  option1?: DeleteVolumeSecurityOption1;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" })
+  personalAccessToken?: shared.SchemePersonalAccessToken;
 
-  @Metadata({ data: "security, option=true" })
-  option2?: DeleteVolumeSecurityOption2;
-}
-
-
-export class DeleteVolumeRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: DeleteVolumePathParams;
-
-  @Metadata()
-  security: DeleteVolumeSecurity;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
+  oauth?: shared.SchemeOauth;
 }
 
 
 export class DeleteVolumeDefaultApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=errors", elemType: shared.ErrorObject })
+  @SpeakeasyMetadata({ data: "json, name=errors", elemType: shared.ErrorObject })
   errors?: shared.ErrorObject[];
 }
 
 
+export class DeleteVolumeRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: DeleteVolumePathParams;
+
+  @SpeakeasyMetadata()
+  security: DeleteVolumeSecurity;
+}
+
+
 export class DeleteVolumeResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   deleteVolume200ApplicationJsonObject?: Map<string, any>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   deleteVolumeDefaultApplicationJsonObject?: DeleteVolumeDefaultApplicationJson;
 }

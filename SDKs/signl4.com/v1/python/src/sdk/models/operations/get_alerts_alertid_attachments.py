@@ -5,19 +5,19 @@ from sdk.models import shared
 
 @dataclass
 class GetAlertsAlertIDAttachmentsPathParams:
-    alert_id: str = field(default=None, metadata={'path_param': { 'field_name': 'alertId', 'style': 'simple', 'explode': False }})
+    alert_id: str = field(metadata={'path_param': { 'field_name': 'alertId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetAlertsAlertIDAttachmentsRequest:
-    path_params: GetAlertsAlertIDAttachmentsPathParams = field(default=None)
+    path_params: GetAlertsAlertIDAttachmentsPathParams = field()
     
 
 @dataclass
 class GetAlertsAlertIDAttachmentsResponse:
+    content_type: str = field()
+    status_code: int = field()
     alert_attachment_infos: Optional[List[shared.AlertAttachmentInfo]] = field(default=None)
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
+    body: Optional[bytes] = field(default=None)
     error_response_content: Optional[shared.ErrorResponseContent] = field(default=None)
-    status_code: int = field(default=None)
     

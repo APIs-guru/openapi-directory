@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Date } from "./date";
 // ImageVersion
 /**
@@ -34,27 +34,27 @@ var ImageVersion = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=creationDisabled" }),
+        SpeakeasyMetadata({ data: "json, name=creationDisabled" }),
         __metadata("design:type", Boolean)
     ], ImageVersion.prototype, "creationDisabled", void 0);
     __decorate([
-        Metadata({ data: "json, name=imageVersionId" }),
+        SpeakeasyMetadata({ data: "json, name=imageVersionId" }),
         __metadata("design:type", String)
     ], ImageVersion.prototype, "imageVersionId", void 0);
     __decorate([
-        Metadata({ data: "json, name=isDefault" }),
+        SpeakeasyMetadata({ data: "json, name=isDefault" }),
         __metadata("design:type", Boolean)
     ], ImageVersion.prototype, "isDefault", void 0);
     __decorate([
-        Metadata({ data: "json, name=releaseDate" }),
+        SpeakeasyMetadata({ data: "json, name=releaseDate" }),
         __metadata("design:type", Date)
     ], ImageVersion.prototype, "releaseDate", void 0);
     __decorate([
-        Metadata({ data: "json, name=supportedPythonVersions" }),
+        SpeakeasyMetadata({ data: "json, name=supportedPythonVersions" }),
         __metadata("design:type", Array)
     ], ImageVersion.prototype, "supportedPythonVersions", void 0);
     __decorate([
-        Metadata({ data: "json, name=upgradeDisabled" }),
+        SpeakeasyMetadata({ data: "json, name=upgradeDisabled" }),
         __metadata("design:type", Boolean)
     ], ImageVersion.prototype, "upgradeDisabled", void 0);
     return ImageVersion;

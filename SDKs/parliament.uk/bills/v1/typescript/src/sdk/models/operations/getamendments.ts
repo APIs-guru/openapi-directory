@@ -1,56 +1,57 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetAmendmentsPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=billId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=billId" })
   billId: number;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=billStageId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=billStageId" })
   billStageId: number;
 }
 
 
 export class GetAmendmentsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Decision" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Decision" })
   decision?: shared.DecisionEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=MemberId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=MemberId" })
   memberId?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=SearchTerm" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=SearchTerm" })
   searchTerm?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Skip" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Skip" })
   skip?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Take" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Take" })
   take?: number;
 }
 
 
 export class GetAmendmentsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetAmendmentsPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetAmendmentsQueryParams;
 }
 
 
 export class GetAmendmentsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   amendmentSearchItemSearchResult?: shared.AmendmentSearchItemSearchResult;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   problemDetails?: Map<string, any>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

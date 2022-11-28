@@ -1,5 +1,7 @@
 package operations
 
+// GetValidity200ApplicationJSONData
+// Validation of API Key
 type GetValidity200ApplicationJSONData struct {
 	Permissions []string `json:"permissions"`
 }

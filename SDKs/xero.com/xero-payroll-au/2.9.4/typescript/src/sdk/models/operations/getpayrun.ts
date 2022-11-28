@@ -1,44 +1,45 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetPayRunPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=PayRunID" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=PayRunID" })
   payRunId: string;
 }
 
 
 export class GetPayRunHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=Xero-Tenant-Id" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Xero-Tenant-Id" })
   xeroTenantId: string;
 }
 
 
 export class GetPayRunSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   oAuth2: shared.SchemeOAuth2;
 }
 
 
 export class GetPayRunRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetPayRunPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: GetPayRunHeaders;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: GetPayRunSecurity;
 }
 
 
 export class GetPayRunResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   payRuns?: shared.PayRuns;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

@@ -10,18 +10,18 @@ class GetMediaFoldersQueryParams:
 
 @dataclass
 class GetMediaFoldersSecurity:
-    custom_authentication: shared.SchemeCustomAuthentication = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    custom_authentication: shared.SchemeCustomAuthentication = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
     
 
 @dataclass
 class GetMediaFoldersRequest:
-    query_params: GetMediaFoldersQueryParams = field(default=None)
-    security: GetMediaFoldersSecurity = field(default=None)
+    query_params: GetMediaFoldersQueryParams = field()
+    security: GetMediaFoldersSecurity = field()
     
 
 @dataclass
 class GetMediaFoldersResponse:
+    content_type: str = field()
+    status_code: int = field()
     base_item_dto_query_result: Optional[shared.BaseItemDtoQueryResult] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

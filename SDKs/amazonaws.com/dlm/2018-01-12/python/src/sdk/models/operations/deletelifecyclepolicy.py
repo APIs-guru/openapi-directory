@@ -1,10 +1,13 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 
 
 @dataclass
 class DeleteLifecyclePolicyPathParams:
-    policy_id: str = field(default=None, metadata={'path_param': { 'field_name': 'policyId', 'style': 'simple', 'explode': False }})
+    policy_id: str = field(metadata={'path_param': { 'field_name': 'policyId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -20,16 +23,16 @@ class DeleteLifecyclePolicyHeaders:
 
 @dataclass
 class DeleteLifecyclePolicyRequest:
-    path_params: DeleteLifecyclePolicyPathParams = field(default=None)
-    headers: DeleteLifecyclePolicyHeaders = field(default=None)
+    headers: DeleteLifecyclePolicyHeaders = field()
+    path_params: DeleteLifecyclePolicyPathParams = field()
     
 
 @dataclass
 class DeleteLifecyclePolicyResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     delete_lifecycle_policy_response: Optional[dict[str, Any]] = field(default=None)
     internal_server_exception: Optional[Any] = field(default=None)
     limit_exceeded_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

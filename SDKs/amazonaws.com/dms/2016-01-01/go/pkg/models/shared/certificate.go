@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// Certificate
+// The SSL certificate that can be used to encrypt connections between the endpoints and the replication instance.
 type Certificate struct {
 	CertificateArn          *string    `json:"CertificateArn,omitempty"`
 	CertificateCreationDate *time.Time `json:"CertificateCreationDate,omitempty"`

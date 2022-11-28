@@ -22,7 +22,39 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+// TagValueInput
+/**
+ * A TagValue is a child of a particular TagKey. This is used to group cloud resources for the purpose of controlling them using policies.
+**/
+var TagValueInput = /** @class */ (function (_super) {
+    __extends(TagValueInput, _super);
+    function TagValueInput() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=description" }),
+        __metadata("design:type", String)
+    ], TagValueInput.prototype, "description", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=etag" }),
+        __metadata("design:type", String)
+    ], TagValueInput.prototype, "etag", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=name" }),
+        __metadata("design:type", String)
+    ], TagValueInput.prototype, "name", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=parent" }),
+        __metadata("design:type", String)
+    ], TagValueInput.prototype, "parent", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=shortName" }),
+        __metadata("design:type", String)
+    ], TagValueInput.prototype, "shortName", void 0);
+    return TagValueInput;
+}(SpeakeasyBase));
+export { TagValueInput };
 // TagValue
 /**
  * A TagValue is a child of a particular TagKey. This is used to group cloud resources for the purpose of controlling them using policies.
@@ -33,35 +65,35 @@ var TagValue = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=createTime" }),
+        SpeakeasyMetadata({ data: "json, name=createTime" }),
         __metadata("design:type", String)
     ], TagValue.prototype, "createTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=description" }),
+        SpeakeasyMetadata({ data: "json, name=description" }),
         __metadata("design:type", String)
     ], TagValue.prototype, "description", void 0);
     __decorate([
-        Metadata({ data: "json, name=etag" }),
+        SpeakeasyMetadata({ data: "json, name=etag" }),
         __metadata("design:type", String)
     ], TagValue.prototype, "etag", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], TagValue.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=namespacedName" }),
+        SpeakeasyMetadata({ data: "json, name=namespacedName" }),
         __metadata("design:type", String)
     ], TagValue.prototype, "namespacedName", void 0);
     __decorate([
-        Metadata({ data: "json, name=parent" }),
+        SpeakeasyMetadata({ data: "json, name=parent" }),
         __metadata("design:type", String)
     ], TagValue.prototype, "parent", void 0);
     __decorate([
-        Metadata({ data: "json, name=shortName" }),
+        SpeakeasyMetadata({ data: "json, name=shortName" }),
         __metadata("design:type", String)
     ], TagValue.prototype, "shortName", void 0);
     __decorate([
-        Metadata({ data: "json, name=updateTime" }),
+        SpeakeasyMetadata({ data: "json, name=updateTime" }),
         __metadata("design:type", String)
     ], TagValue.prototype, "updateTime", void 0);
     return TagValue;

@@ -22,14 +22,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var SchemeClientId = /** @class */ (function (_super) {
     __extends(SchemeClientId, _super);
     function SchemeClientId() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, name=PLAID-CLIENT-ID" }),
+        SpeakeasyMetadata({ data: "security, name=PLAID-CLIENT-ID" }),
         __metadata("design:type", String)
     ], SchemeClientId.prototype, "apiKey", void 0);
     return SchemeClientId;
@@ -41,7 +41,7 @@ var SchemePlaidVersion = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, name=Plaid-Version" }),
+        SpeakeasyMetadata({ data: "security, name=Plaid-Version" }),
         __metadata("design:type", String)
     ], SchemePlaidVersion.prototype, "apiKey", void 0);
     return SchemePlaidVersion;
@@ -53,7 +53,7 @@ var SchemeSecret = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, name=PLAID-SECRET" }),
+        SpeakeasyMetadata({ data: "security, name=PLAID-SECRET" }),
         __metadata("design:type", String)
     ], SchemeSecret.prototype, "apiKey", void 0);
     return SchemeSecret;
@@ -65,15 +65,15 @@ var Security = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", SchemeClientId)
     ], Security.prototype, "clientId", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", SchemePlaidVersion)
     ], Security.prototype, "plaidVersion", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", SchemeSecret)
     ], Security.prototype, "secret", void 0);
     return Security;

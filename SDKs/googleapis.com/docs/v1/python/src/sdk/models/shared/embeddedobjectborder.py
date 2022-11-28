@@ -1,8 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import optionalcolor
-from . import dimension
+from sdk import utils
+from . import *
 
 class EmbeddedObjectBorderDashStyleEnum(str, Enum):
     DASH_STYLE_UNSPECIFIED = "DASH_STYLE_UNSPECIFIED"
@@ -18,8 +19,12 @@ class EmbeddedObjectBorderPropertyStateEnum(str, Enum):
 @dataclass_json
 @dataclass
 class EmbeddedObjectBorder:
-    color: Optional[optionalcolor.OptionalColor] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'color' }})
-    dash_style: Optional[EmbeddedObjectBorderDashStyleEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'dashStyle' }})
-    property_state: Optional[EmbeddedObjectBorderPropertyStateEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'propertyState' }})
-    width: Optional[dimension.Dimension] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'width' }})
+    r"""EmbeddedObjectBorder
+    A border around an EmbeddedObject.
+    """
+    
+    color: Optional[OptionalColor] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('color') }})
+    dash_style: Optional[EmbeddedObjectBorderDashStyleEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('dashStyle') }})
+    property_state: Optional[EmbeddedObjectBorderPropertyStateEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('propertyState') }})
+    width: Optional[Dimension] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('width') }})
     

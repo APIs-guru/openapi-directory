@@ -14,7 +14,7 @@ type CreateSuperfundSecurity struct {
 
 type CreateSuperfundRequest struct {
 	Headers  CreateSuperfundHeaders
-	Request  []shared.SuperFund `request:"mediaType=application/json"`
+	Request  []shared.SuperFundInput `request:"mediaType=application/json"`
 	Security CreateSuperfundSecurity
 }
 

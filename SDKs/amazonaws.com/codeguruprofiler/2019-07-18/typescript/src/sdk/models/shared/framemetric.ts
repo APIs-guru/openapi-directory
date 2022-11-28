@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { MetricTypeEnum } from "./metrictypeenum";
+
 
 
 // FrameMetric
@@ -7,12 +8,12 @@ import { MetricTypeEnum } from "./metrictypeenum";
  *  The frame name, metric type, and thread states. These are used to derive the value of the metric for the frame.
 **/
 export class FrameMetric extends SpeakeasyBase {
-  @Metadata({ data: "json, name=frameName" })
+  @SpeakeasyMetadata({ data: "json, name=frameName" })
   frameName: string;
 
-  @Metadata({ data: "json, name=threadStates" })
+  @SpeakeasyMetadata({ data: "json, name=threadStates" })
   threadStates: string[];
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type: MetricTypeEnum;
 }

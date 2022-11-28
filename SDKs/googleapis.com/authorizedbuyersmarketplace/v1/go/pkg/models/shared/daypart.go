@@ -13,6 +13,8 @@ const (
 	DayPartDayOfWeekEnumSunday               DayPartDayOfWeekEnum = "SUNDAY"
 )
 
+// DayPart
+// Defines targeting for a period of time on a specific week day.
 type DayPart struct {
 	DayOfWeek *DayPartDayOfWeekEnum `json:"dayOfWeek,omitempty"`
 	EndTime   *TimeOfDay            `json:"endTime,omitempty"`

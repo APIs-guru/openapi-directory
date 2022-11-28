@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class GetCarHistoryPathParams:
-    vin: str = field(default=None, metadata={'path_param': { 'field_name': 'vin', 'style': 'simple', 'explode': False }})
+    vin: str = field(metadata={'path_param': { 'field_name': 'vin', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -18,14 +18,14 @@ class GetCarHistoryQueryParams:
 
 @dataclass
 class GetCarHistoryRequest:
-    path_params: GetCarHistoryPathParams = field(default=None)
-    query_params: GetCarHistoryQueryParams = field(default=None)
+    path_params: GetCarHistoryPathParams = field()
+    query_params: GetCarHistoryQueryParams = field()
     
 
 @dataclass
 class GetCarHistoryResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error: Optional[shared.Error] = field(default=None)
     historical_listings: Optional[List[shared.HistoricalListing]] = field(default=None)
-    status_code: int = field(default=None)
     

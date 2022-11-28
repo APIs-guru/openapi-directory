@@ -17,14 +17,14 @@ type InsertEnumOptionForCustomFieldRequestBody struct {
 	Data *shared.EnumOptionInsertRequest `json:"data,omitempty"`
 }
 
+type InsertEnumOptionForCustomField200ApplicationJSON struct {
+	Data *shared.EnumOption `json:"data,omitempty"`
+}
+
 type InsertEnumOptionForCustomFieldRequest struct {
 	PathParams  InsertEnumOptionForCustomFieldPathParams
 	QueryParams InsertEnumOptionForCustomFieldQueryParams
 	Request     *InsertEnumOptionForCustomFieldRequestBody `request:"mediaType=application/json"`
-}
-
-type InsertEnumOptionForCustomField200ApplicationJSON struct {
-	Data *shared.EnumOption `json:"data,omitempty"`
 }
 
 type InsertEnumOptionForCustomFieldResponse struct {

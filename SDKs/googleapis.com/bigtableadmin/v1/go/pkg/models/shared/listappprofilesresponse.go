@@ -1,5 +1,7 @@
 package shared
 
+// ListAppProfilesResponse
+// Response message for BigtableInstanceAdmin.ListAppProfiles.
 type ListAppProfilesResponse struct {
 	AppProfiles     []AppProfile `json:"appProfiles,omitempty"`
 	FailedLocations []string     `json:"failedLocations,omitempty"`

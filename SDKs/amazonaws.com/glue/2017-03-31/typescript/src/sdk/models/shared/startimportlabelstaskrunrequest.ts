@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class StartImportLabelsTaskRunRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=InputS3Path" })
+  @SpeakeasyMetadata({ data: "json, name=InputS3Path" })
   inputS3Path: string;
 
-  @Metadata({ data: "json, name=ReplaceAllLabels" })
+  @SpeakeasyMetadata({ data: "json, name=ReplaceAllLabels" })
   replaceAllLabels?: boolean;
 
-  @Metadata({ data: "json, name=TransformId" })
+  @SpeakeasyMetadata({ data: "json, name=TransformId" })
   transformId: string;
 }

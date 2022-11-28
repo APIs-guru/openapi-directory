@@ -1,19 +1,20 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DescribeCommunicationsRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=afterTime" })
+  @SpeakeasyMetadata({ data: "json, name=afterTime" })
   afterTime?: string;
 
-  @Metadata({ data: "json, name=beforeTime" })
+  @SpeakeasyMetadata({ data: "json, name=beforeTime" })
   beforeTime?: string;
 
-  @Metadata({ data: "json, name=caseId" })
+  @SpeakeasyMetadata({ data: "json, name=caseId" })
   caseId: string;
 
-  @Metadata({ data: "json, name=maxResults" })
+  @SpeakeasyMetadata({ data: "json, name=maxResults" })
   maxResults?: number;
 
-  @Metadata({ data: "json, name=nextToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextToken" })
   nextToken?: string;
 }

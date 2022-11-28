@@ -22,45 +22,21 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
-var PostTransferFundsSecurityOption1 = /** @class */ (function (_super) {
-    __extends(PostTransferFundsSecurityOption1, _super);
-    function PostTransferFundsSecurityOption1() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    __decorate([
-        Metadata({ data: "security, scheme=true;type=http;subtype=basic" }),
-        __metadata("design:type", shared.SchemeBasicAuth)
-    ], PostTransferFundsSecurityOption1.prototype, "basicAuth", void 0);
-    return PostTransferFundsSecurityOption1;
-}(SpeakeasyBase));
-export { PostTransferFundsSecurityOption1 };
-var PostTransferFundsSecurityOption2 = /** @class */ (function (_super) {
-    __extends(PostTransferFundsSecurityOption2, _super);
-    function PostTransferFundsSecurityOption2() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
-        __metadata("design:type", shared.SchemeApiKeyAuth)
-    ], PostTransferFundsSecurityOption2.prototype, "apiKeyAuth", void 0);
-    return PostTransferFundsSecurityOption2;
-}(SpeakeasyBase));
-export { PostTransferFundsSecurityOption2 };
 var PostTransferFundsSecurity = /** @class */ (function (_super) {
     __extends(PostTransferFundsSecurity, _super);
     function PostTransferFundsSecurity() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, option=true" }),
-        __metadata("design:type", PostTransferFundsSecurityOption1)
-    ], PostTransferFundsSecurity.prototype, "option1", void 0);
+        SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=basic" }),
+        __metadata("design:type", shared.SchemeBasicAuth)
+    ], PostTransferFundsSecurity.prototype, "basicAuth", void 0);
     __decorate([
-        Metadata({ data: "security, option=true" }),
-        __metadata("design:type", PostTransferFundsSecurityOption2)
-    ], PostTransferFundsSecurity.prototype, "option2", void 0);
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        __metadata("design:type", shared.SchemeApiKeyAuth)
+    ], PostTransferFundsSecurity.prototype, "apiKeyAuth", void 0);
     return PostTransferFundsSecurity;
 }(SpeakeasyBase));
 export { PostTransferFundsSecurity };
@@ -70,11 +46,11 @@ var PostTransferFundsRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", Object)
     ], PostTransferFundsRequest.prototype, "request", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PostTransferFundsSecurity)
     ], PostTransferFundsRequest.prototype, "security", void 0);
     return PostTransferFundsRequest;
@@ -86,19 +62,19 @@ var PostTransferFundsResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], PostTransferFundsResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], PostTransferFundsResponse.prototype, "serviceError", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], PostTransferFundsResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], PostTransferFundsResponse.prototype, "transferFundsResponse", void 0);
     return PostTransferFundsResponse;

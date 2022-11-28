@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AccessMethodTypeEnum } from "./accessmethodtypeenum";
+
 
 
 // AccessMethod
@@ -7,9 +8,9 @@ import { AccessMethodTypeEnum } from "./accessmethodtypeenum";
  * Describes the type and format of extension access. Only one of <code>CustomObjectIdentifier</code> or <code>AccessMethodType</code> may be provided. Providing both results in <code>InvalidArgsException</code>.
 **/
 export class AccessMethod extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AccessMethodType" })
+  @SpeakeasyMetadata({ data: "json, name=AccessMethodType" })
   accessMethodType?: AccessMethodTypeEnum;
 
-  @Metadata({ data: "json, name=CustomObjectIdentifier" })
+  @SpeakeasyMetadata({ data: "json, name=CustomObjectIdentifier" })
   customObjectIdentifier?: string;
 }

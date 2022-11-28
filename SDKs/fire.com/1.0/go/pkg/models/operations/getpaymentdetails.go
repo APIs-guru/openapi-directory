@@ -9,10 +9,6 @@ type GetPaymentDetailsPathParams struct {
 	PaymentUUID string `pathParam:"style=simple,explode=false,name=paymentUuid"`
 }
 
-type GetPaymentDetailsRequest struct {
-	PathParams GetPaymentDetailsPathParams
-}
-
 type GetPaymentDetailsPaymentRequestStatusEnum string
 
 const (
@@ -58,6 +54,10 @@ type GetPaymentDetailsPaymentRequest struct {
 	TransactionType    *GetPaymentDetailsPaymentRequestTransactionTypeEnum                                                      `json:"transactionType,omitempty"`
 	Type               *GetPaymentDetailsPaymentRequestTypeEnum                                                                 `json:"type,omitempty"`
 	WebhookURL         *string                                                                                                  `json:"webhookUrl,omitempty"`
+}
+
+type GetPaymentDetailsRequest struct {
+	PathParams GetPaymentDetailsPathParams
 }
 
 type GetPaymentDetailsResponse struct {

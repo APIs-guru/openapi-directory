@@ -1,9 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum RestoreDeletedNodesRequestResolutionStrategyEnum {
-    Autorename = "autorename"
-,    Overwrite = "overwrite"
-,    Fail = "fail"
+    Autorename = "autorename",
+    Overwrite = "overwrite",
+    Fail = "fail"
 }
 
 
@@ -12,15 +13,15 @@ export enum RestoreDeletedNodesRequestResolutionStrategyEnum {
  * Request model for restoring deleted nodes
 **/
 export class RestoreDeletedNodesRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=deletedNodeIds" })
+  @SpeakeasyMetadata({ data: "json, name=deletedNodeIds" })
   deletedNodeIds: number[];
 
-  @Metadata({ data: "json, name=keepShareLinks" })
+  @SpeakeasyMetadata({ data: "json, name=keepShareLinks" })
   keepShareLinks?: boolean;
 
-  @Metadata({ data: "json, name=parentId" })
+  @SpeakeasyMetadata({ data: "json, name=parentId" })
   parentId?: number;
 
-  @Metadata({ data: "json, name=resolutionStrategy" })
+  @SpeakeasyMetadata({ data: "json, name=resolutionStrategy" })
   resolutionStrategy?: RestoreDeletedNodesRequestResolutionStrategyEnum;
 }

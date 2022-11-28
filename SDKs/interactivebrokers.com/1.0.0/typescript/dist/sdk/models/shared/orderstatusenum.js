@@ -1,0 +1,19 @@
+export var OrderStatusEnum;
+(function (OrderStatusEnum) {
+    OrderStatusEnum["Minus1"] = "-1";
+    OrderStatusEnum["Zero"] = "0";
+    OrderStatusEnum["One"] = "1";
+    OrderStatusEnum["Two"] = "2";
+    OrderStatusEnum["Three"] = "3";
+    OrderStatusEnum["Four"] = "4";
+    OrderStatusEnum["Five"] = "5";
+    OrderStatusEnum["Six"] = "6";
+    OrderStatusEnum["Seven"] = "7";
+    OrderStatusEnum["Eight"] = "8";
+    OrderStatusEnum["Nine"] = "9";
+    OrderStatusEnum["A"] = "A";
+    OrderStatusEnum["B"] = "B";
+    OrderStatusEnum["C"] = "C";
+    OrderStatusEnum["D"] = "D";
+    OrderStatusEnum["E"] = "E";
+})(OrderStatusEnum || (OrderStatusEnum = {}));

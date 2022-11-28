@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
-from typing import Any,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class ListFunctionEventInvokeConfigsPathParams:
-    function_name: str = field(default=None, metadata={'path_param': { 'field_name': 'FunctionName', 'style': 'simple', 'explode': False }})
+    function_name: str = field(metadata={'path_param': { 'field_name': 'FunctionName', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -27,18 +30,18 @@ class ListFunctionEventInvokeConfigsHeaders:
 
 @dataclass
 class ListFunctionEventInvokeConfigsRequest:
-    path_params: ListFunctionEventInvokeConfigsPathParams = field(default=None)
-    query_params: ListFunctionEventInvokeConfigsQueryParams = field(default=None)
-    headers: ListFunctionEventInvokeConfigsHeaders = field(default=None)
+    headers: ListFunctionEventInvokeConfigsHeaders = field()
+    path_params: ListFunctionEventInvokeConfigsPathParams = field()
+    query_params: ListFunctionEventInvokeConfigsQueryParams = field()
     
 
 @dataclass
 class ListFunctionEventInvokeConfigsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     invalid_parameter_value_exception: Optional[Any] = field(default=None)
     list_function_event_invoke_configs_response: Optional[shared.ListFunctionEventInvokeConfigsResponse] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
     service_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     too_many_requests_exception: Optional[Any] = field(default=None)
     

@@ -1,19 +1,20 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ApiResponseSuccess extends SpeakeasyBase {
-  @Metadata({ data: "json, name=cost" })
+  @SpeakeasyMetadata({ data: "json, name=cost" })
   cost?: number;
 
-  @Metadata({ data: "json, name=mbIn" })
+  @SpeakeasyMetadata({ data: "json, name=mbIn" })
   mbIn?: number;
 
-  @Metadata({ data: "json, name=mbOut" })
+  @SpeakeasyMetadata({ data: "json, name=mbOut" })
   mbOut?: number;
 
-  @Metadata({ data: "json, name=pdf" })
+  @SpeakeasyMetadata({ data: "json, name=pdf" })
   pdf?: string;
 
-  @Metadata({ data: "json, name=success" })
+  @SpeakeasyMetadata({ data: "json, name=success" })
   success?: boolean;
 }

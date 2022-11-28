@@ -9,6 +9,8 @@ const (
 	GoogleCloudIntegrationsV1alphaExecutionExecutionMethodEnumSchedule                   GoogleCloudIntegrationsV1alphaExecutionExecutionMethodEnum = "SCHEDULE"
 )
 
+// GoogleCloudIntegrationsV1alphaExecution
+// The Execution resource contains detailed information of an individual integration execution.
 type GoogleCloudIntegrationsV1alphaExecution struct {
 	CreateTime            *string                                                     `json:"createTime,omitempty"`
 	DirectSubExecutions   []GoogleCloudIntegrationsV1alphaExecution                   `json:"directSubExecutions,omitempty"`

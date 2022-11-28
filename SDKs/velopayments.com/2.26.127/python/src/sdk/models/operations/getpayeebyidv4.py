@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class GetPayeeByIDV4PathParams:
-    payee_id: str = field(default=None, metadata={'path_param': { 'field_name': 'payeeId', 'style': 'simple', 'explode': False }})
+    payee_id: str = field(metadata={'path_param': { 'field_name': 'payeeId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -15,13 +15,13 @@ class GetPayeeByIDV4QueryParams:
 
 @dataclass
 class GetPayeeByIDV4Request:
-    path_params: GetPayeeByIDV4PathParams = field(default=None)
-    query_params: GetPayeeByIDV4QueryParams = field(default=None)
+    path_params: GetPayeeByIDV4PathParams = field()
+    query_params: GetPayeeByIDV4QueryParams = field()
     
 
 @dataclass
 class GetPayeeByIDV4Response:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     payee_detail_response_2: Optional[shared.PayeeDetailResponse2] = field(default=None)
-    status_code: int = field(default=None)
     

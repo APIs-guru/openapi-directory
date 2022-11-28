@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ServiceId } from "./serviceid";
+
 
 
 // TraceUser
@@ -8,9 +8,9 @@ import { ServiceId } from "./serviceid";
  * Information about a user recorded in segment documents.
 **/
 export class TraceUser extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ServiceIds", elemType: shared.ServiceId })
+  @SpeakeasyMetadata({ data: "json, name=ServiceIds", elemType: ServiceId })
   serviceIds?: ServiceId[];
 
-  @Metadata({ data: "json, name=UserName" })
+  @SpeakeasyMetadata({ data: "json, name=UserName" })
   userName?: string;
 }

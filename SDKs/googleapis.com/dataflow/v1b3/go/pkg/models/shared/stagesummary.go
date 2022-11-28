@@ -11,6 +11,8 @@ const (
 	StageSummaryStateEnumExecutionStateCancelled  StageSummaryStateEnum = "EXECUTION_STATE_CANCELLED"
 )
 
+// StageSummary
+// Information about a particular execution stage of a job.
 type StageSummary struct {
 	EndTime          *string                `json:"endTime,omitempty"`
 	Metrics          []MetricUpdate         `json:"metrics,omitempty"`

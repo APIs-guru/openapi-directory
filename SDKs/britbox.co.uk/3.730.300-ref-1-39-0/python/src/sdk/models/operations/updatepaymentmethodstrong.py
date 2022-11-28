@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Optional
 from sdk.models import shared
 
 
 @dataclass
 class UpdatePaymentMethodStrongPathParams:
-    platform: str = field(default=None, metadata={'path_param': { 'field_name': 'platform', 'style': 'simple', 'explode': False }})
+    platform: str = field(metadata={'path_param': { 'field_name': 'platform', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -15,20 +18,20 @@ class UpdatePaymentMethodStrongQueryParams:
 
 @dataclass
 class UpdatePaymentMethodStrongSecurity:
-    account_auth: shared.SchemeAccountAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    account_auth: shared.SchemeAccountAuth = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class UpdatePaymentMethodStrongRequest:
-    path_params: UpdatePaymentMethodStrongPathParams = field(default=None)
-    query_params: UpdatePaymentMethodStrongQueryParams = field(default=None)
-    request: shared.ItvUpdatePaymentStrongRequest = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: UpdatePaymentMethodStrongSecurity = field(default=None)
+    path_params: UpdatePaymentMethodStrongPathParams = field()
+    query_params: UpdatePaymentMethodStrongQueryParams = field()
+    request: shared.ItvUpdatePaymentStrongRequest = field(metadata={'request': { 'media_type': 'application/json' }})
+    security: UpdatePaymentMethodStrongSecurity = field()
     
 
 @dataclass
 class UpdatePaymentMethodStrongResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     service_error: Optional[shared.ServiceError] = field(default=None)
-    status_code: int = field(default=None)
     

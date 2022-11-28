@@ -1,5 +1,7 @@
 package shared
 
+// DeleteItemInput
+// Represents the input of a <code>DeleteItem</code> operation.
 type DeleteItemInput struct {
 	ConditionExpression         *string                           `json:"ConditionExpression,omitempty"`
 	ConditionalOperator         *ConditionalOperatorEnum          `json:"ConditionalOperator,omitempty"`

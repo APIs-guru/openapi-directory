@@ -19,11 +19,15 @@ type CreativeFilteringReasonsReasons struct {
 	FilteringStatus *int32  `json:"filteringStatus,omitempty"`
 }
 
+// CreativeFilteringReasons
+// The filtering reasons for the creative. Read-only. This field should not be set in requests.
 type CreativeFilteringReasons struct {
 	Date    *string                           `json:"date,omitempty"`
 	Reasons []CreativeFilteringReasonsReasons `json:"reasons,omitempty"`
 }
 
+// Creative
+// A creative and its classification data.
 type Creative struct {
 	HTMLSnippet           *string                      `json:"HTMLSnippet,omitempty"`
 	AccountID             *int32                       `json:"accountId,omitempty"`

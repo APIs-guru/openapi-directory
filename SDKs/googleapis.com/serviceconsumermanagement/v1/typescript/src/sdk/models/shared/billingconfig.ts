@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // BillingConfig
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Describes the billing configuration for a new tenant project.
 **/
 export class BillingConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=billingAccount" })
+  @SpeakeasyMetadata({ data: "json, name=billingAccount" })
   billingAccount?: string;
 }

@@ -1,20 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import dimensions
-from . import assetassociation
-from . import cmtrackingad
-from . import counterevent
-from . import dimensions
-from . import exitevent
-from . import obaicon
-from . import audiovideooffset
-from . import reviewstatusinfo
-from . import audiovideooffset
-from . import thirdpartyurl
-from . import timerevent
-from . import transcode
-from . import universaladid
+from sdk import utils
+from . import *
 
 class CreativeCreativeAttributesEnum(str, Enum):
     CREATIVE_ATTRIBUTE_UNSPECIFIED = "CREATIVE_ATTRIBUTE_UNSPECIFIED"
@@ -73,51 +65,96 @@ class CreativeHostingSourceEnum(str, Enum):
 @dataclass_json
 @dataclass
 class Creative:
-    additional_dimensions: Optional[List[dimensions.Dimensions]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'additionalDimensions' }})
-    advertiser_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'advertiserId' }})
-    appended_tag: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'appendedTag' }})
-    assets: Optional[List[assetassociation.AssetAssociation]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'assets' }})
-    cm_placement_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'cmPlacementId' }})
-    cm_tracking_ad: Optional[cmtrackingad.CmTrackingAd] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'cmTrackingAd' }})
-    companion_creative_ids: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'companionCreativeIds' }})
-    counter_events: Optional[List[counterevent.CounterEvent]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'counterEvents' }})
-    create_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'createTime' }})
-    creative_attributes: Optional[List[CreativeCreativeAttributesEnum]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'creativeAttributes' }})
-    creative_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'creativeId' }})
-    creative_type: Optional[CreativeCreativeTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'creativeType' }})
-    dimensions: Optional[dimensions.Dimensions] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'dimensions' }})
-    display_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'displayName' }})
-    dynamic: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'dynamic' }})
-    entity_status: Optional[CreativeEntityStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'entityStatus' }})
-    exit_events: Optional[List[exitevent.ExitEvent]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'exitEvents' }})
-    expand_on_hover: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'expandOnHover' }})
-    expanding_direction: Optional[CreativeExpandingDirectionEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'expandingDirection' }})
-    hosting_source: Optional[CreativeHostingSourceEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'hostingSource' }})
-    html5_video: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'html5Video' }})
-    ias_campaign_monitoring: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'iasCampaignMonitoring' }})
-    integration_code: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'integrationCode' }})
-    js_tracker_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'jsTrackerUrl' }})
-    line_item_ids: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'lineItemIds' }})
-    media_duration: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'mediaDuration' }})
-    mp3_audio: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'mp3Audio' }})
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    notes: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'notes' }})
-    oba_icon: Optional[obaicon.ObaIcon] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'obaIcon' }})
-    ogg_audio: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'oggAudio' }})
-    progress_offset: Optional[audiovideooffset.AudioVideoOffset] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'progressOffset' }})
-    require_html5: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'requireHtml5' }})
-    require_mraid: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'requireMraid' }})
-    require_ping_for_attribution: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'requirePingForAttribution' }})
-    review_status: Optional[reviewstatusinfo.ReviewStatusInfo] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'reviewStatus' }})
-    skip_offset: Optional[audiovideooffset.AudioVideoOffset] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'skipOffset' }})
-    skippable: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'skippable' }})
-    third_party_tag: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'thirdPartyTag' }})
-    third_party_urls: Optional[List[thirdpartyurl.ThirdPartyURL]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'thirdPartyUrls' }})
-    timer_events: Optional[List[timerevent.TimerEvent]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'timerEvents' }})
-    tracker_urls: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'trackerUrls' }})
-    transcodes: Optional[List[transcode.Transcode]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'transcodes' }})
-    universal_ad_id: Optional[universaladid.UniversalAdID] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'universalAdId' }})
-    update_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'updateTime' }})
-    vast_tag_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'vastTagUrl' }})
-    vpaid: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'vpaid' }})
+    r"""Creative
+    A single Creative.
+    """
+    
+    additional_dimensions: Optional[List[Dimensions]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('additionalDimensions') }})
+    advertiser_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('advertiserId') }})
+    appended_tag: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('appendedTag') }})
+    assets: Optional[List[AssetAssociation]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('assets') }})
+    cm_placement_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('cmPlacementId') }})
+    cm_tracking_ad: Optional[CmTrackingAd] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('cmTrackingAd') }})
+    companion_creative_ids: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('companionCreativeIds') }})
+    counter_events: Optional[List[CounterEvent]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('counterEvents') }})
+    create_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('createTime') }})
+    creative_attributes: Optional[List[CreativeCreativeAttributesEnum]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('creativeAttributes') }})
+    creative_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('creativeId') }})
+    creative_type: Optional[CreativeCreativeTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('creativeType') }})
+    dimensions: Optional[Dimensions] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('dimensions') }})
+    display_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('displayName') }})
+    dynamic: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('dynamic') }})
+    entity_status: Optional[CreativeEntityStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('entityStatus') }})
+    exit_events: Optional[List[ExitEvent]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('exitEvents') }})
+    expand_on_hover: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('expandOnHover') }})
+    expanding_direction: Optional[CreativeExpandingDirectionEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('expandingDirection') }})
+    hosting_source: Optional[CreativeHostingSourceEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('hostingSource') }})
+    html5_video: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('html5Video') }})
+    ias_campaign_monitoring: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('iasCampaignMonitoring') }})
+    integration_code: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('integrationCode') }})
+    js_tracker_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('jsTrackerUrl') }})
+    line_item_ids: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('lineItemIds') }})
+    media_duration: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('mediaDuration') }})
+    mp3_audio: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('mp3Audio') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    notes: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('notes') }})
+    oba_icon: Optional[ObaIcon] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('obaIcon') }})
+    ogg_audio: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('oggAudio') }})
+    progress_offset: Optional[AudioVideoOffset] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('progressOffset') }})
+    require_html5: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('requireHtml5') }})
+    require_mraid: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('requireMraid') }})
+    require_ping_for_attribution: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('requirePingForAttribution') }})
+    review_status: Optional[ReviewStatusInfo] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('reviewStatus') }})
+    skip_offset: Optional[AudioVideoOffset] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('skipOffset') }})
+    skippable: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('skippable') }})
+    third_party_tag: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('thirdPartyTag') }})
+    third_party_urls: Optional[List[ThirdPartyURL]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('thirdPartyUrls') }})
+    timer_events: Optional[List[TimerEvent]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('timerEvents') }})
+    tracker_urls: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('trackerUrls') }})
+    transcodes: Optional[List[Transcode]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('transcodes') }})
+    universal_ad_id: Optional[UniversalAdID] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('universalAdId') }})
+    update_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('updateTime') }})
+    vast_tag_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('vastTagUrl') }})
+    vpaid: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('vpaid') }})
+    
+
+@dataclass_json
+@dataclass
+class CreativeInput:
+    r"""CreativeInput
+    A single Creative.
+    """
+    
+    additional_dimensions: Optional[List[Dimensions]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('additionalDimensions') }})
+    appended_tag: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('appendedTag') }})
+    assets: Optional[List[AssetAssociation]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('assets') }})
+    cm_tracking_ad: Optional[CmTrackingAd] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('cmTrackingAd') }})
+    companion_creative_ids: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('companionCreativeIds') }})
+    counter_events: Optional[List[CounterEvent]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('counterEvents') }})
+    creative_type: Optional[CreativeCreativeTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('creativeType') }})
+    dimensions: Optional[Dimensions] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('dimensions') }})
+    display_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('displayName') }})
+    entity_status: Optional[CreativeEntityStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('entityStatus') }})
+    exit_events: Optional[List[ExitEvent]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('exitEvents') }})
+    expand_on_hover: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('expandOnHover') }})
+    expanding_direction: Optional[CreativeExpandingDirectionEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('expandingDirection') }})
+    hosting_source: Optional[CreativeHostingSourceEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('hostingSource') }})
+    ias_campaign_monitoring: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('iasCampaignMonitoring') }})
+    integration_code: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('integrationCode') }})
+    js_tracker_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('jsTrackerUrl') }})
+    notes: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('notes') }})
+    oba_icon: Optional[ObaIcon] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('obaIcon') }})
+    progress_offset: Optional[AudioVideoOffset] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('progressOffset') }})
+    require_html5: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('requireHtml5') }})
+    require_mraid: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('requireMraid') }})
+    require_ping_for_attribution: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('requirePingForAttribution') }})
+    review_status: Optional[ReviewStatusInfo] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('reviewStatus') }})
+    skip_offset: Optional[AudioVideoOffset] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('skipOffset') }})
+    skippable: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('skippable') }})
+    third_party_tag: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('thirdPartyTag') }})
+    third_party_urls: Optional[List[ThirdPartyURL]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('thirdPartyUrls') }})
+    timer_events: Optional[List[TimerEvent]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('timerEvents') }})
+    tracker_urls: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('trackerUrls') }})
+    universal_ad_id: Optional[UniversalAdID] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('universalAdId') }})
+    vast_tag_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('vastTagUrl') }})
     

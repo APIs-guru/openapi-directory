@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
 from typing import List
 from dataclasses_json import dataclass_json
-from . import file
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class FileList:
-    files: List[file.File] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'files' }})
-    sum: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'sum' }})
+    r"""FileList
+    Files List
+    """
+    
+    files: List[File] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('files') }})
+    sum: int = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('sum') }})
     

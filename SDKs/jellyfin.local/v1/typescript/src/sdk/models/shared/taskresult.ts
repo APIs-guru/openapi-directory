@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TaskCompletionStatusEnum } from "./taskcompletionstatusenum";
+
 
 
 // TaskResult
@@ -7,27 +8,27 @@ import { TaskCompletionStatusEnum } from "./taskcompletionstatusenum";
  * Class TaskExecutionInfo.
 **/
 export class TaskResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=EndTimeUtc" })
+  @SpeakeasyMetadata({ data: "json, name=EndTimeUtc" })
   endTimeUtc?: Date;
 
-  @Metadata({ data: "json, name=ErrorMessage" })
+  @SpeakeasyMetadata({ data: "json, name=ErrorMessage" })
   errorMessage?: string;
 
-  @Metadata({ data: "json, name=Id" })
+  @SpeakeasyMetadata({ data: "json, name=Id" })
   id?: string;
 
-  @Metadata({ data: "json, name=Key" })
+  @SpeakeasyMetadata({ data: "json, name=Key" })
   key?: string;
 
-  @Metadata({ data: "json, name=LongErrorMessage" })
+  @SpeakeasyMetadata({ data: "json, name=LongErrorMessage" })
   longErrorMessage?: string;
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name?: string;
 
-  @Metadata({ data: "json, name=StartTimeUtc" })
+  @SpeakeasyMetadata({ data: "json, name=StartTimeUtc" })
   startTimeUtc?: Date;
 
-  @Metadata({ data: "json, name=Status" })
+  @SpeakeasyMetadata({ data: "json, name=Status" })
   status?: TaskCompletionStatusEnum;
 }

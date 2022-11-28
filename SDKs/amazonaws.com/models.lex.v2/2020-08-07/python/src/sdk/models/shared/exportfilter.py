@@ -1,14 +1,19 @@
 from dataclasses import dataclass, field
-from typing import Enum,List
+from typing import List
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import exportfiltername_enum
-from . import exportfilteroperator_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ExportFilter:
-    name: exportfiltername_enum.ExportFilterNameEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    operator: exportfilteroperator_enum.ExportFilterOperatorEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'operator' }})
-    values: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'values' }})
+    r"""ExportFilter
+    Filtes the response form the operation
+    """
+    
+    name: ExportFilterNameEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    operator: ExportFilterOperatorEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('operator') }})
+    values: List[str] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('values') }})
     

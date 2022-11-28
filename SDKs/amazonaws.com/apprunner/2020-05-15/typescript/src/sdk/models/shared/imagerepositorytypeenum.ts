@@ -1,6 +1,7 @@
 
 
+
 export enum ImageRepositoryTypeEnum {
-    Ecr = "ECR"
-,    EcrPublic = "ECR_PUBLIC"
+    Ecr = "ECR",
+    EcrPublic = "ECR_PUBLIC"
 }

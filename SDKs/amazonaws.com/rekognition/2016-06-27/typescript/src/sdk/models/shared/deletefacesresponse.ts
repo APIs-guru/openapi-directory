@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DeleteFacesResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DeletedFaces" })
+  @SpeakeasyMetadata({ data: "json, name=DeletedFaces" })
   deletedFaces?: string[];
 }

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var UpdateConnectorPathParams = /** @class */ (function (_super) {
     __extends(UpdateConnectorPathParams, _super);
@@ -30,7 +30,7 @@ var UpdateConnectorPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=connectorArn" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=connectorArn" }),
         __metadata("design:type", String)
     ], UpdateConnectorPathParams.prototype, "connectorArn", void 0);
     return UpdateConnectorPathParams;
@@ -42,7 +42,7 @@ var UpdateConnectorQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=currentVersion" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=currentVersion" }),
         __metadata("design:type", String)
     ], UpdateConnectorQueryParams.prototype, "currentVersion", void 0);
     return UpdateConnectorQueryParams;
@@ -54,31 +54,31 @@ var UpdateConnectorHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
         __metadata("design:type", String)
     ], UpdateConnectorHeaders.prototype, "xAmzAlgorithm", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
         __metadata("design:type", String)
     ], UpdateConnectorHeaders.prototype, "xAmzContentSha256", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
         __metadata("design:type", String)
     ], UpdateConnectorHeaders.prototype, "xAmzCredential", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
         __metadata("design:type", String)
     ], UpdateConnectorHeaders.prototype, "xAmzDate", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
         __metadata("design:type", String)
     ], UpdateConnectorHeaders.prototype, "xAmzSecurityToken", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
         __metadata("design:type", String)
     ], UpdateConnectorHeaders.prototype, "xAmzSignature", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
         __metadata("design:type", String)
     ], UpdateConnectorHeaders.prototype, "xAmzSignedHeaders", void 0);
     return UpdateConnectorHeaders;
@@ -94,11 +94,11 @@ var UpdateConnectorRequestBodyCapacity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=autoScaling" }),
+        SpeakeasyMetadata({ data: "json, name=autoScaling" }),
         __metadata("design:type", shared.AutoScalingUpdate)
     ], UpdateConnectorRequestBodyCapacity.prototype, "autoScaling", void 0);
     __decorate([
-        Metadata({ data: "json, name=provisionedCapacity" }),
+        SpeakeasyMetadata({ data: "json, name=provisionedCapacity" }),
         __metadata("design:type", shared.ProvisionedCapacityUpdate)
     ], UpdateConnectorRequestBodyCapacity.prototype, "provisionedCapacity", void 0);
     return UpdateConnectorRequestBodyCapacity;
@@ -110,7 +110,7 @@ var UpdateConnectorRequestBody = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=capacity" }),
+        SpeakeasyMetadata({ data: "json, name=capacity" }),
         __metadata("design:type", UpdateConnectorRequestBodyCapacity)
     ], UpdateConnectorRequestBody.prototype, "capacity", void 0);
     return UpdateConnectorRequestBody;
@@ -122,19 +122,19 @@ var UpdateConnectorRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", UpdateConnectorPathParams)
     ], UpdateConnectorRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", UpdateConnectorQueryParams)
     ], UpdateConnectorRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", UpdateConnectorHeaders)
     ], UpdateConnectorRequest.prototype, "headers", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", UpdateConnectorRequestBody)
     ], UpdateConnectorRequest.prototype, "request", void 0);
     return UpdateConnectorRequest;
@@ -146,43 +146,43 @@ var UpdateConnectorResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], UpdateConnectorResponse.prototype, "badRequestException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], UpdateConnectorResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], UpdateConnectorResponse.prototype, "forbiddenException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], UpdateConnectorResponse.prototype, "internalServerErrorException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], UpdateConnectorResponse.prototype, "notFoundException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], UpdateConnectorResponse.prototype, "serviceUnavailableException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], UpdateConnectorResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], UpdateConnectorResponse.prototype, "tooManyRequestsException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], UpdateConnectorResponse.prototype, "unauthorizedException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.UpdateConnectorResponse)
     ], UpdateConnectorResponse.prototype, "updateConnectorResponse", void 0);
     return UpdateConnectorResponse;

@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { FormatEnum } from "./formatenum";
+
 
 
 // ColumnMetadata
@@ -7,9 +8,9 @@ import { FormatEnum } from "./formatenum";
  * Metadata for column in the table.
 **/
 export class ColumnMetadata extends SpeakeasyBase {
-  @Metadata({ data: "json, name=format" })
+  @SpeakeasyMetadata({ data: "json, name=format" })
   format: FormatEnum;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 }

@@ -1,10 +1,11 @@
 from dataclasses import dataclass, field
 from dataclasses_json import dataclass_json
-from . import pushnotificationtemplateresponse
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class GetPushTemplateResponse:
-    push_notification_template_response: pushnotificationtemplateresponse.PushNotificationTemplateResponse = field(default=None, metadata={'dataclasses_json': { 'field_name': 'PushNotificationTemplateResponse' }})
+    push_notification_template_response: PushNotificationTemplateResponse = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('PushNotificationTemplateResponse') }})
     

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { TextSpan } from "./textspan";
 export declare enum EntityMentionTypeEnum {
     TypeUnknown = "TYPE_UNKNOWN",

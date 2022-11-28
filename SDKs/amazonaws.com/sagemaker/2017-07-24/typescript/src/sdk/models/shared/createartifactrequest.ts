@@ -1,26 +1,26 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { MetadataProperties } from "./metadataproperties";
 import { ArtifactSource } from "./artifactsource";
 import { Tag } from "./tag";
 
 
+
 export class CreateArtifactRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ArtifactName" })
+  @SpeakeasyMetadata({ data: "json, name=ArtifactName" })
   artifactName?: string;
 
-  @Metadata({ data: "json, name=ArtifactType" })
+  @SpeakeasyMetadata({ data: "json, name=ArtifactType" })
   artifactType: string;
 
-  @Metadata({ data: "json, name=MetadataProperties" })
+  @SpeakeasyMetadata({ data: "json, name=MetadataProperties" })
   metadataProperties?: MetadataProperties;
 
-  @Metadata({ data: "json, name=Properties" })
+  @SpeakeasyMetadata({ data: "json, name=Properties" })
   properties?: Map<string, string>;
 
-  @Metadata({ data: "json, name=Source" })
+  @SpeakeasyMetadata({ data: "json, name=Source" })
   source: ArtifactSource;
 
-  @Metadata({ data: "json, name=Tags", elemType: shared.Tag })
+  @SpeakeasyMetadata({ data: "json, name=Tags", elemType: Tag })
   tags?: Tag[];
 }

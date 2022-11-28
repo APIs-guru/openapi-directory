@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class MetastoreProjectsLocationsServicesMetadataImportsCreatePathParams extends SpeakeasyBase {
     parent: string;
@@ -25,7 +25,7 @@ export declare class MetastoreProjectsLocationsServicesMetadataImportsCreateSecu
 export declare class MetastoreProjectsLocationsServicesMetadataImportsCreateRequest extends SpeakeasyBase {
     pathParams: MetastoreProjectsLocationsServicesMetadataImportsCreatePathParams;
     queryParams: MetastoreProjectsLocationsServicesMetadataImportsCreateQueryParams;
-    request?: shared.MetadataImport;
+    request?: shared.MetadataImportInput;
     security: MetastoreProjectsLocationsServicesMetadataImportsCreateSecurity;
 }
 export declare class MetastoreProjectsLocationsServicesMetadataImportsCreateResponse extends SpeakeasyBase {

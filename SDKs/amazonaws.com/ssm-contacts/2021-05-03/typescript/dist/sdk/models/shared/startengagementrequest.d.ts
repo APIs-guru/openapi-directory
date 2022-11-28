@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 export declare class StartEngagementRequest extends SpeakeasyBase {
     contactId: string;
     content: string;

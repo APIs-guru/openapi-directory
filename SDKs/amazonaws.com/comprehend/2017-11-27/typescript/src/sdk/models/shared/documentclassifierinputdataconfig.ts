@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AugmentedManifestsListItem } from "./augmentedmanifestslistitem";
 import { DocumentClassifierDataFormatEnum } from "./documentclassifierdataformatenum";
+
 
 
 // DocumentClassifierInputDataConfig
@@ -9,15 +9,15 @@ import { DocumentClassifierDataFormatEnum } from "./documentclassifierdataformat
  * <p>The input properties for training a document classifier. </p> <p>For more information on how the input file is formatted, see <a>how-document-classification-training-data</a>. </p>
 **/
 export class DocumentClassifierInputDataConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AugmentedManifests", elemType: shared.AugmentedManifestsListItem })
+  @SpeakeasyMetadata({ data: "json, name=AugmentedManifests", elemType: AugmentedManifestsListItem })
   augmentedManifests?: AugmentedManifestsListItem[];
 
-  @Metadata({ data: "json, name=DataFormat" })
+  @SpeakeasyMetadata({ data: "json, name=DataFormat" })
   dataFormat?: DocumentClassifierDataFormatEnum;
 
-  @Metadata({ data: "json, name=LabelDelimiter" })
+  @SpeakeasyMetadata({ data: "json, name=LabelDelimiter" })
   labelDelimiter?: string;
 
-  @Metadata({ data: "json, name=S3Uri" })
+  @SpeakeasyMetadata({ data: "json, name=S3Uri" })
   s3Uri?: string;
 }

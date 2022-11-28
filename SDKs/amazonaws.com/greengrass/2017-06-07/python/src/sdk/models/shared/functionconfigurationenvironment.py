@@ -1,15 +1,19 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import functionexecutionconfig
-from . import resourceaccesspolicy
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class FunctionConfigurationEnvironment:
-    access_sysfs: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AccessSysfs' }})
-    execution: Optional[functionexecutionconfig.FunctionExecutionConfig] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Execution' }})
-    resource_access_policies: Optional[List[resourceaccesspolicy.ResourceAccessPolicy]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ResourceAccessPolicies' }})
-    variables: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Variables' }})
+    r"""FunctionConfigurationEnvironment
+    The environment configuration of the function.
+    """
+    
+    access_sysfs: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('AccessSysfs') }})
+    execution: Optional[FunctionExecutionConfig] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Execution') }})
+    resource_access_policies: Optional[List[ResourceAccessPolicy]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ResourceAccessPolicies') }})
+    variables: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Variables') }})
     

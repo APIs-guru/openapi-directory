@@ -12,15 +12,15 @@ type CreateRelationsRequestBody struct {
 	Testsuite     []string `json:"testsuite,omitempty"`
 }
 
-type CreateRelationsRequest struct {
-	PathParams CreateRelationsPathParams
-	Request    *CreateRelationsRequestBody `request:"mediaType=application/json"`
-}
-
 type CreateRelations200ApplicationJSON struct {
 	Contracttest  []string `json:"contracttest,omitempty"`
 	Documentation []string `json:"documentation,omitempty"`
 	Testsuite     []string `json:"testsuite,omitempty"`
+}
+
+type CreateRelationsRequest struct {
+	PathParams CreateRelationsPathParams
+	Request    *CreateRelationsRequestBody `request:"mediaType=application/json"`
 }
 
 type CreateRelationsResponse struct {

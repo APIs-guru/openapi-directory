@@ -1,10 +1,39 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CertificateAuthorityConfig } from "./certificateauthorityconfig";
 
+
 export enum CertificateIssuanceConfigKeyAlgorithmEnum {
-    KeyAlgorithmUnspecified = "KEY_ALGORITHM_UNSPECIFIED"
-,    Rsa2048 = "RSA_2048"
-,    EcdsaP256 = "ECDSA_P256"
+    KeyAlgorithmUnspecified = "KEY_ALGORITHM_UNSPECIFIED",
+    Rsa2048 = "RSA_2048",
+    EcdsaP256 = "ECDSA_P256"
+}
+
+
+// CertificateIssuanceConfigInput
+/** 
+ * CertificateIssuanceConfig specifies how to issue and manage a certificate.
+**/
+export class CertificateIssuanceConfigInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=certificateAuthorityConfig" })
+  certificateAuthorityConfig?: CertificateAuthorityConfig;
+
+  @SpeakeasyMetadata({ data: "json, name=description" })
+  description?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=keyAlgorithm" })
+  keyAlgorithm?: CertificateIssuanceConfigKeyAlgorithmEnum;
+
+  @SpeakeasyMetadata({ data: "json, name=labels" })
+  labels?: Map<string, string>;
+
+  @SpeakeasyMetadata({ data: "json, name=lifetime" })
+  lifetime?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=name" })
+  name?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=rotationWindowPercentage" })
+  rotationWindowPercentage?: number;
 }
 
 
@@ -13,30 +42,30 @@ export enum CertificateIssuanceConfigKeyAlgorithmEnum {
  * CertificateIssuanceConfig specifies how to issue and manage a certificate.
 **/
 export class CertificateIssuanceConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=certificateAuthorityConfig" })
+  @SpeakeasyMetadata({ data: "json, name=certificateAuthorityConfig" })
   certificateAuthorityConfig?: CertificateAuthorityConfig;
 
-  @Metadata({ data: "json, name=createTime" })
+  @SpeakeasyMetadata({ data: "json, name=createTime" })
   createTime?: string;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=keyAlgorithm" })
+  @SpeakeasyMetadata({ data: "json, name=keyAlgorithm" })
   keyAlgorithm?: CertificateIssuanceConfigKeyAlgorithmEnum;
 
-  @Metadata({ data: "json, name=labels" })
+  @SpeakeasyMetadata({ data: "json, name=labels" })
   labels?: Map<string, string>;
 
-  @Metadata({ data: "json, name=lifetime" })
+  @SpeakeasyMetadata({ data: "json, name=lifetime" })
   lifetime?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=rotationWindowPercentage" })
+  @SpeakeasyMetadata({ data: "json, name=rotationWindowPercentage" })
   rotationWindowPercentage?: number;
 
-  @Metadata({ data: "json, name=updateTime" })
+  @SpeakeasyMetadata({ data: "json, name=updateTime" })
   updateTime?: string;
 }

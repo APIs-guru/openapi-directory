@@ -1,33 +1,34 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class UpdateLaunchConfigurationHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
 export enum UpdateLaunchConfigurationRequestBodyLaunchDispositionEnum {
-    Stopped = "STOPPED"
-,    Started = "STARTED"
+    Stopped = "STOPPED",
+    Started = "STARTED"
 }
 
 
@@ -36,68 +37,68 @@ export enum UpdateLaunchConfigurationRequestBodyLaunchDispositionEnum {
  * Configure Licensing.
 **/
 export class UpdateLaunchConfigurationRequestBodyLicensing extends SpeakeasyBase {
-  @Metadata({ data: "json, name=osByol" })
+  @SpeakeasyMetadata({ data: "json, name=osByol" })
   osByol?: boolean;
 }
 
 export enum UpdateLaunchConfigurationRequestBodyTargetInstanceTypeRightSizingMethodEnum {
-    None = "NONE"
-,    Basic = "BASIC"
+    None = "NONE",
+    Basic = "BASIC"
 }
 
 
 export class UpdateLaunchConfigurationRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=copyPrivateIp" })
+  @SpeakeasyMetadata({ data: "json, name=copyPrivateIp" })
   copyPrivateIp?: boolean;
 
-  @Metadata({ data: "json, name=copyTags" })
+  @SpeakeasyMetadata({ data: "json, name=copyTags" })
   copyTags?: boolean;
 
-  @Metadata({ data: "json, name=launchDisposition" })
+  @SpeakeasyMetadata({ data: "json, name=launchDisposition" })
   launchDisposition?: UpdateLaunchConfigurationRequestBodyLaunchDispositionEnum;
 
-  @Metadata({ data: "json, name=licensing" })
+  @SpeakeasyMetadata({ data: "json, name=licensing" })
   licensing?: UpdateLaunchConfigurationRequestBodyLicensing;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=sourceServerID" })
+  @SpeakeasyMetadata({ data: "json, name=sourceServerID" })
   sourceServerId: string;
 
-  @Metadata({ data: "json, name=targetInstanceTypeRightSizingMethod" })
+  @SpeakeasyMetadata({ data: "json, name=targetInstanceTypeRightSizingMethod" })
   targetInstanceTypeRightSizingMethod?: UpdateLaunchConfigurationRequestBodyTargetInstanceTypeRightSizingMethodEnum;
 }
 
 
 export class UpdateLaunchConfigurationRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: UpdateLaunchConfigurationHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: UpdateLaunchConfigurationRequestBody;
 }
 
 
 export class UpdateLaunchConfigurationResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   conflictException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   launchConfiguration?: shared.LaunchConfiguration;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   resourceNotFoundException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   uninitializedAccountException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   validationException?: any;
 }

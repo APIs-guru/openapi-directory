@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetEnableVpcClassicLinkDNSSupportActionEnum(str, Enum):
     ENABLE_VPC_CLASSIC_LINK_DNS_SUPPORT = "EnableVpcClassicLinkDnsSupport"
@@ -10,8 +14,8 @@ class GetEnableVpcClassicLinkDNSSupportVersionEnum(str, Enum):
 
 @dataclass
 class GetEnableVpcClassicLinkDNSSupportQueryParams:
-    action: GetEnableVpcClassicLinkDNSSupportActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: GetEnableVpcClassicLinkDNSSupportVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: GetEnableVpcClassicLinkDNSSupportActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: GetEnableVpcClassicLinkDNSSupportVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     vpc_id: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'VpcId', 'style': 'form', 'explode': True }})
     
 
@@ -28,13 +32,13 @@ class GetEnableVpcClassicLinkDNSSupportHeaders:
 
 @dataclass
 class GetEnableVpcClassicLinkDNSSupportRequest:
-    query_params: GetEnableVpcClassicLinkDNSSupportQueryParams = field(default=None)
-    headers: GetEnableVpcClassicLinkDNSSupportHeaders = field(default=None)
+    headers: GetEnableVpcClassicLinkDNSSupportHeaders = field()
+    query_params: GetEnableVpcClassicLinkDNSSupportQueryParams = field()
     
 
 @dataclass
 class GetEnableVpcClassicLinkDNSSupportResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

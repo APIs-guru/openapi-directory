@@ -22,110 +22,110 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var Task = /** @class */ (function (_super) {
     __extends(Task, _super);
     function Task() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=agent_id" }),
+        SpeakeasyMetadata({ data: "json, name=agent_id" }),
         __metadata("design:type", String)
     ], Task.prototype, "agentId", void 0);
     __decorate([
-        Metadata({ data: "json, name=client_id" }),
+        SpeakeasyMetadata({ data: "json, name=client_id" }),
         __metadata("design:type", String)
     ], Task.prototype, "clientId", void 0);
     __decorate([
-        Metadata({ data: "json, name=created_at" }),
+        SpeakeasyMetadata({ data: "json, name=created_at" }),
         __metadata("design:type", Number)
     ], Task.prototype, "createdAt", void 0);
     __decorate([
-        Metadata({ data: "json, name=created_by" }),
+        SpeakeasyMetadata({ data: "json, name=created_by" }),
         __metadata("design:type", String)
     ], Task.prototype, "createdBy", void 0);
     __decorate([
-        Metadata({ data: "json, name=created_by_user_id" }),
+        SpeakeasyMetadata({ data: "json, name=created_by_user_id" }),
         __metadata("design:type", String)
     ], Task.prototype, "createdByUserId", void 0);
     __decorate([
-        Metadata({ data: "json, name=cruncher_id" }),
+        SpeakeasyMetadata({ data: "json, name=cruncher_id" }),
         __metadata("design:type", String)
     ], Task.prototype, "cruncherId", void 0);
     __decorate([
-        Metadata({ data: "json, name=description" }),
+        SpeakeasyMetadata({ data: "json, name=description" }),
         __metadata("design:type", String)
     ], Task.prototype, "description", void 0);
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Task.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=hidden" }),
+        SpeakeasyMetadata({ data: "json, name=hidden" }),
         __metadata("design:type", Boolean)
     ], Task.prototype, "hidden", void 0);
     __decorate([
-        Metadata({ data: "json, name=id" }),
+        SpeakeasyMetadata({ data: "json, name=id" }),
         __metadata("design:type", String)
     ], Task.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], Task.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=organization_id" }),
+        SpeakeasyMetadata({ data: "json, name=organization_id" }),
         __metadata("design:type", String)
     ], Task.prototype, "organizationId", void 0);
     __decorate([
-        Metadata({ data: "json, name=params" }),
+        SpeakeasyMetadata({ data: "json, name=params" }),
         __metadata("design:type", Map)
     ], Task.prototype, "params", void 0);
     __decorate([
-        Metadata({ data: "json, name=parent_id" }),
+        SpeakeasyMetadata({ data: "json, name=parent_id" }),
         __metadata("design:type", String)
     ], Task.prototype, "parentId", void 0);
     __decorate([
-        Metadata({ data: "json, name=recur" }),
+        SpeakeasyMetadata({ data: "json, name=recur" }),
         __metadata("design:type", Boolean)
     ], Task.prototype, "recur", void 0);
     __decorate([
-        Metadata({ data: "json, name=recur_frequency" }),
+        SpeakeasyMetadata({ data: "json, name=recur_frequency" }),
         __metadata("design:type", String)
     ], Task.prototype, "recurFrequency", void 0);
     __decorate([
-        Metadata({ data: "json, name=recur_last" }),
+        SpeakeasyMetadata({ data: "json, name=recur_last" }),
         __metadata("design:type", Number)
     ], Task.prototype, "recurLast", void 0);
     __decorate([
-        Metadata({ data: "json, name=recur_last_task_id" }),
+        SpeakeasyMetadata({ data: "json, name=recur_last_task_id" }),
         __metadata("design:type", String)
     ], Task.prototype, "recurLastTaskId", void 0);
     __decorate([
-        Metadata({ data: "json, name=recur_next" }),
+        SpeakeasyMetadata({ data: "json, name=recur_next" }),
         __metadata("design:type", Number)
     ], Task.prototype, "recurNext", void 0);
     __decorate([
-        Metadata({ data: "json, name=site_id" }),
+        SpeakeasyMetadata({ data: "json, name=site_id" }),
         __metadata("design:type", String)
     ], Task.prototype, "siteId", void 0);
     __decorate([
-        Metadata({ data: "json, name=start_time" }),
+        SpeakeasyMetadata({ data: "json, name=start_time" }),
         __metadata("design:type", Number)
     ], Task.prototype, "startTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=stats" }),
+        SpeakeasyMetadata({ data: "json, name=stats" }),
         __metadata("design:type", Map)
     ], Task.prototype, "stats", void 0);
     __decorate([
-        Metadata({ data: "json, name=status" }),
+        SpeakeasyMetadata({ data: "json, name=status" }),
         __metadata("design:type", String)
     ], Task.prototype, "status", void 0);
     __decorate([
-        Metadata({ data: "json, name=type" }),
+        SpeakeasyMetadata({ data: "json, name=type" }),
         __metadata("design:type", String)
     ], Task.prototype, "type", void 0);
     __decorate([
-        Metadata({ data: "json, name=updated_at" }),
+        SpeakeasyMetadata({ data: "json, name=updated_at" }),
         __metadata("design:type", Number)
     ], Task.prototype, "updatedAt", void 0);
     return Task;

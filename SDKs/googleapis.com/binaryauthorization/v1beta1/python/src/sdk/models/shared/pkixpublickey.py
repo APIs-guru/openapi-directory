@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class PkixPublicKeySignatureAlgorithmEnum(str, Enum):
     SIGNATURE_ALGORITHM_UNSPECIFIED = "SIGNATURE_ALGORITHM_UNSPECIFIED"
@@ -27,6 +29,10 @@ class PkixPublicKeySignatureAlgorithmEnum(str, Enum):
 @dataclass_json
 @dataclass
 class PkixPublicKey:
-    public_key_pem: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'publicKeyPem' }})
-    signature_algorithm: Optional[PkixPublicKeySignatureAlgorithmEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'signatureAlgorithm' }})
+    r"""PkixPublicKey
+    A public key in the PkixPublicKey format (see https://tools.ietf.org/html/rfc5280#section-4.1.2.7 for details). Public keys of this type are typically textually encoded using the PEM format.
+    """
+    
+    public_key_pem: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('publicKeyPem') }})
+    signature_algorithm: Optional[PkixPublicKeySignatureAlgorithmEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('signatureAlgorithm') }})
     

@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// BotChannelAssociation
+// Represents an association between an Amazon Lex bot and an external messaging platform.
 type BotChannelAssociation struct {
 	BotAlias         *string            `json:"botAlias,omitempty"`
 	BotConfiguration map[string]string  `json:"botConfiguration,omitempty"`

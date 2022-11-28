@@ -6,6 +6,8 @@ from .commentssort_enum import *
 from .filter_enum import *
 from .followstate_enum import *
 from .jobtype_enum import *
+from .mrssgroupcontent import *
+from .mrsspeerlink import *
 from .nsfw_enum import *
 from .nsfwpolicy_enum import *
 from .oauthtoken_password import *
@@ -17,8 +19,10 @@ from .userssort_enum import *
 from .userwithstats import *
 from .videochannelcreate import *
 from .videochannelupdate import *
+from .videocommentsforxml import *
 from .videodetails import *
 from .videoredundanciessort_enum import *
+from .videosforxml import *
 from .videossort_enum import *
 from .videostreamingplaylists import *
 from .videouploadrequestresumable import *

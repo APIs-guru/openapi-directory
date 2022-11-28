@@ -1,9 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PiiEntity } from "./piientity";
 
 
+
 export class DetectPiiEntitiesResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Entities", elemType: shared.PiiEntity })
+  @SpeakeasyMetadata({ data: "json, name=Entities", elemType: PiiEntity })
   entities?: PiiEntity[];
 }

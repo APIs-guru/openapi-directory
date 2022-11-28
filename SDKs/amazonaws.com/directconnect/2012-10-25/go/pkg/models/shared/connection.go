@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// Connection
+// Information about an Direct Connect connection.
 type Connection struct {
 	AwsDevice            *string                   `json:"awsDevice,omitempty"`
 	AwsDeviceV2          *string                   `json:"awsDeviceV2,omitempty"`

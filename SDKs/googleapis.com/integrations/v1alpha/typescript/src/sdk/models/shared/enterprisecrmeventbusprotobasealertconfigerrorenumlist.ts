@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum EnterpriseCrmEventbusProtoBaseAlertConfigErrorEnumListFilterTypeEnum {
-    DefaultInclusive = "DEFAULT_INCLUSIVE"
-,    Exclusive = "EXCLUSIVE"
+    DefaultInclusive = "DEFAULT_INCLUSIVE",
+    Exclusive = "EXCLUSIVE"
 }
 
 
@@ -11,9 +12,9 @@ export enum EnterpriseCrmEventbusProtoBaseAlertConfigErrorEnumListFilterTypeEnum
  * List of error enums for alerts.
 **/
 export class EnterpriseCrmEventbusProtoBaseAlertConfigErrorEnumList extends SpeakeasyBase {
-  @Metadata({ data: "json, name=enumStrings" })
+  @SpeakeasyMetadata({ data: "json, name=enumStrings" })
   enumStrings?: string[];
 
-  @Metadata({ data: "json, name=filterType" })
+  @SpeakeasyMetadata({ data: "json, name=filterType" })
   filterType?: EnterpriseCrmEventbusProtoBaseAlertConfigErrorEnumListFilterTypeEnum;
 }

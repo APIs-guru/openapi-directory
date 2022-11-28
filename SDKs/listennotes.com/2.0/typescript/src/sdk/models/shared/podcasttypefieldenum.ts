@@ -1,6 +1,7 @@
 
 
+
 export enum PodcastTypeFieldEnum {
-    Episodic = "episodic"
-,    Serial = "serial"
+    Episodic = "episodic",
+    Serial = "serial"
 }

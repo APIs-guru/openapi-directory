@@ -1,6 +1,11 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -18,31 +23,35 @@ class UpdateSettingsHeaders:
 @dataclass_json
 @dataclass
 class UpdateSettingsRequestBodyDefaultAssessmentReportsDestination:
-    destination: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'destination' }})
-    destination_type: Optional[shared.AssessmentReportDestinationTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'destinationType' }})
+    r"""UpdateSettingsRequestBodyDefaultAssessmentReportsDestination
+     The location in which Audit Manager saves assessment reports for the given assessment. 
+    """
+    
+    destination: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('destination') }})
+    destination_type: Optional[shared.AssessmentReportDestinationTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('destinationType') }})
     
 
 @dataclass_json
 @dataclass
 class UpdateSettingsRequestBody:
-    default_assessment_reports_destination: Optional[UpdateSettingsRequestBodyDefaultAssessmentReportsDestination] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'defaultAssessmentReportsDestination' }})
-    default_process_owners: Optional[List[shared.Role]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'defaultProcessOwners' }})
-    kms_key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'kmsKey' }})
-    sns_topic: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'snsTopic' }})
+    default_assessment_reports_destination: Optional[UpdateSettingsRequestBodyDefaultAssessmentReportsDestination] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('defaultAssessmentReportsDestination') }})
+    default_process_owners: Optional[List[shared.Role]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('defaultProcessOwners') }})
+    kms_key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('kmsKey') }})
+    sns_topic: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('snsTopic') }})
     
 
 @dataclass
 class UpdateSettingsRequest:
-    headers: UpdateSettingsHeaders = field(default=None)
-    request: UpdateSettingsRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: UpdateSettingsHeaders = field()
+    request: UpdateSettingsRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class UpdateSettingsResponse:
+    content_type: str = field()
+    status_code: int = field()
     access_denied_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     internal_server_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     update_settings_response: Optional[shared.UpdateSettingsResponse] = field(default=None)
     validation_exception: Optional[Any] = field(default=None)
     

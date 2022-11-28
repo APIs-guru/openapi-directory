@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 class GetEventsTypeEnum(str, Enum):
@@ -20,12 +21,12 @@ class GetEventsQueryParams:
 
 @dataclass
 class GetEventsRequest:
-    query_params: GetEventsQueryParams = field(default=None)
+    query_params: GetEventsQueryParams = field()
     
 
 @dataclass
 class GetEventsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     event_records: Optional[List[shared.EventRecord]] = field(default=None)
-    status_code: int = field(default=None)
     

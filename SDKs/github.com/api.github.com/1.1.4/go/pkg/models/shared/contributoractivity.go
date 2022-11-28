@@ -29,6 +29,8 @@ type ContributorActivityWeeks struct {
 	W *string `json:"w,omitempty"`
 }
 
+// ContributorActivity
+// Contributor Activity
 type ContributorActivity struct {
 	Author ContributorActivitySimpleUser `json:"author"`
 	Total  int64                         `json:"total"`

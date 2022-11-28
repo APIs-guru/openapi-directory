@@ -10,6 +10,8 @@ const (
 	DimensionalMetricValueMetricOptionEnumBreakdownHourOfDay      DimensionalMetricValueMetricOptionEnum = "BREAKDOWN_HOUR_OF_DAY"
 )
 
+// DimensionalMetricValue
+// A value for a single metric with a given time dimension.
 type DimensionalMetricValue struct {
 	MetricOption  *DimensionalMetricValueMetricOptionEnum `json:"metricOption,omitempty"`
 	TimeDimension *TimeDimension                          `json:"timeDimension,omitempty"`

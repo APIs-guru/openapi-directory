@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetCreateLoginProfileActionEnum(str, Enum):
     CREATE_LOGIN_PROFILE = "CreateLoginProfile"
@@ -10,11 +14,11 @@ class GetCreateLoginProfileVersionEnum(str, Enum):
 
 @dataclass
 class GetCreateLoginProfileQueryParams:
-    action: GetCreateLoginProfileActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    password: str = field(default=None, metadata={'query_param': { 'field_name': 'Password', 'style': 'form', 'explode': True }})
+    action: GetCreateLoginProfileActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    password: str = field(metadata={'query_param': { 'field_name': 'Password', 'style': 'form', 'explode': True }})
+    user_name: str = field(metadata={'query_param': { 'field_name': 'UserName', 'style': 'form', 'explode': True }})
+    version: GetCreateLoginProfileVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     password_reset_required: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'PasswordResetRequired', 'style': 'form', 'explode': True }})
-    user_name: str = field(default=None, metadata={'query_param': { 'field_name': 'UserName', 'style': 'form', 'explode': True }})
-    version: GetCreateLoginProfileVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -30,13 +34,13 @@ class GetCreateLoginProfileHeaders:
 
 @dataclass
 class GetCreateLoginProfileRequest:
-    query_params: GetCreateLoginProfileQueryParams = field(default=None)
-    headers: GetCreateLoginProfileHeaders = field(default=None)
+    headers: GetCreateLoginProfileHeaders = field()
+    query_params: GetCreateLoginProfileQueryParams = field()
     
 
 @dataclass
 class GetCreateLoginProfileResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

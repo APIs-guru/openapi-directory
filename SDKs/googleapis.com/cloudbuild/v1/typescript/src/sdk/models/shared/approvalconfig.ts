@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ApprovalConfig
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * ApprovalConfig describes configuration for manual approval of a build.
 **/
 export class ApprovalConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=approvalRequired" })
+  @SpeakeasyMetadata({ data: "json, name=approvalRequired" })
   approvalRequired?: boolean;
 }

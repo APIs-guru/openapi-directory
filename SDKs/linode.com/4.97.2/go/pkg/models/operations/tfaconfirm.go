@@ -4,26 +4,18 @@ import (
 	"openapi/pkg/models/shared"
 )
 
-type TfaConfirmSecurityOption1 struct {
-	PersonalAccessToken shared.SchemePersonalAccessToken `security:"scheme,type=http,subtype=bearer"`
-}
-
-type TfaConfirmSecurityOption2 struct {
-	Oauth shared.SchemeOauth `security:"scheme,type=oauth2"`
-}
-
 type TfaConfirmSecurity struct {
-	Option1 *TfaConfirmSecurityOption1 `security:"option"`
-	Option2 *TfaConfirmSecurityOption2 `security:"option"`
+	PersonalAccessToken *shared.SchemePersonalAccessToken `security:"scheme,type=http,subtype=bearer"`
+	Oauth               *shared.SchemeOauth               `security:"scheme,type=oauth2"`
+}
+
+type TfaConfirmDefaultApplicationJSON struct {
+	Errors []shared.ErrorObject `json:"errors,omitempty"`
 }
 
 type TfaConfirmRequest struct {
 	Request  interface{} `request:"mediaType=application/json"`
 	Security TfaConfirmSecurity
-}
-
-type TfaConfirmDefaultApplicationJSON struct {
-	Errors []shared.ErrorObject `json:"errors,omitempty"`
 }
 
 type TfaConfirmResponse struct {

@@ -1,8 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ModelPackageContainerDefinition } from "./modelpackagecontainerdefinition";
 import { ProductionVariantInstanceTypeEnum } from "./productionvariantinstancetypeenum";
 import { TransformInstanceTypeEnum } from "./transforminstancetypeenum";
+
 
 
 // InferenceSpecification
@@ -10,18 +10,18 @@ import { TransformInstanceTypeEnum } from "./transforminstancetypeenum";
  * Defines how to perform inference generation after a training job is run.
 **/
 export class InferenceSpecification extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Containers", elemType: shared.ModelPackageContainerDefinition })
+  @SpeakeasyMetadata({ data: "json, name=Containers", elemType: ModelPackageContainerDefinition })
   containers: ModelPackageContainerDefinition[];
 
-  @Metadata({ data: "json, name=SupportedContentTypes" })
+  @SpeakeasyMetadata({ data: "json, name=SupportedContentTypes" })
   supportedContentTypes: string[];
 
-  @Metadata({ data: "json, name=SupportedRealtimeInferenceInstanceTypes" })
+  @SpeakeasyMetadata({ data: "json, name=SupportedRealtimeInferenceInstanceTypes" })
   supportedRealtimeInferenceInstanceTypes?: ProductionVariantInstanceTypeEnum[];
 
-  @Metadata({ data: "json, name=SupportedResponseMIMETypes" })
+  @SpeakeasyMetadata({ data: "json, name=SupportedResponseMIMETypes" })
   supportedResponseMimeTypes: string[];
 
-  @Metadata({ data: "json, name=SupportedTransformInstanceTypes" })
+  @SpeakeasyMetadata({ data: "json, name=SupportedTransformInstanceTypes" })
   supportedTransformInstanceTypes?: TransformInstanceTypeEnum[];
 }

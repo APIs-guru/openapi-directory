@@ -1,8 +1,9 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 class IssuesListForAuthenticatedUserFilterEnum(str, Enum):
@@ -38,14 +39,14 @@ class IssuesListForAuthenticatedUserQueryParams:
 
 @dataclass
 class IssuesListForAuthenticatedUserRequest:
-    query_params: IssuesListForAuthenticatedUserQueryParams = field(default=None)
+    query_params: IssuesListForAuthenticatedUserQueryParams = field()
     
 
 @dataclass
 class IssuesListForAuthenticatedUserResponse:
-    content_type: str = field(default=None)
-    headers: dict[str, List[str]] = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    headers: dict[str, List[str]] = field()
+    status_code: int = field()
     basic_error: Optional[shared.BasicError] = field(default=None)
     issues: Optional[List[shared.Issue]] = field(default=None)
     

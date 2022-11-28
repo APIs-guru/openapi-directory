@@ -1,31 +1,30 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
-import { NavEntry } from "./naventry";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { NavContent } from "./navcontent";
 
 
+
 export class NavEntry extends SpeakeasyBase {
-  @Metadata({ data: "json, name=children", elemType: shared.NavEntry })
+  @SpeakeasyMetadata({ data: "json, name=children", elemType: NavEntry })
   children?: NavEntry[];
 
-  @Metadata({ data: "json, name=content" })
+  @SpeakeasyMetadata({ data: "json, name=content" })
   content?: NavContent;
 
-  @Metadata({ data: "json, name=customFields" })
+  @SpeakeasyMetadata({ data: "json, name=customFields" })
   customFields?: Map<string, any>;
 
-  @Metadata({ data: "json, name=depth" })
+  @SpeakeasyMetadata({ data: "json, name=depth" })
   depth: number;
 
-  @Metadata({ data: "json, name=featured" })
+  @SpeakeasyMetadata({ data: "json, name=featured" })
   featured?: boolean;
 
-  @Metadata({ data: "json, name=icon" })
+  @SpeakeasyMetadata({ data: "json, name=icon" })
   icon?: string;
 
-  @Metadata({ data: "json, name=label" })
+  @SpeakeasyMetadata({ data: "json, name=label" })
   label?: string;
 
-  @Metadata({ data: "json, name=path" })
+  @SpeakeasyMetadata({ data: "json, name=path" })
   path?: string;
 }

@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ScanStatusEnum } from "./scanstatusenum";
+
 
 
 // ImageScanStatus
@@ -7,9 +8,9 @@ import { ScanStatusEnum } from "./scanstatusenum";
  * The current status of an image scan.
 **/
 export class ImageScanStatus extends SpeakeasyBase {
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: ScanStatusEnum;
 }

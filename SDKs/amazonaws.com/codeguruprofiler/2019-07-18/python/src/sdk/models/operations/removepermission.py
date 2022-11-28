@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 class RemovePermissionActionGroupEnum(str, Enum):
@@ -8,13 +12,13 @@ class RemovePermissionActionGroupEnum(str, Enum):
 
 @dataclass
 class RemovePermissionPathParams:
-    action_group: RemovePermissionActionGroupEnum = field(default=None, metadata={'path_param': { 'field_name': 'actionGroup', 'style': 'simple', 'explode': False }})
-    profiling_group_name: str = field(default=None, metadata={'path_param': { 'field_name': 'profilingGroupName', 'style': 'simple', 'explode': False }})
+    action_group: RemovePermissionActionGroupEnum = field(metadata={'path_param': { 'field_name': 'actionGroup', 'style': 'simple', 'explode': False }})
+    profiling_group_name: str = field(metadata={'path_param': { 'field_name': 'profilingGroupName', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class RemovePermissionQueryParams:
-    revision_id: str = field(default=None, metadata={'query_param': { 'field_name': 'revisionId', 'style': 'form', 'explode': True }})
+    revision_id: str = field(metadata={'query_param': { 'field_name': 'revisionId', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -30,19 +34,19 @@ class RemovePermissionHeaders:
 
 @dataclass
 class RemovePermissionRequest:
-    path_params: RemovePermissionPathParams = field(default=None)
-    query_params: RemovePermissionQueryParams = field(default=None)
-    headers: RemovePermissionHeaders = field(default=None)
+    headers: RemovePermissionHeaders = field()
+    path_params: RemovePermissionPathParams = field()
+    query_params: RemovePermissionQueryParams = field()
     
 
 @dataclass
 class RemovePermissionResponse:
+    content_type: str = field()
+    status_code: int = field()
     conflict_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     internal_server_exception: Optional[Any] = field(default=None)
     remove_permission_response: Optional[shared.RemovePermissionResponse] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     validation_exception: Optional[Any] = field(default=None)
     

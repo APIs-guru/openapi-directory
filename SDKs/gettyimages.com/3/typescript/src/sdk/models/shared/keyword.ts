@@ -1,22 +1,23 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class Keyword extends SpeakeasyBase {
-  @Metadata({ data: "json, name=entity_types" })
+  @SpeakeasyMetadata({ data: "json, name=entity_types" })
   entityTypes?: string[];
 
-  @Metadata({ data: "json, name=entity_uris" })
+  @SpeakeasyMetadata({ data: "json, name=entity_uris" })
   entityUris?: string[];
 
-  @Metadata({ data: "json, name=keyword_id" })
+  @SpeakeasyMetadata({ data: "json, name=keyword_id" })
   keywordId?: string;
 
-  @Metadata({ data: "json, name=relevance" })
+  @SpeakeasyMetadata({ data: "json, name=relevance" })
   relevance?: number;
 
-  @Metadata({ data: "json, name=text" })
+  @SpeakeasyMetadata({ data: "json, name=text" })
   text?: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: string;
 }

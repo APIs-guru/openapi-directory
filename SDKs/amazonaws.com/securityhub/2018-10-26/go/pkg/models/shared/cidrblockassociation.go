@@ -1,5 +1,7 @@
 package shared
 
+// CidrBlockAssociation
+// An IPv4 CIDR block association.
 type CidrBlockAssociation struct {
 	AssociationID  *string `json:"AssociationId,omitempty"`
 	CidrBlock      *string `json:"CidrBlock,omitempty"`

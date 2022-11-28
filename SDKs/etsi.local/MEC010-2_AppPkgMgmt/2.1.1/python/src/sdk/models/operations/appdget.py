@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class AppDgetPathParams:
-    app_d_id: str = field(default=None, metadata={'path_param': { 'field_name': 'appDId', 'style': 'simple', 'explode': False }})
+    app_d_id: str = field(metadata={'path_param': { 'field_name': 'appDId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -19,14 +19,14 @@ class AppDgetQueryParams:
 
 @dataclass
 class AppDgetRequest:
-    path_params: AppDgetPathParams = field(default=None)
-    query_params: AppDgetQueryParams = field(default=None)
+    path_params: AppDgetPathParams = field()
+    query_params: AppDgetQueryParams = field()
     
 
 @dataclass
 class AppDgetResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     problem_details: Optional[shared.ProblemDetails] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -10,7 +10,7 @@ type ExtrasTagsUpdatePathParams struct {
 
 type ExtrasTagsUpdateRequest struct {
 	PathParams ExtrasTagsUpdatePathParams
-	Request    shared.Tag `request:"mediaType=application/json"`
+	Request    shared.TagInput `request:"mediaType=application/json"`
 }
 
 type ExtrasTagsUpdateResponse struct {

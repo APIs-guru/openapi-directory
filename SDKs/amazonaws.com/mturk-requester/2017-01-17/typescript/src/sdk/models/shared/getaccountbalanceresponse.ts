@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetAccountBalanceResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AvailableBalance" })
+  @SpeakeasyMetadata({ data: "json, name=AvailableBalance" })
   availableBalance?: string;
 
-  @Metadata({ data: "json, name=OnHoldBalance" })
+  @SpeakeasyMetadata({ data: "json, name=OnHoldBalance" })
   onHoldBalance?: string;
 }

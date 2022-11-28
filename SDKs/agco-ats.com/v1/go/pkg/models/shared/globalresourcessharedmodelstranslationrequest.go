@@ -13,6 +13,8 @@ const (
 	GlobalResourcesSharedModelsTranslationRequestStateEnumCompleted    GlobalResourcesSharedModelsTranslationRequestStateEnum = "Completed"
 )
 
+// GlobalResourcesSharedModelsTranslationRequest
+// A request to translate specified strings into specified locales
 type GlobalResourcesSharedModelsTranslationRequest struct {
 	ApprovalUserID   *int32                                                 `json:"ApprovalUserId,omitempty" form:"name=ApprovalUserId"`
 	CcEmailAddresses []string                                               `json:"CCEmailAddresses" form:"name=CCEmailAddresses"`

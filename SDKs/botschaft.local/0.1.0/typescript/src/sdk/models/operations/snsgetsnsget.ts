@@ -1,41 +1,42 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class SnsGetSnsGetQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=base64_message" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=base64_message" })
   base64Message?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=message" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=message" })
   message?: string;
 }
 
 
 export class SnsGetSnsGetHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=authorization" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=authorization" })
   authorization?: string;
 }
 
 
 export class SnsGetSnsGetRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: SnsGetSnsGetQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: SnsGetSnsGetHeaders;
 }
 
 
 export class SnsGetSnsGetResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   httpValidationError?: shared.HttpValidationError;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   snsGetSnsGet200ApplicationJsonAny?: any;
 }

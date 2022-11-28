@@ -1,41 +1,42 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class RecipeRelatedPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=recipeId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=recipeId" })
   recipeId: number;
 }
 
 
 export class RecipeRelatedQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=pg" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=pg" })
   pg?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=rpp" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=rpp" })
   rpp?: number;
 }
 
 
 export class RecipeRelatedRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: RecipeRelatedPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: RecipeRelatedQueryParams;
 }
 
 
 export class RecipeRelatedResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   bigOvenModelApi2RecipeSearchResult?: shared.BigOvenModelApi2RecipeSearchResult;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

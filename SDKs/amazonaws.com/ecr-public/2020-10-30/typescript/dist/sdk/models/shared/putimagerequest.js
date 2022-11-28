@@ -22,34 +22,34 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var PutImageRequest = /** @class */ (function (_super) {
     __extends(PutImageRequest, _super);
     function PutImageRequest() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=imageDigest" }),
+        SpeakeasyMetadata({ data: "json, name=imageDigest" }),
         __metadata("design:type", String)
     ], PutImageRequest.prototype, "imageDigest", void 0);
     __decorate([
-        Metadata({ data: "json, name=imageManifest" }),
+        SpeakeasyMetadata({ data: "json, name=imageManifest" }),
         __metadata("design:type", String)
     ], PutImageRequest.prototype, "imageManifest", void 0);
     __decorate([
-        Metadata({ data: "json, name=imageManifestMediaType" }),
+        SpeakeasyMetadata({ data: "json, name=imageManifestMediaType" }),
         __metadata("design:type", String)
     ], PutImageRequest.prototype, "imageManifestMediaType", void 0);
     __decorate([
-        Metadata({ data: "json, name=imageTag" }),
+        SpeakeasyMetadata({ data: "json, name=imageTag" }),
         __metadata("design:type", String)
     ], PutImageRequest.prototype, "imageTag", void 0);
     __decorate([
-        Metadata({ data: "json, name=registryId" }),
+        SpeakeasyMetadata({ data: "json, name=registryId" }),
         __metadata("design:type", String)
     ], PutImageRequest.prototype, "registryId", void 0);
     __decorate([
-        Metadata({ data: "json, name=repositoryName" }),
+        SpeakeasyMetadata({ data: "json, name=repositoryName" }),
         __metadata("design:type", String)
     ], PutImageRequest.prototype, "repositoryName", void 0);
     return PutImageRequest;

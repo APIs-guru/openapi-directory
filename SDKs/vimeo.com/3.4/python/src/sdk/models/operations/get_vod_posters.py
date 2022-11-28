@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class GetVodPostersPathParams:
-    ondemand_id: float = field(default=None, metadata={'path_param': { 'field_name': 'ondemand_id', 'style': 'simple', 'explode': False }})
+    ondemand_id: float = field(metadata={'path_param': { 'field_name': 'ondemand_id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -16,14 +16,14 @@ class GetVodPostersQueryParams:
 
 @dataclass
 class GetVodPostersRequest:
-    path_params: GetVodPostersPathParams = field(default=None)
-    query_params: GetVodPostersQueryParams = field(default=None)
+    path_params: GetVodPostersPathParams = field()
+    query_params: GetVodPostersQueryParams = field()
     
 
 @dataclass
 class GetVodPostersResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     legacy_error: Optional[shared.LegacyError] = field(default=None)
     pictures: Optional[List[shared.Picture]] = field(default=None)
     

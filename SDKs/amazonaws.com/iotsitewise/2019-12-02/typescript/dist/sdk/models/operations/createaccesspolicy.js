@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var CreateAccessPolicyHeaders = /** @class */ (function (_super) {
     __extends(CreateAccessPolicyHeaders, _super);
@@ -30,31 +30,31 @@ var CreateAccessPolicyHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
         __metadata("design:type", String)
     ], CreateAccessPolicyHeaders.prototype, "xAmzAlgorithm", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
         __metadata("design:type", String)
     ], CreateAccessPolicyHeaders.prototype, "xAmzContentSha256", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
         __metadata("design:type", String)
     ], CreateAccessPolicyHeaders.prototype, "xAmzCredential", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
         __metadata("design:type", String)
     ], CreateAccessPolicyHeaders.prototype, "xAmzDate", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
         __metadata("design:type", String)
     ], CreateAccessPolicyHeaders.prototype, "xAmzSecurityToken", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
         __metadata("design:type", String)
     ], CreateAccessPolicyHeaders.prototype, "xAmzSignature", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
         __metadata("design:type", String)
     ], CreateAccessPolicyHeaders.prototype, "xAmzSignedHeaders", void 0);
     return CreateAccessPolicyHeaders;
@@ -70,19 +70,19 @@ var CreateAccessPolicyRequestBodyAccessPolicyIdentity = /** @class */ (function 
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=group" }),
+        SpeakeasyMetadata({ data: "json, name=group" }),
         __metadata("design:type", shared.GroupIdentity)
     ], CreateAccessPolicyRequestBodyAccessPolicyIdentity.prototype, "group", void 0);
     __decorate([
-        Metadata({ data: "json, name=iamRole" }),
+        SpeakeasyMetadata({ data: "json, name=iamRole" }),
         __metadata("design:type", shared.IamRoleIdentity)
     ], CreateAccessPolicyRequestBodyAccessPolicyIdentity.prototype, "iamRole", void 0);
     __decorate([
-        Metadata({ data: "json, name=iamUser" }),
+        SpeakeasyMetadata({ data: "json, name=iamUser" }),
         __metadata("design:type", shared.IamUserIdentity)
     ], CreateAccessPolicyRequestBodyAccessPolicyIdentity.prototype, "iamUser", void 0);
     __decorate([
-        Metadata({ data: "json, name=user" }),
+        SpeakeasyMetadata({ data: "json, name=user" }),
         __metadata("design:type", shared.UserIdentity)
     ], CreateAccessPolicyRequestBodyAccessPolicyIdentity.prototype, "user", void 0);
     return CreateAccessPolicyRequestBodyAccessPolicyIdentity;
@@ -103,11 +103,11 @@ var CreateAccessPolicyRequestBodyAccessPolicyResource = /** @class */ (function 
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=portal" }),
+        SpeakeasyMetadata({ data: "json, name=portal" }),
         __metadata("design:type", shared.PortalResource)
     ], CreateAccessPolicyRequestBodyAccessPolicyResource.prototype, "portal", void 0);
     __decorate([
-        Metadata({ data: "json, name=project" }),
+        SpeakeasyMetadata({ data: "json, name=project" }),
         __metadata("design:type", shared.ProjectResource)
     ], CreateAccessPolicyRequestBodyAccessPolicyResource.prototype, "project", void 0);
     return CreateAccessPolicyRequestBodyAccessPolicyResource;
@@ -119,23 +119,23 @@ var CreateAccessPolicyRequestBody = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=accessPolicyIdentity" }),
+        SpeakeasyMetadata({ data: "json, name=accessPolicyIdentity" }),
         __metadata("design:type", CreateAccessPolicyRequestBodyAccessPolicyIdentity)
     ], CreateAccessPolicyRequestBody.prototype, "accessPolicyIdentity", void 0);
     __decorate([
-        Metadata({ data: "json, name=accessPolicyPermission" }),
+        SpeakeasyMetadata({ data: "json, name=accessPolicyPermission" }),
         __metadata("design:type", String)
     ], CreateAccessPolicyRequestBody.prototype, "accessPolicyPermission", void 0);
     __decorate([
-        Metadata({ data: "json, name=accessPolicyResource" }),
+        SpeakeasyMetadata({ data: "json, name=accessPolicyResource" }),
         __metadata("design:type", CreateAccessPolicyRequestBodyAccessPolicyResource)
     ], CreateAccessPolicyRequestBody.prototype, "accessPolicyResource", void 0);
     __decorate([
-        Metadata({ data: "json, name=clientToken" }),
+        SpeakeasyMetadata({ data: "json, name=clientToken" }),
         __metadata("design:type", String)
     ], CreateAccessPolicyRequestBody.prototype, "clientToken", void 0);
     __decorate([
-        Metadata({ data: "json, name=tags" }),
+        SpeakeasyMetadata({ data: "json, name=tags" }),
         __metadata("design:type", Map)
     ], CreateAccessPolicyRequestBody.prototype, "tags", void 0);
     return CreateAccessPolicyRequestBody;
@@ -147,11 +147,11 @@ var CreateAccessPolicyRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", CreateAccessPolicyHeaders)
     ], CreateAccessPolicyRequest.prototype, "headers", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", CreateAccessPolicyRequestBody)
     ], CreateAccessPolicyRequest.prototype, "request", void 0);
     return CreateAccessPolicyRequest;
@@ -163,35 +163,35 @@ var CreateAccessPolicyResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], CreateAccessPolicyResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.CreateAccessPolicyResponse)
     ], CreateAccessPolicyResponse.prototype, "createAccessPolicyResponse", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], CreateAccessPolicyResponse.prototype, "internalFailureException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], CreateAccessPolicyResponse.prototype, "invalidRequestException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], CreateAccessPolicyResponse.prototype, "limitExceededException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], CreateAccessPolicyResponse.prototype, "resourceNotFoundException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], CreateAccessPolicyResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], CreateAccessPolicyResponse.prototype, "throttlingException", void 0);
     return CreateAccessPolicyResponse;

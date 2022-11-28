@@ -1,13 +1,13 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ColumnStatistics } from "./columnstatistics";
 import { ColumnError } from "./columnerror";
 
 
+
 export class GetColumnStatisticsForPartitionResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ColumnStatisticsList", elemType: shared.ColumnStatistics })
+  @SpeakeasyMetadata({ data: "json, name=ColumnStatisticsList", elemType: ColumnStatistics })
   columnStatisticsList?: ColumnStatistics[];
 
-  @Metadata({ data: "json, name=Errors", elemType: shared.ColumnError })
+  @SpeakeasyMetadata({ data: "json, name=Errors", elemType: ColumnError })
   errors?: ColumnError[];
 }

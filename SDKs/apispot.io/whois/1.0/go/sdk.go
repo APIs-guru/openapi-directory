@@ -10,7 +10,7 @@ import (
 	"strings"
 )
 
-var Servers = []string{
+var ServerList = []string{
 	"http://localhost:5000",
 	"https://apispot.io/api",
 }
@@ -20,9 +20,13 @@ type HTTPClient interface {
 }
 
 type SDK struct {
-	defaultClient  HTTPClient
-	securityClient HTTPClient
-	serverURL      string
+	_defaultClient  HTTPClient
+	_securityClient HTTPClient
+	_security       *shared.Security
+	_serverURL      string
+	_language       string
+	_sdkVersion     string
+	_genVersion     string
 }
 
 type SDKOption func(*SDK)
@@ -33,33 +37,55 @@ func WithServerURL(serverURL string, params map[string]string) SDKOption {
 			serverURL = utils.ReplaceParameters(serverURL, params)
 		}
 
-		sdk.serverURL = serverURL
+		sdk._serverURL = serverURL
+	}
+}
+
+func WithClient(client HTTPClient) SDKOption {
+	return func(sdk *SDK) {
+		sdk._defaultClient = client
 	}
 }
 
 func WithSecurity(security shared.Security) SDKOption {
 	return func(sdk *SDK) {
-		sdk.securityClient = utils.CreateSecurityClient(security)
+		sdk._security = &security
 	}
 }
 
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
-		defaultClient:  http.DefaultClient,
-		securityClient: http.DefaultClient,
+		_language:   "go",
+		_sdkVersion: "",
+		_genVersion: "internal",
 	}
 	for _, opt := range opts {
 		opt(sdk)
 	}
-	if sdk.serverURL == "" {
-		sdk.serverURL = Servers[0]
+
+	if sdk._defaultClient == nil {
+		sdk._defaultClient = http.DefaultClient
+	}
+	if sdk._securityClient == nil {
+
+		if sdk._security != nil {
+			sdk._securityClient = utils.ConfigureSecurityClient(sdk._defaultClient, sdk._security)
+		} else {
+			sdk._securityClient = sdk._defaultClient
+		}
+
+	}
+
+	if sdk._serverURL == "" {
+		sdk._serverURL = ServerList[0]
 	}
 
 	return sdk
 }
 
+// CheckDomain - Check domain availability
 func (s *SDK) CheckDomain(ctx context.Context, request operations.CheckDomainRequest) (*operations.CheckDomainResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/domains/{domain}/check", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -67,7 +93,7 @@ func (s *SDK) CheckDomain(ctx context.Context, request operations.CheckDomainReq
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -97,8 +123,9 @@ func (s *SDK) CheckDomain(ctx context.Context, request operations.CheckDomainReq
 	return res, nil
 }
 
+// CreateBatch - Create batch. Batch is then being processed until all provided items have been completed. At any time it can be `get` to provide current status with results optionally.
 func (s *SDK) CreateBatch(ctx context.Context, request operations.CreateBatchRequest) (*operations.CreateBatchResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/batch"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -116,7 +143,7 @@ func (s *SDK) CreateBatch(ctx context.Context, request operations.CreateBatchReq
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -146,8 +173,9 @@ func (s *SDK) CreateBatch(ctx context.Context, request operations.CreateBatchReq
 	return res, nil
 }
 
+// DeleteBatch - Delete batch
 func (s *SDK) DeleteBatch(ctx context.Context, request operations.DeleteBatchRequest) (*operations.DeleteBatchResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/batch/{id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -155,7 +183,7 @@ func (s *SDK) DeleteBatch(ctx context.Context, request operations.DeleteBatchReq
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -176,8 +204,9 @@ func (s *SDK) DeleteBatch(ctx context.Context, request operations.DeleteBatchReq
 	return res, nil
 }
 
+// DomainRank - Check domain rank (authority).
 func (s *SDK) DomainRank(ctx context.Context, request operations.DomainRankRequest) (*operations.DomainRankResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/domains/{domain}/rank", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -185,7 +214,7 @@ func (s *SDK) DomainRank(ctx context.Context, request operations.DomainRankReque
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -215,8 +244,9 @@ func (s *SDK) DomainRank(ctx context.Context, request operations.DomainRankReque
 	return res, nil
 }
 
+// GetBatch - Get batch
 func (s *SDK) GetBatch(ctx context.Context, request operations.GetBatchRequest) (*operations.GetBatchResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/batch/{id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -224,7 +254,7 @@ func (s *SDK) GetBatch(ctx context.Context, request operations.GetBatchRequest) 
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -254,8 +284,9 @@ func (s *SDK) GetBatch(ctx context.Context, request operations.GetBatchRequest) 
 	return res, nil
 }
 
+// GetBatches - Get your batches
 func (s *SDK) GetBatches(ctx context.Context) (*operations.GetBatchesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/batch"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -263,7 +294,7 @@ func (s *SDK) GetBatches(ctx context.Context) (*operations.GetBatchesResponse, e
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -293,8 +324,9 @@ func (s *SDK) GetBatches(ctx context.Context) (*operations.GetBatchesResponse, e
 	return res, nil
 }
 
+// QueryDb - Query domain database
 func (s *SDK) QueryDb(ctx context.Context, request operations.QueryDbRequest) (*operations.QueryDbResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/db"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -304,7 +336,7 @@ func (s *SDK) QueryDb(ctx context.Context, request operations.QueryDbRequest) (*
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -334,8 +366,9 @@ func (s *SDK) QueryDb(ctx context.Context, request operations.QueryDbRequest) (*
 	return res, nil
 }
 
+// Whois - WHOIS query for a domain
 func (s *SDK) Whois(ctx context.Context, request operations.WhoisRequest) (*operations.WhoisResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/domains/{domain}/whois", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -345,7 +378,7 @@ func (s *SDK) Whois(ctx context.Context, request operations.WhoisRequest) (*oper
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {

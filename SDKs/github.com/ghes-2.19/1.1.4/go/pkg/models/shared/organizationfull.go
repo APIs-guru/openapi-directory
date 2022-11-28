@@ -12,6 +12,8 @@ type OrganizationFullPlan struct {
 	Space        int64  `json:"space"`
 }
 
+// OrganizationFull
+// Organization Full
 type OrganizationFull struct {
 	AvatarURL                            string                `json:"avatar_url"`
 	BillingEmail                         *string               `json:"billing_email,omitempty"`

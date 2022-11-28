@@ -13,9 +13,9 @@ type RequestUserKeyPairsRequest struct {
 	Headers RequestUserKeyPairsHeaders
 }
 
-type RequestUserKeyPairsResponse struct {
+type RequestUserKeyPairsResponseOutput struct {
 	ContentType           string
 	ErrorResponse         *shared.ErrorResponse
 	StatusCode            int64
-	UserKeyPairContainers []shared.UserKeyPairContainer
+	UserKeyPairContainers []shared.UserKeyPairContainerOutput
 }

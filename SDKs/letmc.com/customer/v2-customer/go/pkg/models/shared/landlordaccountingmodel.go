@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// LandlordAccountingModel
+// Landlord Accounting
 type LandlordAccountingModel struct {
 	AccountBalance *float64                         `json:"AccountBalance,omitempty"`
 	LastPayment    *time.Time                       `json:"LastPayment,omitempty"`

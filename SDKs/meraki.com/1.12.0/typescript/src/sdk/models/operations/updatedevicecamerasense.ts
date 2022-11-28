@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class UpdateDeviceCameraSensePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=serial" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=serial" })
   serial: string;
 }
 
@@ -12,42 +13,42 @@ export class UpdateDeviceCameraSensePathParams extends SpeakeasyBase {
  * The details of the audio detection config.
 **/
 export class UpdateDeviceCameraSenseRequestBodyAudioDetection extends SpeakeasyBase {
-  @Metadata({ data: "json, name=enabled" })
+  @SpeakeasyMetadata({ data: "json, name=enabled" })
   enabled?: boolean;
 }
 
 
 export class UpdateDeviceCameraSenseRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=audioDetection" })
+  @SpeakeasyMetadata({ data: "json, name=audioDetection" })
   audioDetection?: UpdateDeviceCameraSenseRequestBodyAudioDetection;
 
-  @Metadata({ data: "json, name=detectionModelId" })
+  @SpeakeasyMetadata({ data: "json, name=detectionModelId" })
   detectionModelId?: string;
 
-  @Metadata({ data: "json, name=mqttBrokerId" })
+  @SpeakeasyMetadata({ data: "json, name=mqttBrokerId" })
   mqttBrokerId?: string;
 
-  @Metadata({ data: "json, name=senseEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=senseEnabled" })
   senseEnabled?: boolean;
 }
 
 
 export class UpdateDeviceCameraSenseRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: UpdateDeviceCameraSensePathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request?: UpdateDeviceCameraSenseRequestBody;
 }
 
 
 export class UpdateDeviceCameraSenseResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   updateDeviceCameraSense200ApplicationJsonObject?: Map<string, any>;
 }

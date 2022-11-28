@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // WebServerResource
 /**
  * Configuration for resources used by Airflow web server.
@@ -33,15 +33,15 @@ var WebServerResource = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=cpu" }),
+        SpeakeasyMetadata({ data: "json, name=cpu" }),
         __metadata("design:type", Number)
     ], WebServerResource.prototype, "cpu", void 0);
     __decorate([
-        Metadata({ data: "json, name=memoryGb" }),
+        SpeakeasyMetadata({ data: "json, name=memoryGb" }),
         __metadata("design:type", Number)
     ], WebServerResource.prototype, "memoryGb", void 0);
     __decorate([
-        Metadata({ data: "json, name=storageGb" }),
+        SpeakeasyMetadata({ data: "json, name=storageGb" }),
         __metadata("design:type", Number)
     ], WebServerResource.prototype, "storageGb", void 0);
     return WebServerResource;

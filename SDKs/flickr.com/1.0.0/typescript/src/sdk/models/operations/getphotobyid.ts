@@ -1,38 +1,39 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetPhotoByIdQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=api_key" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=api_key" })
   apiKey: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=photo_id" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=photo_id" })
   photoId: string;
 }
 
 
-export class GetPhotoByIdRequest extends SpeakeasyBase {
-  @Metadata()
-  queryParams: GetPhotoByIdQueryParams;
-}
-
-
 export class GetPhotoById200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=photo" })
+  @SpeakeasyMetadata({ data: "json, name=photo" })
   photo?: shared.Photo;
 
-  @Metadata({ data: "json, name=stat" })
+  @SpeakeasyMetadata({ data: "json, name=stat" })
   stat?: string;
 }
 
 
+export class GetPhotoByIdRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  queryParams: GetPhotoByIdQueryParams;
+}
+
+
 export class GetPhotoByIdResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getPhotoById200ApplicationJsonObject?: GetPhotoById200ApplicationJson;
 }

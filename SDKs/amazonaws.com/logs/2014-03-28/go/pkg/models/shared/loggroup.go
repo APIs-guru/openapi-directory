@@ -1,5 +1,7 @@
 package shared
 
+// LogGroup
+// Represents a log group.
 type LogGroup struct {
 	Arn               *string `json:"arn,omitempty"`
 	CreationTime      *int64  `json:"creationTime,omitempty"`

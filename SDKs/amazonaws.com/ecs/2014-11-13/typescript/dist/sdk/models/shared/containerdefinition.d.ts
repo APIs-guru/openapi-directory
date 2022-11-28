@@ -1,0 +1,61 @@
+import { SpeakeasyBase } from "../../../internal/utils";
+import { ContainerDependency } from "./containerdependency";
+import { KeyValuePair } from "./keyvaluepair";
+import { EnvironmentFile } from "./environmentfile";
+import { HostEntry } from "./hostentry";
+import { FirelensConfiguration } from "./firelensconfiguration";
+import { HealthCheck } from "./healthcheck";
+import { LinuxParameters } from "./linuxparameters";
+import { LogConfiguration } from "./logconfiguration";
+import { MountPoint } from "./mountpoint";
+import { PortMapping } from "./portmapping";
+import { RepositoryCredentials } from "./repositorycredentials";
+import { ResourceRequirement } from "./resourcerequirement";
+import { Secret } from "./secret";
+import { SystemControl } from "./systemcontrol";
+import { Ulimit } from "./ulimit";
+import { VolumeFrom } from "./volumefrom";
+/**
+ * Container definitions are used in task definitions to describe the different containers that are launched as part of a task.
+**/
+export declare class ContainerDefinition extends SpeakeasyBase {
+    command?: string[];
+    cpu?: number;
+    dependsOn?: ContainerDependency[];
+    disableNetworking?: boolean;
+    dnsSearchDomains?: string[];
+    dnsServers?: string[];
+    dockerLabels?: Map<string, string>;
+    dockerSecurityOptions?: string[];
+    entryPoint?: string[];
+    environment?: KeyValuePair[];
+    environmentFiles?: EnvironmentFile[];
+    essential?: boolean;
+    extraHosts?: HostEntry[];
+    firelensConfiguration?: FirelensConfiguration;
+    healthCheck?: HealthCheck;
+    hostname?: string;
+    image?: string;
+    interactive?: boolean;
+    links?: string[];
+    linuxParameters?: LinuxParameters;
+    logConfiguration?: LogConfiguration;
+    memory?: number;
+    memoryReservation?: number;
+    mountPoints?: MountPoint[];
+    name?: string;
+    portMappings?: PortMapping[];
+    privileged?: boolean;
+    pseudoTerminal?: boolean;
+    readonlyRootFilesystem?: boolean;
+    repositoryCredentials?: RepositoryCredentials;
+    resourceRequirements?: ResourceRequirement[];
+    secrets?: Secret[];
+    startTimeout?: number;
+    stopTimeout?: number;
+    systemControls?: SystemControl[];
+    ulimits?: Ulimit[];
+    user?: string;
+    volumesFrom?: VolumeFrom[];
+    workingDirectory?: string;
+}

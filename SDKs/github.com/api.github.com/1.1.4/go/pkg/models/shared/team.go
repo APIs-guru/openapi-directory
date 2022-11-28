@@ -15,6 +15,8 @@ type TeamTeamSimple struct {
 	URL             string  `json:"url"`
 }
 
+// Team
+// Groups of organization members that gives permissions on specified repositories.
 type Team struct {
 	Description     string          `json:"description"`
 	HTMLURL         string          `json:"html_url"`

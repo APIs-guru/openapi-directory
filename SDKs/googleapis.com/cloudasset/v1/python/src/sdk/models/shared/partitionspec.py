@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class PartitionSpecPartitionKeyEnum(str, Enum):
     PARTITION_KEY_UNSPECIFIED = "PARTITION_KEY_UNSPECIFIED"
@@ -11,5 +13,9 @@ class PartitionSpecPartitionKeyEnum(str, Enum):
 @dataclass_json
 @dataclass
 class PartitionSpec:
-    partition_key: Optional[PartitionSpecPartitionKeyEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'partitionKey' }})
+    r"""PartitionSpec
+    Specifications of BigQuery partitioned table as export destination.
+    """
+    
+    partition_key: Optional[PartitionSpecPartitionKeyEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('partitionKey') }})
     

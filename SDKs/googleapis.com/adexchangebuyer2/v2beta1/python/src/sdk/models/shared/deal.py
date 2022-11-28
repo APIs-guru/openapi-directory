@@ -1,14 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import privatedata
-from . import creativerestrictions
-from . import dealservingmetadata
-from . import dealterms
-from . import deliverycontrol
-from . import contactinformation
-from . import marketplacetargeting
-from . import targetingcriteria
+from sdk import utils
+from . import *
 
 class DealCreativePreApprovalPolicyEnum(str, Enum):
     CREATIVE_PRE_APPROVAL_POLICY_UNSPECIFIED = "CREATIVE_PRE_APPROVAL_POLICY_UNSPECIFIED"
@@ -35,30 +33,57 @@ class DealSyndicationProductEnum(str, Enum):
 
 @dataclass_json
 @dataclass
+class DealInput:
+    r"""DealInput
+    A deal represents a segment of inventory for displaying ads on. A proposal can contain multiple deals. A deal contains the terms and targeting information that is used for serving.
+    """
+    
+    available_end_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('availableEndTime') }})
+    available_start_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('availableStartTime') }})
+    buyer_private_data: Optional[PrivateData] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('buyerPrivateData') }})
+    create_product_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('createProductId') }})
+    create_product_revision: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('createProductRevision') }})
+    creative_restrictions: Optional[CreativeRestrictions] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('creativeRestrictions') }})
+    deal_serving_metadata: Optional[DealServingMetadata] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('dealServingMetadata') }})
+    deal_terms: Optional[DealTerms] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('dealTerms') }})
+    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('description') }})
+    display_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('displayName') }})
+    syndication_product: Optional[DealSyndicationProductEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('syndicationProduct') }})
+    targeting: Optional[MarketplaceTargeting] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('targeting') }})
+    targeting_criterion: Optional[List[TargetingCriteria]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('targetingCriterion') }})
+    web_property_code: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('webPropertyCode') }})
+    
+
+@dataclass_json
+@dataclass
 class Deal:
-    available_end_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'availableEndTime' }})
-    available_start_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'availableStartTime' }})
-    buyer_private_data: Optional[privatedata.PrivateData] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'buyerPrivateData' }})
-    create_product_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'createProductId' }})
-    create_product_revision: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'createProductRevision' }})
-    create_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'createTime' }})
-    creative_pre_approval_policy: Optional[DealCreativePreApprovalPolicyEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'creativePreApprovalPolicy' }})
-    creative_restrictions: Optional[creativerestrictions.CreativeRestrictions] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'creativeRestrictions' }})
-    creative_safe_frame_compatibility: Optional[DealCreativeSafeFrameCompatibilityEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'creativeSafeFrameCompatibility' }})
-    deal_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'dealId' }})
-    deal_serving_metadata: Optional[dealservingmetadata.DealServingMetadata] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'dealServingMetadata' }})
-    deal_terms: Optional[dealterms.DealTerms] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'dealTerms' }})
-    delivery_control: Optional[deliverycontrol.DeliveryControl] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'deliveryControl' }})
-    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
-    display_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'displayName' }})
-    external_deal_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'externalDealId' }})
-    is_setup_complete: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'isSetupComplete' }})
-    programmatic_creative_source: Optional[DealProgrammaticCreativeSourceEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'programmaticCreativeSource' }})
-    proposal_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'proposalId' }})
-    seller_contacts: Optional[List[contactinformation.ContactInformation]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'sellerContacts' }})
-    syndication_product: Optional[DealSyndicationProductEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'syndicationProduct' }})
-    targeting: Optional[marketplacetargeting.MarketplaceTargeting] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'targeting' }})
-    targeting_criterion: Optional[List[targetingcriteria.TargetingCriteria]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'targetingCriterion' }})
-    update_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'updateTime' }})
-    web_property_code: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'webPropertyCode' }})
+    r"""Deal
+    A deal represents a segment of inventory for displaying ads on. A proposal can contain multiple deals. A deal contains the terms and targeting information that is used for serving.
+    """
+    
+    available_end_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('availableEndTime') }})
+    available_start_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('availableStartTime') }})
+    buyer_private_data: Optional[PrivateData] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('buyerPrivateData') }})
+    create_product_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('createProductId') }})
+    create_product_revision: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('createProductRevision') }})
+    create_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('createTime') }})
+    creative_pre_approval_policy: Optional[DealCreativePreApprovalPolicyEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('creativePreApprovalPolicy') }})
+    creative_restrictions: Optional[CreativeRestrictions] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('creativeRestrictions') }})
+    creative_safe_frame_compatibility: Optional[DealCreativeSafeFrameCompatibilityEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('creativeSafeFrameCompatibility') }})
+    deal_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('dealId') }})
+    deal_serving_metadata: Optional[DealServingMetadata] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('dealServingMetadata') }})
+    deal_terms: Optional[DealTerms] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('dealTerms') }})
+    delivery_control: Optional[DeliveryControl] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('deliveryControl') }})
+    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('description') }})
+    display_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('displayName') }})
+    external_deal_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('externalDealId') }})
+    is_setup_complete: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('isSetupComplete') }})
+    programmatic_creative_source: Optional[DealProgrammaticCreativeSourceEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('programmaticCreativeSource') }})
+    proposal_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('proposalId') }})
+    seller_contacts: Optional[List[ContactInformation]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('sellerContacts') }})
+    syndication_product: Optional[DealSyndicationProductEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('syndicationProduct') }})
+    targeting: Optional[MarketplaceTargeting] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('targeting') }})
+    targeting_criterion: Optional[List[TargetingCriteria]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('targetingCriterion') }})
+    update_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('updateTime') }})
+    web_property_code: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('webPropertyCode') }})
     

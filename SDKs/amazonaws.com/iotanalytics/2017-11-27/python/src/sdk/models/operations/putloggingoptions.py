@@ -1,6 +1,11 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -18,29 +23,33 @@ class PutLoggingOptionsHeaders:
 @dataclass_json
 @dataclass
 class PutLoggingOptionsRequestBodyLoggingOptions:
-    enabled: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'enabled' }})
-    level: Optional[shared.LoggingLevelEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'level' }})
-    role_arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'roleArn' }})
+    r"""PutLoggingOptionsRequestBodyLoggingOptions
+    Information about logging options.
+    """
+    
+    enabled: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('enabled') }})
+    level: Optional[shared.LoggingLevelEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('level') }})
+    role_arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('roleArn') }})
     
 
 @dataclass_json
 @dataclass
 class PutLoggingOptionsRequestBody:
-    logging_options: PutLoggingOptionsRequestBodyLoggingOptions = field(default=None, metadata={'dataclasses_json': { 'field_name': 'loggingOptions' }})
+    logging_options: PutLoggingOptionsRequestBodyLoggingOptions = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('loggingOptions') }})
     
 
 @dataclass
 class PutLoggingOptionsRequest:
-    headers: PutLoggingOptionsHeaders = field(default=None)
-    request: PutLoggingOptionsRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: PutLoggingOptionsHeaders = field()
+    request: PutLoggingOptionsRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class PutLoggingOptionsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     internal_failure_exception: Optional[Any] = field(default=None)
     invalid_request_exception: Optional[Any] = field(default=None)
     service_unavailable_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     

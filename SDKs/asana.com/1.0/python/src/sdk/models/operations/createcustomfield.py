@@ -1,6 +1,7 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -14,26 +15,26 @@ class CreateCustomFieldQueryParams:
 
 @dataclass_json
 @dataclass
-class CreateCustomFieldRequestBody:
-    data: Optional[shared.CustomFieldRequest] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'data' }})
-    
-
-@dataclass
-class CreateCustomFieldRequest:
-    query_params: CreateCustomFieldQueryParams = field(default=None)
-    request: Optional[CreateCustomFieldRequestBody] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+class CreateCustomFieldRequestBodyInput:
+    data: Optional[shared.CustomFieldRequestInput] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('data') }})
     
 
 @dataclass_json
 @dataclass
 class CreateCustomField201ApplicationJSON:
-    data: Optional[shared.CustomFieldResponse] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'data' }})
+    data: Optional[shared.CustomFieldResponse] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('data') }})
+    
+
+@dataclass
+class CreateCustomFieldRequest:
+    query_params: CreateCustomFieldQueryParams = field()
+    request: Optional[CreateCustomFieldRequestBodyInput] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class CreateCustomFieldResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error_response: Optional[shared.ErrorResponse] = field(default=None)
-    status_code: int = field(default=None)
     create_custom_field_201_application_json_object: Optional[CreateCustomField201ApplicationJSON] = field(default=None)
     

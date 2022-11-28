@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostPutGroupPolicyActionEnum(str, Enum):
     PUT_GROUP_POLICY = "PutGroupPolicy"
@@ -10,8 +14,8 @@ class PostPutGroupPolicyVersionEnum(str, Enum):
 
 @dataclass
 class PostPutGroupPolicyQueryParams:
-    action: PostPutGroupPolicyActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostPutGroupPolicyVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostPutGroupPolicyActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostPutGroupPolicyVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostPutGroupPolicyHeaders:
 
 @dataclass
 class PostPutGroupPolicyRequest:
-    query_params: PostPutGroupPolicyQueryParams = field(default=None)
-    headers: PostPutGroupPolicyHeaders = field(default=None)
+    headers: PostPutGroupPolicyHeaders = field()
+    query_params: PostPutGroupPolicyQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostPutGroupPolicyResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

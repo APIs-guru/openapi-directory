@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostImportImageActionEnum(str, Enum):
     IMPORT_IMAGE = "ImportImage"
@@ -10,8 +14,8 @@ class PostImportImageVersionEnum(str, Enum):
 
 @dataclass
 class PostImportImageQueryParams:
-    action: PostImportImageActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostImportImageVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostImportImageActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostImportImageVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostImportImageHeaders:
 
 @dataclass
 class PostImportImageRequest:
-    query_params: PostImportImageQueryParams = field(default=None)
-    headers: PostImportImageHeaders = field(default=None)
+    headers: PostImportImageHeaders = field()
+    query_params: PostImportImageQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostImportImageResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

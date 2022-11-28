@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { AdditionalInstanceConfiguration } from "./additionalinstanceconfiguration";
 import { InstanceBlockDeviceMapping } from "./instanceblockdevicemapping";
 import { ComponentConfiguration } from "./componentconfiguration";

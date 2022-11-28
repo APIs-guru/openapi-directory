@@ -1,5 +1,7 @@
 package shared
 
+// OverlayPosition
+// The location an object is overlaid on top of a grid.
 type OverlayPosition struct {
 	AnchorCell    *GridCoordinate `json:"anchorCell,omitempty"`
 	HeightPixels  *int32          `json:"heightPixels,omitempty"`

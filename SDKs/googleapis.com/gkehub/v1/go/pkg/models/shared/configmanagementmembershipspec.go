@@ -1,5 +1,7 @@
 package shared
 
+// ConfigManagementMembershipSpec
+// **Anthos Config Management**: Configuration for a single cluster. Intended to parallel the ConfigManagement CR.
 type ConfigManagementMembershipSpec struct {
 	ConfigSync          *ConfigManagementConfigSync                `json:"configSync,omitempty"`
 	HierarchyController *ConfigManagementHierarchyControllerConfig `json:"hierarchyController,omitempty"`

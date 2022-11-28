@@ -1,0 +1,146 @@
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import * as shared from "../shared";
+var RecaptchaenterpriseProjectsKeysGetMetricsPathParams = /** @class */ (function (_super) {
+    __extends(RecaptchaenterpriseProjectsKeysGetMetricsPathParams, _super);
+    function RecaptchaenterpriseProjectsKeysGetMetricsPathParams() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=name" }),
+        __metadata("design:type", String)
+    ], RecaptchaenterpriseProjectsKeysGetMetricsPathParams.prototype, "name", void 0);
+    return RecaptchaenterpriseProjectsKeysGetMetricsPathParams;
+}(SpeakeasyBase));
+export { RecaptchaenterpriseProjectsKeysGetMetricsPathParams };
+var RecaptchaenterpriseProjectsKeysGetMetricsQueryParams = /** @class */ (function (_super) {
+    __extends(RecaptchaenterpriseProjectsKeysGetMetricsQueryParams, _super);
+    function RecaptchaenterpriseProjectsKeysGetMetricsQueryParams() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=$.xgafv" }),
+        __metadata("design:type", String)
+    ], RecaptchaenterpriseProjectsKeysGetMetricsQueryParams.prototype, "dollarXgafv", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=access_token" }),
+        __metadata("design:type", String)
+    ], RecaptchaenterpriseProjectsKeysGetMetricsQueryParams.prototype, "accessToken", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=alt" }),
+        __metadata("design:type", String)
+    ], RecaptchaenterpriseProjectsKeysGetMetricsQueryParams.prototype, "alt", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=callback" }),
+        __metadata("design:type", String)
+    ], RecaptchaenterpriseProjectsKeysGetMetricsQueryParams.prototype, "callback", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=fields" }),
+        __metadata("design:type", String)
+    ], RecaptchaenterpriseProjectsKeysGetMetricsQueryParams.prototype, "fields", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=key" }),
+        __metadata("design:type", String)
+    ], RecaptchaenterpriseProjectsKeysGetMetricsQueryParams.prototype, "key", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=oauth_token" }),
+        __metadata("design:type", String)
+    ], RecaptchaenterpriseProjectsKeysGetMetricsQueryParams.prototype, "oauthToken", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=prettyPrint" }),
+        __metadata("design:type", Boolean)
+    ], RecaptchaenterpriseProjectsKeysGetMetricsQueryParams.prototype, "prettyPrint", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=quotaUser" }),
+        __metadata("design:type", String)
+    ], RecaptchaenterpriseProjectsKeysGetMetricsQueryParams.prototype, "quotaUser", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=uploadType" }),
+        __metadata("design:type", String)
+    ], RecaptchaenterpriseProjectsKeysGetMetricsQueryParams.prototype, "uploadType", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=upload_protocol" }),
+        __metadata("design:type", String)
+    ], RecaptchaenterpriseProjectsKeysGetMetricsQueryParams.prototype, "uploadProtocol", void 0);
+    return RecaptchaenterpriseProjectsKeysGetMetricsQueryParams;
+}(SpeakeasyBase));
+export { RecaptchaenterpriseProjectsKeysGetMetricsQueryParams };
+var RecaptchaenterpriseProjectsKeysGetMetricsSecurity = /** @class */ (function (_super) {
+    __extends(RecaptchaenterpriseProjectsKeysGetMetricsSecurity, _super);
+    function RecaptchaenterpriseProjectsKeysGetMetricsSecurity() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
+        __metadata("design:type", shared.SchemeOauth2)
+    ], RecaptchaenterpriseProjectsKeysGetMetricsSecurity.prototype, "oauth2", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
+        __metadata("design:type", shared.SchemeOauth2c)
+    ], RecaptchaenterpriseProjectsKeysGetMetricsSecurity.prototype, "oauth2c", void 0);
+    return RecaptchaenterpriseProjectsKeysGetMetricsSecurity;
+}(SpeakeasyBase));
+export { RecaptchaenterpriseProjectsKeysGetMetricsSecurity };
+var RecaptchaenterpriseProjectsKeysGetMetricsRequest = /** @class */ (function (_super) {
+    __extends(RecaptchaenterpriseProjectsKeysGetMetricsRequest, _super);
+    function RecaptchaenterpriseProjectsKeysGetMetricsRequest() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", RecaptchaenterpriseProjectsKeysGetMetricsPathParams)
+    ], RecaptchaenterpriseProjectsKeysGetMetricsRequest.prototype, "pathParams", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", RecaptchaenterpriseProjectsKeysGetMetricsQueryParams)
+    ], RecaptchaenterpriseProjectsKeysGetMetricsRequest.prototype, "queryParams", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", RecaptchaenterpriseProjectsKeysGetMetricsSecurity)
+    ], RecaptchaenterpriseProjectsKeysGetMetricsRequest.prototype, "security", void 0);
+    return RecaptchaenterpriseProjectsKeysGetMetricsRequest;
+}(SpeakeasyBase));
+export { RecaptchaenterpriseProjectsKeysGetMetricsRequest };
+var RecaptchaenterpriseProjectsKeysGetMetricsResponse = /** @class */ (function (_super) {
+    __extends(RecaptchaenterpriseProjectsKeysGetMetricsResponse, _super);
+    function RecaptchaenterpriseProjectsKeysGetMetricsResponse() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", String)
+    ], RecaptchaenterpriseProjectsKeysGetMetricsResponse.prototype, "contentType", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", shared.GoogleCloudRecaptchaenterpriseV1Metrics)
+    ], RecaptchaenterpriseProjectsKeysGetMetricsResponse.prototype, "googleCloudRecaptchaenterpriseV1Metrics", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", Number)
+    ], RecaptchaenterpriseProjectsKeysGetMetricsResponse.prototype, "statusCode", void 0);
+    return RecaptchaenterpriseProjectsKeysGetMetricsResponse;
+}(SpeakeasyBase));
+export { RecaptchaenterpriseProjectsKeysGetMetricsResponse };

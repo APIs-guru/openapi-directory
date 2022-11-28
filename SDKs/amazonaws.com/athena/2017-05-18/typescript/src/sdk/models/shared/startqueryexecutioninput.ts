@@ -1,21 +1,22 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { QueryExecutionContext } from "./queryexecutioncontext";
 import { ResultConfiguration } from "./resultconfiguration";
 
 
+
 export class StartQueryExecutionInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ClientRequestToken" })
+  @SpeakeasyMetadata({ data: "json, name=ClientRequestToken" })
   clientRequestToken?: string;
 
-  @Metadata({ data: "json, name=QueryExecutionContext" })
+  @SpeakeasyMetadata({ data: "json, name=QueryExecutionContext" })
   queryExecutionContext?: QueryExecutionContext;
 
-  @Metadata({ data: "json, name=QueryString" })
+  @SpeakeasyMetadata({ data: "json, name=QueryString" })
   queryString: string;
 
-  @Metadata({ data: "json, name=ResultConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=ResultConfiguration" })
   resultConfiguration?: ResultConfiguration;
 
-  @Metadata({ data: "json, name=WorkGroup" })
+  @SpeakeasyMetadata({ data: "json, name=WorkGroup" })
   workGroup?: string;
 }

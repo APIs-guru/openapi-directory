@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class RelationshipNoteTypeEnum(str, Enum):
     RELATIONSHIP_TYPE_UNSPECIFIED = "RELATIONSHIP_TYPE_UNSPECIFIED"
@@ -52,5 +54,9 @@ class RelationshipNoteTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class RelationshipNote:
-    type: Optional[RelationshipNoteTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    r"""RelationshipNote
+    RelationshipNote represents an SPDX Relationship section: https://spdx.github.io/spdx-spec/7-relationships-between-SPDX-elements/
+    """
+    
+    type: Optional[RelationshipNoteTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('type') }})
     

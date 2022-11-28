@@ -10,6 +10,8 @@ const (
 	SendDebugCaptureRequestDataFormatEnumBrotli                SendDebugCaptureRequestDataFormatEnum = "BROTLI"
 )
 
+// SendDebugCaptureRequest
+// Request to send encoded debug information. Next ID: 8
 type SendDebugCaptureRequest struct {
 	ComponentID *string                                `json:"componentId,omitempty"`
 	Data        *string                                `json:"data,omitempty"`

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ProductsEnum } from "./productsenum";
 /**
  * An optional object to filter `/institutions/get` results.

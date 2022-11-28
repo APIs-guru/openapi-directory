@@ -1,9 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from typing import Any,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import rule_source
-from . import aws_access_keys
-from . import aws_assume_role
+from sdk import utils
+from . import *
 
 class AwsLambdaRulePostRequestModeEnum(str, Enum):
     SINGLE = "single"
@@ -19,18 +19,18 @@ class AwsLambdaRulePostStatusEnum(str, Enum):
 @dataclass_json
 @dataclass
 class AwsLambdaRulePostTarget:
-    authentication: Any = field(default=None, metadata={'dataclasses_json': { 'field_name': 'authentication' }})
-    enveloped: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'enveloped' }})
-    function_name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'functionName' }})
-    region: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'region' }})
+    authentication: Any = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('authentication') }})
+    function_name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('functionName') }})
+    region: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('region') }})
+    enveloped: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('enveloped') }})
     
 
 @dataclass_json
 @dataclass
 class AwsLambdaRulePost:
-    request_mode: AwsLambdaRulePostRequestModeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'requestMode' }})
-    rule_type: AwsLambdaRulePostRuleTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ruleType' }})
-    source: rule_source.RuleSource = field(default=None, metadata={'dataclasses_json': { 'field_name': 'source' }})
-    status: Optional[AwsLambdaRulePostStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
-    target: AwsLambdaRulePostTarget = field(default=None, metadata={'dataclasses_json': { 'field_name': 'target' }})
+    request_mode: AwsLambdaRulePostRequestModeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('requestMode') }})
+    rule_type: AwsLambdaRulePostRuleTypeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('ruleType') }})
+    source: RuleSource = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('source') }})
+    target: AwsLambdaRulePostTarget = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('target') }})
+    status: Optional[AwsLambdaRulePostStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('status') }})
     

@@ -14,6 +14,8 @@ const (
 	InstallationTokenRepositorySelectionEnumSelected InstallationTokenRepositorySelectionEnum = "selected"
 )
 
+// InstallationToken
+// Authentication token for a GitHub App installed on a user or org.
 type InstallationToken struct {
 	ExpiresAt              string                                    `json:"expires_at"`
 	HasMultipleSingleFiles *bool                                     `json:"has_multiple_single_files,omitempty"`

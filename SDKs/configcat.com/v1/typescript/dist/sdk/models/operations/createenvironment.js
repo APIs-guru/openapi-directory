@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var CreateEnvironmentPathParams = /** @class */ (function (_super) {
     __extends(CreateEnvironmentPathParams, _super);
@@ -30,7 +30,7 @@ var CreateEnvironmentPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=productId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=productId" }),
         __metadata("design:type", String)
     ], CreateEnvironmentPathParams.prototype, "productId", void 0);
     return CreateEnvironmentPathParams;
@@ -42,15 +42,15 @@ var CreateEnvironmentRequests = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "request, media_type=application/*+json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/*+json" }),
         __metadata("design:type", shared.CreateEnvironmentModel)
     ], CreateEnvironmentRequests.prototype, "createEnvironmentModel", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", shared.CreateEnvironmentModel)
     ], CreateEnvironmentRequests.prototype, "createEnvironmentModel1", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=text/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=text/json" }),
         __metadata("design:type", shared.CreateEnvironmentModel)
     ], CreateEnvironmentRequests.prototype, "createEnvironmentModel2", void 0);
     return CreateEnvironmentRequests;
@@ -62,11 +62,11 @@ var CreateEnvironmentRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", CreateEnvironmentPathParams)
     ], CreateEnvironmentRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", CreateEnvironmentRequests)
     ], CreateEnvironmentRequest.prototype, "request", void 0);
     return CreateEnvironmentRequest;
@@ -78,19 +78,19 @@ var CreateEnvironmentResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], CreateEnvironmentResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.EnvironmentModel)
     ], CreateEnvironmentResponse.prototype, "environmentModel", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.EnvironmentModelHaljson)
     ], CreateEnvironmentResponse.prototype, "environmentModelHaljson", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], CreateEnvironmentResponse.prototype, "statusCode", void 0);
     return CreateEnvironmentResponse;

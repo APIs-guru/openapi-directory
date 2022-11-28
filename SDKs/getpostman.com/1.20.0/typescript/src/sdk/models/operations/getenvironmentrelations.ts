@@ -1,46 +1,47 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetEnvironmentRelationsPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=apiId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=apiId" })
   apiId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=apiVersionId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=apiVersionId" })
   apiVersionId: string;
 }
 
 
-export class GetEnvironmentRelationsRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: GetEnvironmentRelationsPathParams;
-}
-
-
 export class GetEnvironmentRelations200ApplicationJsonEnvironment extends SpeakeasyBase {
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=updatedAt" })
+  @SpeakeasyMetadata({ data: "json, name=updatedAt" })
   updatedAt?: string;
 }
 
 
 export class GetEnvironmentRelations200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=environment", elemType: operations.GetEnvironmentRelations200ApplicationJsonEnvironment })
+  @SpeakeasyMetadata({ data: "json, name=environment", elemType: GetEnvironmentRelations200ApplicationJsonEnvironment })
   environment?: GetEnvironmentRelations200ApplicationJsonEnvironment[];
 }
 
 
+export class GetEnvironmentRelationsRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: GetEnvironmentRelationsPathParams;
+}
+
+
 export class GetEnvironmentRelationsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getEnvironmentRelations200ApplicationJsonObject?: GetEnvironmentRelations200ApplicationJson;
 }

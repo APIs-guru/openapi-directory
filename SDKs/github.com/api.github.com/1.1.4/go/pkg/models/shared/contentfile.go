@@ -6,6 +6,8 @@ type ContentFileLinks struct {
 	Self string `json:"self"`
 }
 
+// ContentFile
+// Content File
 type ContentFile struct {
 	Links           ContentFileLinks `json:"_links"`
 	Content         string           `json:"content"`

@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AssetStatus } from "./assetstatus";
 
 
+
 export class DeleteAssetResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=assetStatus" })
+  @SpeakeasyMetadata({ data: "json, name=assetStatus" })
   assetStatus: AssetStatus;
 }

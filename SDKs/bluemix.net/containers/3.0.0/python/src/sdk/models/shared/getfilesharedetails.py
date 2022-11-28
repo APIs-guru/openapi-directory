@@ -1,14 +1,14 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import fileshare
-from . import fileshareusage
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class GetFileshareDetails:
-    fs: Optional[List[fileshare.Fileshare]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'fs' }})
-    fs_usage: Optional[List[fileshareusage.FileshareUsage]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'fsUsage' }})
-    volnames: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'volnames' }})
+    fs: Optional[List[Fileshare]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('fs') }})
+    fs_usage: Optional[List[FileshareUsage]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('fsUsage') }})
+    volnames: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('volnames') }})
     

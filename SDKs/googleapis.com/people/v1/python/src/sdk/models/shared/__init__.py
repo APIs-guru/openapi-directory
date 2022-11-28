@@ -1,4 +1,4 @@
-from .__xgafv_enum import *
+from ._xgafv_enum import *
 from .address import *
 from .agerangetype import *
 from .alt_enum import *
@@ -21,7 +21,7 @@ from .contacttocreate import *
 from .copyothercontacttomycontactsgrouprequest import *
 from .coverphoto import *
 from .createcontactgrouprequest import *
-from .date import *
+from .date_ import *
 from .deletecontactphotoresponse import *
 from .domainmembership import *
 from .emailaddress import *

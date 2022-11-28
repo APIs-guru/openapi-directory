@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { WebhookEventResource } from "./webhookeventresource";
+
 
 
 // WebhookEventCallback
@@ -8,6 +9,6 @@ import { WebhookEventResource } from "./webhookeventresource";
  * 
 **/
 export class WebhookEventCallback extends SpeakeasyBase {
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data: WebhookEventResource;
 }

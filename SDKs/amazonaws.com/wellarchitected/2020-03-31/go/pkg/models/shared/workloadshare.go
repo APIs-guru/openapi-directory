@@ -1,5 +1,7 @@
 package shared
 
+// WorkloadShare
+// A workload share return object.
 type WorkloadShare struct {
 	PermissionType *PermissionTypeEnum `json:"PermissionType,omitempty"`
 	ShareID        *string             `json:"ShareId,omitempty"`

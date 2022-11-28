@@ -1,5 +1,7 @@
 package shared
 
+// CreateIdentityPoolInput
+// Input to the CreateIdentityPool action.
 type CreateIdentityPoolInput struct {
 	AllowClassicFlow               *bool                     `json:"AllowClassicFlow,omitempty"`
 	AllowUnauthenticatedIdentities bool                      `json:"AllowUnauthenticatedIdentities"`

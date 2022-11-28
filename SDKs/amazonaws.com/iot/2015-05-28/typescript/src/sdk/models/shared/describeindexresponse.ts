@@ -1,14 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { IndexStatusEnum } from "./indexstatusenum";
 
 
+
 export class DescribeIndexResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=indexName" })
+  @SpeakeasyMetadata({ data: "json, name=indexName" })
   indexName?: string;
 
-  @Metadata({ data: "json, name=indexStatus" })
+  @SpeakeasyMetadata({ data: "json, name=indexStatus" })
   indexStatus?: IndexStatusEnum;
 
-  @Metadata({ data: "json, name=schema" })
+  @SpeakeasyMetadata({ data: "json, name=schema" })
   schema?: string;
 }

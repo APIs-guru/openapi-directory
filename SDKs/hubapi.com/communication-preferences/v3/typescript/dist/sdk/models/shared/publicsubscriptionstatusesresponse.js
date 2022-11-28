@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { PublicSubscriptionStatus } from "./publicsubscriptionstatus";
 // PublicSubscriptionStatusesResponse
 /**
  * A collection of subscription statuses for a contact.
@@ -34,11 +34,11 @@ var PublicSubscriptionStatusesResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=recipient" }),
+        SpeakeasyMetadata({ data: "json, name=recipient" }),
         __metadata("design:type", String)
     ], PublicSubscriptionStatusesResponse.prototype, "recipient", void 0);
     __decorate([
-        Metadata({ data: "json, name=subscriptionStatuses", elemType: shared.PublicSubscriptionStatus }),
+        SpeakeasyMetadata({ data: "json, name=subscriptionStatuses", elemType: PublicSubscriptionStatus }),
         __metadata("design:type", Array)
     ], PublicSubscriptionStatusesResponse.prototype, "subscriptionStatuses", void 0);
     return PublicSubscriptionStatusesResponse;

@@ -1,12 +1,13 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Buyer } from "./buyer";
 import { Seller } from "./seller";
 
 
+
 export class MarketplaceDealParty extends SpeakeasyBase {
-  @Metadata({ data: "json, name=buyer" })
+  @SpeakeasyMetadata({ data: "json, name=buyer" })
   buyer?: Buyer;
 
-  @Metadata({ data: "json, name=seller" })
+  @SpeakeasyMetadata({ data: "json, name=seller" })
   seller?: Seller;
 }

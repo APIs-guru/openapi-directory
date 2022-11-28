@@ -1,9 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum PhoneNumberTypeEnum {
-    Other = "OTHER"
-,    Mobile = "MOBILE"
-,    Office = "OFFICE"
+    Other = "OTHER",
+    Mobile = "MOBILE",
+    Office = "OFFICE"
 }
 
 
@@ -12,9 +13,9 @@ export enum PhoneNumberTypeEnum {
  * A person's Phone Number
 **/
 export class PhoneNumber extends SpeakeasyBase {
-  @Metadata({ data: "json, name=phoneNumber" })
+  @SpeakeasyMetadata({ data: "json, name=phoneNumber" })
   phoneNumber?: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: PhoneNumberTypeEnum;
 }

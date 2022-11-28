@@ -10,8 +10,8 @@ class PostSigninRequest:
 
 @dataclass
 class PostSigninResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     invalid_token: Optional[shared.InvalidToken] = field(default=None)
     key_failure: Optional[shared.KeyFailure] = field(default=None)
     signin_response: Optional[shared.SigninResponse] = field(default=None)

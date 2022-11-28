@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var CertificatemanagerProjectsLocationsCertificateMapsCreatePathParams = /** @class */ (function (_super) {
     __extends(CertificatemanagerProjectsLocationsCertificateMapsCreatePathParams, _super);
@@ -30,7 +30,7 @@ var CertificatemanagerProjectsLocationsCertificateMapsCreatePathParams = /** @cl
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=parent" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=parent" }),
         __metadata("design:type", String)
     ], CertificatemanagerProjectsLocationsCertificateMapsCreatePathParams.prototype, "parent", void 0);
     return CertificatemanagerProjectsLocationsCertificateMapsCreatePathParams;
@@ -42,51 +42,51 @@ var CertificatemanagerProjectsLocationsCertificateMapsCreateQueryParams = /** @c
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=$.xgafv" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=$.xgafv" }),
         __metadata("design:type", String)
     ], CertificatemanagerProjectsLocationsCertificateMapsCreateQueryParams.prototype, "dollarXgafv", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=access_token" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=access_token" }),
         __metadata("design:type", String)
     ], CertificatemanagerProjectsLocationsCertificateMapsCreateQueryParams.prototype, "accessToken", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=alt" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=alt" }),
         __metadata("design:type", String)
     ], CertificatemanagerProjectsLocationsCertificateMapsCreateQueryParams.prototype, "alt", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=callback" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=callback" }),
         __metadata("design:type", String)
     ], CertificatemanagerProjectsLocationsCertificateMapsCreateQueryParams.prototype, "callback", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=certificateMapId" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=certificateMapId" }),
         __metadata("design:type", String)
     ], CertificatemanagerProjectsLocationsCertificateMapsCreateQueryParams.prototype, "certificateMapId", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=fields" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=fields" }),
         __metadata("design:type", String)
     ], CertificatemanagerProjectsLocationsCertificateMapsCreateQueryParams.prototype, "fields", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=key" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=key" }),
         __metadata("design:type", String)
     ], CertificatemanagerProjectsLocationsCertificateMapsCreateQueryParams.prototype, "key", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=oauth_token" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=oauth_token" }),
         __metadata("design:type", String)
     ], CertificatemanagerProjectsLocationsCertificateMapsCreateQueryParams.prototype, "oauthToken", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=prettyPrint" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=prettyPrint" }),
         __metadata("design:type", Boolean)
     ], CertificatemanagerProjectsLocationsCertificateMapsCreateQueryParams.prototype, "prettyPrint", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=quotaUser" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=quotaUser" }),
         __metadata("design:type", String)
     ], CertificatemanagerProjectsLocationsCertificateMapsCreateQueryParams.prototype, "quotaUser", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=uploadType" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=uploadType" }),
         __metadata("design:type", String)
     ], CertificatemanagerProjectsLocationsCertificateMapsCreateQueryParams.prototype, "uploadType", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=upload_protocol" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=upload_protocol" }),
         __metadata("design:type", String)
     ], CertificatemanagerProjectsLocationsCertificateMapsCreateQueryParams.prototype, "uploadProtocol", void 0);
     return CertificatemanagerProjectsLocationsCertificateMapsCreateQueryParams;
@@ -98,11 +98,11 @@ var CertificatemanagerProjectsLocationsCertificateMapsCreateSecurity = /** @clas
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2)
     ], CertificatemanagerProjectsLocationsCertificateMapsCreateSecurity.prototype, "oauth2", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2c)
     ], CertificatemanagerProjectsLocationsCertificateMapsCreateSecurity.prototype, "oauth2c", void 0);
     return CertificatemanagerProjectsLocationsCertificateMapsCreateSecurity;
@@ -114,19 +114,19 @@ var CertificatemanagerProjectsLocationsCertificateMapsCreateRequest = /** @class
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", CertificatemanagerProjectsLocationsCertificateMapsCreatePathParams)
     ], CertificatemanagerProjectsLocationsCertificateMapsCreateRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", CertificatemanagerProjectsLocationsCertificateMapsCreateQueryParams)
     ], CertificatemanagerProjectsLocationsCertificateMapsCreateRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
-        __metadata("design:type", shared.CertificateMap)
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
+        __metadata("design:type", shared.CertificateMapInput)
     ], CertificatemanagerProjectsLocationsCertificateMapsCreateRequest.prototype, "request", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", CertificatemanagerProjectsLocationsCertificateMapsCreateSecurity)
     ], CertificatemanagerProjectsLocationsCertificateMapsCreateRequest.prototype, "security", void 0);
     return CertificatemanagerProjectsLocationsCertificateMapsCreateRequest;
@@ -138,15 +138,15 @@ var CertificatemanagerProjectsLocationsCertificateMapsCreateResponse = /** @clas
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], CertificatemanagerProjectsLocationsCertificateMapsCreateResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.Operation)
     ], CertificatemanagerProjectsLocationsCertificateMapsCreateResponse.prototype, "operation", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], CertificatemanagerProjectsLocationsCertificateMapsCreateResponse.prototype, "statusCode", void 0);
     return CertificatemanagerProjectsLocationsCertificateMapsCreateResponse;

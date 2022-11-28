@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { EffectiveDeploymentExecutionStatusEnum } from "./effectivedeploymentexecutionstatusenum";
 /**
  * Contains information about a deployment job that IoT Greengrass sends to a Greengrass core device.

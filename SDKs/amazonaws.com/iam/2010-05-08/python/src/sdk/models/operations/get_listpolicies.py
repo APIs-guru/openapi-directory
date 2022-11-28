@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetListPoliciesActionEnum(str, Enum):
     LIST_POLICIES = "ListPolicies"
@@ -19,14 +23,14 @@ class GetListPoliciesVersionEnum(str, Enum):
 
 @dataclass
 class GetListPoliciesQueryParams:
-    action: GetListPoliciesActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetListPoliciesActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: GetListPoliciesVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     marker: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'Marker', 'style': 'form', 'explode': True }})
     max_items: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'MaxItems', 'style': 'form', 'explode': True }})
     only_attached: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'OnlyAttached', 'style': 'form', 'explode': True }})
     path_prefix: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'PathPrefix', 'style': 'form', 'explode': True }})
     policy_usage_filter: Optional[GetListPoliciesPolicyUsageFilterEnum] = field(default=None, metadata={'query_param': { 'field_name': 'PolicyUsageFilter', 'style': 'form', 'explode': True }})
     scope: Optional[GetListPoliciesScopeEnum] = field(default=None, metadata={'query_param': { 'field_name': 'Scope', 'style': 'form', 'explode': True }})
-    version: GetListPoliciesVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -42,13 +46,13 @@ class GetListPoliciesHeaders:
 
 @dataclass
 class GetListPoliciesRequest:
-    query_params: GetListPoliciesQueryParams = field(default=None)
-    headers: GetListPoliciesHeaders = field(default=None)
+    headers: GetListPoliciesHeaders = field()
+    query_params: GetListPoliciesQueryParams = field()
     
 
 @dataclass
 class GetListPoliciesResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { JobRun } from "./jobrun";
+
 
 
 // ListJobRunsResponse
@@ -8,12 +8,12 @@ import { JobRun } from "./jobrun";
  * ListJobRunsResponse is the response object returned by `ListJobRuns`.
 **/
 export class ListJobRunsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=jobRuns", elemType: shared.JobRun })
+  @SpeakeasyMetadata({ data: "json, name=jobRuns", elemType: JobRun })
   jobRuns?: JobRun[];
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 
-  @Metadata({ data: "json, name=unreachable" })
+  @SpeakeasyMetadata({ data: "json, name=unreachable" })
   unreachable?: string[];
 }

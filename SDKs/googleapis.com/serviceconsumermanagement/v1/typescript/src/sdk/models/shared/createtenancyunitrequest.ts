@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // CreateTenancyUnitRequest
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Request to create a tenancy unit for a service consumer of a managed service.
 **/
 export class CreateTenancyUnitRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=tenancyUnitId" })
+  @SpeakeasyMetadata({ data: "json, name=tenancyUnitId" })
   tenancyUnitId?: string;
 }

@@ -1,6 +1,7 @@
 
 
+
 export enum QualificationStatusEnum {
-    Granted = "Granted"
-,    Revoked = "Revoked"
+    Granted = "Granted",
+    Revoked = "Revoked"
 }

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // InstanceSummary
 /**
  * A complex type that contains information about the instances that you registered by using a specified service.
@@ -33,11 +33,11 @@ var InstanceSummary = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Attributes" }),
+        SpeakeasyMetadata({ data: "json, name=Attributes" }),
         __metadata("design:type", Map)
     ], InstanceSummary.prototype, "attributes", void 0);
     __decorate([
-        Metadata({ data: "json, name=Id" }),
+        SpeakeasyMetadata({ data: "json, name=Id" }),
         __metadata("design:type", String)
     ], InstanceSummary.prototype, "id", void 0);
     return InstanceSummary;

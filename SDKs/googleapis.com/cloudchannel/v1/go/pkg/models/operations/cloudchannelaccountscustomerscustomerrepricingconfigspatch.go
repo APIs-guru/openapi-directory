@@ -31,7 +31,7 @@ type CloudchannelAccountsCustomersCustomerRepricingConfigsPatchSecurity struct {
 type CloudchannelAccountsCustomersCustomerRepricingConfigsPatchRequest struct {
 	PathParams  CloudchannelAccountsCustomersCustomerRepricingConfigsPatchPathParams
 	QueryParams CloudchannelAccountsCustomersCustomerRepricingConfigsPatchQueryParams
-	Request     *shared.GoogleCloudChannelV1CustomerRepricingConfig `request:"mediaType=application/json"`
+	Request     *shared.GoogleCloudChannelV1CustomerRepricingConfigInput `request:"mediaType=application/json"`
 	Security    CloudchannelAccountsCustomersCustomerRepricingConfigsPatchSecurity
 }
 

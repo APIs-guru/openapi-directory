@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class RetrieveAMediaItemResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     media: Optional[shared.Media] = field(default=None)
-    status_code: int = field(default=None)
     

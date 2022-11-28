@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DrivelabelsUsersGetCapabilitiesPathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 class DrivelabelsUsersGetCapabilitiesViewEnum(str, Enum):
     LABEL_VIEW_BASIC = "LABEL_VIEW_BASIC"
@@ -32,13 +33,13 @@ class DrivelabelsUsersGetCapabilitiesQueryParams:
 
 @dataclass
 class DrivelabelsUsersGetCapabilitiesRequest:
-    path_params: DrivelabelsUsersGetCapabilitiesPathParams = field(default=None)
-    query_params: DrivelabelsUsersGetCapabilitiesQueryParams = field(default=None)
+    path_params: DrivelabelsUsersGetCapabilitiesPathParams = field()
+    query_params: DrivelabelsUsersGetCapabilitiesQueryParams = field()
     
 
 @dataclass
 class DrivelabelsUsersGetCapabilitiesResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_apps_drive_labels_v2beta_user_capabilities: Optional[shared.GoogleAppsDriveLabelsV2betaUserCapabilities] = field(default=None)
-    status_code: int = field(default=None)
     

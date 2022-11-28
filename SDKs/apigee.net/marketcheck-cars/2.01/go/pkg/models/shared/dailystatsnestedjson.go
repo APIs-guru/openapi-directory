@@ -1,5 +1,7 @@
 package shared
 
+// DailyStatsNestedJSON
+// All nested JSON of stats
 type DailyStatsNestedJSON struct {
 	InterquartileRange          *float64 `json:"interquartile_range,omitempty"`
 	Mean                        *float64 `json:"mean,omitempty"`

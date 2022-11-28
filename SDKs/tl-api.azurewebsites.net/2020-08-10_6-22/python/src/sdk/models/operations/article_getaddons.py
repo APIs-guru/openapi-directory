@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import List,Optional
+from typing import Optional
 from sdk.models import shared
 
 
@@ -14,13 +14,13 @@ class ArticleGetAddonsQueryParams:
 
 @dataclass
 class ArticleGetAddonsRequest:
-    query_params: ArticleGetAddonsQueryParams = field(default=None)
+    query_params: ArticleGetAddonsQueryParams = field()
     
 
 @dataclass
 class ArticleGetAddonsResponse:
+    content_type: str = field()
+    status_code: int = field()
     api_response: Optional[shared.APIResponse] = field(default=None)
-    content_type: str = field(default=None)
     default_response_dto_of_list_of_article_search_dto: Optional[shared.DefaultResponseDtoOfListOfArticleSearchDto] = field(default=None)
-    status_code: int = field(default=None)
     

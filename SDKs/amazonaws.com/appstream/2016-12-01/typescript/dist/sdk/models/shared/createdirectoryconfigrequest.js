@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ServiceAccountCredentials } from "./serviceaccountcredentials";
 var CreateDirectoryConfigRequest = /** @class */ (function (_super) {
     __extends(CreateDirectoryConfigRequest, _super);
@@ -30,15 +30,15 @@ var CreateDirectoryConfigRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=DirectoryName" }),
+        SpeakeasyMetadata({ data: "json, name=DirectoryName" }),
         __metadata("design:type", String)
     ], CreateDirectoryConfigRequest.prototype, "directoryName", void 0);
     __decorate([
-        Metadata({ data: "json, name=OrganizationalUnitDistinguishedNames" }),
+        SpeakeasyMetadata({ data: "json, name=OrganizationalUnitDistinguishedNames" }),
         __metadata("design:type", Array)
     ], CreateDirectoryConfigRequest.prototype, "organizationalUnitDistinguishedNames", void 0);
     __decorate([
-        Metadata({ data: "json, name=ServiceAccountCredentials" }),
+        SpeakeasyMetadata({ data: "json, name=ServiceAccountCredentials" }),
         __metadata("design:type", ServiceAccountCredentials)
     ], CreateDirectoryConfigRequest.prototype, "serviceAccountCredentials", void 0);
     return CreateDirectoryConfigRequest;

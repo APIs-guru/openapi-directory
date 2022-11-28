@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { VpcAccessibleServices } from "./vpcaccessibleservices";
+
 
 
 // ServicePerimeterConfig
@@ -7,18 +8,18 @@ import { VpcAccessibleServices } from "./vpcaccessibleservices";
  * `ServicePerimeterConfig` specifies a set of Google Cloud resources that describe specific Service Perimeter configuration.
 **/
 export class ServicePerimeterConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=accessLevels" })
+  @SpeakeasyMetadata({ data: "json, name=accessLevels" })
   accessLevels?: string[];
 
-  @Metadata({ data: "json, name=resources" })
+  @SpeakeasyMetadata({ data: "json, name=resources" })
   resources?: string[];
 
-  @Metadata({ data: "json, name=restrictedServices" })
+  @SpeakeasyMetadata({ data: "json, name=restrictedServices" })
   restrictedServices?: string[];
 
-  @Metadata({ data: "json, name=unrestrictedServices" })
+  @SpeakeasyMetadata({ data: "json, name=unrestrictedServices" })
   unrestrictedServices?: string[];
 
-  @Metadata({ data: "json, name=vpcAccessibleServices" })
+  @SpeakeasyMetadata({ data: "json, name=vpcAccessibleServices" })
   vpcAccessibleServices?: VpcAccessibleServices;
 }

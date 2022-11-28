@@ -1,7 +1,20 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { MoreHoursType } from "./morehourstype";
 import { ServiceType } from "./servicetype";
+
+
+
+// CategoryInput
+/** 
+ * A category describing what this business is (not what it does). For a list of valid category IDs, and the mappings to their human-readable names, see [categories.list](https://developers.google.com/my-business/reference/rest/v4/categories/list).
+**/
+export class CategoryInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=categoryId" })
+  categoryId?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
+  displayName?: string;
+}
 
 
 // Category
@@ -9,15 +22,15 @@ import { ServiceType } from "./servicetype";
  * A category describing what this business is (not what it does). For a list of valid category IDs, and the mappings to their human-readable names, see [categories.list](https://developers.google.com/my-business/reference/rest/v4/categories/list).
 **/
 export class Category extends SpeakeasyBase {
-  @Metadata({ data: "json, name=categoryId" })
+  @SpeakeasyMetadata({ data: "json, name=categoryId" })
   categoryId?: string;
 
-  @Metadata({ data: "json, name=displayName" })
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
   displayName?: string;
 
-  @Metadata({ data: "json, name=moreHoursTypes", elemType: shared.MoreHoursType })
+  @SpeakeasyMetadata({ data: "json, name=moreHoursTypes", elemType: MoreHoursType })
   moreHoursTypes?: MoreHoursType[];
 
-  @Metadata({ data: "json, name=serviceTypes", elemType: shared.ServiceType })
+  @SpeakeasyMetadata({ data: "json, name=serviceTypes", elemType: ServiceType })
   serviceTypes?: ServiceType[];
 }

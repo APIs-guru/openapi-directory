@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { OrderByEnum } from "./orderbyenum";
 var DescribeLogStreamsRequest = /** @class */ (function (_super) {
     __extends(DescribeLogStreamsRequest, _super);
@@ -30,27 +30,27 @@ var DescribeLogStreamsRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=descending" }),
+        SpeakeasyMetadata({ data: "json, name=descending" }),
         __metadata("design:type", Boolean)
     ], DescribeLogStreamsRequest.prototype, "descending", void 0);
     __decorate([
-        Metadata({ data: "json, name=limit" }),
+        SpeakeasyMetadata({ data: "json, name=limit" }),
         __metadata("design:type", Number)
     ], DescribeLogStreamsRequest.prototype, "limit", void 0);
     __decorate([
-        Metadata({ data: "json, name=logGroupName" }),
+        SpeakeasyMetadata({ data: "json, name=logGroupName" }),
         __metadata("design:type", String)
     ], DescribeLogStreamsRequest.prototype, "logGroupName", void 0);
     __decorate([
-        Metadata({ data: "json, name=logStreamNamePrefix" }),
+        SpeakeasyMetadata({ data: "json, name=logStreamNamePrefix" }),
         __metadata("design:type", String)
     ], DescribeLogStreamsRequest.prototype, "logStreamNamePrefix", void 0);
     __decorate([
-        Metadata({ data: "json, name=nextToken" }),
+        SpeakeasyMetadata({ data: "json, name=nextToken" }),
         __metadata("design:type", String)
     ], DescribeLogStreamsRequest.prototype, "nextToken", void 0);
     __decorate([
-        Metadata({ data: "json, name=orderBy" }),
+        SpeakeasyMetadata({ data: "json, name=orderBy" }),
         __metadata("design:type", String)
     ], DescribeLogStreamsRequest.prototype, "orderBy", void 0);
     return DescribeLogStreamsRequest;

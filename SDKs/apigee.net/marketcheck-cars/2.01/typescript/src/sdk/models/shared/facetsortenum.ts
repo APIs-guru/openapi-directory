@@ -1,6 +1,7 @@
 
 
+
 export enum FacetSortEnum {
-    Count = "count"
-,    Index = "index"
+    Count = "count",
+    Index = "index"
 }

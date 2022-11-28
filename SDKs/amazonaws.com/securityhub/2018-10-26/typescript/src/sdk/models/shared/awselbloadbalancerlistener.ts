@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AwsElbLoadBalancerListener
@@ -6,18 +7,18 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Information about a load balancer listener.
 **/
 export class AwsElbLoadBalancerListener extends SpeakeasyBase {
-  @Metadata({ data: "json, name=InstancePort" })
+  @SpeakeasyMetadata({ data: "json, name=InstancePort" })
   instancePort?: number;
 
-  @Metadata({ data: "json, name=InstanceProtocol" })
+  @SpeakeasyMetadata({ data: "json, name=InstanceProtocol" })
   instanceProtocol?: string;
 
-  @Metadata({ data: "json, name=LoadBalancerPort" })
+  @SpeakeasyMetadata({ data: "json, name=LoadBalancerPort" })
   loadBalancerPort?: number;
 
-  @Metadata({ data: "json, name=Protocol" })
+  @SpeakeasyMetadata({ data: "json, name=Protocol" })
   protocol?: string;
 
-  @Metadata({ data: "json, name=SslCertificateId" })
+  @SpeakeasyMetadata({ data: "json, name=SslCertificateId" })
   sslCertificateId?: string;
 }

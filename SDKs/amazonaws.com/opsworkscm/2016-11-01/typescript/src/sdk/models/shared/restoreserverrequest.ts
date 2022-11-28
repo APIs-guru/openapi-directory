@@ -1,16 +1,17 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class RestoreServerRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=BackupId" })
+  @SpeakeasyMetadata({ data: "json, name=BackupId" })
   backupId: string;
 
-  @Metadata({ data: "json, name=InstanceType" })
+  @SpeakeasyMetadata({ data: "json, name=InstanceType" })
   instanceType?: string;
 
-  @Metadata({ data: "json, name=KeyPair" })
+  @SpeakeasyMetadata({ data: "json, name=KeyPair" })
   keyPair?: string;
 
-  @Metadata({ data: "json, name=ServerName" })
+  @SpeakeasyMetadata({ data: "json, name=ServerName" })
   serverName: string;
 }

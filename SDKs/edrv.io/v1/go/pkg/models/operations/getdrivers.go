@@ -21,14 +21,14 @@ type GetDriversQueryParams struct {
 	UpdatedAtDollarLte  *time.Time             `queryParam:"style=form,explode=true,name=updatedAt[$lte]"`
 }
 
-type GetDriversRequest struct {
-	QueryParams GetDriversQueryParams
-}
-
 type GetDrivers200ApplicationJSON struct {
 	Message *string       `json:"message,omitempty"`
 	Ok      *bool         `json:"ok,omitempty"`
 	Result  []interface{} `json:"result,omitempty"`
+}
+
+type GetDriversRequest struct {
+	QueryParams GetDriversQueryParams
 }
 
 type GetDriversResponse struct {

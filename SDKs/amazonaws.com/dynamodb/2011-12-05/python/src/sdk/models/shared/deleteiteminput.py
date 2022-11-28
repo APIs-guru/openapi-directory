@@ -1,16 +1,16 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import expectedattributevalue
-from . import key
-from . import returnvalue_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class DeleteItemInput:
-    expected: Optional[dict[str, expectedattributevalue.ExpectedAttributeValue]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Expected' }})
-    key: key.Key = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Key' }})
-    return_values: Optional[returnvalue_enum.ReturnValueEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ReturnValues' }})
-    table_name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'TableName' }})
+    key: Key = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Key') }})
+    table_name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('TableName') }})
+    expected: Optional[dict[str, ExpectedAttributeValue]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Expected') }})
+    return_values: Optional[ReturnValueEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ReturnValues') }})
     

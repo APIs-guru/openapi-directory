@@ -1,11 +1,15 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import firewallrulegroupassociation
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class UpdateFirewallRuleGroupAssociationResponse:
-    firewall_rule_group_association: Optional[firewallrulegroupassociation.FirewallRuleGroupAssociation] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FirewallRuleGroupAssociation' }})
+    firewall_rule_group_association: Optional[FirewallRuleGroupAssociation] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('FirewallRuleGroupAssociation') }})
     

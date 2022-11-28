@@ -30,7 +30,7 @@ type BaremetalsolutionProjectsLocationsProvisioningConfigsSubmitSecurity struct 
 type BaremetalsolutionProjectsLocationsProvisioningConfigsSubmitRequest struct {
 	PathParams  BaremetalsolutionProjectsLocationsProvisioningConfigsSubmitPathParams
 	QueryParams BaremetalsolutionProjectsLocationsProvisioningConfigsSubmitQueryParams
-	Request     *shared.SubmitProvisioningConfigRequest `request:"mediaType=application/json"`
+	Request     *shared.SubmitProvisioningConfigRequestInput `request:"mediaType=application/json"`
 	Security    BaremetalsolutionProjectsLocationsProvisioningConfigsSubmitSecurity
 }
 

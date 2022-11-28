@@ -1,19 +1,20 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class TopModelEntry extends SpeakeasyBase {
-  @Metadata({ data: "json, name=brandMarketShare" })
+  @SpeakeasyMetadata({ data: "json, name=brandMarketShare" })
   brandMarketShare: number;
 
-  @Metadata({ data: "json, name=brandName" })
+  @SpeakeasyMetadata({ data: "json, name=brandName" })
   brandName: string;
 
-  @Metadata({ data: "json, name=modelName" })
+  @SpeakeasyMetadata({ data: "json, name=modelName" })
   modelName: string;
 
-  @Metadata({ data: "json, name=percentOfBrandSales" })
+  @SpeakeasyMetadata({ data: "json, name=percentOfBrandSales" })
   percentOfBrandSales: number;
 
-  @Metadata({ data: "json, name=percentOfTopSales" })
+  @SpeakeasyMetadata({ data: "json, name=percentOfTopSales" })
   percentOfTopSales: number;
 }

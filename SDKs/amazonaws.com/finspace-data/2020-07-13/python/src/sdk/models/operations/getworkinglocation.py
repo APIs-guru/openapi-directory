@@ -1,6 +1,11 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -22,22 +27,22 @@ class GetWorkingLocationRequestBodyLocationTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class GetWorkingLocationRequestBody:
-    location_type: Optional[GetWorkingLocationRequestBodyLocationTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'locationType' }})
+    location_type: Optional[GetWorkingLocationRequestBodyLocationTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('locationType') }})
     
 
 @dataclass
 class GetWorkingLocationRequest:
-    headers: GetWorkingLocationHeaders = field(default=None)
-    request: GetWorkingLocationRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: GetWorkingLocationHeaders = field()
+    request: GetWorkingLocationRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class GetWorkingLocationResponse:
+    content_type: str = field()
+    status_code: int = field()
     access_denied_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     get_working_location_response: Optional[shared.GetWorkingLocationResponse] = field(default=None)
     internal_server_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     validation_exception: Optional[Any] = field(default=None)
     

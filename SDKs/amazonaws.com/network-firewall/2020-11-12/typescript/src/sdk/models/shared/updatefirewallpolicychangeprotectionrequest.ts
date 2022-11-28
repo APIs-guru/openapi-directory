@@ -1,16 +1,17 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class UpdateFirewallPolicyChangeProtectionRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=FirewallArn" })
+  @SpeakeasyMetadata({ data: "json, name=FirewallArn" })
   firewallArn?: string;
 
-  @Metadata({ data: "json, name=FirewallName" })
+  @SpeakeasyMetadata({ data: "json, name=FirewallName" })
   firewallName?: string;
 
-  @Metadata({ data: "json, name=FirewallPolicyChangeProtection" })
+  @SpeakeasyMetadata({ data: "json, name=FirewallPolicyChangeProtection" })
   firewallPolicyChangeProtection: boolean;
 
-  @Metadata({ data: "json, name=UpdateToken" })
+  @SpeakeasyMetadata({ data: "json, name=UpdateToken" })
   updateToken?: string;
 }

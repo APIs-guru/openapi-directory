@@ -1,77 +1,78 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class DeleteSavedQueryQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, serialization=json;name=q" })
+  @SpeakeasyMetadata({ data: "queryParam, serialization=json;name=q" })
   q?: number[];
 }
 
 
 export class DeleteSavedQuerySecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=bearer" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" })
   jwt: shared.SchemeJwt;
 }
 
 
-export class DeleteSavedQueryRequest extends SpeakeasyBase {
-  @Metadata()
-  queryParams: DeleteSavedQueryQueryParams;
-
-  @Metadata()
-  security: DeleteSavedQuerySecurity;
-}
-
-
 export class DeleteSavedQuery200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class DeleteSavedQuery401ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class DeleteSavedQuery404ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class DeleteSavedQuery422ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class DeleteSavedQuery500ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
+export class DeleteSavedQueryRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  queryParams: DeleteSavedQueryQueryParams;
+
+  @SpeakeasyMetadata()
+  security: DeleteSavedQuerySecurity;
+}
+
+
 export class DeleteSavedQueryResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   deleteSavedQuery200ApplicationJsonObject?: DeleteSavedQuery200ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   deleteSavedQuery401ApplicationJsonObject?: DeleteSavedQuery401ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   deleteSavedQuery404ApplicationJsonObject?: DeleteSavedQuery404ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   deleteSavedQuery422ApplicationJsonObject?: DeleteSavedQuery422ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   deleteSavedQuery500ApplicationJsonObject?: DeleteSavedQuery500ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

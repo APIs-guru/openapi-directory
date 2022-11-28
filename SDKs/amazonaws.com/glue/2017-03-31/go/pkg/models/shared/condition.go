@@ -1,5 +1,7 @@
 package shared
 
+// Condition
+// Defines a condition under which a trigger fires.
 type Condition struct {
 	CrawlState      *CrawlStateEnum      `json:"CrawlState,omitempty"`
 	CrawlerName     *string              `json:"CrawlerName,omitempty"`

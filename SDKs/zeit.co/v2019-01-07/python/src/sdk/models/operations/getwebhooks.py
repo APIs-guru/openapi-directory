@@ -9,12 +9,12 @@ class GetWebhooksQueryParams:
 
 @dataclass
 class GetWebhooksRequest:
-    query_params: GetWebhooksQueryParams = field(default=None)
+    query_params: GetWebhooksQueryParams = field()
     
 
 @dataclass
 class GetWebhooksResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     webhooks: Optional[List[Any]] = field(default=None)
     

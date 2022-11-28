@@ -1,4 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { NestedRole } from "./nestedrole";
 import { NestedSite } from "./nestedsite";
 import { NestedTenant } from "./nestedtenant";
@@ -6,58 +6,59 @@ import { NestedVlan } from "./nestedvlan";
 import { NestedVrf } from "./nestedvrf";
 
 
+
 export class PrefixStatus extends SpeakeasyBase {
-  @Metadata({ data: "json, name=label" })
+  @SpeakeasyMetadata({ data: "json, name=label" })
   label: string;
 
-  @Metadata({ data: "json, name=value" })
+  @SpeakeasyMetadata({ data: "json, name=value" })
   value: number;
 }
 
 
 export class Prefix extends SpeakeasyBase {
-  @Metadata({ data: "json, name=created" })
+  @SpeakeasyMetadata({ data: "json, name=created" })
   created?: Date;
 
-  @Metadata({ data: "json, name=custom_fields" })
+  @SpeakeasyMetadata({ data: "json, name=custom_fields" })
   customFields?: Map<string, any>;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=family" })
+  @SpeakeasyMetadata({ data: "json, name=family" })
   family?: number;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: number;
 
-  @Metadata({ data: "json, name=is_pool" })
+  @SpeakeasyMetadata({ data: "json, name=is_pool" })
   isPool?: boolean;
 
-  @Metadata({ data: "json, name=last_updated" })
+  @SpeakeasyMetadata({ data: "json, name=last_updated" })
   lastUpdated?: Date;
 
-  @Metadata({ data: "json, name=prefix" })
+  @SpeakeasyMetadata({ data: "json, name=prefix" })
   prefix: string;
 
-  @Metadata({ data: "json, name=role" })
+  @SpeakeasyMetadata({ data: "json, name=role" })
   role?: NestedRole;
 
-  @Metadata({ data: "json, name=site" })
+  @SpeakeasyMetadata({ data: "json, name=site" })
   site?: NestedSite;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: PrefixStatus;
 
-  @Metadata({ data: "json, name=tags" })
+  @SpeakeasyMetadata({ data: "json, name=tags" })
   tags?: string[];
 
-  @Metadata({ data: "json, name=tenant" })
+  @SpeakeasyMetadata({ data: "json, name=tenant" })
   tenant?: NestedTenant;
 
-  @Metadata({ data: "json, name=vlan" })
+  @SpeakeasyMetadata({ data: "json, name=vlan" })
   vlan?: NestedVlan;
 
-  @Metadata({ data: "json, name=vrf" })
+  @SpeakeasyMetadata({ data: "json, name=vrf" })
   vrf?: NestedVrf;
 }

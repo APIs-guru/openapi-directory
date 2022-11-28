@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // VmImage
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Definition of a custom Compute Engine virtual machine image for starting a notebook instance with the environment installed directly on the VM.
 **/
 export class VmImage extends SpeakeasyBase {
-  @Metadata({ data: "json, name=imageFamily" })
+  @SpeakeasyMetadata({ data: "json, name=imageFamily" })
   imageFamily?: string;
 
-  @Metadata({ data: "json, name=imageName" })
+  @SpeakeasyMetadata({ data: "json, name=imageName" })
   imageName?: string;
 
-  @Metadata({ data: "json, name=project" })
+  @SpeakeasyMetadata({ data: "json, name=project" })
   project?: string;
 }

@@ -8,16 +8,14 @@ type APIInformationsPathParams struct {
 	EndpointName string `pathParam:"style=simple,explode=false,name=endpointName"`
 }
 
-type APIInformationsRequest struct {
-	PathParams APIInformationsPathParams
-}
-
 type APIInformations200ApplicationJSONActionEnum string
 
 const (
 	APIInformations200ApplicationJSONActionEnumAPIInformations APIInformations200ApplicationJSONActionEnum = "apiInformations"
 )
 
+// APIInformations200ApplicationJSONDataEndpoints
+// Supported path and version for that endpoint
 type APIInformations200ApplicationJSONDataEndpoints struct {
 	HTTPVerb *interface{}       `json:"httpVerb,omitempty"`
 	Version  *shared.APIVersion `json:"version,omitempty"`
@@ -40,6 +38,10 @@ type APIInformations200ApplicationJSON struct {
 	Action APIInformations200ApplicationJSONActionEnum `json:"action"`
 	Data   APIInformations200ApplicationJSONData       `json:"data"`
 	Result APIInformations200ApplicationJSONResultEnum `json:"result"`
+}
+
+type APIInformationsRequest struct {
+	PathParams APIInformationsPathParams
 }
 
 type APIInformationsResponse struct {

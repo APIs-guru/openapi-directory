@@ -1,40 +1,40 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { VsoPlanInfo } from "./vsoplaninfo";
 import { EnvironmentUsage } from "./environmentusage";
 
 
+
 export class BillSummary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=billGenerationTime" })
+  @SpeakeasyMetadata({ data: "json, name=billGenerationTime" })
   billGenerationTime?: Date;
 
-  @Metadata({ data: "json, name=environmentId" })
+  @SpeakeasyMetadata({ data: "json, name=environmentId" })
   environmentId?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=isFinalBill" })
+  @SpeakeasyMetadata({ data: "json, name=isFinalBill" })
   isFinalBill?: boolean;
 
-  @Metadata({ data: "json, name=partitionKey" })
+  @SpeakeasyMetadata({ data: "json, name=partitionKey" })
   partitionKey?: string;
 
-  @Metadata({ data: "json, name=periodEnd" })
+  @SpeakeasyMetadata({ data: "json, name=periodEnd" })
   periodEnd?: Date;
 
-  @Metadata({ data: "json, name=periodStart" })
+  @SpeakeasyMetadata({ data: "json, name=periodStart" })
   periodStart?: Date;
 
-  @Metadata({ data: "json, name=plan" })
+  @SpeakeasyMetadata({ data: "json, name=plan" })
   plan?: VsoPlanInfo;
 
-  @Metadata({ data: "json, name=planIsDeleted" })
+  @SpeakeasyMetadata({ data: "json, name=planIsDeleted" })
   planIsDeleted?: boolean;
 
-  @Metadata({ data: "json, name=usage" })
+  @SpeakeasyMetadata({ data: "json, name=usage" })
   usage?: Map<string, number>;
 
-  @Metadata({ data: "json, name=usageDetail", elemType: shared.EnvironmentUsage })
+  @SpeakeasyMetadata({ data: "json, name=usageDetail", elemType: EnvironmentUsage })
   usageDetail?: EnvironmentUsage[];
 }

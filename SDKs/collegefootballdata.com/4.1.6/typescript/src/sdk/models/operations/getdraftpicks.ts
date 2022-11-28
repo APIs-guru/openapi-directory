@@ -1,38 +1,39 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetDraftPicksQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=college" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=college" })
   college?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=conference" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=conference" })
   conference?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=nflTeam" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=nflTeam" })
   nflTeam?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=position" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=position" })
   position?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=year" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=year" })
   year?: number;
 }
 
 
 export class GetDraftPicksRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetDraftPicksQueryParams;
 }
 
 
 export class GetDraftPicksResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata({ elemType: shared.DraftPick })
+  @SpeakeasyMetadata({ elemType: shared.DraftPick })
   draftPicks?: shared.DraftPick[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

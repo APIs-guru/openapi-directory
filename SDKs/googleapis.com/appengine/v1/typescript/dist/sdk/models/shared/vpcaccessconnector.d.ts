@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 export declare enum VpcAccessConnectorEgressSettingEnum {
     EgressSettingUnspecified = "EGRESS_SETTING_UNSPECIFIED",
     AllTraffic = "ALL_TRAFFIC",

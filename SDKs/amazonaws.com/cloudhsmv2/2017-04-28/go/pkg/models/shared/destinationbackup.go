@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// DestinationBackup
+// Contains information about the backup that will be copied and created by the <a>CopyBackupToRegion</a> operation.
 type DestinationBackup struct {
 	CreateTimestamp *time.Time `json:"CreateTimestamp,omitempty"`
 	SourceBackup    *string    `json:"SourceBackup,omitempty"`

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // MetricMatrixRow
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A message representing a row of a matrix of floats.
 **/
 export class MetricMatrixRow extends SpeakeasyBase {
-  @Metadata({ data: "json, name=cols" })
+  @SpeakeasyMetadata({ data: "json, name=cols" })
   cols?: number[];
 }

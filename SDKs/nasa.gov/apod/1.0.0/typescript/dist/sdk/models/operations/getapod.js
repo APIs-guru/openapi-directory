@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetApodQueryParams = /** @class */ (function (_super) {
     __extends(GetApodQueryParams, _super);
@@ -30,11 +30,11 @@ var GetApodQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=date" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=date" }),
         __metadata("design:type", String)
     ], GetApodQueryParams.prototype, "date", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=hd" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=hd" }),
         __metadata("design:type", Boolean)
     ], GetApodQueryParams.prototype, "hd", void 0);
     return GetApodQueryParams;
@@ -46,7 +46,7 @@ var GetApodSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=query" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=query" }),
         __metadata("design:type", shared.SchemeApiKey)
     ], GetApodSecurity.prototype, "apiKey", void 0);
     return GetApodSecurity;
@@ -58,11 +58,11 @@ var GetApodRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetApodQueryParams)
     ], GetApodRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetApodSecurity)
     ], GetApodRequest.prototype, "security", void 0);
     return GetApodRequest;
@@ -74,15 +74,15 @@ var GetApodResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetApodResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Array)
     ], GetApodResponse.prototype, "getApod200ApplicationJsonAnies", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetApodResponse.prototype, "statusCode", void 0);
     return GetApodResponse;

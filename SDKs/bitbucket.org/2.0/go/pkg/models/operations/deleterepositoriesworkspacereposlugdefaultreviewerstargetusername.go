@@ -10,22 +10,10 @@ type DeleteRepositoriesWorkspaceRepoSlugDefaultReviewersTargetUsernamePathParams
 	Workspace      string `pathParam:"style=simple,explode=false,name=workspace"`
 }
 
-type DeleteRepositoriesWorkspaceRepoSlugDefaultReviewersTargetUsernameSecurityOption1 struct {
-	Oauth2 shared.SchemeOauth2 `security:"scheme,type=oauth2"`
-}
-
-type DeleteRepositoriesWorkspaceRepoSlugDefaultReviewersTargetUsernameSecurityOption2 struct {
-	Basic shared.SchemeBasic `security:"scheme,type=http,subtype=basic"`
-}
-
-type DeleteRepositoriesWorkspaceRepoSlugDefaultReviewersTargetUsernameSecurityOption3 struct {
-	APIKey shared.SchemeAPIKey `security:"scheme,type=apiKey,subtype=header"`
-}
-
 type DeleteRepositoriesWorkspaceRepoSlugDefaultReviewersTargetUsernameSecurity struct {
-	Option1 *DeleteRepositoriesWorkspaceRepoSlugDefaultReviewersTargetUsernameSecurityOption1 `security:"option"`
-	Option2 *DeleteRepositoriesWorkspaceRepoSlugDefaultReviewersTargetUsernameSecurityOption2 `security:"option"`
-	Option3 *DeleteRepositoriesWorkspaceRepoSlugDefaultReviewersTargetUsernameSecurityOption3 `security:"option"`
+	Oauth2 *shared.SchemeOauth2 `security:"scheme,type=oauth2"`
+	Basic  *shared.SchemeBasic  `security:"scheme,type=http,subtype=basic"`
+	APIKey *shared.SchemeAPIKey `security:"scheme,type=apiKey,subtype=header"`
 }
 
 type DeleteRepositoriesWorkspaceRepoSlugDefaultReviewersTargetUsernameRequest struct {

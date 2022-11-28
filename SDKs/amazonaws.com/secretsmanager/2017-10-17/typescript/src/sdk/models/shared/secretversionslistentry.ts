@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // SecretVersionsListEntry
@@ -6,18 +7,18 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A structure that contains information about one version of a secret.
 **/
 export class SecretVersionsListEntry extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CreatedDate" })
+  @SpeakeasyMetadata({ data: "json, name=CreatedDate" })
   createdDate?: Date;
 
-  @Metadata({ data: "json, name=KmsKeyIds" })
+  @SpeakeasyMetadata({ data: "json, name=KmsKeyIds" })
   kmsKeyIds?: string[];
 
-  @Metadata({ data: "json, name=LastAccessedDate" })
+  @SpeakeasyMetadata({ data: "json, name=LastAccessedDate" })
   lastAccessedDate?: Date;
 
-  @Metadata({ data: "json, name=VersionId" })
+  @SpeakeasyMetadata({ data: "json, name=VersionId" })
   versionId?: string;
 
-  @Metadata({ data: "json, name=VersionStages" })
+  @SpeakeasyMetadata({ data: "json, name=VersionStages" })
   versionStages?: string[];
 }

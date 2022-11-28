@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class RemotebuildexecutionProjectsInstancesListPathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,20 +26,20 @@ class RemotebuildexecutionProjectsInstancesListQueryParams:
 
 @dataclass
 class RemotebuildexecutionProjectsInstancesListSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class RemotebuildexecutionProjectsInstancesListRequest:
-    path_params: RemotebuildexecutionProjectsInstancesListPathParams = field(default=None)
-    query_params: RemotebuildexecutionProjectsInstancesListQueryParams = field(default=None)
-    security: RemotebuildexecutionProjectsInstancesListSecurity = field(default=None)
+    path_params: RemotebuildexecutionProjectsInstancesListPathParams = field()
+    query_params: RemotebuildexecutionProjectsInstancesListQueryParams = field()
+    security: RemotebuildexecutionProjectsInstancesListSecurity = field()
     
 
 @dataclass
 class RemotebuildexecutionProjectsInstancesListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_devtools_remotebuildexecution_admin_v1alpha_list_instances_response: Optional[shared.GoogleDevtoolsRemotebuildexecutionAdminV1alphaListInstancesResponse] = field(default=None)
-    status_code: int = field(default=None)
     

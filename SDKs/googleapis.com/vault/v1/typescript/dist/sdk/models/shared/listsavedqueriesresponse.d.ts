@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { SavedQuery } from "./savedquery";
 /**
  * Definition of the response for method ListSaveQuery.

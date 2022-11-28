@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetDistrictAdminsQueryParams = /** @class */ (function (_super) {
     __extends(GetDistrictAdminsQueryParams, _super);
@@ -30,15 +30,15 @@ var GetDistrictAdminsQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=ending_before" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=ending_before" }),
         __metadata("design:type", String)
     ], GetDistrictAdminsQueryParams.prototype, "endingBefore", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=show_links" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=show_links" }),
         __metadata("design:type", String)
     ], GetDistrictAdminsQueryParams.prototype, "showLinks", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=starting_after" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=starting_after" }),
         __metadata("design:type", String)
     ], GetDistrictAdminsQueryParams.prototype, "startingAfter", void 0);
     return GetDistrictAdminsQueryParams;
@@ -50,7 +50,7 @@ var GetDistrictAdminsRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetDistrictAdminsQueryParams)
     ], GetDistrictAdminsRequest.prototype, "queryParams", void 0);
     return GetDistrictAdminsRequest;
@@ -62,15 +62,15 @@ var GetDistrictAdminsResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetDistrictAdminsResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.DistrictAdminsResponse)
     ], GetDistrictAdminsResponse.prototype, "districtAdminsResponse", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetDistrictAdminsResponse.prototype, "statusCode", void 0);
     return GetDistrictAdminsResponse;

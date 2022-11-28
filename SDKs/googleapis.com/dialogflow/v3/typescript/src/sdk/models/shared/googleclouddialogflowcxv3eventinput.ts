@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudDialogflowCxV3EventInput
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Represents the event to trigger.
 **/
 export class GoogleCloudDialogflowCxV3EventInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=event" })
+  @SpeakeasyMetadata({ data: "json, name=event" })
   event?: string;
 }

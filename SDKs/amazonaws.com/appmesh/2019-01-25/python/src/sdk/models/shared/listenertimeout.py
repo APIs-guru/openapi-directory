@@ -1,17 +1,19 @@
 from dataclasses import dataclass, field
-from typing import List,Optional
+from typing import Optional
 from dataclasses_json import dataclass_json
-from . import grpctimeout
-from . import httptimeout
-from . import httptimeout
-from . import tcptimeout
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ListenerTimeout:
-    grpc: Optional[grpctimeout.GrpcTimeout] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'grpc' }})
-    http: Optional[httptimeout.HTTPTimeout] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'http' }})
-    http2: Optional[httptimeout.HTTPTimeout] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'http2' }})
-    tcp: Optional[tcptimeout.TCPTimeout] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tcp' }})
+    r"""ListenerTimeout
+    An object that represents timeouts for different protocols.
+    """
+    
+    grpc: Optional[GrpcTimeout] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('grpc') }})
+    http: Optional[HTTPTimeout] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('http') }})
+    http2: Optional[HTTPTimeout] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('http2') }})
+    tcp: Optional[TCPTimeout] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('tcp') }})
     

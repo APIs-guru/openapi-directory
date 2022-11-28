@@ -1,13 +1,17 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import documentstyle
-from . import documentstylesuggestionstate
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class SuggestedDocumentStyle:
-    document_style: Optional[documentstyle.DocumentStyle] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'documentStyle' }})
-    document_style_suggestion_state: Optional[documentstylesuggestionstate.DocumentStyleSuggestionState] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'documentStyleSuggestionState' }})
+    r"""SuggestedDocumentStyle
+    A suggested change to the DocumentStyle.
+    """
+    
+    document_style: Optional[DocumentStyle] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('documentStyle') }})
+    document_style_suggestion_state: Optional[DocumentStyleSuggestionState] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('documentStyleSuggestionState') }})
     

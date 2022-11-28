@@ -1,8 +1,9 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
-from typing import Any,Enum,List,Optional
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 class ListAuditMitigationActionsTasksTaskStatusEnum(str, Enum):
@@ -14,12 +15,12 @@ class ListAuditMitigationActionsTasksTaskStatusEnum(str, Enum):
 
 @dataclass
 class ListAuditMitigationActionsTasksQueryParams:
+    end_time: datetime = field(metadata={'query_param': { 'field_name': 'endTime', 'style': 'form', 'explode': True }})
+    start_time: datetime = field(metadata={'query_param': { 'field_name': 'startTime', 'style': 'form', 'explode': True }})
     audit_task_id: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'auditTaskId', 'style': 'form', 'explode': True }})
-    end_time: datetime = field(default=None, metadata={'query_param': { 'field_name': 'endTime', 'style': 'form', 'explode': True }})
     finding_id: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'findingId', 'style': 'form', 'explode': True }})
     max_results: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'maxResults', 'style': 'form', 'explode': True }})
     next_token: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'nextToken', 'style': 'form', 'explode': True }})
-    start_time: datetime = field(default=None, metadata={'query_param': { 'field_name': 'startTime', 'style': 'form', 'explode': True }})
     task_status: Optional[ListAuditMitigationActionsTasksTaskStatusEnum] = field(default=None, metadata={'query_param': { 'field_name': 'taskStatus', 'style': 'form', 'explode': True }})
     
 
@@ -36,16 +37,16 @@ class ListAuditMitigationActionsTasksHeaders:
 
 @dataclass
 class ListAuditMitigationActionsTasksRequest:
-    query_params: ListAuditMitigationActionsTasksQueryParams = field(default=None)
-    headers: ListAuditMitigationActionsTasksHeaders = field(default=None)
+    headers: ListAuditMitigationActionsTasksHeaders = field()
+    query_params: ListAuditMitigationActionsTasksQueryParams = field()
     
 
 @dataclass
 class ListAuditMitigationActionsTasksResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     internal_failure_exception: Optional[Any] = field(default=None)
     invalid_request_exception: Optional[Any] = field(default=None)
     list_audit_mitigation_actions_tasks_response: Optional[shared.ListAuditMitigationActionsTasksResponse] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     

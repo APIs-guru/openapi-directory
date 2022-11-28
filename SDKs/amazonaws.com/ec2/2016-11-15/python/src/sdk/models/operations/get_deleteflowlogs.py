@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 
 class GetDeleteFlowLogsActionEnum(str, Enum):
     DELETE_FLOW_LOGS = "DeleteFlowLogs"
@@ -10,10 +14,10 @@ class GetDeleteFlowLogsVersionEnum(str, Enum):
 
 @dataclass
 class GetDeleteFlowLogsQueryParams:
-    action: GetDeleteFlowLogsActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetDeleteFlowLogsActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    flow_log_id: List[str] = field(metadata={'query_param': { 'field_name': 'FlowLogId', 'style': 'form', 'explode': True }})
+    version: GetDeleteFlowLogsVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     dry_run: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'DryRun', 'style': 'form', 'explode': True }})
-    flow_log_id: List[str] = field(default=None, metadata={'query_param': { 'field_name': 'FlowLogId', 'style': 'form', 'explode': True }})
-    version: GetDeleteFlowLogsVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -29,13 +33,13 @@ class GetDeleteFlowLogsHeaders:
 
 @dataclass
 class GetDeleteFlowLogsRequest:
-    query_params: GetDeleteFlowLogsQueryParams = field(default=None)
-    headers: GetDeleteFlowLogsHeaders = field(default=None)
+    headers: GetDeleteFlowLogsHeaders = field()
+    query_params: GetDeleteFlowLogsQueryParams = field()
     
 
 @dataclass
 class GetDeleteFlowLogsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

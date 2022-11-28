@@ -1,11 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum MonitoringComponentConfigEnableComponentsEnum {
-    ComponentUnspecified = "COMPONENT_UNSPECIFIED"
-,    SystemComponents = "SYSTEM_COMPONENTS"
-,    Apiserver = "APISERVER"
-,    Scheduler = "SCHEDULER"
-,    ControllerManager = "CONTROLLER_MANAGER"
+    ComponentUnspecified = "COMPONENT_UNSPECIFIED",
+    SystemComponents = "SYSTEM_COMPONENTS",
+    Apiserver = "APISERVER",
+    Scheduler = "SCHEDULER",
+    ControllerManager = "CONTROLLER_MANAGER"
 }
 
 
@@ -14,6 +15,6 @@ export enum MonitoringComponentConfigEnableComponentsEnum {
  * MonitoringComponentConfig is cluster monitoring component configuration.
 **/
 export class MonitoringComponentConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=enableComponents" })
+  @SpeakeasyMetadata({ data: "json, name=enableComponents" })
   enableComponents?: MonitoringComponentConfigEnableComponentsEnum[];
 }

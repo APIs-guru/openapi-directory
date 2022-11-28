@@ -1,26 +1,27 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetDirectDebitByUuidPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=directDebitUuid" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=directDebitUuid" })
   directDebitUuid: string;
 }
 
 
 export class GetDirectDebitByUuidRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetDirectDebitByUuidPathParams;
 }
 
 
 export class GetDirectDebitByUuidResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   onedirectdebitsGetResponses200ContentApplication1jsonSchemaPropertiesDirectdebitsItems?: shared.OnedirectdebitsGetResponses200ContentApplication1jsonSchemaPropertiesDirectdebitsItems;
 }

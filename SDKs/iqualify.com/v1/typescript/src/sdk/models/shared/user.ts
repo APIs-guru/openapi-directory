@@ -1,27 +1,28 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { UserMetadata } from "./usermetadata";
 import { UserProfileRequest } from "./userprofilerequest";
 
 
+
 export class User extends SpeakeasyBase {
-  @Metadata({ data: "json, name=email" })
+  @SpeakeasyMetadata({ data: "json, name=email" })
   email?: string;
 
-  @Metadata({ data: "json, name=firstName" })
+  @SpeakeasyMetadata({ data: "json, name=firstName" })
   firstName?: string;
 
-  @Metadata({ data: "json, name=lastName" })
+  @SpeakeasyMetadata({ data: "json, name=lastName" })
   lastName?: string;
 
-  @Metadata({ data: "json, name=metadata" })
+  @SpeakeasyMetadata({ data: "json, name=metadata" })
   metadata?: UserMetadata;
 
-  @Metadata({ data: "json, name=personId" })
+  @SpeakeasyMetadata({ data: "json, name=personId" })
   personId?: string;
 
-  @Metadata({ data: "json, name=profile" })
+  @SpeakeasyMetadata({ data: "json, name=profile" })
   profile?: UserProfileRequest;
 
-  @Metadata({ data: "json, name=sendInvite" })
+  @SpeakeasyMetadata({ data: "json, name=sendInvite" })
   sendInvite?: boolean;
 }

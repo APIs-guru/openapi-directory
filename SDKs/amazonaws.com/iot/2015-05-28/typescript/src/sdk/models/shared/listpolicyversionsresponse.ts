@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PolicyVersion } from "./policyversion";
+
 
 
 // ListPolicyVersionsResponse
@@ -8,6 +8,6 @@ import { PolicyVersion } from "./policyversion";
  * The output from the ListPolicyVersions operation.
 **/
 export class ListPolicyVersionsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=policyVersions", elemType: shared.PolicyVersion })
+  @SpeakeasyMetadata({ data: "json, name=policyVersions", elemType: PolicyVersion })
   policyVersions?: PolicyVersion[];
 }

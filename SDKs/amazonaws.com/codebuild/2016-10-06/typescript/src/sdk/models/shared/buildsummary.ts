@@ -1,8 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { StatusTypeEnum } from "./statustypeenum";
 import { ResolvedArtifact } from "./resolvedartifact";
-import { ResolvedArtifact } from "./resolvedartifact";
+
 
 
 // BuildSummary
@@ -10,18 +9,18 @@ import { ResolvedArtifact } from "./resolvedartifact";
  * Contains summary information about a batch build group.
 **/
 export class BuildSummary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=arn" })
+  @SpeakeasyMetadata({ data: "json, name=arn" })
   arn?: string;
 
-  @Metadata({ data: "json, name=buildStatus" })
+  @SpeakeasyMetadata({ data: "json, name=buildStatus" })
   buildStatus?: StatusTypeEnum;
 
-  @Metadata({ data: "json, name=primaryArtifact" })
+  @SpeakeasyMetadata({ data: "json, name=primaryArtifact" })
   primaryArtifact?: ResolvedArtifact;
 
-  @Metadata({ data: "json, name=requestedOn" })
+  @SpeakeasyMetadata({ data: "json, name=requestedOn" })
   requestedOn?: Date;
 
-  @Metadata({ data: "json, name=secondaryArtifacts", elemType: shared.ResolvedArtifact })
+  @SpeakeasyMetadata({ data: "json, name=secondaryArtifacts", elemType: ResolvedArtifact })
   secondaryArtifacts?: ResolvedArtifact[];
 }

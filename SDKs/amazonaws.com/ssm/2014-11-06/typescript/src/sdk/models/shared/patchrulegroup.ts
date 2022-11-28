@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PatchRule } from "./patchrule";
+
 
 
 // PatchRuleGroup
@@ -8,6 +8,6 @@ import { PatchRule } from "./patchrule";
  * A set of rules defining the approval rules for a patch baseline.
 **/
 export class PatchRuleGroup extends SpeakeasyBase {
-  @Metadata({ data: "json, name=PatchRules", elemType: shared.PatchRule })
+  @SpeakeasyMetadata({ data: "json, name=PatchRules", elemType: PatchRule })
   patchRules: PatchRule[];
 }

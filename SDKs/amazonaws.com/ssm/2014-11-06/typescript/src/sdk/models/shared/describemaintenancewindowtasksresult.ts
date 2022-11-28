@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { MaintenanceWindowTask } from "./maintenancewindowtask";
 
 
+
 export class DescribeMaintenanceWindowTasksResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=Tasks", elemType: shared.MaintenanceWindowTask })
+  @SpeakeasyMetadata({ data: "json, name=Tasks", elemType: MaintenanceWindowTask })
   tasks?: MaintenanceWindowTask[];
 }

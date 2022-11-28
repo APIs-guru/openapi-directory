@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import indtaxdocuments
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class TaxDocuments:
-    ind: Optional[indtaxdocuments.IndTaxDocuments] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'IND' }})
+    r"""TaxDocuments
+    The tax documents required in your AWS Region.
+    """
+    
+    ind: Optional[IndTaxDocuments] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('IND') }})
     

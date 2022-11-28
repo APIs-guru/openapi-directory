@@ -1,4 +1,21 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
+
+
+// GoogleCloudApigeeV1ArchiveDeploymentInput
+/** 
+ * Archive Deployment information.
+**/
+export class GoogleCloudApigeeV1ArchiveDeploymentInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=gcsUri" })
+  gcsUri?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=labels" })
+  labels?: Map<string, string>;
+
+  @SpeakeasyMetadata({ data: "json, name=name" })
+  name?: string;
+}
 
 
 // GoogleCloudApigeeV1ArchiveDeployment
@@ -6,21 +23,21 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Archive Deployment information.
 **/
 export class GoogleCloudApigeeV1ArchiveDeployment extends SpeakeasyBase {
-  @Metadata({ data: "json, name=createdAt" })
+  @SpeakeasyMetadata({ data: "json, name=createdAt" })
   createdAt?: string;
 
-  @Metadata({ data: "json, name=gcsUri" })
+  @SpeakeasyMetadata({ data: "json, name=gcsUri" })
   gcsUri?: string;
 
-  @Metadata({ data: "json, name=labels" })
+  @SpeakeasyMetadata({ data: "json, name=labels" })
   labels?: Map<string, string>;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=operation" })
+  @SpeakeasyMetadata({ data: "json, name=operation" })
   operation?: string;
 
-  @Metadata({ data: "json, name=updatedAt" })
+  @SpeakeasyMetadata({ data: "json, name=updatedAt" })
   updatedAt?: string;
 }

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { DataCatalogConfig } from "./datacatalogconfig";
 import { DataplexConfig } from "./dataplexconfig";
 /**

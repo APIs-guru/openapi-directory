@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class CreateEndpointConfigOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=EndpointConfigArn" })
+  @SpeakeasyMetadata({ data: "json, name=EndpointConfigArn" })
   endpointConfigArn: string;
 }

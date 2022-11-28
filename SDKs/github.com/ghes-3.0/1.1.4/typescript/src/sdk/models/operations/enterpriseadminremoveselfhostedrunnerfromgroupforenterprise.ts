@@ -1,28 +1,29 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class EnterpriseAdminRemoveSelfHostedRunnerFromGroupForEnterprisePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=enterprise" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=enterprise" })
   enterprise: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=runner_group_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=runner_group_id" })
   runnerGroupId: number;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=runner_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=runner_id" })
   runnerId: number;
 }
 
 
 export class EnterpriseAdminRemoveSelfHostedRunnerFromGroupForEnterpriseRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: EnterpriseAdminRemoveSelfHostedRunnerFromGroupForEnterprisePathParams;
 }
 
 
 export class EnterpriseAdminRemoveSelfHostedRunnerFromGroupForEnterpriseResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

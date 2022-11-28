@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { InitiatedByEnum } from "./initiatedbyenum";
 import { ParticipatingServer } from "./participatingserver";
 import { JobStatusEnum } from "./jobstatusenum";

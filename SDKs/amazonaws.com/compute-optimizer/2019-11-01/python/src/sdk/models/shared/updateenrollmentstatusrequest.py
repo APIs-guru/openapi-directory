@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import status_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class UpdateEnrollmentStatusRequest:
-    include_member_accounts: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'includeMemberAccounts' }})
-    status: status_enum.StatusEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+    status: StatusEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('status') }})
+    include_member_accounts: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('includeMemberAccounts') }})
     

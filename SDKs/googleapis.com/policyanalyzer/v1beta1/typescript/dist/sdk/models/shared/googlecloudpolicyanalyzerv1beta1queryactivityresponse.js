@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { GoogleCloudPolicyanalyzerV1beta1Activity } from "./googlecloudpolicyanalyzerv1beta1activity";
 // GoogleCloudPolicyanalyzerV1beta1QueryActivityResponse
 /**
  * Response to the `QueryActivity` method.
@@ -34,11 +34,11 @@ var GoogleCloudPolicyanalyzerV1beta1QueryActivityResponse = /** @class */ (funct
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=activities", elemType: shared.GoogleCloudPolicyanalyzerV1beta1Activity }),
+        SpeakeasyMetadata({ data: "json, name=activities", elemType: GoogleCloudPolicyanalyzerV1beta1Activity }),
         __metadata("design:type", Array)
     ], GoogleCloudPolicyanalyzerV1beta1QueryActivityResponse.prototype, "activities", void 0);
     __decorate([
-        Metadata({ data: "json, name=nextPageToken" }),
+        SpeakeasyMetadata({ data: "json, name=nextPageToken" }),
         __metadata("design:type", String)
     ], GoogleCloudPolicyanalyzerV1beta1QueryActivityResponse.prototype, "nextPageToken", void 0);
     return GoogleCloudPolicyanalyzerV1beta1QueryActivityResponse;

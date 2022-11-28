@@ -1,14 +1,19 @@
 from dataclasses import dataclass, field
-from typing import Enum,List
+from typing import List
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import botlocalefiltername_enum
-from . import botlocalefilteroperator_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class BotLocaleFilter:
-    name: botlocalefiltername_enum.BotLocaleFilterNameEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    operator: botlocalefilteroperator_enum.BotLocaleFilterOperatorEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'operator' }})
-    values: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'values' }})
+    r"""BotLocaleFilter
+    Filters responses returned by the <code>ListBotLocales</code> operation.
+    """
+    
+    name: BotLocaleFilterNameEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    operator: BotLocaleFilterOperatorEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('operator') }})
+    values: List[str] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('values') }})
     

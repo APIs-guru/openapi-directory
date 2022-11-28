@@ -9,6 +9,8 @@ const (
 	ProductVisibilityTracksEnumAlpha               ProductVisibilityTracksEnum = "alpha"
 )
 
+// ProductVisibility
+// A product to be made visible to a user.
 type ProductVisibility struct {
 	ProductID *string                       `json:"productId,omitempty"`
 	TrackIds  []string                      `json:"trackIds,omitempty"`

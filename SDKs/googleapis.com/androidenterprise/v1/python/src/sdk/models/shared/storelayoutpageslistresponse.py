@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import storepage
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class StoreLayoutPagesListResponse:
-    page: Optional[List[storepage.StorePage]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'page' }})
+    page: Optional[List[StorePage]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('page') }})
     

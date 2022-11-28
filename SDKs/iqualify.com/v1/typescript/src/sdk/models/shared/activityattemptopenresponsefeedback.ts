@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ActivityAttemptOpenResponseFeedback extends SpeakeasyBase {
-  @Metadata({ data: "json, name=facilitatorEmail" })
+  @SpeakeasyMetadata({ data: "json, name=facilitatorEmail" })
   facilitatorEmail?: string;
 
-  @Metadata({ data: "json, name=text" })
+  @SpeakeasyMetadata({ data: "json, name=text" })
   text?: string;
 }

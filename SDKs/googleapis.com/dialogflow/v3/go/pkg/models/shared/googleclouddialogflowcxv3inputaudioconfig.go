@@ -22,6 +22,8 @@ const (
 	GoogleCloudDialogflowCxV3InputAudioConfigModelVariantEnumUseEnhanced                   GoogleCloudDialogflowCxV3InputAudioConfigModelVariantEnum = "USE_ENHANCED"
 )
 
+// GoogleCloudDialogflowCxV3InputAudioConfig
+// Instructs the speech recognizer on how to process the audio content.
 type GoogleCloudDialogflowCxV3InputAudioConfig struct {
 	AudioEncoding   *GoogleCloudDialogflowCxV3InputAudioConfigAudioEncodingEnum `json:"audioEncoding,omitempty"`
 	EnableWordInfo  *bool                                                       `json:"enableWordInfo,omitempty"`

@@ -1,6 +1,8 @@
 package shared
 
-type UpdateParametersRequest struct {
-	Parameters *MemcacheParameters `json:"parameters,omitempty"`
-	UpdateMask *string             `json:"updateMask,omitempty"`
+// UpdateParametersRequestInput
+// Request for UpdateParameters.
+type UpdateParametersRequestInput struct {
+	Parameters *MemcacheParametersInput `json:"parameters,omitempty"`
+	UpdateMask *string                  `json:"updateMask,omitempty"`
 }

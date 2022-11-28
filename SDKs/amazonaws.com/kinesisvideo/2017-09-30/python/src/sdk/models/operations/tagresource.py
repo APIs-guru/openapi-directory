@@ -1,6 +1,10 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,List,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -18,24 +22,24 @@ class TagResourceHeaders:
 @dataclass_json
 @dataclass
 class TagResourceRequestBody:
-    resource_arn: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ResourceARN' }})
-    tags: List[shared.Tag] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Tags' }})
+    resource_arn: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('ResourceARN') }})
+    tags: List[shared.Tag] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Tags') }})
     
 
 @dataclass
 class TagResourceRequest:
-    headers: TagResourceHeaders = field(default=None)
-    request: TagResourceRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: TagResourceHeaders = field()
+    request: TagResourceRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class TagResourceResponse:
+    content_type: str = field()
+    status_code: int = field()
     access_denied_exception: Optional[Any] = field(default=None)
     client_limit_exceeded_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     invalid_argument_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     tag_resource_output: Optional[dict[str, Any]] = field(default=None)
     tags_per_resource_exceeded_limit_exception: Optional[Any] = field(default=None)
     

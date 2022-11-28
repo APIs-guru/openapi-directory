@@ -1,6 +1,7 @@
 
 
+
 export enum ConfigurationPageTypeEnum {
-    PluginConfiguration = "PluginConfiguration"
-,    None = "None"
+    PluginConfiguration = "PluginConfiguration",
+    None = "None"
 }

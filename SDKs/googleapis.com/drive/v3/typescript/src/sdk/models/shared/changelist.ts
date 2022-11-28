@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Change } from "./change";
+
 
 
 // ChangeList
@@ -8,15 +8,15 @@ import { Change } from "./change";
  * A list of changes for a user.
 **/
 export class ChangeList extends SpeakeasyBase {
-  @Metadata({ data: "json, name=changes", elemType: shared.Change })
+  @SpeakeasyMetadata({ data: "json, name=changes", elemType: Change })
   changes?: Change[];
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=newStartPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=newStartPageToken" })
   newStartPageToken?: string;
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 }

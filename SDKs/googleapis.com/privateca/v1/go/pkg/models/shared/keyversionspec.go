@@ -14,6 +14,8 @@ const (
 	KeyVersionSpecAlgorithmEnumEcP384Sha384                 KeyVersionSpecAlgorithmEnum = "EC_P384_SHA384"
 )
 
+// KeyVersionSpec
+// A Cloud KMS key configuration that a CertificateAuthority will use.
 type KeyVersionSpec struct {
 	Algorithm          *KeyVersionSpecAlgorithmEnum `json:"algorithm,omitempty"`
 	CloudKmsKeyVersion *string                      `json:"cloudKmsKeyVersion,omitempty"`

@@ -1,8 +1,11 @@
-import warnings
+
+
 import requests
 from typing import Any,List,Optional
-from sdk.models import operations, shared
+from sdk.models import shared, operations
 from . import utils
+
+
 
 
 SERVERS = [
@@ -11,28 +14,53 @@ SERVERS = [
 
 
 class SDK:
-    client = requests.Session()
-    server_url = SERVERS[0]
+    
+
+    _client: requests.Session
+    _security_client: requests.Session
+    
+    _server_url: str = SERVERS[0]
+    _language: str = "python"
+    _sdk_version: str = "0.0.1"
+    _gen_version: str = "internal"
+
+    def __init__(self) -> None:
+        self._client = requests.Session()
+        self._security_client = requests.Session()
+        
+
 
     def config_server_url(self, server_url: str, params: dict[str, str]):
-        if not params is None:
-            self.server_url = utils.replace_parameters(server_url, params)
+        if params is not None:
+            self._server_url = utils.replace_parameters(server_url, params)
         else:
-            self.server_url = server_url
-            
+            self._server_url = server_url
+
+        
     
 
+    def config_client(self, client: requests.Session):
+        self._client = client
+        
+    
+    
     
     def get_api_v_version_currencies_history(self, request: operations.GetAPIVVersionCurrenciesHistoryRequest) -> operations.GetAPIVVersionCurrenciesHistoryResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get historical prices for requested currency pairs
+        Historical OHLC data for the specified period and interval size
+        
+        The combination of the interval parameter and start and end dates can result in results
+        being truncated to conform to result size limits. See comments on interval parameter for details on valid interval values.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/v{version}/Currencies/history", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -61,15 +89,19 @@ class SDK:
 
     
     def get_api_v_version_currencies_history_supported(self, request: operations.GetAPIVVersionCurrenciesHistorySupportedRequest) -> operations.GetAPIVVersionCurrenciesHistorySupportedResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get list of currency pairs supported by the history endpoint
+        Only the currency pairs in the direction noted can be used with the history endpoint.
+        For example: USD/CAD is not the same as CAD/USD
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/v{version}/Currencies/history/supported", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -98,15 +130,18 @@ class SDK:
 
     
     def get_api_v_version_currencies_rate(self, request: operations.GetAPIVVersionCurrenciesRateRequest) -> operations.GetAPIVVersionCurrenciesRateResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get latest mid rate for requested currency pairs
+        Current Mid Rate
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/v{version}/Currencies/rate", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -135,15 +170,19 @@ class SDK:
 
     
     def get_api_v_version_currencies_rate_supported(self, request: operations.GetAPIVVersionCurrenciesRateSupportedRequest) -> operations.GetAPIVVersionCurrenciesRateSupportedResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get list of currencies supported by the rate endpoint
+        Any of the currencies in this list can be paired with any other currency in this list when supplied to the Rate endpoint.
+        For example: USD/CAD,CAD/USD,USD/EUR,EUR/CAD
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/v{version}/Currencies/rate/supported", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -172,15 +211,18 @@ class SDK:
 
     
     def get_api_v_version_currencies_summary(self, request: operations.GetAPIVVersionCurrenciesSummaryRequest) -> operations.GetAPIVVersionCurrenciesSummaryResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get latest Summary for requested currency pairs
+        Current and daily summary information combined into a single quote
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/v{version}/Currencies/summary", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -209,15 +251,19 @@ class SDK:
 
     
     def get_api_v_version_currencies_summary_supported(self, request: operations.GetAPIVVersionCurrenciesSummarySupportedRequest) -> operations.GetAPIVVersionCurrenciesSummarySupportedResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get list of currency pairs supported by the Summary endpoint
+        Only the currency pairs in the direction noted can be used with the Summary endpoint.
+        For example: USD/CAD is not the same as CAD/USD
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/v{version}/Currencies/summary/supported", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -246,15 +292,23 @@ class SDK:
 
     
     def get_api_v_version_metals_benchmark_history(self, request: operations.GetAPIVVersionMetalsBenchmarkHistoryRequest) -> operations.GetAPIVVersionMetalsBenchmarkHistoryResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get historical benchmark prices for requested metals
+        Historical OHLC data for the specified period and interval size
+        
+        The combination of the interval parameter and start and end dates can result in results
+        being truncated to conform to result size limits. See comments on interval parameter for details on valid interval values.
+        
+        The historicalfx flag is used to determine whether to apply today's fx rates to a historical period, or to apply the historical rates from that same time frame.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/v{version}/Metals/benchmark/history", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -283,15 +337,18 @@ class SDK:
 
     
     def get_api_v_version_metals_benchmark_summary(self, request: operations.GetAPIVVersionMetalsBenchmarkSummaryRequest) -> operations.GetAPIVVersionMetalsBenchmarkSummaryResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get latest Benchmark prices for requested metals
+        Benchmark price information
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/v{version}/Metals/benchmark/summary", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -320,15 +377,17 @@ class SDK:
 
     
     def get_api_v_version_metals_benchmark_supported(self, request: operations.GetAPIVVersionMetalsBenchmarkSupportedRequest) -> operations.GetAPIVVersionMetalsBenchmarkSupportedResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get list of symbols supported by the benchmark endpoints
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/v{version}/Metals/benchmark/supported", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -357,15 +416,23 @@ class SDK:
 
     
     def get_api_v_version_metals_spot_history(self, request: operations.GetAPIVVersionMetalsSpotHistoryRequest) -> operations.GetAPIVVersionMetalsSpotHistoryResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get historical Spot prices for requested metals
+        Historical OHLC data for the specified period and interval size
+        
+        The combination of the interval parameter and start and end dates can result in results
+        being truncated to conform to result size limits. See comments on interval parameter for details on valid interval values.
+        
+        The historicalfx flag is used to determine whether to apply today's fx rates to a historical period, or to apply the historical rates from that same time frame.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/v{version}/Metals/spot/history", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -394,15 +461,18 @@ class SDK:
 
     
     def get_api_v_version_metals_spot_performance(self, request: operations.GetAPIVVersionMetalsSpotPerformanceRequest) -> operations.GetAPIVVersionMetalsSpotPerformanceResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get Historical Performance for requested metals
+        Historical Performance information
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/v{version}/Metals/spot/performance", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -431,15 +501,18 @@ class SDK:
 
     
     def get_api_v_version_metals_spot_performance_annual(self, request: operations.GetAPIVVersionMetalsSpotPerformanceAnnualRequest) -> operations.GetAPIVVersionMetalsSpotPerformanceAnnualResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get Historical Annual Performance for requested metals
+        Annual Historical Performance information
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/v{version}/Metals/spot/performance/annual", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -468,15 +541,21 @@ class SDK:
 
     
     def get_api_v_version_metals_spot_ratio_history(self, request: operations.GetAPIVVersionMetalsSpotRatioHistoryRequest) -> operations.GetAPIVVersionMetalsSpotRatioHistoryResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get historical Spot Ratio prices for requested metals
+        Historical data for the specified period and interval size
+        
+        The combination of the interval parameter and start and end dates can result in results
+        being truncated to conform to result size limits. See comments on interval parameter for details on valid interval values.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/v{version}/Metals/spot/ratio/history", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -505,15 +584,18 @@ class SDK:
 
     
     def get_api_v_version_metals_spot_ratio_summary(self, request: operations.GetAPIVVersionMetalsSpotRatioSummaryRequest) -> operations.GetAPIVVersionMetalsSpotRatioSummaryResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get latest Spot Summary for requested metal ratios
+        Ratios between prices of two metals
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/v{version}/Metals/spot/ratio/summary", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -542,15 +624,18 @@ class SDK:
 
     
     def get_api_v_version_metals_spot_summary(self, request: operations.GetAPIVVersionMetalsSpotSummaryRequest) -> operations.GetAPIVVersionMetalsSpotSummaryResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get latest Spot Summary for requested metals
+        Current and daily summary information combined into a single quote
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/v{version}/Metals/spot/summary", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -579,15 +664,17 @@ class SDK:
 
     
     def get_api_v_version_metals_spot_supported(self, request: operations.GetAPIVVersionMetalsSpotSupportedRequest) -> operations.GetAPIVVersionMetalsSpotSupportedResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get list of symbols supported by the spot endpoints
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/v{version}/Metals/spot/supported", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -616,15 +703,17 @@ class SDK:
 
     
     def get_api_v_version_metals_supported_currency(self, request: operations.GetAPIVVersionMetalsSupportedCurrencyRequest) -> operations.GetAPIVVersionMetalsSupportedCurrencyResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get list of currencies supported by metals endpoints for currency conversion
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/v{version}/Metals/supported/currency", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 

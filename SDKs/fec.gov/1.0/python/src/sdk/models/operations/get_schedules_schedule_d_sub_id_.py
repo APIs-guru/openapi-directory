@@ -1,20 +1,21 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
 from typing import List,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
 @dataclass
 class GetSchedulesScheduleDSubIDPathParams:
-    sub_id: str = field(default=None, metadata={'path_param': { 'field_name': 'sub_id', 'style': 'simple', 'explode': False }})
+    sub_id: str = field(metadata={'path_param': { 'field_name': 'sub_id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetSchedulesScheduleDSubIDQueryParams:
-    api_key: str = field(default=None, metadata={'query_param': { 'field_name': 'api_key', 'style': 'form', 'explode': True }})
+    api_key: str = field(metadata={'query_param': { 'field_name': 'api_key', 'style': 'form', 'explode': True }})
     page: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'page', 'style': 'form', 'explode': True }})
     per_page: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'per_page', 'style': 'form', 'explode': True }})
     sort: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'sort', 'style': 'form', 'explode': True }})
@@ -23,79 +24,79 @@ class GetSchedulesScheduleDSubIDQueryParams:
     sort_nulls_last: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'sort_nulls_last', 'style': 'form', 'explode': True }})
     
 
-@dataclass
-class GetSchedulesScheduleDSubIDRequest:
-    path_params: GetSchedulesScheduleDSubIDPathParams = field(default=None)
-    query_params: GetSchedulesScheduleDSubIDQueryParams = field(default=None)
-    
-
 @dataclass_json
 @dataclass
 class GetSchedulesScheduleDSubIDDefaultApplicationJSONResults:
-    action_code: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'action_code' }})
-    action_code_full: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'action_code_full' }})
-    amount_incurred_period: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'amount_incurred_period' }})
-    candidate_first_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'candidate_first_name' }})
-    candidate_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'candidate_id' }})
-    candidate_last_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'candidate_last_name' }})
-    candidate_office: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'candidate_office' }})
-    candidate_office_district: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'candidate_office_district' }})
-    candidate_office_state: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'candidate_office_state' }})
-    candidate_office_state_full: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'candidate_office_state_full' }})
-    canidate_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'canidate_name' }})
-    committee: Optional[shared.CommitteeHistory] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'committee' }})
-    committee_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'committee_id' }})
-    committee_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'committee_name' }})
-    conduit_committee_city: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'conduit_committee_city' }})
-    conduit_committee_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'conduit_committee_id' }})
-    conduit_committee_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'conduit_committee_name' }})
-    conduit_committee_state: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'conduit_committee_state' }})
-    conduit_committee_street1: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'conduit_committee_street1' }})
-    conduit_committee_street2: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'conduit_committee_street2' }})
-    conduit_committee_zip: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'conduit_committee_zip' }})
-    creditor_debtor_city: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'creditor_debtor_city' }})
-    creditor_debtor_first_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'creditor_debtor_first_name' }})
-    creditor_debtor_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'creditor_debtor_id' }})
-    creditor_debtor_last_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'creditor_debtor_last_name' }})
-    creditor_debtor_middle_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'creditor_debtor_middle_name' }})
-    creditor_debtor_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'creditor_debtor_name' }})
-    creditor_debtor_prefix: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'creditor_debtor_prefix' }})
-    creditor_debtor_state: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'creditor_debtor_state' }})
-    creditor_debtor_street1: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'creditor_debtor_street1' }})
-    creditor_debtor_street2: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'creditor_debtor_street2' }})
-    creditor_debtor_suffix: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'creditor_debtor_suffix' }})
-    election_cycle: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'election_cycle' }})
-    entity_type: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'entity_type' }})
-    file_number: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'file_number' }})
-    filing_form: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'filing_form' }})
-    image_number: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'image_number' }})
-    line_number: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'line_number' }})
-    link_id: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'link_id' }})
-    load_date: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'load_date', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    nature_of_debt: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'nature_of_debt' }})
-    original_sub_id: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'original_sub_id' }})
-    outstanding_balance_beginning_of_period: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'outstanding_balance_beginning_of_period' }})
-    outstanding_balance_close_of_period: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'outstanding_balance_close_of_period' }})
-    payment_period: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'payment_period' }})
-    pdf_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'pdf_url' }})
-    report_type: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'report_type' }})
-    report_year: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'report_year' }})
-    schedule_type: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'schedule_type' }})
-    schedule_type_full: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'schedule_type_full' }})
-    sub_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'sub_id' }})
-    transaction_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'transaction_id' }})
+    action_code: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('action_code') }})
+    action_code_full: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('action_code_full') }})
+    amount_incurred_period: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('amount_incurred_period') }})
+    candidate_first_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('candidate_first_name') }})
+    candidate_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('candidate_id') }})
+    candidate_last_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('candidate_last_name') }})
+    candidate_office: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('candidate_office') }})
+    candidate_office_district: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('candidate_office_district') }})
+    candidate_office_state: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('candidate_office_state') }})
+    candidate_office_state_full: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('candidate_office_state_full') }})
+    canidate_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('canidate_name') }})
+    committee: Optional[shared.CommitteeHistory] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('committee') }})
+    committee_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('committee_id') }})
+    committee_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('committee_name') }})
+    conduit_committee_city: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('conduit_committee_city') }})
+    conduit_committee_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('conduit_committee_id') }})
+    conduit_committee_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('conduit_committee_name') }})
+    conduit_committee_state: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('conduit_committee_state') }})
+    conduit_committee_street1: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('conduit_committee_street1') }})
+    conduit_committee_street2: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('conduit_committee_street2') }})
+    conduit_committee_zip: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('conduit_committee_zip') }})
+    creditor_debtor_city: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('creditor_debtor_city') }})
+    creditor_debtor_first_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('creditor_debtor_first_name') }})
+    creditor_debtor_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('creditor_debtor_id') }})
+    creditor_debtor_last_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('creditor_debtor_last_name') }})
+    creditor_debtor_middle_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('creditor_debtor_middle_name') }})
+    creditor_debtor_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('creditor_debtor_name') }})
+    creditor_debtor_prefix: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('creditor_debtor_prefix') }})
+    creditor_debtor_state: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('creditor_debtor_state') }})
+    creditor_debtor_street1: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('creditor_debtor_street1') }})
+    creditor_debtor_street2: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('creditor_debtor_street2') }})
+    creditor_debtor_suffix: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('creditor_debtor_suffix') }})
+    election_cycle: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('election_cycle') }})
+    entity_type: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('entity_type') }})
+    file_number: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('file_number') }})
+    filing_form: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('filing_form') }})
+    image_number: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('image_number') }})
+    line_number: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('line_number') }})
+    link_id: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('link_id') }})
+    load_date: Optional[date] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('load_date'), 'encoder': utils.dateisoformat(True), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    nature_of_debt: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('nature_of_debt') }})
+    original_sub_id: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('original_sub_id') }})
+    outstanding_balance_beginning_of_period: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('outstanding_balance_beginning_of_period') }})
+    outstanding_balance_close_of_period: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('outstanding_balance_close_of_period') }})
+    payment_period: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('payment_period') }})
+    pdf_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('pdf_url') }})
+    report_type: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('report_type') }})
+    report_year: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('report_year') }})
+    schedule_type: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('schedule_type') }})
+    schedule_type_full: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('schedule_type_full') }})
+    sub_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('sub_id') }})
+    transaction_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('transaction_id') }})
     
 
 @dataclass_json
 @dataclass
 class GetSchedulesScheduleDSubIDDefaultApplicationJSON:
-    pagination: Optional[shared.OffsetInfo] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'pagination' }})
-    results: Optional[List[GetSchedulesScheduleDSubIDDefaultApplicationJSONResults]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'results' }})
+    pagination: Optional[shared.OffsetInfo] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('pagination') }})
+    results: Optional[List[GetSchedulesScheduleDSubIDDefaultApplicationJSONResults]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('results') }})
+    
+
+@dataclass
+class GetSchedulesScheduleDSubIDRequest:
+    path_params: GetSchedulesScheduleDSubIDPathParams = field()
+    query_params: GetSchedulesScheduleDSubIDQueryParams = field()
     
 
 @dataclass
 class GetSchedulesScheduleDSubIDResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     get_schedules_schedule_d_sub_id_default_application_json_object: Optional[GetSchedulesScheduleDSubIDDefaultApplicationJSON] = field(default=None)
-    status_code: int = field(default=None)
     

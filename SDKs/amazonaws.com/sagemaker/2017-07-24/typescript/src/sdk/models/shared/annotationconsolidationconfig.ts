@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AnnotationConsolidationConfig
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Configures how labels are consolidated across human workers and processes output data. 
 **/
 export class AnnotationConsolidationConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AnnotationConsolidationLambdaArn" })
+  @SpeakeasyMetadata({ data: "json, name=AnnotationConsolidationLambdaArn" })
   annotationConsolidationLambdaArn: string;
 }

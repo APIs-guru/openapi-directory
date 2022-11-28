@@ -1,38 +1,39 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class CreateTimesheetHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=Xero-Tenant-Id" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Xero-Tenant-Id" })
   xeroTenantId: string;
 }
 
 
 export class CreateTimesheetSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   oAuth2: shared.SchemeOAuth2;
 }
 
 
 export class CreateTimesheetRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: CreateTimesheetHeaders;
 
-  @Metadata({ data: "request, media_type=application/json", elemType: shared.Timesheet })
-  request: shared.Timesheet[];
+  @SpeakeasyMetadata({ data: "request, media_type=application/json", elemType: shared.TimesheetInput })
+  request: shared.TimesheetInput[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: CreateTimesheetSecurity;
 }
 
 
 export class CreateTimesheetResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   timesheets?: shared.Timesheets;
 }

@@ -1,7 +1,8 @@
 
 
+
 export enum LastUpdateStatusEnum {
-    Successful = "Successful"
-,    Failed = "Failed"
-,    InProgress = "InProgress"
+    Successful = "Successful",
+    Failed = "Failed",
+    InProgress = "InProgress"
 }

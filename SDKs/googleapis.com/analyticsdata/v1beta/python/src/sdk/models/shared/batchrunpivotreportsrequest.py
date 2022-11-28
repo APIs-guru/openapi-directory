@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import runpivotreportrequest
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class BatchRunPivotReportsRequest:
-    requests: Optional[List[runpivotreportrequest.RunPivotReportRequest]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'requests' }})
+    r"""BatchRunPivotReportsRequest
+    The batch request containing multiple pivot report requests.
+    """
+    
+    requests: Optional[List[RunPivotReportRequest]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('requests') }})
     

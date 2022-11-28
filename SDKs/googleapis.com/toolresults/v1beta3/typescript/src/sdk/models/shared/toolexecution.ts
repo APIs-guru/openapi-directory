@@ -1,8 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ToolExitCode } from "./toolexitcode";
 import { FileReference } from "./filereference";
 import { ToolOutputReference } from "./tooloutputreference";
+
 
 
 // ToolExecution
@@ -10,15 +10,15 @@ import { ToolOutputReference } from "./tooloutputreference";
  * An execution of an arbitrary tool. It could be a test runner or a tool copying artifacts or deploying code.
 **/
 export class ToolExecution extends SpeakeasyBase {
-  @Metadata({ data: "json, name=commandLineArguments" })
+  @SpeakeasyMetadata({ data: "json, name=commandLineArguments" })
   commandLineArguments?: string[];
 
-  @Metadata({ data: "json, name=exitCode" })
+  @SpeakeasyMetadata({ data: "json, name=exitCode" })
   exitCode?: ToolExitCode;
 
-  @Metadata({ data: "json, name=toolLogs", elemType: shared.FileReference })
+  @SpeakeasyMetadata({ data: "json, name=toolLogs", elemType: FileReference })
   toolLogs?: FileReference[];
 
-  @Metadata({ data: "json, name=toolOutputs", elemType: shared.ToolOutputReference })
+  @SpeakeasyMetadata({ data: "json, name=toolOutputs", elemType: ToolOutputReference })
   toolOutputs?: ToolOutputReference[];
 }

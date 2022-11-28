@@ -31,7 +31,7 @@ type SecuritycenterProjectsBigQueryExportsCreateSecurity struct {
 type SecuritycenterProjectsBigQueryExportsCreateRequest struct {
 	PathParams  SecuritycenterProjectsBigQueryExportsCreatePathParams
 	QueryParams SecuritycenterProjectsBigQueryExportsCreateQueryParams
-	Request     *shared.GoogleCloudSecuritycenterV1BigQueryExport `request:"mediaType=application/json"`
+	Request     *shared.GoogleCloudSecuritycenterV1BigQueryExportInput `request:"mediaType=application/json"`
 	Security    SecuritycenterProjectsBigQueryExportsCreateSecurity
 }
 

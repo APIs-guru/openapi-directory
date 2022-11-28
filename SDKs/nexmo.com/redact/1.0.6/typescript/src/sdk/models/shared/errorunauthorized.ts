@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ErrorUnauthorized extends SpeakeasyBase {
-  @Metadata({ data: "json, name=error_title" })
+  @SpeakeasyMetadata({ data: "json, name=error_title" })
   errorTitle: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type: string;
 }

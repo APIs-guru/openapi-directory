@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from typing import Any,List,Optional
+from enum import Enum
 
 class VenuesFormatEnum(str, Enum):
     XML = "xml"
@@ -8,17 +9,17 @@ class VenuesFormatEnum(str, Enum):
 
 @dataclass
 class VenuesPathParams:
-    format: VenuesFormatEnum = field(default=None, metadata={'path_param': { 'field_name': 'format', 'style': 'simple', 'explode': False }})
+    format: VenuesFormatEnum = field(metadata={'path_param': { 'field_name': 'format', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class VenuesRequest:
-    path_params: VenuesPathParams = field(default=None)
+    path_params: VenuesPathParams = field()
     
 
 @dataclass
 class VenuesResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     venues: Optional[List[Any]] = field(default=None)
     

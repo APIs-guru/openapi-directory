@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // InsightsConfig
@@ -6,18 +7,18 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Insights configuration. This specifies when Cloud SQL Insights feature is enabled and optional configuration.
 **/
 export class InsightsConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=queryInsightsEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=queryInsightsEnabled" })
   queryInsightsEnabled?: boolean;
 
-  @Metadata({ data: "json, name=queryPlansPerMinute" })
+  @SpeakeasyMetadata({ data: "json, name=queryPlansPerMinute" })
   queryPlansPerMinute?: number;
 
-  @Metadata({ data: "json, name=queryStringLength" })
+  @SpeakeasyMetadata({ data: "json, name=queryStringLength" })
   queryStringLength?: number;
 
-  @Metadata({ data: "json, name=recordApplicationTags" })
+  @SpeakeasyMetadata({ data: "json, name=recordApplicationTags" })
   recordApplicationTags?: boolean;
 
-  @Metadata({ data: "json, name=recordClientAddress" })
+  @SpeakeasyMetadata({ data: "json, name=recordClientAddress" })
   recordClientAddress?: boolean;
 }

@@ -1,22 +1,22 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DealTermsGuaranteedFixedPriceTermsBillingInfo } from "./dealtermsguaranteedfixedpricetermsbillinginfo";
 import { PricePerBuyer } from "./priceperbuyer";
 
 
+
 export class DealTermsGuaranteedFixedPriceTerms extends SpeakeasyBase {
-  @Metadata({ data: "json, name=billingInfo" })
+  @SpeakeasyMetadata({ data: "json, name=billingInfo" })
   billingInfo?: DealTermsGuaranteedFixedPriceTermsBillingInfo;
 
-  @Metadata({ data: "json, name=fixedPrices", elemType: shared.PricePerBuyer })
+  @SpeakeasyMetadata({ data: "json, name=fixedPrices", elemType: PricePerBuyer })
   fixedPrices?: PricePerBuyer[];
 
-  @Metadata({ data: "json, name=guaranteedImpressions" })
+  @SpeakeasyMetadata({ data: "json, name=guaranteedImpressions" })
   guaranteedImpressions?: string;
 
-  @Metadata({ data: "json, name=guaranteedLooks" })
+  @SpeakeasyMetadata({ data: "json, name=guaranteedLooks" })
   guaranteedLooks?: string;
 
-  @Metadata({ data: "json, name=minimumDailyLooks" })
+  @SpeakeasyMetadata({ data: "json, name=minimumDailyLooks" })
   minimumDailyLooks?: string;
 }

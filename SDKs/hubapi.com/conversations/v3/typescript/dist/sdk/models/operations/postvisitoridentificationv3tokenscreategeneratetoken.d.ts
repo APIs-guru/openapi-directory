@@ -1,14 +1,9 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
-export declare class PostVisitorIdentificationV3TokensCreateGenerateTokenSecurityOption1 extends SpeakeasyBase {
-    hapikey: shared.SchemeHapikey;
-}
-export declare class PostVisitorIdentificationV3TokensCreateGenerateTokenSecurityOption2 extends SpeakeasyBase {
-    oauth2Legacy: shared.SchemeOauth2Legacy;
-}
 export declare class PostVisitorIdentificationV3TokensCreateGenerateTokenSecurity extends SpeakeasyBase {
-    option1?: PostVisitorIdentificationV3TokensCreateGenerateTokenSecurityOption1;
-    option2?: PostVisitorIdentificationV3TokensCreateGenerateTokenSecurityOption2;
+    hapikey?: shared.SchemeHapikey;
+    oauth2Legacy?: shared.SchemeOauth2Legacy;
+    privateAppsLegacy?: shared.SchemePrivateAppsLegacy;
 }
 export declare class PostVisitorIdentificationV3TokensCreateGenerateTokenRequest extends SpeakeasyBase {
     request: shared.IdentificationTokenGenerationRequest;

@@ -1,13 +1,18 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import parameter
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class StructuredMessage:
-    message_key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'messageKey' }})
-    message_text: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'messageText' }})
-    parameters: Optional[List[parameter.Parameter]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'parameters' }})
+    r"""StructuredMessage
+    A rich message format, including a human readable string, a key for identifying the message, and structured data associated with the message for programmatic consumption.
+    """
+    
+    message_key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('messageKey') }})
+    message_text: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('messageText') }})
+    parameters: Optional[List[Parameter]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('parameters') }})
     

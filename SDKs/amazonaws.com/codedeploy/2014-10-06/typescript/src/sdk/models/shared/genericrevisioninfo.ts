@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GenericRevisionInfo
@@ -6,18 +7,18 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Information about an application revision.
 **/
 export class GenericRevisionInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=deploymentGroups" })
+  @SpeakeasyMetadata({ data: "json, name=deploymentGroups" })
   deploymentGroups?: string[];
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=firstUsedTime" })
+  @SpeakeasyMetadata({ data: "json, name=firstUsedTime" })
   firstUsedTime?: Date;
 
-  @Metadata({ data: "json, name=lastUsedTime" })
+  @SpeakeasyMetadata({ data: "json, name=lastUsedTime" })
   lastUsedTime?: Date;
 
-  @Metadata({ data: "json, name=registerTime" })
+  @SpeakeasyMetadata({ data: "json, name=registerTime" })
   registerTime?: Date;
 }

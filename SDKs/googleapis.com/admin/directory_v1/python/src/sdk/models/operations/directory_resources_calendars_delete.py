@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DirectoryResourcesCalendarsDeletePathParams:
-    calendar_resource_id: str = field(default=None, metadata={'path_param': { 'field_name': 'calendarResourceId', 'style': 'simple', 'explode': False }})
-    customer: str = field(default=None, metadata={'path_param': { 'field_name': 'customer', 'style': 'simple', 'explode': False }})
+    calendar_resource_id: str = field(metadata={'path_param': { 'field_name': 'calendarResourceId', 'style': 'simple', 'explode': False }})
+    customer: str = field(metadata={'path_param': { 'field_name': 'customer', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,19 +27,19 @@ class DirectoryResourcesCalendarsDeleteQueryParams:
 
 @dataclass
 class DirectoryResourcesCalendarsDeleteSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DirectoryResourcesCalendarsDeleteRequest:
-    path_params: DirectoryResourcesCalendarsDeletePathParams = field(default=None)
-    query_params: DirectoryResourcesCalendarsDeleteQueryParams = field(default=None)
-    security: DirectoryResourcesCalendarsDeleteSecurity = field(default=None)
+    path_params: DirectoryResourcesCalendarsDeletePathParams = field()
+    query_params: DirectoryResourcesCalendarsDeleteQueryParams = field()
+    security: DirectoryResourcesCalendarsDeleteSecurity = field()
     
 
 @dataclass
 class DirectoryResourcesCalendarsDeleteResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

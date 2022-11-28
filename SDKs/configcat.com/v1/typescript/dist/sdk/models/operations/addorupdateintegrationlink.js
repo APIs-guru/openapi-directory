@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var AddOrUpdateIntegrationLinkPathParams = /** @class */ (function (_super) {
     __extends(AddOrUpdateIntegrationLinkPathParams, _super);
@@ -30,19 +30,19 @@ var AddOrUpdateIntegrationLinkPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=environmentId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=environmentId" }),
         __metadata("design:type", String)
     ], AddOrUpdateIntegrationLinkPathParams.prototype, "environmentId", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=integrationLinkType" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=integrationLinkType" }),
         __metadata("design:type", String)
     ], AddOrUpdateIntegrationLinkPathParams.prototype, "integrationLinkType", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=key" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=key" }),
         __metadata("design:type", String)
     ], AddOrUpdateIntegrationLinkPathParams.prototype, "key", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=settingId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=settingId" }),
         __metadata("design:type", Number)
     ], AddOrUpdateIntegrationLinkPathParams.prototype, "settingId", void 0);
     return AddOrUpdateIntegrationLinkPathParams;
@@ -54,15 +54,15 @@ var AddOrUpdateIntegrationLinkRequests = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "request, media_type=application/*+json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/*+json" }),
         __metadata("design:type", shared.AddOrUpdateIntegrationLinkModel)
     ], AddOrUpdateIntegrationLinkRequests.prototype, "addOrUpdateIntegrationLinkModel", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", shared.AddOrUpdateIntegrationLinkModel)
     ], AddOrUpdateIntegrationLinkRequests.prototype, "addOrUpdateIntegrationLinkModel1", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=text/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=text/json" }),
         __metadata("design:type", shared.AddOrUpdateIntegrationLinkModel)
     ], AddOrUpdateIntegrationLinkRequests.prototype, "addOrUpdateIntegrationLinkModel2", void 0);
     return AddOrUpdateIntegrationLinkRequests;
@@ -74,11 +74,11 @@ var AddOrUpdateIntegrationLinkRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", AddOrUpdateIntegrationLinkPathParams)
     ], AddOrUpdateIntegrationLinkRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", AddOrUpdateIntegrationLinkRequests)
     ], AddOrUpdateIntegrationLinkRequest.prototype, "request", void 0);
     return AddOrUpdateIntegrationLinkRequest;
@@ -90,15 +90,15 @@ var AddOrUpdateIntegrationLinkResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], AddOrUpdateIntegrationLinkResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.IntegrationLinkModel)
     ], AddOrUpdateIntegrationLinkResponse.prototype, "integrationLinkModel", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], AddOrUpdateIntegrationLinkResponse.prototype, "statusCode", void 0);
     return AddOrUpdateIntegrationLinkResponse;

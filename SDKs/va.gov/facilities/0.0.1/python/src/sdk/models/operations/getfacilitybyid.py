@@ -5,26 +5,26 @@ from sdk.models import shared
 
 @dataclass
 class GetFacilityByIDPathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetFacilityByIDSecurity:
-    apikey: shared.SchemeApikey = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    apikey: shared.SchemeApikey = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
     
 
 @dataclass
 class GetFacilityByIDRequest:
-    path_params: GetFacilityByIDPathParams = field(default=None)
-    security: GetFacilityByIDSecurity = field(default=None)
+    path_params: GetFacilityByIDPathParams = field()
+    security: GetFacilityByIDSecurity = field()
     
 
 @dataclass
 class GetFacilityByIDResponse:
+    content_type: str = field()
+    status_code: int = field()
     api_error: Optional[shared.APIError] = field(default=None)
-    content_type: str = field(default=None)
     facility_read_response: Optional[shared.FacilityReadResponse] = field(default=None)
     generic_error: Optional[shared.GenericError] = field(default=None)
     geo_facility_read_response: Optional[shared.GeoFacilityReadResponse] = field(default=None)
-    status_code: int = field(default=None)
     

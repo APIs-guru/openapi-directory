@@ -13,6 +13,8 @@ const (
 	GoogleMapsUnityClientInfoPlatformEnumWebGl               GoogleMapsUnityClientInfoPlatformEnum = "WEB_GL"
 )
 
+// GoogleMapsUnityClientInfo
+// Client information.
 type GoogleMapsUnityClientInfo struct {
 	APIClient            *string                                `json:"apiClient,omitempty"`
 	ApplicationID        *string                                `json:"applicationId,omitempty"`

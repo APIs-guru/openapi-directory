@@ -1,19 +1,20 @@
 from dataclasses import dataclass, field
-from typing import List,Optional
+from typing import Optional
 from dataclasses_json import dataclass_json
-from . import googleanalyticsadminv1alphaaudiencefilterexpressionlist
-from . import googleanalyticsadminv1alphaaudiencedimensionormetricfilter
-from . import googleanalyticsadminv1alphaaudienceeventfilter
-from . import googleanalyticsadminv1alphaaudiencefilterexpression
-from . import googleanalyticsadminv1alphaaudiencefilterexpressionlist
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class GoogleAnalyticsAdminV1alphaAudienceFilterExpression:
-    and_group: Optional[googleanalyticsadminv1alphaaudiencefilterexpressionlist.GoogleAnalyticsAdminV1alphaAudienceFilterExpressionList] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'andGroup' }})
-    dimension_or_metric_filter: Optional[googleanalyticsadminv1alphaaudiencedimensionormetricfilter.GoogleAnalyticsAdminV1alphaAudienceDimensionOrMetricFilter] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'dimensionOrMetricFilter' }})
-    event_filter: Optional[googleanalyticsadminv1alphaaudienceeventfilter.GoogleAnalyticsAdminV1alphaAudienceEventFilter] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'eventFilter' }})
-    not_expression: Optional[googleanalyticsadminv1alphaaudiencefilterexpression.GoogleAnalyticsAdminV1alphaAudienceFilterExpression] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'notExpression' }})
-    or_group: Optional[googleanalyticsadminv1alphaaudiencefilterexpressionlist.GoogleAnalyticsAdminV1alphaAudienceFilterExpressionList] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'orGroup' }})
+    r"""GoogleAnalyticsAdminV1alphaAudienceFilterExpression
+    A logical expression of Audience dimension, metric, or event filters.
+    """
+    
+    and_group: Optional[GoogleAnalyticsAdminV1alphaAudienceFilterExpressionList] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('andGroup') }})
+    dimension_or_metric_filter: Optional[GoogleAnalyticsAdminV1alphaAudienceDimensionOrMetricFilter] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('dimensionOrMetricFilter') }})
+    event_filter: Optional[GoogleAnalyticsAdminV1alphaAudienceEventFilter] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('eventFilter') }})
+    not_expression: Optional[GoogleAnalyticsAdminV1alphaAudienceFilterExpression] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('notExpression') }})
+    or_group: Optional[GoogleAnalyticsAdminV1alphaAudienceFilterExpressionList] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('orGroup') }})
     

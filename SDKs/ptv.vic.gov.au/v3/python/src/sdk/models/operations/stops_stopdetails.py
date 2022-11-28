@@ -5,8 +5,8 @@ from sdk.models import shared
 
 @dataclass
 class StopsStopDetailsPathParams:
-    route_type: int = field(default=None, metadata={'path_param': { 'field_name': 'route_type', 'style': 'simple', 'explode': False }})
-    stop_id: int = field(default=None, metadata={'path_param': { 'field_name': 'stop_id', 'style': 'simple', 'explode': False }})
+    route_type: int = field(metadata={'path_param': { 'field_name': 'route_type', 'style': 'simple', 'explode': False }})
+    stop_id: int = field(metadata={'path_param': { 'field_name': 'stop_id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,15 +26,15 @@ class StopsStopDetailsQueryParams:
 
 @dataclass
 class StopsStopDetailsRequest:
-    path_params: StopsStopDetailsPathParams = field(default=None)
-    query_params: StopsStopDetailsQueryParams = field(default=None)
+    path_params: StopsStopDetailsPathParams = field()
+    query_params: StopsStopDetailsQueryParams = field()
     
 
 @dataclass
 class StopsStopDetailsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     v3_error_response: Optional[shared.V3ErrorResponse] = field(default=None)
     v3_stop_response: Optional[shared.V3StopResponse] = field(default=None)
     

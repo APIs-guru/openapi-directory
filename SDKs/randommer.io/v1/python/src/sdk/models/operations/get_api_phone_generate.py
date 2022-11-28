@@ -4,8 +4,8 @@ from typing import Optional
 
 @dataclass
 class GetAPIPhoneGenerateQueryParams:
-    country_code: str = field(default=None, metadata={'query_param': { 'field_name': 'CountryCode', 'style': 'form', 'explode': True }})
-    quantity: int = field(default=None, metadata={'query_param': { 'field_name': 'Quantity', 'style': 'form', 'explode': True }})
+    country_code: str = field(metadata={'query_param': { 'field_name': 'CountryCode', 'style': 'form', 'explode': True }})
+    quantity: int = field(metadata={'query_param': { 'field_name': 'Quantity', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -15,12 +15,12 @@ class GetAPIPhoneGenerateHeaders:
 
 @dataclass
 class GetAPIPhoneGenerateRequest:
-    query_params: GetAPIPhoneGenerateQueryParams = field(default=None)
-    headers: GetAPIPhoneGenerateHeaders = field(default=None)
+    headers: GetAPIPhoneGenerateHeaders = field()
+    query_params: GetAPIPhoneGenerateQueryParams = field()
     
 
 @dataclass
 class GetAPIPhoneGenerateResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

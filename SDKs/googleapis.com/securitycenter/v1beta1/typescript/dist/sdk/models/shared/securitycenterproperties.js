@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // SecurityCenterProperties
 /**
  * Security Command Center managed properties. These properties are managed by Security Command Center and cannot be modified by the user.
@@ -33,23 +33,23 @@ var SecurityCenterProperties = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=resourceName" }),
+        SpeakeasyMetadata({ data: "json, name=resourceName" }),
         __metadata("design:type", String)
     ], SecurityCenterProperties.prototype, "resourceName", void 0);
     __decorate([
-        Metadata({ data: "json, name=resourceOwners" }),
+        SpeakeasyMetadata({ data: "json, name=resourceOwners" }),
         __metadata("design:type", Array)
     ], SecurityCenterProperties.prototype, "resourceOwners", void 0);
     __decorate([
-        Metadata({ data: "json, name=resourceParent" }),
+        SpeakeasyMetadata({ data: "json, name=resourceParent" }),
         __metadata("design:type", String)
     ], SecurityCenterProperties.prototype, "resourceParent", void 0);
     __decorate([
-        Metadata({ data: "json, name=resourceProject" }),
+        SpeakeasyMetadata({ data: "json, name=resourceProject" }),
         __metadata("design:type", String)
     ], SecurityCenterProperties.prototype, "resourceProject", void 0);
     __decorate([
-        Metadata({ data: "json, name=resourceType" }),
+        SpeakeasyMetadata({ data: "json, name=resourceType" }),
         __metadata("design:type", String)
     ], SecurityCenterProperties.prototype, "resourceType", void 0);
     return SecurityCenterProperties;

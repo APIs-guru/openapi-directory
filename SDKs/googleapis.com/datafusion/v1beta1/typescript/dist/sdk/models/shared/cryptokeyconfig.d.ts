@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 /**
  * The crypto key configuration. This field is used by the Customer-managed encryption keys (CMEK) feature.
 **/

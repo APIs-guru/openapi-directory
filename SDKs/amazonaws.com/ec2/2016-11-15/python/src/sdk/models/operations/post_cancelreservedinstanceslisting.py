@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostCancelReservedInstancesListingActionEnum(str, Enum):
     CANCEL_RESERVED_INSTANCES_LISTING = "CancelReservedInstancesListing"
@@ -10,8 +14,8 @@ class PostCancelReservedInstancesListingVersionEnum(str, Enum):
 
 @dataclass
 class PostCancelReservedInstancesListingQueryParams:
-    action: PostCancelReservedInstancesListingActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostCancelReservedInstancesListingVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostCancelReservedInstancesListingActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostCancelReservedInstancesListingVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostCancelReservedInstancesListingHeaders:
 
 @dataclass
 class PostCancelReservedInstancesListingRequest:
-    query_params: PostCancelReservedInstancesListingQueryParams = field(default=None)
-    headers: PostCancelReservedInstancesListingHeaders = field(default=None)
+    headers: PostCancelReservedInstancesListingHeaders = field()
+    query_params: PostCancelReservedInstancesListingQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostCancelReservedInstancesListingResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

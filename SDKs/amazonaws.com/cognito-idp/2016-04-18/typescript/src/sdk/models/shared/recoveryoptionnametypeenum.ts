@@ -1,7 +1,8 @@
 
 
+
 export enum RecoveryOptionNameTypeEnum {
-    VerifiedEmail = "verified_email"
-,    VerifiedPhoneNumber = "verified_phone_number"
-,    AdminOnly = "admin_only"
+    VerifiedEmail = "verified_email",
+    VerifiedPhoneNumber = "verified_phone_number",
+    AdminOnly = "admin_only"
 }

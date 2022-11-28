@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudDialogflowCxV3beta1IntentInput
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Represents the intent to trigger programmatically rather than as a result of natural language processing.
 **/
 export class GoogleCloudDialogflowCxV3beta1IntentInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=intent" })
+  @SpeakeasyMetadata({ data: "json, name=intent" })
   intent?: string;
 }

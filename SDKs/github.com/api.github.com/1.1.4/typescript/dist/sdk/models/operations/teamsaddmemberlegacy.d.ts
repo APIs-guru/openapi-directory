@@ -1,0 +1,25 @@
+import { SpeakeasyBase } from "../../../internal/utils";
+import * as shared from "../shared";
+export declare class TeamsAddMemberLegacyPathParams extends SpeakeasyBase {
+    teamId: number;
+    username: string;
+}
+export declare class TeamsAddMemberLegacy422ApplicationJsonErrors extends SpeakeasyBase {
+    code?: string;
+    field?: string;
+    resource?: string;
+}
+export declare class TeamsAddMemberLegacy422ApplicationJson extends SpeakeasyBase {
+    documentationUrl?: string;
+    errors?: TeamsAddMemberLegacy422ApplicationJsonErrors[];
+    message?: string;
+}
+export declare class TeamsAddMemberLegacyRequest extends SpeakeasyBase {
+    pathParams: TeamsAddMemberLegacyPathParams;
+}
+export declare class TeamsAddMemberLegacyResponse extends SpeakeasyBase {
+    contentType: string;
+    statusCode: number;
+    basicError?: shared.BasicError;
+    teamsAddMemberLegacy422ApplicationJsonObject?: TeamsAddMemberLegacy422ApplicationJson;
+}

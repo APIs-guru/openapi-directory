@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DestinationDataset } from "./destinationdataset";
+
 
 
 // SubscribeListingRequest
@@ -7,6 +8,6 @@ import { DestinationDataset } from "./destinationdataset";
  * Message for subscribing to a listing.
 **/
 export class SubscribeListingRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=destinationDataset" })
+  @SpeakeasyMetadata({ data: "json, name=destinationDataset" })
   destinationDataset?: DestinationDataset;
 }

@@ -1,5 +1,7 @@
 package shared
 
+// Form
+// Google Forms item.
 type Form struct {
 	FormURL      *string `json:"formUrl,omitempty"`
 	ResponseURL  *string `json:"responseUrl,omitempty"`

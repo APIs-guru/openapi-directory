@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AdBlockingConfiguration
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Campaign ad blocking settings.
 **/
 export class AdBlockingConfiguration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=clickThroughUrl" })
+  @SpeakeasyMetadata({ data: "json, name=clickThroughUrl" })
   clickThroughUrl?: string;
 
-  @Metadata({ data: "json, name=creativeBundleId" })
+  @SpeakeasyMetadata({ data: "json, name=creativeBundleId" })
   creativeBundleId?: string;
 
-  @Metadata({ data: "json, name=enabled" })
+  @SpeakeasyMetadata({ data: "json, name=enabled" })
   enabled?: boolean;
 
-  @Metadata({ data: "json, name=overrideClickThroughUrl" })
+  @SpeakeasyMetadata({ data: "json, name=overrideClickThroughUrl" })
   overrideClickThroughUrl?: boolean;
 }

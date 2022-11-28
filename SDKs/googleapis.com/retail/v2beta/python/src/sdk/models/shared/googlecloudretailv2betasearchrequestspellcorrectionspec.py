@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class GoogleCloudRetailV2betaSearchRequestSpellCorrectionSpecModeEnum(str, Enum):
     MODE_UNSPECIFIED = "MODE_UNSPECIFIED"
@@ -11,5 +13,9 @@ class GoogleCloudRetailV2betaSearchRequestSpellCorrectionSpecModeEnum(str, Enum)
 @dataclass_json
 @dataclass
 class GoogleCloudRetailV2betaSearchRequestSpellCorrectionSpec:
-    mode: Optional[GoogleCloudRetailV2betaSearchRequestSpellCorrectionSpecModeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'mode' }})
+    r"""GoogleCloudRetailV2betaSearchRequestSpellCorrectionSpec
+    The specification for query spell correction.
+    """
+    
+    mode: Optional[GoogleCloudRetailV2betaSearchRequestSpellCorrectionSpecModeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('mode') }})
     

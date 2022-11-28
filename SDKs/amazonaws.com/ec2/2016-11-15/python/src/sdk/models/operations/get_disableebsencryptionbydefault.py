@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetDisableEbsEncryptionByDefaultActionEnum(str, Enum):
     DISABLE_EBS_ENCRYPTION_BY_DEFAULT = "DisableEbsEncryptionByDefault"
@@ -10,9 +14,9 @@ class GetDisableEbsEncryptionByDefaultVersionEnum(str, Enum):
 
 @dataclass
 class GetDisableEbsEncryptionByDefaultQueryParams:
-    action: GetDisableEbsEncryptionByDefaultActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetDisableEbsEncryptionByDefaultActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: GetDisableEbsEncryptionByDefaultVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     dry_run: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'DryRun', 'style': 'form', 'explode': True }})
-    version: GetDisableEbsEncryptionByDefaultVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -28,13 +32,13 @@ class GetDisableEbsEncryptionByDefaultHeaders:
 
 @dataclass
 class GetDisableEbsEncryptionByDefaultRequest:
-    query_params: GetDisableEbsEncryptionByDefaultQueryParams = field(default=None)
-    headers: GetDisableEbsEncryptionByDefaultHeaders = field(default=None)
+    headers: GetDisableEbsEncryptionByDefaultHeaders = field()
+    query_params: GetDisableEbsEncryptionByDefaultQueryParams = field()
     
 
 @dataclass
 class GetDisableEbsEncryptionByDefaultResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

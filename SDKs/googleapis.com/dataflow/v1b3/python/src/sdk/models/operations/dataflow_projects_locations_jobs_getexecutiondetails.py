@@ -1,13 +1,14 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DataflowProjectsLocationsJobsGetExecutionDetailsPathParams:
-    job_id: str = field(default=None, metadata={'path_param': { 'field_name': 'jobId', 'style': 'simple', 'explode': False }})
-    location: str = field(default=None, metadata={'path_param': { 'field_name': 'location', 'style': 'simple', 'explode': False }})
-    project_id: str = field(default=None, metadata={'path_param': { 'field_name': 'projectId', 'style': 'simple', 'explode': False }})
+    job_id: str = field(metadata={'path_param': { 'field_name': 'jobId', 'style': 'simple', 'explode': False }})
+    location: str = field(metadata={'path_param': { 'field_name': 'location', 'style': 'simple', 'explode': False }})
+    project_id: str = field(metadata={'path_param': { 'field_name': 'projectId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -29,26 +30,26 @@ class DataflowProjectsLocationsJobsGetExecutionDetailsQueryParams:
 
 @dataclass
 class DataflowProjectsLocationsJobsGetExecutionDetailsSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DataflowProjectsLocationsJobsGetExecutionDetailsSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DataflowProjectsLocationsJobsGetExecutionDetailsSecurityOption3:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DataflowProjectsLocationsJobsGetExecutionDetailsSecurityOption4:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -61,14 +62,14 @@ class DataflowProjectsLocationsJobsGetExecutionDetailsSecurity:
 
 @dataclass
 class DataflowProjectsLocationsJobsGetExecutionDetailsRequest:
-    path_params: DataflowProjectsLocationsJobsGetExecutionDetailsPathParams = field(default=None)
-    query_params: DataflowProjectsLocationsJobsGetExecutionDetailsQueryParams = field(default=None)
-    security: DataflowProjectsLocationsJobsGetExecutionDetailsSecurity = field(default=None)
+    path_params: DataflowProjectsLocationsJobsGetExecutionDetailsPathParams = field()
+    query_params: DataflowProjectsLocationsJobsGetExecutionDetailsQueryParams = field()
+    security: DataflowProjectsLocationsJobsGetExecutionDetailsSecurity = field()
     
 
 @dataclass
 class DataflowProjectsLocationsJobsGetExecutionDetailsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     job_execution_details: Optional[shared.JobExecutionDetails] = field(default=None)
-    status_code: int = field(default=None)
     

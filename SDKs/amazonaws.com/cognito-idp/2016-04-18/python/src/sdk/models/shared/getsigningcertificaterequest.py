@@ -1,9 +1,14 @@
 from dataclasses import dataclass, field
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass_json
 @dataclass
 class GetSigningCertificateRequest:
-    user_pool_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'UserPoolId' }})
+    r"""GetSigningCertificateRequest
+    Request to get a signing certificate from Cognito.
+    """
+    
+    user_pool_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('UserPoolId') }})
     

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { HealthCheckConfiguration } from "./healthcheckconfiguration";
 import { InstanceConfiguration } from "./instanceconfiguration";
 import { SourceConfiguration } from "./sourceconfiguration";
@@ -32,23 +32,23 @@ var UpdateServiceRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=AutoScalingConfigurationArn" }),
+        SpeakeasyMetadata({ data: "json, name=AutoScalingConfigurationArn" }),
         __metadata("design:type", String)
     ], UpdateServiceRequest.prototype, "autoScalingConfigurationArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=HealthCheckConfiguration" }),
+        SpeakeasyMetadata({ data: "json, name=HealthCheckConfiguration" }),
         __metadata("design:type", HealthCheckConfiguration)
     ], UpdateServiceRequest.prototype, "healthCheckConfiguration", void 0);
     __decorate([
-        Metadata({ data: "json, name=InstanceConfiguration" }),
+        SpeakeasyMetadata({ data: "json, name=InstanceConfiguration" }),
         __metadata("design:type", InstanceConfiguration)
     ], UpdateServiceRequest.prototype, "instanceConfiguration", void 0);
     __decorate([
-        Metadata({ data: "json, name=ServiceArn" }),
+        SpeakeasyMetadata({ data: "json, name=ServiceArn" }),
         __metadata("design:type", String)
     ], UpdateServiceRequest.prototype, "serviceArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=SourceConfiguration" }),
+        SpeakeasyMetadata({ data: "json, name=SourceConfiguration" }),
         __metadata("design:type", SourceConfiguration)
     ], UpdateServiceRequest.prototype, "sourceConfiguration", void 0);
     return UpdateServiceRequest;

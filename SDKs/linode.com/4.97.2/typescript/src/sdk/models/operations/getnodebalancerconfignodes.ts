@@ -1,89 +1,78 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetNodeBalancerConfigNodesPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=configId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=configId" })
   configId: number;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=nodeBalancerId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=nodeBalancerId" })
   nodeBalancerId: number;
 }
 
 
 export class GetNodeBalancerConfigNodesQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=page" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page" })
   page?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=page_size" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page_size" })
   pageSize?: number;
 }
 
 
-export class GetNodeBalancerConfigNodesSecurityOption1 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=bearer" })
-  personalAccessToken: shared.SchemePersonalAccessToken;
-}
-
-
-export class GetNodeBalancerConfigNodesSecurityOption2 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
-  oauth: shared.SchemeOauth;
-}
-
-
 export class GetNodeBalancerConfigNodesSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, option=true" })
-  option1?: GetNodeBalancerConfigNodesSecurityOption1;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" })
+  personalAccessToken?: shared.SchemePersonalAccessToken;
 
-  @Metadata({ data: "security, option=true" })
-  option2?: GetNodeBalancerConfigNodesSecurityOption2;
-}
-
-
-export class GetNodeBalancerConfigNodesRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: GetNodeBalancerConfigNodesPathParams;
-
-  @Metadata()
-  queryParams: GetNodeBalancerConfigNodesQueryParams;
-
-  @Metadata()
-  security: GetNodeBalancerConfigNodesSecurity;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
+  oauth?: shared.SchemeOauth;
 }
 
 
 export class GetNodeBalancerConfigNodes200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=data", elemType: shared.NodeBalancerNode })
+  @SpeakeasyMetadata({ data: "json, name=data", elemType: shared.NodeBalancerNode })
   data?: shared.NodeBalancerNode[];
 
-  @Metadata({ data: "json, name=page" })
+  @SpeakeasyMetadata({ data: "json, name=page" })
   page?: number;
 
-  @Metadata({ data: "json, name=pages" })
+  @SpeakeasyMetadata({ data: "json, name=pages" })
   pages?: number;
 
-  @Metadata({ data: "json, name=results" })
+  @SpeakeasyMetadata({ data: "json, name=results" })
   results?: number;
 }
 
 
 export class GetNodeBalancerConfigNodesDefaultApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=errors", elemType: shared.ErrorObject })
+  @SpeakeasyMetadata({ data: "json, name=errors", elemType: shared.ErrorObject })
   errors?: shared.ErrorObject[];
 }
 
 
+export class GetNodeBalancerConfigNodesRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: GetNodeBalancerConfigNodesPathParams;
+
+  @SpeakeasyMetadata()
+  queryParams: GetNodeBalancerConfigNodesQueryParams;
+
+  @SpeakeasyMetadata()
+  security: GetNodeBalancerConfigNodesSecurity;
+}
+
+
 export class GetNodeBalancerConfigNodesResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getNodeBalancerConfigNodes200ApplicationJsonObject?: GetNodeBalancerConfigNodes200ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getNodeBalancerConfigNodesDefaultApplicationJsonObject?: GetNodeBalancerConfigNodesDefaultApplicationJson;
 }

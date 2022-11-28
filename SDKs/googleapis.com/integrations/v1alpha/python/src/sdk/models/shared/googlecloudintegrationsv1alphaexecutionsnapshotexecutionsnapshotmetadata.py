@@ -1,13 +1,18 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass_json
 @dataclass
 class GoogleCloudIntegrationsV1alphaExecutionSnapshotExecutionSnapshotMetadata:
-    execution_attempt: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'executionAttempt' }})
-    task: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'task' }})
-    task_attempt: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'taskAttempt' }})
-    task_number: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'taskNumber' }})
+    r"""GoogleCloudIntegrationsV1alphaExecutionSnapshotExecutionSnapshotMetadata
+    Metadata of the execution snapshot.
+    """
+    
+    execution_attempt: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('executionAttempt') }})
+    task: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('task') }})
+    task_attempt: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('taskAttempt') }})
+    task_number: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('taskNumber') }})
     

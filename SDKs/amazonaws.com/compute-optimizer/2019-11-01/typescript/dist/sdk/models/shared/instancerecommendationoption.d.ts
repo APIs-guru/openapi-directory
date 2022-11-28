@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { PlatformDifferenceEnum } from "./platformdifferenceenum";
 import { UtilizationMetric } from "./utilizationmetric";
 /**

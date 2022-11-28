@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // UpdateCryptoKeyPrimaryVersionRequest
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Request message for KeyManagementService.UpdateCryptoKeyPrimaryVersion.
 **/
 export class UpdateCryptoKeyPrimaryVersionRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=cryptoKeyVersionId" })
+  @SpeakeasyMetadata({ data: "json, name=cryptoKeyVersionId" })
   cryptoKeyVersionId?: string;
 }

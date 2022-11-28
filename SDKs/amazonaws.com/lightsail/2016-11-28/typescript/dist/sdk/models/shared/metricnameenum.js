@@ -1,0 +1,28 @@
+export var MetricNameEnum;
+(function (MetricNameEnum) {
+    MetricNameEnum["CpuUtilization"] = "CPUUtilization";
+    MetricNameEnum["NetworkIn"] = "NetworkIn";
+    MetricNameEnum["NetworkOut"] = "NetworkOut";
+    MetricNameEnum["StatusCheckFailed"] = "StatusCheckFailed";
+    MetricNameEnum["StatusCheckFailedInstance"] = "StatusCheckFailed_Instance";
+    MetricNameEnum["StatusCheckFailedSystem"] = "StatusCheckFailed_System";
+    MetricNameEnum["ClientTlsNegotiationErrorCount"] = "ClientTLSNegotiationErrorCount";
+    MetricNameEnum["HealthyHostCount"] = "HealthyHostCount";
+    MetricNameEnum["UnhealthyHostCount"] = "UnhealthyHostCount";
+    MetricNameEnum["HttpCodeLb4XxCount"] = "HTTPCode_LB_4XX_Count";
+    MetricNameEnum["HttpCodeLb5XxCount"] = "HTTPCode_LB_5XX_Count";
+    MetricNameEnum["HttpCodeInstance2XxCount"] = "HTTPCode_Instance_2XX_Count";
+    MetricNameEnum["HttpCodeInstance3XxCount"] = "HTTPCode_Instance_3XX_Count";
+    MetricNameEnum["HttpCodeInstance4XxCount"] = "HTTPCode_Instance_4XX_Count";
+    MetricNameEnum["HttpCodeInstance5XxCount"] = "HTTPCode_Instance_5XX_Count";
+    MetricNameEnum["InstanceResponseTime"] = "InstanceResponseTime";
+    MetricNameEnum["RejectedConnectionCount"] = "RejectedConnectionCount";
+    MetricNameEnum["RequestCount"] = "RequestCount";
+    MetricNameEnum["DatabaseConnections"] = "DatabaseConnections";
+    MetricNameEnum["DiskQueueDepth"] = "DiskQueueDepth";
+    MetricNameEnum["FreeStorageSpace"] = "FreeStorageSpace";
+    MetricNameEnum["NetworkReceiveThroughput"] = "NetworkReceiveThroughput";
+    MetricNameEnum["NetworkTransmitThroughput"] = "NetworkTransmitThroughput";
+    MetricNameEnum["BurstCapacityTime"] = "BurstCapacityTime";
+    MetricNameEnum["BurstCapacityPercentage"] = "BurstCapacityPercentage";
+})(MetricNameEnum || (MetricNameEnum = {}));

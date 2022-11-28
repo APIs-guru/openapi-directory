@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SecurityConfiguration } from "./securityconfiguration";
 
 
+
 export class GetSecurityConfigurationResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=SecurityConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=SecurityConfiguration" })
   securityConfiguration?: SecurityConfiguration;
 }

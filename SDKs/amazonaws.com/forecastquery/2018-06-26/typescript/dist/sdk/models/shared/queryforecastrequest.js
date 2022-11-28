@@ -22,30 +22,30 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var QueryForecastRequest = /** @class */ (function (_super) {
     __extends(QueryForecastRequest, _super);
     function QueryForecastRequest() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=EndDate" }),
+        SpeakeasyMetadata({ data: "json, name=EndDate" }),
         __metadata("design:type", String)
     ], QueryForecastRequest.prototype, "endDate", void 0);
     __decorate([
-        Metadata({ data: "json, name=Filters" }),
+        SpeakeasyMetadata({ data: "json, name=Filters" }),
         __metadata("design:type", Map)
     ], QueryForecastRequest.prototype, "filters", void 0);
     __decorate([
-        Metadata({ data: "json, name=ForecastArn" }),
+        SpeakeasyMetadata({ data: "json, name=ForecastArn" }),
         __metadata("design:type", String)
     ], QueryForecastRequest.prototype, "forecastArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=NextToken" }),
+        SpeakeasyMetadata({ data: "json, name=NextToken" }),
         __metadata("design:type", String)
     ], QueryForecastRequest.prototype, "nextToken", void 0);
     __decorate([
-        Metadata({ data: "json, name=StartDate" }),
+        SpeakeasyMetadata({ data: "json, name=StartDate" }),
         __metadata("design:type", String)
     ], QueryForecastRequest.prototype, "startDate", void 0);
     return QueryForecastRequest;

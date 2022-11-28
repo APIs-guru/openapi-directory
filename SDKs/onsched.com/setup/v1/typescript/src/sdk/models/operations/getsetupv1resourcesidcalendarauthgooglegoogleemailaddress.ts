@@ -1,38 +1,39 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetSetupV1ResourcesIdCalendarAuthGoogleGoogleEmailAddressPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=googleEmailAddress" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=googleEmailAddress" })
   googleEmailAddress: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" })
   id: string;
 }
 
 
 export class GetSetupV1ResourcesIdCalendarAuthGoogleGoogleEmailAddressQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=googleAuthReturnUrl" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=googleAuthReturnUrl" })
   googleAuthReturnUrl?: string;
 }
 
 
 export class GetSetupV1ResourcesIdCalendarAuthGoogleGoogleEmailAddressRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetSetupV1ResourcesIdCalendarAuthGoogleGoogleEmailAddressPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetSetupV1ResourcesIdCalendarAuthGoogleGoogleEmailAddressQueryParams;
 }
 
 
 export class GetSetupV1ResourcesIdCalendarAuthGoogleGoogleEmailAddressResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   calendarAuthViewModel?: shared.CalendarAuthViewModel;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

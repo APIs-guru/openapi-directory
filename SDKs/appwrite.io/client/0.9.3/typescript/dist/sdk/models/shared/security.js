@@ -22,14 +22,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var SchemeJwt = /** @class */ (function (_super) {
     __extends(SchemeJwt, _super);
     function SchemeJwt() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, name=X-Appwrite-JWT" }),
+        SpeakeasyMetadata({ data: "security, name=X-Appwrite-JWT" }),
         __metadata("design:type", String)
     ], SchemeJwt.prototype, "apiKey", void 0);
     return SchemeJwt;
@@ -41,7 +41,7 @@ var SchemeLocale = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, name=X-Appwrite-Locale" }),
+        SpeakeasyMetadata({ data: "security, name=X-Appwrite-Locale" }),
         __metadata("design:type", String)
     ], SchemeLocale.prototype, "apiKey", void 0);
     return SchemeLocale;
@@ -53,7 +53,7 @@ var SchemeProject = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, name=X-Appwrite-Project" }),
+        SpeakeasyMetadata({ data: "security, name=X-Appwrite-Project" }),
         __metadata("design:type", String)
     ], SchemeProject.prototype, "apiKey", void 0);
     return SchemeProject;

@@ -1,55 +1,56 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class Event extends SpeakeasyBase {
-  @Metadata({ data: "json, name=action" })
+  @SpeakeasyMetadata({ data: "json, name=action" })
   action?: string;
 
-  @Metadata({ data: "json, name=client_id" })
+  @SpeakeasyMetadata({ data: "json, name=client_id" })
   clientId?: string;
 
-  @Metadata({ data: "json, name=created_at" })
+  @SpeakeasyMetadata({ data: "json, name=created_at" })
   createdAt?: number;
 
-  @Metadata({ data: "json, name=details" })
+  @SpeakeasyMetadata({ data: "json, name=details" })
   details?: Map<string, any>;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=organization_id" })
+  @SpeakeasyMetadata({ data: "json, name=organization_id" })
   organizationId?: string;
 
-  @Metadata({ data: "json, name=processed_at" })
+  @SpeakeasyMetadata({ data: "json, name=processed_at" })
   processedAt?: number;
 
-  @Metadata({ data: "json, name=processor_id" })
+  @SpeakeasyMetadata({ data: "json, name=processor_id" })
   processorId?: string;
 
-  @Metadata({ data: "json, name=site_id" })
+  @SpeakeasyMetadata({ data: "json, name=site_id" })
   siteId?: string;
 
-  @Metadata({ data: "json, name=source_id" })
+  @SpeakeasyMetadata({ data: "json, name=source_id" })
   sourceId?: string;
 
-  @Metadata({ data: "json, name=source_name" })
+  @SpeakeasyMetadata({ data: "json, name=source_name" })
   sourceName?: string;
 
-  @Metadata({ data: "json, name=source_type" })
+  @SpeakeasyMetadata({ data: "json, name=source_type" })
   sourceType?: string;
 
-  @Metadata({ data: "json, name=state" })
+  @SpeakeasyMetadata({ data: "json, name=state" })
   state?: string;
 
-  @Metadata({ data: "json, name=success" })
+  @SpeakeasyMetadata({ data: "json, name=success" })
   success?: boolean;
 
-  @Metadata({ data: "json, name=target_id" })
+  @SpeakeasyMetadata({ data: "json, name=target_id" })
   targetId?: string;
 
-  @Metadata({ data: "json, name=target_name" })
+  @SpeakeasyMetadata({ data: "json, name=target_name" })
   targetName?: string;
 
-  @Metadata({ data: "json, name=target_type" })
+  @SpeakeasyMetadata({ data: "json, name=target_type" })
   targetType?: string;
 }

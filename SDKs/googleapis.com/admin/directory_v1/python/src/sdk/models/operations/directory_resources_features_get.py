@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DirectoryResourcesFeaturesGetPathParams:
-    customer: str = field(default=None, metadata={'path_param': { 'field_name': 'customer', 'style': 'simple', 'explode': False }})
-    feature_key: str = field(default=None, metadata={'path_param': { 'field_name': 'featureKey', 'style': 'simple', 'explode': False }})
+    customer: str = field(metadata={'path_param': { 'field_name': 'customer', 'style': 'simple', 'explode': False }})
+    feature_key: str = field(metadata={'path_param': { 'field_name': 'featureKey', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,14 +27,14 @@ class DirectoryResourcesFeaturesGetQueryParams:
 
 @dataclass
 class DirectoryResourcesFeaturesGetSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DirectoryResourcesFeaturesGetSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -44,14 +45,14 @@ class DirectoryResourcesFeaturesGetSecurity:
 
 @dataclass
 class DirectoryResourcesFeaturesGetRequest:
-    path_params: DirectoryResourcesFeaturesGetPathParams = field(default=None)
-    query_params: DirectoryResourcesFeaturesGetQueryParams = field(default=None)
-    security: DirectoryResourcesFeaturesGetSecurity = field(default=None)
+    path_params: DirectoryResourcesFeaturesGetPathParams = field()
+    query_params: DirectoryResourcesFeaturesGetQueryParams = field()
+    security: DirectoryResourcesFeaturesGetSecurity = field()
     
 
 @dataclass
 class DirectoryResourcesFeaturesGetResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     feature: Optional[shared.Feature] = field(default=None)
-    status_code: int = field(default=None)
     

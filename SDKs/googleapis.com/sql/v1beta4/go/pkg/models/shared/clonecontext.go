@@ -1,5 +1,7 @@
 package shared
 
+// CloneContext
+// Database instance clone context.
 type CloneContext struct {
 	AllocatedIPRange        *string            `json:"allocatedIpRange,omitempty"`
 	BinLogCoordinates       *BinLogCoordinates `json:"binLogCoordinates,omitempty"`

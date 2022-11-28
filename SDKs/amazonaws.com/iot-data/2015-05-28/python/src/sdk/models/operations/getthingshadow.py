@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class GetThingShadowPathParams:
-    thing_name: str = field(default=None, metadata={'path_param': { 'field_name': 'thingName', 'style': 'simple', 'explode': False }})
+    thing_name: str = field(metadata={'path_param': { 'field_name': 'thingName', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,21 +29,21 @@ class GetThingShadowHeaders:
 
 @dataclass
 class GetThingShadowRequest:
-    path_params: GetThingShadowPathParams = field(default=None)
-    query_params: GetThingShadowQueryParams = field(default=None)
-    headers: GetThingShadowHeaders = field(default=None)
+    headers: GetThingShadowHeaders = field()
+    path_params: GetThingShadowPathParams = field()
+    query_params: GetThingShadowQueryParams = field()
     
 
 @dataclass
 class GetThingShadowResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     get_thing_shadow_response: Optional[shared.GetThingShadowResponse] = field(default=None)
     internal_failure_exception: Optional[Any] = field(default=None)
     invalid_request_exception: Optional[Any] = field(default=None)
     method_not_allowed_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
     service_unavailable_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     unauthorized_exception: Optional[Any] = field(default=None)
     unsupported_document_encoding_exception: Optional[Any] = field(default=None)

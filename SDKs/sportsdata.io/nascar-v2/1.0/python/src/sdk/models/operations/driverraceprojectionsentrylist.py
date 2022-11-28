@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from typing import Any,List,Optional
+from enum import Enum
 
 class DriverRaceProjectionsEntryListFormatEnum(str, Enum):
     XML = "xml"
@@ -8,18 +9,18 @@ class DriverRaceProjectionsEntryListFormatEnum(str, Enum):
 
 @dataclass
 class DriverRaceProjectionsEntryListPathParams:
-    format: DriverRaceProjectionsEntryListFormatEnum = field(default=None, metadata={'path_param': { 'field_name': 'format', 'style': 'simple', 'explode': False }})
-    raceid: str = field(default=None, metadata={'path_param': { 'field_name': 'raceid', 'style': 'simple', 'explode': False }})
+    format: DriverRaceProjectionsEntryListFormatEnum = field(metadata={'path_param': { 'field_name': 'format', 'style': 'simple', 'explode': False }})
+    raceid: str = field(metadata={'path_param': { 'field_name': 'raceid', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class DriverRaceProjectionsEntryListRequest:
-    path_params: DriverRaceProjectionsEntryListPathParams = field(default=None)
+    path_params: DriverRaceProjectionsEntryListPathParams = field()
     
 
 @dataclass
 class DriverRaceProjectionsEntryListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     driver_race_projections: Optional[List[Any]] = field(default=None)
-    status_code: int = field(default=None)
     

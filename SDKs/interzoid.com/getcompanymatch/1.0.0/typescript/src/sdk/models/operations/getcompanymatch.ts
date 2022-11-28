@@ -1,40 +1,41 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetcompanymatchQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=company" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=company" })
   company: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=license" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=license" })
   license: string;
 }
 
 
-export class GetcompanymatchRequest extends SpeakeasyBase {
-  @Metadata()
-  queryParams: GetcompanymatchQueryParams;
-}
-
-
 export class Getcompanymatch200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Code" })
+  @SpeakeasyMetadata({ data: "json, name=Code" })
   code?: string;
 
-  @Metadata({ data: "json, name=Credits" })
+  @SpeakeasyMetadata({ data: "json, name=Credits" })
   credits?: string;
 
-  @Metadata({ data: "json, name=Simkey" })
+  @SpeakeasyMetadata({ data: "json, name=Simkey" })
   simkey?: string;
 }
 
 
+export class GetcompanymatchRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  queryParams: GetcompanymatchQueryParams;
+}
+
+
 export class GetcompanymatchResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getcompanymatch200ApplicationJsonObject?: Getcompanymatch200ApplicationJson;
 }

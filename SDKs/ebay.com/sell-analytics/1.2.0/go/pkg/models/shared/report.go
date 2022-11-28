@@ -1,5 +1,7 @@
 package shared
 
+// Report
+// The complex type that defines that defines the report.
 type Report struct {
 	DimensionMetadata []Metadata `json:"dimensionMetadata,omitempty"`
 	EndDate           *string    `json:"endDate,omitempty"`

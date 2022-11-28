@@ -1,0 +1,31 @@
+import { AxiosInstance, AxiosRequestConfig } from "axios";
+import * as operations from "./models/operations";
+type OptsFunc = (sdk: SDK) => void;
+export declare const ServerList: readonly ["https://notify.twilio.com"];
+export declare function WithServerURL(serverURL: string, params?: Map<string, string>): OptsFunc;
+export declare function WithClient(client: AxiosInstance): OptsFunc;
+export declare class SDK {
+    _defaultClient: AxiosInstance;
+    _securityClient: AxiosInstance;
+    _serverURL: string;
+    private _language;
+    private _sdkVersion;
+    private _genVersion;
+    constructor(...opts: OptsFunc[]);
+    createBinding(req: operations.CreateBindingRequest, config?: AxiosRequestConfig): Promise<operations.CreateBindingResponse>;
+    createCredential(req: operations.CreateCredentialRequest, config?: AxiosRequestConfig): Promise<operations.CreateCredentialResponse>;
+    createNotification(req: operations.CreateNotificationRequest, config?: AxiosRequestConfig): Promise<operations.CreateNotificationResponse>;
+    createService(req: operations.CreateServiceRequest, config?: AxiosRequestConfig): Promise<operations.CreateServiceResponse>;
+    deleteBinding(req: operations.DeleteBindingRequest, config?: AxiosRequestConfig): Promise<operations.DeleteBindingResponse>;
+    deleteCredential(req: operations.DeleteCredentialRequest, config?: AxiosRequestConfig): Promise<operations.DeleteCredentialResponse>;
+    deleteService(req: operations.DeleteServiceRequest, config?: AxiosRequestConfig): Promise<operations.DeleteServiceResponse>;
+    fetchBinding(req: operations.FetchBindingRequest, config?: AxiosRequestConfig): Promise<operations.FetchBindingResponse>;
+    fetchCredential(req: operations.FetchCredentialRequest, config?: AxiosRequestConfig): Promise<operations.FetchCredentialResponse>;
+    fetchService(req: operations.FetchServiceRequest, config?: AxiosRequestConfig): Promise<operations.FetchServiceResponse>;
+    listBinding(req: operations.ListBindingRequest, config?: AxiosRequestConfig): Promise<operations.ListBindingResponse>;
+    listCredential(req: operations.ListCredentialRequest, config?: AxiosRequestConfig): Promise<operations.ListCredentialResponse>;
+    listService(req: operations.ListServiceRequest, config?: AxiosRequestConfig): Promise<operations.ListServiceResponse>;
+    updateCredential(req: operations.UpdateCredentialRequest, config?: AxiosRequestConfig): Promise<operations.UpdateCredentialResponse>;
+    updateService(req: operations.UpdateServiceRequest, config?: AxiosRequestConfig): Promise<operations.UpdateServiceResponse>;
+}
+export {};

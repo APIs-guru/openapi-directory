@@ -1,56 +1,57 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetP60ReportOutputQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=EmployeeCodes" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=EmployeeCodes" })
   employeeCodes?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=EmployerKey" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=EmployerKey" })
   employerKey: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=MaxIndex" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=MaxIndex" })
   maxIndex?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=StartIndex" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=StartIndex" })
   startIndex?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=TaxYear" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=TaxYear" })
   taxYear: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=TransformDefinitionKey" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=TransformDefinitionKey" })
   transformDefinitionKey?: string;
 }
 
 
 export class GetP60ReportOutputHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=Api-Version" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Api-Version" })
   apiVersion: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=Authorization" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Authorization" })
   authorization: string;
 }
 
 
 export class GetP60ReportOutputRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetP60ReportOutputQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: GetP60ReportOutputHeaders;
 }
 
 
 export class GetP60ReportOutputResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   errorModel?: shared.ErrorModel;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getP60ReportOutput200ApplicationJsonBinaryString?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

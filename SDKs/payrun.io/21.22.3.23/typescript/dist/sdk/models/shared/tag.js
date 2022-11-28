@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // TagTagTaggedItem
 /**
  * The tags' tagged item
@@ -33,15 +33,15 @@ var TagTagTaggedItem = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=@href" }),
+        SpeakeasyMetadata({ data: "json, name=@href" }),
         __metadata("design:type", String)
     ], TagTagTaggedItem.prototype, "atHref", void 0);
     __decorate([
-        Metadata({ data: "json, name=@rel" }),
+        SpeakeasyMetadata({ data: "json, name=@rel" }),
         __metadata("design:type", String)
     ], TagTagTaggedItem.prototype, "atRel", void 0);
     __decorate([
-        Metadata({ data: "json, name=@title" }),
+        SpeakeasyMetadata({ data: "json, name=@title" }),
         __metadata("design:type", String)
     ], TagTagTaggedItem.prototype, "atTitle", void 0);
     return TagTagTaggedItem;
@@ -53,15 +53,15 @@ var TagTag = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Created" }),
+        SpeakeasyMetadata({ data: "json, name=Created" }),
         __metadata("design:type", Date)
     ], TagTag.prototype, "created", void 0);
     __decorate([
-        Metadata({ data: "json, name=TaggedItem" }),
+        SpeakeasyMetadata({ data: "json, name=TaggedItem" }),
         __metadata("design:type", TagTagTaggedItem)
     ], TagTag.prototype, "taggedItem", void 0);
     __decorate([
-        Metadata({ data: "json, name=Text" }),
+        SpeakeasyMetadata({ data: "json, name=Text" }),
         __metadata("design:type", String)
     ], TagTag.prototype, "text", void 0);
     return TagTag;
@@ -73,7 +73,7 @@ var Tag = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Tag" }),
+        SpeakeasyMetadata({ data: "json, name=Tag" }),
         __metadata("design:type", TagTag)
     ], Tag.prototype, "tag", void 0);
     return Tag;

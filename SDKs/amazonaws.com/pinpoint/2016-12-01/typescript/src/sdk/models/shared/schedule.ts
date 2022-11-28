@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CampaignEventFilter } from "./campaigneventfilter";
 import { FrequencyEnum } from "./frequencyenum";
 import { QuietTime } from "./quiettime";
+
 
 
 // Schedule
@@ -9,24 +10,24 @@ import { QuietTime } from "./quiettime";
  * Specifies the schedule settings for a campaign.
 **/
 export class Schedule extends SpeakeasyBase {
-  @Metadata({ data: "json, name=EndTime" })
+  @SpeakeasyMetadata({ data: "json, name=EndTime" })
   endTime?: string;
 
-  @Metadata({ data: "json, name=EventFilter" })
+  @SpeakeasyMetadata({ data: "json, name=EventFilter" })
   eventFilter?: CampaignEventFilter;
 
-  @Metadata({ data: "json, name=Frequency" })
+  @SpeakeasyMetadata({ data: "json, name=Frequency" })
   frequency?: FrequencyEnum;
 
-  @Metadata({ data: "json, name=IsLocalTime" })
+  @SpeakeasyMetadata({ data: "json, name=IsLocalTime" })
   isLocalTime?: boolean;
 
-  @Metadata({ data: "json, name=QuietTime" })
+  @SpeakeasyMetadata({ data: "json, name=QuietTime" })
   quietTime?: QuietTime;
 
-  @Metadata({ data: "json, name=StartTime" })
+  @SpeakeasyMetadata({ data: "json, name=StartTime" })
   startTime: string;
 
-  @Metadata({ data: "json, name=Timezone" })
+  @SpeakeasyMetadata({ data: "json, name=Timezone" })
   timezone?: string;
 }

@@ -1,17 +1,18 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class RecipeCategoriesResponse extends SpeakeasyBase {
-  @Metadata({ elemType: shared.BigOvenModelRecipeCategory })
+  @SpeakeasyMetadata({ elemType: shared.BigOvenModelRecipeCategory })
   bigOvenModelRecipeCategories?: shared.BigOvenModelRecipeCategory[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

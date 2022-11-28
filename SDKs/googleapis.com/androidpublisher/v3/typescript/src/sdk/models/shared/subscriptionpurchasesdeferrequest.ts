@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SubscriptionDeferralInfo } from "./subscriptiondeferralinfo";
+
 
 
 // SubscriptionPurchasesDeferRequest
@@ -7,6 +8,6 @@ import { SubscriptionDeferralInfo } from "./subscriptiondeferralinfo";
  * Request for the purchases.subscriptions.defer API.
 **/
 export class SubscriptionPurchasesDeferRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=deferralInfo" })
+  @SpeakeasyMetadata({ data: "json, name=deferralInfo" })
   deferralInfo?: SubscriptionDeferralInfo;
 }

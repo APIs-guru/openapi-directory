@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { PubsubMessage } from "./pubsubmessage";
 /**
  * An event indicating a received message or truncation event.

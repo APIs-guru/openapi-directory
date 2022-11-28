@@ -1,14 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Process } from "./process";
 
 
+
 export class ProjectRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=file_id" })
+  @SpeakeasyMetadata({ data: "json, name=file_id" })
   fileId: string;
 
-  @Metadata({ data: "json, name=process" })
+  @SpeakeasyMetadata({ data: "json, name=process" })
   process?: Process;
 
-  @Metadata({ data: "json, name=project_title" })
+  @SpeakeasyMetadata({ data: "json, name=project_title" })
   projectTitle: string;
 }

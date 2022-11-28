@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum CustomRankingInfoImportanceLevelEnum {
-    ImportanceLevelUnspecified = "IMPORTANCE_LEVEL_UNSPECIFIED"
-,    None = "NONE"
-,    Low = "LOW"
-,    Mild = "MILD"
-,    Medium = "MEDIUM"
-,    High = "HIGH"
-,    Extreme = "EXTREME"
+    ImportanceLevelUnspecified = "IMPORTANCE_LEVEL_UNSPECIFIED",
+    None = "NONE",
+    Low = "LOW",
+    Mild = "MILD",
+    Medium = "MEDIUM",
+    High = "HIGH",
+    Extreme = "EXTREME"
 }
 
 
@@ -16,9 +17,9 @@ export enum CustomRankingInfoImportanceLevelEnum {
  * Custom ranking information for SearchJobsRequest.
 **/
 export class CustomRankingInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=importanceLevel" })
+  @SpeakeasyMetadata({ data: "json, name=importanceLevel" })
   importanceLevel?: CustomRankingInfoImportanceLevelEnum;
 
-  @Metadata({ data: "json, name=rankingExpression" })
+  @SpeakeasyMetadata({ data: "json, name=rankingExpression" })
   rankingExpression?: string;
 }

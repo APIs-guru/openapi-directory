@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ActivityType } from "./activitytype";
 import { RegistrationStatusEnum } from "./registrationstatusenum";
+
 
 
 // ActivityTypeInfo
@@ -8,18 +9,18 @@ import { RegistrationStatusEnum } from "./registrationstatusenum";
  * Detailed information about an activity type.
 **/
 export class ActivityTypeInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=activityType" })
+  @SpeakeasyMetadata({ data: "json, name=activityType" })
   activityType: ActivityType;
 
-  @Metadata({ data: "json, name=creationDate" })
+  @SpeakeasyMetadata({ data: "json, name=creationDate" })
   creationDate: Date;
 
-  @Metadata({ data: "json, name=deprecationDate" })
+  @SpeakeasyMetadata({ data: "json, name=deprecationDate" })
   deprecationDate?: Date;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status: RegistrationStatusEnum;
 }

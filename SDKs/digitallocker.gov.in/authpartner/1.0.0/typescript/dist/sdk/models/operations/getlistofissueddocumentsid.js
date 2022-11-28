@@ -22,18 +22,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var GetListOfIssuedDocumentsId200ApplicationJson = /** @class */ (function (_super) {
     __extends(GetListOfIssuedDocumentsId200ApplicationJson, _super);
     function GetListOfIssuedDocumentsId200ApplicationJson() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=items" }),
+        SpeakeasyMetadata({ data: "json, name=items" }),
         __metadata("design:type", Array)
     ], GetListOfIssuedDocumentsId200ApplicationJson.prototype, "items", void 0);
     __decorate([
-        Metadata({ data: "json, name=resource" }),
+        SpeakeasyMetadata({ data: "json, name=resource" }),
         __metadata("design:type", String)
     ], GetListOfIssuedDocumentsId200ApplicationJson.prototype, "resource", void 0);
     return GetListOfIssuedDocumentsId200ApplicationJson;
@@ -45,11 +45,11 @@ var GetListOfIssuedDocumentsId401ApplicationJson = /** @class */ (function (_sup
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], GetListOfIssuedDocumentsId401ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=error_description" }),
+        SpeakeasyMetadata({ data: "json, name=error_description" }),
         __metadata("design:type", String)
     ], GetListOfIssuedDocumentsId401ApplicationJson.prototype, "errorDescription", void 0);
     return GetListOfIssuedDocumentsId401ApplicationJson;
@@ -61,23 +61,23 @@ var GetListOfIssuedDocumentsIdResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetListOfIssuedDocumentsIdResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetListOfIssuedDocumentsId200ApplicationJson)
     ], GetListOfIssuedDocumentsIdResponse.prototype, "getListOfIssuedDocumentsId200ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetListOfIssuedDocumentsId401ApplicationJson)
     ], GetListOfIssuedDocumentsIdResponse.prototype, "getListOfIssuedDocumentsId401ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], GetListOfIssuedDocumentsIdResponse.prototype, "getListOfIssuedDocumentsId500ApplicationJsonOneOf", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetListOfIssuedDocumentsIdResponse.prototype, "statusCode", void 0);
     return GetListOfIssuedDocumentsIdResponse;

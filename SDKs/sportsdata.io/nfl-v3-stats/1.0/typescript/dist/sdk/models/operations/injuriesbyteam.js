@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var InjuriesByTeamFormatEnum;
 (function (InjuriesByTeamFormatEnum) {
     InjuriesByTeamFormatEnum["Xml"] = "XML";
@@ -34,19 +34,19 @@ var InjuriesByTeamPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=format" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=format" }),
         __metadata("design:type", String)
     ], InjuriesByTeamPathParams.prototype, "format", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=season" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=season" }),
         __metadata("design:type", String)
     ], InjuriesByTeamPathParams.prototype, "season", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=team" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=team" }),
         __metadata("design:type", String)
     ], InjuriesByTeamPathParams.prototype, "team", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=week" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=week" }),
         __metadata("design:type", String)
     ], InjuriesByTeamPathParams.prototype, "week", void 0);
     return InjuriesByTeamPathParams;
@@ -58,7 +58,7 @@ var InjuriesByTeamRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", InjuriesByTeamPathParams)
     ], InjuriesByTeamRequest.prototype, "pathParams", void 0);
     return InjuriesByTeamRequest;
@@ -70,15 +70,15 @@ var InjuriesByTeamResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], InjuriesByTeamResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Array)
     ], InjuriesByTeamResponse.prototype, "injuries", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], InjuriesByTeamResponse.prototype, "statusCode", void 0);
     return InjuriesByTeamResponse;

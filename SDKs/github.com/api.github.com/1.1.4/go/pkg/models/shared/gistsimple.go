@@ -10,6 +10,8 @@ type GistSimpleFiles struct {
 	Type      *string `json:"type,omitempty"`
 }
 
+// GistSimple
+// Gist Simple
 type GistSimple struct {
 	Comments    *int64                     `json:"comments,omitempty"`
 	CommentsURL *string                    `json:"comments_url,omitempty"`

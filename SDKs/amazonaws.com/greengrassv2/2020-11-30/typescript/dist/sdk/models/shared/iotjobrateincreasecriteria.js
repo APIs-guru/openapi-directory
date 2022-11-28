@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // IoTJobRateIncreaseCriteria
 /**
  * Contains information about criteria to meet before a job increases its rollout rate. Specify either <code>numberOfNotifiedThings</code> or <code>numberOfSucceededThings</code>.
@@ -33,11 +33,11 @@ var IoTJobRateIncreaseCriteria = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=numberOfNotifiedThings" }),
+        SpeakeasyMetadata({ data: "json, name=numberOfNotifiedThings" }),
         __metadata("design:type", Number)
     ], IoTJobRateIncreaseCriteria.prototype, "numberOfNotifiedThings", void 0);
     __decorate([
-        Metadata({ data: "json, name=numberOfSucceededThings" }),
+        SpeakeasyMetadata({ data: "json, name=numberOfSucceededThings" }),
         __metadata("design:type", Number)
     ], IoTJobRateIncreaseCriteria.prototype, "numberOfSucceededThings", void 0);
     return IoTJobRateIncreaseCriteria;

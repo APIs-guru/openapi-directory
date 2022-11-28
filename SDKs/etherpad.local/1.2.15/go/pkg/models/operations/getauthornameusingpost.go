@@ -4,10 +4,6 @@ type GetAuthorNameUsingPostQueryParams struct {
 	AuthorID *string `queryParam:"style=form,explode=true,name=authorID"`
 }
 
-type GetAuthorNameUsingPostRequest struct {
-	QueryParams GetAuthorNameUsingPostQueryParams
-}
-
 type GetAuthorNameUsingPost200ApplicationJSONDataInfo struct {
 	ColorID   *string `json:"colorId,omitempty"`
 	ID        *string `json:"id,omitempty"`
@@ -41,6 +37,10 @@ type GetAuthorNameUsingPost500ApplicationJSON struct {
 	Code    *int64                 `json:"code,omitempty"`
 	Data    map[string]interface{} `json:"data,omitempty"`
 	Message *string                `json:"message,omitempty"`
+}
+
+type GetAuthorNameUsingPostRequest struct {
+	QueryParams GetAuthorNameUsingPostQueryParams
 }
 
 type GetAuthorNameUsingPostResponse struct {

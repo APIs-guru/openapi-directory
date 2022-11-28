@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostPurgeQueueActionEnum(str, Enum):
     PURGE_QUEUE = "PurgeQueue"
@@ -10,8 +14,8 @@ class PostPurgeQueueVersionEnum(str, Enum):
 
 @dataclass
 class PostPurgeQueueQueryParams:
-    action: PostPurgeQueueActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostPurgeQueueVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostPurgeQueueActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostPurgeQueueVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostPurgeQueueHeaders:
 
 @dataclass
 class PostPurgeQueueRequest:
-    query_params: PostPurgeQueueQueryParams = field(default=None)
-    headers: PostPurgeQueueHeaders = field(default=None)
+    headers: PostPurgeQueueHeaders = field()
+    query_params: PostPurgeQueueQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostPurgeQueueResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

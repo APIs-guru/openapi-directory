@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Forecast } from "./forecast";
 
 
+
 export class QueryForecastResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Forecast" })
+  @SpeakeasyMetadata({ data: "json, name=Forecast" })
   forecast?: Forecast;
 }

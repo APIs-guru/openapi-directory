@@ -1,86 +1,87 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class BigqueryModelsDeletePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=datasetId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=datasetId" })
   datasetId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=modelId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=modelId" })
   modelId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=projectId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=projectId" })
   projectId: string;
 }
 
 
 export class BigqueryModelsDeleteQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=alt" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=alt" })
   alt?: shared.AltEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=fields" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=fields" })
   fields?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=key" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=key" })
   key?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=oauth_token" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=oauth_token" })
   oauthToken?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=prettyPrint" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=prettyPrint" })
   prettyPrint?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=quotaUser" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=quotaUser" })
   quotaUser?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=userIp" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=userIp" })
   userIp?: string;
 }
 
 
 export class BigqueryModelsDeleteSecurityOption1 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   oauth2: shared.SchemeOauth2;
 
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   oauth2c: shared.SchemeOauth2c;
 }
 
 
 export class BigqueryModelsDeleteSecurityOption2 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   oauth2: shared.SchemeOauth2;
 
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   oauth2c: shared.SchemeOauth2c;
 }
 
 
 export class BigqueryModelsDeleteSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, option=true" })
+  @SpeakeasyMetadata({ data: "security, option=true" })
   option1?: BigqueryModelsDeleteSecurityOption1;
 
-  @Metadata({ data: "security, option=true" })
+  @SpeakeasyMetadata({ data: "security, option=true" })
   option2?: BigqueryModelsDeleteSecurityOption2;
 }
 
 
 export class BigqueryModelsDeleteRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: BigqueryModelsDeletePathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: BigqueryModelsDeleteQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: BigqueryModelsDeleteSecurity;
 }
 
 
 export class BigqueryModelsDeleteResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

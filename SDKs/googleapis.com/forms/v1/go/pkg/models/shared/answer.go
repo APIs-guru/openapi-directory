@@ -1,5 +1,7 @@
 package shared
 
+// Answer
+// The submitted answer for a question.
 type Answer struct {
 	FileUploadAnswers *FileUploadAnswers `json:"fileUploadAnswers,omitempty"`
 	Grade             *Grade             `json:"grade,omitempty"`

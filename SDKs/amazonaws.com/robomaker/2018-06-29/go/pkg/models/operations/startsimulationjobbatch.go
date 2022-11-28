@@ -14,6 +14,8 @@ type StartSimulationJobBatchHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// StartSimulationJobBatchRequestBodyBatchPolicy
+// Information about the batch policy.
 type StartSimulationJobBatchRequestBodyBatchPolicy struct {
 	MaxConcurrency   *int64 `json:"maxConcurrency,omitempty"`
 	TimeoutInSeconds *int64 `json:"timeoutInSeconds,omitempty"`

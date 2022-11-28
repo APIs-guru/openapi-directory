@@ -1,15 +1,15 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import userpoolmfatype_enum
-from . import smsmfaconfigtype
-from . import softwaretokenmfaconfigtype
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class SetUserPoolMfaConfigResponse:
-    mfa_configuration: Optional[userpoolmfatype_enum.UserPoolMfaTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'MfaConfiguration' }})
-    sms_mfa_configuration: Optional[smsmfaconfigtype.SmsMfaConfigType] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'SmsMfaConfiguration' }})
-    software_token_mfa_configuration: Optional[softwaretokenmfaconfigtype.SoftwareTokenMfaConfigType] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'SoftwareTokenMfaConfiguration' }})
+    mfa_configuration: Optional[UserPoolMfaTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('MfaConfiguration') }})
+    sms_mfa_configuration: Optional[SmsMfaConfigType] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('SmsMfaConfiguration') }})
+    software_token_mfa_configuration: Optional[SoftwareTokenMfaConfigType] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('SoftwareTokenMfaConfiguration') }})
     

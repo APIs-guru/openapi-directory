@@ -1,13 +1,19 @@
 from dataclasses import dataclass, field
-from typing import Enum,List
+from typing import List
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import actionsubtype_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class SsmActionDefinition:
-    action_sub_type: actionsubtype_enum.ActionSubTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ActionSubType' }})
-    instance_ids: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'InstanceIds' }})
-    region: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Region' }})
+    r"""SsmActionDefinition
+     The AWS Systems Manager (SSM) action definition details. 
+    """
+    
+    action_sub_type: ActionSubTypeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('ActionSubType') }})
+    instance_ids: List[str] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('InstanceIds') }})
+    region: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Region') }})
     

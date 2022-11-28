@@ -1,16 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class DeleteDataSourcePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=datasourceId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=datasourceId" })
   datasourceId: string;
-}
-
-
-export class DeleteDataSourceRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: DeleteDataSourcePathParams;
 }
 
 export enum DeleteDataSource200ApplicationJsonActionEnum {
@@ -19,35 +14,41 @@ export enum DeleteDataSource200ApplicationJsonActionEnum {
 
 
 export class DeleteDataSource200ApplicationJsonData extends SpeakeasyBase {
-  @Metadata({ data: "json, name=datasources", elemType: shared.Datasource })
+  @SpeakeasyMetadata({ data: "json, name=datasources", elemType: shared.Datasource })
   datasources: shared.Datasource[];
 }
 
 export enum DeleteDataSource200ApplicationJsonResultEnum {
-    Success = "success"
-,    Error = "error"
+    Success = "success",
+    Error = "error"
 }
 
 
 export class DeleteDataSource200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=action" })
+  @SpeakeasyMetadata({ data: "json, name=action" })
   action: DeleteDataSource200ApplicationJsonActionEnum;
 
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data: DeleteDataSource200ApplicationJsonData;
 
-  @Metadata({ data: "json, name=result" })
+  @SpeakeasyMetadata({ data: "json, name=result" })
   result: DeleteDataSource200ApplicationJsonResultEnum;
 }
 
 
+export class DeleteDataSourceRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: DeleteDataSourcePathParams;
+}
+
+
 export class DeleteDataSourceResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   deleteDataSource200ApplicationJsonObject?: DeleteDataSource200ApplicationJson;
 }

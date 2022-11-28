@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // SpeechContext
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Provides "hints" to the speech recognizer to favor specific words and phrases in the results.
 **/
 export class SpeechContext extends SpeakeasyBase {
-  @Metadata({ data: "json, name=boost" })
+  @SpeakeasyMetadata({ data: "json, name=boost" })
   boost?: number;
 
-  @Metadata({ data: "json, name=phrases" })
+  @SpeakeasyMetadata({ data: "json, name=phrases" })
   phrases?: string[];
 }

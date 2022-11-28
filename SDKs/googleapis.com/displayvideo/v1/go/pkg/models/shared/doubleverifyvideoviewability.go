@@ -37,6 +37,8 @@ const (
 	DoubleVerifyVideoViewabilityVideoViewableRateEnumViewedPerformance10PercentHigher DoubleVerifyVideoViewabilityVideoViewableRateEnum = "VIEWED_PERFORMANCE_10_PERCENT_HIGHER"
 )
 
+// DoubleVerifyVideoViewability
+// Details of DoubleVerify video viewability settings.
 type DoubleVerifyVideoViewability struct {
 	PlayerImpressionRate *DoubleVerifyVideoViewabilityPlayerImpressionRateEnum `json:"playerImpressionRate,omitempty"`
 	VideoIab             *DoubleVerifyVideoViewabilityVideoIabEnum             `json:"videoIab,omitempty"`

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // VideoFileDetailsAudioStream
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Information about an audio stream.
 **/
 export class VideoFileDetailsAudioStream extends SpeakeasyBase {
-  @Metadata({ data: "json, name=bitrateBps" })
+  @SpeakeasyMetadata({ data: "json, name=bitrateBps" })
   bitrateBps?: string;
 
-  @Metadata({ data: "json, name=channelCount" })
+  @SpeakeasyMetadata({ data: "json, name=channelCount" })
   channelCount?: number;
 
-  @Metadata({ data: "json, name=codec" })
+  @SpeakeasyMetadata({ data: "json, name=codec" })
   codec?: string;
 
-  @Metadata({ data: "json, name=vendor" })
+  @SpeakeasyMetadata({ data: "json, name=vendor" })
   vendor?: string;
 }

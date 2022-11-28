@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass_json
 @dataclass
 class DocumentServiceException:
-    message: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'message' }})
-    status: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+    r"""DocumentServiceException
+    Information about any problems encountered while processing an upload request.
+    """
+    
+    message: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('message') }})
+    status: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('status') }})
     

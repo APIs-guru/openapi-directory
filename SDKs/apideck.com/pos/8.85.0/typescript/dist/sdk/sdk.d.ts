@@ -1,0 +1,36 @@
+import { AxiosInstance } from "axios";
+import { Security } from "./models/shared";
+import { Items } from "./items";
+import { Locations } from "./locations";
+import { Merchants } from "./merchants";
+import { ModifierGroups } from "./modifiergroups";
+import { Modifiers } from "./modifiers";
+import { OrderTypes } from "./ordertypes";
+import { Orders } from "./orders";
+import { Payments } from "./payments";
+import { Tenders } from "./tenders";
+type OptsFunc = (sdk: SDK) => void;
+export declare const ServerList: readonly ["https://unify.apideck.com"];
+export declare function WithServerURL(serverURL: string, params?: Map<string, string>): OptsFunc;
+export declare function WithClient(client: AxiosInstance): OptsFunc;
+export declare function WithSecurity(security: Security): OptsFunc;
+export declare class SDK {
+    items: Items;
+    locations: Locations;
+    merchants: Merchants;
+    modifierGroups: ModifierGroups;
+    modifiers: Modifiers;
+    orderTypes: OrderTypes;
+    orders: Orders;
+    payments: Payments;
+    tenders: Tenders;
+    _defaultClient: AxiosInstance;
+    _securityClient: AxiosInstance;
+    _security?: Security;
+    _serverURL: string;
+    private _language;
+    private _sdkVersion;
+    private _genVersion;
+    constructor(...opts: OptsFunc[]);
+}
+export {};

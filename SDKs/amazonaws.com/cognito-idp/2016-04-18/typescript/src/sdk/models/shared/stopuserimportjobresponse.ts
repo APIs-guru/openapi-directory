@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { UserImportJobType } from "./userimportjobtype";
+
 
 
 // StopUserImportJobResponse
@@ -7,6 +8,6 @@ import { UserImportJobType } from "./userimportjobtype";
  * Represents the response from the server to the request to stop the user import job.
 **/
 export class StopUserImportJobResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=UserImportJob" })
+  @SpeakeasyMetadata({ data: "json, name=UserImportJob" })
   userImportJob?: UserImportJobType;
 }

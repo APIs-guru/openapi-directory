@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Credentials
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Credentials for the provided identity ID.
 **/
 export class Credentials extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AccessKeyId" })
+  @SpeakeasyMetadata({ data: "json, name=AccessKeyId" })
   accessKeyId?: string;
 
-  @Metadata({ data: "json, name=Expiration" })
+  @SpeakeasyMetadata({ data: "json, name=Expiration" })
   expiration?: Date;
 
-  @Metadata({ data: "json, name=SecretKey" })
+  @SpeakeasyMetadata({ data: "json, name=SecretKey" })
   secretKey?: string;
 
-  @Metadata({ data: "json, name=SessionToken" })
+  @SpeakeasyMetadata({ data: "json, name=SessionToken" })
   sessionToken?: string;
 }

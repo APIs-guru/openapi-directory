@@ -1,49 +1,50 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DownloadFilePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=file_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=file_id" })
   fileId: number;
 }
 
 
 export class DownloadFileQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=generic_mimetype" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=generic_mimetype" })
   genericMimetype?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=inline" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=inline" })
   inline?: boolean;
 }
 
 
 export class DownloadFileHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=Range" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Range" })
   range?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Sds-Auth-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Sds-Auth-Token" })
   xSdsAuthToken?: string;
 }
 
 
 export class DownloadFileRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: DownloadFilePathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: DownloadFileQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: DownloadFileHeaders;
 }
 
 
 export class DownloadFileResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

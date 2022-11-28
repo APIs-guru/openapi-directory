@@ -1,7 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import size
+from sdk import utils
+from . import *
 
 class VideoFormatFileTypeEnum(str, Enum):
     FLV = "FLV"
@@ -14,9 +16,13 @@ class VideoFormatFileTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class VideoFormat:
-    file_type: Optional[VideoFormatFileTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'fileType' }})
-    id: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
-    kind: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'kind' }})
-    resolution: Optional[size.Size] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'resolution' }})
-    target_bit_rate: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'targetBitRate' }})
+    r"""VideoFormat
+    Contains information about supported video formats.
+    """
+    
+    file_type: Optional[VideoFormatFileTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('fileType') }})
+    id: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('id') }})
+    kind: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('kind') }})
+    resolution: Optional[Size] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('resolution') }})
+    target_bit_rate: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('targetBitRate') }})
     

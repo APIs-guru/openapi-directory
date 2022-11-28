@@ -1,5 +1,7 @@
 package shared
 
+// Resource
+// A representation of a Google Cloud resource.
 type Resource struct {
 	Data                 map[string]interface{} `json:"data,omitempty"`
 	DiscoveryDocumentURI *string                `json:"discoveryDocumentUri,omitempty"`

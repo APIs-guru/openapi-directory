@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetPullRequestInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=pullRequestId" })
+  @SpeakeasyMetadata({ data: "json, name=pullRequestId" })
   pullRequestId: string;
 }

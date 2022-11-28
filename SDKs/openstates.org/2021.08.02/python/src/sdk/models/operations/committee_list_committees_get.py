@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 
@@ -22,14 +23,14 @@ class CommitteeListCommitteesGetHeaders:
 
 @dataclass
 class CommitteeListCommitteesGetRequest:
-    query_params: CommitteeListCommitteesGetQueryParams = field(default=None)
-    headers: CommitteeListCommitteesGetHeaders = field(default=None)
+    headers: CommitteeListCommitteesGetHeaders = field()
+    query_params: CommitteeListCommitteesGetQueryParams = field()
     
 
 @dataclass
 class CommitteeListCommitteesGetResponse:
+    content_type: str = field()
+    status_code: int = field()
     committee_list: Optional[shared.CommitteeList] = field(default=None)
-    content_type: str = field(default=None)
     http_validation_error: Optional[shared.HTTPValidationError] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostDescribeClassicLinkInstancesActionEnum(str, Enum):
     DESCRIBE_CLASSIC_LINK_INSTANCES = "DescribeClassicLinkInstances"
@@ -10,10 +14,10 @@ class PostDescribeClassicLinkInstancesVersionEnum(str, Enum):
 
 @dataclass
 class PostDescribeClassicLinkInstancesQueryParams:
-    action: PostDescribeClassicLinkInstancesActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: PostDescribeClassicLinkInstancesActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostDescribeClassicLinkInstancesVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     max_results: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'MaxResults', 'style': 'form', 'explode': True }})
     next_token: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'NextToken', 'style': 'form', 'explode': True }})
-    version: PostDescribeClassicLinkInstancesVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -29,14 +33,14 @@ class PostDescribeClassicLinkInstancesHeaders:
 
 @dataclass
 class PostDescribeClassicLinkInstancesRequest:
-    query_params: PostDescribeClassicLinkInstancesQueryParams = field(default=None)
-    headers: PostDescribeClassicLinkInstancesHeaders = field(default=None)
+    headers: PostDescribeClassicLinkInstancesHeaders = field()
+    query_params: PostDescribeClassicLinkInstancesQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostDescribeClassicLinkInstancesResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

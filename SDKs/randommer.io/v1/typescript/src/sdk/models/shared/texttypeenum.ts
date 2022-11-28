@@ -1,6 +1,7 @@
 
 
+
 export enum TextTypeEnum {
-    Paragraphs = "paragraphs"
-,    Words = "words"
+    Paragraphs = "paragraphs",
+    Words = "words"
 }

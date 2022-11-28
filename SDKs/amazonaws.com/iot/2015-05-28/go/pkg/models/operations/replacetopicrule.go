@@ -18,6 +18,8 @@ type ReplaceTopicRuleHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// ReplaceTopicRuleRequestBodyTopicRulePayload
+// Describes a rule.
 type ReplaceTopicRuleRequestBodyTopicRulePayload struct {
 	Actions          []shared.Action `json:"actions,omitempty"`
 	AwsIotSQLVersion *string         `json:"awsIotSqlVersion,omitempty"`

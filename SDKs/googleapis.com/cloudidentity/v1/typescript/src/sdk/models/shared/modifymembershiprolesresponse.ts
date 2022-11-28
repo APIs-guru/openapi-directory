@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Membership } from "./membership";
+
 
 
 // ModifyMembershipRolesResponse
@@ -7,6 +8,6 @@ import { Membership } from "./membership";
  * The response message for MembershipsService.ModifyMembershipRoles.
 **/
 export class ModifyMembershipRolesResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=membership" })
+  @SpeakeasyMetadata({ data: "json, name=membership" })
   membership?: Membership;
 }

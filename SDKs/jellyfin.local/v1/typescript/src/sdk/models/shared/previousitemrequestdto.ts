@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // PreviousItemRequestDto
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Class PreviousItemRequestDto.
 **/
 export class PreviousItemRequestDto extends SpeakeasyBase {
-  @Metadata({ data: "json, name=PlaylistItemId" })
+  @SpeakeasyMetadata({ data: "json, name=PlaylistItemId" })
   playlistItemId?: string;
 }

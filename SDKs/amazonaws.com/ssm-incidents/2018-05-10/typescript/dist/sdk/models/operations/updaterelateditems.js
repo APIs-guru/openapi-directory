@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var UpdateRelatedItemsHeaders = /** @class */ (function (_super) {
     __extends(UpdateRelatedItemsHeaders, _super);
@@ -30,31 +30,31 @@ var UpdateRelatedItemsHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
         __metadata("design:type", String)
     ], UpdateRelatedItemsHeaders.prototype, "xAmzAlgorithm", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
         __metadata("design:type", String)
     ], UpdateRelatedItemsHeaders.prototype, "xAmzContentSha256", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
         __metadata("design:type", String)
     ], UpdateRelatedItemsHeaders.prototype, "xAmzCredential", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
         __metadata("design:type", String)
     ], UpdateRelatedItemsHeaders.prototype, "xAmzDate", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
         __metadata("design:type", String)
     ], UpdateRelatedItemsHeaders.prototype, "xAmzSecurityToken", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
         __metadata("design:type", String)
     ], UpdateRelatedItemsHeaders.prototype, "xAmzSignature", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
         __metadata("design:type", String)
     ], UpdateRelatedItemsHeaders.prototype, "xAmzSignedHeaders", void 0);
     return UpdateRelatedItemsHeaders;
@@ -70,11 +70,11 @@ var UpdateRelatedItemsRequestBodyRelatedItemsUpdate = /** @class */ (function (_
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=itemToAdd" }),
+        SpeakeasyMetadata({ data: "json, name=itemToAdd" }),
         __metadata("design:type", shared.RelatedItem)
     ], UpdateRelatedItemsRequestBodyRelatedItemsUpdate.prototype, "itemToAdd", void 0);
     __decorate([
-        Metadata({ data: "json, name=itemToRemove" }),
+        SpeakeasyMetadata({ data: "json, name=itemToRemove" }),
         __metadata("design:type", shared.ItemIdentifier)
     ], UpdateRelatedItemsRequestBodyRelatedItemsUpdate.prototype, "itemToRemove", void 0);
     return UpdateRelatedItemsRequestBodyRelatedItemsUpdate;
@@ -86,15 +86,15 @@ var UpdateRelatedItemsRequestBody = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=clientToken" }),
+        SpeakeasyMetadata({ data: "json, name=clientToken" }),
         __metadata("design:type", String)
     ], UpdateRelatedItemsRequestBody.prototype, "clientToken", void 0);
     __decorate([
-        Metadata({ data: "json, name=incidentRecordArn" }),
+        SpeakeasyMetadata({ data: "json, name=incidentRecordArn" }),
         __metadata("design:type", String)
     ], UpdateRelatedItemsRequestBody.prototype, "incidentRecordArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=relatedItemsUpdate" }),
+        SpeakeasyMetadata({ data: "json, name=relatedItemsUpdate" }),
         __metadata("design:type", UpdateRelatedItemsRequestBodyRelatedItemsUpdate)
     ], UpdateRelatedItemsRequestBody.prototype, "relatedItemsUpdate", void 0);
     return UpdateRelatedItemsRequestBody;
@@ -106,11 +106,11 @@ var UpdateRelatedItemsRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", UpdateRelatedItemsHeaders)
     ], UpdateRelatedItemsRequest.prototype, "headers", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", UpdateRelatedItemsRequestBody)
     ], UpdateRelatedItemsRequest.prototype, "request", void 0);
     return UpdateRelatedItemsRequest;
@@ -122,39 +122,39 @@ var UpdateRelatedItemsResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], UpdateRelatedItemsResponse.prototype, "accessDeniedException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], UpdateRelatedItemsResponse.prototype, "conflictException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], UpdateRelatedItemsResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], UpdateRelatedItemsResponse.prototype, "internalServerException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], UpdateRelatedItemsResponse.prototype, "resourceNotFoundException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], UpdateRelatedItemsResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], UpdateRelatedItemsResponse.prototype, "throttlingException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Map)
     ], UpdateRelatedItemsResponse.prototype, "updateRelatedItemsOutput", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], UpdateRelatedItemsResponse.prototype, "validationException", void 0);
     return UpdateRelatedItemsResponse;

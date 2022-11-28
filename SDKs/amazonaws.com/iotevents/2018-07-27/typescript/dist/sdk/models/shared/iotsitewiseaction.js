@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AssetPropertyValue } from "./assetpropertyvalue";
 // IotSiteWiseAction
 /**
@@ -34,23 +34,23 @@ var IotSiteWiseAction = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=assetId" }),
+        SpeakeasyMetadata({ data: "json, name=assetId" }),
         __metadata("design:type", String)
     ], IotSiteWiseAction.prototype, "assetId", void 0);
     __decorate([
-        Metadata({ data: "json, name=entryId" }),
+        SpeakeasyMetadata({ data: "json, name=entryId" }),
         __metadata("design:type", String)
     ], IotSiteWiseAction.prototype, "entryId", void 0);
     __decorate([
-        Metadata({ data: "json, name=propertyAlias" }),
+        SpeakeasyMetadata({ data: "json, name=propertyAlias" }),
         __metadata("design:type", String)
     ], IotSiteWiseAction.prototype, "propertyAlias", void 0);
     __decorate([
-        Metadata({ data: "json, name=propertyId" }),
+        SpeakeasyMetadata({ data: "json, name=propertyId" }),
         __metadata("design:type", String)
     ], IotSiteWiseAction.prototype, "propertyId", void 0);
     __decorate([
-        Metadata({ data: "json, name=propertyValue" }),
+        SpeakeasyMetadata({ data: "json, name=propertyValue" }),
         __metadata("design:type", AssetPropertyValue)
     ], IotSiteWiseAction.prototype, "propertyValue", void 0);
     return IotSiteWiseAction;

@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ClientAuthenticationSettingInfo } from "./clientauthenticationsettinginfo";
 
 
+
 export class DescribeClientAuthenticationSettingsResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ClientAuthenticationSettingsInfo", elemType: shared.ClientAuthenticationSettingInfo })
+  @SpeakeasyMetadata({ data: "json, name=ClientAuthenticationSettingsInfo", elemType: ClientAuthenticationSettingInfo })
   clientAuthenticationSettingsInfo?: ClientAuthenticationSettingInfo[];
 
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 }

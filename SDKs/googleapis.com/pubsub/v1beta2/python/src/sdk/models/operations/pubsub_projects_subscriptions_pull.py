@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class PubsubProjectsSubscriptionsPullPathParams:
-    subscription: str = field(default=None, metadata={'path_param': { 'field_name': 'subscription', 'style': 'simple', 'explode': False }})
+    subscription: str = field(metadata={'path_param': { 'field_name': 'subscription', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,14 +26,14 @@ class PubsubProjectsSubscriptionsPullQueryParams:
 
 @dataclass
 class PubsubProjectsSubscriptionsPullSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class PubsubProjectsSubscriptionsPullSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -43,15 +44,15 @@ class PubsubProjectsSubscriptionsPullSecurity:
 
 @dataclass
 class PubsubProjectsSubscriptionsPullRequest:
-    path_params: PubsubProjectsSubscriptionsPullPathParams = field(default=None)
-    query_params: PubsubProjectsSubscriptionsPullQueryParams = field(default=None)
+    path_params: PubsubProjectsSubscriptionsPullPathParams = field()
+    query_params: PubsubProjectsSubscriptionsPullQueryParams = field()
+    security: PubsubProjectsSubscriptionsPullSecurity = field()
     request: Optional[shared.PullRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: PubsubProjectsSubscriptionsPullSecurity = field(default=None)
     
 
 @dataclass
 class PubsubProjectsSubscriptionsPullResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     pull_response: Optional[shared.PullResponse] = field(default=None)
-    status_code: int = field(default=None)
     

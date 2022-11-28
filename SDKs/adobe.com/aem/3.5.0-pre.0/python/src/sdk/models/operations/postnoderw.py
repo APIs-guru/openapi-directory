@@ -4,8 +4,8 @@ from typing import Optional
 
 @dataclass
 class PostNodeRwPathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
-    path: str = field(default=None, metadata={'path_param': { 'field_name': 'path', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    path: str = field(metadata={'path_param': { 'field_name': 'path', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -15,12 +15,12 @@ class PostNodeRwQueryParams:
 
 @dataclass
 class PostNodeRwRequest:
-    path_params: PostNodeRwPathParams = field(default=None)
-    query_params: PostNodeRwQueryParams = field(default=None)
+    path_params: PostNodeRwPathParams = field()
+    query_params: PostNodeRwQueryParams = field()
     
 
 @dataclass
 class PostNodeRwResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

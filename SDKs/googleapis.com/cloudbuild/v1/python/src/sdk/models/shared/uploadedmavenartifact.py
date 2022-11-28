@@ -1,14 +1,18 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import filehashes
-from . import timespan
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class UploadedMavenArtifact:
-    file_hashes: Optional[filehashes.FileHashes] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'fileHashes' }})
-    push_timing: Optional[timespan.TimeSpan] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'pushTiming' }})
-    uri: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'uri' }})
+    r"""UploadedMavenArtifact
+    A Maven artifact uploaded using the MavenArtifact directive.
+    """
+    
+    file_hashes: Optional[FileHashes] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('fileHashes') }})
+    push_timing: Optional[TimeSpan] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('pushTiming') }})
+    uri: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('uri') }})
     

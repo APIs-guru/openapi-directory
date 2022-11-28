@@ -1,29 +1,26 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
-from typing import Enum
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import simple_user
-from . import code_scanning_alert_instance
-from . import code_scanning_alert_rule
-from . import code_scanning_alert_state_enum
-from . import code_scanning_analysis_tool
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class CodeScanningAlert:
-    created_at: datetime = field(default=None, metadata={'dataclasses_json': { 'field_name': 'created_at', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    dismissed_at: datetime = field(default=None, metadata={'dataclasses_json': { 'field_name': 'dismissed_at', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    dismissed_by: simple_user.SimpleUser = field(default=None, metadata={'dataclasses_json': { 'field_name': 'dismissed_by' }})
-    dismissed_reason: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'dismissed_reason' }})
-    html_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'html_url' }})
-    instances_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'instances_url' }})
-    most_recent_instance: code_scanning_alert_instance.CodeScanningAlertInstance = field(default=None, metadata={'dataclasses_json': { 'field_name': 'most_recent_instance' }})
-    number: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'number' }})
-    rule: code_scanning_alert_rule.CodeScanningAlertRule = field(default=None, metadata={'dataclasses_json': { 'field_name': 'rule' }})
-    state: code_scanning_alert_state_enum.CodeScanningAlertStateEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'state' }})
-    tool: code_scanning_analysis_tool.CodeScanningAnalysisTool = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tool' }})
-    url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'url' }})
+    created_at: datetime = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('created_at'), 'encoder': utils.datetimeisoformat(False), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    dismissed_at: datetime = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('dismissed_at'), 'encoder': utils.datetimeisoformat(False), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    dismissed_by: SimpleUser = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('dismissed_by') }})
+    dismissed_reason: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('dismissed_reason') }})
+    html_url: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('html_url') }})
+    instances_url: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('instances_url') }})
+    most_recent_instance: CodeScanningAlertInstance = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('most_recent_instance') }})
+    number: int = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('number') }})
+    rule: CodeScanningAlertRule = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('rule') }})
+    state: CodeScanningAlertStateEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('state') }})
+    tool: CodeScanningAnalysisTool = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('tool') }})
+    url: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('url') }})
     

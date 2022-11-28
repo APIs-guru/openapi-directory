@@ -1,26 +1,27 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class StromkontoChoicesQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=account" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=account" })
   account?: string;
 }
 
 
 export class StromkontoChoicesRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: StromkontoChoicesQueryParams;
 }
 
 
 export class StromkontoChoicesResponse extends SpeakeasyBase {
-  @Metadata({ elemType: shared.Balance })
+  @SpeakeasyMetadata({ elemType: shared.Balance })
   balances?: shared.Balance[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

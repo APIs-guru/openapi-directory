@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { EventDimensions } from "./eventdimensions";
+
 
 
 // EventCondition
@@ -7,9 +8,9 @@ import { EventDimensions } from "./eventdimensions";
  * Specifies the conditions to evaluate for an event that applies to an activity in a journey.
 **/
 export class EventCondition extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Dimensions" })
+  @SpeakeasyMetadata({ data: "json, name=Dimensions" })
   dimensions?: EventDimensions;
 
-  @Metadata({ data: "json, name=MessageActivity" })
+  @SpeakeasyMetadata({ data: "json, name=MessageActivity" })
   messageActivity?: string;
 }

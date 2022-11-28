@@ -10,6 +10,8 @@ const (
 	GoogleCloudPolicysimulatorV1ExplainedAccessAccessStateEnumUnknownInfoDenied      GoogleCloudPolicysimulatorV1ExplainedAccessAccessStateEnum = "UNKNOWN_INFO_DENIED"
 )
 
+// GoogleCloudPolicysimulatorV1ExplainedAccess
+// Details about how a set of policies, listed in ExplainedPolicy, resulted in a certain AccessState when replaying an access tuple.
 type GoogleCloudPolicysimulatorV1ExplainedAccess struct {
 	AccessState *GoogleCloudPolicysimulatorV1ExplainedAccessAccessStateEnum `json:"accessState,omitempty"`
 	Errors      []GoogleRPCStatus                                           `json:"errors,omitempty"`

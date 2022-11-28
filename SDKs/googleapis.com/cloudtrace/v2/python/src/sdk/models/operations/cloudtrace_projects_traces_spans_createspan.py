@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class CloudtraceProjectsTracesSpansCreateSpanPathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,14 +26,14 @@ class CloudtraceProjectsTracesSpansCreateSpanQueryParams:
 
 @dataclass
 class CloudtraceProjectsTracesSpansCreateSpanSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class CloudtraceProjectsTracesSpansCreateSpanSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -43,15 +44,15 @@ class CloudtraceProjectsTracesSpansCreateSpanSecurity:
 
 @dataclass
 class CloudtraceProjectsTracesSpansCreateSpanRequest:
-    path_params: CloudtraceProjectsTracesSpansCreateSpanPathParams = field(default=None)
-    query_params: CloudtraceProjectsTracesSpansCreateSpanQueryParams = field(default=None)
+    path_params: CloudtraceProjectsTracesSpansCreateSpanPathParams = field()
+    query_params: CloudtraceProjectsTracesSpansCreateSpanQueryParams = field()
+    security: CloudtraceProjectsTracesSpansCreateSpanSecurity = field()
     request: Optional[shared.Span] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: CloudtraceProjectsTracesSpansCreateSpanSecurity = field(default=None)
     
 
 @dataclass
 class CloudtraceProjectsTracesSpansCreateSpanResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     span: Optional[shared.Span] = field(default=None)
-    status_code: int = field(default=None)
     

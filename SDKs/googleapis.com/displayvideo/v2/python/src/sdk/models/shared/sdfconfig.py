@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class SdfConfigVersionEnum(str, Enum):
     SDF_VERSION_UNSPECIFIED = "SDF_VERSION_UNSPECIFIED"
@@ -19,6 +21,10 @@ class SdfConfigVersionEnum(str, Enum):
 @dataclass_json
 @dataclass
 class SdfConfig:
-    admin_email: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'adminEmail' }})
-    version: Optional[SdfConfigVersionEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'version' }})
+    r"""SdfConfig
+    Structured Data File (SDF) related settings.
+    """
+    
+    admin_email: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('adminEmail') }})
+    version: Optional[SdfConfigVersionEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('version') }})
     

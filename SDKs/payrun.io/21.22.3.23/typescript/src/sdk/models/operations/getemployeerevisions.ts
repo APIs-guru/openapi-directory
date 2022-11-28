@@ -1,44 +1,45 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetEmployeeRevisionsPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=EmployeeId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=EmployeeId" })
   employeeId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=EmployerId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=EmployerId" })
   employerId: string;
 }
 
 
 export class GetEmployeeRevisionsHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=Api-Version" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Api-Version" })
   apiVersion: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=Authorization" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Authorization" })
   authorization: string;
 }
 
 
 export class GetEmployeeRevisionsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetEmployeeRevisionsPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: GetEmployeeRevisionsHeaders;
 }
 
 
 export class GetEmployeeRevisionsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   errorModel?: shared.ErrorModel;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   linkCollection?: shared.LinkCollection;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ApiVersion } from "./apiversion";
 
 
+
 export class ApiVersions extends SpeakeasyBase {
-  @Metadata({ data: "json, name=all", elemType: shared.ApiVersion })
+  @SpeakeasyMetadata({ data: "json, name=all", elemType: ApiVersion })
   all?: ApiVersion[];
 
-  @Metadata({ data: "json, name=latest" })
+  @SpeakeasyMetadata({ data: "json, name=latest" })
   latest?: number;
 }

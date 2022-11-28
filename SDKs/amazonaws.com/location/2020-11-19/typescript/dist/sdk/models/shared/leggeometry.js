@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // LegGeometry
 /**
  * Contains the geometry details for each path between a pair of positions. Used in plotting a route leg on a map.
@@ -33,7 +33,7 @@ var LegGeometry = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=LineString" }),
+        SpeakeasyMetadata({ data: "json, name=LineString" }),
         __metadata("design:type", Array)
     ], LegGeometry.prototype, "lineString", void 0);
     return LegGeometry;

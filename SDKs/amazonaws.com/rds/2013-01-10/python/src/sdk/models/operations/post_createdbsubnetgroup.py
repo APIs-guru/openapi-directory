@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostCreateDbSubnetGroupActionEnum(str, Enum):
     CREATE_DB_SUBNET_GROUP = "CreateDBSubnetGroup"
@@ -10,8 +14,8 @@ class PostCreateDbSubnetGroupVersionEnum(str, Enum):
 
 @dataclass
 class PostCreateDbSubnetGroupQueryParams:
-    action: PostCreateDbSubnetGroupActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostCreateDbSubnetGroupVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostCreateDbSubnetGroupActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostCreateDbSubnetGroupVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostCreateDbSubnetGroupHeaders:
 
 @dataclass
 class PostCreateDbSubnetGroupRequest:
-    query_params: PostCreateDbSubnetGroupQueryParams = field(default=None)
-    headers: PostCreateDbSubnetGroupHeaders = field(default=None)
+    headers: PostCreateDbSubnetGroupHeaders = field()
+    query_params: PostCreateDbSubnetGroupQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostCreateDbSubnetGroupResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

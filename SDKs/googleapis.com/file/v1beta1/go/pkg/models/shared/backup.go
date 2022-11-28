@@ -22,6 +22,8 @@ const (
 	BackupStateEnumDeleting         BackupStateEnum = "DELETING"
 )
 
+// Backup
+// A Filestore backup.
 type Backup struct {
 	CapacityGb         *string                       `json:"capacityGb,omitempty"`
 	CreateTime         *string                       `json:"createTime,omitempty"`
@@ -36,4 +38,14 @@ type Backup struct {
 	SourceInstanceTier *BackupSourceInstanceTierEnum `json:"sourceInstanceTier,omitempty"`
 	State              *BackupStateEnum              `json:"state,omitempty"`
 	StorageBytes       *string                       `json:"storageBytes,omitempty"`
+}
+
+// BackupInput
+// A Filestore backup.
+type BackupInput struct {
+	Description     *string           `json:"description,omitempty"`
+	KmsKeyName      *string           `json:"kmsKeyName,omitempty"`
+	Labels          map[string]string `json:"labels,omitempty"`
+	SourceFileShare *string           `json:"sourceFileShare,omitempty"`
+	SourceInstance  *string           `json:"sourceInstance,omitempty"`
 }

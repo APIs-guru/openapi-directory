@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export var ListPromotionsMixinEnum;
 (function (ListPromotionsMixinEnum) {
@@ -38,47 +38,47 @@ var ListPromotionsQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=context" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=context" }),
         __metadata("design:type", String)
     ], ListPromotionsQueryParams.prototype, "context", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=mixin" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=mixin" }),
         __metadata("design:type", Array)
     ], ListPromotionsQueryParams.prototype, "mixin", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=page" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page" }),
         __metadata("design:type", Number)
     ], ListPromotionsQueryParams.prototype, "page", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=page_size" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page_size" }),
         __metadata("design:type", Number)
     ], ListPromotionsQueryParams.prototype, "pageSize", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=partner_id" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=partner_id" }),
         __metadata("design:type", Array)
     ], ListPromotionsQueryParams.prototype, "partnerId", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=partner_pid" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=partner_pid" }),
         __metadata("design:type", Array)
     ], ListPromotionsQueryParams.prototype, "partnerPid", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=pid" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=pid" }),
         __metadata("design:type", Array)
     ], ListPromotionsQueryParams.prototype, "pid", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=promoted_by" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=promoted_by" }),
         __metadata("design:type", Array)
     ], ListPromotionsQueryParams.prototype, "promotedBy", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=promoted_for" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=promoted_for" }),
         __metadata("design:type", Array)
     ], ListPromotionsQueryParams.prototype, "promotedFor", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=q" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=q" }),
         __metadata("design:type", String)
     ], ListPromotionsQueryParams.prototype, "q", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=status" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=status" }),
         __metadata("design:type", Array)
     ], ListPromotionsQueryParams.prototype, "status", void 0);
     return ListPromotionsQueryParams;
@@ -90,7 +90,7 @@ var ListPromotionsRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ListPromotionsQueryParams)
     ], ListPromotionsRequest.prototype, "queryParams", void 0);
     return ListPromotionsRequest;
@@ -102,23 +102,23 @@ var ListPromotionsResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], ListPromotionsResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], ListPromotionsResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.ErrorModel)
     ], ListPromotionsResponse.prototype, "errorModel", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], ListPromotionsResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], ListPromotionsResponse.prototype, "nitro", void 0);
     return ListPromotionsResponse;

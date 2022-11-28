@@ -9,7 +9,7 @@ import (
 	"strings"
 )
 
-var Servers = []string{
+var ServerList = []string{
 	"https://palabras-aleatorias-public-api.herokuapp.com",
 }
 
@@ -18,9 +18,13 @@ type HTTPClient interface {
 }
 
 type SDK struct {
-	defaultClient  HTTPClient
-	securityClient HTTPClient
-	serverURL      string
+	_defaultClient  HTTPClient
+	_securityClient HTTPClient
+
+	_serverURL  string
+	_language   string
+	_sdkVersion string
+	_genVersion string
 }
 
 type SDKOption func(*SDK)
@@ -31,27 +35,46 @@ func WithServerURL(serverURL string, params map[string]string) SDKOption {
 			serverURL = utils.ReplaceParameters(serverURL, params)
 		}
 
-		sdk.serverURL = serverURL
+		sdk._serverURL = serverURL
+	}
+}
+
+func WithClient(client HTTPClient) SDKOption {
+	return func(sdk *SDK) {
+		sdk._defaultClient = client
 	}
 }
 
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
-		defaultClient:  http.DefaultClient,
-		securityClient: http.DefaultClient,
+		_language:   "go",
+		_sdkVersion: "",
+		_genVersion: "internal",
 	}
 	for _, opt := range opts {
 		opt(sdk)
 	}
-	if sdk.serverURL == "" {
-		sdk.serverURL = Servers[0]
+
+	if sdk._defaultClient == nil {
+		sdk._defaultClient = http.DefaultClient
+	}
+	if sdk._securityClient == nil {
+
+		sdk._securityClient = sdk._defaultClient
+
+	}
+
+	if sdk._serverURL == "" {
+		sdk._serverURL = ServerList[0]
 	}
 
 	return sdk
 }
 
+// GetAddWord - Add new word
+// Add a new word. Need to be accepted by a human.
 func (s *SDK) GetAddWord(ctx context.Context, request operations.GetAddWordRequest) (*operations.GetAddWordResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/add-word"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -61,7 +84,7 @@ func (s *SDK) GetAddWord(ctx context.Context, request operations.GetAddWordReque
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -82,8 +105,9 @@ func (s *SDK) GetAddWord(ctx context.Context, request operations.GetAddWordReque
 	return res, nil
 }
 
+// GetCount - Return the count of words in database
 func (s *SDK) GetCount(ctx context.Context) (*operations.GetCountResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/count"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -91,7 +115,7 @@ func (s *SDK) GetCount(ctx context.Context) (*operations.GetCountResponse, error
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -112,8 +136,9 @@ func (s *SDK) GetCount(ctx context.Context) (*operations.GetCountResponse, error
 	return res, nil
 }
 
+// GetEcho - Response with all query params
 func (s *SDK) GetEcho(ctx context.Context) (*operations.GetEchoResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/echo"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -121,7 +146,7 @@ func (s *SDK) GetEcho(ctx context.Context) (*operations.GetEchoResponse, error) 
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -142,8 +167,9 @@ func (s *SDK) GetEcho(ctx context.Context) (*operations.GetEchoResponse, error) 
 	return res, nil
 }
 
+// GetOpenapi3JSON - Response with all query params
 func (s *SDK) GetOpenapi3JSON(ctx context.Context) (*operations.GetOpenapi3JSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/openapi3.json"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -151,7 +177,7 @@ func (s *SDK) GetOpenapi3JSON(ctx context.Context) (*operations.GetOpenapi3JSONR
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -172,8 +198,9 @@ func (s *SDK) GetOpenapi3JSON(ctx context.Context) (*operations.GetOpenapi3JSONR
 	return res, nil
 }
 
+// GetRandom - Return a random spanish word
 func (s *SDK) GetRandom(ctx context.Context) (*operations.GetRandomResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/random"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -181,7 +208,7 @@ func (s *SDK) GetRandom(ctx context.Context) (*operations.GetRandomResponse, err
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {

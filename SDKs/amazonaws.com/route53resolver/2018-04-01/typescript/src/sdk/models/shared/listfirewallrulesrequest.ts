@@ -1,20 +1,21 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ActionEnum } from "./actionenum";
 
 
+
 export class ListFirewallRulesRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Action" })
+  @SpeakeasyMetadata({ data: "json, name=Action" })
   action?: ActionEnum;
 
-  @Metadata({ data: "json, name=FirewallRuleGroupId" })
+  @SpeakeasyMetadata({ data: "json, name=FirewallRuleGroupId" })
   firewallRuleGroupId: string;
 
-  @Metadata({ data: "json, name=MaxResults" })
+  @SpeakeasyMetadata({ data: "json, name=MaxResults" })
   maxResults?: number;
 
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=Priority" })
+  @SpeakeasyMetadata({ data: "json, name=Priority" })
   priority?: number;
 }

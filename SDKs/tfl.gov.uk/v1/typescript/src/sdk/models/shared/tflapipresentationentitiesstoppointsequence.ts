@@ -1,35 +1,35 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TflApiPresentationEntitiesMatchedStop } from "./tflapipresentationentitiesmatchedstop";
 
+
 export enum TflApiPresentationEntitiesStopPointSequenceServiceTypeEnum {
-    Regular = "Regular"
-,    Night = "Night"
+    Regular = "Regular",
+    Night = "Night"
 }
 
 
 export class TflApiPresentationEntitiesStopPointSequence extends SpeakeasyBase {
-  @Metadata({ data: "json, name=branchId" })
+  @SpeakeasyMetadata({ data: "json, name=branchId" })
   branchId?: number;
 
-  @Metadata({ data: "json, name=direction" })
+  @SpeakeasyMetadata({ data: "json, name=direction" })
   direction?: string;
 
-  @Metadata({ data: "json, name=lineId" })
+  @SpeakeasyMetadata({ data: "json, name=lineId" })
   lineId?: string;
 
-  @Metadata({ data: "json, name=lineName" })
+  @SpeakeasyMetadata({ data: "json, name=lineName" })
   lineName?: string;
 
-  @Metadata({ data: "json, name=nextBranchIds" })
+  @SpeakeasyMetadata({ data: "json, name=nextBranchIds" })
   nextBranchIds?: number[];
 
-  @Metadata({ data: "json, name=prevBranchIds" })
+  @SpeakeasyMetadata({ data: "json, name=prevBranchIds" })
   prevBranchIds?: number[];
 
-  @Metadata({ data: "json, name=serviceType" })
+  @SpeakeasyMetadata({ data: "json, name=serviceType" })
   serviceType?: TflApiPresentationEntitiesStopPointSequenceServiceTypeEnum;
 
-  @Metadata({ data: "json, name=stopPoint", elemType: shared.TflApiPresentationEntitiesMatchedStop })
+  @SpeakeasyMetadata({ data: "json, name=stopPoint", elemType: TflApiPresentationEntitiesMatchedStop })
   stopPoint?: TflApiPresentationEntitiesMatchedStop[];
 }

@@ -16,6 +16,8 @@ const (
 	GoogleCloudDialogflowV2ConversationLifecycleStateEnumCompleted                 GoogleCloudDialogflowV2ConversationLifecycleStateEnum = "COMPLETED"
 )
 
+// GoogleCloudDialogflowV2Conversation
+// Represents a conversation. A conversation is an interaction between an agent, including live agents and Dialogflow agents, and a support customer. Conversations can include phone calls and text-based chat sessions.
 type GoogleCloudDialogflowV2Conversation struct {
 	ConversationProfile *string                                                   `json:"conversationProfile,omitempty"`
 	ConversationStage   *GoogleCloudDialogflowV2ConversationConversationStageEnum `json:"conversationStage,omitempty"`
@@ -24,4 +26,11 @@ type GoogleCloudDialogflowV2Conversation struct {
 	Name                *string                                                   `json:"name,omitempty"`
 	PhoneNumber         *GoogleCloudDialogflowV2ConversationPhoneNumber           `json:"phoneNumber,omitempty"`
 	StartTime           *string                                                   `json:"startTime,omitempty"`
+}
+
+// GoogleCloudDialogflowV2ConversationInput
+// Represents a conversation. A conversation is an interaction between an agent, including live agents and Dialogflow agents, and a support customer. Conversations can include phone calls and text-based chat sessions.
+type GoogleCloudDialogflowV2ConversationInput struct {
+	ConversationProfile *string                                                   `json:"conversationProfile,omitempty"`
+	ConversationStage   *GoogleCloudDialogflowV2ConversationConversationStageEnum `json:"conversationStage,omitempty"`
 }

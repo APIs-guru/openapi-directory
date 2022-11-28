@@ -1,5 +1,7 @@
 package shared
 
+// HTTPEndpointDestinationUpdate
+// Updates the specified HTTP endpoint destination.
 type HTTPEndpointDestinationUpdate struct {
 	BufferingHints           *HTTPEndpointBufferingHints       `json:"BufferingHints,omitempty"`
 	CloudWatchLoggingOptions *CloudWatchLoggingOptions         `json:"CloudWatchLoggingOptions,omitempty"`

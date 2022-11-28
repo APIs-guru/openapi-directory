@@ -22,26 +22,26 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var DescribeDomainControllersRequest = /** @class */ (function (_super) {
     __extends(DescribeDomainControllersRequest, _super);
     function DescribeDomainControllersRequest() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=DirectoryId" }),
+        SpeakeasyMetadata({ data: "json, name=DirectoryId" }),
         __metadata("design:type", String)
     ], DescribeDomainControllersRequest.prototype, "directoryId", void 0);
     __decorate([
-        Metadata({ data: "json, name=DomainControllerIds" }),
+        SpeakeasyMetadata({ data: "json, name=DomainControllerIds" }),
         __metadata("design:type", Array)
     ], DescribeDomainControllersRequest.prototype, "domainControllerIds", void 0);
     __decorate([
-        Metadata({ data: "json, name=Limit" }),
+        SpeakeasyMetadata({ data: "json, name=Limit" }),
         __metadata("design:type", Number)
     ], DescribeDomainControllersRequest.prototype, "limit", void 0);
     __decorate([
-        Metadata({ data: "json, name=NextToken" }),
+        SpeakeasyMetadata({ data: "json, name=NextToken" }),
         __metadata("design:type", String)
     ], DescribeDomainControllersRequest.prototype, "nextToken", void 0);
     return DescribeDomainControllersRequest;

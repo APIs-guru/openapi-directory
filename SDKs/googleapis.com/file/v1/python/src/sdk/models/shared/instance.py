@@ -1,8 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import fileshareconfig
-from . import networkconfig
+from sdk import utils
+from . import *
 
 class InstanceStateEnum(str, Enum):
     STATE_UNSPECIFIED = "STATE_UNSPECIFIED"
@@ -13,6 +14,8 @@ class InstanceStateEnum(str, Enum):
     ERROR = "ERROR"
     RESTORING = "RESTORING"
     SUSPENDED = "SUSPENDED"
+    SUSPENDING = "SUSPENDING"
+    RESUMING = "RESUMING"
 
 class InstanceSuspensionReasonsEnum(str, Enum):
     SUSPENSION_REASON_UNSPECIFIED = "SUSPENSION_REASON_UNSPECIFIED"
@@ -30,18 +33,38 @@ class InstanceTierEnum(str, Enum):
 
 @dataclass_json
 @dataclass
+class InstanceInput:
+    r"""InstanceInput
+    A Filestore instance.
+    """
+    
+    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('description') }})
+    etag: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('etag') }})
+    file_shares: Optional[List[FileShareConfig]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('fileShares') }})
+    kms_key_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('kmsKeyName') }})
+    labels: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('labels') }})
+    networks: Optional[List[NetworkConfigInput]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('networks') }})
+    tier: Optional[InstanceTierEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('tier') }})
+    
+
+@dataclass_json
+@dataclass
 class Instance:
-    create_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'createTime' }})
-    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
-    etag: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'etag' }})
-    file_shares: Optional[List[fileshareconfig.FileShareConfig]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'fileShares' }})
-    kms_key_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'kmsKeyName' }})
-    labels: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'labels' }})
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    networks: Optional[List[networkconfig.NetworkConfig]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'networks' }})
-    satisfies_pzs: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'satisfiesPzs' }})
-    state: Optional[InstanceStateEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'state' }})
-    status_message: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'statusMessage' }})
-    suspension_reasons: Optional[List[InstanceSuspensionReasonsEnum]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'suspensionReasons' }})
-    tier: Optional[InstanceTierEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tier' }})
+    r"""Instance
+    A Filestore instance.
+    """
+    
+    create_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('createTime') }})
+    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('description') }})
+    etag: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('etag') }})
+    file_shares: Optional[List[FileShareConfig]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('fileShares') }})
+    kms_key_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('kmsKeyName') }})
+    labels: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('labels') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    networks: Optional[List[NetworkConfig]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('networks') }})
+    satisfies_pzs: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('satisfiesPzs') }})
+    state: Optional[InstanceStateEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('state') }})
+    status_message: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('statusMessage') }})
+    suspension_reasons: Optional[List[InstanceSuspensionReasonsEnum]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('suspensionReasons') }})
+    tier: Optional[InstanceTierEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('tier') }})
     

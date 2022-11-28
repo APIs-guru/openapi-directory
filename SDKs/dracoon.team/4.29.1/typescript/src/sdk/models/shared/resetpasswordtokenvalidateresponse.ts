@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { LoginPasswordPolicies } from "./loginpasswordpolicies";
+
 
 
 // ResetPasswordTokenValidateResponse
@@ -7,21 +8,21 @@ import { LoginPasswordPolicies } from "./loginpasswordpolicies";
  * Password reset information
 **/
 export class ResetPasswordTokenValidateResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=allowSystemGlobalWeakPassword" })
+  @SpeakeasyMetadata({ data: "json, name=allowSystemGlobalWeakPassword" })
   allowSystemGlobalWeakPassword?: boolean;
 
-  @Metadata({ data: "json, name=firstName" })
+  @SpeakeasyMetadata({ data: "json, name=firstName" })
   firstName: string;
 
-  @Metadata({ data: "json, name=gender" })
+  @SpeakeasyMetadata({ data: "json, name=gender" })
   gender?: string;
 
-  @Metadata({ data: "json, name=lastName" })
+  @SpeakeasyMetadata({ data: "json, name=lastName" })
   lastName: string;
 
-  @Metadata({ data: "json, name=loginPasswordPolicies" })
+  @SpeakeasyMetadata({ data: "json, name=loginPasswordPolicies" })
   loginPasswordPolicies?: LoginPasswordPolicies;
 
-  @Metadata({ data: "json, name=title" })
+  @SpeakeasyMetadata({ data: "json, name=title" })
   title?: string;
 }

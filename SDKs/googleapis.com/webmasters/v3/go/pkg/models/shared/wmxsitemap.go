@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// WmxSitemap
+// Contains detailed information about a specific URL submitted as a sitemap.
 type WmxSitemap struct {
 	Contents        []WmxSitemapContent `json:"contents,omitempty"`
 	Errors          *string             `json:"errors,omitempty"`

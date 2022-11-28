@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // ModifyIndividualStudentsOptions
 /**
  * Contains fields to add or remove students from a course work or announcement where the `assigneeMode` is set to `INDIVIDUAL_STUDENTS`.
@@ -33,11 +33,11 @@ var ModifyIndividualStudentsOptions = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=addStudentIds" }),
+        SpeakeasyMetadata({ data: "json, name=addStudentIds" }),
         __metadata("design:type", Array)
     ], ModifyIndividualStudentsOptions.prototype, "addStudentIds", void 0);
     __decorate([
-        Metadata({ data: "json, name=removeStudentIds" }),
+        SpeakeasyMetadata({ data: "json, name=removeStudentIds" }),
         __metadata("design:type", Array)
     ], ModifyIndividualStudentsOptions.prototype, "removeStudentIds", void 0);
     return ModifyIndividualStudentsOptions;

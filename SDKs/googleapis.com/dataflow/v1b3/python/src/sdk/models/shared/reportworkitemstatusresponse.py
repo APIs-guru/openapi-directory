@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
 from typing import Any,List,Optional
 from dataclasses_json import dataclass_json
-from . import workitemservicestate
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ReportWorkItemStatusResponse:
-    unified_worker_response: Optional[dict[str, Any]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'unifiedWorkerResponse' }})
-    work_item_service_states: Optional[List[workitemservicestate.WorkItemServiceState]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'workItemServiceStates' }})
+    r"""ReportWorkItemStatusResponse
+    Response from a request to report the status of WorkItems.
+    """
+    
+    unified_worker_response: Optional[dict[str, Any]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('unifiedWorkerResponse') }})
+    work_item_service_states: Optional[List[WorkItemServiceState]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('workItemServiceStates') }})
     

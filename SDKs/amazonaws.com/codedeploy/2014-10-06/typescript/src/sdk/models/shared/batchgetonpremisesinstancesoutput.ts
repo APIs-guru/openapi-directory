@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { InstanceInfo } from "./instanceinfo";
+
 
 
 // BatchGetOnPremisesInstancesOutput
@@ -8,6 +8,6 @@ import { InstanceInfo } from "./instanceinfo";
  * Represents the output of a <code>BatchGetOnPremisesInstances</code> operation.
 **/
 export class BatchGetOnPremisesInstancesOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=instanceInfos", elemType: shared.InstanceInfo })
+  @SpeakeasyMetadata({ data: "json, name=instanceInfos", elemType: InstanceInfo })
   instanceInfos?: InstanceInfo[];
 }

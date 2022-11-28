@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ChannelSectionTargeting
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * ChannelSection targeting setting.
 **/
 export class ChannelSectionTargeting extends SpeakeasyBase {
-  @Metadata({ data: "json, name=countries" })
+  @SpeakeasyMetadata({ data: "json, name=countries" })
   countries?: string[];
 
-  @Metadata({ data: "json, name=languages" })
+  @SpeakeasyMetadata({ data: "json, name=languages" })
   languages?: string[];
 
-  @Metadata({ data: "json, name=regions" })
+  @SpeakeasyMetadata({ data: "json, name=regions" })
   regions?: string[];
 }

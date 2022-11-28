@@ -25,7 +25,7 @@ type ContentAccountsCustombatchSecurity struct {
 
 type ContentAccountsCustombatchRequest struct {
 	QueryParams ContentAccountsCustombatchQueryParams
-	Request     *shared.AccountsCustomBatchRequest `request:"mediaType=application/json"`
+	Request     *shared.AccountsCustomBatchRequestInput `request:"mediaType=application/json"`
 	Security    ContentAccountsCustombatchSecurity
 }
 

@@ -1,11 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum GoogleCloudDialogflowV2beta1ValidationErrorSeverityEnum {
-    SeverityUnspecified = "SEVERITY_UNSPECIFIED"
-,    Info = "INFO"
-,    Warning = "WARNING"
-,    Error = "ERROR"
-,    Critical = "CRITICAL"
+    SeverityUnspecified = "SEVERITY_UNSPECIFIED",
+    Info = "INFO",
+    Warning = "WARNING",
+    Error = "ERROR",
+    Critical = "CRITICAL"
 }
 
 
@@ -14,12 +15,12 @@ export enum GoogleCloudDialogflowV2beta1ValidationErrorSeverityEnum {
  * Represents a single validation error.
 **/
 export class GoogleCloudDialogflowV2beta1ValidationError extends SpeakeasyBase {
-  @Metadata({ data: "json, name=entries" })
+  @SpeakeasyMetadata({ data: "json, name=entries" })
   entries?: string[];
 
-  @Metadata({ data: "json, name=errorMessage" })
+  @SpeakeasyMetadata({ data: "json, name=errorMessage" })
   errorMessage?: string;
 
-  @Metadata({ data: "json, name=severity" })
+  @SpeakeasyMetadata({ data: "json, name=severity" })
   severity?: GoogleCloudDialogflowV2beta1ValidationErrorSeverityEnum;
 }

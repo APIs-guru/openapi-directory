@@ -14,25 +14,25 @@ class EndpointGetFeaturedPlaylistsQueryParams:
 
 @dataclass
 class EndpointGetFeaturedPlaylistsHeaders:
-    authorization: str = field(default=None, metadata={'header': { 'field_name': 'Authorization', 'style': 'simple', 'explode': False }})
+    authorization: str = field(metadata={'header': { 'field_name': 'Authorization', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class EndpointGetFeaturedPlaylistsSecurity:
-    spotify_auth: shared.SchemeSpotifyAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    spotify_auth: shared.SchemeSpotifyAuth = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class EndpointGetFeaturedPlaylistsRequest:
-    query_params: EndpointGetFeaturedPlaylistsQueryParams = field(default=None)
-    headers: EndpointGetFeaturedPlaylistsHeaders = field(default=None)
-    security: EndpointGetFeaturedPlaylistsSecurity = field(default=None)
+    headers: EndpointGetFeaturedPlaylistsHeaders = field()
+    query_params: EndpointGetFeaturedPlaylistsQueryParams = field()
+    security: EndpointGetFeaturedPlaylistsSecurity = field()
     
 
 @dataclass
 class EndpointGetFeaturedPlaylistsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error_response_object: Optional[shared.ErrorResponseObject] = field(default=None)
     featured_playlist_object: Optional[shared.FeaturedPlaylistObject] = field(default=None)
-    status_code: int = field(default=None)
     

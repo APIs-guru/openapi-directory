@@ -1,6 +1,7 @@
 
 
+
 export enum LoadBalancerProtocolEnum {
-    HttpHttps = "HTTP_HTTPS"
-,    Http = "HTTP"
+    HttpHttps = "HTTP_HTTPS",
+    Http = "HTTP"
 }

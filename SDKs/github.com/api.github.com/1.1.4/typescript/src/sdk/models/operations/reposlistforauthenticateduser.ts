@@ -1,82 +1,83 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
+
 export enum ReposListForAuthenticatedUserDirectionEnum {
-    Asc = "asc"
-,    Desc = "desc"
+    Asc = "asc",
+    Desc = "desc"
 }
 
 export enum ReposListForAuthenticatedUserSortEnum {
-    Created = "created"
-,    Updated = "updated"
-,    Pushed = "pushed"
-,    FullName = "full_name"
+    Created = "created",
+    Updated = "updated",
+    Pushed = "pushed",
+    FullName = "full_name"
 }
 
 export enum ReposListForAuthenticatedUserTypeEnum {
-    All = "all"
-,    Owner = "owner"
-,    Public = "public"
-,    Private = "private"
-,    Member = "member"
+    All = "all",
+    Owner = "owner",
+    Public = "public",
+    Private = "private",
+    Member = "member"
 }
 
 export enum ReposListForAuthenticatedUserVisibilityEnum {
-    All = "all"
-,    Public = "public"
-,    Private = "private"
+    All = "all",
+    Public = "public",
+    Private = "private"
 }
 
 
 export class ReposListForAuthenticatedUserQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=affiliation" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=affiliation" })
   affiliation?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=before" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=before" })
   before?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=direction" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=direction" })
   direction?: ReposListForAuthenticatedUserDirectionEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=page" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page" })
   page?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=per_page" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=per_page" })
   perPage?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=since" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=since" })
   since?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=sort" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sort" })
   sort?: ReposListForAuthenticatedUserSortEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=type" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=type" })
   type?: ReposListForAuthenticatedUserTypeEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=visibility" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=visibility" })
   visibility?: ReposListForAuthenticatedUserVisibilityEnum;
 }
 
 
 export class ReposListForAuthenticatedUserRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: ReposListForAuthenticatedUserQueryParams;
 }
 
 
 export class ReposListForAuthenticatedUserResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   basicError?: shared.BasicError;
 
-  @Metadata({ elemType: shared.Repository })
+  @SpeakeasyMetadata({ elemType: shared.Repository })
   repositories?: shared.Repository[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   validationError?: shared.ValidationError;
 }

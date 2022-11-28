@@ -13,14 +13,14 @@ type PutPostsIDLockedJSONRequestBody struct {
 	Locked bool `json:"locked"`
 }
 
+type PutPostsIDLockedJSON200ApplicationJSON struct {
+	Locked *bool `json:"locked,omitempty"`
+}
+
 type PutPostsIDLockedJSONRequest struct {
 	PathParams PutPostsIDLockedJSONPathParams
 	Headers    PutPostsIDLockedJSONHeaders
 	Request    *PutPostsIDLockedJSONRequestBody `request:"mediaType=application/json"`
-}
-
-type PutPostsIDLockedJSON200ApplicationJSON struct {
-	Locked *bool `json:"locked,omitempty"`
 }
 
 type PutPostsIDLockedJSONResponse struct {

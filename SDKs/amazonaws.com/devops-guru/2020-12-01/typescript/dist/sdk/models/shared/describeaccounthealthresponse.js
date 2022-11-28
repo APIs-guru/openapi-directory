@@ -22,26 +22,26 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var DescribeAccountHealthResponse = /** @class */ (function (_super) {
     __extends(DescribeAccountHealthResponse, _super);
     function DescribeAccountHealthResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=MetricsAnalyzed" }),
+        SpeakeasyMetadata({ data: "json, name=MetricsAnalyzed" }),
         __metadata("design:type", Number)
     ], DescribeAccountHealthResponse.prototype, "metricsAnalyzed", void 0);
     __decorate([
-        Metadata({ data: "json, name=OpenProactiveInsights" }),
+        SpeakeasyMetadata({ data: "json, name=OpenProactiveInsights" }),
         __metadata("design:type", Number)
     ], DescribeAccountHealthResponse.prototype, "openProactiveInsights", void 0);
     __decorate([
-        Metadata({ data: "json, name=OpenReactiveInsights" }),
+        SpeakeasyMetadata({ data: "json, name=OpenReactiveInsights" }),
         __metadata("design:type", Number)
     ], DescribeAccountHealthResponse.prototype, "openReactiveInsights", void 0);
     __decorate([
-        Metadata({ data: "json, name=ResourceHours" }),
+        SpeakeasyMetadata({ data: "json, name=ResourceHours" }),
         __metadata("design:type", Number)
     ], DescribeAccountHealthResponse.prototype, "resourceHours", void 0);
     return DescribeAccountHealthResponse;

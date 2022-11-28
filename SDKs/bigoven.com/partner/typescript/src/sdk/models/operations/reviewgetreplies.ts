@@ -1,41 +1,42 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class ReviewGetRepliesPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=reviewId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=reviewId" })
   reviewId: string;
 }
 
 
 export class ReviewGetRepliesQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=pg" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=pg" })
   pg?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=rpp" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=rpp" })
   rpp?: number;
 }
 
 
 export class ReviewGetRepliesRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: ReviewGetRepliesPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: ReviewGetRepliesQueryParams;
 }
 
 
 export class ReviewGetRepliesResponse extends SpeakeasyBase {
-  @Metadata({ elemType: shared.BigOvenModelApiReply })
+  @SpeakeasyMetadata({ elemType: shared.BigOvenModelApiReply })
   bigOvenModelApiReplies?: shared.BigOvenModelApiReply[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

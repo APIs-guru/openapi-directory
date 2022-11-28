@@ -9,11 +9,11 @@ class DeleteWebhooksQueryParams:
 
 @dataclass
 class DeleteWebhooksRequest:
-    query_params: DeleteWebhooksQueryParams = field(default=None)
+    query_params: DeleteWebhooksQueryParams = field()
     
 
 @dataclass
 class DeleteWebhooksResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

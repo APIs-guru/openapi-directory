@@ -1,13 +1,17 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import locale
-from . import orientation
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class IosRuntimeConfiguration:
-    locales: Optional[List[locale.Locale]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'locales' }})
-    orientations: Optional[List[orientation.Orientation]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'orientations' }})
+    r"""IosRuntimeConfiguration
+    iOS configuration that can be selected at the time a test is run.
+    """
+    
+    locales: Optional[List[Locale]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('locales') }})
+    orientations: Optional[List[Orientation]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('orientations') }})
     

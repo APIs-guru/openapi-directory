@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { InventoryItem } from "./inventoryitem";
+
 
 
 // InventoryItemsListResponse
@@ -8,12 +8,12 @@ import { InventoryItem } from "./inventoryitem";
  * Inventory item List Response
 **/
 export class InventoryItemsListResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=inventoryItems", elemType: shared.InventoryItem })
+  @SpeakeasyMetadata({ data: "json, name=inventoryItems", elemType: InventoryItem })
   inventoryItems?: InventoryItem[];
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 }

@@ -15,12 +15,12 @@ type CreateBatchPaymentNewBatch struct {
 	Type        *CreateBatchPaymentNewBatchTypeEnum `json:"type,omitempty"`
 }
 
-type CreateBatchPaymentRequest struct {
-	Request CreateBatchPaymentNewBatch `request:"mediaType=application/json"`
-}
-
 type CreateBatchPaymentNewBatchResponse struct {
 	BatchUUID *string `json:"batchUuid,omitempty"`
+}
+
+type CreateBatchPaymentRequest struct {
+	Request CreateBatchPaymentNewBatch `request:"mediaType=application/json"`
 }
 
 type CreateBatchPaymentResponse struct {

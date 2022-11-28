@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudDatacatalogV1beta1RenameTagTemplateFieldEnumValueRequest
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Request message for RenameTagTemplateFieldEnumValue.
 **/
 export class GoogleCloudDatacatalogV1beta1RenameTagTemplateFieldEnumValueRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=newEnumValueDisplayName" })
+  @SpeakeasyMetadata({ data: "json, name=newEnumValueDisplayName" })
   newEnumValueDisplayName?: string;
 }

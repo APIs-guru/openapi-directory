@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ErrorEvent } from "./errorevent";
 /**
  * Contains a set of requested error events.

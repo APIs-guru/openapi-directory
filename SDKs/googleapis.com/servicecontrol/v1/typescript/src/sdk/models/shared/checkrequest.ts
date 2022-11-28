@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Operation } from "./operation";
+
 
 
 // CheckRequest
@@ -7,15 +8,15 @@ import { Operation } from "./operation";
  * Request message for the Check method.
 **/
 export class CheckRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=operation" })
+  @SpeakeasyMetadata({ data: "json, name=operation" })
   operation?: Operation;
 
-  @Metadata({ data: "json, name=requestProjectSettings" })
+  @SpeakeasyMetadata({ data: "json, name=requestProjectSettings" })
   requestProjectSettings?: boolean;
 
-  @Metadata({ data: "json, name=serviceConfigId" })
+  @SpeakeasyMetadata({ data: "json, name=serviceConfigId" })
   serviceConfigId?: string;
 
-  @Metadata({ data: "json, name=skipActivationCheck" })
+  @SpeakeasyMetadata({ data: "json, name=skipActivationCheck" })
   skipActivationCheck?: boolean;
 }

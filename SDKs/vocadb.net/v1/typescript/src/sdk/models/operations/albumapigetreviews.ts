@@ -1,38 +1,39 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class AlbumApiGetReviewsPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" })
   id: number;
 }
 
 
 export class AlbumApiGetReviewsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=languageCode" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=languageCode" })
   languageCode?: string;
 }
 
 
 export class AlbumApiGetReviewsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: AlbumApiGetReviewsPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: AlbumApiGetReviewsQueryParams;
 }
 
 
 export class AlbumApiGetReviewsResponse extends SpeakeasyBase {
-  @Metadata({ elemType: shared.AlbumReviewContract })
+  @SpeakeasyMetadata({ elemType: shared.AlbumReviewContract })
   albumReviewContracts?: shared.AlbumReviewContract[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

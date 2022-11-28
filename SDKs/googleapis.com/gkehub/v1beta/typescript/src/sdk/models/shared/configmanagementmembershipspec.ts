@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ConfigManagementBinauthzConfig } from "./configmanagementbinauthzconfig";
 import { ConfigManagementConfigSync } from "./configmanagementconfigsync";
 import { ConfigManagementHierarchyControllerConfig } from "./configmanagementhierarchycontrollerconfig";
 import { ConfigManagementPolicyController } from "./configmanagementpolicycontroller";
+
 
 
 // ConfigManagementMembershipSpec
@@ -10,18 +11,18 @@ import { ConfigManagementPolicyController } from "./configmanagementpolicycontro
  * **Anthos Config Management**: Configuration for a single cluster. Intended to parallel the ConfigManagement CR.
 **/
 export class ConfigManagementMembershipSpec extends SpeakeasyBase {
-  @Metadata({ data: "json, name=binauthz" })
+  @SpeakeasyMetadata({ data: "json, name=binauthz" })
   binauthz?: ConfigManagementBinauthzConfig;
 
-  @Metadata({ data: "json, name=configSync" })
+  @SpeakeasyMetadata({ data: "json, name=configSync" })
   configSync?: ConfigManagementConfigSync;
 
-  @Metadata({ data: "json, name=hierarchyController" })
+  @SpeakeasyMetadata({ data: "json, name=hierarchyController" })
   hierarchyController?: ConfigManagementHierarchyControllerConfig;
 
-  @Metadata({ data: "json, name=policyController" })
+  @SpeakeasyMetadata({ data: "json, name=policyController" })
   policyController?: ConfigManagementPolicyController;
 
-  @Metadata({ data: "json, name=version" })
+  @SpeakeasyMetadata({ data: "json, name=version" })
   version?: string;
 }

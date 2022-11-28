@@ -18,6 +18,8 @@ const (
 	NetworkTypeEnumPrivate         NetworkTypeEnum = "PRIVATE"
 )
 
+// Network
+// A Network.
 type Network struct {
 	Cidr               *string                     `json:"cidr,omitempty"`
 	GatewayIP          *string                     `json:"gatewayIp,omitempty"`

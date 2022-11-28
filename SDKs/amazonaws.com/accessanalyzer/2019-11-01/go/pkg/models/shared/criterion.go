@@ -1,5 +1,7 @@
 package shared
 
+// Criterion
+// The criteria to use in the filter that defines the archive rule.
 type Criterion struct {
 	Contains []string `json:"contains,omitempty"`
 	Eq       []string `json:"eq,omitempty"`

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // DeleteDuplicatesResponse
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The result of removing duplicates in a range.
 **/
 export class DeleteDuplicatesResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=duplicatesRemovedCount" })
+  @SpeakeasyMetadata({ data: "json, name=duplicatesRemovedCount" })
   duplicatesRemovedCount?: number;
 }

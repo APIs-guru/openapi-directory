@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DirectoryDomainAliasesListPathParams:
-    customer: str = field(default=None, metadata={'path_param': { 'field_name': 'customer', 'style': 'simple', 'explode': False }})
+    customer: str = field(metadata={'path_param': { 'field_name': 'customer', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,14 +27,14 @@ class DirectoryDomainAliasesListQueryParams:
 
 @dataclass
 class DirectoryDomainAliasesListSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DirectoryDomainAliasesListSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -44,14 +45,14 @@ class DirectoryDomainAliasesListSecurity:
 
 @dataclass
 class DirectoryDomainAliasesListRequest:
-    path_params: DirectoryDomainAliasesListPathParams = field(default=None)
-    query_params: DirectoryDomainAliasesListQueryParams = field(default=None)
-    security: DirectoryDomainAliasesListSecurity = field(default=None)
+    path_params: DirectoryDomainAliasesListPathParams = field()
+    query_params: DirectoryDomainAliasesListQueryParams = field()
+    security: DirectoryDomainAliasesListSecurity = field()
     
 
 @dataclass
 class DirectoryDomainAliasesListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     domain_aliases: Optional[shared.DomainAliases] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostDeleteVpnConnectionActionEnum(str, Enum):
     DELETE_VPN_CONNECTION = "DeleteVpnConnection"
@@ -10,8 +14,8 @@ class PostDeleteVpnConnectionVersionEnum(str, Enum):
 
 @dataclass
 class PostDeleteVpnConnectionQueryParams:
-    action: PostDeleteVpnConnectionActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostDeleteVpnConnectionVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostDeleteVpnConnectionActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostDeleteVpnConnectionVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,13 +31,13 @@ class PostDeleteVpnConnectionHeaders:
 
 @dataclass
 class PostDeleteVpnConnectionRequest:
-    query_params: PostDeleteVpnConnectionQueryParams = field(default=None)
-    headers: PostDeleteVpnConnectionHeaders = field(default=None)
+    headers: PostDeleteVpnConnectionHeaders = field()
+    query_params: PostDeleteVpnConnectionQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostDeleteVpnConnectionResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

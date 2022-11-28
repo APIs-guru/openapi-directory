@@ -1,10 +1,15 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,List,Optional
+from enum import Enum
+from sdk.models import shared
 
 
 @dataclass
 class UpdateWebHookPathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 class UpdateWebHookRequestBodyFilterEnum(str, Enum):
     CONVERSATION_CREATE = "CONVERSATION.CREATE"
@@ -25,20 +30,20 @@ class UpdateWebHookRequestBody:
 
 @dataclass
 class UpdateWebHookSecurity:
-    oauth: shared.SchemeOauth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth: shared.SchemeOauth = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class UpdateWebHookRequest:
-    path_params: UpdateWebHookPathParams = field(default=None)
+    path_params: UpdateWebHookPathParams = field()
+    security: UpdateWebHookSecurity = field()
     request: Optional[UpdateWebHookRequestBody] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
-    security: UpdateWebHookSecurity = field(default=None)
     
 
 @dataclass
 class UpdateWebHookResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     web_hook: Optional[Any] = field(default=None)
     

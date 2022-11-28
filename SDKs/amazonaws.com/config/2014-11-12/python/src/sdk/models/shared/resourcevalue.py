@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import resourcevaluetype_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ResourceValue:
-    value: resourcevaluetype_enum.ResourceValueTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Value' }})
+    r"""ResourceValue
+    The dynamic value of the resource.
+    """
+    
+    value: ResourceValueTypeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Value') }})
     

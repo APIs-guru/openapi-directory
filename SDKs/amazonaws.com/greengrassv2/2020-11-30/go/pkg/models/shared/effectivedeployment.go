@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// EffectiveDeployment
+// Contains information about a deployment job that IoT Greengrass sends to a Greengrass core device.
 type EffectiveDeployment struct {
 	CoreDeviceExecutionStatus EffectiveDeploymentExecutionStatusEnum `json:"coreDeviceExecutionStatus"`
 	CreationTimestamp         time.Time                              `json:"creationTimestamp"`

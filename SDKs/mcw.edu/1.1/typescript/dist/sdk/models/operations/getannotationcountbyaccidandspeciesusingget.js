@@ -22,22 +22,22 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var GetAnnotationCountByAccIdAndSpeciesUsingGetPathParams = /** @class */ (function (_super) {
     __extends(GetAnnotationCountByAccIdAndSpeciesUsingGetPathParams, _super);
     function GetAnnotationCountByAccIdAndSpeciesUsingGetPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=accId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=accId" }),
         __metadata("design:type", String)
     ], GetAnnotationCountByAccIdAndSpeciesUsingGetPathParams.prototype, "accId", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=includeChildren" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=includeChildren" }),
         __metadata("design:type", Boolean)
     ], GetAnnotationCountByAccIdAndSpeciesUsingGetPathParams.prototype, "includeChildren", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=speciesTypeKey" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=speciesTypeKey" }),
         __metadata("design:type", Number)
     ], GetAnnotationCountByAccIdAndSpeciesUsingGetPathParams.prototype, "speciesTypeKey", void 0);
     return GetAnnotationCountByAccIdAndSpeciesUsingGetPathParams;
@@ -49,7 +49,7 @@ var GetAnnotationCountByAccIdAndSpeciesUsingGetRequest = /** @class */ (function
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetAnnotationCountByAccIdAndSpeciesUsingGetPathParams)
     ], GetAnnotationCountByAccIdAndSpeciesUsingGetRequest.prototype, "pathParams", void 0);
     return GetAnnotationCountByAccIdAndSpeciesUsingGetRequest;
@@ -61,15 +61,15 @@ var GetAnnotationCountByAccIdAndSpeciesUsingGetResponse = /** @class */ (functio
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], GetAnnotationCountByAccIdAndSpeciesUsingGetResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetAnnotationCountByAccIdAndSpeciesUsingGetResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetAnnotationCountByAccIdAndSpeciesUsingGetResponse.prototype, "statusCode", void 0);
     return GetAnnotationCountByAccIdAndSpeciesUsingGetResponse;

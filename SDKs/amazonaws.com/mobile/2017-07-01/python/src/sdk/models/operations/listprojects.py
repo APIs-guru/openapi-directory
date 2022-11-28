@@ -1,5 +1,8 @@
 from dataclasses import dataclass, field
-from typing import List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
 from sdk.models import shared
 
 
@@ -22,18 +25,18 @@ class ListProjectsHeaders:
 
 @dataclass
 class ListProjectsRequest:
-    query_params: ListProjectsQueryParams = field(default=None)
-    headers: ListProjectsHeaders = field(default=None)
+    headers: ListProjectsHeaders = field()
+    query_params: ListProjectsQueryParams = field()
     
 
 @dataclass
 class ListProjectsResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[shared.BadRequestException] = field(default=None)
-    content_type: str = field(default=None)
     internal_failure_exception: Optional[shared.InternalFailureException] = field(default=None)
     list_projects_result: Optional[shared.ListProjectsResult] = field(default=None)
     service_unavailable_exception: Optional[shared.ServiceUnavailableException] = field(default=None)
-    status_code: int = field(default=None)
     too_many_requests_exception: Optional[shared.TooManyRequestsException] = field(default=None)
     unauthorized_exception: Optional[shared.UnauthorizedException] = field(default=None)
     

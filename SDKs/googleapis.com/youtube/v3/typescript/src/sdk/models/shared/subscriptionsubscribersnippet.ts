@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ThumbnailDetails } from "./thumbnaildetails";
+
 
 
 // SubscriptionSubscriberSnippet
@@ -7,15 +8,15 @@ import { ThumbnailDetails } from "./thumbnaildetails";
  * Basic details about a subscription's subscriber including title, description, channel ID and thumbnails.
 **/
 export class SubscriptionSubscriberSnippet extends SpeakeasyBase {
-  @Metadata({ data: "json, name=channelId" })
+  @SpeakeasyMetadata({ data: "json, name=channelId" })
   channelId?: string;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=thumbnails" })
+  @SpeakeasyMetadata({ data: "json, name=thumbnails" })
   thumbnails?: ThumbnailDetails;
 
-  @Metadata({ data: "json, name=title" })
+  @SpeakeasyMetadata({ data: "json, name=title" })
   title?: string;
 }

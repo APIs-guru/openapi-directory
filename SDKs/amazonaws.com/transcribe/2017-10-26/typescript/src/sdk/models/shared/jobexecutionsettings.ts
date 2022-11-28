@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // JobExecutionSettings
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Provides information about when a transcription job should be executed.
 **/
 export class JobExecutionSettings extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AllowDeferredExecution" })
+  @SpeakeasyMetadata({ data: "json, name=AllowDeferredExecution" })
   allowDeferredExecution?: boolean;
 
-  @Metadata({ data: "json, name=DataAccessRoleArn" })
+  @SpeakeasyMetadata({ data: "json, name=DataAccessRoleArn" })
   dataAccessRoleArn?: string;
 }

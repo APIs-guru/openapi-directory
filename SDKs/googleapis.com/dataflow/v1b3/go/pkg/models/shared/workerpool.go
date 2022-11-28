@@ -26,6 +26,8 @@ const (
 	WorkerPoolTeardownPolicyEnumTeardownNever         WorkerPoolTeardownPolicyEnum = "TEARDOWN_NEVER"
 )
 
+// WorkerPool
+// Describes one particular pool of Cloud Dataflow workers to be instantiated by the Cloud Dataflow service in order to perform the computations required by a job. Note that a workflow job may use multiple pools, in order to match the various computational requirements of the various stages of the job.
 type WorkerPool struct {
 	AutoscalingSettings         *AutoscalingSettings             `json:"autoscalingSettings,omitempty"`
 	DataDisks                   []Disk                           `json:"dataDisks,omitempty"`
@@ -43,7 +45,7 @@ type WorkerPool struct {
 	OnHostMaintenance           *string                          `json:"onHostMaintenance,omitempty"`
 	Packages                    []Package                        `json:"packages,omitempty"`
 	PoolArgs                    map[string]interface{}           `json:"poolArgs,omitempty"`
-	SdkHarnessContainerImages   []SdkHarnessContainerImage       `json:"sdkHarnessContainerImages,omitempty"`
+	SdkHarnessContainerImages   []SDKHarnessContainerImage       `json:"sdkHarnessContainerImages,omitempty"`
 	Subnetwork                  *string                          `json:"subnetwork,omitempty"`
 	TaskrunnerSettings          *TaskRunnerSettings              `json:"taskrunnerSettings,omitempty"`
 	TeardownPolicy              *WorkerPoolTeardownPolicyEnum    `json:"teardownPolicy,omitempty"`

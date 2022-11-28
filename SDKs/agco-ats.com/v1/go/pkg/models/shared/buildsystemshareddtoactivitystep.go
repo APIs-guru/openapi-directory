@@ -1,5 +1,7 @@
 package shared
 
+// BuildSystemSharedDtoActivityStep
+// A DTO for an IActivityStep
 type BuildSystemSharedDtoActivityStep struct {
 	ActivityID        *int32                                 `json:"ActivityID,omitempty"`
 	ActivityStepID    *int32                                 `json:"ActivityStepID,omitempty"`

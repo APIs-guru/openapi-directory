@@ -1,5 +1,7 @@
 package shared
 
+// ScheduleRunConfiguration
+// Represents the settings for a run. Includes things like location, radio states, auxiliary apps, and network profiles.
 type ScheduleRunConfiguration struct {
 	AuxiliaryApps         []string               `json:"auxiliaryApps,omitempty"`
 	BillingMethod         *BillingMethodEnum     `json:"billingMethod,omitempty"`

@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class UpdateServicePrimaryTaskSetRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=cluster" })
+  @SpeakeasyMetadata({ data: "json, name=cluster" })
   cluster: string;
 
-  @Metadata({ data: "json, name=primaryTaskSet" })
+  @SpeakeasyMetadata({ data: "json, name=primaryTaskSet" })
   primaryTaskSet: string;
 
-  @Metadata({ data: "json, name=service" })
+  @SpeakeasyMetadata({ data: "json, name=service" })
   service: string;
 }

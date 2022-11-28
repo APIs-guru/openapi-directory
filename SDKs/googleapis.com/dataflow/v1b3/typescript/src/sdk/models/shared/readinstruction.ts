@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Source } from "./source";
+
 
 
 // ReadInstruction
@@ -7,6 +8,6 @@ import { Source } from "./source";
  * An instruction that reads records. Takes no inputs, produces one output.
 **/
 export class ReadInstruction extends SpeakeasyBase {
-  @Metadata({ data: "json, name=source" })
+  @SpeakeasyMetadata({ data: "json, name=source" })
   source?: Source;
 }

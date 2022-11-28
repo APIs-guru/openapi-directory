@@ -1,5 +1,7 @@
 package shared
 
+// Bundle
+// Describes a bundle, which is a set of specs describing your virtual private server (or <i>instance</i>).
 type Bundle struct {
 	BundleID             *string                `json:"bundleId,omitempty"`
 	CPUCount             *int64                 `json:"cpuCount,omitempty"`

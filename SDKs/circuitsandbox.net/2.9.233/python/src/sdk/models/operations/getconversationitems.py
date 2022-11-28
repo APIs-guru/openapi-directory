@@ -1,13 +1,15 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
-from typing import Any,Enum,List,Optional
+from typing import Any,List,Optional
+from enum import Enum
+from sdk.models import shared
 
 
 @dataclass
 class GetConversationItemsPathParams:
-    conv_id: str = field(default=None, metadata={'path_param': { 'field_name': 'convId', 'style': 'simple', 'explode': False }})
+    conv_id: str = field(metadata={'path_param': { 'field_name': 'convId', 'style': 'simple', 'explode': False }})
     
 class GetConversationItemsDirectionEnum(str, Enum):
     BEFORE = "BEFORE"
@@ -23,20 +25,20 @@ class GetConversationItemsQueryParams:
 
 @dataclass
 class GetConversationItemsSecurity:
-    oauth: shared.SchemeOauth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth: shared.SchemeOauth = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class GetConversationItemsRequest:
-    path_params: GetConversationItemsPathParams = field(default=None)
-    query_params: GetConversationItemsQueryParams = field(default=None)
-    security: GetConversationItemsSecurity = field(default=None)
+    path_params: GetConversationItemsPathParams = field()
+    query_params: GetConversationItemsQueryParams = field()
+    security: GetConversationItemsSecurity = field()
     
 
 @dataclass
 class GetConversationItemsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     conversation_items: Optional[List[Any]] = field(default=None)
-    status_code: int = field(default=None)
     

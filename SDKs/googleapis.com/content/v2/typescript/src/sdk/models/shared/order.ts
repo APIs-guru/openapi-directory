@@ -1,5 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { OrderCustomer } from "./ordercustomer";
 import { OrderDeliveryDetails } from "./orderdeliverydetails";
 import { OrderLineItem } from "./orderlineitem";
@@ -9,8 +8,7 @@ import { OrderPickupDetails } from "./orderpickupdetails";
 import { OrderLegacyPromotion } from "./orderlegacypromotion";
 import { OrderRefund } from "./orderrefund";
 import { OrderShipment } from "./ordershipment";
-import { Price } from "./price";
-import { Price } from "./price";
+
 
 
 // Order
@@ -18,69 +16,69 @@ import { Price } from "./price";
  * Order. Production access (all methods) requires the order manager role. Sandbox access does not.
 **/
 export class Order extends SpeakeasyBase {
-  @Metadata({ data: "json, name=acknowledged" })
+  @SpeakeasyMetadata({ data: "json, name=acknowledged" })
   acknowledged?: boolean;
 
-  @Metadata({ data: "json, name=channelType" })
+  @SpeakeasyMetadata({ data: "json, name=channelType" })
   channelType?: string;
 
-  @Metadata({ data: "json, name=customer" })
+  @SpeakeasyMetadata({ data: "json, name=customer" })
   customer?: OrderCustomer;
 
-  @Metadata({ data: "json, name=deliveryDetails" })
+  @SpeakeasyMetadata({ data: "json, name=deliveryDetails" })
   deliveryDetails?: OrderDeliveryDetails;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=lineItems", elemType: shared.OrderLineItem })
+  @SpeakeasyMetadata({ data: "json, name=lineItems", elemType: OrderLineItem })
   lineItems?: OrderLineItem[];
 
-  @Metadata({ data: "json, name=merchantId" })
+  @SpeakeasyMetadata({ data: "json, name=merchantId" })
   merchantId?: string;
 
-  @Metadata({ data: "json, name=merchantOrderId" })
+  @SpeakeasyMetadata({ data: "json, name=merchantOrderId" })
   merchantOrderId?: string;
 
-  @Metadata({ data: "json, name=netAmount" })
+  @SpeakeasyMetadata({ data: "json, name=netAmount" })
   netAmount?: Price;
 
-  @Metadata({ data: "json, name=paymentMethod" })
+  @SpeakeasyMetadata({ data: "json, name=paymentMethod" })
   paymentMethod?: OrderPaymentMethod;
 
-  @Metadata({ data: "json, name=paymentStatus" })
+  @SpeakeasyMetadata({ data: "json, name=paymentStatus" })
   paymentStatus?: string;
 
-  @Metadata({ data: "json, name=pickupDetails" })
+  @SpeakeasyMetadata({ data: "json, name=pickupDetails" })
   pickupDetails?: OrderPickupDetails;
 
-  @Metadata({ data: "json, name=placedDate" })
+  @SpeakeasyMetadata({ data: "json, name=placedDate" })
   placedDate?: string;
 
-  @Metadata({ data: "json, name=promotions", elemType: shared.OrderLegacyPromotion })
+  @SpeakeasyMetadata({ data: "json, name=promotions", elemType: OrderLegacyPromotion })
   promotions?: OrderLegacyPromotion[];
 
-  @Metadata({ data: "json, name=refunds", elemType: shared.OrderRefund })
+  @SpeakeasyMetadata({ data: "json, name=refunds", elemType: OrderRefund })
   refunds?: OrderRefund[];
 
-  @Metadata({ data: "json, name=shipments", elemType: shared.OrderShipment })
+  @SpeakeasyMetadata({ data: "json, name=shipments", elemType: OrderShipment })
   shipments?: OrderShipment[];
 
-  @Metadata({ data: "json, name=shippingCost" })
+  @SpeakeasyMetadata({ data: "json, name=shippingCost" })
   shippingCost?: Price;
 
-  @Metadata({ data: "json, name=shippingCostTax" })
+  @SpeakeasyMetadata({ data: "json, name=shippingCostTax" })
   shippingCostTax?: Price;
 
-  @Metadata({ data: "json, name=shippingOption" })
+  @SpeakeasyMetadata({ data: "json, name=shippingOption" })
   shippingOption?: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: string;
 
-  @Metadata({ data: "json, name=taxCollector" })
+  @SpeakeasyMetadata({ data: "json, name=taxCollector" })
   taxCollector?: string;
 }

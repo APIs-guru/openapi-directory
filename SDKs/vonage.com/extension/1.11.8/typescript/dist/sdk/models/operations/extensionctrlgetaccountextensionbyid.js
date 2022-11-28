@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var ExtensionCtrlGetAccountExtensionByIdPathParams = /** @class */ (function (_super) {
     __extends(ExtensionCtrlGetAccountExtensionByIdPathParams, _super);
@@ -30,11 +30,11 @@ var ExtensionCtrlGetAccountExtensionByIdPathParams = /** @class */ (function (_s
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=account_id" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=account_id" }),
         __metadata("design:type", String)
     ], ExtensionCtrlGetAccountExtensionByIdPathParams.prototype, "accountId", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=extension_number" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=extension_number" }),
         __metadata("design:type", Number)
     ], ExtensionCtrlGetAccountExtensionByIdPathParams.prototype, "extensionNumber", void 0);
     return ExtensionCtrlGetAccountExtensionByIdPathParams;
@@ -46,7 +46,7 @@ var ExtensionCtrlGetAccountExtensionByIdSecurity = /** @class */ (function (_sup
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=http;subtype=bearer" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" }),
         __metadata("design:type", shared.SchemeBearerAuth)
     ], ExtensionCtrlGetAccountExtensionByIdSecurity.prototype, "bearerAuth", void 0);
     return ExtensionCtrlGetAccountExtensionByIdSecurity;
@@ -58,11 +58,11 @@ var ExtensionCtrlGetAccountExtensionByIdRequest = /** @class */ (function (_supe
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ExtensionCtrlGetAccountExtensionByIdPathParams)
     ], ExtensionCtrlGetAccountExtensionByIdRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ExtensionCtrlGetAccountExtensionByIdSecurity)
     ], ExtensionCtrlGetAccountExtensionByIdRequest.prototype, "security", void 0);
     return ExtensionCtrlGetAccountExtensionByIdRequest;
@@ -74,19 +74,19 @@ var ExtensionCtrlGetAccountExtensionByIdResponse = /** @class */ (function (_sup
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], ExtensionCtrlGetAccountExtensionByIdResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.EndUserRouteHalResponse)
     ], ExtensionCtrlGetAccountExtensionByIdResponse.prototype, "endUserRouteHalResponse", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.ErrorResponse)
     ], ExtensionCtrlGetAccountExtensionByIdResponse.prototype, "errorResponse", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], ExtensionCtrlGetAccountExtensionByIdResponse.prototype, "statusCode", void 0);
     return ExtensionCtrlGetAccountExtensionByIdResponse;

@@ -1,14 +1,20 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import taskstate_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class TaskSummary:
-    state: Optional[taskstate_enum.TaskStateEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'state' }})
-    tags: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tags' }})
-    task_arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'taskArn' }})
-    task_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'taskId' }})
+    r"""TaskSummary
+    Information about the task assigned to one or many devices.
+    """
+    
+    task_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('taskId') }})
+    state: Optional[TaskStateEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('state') }})
+    tags: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('tags') }})
+    task_arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('taskArn') }})
     

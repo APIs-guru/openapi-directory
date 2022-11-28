@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class AgcerRequestBodyCertificateParameters extends SpeakeasyBase {
     name: string;
@@ -16,10 +16,6 @@ export declare class AgcerRequestBody extends SpeakeasyBase {
 export declare class AgcerSecurity extends SpeakeasyBase {
     apiKey: shared.SchemeApiKey;
     clientId: shared.SchemeClientId;
-}
-export declare class AgcerRequest extends SpeakeasyBase {
-    request?: AgcerRequestBody;
-    security: AgcerSecurity;
 }
 export declare enum Agcer400ApplicationJsonErrorEnum {
     MissingParameter = "missing_parameter",
@@ -102,6 +98,10 @@ export declare enum Agcer504ApplicationJsonErrorDescriptionEnum {
 export declare class Agcer504ApplicationJson extends SpeakeasyBase {
     error?: Agcer504ApplicationJsonErrorEnum;
     errorDescription?: Agcer504ApplicationJsonErrorDescriptionEnum;
+}
+export declare class AgcerRequest extends SpeakeasyBase {
+    request?: AgcerRequestBody;
+    security: AgcerSecurity;
 }
 export declare class AgcerResponse extends SpeakeasyBase {
     contentType: string;

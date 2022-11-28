@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // Record
 /**
  * The basic data structure of a dataset.
@@ -33,27 +33,27 @@ var Record = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=DeviceLastModifiedDate" }),
+        SpeakeasyMetadata({ data: "json, name=DeviceLastModifiedDate" }),
         __metadata("design:type", Date)
     ], Record.prototype, "deviceLastModifiedDate", void 0);
     __decorate([
-        Metadata({ data: "json, name=Key" }),
+        SpeakeasyMetadata({ data: "json, name=Key" }),
         __metadata("design:type", String)
     ], Record.prototype, "key", void 0);
     __decorate([
-        Metadata({ data: "json, name=LastModifiedBy" }),
+        SpeakeasyMetadata({ data: "json, name=LastModifiedBy" }),
         __metadata("design:type", String)
     ], Record.prototype, "lastModifiedBy", void 0);
     __decorate([
-        Metadata({ data: "json, name=LastModifiedDate" }),
+        SpeakeasyMetadata({ data: "json, name=LastModifiedDate" }),
         __metadata("design:type", Date)
     ], Record.prototype, "lastModifiedDate", void 0);
     __decorate([
-        Metadata({ data: "json, name=SyncCount" }),
+        SpeakeasyMetadata({ data: "json, name=SyncCount" }),
         __metadata("design:type", Number)
     ], Record.prototype, "syncCount", void 0);
     __decorate([
-        Metadata({ data: "json, name=Value" }),
+        SpeakeasyMetadata({ data: "json, name=Value" }),
         __metadata("design:type", String)
     ], Record.prototype, "value", void 0);
     return Record;

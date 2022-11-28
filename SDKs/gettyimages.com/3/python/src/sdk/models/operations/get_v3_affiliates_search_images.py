@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
@@ -16,13 +17,13 @@ class GetV3AffiliatesSearchImagesHeaders:
 
 @dataclass
 class GetV3AffiliatesSearchImagesRequest:
-    query_params: GetV3AffiliatesSearchImagesQueryParams = field(default=None)
-    headers: GetV3AffiliatesSearchImagesHeaders = field(default=None)
+    headers: GetV3AffiliatesSearchImagesHeaders = field()
+    query_params: GetV3AffiliatesSearchImagesQueryParams = field()
     
 
 @dataclass
 class GetV3AffiliatesSearchImagesResponse:
+    content_type: str = field()
+    status_code: int = field()
     affiliate_image_search_response: Optional[shared.AffiliateImageSearchResponse] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

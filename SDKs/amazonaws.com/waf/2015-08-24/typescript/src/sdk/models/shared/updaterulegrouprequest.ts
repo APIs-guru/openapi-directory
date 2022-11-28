@@ -1,15 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RuleGroupUpdate } from "./rulegroupupdate";
 
 
+
 export class UpdateRuleGroupRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ChangeToken" })
+  @SpeakeasyMetadata({ data: "json, name=ChangeToken" })
   changeToken: string;
 
-  @Metadata({ data: "json, name=RuleGroupId" })
+  @SpeakeasyMetadata({ data: "json, name=RuleGroupId" })
   ruleGroupId: string;
 
-  @Metadata({ data: "json, name=Updates", elemType: shared.RuleGroupUpdate })
+  @SpeakeasyMetadata({ data: "json, name=Updates", elemType: RuleGroupUpdate })
   updates: RuleGroupUpdate[];
 }

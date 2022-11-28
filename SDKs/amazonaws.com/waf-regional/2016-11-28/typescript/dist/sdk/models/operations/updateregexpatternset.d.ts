@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare enum UpdateRegexPatternSetXAmzTargetEnum {
     AwswafRegional20161128UpdateRegexPatternSet = "AWSWAF_Regional_20161128.UpdateRegexPatternSet"

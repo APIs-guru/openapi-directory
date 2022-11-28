@@ -1,5 +1,7 @@
 package shared
 
+// PersonalNameGeoOut
+// Classified geo names
 type PersonalNameGeoOut struct {
 	CountriesTop             []string `json:"countriesTop,omitempty"`
 	Country                  *string  `json:"country,omitempty"`

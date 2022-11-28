@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// AuthorizerDescription
+// The authorizer description.
 type AuthorizerDescription struct {
 	AuthorizerArn          *string               `json:"authorizerArn,omitempty"`
 	AuthorizerFunctionArn  *string               `json:"authorizerFunctionArn,omitempty"`

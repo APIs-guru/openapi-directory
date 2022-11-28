@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleFirebaseAppcheckV1ExchangeRecaptchaV3TokenRequest
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Request message for the ExchangeRecaptchaV3Token method.
 **/
 export class GoogleFirebaseAppcheckV1ExchangeRecaptchaV3TokenRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=recaptchaV3Token" })
+  @SpeakeasyMetadata({ data: "json, name=recaptchaV3Token" })
   recaptchaV3Token?: string;
 }

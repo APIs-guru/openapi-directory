@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SubtitleFormatEnum } from "./subtitleformatenum";
+
 
 
 // Subtitles
@@ -7,6 +8,6 @@ import { SubtitleFormatEnum } from "./subtitleformatenum";
  * Generate subtitles for your batch transcription job.
 **/
 export class Subtitles extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Formats" })
+  @SpeakeasyMetadata({ data: "json, name=Formats" })
   formats?: SubtitleFormatEnum[];
 }

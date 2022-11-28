@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostSetLoadBalancerPoliciesForBackendServerActionEnum(str, Enum):
     SET_LOAD_BALANCER_POLICIES_FOR_BACKEND_SERVER = "SetLoadBalancerPoliciesForBackendServer"
@@ -10,8 +14,8 @@ class PostSetLoadBalancerPoliciesForBackendServerVersionEnum(str, Enum):
 
 @dataclass
 class PostSetLoadBalancerPoliciesForBackendServerQueryParams:
-    action: PostSetLoadBalancerPoliciesForBackendServerActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostSetLoadBalancerPoliciesForBackendServerVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostSetLoadBalancerPoliciesForBackendServerActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostSetLoadBalancerPoliciesForBackendServerVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostSetLoadBalancerPoliciesForBackendServerHeaders:
 
 @dataclass
 class PostSetLoadBalancerPoliciesForBackendServerRequest:
-    query_params: PostSetLoadBalancerPoliciesForBackendServerQueryParams = field(default=None)
-    headers: PostSetLoadBalancerPoliciesForBackendServerHeaders = field(default=None)
+    headers: PostSetLoadBalancerPoliciesForBackendServerHeaders = field()
+    query_params: PostSetLoadBalancerPoliciesForBackendServerQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostSetLoadBalancerPoliciesForBackendServerResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

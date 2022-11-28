@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // BotLocaleHistoryEvent
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Provides information about an event that occurred affecting the bot locale.
 **/
 export class BotLocaleHistoryEvent extends SpeakeasyBase {
-  @Metadata({ data: "json, name=event" })
+  @SpeakeasyMetadata({ data: "json, name=event" })
   event: string;
 
-  @Metadata({ data: "json, name=eventDate" })
+  @SpeakeasyMetadata({ data: "json, name=eventDate" })
   eventDate: Date;
 }

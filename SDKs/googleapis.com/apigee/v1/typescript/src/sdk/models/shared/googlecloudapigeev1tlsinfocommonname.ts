@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GoogleCloudApigeeV1TlsInfoCommonName extends SpeakeasyBase {
-  @Metadata({ data: "json, name=value" })
+  @SpeakeasyMetadata({ data: "json, name=value" })
   value?: string;
 
-  @Metadata({ data: "json, name=wildcardMatch" })
+  @SpeakeasyMetadata({ data: "json, name=wildcardMatch" })
   wildcardMatch?: boolean;
 }

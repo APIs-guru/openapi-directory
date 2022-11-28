@@ -1,10 +1,15 @@
 from dataclasses import dataclass, field
 from dataclasses_json import dataclass_json
-from . import place
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class SearchForTextResult:
-    place: place.Place = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Place' }})
+    r"""SearchForTextResult
+    Contains relevant Places returned by calling <code>SearchPlaceIndexForText</code>.
+    """
+    
+    place: Place = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Place') }})
     

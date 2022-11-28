@@ -1,11 +1,11 @@
 from dataclasses import dataclass, field
-from typing import List,Optional
+from typing import Optional
 from sdk.models import shared
 
 
 @dataclass
 class ListCheckDetailsPathParams:
-    check_id: str = field(default=None, metadata={'path_param': { 'field_name': 'check_id', 'style': 'simple', 'explode': False }})
+    check_id: str = field(metadata={'path_param': { 'field_name': 'check_id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -16,19 +16,19 @@ class ListCheckDetailsQueryParams:
 
 @dataclass
 class ListCheckDetailsSecurity:
-    api_key: shared.SchemeAPIKey = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    api_key: shared.SchemeAPIKey = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
     
 
 @dataclass
 class ListCheckDetailsRequest:
-    path_params: ListCheckDetailsPathParams = field(default=None)
-    query_params: ListCheckDetailsQueryParams = field(default=None)
-    security: ListCheckDetailsSecurity = field(default=None)
+    path_params: ListCheckDetailsPathParams = field()
+    query_params: ListCheckDetailsQueryParams = field()
+    security: ListCheckDetailsSecurity = field()
     
 
 @dataclass
 class ListCheckDetailsResponse:
+    content_type: str = field()
+    status_code: int = field()
     check_details_output: Optional[shared.CheckDetailsOutput] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

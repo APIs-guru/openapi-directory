@@ -1,10 +1,13 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 
 
 @dataclass
 class DeleteTopicRulePathParams:
-    rule_name: str = field(default=None, metadata={'path_param': { 'field_name': 'ruleName', 'style': 'simple', 'explode': False }})
+    rule_name: str = field(metadata={'path_param': { 'field_name': 'ruleName', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -20,17 +23,17 @@ class DeleteTopicRuleHeaders:
 
 @dataclass
 class DeleteTopicRuleRequest:
-    path_params: DeleteTopicRulePathParams = field(default=None)
-    headers: DeleteTopicRuleHeaders = field(default=None)
+    headers: DeleteTopicRuleHeaders = field()
+    path_params: DeleteTopicRulePathParams = field()
     
 
 @dataclass
 class DeleteTopicRuleResponse:
+    content_type: str = field()
+    status_code: int = field()
     conflicting_resource_update_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     internal_exception: Optional[Any] = field(default=None)
     invalid_request_exception: Optional[Any] = field(default=None)
     service_unavailable_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     unauthorized_exception: Optional[Any] = field(default=None)
     

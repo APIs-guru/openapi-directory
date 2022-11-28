@@ -1,99 +1,100 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class SearchFreetextHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=Accept-Language" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Accept-Language" })
   acceptLanguage: string;
 }
 
 export enum SearchFreetextRequestBodySearchTypesEnum {
-    Product = "PRODUCT"
-,    Destination = "DESTINATION"
-,    Attraction = "ATTRACTION"
-,    Recommendation = "RECOMMENDATION"
+    Product = "PRODUCT",
+    Destination = "DESTINATION",
+    Attraction = "ATTRACTION",
+    Recommendation = "RECOMMENDATION"
 }
 
 
 export class SearchFreetextRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=currencyCode" })
+  @SpeakeasyMetadata({ data: "json, name=currencyCode" })
   currencyCode?: string;
 
-  @Metadata({ data: "json, name=destId" })
+  @SpeakeasyMetadata({ data: "json, name=destId" })
   destId?: number;
 
-  @Metadata({ data: "json, name=searchTypes" })
+  @SpeakeasyMetadata({ data: "json, name=searchTypes" })
   searchTypes?: SearchFreetextRequestBodySearchTypesEnum[];
 
-  @Metadata({ data: "json, name=sortOrder" })
+  @SpeakeasyMetadata({ data: "json, name=sortOrder" })
   sortOrder?: shared.SortOrderEnum;
 
-  @Metadata({ data: "json, name=text" })
+  @SpeakeasyMetadata({ data: "json, name=text" })
   text?: string;
 
-  @Metadata({ data: "json, name=topX" })
+  @SpeakeasyMetadata({ data: "json, name=topX" })
   topX?: string;
 }
 
 
-export class SearchFreetextRequest extends SpeakeasyBase {
-  @Metadata()
-  headers: SearchFreetextHeaders;
-
-  @Metadata({ data: "request, media_type=application/json" })
-  request?: SearchFreetextRequestBody;
-}
-
-
 export class SearchFreetext200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=data", elemType: shared.SearchFreetextResponse })
+  @SpeakeasyMetadata({ data: "json, name=data", elemType: shared.SearchFreetextResponse })
   data?: shared.SearchFreetextResponse[];
 
-  @Metadata({ data: "json, name=dateStamp" })
+  @SpeakeasyMetadata({ data: "json, name=dateStamp" })
   dateStamp?: string;
 
-  @Metadata({ data: "json, name=errorCodes" })
+  @SpeakeasyMetadata({ data: "json, name=errorCodes" })
   errorCodes?: string[];
 
-  @Metadata({ data: "json, name=errorMessage" })
+  @SpeakeasyMetadata({ data: "json, name=errorMessage" })
   errorMessage?: any[];
 
-  @Metadata({ data: "json, name=errorMessageText" })
+  @SpeakeasyMetadata({ data: "json, name=errorMessageText" })
   errorMessageText?: string;
 
-  @Metadata({ data: "json, name=errorName" })
+  @SpeakeasyMetadata({ data: "json, name=errorName" })
   errorName?: string;
 
-  @Metadata({ data: "json, name=errorReference" })
+  @SpeakeasyMetadata({ data: "json, name=errorReference" })
   errorReference?: string;
 
-  @Metadata({ data: "json, name=errorType" })
+  @SpeakeasyMetadata({ data: "json, name=errorType" })
   errorType?: string;
 
-  @Metadata({ data: "json, name=extraInfo" })
+  @SpeakeasyMetadata({ data: "json, name=extraInfo" })
   extraInfo?: Map<string, any>;
 
-  @Metadata({ data: "json, name=extraObject" })
+  @SpeakeasyMetadata({ data: "json, name=extraObject" })
   extraObject?: Map<string, any>;
 
-  @Metadata({ data: "json, name=success" })
+  @SpeakeasyMetadata({ data: "json, name=success" })
   success?: boolean;
 
-  @Metadata({ data: "json, name=totalCount" })
+  @SpeakeasyMetadata({ data: "json, name=totalCount" })
   totalCount?: number;
 
-  @Metadata({ data: "json, name=vmid" })
+  @SpeakeasyMetadata({ data: "json, name=vmid" })
   vmid?: string;
 }
 
 
+export class SearchFreetextRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  headers: SearchFreetextHeaders;
+
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request?: SearchFreetextRequestBody;
+}
+
+
 export class SearchFreetextResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   searchFreetext200ApplicationJsonObject?: SearchFreetext200ApplicationJson;
 }

@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import wmxsitemap
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class SitemapsListResponse:
-    sitemap: Optional[List[wmxsitemap.WmxSitemap]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'sitemap' }})
+    r"""SitemapsListResponse
+    List of sitemaps.
+    """
+    
+    sitemap: Optional[List[WmxSitemap]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('sitemap') }})
     

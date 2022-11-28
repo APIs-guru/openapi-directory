@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum DiscoverableParticipantDocumentTypesEnum {
-    Invoice = "invoice"
-,    Creditnote = "creditnote"
-,    InvoiceResponse = "invoice_response"
-,    Order = "order"
-,    OrderResponse = "order_response"
-,    DespatchNotification = "despatch_notification"
-,    ProductCatalogue = "product_catalogue"
+    Invoice = "invoice",
+    Creditnote = "creditnote",
+    InvoiceResponse = "invoice_response",
+    Order = "order",
+    OrderResponse = "order_response",
+    DespatchNotification = "despatch_notification",
+    ProductCatalogue = "product_catalogue"
 }
 
 
@@ -16,18 +17,18 @@ export enum DiscoverableParticipantDocumentTypesEnum {
  * A participant to be discovered.
 **/
 export class DiscoverableParticipant extends SpeakeasyBase {
-  @Metadata({ data: "json, name=documentTypes" })
+  @SpeakeasyMetadata({ data: "json, name=documentTypes" })
   documentTypes?: DiscoverableParticipantDocumentTypesEnum[];
 
-  @Metadata({ data: "json, name=identifier" })
+  @SpeakeasyMetadata({ data: "json, name=identifier" })
   identifier: string;
 
-  @Metadata({ data: "json, name=metaScheme" })
+  @SpeakeasyMetadata({ data: "json, name=metaScheme" })
   metaScheme?: string;
 
-  @Metadata({ data: "json, name=network" })
+  @SpeakeasyMetadata({ data: "json, name=network" })
   network?: string;
 
-  @Metadata({ data: "json, name=scheme" })
+  @SpeakeasyMetadata({ data: "json, name=scheme" })
   scheme: string;
 }

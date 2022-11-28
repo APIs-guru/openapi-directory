@@ -1,19 +1,20 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ChangedAssetDetail extends SpeakeasyBase {
-  @Metadata({ data: "json, name=asset_changed_utc_datetime" })
+  @SpeakeasyMetadata({ data: "json, name=asset_changed_utc_datetime" })
   assetChangedUtcDatetime?: Date;
 
-  @Metadata({ data: "json, name=asset_lifecycle" })
+  @SpeakeasyMetadata({ data: "json, name=asset_lifecycle" })
   assetLifecycle?: string;
 
-  @Metadata({ data: "json, name=asset_type" })
+  @SpeakeasyMetadata({ data: "json, name=asset_type" })
   assetType?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=uri" })
+  @SpeakeasyMetadata({ data: "json, name=uri" })
   uri?: string;
 }

@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// Pipeline
+// A SageMaker Model Building Pipeline instance.
 type Pipeline struct {
 	CreatedBy           *UserContext        `json:"CreatedBy,omitempty"`
 	CreationTime        *time.Time          `json:"CreationTime,omitempty"`

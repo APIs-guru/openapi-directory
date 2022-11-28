@@ -1,5 +1,7 @@
 package shared
 
+// GoogleCloudIntegrationsV1alphaExecutionSnapshot
+// Contains the snapshot of the execution for a given checkpoint.
 type GoogleCloudIntegrationsV1alphaExecutionSnapshot struct {
 	CheckpointTaskNumber      *string                                                                   `json:"checkpointTaskNumber,omitempty"`
 	ExecutionSnapshotMetadata *GoogleCloudIntegrationsV1alphaExecutionSnapshotExecutionSnapshotMetadata `json:"executionSnapshotMetadata,omitempty"`

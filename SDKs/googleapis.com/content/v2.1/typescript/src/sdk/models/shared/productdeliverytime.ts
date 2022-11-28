@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ProductDeliveryTimeAreaDeliveryTime } from "./productdeliverytimeareadeliverytime";
 import { ProductId } from "./productid";
+
 
 
 // ProductDeliveryTime
@@ -9,9 +9,9 @@ import { ProductId } from "./productid";
  * The estimated days to deliver a product after an order is placed. Only authorized shipping signals partners working with a merchant can use this resource. Merchants should use the [`products`](https://developers.google.com/shopping-content/reference/rest/v2.1/products#productshipping) resource instead.
 **/
 export class ProductDeliveryTime extends SpeakeasyBase {
-  @Metadata({ data: "json, name=areaDeliveryTimes", elemType: shared.ProductDeliveryTimeAreaDeliveryTime })
+  @SpeakeasyMetadata({ data: "json, name=areaDeliveryTimes", elemType: ProductDeliveryTimeAreaDeliveryTime })
   areaDeliveryTimes?: ProductDeliveryTimeAreaDeliveryTime[];
 
-  @Metadata({ data: "json, name=productId" })
+  @SpeakeasyMetadata({ data: "json, name=productId" })
   productId?: ProductId;
 }

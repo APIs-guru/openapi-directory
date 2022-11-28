@@ -1,5 +1,7 @@
 package shared
 
+// OrderedJob
+// A job executed by the workflow.
 type OrderedJob struct {
 	HadoopJob           *HadoopJob        `json:"hadoopJob,omitempty"`
 	HiveJob             *HiveJob          `json:"hiveJob,omitempty"`

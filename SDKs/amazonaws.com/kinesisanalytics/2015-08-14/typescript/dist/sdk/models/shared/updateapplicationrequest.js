@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ApplicationUpdate } from "./applicationupdate";
 var UpdateApplicationRequest = /** @class */ (function (_super) {
     __extends(UpdateApplicationRequest, _super);
@@ -30,15 +30,15 @@ var UpdateApplicationRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=ApplicationName" }),
+        SpeakeasyMetadata({ data: "json, name=ApplicationName" }),
         __metadata("design:type", String)
     ], UpdateApplicationRequest.prototype, "applicationName", void 0);
     __decorate([
-        Metadata({ data: "json, name=ApplicationUpdate" }),
+        SpeakeasyMetadata({ data: "json, name=ApplicationUpdate" }),
         __metadata("design:type", ApplicationUpdate)
     ], UpdateApplicationRequest.prototype, "applicationUpdate", void 0);
     __decorate([
-        Metadata({ data: "json, name=CurrentApplicationVersionId" }),
+        SpeakeasyMetadata({ data: "json, name=CurrentApplicationVersionId" }),
         __metadata("design:type", Number)
     ], UpdateApplicationRequest.prototype, "currentApplicationVersionId", void 0);
     return UpdateApplicationRequest;

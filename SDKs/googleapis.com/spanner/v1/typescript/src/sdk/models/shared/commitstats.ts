@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // CommitStats
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Additional statistics about a commit.
 **/
 export class CommitStats extends SpeakeasyBase {
-  @Metadata({ data: "json, name=mutationCount" })
+  @SpeakeasyMetadata({ data: "json, name=mutationCount" })
   mutationCount?: string;
 }

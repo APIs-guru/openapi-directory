@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // AccountFilter
 /**
  * Enumerates the account subtypes that the application wishes for the user to be able to select from. For more details refer to Plaid documentation on account filters.
@@ -33,19 +33,19 @@ var AccountFilter = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=credit" }),
+        SpeakeasyMetadata({ data: "json, name=credit" }),
         __metadata("design:type", Array)
     ], AccountFilter.prototype, "credit", void 0);
     __decorate([
-        Metadata({ data: "json, name=depository" }),
+        SpeakeasyMetadata({ data: "json, name=depository" }),
         __metadata("design:type", Array)
     ], AccountFilter.prototype, "depository", void 0);
     __decorate([
-        Metadata({ data: "json, name=investment" }),
+        SpeakeasyMetadata({ data: "json, name=investment" }),
         __metadata("design:type", Array)
     ], AccountFilter.prototype, "investment", void 0);
     __decorate([
-        Metadata({ data: "json, name=loan" }),
+        SpeakeasyMetadata({ data: "json, name=loan" }),
         __metadata("design:type", Array)
     ], AccountFilter.prototype, "loan", void 0);
     return AccountFilter;

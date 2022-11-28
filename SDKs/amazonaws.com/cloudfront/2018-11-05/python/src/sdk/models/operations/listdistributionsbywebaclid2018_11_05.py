@@ -1,10 +1,13 @@
 from dataclasses import dataclass, field
-from typing import List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
 
 
 @dataclass
 class ListDistributionsByWebACLId20181105PathParams:
-    web_acl_id: str = field(default=None, metadata={'path_param': { 'field_name': 'WebACLId', 'style': 'simple', 'explode': False }})
+    web_acl_id: str = field(metadata={'path_param': { 'field_name': 'WebACLId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,14 +29,14 @@ class ListDistributionsByWebACLId20181105Headers:
 
 @dataclass
 class ListDistributionsByWebACLId20181105Request:
-    path_params: ListDistributionsByWebACLId20181105PathParams = field(default=None)
-    query_params: ListDistributionsByWebACLId20181105QueryParams = field(default=None)
-    headers: ListDistributionsByWebACLId20181105Headers = field(default=None)
+    headers: ListDistributionsByWebACLId20181105Headers = field()
+    path_params: ListDistributionsByWebACLId20181105PathParams = field()
+    query_params: ListDistributionsByWebACLId20181105QueryParams = field()
     
 
 @dataclass
 class ListDistributionsByWebACLId20181105Response:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

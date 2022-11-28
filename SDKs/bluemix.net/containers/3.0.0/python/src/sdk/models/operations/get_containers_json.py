@@ -10,19 +10,19 @@ class GetContainersJSONQueryParams:
 
 @dataclass
 class GetContainersJSONHeaders:
-    x_auth_project_id: str = field(default=None, metadata={'header': { 'field_name': 'X-Auth-Project-Id', 'style': 'simple', 'explode': False }})
-    x_auth_token: str = field(default=None, metadata={'header': { 'field_name': 'X-Auth-Token', 'style': 'simple', 'explode': False }})
+    x_auth_project_id: str = field(metadata={'header': { 'field_name': 'X-Auth-Project-Id', 'style': 'simple', 'explode': False }})
+    x_auth_token: str = field(metadata={'header': { 'field_name': 'X-Auth-Token', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetContainersJSONRequest:
-    query_params: GetContainersJSONQueryParams = field(default=None)
-    headers: GetContainersJSONHeaders = field(default=None)
+    headers: GetContainersJSONHeaders = field()
+    query_params: GetContainersJSONQueryParams = field()
     
 
 @dataclass
 class GetContainersJSONResponse:
+    content_type: str = field()
+    status_code: int = field()
     containers: Optional[List[Any]] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

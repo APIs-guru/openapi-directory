@@ -1,5 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ActiveDirectoryBackupAttributes } from "./activedirectorybackupattributes";
 import { BackupFailureDetails } from "./backupfailuredetails";
 import { FileSystem } from "./filesystem";
@@ -10,56 +9,57 @@ import { BackupTypeEnum } from "./backuptypeenum";
 import { Volume } from "./volume";
 
 
+
 // Backup
 /** 
  * A backup of an Amazon FSx for Windows File Server or Amazon FSx for Lustre file system, or of an Amazon FSx for NetApp ONTAP volume.
 **/
 export class Backup extends SpeakeasyBase {
-  @Metadata({ data: "json, name=BackupId" })
+  @SpeakeasyMetadata({ data: "json, name=BackupId" })
   backupId: string;
 
-  @Metadata({ data: "json, name=CreationTime" })
+  @SpeakeasyMetadata({ data: "json, name=CreationTime" })
   creationTime: Date;
 
-  @Metadata({ data: "json, name=DirectoryInformation" })
+  @SpeakeasyMetadata({ data: "json, name=DirectoryInformation" })
   directoryInformation?: ActiveDirectoryBackupAttributes;
 
-  @Metadata({ data: "json, name=FailureDetails" })
+  @SpeakeasyMetadata({ data: "json, name=FailureDetails" })
   failureDetails?: BackupFailureDetails;
 
-  @Metadata({ data: "json, name=FileSystem" })
+  @SpeakeasyMetadata({ data: "json, name=FileSystem" })
   fileSystem: FileSystem;
 
-  @Metadata({ data: "json, name=KmsKeyId" })
+  @SpeakeasyMetadata({ data: "json, name=KmsKeyId" })
   kmsKeyId?: string;
 
-  @Metadata({ data: "json, name=Lifecycle" })
+  @SpeakeasyMetadata({ data: "json, name=Lifecycle" })
   lifecycle: BackupLifecycleEnum;
 
-  @Metadata({ data: "json, name=OwnerId" })
+  @SpeakeasyMetadata({ data: "json, name=OwnerId" })
   ownerId?: string;
 
-  @Metadata({ data: "json, name=ProgressPercent" })
+  @SpeakeasyMetadata({ data: "json, name=ProgressPercent" })
   progressPercent?: number;
 
-  @Metadata({ data: "json, name=ResourceARN" })
+  @SpeakeasyMetadata({ data: "json, name=ResourceARN" })
   resourceArn?: string;
 
-  @Metadata({ data: "json, name=ResourceType" })
+  @SpeakeasyMetadata({ data: "json, name=ResourceType" })
   resourceType?: ResourceTypeEnum;
 
-  @Metadata({ data: "json, name=SourceBackupId" })
+  @SpeakeasyMetadata({ data: "json, name=SourceBackupId" })
   sourceBackupId?: string;
 
-  @Metadata({ data: "json, name=SourceBackupRegion" })
+  @SpeakeasyMetadata({ data: "json, name=SourceBackupRegion" })
   sourceBackupRegion?: string;
 
-  @Metadata({ data: "json, name=Tags", elemType: shared.Tag })
+  @SpeakeasyMetadata({ data: "json, name=Tags", elemType: Tag })
   tags?: Tag[];
 
-  @Metadata({ data: "json, name=Type" })
+  @SpeakeasyMetadata({ data: "json, name=Type" })
   type: BackupTypeEnum;
 
-  @Metadata({ data: "json, name=Volume" })
+  @SpeakeasyMetadata({ data: "json, name=Volume" })
   volume?: Volume;
 }

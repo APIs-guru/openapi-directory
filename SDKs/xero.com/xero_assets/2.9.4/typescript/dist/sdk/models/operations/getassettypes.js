@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetAssetTypesHeaders = /** @class */ (function (_super) {
     __extends(GetAssetTypesHeaders, _super);
@@ -30,7 +30,7 @@ var GetAssetTypesHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=xero-tenant-id" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=xero-tenant-id" }),
         __metadata("design:type", String)
     ], GetAssetTypesHeaders.prototype, "xeroTenantId", void 0);
     return GetAssetTypesHeaders;
@@ -42,7 +42,7 @@ var GetAssetTypesSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOAuth2)
     ], GetAssetTypesSecurity.prototype, "oAuth2", void 0);
     return GetAssetTypesSecurity;
@@ -54,11 +54,11 @@ var GetAssetTypesRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetAssetTypesHeaders)
     ], GetAssetTypesRequest.prototype, "headers", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetAssetTypesSecurity)
     ], GetAssetTypesRequest.prototype, "security", void 0);
     return GetAssetTypesRequest;
@@ -70,15 +70,15 @@ var GetAssetTypesResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ elemType: shared.AssetType }),
+        SpeakeasyMetadata({ elemType: shared.AssetType }),
         __metadata("design:type", Array)
     ], GetAssetTypesResponse.prototype, "assetTypes", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetAssetTypesResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetAssetTypesResponse.prototype, "statusCode", void 0);
     return GetAssetTypesResponse;

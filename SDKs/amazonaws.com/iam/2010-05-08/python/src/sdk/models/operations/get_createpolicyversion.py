@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetCreatePolicyVersionActionEnum(str, Enum):
     CREATE_POLICY_VERSION = "CreatePolicyVersion"
@@ -10,11 +14,11 @@ class GetCreatePolicyVersionVersionEnum(str, Enum):
 
 @dataclass
 class GetCreatePolicyVersionQueryParams:
-    action: GetCreatePolicyVersionActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    policy_arn: str = field(default=None, metadata={'query_param': { 'field_name': 'PolicyArn', 'style': 'form', 'explode': True }})
-    policy_document: str = field(default=None, metadata={'query_param': { 'field_name': 'PolicyDocument', 'style': 'form', 'explode': True }})
+    action: GetCreatePolicyVersionActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    policy_arn: str = field(metadata={'query_param': { 'field_name': 'PolicyArn', 'style': 'form', 'explode': True }})
+    policy_document: str = field(metadata={'query_param': { 'field_name': 'PolicyDocument', 'style': 'form', 'explode': True }})
+    version: GetCreatePolicyVersionVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     set_as_default: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'SetAsDefault', 'style': 'form', 'explode': True }})
-    version: GetCreatePolicyVersionVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -30,13 +34,13 @@ class GetCreatePolicyVersionHeaders:
 
 @dataclass
 class GetCreatePolicyVersionRequest:
-    query_params: GetCreatePolicyVersionQueryParams = field(default=None)
-    headers: GetCreatePolicyVersionHeaders = field(default=None)
+    headers: GetCreatePolicyVersionHeaders = field()
+    query_params: GetCreatePolicyVersionQueryParams = field()
     
 
 @dataclass
 class GetCreatePolicyVersionResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

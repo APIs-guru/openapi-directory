@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // BranchInfo
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Returns information about a branch.
 **/
 export class BranchInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=branchName" })
+  @SpeakeasyMetadata({ data: "json, name=branchName" })
   branchName?: string;
 
-  @Metadata({ data: "json, name=commitId" })
+  @SpeakeasyMetadata({ data: "json, name=commitId" })
   commitId?: string;
 }

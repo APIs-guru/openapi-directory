@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// LandlordTenancyModel
+// Landlord Tenancy Model.
 type LandlordTenancyModel struct {
 	ActualEndDate      *time.Time                            `json:"ActualEndDate,omitempty"`
 	Beds               *int32                                `json:"Beds,omitempty"`

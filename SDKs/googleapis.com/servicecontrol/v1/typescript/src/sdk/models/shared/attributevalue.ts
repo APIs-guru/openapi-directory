@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TruncatableString } from "./truncatablestring";
+
 
 
 // AttributeValue
@@ -7,12 +8,12 @@ import { TruncatableString } from "./truncatablestring";
  * The allowed types for [VALUE] in a `[KEY]:[VALUE]` attribute.
 **/
 export class AttributeValue extends SpeakeasyBase {
-  @Metadata({ data: "json, name=boolValue" })
+  @SpeakeasyMetadata({ data: "json, name=boolValue" })
   boolValue?: boolean;
 
-  @Metadata({ data: "json, name=intValue" })
+  @SpeakeasyMetadata({ data: "json, name=intValue" })
   intValue?: string;
 
-  @Metadata({ data: "json, name=stringValue" })
+  @SpeakeasyMetadata({ data: "json, name=stringValue" })
   stringValue?: TruncatableString;
 }

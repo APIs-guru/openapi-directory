@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { KeyRangeDataDiskAssignment } from "./keyrangedatadiskassignment";
+
 
 
 // StreamingComputationRanges
@@ -8,9 +8,9 @@ import { KeyRangeDataDiskAssignment } from "./keyrangedatadiskassignment";
  * Describes full or partial data disk assignment information of the computation ranges.
 **/
 export class StreamingComputationRanges extends SpeakeasyBase {
-  @Metadata({ data: "json, name=computationId" })
+  @SpeakeasyMetadata({ data: "json, name=computationId" })
   computationId?: string;
 
-  @Metadata({ data: "json, name=rangeAssignments", elemType: shared.KeyRangeDataDiskAssignment })
+  @SpeakeasyMetadata({ data: "json, name=rangeAssignments", elemType: KeyRangeDataDiskAssignment })
   rangeAssignments?: KeyRangeDataDiskAssignment[];
 }

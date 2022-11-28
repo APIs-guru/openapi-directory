@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GooglePrivacyDlpV2InspectResult } from "./googleprivacydlpv2inspectresult";
+
 
 
 // GooglePrivacyDlpV2InspectContentResponse
@@ -7,6 +8,6 @@ import { GooglePrivacyDlpV2InspectResult } from "./googleprivacydlpv2inspectresu
  * Results of inspecting an item.
 **/
 export class GooglePrivacyDlpV2InspectContentResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=result" })
+  @SpeakeasyMetadata({ data: "json, name=result" })
   result?: GooglePrivacyDlpV2InspectResult;
 }

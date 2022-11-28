@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AttachmentFields } from "./attachmentfields";
 
 
+
 export class Attachment extends SpeakeasyBase {
-  @Metadata({ data: "json, name=attachment" })
+  @SpeakeasyMetadata({ data: "json, name=attachment" })
   attachment?: AttachmentFields;
 }

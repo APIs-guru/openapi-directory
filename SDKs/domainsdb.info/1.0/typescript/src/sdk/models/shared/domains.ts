@@ -1,36 +1,36 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { MxRecords } from "./mxrecords";
 
 
+
 export class Domains extends SpeakeasyBase {
-  @Metadata({ data: "json, name=A" })
+  @SpeakeasyMetadata({ data: "json, name=A" })
   a?: string[];
 
-  @Metadata({ data: "json, name=CNAME" })
+  @SpeakeasyMetadata({ data: "json, name=CNAME" })
   cname?: string[];
 
-  @Metadata({ data: "json, name=MX", elemType: shared.MxRecords })
+  @SpeakeasyMetadata({ data: "json, name=MX", elemType: MxRecords })
   mx?: MxRecords[];
 
-  @Metadata({ data: "json, name=NS" })
+  @SpeakeasyMetadata({ data: "json, name=NS" })
   ns?: string[];
 
-  @Metadata({ data: "json, name=TXT" })
+  @SpeakeasyMetadata({ data: "json, name=TXT" })
   txt?: string[];
 
-  @Metadata({ data: "json, name=country" })
+  @SpeakeasyMetadata({ data: "json, name=country" })
   country?: string;
 
-  @Metadata({ data: "json, name=create_date" })
+  @SpeakeasyMetadata({ data: "json, name=create_date" })
   createDate?: Date;
 
-  @Metadata({ data: "json, name=domain" })
+  @SpeakeasyMetadata({ data: "json, name=domain" })
   domain?: string;
 
-  @Metadata({ data: "json, name=isDead" })
+  @SpeakeasyMetadata({ data: "json, name=isDead" })
   isDead?: string;
 
-  @Metadata({ data: "json, name=update_date" })
+  @SpeakeasyMetadata({ data: "json, name=update_date" })
   updateDate?: Date;
 }

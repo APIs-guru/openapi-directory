@@ -1,15 +1,16 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum NumberFormatTypeEnum {
-    NumberFormatTypeUnspecified = "NUMBER_FORMAT_TYPE_UNSPECIFIED"
-,    Text = "TEXT"
-,    Number = "NUMBER"
-,    Percent = "PERCENT"
-,    Currency = "CURRENCY"
-,    Date = "DATE"
-,    Time = "TIME"
-,    DateTime = "DATE_TIME"
-,    Scientific = "SCIENTIFIC"
+    NumberFormatTypeUnspecified = "NUMBER_FORMAT_TYPE_UNSPECIFIED",
+    Text = "TEXT",
+    Number = "NUMBER",
+    Percent = "PERCENT",
+    Currency = "CURRENCY",
+    Date = "DATE",
+    Time = "TIME",
+    DateTime = "DATE_TIME",
+    Scientific = "SCIENTIFIC"
 }
 
 
@@ -18,9 +19,9 @@ export enum NumberFormatTypeEnum {
  * The number format of a cell.
 **/
 export class NumberFormat extends SpeakeasyBase {
-  @Metadata({ data: "json, name=pattern" })
+  @SpeakeasyMetadata({ data: "json, name=pattern" })
   pattern?: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: NumberFormatTypeEnum;
 }

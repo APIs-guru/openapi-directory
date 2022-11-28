@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class AdexchangebuyerCreativesListDealsPathParams:
-    account_id: int = field(default=None, metadata={'path_param': { 'field_name': 'accountId', 'style': 'simple', 'explode': False }})
-    buyer_creative_id: str = field(default=None, metadata={'path_param': { 'field_name': 'buyerCreativeId', 'style': 'simple', 'explode': False }})
+    account_id: int = field(metadata={'path_param': { 'field_name': 'accountId', 'style': 'simple', 'explode': False }})
+    buyer_creative_id: str = field(metadata={'path_param': { 'field_name': 'buyerCreativeId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -22,20 +23,20 @@ class AdexchangebuyerCreativesListDealsQueryParams:
 
 @dataclass
 class AdexchangebuyerCreativesListDealsSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class AdexchangebuyerCreativesListDealsRequest:
-    path_params: AdexchangebuyerCreativesListDealsPathParams = field(default=None)
-    query_params: AdexchangebuyerCreativesListDealsQueryParams = field(default=None)
-    security: AdexchangebuyerCreativesListDealsSecurity = field(default=None)
+    path_params: AdexchangebuyerCreativesListDealsPathParams = field()
+    query_params: AdexchangebuyerCreativesListDealsQueryParams = field()
+    security: AdexchangebuyerCreativesListDealsSecurity = field()
     
 
 @dataclass
 class AdexchangebuyerCreativesListDealsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     creative_deal_ids: Optional[shared.CreativeDealIds] = field(default=None)
-    status_code: int = field(default=None)
     

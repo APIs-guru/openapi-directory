@@ -1,9 +1,23 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum AccountSettingsObjectStorageEnum {
-    Disabled = "disabled"
-,    Suspended = "suspended"
-,    Active = "active"
+    Disabled = "disabled",
+    Suspended = "suspended",
+    Active = "active"
+}
+
+
+// AccountSettingsInput
+/** 
+ * Account Settings object
+**/
+export class AccountSettingsInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=backups_enabled" })
+  backupsEnabled?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=network_helper" })
+  networkHelper?: boolean;
 }
 
 
@@ -12,18 +26,18 @@ export enum AccountSettingsObjectStorageEnum {
  * Account Settings object
 **/
 export class AccountSettings extends SpeakeasyBase {
-  @Metadata({ data: "json, name=backups_enabled" })
+  @SpeakeasyMetadata({ data: "json, name=backups_enabled" })
   backupsEnabled?: boolean;
 
-  @Metadata({ data: "json, name=longview_subscription" })
+  @SpeakeasyMetadata({ data: "json, name=longview_subscription" })
   longviewSubscription?: string;
 
-  @Metadata({ data: "json, name=managed" })
+  @SpeakeasyMetadata({ data: "json, name=managed" })
   managed?: boolean;
 
-  @Metadata({ data: "json, name=network_helper" })
+  @SpeakeasyMetadata({ data: "json, name=network_helper" })
   networkHelper?: boolean;
 
-  @Metadata({ data: "json, name=object_storage" })
+  @SpeakeasyMetadata({ data: "json, name=object_storage" })
   objectStorage?: AccountSettingsObjectStorageEnum;
 }

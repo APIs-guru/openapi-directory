@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // RepositorySubscription
@@ -6,21 +7,21 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Repository invitations let you manage who you collaborate with.
 **/
 export class RepositorySubscription extends SpeakeasyBase {
-  @Metadata({ data: "json, name=created_at" })
+  @SpeakeasyMetadata({ data: "json, name=created_at" })
   createdAt: Date;
 
-  @Metadata({ data: "json, name=ignored" })
+  @SpeakeasyMetadata({ data: "json, name=ignored" })
   ignored: boolean;
 
-  @Metadata({ data: "json, name=reason" })
+  @SpeakeasyMetadata({ data: "json, name=reason" })
   reason: string;
 
-  @Metadata({ data: "json, name=repository_url" })
+  @SpeakeasyMetadata({ data: "json, name=repository_url" })
   repositoryUrl: string;
 
-  @Metadata({ data: "json, name=subscribed" })
+  @SpeakeasyMetadata({ data: "json, name=subscribed" })
   subscribed: boolean;
 
-  @Metadata({ data: "json, name=url" })
+  @SpeakeasyMetadata({ data: "json, name=url" })
   url: string;
 }

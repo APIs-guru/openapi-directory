@@ -1,5 +1,7 @@
 package shared
 
+// UsersettingsNotesExport
+// User settings in sub-objects, each for different purposes.
 type UsersettingsNotesExport struct {
 	FolderName *string `json:"folderName,omitempty"`
 	IsEnabled  *bool   `json:"isEnabled,omitempty"`

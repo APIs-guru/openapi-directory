@@ -8,10 +8,10 @@ type UpdateTimerPathParams struct {
 	TimerID string `pathParam:"style=simple,explode=false,name=timerId"`
 }
 
-type UpdateTimerRequests struct {
-	TimerInfoDto  *shared.TimerInfoDto `request:"mediaType=application/*+json"`
-	TimerInfoDto1 *shared.TimerInfoDto `request:"mediaType=application/json"`
-	TimerInfoDto2 *shared.TimerInfoDto `request:"mediaType=text/json"`
+type UpdateTimerRequestsInput struct {
+	TimerInfoDto  *shared.TimerInfoDtoInput `request:"mediaType=application/*+json"`
+	TimerInfoDto1 *shared.TimerInfoDtoInput `request:"mediaType=application/json"`
+	TimerInfoDto2 *shared.TimerInfoDtoInput `request:"mediaType=text/json"`
 }
 
 type UpdateTimerSecurity struct {
@@ -20,7 +20,7 @@ type UpdateTimerSecurity struct {
 
 type UpdateTimerRequest struct {
 	PathParams UpdateTimerPathParams
-	Request    *UpdateTimerRequests
+	Request    *UpdateTimerRequestsInput
 	Security   UpdateTimerSecurity
 }
 

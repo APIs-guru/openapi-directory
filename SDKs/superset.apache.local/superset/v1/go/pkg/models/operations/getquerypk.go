@@ -16,12 +16,6 @@ type GetQueryPkSecurity struct {
 	Jwt shared.SchemeJwt `security:"scheme,type=http,subtype=bearer"`
 }
 
-type GetQueryPkRequest struct {
-	PathParams  GetQueryPkPathParams
-	QueryParams GetQueryPkQueryParams
-	Security    GetQueryPkSecurity
-}
-
 type GetQueryPk200ApplicationJSONDescriptionColumns struct {
 	ColumnName *string `json:"column_name,omitempty"`
 }
@@ -57,6 +51,12 @@ type GetQueryPk422ApplicationJSON struct {
 
 type GetQueryPk500ApplicationJSON struct {
 	Message *string `json:"message,omitempty"`
+}
+
+type GetQueryPkRequest struct {
+	PathParams  GetQueryPkPathParams
+	QueryParams GetQueryPkQueryParams
+	Security    GetQueryPkSecurity
 }
 
 type GetQueryPkResponse struct {

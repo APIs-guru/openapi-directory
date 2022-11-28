@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AnnotationSource } from "./annotationsource";
 import { ImageAnnotation } from "./imageannotation";
 import { ResourceAnnotation } from "./resourceannotation";
 import { SensitiveTextAnnotation } from "./sensitivetextannotation";
+
 
 
 // Annotation
@@ -10,21 +11,21 @@ import { SensitiveTextAnnotation } from "./sensitivetextannotation";
  * An annotation record.
 **/
 export class Annotation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=annotationSource" })
+  @SpeakeasyMetadata({ data: "json, name=annotationSource" })
   annotationSource?: AnnotationSource;
 
-  @Metadata({ data: "json, name=customData" })
+  @SpeakeasyMetadata({ data: "json, name=customData" })
   customData?: Map<string, string>;
 
-  @Metadata({ data: "json, name=imageAnnotation" })
+  @SpeakeasyMetadata({ data: "json, name=imageAnnotation" })
   imageAnnotation?: ImageAnnotation;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=resourceAnnotation" })
+  @SpeakeasyMetadata({ data: "json, name=resourceAnnotation" })
   resourceAnnotation?: ResourceAnnotation;
 
-  @Metadata({ data: "json, name=textAnnotation" })
+  @SpeakeasyMetadata({ data: "json, name=textAnnotation" })
   textAnnotation?: SensitiveTextAnnotation;
 }

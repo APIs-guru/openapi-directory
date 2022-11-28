@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class GoogleCloudDialogflowV2IntentMessageColumnPropertiesHorizontalAlignmentEnum(str, Enum):
     HORIZONTAL_ALIGNMENT_UNSPECIFIED = "HORIZONTAL_ALIGNMENT_UNSPECIFIED"
@@ -12,6 +14,10 @@ class GoogleCloudDialogflowV2IntentMessageColumnPropertiesHorizontalAlignmentEnu
 @dataclass_json
 @dataclass
 class GoogleCloudDialogflowV2IntentMessageColumnProperties:
-    header: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'header' }})
-    horizontal_alignment: Optional[GoogleCloudDialogflowV2IntentMessageColumnPropertiesHorizontalAlignmentEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'horizontalAlignment' }})
+    r"""GoogleCloudDialogflowV2IntentMessageColumnProperties
+    Column properties for TableCard.
+    """
+    
+    header: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('header') }})
+    horizontal_alignment: Optional[GoogleCloudDialogflowV2IntentMessageColumnPropertiesHorizontalAlignmentEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('horizontalAlignment') }})
     

@@ -1,11 +1,15 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class GetProjectsPathParams:
-    user_id: float = field(default=None, metadata={'path_param': { 'field_name': 'user_id', 'style': 'simple', 'explode': False }})
+    user_id: float = field(metadata={'path_param': { 'field_name': 'user_id', 'style': 'simple', 'explode': False }})
     
 class GetProjectsDirectionEnum(str, Enum):
     ASC = "asc"
@@ -28,20 +32,20 @@ class GetProjectsQueryParams:
 
 @dataclass
 class GetProjectsSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class GetProjectsRequest:
-    path_params: GetProjectsPathParams = field(default=None)
-    query_params: GetProjectsQueryParams = field(default=None)
-    security: GetProjectsSecurity = field(default=None)
+    path_params: GetProjectsPathParams = field()
+    query_params: GetProjectsQueryParams = field()
+    security: GetProjectsSecurity = field()
     
 
 @dataclass
 class GetProjectsResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error: Optional[shared.Error] = field(default=None)
     projects: Optional[List[shared.Project]] = field(default=None)
     

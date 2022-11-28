@@ -22,13 +22,13 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Assignment } from "./assignment";
 import { Date } from "./date";
 import { TimeOfDay } from "./timeofday";
 import { GradeCategory } from "./gradecategory";
 import { IndividualStudentsOptions } from "./individualstudentsoptions";
+import { Material } from "./material";
 import { MultipleChoiceQuestion } from "./multiplechoicequestion";
 export var CourseWorkAssigneeModeEnum;
 (function (CourseWorkAssigneeModeEnum) {
@@ -66,95 +66,95 @@ var CourseWork = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=alternateLink" }),
+        SpeakeasyMetadata({ data: "json, name=alternateLink" }),
         __metadata("design:type", String)
     ], CourseWork.prototype, "alternateLink", void 0);
     __decorate([
-        Metadata({ data: "json, name=assigneeMode" }),
+        SpeakeasyMetadata({ data: "json, name=assigneeMode" }),
         __metadata("design:type", String)
     ], CourseWork.prototype, "assigneeMode", void 0);
     __decorate([
-        Metadata({ data: "json, name=assignment" }),
+        SpeakeasyMetadata({ data: "json, name=assignment" }),
         __metadata("design:type", Assignment)
     ], CourseWork.prototype, "assignment", void 0);
     __decorate([
-        Metadata({ data: "json, name=associatedWithDeveloper" }),
+        SpeakeasyMetadata({ data: "json, name=associatedWithDeveloper" }),
         __metadata("design:type", Boolean)
     ], CourseWork.prototype, "associatedWithDeveloper", void 0);
     __decorate([
-        Metadata({ data: "json, name=courseId" }),
+        SpeakeasyMetadata({ data: "json, name=courseId" }),
         __metadata("design:type", String)
     ], CourseWork.prototype, "courseId", void 0);
     __decorate([
-        Metadata({ data: "json, name=creationTime" }),
+        SpeakeasyMetadata({ data: "json, name=creationTime" }),
         __metadata("design:type", String)
     ], CourseWork.prototype, "creationTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=creatorUserId" }),
+        SpeakeasyMetadata({ data: "json, name=creatorUserId" }),
         __metadata("design:type", String)
     ], CourseWork.prototype, "creatorUserId", void 0);
     __decorate([
-        Metadata({ data: "json, name=description" }),
+        SpeakeasyMetadata({ data: "json, name=description" }),
         __metadata("design:type", String)
     ], CourseWork.prototype, "description", void 0);
     __decorate([
-        Metadata({ data: "json, name=dueDate" }),
+        SpeakeasyMetadata({ data: "json, name=dueDate" }),
         __metadata("design:type", Date)
     ], CourseWork.prototype, "dueDate", void 0);
     __decorate([
-        Metadata({ data: "json, name=dueTime" }),
+        SpeakeasyMetadata({ data: "json, name=dueTime" }),
         __metadata("design:type", TimeOfDay)
     ], CourseWork.prototype, "dueTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=gradeCategory" }),
+        SpeakeasyMetadata({ data: "json, name=gradeCategory" }),
         __metadata("design:type", GradeCategory)
     ], CourseWork.prototype, "gradeCategory", void 0);
     __decorate([
-        Metadata({ data: "json, name=id" }),
+        SpeakeasyMetadata({ data: "json, name=id" }),
         __metadata("design:type", String)
     ], CourseWork.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "json, name=individualStudentsOptions" }),
+        SpeakeasyMetadata({ data: "json, name=individualStudentsOptions" }),
         __metadata("design:type", IndividualStudentsOptions)
     ], CourseWork.prototype, "individualStudentsOptions", void 0);
     __decorate([
-        Metadata({ data: "json, name=materials", elemType: shared.Material }),
+        SpeakeasyMetadata({ data: "json, name=materials", elemType: Material }),
         __metadata("design:type", Array)
     ], CourseWork.prototype, "materials", void 0);
     __decorate([
-        Metadata({ data: "json, name=maxPoints" }),
+        SpeakeasyMetadata({ data: "json, name=maxPoints" }),
         __metadata("design:type", Number)
     ], CourseWork.prototype, "maxPoints", void 0);
     __decorate([
-        Metadata({ data: "json, name=multipleChoiceQuestion" }),
+        SpeakeasyMetadata({ data: "json, name=multipleChoiceQuestion" }),
         __metadata("design:type", MultipleChoiceQuestion)
     ], CourseWork.prototype, "multipleChoiceQuestion", void 0);
     __decorate([
-        Metadata({ data: "json, name=scheduledTime" }),
+        SpeakeasyMetadata({ data: "json, name=scheduledTime" }),
         __metadata("design:type", String)
     ], CourseWork.prototype, "scheduledTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=state" }),
+        SpeakeasyMetadata({ data: "json, name=state" }),
         __metadata("design:type", String)
     ], CourseWork.prototype, "state", void 0);
     __decorate([
-        Metadata({ data: "json, name=submissionModificationMode" }),
+        SpeakeasyMetadata({ data: "json, name=submissionModificationMode" }),
         __metadata("design:type", String)
     ], CourseWork.prototype, "submissionModificationMode", void 0);
     __decorate([
-        Metadata({ data: "json, name=title" }),
+        SpeakeasyMetadata({ data: "json, name=title" }),
         __metadata("design:type", String)
     ], CourseWork.prototype, "title", void 0);
     __decorate([
-        Metadata({ data: "json, name=topicId" }),
+        SpeakeasyMetadata({ data: "json, name=topicId" }),
         __metadata("design:type", String)
     ], CourseWork.prototype, "topicId", void 0);
     __decorate([
-        Metadata({ data: "json, name=updateTime" }),
+        SpeakeasyMetadata({ data: "json, name=updateTime" }),
         __metadata("design:type", String)
     ], CourseWork.prototype, "updateTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=workType" }),
+        SpeakeasyMetadata({ data: "json, name=workType" }),
         __metadata("design:type", String)
     ], CourseWork.prototype, "workType", void 0);
     return CourseWork;

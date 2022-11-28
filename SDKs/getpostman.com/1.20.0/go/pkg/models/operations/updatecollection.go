@@ -48,11 +48,6 @@ type UpdateCollectionRequestBody struct {
 	Collection *UpdateCollectionRequestBodyCollection `json:"collection,omitempty"`
 }
 
-type UpdateCollectionRequest struct {
-	PathParams UpdateCollectionPathParams
-	Request    *UpdateCollectionRequestBody `request:"mediaType=application/json"`
-}
-
 type UpdateCollection200ApplicationJSONCollection struct {
 	ID   *string `json:"id,omitempty"`
 	Name *string `json:"name,omitempty"`
@@ -94,6 +89,11 @@ type UpdateCollection404ApplicationJSONError struct {
 
 type UpdateCollection404ApplicationJSON struct {
 	Error *UpdateCollection404ApplicationJSONError `json:"error,omitempty"`
+}
+
+type UpdateCollectionRequest struct {
+	PathParams UpdateCollectionPathParams
+	Request    *UpdateCollectionRequestBody `request:"mediaType=application/json"`
 }
 
 type UpdateCollectionResponse struct {

@@ -1,8 +1,10 @@
-import warnings
+
+__doc__ = """ SDK Documentation: https://cloud.google.com/container-analysis/api/reference/rest/"""
 import requests
-from typing import Any,List,Optional
-from sdk.models import operations, shared
+
 from . import utils
+
+from .projects import Projects
 
 
 SERVERS = [
@@ -11,460 +13,46 @@ SERVERS = [
 
 
 class SDK:
-    client = requests.Session()
-    server_url = SERVERS[0]
+    r"""SDK Documentation: https://cloud.google.com/container-analysis/api/reference/rest/"""
+    projects: Projects
+
+    _client: requests.Session
+    _security_client: requests.Session
+    
+    _server_url: str = SERVERS[0]
+    _language: str = "python"
+    _sdk_version: str = "0.0.1"
+    _gen_version: str = "internal"
+
+    def __init__(self) -> None:
+        self._client = requests.Session()
+        self._security_client = requests.Session()
+        self._init_sdks()
+
 
     def config_server_url(self, server_url: str, params: dict[str, str]):
-        if not params is None:
-            self.server_url = utils.replace_parameters(server_url, params)
+        if params is not None:
+            self._server_url = utils.replace_parameters(server_url, params)
         else:
-            self.server_url = server_url
-            
+            self._server_url = server_url
+
+        self._init_sdks()
     
 
+    def config_client(self, client: requests.Session):
+        self._client = client
+        self._init_sdks()
     
-    def containeranalysis_projects_notes_batch_create(self, request: operations.ContaineranalysisProjectsNotesBatchCreateRequest) -> operations.ContaineranalysisProjectsNotesBatchCreateResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = utils.generate_url(base_url, "/v1beta1/{parent}/notes:batchCreate", request.path_params)
-
-        headers = {}
-
-        req_content_type, data, form = utils.serialize_request_body(request)
-        if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers["content-type"] = req_content_type
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
-        r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.ContaineranalysisProjectsNotesBatchCreateResponse(status_code=r.status_code, content_type=content_type)
+    
+    def _init_sdks(self):
         
-        if r.status_code == 200:
-            if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[shared.BatchCreateNotesResponse])
-                res.batch_create_notes_response = out
-
-        return res
-
+        self.projects = Projects(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
     
-    def containeranalysis_projects_notes_create(self, request: operations.ContaineranalysisProjectsNotesCreateRequest) -> operations.ContaineranalysisProjectsNotesCreateResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = utils.generate_url(base_url, "/v1beta1/{parent}/notes", request.path_params)
-
-        headers = {}
-
-        req_content_type, data, form = utils.serialize_request_body(request)
-        if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers["content-type"] = req_content_type
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
-        r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.ContaineranalysisProjectsNotesCreateResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[shared.Note])
-                res.note = out
-
-        return res
-
-    
-    def containeranalysis_projects_notes_list(self, request: operations.ContaineranalysisProjectsNotesListRequest) -> operations.ContaineranalysisProjectsNotesListResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = utils.generate_url(base_url, "/v1beta1/{parent}/notes", request.path_params)
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.ContaineranalysisProjectsNotesListResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[shared.ListNotesResponse])
-                res.list_notes_response = out
-
-        return res
-
-    
-    def containeranalysis_projects_notes_occurrences_list(self, request: operations.ContaineranalysisProjectsNotesOccurrencesListRequest) -> operations.ContaineranalysisProjectsNotesOccurrencesListResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = utils.generate_url(base_url, "/v1beta1/{name}/occurrences", request.path_params)
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.ContaineranalysisProjectsNotesOccurrencesListResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[shared.ListNoteOccurrencesResponse])
-                res.list_note_occurrences_response = out
-
-        return res
-
-    
-    def containeranalysis_projects_occurrences_batch_create(self, request: operations.ContaineranalysisProjectsOccurrencesBatchCreateRequest) -> operations.ContaineranalysisProjectsOccurrencesBatchCreateResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = utils.generate_url(base_url, "/v1beta1/{parent}/occurrences:batchCreate", request.path_params)
-
-        headers = {}
-
-        req_content_type, data, form = utils.serialize_request_body(request)
-        if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers["content-type"] = req_content_type
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
-        r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.ContaineranalysisProjectsOccurrencesBatchCreateResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[shared.BatchCreateOccurrencesResponse])
-                res.batch_create_occurrences_response = out
-
-        return res
-
-    
-    def containeranalysis_projects_occurrences_create(self, request: operations.ContaineranalysisProjectsOccurrencesCreateRequest) -> operations.ContaineranalysisProjectsOccurrencesCreateResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = utils.generate_url(base_url, "/v1beta1/{parent}/occurrences", request.path_params)
-
-        headers = {}
-
-        req_content_type, data, form = utils.serialize_request_body(request)
-        if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers["content-type"] = req_content_type
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
-        r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.ContaineranalysisProjectsOccurrencesCreateResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[shared.Occurrence])
-                res.occurrence = out
-
-        return res
-
-    
-    def containeranalysis_projects_occurrences_delete(self, request: operations.ContaineranalysisProjectsOccurrencesDeleteRequest) -> operations.ContaineranalysisProjectsOccurrencesDeleteResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = utils.generate_url(base_url, "/v1beta1/{name}", request.path_params)
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
-        r = client.request("DELETE", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.ContaineranalysisProjectsOccurrencesDeleteResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[dict[str, Any]])
-                res.empty = out
-
-        return res
-
-    
-    def containeranalysis_projects_occurrences_get_iam_policy(self, request: operations.ContaineranalysisProjectsOccurrencesGetIamPolicyRequest) -> operations.ContaineranalysisProjectsOccurrencesGetIamPolicyResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = utils.generate_url(base_url, "/v1beta1/{resource}:getIamPolicy", request.path_params)
-
-        headers = {}
-
-        req_content_type, data, form = utils.serialize_request_body(request)
-        if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers["content-type"] = req_content_type
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
-        r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.ContaineranalysisProjectsOccurrencesGetIamPolicyResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[shared.Policy])
-                res.policy = out
-
-        return res
-
-    
-    def containeranalysis_projects_occurrences_get_notes(self, request: operations.ContaineranalysisProjectsOccurrencesGetNotesRequest) -> operations.ContaineranalysisProjectsOccurrencesGetNotesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = utils.generate_url(base_url, "/v1beta1/{name}/notes", request.path_params)
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.ContaineranalysisProjectsOccurrencesGetNotesResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[shared.Note])
-                res.note = out
-
-        return res
-
-    
-    def containeranalysis_projects_occurrences_get_vulnerability_summary(self, request: operations.ContaineranalysisProjectsOccurrencesGetVulnerabilitySummaryRequest) -> operations.ContaineranalysisProjectsOccurrencesGetVulnerabilitySummaryResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = utils.generate_url(base_url, "/v1beta1/{parent}/occurrences:vulnerabilitySummary", request.path_params)
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.ContaineranalysisProjectsOccurrencesGetVulnerabilitySummaryResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[shared.VulnerabilityOccurrencesSummary])
-                res.vulnerability_occurrences_summary = out
-
-        return res
-
-    
-    def containeranalysis_projects_occurrences_list(self, request: operations.ContaineranalysisProjectsOccurrencesListRequest) -> operations.ContaineranalysisProjectsOccurrencesListResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = utils.generate_url(base_url, "/v1beta1/{parent}/occurrences", request.path_params)
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.ContaineranalysisProjectsOccurrencesListResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[shared.ListOccurrencesResponse])
-                res.list_occurrences_response = out
-
-        return res
-
-    
-    def containeranalysis_projects_occurrences_patch(self, request: operations.ContaineranalysisProjectsOccurrencesPatchRequest) -> operations.ContaineranalysisProjectsOccurrencesPatchResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = utils.generate_url(base_url, "/v1beta1/{name}", request.path_params)
-
-        headers = {}
-
-        req_content_type, data, form = utils.serialize_request_body(request)
-        if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers["content-type"] = req_content_type
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
-        r = client.request("PATCH", url, params=query_params, data=data, files=form, headers=headers)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.ContaineranalysisProjectsOccurrencesPatchResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[shared.Occurrence])
-                res.occurrence = out
-
-        return res
-
-    
-    def containeranalysis_projects_occurrences_set_iam_policy(self, request: operations.ContaineranalysisProjectsOccurrencesSetIamPolicyRequest) -> operations.ContaineranalysisProjectsOccurrencesSetIamPolicyResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = utils.generate_url(base_url, "/v1beta1/{resource}:setIamPolicy", request.path_params)
-
-        headers = {}
-
-        req_content_type, data, form = utils.serialize_request_body(request)
-        if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers["content-type"] = req_content_type
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
-        r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.ContaineranalysisProjectsOccurrencesSetIamPolicyResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[shared.Policy])
-                res.policy = out
-
-        return res
-
-    
-    def containeranalysis_projects_occurrences_test_iam_permissions(self, request: operations.ContaineranalysisProjectsOccurrencesTestIamPermissionsRequest) -> operations.ContaineranalysisProjectsOccurrencesTestIamPermissionsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = utils.generate_url(base_url, "/v1beta1/{resource}:testIamPermissions", request.path_params)
-
-        headers = {}
-
-        req_content_type, data, form = utils.serialize_request_body(request)
-        if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers["content-type"] = req_content_type
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
-        r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.ContaineranalysisProjectsOccurrencesTestIamPermissionsResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[shared.TestIamPermissionsResponse])
-                res.test_iam_permissions_response = out
-
-        return res
-
-    
-    def containeranalysis_projects_scan_configs_get(self, request: operations.ContaineranalysisProjectsScanConfigsGetRequest) -> operations.ContaineranalysisProjectsScanConfigsGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = utils.generate_url(base_url, "/v1beta1/{name}", request.path_params)
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.ContaineranalysisProjectsScanConfigsGetResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[shared.ScanConfig])
-                res.scan_config = out
-
-        return res
-
-    
-    def containeranalysis_projects_scan_configs_list(self, request: operations.ContaineranalysisProjectsScanConfigsListRequest) -> operations.ContaineranalysisProjectsScanConfigsListResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = utils.generate_url(base_url, "/v1beta1/{parent}/scanConfigs", request.path_params)
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.ContaineranalysisProjectsScanConfigsListResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[shared.ListScanConfigsResponse])
-                res.list_scan_configs_response = out
-
-        return res
-
-    
-    def containeranalysis_projects_scan_configs_update(self, request: operations.ContaineranalysisProjectsScanConfigsUpdateRequest) -> operations.ContaineranalysisProjectsScanConfigsUpdateResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = utils.generate_url(base_url, "/v1beta1/{name}", request.path_params)
-
-        headers = {}
-
-        req_content_type, data, form = utils.serialize_request_body(request)
-        if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers["content-type"] = req_content_type
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
-        r = client.request("PUT", url, params=query_params, data=data, files=form, headers=headers)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.ContaineranalysisProjectsScanConfigsUpdateResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[shared.ScanConfig])
-                res.scan_config = out
-
-        return res
-
     

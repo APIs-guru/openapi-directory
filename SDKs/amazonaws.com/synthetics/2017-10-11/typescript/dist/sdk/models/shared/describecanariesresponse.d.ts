@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { Canary } from "./canary";
 export declare class DescribeCanariesResponse extends SpeakeasyBase {
     canaries?: Canary[];

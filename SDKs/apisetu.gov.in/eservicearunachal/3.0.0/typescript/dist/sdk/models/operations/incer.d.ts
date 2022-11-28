@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class IncerRequestBodyCertificateParameters extends SpeakeasyBase {
     fullName: string;
@@ -17,10 +17,6 @@ export declare class IncerRequestBody extends SpeakeasyBase {
 export declare class IncerSecurity extends SpeakeasyBase {
     apiKey: shared.SchemeApiKey;
     clientId: shared.SchemeClientId;
-}
-export declare class IncerRequest extends SpeakeasyBase {
-    request?: IncerRequestBody;
-    security: IncerSecurity;
 }
 export declare enum Incer400ApplicationJsonErrorEnum {
     MissingParameter = "missing_parameter",
@@ -103,6 +99,10 @@ export declare enum Incer504ApplicationJsonErrorDescriptionEnum {
 export declare class Incer504ApplicationJson extends SpeakeasyBase {
     error?: Incer504ApplicationJsonErrorEnum;
     errorDescription?: Incer504ApplicationJsonErrorDescriptionEnum;
+}
+export declare class IncerRequest extends SpeakeasyBase {
+    request?: IncerRequestBody;
+    security: IncerSecurity;
 }
 export declare class IncerResponse extends SpeakeasyBase {
     contentType: string;

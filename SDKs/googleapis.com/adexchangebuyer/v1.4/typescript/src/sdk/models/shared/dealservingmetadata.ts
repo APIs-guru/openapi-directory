@@ -1,11 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DealServingMetadataDealPauseStatus } from "./dealservingmetadatadealpausestatus";
 
 
+
 export class DealServingMetadata extends SpeakeasyBase {
-  @Metadata({ data: "json, name=alcoholAdsAllowed" })
+  @SpeakeasyMetadata({ data: "json, name=alcoholAdsAllowed" })
   alcoholAdsAllowed?: boolean;
 
-  @Metadata({ data: "json, name=dealPauseStatus" })
+  @SpeakeasyMetadata({ data: "json, name=dealPauseStatus" })
   dealPauseStatus?: DealServingMetadataDealPauseStatus;
 }

@@ -1,25 +1,26 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetUserStoreRecommendationsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=identity_cookie" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=identity_cookie" })
   identityCookie: number;
 }
 
 
 export class GetUserStoreRecommendationsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetUserStoreRecommendationsQueryParams;
 }
 
 
 export class GetUserStoreRecommendationsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   ibl?: any;
 }

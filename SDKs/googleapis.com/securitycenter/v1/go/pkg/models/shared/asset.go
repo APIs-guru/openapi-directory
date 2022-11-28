@@ -1,5 +1,7 @@
 package shared
 
+// Asset
+// Security Command Center representation of a Google Cloud resource. The Asset is a Security Command Center resource that captures information about a single Google Cloud resource. All modifications to an Asset are only within the context of Security Command Center and don't affect the referenced Google Cloud resource.
 type Asset struct {
 	CanonicalName            *string                   `json:"canonicalName,omitempty"`
 	CreateTime               *string                   `json:"createTime,omitempty"`

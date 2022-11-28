@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { StatementsViewModelItem } from "./statementsviewmodelitem";
 
 
+
 export class StatementsViewModelSearchResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=results", elemType: shared.StatementsViewModelItem })
+  @SpeakeasyMetadata({ data: "json, name=results", elemType: StatementsViewModelItem })
   results?: StatementsViewModelItem[];
 
-  @Metadata({ data: "json, name=totalResults" })
+  @SpeakeasyMetadata({ data: "json, name=totalResults" })
   totalResults?: number;
 }

@@ -4,17 +4,9 @@ import (
 	"openapi/pkg/models/shared"
 )
 
-type PostListRecurringDetailsSecurityOption1 struct {
-	BasicAuth shared.SchemeBasicAuth `security:"scheme,type=http,subtype=basic"`
-}
-
-type PostListRecurringDetailsSecurityOption2 struct {
-	APIKeyAuth shared.SchemeAPIKeyAuth `security:"scheme,type=apiKey,subtype=header"`
-}
-
 type PostListRecurringDetailsSecurity struct {
-	Option1 *PostListRecurringDetailsSecurityOption1 `security:"option"`
-	Option2 *PostListRecurringDetailsSecurityOption2 `security:"option"`
+	BasicAuth  *shared.SchemeBasicAuth  `security:"scheme,type=http,subtype=basic"`
+	APIKeyAuth *shared.SchemeAPIKeyAuth `security:"scheme,type=apiKey,subtype=header"`
 }
 
 type PostListRecurringDetailsRequest struct {

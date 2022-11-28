@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ServiceAccount } from "./serviceaccount";
+
 
 
 // PrincipalInfo
@@ -7,6 +8,6 @@ import { ServiceAccount } from "./serviceaccount";
  * PrincipalInfo represents an Identity oneof.
 **/
 export class PrincipalInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=serviceAccount" })
+  @SpeakeasyMetadata({ data: "json, name=serviceAccount" })
   serviceAccount?: ServiceAccount;
 }

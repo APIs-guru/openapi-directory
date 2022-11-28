@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { HeroImage } from "./heroimage";
 import { LocationEvent } from "./locationevent";
 export declare class Event extends SpeakeasyBase {

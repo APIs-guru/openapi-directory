@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PrincipalResourcePermissions } from "./principalresourcepermissions";
 
 
+
 export class ListPermissionsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=PrincipalResourcePermissions", elemType: shared.PrincipalResourcePermissions })
+  @SpeakeasyMetadata({ data: "json, name=PrincipalResourcePermissions", elemType: PrincipalResourcePermissions })
   principalResourcePermissions?: PrincipalResourcePermissions[];
 }

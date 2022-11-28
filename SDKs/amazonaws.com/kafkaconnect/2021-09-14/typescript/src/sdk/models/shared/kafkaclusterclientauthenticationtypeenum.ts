@@ -1,6 +1,7 @@
 
 
+
 export enum KafkaClusterClientAuthenticationTypeEnum {
-    None = "NONE"
-,    Iam = "IAM"
+    None = "NONE",
+    Iam = "IAM"
 }

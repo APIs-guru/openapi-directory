@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AttributeMetadata } from "./attributemetadata";
+
 
 
 // ListAttributeMetadataResponse
@@ -8,9 +8,9 @@ import { AttributeMetadata } from "./attributemetadata";
  * Response message for Locations.ListAttributeMetadata.
 **/
 export class ListAttributeMetadataResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=attributes", elemType: shared.AttributeMetadata })
+  @SpeakeasyMetadata({ data: "json, name=attributes", elemType: AttributeMetadata })
   attributes?: AttributeMetadata[];
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 }

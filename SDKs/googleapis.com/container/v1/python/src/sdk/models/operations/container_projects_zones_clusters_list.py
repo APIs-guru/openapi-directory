@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class ContainerProjectsZonesClustersListPathParams:
-    project_id: str = field(default=None, metadata={'path_param': { 'field_name': 'projectId', 'style': 'simple', 'explode': False }})
-    zone: str = field(default=None, metadata={'path_param': { 'field_name': 'zone', 'style': 'simple', 'explode': False }})
+    project_id: str = field(metadata={'path_param': { 'field_name': 'projectId', 'style': 'simple', 'explode': False }})
+    zone: str = field(metadata={'path_param': { 'field_name': 'zone', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -27,20 +28,20 @@ class ContainerProjectsZonesClustersListQueryParams:
 
 @dataclass
 class ContainerProjectsZonesClustersListSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class ContainerProjectsZonesClustersListRequest:
-    path_params: ContainerProjectsZonesClustersListPathParams = field(default=None)
-    query_params: ContainerProjectsZonesClustersListQueryParams = field(default=None)
-    security: ContainerProjectsZonesClustersListSecurity = field(default=None)
+    path_params: ContainerProjectsZonesClustersListPathParams = field()
+    query_params: ContainerProjectsZonesClustersListQueryParams = field()
+    security: ContainerProjectsZonesClustersListSecurity = field()
     
 
 @dataclass
 class ContainerProjectsZonesClustersListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     list_clusters_response: Optional[shared.ListClustersResponse] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// ProvisionedProductAttribute
+// Information about a provisioned product.
 type ProvisionedProductAttribute struct {
 	Arn                                *string                       `json:"Arn,omitempty"`
 	CreatedTime                        *time.Time                    `json:"CreatedTime,omitempty"`

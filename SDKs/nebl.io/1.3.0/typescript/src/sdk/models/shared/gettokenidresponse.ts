@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetTokenIdResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=tokenId" })
+  @SpeakeasyMetadata({ data: "json, name=tokenId" })
   tokenId?: string;
 
-  @Metadata({ data: "json, name=tokenName" })
+  @SpeakeasyMetadata({ data: "json, name=tokenName" })
   tokenName?: string;
 }

@@ -22,26 +22,26 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var Translation = /** @class */ (function (_super) {
     __extends(Translation, _super);
     function Translation() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=from" }),
+        SpeakeasyMetadata({ data: "json, name=from" }),
         __metadata("design:type", String)
     ], Translation.prototype, "from", void 0);
     __decorate([
-        Metadata({ data: "json, name=originalText" }),
+        SpeakeasyMetadata({ data: "json, name=originalText" }),
         __metadata("design:type", String)
     ], Translation.prototype, "originalText", void 0);
     __decorate([
-        Metadata({ data: "json, name=to" }),
+        SpeakeasyMetadata({ data: "json, name=to" }),
         __metadata("design:type", String)
     ], Translation.prototype, "to", void 0);
     __decorate([
-        Metadata({ data: "json, name=translatedText" }),
+        SpeakeasyMetadata({ data: "json, name=translatedText" }),
         __metadata("design:type", String)
     ], Translation.prototype, "translatedText", void 0);
     return Translation;

@@ -1,8 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import pooloption
-from . import volume
+from sdk import utils
+from . import *
 
 class BuildOptionsLogStreamingOptionEnum(str, Enum):
     STREAM_DEFAULT = "STREAM_DEFAULT"
@@ -41,17 +42,21 @@ class BuildOptionsSubstitutionOptionEnum(str, Enum):
 @dataclass_json
 @dataclass
 class BuildOptions:
-    disk_size_gb: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'diskSizeGb' }})
-    dynamic_substitutions: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'dynamicSubstitutions' }})
-    env: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'env' }})
-    log_streaming_option: Optional[BuildOptionsLogStreamingOptionEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'logStreamingOption' }})
-    logging: Optional[BuildOptionsLoggingEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'logging' }})
-    machine_type: Optional[BuildOptionsMachineTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'machineType' }})
-    pool: Optional[pooloption.PoolOption] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'pool' }})
-    requested_verify_option: Optional[BuildOptionsRequestedVerifyOptionEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'requestedVerifyOption' }})
-    secret_env: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'secretEnv' }})
-    source_provenance_hash: Optional[List[BuildOptionsSourceProvenanceHashEnum]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'sourceProvenanceHash' }})
-    substitution_option: Optional[BuildOptionsSubstitutionOptionEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'substitutionOption' }})
-    volumes: Optional[List[volume.Volume]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'volumes' }})
-    worker_pool: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'workerPool' }})
+    r"""BuildOptions
+    Optional arguments to enable specific features of builds.
+    """
+    
+    disk_size_gb: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('diskSizeGb') }})
+    dynamic_substitutions: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('dynamicSubstitutions') }})
+    env: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('env') }})
+    log_streaming_option: Optional[BuildOptionsLogStreamingOptionEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('logStreamingOption') }})
+    logging: Optional[BuildOptionsLoggingEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('logging') }})
+    machine_type: Optional[BuildOptionsMachineTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('machineType') }})
+    pool: Optional[PoolOption] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('pool') }})
+    requested_verify_option: Optional[BuildOptionsRequestedVerifyOptionEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('requestedVerifyOption') }})
+    secret_env: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('secretEnv') }})
+    source_provenance_hash: Optional[List[BuildOptionsSourceProvenanceHashEnum]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('sourceProvenanceHash') }})
+    substitution_option: Optional[BuildOptionsSubstitutionOptionEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('substitutionOption') }})
+    volumes: Optional[List[Volume]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('volumes') }})
+    worker_pool: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('workerPool') }})
     

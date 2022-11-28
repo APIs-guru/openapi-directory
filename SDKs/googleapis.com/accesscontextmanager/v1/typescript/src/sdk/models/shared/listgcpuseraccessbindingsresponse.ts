@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GcpUserAccessBinding } from "./gcpuseraccessbinding";
+
 
 
 // ListGcpUserAccessBindingsResponse
@@ -8,9 +8,9 @@ import { GcpUserAccessBinding } from "./gcpuseraccessbinding";
  * Response of ListGcpUserAccessBindings.
 **/
 export class ListGcpUserAccessBindingsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=gcpUserAccessBindings", elemType: shared.GcpUserAccessBinding })
+  @SpeakeasyMetadata({ data: "json, name=gcpUserAccessBindings", elemType: GcpUserAccessBinding })
   gcpUserAccessBindings?: GcpUserAccessBinding[];
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 }

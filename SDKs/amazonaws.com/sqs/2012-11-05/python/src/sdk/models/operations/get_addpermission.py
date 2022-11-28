@@ -1,11 +1,15 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 
 
 @dataclass
 class GetAddPermissionPathParams:
-    account_number: int = field(default=None, metadata={'path_param': { 'field_name': 'AccountNumber', 'style': 'simple', 'explode': False }})
-    queue_name: str = field(default=None, metadata={'path_param': { 'field_name': 'QueueName', 'style': 'simple', 'explode': False }})
+    account_number: int = field(metadata={'path_param': { 'field_name': 'AccountNumber', 'style': 'simple', 'explode': False }})
+    queue_name: str = field(metadata={'path_param': { 'field_name': 'QueueName', 'style': 'simple', 'explode': False }})
     
 class GetAddPermissionActionEnum(str, Enum):
     ADD_PERMISSION = "AddPermission"
@@ -16,11 +20,11 @@ class GetAddPermissionVersionEnum(str, Enum):
 
 @dataclass
 class GetAddPermissionQueryParams:
-    aws_account_ids: List[str] = field(default=None, metadata={'query_param': { 'field_name': 'AWSAccountIds', 'style': 'form', 'explode': True }})
-    action: GetAddPermissionActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    actions: List[str] = field(default=None, metadata={'query_param': { 'field_name': 'Actions', 'style': 'form', 'explode': True }})
-    label: str = field(default=None, metadata={'query_param': { 'field_name': 'Label', 'style': 'form', 'explode': True }})
-    version: GetAddPermissionVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    aws_account_ids: List[str] = field(metadata={'query_param': { 'field_name': 'AWSAccountIds', 'style': 'form', 'explode': True }})
+    action: GetAddPermissionActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    actions: List[str] = field(metadata={'query_param': { 'field_name': 'Actions', 'style': 'form', 'explode': True }})
+    label: str = field(metadata={'query_param': { 'field_name': 'Label', 'style': 'form', 'explode': True }})
+    version: GetAddPermissionVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -36,14 +40,14 @@ class GetAddPermissionHeaders:
 
 @dataclass
 class GetAddPermissionRequest:
-    path_params: GetAddPermissionPathParams = field(default=None)
-    query_params: GetAddPermissionQueryParams = field(default=None)
-    headers: GetAddPermissionHeaders = field(default=None)
+    headers: GetAddPermissionHeaders = field()
+    path_params: GetAddPermissionPathParams = field()
+    query_params: GetAddPermissionQueryParams = field()
     
 
 @dataclass
 class GetAddPermissionResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

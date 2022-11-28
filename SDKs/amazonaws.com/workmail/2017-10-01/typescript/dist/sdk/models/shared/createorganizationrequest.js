@@ -22,35 +22,35 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { Domain } from "./domain";
 var CreateOrganizationRequest = /** @class */ (function (_super) {
     __extends(CreateOrganizationRequest, _super);
     function CreateOrganizationRequest() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Alias" }),
+        SpeakeasyMetadata({ data: "json, name=Alias" }),
         __metadata("design:type", String)
     ], CreateOrganizationRequest.prototype, "alias", void 0);
     __decorate([
-        Metadata({ data: "json, name=ClientToken" }),
+        SpeakeasyMetadata({ data: "json, name=ClientToken" }),
         __metadata("design:type", String)
     ], CreateOrganizationRequest.prototype, "clientToken", void 0);
     __decorate([
-        Metadata({ data: "json, name=DirectoryId" }),
+        SpeakeasyMetadata({ data: "json, name=DirectoryId" }),
         __metadata("design:type", String)
     ], CreateOrganizationRequest.prototype, "directoryId", void 0);
     __decorate([
-        Metadata({ data: "json, name=Domains", elemType: shared.Domain }),
+        SpeakeasyMetadata({ data: "json, name=Domains", elemType: Domain }),
         __metadata("design:type", Array)
     ], CreateOrganizationRequest.prototype, "domains", void 0);
     __decorate([
-        Metadata({ data: "json, name=EnableInteroperability" }),
+        SpeakeasyMetadata({ data: "json, name=EnableInteroperability" }),
         __metadata("design:type", Boolean)
     ], CreateOrganizationRequest.prototype, "enableInteroperability", void 0);
     __decorate([
-        Metadata({ data: "json, name=KmsKeyArn" }),
+        SpeakeasyMetadata({ data: "json, name=KmsKeyArn" }),
         __metadata("design:type", String)
     ], CreateOrganizationRequest.prototype, "kmsKeyArn", void 0);
     return CreateOrganizationRequest;

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Api2ControllersWebApiReviewControllerPostReplyReq
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Reply request parameters
 **/
 export class Api2ControllersWebApiReviewControllerPostReplyReq extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Comment, form, name=Comment;" })
+  @SpeakeasyMetadata({ data: "json, name=Comment, form, name=Comment;" })
   comment?: string;
 }

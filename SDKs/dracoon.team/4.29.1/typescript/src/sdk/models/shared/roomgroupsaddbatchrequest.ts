@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RoomGroupsAddBatchRequestItem } from "./roomgroupsaddbatchrequestitem";
+
 
 
 // RoomGroupsAddBatchRequest
@@ -8,6 +8,6 @@ import { RoomGroupsAddBatchRequestItem } from "./roomgroupsaddbatchrequestitem";
  * Request model for granting group(s) to the room
 **/
 export class RoomGroupsAddBatchRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=items", elemType: shared.RoomGroupsAddBatchRequestItem })
+  @SpeakeasyMetadata({ data: "json, name=items", elemType: RoomGroupsAddBatchRequestItem })
   items: RoomGroupsAddBatchRequestItem[];
 }

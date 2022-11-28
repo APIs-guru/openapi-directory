@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class SalesRepGetResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     page_result_sale_reps_dto_: Optional[shared.PageResultSaleRepsDto] = field(default=None)
-    status_code: int = field(default=None)
     

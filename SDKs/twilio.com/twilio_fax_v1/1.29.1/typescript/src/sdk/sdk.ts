@@ -1,15 +1,13 @@
-import axios, { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
-import { MatchContentType } from "../internal/utils/contenttype";
+import axios, { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse, ParamsSerializerOptions } from "axios";
 import * as operations from "./models/operations";
-import { ParamsSerializerOptions } from "axios";
-import { GetQueryParamSerializer } from "../internal/utils/queryparams";
-import { CreateSecurityClient } from "../internal/utils/security";
-import * as utils from "../internal/utils/utils";
+import * as utils from "../internal/utils";
+
+
 
 type OptsFunc = (sdk: SDK) => void;
 
-const Servers = [
-  "https://fax.twilio.com",
+export const ServerList = [
+	"https://fax.twilio.com",
 ] as const;
 
 export function WithServerURL(
@@ -20,47 +18,47 @@ export function WithServerURL(
     if (params != null) {
       serverURL = utils.ReplaceParameters(serverURL, params);
     }
-    sdk.serverURL = serverURL;
+    sdk._serverURL = serverURL;
   };
 }
 
 export function WithClient(client: AxiosInstance): OptsFunc {
   return (sdk: SDK) => {
-    sdk.defaultClient = client;
+    sdk._defaultClient = client;
   };
 }
 
 
 export class SDK {
-  defaultClient?: AxiosInstance;
-  securityClient?: AxiosInstance;
-  security?: any;
-  serverURL: string;
+
+  public _defaultClient: AxiosInstance;
+  public _securityClient: AxiosInstance;
+  
+  public _serverURL: string;
+  private _language = "typescript";
+  private _sdkVersion = "0.0.1";
+  private _genVersion = "internal";
 
   constructor(...opts: OptsFunc[]) {
     opts.forEach((o) => o(this));
-    if (this.serverURL == "") {
-      this.serverURL = Servers[0];
+    if (this._serverURL == "") {
+      this._serverURL = ServerList[0];
     }
 
-    if (!this.defaultClient) {
-      this.defaultClient = axios.create({ baseURL: this.serverURL });
+    if (!this._defaultClient) {
+      this._defaultClient = axios.create({ baseURL: this._serverURL });
     }
 
-    if (!this.securityClient) {
-      if (this.security) {
-        this.securityClient = CreateSecurityClient(
-          this.defaultClient,
-          this.security
-        );
-      } else {
-        this.securityClient = this.defaultClient;
-      }
+    if (!this._securityClient) {
+      this._securityClient = this._defaultClient;
     }
+    
   }
   
-  // DeleteFax - Delete a specific fax and its associated media.
-  DeleteFax(
+  /**
+   * deleteFax - Delete a specific fax and its associated media.
+  **/
+  deleteFax(
     req: operations.DeleteFaxRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DeleteFaxResponse> {
@@ -68,21 +66,26 @@ export class SDK {
       req = new operations.DeleteFaxRequest(req);
     }
     
-    let baseURL: string = operations.DELETEFAX_SERVERS[0];
+    let baseURL: string = operations.DeleteFaxServerList[0];
+    if (req.serverUrl) {
+      baseURL = req.serverUrl;
+    }
     const url: string = utils.GenerateURL(baseURL, "/v1/Faxes/{Sid}", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
     return client
-      .delete(url, {
+      .request({
+        url: url,
+        method: "delete",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DeleteFaxResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 204:
+        const res: operations.DeleteFaxResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 204:
             break;
         }
 
@@ -92,8 +95,10 @@ export class SDK {
   }
 
   
-  // DeleteFaxMedia - Delete a specific fax media instance.
-  DeleteFaxMedia(
+  /**
+   * deleteFaxMedia - Delete a specific fax media instance.
+  **/
+  deleteFaxMedia(
     req: operations.DeleteFaxMediaRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DeleteFaxMediaResponse> {
@@ -101,21 +106,26 @@ export class SDK {
       req = new operations.DeleteFaxMediaRequest(req);
     }
     
-    let baseURL: string = operations.DELETEFAXMEDIA_SERVERS[0];
+    let baseURL: string = operations.DeleteFaxMediaServerList[0];
+    if (req.serverUrl) {
+      baseURL = req.serverUrl;
+    }
     const url: string = utils.GenerateURL(baseURL, "/v1/Faxes/{FaxSid}/Media/{Sid}", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
     return client
-      .delete(url, {
+      .request({
+        url: url,
+        method: "delete",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DeleteFaxMediaResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 204:
+        const res: operations.DeleteFaxMediaResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 204:
             break;
         }
 
@@ -125,8 +135,10 @@ export class SDK {
   }
 
   
-  // FetchFax - Fetch a specific fax.
-  FetchFax(
+  /**
+   * fetchFax - Fetch a specific fax.
+  **/
+  fetchFax(
     req: operations.FetchFaxRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.FetchFaxResponse> {
@@ -134,22 +146,27 @@ export class SDK {
       req = new operations.FetchFaxRequest(req);
     }
     
-    let baseURL: string = operations.FETCHFAX_SERVERS[0];
+    let baseURL: string = operations.FetchFaxServerList[0];
+    if (req.serverUrl) {
+      baseURL = req.serverUrl;
+    }
     const url: string = utils.GenerateURL(baseURL, "/v1/Faxes/{Sid}", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.FetchFaxResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.FetchFaxResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.faxV1Fax = httpRes?.data;
             }
             break;
@@ -161,8 +178,10 @@ export class SDK {
   }
 
   
-  // FetchFaxMedia - Fetch a specific fax media instance.
-  FetchFaxMedia(
+  /**
+   * fetchFaxMedia - Fetch a specific fax media instance.
+  **/
+  fetchFaxMedia(
     req: operations.FetchFaxMediaRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.FetchFaxMediaResponse> {
@@ -170,22 +189,27 @@ export class SDK {
       req = new operations.FetchFaxMediaRequest(req);
     }
     
-    let baseURL: string = operations.FETCHFAXMEDIA_SERVERS[0];
+    let baseURL: string = operations.FetchFaxMediaServerList[0];
+    if (req.serverUrl) {
+      baseURL = req.serverUrl;
+    }
     const url: string = utils.GenerateURL(baseURL, "/v1/Faxes/{FaxSid}/Media/{Sid}", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.FetchFaxMediaResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.FetchFaxMediaResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.faxV1FaxFaxMedia = httpRes?.data;
             }
             break;
@@ -197,8 +221,10 @@ export class SDK {
   }
 
   
-  // ListFax - Retrieve a list of all faxes.
-  ListFax(
+  /**
+   * listFax - Retrieve a list of all faxes.
+  **/
+  listFax(
     req: operations.ListFaxRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.ListFaxResponse> {
@@ -206,11 +232,15 @@ export class SDK {
       req = new operations.ListFaxRequest(req);
     }
     
-    let baseURL: string = operations.LISTFAX_SERVERS[0];
+    let baseURL: string = operations.ListFaxServerList[0];
+    if (req.serverUrl) {
+      baseURL = req.serverUrl;
+    }
     const url: string = baseURL.replace(/\/$/, "") + "/v1/Faxes";
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -219,17 +249,18 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.ListFaxResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.ListFaxResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.listFaxResponse = httpRes?.data;
             }
             break;
@@ -241,8 +272,10 @@ export class SDK {
   }
 
   
-  // ListFaxMedia - Retrieve a list of all fax media instances for the specified fax.
-  ListFaxMedia(
+  /**
+   * listFaxMedia - Retrieve a list of all fax media instances for the specified fax.
+  **/
+  listFaxMedia(
     req: operations.ListFaxMediaRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.ListFaxMediaResponse> {
@@ -250,11 +283,15 @@ export class SDK {
       req = new operations.ListFaxMediaRequest(req);
     }
     
-    let baseURL: string = operations.LISTFAXMEDIA_SERVERS[0];
+    let baseURL: string = operations.ListFaxMediaServerList[0];
+    if (req.serverUrl) {
+      baseURL = req.serverUrl;
+    }
     const url: string = utils.GenerateURL(baseURL, "/v1/Faxes/{FaxSid}/Media", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -263,17 +300,18 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.ListFaxMediaResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.ListFaxMediaResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.listFaxMediaResponse = httpRes?.data;
             }
             break;

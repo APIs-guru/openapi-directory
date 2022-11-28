@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // LivenessCheck
@@ -6,24 +7,24 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Health checking configuration for VM instances. Unhealthy instances are killed and replaced with new instances.
 **/
 export class LivenessCheck extends SpeakeasyBase {
-  @Metadata({ data: "json, name=checkInterval" })
+  @SpeakeasyMetadata({ data: "json, name=checkInterval" })
   checkInterval?: string;
 
-  @Metadata({ data: "json, name=failureThreshold" })
+  @SpeakeasyMetadata({ data: "json, name=failureThreshold" })
   failureThreshold?: number;
 
-  @Metadata({ data: "json, name=host" })
+  @SpeakeasyMetadata({ data: "json, name=host" })
   host?: string;
 
-  @Metadata({ data: "json, name=initialDelay" })
+  @SpeakeasyMetadata({ data: "json, name=initialDelay" })
   initialDelay?: string;
 
-  @Metadata({ data: "json, name=path" })
+  @SpeakeasyMetadata({ data: "json, name=path" })
   path?: string;
 
-  @Metadata({ data: "json, name=successThreshold" })
+  @SpeakeasyMetadata({ data: "json, name=successThreshold" })
   successThreshold?: number;
 
-  @Metadata({ data: "json, name=timeout" })
+  @SpeakeasyMetadata({ data: "json, name=timeout" })
   timeout?: string;
 }

@@ -1,16 +1,20 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import webhookbuildtype_enum
-from . import webhookfilter
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class UpdateWebhookInput:
-    branch_filter: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'branchFilter' }})
-    build_type: Optional[webhookbuildtype_enum.WebhookBuildTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'buildType' }})
-    filter_groups: Optional[List[List[webhookfilter.WebhookFilter]]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'filterGroups' }})
-    project_name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'projectName' }})
-    rotate_secret: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'rotateSecret' }})
+    project_name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('projectName') }})
+    branch_filter: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('branchFilter') }})
+    build_type: Optional[WebhookBuildTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('buildType') }})
+    filter_groups: Optional[List[List[WebhookFilter]]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('filterGroups') }})
+    rotate_secret: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('rotateSecret') }})
     

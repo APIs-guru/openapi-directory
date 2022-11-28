@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { EirpUnitsEnum } from "./eirpunitsenum";
 /**
  * Object that represents EIRP.

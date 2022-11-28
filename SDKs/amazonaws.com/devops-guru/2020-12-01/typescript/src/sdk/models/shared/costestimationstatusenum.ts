@@ -1,6 +1,7 @@
 
 
+
 export enum CostEstimationStatusEnum {
-    Ongoing = "ONGOING"
-,    Completed = "COMPLETED"
+    Ongoing = "ONGOING",
+    Completed = "COMPLETED"
 }

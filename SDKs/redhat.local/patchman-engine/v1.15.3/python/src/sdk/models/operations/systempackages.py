@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class SystemPackagesPathParams:
-    inventory_id: str = field(default=None, metadata={'path_param': { 'field_name': 'inventory_id', 'style': 'simple', 'explode': False }})
+    inventory_id: str = field(metadata={'path_param': { 'field_name': 'inventory_id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -22,19 +22,19 @@ class SystemPackagesQueryParams:
 
 @dataclass
 class SystemPackagesSecurity:
-    rh_identity: shared.SchemeRhIdentity = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    rh_identity: shared.SchemeRhIdentity = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
     
 
 @dataclass
 class SystemPackagesRequest:
-    path_params: SystemPackagesPathParams = field(default=None)
-    query_params: SystemPackagesQueryParams = field(default=None)
-    security: SystemPackagesSecurity = field(default=None)
+    path_params: SystemPackagesPathParams = field()
+    query_params: SystemPackagesQueryParams = field()
+    security: SystemPackagesSecurity = field()
     
 
 @dataclass
 class SystemPackagesResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     controllers_system_package_response: Optional[shared.ControllersSystemPackageResponse] = field(default=None)
     

@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import policytopath
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class BatchLookupPolicyResponse:
-    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'NextToken' }})
-    policy_to_path_list: Optional[List[policytopath.PolicyToPath]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'PolicyToPathList' }})
+    r"""BatchLookupPolicyResponse
+    Represents the output of a <a>LookupPolicy</a> response operation.
+    """
+    
+    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('NextToken') }})
+    policy_to_path_list: Optional[List[PolicyToPath]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('PolicyToPathList') }})
     

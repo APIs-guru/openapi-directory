@@ -1,8 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ConsumedCapacity } from "./consumedcapacity";
 import { AttributeValue } from "./attributevalue";
 import { KeysAndAttributes } from "./keysandattributes";
+
 
 
 // BatchGetItemOutput
@@ -10,12 +10,12 @@ import { KeysAndAttributes } from "./keysandattributes";
  * Represents the output of a <code>BatchGetItem</code> operation.
 **/
 export class BatchGetItemOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ConsumedCapacity", elemType: shared.ConsumedCapacity })
+  @SpeakeasyMetadata({ data: "json, name=ConsumedCapacity", elemType: ConsumedCapacity })
   consumedCapacity?: ConsumedCapacity[];
 
-  @Metadata({ data: "json, name=Responses", elemType: shared.AttributeValue, elemDepth: 3 })
+  @SpeakeasyMetadata({ data: "json, name=Responses", elemType: AttributeValue, elemDepth: 3 })
   responses?: Map<string, Map<string, AttributeValue>[]>;
 
-  @Metadata({ data: "json, name=UnprocessedKeys", elemType: shared.KeysAndAttributes })
+  @SpeakeasyMetadata({ data: "json, name=UnprocessedKeys", elemType: KeysAndAttributes })
   unprocessedKeys?: Map<string, KeysAndAttributes>;
 }

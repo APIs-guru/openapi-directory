@@ -1,36 +1,36 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { EdgeModel } from "./edgemodel";
 
 
+
 export class DescribeDeviceResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Description" })
+  @SpeakeasyMetadata({ data: "json, name=Description" })
   description?: string;
 
-  @Metadata({ data: "json, name=DeviceArn" })
+  @SpeakeasyMetadata({ data: "json, name=DeviceArn" })
   deviceArn?: string;
 
-  @Metadata({ data: "json, name=DeviceFleetName" })
+  @SpeakeasyMetadata({ data: "json, name=DeviceFleetName" })
   deviceFleetName: string;
 
-  @Metadata({ data: "json, name=DeviceName" })
+  @SpeakeasyMetadata({ data: "json, name=DeviceName" })
   deviceName: string;
 
-  @Metadata({ data: "json, name=IotThingName" })
+  @SpeakeasyMetadata({ data: "json, name=IotThingName" })
   iotThingName?: string;
 
-  @Metadata({ data: "json, name=LatestHeartbeat" })
+  @SpeakeasyMetadata({ data: "json, name=LatestHeartbeat" })
   latestHeartbeat?: Date;
 
-  @Metadata({ data: "json, name=MaxModels" })
+  @SpeakeasyMetadata({ data: "json, name=MaxModels" })
   maxModels?: number;
 
-  @Metadata({ data: "json, name=Models", elemType: shared.EdgeModel })
+  @SpeakeasyMetadata({ data: "json, name=Models", elemType: EdgeModel })
   models?: EdgeModel[];
 
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=RegistrationTime" })
+  @SpeakeasyMetadata({ data: "json, name=RegistrationTime" })
   registrationTime: Date;
 }

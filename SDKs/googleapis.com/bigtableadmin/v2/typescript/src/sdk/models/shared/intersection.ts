@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GcRule } from "./gcrule";
+
 
 
 // Intersection
@@ -8,6 +8,6 @@ import { GcRule } from "./gcrule";
  * A GcRule which deletes cells matching all of the given rules.
 **/
 export class Intersection extends SpeakeasyBase {
-  @Metadata({ data: "json, name=rules", elemType: shared.GcRule })
+  @SpeakeasyMetadata({ data: "json, name=rules", elemType: GcRule })
   rules?: GcRule[];
 }

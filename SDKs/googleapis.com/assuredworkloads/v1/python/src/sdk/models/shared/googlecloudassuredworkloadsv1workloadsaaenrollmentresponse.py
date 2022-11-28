@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class GoogleCloudAssuredworkloadsV1WorkloadSaaEnrollmentResponseSetupErrorsEnum(str, Enum):
     SETUP_ERROR_UNSPECIFIED = "SETUP_ERROR_UNSPECIFIED"
@@ -18,6 +20,10 @@ class GoogleCloudAssuredworkloadsV1WorkloadSaaEnrollmentResponseSetupStatusEnum(
 @dataclass_json
 @dataclass
 class GoogleCloudAssuredworkloadsV1WorkloadSaaEnrollmentResponse:
-    setup_errors: Optional[List[GoogleCloudAssuredworkloadsV1WorkloadSaaEnrollmentResponseSetupErrorsEnum]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'setupErrors' }})
-    setup_status: Optional[GoogleCloudAssuredworkloadsV1WorkloadSaaEnrollmentResponseSetupStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'setupStatus' }})
+    r"""GoogleCloudAssuredworkloadsV1WorkloadSaaEnrollmentResponse
+    Signed Access Approvals (SAA) enrollment response.
+    """
+    
+    setup_errors: Optional[List[GoogleCloudAssuredworkloadsV1WorkloadSaaEnrollmentResponseSetupErrorsEnum]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('setupErrors') }})
+    setup_status: Optional[GoogleCloudAssuredworkloadsV1WorkloadSaaEnrollmentResponseSetupStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('setupStatus') }})
     

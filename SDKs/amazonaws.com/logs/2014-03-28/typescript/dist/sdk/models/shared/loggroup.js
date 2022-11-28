@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // LogGroup
 /**
  * Represents a log group.
@@ -33,31 +33,31 @@ var LogGroup = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=arn" }),
+        SpeakeasyMetadata({ data: "json, name=arn" }),
         __metadata("design:type", String)
     ], LogGroup.prototype, "arn", void 0);
     __decorate([
-        Metadata({ data: "json, name=creationTime" }),
+        SpeakeasyMetadata({ data: "json, name=creationTime" }),
         __metadata("design:type", Number)
     ], LogGroup.prototype, "creationTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=kmsKeyId" }),
+        SpeakeasyMetadata({ data: "json, name=kmsKeyId" }),
         __metadata("design:type", String)
     ], LogGroup.prototype, "kmsKeyId", void 0);
     __decorate([
-        Metadata({ data: "json, name=logGroupName" }),
+        SpeakeasyMetadata({ data: "json, name=logGroupName" }),
         __metadata("design:type", String)
     ], LogGroup.prototype, "logGroupName", void 0);
     __decorate([
-        Metadata({ data: "json, name=metricFilterCount" }),
+        SpeakeasyMetadata({ data: "json, name=metricFilterCount" }),
         __metadata("design:type", Number)
     ], LogGroup.prototype, "metricFilterCount", void 0);
     __decorate([
-        Metadata({ data: "json, name=retentionInDays" }),
+        SpeakeasyMetadata({ data: "json, name=retentionInDays" }),
         __metadata("design:type", Number)
     ], LogGroup.prototype, "retentionInDays", void 0);
     __decorate([
-        Metadata({ data: "json, name=storedBytes" }),
+        SpeakeasyMetadata({ data: "json, name=storedBytes" }),
         __metadata("design:type", Number)
     ], LogGroup.prototype, "storedBytes", void 0);
     return LogGroup;

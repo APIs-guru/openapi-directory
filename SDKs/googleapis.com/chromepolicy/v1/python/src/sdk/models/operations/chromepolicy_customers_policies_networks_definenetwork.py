@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class ChromepolicyCustomersPoliciesNetworksDefineNetworkPathParams:
-    customer: str = field(default=None, metadata={'path_param': { 'field_name': 'customer', 'style': 'simple', 'explode': False }})
+    customer: str = field(metadata={'path_param': { 'field_name': 'customer', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,21 +26,21 @@ class ChromepolicyCustomersPoliciesNetworksDefineNetworkQueryParams:
 
 @dataclass
 class ChromepolicyCustomersPoliciesNetworksDefineNetworkSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class ChromepolicyCustomersPoliciesNetworksDefineNetworkRequest:
-    path_params: ChromepolicyCustomersPoliciesNetworksDefineNetworkPathParams = field(default=None)
-    query_params: ChromepolicyCustomersPoliciesNetworksDefineNetworkQueryParams = field(default=None)
+    path_params: ChromepolicyCustomersPoliciesNetworksDefineNetworkPathParams = field()
+    query_params: ChromepolicyCustomersPoliciesNetworksDefineNetworkQueryParams = field()
+    security: ChromepolicyCustomersPoliciesNetworksDefineNetworkSecurity = field()
     request: Optional[shared.GoogleChromePolicyVersionsV1DefineNetworkRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: ChromepolicyCustomersPoliciesNetworksDefineNetworkSecurity = field(default=None)
     
 
 @dataclass
 class ChromepolicyCustomersPoliciesNetworksDefineNetworkResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_chrome_policy_versions_v1_define_network_response: Optional[shared.GoogleChromePolicyVersionsV1DefineNetworkResponse] = field(default=None)
-    status_code: int = field(default=None)
     

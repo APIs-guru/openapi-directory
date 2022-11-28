@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import translationsresource
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class TranslationsListResponse:
-    translations: Optional[List[translationsresource.TranslationsResource]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'translations' }})
+    r"""TranslationsListResponse
+    The main language translation response message.
+    """
+    
+    translations: Optional[List[TranslationsResource]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('translations') }})
     

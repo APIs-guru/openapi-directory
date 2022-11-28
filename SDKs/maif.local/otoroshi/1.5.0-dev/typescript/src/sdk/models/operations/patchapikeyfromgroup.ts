@@ -1,41 +1,42 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class PatchApiKeyFromGroupPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=clientId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=clientId" })
   clientId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=groupId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=groupId" })
   groupId: string;
 }
 
 
 export class PatchApiKeyFromGroupSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=basic" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=basic" })
   otoroshiAuth: shared.SchemeOtoroshiAuth;
 }
 
 
 export class PatchApiKeyFromGroupRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: PatchApiKeyFromGroupPathParams;
 
-  @Metadata({ data: "request, media_type=application/json", elemType: shared.Patch })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json", elemType: shared.Patch })
   request?: shared.Patch[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: PatchApiKeyFromGroupSecurity;
 }
 
 
 export class PatchApiKeyFromGroupResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   apiKey?: shared.ApiKey;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SimpleCondition } from "./simplecondition";
+
 
 
 // MultiConditionalBranch
@@ -7,9 +8,9 @@ import { SimpleCondition } from "./simplecondition";
  * Specifies a condition to evaluate for an activity path in a journey.
 **/
 export class MultiConditionalBranch extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Condition" })
+  @SpeakeasyMetadata({ data: "json, name=Condition" })
   condition?: SimpleCondition;
 
-  @Metadata({ data: "json, name=NextActivity" })
+  @SpeakeasyMetadata({ data: "json, name=NextActivity" })
   nextActivity?: string;
 }

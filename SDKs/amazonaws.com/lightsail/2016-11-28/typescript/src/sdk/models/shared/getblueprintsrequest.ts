@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetBlueprintsRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=includeInactive" })
+  @SpeakeasyMetadata({ data: "json, name=includeInactive" })
   includeInactive?: boolean;
 
-  @Metadata({ data: "json, name=pageToken" })
+  @SpeakeasyMetadata({ data: "json, name=pageToken" })
   pageToken?: string;
 }

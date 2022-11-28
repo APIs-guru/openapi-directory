@@ -1,22 +1,22 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { IErrorInfo } from "./ierrorinfo";
 import { OrderDetailsApiModel } from "./orderdetailsapimodel";
 
 
+
 export class ListResultOrderDetailsApiModel extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Count" })
+  @SpeakeasyMetadata({ data: "json, name=Count" })
   count?: number;
 
-  @Metadata({ data: "json, name=ErrorMessages", elemType: shared.IErrorInfo })
+  @SpeakeasyMetadata({ data: "json, name=ErrorMessages", elemType: IErrorInfo })
   errorMessages?: IErrorInfo[];
 
-  @Metadata({ data: "json, name=IsFaulted" })
+  @SpeakeasyMetadata({ data: "json, name=IsFaulted" })
   isFaulted?: boolean;
 
-  @Metadata({ data: "json, name=Result", elemType: shared.OrderDetailsApiModel })
+  @SpeakeasyMetadata({ data: "json, name=Result", elemType: OrderDetailsApiModel })
   result?: OrderDetailsApiModel[];
 
-  @Metadata({ data: "json, name=TotalCount" })
+  @SpeakeasyMetadata({ data: "json, name=TotalCount" })
   totalCount?: number;
 }

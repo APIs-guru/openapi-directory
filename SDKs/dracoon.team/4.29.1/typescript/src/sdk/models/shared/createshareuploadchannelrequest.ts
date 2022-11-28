@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // CreateShareUploadChannelRequest
@@ -6,21 +7,21 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Request model for creating an upload channel
 **/
 export class CreateShareUploadChannelRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=directS3Upload" })
+  @SpeakeasyMetadata({ data: "json, name=directS3Upload" })
   directS3Upload?: boolean;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 
-  @Metadata({ data: "json, name=password" })
+  @SpeakeasyMetadata({ data: "json, name=password" })
   password?: string;
 
-  @Metadata({ data: "json, name=size" })
+  @SpeakeasyMetadata({ data: "json, name=size" })
   size?: number;
 
-  @Metadata({ data: "json, name=timestampCreation" })
+  @SpeakeasyMetadata({ data: "json, name=timestampCreation" })
   timestampCreation?: Date;
 
-  @Metadata({ data: "json, name=timestampModification" })
+  @SpeakeasyMetadata({ data: "json, name=timestampModification" })
   timestampModification?: Date;
 }

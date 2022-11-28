@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CertificateStateEnum } from "./certificatestateenum";
 import { CertificateTypeEnum } from "./certificatetypeenum";
+
 
 
 // CertificateInfo
@@ -8,18 +9,18 @@ import { CertificateTypeEnum } from "./certificatetypeenum";
  * Contains general information about a certificate.
 **/
 export class CertificateInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CertificateId" })
+  @SpeakeasyMetadata({ data: "json, name=CertificateId" })
   certificateId?: string;
 
-  @Metadata({ data: "json, name=CommonName" })
+  @SpeakeasyMetadata({ data: "json, name=CommonName" })
   commonName?: string;
 
-  @Metadata({ data: "json, name=ExpiryDateTime" })
+  @SpeakeasyMetadata({ data: "json, name=ExpiryDateTime" })
   expiryDateTime?: Date;
 
-  @Metadata({ data: "json, name=State" })
+  @SpeakeasyMetadata({ data: "json, name=State" })
   state?: CertificateStateEnum;
 
-  @Metadata({ data: "json, name=Type" })
+  @SpeakeasyMetadata({ data: "json, name=Type" })
   type?: CertificateTypeEnum;
 }

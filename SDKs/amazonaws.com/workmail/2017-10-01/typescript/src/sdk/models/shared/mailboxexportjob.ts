@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { MailboxExportJobStateEnum } from "./mailboxexportjobstateenum";
+
 
 
 // MailboxExportJob
@@ -7,30 +8,30 @@ import { MailboxExportJobStateEnum } from "./mailboxexportjobstateenum";
  * The details of a mailbox export job, including the user or resource ID associated with the mailbox and the S3 bucket that the mailbox contents are exported to.
 **/
 export class MailboxExportJob extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Description" })
+  @SpeakeasyMetadata({ data: "json, name=Description" })
   description?: string;
 
-  @Metadata({ data: "json, name=EndTime" })
+  @SpeakeasyMetadata({ data: "json, name=EndTime" })
   endTime?: Date;
 
-  @Metadata({ data: "json, name=EntityId" })
+  @SpeakeasyMetadata({ data: "json, name=EntityId" })
   entityId?: string;
 
-  @Metadata({ data: "json, name=EstimatedProgress" })
+  @SpeakeasyMetadata({ data: "json, name=EstimatedProgress" })
   estimatedProgress?: number;
 
-  @Metadata({ data: "json, name=JobId" })
+  @SpeakeasyMetadata({ data: "json, name=JobId" })
   jobId?: string;
 
-  @Metadata({ data: "json, name=S3BucketName" })
+  @SpeakeasyMetadata({ data: "json, name=S3BucketName" })
   s3BucketName?: string;
 
-  @Metadata({ data: "json, name=S3Path" })
+  @SpeakeasyMetadata({ data: "json, name=S3Path" })
   s3Path?: string;
 
-  @Metadata({ data: "json, name=StartTime" })
+  @SpeakeasyMetadata({ data: "json, name=StartTime" })
   startTime?: Date;
 
-  @Metadata({ data: "json, name=State" })
+  @SpeakeasyMetadata({ data: "json, name=State" })
   state?: MailboxExportJobStateEnum;
 }

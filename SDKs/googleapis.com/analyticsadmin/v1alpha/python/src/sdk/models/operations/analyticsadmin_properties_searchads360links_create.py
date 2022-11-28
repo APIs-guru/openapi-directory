@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class AnalyticsadminPropertiesSearchAds360LinksCreatePathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,21 +26,21 @@ class AnalyticsadminPropertiesSearchAds360LinksCreateQueryParams:
 
 @dataclass
 class AnalyticsadminPropertiesSearchAds360LinksCreateSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class AnalyticsadminPropertiesSearchAds360LinksCreateRequest:
-    path_params: AnalyticsadminPropertiesSearchAds360LinksCreatePathParams = field(default=None)
-    query_params: AnalyticsadminPropertiesSearchAds360LinksCreateQueryParams = field(default=None)
-    request: Optional[shared.GoogleAnalyticsAdminV1alphaSearchAds360Link] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: AnalyticsadminPropertiesSearchAds360LinksCreateSecurity = field(default=None)
+    path_params: AnalyticsadminPropertiesSearchAds360LinksCreatePathParams = field()
+    query_params: AnalyticsadminPropertiesSearchAds360LinksCreateQueryParams = field()
+    security: AnalyticsadminPropertiesSearchAds360LinksCreateSecurity = field()
+    request: Optional[shared.GoogleAnalyticsAdminV1alphaSearchAds360LinkInput] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class AnalyticsadminPropertiesSearchAds360LinksCreateResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_analytics_admin_v1alpha_search_ads360_link: Optional[shared.GoogleAnalyticsAdminV1alphaSearchAds360Link] = field(default=None)
-    status_code: int = field(default=None)
     

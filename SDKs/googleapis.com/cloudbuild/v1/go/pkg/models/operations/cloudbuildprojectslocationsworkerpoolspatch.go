@@ -32,7 +32,7 @@ type CloudbuildProjectsLocationsWorkerPoolsPatchSecurity struct {
 type CloudbuildProjectsLocationsWorkerPoolsPatchRequest struct {
 	PathParams  CloudbuildProjectsLocationsWorkerPoolsPatchPathParams
 	QueryParams CloudbuildProjectsLocationsWorkerPoolsPatchQueryParams
-	Request     *shared.WorkerPool `request:"mediaType=application/json"`
+	Request     *shared.WorkerPoolInput `request:"mediaType=application/json"`
 	Security    CloudbuildProjectsLocationsWorkerPoolsPatchSecurity
 }
 

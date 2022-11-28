@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// PipelineSummary
+// A summary of information about a pipeline.
 type PipelineSummary struct {
 	CreationTime          *time.Time            `json:"creationTime,omitempty"`
 	LastUpdateTime        *time.Time            `json:"lastUpdateTime,omitempty"`

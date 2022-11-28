@@ -1,12 +1,15 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class GetCampaignVersionsPathParams:
-    application_id: str = field(default=None, metadata={'path_param': { 'field_name': 'application-id', 'style': 'simple', 'explode': False }})
-    campaign_id: str = field(default=None, metadata={'path_param': { 'field_name': 'campaign-id', 'style': 'simple', 'explode': False }})
+    application_id: str = field(metadata={'path_param': { 'field_name': 'application-id', 'style': 'simple', 'explode': False }})
+    campaign_id: str = field(metadata={'path_param': { 'field_name': 'campaign-id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -28,21 +31,21 @@ class GetCampaignVersionsHeaders:
 
 @dataclass
 class GetCampaignVersionsRequest:
-    path_params: GetCampaignVersionsPathParams = field(default=None)
-    query_params: GetCampaignVersionsQueryParams = field(default=None)
-    headers: GetCampaignVersionsHeaders = field(default=None)
+    headers: GetCampaignVersionsHeaders = field()
+    path_params: GetCampaignVersionsPathParams = field()
+    query_params: GetCampaignVersionsQueryParams = field()
     
 
 @dataclass
 class GetCampaignVersionsResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     forbidden_exception: Optional[Any] = field(default=None)
     get_campaign_versions_response: Optional[shared.GetCampaignVersionsResponse] = field(default=None)
     internal_server_error_exception: Optional[Any] = field(default=None)
     method_not_allowed_exception: Optional[Any] = field(default=None)
     not_found_exception: Optional[Any] = field(default=None)
     payload_too_large_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     too_many_requests_exception: Optional[Any] = field(default=None)
     

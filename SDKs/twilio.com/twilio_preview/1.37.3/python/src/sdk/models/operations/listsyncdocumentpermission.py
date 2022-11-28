@@ -1,0 +1,61 @@
+from dataclasses import dataclass, field
+from typing import List,Optional
+from dataclasses_json import dataclass_json
+from sdk import utils
+from sdk.models import shared
+
+
+LIST_SYNC_DOCUMENT_PERMISSION_SERVERS = [
+	"https://preview.twilio.com",
+]
+
+
+@dataclass
+class ListSyncDocumentPermissionPathParams:
+    document_sid: str = field(metadata={'path_param': { 'field_name': 'DocumentSid', 'style': 'simple', 'explode': False }})
+    service_sid: str = field(metadata={'path_param': { 'field_name': 'ServiceSid', 'style': 'simple', 'explode': False }})
+    
+
+@dataclass
+class ListSyncDocumentPermissionQueryParams:
+    page_size: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'PageSize', 'style': 'form', 'explode': True }})
+    
+
+@dataclass
+class ListSyncDocumentPermissionSecurity:
+    account_sid_auth_token: shared.SchemeAccountSidAuthToken = field(metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'basic' }})
+    
+
+@dataclass_json
+@dataclass
+class ListSyncDocumentPermissionListSyncDocumentPermissionResponseMeta:
+    first_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('first_page_url') }})
+    key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('key') }})
+    next_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('next_page_url') }})
+    page: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('page') }})
+    page_size: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('page_size') }})
+    previous_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('previous_page_url') }})
+    url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('url') }})
+    
+
+@dataclass_json
+@dataclass
+class ListSyncDocumentPermissionListSyncDocumentPermissionResponse:
+    meta: Optional[ListSyncDocumentPermissionListSyncDocumentPermissionResponseMeta] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('meta') }})
+    permissions: Optional[List[shared.PreviewSyncServiceDocumentDocumentPermission]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('permissions') }})
+    
+
+@dataclass
+class ListSyncDocumentPermissionRequest:
+    path_params: ListSyncDocumentPermissionPathParams = field()
+    query_params: ListSyncDocumentPermissionQueryParams = field()
+    security: ListSyncDocumentPermissionSecurity = field()
+    server_url: Optional[str] = field(default=None)
+    
+
+@dataclass
+class ListSyncDocumentPermissionResponse:
+    content_type: str = field()
+    status_code: int = field()
+    list_sync_document_permission_response: Optional[ListSyncDocumentPermissionListSyncDocumentPermissionResponse] = field(default=None)
+    

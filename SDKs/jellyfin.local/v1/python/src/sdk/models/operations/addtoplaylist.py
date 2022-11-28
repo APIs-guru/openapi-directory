@@ -1,10 +1,11 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
+from sdk.models import shared
 
 
 @dataclass
 class AddToPlaylistPathParams:
-    playlist_id: str = field(default=None, metadata={'path_param': { 'field_name': 'playlistId', 'style': 'simple', 'explode': False }})
+    playlist_id: str = field(metadata={'path_param': { 'field_name': 'playlistId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -15,18 +16,18 @@ class AddToPlaylistQueryParams:
 
 @dataclass
 class AddToPlaylistSecurity:
-    custom_authentication: shared.SchemeCustomAuthentication = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    custom_authentication: shared.SchemeCustomAuthentication = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
     
 
 @dataclass
 class AddToPlaylistRequest:
-    path_params: AddToPlaylistPathParams = field(default=None)
-    query_params: AddToPlaylistQueryParams = field(default=None)
-    security: AddToPlaylistSecurity = field(default=None)
+    path_params: AddToPlaylistPathParams = field()
+    query_params: AddToPlaylistQueryParams = field()
+    security: AddToPlaylistSecurity = field()
     
 
 @dataclass
 class AddToPlaylistResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

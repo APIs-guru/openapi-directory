@@ -71,10 +71,9 @@ const (
 	WritablePowerPortTemplateTypeEnumItaO           WritablePowerPortTemplateTypeEnum = "ita-o"
 )
 
-type WritablePowerPortTemplate struct {
+type WritablePowerPortTemplateInput struct {
 	AllocatedDraw *int64                             `json:"allocated_draw,omitempty"`
 	DeviceType    int64                              `json:"device_type"`
-	ID            *int64                             `json:"id,omitempty"`
 	MaximumDraw   *int64                             `json:"maximum_draw,omitempty"`
 	Name          string                             `json:"name"`
 	Type          *WritablePowerPortTemplateTypeEnum `json:"type,omitempty"`

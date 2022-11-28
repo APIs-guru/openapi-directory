@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class RequestNodePathParams:
-    node_id: int = field(default=None, metadata={'path_param': { 'field_name': 'node_id', 'style': 'simple', 'explode': False }})
+    node_id: int = field(metadata={'path_param': { 'field_name': 'node_id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -16,14 +19,14 @@ class RequestNodeHeaders:
 
 @dataclass
 class RequestNodeRequest:
-    path_params: RequestNodePathParams = field(default=None)
-    headers: RequestNodeHeaders = field(default=None)
+    headers: RequestNodeHeaders = field()
+    path_params: RequestNodePathParams = field()
     
 
 @dataclass
 class RequestNodeResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error_response: Optional[shared.ErrorResponse] = field(default=None)
     node: Optional[shared.Node] = field(default=None)
-    status_code: int = field(default=None)
     

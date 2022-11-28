@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import savedreport
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ListSavedReportsResponse:
-    next_page_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'nextPageToken' }})
-    saved_reports: Optional[List[savedreport.SavedReport]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'savedReports' }})
+    r"""ListSavedReportsResponse
+    Response definition for the saved reports list rpc.
+    """
+    
+    next_page_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('nextPageToken') }})
+    saved_reports: Optional[List[SavedReport]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('savedReports') }})
     

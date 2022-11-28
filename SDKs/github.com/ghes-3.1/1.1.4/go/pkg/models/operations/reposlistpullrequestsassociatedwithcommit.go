@@ -15,14 +15,14 @@ type ReposListPullRequestsAssociatedWithCommitQueryParams struct {
 	PerPage *int64 `queryParam:"style=form,explode=true,name=per_page"`
 }
 
-type ReposListPullRequestsAssociatedWithCommitRequest struct {
-	PathParams  ReposListPullRequestsAssociatedWithCommitPathParams
-	QueryParams ReposListPullRequestsAssociatedWithCommitQueryParams
-}
-
 type ReposListPullRequestsAssociatedWithCommit415ApplicationJSON struct {
 	DocumentationURL string `json:"documentation_url"`
 	Message          string `json:"message"`
+}
+
+type ReposListPullRequestsAssociatedWithCommitRequest struct {
+	PathParams  ReposListPullRequestsAssociatedWithCommitPathParams
+	QueryParams ReposListPullRequestsAssociatedWithCommitQueryParams
 }
 
 type ReposListPullRequestsAssociatedWithCommitResponse struct {

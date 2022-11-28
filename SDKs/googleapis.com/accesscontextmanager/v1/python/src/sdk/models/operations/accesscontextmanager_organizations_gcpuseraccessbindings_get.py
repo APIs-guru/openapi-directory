@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class AccesscontextmanagerOrganizationsGcpUserAccessBindingsGetPathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 class AccesscontextmanagerOrganizationsGcpUserAccessBindingsGetFilterEnum(str, Enum):
     LEVEL_FORMAT_UNSPECIFIED = "LEVEL_FORMAT_UNSPECIFIED"
@@ -33,20 +34,20 @@ class AccesscontextmanagerOrganizationsGcpUserAccessBindingsGetQueryParams:
 
 @dataclass
 class AccesscontextmanagerOrganizationsGcpUserAccessBindingsGetSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class AccesscontextmanagerOrganizationsGcpUserAccessBindingsGetRequest:
-    path_params: AccesscontextmanagerOrganizationsGcpUserAccessBindingsGetPathParams = field(default=None)
-    query_params: AccesscontextmanagerOrganizationsGcpUserAccessBindingsGetQueryParams = field(default=None)
-    security: AccesscontextmanagerOrganizationsGcpUserAccessBindingsGetSecurity = field(default=None)
+    path_params: AccesscontextmanagerOrganizationsGcpUserAccessBindingsGetPathParams = field()
+    query_params: AccesscontextmanagerOrganizationsGcpUserAccessBindingsGetQueryParams = field()
+    security: AccesscontextmanagerOrganizationsGcpUserAccessBindingsGetSecurity = field()
     
 
 @dataclass
 class AccesscontextmanagerOrganizationsGcpUserAccessBindingsGetResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     gcp_user_access_binding: Optional[shared.GcpUserAccessBinding] = field(default=None)
-    status_code: int = field(default=None)
     

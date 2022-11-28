@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { IngestionModeEnum } from "./ingestionmodeenum";
 import { DatasetExportJobOutput } from "./datasetexportjoboutput";
 export declare class CreateDatasetExportJobRequest extends SpeakeasyBase {

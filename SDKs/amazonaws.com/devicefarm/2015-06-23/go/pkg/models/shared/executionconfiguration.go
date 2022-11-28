@@ -1,5 +1,7 @@
 package shared
 
+// ExecutionConfiguration
+// Represents configuration information about a test run, such as the execution timeout (in minutes).
 type ExecutionConfiguration struct {
 	AccountsCleanup    *bool  `json:"accountsCleanup,omitempty"`
 	AppPackagesCleanup *bool  `json:"appPackagesCleanup,omitempty"`

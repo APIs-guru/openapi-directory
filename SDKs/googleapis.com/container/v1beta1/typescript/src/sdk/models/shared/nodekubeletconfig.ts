@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // NodeKubeletConfig
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Node kubelet configs.
 **/
 export class NodeKubeletConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=cpuCfsQuota" })
+  @SpeakeasyMetadata({ data: "json, name=cpuCfsQuota" })
   cpuCfsQuota?: boolean;
 
-  @Metadata({ data: "json, name=cpuCfsQuotaPeriod" })
+  @SpeakeasyMetadata({ data: "json, name=cpuCfsQuotaPeriod" })
   cpuCfsQuotaPeriod?: string;
 
-  @Metadata({ data: "json, name=cpuManagerPolicy" })
+  @SpeakeasyMetadata({ data: "json, name=cpuManagerPolicy" })
   cpuManagerPolicy?: string;
 
-  @Metadata({ data: "json, name=podPidsLimit" })
+  @SpeakeasyMetadata({ data: "json, name=podPidsLimit" })
   podPidsLimit?: string;
 }

@@ -5,12 +5,12 @@ from sdk.models import shared
 
 @dataclass
 class ItemImportRequest:
-    request: shared.ItemImportRequest = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    request: shared.ItemImportRequest = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class ItemImportResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     item_import_response: Optional[dict[str, Any]] = field(default=None)
-    status_code: int = field(default=None)
     

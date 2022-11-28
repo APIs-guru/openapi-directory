@@ -1,13 +1,14 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import timerange_enum
-from . import usagetotal
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class GetUsageTotalsResponse:
-    time_range: Optional[timerange_enum.TimeRangeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'timeRange' }})
-    usage_totals: Optional[List[usagetotal.UsageTotal]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'usageTotals' }})
+    time_range: Optional[TimeRangeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('timeRange') }})
+    usage_totals: Optional[List[UsageTotal]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('usageTotals') }})
     

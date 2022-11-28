@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ServiceInfo
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Information about a service.
 **/
 export class ServiceInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ServiceCode" })
+  @SpeakeasyMetadata({ data: "json, name=ServiceCode" })
   serviceCode?: string;
 
-  @Metadata({ data: "json, name=ServiceName" })
+  @SpeakeasyMetadata({ data: "json, name=ServiceName" })
   serviceName?: string;
 }

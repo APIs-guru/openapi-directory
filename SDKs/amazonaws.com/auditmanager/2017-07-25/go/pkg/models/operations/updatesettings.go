@@ -14,6 +14,9 @@ type UpdateSettingsHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// UpdateSettingsRequestBodyDefaultAssessmentReportsDestination
+//
+//	The location in which Audit Manager saves assessment reports for the given assessment.
 type UpdateSettingsRequestBodyDefaultAssessmentReportsDestination struct {
 	Destination     *string                                     `json:"destination,omitempty"`
 	DestinationType *shared.AssessmentReportDestinationTypeEnum `json:"destinationType,omitempty"`

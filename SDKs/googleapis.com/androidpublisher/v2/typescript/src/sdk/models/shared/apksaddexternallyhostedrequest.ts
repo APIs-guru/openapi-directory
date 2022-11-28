@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ExternallyHostedApk } from "./externallyhostedapk";
 
 
+
 export class ApksAddExternallyHostedRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=externallyHostedApk" })
+  @SpeakeasyMetadata({ data: "json, name=externallyHostedApk" })
   externallyHostedApk?: ExternallyHostedApk;
 }

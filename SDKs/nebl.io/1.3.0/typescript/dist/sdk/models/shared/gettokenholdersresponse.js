@@ -22,19 +22,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var GetTokenHoldersResponseHolders = /** @class */ (function (_super) {
     __extends(GetTokenHoldersResponseHolders, _super);
     function GetTokenHoldersResponseHolders() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=address" }),
+        SpeakeasyMetadata({ data: "json, name=address" }),
         __metadata("design:type", String)
     ], GetTokenHoldersResponseHolders.prototype, "address", void 0);
     __decorate([
-        Metadata({ data: "json, name=amount" }),
+        SpeakeasyMetadata({ data: "json, name=amount" }),
         __metadata("design:type", Number)
     ], GetTokenHoldersResponseHolders.prototype, "amount", void 0);
     return GetTokenHoldersResponseHolders;
@@ -46,27 +45,27 @@ var GetTokenHoldersResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=aggregationPolicy" }),
+        SpeakeasyMetadata({ data: "json, name=aggregationPolicy" }),
         __metadata("design:type", String)
     ], GetTokenHoldersResponse.prototype, "aggregationPolicy", void 0);
     __decorate([
-        Metadata({ data: "json, name=divibility" }),
+        SpeakeasyMetadata({ data: "json, name=divibility" }),
         __metadata("design:type", Number)
     ], GetTokenHoldersResponse.prototype, "divibility", void 0);
     __decorate([
-        Metadata({ data: "json, name=holders", elemType: shared.GetTokenHoldersResponseHolders }),
+        SpeakeasyMetadata({ data: "json, name=holders", elemType: GetTokenHoldersResponseHolders }),
         __metadata("design:type", Array)
     ], GetTokenHoldersResponse.prototype, "holders", void 0);
     __decorate([
-        Metadata({ data: "json, name=lockStatus" }),
+        SpeakeasyMetadata({ data: "json, name=lockStatus" }),
         __metadata("design:type", Boolean)
     ], GetTokenHoldersResponse.prototype, "lockStatus", void 0);
     __decorate([
-        Metadata({ data: "json, name=someUtxo" }),
+        SpeakeasyMetadata({ data: "json, name=someUtxo" }),
         __metadata("design:type", String)
     ], GetTokenHoldersResponse.prototype, "someUtxo", void 0);
     __decorate([
-        Metadata({ data: "json, name=tokenId" }),
+        SpeakeasyMetadata({ data: "json, name=tokenId" }),
         __metadata("design:type", String)
     ], GetTokenHoldersResponse.prototype, "tokenId", void 0);
     return GetTokenHoldersResponse;

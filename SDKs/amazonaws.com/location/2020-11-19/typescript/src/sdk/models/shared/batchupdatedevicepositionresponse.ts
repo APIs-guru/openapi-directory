@@ -1,9 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BatchUpdateDevicePositionError } from "./batchupdatedevicepositionerror";
 
 
+
 export class BatchUpdateDevicePositionResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Errors", elemType: shared.BatchUpdateDevicePositionError })
+  @SpeakeasyMetadata({ data: "json, name=Errors", elemType: BatchUpdateDevicePositionError })
   errors: BatchUpdateDevicePositionError[];
 }

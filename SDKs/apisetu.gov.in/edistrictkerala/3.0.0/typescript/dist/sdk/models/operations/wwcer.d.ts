@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class WwcerRequestBodyCertificateParameters extends SpeakeasyBase {
     aplno: string;
@@ -17,10 +17,6 @@ export declare class WwcerRequestBody extends SpeakeasyBase {
 export declare class WwcerSecurity extends SpeakeasyBase {
     apiKey: shared.SchemeApiKey;
     clientId: shared.SchemeClientId;
-}
-export declare class WwcerRequest extends SpeakeasyBase {
-    request?: WwcerRequestBody;
-    security: WwcerSecurity;
 }
 export declare enum Wwcer400ApplicationJsonErrorEnum {
     MissingParameter = "missing_parameter",
@@ -103,6 +99,10 @@ export declare enum Wwcer504ApplicationJsonErrorDescriptionEnum {
 export declare class Wwcer504ApplicationJson extends SpeakeasyBase {
     error?: Wwcer504ApplicationJsonErrorEnum;
     errorDescription?: Wwcer504ApplicationJsonErrorDescriptionEnum;
+}
+export declare class WwcerRequest extends SpeakeasyBase {
+    request?: WwcerRequestBody;
+    security: WwcerSecurity;
 }
 export declare class WwcerResponse extends SpeakeasyBase {
     contentType: string;

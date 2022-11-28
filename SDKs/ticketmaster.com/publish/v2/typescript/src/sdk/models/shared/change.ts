@@ -1,12 +1,13 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum ChangeOpEnum {
-    Add = "add"
-,    Remove = "remove"
-,    Replace = "replace"
-,    Move = "move"
-,    Copy = "copy"
-,    Test = "test"
+    Add = "add",
+    Remove = "remove",
+    Replace = "replace",
+    Move = "move",
+    Copy = "copy",
+    Test = "test"
 }
 
 
@@ -15,15 +16,15 @@ export enum ChangeOpEnum {
  * This class defines the Changes on the Publish API
 **/
 export class Change extends SpeakeasyBase {
-  @Metadata({ data: "json, name=from" })
+  @SpeakeasyMetadata({ data: "json, name=from" })
   from?: string;
 
-  @Metadata({ data: "json, name=op" })
+  @SpeakeasyMetadata({ data: "json, name=op" })
   op: ChangeOpEnum;
 
-  @Metadata({ data: "json, name=path" })
+  @SpeakeasyMetadata({ data: "json, name=path" })
   path: string;
 
-  @Metadata({ data: "json, name=value" })
+  @SpeakeasyMetadata({ data: "json, name=value" })
   value?: Map<string, any>;
 }

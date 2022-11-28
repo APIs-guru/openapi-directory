@@ -1,22 +1,20 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 
 
-export class WritableConsolePort extends SpeakeasyBase {
-  @Metadata({ data: "json, name=connection_status" })
+
+export class WritableConsolePortInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=connection_status" })
   connectionStatus?: boolean;
 
-  @Metadata({ data: "json, name=cs_port" })
+  @SpeakeasyMetadata({ data: "json, name=cs_port" })
   csPort?: number;
 
-  @Metadata({ data: "json, name=device" })
+  @SpeakeasyMetadata({ data: "json, name=device" })
   device: number;
 
-  @Metadata({ data: "json, name=id" })
-  id?: number;
-
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 
-  @Metadata({ data: "json, name=tags" })
+  @SpeakeasyMetadata({ data: "json, name=tags" })
   tags?: string[];
 }

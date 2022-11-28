@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class GetDevicePathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -16,20 +17,20 @@ class GetDeviceQueryParams:
 
 @dataclass
 class GetDeviceSecurity:
-    account_auth: shared.SchemeAccountAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    account_auth: shared.SchemeAccountAuth = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class GetDeviceRequest:
-    path_params: GetDevicePathParams = field(default=None)
-    query_params: GetDeviceQueryParams = field(default=None)
-    security: GetDeviceSecurity = field(default=None)
+    path_params: GetDevicePathParams = field()
+    query_params: GetDeviceQueryParams = field()
+    security: GetDeviceSecurity = field()
     
 
 @dataclass
 class GetDeviceResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     device: Optional[shared.Device] = field(default=None)
     service_error: Optional[shared.ServiceError] = field(default=None)
-    status_code: int = field(default=None)
     

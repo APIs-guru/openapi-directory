@@ -1,15 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class PostVolumesIdActionsDetachPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" })
   id: number;
-}
-
-
-export class PostVolumesIdActionsDetachRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: PostVolumesIdActionsDetachPathParams;
 }
 
 
@@ -18,69 +13,75 @@ export class PostVolumesIdActionsDetachRequest extends SpeakeasyBase {
  * Error message for the Action if error occurred, otherwise null
 **/
 export class PostVolumesIdActionsDetachActionResponseActionError extends SpeakeasyBase {
-  @Metadata({ data: "json, name=code" })
+  @SpeakeasyMetadata({ data: "json, name=code" })
   code: string;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message: string;
 }
 
 
 export class PostVolumesIdActionsDetachActionResponseActionResources extends SpeakeasyBase {
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: number;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type: string;
 }
 
 export enum PostVolumesIdActionsDetachActionResponseActionStatusEnum {
-    Success = "success"
-,    Running = "running"
-,    Error = "error"
+    Success = "success",
+    Running = "running",
+    Error = "error"
 }
 
 
 export class PostVolumesIdActionsDetachActionResponseAction extends SpeakeasyBase {
-  @Metadata({ data: "json, name=command" })
+  @SpeakeasyMetadata({ data: "json, name=command" })
   command: string;
 
-  @Metadata({ data: "json, name=error" })
+  @SpeakeasyMetadata({ data: "json, name=error" })
   error: PostVolumesIdActionsDetachActionResponseActionError;
 
-  @Metadata({ data: "json, name=finished" })
+  @SpeakeasyMetadata({ data: "json, name=finished" })
   finished: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: number;
 
-  @Metadata({ data: "json, name=progress" })
+  @SpeakeasyMetadata({ data: "json, name=progress" })
   progress: number;
 
-  @Metadata({ data: "json, name=resources", elemType: operations.PostVolumesIdActionsDetachActionResponseActionResources })
+  @SpeakeasyMetadata({ data: "json, name=resources", elemType: PostVolumesIdActionsDetachActionResponseActionResources })
   resources: PostVolumesIdActionsDetachActionResponseActionResources[];
 
-  @Metadata({ data: "json, name=started" })
+  @SpeakeasyMetadata({ data: "json, name=started" })
   started: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status: PostVolumesIdActionsDetachActionResponseActionStatusEnum;
 }
 
 
 export class PostVolumesIdActionsDetachActionResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=action" })
+  @SpeakeasyMetadata({ data: "json, name=action" })
   action: PostVolumesIdActionsDetachActionResponseAction;
 }
 
 
+export class PostVolumesIdActionsDetachRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: PostVolumesIdActionsDetachPathParams;
+}
+
+
 export class PostVolumesIdActionsDetachResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   actionResponse?: PostVolumesIdActionsDetachActionResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

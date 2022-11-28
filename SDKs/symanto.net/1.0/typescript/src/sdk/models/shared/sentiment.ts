@@ -1,28 +1,29 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class Sentiment extends SpeakeasyBase {
-  @Metadata({ data: "json, name=category" })
+  @SpeakeasyMetadata({ data: "json, name=category" })
   category?: string;
 
-  @Metadata({ data: "json, name=end" })
+  @SpeakeasyMetadata({ data: "json, name=end" })
   end?: number;
 
-  @Metadata({ data: "json, name=negationTerm" })
+  @SpeakeasyMetadata({ data: "json, name=negationTerm" })
   negationTerm?: string;
 
-  @Metadata({ data: "json, name=parentCategory" })
+  @SpeakeasyMetadata({ data: "json, name=parentCategory" })
   parentCategory?: string;
 
-  @Metadata({ data: "json, name=positive" })
+  @SpeakeasyMetadata({ data: "json, name=positive" })
   positive?: boolean;
 
-  @Metadata({ data: "json, name=scale" })
+  @SpeakeasyMetadata({ data: "json, name=scale" })
   scale?: number;
 
-  @Metadata({ data: "json, name=start" })
+  @SpeakeasyMetadata({ data: "json, name=start" })
   start?: number;
 
-  @Metadata({ data: "json, name=text" })
+  @SpeakeasyMetadata({ data: "json, name=text" })
   text?: string;
 }

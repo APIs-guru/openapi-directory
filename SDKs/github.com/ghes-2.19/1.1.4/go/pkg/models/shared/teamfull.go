@@ -26,6 +26,8 @@ const (
 	TeamFullPrivacyEnumSecret TeamFullPrivacyEnum = "secret"
 )
 
+// TeamFull
+// Groups of organization members that gives permissions on specified repositories.
 type TeamFull struct {
 	CreatedAt       time.Time            `json:"created_at"`
 	Description     string               `json:"description"`

@@ -22,22 +22,22 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var CreateAliasResponseModel = /** @class */ (function (_super) {
     __extends(CreateAliasResponseModel, _super);
     function CreateAliasResponseModel() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=aliasName" }),
+        SpeakeasyMetadata({ data: "json, name=aliasName" }),
         __metadata("design:type", String)
     ], CreateAliasResponseModel.prototype, "aliasName", void 0);
     __decorate([
-        Metadata({ data: "json, name=domainName" }),
+        SpeakeasyMetadata({ data: "json, name=domainName" }),
         __metadata("design:type", String)
     ], CreateAliasResponseModel.prototype, "domainName", void 0);
     __decorate([
-        Metadata({ data: "json, name=shortUrl" }),
+        SpeakeasyMetadata({ data: "json, name=shortUrl" }),
         __metadata("design:type", String)
     ], CreateAliasResponseModel.prototype, "shortUrl", void 0);
     return CreateAliasResponseModel;

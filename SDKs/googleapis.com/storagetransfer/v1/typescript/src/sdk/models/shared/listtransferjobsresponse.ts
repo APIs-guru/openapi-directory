@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TransferJob } from "./transferjob";
+
 
 
 // ListTransferJobsResponse
@@ -8,9 +8,9 @@ import { TransferJob } from "./transferjob";
  * Response from ListTransferJobs.
 **/
 export class ListTransferJobsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 
-  @Metadata({ data: "json, name=transferJobs", elemType: shared.TransferJob })
+  @SpeakeasyMetadata({ data: "json, name=transferJobs", elemType: TransferJob })
   transferJobs?: TransferJob[];
 }

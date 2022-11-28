@@ -10,18 +10,18 @@ class GetAccountAgentsQueryParams:
 
 @dataclass
 class GetAccountAgentsSecurity:
-    bearer_auth: shared.SchemeBearerAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer' }})
+    bearer_auth: shared.SchemeBearerAuth = field(metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer' }})
     
 
 @dataclass
 class GetAccountAgentsRequest:
-    query_params: GetAccountAgentsQueryParams = field(default=None)
-    security: GetAccountAgentsSecurity = field(default=None)
+    query_params: GetAccountAgentsQueryParams = field()
+    security: GetAccountAgentsSecurity = field()
     
 
 @dataclass
 class GetAccountAgentsResponse:
+    content_type: str = field()
+    status_code: int = field()
     agents: Optional[List[shared.Agent]] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

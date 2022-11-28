@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var CripcRequestBodyCertificateParameters = /** @class */ (function (_super) {
     __extends(CripcRequestBodyCertificateParameters, _super);
@@ -30,15 +30,15 @@ var CripcRequestBodyCertificateParameters = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=customer_Id" }),
+        SpeakeasyMetadata({ data: "json, name=customer_Id" }),
         __metadata("design:type", String)
     ], CripcRequestBodyCertificateParameters.prototype, "customerId", void 0);
     __decorate([
-        Metadata({ data: "json, name=policy_Number" }),
+        SpeakeasyMetadata({ data: "json, name=policy_Number" }),
         __metadata("design:type", String)
     ], CripcRequestBodyCertificateParameters.prototype, "policyNumber", void 0);
     __decorate([
-        Metadata({ data: "json, name=policy_StartDate" }),
+        SpeakeasyMetadata({ data: "json, name=policy_StartDate" }),
         __metadata("design:type", String)
     ], CripcRequestBodyCertificateParameters.prototype, "policyStartDate", void 0);
     return CripcRequestBodyCertificateParameters;
@@ -54,19 +54,19 @@ var CripcRequestBody = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=certificateParameters" }),
+        SpeakeasyMetadata({ data: "json, name=certificateParameters" }),
         __metadata("design:type", CripcRequestBodyCertificateParameters)
     ], CripcRequestBody.prototype, "certificateParameters", void 0);
     __decorate([
-        Metadata({ data: "json, name=consentArtifact" }),
+        SpeakeasyMetadata({ data: "json, name=consentArtifact" }),
         __metadata("design:type", Object)
     ], CripcRequestBody.prototype, "consentArtifact", void 0);
     __decorate([
-        Metadata({ data: "json, name=format" }),
+        SpeakeasyMetadata({ data: "json, name=format" }),
         __metadata("design:type", String)
     ], CripcRequestBody.prototype, "format", void 0);
     __decorate([
-        Metadata({ data: "json, name=txnId" }),
+        SpeakeasyMetadata({ data: "json, name=txnId" }),
         __metadata("design:type", String)
     ], CripcRequestBody.prototype, "txnId", void 0);
     return CripcRequestBody;
@@ -78,32 +78,16 @@ var CripcSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeApiKey)
     ], CripcSecurity.prototype, "apiKey", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeClientId)
     ], CripcSecurity.prototype, "clientId", void 0);
     return CripcSecurity;
 }(SpeakeasyBase));
 export { CripcSecurity };
-var CripcRequest = /** @class */ (function (_super) {
-    __extends(CripcRequest, _super);
-    function CripcRequest() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
-        __metadata("design:type", CripcRequestBody)
-    ], CripcRequest.prototype, "request", void 0);
-    __decorate([
-        Metadata(),
-        __metadata("design:type", CripcSecurity)
-    ], CripcRequest.prototype, "security", void 0);
-    return CripcRequest;
-}(SpeakeasyBase));
-export { CripcRequest };
 export var Cripc400ApplicationJsonErrorEnum;
 (function (Cripc400ApplicationJsonErrorEnum) {
     Cripc400ApplicationJsonErrorEnum["MissingParameter"] = "missing_parameter";
@@ -126,11 +110,11 @@ var Cripc400ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Cripc400ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Cripc400ApplicationJson.prototype, "errorDescription", void 0);
     return Cripc400ApplicationJson;
@@ -152,11 +136,11 @@ var Cripc401ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Cripc401ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Cripc401ApplicationJson.prototype, "errorDescription", void 0);
     return Cripc401ApplicationJson;
@@ -178,11 +162,11 @@ var Cripc404ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Cripc404ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Cripc404ApplicationJson.prototype, "errorDescription", void 0);
     return Cripc404ApplicationJson;
@@ -202,11 +186,11 @@ var Cripc500ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Cripc500ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Cripc500ApplicationJson.prototype, "errorDescription", void 0);
     return Cripc500ApplicationJson;
@@ -226,11 +210,11 @@ var Cripc502ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Cripc502ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Cripc502ApplicationJson.prototype, "errorDescription", void 0);
     return Cripc502ApplicationJson;
@@ -250,11 +234,11 @@ var Cripc503ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Cripc503ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Cripc503ApplicationJson.prototype, "errorDescription", void 0);
     return Cripc503ApplicationJson;
@@ -274,55 +258,71 @@ var Cripc504ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Cripc504ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Cripc504ApplicationJson.prototype, "errorDescription", void 0);
     return Cripc504ApplicationJson;
 }(SpeakeasyBase));
 export { Cripc504ApplicationJson };
+var CripcRequest = /** @class */ (function (_super) {
+    __extends(CripcRequest, _super);
+    function CripcRequest() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
+        __metadata("design:type", CripcRequestBody)
+    ], CripcRequest.prototype, "request", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", CripcSecurity)
+    ], CripcRequest.prototype, "security", void 0);
+    return CripcRequest;
+}(SpeakeasyBase));
+export { CripcRequest };
 var CripcResponse = /** @class */ (function (_super) {
     __extends(CripcResponse, _super);
     function CripcResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], CripcResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], CripcResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Cripc400ApplicationJson)
     ], CripcResponse.prototype, "cripc400ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Cripc401ApplicationJson)
     ], CripcResponse.prototype, "cripc401ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Cripc404ApplicationJson)
     ], CripcResponse.prototype, "cripc404ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Cripc500ApplicationJson)
     ], CripcResponse.prototype, "cripc500ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Cripc502ApplicationJson)
     ], CripcResponse.prototype, "cripc502ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Cripc503ApplicationJson)
     ], CripcResponse.prototype, "cripc503ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Cripc504ApplicationJson)
     ], CripcResponse.prototype, "cripc504ApplicationJsonObject", void 0);
     return CripcResponse;

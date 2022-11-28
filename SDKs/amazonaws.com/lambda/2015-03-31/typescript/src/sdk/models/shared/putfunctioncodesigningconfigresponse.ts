@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class PutFunctionCodeSigningConfigResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CodeSigningConfigArn" })
+  @SpeakeasyMetadata({ data: "json, name=CodeSigningConfigArn" })
   codeSigningConfigArn: string;
 
-  @Metadata({ data: "json, name=FunctionName" })
+  @SpeakeasyMetadata({ data: "json, name=FunctionName" })
   functionName: string;
 }

@@ -1,5 +1,7 @@
 package shared
 
+// Account
+// Represents a user account
 type Account struct {
 	Email    *string       `json:"Email,omitempty"`
 	Keys     *APIKeys      `json:"Keys,omitempty"`

@@ -1,15 +1,16 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudDocumentaiV1beta2BoundingPoly } from "./googleclouddocumentaiv1beta2boundingpoly";
 
+
 export enum GoogleCloudDocumentaiV1beta2DocumentPageAnchorPageRefLayoutTypeEnum {
-    LayoutTypeUnspecified = "LAYOUT_TYPE_UNSPECIFIED"
-,    Block = "BLOCK"
-,    Paragraph = "PARAGRAPH"
-,    Line = "LINE"
-,    Token = "TOKEN"
-,    VisualElement = "VISUAL_ELEMENT"
-,    Table = "TABLE"
-,    FormField = "FORM_FIELD"
+    LayoutTypeUnspecified = "LAYOUT_TYPE_UNSPECIFIED",
+    Block = "BLOCK",
+    Paragraph = "PARAGRAPH",
+    Line = "LINE",
+    Token = "TOKEN",
+    VisualElement = "VISUAL_ELEMENT",
+    Table = "TABLE",
+    FormField = "FORM_FIELD"
 }
 
 
@@ -18,18 +19,18 @@ export enum GoogleCloudDocumentaiV1beta2DocumentPageAnchorPageRefLayoutTypeEnum 
  * Represents a weak reference to a page element within a document.
 **/
 export class GoogleCloudDocumentaiV1beta2DocumentPageAnchorPageRef extends SpeakeasyBase {
-  @Metadata({ data: "json, name=boundingPoly" })
+  @SpeakeasyMetadata({ data: "json, name=boundingPoly" })
   boundingPoly?: GoogleCloudDocumentaiV1beta2BoundingPoly;
 
-  @Metadata({ data: "json, name=confidence" })
+  @SpeakeasyMetadata({ data: "json, name=confidence" })
   confidence?: number;
 
-  @Metadata({ data: "json, name=layoutId" })
+  @SpeakeasyMetadata({ data: "json, name=layoutId" })
   layoutId?: string;
 
-  @Metadata({ data: "json, name=layoutType" })
+  @SpeakeasyMetadata({ data: "json, name=layoutType" })
   layoutType?: GoogleCloudDocumentaiV1beta2DocumentPageAnchorPageRefLayoutTypeEnum;
 
-  @Metadata({ data: "json, name=page" })
+  @SpeakeasyMetadata({ data: "json, name=page" })
   page?: string;
 }

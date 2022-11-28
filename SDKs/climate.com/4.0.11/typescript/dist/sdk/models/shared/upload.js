@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var UploadContentTypeEnum;
 (function (UploadContentTypeEnum) {
     UploadContentTypeEnum["ApplicationVndClimateFieldGeojson"] = "application/vnd.climate.field.geojson";
@@ -43,19 +43,19 @@ var Upload = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=contentType" }),
+        SpeakeasyMetadata({ data: "json, name=contentType" }),
         __metadata("design:type", String)
     ], Upload.prototype, "contentType", void 0);
     __decorate([
-        Metadata({ data: "json, name=length" }),
+        SpeakeasyMetadata({ data: "json, name=length" }),
         __metadata("design:type", Number)
     ], Upload.prototype, "length", void 0);
     __decorate([
-        Metadata({ data: "json, name=md5" }),
+        SpeakeasyMetadata({ data: "json, name=md5" }),
         __metadata("design:type", String)
     ], Upload.prototype, "md5", void 0);
     __decorate([
-        Metadata({ data: "json, name=metadata" }),
+        SpeakeasyMetadata({ data: "json, name=metadata" }),
         __metadata("design:type", Map)
     ], Upload.prototype, "metadata", void 0);
     return Upload;

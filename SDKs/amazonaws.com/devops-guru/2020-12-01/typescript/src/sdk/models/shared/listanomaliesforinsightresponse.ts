@@ -1,16 +1,16 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ProactiveAnomalySummary } from "./proactiveanomalysummary";
 import { ReactiveAnomalySummary } from "./reactiveanomalysummary";
 
 
+
 export class ListAnomaliesForInsightResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=ProactiveAnomalies", elemType: shared.ProactiveAnomalySummary })
+  @SpeakeasyMetadata({ data: "json, name=ProactiveAnomalies", elemType: ProactiveAnomalySummary })
   proactiveAnomalies?: ProactiveAnomalySummary[];
 
-  @Metadata({ data: "json, name=ReactiveAnomalies", elemType: shared.ReactiveAnomalySummary })
+  @SpeakeasyMetadata({ data: "json, name=ReactiveAnomalies", elemType: ReactiveAnomalySummary })
   reactiveAnomalies?: ReactiveAnomalySummary[];
 }

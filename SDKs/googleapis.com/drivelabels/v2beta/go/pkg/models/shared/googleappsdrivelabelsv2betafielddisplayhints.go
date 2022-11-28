@@ -1,5 +1,7 @@
 package shared
 
+// GoogleAppsDriveLabelsV2betaFieldDisplayHints
+// UI display hints for rendering a field.
 type GoogleAppsDriveLabelsV2betaFieldDisplayHints struct {
 	Disabled       *bool `json:"disabled,omitempty"`
 	HiddenInSearch *bool `json:"hiddenInSearch,omitempty"`

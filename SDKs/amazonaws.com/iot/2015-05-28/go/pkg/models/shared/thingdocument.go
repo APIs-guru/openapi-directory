@@ -1,5 +1,7 @@
 package shared
 
+// ThingDocument
+// The thing search index document.
 type ThingDocument struct {
 	Attributes      map[string]string  `json:"attributes,omitempty"`
 	Connectivity    *ThingConnectivity `json:"connectivity,omitempty"`

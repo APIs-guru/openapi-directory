@@ -1,5 +1,7 @@
 package shared
 
+// HparamSearchSpaces
+// Hyperparameter search spaces. These should be a subset of training_options.
 type HparamSearchSpaces struct {
 	ActivationFn       *StringHparamSearchSpace   `json:"activationFn,omitempty"`
 	BatchSize          *IntHparamSearchSpace      `json:"batchSize,omitempty"`

@@ -1,30 +1,31 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Meta31 } from "./meta31";
 import { Meta32 } from "./meta32";
 
 
+
 export class SavedQueryRestApiGet extends SpeakeasyBase {
-  @Metadata({ data: "json, name=created_by" })
+  @SpeakeasyMetadata({ data: "json, name=created_by" })
   createdBy?: Meta31;
 
-  @Metadata({ data: "json, name=database" })
+  @SpeakeasyMetadata({ data: "json, name=database" })
   database?: Meta32;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: number;
 
-  @Metadata({ data: "json, name=label" })
+  @SpeakeasyMetadata({ data: "json, name=label" })
   label?: string;
 
-  @Metadata({ data: "json, name=schema" })
+  @SpeakeasyMetadata({ data: "json, name=schema" })
   schema?: string;
 
-  @Metadata({ data: "json, name=sql" })
+  @SpeakeasyMetadata({ data: "json, name=sql" })
   sql?: string;
 
-  @Metadata({ data: "json, name=sql_tables" })
+  @SpeakeasyMetadata({ data: "json, name=sql_tables" })
   sqlTables?: any;
 }

@@ -1,13 +1,14 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class HeadPersonImageByIndexPathParams:
-    image_index: int = field(default=None, metadata={'path_param': { 'field_name': 'imageIndex', 'style': 'simple', 'explode': False }})
-    image_type: shared.ImageTypeEnum = field(default=None, metadata={'path_param': { 'field_name': 'imageType', 'style': 'simple', 'explode': False }})
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    image_index: int = field(metadata={'path_param': { 'field_name': 'imageIndex', 'style': 'simple', 'explode': False }})
+    image_type: shared.ImageTypeEnum = field(metadata={'path_param': { 'field_name': 'imageType', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -30,14 +31,14 @@ class HeadPersonImageByIndexQueryParams:
 
 @dataclass
 class HeadPersonImageByIndexRequest:
-    path_params: HeadPersonImageByIndexPathParams = field(default=None)
-    query_params: HeadPersonImageByIndexQueryParams = field(default=None)
+    path_params: HeadPersonImageByIndexPathParams = field()
+    query_params: HeadPersonImageByIndexQueryParams = field()
     
 
 @dataclass
 class HeadPersonImageByIndexResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     head_person_image_by_index_200_image_wildcard_binary_string: Optional[bytes] = field(default=None)
     problem_details: Optional[dict[str, Any]] = field(default=None)
-    status_code: int = field(default=None)
     

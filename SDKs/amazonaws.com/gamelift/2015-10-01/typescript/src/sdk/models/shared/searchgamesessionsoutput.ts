@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GameSession } from "./gamesession";
+
 
 
 // SearchGameSessionsOutput
@@ -8,9 +8,9 @@ import { GameSession } from "./gamesession";
  * Represents the returned data in response to a request operation.
 **/
 export class SearchGameSessionsOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=GameSessions", elemType: shared.GameSession })
+  @SpeakeasyMetadata({ data: "json, name=GameSessions", elemType: GameSession })
   gameSessions?: GameSession[];
 
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 }

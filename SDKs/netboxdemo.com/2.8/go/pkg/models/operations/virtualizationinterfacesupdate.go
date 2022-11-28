@@ -10,7 +10,7 @@ type VirtualizationInterfacesUpdatePathParams struct {
 
 type VirtualizationInterfacesUpdateRequest struct {
 	PathParams VirtualizationInterfacesUpdatePathParams
-	Request    shared.WritableVirtualMachineInterface `request:"mediaType=application/json"`
+	Request    shared.WritableVirtualMachineInterfaceInput `request:"mediaType=application/json"`
 }
 
 type VirtualizationInterfacesUpdateResponse struct {

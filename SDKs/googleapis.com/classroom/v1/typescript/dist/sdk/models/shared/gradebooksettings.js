@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { GradeCategory } from "./gradecategory";
 export var GradebookSettingsCalculationTypeEnum;
 (function (GradebookSettingsCalculationTypeEnum) {
     GradebookSettingsCalculationTypeEnum["CalculationTypeUnspecified"] = "CALCULATION_TYPE_UNSPECIFIED";
@@ -47,15 +47,15 @@ var GradebookSettings = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=calculationType" }),
+        SpeakeasyMetadata({ data: "json, name=calculationType" }),
         __metadata("design:type", String)
     ], GradebookSettings.prototype, "calculationType", void 0);
     __decorate([
-        Metadata({ data: "json, name=displaySetting" }),
+        SpeakeasyMetadata({ data: "json, name=displaySetting" }),
         __metadata("design:type", String)
     ], GradebookSettings.prototype, "displaySetting", void 0);
     __decorate([
-        Metadata({ data: "json, name=gradeCategories", elemType: shared.GradeCategory }),
+        SpeakeasyMetadata({ data: "json, name=gradeCategories", elemType: GradeCategory }),
         __metadata("design:type", Array)
     ], GradebookSettings.prototype, "gradeCategories", void 0);
     return GradebookSettings;

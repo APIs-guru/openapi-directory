@@ -1,11 +1,19 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import updateresult
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class BatchExecuteStatementResponse:
-    update_results: Optional[List[updateresult.UpdateResult]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'updateResults' }})
+    r"""BatchExecuteStatementResponse
+    The response elements represent the output of a SQL statement over an array of data.
+    """
+    
+    update_results: Optional[List[UpdateResult]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('updateResults') }})
     

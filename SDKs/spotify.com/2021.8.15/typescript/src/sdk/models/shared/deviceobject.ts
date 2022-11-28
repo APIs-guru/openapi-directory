@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // DeviceObject
@@ -6,24 +7,24 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * https://developer.spotify.com/documentation/web-api/reference/#object-deviceobject - Find more info on the official Spotify Web API Reference
 **/
 export class DeviceObject extends SpeakeasyBase {
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=is_active" })
+  @SpeakeasyMetadata({ data: "json, name=is_active" })
   isActive?: boolean;
 
-  @Metadata({ data: "json, name=is_private_session" })
+  @SpeakeasyMetadata({ data: "json, name=is_private_session" })
   isPrivateSession?: boolean;
 
-  @Metadata({ data: "json, name=is_restricted" })
+  @SpeakeasyMetadata({ data: "json, name=is_restricted" })
   isRestricted?: boolean;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: string;
 
-  @Metadata({ data: "json, name=volume_percent" })
+  @SpeakeasyMetadata({ data: "json, name=volume_percent" })
   volumePercent?: number;
 }

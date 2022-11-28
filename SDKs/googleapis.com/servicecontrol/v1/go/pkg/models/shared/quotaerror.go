@@ -19,6 +19,8 @@ const (
 	QuotaErrorCodeEnumQuotaSystemUnavailable   QuotaErrorCodeEnum = "QUOTA_SYSTEM_UNAVAILABLE"
 )
 
+// QuotaError
+// Represents error information for QuotaOperation.
 type QuotaError struct {
 	Code        *QuotaErrorCodeEnum `json:"code,omitempty"`
 	Description *string             `json:"description,omitempty"`

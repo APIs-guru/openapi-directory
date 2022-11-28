@@ -1,9 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum AgcoPowerServicesModelsEcuStateEnum {
-    Active = "Active"
-,    Inactive = "Inactive"
-,    Damaged = "Damaged"
+    Active = "Active",
+    Inactive = "Inactive",
+    Damaged = "Damaged"
 }
 
 
@@ -12,21 +13,21 @@ export enum AgcoPowerServicesModelsEcuStateEnum {
  * An AGCO Power ECU
 **/
 export class AgcoPowerServicesModelsEcu extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ActivationCode, form, name=ActivationCode;" })
+  @SpeakeasyMetadata({ data: "json, name=ActivationCode, form, name=ActivationCode;" })
   activationCode?: string;
 
-  @Metadata({ data: "json, name=DamagedDescription, form, name=DamagedDescription;" })
+  @SpeakeasyMetadata({ data: "json, name=DamagedDescription, form, name=DamagedDescription;" })
   damagedDescription?: string;
 
-  @Metadata({ data: "json, name=EngineSerialNumber, form, name=EngineSerialNumber;" })
+  @SpeakeasyMetadata({ data: "json, name=EngineSerialNumber, form, name=EngineSerialNumber;" })
   engineSerialNumber: string;
 
-  @Metadata({ data: "json, name=ReplacesECUSerialNumber, form, name=ReplacesECUSerialNumber;" })
+  @SpeakeasyMetadata({ data: "json, name=ReplacesECUSerialNumber, form, name=ReplacesECUSerialNumber;" })
   replacesEcuSerialNumber?: string;
 
-  @Metadata({ data: "json, name=SerialNumber, form, name=SerialNumber;" })
+  @SpeakeasyMetadata({ data: "json, name=SerialNumber, form, name=SerialNumber;" })
   serialNumber: string;
 
-  @Metadata({ data: "json, name=State, form, name=State;" })
+  @SpeakeasyMetadata({ data: "json, name=State, form, name=State;" })
   state: AgcoPowerServicesModelsEcuStateEnum;
 }

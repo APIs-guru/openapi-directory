@@ -8,6 +8,8 @@ const (
 	GoogleCloudIntegrationsV1alphaMonitorExecutionStatsRequestResponseTemplateEnumAploseSeriesListConfig GoogleCloudIntegrationsV1alphaMonitorExecutionStatsRequestResponseTemplateEnum = "APLOSE_SERIES_LIST_CONFIG"
 )
 
+// GoogleCloudIntegrationsV1alphaMonitorExecutionStatsRequest
+// The request to get data for monarch connector config.
 type GoogleCloudIntegrationsV1alphaMonitorExecutionStatsRequest struct {
 	Duration         *string                                                                         `json:"duration,omitempty"`
 	EndTime          *string                                                                         `json:"endTime,omitempty"`

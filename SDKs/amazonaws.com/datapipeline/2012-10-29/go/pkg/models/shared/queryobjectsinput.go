@@ -1,5 +1,7 @@
 package shared
 
+// QueryObjectsInput
+// Contains the parameters for QueryObjects.
 type QueryObjectsInput struct {
 	Limit      *int64  `json:"limit,omitempty"`
 	Marker     *string `json:"marker,omitempty"`

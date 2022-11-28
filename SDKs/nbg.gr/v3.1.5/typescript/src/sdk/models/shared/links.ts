@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Links
@@ -6,18 +7,18 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Links relevant to the payload
 **/
 export class Links extends SpeakeasyBase {
-  @Metadata({ data: "json, name=First" })
+  @SpeakeasyMetadata({ data: "json, name=First" })
   first?: string;
 
-  @Metadata({ data: "json, name=Last" })
+  @SpeakeasyMetadata({ data: "json, name=Last" })
   last?: string;
 
-  @Metadata({ data: "json, name=Next" })
+  @SpeakeasyMetadata({ data: "json, name=Next" })
   next?: string;
 
-  @Metadata({ data: "json, name=Prev" })
+  @SpeakeasyMetadata({ data: "json, name=Prev" })
   prev?: string;
 
-  @Metadata({ data: "json, name=Self" })
+  @SpeakeasyMetadata({ data: "json, name=Self" })
   self: string;
 }

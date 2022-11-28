@@ -18,6 +18,8 @@ type DescribeIdentityProviderConfigHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// DescribeIdentityProviderConfigRequestBodyIdentityProviderConfig
+// An object representing an identity provider configuration.
 type DescribeIdentityProviderConfigRequestBodyIdentityProviderConfig struct {
 	Name *string `json:"name,omitempty"`
 	Type *string `json:"type,omitempty"`

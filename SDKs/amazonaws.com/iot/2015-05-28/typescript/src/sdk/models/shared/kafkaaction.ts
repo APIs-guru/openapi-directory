@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // KafkaAction
@@ -6,18 +7,18 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Send messages to an Amazon Managed Streaming for Apache Kafka (Amazon MSK) or self-managed Apache Kafka cluster.
 **/
 export class KafkaAction extends SpeakeasyBase {
-  @Metadata({ data: "json, name=clientProperties" })
+  @SpeakeasyMetadata({ data: "json, name=clientProperties" })
   clientProperties: Map<string, string>;
 
-  @Metadata({ data: "json, name=destinationArn" })
+  @SpeakeasyMetadata({ data: "json, name=destinationArn" })
   destinationArn: string;
 
-  @Metadata({ data: "json, name=key" })
+  @SpeakeasyMetadata({ data: "json, name=key" })
   key?: string;
 
-  @Metadata({ data: "json, name=partition" })
+  @SpeakeasyMetadata({ data: "json, name=partition" })
   partition?: string;
 
-  @Metadata({ data: "json, name=topic" })
+  @SpeakeasyMetadata({ data: "json, name=topic" })
   topic: string;
 }

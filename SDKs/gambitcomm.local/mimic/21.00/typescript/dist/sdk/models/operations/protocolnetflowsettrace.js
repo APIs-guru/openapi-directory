@@ -22,18 +22,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var ProtocolNetflowSetTracePathParams = /** @class */ (function (_super) {
     __extends(ProtocolNetflowSetTracePathParams, _super);
     function ProtocolNetflowSetTracePathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=agentNum" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=agentNum" }),
         __metadata("design:type", Number)
     ], ProtocolNetflowSetTracePathParams.prototype, "agentNum", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=enableOrNot" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=enableOrNot" }),
         __metadata("design:type", String)
     ], ProtocolNetflowSetTracePathParams.prototype, "enableOrNot", void 0);
     return ProtocolNetflowSetTracePathParams;
@@ -45,7 +45,7 @@ var ProtocolNetflowSetTraceRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ProtocolNetflowSetTracePathParams)
     ], ProtocolNetflowSetTraceRequest.prototype, "pathParams", void 0);
     return ProtocolNetflowSetTraceRequest;
@@ -57,15 +57,15 @@ var ProtocolNetflowSetTraceResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], ProtocolNetflowSetTraceResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], ProtocolNetflowSetTraceResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], ProtocolNetflowSetTraceResponse.prototype, "protocolNetflowSetTrace200ApplicationJsonString", void 0);
     return ProtocolNetflowSetTraceResponse;

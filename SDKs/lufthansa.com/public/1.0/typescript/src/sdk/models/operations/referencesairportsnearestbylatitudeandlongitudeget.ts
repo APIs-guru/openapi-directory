@@ -1,56 +1,57 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class ReferencesAirportsNearestByLatitudeAndLongitudeGetPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=latitude" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=latitude" })
   latitude: number;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=longitude" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=longitude" })
   longitude: number;
 }
 
 
 export class ReferencesAirportsNearestByLatitudeAndLongitudeGetQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=lang" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=lang" })
   lang?: string;
 }
 
 
 export class ReferencesAirportsNearestByLatitudeAndLongitudeGetHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=Accept" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Accept" })
   accept: string;
 }
 
 
 export class ReferencesAirportsNearestByLatitudeAndLongitudeGetSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   auth: shared.SchemeAuth;
 }
 
 
 export class ReferencesAirportsNearestByLatitudeAndLongitudeGetRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: ReferencesAirportsNearestByLatitudeAndLongitudeGetPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: ReferencesAirportsNearestByLatitudeAndLongitudeGetQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: ReferencesAirportsNearestByLatitudeAndLongitudeGetHeaders;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: ReferencesAirportsNearestByLatitudeAndLongitudeGetSecurity;
 }
 
 
 export class ReferencesAirportsNearestByLatitudeAndLongitudeGetResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   referencesAirportsNearestByLatitudeAndLongitudeGet200ApplicationJsonObject?: Map<string, any>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

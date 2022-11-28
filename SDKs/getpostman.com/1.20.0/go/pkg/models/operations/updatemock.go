@@ -16,11 +16,6 @@ type UpdateMockRequestBody struct {
 	Mock *UpdateMockRequestBodyMock `json:"mock,omitempty"`
 }
 
-type UpdateMockRequest struct {
-	PathParams UpdateMockPathParams
-	Request    *UpdateMockRequestBody `request:"mediaType=application/json"`
-}
-
 type UpdateMock200ApplicationJSONMockConfig struct {
 	Headers          []interface{} `json:"headers,omitempty"`
 	MatchBody        *bool         `json:"matchBody,omitempty"`
@@ -41,6 +36,11 @@ type UpdateMock200ApplicationJSONMock struct {
 
 type UpdateMock200ApplicationJSON struct {
 	Mock *UpdateMock200ApplicationJSONMock `json:"mock,omitempty"`
+}
+
+type UpdateMockRequest struct {
+	PathParams UpdateMockPathParams
+	Request    *UpdateMockRequestBody `request:"mediaType=application/json"`
 }
 
 type UpdateMockResponse struct {

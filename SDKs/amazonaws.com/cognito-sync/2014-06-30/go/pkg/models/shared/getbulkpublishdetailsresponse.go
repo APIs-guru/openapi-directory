@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// GetBulkPublishDetailsResponse
+// The output for the GetBulkPublishDetails operation.
 type GetBulkPublishDetailsResponse struct {
 	BulkPublishCompleteTime *time.Time             `json:"BulkPublishCompleteTime,omitempty"`
 	BulkPublishStartTime    *time.Time             `json:"BulkPublishStartTime,omitempty"`

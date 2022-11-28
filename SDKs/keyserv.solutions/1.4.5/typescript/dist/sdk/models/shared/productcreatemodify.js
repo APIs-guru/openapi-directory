@@ -22,26 +22,26 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var ProductCreateModify = /** @class */ (function (_super) {
     __extends(ProductCreateModify, _super);
     function ProductCreateModify() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=custom" }),
+        SpeakeasyMetadata({ data: "json, name=custom" }),
         __metadata("design:type", Object)
     ], ProductCreateModify.prototype, "custom", void 0);
     __decorate([
-        Metadata({ data: "json, name=key" }),
+        SpeakeasyMetadata({ data: "json, name=key" }),
         __metadata("design:type", String)
     ], ProductCreateModify.prototype, "key", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], ProductCreateModify.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=serial" }),
+        SpeakeasyMetadata({ data: "json, name=serial" }),
         __metadata("design:type", String)
     ], ProductCreateModify.prototype, "serial", void 0);
     return ProductCreateModify;

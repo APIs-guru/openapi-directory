@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { VirtualServiceData } from "./virtualservicedata";
+
 
 
 // UpdateVirtualServiceOutput
@@ -7,6 +8,6 @@ import { VirtualServiceData } from "./virtualservicedata";
  * <zonbook></zonbook><xhtml></xhtml>
 **/
 export class UpdateVirtualServiceOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=virtualService" })
+  @SpeakeasyMetadata({ data: "json, name=virtualService" })
   virtualService: VirtualServiceData;
 }

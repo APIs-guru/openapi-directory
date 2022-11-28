@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CompliantSummary } from "./compliantsummary";
 import { NonCompliantSummary } from "./noncompliantsummary";
+
 
 
 // ComplianceSummaryItem
@@ -8,12 +9,12 @@ import { NonCompliantSummary } from "./noncompliantsummary";
  * A summary of compliance information by compliance type.
 **/
 export class ComplianceSummaryItem extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ComplianceType" })
+  @SpeakeasyMetadata({ data: "json, name=ComplianceType" })
   complianceType?: string;
 
-  @Metadata({ data: "json, name=CompliantSummary" })
+  @SpeakeasyMetadata({ data: "json, name=CompliantSummary" })
   compliantSummary?: CompliantSummary;
 
-  @Metadata({ data: "json, name=NonCompliantSummary" })
+  @SpeakeasyMetadata({ data: "json, name=NonCompliantSummary" })
   nonCompliantSummary?: NonCompliantSummary;
 }

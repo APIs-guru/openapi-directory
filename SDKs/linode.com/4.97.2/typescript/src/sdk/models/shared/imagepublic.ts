@@ -1,14 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum ImagePublicStatusEnum {
-    Creating = "creating"
-,    PendingUpload = "pending_upload"
-,    Available = "available"
+    Creating = "creating",
+    PendingUpload = "pending_upload",
+    Available = "available"
 }
 
 export enum ImagePublicTypeEnum {
-    Manual = "manual"
-,    Automatic = "automatic"
+    Manual = "manual",
+    Automatic = "automatic"
 }
 
 
@@ -17,45 +18,45 @@ export enum ImagePublicTypeEnum {
  * Public Image object
 **/
 export class ImagePublic extends SpeakeasyBase {
-  @Metadata({ data: "json, name=created" })
+  @SpeakeasyMetadata({ data: "json, name=created" })
   created?: Date;
 
-  @Metadata({ data: "json, name=created_by" })
+  @SpeakeasyMetadata({ data: "json, name=created_by" })
   createdBy?: string;
 
-  @Metadata({ data: "json, name=deprecated" })
+  @SpeakeasyMetadata({ data: "json, name=deprecated" })
   deprecated?: boolean;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=eol" })
+  @SpeakeasyMetadata({ data: "json, name=eol" })
   eol?: Date;
 
-  @Metadata({ data: "json, name=expiry" })
+  @SpeakeasyMetadata({ data: "json, name=expiry" })
   expiry?: Date;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=is_public" })
+  @SpeakeasyMetadata({ data: "json, name=is_public" })
   isPublic?: boolean;
 
-  @Metadata({ data: "json, name=label" })
+  @SpeakeasyMetadata({ data: "json, name=label" })
   label?: string;
 
-  @Metadata({ data: "json, name=size" })
+  @SpeakeasyMetadata({ data: "json, name=size" })
   size?: number;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: ImagePublicStatusEnum;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: ImagePublicTypeEnum;
 
-  @Metadata({ data: "json, name=updated" })
+  @SpeakeasyMetadata({ data: "json, name=updated" })
   updated?: Date;
 
-  @Metadata({ data: "json, name=vendor" })
+  @SpeakeasyMetadata({ data: "json, name=vendor" })
   vendor?: string;
 }

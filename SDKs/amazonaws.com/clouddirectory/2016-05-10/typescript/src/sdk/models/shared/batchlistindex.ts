@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ObjectReference } from "./objectreference";
 import { ObjectAttributeRange } from "./objectattributerange";
+
 
 
 // BatchListIndex
@@ -9,15 +9,15 @@ import { ObjectAttributeRange } from "./objectattributerange";
  * Lists objects attached to the specified index inside a <a>BatchRead</a> operation. For more information, see <a>ListIndex</a> and <a>BatchReadRequest$Operations</a>.
 **/
 export class BatchListIndex extends SpeakeasyBase {
-  @Metadata({ data: "json, name=IndexReference" })
+  @SpeakeasyMetadata({ data: "json, name=IndexReference" })
   indexReference: ObjectReference;
 
-  @Metadata({ data: "json, name=MaxResults" })
+  @SpeakeasyMetadata({ data: "json, name=MaxResults" })
   maxResults?: number;
 
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=RangesOnIndexedValues", elemType: shared.ObjectAttributeRange })
+  @SpeakeasyMetadata({ data: "json, name=RangesOnIndexedValues", elemType: ObjectAttributeRange })
   rangesOnIndexedValues?: ObjectAttributeRange[];
 }

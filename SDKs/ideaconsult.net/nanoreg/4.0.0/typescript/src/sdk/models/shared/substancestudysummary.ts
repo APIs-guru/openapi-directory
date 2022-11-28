@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class SubstanceStudySummary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=facet" })
+  @SpeakeasyMetadata({ data: "json, name=facet" })
   facet?: Map<string, any>;
 }

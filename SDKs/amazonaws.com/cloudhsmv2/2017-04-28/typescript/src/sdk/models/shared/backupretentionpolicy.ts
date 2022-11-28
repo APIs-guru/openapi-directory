@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BackupRetentionTypeEnum } from "./backupretentiontypeenum";
+
 
 
 // BackupRetentionPolicy
@@ -7,9 +8,9 @@ import { BackupRetentionTypeEnum } from "./backupretentiontypeenum";
  * A policy that defines the number of days to retain backups.
 **/
 export class BackupRetentionPolicy extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Type" })
+  @SpeakeasyMetadata({ data: "json, name=Type" })
   type?: BackupRetentionTypeEnum;
 
-  @Metadata({ data: "json, name=Value" })
+  @SpeakeasyMetadata({ data: "json, name=Value" })
   value?: string;
 }

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { KeyPhrasesDetectionJobProperties } from "./keyphrasesdetectionjobproperties";
 var DescribeKeyPhrasesDetectionJobResponse = /** @class */ (function (_super) {
     __extends(DescribeKeyPhrasesDetectionJobResponse, _super);
@@ -30,7 +30,7 @@ var DescribeKeyPhrasesDetectionJobResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=KeyPhrasesDetectionJobProperties" }),
+        SpeakeasyMetadata({ data: "json, name=KeyPhrasesDetectionJobProperties" }),
         __metadata("design:type", KeyPhrasesDetectionJobProperties)
     ], DescribeKeyPhrasesDetectionJobResponse.prototype, "keyPhrasesDetectionJobProperties", void 0);
     return DescribeKeyPhrasesDetectionJobResponse;

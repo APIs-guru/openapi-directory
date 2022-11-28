@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DetachDiskRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=diskName" })
+  @SpeakeasyMetadata({ data: "json, name=diskName" })
   diskName: string;
 }

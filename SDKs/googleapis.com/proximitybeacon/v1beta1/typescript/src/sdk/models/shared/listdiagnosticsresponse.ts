@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Diagnostics } from "./diagnostics";
+
 
 
 // ListDiagnosticsResponse
@@ -8,9 +8,9 @@ import { Diagnostics } from "./diagnostics";
  * Response that contains the requested diagnostics.
 **/
 export class ListDiagnosticsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=diagnostics", elemType: shared.Diagnostics })
+  @SpeakeasyMetadata({ data: "json, name=diagnostics", elemType: Diagnostics })
   diagnostics?: Diagnostics[];
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 }

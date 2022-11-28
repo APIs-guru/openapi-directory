@@ -1,12 +1,16 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,List,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
 @dataclass
 class PutStudioMembersPathParams:
-    studio_id: str = field(default=None, metadata={'path_param': { 'field_name': 'studioId', 'style': 'simple', 'explode': False }})
+    studio_id: str = field(metadata={'path_param': { 'field_name': 'studioId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -24,27 +28,27 @@ class PutStudioMembersHeaders:
 @dataclass_json
 @dataclass
 class PutStudioMembersRequestBody:
-    identity_store_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'identityStoreId' }})
-    members: List[shared.NewStudioMember] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'members' }})
+    identity_store_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('identityStoreId') }})
+    members: List[shared.NewStudioMember] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('members') }})
     
 
 @dataclass
 class PutStudioMembersRequest:
-    path_params: PutStudioMembersPathParams = field(default=None)
-    headers: PutStudioMembersHeaders = field(default=None)
-    request: PutStudioMembersRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: PutStudioMembersHeaders = field()
+    path_params: PutStudioMembersPathParams = field()
+    request: PutStudioMembersRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class PutStudioMembersResponse:
+    content_type: str = field()
+    status_code: int = field()
     access_denied_exception: Optional[Any] = field(default=None)
     conflict_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     internal_server_error_exception: Optional[Any] = field(default=None)
     put_studio_members_response: Optional[dict[str, Any]] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
     service_quota_exceeded_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     validation_exception: Optional[Any] = field(default=None)
     

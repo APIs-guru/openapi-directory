@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ShoppingAdsProgramStatusReviewIneligibilityReasonDetails
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Additional details for review ineligibility reasons.
 **/
 export class ShoppingAdsProgramStatusReviewIneligibilityReasonDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=cooldownTime" })
+  @SpeakeasyMetadata({ data: "json, name=cooldownTime" })
   cooldownTime?: string;
 }

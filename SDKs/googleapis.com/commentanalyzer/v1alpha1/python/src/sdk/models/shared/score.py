@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class ScoreTypeEnum(str, Enum):
     SCORE_TYPE_UNSPECIFIED = "SCORE_TYPE_UNSPECIFIED"
@@ -13,6 +15,10 @@ class ScoreTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class Score:
-    type: Optional[ScoreTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
-    value: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'value' }})
+    r"""Score
+    Analysis scores are described by a value and a ScoreType.
+    """
+    
+    type: Optional[ScoreTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('type') }})
+    value: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('value') }})
     

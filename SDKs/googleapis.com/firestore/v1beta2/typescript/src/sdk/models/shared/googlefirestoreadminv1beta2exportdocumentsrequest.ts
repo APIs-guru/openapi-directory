@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleFirestoreAdminV1beta2ExportDocumentsRequest
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The request for FirestoreAdmin.ExportDocuments.
 **/
 export class GoogleFirestoreAdminV1beta2ExportDocumentsRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=collectionIds" })
+  @SpeakeasyMetadata({ data: "json, name=collectionIds" })
   collectionIds?: string[];
 
-  @Metadata({ data: "json, name=outputUriPrefix" })
+  @SpeakeasyMetadata({ data: "json, name=outputUriPrefix" })
   outputUriPrefix?: string;
 }

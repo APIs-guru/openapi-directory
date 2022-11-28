@@ -10,12 +10,12 @@ class GetAemHealthCheckQueryParams:
 
 @dataclass
 class GetAemHealthCheckRequest:
-    query_params: GetAemHealthCheckQueryParams = field(default=None)
+    query_params: GetAemHealthCheckQueryParams = field()
     
 
 @dataclass
 class GetAemHealthCheckResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     get_aem_health_check_default_application_json_string: Optional[str] = field(default=None)
     

@@ -1,7 +1,8 @@
 
 
+
 export enum FaultEnum {
-    Client = "Client"
-,    Server = "Server"
-,    Unknown = "Unknown"
+    Client = "Client",
+    Server = "Server",
+    Unknown = "Unknown"
 }

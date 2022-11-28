@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PrismaCpeCode } from "./prismacpecode";
+
 
 
 // BudgetSummary
@@ -7,18 +8,18 @@ import { PrismaCpeCode } from "./prismacpecode";
  * Summarized information of an individual campaign budget.
 **/
 export class BudgetSummary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=externalBudgetId" })
+  @SpeakeasyMetadata({ data: "json, name=externalBudgetId" })
   externalBudgetId?: string;
 
-  @Metadata({ data: "json, name=preTaxAmountMicros" })
+  @SpeakeasyMetadata({ data: "json, name=preTaxAmountMicros" })
   preTaxAmountMicros?: string;
 
-  @Metadata({ data: "json, name=prismaCpeCode" })
+  @SpeakeasyMetadata({ data: "json, name=prismaCpeCode" })
   prismaCpeCode?: PrismaCpeCode;
 
-  @Metadata({ data: "json, name=taxAmountMicros" })
+  @SpeakeasyMetadata({ data: "json, name=taxAmountMicros" })
   taxAmountMicros?: string;
 
-  @Metadata({ data: "json, name=totalAmountMicros" })
+  @SpeakeasyMetadata({ data: "json, name=totalAmountMicros" })
   totalAmountMicros?: string;
 }

@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { HistoryEventExecutionDataDetails } from "./historyeventexecutiondatadetails";
+
 
 
 // ExecutionSucceededEventDetails
@@ -7,9 +8,9 @@ import { HistoryEventExecutionDataDetails } from "./historyeventexecutiondatadet
  * Contains details about the successful termination of the execution.
 **/
 export class ExecutionSucceededEventDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=output" })
+  @SpeakeasyMetadata({ data: "json, name=output" })
   output?: string;
 
-  @Metadata({ data: "json, name=outputDetails" })
+  @SpeakeasyMetadata({ data: "json, name=outputDetails" })
   outputDetails?: HistoryEventExecutionDataDetails;
 }

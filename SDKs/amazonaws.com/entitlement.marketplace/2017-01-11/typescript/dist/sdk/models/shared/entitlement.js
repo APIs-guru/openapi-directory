@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { EntitlementValue } from "./entitlementvalue";
 // Entitlement
 /**
@@ -34,23 +34,23 @@ var Entitlement = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=CustomerIdentifier" }),
+        SpeakeasyMetadata({ data: "json, name=CustomerIdentifier" }),
         __metadata("design:type", String)
     ], Entitlement.prototype, "customerIdentifier", void 0);
     __decorate([
-        Metadata({ data: "json, name=Dimension" }),
+        SpeakeasyMetadata({ data: "json, name=Dimension" }),
         __metadata("design:type", String)
     ], Entitlement.prototype, "dimension", void 0);
     __decorate([
-        Metadata({ data: "json, name=ExpirationDate" }),
+        SpeakeasyMetadata({ data: "json, name=ExpirationDate" }),
         __metadata("design:type", Date)
     ], Entitlement.prototype, "expirationDate", void 0);
     __decorate([
-        Metadata({ data: "json, name=ProductCode" }),
+        SpeakeasyMetadata({ data: "json, name=ProductCode" }),
         __metadata("design:type", String)
     ], Entitlement.prototype, "productCode", void 0);
     __decorate([
-        Metadata({ data: "json, name=Value" }),
+        SpeakeasyMetadata({ data: "json, name=Value" }),
         __metadata("design:type", EntitlementValue)
     ], Entitlement.prototype, "value", void 0);
     return Entitlement;

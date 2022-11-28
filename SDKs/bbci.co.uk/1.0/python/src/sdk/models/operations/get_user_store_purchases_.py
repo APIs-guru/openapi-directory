@@ -1,26 +1,27 @@
 from dataclasses import dataclass, field
 from typing import Any,Optional
+from sdk.models import shared
 
 
 @dataclass
 class GetUserStorePurchasesQueryParams:
-    identity_cookie: float = field(default=None, metadata={'query_param': { 'field_name': 'identity_cookie', 'style': 'form', 'explode': True }})
+    identity_cookie: float = field(metadata={'query_param': { 'field_name': 'identity_cookie', 'style': 'form', 'explode': True }})
     
 
 @dataclass
 class GetUserStorePurchasesSecurity:
-    basic: shared.SchemeBasic = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'basic' }})
+    basic: shared.SchemeBasic = field(metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'basic' }})
     
 
 @dataclass
 class GetUserStorePurchasesRequest:
-    query_params: GetUserStorePurchasesQueryParams = field(default=None)
-    security: GetUserStorePurchasesSecurity = field(default=None)
+    query_params: GetUserStorePurchasesQueryParams = field()
+    security: GetUserStorePurchasesSecurity = field()
     
 
 @dataclass
 class GetUserStorePurchasesResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     ibl: Optional[Any] = field(default=None)
     

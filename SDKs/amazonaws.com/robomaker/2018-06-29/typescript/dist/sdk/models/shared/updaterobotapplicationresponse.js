@@ -22,45 +22,45 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Environment } from "./environment";
 import { RobotSoftwareSuite } from "./robotsoftwaresuite";
+import { Source } from "./source";
 var UpdateRobotApplicationResponse = /** @class */ (function (_super) {
     __extends(UpdateRobotApplicationResponse, _super);
     function UpdateRobotApplicationResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=arn" }),
+        SpeakeasyMetadata({ data: "json, name=arn" }),
         __metadata("design:type", String)
     ], UpdateRobotApplicationResponse.prototype, "arn", void 0);
     __decorate([
-        Metadata({ data: "json, name=environment" }),
+        SpeakeasyMetadata({ data: "json, name=environment" }),
         __metadata("design:type", Environment)
     ], UpdateRobotApplicationResponse.prototype, "environment", void 0);
     __decorate([
-        Metadata({ data: "json, name=lastUpdatedAt" }),
+        SpeakeasyMetadata({ data: "json, name=lastUpdatedAt" }),
         __metadata("design:type", Date)
     ], UpdateRobotApplicationResponse.prototype, "lastUpdatedAt", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], UpdateRobotApplicationResponse.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=revisionId" }),
+        SpeakeasyMetadata({ data: "json, name=revisionId" }),
         __metadata("design:type", String)
     ], UpdateRobotApplicationResponse.prototype, "revisionId", void 0);
     __decorate([
-        Metadata({ data: "json, name=robotSoftwareSuite" }),
+        SpeakeasyMetadata({ data: "json, name=robotSoftwareSuite" }),
         __metadata("design:type", RobotSoftwareSuite)
     ], UpdateRobotApplicationResponse.prototype, "robotSoftwareSuite", void 0);
     __decorate([
-        Metadata({ data: "json, name=sources", elemType: shared.Source }),
+        SpeakeasyMetadata({ data: "json, name=sources", elemType: Source }),
         __metadata("design:type", Array)
     ], UpdateRobotApplicationResponse.prototype, "sources", void 0);
     __decorate([
-        Metadata({ data: "json, name=version" }),
+        SpeakeasyMetadata({ data: "json, name=version" }),
         __metadata("design:type", String)
     ], UpdateRobotApplicationResponse.prototype, "version", void 0);
     return UpdateRobotApplicationResponse;

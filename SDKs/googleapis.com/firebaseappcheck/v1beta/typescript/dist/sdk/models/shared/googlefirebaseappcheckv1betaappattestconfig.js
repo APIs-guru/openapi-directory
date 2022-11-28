@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // GoogleFirebaseAppcheckV1betaAppAttestConfig
 /**
  * An app's App Attest configuration object. This configuration controls certain properties of the `AppCheckToken` returned by ExchangeAppAttestAttestation and ExchangeAppAttestAssertion, such as its ttl. Note that the Team ID registered with your app is used as part of the validation process. Please register it via the Firebase Console or programmatically via the [Firebase Management Service](https://firebase.google.com/docs/projects/api/reference/rest/v1beta1/projects.iosApps/patch).
@@ -33,11 +33,11 @@ var GoogleFirebaseAppcheckV1betaAppAttestConfig = /** @class */ (function (_supe
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], GoogleFirebaseAppcheckV1betaAppAttestConfig.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=tokenTtl" }),
+        SpeakeasyMetadata({ data: "json, name=tokenTtl" }),
         __metadata("design:type", String)
     ], GoogleFirebaseAppcheckV1betaAppAttestConfig.prototype, "tokenTtl", void 0);
     return GoogleFirebaseAppcheckV1betaAppAttestConfig;

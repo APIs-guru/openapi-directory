@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class ConnectionExceptionProblemConnectionIssueEnum(str, Enum):
     TOO_MANY_CONNECTIONS = "TooManyConnections"
@@ -10,8 +12,12 @@ class ConnectionExceptionProblemConnectionIssueEnum(str, Enum):
 @dataclass_json
 @dataclass
 class ConnectionExceptionProblem:
-    connection_issue: Optional[ConnectionExceptionProblemConnectionIssueEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'connection_issue' }})
-    detail: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'detail' }})
-    title: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'title' }})
-    type: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    r"""ConnectionExceptionProblem
+    A problem that indicates something is wrong with the connection
+    """
+    
+    detail: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('detail') }})
+    title: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('title') }})
+    type: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('type') }})
+    connection_issue: Optional[ConnectionExceptionProblemConnectionIssueEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('connection_issue') }})
     

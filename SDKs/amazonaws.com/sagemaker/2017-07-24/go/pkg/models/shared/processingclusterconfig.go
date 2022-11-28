@@ -1,5 +1,7 @@
 package shared
 
+// ProcessingClusterConfig
+// Configuration for the cluster used to run a processing job.
 type ProcessingClusterConfig struct {
 	InstanceCount  int64                      `json:"InstanceCount"`
 	InstanceType   ProcessingInstanceTypeEnum `json:"InstanceType"`

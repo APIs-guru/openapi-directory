@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { InstanceQuota } from "./instancequota";
+
 
 
 // ProvisioningQuota
@@ -7,6 +8,6 @@ import { InstanceQuota } from "./instancequota";
  * A provisioning quota for a given project.
 **/
 export class ProvisioningQuota extends SpeakeasyBase {
-  @Metadata({ data: "json, name=instanceQuota" })
+  @SpeakeasyMetadata({ data: "json, name=instanceQuota" })
   instanceQuota?: InstanceQuota;
 }

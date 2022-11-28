@@ -1,6 +1,11 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -24,34 +29,38 @@ class ListFragmentsHeaders:
 @dataclass_json
 @dataclass
 class ListFragmentsRequestBodyFragmentSelector:
-    fragment_selector_type: Optional[shared.FragmentSelectorTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FragmentSelectorType' }})
-    timestamp_range: Optional[shared.TimestampRange] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'TimestampRange' }})
+    r"""ListFragmentsRequestBodyFragmentSelector
+    <p>Describes the timestamp range and timestamp origin of a range of fragments.</p> <p>Only fragments with a start timestamp greater than or equal to the given start time and less than or equal to the end time are returned. For example, if a stream contains fragments with the following start timestamps: </p> <ul> <li> <p>00:00:00</p> </li> <li> <p>00:00:02</p> </li> <li> <p>00:00:04</p> </li> <li> <p>00:00:06</p> </li> </ul> <p> A fragment selector range with a start time of 00:00:01 and end time of 00:00:04 would return the fragments with start times of 00:00:02 and 00:00:04. </p>
+    """
+    
+    fragment_selector_type: Optional[shared.FragmentSelectorTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('FragmentSelectorType') }})
+    timestamp_range: Optional[shared.TimestampRange] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('TimestampRange') }})
     
 
 @dataclass_json
 @dataclass
 class ListFragmentsRequestBody:
-    fragment_selector: Optional[ListFragmentsRequestBodyFragmentSelector] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FragmentSelector' }})
-    max_results: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'MaxResults' }})
-    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'NextToken' }})
-    stream_arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'StreamARN' }})
-    stream_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'StreamName' }})
+    fragment_selector: Optional[ListFragmentsRequestBodyFragmentSelector] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('FragmentSelector') }})
+    max_results: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('MaxResults') }})
+    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('NextToken') }})
+    stream_arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('StreamARN') }})
+    stream_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('StreamName') }})
     
 
 @dataclass
 class ListFragmentsRequest:
-    query_params: ListFragmentsQueryParams = field(default=None)
-    headers: ListFragmentsHeaders = field(default=None)
-    request: ListFragmentsRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: ListFragmentsHeaders = field()
+    query_params: ListFragmentsQueryParams = field()
+    request: ListFragmentsRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class ListFragmentsResponse:
+    content_type: str = field()
+    status_code: int = field()
     client_limit_exceeded_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     invalid_argument_exception: Optional[Any] = field(default=None)
     list_fragments_output: Optional[shared.ListFragmentsOutput] = field(default=None)
     not_authorized_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

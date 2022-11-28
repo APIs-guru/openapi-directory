@@ -1,18 +1,16 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import testorderlineitemproduct
-from . import orderlineitemreturninfo
-from . import orderlineitemshippingdetails
-from . import price
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class TestOrderLineItem:
-    product: Optional[testorderlineitemproduct.TestOrderLineItemProduct] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'product' }})
-    quantity_ordered: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'quantityOrdered' }})
-    return_info: Optional[orderlineitemreturninfo.OrderLineItemReturnInfo] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'returnInfo' }})
-    shipping_details: Optional[orderlineitemshippingdetails.OrderLineItemShippingDetails] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'shippingDetails' }})
-    unit_tax: Optional[price.Price] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'unitTax' }})
+    product: Optional[TestOrderLineItemProduct] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('product') }})
+    quantity_ordered: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('quantityOrdered') }})
+    return_info: Optional[OrderLineItemReturnInfo] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('returnInfo') }})
+    shipping_details: Optional[OrderLineItemShippingDetails] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('shippingDetails') }})
+    unit_tax: Optional[Price] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('unitTax') }})
     

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Write
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Arguments to insert, update, insert_or_update, and replace operations.
 **/
 export class Write extends SpeakeasyBase {
-  @Metadata({ data: "json, name=columns" })
+  @SpeakeasyMetadata({ data: "json, name=columns" })
   columns?: string[];
 
-  @Metadata({ data: "json, name=table" })
+  @SpeakeasyMetadata({ data: "json, name=table" })
   table?: string;
 
-  @Metadata({ data: "json, name=values" })
+  @SpeakeasyMetadata({ data: "json, name=values" })
   values?: any[][];
 }

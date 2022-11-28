@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // BankTransferCancelRequest
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * BankTransferCancelRequest defines the request schema for `/bank_transfer/cancel`
 **/
 export class BankTransferCancelRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=bank_transfer_id" })
+  @SpeakeasyMetadata({ data: "json, name=bank_transfer_id" })
   bankTransferId: string;
 
-  @Metadata({ data: "json, name=client_id" })
+  @SpeakeasyMetadata({ data: "json, name=client_id" })
   clientId?: string;
 
-  @Metadata({ data: "json, name=secret" })
+  @SpeakeasyMetadata({ data: "json, name=secret" })
   secret?: string;
 }

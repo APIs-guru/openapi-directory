@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DsRecord } from "./dsrecord";
+
 
 
 // CustomDns
@@ -8,9 +8,9 @@ import { DsRecord } from "./dsrecord";
  * Configuration for an arbitrary DNS provider.
 **/
 export class CustomDns extends SpeakeasyBase {
-  @Metadata({ data: "json, name=dsRecords", elemType: shared.DsRecord })
+  @SpeakeasyMetadata({ data: "json, name=dsRecords", elemType: DsRecord })
   dsRecords?: DsRecord[];
 
-  @Metadata({ data: "json, name=nameServers" })
+  @SpeakeasyMetadata({ data: "json, name=nameServers" })
   nameServers?: string[];
 }

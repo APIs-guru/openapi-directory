@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // NetworkMountPoint
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Mount point for a network.
 **/
 export class NetworkMountPoint extends SpeakeasyBase {
-  @Metadata({ data: "json, name=defaultGateway" })
+  @SpeakeasyMetadata({ data: "json, name=defaultGateway" })
   defaultGateway?: boolean;
 
-  @Metadata({ data: "json, name=instance" })
+  @SpeakeasyMetadata({ data: "json, name=instance" })
   instance?: string;
 
-  @Metadata({ data: "json, name=ipAddress" })
+  @SpeakeasyMetadata({ data: "json, name=ipAddress" })
   ipAddress?: string;
 
-  @Metadata({ data: "json, name=logicalInterface" })
+  @SpeakeasyMetadata({ data: "json, name=logicalInterface" })
   logicalInterface?: string;
 }

@@ -4,7 +4,7 @@ from typing import Any,Optional
 
 @dataclass
 class RegistryCreateArtifactPathParams:
-    project: str = field(default=None, metadata={'path_param': { 'field_name': 'project', 'style': 'simple', 'explode': False }})
+    project: str = field(metadata={'path_param': { 'field_name': 'project', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -14,14 +14,14 @@ class RegistryCreateArtifactQueryParams:
 
 @dataclass
 class RegistryCreateArtifactRequest:
-    path_params: RegistryCreateArtifactPathParams = field(default=None)
-    query_params: RegistryCreateArtifactQueryParams = field(default=None)
-    request: Any = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    path_params: RegistryCreateArtifactPathParams = field()
+    query_params: RegistryCreateArtifactQueryParams = field()
+    request: Any = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class RegistryCreateArtifactResponse:
+    content_type: str = field()
+    status_code: int = field()
     artifact: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

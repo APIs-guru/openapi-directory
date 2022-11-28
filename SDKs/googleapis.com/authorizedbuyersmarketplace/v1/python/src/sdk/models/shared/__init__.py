@@ -1,4 +1,4 @@
-from .__xgafv_enum import *
+from ._xgafv_enum import *
 from .acceptproposalrequest import *
 from .addcreativerequest import *
 from .addnoterequest import *

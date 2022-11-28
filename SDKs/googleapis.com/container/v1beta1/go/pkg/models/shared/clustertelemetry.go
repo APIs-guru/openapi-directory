@@ -9,6 +9,8 @@ const (
 	ClusterTelemetryTypeEnumSystemOnly  ClusterTelemetryTypeEnum = "SYSTEM_ONLY"
 )
 
+// ClusterTelemetry
+// Telemetry integration for the cluster.
 type ClusterTelemetry struct {
 	Type *ClusterTelemetryTypeEnum `json:"type,omitempty"`
 }

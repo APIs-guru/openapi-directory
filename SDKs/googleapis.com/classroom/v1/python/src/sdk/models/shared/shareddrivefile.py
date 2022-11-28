@@ -1,7 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import drivefile
+from sdk import utils
+from . import *
 
 class SharedDriveFileShareModeEnum(str, Enum):
     UNKNOWN_SHARE_MODE = "UNKNOWN_SHARE_MODE"
@@ -13,6 +15,10 @@ class SharedDriveFileShareModeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class SharedDriveFile:
-    drive_file: Optional[drivefile.DriveFile] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'driveFile' }})
-    share_mode: Optional[SharedDriveFileShareModeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'shareMode' }})
+    r"""SharedDriveFile
+    Drive file that is used as material for course work.
+    """
+    
+    drive_file: Optional[DriveFile] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('driveFile') }})
+    share_mode: Optional[SharedDriveFileShareModeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('shareMode') }})
     

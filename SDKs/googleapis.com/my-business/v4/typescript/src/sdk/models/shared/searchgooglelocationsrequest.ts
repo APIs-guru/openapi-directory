@@ -1,18 +1,19 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import { Location } from "./location";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { LocationInput } from "./location";
 
 
-// SearchGoogleLocationsRequest
+
+// SearchGoogleLocationsRequestInput
 /** 
  * Request message for GoogleLocations.SearchGoogleLocations.
 **/
-export class SearchGoogleLocationsRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=location" })
-  location?: Location;
+export class SearchGoogleLocationsRequestInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=location" })
+  location?: LocationInput;
 
-  @Metadata({ data: "json, name=query" })
+  @SpeakeasyMetadata({ data: "json, name=query" })
   query?: string;
 
-  @Metadata({ data: "json, name=resultCount" })
+  @SpeakeasyMetadata({ data: "json, name=resultCount" })
   resultCount?: number;
 }

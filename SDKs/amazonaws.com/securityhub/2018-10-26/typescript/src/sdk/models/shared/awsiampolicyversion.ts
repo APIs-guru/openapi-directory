@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AwsIamPolicyVersion
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A version of an IAM policy.
 **/
 export class AwsIamPolicyVersion extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CreateDate" })
+  @SpeakeasyMetadata({ data: "json, name=CreateDate" })
   createDate?: string;
 
-  @Metadata({ data: "json, name=IsDefaultVersion" })
+  @SpeakeasyMetadata({ data: "json, name=IsDefaultVersion" })
   isDefaultVersion?: boolean;
 
-  @Metadata({ data: "json, name=VersionId" })
+  @SpeakeasyMetadata({ data: "json, name=VersionId" })
   versionId?: string;
 }

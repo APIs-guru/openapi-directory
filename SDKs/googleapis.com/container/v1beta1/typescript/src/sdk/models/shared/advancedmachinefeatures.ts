@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AdvancedMachineFeatures
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Specifies options for controlling advanced machine features.
 **/
 export class AdvancedMachineFeatures extends SpeakeasyBase {
-  @Metadata({ data: "json, name=threadsPerCore" })
+  @SpeakeasyMetadata({ data: "json, name=threadsPerCore" })
   threadsPerCore?: string;
 }

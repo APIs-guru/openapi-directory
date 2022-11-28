@@ -17,15 +17,13 @@ type GetFloatingIpsQueryParams struct {
 	Sort          *GetFloatingIpsSortEnum `queryParam:"style=form,explode=true,name=sort"`
 }
 
-type GetFloatingIpsRequest struct {
-	QueryParams GetFloatingIpsQueryParams
-}
-
 type GetFloatingIps200ApplicationJSONFloatingIpsDNSPtr struct {
 	DNSPtr string `json:"dns_ptr"`
 	IP     string `json:"ip"`
 }
 
+// GetFloatingIps200ApplicationJSONFloatingIpsHomeLocation
+// Location the Floating IP was created in. Routing is optimized for this Location.
 type GetFloatingIps200ApplicationJSONFloatingIpsHomeLocation struct {
 	City        string  `json:"city"`
 	Country     string  `json:"country"`
@@ -37,6 +35,8 @@ type GetFloatingIps200ApplicationJSONFloatingIpsHomeLocation struct {
 	NetworkZone string  `json:"network_zone"`
 }
 
+// GetFloatingIps200ApplicationJSONFloatingIpsProtection
+// Protection configuration for the Resource
 type GetFloatingIps200ApplicationJSONFloatingIpsProtection struct {
 	Delete bool `json:"delete"`
 }
@@ -79,6 +79,10 @@ type GetFloatingIps200ApplicationJSONMeta struct {
 type GetFloatingIps200ApplicationJSON struct {
 	FloatingIps []GetFloatingIps200ApplicationJSONFloatingIps `json:"floating_ips"`
 	Meta        *GetFloatingIps200ApplicationJSONMeta         `json:"meta,omitempty"`
+}
+
+type GetFloatingIpsRequest struct {
+	QueryParams GetFloatingIpsQueryParams
 }
 
 type GetFloatingIpsResponse struct {

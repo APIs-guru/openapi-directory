@@ -9,6 +9,8 @@ const (
 	WebSecurityScannerSettingsServiceEnablementStateEnumDisabled                   WebSecurityScannerSettingsServiceEnablementStateEnum = "DISABLED"
 )
 
+// WebSecurityScannerSettings
+// Resource capturing the settings for the Web Security Scanner service.
 type WebSecurityScannerSettings struct {
 	Modules                map[string]Config                                     `json:"modules,omitempty"`
 	Name                   *string                                               `json:"name,omitempty"`

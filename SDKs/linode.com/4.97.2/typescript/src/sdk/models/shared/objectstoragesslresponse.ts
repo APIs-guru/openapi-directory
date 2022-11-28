@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ObjectStorageSslResponse
@@ -7,6 +8,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * 
 **/
 export class ObjectStorageSslResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ssl" })
+  @SpeakeasyMetadata({ data: "json, name=ssl" })
   ssl?: boolean;
 }

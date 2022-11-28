@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { MatchmakingRuleSet } from "./matchmakingruleset";
+
 
 
 // CreateMatchmakingRuleSetOutput
@@ -7,6 +8,6 @@ import { MatchmakingRuleSet } from "./matchmakingruleset";
  * Represents the returned data in response to a request operation.
 **/
 export class CreateMatchmakingRuleSetOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=RuleSet" })
+  @SpeakeasyMetadata({ data: "json, name=RuleSet" })
   ruleSet: MatchmakingRuleSet;
 }

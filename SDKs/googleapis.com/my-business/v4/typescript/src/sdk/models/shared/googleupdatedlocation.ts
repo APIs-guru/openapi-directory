@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Location } from "./location";
+
 
 
 // GoogleUpdatedLocation
@@ -7,9 +8,9 @@ import { Location } from "./location";
  * Represents a location that was modified by Google.
 **/
 export class GoogleUpdatedLocation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=diffMask" })
+  @SpeakeasyMetadata({ data: "json, name=diffMask" })
   diffMask?: string;
 
-  @Metadata({ data: "json, name=location" })
+  @SpeakeasyMetadata({ data: "json, name=location" })
   location?: Location;
 }

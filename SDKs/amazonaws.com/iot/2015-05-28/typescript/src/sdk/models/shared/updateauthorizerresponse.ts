@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class UpdateAuthorizerResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=authorizerArn" })
+  @SpeakeasyMetadata({ data: "json, name=authorizerArn" })
   authorizerArn?: string;
 
-  @Metadata({ data: "json, name=authorizerName" })
+  @SpeakeasyMetadata({ data: "json, name=authorizerName" })
   authorizerName?: string;
 }

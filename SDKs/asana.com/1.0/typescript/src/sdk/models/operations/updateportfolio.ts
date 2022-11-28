@@ -1,56 +1,57 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class UpdatePortfolioPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=portfolio_gid" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=portfolio_gid" })
   portfolioGid: string;
 }
 
 
 export class UpdatePortfolioQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=false;name=opt_fields" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=opt_fields" })
   optFields?: string[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=opt_pretty" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=opt_pretty" })
   optPretty?: boolean;
 }
 
 
-export class UpdatePortfolioRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=data" })
-  data?: shared.PortfolioRequest;
-}
-
-
-export class UpdatePortfolioRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: UpdatePortfolioPathParams;
-
-  @Metadata()
-  queryParams: UpdatePortfolioQueryParams;
-
-  @Metadata({ data: "request, media_type=application/json" })
-  request: UpdatePortfolioRequestBody;
+export class UpdatePortfolioRequestBodyInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=data" })
+  data?: shared.PortfolioRequestInput;
 }
 
 
 export class UpdatePortfolio200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data?: shared.PortfolioResponse;
 }
 
 
+export class UpdatePortfolioRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: UpdatePortfolioPathParams;
+
+  @SpeakeasyMetadata()
+  queryParams: UpdatePortfolioQueryParams;
+
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request: UpdatePortfolioRequestBodyInput;
+}
+
+
 export class UpdatePortfolioResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   errorResponse?: shared.ErrorResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   updatePortfolio200ApplicationJsonObject?: UpdatePortfolio200ApplicationJson;
 }

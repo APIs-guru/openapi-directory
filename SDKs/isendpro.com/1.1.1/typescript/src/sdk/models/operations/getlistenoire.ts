@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
+
 
 export enum GetListeNoireGetListeNoireEnum {
     One = "1"
@@ -7,30 +8,30 @@ export enum GetListeNoireGetListeNoireEnum {
 
 
 export class GetListeNoireQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=getListeNoire" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=getListeNoire" })
   getListeNoire: GetListeNoireGetListeNoireEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=keyid" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=keyid" })
   keyid: string;
 }
 
 
 export class GetListeNoireRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetListeNoireQueryParams;
 }
 
 
 export class GetListeNoireResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   erreur?: shared.Erreur;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getListeNoire200ApplicationJsonBinaryString?: Uint8Array;
 }

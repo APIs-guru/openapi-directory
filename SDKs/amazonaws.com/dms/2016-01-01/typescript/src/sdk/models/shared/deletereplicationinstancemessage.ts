@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // DeleteReplicationInstanceMessage
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * <p/>
 **/
 export class DeleteReplicationInstanceMessage extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ReplicationInstanceArn" })
+  @SpeakeasyMetadata({ data: "json, name=ReplicationInstanceArn" })
   replicationInstanceArn: string;
 }

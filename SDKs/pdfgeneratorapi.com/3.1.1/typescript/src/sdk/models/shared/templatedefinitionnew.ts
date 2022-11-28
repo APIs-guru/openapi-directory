@@ -1,11 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Component } from "./component";
 
+
 export enum TemplateDefinitionNewLayoutFormatEnum {
-    A4 = "A4"
-,    Letter = "letter"
-,    Custom = "custom"
+    A4 = "A4",
+    Letter = "letter",
+    Custom = "custom"
 }
 
 
@@ -14,28 +14,28 @@ export enum TemplateDefinitionNewLayoutFormatEnum {
  * Page margins in units
 **/
 export class TemplateDefinitionNewLayoutMargins extends SpeakeasyBase {
-  @Metadata({ data: "json, name=bottom" })
+  @SpeakeasyMetadata({ data: "json, name=bottom" })
   bottom?: number;
 
-  @Metadata({ data: "json, name=left" })
+  @SpeakeasyMetadata({ data: "json, name=left" })
   left?: number;
 
-  @Metadata({ data: "json, name=right" })
+  @SpeakeasyMetadata({ data: "json, name=right" })
   right?: number;
 
-  @Metadata({ data: "json, name=top" })
+  @SpeakeasyMetadata({ data: "json, name=top" })
   top?: number;
 }
 
 export enum TemplateDefinitionNewLayoutOrientationEnum {
-    Portrait = "portrait"
-,    Landscape = "landscape"
+    Portrait = "portrait",
+    Landscape = "landscape"
 }
 
 export enum TemplateDefinitionNewLayoutRepeatLayoutFormatEnum {
-    A4 = "A4"
-,    Letter = "letter"
-,    Custom = "custom"
+    A4 = "A4",
+    Letter = "letter",
+    Custom = "custom"
 }
 
 
@@ -44,19 +44,19 @@ export enum TemplateDefinitionNewLayoutRepeatLayoutFormatEnum {
  * Defines page size if layout is repeated on the page e.g sheet labels
 **/
 export class TemplateDefinitionNewLayoutRepeatLayout extends SpeakeasyBase {
-  @Metadata({ data: "json, name=format" })
+  @SpeakeasyMetadata({ data: "json, name=format" })
   format?: TemplateDefinitionNewLayoutRepeatLayoutFormatEnum;
 
-  @Metadata({ data: "json, name=height" })
+  @SpeakeasyMetadata({ data: "json, name=height" })
   height?: number;
 
-  @Metadata({ data: "json, name=width" })
+  @SpeakeasyMetadata({ data: "json, name=width" })
   width?: number;
 }
 
 export enum TemplateDefinitionNewLayoutUnitEnum {
-    Cm = "cm"
-,    In = "in"
+    Cm = "cm",
+    In = "in"
 }
 
 
@@ -65,55 +65,55 @@ export enum TemplateDefinitionNewLayoutUnitEnum {
  * Defines template layout (e.g page format, margins).
 **/
 export class TemplateDefinitionNewLayout extends SpeakeasyBase {
-  @Metadata({ data: "json, name=emptyLabels" })
+  @SpeakeasyMetadata({ data: "json, name=emptyLabels" })
   emptyLabels?: number;
 
-  @Metadata({ data: "json, name=format" })
+  @SpeakeasyMetadata({ data: "json, name=format" })
   format?: TemplateDefinitionNewLayoutFormatEnum;
 
-  @Metadata({ data: "json, name=height" })
+  @SpeakeasyMetadata({ data: "json, name=height" })
   height?: number;
 
-  @Metadata({ data: "json, name=margins" })
+  @SpeakeasyMetadata({ data: "json, name=margins" })
   margins?: TemplateDefinitionNewLayoutMargins;
 
-  @Metadata({ data: "json, name=orientation" })
+  @SpeakeasyMetadata({ data: "json, name=orientation" })
   orientation?: TemplateDefinitionNewLayoutOrientationEnum;
 
-  @Metadata({ data: "json, name=repeatLayout" })
+  @SpeakeasyMetadata({ data: "json, name=repeatLayout" })
   repeatLayout?: TemplateDefinitionNewLayoutRepeatLayout;
 
-  @Metadata({ data: "json, name=rotaion" })
+  @SpeakeasyMetadata({ data: "json, name=rotaion" })
   rotaion?: number;
 
-  @Metadata({ data: "json, name=unit" })
+  @SpeakeasyMetadata({ data: "json, name=unit" })
   unit?: TemplateDefinitionNewLayoutUnitEnum;
 
-  @Metadata({ data: "json, name=width" })
+  @SpeakeasyMetadata({ data: "json, name=width" })
   width?: number;
 }
 
 
 export class TemplateDefinitionNewPagesMargins extends SpeakeasyBase {
-  @Metadata({ data: "json, name=bottom" })
+  @SpeakeasyMetadata({ data: "json, name=bottom" })
   bottom?: number;
 
-  @Metadata({ data: "json, name=right" })
+  @SpeakeasyMetadata({ data: "json, name=right" })
   right?: number;
 }
 
 
 export class TemplateDefinitionNewPages extends SpeakeasyBase {
-  @Metadata({ data: "json, name=components", elemType: shared.Component })
+  @SpeakeasyMetadata({ data: "json, name=components", elemType: Component })
   components?: Component[];
 
-  @Metadata({ data: "json, name=height" })
+  @SpeakeasyMetadata({ data: "json, name=height" })
   height?: number;
 
-  @Metadata({ data: "json, name=margins" })
+  @SpeakeasyMetadata({ data: "json, name=margins" })
   margins?: TemplateDefinitionNewPagesMargins;
 
-  @Metadata({ data: "json, name=width" })
+  @SpeakeasyMetadata({ data: "json, name=width" })
   width?: number;
 }
 
@@ -123,18 +123,18 @@ export class TemplateDefinitionNewPages extends SpeakeasyBase {
  * Template configuration
 **/
 export class TemplateDefinitionNew extends SpeakeasyBase {
-  @Metadata({ data: "json, name=isDraft" })
+  @SpeakeasyMetadata({ data: "json, name=isDraft" })
   isDraft?: boolean;
 
-  @Metadata({ data: "json, name=layout" })
+  @SpeakeasyMetadata({ data: "json, name=layout" })
   layout?: TemplateDefinitionNewLayout;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 
-  @Metadata({ data: "json, name=pages", elemType: shared.TemplateDefinitionNewPages })
+  @SpeakeasyMetadata({ data: "json, name=pages", elemType: TemplateDefinitionNewPages })
   pages?: TemplateDefinitionNewPages[];
 
-  @Metadata({ data: "json, name=tags" })
+  @SpeakeasyMetadata({ data: "json, name=tags" })
   tags?: string[];
 }

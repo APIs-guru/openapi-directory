@@ -1,47 +1,48 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class MessagesCreatePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=logId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=logId" })
   logId: string;
 }
 
 
 export class MessagesCreateRequests extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/*+json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/*+json" })
   createMessage?: shared.CreateMessage;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   createMessage1?: shared.CreateMessage;
 
-  @Metadata({ data: "request, media_type=application/json-patch+json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json-patch+json" })
   createMessage2?: shared.CreateMessage;
 
-  @Metadata({ data: "request, media_type=text/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=text/json" })
   createMessage3?: shared.CreateMessage;
 }
 
 
 export class MessagesCreateRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: MessagesCreatePathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   request?: MessagesCreateRequests;
 }
 
 
 export class MessagesCreateResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   createMessageResult?: shared.CreateMessageResult;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

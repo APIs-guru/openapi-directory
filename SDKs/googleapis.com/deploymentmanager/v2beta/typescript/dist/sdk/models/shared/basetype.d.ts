@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { CollectionOverride } from "./collectionoverride";
 import { Credential } from "./credential";
 import { Options } from "./options";

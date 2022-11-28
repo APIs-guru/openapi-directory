@@ -25,7 +25,7 @@ type AndroiddeviceprovisioningCustomersConfigurationsCreateQueryParams struct {
 type AndroiddeviceprovisioningCustomersConfigurationsCreateRequest struct {
 	PathParams  AndroiddeviceprovisioningCustomersConfigurationsCreatePathParams
 	QueryParams AndroiddeviceprovisioningCustomersConfigurationsCreateQueryParams
-	Request     *shared.Configuration `request:"mediaType=application/json"`
+	Request     *shared.ConfigurationInput `request:"mediaType=application/json"`
 }
 
 type AndroiddeviceprovisioningCustomersConfigurationsCreateResponse struct {

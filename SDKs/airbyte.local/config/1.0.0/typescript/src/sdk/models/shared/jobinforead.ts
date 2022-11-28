@@ -1,13 +1,13 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AttemptInfoRead } from "./attemptinforead";
 import { JobRead } from "./jobread";
 
 
+
 export class JobInfoRead extends SpeakeasyBase {
-  @Metadata({ data: "json, name=attempts", elemType: shared.AttemptInfoRead })
+  @SpeakeasyMetadata({ data: "json, name=attempts", elemType: AttemptInfoRead })
   attempts: AttemptInfoRead[];
 
-  @Metadata({ data: "json, name=job" })
+  @SpeakeasyMetadata({ data: "json, name=job" })
   job: JobRead;
 }

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // LunRange
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A LUN(Logical Unit Number) range.
 **/
 export class LunRange extends SpeakeasyBase {
-  @Metadata({ data: "json, name=quantity" })
+  @SpeakeasyMetadata({ data: "json, name=quantity" })
   quantity?: number;
 
-  @Metadata({ data: "json, name=sizeGb" })
+  @SpeakeasyMetadata({ data: "json, name=sizeGb" })
   sizeGb?: number;
 }

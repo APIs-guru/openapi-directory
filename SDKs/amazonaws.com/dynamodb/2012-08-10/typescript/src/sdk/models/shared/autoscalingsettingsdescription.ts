@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AutoScalingPolicyDescription } from "./autoscalingpolicydescription";
+
 
 
 // AutoScalingSettingsDescription
@@ -8,18 +8,18 @@ import { AutoScalingPolicyDescription } from "./autoscalingpolicydescription";
  * Represents the auto scaling settings for a global table or global secondary index.
 **/
 export class AutoScalingSettingsDescription extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AutoScalingDisabled" })
+  @SpeakeasyMetadata({ data: "json, name=AutoScalingDisabled" })
   autoScalingDisabled?: boolean;
 
-  @Metadata({ data: "json, name=AutoScalingRoleArn" })
+  @SpeakeasyMetadata({ data: "json, name=AutoScalingRoleArn" })
   autoScalingRoleArn?: string;
 
-  @Metadata({ data: "json, name=MaximumUnits" })
+  @SpeakeasyMetadata({ data: "json, name=MaximumUnits" })
   maximumUnits?: number;
 
-  @Metadata({ data: "json, name=MinimumUnits" })
+  @SpeakeasyMetadata({ data: "json, name=MinimumUnits" })
   minimumUnits?: number;
 
-  @Metadata({ data: "json, name=ScalingPolicies", elemType: shared.AutoScalingPolicyDescription })
+  @SpeakeasyMetadata({ data: "json, name=ScalingPolicies", elemType: AutoScalingPolicyDescription })
   scalingPolicies?: AutoScalingPolicyDescription[];
 }

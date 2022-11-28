@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BulkPublishStatusEnum } from "./bulkpublishstatusenum";
+
 
 
 // GetBulkPublishDetailsResponse
@@ -7,18 +8,18 @@ import { BulkPublishStatusEnum } from "./bulkpublishstatusenum";
  * The output for the GetBulkPublishDetails operation.
 **/
 export class GetBulkPublishDetailsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=BulkPublishCompleteTime" })
+  @SpeakeasyMetadata({ data: "json, name=BulkPublishCompleteTime" })
   bulkPublishCompleteTime?: Date;
 
-  @Metadata({ data: "json, name=BulkPublishStartTime" })
+  @SpeakeasyMetadata({ data: "json, name=BulkPublishStartTime" })
   bulkPublishStartTime?: Date;
 
-  @Metadata({ data: "json, name=BulkPublishStatus" })
+  @SpeakeasyMetadata({ data: "json, name=BulkPublishStatus" })
   bulkPublishStatus?: BulkPublishStatusEnum;
 
-  @Metadata({ data: "json, name=FailureMessage" })
+  @SpeakeasyMetadata({ data: "json, name=FailureMessage" })
   failureMessage?: string;
 
-  @Metadata({ data: "json, name=IdentityPoolId" })
+  @SpeakeasyMetadata({ data: "json, name=IdentityPoolId" })
   identityPoolId?: string;
 }

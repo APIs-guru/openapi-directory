@@ -1,5 +1,7 @@
 package shared
 
+// PaginatedBranches
+// A paginated list of branches.
 type PaginatedBranches struct {
 	Next     *string                  `json:"next,omitempty"`
 	Page     *int64                   `json:"page,omitempty"`

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var ImageOcrPostHeaders = /** @class */ (function (_super) {
     __extends(ImageOcrPostHeaders, _super);
@@ -30,15 +30,15 @@ var ImageOcrPostHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=language" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=language" }),
         __metadata("design:type", String)
     ], ImageOcrPostHeaders.prototype, "language", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=preprocessing" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=preprocessing" }),
         __metadata("design:type", String)
     ], ImageOcrPostHeaders.prototype, "preprocessing", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=recognitionMode" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=recognitionMode" }),
         __metadata("design:type", String)
     ], ImageOcrPostHeaders.prototype, "recognitionMode", void 0);
     return ImageOcrPostHeaders;
@@ -50,11 +50,11 @@ var ImageOcrPostRequestBodyImageFile = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "multipart_form, content=true" }),
+        SpeakeasyMetadata({ data: "multipart_form, content=true" }),
         __metadata("design:type", Uint8Array)
     ], ImageOcrPostRequestBodyImageFile.prototype, "content", void 0);
     __decorate([
-        Metadata({ data: "multipart_form, name=imageFile" }),
+        SpeakeasyMetadata({ data: "multipart_form, name=imageFile" }),
         __metadata("design:type", String)
     ], ImageOcrPostRequestBodyImageFile.prototype, "imageFile", void 0);
     return ImageOcrPostRequestBodyImageFile;
@@ -66,7 +66,7 @@ var ImageOcrPostRequestBody = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "multipart_form, file=true" }),
+        SpeakeasyMetadata({ data: "multipart_form, file=true" }),
         __metadata("design:type", ImageOcrPostRequestBodyImageFile)
     ], ImageOcrPostRequestBody.prototype, "imageFile", void 0);
     return ImageOcrPostRequestBody;
@@ -78,7 +78,7 @@ var ImageOcrPostSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeApikey)
     ], ImageOcrPostSecurity.prototype, "apikey", void 0);
     return ImageOcrPostSecurity;
@@ -90,15 +90,15 @@ var ImageOcrPostRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ImageOcrPostHeaders)
     ], ImageOcrPostRequest.prototype, "headers", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=multipart/form-data" }),
+        SpeakeasyMetadata({ data: "request, media_type=multipart/form-data" }),
         __metadata("design:type", ImageOcrPostRequestBody)
     ], ImageOcrPostRequest.prototype, "request", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ImageOcrPostSecurity)
     ], ImageOcrPostRequest.prototype, "security", void 0);
     return ImageOcrPostRequest;
@@ -110,19 +110,19 @@ var ImageOcrPostResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], ImageOcrPostResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], ImageOcrPostResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.ImageToTextResponse)
     ], ImageOcrPostResponse.prototype, "imageToTextResponse", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], ImageOcrPostResponse.prototype, "statusCode", void 0);
     return ImageOcrPostResponse;

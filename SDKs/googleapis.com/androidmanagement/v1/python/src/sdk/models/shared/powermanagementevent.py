@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class PowerManagementEventEventTypeEnum(str, Enum):
     POWER_MANAGEMENT_EVENT_TYPE_UNSPECIFIED = "POWER_MANAGEMENT_EVENT_TYPE_UNSPECIFIED"
@@ -16,7 +18,11 @@ class PowerManagementEventEventTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class PowerManagementEvent:
-    battery_level: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'batteryLevel' }})
-    create_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'createTime' }})
-    event_type: Optional[PowerManagementEventEventTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'eventType' }})
+    r"""PowerManagementEvent
+    A power management event.
+    """
+    
+    battery_level: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('batteryLevel') }})
+    create_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('createTime') }})
+    event_type: Optional[PowerManagementEventEventTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('eventType') }})
     

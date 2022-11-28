@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // VMeterToActivate
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Actives a virtual Meter
 **/
 export class VMeterToActivate extends SpeakeasyBase {
-  @Metadata({ data: "json, name=SerialNumber, form, name=SerialNumber;" })
+  @SpeakeasyMetadata({ data: "json, name=SerialNumber, form, name=SerialNumber;" })
   serialNumber?: string;
 }

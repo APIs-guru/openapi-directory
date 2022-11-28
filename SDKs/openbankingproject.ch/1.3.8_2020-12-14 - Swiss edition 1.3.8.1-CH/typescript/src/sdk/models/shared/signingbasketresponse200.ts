@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { LinksSigningBasket } from "./linkssigningbasket";
 import { TransactionStatusSbsEnum } from "./transactionstatussbsenum";
+
 
 
 // SigningBasketResponse200
@@ -14,15 +15,15 @@ import { TransactionStatusSbsEnum } from "./transactionstatussbsenum";
  * 
 **/
 export class SigningBasketResponse200 extends SpeakeasyBase {
-  @Metadata({ data: "json, name=_links" })
+  @SpeakeasyMetadata({ data: "json, name=_links" })
   links?: LinksSigningBasket;
 
-  @Metadata({ data: "json, name=consents" })
+  @SpeakeasyMetadata({ data: "json, name=consents" })
   consents?: string[];
 
-  @Metadata({ data: "json, name=payments" })
+  @SpeakeasyMetadata({ data: "json, name=payments" })
   payments?: string[];
 
-  @Metadata({ data: "json, name=transactionStatus" })
+  @SpeakeasyMetadata({ data: "json, name=transactionStatus" })
   transactionStatus: TransactionStatusSbsEnum;
 }

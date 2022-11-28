@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ContainerServicePower
@@ -6,21 +7,21 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * <p>Describes the powers that can be specified for an Amazon Lightsail container service.</p> <p>The power specifies the amount of RAM, the number of vCPUs, and the base price of the container service.</p>
 **/
 export class ContainerServicePower extends SpeakeasyBase {
-  @Metadata({ data: "json, name=cpuCount" })
+  @SpeakeasyMetadata({ data: "json, name=cpuCount" })
   cpuCount?: number;
 
-  @Metadata({ data: "json, name=isActive" })
+  @SpeakeasyMetadata({ data: "json, name=isActive" })
   isActive?: boolean;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=powerId" })
+  @SpeakeasyMetadata({ data: "json, name=powerId" })
   powerId?: string;
 
-  @Metadata({ data: "json, name=price" })
+  @SpeakeasyMetadata({ data: "json, name=price" })
   price?: number;
 
-  @Metadata({ data: "json, name=ramSizeInGb" })
+  @SpeakeasyMetadata({ data: "json, name=ramSizeInGb" })
   ramSizeInGb?: number;
 }

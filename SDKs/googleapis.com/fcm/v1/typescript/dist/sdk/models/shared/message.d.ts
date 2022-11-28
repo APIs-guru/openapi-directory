@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { AndroidConfig } from "./androidconfig";
 import { ApnsConfig } from "./apnsconfig";
 import { FcmOptions } from "./fcmoptions";

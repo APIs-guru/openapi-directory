@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { AntennaDownlinkConfig } from "./antennadownlinkconfig";
 import { AntennaDownlinkDemodDecodeConfig } from "./antennadownlinkdemoddecodeconfig";
 import { AntennaUplinkConfig } from "./antennauplinkconfig";

@@ -9,7 +9,7 @@ type AddUserSecurity struct {
 }
 
 type AddUserRequest struct {
-	Request  shared.User `request:"mediaType=application/json"`
+	Request  shared.UserInput `request:"mediaType=application/json"`
 	Security AddUserSecurity
 }
 

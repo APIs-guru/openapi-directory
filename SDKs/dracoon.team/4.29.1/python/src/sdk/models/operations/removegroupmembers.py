@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class RemoveGroupMembersPathParams:
-    group_id: int = field(default=None, metadata={'path_param': { 'field_name': 'group_id', 'style': 'simple', 'explode': False }})
+    group_id: int = field(metadata={'path_param': { 'field_name': 'group_id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -16,15 +19,15 @@ class RemoveGroupMembersHeaders:
 
 @dataclass
 class RemoveGroupMembersRequest:
-    path_params: RemoveGroupMembersPathParams = field(default=None)
-    headers: RemoveGroupMembersHeaders = field(default=None)
-    request: shared.ChangeGroupMembersRequest = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: RemoveGroupMembersHeaders = field()
+    path_params: RemoveGroupMembersPathParams = field()
+    request: shared.ChangeGroupMembersRequest = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class RemoveGroupMembersResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error_response: Optional[shared.ErrorResponse] = field(default=None)
     group: Optional[shared.Group] = field(default=None)
-    status_code: int = field(default=None)
     

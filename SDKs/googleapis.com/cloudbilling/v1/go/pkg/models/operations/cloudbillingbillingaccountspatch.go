@@ -41,7 +41,7 @@ type CloudbillingBillingAccountsPatchSecurity struct {
 type CloudbillingBillingAccountsPatchRequest struct {
 	PathParams  CloudbillingBillingAccountsPatchPathParams
 	QueryParams CloudbillingBillingAccountsPatchQueryParams
-	Request     *shared.BillingAccount `request:"mediaType=application/json"`
+	Request     *shared.BillingAccountInput `request:"mediaType=application/json"`
 	Security    CloudbillingBillingAccountsPatchSecurity
 }
 

@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import twitter
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class Social:
-    twitter: Optional[twitter.Twitter] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'twitter' }})
+    r"""Social
+    Social networks data
+    """
+    
+    twitter: Optional[Twitter] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('twitter') }})
     

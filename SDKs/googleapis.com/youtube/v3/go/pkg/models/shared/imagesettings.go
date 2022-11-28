@@ -1,5 +1,7 @@
 package shared
 
+// ImageSettings
+// Branding properties for images associated with the channel.
 type ImageSettings struct {
 	BackgroundImageURL                *LocalizedProperty `json:"backgroundImageUrl,omitempty"`
 	BannerExternalURL                 *string            `json:"bannerExternalUrl,omitempty"`

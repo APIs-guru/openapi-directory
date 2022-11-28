@@ -1,14 +1,30 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import vmutilizationmetrics
-from . import vmwarevmdetails
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
+class VMUtilizationInfoInput:
+    r"""VMUtilizationInfoInput
+    Utilization information of a single VM.
+    """
+    
+    utilization: Optional[VMUtilizationMetrics] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('utilization') }})
+    vm_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('vmId') }})
+    vmware_vm_details: Optional[VmwareVMDetailsInput] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('vmwareVmDetails') }})
+    
+
+@dataclass_json
+@dataclass
 class VMUtilizationInfo:
-    utilization: Optional[vmutilizationmetrics.VMUtilizationMetrics] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'utilization' }})
-    vm_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'vmId' }})
-    vmware_vm_details: Optional[vmwarevmdetails.VmwareVMDetails] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'vmwareVmDetails' }})
+    r"""VMUtilizationInfo
+    Utilization information of a single VM.
+    """
+    
+    utilization: Optional[VMUtilizationMetrics] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('utilization') }})
+    vm_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('vmId') }})
+    vmware_vm_details: Optional[VmwareVMDetails] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('vmwareVmDetails') }})
     

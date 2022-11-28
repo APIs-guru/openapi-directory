@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // EncryptionConfiguration
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Describes a custom encryption key that AWS App Runner uses to encrypt copies of the source repository and service logs.
 **/
 export class EncryptionConfiguration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=KmsKey" })
+  @SpeakeasyMetadata({ data: "json, name=KmsKey" })
   kmsKey: string;
 }

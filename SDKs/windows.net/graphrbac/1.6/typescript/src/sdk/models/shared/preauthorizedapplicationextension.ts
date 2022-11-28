@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // PreAuthorizedApplicationExtension
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Representation of an app PreAuthorizedApplicationExtension required by a pre authorized client app.
 **/
 export class PreAuthorizedApplicationExtension extends SpeakeasyBase {
-  @Metadata({ data: "json, name=conditions" })
+  @SpeakeasyMetadata({ data: "json, name=conditions" })
   conditions?: string[];
 }

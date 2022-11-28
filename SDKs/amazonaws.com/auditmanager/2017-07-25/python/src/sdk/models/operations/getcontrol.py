@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class GetControlPathParams:
-    control_id: str = field(default=None, metadata={'path_param': { 'field_name': 'controlId', 'style': 'simple', 'explode': False }})
+    control_id: str = field(metadata={'path_param': { 'field_name': 'controlId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -21,17 +24,17 @@ class GetControlHeaders:
 
 @dataclass
 class GetControlRequest:
-    path_params: GetControlPathParams = field(default=None)
-    headers: GetControlHeaders = field(default=None)
+    headers: GetControlHeaders = field()
+    path_params: GetControlPathParams = field()
     
 
 @dataclass
 class GetControlResponse:
+    content_type: str = field()
+    status_code: int = field()
     access_denied_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     get_control_response: Optional[shared.GetControlResponse] = field(default=None)
     internal_server_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     validation_exception: Optional[Any] = field(default=None)
     

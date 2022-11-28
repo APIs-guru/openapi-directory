@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AttemptStatusEnum } from "./attemptstatusenum";
 var AttemptRead = /** @class */ (function (_super) {
     __extends(AttemptRead, _super);
@@ -30,31 +30,31 @@ var AttemptRead = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=bytesSynced" }),
+        SpeakeasyMetadata({ data: "json, name=bytesSynced" }),
         __metadata("design:type", Number)
     ], AttemptRead.prototype, "bytesSynced", void 0);
     __decorate([
-        Metadata({ data: "json, name=createdAt" }),
+        SpeakeasyMetadata({ data: "json, name=createdAt" }),
         __metadata("design:type", Number)
     ], AttemptRead.prototype, "createdAt", void 0);
     __decorate([
-        Metadata({ data: "json, name=endedAt" }),
+        SpeakeasyMetadata({ data: "json, name=endedAt" }),
         __metadata("design:type", Number)
     ], AttemptRead.prototype, "endedAt", void 0);
     __decorate([
-        Metadata({ data: "json, name=id" }),
+        SpeakeasyMetadata({ data: "json, name=id" }),
         __metadata("design:type", Number)
     ], AttemptRead.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "json, name=recordsSynced" }),
+        SpeakeasyMetadata({ data: "json, name=recordsSynced" }),
         __metadata("design:type", Number)
     ], AttemptRead.prototype, "recordsSynced", void 0);
     __decorate([
-        Metadata({ data: "json, name=status" }),
+        SpeakeasyMetadata({ data: "json, name=status" }),
         __metadata("design:type", String)
     ], AttemptRead.prototype, "status", void 0);
     __decorate([
-        Metadata({ data: "json, name=updatedAt" }),
+        SpeakeasyMetadata({ data: "json, name=updatedAt" }),
         __metadata("design:type", Number)
     ], AttemptRead.prototype, "updatedAt", void 0);
     return AttemptRead;

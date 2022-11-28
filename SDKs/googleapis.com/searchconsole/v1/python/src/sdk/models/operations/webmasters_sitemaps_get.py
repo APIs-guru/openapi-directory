@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class WebmastersSitemapsGetPathParams:
-    feedpath: str = field(default=None, metadata={'path_param': { 'field_name': 'feedpath', 'style': 'simple', 'explode': False }})
-    site_url: str = field(default=None, metadata={'path_param': { 'field_name': 'siteUrl', 'style': 'simple', 'explode': False }})
+    feedpath: str = field(metadata={'path_param': { 'field_name': 'feedpath', 'style': 'simple', 'explode': False }})
+    site_url: str = field(metadata={'path_param': { 'field_name': 'siteUrl', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,14 +27,14 @@ class WebmastersSitemapsGetQueryParams:
 
 @dataclass
 class WebmastersSitemapsGetSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class WebmastersSitemapsGetSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -44,14 +45,14 @@ class WebmastersSitemapsGetSecurity:
 
 @dataclass
 class WebmastersSitemapsGetRequest:
-    path_params: WebmastersSitemapsGetPathParams = field(default=None)
-    query_params: WebmastersSitemapsGetQueryParams = field(default=None)
-    security: WebmastersSitemapsGetSecurity = field(default=None)
+    path_params: WebmastersSitemapsGetPathParams = field()
+    query_params: WebmastersSitemapsGetQueryParams = field()
+    security: WebmastersSitemapsGetSecurity = field()
     
 
 @dataclass
 class WebmastersSitemapsGetResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     wmx_sitemap: Optional[shared.WmxSitemap] = field(default=None)
     

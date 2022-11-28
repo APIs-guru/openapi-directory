@@ -1,25 +1,26 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class PostCqActionsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=authorizableId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=authorizableId" })
   authorizableId: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=changelog" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=changelog" })
   changelog: string;
 }
 
 
 export class PostCqActionsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: PostCqActionsQueryParams;
 }
 
 
 export class PostCqActionsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

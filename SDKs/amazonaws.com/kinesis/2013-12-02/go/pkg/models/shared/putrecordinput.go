@@ -1,5 +1,7 @@
 package shared
 
+// PutRecordInput
+// Represents the input for <code>PutRecord</code>.
 type PutRecordInput struct {
 	Data                      string  `json:"Data"`
 	ExplicitHashKey           *string `json:"ExplicitHashKey,omitempty"`

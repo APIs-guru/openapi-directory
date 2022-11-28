@@ -1,39 +1,40 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum BoxScoresDeltaByDateByCompetitionFormatEnum {
-    Xml = "xml"
-,    Json = "json"
+    Xml = "xml",
+    Json = "json"
 }
 
 
 export class BoxScoresDeltaByDateByCompetitionPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=competition" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=competition" })
   competition: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=date" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=date" })
   date: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=format" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=format" })
   format: BoxScoresDeltaByDateByCompetitionFormatEnum;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=minutes" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=minutes" })
   minutes: string;
 }
 
 
 export class BoxScoresDeltaByDateByCompetitionRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: BoxScoresDeltaByDateByCompetitionPathParams;
 }
 
 
 export class BoxScoresDeltaByDateByCompetitionResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   boxScores?: any[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

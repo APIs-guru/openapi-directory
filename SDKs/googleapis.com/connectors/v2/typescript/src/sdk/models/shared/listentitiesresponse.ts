@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Entity } from "./entity";
+
 
 
 // ListEntitiesResponse
@@ -8,9 +8,9 @@ import { Entity } from "./entity";
  * Response message for EntityService.ListEntities
 **/
 export class ListEntitiesResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=entities", elemType: shared.Entity })
+  @SpeakeasyMetadata({ data: "json, name=entities", elemType: Entity })
   entities?: Entity[];
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 }

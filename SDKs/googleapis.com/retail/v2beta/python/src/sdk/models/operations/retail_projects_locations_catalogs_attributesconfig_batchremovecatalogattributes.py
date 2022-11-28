@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class RetailProjectsLocationsCatalogsAttributesConfigBatchRemoveCatalogAttributesPathParams:
-    attributes_config: str = field(default=None, metadata={'path_param': { 'field_name': 'attributesConfig', 'style': 'simple', 'explode': False }})
+    attributes_config: str = field(metadata={'path_param': { 'field_name': 'attributesConfig', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,21 +26,21 @@ class RetailProjectsLocationsCatalogsAttributesConfigBatchRemoveCatalogAttribute
 
 @dataclass
 class RetailProjectsLocationsCatalogsAttributesConfigBatchRemoveCatalogAttributesSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class RetailProjectsLocationsCatalogsAttributesConfigBatchRemoveCatalogAttributesRequest:
-    path_params: RetailProjectsLocationsCatalogsAttributesConfigBatchRemoveCatalogAttributesPathParams = field(default=None)
-    query_params: RetailProjectsLocationsCatalogsAttributesConfigBatchRemoveCatalogAttributesQueryParams = field(default=None)
+    path_params: RetailProjectsLocationsCatalogsAttributesConfigBatchRemoveCatalogAttributesPathParams = field()
+    query_params: RetailProjectsLocationsCatalogsAttributesConfigBatchRemoveCatalogAttributesQueryParams = field()
+    security: RetailProjectsLocationsCatalogsAttributesConfigBatchRemoveCatalogAttributesSecurity = field()
     request: Optional[shared.GoogleCloudRetailV2betaBatchRemoveCatalogAttributesRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: RetailProjectsLocationsCatalogsAttributesConfigBatchRemoveCatalogAttributesSecurity = field(default=None)
     
 
 @dataclass
 class RetailProjectsLocationsCatalogsAttributesConfigBatchRemoveCatalogAttributesResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_cloud_retail_v2beta_batch_remove_catalog_attributes_response: Optional[shared.GoogleCloudRetailV2betaBatchRemoveCatalogAttributesResponse] = field(default=None)
-    status_code: int = field(default=None)
     

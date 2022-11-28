@@ -4,8 +4,8 @@ from typing import Any,Optional
 
 @dataclass
 class PutInstancesIDAttachmentsNamePathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -15,14 +15,14 @@ class PutInstancesIDAttachmentsNameHeaders:
 
 @dataclass
 class PutInstancesIDAttachmentsNameRequest:
-    path_params: PutInstancesIDAttachmentsNamePathParams = field(default=None)
-    headers: PutInstancesIDAttachmentsNameHeaders = field(default=None)
+    headers: PutInstancesIDAttachmentsNameHeaders = field()
+    path_params: PutInstancesIDAttachmentsNamePathParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'application/octet-stream' }})
     
 
 @dataclass
 class PutInstancesIDAttachmentsNameResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     put_instances_id_attachments_name_200_application_json_any: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

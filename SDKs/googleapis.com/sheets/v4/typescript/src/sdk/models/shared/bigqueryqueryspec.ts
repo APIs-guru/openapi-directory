@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // BigQueryQuerySpec
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Specifies a custom BigQuery query.
 **/
 export class BigQueryQuerySpec extends SpeakeasyBase {
-  @Metadata({ data: "json, name=rawQuery" })
+  @SpeakeasyMetadata({ data: "json, name=rawQuery" })
   rawQuery?: string;
 }

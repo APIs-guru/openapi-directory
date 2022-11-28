@@ -1,62 +1,51 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class DeleteNodeBalancerConfigPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=configId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=configId" })
   configId: number;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=nodeBalancerId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=nodeBalancerId" })
   nodeBalancerId: number;
 }
 
 
-export class DeleteNodeBalancerConfigSecurityOption1 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=bearer" })
-  personalAccessToken: shared.SchemePersonalAccessToken;
-}
-
-
-export class DeleteNodeBalancerConfigSecurityOption2 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
-  oauth: shared.SchemeOauth;
-}
-
-
 export class DeleteNodeBalancerConfigSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, option=true" })
-  option1?: DeleteNodeBalancerConfigSecurityOption1;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" })
+  personalAccessToken?: shared.SchemePersonalAccessToken;
 
-  @Metadata({ data: "security, option=true" })
-  option2?: DeleteNodeBalancerConfigSecurityOption2;
-}
-
-
-export class DeleteNodeBalancerConfigRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: DeleteNodeBalancerConfigPathParams;
-
-  @Metadata()
-  security: DeleteNodeBalancerConfigSecurity;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
+  oauth?: shared.SchemeOauth;
 }
 
 
 export class DeleteNodeBalancerConfigDefaultApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=errors", elemType: shared.ErrorObject })
+  @SpeakeasyMetadata({ data: "json, name=errors", elemType: shared.ErrorObject })
   errors?: shared.ErrorObject[];
 }
 
 
+export class DeleteNodeBalancerConfigRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: DeleteNodeBalancerConfigPathParams;
+
+  @SpeakeasyMetadata()
+  security: DeleteNodeBalancerConfigSecurity;
+}
+
+
 export class DeleteNodeBalancerConfigResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   deleteNodeBalancerConfig200ApplicationJsonObject?: Map<string, any>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   deleteNodeBalancerConfigDefaultApplicationJsonObject?: DeleteNodeBalancerConfigDefaultApplicationJson;
 }

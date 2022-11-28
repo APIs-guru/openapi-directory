@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var UpdateResolverPathParams = /** @class */ (function (_super) {
     __extends(UpdateResolverPathParams, _super);
@@ -30,15 +30,15 @@ var UpdateResolverPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=apiId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=apiId" }),
         __metadata("design:type", String)
     ], UpdateResolverPathParams.prototype, "apiId", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=fieldName" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=fieldName" }),
         __metadata("design:type", String)
     ], UpdateResolverPathParams.prototype, "fieldName", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=typeName" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=typeName" }),
         __metadata("design:type", String)
     ], UpdateResolverPathParams.prototype, "typeName", void 0);
     return UpdateResolverPathParams;
@@ -50,31 +50,31 @@ var UpdateResolverHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
         __metadata("design:type", String)
     ], UpdateResolverHeaders.prototype, "xAmzAlgorithm", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
         __metadata("design:type", String)
     ], UpdateResolverHeaders.prototype, "xAmzContentSha256", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
         __metadata("design:type", String)
     ], UpdateResolverHeaders.prototype, "xAmzCredential", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
         __metadata("design:type", String)
     ], UpdateResolverHeaders.prototype, "xAmzDate", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
         __metadata("design:type", String)
     ], UpdateResolverHeaders.prototype, "xAmzSecurityToken", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
         __metadata("design:type", String)
     ], UpdateResolverHeaders.prototype, "xAmzSignature", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
         __metadata("design:type", String)
     ], UpdateResolverHeaders.prototype, "xAmzSignedHeaders", void 0);
     return UpdateResolverHeaders;
@@ -90,11 +90,11 @@ var UpdateResolverRequestBodyCachingConfig = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=cachingKeys" }),
+        SpeakeasyMetadata({ data: "json, name=cachingKeys" }),
         __metadata("design:type", Array)
     ], UpdateResolverRequestBodyCachingConfig.prototype, "cachingKeys", void 0);
     __decorate([
-        Metadata({ data: "json, name=ttl" }),
+        SpeakeasyMetadata({ data: "json, name=ttl" }),
         __metadata("design:type", Number)
     ], UpdateResolverRequestBodyCachingConfig.prototype, "ttl", void 0);
     return UpdateResolverRequestBodyCachingConfig;
@@ -115,7 +115,7 @@ var UpdateResolverRequestBodyPipelineConfig = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=functions" }),
+        SpeakeasyMetadata({ data: "json, name=functions" }),
         __metadata("design:type", Array)
     ], UpdateResolverRequestBodyPipelineConfig.prototype, "functions", void 0);
     return UpdateResolverRequestBodyPipelineConfig;
@@ -131,15 +131,15 @@ var UpdateResolverRequestBodySyncConfig = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=conflictDetection" }),
+        SpeakeasyMetadata({ data: "json, name=conflictDetection" }),
         __metadata("design:type", String)
     ], UpdateResolverRequestBodySyncConfig.prototype, "conflictDetection", void 0);
     __decorate([
-        Metadata({ data: "json, name=conflictHandler" }),
+        SpeakeasyMetadata({ data: "json, name=conflictHandler" }),
         __metadata("design:type", String)
     ], UpdateResolverRequestBodySyncConfig.prototype, "conflictHandler", void 0);
     __decorate([
-        Metadata({ data: "json, name=lambdaConflictHandlerConfig" }),
+        SpeakeasyMetadata({ data: "json, name=lambdaConflictHandlerConfig" }),
         __metadata("design:type", shared.LambdaConflictHandlerConfig)
     ], UpdateResolverRequestBodySyncConfig.prototype, "lambdaConflictHandlerConfig", void 0);
     return UpdateResolverRequestBodySyncConfig;
@@ -151,31 +151,31 @@ var UpdateResolverRequestBody = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=cachingConfig" }),
+        SpeakeasyMetadata({ data: "json, name=cachingConfig" }),
         __metadata("design:type", UpdateResolverRequestBodyCachingConfig)
     ], UpdateResolverRequestBody.prototype, "cachingConfig", void 0);
     __decorate([
-        Metadata({ data: "json, name=dataSourceName" }),
+        SpeakeasyMetadata({ data: "json, name=dataSourceName" }),
         __metadata("design:type", String)
     ], UpdateResolverRequestBody.prototype, "dataSourceName", void 0);
     __decorate([
-        Metadata({ data: "json, name=kind" }),
+        SpeakeasyMetadata({ data: "json, name=kind" }),
         __metadata("design:type", String)
     ], UpdateResolverRequestBody.prototype, "kind", void 0);
     __decorate([
-        Metadata({ data: "json, name=pipelineConfig" }),
+        SpeakeasyMetadata({ data: "json, name=pipelineConfig" }),
         __metadata("design:type", UpdateResolverRequestBodyPipelineConfig)
     ], UpdateResolverRequestBody.prototype, "pipelineConfig", void 0);
     __decorate([
-        Metadata({ data: "json, name=requestMappingTemplate" }),
+        SpeakeasyMetadata({ data: "json, name=requestMappingTemplate" }),
         __metadata("design:type", String)
     ], UpdateResolverRequestBody.prototype, "requestMappingTemplate", void 0);
     __decorate([
-        Metadata({ data: "json, name=responseMappingTemplate" }),
+        SpeakeasyMetadata({ data: "json, name=responseMappingTemplate" }),
         __metadata("design:type", String)
     ], UpdateResolverRequestBody.prototype, "responseMappingTemplate", void 0);
     __decorate([
-        Metadata({ data: "json, name=syncConfig" }),
+        SpeakeasyMetadata({ data: "json, name=syncConfig" }),
         __metadata("design:type", UpdateResolverRequestBodySyncConfig)
     ], UpdateResolverRequestBody.prototype, "syncConfig", void 0);
     return UpdateResolverRequestBody;
@@ -187,15 +187,15 @@ var UpdateResolverRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", UpdateResolverPathParams)
     ], UpdateResolverRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", UpdateResolverHeaders)
     ], UpdateResolverRequest.prototype, "headers", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", UpdateResolverRequestBody)
     ], UpdateResolverRequest.prototype, "request", void 0);
     return UpdateResolverRequest;
@@ -207,31 +207,31 @@ var UpdateResolverResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], UpdateResolverResponse.prototype, "concurrentModificationException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], UpdateResolverResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], UpdateResolverResponse.prototype, "internalFailureException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], UpdateResolverResponse.prototype, "notFoundException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], UpdateResolverResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], UpdateResolverResponse.prototype, "unauthorizedException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.UpdateResolverResponse)
     ], UpdateResolverResponse.prototype, "updateResolverResponse", void 0);
     return UpdateResolverResponse;

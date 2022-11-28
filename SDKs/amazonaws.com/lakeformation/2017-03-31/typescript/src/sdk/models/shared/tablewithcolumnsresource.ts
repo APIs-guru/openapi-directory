@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ColumnWildcard } from "./columnwildcard";
+
 
 
 // TableWithColumnsResource
@@ -7,18 +8,18 @@ import { ColumnWildcard } from "./columnwildcard";
  * <p>A structure for a table with columns object. This object is only used when granting a SELECT permission.</p> <p>This object must take a value for at least one of <code>ColumnsNames</code>, <code>ColumnsIndexes</code>, or <code>ColumnsWildcard</code>.</p>
 **/
 export class TableWithColumnsResource extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CatalogId" })
+  @SpeakeasyMetadata({ data: "json, name=CatalogId" })
   catalogId?: string;
 
-  @Metadata({ data: "json, name=ColumnNames" })
+  @SpeakeasyMetadata({ data: "json, name=ColumnNames" })
   columnNames?: string[];
 
-  @Metadata({ data: "json, name=ColumnWildcard" })
+  @SpeakeasyMetadata({ data: "json, name=ColumnWildcard" })
   columnWildcard?: ColumnWildcard;
 
-  @Metadata({ data: "json, name=DatabaseName" })
+  @SpeakeasyMetadata({ data: "json, name=DatabaseName" })
   databaseName: string;
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name: string;
 }

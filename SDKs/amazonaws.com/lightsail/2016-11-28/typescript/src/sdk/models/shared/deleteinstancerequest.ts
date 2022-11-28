@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DeleteInstanceRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=forceDeleteAddOns" })
+  @SpeakeasyMetadata({ data: "json, name=forceDeleteAddOns" })
   forceDeleteAddOns?: boolean;
 
-  @Metadata({ data: "json, name=instanceName" })
+  @SpeakeasyMetadata({ data: "json, name=instanceName" })
   instanceName: string;
 }

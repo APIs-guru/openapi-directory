@@ -1,5 +1,7 @@
 package shared
 
+// CommentThreadSnippet
+// Basic details about a comment thread.
 type CommentThreadSnippet struct {
 	CanReply        *bool    `json:"canReply,omitempty"`
 	ChannelID       *string  `json:"channelId,omitempty"`

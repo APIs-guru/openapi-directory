@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // JourneyPushMessage
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Specifies the message configuration for a push notification that's sent to participants in a journey.
 **/
 export class JourneyPushMessage extends SpeakeasyBase {
-  @Metadata({ data: "json, name=TimeToLive" })
+  @SpeakeasyMetadata({ data: "json, name=TimeToLive" })
   timeToLive?: string;
 }

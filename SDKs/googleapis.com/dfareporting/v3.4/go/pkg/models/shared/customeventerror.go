@@ -10,6 +10,8 @@ const (
 	CustomEventErrorCodeEnumNotFound         CustomEventErrorCodeEnum = "NOT_FOUND"
 )
 
+// CustomEventError
+// The error code and description for a custom event that failed to insert.
 type CustomEventError struct {
 	Code    *CustomEventErrorCodeEnum `json:"code,omitempty"`
 	Kind    *string                   `json:"kind,omitempty"`

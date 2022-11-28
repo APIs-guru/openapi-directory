@@ -1,11 +1,12 @@
 
 
+
 export enum ExecutionStatusEnum {
-    Pending = "Pending"
-,    Completed = "Completed"
-,    CompletedWithViolations = "CompletedWithViolations"
-,    InProgress = "InProgress"
-,    Failed = "Failed"
-,    Stopping = "Stopping"
-,    Stopped = "Stopped"
+    Pending = "Pending",
+    Completed = "Completed",
+    CompletedWithViolations = "CompletedWithViolations",
+    InProgress = "InProgress",
+    Failed = "Failed",
+    Stopping = "Stopping",
+    Stopped = "Stopped"
 }

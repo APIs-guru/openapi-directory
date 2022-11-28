@@ -1,10 +1,15 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
+from sdk.models import shared
 
 
 @dataclass
 class GetWorkspaceIDActivitiesPathParams:
-    workspace_id: str = field(default=None, metadata={'path_param': { 'field_name': 'workspace_id', 'style': 'simple', 'explode': False }})
+    workspace_id: str = field(metadata={'path_param': { 'field_name': 'workspace_id', 'style': 'simple', 'explode': False }})
     
 class GetWorkspaceIDActivitiesActivityTypeEnum(str, Enum):
     DISCORD_MESSAGE_SENT = "discord:message:sent"
@@ -83,18 +88,18 @@ class GetWorkspaceIDActivitiesQueryParams:
 
 @dataclass
 class GetWorkspaceIDActivitiesSecurity:
-    bearer: shared.SchemeBearer = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    bearer: shared.SchemeBearer = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
     
 
 @dataclass
 class GetWorkspaceIDActivitiesRequest:
-    path_params: GetWorkspaceIDActivitiesPathParams = field(default=None)
-    query_params: GetWorkspaceIDActivitiesQueryParams = field(default=None)
-    security: GetWorkspaceIDActivitiesSecurity = field(default=None)
+    path_params: GetWorkspaceIDActivitiesPathParams = field()
+    query_params: GetWorkspaceIDActivitiesQueryParams = field()
+    security: GetWorkspaceIDActivitiesSecurity = field()
     
 
 @dataclass
 class GetWorkspaceIDActivitiesResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

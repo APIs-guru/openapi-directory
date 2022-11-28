@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DimensionFilter } from "./dimensionfilter";
+
 
 
 // DimensionValueRequest
@@ -8,18 +8,18 @@ import { DimensionFilter } from "./dimensionfilter";
  * Represents a DimensionValuesRequest.
 **/
 export class DimensionValueRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=dimensionName" })
+  @SpeakeasyMetadata({ data: "json, name=dimensionName" })
   dimensionName?: string;
 
-  @Metadata({ data: "json, name=endDate" })
+  @SpeakeasyMetadata({ data: "json, name=endDate" })
   endDate?: Date;
 
-  @Metadata({ data: "json, name=filters", elemType: shared.DimensionFilter })
+  @SpeakeasyMetadata({ data: "json, name=filters", elemType: DimensionFilter })
   filters?: DimensionFilter[];
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=startDate" })
+  @SpeakeasyMetadata({ data: "json, name=startDate" })
   startDate?: Date;
 }

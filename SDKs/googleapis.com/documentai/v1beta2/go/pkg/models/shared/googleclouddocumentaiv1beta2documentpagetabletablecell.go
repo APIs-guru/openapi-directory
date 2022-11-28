@@ -1,5 +1,7 @@
 package shared
 
+// GoogleCloudDocumentaiV1beta2DocumentPageTableTableCell
+// A cell representation inside the table.
 type GoogleCloudDocumentaiV1beta2DocumentPageTableTableCell struct {
 	ColSpan           *int32                                                     `json:"colSpan,omitempty"`
 	DetectedLanguages []GoogleCloudDocumentaiV1beta2DocumentPageDetectedLanguage `json:"detectedLanguages,omitempty"`

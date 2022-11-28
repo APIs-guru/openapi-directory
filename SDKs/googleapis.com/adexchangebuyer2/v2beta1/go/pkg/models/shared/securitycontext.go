@@ -7,6 +7,8 @@ const (
 	SecurityContextSecuritiesEnumSsl      SecurityContextSecuritiesEnum = "SSL"
 )
 
+// SecurityContext
+// Output only. A security context.
 type SecurityContext struct {
 	Securities []SecurityContextSecuritiesEnum `json:"securities,omitempty"`
 }

@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { StreamingSession } from "./streamingsession";
 
 
+
 export class GetStreamingSessionResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=session" })
+  @SpeakeasyMetadata({ data: "json, name=session" })
   session?: StreamingSession;
 }

@@ -12,6 +12,8 @@ const (
 	GoogleAnalyticsAdminV1alphaAccessStringFilterMatchTypeEnumPartialRegexp        GoogleAnalyticsAdminV1alphaAccessStringFilterMatchTypeEnum = "PARTIAL_REGEXP"
 )
 
+// GoogleAnalyticsAdminV1alphaAccessStringFilter
+// The filter for strings.
 type GoogleAnalyticsAdminV1alphaAccessStringFilter struct {
 	CaseSensitive *bool                                                       `json:"caseSensitive,omitempty"`
 	MatchType     *GoogleAnalyticsAdminV1alphaAccessStringFilterMatchTypeEnum `json:"matchType,omitempty"`

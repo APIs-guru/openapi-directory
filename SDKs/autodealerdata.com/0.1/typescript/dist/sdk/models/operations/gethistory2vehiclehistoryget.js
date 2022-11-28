@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetHistory2VehicleHistoryGetQueryParams = /** @class */ (function (_super) {
     __extends(GetHistory2VehicleHistoryGetQueryParams, _super);
@@ -30,11 +30,11 @@ var GetHistory2VehicleHistoryGetQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=jwt" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=jwt" }),
         __metadata("design:type", String)
     ], GetHistory2VehicleHistoryGetQueryParams.prototype, "jwt", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=vin" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=vin" }),
         __metadata("design:type", String)
     ], GetHistory2VehicleHistoryGetQueryParams.prototype, "vin", void 0);
     return GetHistory2VehicleHistoryGetQueryParams;
@@ -46,7 +46,7 @@ var GetHistory2VehicleHistoryGetRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetHistory2VehicleHistoryGetQueryParams)
     ], GetHistory2VehicleHistoryGetRequest.prototype, "queryParams", void 0);
     return GetHistory2VehicleHistoryGetRequest;
@@ -58,19 +58,19 @@ var GetHistory2VehicleHistoryGetResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetHistory2VehicleHistoryGetResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.HttpValidationError)
     ], GetHistory2VehicleHistoryGetResponse.prototype, "httpValidationError", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.HistoryResp)
     ], GetHistory2VehicleHistoryGetResponse.prototype, "historyResp", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetHistory2VehicleHistoryGetResponse.prototype, "statusCode", void 0);
     return GetHistory2VehicleHistoryGetResponse;

@@ -10,7 +10,7 @@ import (
 	"strings"
 )
 
-var Servers = []string{
+var ServerList = []string{
 	"http://codestar-connections.{region}.amazonaws.com",
 	"https://codestar-connections.{region}.amazonaws.com",
 	"http://codestar-connections.{region}.amazonaws.com.cn",
@@ -21,10 +21,15 @@ type HTTPClient interface {
 	Do(req *http.Request) (*http.Response, error)
 }
 
+// SDK Documentation: https://docs.aws.amazon.com/codestar-connections/ - Amazon Web Services documentation
 type SDK struct {
-	defaultClient  HTTPClient
-	securityClient HTTPClient
-	serverURL      string
+	_defaultClient  HTTPClient
+	_securityClient HTTPClient
+	_security       *shared.Security
+	_serverURL      string
+	_language       string
+	_sdkVersion     string
+	_genVersion     string
 }
 
 type SDKOption func(*SDK)
@@ -35,33 +40,55 @@ func WithServerURL(serverURL string, params map[string]string) SDKOption {
 			serverURL = utils.ReplaceParameters(serverURL, params)
 		}
 
-		sdk.serverURL = serverURL
+		sdk._serverURL = serverURL
+	}
+}
+
+func WithClient(client HTTPClient) SDKOption {
+	return func(sdk *SDK) {
+		sdk._defaultClient = client
 	}
 }
 
 func WithSecurity(security shared.Security) SDKOption {
 	return func(sdk *SDK) {
-		sdk.securityClient = utils.CreateSecurityClient(security)
+		sdk._security = &security
 	}
 }
 
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
-		defaultClient:  http.DefaultClient,
-		securityClient: http.DefaultClient,
+		_language:   "go",
+		_sdkVersion: "",
+		_genVersion: "internal",
 	}
 	for _, opt := range opts {
 		opt(sdk)
 	}
-	if sdk.serverURL == "" {
-		sdk.serverURL = Servers[0]
+
+	if sdk._defaultClient == nil {
+		sdk._defaultClient = http.DefaultClient
+	}
+	if sdk._securityClient == nil {
+
+		if sdk._security != nil {
+			sdk._securityClient = utils.ConfigureSecurityClient(sdk._defaultClient, sdk._security)
+		} else {
+			sdk._securityClient = sdk._defaultClient
+		}
+
+	}
+
+	if sdk._serverURL == "" {
+		sdk._serverURL = ServerList[0]
 	}
 
 	return sdk
 }
 
+// CreateConnection - Creates a connection that can then be given to other AWS services like CodePipeline so that it can access third-party code repositories. The connection is in pending status until the third-party connection handshake is completed from the console.
 func (s *SDK) CreateConnection(ctx context.Context, request operations.CreateConnectionRequest) (*operations.CreateConnectionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=com.amazonaws.codestar.connections.CodeStar_connections_20191201.CreateConnection"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -81,7 +108,7 @@ func (s *SDK) CreateConnection(ctx context.Context, request operations.CreateCon
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -141,8 +168,9 @@ func (s *SDK) CreateConnection(ctx context.Context, request operations.CreateCon
 	return res, nil
 }
 
+// CreateHost - <p>Creates a resource that represents the infrastructure where a third-party provider is installed. The host is used when you create connections to an installed third-party provider type, such as GitHub Enterprise Server. You create one host for all connections to that provider.</p> <note> <p>A host created through the CLI or the SDK is in `PENDING` status by default. You can make its status `AVAILABLE` by setting up the host in the console.</p> </note>
 func (s *SDK) CreateHost(ctx context.Context, request operations.CreateHostRequest) (*operations.CreateHostResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=com.amazonaws.codestar.connections.CodeStar_connections_20191201.CreateHost"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -162,7 +190,7 @@ func (s *SDK) CreateHost(ctx context.Context, request operations.CreateHostReque
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -202,8 +230,9 @@ func (s *SDK) CreateHost(ctx context.Context, request operations.CreateHostReque
 	return res, nil
 }
 
+// DeleteConnection - The connection to be deleted.
 func (s *SDK) DeleteConnection(ctx context.Context, request operations.DeleteConnectionRequest) (*operations.DeleteConnectionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=com.amazonaws.codestar.connections.CodeStar_connections_20191201.DeleteConnection"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -223,7 +252,7 @@ func (s *SDK) DeleteConnection(ctx context.Context, request operations.DeleteCon
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -263,8 +292,9 @@ func (s *SDK) DeleteConnection(ctx context.Context, request operations.DeleteCon
 	return res, nil
 }
 
+// DeleteHost - <p>The host to be deleted. Before you delete a host, all connections associated to the host must be deleted.</p> <note> <p>A host cannot be deleted if it is in the VPC_CONFIG_INITIALIZING or VPC_CONFIG_DELETING state.</p> </note>
 func (s *SDK) DeleteHost(ctx context.Context, request operations.DeleteHostRequest) (*operations.DeleteHostResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=com.amazonaws.codestar.connections.CodeStar_connections_20191201.DeleteHost"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -284,7 +314,7 @@ func (s *SDK) DeleteHost(ctx context.Context, request operations.DeleteHostReque
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -334,8 +364,9 @@ func (s *SDK) DeleteHost(ctx context.Context, request operations.DeleteHostReque
 	return res, nil
 }
 
+// GetConnection - Returns the connection ARN and details such as status, owner, and provider type.
 func (s *SDK) GetConnection(ctx context.Context, request operations.GetConnectionRequest) (*operations.GetConnectionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=com.amazonaws.codestar.connections.CodeStar_connections_20191201.GetConnection"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -355,7 +386,7 @@ func (s *SDK) GetConnection(ctx context.Context, request operations.GetConnectio
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -405,8 +436,9 @@ func (s *SDK) GetConnection(ctx context.Context, request operations.GetConnectio
 	return res, nil
 }
 
+// GetHost - Returns the host ARN and details such as status, provider type, endpoint, and, if applicable, the VPC configuration.
 func (s *SDK) GetHost(ctx context.Context, request operations.GetHostRequest) (*operations.GetHostResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=com.amazonaws.codestar.connections.CodeStar_connections_20191201.GetHost"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -426,7 +458,7 @@ func (s *SDK) GetHost(ctx context.Context, request operations.GetHostRequest) (*
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -476,8 +508,9 @@ func (s *SDK) GetHost(ctx context.Context, request operations.GetHostRequest) (*
 	return res, nil
 }
 
+// ListConnections - Lists the connections associated with your account.
 func (s *SDK) ListConnections(ctx context.Context, request operations.ListConnectionsRequest) (*operations.ListConnectionsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=com.amazonaws.codestar.connections.CodeStar_connections_20191201.ListConnections"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -499,7 +532,7 @@ func (s *SDK) ListConnections(ctx context.Context, request operations.ListConnec
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -529,8 +562,9 @@ func (s *SDK) ListConnections(ctx context.Context, request operations.ListConnec
 	return res, nil
 }
 
+// ListHosts - Lists the hosts associated with your account.
 func (s *SDK) ListHosts(ctx context.Context, request operations.ListHostsRequest) (*operations.ListHostsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=com.amazonaws.codestar.connections.CodeStar_connections_20191201.ListHosts"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -552,7 +586,7 @@ func (s *SDK) ListHosts(ctx context.Context, request operations.ListHostsRequest
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -582,8 +616,9 @@ func (s *SDK) ListHosts(ctx context.Context, request operations.ListHostsRequest
 	return res, nil
 }
 
+// ListTagsForResource - Gets the set of key-value pairs (metadata) that are used to manage the resource.
 func (s *SDK) ListTagsForResource(ctx context.Context, request operations.ListTagsForResourceRequest) (*operations.ListTagsForResourceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=com.amazonaws.codestar.connections.CodeStar_connections_20191201.ListTagsForResource"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -603,7 +638,7 @@ func (s *SDK) ListTagsForResource(ctx context.Context, request operations.ListTa
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -643,8 +678,9 @@ func (s *SDK) ListTagsForResource(ctx context.Context, request operations.ListTa
 	return res, nil
 }
 
+// TagResource - Adds to or modifies the tags of the given resource. Tags are metadata that can be used to manage a resource.
 func (s *SDK) TagResource(ctx context.Context, request operations.TagResourceRequest) (*operations.TagResourceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=com.amazonaws.codestar.connections.CodeStar_connections_20191201.TagResource"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -664,7 +700,7 @@ func (s *SDK) TagResource(ctx context.Context, request operations.TagResourceReq
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -714,8 +750,9 @@ func (s *SDK) TagResource(ctx context.Context, request operations.TagResourceReq
 	return res, nil
 }
 
+// UntagResource - Removes tags from an AWS resource.
 func (s *SDK) UntagResource(ctx context.Context, request operations.UntagResourceRequest) (*operations.UntagResourceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=com.amazonaws.codestar.connections.CodeStar_connections_20191201.UntagResource"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -735,7 +772,7 @@ func (s *SDK) UntagResource(ctx context.Context, request operations.UntagResourc
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -775,8 +812,9 @@ func (s *SDK) UntagResource(ctx context.Context, request operations.UntagResourc
 	return res, nil
 }
 
+// UpdateHost - Updates a specified host with the provided configurations.
 func (s *SDK) UpdateHost(ctx context.Context, request operations.UpdateHostRequest) (*operations.UpdateHostResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=com.amazonaws.codestar.connections.CodeStar_connections_20191201.UpdateHost"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -796,7 +834,7 @@ func (s *SDK) UpdateHost(ctx context.Context, request operations.UpdateHostReque
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {

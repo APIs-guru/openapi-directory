@@ -9,22 +9,10 @@ type PostRepositoriesWorkspaceRepoSlugPathParams struct {
 	Workspace string `pathParam:"style=simple,explode=false,name=workspace"`
 }
 
-type PostRepositoriesWorkspaceRepoSlugSecurityOption1 struct {
-	Oauth2 shared.SchemeOauth2 `security:"scheme,type=oauth2"`
-}
-
-type PostRepositoriesWorkspaceRepoSlugSecurityOption2 struct {
-	Basic shared.SchemeBasic `security:"scheme,type=http,subtype=basic"`
-}
-
-type PostRepositoriesWorkspaceRepoSlugSecurityOption3 struct {
-	APIKey shared.SchemeAPIKey `security:"scheme,type=apiKey,subtype=header"`
-}
-
 type PostRepositoriesWorkspaceRepoSlugSecurity struct {
-	Option1 *PostRepositoriesWorkspaceRepoSlugSecurityOption1 `security:"option"`
-	Option2 *PostRepositoriesWorkspaceRepoSlugSecurityOption2 `security:"option"`
-	Option3 *PostRepositoriesWorkspaceRepoSlugSecurityOption3 `security:"option"`
+	Oauth2 *shared.SchemeOauth2 `security:"scheme,type=oauth2"`
+	Basic  *shared.SchemeBasic  `security:"scheme,type=http,subtype=basic"`
+	APIKey *shared.SchemeAPIKey `security:"scheme,type=apiKey,subtype=header"`
 }
 
 type PostRepositoriesWorkspaceRepoSlugRequest struct {

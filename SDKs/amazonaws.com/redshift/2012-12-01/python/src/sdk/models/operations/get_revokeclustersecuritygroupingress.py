@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetRevokeClusterSecurityGroupIngressActionEnum(str, Enum):
     REVOKE_CLUSTER_SECURITY_GROUP_INGRESS = "RevokeClusterSecurityGroupIngress"
@@ -10,12 +14,12 @@ class GetRevokeClusterSecurityGroupIngressVersionEnum(str, Enum):
 
 @dataclass
 class GetRevokeClusterSecurityGroupIngressQueryParams:
-    action: GetRevokeClusterSecurityGroupIngressActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetRevokeClusterSecurityGroupIngressActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    cluster_security_group_name: str = field(metadata={'query_param': { 'field_name': 'ClusterSecurityGroupName', 'style': 'form', 'explode': True }})
+    version: GetRevokeClusterSecurityGroupIngressVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     cidrip: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'CIDRIP', 'style': 'form', 'explode': True }})
-    cluster_security_group_name: str = field(default=None, metadata={'query_param': { 'field_name': 'ClusterSecurityGroupName', 'style': 'form', 'explode': True }})
     ec2_security_group_name: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'EC2SecurityGroupName', 'style': 'form', 'explode': True }})
     ec2_security_group_owner_id: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'EC2SecurityGroupOwnerId', 'style': 'form', 'explode': True }})
-    version: GetRevokeClusterSecurityGroupIngressVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -31,13 +35,13 @@ class GetRevokeClusterSecurityGroupIngressHeaders:
 
 @dataclass
 class GetRevokeClusterSecurityGroupIngressRequest:
-    query_params: GetRevokeClusterSecurityGroupIngressQueryParams = field(default=None)
-    headers: GetRevokeClusterSecurityGroupIngressHeaders = field(default=None)
+    headers: GetRevokeClusterSecurityGroupIngressHeaders = field()
+    query_params: GetRevokeClusterSecurityGroupIngressQueryParams = field()
     
 
 @dataclass
 class GetRevokeClusterSecurityGroupIngressResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

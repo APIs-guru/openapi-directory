@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { Component } from "./component";
 export declare enum TemplateDefinitionNewLayoutFormatEnum {
     A4 = "A4",

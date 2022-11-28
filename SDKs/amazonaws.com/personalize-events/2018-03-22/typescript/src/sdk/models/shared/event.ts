@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Event
@@ -6,27 +7,27 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Represents user interaction event information sent using the <code>PutEvents</code> API.
 **/
 export class Event extends SpeakeasyBase {
-  @Metadata({ data: "json, name=eventId" })
+  @SpeakeasyMetadata({ data: "json, name=eventId" })
   eventId?: string;
 
-  @Metadata({ data: "json, name=eventType" })
+  @SpeakeasyMetadata({ data: "json, name=eventType" })
   eventType: string;
 
-  @Metadata({ data: "json, name=eventValue" })
+  @SpeakeasyMetadata({ data: "json, name=eventValue" })
   eventValue?: number;
 
-  @Metadata({ data: "json, name=impression" })
+  @SpeakeasyMetadata({ data: "json, name=impression" })
   impression?: string[];
 
-  @Metadata({ data: "json, name=itemId" })
+  @SpeakeasyMetadata({ data: "json, name=itemId" })
   itemId?: string;
 
-  @Metadata({ data: "json, name=properties" })
+  @SpeakeasyMetadata({ data: "json, name=properties" })
   properties?: any;
 
-  @Metadata({ data: "json, name=recommendationId" })
+  @SpeakeasyMetadata({ data: "json, name=recommendationId" })
   recommendationId?: string;
 
-  @Metadata({ data: "json, name=sentAt" })
+  @SpeakeasyMetadata({ data: "json, name=sentAt" })
   sentAt: Date;
 }

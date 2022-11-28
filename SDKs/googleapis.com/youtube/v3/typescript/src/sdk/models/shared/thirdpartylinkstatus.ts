@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum ThirdPartyLinkStatusLinkStatusEnum {
-    Unknown = "unknown"
-,    Failed = "failed"
-,    Pending = "pending"
-,    Linked = "linked"
+    Unknown = "unknown",
+    Failed = "failed",
+    Pending = "pending",
+    Linked = "linked"
 }
 
 
@@ -13,6 +14,6 @@ export enum ThirdPartyLinkStatusLinkStatusEnum {
  * The third-party link status object contains information about the status of the link.
 **/
 export class ThirdPartyLinkStatus extends SpeakeasyBase {
-  @Metadata({ data: "json, name=linkStatus" })
+  @SpeakeasyMetadata({ data: "json, name=linkStatus" })
   linkStatus?: ThirdPartyLinkStatusLinkStatusEnum;
 }

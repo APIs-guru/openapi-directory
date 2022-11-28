@@ -30,7 +30,7 @@ type DirectoryUsersPatchSecurity struct {
 type DirectoryUsersPatchRequest struct {
 	PathParams  DirectoryUsersPatchPathParams
 	QueryParams DirectoryUsersPatchQueryParams
-	Request     *shared.User `request:"mediaType=application/json"`
+	Request     *shared.UserInput `request:"mediaType=application/json"`
 	Security    DirectoryUsersPatchSecurity
 }
 

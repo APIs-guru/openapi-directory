@@ -1,14 +1,8 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
-export declare class PostAccountHolderTransactionListSecurityOption1 extends SpeakeasyBase {
-    basicAuth: shared.SchemeBasicAuth;
-}
-export declare class PostAccountHolderTransactionListSecurityOption2 extends SpeakeasyBase {
-    apiKeyAuth: shared.SchemeApiKeyAuth;
-}
 export declare class PostAccountHolderTransactionListSecurity extends SpeakeasyBase {
-    option1?: PostAccountHolderTransactionListSecurityOption1;
-    option2?: PostAccountHolderTransactionListSecurityOption2;
+    basicAuth?: shared.SchemeBasicAuth;
+    apiKeyAuth?: shared.SchemeApiKeyAuth;
 }
 export declare class PostAccountHolderTransactionListRequest extends SpeakeasyBase {
     request?: any;

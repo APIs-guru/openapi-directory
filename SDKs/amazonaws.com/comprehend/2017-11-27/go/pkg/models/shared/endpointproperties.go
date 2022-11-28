@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// EndpointProperties
+// Specifies information about the specified endpoint.
 type EndpointProperties struct {
 	CreationTime          *time.Time          `json:"CreationTime,omitempty"`
 	CurrentInferenceUnits *int64              `json:"CurrentInferenceUnits,omitempty"`

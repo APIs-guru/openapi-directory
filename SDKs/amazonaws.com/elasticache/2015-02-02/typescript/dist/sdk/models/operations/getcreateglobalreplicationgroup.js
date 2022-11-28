@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var GetCreateGlobalReplicationGroupActionEnum;
 (function (GetCreateGlobalReplicationGroupActionEnum) {
     GetCreateGlobalReplicationGroupActionEnum["CreateGlobalReplicationGroup"] = "CreateGlobalReplicationGroup";
@@ -37,23 +37,23 @@ var GetCreateGlobalReplicationGroupQueryParams = /** @class */ (function (_super
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=Action" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Action" }),
         __metadata("design:type", String)
     ], GetCreateGlobalReplicationGroupQueryParams.prototype, "action", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=GlobalReplicationGroupDescription" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=GlobalReplicationGroupDescription" }),
         __metadata("design:type", String)
     ], GetCreateGlobalReplicationGroupQueryParams.prototype, "globalReplicationGroupDescription", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=GlobalReplicationGroupIdSuffix" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=GlobalReplicationGroupIdSuffix" }),
         __metadata("design:type", String)
     ], GetCreateGlobalReplicationGroupQueryParams.prototype, "globalReplicationGroupIdSuffix", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=PrimaryReplicationGroupId" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=PrimaryReplicationGroupId" }),
         __metadata("design:type", String)
     ], GetCreateGlobalReplicationGroupQueryParams.prototype, "primaryReplicationGroupId", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=Version" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Version" }),
         __metadata("design:type", String)
     ], GetCreateGlobalReplicationGroupQueryParams.prototype, "version", void 0);
     return GetCreateGlobalReplicationGroupQueryParams;
@@ -65,31 +65,31 @@ var GetCreateGlobalReplicationGroupHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
         __metadata("design:type", String)
     ], GetCreateGlobalReplicationGroupHeaders.prototype, "xAmzAlgorithm", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
         __metadata("design:type", String)
     ], GetCreateGlobalReplicationGroupHeaders.prototype, "xAmzContentSha256", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
         __metadata("design:type", String)
     ], GetCreateGlobalReplicationGroupHeaders.prototype, "xAmzCredential", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
         __metadata("design:type", String)
     ], GetCreateGlobalReplicationGroupHeaders.prototype, "xAmzDate", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
         __metadata("design:type", String)
     ], GetCreateGlobalReplicationGroupHeaders.prototype, "xAmzSecurityToken", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
         __metadata("design:type", String)
     ], GetCreateGlobalReplicationGroupHeaders.prototype, "xAmzSignature", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
         __metadata("design:type", String)
     ], GetCreateGlobalReplicationGroupHeaders.prototype, "xAmzSignedHeaders", void 0);
     return GetCreateGlobalReplicationGroupHeaders;
@@ -101,11 +101,11 @@ var GetCreateGlobalReplicationGroupRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetCreateGlobalReplicationGroupQueryParams)
     ], GetCreateGlobalReplicationGroupRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetCreateGlobalReplicationGroupHeaders)
     ], GetCreateGlobalReplicationGroupRequest.prototype, "headers", void 0);
     return GetCreateGlobalReplicationGroupRequest;
@@ -117,15 +117,15 @@ var GetCreateGlobalReplicationGroupResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], GetCreateGlobalReplicationGroupResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetCreateGlobalReplicationGroupResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetCreateGlobalReplicationGroupResponse.prototype, "statusCode", void 0);
     return GetCreateGlobalReplicationGroupResponse;

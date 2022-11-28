@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var ProductOrderConciergeRequestBody = /** @class */ (function (_super) {
     __extends(ProductOrderConciergeRequestBody, _super);
@@ -30,55 +30,55 @@ var ProductOrderConciergeRequestBody = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "form, name=companyName;" }),
+        SpeakeasyMetadata({ data: "form, name=companyName;" }),
         __metadata("design:type", String)
     ], ProductOrderConciergeRequestBody.prototype, "companyName", void 0);
     __decorate([
-        Metadata({ data: "form, name=contactEmail;" }),
+        SpeakeasyMetadata({ data: "form, name=contactEmail;" }),
         __metadata("design:type", String)
     ], ProductOrderConciergeRequestBody.prototype, "contactEmail", void 0);
     __decorate([
-        Metadata({ data: "form, name=contactPhone;" }),
+        SpeakeasyMetadata({ data: "form, name=contactPhone;" }),
         __metadata("design:type", String)
     ], ProductOrderConciergeRequestBody.prototype, "contactPhone", void 0);
     __decorate([
-        Metadata({ data: "form, name=costConfirmation;" }),
+        SpeakeasyMetadata({ data: "form, name=costConfirmation;" }),
         __metadata("design:type", Boolean)
     ], ProductOrderConciergeRequestBody.prototype, "costConfirmation", void 0);
     __decorate([
-        Metadata({ data: "form, name=country;" }),
+        SpeakeasyMetadata({ data: "form, name=country;" }),
         __metadata("design:type", String)
     ], ProductOrderConciergeRequestBody.prototype, "country", void 0);
     __decorate([
-        Metadata({ data: "form, name=financialData;" }),
+        SpeakeasyMetadata({ data: "form, name=financialData;" }),
         __metadata("design:type", Boolean)
     ], ProductOrderConciergeRequestBody.prototype, "financialData", void 0);
     __decorate([
-        Metadata({ data: "form, name=historicInformation;" }),
+        SpeakeasyMetadata({ data: "form, name=historicInformation;" }),
         __metadata("design:type", Boolean)
     ], ProductOrderConciergeRequestBody.prototype, "historicInformation", void 0);
     __decorate([
-        Metadata({ data: "form, name=informationRequirements;" }),
+        SpeakeasyMetadata({ data: "form, name=informationRequirements;" }),
         __metadata("design:type", String)
     ], ProductOrderConciergeRequestBody.prototype, "informationRequirements", void 0);
     __decorate([
-        Metadata({ data: "form, name=locationInvestigation;" }),
+        SpeakeasyMetadata({ data: "form, name=locationInvestigation;" }),
         __metadata("design:type", Boolean)
     ], ProductOrderConciergeRequestBody.prototype, "locationInvestigation", void 0);
     __decorate([
-        Metadata({ data: "form, name=priority;" }),
+        SpeakeasyMetadata({ data: "form, name=priority;" }),
         __metadata("design:type", String)
     ], ProductOrderConciergeRequestBody.prototype, "priority", void 0);
     __decorate([
-        Metadata({ data: "form, name=registerData;" }),
+        SpeakeasyMetadata({ data: "form, name=registerData;" }),
         __metadata("design:type", Boolean)
     ], ProductOrderConciergeRequestBody.prototype, "registerData", void 0);
     __decorate([
-        Metadata({ data: "form, name=registerNumber;" }),
+        SpeakeasyMetadata({ data: "form, name=registerNumber;" }),
         __metadata("design:type", String)
     ], ProductOrderConciergeRequestBody.prototype, "registerNumber", void 0);
     __decorate([
-        Metadata({ data: "form, name=subjectId;" }),
+        SpeakeasyMetadata({ data: "form, name=subjectId;" }),
         __metadata("design:type", String)
     ], ProductOrderConciergeRequestBody.prototype, "subjectId", void 0);
     return ProductOrderConciergeRequestBody;
@@ -90,7 +90,7 @@ var ProductOrderConciergeSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeUserKey)
     ], ProductOrderConciergeSecurity.prototype, "userKey", void 0);
     return ProductOrderConciergeSecurity;
@@ -102,11 +102,11 @@ var ProductOrderConciergeRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "request, media_type=application/x-www-form-urlencoded" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/x-www-form-urlencoded" }),
         __metadata("design:type", ProductOrderConciergeRequestBody)
     ], ProductOrderConciergeRequest.prototype, "request", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ProductOrderConciergeSecurity)
     ], ProductOrderConciergeRequest.prototype, "security", void 0);
     return ProductOrderConciergeRequest;
@@ -118,19 +118,19 @@ var ProductOrderConciergeResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], ProductOrderConciergeResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], ProductOrderConciergeResponse.prototype, "productOrderConcierge200ApplicationJsonAny", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], ProductOrderConciergeResponse.prototype, "productOrderConciergeDefaultApplicationJsonAny", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], ProductOrderConciergeResponse.prototype, "statusCode", void 0);
     return ProductOrderConciergeResponse;

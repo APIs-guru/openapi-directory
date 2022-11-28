@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Block } from "./block";
 import { TextProperty } from "./textproperty";
+
 
 
 // Page
@@ -9,18 +9,18 @@ import { TextProperty } from "./textproperty";
  * Detected page from OCR.
 **/
 export class Page extends SpeakeasyBase {
-  @Metadata({ data: "json, name=blocks", elemType: shared.Block })
+  @SpeakeasyMetadata({ data: "json, name=blocks", elemType: Block })
   blocks?: Block[];
 
-  @Metadata({ data: "json, name=confidence" })
+  @SpeakeasyMetadata({ data: "json, name=confidence" })
   confidence?: number;
 
-  @Metadata({ data: "json, name=height" })
+  @SpeakeasyMetadata({ data: "json, name=height" })
   height?: number;
 
-  @Metadata({ data: "json, name=property" })
+  @SpeakeasyMetadata({ data: "json, name=property" })
   property?: TextProperty;
 
-  @Metadata({ data: "json, name=width" })
+  @SpeakeasyMetadata({ data: "json, name=width" })
   width?: number;
 }

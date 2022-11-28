@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class PecerRequestBodyCertificateParameters extends SpeakeasyBase {
     acNo: string;
@@ -16,10 +16,6 @@ export declare class PecerRequestBody extends SpeakeasyBase {
 export declare class PecerSecurity extends SpeakeasyBase {
     apiKey: shared.SchemeApiKey;
     clientId: shared.SchemeClientId;
-}
-export declare class PecerRequest extends SpeakeasyBase {
-    request?: PecerRequestBody;
-    security: PecerSecurity;
 }
 export declare enum Pecer400ApplicationJsonErrorEnum {
     MissingParameter = "missing_parameter",
@@ -102,6 +98,10 @@ export declare enum Pecer504ApplicationJsonErrorDescriptionEnum {
 export declare class Pecer504ApplicationJson extends SpeakeasyBase {
     error?: Pecer504ApplicationJsonErrorEnum;
     errorDescription?: Pecer504ApplicationJsonErrorDescriptionEnum;
+}
+export declare class PecerRequest extends SpeakeasyBase {
+    request?: PecerRequestBody;
+    security: PecerSecurity;
 }
 export declare class PecerResponse extends SpeakeasyBase {
     contentType: string;

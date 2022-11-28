@@ -34,7 +34,7 @@ type StreetviewpublishPhotoSequenceCreateSecurity struct {
 
 type StreetviewpublishPhotoSequenceCreateRequest struct {
 	QueryParams StreetviewpublishPhotoSequenceCreateQueryParams
-	Request     *shared.PhotoSequence `request:"mediaType=application/json"`
+	Request     *shared.PhotoSequenceInput `request:"mediaType=application/json"`
 	Security    StreetviewpublishPhotoSequenceCreateSecurity
 }
 

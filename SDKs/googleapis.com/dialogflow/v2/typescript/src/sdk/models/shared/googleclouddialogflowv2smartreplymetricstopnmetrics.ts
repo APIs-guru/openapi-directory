@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudDialogflowV2SmartReplyMetricsTopNMetrics
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Evaluation metrics when retrieving `n` smart replies with the model.
 **/
 export class GoogleCloudDialogflowV2SmartReplyMetricsTopNMetrics extends SpeakeasyBase {
-  @Metadata({ data: "json, name=n" })
+  @SpeakeasyMetadata({ data: "json, name=n" })
   n?: number;
 
-  @Metadata({ data: "json, name=recall" })
+  @SpeakeasyMetadata({ data: "json, name=recall" })
   recall?: number;
 }

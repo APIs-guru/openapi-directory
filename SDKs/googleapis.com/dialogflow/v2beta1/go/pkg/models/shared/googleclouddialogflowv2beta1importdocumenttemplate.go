@@ -11,6 +11,8 @@ const (
 	GoogleCloudDialogflowV2beta1ImportDocumentTemplateKnowledgeTypesEnumSmartReply               GoogleCloudDialogflowV2beta1ImportDocumentTemplateKnowledgeTypesEnum = "SMART_REPLY"
 )
 
+// GoogleCloudDialogflowV2beta1ImportDocumentTemplate
+// The template used for importing documents.
 type GoogleCloudDialogflowV2beta1ImportDocumentTemplate struct {
 	KnowledgeTypes []GoogleCloudDialogflowV2beta1ImportDocumentTemplateKnowledgeTypesEnum `json:"knowledgeTypes,omitempty"`
 	Metadata       map[string]string                                                      `json:"metadata,omitempty"`

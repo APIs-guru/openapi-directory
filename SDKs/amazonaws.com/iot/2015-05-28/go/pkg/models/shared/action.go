@@ -1,5 +1,7 @@
 package shared
 
+// Action
+// Describes the actions associated with a rule.
 type Action struct {
 	CloudwatchAlarm  *CloudwatchAlarmAction  `json:"cloudwatchAlarm,omitempty"`
 	CloudwatchLogs   *CloudwatchLogsAction   `json:"cloudwatchLogs,omitempty"`

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // WatchVariableRequest
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Request for the `WatchVariable()` method.
 **/
 export class WatchVariableRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=newerThan" })
+  @SpeakeasyMetadata({ data: "json, name=newerThan" })
   newerThan?: string;
 }

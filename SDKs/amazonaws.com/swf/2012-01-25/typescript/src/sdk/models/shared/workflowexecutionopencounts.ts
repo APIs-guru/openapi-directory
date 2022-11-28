@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // WorkflowExecutionOpenCounts
@@ -6,18 +7,18 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Contains the counts of open tasks, child workflow executions and timers for a workflow execution.
 **/
 export class WorkflowExecutionOpenCounts extends SpeakeasyBase {
-  @Metadata({ data: "json, name=openActivityTasks" })
+  @SpeakeasyMetadata({ data: "json, name=openActivityTasks" })
   openActivityTasks: number;
 
-  @Metadata({ data: "json, name=openChildWorkflowExecutions" })
+  @SpeakeasyMetadata({ data: "json, name=openChildWorkflowExecutions" })
   openChildWorkflowExecutions: number;
 
-  @Metadata({ data: "json, name=openDecisionTasks" })
+  @SpeakeasyMetadata({ data: "json, name=openDecisionTasks" })
   openDecisionTasks: number;
 
-  @Metadata({ data: "json, name=openLambdaFunctions" })
+  @SpeakeasyMetadata({ data: "json, name=openLambdaFunctions" })
   openLambdaFunctions?: number;
 
-  @Metadata({ data: "json, name=openTimers" })
+  @SpeakeasyMetadata({ data: "json, name=openTimers" })
   openTimers: number;
 }

@@ -6,10 +6,6 @@ type GetSchemaPathParams struct {
 	SchemaID     string `pathParam:"style=simple,explode=false,name=schemaId"`
 }
 
-type GetSchemaRequest struct {
-	PathParams GetSchemaPathParams
-}
-
 type GetSchema200ApplicationJSONSchema struct {
 	APIVersion *string `json:"apiVersion,omitempty"`
 	CreatedAt  *string `json:"createdAt,omitempty"`
@@ -23,6 +19,10 @@ type GetSchema200ApplicationJSONSchema struct {
 
 type GetSchema200ApplicationJSON struct {
 	Schema *GetSchema200ApplicationJSONSchema `json:"schema,omitempty"`
+}
+
+type GetSchemaRequest struct {
+	PathParams GetSchemaPathParams
 }
 
 type GetSchemaResponse struct {

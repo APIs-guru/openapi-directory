@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { MetricLevelImpact } from "./metriclevelimpact";
 /**
  * A group of anomalous metrics

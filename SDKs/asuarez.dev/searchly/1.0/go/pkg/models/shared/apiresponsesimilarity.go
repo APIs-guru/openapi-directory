@@ -1,5 +1,7 @@
 package shared
 
+// APIResponseSimilarityResponseSimilarityList
+// Song similarity item.
 type APIResponseSimilarityResponseSimilarityList struct {
 	ArtistName *string  `json:"artist_name,omitempty"`
 	ArtistURL  *string  `json:"artist_url,omitempty"`
@@ -11,6 +13,8 @@ type APIResponseSimilarityResponseSimilarityList struct {
 	SongURL    *string  `json:"song_url,omitempty"`
 }
 
+// APIResponseSimilarityResponse
+// Contains the response data if the request was successful.
 type APIResponseSimilarityResponse struct {
 	SimilarityList []APIResponseSimilarityResponseSimilarityList `json:"similarity_list,omitempty"`
 }

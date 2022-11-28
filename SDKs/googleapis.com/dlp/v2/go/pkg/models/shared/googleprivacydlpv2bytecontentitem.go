@@ -19,6 +19,8 @@ const (
 	GooglePrivacyDlpV2ByteContentItemTypeEnumTsv                  GooglePrivacyDlpV2ByteContentItemTypeEnum = "TSV"
 )
 
+// GooglePrivacyDlpV2ByteContentItem
+// Container for bytes to inspect or redact.
 type GooglePrivacyDlpV2ByteContentItem struct {
 	Data *string                                    `json:"data,omitempty"`
 	Type *GooglePrivacyDlpV2ByteContentItemTypeEnum `json:"type,omitempty"`

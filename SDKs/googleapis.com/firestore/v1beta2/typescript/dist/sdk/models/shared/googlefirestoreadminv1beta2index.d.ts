@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { GoogleFirestoreAdminV1beta2IndexField } from "./googlefirestoreadminv1beta2indexfield";
 export declare enum GoogleFirestoreAdminV1beta2IndexQueryScopeEnum {
     QueryScopeUnspecified = "QUERY_SCOPE_UNSPECIFIED",

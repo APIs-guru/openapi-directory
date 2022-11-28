@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class ContentOrderreturnsCreateorderreturnPathParams:
-    merchant_id: str = field(default=None, metadata={'path_param': { 'field_name': 'merchantId', 'style': 'simple', 'explode': False }})
+    merchant_id: str = field(metadata={'path_param': { 'field_name': 'merchantId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,21 +26,21 @@ class ContentOrderreturnsCreateorderreturnQueryParams:
 
 @dataclass
 class ContentOrderreturnsCreateorderreturnSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class ContentOrderreturnsCreateorderreturnRequest:
-    path_params: ContentOrderreturnsCreateorderreturnPathParams = field(default=None)
-    query_params: ContentOrderreturnsCreateorderreturnQueryParams = field(default=None)
+    path_params: ContentOrderreturnsCreateorderreturnPathParams = field()
+    query_params: ContentOrderreturnsCreateorderreturnQueryParams = field()
+    security: ContentOrderreturnsCreateorderreturnSecurity = field()
     request: Optional[shared.OrderreturnsCreateOrderReturnRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: ContentOrderreturnsCreateorderreturnSecurity = field(default=None)
     
 
 @dataclass
 class ContentOrderreturnsCreateorderreturnResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     orderreturns_create_order_return_response: Optional[shared.OrderreturnsCreateOrderReturnResponse] = field(default=None)
-    status_code: int = field(default=None)
     

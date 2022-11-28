@@ -10,7 +10,7 @@ type PutScrobbleEpisodesEpisodeIDPathParams struct {
 
 type PutScrobbleEpisodesEpisodeIDRequest struct {
 	PathParams PutScrobbleEpisodesEpisodeIDPathParams
-	Request    *shared.MarkedEpisode `request:"mediaType=application/json"`
+	Request    *shared.MarkedEpisodeInput `request:"mediaType=application/json"`
 }
 
 type PutScrobbleEpisodesEpisodeIDResponse struct {

@@ -1,68 +1,69 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class EndpointCreatePlaylistPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=user_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=user_id" })
   userId: string;
 }
 
 
 export class EndpointCreatePlaylistHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=Authorization" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Authorization" })
   authorization: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=Content-Type" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Content-Type" })
   contentType?: string;
 }
 
 
 export class EndpointCreatePlaylistRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=collaborative" })
+  @SpeakeasyMetadata({ data: "json, name=collaborative" })
   collaborative?: boolean;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 
-  @Metadata({ data: "json, name=public" })
+  @SpeakeasyMetadata({ data: "json, name=public" })
   public?: boolean;
 }
 
 
 export class EndpointCreatePlaylistSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   spotifyAuth: shared.SchemeSpotifyAuth;
 }
 
 
 export class EndpointCreatePlaylistRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: EndpointCreatePlaylistPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: EndpointCreatePlaylistHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: EndpointCreatePlaylistRequestBody;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: EndpointCreatePlaylistSecurity;
 }
 
 
 export class EndpointCreatePlaylistResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   errorResponseObject?: shared.ErrorResponseObject;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   playlistObject?: shared.PlaylistObject;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

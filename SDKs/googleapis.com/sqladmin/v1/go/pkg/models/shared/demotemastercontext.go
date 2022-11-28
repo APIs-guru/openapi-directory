@@ -1,5 +1,7 @@
 package shared
 
+// DemoteMasterContext
+// Database instance demote primary instance context.
 type DemoteMasterContext struct {
 	Kind                  *string                    `json:"kind,omitempty"`
 	MasterInstanceName    *string                    `json:"masterInstanceName,omitempty"`

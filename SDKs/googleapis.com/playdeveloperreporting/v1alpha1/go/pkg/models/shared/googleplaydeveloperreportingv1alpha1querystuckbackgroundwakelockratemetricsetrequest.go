@@ -1,5 +1,7 @@
 package shared
 
+// GooglePlayDeveloperReportingV1alpha1QueryStuckBackgroundWakelockRateMetricSetRequest
+// Request message for QueryStuckBackgroundWakelockRateMetricSet.
 type GooglePlayDeveloperReportingV1alpha1QueryStuckBackgroundWakelockRateMetricSetRequest struct {
 	Dimensions   []string                                          `json:"dimensions,omitempty"`
 	Filter       *string                                           `json:"filter,omitempty"`

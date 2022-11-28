@@ -309,6 +309,8 @@ const (
 	PathQueryOptionsFilterMatchEnumWildcardExpression PathQueryOptionsFilterMatchEnum = "WILDCARD_EXPRESSION"
 )
 
+// PathQueryOptionsFilter
+// Dimension Filter on path events.
 type PathQueryOptionsFilter struct {
 	Filter *PathQueryOptionsFilterFilterEnum `json:"filter,omitempty"`
 	Match  *PathQueryOptionsFilterMatchEnum  `json:"match,omitempty"`

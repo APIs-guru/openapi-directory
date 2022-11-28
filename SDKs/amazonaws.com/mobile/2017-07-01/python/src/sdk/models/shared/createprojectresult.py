@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import projectdetails
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class CreateProjectResult:
-    details: Optional[projectdetails.ProjectDetails] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'details' }})
+    r"""CreateProjectResult
+     Result structure used in response to a request to create a project. 
+    """
+    
+    details: Optional[ProjectDetails] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('details') }})
     

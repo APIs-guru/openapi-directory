@@ -1,6 +1,10 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,List,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -18,25 +22,25 @@ class TagResourceHeaders:
 @dataclass_json
 @dataclass
 class TagResourceRequestBody:
-    resource_share_arn: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'resourceShareArn' }})
-    tags: List[shared.Tag] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tags' }})
+    resource_share_arn: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('resourceShareArn') }})
+    tags: List[shared.Tag] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('tags') }})
     
 
 @dataclass
 class TagResourceRequest:
-    headers: TagResourceHeaders = field(default=None)
-    request: TagResourceRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: TagResourceHeaders = field()
+    request: TagResourceRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class TagResourceResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     invalid_parameter_exception: Optional[Any] = field(default=None)
     malformed_arn_exception: Optional[Any] = field(default=None)
     resource_arn_not_found_exception: Optional[Any] = field(default=None)
     server_internal_exception: Optional[Any] = field(default=None)
     service_unavailable_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     tag_limit_exceeded_exception: Optional[Any] = field(default=None)
     tag_policy_violation_exception: Optional[Any] = field(default=None)
     tag_resource_response: Optional[dict[str, Any]] = field(default=None)

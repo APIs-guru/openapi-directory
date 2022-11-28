@@ -1,27 +1,22 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class SearchPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=query" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=query" })
   query: string;
 }
 
 
-export class SearchRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: SearchPathParams;
-}
-
-
 export class Search200ApplicationJsonResults extends SpeakeasyBase {
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=link" })
+  @SpeakeasyMetadata({ data: "json, name=link" })
   link?: string;
 
-  @Metadata({ data: "json, name=title" })
+  @SpeakeasyMetadata({ data: "json, name=title" })
   title?: string;
 }
 
@@ -31,27 +26,33 @@ export class Search200ApplicationJsonResults extends SpeakeasyBase {
  * results
 **/
 export class Search200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=answer" })
+  @SpeakeasyMetadata({ data: "json, name=answer" })
   answer?: string;
 
-  @Metadata({ data: "json, name=results", elemType: operations.Search200ApplicationJsonResults })
+  @SpeakeasyMetadata({ data: "json, name=results", elemType: Search200ApplicationJsonResults })
   results?: Search200ApplicationJsonResults[];
 
-  @Metadata({ data: "json, name=total" })
+  @SpeakeasyMetadata({ data: "json, name=total" })
   total?: string;
 }
 
 
+export class SearchRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: SearchPathParams;
+}
+
+
 export class SearchResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   httpValidationError?: shared.HttpValidationError;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   search200ApplicationJsonObject?: Search200ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

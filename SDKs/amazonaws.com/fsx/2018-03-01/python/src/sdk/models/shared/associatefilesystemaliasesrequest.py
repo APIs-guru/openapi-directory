@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass_json
 @dataclass
 class AssociateFileSystemAliasesRequest:
-    aliases: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Aliases' }})
-    client_request_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ClientRequestToken' }})
-    file_system_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FileSystemId' }})
+    r"""AssociateFileSystemAliasesRequest
+    The request object specifying one or more DNS alias names to associate with an Amazon FSx for Windows File Server file system.
+    """
+    
+    aliases: List[str] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Aliases') }})
+    file_system_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('FileSystemId') }})
+    client_request_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ClientRequestToken') }})
     

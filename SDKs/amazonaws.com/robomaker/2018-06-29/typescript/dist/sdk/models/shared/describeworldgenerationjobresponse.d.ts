@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { WorldGenerationJobErrorCodeEnum } from "./worldgenerationjoberrorcodeenum";
 import { FinishedWorldsSummary } from "./finishedworldssummary";
 import { WorldGenerationJobStatusEnum } from "./worldgenerationjobstatusenum";

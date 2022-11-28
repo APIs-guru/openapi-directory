@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 class GetDailyStatsCarTypeEnum(str, Enum):
@@ -26,13 +27,13 @@ class GetDailyStatsQueryParams:
 
 @dataclass
 class GetDailyStatsRequest:
-    query_params: GetDailyStatsQueryParams = field(default=None)
+    query_params: GetDailyStatsQueryParams = field()
     
 
 @dataclass
 class GetDailyStatsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     daily_stats: Optional[shared.DailyStats] = field(default=None)
     error: Optional[shared.Error] = field(default=None)
-    status_code: int = field(default=None)
     

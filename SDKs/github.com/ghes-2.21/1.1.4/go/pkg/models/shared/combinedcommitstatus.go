@@ -1,5 +1,7 @@
 package shared
 
+// CombinedCommitStatus
+// Combined Commit Status
 type CombinedCommitStatus struct {
 	CommitURL  string               `json:"commit_url"`
 	Repository MinimalRepository    `json:"repository"`

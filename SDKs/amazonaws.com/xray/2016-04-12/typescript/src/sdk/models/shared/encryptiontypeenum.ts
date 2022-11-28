@@ -1,6 +1,7 @@
 
 
+
 export enum EncryptionTypeEnum {
-    None = "NONE"
-,    Kms = "KMS"
+    None = "NONE",
+    Kms = "KMS"
 }

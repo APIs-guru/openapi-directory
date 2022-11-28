@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetStartDbInstanceAutomatedBackupsReplicationActionEnum(str, Enum):
     START_DB_INSTANCE_AUTOMATED_BACKUPS_REPLICATION = "StartDBInstanceAutomatedBackupsReplication"
@@ -10,12 +14,12 @@ class GetStartDbInstanceAutomatedBackupsReplicationVersionEnum(str, Enum):
 
 @dataclass
 class GetStartDbInstanceAutomatedBackupsReplicationQueryParams:
-    action: GetStartDbInstanceAutomatedBackupsReplicationActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetStartDbInstanceAutomatedBackupsReplicationActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    source_db_instance_arn: str = field(metadata={'query_param': { 'field_name': 'SourceDBInstanceArn', 'style': 'form', 'explode': True }})
+    version: GetStartDbInstanceAutomatedBackupsReplicationVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     backup_retention_period: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'BackupRetentionPeriod', 'style': 'form', 'explode': True }})
     kms_key_id: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'KmsKeyId', 'style': 'form', 'explode': True }})
     pre_signed_url: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'PreSignedUrl', 'style': 'form', 'explode': True }})
-    source_db_instance_arn: str = field(default=None, metadata={'query_param': { 'field_name': 'SourceDBInstanceArn', 'style': 'form', 'explode': True }})
-    version: GetStartDbInstanceAutomatedBackupsReplicationVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -31,13 +35,13 @@ class GetStartDbInstanceAutomatedBackupsReplicationHeaders:
 
 @dataclass
 class GetStartDbInstanceAutomatedBackupsReplicationRequest:
-    query_params: GetStartDbInstanceAutomatedBackupsReplicationQueryParams = field(default=None)
-    headers: GetStartDbInstanceAutomatedBackupsReplicationHeaders = field(default=None)
+    headers: GetStartDbInstanceAutomatedBackupsReplicationHeaders = field()
+    query_params: GetStartDbInstanceAutomatedBackupsReplicationQueryParams = field()
     
 
 @dataclass
 class GetStartDbInstanceAutomatedBackupsReplicationResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

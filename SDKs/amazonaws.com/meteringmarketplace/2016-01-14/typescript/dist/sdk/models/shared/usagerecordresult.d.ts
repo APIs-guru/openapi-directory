@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { UsageRecordResultStatusEnum } from "./usagerecordresultstatusenum";
 import { UsageRecord } from "./usagerecord";
 /**

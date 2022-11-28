@@ -5,12 +5,12 @@ from sdk.models import shared
 
 @dataclass
 class PostMaintenanceRequest:
-    request: shared.Maintenance = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    request: shared.Maintenance = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class PostMaintenanceResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     maintenance: Optional[shared.Maintenance] = field(default=None)
-    status_code: int = field(default=None)
     

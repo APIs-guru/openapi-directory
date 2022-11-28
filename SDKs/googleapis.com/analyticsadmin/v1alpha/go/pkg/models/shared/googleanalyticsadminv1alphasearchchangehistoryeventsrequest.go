@@ -29,8 +29,11 @@ const (
 	GoogleAnalyticsAdminV1alphaSearchChangeHistoryEventsRequestResourceTypeEnumDataStream                            GoogleAnalyticsAdminV1alphaSearchChangeHistoryEventsRequestResourceTypeEnum = "DATA_STREAM"
 	GoogleAnalyticsAdminV1alphaSearchChangeHistoryEventsRequestResourceTypeEnumAttributionSettings                   GoogleAnalyticsAdminV1alphaSearchChangeHistoryEventsRequestResourceTypeEnum = "ATTRIBUTION_SETTINGS"
 	GoogleAnalyticsAdminV1alphaSearchChangeHistoryEventsRequestResourceTypeEnumExpandedDataSet                       GoogleAnalyticsAdminV1alphaSearchChangeHistoryEventsRequestResourceTypeEnum = "EXPANDED_DATA_SET"
+	GoogleAnalyticsAdminV1alphaSearchChangeHistoryEventsRequestResourceTypeEnumChannelGroup                          GoogleAnalyticsAdminV1alphaSearchChangeHistoryEventsRequestResourceTypeEnum = "CHANNEL_GROUP"
 )
 
+// GoogleAnalyticsAdminV1alphaSearchChangeHistoryEventsRequest
+// Request message for SearchChangeHistoryEvents RPC.
 type GoogleAnalyticsAdminV1alphaSearchChangeHistoryEventsRequest struct {
 	Action             []GoogleAnalyticsAdminV1alphaSearchChangeHistoryEventsRequestActionEnum       `json:"action,omitempty"`
 	ActorEmail         []string                                                                      `json:"actorEmail,omitempty"`

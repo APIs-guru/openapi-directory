@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // MultipleChoiceQuestion
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Additional details for multiple-choice questions.
 **/
 export class MultipleChoiceQuestion extends SpeakeasyBase {
-  @Metadata({ data: "json, name=choices" })
+  @SpeakeasyMetadata({ data: "json, name=choices" })
   choices?: string[];
 }

@@ -1,6 +1,7 @@
 
 
+
 export enum CodeSigningPolicyEnum {
-    Warn = "Warn"
-,    Enforce = "Enforce"
+    Warn = "Warn",
+    Enforce = "Enforce"
 }

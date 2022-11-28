@@ -1,21 +1,25 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import configuration
-from . import accesspreviewstatus_enum
-from . import accesspreviewstatusreason
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class AccessPreview:
-    analyzer_arn: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'analyzerArn' }})
-    configurations: dict[str, configuration.Configuration] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'configurations' }})
-    created_at: datetime = field(default=None, metadata={'dataclasses_json': { 'field_name': 'createdAt', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
-    status: accesspreviewstatus_enum.AccessPreviewStatusEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
-    status_reason: Optional[accesspreviewstatusreason.AccessPreviewStatusReason] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'statusReason' }})
+    r"""AccessPreview
+    Contains information about an access preview.
+    """
+    
+    analyzer_arn: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('analyzerArn') }})
+    configurations: dict[str, Configuration] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('configurations') }})
+    created_at: datetime = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('createdAt'), 'encoder': utils.datetimeisoformat(False), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('id') }})
+    status: AccessPreviewStatusEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('status') }})
+    status_reason: Optional[AccessPreviewStatusReason] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('statusReason') }})
     

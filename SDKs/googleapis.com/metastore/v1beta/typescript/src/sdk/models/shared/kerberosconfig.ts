@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Secret } from "./secret";
+
 
 
 // KerberosConfig
@@ -7,12 +8,12 @@ import { Secret } from "./secret";
  * Configuration information for a Kerberos principal.
 **/
 export class KerberosConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=keytab" })
+  @SpeakeasyMetadata({ data: "json, name=keytab" })
   keytab?: Secret;
 
-  @Metadata({ data: "json, name=krb5ConfigGcsUri" })
+  @SpeakeasyMetadata({ data: "json, name=krb5ConfigGcsUri" })
   krb5ConfigGcsUri?: string;
 
-  @Metadata({ data: "json, name=principal" })
+  @SpeakeasyMetadata({ data: "json, name=principal" })
   principal?: string;
 }

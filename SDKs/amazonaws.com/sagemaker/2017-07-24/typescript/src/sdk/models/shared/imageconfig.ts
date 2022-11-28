@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RepositoryAccessModeEnum } from "./repositoryaccessmodeenum";
 import { RepositoryAuthConfig } from "./repositoryauthconfig";
+
 
 
 // ImageConfig
@@ -8,9 +9,9 @@ import { RepositoryAuthConfig } from "./repositoryauthconfig";
  * Specifies whether the model container is in Amazon ECR or a private Docker registry accessible from your Amazon Virtual Private Cloud (VPC).
 **/
 export class ImageConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=RepositoryAccessMode" })
+  @SpeakeasyMetadata({ data: "json, name=RepositoryAccessMode" })
   repositoryAccessMode: RepositoryAccessModeEnum;
 
-  @Metadata({ data: "json, name=RepositoryAuthConfig" })
+  @SpeakeasyMetadata({ data: "json, name=RepositoryAuthConfig" })
   repositoryAuthConfig?: RepositoryAuthConfig;
 }

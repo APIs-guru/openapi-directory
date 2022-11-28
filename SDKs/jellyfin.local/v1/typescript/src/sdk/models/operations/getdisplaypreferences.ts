@@ -1,47 +1,48 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetDisplayPreferencesPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=displayPreferencesId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=displayPreferencesId" })
   displayPreferencesId: string;
 }
 
 
 export class GetDisplayPreferencesQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=client" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=client" })
   client: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=userId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=userId" })
   userId: string;
 }
 
 
 export class GetDisplayPreferencesSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
   customAuthentication: shared.SchemeCustomAuthentication;
 }
 
 
 export class GetDisplayPreferencesRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetDisplayPreferencesPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetDisplayPreferencesQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: GetDisplayPreferencesSecurity;
 }
 
 
 export class GetDisplayPreferencesResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   displayPreferencesDto?: shared.DisplayPreferencesDto;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

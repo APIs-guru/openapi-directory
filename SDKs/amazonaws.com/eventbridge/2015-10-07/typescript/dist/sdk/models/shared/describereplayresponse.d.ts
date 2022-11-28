@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ReplayDestination } from "./replaydestination";
 import { ReplayStateEnum } from "./replaystateenum";
 export declare class DescribeReplayResponse extends SpeakeasyBase {

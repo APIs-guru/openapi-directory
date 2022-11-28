@@ -14,6 +14,8 @@ const (
 	URLRestrictionRestrictionTypeEnumDoesNotEndWith             URLRestrictionRestrictionTypeEnum = "DOES_NOT_END_WITH"
 )
 
+// URLRestriction
+// Represents the URL restriction (for the URL captured by the pixel callback) for a user list.
 type URLRestriction struct {
 	EndDate         *Date                              `json:"endDate,omitempty"`
 	RestrictionType *URLRestrictionRestrictionTypeEnum `json:"restrictionType,omitempty"`

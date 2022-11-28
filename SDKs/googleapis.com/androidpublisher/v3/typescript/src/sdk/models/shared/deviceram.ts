@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // DeviceRam
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Conditions about a device's RAM capabilities.
 **/
 export class DeviceRam extends SpeakeasyBase {
-  @Metadata({ data: "json, name=maxBytes" })
+  @SpeakeasyMetadata({ data: "json, name=maxBytes" })
   maxBytes?: string;
 
-  @Metadata({ data: "json, name=minBytes" })
+  @SpeakeasyMetadata({ data: "json, name=minBytes" })
   minBytes?: string;
 }

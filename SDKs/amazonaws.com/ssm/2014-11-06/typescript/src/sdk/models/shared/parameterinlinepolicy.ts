@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ParameterInlinePolicy
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * One or more policies assigned to a parameter.
 **/
 export class ParameterInlinePolicy extends SpeakeasyBase {
-  @Metadata({ data: "json, name=PolicyStatus" })
+  @SpeakeasyMetadata({ data: "json, name=PolicyStatus" })
   policyStatus?: string;
 
-  @Metadata({ data: "json, name=PolicyText" })
+  @SpeakeasyMetadata({ data: "json, name=PolicyText" })
   policyText?: string;
 
-  @Metadata({ data: "json, name=PolicyType" })
+  @SpeakeasyMetadata({ data: "json, name=PolicyType" })
   policyType?: string;
 }

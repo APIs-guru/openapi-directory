@@ -1,18 +1,24 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import flowdefinitionstatus_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class FlowDefinitionSummary:
-    creation_time: datetime = field(default=None, metadata={'dataclasses_json': { 'field_name': 'CreationTime', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    failure_reason: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FailureReason' }})
-    flow_definition_arn: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FlowDefinitionArn' }})
-    flow_definition_name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FlowDefinitionName' }})
-    flow_definition_status: flowdefinitionstatus_enum.FlowDefinitionStatusEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FlowDefinitionStatus' }})
+    r"""FlowDefinitionSummary
+    Contains summary information about the flow definition.
+    """
+    
+    creation_time: datetime = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('CreationTime'), 'encoder': utils.datetimeisoformat(False), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    flow_definition_arn: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('FlowDefinitionArn') }})
+    flow_definition_name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('FlowDefinitionName') }})
+    flow_definition_status: FlowDefinitionStatusEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('FlowDefinitionStatus') }})
+    failure_reason: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('FailureReason') }})
     

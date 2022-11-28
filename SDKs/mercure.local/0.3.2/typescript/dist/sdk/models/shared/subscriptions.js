@@ -22,31 +22,31 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { Subscription } from "./subscription";
 var Subscriptions = /** @class */ (function (_super) {
     __extends(Subscriptions, _super);
     function Subscriptions() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=@context" }),
+        SpeakeasyMetadata({ data: "json, name=@context" }),
         __metadata("design:type", String)
     ], Subscriptions.prototype, "atContext", void 0);
     __decorate([
-        Metadata({ data: "json, name=id" }),
+        SpeakeasyMetadata({ data: "json, name=id" }),
         __metadata("design:type", String)
     ], Subscriptions.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "json, name=lastEventID" }),
+        SpeakeasyMetadata({ data: "json, name=lastEventID" }),
         __metadata("design:type", String)
     ], Subscriptions.prototype, "lastEventId", void 0);
     __decorate([
-        Metadata({ data: "json, name=subscriptions", elemType: shared.Subscription }),
+        SpeakeasyMetadata({ data: "json, name=subscriptions", elemType: Subscription }),
         __metadata("design:type", Array)
     ], Subscriptions.prototype, "subscriptions", void 0);
     __decorate([
-        Metadata({ data: "json, name=type" }),
+        SpeakeasyMetadata({ data: "json, name=type" }),
         __metadata("design:type", String)
     ], Subscriptions.prototype, "type", void 0);
     return Subscriptions;

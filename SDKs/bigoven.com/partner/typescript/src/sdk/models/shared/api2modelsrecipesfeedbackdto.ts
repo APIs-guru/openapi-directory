@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class Api2ModelsRecipesFeedbackDto extends SpeakeasyBase {
-  @Metadata({ data: "json, name=feedback, form, name=feedback;" })
+  @SpeakeasyMetadata({ data: "json, name=feedback, form, name=feedback;" })
   feedback?: string;
 }

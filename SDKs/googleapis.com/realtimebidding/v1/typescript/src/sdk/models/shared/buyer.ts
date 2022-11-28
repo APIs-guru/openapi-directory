@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Buyer
@@ -6,21 +7,21 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * RTB Buyer account information.
 **/
 export class Buyer extends SpeakeasyBase {
-  @Metadata({ data: "json, name=activeCreativeCount" })
+  @SpeakeasyMetadata({ data: "json, name=activeCreativeCount" })
   activeCreativeCount?: string;
 
-  @Metadata({ data: "json, name=bidder" })
+  @SpeakeasyMetadata({ data: "json, name=bidder" })
   bidder?: string;
 
-  @Metadata({ data: "json, name=billingIds" })
+  @SpeakeasyMetadata({ data: "json, name=billingIds" })
   billingIds?: string[];
 
-  @Metadata({ data: "json, name=displayName" })
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
   displayName?: string;
 
-  @Metadata({ data: "json, name=maximumActiveCreativeCount" })
+  @SpeakeasyMetadata({ data: "json, name=maximumActiveCreativeCount" })
   maximumActiveCreativeCount?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 }

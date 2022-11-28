@@ -1,9 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Environment } from "./environment";
 
 
+
 export class DescribeEnvironmentsResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=environments", elemType: shared.Environment })
+  @SpeakeasyMetadata({ data: "json, name=environments", elemType: Environment })
   environments?: Environment[];
 }

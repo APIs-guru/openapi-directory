@@ -1,44 +1,45 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetListingCarFsboIdPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" })
   id: string;
 }
 
 
 export class GetListingCarFsboIdQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=api_key" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=api_key" })
   apiKey?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=append_api_key" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=append_api_key" })
   appendApiKey?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=include_relevant_links" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=include_relevant_links" })
   includeRelevantLinks?: boolean;
 }
 
 
 export class GetListingCarFsboIdRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetListingCarFsboIdPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetListingCarFsboIdQueryParams;
 }
 
 
 export class GetListingCarFsboIdResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   error?: shared.Error;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   listing?: shared.Listing;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

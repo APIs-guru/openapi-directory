@@ -9,6 +9,8 @@ const (
 	QueueStateEnumDisabled         QueueStateEnum = "DISABLED"
 )
 
+// Queue
+// A queue is a container of related tasks. Queues are configured to manage how those tasks are dispatched. Configurable properties include rate limits, retry options, queue types, and others.
 type Queue struct {
 	AppEngineRoutingOverride *AppEngineRouting         `json:"appEngineRoutingOverride,omitempty"`
 	Name                     *string                   `json:"name,omitempty"`

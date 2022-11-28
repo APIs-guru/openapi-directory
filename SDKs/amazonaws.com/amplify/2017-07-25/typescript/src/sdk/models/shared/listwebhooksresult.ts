@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Webhook } from "./webhook";
+
 
 
 // ListWebhooksResult
@@ -8,9 +8,9 @@ import { Webhook } from "./webhook";
  *  The result structure for the list webhooks request. 
 **/
 export class ListWebhooksResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=nextToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=webhooks", elemType: shared.Webhook })
+  @SpeakeasyMetadata({ data: "json, name=webhooks", elemType: Webhook })
   webhooks: Webhook[];
 }

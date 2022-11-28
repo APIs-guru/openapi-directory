@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import celldata
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class RowData:
-    values: Optional[List[celldata.CellData]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'values' }})
+    r"""RowData
+    Data about each cell in a row.
+    """
+    
+    values: Optional[List[CellData]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('values') }})
     

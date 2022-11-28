@@ -18,7 +18,7 @@ class PostSetupV1ServicesRequest:
 
 @dataclass
 class PostSetupV1ServicesResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     service_view_model: Optional[shared.ServiceViewModel] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CategoricalParameterRangeSpecification } from "./categoricalparameterrangespecification";
 import { ContinuousParameterRangeSpecification } from "./continuousparameterrangespecification";
 import { IntegerParameterRangeSpecification } from "./integerparameterrangespecification";
+
 
 
 // ParameterRange
@@ -9,12 +10,12 @@ import { IntegerParameterRangeSpecification } from "./integerparameterrangespeci
  * Defines the possible values for categorical, continuous, and integer hyperparameters to be used by an algorithm.
 **/
 export class ParameterRange extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CategoricalParameterRangeSpecification" })
+  @SpeakeasyMetadata({ data: "json, name=CategoricalParameterRangeSpecification" })
   categoricalParameterRangeSpecification?: CategoricalParameterRangeSpecification;
 
-  @Metadata({ data: "json, name=ContinuousParameterRangeSpecification" })
+  @SpeakeasyMetadata({ data: "json, name=ContinuousParameterRangeSpecification" })
   continuousParameterRangeSpecification?: ContinuousParameterRangeSpecification;
 
-  @Metadata({ data: "json, name=IntegerParameterRangeSpecification" })
+  @SpeakeasyMetadata({ data: "json, name=IntegerParameterRangeSpecification" })
   integerParameterRangeSpecification?: IntegerParameterRangeSpecification;
 }

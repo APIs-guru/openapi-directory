@@ -10,7 +10,7 @@ type DcimCablesUpdatePathParams struct {
 
 type DcimCablesUpdateRequest struct {
 	PathParams DcimCablesUpdatePathParams
-	Request    shared.WritableCable `request:"mediaType=application/json"`
+	Request    shared.WritableCableInput `request:"mediaType=application/json"`
 }
 
 type DcimCablesUpdateResponse struct {

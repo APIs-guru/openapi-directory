@@ -12,13 +12,13 @@ type GetServerFollowingQueryParams struct {
 	State     *shared.FollowStateEnum `queryParam:"style=form,explode=true,name=state"`
 }
 
-type GetServerFollowingRequest struct {
-	QueryParams GetServerFollowingQueryParams
-}
-
 type GetServerFollowing200ApplicationJSON struct {
 	Data  []interface{} `json:"data,omitempty"`
 	Total *int64        `json:"total,omitempty"`
+}
+
+type GetServerFollowingRequest struct {
+	QueryParams GetServerFollowingQueryParams
 }
 
 type GetServerFollowingResponse struct {

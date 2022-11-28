@@ -1,5 +1,7 @@
 package shared
 
+// LocalInventory
+// Local inventory resource. For accepted attribute values, see the local product inventory feed specification.
 type LocalInventory struct {
 	Availability           *string           `json:"availability,omitempty"`
 	CustomAttributes       []CustomAttribute `json:"customAttributes,omitempty"`

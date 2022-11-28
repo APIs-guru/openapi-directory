@@ -1,21 +1,22 @@
 from dataclasses import dataclass, field
 from typing import Any,List,Optional
+from sdk.models import shared
 
 
 @dataclass
 class ListTransactionsSecurity:
-    basic_auth: shared.SchemeBasicAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'basic' }})
+    basic_auth: shared.SchemeBasicAuth = field(metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'basic' }})
     
 
 @dataclass
 class ListTransactionsRequest:
-    security: ListTransactionsSecurity = field(default=None)
+    security: ListTransactionsSecurity = field()
     
 
 @dataclass
 class ListTransactionsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     netlicensings: Optional[List[Any]] = field(default=None)
     

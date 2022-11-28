@@ -5,29 +5,29 @@ from sdk.models import shared
 
 @dataclass
 class GetCompanySpecificOpenAPIDocumentationPathParams:
-    company_id: str = field(default=None, metadata={'path_param': { 'field_name': 'companyId', 'style': 'simple', 'explode': False }})
+    company_id: str = field(metadata={'path_param': { 'field_name': 'companyId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetCompanySpecificOpenAPIDocumentationHeaders:
-    authorization: str = field(default=None, metadata={'header': { 'field_name': 'Authorization', 'style': 'simple', 'explode': False }})
+    authorization: str = field(metadata={'header': { 'field_name': 'Authorization', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetCompanySpecificOpenAPIDocumentationSecurity:
-    paylocity_auth: shared.SchemePaylocityAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    paylocity_auth: shared.SchemePaylocityAuth = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class GetCompanySpecificOpenAPIDocumentationRequest:
-    path_params: GetCompanySpecificOpenAPIDocumentationPathParams = field(default=None)
-    headers: GetCompanySpecificOpenAPIDocumentationHeaders = field(default=None)
-    security: GetCompanySpecificOpenAPIDocumentationSecurity = field(default=None)
+    headers: GetCompanySpecificOpenAPIDocumentationHeaders = field()
+    path_params: GetCompanySpecificOpenAPIDocumentationPathParams = field()
+    security: GetCompanySpecificOpenAPIDocumentationSecurity = field()
     
 
 @dataclass
 class GetCompanySpecificOpenAPIDocumentationResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     errors: Optional[List[shared.Error]] = field(default=None)
     

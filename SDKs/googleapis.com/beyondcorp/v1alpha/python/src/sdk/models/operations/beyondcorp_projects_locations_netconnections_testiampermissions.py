@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class BeyondcorpProjectsLocationsNetConnectionsTestIamPermissionsPathParams:
-    resource: str = field(default=None, metadata={'path_param': { 'field_name': 'resource', 'style': 'simple', 'explode': False }})
+    resource: str = field(metadata={'path_param': { 'field_name': 'resource', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,21 +26,21 @@ class BeyondcorpProjectsLocationsNetConnectionsTestIamPermissionsQueryParams:
 
 @dataclass
 class BeyondcorpProjectsLocationsNetConnectionsTestIamPermissionsSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class BeyondcorpProjectsLocationsNetConnectionsTestIamPermissionsRequest:
-    path_params: BeyondcorpProjectsLocationsNetConnectionsTestIamPermissionsPathParams = field(default=None)
-    query_params: BeyondcorpProjectsLocationsNetConnectionsTestIamPermissionsQueryParams = field(default=None)
+    path_params: BeyondcorpProjectsLocationsNetConnectionsTestIamPermissionsPathParams = field()
+    query_params: BeyondcorpProjectsLocationsNetConnectionsTestIamPermissionsQueryParams = field()
+    security: BeyondcorpProjectsLocationsNetConnectionsTestIamPermissionsSecurity = field()
     request: Optional[shared.GoogleIamV1TestIamPermissionsRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: BeyondcorpProjectsLocationsNetConnectionsTestIamPermissionsSecurity = field(default=None)
     
 
 @dataclass
 class BeyondcorpProjectsLocationsNetConnectionsTestIamPermissionsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_iam_v1_test_iam_permissions_response: Optional[shared.GoogleIamV1TestIamPermissionsResponse] = field(default=None)
-    status_code: int = field(default=None)
     

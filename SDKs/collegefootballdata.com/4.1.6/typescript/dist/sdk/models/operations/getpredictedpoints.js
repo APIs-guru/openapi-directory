@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetPredictedPointsQueryParams = /** @class */ (function (_super) {
     __extends(GetPredictedPointsQueryParams, _super);
@@ -30,11 +30,11 @@ var GetPredictedPointsQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=distance" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=distance" }),
         __metadata("design:type", Number)
     ], GetPredictedPointsQueryParams.prototype, "distance", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=down" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=down" }),
         __metadata("design:type", Number)
     ], GetPredictedPointsQueryParams.prototype, "down", void 0);
     return GetPredictedPointsQueryParams;
@@ -46,7 +46,7 @@ var GetPredictedPointsRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetPredictedPointsQueryParams)
     ], GetPredictedPointsRequest.prototype, "queryParams", void 0);
     return GetPredictedPointsRequest;
@@ -58,15 +58,15 @@ var GetPredictedPointsResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetPredictedPointsResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata({ elemType: shared.PredictedPoints }),
+        SpeakeasyMetadata({ elemType: shared.PredictedPoints }),
         __metadata("design:type", Array)
     ], GetPredictedPointsResponse.prototype, "predictedPoints", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetPredictedPointsResponse.prototype, "statusCode", void 0);
     return GetPredictedPointsResponse;

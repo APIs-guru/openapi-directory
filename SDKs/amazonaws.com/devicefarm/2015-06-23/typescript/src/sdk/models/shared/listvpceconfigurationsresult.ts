@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { VpceConfiguration } from "./vpceconfiguration";
 
 
+
 export class ListVpceConfigurationsResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=nextToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=vpceConfigurations", elemType: shared.VpceConfiguration })
+  @SpeakeasyMetadata({ data: "json, name=vpceConfigurations", elemType: VpceConfiguration })
   vpceConfigurations?: VpceConfiguration[];
 }

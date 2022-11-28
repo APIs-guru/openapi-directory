@@ -1,6 +1,11 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -21,8 +26,12 @@ class CreateContainerRecipeRequestBodyContainerTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class CreateContainerRecipeRequestBodyInstanceConfiguration:
-    block_device_mappings: Optional[List[shared.InstanceBlockDeviceMapping]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'blockDeviceMappings' }})
-    image: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'image' }})
+    r"""CreateContainerRecipeRequestBodyInstanceConfiguration
+    Defines a custom source AMI and block device mapping configurations of an instance used for building and testing container images.
+    """
+    
+    block_device_mappings: Optional[List[shared.InstanceBlockDeviceMapping]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('blockDeviceMappings') }})
+    image: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('image') }})
     
 class CreateContainerRecipeRequestBodyPlatformOverrideEnum(str, Enum):
     WINDOWS = "Windows"
@@ -32,42 +41,47 @@ class CreateContainerRecipeRequestBodyPlatformOverrideEnum(str, Enum):
 @dataclass_json
 @dataclass
 class CreateContainerRecipeRequestBodyTargetRepository:
-    repository_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'repositoryName' }})
-    service: Optional[shared.ContainerRepositoryServiceEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'service' }})
+    r"""CreateContainerRecipeRequestBodyTargetRepository
+    The container repository where the output container image is stored.
+    """
+    
+    repository_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('repositoryName') }})
+    service: Optional[shared.ContainerRepositoryServiceEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('service') }})
     
 
 @dataclass_json
 @dataclass
 class CreateContainerRecipeRequestBody:
-    client_token: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'clientToken' }})
-    components: List[shared.ComponentConfiguration] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'components' }})
-    container_type: CreateContainerRecipeRequestBodyContainerTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'containerType' }})
-    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
-    dockerfile_template_data: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'dockerfileTemplateData' }})
-    dockerfile_template_uri: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'dockerfileTemplateUri' }})
-    image_os_version_override: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'imageOsVersionOverride' }})
-    instance_configuration: Optional[CreateContainerRecipeRequestBodyInstanceConfiguration] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'instanceConfiguration' }})
-    kms_key_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'kmsKeyId' }})
-    name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    parent_image: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'parentImage' }})
-    platform_override: Optional[CreateContainerRecipeRequestBodyPlatformOverrideEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'platformOverride' }})
-    semantic_version: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'semanticVersion' }})
-    tags: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tags' }})
-    target_repository: CreateContainerRecipeRequestBodyTargetRepository = field(default=None, metadata={'dataclasses_json': { 'field_name': 'targetRepository' }})
-    working_directory: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'workingDirectory' }})
+    client_token: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('clientToken') }})
+    components: List[shared.ComponentConfiguration] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('components') }})
+    container_type: CreateContainerRecipeRequestBodyContainerTypeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('containerType') }})
+    name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    parent_image: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('parentImage') }})
+    semantic_version: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('semanticVersion') }})
+    target_repository: CreateContainerRecipeRequestBodyTargetRepository = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('targetRepository') }})
+    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('description') }})
+    dockerfile_template_data: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('dockerfileTemplateData') }})
+    dockerfile_template_uri: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('dockerfileTemplateUri') }})
+    image_os_version_override: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('imageOsVersionOverride') }})
+    instance_configuration: Optional[CreateContainerRecipeRequestBodyInstanceConfiguration] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('instanceConfiguration') }})
+    kms_key_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('kmsKeyId') }})
+    platform_override: Optional[CreateContainerRecipeRequestBodyPlatformOverrideEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('platformOverride') }})
+    tags: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('tags') }})
+    working_directory: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('workingDirectory') }})
     
 
 @dataclass
 class CreateContainerRecipeRequest:
-    headers: CreateContainerRecipeHeaders = field(default=None)
-    request: CreateContainerRecipeRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: CreateContainerRecipeHeaders = field()
+    request: CreateContainerRecipeRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class CreateContainerRecipeResponse:
+    content_type: str = field()
+    status_code: int = field()
     call_rate_limit_exceeded_exception: Optional[Any] = field(default=None)
     client_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     create_container_recipe_response: Optional[shared.CreateContainerRecipeResponse] = field(default=None)
     forbidden_exception: Optional[Any] = field(default=None)
     idempotent_parameter_mismatch_exception: Optional[Any] = field(default=None)
@@ -78,5 +92,4 @@ class CreateContainerRecipeResponse:
     service_exception: Optional[Any] = field(default=None)
     service_quota_exceeded_exception: Optional[Any] = field(default=None)
     service_unavailable_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

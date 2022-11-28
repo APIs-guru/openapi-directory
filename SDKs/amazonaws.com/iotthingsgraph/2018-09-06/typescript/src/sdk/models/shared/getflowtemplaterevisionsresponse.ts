@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { FlowTemplateSummary } from "./flowtemplatesummary";
 
 
+
 export class GetFlowTemplateRevisionsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=nextToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=summaries", elemType: shared.FlowTemplateSummary })
+  @SpeakeasyMetadata({ data: "json, name=summaries", elemType: FlowTemplateSummary })
   summaries?: FlowTemplateSummary[];
 }

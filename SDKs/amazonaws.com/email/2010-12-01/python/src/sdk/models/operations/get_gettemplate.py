@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetGetTemplateActionEnum(str, Enum):
     GET_TEMPLATE = "GetTemplate"
@@ -10,9 +14,9 @@ class GetGetTemplateVersionEnum(str, Enum):
 
 @dataclass
 class GetGetTemplateQueryParams:
-    action: GetGetTemplateActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    template_name: str = field(default=None, metadata={'query_param': { 'field_name': 'TemplateName', 'style': 'form', 'explode': True }})
-    version: GetGetTemplateVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: GetGetTemplateActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    template_name: str = field(metadata={'query_param': { 'field_name': 'TemplateName', 'style': 'form', 'explode': True }})
+    version: GetGetTemplateVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -28,13 +32,13 @@ class GetGetTemplateHeaders:
 
 @dataclass
 class GetGetTemplateRequest:
-    query_params: GetGetTemplateQueryParams = field(default=None)
-    headers: GetGetTemplateHeaders = field(default=None)
+    headers: GetGetTemplateHeaders = field()
+    query_params: GetGetTemplateQueryParams = field()
     
 
 @dataclass
 class GetGetTemplateResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 export declare enum GoogleCloudIdentitytoolkitAdminV2HashConfigAlgorithmEnum {
     HashAlgorithmUnspecified = "HASH_ALGORITHM_UNSPECIFIED",
     HmacSha256 = "HMAC_SHA256",

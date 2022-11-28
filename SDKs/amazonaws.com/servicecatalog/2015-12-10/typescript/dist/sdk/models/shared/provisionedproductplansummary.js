@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ProvisionedProductPlanTypeEnum } from "./provisionedproductplantypeenum";
 // ProvisionedProductPlanSummary
 /**
@@ -34,27 +34,27 @@ var ProvisionedProductPlanSummary = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=PlanId" }),
+        SpeakeasyMetadata({ data: "json, name=PlanId" }),
         __metadata("design:type", String)
     ], ProvisionedProductPlanSummary.prototype, "planId", void 0);
     __decorate([
-        Metadata({ data: "json, name=PlanName" }),
+        SpeakeasyMetadata({ data: "json, name=PlanName" }),
         __metadata("design:type", String)
     ], ProvisionedProductPlanSummary.prototype, "planName", void 0);
     __decorate([
-        Metadata({ data: "json, name=PlanType" }),
+        SpeakeasyMetadata({ data: "json, name=PlanType" }),
         __metadata("design:type", String)
     ], ProvisionedProductPlanSummary.prototype, "planType", void 0);
     __decorate([
-        Metadata({ data: "json, name=ProvisionProductId" }),
+        SpeakeasyMetadata({ data: "json, name=ProvisionProductId" }),
         __metadata("design:type", String)
     ], ProvisionedProductPlanSummary.prototype, "provisionProductId", void 0);
     __decorate([
-        Metadata({ data: "json, name=ProvisionProductName" }),
+        SpeakeasyMetadata({ data: "json, name=ProvisionProductName" }),
         __metadata("design:type", String)
     ], ProvisionedProductPlanSummary.prototype, "provisionProductName", void 0);
     __decorate([
-        Metadata({ data: "json, name=ProvisioningArtifactId" }),
+        SpeakeasyMetadata({ data: "json, name=ProvisioningArtifactId" }),
         __metadata("design:type", String)
     ], ProvisionedProductPlanSummary.prototype, "provisioningArtifactId", void 0);
     return ProvisionedProductPlanSummary;

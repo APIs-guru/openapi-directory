@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DataTransfer } from "./datatransfer";
+
 
 
 // DataTransfersListResponse
@@ -8,15 +8,15 @@ import { DataTransfer } from "./datatransfer";
  * Template for a collection of DataTransfer resources.
 **/
 export class DataTransfersListResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=dataTransfers", elemType: shared.DataTransfer })
+  @SpeakeasyMetadata({ data: "json, name=dataTransfers", elemType: DataTransfer })
   dataTransfers?: DataTransfer[];
 
-  @Metadata({ data: "json, name=etag" })
+  @SpeakeasyMetadata({ data: "json, name=etag" })
   etag?: string;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 }

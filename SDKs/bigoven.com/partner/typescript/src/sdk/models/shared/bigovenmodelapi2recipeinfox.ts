@@ -1,59 +1,60 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BigOvenModelApi2UserInfoTinyx } from "./bigovenmodelapi2userinfotinyx";
 
 
+
 export class BigOvenModelApi2RecipeInfox extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Category" })
+  @SpeakeasyMetadata({ data: "json, name=Category" })
   category?: string;
 
-  @Metadata({ data: "json, name=CreationDate" })
+  @SpeakeasyMetadata({ data: "json, name=CreationDate" })
   creationDate?: Date;
 
-  @Metadata({ data: "json, name=Cuisine" })
+  @SpeakeasyMetadata({ data: "json, name=Cuisine" })
   cuisine?: string;
 
-  @Metadata({ data: "json, name=HasVideos" })
+  @SpeakeasyMetadata({ data: "json, name=HasVideos" })
   hasVideos?: boolean;
 
-  @Metadata({ data: "json, name=IsBookmark" })
+  @SpeakeasyMetadata({ data: "json, name=IsBookmark" })
   isBookmark?: boolean;
 
-  @Metadata({ data: "json, name=IsPrivate" })
+  @SpeakeasyMetadata({ data: "json, name=IsPrivate" })
   isPrivate?: boolean;
 
-  @Metadata({ data: "json, name=IsRecipeScan" })
+  @SpeakeasyMetadata({ data: "json, name=IsRecipeScan" })
   isRecipeScan?: boolean;
 
-  @Metadata({ data: "json, name=Microcategory" })
+  @SpeakeasyMetadata({ data: "json, name=Microcategory" })
   microcategory?: string;
 
-  @Metadata({ data: "json, name=PhotoUrl" })
+  @SpeakeasyMetadata({ data: "json, name=PhotoUrl" })
   photoUrl?: string;
 
-  @Metadata({ data: "json, name=Poster" })
+  @SpeakeasyMetadata({ data: "json, name=Poster" })
   poster?: BigOvenModelApi2UserInfoTinyx;
 
-  @Metadata({ data: "json, name=RecipeID" })
+  @SpeakeasyMetadata({ data: "json, name=RecipeID" })
   recipeId?: number;
 
-  @Metadata({ data: "json, name=ReviewCount" })
+  @SpeakeasyMetadata({ data: "json, name=ReviewCount" })
   reviewCount?: number;
 
-  @Metadata({ data: "json, name=Servings" })
+  @SpeakeasyMetadata({ data: "json, name=Servings" })
   servings?: number;
 
-  @Metadata({ data: "json, name=StarRating" })
+  @SpeakeasyMetadata({ data: "json, name=StarRating" })
   starRating?: number;
 
-  @Metadata({ data: "json, name=Subcategory" })
+  @SpeakeasyMetadata({ data: "json, name=Subcategory" })
   subcategory?: string;
 
-  @Metadata({ data: "json, name=Title" })
+  @SpeakeasyMetadata({ data: "json, name=Title" })
   title?: string;
 
-  @Metadata({ data: "json, name=TotalTries" })
+  @SpeakeasyMetadata({ data: "json, name=TotalTries" })
   totalTries?: number;
 
-  @Metadata({ data: "json, name=WebURL" })
+  @SpeakeasyMetadata({ data: "json, name=WebURL" })
   webUrl?: string;
 }

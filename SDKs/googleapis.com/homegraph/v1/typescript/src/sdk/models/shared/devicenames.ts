@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // DeviceNames
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Identifiers used to describe the device.
 **/
 export class DeviceNames extends SpeakeasyBase {
-  @Metadata({ data: "json, name=defaultNames" })
+  @SpeakeasyMetadata({ data: "json, name=defaultNames" })
   defaultNames?: string[];
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=nicknames" })
+  @SpeakeasyMetadata({ data: "json, name=nicknames" })
   nicknames?: string[];
 }

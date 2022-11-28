@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { JobCondition } from "./jobcondition";
 import { InstanceStatus } from "./instancestatus";
+
 
 
 // JobStatus
@@ -9,30 +9,30 @@ import { InstanceStatus } from "./instancestatus";
  * JobStatus represents the current state of a Job.
 **/
 export class JobStatus extends SpeakeasyBase {
-  @Metadata({ data: "json, name=active" })
+  @SpeakeasyMetadata({ data: "json, name=active" })
   active?: number;
 
-  @Metadata({ data: "json, name=completionTime" })
+  @SpeakeasyMetadata({ data: "json, name=completionTime" })
   completionTime?: string;
 
-  @Metadata({ data: "json, name=conditions", elemType: shared.JobCondition })
+  @SpeakeasyMetadata({ data: "json, name=conditions", elemType: JobCondition })
   conditions?: JobCondition[];
 
-  @Metadata({ data: "json, name=failed" })
+  @SpeakeasyMetadata({ data: "json, name=failed" })
   failed?: number;
 
-  @Metadata({ data: "json, name=imageDigest" })
+  @SpeakeasyMetadata({ data: "json, name=imageDigest" })
   imageDigest?: string;
 
-  @Metadata({ data: "json, name=instances", elemType: shared.InstanceStatus })
+  @SpeakeasyMetadata({ data: "json, name=instances", elemType: InstanceStatus })
   instances?: InstanceStatus[];
 
-  @Metadata({ data: "json, name=observedGeneration" })
+  @SpeakeasyMetadata({ data: "json, name=observedGeneration" })
   observedGeneration?: number;
 
-  @Metadata({ data: "json, name=startTime" })
+  @SpeakeasyMetadata({ data: "json, name=startTime" })
   startTime?: string;
 
-  @Metadata({ data: "json, name=succeeded" })
+  @SpeakeasyMetadata({ data: "json, name=succeeded" })
   succeeded?: number;
 }

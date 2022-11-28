@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare enum UpdateSizeConstraintSetXAmzTargetEnum {
     AwswafRegional20161128UpdateSizeConstraintSet = "AWSWAF_Regional_20161128.UpdateSizeConstraintSet"

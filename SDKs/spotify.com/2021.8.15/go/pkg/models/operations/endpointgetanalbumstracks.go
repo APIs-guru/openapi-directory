@@ -22,13 +22,9 @@ type EndpointGetAnAlbumsTracksSecurity struct {
 	SpotifyAuth shared.SchemeSpotifyAuth `security:"scheme,type=oauth2"`
 }
 
-type EndpointGetAnAlbumsTracksRequest struct {
-	PathParams  EndpointGetAnAlbumsTracksPathParams
-	QueryParams EndpointGetAnAlbumsTracksQueryParams
-	Headers     EndpointGetAnAlbumsTracksHeaders
-	Security    EndpointGetAnAlbumsTracksSecurity
-}
+// EndpointGetAnAlbumsTracks200ApplicationJSON
 
+// https://developer.spotify.com/documentation/web-api/reference/#object-pagingobject - Find more info on the official Spotify Web API Reference
 type EndpointGetAnAlbumsTracks200ApplicationJSON struct {
 	Href     *string                        `json:"href,omitempty"`
 	Items    []shared.SimplifiedTrackObject `json:"items,omitempty"`
@@ -37,6 +33,13 @@ type EndpointGetAnAlbumsTracks200ApplicationJSON struct {
 	Offset   *int32                         `json:"offset,omitempty"`
 	Previous *string                        `json:"previous,omitempty"`
 	Total    *int32                         `json:"total,omitempty"`
+}
+
+type EndpointGetAnAlbumsTracksRequest struct {
+	PathParams  EndpointGetAnAlbumsTracksPathParams
+	QueryParams EndpointGetAnAlbumsTracksQueryParams
+	Headers     EndpointGetAnAlbumsTracksHeaders
+	Security    EndpointGetAnAlbumsTracksSecurity
 }
 
 type EndpointGetAnAlbumsTracksResponse struct {

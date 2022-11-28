@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var PostGeomarksCopyBufferCapEnum;
 (function (PostGeomarksCopyBufferCapEnum) {
     PostGeomarksCopyBufferCapEnum["Round"] = "ROUND";
@@ -53,47 +53,47 @@ var PostGeomarksCopyQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=allowOverlap" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=allowOverlap" }),
         __metadata("design:type", Boolean)
     ], PostGeomarksCopyQueryParams.prototype, "allowOverlap", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=bufferCap" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=bufferCap" }),
         __metadata("design:type", String)
     ], PostGeomarksCopyQueryParams.prototype, "bufferCap", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=bufferJoin" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=bufferJoin" }),
         __metadata("design:type", String)
     ], PostGeomarksCopyQueryParams.prototype, "bufferJoin", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=bufferMetres" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=bufferMetres" }),
         __metadata("design:type", Number)
     ], PostGeomarksCopyQueryParams.prototype, "bufferMetres", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=bufferMitreLimit" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=bufferMitreLimit" }),
         __metadata("design:type", Number)
     ], PostGeomarksCopyQueryParams.prototype, "bufferMitreLimit", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=bufferSegments" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=bufferSegments" }),
         __metadata("design:type", Number)
     ], PostGeomarksCopyQueryParams.prototype, "bufferSegments", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=callback" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=callback" }),
         __metadata("design:type", String)
     ], PostGeomarksCopyQueryParams.prototype, "callback", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=failureRedirectUrl" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=failureRedirectUrl" }),
         __metadata("design:type", String)
     ], PostGeomarksCopyQueryParams.prototype, "failureRedirectUrl", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=geomarkUrl" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=geomarkUrl" }),
         __metadata("design:type", String)
     ], PostGeomarksCopyQueryParams.prototype, "geomarkUrl", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=redirectUrl" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=redirectUrl" }),
         __metadata("design:type", String)
     ], PostGeomarksCopyQueryParams.prototype, "redirectUrl", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=resultFormat" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=resultFormat" }),
         __metadata("design:type", String)
     ], PostGeomarksCopyQueryParams.prototype, "resultFormat", void 0);
     return PostGeomarksCopyQueryParams;
@@ -105,7 +105,7 @@ var PostGeomarksCopyRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PostGeomarksCopyQueryParams)
     ], PostGeomarksCopyRequest.prototype, "queryParams", void 0);
     return PostGeomarksCopyRequest;
@@ -117,11 +117,11 @@ var PostGeomarksCopyResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], PostGeomarksCopyResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], PostGeomarksCopyResponse.prototype, "statusCode", void 0);
     return PostGeomarksCopyResponse;

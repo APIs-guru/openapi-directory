@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class GetOfferingsOfferingIDLearnersPendingSubmissionPathParams:
-    offering_id: str = field(default=None, metadata={'path_param': { 'field_name': 'offeringId', 'style': 'simple', 'explode': False }})
+    offering_id: str = field(metadata={'path_param': { 'field_name': 'offeringId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -15,14 +15,14 @@ class GetOfferingsOfferingIDLearnersPendingSubmissionQueryParams:
 
 @dataclass
 class GetOfferingsOfferingIDLearnersPendingSubmissionRequest:
-    path_params: GetOfferingsOfferingIDLearnersPendingSubmissionPathParams = field(default=None)
-    query_params: GetOfferingsOfferingIDLearnersPendingSubmissionQueryParams = field(default=None)
+    path_params: GetOfferingsOfferingIDLearnersPendingSubmissionPathParams = field()
+    query_params: GetOfferingsOfferingIDLearnersPendingSubmissionQueryParams = field()
     
 
 @dataclass
 class GetOfferingsOfferingIDLearnersPendingSubmissionResponse:
+    content_type: str = field()
+    status_code: int = field()
     assessment_pending_submissions: Optional[List[shared.AssessmentPendingSubmission]] = field(default=None)
-    content_type: str = field(default=None)
     error: Optional[shared.Error] = field(default=None)
-    status_code: int = field(default=None)
     

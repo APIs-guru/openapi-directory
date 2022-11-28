@@ -19,6 +19,8 @@ const (
 	InstanceVMLivenessEnumTimeout                  InstanceVMLivenessEnum = "TIMEOUT"
 )
 
+// Instance
+// An Instance resource is the computing unit that App Engine uses to automatically scale an application.
 type Instance struct {
 	AppEngineRelease *string                   `json:"appEngineRelease,omitempty"`
 	Availability     *InstanceAvailabilityEnum `json:"availability,omitempty"`

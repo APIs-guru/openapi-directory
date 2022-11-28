@@ -1,32 +1,33 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class PackageDeleteQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=PackageId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=PackageId" })
   packageId?: number;
 }
 
 
 export class PackageDeleteRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: PackageDeleteQueryParams;
 }
 
 
 export class PackageDeleteResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   apiException?: shared.ApiException;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   defaultResponseDtoOfBoolean?: shared.DefaultResponseDtoOfBoolean;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   defaultResponseDtoOfString?: shared.DefaultResponseDtoOfString;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

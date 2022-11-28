@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class TransformInstanceTypeEnum(str, Enum):
     ML_M4_XLARGE = "ml.m4.xlarge"

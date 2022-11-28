@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class JSONPathMatcherJSONMatcherEnum(str, Enum):
     JSON_PATH_MATCHER_OPTION_UNSPECIFIED = "JSON_PATH_MATCHER_OPTION_UNSPECIFIED"
@@ -11,6 +13,10 @@ class JSONPathMatcherJSONMatcherEnum(str, Enum):
 @dataclass_json
 @dataclass
 class JSONPathMatcher:
-    json_matcher: Optional[JSONPathMatcherJSONMatcherEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'jsonMatcher' }})
-    json_path: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'jsonPath' }})
+    r"""JSONPathMatcher
+    Information needed to perform a JSONPath content match. Used for ContentMatcherOption::MATCHES_JSON_PATH and ContentMatcherOption::NOT_MATCHES_JSON_PATH.
+    """
+    
+    json_matcher: Optional[JSONPathMatcherJSONMatcherEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('jsonMatcher') }})
+    json_path: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('jsonPath') }})
     

@@ -1,16 +1,16 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
-import { NegativeKeyword } from "./negativekeyword";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { NegativeKeywordInput } from "./negativekeyword";
 
 
-// BulkEditNegativeKeywordsRequest
+
+// BulkEditNegativeKeywordsRequestInput
 /** 
  * Request message for NegativeKeywordService.BulkEditNegativeKeywords.
 **/
-export class BulkEditNegativeKeywordsRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=createdNegativeKeywords", elemType: shared.NegativeKeyword })
-  createdNegativeKeywords?: NegativeKeyword[];
+export class BulkEditNegativeKeywordsRequestInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=createdNegativeKeywords", elemType: NegativeKeywordInput })
+  createdNegativeKeywords?: NegativeKeywordInput[];
 
-  @Metadata({ data: "json, name=deletedNegativeKeywords" })
+  @SpeakeasyMetadata({ data: "json, name=deletedNegativeKeywords" })
   deletedNegativeKeywords?: string[];
 }

@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { OperatingSystemEnum } from "./operatingsystemenum";
+
 
 
 // PatchBaselineIdentity
@@ -7,18 +8,18 @@ import { OperatingSystemEnum } from "./operatingsystemenum";
  * Defines the basic information about a patch baseline.
 **/
 export class PatchBaselineIdentity extends SpeakeasyBase {
-  @Metadata({ data: "json, name=BaselineDescription" })
+  @SpeakeasyMetadata({ data: "json, name=BaselineDescription" })
   baselineDescription?: string;
 
-  @Metadata({ data: "json, name=BaselineId" })
+  @SpeakeasyMetadata({ data: "json, name=BaselineId" })
   baselineId?: string;
 
-  @Metadata({ data: "json, name=BaselineName" })
+  @SpeakeasyMetadata({ data: "json, name=BaselineName" })
   baselineName?: string;
 
-  @Metadata({ data: "json, name=DefaultBaseline" })
+  @SpeakeasyMetadata({ data: "json, name=DefaultBaseline" })
   defaultBaseline?: boolean;
 
-  @Metadata({ data: "json, name=OperatingSystem" })
+  @SpeakeasyMetadata({ data: "json, name=OperatingSystem" })
   operatingSystem?: OperatingSystemEnum;
 }

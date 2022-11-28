@@ -1,16 +1,16 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import encryptionkey
-from . import paralleldataconfig
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class CreateParallelDataRequest:
-    client_token: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ClientToken' }})
-    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Description' }})
-    encryption_key: Optional[encryptionkey.EncryptionKey] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'EncryptionKey' }})
-    name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Name' }})
-    parallel_data_config: paralleldataconfig.ParallelDataConfig = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ParallelDataConfig' }})
+    client_token: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('ClientToken') }})
+    name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Name') }})
+    parallel_data_config: ParallelDataConfig = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('ParallelDataConfig') }})
+    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Description') }})
+    encryption_key: Optional[EncryptionKey] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('EncryptionKey') }})
     

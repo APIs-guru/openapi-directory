@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 export declare enum EventTypeEnum {
     EventTypeUnspecified = "EVENT_TYPE_UNSPECIFIED",
     Idle = "IDLE",

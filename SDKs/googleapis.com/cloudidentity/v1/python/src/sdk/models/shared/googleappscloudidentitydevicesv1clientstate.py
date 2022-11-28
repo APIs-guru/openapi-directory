@@ -1,7 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import googleappscloudidentitydevicesv1customattributevalue
+from sdk import utils
+from . import *
 
 class GoogleAppsCloudidentityDevicesV1ClientStateComplianceStateEnum(str, Enum):
     COMPLIANCE_STATE_UNSPECIFIED = "COMPLIANCE_STATE_UNSPECIFIED"
@@ -30,16 +35,20 @@ class GoogleAppsCloudidentityDevicesV1ClientStateOwnerTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class GoogleAppsCloudidentityDevicesV1ClientState:
-    asset_tags: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'assetTags' }})
-    compliance_state: Optional[GoogleAppsCloudidentityDevicesV1ClientStateComplianceStateEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'complianceState' }})
-    create_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'createTime' }})
-    custom_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'customId' }})
-    etag: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'etag' }})
-    health_score: Optional[GoogleAppsCloudidentityDevicesV1ClientStateHealthScoreEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'healthScore' }})
-    key_value_pairs: Optional[dict[str, googleappscloudidentitydevicesv1customattributevalue.GoogleAppsCloudidentityDevicesV1CustomAttributeValue]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'keyValuePairs' }})
-    last_update_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'lastUpdateTime' }})
-    managed: Optional[GoogleAppsCloudidentityDevicesV1ClientStateManagedEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'managed' }})
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    owner_type: Optional[GoogleAppsCloudidentityDevicesV1ClientStateOwnerTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ownerType' }})
-    score_reason: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'scoreReason' }})
+    r"""GoogleAppsCloudidentityDevicesV1ClientState
+    Represents the state associated with an API client calling the Devices API. Resource representing ClientState and supports updates from API users
+    """
+    
+    asset_tags: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('assetTags') }})
+    compliance_state: Optional[GoogleAppsCloudidentityDevicesV1ClientStateComplianceStateEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('complianceState') }})
+    create_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('createTime') }})
+    custom_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('customId') }})
+    etag: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('etag') }})
+    health_score: Optional[GoogleAppsCloudidentityDevicesV1ClientStateHealthScoreEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('healthScore') }})
+    key_value_pairs: Optional[dict[str, GoogleAppsCloudidentityDevicesV1CustomAttributeValue]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('keyValuePairs') }})
+    last_update_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('lastUpdateTime') }})
+    managed: Optional[GoogleAppsCloudidentityDevicesV1ClientStateManagedEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('managed') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    owner_type: Optional[GoogleAppsCloudidentityDevicesV1ClientStateOwnerTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ownerType') }})
+    score_reason: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('scoreReason') }})
     

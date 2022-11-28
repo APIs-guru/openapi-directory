@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GooglePrivacyDlpV2TimeZone
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Time zone of the date time object.
 **/
 export class GooglePrivacyDlpV2TimeZone extends SpeakeasyBase {
-  @Metadata({ data: "json, name=offsetMinutes" })
+  @SpeakeasyMetadata({ data: "json, name=offsetMinutes" })
   offsetMinutes?: number;
 }

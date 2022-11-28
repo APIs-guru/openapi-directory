@@ -1,5 +1,7 @@
 package shared
 
+// ZeppelinApplicationConfiguration
+// The configuration of a Kinesis Data Analytics Studio notebook.
 type ZeppelinApplicationConfiguration struct {
 	CatalogConfiguration             *CatalogConfiguration             `json:"CatalogConfiguration,omitempty"`
 	CustomArtifactsConfiguration     []CustomArtifactConfiguration     `json:"CustomArtifactsConfiguration,omitempty"`

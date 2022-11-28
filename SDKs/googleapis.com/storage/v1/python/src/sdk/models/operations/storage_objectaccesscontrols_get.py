@@ -1,13 +1,14 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class StorageObjectAccessControlsGetPathParams:
-    bucket: str = field(default=None, metadata={'path_param': { 'field_name': 'bucket', 'style': 'simple', 'explode': False }})
-    entity: str = field(default=None, metadata={'path_param': { 'field_name': 'entity', 'style': 'simple', 'explode': False }})
-    object: str = field(default=None, metadata={'path_param': { 'field_name': 'object', 'style': 'simple', 'explode': False }})
+    bucket: str = field(metadata={'path_param': { 'field_name': 'bucket', 'style': 'simple', 'explode': False }})
+    entity: str = field(metadata={'path_param': { 'field_name': 'entity', 'style': 'simple', 'explode': False }})
+    object: str = field(metadata={'path_param': { 'field_name': 'object', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,14 +27,14 @@ class StorageObjectAccessControlsGetQueryParams:
 
 @dataclass
 class StorageObjectAccessControlsGetSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class StorageObjectAccessControlsGetSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -44,14 +45,14 @@ class StorageObjectAccessControlsGetSecurity:
 
 @dataclass
 class StorageObjectAccessControlsGetRequest:
-    path_params: StorageObjectAccessControlsGetPathParams = field(default=None)
-    query_params: StorageObjectAccessControlsGetQueryParams = field(default=None)
-    security: StorageObjectAccessControlsGetSecurity = field(default=None)
+    path_params: StorageObjectAccessControlsGetPathParams = field()
+    query_params: StorageObjectAccessControlsGetQueryParams = field()
+    security: StorageObjectAccessControlsGetSecurity = field()
     
 
 @dataclass
 class StorageObjectAccessControlsGetResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     object_access_control: Optional[shared.ObjectAccessControl] = field(default=None)
-    status_code: int = field(default=None)
     

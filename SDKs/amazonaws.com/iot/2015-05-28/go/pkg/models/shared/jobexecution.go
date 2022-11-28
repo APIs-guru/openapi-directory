@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// JobExecution
+// The job execution object represents the execution of a job on a particular device.
 type JobExecution struct {
 	ApproximateSecondsBeforeTimedOut *int64                     `json:"approximateSecondsBeforeTimedOut,omitempty"`
 	ExecutionNumber                  *int64                     `json:"executionNumber,omitempty"`

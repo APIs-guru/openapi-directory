@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var PostRequestIdCmdEqualDiffPathParams = /** @class */ (function (_super) {
     __extends(PostRequestIdCmdEqualDiffPathParams, _super);
@@ -30,7 +30,7 @@ var PostRequestIdCmdEqualDiffPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=id" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" }),
         __metadata("design:type", Number)
     ], PostRequestIdCmdEqualDiffPathParams.prototype, "id", void 0);
     return PostRequestIdCmdEqualDiffPathParams;
@@ -51,15 +51,15 @@ var PostRequestIdCmdEqualDiffQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=diff_to_superseded" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=diff_to_superseded" }),
         __metadata("design:type", String)
     ], PostRequestIdCmdEqualDiffQueryParams.prototype, "diffToSuperseded", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=view" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=view" }),
         __metadata("design:type", String)
     ], PostRequestIdCmdEqualDiffQueryParams.prototype, "view", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=withissues" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=withissues" }),
         __metadata("design:type", String)
     ], PostRequestIdCmdEqualDiffQueryParams.prototype, "withissues", void 0);
     return PostRequestIdCmdEqualDiffQueryParams;
@@ -71,7 +71,7 @@ var PostRequestIdCmdEqualDiffSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=http;subtype=basic" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=basic" }),
         __metadata("design:type", shared.SchemeBasicAuthentication)
     ], PostRequestIdCmdEqualDiffSecurity.prototype, "basicAuthentication", void 0);
     return PostRequestIdCmdEqualDiffSecurity;
@@ -83,15 +83,15 @@ var PostRequestIdCmdEqualDiffRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PostRequestIdCmdEqualDiffPathParams)
     ], PostRequestIdCmdEqualDiffRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PostRequestIdCmdEqualDiffQueryParams)
     ], PostRequestIdCmdEqualDiffRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PostRequestIdCmdEqualDiffSecurity)
     ], PostRequestIdCmdEqualDiffRequest.prototype, "security", void 0);
     return PostRequestIdCmdEqualDiffRequest;
@@ -103,19 +103,19 @@ var PostRequestIdCmdEqualDiffResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], PostRequestIdCmdEqualDiffResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], PostRequestIdCmdEqualDiffResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], PostRequestIdCmdEqualDiffResponse.prototype, "postRequestIdCmdEqualDiff200TextPlainString", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], PostRequestIdCmdEqualDiffResponse.prototype, "statusCode", void 0);
     return PostRequestIdCmdEqualDiffResponse;

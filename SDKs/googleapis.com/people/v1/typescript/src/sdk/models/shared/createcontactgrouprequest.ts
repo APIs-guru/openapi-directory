@@ -1,15 +1,16 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import { ContactGroup } from "./contactgroup";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { ContactGroupInput } from "./contactgroup";
 
 
-// CreateContactGroupRequest
+
+// CreateContactGroupRequestInput
 /** 
  * A request to create a new contact group.
 **/
-export class CreateContactGroupRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=contactGroup" })
-  contactGroup?: ContactGroup;
+export class CreateContactGroupRequestInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=contactGroup" })
+  contactGroup?: ContactGroupInput;
 
-  @Metadata({ data: "json, name=readGroupFields" })
+  @SpeakeasyMetadata({ data: "json, name=readGroupFields" })
   readGroupFields?: string;
 }

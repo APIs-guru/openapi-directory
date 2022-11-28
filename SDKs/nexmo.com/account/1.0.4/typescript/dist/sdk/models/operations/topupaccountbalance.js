@@ -22,9 +22,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
-export var TOPUPACCOUNTBALANCE_SERVERS = [
+export var TopUpAccountBalanceServerList = [
     "https://rest.nexmo.com",
 ];
 var TopUpAccountBalanceQueryParams = /** @class */ (function (_super) {
@@ -33,11 +33,11 @@ var TopUpAccountBalanceQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=api_key" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=api_key" }),
         __metadata("design:type", String)
     ], TopUpAccountBalanceQueryParams.prototype, "apiKey", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=api_secret" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=api_secret" }),
         __metadata("design:type", String)
     ], TopUpAccountBalanceQueryParams.prototype, "apiSecret", void 0);
     return TopUpAccountBalanceQueryParams;
@@ -49,15 +49,15 @@ var TopUpAccountBalanceRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], TopUpAccountBalanceRequest.prototype, "serverUrl", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", TopUpAccountBalanceQueryParams)
     ], TopUpAccountBalanceRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/x-www-form-urlencoded" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/x-www-form-urlencoded" }),
         __metadata("design:type", shared.TopupRequest)
     ], TopUpAccountBalanceRequest.prototype, "request", void 0);
     return TopUpAccountBalanceRequest;
@@ -69,23 +69,23 @@ var TopUpAccountBalanceResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], TopUpAccountBalanceResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], TopUpAccountBalanceResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], TopUpAccountBalanceResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.Success)
     ], TopUpAccountBalanceResponse.prototype, "success", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], TopUpAccountBalanceResponse.prototype, "topUpAccountBalance401ApplicationJsonOneOf", void 0);
     return TopUpAccountBalanceResponse;

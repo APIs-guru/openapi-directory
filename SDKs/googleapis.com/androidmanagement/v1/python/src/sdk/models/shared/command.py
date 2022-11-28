@@ -1,8 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import clearappsdataparams
-from . import clearappsdatastatus
+from sdk import utils
+from . import *
 
 class CommandErrorCodeEnum(str, Enum):
     COMMAND_ERROR_CODE_UNSPECIFIED = "COMMAND_ERROR_CODE_UNSPECIFIED"
@@ -30,13 +31,17 @@ class CommandTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class Command:
-    clear_apps_data_params: Optional[clearappsdataparams.ClearAppsDataParams] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'clearAppsDataParams' }})
-    clear_apps_data_status: Optional[clearappsdatastatus.ClearAppsDataStatus] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'clearAppsDataStatus' }})
-    create_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'createTime' }})
-    duration: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'duration' }})
-    error_code: Optional[CommandErrorCodeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'errorCode' }})
-    new_password: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'newPassword' }})
-    reset_password_flags: Optional[List[CommandResetPasswordFlagsEnum]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'resetPasswordFlags' }})
-    type: Optional[CommandTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
-    user_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'userName' }})
+    r"""Command
+    A command.
+    """
+    
+    clear_apps_data_params: Optional[ClearAppsDataParams] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('clearAppsDataParams') }})
+    clear_apps_data_status: Optional[ClearAppsDataStatus] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('clearAppsDataStatus') }})
+    create_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('createTime') }})
+    duration: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('duration') }})
+    error_code: Optional[CommandErrorCodeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('errorCode') }})
+    new_password: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('newPassword') }})
+    reset_password_flags: Optional[List[CommandResetPasswordFlagsEnum]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('resetPasswordFlags') }})
+    type: Optional[CommandTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('type') }})
+    user_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('userName') }})
     

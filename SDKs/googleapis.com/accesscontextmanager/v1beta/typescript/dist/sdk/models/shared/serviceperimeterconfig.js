@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { VpcAccessibleServices } from "./vpcaccessibleservices";
 // ServicePerimeterConfig
 /**
@@ -34,23 +34,23 @@ var ServicePerimeterConfig = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=accessLevels" }),
+        SpeakeasyMetadata({ data: "json, name=accessLevels" }),
         __metadata("design:type", Array)
     ], ServicePerimeterConfig.prototype, "accessLevels", void 0);
     __decorate([
-        Metadata({ data: "json, name=resources" }),
+        SpeakeasyMetadata({ data: "json, name=resources" }),
         __metadata("design:type", Array)
     ], ServicePerimeterConfig.prototype, "resources", void 0);
     __decorate([
-        Metadata({ data: "json, name=restrictedServices" }),
+        SpeakeasyMetadata({ data: "json, name=restrictedServices" }),
         __metadata("design:type", Array)
     ], ServicePerimeterConfig.prototype, "restrictedServices", void 0);
     __decorate([
-        Metadata({ data: "json, name=unrestrictedServices" }),
+        SpeakeasyMetadata({ data: "json, name=unrestrictedServices" }),
         __metadata("design:type", Array)
     ], ServicePerimeterConfig.prototype, "unrestrictedServices", void 0);
     __decorate([
-        Metadata({ data: "json, name=vpcAccessibleServices" }),
+        SpeakeasyMetadata({ data: "json, name=vpcAccessibleServices" }),
         __metadata("design:type", VpcAccessibleServices)
     ], ServicePerimeterConfig.prototype, "vpcAccessibleServices", void 0);
     return ServicePerimeterConfig;

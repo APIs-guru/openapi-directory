@@ -1,56 +1,57 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class FolderListForPathPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=path" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=path" })
   path: string;
 }
 
 
 export class FolderListForPathQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=cursor" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=cursor" })
   cursor?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=filter" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=filter" })
   filter?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=per_page" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=per_page" })
   perPage?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=preview_size" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=preview_size" })
   previewSize?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=search" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=search" })
   search?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=search_all" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=search_all" })
   searchAll?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=with_previews" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=with_previews" })
   withPreviews?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=with_priority_color" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=with_priority_color" })
   withPriorityColor?: boolean;
 }
 
 
 export class FolderListForPathRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: FolderListForPathPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: FolderListForPathQueryParams;
 }
 
 
 export class FolderListForPathResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata({ elemType: shared.FileEntity })
+  @SpeakeasyMetadata({ elemType: shared.FileEntity })
   fileEntities?: shared.FileEntity[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

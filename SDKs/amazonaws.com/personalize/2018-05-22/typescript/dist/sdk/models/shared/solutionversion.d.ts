@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { SolutionConfig } from "./solutionconfig";
 import { TrainingModeEnum } from "./trainingmodeenum";
 import { TunedHpoParams } from "./tunedhpoparams";

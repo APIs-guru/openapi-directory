@@ -1,36 +1,37 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum GetV1ValidationSingleFormatEnum {
-    Json = "json"
-,    Xml = "xml"
+    Json = "json",
+    Xml = "xml"
 }
 
 
 export class GetV1ValidationSingleQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=email" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=email" })
   email: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=format" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=format" })
   format?: GetV1ValidationSingleFormatEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=key" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=key" })
   key: string;
 }
 
 
 export class GetV1ValidationSingleRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetV1ValidationSingleQueryParams;
 }
 
 
 export class GetV1ValidationSingleResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getV1ValidationSingle200ApplicationJsonString?: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { Field } from "./field";
 /**
  * Contains the parameters for ReportTaskProgress.

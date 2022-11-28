@@ -28,6 +28,8 @@ type ListAttachedIndicesHeaders struct {
 	XAmzDataPartition    string                                       `header:"style=simple,explode=false,name=x-amz-data-partition"`
 }
 
+// ListAttachedIndicesRequestBodyTargetReference
+// The reference that identifies an object.
 type ListAttachedIndicesRequestBodyTargetReference struct {
 	Selector *string `json:"Selector,omitempty"`
 }

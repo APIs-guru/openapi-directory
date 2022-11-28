@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export var GetPurchaseReservedInstancesOfferingActionEnum;
 (function (GetPurchaseReservedInstancesOfferingActionEnum) {
@@ -38,11 +38,11 @@ var GetPurchaseReservedInstancesOfferingLimitPrice = /** @class */ (function (_s
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, name=Amount" }),
+        SpeakeasyMetadata({ data: "queryParam, name=Amount" }),
         __metadata("design:type", Number)
     ], GetPurchaseReservedInstancesOfferingLimitPrice.prototype, "amount", void 0);
     __decorate([
-        Metadata({ data: "queryParam, name=CurrencyCode" }),
+        SpeakeasyMetadata({ data: "queryParam, name=CurrencyCode" }),
         __metadata("design:type", String)
     ], GetPurchaseReservedInstancesOfferingLimitPrice.prototype, "currencyCode", void 0);
     return GetPurchaseReservedInstancesOfferingLimitPrice;
@@ -58,31 +58,31 @@ var GetPurchaseReservedInstancesOfferingQueryParams = /** @class */ (function (_
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=Action" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Action" }),
         __metadata("design:type", String)
     ], GetPurchaseReservedInstancesOfferingQueryParams.prototype, "action", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=DryRun" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=DryRun" }),
         __metadata("design:type", Boolean)
     ], GetPurchaseReservedInstancesOfferingQueryParams.prototype, "dryRun", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=InstanceCount" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=InstanceCount" }),
         __metadata("design:type", Number)
     ], GetPurchaseReservedInstancesOfferingQueryParams.prototype, "instanceCount", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=LimitPrice" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=LimitPrice" }),
         __metadata("design:type", GetPurchaseReservedInstancesOfferingLimitPrice)
     ], GetPurchaseReservedInstancesOfferingQueryParams.prototype, "limitPrice", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=PurchaseTime" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=PurchaseTime" }),
         __metadata("design:type", Date)
     ], GetPurchaseReservedInstancesOfferingQueryParams.prototype, "purchaseTime", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=ReservedInstancesOfferingId" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=ReservedInstancesOfferingId" }),
         __metadata("design:type", String)
     ], GetPurchaseReservedInstancesOfferingQueryParams.prototype, "reservedInstancesOfferingId", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=Version" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Version" }),
         __metadata("design:type", String)
     ], GetPurchaseReservedInstancesOfferingQueryParams.prototype, "version", void 0);
     return GetPurchaseReservedInstancesOfferingQueryParams;
@@ -94,31 +94,31 @@ var GetPurchaseReservedInstancesOfferingHeaders = /** @class */ (function (_supe
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
         __metadata("design:type", String)
     ], GetPurchaseReservedInstancesOfferingHeaders.prototype, "xAmzAlgorithm", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
         __metadata("design:type", String)
     ], GetPurchaseReservedInstancesOfferingHeaders.prototype, "xAmzContentSha256", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
         __metadata("design:type", String)
     ], GetPurchaseReservedInstancesOfferingHeaders.prototype, "xAmzCredential", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
         __metadata("design:type", String)
     ], GetPurchaseReservedInstancesOfferingHeaders.prototype, "xAmzDate", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
         __metadata("design:type", String)
     ], GetPurchaseReservedInstancesOfferingHeaders.prototype, "xAmzSecurityToken", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
         __metadata("design:type", String)
     ], GetPurchaseReservedInstancesOfferingHeaders.prototype, "xAmzSignature", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
         __metadata("design:type", String)
     ], GetPurchaseReservedInstancesOfferingHeaders.prototype, "xAmzSignedHeaders", void 0);
     return GetPurchaseReservedInstancesOfferingHeaders;
@@ -130,11 +130,11 @@ var GetPurchaseReservedInstancesOfferingRequest = /** @class */ (function (_supe
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetPurchaseReservedInstancesOfferingQueryParams)
     ], GetPurchaseReservedInstancesOfferingRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetPurchaseReservedInstancesOfferingHeaders)
     ], GetPurchaseReservedInstancesOfferingRequest.prototype, "headers", void 0);
     return GetPurchaseReservedInstancesOfferingRequest;
@@ -146,15 +146,15 @@ var GetPurchaseReservedInstancesOfferingResponse = /** @class */ (function (_sup
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], GetPurchaseReservedInstancesOfferingResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetPurchaseReservedInstancesOfferingResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetPurchaseReservedInstancesOfferingResponse.prototype, "statusCode", void 0);
     return GetPurchaseReservedInstancesOfferingResponse;

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ComplianceVersion
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Describes the CIS benchmark version that is applicable to a given OS and os version.
 **/
 export class ComplianceVersion extends SpeakeasyBase {
-  @Metadata({ data: "json, name=benchmarkDocument" })
+  @SpeakeasyMetadata({ data: "json, name=benchmarkDocument" })
   benchmarkDocument?: string;
 
-  @Metadata({ data: "json, name=cpeUri" })
+  @SpeakeasyMetadata({ data: "json, name=cpeUri" })
   cpeUri?: string;
 
-  @Metadata({ data: "json, name=version" })
+  @SpeakeasyMetadata({ data: "json, name=version" })
   version?: string;
 }

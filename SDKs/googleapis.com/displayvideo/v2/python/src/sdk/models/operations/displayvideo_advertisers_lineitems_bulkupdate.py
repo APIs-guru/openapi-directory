@@ -1,11 +1,15 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DisplayvideoAdvertisersLineItemsBulkUpdatePathParams:
-    advertisers_id: str = field(default=None, metadata={'path_param': { 'field_name': 'advertisersId', 'style': 'simple', 'explode': False }})
+    advertisers_id: str = field(metadata={'path_param': { 'field_name': 'advertisersId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,21 +29,21 @@ class DisplayvideoAdvertisersLineItemsBulkUpdateQueryParams:
 
 @dataclass
 class DisplayvideoAdvertisersLineItemsBulkUpdateSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DisplayvideoAdvertisersLineItemsBulkUpdateRequest:
-    path_params: DisplayvideoAdvertisersLineItemsBulkUpdatePathParams = field(default=None)
-    query_params: DisplayvideoAdvertisersLineItemsBulkUpdateQueryParams = field(default=None)
-    request: Optional[shared.BulkUpdateLineItemsRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: DisplayvideoAdvertisersLineItemsBulkUpdateSecurity = field(default=None)
+    path_params: DisplayvideoAdvertisersLineItemsBulkUpdatePathParams = field()
+    query_params: DisplayvideoAdvertisersLineItemsBulkUpdateQueryParams = field()
+    security: DisplayvideoAdvertisersLineItemsBulkUpdateSecurity = field()
+    request: Optional[shared.BulkUpdateLineItemsRequestInput] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class DisplayvideoAdvertisersLineItemsBulkUpdateResponse:
+    content_type: str = field()
+    status_code: int = field()
     bulk_update_line_items_response: Optional[shared.BulkUpdateLineItemsResponse] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

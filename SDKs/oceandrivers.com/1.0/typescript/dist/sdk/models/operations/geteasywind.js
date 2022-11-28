@@ -22,14 +22,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var GetEasywindPathParams = /** @class */ (function (_super) {
     __extends(GetEasywindPathParams, _super);
     function GetEasywindPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=easywindId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=easywindId" }),
         __metadata("design:type", String)
     ], GetEasywindPathParams.prototype, "easywindId", void 0);
     return GetEasywindPathParams;
@@ -41,7 +41,7 @@ var GetEasywindQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=period" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=period" }),
         __metadata("design:type", String)
     ], GetEasywindQueryParams.prototype, "period", void 0);
     return GetEasywindQueryParams;
@@ -53,11 +53,11 @@ var GetEasywindRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetEasywindPathParams)
     ], GetEasywindRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetEasywindQueryParams)
     ], GetEasywindRequest.prototype, "queryParams", void 0);
     return GetEasywindRequest;
@@ -69,11 +69,11 @@ var GetEasywindResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetEasywindResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetEasywindResponse.prototype, "statusCode", void 0);
     return GetEasywindResponse;

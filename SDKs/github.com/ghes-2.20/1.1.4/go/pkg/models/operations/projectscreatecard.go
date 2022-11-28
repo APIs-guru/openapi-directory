@@ -17,11 +17,6 @@ type ProjectsCreateCardRequestBody2 struct {
 	ContentType string `json:"content_type"`
 }
 
-type ProjectsCreateCardRequest struct {
-	PathParams ProjectsCreateCardPathParams
-	Request    *interface{} `request:"mediaType=application/json"`
-}
-
 type ProjectsCreateCard503ApplicationJSONErrors struct {
 	Code    *string `json:"code,omitempty"`
 	Message *string `json:"message,omitempty"`
@@ -32,6 +27,11 @@ type ProjectsCreateCard503ApplicationJSON struct {
 	DocumentationURL *string                                      `json:"documentation_url,omitempty"`
 	Errors           []ProjectsCreateCard503ApplicationJSONErrors `json:"errors,omitempty"`
 	Message          *string                                      `json:"message,omitempty"`
+}
+
+type ProjectsCreateCardRequest struct {
+	PathParams ProjectsCreateCardPathParams
+	Request    *interface{} `request:"mediaType=application/json"`
 }
 
 type ProjectsCreateCardResponse struct {

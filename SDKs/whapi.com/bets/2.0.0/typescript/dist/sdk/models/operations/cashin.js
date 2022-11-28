@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var CashinPathParams = /** @class */ (function (_super) {
     __extends(CashinPathParams, _super);
@@ -30,7 +30,7 @@ var CashinPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=betId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=betId" }),
         __metadata("design:type", String)
     ], CashinPathParams.prototype, "betId", void 0);
     return CashinPathParams;
@@ -42,11 +42,11 @@ var CashinQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=cashInValue" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=cashInValue" }),
         __metadata("design:type", Number)
     ], CashinQueryParams.prototype, "cashInValue", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=cashinBetDelayId" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=cashinBetDelayId" }),
         __metadata("design:type", String)
     ], CashinQueryParams.prototype, "cashinBetDelayId", void 0);
     return CashinQueryParams;
@@ -58,15 +58,15 @@ var CashinHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=apiKey" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=apiKey" }),
         __metadata("design:type", String)
     ], CashinHeaders.prototype, "apiKey", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=apiSecret" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=apiSecret" }),
         __metadata("design:type", String)
     ], CashinHeaders.prototype, "apiSecret", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=apiTicket" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=apiTicket" }),
         __metadata("design:type", String)
     ], CashinHeaders.prototype, "apiTicket", void 0);
     return CashinHeaders;
@@ -78,15 +78,15 @@ var CashinRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", CashinPathParams)
     ], CashinRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", CashinQueryParams)
     ], CashinRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", CashinHeaders)
     ], CashinRequest.prototype, "headers", void 0);
     return CashinRequest;
@@ -98,19 +98,19 @@ var CashinResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], CashinResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], CashinResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.CashInResponse)
     ], CashinResponse.prototype, "cashInResponse", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.Errors)
     ], CashinResponse.prototype, "errors", void 0);
     return CashinResponse;

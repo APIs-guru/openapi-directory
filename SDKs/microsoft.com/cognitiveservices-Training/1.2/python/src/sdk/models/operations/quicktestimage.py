@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class QuickTestImagePathParams:
-    project_id: str = field(default=None, metadata={'path_param': { 'field_name': 'projectId', 'style': 'simple', 'explode': False }})
+    project_id: str = field(metadata={'path_param': { 'field_name': 'projectId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -15,32 +15,32 @@ class QuickTestImageQueryParams:
 
 @dataclass
 class QuickTestImageHeaders:
-    training_key: str = field(default=None, metadata={'header': { 'field_name': 'Training-Key', 'style': 'simple', 'explode': False }})
+    training_key: str = field(metadata={'header': { 'field_name': 'Training-Key', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class QuickTestImageRequestBodyImageData:
-    content: bytes = field(default=None, metadata={'multipart_form': { 'content': True }})
-    image_data: str = field(default=None, metadata={'multipart_form': { 'field_name': 'imageData' }})
+    content: bytes = field(metadata={'multipart_form': { 'content': True }})
+    image_data: str = field(metadata={'multipart_form': { 'field_name': 'imageData' }})
     
 
 @dataclass
 class QuickTestImageRequestBody:
-    image_data: QuickTestImageRequestBodyImageData = field(default=None, metadata={'multipart_form': { 'file': True }})
+    image_data: QuickTestImageRequestBodyImageData = field(metadata={'multipart_form': { 'file': True }})
     
 
 @dataclass
 class QuickTestImageRequest:
-    path_params: QuickTestImagePathParams = field(default=None)
-    query_params: QuickTestImageQueryParams = field(default=None)
-    headers: QuickTestImageHeaders = field(default=None)
-    request: QuickTestImageRequestBody = field(default=None, metadata={'request': { 'media_type': 'multipart/form-data' }})
+    headers: QuickTestImageHeaders = field()
+    path_params: QuickTestImagePathParams = field()
+    query_params: QuickTestImageQueryParams = field()
+    request: QuickTestImageRequestBody = field(metadata={'request': { 'media_type': 'multipart/form-data' }})
     
 
 @dataclass
 class QuickTestImageResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     image_prediction_result: Optional[shared.ImagePredictionResult] = field(default=None)
-    status_code: int = field(default=None)
     

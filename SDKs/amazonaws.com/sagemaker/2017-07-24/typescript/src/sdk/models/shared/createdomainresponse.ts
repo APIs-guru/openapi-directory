@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class CreateDomainResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DomainArn" })
+  @SpeakeasyMetadata({ data: "json, name=DomainArn" })
   domainArn?: string;
 
-  @Metadata({ data: "json, name=Url" })
+  @SpeakeasyMetadata({ data: "json, name=Url" })
   url?: string;
 }

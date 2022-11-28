@@ -22,54 +22,54 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var ConfigTftp = /** @class */ (function (_super) {
     __extends(ConfigTftp, _super);
     function ConfigTftp() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=cache" }),
+        SpeakeasyMetadata({ data: "json, name=cache" }),
         __metadata("design:type", Number)
     ], ConfigTftp.prototype, "cache", void 0);
     __decorate([
-        Metadata({ data: "json, name=client" }),
+        SpeakeasyMetadata({ data: "json, name=client" }),
         __metadata("design:type", String)
     ], ConfigTftp.prototype, "client", void 0);
     __decorate([
-        Metadata({ data: "json, name=dstfile" }),
+        SpeakeasyMetadata({ data: "json, name=dstfile" }),
         __metadata("design:type", String)
     ], ConfigTftp.prototype, "dstfile", void 0);
     __decorate([
-        Metadata({ data: "json, name=mode" }),
+        SpeakeasyMetadata({ data: "json, name=mode" }),
         __metadata("design:type", String)
     ], ConfigTftp.prototype, "mode", void 0);
     __decorate([
-        Metadata({ data: "json, name=port" }),
+        SpeakeasyMetadata({ data: "json, name=port" }),
         __metadata("design:type", Number)
     ], ConfigTftp.prototype, "port", void 0);
     __decorate([
-        Metadata({ data: "json, name=retries" }),
+        SpeakeasyMetadata({ data: "json, name=retries" }),
         __metadata("design:type", Number)
     ], ConfigTftp.prototype, "retries", void 0);
     __decorate([
-        Metadata({ data: "json, name=script" }),
+        SpeakeasyMetadata({ data: "json, name=script" }),
         __metadata("design:type", String)
     ], ConfigTftp.prototype, "script", void 0);
     __decorate([
-        Metadata({ data: "json, name=server" }),
+        SpeakeasyMetadata({ data: "json, name=server" }),
         __metadata("design:type", String)
     ], ConfigTftp.prototype, "server", void 0);
     __decorate([
-        Metadata({ data: "json, name=srcfile" }),
+        SpeakeasyMetadata({ data: "json, name=srcfile" }),
         __metadata("design:type", String)
     ], ConfigTftp.prototype, "srcfile", void 0);
     __decorate([
-        Metadata({ data: "json, name=timeout" }),
+        SpeakeasyMetadata({ data: "json, name=timeout" }),
         __metadata("design:type", Number)
     ], ConfigTftp.prototype, "timeout", void 0);
     __decorate([
-        Metadata({ data: "json, name=trace" }),
+        SpeakeasyMetadata({ data: "json, name=trace" }),
         __metadata("design:type", String)
     ], ConfigTftp.prototype, "trace", void 0);
     return ConfigTftp;

@@ -22,9 +22,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AssessmentReportsDestination } from "./assessmentreportsdestination";
+import { Role } from "./role";
 // Settings
 /**
  *  The settings object that holds all supported Audit Manager settings.
@@ -35,23 +35,23 @@ var Settings = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=defaultAssessmentReportsDestination" }),
+        SpeakeasyMetadata({ data: "json, name=defaultAssessmentReportsDestination" }),
         __metadata("design:type", AssessmentReportsDestination)
     ], Settings.prototype, "defaultAssessmentReportsDestination", void 0);
     __decorate([
-        Metadata({ data: "json, name=defaultProcessOwners", elemType: shared.Role }),
+        SpeakeasyMetadata({ data: "json, name=defaultProcessOwners", elemType: Role }),
         __metadata("design:type", Array)
     ], Settings.prototype, "defaultProcessOwners", void 0);
     __decorate([
-        Metadata({ data: "json, name=isAwsOrgEnabled" }),
+        SpeakeasyMetadata({ data: "json, name=isAwsOrgEnabled" }),
         __metadata("design:type", Boolean)
     ], Settings.prototype, "isAwsOrgEnabled", void 0);
     __decorate([
-        Metadata({ data: "json, name=kmsKey" }),
+        SpeakeasyMetadata({ data: "json, name=kmsKey" }),
         __metadata("design:type", String)
     ], Settings.prototype, "kmsKey", void 0);
     __decorate([
-        Metadata({ data: "json, name=snsTopic" }),
+        SpeakeasyMetadata({ data: "json, name=snsTopic" }),
         __metadata("design:type", String)
     ], Settings.prototype, "snsTopic", void 0);
     return Settings;

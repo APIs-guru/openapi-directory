@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DataSourceSheetDimensionRange } from "./datasourcesheetdimensionrange";
 import { DimensionProperties } from "./dimensionproperties";
 import { DimensionRange } from "./dimensionrange";
+
 
 
 // UpdateDimensionPropertiesRequest
@@ -9,15 +10,15 @@ import { DimensionRange } from "./dimensionrange";
  * Updates properties of dimensions within the specified range.
 **/
 export class UpdateDimensionPropertiesRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=dataSourceSheetRange" })
+  @SpeakeasyMetadata({ data: "json, name=dataSourceSheetRange" })
   dataSourceSheetRange?: DataSourceSheetDimensionRange;
 
-  @Metadata({ data: "json, name=fields" })
+  @SpeakeasyMetadata({ data: "json, name=fields" })
   fields?: string;
 
-  @Metadata({ data: "json, name=properties" })
+  @SpeakeasyMetadata({ data: "json, name=properties" })
   properties?: DimensionProperties;
 
-  @Metadata({ data: "json, name=range" })
+  @SpeakeasyMetadata({ data: "json, name=range" })
   range?: DimensionRange;
 }

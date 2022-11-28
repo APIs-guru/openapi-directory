@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudApigeeV1DeploymentChangeReportRoutingDeployment } from "./googlecloudapigeev1deploymentchangereportroutingdeployment";
+
 
 
 // GoogleCloudApigeeV1DeploymentChangeReportRoutingConflict
@@ -7,12 +8,12 @@ import { GoogleCloudApigeeV1DeploymentChangeReportRoutingDeployment } from "./go
  * Describes a routing conflict that may cause a deployment not to receive traffic at some base path.
 **/
 export class GoogleCloudApigeeV1DeploymentChangeReportRoutingConflict extends SpeakeasyBase {
-  @Metadata({ data: "json, name=conflictingDeployment" })
+  @SpeakeasyMetadata({ data: "json, name=conflictingDeployment" })
   conflictingDeployment?: GoogleCloudApigeeV1DeploymentChangeReportRoutingDeployment;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=environmentGroup" })
+  @SpeakeasyMetadata({ data: "json, name=environmentGroup" })
   environmentGroup?: string;
 }

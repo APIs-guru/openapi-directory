@@ -1,0 +1,98 @@
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import * as shared from "../shared";
+var GistsListCommentsPathParams = /** @class */ (function (_super) {
+    __extends(GistsListCommentsPathParams, _super);
+    function GistsListCommentsPathParams() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=gist_id" }),
+        __metadata("design:type", String)
+    ], GistsListCommentsPathParams.prototype, "gistId", void 0);
+    return GistsListCommentsPathParams;
+}(SpeakeasyBase));
+export { GistsListCommentsPathParams };
+var GistsListCommentsQueryParams = /** @class */ (function (_super) {
+    __extends(GistsListCommentsQueryParams, _super);
+    function GistsListCommentsQueryParams() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page" }),
+        __metadata("design:type", Number)
+    ], GistsListCommentsQueryParams.prototype, "page", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=per_page" }),
+        __metadata("design:type", Number)
+    ], GistsListCommentsQueryParams.prototype, "perPage", void 0);
+    return GistsListCommentsQueryParams;
+}(SpeakeasyBase));
+export { GistsListCommentsQueryParams };
+var GistsListCommentsRequest = /** @class */ (function (_super) {
+    __extends(GistsListCommentsRequest, _super);
+    function GistsListCommentsRequest() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", GistsListCommentsPathParams)
+    ], GistsListCommentsRequest.prototype, "pathParams", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", GistsListCommentsQueryParams)
+    ], GistsListCommentsRequest.prototype, "queryParams", void 0);
+    return GistsListCommentsRequest;
+}(SpeakeasyBase));
+export { GistsListCommentsRequest };
+var GistsListCommentsResponse = /** @class */ (function (_super) {
+    __extends(GistsListCommentsResponse, _super);
+    function GistsListCommentsResponse() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", String)
+    ], GistsListCommentsResponse.prototype, "contentType", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", Map)
+    ], GistsListCommentsResponse.prototype, "headers", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", Number)
+    ], GistsListCommentsResponse.prototype, "statusCode", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", shared.BasicError)
+    ], GistsListCommentsResponse.prototype, "basicError", void 0);
+    __decorate([
+        SpeakeasyMetadata({ elemType: shared.GistComment }),
+        __metadata("design:type", Array)
+    ], GistsListCommentsResponse.prototype, "gistComments", void 0);
+    return GistsListCommentsResponse;
+}(SpeakeasyBase));
+export { GistsListCommentsResponse };

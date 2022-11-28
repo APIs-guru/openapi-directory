@@ -1,5 +1,7 @@
 package shared
 
+// MuxStream
+// Multiplexing settings for output stream.
 type MuxStream struct {
 	Container         *string          `json:"container,omitempty"`
 	ElementaryStreams []string         `json:"elementaryStreams,omitempty"`

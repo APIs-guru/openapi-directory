@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// ObFundsConfirmationConsentResponse1DataDebtorAccount
+// Unambiguous identification of the account of the debtor to which a confirmation of funds consent will be applied.
 type ObFundsConfirmationConsentResponse1DataDebtorAccount struct {
 	Identification          string  `json:"Identification"`
 	Name                    *string `json:"Name,omitempty"`

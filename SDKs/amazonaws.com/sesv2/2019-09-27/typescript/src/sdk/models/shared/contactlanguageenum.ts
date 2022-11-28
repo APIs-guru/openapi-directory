@@ -1,6 +1,7 @@
 
 
+
 export enum ContactLanguageEnum {
-    En = "EN"
-,    Ja = "JA"
+    En = "EN",
+    Ja = "JA"
 }

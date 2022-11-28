@@ -1,7 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import googlefirestoreadminv1beta2indexfield
+from sdk import utils
+from . import *
 
 class GoogleFirestoreAdminV1beta2IndexQueryScopeEnum(str, Enum):
     QUERY_SCOPE_UNSPECIFIED = "QUERY_SCOPE_UNSPECIFIED"
@@ -18,8 +20,12 @@ class GoogleFirestoreAdminV1beta2IndexStateEnum(str, Enum):
 @dataclass_json
 @dataclass
 class GoogleFirestoreAdminV1beta2Index:
-    fields: Optional[List[googlefirestoreadminv1beta2indexfield.GoogleFirestoreAdminV1beta2IndexField]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'fields' }})
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    query_scope: Optional[GoogleFirestoreAdminV1beta2IndexQueryScopeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'queryScope' }})
-    state: Optional[GoogleFirestoreAdminV1beta2IndexStateEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'state' }})
+    r"""GoogleFirestoreAdminV1beta2Index
+    Cloud Firestore indexes enable simple and complex queries against documents in a database.
+    """
+    
+    fields: Optional[List[GoogleFirestoreAdminV1beta2IndexField]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('fields') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    query_scope: Optional[GoogleFirestoreAdminV1beta2IndexQueryScopeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('queryScope') }})
+    state: Optional[GoogleFirestoreAdminV1beta2IndexStateEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('state') }})
     

@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DimensionValue } from "./dimensionvalue";
+
 
 
 // OptimizationActivity
@@ -7,12 +8,12 @@ import { DimensionValue } from "./dimensionvalue";
  * Creative optimization activity.
 **/
 export class OptimizationActivity extends SpeakeasyBase {
-  @Metadata({ data: "json, name=floodlightActivityId" })
+  @SpeakeasyMetadata({ data: "json, name=floodlightActivityId" })
   floodlightActivityId?: string;
 
-  @Metadata({ data: "json, name=floodlightActivityIdDimensionValue" })
+  @SpeakeasyMetadata({ data: "json, name=floodlightActivityIdDimensionValue" })
   floodlightActivityIdDimensionValue?: DimensionValue;
 
-  @Metadata({ data: "json, name=weight" })
+  @SpeakeasyMetadata({ data: "json, name=weight" })
   weight?: number;
 }

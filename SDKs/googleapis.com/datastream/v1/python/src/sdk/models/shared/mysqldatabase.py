@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import mysqltable
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class MysqlDatabase:
-    database: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'database' }})
-    mysql_tables: Optional[List[mysqltable.MysqlTable]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'mysqlTables' }})
+    r"""MysqlDatabase
+    MySQL database.
+    """
+    
+    database: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('database') }})
+    mysql_tables: Optional[List[MysqlTable]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('mysqlTables') }})
     

@@ -1,8 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ResourceStatusEnum } from "./resourcestatusenum";
 import { Tag } from "./tag";
 import { RuleGroupTypeEnum } from "./rulegrouptypeenum";
+
 
 
 // RuleGroupResponse
@@ -10,27 +10,27 @@ import { RuleGroupTypeEnum } from "./rulegrouptypeenum";
  * The high-level properties of a rule group. This, along with the <a>RuleGroup</a>, define the rule group. You can retrieve all objects for a rule group by calling <a>DescribeRuleGroup</a>. 
 **/
 export class RuleGroupResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Capacity" })
+  @SpeakeasyMetadata({ data: "json, name=Capacity" })
   capacity?: number;
 
-  @Metadata({ data: "json, name=Description" })
+  @SpeakeasyMetadata({ data: "json, name=Description" })
   description?: string;
 
-  @Metadata({ data: "json, name=RuleGroupArn" })
+  @SpeakeasyMetadata({ data: "json, name=RuleGroupArn" })
   ruleGroupArn: string;
 
-  @Metadata({ data: "json, name=RuleGroupId" })
+  @SpeakeasyMetadata({ data: "json, name=RuleGroupId" })
   ruleGroupId: string;
 
-  @Metadata({ data: "json, name=RuleGroupName" })
+  @SpeakeasyMetadata({ data: "json, name=RuleGroupName" })
   ruleGroupName: string;
 
-  @Metadata({ data: "json, name=RuleGroupStatus" })
+  @SpeakeasyMetadata({ data: "json, name=RuleGroupStatus" })
   ruleGroupStatus?: ResourceStatusEnum;
 
-  @Metadata({ data: "json, name=Tags", elemType: shared.Tag })
+  @SpeakeasyMetadata({ data: "json, name=Tags", elemType: Tag })
   tags?: Tag[];
 
-  @Metadata({ data: "json, name=Type" })
+  @SpeakeasyMetadata({ data: "json, name=Type" })
   type?: RuleGroupTypeEnum;
 }

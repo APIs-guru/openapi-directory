@@ -30,7 +30,7 @@ type BaremetalsolutionProjectsLocationsInstancesCreateSecurity struct {
 type BaremetalsolutionProjectsLocationsInstancesCreateRequest struct {
 	PathParams  BaremetalsolutionProjectsLocationsInstancesCreatePathParams
 	QueryParams BaremetalsolutionProjectsLocationsInstancesCreateQueryParams
-	Request     *shared.Instance `request:"mediaType=application/json"`
+	Request     *shared.InstanceInput `request:"mediaType=application/json"`
 	Security    BaremetalsolutionProjectsLocationsInstancesCreateSecurity
 }
 

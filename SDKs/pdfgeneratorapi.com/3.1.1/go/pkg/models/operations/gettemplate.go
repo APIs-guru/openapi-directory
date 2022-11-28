@@ -8,10 +8,6 @@ type GetTemplateQueryParams struct {
 	TemplateID int64 `queryParam:"style=form,explode=true,name=templateId"`
 }
 
-type GetTemplateRequest struct {
-	QueryParams GetTemplateQueryParams
-}
-
 type GetTemplate200ApplicationJSON struct {
 	Response *shared.TemplateDefinition `json:"response,omitempty"`
 }
@@ -77,6 +73,10 @@ type GetTemplate422ApplicationJSON struct {
 type GetTemplate500ApplicationJSON struct {
 	Error  *string `json:"error,omitempty"`
 	Status *int64  `json:"status,omitempty"`
+}
+
+type GetTemplateRequest struct {
+	QueryParams GetTemplateQueryParams
 }
 
 type GetTemplateResponse struct {

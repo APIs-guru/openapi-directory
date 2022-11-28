@@ -1,5 +1,7 @@
 package shared
 
+// UpdateWebhookRequest
+// Request model for updating a webhook
 type UpdateWebhookRequest struct {
 	EventTypeNames      []string `json:"eventTypeNames,omitempty"`
 	IsEnabled           *bool    `json:"isEnabled,omitempty"`

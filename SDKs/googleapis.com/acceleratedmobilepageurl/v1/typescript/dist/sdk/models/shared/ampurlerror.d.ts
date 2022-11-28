@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 export declare enum AmpUrlErrorErrorCodeEnum {
     ErrorCodeUnspecified = "ERROR_CODE_UNSPECIFIED",
     InputUrlNotFound = "INPUT_URL_NOT_FOUND",

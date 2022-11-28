@@ -41,6 +41,8 @@ const (
 	SustainabilityCertificationsLeedCertificationExceptionEnumDependentOnDayOfWeek SustainabilityCertificationsLeedCertificationExceptionEnum = "DEPENDENT_ON_DAY_OF_WEEK"
 )
 
+// SustainabilityCertifications
+// Sustainability certifications the hotel has been awarded.
 type SustainabilityCertifications struct {
 	BreeamCertification          *SustainabilityCertificationsBreeamCertificationEnum          `json:"breeamCertification,omitempty"`
 	BreeamCertificationException *SustainabilityCertificationsBreeamCertificationExceptionEnum `json:"breeamCertificationException,omitempty"`

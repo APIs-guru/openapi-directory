@@ -1,8 +1,11 @@
-import warnings
+
+
 import requests
 from typing import Any,List,Optional
-from sdk.models import operations, shared
+from sdk.models import shared, operations
 from . import utils
+
+
 
 
 SERVERS = [
@@ -11,28 +14,49 @@ SERVERS = [
 
 
 class SDK:
-    client = requests.Session()
-    server_url = SERVERS[0]
+    
+
+    _client: requests.Session
+    _security_client: requests.Session
+    
+    _server_url: str = SERVERS[0]
+    _language: str = "python"
+    _sdk_version: str = "0.0.1"
+    _gen_version: str = "internal"
+
+    def __init__(self) -> None:
+        self._client = requests.Session()
+        self._security_client = requests.Session()
+        
+
 
     def config_server_url(self, server_url: str, params: dict[str, str]):
-        if not params is None:
-            self.server_url = utils.replace_parameters(server_url, params)
+        if params is not None:
+            self._server_url = utils.replace_parameters(server_url, params)
         else:
-            self.server_url = server_url
-            
+            self._server_url = server_url
+
+        
     
 
+    def config_client(self, client: requests.Session):
+        self._client = client
+        
+    
+    
     
     def get_search_v1_fields(self, request: operations.GetSearchV1FieldsRequest) -> operations.GetSearchV1FieldsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Fields that can be requested
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/search/v1/fields"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -49,15 +73,18 @@ class SDK:
 
     
     def get_search_v1_organic(self, request: operations.GetSearchV1OrganicRequest) -> operations.GetSearchV1OrganicResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Return relevance-based results from search queries
+        
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/search/v1/organic"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -80,15 +107,18 @@ class SDK:
 
     
     def get_search_v1_scrape(self, request: operations.GetSearchV1ScrapeRequest) -> operations.GetSearchV1ScrapeResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Scrape search results from Internet Archive, allowing a scrolling cursor
+        
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/search/v1/scrape"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 

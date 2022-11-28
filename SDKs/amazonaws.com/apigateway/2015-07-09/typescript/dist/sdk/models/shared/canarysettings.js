@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // CanarySettings
 /**
  * Configuration settings of a canary deployment.
@@ -33,19 +33,19 @@ var CanarySettings = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=deploymentId" }),
+        SpeakeasyMetadata({ data: "json, name=deploymentId" }),
         __metadata("design:type", String)
     ], CanarySettings.prototype, "deploymentId", void 0);
     __decorate([
-        Metadata({ data: "json, name=percentTraffic" }),
+        SpeakeasyMetadata({ data: "json, name=percentTraffic" }),
         __metadata("design:type", Number)
     ], CanarySettings.prototype, "percentTraffic", void 0);
     __decorate([
-        Metadata({ data: "json, name=stageVariableOverrides" }),
+        SpeakeasyMetadata({ data: "json, name=stageVariableOverrides" }),
         __metadata("design:type", Map)
     ], CanarySettings.prototype, "stageVariableOverrides", void 0);
     __decorate([
-        Metadata({ data: "json, name=useStageCache" }),
+        SpeakeasyMetadata({ data: "json, name=useStageCache" }),
         __metadata("design:type", Boolean)
     ], CanarySettings.prototype, "useStageCache", void 0);
     return CanarySettings;

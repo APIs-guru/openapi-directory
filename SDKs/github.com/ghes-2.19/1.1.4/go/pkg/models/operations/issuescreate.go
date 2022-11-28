@@ -25,15 +25,15 @@ type IssuesCreateRequestBody struct {
 	Title     interface{}   `json:"title"`
 }
 
-type IssuesCreateRequest struct {
-	PathParams IssuesCreatePathParams
-	Request    *IssuesCreateRequestBody `request:"mediaType=application/json"`
-}
-
 type IssuesCreate503ApplicationJSON struct {
 	Code             *string `json:"code,omitempty"`
 	DocumentationURL *string `json:"documentation_url,omitempty"`
 	Message          *string `json:"message,omitempty"`
+}
+
+type IssuesCreateRequest struct {
+	PathParams IssuesCreatePathParams
+	Request    *IssuesCreateRequestBody `request:"mediaType=application/json"`
 }
 
 type IssuesCreateResponse struct {

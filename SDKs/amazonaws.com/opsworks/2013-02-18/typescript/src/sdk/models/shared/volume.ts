@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Volume
@@ -6,45 +7,45 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Describes an instance's Amazon EBS volume.
 **/
 export class Volume extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AvailabilityZone" })
+  @SpeakeasyMetadata({ data: "json, name=AvailabilityZone" })
   availabilityZone?: string;
 
-  @Metadata({ data: "json, name=Device" })
+  @SpeakeasyMetadata({ data: "json, name=Device" })
   device?: string;
 
-  @Metadata({ data: "json, name=Ec2VolumeId" })
+  @SpeakeasyMetadata({ data: "json, name=Ec2VolumeId" })
   ec2VolumeId?: string;
 
-  @Metadata({ data: "json, name=Encrypted" })
+  @SpeakeasyMetadata({ data: "json, name=Encrypted" })
   encrypted?: boolean;
 
-  @Metadata({ data: "json, name=InstanceId" })
+  @SpeakeasyMetadata({ data: "json, name=InstanceId" })
   instanceId?: string;
 
-  @Metadata({ data: "json, name=Iops" })
+  @SpeakeasyMetadata({ data: "json, name=Iops" })
   iops?: number;
 
-  @Metadata({ data: "json, name=MountPoint" })
+  @SpeakeasyMetadata({ data: "json, name=MountPoint" })
   mountPoint?: string;
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name?: string;
 
-  @Metadata({ data: "json, name=RaidArrayId" })
+  @SpeakeasyMetadata({ data: "json, name=RaidArrayId" })
   raidArrayId?: string;
 
-  @Metadata({ data: "json, name=Region" })
+  @SpeakeasyMetadata({ data: "json, name=Region" })
   region?: string;
 
-  @Metadata({ data: "json, name=Size" })
+  @SpeakeasyMetadata({ data: "json, name=Size" })
   size?: number;
 
-  @Metadata({ data: "json, name=Status" })
+  @SpeakeasyMetadata({ data: "json, name=Status" })
   status?: string;
 
-  @Metadata({ data: "json, name=VolumeId" })
+  @SpeakeasyMetadata({ data: "json, name=VolumeId" })
   volumeId?: string;
 
-  @Metadata({ data: "json, name=VolumeType" })
+  @SpeakeasyMetadata({ data: "json, name=VolumeType" })
   volumeType?: string;
 }

@@ -1,14 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleDevtoolsRemotebuildexecutionAdminV1alphaAutoscale } from "./googledevtoolsremotebuildexecutionadminv1alphaautoscale";
 import { GoogleDevtoolsRemotebuildexecutionAdminV1alphaWorkerConfig } from "./googledevtoolsremotebuildexecutionadminv1alphaworkerconfig";
 
+
 export enum GoogleDevtoolsRemotebuildexecutionAdminV1alphaWorkerPoolStateEnum {
-    StateUnspecified = "STATE_UNSPECIFIED"
-,    Creating = "CREATING"
-,    Running = "RUNNING"
-,    Updating = "UPDATING"
-,    Deleting = "DELETING"
-,    Inactive = "INACTIVE"
+    StateUnspecified = "STATE_UNSPECIFIED",
+    Creating = "CREATING",
+    Running = "RUNNING",
+    Updating = "UPDATING",
+    Deleting = "DELETING",
+    Inactive = "INACTIVE"
 }
 
 
@@ -17,24 +18,24 @@ export enum GoogleDevtoolsRemotebuildexecutionAdminV1alphaWorkerPoolStateEnum {
  * A worker pool resource in the Remote Build Execution API.
 **/
 export class GoogleDevtoolsRemotebuildexecutionAdminV1alphaWorkerPool extends SpeakeasyBase {
-  @Metadata({ data: "json, name=autoscale" })
+  @SpeakeasyMetadata({ data: "json, name=autoscale" })
   autoscale?: GoogleDevtoolsRemotebuildexecutionAdminV1alphaAutoscale;
 
-  @Metadata({ data: "json, name=channel" })
+  @SpeakeasyMetadata({ data: "json, name=channel" })
   channel?: string;
 
-  @Metadata({ data: "json, name=hostOs" })
+  @SpeakeasyMetadata({ data: "json, name=hostOs" })
   hostOs?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=state" })
+  @SpeakeasyMetadata({ data: "json, name=state" })
   state?: GoogleDevtoolsRemotebuildexecutionAdminV1alphaWorkerPoolStateEnum;
 
-  @Metadata({ data: "json, name=workerConfig" })
+  @SpeakeasyMetadata({ data: "json, name=workerConfig" })
   workerConfig?: GoogleDevtoolsRemotebuildexecutionAdminV1alphaWorkerConfig;
 
-  @Metadata({ data: "json, name=workerCount" })
+  @SpeakeasyMetadata({ data: "json, name=workerCount" })
   workerCount?: string;
 }

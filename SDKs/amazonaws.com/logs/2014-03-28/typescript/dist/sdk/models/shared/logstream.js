@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // LogStream
 /**
  * Represents a log stream, which is a sequence of log events from a single emitter of logs.
@@ -33,35 +33,35 @@ var LogStream = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=arn" }),
+        SpeakeasyMetadata({ data: "json, name=arn" }),
         __metadata("design:type", String)
     ], LogStream.prototype, "arn", void 0);
     __decorate([
-        Metadata({ data: "json, name=creationTime" }),
+        SpeakeasyMetadata({ data: "json, name=creationTime" }),
         __metadata("design:type", Number)
     ], LogStream.prototype, "creationTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=firstEventTimestamp" }),
+        SpeakeasyMetadata({ data: "json, name=firstEventTimestamp" }),
         __metadata("design:type", Number)
     ], LogStream.prototype, "firstEventTimestamp", void 0);
     __decorate([
-        Metadata({ data: "json, name=lastEventTimestamp" }),
+        SpeakeasyMetadata({ data: "json, name=lastEventTimestamp" }),
         __metadata("design:type", Number)
     ], LogStream.prototype, "lastEventTimestamp", void 0);
     __decorate([
-        Metadata({ data: "json, name=lastIngestionTime" }),
+        SpeakeasyMetadata({ data: "json, name=lastIngestionTime" }),
         __metadata("design:type", Number)
     ], LogStream.prototype, "lastIngestionTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=logStreamName" }),
+        SpeakeasyMetadata({ data: "json, name=logStreamName" }),
         __metadata("design:type", String)
     ], LogStream.prototype, "logStreamName", void 0);
     __decorate([
-        Metadata({ data: "json, name=storedBytes" }),
+        SpeakeasyMetadata({ data: "json, name=storedBytes" }),
         __metadata("design:type", Number)
     ], LogStream.prototype, "storedBytes", void 0);
     __decorate([
-        Metadata({ data: "json, name=uploadSequenceToken" }),
+        SpeakeasyMetadata({ data: "json, name=uploadSequenceToken" }),
         __metadata("design:type", String)
     ], LogStream.prototype, "uploadSequenceToken", void 0);
     return LogStream;

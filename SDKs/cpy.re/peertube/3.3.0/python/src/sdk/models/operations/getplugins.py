@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
 from typing import Any,Optional
+from sdk.models import shared
 
 
 @dataclass
@@ -13,18 +14,18 @@ class GetPluginsQueryParams:
 
 @dataclass
 class GetPluginsSecurity:
-    o_auth2: shared.SchemeOAuth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    o_auth2: shared.SchemeOAuth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class GetPluginsRequest:
-    query_params: GetPluginsQueryParams = field(default=None)
-    security: GetPluginsSecurity = field(default=None)
+    query_params: GetPluginsQueryParams = field()
+    security: GetPluginsSecurity = field()
     
 
 @dataclass
 class GetPluginsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     plugin_response: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

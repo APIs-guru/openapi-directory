@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AccountInfo } from "./accountinfo";
 import { DriveOptions } from "./driveoptions";
 import { HangoutsChatInfo } from "./hangoutschatinfo";
@@ -81,75 +81,75 @@ var Query = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=accountInfo" }),
+        SpeakeasyMetadata({ data: "json, name=accountInfo" }),
         __metadata("design:type", AccountInfo)
     ], Query.prototype, "accountInfo", void 0);
     __decorate([
-        Metadata({ data: "json, name=corpus" }),
+        SpeakeasyMetadata({ data: "json, name=corpus" }),
         __metadata("design:type", String)
     ], Query.prototype, "corpus", void 0);
     __decorate([
-        Metadata({ data: "json, name=dataScope" }),
+        SpeakeasyMetadata({ data: "json, name=dataScope" }),
         __metadata("design:type", String)
     ], Query.prototype, "dataScope", void 0);
     __decorate([
-        Metadata({ data: "json, name=driveOptions" }),
+        SpeakeasyMetadata({ data: "json, name=driveOptions" }),
         __metadata("design:type", DriveOptions)
     ], Query.prototype, "driveOptions", void 0);
     __decorate([
-        Metadata({ data: "json, name=endTime" }),
+        SpeakeasyMetadata({ data: "json, name=endTime" }),
         __metadata("design:type", String)
     ], Query.prototype, "endTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=hangoutsChatInfo" }),
+        SpeakeasyMetadata({ data: "json, name=hangoutsChatInfo" }),
         __metadata("design:type", HangoutsChatInfo)
     ], Query.prototype, "hangoutsChatInfo", void 0);
     __decorate([
-        Metadata({ data: "json, name=hangoutsChatOptions" }),
+        SpeakeasyMetadata({ data: "json, name=hangoutsChatOptions" }),
         __metadata("design:type", HangoutsChatOptions)
     ], Query.prototype, "hangoutsChatOptions", void 0);
     __decorate([
-        Metadata({ data: "json, name=mailOptions" }),
+        SpeakeasyMetadata({ data: "json, name=mailOptions" }),
         __metadata("design:type", MailOptions)
     ], Query.prototype, "mailOptions", void 0);
     __decorate([
-        Metadata({ data: "json, name=method" }),
+        SpeakeasyMetadata({ data: "json, name=method" }),
         __metadata("design:type", String)
     ], Query.prototype, "method", void 0);
     __decorate([
-        Metadata({ data: "json, name=orgUnitInfo" }),
+        SpeakeasyMetadata({ data: "json, name=orgUnitInfo" }),
         __metadata("design:type", OrgUnitInfo)
     ], Query.prototype, "orgUnitInfo", void 0);
     __decorate([
-        Metadata({ data: "json, name=searchMethod" }),
+        SpeakeasyMetadata({ data: "json, name=searchMethod" }),
         __metadata("design:type", String)
     ], Query.prototype, "searchMethod", void 0);
     __decorate([
-        Metadata({ data: "json, name=sharedDriveInfo" }),
+        SpeakeasyMetadata({ data: "json, name=sharedDriveInfo" }),
         __metadata("design:type", SharedDriveInfo)
     ], Query.prototype, "sharedDriveInfo", void 0);
     __decorate([
-        Metadata({ data: "json, name=sitesUrlInfo" }),
+        SpeakeasyMetadata({ data: "json, name=sitesUrlInfo" }),
         __metadata("design:type", SitesUrlInfo)
     ], Query.prototype, "sitesUrlInfo", void 0);
     __decorate([
-        Metadata({ data: "json, name=startTime" }),
+        SpeakeasyMetadata({ data: "json, name=startTime" }),
         __metadata("design:type", String)
     ], Query.prototype, "startTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=teamDriveInfo" }),
+        SpeakeasyMetadata({ data: "json, name=teamDriveInfo" }),
         __metadata("design:type", TeamDriveInfo)
     ], Query.prototype, "teamDriveInfo", void 0);
     __decorate([
-        Metadata({ data: "json, name=terms" }),
+        SpeakeasyMetadata({ data: "json, name=terms" }),
         __metadata("design:type", String)
     ], Query.prototype, "terms", void 0);
     __decorate([
-        Metadata({ data: "json, name=timeZone" }),
+        SpeakeasyMetadata({ data: "json, name=timeZone" }),
         __metadata("design:type", String)
     ], Query.prototype, "timeZone", void 0);
     __decorate([
-        Metadata({ data: "json, name=voiceOptions" }),
+        SpeakeasyMetadata({ data: "json, name=voiceOptions" }),
         __metadata("design:type", VoiceOptions)
     ], Query.prototype, "voiceOptions", void 0);
     return Query;

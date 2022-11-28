@@ -15,14 +15,14 @@ type CreateAttachmentForTaskQueryParams struct {
 	OptPretty *bool    `queryParam:"style=form,explode=true,name=opt_pretty"`
 }
 
+type CreateAttachmentForTask200ApplicationJSON struct {
+	Data *shared.AttachmentResponse `json:"data,omitempty"`
+}
+
 type CreateAttachmentForTaskRequest struct {
 	PathParams  CreateAttachmentForTaskPathParams
 	QueryParams CreateAttachmentForTaskQueryParams
 	Request     shared.AttachmentRequest `request:"mediaType=multipart/form-data"`
-}
-
-type CreateAttachmentForTask200ApplicationJSON struct {
-	Data *shared.AttachmentResponse `json:"data,omitempty"`
 }
 
 type CreateAttachmentForTaskResponse struct {

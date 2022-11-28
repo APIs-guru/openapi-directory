@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { RequestStatusEnum } from "./requeststatusenum";
 /**
  * Information about a quota increase request.

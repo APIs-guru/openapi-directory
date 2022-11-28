@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // V2LanguageTrainParams
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * JSON that contains parameters that specify how the model is created
 **/
 export class V2LanguageTrainParams extends SpeakeasyBase {
-  @Metadata({ data: "json, name=trainSplitRatio" })
+  @SpeakeasyMetadata({ data: "json, name=trainSplitRatio" })
   trainSplitRatio?: number;
 
-  @Metadata({ data: "json, name=withFeedback" })
+  @SpeakeasyMetadata({ data: "json, name=withFeedback" })
   withFeedback?: boolean;
 
-  @Metadata({ data: "json, name=withGlobalDatasetId" })
+  @SpeakeasyMetadata({ data: "json, name=withGlobalDatasetId" })
   withGlobalDatasetId?: number;
 }

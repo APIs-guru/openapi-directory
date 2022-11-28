@@ -65,6 +65,8 @@ const (
 	GoogleCloudRunV2ConditionStateEnumConditionSucceeded   GoogleCloudRunV2ConditionStateEnum = "CONDITION_SUCCEEDED"
 )
 
+// GoogleCloudRunV2Condition
+// Defines a status condition for a resource.
 type GoogleCloudRunV2Condition struct {
 	ExecutionReason    *GoogleCloudRunV2ConditionExecutionReasonEnum `json:"executionReason,omitempty"`
 	LastTransitionTime *string                                       `json:"lastTransitionTime,omitempty"`

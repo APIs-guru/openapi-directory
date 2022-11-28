@@ -10,6 +10,8 @@ const (
 	DisplayStateEnumSuspended               DisplayStateEnum = "SUSPENDED"
 )
 
+// Display
+// Device display information.
 type Display struct {
 	Density     *int32            `json:"density,omitempty"`
 	DisplayID   *int32            `json:"displayId,omitempty"`

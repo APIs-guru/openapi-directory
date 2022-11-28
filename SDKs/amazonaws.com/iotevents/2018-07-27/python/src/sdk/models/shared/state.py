@@ -1,16 +1,19 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import onenterlifecycle
-from . import onexitlifecycle
-from . import oninputlifecycle
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class State:
-    on_enter: Optional[onenterlifecycle.OnEnterLifecycle] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'onEnter' }})
-    on_exit: Optional[onexitlifecycle.OnExitLifecycle] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'onExit' }})
-    on_input: Optional[oninputlifecycle.OnInputLifecycle] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'onInput' }})
-    state_name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'stateName' }})
+    r"""State
+    Information that defines a state of a detector.
+    """
+    
+    state_name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('stateName') }})
+    on_enter: Optional[OnEnterLifecycle] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('onEnter') }})
+    on_exit: Optional[OnExitLifecycle] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('onExit') }})
+    on_input: Optional[OnInputLifecycle] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('onInput') }})
     

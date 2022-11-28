@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import List
 from dataclasses_json import dataclass_json
-from . import keyvalueentry
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class UserAttributes:
-    items: List[keyvalueentry.KeyValueEntry] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'items' }})
+    r"""UserAttributes
+    User custom attributes (list of key-value pairs)
+    """
+    
+    items: List[KeyValueEntry] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('items') }})
     

@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class GetWiFiScanResultsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     example114s: Optional[List[shared.Example114]] = field(default=None)
-    status_code: int = field(default=None)
     

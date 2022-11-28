@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class HeadItemImagePathParams:
-    image_type: shared.ImageTypeEnum = field(default=None, metadata={'path_param': { 'field_name': 'imageType', 'style': 'simple', 'explode': False }})
-    item_id: str = field(default=None, metadata={'path_param': { 'field_name': 'itemId', 'style': 'simple', 'explode': False }})
+    image_type: shared.ImageTypeEnum = field(metadata={'path_param': { 'field_name': 'imageType', 'style': 'simple', 'explode': False }})
+    item_id: str = field(metadata={'path_param': { 'field_name': 'itemId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -30,14 +31,14 @@ class HeadItemImageQueryParams:
 
 @dataclass
 class HeadItemImageRequest:
-    path_params: HeadItemImagePathParams = field(default=None)
-    query_params: HeadItemImageQueryParams = field(default=None)
+    path_params: HeadItemImagePathParams = field()
+    query_params: HeadItemImageQueryParams = field()
     
 
 @dataclass
 class HeadItemImageResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     head_item_image_200_image_wildcard_binary_string: Optional[bytes] = field(default=None)
     problem_details: Optional[dict[str, Any]] = field(default=None)
-    status_code: int = field(default=None)
     

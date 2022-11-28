@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ResourceDataContainer } from "./resourcedatacontainer";
+
 
 
 // Resource
@@ -7,12 +8,12 @@ import { ResourceDataContainer } from "./resourcedatacontainer";
  * Information about a resource.
 **/
 export class Resource extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Id" })
+  @SpeakeasyMetadata({ data: "json, name=Id" })
   id: string;
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name: string;
 
-  @Metadata({ data: "json, name=ResourceDataContainer" })
+  @SpeakeasyMetadata({ data: "json, name=ResourceDataContainer" })
   resourceDataContainer: ResourceDataContainer;
 }

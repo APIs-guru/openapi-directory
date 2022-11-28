@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // TestInvokeMethodResponse
 /**
  * <p>Represents the response of the test invoke request in the HTTP method.</p> <div class="seeAlso"> <a href="https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-test-method.html#how-to-test-method-console">Test API using the API Gateway console</a> </div>
@@ -33,27 +33,27 @@ var TestInvokeMethodResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=body" }),
+        SpeakeasyMetadata({ data: "json, name=body" }),
         __metadata("design:type", String)
     ], TestInvokeMethodResponse.prototype, "body", void 0);
     __decorate([
-        Metadata({ data: "json, name=headers" }),
+        SpeakeasyMetadata({ data: "json, name=headers" }),
         __metadata("design:type", Map)
     ], TestInvokeMethodResponse.prototype, "headers", void 0);
     __decorate([
-        Metadata({ data: "json, name=latency" }),
+        SpeakeasyMetadata({ data: "json, name=latency" }),
         __metadata("design:type", Number)
     ], TestInvokeMethodResponse.prototype, "latency", void 0);
     __decorate([
-        Metadata({ data: "json, name=log" }),
+        SpeakeasyMetadata({ data: "json, name=log" }),
         __metadata("design:type", String)
     ], TestInvokeMethodResponse.prototype, "log", void 0);
     __decorate([
-        Metadata({ data: "json, name=multiValueHeaders" }),
+        SpeakeasyMetadata({ data: "json, name=multiValueHeaders" }),
         __metadata("design:type", Map)
     ], TestInvokeMethodResponse.prototype, "multiValueHeaders", void 0);
     __decorate([
-        Metadata({ data: "json, name=status" }),
+        SpeakeasyMetadata({ data: "json, name=status" }),
         __metadata("design:type", Number)
     ], TestInvokeMethodResponse.prototype, "status", void 0);
     return TestInvokeMethodResponse;

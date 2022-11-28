@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class LinksConversationsListSelf extends SpeakeasyBase {
-  @Metadata({ data: "json, name=href" })
+  @SpeakeasyMetadata({ data: "json, name=href" })
   href: string;
 }
 
@@ -12,6 +13,6 @@ export class LinksConversationsListSelf extends SpeakeasyBase {
  * A series of links between resources in this API in the http://stateless.co/hal_specification.html.
 **/
 export class LinksConversationsList extends SpeakeasyBase {
-  @Metadata({ data: "json, name=self" })
+  @SpeakeasyMetadata({ data: "json, name=self" })
   self: LinksConversationsListSelf;
 }

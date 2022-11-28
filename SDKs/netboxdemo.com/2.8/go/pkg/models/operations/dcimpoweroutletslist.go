@@ -57,15 +57,15 @@ type DcimPowerOutletsListQueryParams struct {
 	TypeN             *string `queryParam:"style=form,explode=true,name=type__n"`
 }
 
-type DcimPowerOutletsListRequest struct {
-	QueryParams DcimPowerOutletsListQueryParams
-}
-
 type DcimPowerOutletsList200ApplicationJSON struct {
 	Count    int64                `json:"count"`
 	Next     *string              `json:"next,omitempty"`
 	Previous *string              `json:"previous,omitempty"`
 	Results  []shared.PowerOutlet `json:"results"`
+}
+
+type DcimPowerOutletsListRequest struct {
+	QueryParams DcimPowerOutletsListQueryParams
 }
 
 type DcimPowerOutletsListResponse struct {

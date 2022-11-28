@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { FormTableColumnDefinition } from "./formtablecolumndefinition";
+
 
 
 // FormTableDefinition
@@ -8,15 +8,15 @@ import { FormTableColumnDefinition } from "./formtablecolumndefinition";
  * Definition of a form table for OCR data extraction from images
 **/
 export class FormTableDefinition extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ColumnDefinitions", elemType: shared.FormTableColumnDefinition })
+  @SpeakeasyMetadata({ data: "json, name=ColumnDefinitions", elemType: FormTableColumnDefinition })
   columnDefinitions?: FormTableColumnDefinition[];
 
-  @Metadata({ data: "json, name=TableID" })
+  @SpeakeasyMetadata({ data: "json, name=TableID" })
   tableId?: string;
 
-  @Metadata({ data: "json, name=TargetRowHeight_Relative" })
+  @SpeakeasyMetadata({ data: "json, name=TargetRowHeight_Relative" })
   targetRowHeightRelative?: number;
 
-  @Metadata({ data: "json, name=TargetTableHeight_Relative" })
+  @SpeakeasyMetadata({ data: "json, name=TargetTableHeight_Relative" })
   targetTableHeightRelative?: number;
 }

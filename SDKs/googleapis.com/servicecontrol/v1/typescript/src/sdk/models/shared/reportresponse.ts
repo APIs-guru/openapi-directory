@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ReportError } from "./reporterror";
+
 
 
 // ReportResponse
@@ -8,12 +8,12 @@ import { ReportError } from "./reporterror";
  * Response message for the Report method.
 **/
 export class ReportResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=reportErrors", elemType: shared.ReportError })
+  @SpeakeasyMetadata({ data: "json, name=reportErrors", elemType: ReportError })
   reportErrors?: ReportError[];
 
-  @Metadata({ data: "json, name=serviceConfigId" })
+  @SpeakeasyMetadata({ data: "json, name=serviceConfigId" })
   serviceConfigId?: string;
 
-  @Metadata({ data: "json, name=serviceRolloutId" })
+  @SpeakeasyMetadata({ data: "json, name=serviceRolloutId" })
   serviceRolloutId?: string;
 }

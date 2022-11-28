@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class WorkflowexecutionsProjectsLocationsWorkflowsExecutionsListPathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 class WorkflowexecutionsProjectsLocationsWorkflowsExecutionsListViewEnum(str, Enum):
     EXECUTION_VIEW_UNSPECIFIED = "EXECUTION_VIEW_UNSPECIFIED"
@@ -33,20 +34,20 @@ class WorkflowexecutionsProjectsLocationsWorkflowsExecutionsListQueryParams:
 
 @dataclass
 class WorkflowexecutionsProjectsLocationsWorkflowsExecutionsListSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class WorkflowexecutionsProjectsLocationsWorkflowsExecutionsListRequest:
-    path_params: WorkflowexecutionsProjectsLocationsWorkflowsExecutionsListPathParams = field(default=None)
-    query_params: WorkflowexecutionsProjectsLocationsWorkflowsExecutionsListQueryParams = field(default=None)
-    security: WorkflowexecutionsProjectsLocationsWorkflowsExecutionsListSecurity = field(default=None)
+    path_params: WorkflowexecutionsProjectsLocationsWorkflowsExecutionsListPathParams = field()
+    query_params: WorkflowexecutionsProjectsLocationsWorkflowsExecutionsListQueryParams = field()
+    security: WorkflowexecutionsProjectsLocationsWorkflowsExecutionsListSecurity = field()
     
 
 @dataclass
 class WorkflowexecutionsProjectsLocationsWorkflowsExecutionsListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     list_executions_response: Optional[shared.ListExecutionsResponse] = field(default=None)
-    status_code: int = field(default=None)
     

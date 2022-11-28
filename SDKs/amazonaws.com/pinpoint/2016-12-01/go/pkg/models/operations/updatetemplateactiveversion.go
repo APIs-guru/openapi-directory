@@ -19,6 +19,8 @@ type UpdateTemplateActiveVersionHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// UpdateTemplateActiveVersionRequestBodyTemplateActiveVersionRequest
+// Specifies which version of a message template to use as the active version of the template.
 type UpdateTemplateActiveVersionRequestBodyTemplateActiveVersionRequest struct {
 	Version *string `json:"Version,omitempty"`
 }

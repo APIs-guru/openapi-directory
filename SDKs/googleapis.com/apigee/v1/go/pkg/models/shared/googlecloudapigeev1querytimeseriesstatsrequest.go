@@ -18,6 +18,8 @@ const (
 	GoogleCloudApigeeV1QueryTimeSeriesStatsRequestWindowSizeEnumMonth                 GoogleCloudApigeeV1QueryTimeSeriesStatsRequestWindowSizeEnum = "MONTH"
 )
 
+// GoogleCloudApigeeV1QueryTimeSeriesStatsRequest
+// QueryTimeSeriesStatsRequest represents a query that returns a collection of time series sequences grouped by their values.
 type GoogleCloudApigeeV1QueryTimeSeriesStatsRequest struct {
 	Dimensions     []string                                                          `json:"dimensions,omitempty"`
 	Filter         *string                                                           `json:"filter,omitempty"`

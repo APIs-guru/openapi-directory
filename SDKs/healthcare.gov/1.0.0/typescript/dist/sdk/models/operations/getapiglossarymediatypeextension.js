@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var GetApiGlossaryMediaTypeExtensionMediaTypeExtensionEnum;
 (function (GetApiGlossaryMediaTypeExtensionMediaTypeExtensionEnum) {
     GetApiGlossaryMediaTypeExtensionMediaTypeExtensionEnum["DotJson"] = ".json";
@@ -33,7 +33,7 @@ var GetApiGlossaryMediaTypeExtensionPathParams = /** @class */ (function (_super
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=mediaTypeExtension" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=mediaTypeExtension" }),
         __metadata("design:type", String)
     ], GetApiGlossaryMediaTypeExtensionPathParams.prototype, "mediaTypeExtension", void 0);
     return GetApiGlossaryMediaTypeExtensionPathParams;
@@ -45,7 +45,7 @@ var GetApiGlossaryMediaTypeExtensionRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetApiGlossaryMediaTypeExtensionPathParams)
     ], GetApiGlossaryMediaTypeExtensionRequest.prototype, "pathParams", void 0);
     return GetApiGlossaryMediaTypeExtensionRequest;
@@ -57,15 +57,15 @@ var GetApiGlossaryMediaTypeExtensionResponse = /** @class */ (function (_super) 
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], GetApiGlossaryMediaTypeExtensionResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetApiGlossaryMediaTypeExtensionResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetApiGlossaryMediaTypeExtensionResponse.prototype, "statusCode", void 0);
     return GetApiGlossaryMediaTypeExtensionResponse;

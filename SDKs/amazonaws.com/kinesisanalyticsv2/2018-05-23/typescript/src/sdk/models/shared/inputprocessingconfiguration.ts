@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { InputLambdaProcessor } from "./inputlambdaprocessor";
+
 
 
 // InputProcessingConfiguration
@@ -7,6 +8,6 @@ import { InputLambdaProcessor } from "./inputlambdaprocessor";
  * For a SQL-based Kinesis Data Analytics application, describes a processor that is used to preprocess the records in the stream before being processed by your application code. Currently, the only input processor available is <a href="https://docs.aws.amazon.com/lambda/">AWS Lambda</a>.
 **/
 export class InputProcessingConfiguration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=InputLambdaProcessor" })
+  @SpeakeasyMetadata({ data: "json, name=InputLambdaProcessor" })
   inputLambdaProcessor: InputLambdaProcessor;
 }

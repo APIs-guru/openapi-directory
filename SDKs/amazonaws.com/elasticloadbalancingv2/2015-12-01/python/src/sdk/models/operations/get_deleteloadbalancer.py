@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetDeleteLoadBalancerActionEnum(str, Enum):
     DELETE_LOAD_BALANCER = "DeleteLoadBalancer"
@@ -10,9 +14,9 @@ class GetDeleteLoadBalancerVersionEnum(str, Enum):
 
 @dataclass
 class GetDeleteLoadBalancerQueryParams:
-    action: GetDeleteLoadBalancerActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    load_balancer_arn: str = field(default=None, metadata={'query_param': { 'field_name': 'LoadBalancerArn', 'style': 'form', 'explode': True }})
-    version: GetDeleteLoadBalancerVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: GetDeleteLoadBalancerActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    load_balancer_arn: str = field(metadata={'query_param': { 'field_name': 'LoadBalancerArn', 'style': 'form', 'explode': True }})
+    version: GetDeleteLoadBalancerVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -28,13 +32,13 @@ class GetDeleteLoadBalancerHeaders:
 
 @dataclass
 class GetDeleteLoadBalancerRequest:
-    query_params: GetDeleteLoadBalancerQueryParams = field(default=None)
-    headers: GetDeleteLoadBalancerHeaders = field(default=None)
+    headers: GetDeleteLoadBalancerHeaders = field()
+    query_params: GetDeleteLoadBalancerQueryParams = field()
     
 
 @dataclass
 class GetDeleteLoadBalancerResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

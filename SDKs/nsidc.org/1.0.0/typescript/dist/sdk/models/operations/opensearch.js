@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var OpenSearchSortKeysEnum;
 (function (OpenSearchSortKeysEnum) {
     OpenSearchSortKeysEnum["ScoreDesc"] = "score,,desc";
@@ -43,39 +43,39 @@ var OpenSearchQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=count" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=count" }),
         __metadata("design:type", Number)
     ], OpenSearchQueryParams.prototype, "count", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=endDate" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=endDate" }),
         __metadata("design:type", Date)
     ], OpenSearchQueryParams.prototype, "endDate", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=facetFilters" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=facetFilters" }),
         __metadata("design:type", String)
     ], OpenSearchQueryParams.prototype, "facetFilters", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=searchTerms" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=searchTerms" }),
         __metadata("design:type", String)
     ], OpenSearchQueryParams.prototype, "searchTerms", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=sortKeys" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sortKeys" }),
         __metadata("design:type", String)
     ], OpenSearchQueryParams.prototype, "sortKeys", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=source" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=source" }),
         __metadata("design:type", String)
     ], OpenSearchQueryParams.prototype, "source", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=spatial" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=spatial" }),
         __metadata("design:type", String)
     ], OpenSearchQueryParams.prototype, "spatial", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=startDate" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=startDate" }),
         __metadata("design:type", Date)
     ], OpenSearchQueryParams.prototype, "startDate", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=startIndex" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=startIndex" }),
         __metadata("design:type", Number)
     ], OpenSearchQueryParams.prototype, "startIndex", void 0);
     return OpenSearchQueryParams;
@@ -87,7 +87,7 @@ var OpenSearchRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", OpenSearchQueryParams)
     ], OpenSearchRequest.prototype, "queryParams", void 0);
     return OpenSearchRequest;
@@ -99,15 +99,15 @@ var OpenSearchResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], OpenSearchResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], OpenSearchResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], OpenSearchResponse.prototype, "openSearch200ApplicationAtomPlusXmlString", void 0);
     return OpenSearchResponse;

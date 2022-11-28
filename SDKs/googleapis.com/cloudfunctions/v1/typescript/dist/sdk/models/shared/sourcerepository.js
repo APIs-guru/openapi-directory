@@ -22,7 +22,23 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+// SourceRepositoryInput
+/**
+ * Describes SourceRepository, used to represent parameters related to source repository where a function is hosted.
+**/
+var SourceRepositoryInput = /** @class */ (function (_super) {
+    __extends(SourceRepositoryInput, _super);
+    function SourceRepositoryInput() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=url" }),
+        __metadata("design:type", String)
+    ], SourceRepositoryInput.prototype, "url", void 0);
+    return SourceRepositoryInput;
+}(SpeakeasyBase));
+export { SourceRepositoryInput };
 // SourceRepository
 /**
  * Describes SourceRepository, used to represent parameters related to source repository where a function is hosted.
@@ -33,11 +49,11 @@ var SourceRepository = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=deployedUrl" }),
+        SpeakeasyMetadata({ data: "json, name=deployedUrl" }),
         __metadata("design:type", String)
     ], SourceRepository.prototype, "deployedUrl", void 0);
     __decorate([
-        Metadata({ data: "json, name=url" }),
+        SpeakeasyMetadata({ data: "json, name=url" }),
         __metadata("design:type", String)
     ], SourceRepository.prototype, "url", void 0);
     return SourceRepository;

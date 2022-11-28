@@ -1,5 +1,7 @@
 package shared
 
+// PullRequestTarget
+// Returns information about a pull request target.
 type PullRequestTarget struct {
 	DestinationCommit    *string        `json:"destinationCommit,omitempty"`
 	DestinationReference *string        `json:"destinationReference,omitempty"`

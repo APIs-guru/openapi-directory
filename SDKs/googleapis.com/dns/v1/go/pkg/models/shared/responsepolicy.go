@@ -1,5 +1,7 @@
 package shared
 
+// ResponsePolicy
+// A Response Policy is a collection of selectors that apply to queries made against one or more Virtual Private Cloud networks.
 type ResponsePolicy struct {
 	Description        *string                    `json:"description,omitempty"`
 	GkeClusters        []ResponsePolicyGkeCluster `json:"gkeClusters,omitempty"`

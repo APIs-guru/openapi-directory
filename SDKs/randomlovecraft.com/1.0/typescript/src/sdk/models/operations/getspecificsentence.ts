@@ -1,32 +1,33 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetSpecificSentencePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" })
   id: string;
 }
 
 
-export class GetSpecificSentenceRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: GetSpecificSentencePathParams;
-}
-
-
 export class GetSpecificSentence200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data?: shared.Sentence;
 }
 
 
+export class GetSpecificSentenceRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: GetSpecificSentencePathParams;
+}
+
+
 export class GetSpecificSentenceResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getSpecificSentence200ApplicationJsonObject?: GetSpecificSentence200ApplicationJson;
 }

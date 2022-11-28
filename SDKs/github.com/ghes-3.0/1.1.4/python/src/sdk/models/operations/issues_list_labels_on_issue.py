@@ -5,9 +5,9 @@ from sdk.models import shared
 
 @dataclass
 class IssuesListLabelsOnIssuePathParams:
-    issue_number: int = field(default=None, metadata={'path_param': { 'field_name': 'issue_number', 'style': 'simple', 'explode': False }})
-    owner: str = field(default=None, metadata={'path_param': { 'field_name': 'owner', 'style': 'simple', 'explode': False }})
-    repo: str = field(default=None, metadata={'path_param': { 'field_name': 'repo', 'style': 'simple', 'explode': False }})
+    issue_number: int = field(metadata={'path_param': { 'field_name': 'issue_number', 'style': 'simple', 'explode': False }})
+    owner: str = field(metadata={'path_param': { 'field_name': 'owner', 'style': 'simple', 'explode': False }})
+    repo: str = field(metadata={'path_param': { 'field_name': 'repo', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -18,15 +18,15 @@ class IssuesListLabelsOnIssueQueryParams:
 
 @dataclass
 class IssuesListLabelsOnIssueRequest:
-    path_params: IssuesListLabelsOnIssuePathParams = field(default=None)
-    query_params: IssuesListLabelsOnIssueQueryParams = field(default=None)
+    path_params: IssuesListLabelsOnIssuePathParams = field()
+    query_params: IssuesListLabelsOnIssueQueryParams = field()
     
 
 @dataclass
 class IssuesListLabelsOnIssueResponse:
-    content_type: str = field(default=None)
-    headers: dict[str, List[str]] = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    headers: dict[str, List[str]] = field()
+    status_code: int = field()
     basic_error: Optional[shared.BasicError] = field(default=None)
     labels: Optional[List[shared.Label]] = field(default=None)
     

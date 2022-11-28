@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DfareportingEventTagsGetPathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
-    profile_id: str = field(default=None, metadata={'path_param': { 'field_name': 'profileId', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    profile_id: str = field(metadata={'path_param': { 'field_name': 'profileId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,20 +27,20 @@ class DfareportingEventTagsGetQueryParams:
 
 @dataclass
 class DfareportingEventTagsGetSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DfareportingEventTagsGetRequest:
-    path_params: DfareportingEventTagsGetPathParams = field(default=None)
-    query_params: DfareportingEventTagsGetQueryParams = field(default=None)
-    security: DfareportingEventTagsGetSecurity = field(default=None)
+    path_params: DfareportingEventTagsGetPathParams = field()
+    query_params: DfareportingEventTagsGetQueryParams = field()
+    security: DfareportingEventTagsGetSecurity = field()
     
 
 @dataclass
 class DfareportingEventTagsGetResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     event_tag: Optional[shared.EventTag] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { BucketAccessControl } from "./bucketaccesscontrol";
 import { ObjectAccessControl } from "./objectaccesscontrol";
 /**

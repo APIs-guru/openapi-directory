@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class CoprgRequestBodyCertificateParameters extends SpeakeasyBase {
     udf1: string;
@@ -15,10 +15,6 @@ export declare class CoprgRequestBody extends SpeakeasyBase {
 export declare class CoprgSecurity extends SpeakeasyBase {
     apiKey: shared.SchemeApiKey;
     clientId: shared.SchemeClientId;
-}
-export declare class CoprgRequest extends SpeakeasyBase {
-    request?: CoprgRequestBody;
-    security: CoprgSecurity;
 }
 export declare enum Coprg400ApplicationJsonErrorEnum {
     MissingParameter = "missing_parameter",
@@ -101,6 +97,10 @@ export declare enum Coprg504ApplicationJsonErrorDescriptionEnum {
 export declare class Coprg504ApplicationJson extends SpeakeasyBase {
     error?: Coprg504ApplicationJsonErrorEnum;
     errorDescription?: Coprg504ApplicationJsonErrorDescriptionEnum;
+}
+export declare class CoprgRequest extends SpeakeasyBase {
+    request?: CoprgRequestBody;
+    security: CoprgSecurity;
 }
 export declare class CoprgResponse extends SpeakeasyBase {
     contentType: string;

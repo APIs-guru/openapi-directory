@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostResetFpgaImageAttributeActionEnum(str, Enum):
     RESET_FPGA_IMAGE_ATTRIBUTE = "ResetFpgaImageAttribute"
@@ -10,8 +14,8 @@ class PostResetFpgaImageAttributeVersionEnum(str, Enum):
 
 @dataclass
 class PostResetFpgaImageAttributeQueryParams:
-    action: PostResetFpgaImageAttributeActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostResetFpgaImageAttributeVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostResetFpgaImageAttributeActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostResetFpgaImageAttributeVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostResetFpgaImageAttributeHeaders:
 
 @dataclass
 class PostResetFpgaImageAttributeRequest:
-    query_params: PostResetFpgaImageAttributeQueryParams = field(default=None)
-    headers: PostResetFpgaImageAttributeHeaders = field(default=None)
+    headers: PostResetFpgaImageAttributeHeaders = field()
+    query_params: PostResetFpgaImageAttributeQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostResetFpgaImageAttributeResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

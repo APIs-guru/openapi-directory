@@ -9,11 +9,8 @@ type PostLoadBalancersIDActionsChangeDNSPtrChangeLoadbalancerDNSPtrRequest struc
 	IP     string `json:"ip"`
 }
 
-type PostLoadBalancersIDActionsChangeDNSPtrRequest struct {
-	PathParams PostLoadBalancersIDActionsChangeDNSPtrPathParams
-	Request    *PostLoadBalancersIDActionsChangeDNSPtrChangeLoadbalancerDNSPtrRequest `request:"mediaType=application/json"`
-}
-
+// PostLoadBalancersIDActionsChangeDNSPtrActionResponseActionError
+// Error message for the Action if error occurred, otherwise null
 type PostLoadBalancersIDActionsChangeDNSPtrActionResponseActionError struct {
 	Code    string `json:"code"`
 	Message string `json:"message"`
@@ -45,6 +42,11 @@ type PostLoadBalancersIDActionsChangeDNSPtrActionResponseAction struct {
 
 type PostLoadBalancersIDActionsChangeDNSPtrActionResponse struct {
 	Action PostLoadBalancersIDActionsChangeDNSPtrActionResponseAction `json:"action"`
+}
+
+type PostLoadBalancersIDActionsChangeDNSPtrRequest struct {
+	PathParams PostLoadBalancersIDActionsChangeDNSPtrPathParams
+	Request    *PostLoadBalancersIDActionsChangeDNSPtrChangeLoadbalancerDNSPtrRequest `request:"mediaType=application/json"`
 }
 
 type PostLoadBalancersIDActionsChangeDNSPtrResponse struct {

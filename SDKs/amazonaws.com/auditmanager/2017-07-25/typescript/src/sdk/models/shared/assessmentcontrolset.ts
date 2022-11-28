@@ -1,9 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AssessmentControl } from "./assessmentcontrol";
 import { Delegation } from "./delegation";
 import { Role } from "./role";
 import { ControlSetStatusEnum } from "./controlsetstatusenum";
+
 
 
 // AssessmentControlSet
@@ -11,27 +11,27 @@ import { ControlSetStatusEnum } from "./controlsetstatusenum";
  *  Represents a set of controls in an Audit Manager assessment. 
 **/
 export class AssessmentControlSet extends SpeakeasyBase {
-  @Metadata({ data: "json, name=controls", elemType: shared.AssessmentControl })
+  @SpeakeasyMetadata({ data: "json, name=controls", elemType: AssessmentControl })
   controls?: AssessmentControl[];
 
-  @Metadata({ data: "json, name=delegations", elemType: shared.Delegation })
+  @SpeakeasyMetadata({ data: "json, name=delegations", elemType: Delegation })
   delegations?: Delegation[];
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=manualEvidenceCount" })
+  @SpeakeasyMetadata({ data: "json, name=manualEvidenceCount" })
   manualEvidenceCount?: number;
 
-  @Metadata({ data: "json, name=roles", elemType: shared.Role })
+  @SpeakeasyMetadata({ data: "json, name=roles", elemType: Role })
   roles?: Role[];
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: ControlSetStatusEnum;
 
-  @Metadata({ data: "json, name=systemEvidenceCount" })
+  @SpeakeasyMetadata({ data: "json, name=systemEvidenceCount" })
   systemEvidenceCount?: number;
 }

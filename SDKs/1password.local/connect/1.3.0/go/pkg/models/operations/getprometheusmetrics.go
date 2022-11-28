@@ -1,6 +1,6 @@
 package operations
 
-var GetPrometheusMetricsServers = []string{
+var GetPrometheusMetricsServerList = []string{
 	"http://localhost:8080",
 }
 

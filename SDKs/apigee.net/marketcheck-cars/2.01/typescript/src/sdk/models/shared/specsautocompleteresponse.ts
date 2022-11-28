@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // SpecsAutoCompleteResponse
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Specs auto complete query response
 **/
 export class SpecsAutoCompleteResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=terms" })
+  @SpeakeasyMetadata({ data: "json, name=terms" })
   terms?: string[];
 }

@@ -8,6 +8,8 @@ const (
 	GoogleAppsDriveLabelsV2LabelLabelTypeEnumAdmin                GoogleAppsDriveLabelsV2LabelLabelTypeEnum = "ADMIN"
 )
 
+// GoogleAppsDriveLabelsV2Label
+// A label defines a taxonomy that can be applied to Drive items in order to organize and search across items. Labels can be simple strings, or can contain fields that describe additional metadata that can be further used to organize and search Drive items.
 type GoogleAppsDriveLabelsV2Label struct {
 	AppliedCapabilities *GoogleAppsDriveLabelsV2LabelAppliedCapabilities `json:"appliedCapabilities,omitempty"`
 	AppliedLabelPolicy  *GoogleAppsDriveLabelsV2LabelAppliedLabelPolicy  `json:"appliedLabelPolicy,omitempty"`

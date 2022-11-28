@@ -22,9 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AccountActivity } from "./accountactivity";
-import { AccountRiskVerdict } from "./accountriskverdict";
 export var AccountDetailsAppLicensingVerdictEnum;
 (function (AccountDetailsAppLicensingVerdictEnum) {
     AccountDetailsAppLicensingVerdictEnum["Unknown"] = "UNKNOWN";
@@ -42,15 +41,11 @@ var AccountDetails = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=accountActivity" }),
+        SpeakeasyMetadata({ data: "json, name=accountActivity" }),
         __metadata("design:type", AccountActivity)
     ], AccountDetails.prototype, "accountActivity", void 0);
     __decorate([
-        Metadata({ data: "json, name=accountRiskVerdict" }),
-        __metadata("design:type", AccountRiskVerdict)
-    ], AccountDetails.prototype, "accountRiskVerdict", void 0);
-    __decorate([
-        Metadata({ data: "json, name=appLicensingVerdict" }),
+        SpeakeasyMetadata({ data: "json, name=appLicensingVerdict" }),
         __metadata("design:type", String)
     ], AccountDetails.prototype, "appLicensingVerdict", void 0);
     return AccountDetails;

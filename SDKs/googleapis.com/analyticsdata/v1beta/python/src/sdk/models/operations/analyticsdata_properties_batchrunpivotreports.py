@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class AnalyticsdataPropertiesBatchRunPivotReportsPathParams:
-    property: str = field(default=None, metadata={'path_param': { 'field_name': 'property', 'style': 'simple', 'explode': False }})
+    property: str = field(metadata={'path_param': { 'field_name': 'property', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,14 +26,14 @@ class AnalyticsdataPropertiesBatchRunPivotReportsQueryParams:
 
 @dataclass
 class AnalyticsdataPropertiesBatchRunPivotReportsSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class AnalyticsdataPropertiesBatchRunPivotReportsSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -43,15 +44,15 @@ class AnalyticsdataPropertiesBatchRunPivotReportsSecurity:
 
 @dataclass
 class AnalyticsdataPropertiesBatchRunPivotReportsRequest:
-    path_params: AnalyticsdataPropertiesBatchRunPivotReportsPathParams = field(default=None)
-    query_params: AnalyticsdataPropertiesBatchRunPivotReportsQueryParams = field(default=None)
+    path_params: AnalyticsdataPropertiesBatchRunPivotReportsPathParams = field()
+    query_params: AnalyticsdataPropertiesBatchRunPivotReportsQueryParams = field()
+    security: AnalyticsdataPropertiesBatchRunPivotReportsSecurity = field()
     request: Optional[shared.BatchRunPivotReportsRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: AnalyticsdataPropertiesBatchRunPivotReportsSecurity = field(default=None)
     
 
 @dataclass
 class AnalyticsdataPropertiesBatchRunPivotReportsResponse:
+    content_type: str = field()
+    status_code: int = field()
     batch_run_pivot_reports_response: Optional[shared.BatchRunPivotReportsResponse] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

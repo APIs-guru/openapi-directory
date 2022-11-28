@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AuctionPackage } from "./auctionpackage";
+
 
 
 // ListAuctionPackagesResponse
@@ -8,9 +8,9 @@ import { AuctionPackage } from "./auctionpackage";
  * Response message for listing auction packages.
 **/
 export class ListAuctionPackagesResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=auctionPackages", elemType: shared.AuctionPackage })
+  @SpeakeasyMetadata({ data: "json, name=auctionPackages", elemType: AuctionPackage })
   auctionPackages?: AuctionPackage[];
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 }

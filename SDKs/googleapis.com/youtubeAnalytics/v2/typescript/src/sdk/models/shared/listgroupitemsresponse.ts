@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Errors } from "./errors";
 import { GroupItem } from "./groupitem";
+
 
 
 // ListGroupItemsResponse
@@ -9,15 +9,15 @@ import { GroupItem } from "./groupitem";
  * Response message for GroupsService.ListGroupItems.
 **/
 export class ListGroupItemsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=errors" })
+  @SpeakeasyMetadata({ data: "json, name=errors" })
   errors?: Errors;
 
-  @Metadata({ data: "json, name=etag" })
+  @SpeakeasyMetadata({ data: "json, name=etag" })
   etag?: string;
 
-  @Metadata({ data: "json, name=items", elemType: shared.GroupItem })
+  @SpeakeasyMetadata({ data: "json, name=items", elemType: GroupItem })
   items?: GroupItem[];
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 }

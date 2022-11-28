@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class VaultMattersHoldsCreatePathParams:
-    matter_id: str = field(default=None, metadata={'path_param': { 'field_name': 'matterId', 'style': 'simple', 'explode': False }})
+    matter_id: str = field(metadata={'path_param': { 'field_name': 'matterId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,21 +26,21 @@ class VaultMattersHoldsCreateQueryParams:
 
 @dataclass
 class VaultMattersHoldsCreateSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class VaultMattersHoldsCreateRequest:
-    path_params: VaultMattersHoldsCreatePathParams = field(default=None)
-    query_params: VaultMattersHoldsCreateQueryParams = field(default=None)
+    path_params: VaultMattersHoldsCreatePathParams = field()
+    query_params: VaultMattersHoldsCreateQueryParams = field()
+    security: VaultMattersHoldsCreateSecurity = field()
     request: Optional[shared.Hold] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: VaultMattersHoldsCreateSecurity = field(default=None)
     
 
 @dataclass
 class VaultMattersHoldsCreateResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     hold: Optional[shared.Hold] = field(default=None)
-    status_code: int = field(default=None)
     

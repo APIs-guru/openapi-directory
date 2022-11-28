@@ -1,5 +1,7 @@
 package shared
 
+// MailerSettings
+// Configuration for mailgun api client
 type MailerSettings struct {
 	APIKey        string            `json:"apiKey"`
 	APIKeyPrivate *string           `json:"apiKeyPrivate,omitempty"`

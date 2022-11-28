@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Optional
 from sdk.models import shared
 
 
 @dataclass
 class GetFunctionConfigurationPathParams:
-    function_name: str = field(default=None, metadata={'path_param': { 'field_name': 'FunctionName', 'style': 'simple', 'explode': False }})
+    function_name: str = field(metadata={'path_param': { 'field_name': 'FunctionName', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -21,15 +24,15 @@ class GetFunctionConfigurationHeaders:
 
 @dataclass
 class GetFunctionConfigurationRequest:
-    path_params: GetFunctionConfigurationPathParams = field(default=None)
-    headers: GetFunctionConfigurationHeaders = field(default=None)
+    headers: GetFunctionConfigurationHeaders = field()
+    path_params: GetFunctionConfigurationPathParams = field()
     
 
 @dataclass
 class GetFunctionConfigurationResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     function_configuration: Optional[shared.FunctionConfiguration] = field(default=None)
     resource_not_found_exception: Optional[shared.ResourceNotFoundException] = field(default=None)
     service_exception: Optional[shared.ServiceException] = field(default=None)
-    status_code: int = field(default=None)
     

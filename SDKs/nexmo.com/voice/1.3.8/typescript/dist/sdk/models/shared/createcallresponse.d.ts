@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { DirectionEnum } from "./directionenum";
 export declare class CreateCallResponse extends SpeakeasyBase {
     conversationUuid?: string;

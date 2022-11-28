@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { MonitoringConstraintsResource } from "./monitoringconstraintsresource";
+
 
 
 // ModelExplainabilityBaselineConfig
@@ -7,9 +8,9 @@ import { MonitoringConstraintsResource } from "./monitoringconstraintsresource";
  * The configuration for a baseline model explainability job.
 **/
 export class ModelExplainabilityBaselineConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=BaseliningJobName" })
+  @SpeakeasyMetadata({ data: "json, name=BaseliningJobName" })
   baseliningJobName?: string;
 
-  @Metadata({ data: "json, name=ConstraintsResource" })
+  @SpeakeasyMetadata({ data: "json, name=ConstraintsResource" })
   constraintsResource?: MonitoringConstraintsResource;
 }

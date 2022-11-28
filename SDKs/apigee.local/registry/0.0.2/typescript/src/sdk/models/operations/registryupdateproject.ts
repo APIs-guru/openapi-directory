@@ -1,37 +1,38 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class RegistryUpdateProjectPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=project" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=project" })
   project: string;
 }
 
 
 export class RegistryUpdateProjectQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=update_mask" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=update_mask" })
   updateMask?: string;
 }
 
 
 export class RegistryUpdateProjectRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: RegistryUpdateProjectPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: RegistryUpdateProjectQueryParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: any;
 }
 
 
 export class RegistryUpdateProjectResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   project?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

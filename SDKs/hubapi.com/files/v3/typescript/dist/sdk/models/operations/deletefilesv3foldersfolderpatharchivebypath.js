@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var DeleteFilesV3FoldersFolderPathArchiveByPathPathParams = /** @class */ (function (_super) {
     __extends(DeleteFilesV3FoldersFolderPathArchiveByPathPathParams, _super);
@@ -30,49 +30,29 @@ var DeleteFilesV3FoldersFolderPathArchiveByPathPathParams = /** @class */ (funct
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=folderPath" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=folderPath" }),
         __metadata("design:type", String)
     ], DeleteFilesV3FoldersFolderPathArchiveByPathPathParams.prototype, "folderPath", void 0);
     return DeleteFilesV3FoldersFolderPathArchiveByPathPathParams;
 }(SpeakeasyBase));
 export { DeleteFilesV3FoldersFolderPathArchiveByPathPathParams };
-var DeleteFilesV3FoldersFolderPathArchiveByPathSecurityOption1 = /** @class */ (function (_super) {
-    __extends(DeleteFilesV3FoldersFolderPathArchiveByPathSecurityOption1, _super);
-    function DeleteFilesV3FoldersFolderPathArchiveByPathSecurityOption1() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=query" }),
-        __metadata("design:type", shared.SchemeHapikey)
-    ], DeleteFilesV3FoldersFolderPathArchiveByPathSecurityOption1.prototype, "hapikey", void 0);
-    return DeleteFilesV3FoldersFolderPathArchiveByPathSecurityOption1;
-}(SpeakeasyBase));
-export { DeleteFilesV3FoldersFolderPathArchiveByPathSecurityOption1 };
-var DeleteFilesV3FoldersFolderPathArchiveByPathSecurityOption2 = /** @class */ (function (_super) {
-    __extends(DeleteFilesV3FoldersFolderPathArchiveByPathSecurityOption2, _super);
-    function DeleteFilesV3FoldersFolderPathArchiveByPathSecurityOption2() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
-        __metadata("design:type", shared.SchemeOauth2Legacy)
-    ], DeleteFilesV3FoldersFolderPathArchiveByPathSecurityOption2.prototype, "oauth2Legacy", void 0);
-    return DeleteFilesV3FoldersFolderPathArchiveByPathSecurityOption2;
-}(SpeakeasyBase));
-export { DeleteFilesV3FoldersFolderPathArchiveByPathSecurityOption2 };
 var DeleteFilesV3FoldersFolderPathArchiveByPathSecurity = /** @class */ (function (_super) {
     __extends(DeleteFilesV3FoldersFolderPathArchiveByPathSecurity, _super);
     function DeleteFilesV3FoldersFolderPathArchiveByPathSecurity() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, option=true" }),
-        __metadata("design:type", DeleteFilesV3FoldersFolderPathArchiveByPathSecurityOption1)
-    ], DeleteFilesV3FoldersFolderPathArchiveByPathSecurity.prototype, "option1", void 0);
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=query" }),
+        __metadata("design:type", shared.SchemeHapikey)
+    ], DeleteFilesV3FoldersFolderPathArchiveByPathSecurity.prototype, "hapikey", void 0);
     __decorate([
-        Metadata({ data: "security, option=true" }),
-        __metadata("design:type", DeleteFilesV3FoldersFolderPathArchiveByPathSecurityOption2)
-    ], DeleteFilesV3FoldersFolderPathArchiveByPathSecurity.prototype, "option2", void 0);
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        __metadata("design:type", shared.SchemePrivateAppsLegacy)
+    ], DeleteFilesV3FoldersFolderPathArchiveByPathSecurity.prototype, "privateAppsLegacy", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
+        __metadata("design:type", shared.SchemeOauth2Legacy)
+    ], DeleteFilesV3FoldersFolderPathArchiveByPathSecurity.prototype, "oauth2Legacy", void 0);
     return DeleteFilesV3FoldersFolderPathArchiveByPathSecurity;
 }(SpeakeasyBase));
 export { DeleteFilesV3FoldersFolderPathArchiveByPathSecurity };
@@ -82,11 +62,11 @@ var DeleteFilesV3FoldersFolderPathArchiveByPathRequest = /** @class */ (function
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", DeleteFilesV3FoldersFolderPathArchiveByPathPathParams)
     ], DeleteFilesV3FoldersFolderPathArchiveByPathRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", DeleteFilesV3FoldersFolderPathArchiveByPathSecurity)
     ], DeleteFilesV3FoldersFolderPathArchiveByPathRequest.prototype, "security", void 0);
     return DeleteFilesV3FoldersFolderPathArchiveByPathRequest;
@@ -98,15 +78,15 @@ var DeleteFilesV3FoldersFolderPathArchiveByPathResponse = /** @class */ (functio
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], DeleteFilesV3FoldersFolderPathArchiveByPathResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], DeleteFilesV3FoldersFolderPathArchiveByPathResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], DeleteFilesV3FoldersFolderPathArchiveByPathResponse.prototype, "statusCode", void 0);
     return DeleteFilesV3FoldersFolderPathArchiveByPathResponse;

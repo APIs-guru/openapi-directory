@@ -8,6 +8,8 @@ const (
 	ImageRatioEnumFortyThree             ImageRatioEnum = "43"
 )
 
+// Image
+// Image
 type Image struct {
 	Attribution *string         `json:"attribution,omitempty"`
 	Domains     []string        `json:"domains,omitempty"`

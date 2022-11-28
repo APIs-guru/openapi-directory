@@ -1,54 +1,55 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum GetLatestTotalsFormatEnum {
-    Json = "json"
-,    Xml = "xml"
+    Json = "json",
+    Xml = "xml"
 }
 
 
 export class GetLatestTotalsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=format" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=format" })
   format?: GetLatestTotalsFormatEnum;
 }
 
 
-export class GetLatestTotalsRequest extends SpeakeasyBase {
-  @Metadata()
-  queryParams: GetLatestTotalsQueryParams;
-}
-
-
 export class GetLatestTotals200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=confirmed" })
+  @SpeakeasyMetadata({ data: "json, name=confirmed" })
   confirmed?: number;
 
-  @Metadata({ data: "json, name=critical" })
+  @SpeakeasyMetadata({ data: "json, name=critical" })
   critical?: number;
 
-  @Metadata({ data: "json, name=deaths" })
+  @SpeakeasyMetadata({ data: "json, name=deaths" })
   deaths?: number;
 
-  @Metadata({ data: "json, name=lastChange" })
+  @SpeakeasyMetadata({ data: "json, name=lastChange" })
   lastChange?: Date;
 
-  @Metadata({ data: "json, name=lastUpdate" })
+  @SpeakeasyMetadata({ data: "json, name=lastUpdate" })
   lastUpdate?: Date;
 
-  @Metadata({ data: "json, name=recovered" })
+  @SpeakeasyMetadata({ data: "json, name=recovered" })
   recovered?: number;
 }
 
 
+export class GetLatestTotalsRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  queryParams: GetLatestTotalsQueryParams;
+}
+
+
 export class GetLatestTotalsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata({ elemType: operations.GetLatestTotals200ApplicationJson })
+  @SpeakeasyMetadata({ elemType: GetLatestTotals200ApplicationJson })
   getLatestTotals200ApplicationJsonObjects?: GetLatestTotals200ApplicationJson[];
 }

@@ -1,15 +1,18 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import checkpointconfiguration
-from . import monitoringconfiguration
-from . import parallelismconfiguration
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class FlinkApplicationConfiguration:
-    checkpoint_configuration: Optional[checkpointconfiguration.CheckpointConfiguration] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'CheckpointConfiguration' }})
-    monitoring_configuration: Optional[monitoringconfiguration.MonitoringConfiguration] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'MonitoringConfiguration' }})
-    parallelism_configuration: Optional[parallelismconfiguration.ParallelismConfiguration] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ParallelismConfiguration' }})
+    r"""FlinkApplicationConfiguration
+    Describes configuration parameters for a Flink-based Kinesis Data Analytics application or a Studio notebook.
+    """
+    
+    checkpoint_configuration: Optional[CheckpointConfiguration] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('CheckpointConfiguration') }})
+    monitoring_configuration: Optional[MonitoringConfiguration] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('MonitoringConfiguration') }})
+    parallelism_configuration: Optional[ParallelismConfiguration] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ParallelismConfiguration') }})
     

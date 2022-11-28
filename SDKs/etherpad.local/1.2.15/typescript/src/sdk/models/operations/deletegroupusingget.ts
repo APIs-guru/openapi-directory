@@ -1,82 +1,83 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DeleteGroupUsingGetQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=groupID" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=groupID" })
   groupId?: string;
 }
 
 
-export class DeleteGroupUsingGetRequest extends SpeakeasyBase {
-  @Metadata()
-  queryParams: DeleteGroupUsingGetQueryParams;
-}
-
-
 export class DeleteGroupUsingGet200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=code" })
+  @SpeakeasyMetadata({ data: "json, name=code" })
   code?: number;
 
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data?: Map<string, any>;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class DeleteGroupUsingGet400ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=code" })
+  @SpeakeasyMetadata({ data: "json, name=code" })
   code?: number;
 
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data?: Map<string, any>;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class DeleteGroupUsingGet401ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=code" })
+  @SpeakeasyMetadata({ data: "json, name=code" })
   code?: number;
 
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data?: Map<string, any>;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class DeleteGroupUsingGet500ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=code" })
+  @SpeakeasyMetadata({ data: "json, name=code" })
   code?: number;
 
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data?: Map<string, any>;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
+export class DeleteGroupUsingGetRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  queryParams: DeleteGroupUsingGetQueryParams;
+}
+
+
 export class DeleteGroupUsingGetResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   deleteGroupUsingGet200ApplicationJsonObject?: DeleteGroupUsingGet200ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   deleteGroupUsingGet400ApplicationJsonObject?: DeleteGroupUsingGet400ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   deleteGroupUsingGet401ApplicationJsonObject?: DeleteGroupUsingGet401ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   deleteGroupUsingGet500ApplicationJsonObject?: DeleteGroupUsingGet500ApplicationJson;
 }

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // SourceLocation
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Indicates a location in the source code of the service for which errors are reported. `functionName` must be provided by the application when reporting an error, unless the error report contains a `message` with a supported exception stack trace. All fields are optional for the later case.
 **/
 export class SourceLocation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=filePath" })
+  @SpeakeasyMetadata({ data: "json, name=filePath" })
   filePath?: string;
 
-  @Metadata({ data: "json, name=functionName" })
+  @SpeakeasyMetadata({ data: "json, name=functionName" })
   functionName?: string;
 
-  @Metadata({ data: "json, name=lineNumber" })
+  @SpeakeasyMetadata({ data: "json, name=lineNumber" })
   lineNumber?: number;
 }

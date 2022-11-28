@@ -12,11 +12,6 @@ type DeleteDatasetSecurity struct {
 	Jwt shared.SchemeJwt `security:"scheme,type=http,subtype=bearer"`
 }
 
-type DeleteDatasetRequest struct {
-	QueryParams DeleteDatasetQueryParams
-	Security    DeleteDatasetSecurity
-}
-
 type DeleteDataset200ApplicationJSON struct {
 	Message *string `json:"message,omitempty"`
 }
@@ -43,6 +38,11 @@ type DeleteDataset422ApplicationJSON struct {
 
 type DeleteDataset500ApplicationJSON struct {
 	Message *string `json:"message,omitempty"`
+}
+
+type DeleteDatasetRequest struct {
+	QueryParams DeleteDatasetQueryParams
+	Security    DeleteDatasetSecurity
 }
 
 type DeleteDatasetResponse struct {

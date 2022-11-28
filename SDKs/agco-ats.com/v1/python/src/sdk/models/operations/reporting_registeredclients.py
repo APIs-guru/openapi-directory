@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
 from typing import Optional
@@ -23,13 +23,13 @@ class ReportingRegisteredClientsQueryParams:
 
 @dataclass
 class ReportingRegisteredClientsRequest:
-    query_params: ReportingRegisteredClientsQueryParams = field(default=None)
+    query_params: ReportingRegisteredClientsQueryParams = field()
     
 
 @dataclass
 class ReportingRegisteredClientsResponse:
+    content_type: str = field()
+    status_code: int = field()
     api_models_api_error: Optional[shared.APIModelsAPIError] = field(default=None)
     api_paged_response_update_system_models_client_status_update_system_models_paged_client_status_metadata_: Optional[shared.APIPagedResponseUpdateSystemModelsClientStatusUpdateSystemModelsPagedClientStatusMetadata] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

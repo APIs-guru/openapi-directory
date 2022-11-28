@@ -1,12 +1,20 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import queryinfo
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ValidateResponse:
-    error_message: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'errorMessage' }})
-    query_info: Optional[queryinfo.QueryInfo] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'queryInfo' }})
+    r"""ValidateResponse
+    Response to the validation request.
+    """
+    
+    error_message: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('errorMessage') }})
+    query_info: Optional[QueryInfo] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('queryInfo') }})
     

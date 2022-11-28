@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { UploadListElement } from "./uploadlistelement";
+
 
 
 // ListMultipartUploadsOutput
@@ -8,9 +8,9 @@ import { UploadListElement } from "./uploadlistelement";
  * Contains the Amazon S3 Glacier response to your request.
 **/
 export class ListMultipartUploadsOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Marker" })
+  @SpeakeasyMetadata({ data: "json, name=Marker" })
   marker?: string;
 
-  @Metadata({ data: "json, name=UploadsList", elemType: shared.UploadListElement })
+  @SpeakeasyMetadata({ data: "json, name=UploadsList", elemType: UploadListElement })
   uploadsList?: UploadListElement[];
 }

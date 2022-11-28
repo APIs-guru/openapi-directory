@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var CyipcRequestBodyCertificateParameters = /** @class */ (function (_super) {
     __extends(CyipcRequestBodyCertificateParameters, _super);
@@ -30,11 +30,11 @@ var CyipcRequestBodyCertificateParameters = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=FullName" }),
+        SpeakeasyMetadata({ data: "json, name=FullName" }),
         __metadata("design:type", String)
     ], CyipcRequestBodyCertificateParameters.prototype, "fullName", void 0);
     __decorate([
-        Metadata({ data: "json, name=policy_number" }),
+        SpeakeasyMetadata({ data: "json, name=policy_number" }),
         __metadata("design:type", String)
     ], CyipcRequestBodyCertificateParameters.prototype, "policyNumber", void 0);
     return CyipcRequestBodyCertificateParameters;
@@ -50,19 +50,19 @@ var CyipcRequestBody = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=certificateParameters" }),
+        SpeakeasyMetadata({ data: "json, name=certificateParameters" }),
         __metadata("design:type", CyipcRequestBodyCertificateParameters)
     ], CyipcRequestBody.prototype, "certificateParameters", void 0);
     __decorate([
-        Metadata({ data: "json, name=consentArtifact" }),
+        SpeakeasyMetadata({ data: "json, name=consentArtifact" }),
         __metadata("design:type", Object)
     ], CyipcRequestBody.prototype, "consentArtifact", void 0);
     __decorate([
-        Metadata({ data: "json, name=format" }),
+        SpeakeasyMetadata({ data: "json, name=format" }),
         __metadata("design:type", String)
     ], CyipcRequestBody.prototype, "format", void 0);
     __decorate([
-        Metadata({ data: "json, name=txnId" }),
+        SpeakeasyMetadata({ data: "json, name=txnId" }),
         __metadata("design:type", String)
     ], CyipcRequestBody.prototype, "txnId", void 0);
     return CyipcRequestBody;
@@ -74,32 +74,16 @@ var CyipcSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeApiKey)
     ], CyipcSecurity.prototype, "apiKey", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeClientId)
     ], CyipcSecurity.prototype, "clientId", void 0);
     return CyipcSecurity;
 }(SpeakeasyBase));
 export { CyipcSecurity };
-var CyipcRequest = /** @class */ (function (_super) {
-    __extends(CyipcRequest, _super);
-    function CyipcRequest() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
-        __metadata("design:type", CyipcRequestBody)
-    ], CyipcRequest.prototype, "request", void 0);
-    __decorate([
-        Metadata(),
-        __metadata("design:type", CyipcSecurity)
-    ], CyipcRequest.prototype, "security", void 0);
-    return CyipcRequest;
-}(SpeakeasyBase));
-export { CyipcRequest };
 export var Cyipc400ApplicationJsonErrorEnum;
 (function (Cyipc400ApplicationJsonErrorEnum) {
     Cyipc400ApplicationJsonErrorEnum["MissingParameter"] = "missing_parameter";
@@ -122,11 +106,11 @@ var Cyipc400ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Cyipc400ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Cyipc400ApplicationJson.prototype, "errorDescription", void 0);
     return Cyipc400ApplicationJson;
@@ -148,11 +132,11 @@ var Cyipc401ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Cyipc401ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Cyipc401ApplicationJson.prototype, "errorDescription", void 0);
     return Cyipc401ApplicationJson;
@@ -174,11 +158,11 @@ var Cyipc404ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Cyipc404ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Cyipc404ApplicationJson.prototype, "errorDescription", void 0);
     return Cyipc404ApplicationJson;
@@ -198,11 +182,11 @@ var Cyipc500ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Cyipc500ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Cyipc500ApplicationJson.prototype, "errorDescription", void 0);
     return Cyipc500ApplicationJson;
@@ -222,11 +206,11 @@ var Cyipc502ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Cyipc502ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Cyipc502ApplicationJson.prototype, "errorDescription", void 0);
     return Cyipc502ApplicationJson;
@@ -246,11 +230,11 @@ var Cyipc503ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Cyipc503ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Cyipc503ApplicationJson.prototype, "errorDescription", void 0);
     return Cyipc503ApplicationJson;
@@ -270,55 +254,71 @@ var Cyipc504ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Cyipc504ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Cyipc504ApplicationJson.prototype, "errorDescription", void 0);
     return Cyipc504ApplicationJson;
 }(SpeakeasyBase));
 export { Cyipc504ApplicationJson };
+var CyipcRequest = /** @class */ (function (_super) {
+    __extends(CyipcRequest, _super);
+    function CyipcRequest() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
+        __metadata("design:type", CyipcRequestBody)
+    ], CyipcRequest.prototype, "request", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", CyipcSecurity)
+    ], CyipcRequest.prototype, "security", void 0);
+    return CyipcRequest;
+}(SpeakeasyBase));
+export { CyipcRequest };
 var CyipcResponse = /** @class */ (function (_super) {
     __extends(CyipcResponse, _super);
     function CyipcResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], CyipcResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], CyipcResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Cyipc400ApplicationJson)
     ], CyipcResponse.prototype, "cyipc400ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Cyipc401ApplicationJson)
     ], CyipcResponse.prototype, "cyipc401ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Cyipc404ApplicationJson)
     ], CyipcResponse.prototype, "cyipc404ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Cyipc500ApplicationJson)
     ], CyipcResponse.prototype, "cyipc500ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Cyipc502ApplicationJson)
     ], CyipcResponse.prototype, "cyipc502ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Cyipc503ApplicationJson)
     ], CyipcResponse.prototype, "cyipc503ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Cyipc504ApplicationJson)
     ], CyipcResponse.prototype, "cyipc504ApplicationJsonObject", void 0);
     return CyipcResponse;

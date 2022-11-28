@@ -1,22 +1,26 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import status_enum
-from . import channeltype_enum
-from . import singlemasterconfiguration
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ChannelInfo:
-    channel_arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ChannelARN' }})
-    channel_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ChannelName' }})
-    channel_status: Optional[status_enum.StatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ChannelStatus' }})
-    channel_type: Optional[channeltype_enum.ChannelTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ChannelType' }})
-    creation_time: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'CreationTime', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    single_master_configuration: Optional[singlemasterconfiguration.SingleMasterConfiguration] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'SingleMasterConfiguration' }})
-    version: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Version' }})
+    r"""ChannelInfo
+    A structure that encapsulates a signaling channel's metadata and properties.
+    """
+    
+    channel_arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ChannelARN') }})
+    channel_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ChannelName') }})
+    channel_status: Optional[StatusEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ChannelStatus') }})
+    channel_type: Optional[ChannelTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ChannelType') }})
+    creation_time: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('CreationTime'), 'encoder': utils.datetimeisoformat(True), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    single_master_configuration: Optional[SingleMasterConfiguration] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('SingleMasterConfiguration') }})
+    version: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Version') }})
     

@@ -1,50 +1,51 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class PutCisInstructionIntoSubContractorPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=CisInstructionId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=CisInstructionId" })
   cisInstructionId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=EmployerId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=EmployerId" })
   employerId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=SubContractorId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=SubContractorId" })
   subContractorId: string;
 }
 
 
 export class PutCisInstructionIntoSubContractorHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=Api-Version" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Api-Version" })
   apiVersion: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=Authorization" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Authorization" })
   authorization: string;
 }
 
 
 export class PutCisInstructionIntoSubContractorRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: PutCisInstructionIntoSubContractorPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: PutCisInstructionIntoSubContractorHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: shared.CisInstruction;
 }
 
 
 export class PutCisInstructionIntoSubContractorResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   cisInstruction?: shared.CisInstruction;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   errorModel?: shared.ErrorModel;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

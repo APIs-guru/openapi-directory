@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// Subscription
+// A subscription to events on a collection.
 type Subscription struct {
 	CallbackURL  *string       `json:"callbackUrl,omitempty"`
 	Collection   *string       `json:"collection,omitempty"`

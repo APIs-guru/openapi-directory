@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import structuredquery
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class QueryTarget:
-    parent: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'parent' }})
-    structured_query: Optional[structuredquery.StructuredQuery] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'structuredQuery' }})
+    r"""QueryTarget
+    A target specified by a query.
+    """
+    
+    parent: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('parent') }})
+    structured_query: Optional[StructuredQuery] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('structuredQuery') }})
     

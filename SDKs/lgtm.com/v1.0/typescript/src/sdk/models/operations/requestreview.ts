@@ -1,59 +1,60 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class RequestReviewPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=project-id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=project-id" })
   projectId: number;
 }
 
 
 export class RequestReviewQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=base" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=base" })
   base: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=callback-secret" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=callback-secret" })
   callbackSecret?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=callback-url" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=callback-url" })
   callbackUrl?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=external-id" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=external-id" })
   externalId: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=review-url" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=review-url" })
   reviewUrl?: string;
 }
 
 
 export class RequestReviewSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=bearer" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" })
   accessToken: shared.SchemeAccessToken;
 }
 
 
 export class RequestReviewRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: RequestReviewPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: RequestReviewQueryParams;
 
-  @Metadata({ data: "request, media_type=application/octet-stream" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/octet-stream" })
   request: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: RequestReviewSecurity;
 }
 
 
 export class RequestReviewResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   operation?: shared.Operation;
 }

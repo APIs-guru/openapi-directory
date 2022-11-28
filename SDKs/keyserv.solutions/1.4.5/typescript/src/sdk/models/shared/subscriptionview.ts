@@ -1,36 +1,36 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { KeyView } from "./keyview";
 
 
+
 export class SubscriptionView extends SpeakeasyBase {
-  @Metadata({ data: "json, name=action" })
+  @SpeakeasyMetadata({ data: "json, name=action" })
   action: string;
 
-  @Metadata({ data: "json, name=callbackOnModify" })
+  @SpeakeasyMetadata({ data: "json, name=callbackOnModify" })
   callbackOnModify: boolean;
 
-  @Metadata({ data: "json, name=callbackUrl" })
+  @SpeakeasyMetadata({ data: "json, name=callbackUrl" })
   callbackUrl?: string;
 
-  @Metadata({ data: "json, name=commenced" })
+  @SpeakeasyMetadata({ data: "json, name=commenced" })
   commenced: Date;
 
-  @Metadata({ data: "json, name=created" })
+  @SpeakeasyMetadata({ data: "json, name=created" })
   created?: Date;
 
-  @Metadata({ data: "json, name=custom" })
+  @SpeakeasyMetadata({ data: "json, name=custom" })
   custom?: any;
 
-  @Metadata({ data: "json, name=frequency" })
+  @SpeakeasyMetadata({ data: "json, name=frequency" })
   frequency: string;
 
-  @Metadata({ data: "json, name=keys", elemType: shared.KeyView })
+  @SpeakeasyMetadata({ data: "json, name=keys", elemType: KeyView })
   keys?: KeyView[];
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=updated" })
+  @SpeakeasyMetadata({ data: "json, name=updated" })
   updated?: Date;
 }

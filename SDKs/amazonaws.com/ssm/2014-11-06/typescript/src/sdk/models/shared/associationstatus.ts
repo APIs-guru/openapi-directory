@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AssociationStatusNameEnum } from "./associationstatusnameenum";
+
 
 
 // AssociationStatus
@@ -7,15 +8,15 @@ import { AssociationStatusNameEnum } from "./associationstatusnameenum";
  * Describes an association status.
 **/
 export class AssociationStatus extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AdditionalInfo" })
+  @SpeakeasyMetadata({ data: "json, name=AdditionalInfo" })
   additionalInfo?: string;
 
-  @Metadata({ data: "json, name=Date" })
+  @SpeakeasyMetadata({ data: "json, name=Date" })
   date: Date;
 
-  @Metadata({ data: "json, name=Message" })
+  @SpeakeasyMetadata({ data: "json, name=Message" })
   message: string;
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name: AssociationStatusNameEnum;
 }

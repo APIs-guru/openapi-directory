@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class AnalyticsadminPropertiesSearchAds360LinksListPathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -27,14 +28,14 @@ class AnalyticsadminPropertiesSearchAds360LinksListQueryParams:
 
 @dataclass
 class AnalyticsadminPropertiesSearchAds360LinksListSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class AnalyticsadminPropertiesSearchAds360LinksListSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -45,14 +46,14 @@ class AnalyticsadminPropertiesSearchAds360LinksListSecurity:
 
 @dataclass
 class AnalyticsadminPropertiesSearchAds360LinksListRequest:
-    path_params: AnalyticsadminPropertiesSearchAds360LinksListPathParams = field(default=None)
-    query_params: AnalyticsadminPropertiesSearchAds360LinksListQueryParams = field(default=None)
-    security: AnalyticsadminPropertiesSearchAds360LinksListSecurity = field(default=None)
+    path_params: AnalyticsadminPropertiesSearchAds360LinksListPathParams = field()
+    query_params: AnalyticsadminPropertiesSearchAds360LinksListQueryParams = field()
+    security: AnalyticsadminPropertiesSearchAds360LinksListSecurity = field()
     
 
 @dataclass
 class AnalyticsadminPropertiesSearchAds360LinksListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_analytics_admin_v1alpha_list_search_ads360_links_response: Optional[shared.GoogleAnalyticsAdminV1alphaListSearchAds360LinksResponse] = field(default=None)
-    status_code: int = field(default=None)
     

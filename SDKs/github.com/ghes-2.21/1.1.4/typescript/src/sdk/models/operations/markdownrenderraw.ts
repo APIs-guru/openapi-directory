@@ -1,31 +1,32 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class MarkdownRenderRawRequests extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=text/plain" })
+  @SpeakeasyMetadata({ data: "request, media_type=text/plain" })
   string?: string;
 
-  @Metadata({ data: "request, media_type=text/x-markdown" })
+  @SpeakeasyMetadata({ data: "request, media_type=text/x-markdown" })
   string1?: string;
 }
 
 
 export class MarkdownRenderRawRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   request?: MarkdownRenderRawRequests;
 }
 
 
 export class MarkdownRenderRawResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: Map<string, string[]>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   markdownRenderRaw200TextHtmlString?: string;
 }

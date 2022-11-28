@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ProgressUpdateStreamSummary
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Summary of the AWS resource used for access control that is implicitly linked to your AWS account.
 **/
 export class ProgressUpdateStreamSummary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ProgressUpdateStreamName" })
+  @SpeakeasyMetadata({ data: "json, name=ProgressUpdateStreamName" })
   progressUpdateStreamName?: string;
 }

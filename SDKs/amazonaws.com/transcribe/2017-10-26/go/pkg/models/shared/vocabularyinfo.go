@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// VocabularyInfo
+// Provides information about a custom vocabulary.
 type VocabularyInfo struct {
 	LanguageCode     *LanguageCodeEnum    `json:"LanguageCode,omitempty"`
 	LastModifiedTime *time.Time           `json:"LastModifiedTime,omitempty"`

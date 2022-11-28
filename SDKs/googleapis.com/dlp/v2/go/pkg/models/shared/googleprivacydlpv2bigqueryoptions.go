@@ -8,6 +8,8 @@ const (
 	GooglePrivacyDlpV2BigQueryOptionsSampleMethodEnumRandomStart             GooglePrivacyDlpV2BigQueryOptionsSampleMethodEnum = "RANDOM_START"
 )
 
+// GooglePrivacyDlpV2BigQueryOptions
+// Options defining BigQuery table and row identifiers.
 type GooglePrivacyDlpV2BigQueryOptions struct {
 	ExcludedFields    []GooglePrivacyDlpV2FieldID                        `json:"excludedFields,omitempty"`
 	IdentifyingFields []GooglePrivacyDlpV2FieldID                        `json:"identifyingFields,omitempty"`

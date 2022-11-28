@@ -9,10 +9,6 @@ type SevenGetListOfPaymentsQueryParams struct {
 	SortBy   *string `queryParam:"style=form,explode=true,name=sortBy"`
 }
 
-type SevenGetListOfPaymentsRequest struct {
-	QueryParams SevenGetListOfPaymentsQueryParams
-}
-
 type SevenGetListOfPayments200ApplicationJSONData struct {
 	ActuallyPaid     *float64 `json:"actually_paid,omitempty"`
 	OrderDescription *string  `json:"order_description,omitempty"`
@@ -35,6 +31,10 @@ type SevenGetListOfPayments200ApplicationJSON struct {
 	Page       *float64                                       `json:"page,omitempty"`
 	PagesCount *float64                                       `json:"pagesCount,omitempty"`
 	Total      *float64                                       `json:"total,omitempty"`
+}
+
+type SevenGetListOfPaymentsRequest struct {
+	QueryParams SevenGetListOfPaymentsQueryParams
 }
 
 type SevenGetListOfPaymentsResponse struct {

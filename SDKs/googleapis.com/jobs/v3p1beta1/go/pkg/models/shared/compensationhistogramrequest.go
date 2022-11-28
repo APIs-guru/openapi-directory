@@ -9,6 +9,8 @@ const (
 	CompensationHistogramRequestTypeEnumAnnualizedTotal                             CompensationHistogramRequestTypeEnum = "ANNUALIZED_TOTAL"
 )
 
+// CompensationHistogramRequest
+// Input only. Compensation based histogram request.
 type CompensationHistogramRequest struct {
 	BucketingOption *NumericBucketingOption               `json:"bucketingOption,omitempty"`
 	Type            *CompensationHistogramRequestTypeEnum `json:"type,omitempty"`

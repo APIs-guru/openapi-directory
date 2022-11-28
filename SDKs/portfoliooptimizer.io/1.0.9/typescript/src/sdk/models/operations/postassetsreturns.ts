@@ -1,43 +1,44 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class PostAssetsReturnsRequestBodyAssets extends SpeakeasyBase {
-  @Metadata({ data: "json, name=assetPrices" })
+  @SpeakeasyMetadata({ data: "json, name=assetPrices" })
   assetPrices: number[];
 }
 
 
 export class PostAssetsReturnsRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=assets", elemType: operations.PostAssetsReturnsRequestBodyAssets })
+  @SpeakeasyMetadata({ data: "json, name=assets", elemType: PostAssetsReturnsRequestBodyAssets })
   assets: PostAssetsReturnsRequestBodyAssets[];
 }
 
 
-export class PostAssetsReturnsRequest extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/json" })
-  request: PostAssetsReturnsRequestBody;
-}
-
-
 export class PostAssetsReturns200ApplicationJsonAssets extends SpeakeasyBase {
-  @Metadata({ data: "json, name=assetReturns" })
+  @SpeakeasyMetadata({ data: "json, name=assetReturns" })
   assetReturns: number[];
 }
 
 
 export class PostAssetsReturns200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=assets", elemType: operations.PostAssetsReturns200ApplicationJsonAssets })
+  @SpeakeasyMetadata({ data: "json, name=assets", elemType: PostAssetsReturns200ApplicationJsonAssets })
   assets: PostAssetsReturns200ApplicationJsonAssets[];
 }
 
 
+export class PostAssetsReturnsRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request: PostAssetsReturnsRequestBody;
+}
+
+
 export class PostAssetsReturnsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   postAssetsReturns200ApplicationJsonObject?: PostAssetsReturns200ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

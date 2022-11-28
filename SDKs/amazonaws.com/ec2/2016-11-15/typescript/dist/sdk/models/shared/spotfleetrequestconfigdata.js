@@ -1,0 +1,147 @@
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { AllocationStrategyEnum } from "./allocationstrategyenum";
+import { ExcessCapacityTerminationPolicyEnum } from "./excesscapacityterminationpolicyenum";
+import { InstanceInterruptionBehaviorEnum } from "./instanceinterruptionbehaviorenum";
+import { SpotFleetLaunchSpecification } from "./spotfleetlaunchspecification";
+import { LaunchTemplateConfig } from "./launchtemplateconfig";
+import { LoadBalancersConfig } from "./loadbalancersconfig";
+import { OnDemandAllocationStrategyEnum } from "./ondemandallocationstrategyenum";
+import { SpotMaintenanceStrategies } from "./spotmaintenancestrategies";
+import { TagSpecification } from "./tagspecification";
+import { FleetTypeEnum } from "./fleettypeenum";
+// SpotFleetRequestConfigData
+/**
+ * Describes the configuration of a Spot Fleet request.
+**/
+var SpotFleetRequestConfigData = /** @class */ (function (_super) {
+    __extends(SpotFleetRequestConfigData, _super);
+    function SpotFleetRequestConfigData() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", String)
+    ], SpotFleetRequestConfigData.prototype, "allocationStrategy", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", String)
+    ], SpotFleetRequestConfigData.prototype, "clientToken", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", String)
+    ], SpotFleetRequestConfigData.prototype, "context", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", String)
+    ], SpotFleetRequestConfigData.prototype, "excessCapacityTerminationPolicy", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", Number)
+    ], SpotFleetRequestConfigData.prototype, "fulfilledCapacity", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", String)
+    ], SpotFleetRequestConfigData.prototype, "iamFleetRole", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", String)
+    ], SpotFleetRequestConfigData.prototype, "instanceInterruptionBehavior", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", Number)
+    ], SpotFleetRequestConfigData.prototype, "instancePoolsToUseCount", void 0);
+    __decorate([
+        SpeakeasyMetadata({ elemType: SpotFleetLaunchSpecification }),
+        __metadata("design:type", Array)
+    ], SpotFleetRequestConfigData.prototype, "launchSpecifications", void 0);
+    __decorate([
+        SpeakeasyMetadata({ elemType: LaunchTemplateConfig }),
+        __metadata("design:type", Array)
+    ], SpotFleetRequestConfigData.prototype, "launchTemplateConfigs", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", LoadBalancersConfig)
+    ], SpotFleetRequestConfigData.prototype, "loadBalancersConfig", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", String)
+    ], SpotFleetRequestConfigData.prototype, "onDemandAllocationStrategy", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", Number)
+    ], SpotFleetRequestConfigData.prototype, "onDemandFulfilledCapacity", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", String)
+    ], SpotFleetRequestConfigData.prototype, "onDemandMaxTotalPrice", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", Number)
+    ], SpotFleetRequestConfigData.prototype, "onDemandTargetCapacity", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", Boolean)
+    ], SpotFleetRequestConfigData.prototype, "replaceUnhealthyInstances", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", SpotMaintenanceStrategies)
+    ], SpotFleetRequestConfigData.prototype, "spotMaintenanceStrategies", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", String)
+    ], SpotFleetRequestConfigData.prototype, "spotMaxTotalPrice", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", String)
+    ], SpotFleetRequestConfigData.prototype, "spotPrice", void 0);
+    __decorate([
+        SpeakeasyMetadata({ elemType: TagSpecification }),
+        __metadata("design:type", Array)
+    ], SpotFleetRequestConfigData.prototype, "tagSpecifications", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", Number)
+    ], SpotFleetRequestConfigData.prototype, "targetCapacity", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", Boolean)
+    ], SpotFleetRequestConfigData.prototype, "terminateInstancesWithExpiration", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", String)
+    ], SpotFleetRequestConfigData.prototype, "type", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", Date)
+    ], SpotFleetRequestConfigData.prototype, "validFrom", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", Date)
+    ], SpotFleetRequestConfigData.prototype, "validUntil", void 0);
+    return SpotFleetRequestConfigData;
+}(SpeakeasyBase));
+export { SpotFleetRequestConfigData };

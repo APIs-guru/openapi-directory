@@ -1,6 +1,8 @@
 package shared
 
-type ValidateCreateMembershipRequest struct {
-	Membership   *Membership `json:"membership,omitempty"`
-	MembershipID *string     `json:"membershipId,omitempty"`
+// ValidateCreateMembershipRequestInput
+// Request message for the `GkeHub.ValidateCreateMembership` method.
+type ValidateCreateMembershipRequestInput struct {
+	Membership   *MembershipInput `json:"membership,omitempty"`
+	MembershipID *string          `json:"membershipId,omitempty"`
 }

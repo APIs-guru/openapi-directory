@@ -1,12 +1,18 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import launchstatus_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ParticipatingServer:
-    launch_status: Optional[launchstatus_enum.LaunchStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'launchStatus' }})
-    source_server_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'sourceServerID' }})
+    r"""ParticipatingServer
+    Server participating in Job.
+    """
+    
+    launch_status: Optional[LaunchStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('launchStatus') }})
+    source_server_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('sourceServerID') }})
     

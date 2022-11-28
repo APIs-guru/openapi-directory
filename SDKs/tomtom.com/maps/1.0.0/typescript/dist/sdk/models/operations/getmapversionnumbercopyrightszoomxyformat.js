@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var GetMapVersionNumberCopyrightsZoomXYFormatFormatEnum;
 (function (GetMapVersionNumberCopyrightsZoomXYFormatFormatEnum) {
     GetMapVersionNumberCopyrightsZoomXYFormatFormatEnum["Json"] = "json";
@@ -35,23 +35,23 @@ var GetMapVersionNumberCopyrightsZoomXYFormatPathParams = /** @class */ (functio
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=X" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=X" }),
         __metadata("design:type", Number)
     ], GetMapVersionNumberCopyrightsZoomXYFormatPathParams.prototype, "x", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=Y" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=Y" }),
         __metadata("design:type", Number)
     ], GetMapVersionNumberCopyrightsZoomXYFormatPathParams.prototype, "y", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=format" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=format" }),
         __metadata("design:type", String)
     ], GetMapVersionNumberCopyrightsZoomXYFormatPathParams.prototype, "format", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=versionNumber" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=versionNumber" }),
         __metadata("design:type", Number)
     ], GetMapVersionNumberCopyrightsZoomXYFormatPathParams.prototype, "versionNumber", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=zoom" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=zoom" }),
         __metadata("design:type", Number)
     ], GetMapVersionNumberCopyrightsZoomXYFormatPathParams.prototype, "zoom", void 0);
     return GetMapVersionNumberCopyrightsZoomXYFormatPathParams;
@@ -63,7 +63,7 @@ var GetMapVersionNumberCopyrightsZoomXYFormatQueryParams = /** @class */ (functi
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=callback" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=callback" }),
         __metadata("design:type", String)
     ], GetMapVersionNumberCopyrightsZoomXYFormatQueryParams.prototype, "callback", void 0);
     return GetMapVersionNumberCopyrightsZoomXYFormatQueryParams;
@@ -75,11 +75,11 @@ var GetMapVersionNumberCopyrightsZoomXYFormatRequest = /** @class */ (function (
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetMapVersionNumberCopyrightsZoomXYFormatPathParams)
     ], GetMapVersionNumberCopyrightsZoomXYFormatRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetMapVersionNumberCopyrightsZoomXYFormatQueryParams)
     ], GetMapVersionNumberCopyrightsZoomXYFormatRequest.prototype, "queryParams", void 0);
     return GetMapVersionNumberCopyrightsZoomXYFormatRequest;
@@ -91,11 +91,11 @@ var GetMapVersionNumberCopyrightsZoomXYFormatResponse = /** @class */ (function 
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetMapVersionNumberCopyrightsZoomXYFormatResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetMapVersionNumberCopyrightsZoomXYFormatResponse.prototype, "statusCode", void 0);
     return GetMapVersionNumberCopyrightsZoomXYFormatResponse;

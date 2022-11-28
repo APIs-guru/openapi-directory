@@ -10,6 +10,8 @@ const (
 	GoogleCloudRecommenderV1beta1RecommendationPriorityEnumP1                  GoogleCloudRecommenderV1beta1RecommendationPriorityEnum = "P1"
 )
 
+// GoogleCloudRecommenderV1beta1Recommendation
+// A recommendation along with a suggested action. E.g., a rightsizing recommendation for an underutilized VM, IAM role recommendations, etc
 type GoogleCloudRecommenderV1beta1Recommendation struct {
 	AdditionalImpact   []GoogleCloudRecommenderV1beta1Impact                         `json:"additionalImpact,omitempty"`
 	AssociatedInsights []GoogleCloudRecommenderV1beta1RecommendationInsightReference `json:"associatedInsights,omitempty"`

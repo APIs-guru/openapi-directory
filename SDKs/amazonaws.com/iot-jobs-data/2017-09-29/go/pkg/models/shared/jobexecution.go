@@ -1,5 +1,7 @@
 package shared
 
+// JobExecution
+// Contains data about a job execution.
 type JobExecution struct {
 	ApproximateSecondsBeforeTimedOut *int64                  `json:"approximateSecondsBeforeTimedOut,omitempty"`
 	ExecutionNumber                  *int64                  `json:"executionNumber,omitempty"`

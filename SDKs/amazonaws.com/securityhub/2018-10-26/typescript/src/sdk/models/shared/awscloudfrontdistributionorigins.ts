@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AwsCloudFrontDistributionOriginItem } from "./awscloudfrontdistributionoriginitem";
+
 
 
 // AwsCloudFrontDistributionOrigins
@@ -8,6 +8,6 @@ import { AwsCloudFrontDistributionOriginItem } from "./awscloudfrontdistribution
  * A complex type that contains information about origins and origin groups for this distribution.
 **/
 export class AwsCloudFrontDistributionOrigins extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Items", elemType: shared.AwsCloudFrontDistributionOriginItem })
+  @SpeakeasyMetadata({ data: "json, name=Items", elemType: AwsCloudFrontDistributionOriginItem })
   items?: AwsCloudFrontDistributionOriginItem[];
 }

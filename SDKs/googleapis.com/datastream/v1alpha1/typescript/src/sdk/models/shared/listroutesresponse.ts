@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Route } from "./route";
+
 
 
 // ListRoutesResponse
@@ -8,12 +8,12 @@ import { Route } from "./route";
  * route list response
 **/
 export class ListRoutesResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 
-  @Metadata({ data: "json, name=routes", elemType: shared.Route })
+  @SpeakeasyMetadata({ data: "json, name=routes", elemType: Route })
   routes?: Route[];
 
-  @Metadata({ data: "json, name=unreachable" })
+  @SpeakeasyMetadata({ data: "json, name=unreachable" })
   unreachable?: string[];
 }

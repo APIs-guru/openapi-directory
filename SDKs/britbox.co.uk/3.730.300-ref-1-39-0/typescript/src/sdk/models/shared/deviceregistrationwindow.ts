@@ -1,19 +1,20 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DeviceRegistrationWindow extends SpeakeasyBase {
-  @Metadata({ data: "json, name=endDate" })
+  @SpeakeasyMetadata({ data: "json, name=endDate" })
   endDate: Date;
 
-  @Metadata({ data: "json, name=limit" })
+  @SpeakeasyMetadata({ data: "json, name=limit" })
   limit: number;
 
-  @Metadata({ data: "json, name=periodDays" })
+  @SpeakeasyMetadata({ data: "json, name=periodDays" })
   periodDays: number;
 
-  @Metadata({ data: "json, name=remaining" })
+  @SpeakeasyMetadata({ data: "json, name=remaining" })
   remaining: number;
 
-  @Metadata({ data: "json, name=startDate" })
+  @SpeakeasyMetadata({ data: "json, name=startDate" })
   startDate: Date;
 }

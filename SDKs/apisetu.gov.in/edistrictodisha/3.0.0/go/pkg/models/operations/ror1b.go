@@ -27,11 +27,6 @@ type Ror1bSecurity struct {
 	ClientID shared.SchemeClientID `security:"scheme,type=apiKey,subtype=header"`
 }
 
-type Ror1bRequest struct {
-	Request  *Ror1bRequestBody `request:"mediaType=application/json"`
-	Security Ror1bSecurity
-}
-
 type Ror1b400ApplicationJSONErrorEnum string
 
 const (
@@ -161,6 +156,11 @@ const (
 type Ror1b504ApplicationJSON struct {
 	Error            *Ror1b504ApplicationJSONErrorEnum            `json:"error,omitempty"`
 	ErrorDescription *Ror1b504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
+}
+
+type Ror1bRequest struct {
+	Request  *Ror1bRequestBody `request:"mediaType=application/json"`
+	Security Ror1bSecurity
 }
 
 type Ror1bResponse struct {

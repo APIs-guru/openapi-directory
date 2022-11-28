@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// SubscriptionSnippet
+// Basic details about a subscription, including title, description and thumbnails of the subscribed item.
 type SubscriptionSnippet struct {
 	ChannelID    *string           `json:"channelId,omitempty"`
 	ChannelTitle *string           `json:"channelTitle,omitempty"`

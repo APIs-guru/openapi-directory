@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var ImageOcrPhotoToTextHeaders = /** @class */ (function (_super) {
     __extends(ImageOcrPhotoToTextHeaders, _super);
@@ -30,11 +30,11 @@ var ImageOcrPhotoToTextHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=language" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=language" }),
         __metadata("design:type", String)
     ], ImageOcrPhotoToTextHeaders.prototype, "language", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=recognitionMode" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=recognitionMode" }),
         __metadata("design:type", String)
     ], ImageOcrPhotoToTextHeaders.prototype, "recognitionMode", void 0);
     return ImageOcrPhotoToTextHeaders;
@@ -46,11 +46,11 @@ var ImageOcrPhotoToTextRequestBodyImageFile = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "multipart_form, content=true" }),
+        SpeakeasyMetadata({ data: "multipart_form, content=true" }),
         __metadata("design:type", Uint8Array)
     ], ImageOcrPhotoToTextRequestBodyImageFile.prototype, "content", void 0);
     __decorate([
-        Metadata({ data: "multipart_form, name=imageFile" }),
+        SpeakeasyMetadata({ data: "multipart_form, name=imageFile" }),
         __metadata("design:type", String)
     ], ImageOcrPhotoToTextRequestBodyImageFile.prototype, "imageFile", void 0);
     return ImageOcrPhotoToTextRequestBodyImageFile;
@@ -62,7 +62,7 @@ var ImageOcrPhotoToTextRequestBody = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "multipart_form, file=true" }),
+        SpeakeasyMetadata({ data: "multipart_form, file=true" }),
         __metadata("design:type", ImageOcrPhotoToTextRequestBodyImageFile)
     ], ImageOcrPhotoToTextRequestBody.prototype, "imageFile", void 0);
     return ImageOcrPhotoToTextRequestBody;
@@ -74,7 +74,7 @@ var ImageOcrPhotoToTextSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeApikey)
     ], ImageOcrPhotoToTextSecurity.prototype, "apikey", void 0);
     return ImageOcrPhotoToTextSecurity;
@@ -86,15 +86,15 @@ var ImageOcrPhotoToTextRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ImageOcrPhotoToTextHeaders)
     ], ImageOcrPhotoToTextRequest.prototype, "headers", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=multipart/form-data" }),
+        SpeakeasyMetadata({ data: "request, media_type=multipart/form-data" }),
         __metadata("design:type", ImageOcrPhotoToTextRequestBody)
     ], ImageOcrPhotoToTextRequest.prototype, "request", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ImageOcrPhotoToTextSecurity)
     ], ImageOcrPhotoToTextRequest.prototype, "security", void 0);
     return ImageOcrPhotoToTextRequest;
@@ -106,19 +106,19 @@ var ImageOcrPhotoToTextResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], ImageOcrPhotoToTextResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], ImageOcrPhotoToTextResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.ImageToTextResponse)
     ], ImageOcrPhotoToTextResponse.prototype, "imageToTextResponse", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], ImageOcrPhotoToTextResponse.prototype, "statusCode", void 0);
     return ImageOcrPhotoToTextResponse;

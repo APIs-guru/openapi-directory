@@ -28,6 +28,23 @@ const (
 	NetworkConfigTypeEnumPrivate         NetworkConfigTypeEnum = "PRIVATE"
 )
 
+// NetworkConfigInput
+// Configuration parameters for a new network.
+type NetworkConfigInput struct {
+	Bandwidth          *NetworkConfigBandwidthEnum   `json:"bandwidth,omitempty"`
+	Cidr               *string                       `json:"cidr,omitempty"`
+	GcpService         *string                       `json:"gcpService,omitempty"`
+	ID                 *string                       `json:"id,omitempty"`
+	JumboFramesEnabled *bool                         `json:"jumboFramesEnabled,omitempty"`
+	ServiceCidr        *NetworkConfigServiceCidrEnum `json:"serviceCidr,omitempty"`
+	Type               *NetworkConfigTypeEnum        `json:"type,omitempty"`
+	UserNote           *string                       `json:"userNote,omitempty"`
+	VlanAttachments    []IntakeVlanAttachment        `json:"vlanAttachments,omitempty"`
+	VlanSameProject    *bool                         `json:"vlanSameProject,omitempty"`
+}
+
+// NetworkConfig
+// Configuration parameters for a new network.
 type NetworkConfig struct {
 	Bandwidth          *NetworkConfigBandwidthEnum   `json:"bandwidth,omitempty"`
 	Cidr               *string                       `json:"cidr,omitempty"`

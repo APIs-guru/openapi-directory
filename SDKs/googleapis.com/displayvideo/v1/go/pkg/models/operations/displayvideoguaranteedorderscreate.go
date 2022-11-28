@@ -27,7 +27,7 @@ type DisplayvideoGuaranteedOrdersCreateSecurity struct {
 
 type DisplayvideoGuaranteedOrdersCreateRequest struct {
 	QueryParams DisplayvideoGuaranteedOrdersCreateQueryParams
-	Request     *shared.GuaranteedOrder `request:"mediaType=application/json"`
+	Request     *shared.GuaranteedOrderInput `request:"mediaType=application/json"`
 	Security    DisplayvideoGuaranteedOrdersCreateSecurity
 }
 

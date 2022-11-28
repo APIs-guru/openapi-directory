@@ -1,6 +1,7 @@
 
 
+
 export enum NetworkProfileTypeEnum {
-    Curated = "CURATED"
-,    Private = "PRIVATE"
+    Curated = "CURATED",
+    Private = "PRIVATE"
 }

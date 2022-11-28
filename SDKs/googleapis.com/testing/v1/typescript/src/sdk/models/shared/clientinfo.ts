@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ClientInfoDetail } from "./clientinfodetail";
+
 
 
 // ClientInfo
@@ -8,9 +8,9 @@ import { ClientInfoDetail } from "./clientinfodetail";
  * Information about the client which invoked the test.
 **/
 export class ClientInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=clientInfoDetails", elemType: shared.ClientInfoDetail })
+  @SpeakeasyMetadata({ data: "json, name=clientInfoDetails", elemType: ClientInfoDetail })
   clientInfoDetails?: ClientInfoDetail[];
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 }

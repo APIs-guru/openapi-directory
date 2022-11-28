@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ShardConfiguration
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Shard configuration options. Each shard configuration has the following: Slots and ReplicaCount.
 **/
 export class ShardConfiguration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ReplicaCount" })
+  @SpeakeasyMetadata({ data: "json, name=ReplicaCount" })
   replicaCount?: number;
 
-  @Metadata({ data: "json, name=Slots" })
+  @SpeakeasyMetadata({ data: "json, name=Slots" })
   slots?: string;
 }

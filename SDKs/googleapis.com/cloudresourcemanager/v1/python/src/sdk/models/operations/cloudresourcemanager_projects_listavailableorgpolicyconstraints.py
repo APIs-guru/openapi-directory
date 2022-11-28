@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class CloudresourcemanagerProjectsListAvailableOrgPolicyConstraintsPathParams:
-    resource: str = field(default=None, metadata={'path_param': { 'field_name': 'resource', 'style': 'simple', 'explode': False }})
+    resource: str = field(metadata={'path_param': { 'field_name': 'resource', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,14 +26,14 @@ class CloudresourcemanagerProjectsListAvailableOrgPolicyConstraintsQueryParams:
 
 @dataclass
 class CloudresourcemanagerProjectsListAvailableOrgPolicyConstraintsSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class CloudresourcemanagerProjectsListAvailableOrgPolicyConstraintsSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -43,15 +44,15 @@ class CloudresourcemanagerProjectsListAvailableOrgPolicyConstraintsSecurity:
 
 @dataclass
 class CloudresourcemanagerProjectsListAvailableOrgPolicyConstraintsRequest:
-    path_params: CloudresourcemanagerProjectsListAvailableOrgPolicyConstraintsPathParams = field(default=None)
-    query_params: CloudresourcemanagerProjectsListAvailableOrgPolicyConstraintsQueryParams = field(default=None)
+    path_params: CloudresourcemanagerProjectsListAvailableOrgPolicyConstraintsPathParams = field()
+    query_params: CloudresourcemanagerProjectsListAvailableOrgPolicyConstraintsQueryParams = field()
+    security: CloudresourcemanagerProjectsListAvailableOrgPolicyConstraintsSecurity = field()
     request: Optional[shared.ListAvailableOrgPolicyConstraintsRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: CloudresourcemanagerProjectsListAvailableOrgPolicyConstraintsSecurity = field(default=None)
     
 
 @dataclass
 class CloudresourcemanagerProjectsListAvailableOrgPolicyConstraintsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     list_available_org_policy_constraints_response: Optional[shared.ListAvailableOrgPolicyConstraintsResponse] = field(default=None)
-    status_code: int = field(default=None)
     

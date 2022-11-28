@@ -1,24 +1,25 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum KeyTypeEnum {
-    DeployKey = "deploy-key"
-,    GithubUserKey = "github-user-key"
+    DeployKey = "deploy-key",
+    GithubUserKey = "github-user-key"
 }
 
 
 export class Key extends SpeakeasyBase {
-  @Metadata({ data: "json, name=fingerprint" })
+  @SpeakeasyMetadata({ data: "json, name=fingerprint" })
   fingerprint?: string;
 
-  @Metadata({ data: "json, name=preferred" })
+  @SpeakeasyMetadata({ data: "json, name=preferred" })
   preferred?: boolean;
 
-  @Metadata({ data: "json, name=public_key" })
+  @SpeakeasyMetadata({ data: "json, name=public_key" })
   publicKey?: string;
 
-  @Metadata({ data: "json, name=time" })
+  @SpeakeasyMetadata({ data: "json, name=time" })
   time?: Date;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: KeyTypeEnum;
 }

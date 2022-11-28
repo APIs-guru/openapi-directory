@@ -1,5 +1,7 @@
 package shared
 
+// FirewallRuleGroupAssociation
+// An association between a firewall rule group and a VPC, which enables DNS filtering for the VPC.
 type FirewallRuleGroupAssociation struct {
 	Arn                 *string                                 `json:"Arn,omitempty"`
 	CreationTime        *string                                 `json:"CreationTime,omitempty"`

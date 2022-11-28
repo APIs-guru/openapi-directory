@@ -1,5 +1,7 @@
 package shared
 
+// SelectPsuAuthenticationMethodResponse
+// Body of the JSON response for a successful select PSU authentication method request.
 type SelectPsuAuthenticationMethodResponse struct {
 	Links                              map[string]HrefType `json:"_links,omitempty"`
 	ChallengeData                      *ChallengeData      `json:"challengeData,omitempty"`

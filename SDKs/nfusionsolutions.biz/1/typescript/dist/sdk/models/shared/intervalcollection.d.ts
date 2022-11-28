@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { Interval } from "./interval";
 export declare class IntervalCollection extends SpeakeasyBase {
     baseCurrency?: string;

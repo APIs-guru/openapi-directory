@@ -1,5 +1,7 @@
 package shared
 
+// PaginatedSnippetComments
+// A paginated list of snippet comments.
 type PaginatedSnippetComments struct {
 	Next     *string                  `json:"next,omitempty"`
 	Page     *int64                   `json:"page,omitempty"`

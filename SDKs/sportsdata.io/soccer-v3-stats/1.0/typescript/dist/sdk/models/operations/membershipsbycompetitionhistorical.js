@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var MembershipsByCompetitionHistoricalFormatEnum;
 (function (MembershipsByCompetitionHistoricalFormatEnum) {
     MembershipsByCompetitionHistoricalFormatEnum["Xml"] = "xml";
@@ -34,11 +34,11 @@ var MembershipsByCompetitionHistoricalPathParams = /** @class */ (function (_sup
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=competition" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=competition" }),
         __metadata("design:type", String)
     ], MembershipsByCompetitionHistoricalPathParams.prototype, "competition", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=format" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=format" }),
         __metadata("design:type", String)
     ], MembershipsByCompetitionHistoricalPathParams.prototype, "format", void 0);
     return MembershipsByCompetitionHistoricalPathParams;
@@ -50,7 +50,7 @@ var MembershipsByCompetitionHistoricalRequest = /** @class */ (function (_super)
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", MembershipsByCompetitionHistoricalPathParams)
     ], MembershipsByCompetitionHistoricalRequest.prototype, "pathParams", void 0);
     return MembershipsByCompetitionHistoricalRequest;
@@ -62,15 +62,15 @@ var MembershipsByCompetitionHistoricalResponse = /** @class */ (function (_super
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], MembershipsByCompetitionHistoricalResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Array)
     ], MembershipsByCompetitionHistoricalResponse.prototype, "memberships", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], MembershipsByCompetitionHistoricalResponse.prototype, "statusCode", void 0);
     return MembershipsByCompetitionHistoricalResponse;

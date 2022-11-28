@@ -1,15 +1,19 @@
 from dataclasses import dataclass, field
-from typing import List,Optional
+from typing import Optional
 from dataclasses_json import dataclass_json
-from . import googleclouddialogflowv2intentmessageimage
-from . import googleclouddialogflowv2intentmessageselectiteminfo
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class GoogleCloudDialogflowV2IntentMessageListSelectItem:
-    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
-    image: Optional[googleclouddialogflowv2intentmessageimage.GoogleCloudDialogflowV2IntentMessageImage] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'image' }})
-    info: Optional[googleclouddialogflowv2intentmessageselectiteminfo.GoogleCloudDialogflowV2IntentMessageSelectItemInfo] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'info' }})
-    title: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'title' }})
+    r"""GoogleCloudDialogflowV2IntentMessageListSelectItem
+    An item in the list.
+    """
+    
+    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('description') }})
+    image: Optional[GoogleCloudDialogflowV2IntentMessageImage] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('image') }})
+    info: Optional[GoogleCloudDialogflowV2IntentMessageSelectItemInfo] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('info') }})
+    title: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('title') }})
     

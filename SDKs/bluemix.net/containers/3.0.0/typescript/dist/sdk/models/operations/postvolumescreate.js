@@ -22,18 +22,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var PostVolumesCreateQueryParams = /** @class */ (function (_super) {
     __extends(PostVolumesCreateQueryParams, _super);
     function PostVolumesCreateQueryParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=fsName" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=fsName" }),
         __metadata("design:type", String)
     ], PostVolumesCreateQueryParams.prototype, "fsName", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=name" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=name" }),
         __metadata("design:type", String)
     ], PostVolumesCreateQueryParams.prototype, "name", void 0);
     return PostVolumesCreateQueryParams;
@@ -45,11 +45,11 @@ var PostVolumesCreateHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Auth-Project-Id" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Auth-Project-Id" }),
         __metadata("design:type", String)
     ], PostVolumesCreateHeaders.prototype, "xAuthProjectId", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Auth-Token" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Auth-Token" }),
         __metadata("design:type", String)
     ], PostVolumesCreateHeaders.prototype, "xAuthToken", void 0);
     return PostVolumesCreateHeaders;
@@ -61,11 +61,11 @@ var PostVolumesCreateRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PostVolumesCreateQueryParams)
     ], PostVolumesCreateRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PostVolumesCreateHeaders)
     ], PostVolumesCreateRequest.prototype, "headers", void 0);
     return PostVolumesCreateRequest;
@@ -77,15 +77,15 @@ var PostVolumesCreateResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], PostVolumesCreateResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], PostVolumesCreateResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], PostVolumesCreateResponse.prototype, "volume", void 0);
     return PostVolumesCreateResponse;

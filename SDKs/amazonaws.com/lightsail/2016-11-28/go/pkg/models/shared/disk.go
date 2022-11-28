@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// Disk
+// Describes a block storage disk.
 type Disk struct {
 	AddOns          []AddOn           `json:"addOns,omitempty"`
 	Arn             *string           `json:"arn,omitempty"`

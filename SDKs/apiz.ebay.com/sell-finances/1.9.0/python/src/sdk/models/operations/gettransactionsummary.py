@@ -10,18 +10,18 @@ class GetTransactionSummaryQueryParams:
 
 @dataclass
 class GetTransactionSummarySecurity:
-    api_auth: shared.SchemeAPIAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    api_auth: shared.SchemeAPIAuth = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class GetTransactionSummaryRequest:
-    query_params: GetTransactionSummaryQueryParams = field(default=None)
-    security: GetTransactionSummarySecurity = field(default=None)
+    query_params: GetTransactionSummaryQueryParams = field()
+    security: GetTransactionSummarySecurity = field()
     
 
 @dataclass
 class GetTransactionSummaryResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     transaction_summary_response: Optional[shared.TransactionSummaryResponse] = field(default=None)
     

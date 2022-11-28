@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // S3ContentLocationUpdate
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Describes an update for the Amazon S3 code content location for an application.
 **/
 export class S3ContentLocationUpdate extends SpeakeasyBase {
-  @Metadata({ data: "json, name=BucketARNUpdate" })
+  @SpeakeasyMetadata({ data: "json, name=BucketARNUpdate" })
   bucketArnUpdate?: string;
 
-  @Metadata({ data: "json, name=FileKeyUpdate" })
+  @SpeakeasyMetadata({ data: "json, name=FileKeyUpdate" })
   fileKeyUpdate?: string;
 
-  @Metadata({ data: "json, name=ObjectVersionUpdate" })
+  @SpeakeasyMetadata({ data: "json, name=ObjectVersionUpdate" })
   objectVersionUpdate?: string;
 }

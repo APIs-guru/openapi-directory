@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ItvUpdatePaymentStrongRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=paymentMethodFromToken" })
+  @SpeakeasyMetadata({ data: "json, name=paymentMethodFromToken" })
   paymentMethodFromToken?: string;
 
-  @Metadata({ data: "json, name=paymentMethodId" })
+  @SpeakeasyMetadata({ data: "json, name=paymentMethodId" })
   paymentMethodId?: string;
 
-  @Metadata({ data: "json, name=profileToken" })
+  @SpeakeasyMetadata({ data: "json, name=profileToken" })
   profileToken: string;
 }

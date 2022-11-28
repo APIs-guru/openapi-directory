@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ProductData
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Details of the products in an e-commerce transaction.
 **/
 export class ProductData extends SpeakeasyBase {
-  @Metadata({ data: "json, name=itemRevenue" })
+  @SpeakeasyMetadata({ data: "json, name=itemRevenue" })
   itemRevenue?: number;
 
-  @Metadata({ data: "json, name=productName" })
+  @SpeakeasyMetadata({ data: "json, name=productName" })
   productName?: string;
 
-  @Metadata({ data: "json, name=productQuantity" })
+  @SpeakeasyMetadata({ data: "json, name=productQuantity" })
   productQuantity?: string;
 
-  @Metadata({ data: "json, name=productSku" })
+  @SpeakeasyMetadata({ data: "json, name=productSku" })
   productSku?: string;
 }

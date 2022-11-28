@@ -22,8 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Object } from "./object";
 // ComposeRequestSourceObjectsObjectPreconditions
 /**
@@ -35,7 +34,7 @@ var ComposeRequestSourceObjectsObjectPreconditions = /** @class */ (function (_s
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=ifGenerationMatch" }),
+        SpeakeasyMetadata({ data: "json, name=ifGenerationMatch" }),
         __metadata("design:type", String)
     ], ComposeRequestSourceObjectsObjectPreconditions.prototype, "ifGenerationMatch", void 0);
     return ComposeRequestSourceObjectsObjectPreconditions;
@@ -47,15 +46,15 @@ var ComposeRequestSourceObjects = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=generation" }),
+        SpeakeasyMetadata({ data: "json, name=generation" }),
         __metadata("design:type", String)
     ], ComposeRequestSourceObjects.prototype, "generation", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], ComposeRequestSourceObjects.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=objectPreconditions" }),
+        SpeakeasyMetadata({ data: "json, name=objectPreconditions" }),
         __metadata("design:type", ComposeRequestSourceObjectsObjectPreconditions)
     ], ComposeRequestSourceObjects.prototype, "objectPreconditions", void 0);
     return ComposeRequestSourceObjects;
@@ -71,15 +70,15 @@ var ComposeRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=destination" }),
+        SpeakeasyMetadata({ data: "json, name=destination" }),
         __metadata("design:type", Object)
     ], ComposeRequest.prototype, "destination", void 0);
     __decorate([
-        Metadata({ data: "json, name=kind" }),
+        SpeakeasyMetadata({ data: "json, name=kind" }),
         __metadata("design:type", String)
     ], ComposeRequest.prototype, "kind", void 0);
     __decorate([
-        Metadata({ data: "json, name=sourceObjects", elemType: shared.ComposeRequestSourceObjects }),
+        SpeakeasyMetadata({ data: "json, name=sourceObjects", elemType: ComposeRequestSourceObjects }),
         __metadata("design:type", Array)
     ], ComposeRequest.prototype, "sourceObjects", void 0);
     return ComposeRequest;

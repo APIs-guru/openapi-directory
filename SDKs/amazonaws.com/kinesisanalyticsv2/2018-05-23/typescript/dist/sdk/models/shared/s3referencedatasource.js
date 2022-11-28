@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // S3ReferenceDataSource
 /**
  * <p>For a SQL-based Kinesis Data Analytics application, identifies the Amazon S3 bucket and object that contains the reference data.</p> <p>A Kinesis Data Analytics application loads reference data only once. If the data changes, you call the <a>UpdateApplication</a> operation to trigger reloading of data into your application. </p>
@@ -33,11 +33,11 @@ var S3ReferenceDataSource = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=BucketARN" }),
+        SpeakeasyMetadata({ data: "json, name=BucketARN" }),
         __metadata("design:type", String)
     ], S3ReferenceDataSource.prototype, "bucketArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=FileKey" }),
+        SpeakeasyMetadata({ data: "json, name=FileKey" }),
         __metadata("design:type", String)
     ], S3ReferenceDataSource.prototype, "fileKey", void 0);
     return S3ReferenceDataSource;

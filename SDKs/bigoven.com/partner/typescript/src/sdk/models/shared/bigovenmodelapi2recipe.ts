@@ -1,147 +1,147 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BigOvenModelApiIngredient } from "./bigovenmodelapiingredient";
 import { BigOvenModelApiNutritionInfo } from "./bigovenmodelapinutritioninfo";
 import { BigOvenModelApiUserInfo } from "./bigovenmodelapiuserinfo";
 import { BigOvenModelInstructionStep } from "./bigovenmodelinstructionstep";
 
 
+
 export class BigOvenModelApi2Recipe extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ActiveMinutes" })
+  @SpeakeasyMetadata({ data: "json, name=ActiveMinutes" })
   activeMinutes?: number;
 
-  @Metadata({ data: "json, name=AdTags" })
+  @SpeakeasyMetadata({ data: "json, name=AdTags" })
   adTags?: string;
 
-  @Metadata({ data: "json, name=AdminBoost" })
+  @SpeakeasyMetadata({ data: "json, name=AdminBoost" })
   adminBoost?: number;
 
-  @Metadata({ data: "json, name=AllCategoriesText" })
+  @SpeakeasyMetadata({ data: "json, name=AllCategoriesText" })
   allCategoriesText?: string;
 
-  @Metadata({ data: "json, name=BookmarkImageURL" })
+  @SpeakeasyMetadata({ data: "json, name=BookmarkImageURL" })
   bookmarkImageUrl?: string;
 
-  @Metadata({ data: "json, name=BookmarkSiteLogo" })
+  @SpeakeasyMetadata({ data: "json, name=BookmarkSiteLogo" })
   bookmarkSiteLogo?: string;
 
-  @Metadata({ data: "json, name=BookmarkURL" })
+  @SpeakeasyMetadata({ data: "json, name=BookmarkURL" })
   bookmarkUrl?: string;
 
-  @Metadata({ data: "json, name=Category" })
+  @SpeakeasyMetadata({ data: "json, name=Category" })
   category?: string;
 
-  @Metadata({ data: "json, name=Collection" })
+  @SpeakeasyMetadata({ data: "json, name=Collection" })
   collection?: string;
 
-  @Metadata({ data: "json, name=CollectionID" })
+  @SpeakeasyMetadata({ data: "json, name=CollectionID" })
   collectionId?: number;
 
-  @Metadata({ data: "json, name=CreationDate" })
+  @SpeakeasyMetadata({ data: "json, name=CreationDate" })
   creationDate?: Date;
 
-  @Metadata({ data: "json, name=Cuisine" })
+  @SpeakeasyMetadata({ data: "json, name=Cuisine" })
   cuisine?: string;
 
-  @Metadata({ data: "json, name=Description" })
+  @SpeakeasyMetadata({ data: "json, name=Description" })
   description?: string;
 
-  @Metadata({ data: "json, name=FavoriteCount" })
+  @SpeakeasyMetadata({ data: "json, name=FavoriteCount" })
   favoriteCount?: number;
 
-  @Metadata({ data: "json, name=ImageSquares" })
+  @SpeakeasyMetadata({ data: "json, name=ImageSquares" })
   imageSquares?: number[];
 
-  @Metadata({ data: "json, name=ImageURL" })
+  @SpeakeasyMetadata({ data: "json, name=ImageURL" })
   imageUrl?: string;
 
-  @Metadata({ data: "json, name=Ingredients", elemType: shared.BigOvenModelApiIngredient })
+  @SpeakeasyMetadata({ data: "json, name=Ingredients", elemType: BigOvenModelApiIngredient })
   ingredients?: BigOvenModelApiIngredient[];
 
-  @Metadata({ data: "json, name=IngredientsTextBlock" })
+  @SpeakeasyMetadata({ data: "json, name=IngredientsTextBlock" })
   ingredientsTextBlock?: string;
 
-  @Metadata({ data: "json, name=Instructions" })
+  @SpeakeasyMetadata({ data: "json, name=Instructions" })
   instructions?: string;
 
-  @Metadata({ data: "json, name=IsBookmark" })
+  @SpeakeasyMetadata({ data: "json, name=IsBookmark" })
   isBookmark?: boolean;
 
-  @Metadata({ data: "json, name=IsPrivate" })
+  @SpeakeasyMetadata({ data: "json, name=IsPrivate" })
   isPrivate?: boolean;
 
-  @Metadata({ data: "json, name=IsRecipeScan" })
+  @SpeakeasyMetadata({ data: "json, name=IsRecipeScan" })
   isRecipeScan?: boolean;
 
-  @Metadata({ data: "json, name=IsSponsored" })
+  @SpeakeasyMetadata({ data: "json, name=IsSponsored" })
   isSponsored?: boolean;
 
-  @Metadata({ data: "json, name=LastModified" })
+  @SpeakeasyMetadata({ data: "json, name=LastModified" })
   lastModified?: Date;
 
-  @Metadata({ data: "json, name=MaxImageSquare" })
+  @SpeakeasyMetadata({ data: "json, name=MaxImageSquare" })
   maxImageSquare?: number;
 
-  @Metadata({ data: "json, name=MedalCount" })
+  @SpeakeasyMetadata({ data: "json, name=MedalCount" })
   medalCount?: number;
 
-  @Metadata({ data: "json, name=MenuCount" })
+  @SpeakeasyMetadata({ data: "json, name=MenuCount" })
   menuCount?: number;
 
-  @Metadata({ data: "json, name=Microcategory" })
+  @SpeakeasyMetadata({ data: "json, name=Microcategory" })
   microcategory?: string;
 
-  @Metadata({ data: "json, name=NotesCount" })
+  @SpeakeasyMetadata({ data: "json, name=NotesCount" })
   notesCount?: number;
 
-  @Metadata({ data: "json, name=NutritionInfo" })
+  @SpeakeasyMetadata({ data: "json, name=NutritionInfo" })
   nutritionInfo?: BigOvenModelApiNutritionInfo;
 
-  @Metadata({ data: "json, name=PhotoUrl" })
+  @SpeakeasyMetadata({ data: "json, name=PhotoUrl" })
   photoUrl?: string;
 
-  @Metadata({ data: "json, name=Poster" })
+  @SpeakeasyMetadata({ data: "json, name=Poster" })
   poster?: BigOvenModelApiUserInfo;
 
-  @Metadata({ data: "json, name=PrimaryIngredient" })
+  @SpeakeasyMetadata({ data: "json, name=PrimaryIngredient" })
   primaryIngredient?: string;
 
-  @Metadata({ data: "json, name=RecipeID" })
+  @SpeakeasyMetadata({ data: "json, name=RecipeID" })
   recipeId?: number;
 
-  @Metadata({ data: "json, name=ReviewCount" })
+  @SpeakeasyMetadata({ data: "json, name=ReviewCount" })
   reviewCount?: number;
 
-  @Metadata({ data: "json, name=StarRating" })
+  @SpeakeasyMetadata({ data: "json, name=StarRating" })
   starRating?: number;
 
-  @Metadata({ data: "json, name=Steps", elemType: shared.BigOvenModelInstructionStep })
+  @SpeakeasyMetadata({ data: "json, name=Steps", elemType: BigOvenModelInstructionStep })
   steps?: BigOvenModelInstructionStep[];
 
-  @Metadata({ data: "json, name=Subcategory" })
+  @SpeakeasyMetadata({ data: "json, name=Subcategory" })
   subcategory?: string;
 
-  @Metadata({ data: "json, name=Title" })
+  @SpeakeasyMetadata({ data: "json, name=Title" })
   title?: string;
 
-  @Metadata({ data: "json, name=TotalMinutes" })
+  @SpeakeasyMetadata({ data: "json, name=TotalMinutes" })
   totalMinutes?: number;
 
-  @Metadata({ data: "json, name=VariantOfRecipeID" })
+  @SpeakeasyMetadata({ data: "json, name=VariantOfRecipeID" })
   variantOfRecipeId?: number;
 
-  @Metadata({ data: "json, name=VerifiedByClass" })
+  @SpeakeasyMetadata({ data: "json, name=VerifiedByClass" })
   verifiedByClass?: string;
 
-  @Metadata({ data: "json, name=VerifiedDateTime" })
+  @SpeakeasyMetadata({ data: "json, name=VerifiedDateTime" })
   verifiedDateTime?: Date;
 
-  @Metadata({ data: "json, name=WebURL" })
+  @SpeakeasyMetadata({ data: "json, name=WebURL" })
   webUrl?: string;
 
-  @Metadata({ data: "json, name=YieldNumber" })
+  @SpeakeasyMetadata({ data: "json, name=YieldNumber" })
   yieldNumber?: number;
 
-  @Metadata({ data: "json, name=YieldUnit" })
+  @SpeakeasyMetadata({ data: "json, name=YieldUnit" })
   yieldUnit?: string;
 }

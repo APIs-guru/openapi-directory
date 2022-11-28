@@ -1,6 +1,8 @@
 package shared
 
-type BulkEditPartnerAssignedTargetingOptionsRequest struct {
-	CreateRequests []CreateAssignedTargetingOptionsRequest `json:"createRequests,omitempty"`
-	DeleteRequests []DeleteAssignedTargetingOptionsRequest `json:"deleteRequests,omitempty"`
+// BulkEditPartnerAssignedTargetingOptionsRequestInput
+// Request message for BulkEditPartnerAssignedTargetingOptions.
+type BulkEditPartnerAssignedTargetingOptionsRequestInput struct {
+	CreateRequests []CreateAssignedTargetingOptionsRequestInput `json:"createRequests,omitempty"`
+	DeleteRequests []DeleteAssignedTargetingOptionsRequest      `json:"deleteRequests,omitempty"`
 }

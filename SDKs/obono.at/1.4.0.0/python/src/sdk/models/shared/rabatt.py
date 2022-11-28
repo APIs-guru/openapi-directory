@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class RabattSatzEnum(str, Enum):
     NORMAL = "NORMAL"
@@ -13,8 +15,8 @@ class RabattSatzEnum(str, Enum):
 @dataclass_json
 @dataclass
 class Rabatt:
-    betrag_brutto: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Betrag-Brutto' }})
-    betrag_netto: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Betrag-Netto' }})
-    bezeichnung: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Bezeichnung' }})
-    satz: Optional[RabattSatzEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Satz' }})
+    betrag_brutto: int = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Betrag-Brutto') }})
+    betrag_netto: int = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Betrag-Netto') }})
+    bezeichnung: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Bezeichnung') }})
+    satz: Optional[RabattSatzEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Satz') }})
     

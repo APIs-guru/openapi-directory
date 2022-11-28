@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // EmailChannelResponse
@@ -6,48 +7,48 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Provides information about the status and settings of the email channel for an application.
 **/
 export class EmailChannelResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ApplicationId" })
+  @SpeakeasyMetadata({ data: "json, name=ApplicationId" })
   applicationId?: string;
 
-  @Metadata({ data: "json, name=ConfigurationSet" })
+  @SpeakeasyMetadata({ data: "json, name=ConfigurationSet" })
   configurationSet?: string;
 
-  @Metadata({ data: "json, name=CreationDate" })
+  @SpeakeasyMetadata({ data: "json, name=CreationDate" })
   creationDate?: string;
 
-  @Metadata({ data: "json, name=Enabled" })
+  @SpeakeasyMetadata({ data: "json, name=Enabled" })
   enabled?: boolean;
 
-  @Metadata({ data: "json, name=FromAddress" })
+  @SpeakeasyMetadata({ data: "json, name=FromAddress" })
   fromAddress?: string;
 
-  @Metadata({ data: "json, name=HasCredential" })
+  @SpeakeasyMetadata({ data: "json, name=HasCredential" })
   hasCredential?: boolean;
 
-  @Metadata({ data: "json, name=Id" })
+  @SpeakeasyMetadata({ data: "json, name=Id" })
   id?: string;
 
-  @Metadata({ data: "json, name=Identity" })
+  @SpeakeasyMetadata({ data: "json, name=Identity" })
   identity?: string;
 
-  @Metadata({ data: "json, name=IsArchived" })
+  @SpeakeasyMetadata({ data: "json, name=IsArchived" })
   isArchived?: boolean;
 
-  @Metadata({ data: "json, name=LastModifiedBy" })
+  @SpeakeasyMetadata({ data: "json, name=LastModifiedBy" })
   lastModifiedBy?: string;
 
-  @Metadata({ data: "json, name=LastModifiedDate" })
+  @SpeakeasyMetadata({ data: "json, name=LastModifiedDate" })
   lastModifiedDate?: string;
 
-  @Metadata({ data: "json, name=MessagesPerSecond" })
+  @SpeakeasyMetadata({ data: "json, name=MessagesPerSecond" })
   messagesPerSecond?: number;
 
-  @Metadata({ data: "json, name=Platform" })
+  @SpeakeasyMetadata({ data: "json, name=Platform" })
   platform: string;
 
-  @Metadata({ data: "json, name=RoleArn" })
+  @SpeakeasyMetadata({ data: "json, name=RoleArn" })
   roleArn?: string;
 
-  @Metadata({ data: "json, name=Version" })
+  @SpeakeasyMetadata({ data: "json, name=Version" })
   version?: number;
 }

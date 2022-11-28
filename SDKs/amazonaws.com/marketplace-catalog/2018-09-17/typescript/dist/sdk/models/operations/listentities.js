@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var ListEntitiesQueryParams = /** @class */ (function (_super) {
     __extends(ListEntitiesQueryParams, _super);
@@ -30,11 +30,11 @@ var ListEntitiesQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=MaxResults" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=MaxResults" }),
         __metadata("design:type", String)
     ], ListEntitiesQueryParams.prototype, "maxResults", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=NextToken" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=NextToken" }),
         __metadata("design:type", String)
     ], ListEntitiesQueryParams.prototype, "nextToken", void 0);
     return ListEntitiesQueryParams;
@@ -46,31 +46,31 @@ var ListEntitiesHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
         __metadata("design:type", String)
     ], ListEntitiesHeaders.prototype, "xAmzAlgorithm", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
         __metadata("design:type", String)
     ], ListEntitiesHeaders.prototype, "xAmzContentSha256", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
         __metadata("design:type", String)
     ], ListEntitiesHeaders.prototype, "xAmzCredential", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
         __metadata("design:type", String)
     ], ListEntitiesHeaders.prototype, "xAmzDate", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
         __metadata("design:type", String)
     ], ListEntitiesHeaders.prototype, "xAmzSecurityToken", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
         __metadata("design:type", String)
     ], ListEntitiesHeaders.prototype, "xAmzSignature", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
         __metadata("design:type", String)
     ], ListEntitiesHeaders.prototype, "xAmzSignedHeaders", void 0);
     return ListEntitiesHeaders;
@@ -86,11 +86,11 @@ var ListEntitiesRequestBodySort = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=SortBy" }),
+        SpeakeasyMetadata({ data: "json, name=SortBy" }),
         __metadata("design:type", String)
     ], ListEntitiesRequestBodySort.prototype, "sortBy", void 0);
     __decorate([
-        Metadata({ data: "json, name=SortOrder" }),
+        SpeakeasyMetadata({ data: "json, name=SortOrder" }),
         __metadata("design:type", String)
     ], ListEntitiesRequestBodySort.prototype, "sortOrder", void 0);
     return ListEntitiesRequestBodySort;
@@ -102,27 +102,27 @@ var ListEntitiesRequestBody = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Catalog" }),
+        SpeakeasyMetadata({ data: "json, name=Catalog" }),
         __metadata("design:type", String)
     ], ListEntitiesRequestBody.prototype, "catalog", void 0);
     __decorate([
-        Metadata({ data: "json, name=EntityType" }),
+        SpeakeasyMetadata({ data: "json, name=EntityType" }),
         __metadata("design:type", String)
     ], ListEntitiesRequestBody.prototype, "entityType", void 0);
     __decorate([
-        Metadata({ data: "json, name=FilterList", elemType: shared.Filter }),
+        SpeakeasyMetadata({ data: "json, name=FilterList", elemType: shared.Filter }),
         __metadata("design:type", Array)
     ], ListEntitiesRequestBody.prototype, "filterList", void 0);
     __decorate([
-        Metadata({ data: "json, name=MaxResults" }),
+        SpeakeasyMetadata({ data: "json, name=MaxResults" }),
         __metadata("design:type", Number)
     ], ListEntitiesRequestBody.prototype, "maxResults", void 0);
     __decorate([
-        Metadata({ data: "json, name=NextToken" }),
+        SpeakeasyMetadata({ data: "json, name=NextToken" }),
         __metadata("design:type", String)
     ], ListEntitiesRequestBody.prototype, "nextToken", void 0);
     __decorate([
-        Metadata({ data: "json, name=Sort" }),
+        SpeakeasyMetadata({ data: "json, name=Sort" }),
         __metadata("design:type", ListEntitiesRequestBodySort)
     ], ListEntitiesRequestBody.prototype, "sort", void 0);
     return ListEntitiesRequestBody;
@@ -134,15 +134,15 @@ var ListEntitiesRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ListEntitiesQueryParams)
     ], ListEntitiesRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ListEntitiesHeaders)
     ], ListEntitiesRequest.prototype, "headers", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", ListEntitiesRequestBody)
     ], ListEntitiesRequest.prototype, "request", void 0);
     return ListEntitiesRequest;
@@ -154,35 +154,35 @@ var ListEntitiesResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], ListEntitiesResponse.prototype, "accessDeniedException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], ListEntitiesResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], ListEntitiesResponse.prototype, "internalServiceException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.ListEntitiesResponse)
     ], ListEntitiesResponse.prototype, "listEntitiesResponse", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], ListEntitiesResponse.prototype, "resourceNotFoundException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], ListEntitiesResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], ListEntitiesResponse.prototype, "throttlingException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], ListEntitiesResponse.prototype, "validationException", void 0);
     return ListEntitiesResponse;

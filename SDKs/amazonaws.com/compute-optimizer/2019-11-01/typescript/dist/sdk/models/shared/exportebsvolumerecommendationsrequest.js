@@ -22,9 +22,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { FileFormatEnum } from "./fileformatenum";
+import { EbsFilter } from "./ebsfilter";
 import { S3DestinationConfig } from "./s3destinationconfig";
 var ExportEbsVolumeRecommendationsRequest = /** @class */ (function (_super) {
     __extends(ExportEbsVolumeRecommendationsRequest, _super);
@@ -32,27 +32,27 @@ var ExportEbsVolumeRecommendationsRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=accountIds" }),
+        SpeakeasyMetadata({ data: "json, name=accountIds" }),
         __metadata("design:type", Array)
     ], ExportEbsVolumeRecommendationsRequest.prototype, "accountIds", void 0);
     __decorate([
-        Metadata({ data: "json, name=fieldsToExport" }),
+        SpeakeasyMetadata({ data: "json, name=fieldsToExport" }),
         __metadata("design:type", Array)
     ], ExportEbsVolumeRecommendationsRequest.prototype, "fieldsToExport", void 0);
     __decorate([
-        Metadata({ data: "json, name=fileFormat" }),
+        SpeakeasyMetadata({ data: "json, name=fileFormat" }),
         __metadata("design:type", String)
     ], ExportEbsVolumeRecommendationsRequest.prototype, "fileFormat", void 0);
     __decorate([
-        Metadata({ data: "json, name=filters", elemType: shared.EbsFilter }),
+        SpeakeasyMetadata({ data: "json, name=filters", elemType: EbsFilter }),
         __metadata("design:type", Array)
     ], ExportEbsVolumeRecommendationsRequest.prototype, "filters", void 0);
     __decorate([
-        Metadata({ data: "json, name=includeMemberAccounts" }),
+        SpeakeasyMetadata({ data: "json, name=includeMemberAccounts" }),
         __metadata("design:type", Boolean)
     ], ExportEbsVolumeRecommendationsRequest.prototype, "includeMemberAccounts", void 0);
     __decorate([
-        Metadata({ data: "json, name=s3DestinationConfig" }),
+        SpeakeasyMetadata({ data: "json, name=s3DestinationConfig" }),
         __metadata("design:type", S3DestinationConfig)
     ], ExportEbsVolumeRecommendationsRequest.prototype, "s3DestinationConfig", void 0);
     return ExportEbsVolumeRecommendationsRequest;

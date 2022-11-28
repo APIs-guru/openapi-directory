@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // X509CertificateDetails
@@ -6,21 +7,21 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Details of an X.509 certificate. For informational purposes only.
 **/
 export class X509CertificateDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=expiryTime" })
+  @SpeakeasyMetadata({ data: "json, name=expiryTime" })
   expiryTime?: string;
 
-  @Metadata({ data: "json, name=issuer" })
+  @SpeakeasyMetadata({ data: "json, name=issuer" })
   issuer?: string;
 
-  @Metadata({ data: "json, name=publicKeyType" })
+  @SpeakeasyMetadata({ data: "json, name=publicKeyType" })
   publicKeyType?: string;
 
-  @Metadata({ data: "json, name=signatureAlgorithm" })
+  @SpeakeasyMetadata({ data: "json, name=signatureAlgorithm" })
   signatureAlgorithm?: string;
 
-  @Metadata({ data: "json, name=startTime" })
+  @SpeakeasyMetadata({ data: "json, name=startTime" })
   startTime?: string;
 
-  @Metadata({ data: "json, name=subject" })
+  @SpeakeasyMetadata({ data: "json, name=subject" })
   subject?: string;
 }

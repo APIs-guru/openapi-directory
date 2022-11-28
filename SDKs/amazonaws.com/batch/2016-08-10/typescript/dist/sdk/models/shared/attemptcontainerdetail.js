@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { NetworkInterface } from "./networkinterface";
 // AttemptContainerDetail
 /**
  * An object representing the details of a container that's part of a job attempt.
@@ -34,27 +34,27 @@ var AttemptContainerDetail = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=containerInstanceArn" }),
+        SpeakeasyMetadata({ data: "json, name=containerInstanceArn" }),
         __metadata("design:type", String)
     ], AttemptContainerDetail.prototype, "containerInstanceArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=exitCode" }),
+        SpeakeasyMetadata({ data: "json, name=exitCode" }),
         __metadata("design:type", Number)
     ], AttemptContainerDetail.prototype, "exitCode", void 0);
     __decorate([
-        Metadata({ data: "json, name=logStreamName" }),
+        SpeakeasyMetadata({ data: "json, name=logStreamName" }),
         __metadata("design:type", String)
     ], AttemptContainerDetail.prototype, "logStreamName", void 0);
     __decorate([
-        Metadata({ data: "json, name=networkInterfaces", elemType: shared.NetworkInterface }),
+        SpeakeasyMetadata({ data: "json, name=networkInterfaces", elemType: NetworkInterface }),
         __metadata("design:type", Array)
     ], AttemptContainerDetail.prototype, "networkInterfaces", void 0);
     __decorate([
-        Metadata({ data: "json, name=reason" }),
+        SpeakeasyMetadata({ data: "json, name=reason" }),
         __metadata("design:type", String)
     ], AttemptContainerDetail.prototype, "reason", void 0);
     __decorate([
-        Metadata({ data: "json, name=taskArn" }),
+        SpeakeasyMetadata({ data: "json, name=taskArn" }),
         __metadata("design:type", String)
     ], AttemptContainerDetail.prototype, "taskArn", void 0);
     return AttemptContainerDetail;

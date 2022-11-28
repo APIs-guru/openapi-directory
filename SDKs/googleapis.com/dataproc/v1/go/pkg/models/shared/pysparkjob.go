@@ -1,5 +1,7 @@
 package shared
 
+// PySparkJob
+// A Dataproc job for running Apache PySpark (https://spark.apache.org/docs/0.9.0/python-programming-guide.html) applications on YARN.
 type PySparkJob struct {
 	ArchiveUris       []string          `json:"archiveUris,omitempty"`
 	Args              []string          `json:"args,omitempty"`

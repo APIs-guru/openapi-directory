@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // TrafficRoute
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  *  Information about a listener. The listener contains the path used to route traffic that is received from the load balancer to a target group. 
 **/
 export class TrafficRoute extends SpeakeasyBase {
-  @Metadata({ data: "json, name=listenerArns" })
+  @SpeakeasyMetadata({ data: "json, name=listenerArns" })
   listenerArns?: string[];
 }

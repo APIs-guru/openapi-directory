@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 
 class GetModifyClusterActionEnum(str, Enum):
     MODIFY_CLUSTER = "ModifyCluster"
@@ -10,12 +14,13 @@ class GetModifyClusterVersionEnum(str, Enum):
 
 @dataclass
 class GetModifyClusterQueryParams:
-    action: GetModifyClusterActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetModifyClusterActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    cluster_identifier: str = field(metadata={'query_param': { 'field_name': 'ClusterIdentifier', 'style': 'form', 'explode': True }})
+    version: GetModifyClusterVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     allow_version_upgrade: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'AllowVersionUpgrade', 'style': 'form', 'explode': True }})
     automated_snapshot_retention_period: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'AutomatedSnapshotRetentionPeriod', 'style': 'form', 'explode': True }})
     availability_zone: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'AvailabilityZone', 'style': 'form', 'explode': True }})
     availability_zone_relocation: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'AvailabilityZoneRelocation', 'style': 'form', 'explode': True }})
-    cluster_identifier: str = field(default=None, metadata={'query_param': { 'field_name': 'ClusterIdentifier', 'style': 'form', 'explode': True }})
     cluster_parameter_group_name: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'ClusterParameterGroupName', 'style': 'form', 'explode': True }})
     cluster_security_groups: Optional[List[str]] = field(default=None, metadata={'query_param': { 'field_name': 'ClusterSecurityGroups', 'style': 'form', 'explode': True }})
     cluster_type: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'ClusterType', 'style': 'form', 'explode': True }})
@@ -35,7 +40,6 @@ class GetModifyClusterQueryParams:
     port: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'Port', 'style': 'form', 'explode': True }})
     preferred_maintenance_window: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'PreferredMaintenanceWindow', 'style': 'form', 'explode': True }})
     publicly_accessible: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'PubliclyAccessible', 'style': 'form', 'explode': True }})
-    version: GetModifyClusterVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     vpc_security_group_ids: Optional[List[str]] = field(default=None, metadata={'query_param': { 'field_name': 'VpcSecurityGroupIds', 'style': 'form', 'explode': True }})
     
 
@@ -52,13 +56,13 @@ class GetModifyClusterHeaders:
 
 @dataclass
 class GetModifyClusterRequest:
-    query_params: GetModifyClusterQueryParams = field(default=None)
-    headers: GetModifyClusterHeaders = field(default=None)
+    headers: GetModifyClusterHeaders = field()
+    query_params: GetModifyClusterQueryParams = field()
     
 
 @dataclass
 class GetModifyClusterResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

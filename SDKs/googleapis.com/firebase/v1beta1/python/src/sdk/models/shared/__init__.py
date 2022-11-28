@@ -1,4 +1,4 @@
-from .__xgafv_enum import *
+from ._xgafv_enum import *
 from .addfirebaserequest import *
 from .addgoogleanalyticsrequest import *
 from .alt_enum import *

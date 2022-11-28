@@ -1,10 +1,15 @@
 from dataclasses import dataclass, field
 from dataclasses_json import dataclass_json
-from . import commit
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class GetCommitOutput:
-    commit: commit.Commit = field(default=None, metadata={'dataclasses_json': { 'field_name': 'commit' }})
+    r"""GetCommitOutput
+    Represents the output of a get commit operation.
+    """
+    
+    commit: Commit = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('commit') }})
     

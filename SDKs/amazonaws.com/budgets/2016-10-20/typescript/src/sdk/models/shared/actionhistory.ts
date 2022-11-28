@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ActionHistoryDetails } from "./actionhistorydetails";
 import { EventTypeEnum } from "./eventtypeenum";
 import { ActionStatusEnum } from "./actionstatusenum";
+
 
 
 // ActionHistory
@@ -9,15 +10,15 @@ import { ActionStatusEnum } from "./actionstatusenum";
  *  The historical records for a budget action. 
 **/
 export class ActionHistory extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ActionHistoryDetails" })
+  @SpeakeasyMetadata({ data: "json, name=ActionHistoryDetails" })
   actionHistoryDetails: ActionHistoryDetails;
 
-  @Metadata({ data: "json, name=EventType" })
+  @SpeakeasyMetadata({ data: "json, name=EventType" })
   eventType: EventTypeEnum;
 
-  @Metadata({ data: "json, name=Status" })
+  @SpeakeasyMetadata({ data: "json, name=Status" })
   status: ActionStatusEnum;
 
-  @Metadata({ data: "json, name=Timestamp" })
+  @SpeakeasyMetadata({ data: "json, name=Timestamp" })
   timestamp: Date;
 }

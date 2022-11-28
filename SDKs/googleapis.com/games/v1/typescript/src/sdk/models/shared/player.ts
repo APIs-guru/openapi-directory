@@ -1,11 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PlayerExperienceInfo } from "./playerexperienceinfo";
 import { ProfileSettings } from "./profilesettings";
 
+
 export enum PlayerFriendStatusEnum {
-    FriendStatusUnspecified = "FRIEND_STATUS_UNSPECIFIED"
-,    NoRelationship = "NO_RELATIONSHIP"
-,    Friend = "FRIEND"
+    FriendStatusUnspecified = "FRIEND_STATUS_UNSPECIFIED",
+    NoRelationship = "NO_RELATIONSHIP",
+    Friend = "FRIEND"
 }
 
 
@@ -14,10 +15,10 @@ export enum PlayerFriendStatusEnum {
  * A representation of the individual components of the name.
 **/
 export class PlayerName extends SpeakeasyBase {
-  @Metadata({ data: "json, name=familyName" })
+  @SpeakeasyMetadata({ data: "json, name=familyName" })
   familyName?: string;
 
-  @Metadata({ data: "json, name=givenName" })
+  @SpeakeasyMetadata({ data: "json, name=givenName" })
   givenName?: string;
 }
 
@@ -27,42 +28,42 @@ export class PlayerName extends SpeakeasyBase {
  * A Player resource.
 **/
 export class Player extends SpeakeasyBase {
-  @Metadata({ data: "json, name=avatarImageUrl" })
+  @SpeakeasyMetadata({ data: "json, name=avatarImageUrl" })
   avatarImageUrl?: string;
 
-  @Metadata({ data: "json, name=bannerUrlLandscape" })
+  @SpeakeasyMetadata({ data: "json, name=bannerUrlLandscape" })
   bannerUrlLandscape?: string;
 
-  @Metadata({ data: "json, name=bannerUrlPortrait" })
+  @SpeakeasyMetadata({ data: "json, name=bannerUrlPortrait" })
   bannerUrlPortrait?: string;
 
-  @Metadata({ data: "json, name=displayName" })
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
   displayName?: string;
 
-  @Metadata({ data: "json, name=experienceInfo" })
+  @SpeakeasyMetadata({ data: "json, name=experienceInfo" })
   experienceInfo?: PlayerExperienceInfo;
 
-  @Metadata({ data: "json, name=friendStatus" })
+  @SpeakeasyMetadata({ data: "json, name=friendStatus" })
   friendStatus?: PlayerFriendStatusEnum;
 
-  @Metadata({ data: "json, name=gamePlayerId" })
+  @SpeakeasyMetadata({ data: "json, name=gamePlayerId" })
   gamePlayerId?: string;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: PlayerName;
 
-  @Metadata({ data: "json, name=originalPlayerId" })
+  @SpeakeasyMetadata({ data: "json, name=originalPlayerId" })
   originalPlayerId?: string;
 
-  @Metadata({ data: "json, name=playerId" })
+  @SpeakeasyMetadata({ data: "json, name=playerId" })
   playerId?: string;
 
-  @Metadata({ data: "json, name=profileSettings" })
+  @SpeakeasyMetadata({ data: "json, name=profileSettings" })
   profileSettings?: ProfileSettings;
 
-  @Metadata({ data: "json, name=title" })
+  @SpeakeasyMetadata({ data: "json, name=title" })
   title?: string;
 }

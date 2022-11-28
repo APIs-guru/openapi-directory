@@ -22,14 +22,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var DeleteDataSourceInput = /** @class */ (function (_super) {
     __extends(DeleteDataSourceInput, _super);
     function DeleteDataSourceInput() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=DataSourceId" }),
+        SpeakeasyMetadata({ data: "json, name=DataSourceId" }),
         __metadata("design:type", String)
     ], DeleteDataSourceInput.prototype, "dataSourceId", void 0);
     return DeleteDataSourceInput;

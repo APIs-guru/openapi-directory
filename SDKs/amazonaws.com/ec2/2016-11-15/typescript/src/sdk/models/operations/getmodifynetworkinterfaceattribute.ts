@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum GetModifyNetworkInterfaceAttributeActionEnum {
     ModifyNetworkInterfaceAttribute = "ModifyNetworkInterfaceAttribute"
@@ -10,10 +11,10 @@ export enum GetModifyNetworkInterfaceAttributeActionEnum {
  * Describes an attachment change.
 **/
 export class GetModifyNetworkInterfaceAttributeAttachment extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, name=AttachmentId" })
+  @SpeakeasyMetadata({ data: "queryParam, name=AttachmentId" })
   attachmentId?: string;
 
-  @Metadata({ data: "queryParam, name=DeleteOnTermination" })
+  @SpeakeasyMetadata({ data: "queryParam, name=DeleteOnTermination" })
   deleteOnTermination?: boolean;
 }
 
@@ -23,7 +24,7 @@ export class GetModifyNetworkInterfaceAttributeAttachment extends SpeakeasyBase 
  * Describes a value for a resource attribute that is a String.
 **/
 export class GetModifyNetworkInterfaceAttributeDescription extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, name=Value" })
+  @SpeakeasyMetadata({ data: "queryParam, name=Value" })
   value?: string;
 }
 
@@ -33,7 +34,7 @@ export class GetModifyNetworkInterfaceAttributeDescription extends SpeakeasyBase
  * Describes a value for a resource attribute that is a Boolean value.
 **/
 export class GetModifyNetworkInterfaceAttributeSourceDestCheck extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, name=Value" })
+  @SpeakeasyMetadata({ data: "queryParam, name=Value" })
   value?: boolean;
 }
 
@@ -43,69 +44,69 @@ export enum GetModifyNetworkInterfaceAttributeVersionEnum {
 
 
 export class GetModifyNetworkInterfaceAttributeQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Action" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Action" })
   action: GetModifyNetworkInterfaceAttributeActionEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Attachment" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Attachment" })
   attachment?: GetModifyNetworkInterfaceAttributeAttachment;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Description" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Description" })
   description?: GetModifyNetworkInterfaceAttributeDescription;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=DryRun" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=DryRun" })
   dryRun?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=NetworkInterfaceId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=NetworkInterfaceId" })
   networkInterfaceId: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=SecurityGroupId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=SecurityGroupId" })
   securityGroupId?: string[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=SourceDestCheck" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=SourceDestCheck" })
   sourceDestCheck?: GetModifyNetworkInterfaceAttributeSourceDestCheck;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Version" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Version" })
   version: GetModifyNetworkInterfaceAttributeVersionEnum;
 }
 
 
 export class GetModifyNetworkInterfaceAttributeHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
 
 export class GetModifyNetworkInterfaceAttributeRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetModifyNetworkInterfaceAttributeQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: GetModifyNetworkInterfaceAttributeHeaders;
 }
 
 
 export class GetModifyNetworkInterfaceAttributeResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

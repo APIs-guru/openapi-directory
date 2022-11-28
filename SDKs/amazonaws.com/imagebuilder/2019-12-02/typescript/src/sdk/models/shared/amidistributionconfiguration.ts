@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { LaunchPermissionConfiguration } from "./launchpermissionconfiguration";
+
 
 
 // AmiDistributionConfiguration
@@ -7,21 +8,21 @@ import { LaunchPermissionConfiguration } from "./launchpermissionconfiguration";
  *  Define and configure the output AMIs of the pipeline.
 **/
 export class AmiDistributionConfiguration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=amiTags" })
+  @SpeakeasyMetadata({ data: "json, name=amiTags" })
   amiTags?: Map<string, string>;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=kmsKeyId" })
+  @SpeakeasyMetadata({ data: "json, name=kmsKeyId" })
   kmsKeyId?: string;
 
-  @Metadata({ data: "json, name=launchPermission" })
+  @SpeakeasyMetadata({ data: "json, name=launchPermission" })
   launchPermission?: LaunchPermissionConfiguration;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=targetAccountIds" })
+  @SpeakeasyMetadata({ data: "json, name=targetAccountIds" })
   targetAccountIds?: string[];
 }

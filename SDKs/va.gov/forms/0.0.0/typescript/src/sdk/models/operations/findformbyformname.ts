@@ -1,56 +1,57 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class FindFormByFormNamePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=form_name" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=form_name" })
   formName: string;
 }
 
 
 export class FindFormByFormNameSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
   apikey: shared.SchemeApikey;
 }
 
 
-export class FindFormByFormNameRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: FindFormByFormNamePathParams;
-
-  @Metadata()
-  security: FindFormByFormNameSecurity;
-}
-
-
 export class FindFormByFormName200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data: any;
 }
 
 
 export class FindFormByFormName404ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=errors" })
+  @SpeakeasyMetadata({ data: "json, name=errors" })
   errors: any[];
 }
 
 
+export class FindFormByFormNameRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: FindFormByFormNamePathParams;
+
+  @SpeakeasyMetadata()
+  security: FindFormByFormNameSecurity;
+}
+
+
 export class FindFormByFormNameResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   findFormByFormName200ApplicationJsonObject?: FindFormByFormName200ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   findFormByFormName401ApplicationJsonAny?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   findFormByFormName404ApplicationJsonObject?: FindFormByFormName404ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   findFormByFormName429ApplicationJsonAny?: any;
 }

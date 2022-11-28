@@ -1,15 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ReloadOneDatasourceAllNodesPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=datasourceId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=datasourceId" })
   datasourceId: string;
-}
-
-
-export class ReloadOneDatasourceAllNodesRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: ReloadOneDatasourceAllNodesPathParams;
 }
 
 export enum ReloadOneDatasourceAllNodes200ApplicationJsonActionEnum {
@@ -17,30 +12,36 @@ export enum ReloadOneDatasourceAllNodes200ApplicationJsonActionEnum {
 }
 
 export enum ReloadOneDatasourceAllNodes200ApplicationJsonResultEnum {
-    Success = "success"
-,    Error = "error"
+    Success = "success",
+    Error = "error"
 }
 
 
 export class ReloadOneDatasourceAllNodes200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=action" })
+  @SpeakeasyMetadata({ data: "json, name=action" })
   action: ReloadOneDatasourceAllNodes200ApplicationJsonActionEnum;
 
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data: string;
 
-  @Metadata({ data: "json, name=result" })
+  @SpeakeasyMetadata({ data: "json, name=result" })
   result: ReloadOneDatasourceAllNodes200ApplicationJsonResultEnum;
 }
 
 
+export class ReloadOneDatasourceAllNodesRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: ReloadOneDatasourceAllNodesPathParams;
+}
+
+
 export class ReloadOneDatasourceAllNodesResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   reloadOneDatasourceAllNodes200ApplicationJsonObject?: ReloadOneDatasourceAllNodes200ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

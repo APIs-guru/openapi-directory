@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // ProvisioningArtifactPreferences
 /**
  * <p>The user-defined preferences that will be applied during product provisioning, unless overridden by <code>ProvisioningPreferences</code> or <code>UpdateProvisioningPreferences</code>.</p> <p>For more information on maximum concurrent accounts and failure tolerance, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-concepts.html#stackset-ops-options">Stack set operation options</a> in the <i>AWS CloudFormation User Guide</i>.</p>
@@ -33,11 +33,11 @@ var ProvisioningArtifactPreferences = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=StackSetAccounts" }),
+        SpeakeasyMetadata({ data: "json, name=StackSetAccounts" }),
         __metadata("design:type", Array)
     ], ProvisioningArtifactPreferences.prototype, "stackSetAccounts", void 0);
     __decorate([
-        Metadata({ data: "json, name=StackSetRegions" }),
+        SpeakeasyMetadata({ data: "json, name=StackSetRegions" }),
         __metadata("design:type", Array)
     ], ProvisioningArtifactPreferences.prototype, "stackSetRegions", void 0);
     return ProvisioningArtifactPreferences;

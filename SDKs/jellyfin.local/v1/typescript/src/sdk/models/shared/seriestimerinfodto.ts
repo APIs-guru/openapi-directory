@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DayPatternEnum } from "./daypatternenum";
 import { DayOfWeekEnum } from "./dayofweekenum";
 import { KeepUntilEnum } from "./keepuntilenum";
+
 
 
 // SeriesTimerInfoDto
@@ -9,108 +10,108 @@ import { KeepUntilEnum } from "./keepuntilenum";
  * Class SeriesTimerInfoDto.
 **/
 export class SeriesTimerInfoDto extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ChannelId" })
+  @SpeakeasyMetadata({ data: "json, name=ChannelId" })
   channelId?: string;
 
-  @Metadata({ data: "json, name=ChannelName" })
+  @SpeakeasyMetadata({ data: "json, name=ChannelName" })
   channelName?: string;
 
-  @Metadata({ data: "json, name=ChannelPrimaryImageTag" })
+  @SpeakeasyMetadata({ data: "json, name=ChannelPrimaryImageTag" })
   channelPrimaryImageTag?: string;
 
-  @Metadata({ data: "json, name=DayPattern" })
+  @SpeakeasyMetadata({ data: "json, name=DayPattern" })
   dayPattern?: DayPatternEnum;
 
-  @Metadata({ data: "json, name=Days" })
+  @SpeakeasyMetadata({ data: "json, name=Days" })
   days?: DayOfWeekEnum[];
 
-  @Metadata({ data: "json, name=EndDate" })
+  @SpeakeasyMetadata({ data: "json, name=EndDate" })
   endDate?: Date;
 
-  @Metadata({ data: "json, name=ExternalChannelId" })
+  @SpeakeasyMetadata({ data: "json, name=ExternalChannelId" })
   externalChannelId?: string;
 
-  @Metadata({ data: "json, name=ExternalId" })
+  @SpeakeasyMetadata({ data: "json, name=ExternalId" })
   externalId?: string;
 
-  @Metadata({ data: "json, name=ExternalProgramId" })
+  @SpeakeasyMetadata({ data: "json, name=ExternalProgramId" })
   externalProgramId?: string;
 
-  @Metadata({ data: "json, name=Id" })
+  @SpeakeasyMetadata({ data: "json, name=Id" })
   id?: string;
 
-  @Metadata({ data: "json, name=ImageTags" })
+  @SpeakeasyMetadata({ data: "json, name=ImageTags" })
   imageTags?: Map<string, string>;
 
-  @Metadata({ data: "json, name=IsPostPaddingRequired" })
+  @SpeakeasyMetadata({ data: "json, name=IsPostPaddingRequired" })
   isPostPaddingRequired?: boolean;
 
-  @Metadata({ data: "json, name=IsPrePaddingRequired" })
+  @SpeakeasyMetadata({ data: "json, name=IsPrePaddingRequired" })
   isPrePaddingRequired?: boolean;
 
-  @Metadata({ data: "json, name=KeepUntil" })
+  @SpeakeasyMetadata({ data: "json, name=KeepUntil" })
   keepUntil?: KeepUntilEnum;
 
-  @Metadata({ data: "json, name=KeepUpTo" })
+  @SpeakeasyMetadata({ data: "json, name=KeepUpTo" })
   keepUpTo?: number;
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name?: string;
 
-  @Metadata({ data: "json, name=Overview" })
+  @SpeakeasyMetadata({ data: "json, name=Overview" })
   overview?: string;
 
-  @Metadata({ data: "json, name=ParentBackdropImageTags" })
+  @SpeakeasyMetadata({ data: "json, name=ParentBackdropImageTags" })
   parentBackdropImageTags?: string[];
 
-  @Metadata({ data: "json, name=ParentBackdropItemId" })
+  @SpeakeasyMetadata({ data: "json, name=ParentBackdropItemId" })
   parentBackdropItemId?: string;
 
-  @Metadata({ data: "json, name=ParentPrimaryImageItemId" })
+  @SpeakeasyMetadata({ data: "json, name=ParentPrimaryImageItemId" })
   parentPrimaryImageItemId?: string;
 
-  @Metadata({ data: "json, name=ParentPrimaryImageTag" })
+  @SpeakeasyMetadata({ data: "json, name=ParentPrimaryImageTag" })
   parentPrimaryImageTag?: string;
 
-  @Metadata({ data: "json, name=ParentThumbImageTag" })
+  @SpeakeasyMetadata({ data: "json, name=ParentThumbImageTag" })
   parentThumbImageTag?: string;
 
-  @Metadata({ data: "json, name=ParentThumbItemId" })
+  @SpeakeasyMetadata({ data: "json, name=ParentThumbItemId" })
   parentThumbItemId?: string;
 
-  @Metadata({ data: "json, name=PostPaddingSeconds" })
+  @SpeakeasyMetadata({ data: "json, name=PostPaddingSeconds" })
   postPaddingSeconds?: number;
 
-  @Metadata({ data: "json, name=PrePaddingSeconds" })
+  @SpeakeasyMetadata({ data: "json, name=PrePaddingSeconds" })
   prePaddingSeconds?: number;
 
-  @Metadata({ data: "json, name=Priority" })
+  @SpeakeasyMetadata({ data: "json, name=Priority" })
   priority?: number;
 
-  @Metadata({ data: "json, name=ProgramId" })
+  @SpeakeasyMetadata({ data: "json, name=ProgramId" })
   programId?: string;
 
-  @Metadata({ data: "json, name=RecordAnyChannel" })
+  @SpeakeasyMetadata({ data: "json, name=RecordAnyChannel" })
   recordAnyChannel?: boolean;
 
-  @Metadata({ data: "json, name=RecordAnyTime" })
+  @SpeakeasyMetadata({ data: "json, name=RecordAnyTime" })
   recordAnyTime?: boolean;
 
-  @Metadata({ data: "json, name=RecordNewOnly" })
+  @SpeakeasyMetadata({ data: "json, name=RecordNewOnly" })
   recordNewOnly?: boolean;
 
-  @Metadata({ data: "json, name=ServerId" })
+  @SpeakeasyMetadata({ data: "json, name=ServerId" })
   serverId?: string;
 
-  @Metadata({ data: "json, name=ServiceName" })
+  @SpeakeasyMetadata({ data: "json, name=ServiceName" })
   serviceName?: string;
 
-  @Metadata({ data: "json, name=SkipEpisodesInLibrary" })
+  @SpeakeasyMetadata({ data: "json, name=SkipEpisodesInLibrary" })
   skipEpisodesInLibrary?: boolean;
 
-  @Metadata({ data: "json, name=StartDate" })
+  @SpeakeasyMetadata({ data: "json, name=StartDate" })
   startDate?: Date;
 
-  @Metadata({ data: "json, name=Type" })
+  @SpeakeasyMetadata({ data: "json, name=Type" })
   type?: string;
 }

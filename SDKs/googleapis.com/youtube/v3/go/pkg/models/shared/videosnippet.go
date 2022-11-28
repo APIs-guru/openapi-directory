@@ -13,6 +13,8 @@ const (
 	VideoSnippetLiveBroadcastContentEnumCompleted VideoSnippetLiveBroadcastContentEnum = "completed"
 )
 
+// VideoSnippet
+// Basic details about a video, including title, description, uploader, thumbnails and category.
 type VideoSnippet struct {
 	CategoryID           *string                               `json:"categoryId,omitempty"`
 	ChannelID            *string                               `json:"channelId,omitempty"`

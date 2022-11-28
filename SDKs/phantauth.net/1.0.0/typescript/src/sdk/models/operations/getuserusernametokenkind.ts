@@ -1,43 +1,44 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum GetUserUsernameTokenKindKindEnum {
-    Access = "'access'"
-,    Refresh = "'refresh'"
-,    Authorization = "'authorization'"
-,    Id = "'id'"
-,    Selfie = "'selfie'"
-,    Plain = "'plain'"
+    Access = "'access'",
+    Refresh = "'refresh'",
+    Authorization = "'authorization'",
+    Id = "'id'",
+    Selfie = "'selfie'",
+    Plain = "'plain'"
 }
 
 
 export class GetUserUsernameTokenKindPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=kind" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=kind" })
   kind: GetUserUsernameTokenKindKindEnum;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=username" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=username" })
   username: string;
 }
 
 
 export class GetUserUsernameTokenKindQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=scope" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=scope" })
   scope?: string;
 }
 
 
 export class GetUserUsernameTokenKindRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetUserUsernameTokenKindPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetUserUsernameTokenKindQueryParams;
 }
 
 
 export class GetUserUsernameTokenKindResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

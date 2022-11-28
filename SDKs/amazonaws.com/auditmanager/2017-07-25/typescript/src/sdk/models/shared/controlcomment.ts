@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ControlComment
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  *  A comment posted by a user on a control. This includes the author's name, the comment text, and a timestamp. 
 **/
 export class ControlComment extends SpeakeasyBase {
-  @Metadata({ data: "json, name=authorName" })
+  @SpeakeasyMetadata({ data: "json, name=authorName" })
   authorName?: string;
 
-  @Metadata({ data: "json, name=commentBody" })
+  @SpeakeasyMetadata({ data: "json, name=commentBody" })
   commentBody?: string;
 
-  @Metadata({ data: "json, name=postedDate" })
+  @SpeakeasyMetadata({ data: "json, name=postedDate" })
   postedDate?: Date;
 }

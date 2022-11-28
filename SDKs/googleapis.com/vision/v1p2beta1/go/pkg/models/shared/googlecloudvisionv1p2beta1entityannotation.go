@@ -1,5 +1,7 @@
 package shared
 
+// GoogleCloudVisionV1p2beta1EntityAnnotation
+// Set of detected entity features.
 type GoogleCloudVisionV1p2beta1EntityAnnotation struct {
 	BoundingPoly *GoogleCloudVisionV1p2beta1BoundingPoly  `json:"boundingPoly,omitempty"`
 	Confidence   *float32                                 `json:"confidence,omitempty"`

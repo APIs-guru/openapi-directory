@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 class DisplayvideoAdvertisersInsertionOrdersTargetingTypesAssignedTargetingOptionsGetTargetingTypeEnum(str, Enum):
@@ -53,10 +54,10 @@ class DisplayvideoAdvertisersInsertionOrdersTargetingTypesAssignedTargetingOptio
 
 @dataclass
 class DisplayvideoAdvertisersInsertionOrdersTargetingTypesAssignedTargetingOptionsGetPathParams:
-    advertiser_id: str = field(default=None, metadata={'path_param': { 'field_name': 'advertiserId', 'style': 'simple', 'explode': False }})
-    assigned_targeting_option_id: str = field(default=None, metadata={'path_param': { 'field_name': 'assignedTargetingOptionId', 'style': 'simple', 'explode': False }})
-    insertion_order_id: str = field(default=None, metadata={'path_param': { 'field_name': 'insertionOrderId', 'style': 'simple', 'explode': False }})
-    targeting_type: DisplayvideoAdvertisersInsertionOrdersTargetingTypesAssignedTargetingOptionsGetTargetingTypeEnum = field(default=None, metadata={'path_param': { 'field_name': 'targetingType', 'style': 'simple', 'explode': False }})
+    advertiser_id: str = field(metadata={'path_param': { 'field_name': 'advertiserId', 'style': 'simple', 'explode': False }})
+    assigned_targeting_option_id: str = field(metadata={'path_param': { 'field_name': 'assignedTargetingOptionId', 'style': 'simple', 'explode': False }})
+    insertion_order_id: str = field(metadata={'path_param': { 'field_name': 'insertionOrderId', 'style': 'simple', 'explode': False }})
+    targeting_type: DisplayvideoAdvertisersInsertionOrdersTargetingTypesAssignedTargetingOptionsGetTargetingTypeEnum = field(metadata={'path_param': { 'field_name': 'targetingType', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -76,20 +77,20 @@ class DisplayvideoAdvertisersInsertionOrdersTargetingTypesAssignedTargetingOptio
 
 @dataclass
 class DisplayvideoAdvertisersInsertionOrdersTargetingTypesAssignedTargetingOptionsGetSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DisplayvideoAdvertisersInsertionOrdersTargetingTypesAssignedTargetingOptionsGetRequest:
-    path_params: DisplayvideoAdvertisersInsertionOrdersTargetingTypesAssignedTargetingOptionsGetPathParams = field(default=None)
-    query_params: DisplayvideoAdvertisersInsertionOrdersTargetingTypesAssignedTargetingOptionsGetQueryParams = field(default=None)
-    security: DisplayvideoAdvertisersInsertionOrdersTargetingTypesAssignedTargetingOptionsGetSecurity = field(default=None)
+    path_params: DisplayvideoAdvertisersInsertionOrdersTargetingTypesAssignedTargetingOptionsGetPathParams = field()
+    query_params: DisplayvideoAdvertisersInsertionOrdersTargetingTypesAssignedTargetingOptionsGetQueryParams = field()
+    security: DisplayvideoAdvertisersInsertionOrdersTargetingTypesAssignedTargetingOptionsGetSecurity = field()
     
 
 @dataclass
 class DisplayvideoAdvertisersInsertionOrdersTargetingTypesAssignedTargetingOptionsGetResponse:
+    content_type: str = field()
+    status_code: int = field()
     assigned_targeting_option: Optional[shared.AssignedTargetingOption] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,5 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SandboxBeneficiary } from "./sandboxbeneficiary";
 import { SandboxBankAccountInfo } from "./sandboxbankaccountinfo";
 import { SandboxParty } from "./sandboxparty";
@@ -9,29 +8,30 @@ import { SandboxStatement } from "./sandboxstatement";
 import { SandboxTransaction } from "./sandboxtransaction";
 
 
+
 // SandboxBankAccount
 /** 
  * Sandbox bank account
 **/
 export class SandboxBankAccount extends SpeakeasyBase {
-  @Metadata({ data: "json, name=beneficiaries", elemType: shared.SandboxBeneficiary })
+  @SpeakeasyMetadata({ data: "json, name=beneficiaries", elemType: SandboxBeneficiary })
   beneficiaries?: SandboxBeneficiary[];
 
-  @Metadata({ data: "json, name=info" })
+  @SpeakeasyMetadata({ data: "json, name=info" })
   info?: SandboxBankAccountInfo;
 
-  @Metadata({ data: "json, name=party" })
+  @SpeakeasyMetadata({ data: "json, name=party" })
   party?: SandboxParty;
 
-  @Metadata({ data: "json, name=scheduledPayments", elemType: shared.SandboxScheduledPayment })
+  @SpeakeasyMetadata({ data: "json, name=scheduledPayments", elemType: SandboxScheduledPayment })
   scheduledPayments?: SandboxScheduledPayment[];
 
-  @Metadata({ data: "json, name=standingOrders", elemType: shared.SandboxStandingOrder })
+  @SpeakeasyMetadata({ data: "json, name=standingOrders", elemType: SandboxStandingOrder })
   standingOrders?: SandboxStandingOrder[];
 
-  @Metadata({ data: "json, name=statements", elemType: shared.SandboxStatement })
+  @SpeakeasyMetadata({ data: "json, name=statements", elemType: SandboxStatement })
   statements?: SandboxStatement[];
 
-  @Metadata({ data: "json, name=transactions", elemType: shared.SandboxTransaction })
+  @SpeakeasyMetadata({ data: "json, name=transactions", elemType: SandboxTransaction })
   transactions?: SandboxTransaction[];
 }

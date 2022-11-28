@@ -1,6 +1,7 @@
 
 
+
 export enum CostEstimationServiceResourceStateEnum {
-    Active = "ACTIVE"
-,    Inactive = "INACTIVE"
+    Active = "ACTIVE",
+    Inactive = "INACTIVE"
 }

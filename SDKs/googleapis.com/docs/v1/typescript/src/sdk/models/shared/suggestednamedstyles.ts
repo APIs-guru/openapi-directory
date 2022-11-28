@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { NamedStyles } from "./namedstyles";
 import { NamedStylesSuggestionState } from "./namedstylessuggestionstate";
+
 
 
 // SuggestedNamedStyles
@@ -8,9 +9,9 @@ import { NamedStylesSuggestionState } from "./namedstylessuggestionstate";
  * A suggested change to the NamedStyles.
 **/
 export class SuggestedNamedStyles extends SpeakeasyBase {
-  @Metadata({ data: "json, name=namedStyles" })
+  @SpeakeasyMetadata({ data: "json, name=namedStyles" })
   namedStyles?: NamedStyles;
 
-  @Metadata({ data: "json, name=namedStylesSuggestionState" })
+  @SpeakeasyMetadata({ data: "json, name=namedStylesSuggestionState" })
   namedStylesSuggestionState?: NamedStylesSuggestionState;
 }

@@ -4,10 +4,6 @@ type GetDatacentersIDPathParams struct {
 	ID int64 `pathParam:"style=simple,explode=false,name=id"`
 }
 
-type GetDatacentersIDRequest struct {
-	PathParams GetDatacentersIDPathParams
-}
-
 type GetDatacentersID200ApplicationJSONDatacenterLocation struct {
 	City        string  `json:"city"`
 	Country     string  `json:"country"`
@@ -19,6 +15,8 @@ type GetDatacentersID200ApplicationJSONDatacenterLocation struct {
 	NetworkZone string  `json:"network_zone"`
 }
 
+// GetDatacentersID200ApplicationJSONDatacenterServerTypes
+// The Server types the Datacenter can handle
 type GetDatacentersID200ApplicationJSONDatacenterServerTypes struct {
 	Available             []float64 `json:"available"`
 	AvailableForMigration []float64 `json:"available_for_migration"`
@@ -35,6 +33,10 @@ type GetDatacentersID200ApplicationJSONDatacenter struct {
 
 type GetDatacentersID200ApplicationJSON struct {
 	Datacenter GetDatacentersID200ApplicationJSONDatacenter `json:"datacenter"`
+}
+
+type GetDatacentersIDRequest struct {
+	PathParams GetDatacentersIDPathParams
 }
 
 type GetDatacentersIDResponse struct {

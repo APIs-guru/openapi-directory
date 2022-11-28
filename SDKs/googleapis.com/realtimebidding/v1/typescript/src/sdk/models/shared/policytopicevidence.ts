@@ -1,4 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DestinationNotCrawlableEvidence } from "./destinationnotcrawlableevidence";
 import { DestinationNotWorkingEvidence } from "./destinationnotworkingevidence";
 import { DestinationUrlEvidence } from "./destinationurlevidence";
@@ -8,29 +8,30 @@ import { HttpCallEvidence } from "./httpcallevidence";
 import { HttpCookieEvidence } from "./httpcookieevidence";
 
 
+
 // PolicyTopicEvidence
 /** 
  * Evidence associated with a policy topic entry.
 **/
 export class PolicyTopicEvidence extends SpeakeasyBase {
-  @Metadata({ data: "json, name=destinationNotCrawlable" })
+  @SpeakeasyMetadata({ data: "json, name=destinationNotCrawlable" })
   destinationNotCrawlable?: DestinationNotCrawlableEvidence;
 
-  @Metadata({ data: "json, name=destinationNotWorking" })
+  @SpeakeasyMetadata({ data: "json, name=destinationNotWorking" })
   destinationNotWorking?: DestinationNotWorkingEvidence;
 
-  @Metadata({ data: "json, name=destinationUrl" })
+  @SpeakeasyMetadata({ data: "json, name=destinationUrl" })
   destinationUrl?: DestinationUrlEvidence;
 
-  @Metadata({ data: "json, name=domainCall" })
+  @SpeakeasyMetadata({ data: "json, name=domainCall" })
   domainCall?: DomainCallEvidence;
 
-  @Metadata({ data: "json, name=downloadSize" })
+  @SpeakeasyMetadata({ data: "json, name=downloadSize" })
   downloadSize?: DownloadSizeEvidence;
 
-  @Metadata({ data: "json, name=httpCall" })
+  @SpeakeasyMetadata({ data: "json, name=httpCall" })
   httpCall?: HttpCallEvidence;
 
-  @Metadata({ data: "json, name=httpCookie" })
+  @SpeakeasyMetadata({ data: "json, name=httpCookie" })
   httpCookie?: HttpCookieEvidence;
 }

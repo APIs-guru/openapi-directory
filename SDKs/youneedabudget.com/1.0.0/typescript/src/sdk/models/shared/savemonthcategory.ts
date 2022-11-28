@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class SaveMonthCategory extends SpeakeasyBase {
-  @Metadata({ data: "json, name=budgeted" })
+  @SpeakeasyMetadata({ data: "json, name=budgeted" })
   budgeted: number;
 }

@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class TemplatesFetchAllPathParams:
-    account_id: str = field(default=None, metadata={'path_param': { 'field_name': 'accountId', 'style': 'simple', 'explode': False }})
+    account_id: str = field(metadata={'path_param': { 'field_name': 'accountId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -17,20 +17,20 @@ class TemplatesFetchAllQueryParams:
 
 @dataclass
 class TemplatesFetchAllSecurity:
-    sakari_auth: shared.SchemeSakariAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    sakari_auth: shared.SchemeSakariAuth = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class TemplatesFetchAllRequest:
-    path_params: TemplatesFetchAllPathParams = field(default=None)
-    query_params: TemplatesFetchAllQueryParams = field(default=None)
-    security: TemplatesFetchAllSecurity = field(default=None)
+    path_params: TemplatesFetchAllPathParams = field()
+    query_params: TemplatesFetchAllQueryParams = field()
+    security: TemplatesFetchAllSecurity = field()
     
 
 @dataclass
 class TemplatesFetchAllResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error_response: Optional[shared.ErrorResponse] = field(default=None)
-    status_code: int = field(default=None)
     templates_response: Optional[shared.TemplatesResponse] = field(default=None)
     

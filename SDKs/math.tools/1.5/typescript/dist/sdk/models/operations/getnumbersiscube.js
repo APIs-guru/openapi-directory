@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetNumbersIsCubeQueryParams = /** @class */ (function (_super) {
     __extends(GetNumbersIsCubeQueryParams, _super);
@@ -30,7 +30,7 @@ var GetNumbersIsCubeQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=number" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=number" }),
         __metadata("design:type", Number)
     ], GetNumbersIsCubeQueryParams.prototype, "number", void 0);
     return GetNumbersIsCubeQueryParams;
@@ -42,7 +42,7 @@ var GetNumbersIsCubeSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeXMathtoolsApiSecret)
     ], GetNumbersIsCubeSecurity.prototype, "xMathtoolsApiSecret", void 0);
     return GetNumbersIsCubeSecurity;
@@ -54,11 +54,11 @@ var GetNumbersIsCubeRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetNumbersIsCubeQueryParams)
     ], GetNumbersIsCubeRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetNumbersIsCubeSecurity)
     ], GetNumbersIsCubeRequest.prototype, "security", void 0);
     return GetNumbersIsCubeRequest;
@@ -70,11 +70,11 @@ var GetNumbersIsCubeResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetNumbersIsCubeResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetNumbersIsCubeResponse.prototype, "statusCode", void 0);
     return GetNumbersIsCubeResponse;

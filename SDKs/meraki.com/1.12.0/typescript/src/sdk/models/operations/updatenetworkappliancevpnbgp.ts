@@ -1,64 +1,65 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class UpdateNetworkApplianceVpnBgpPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=networkId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=networkId" })
   networkId: string;
 }
 
 
 export class UpdateNetworkApplianceVpnBgpRequestBodyNeighbors extends SpeakeasyBase {
-  @Metadata({ data: "json, name=allowTransit" })
+  @SpeakeasyMetadata({ data: "json, name=allowTransit" })
   allowTransit?: boolean;
 
-  @Metadata({ data: "json, name=ebgpHoldTimer" })
+  @SpeakeasyMetadata({ data: "json, name=ebgpHoldTimer" })
   ebgpHoldTimer: number;
 
-  @Metadata({ data: "json, name=ebgpMultihop" })
+  @SpeakeasyMetadata({ data: "json, name=ebgpMultihop" })
   ebgpMultihop: number;
 
-  @Metadata({ data: "json, name=ip" })
+  @SpeakeasyMetadata({ data: "json, name=ip" })
   ip: string;
 
-  @Metadata({ data: "json, name=receiveLimit" })
+  @SpeakeasyMetadata({ data: "json, name=receiveLimit" })
   receiveLimit?: number;
 
-  @Metadata({ data: "json, name=remoteAsNumber" })
+  @SpeakeasyMetadata({ data: "json, name=remoteAsNumber" })
   remoteAsNumber: number;
 }
 
 
 export class UpdateNetworkApplianceVpnBgpRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=asNumber" })
+  @SpeakeasyMetadata({ data: "json, name=asNumber" })
   asNumber?: number;
 
-  @Metadata({ data: "json, name=enabled" })
+  @SpeakeasyMetadata({ data: "json, name=enabled" })
   enabled: boolean;
 
-  @Metadata({ data: "json, name=ibgpHoldTimer" })
+  @SpeakeasyMetadata({ data: "json, name=ibgpHoldTimer" })
   ibgpHoldTimer?: number;
 
-  @Metadata({ data: "json, name=neighbors", elemType: operations.UpdateNetworkApplianceVpnBgpRequestBodyNeighbors })
+  @SpeakeasyMetadata({ data: "json, name=neighbors", elemType: UpdateNetworkApplianceVpnBgpRequestBodyNeighbors })
   neighbors?: UpdateNetworkApplianceVpnBgpRequestBodyNeighbors[];
 }
 
 
 export class UpdateNetworkApplianceVpnBgpRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: UpdateNetworkApplianceVpnBgpPathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: UpdateNetworkApplianceVpnBgpRequestBody;
 }
 
 
 export class UpdateNetworkApplianceVpnBgpResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   updateNetworkApplianceVpnBgp200ApplicationJsonObject?: Map<string, any>;
 }

@@ -1,5 +1,7 @@
 package shared
 
+// GetCustomVerificationEmailTemplateResponse
+// The following elements are returned by the service.
 type GetCustomVerificationEmailTemplateResponse struct {
 	FailureRedirectionURL *string `json:"FailureRedirectionURL,omitempty"`
 	FromEmailAddress      *string `json:"FromEmailAddress,omitempty"`

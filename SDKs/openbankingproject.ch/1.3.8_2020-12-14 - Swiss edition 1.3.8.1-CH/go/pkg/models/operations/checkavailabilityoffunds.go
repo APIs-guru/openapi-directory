@@ -16,14 +16,17 @@ type CheckAvailabilityOfFundsSecurity struct {
 	BearerAuthOAuth *shared.SchemeBearerAuthOAuth `security:"scheme,type=http,subtype=bearer"`
 }
 
+// CheckAvailabilityOfFunds200ApplicationJSON
+// Equals "true" if sufficient funds are available at the time of the request,
+// "false" otherwise.
+type CheckAvailabilityOfFunds200ApplicationJSON struct {
+	FundsAvailable bool `json:"fundsAvailable"`
+}
+
 type CheckAvailabilityOfFundsRequest struct {
 	Headers  CheckAvailabilityOfFundsHeaders
 	Request  shared.ConfirmationOfFunds `request:"mediaType=application/json"`
 	Security CheckAvailabilityOfFundsSecurity
-}
-
-type CheckAvailabilityOfFunds200ApplicationJSON struct {
-	FundsAvailable bool `json:"fundsAvailable"`
 }
 
 type CheckAvailabilityOfFundsResponse struct {

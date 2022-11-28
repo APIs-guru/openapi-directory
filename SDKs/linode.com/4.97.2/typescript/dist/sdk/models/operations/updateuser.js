@@ -1,0 +1,110 @@
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import * as shared from "../shared";
+var UpdateUserPathParams = /** @class */ (function (_super) {
+    __extends(UpdateUserPathParams, _super);
+    function UpdateUserPathParams() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=username" }),
+        __metadata("design:type", String)
+    ], UpdateUserPathParams.prototype, "username", void 0);
+    return UpdateUserPathParams;
+}(SpeakeasyBase));
+export { UpdateUserPathParams };
+var UpdateUserSecurity = /** @class */ (function (_super) {
+    __extends(UpdateUserSecurity, _super);
+    function UpdateUserSecurity() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" }),
+        __metadata("design:type", shared.SchemePersonalAccessToken)
+    ], UpdateUserSecurity.prototype, "personalAccessToken", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
+        __metadata("design:type", shared.SchemeOauth)
+    ], UpdateUserSecurity.prototype, "oauth", void 0);
+    return UpdateUserSecurity;
+}(SpeakeasyBase));
+export { UpdateUserSecurity };
+var UpdateUserDefaultApplicationJson = /** @class */ (function (_super) {
+    __extends(UpdateUserDefaultApplicationJson, _super);
+    function UpdateUserDefaultApplicationJson() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=errors", elemType: shared.ErrorObject }),
+        __metadata("design:type", Array)
+    ], UpdateUserDefaultApplicationJson.prototype, "errors", void 0);
+    return UpdateUserDefaultApplicationJson;
+}(SpeakeasyBase));
+export { UpdateUserDefaultApplicationJson };
+var UpdateUserRequest = /** @class */ (function (_super) {
+    __extends(UpdateUserRequest, _super);
+    function UpdateUserRequest() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", UpdateUserPathParams)
+    ], UpdateUserRequest.prototype, "pathParams", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
+        __metadata("design:type", shared.UserInput)
+    ], UpdateUserRequest.prototype, "request", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", UpdateUserSecurity)
+    ], UpdateUserRequest.prototype, "security", void 0);
+    return UpdateUserRequest;
+}(SpeakeasyBase));
+export { UpdateUserRequest };
+var UpdateUserResponse = /** @class */ (function (_super) {
+    __extends(UpdateUserResponse, _super);
+    function UpdateUserResponse() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", String)
+    ], UpdateUserResponse.prototype, "contentType", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", Number)
+    ], UpdateUserResponse.prototype, "statusCode", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", shared.User)
+    ], UpdateUserResponse.prototype, "user", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", UpdateUserDefaultApplicationJson)
+    ], UpdateUserResponse.prototype, "updateUserDefaultApplicationJsonObject", void 0);
+    return UpdateUserResponse;
+}(SpeakeasyBase));
+export { UpdateUserResponse };

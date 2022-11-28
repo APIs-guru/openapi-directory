@@ -1,35 +1,30 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum PostCertificatesCreateCertificateRequestTypeEnum {
-    Uploaded = "uploaded"
-,    Managed = "managed"
+    Uploaded = "uploaded",
+    Managed = "managed"
 }
 
 
 export class PostCertificatesCreateCertificateRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=certificate" })
+  @SpeakeasyMetadata({ data: "json, name=certificate" })
   certificate?: string;
 
-  @Metadata({ data: "json, name=domain_names" })
+  @SpeakeasyMetadata({ data: "json, name=domain_names" })
   domainNames?: string[];
 
-  @Metadata({ data: "json, name=labels" })
+  @SpeakeasyMetadata({ data: "json, name=labels" })
   labels?: Map<string, any>;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 
-  @Metadata({ data: "json, name=private_key" })
+  @SpeakeasyMetadata({ data: "json, name=private_key" })
   privateKey?: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: PostCertificatesCreateCertificateRequestTypeEnum;
-}
-
-
-export class PostCertificatesRequest extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/json" })
-  request?: PostCertificatesCreateCertificateRequest;
 }
 
 
@@ -38,52 +33,52 @@ export class PostCertificatesRequest extends SpeakeasyBase {
  * Error message for the Action if error occurred, otherwise null
 **/
 export class PostCertificatesCreateCertificateResponseNullableActionError extends SpeakeasyBase {
-  @Metadata({ data: "json, name=code" })
+  @SpeakeasyMetadata({ data: "json, name=code" })
   code: string;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message: string;
 }
 
 
 export class PostCertificatesCreateCertificateResponseNullableActionResources extends SpeakeasyBase {
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: number;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type: string;
 }
 
 export enum PostCertificatesCreateCertificateResponseNullableActionStatusEnum {
-    Success = "success"
-,    Running = "running"
-,    Error = "error"
+    Success = "success",
+    Running = "running",
+    Error = "error"
 }
 
 
 export class PostCertificatesCreateCertificateResponseNullableAction extends SpeakeasyBase {
-  @Metadata({ data: "json, name=command" })
+  @SpeakeasyMetadata({ data: "json, name=command" })
   command: string;
 
-  @Metadata({ data: "json, name=error" })
+  @SpeakeasyMetadata({ data: "json, name=error" })
   error: PostCertificatesCreateCertificateResponseNullableActionError;
 
-  @Metadata({ data: "json, name=finished" })
+  @SpeakeasyMetadata({ data: "json, name=finished" })
   finished: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: number;
 
-  @Metadata({ data: "json, name=progress" })
+  @SpeakeasyMetadata({ data: "json, name=progress" })
   progress: number;
 
-  @Metadata({ data: "json, name=resources", elemType: operations.PostCertificatesCreateCertificateResponseNullableActionResources })
+  @SpeakeasyMetadata({ data: "json, name=resources", elemType: PostCertificatesCreateCertificateResponseNullableActionResources })
   resources: PostCertificatesCreateCertificateResponseNullableActionResources[];
 
-  @Metadata({ data: "json, name=started" })
+  @SpeakeasyMetadata({ data: "json, name=started" })
   started: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status: PostCertificatesCreateCertificateResponseNullableActionStatusEnum;
 }
 
@@ -93,24 +88,24 @@ export class PostCertificatesCreateCertificateResponseNullableAction extends Spe
  * If issuance or renewal reports `failed`, this property contains information about what happened
 **/
 export class PostCertificatesCreateCertificateResponseCertificateStatusError extends SpeakeasyBase {
-  @Metadata({ data: "json, name=code" })
+  @SpeakeasyMetadata({ data: "json, name=code" })
   code?: string;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 export enum PostCertificatesCreateCertificateResponseCertificateStatusIssuanceEnum {
-    Pending = "pending"
-,    Completed = "completed"
-,    Failed = "failed"
+    Pending = "pending",
+    Completed = "completed",
+    Failed = "failed"
 }
 
 export enum PostCertificatesCreateCertificateResponseCertificateStatusRenewalEnum {
-    Scheduled = "scheduled"
-,    Pending = "pending"
-,    Failed = "failed"
-,    Unavailable = "unavailable"
+    Scheduled = "scheduled",
+    Pending = "pending",
+    Failed = "failed",
+    Unavailable = "unavailable"
 }
 
 
@@ -119,86 +114,92 @@ export enum PostCertificatesCreateCertificateResponseCertificateStatusRenewalEnu
  * Current status of a type `managed` Certificate, always *null* for type `uploaded` Certificates
 **/
 export class PostCertificatesCreateCertificateResponseCertificateStatus extends SpeakeasyBase {
-  @Metadata({ data: "json, name=error" })
+  @SpeakeasyMetadata({ data: "json, name=error" })
   error?: PostCertificatesCreateCertificateResponseCertificateStatusError;
 
-  @Metadata({ data: "json, name=issuance" })
+  @SpeakeasyMetadata({ data: "json, name=issuance" })
   issuance?: PostCertificatesCreateCertificateResponseCertificateStatusIssuanceEnum;
 
-  @Metadata({ data: "json, name=renewal" })
+  @SpeakeasyMetadata({ data: "json, name=renewal" })
   renewal?: PostCertificatesCreateCertificateResponseCertificateStatusRenewalEnum;
 }
 
 export enum PostCertificatesCreateCertificateResponseCertificateTypeEnum {
-    Uploaded = "uploaded"
-,    Managed = "managed"
+    Uploaded = "uploaded",
+    Managed = "managed"
 }
 
 
 export class PostCertificatesCreateCertificateResponseCertificateUsedBy extends SpeakeasyBase {
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: number;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type: string;
 }
 
 
 export class PostCertificatesCreateCertificateResponseCertificate extends SpeakeasyBase {
-  @Metadata({ data: "json, name=certificate" })
+  @SpeakeasyMetadata({ data: "json, name=certificate" })
   certificate: string;
 
-  @Metadata({ data: "json, name=created" })
+  @SpeakeasyMetadata({ data: "json, name=created" })
   created: string;
 
-  @Metadata({ data: "json, name=domain_names" })
+  @SpeakeasyMetadata({ data: "json, name=domain_names" })
   domainNames: string[];
 
-  @Metadata({ data: "json, name=fingerprint" })
+  @SpeakeasyMetadata({ data: "json, name=fingerprint" })
   fingerprint: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: number;
 
-  @Metadata({ data: "json, name=labels" })
+  @SpeakeasyMetadata({ data: "json, name=labels" })
   labels: Map<string, string>;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 
-  @Metadata({ data: "json, name=not_valid_after" })
+  @SpeakeasyMetadata({ data: "json, name=not_valid_after" })
   notValidAfter: string;
 
-  @Metadata({ data: "json, name=not_valid_before" })
+  @SpeakeasyMetadata({ data: "json, name=not_valid_before" })
   notValidBefore: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: PostCertificatesCreateCertificateResponseCertificateStatus;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: PostCertificatesCreateCertificateResponseCertificateTypeEnum;
 
-  @Metadata({ data: "json, name=used_by", elemType: operations.PostCertificatesCreateCertificateResponseCertificateUsedBy })
+  @SpeakeasyMetadata({ data: "json, name=used_by", elemType: PostCertificatesCreateCertificateResponseCertificateUsedBy })
   usedBy: PostCertificatesCreateCertificateResponseCertificateUsedBy[];
 }
 
 
 export class PostCertificatesCreateCertificateResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=action" })
+  @SpeakeasyMetadata({ data: "json, name=action" })
   action?: PostCertificatesCreateCertificateResponseNullableAction;
 
-  @Metadata({ data: "json, name=certificate" })
+  @SpeakeasyMetadata({ data: "json, name=certificate" })
   certificate: PostCertificatesCreateCertificateResponseCertificate;
 }
 
 
+export class PostCertificatesRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request?: PostCertificatesCreateCertificateRequest;
+}
+
+
 export class PostCertificatesResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   createCertificateResponse?: PostCertificatesCreateCertificateResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

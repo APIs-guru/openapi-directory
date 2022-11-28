@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class CloudprofilerProjectsProfilesCreateOfflinePathParams extends SpeakeasyBase {
     parent: string;
@@ -36,7 +36,7 @@ export declare class CloudprofilerProjectsProfilesCreateOfflineSecurity extends 
 export declare class CloudprofilerProjectsProfilesCreateOfflineRequest extends SpeakeasyBase {
     pathParams: CloudprofilerProjectsProfilesCreateOfflinePathParams;
     queryParams: CloudprofilerProjectsProfilesCreateOfflineQueryParams;
-    request?: shared.Profile;
+    request?: shared.ProfileInput;
     security: CloudprofilerProjectsProfilesCreateOfflineSecurity;
 }
 export declare class CloudprofilerProjectsProfilesCreateOfflineResponse extends SpeakeasyBase {

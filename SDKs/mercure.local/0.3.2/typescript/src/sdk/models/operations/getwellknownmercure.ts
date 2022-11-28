@@ -1,34 +1,35 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetWellKnownMercureQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Last-Event-ID" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Last-Event-ID" })
   lastEventId?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=topic" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=topic" })
   topic: string[];
 }
 
 
 export class GetWellKnownMercureHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=Last-Event-ID" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Last-Event-ID" })
   lastEventId?: string;
 }
 
 
 export class GetWellKnownMercureRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetWellKnownMercureQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: GetWellKnownMercureHeaders;
 }
 
 
 export class GetWellKnownMercureResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

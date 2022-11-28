@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// ProjectSummary
+// Contains project summary information.
 type ProjectSummary struct {
 	CreationDate   *time.Time `json:"creationDate,omitempty"`
 	Description    *string    `json:"description,omitempty"`

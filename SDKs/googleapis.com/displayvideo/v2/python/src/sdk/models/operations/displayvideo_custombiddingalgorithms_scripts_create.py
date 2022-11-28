@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DisplayvideoCustomBiddingAlgorithmsScriptsCreatePathParams:
-    custom_bidding_algorithm_id: str = field(default=None, metadata={'path_param': { 'field_name': 'customBiddingAlgorithmId', 'style': 'simple', 'explode': False }})
+    custom_bidding_algorithm_id: str = field(metadata={'path_param': { 'field_name': 'customBiddingAlgorithmId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -27,21 +28,21 @@ class DisplayvideoCustomBiddingAlgorithmsScriptsCreateQueryParams:
 
 @dataclass
 class DisplayvideoCustomBiddingAlgorithmsScriptsCreateSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DisplayvideoCustomBiddingAlgorithmsScriptsCreateRequest:
-    path_params: DisplayvideoCustomBiddingAlgorithmsScriptsCreatePathParams = field(default=None)
-    query_params: DisplayvideoCustomBiddingAlgorithmsScriptsCreateQueryParams = field(default=None)
-    request: Optional[shared.CustomBiddingScript] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: DisplayvideoCustomBiddingAlgorithmsScriptsCreateSecurity = field(default=None)
+    path_params: DisplayvideoCustomBiddingAlgorithmsScriptsCreatePathParams = field()
+    query_params: DisplayvideoCustomBiddingAlgorithmsScriptsCreateQueryParams = field()
+    security: DisplayvideoCustomBiddingAlgorithmsScriptsCreateSecurity = field()
+    request: Optional[shared.CustomBiddingScriptInput] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class DisplayvideoCustomBiddingAlgorithmsScriptsCreateResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     custom_bidding_script: Optional[shared.CustomBiddingScript] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -9,7 +9,7 @@ import (
 	"strings"
 )
 
-var Servers = []string{
+var ServerList = []string{
 	"https://pal-test.adyen.com/pal/servlet/Recurring/v40",
 }
 
@@ -18,9 +18,13 @@ type HTTPClient interface {
 }
 
 type SDK struct {
-	defaultClient  HTTPClient
-	securityClient HTTPClient
-	serverURL      string
+	_defaultClient  HTTPClient
+	_securityClient HTTPClient
+
+	_serverURL  string
+	_language   string
+	_sdkVersion string
+	_genVersion string
 }
 
 type SDKOption func(*SDK)
@@ -31,27 +35,48 @@ func WithServerURL(serverURL string, params map[string]string) SDKOption {
 			serverURL = utils.ReplaceParameters(serverURL, params)
 		}
 
-		sdk.serverURL = serverURL
+		sdk._serverURL = serverURL
+	}
+}
+
+func WithClient(client HTTPClient) SDKOption {
+	return func(sdk *SDK) {
+		sdk._defaultClient = client
 	}
 }
 
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
-		defaultClient:  http.DefaultClient,
-		securityClient: http.DefaultClient,
+		_language:   "go",
+		_sdkVersion: "",
+		_genVersion: "internal",
 	}
 	for _, opt := range opts {
 		opt(sdk)
 	}
-	if sdk.serverURL == "" {
-		sdk.serverURL = Servers[0]
+
+	if sdk._defaultClient == nil {
+		sdk._defaultClient = http.DefaultClient
+	}
+	if sdk._securityClient == nil {
+
+		sdk._securityClient = sdk._defaultClient
+
+	}
+
+	if sdk._serverURL == "" {
+		sdk._serverURL = ServerList[0]
 	}
 
 	return sdk
 }
 
+// PostDisable - Disables stored payment details.
+// Disables stored payment details to stop charging a shopper with this particular recurring detail ID.
+//
+// For more information, refer to [Disable stored details](https://docs.adyen.com/classic-integration/recurring-payments/disable-stored-details/).
 func (s *SDK) PostDisable(ctx context.Context, request operations.PostDisableRequest) (*operations.PostDisableResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/disable"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -66,7 +91,7 @@ func (s *SDK) PostDisable(ctx context.Context, request operations.PostDisableReq
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -146,8 +171,12 @@ func (s *SDK) PostDisable(ctx context.Context, request operations.PostDisableReq
 	return res, nil
 }
 
+// PostListRecurringDetails - Retrieves stored payment details for a shopper.
+// Lists the stored payment details for a shopper, if there are any available. The recurring detail ID can be used with a regular authorisation request to charge the shopper. A summary of the payment detail is returned for presentation to the shopper.
+//
+// For more information, refer to [Retrieve stored details](https://docs.adyen.com/classic-integration/recurring-payments/retrieve-stored-details/).
 func (s *SDK) PostListRecurringDetails(ctx context.Context, request operations.PostListRecurringDetailsRequest) (*operations.PostListRecurringDetailsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/listRecurringDetails"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -162,7 +191,7 @@ func (s *SDK) PostListRecurringDetails(ctx context.Context, request operations.P
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -242,8 +271,12 @@ func (s *SDK) PostListRecurringDetails(ctx context.Context, request operations.P
 	return res, nil
 }
 
+// PostScheduleAccountUpdater - Schedules running of the Account Updater.
+// When making the API call, you can submit either the credit card information, or the recurring detail reference and the shopper reference:
+// * If the card information is provided, all the sub-fields for `card` are mandatory.
+// * If the recurring detail reference is provided, the fields for `shopperReference` and `selectedRecurringDetailReference` are mandatory.
 func (s *SDK) PostScheduleAccountUpdater(ctx context.Context, request operations.PostScheduleAccountUpdaterRequest) (*operations.PostScheduleAccountUpdaterResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/scheduleAccountUpdater"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -258,7 +291,7 @@ func (s *SDK) PostScheduleAccountUpdater(ctx context.Context, request operations
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {

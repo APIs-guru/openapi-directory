@@ -1,5 +1,7 @@
 package shared
 
+// ListLocationsRequest
+// ListLocationsRequest
 type ListLocationsRequest struct {
 	Filters    []LocationFilter `json:"Filters,omitempty"`
 	MaxResults *int64           `json:"MaxResults,omitempty"`

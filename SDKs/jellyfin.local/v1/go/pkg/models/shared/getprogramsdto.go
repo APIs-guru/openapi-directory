@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// GetProgramsDto
+// Get programs dto.
 type GetProgramsDto struct {
 	ChannelIds             []string         `json:"ChannelIds,omitempty"`
 	EnableImageTypes       []ImageTypeEnum  `json:"EnableImageTypes,omitempty"`

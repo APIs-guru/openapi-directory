@@ -1,0 +1,30 @@
+import { SpeakeasyBase } from "../../../internal/utils";
+import { Statement } from "./statement";
+import { Prompt } from "./prompt";
+import { CodeHook } from "./codehook";
+import { FollowUpPrompt } from "./followupprompt";
+import { FulfillmentActivity } from "./fulfillmentactivity";
+import { InputContext } from "./inputcontext";
+import { KendraConfiguration } from "./kendraconfiguration";
+import { OutputContext } from "./outputcontext";
+import { Slot } from "./slot";
+export declare class GetIntentResponse extends SpeakeasyBase {
+    checksum?: string;
+    conclusionStatement?: Statement;
+    confirmationPrompt?: Prompt;
+    createdDate?: Date;
+    description?: string;
+    dialogCodeHook?: CodeHook;
+    followUpPrompt?: FollowUpPrompt;
+    fulfillmentActivity?: FulfillmentActivity;
+    inputContexts?: InputContext[];
+    kendraConfiguration?: KendraConfiguration;
+    lastUpdatedDate?: Date;
+    name?: string;
+    outputContexts?: OutputContext[];
+    parentIntentSignature?: string;
+    rejectionStatement?: Statement;
+    sampleUtterances?: string[];
+    slots?: Slot[];
+    version?: string;
+}

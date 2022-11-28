@@ -1,26 +1,27 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetCompanyEmployeesEmployeeIdPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=employee_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=employee_id" })
   employeeId: number;
 }
 
 
 export class GetCompanyEmployeesEmployeeIdRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetCompanyEmployeesEmployeeIdPathParams;
 }
 
 
 export class GetCompanyEmployeesEmployeeIdResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   employeeResponse?: shared.EmployeeResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

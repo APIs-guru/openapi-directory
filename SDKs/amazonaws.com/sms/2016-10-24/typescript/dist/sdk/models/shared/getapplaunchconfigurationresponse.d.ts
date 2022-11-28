@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ServerGroupLaunchConfiguration } from "./servergrouplaunchconfiguration";
 export declare class GetAppLaunchConfigurationResponse extends SpeakeasyBase {
     appId?: string;

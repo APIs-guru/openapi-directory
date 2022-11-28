@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { StructuralElement } from "./structuralelement";
+
 
 
 // TableOfContents
@@ -8,12 +8,12 @@ import { StructuralElement } from "./structuralelement";
  * A StructuralElement representing a table of contents.
 **/
 export class TableOfContents extends SpeakeasyBase {
-  @Metadata({ data: "json, name=content", elemType: shared.StructuralElement })
+  @SpeakeasyMetadata({ data: "json, name=content", elemType: StructuralElement })
   content?: StructuralElement[];
 
-  @Metadata({ data: "json, name=suggestedDeletionIds" })
+  @SpeakeasyMetadata({ data: "json, name=suggestedDeletionIds" })
   suggestedDeletionIds?: string[];
 
-  @Metadata({ data: "json, name=suggestedInsertionIds" })
+  @SpeakeasyMetadata({ data: "json, name=suggestedInsertionIds" })
   suggestedInsertionIds?: string[];
 }

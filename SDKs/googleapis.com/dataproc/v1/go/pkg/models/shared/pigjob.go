@@ -1,5 +1,7 @@
 package shared
 
+// PigJob
+// A Dataproc job for running Apache Pig (https://pig.apache.org/) queries on YARN.
 type PigJob struct {
 	ContinueOnFailure *bool             `json:"continueOnFailure,omitempty"`
 	JarFileUris       []string          `json:"jarFileUris,omitempty"`

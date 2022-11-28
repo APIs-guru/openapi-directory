@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // MonitoringJobDefinitionSummary
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Summary information about a monitoring job.
 **/
 export class MonitoringJobDefinitionSummary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CreationTime" })
+  @SpeakeasyMetadata({ data: "json, name=CreationTime" })
   creationTime: Date;
 
-  @Metadata({ data: "json, name=EndpointName" })
+  @SpeakeasyMetadata({ data: "json, name=EndpointName" })
   endpointName: string;
 
-  @Metadata({ data: "json, name=MonitoringJobDefinitionArn" })
+  @SpeakeasyMetadata({ data: "json, name=MonitoringJobDefinitionArn" })
   monitoringJobDefinitionArn: string;
 
-  @Metadata({ data: "json, name=MonitoringJobDefinitionName" })
+  @SpeakeasyMetadata({ data: "json, name=MonitoringJobDefinitionName" })
   monitoringJobDefinitionName: string;
 }

@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostGetServiceLastAccessedDetailsActionEnum(str, Enum):
     GET_SERVICE_LAST_ACCESSED_DETAILS = "GetServiceLastAccessedDetails"
@@ -10,8 +14,8 @@ class PostGetServiceLastAccessedDetailsVersionEnum(str, Enum):
 
 @dataclass
 class PostGetServiceLastAccessedDetailsQueryParams:
-    action: PostGetServiceLastAccessedDetailsActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostGetServiceLastAccessedDetailsVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostGetServiceLastAccessedDetailsActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostGetServiceLastAccessedDetailsVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostGetServiceLastAccessedDetailsHeaders:
 
 @dataclass
 class PostGetServiceLastAccessedDetailsRequest:
-    query_params: PostGetServiceLastAccessedDetailsQueryParams = field(default=None)
-    headers: PostGetServiceLastAccessedDetailsHeaders = field(default=None)
+    headers: PostGetServiceLastAccessedDetailsHeaders = field()
+    query_params: PostGetServiceLastAccessedDetailsQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostGetServiceLastAccessedDetailsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

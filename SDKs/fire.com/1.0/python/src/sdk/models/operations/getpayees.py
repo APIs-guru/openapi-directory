@@ -1,9 +1,11 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 class GetPayeesPayeeCreatedByEnum(str, Enum):
@@ -24,22 +26,22 @@ class GetPayeesPayeeStatusEnum(str, Enum):
 @dataclass_json
 @dataclass
 class GetPayeesPayee:
-    account_holder_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'accountHolderName' }})
-    account_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'accountName' }})
-    account_number: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'accountNumber' }})
-    bic: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'bic' }})
-    created_by: Optional[GetPayeesPayeeCreatedByEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'createdBy' }})
-    currency: Optional[shared.OneaccountsGetResponses200ContentApplication1jsonSchemaPropertiesAccountsItemsPropertiesCurrency] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'currency' }})
-    date_created: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'dateCreated', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    iban: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'iban' }})
-    id: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
-    nsc: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'nsc' }})
-    status: Optional[GetPayeesPayeeStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+    account_holder_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('accountHolderName') }})
+    account_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('accountName') }})
+    account_number: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('accountNumber') }})
+    bic: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('bic') }})
+    created_by: Optional[GetPayeesPayeeCreatedByEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('createdBy') }})
+    currency: Optional[shared.OneaccountsGetResponses200ContentApplication1jsonSchemaPropertiesAccountsItemsPropertiesCurrency] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('currency') }})
+    date_created: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('dateCreated'), 'encoder': utils.datetimeisoformat(True), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    iban: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('iban') }})
+    id: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('id') }})
+    nsc: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('nsc') }})
+    status: Optional[GetPayeesPayeeStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('status') }})
     
 
 @dataclass
 class GetPayeesResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     payee: Optional[GetPayeesPayee] = field(default=None)
-    status_code: int = field(default=None)
     

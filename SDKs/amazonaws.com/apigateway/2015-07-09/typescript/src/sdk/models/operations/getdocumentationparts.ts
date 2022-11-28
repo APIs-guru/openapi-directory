@@ -1,109 +1,110 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetDocumentationPartsPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=restapi_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=restapi_id" })
   restapiId: string;
 }
 
 export enum GetDocumentationPartsLocationStatusEnum {
-    Documented = "DOCUMENTED"
-,    Undocumented = "UNDOCUMENTED"
+    Documented = "DOCUMENTED",
+    Undocumented = "UNDOCUMENTED"
 }
 
 export enum GetDocumentationPartsTypeEnum {
-    Api = "API"
-,    Authorizer = "AUTHORIZER"
-,    Model = "MODEL"
-,    Resource = "RESOURCE"
-,    Method = "METHOD"
-,    PathParameter = "PATH_PARAMETER"
-,    QueryParameter = "QUERY_PARAMETER"
-,    RequestHeader = "REQUEST_HEADER"
-,    RequestBody = "REQUEST_BODY"
-,    Response = "RESPONSE"
-,    ResponseHeader = "RESPONSE_HEADER"
-,    ResponseBody = "RESPONSE_BODY"
+    Api = "API",
+    Authorizer = "AUTHORIZER",
+    Model = "MODEL",
+    Resource = "RESOURCE",
+    Method = "METHOD",
+    PathParameter = "PATH_PARAMETER",
+    QueryParameter = "QUERY_PARAMETER",
+    RequestHeader = "REQUEST_HEADER",
+    RequestBody = "REQUEST_BODY",
+    Response = "RESPONSE",
+    ResponseHeader = "RESPONSE_HEADER",
+    ResponseBody = "RESPONSE_BODY"
 }
 
 
 export class GetDocumentationPartsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=limit" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=limit" })
   limit?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=locationStatus" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=locationStatus" })
   locationStatus?: GetDocumentationPartsLocationStatusEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=name" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=name" })
   name?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=path" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=path" })
   path?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=position" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=position" })
   position?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=type" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=type" })
   type?: GetDocumentationPartsTypeEnum;
 }
 
 
 export class GetDocumentationPartsHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
 
 export class GetDocumentationPartsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetDocumentationPartsPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetDocumentationPartsQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: GetDocumentationPartsHeaders;
 }
 
 
 export class GetDocumentationPartsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   badRequestException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   documentationParts?: shared.DocumentationParts;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   notFoundException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   tooManyRequestsException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   unauthorizedException?: any;
 }

@@ -1,6 +1,10 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,List,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -24,25 +28,25 @@ class GetEnabledStandardsHeaders:
 @dataclass_json
 @dataclass
 class GetEnabledStandardsRequestBody:
-    max_results: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'MaxResults' }})
-    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'NextToken' }})
-    standards_subscription_arns: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'StandardsSubscriptionArns' }})
+    max_results: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('MaxResults') }})
+    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('NextToken') }})
+    standards_subscription_arns: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('StandardsSubscriptionArns') }})
     
 
 @dataclass
 class GetEnabledStandardsRequest:
-    query_params: GetEnabledStandardsQueryParams = field(default=None)
-    headers: GetEnabledStandardsHeaders = field(default=None)
-    request: GetEnabledStandardsRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: GetEnabledStandardsHeaders = field()
+    query_params: GetEnabledStandardsQueryParams = field()
+    request: GetEnabledStandardsRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class GetEnabledStandardsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     get_enabled_standards_response: Optional[shared.GetEnabledStandardsResponse] = field(default=None)
     internal_exception: Optional[Any] = field(default=None)
     invalid_access_exception: Optional[Any] = field(default=None)
     invalid_input_exception: Optional[Any] = field(default=None)
     limit_exceeded_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

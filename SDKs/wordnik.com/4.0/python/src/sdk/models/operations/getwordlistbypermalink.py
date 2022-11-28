@@ -1,26 +1,26 @@
 from dataclasses import dataclass, field
-from typing import List
+from typing import Optional
 
 
 @dataclass
 class GetWordListByPermalinkPathParams:
-    permalink: str = field(default=None, metadata={'path_param': { 'field_name': 'permalink', 'style': 'simple', 'explode': False }})
+    permalink: str = field(metadata={'path_param': { 'field_name': 'permalink', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetWordListByPermalinkHeaders:
-    auth_token: str = field(default=None, metadata={'header': { 'field_name': 'auth_token', 'style': 'simple', 'explode': False }})
+    auth_token: str = field(metadata={'header': { 'field_name': 'auth_token', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetWordListByPermalinkRequest:
-    path_params: GetWordListByPermalinkPathParams = field(default=None)
-    headers: GetWordListByPermalinkHeaders = field(default=None)
+    headers: GetWordListByPermalinkHeaders = field()
+    path_params: GetWordListByPermalinkPathParams = field()
     
 
 @dataclass
 class GetWordListByPermalinkResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

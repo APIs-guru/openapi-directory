@@ -22,42 +22,42 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var StartMailboxExportJobRequest = /** @class */ (function (_super) {
     __extends(StartMailboxExportJobRequest, _super);
     function StartMailboxExportJobRequest() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=ClientToken" }),
+        SpeakeasyMetadata({ data: "json, name=ClientToken" }),
         __metadata("design:type", String)
     ], StartMailboxExportJobRequest.prototype, "clientToken", void 0);
     __decorate([
-        Metadata({ data: "json, name=Description" }),
+        SpeakeasyMetadata({ data: "json, name=Description" }),
         __metadata("design:type", String)
     ], StartMailboxExportJobRequest.prototype, "description", void 0);
     __decorate([
-        Metadata({ data: "json, name=EntityId" }),
+        SpeakeasyMetadata({ data: "json, name=EntityId" }),
         __metadata("design:type", String)
     ], StartMailboxExportJobRequest.prototype, "entityId", void 0);
     __decorate([
-        Metadata({ data: "json, name=KmsKeyArn" }),
+        SpeakeasyMetadata({ data: "json, name=KmsKeyArn" }),
         __metadata("design:type", String)
     ], StartMailboxExportJobRequest.prototype, "kmsKeyArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=OrganizationId" }),
+        SpeakeasyMetadata({ data: "json, name=OrganizationId" }),
         __metadata("design:type", String)
     ], StartMailboxExportJobRequest.prototype, "organizationId", void 0);
     __decorate([
-        Metadata({ data: "json, name=RoleArn" }),
+        SpeakeasyMetadata({ data: "json, name=RoleArn" }),
         __metadata("design:type", String)
     ], StartMailboxExportJobRequest.prototype, "roleArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=S3BucketName" }),
+        SpeakeasyMetadata({ data: "json, name=S3BucketName" }),
         __metadata("design:type", String)
     ], StartMailboxExportJobRequest.prototype, "s3BucketName", void 0);
     __decorate([
-        Metadata({ data: "json, name=S3Prefix" }),
+        SpeakeasyMetadata({ data: "json, name=S3Prefix" }),
         __metadata("design:type", String)
     ], StartMailboxExportJobRequest.prototype, "s3Prefix", void 0);
     return StartMailboxExportJobRequest;

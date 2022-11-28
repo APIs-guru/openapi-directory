@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum GetSystemInfo200ApplicationJsonActionEnum {
     GetSystemInfo = "getSystemInfo"
@@ -10,35 +11,35 @@ export enum GetSystemInfo200ApplicationJsonActionEnum {
  * Information about the service
 **/
 export class GetSystemInfo200ApplicationJsonData extends SpeakeasyBase {
-  @Metadata({ data: "json, name=rudder" })
+  @SpeakeasyMetadata({ data: "json, name=rudder" })
   rudder: any;
 }
 
 export enum GetSystemInfo200ApplicationJsonResultEnum {
-    Success = "success"
-,    Error = "error"
+    Success = "success",
+    Error = "error"
 }
 
 
 export class GetSystemInfo200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=action" })
+  @SpeakeasyMetadata({ data: "json, name=action" })
   action: GetSystemInfo200ApplicationJsonActionEnum;
 
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data: GetSystemInfo200ApplicationJsonData;
 
-  @Metadata({ data: "json, name=result" })
+  @SpeakeasyMetadata({ data: "json, name=result" })
   result: GetSystemInfo200ApplicationJsonResultEnum;
 }
 
 
 export class GetSystemInfoResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getSystemInfo200ApplicationJsonObject?: GetSystemInfo200ApplicationJson;
 }

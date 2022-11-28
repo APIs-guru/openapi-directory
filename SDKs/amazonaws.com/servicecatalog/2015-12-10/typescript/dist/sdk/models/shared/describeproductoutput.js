@@ -22,28 +22,30 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { BudgetDetail } from "./budgetdetail";
+import { LaunchPath } from "./launchpath";
 import { ProductViewSummary } from "./productviewsummary";
+import { ProvisioningArtifact } from "./provisioningartifact";
 var DescribeProductOutput = /** @class */ (function (_super) {
     __extends(DescribeProductOutput, _super);
     function DescribeProductOutput() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Budgets", elemType: shared.BudgetDetail }),
+        SpeakeasyMetadata({ data: "json, name=Budgets", elemType: BudgetDetail }),
         __metadata("design:type", Array)
     ], DescribeProductOutput.prototype, "budgets", void 0);
     __decorate([
-        Metadata({ data: "json, name=LaunchPaths", elemType: shared.LaunchPath }),
+        SpeakeasyMetadata({ data: "json, name=LaunchPaths", elemType: LaunchPath }),
         __metadata("design:type", Array)
     ], DescribeProductOutput.prototype, "launchPaths", void 0);
     __decorate([
-        Metadata({ data: "json, name=ProductViewSummary" }),
+        SpeakeasyMetadata({ data: "json, name=ProductViewSummary" }),
         __metadata("design:type", ProductViewSummary)
     ], DescribeProductOutput.prototype, "productViewSummary", void 0);
     __decorate([
-        Metadata({ data: "json, name=ProvisioningArtifacts", elemType: shared.ProvisioningArtifact }),
+        SpeakeasyMetadata({ data: "json, name=ProvisioningArtifacts", elemType: ProvisioningArtifact }),
         __metadata("design:type", Array)
     ], DescribeProductOutput.prototype, "provisioningArtifacts", void 0);
     return DescribeProductOutput;

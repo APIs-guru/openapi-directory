@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import computelocation_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class MetricProcessingConfig:
-    compute_location: computelocation_enum.ComputeLocationEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'computeLocation' }})
+    r"""MetricProcessingConfig
+    The processing configuration for the given metric property. You can configure metrics to be computed at the edge or in the Amazon Web Services Cloud. By default, metrics are forwarded to the cloud.
+    """
+    
+    compute_location: ComputeLocationEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('computeLocation') }})
     

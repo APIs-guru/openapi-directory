@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class Adexchangebuyer2BiddersFilterSetsGetPathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,20 +26,20 @@ class Adexchangebuyer2BiddersFilterSetsGetQueryParams:
 
 @dataclass
 class Adexchangebuyer2BiddersFilterSetsGetSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class Adexchangebuyer2BiddersFilterSetsGetRequest:
-    path_params: Adexchangebuyer2BiddersFilterSetsGetPathParams = field(default=None)
-    query_params: Adexchangebuyer2BiddersFilterSetsGetQueryParams = field(default=None)
-    security: Adexchangebuyer2BiddersFilterSetsGetSecurity = field(default=None)
+    path_params: Adexchangebuyer2BiddersFilterSetsGetPathParams = field()
+    query_params: Adexchangebuyer2BiddersFilterSetsGetQueryParams = field()
+    security: Adexchangebuyer2BiddersFilterSetsGetSecurity = field()
     
 
 @dataclass
 class Adexchangebuyer2BiddersFilterSetsGetResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     filter_set: Optional[shared.FilterSet] = field(default=None)
-    status_code: int = field(default=None)
     

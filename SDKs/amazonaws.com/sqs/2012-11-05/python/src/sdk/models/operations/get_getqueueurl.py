@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetGetQueueURLActionEnum(str, Enum):
     GET_QUEUE_URL = "GetQueueUrl"
@@ -10,10 +14,10 @@ class GetGetQueueURLVersionEnum(str, Enum):
 
 @dataclass
 class GetGetQueueURLQueryParams:
-    action: GetGetQueueURLActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    queue_name: str = field(default=None, metadata={'query_param': { 'field_name': 'QueueName', 'style': 'form', 'explode': True }})
+    action: GetGetQueueURLActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    queue_name: str = field(metadata={'query_param': { 'field_name': 'QueueName', 'style': 'form', 'explode': True }})
+    version: GetGetQueueURLVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     queue_owner_aws_account_id: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'QueueOwnerAWSAccountId', 'style': 'form', 'explode': True }})
-    version: GetGetQueueURLVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -29,13 +33,13 @@ class GetGetQueueURLHeaders:
 
 @dataclass
 class GetGetQueueURLRequest:
-    query_params: GetGetQueueURLQueryParams = field(default=None)
-    headers: GetGetQueueURLHeaders = field(default=None)
+    headers: GetGetQueueURLHeaders = field()
+    query_params: GetGetQueueURLQueryParams = field()
     
 
 @dataclass
 class GetGetQueueURLResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

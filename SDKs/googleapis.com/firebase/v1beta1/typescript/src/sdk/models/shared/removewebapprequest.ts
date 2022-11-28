@@ -1,16 +1,17 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class RemoveWebAppRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=allowMissing" })
+  @SpeakeasyMetadata({ data: "json, name=allowMissing" })
   allowMissing?: boolean;
 
-  @Metadata({ data: "json, name=etag" })
+  @SpeakeasyMetadata({ data: "json, name=etag" })
   etag?: string;
 
-  @Metadata({ data: "json, name=immediate" })
+  @SpeakeasyMetadata({ data: "json, name=immediate" })
   immediate?: boolean;
 
-  @Metadata({ data: "json, name=validateOnly" })
+  @SpeakeasyMetadata({ data: "json, name=validateOnly" })
   validateOnly?: boolean;
 }

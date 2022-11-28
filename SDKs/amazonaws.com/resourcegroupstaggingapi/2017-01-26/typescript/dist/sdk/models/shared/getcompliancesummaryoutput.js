@@ -22,19 +22,19 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { Summary } from "./summary";
 var GetComplianceSummaryOutput = /** @class */ (function (_super) {
     __extends(GetComplianceSummaryOutput, _super);
     function GetComplianceSummaryOutput() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=PaginationToken" }),
+        SpeakeasyMetadata({ data: "json, name=PaginationToken" }),
         __metadata("design:type", String)
     ], GetComplianceSummaryOutput.prototype, "paginationToken", void 0);
     __decorate([
-        Metadata({ data: "json, name=SummaryList", elemType: shared.Summary }),
+        SpeakeasyMetadata({ data: "json, name=SummaryList", elemType: Summary }),
         __metadata("design:type", Array)
     ], GetComplianceSummaryOutput.prototype, "summaryList", void 0);
     return GetComplianceSummaryOutput;

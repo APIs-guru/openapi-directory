@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class LanguageSpokenSpokenExceptionEnum(str, Enum):
     EXCEPTION_UNSPECIFIED = "EXCEPTION_UNSPECIFIED"
@@ -12,7 +14,11 @@ class LanguageSpokenSpokenExceptionEnum(str, Enum):
 @dataclass_json
 @dataclass
 class LanguageSpoken:
-    language_code: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'languageCode' }})
-    spoken: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'spoken' }})
-    spoken_exception: Optional[LanguageSpokenSpokenExceptionEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'spokenException' }})
+    r"""LanguageSpoken
+    Language spoken by at least one staff member.
+    """
+    
+    language_code: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('languageCode') }})
+    spoken: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('spoken') }})
+    spoken_exception: Optional[LanguageSpokenSpokenExceptionEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('spokenException') }})
     

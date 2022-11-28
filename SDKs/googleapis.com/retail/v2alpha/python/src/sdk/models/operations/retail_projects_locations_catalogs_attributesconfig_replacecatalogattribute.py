@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class RetailProjectsLocationsCatalogsAttributesConfigReplaceCatalogAttributePathParams:
-    attributes_config: str = field(default=None, metadata={'path_param': { 'field_name': 'attributesConfig', 'style': 'simple', 'explode': False }})
+    attributes_config: str = field(metadata={'path_param': { 'field_name': 'attributesConfig', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,21 +26,21 @@ class RetailProjectsLocationsCatalogsAttributesConfigReplaceCatalogAttributeQuer
 
 @dataclass
 class RetailProjectsLocationsCatalogsAttributesConfigReplaceCatalogAttributeSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class RetailProjectsLocationsCatalogsAttributesConfigReplaceCatalogAttributeRequest:
-    path_params: RetailProjectsLocationsCatalogsAttributesConfigReplaceCatalogAttributePathParams = field(default=None)
-    query_params: RetailProjectsLocationsCatalogsAttributesConfigReplaceCatalogAttributeQueryParams = field(default=None)
-    request: Optional[shared.GoogleCloudRetailV2alphaReplaceCatalogAttributeRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: RetailProjectsLocationsCatalogsAttributesConfigReplaceCatalogAttributeSecurity = field(default=None)
+    path_params: RetailProjectsLocationsCatalogsAttributesConfigReplaceCatalogAttributePathParams = field()
+    query_params: RetailProjectsLocationsCatalogsAttributesConfigReplaceCatalogAttributeQueryParams = field()
+    security: RetailProjectsLocationsCatalogsAttributesConfigReplaceCatalogAttributeSecurity = field()
+    request: Optional[shared.GoogleCloudRetailV2alphaReplaceCatalogAttributeRequestInput] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class RetailProjectsLocationsCatalogsAttributesConfigReplaceCatalogAttributeResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_cloud_retail_v2alpha_attributes_config: Optional[shared.GoogleCloudRetailV2alphaAttributesConfig] = field(default=None)
-    status_code: int = field(default=None)
     

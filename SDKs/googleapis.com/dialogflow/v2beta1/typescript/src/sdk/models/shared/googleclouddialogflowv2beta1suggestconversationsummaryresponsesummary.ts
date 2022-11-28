@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudDialogflowV2beta1SuggestConversationSummaryResponseSummary
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Generated summary for a conversation.
 **/
 export class GoogleCloudDialogflowV2beta1SuggestConversationSummaryResponseSummary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=answerRecord" })
+  @SpeakeasyMetadata({ data: "json, name=answerRecord" })
   answerRecord?: string;
 
-  @Metadata({ data: "json, name=text" })
+  @SpeakeasyMetadata({ data: "json, name=text" })
   text?: string;
 
-  @Metadata({ data: "json, name=textSections" })
+  @SpeakeasyMetadata({ data: "json, name=textSections" })
   textSections?: Map<string, string>;
 }

@@ -1,16 +1,17 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DescribeCustomKeyStoresRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CustomKeyStoreId" })
+  @SpeakeasyMetadata({ data: "json, name=CustomKeyStoreId" })
   customKeyStoreId?: string;
 
-  @Metadata({ data: "json, name=CustomKeyStoreName" })
+  @SpeakeasyMetadata({ data: "json, name=CustomKeyStoreName" })
   customKeyStoreName?: string;
 
-  @Metadata({ data: "json, name=Limit" })
+  @SpeakeasyMetadata({ data: "json, name=Limit" })
   limit?: number;
 
-  @Metadata({ data: "json, name=Marker" })
+  @SpeakeasyMetadata({ data: "json, name=Marker" })
   marker?: string;
 }

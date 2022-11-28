@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // InstanceConfiguration
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Describes the runtime configuration of an AWS App Runner service instance (scaling unit).
 **/
 export class InstanceConfiguration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Cpu" })
+  @SpeakeasyMetadata({ data: "json, name=Cpu" })
   cpu?: string;
 
-  @Metadata({ data: "json, name=InstanceRoleArn" })
+  @SpeakeasyMetadata({ data: "json, name=InstanceRoleArn" })
   instanceRoleArn?: string;
 
-  @Metadata({ data: "json, name=Memory" })
+  @SpeakeasyMetadata({ data: "json, name=Memory" })
   memory?: string;
 }

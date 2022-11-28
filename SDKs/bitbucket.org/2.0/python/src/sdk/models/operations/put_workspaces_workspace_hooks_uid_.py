@@ -1,45 +1,31 @@
 from dataclasses import dataclass, field
 from typing import Any,Optional
+from sdk.models import shared
 
 
 @dataclass
 class PutWorkspacesWorkspaceHooksUIDPathParams:
-    uid: str = field(default=None, metadata={'path_param': { 'field_name': 'uid', 'style': 'simple', 'explode': False }})
-    workspace: str = field(default=None, metadata={'path_param': { 'field_name': 'workspace', 'style': 'simple', 'explode': False }})
-    
-
-@dataclass
-class PutWorkspacesWorkspaceHooksUIDSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    
-
-@dataclass
-class PutWorkspacesWorkspaceHooksUIDSecurityOption2:
-    basic: shared.SchemeBasic = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'basic' }})
-    
-
-@dataclass
-class PutWorkspacesWorkspaceHooksUIDSecurityOption3:
-    api_key: shared.SchemeAPIKey = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    uid: str = field(metadata={'path_param': { 'field_name': 'uid', 'style': 'simple', 'explode': False }})
+    workspace: str = field(metadata={'path_param': { 'field_name': 'workspace', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class PutWorkspacesWorkspaceHooksUIDSecurity:
-    option1: Optional[PutWorkspacesWorkspaceHooksUIDSecurityOption1] = field(default=None, metadata={'security': { 'option': True }})
-    option2: Optional[PutWorkspacesWorkspaceHooksUIDSecurityOption2] = field(default=None, metadata={'security': { 'option': True }})
-    option3: Optional[PutWorkspacesWorkspaceHooksUIDSecurityOption3] = field(default=None, metadata={'security': { 'option': True }})
+    api_key: Optional[shared.SchemeAPIKey] = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    basic: Optional[shared.SchemeBasic] = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'basic' }})
+    oauth2: Optional[shared.SchemeOauth2] = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class PutWorkspacesWorkspaceHooksUIDRequest:
-    path_params: PutWorkspacesWorkspaceHooksUIDPathParams = field(default=None)
-    security: PutWorkspacesWorkspaceHooksUIDSecurity = field(default=None)
+    path_params: PutWorkspacesWorkspaceHooksUIDPathParams = field()
+    security: PutWorkspacesWorkspaceHooksUIDSecurity = field()
     
 
 @dataclass
 class PutWorkspacesWorkspaceHooksUIDResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error: Optional[dict[str, Any]] = field(default=None)
     webhook_subscription: Optional[dict[str, Any]] = field(default=None)
     

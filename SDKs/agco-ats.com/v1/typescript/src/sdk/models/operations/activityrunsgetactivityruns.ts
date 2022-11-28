@@ -1,43 +1,44 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
+
 export enum ActivityRunsGetActivityRunsStatusEnum {
-    Ready = "Ready"
-,    InProgress = "InProgress"
-,    Succeeded = "Succeeded"
-,    Cancelled = "Cancelled"
-,    Failed = "Failed"
+    Ready = "Ready",
+    InProgress = "InProgress",
+    Succeeded = "Succeeded",
+    Cancelled = "Cancelled",
+    Failed = "Failed"
 }
 
 
 export class ActivityRunsGetActivityRunsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=limit" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=limit" })
   limit?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=offset" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=offset" })
   offset?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=status" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=status" })
   status?: ActivityRunsGetActivityRunsStatusEnum;
 }
 
 
 export class ActivityRunsGetActivityRunsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: ActivityRunsGetActivityRunsQueryParams;
 }
 
 
 export class ActivityRunsGetActivityRunsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   apiModelsApiError?: shared.ApiModelsApiError;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   apiPagedResponseBuildSystemSharedDtoActivityRun?: shared.ApiPagedResponseBuildSystemSharedDtoActivityRun;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

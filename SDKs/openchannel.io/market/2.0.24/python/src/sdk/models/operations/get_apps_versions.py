@@ -13,12 +13,12 @@ class GetAppsVersionsQueryParams:
 
 @dataclass
 class GetAppsVersionsRequest:
-    query_params: GetAppsVersionsQueryParams = field(default=None)
+    query_params: GetAppsVersionsQueryParams = field()
     
 
 @dataclass
 class GetAppsVersionsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

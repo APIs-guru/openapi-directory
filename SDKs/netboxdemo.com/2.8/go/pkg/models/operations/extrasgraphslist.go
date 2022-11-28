@@ -29,15 +29,15 @@ type ExtrasGraphsListQueryParams struct {
 	TypeN             *string `queryParam:"style=form,explode=true,name=type__n"`
 }
 
-type ExtrasGraphsListRequest struct {
-	QueryParams ExtrasGraphsListQueryParams
-}
-
 type ExtrasGraphsList200ApplicationJSON struct {
 	Count    int64          `json:"count"`
 	Next     *string        `json:"next,omitempty"`
 	Previous *string        `json:"previous,omitempty"`
 	Results  []shared.Graph `json:"results"`
+}
+
+type ExtrasGraphsListRequest struct {
+	QueryParams ExtrasGraphsListQueryParams
 }
 
 type ExtrasGraphsListResponse struct {

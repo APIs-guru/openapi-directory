@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { TestWindowSummary } from "./testwindowsummary";
 /**
  * The algorithm used to perform a backtest and the status of those tests.

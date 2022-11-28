@@ -1,4 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AbortTransactionResult } from "./aborttransactionresult";
 import { CommitTransactionResult } from "./committransactionresult";
 import { EndSessionResult } from "./endsessionresult";
@@ -8,25 +8,26 @@ import { StartSessionResult } from "./startsessionresult";
 import { StartTransactionResult } from "./starttransactionresult";
 
 
+
 export class SendCommandResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AbortTransaction" })
+  @SpeakeasyMetadata({ data: "json, name=AbortTransaction" })
   abortTransaction?: AbortTransactionResult;
 
-  @Metadata({ data: "json, name=CommitTransaction" })
+  @SpeakeasyMetadata({ data: "json, name=CommitTransaction" })
   commitTransaction?: CommitTransactionResult;
 
-  @Metadata({ data: "json, name=EndSession" })
+  @SpeakeasyMetadata({ data: "json, name=EndSession" })
   endSession?: EndSessionResult;
 
-  @Metadata({ data: "json, name=ExecuteStatement" })
+  @SpeakeasyMetadata({ data: "json, name=ExecuteStatement" })
   executeStatement?: ExecuteStatementResult;
 
-  @Metadata({ data: "json, name=FetchPage" })
+  @SpeakeasyMetadata({ data: "json, name=FetchPage" })
   fetchPage?: FetchPageResult;
 
-  @Metadata({ data: "json, name=StartSession" })
+  @SpeakeasyMetadata({ data: "json, name=StartSession" })
   startSession?: StartSessionResult;
 
-  @Metadata({ data: "json, name=StartTransaction" })
+  @SpeakeasyMetadata({ data: "json, name=StartTransaction" })
   startTransaction?: StartTransactionResult;
 }

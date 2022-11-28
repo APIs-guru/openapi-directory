@@ -10,6 +10,8 @@ const (
 	GoogleCloudIntegrationsV1alphaMonitorExecutionStatsRequestMashQueryComponentBorgTaskMetricEnumTaskIndividualDuration    GoogleCloudIntegrationsV1alphaMonitorExecutionStatsRequestMashQueryComponentBorgTaskMetricEnum = "TASK_INDIVIDUAL_DURATION"
 )
 
+// GoogleCloudIntegrationsV1alphaMonitorExecutionStatsRequestMashQueryComponent
+// The components for constructing MashQuery.
 type GoogleCloudIntegrationsV1alphaMonitorExecutionStatsRequestMashQueryComponent struct {
 	BorgTaskMetric *GoogleCloudIntegrationsV1alphaMonitorExecutionStatsRequestMashQueryComponentBorgTaskMetricEnum `json:"borgTaskMetric,omitempty"`
 	DataFilters    []string                                                                                        `json:"dataFilters,omitempty"`

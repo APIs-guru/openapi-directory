@@ -1,44 +1,45 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class PostUsersIdAttachmentsPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" })
   id: number;
 }
 
 
 export class PostUsersIdAttachmentsRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=file_data" })
+  @SpeakeasyMetadata({ data: "json, name=file_data" })
   fileData?: string;
 
-  @Metadata({ data: "json, name=file_name" })
+  @SpeakeasyMetadata({ data: "json, name=file_name" })
   fileName?: string;
 
-  @Metadata({ data: "json, name=title" })
+  @SpeakeasyMetadata({ data: "json, name=title" })
   title?: string;
 }
 
 
 export class PostUsersIdAttachmentsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: PostUsersIdAttachmentsPathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request?: PostUsersIdAttachmentsRequestBody;
 }
 
 
 export class PostUsersIdAttachmentsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   attachment?: shared.Attachment;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   error?: shared.Error;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

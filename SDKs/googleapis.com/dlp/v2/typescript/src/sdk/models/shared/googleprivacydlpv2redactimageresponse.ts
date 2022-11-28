@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GooglePrivacyDlpV2InspectResult } from "./googleprivacydlpv2inspectresult";
+
 
 
 // GooglePrivacyDlpV2RedactImageResponse
@@ -7,12 +8,12 @@ import { GooglePrivacyDlpV2InspectResult } from "./googleprivacydlpv2inspectresu
  * Results of redacting an image.
 **/
 export class GooglePrivacyDlpV2RedactImageResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=extractedText" })
+  @SpeakeasyMetadata({ data: "json, name=extractedText" })
   extractedText?: string;
 
-  @Metadata({ data: "json, name=inspectResult" })
+  @SpeakeasyMetadata({ data: "json, name=inspectResult" })
   inspectResult?: GooglePrivacyDlpV2InspectResult;
 
-  @Metadata({ data: "json, name=redactedImage" })
+  @SpeakeasyMetadata({ data: "json, name=redactedImage" })
   redactedImage?: string;
 }

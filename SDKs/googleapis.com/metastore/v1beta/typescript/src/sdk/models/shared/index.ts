@@ -39,6 +39,7 @@ export * from "./security";
 export * from "./service";
 export * from "./setiampolicyrequest";
 export * from "./status";
+export * from "./telemetryconfig";
 export * from "./testiampermissionsrequest";
 export * from "./testiampermissionsresponse";
 export * from "./xgafvenum";

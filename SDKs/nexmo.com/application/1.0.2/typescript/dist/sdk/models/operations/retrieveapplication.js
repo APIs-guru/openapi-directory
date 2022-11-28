@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var RetrieveApplicationPathParams = /** @class */ (function (_super) {
     __extends(RetrieveApplicationPathParams, _super);
@@ -30,7 +30,7 @@ var RetrieveApplicationPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=app_id" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=app_id" }),
         __metadata("design:type", String)
     ], RetrieveApplicationPathParams.prototype, "appId", void 0);
     return RetrieveApplicationPathParams;
@@ -42,11 +42,11 @@ var RetrieveApplicationQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=api_key" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=api_key" }),
         __metadata("design:type", String)
     ], RetrieveApplicationQueryParams.prototype, "apiKey", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=api_secret" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=api_secret" }),
         __metadata("design:type", String)
     ], RetrieveApplicationQueryParams.prototype, "apiSecret", void 0);
     return RetrieveApplicationQueryParams;
@@ -58,11 +58,11 @@ var RetrieveApplicationRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", RetrieveApplicationPathParams)
     ], RetrieveApplicationRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", RetrieveApplicationQueryParams)
     ], RetrieveApplicationRequest.prototype, "queryParams", void 0);
     return RetrieveApplicationRequest;
@@ -74,15 +74,15 @@ var RetrieveApplicationResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], RetrieveApplicationResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], RetrieveApplicationResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.Application)
     ], RetrieveApplicationResponse.prototype, "application", void 0);
     return RetrieveApplicationResponse;

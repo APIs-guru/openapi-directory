@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 
 class GetComposeEnvironmentsActionEnum(str, Enum):
     COMPOSE_ENVIRONMENTS = "ComposeEnvironments"
@@ -10,10 +14,10 @@ class GetComposeEnvironmentsVersionEnum(str, Enum):
 
 @dataclass
 class GetComposeEnvironmentsQueryParams:
-    action: GetComposeEnvironmentsActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetComposeEnvironmentsActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: GetComposeEnvironmentsVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     application_name: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'ApplicationName', 'style': 'form', 'explode': True }})
     group_name: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'GroupName', 'style': 'form', 'explode': True }})
-    version: GetComposeEnvironmentsVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     version_labels: Optional[List[str]] = field(default=None, metadata={'query_param': { 'field_name': 'VersionLabels', 'style': 'form', 'explode': True }})
     
 
@@ -30,13 +34,13 @@ class GetComposeEnvironmentsHeaders:
 
 @dataclass
 class GetComposeEnvironmentsRequest:
-    query_params: GetComposeEnvironmentsQueryParams = field(default=None)
-    headers: GetComposeEnvironmentsHeaders = field(default=None)
+    headers: GetComposeEnvironmentsHeaders = field()
+    query_params: GetComposeEnvironmentsQueryParams = field()
     
 
 @dataclass
 class GetComposeEnvironmentsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

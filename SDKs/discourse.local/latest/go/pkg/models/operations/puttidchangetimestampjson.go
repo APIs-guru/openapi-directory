@@ -13,14 +13,14 @@ type PutTIDChangeTimestampJSONRequestBody struct {
 	Timestamp string `json:"timestamp"`
 }
 
+type PutTIDChangeTimestampJSON200ApplicationJSON struct {
+	Success *string `json:"success,omitempty"`
+}
+
 type PutTIDChangeTimestampJSONRequest struct {
 	PathParams PutTIDChangeTimestampJSONPathParams
 	Headers    PutTIDChangeTimestampJSONHeaders
 	Request    *PutTIDChangeTimestampJSONRequestBody `request:"mediaType=application/json"`
-}
-
-type PutTIDChangeTimestampJSON200ApplicationJSON struct {
-	Success *string `json:"success,omitempty"`
 }
 
 type PutTIDChangeTimestampJSONResponse struct {

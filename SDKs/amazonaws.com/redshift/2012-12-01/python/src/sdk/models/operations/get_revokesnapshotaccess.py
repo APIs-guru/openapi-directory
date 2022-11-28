@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetRevokeSnapshotAccessActionEnum(str, Enum):
     REVOKE_SNAPSHOT_ACCESS = "RevokeSnapshotAccess"
@@ -10,11 +14,11 @@ class GetRevokeSnapshotAccessVersionEnum(str, Enum):
 
 @dataclass
 class GetRevokeSnapshotAccessQueryParams:
-    account_with_restore_access: str = field(default=None, metadata={'query_param': { 'field_name': 'AccountWithRestoreAccess', 'style': 'form', 'explode': True }})
-    action: GetRevokeSnapshotAccessActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    account_with_restore_access: str = field(metadata={'query_param': { 'field_name': 'AccountWithRestoreAccess', 'style': 'form', 'explode': True }})
+    action: GetRevokeSnapshotAccessActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    snapshot_identifier: str = field(metadata={'query_param': { 'field_name': 'SnapshotIdentifier', 'style': 'form', 'explode': True }})
+    version: GetRevokeSnapshotAccessVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     snapshot_cluster_identifier: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'SnapshotClusterIdentifier', 'style': 'form', 'explode': True }})
-    snapshot_identifier: str = field(default=None, metadata={'query_param': { 'field_name': 'SnapshotIdentifier', 'style': 'form', 'explode': True }})
-    version: GetRevokeSnapshotAccessVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -30,13 +34,13 @@ class GetRevokeSnapshotAccessHeaders:
 
 @dataclass
 class GetRevokeSnapshotAccessRequest:
-    query_params: GetRevokeSnapshotAccessQueryParams = field(default=None)
-    headers: GetRevokeSnapshotAccessHeaders = field(default=None)
+    headers: GetRevokeSnapshotAccessHeaders = field()
+    query_params: GetRevokeSnapshotAccessQueryParams = field()
     
 
 @dataclass
 class GetRevokeSnapshotAccessResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

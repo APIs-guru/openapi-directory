@@ -4,6 +4,9 @@ import (
 	"time"
 )
 
+// Assignment
+//
+//	The Assignment data structure represents a single assignment of a HIT to a Worker. The assignment tracks the Worker's efforts to complete the HIT, and contains the results for later retrieval.
 type Assignment struct {
 	AcceptTime        *time.Time            `json:"AcceptTime,omitempty"`
 	Answer            *string               `json:"Answer,omitempty"`

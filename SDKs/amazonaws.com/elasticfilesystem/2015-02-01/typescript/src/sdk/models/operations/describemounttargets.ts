@@ -1,80 +1,81 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class DescribeMountTargetsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=AccessPointId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=AccessPointId" })
   accessPointId?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=FileSystemId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=FileSystemId" })
   fileSystemId?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Marker" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Marker" })
   marker?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=MaxItems" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=MaxItems" })
   maxItems?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=MountTargetId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=MountTargetId" })
   mountTargetId?: string;
 }
 
 
 export class DescribeMountTargetsHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
 
 export class DescribeMountTargetsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: DescribeMountTargetsQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: DescribeMountTargetsHeaders;
 }
 
 
 export class DescribeMountTargetsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   accessPointNotFound?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   badRequest?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   describeMountTargetsResponse?: shared.DescribeMountTargetsResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   fileSystemNotFound?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   internalServerError?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   mountTargetNotFound?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Completeness
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Indicates that the builder claims certain fields in this message to be complete.
 **/
 export class Completeness extends SpeakeasyBase {
-  @Metadata({ data: "json, name=arguments" })
+  @SpeakeasyMetadata({ data: "json, name=arguments" })
   arguments?: boolean;
 
-  @Metadata({ data: "json, name=environment" })
+  @SpeakeasyMetadata({ data: "json, name=environment" })
   environment?: boolean;
 
-  @Metadata({ data: "json, name=materials" })
+  @SpeakeasyMetadata({ data: "json, name=materials" })
   materials?: boolean;
 }

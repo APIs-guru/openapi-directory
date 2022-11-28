@@ -1,23 +1,23 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { LiveStreamConfigurationIssue } from "./livestreamconfigurationissue";
 
+
 export enum LiveStreamHealthStatusStatusEnum {
-    Good = "good"
-,    Ok = "ok"
-,    Bad = "bad"
-,    NoData = "noData"
-,    Revoked = "revoked"
+    Good = "good",
+    Ok = "ok",
+    Bad = "bad",
+    NoData = "noData",
+    Revoked = "revoked"
 }
 
 
 export class LiveStreamHealthStatus extends SpeakeasyBase {
-  @Metadata({ data: "json, name=configurationIssues", elemType: shared.LiveStreamConfigurationIssue })
+  @SpeakeasyMetadata({ data: "json, name=configurationIssues", elemType: LiveStreamConfigurationIssue })
   configurationIssues?: LiveStreamConfigurationIssue[];
 
-  @Metadata({ data: "json, name=lastUpdateTimeSeconds" })
+  @SpeakeasyMetadata({ data: "json, name=lastUpdateTimeSeconds" })
   lastUpdateTimeSeconds?: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: LiveStreamHealthStatusStatusEnum;
 }

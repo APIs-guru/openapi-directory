@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GlueDataCatalogConfigurationUpdate } from "./gluedatacatalogconfigurationupdate";
+
 
 
 // CatalogConfigurationUpdate
@@ -7,6 +8,6 @@ import { GlueDataCatalogConfigurationUpdate } from "./gluedatacatalogconfigurati
  * Updates to 
 **/
 export class CatalogConfigurationUpdate extends SpeakeasyBase {
-  @Metadata({ data: "json, name=GlueDataCatalogConfigurationUpdate" })
+  @SpeakeasyMetadata({ data: "json, name=GlueDataCatalogConfigurationUpdate" })
   glueDataCatalogConfigurationUpdate: GlueDataCatalogConfigurationUpdate;
 }

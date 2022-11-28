@@ -1,50 +1,51 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetPlansIdPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" })
   id: string;
 }
 
 
 export class GetPlansIdQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=device" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=device" })
   device?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=false;name=ff" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=ff" })
   ff?: shared.FeatureFlagsEnum[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=lang" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=lang" })
   lang?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=false;name=segments" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=segments" })
   segments?: string[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=sub" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sub" })
   sub?: string;
 }
 
 
 export class GetPlansIdRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetPlansIdPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetPlansIdQueryParams;
 }
 
 
 export class GetPlansIdResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   plan?: shared.Plan;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   serviceError?: shared.ServiceError;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

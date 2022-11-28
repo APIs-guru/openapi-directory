@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // SiteVerificationWebResourceResourceSite
 /**
  * The address and type of a site that is verified or will be verified.
@@ -33,11 +33,11 @@ var SiteVerificationWebResourceResourceSite = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=identifier" }),
+        SpeakeasyMetadata({ data: "json, name=identifier" }),
         __metadata("design:type", String)
     ], SiteVerificationWebResourceResourceSite.prototype, "identifier", void 0);
     __decorate([
-        Metadata({ data: "json, name=type" }),
+        SpeakeasyMetadata({ data: "json, name=type" }),
         __metadata("design:type", String)
     ], SiteVerificationWebResourceResourceSite.prototype, "type", void 0);
     return SiteVerificationWebResourceResourceSite;
@@ -49,15 +49,15 @@ var SiteVerificationWebResourceResource = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=id" }),
+        SpeakeasyMetadata({ data: "json, name=id" }),
         __metadata("design:type", String)
     ], SiteVerificationWebResourceResource.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "json, name=owners" }),
+        SpeakeasyMetadata({ data: "json, name=owners" }),
         __metadata("design:type", Array)
     ], SiteVerificationWebResourceResource.prototype, "owners", void 0);
     __decorate([
-        Metadata({ data: "json, name=site" }),
+        SpeakeasyMetadata({ data: "json, name=site" }),
         __metadata("design:type", SiteVerificationWebResourceResourceSite)
     ], SiteVerificationWebResourceResource.prototype, "site", void 0);
     return SiteVerificationWebResourceResource;

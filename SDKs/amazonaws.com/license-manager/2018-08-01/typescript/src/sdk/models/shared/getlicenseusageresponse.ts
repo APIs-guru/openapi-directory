@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { LicenseUsage } from "./licenseusage";
 
 
+
 export class GetLicenseUsageResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=LicenseUsage" })
+  @SpeakeasyMetadata({ data: "json, name=LicenseUsage" })
   licenseUsage?: LicenseUsage;
 }

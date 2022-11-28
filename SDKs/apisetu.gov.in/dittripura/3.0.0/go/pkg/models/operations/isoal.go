@@ -27,11 +27,6 @@ type IsoalSecurity struct {
 	ClientID shared.SchemeClientID `security:"scheme,type=apiKey,subtype=header"`
 }
 
-type IsoalRequest struct {
-	Request  *IsoalRequestBody `request:"mediaType=application/json"`
-	Security IsoalSecurity
-}
-
 type Isoal400ApplicationJSONErrorEnum string
 
 const (
@@ -161,6 +156,11 @@ const (
 type Isoal504ApplicationJSON struct {
 	Error            *Isoal504ApplicationJSONErrorEnum            `json:"error,omitempty"`
 	ErrorDescription *Isoal504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
+}
+
+type IsoalRequest struct {
+	Request  *IsoalRequestBody `request:"mediaType=application/json"`
+	Security IsoalSecurity
 }
 
 type IsoalResponse struct {

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SolutionConfig } from "./solutionconfig";
 import { TrainingModeEnum } from "./trainingmodeenum";
 import { TunedHpoParams } from "./tunedhpoparams";
@@ -36,63 +36,63 @@ var SolutionVersion = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=creationDateTime" }),
+        SpeakeasyMetadata({ data: "json, name=creationDateTime" }),
         __metadata("design:type", Date)
     ], SolutionVersion.prototype, "creationDateTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=datasetGroupArn" }),
+        SpeakeasyMetadata({ data: "json, name=datasetGroupArn" }),
         __metadata("design:type", String)
     ], SolutionVersion.prototype, "datasetGroupArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=eventType" }),
+        SpeakeasyMetadata({ data: "json, name=eventType" }),
         __metadata("design:type", String)
     ], SolutionVersion.prototype, "eventType", void 0);
     __decorate([
-        Metadata({ data: "json, name=failureReason" }),
+        SpeakeasyMetadata({ data: "json, name=failureReason" }),
         __metadata("design:type", String)
     ], SolutionVersion.prototype, "failureReason", void 0);
     __decorate([
-        Metadata({ data: "json, name=lastUpdatedDateTime" }),
+        SpeakeasyMetadata({ data: "json, name=lastUpdatedDateTime" }),
         __metadata("design:type", Date)
     ], SolutionVersion.prototype, "lastUpdatedDateTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=performAutoML" }),
+        SpeakeasyMetadata({ data: "json, name=performAutoML" }),
         __metadata("design:type", Boolean)
     ], SolutionVersion.prototype, "performAutoMl", void 0);
     __decorate([
-        Metadata({ data: "json, name=performHPO" }),
+        SpeakeasyMetadata({ data: "json, name=performHPO" }),
         __metadata("design:type", Boolean)
     ], SolutionVersion.prototype, "performHpo", void 0);
     __decorate([
-        Metadata({ data: "json, name=recipeArn" }),
+        SpeakeasyMetadata({ data: "json, name=recipeArn" }),
         __metadata("design:type", String)
     ], SolutionVersion.prototype, "recipeArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=solutionArn" }),
+        SpeakeasyMetadata({ data: "json, name=solutionArn" }),
         __metadata("design:type", String)
     ], SolutionVersion.prototype, "solutionArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=solutionConfig" }),
+        SpeakeasyMetadata({ data: "json, name=solutionConfig" }),
         __metadata("design:type", SolutionConfig)
     ], SolutionVersion.prototype, "solutionConfig", void 0);
     __decorate([
-        Metadata({ data: "json, name=solutionVersionArn" }),
+        SpeakeasyMetadata({ data: "json, name=solutionVersionArn" }),
         __metadata("design:type", String)
     ], SolutionVersion.prototype, "solutionVersionArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=status" }),
+        SpeakeasyMetadata({ data: "json, name=status" }),
         __metadata("design:type", String)
     ], SolutionVersion.prototype, "status", void 0);
     __decorate([
-        Metadata({ data: "json, name=trainingHours" }),
+        SpeakeasyMetadata({ data: "json, name=trainingHours" }),
         __metadata("design:type", Number)
     ], SolutionVersion.prototype, "trainingHours", void 0);
     __decorate([
-        Metadata({ data: "json, name=trainingMode" }),
+        SpeakeasyMetadata({ data: "json, name=trainingMode" }),
         __metadata("design:type", String)
     ], SolutionVersion.prototype, "trainingMode", void 0);
     __decorate([
-        Metadata({ data: "json, name=tunedHPOParams" }),
+        SpeakeasyMetadata({ data: "json, name=tunedHPOParams" }),
         __metadata("design:type", TunedHpoParams)
     ], SolutionVersion.prototype, "tunedHpoParams", void 0);
     return SolutionVersion;

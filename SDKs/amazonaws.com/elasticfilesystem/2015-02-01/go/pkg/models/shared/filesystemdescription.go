@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// FileSystemDescription
+// A description of the file system.
 type FileSystemDescription struct {
 	AvailabilityZoneID           *string             `json:"AvailabilityZoneId,omitempty"`
 	AvailabilityZoneName         *string             `json:"AvailabilityZoneName,omitempty"`

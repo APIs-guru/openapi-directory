@@ -1,34 +1,34 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AddOnRequest } from "./addonrequest";
 import { Tag } from "./tag";
 
 
+
 export class CreateDiskFromSnapshotRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=addOns", elemType: shared.AddOnRequest })
+  @SpeakeasyMetadata({ data: "json, name=addOns", elemType: AddOnRequest })
   addOns?: AddOnRequest[];
 
-  @Metadata({ data: "json, name=availabilityZone" })
+  @SpeakeasyMetadata({ data: "json, name=availabilityZone" })
   availabilityZone: string;
 
-  @Metadata({ data: "json, name=diskName" })
+  @SpeakeasyMetadata({ data: "json, name=diskName" })
   diskName: string;
 
-  @Metadata({ data: "json, name=diskSnapshotName" })
+  @SpeakeasyMetadata({ data: "json, name=diskSnapshotName" })
   diskSnapshotName?: string;
 
-  @Metadata({ data: "json, name=restoreDate" })
+  @SpeakeasyMetadata({ data: "json, name=restoreDate" })
   restoreDate?: string;
 
-  @Metadata({ data: "json, name=sizeInGb" })
+  @SpeakeasyMetadata({ data: "json, name=sizeInGb" })
   sizeInGb: number;
 
-  @Metadata({ data: "json, name=sourceDiskName" })
+  @SpeakeasyMetadata({ data: "json, name=sourceDiskName" })
   sourceDiskName?: string;
 
-  @Metadata({ data: "json, name=tags", elemType: shared.Tag })
+  @SpeakeasyMetadata({ data: "json, name=tags", elemType: Tag })
   tags?: Tag[];
 
-  @Metadata({ data: "json, name=useLatestRestorableAutoSnapshot" })
+  @SpeakeasyMetadata({ data: "json, name=useLatestRestorableAutoSnapshot" })
   useLatestRestorableAutoSnapshot?: boolean;
 }

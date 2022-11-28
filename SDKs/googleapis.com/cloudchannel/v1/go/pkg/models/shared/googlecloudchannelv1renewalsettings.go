@@ -11,6 +11,8 @@ const (
 	GoogleCloudChannelV1RenewalSettingsPaymentPlanEnumOffline                GoogleCloudChannelV1RenewalSettingsPaymentPlanEnum = "OFFLINE"
 )
 
+// GoogleCloudChannelV1RenewalSettings
+// Renewal settings for renewable Offers.
 type GoogleCloudChannelV1RenewalSettings struct {
 	EnableRenewal   *bool                                               `json:"enableRenewal,omitempty"`
 	PaymentCycle    *GoogleCloudChannelV1Period                         `json:"paymentCycle,omitempty"`

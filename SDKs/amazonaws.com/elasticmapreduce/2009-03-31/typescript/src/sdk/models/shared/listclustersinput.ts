@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ClusterStateEnum } from "./clusterstateenum";
+
 
 
 // ListClustersInput
@@ -7,15 +8,15 @@ import { ClusterStateEnum } from "./clusterstateenum";
  * This input determines how the ListClusters action filters the list of clusters that it returns.
 **/
 export class ListClustersInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ClusterStates" })
+  @SpeakeasyMetadata({ data: "json, name=ClusterStates" })
   clusterStates?: ClusterStateEnum[];
 
-  @Metadata({ data: "json, name=CreatedAfter" })
+  @SpeakeasyMetadata({ data: "json, name=CreatedAfter" })
   createdAfter?: Date;
 
-  @Metadata({ data: "json, name=CreatedBefore" })
+  @SpeakeasyMetadata({ data: "json, name=CreatedBefore" })
   createdBefore?: Date;
 
-  @Metadata({ data: "json, name=Marker" })
+  @SpeakeasyMetadata({ data: "json, name=Marker" })
   marker?: string;
 }

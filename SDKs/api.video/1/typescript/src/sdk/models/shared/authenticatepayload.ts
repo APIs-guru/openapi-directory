@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class AuthenticatePayload extends SpeakeasyBase {
-  @Metadata({ data: "json, name=apiKey" })
+  @SpeakeasyMetadata({ data: "json, name=apiKey" })
   apiKey: string;
 }

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // ServiceUpdateRequest
 /**
  * A request to apply a service update
@@ -33,7 +33,7 @@ var ServiceUpdateRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=ServiceUpdateNameToApply" }),
+        SpeakeasyMetadata({ data: "json, name=ServiceUpdateNameToApply" }),
         __metadata("design:type", String)
     ], ServiceUpdateRequest.prototype, "serviceUpdateNameToApply", void 0);
     return ServiceUpdateRequest;

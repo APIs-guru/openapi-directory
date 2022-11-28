@@ -1,19 +1,20 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class OrderBillingDetailsApiModel extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Address" })
+  @SpeakeasyMetadata({ data: "json, name=Address" })
   address?: string;
 
-  @Metadata({ data: "json, name=CountryId" })
+  @SpeakeasyMetadata({ data: "json, name=CountryId" })
   countryId?: number;
 
-  @Metadata({ data: "json, name=Email" })
+  @SpeakeasyMetadata({ data: "json, name=Email" })
   email?: string;
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name?: string;
 
-  @Metadata({ data: "json, name=PhoneNumber" })
+  @SpeakeasyMetadata({ data: "json, name=PhoneNumber" })
   phoneNumber?: string;
 }

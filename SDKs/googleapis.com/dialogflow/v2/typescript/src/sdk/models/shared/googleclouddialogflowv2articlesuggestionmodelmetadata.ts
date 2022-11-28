@@ -1,9 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum GoogleCloudDialogflowV2ArticleSuggestionModelMetadataTrainingModelTypeEnum {
-    ModelTypeUnspecified = "MODEL_TYPE_UNSPECIFIED"
-,    SmartReplyDualEncoderModel = "SMART_REPLY_DUAL_ENCODER_MODEL"
-,    SmartReplyBertModel = "SMART_REPLY_BERT_MODEL"
+    ModelTypeUnspecified = "MODEL_TYPE_UNSPECIFIED",
+    SmartReplyDualEncoderModel = "SMART_REPLY_DUAL_ENCODER_MODEL",
+    SmartReplyBertModel = "SMART_REPLY_BERT_MODEL"
 }
 
 
@@ -12,6 +13,6 @@ export enum GoogleCloudDialogflowV2ArticleSuggestionModelMetadataTrainingModelTy
  * Metadata for article suggestion models.
 **/
 export class GoogleCloudDialogflowV2ArticleSuggestionModelMetadata extends SpeakeasyBase {
-  @Metadata({ data: "json, name=trainingModelType" })
+  @SpeakeasyMetadata({ data: "json, name=trainingModelType" })
   trainingModelType?: GoogleCloudDialogflowV2ArticleSuggestionModelMetadataTrainingModelTypeEnum;
 }

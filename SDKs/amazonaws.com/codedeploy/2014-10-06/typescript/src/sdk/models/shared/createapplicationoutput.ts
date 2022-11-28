@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // CreateApplicationOutput
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Represents the output of a <code>CreateApplication</code> operation.
 **/
 export class CreateApplicationOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=applicationId" })
+  @SpeakeasyMetadata({ data: "json, name=applicationId" })
   applicationId?: string;
 }

@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { Rate } from "./rate";
 // Resource
 /**
  * This complex type defines the resource (API method) and the current rate-limit data for that resource.
@@ -34,11 +34,11 @@ var Resource = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], Resource.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=rates", elemType: shared.Rate }),
+        SpeakeasyMetadata({ data: "json, name=rates", elemType: Rate }),
         __metadata("design:type", Array)
     ], Resource.prototype, "rates", void 0);
     return Resource;

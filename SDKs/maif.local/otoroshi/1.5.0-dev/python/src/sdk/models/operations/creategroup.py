@@ -5,18 +5,18 @@ from sdk.models import shared
 
 @dataclass
 class CreateGroupSecurity:
-    otoroshi_auth: shared.SchemeOtoroshiAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'basic' }})
+    otoroshi_auth: shared.SchemeOtoroshiAuth = field(metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'basic' }})
     
 
 @dataclass
 class CreateGroupRequest:
+    security: CreateGroupSecurity = field()
     request: Optional[shared.Group] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: CreateGroupSecurity = field(default=None)
     
 
 @dataclass
 class CreateGroupResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     group: Optional[shared.Group] = field(default=None)
-    status_code: int = field(default=None)
     

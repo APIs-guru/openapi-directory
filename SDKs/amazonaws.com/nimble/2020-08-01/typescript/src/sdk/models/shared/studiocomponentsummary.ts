@@ -1,33 +1,34 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { StudioComponentSubtypeEnum } from "./studiocomponentsubtypeenum";
 import { StudioComponentTypeEnum } from "./studiocomponenttypeenum";
 
 
+
 export class StudioComponentSummary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=createdAt" })
+  @SpeakeasyMetadata({ data: "json, name=createdAt" })
   createdAt?: Date;
 
-  @Metadata({ data: "json, name=createdBy" })
+  @SpeakeasyMetadata({ data: "json, name=createdBy" })
   createdBy?: string;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=studioComponentId" })
+  @SpeakeasyMetadata({ data: "json, name=studioComponentId" })
   studioComponentId?: string;
 
-  @Metadata({ data: "json, name=subtype" })
+  @SpeakeasyMetadata({ data: "json, name=subtype" })
   subtype?: StudioComponentSubtypeEnum;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: StudioComponentTypeEnum;
 
-  @Metadata({ data: "json, name=updatedAt" })
+  @SpeakeasyMetadata({ data: "json, name=updatedAt" })
   updatedAt?: Date;
 
-  @Metadata({ data: "json, name=updatedBy" })
+  @SpeakeasyMetadata({ data: "json, name=updatedBy" })
   updatedBy?: string;
 }

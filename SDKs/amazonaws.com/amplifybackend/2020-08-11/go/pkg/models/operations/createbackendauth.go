@@ -18,6 +18,8 @@ type CreateBackendAuthHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// CreateBackendAuthRequestBodyResourceConfig
+// Defines the resource configuration when creating an auth resource in your Amplify project.
 type CreateBackendAuthRequestBodyResourceConfig struct {
 	AuthResources       *shared.AuthResourcesEnum                   `json:"AuthResources,omitempty"`
 	IdentityPoolConfigs *shared.CreateBackendAuthIdentityPoolConfig `json:"IdentityPoolConfigs,omitempty"`

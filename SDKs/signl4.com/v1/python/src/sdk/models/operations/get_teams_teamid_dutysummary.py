@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class GetTeamsTeamIDDutysummaryPathParams:
-    team_id: str = field(default=None, metadata={'path_param': { 'field_name': 'teamId', 'style': 'simple', 'explode': False }})
+    team_id: str = field(metadata={'path_param': { 'field_name': 'teamId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -15,15 +15,15 @@ class GetTeamsTeamIDDutysummaryQueryParams:
 
 @dataclass
 class GetTeamsTeamIDDutysummaryRequest:
-    path_params: GetTeamsTeamIDDutysummaryPathParams = field(default=None)
-    query_params: GetTeamsTeamIDDutysummaryQueryParams = field(default=None)
+    path_params: GetTeamsTeamIDDutysummaryPathParams = field()
+    query_params: GetTeamsTeamIDDutysummaryQueryParams = field()
     
 
 @dataclass
 class GetTeamsTeamIDDutysummaryResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     error_response_content: Optional[shared.ErrorResponseContent] = field(default=None)
-    status_code: int = field(default=None)
     team_duty_summary_info: Optional[shared.TeamDutySummaryInfo] = field(default=None)
     

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { InputProcessingConfiguration } from "./inputprocessingconfiguration";
 export declare class AddApplicationInputProcessingConfigurationRequest extends SpeakeasyBase {
     applicationName: string;

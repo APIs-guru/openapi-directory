@@ -1,35 +1,36 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetApiV1StagesQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Skip" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Skip" })
   skip?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Take" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Take" })
   take?: number;
 }
 
 
 export class GetApiV1StagesRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetApiV1StagesQueryParams;
 }
 
 
 export class GetApiV1StagesResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   problemDetails?: Map<string, any>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   stageReferenceSearchResult?: shared.StageReferenceSearchResult;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

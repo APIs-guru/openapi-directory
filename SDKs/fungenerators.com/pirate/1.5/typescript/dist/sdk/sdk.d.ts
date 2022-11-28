@@ -1,17 +1,19 @@
-import { AxiosInstance, AxiosRequestConfig } from "axios";
-import * as operations from "./models/operations";
-declare type OptsFunc = (sdk: SDK) => void;
+import { AxiosInstance } from "axios";
+import { Generation } from "./generation";
+import { Translation } from "./translation";
+type OptsFunc = (sdk: SDK) => void;
+export declare const ServerList: readonly ["http://api.fungenerators.com", "https://api.fungenerators.com"];
 export declare function WithServerURL(serverURL: string, params?: Map<string, string>): OptsFunc;
 export declare function WithClient(client: AxiosInstance): OptsFunc;
 export declare class SDK {
-    defaultClient?: AxiosInstance;
-    securityClient?: AxiosInstance;
-    security?: any;
-    serverURL: string;
+    generation: Generation;
+    translation: Translation;
+    _defaultClient: AxiosInstance;
+    _securityClient: AxiosInstance;
+    _serverURL: string;
+    private _language;
+    private _sdkVersion;
+    private _genVersion;
     constructor(...opts: OptsFunc[]);
-    GetPirateGenerateInsult(req: operations.GetPirateGenerateInsultRequest, config?: AxiosRequestConfig): Promise<operations.GetPirateGenerateInsultResponse>;
-    GetPirateGenerateLoremIpsum(req: operations.GetPirateGenerateLoremIpsumRequest, config?: AxiosRequestConfig): Promise<operations.GetPirateGenerateLoremIpsumResponse>;
-    GetPirateGenerateName(req: operations.GetPirateGenerateNameRequest, config?: AxiosRequestConfig): Promise<operations.GetPirateGenerateNameResponse>;
-    GetPirateTranslate(req: operations.GetPirateTranslateRequest, config?: AxiosRequestConfig): Promise<operations.GetPirateTranslateResponse>;
 }
 export {};

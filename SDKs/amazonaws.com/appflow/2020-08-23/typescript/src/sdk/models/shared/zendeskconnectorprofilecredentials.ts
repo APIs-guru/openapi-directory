@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ConnectorOAuthRequest } from "./connectoroauthrequest";
+
 
 
 // ZendeskConnectorProfileCredentials
@@ -7,15 +8,15 @@ import { ConnectorOAuthRequest } from "./connectoroauthrequest";
  *  The connector-specific profile credentials required when using Zendesk. 
 **/
 export class ZendeskConnectorProfileCredentials extends SpeakeasyBase {
-  @Metadata({ data: "json, name=accessToken" })
+  @SpeakeasyMetadata({ data: "json, name=accessToken" })
   accessToken?: string;
 
-  @Metadata({ data: "json, name=clientId" })
+  @SpeakeasyMetadata({ data: "json, name=clientId" })
   clientId: string;
 
-  @Metadata({ data: "json, name=clientSecret" })
+  @SpeakeasyMetadata({ data: "json, name=clientSecret" })
   clientSecret: string;
 
-  @Metadata({ data: "json, name=oAuthRequest" })
+  @SpeakeasyMetadata({ data: "json, name=oAuthRequest" })
   oAuthRequest?: ConnectorOAuthRequest;
 }

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ApigatewayApiConfigFile
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A lightweight description of a file.
 **/
 export class ApigatewayApiConfigFile extends SpeakeasyBase {
-  @Metadata({ data: "json, name=contents" })
+  @SpeakeasyMetadata({ data: "json, name=contents" })
   contents?: string;
 
-  @Metadata({ data: "json, name=path" })
+  @SpeakeasyMetadata({ data: "json, name=path" })
   path?: string;
 }

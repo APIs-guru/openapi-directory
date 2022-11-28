@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // NeighborConnectionDetail
@@ -6,18 +7,18 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Details about neighboring servers.
 **/
 export class NeighborConnectionDetail extends SpeakeasyBase {
-  @Metadata({ data: "json, name=connectionsCount" })
+  @SpeakeasyMetadata({ data: "json, name=connectionsCount" })
   connectionsCount: number;
 
-  @Metadata({ data: "json, name=destinationPort" })
+  @SpeakeasyMetadata({ data: "json, name=destinationPort" })
   destinationPort?: number;
 
-  @Metadata({ data: "json, name=destinationServerId" })
+  @SpeakeasyMetadata({ data: "json, name=destinationServerId" })
   destinationServerId: string;
 
-  @Metadata({ data: "json, name=sourceServerId" })
+  @SpeakeasyMetadata({ data: "json, name=sourceServerId" })
   sourceServerId: string;
 
-  @Metadata({ data: "json, name=transportProtocol" })
+  @SpeakeasyMetadata({ data: "json, name=transportProtocol" })
   transportProtocol?: string;
 }

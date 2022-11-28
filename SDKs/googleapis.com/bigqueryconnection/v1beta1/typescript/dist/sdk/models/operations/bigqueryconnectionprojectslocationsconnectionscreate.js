@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var BigqueryconnectionProjectsLocationsConnectionsCreatePathParams = /** @class */ (function (_super) {
     __extends(BigqueryconnectionProjectsLocationsConnectionsCreatePathParams, _super);
@@ -30,7 +30,7 @@ var BigqueryconnectionProjectsLocationsConnectionsCreatePathParams = /** @class 
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=parent" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=parent" }),
         __metadata("design:type", String)
     ], BigqueryconnectionProjectsLocationsConnectionsCreatePathParams.prototype, "parent", void 0);
     return BigqueryconnectionProjectsLocationsConnectionsCreatePathParams;
@@ -42,51 +42,51 @@ var BigqueryconnectionProjectsLocationsConnectionsCreateQueryParams = /** @class
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=$.xgafv" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=$.xgafv" }),
         __metadata("design:type", String)
     ], BigqueryconnectionProjectsLocationsConnectionsCreateQueryParams.prototype, "dollarXgafv", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=access_token" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=access_token" }),
         __metadata("design:type", String)
     ], BigqueryconnectionProjectsLocationsConnectionsCreateQueryParams.prototype, "accessToken", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=alt" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=alt" }),
         __metadata("design:type", String)
     ], BigqueryconnectionProjectsLocationsConnectionsCreateQueryParams.prototype, "alt", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=callback" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=callback" }),
         __metadata("design:type", String)
     ], BigqueryconnectionProjectsLocationsConnectionsCreateQueryParams.prototype, "callback", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=connectionId" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=connectionId" }),
         __metadata("design:type", String)
     ], BigqueryconnectionProjectsLocationsConnectionsCreateQueryParams.prototype, "connectionId", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=fields" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=fields" }),
         __metadata("design:type", String)
     ], BigqueryconnectionProjectsLocationsConnectionsCreateQueryParams.prototype, "fields", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=key" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=key" }),
         __metadata("design:type", String)
     ], BigqueryconnectionProjectsLocationsConnectionsCreateQueryParams.prototype, "key", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=oauth_token" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=oauth_token" }),
         __metadata("design:type", String)
     ], BigqueryconnectionProjectsLocationsConnectionsCreateQueryParams.prototype, "oauthToken", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=prettyPrint" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=prettyPrint" }),
         __metadata("design:type", Boolean)
     ], BigqueryconnectionProjectsLocationsConnectionsCreateQueryParams.prototype, "prettyPrint", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=quotaUser" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=quotaUser" }),
         __metadata("design:type", String)
     ], BigqueryconnectionProjectsLocationsConnectionsCreateQueryParams.prototype, "quotaUser", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=uploadType" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=uploadType" }),
         __metadata("design:type", String)
     ], BigqueryconnectionProjectsLocationsConnectionsCreateQueryParams.prototype, "uploadType", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=upload_protocol" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=upload_protocol" }),
         __metadata("design:type", String)
     ], BigqueryconnectionProjectsLocationsConnectionsCreateQueryParams.prototype, "uploadProtocol", void 0);
     return BigqueryconnectionProjectsLocationsConnectionsCreateQueryParams;
@@ -98,11 +98,11 @@ var BigqueryconnectionProjectsLocationsConnectionsCreateSecurityOption1 = /** @c
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2)
     ], BigqueryconnectionProjectsLocationsConnectionsCreateSecurityOption1.prototype, "oauth2", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2c)
     ], BigqueryconnectionProjectsLocationsConnectionsCreateSecurityOption1.prototype, "oauth2c", void 0);
     return BigqueryconnectionProjectsLocationsConnectionsCreateSecurityOption1;
@@ -114,11 +114,11 @@ var BigqueryconnectionProjectsLocationsConnectionsCreateSecurityOption2 = /** @c
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2)
     ], BigqueryconnectionProjectsLocationsConnectionsCreateSecurityOption2.prototype, "oauth2", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2c)
     ], BigqueryconnectionProjectsLocationsConnectionsCreateSecurityOption2.prototype, "oauth2c", void 0);
     return BigqueryconnectionProjectsLocationsConnectionsCreateSecurityOption2;
@@ -130,11 +130,11 @@ var BigqueryconnectionProjectsLocationsConnectionsCreateSecurity = /** @class */
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, option=true" }),
+        SpeakeasyMetadata({ data: "security, option=true" }),
         __metadata("design:type", BigqueryconnectionProjectsLocationsConnectionsCreateSecurityOption1)
     ], BigqueryconnectionProjectsLocationsConnectionsCreateSecurity.prototype, "option1", void 0);
     __decorate([
-        Metadata({ data: "security, option=true" }),
+        SpeakeasyMetadata({ data: "security, option=true" }),
         __metadata("design:type", BigqueryconnectionProjectsLocationsConnectionsCreateSecurityOption2)
     ], BigqueryconnectionProjectsLocationsConnectionsCreateSecurity.prototype, "option2", void 0);
     return BigqueryconnectionProjectsLocationsConnectionsCreateSecurity;
@@ -146,19 +146,19 @@ var BigqueryconnectionProjectsLocationsConnectionsCreateRequest = /** @class */ 
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", BigqueryconnectionProjectsLocationsConnectionsCreatePathParams)
     ], BigqueryconnectionProjectsLocationsConnectionsCreateRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", BigqueryconnectionProjectsLocationsConnectionsCreateQueryParams)
     ], BigqueryconnectionProjectsLocationsConnectionsCreateRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
-        __metadata("design:type", shared.Connection)
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
+        __metadata("design:type", shared.ConnectionInput)
     ], BigqueryconnectionProjectsLocationsConnectionsCreateRequest.prototype, "request", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", BigqueryconnectionProjectsLocationsConnectionsCreateSecurity)
     ], BigqueryconnectionProjectsLocationsConnectionsCreateRequest.prototype, "security", void 0);
     return BigqueryconnectionProjectsLocationsConnectionsCreateRequest;
@@ -170,15 +170,15 @@ var BigqueryconnectionProjectsLocationsConnectionsCreateResponse = /** @class */
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.Connection)
     ], BigqueryconnectionProjectsLocationsConnectionsCreateResponse.prototype, "connection", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], BigqueryconnectionProjectsLocationsConnectionsCreateResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], BigqueryconnectionProjectsLocationsConnectionsCreateResponse.prototype, "statusCode", void 0);
     return BigqueryconnectionProjectsLocationsConnectionsCreateResponse;

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var PostRiddleQueryParams = /** @class */ (function (_super) {
     __extends(PostRiddleQueryParams, _super);
@@ -30,15 +30,15 @@ var PostRiddleQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=answer" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=answer" }),
         __metadata("design:type", String)
     ], PostRiddleQueryParams.prototype, "answer", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=category" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=category" }),
         __metadata("design:type", String)
     ], PostRiddleQueryParams.prototype, "category", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=question" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=question" }),
         __metadata("design:type", String)
     ], PostRiddleQueryParams.prototype, "question", void 0);
     return PostRiddleQueryParams;
@@ -50,7 +50,7 @@ var PostRiddleSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeXFungeneratorsApiSecret)
     ], PostRiddleSecurity.prototype, "xFungeneratorsApiSecret", void 0);
     return PostRiddleSecurity;
@@ -62,11 +62,11 @@ var PostRiddleRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PostRiddleQueryParams)
     ], PostRiddleRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PostRiddleSecurity)
     ], PostRiddleRequest.prototype, "security", void 0);
     return PostRiddleRequest;
@@ -78,11 +78,11 @@ var PostRiddleResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], PostRiddleResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], PostRiddleResponse.prototype, "statusCode", void 0);
     return PostRiddleResponse;

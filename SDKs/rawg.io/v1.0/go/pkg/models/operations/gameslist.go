@@ -30,15 +30,15 @@ type GamesListQueryParams struct {
 	Updated           *string `queryParam:"style=form,explode=true,name=updated"`
 }
 
-type GamesListRequest struct {
-	QueryParams GamesListQueryParams
-}
-
 type GamesList200ApplicationJSON struct {
 	Count    int64         `json:"count"`
 	Next     *string       `json:"next,omitempty"`
 	Previous *string       `json:"previous,omitempty"`
 	Results  []shared.Game `json:"results"`
+}
+
+type GamesListRequest struct {
+	QueryParams GamesListQueryParams
 }
 
 type GamesListResponse struct {

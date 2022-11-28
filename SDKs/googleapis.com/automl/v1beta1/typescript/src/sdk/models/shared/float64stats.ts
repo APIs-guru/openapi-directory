@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { HistogramBucket } from "./histogrambucket";
+
 
 
 // Float64Stats
@@ -8,15 +8,15 @@ import { HistogramBucket } from "./histogrambucket";
  * The data statistics of a series of FLOAT64 values.
 **/
 export class Float64Stats extends SpeakeasyBase {
-  @Metadata({ data: "json, name=histogramBuckets", elemType: shared.HistogramBucket })
+  @SpeakeasyMetadata({ data: "json, name=histogramBuckets", elemType: HistogramBucket })
   histogramBuckets?: HistogramBucket[];
 
-  @Metadata({ data: "json, name=mean" })
+  @SpeakeasyMetadata({ data: "json, name=mean" })
   mean?: number;
 
-  @Metadata({ data: "json, name=quantiles" })
+  @SpeakeasyMetadata({ data: "json, name=quantiles" })
   quantiles?: number[];
 
-  @Metadata({ data: "json, name=standardDeviation" })
+  @SpeakeasyMetadata({ data: "json, name=standardDeviation" })
   standardDeviation?: number;
 }

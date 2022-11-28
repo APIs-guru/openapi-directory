@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudDocumentaiV1GcsPrefix
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Specifies all documents on Cloud Storage with a common prefix.
 **/
 export class GoogleCloudDocumentaiV1GcsPrefix extends SpeakeasyBase {
-  @Metadata({ data: "json, name=gcsUriPrefix" })
+  @SpeakeasyMetadata({ data: "json, name=gcsUriPrefix" })
   gcsUriPrefix?: string;
 }

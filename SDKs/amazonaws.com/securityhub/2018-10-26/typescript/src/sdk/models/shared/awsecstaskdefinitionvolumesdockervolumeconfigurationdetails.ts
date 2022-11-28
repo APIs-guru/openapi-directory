@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AwsEcsTaskDefinitionVolumesDockerVolumeConfigurationDetails
@@ -6,18 +7,18 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Information about a Docker volume.
 **/
 export class AwsEcsTaskDefinitionVolumesDockerVolumeConfigurationDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Autoprovision" })
+  @SpeakeasyMetadata({ data: "json, name=Autoprovision" })
   autoprovision?: boolean;
 
-  @Metadata({ data: "json, name=Driver" })
+  @SpeakeasyMetadata({ data: "json, name=Driver" })
   driver?: string;
 
-  @Metadata({ data: "json, name=DriverOpts" })
+  @SpeakeasyMetadata({ data: "json, name=DriverOpts" })
   driverOpts?: Map<string, string>;
 
-  @Metadata({ data: "json, name=Labels" })
+  @SpeakeasyMetadata({ data: "json, name=Labels" })
   labels?: Map<string, string>;
 
-  @Metadata({ data: "json, name=Scope" })
+  @SpeakeasyMetadata({ data: "json, name=Scope" })
   scope?: string;
 }

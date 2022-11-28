@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 export declare enum OsConstraintOsTypeEnum {
     OsUnspecified = "OS_UNSPECIFIED",
     DesktopMac = "DESKTOP_MAC",

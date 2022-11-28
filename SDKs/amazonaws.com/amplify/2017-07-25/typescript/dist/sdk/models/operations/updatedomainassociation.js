@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var UpdateDomainAssociationPathParams = /** @class */ (function (_super) {
     __extends(UpdateDomainAssociationPathParams, _super);
@@ -30,11 +30,11 @@ var UpdateDomainAssociationPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=appId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=appId" }),
         __metadata("design:type", String)
     ], UpdateDomainAssociationPathParams.prototype, "appId", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=domainName" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=domainName" }),
         __metadata("design:type", String)
     ], UpdateDomainAssociationPathParams.prototype, "domainName", void 0);
     return UpdateDomainAssociationPathParams;
@@ -46,31 +46,31 @@ var UpdateDomainAssociationHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
         __metadata("design:type", String)
     ], UpdateDomainAssociationHeaders.prototype, "xAmzAlgorithm", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
         __metadata("design:type", String)
     ], UpdateDomainAssociationHeaders.prototype, "xAmzContentSha256", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
         __metadata("design:type", String)
     ], UpdateDomainAssociationHeaders.prototype, "xAmzCredential", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
         __metadata("design:type", String)
     ], UpdateDomainAssociationHeaders.prototype, "xAmzDate", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
         __metadata("design:type", String)
     ], UpdateDomainAssociationHeaders.prototype, "xAmzSecurityToken", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
         __metadata("design:type", String)
     ], UpdateDomainAssociationHeaders.prototype, "xAmzSignature", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
         __metadata("design:type", String)
     ], UpdateDomainAssociationHeaders.prototype, "xAmzSignedHeaders", void 0);
     return UpdateDomainAssociationHeaders;
@@ -82,19 +82,19 @@ var UpdateDomainAssociationRequestBody = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=autoSubDomainCreationPatterns" }),
+        SpeakeasyMetadata({ data: "json, name=autoSubDomainCreationPatterns" }),
         __metadata("design:type", Array)
     ], UpdateDomainAssociationRequestBody.prototype, "autoSubDomainCreationPatterns", void 0);
     __decorate([
-        Metadata({ data: "json, name=autoSubDomainIAMRole" }),
+        SpeakeasyMetadata({ data: "json, name=autoSubDomainIAMRole" }),
         __metadata("design:type", String)
     ], UpdateDomainAssociationRequestBody.prototype, "autoSubDomainIamRole", void 0);
     __decorate([
-        Metadata({ data: "json, name=enableAutoSubDomain" }),
+        SpeakeasyMetadata({ data: "json, name=enableAutoSubDomain" }),
         __metadata("design:type", Boolean)
     ], UpdateDomainAssociationRequestBody.prototype, "enableAutoSubDomain", void 0);
     __decorate([
-        Metadata({ data: "json, name=subDomainSettings", elemType: shared.SubDomainSetting }),
+        SpeakeasyMetadata({ data: "json, name=subDomainSettings", elemType: shared.SubDomainSetting }),
         __metadata("design:type", Array)
     ], UpdateDomainAssociationRequestBody.prototype, "subDomainSettings", void 0);
     return UpdateDomainAssociationRequestBody;
@@ -106,15 +106,15 @@ var UpdateDomainAssociationRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", UpdateDomainAssociationPathParams)
     ], UpdateDomainAssociationRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", UpdateDomainAssociationHeaders)
     ], UpdateDomainAssociationRequest.prototype, "headers", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", UpdateDomainAssociationRequestBody)
     ], UpdateDomainAssociationRequest.prototype, "request", void 0);
     return UpdateDomainAssociationRequest;
@@ -126,35 +126,35 @@ var UpdateDomainAssociationResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], UpdateDomainAssociationResponse.prototype, "badRequestException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], UpdateDomainAssociationResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], UpdateDomainAssociationResponse.prototype, "dependentServiceFailureException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], UpdateDomainAssociationResponse.prototype, "internalFailureException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], UpdateDomainAssociationResponse.prototype, "notFoundException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], UpdateDomainAssociationResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], UpdateDomainAssociationResponse.prototype, "unauthorizedException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.UpdateDomainAssociationResult)
     ], UpdateDomainAssociationResponse.prototype, "updateDomainAssociationResult", void 0);
     return UpdateDomainAssociationResponse;

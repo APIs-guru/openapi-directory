@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DeleteImageResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=imageBuildVersionArn" })
+  @SpeakeasyMetadata({ data: "json, name=imageBuildVersionArn" })
   imageBuildVersionArn?: string;
 
-  @Metadata({ data: "json, name=requestId" })
+  @SpeakeasyMetadata({ data: "json, name=requestId" })
   requestId?: string;
 }

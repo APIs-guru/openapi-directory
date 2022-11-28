@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CryptoKey } from "./cryptokey";
+
 
 
 // ListCryptoKeysResponse
@@ -8,12 +8,12 @@ import { CryptoKey } from "./cryptokey";
  * Response message for KeyManagementService.ListCryptoKeys.
 **/
 export class ListCryptoKeysResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=cryptoKeys", elemType: shared.CryptoKey })
+  @SpeakeasyMetadata({ data: "json, name=cryptoKeys", elemType: CryptoKey })
   cryptoKeys?: CryptoKey[];
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 
-  @Metadata({ data: "json, name=totalSize" })
+  @SpeakeasyMetadata({ data: "json, name=totalSize" })
   totalSize?: number;
 }

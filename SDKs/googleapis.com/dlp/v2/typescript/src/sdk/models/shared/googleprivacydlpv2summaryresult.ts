@@ -1,9 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum GooglePrivacyDlpV2SummaryResultCodeEnum {
-    TransformationResultCodeUnspecified = "TRANSFORMATION_RESULT_CODE_UNSPECIFIED"
-,    Success = "SUCCESS"
-,    Error = "ERROR"
+    TransformationResultCodeUnspecified = "TRANSFORMATION_RESULT_CODE_UNSPECIFIED",
+    Success = "SUCCESS",
+    Error = "ERROR"
 }
 
 
@@ -12,12 +13,12 @@ export enum GooglePrivacyDlpV2SummaryResultCodeEnum {
  * A collection that informs the user the number of times a particular `TransformationResultCode` and error details occurred.
 **/
 export class GooglePrivacyDlpV2SummaryResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=code" })
+  @SpeakeasyMetadata({ data: "json, name=code" })
   code?: GooglePrivacyDlpV2SummaryResultCodeEnum;
 
-  @Metadata({ data: "json, name=count" })
+  @SpeakeasyMetadata({ data: "json, name=count" })
   count?: string;
 
-  @Metadata({ data: "json, name=details" })
+  @SpeakeasyMetadata({ data: "json, name=details" })
   details?: string;
 }

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class CloudidentityDevicesCreateQueryParams extends SpeakeasyBase {
     dollarXgafv?: shared.XgafvEnum;
@@ -20,7 +20,7 @@ export declare class CloudidentityDevicesCreateSecurity extends SpeakeasyBase {
 }
 export declare class CloudidentityDevicesCreateRequest extends SpeakeasyBase {
     queryParams: CloudidentityDevicesCreateQueryParams;
-    request?: shared.GoogleAppsCloudidentityDevicesV1Device;
+    request?: shared.GoogleAppsCloudidentityDevicesV1DeviceInput;
     security: CloudidentityDevicesCreateSecurity;
 }
 export declare class CloudidentityDevicesCreateResponse extends SpeakeasyBase {

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DataSourceEnum } from "./datasourceenum";
 import { ContinuousExportStatusEnum } from "./continuousexportstatusenum";
 // ContinuousExportDescription
@@ -35,35 +35,35 @@ var ContinuousExportDescription = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=dataSource" }),
+        SpeakeasyMetadata({ data: "json, name=dataSource" }),
         __metadata("design:type", String)
     ], ContinuousExportDescription.prototype, "dataSource", void 0);
     __decorate([
-        Metadata({ data: "json, name=exportId" }),
+        SpeakeasyMetadata({ data: "json, name=exportId" }),
         __metadata("design:type", String)
     ], ContinuousExportDescription.prototype, "exportId", void 0);
     __decorate([
-        Metadata({ data: "json, name=s3Bucket" }),
+        SpeakeasyMetadata({ data: "json, name=s3Bucket" }),
         __metadata("design:type", String)
     ], ContinuousExportDescription.prototype, "s3Bucket", void 0);
     __decorate([
-        Metadata({ data: "json, name=schemaStorageConfig" }),
+        SpeakeasyMetadata({ data: "json, name=schemaStorageConfig" }),
         __metadata("design:type", Map)
     ], ContinuousExportDescription.prototype, "schemaStorageConfig", void 0);
     __decorate([
-        Metadata({ data: "json, name=startTime" }),
+        SpeakeasyMetadata({ data: "json, name=startTime" }),
         __metadata("design:type", Date)
     ], ContinuousExportDescription.prototype, "startTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=status" }),
+        SpeakeasyMetadata({ data: "json, name=status" }),
         __metadata("design:type", String)
     ], ContinuousExportDescription.prototype, "status", void 0);
     __decorate([
-        Metadata({ data: "json, name=statusDetail" }),
+        SpeakeasyMetadata({ data: "json, name=statusDetail" }),
         __metadata("design:type", String)
     ], ContinuousExportDescription.prototype, "statusDetail", void 0);
     __decorate([
-        Metadata({ data: "json, name=stopTime" }),
+        SpeakeasyMetadata({ data: "json, name=stopTime" }),
         __metadata("design:type", Date)
     ], ContinuousExportDescription.prototype, "stopTime", void 0);
     return ContinuousExportDescription;

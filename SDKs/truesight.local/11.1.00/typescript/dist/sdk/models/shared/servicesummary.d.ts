@@ -1,0 +1,34 @@
+import { SpeakeasyBase } from "../../../internal/utils";
+import { DeviceSummary } from "./devicesummary";
+export declare class ServiceSummary extends SpeakeasyBase {
+    costUnit?: string;
+    deviceSummaries?: DeviceSummary[];
+    emittedCo2Unit?: string;
+    energyConsumptionUnit?: string;
+    heatingMargin?: number;
+    heatingMarginCoverage?: number;
+    heatingMarginDeviceName?: string;
+    heatingMarginDeviceUrl?: string;
+    heatingMarginUnit?: string;
+    historyParentIdKey?: string;
+    id?: string;
+    name?: string;
+    numberOfDevices?: number;
+    oneDayConfidence?: number;
+    oneDayCost?: number;
+    oneDayEmittedCo2?: number;
+    oneDayEnergyConsumption?: number;
+    oneMonthConfidence?: number;
+    oneMonthCost?: number;
+    oneMonthEmittedCo2?: number;
+    oneMonthEnergyConsumption?: number;
+    oneYearConfidence?: number;
+    oneYearCost?: number;
+    oneYearEmittedCo2?: number;
+    oneYearEnergyConsumption?: number;
+    providerId?: string;
+    totalPowerConsumption?: number;
+    totalPowerConsumptionUnit?: string;
+    updateTimestamp?: number;
+    url?: string;
+}

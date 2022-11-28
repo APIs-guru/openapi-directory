@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// ExportJobProperties
+// The properties of a FHIR export job, including the ID, ARN, name, and the status of the job.
 type ExportJobProperties struct {
 	DataAccessRoleArn *string          `json:"DataAccessRoleArn,omitempty"`
 	DatastoreID       string           `json:"DatastoreId"`

@@ -1,20 +1,20 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { NotificationConfig } from "./notificationconfig";
 import { StreamConfig } from "./streamconfig";
 import { ValidationConfig } from "./validationconfig";
 
+
 export enum FhirStoreComplexDataTypeReferenceParsingEnum {
-    ComplexDataTypeReferenceParsingUnspecified = "COMPLEX_DATA_TYPE_REFERENCE_PARSING_UNSPECIFIED"
-,    Disabled = "DISABLED"
-,    Enabled = "ENABLED"
+    ComplexDataTypeReferenceParsingUnspecified = "COMPLEX_DATA_TYPE_REFERENCE_PARSING_UNSPECIFIED",
+    Disabled = "DISABLED",
+    Enabled = "ENABLED"
 }
 
 export enum FhirStoreVersionEnum {
-    VersionUnspecified = "VERSION_UNSPECIFIED"
-,    Dstu2 = "DSTU2"
-,    Stu3 = "STU3"
-,    R4 = "R4"
+    VersionUnspecified = "VERSION_UNSPECIFIED",
+    Dstu2 = "DSTU2",
+    Stu3 = "STU3",
+    R4 = "R4"
 }
 
 
@@ -23,36 +23,36 @@ export enum FhirStoreVersionEnum {
  * Represents a FHIR store.
 **/
 export class FhirStore extends SpeakeasyBase {
-  @Metadata({ data: "json, name=complexDataTypeReferenceParsing" })
+  @SpeakeasyMetadata({ data: "json, name=complexDataTypeReferenceParsing" })
   complexDataTypeReferenceParsing?: FhirStoreComplexDataTypeReferenceParsingEnum;
 
-  @Metadata({ data: "json, name=defaultSearchHandlingStrict" })
+  @SpeakeasyMetadata({ data: "json, name=defaultSearchHandlingStrict" })
   defaultSearchHandlingStrict?: boolean;
 
-  @Metadata({ data: "json, name=disableReferentialIntegrity" })
+  @SpeakeasyMetadata({ data: "json, name=disableReferentialIntegrity" })
   disableReferentialIntegrity?: boolean;
 
-  @Metadata({ data: "json, name=disableResourceVersioning" })
+  @SpeakeasyMetadata({ data: "json, name=disableResourceVersioning" })
   disableResourceVersioning?: boolean;
 
-  @Metadata({ data: "json, name=enableUpdateCreate" })
+  @SpeakeasyMetadata({ data: "json, name=enableUpdateCreate" })
   enableUpdateCreate?: boolean;
 
-  @Metadata({ data: "json, name=labels" })
+  @SpeakeasyMetadata({ data: "json, name=labels" })
   labels?: Map<string, string>;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=notificationConfig" })
+  @SpeakeasyMetadata({ data: "json, name=notificationConfig" })
   notificationConfig?: NotificationConfig;
 
-  @Metadata({ data: "json, name=streamConfigs", elemType: shared.StreamConfig })
+  @SpeakeasyMetadata({ data: "json, name=streamConfigs", elemType: StreamConfig })
   streamConfigs?: StreamConfig[];
 
-  @Metadata({ data: "json, name=validationConfig" })
+  @SpeakeasyMetadata({ data: "json, name=validationConfig" })
   validationConfig?: ValidationConfig;
 
-  @Metadata({ data: "json, name=version" })
+  @SpeakeasyMetadata({ data: "json, name=version" })
   version?: FhirStoreVersionEnum;
 }

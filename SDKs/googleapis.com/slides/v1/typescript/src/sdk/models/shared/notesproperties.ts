@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // NotesProperties
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The properties of Page that are only relevant for pages with page_type NOTES.
 **/
 export class NotesProperties extends SpeakeasyBase {
-  @Metadata({ data: "json, name=speakerNotesObjectId" })
+  @SpeakeasyMetadata({ data: "json, name=speakerNotesObjectId" })
   speakerNotesObjectId?: string;
 }

@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BulkEmailEntryResult } from "./bulkemailentryresult";
+
 
 
 // SendBulkEmailResponse
@@ -8,6 +8,6 @@ import { BulkEmailEntryResult } from "./bulkemailentryresult";
  * The following data is returned in JSON format by the service.
 **/
 export class SendBulkEmailResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=BulkEmailEntryResults", elemType: shared.BulkEmailEntryResult })
+  @SpeakeasyMetadata({ data: "json, name=BulkEmailEntryResults", elemType: BulkEmailEntryResult })
   bulkEmailEntryResults: BulkEmailEntryResult[];
 }

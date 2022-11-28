@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetListQueuesActionEnum(str, Enum):
     LIST_QUEUES = "ListQueues"
@@ -10,11 +14,11 @@ class GetListQueuesVersionEnum(str, Enum):
 
 @dataclass
 class GetListQueuesQueryParams:
-    action: GetListQueuesActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetListQueuesActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: GetListQueuesVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     max_results: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'MaxResults', 'style': 'form', 'explode': True }})
     next_token: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'NextToken', 'style': 'form', 'explode': True }})
     queue_name_prefix: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'QueueNamePrefix', 'style': 'form', 'explode': True }})
-    version: GetListQueuesVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -30,13 +34,13 @@ class GetListQueuesHeaders:
 
 @dataclass
 class GetListQueuesRequest:
-    query_params: GetListQueuesQueryParams = field(default=None)
-    headers: GetListQueuesHeaders = field(default=None)
+    headers: GetListQueuesHeaders = field()
+    query_params: GetListQueuesQueryParams = field()
     
 
 @dataclass
 class GetListQueuesResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

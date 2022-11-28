@@ -1,0 +1,34 @@
+import { SpeakeasyBase } from "../../../internal/utils";
+export declare class CandidateHistory extends SpeakeasyBase {
+    activeThrough?: number;
+    addressCity?: string;
+    addressState?: string;
+    addressStreet1?: string;
+    addressStreet2?: string;
+    addressZip?: string;
+    candidateElectionYear?: number;
+    candidateId: string;
+    candidateInactive?: boolean;
+    candidateStatus?: string;
+    cycles?: number[];
+    district?: string;
+    districtNumber?: number;
+    electionDistricts?: string[];
+    electionYears?: number[];
+    fecCyclesInElection?: number[];
+    firstFileDate?: Date;
+    flags?: string;
+    incumbentChallenge?: string;
+    incumbentChallengeFull?: string;
+    lastF2Date?: Date;
+    lastFileDate?: Date;
+    loadDate?: Date;
+    name?: string;
+    office?: string;
+    officeFull?: string;
+    party?: string;
+    partyFull?: string;
+    roundedElectionYears?: number[];
+    state?: string;
+    twoYearPeriod: number;
+}

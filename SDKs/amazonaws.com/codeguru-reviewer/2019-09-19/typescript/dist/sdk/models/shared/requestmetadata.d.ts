@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { EventInfo } from "./eventinfo";
 import { VendorNameEnum } from "./vendornameenum";
 /**

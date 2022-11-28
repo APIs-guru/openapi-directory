@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var AddEmployeePathParams = /** @class */ (function (_super) {
     __extends(AddEmployeePathParams, _super);
@@ -30,7 +30,7 @@ var AddEmployeePathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=companyId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=companyId" }),
         __metadata("design:type", String)
     ], AddEmployeePathParams.prototype, "companyId", void 0);
     return AddEmployeePathParams;
@@ -42,7 +42,7 @@ var AddEmployeeSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemePaylocityAuth)
     ], AddEmployeeSecurity.prototype, "paylocityAuth", void 0);
     return AddEmployeeSecurity;
@@ -54,15 +54,15 @@ var AddEmployeeRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", AddEmployeePathParams)
     ], AddEmployeeRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", shared.Employee)
     ], AddEmployeeRequest.prototype, "request", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", AddEmployeeSecurity)
     ], AddEmployeeRequest.prototype, "security", void 0);
     return AddEmployeeRequest;
@@ -74,19 +74,19 @@ var AddEmployeeResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], AddEmployeeResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], AddEmployeeResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata({ elemType: shared.EmployeeIdResponse }),
+        SpeakeasyMetadata({ elemType: shared.EmployeeIdResponse }),
         __metadata("design:type", Array)
     ], AddEmployeeResponse.prototype, "employeeIdResponses", void 0);
     __decorate([
-        Metadata({ elemType: shared.Error }),
+        SpeakeasyMetadata({ elemType: shared.Error }),
         __metadata("design:type", Array)
     ], AddEmployeeResponse.prototype, "errors", void 0);
     return AddEmployeeResponse;

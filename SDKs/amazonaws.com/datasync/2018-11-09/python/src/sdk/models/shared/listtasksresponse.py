@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import tasklistentry
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ListTasksResponse:
-    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'NextToken' }})
-    tasks: Optional[List[tasklistentry.TaskListEntry]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Tasks' }})
+    r"""ListTasksResponse
+    ListTasksResponse
+    """
+    
+    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('NextToken') }})
+    tasks: Optional[List[TaskListEntry]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Tasks') }})
     

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudDocumentaiV1beta3SetDefaultProcessorVersionRequest
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Request message for the set default processor version method.
 **/
 export class GoogleCloudDocumentaiV1beta3SetDefaultProcessorVersionRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=defaultProcessorVersion" })
+  @SpeakeasyMetadata({ data: "json, name=defaultProcessorVersion" })
   defaultProcessorVersion?: string;
 }

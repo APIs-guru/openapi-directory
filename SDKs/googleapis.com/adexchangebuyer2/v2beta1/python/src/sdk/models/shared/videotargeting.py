@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class VideoTargetingExcludedPositionTypesEnum(str, Enum):
     POSITION_TYPE_UNSPECIFIED = "POSITION_TYPE_UNSPECIFIED"
@@ -18,6 +20,10 @@ class VideoTargetingTargetedPositionTypesEnum(str, Enum):
 @dataclass_json
 @dataclass
 class VideoTargeting:
-    excluded_position_types: Optional[List[VideoTargetingExcludedPositionTypesEnum]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'excludedPositionTypes' }})
-    targeted_position_types: Optional[List[VideoTargetingTargetedPositionTypesEnum]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'targetedPositionTypes' }})
+    r"""VideoTargeting
+    Represents targeting information about video.
+    """
+    
+    excluded_position_types: Optional[List[VideoTargetingExcludedPositionTypesEnum]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('excludedPositionTypes') }})
+    targeted_position_types: Optional[List[VideoTargetingTargetedPositionTypesEnum]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('targetedPositionTypes') }})
     

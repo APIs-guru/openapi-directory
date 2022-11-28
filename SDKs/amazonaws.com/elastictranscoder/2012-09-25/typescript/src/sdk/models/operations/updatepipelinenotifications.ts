@@ -1,33 +1,34 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class UpdatePipelineNotificationsPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=Id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=Id" })
   id: string;
 }
 
 
 export class UpdatePipelineNotificationsHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
@@ -37,63 +38,63 @@ export class UpdatePipelineNotificationsHeaders extends SpeakeasyBase {
  * <p>The Amazon Simple Notification Service (Amazon SNS) topic or topics to notify in order to report job status.</p> <important> <p>To receive notifications, you must also subscribe to the new topic in the Amazon SNS console.</p> </important>
 **/
 export class UpdatePipelineNotificationsRequestBodyNotifications extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Completed" })
+  @SpeakeasyMetadata({ data: "json, name=Completed" })
   completed?: string;
 
-  @Metadata({ data: "json, name=Error" })
+  @SpeakeasyMetadata({ data: "json, name=Error" })
   error?: string;
 
-  @Metadata({ data: "json, name=Progressing" })
+  @SpeakeasyMetadata({ data: "json, name=Progressing" })
   progressing?: string;
 
-  @Metadata({ data: "json, name=Warning" })
+  @SpeakeasyMetadata({ data: "json, name=Warning" })
   warning?: string;
 }
 
 
 export class UpdatePipelineNotificationsRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Notifications" })
+  @SpeakeasyMetadata({ data: "json, name=Notifications" })
   notifications: UpdatePipelineNotificationsRequestBodyNotifications;
 }
 
 
 export class UpdatePipelineNotificationsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: UpdatePipelineNotificationsPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: UpdatePipelineNotificationsHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: UpdatePipelineNotificationsRequestBody;
 }
 
 
 export class UpdatePipelineNotificationsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   accessDeniedException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   incompatibleVersionException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   internalServiceException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   resourceInUseException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   resourceNotFoundException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   updatePipelineNotificationsResponse?: shared.UpdatePipelineNotificationsResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   validationException?: any;
 }

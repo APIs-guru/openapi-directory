@@ -22,42 +22,42 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var SignedUrl = /** @class */ (function (_super) {
     __extends(SignedUrl, _super);
     function SignedUrl() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=expiresAt" }),
+        SpeakeasyMetadata({ data: "json, name=expiresAt" }),
         __metadata("design:type", Date)
     ], SignedUrl.prototype, "expiresAt", void 0);
     __decorate([
-        Metadata({ data: "json, name=extension" }),
+        SpeakeasyMetadata({ data: "json, name=extension" }),
         __metadata("design:type", String)
     ], SignedUrl.prototype, "extension", void 0);
     __decorate([
-        Metadata({ data: "json, name=height" }),
+        SpeakeasyMetadata({ data: "json, name=height" }),
         __metadata("design:type", Number)
     ], SignedUrl.prototype, "height", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], SignedUrl.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=size" }),
+        SpeakeasyMetadata({ data: "json, name=size" }),
         __metadata("design:type", Number)
     ], SignedUrl.prototype, "size", void 0);
     __decorate([
-        Metadata({ data: "json, name=type" }),
+        SpeakeasyMetadata({ data: "json, name=type" }),
         __metadata("design:type", String)
     ], SignedUrl.prototype, "type", void 0);
     __decorate([
-        Metadata({ data: "json, name=url" }),
+        SpeakeasyMetadata({ data: "json, name=url" }),
         __metadata("design:type", String)
     ], SignedUrl.prototype, "url", void 0);
     __decorate([
-        Metadata({ data: "json, name=width" }),
+        SpeakeasyMetadata({ data: "json, name=width" }),
         __metadata("design:type", Number)
     ], SignedUrl.prototype, "width", void 0);
     return SignedUrl;

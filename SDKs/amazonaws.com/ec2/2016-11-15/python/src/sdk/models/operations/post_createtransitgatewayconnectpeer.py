@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostCreateTransitGatewayConnectPeerActionEnum(str, Enum):
     CREATE_TRANSIT_GATEWAY_CONNECT_PEER = "CreateTransitGatewayConnectPeer"
@@ -10,8 +14,8 @@ class PostCreateTransitGatewayConnectPeerVersionEnum(str, Enum):
 
 @dataclass
 class PostCreateTransitGatewayConnectPeerQueryParams:
-    action: PostCreateTransitGatewayConnectPeerActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostCreateTransitGatewayConnectPeerVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostCreateTransitGatewayConnectPeerActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostCreateTransitGatewayConnectPeerVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostCreateTransitGatewayConnectPeerHeaders:
 
 @dataclass
 class PostCreateTransitGatewayConnectPeerRequest:
-    query_params: PostCreateTransitGatewayConnectPeerQueryParams = field(default=None)
-    headers: PostCreateTransitGatewayConnectPeerHeaders = field(default=None)
+    headers: PostCreateTransitGatewayConnectPeerHeaders = field()
+    query_params: PostCreateTransitGatewayConnectPeerQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostCreateTransitGatewayConnectPeerResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

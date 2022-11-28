@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// Consents
+// Content of the body of a consent request.
 type Consents struct {
 	Access                   AccountAccess `json:"access"`
 	CombinedServiceIndicator bool          `json:"combinedServiceIndicator"`

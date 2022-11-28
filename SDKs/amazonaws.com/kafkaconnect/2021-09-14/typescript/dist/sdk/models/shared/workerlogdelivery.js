@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CloudWatchLogsLogDelivery } from "./cloudwatchlogslogdelivery";
 import { FirehoseLogDelivery } from "./firehoselogdelivery";
 import { S3LogDelivery } from "./s3logdelivery";
@@ -36,15 +36,15 @@ var WorkerLogDelivery = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=cloudWatchLogs" }),
+        SpeakeasyMetadata({ data: "json, name=cloudWatchLogs" }),
         __metadata("design:type", CloudWatchLogsLogDelivery)
     ], WorkerLogDelivery.prototype, "cloudWatchLogs", void 0);
     __decorate([
-        Metadata({ data: "json, name=firehose" }),
+        SpeakeasyMetadata({ data: "json, name=firehose" }),
         __metadata("design:type", FirehoseLogDelivery)
     ], WorkerLogDelivery.prototype, "firehose", void 0);
     __decorate([
-        Metadata({ data: "json, name=s3" }),
+        SpeakeasyMetadata({ data: "json, name=s3" }),
         __metadata("design:type", S3LogDelivery)
     ], WorkerLogDelivery.prototype, "s3", void 0);
     return WorkerLogDelivery;

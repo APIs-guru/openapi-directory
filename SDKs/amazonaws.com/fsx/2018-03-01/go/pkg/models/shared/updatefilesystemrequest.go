@@ -1,5 +1,7 @@
 package shared
 
+// UpdateFileSystemRequest
+// The request object for the <code>UpdateFileSystem</code> operation.
 type UpdateFileSystemRequest struct {
 	ClientRequestToken   *string                               `json:"ClientRequestToken,omitempty"`
 	FileSystemID         string                                `json:"FileSystemId"`

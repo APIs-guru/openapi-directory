@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var GoogleCloudFunctionsV2betaStateMessageSeverityEnum;
 (function (GoogleCloudFunctionsV2betaStateMessageSeverityEnum) {
     GoogleCloudFunctionsV2betaStateMessageSeverityEnum["SeverityUnspecified"] = "SEVERITY_UNSPECIFIED";
@@ -40,15 +40,15 @@ var GoogleCloudFunctionsV2betaStateMessage = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=message" }),
+        SpeakeasyMetadata({ data: "json, name=message" }),
         __metadata("design:type", String)
     ], GoogleCloudFunctionsV2betaStateMessage.prototype, "message", void 0);
     __decorate([
-        Metadata({ data: "json, name=severity" }),
+        SpeakeasyMetadata({ data: "json, name=severity" }),
         __metadata("design:type", String)
     ], GoogleCloudFunctionsV2betaStateMessage.prototype, "severity", void 0);
     __decorate([
-        Metadata({ data: "json, name=type" }),
+        SpeakeasyMetadata({ data: "json, name=type" }),
         __metadata("design:type", String)
     ], GoogleCloudFunctionsV2betaStateMessage.prototype, "type", void 0);
     return GoogleCloudFunctionsV2betaStateMessage;

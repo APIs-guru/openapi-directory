@@ -1,56 +1,57 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class ReposGetAllTopicsPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=owner" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=owner" })
   owner: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=repo" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=repo" })
   repo: string;
 }
 
 
 export class ReposGetAllTopicsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=page" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page" })
   page?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=per_page" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=per_page" })
   perPage?: number;
 }
 
 
-export class ReposGetAllTopicsRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: ReposGetAllTopicsPathParams;
-
-  @Metadata()
-  queryParams: ReposGetAllTopicsQueryParams;
-}
-
-
 export class ReposGetAllTopics415ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=documentation_url" })
+  @SpeakeasyMetadata({ data: "json, name=documentation_url" })
   documentationUrl: string;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message: string;
 }
 
 
+export class ReposGetAllTopicsRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: ReposGetAllTopicsPathParams;
+
+  @SpeakeasyMetadata()
+  queryParams: ReposGetAllTopicsQueryParams;
+}
+
+
 export class ReposGetAllTopicsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   basicError?: shared.BasicError;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   reposGetAllTopics415ApplicationJsonObject?: ReposGetAllTopics415ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   topic?: shared.Topic;
 }

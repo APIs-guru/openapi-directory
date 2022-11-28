@@ -1,45 +1,45 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { QuoteAcEntriesDto } from "./quoteacentriesdto";
 
 
+
 export class QuoteProductTransDto extends SpeakeasyBase {
-  @Metadata({ data: "json, name=acEntries", elemType: shared.QuoteAcEntriesDto })
+  @SpeakeasyMetadata({ data: "json, name=acEntries", elemType: QuoteAcEntriesDto })
   acEntries?: QuoteAcEntriesDto[];
 
-  @Metadata({ data: "json, name=amount" })
+  @SpeakeasyMetadata({ data: "json, name=amount" })
   amount?: number;
 
-  @Metadata({ data: "json, name=companyId" })
+  @SpeakeasyMetadata({ data: "json, name=companyId" })
   companyId?: number;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: number;
 
-  @Metadata({ data: "json, name=percentage" })
+  @SpeakeasyMetadata({ data: "json, name=percentage" })
   percentage?: number;
 
-  @Metadata({ data: "json, name=productCode" })
+  @SpeakeasyMetadata({ data: "json, name=productCode" })
   productCode?: string;
 
-  @Metadata({ data: "json, name=productId" })
+  @SpeakeasyMetadata({ data: "json, name=productId" })
   productId?: number;
 
-  @Metadata({ data: "json, name=quantity" })
+  @SpeakeasyMetadata({ data: "json, name=quantity" })
   quantity?: number;
 
-  @Metadata({ data: "json, name=tranNotes" })
+  @SpeakeasyMetadata({ data: "json, name=tranNotes" })
   tranNotes?: string[];
 
-  @Metadata({ data: "json, name=unitPrice" })
+  @SpeakeasyMetadata({ data: "json, name=unitPrice" })
   unitPrice?: number;
 
-  @Metadata({ data: "json, name=vatAmount" })
+  @SpeakeasyMetadata({ data: "json, name=vatAmount" })
   vatAmount?: number;
 
-  @Metadata({ data: "json, name=vatAnalysisTypeId" })
+  @SpeakeasyMetadata({ data: "json, name=vatAnalysisTypeId" })
   vatAnalysisTypeId?: number;
 
-  @Metadata({ data: "json, name=vatRateId" })
+  @SpeakeasyMetadata({ data: "json, name=vatRateId" })
   vatRateId?: number;
 }

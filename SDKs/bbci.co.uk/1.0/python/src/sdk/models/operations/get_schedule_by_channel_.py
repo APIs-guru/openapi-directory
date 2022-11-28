@@ -1,30 +1,34 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class GetScheduleByChannelPathParams:
-    channel: str = field(default=None, metadata={'path_param': { 'field_name': 'channel', 'style': 'simple', 'explode': False }})
-    date: str = field(default=None, metadata={'path_param': { 'field_name': 'date', 'style': 'simple', 'explode': False }})
+    channel: str = field(metadata={'path_param': { 'field_name': 'channel', 'style': 'simple', 'explode': False }})
+    date_: str = field(metadata={'path_param': { 'field_name': 'date', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetScheduleByChannelQueryParams:
-    availability: shared.AvailabilityEnum = field(default=None, metadata={'query_param': { 'field_name': 'availability', 'style': 'form', 'explode': True }})
-    lang: shared.LangEnum = field(default=None, metadata={'query_param': { 'field_name': 'lang', 'style': 'form', 'explode': True }})
-    rights: shared.RightsEnum = field(default=None, metadata={'query_param': { 'field_name': 'rights', 'style': 'form', 'explode': True }})
+    availability: shared.AvailabilityEnum = field(metadata={'query_param': { 'field_name': 'availability', 'style': 'form', 'explode': True }})
+    lang: shared.LangEnum = field(metadata={'query_param': { 'field_name': 'lang', 'style': 'form', 'explode': True }})
+    rights: shared.RightsEnum = field(metadata={'query_param': { 'field_name': 'rights', 'style': 'form', 'explode': True }})
     
 
 @dataclass
 class GetScheduleByChannelRequest:
-    path_params: GetScheduleByChannelPathParams = field(default=None)
-    query_params: GetScheduleByChannelQueryParams = field(default=None)
+    path_params: GetScheduleByChannelPathParams = field()
+    query_params: GetScheduleByChannelQueryParams = field()
     
 
 @dataclass
 class GetScheduleByChannelResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     ibl: Optional[Any] = field(default=None)
     

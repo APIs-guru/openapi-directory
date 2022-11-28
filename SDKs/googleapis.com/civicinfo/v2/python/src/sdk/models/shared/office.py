@@ -1,7 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import source
+from sdk import utils
+from . import *
 
 class OfficeLevelsEnum(str, Enum):
     INTERNATIONAL = "international"
@@ -32,10 +34,14 @@ class OfficeRolesEnum(str, Enum):
 @dataclass_json
 @dataclass
 class Office:
-    division_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'divisionId' }})
-    levels: Optional[List[OfficeLevelsEnum]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'levels' }})
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    official_indices: Optional[List[int]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'officialIndices' }})
-    roles: Optional[List[OfficeRolesEnum]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'roles' }})
-    sources: Optional[List[source.Source]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'sources' }})
+    r"""Office
+    Information about an Office held by one or more Officials.
+    """
+    
+    division_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('divisionId') }})
+    levels: Optional[List[OfficeLevelsEnum]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('levels') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    official_indices: Optional[List[int]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('officialIndices') }})
+    roles: Optional[List[OfficeRolesEnum]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('roles') }})
+    sources: Optional[List[Source]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('sources') }})
     

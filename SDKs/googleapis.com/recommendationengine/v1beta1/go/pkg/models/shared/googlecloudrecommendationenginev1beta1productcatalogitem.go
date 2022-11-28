@@ -10,6 +10,8 @@ const (
 	GoogleCloudRecommendationengineV1beta1ProductCatalogItemStockStateEnumBackorder             GoogleCloudRecommendationengineV1beta1ProductCatalogItemStockStateEnum = "BACKORDER"
 )
 
+// GoogleCloudRecommendationengineV1beta1ProductCatalogItem
+// ProductCatalogItem captures item metadata specific to retail products.
 type GoogleCloudRecommendationengineV1beta1ProductCatalogItem struct {
 	AvailableQuantity   *string                                                                 `json:"availableQuantity,omitempty"`
 	CanonicalProductURI *string                                                                 `json:"canonicalProductUri,omitempty"`

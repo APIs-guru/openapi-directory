@@ -1,68 +1,67 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BillAgent } from "./billagent";
 import { HouseEnum } from "./houseenum";
 import { StageSummary } from "./stagesummary";
-import { HouseEnum } from "./houseenum";
 import { Promoter } from "./promoter";
 import { Sponsor } from "./sponsor";
 
 
+
 export class Bill extends SpeakeasyBase {
-  @Metadata({ data: "json, name=agent" })
+  @SpeakeasyMetadata({ data: "json, name=agent" })
   agent?: BillAgent;
 
-  @Metadata({ data: "json, name=billId" })
+  @SpeakeasyMetadata({ data: "json, name=billId" })
   billId?: number;
 
-  @Metadata({ data: "json, name=billTypeId" })
+  @SpeakeasyMetadata({ data: "json, name=billTypeId" })
   billTypeId?: number;
 
-  @Metadata({ data: "json, name=billWithdrawn" })
+  @SpeakeasyMetadata({ data: "json, name=billWithdrawn" })
   billWithdrawn?: Date;
 
-  @Metadata({ data: "json, name=currentHouse" })
+  @SpeakeasyMetadata({ data: "json, name=currentHouse" })
   currentHouse?: HouseEnum;
 
-  @Metadata({ data: "json, name=currentStage" })
+  @SpeakeasyMetadata({ data: "json, name=currentStage" })
   currentStage?: StageSummary;
 
-  @Metadata({ data: "json, name=includedSessionIds" })
+  @SpeakeasyMetadata({ data: "json, name=includedSessionIds" })
   includedSessionIds?: number[];
 
-  @Metadata({ data: "json, name=introducedSessionId" })
+  @SpeakeasyMetadata({ data: "json, name=introducedSessionId" })
   introducedSessionId?: number;
 
-  @Metadata({ data: "json, name=isAct" })
+  @SpeakeasyMetadata({ data: "json, name=isAct" })
   isAct?: boolean;
 
-  @Metadata({ data: "json, name=isDefeated" })
+  @SpeakeasyMetadata({ data: "json, name=isDefeated" })
   isDefeated?: boolean;
 
-  @Metadata({ data: "json, name=lastUpdate" })
+  @SpeakeasyMetadata({ data: "json, name=lastUpdate" })
   lastUpdate?: Date;
 
-  @Metadata({ data: "json, name=longTitle" })
+  @SpeakeasyMetadata({ data: "json, name=longTitle" })
   longTitle?: string;
 
-  @Metadata({ data: "json, name=originatingHouse" })
+  @SpeakeasyMetadata({ data: "json, name=originatingHouse" })
   originatingHouse?: HouseEnum;
 
-  @Metadata({ data: "json, name=petitionInformation" })
+  @SpeakeasyMetadata({ data: "json, name=petitionInformation" })
   petitionInformation?: string;
 
-  @Metadata({ data: "json, name=petitioningPeriod" })
+  @SpeakeasyMetadata({ data: "json, name=petitioningPeriod" })
   petitioningPeriod?: string;
 
-  @Metadata({ data: "json, name=promoters", elemType: shared.Promoter })
+  @SpeakeasyMetadata({ data: "json, name=promoters", elemType: Promoter })
   promoters?: Promoter[];
 
-  @Metadata({ data: "json, name=shortTitle" })
+  @SpeakeasyMetadata({ data: "json, name=shortTitle" })
   shortTitle?: string;
 
-  @Metadata({ data: "json, name=sponsors", elemType: shared.Sponsor })
+  @SpeakeasyMetadata({ data: "json, name=sponsors", elemType: Sponsor })
   sponsors?: Sponsor[];
 
-  @Metadata({ data: "json, name=summary" })
+  @SpeakeasyMetadata({ data: "json, name=summary" })
   summary?: string;
 }

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // MethodSnapshot
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Represents a summary of a <a>Method</a> resource, given a particular date and time.
 **/
 export class MethodSnapshot extends SpeakeasyBase {
-  @Metadata({ data: "json, name=apiKeyRequired" })
+  @SpeakeasyMetadata({ data: "json, name=apiKeyRequired" })
   apiKeyRequired?: boolean;
 
-  @Metadata({ data: "json, name=authorizationType" })
+  @SpeakeasyMetadata({ data: "json, name=authorizationType" })
   authorizationType?: string;
 }

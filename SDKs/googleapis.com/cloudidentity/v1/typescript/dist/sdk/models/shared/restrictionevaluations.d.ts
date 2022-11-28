@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { MembershipRoleRestrictionEvaluation } from "./membershiprolerestrictionevaluation";
 /**
  * Evaluations of restrictions applied to parent group on this membership.

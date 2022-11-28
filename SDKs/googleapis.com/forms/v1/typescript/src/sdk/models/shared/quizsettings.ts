@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // QuizSettings
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Settings related to quiz forms and grading. These must be updated with the UpdateSettingsRequest.
 **/
 export class QuizSettings extends SpeakeasyBase {
-  @Metadata({ data: "json, name=isQuiz" })
+  @SpeakeasyMetadata({ data: "json, name=isQuiz" })
   isQuiz?: boolean;
 }

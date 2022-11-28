@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// Campaign
+// Describes a deployed solution version, otherwise known as a campaign. For more information on campaigns, see <a>CreateCampaign</a>.
 type Campaign struct {
 	CampaignArn          *string                `json:"campaignArn,omitempty"`
 	CampaignConfig       *CampaignConfig        `json:"campaignConfig,omitempty"`

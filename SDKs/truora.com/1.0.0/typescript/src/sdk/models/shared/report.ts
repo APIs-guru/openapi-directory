@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Report
@@ -6,30 +7,30 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Represents reports
 **/
 export class Report extends SpeakeasyBase {
-  @Metadata({ data: "json, name=created_by" })
+  @SpeakeasyMetadata({ data: "json, name=created_by" })
   createdBy?: string;
 
-  @Metadata({ data: "json, name=created_checks_count" })
+  @SpeakeasyMetadata({ data: "json, name=created_checks_count" })
   createdChecksCount?: number;
 
-  @Metadata({ data: "json, name=creation_date" })
+  @SpeakeasyMetadata({ data: "json, name=creation_date" })
   creationDate: Date;
 
-  @Metadata({ data: "json, name=has_data" })
+  @SpeakeasyMetadata({ data: "json, name=has_data" })
   hasData?: boolean;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: string;
 
-  @Metadata({ data: "json, name=invalid_checks_count" })
+  @SpeakeasyMetadata({ data: "json, name=invalid_checks_count" })
   invalidChecksCount?: number;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 
-  @Metadata({ data: "json, name=size" })
+  @SpeakeasyMetadata({ data: "json, name=size" })
   size?: number;
 
-  @Metadata({ data: "json, name=update_date" })
+  @SpeakeasyMetadata({ data: "json, name=update_date" })
   updateDate: Date;
 }

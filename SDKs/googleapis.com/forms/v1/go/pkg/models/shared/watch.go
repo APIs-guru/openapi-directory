@@ -25,6 +25,8 @@ const (
 	WatchStateEnumSuspended        WatchStateEnum = "SUSPENDED"
 )
 
+// Watch
+// A watch for events for a form. When the designated event happens, a notification will be published to the specified target. The notification's attributes will include a `formId` key that has the ID of the watched form and an `eventType` key that has the string of the type. Messages are sent with at-least-once delivery and are only dropped in extraordinary circumstances. Typically all notifications should be reliably delivered within a few seconds; however, in some situations notifications may be delayed. A watch expires seven days after it is created unless it is renewed with watches.renew
 type Watch struct {
 	CreateTime *string             `json:"createTime,omitempty"`
 	ErrorType  *WatchErrorTypeEnum `json:"errorType,omitempty"`
@@ -33,4 +35,11 @@ type Watch struct {
 	ID         *string             `json:"id,omitempty"`
 	State      *WatchStateEnum     `json:"state,omitempty"`
 	Target     *WatchTarget        `json:"target,omitempty"`
+}
+
+// WatchInput
+// A watch for events for a form. When the designated event happens, a notification will be published to the specified target. The notification's attributes will include a `formId` key that has the ID of the watched form and an `eventType` key that has the string of the type. Messages are sent with at-least-once delivery and are only dropped in extraordinary circumstances. Typically all notifications should be reliably delivered within a few seconds; however, in some situations notifications may be delayed. A watch expires seven days after it is created unless it is renewed with watches.renew
+type WatchInput struct {
+	EventType *WatchEventTypeEnum `json:"eventType,omitempty"`
+	Target    *WatchTarget        `json:"target,omitempty"`
 }

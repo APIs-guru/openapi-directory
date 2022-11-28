@@ -1,11 +1,15 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import timetolivespecification
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class UpdateTimeToLiveOutput:
-    time_to_live_specification: Optional[timetolivespecification.TimeToLiveSpecification] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'TimeToLiveSpecification' }})
+    time_to_live_specification: Optional[TimeToLiveSpecification] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('TimeToLiveSpecification') }})
     

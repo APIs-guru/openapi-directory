@@ -22,26 +22,26 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var ObjectDetectionRequest = /** @class */ (function (_super) {
     __extends(ObjectDetectionRequest, _super);
     function ObjectDetectionRequest() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=modelId, multipart_form, name=modelId" }),
+        SpeakeasyMetadata({ data: "json, name=modelId, multipart_form, name=modelId" }),
         __metadata("design:type", String)
     ], ObjectDetectionRequest.prototype, "modelId", void 0);
     __decorate([
-        Metadata({ data: "json, name=sampleBase64Content, multipart_form, name=sampleBase64Content" }),
+        SpeakeasyMetadata({ data: "json, name=sampleBase64Content, multipart_form, name=sampleBase64Content" }),
         __metadata("design:type", String)
     ], ObjectDetectionRequest.prototype, "sampleBase64Content", void 0);
     __decorate([
-        Metadata({ data: "json, name=sampleId, multipart_form, name=sampleId" }),
+        SpeakeasyMetadata({ data: "json, name=sampleId, multipart_form, name=sampleId" }),
         __metadata("design:type", String)
     ], ObjectDetectionRequest.prototype, "sampleId", void 0);
     __decorate([
-        Metadata({ data: "json, name=sampleLocation, multipart_form, name=sampleLocation" }),
+        SpeakeasyMetadata({ data: "json, name=sampleLocation, multipart_form, name=sampleLocation" }),
         __metadata("design:type", String)
     ], ObjectDetectionRequest.prototype, "sampleLocation", void 0);
     return ObjectDetectionRequest;

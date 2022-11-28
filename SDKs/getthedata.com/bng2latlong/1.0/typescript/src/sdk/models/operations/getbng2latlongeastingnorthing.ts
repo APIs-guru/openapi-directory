@@ -1,54 +1,55 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetBng2latlongEastingNorthingPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=easting" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=easting" })
   easting: number;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=northing" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=northing" })
   northing: number;
 }
 
-
-export class GetBng2latlongEastingNorthingRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: GetBng2latlongEastingNorthingPathParams;
-}
-
 export enum GetBng2latlongEastingNorthing200ApplicationJsonStatusEnum {
-    Ok = "ok"
-,    Error = "error"
+    Ok = "ok",
+    Error = "error"
 }
 
 
 export class GetBng2latlongEastingNorthing200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=easting" })
+  @SpeakeasyMetadata({ data: "json, name=easting" })
   easting?: number;
 
-  @Metadata({ data: "json, name=error" })
+  @SpeakeasyMetadata({ data: "json, name=error" })
   error?: string;
 
-  @Metadata({ data: "json, name=latitude" })
+  @SpeakeasyMetadata({ data: "json, name=latitude" })
   latitude?: number;
 
-  @Metadata({ data: "json, name=longitude" })
+  @SpeakeasyMetadata({ data: "json, name=longitude" })
   longitude?: number;
 
-  @Metadata({ data: "json, name=northing" })
+  @SpeakeasyMetadata({ data: "json, name=northing" })
   northing?: number;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: GetBng2latlongEastingNorthing200ApplicationJsonStatusEnum;
 }
 
 
+export class GetBng2latlongEastingNorthingRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: GetBng2latlongEastingNorthingPathParams;
+}
+
+
 export class GetBng2latlongEastingNorthingResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getBng2latlongEastingNorthing200ApplicationJsonObject?: GetBng2latlongEastingNorthing200ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

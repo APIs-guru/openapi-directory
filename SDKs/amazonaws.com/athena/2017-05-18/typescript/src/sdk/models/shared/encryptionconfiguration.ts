@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { EncryptionOptionEnum } from "./encryptionoptionenum";
+
 
 
 // EncryptionConfiguration
@@ -7,9 +8,9 @@ import { EncryptionOptionEnum } from "./encryptionoptionenum";
  * If query results are encrypted in Amazon S3, indicates the encryption option used (for example, <code>SSE-KMS</code> or <code>CSE-KMS</code>) and key information.
 **/
 export class EncryptionConfiguration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=EncryptionOption" })
+  @SpeakeasyMetadata({ data: "json, name=EncryptionOption" })
   encryptionOption: EncryptionOptionEnum;
 
-  @Metadata({ data: "json, name=KmsKey" })
+  @SpeakeasyMetadata({ data: "json, name=KmsKey" })
   kmsKey?: string;
 }

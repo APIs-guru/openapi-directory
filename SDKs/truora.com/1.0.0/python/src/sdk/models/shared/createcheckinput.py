@@ -1,8 +1,9 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 
 class CreateCheckInputCountryEnum(str, Enum):
     ALL = "ALL"
@@ -53,17 +54,22 @@ class CreateCheckInputTypeEnum(str, Enum):
 
 @dataclass
 class CreateCheckInput:
+    r"""CreateCheckInput
+    Represents paramaters required to create a background check
+    """
+    
+    country: CreateCheckInputCountryEnum = field(metadata={'form': { 'field_name': 'country' }})
+    type: CreateCheckInputTypeEnum = field(metadata={'form': { 'field_name': 'type' }})
     birth_certificate: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'birth_certificate' }})
     company_name: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'company_name' }})
-    country: CreateCheckInputCountryEnum = field(default=None, metadata={'form': { 'field_name': 'country' }})
-    date_of_birth: Optional[datetime] = field(default=None, metadata={'form': { 'field_name': 'date_of_birth' }})
+    date_of_birth: Optional[date] = field(default=None, metadata={'form': { 'field_name': 'date_of_birth' }})
     diplomatic_id: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'diplomatic_id' }})
     driver_license: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'driver_license' }})
     escrow: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'escrow' }})
     first_name: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'first_name' }})
     force_creation: Optional[bool] = field(default=None, metadata={'form': { 'field_name': 'force_creation' }})
     foreign_id: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'foreign_id' }})
-    issue_date: Optional[datetime] = field(default=None, metadata={'form': { 'field_name': 'issue_date' }})
+    issue_date: Optional[date] = field(default=None, metadata={'form': { 'field_name': 'issue_date' }})
     last_name: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'last_name' }})
     license_plate: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'license_plate' }})
     national_id: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'national_id' }})
@@ -71,7 +77,7 @@ class CreateCheckInput:
     owner_document_id: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'owner_document_id' }})
     owner_document_type: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'owner_document_type' }})
     passport: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'passport' }})
-    payment_date: Optional[datetime] = field(default=None, metadata={'form': { 'field_name': 'payment_date' }})
+    payment_date: Optional[date] = field(default=None, metadata={'form': { 'field_name': 'payment_date' }})
     pep: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'pep' }})
     phone_number: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'phone_number' }})
     professional_card: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'professional_card' }})
@@ -80,7 +86,6 @@ class CreateCheckInput:
     report_id: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'report_id' }})
     state_id: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'state_id' }})
     tax_id: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'tax_id' }})
-    type: CreateCheckInputTypeEnum = field(default=None, metadata={'form': { 'field_name': 'type' }})
     user_authorized: Optional[bool] = field(default=None, metadata={'form': { 'field_name': 'user_authorized' }})
     vehicle_id: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'vehicle_id' }})
     verification_code: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'verification_code' }})

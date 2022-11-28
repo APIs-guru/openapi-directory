@@ -1,14 +1,40 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum CertificateMapEntryMatcherEnum {
-    MatcherUnspecified = "MATCHER_UNSPECIFIED"
-,    Primary = "PRIMARY"
+    MatcherUnspecified = "MATCHER_UNSPECIFIED",
+    Primary = "PRIMARY"
 }
 
 export enum CertificateMapEntryStateEnum {
-    ServingStateUnspecified = "SERVING_STATE_UNSPECIFIED"
-,    Active = "ACTIVE"
-,    Pending = "PENDING"
+    ServingStateUnspecified = "SERVING_STATE_UNSPECIFIED",
+    Active = "ACTIVE",
+    Pending = "PENDING"
+}
+
+
+// CertificateMapEntryInput
+/** 
+ * Defines a certificate map entry.
+**/
+export class CertificateMapEntryInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=certificates" })
+  certificates?: string[];
+
+  @SpeakeasyMetadata({ data: "json, name=description" })
+  description?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=hostname" })
+  hostname?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=labels" })
+  labels?: Map<string, string>;
+
+  @SpeakeasyMetadata({ data: "json, name=matcher" })
+  matcher?: CertificateMapEntryMatcherEnum;
+
+  @SpeakeasyMetadata({ data: "json, name=name" })
+  name?: string;
 }
 
 
@@ -17,30 +43,30 @@ export enum CertificateMapEntryStateEnum {
  * Defines a certificate map entry.
 **/
 export class CertificateMapEntry extends SpeakeasyBase {
-  @Metadata({ data: "json, name=certificates" })
+  @SpeakeasyMetadata({ data: "json, name=certificates" })
   certificates?: string[];
 
-  @Metadata({ data: "json, name=createTime" })
+  @SpeakeasyMetadata({ data: "json, name=createTime" })
   createTime?: string;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=hostname" })
+  @SpeakeasyMetadata({ data: "json, name=hostname" })
   hostname?: string;
 
-  @Metadata({ data: "json, name=labels" })
+  @SpeakeasyMetadata({ data: "json, name=labels" })
   labels?: Map<string, string>;
 
-  @Metadata({ data: "json, name=matcher" })
+  @SpeakeasyMetadata({ data: "json, name=matcher" })
   matcher?: CertificateMapEntryMatcherEnum;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=state" })
+  @SpeakeasyMetadata({ data: "json, name=state" })
   state?: CertificateMapEntryStateEnum;
 
-  @Metadata({ data: "json, name=updateTime" })
+  @SpeakeasyMetadata({ data: "json, name=updateTime" })
   updateTime?: string;
 }

@@ -1,31 +1,32 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GroupV2RecoverGroupForFounderPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=groupType" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=groupType" })
   groupType: number;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=membershipId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=membershipId" })
   membershipId: number;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=membershipType" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=membershipType" })
   membershipType: number;
 }
 
 
 export class GroupV2RecoverGroupForFounderRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GroupV2RecoverGroupForFounderPathParams;
 }
 
 
 export class GroupV2RecoverGroupForFounderResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

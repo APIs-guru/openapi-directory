@@ -5,12 +5,12 @@ from sdk.models import shared
 
 @dataclass
 class EmailSendQuoteRequest:
-    request: shared.EmailQuoteDto = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    request: shared.EmailQuoteDto = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class EmailSendQuoteResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     email_send_quote_200_application_json_object: Optional[dict[str, Any]] = field(default=None)
-    status_code: int = field(default=None)
     

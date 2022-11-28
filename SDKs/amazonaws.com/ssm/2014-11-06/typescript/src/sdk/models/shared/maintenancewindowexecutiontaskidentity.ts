@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { MaintenanceWindowExecutionStatusEnum } from "./maintenancewindowexecutionstatusenum";
 import { MaintenanceWindowTaskTypeEnum } from "./maintenancewindowtasktypeenum";
+
 
 
 // MaintenanceWindowExecutionTaskIdentity
@@ -8,27 +9,27 @@ import { MaintenanceWindowTaskTypeEnum } from "./maintenancewindowtasktypeenum";
  * Information about a task execution performed as part of a maintenance window execution.
 **/
 export class MaintenanceWindowExecutionTaskIdentity extends SpeakeasyBase {
-  @Metadata({ data: "json, name=EndTime" })
+  @SpeakeasyMetadata({ data: "json, name=EndTime" })
   endTime?: Date;
 
-  @Metadata({ data: "json, name=StartTime" })
+  @SpeakeasyMetadata({ data: "json, name=StartTime" })
   startTime?: Date;
 
-  @Metadata({ data: "json, name=Status" })
+  @SpeakeasyMetadata({ data: "json, name=Status" })
   status?: MaintenanceWindowExecutionStatusEnum;
 
-  @Metadata({ data: "json, name=StatusDetails" })
+  @SpeakeasyMetadata({ data: "json, name=StatusDetails" })
   statusDetails?: string;
 
-  @Metadata({ data: "json, name=TaskArn" })
+  @SpeakeasyMetadata({ data: "json, name=TaskArn" })
   taskArn?: string;
 
-  @Metadata({ data: "json, name=TaskExecutionId" })
+  @SpeakeasyMetadata({ data: "json, name=TaskExecutionId" })
   taskExecutionId?: string;
 
-  @Metadata({ data: "json, name=TaskType" })
+  @SpeakeasyMetadata({ data: "json, name=TaskType" })
   taskType?: MaintenanceWindowTaskTypeEnum;
 
-  @Metadata({ data: "json, name=WindowExecutionId" })
+  @SpeakeasyMetadata({ data: "json, name=WindowExecutionId" })
   windowExecutionId?: string;
 }

@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ContextSource } from "./contextsource";
+
 
 
 // ContextSummary
@@ -7,21 +8,21 @@ import { ContextSource } from "./contextsource";
  * Lists a summary of the properties of a context. A context provides a logical grouping of other entities.
 **/
 export class ContextSummary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ContextArn" })
+  @SpeakeasyMetadata({ data: "json, name=ContextArn" })
   contextArn?: string;
 
-  @Metadata({ data: "json, name=ContextName" })
+  @SpeakeasyMetadata({ data: "json, name=ContextName" })
   contextName?: string;
 
-  @Metadata({ data: "json, name=ContextType" })
+  @SpeakeasyMetadata({ data: "json, name=ContextType" })
   contextType?: string;
 
-  @Metadata({ data: "json, name=CreationTime" })
+  @SpeakeasyMetadata({ data: "json, name=CreationTime" })
   creationTime?: Date;
 
-  @Metadata({ data: "json, name=LastModifiedTime" })
+  @SpeakeasyMetadata({ data: "json, name=LastModifiedTime" })
   lastModifiedTime?: Date;
 
-  @Metadata({ data: "json, name=Source" })
+  @SpeakeasyMetadata({ data: "json, name=Source" })
   source?: ContextSource;
 }

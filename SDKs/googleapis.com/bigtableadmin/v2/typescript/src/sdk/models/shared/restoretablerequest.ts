@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // RestoreTableRequest
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The request for RestoreTable.
 **/
 export class RestoreTableRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=backup" })
+  @SpeakeasyMetadata({ data: "json, name=backup" })
   backup?: string;
 
-  @Metadata({ data: "json, name=tableId" })
+  @SpeakeasyMetadata({ data: "json, name=tableId" })
   tableId?: string;
 }

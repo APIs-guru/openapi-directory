@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { AuthenticationTypeEnum } from "./authenticationtypeenum";
 /**
  * Describes a user in the user pool.

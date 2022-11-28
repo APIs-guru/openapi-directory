@@ -22,26 +22,26 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var Queue = /** @class */ (function (_super) {
     __extends(Queue, _super);
     function Queue() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=maxLength" }),
+        SpeakeasyMetadata({ data: "json, name=maxLength" }),
         __metadata("design:type", Number)
     ], Queue.prototype, "maxLength", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], Queue.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=region" }),
+        SpeakeasyMetadata({ data: "json, name=region" }),
         __metadata("design:type", String)
     ], Queue.prototype, "region", void 0);
     __decorate([
-        Metadata({ data: "json, name=ttl" }),
+        SpeakeasyMetadata({ data: "json, name=ttl" }),
         __metadata("design:type", Number)
     ], Queue.prototype, "ttl", void 0);
     return Queue;

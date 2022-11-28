@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // LoggingConfiguration
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Consists of the logging role and the log group name.
 **/
 export class LoggingConfiguration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=LogGroupName" })
+  @SpeakeasyMetadata({ data: "json, name=LogGroupName" })
   logGroupName?: string;
 
-  @Metadata({ data: "json, name=LoggingRole" })
+  @SpeakeasyMetadata({ data: "json, name=LoggingRole" })
   loggingRole?: string;
 }

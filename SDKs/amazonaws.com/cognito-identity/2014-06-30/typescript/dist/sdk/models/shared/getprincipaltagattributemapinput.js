@@ -22,18 +22,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var GetPrincipalTagAttributeMapInput = /** @class */ (function (_super) {
     __extends(GetPrincipalTagAttributeMapInput, _super);
     function GetPrincipalTagAttributeMapInput() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=IdentityPoolId" }),
+        SpeakeasyMetadata({ data: "json, name=IdentityPoolId" }),
         __metadata("design:type", String)
     ], GetPrincipalTagAttributeMapInput.prototype, "identityPoolId", void 0);
     __decorate([
-        Metadata({ data: "json, name=IdentityProviderName" }),
+        SpeakeasyMetadata({ data: "json, name=IdentityProviderName" }),
         __metadata("design:type", String)
     ], GetPrincipalTagAttributeMapInput.prototype, "identityProviderName", void 0);
     return GetPrincipalTagAttributeMapInput;

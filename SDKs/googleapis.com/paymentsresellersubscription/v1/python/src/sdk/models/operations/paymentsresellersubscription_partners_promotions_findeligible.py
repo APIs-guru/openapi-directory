@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class PaymentsresellersubscriptionPartnersPromotionsFindEligiblePathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,14 +26,14 @@ class PaymentsresellersubscriptionPartnersPromotionsFindEligibleQueryParams:
 
 @dataclass
 class PaymentsresellersubscriptionPartnersPromotionsFindEligibleRequest:
-    path_params: PaymentsresellersubscriptionPartnersPromotionsFindEligiblePathParams = field(default=None)
-    query_params: PaymentsresellersubscriptionPartnersPromotionsFindEligibleQueryParams = field(default=None)
+    path_params: PaymentsresellersubscriptionPartnersPromotionsFindEligiblePathParams = field()
+    query_params: PaymentsresellersubscriptionPartnersPromotionsFindEligibleQueryParams = field()
     request: Optional[shared.GoogleCloudPaymentsResellerSubscriptionV1FindEligiblePromotionsRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class PaymentsresellersubscriptionPartnersPromotionsFindEligibleResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_cloud_payments_reseller_subscription_v1_find_eligible_promotions_response: Optional[shared.GoogleCloudPaymentsResellerSubscriptionV1FindEligiblePromotionsResponse] = field(default=None)
-    status_code: int = field(default=None)
     

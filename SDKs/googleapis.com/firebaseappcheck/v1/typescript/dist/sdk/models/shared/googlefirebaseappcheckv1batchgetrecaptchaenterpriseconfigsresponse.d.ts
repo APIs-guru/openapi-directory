@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { GoogleFirebaseAppcheckV1RecaptchaEnterpriseConfig } from "./googlefirebaseappcheckv1recaptchaenterpriseconfig";
 /**
  * Response message for the BatchGetRecaptchaEnterpriseConfigs method.

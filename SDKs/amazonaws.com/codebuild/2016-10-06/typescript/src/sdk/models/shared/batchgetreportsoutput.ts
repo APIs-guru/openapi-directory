@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Report } from "./report";
 
 
+
 export class BatchGetReportsOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=reports", elemType: shared.Report })
+  @SpeakeasyMetadata({ data: "json, name=reports", elemType: Report })
   reports?: Report[];
 
-  @Metadata({ data: "json, name=reportsNotFound" })
+  @SpeakeasyMetadata({ data: "json, name=reportsNotFound" })
   reportsNotFound?: string[];
 }

@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ManagedScaling } from "./managedscaling";
 import { ManagedTerminationProtectionEnum } from "./managedterminationprotectionenum";
+
 
 
 // AutoScalingGroupProvider
@@ -8,12 +9,12 @@ import { ManagedTerminationProtectionEnum } from "./managedterminationprotection
  * The details of the Auto Scaling group for the capacity provider.
 **/
 export class AutoScalingGroupProvider extends SpeakeasyBase {
-  @Metadata({ data: "json, name=autoScalingGroupArn" })
+  @SpeakeasyMetadata({ data: "json, name=autoScalingGroupArn" })
   autoScalingGroupArn: string;
 
-  @Metadata({ data: "json, name=managedScaling" })
+  @SpeakeasyMetadata({ data: "json, name=managedScaling" })
   managedScaling?: ManagedScaling;
 
-  @Metadata({ data: "json, name=managedTerminationProtection" })
+  @SpeakeasyMetadata({ data: "json, name=managedTerminationProtection" })
   managedTerminationProtection?: ManagedTerminationProtectionEnum;
 }

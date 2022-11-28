@@ -1,7 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import encryptioninfo
+from sdk import utils
+from . import *
 
 class BackupDatabaseDialectEnum(str, Enum):
     DATABASE_DIALECT_UNSPECIFIED = "DATABASE_DIALECT_UNSPECIFIED"
@@ -17,16 +19,34 @@ class BackupStateEnum(str, Enum):
 @dataclass_json
 @dataclass
 class Backup:
-    create_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'createTime' }})
-    database: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'database' }})
-    database_dialect: Optional[BackupDatabaseDialectEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'databaseDialect' }})
-    encryption_info: Optional[encryptioninfo.EncryptionInfo] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'encryptionInfo' }})
-    expire_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'expireTime' }})
-    max_expire_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'maxExpireTime' }})
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    referencing_backups: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'referencingBackups' }})
-    referencing_databases: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'referencingDatabases' }})
-    size_bytes: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'sizeBytes' }})
-    state: Optional[BackupStateEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'state' }})
-    version_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'versionTime' }})
+    r"""Backup
+    A backup of a Cloud Spanner database.
+    """
+    
+    create_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('createTime') }})
+    database: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('database') }})
+    database_dialect: Optional[BackupDatabaseDialectEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('databaseDialect') }})
+    encryption_info: Optional[EncryptionInfo] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('encryptionInfo') }})
+    expire_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('expireTime') }})
+    max_expire_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('maxExpireTime') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    referencing_backups: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('referencingBackups') }})
+    referencing_databases: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('referencingDatabases') }})
+    size_bytes: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('sizeBytes') }})
+    state: Optional[BackupStateEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('state') }})
+    version_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('versionTime') }})
+    
+
+@dataclass_json
+@dataclass
+class BackupInput:
+    r"""BackupInput
+    A backup of a Cloud Spanner database.
+    """
+    
+    database: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('database') }})
+    encryption_info: Optional[EncryptionInfoInput] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('encryptionInfo') }})
+    expire_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('expireTime') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    version_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('versionTime') }})
     

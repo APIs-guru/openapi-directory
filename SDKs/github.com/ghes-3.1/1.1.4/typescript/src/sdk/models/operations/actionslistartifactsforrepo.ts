@@ -1,53 +1,54 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class ActionsListArtifactsForRepoPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=owner" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=owner" })
   owner: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=repo" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=repo" })
   repo: string;
 }
 
 
 export class ActionsListArtifactsForRepoQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=page" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page" })
   page?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=per_page" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=per_page" })
   perPage?: number;
 }
 
 
-export class ActionsListArtifactsForRepoRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: ActionsListArtifactsForRepoPathParams;
-
-  @Metadata()
-  queryParams: ActionsListArtifactsForRepoQueryParams;
-}
-
-
 export class ActionsListArtifactsForRepo200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=artifacts", elemType: shared.Artifact })
+  @SpeakeasyMetadata({ data: "json, name=artifacts", elemType: shared.Artifact })
   artifacts: shared.Artifact[];
 
-  @Metadata({ data: "json, name=total_count" })
+  @SpeakeasyMetadata({ data: "json, name=total_count" })
   totalCount: number;
 }
 
 
+export class ActionsListArtifactsForRepoRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: ActionsListArtifactsForRepoPathParams;
+
+  @SpeakeasyMetadata()
+  queryParams: ActionsListArtifactsForRepoQueryParams;
+}
+
+
 export class ActionsListArtifactsForRepoResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: Map<string, string[]>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   actionsListArtifactsForRepo200ApplicationJsonObject?: ActionsListArtifactsForRepo200ApplicationJson;
 }

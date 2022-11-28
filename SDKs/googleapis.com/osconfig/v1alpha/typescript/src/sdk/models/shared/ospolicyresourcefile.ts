@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { OsPolicyResourceFileGcs } from "./ospolicyresourcefilegcs";
 import { OsPolicyResourceFileRemote } from "./ospolicyresourcefileremote";
+
 
 
 // OsPolicyResourceFile
@@ -8,15 +9,15 @@ import { OsPolicyResourceFileRemote } from "./ospolicyresourcefileremote";
  * A remote or local file.
 **/
 export class OsPolicyResourceFile extends SpeakeasyBase {
-  @Metadata({ data: "json, name=allowInsecure" })
+  @SpeakeasyMetadata({ data: "json, name=allowInsecure" })
   allowInsecure?: boolean;
 
-  @Metadata({ data: "json, name=gcs" })
+  @SpeakeasyMetadata({ data: "json, name=gcs" })
   gcs?: OsPolicyResourceFileGcs;
 
-  @Metadata({ data: "json, name=localPath" })
+  @SpeakeasyMetadata({ data: "json, name=localPath" })
   localPath?: string;
 
-  @Metadata({ data: "json, name=remote" })
+  @SpeakeasyMetadata({ data: "json, name=remote" })
   remote?: OsPolicyResourceFileRemote;
 }

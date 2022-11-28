@@ -12,6 +12,8 @@ const (
 	PostSubtypeEnumReopened           PostSubtypeEnum = "REOPENED"
 )
 
+// Post
+// A regular posted comment.
 type Post struct {
 	Subtype *PostSubtypeEnum `json:"subtype,omitempty"`
 }

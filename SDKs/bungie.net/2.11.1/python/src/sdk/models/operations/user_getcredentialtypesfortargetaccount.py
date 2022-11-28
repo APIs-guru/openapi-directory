@@ -1,20 +1,20 @@
 from dataclasses import dataclass, field
-
+from typing import Optional
 
 
 @dataclass
 class UserGetCredentialTypesForTargetAccountPathParams:
-    membership_id: int = field(default=None, metadata={'path_param': { 'field_name': 'membershipId', 'style': 'simple', 'explode': False }})
+    membership_id: int = field(metadata={'path_param': { 'field_name': 'membershipId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class UserGetCredentialTypesForTargetAccountRequest:
-    path_params: UserGetCredentialTypesForTargetAccountPathParams = field(default=None)
+    path_params: UserGetCredentialTypesForTargetAccountPathParams = field()
     
 
 @dataclass
 class UserGetCredentialTypesForTargetAccountResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

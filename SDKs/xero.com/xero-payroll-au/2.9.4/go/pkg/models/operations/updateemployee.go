@@ -19,7 +19,7 @@ type UpdateEmployeeSecurity struct {
 type UpdateEmployeeRequest struct {
 	PathParams UpdateEmployeePathParams
 	Headers    UpdateEmployeeHeaders
-	Request    []shared.Employee `request:"mediaType=application/json"`
+	Request    []shared.EmployeeInput `request:"mediaType=application/json"`
 	Security   UpdateEmployeeSecurity
 }
 

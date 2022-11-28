@@ -1,6 +1,7 @@
 
 
+
 export enum AuthorizerStatusEnum {
-    Active = "ACTIVE"
-,    Inactive = "INACTIVE"
+    Active = "ACTIVE",
+    Inactive = "INACTIVE"
 }

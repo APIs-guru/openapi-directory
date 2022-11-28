@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import solutionversion
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class DescribeSolutionVersionResponse:
-    solution_version: Optional[solutionversion.SolutionVersion] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'solutionVersion' }})
+    solution_version: Optional[SolutionVersion] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('solutionVersion') }})
     

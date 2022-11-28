@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum PostPersonCmdEnum {
     Register = "register"
@@ -6,27 +7,27 @@ export enum PostPersonCmdEnum {
 
 
 export class PostPersonQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=cmd" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=cmd" })
   cmd: PostPersonCmdEnum;
 }
 
 
 export class PostPersonRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: PostPersonQueryParams;
 
-  @Metadata({ data: "request, media_type=application/xml" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/xml" })
   request: Uint8Array;
 }
 
 
 export class PostPersonResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

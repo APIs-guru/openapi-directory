@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class ServiceActionDefinitionTypeEnum(str, Enum):
     SSM_AUTOMATION = "SSM_AUTOMATION"

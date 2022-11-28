@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // Field
 /**
  * A data value in a column.
@@ -33,27 +33,27 @@ var Field = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=blobValue" }),
+        SpeakeasyMetadata({ data: "json, name=blobValue" }),
         __metadata("design:type", String)
     ], Field.prototype, "blobValue", void 0);
     __decorate([
-        Metadata({ data: "json, name=booleanValue" }),
+        SpeakeasyMetadata({ data: "json, name=booleanValue" }),
         __metadata("design:type", Boolean)
     ], Field.prototype, "booleanValue", void 0);
     __decorate([
-        Metadata({ data: "json, name=doubleValue" }),
+        SpeakeasyMetadata({ data: "json, name=doubleValue" }),
         __metadata("design:type", Number)
     ], Field.prototype, "doubleValue", void 0);
     __decorate([
-        Metadata({ data: "json, name=isNull" }),
+        SpeakeasyMetadata({ data: "json, name=isNull" }),
         __metadata("design:type", Boolean)
     ], Field.prototype, "isNull", void 0);
     __decorate([
-        Metadata({ data: "json, name=longValue" }),
+        SpeakeasyMetadata({ data: "json, name=longValue" }),
         __metadata("design:type", Number)
     ], Field.prototype, "longValue", void 0);
     __decorate([
-        Metadata({ data: "json, name=stringValue" }),
+        SpeakeasyMetadata({ data: "json, name=stringValue" }),
         __metadata("design:type", String)
     ], Field.prototype, "stringValue", void 0);
     return Field;

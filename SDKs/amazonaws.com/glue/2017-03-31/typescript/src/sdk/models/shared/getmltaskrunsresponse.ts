@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TaskRun } from "./taskrun";
 
 
+
 export class GetMlTaskRunsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=TaskRuns", elemType: shared.TaskRun })
+  @SpeakeasyMetadata({ data: "json, name=TaskRuns", elemType: TaskRun })
   taskRuns?: TaskRun[];
 }

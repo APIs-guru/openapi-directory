@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { MarketplaceAccount } from "./marketplaceaccount";
 import { MarketplaceListingPlan } from "./marketplacelistingplan";
+
 
 
 // UserMarketplacePurchase
@@ -8,27 +9,27 @@ import { MarketplaceListingPlan } from "./marketplacelistingplan";
  * User Marketplace Purchase
 **/
 export class UserMarketplacePurchase extends SpeakeasyBase {
-  @Metadata({ data: "json, name=account" })
+  @SpeakeasyMetadata({ data: "json, name=account" })
   account: MarketplaceAccount;
 
-  @Metadata({ data: "json, name=billing_cycle" })
+  @SpeakeasyMetadata({ data: "json, name=billing_cycle" })
   billingCycle: string;
 
-  @Metadata({ data: "json, name=free_trial_ends_on" })
+  @SpeakeasyMetadata({ data: "json, name=free_trial_ends_on" })
   freeTrialEndsOn: Date;
 
-  @Metadata({ data: "json, name=next_billing_date" })
+  @SpeakeasyMetadata({ data: "json, name=next_billing_date" })
   nextBillingDate: Date;
 
-  @Metadata({ data: "json, name=on_free_trial" })
+  @SpeakeasyMetadata({ data: "json, name=on_free_trial" })
   onFreeTrial: boolean;
 
-  @Metadata({ data: "json, name=plan" })
+  @SpeakeasyMetadata({ data: "json, name=plan" })
   plan: MarketplaceListingPlan;
 
-  @Metadata({ data: "json, name=unit_count" })
+  @SpeakeasyMetadata({ data: "json, name=unit_count" })
   unitCount: number;
 
-  @Metadata({ data: "json, name=updated_at" })
+  @SpeakeasyMetadata({ data: "json, name=updated_at" })
   updatedAt: Date;
 }

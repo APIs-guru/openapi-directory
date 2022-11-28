@@ -10,26 +10,18 @@ type GetLinodeStatsByYearMonthPathParams struct {
 	Year     int64 `pathParam:"style=simple,explode=false,name=year"`
 }
 
-type GetLinodeStatsByYearMonthSecurityOption1 struct {
-	PersonalAccessToken shared.SchemePersonalAccessToken `security:"scheme,type=http,subtype=bearer"`
-}
-
-type GetLinodeStatsByYearMonthSecurityOption2 struct {
-	Oauth shared.SchemeOauth `security:"scheme,type=oauth2"`
-}
-
 type GetLinodeStatsByYearMonthSecurity struct {
-	Option1 *GetLinodeStatsByYearMonthSecurityOption1 `security:"option"`
-	Option2 *GetLinodeStatsByYearMonthSecurityOption2 `security:"option"`
+	PersonalAccessToken *shared.SchemePersonalAccessToken `security:"scheme,type=http,subtype=bearer"`
+	Oauth               *shared.SchemeOauth               `security:"scheme,type=oauth2"`
+}
+
+type GetLinodeStatsByYearMonthDefaultApplicationJSON struct {
+	Errors []shared.ErrorObject `json:"errors,omitempty"`
 }
 
 type GetLinodeStatsByYearMonthRequest struct {
 	PathParams GetLinodeStatsByYearMonthPathParams
 	Security   GetLinodeStatsByYearMonthSecurity
-}
-
-type GetLinodeStatsByYearMonthDefaultApplicationJSON struct {
-	Errors []shared.ErrorObject `json:"errors,omitempty"`
 }
 
 type GetLinodeStatsByYearMonthResponse struct {

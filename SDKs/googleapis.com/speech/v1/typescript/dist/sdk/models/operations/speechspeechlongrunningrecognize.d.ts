@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class SpeechSpeechLongrunningrecognizeQueryParams extends SpeakeasyBase {
     dollarXgafv?: shared.XgafvEnum;
@@ -19,7 +19,7 @@ export declare class SpeechSpeechLongrunningrecognizeSecurity extends SpeakeasyB
 }
 export declare class SpeechSpeechLongrunningrecognizeRequest extends SpeakeasyBase {
     queryParams: SpeechSpeechLongrunningrecognizeQueryParams;
-    request?: shared.LongRunningRecognizeRequest;
+    request?: shared.LongRunningRecognizeRequestInput;
     security: SpeechSpeechLongrunningrecognizeSecurity;
 }
 export declare class SpeechSpeechLongrunningrecognizeResponse extends SpeakeasyBase {

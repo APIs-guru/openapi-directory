@@ -1,7 +1,8 @@
 
 
+
 export enum ReportFrequencyTypeEnum {
-    Day = "DAY"
-,    Week = "WEEK"
-,    Month = "MONTH"
+    Day = "DAY",
+    Week = "WEEK",
+    Month = "MONTH"
 }

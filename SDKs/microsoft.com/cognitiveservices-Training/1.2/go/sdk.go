@@ -11,7 +11,7 @@ import (
 	"strings"
 )
 
-var Servers = []string{
+var ServerList = []string{
 	"https://southcentralus.api.cognitive.microsoft.com/customvision/v1.2/Training",
 }
 
@@ -20,9 +20,13 @@ type HTTPClient interface {
 }
 
 type SDK struct {
-	defaultClient  HTTPClient
-	securityClient HTTPClient
-	serverURL      string
+	_defaultClient  HTTPClient
+	_securityClient HTTPClient
+
+	_serverURL  string
+	_language   string
+	_sdkVersion string
+	_genVersion string
 }
 
 type SDKOption func(*SDK)
@@ -33,27 +37,47 @@ func WithServerURL(serverURL string, params map[string]string) SDKOption {
 			serverURL = utils.ReplaceParameters(serverURL, params)
 		}
 
-		sdk.serverURL = serverURL
+		sdk._serverURL = serverURL
+	}
+}
+
+func WithClient(client HTTPClient) SDKOption {
+	return func(sdk *SDK) {
+		sdk._defaultClient = client
 	}
 }
 
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
-		defaultClient:  http.DefaultClient,
-		securityClient: http.DefaultClient,
+		_language:   "go",
+		_sdkVersion: "",
+		_genVersion: "internal",
 	}
 	for _, opt := range opts {
 		opt(sdk)
 	}
-	if sdk.serverURL == "" {
-		sdk.serverURL = Servers[0]
+
+	if sdk._defaultClient == nil {
+		sdk._defaultClient = http.DefaultClient
+	}
+	if sdk._securityClient == nil {
+
+		sdk._securityClient = sdk._defaultClient
+
+	}
+
+	if sdk._serverURL == "" {
+		sdk._serverURL = ServerList[0]
 	}
 
 	return sdk
 }
 
+// CreateImagesFromData - Add the provided images to the set of training images
+// This API accepts body content as multipart/form-data and application/octet-stream. When using multipart
+// multiple image files can be sent at once, with a maximum of 64 files
 func (s *SDK) CreateImagesFromData(ctx context.Context, request operations.CreateImagesFromDataRequest) (*operations.CreateImagesFromDataResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/projects/{projectId}/images", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -75,7 +99,7 @@ func (s *SDK) CreateImagesFromData(ctx context.Context, request operations.Creat
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -126,8 +150,9 @@ func (s *SDK) CreateImagesFromData(ctx context.Context, request operations.Creat
 	return res, nil
 }
 
+// CreateProject - Create a project
 func (s *SDK) CreateProject(ctx context.Context, request operations.CreateProjectRequest) (*operations.CreateProjectResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/projects"
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -139,7 +164,7 @@ func (s *SDK) CreateProject(ctx context.Context, request operations.CreateProjec
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -190,8 +215,9 @@ func (s *SDK) CreateProject(ctx context.Context, request operations.CreateProjec
 	return res, nil
 }
 
+// CreateTag - Create a tag for the project
 func (s *SDK) CreateTag(ctx context.Context, request operations.CreateTagRequest) (*operations.CreateTagResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/projects/{projectId}/tags", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -203,7 +229,7 @@ func (s *SDK) CreateTag(ctx context.Context, request operations.CreateTagRequest
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -254,8 +280,9 @@ func (s *SDK) CreateTag(ctx context.Context, request operations.CreateTagRequest
 	return res, nil
 }
 
+// DeleteImageTags - Remove a set of tags from a set of images
 func (s *SDK) DeleteImageTags(ctx context.Context, request operations.DeleteImageTagsRequest) (*operations.DeleteImageTagsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/projects/{projectId}/images/tags", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -267,7 +294,7 @@ func (s *SDK) DeleteImageTags(ctx context.Context, request operations.DeleteImag
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -288,8 +315,9 @@ func (s *SDK) DeleteImageTags(ctx context.Context, request operations.DeleteImag
 	return res, nil
 }
 
+// DeleteImages - Delete images from the set of training images
 func (s *SDK) DeleteImages(ctx context.Context, request operations.DeleteImagesRequest) (*operations.DeleteImagesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/projects/{projectId}/images", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -301,7 +329,7 @@ func (s *SDK) DeleteImages(ctx context.Context, request operations.DeleteImagesR
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -322,8 +350,9 @@ func (s *SDK) DeleteImages(ctx context.Context, request operations.DeleteImagesR
 	return res, nil
 }
 
+// DeleteIteration - Delete a specific iteration of a project
 func (s *SDK) DeleteIteration(ctx context.Context, request operations.DeleteIterationRequest) (*operations.DeleteIterationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/projects/{projectId}/iterations/{iterationId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -333,7 +362,7 @@ func (s *SDK) DeleteIteration(ctx context.Context, request operations.DeleteIter
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -354,8 +383,9 @@ func (s *SDK) DeleteIteration(ctx context.Context, request operations.DeleteIter
 	return res, nil
 }
 
+// DeletePrediction - Delete a set of predicted images and their associated prediction results
 func (s *SDK) DeletePrediction(ctx context.Context, request operations.DeletePredictionRequest) (*operations.DeletePredictionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/projects/{projectId}/predictions", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -367,7 +397,7 @@ func (s *SDK) DeletePrediction(ctx context.Context, request operations.DeletePre
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -388,8 +418,9 @@ func (s *SDK) DeletePrediction(ctx context.Context, request operations.DeletePre
 	return res, nil
 }
 
+// DeleteProject - Delete a specific project
 func (s *SDK) DeleteProject(ctx context.Context, request operations.DeleteProjectRequest) (*operations.DeleteProjectResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/projects/{projectId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -399,7 +430,7 @@ func (s *SDK) DeleteProject(ctx context.Context, request operations.DeleteProjec
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -420,8 +451,9 @@ func (s *SDK) DeleteProject(ctx context.Context, request operations.DeleteProjec
 	return res, nil
 }
 
+// DeleteTag - Delete a tag from the project
 func (s *SDK) DeleteTag(ctx context.Context, request operations.DeleteTagRequest) (*operations.DeleteTagResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/projects/{projectId}/tags/{tagId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -431,7 +463,7 @@ func (s *SDK) DeleteTag(ctx context.Context, request operations.DeleteTagRequest
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -452,8 +484,9 @@ func (s *SDK) DeleteTag(ctx context.Context, request operations.DeleteTagRequest
 	return res, nil
 }
 
+// ExportIteration - Export a trained iteration
 func (s *SDK) ExportIteration(ctx context.Context, request operations.ExportIterationRequest) (*operations.ExportIterationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/projects/{projectId}/iterations/{iterationId}/export", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -465,7 +498,7 @@ func (s *SDK) ExportIteration(ctx context.Context, request operations.ExportIter
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -516,8 +549,9 @@ func (s *SDK) ExportIteration(ctx context.Context, request operations.ExportIter
 	return res, nil
 }
 
+// GetAccountInfo - Get basic information about your account
 func (s *SDK) GetAccountInfo(ctx context.Context, request operations.GetAccountInfoRequest) (*operations.GetAccountInfoResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/account"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -527,7 +561,7 @@ func (s *SDK) GetAccountInfo(ctx context.Context, request operations.GetAccountI
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -578,8 +612,9 @@ func (s *SDK) GetAccountInfo(ctx context.Context, request operations.GetAccountI
 	return res, nil
 }
 
+// GetDomain - Get information about a specific domain
 func (s *SDK) GetDomain(ctx context.Context, request operations.GetDomainRequest) (*operations.GetDomainResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/domains/{domainId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -589,7 +624,7 @@ func (s *SDK) GetDomain(ctx context.Context, request operations.GetDomainRequest
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -640,8 +675,9 @@ func (s *SDK) GetDomain(ctx context.Context, request operations.GetDomainRequest
 	return res, nil
 }
 
+// GetDomains - Get a list of the available domains
 func (s *SDK) GetDomains(ctx context.Context, request operations.GetDomainsRequest) (*operations.GetDomainsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/domains"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -651,7 +687,7 @@ func (s *SDK) GetDomains(ctx context.Context, request operations.GetDomainsReque
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -702,8 +738,9 @@ func (s *SDK) GetDomains(ctx context.Context, request operations.GetDomainsReque
 	return res, nil
 }
 
+// GetExports - Get the list of exports for a specific iteration
 func (s *SDK) GetExports(ctx context.Context, request operations.GetExportsRequest) (*operations.GetExportsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/projects/{projectId}/iterations/{iterationId}/export", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -713,7 +750,7 @@ func (s *SDK) GetExports(ctx context.Context, request operations.GetExportsReque
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -764,8 +801,9 @@ func (s *SDK) GetExports(ctx context.Context, request operations.GetExportsReque
 	return res, nil
 }
 
+// GetIteration - Get a specific iteration
 func (s *SDK) GetIteration(ctx context.Context, request operations.GetIterationRequest) (*operations.GetIterationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/projects/{projectId}/iterations/{iterationId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -775,7 +813,7 @@ func (s *SDK) GetIteration(ctx context.Context, request operations.GetIterationR
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -826,8 +864,9 @@ func (s *SDK) GetIteration(ctx context.Context, request operations.GetIterationR
 	return res, nil
 }
 
+// GetIterationPerformance - Get detailed performance information about a trained iteration
 func (s *SDK) GetIterationPerformance(ctx context.Context, request operations.GetIterationPerformanceRequest) (*operations.GetIterationPerformanceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/projects/{projectId}/iterations/{iterationId}/performance", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -839,7 +878,7 @@ func (s *SDK) GetIterationPerformance(ctx context.Context, request operations.Ge
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -890,8 +929,9 @@ func (s *SDK) GetIterationPerformance(ctx context.Context, request operations.Ge
 	return res, nil
 }
 
+// GetIterations - Get iterations for the project
 func (s *SDK) GetIterations(ctx context.Context, request operations.GetIterationsRequest) (*operations.GetIterationsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/projects/{projectId}/iterations", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -901,7 +941,7 @@ func (s *SDK) GetIterations(ctx context.Context, request operations.GetIteration
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -952,8 +992,9 @@ func (s *SDK) GetIterations(ctx context.Context, request operations.GetIteration
 	return res, nil
 }
 
+// GetProject - Get a specific project
 func (s *SDK) GetProject(ctx context.Context, request operations.GetProjectRequest) (*operations.GetProjectResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/projects/{projectId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -963,7 +1004,7 @@ func (s *SDK) GetProject(ctx context.Context, request operations.GetProjectReque
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1014,8 +1055,9 @@ func (s *SDK) GetProject(ctx context.Context, request operations.GetProjectReque
 	return res, nil
 }
 
+// GetProjects - Get your projects
 func (s *SDK) GetProjects(ctx context.Context, request operations.GetProjectsRequest) (*operations.GetProjectsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/projects"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1025,7 +1067,7 @@ func (s *SDK) GetProjects(ctx context.Context, request operations.GetProjectsReq
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1076,8 +1118,9 @@ func (s *SDK) GetProjects(ctx context.Context, request operations.GetProjectsReq
 	return res, nil
 }
 
+// GetTag - Get information about a specific tag
 func (s *SDK) GetTag(ctx context.Context, request operations.GetTagRequest) (*operations.GetTagResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/projects/{projectId}/tags/{tagId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1089,7 +1132,7 @@ func (s *SDK) GetTag(ctx context.Context, request operations.GetTagRequest) (*op
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1140,8 +1183,13 @@ func (s *SDK) GetTag(ctx context.Context, request operations.GetTagRequest) (*op
 	return res, nil
 }
 
+// GetTaggedImages - Get tagged images for a given project iteration
+// This API supports batching and range selection. By default it will only return first 50 images matching images.
+// Use the {take} and {skip} parameters to control how many images to return in a given batch.
+// The filtering is on an and/or relationship. For example, if the provided tag ids are for the "Dog" and
+// "Cat" tags, then only images tagged with Dog and/or Cat will be returned
 func (s *SDK) GetTaggedImages(ctx context.Context, request operations.GetTaggedImagesRequest) (*operations.GetTaggedImagesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/projects/{projectId}/images/tagged", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1153,7 +1201,7 @@ func (s *SDK) GetTaggedImages(ctx context.Context, request operations.GetTaggedI
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1204,8 +1252,9 @@ func (s *SDK) GetTaggedImages(ctx context.Context, request operations.GetTaggedI
 	return res, nil
 }
 
+// GetTags - Get the tags for a given project and iteration
 func (s *SDK) GetTags(ctx context.Context, request operations.GetTagsRequest) (*operations.GetTagsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/projects/{projectId}/tags", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1217,7 +1266,7 @@ func (s *SDK) GetTags(ctx context.Context, request operations.GetTagsRequest) (*
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1268,8 +1317,11 @@ func (s *SDK) GetTags(ctx context.Context, request operations.GetTagsRequest) (*
 	return res, nil
 }
 
+// GetUntaggedImages - Get untagged images for a given project iteration
+// This API supports batching and range selection. By default it will only return first 50 images matching images.
+// Use the {take} and {skip} parameters to control how many images to return in a given batch.
 func (s *SDK) GetUntaggedImages(ctx context.Context, request operations.GetUntaggedImagesRequest) (*operations.GetUntaggedImagesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/projects/{projectId}/images/untagged", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1281,7 +1333,7 @@ func (s *SDK) GetUntaggedImages(ctx context.Context, request operations.GetUntag
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1332,8 +1384,9 @@ func (s *SDK) GetUntaggedImages(ctx context.Context, request operations.GetUntag
 	return res, nil
 }
 
+// QuickTestImage - Quick test an image
 func (s *SDK) QuickTestImage(ctx context.Context, request operations.QuickTestImageRequest) (*operations.QuickTestImageResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/projects/{projectId}/quicktest/image", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1355,7 +1408,7 @@ func (s *SDK) QuickTestImage(ctx context.Context, request operations.QuickTestIm
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1406,8 +1459,9 @@ func (s *SDK) QuickTestImage(ctx context.Context, request operations.QuickTestIm
 	return res, nil
 }
 
+// QuickTestImageURL - Quick test an image url
 func (s *SDK) QuickTestImageURL(ctx context.Context, request operations.QuickTestImageURLRequest) (*operations.QuickTestImageURLResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/projects/{projectId}/quicktest/url", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1429,7 +1483,7 @@ func (s *SDK) QuickTestImageURL(ctx context.Context, request operations.QuickTes
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1480,8 +1534,9 @@ func (s *SDK) QuickTestImageURL(ctx context.Context, request operations.QuickTes
 	return res, nil
 }
 
+// TrainProject - Queues project for training
 func (s *SDK) TrainProject(ctx context.Context, request operations.TrainProjectRequest) (*operations.TrainProjectResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/projects/{projectId}/train", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -1491,7 +1546,7 @@ func (s *SDK) TrainProject(ctx context.Context, request operations.TrainProjectR
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1542,8 +1597,9 @@ func (s *SDK) TrainProject(ctx context.Context, request operations.TrainProjectR
 	return res, nil
 }
 
+// UpdateIteration - Update a specific iteration
 func (s *SDK) UpdateIteration(ctx context.Context, request operations.UpdateIterationRequest) (*operations.UpdateIterationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/projects/{projectId}/iterations/{iterationId}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1563,7 +1619,7 @@ func (s *SDK) UpdateIteration(ctx context.Context, request operations.UpdateIter
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1614,8 +1670,9 @@ func (s *SDK) UpdateIteration(ctx context.Context, request operations.UpdateIter
 	return res, nil
 }
 
+// UpdateProject - Update a specific project
 func (s *SDK) UpdateProject(ctx context.Context, request operations.UpdateProjectRequest) (*operations.UpdateProjectResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/projects/{projectId}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1635,7 +1692,7 @@ func (s *SDK) UpdateProject(ctx context.Context, request operations.UpdateProjec
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1686,8 +1743,9 @@ func (s *SDK) UpdateProject(ctx context.Context, request operations.UpdateProjec
 	return res, nil
 }
 
+// UpdateTag - Update a tag
 func (s *SDK) UpdateTag(ctx context.Context, request operations.UpdateTagRequest) (*operations.UpdateTagResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/projects/{projectId}/tags/{tagId}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1707,7 +1765,7 @@ func (s *SDK) UpdateTag(ctx context.Context, request operations.UpdateTagRequest
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {

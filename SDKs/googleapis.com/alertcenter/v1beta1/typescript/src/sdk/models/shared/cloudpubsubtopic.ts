@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum CloudPubsubTopicPayloadFormatEnum {
-    PayloadFormatUnspecified = "PAYLOAD_FORMAT_UNSPECIFIED"
-,    Json = "JSON"
+    PayloadFormatUnspecified = "PAYLOAD_FORMAT_UNSPECIFIED",
+    Json = "JSON"
 }
 
 
@@ -11,9 +12,9 @@ export enum CloudPubsubTopicPayloadFormatEnum {
  * A reference to a Cloud Pubsub topic. To register for notifications, the owner of the topic must grant `alerts-api-push-notifications@system.gserviceaccount.com` the `projects.topics.publish` permission.
 **/
 export class CloudPubsubTopic extends SpeakeasyBase {
-  @Metadata({ data: "json, name=payloadFormat" })
+  @SpeakeasyMetadata({ data: "json, name=payloadFormat" })
   payloadFormat?: CloudPubsubTopicPayloadFormatEnum;
 
-  @Metadata({ data: "json, name=topicName" })
+  @SpeakeasyMetadata({ data: "json, name=topicName" })
   topicName?: string;
 }

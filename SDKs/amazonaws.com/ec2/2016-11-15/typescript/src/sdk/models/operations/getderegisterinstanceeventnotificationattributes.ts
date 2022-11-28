@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum GetDeregisterInstanceEventNotificationAttributesActionEnum {
     DeregisterInstanceEventNotificationAttributes = "DeregisterInstanceEventNotificationAttributes"
@@ -10,10 +11,10 @@ export enum GetDeregisterInstanceEventNotificationAttributesActionEnum {
  * Information about the tag keys to deregister for the current Region. You can either specify individual tag keys or deregister all tag keys in the current Region. You must specify either <code>IncludeAllTagsOfInstance</code> or <code>InstanceTagKeys</code> in the request
 **/
 export class GetDeregisterInstanceEventNotificationAttributesInstanceTagAttribute extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, name=IncludeAllTagsOfInstance" })
+  @SpeakeasyMetadata({ data: "queryParam, name=IncludeAllTagsOfInstance" })
   includeAllTagsOfInstance?: boolean;
 
-  @Metadata({ data: "queryParam, name=InstanceTagKeys" })
+  @SpeakeasyMetadata({ data: "queryParam, name=InstanceTagKeys" })
   instanceTagKeys?: string[];
 }
 
@@ -23,60 +24,60 @@ export enum GetDeregisterInstanceEventNotificationAttributesVersionEnum {
 
 
 export class GetDeregisterInstanceEventNotificationAttributesQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Action" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Action" })
   action: GetDeregisterInstanceEventNotificationAttributesActionEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=DryRun" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=DryRun" })
   dryRun?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=InstanceTagAttribute" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=InstanceTagAttribute" })
   instanceTagAttribute?: GetDeregisterInstanceEventNotificationAttributesInstanceTagAttribute;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Version" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Version" })
   version: GetDeregisterInstanceEventNotificationAttributesVersionEnum;
 }
 
 
 export class GetDeregisterInstanceEventNotificationAttributesHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
 
 export class GetDeregisterInstanceEventNotificationAttributesRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetDeregisterInstanceEventNotificationAttributesQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: GetDeregisterInstanceEventNotificationAttributesHeaders;
 }
 
 
 export class GetDeregisterInstanceEventNotificationAttributesResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

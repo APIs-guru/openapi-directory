@@ -1,14 +1,18 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import codeconfiguration
-from . import sourcecodeversion
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class CodeRepository:
-    code_configuration: Optional[codeconfiguration.CodeConfiguration] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'CodeConfiguration' }})
-    repository_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'RepositoryUrl' }})
-    source_code_version: sourcecodeversion.SourceCodeVersion = field(default=None, metadata={'dataclasses_json': { 'field_name': 'SourceCodeVersion' }})
+    r"""CodeRepository
+    Describes a source code repository.
+    """
+    
+    repository_url: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('RepositoryUrl') }})
+    source_code_version: SourceCodeVersion = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('SourceCodeVersion') }})
+    code_configuration: Optional[CodeConfiguration] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('CodeConfiguration') }})
     

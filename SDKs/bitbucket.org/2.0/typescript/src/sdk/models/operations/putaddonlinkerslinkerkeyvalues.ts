@@ -1,59 +1,42 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class PutAddonLinkersLinkerKeyValuesPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=linker_key" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=linker_key" })
   linkerKey: string;
 }
 
 
-export class PutAddonLinkersLinkerKeyValuesSecurityOption1 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
-  oauth2: shared.SchemeOauth2;
-}
-
-
-export class PutAddonLinkersLinkerKeyValuesSecurityOption2 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=basic" })
-  basic: shared.SchemeBasic;
-}
-
-
-export class PutAddonLinkersLinkerKeyValuesSecurityOption3 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
-  apiKey: shared.SchemeApiKey;
-}
-
-
 export class PutAddonLinkersLinkerKeyValuesSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, option=true" })
-  option1?: PutAddonLinkersLinkerKeyValuesSecurityOption1;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
+  oauth2?: shared.SchemeOauth2;
 
-  @Metadata({ data: "security, option=true" })
-  option2?: PutAddonLinkersLinkerKeyValuesSecurityOption2;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=basic" })
+  basic?: shared.SchemeBasic;
 
-  @Metadata({ data: "security, option=true" })
-  option3?: PutAddonLinkersLinkerKeyValuesSecurityOption3;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  apiKey?: shared.SchemeApiKey;
 }
 
 
 export class PutAddonLinkersLinkerKeyValuesRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: PutAddonLinkersLinkerKeyValuesPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: PutAddonLinkersLinkerKeyValuesSecurity;
 }
 
 
 export class PutAddonLinkersLinkerKeyValuesResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   error?: Map<string, any>;
 }

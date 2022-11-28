@@ -30,7 +30,7 @@ type EssentialcontactsProjectsContactsCreateSecurity struct {
 type EssentialcontactsProjectsContactsCreateRequest struct {
 	PathParams  EssentialcontactsProjectsContactsCreatePathParams
 	QueryParams EssentialcontactsProjectsContactsCreateQueryParams
-	Request     *shared.GoogleCloudEssentialcontactsV1Contact `request:"mediaType=application/json"`
+	Request     *shared.GoogleCloudEssentialcontactsV1ContactInput `request:"mediaType=application/json"`
 	Security    EssentialcontactsProjectsContactsCreateSecurity
 }
 

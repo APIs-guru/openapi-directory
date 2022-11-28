@@ -1,4 +1,4 @@
-from .__xgafv_enum import *
+from ._xgafv_enum import *
 from .alt_enum import *
 from .auditloggingsettings import *
 from .booleanoperatoroptions import *
@@ -15,7 +15,7 @@ from .customeruserstats import *
 from .datasource import *
 from .datasourceindexstats import *
 from .datasourcerestriction import *
-from .date import *
+from .date_ import *
 from .dateoperatoroptions import *
 from .datepropertyoptions import *
 from .datevalues import *

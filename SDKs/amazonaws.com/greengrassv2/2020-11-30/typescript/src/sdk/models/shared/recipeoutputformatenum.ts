@@ -1,6 +1,7 @@
 
 
+
 export enum RecipeOutputFormatEnum {
-    Json = "JSON"
-,    Yaml = "YAML"
+    Json = "JSON",
+    Yaml = "YAML"
 }

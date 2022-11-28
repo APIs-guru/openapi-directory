@@ -1,20 +1,21 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RecognitionAudio } from "./recognitionaudio";
-import { RecognitionConfig } from "./recognitionconfig";
+import { RecognitionConfigInput } from "./recognitionconfig";
 import { TranscriptOutputConfig } from "./transcriptoutputconfig";
 
 
-// LongRunningRecognizeRequest
+
+// LongRunningRecognizeRequestInput
 /** 
  * The top-level message sent by the client for the `LongRunningRecognize` method.
 **/
-export class LongRunningRecognizeRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=audio" })
+export class LongRunningRecognizeRequestInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=audio" })
   audio?: RecognitionAudio;
 
-  @Metadata({ data: "json, name=config" })
-  config?: RecognitionConfig;
+  @SpeakeasyMetadata({ data: "json, name=config" })
+  config?: RecognitionConfigInput;
 
-  @Metadata({ data: "json, name=outputConfig" })
+  @SpeakeasyMetadata({ data: "json, name=outputConfig" })
   outputConfig?: TranscriptOutputConfig;
 }

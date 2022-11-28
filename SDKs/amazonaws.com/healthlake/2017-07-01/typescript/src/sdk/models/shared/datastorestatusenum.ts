@@ -1,8 +1,9 @@
 
 
+
 export enum DatastoreStatusEnum {
-    Creating = "CREATING"
-,    Active = "ACTIVE"
-,    Deleting = "DELETING"
-,    Deleted = "DELETED"
+    Creating = "CREATING",
+    Active = "ACTIVE",
+    Deleting = "DELETING",
+    Deleted = "DELETED"
 }

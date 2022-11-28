@@ -8,6 +8,8 @@ const (
 	ProtectConfigWorkloadVulnerabilityModeEnumBasic                                ProtectConfigWorkloadVulnerabilityModeEnum = "BASIC"
 )
 
+// ProtectConfig
+// ProtectConfig defines the flags needed to enable/disable features for the Protect API.
 type ProtectConfig struct {
 	WorkloadConfig            *WorkloadConfig                             `json:"workloadConfig,omitempty"`
 	WorkloadVulnerabilityMode *ProtectConfigWorkloadVulnerabilityModeEnum `json:"workloadVulnerabilityMode,omitempty"`

@@ -11,6 +11,7 @@ from .componentversion import *
 from .credential import *
 from .credentialoptions import *
 from .event import *
+from .license import *
 from .organization import *
 from .orgoptions import *
 from .scanoptions import *
@@ -19,6 +20,7 @@ from .service import *
 from .site import *
 from .siteoptions import *
 from .task import *
+from .url import *
 from .user import *
 from .userinviteoptions import *
 from .useroptions import *

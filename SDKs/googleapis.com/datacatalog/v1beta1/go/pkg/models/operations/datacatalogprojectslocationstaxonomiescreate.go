@@ -30,7 +30,7 @@ type DatacatalogProjectsLocationsTaxonomiesCreateSecurity struct {
 type DatacatalogProjectsLocationsTaxonomiesCreateRequest struct {
 	PathParams  DatacatalogProjectsLocationsTaxonomiesCreatePathParams
 	QueryParams DatacatalogProjectsLocationsTaxonomiesCreateQueryParams
-	Request     *shared.GoogleCloudDatacatalogV1beta1Taxonomy `request:"mediaType=application/json"`
+	Request     *shared.GoogleCloudDatacatalogV1beta1TaxonomyInput `request:"mediaType=application/json"`
 	Security    DatacatalogProjectsLocationsTaxonomiesCreateSecurity
 }
 

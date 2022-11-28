@@ -1,5 +1,7 @@
 package shared
 
+// JobFlowInstancesDetail
+// Specify the type of Amazon EC2 instances that the cluster (job flow) runs on.
 type JobFlowInstancesDetail struct {
 	Ec2KeyName                  *string               `json:"Ec2KeyName,omitempty"`
 	Ec2SubnetID                 *string               `json:"Ec2SubnetId,omitempty"`

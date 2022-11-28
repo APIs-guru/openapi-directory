@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetBlockIndexResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=blockHash" })
+  @SpeakeasyMetadata({ data: "json, name=blockHash" })
   blockHash?: string;
 }

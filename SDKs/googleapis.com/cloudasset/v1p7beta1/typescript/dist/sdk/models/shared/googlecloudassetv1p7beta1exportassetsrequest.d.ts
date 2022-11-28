@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudAssetV1p7beta1OutputConfig } from "./googlecloudassetv1p7beta1outputconfig";
 export declare enum GoogleCloudAssetV1p7beta1ExportAssetsRequestContentTypeEnum {
     ContentTypeUnspecified = "CONTENT_TYPE_UNSPECIFIED",

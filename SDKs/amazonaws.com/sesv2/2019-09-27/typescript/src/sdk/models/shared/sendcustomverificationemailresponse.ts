@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // SendCustomVerificationEmailResponse
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The following element is returned by the service.
 **/
 export class SendCustomVerificationEmailResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=MessageId" })
+  @SpeakeasyMetadata({ data: "json, name=MessageId" })
   messageId?: string;
 }

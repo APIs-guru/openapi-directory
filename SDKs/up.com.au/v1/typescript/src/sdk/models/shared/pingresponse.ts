@@ -1,11 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class PingResponseMeta extends SpeakeasyBase {
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: string;
 
-  @Metadata({ data: "json, name=statusEmoji" })
+  @SpeakeasyMetadata({ data: "json, name=statusEmoji" })
   statusEmoji: string;
 }
 
@@ -16,6 +17,6 @@ export class PingResponseMeta extends SpeakeasyBase {
  * 
 **/
 export class PingResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=meta" })
+  @SpeakeasyMetadata({ data: "json, name=meta" })
   meta: PingResponseMeta;
 }

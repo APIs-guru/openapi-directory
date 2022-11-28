@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ProductPurchase
@@ -6,45 +7,45 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A ProductPurchase resource indicates the status of a user's inapp product purchase.
 **/
 export class ProductPurchase extends SpeakeasyBase {
-  @Metadata({ data: "json, name=acknowledgementState" })
+  @SpeakeasyMetadata({ data: "json, name=acknowledgementState" })
   acknowledgementState?: number;
 
-  @Metadata({ data: "json, name=consumptionState" })
+  @SpeakeasyMetadata({ data: "json, name=consumptionState" })
   consumptionState?: number;
 
-  @Metadata({ data: "json, name=developerPayload" })
+  @SpeakeasyMetadata({ data: "json, name=developerPayload" })
   developerPayload?: string;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=obfuscatedExternalAccountId" })
+  @SpeakeasyMetadata({ data: "json, name=obfuscatedExternalAccountId" })
   obfuscatedExternalAccountId?: string;
 
-  @Metadata({ data: "json, name=obfuscatedExternalProfileId" })
+  @SpeakeasyMetadata({ data: "json, name=obfuscatedExternalProfileId" })
   obfuscatedExternalProfileId?: string;
 
-  @Metadata({ data: "json, name=orderId" })
+  @SpeakeasyMetadata({ data: "json, name=orderId" })
   orderId?: string;
 
-  @Metadata({ data: "json, name=productId" })
+  @SpeakeasyMetadata({ data: "json, name=productId" })
   productId?: string;
 
-  @Metadata({ data: "json, name=purchaseState" })
+  @SpeakeasyMetadata({ data: "json, name=purchaseState" })
   purchaseState?: number;
 
-  @Metadata({ data: "json, name=purchaseTimeMillis" })
+  @SpeakeasyMetadata({ data: "json, name=purchaseTimeMillis" })
   purchaseTimeMillis?: string;
 
-  @Metadata({ data: "json, name=purchaseToken" })
+  @SpeakeasyMetadata({ data: "json, name=purchaseToken" })
   purchaseToken?: string;
 
-  @Metadata({ data: "json, name=purchaseType" })
+  @SpeakeasyMetadata({ data: "json, name=purchaseType" })
   purchaseType?: number;
 
-  @Metadata({ data: "json, name=quantity" })
+  @SpeakeasyMetadata({ data: "json, name=quantity" })
   quantity?: number;
 
-  @Metadata({ data: "json, name=regionCode" })
+  @SpeakeasyMetadata({ data: "json, name=regionCode" })
   regionCode?: string;
 }

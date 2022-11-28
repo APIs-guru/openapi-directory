@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Phrase } from "./phrase";
+
 
 
 // PhraseSet
@@ -8,12 +8,12 @@ import { Phrase } from "./phrase";
  * Provides "hints" to the speech recognizer to favor specific words and phrases in the results.
 **/
 export class PhraseSet extends SpeakeasyBase {
-  @Metadata({ data: "json, name=boost" })
+  @SpeakeasyMetadata({ data: "json, name=boost" })
   boost?: number;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=phrases", elemType: shared.Phrase })
+  @SpeakeasyMetadata({ data: "json, name=phrases", elemType: Phrase })
   phrases?: Phrase[];
 }

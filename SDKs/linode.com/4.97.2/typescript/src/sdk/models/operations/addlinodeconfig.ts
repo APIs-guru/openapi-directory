@@ -1,62 +1,51 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class AddLinodeConfigPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=linodeId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=linodeId" })
   linodeId: number;
 }
 
 
-export class AddLinodeConfigSecurityOption1 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=bearer" })
-  personalAccessToken: shared.SchemePersonalAccessToken;
-}
-
-
-export class AddLinodeConfigSecurityOption2 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
-  oauth: shared.SchemeOauth;
-}
-
-
 export class AddLinodeConfigSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, option=true" })
-  option1?: AddLinodeConfigSecurityOption1;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" })
+  personalAccessToken?: shared.SchemePersonalAccessToken;
 
-  @Metadata({ data: "security, option=true" })
-  option2?: AddLinodeConfigSecurityOption2;
-}
-
-
-export class AddLinodeConfigRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: AddLinodeConfigPathParams;
-
-  @Metadata({ data: "request, media_type=application/json" })
-  request: shared.LinodeConfig;
-
-  @Metadata()
-  security: AddLinodeConfigSecurity;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
+  oauth?: shared.SchemeOauth;
 }
 
 
 export class AddLinodeConfigDefaultApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=errors", elemType: shared.ErrorObject })
+  @SpeakeasyMetadata({ data: "json, name=errors", elemType: shared.ErrorObject })
   errors?: shared.ErrorObject[];
 }
 
 
+export class AddLinodeConfigRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: AddLinodeConfigPathParams;
+
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request: shared.LinodeConfigInput;
+
+  @SpeakeasyMetadata()
+  security: AddLinodeConfigSecurity;
+}
+
+
 export class AddLinodeConfigResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   linodeConfig?: shared.LinodeConfig;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   addLinodeConfigDefaultApplicationJsonObject?: AddLinodeConfigDefaultApplicationJson;
 }

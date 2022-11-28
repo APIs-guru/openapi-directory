@@ -1,9 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { VolumeConfiguration } from "./volumeconfiguration";
 import { EbsFindingEnum } from "./ebsfindingenum";
 import { EbsUtilizationMetric } from "./ebsutilizationmetric";
 import { VolumeRecommendationOption } from "./volumerecommendationoption";
+
 
 
 // VolumeRecommendation
@@ -11,27 +11,27 @@ import { VolumeRecommendationOption } from "./volumerecommendationoption";
  * Describes an Amazon Elastic Block Store (Amazon EBS) volume recommendation.
 **/
 export class VolumeRecommendation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=accountId" })
+  @SpeakeasyMetadata({ data: "json, name=accountId" })
   accountId?: string;
 
-  @Metadata({ data: "json, name=currentConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=currentConfiguration" })
   currentConfiguration?: VolumeConfiguration;
 
-  @Metadata({ data: "json, name=finding" })
+  @SpeakeasyMetadata({ data: "json, name=finding" })
   finding?: EbsFindingEnum;
 
-  @Metadata({ data: "json, name=lastRefreshTimestamp" })
+  @SpeakeasyMetadata({ data: "json, name=lastRefreshTimestamp" })
   lastRefreshTimestamp?: Date;
 
-  @Metadata({ data: "json, name=lookBackPeriodInDays" })
+  @SpeakeasyMetadata({ data: "json, name=lookBackPeriodInDays" })
   lookBackPeriodInDays?: number;
 
-  @Metadata({ data: "json, name=utilizationMetrics", elemType: shared.EbsUtilizationMetric })
+  @SpeakeasyMetadata({ data: "json, name=utilizationMetrics", elemType: EbsUtilizationMetric })
   utilizationMetrics?: EbsUtilizationMetric[];
 
-  @Metadata({ data: "json, name=volumeArn" })
+  @SpeakeasyMetadata({ data: "json, name=volumeArn" })
   volumeArn?: string;
 
-  @Metadata({ data: "json, name=volumeRecommendationOptions", elemType: shared.VolumeRecommendationOption })
+  @SpeakeasyMetadata({ data: "json, name=volumeRecommendationOptions", elemType: VolumeRecommendationOption })
   volumeRecommendationOptions?: VolumeRecommendationOption[];
 }

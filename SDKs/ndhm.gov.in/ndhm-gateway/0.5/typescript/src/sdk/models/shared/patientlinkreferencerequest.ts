@@ -1,30 +1,30 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CareContext } from "./carecontext";
 
 
+
 export class PatientLinkReferenceRequestPatient extends SpeakeasyBase {
-  @Metadata({ data: "json, name=careContexts", elemType: shared.CareContext })
+  @SpeakeasyMetadata({ data: "json, name=careContexts", elemType: CareContext })
   careContexts: CareContext[];
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: string;
 
-  @Metadata({ data: "json, name=referenceNumber" })
+  @SpeakeasyMetadata({ data: "json, name=referenceNumber" })
   referenceNumber: string;
 }
 
 
 export class PatientLinkReferenceRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=patient" })
+  @SpeakeasyMetadata({ data: "json, name=patient" })
   patient: PatientLinkReferenceRequestPatient;
 
-  @Metadata({ data: "json, name=requestId" })
+  @SpeakeasyMetadata({ data: "json, name=requestId" })
   requestId: string;
 
-  @Metadata({ data: "json, name=timestamp" })
+  @SpeakeasyMetadata({ data: "json, name=timestamp" })
   timestamp: Date;
 
-  @Metadata({ data: "json, name=transactionId" })
+  @SpeakeasyMetadata({ data: "json, name=transactionId" })
   transactionId: string;
 }

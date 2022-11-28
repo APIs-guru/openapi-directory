@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AddJobFlowStepsOutput
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  *  The output for the <a>AddJobFlowSteps</a> operation. 
 **/
 export class AddJobFlowStepsOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=StepIds" })
+  @SpeakeasyMetadata({ data: "json, name=StepIds" })
   stepIds?: string[];
 }

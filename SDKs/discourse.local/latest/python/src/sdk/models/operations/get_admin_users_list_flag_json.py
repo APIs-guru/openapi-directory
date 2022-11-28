@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from typing import Any,List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class GetAdminUsersListFlagJSONFlagEnum(str, Enum):
     ACTIVE = "active"
@@ -13,7 +15,7 @@ class GetAdminUsersListFlagJSONFlagEnum(str, Enum):
 
 @dataclass
 class GetAdminUsersListFlagJSONPathParams:
-    flag: GetAdminUsersListFlagJSONFlagEnum = field(default=None, metadata={'path_param': { 'field_name': 'flag', 'style': 'simple', 'explode': False }})
+    flag: GetAdminUsersListFlagJSONFlagEnum = field(metadata={'path_param': { 'field_name': 'flag', 'style': 'simple', 'explode': False }})
     
 class GetAdminUsersListFlagJSONAscEnum(str, Enum):
     TRUE = "true"
@@ -40,45 +42,45 @@ class GetAdminUsersListFlagJSONQueryParams:
     show_emails: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'show_emails', 'style': 'form', 'explode': True }})
     
 
-@dataclass
-class GetAdminUsersListFlagJSONRequest:
-    path_params: GetAdminUsersListFlagJSONPathParams = field(default=None)
-    query_params: GetAdminUsersListFlagJSONQueryParams = field(default=None)
-    
-
 @dataclass_json
 @dataclass
 class GetAdminUsersListFlagJSON200ApplicationJSON:
-    active: bool = field(default=None, metadata={'dataclasses_json': { 'field_name': 'active' }})
-    admin: bool = field(default=None, metadata={'dataclasses_json': { 'field_name': 'admin' }})
-    avatar_template: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'avatar_template' }})
-    created_at: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'created_at' }})
-    created_at_age: Any = field(default=None, metadata={'dataclasses_json': { 'field_name': 'created_at_age' }})
-    days_visited: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'days_visited' }})
-    email: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'email' }})
-    flag_level: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'flag_level' }})
-    id: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
-    last_emailed_age: Any = field(default=None, metadata={'dataclasses_json': { 'field_name': 'last_emailed_age' }})
-    last_emailed_at: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'last_emailed_at' }})
-    last_seen_age: Any = field(default=None, metadata={'dataclasses_json': { 'field_name': 'last_seen_age' }})
-    last_seen_at: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'last_seen_at' }})
-    manual_locked_trust_level: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'manual_locked_trust_level' }})
-    moderator: bool = field(default=None, metadata={'dataclasses_json': { 'field_name': 'moderator' }})
-    name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    post_count: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'post_count' }})
-    posts_read_count: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'posts_read_count' }})
-    secondary_emails: Optional[List[Any]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'secondary_emails' }})
-    staged: bool = field(default=None, metadata={'dataclasses_json': { 'field_name': 'staged' }})
-    time_read: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'time_read' }})
-    title: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'title' }})
-    topics_entered: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'topics_entered' }})
-    trust_level: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'trust_level' }})
-    username: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'username' }})
+    active: bool = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('active') }})
+    admin: bool = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('admin') }})
+    avatar_template: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('avatar_template') }})
+    created_at: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('created_at') }})
+    created_at_age: Any = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('created_at_age') }})
+    days_visited: int = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('days_visited') }})
+    flag_level: int = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('flag_level') }})
+    id: int = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('id') }})
+    last_emailed_age: Any = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('last_emailed_age') }})
+    last_emailed_at: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('last_emailed_at') }})
+    last_seen_age: Any = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('last_seen_age') }})
+    last_seen_at: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('last_seen_at') }})
+    manual_locked_trust_level: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('manual_locked_trust_level') }})
+    moderator: bool = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('moderator') }})
+    name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    post_count: int = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('post_count') }})
+    posts_read_count: int = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('posts_read_count') }})
+    staged: bool = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('staged') }})
+    time_read: int = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('time_read') }})
+    title: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('title') }})
+    topics_entered: int = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('topics_entered') }})
+    trust_level: int = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('trust_level') }})
+    username: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('username') }})
+    email: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('email') }})
+    secondary_emails: Optional[List[Any]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('secondary_emails') }})
+    
+
+@dataclass
+class GetAdminUsersListFlagJSONRequest:
+    path_params: GetAdminUsersListFlagJSONPathParams = field()
+    query_params: GetAdminUsersListFlagJSONQueryParams = field()
     
 
 @dataclass
 class GetAdminUsersListFlagJSONResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     get_admin_users_list_flag_json_200_application_json_objects: Optional[List[GetAdminUsersListFlagJSON200ApplicationJSON]] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,140 +1,141 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class DcimDevicesListQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=asset_tag" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=asset_tag" })
   assetTag?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=cluster_id" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=cluster_id" })
   clusterId?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=device_type_id" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=device_type_id" })
   deviceTypeId?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=has_primary_ip" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=has_primary_ip" })
   hasPrimaryIp?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=id__in" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=id__in" })
   idIn?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=is_console_server" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=is_console_server" })
   isConsoleServer?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=is_full_depth" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=is_full_depth" })
   isFullDepth?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=is_network_device" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=is_network_device" })
   isNetworkDevice?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=is_pdu" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=is_pdu" })
   isPdu?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=limit" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=limit" })
   limit?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=mac_address" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=mac_address" })
   macAddress?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=manufacturer" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=manufacturer" })
   manufacturer?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=manufacturer_id" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=manufacturer_id" })
   manufacturerId?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=model" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=model" })
   model?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=name" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=name" })
   name?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=offset" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=offset" })
   offset?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=platform" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=platform" })
   platform?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=platform_id" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=platform_id" })
   platformId?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=position" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=position" })
   position?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=q" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=q" })
   q?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=rack_group_id" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=rack_group_id" })
   rackGroupId?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=rack_id" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=rack_id" })
   rackId?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=region" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=region" })
   region?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=region_id" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=region_id" })
   regionId?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=role" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=role" })
   role?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=role_id" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=role_id" })
   roleId?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=serial" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=serial" })
   serial?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=site" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=site" })
   site?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=site_id" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=site_id" })
   siteId?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=status" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=status" })
   status?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=tag" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=tag" })
   tag?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=tenant" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=tenant" })
   tenant?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=tenant_id" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=tenant_id" })
   tenantId?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=virtual_chassis_id" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=virtual_chassis_id" })
   virtualChassisId?: string;
 }
 
 
-export class DcimDevicesListRequest extends SpeakeasyBase {
-  @Metadata()
-  queryParams: DcimDevicesListQueryParams;
-}
-
-
 export class DcimDevicesList200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=count" })
+  @SpeakeasyMetadata({ data: "json, name=count" })
   count: number;
 
-  @Metadata({ data: "json, name=next" })
+  @SpeakeasyMetadata({ data: "json, name=next" })
   next?: string;
 
-  @Metadata({ data: "json, name=previous" })
+  @SpeakeasyMetadata({ data: "json, name=previous" })
   previous?: string;
 
-  @Metadata({ data: "json, name=results", elemType: shared.Device })
+  @SpeakeasyMetadata({ data: "json, name=results", elemType: shared.Device })
   results: shared.Device[];
 }
 
 
+export class DcimDevicesListRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  queryParams: DcimDevicesListQueryParams;
+}
+
+
 export class DcimDevicesListResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   dcimDevicesList200ApplicationJsonObject?: DcimDevicesList200ApplicationJson;
 }

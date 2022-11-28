@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import gamesession
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class DescribeGameSessionsOutput:
-    game_sessions: Optional[List[gamesession.GameSession]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'GameSessions' }})
-    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'NextToken' }})
+    r"""DescribeGameSessionsOutput
+    Represents the returned data in response to a request operation.
+    """
+    
+    game_sessions: Optional[List[GameSession]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('GameSessions') }})
+    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('NextToken') }})
     

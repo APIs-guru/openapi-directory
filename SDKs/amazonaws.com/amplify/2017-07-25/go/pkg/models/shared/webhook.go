@@ -4,6 +4,9 @@ import (
 	"time"
 )
 
+// Webhook
+//
+//	Describes a webhook that connects repository events to an Amplify app.
 type Webhook struct {
 	BranchName  string    `json:"branchName"`
 	CreateTime  time.Time `json:"createTime"`

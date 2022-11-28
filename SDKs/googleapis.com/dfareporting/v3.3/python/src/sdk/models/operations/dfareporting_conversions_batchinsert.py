@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DfareportingConversionsBatchinsertPathParams:
-    profile_id: str = field(default=None, metadata={'path_param': { 'field_name': 'profileId', 'style': 'simple', 'explode': False }})
+    profile_id: str = field(metadata={'path_param': { 'field_name': 'profileId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,21 +26,21 @@ class DfareportingConversionsBatchinsertQueryParams:
 
 @dataclass
 class DfareportingConversionsBatchinsertSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DfareportingConversionsBatchinsertRequest:
-    path_params: DfareportingConversionsBatchinsertPathParams = field(default=None)
-    query_params: DfareportingConversionsBatchinsertQueryParams = field(default=None)
+    path_params: DfareportingConversionsBatchinsertPathParams = field()
+    query_params: DfareportingConversionsBatchinsertQueryParams = field()
+    security: DfareportingConversionsBatchinsertSecurity = field()
     request: Optional[shared.ConversionsBatchInsertRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: DfareportingConversionsBatchinsertSecurity = field(default=None)
     
 
 @dataclass
 class DfareportingConversionsBatchinsertResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     conversions_batch_insert_response: Optional[shared.ConversionsBatchInsertResponse] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -22,6 +22,8 @@ const (
 	EcommerceDataEcommerceTypeEnumEnhanced                 EcommerceDataEcommerceTypeEnum = "ENHANCED"
 )
 
+// EcommerceData
+// E-commerce details associated with the user activity.
 type EcommerceData struct {
 	ActionType    *EcommerceDataActionTypeEnum    `json:"actionType,omitempty"`
 	EcommerceType *EcommerceDataEcommerceTypeEnum `json:"ecommerceType,omitempty"`

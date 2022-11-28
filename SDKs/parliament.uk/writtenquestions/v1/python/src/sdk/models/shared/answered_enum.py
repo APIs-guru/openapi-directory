@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum
+from typing import Any
+from enum import Enum
 
 class AnsweredEnum(str, Enum):
     ANY = "Any"

@@ -1,44 +1,45 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class SearchAccountPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=username" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=username" })
   username: string;
 }
 
 
 export class SearchAccountQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=page" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page" })
   page?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=pagelen" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=pagelen" })
   pagelen?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=search_query" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=search_query" })
   searchQuery: string;
 }
 
 
 export class SearchAccountRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: SearchAccountPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: SearchAccountQueryParams;
 }
 
 
 export class SearchAccountResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   error?: Map<string, any>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   searchResultPage?: shared.SearchResultPage;
 }

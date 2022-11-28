@@ -1,17 +1,18 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleAppsCardV1SelectionItem
 /** 
- * A selectable item in the switch control.
+ * A selectable item in a selection input, such as a check box or a switch.
 **/
 export class GoogleAppsCardV1SelectionItem extends SpeakeasyBase {
-  @Metadata({ data: "json, name=selected" })
+  @SpeakeasyMetadata({ data: "json, name=selected" })
   selected?: boolean;
 
-  @Metadata({ data: "json, name=text" })
+  @SpeakeasyMetadata({ data: "json, name=text" })
   text?: string;
 
-  @Metadata({ data: "json, name=value" })
+  @SpeakeasyMetadata({ data: "json, name=value" })
   value?: string;
 }

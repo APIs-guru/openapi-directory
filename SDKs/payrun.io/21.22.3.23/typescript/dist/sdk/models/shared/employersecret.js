@@ -22,22 +22,22 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var EmployerSecretEmployerSecret = /** @class */ (function (_super) {
     __extends(EmployerSecretEmployerSecret, _super);
     function EmployerSecretEmployerSecret() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Created" }),
+        SpeakeasyMetadata({ data: "json, name=Created" }),
         __metadata("design:type", Date)
     ], EmployerSecretEmployerSecret.prototype, "created", void 0);
     __decorate([
-        Metadata({ data: "json, name=Name" }),
+        SpeakeasyMetadata({ data: "json, name=Name" }),
         __metadata("design:type", String)
     ], EmployerSecretEmployerSecret.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=Value" }),
+        SpeakeasyMetadata({ data: "json, name=Value" }),
         __metadata("design:type", String)
     ], EmployerSecretEmployerSecret.prototype, "value", void 0);
     return EmployerSecretEmployerSecret;
@@ -49,7 +49,7 @@ var EmployerSecret = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=EmployerSecret" }),
+        SpeakeasyMetadata({ data: "json, name=EmployerSecret" }),
         __metadata("design:type", EmployerSecretEmployerSecret)
     ], EmployerSecret.prototype, "employerSecret", void 0);
     return EmployerSecret;

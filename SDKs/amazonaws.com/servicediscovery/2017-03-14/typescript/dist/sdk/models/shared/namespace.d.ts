@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { NamespaceProperties } from "./namespaceproperties";
 import { NamespaceTypeEnum } from "./namespacetypeenum";
 /**

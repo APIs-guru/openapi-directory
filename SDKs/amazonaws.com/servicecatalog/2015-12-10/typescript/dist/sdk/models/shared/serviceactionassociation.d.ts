@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 /**
  * A self-service action association consisting of the Action ID, the Product ID, and the Provisioning Artifact ID.
 **/

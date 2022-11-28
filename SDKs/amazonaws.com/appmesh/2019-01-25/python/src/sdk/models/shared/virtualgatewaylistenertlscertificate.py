@@ -1,15 +1,18 @@
 from dataclasses import dataclass, field
-from typing import List,Optional
+from typing import Optional
 from dataclasses_json import dataclass_json
-from . import virtualgatewaylistenertlsacmcertificate
-from . import virtualgatewaylistenertlsfilecertificate
-from . import virtualgatewaylistenertlssdscertificate
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class VirtualGatewayListenerTLSCertificate:
-    acm: Optional[virtualgatewaylistenertlsacmcertificate.VirtualGatewayListenerTLSAcmCertificate] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'acm' }})
-    file: Optional[virtualgatewaylistenertlsfilecertificate.VirtualGatewayListenerTLSFileCertificate] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'file' }})
-    sds: Optional[virtualgatewaylistenertlssdscertificate.VirtualGatewayListenerTLSSdsCertificate] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'sds' }})
+    r"""VirtualGatewayListenerTLSCertificate
+    An object that represents a listener's Transport Layer Security (TLS) certificate.
+    """
+    
+    acm: Optional[VirtualGatewayListenerTLSAcmCertificate] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('acm') }})
+    file: Optional[VirtualGatewayListenerTLSFileCertificate] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('file') }})
+    sds: Optional[VirtualGatewayListenerTLSSdsCertificate] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('sds') }})
     

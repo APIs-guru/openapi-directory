@@ -1,13 +1,19 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import buildstatus_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ListBuildsInput:
-    limit: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Limit' }})
-    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'NextToken' }})
-    status: Optional[buildstatus_enum.BuildStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Status' }})
+    r"""ListBuildsInput
+    Represents the input for a request operation.
+    """
+    
+    limit: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Limit') }})
+    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('NextToken') }})
+    status: Optional[BuildStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Status') }})
     

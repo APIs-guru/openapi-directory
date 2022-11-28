@@ -5,19 +5,19 @@ from sdk.models import shared
 
 @dataclass
 class PostUsersUserEmailOfferingsPathParams:
-    user_email: str = field(default=None, metadata={'path_param': { 'field_name': 'userEmail', 'style': 'simple', 'explode': False }})
+    user_email: str = field(metadata={'path_param': { 'field_name': 'userEmail', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class PostUsersUserEmailOfferingsRequest:
-    path_params: PostUsersUserEmailOfferingsPathParams = field(default=None)
-    request: List[str] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    path_params: PostUsersUserEmailOfferingsPathParams = field()
+    request: List[str] = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class PostUsersUserEmailOfferingsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error: Optional[shared.Error] = field(default=None)
     offering_metadata_responses: Optional[List[shared.OfferingMetadataResponse]] = field(default=None)
-    status_code: int = field(default=None)
     

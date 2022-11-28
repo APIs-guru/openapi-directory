@@ -29,6 +29,8 @@ type EnvironmentProtectionRules3 struct {
 	Type   string `json:"type"`
 }
 
+// Environment
+// Details of a deployment environment
 type Environment struct {
 	CreatedAt              time.Time               `json:"created_at"`
 	DeploymentBranchPolicy *DeploymentBranchPolicy `json:"deployment_branch_policy,omitempty"`

@@ -24,6 +24,9 @@ type ListAnomaliesForInsightHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// ListAnomaliesForInsightRequestBodyStartTimeRange
+//
+//	A time range used to specify when the behavior of an insight or anomaly started.
 type ListAnomaliesForInsightRequestBodyStartTimeRange struct {
 	FromTime *time.Time `json:"FromTime,omitempty"`
 	ToTime   *time.Time `json:"ToTime,omitempty"`

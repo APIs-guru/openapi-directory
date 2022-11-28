@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetScanResultsResponse = /** @class */ (function (_super) {
     __extends(GetScanResultsResponse, _super);
@@ -30,15 +30,15 @@ var GetScanResultsResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetScanResultsResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata({ elemType: shared.Example112 }),
+        SpeakeasyMetadata({ elemType: shared.Example112 }),
         __metadata("design:type", Array)
     ], GetScanResultsResponse.prototype, "example112s", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetScanResultsResponse.prototype, "statusCode", void 0);
     return GetScanResultsResponse;

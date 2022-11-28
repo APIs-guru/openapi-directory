@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// GrantListEntry
+// Contains information about a grant.
 type GrantListEntry struct {
 	Constraints       *GrantConstraints    `json:"Constraints,omitempty"`
 	CreationDate      *time.Time           `json:"CreationDate,omitempty"`

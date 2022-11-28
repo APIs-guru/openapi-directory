@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class JobsProjectsTenantsJobsDeletePathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,14 +26,14 @@ class JobsProjectsTenantsJobsDeleteQueryParams:
 
 @dataclass
 class JobsProjectsTenantsJobsDeleteSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class JobsProjectsTenantsJobsDeleteSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -43,14 +44,14 @@ class JobsProjectsTenantsJobsDeleteSecurity:
 
 @dataclass
 class JobsProjectsTenantsJobsDeleteRequest:
-    path_params: JobsProjectsTenantsJobsDeletePathParams = field(default=None)
-    query_params: JobsProjectsTenantsJobsDeleteQueryParams = field(default=None)
-    security: JobsProjectsTenantsJobsDeleteSecurity = field(default=None)
+    path_params: JobsProjectsTenantsJobsDeletePathParams = field()
+    query_params: JobsProjectsTenantsJobsDeleteQueryParams = field()
+    security: JobsProjectsTenantsJobsDeleteSecurity = field()
     
 
 @dataclass
 class JobsProjectsTenantsJobsDeleteResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     empty: Optional[dict[str, Any]] = field(default=None)
-    status_code: int = field(default=None)
     

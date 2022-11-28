@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleLongrunningOperation } from "./googlelongrunningoperation";
+
 
 
 // GoogleLongrunningListOperationsResponse
@@ -8,9 +8,9 @@ import { GoogleLongrunningOperation } from "./googlelongrunningoperation";
  * The response message for Operations.ListOperations.
 **/
 export class GoogleLongrunningListOperationsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 
-  @Metadata({ data: "json, name=operations", elemType: shared.GoogleLongrunningOperation })
+  @SpeakeasyMetadata({ data: "json, name=operations", elemType: GoogleLongrunningOperation })
   operations?: GoogleLongrunningOperation[];
 }

@@ -1,16 +1,17 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RecognitionAudio } from "./recognitionaudio";
-import { RecognitionConfig } from "./recognitionconfig";
+import { RecognitionConfigInput } from "./recognitionconfig";
 
 
-// RecognizeRequest
+
+// RecognizeRequestInput
 /** 
  * The top-level message sent by the client for the `Recognize` method.
 **/
-export class RecognizeRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=audio" })
+export class RecognizeRequestInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=audio" })
   audio?: RecognitionAudio;
 
-  @Metadata({ data: "json, name=config" })
-  config?: RecognitionConfig;
+  @SpeakeasyMetadata({ data: "json, name=config" })
+  config?: RecognitionConfigInput;
 }

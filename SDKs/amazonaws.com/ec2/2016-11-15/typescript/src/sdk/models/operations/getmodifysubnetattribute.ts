@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum GetModifySubnetAttributeActionEnum {
     ModifySubnetAttribute = "ModifySubnetAttribute"
@@ -10,7 +11,7 @@ export enum GetModifySubnetAttributeActionEnum {
  * Describes a value for a resource attribute that is a Boolean value.
 **/
 export class GetModifySubnetAttributeAssignIpv6AddressOnCreation extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, name=Value" })
+  @SpeakeasyMetadata({ data: "queryParam, name=Value" })
   value?: boolean;
 }
 
@@ -20,7 +21,7 @@ export class GetModifySubnetAttributeAssignIpv6AddressOnCreation extends Speakea
  * Describes a value for a resource attribute that is a Boolean value.
 **/
 export class GetModifySubnetAttributeMapCustomerOwnedIpOnLaunch extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, name=Value" })
+  @SpeakeasyMetadata({ data: "queryParam, name=Value" })
   value?: boolean;
 }
 
@@ -30,7 +31,7 @@ export class GetModifySubnetAttributeMapCustomerOwnedIpOnLaunch extends Speakeas
  * Describes a value for a resource attribute that is a Boolean value.
 **/
 export class GetModifySubnetAttributeMapPublicIpOnLaunch extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, name=Value" })
+  @SpeakeasyMetadata({ data: "queryParam, name=Value" })
   value?: boolean;
 }
 
@@ -40,66 +41,66 @@ export enum GetModifySubnetAttributeVersionEnum {
 
 
 export class GetModifySubnetAttributeQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Action" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Action" })
   action: GetModifySubnetAttributeActionEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=AssignIpv6AddressOnCreation" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=AssignIpv6AddressOnCreation" })
   assignIpv6AddressOnCreation?: GetModifySubnetAttributeAssignIpv6AddressOnCreation;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=CustomerOwnedIpv4Pool" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=CustomerOwnedIpv4Pool" })
   customerOwnedIpv4Pool?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=MapCustomerOwnedIpOnLaunch" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=MapCustomerOwnedIpOnLaunch" })
   mapCustomerOwnedIpOnLaunch?: GetModifySubnetAttributeMapCustomerOwnedIpOnLaunch;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=MapPublicIpOnLaunch" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=MapPublicIpOnLaunch" })
   mapPublicIpOnLaunch?: GetModifySubnetAttributeMapPublicIpOnLaunch;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=SubnetId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=SubnetId" })
   subnetId: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Version" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Version" })
   version: GetModifySubnetAttributeVersionEnum;
 }
 
 
 export class GetModifySubnetAttributeHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
 
 export class GetModifySubnetAttributeRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetModifySubnetAttributeQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: GetModifySubnetAttributeHeaders;
 }
 
 
 export class GetModifySubnetAttributeResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

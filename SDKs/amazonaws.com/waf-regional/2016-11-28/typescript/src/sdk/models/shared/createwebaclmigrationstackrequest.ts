@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class CreateWebAclMigrationStackRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=IgnoreUnsupportedType" })
+  @SpeakeasyMetadata({ data: "json, name=IgnoreUnsupportedType" })
   ignoreUnsupportedType: boolean;
 
-  @Metadata({ data: "json, name=S3BucketName" })
+  @SpeakeasyMetadata({ data: "json, name=S3BucketName" })
   s3BucketName: string;
 
-  @Metadata({ data: "json, name=WebACLId" })
+  @SpeakeasyMetadata({ data: "json, name=WebACLId" })
   webAclId: string;
 }

@@ -1,24 +1,25 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Printer } from "./printer";
 
+
 export enum FailureInfoErrorCodeEnum {
-    Ok = "OK"
-,    Cancelled = "CANCELLED"
-,    Unknown = "UNKNOWN"
-,    InvalidArgument = "INVALID_ARGUMENT"
-,    DeadlineExceeded = "DEADLINE_EXCEEDED"
-,    NotFound = "NOT_FOUND"
-,    AlreadyExists = "ALREADY_EXISTS"
-,    PermissionDenied = "PERMISSION_DENIED"
-,    Unauthenticated = "UNAUTHENTICATED"
-,    ResourceExhausted = "RESOURCE_EXHAUSTED"
-,    FailedPrecondition = "FAILED_PRECONDITION"
-,    Aborted = "ABORTED"
-,    OutOfRange = "OUT_OF_RANGE"
-,    Unimplemented = "UNIMPLEMENTED"
-,    Internal = "INTERNAL"
-,    Unavailable = "UNAVAILABLE"
-,    DataLoss = "DATA_LOSS"
+    Ok = "OK",
+    Cancelled = "CANCELLED",
+    Unknown = "UNKNOWN",
+    InvalidArgument = "INVALID_ARGUMENT",
+    DeadlineExceeded = "DEADLINE_EXCEEDED",
+    NotFound = "NOT_FOUND",
+    AlreadyExists = "ALREADY_EXISTS",
+    PermissionDenied = "PERMISSION_DENIED",
+    Unauthenticated = "UNAUTHENTICATED",
+    ResourceExhausted = "RESOURCE_EXHAUSTED",
+    FailedPrecondition = "FAILED_PRECONDITION",
+    Aborted = "ABORTED",
+    OutOfRange = "OUT_OF_RANGE",
+    Unimplemented = "UNIMPLEMENTED",
+    Internal = "INTERNAL",
+    Unavailable = "UNAVAILABLE",
+    DataLoss = "DATA_LOSS"
 }
 
 
@@ -27,15 +28,15 @@ export enum FailureInfoErrorCodeEnum {
  * Info about failures
 **/
 export class FailureInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=errorCode" })
+  @SpeakeasyMetadata({ data: "json, name=errorCode" })
   errorCode?: FailureInfoErrorCodeEnum;
 
-  @Metadata({ data: "json, name=errorMessage" })
+  @SpeakeasyMetadata({ data: "json, name=errorMessage" })
   errorMessage?: string;
 
-  @Metadata({ data: "json, name=printer" })
+  @SpeakeasyMetadata({ data: "json, name=printer" })
   printer?: Printer;
 
-  @Metadata({ data: "json, name=printerId" })
+  @SpeakeasyMetadata({ data: "json, name=printerId" })
   printerId?: string;
 }

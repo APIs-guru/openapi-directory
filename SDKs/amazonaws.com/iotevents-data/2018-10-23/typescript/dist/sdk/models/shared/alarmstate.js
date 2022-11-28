@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CustomerAction } from "./customeraction";
 import { RuleEvaluation } from "./ruleevaluation";
 import { AlarmStateNameEnum } from "./alarmstatenameenum";
@@ -37,19 +37,19 @@ var AlarmState = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=customerAction" }),
+        SpeakeasyMetadata({ data: "json, name=customerAction" }),
         __metadata("design:type", CustomerAction)
     ], AlarmState.prototype, "customerAction", void 0);
     __decorate([
-        Metadata({ data: "json, name=ruleEvaluation" }),
+        SpeakeasyMetadata({ data: "json, name=ruleEvaluation" }),
         __metadata("design:type", RuleEvaluation)
     ], AlarmState.prototype, "ruleEvaluation", void 0);
     __decorate([
-        Metadata({ data: "json, name=stateName" }),
+        SpeakeasyMetadata({ data: "json, name=stateName" }),
         __metadata("design:type", String)
     ], AlarmState.prototype, "stateName", void 0);
     __decorate([
-        Metadata({ data: "json, name=systemEvent" }),
+        SpeakeasyMetadata({ data: "json, name=systemEvent" }),
         __metadata("design:type", SystemEvent)
     ], AlarmState.prototype, "systemEvent", void 0);
     return AlarmState;

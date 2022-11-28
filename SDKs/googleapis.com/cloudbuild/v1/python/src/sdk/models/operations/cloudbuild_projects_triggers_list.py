@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class CloudbuildProjectsTriggersListPathParams:
-    project_id: str = field(default=None, metadata={'path_param': { 'field_name': 'projectId', 'style': 'simple', 'explode': False }})
+    project_id: str = field(metadata={'path_param': { 'field_name': 'projectId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -28,20 +29,20 @@ class CloudbuildProjectsTriggersListQueryParams:
 
 @dataclass
 class CloudbuildProjectsTriggersListSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class CloudbuildProjectsTriggersListRequest:
-    path_params: CloudbuildProjectsTriggersListPathParams = field(default=None)
-    query_params: CloudbuildProjectsTriggersListQueryParams = field(default=None)
-    security: CloudbuildProjectsTriggersListSecurity = field(default=None)
+    path_params: CloudbuildProjectsTriggersListPathParams = field()
+    query_params: CloudbuildProjectsTriggersListQueryParams = field()
+    security: CloudbuildProjectsTriggersListSecurity = field()
     
 
 @dataclass
 class CloudbuildProjectsTriggersListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     list_build_triggers_response: Optional[shared.ListBuildTriggersResponse] = field(default=None)
-    status_code: int = field(default=None)
     

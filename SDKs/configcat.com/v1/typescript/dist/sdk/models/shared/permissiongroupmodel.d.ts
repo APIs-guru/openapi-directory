@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { AccessTypeEnum } from "./accesstypeenum";
 import { EnvironmentAccessModel } from "./environmentaccessmodel";
 import { EnvironmentAccessTypeEnum } from "./environmentaccesstypeenum";

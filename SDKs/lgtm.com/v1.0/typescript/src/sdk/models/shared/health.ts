@@ -1,21 +1,20 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
-import { Health } from "./health";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum HealthStatusEnum {
-    Unknown = "UNKNOWN"
-,    Up = "UP"
-,    Down = "DOWN"
+    Unknown = "UNKNOWN",
+    Up = "UP",
+    Down = "DOWN"
 }
 
 
 export class Health extends SpeakeasyBase {
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=details", elemType: shared.Health })
+  @SpeakeasyMetadata({ data: "json, name=details", elemType: Health })
   details?: Map<string, Health>;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: HealthStatusEnum;
 }

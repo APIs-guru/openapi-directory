@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // PillarReviewSummary
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A pillar review summary of a lens review.
 **/
 export class PillarReviewSummary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Notes" })
+  @SpeakeasyMetadata({ data: "json, name=Notes" })
   notes?: string;
 
-  @Metadata({ data: "json, name=PillarId" })
+  @SpeakeasyMetadata({ data: "json, name=PillarId" })
   pillarId?: string;
 
-  @Metadata({ data: "json, name=PillarName" })
+  @SpeakeasyMetadata({ data: "json, name=PillarName" })
   pillarName?: string;
 
-  @Metadata({ data: "json, name=RiskCounts" })
+  @SpeakeasyMetadata({ data: "json, name=RiskCounts" })
   riskCounts?: Map<string, number>;
 }

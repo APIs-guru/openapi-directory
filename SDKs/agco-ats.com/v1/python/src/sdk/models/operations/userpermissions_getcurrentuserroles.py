@@ -12,13 +12,13 @@ class UserPermissionsGetCurrentUserRolesQueryParams:
 
 @dataclass
 class UserPermissionsGetCurrentUserRolesRequest:
-    query_params: UserPermissionsGetCurrentUserRolesQueryParams = field(default=None)
+    query_params: UserPermissionsGetCurrentUserRolesQueryParams = field()
     
 
 @dataclass
 class UserPermissionsGetCurrentUserRolesResponse:
+    content_type: str = field()
+    status_code: int = field()
     api_models_api_error: Optional[shared.APIModelsAPIError] = field(default=None)
     api_paged_response_api_models_role_: Optional[shared.APIPagedResponseAPIModelsRole] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

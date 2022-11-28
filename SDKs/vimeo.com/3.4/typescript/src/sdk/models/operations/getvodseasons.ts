@@ -1,15 +1,16 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetVodSeasonsPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=ondemand_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=ondemand_id" })
   ondemandId: number;
 }
 
 export enum GetVodSeasonsDirectionEnum {
-    Asc = "asc"
-,    Desc = "desc"
+    Asc = "asc",
+    Desc = "desc"
 }
 
 export enum GetVodSeasonsFilterEnum {
@@ -17,48 +18,48 @@ export enum GetVodSeasonsFilterEnum {
 }
 
 export enum GetVodSeasonsSortEnum {
-    Date = "date"
-,    Manual = "manual"
+    Date = "date",
+    Manual = "manual"
 }
 
 
 export class GetVodSeasonsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=direction" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=direction" })
   direction?: GetVodSeasonsDirectionEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=filter" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=filter" })
   filter?: GetVodSeasonsFilterEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=page" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page" })
   page?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=per_page" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=per_page" })
   perPage?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=sort" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sort" })
   sort?: GetVodSeasonsSortEnum;
 }
 
 
 export class GetVodSeasonsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetVodSeasonsPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetVodSeasonsQueryParams;
 }
 
 
 export class GetVodSeasonsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   legacyError?: shared.LegacyError;
 
-  @Metadata({ elemType: shared.OnDemandSeason })
+  @SpeakeasyMetadata({ elemType: shared.OnDemandSeason })
   onDemandSeasons?: shared.OnDemandSeason[];
 }

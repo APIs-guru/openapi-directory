@@ -1,5 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CapacityDescription } from "./capacitydescription";
 import { ConnectorStateEnum } from "./connectorstateenum";
 import { KafkaClusterDescription } from "./kafkaclusterdescription";
@@ -10,53 +9,54 @@ import { PluginDescription } from "./plugindescription";
 import { WorkerConfigurationDescription } from "./workerconfigurationdescription";
 
 
+
 // ConnectorSummary
 /** 
  * Summary of a connector.
 **/
 export class ConnectorSummary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=capacity" })
+  @SpeakeasyMetadata({ data: "json, name=capacity" })
   capacity?: CapacityDescription;
 
-  @Metadata({ data: "json, name=connectorArn" })
+  @SpeakeasyMetadata({ data: "json, name=connectorArn" })
   connectorArn?: string;
 
-  @Metadata({ data: "json, name=connectorDescription" })
+  @SpeakeasyMetadata({ data: "json, name=connectorDescription" })
   connectorDescription?: string;
 
-  @Metadata({ data: "json, name=connectorName" })
+  @SpeakeasyMetadata({ data: "json, name=connectorName" })
   connectorName?: string;
 
-  @Metadata({ data: "json, name=connectorState" })
+  @SpeakeasyMetadata({ data: "json, name=connectorState" })
   connectorState?: ConnectorStateEnum;
 
-  @Metadata({ data: "json, name=creationTime" })
+  @SpeakeasyMetadata({ data: "json, name=creationTime" })
   creationTime?: Date;
 
-  @Metadata({ data: "json, name=currentVersion" })
+  @SpeakeasyMetadata({ data: "json, name=currentVersion" })
   currentVersion?: string;
 
-  @Metadata({ data: "json, name=kafkaCluster" })
+  @SpeakeasyMetadata({ data: "json, name=kafkaCluster" })
   kafkaCluster?: KafkaClusterDescription;
 
-  @Metadata({ data: "json, name=kafkaClusterClientAuthentication" })
+  @SpeakeasyMetadata({ data: "json, name=kafkaClusterClientAuthentication" })
   kafkaClusterClientAuthentication?: KafkaClusterClientAuthenticationDescription;
 
-  @Metadata({ data: "json, name=kafkaClusterEncryptionInTransit" })
+  @SpeakeasyMetadata({ data: "json, name=kafkaClusterEncryptionInTransit" })
   kafkaClusterEncryptionInTransit?: KafkaClusterEncryptionInTransitDescription;
 
-  @Metadata({ data: "json, name=kafkaConnectVersion" })
+  @SpeakeasyMetadata({ data: "json, name=kafkaConnectVersion" })
   kafkaConnectVersion?: string;
 
-  @Metadata({ data: "json, name=logDelivery" })
+  @SpeakeasyMetadata({ data: "json, name=logDelivery" })
   logDelivery?: LogDeliveryDescription;
 
-  @Metadata({ data: "json, name=plugins", elemType: shared.PluginDescription })
+  @SpeakeasyMetadata({ data: "json, name=plugins", elemType: PluginDescription })
   plugins?: PluginDescription[];
 
-  @Metadata({ data: "json, name=serviceExecutionRoleArn" })
+  @SpeakeasyMetadata({ data: "json, name=serviceExecutionRoleArn" })
   serviceExecutionRoleArn?: string;
 
-  @Metadata({ data: "json, name=workerConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=workerConfiguration" })
   workerConfiguration?: WorkerConfigurationDescription;
 }

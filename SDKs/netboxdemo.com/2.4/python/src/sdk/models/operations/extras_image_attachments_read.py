@@ -5,17 +5,17 @@ from sdk.models import shared
 
 @dataclass
 class ExtrasImageAttachmentsReadPathParams:
-    id: int = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: int = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class ExtrasImageAttachmentsReadRequest:
-    path_params: ExtrasImageAttachmentsReadPathParams = field(default=None)
+    path_params: ExtrasImageAttachmentsReadPathParams = field()
     
 
 @dataclass
 class ExtrasImageAttachmentsReadResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     image_attachment: Optional[shared.ImageAttachment] = field(default=None)
-    status_code: int = field(default=None)
     

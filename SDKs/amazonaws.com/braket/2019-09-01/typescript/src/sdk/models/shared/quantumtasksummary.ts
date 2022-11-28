@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { QuantumTaskStatusEnum } from "./quantumtaskstatusenum";
+
 
 
 // QuantumTaskSummary
@@ -7,30 +8,30 @@ import { QuantumTaskStatusEnum } from "./quantumtaskstatusenum";
  * Includes information about a quantum task.
 **/
 export class QuantumTaskSummary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=createdAt" })
+  @SpeakeasyMetadata({ data: "json, name=createdAt" })
   createdAt: Date;
 
-  @Metadata({ data: "json, name=deviceArn" })
+  @SpeakeasyMetadata({ data: "json, name=deviceArn" })
   deviceArn: string;
 
-  @Metadata({ data: "json, name=endedAt" })
+  @SpeakeasyMetadata({ data: "json, name=endedAt" })
   endedAt?: Date;
 
-  @Metadata({ data: "json, name=outputS3Bucket" })
+  @SpeakeasyMetadata({ data: "json, name=outputS3Bucket" })
   outputS3Bucket: string;
 
-  @Metadata({ data: "json, name=outputS3Directory" })
+  @SpeakeasyMetadata({ data: "json, name=outputS3Directory" })
   outputS3Directory: string;
 
-  @Metadata({ data: "json, name=quantumTaskArn" })
+  @SpeakeasyMetadata({ data: "json, name=quantumTaskArn" })
   quantumTaskArn: string;
 
-  @Metadata({ data: "json, name=shots" })
+  @SpeakeasyMetadata({ data: "json, name=shots" })
   shots: number;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status: QuantumTaskStatusEnum;
 
-  @Metadata({ data: "json, name=tags" })
+  @SpeakeasyMetadata({ data: "json, name=tags" })
   tags?: Map<string, string>;
 }

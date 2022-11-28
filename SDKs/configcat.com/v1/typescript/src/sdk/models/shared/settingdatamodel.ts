@@ -1,41 +1,42 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SettingTypeEnum } from "./settingtypeenum";
 
 
+
 export class SettingDataModel extends SpeakeasyBase {
-  @Metadata({ data: "json, name=createdAt" })
+  @SpeakeasyMetadata({ data: "json, name=createdAt" })
   createdAt?: Date;
 
-  @Metadata({ data: "json, name=creatorEmail" })
+  @SpeakeasyMetadata({ data: "json, name=creatorEmail" })
   creatorEmail?: string;
 
-  @Metadata({ data: "json, name=creatorFullName" })
+  @SpeakeasyMetadata({ data: "json, name=creatorFullName" })
   creatorFullName?: string;
 
-  @Metadata({ data: "json, name=expirationWarningAt" })
+  @SpeakeasyMetadata({ data: "json, name=expirationWarningAt" })
   expirationWarningAt?: Date;
 
-  @Metadata({ data: "json, name=hint" })
+  @SpeakeasyMetadata({ data: "json, name=hint" })
   hint?: string;
 
-  @Metadata({ data: "json, name=isWatching" })
+  @SpeakeasyMetadata({ data: "json, name=isWatching" })
   isWatching?: boolean;
 
-  @Metadata({ data: "json, name=key" })
+  @SpeakeasyMetadata({ data: "json, name=key" })
   key?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=ownerEmail" })
+  @SpeakeasyMetadata({ data: "json, name=ownerEmail" })
   ownerEmail?: string;
 
-  @Metadata({ data: "json, name=ownerFullName" })
+  @SpeakeasyMetadata({ data: "json, name=ownerFullName" })
   ownerFullName?: string;
 
-  @Metadata({ data: "json, name=settingId" })
+  @SpeakeasyMetadata({ data: "json, name=settingId" })
   settingId?: number;
 
-  @Metadata({ data: "json, name=settingType" })
+  @SpeakeasyMetadata({ data: "json, name=settingType" })
   settingType?: SettingTypeEnum;
 }

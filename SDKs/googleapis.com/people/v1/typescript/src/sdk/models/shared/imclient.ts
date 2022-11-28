@@ -1,5 +1,26 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { FieldMetadataInput } from "./fieldmetadata";
 import { FieldMetadata } from "./fieldmetadata";
+
+
+
+// ImClientInput
+/** 
+ * A person's instant messaging client.
+**/
+export class ImClientInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=metadata" })
+  metadata?: FieldMetadataInput;
+
+  @SpeakeasyMetadata({ data: "json, name=protocol" })
+  protocol?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=type" })
+  type?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=username" })
+  username?: string;
+}
 
 
 // ImClient
@@ -7,21 +28,21 @@ import { FieldMetadata } from "./fieldmetadata";
  * A person's instant messaging client.
 **/
 export class ImClient extends SpeakeasyBase {
-  @Metadata({ data: "json, name=formattedProtocol" })
+  @SpeakeasyMetadata({ data: "json, name=formattedProtocol" })
   formattedProtocol?: string;
 
-  @Metadata({ data: "json, name=formattedType" })
+  @SpeakeasyMetadata({ data: "json, name=formattedType" })
   formattedType?: string;
 
-  @Metadata({ data: "json, name=metadata" })
+  @SpeakeasyMetadata({ data: "json, name=metadata" })
   metadata?: FieldMetadata;
 
-  @Metadata({ data: "json, name=protocol" })
+  @SpeakeasyMetadata({ data: "json, name=protocol" })
   protocol?: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: string;
 
-  @Metadata({ data: "json, name=username" })
+  @SpeakeasyMetadata({ data: "json, name=username" })
   username?: string;
 }

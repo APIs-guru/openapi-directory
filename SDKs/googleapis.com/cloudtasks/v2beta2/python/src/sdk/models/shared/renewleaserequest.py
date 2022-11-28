@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class RenewLeaseRequestResponseViewEnum(str, Enum):
     VIEW_UNSPECIFIED = "VIEW_UNSPECIFIED"
@@ -11,7 +13,11 @@ class RenewLeaseRequestResponseViewEnum(str, Enum):
 @dataclass_json
 @dataclass
 class RenewLeaseRequest:
-    lease_duration: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'leaseDuration' }})
-    response_view: Optional[RenewLeaseRequestResponseViewEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'responseView' }})
-    schedule_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'scheduleTime' }})
+    r"""RenewLeaseRequest
+    Request message for renewing a lease using RenewLease.
+    """
+    
+    lease_duration: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('leaseDuration') }})
+    response_view: Optional[RenewLeaseRequestResponseViewEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('responseView') }})
+    schedule_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('scheduleTime') }})
     

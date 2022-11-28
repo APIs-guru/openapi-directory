@@ -1,29 +1,30 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetOfferingsOfferingIdAnalyticsSubmissionsAssignmentsPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=offeringId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=offeringId" })
   offeringId: string;
 }
 
 
 export class GetOfferingsOfferingIdAnalyticsSubmissionsAssignmentsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetOfferingsOfferingIdAnalyticsSubmissionsAssignmentsPathParams;
 }
 
 
 export class GetOfferingsOfferingIdAnalyticsSubmissionsAssignmentsResponse extends SpeakeasyBase {
-  @Metadata({ elemType: shared.AssignmentMarkResponse })
+  @SpeakeasyMetadata({ elemType: shared.AssignmentMarkResponse })
   assignmentMarkResponses?: shared.AssignmentMarkResponse[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   error?: shared.Error;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

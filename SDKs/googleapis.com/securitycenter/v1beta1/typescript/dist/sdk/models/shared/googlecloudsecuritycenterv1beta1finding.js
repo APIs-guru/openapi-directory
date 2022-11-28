@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudSecuritycenterV1beta1SecurityMarks } from "./googlecloudsecuritycenterv1beta1securitymarks";
 export var GoogleCloudSecuritycenterV1beta1FindingStateEnum;
 (function (GoogleCloudSecuritycenterV1beta1FindingStateEnum) {
@@ -40,43 +40,43 @@ var GoogleCloudSecuritycenterV1beta1Finding = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=category" }),
+        SpeakeasyMetadata({ data: "json, name=category" }),
         __metadata("design:type", String)
     ], GoogleCloudSecuritycenterV1beta1Finding.prototype, "category", void 0);
     __decorate([
-        Metadata({ data: "json, name=createTime" }),
+        SpeakeasyMetadata({ data: "json, name=createTime" }),
         __metadata("design:type", String)
     ], GoogleCloudSecuritycenterV1beta1Finding.prototype, "createTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=eventTime" }),
+        SpeakeasyMetadata({ data: "json, name=eventTime" }),
         __metadata("design:type", String)
     ], GoogleCloudSecuritycenterV1beta1Finding.prototype, "eventTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=externalUri" }),
+        SpeakeasyMetadata({ data: "json, name=externalUri" }),
         __metadata("design:type", String)
     ], GoogleCloudSecuritycenterV1beta1Finding.prototype, "externalUri", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], GoogleCloudSecuritycenterV1beta1Finding.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=parent" }),
+        SpeakeasyMetadata({ data: "json, name=parent" }),
         __metadata("design:type", String)
     ], GoogleCloudSecuritycenterV1beta1Finding.prototype, "parent", void 0);
     __decorate([
-        Metadata({ data: "json, name=resourceName" }),
+        SpeakeasyMetadata({ data: "json, name=resourceName" }),
         __metadata("design:type", String)
     ], GoogleCloudSecuritycenterV1beta1Finding.prototype, "resourceName", void 0);
     __decorate([
-        Metadata({ data: "json, name=securityMarks" }),
+        SpeakeasyMetadata({ data: "json, name=securityMarks" }),
         __metadata("design:type", GoogleCloudSecuritycenterV1beta1SecurityMarks)
     ], GoogleCloudSecuritycenterV1beta1Finding.prototype, "securityMarks", void 0);
     __decorate([
-        Metadata({ data: "json, name=sourceProperties" }),
+        SpeakeasyMetadata({ data: "json, name=sourceProperties" }),
         __metadata("design:type", Map)
     ], GoogleCloudSecuritycenterV1beta1Finding.prototype, "sourceProperties", void 0);
     __decorate([
-        Metadata({ data: "json, name=state" }),
+        SpeakeasyMetadata({ data: "json, name=state" }),
         __metadata("design:type", String)
     ], GoogleCloudSecuritycenterV1beta1Finding.prototype, "state", void 0);
     return GoogleCloudSecuritycenterV1beta1Finding;

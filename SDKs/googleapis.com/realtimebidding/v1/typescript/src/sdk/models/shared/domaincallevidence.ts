@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DomainCalls } from "./domaincalls";
+
 
 
 // DomainCallEvidence
@@ -8,9 +8,9 @@ import { DomainCalls } from "./domaincalls";
  * Number of HTTP calls made by a creative, broken down by domain.
 **/
 export class DomainCallEvidence extends SpeakeasyBase {
-  @Metadata({ data: "json, name=topHttpCallDomains", elemType: shared.DomainCalls })
+  @SpeakeasyMetadata({ data: "json, name=topHttpCallDomains", elemType: DomainCalls })
   topHttpCallDomains?: DomainCalls[];
 
-  @Metadata({ data: "json, name=totalHttpCallCount" })
+  @SpeakeasyMetadata({ data: "json, name=totalHttpCallCount" })
   totalHttpCallCount?: number;
 }

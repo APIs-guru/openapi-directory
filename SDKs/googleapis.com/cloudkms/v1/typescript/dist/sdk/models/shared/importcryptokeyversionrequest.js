@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var ImportCryptoKeyVersionRequestAlgorithmEnum;
 (function (ImportCryptoKeyVersionRequestAlgorithmEnum) {
     ImportCryptoKeyVersionRequestAlgorithmEnum["CryptoKeyVersionAlgorithmUnspecified"] = "CRYPTO_KEY_VERSION_ALGORITHM_UNSPECIFIED";
@@ -49,6 +49,10 @@ export var ImportCryptoKeyVersionRequestAlgorithmEnum;
     ImportCryptoKeyVersionRequestAlgorithmEnum["EcSignP384Sha384"] = "EC_SIGN_P384_SHA384";
     ImportCryptoKeyVersionRequestAlgorithmEnum["EcSignSecp256K1Sha256"] = "EC_SIGN_SECP256K1_SHA256";
     ImportCryptoKeyVersionRequestAlgorithmEnum["HmacSha256"] = "HMAC_SHA256";
+    ImportCryptoKeyVersionRequestAlgorithmEnum["HmacSha1"] = "HMAC_SHA1";
+    ImportCryptoKeyVersionRequestAlgorithmEnum["HmacSha384"] = "HMAC_SHA384";
+    ImportCryptoKeyVersionRequestAlgorithmEnum["HmacSha512"] = "HMAC_SHA512";
+    ImportCryptoKeyVersionRequestAlgorithmEnum["HmacSha224"] = "HMAC_SHA224";
     ImportCryptoKeyVersionRequestAlgorithmEnum["ExternalSymmetricEncryption"] = "EXTERNAL_SYMMETRIC_ENCRYPTION";
 })(ImportCryptoKeyVersionRequestAlgorithmEnum || (ImportCryptoKeyVersionRequestAlgorithmEnum = {}));
 // ImportCryptoKeyVersionRequest
@@ -61,23 +65,23 @@ var ImportCryptoKeyVersionRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=algorithm" }),
+        SpeakeasyMetadata({ data: "json, name=algorithm" }),
         __metadata("design:type", String)
     ], ImportCryptoKeyVersionRequest.prototype, "algorithm", void 0);
     __decorate([
-        Metadata({ data: "json, name=cryptoKeyVersion" }),
+        SpeakeasyMetadata({ data: "json, name=cryptoKeyVersion" }),
         __metadata("design:type", String)
     ], ImportCryptoKeyVersionRequest.prototype, "cryptoKeyVersion", void 0);
     __decorate([
-        Metadata({ data: "json, name=importJob" }),
+        SpeakeasyMetadata({ data: "json, name=importJob" }),
         __metadata("design:type", String)
     ], ImportCryptoKeyVersionRequest.prototype, "importJob", void 0);
     __decorate([
-        Metadata({ data: "json, name=rsaAesWrappedKey" }),
+        SpeakeasyMetadata({ data: "json, name=rsaAesWrappedKey" }),
         __metadata("design:type", String)
     ], ImportCryptoKeyVersionRequest.prototype, "rsaAesWrappedKey", void 0);
     __decorate([
-        Metadata({ data: "json, name=wrappedKey" }),
+        SpeakeasyMetadata({ data: "json, name=wrappedKey" }),
         __metadata("design:type", String)
     ], ImportCryptoKeyVersionRequest.prototype, "wrappedKey", void 0);
     return ImportCryptoKeyVersionRequest;

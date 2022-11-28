@@ -1,17 +1,18 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AvailableSettingsResult } from "./availablesettingsresult";
 
 
+
 export class SkuInfoResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=availableSettings" })
+  @SpeakeasyMetadata({ data: "json, name=availableSettings" })
   availableSettings?: AvailableSettingsResult;
 
-  @Metadata({ data: "json, name=displayName" })
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
   displayName?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=os" })
+  @SpeakeasyMetadata({ data: "json, name=os" })
   os?: string;
 }

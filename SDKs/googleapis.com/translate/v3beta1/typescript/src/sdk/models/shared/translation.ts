@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TranslateTextGlossaryConfig } from "./translatetextglossaryconfig";
+
 
 
 // Translation
@@ -7,15 +8,15 @@ import { TranslateTextGlossaryConfig } from "./translatetextglossaryconfig";
  * A single translation response.
 **/
 export class Translation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=detectedLanguageCode" })
+  @SpeakeasyMetadata({ data: "json, name=detectedLanguageCode" })
   detectedLanguageCode?: string;
 
-  @Metadata({ data: "json, name=glossaryConfig" })
+  @SpeakeasyMetadata({ data: "json, name=glossaryConfig" })
   glossaryConfig?: TranslateTextGlossaryConfig;
 
-  @Metadata({ data: "json, name=model" })
+  @SpeakeasyMetadata({ data: "json, name=model" })
   model?: string;
 
-  @Metadata({ data: "json, name=translatedText" })
+  @SpeakeasyMetadata({ data: "json, name=translatedText" })
   translatedText?: string;
 }

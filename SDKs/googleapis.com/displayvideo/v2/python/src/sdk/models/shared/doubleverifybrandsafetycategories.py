@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class DoubleVerifyBrandSafetyCategoriesAvoidedHighSeverityCategoriesEnum(str, Enum):
     HIGHER_SEVERITY_UNSPECIFIED = "HIGHER_SEVERITY_UNSPECIFIED"
@@ -39,7 +41,11 @@ class DoubleVerifyBrandSafetyCategoriesAvoidedMediumSeverityCategoriesEnum(str, 
 @dataclass_json
 @dataclass
 class DoubleVerifyBrandSafetyCategories:
-    avoid_unknown_brand_safety_category: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'avoidUnknownBrandSafetyCategory' }})
-    avoided_high_severity_categories: Optional[List[DoubleVerifyBrandSafetyCategoriesAvoidedHighSeverityCategoriesEnum]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'avoidedHighSeverityCategories' }})
-    avoided_medium_severity_categories: Optional[List[DoubleVerifyBrandSafetyCategoriesAvoidedMediumSeverityCategoriesEnum]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'avoidedMediumSeverityCategories' }})
+    r"""DoubleVerifyBrandSafetyCategories
+    Settings for brand safety controls.
+    """
+    
+    avoid_unknown_brand_safety_category: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('avoidUnknownBrandSafetyCategory') }})
+    avoided_high_severity_categories: Optional[List[DoubleVerifyBrandSafetyCategoriesAvoidedHighSeverityCategoriesEnum]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('avoidedHighSeverityCategories') }})
+    avoided_medium_severity_categories: Optional[List[DoubleVerifyBrandSafetyCategoriesAvoidedMediumSeverityCategoriesEnum]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('avoidedMediumSeverityCategories') }})
     

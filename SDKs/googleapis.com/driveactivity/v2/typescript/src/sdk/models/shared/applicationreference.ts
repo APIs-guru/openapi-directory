@@ -1,9 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum ApplicationReferenceTypeEnum {
-    UnspecifiedReferenceType = "UNSPECIFIED_REFERENCE_TYPE"
-,    Link = "LINK"
-,    Discuss = "DISCUSS"
+    UnspecifiedReferenceType = "UNSPECIFIED_REFERENCE_TYPE",
+    Link = "LINK",
+    Discuss = "DISCUSS"
 }
 
 
@@ -12,6 +13,6 @@ export enum ApplicationReferenceTypeEnum {
  * Activity in applications other than Drive.
 **/
 export class ApplicationReference extends SpeakeasyBase {
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: ApplicationReferenceTypeEnum;
 }

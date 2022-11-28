@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { Status } from "./status";
 export declare enum QuotaErrorCodeEnum {
     Unspecified = "UNSPECIFIED",

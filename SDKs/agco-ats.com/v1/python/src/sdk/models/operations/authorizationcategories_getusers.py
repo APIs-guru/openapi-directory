@@ -16,14 +16,14 @@ class AuthorizationCategoriesGetUsersQueryParams:
 
 @dataclass
 class AuthorizationCategoriesGetUsersRequest:
-    query_params: AuthorizationCategoriesGetUsersQueryParams = field(default=None)
+    query_params: AuthorizationCategoriesGetUsersQueryParams = field()
     
 
 @dataclass
 class AuthorizationCategoriesGetUsersResponse:
+    content_type: str = field()
+    status_code: int = field()
     api_i_paged_response_authorization_codes_shared_models_category_user_report_: Optional[shared.APIIPagedResponseAuthorizationCodesSharedModelsCategoryUserReport] = field(default=None)
     api_models_api_error: Optional[shared.APIModelsAPIError] = field(default=None)
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    body: Optional[bytes] = field(default=None)
     

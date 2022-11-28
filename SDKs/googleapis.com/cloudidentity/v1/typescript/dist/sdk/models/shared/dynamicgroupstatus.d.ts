@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 export declare enum DynamicGroupStatusStatusEnum {
     StatusUnspecified = "STATUS_UNSPECIFIED",
     UpToDate = "UP_TO_DATE",

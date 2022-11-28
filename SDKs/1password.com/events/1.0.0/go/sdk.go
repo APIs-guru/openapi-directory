@@ -10,7 +10,7 @@ import (
 	"strings"
 )
 
-var Servers = []string{
+var ServerList = []string{
 	"https://events.1password.com",
 	"https://events.1password.ca",
 	"https://events.1password.eu",
@@ -22,9 +22,13 @@ type HTTPClient interface {
 }
 
 type SDK struct {
-	defaultClient  HTTPClient
-	securityClient HTTPClient
-	serverURL      string
+	_defaultClient  HTTPClient
+	_securityClient HTTPClient
+
+	_serverURL  string
+	_language   string
+	_sdkVersion string
+	_genVersion string
 }
 
 type SDKOption func(*SDK)
@@ -35,27 +39,45 @@ func WithServerURL(serverURL string, params map[string]string) SDKOption {
 			serverURL = utils.ReplaceParameters(serverURL, params)
 		}
 
-		sdk.serverURL = serverURL
+		sdk._serverURL = serverURL
+	}
+}
+
+func WithClient(client HTTPClient) SDKOption {
+	return func(sdk *SDK) {
+		sdk._defaultClient = client
 	}
 }
 
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
-		defaultClient:  http.DefaultClient,
-		securityClient: http.DefaultClient,
+		_language:   "go",
+		_sdkVersion: "",
+		_genVersion: "internal",
 	}
 	for _, opt := range opts {
 		opt(sdk)
 	}
-	if sdk.serverURL == "" {
-		sdk.serverURL = Servers[0]
+
+	if sdk._defaultClient == nil {
+		sdk._defaultClient = http.DefaultClient
+	}
+	if sdk._securityClient == nil {
+
+		sdk._securityClient = sdk._defaultClient
+
+	}
+
+	if sdk._serverURL == "" {
+		sdk._serverURL = ServerList[0]
 	}
 
 	return sdk
 }
 
+// GetAuthIntrospect - Performs introspection of the provided Bearer JWT token
 func (s *SDK) GetAuthIntrospect(ctx context.Context, request operations.GetAuthIntrospectRequest) (*operations.GetAuthIntrospectResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/api/auth/introspect"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -63,7 +85,7 @@ func (s *SDK) GetAuthIntrospect(ctx context.Context, request operations.GetAuthI
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -113,8 +135,10 @@ func (s *SDK) GetAuthIntrospect(ctx context.Context, request operations.GetAuthI
 	return res, nil
 }
 
+// GetItemUsages - Retrieves item usages
+// This endpoint requires your JSON Web Token to have the *itemusages* feature.
 func (s *SDK) GetItemUsages(ctx context.Context, request operations.GetItemUsagesRequest) (*operations.GetItemUsagesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/api/v1/itemusages"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -129,7 +153,7 @@ func (s *SDK) GetItemUsages(ctx context.Context, request operations.GetItemUsage
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -179,8 +203,10 @@ func (s *SDK) GetItemUsages(ctx context.Context, request operations.GetItemUsage
 	return res, nil
 }
 
+// GetSignInAttempts - Retrieves sign-in attempts
+// This endpoint requires your JSON Web Token to have the *signinattempts* feature.
 func (s *SDK) GetSignInAttempts(ctx context.Context, request operations.GetSignInAttemptsRequest) (*operations.GetSignInAttemptsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/api/v1/signinattempts"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -195,7 +221,7 @@ func (s *SDK) GetSignInAttempts(ctx context.Context, request operations.GetSignI
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {

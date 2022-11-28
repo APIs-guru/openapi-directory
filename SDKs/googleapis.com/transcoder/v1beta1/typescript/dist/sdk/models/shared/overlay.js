@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { Animation } from "./animation";
 import { Image } from "./image";
 // Overlay
 /**
@@ -35,11 +35,11 @@ var Overlay = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=animations", elemType: shared.Animation }),
+        SpeakeasyMetadata({ data: "json, name=animations", elemType: Animation }),
         __metadata("design:type", Array)
     ], Overlay.prototype, "animations", void 0);
     __decorate([
-        Metadata({ data: "json, name=image" }),
+        SpeakeasyMetadata({ data: "json, name=image" }),
         __metadata("design:type", Image)
     ], Overlay.prototype, "image", void 0);
     return Overlay;

@@ -1,6 +1,11 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -24,36 +29,40 @@ class ListEntitiesHeaders:
 @dataclass_json
 @dataclass
 class ListEntitiesRequestBodySort:
-    sort_by: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'SortBy' }})
-    sort_order: Optional[shared.SortOrderEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'SortOrder' }})
+    r"""ListEntitiesRequestBodySort
+    An object that contains two attributes, <code>SortBy</code> and <code>SortOrder</code>.
+    """
+    
+    sort_by: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('SortBy') }})
+    sort_order: Optional[shared.SortOrderEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('SortOrder') }})
     
 
 @dataclass_json
 @dataclass
 class ListEntitiesRequestBody:
-    catalog: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Catalog' }})
-    entity_type: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'EntityType' }})
-    filter_list: Optional[List[shared.Filter]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FilterList' }})
-    max_results: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'MaxResults' }})
-    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'NextToken' }})
-    sort: Optional[ListEntitiesRequestBodySort] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Sort' }})
+    catalog: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Catalog') }})
+    entity_type: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('EntityType') }})
+    filter_list: Optional[List[shared.Filter]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('FilterList') }})
+    max_results: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('MaxResults') }})
+    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('NextToken') }})
+    sort: Optional[ListEntitiesRequestBodySort] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Sort') }})
     
 
 @dataclass
 class ListEntitiesRequest:
-    query_params: ListEntitiesQueryParams = field(default=None)
-    headers: ListEntitiesHeaders = field(default=None)
-    request: ListEntitiesRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: ListEntitiesHeaders = field()
+    query_params: ListEntitiesQueryParams = field()
+    request: ListEntitiesRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class ListEntitiesResponse:
+    content_type: str = field()
+    status_code: int = field()
     access_denied_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     internal_service_exception: Optional[Any] = field(default=None)
     list_entities_response: Optional[shared.ListEntitiesResponse] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     validation_exception: Optional[Any] = field(default=None)
     

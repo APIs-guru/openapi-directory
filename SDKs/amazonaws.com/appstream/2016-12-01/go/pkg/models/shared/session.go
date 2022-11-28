@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// Session
+// Describes a streaming session.
 type Session struct {
 	AuthenticationType         *AuthenticationTypeEnum     `json:"AuthenticationType,omitempty"`
 	ConnectionState            *SessionConnectionStateEnum `json:"ConnectionState,omitempty"`

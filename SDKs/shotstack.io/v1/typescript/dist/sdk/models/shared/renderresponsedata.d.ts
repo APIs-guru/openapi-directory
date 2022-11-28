@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { Edit } from "./edit";
 export declare enum RenderResponseDataStatusEnum {
     Queued = "queued",

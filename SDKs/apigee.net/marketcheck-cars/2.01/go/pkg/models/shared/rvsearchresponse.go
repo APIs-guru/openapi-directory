@@ -1,5 +1,7 @@
 package shared
 
+// RvSearchResponse
+// RV search query response
 type RvSearchResponse struct {
 	Facets      map[string]interface{} `json:"facets,omitempty"`
 	Listings    []RvBaseListing        `json:"listings,omitempty"`

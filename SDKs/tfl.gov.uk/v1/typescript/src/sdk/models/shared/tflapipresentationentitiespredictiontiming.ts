@@ -1,22 +1,23 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class TflApiPresentationEntitiesPredictionTiming extends SpeakeasyBase {
-  @Metadata({ data: "json, name=countdownServerAdjustment" })
+  @SpeakeasyMetadata({ data: "json, name=countdownServerAdjustment" })
   countdownServerAdjustment?: string;
 
-  @Metadata({ data: "json, name=insert" })
+  @SpeakeasyMetadata({ data: "json, name=insert" })
   insert?: Date;
 
-  @Metadata({ data: "json, name=read" })
+  @SpeakeasyMetadata({ data: "json, name=read" })
   read?: Date;
 
-  @Metadata({ data: "json, name=received" })
+  @SpeakeasyMetadata({ data: "json, name=received" })
   received?: Date;
 
-  @Metadata({ data: "json, name=sent" })
+  @SpeakeasyMetadata({ data: "json, name=sent" })
   sent?: Date;
 
-  @Metadata({ data: "json, name=source" })
+  @SpeakeasyMetadata({ data: "json, name=source" })
   source?: Date;
 }

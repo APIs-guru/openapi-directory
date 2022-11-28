@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostCreateAccessKeyActionEnum(str, Enum):
     CREATE_ACCESS_KEY = "CreateAccessKey"
@@ -10,8 +14,8 @@ class PostCreateAccessKeyVersionEnum(str, Enum):
 
 @dataclass
 class PostCreateAccessKeyQueryParams:
-    action: PostCreateAccessKeyActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostCreateAccessKeyVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostCreateAccessKeyActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostCreateAccessKeyVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostCreateAccessKeyHeaders:
 
 @dataclass
 class PostCreateAccessKeyRequest:
-    query_params: PostCreateAccessKeyQueryParams = field(default=None)
-    headers: PostCreateAccessKeyHeaders = field(default=None)
+    headers: PostCreateAccessKeyHeaders = field()
+    query_params: PostCreateAccessKeyQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostCreateAccessKeyResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

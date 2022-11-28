@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { EventsDetectionJobProperties } from "./eventsdetectionjobproperties";
 export declare class ListEventsDetectionJobsResponse extends SpeakeasyBase {
     eventsDetectionJobPropertiesList?: EventsDetectionJobProperties[];

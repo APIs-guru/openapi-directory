@@ -22,30 +22,30 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var NeighborhoodInAStreetPathParams = /** @class */ (function (_super) {
     __extends(NeighborhoodInAStreetPathParams, _super);
     function NeighborhoodInAStreetPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=country" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=country" }),
         __metadata("design:type", String)
     ], NeighborhoodInAStreetPathParams.prototype, "country", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=district" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=district" }),
         __metadata("design:type", String)
     ], NeighborhoodInAStreetPathParams.prototype, "district", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=region" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=region" }),
         __metadata("design:type", String)
     ], NeighborhoodInAStreetPathParams.prototype, "region", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=street" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=street" }),
         __metadata("design:type", String)
     ], NeighborhoodInAStreetPathParams.prototype, "street", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=ward" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=ward" }),
         __metadata("design:type", String)
     ], NeighborhoodInAStreetPathParams.prototype, "ward", void 0);
     return NeighborhoodInAStreetPathParams;
@@ -57,7 +57,7 @@ var NeighborhoodInAStreetRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", NeighborhoodInAStreetPathParams)
     ], NeighborhoodInAStreetRequest.prototype, "pathParams", void 0);
     return NeighborhoodInAStreetRequest;
@@ -69,11 +69,11 @@ var NeighborhoodInAStreetResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], NeighborhoodInAStreetResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], NeighborhoodInAStreetResponse.prototype, "statusCode", void 0);
     return NeighborhoodInAStreetResponse;

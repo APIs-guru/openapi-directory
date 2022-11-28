@@ -1,5 +1,7 @@
 package shared
 
+// Product
+// This type contains the full details of a specified product, including information about the product's identifiers, product images, aspects, and categories.
 type Product struct {
 	AdditionalImages           []Image  `json:"additionalImages,omitempty"`
 	Aspects                    []Aspect `json:"aspects,omitempty"`

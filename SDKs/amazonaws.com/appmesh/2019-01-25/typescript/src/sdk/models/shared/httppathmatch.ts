@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // HttpPathMatch
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * An object representing the path to match in the request.
 **/
 export class HttpPathMatch extends SpeakeasyBase {
-  @Metadata({ data: "json, name=exact" })
+  @SpeakeasyMetadata({ data: "json, name=exact" })
   exact?: string;
 
-  @Metadata({ data: "json, name=regex" })
+  @SpeakeasyMetadata({ data: "json, name=regex" })
   regex?: string;
 }

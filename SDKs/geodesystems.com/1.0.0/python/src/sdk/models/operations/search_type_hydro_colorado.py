@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
 from typing import Optional
@@ -29,11 +29,11 @@ class SearchTypeHydroColoradoQueryParams:
 
 @dataclass
 class SearchTypeHydroColoradoRequest:
-    query_params: SearchTypeHydroColoradoQueryParams = field(default=None)
+    query_params: SearchTypeHydroColoradoQueryParams = field()
     
 
 @dataclass
 class SearchTypeHydroColoradoResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

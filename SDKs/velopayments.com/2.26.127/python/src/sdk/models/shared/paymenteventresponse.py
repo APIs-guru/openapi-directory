@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import paymentauditcurrency_enum
-from . import paymentauditcurrency_enum
+from sdk import utils
+from . import *
 
 class PaymentEventResponseEventTypeEnum(str, Enum):
     PAYOUT_SUBMITTED = "PAYOUT_SUBMITTED"
@@ -46,16 +47,16 @@ class PaymentEventResponseEventTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class PaymentEventResponse:
-    account_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'accountName' }})
-    account_number: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'accountNumber' }})
-    event_date_time: datetime = field(default=None, metadata={'dataclasses_json': { 'field_name': 'eventDateTime', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    event_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'eventId' }})
-    event_type: PaymentEventResponseEventTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'eventType' }})
-    iban: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'iban' }})
-    payment_amount: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'paymentAmount' }})
-    payment_currency: Optional[paymentauditcurrency_enum.PaymentAuditCurrencyEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'paymentCurrency' }})
-    principal: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'principal' }})
-    routing_number: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'routingNumber' }})
-    source_amount: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'sourceAmount' }})
-    source_currency: Optional[paymentauditcurrency_enum.PaymentAuditCurrencyEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'sourceCurrency' }})
+    event_date_time: datetime = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('eventDateTime'), 'encoder': utils.datetimeisoformat(False), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    event_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('eventId') }})
+    event_type: PaymentEventResponseEventTypeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('eventType') }})
+    account_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('accountName') }})
+    account_number: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('accountNumber') }})
+    iban: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('iban') }})
+    payment_amount: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('paymentAmount') }})
+    payment_currency: Optional[PaymentAuditCurrencyEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('paymentCurrency') }})
+    principal: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('principal') }})
+    routing_number: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('routingNumber') }})
+    source_amount: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('sourceAmount') }})
+    source_currency: Optional[PaymentAuditCurrencyEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('sourceCurrency') }})
     

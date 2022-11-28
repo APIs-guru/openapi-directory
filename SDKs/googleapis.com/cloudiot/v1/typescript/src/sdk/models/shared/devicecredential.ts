@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PublicKeyCredential } from "./publickeycredential";
+
 
 
 // DeviceCredential
@@ -7,9 +8,9 @@ import { PublicKeyCredential } from "./publickeycredential";
  * A server-stored device credential used for authentication.
 **/
 export class DeviceCredential extends SpeakeasyBase {
-  @Metadata({ data: "json, name=expirationTime" })
+  @SpeakeasyMetadata({ data: "json, name=expirationTime" })
   expirationTime?: string;
 
-  @Metadata({ data: "json, name=publicKey" })
+  @SpeakeasyMetadata({ data: "json, name=publicKey" })
   publicKey?: PublicKeyCredential;
 }

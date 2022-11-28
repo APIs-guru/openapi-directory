@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // BatchRejectPublisherConnectionsRequest
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A request to reject a batch of publisher connections.
 **/
 export class BatchRejectPublisherConnectionsRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=names" })
+  @SpeakeasyMetadata({ data: "json, name=names" })
   names?: string[];
 }

@@ -1,44 +1,45 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class TagApiPostReportPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=tagId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=tagId" })
   tagId: number;
 }
 
 export enum TagApiPostReportReportTypeEnum {
-    InvalidInfo = "InvalidInfo"
-,    Duplicate = "Duplicate"
-,    Inappropriate = "Inappropriate"
-,    Other = "Other"
+    InvalidInfo = "InvalidInfo",
+    Duplicate = "Duplicate",
+    Inappropriate = "Inappropriate",
+    Other = "Other"
 }
 
 
 export class TagApiPostReportQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=notes" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=notes" })
   notes: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=reportType" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=reportType" })
   reportType: TagApiPostReportReportTypeEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=versionNumber" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=versionNumber" })
   versionNumber: number;
 }
 
 
 export class TagApiPostReportRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: TagApiPostReportPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: TagApiPostReportQueryParams;
 }
 
 
 export class TagApiPostReportResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

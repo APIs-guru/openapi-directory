@@ -1,13 +1,20 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import List
 from dataclasses_json import dataclass_json
-from . import objectattributeupdate
-from . import objectreference
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class BatchUpdateObjectAttributes:
-    attribute_updates: List[objectattributeupdate.ObjectAttributeUpdate] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AttributeUpdates' }})
-    object_reference: objectreference.ObjectReference = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ObjectReference' }})
+    r"""BatchUpdateObjectAttributes
+    Represents the output of a <code>BatchUpdate</code> operation. 
+    """
+    
+    attribute_updates: List[ObjectAttributeUpdate] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('AttributeUpdates') }})
+    object_reference: ObjectReference = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('ObjectReference') }})
     

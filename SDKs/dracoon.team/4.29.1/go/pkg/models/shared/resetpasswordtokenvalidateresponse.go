@@ -1,5 +1,7 @@
 package shared
 
+// ResetPasswordTokenValidateResponse
+// Password reset information
 type ResetPasswordTokenValidateResponse struct {
 	AllowSystemGlobalWeakPassword *bool                  `json:"allowSystemGlobalWeakPassword,omitempty"`
 	FirstName                     string                 `json:"firstName"`

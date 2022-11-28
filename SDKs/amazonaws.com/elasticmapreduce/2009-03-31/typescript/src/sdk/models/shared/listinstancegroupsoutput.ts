@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { InstanceGroup } from "./instancegroup";
+
 
 
 // ListInstanceGroupsOutput
@@ -8,9 +8,9 @@ import { InstanceGroup } from "./instancegroup";
  * This input determines which instance groups to retrieve.
 **/
 export class ListInstanceGroupsOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=InstanceGroups", elemType: shared.InstanceGroup })
+  @SpeakeasyMetadata({ data: "json, name=InstanceGroups", elemType: InstanceGroup })
   instanceGroups?: InstanceGroup[];
 
-  @Metadata({ data: "json, name=Marker" })
+  @SpeakeasyMetadata({ data: "json, name=Marker" })
   marker?: string;
 }

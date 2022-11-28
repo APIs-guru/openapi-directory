@@ -1,14 +1,16 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from typing import Any,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import rolloutrulecomparator_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class RolloutRuleModel:
-    comparator: Optional[rolloutrulecomparator_enum.RolloutRuleComparatorEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'comparator' }})
-    comparison_attribute: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'comparisonAttribute' }})
-    comparison_value: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'comparisonValue' }})
-    value: Optional[dict[str, Any]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'value' }})
+    comparison_attribute: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('comparisonAttribute') }})
+    comparison_value: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('comparisonValue') }})
+    comparator: Optional[RolloutRuleComparatorEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('comparator') }})
+    value: Optional[dict[str, Any]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('value') }})
     

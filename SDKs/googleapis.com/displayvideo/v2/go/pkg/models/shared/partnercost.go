@@ -51,6 +51,8 @@ const (
 	PartnerCostInvoiceTypeEnumPartnerCostInvoiceTypePartner     PartnerCostInvoiceTypeEnum = "PARTNER_COST_INVOICE_TYPE_PARTNER"
 )
 
+// PartnerCost
+// Settings that control a partner cost. A partner cost is any type of expense involved in running a campaign, other than the costs of purchasing impressions (which is called the media cost) and using third-party audience segment data (data fee). Some examples of partner costs include the fees for using DV360, a third-party ad server, or a third-party ad serving verification service.
 type PartnerCost struct {
 	CostType            *PartnerCostCostTypeEnum    `json:"costType,omitempty"`
 	FeeAmount           *string                     `json:"feeAmount,omitempty"`

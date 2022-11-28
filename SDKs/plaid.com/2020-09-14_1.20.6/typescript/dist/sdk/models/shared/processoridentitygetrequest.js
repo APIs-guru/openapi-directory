@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // ProcessorIdentityGetRequest
 /**
  * ProcessorIdentityGetRequest defines the request schema for `/processor/identity/get`
@@ -33,15 +33,15 @@ var ProcessorIdentityGetRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=client_id" }),
+        SpeakeasyMetadata({ data: "json, name=client_id" }),
         __metadata("design:type", String)
     ], ProcessorIdentityGetRequest.prototype, "clientId", void 0);
     __decorate([
-        Metadata({ data: "json, name=processor_token" }),
+        SpeakeasyMetadata({ data: "json, name=processor_token" }),
         __metadata("design:type", String)
     ], ProcessorIdentityGetRequest.prototype, "processorToken", void 0);
     __decorate([
-        Metadata({ data: "json, name=secret" }),
+        SpeakeasyMetadata({ data: "json, name=secret" }),
         __metadata("design:type", String)
     ], ProcessorIdentityGetRequest.prototype, "secret", void 0);
     return ProcessorIdentityGetRequest;

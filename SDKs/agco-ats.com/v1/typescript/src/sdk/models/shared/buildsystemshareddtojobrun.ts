@@ -1,14 +1,36 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BuildSystemSharedDtoActivityRun } from "./buildsystemshareddtoactivityrun";
 import { BuildSystemSharedDtoParameterValue } from "./buildsystemshareddtoparametervalue";
 
+
 export enum BuildSystemSharedDtoJobRunStatusEnum {
-    Ready = "Ready"
-,    InProgress = "InProgress"
-,    Succeeded = "Succeeded"
-,    Cancelled = "Cancelled"
-,    Failed = "Failed"
+    Ready = "Ready",
+    InProgress = "InProgress",
+    Succeeded = "Succeeded",
+    Cancelled = "Cancelled",
+    Failed = "Failed"
+}
+
+
+// BuildSystemSharedDtoJobRunInput
+/** 
+ * A DTO for an IJobRun
+**/
+export class BuildSystemSharedDtoJobRunInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=EndDate, form, name=EndDate;" })
+  endDate?: Date;
+
+  @SpeakeasyMetadata({ data: "json, name=JobID, form, name=JobID;" })
+  jobId?: number;
+
+  @SpeakeasyMetadata({ data: "json, name=JobRunID, form, name=JobRunID;" })
+  jobRunId?: number;
+
+  @SpeakeasyMetadata({ data: "json, name=StartDate, form, name=StartDate;" })
+  startDate?: Date;
+
+  @SpeakeasyMetadata({ data: "json, name=Status, form, name=Status;" })
+  status?: BuildSystemSharedDtoJobRunStatusEnum;
 }
 
 
@@ -17,24 +39,24 @@ export enum BuildSystemSharedDtoJobRunStatusEnum {
  * A DTO for an IJobRun
 **/
 export class BuildSystemSharedDtoJobRun extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ActivityRuns", elemType: shared.BuildSystemSharedDtoActivityRun })
+  @SpeakeasyMetadata({ data: "json, name=ActivityRuns", elemType: BuildSystemSharedDtoActivityRun })
   activityRuns?: BuildSystemSharedDtoActivityRun[];
 
-  @Metadata({ data: "json, name=EndDate" })
+  @SpeakeasyMetadata({ data: "json, name=EndDate" })
   endDate?: Date;
 
-  @Metadata({ data: "json, name=JobID" })
+  @SpeakeasyMetadata({ data: "json, name=JobID" })
   jobId?: number;
 
-  @Metadata({ data: "json, name=JobRunID" })
+  @SpeakeasyMetadata({ data: "json, name=JobRunID" })
   jobRunId?: number;
 
-  @Metadata({ data: "json, name=Parameters", elemType: shared.BuildSystemSharedDtoParameterValue })
+  @SpeakeasyMetadata({ data: "json, name=Parameters", elemType: BuildSystemSharedDtoParameterValue })
   parameters?: BuildSystemSharedDtoParameterValue[];
 
-  @Metadata({ data: "json, name=StartDate" })
+  @SpeakeasyMetadata({ data: "json, name=StartDate" })
   startDate?: Date;
 
-  @Metadata({ data: "json, name=Status" })
+  @SpeakeasyMetadata({ data: "json, name=Status" })
   status?: BuildSystemSharedDtoJobRunStatusEnum;
 }

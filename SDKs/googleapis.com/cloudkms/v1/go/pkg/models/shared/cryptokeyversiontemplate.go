@@ -27,6 +27,10 @@ const (
 	CryptoKeyVersionTemplateAlgorithmEnumEcSignP384Sha384                     CryptoKeyVersionTemplateAlgorithmEnum = "EC_SIGN_P384_SHA384"
 	CryptoKeyVersionTemplateAlgorithmEnumEcSignSecp256K1Sha256                CryptoKeyVersionTemplateAlgorithmEnum = "EC_SIGN_SECP256K1_SHA256"
 	CryptoKeyVersionTemplateAlgorithmEnumHmacSha256                           CryptoKeyVersionTemplateAlgorithmEnum = "HMAC_SHA256"
+	CryptoKeyVersionTemplateAlgorithmEnumHmacSha1                             CryptoKeyVersionTemplateAlgorithmEnum = "HMAC_SHA1"
+	CryptoKeyVersionTemplateAlgorithmEnumHmacSha384                           CryptoKeyVersionTemplateAlgorithmEnum = "HMAC_SHA384"
+	CryptoKeyVersionTemplateAlgorithmEnumHmacSha512                           CryptoKeyVersionTemplateAlgorithmEnum = "HMAC_SHA512"
+	CryptoKeyVersionTemplateAlgorithmEnumHmacSha224                           CryptoKeyVersionTemplateAlgorithmEnum = "HMAC_SHA224"
 	CryptoKeyVersionTemplateAlgorithmEnumExternalSymmetricEncryption          CryptoKeyVersionTemplateAlgorithmEnum = "EXTERNAL_SYMMETRIC_ENCRYPTION"
 )
 
@@ -40,6 +44,8 @@ const (
 	CryptoKeyVersionTemplateProtectionLevelEnumExternalVpc                CryptoKeyVersionTemplateProtectionLevelEnum = "EXTERNAL_VPC"
 )
 
+// CryptoKeyVersionTemplate
+// A CryptoKeyVersionTemplate specifies the properties to use when creating a new CryptoKeyVersion, either manually with CreateCryptoKeyVersion or automatically as a result of auto-rotation.
 type CryptoKeyVersionTemplate struct {
 	Algorithm       *CryptoKeyVersionTemplateAlgorithmEnum       `json:"algorithm,omitempty"`
 	ProtectionLevel *CryptoKeyVersionTemplateProtectionLevelEnum `json:"protectionLevel,omitempty"`

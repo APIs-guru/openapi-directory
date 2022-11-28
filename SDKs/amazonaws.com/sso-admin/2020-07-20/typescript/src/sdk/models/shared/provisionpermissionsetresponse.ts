@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PermissionSetProvisioningStatus } from "./permissionsetprovisioningstatus";
 
 
+
 export class ProvisionPermissionSetResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=PermissionSetProvisioningStatus" })
+  @SpeakeasyMetadata({ data: "json, name=PermissionSetProvisioningStatus" })
   permissionSetProvisioningStatus?: PermissionSetProvisioningStatus;
 }

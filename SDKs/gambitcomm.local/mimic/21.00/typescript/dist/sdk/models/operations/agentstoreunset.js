@@ -22,18 +22,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var AgentStoreUnsetPathParams = /** @class */ (function (_super) {
     __extends(AgentStoreUnsetPathParams, _super);
     function AgentStoreUnsetPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=agentNum" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=agentNum" }),
         __metadata("design:type", Number)
     ], AgentStoreUnsetPathParams.prototype, "agentNum", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=var" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=var" }),
         __metadata("design:type", String)
     ], AgentStoreUnsetPathParams.prototype, "var", void 0);
     return AgentStoreUnsetPathParams;
@@ -45,7 +45,7 @@ var AgentStoreUnsetRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", AgentStoreUnsetPathParams)
     ], AgentStoreUnsetRequest.prototype, "pathParams", void 0);
     return AgentStoreUnsetRequest;
@@ -57,15 +57,15 @@ var AgentStoreUnsetResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], AgentStoreUnsetResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], AgentStoreUnsetResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], AgentStoreUnsetResponse.prototype, "agentStoreUnset200ApplicationJsonString", void 0);
     return AgentStoreUnsetResponse;

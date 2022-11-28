@@ -1,13 +1,13 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SeekInfo } from "./seekinfo";
 import { ScheduleA } from "./schedulea";
 
 
+
 export class ScheduleAPage extends SpeakeasyBase {
-  @Metadata({ data: "json, name=pagination" })
+  @SpeakeasyMetadata({ data: "json, name=pagination" })
   pagination?: SeekInfo;
 
-  @Metadata({ data: "json, name=results", elemType: shared.ScheduleA })
+  @SpeakeasyMetadata({ data: "json, name=results", elemType: ScheduleA })
   results?: ScheduleA[];
 }

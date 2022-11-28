@@ -14,6 +14,8 @@ const (
 	HTMLAssetPositionEnumCenter      HTMLAssetPositionEnum = "center"
 )
 
+// HTMLAsset
+// The HtmlAsset clip type lets you create text based layout and formatting using HTML and CSS. You can also set the height and width of a bounding box for the HTML content to sit within. Text and elements will wrap within the bounding box.
 type HTMLAsset struct {
 	Background *string                `json:"background,omitempty"`
 	CSS        *string                `json:"css,omitempty"`

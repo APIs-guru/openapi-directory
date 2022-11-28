@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass_json
 @dataclass
 class StreamingSideInputLocation:
-    state_family: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'stateFamily' }})
-    tag: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tag' }})
+    r"""StreamingSideInputLocation
+    Identifies the location of a streaming side input.
+    """
+    
+    state_family: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('stateFamily') }})
+    tag: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('tag') }})
     

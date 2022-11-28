@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 
 class PostGeomarksCopyBufferCapEnum(str, Enum):
     ROUND = "ROUND"
@@ -25,6 +26,7 @@ class PostGeomarksCopyResultFormatEnum(str, Enum):
 
 @dataclass
 class PostGeomarksCopyQueryParams:
+    geomark_url: str = field(metadata={'query_param': { 'field_name': 'geomarkUrl', 'style': 'form', 'explode': True }})
     allow_overlap: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'allowOverlap', 'style': 'form', 'explode': True }})
     buffer_cap: Optional[PostGeomarksCopyBufferCapEnum] = field(default=None, metadata={'query_param': { 'field_name': 'bufferCap', 'style': 'form', 'explode': True }})
     buffer_join: Optional[PostGeomarksCopyBufferJoinEnum] = field(default=None, metadata={'query_param': { 'field_name': 'bufferJoin', 'style': 'form', 'explode': True }})
@@ -33,18 +35,17 @@ class PostGeomarksCopyQueryParams:
     buffer_segments: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'bufferSegments', 'style': 'form', 'explode': True }})
     callback: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'callback', 'style': 'form', 'explode': True }})
     failure_redirect_url: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'failureRedirectUrl', 'style': 'form', 'explode': True }})
-    geomark_url: str = field(default=None, metadata={'query_param': { 'field_name': 'geomarkUrl', 'style': 'form', 'explode': True }})
     redirect_url: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'redirectUrl', 'style': 'form', 'explode': True }})
     result_format: Optional[PostGeomarksCopyResultFormatEnum] = field(default=None, metadata={'query_param': { 'field_name': 'resultFormat', 'style': 'form', 'explode': True }})
     
 
 @dataclass
 class PostGeomarksCopyRequest:
-    query_params: PostGeomarksCopyQueryParams = field(default=None)
+    query_params: PostGeomarksCopyQueryParams = field()
     
 
 @dataclass
 class PostGeomarksCopyResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SingleCategoryStats } from "./singlecategorystats";
+
 
 
 // CategoryStats
@@ -8,6 +8,6 @@ import { SingleCategoryStats } from "./singlecategorystats";
  * The data statistics of a series of CATEGORY values.
 **/
 export class CategoryStats extends SpeakeasyBase {
-  @Metadata({ data: "json, name=topCategoryStats", elemType: shared.SingleCategoryStats })
+  @SpeakeasyMetadata({ data: "json, name=topCategoryStats", elemType: SingleCategoryStats })
   topCategoryStats?: SingleCategoryStats[];
 }

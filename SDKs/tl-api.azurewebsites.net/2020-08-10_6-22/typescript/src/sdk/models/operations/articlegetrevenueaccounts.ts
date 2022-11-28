@@ -1,17 +1,18 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class ArticleGetRevenueAccountsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   apiResponse?: shared.ApiResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   defaultResponseDtoOfStatusDto?: shared.DefaultResponseDtoOfStatusDto;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

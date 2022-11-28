@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Component } from "./component";
+
 
 
 // TemplateDefinitionDataSettings
@@ -8,10 +8,10 @@ import { Component } from "./component";
  * Defines filter and sort option for root data set.
 **/
 export class TemplateDefinitionDataSettings extends SpeakeasyBase {
-  @Metadata({ data: "json, name=filterBy" })
+  @SpeakeasyMetadata({ data: "json, name=filterBy" })
   filterBy?: Map<string, any>[];
 
-  @Metadata({ data: "json, name=sortBy" })
+  @SpeakeasyMetadata({ data: "json, name=sortBy" })
   sortBy?: Map<string, any>[];
 }
 
@@ -21,14 +21,14 @@ export class TemplateDefinitionDataSettings extends SpeakeasyBase {
  * Configuration preferences for the editor
 **/
 export class TemplateDefinitionEditor extends SpeakeasyBase {
-  @Metadata({ data: "json, name=heightMultiplier" })
+  @SpeakeasyMetadata({ data: "json, name=heightMultiplier" })
   heightMultiplier?: number;
 }
 
 export enum TemplateDefinitionLayoutFormatEnum {
-    A4 = "A4"
-,    Letter = "letter"
-,    Custom = "custom"
+    A4 = "A4",
+    Letter = "letter",
+    Custom = "custom"
 }
 
 
@@ -37,28 +37,28 @@ export enum TemplateDefinitionLayoutFormatEnum {
  * Page margins in units
 **/
 export class TemplateDefinitionLayoutMargins extends SpeakeasyBase {
-  @Metadata({ data: "json, name=bottom" })
+  @SpeakeasyMetadata({ data: "json, name=bottom" })
   bottom?: number;
 
-  @Metadata({ data: "json, name=left" })
+  @SpeakeasyMetadata({ data: "json, name=left" })
   left?: number;
 
-  @Metadata({ data: "json, name=right" })
+  @SpeakeasyMetadata({ data: "json, name=right" })
   right?: number;
 
-  @Metadata({ data: "json, name=top" })
+  @SpeakeasyMetadata({ data: "json, name=top" })
   top?: number;
 }
 
 export enum TemplateDefinitionLayoutOrientationEnum {
-    Portrait = "portrait"
-,    Landscape = "landscape"
+    Portrait = "portrait",
+    Landscape = "landscape"
 }
 
 export enum TemplateDefinitionLayoutRepeatLayoutFormatEnum {
-    A4 = "A4"
-,    Letter = "letter"
-,    Custom = "custom"
+    A4 = "A4",
+    Letter = "letter",
+    Custom = "custom"
 }
 
 
@@ -67,19 +67,19 @@ export enum TemplateDefinitionLayoutRepeatLayoutFormatEnum {
  * Defines page size if layout is repeated on the page e.g sheet labels
 **/
 export class TemplateDefinitionLayoutRepeatLayout extends SpeakeasyBase {
-  @Metadata({ data: "json, name=format" })
+  @SpeakeasyMetadata({ data: "json, name=format" })
   format?: TemplateDefinitionLayoutRepeatLayoutFormatEnum;
 
-  @Metadata({ data: "json, name=height" })
+  @SpeakeasyMetadata({ data: "json, name=height" })
   height?: number;
 
-  @Metadata({ data: "json, name=width" })
+  @SpeakeasyMetadata({ data: "json, name=width" })
   width?: number;
 }
 
 export enum TemplateDefinitionLayoutUnitEnum {
-    Cm = "cm"
-,    In = "in"
+    Cm = "cm",
+    In = "in"
 }
 
 
@@ -88,81 +88,81 @@ export enum TemplateDefinitionLayoutUnitEnum {
  * Defines template layout (e.g page format, margins).
 **/
 export class TemplateDefinitionLayout extends SpeakeasyBase {
-  @Metadata({ data: "json, name=emptyLabels" })
+  @SpeakeasyMetadata({ data: "json, name=emptyLabels" })
   emptyLabels?: number;
 
-  @Metadata({ data: "json, name=format" })
+  @SpeakeasyMetadata({ data: "json, name=format" })
   format?: TemplateDefinitionLayoutFormatEnum;
 
-  @Metadata({ data: "json, name=height" })
+  @SpeakeasyMetadata({ data: "json, name=height" })
   height?: number;
 
-  @Metadata({ data: "json, name=margins" })
+  @SpeakeasyMetadata({ data: "json, name=margins" })
   margins?: TemplateDefinitionLayoutMargins;
 
-  @Metadata({ data: "json, name=orientation" })
+  @SpeakeasyMetadata({ data: "json, name=orientation" })
   orientation?: TemplateDefinitionLayoutOrientationEnum;
 
-  @Metadata({ data: "json, name=repeatLayout" })
+  @SpeakeasyMetadata({ data: "json, name=repeatLayout" })
   repeatLayout?: TemplateDefinitionLayoutRepeatLayout;
 
-  @Metadata({ data: "json, name=rotation" })
+  @SpeakeasyMetadata({ data: "json, name=rotation" })
   rotation?: number;
 
-  @Metadata({ data: "json, name=unit" })
+  @SpeakeasyMetadata({ data: "json, name=unit" })
   unit?: TemplateDefinitionLayoutUnitEnum;
 
-  @Metadata({ data: "json, name=width" })
+  @SpeakeasyMetadata({ data: "json, name=width" })
   width?: number;
 }
 
 
 export class TemplateDefinitionPagesMargins extends SpeakeasyBase {
-  @Metadata({ data: "json, name=bottom" })
+  @SpeakeasyMetadata({ data: "json, name=bottom" })
   bottom?: number;
 
-  @Metadata({ data: "json, name=right" })
+  @SpeakeasyMetadata({ data: "json, name=right" })
   right?: number;
 }
 
 
 export class TemplateDefinitionPages extends SpeakeasyBase {
-  @Metadata({ data: "json, name=components", elemType: shared.Component })
+  @SpeakeasyMetadata({ data: "json, name=components", elemType: Component })
   components?: Component[];
 
-  @Metadata({ data: "json, name=height" })
+  @SpeakeasyMetadata({ data: "json, name=height" })
   height?: number;
 
-  @Metadata({ data: "json, name=margins" })
+  @SpeakeasyMetadata({ data: "json, name=margins" })
   margins?: TemplateDefinitionPagesMargins;
 
-  @Metadata({ data: "json, name=width" })
+  @SpeakeasyMetadata({ data: "json, name=width" })
   width?: number;
 }
 
 
 export class TemplateDefinition extends SpeakeasyBase {
-  @Metadata({ data: "json, name=dataSettings" })
+  @SpeakeasyMetadata({ data: "json, name=dataSettings" })
   dataSettings?: TemplateDefinitionDataSettings;
 
-  @Metadata({ data: "json, name=editor" })
+  @SpeakeasyMetadata({ data: "json, name=editor" })
   editor?: TemplateDefinitionEditor;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: number;
 
-  @Metadata({ data: "json, name=isDraft" })
+  @SpeakeasyMetadata({ data: "json, name=isDraft" })
   isDraft?: boolean;
 
-  @Metadata({ data: "json, name=layout" })
+  @SpeakeasyMetadata({ data: "json, name=layout" })
   layout?: TemplateDefinitionLayout;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=pages", elemType: shared.TemplateDefinitionPages })
+  @SpeakeasyMetadata({ data: "json, name=pages", elemType: TemplateDefinitionPages })
   pages?: TemplateDefinitionPages[];
 
-  @Metadata({ data: "json, name=tags" })
+  @SpeakeasyMetadata({ data: "json, name=tags" })
   tags?: string[];
 }

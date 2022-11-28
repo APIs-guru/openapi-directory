@@ -22,26 +22,26 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var Message = /** @class */ (function (_super) {
     __extends(Message, _super);
     function Message() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=errorCode" }),
+        SpeakeasyMetadata({ data: "json, name=errorCode" }),
         __metadata("design:type", String)
     ], Message.prototype, "errorCode", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDetail" }),
+        SpeakeasyMetadata({ data: "json, name=errorDetail" }),
         __metadata("design:type", String)
     ], Message.prototype, "errorDetail", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorMessage" }),
+        SpeakeasyMetadata({ data: "json, name=errorMessage" }),
         __metadata("design:type", String)
     ], Message.prototype, "errorMessage", void 0);
     __decorate([
-        Metadata({ data: "json, name=userMessage" }),
+        SpeakeasyMetadata({ data: "json, name=userMessage" }),
         __metadata("design:type", String)
     ], Message.prototype, "userMessage", void 0);
     return Message;

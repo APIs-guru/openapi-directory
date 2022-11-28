@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { Observation } from "./observation";
 // RelatedObservations
 /**
  * Describes observations related to the problem.
@@ -34,7 +34,7 @@ var RelatedObservations = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=ObservationList", elemType: shared.Observation }),
+        SpeakeasyMetadata({ data: "json, name=ObservationList", elemType: Observation }),
         __metadata("design:type", Array)
     ], RelatedObservations.prototype, "observationList", void 0);
     return RelatedObservations;

@@ -4,12 +4,12 @@ type SignConfirmPathParams struct {
 	Job string `pathParam:"style=simple,explode=false,name=job"`
 }
 
-type SignConfirmRequest struct {
-	PathParams SignConfirmPathParams
-}
-
 type SignConfirm202ApplicationJSON struct {
 	Status *string `json:"status,omitempty"`
+}
+
+type SignConfirmRequest struct {
+	PathParams SignConfirmPathParams
 }
 
 type SignConfirmResponse struct {

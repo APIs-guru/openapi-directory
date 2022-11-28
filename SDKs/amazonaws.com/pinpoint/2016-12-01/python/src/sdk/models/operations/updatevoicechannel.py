@@ -1,12 +1,16 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
 @dataclass
 class UpdateVoiceChannelPathParams:
-    application_id: str = field(default=None, metadata={'path_param': { 'field_name': 'application-id', 'style': 'simple', 'explode': False }})
+    application_id: str = field(metadata={'path_param': { 'field_name': 'application-id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -23,32 +27,36 @@ class UpdateVoiceChannelHeaders:
 @dataclass_json
 @dataclass
 class UpdateVoiceChannelRequestBodyVoiceChannelRequest:
-    enabled: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Enabled' }})
+    r"""UpdateVoiceChannelRequestBodyVoiceChannelRequest
+    Specifies the status and settings of the voice channel for an application.
+    """
+    
+    enabled: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Enabled') }})
     
 
 @dataclass_json
 @dataclass
 class UpdateVoiceChannelRequestBody:
-    voice_channel_request: UpdateVoiceChannelRequestBodyVoiceChannelRequest = field(default=None, metadata={'dataclasses_json': { 'field_name': 'VoiceChannelRequest' }})
+    voice_channel_request: UpdateVoiceChannelRequestBodyVoiceChannelRequest = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('VoiceChannelRequest') }})
     
 
 @dataclass
 class UpdateVoiceChannelRequest:
-    path_params: UpdateVoiceChannelPathParams = field(default=None)
-    headers: UpdateVoiceChannelHeaders = field(default=None)
-    request: UpdateVoiceChannelRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: UpdateVoiceChannelHeaders = field()
+    path_params: UpdateVoiceChannelPathParams = field()
+    request: UpdateVoiceChannelRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class UpdateVoiceChannelResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     forbidden_exception: Optional[Any] = field(default=None)
     internal_server_error_exception: Optional[Any] = field(default=None)
     method_not_allowed_exception: Optional[Any] = field(default=None)
     not_found_exception: Optional[Any] = field(default=None)
     payload_too_large_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     too_many_requests_exception: Optional[Any] = field(default=None)
     update_voice_channel_response: Optional[shared.UpdateVoiceChannelResponse] = field(default=None)
     

@@ -1,86 +1,87 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class UpdateAssessmentControlSetStatusPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=assessmentId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=assessmentId" })
   assessmentId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=controlSetId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=controlSetId" })
   controlSetId: string;
 }
 
 
 export class UpdateAssessmentControlSetStatusHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
 export enum UpdateAssessmentControlSetStatusRequestBodyStatusEnum {
-    Active = "ACTIVE"
-,    UnderReview = "UNDER_REVIEW"
-,    Reviewed = "REVIEWED"
+    Active = "ACTIVE",
+    UnderReview = "UNDER_REVIEW",
+    Reviewed = "REVIEWED"
 }
 
 
 export class UpdateAssessmentControlSetStatusRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=comment" })
+  @SpeakeasyMetadata({ data: "json, name=comment" })
   comment: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status: UpdateAssessmentControlSetStatusRequestBodyStatusEnum;
 }
 
 
 export class UpdateAssessmentControlSetStatusRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: UpdateAssessmentControlSetStatusPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: UpdateAssessmentControlSetStatusHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: UpdateAssessmentControlSetStatusRequestBody;
 }
 
 
 export class UpdateAssessmentControlSetStatusResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   accessDeniedException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   internalServerException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   resourceNotFoundException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   updateAssessmentControlSetStatusResponse?: shared.UpdateAssessmentControlSetStatusResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   validationException?: any;
 }

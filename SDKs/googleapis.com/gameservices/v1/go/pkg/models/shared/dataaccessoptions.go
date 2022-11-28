@@ -7,6 +7,8 @@ const (
 	DataAccessOptionsLogModeEnumLogFailClosed      DataAccessOptionsLogModeEnum = "LOG_FAIL_CLOSED"
 )
 
+// DataAccessOptions
+// Write a Data Access (Gin) log
 type DataAccessOptions struct {
 	LogMode *DataAccessOptionsLogModeEnum `json:"logMode,omitempty"`
 }

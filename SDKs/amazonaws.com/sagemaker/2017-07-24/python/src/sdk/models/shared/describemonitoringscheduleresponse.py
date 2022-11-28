@@ -1,26 +1,25 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import monitoringexecutionsummary
-from . import monitoringscheduleconfig
-from . import schedulestatus_enum
-from . import monitoringtype_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class DescribeMonitoringScheduleResponse:
-    creation_time: datetime = field(default=None, metadata={'dataclasses_json': { 'field_name': 'CreationTime', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    endpoint_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'EndpointName' }})
-    failure_reason: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FailureReason' }})
-    last_modified_time: datetime = field(default=None, metadata={'dataclasses_json': { 'field_name': 'LastModifiedTime', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    last_monitoring_execution_summary: Optional[monitoringexecutionsummary.MonitoringExecutionSummary] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'LastMonitoringExecutionSummary' }})
-    monitoring_schedule_arn: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'MonitoringScheduleArn' }})
-    monitoring_schedule_config: monitoringscheduleconfig.MonitoringScheduleConfig = field(default=None, metadata={'dataclasses_json': { 'field_name': 'MonitoringScheduleConfig' }})
-    monitoring_schedule_name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'MonitoringScheduleName' }})
-    monitoring_schedule_status: schedulestatus_enum.ScheduleStatusEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'MonitoringScheduleStatus' }})
-    monitoring_type: Optional[monitoringtype_enum.MonitoringTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'MonitoringType' }})
+    creation_time: datetime = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('CreationTime'), 'encoder': utils.datetimeisoformat(False), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    last_modified_time: datetime = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('LastModifiedTime'), 'encoder': utils.datetimeisoformat(False), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    monitoring_schedule_arn: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('MonitoringScheduleArn') }})
+    monitoring_schedule_config: MonitoringScheduleConfig = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('MonitoringScheduleConfig') }})
+    monitoring_schedule_name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('MonitoringScheduleName') }})
+    monitoring_schedule_status: ScheduleStatusEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('MonitoringScheduleStatus') }})
+    endpoint_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('EndpointName') }})
+    failure_reason: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('FailureReason') }})
+    last_monitoring_execution_summary: Optional[MonitoringExecutionSummary] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('LastMonitoringExecutionSummary') }})
+    monitoring_type: Optional[MonitoringTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('MonitoringType') }})
     

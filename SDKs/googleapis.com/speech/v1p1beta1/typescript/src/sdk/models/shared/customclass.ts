@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ClassItem } from "./classitem";
+
 
 
 // CustomClass
@@ -8,12 +8,12 @@ import { ClassItem } from "./classitem";
  * A set of words or phrases that represents a common concept likely to appear in your audio, for example a list of passenger ship names. CustomClass items can be substituted into placeholders that you set in PhraseSet phrases.
 **/
 export class CustomClass extends SpeakeasyBase {
-  @Metadata({ data: "json, name=customClassId" })
+  @SpeakeasyMetadata({ data: "json, name=customClassId" })
   customClassId?: string;
 
-  @Metadata({ data: "json, name=items", elemType: shared.ClassItem })
+  @SpeakeasyMetadata({ data: "json, name=items", elemType: ClassItem })
   items?: ClassItem[];
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 }

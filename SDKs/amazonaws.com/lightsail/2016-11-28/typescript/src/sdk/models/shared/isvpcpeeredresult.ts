@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class IsVpcPeeredResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=isPeered" })
+  @SpeakeasyMetadata({ data: "json, name=isPeered" })
   isPeered?: boolean;
 }

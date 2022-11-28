@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// ServicePipeline
+// The service pipeline detail data.
 type ServicePipeline struct {
 	Arn                       string               `json:"arn"`
 	CreatedAt                 time.Time            `json:"createdAt"`

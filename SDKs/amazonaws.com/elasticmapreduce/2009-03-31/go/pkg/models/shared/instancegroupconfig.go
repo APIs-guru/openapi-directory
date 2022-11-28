@@ -1,5 +1,7 @@
 package shared
 
+// InstanceGroupConfig
+// Configuration defining a new instance group.
 type InstanceGroupConfig struct {
 	AutoScalingPolicy *AutoScalingPolicy   `json:"AutoScalingPolicy,omitempty"`
 	BidPrice          *string              `json:"BidPrice,omitempty"`

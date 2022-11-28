@@ -1,67 +1,68 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class UpdateNetworkWirelessSsidSchedulesPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=networkId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=networkId" })
   networkId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=number" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=number" })
   number: string;
 }
 
 
 export class UpdateNetworkWirelessSsidSchedulesRequestBodyRanges extends SpeakeasyBase {
-  @Metadata({ data: "json, name=endDay" })
+  @SpeakeasyMetadata({ data: "json, name=endDay" })
   endDay: string;
 
-  @Metadata({ data: "json, name=endTime" })
+  @SpeakeasyMetadata({ data: "json, name=endTime" })
   endTime: string;
 
-  @Metadata({ data: "json, name=startDay" })
+  @SpeakeasyMetadata({ data: "json, name=startDay" })
   startDay: string;
 
-  @Metadata({ data: "json, name=startTime" })
+  @SpeakeasyMetadata({ data: "json, name=startTime" })
   startTime: string;
 }
 
 
 export class UpdateNetworkWirelessSsidSchedulesRequestBodyRangesInSeconds extends SpeakeasyBase {
-  @Metadata({ data: "json, name=end" })
+  @SpeakeasyMetadata({ data: "json, name=end" })
   end: number;
 
-  @Metadata({ data: "json, name=start" })
+  @SpeakeasyMetadata({ data: "json, name=start" })
   start: number;
 }
 
 
 export class UpdateNetworkWirelessSsidSchedulesRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=enabled" })
+  @SpeakeasyMetadata({ data: "json, name=enabled" })
   enabled?: boolean;
 
-  @Metadata({ data: "json, name=ranges", elemType: operations.UpdateNetworkWirelessSsidSchedulesRequestBodyRanges })
+  @SpeakeasyMetadata({ data: "json, name=ranges", elemType: UpdateNetworkWirelessSsidSchedulesRequestBodyRanges })
   ranges?: UpdateNetworkWirelessSsidSchedulesRequestBodyRanges[];
 
-  @Metadata({ data: "json, name=rangesInSeconds", elemType: operations.UpdateNetworkWirelessSsidSchedulesRequestBodyRangesInSeconds })
+  @SpeakeasyMetadata({ data: "json, name=rangesInSeconds", elemType: UpdateNetworkWirelessSsidSchedulesRequestBodyRangesInSeconds })
   rangesInSeconds?: UpdateNetworkWirelessSsidSchedulesRequestBodyRangesInSeconds[];
 }
 
 
 export class UpdateNetworkWirelessSsidSchedulesRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: UpdateNetworkWirelessSsidSchedulesPathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request?: UpdateNetworkWirelessSsidSchedulesRequestBody;
 }
 
 
 export class UpdateNetworkWirelessSsidSchedulesResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   updateNetworkWirelessSsidSchedules200ApplicationJsonObject?: Map<string, any>;
 }

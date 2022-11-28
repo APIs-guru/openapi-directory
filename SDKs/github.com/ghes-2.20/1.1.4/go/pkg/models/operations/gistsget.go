@@ -8,10 +8,6 @@ type GistsGetPathParams struct {
 	GistID string `pathParam:"style=simple,explode=false,name=gist_id"`
 }
 
-type GistsGetRequest struct {
-	PathParams GistsGetPathParams
-}
-
 type GistsGet403ApplicationJSONBlock struct {
 	CreatedAt *string `json:"created_at,omitempty"`
 	HTMLURL   *string `json:"html_url,omitempty"`
@@ -22,6 +18,10 @@ type GistsGet403ApplicationJSON struct {
 	Block            *GistsGet403ApplicationJSONBlock `json:"block,omitempty"`
 	DocumentationURL *string                          `json:"documentation_url,omitempty"`
 	Message          *string                          `json:"message,omitempty"`
+}
+
+type GistsGetRequest struct {
+	PathParams GistsGetPathParams
 }
 
 type GistsGetResponse struct {

@@ -1,8 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Artifact } from "./artifact";
 import { Command } from "./command";
 import { Source } from "./source";
+
 
 
 // BuildProvenance
@@ -10,42 +10,42 @@ import { Source } from "./source";
  * Provenance of a build. Contains all information needed to verify the full details about the build from source to completion.
 **/
 export class BuildProvenance extends SpeakeasyBase {
-  @Metadata({ data: "json, name=buildOptions" })
+  @SpeakeasyMetadata({ data: "json, name=buildOptions" })
   buildOptions?: Map<string, string>;
 
-  @Metadata({ data: "json, name=builderVersion" })
+  @SpeakeasyMetadata({ data: "json, name=builderVersion" })
   builderVersion?: string;
 
-  @Metadata({ data: "json, name=builtArtifacts", elemType: shared.Artifact })
+  @SpeakeasyMetadata({ data: "json, name=builtArtifacts", elemType: Artifact })
   builtArtifacts?: Artifact[];
 
-  @Metadata({ data: "json, name=commands", elemType: shared.Command })
+  @SpeakeasyMetadata({ data: "json, name=commands", elemType: Command })
   commands?: Command[];
 
-  @Metadata({ data: "json, name=createTime" })
+  @SpeakeasyMetadata({ data: "json, name=createTime" })
   createTime?: string;
 
-  @Metadata({ data: "json, name=creator" })
+  @SpeakeasyMetadata({ data: "json, name=creator" })
   creator?: string;
 
-  @Metadata({ data: "json, name=endTime" })
+  @SpeakeasyMetadata({ data: "json, name=endTime" })
   endTime?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=logsUri" })
+  @SpeakeasyMetadata({ data: "json, name=logsUri" })
   logsUri?: string;
 
-  @Metadata({ data: "json, name=projectId" })
+  @SpeakeasyMetadata({ data: "json, name=projectId" })
   projectId?: string;
 
-  @Metadata({ data: "json, name=sourceProvenance" })
+  @SpeakeasyMetadata({ data: "json, name=sourceProvenance" })
   sourceProvenance?: Source;
 
-  @Metadata({ data: "json, name=startTime" })
+  @SpeakeasyMetadata({ data: "json, name=startTime" })
   startTime?: string;
 
-  @Metadata({ data: "json, name=triggerId" })
+  @SpeakeasyMetadata({ data: "json, name=triggerId" })
   triggerId?: string;
 }

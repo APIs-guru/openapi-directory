@@ -1,19 +1,20 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
+
 
 export enum GetDescribeAlarmHistoryActionEnum {
     DescribeAlarmHistory = "DescribeAlarmHistory"
 }
 
 export enum GetDescribeAlarmHistoryHistoryItemTypeEnum {
-    ConfigurationUpdate = "ConfigurationUpdate"
-,    StateUpdate = "StateUpdate"
-,    Action = "Action"
+    ConfigurationUpdate = "ConfigurationUpdate",
+    StateUpdate = "StateUpdate",
+    Action = "Action"
 }
 
 export enum GetDescribeAlarmHistoryScanByEnum {
-    TimestampDescending = "TimestampDescending"
-,    TimestampAscending = "TimestampAscending"
+    TimestampDescending = "TimestampDescending",
+    TimestampAscending = "TimestampAscending"
 }
 
 export enum GetDescribeAlarmHistoryVersionEnum {
@@ -22,78 +23,78 @@ export enum GetDescribeAlarmHistoryVersionEnum {
 
 
 export class GetDescribeAlarmHistoryQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Action" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Action" })
   action: GetDescribeAlarmHistoryActionEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=AlarmName" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=AlarmName" })
   alarmName?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=AlarmTypes" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=AlarmTypes" })
   alarmTypes?: shared.AlarmTypeEnum[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=EndDate" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=EndDate" })
   endDate?: Date;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=HistoryItemType" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=HistoryItemType" })
   historyItemType?: GetDescribeAlarmHistoryHistoryItemTypeEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=MaxRecords" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=MaxRecords" })
   maxRecords?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=NextToken" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=NextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=ScanBy" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=ScanBy" })
   scanBy?: GetDescribeAlarmHistoryScanByEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=StartDate" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=StartDate" })
   startDate?: Date;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Version" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Version" })
   version: GetDescribeAlarmHistoryVersionEnum;
 }
 
 
 export class GetDescribeAlarmHistoryHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
 
 export class GetDescribeAlarmHistoryRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetDescribeAlarmHistoryQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: GetDescribeAlarmHistoryHeaders;
 }
 
 
 export class GetDescribeAlarmHistoryResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

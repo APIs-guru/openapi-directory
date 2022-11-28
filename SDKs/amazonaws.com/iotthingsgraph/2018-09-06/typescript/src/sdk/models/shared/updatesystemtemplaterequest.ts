@@ -1,14 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DefinitionDocument } from "./definitiondocument";
 
 
+
 export class UpdateSystemTemplateRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=compatibleNamespaceVersion" })
+  @SpeakeasyMetadata({ data: "json, name=compatibleNamespaceVersion" })
   compatibleNamespaceVersion?: number;
 
-  @Metadata({ data: "json, name=definition" })
+  @SpeakeasyMetadata({ data: "json, name=definition" })
   definition: DefinitionDocument;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: string;
 }

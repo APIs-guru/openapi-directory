@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 
 class GetIntersectionsNearestOutputFormatOutputFormatEnum(str, Enum):
     JSON = "json"
@@ -13,26 +14,26 @@ class GetIntersectionsNearestOutputFormatOutputFormatEnum(str, Enum):
 
 @dataclass
 class GetIntersectionsNearestOutputFormatPathParams:
-    output_format: GetIntersectionsNearestOutputFormatOutputFormatEnum = field(default=None, metadata={'path_param': { 'field_name': 'outputFormat', 'style': 'simple', 'explode': False }})
+    output_format: GetIntersectionsNearestOutputFormatOutputFormatEnum = field(metadata={'path_param': { 'field_name': 'outputFormat', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetIntersectionsNearestOutputFormatQueryParams:
+    point: str = field(metadata={'query_param': { 'field_name': 'point', 'style': 'form', 'explode': True }})
     max_degree: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'maxDegree', 'style': 'form', 'explode': True }})
     max_distance: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'maxDistance', 'style': 'form', 'explode': True }})
     min_degree: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'minDegree', 'style': 'form', 'explode': True }})
     output_srs: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'outputSRS', 'style': 'form', 'explode': True }})
-    point: str = field(default=None, metadata={'query_param': { 'field_name': 'point', 'style': 'form', 'explode': True }})
     
 
 @dataclass
 class GetIntersectionsNearestOutputFormatRequest:
-    path_params: GetIntersectionsNearestOutputFormatPathParams = field(default=None)
-    query_params: GetIntersectionsNearestOutputFormatQueryParams = field(default=None)
+    path_params: GetIntersectionsNearestOutputFormatPathParams = field()
+    query_params: GetIntersectionsNearestOutputFormatQueryParams = field()
     
 
 @dataclass
 class GetIntersectionsNearestOutputFormatResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

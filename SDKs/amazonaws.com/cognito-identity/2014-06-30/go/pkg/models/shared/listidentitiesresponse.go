@@ -1,5 +1,7 @@
 package shared
 
+// ListIdentitiesResponse
+// The response to a ListIdentities request.
 type ListIdentitiesResponse struct {
 	Identities     []IdentityDescription `json:"Identities,omitempty"`
 	IdentityPoolID *string               `json:"IdentityPoolId,omitempty"`

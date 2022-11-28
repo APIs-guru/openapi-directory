@@ -1,7 +1,8 @@
 
 
+
 export enum FirewallRuleGroupAssociationStatusEnum {
-    Complete = "COMPLETE"
-,    Deleting = "DELETING"
-,    Updating = "UPDATING"
+    Complete = "COMPLETE",
+    Deleting = "DELETING",
+    Updating = "UPDATING"
 }

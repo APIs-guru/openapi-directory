@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 
 class VerifyRequestLgEnum(str, Enum):
     AR_XA = "ar-xa"
@@ -45,14 +46,14 @@ class VerifyRequestLgEnum(str, Enum):
 
 @dataclass
 class VerifyRequest:
-    api_key: str = field(default=None, metadata={'form': { 'field_name': 'api_key' }})
-    api_secret: str = field(default=None, metadata={'form': { 'field_name': 'api_secret' }})
-    brand: str = field(default=None, metadata={'form': { 'field_name': 'brand' }})
+    api_key: str = field(metadata={'form': { 'field_name': 'api_key' }})
+    api_secret: str = field(metadata={'form': { 'field_name': 'api_secret' }})
+    brand: str = field(metadata={'form': { 'field_name': 'brand' }})
+    number: str = field(metadata={'form': { 'field_name': 'number' }})
     code_length: Optional[int] = field(default=None, metadata={'form': { 'field_name': 'code_length' }})
     country: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'country' }})
     lg: Optional[VerifyRequestLgEnum] = field(default=None, metadata={'form': { 'field_name': 'lg' }})
     next_event_wait: Optional[int] = field(default=None, metadata={'form': { 'field_name': 'next_event_wait' }})
-    number: str = field(default=None, metadata={'form': { 'field_name': 'number' }})
     pin_expiry: Optional[int] = field(default=None, metadata={'form': { 'field_name': 'pin_expiry' }})
     sender_id: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'sender_id' }})
     workflow_id: Optional[int] = field(default=None, metadata={'form': { 'field_name': 'workflow_id' }})

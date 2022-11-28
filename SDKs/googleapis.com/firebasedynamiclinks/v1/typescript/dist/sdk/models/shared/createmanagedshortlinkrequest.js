@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DynamicLinkInfo } from "./dynamiclinkinfo";
 import { Suffix } from "./suffix";
 // CreateManagedShortLinkRequest
@@ -35,23 +35,23 @@ var CreateManagedShortLinkRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=dynamicLinkInfo" }),
+        SpeakeasyMetadata({ data: "json, name=dynamicLinkInfo" }),
         __metadata("design:type", DynamicLinkInfo)
     ], CreateManagedShortLinkRequest.prototype, "dynamicLinkInfo", void 0);
     __decorate([
-        Metadata({ data: "json, name=longDynamicLink" }),
+        SpeakeasyMetadata({ data: "json, name=longDynamicLink" }),
         __metadata("design:type", String)
     ], CreateManagedShortLinkRequest.prototype, "longDynamicLink", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], CreateManagedShortLinkRequest.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=sdkVersion" }),
+        SpeakeasyMetadata({ data: "json, name=sdkVersion" }),
         __metadata("design:type", String)
     ], CreateManagedShortLinkRequest.prototype, "sdkVersion", void 0);
     __decorate([
-        Metadata({ data: "json, name=suffix" }),
+        SpeakeasyMetadata({ data: "json, name=suffix" }),
         __metadata("design:type", Suffix)
     ], CreateManagedShortLinkRequest.prototype, "suffix", void 0);
     return CreateManagedShortLinkRequest;

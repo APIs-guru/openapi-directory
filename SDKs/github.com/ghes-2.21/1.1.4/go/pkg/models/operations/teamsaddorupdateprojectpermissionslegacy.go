@@ -21,11 +21,6 @@ type TeamsAddOrUpdateProjectPermissionsLegacyRequestBody struct {
 	Permission *TeamsAddOrUpdateProjectPermissionsLegacyRequestBodyPermissionEnum `json:"permission,omitempty"`
 }
 
-type TeamsAddOrUpdateProjectPermissionsLegacyRequest struct {
-	PathParams TeamsAddOrUpdateProjectPermissionsLegacyPathParams
-	Request    *TeamsAddOrUpdateProjectPermissionsLegacyRequestBody `request:"mediaType=application/json"`
-}
-
 type TeamsAddOrUpdateProjectPermissionsLegacy403ApplicationJSON struct {
 	DocumentationURL *string `json:"documentation_url,omitempty"`
 	Message          *string `json:"message,omitempty"`
@@ -34,6 +29,11 @@ type TeamsAddOrUpdateProjectPermissionsLegacy403ApplicationJSON struct {
 type TeamsAddOrUpdateProjectPermissionsLegacy415ApplicationJSON struct {
 	DocumentationURL string `json:"documentation_url"`
 	Message          string `json:"message"`
+}
+
+type TeamsAddOrUpdateProjectPermissionsLegacyRequest struct {
+	PathParams TeamsAddOrUpdateProjectPermissionsLegacyPathParams
+	Request    *TeamsAddOrUpdateProjectPermissionsLegacyRequestBody `request:"mediaType=application/json"`
 }
 
 type TeamsAddOrUpdateProjectPermissionsLegacyResponse struct {

@@ -1,5 +1,7 @@
 package shared
 
+// LiveChatMessage
+// A *liveChatMessage* resource represents a chat message in a YouTube Live Chat.
 type LiveChatMessage struct {
 	AuthorDetails *LiveChatMessageAuthorDetails `json:"authorDetails,omitempty"`
 	Etag          *string                       `json:"etag,omitempty"`

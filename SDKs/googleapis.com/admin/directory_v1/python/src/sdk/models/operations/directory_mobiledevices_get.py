@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DirectoryMobiledevicesGetPathParams:
-    customer_id: str = field(default=None, metadata={'path_param': { 'field_name': 'customerId', 'style': 'simple', 'explode': False }})
-    resource_id: str = field(default=None, metadata={'path_param': { 'field_name': 'resourceId', 'style': 'simple', 'explode': False }})
+    customer_id: str = field(metadata={'path_param': { 'field_name': 'customerId', 'style': 'simple', 'explode': False }})
+    resource_id: str = field(metadata={'path_param': { 'field_name': 'resourceId', 'style': 'simple', 'explode': False }})
     
 class DirectoryMobiledevicesGetProjectionEnum(str, Enum):
     BASIC = "BASIC"
@@ -31,20 +32,20 @@ class DirectoryMobiledevicesGetQueryParams:
 
 @dataclass
 class DirectoryMobiledevicesGetSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DirectoryMobiledevicesGetSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DirectoryMobiledevicesGetSecurityOption3:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -56,14 +57,14 @@ class DirectoryMobiledevicesGetSecurity:
 
 @dataclass
 class DirectoryMobiledevicesGetRequest:
-    path_params: DirectoryMobiledevicesGetPathParams = field(default=None)
-    query_params: DirectoryMobiledevicesGetQueryParams = field(default=None)
-    security: DirectoryMobiledevicesGetSecurity = field(default=None)
+    path_params: DirectoryMobiledevicesGetPathParams = field()
+    query_params: DirectoryMobiledevicesGetQueryParams = field()
+    security: DirectoryMobiledevicesGetSecurity = field()
     
 
 @dataclass
 class DirectoryMobiledevicesGetResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     mobile_device: Optional[shared.MobileDevice] = field(default=None)
-    status_code: int = field(default=None)
     

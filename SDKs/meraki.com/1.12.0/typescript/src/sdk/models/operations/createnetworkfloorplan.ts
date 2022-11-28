@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class CreateNetworkFloorPlanPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=networkId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=networkId" })
   networkId: string;
 }
 
@@ -12,10 +13,10 @@ export class CreateNetworkFloorPlanPathParams extends SpeakeasyBase {
  * The longitude and latitude of the bottom left corner of your floor plan.
 **/
 export class CreateNetworkFloorPlanRequestBodyBottomLeftCorner extends SpeakeasyBase {
-  @Metadata({ data: "json, name=lat" })
+  @SpeakeasyMetadata({ data: "json, name=lat" })
   lat?: number;
 
-  @Metadata({ data: "json, name=lng" })
+  @SpeakeasyMetadata({ data: "json, name=lng" })
   lng?: number;
 }
 
@@ -25,10 +26,10 @@ export class CreateNetworkFloorPlanRequestBodyBottomLeftCorner extends Speakeasy
  * The longitude and latitude of the bottom right corner of your floor plan.
 **/
 export class CreateNetworkFloorPlanRequestBodyBottomRightCorner extends SpeakeasyBase {
-  @Metadata({ data: "json, name=lat" })
+  @SpeakeasyMetadata({ data: "json, name=lat" })
   lat?: number;
 
-  @Metadata({ data: "json, name=lng" })
+  @SpeakeasyMetadata({ data: "json, name=lng" })
   lng?: number;
 }
 
@@ -38,10 +39,10 @@ export class CreateNetworkFloorPlanRequestBodyBottomRightCorner extends Speakeas
  * The longitude and latitude of the center of your floor plan. The 'center' or two adjacent corners (e.g. 'topLeftCorner' and 'bottomLeftCorner') must be specified. If 'center' is specified, the floor plan is placed over that point with no rotation. If two adjacent corners are specified, the floor plan is rotated to line up with the two specified points. The aspect ratio of the floor plan's image is preserved regardless of which corners/center are specified. (This means if that more than two corners are specified, only two corners may be used to preserve the floor plan's aspect ratio.). No two points can have the same latitude, longitude pair.
 **/
 export class CreateNetworkFloorPlanRequestBodyCenter extends SpeakeasyBase {
-  @Metadata({ data: "json, name=lat" })
+  @SpeakeasyMetadata({ data: "json, name=lat" })
   lat?: number;
 
-  @Metadata({ data: "json, name=lng" })
+  @SpeakeasyMetadata({ data: "json, name=lng" })
   lng?: number;
 }
 
@@ -51,10 +52,10 @@ export class CreateNetworkFloorPlanRequestBodyCenter extends SpeakeasyBase {
  * The longitude and latitude of the top left corner of your floor plan.
 **/
 export class CreateNetworkFloorPlanRequestBodyTopLeftCorner extends SpeakeasyBase {
-  @Metadata({ data: "json, name=lat" })
+  @SpeakeasyMetadata({ data: "json, name=lat" })
   lat?: number;
 
-  @Metadata({ data: "json, name=lng" })
+  @SpeakeasyMetadata({ data: "json, name=lng" })
   lng?: number;
 }
 
@@ -64,54 +65,54 @@ export class CreateNetworkFloorPlanRequestBodyTopLeftCorner extends SpeakeasyBas
  * The longitude and latitude of the top right corner of your floor plan.
 **/
 export class CreateNetworkFloorPlanRequestBodyTopRightCorner extends SpeakeasyBase {
-  @Metadata({ data: "json, name=lat" })
+  @SpeakeasyMetadata({ data: "json, name=lat" })
   lat?: number;
 
-  @Metadata({ data: "json, name=lng" })
+  @SpeakeasyMetadata({ data: "json, name=lng" })
   lng?: number;
 }
 
 
 export class CreateNetworkFloorPlanRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=bottomLeftCorner" })
+  @SpeakeasyMetadata({ data: "json, name=bottomLeftCorner" })
   bottomLeftCorner?: CreateNetworkFloorPlanRequestBodyBottomLeftCorner;
 
-  @Metadata({ data: "json, name=bottomRightCorner" })
+  @SpeakeasyMetadata({ data: "json, name=bottomRightCorner" })
   bottomRightCorner?: CreateNetworkFloorPlanRequestBodyBottomRightCorner;
 
-  @Metadata({ data: "json, name=center" })
+  @SpeakeasyMetadata({ data: "json, name=center" })
   center?: CreateNetworkFloorPlanRequestBodyCenter;
 
-  @Metadata({ data: "json, name=imageContents" })
+  @SpeakeasyMetadata({ data: "json, name=imageContents" })
   imageContents: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 
-  @Metadata({ data: "json, name=topLeftCorner" })
+  @SpeakeasyMetadata({ data: "json, name=topLeftCorner" })
   topLeftCorner?: CreateNetworkFloorPlanRequestBodyTopLeftCorner;
 
-  @Metadata({ data: "json, name=topRightCorner" })
+  @SpeakeasyMetadata({ data: "json, name=topRightCorner" })
   topRightCorner?: CreateNetworkFloorPlanRequestBodyTopRightCorner;
 }
 
 
 export class CreateNetworkFloorPlanRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: CreateNetworkFloorPlanPathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: CreateNetworkFloorPlanRequestBody;
 }
 
 
 export class CreateNetworkFloorPlanResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   createNetworkFloorPlan201ApplicationJsonObject?: Map<string, any>;
 }

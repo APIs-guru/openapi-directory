@@ -103,7 +103,6 @@ export * from "./vlan";
 export * from "./vlangroup";
 export * from "./vrf";
 export * from "./writableaggregate";
-export * from "./writableavailableip";
 export * from "./writablecable";
 export * from "./writablecircuit";
 export * from "./writablecircuittermination";

@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,List
+from typing import List
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class CharacterRulesMustContainCharactersEnum(str, Enum):
     ALPHA = "alpha"
@@ -15,6 +17,10 @@ class CharacterRulesMustContainCharactersEnum(str, Enum):
 @dataclass_json
 @dataclass
 class CharacterRules:
-    must_contain_characters: List[CharacterRulesMustContainCharactersEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'mustContainCharacters' }})
-    number_of_characteristics_to_enforce: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'numberOfCharacteristicsToEnforce' }})
+    r"""CharacterRules
+    Password character rules
+    """
+    
+    must_contain_characters: List[CharacterRulesMustContainCharactersEnum] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('mustContainCharacters') }})
+    number_of_characteristics_to_enforce: int = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('numberOfCharacteristicsToEnforce') }})
     

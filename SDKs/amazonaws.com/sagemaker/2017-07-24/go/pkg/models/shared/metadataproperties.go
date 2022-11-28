@@ -1,5 +1,7 @@
 package shared
 
+// MetadataProperties
+// Metadata properties of the tracking entity, trial, or trial component.
 type MetadataProperties struct {
 	CommitID    *string `json:"CommitId,omitempty"`
 	GeneratedBy *string `json:"GeneratedBy,omitempty"`

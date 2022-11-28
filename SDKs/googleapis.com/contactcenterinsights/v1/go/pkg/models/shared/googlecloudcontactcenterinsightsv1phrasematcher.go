@@ -18,6 +18,8 @@ const (
 	GoogleCloudContactcenterinsightsV1PhraseMatcherTypeEnumAnyOf                        GoogleCloudContactcenterinsightsV1PhraseMatcherTypeEnum = "ANY_OF"
 )
 
+// GoogleCloudContactcenterinsightsV1PhraseMatcher
+// The phrase matcher resource.
 type GoogleCloudContactcenterinsightsV1PhraseMatcher struct {
 	ActivationUpdateTime  *string                                                       `json:"activationUpdateTime,omitempty"`
 	Active                *bool                                                         `json:"active,omitempty"`
@@ -29,5 +31,17 @@ type GoogleCloudContactcenterinsightsV1PhraseMatcher struct {
 	RoleMatch             *GoogleCloudContactcenterinsightsV1PhraseMatcherRoleMatchEnum `json:"roleMatch,omitempty"`
 	Type                  *GoogleCloudContactcenterinsightsV1PhraseMatcherTypeEnum      `json:"type,omitempty"`
 	UpdateTime            *string                                                       `json:"updateTime,omitempty"`
+	VersionTag            *string                                                       `json:"versionTag,omitempty"`
+}
+
+// GoogleCloudContactcenterinsightsV1PhraseMatcherInput
+// The phrase matcher resource.
+type GoogleCloudContactcenterinsightsV1PhraseMatcherInput struct {
+	Active                *bool                                                         `json:"active,omitempty"`
+	DisplayName           *string                                                       `json:"displayName,omitempty"`
+	Name                  *string                                                       `json:"name,omitempty"`
+	PhraseMatchRuleGroups []GoogleCloudContactcenterinsightsV1PhraseMatchRuleGroup      `json:"phraseMatchRuleGroups,omitempty"`
+	RoleMatch             *GoogleCloudContactcenterinsightsV1PhraseMatcherRoleMatchEnum `json:"roleMatch,omitempty"`
+	Type                  *GoogleCloudContactcenterinsightsV1PhraseMatcherTypeEnum      `json:"type,omitempty"`
 	VersionTag            *string                                                       `json:"versionTag,omitempty"`
 }

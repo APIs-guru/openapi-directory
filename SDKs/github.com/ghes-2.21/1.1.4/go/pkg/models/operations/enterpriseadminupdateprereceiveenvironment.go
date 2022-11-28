@@ -13,11 +13,6 @@ type EnterpriseAdminUpdatePreReceiveEnvironmentRequestBody struct {
 	Name     *string `json:"name,omitempty"`
 }
 
-type EnterpriseAdminUpdatePreReceiveEnvironmentRequest struct {
-	PathParams EnterpriseAdminUpdatePreReceiveEnvironmentPathParams
-	Request    *EnterpriseAdminUpdatePreReceiveEnvironmentRequestBody `request:"mediaType=application/json"`
-}
-
 type EnterpriseAdminUpdatePreReceiveEnvironment422ApplicationJSONErrors struct {
 	Code     *string `json:"code,omitempty"`
 	Message  *string `json:"message,omitempty"`
@@ -27,6 +22,11 @@ type EnterpriseAdminUpdatePreReceiveEnvironment422ApplicationJSONErrors struct {
 type EnterpriseAdminUpdatePreReceiveEnvironment422ApplicationJSON struct {
 	Errors  []EnterpriseAdminUpdatePreReceiveEnvironment422ApplicationJSONErrors `json:"errors,omitempty"`
 	Message *string                                                              `json:"message,omitempty"`
+}
+
+type EnterpriseAdminUpdatePreReceiveEnvironmentRequest struct {
+	PathParams EnterpriseAdminUpdatePreReceiveEnvironmentPathParams
+	Request    *EnterpriseAdminUpdatePreReceiveEnvironmentRequestBody `request:"mediaType=application/json"`
 }
 
 type EnterpriseAdminUpdatePreReceiveEnvironmentResponse struct {

@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class GoogleAnalyticsAdminV1alphaLinkProposalStatusDetailsLinkProposalInitiatingProductEnum(str, Enum):
     LINK_PROPOSAL_INITIATING_PRODUCT_UNSPECIFIED = "LINK_PROPOSAL_INITIATING_PRODUCT_UNSPECIFIED"
@@ -20,7 +22,11 @@ class GoogleAnalyticsAdminV1alphaLinkProposalStatusDetailsLinkProposalStateEnum(
 @dataclass_json
 @dataclass
 class GoogleAnalyticsAdminV1alphaLinkProposalStatusDetails:
-    link_proposal_initiating_product: Optional[GoogleAnalyticsAdminV1alphaLinkProposalStatusDetailsLinkProposalInitiatingProductEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'linkProposalInitiatingProduct' }})
-    link_proposal_state: Optional[GoogleAnalyticsAdminV1alphaLinkProposalStatusDetailsLinkProposalStateEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'linkProposalState' }})
-    requestor_email: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'requestorEmail' }})
+    r"""GoogleAnalyticsAdminV1alphaLinkProposalStatusDetails
+    Status information for a link proposal.
+    """
+    
+    link_proposal_initiating_product: Optional[GoogleAnalyticsAdminV1alphaLinkProposalStatusDetailsLinkProposalInitiatingProductEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('linkProposalInitiatingProduct') }})
+    link_proposal_state: Optional[GoogleAnalyticsAdminV1alphaLinkProposalStatusDetailsLinkProposalStateEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('linkProposalState') }})
+    requestor_email: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('requestorEmail') }})
     

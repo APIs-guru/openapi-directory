@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class ApigeeOrganizationsSecurityProfilesEnvironmentsCreatePathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,21 +27,21 @@ class ApigeeOrganizationsSecurityProfilesEnvironmentsCreateQueryParams:
 
 @dataclass
 class ApigeeOrganizationsSecurityProfilesEnvironmentsCreateSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class ApigeeOrganizationsSecurityProfilesEnvironmentsCreateRequest:
-    path_params: ApigeeOrganizationsSecurityProfilesEnvironmentsCreatePathParams = field(default=None)
-    query_params: ApigeeOrganizationsSecurityProfilesEnvironmentsCreateQueryParams = field(default=None)
-    request: Optional[shared.GoogleCloudApigeeV1SecurityProfileEnvironmentAssociation] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: ApigeeOrganizationsSecurityProfilesEnvironmentsCreateSecurity = field(default=None)
+    path_params: ApigeeOrganizationsSecurityProfilesEnvironmentsCreatePathParams = field()
+    query_params: ApigeeOrganizationsSecurityProfilesEnvironmentsCreateQueryParams = field()
+    security: ApigeeOrganizationsSecurityProfilesEnvironmentsCreateSecurity = field()
+    request: Optional[shared.GoogleCloudApigeeV1SecurityProfileEnvironmentAssociationInput] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class ApigeeOrganizationsSecurityProfilesEnvironmentsCreateResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_cloud_apigee_v1_security_profile_environment_association: Optional[shared.GoogleCloudApigeeV1SecurityProfileEnvironmentAssociation] = field(default=None)
-    status_code: int = field(default=None)
     

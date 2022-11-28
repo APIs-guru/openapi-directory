@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudDatacatalogV1beta1Taxonomy } from "./googleclouddatacatalogv1beta1taxonomy";
+
 
 
 // GoogleCloudDatacatalogV1beta1ImportTaxonomiesResponse
@@ -8,6 +8,6 @@ import { GoogleCloudDatacatalogV1beta1Taxonomy } from "./googleclouddatacatalogv
  * Response message for ImportTaxonomies.
 **/
 export class GoogleCloudDatacatalogV1beta1ImportTaxonomiesResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=taxonomies", elemType: shared.GoogleCloudDatacatalogV1beta1Taxonomy })
+  @SpeakeasyMetadata({ data: "json, name=taxonomies", elemType: GoogleCloudDatacatalogV1beta1Taxonomy })
   taxonomies?: GoogleCloudDatacatalogV1beta1Taxonomy[];
 }

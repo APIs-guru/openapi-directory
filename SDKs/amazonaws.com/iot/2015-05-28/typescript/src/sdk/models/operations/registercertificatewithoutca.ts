@@ -1,89 +1,90 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class RegisterCertificateWithoutCaHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
 export enum RegisterCertificateWithoutCaRequestBodyStatusEnum {
-    Active = "ACTIVE"
-,    Inactive = "INACTIVE"
-,    Revoked = "REVOKED"
-,    PendingTransfer = "PENDING_TRANSFER"
-,    RegisterInactive = "REGISTER_INACTIVE"
-,    PendingActivation = "PENDING_ACTIVATION"
+    Active = "ACTIVE",
+    Inactive = "INACTIVE",
+    Revoked = "REVOKED",
+    PendingTransfer = "PENDING_TRANSFER",
+    RegisterInactive = "REGISTER_INACTIVE",
+    PendingActivation = "PENDING_ACTIVATION"
 }
 
 
 export class RegisterCertificateWithoutCaRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=certificatePem" })
+  @SpeakeasyMetadata({ data: "json, name=certificatePem" })
   certificatePem: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: RegisterCertificateWithoutCaRequestBodyStatusEnum;
 }
 
 
 export class RegisterCertificateWithoutCaRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: RegisterCertificateWithoutCaHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: RegisterCertificateWithoutCaRequestBody;
 }
 
 
 export class RegisterCertificateWithoutCaResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   certificateStateException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   certificateValidationException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   internalFailureException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidRequestException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   registerCertificateWithoutCaResponse?: shared.RegisterCertificateWithoutCaResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   resourceAlreadyExistsException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   serviceUnavailableException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   throttlingException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   unauthorizedException?: any;
 }

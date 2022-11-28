@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import heroimagedisplaysize
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class HeroImage:
-    display_sizes: Optional[List[heroimagedisplaysize.HeroImageDisplaySize]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'display_sizes' }})
-    id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
+    display_sizes: Optional[List[HeroImageDisplaySize]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('display_sizes') }})
+    id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('id') }})
     

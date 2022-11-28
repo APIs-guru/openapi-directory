@@ -1,26 +1,27 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ComplianceTypeEnum } from "./compliancetypeenum";
 
 
+
 export class GetAggregateComplianceDetailsByConfigRuleRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AccountId" })
+  @SpeakeasyMetadata({ data: "json, name=AccountId" })
   accountId: string;
 
-  @Metadata({ data: "json, name=AwsRegion" })
+  @SpeakeasyMetadata({ data: "json, name=AwsRegion" })
   awsRegion: string;
 
-  @Metadata({ data: "json, name=ComplianceType" })
+  @SpeakeasyMetadata({ data: "json, name=ComplianceType" })
   complianceType?: ComplianceTypeEnum;
 
-  @Metadata({ data: "json, name=ConfigRuleName" })
+  @SpeakeasyMetadata({ data: "json, name=ConfigRuleName" })
   configRuleName: string;
 
-  @Metadata({ data: "json, name=ConfigurationAggregatorName" })
+  @SpeakeasyMetadata({ data: "json, name=ConfigurationAggregatorName" })
   configurationAggregatorName: string;
 
-  @Metadata({ data: "json, name=Limit" })
+  @SpeakeasyMetadata({ data: "json, name=Limit" })
   limit?: number;
 
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 }

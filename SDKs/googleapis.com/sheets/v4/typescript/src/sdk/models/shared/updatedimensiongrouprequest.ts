@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DimensionGroup } from "./dimensiongroup";
+
 
 
 // UpdateDimensionGroupRequest
@@ -7,9 +8,9 @@ import { DimensionGroup } from "./dimensiongroup";
  * Updates the state of the specified group.
 **/
 export class UpdateDimensionGroupRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=dimensionGroup" })
+  @SpeakeasyMetadata({ data: "json, name=dimensionGroup" })
   dimensionGroup?: DimensionGroup;
 
-  @Metadata({ data: "json, name=fields" })
+  @SpeakeasyMetadata({ data: "json, name=fields" })
   fields?: string;
 }

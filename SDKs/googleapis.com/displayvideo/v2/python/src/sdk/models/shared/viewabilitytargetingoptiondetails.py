@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class ViewabilityTargetingOptionDetailsViewabilityEnum(str, Enum):
     VIEWABILITY_UNSPECIFIED = "VIEWABILITY_UNSPECIFIED"
@@ -18,5 +20,9 @@ class ViewabilityTargetingOptionDetailsViewabilityEnum(str, Enum):
 @dataclass_json
 @dataclass
 class ViewabilityTargetingOptionDetails:
-    viewability: Optional[ViewabilityTargetingOptionDetailsViewabilityEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'viewability' }})
+    r"""ViewabilityTargetingOptionDetails
+    Represents a targetable viewability. This will be populated in the viewability_details field of a TargetingOption when targeting_type is `TARGETING_TYPE_VIEWABILITY`.
+    """
+    
+    viewability: Optional[ViewabilityTargetingOptionDetailsViewabilityEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('viewability') }})
     

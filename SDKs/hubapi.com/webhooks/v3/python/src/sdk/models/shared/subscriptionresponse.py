@@ -1,9 +1,11 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class SubscriptionResponseEventTypeEnum(str, Enum):
     CONTACT_PROPERTY_CHANGE = "contact.propertyChange"
@@ -35,10 +37,14 @@ class SubscriptionResponseEventTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class SubscriptionResponse:
-    active: bool = field(default=None, metadata={'dataclasses_json': { 'field_name': 'active' }})
-    created_at: datetime = field(default=None, metadata={'dataclasses_json': { 'field_name': 'createdAt', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    event_type: SubscriptionResponseEventTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'eventType' }})
-    id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
-    property_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'propertyName' }})
-    updated_at: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'updatedAt', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    r"""SubscriptionResponse
+    Complete details for an event subscription.
+    """
+    
+    active: bool = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('active') }})
+    created_at: datetime = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('createdAt'), 'encoder': utils.datetimeisoformat(False), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    event_type: SubscriptionResponseEventTypeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('eventType') }})
+    id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('id') }})
+    property_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('propertyName') }})
+    updated_at: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('updatedAt'), 'encoder': utils.datetimeisoformat(True), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
     

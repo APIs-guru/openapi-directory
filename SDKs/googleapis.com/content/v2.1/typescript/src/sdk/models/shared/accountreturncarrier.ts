@@ -1,9 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum AccountReturnCarrierCarrierCodeEnum {
-    CarrierCodeUnspecified = "CARRIER_CODE_UNSPECIFIED"
-,    Fedex = "FEDEX"
-,    Ups = "UPS"
+    CarrierCodeUnspecified = "CARRIER_CODE_UNSPECIFIED",
+    Fedex = "FEDEX",
+    Ups = "UPS"
 }
 
 
@@ -12,15 +13,31 @@ export enum AccountReturnCarrierCarrierCodeEnum {
  *  The return carrier information. This service is designed for merchants enrolled in the Buy on Google program. 
 **/
 export class AccountReturnCarrier extends SpeakeasyBase {
-  @Metadata({ data: "json, name=carrierAccountId" })
+  @SpeakeasyMetadata({ data: "json, name=carrierAccountId" })
   carrierAccountId?: string;
 
-  @Metadata({ data: "json, name=carrierAccountName" })
+  @SpeakeasyMetadata({ data: "json, name=carrierAccountName" })
   carrierAccountName?: string;
 
-  @Metadata({ data: "json, name=carrierAccountNumber" })
+  @SpeakeasyMetadata({ data: "json, name=carrierAccountNumber" })
   carrierAccountNumber?: string;
 
-  @Metadata({ data: "json, name=carrierCode" })
+  @SpeakeasyMetadata({ data: "json, name=carrierCode" })
+  carrierCode?: AccountReturnCarrierCarrierCodeEnum;
+}
+
+
+// AccountReturnCarrierInput
+/** 
+ *  The return carrier information. This service is designed for merchants enrolled in the Buy on Google program. 
+**/
+export class AccountReturnCarrierInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=carrierAccountName" })
+  carrierAccountName?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=carrierAccountNumber" })
+  carrierAccountNumber?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=carrierCode" })
   carrierCode?: AccountReturnCarrierCarrierCodeEnum;
 }

@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class LandmarkTypeEnum(str, Enum):
     EYE_LEFT = "eyeLeft"

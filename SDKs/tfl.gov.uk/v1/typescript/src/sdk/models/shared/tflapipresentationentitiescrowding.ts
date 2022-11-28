@@ -1,13 +1,13 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TflApiPresentationEntitiesPassengerFlow } from "./tflapipresentationentitiespassengerflow";
 import { TflApiPresentationEntitiesTrainLoading } from "./tflapipresentationentitiestrainloading";
 
 
+
 export class TflApiPresentationEntitiesCrowding extends SpeakeasyBase {
-  @Metadata({ data: "json, name=passengerFlows", elemType: shared.TflApiPresentationEntitiesPassengerFlow })
+  @SpeakeasyMetadata({ data: "json, name=passengerFlows", elemType: TflApiPresentationEntitiesPassengerFlow })
   passengerFlows?: TflApiPresentationEntitiesPassengerFlow[];
 
-  @Metadata({ data: "json, name=trainLoadings", elemType: shared.TflApiPresentationEntitiesTrainLoading })
+  @SpeakeasyMetadata({ data: "json, name=trainLoadings", elemType: TflApiPresentationEntitiesTrainLoading })
   trainLoadings?: TflApiPresentationEntitiesTrainLoading[];
 }

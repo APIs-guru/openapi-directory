@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import handshakepartytype_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class HandshakeParty:
-    id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Id' }})
-    type: handshakepartytype_enum.HandshakePartyTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Type' }})
+    r"""HandshakeParty
+    Identifies a participant in a handshake.
+    """
+    
+    id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Id') }})
+    type: HandshakePartyTypeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Type') }})
     

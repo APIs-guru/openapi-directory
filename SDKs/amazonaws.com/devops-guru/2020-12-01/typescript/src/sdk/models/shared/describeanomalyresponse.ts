@@ -1,12 +1,13 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ProactiveAnomaly } from "./proactiveanomaly";
 import { ReactiveAnomaly } from "./reactiveanomaly";
 
 
+
 export class DescribeAnomalyResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ProactiveAnomaly" })
+  @SpeakeasyMetadata({ data: "json, name=ProactiveAnomaly" })
   proactiveAnomaly?: ProactiveAnomaly;
 
-  @Metadata({ data: "json, name=ReactiveAnomaly" })
+  @SpeakeasyMetadata({ data: "json, name=ReactiveAnomaly" })
   reactiveAnomaly?: ReactiveAnomaly;
 }

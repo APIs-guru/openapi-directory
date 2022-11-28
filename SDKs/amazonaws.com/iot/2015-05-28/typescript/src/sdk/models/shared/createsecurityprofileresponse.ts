@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class CreateSecurityProfileResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=securityProfileArn" })
+  @SpeakeasyMetadata({ data: "json, name=securityProfileArn" })
   securityProfileArn?: string;
 
-  @Metadata({ data: "json, name=securityProfileName" })
+  @SpeakeasyMetadata({ data: "json, name=securityProfileName" })
   securityProfileName?: string;
 }

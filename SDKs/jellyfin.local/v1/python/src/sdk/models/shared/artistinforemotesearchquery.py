@@ -1,14 +1,15 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import artistinfo
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ArtistInfoRemoteSearchQuery:
-    include_disabled_providers: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'IncludeDisabledProviders' }})
-    item_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ItemId' }})
-    search_info: Optional[artistinfo.ArtistInfo] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'SearchInfo' }})
-    search_provider_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'SearchProviderName' }})
+    include_disabled_providers: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('IncludeDisabledProviders') }})
+    item_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ItemId') }})
+    search_info: Optional[ArtistInfo] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('SearchInfo') }})
+    search_provider_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('SearchProviderName') }})
     

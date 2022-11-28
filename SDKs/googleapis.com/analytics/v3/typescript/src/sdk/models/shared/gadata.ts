@@ -1,48 +1,48 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GaDataColumnHeaders extends SpeakeasyBase {
-  @Metadata({ data: "json, name=columnType" })
+  @SpeakeasyMetadata({ data: "json, name=columnType" })
   columnType?: string;
 
-  @Metadata({ data: "json, name=dataType" })
+  @SpeakeasyMetadata({ data: "json, name=dataType" })
   dataType?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 }
 
 
 export class GaDataDataTableCols extends SpeakeasyBase {
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=label" })
+  @SpeakeasyMetadata({ data: "json, name=label" })
   label?: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: string;
 }
 
 
 export class GaDataDataTableRowsC extends SpeakeasyBase {
-  @Metadata({ data: "json, name=v" })
+  @SpeakeasyMetadata({ data: "json, name=v" })
   v?: string;
 }
 
 
 export class GaDataDataTableRows extends SpeakeasyBase {
-  @Metadata({ data: "json, name=c", elemType: shared.GaDataDataTableRowsC })
+  @SpeakeasyMetadata({ data: "json, name=c", elemType: GaDataDataTableRowsC })
   c?: GaDataDataTableRowsC[];
 }
 
 
 export class GaDataDataTable extends SpeakeasyBase {
-  @Metadata({ data: "json, name=cols", elemType: shared.GaDataDataTableCols })
+  @SpeakeasyMetadata({ data: "json, name=cols", elemType: GaDataDataTableCols })
   cols?: GaDataDataTableCols[];
 
-  @Metadata({ data: "json, name=rows", elemType: shared.GaDataDataTableRows })
+  @SpeakeasyMetadata({ data: "json, name=rows", elemType: GaDataDataTableRows })
   rows?: GaDataDataTableRows[];
 }
 
@@ -52,22 +52,22 @@ export class GaDataDataTable extends SpeakeasyBase {
  * Information for the view (profile), for which the Analytics data was requested.
 **/
 export class GaDataProfileInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=accountId" })
+  @SpeakeasyMetadata({ data: "json, name=accountId" })
   accountId?: string;
 
-  @Metadata({ data: "json, name=internalWebPropertyId" })
+  @SpeakeasyMetadata({ data: "json, name=internalWebPropertyId" })
   internalWebPropertyId?: string;
 
-  @Metadata({ data: "json, name=profileId" })
+  @SpeakeasyMetadata({ data: "json, name=profileId" })
   profileId?: string;
 
-  @Metadata({ data: "json, name=profileName" })
+  @SpeakeasyMetadata({ data: "json, name=profileName" })
   profileName?: string;
 
-  @Metadata({ data: "json, name=tableId" })
+  @SpeakeasyMetadata({ data: "json, name=tableId" })
   tableId?: string;
 
-  @Metadata({ data: "json, name=webPropertyId" })
+  @SpeakeasyMetadata({ data: "json, name=webPropertyId" })
   webPropertyId?: string;
 }
 
@@ -77,37 +77,37 @@ export class GaDataProfileInfo extends SpeakeasyBase {
  * Analytics data request query parameters.
 **/
 export class GaDataQuery extends SpeakeasyBase {
-  @Metadata({ data: "json, name=dimensions" })
+  @SpeakeasyMetadata({ data: "json, name=dimensions" })
   dimensions?: string;
 
-  @Metadata({ data: "json, name=end-date" })
+  @SpeakeasyMetadata({ data: "json, name=end-date" })
   endDate?: string;
 
-  @Metadata({ data: "json, name=filters" })
+  @SpeakeasyMetadata({ data: "json, name=filters" })
   filters?: string;
 
-  @Metadata({ data: "json, name=ids" })
+  @SpeakeasyMetadata({ data: "json, name=ids" })
   ids?: string;
 
-  @Metadata({ data: "json, name=max-results" })
+  @SpeakeasyMetadata({ data: "json, name=max-results" })
   maxResults?: number;
 
-  @Metadata({ data: "json, name=metrics" })
+  @SpeakeasyMetadata({ data: "json, name=metrics" })
   metrics?: string[];
 
-  @Metadata({ data: "json, name=samplingLevel" })
+  @SpeakeasyMetadata({ data: "json, name=samplingLevel" })
   samplingLevel?: string;
 
-  @Metadata({ data: "json, name=segment" })
+  @SpeakeasyMetadata({ data: "json, name=segment" })
   segment?: string;
 
-  @Metadata({ data: "json, name=sort" })
+  @SpeakeasyMetadata({ data: "json, name=sort" })
   sort?: string[];
 
-  @Metadata({ data: "json, name=start-date" })
+  @SpeakeasyMetadata({ data: "json, name=start-date" })
   startDate?: string;
 
-  @Metadata({ data: "json, name=start-index" })
+  @SpeakeasyMetadata({ data: "json, name=start-index" })
   startIndex?: number;
 }
 
@@ -117,54 +117,54 @@ export class GaDataQuery extends SpeakeasyBase {
  * Analytics data for a given view (profile).
 **/
 export class GaData extends SpeakeasyBase {
-  @Metadata({ data: "json, name=columnHeaders", elemType: shared.GaDataColumnHeaders })
+  @SpeakeasyMetadata({ data: "json, name=columnHeaders", elemType: GaDataColumnHeaders })
   columnHeaders?: GaDataColumnHeaders[];
 
-  @Metadata({ data: "json, name=containsSampledData" })
+  @SpeakeasyMetadata({ data: "json, name=containsSampledData" })
   containsSampledData?: boolean;
 
-  @Metadata({ data: "json, name=dataLastRefreshed" })
+  @SpeakeasyMetadata({ data: "json, name=dataLastRefreshed" })
   dataLastRefreshed?: string;
 
-  @Metadata({ data: "json, name=dataTable" })
+  @SpeakeasyMetadata({ data: "json, name=dataTable" })
   dataTable?: GaDataDataTable;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=itemsPerPage" })
+  @SpeakeasyMetadata({ data: "json, name=itemsPerPage" })
   itemsPerPage?: number;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=nextLink" })
+  @SpeakeasyMetadata({ data: "json, name=nextLink" })
   nextLink?: string;
 
-  @Metadata({ data: "json, name=previousLink" })
+  @SpeakeasyMetadata({ data: "json, name=previousLink" })
   previousLink?: string;
 
-  @Metadata({ data: "json, name=profileInfo" })
+  @SpeakeasyMetadata({ data: "json, name=profileInfo" })
   profileInfo?: GaDataProfileInfo;
 
-  @Metadata({ data: "json, name=query" })
+  @SpeakeasyMetadata({ data: "json, name=query" })
   query?: GaDataQuery;
 
-  @Metadata({ data: "json, name=rows" })
+  @SpeakeasyMetadata({ data: "json, name=rows" })
   rows?: string[][];
 
-  @Metadata({ data: "json, name=sampleSize" })
+  @SpeakeasyMetadata({ data: "json, name=sampleSize" })
   sampleSize?: string;
 
-  @Metadata({ data: "json, name=sampleSpace" })
+  @SpeakeasyMetadata({ data: "json, name=sampleSpace" })
   sampleSpace?: string;
 
-  @Metadata({ data: "json, name=selfLink" })
+  @SpeakeasyMetadata({ data: "json, name=selfLink" })
   selfLink?: string;
 
-  @Metadata({ data: "json, name=totalResults" })
+  @SpeakeasyMetadata({ data: "json, name=totalResults" })
   totalResults?: number;
 
-  @Metadata({ data: "json, name=totalsForAllResults" })
+  @SpeakeasyMetadata({ data: "json, name=totalsForAllResults" })
   totalsForAllResults?: Map<string, string>;
 }

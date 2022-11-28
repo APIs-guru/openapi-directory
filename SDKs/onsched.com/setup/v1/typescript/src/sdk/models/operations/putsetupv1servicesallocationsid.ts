@@ -1,44 +1,45 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class PutSetupV1ServicesAllocationsIdPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" })
   id: string;
 }
 
 
 export class PutSetupV1ServicesAllocationsIdRequests extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/*+json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/*+json" })
   serviceAllocationUpdateModel?: shared.ServiceAllocationUpdateModel;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   serviceAllocationUpdateModel1?: shared.ServiceAllocationUpdateModel;
 
-  @Metadata({ data: "request, media_type=application/json-patch+json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json-patch+json" })
   serviceAllocationUpdateModel2?: shared.ServiceAllocationUpdateModel;
 
-  @Metadata({ data: "request, media_type=text/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=text/json" })
   serviceAllocationUpdateModel3?: shared.ServiceAllocationUpdateModel;
 }
 
 
 export class PutSetupV1ServicesAllocationsIdRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: PutSetupV1ServicesAllocationsIdPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   request?: PutSetupV1ServicesAllocationsIdRequests;
 }
 
 
 export class PutSetupV1ServicesAllocationsIdResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   serviceAllocationViewModel?: shared.ServiceAllocationViewModel;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

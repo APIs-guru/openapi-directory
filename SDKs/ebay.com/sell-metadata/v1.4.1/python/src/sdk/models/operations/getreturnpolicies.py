@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class GetReturnPoliciesPathParams:
-    marketplace_id: str = field(default=None, metadata={'path_param': { 'field_name': 'marketplace_id', 'style': 'simple', 'explode': False }})
+    marketplace_id: str = field(metadata={'path_param': { 'field_name': 'marketplace_id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -15,19 +15,19 @@ class GetReturnPoliciesQueryParams:
 
 @dataclass
 class GetReturnPoliciesSecurity:
-    api_auth: shared.SchemeAPIAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    api_auth: shared.SchemeAPIAuth = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class GetReturnPoliciesRequest:
-    path_params: GetReturnPoliciesPathParams = field(default=None)
-    query_params: GetReturnPoliciesQueryParams = field(default=None)
-    security: GetReturnPoliciesSecurity = field(default=None)
+    path_params: GetReturnPoliciesPathParams = field()
+    query_params: GetReturnPoliciesQueryParams = field()
+    security: GetReturnPoliciesSecurity = field()
     
 
 @dataclass
 class GetReturnPoliciesResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     return_policy_response: Optional[shared.ReturnPolicyResponse] = field(default=None)
-    status_code: int = field(default=None)
     

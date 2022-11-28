@@ -1,5 +1,7 @@
 package shared
 
+// FieldStats
+// The statistics for a field calculated in the request.
 type FieldStats struct {
 	Count        *int64   `json:"count,omitempty"`
 	Max          *string  `json:"max,omitempty"`

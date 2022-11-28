@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DeploymentmanagerCompositeTypesGetPathParams:
-    composite_type: str = field(default=None, metadata={'path_param': { 'field_name': 'compositeType', 'style': 'simple', 'explode': False }})
-    project: str = field(default=None, metadata={'path_param': { 'field_name': 'project', 'style': 'simple', 'explode': False }})
+    composite_type: str = field(metadata={'path_param': { 'field_name': 'compositeType', 'style': 'simple', 'explode': False }})
+    project: str = field(metadata={'path_param': { 'field_name': 'project', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,26 +27,26 @@ class DeploymentmanagerCompositeTypesGetQueryParams:
 
 @dataclass
 class DeploymentmanagerCompositeTypesGetSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DeploymentmanagerCompositeTypesGetSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DeploymentmanagerCompositeTypesGetSecurityOption3:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DeploymentmanagerCompositeTypesGetSecurityOption4:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -58,14 +59,14 @@ class DeploymentmanagerCompositeTypesGetSecurity:
 
 @dataclass
 class DeploymentmanagerCompositeTypesGetRequest:
-    path_params: DeploymentmanagerCompositeTypesGetPathParams = field(default=None)
-    query_params: DeploymentmanagerCompositeTypesGetQueryParams = field(default=None)
-    security: DeploymentmanagerCompositeTypesGetSecurity = field(default=None)
+    path_params: DeploymentmanagerCompositeTypesGetPathParams = field()
+    query_params: DeploymentmanagerCompositeTypesGetQueryParams = field()
+    security: DeploymentmanagerCompositeTypesGetSecurity = field()
     
 
 @dataclass
 class DeploymentmanagerCompositeTypesGetResponse:
+    content_type: str = field()
+    status_code: int = field()
     composite_type: Optional[shared.CompositeType] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

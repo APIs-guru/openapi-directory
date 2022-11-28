@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AwsEc2EipDetails
@@ -6,33 +7,33 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Information about an Elastic IP address.
 **/
 export class AwsEc2EipDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AllocationId" })
+  @SpeakeasyMetadata({ data: "json, name=AllocationId" })
   allocationId?: string;
 
-  @Metadata({ data: "json, name=AssociationId" })
+  @SpeakeasyMetadata({ data: "json, name=AssociationId" })
   associationId?: string;
 
-  @Metadata({ data: "json, name=Domain" })
+  @SpeakeasyMetadata({ data: "json, name=Domain" })
   domain?: string;
 
-  @Metadata({ data: "json, name=InstanceId" })
+  @SpeakeasyMetadata({ data: "json, name=InstanceId" })
   instanceId?: string;
 
-  @Metadata({ data: "json, name=NetworkBorderGroup" })
+  @SpeakeasyMetadata({ data: "json, name=NetworkBorderGroup" })
   networkBorderGroup?: string;
 
-  @Metadata({ data: "json, name=NetworkInterfaceId" })
+  @SpeakeasyMetadata({ data: "json, name=NetworkInterfaceId" })
   networkInterfaceId?: string;
 
-  @Metadata({ data: "json, name=NetworkInterfaceOwnerId" })
+  @SpeakeasyMetadata({ data: "json, name=NetworkInterfaceOwnerId" })
   networkInterfaceOwnerId?: string;
 
-  @Metadata({ data: "json, name=PrivateIpAddress" })
+  @SpeakeasyMetadata({ data: "json, name=PrivateIpAddress" })
   privateIpAddress?: string;
 
-  @Metadata({ data: "json, name=PublicIp" })
+  @SpeakeasyMetadata({ data: "json, name=PublicIp" })
   publicIp?: string;
 
-  @Metadata({ data: "json, name=PublicIpv4Pool" })
+  @SpeakeasyMetadata({ data: "json, name=PublicIpv4Pool" })
   publicIpv4Pool?: string;
 }

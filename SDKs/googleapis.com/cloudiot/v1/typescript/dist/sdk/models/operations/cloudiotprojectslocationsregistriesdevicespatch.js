@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var CloudiotProjectsLocationsRegistriesDevicesPatchPathParams = /** @class */ (function (_super) {
     __extends(CloudiotProjectsLocationsRegistriesDevicesPatchPathParams, _super);
@@ -30,7 +30,7 @@ var CloudiotProjectsLocationsRegistriesDevicesPatchPathParams = /** @class */ (f
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=name" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=name" }),
         __metadata("design:type", String)
     ], CloudiotProjectsLocationsRegistriesDevicesPatchPathParams.prototype, "name", void 0);
     return CloudiotProjectsLocationsRegistriesDevicesPatchPathParams;
@@ -42,51 +42,51 @@ var CloudiotProjectsLocationsRegistriesDevicesPatchQueryParams = /** @class */ (
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=$.xgafv" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=$.xgafv" }),
         __metadata("design:type", String)
     ], CloudiotProjectsLocationsRegistriesDevicesPatchQueryParams.prototype, "dollarXgafv", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=access_token" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=access_token" }),
         __metadata("design:type", String)
     ], CloudiotProjectsLocationsRegistriesDevicesPatchQueryParams.prototype, "accessToken", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=alt" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=alt" }),
         __metadata("design:type", String)
     ], CloudiotProjectsLocationsRegistriesDevicesPatchQueryParams.prototype, "alt", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=callback" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=callback" }),
         __metadata("design:type", String)
     ], CloudiotProjectsLocationsRegistriesDevicesPatchQueryParams.prototype, "callback", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=fields" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=fields" }),
         __metadata("design:type", String)
     ], CloudiotProjectsLocationsRegistriesDevicesPatchQueryParams.prototype, "fields", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=key" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=key" }),
         __metadata("design:type", String)
     ], CloudiotProjectsLocationsRegistriesDevicesPatchQueryParams.prototype, "key", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=oauth_token" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=oauth_token" }),
         __metadata("design:type", String)
     ], CloudiotProjectsLocationsRegistriesDevicesPatchQueryParams.prototype, "oauthToken", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=prettyPrint" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=prettyPrint" }),
         __metadata("design:type", Boolean)
     ], CloudiotProjectsLocationsRegistriesDevicesPatchQueryParams.prototype, "prettyPrint", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=quotaUser" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=quotaUser" }),
         __metadata("design:type", String)
     ], CloudiotProjectsLocationsRegistriesDevicesPatchQueryParams.prototype, "quotaUser", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=updateMask" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=updateMask" }),
         __metadata("design:type", String)
     ], CloudiotProjectsLocationsRegistriesDevicesPatchQueryParams.prototype, "updateMask", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=uploadType" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=uploadType" }),
         __metadata("design:type", String)
     ], CloudiotProjectsLocationsRegistriesDevicesPatchQueryParams.prototype, "uploadType", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=upload_protocol" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=upload_protocol" }),
         __metadata("design:type", String)
     ], CloudiotProjectsLocationsRegistriesDevicesPatchQueryParams.prototype, "uploadProtocol", void 0);
     return CloudiotProjectsLocationsRegistriesDevicesPatchQueryParams;
@@ -98,11 +98,11 @@ var CloudiotProjectsLocationsRegistriesDevicesPatchSecurityOption1 = /** @class 
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2)
     ], CloudiotProjectsLocationsRegistriesDevicesPatchSecurityOption1.prototype, "oauth2", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2c)
     ], CloudiotProjectsLocationsRegistriesDevicesPatchSecurityOption1.prototype, "oauth2c", void 0);
     return CloudiotProjectsLocationsRegistriesDevicesPatchSecurityOption1;
@@ -114,11 +114,11 @@ var CloudiotProjectsLocationsRegistriesDevicesPatchSecurityOption2 = /** @class 
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2)
     ], CloudiotProjectsLocationsRegistriesDevicesPatchSecurityOption2.prototype, "oauth2", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2c)
     ], CloudiotProjectsLocationsRegistriesDevicesPatchSecurityOption2.prototype, "oauth2c", void 0);
     return CloudiotProjectsLocationsRegistriesDevicesPatchSecurityOption2;
@@ -130,11 +130,11 @@ var CloudiotProjectsLocationsRegistriesDevicesPatchSecurity = /** @class */ (fun
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, option=true" }),
+        SpeakeasyMetadata({ data: "security, option=true" }),
         __metadata("design:type", CloudiotProjectsLocationsRegistriesDevicesPatchSecurityOption1)
     ], CloudiotProjectsLocationsRegistriesDevicesPatchSecurity.prototype, "option1", void 0);
     __decorate([
-        Metadata({ data: "security, option=true" }),
+        SpeakeasyMetadata({ data: "security, option=true" }),
         __metadata("design:type", CloudiotProjectsLocationsRegistriesDevicesPatchSecurityOption2)
     ], CloudiotProjectsLocationsRegistriesDevicesPatchSecurity.prototype, "option2", void 0);
     return CloudiotProjectsLocationsRegistriesDevicesPatchSecurity;
@@ -146,19 +146,19 @@ var CloudiotProjectsLocationsRegistriesDevicesPatchRequest = /** @class */ (func
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", CloudiotProjectsLocationsRegistriesDevicesPatchPathParams)
     ], CloudiotProjectsLocationsRegistriesDevicesPatchRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", CloudiotProjectsLocationsRegistriesDevicesPatchQueryParams)
     ], CloudiotProjectsLocationsRegistriesDevicesPatchRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", shared.Device)
     ], CloudiotProjectsLocationsRegistriesDevicesPatchRequest.prototype, "request", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", CloudiotProjectsLocationsRegistriesDevicesPatchSecurity)
     ], CloudiotProjectsLocationsRegistriesDevicesPatchRequest.prototype, "security", void 0);
     return CloudiotProjectsLocationsRegistriesDevicesPatchRequest;
@@ -170,15 +170,15 @@ var CloudiotProjectsLocationsRegistriesDevicesPatchResponse = /** @class */ (fun
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], CloudiotProjectsLocationsRegistriesDevicesPatchResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.Device)
     ], CloudiotProjectsLocationsRegistriesDevicesPatchResponse.prototype, "device", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], CloudiotProjectsLocationsRegistriesDevicesPatchResponse.prototype, "statusCode", void 0);
     return CloudiotProjectsLocationsRegistriesDevicesPatchResponse;

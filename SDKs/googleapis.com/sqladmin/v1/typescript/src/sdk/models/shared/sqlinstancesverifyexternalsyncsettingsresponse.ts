@@ -1,7 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SqlExternalSyncSettingError } from "./sqlexternalsyncsettingerror";
-import { SqlExternalSyncSettingError } from "./sqlexternalsyncsettingerror";
+
 
 
 // SqlInstancesVerifyExternalSyncSettingsResponse
@@ -9,12 +8,12 @@ import { SqlExternalSyncSettingError } from "./sqlexternalsyncsettingerror";
  * Instance verify external sync settings response.
 **/
 export class SqlInstancesVerifyExternalSyncSettingsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=errors", elemType: shared.SqlExternalSyncSettingError })
+  @SpeakeasyMetadata({ data: "json, name=errors", elemType: SqlExternalSyncSettingError })
   errors?: SqlExternalSyncSettingError[];
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=warnings", elemType: shared.SqlExternalSyncSettingError })
+  @SpeakeasyMetadata({ data: "json, name=warnings", elemType: SqlExternalSyncSettingError })
   warnings?: SqlExternalSyncSettingError[];
 }

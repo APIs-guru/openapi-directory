@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class GamesSnapshotsGetPathParams:
-    snapshot_id: str = field(default=None, metadata={'path_param': { 'field_name': 'snapshotId', 'style': 'simple', 'explode': False }})
+    snapshot_id: str = field(metadata={'path_param': { 'field_name': 'snapshotId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,14 +27,14 @@ class GamesSnapshotsGetQueryParams:
 
 @dataclass
 class GamesSnapshotsGetSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class GamesSnapshotsGetSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -44,14 +45,14 @@ class GamesSnapshotsGetSecurity:
 
 @dataclass
 class GamesSnapshotsGetRequest:
-    path_params: GamesSnapshotsGetPathParams = field(default=None)
-    query_params: GamesSnapshotsGetQueryParams = field(default=None)
-    security: GamesSnapshotsGetSecurity = field(default=None)
+    path_params: GamesSnapshotsGetPathParams = field()
+    query_params: GamesSnapshotsGetQueryParams = field()
+    security: GamesSnapshotsGetSecurity = field()
     
 
 @dataclass
 class GamesSnapshotsGetResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     snapshot: Optional[shared.Snapshot] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Substring
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A reference to a substring of a literal string in a JSON document.
 **/
 export class Substring extends SpeakeasyBase {
-  @Metadata({ data: "json, name=length" })
+  @SpeakeasyMetadata({ data: "json, name=length" })
   length: number;
 
-  @Metadata({ data: "json, name=start" })
+  @SpeakeasyMetadata({ data: "json, name=start" })
   start: number;
 }

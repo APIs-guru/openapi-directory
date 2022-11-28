@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudAssuredworkloadsV1beta1Violation } from "./googlecloudassuredworkloadsv1beta1violation";
 /**
  * Response of ListViolations endpoint.

@@ -1,5 +1,7 @@
 package shared
 
+// LocalizedObjectAnnotation
+// Set of detected objects with bounding boxes.
 type LocalizedObjectAnnotation struct {
 	BoundingPoly *BoundingPoly `json:"boundingPoly,omitempty"`
 	LanguageCode *string       `json:"languageCode,omitempty"`

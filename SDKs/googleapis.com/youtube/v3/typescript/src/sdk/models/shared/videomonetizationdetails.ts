@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AccessPolicy } from "./accesspolicy";
+
 
 
 // VideoMonetizationDetails
@@ -7,6 +8,6 @@ import { AccessPolicy } from "./accesspolicy";
  * Details about monetization of a YouTube Video.
 **/
 export class VideoMonetizationDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=access" })
+  @SpeakeasyMetadata({ data: "json, name=access" })
   access?: AccessPolicy;
 }

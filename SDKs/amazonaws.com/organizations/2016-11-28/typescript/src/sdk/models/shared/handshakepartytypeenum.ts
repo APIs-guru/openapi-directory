@@ -1,7 +1,8 @@
 
 
+
 export enum HandshakePartyTypeEnum {
-    Account = "ACCOUNT"
-,    Organization = "ORGANIZATION"
-,    Email = "EMAIL"
+    Account = "ACCOUNT",
+    Organization = "ORGANIZATION",
+    Email = "EMAIL"
 }

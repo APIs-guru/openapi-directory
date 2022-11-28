@@ -1,4 +1,4 @@
-from .__xgafv_enum import *
+from ._xgafv_enum import *
 from .alt_enum import *
 from .approvalconfig import *
 from .approvalresult import *
@@ -53,6 +53,7 @@ from .pushfilter import *
 from .pythonpackage import *
 from .removebitbucketserverconnectedrepositoryrequest import *
 from .removegitlabconnectedrepositoryrequest import *
+from .repositoryeventconfig import *
 from .reposource import *
 from .results import *
 from .retrybuildrequest import *

@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Attributes } from "./attributes";
 import { TruncatableString } from "./truncatablestring";
+
 
 
 // Annotation
@@ -8,9 +9,9 @@ import { TruncatableString } from "./truncatablestring";
  * Text annotation with a set of attributes.
 **/
 export class Annotation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=attributes" })
+  @SpeakeasyMetadata({ data: "json, name=attributes" })
   attributes?: Attributes;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: TruncatableString;
 }

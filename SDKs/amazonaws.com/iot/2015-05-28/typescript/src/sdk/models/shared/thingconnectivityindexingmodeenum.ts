@@ -1,6 +1,7 @@
 
 
+
 export enum ThingConnectivityIndexingModeEnum {
-    Off = "OFF"
-,    Status = "STATUS"
+    Off = "OFF",
+    Status = "STATUS"
 }

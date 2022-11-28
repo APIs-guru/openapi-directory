@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class AutoForwardingDispositionEnum(str, Enum):
     DISPOSITION_UNSPECIFIED = "dispositionUnspecified"
@@ -13,7 +15,11 @@ class AutoForwardingDispositionEnum(str, Enum):
 @dataclass_json
 @dataclass
 class AutoForwarding:
-    disposition: Optional[AutoForwardingDispositionEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'disposition' }})
-    email_address: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'emailAddress' }})
-    enabled: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'enabled' }})
+    r"""AutoForwarding
+    Auto-forwarding settings for an account.
+    """
+    
+    disposition: Optional[AutoForwardingDispositionEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('disposition') }})
+    email_address: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('emailAddress') }})
+    enabled: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('enabled') }})
     

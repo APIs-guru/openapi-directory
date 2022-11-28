@@ -4,15 +4,16 @@ from dataclasses import dataclass, field
 
 @dataclass
 class SchemeAPIKey:
-    api_key: str = field(default=None, metadata={'security': { 'field_name': 'api_key' }})
-    
-
-@dataclass
-class SchemeBasic:
-    authorization: str = field(default=None, metadata={'security': { 'field_name': 'Authorization' }})
+    api_key: str = field(metadata={'security': { 'field_name': 'api_key' }})
     
 
 @dataclass
 class Security:
-    api_key: SchemeAPIKey = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'query' }})
+    api_key: SchemeAPIKey = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'query' }})
+    
+
+@dataclass
+class SchemeBasic:
+    password: str = field(metadata={'security': { 'field_name': 'password' }})
+    username: str = field(metadata={'security': { 'field_name': 'username' }})
     

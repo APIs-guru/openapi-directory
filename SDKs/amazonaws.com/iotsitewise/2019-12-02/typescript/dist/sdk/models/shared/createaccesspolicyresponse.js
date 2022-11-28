@@ -22,18 +22,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var CreateAccessPolicyResponse = /** @class */ (function (_super) {
     __extends(CreateAccessPolicyResponse, _super);
     function CreateAccessPolicyResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=accessPolicyArn" }),
+        SpeakeasyMetadata({ data: "json, name=accessPolicyArn" }),
         __metadata("design:type", String)
     ], CreateAccessPolicyResponse.prototype, "accessPolicyArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=accessPolicyId" }),
+        SpeakeasyMetadata({ data: "json, name=accessPolicyId" }),
         __metadata("design:type", String)
     ], CreateAccessPolicyResponse.prototype, "accessPolicyId", void 0);
     return CreateAccessPolicyResponse;

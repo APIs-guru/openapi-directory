@@ -1,50 +1,51 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class TeamsAddOrUpdateRepoPermissionsLegacyPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=owner" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=owner" })
   owner: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=repo" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=repo" })
   repo: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=team_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=team_id" })
   teamId: number;
 }
 
 export enum TeamsAddOrUpdateRepoPermissionsLegacyRequestBodyPermissionEnum {
-    Pull = "pull"
-,    Push = "push"
-,    Admin = "admin"
+    Pull = "pull",
+    Push = "push",
+    Admin = "admin"
 }
 
 
 export class TeamsAddOrUpdateRepoPermissionsLegacyRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=permission" })
+  @SpeakeasyMetadata({ data: "json, name=permission" })
   permission?: TeamsAddOrUpdateRepoPermissionsLegacyRequestBodyPermissionEnum;
 }
 
 
 export class TeamsAddOrUpdateRepoPermissionsLegacyRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: TeamsAddOrUpdateRepoPermissionsLegacyPathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request?: TeamsAddOrUpdateRepoPermissionsLegacyRequestBody;
 }
 
 
 export class TeamsAddOrUpdateRepoPermissionsLegacyResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   basicError?: shared.BasicError;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   validationError?: shared.ValidationError;
 }

@@ -22,26 +22,26 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var ListInferenceSchedulersRequest = /** @class */ (function (_super) {
     __extends(ListInferenceSchedulersRequest, _super);
     function ListInferenceSchedulersRequest() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=InferenceSchedulerNameBeginsWith" }),
+        SpeakeasyMetadata({ data: "json, name=InferenceSchedulerNameBeginsWith" }),
         __metadata("design:type", String)
     ], ListInferenceSchedulersRequest.prototype, "inferenceSchedulerNameBeginsWith", void 0);
     __decorate([
-        Metadata({ data: "json, name=MaxResults" }),
+        SpeakeasyMetadata({ data: "json, name=MaxResults" }),
         __metadata("design:type", Number)
     ], ListInferenceSchedulersRequest.prototype, "maxResults", void 0);
     __decorate([
-        Metadata({ data: "json, name=ModelName" }),
+        SpeakeasyMetadata({ data: "json, name=ModelName" }),
         __metadata("design:type", String)
     ], ListInferenceSchedulersRequest.prototype, "modelName", void 0);
     __decorate([
-        Metadata({ data: "json, name=NextToken" }),
+        SpeakeasyMetadata({ data: "json, name=NextToken" }),
         __metadata("design:type", String)
     ], ListInferenceSchedulersRequest.prototype, "nextToken", void 0);
     return ListInferenceSchedulersRequest;

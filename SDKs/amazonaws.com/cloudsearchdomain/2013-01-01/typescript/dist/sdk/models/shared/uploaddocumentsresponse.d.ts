@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { DocumentServiceWarning } from "./documentservicewarning";
 /**
  * Contains the response to an <code>UploadDocuments</code> request.

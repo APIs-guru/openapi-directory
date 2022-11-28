@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { PortalStatus } from "./portalstatus";
 export declare class CreatePortalResponse extends SpeakeasyBase {
     portalArn: string;

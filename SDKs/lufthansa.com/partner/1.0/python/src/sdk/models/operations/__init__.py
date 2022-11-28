@@ -5,8 +5,8 @@ from .best_fares import *
 from .deep_links import *
 from .fares import *
 from .fares_subscriptions import *
-from .lh_deep_links___ffp import *
-from .lh_deep_links___itco import *
+from .lh_deep_links_ffp import *
+from .lh_deep_links_itco import *
 from .lowest_fares import *
 from .ond_route import *
 from .ond_status import *

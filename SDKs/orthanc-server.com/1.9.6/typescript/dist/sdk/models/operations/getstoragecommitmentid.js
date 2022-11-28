@@ -22,14 +22,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var GetStorageCommitmentIdPathParams = /** @class */ (function (_super) {
     __extends(GetStorageCommitmentIdPathParams, _super);
     function GetStorageCommitmentIdPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=id" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" }),
         __metadata("design:type", String)
     ], GetStorageCommitmentIdPathParams.prototype, "id", void 0);
     return GetStorageCommitmentIdPathParams;
@@ -41,7 +41,7 @@ var GetStorageCommitmentIdRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetStorageCommitmentIdPathParams)
     ], GetStorageCommitmentIdRequest.prototype, "pathParams", void 0);
     return GetStorageCommitmentIdRequest;
@@ -53,15 +53,15 @@ var GetStorageCommitmentIdResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetStorageCommitmentIdResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], GetStorageCommitmentIdResponse.prototype, "getStorageCommitmentId200ApplicationJsonAny", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetStorageCommitmentIdResponse.prototype, "statusCode", void 0);
     return GetStorageCommitmentIdResponse;

@@ -1,85 +1,86 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class SendClientsMessageUsingPostQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=msg" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=msg" })
   msg?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=padID" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=padID" })
   padId?: string;
 }
 
 
-export class SendClientsMessageUsingPostRequest extends SpeakeasyBase {
-  @Metadata()
-  queryParams: SendClientsMessageUsingPostQueryParams;
-}
-
-
 export class SendClientsMessageUsingPost200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=code" })
+  @SpeakeasyMetadata({ data: "json, name=code" })
   code?: number;
 
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data?: Map<string, any>;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class SendClientsMessageUsingPost400ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=code" })
+  @SpeakeasyMetadata({ data: "json, name=code" })
   code?: number;
 
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data?: Map<string, any>;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class SendClientsMessageUsingPost401ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=code" })
+  @SpeakeasyMetadata({ data: "json, name=code" })
   code?: number;
 
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data?: Map<string, any>;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class SendClientsMessageUsingPost500ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=code" })
+  @SpeakeasyMetadata({ data: "json, name=code" })
   code?: number;
 
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data?: Map<string, any>;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
+export class SendClientsMessageUsingPostRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  queryParams: SendClientsMessageUsingPostQueryParams;
+}
+
+
 export class SendClientsMessageUsingPostResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   sendClientsMessageUsingPost200ApplicationJsonObject?: SendClientsMessageUsingPost200ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   sendClientsMessageUsingPost400ApplicationJsonObject?: SendClientsMessageUsingPost400ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   sendClientsMessageUsingPost401ApplicationJsonObject?: SendClientsMessageUsingPost401ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   sendClientsMessageUsingPost500ApplicationJsonObject?: SendClientsMessageUsingPost500ApplicationJson;
 }

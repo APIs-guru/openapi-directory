@@ -9,6 +9,8 @@ const (
 	EnvironmentAssignedTargetingOptionDetailsEnvironmentEnumEnvironmentApp             EnvironmentAssignedTargetingOptionDetailsEnvironmentEnum = "ENVIRONMENT_APP"
 )
 
+// EnvironmentAssignedTargetingOptionDetails
+// Assigned environment targeting option details. This will be populated in the details field of an AssignedTargetingOption when targeting_type is `TARGETING_TYPE_ENVIRONMENT`.
 type EnvironmentAssignedTargetingOptionDetails struct {
 	Environment *EnvironmentAssignedTargetingOptionDetailsEnvironmentEnum `json:"environment,omitempty"`
 }

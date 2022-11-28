@@ -22,14 +22,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var RegistryDeleteProjectPathParams = /** @class */ (function (_super) {
     __extends(RegistryDeleteProjectPathParams, _super);
     function RegistryDeleteProjectPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=project" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=project" }),
         __metadata("design:type", String)
     ], RegistryDeleteProjectPathParams.prototype, "project", void 0);
     return RegistryDeleteProjectPathParams;
@@ -41,7 +41,7 @@ var RegistryDeleteProjectRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", RegistryDeleteProjectPathParams)
     ], RegistryDeleteProjectRequest.prototype, "pathParams", void 0);
     return RegistryDeleteProjectRequest;
@@ -53,11 +53,11 @@ var RegistryDeleteProjectResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], RegistryDeleteProjectResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], RegistryDeleteProjectResponse.prototype, "statusCode", void 0);
     return RegistryDeleteProjectResponse;

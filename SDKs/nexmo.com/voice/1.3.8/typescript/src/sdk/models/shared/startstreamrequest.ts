@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class StartStreamRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=level" })
+  @SpeakeasyMetadata({ data: "json, name=level" })
   level?: string;
 
-  @Metadata({ data: "json, name=loop" })
+  @SpeakeasyMetadata({ data: "json, name=loop" })
   loop?: number;
 
-  @Metadata({ data: "json, name=stream_url" })
+  @SpeakeasyMetadata({ data: "json, name=stream_url" })
   streamUrl: string[];
 }

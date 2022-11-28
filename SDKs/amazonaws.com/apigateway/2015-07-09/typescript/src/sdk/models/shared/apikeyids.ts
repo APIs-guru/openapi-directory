@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ApiKeyIds
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The identifier of an <a>ApiKey</a> used in a <a>UsagePlan</a>.
 **/
 export class ApiKeyIds extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ids" })
+  @SpeakeasyMetadata({ data: "json, name=ids" })
   ids?: string[];
 
-  @Metadata({ data: "json, name=warnings" })
+  @SpeakeasyMetadata({ data: "json, name=warnings" })
   warnings?: string[];
 }

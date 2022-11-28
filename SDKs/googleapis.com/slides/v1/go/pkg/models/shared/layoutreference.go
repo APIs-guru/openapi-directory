@@ -17,6 +17,8 @@ const (
 	LayoutReferencePredefinedLayoutEnumBigNumber                   LayoutReferencePredefinedLayoutEnum = "BIG_NUMBER"
 )
 
+// LayoutReference
+// Slide layout reference. This may reference either: - A predefined layout - One of the layouts in the presentation.
 type LayoutReference struct {
 	LayoutID         *string                              `json:"layoutId,omitempty"`
 	PredefinedLayout *LayoutReferencePredefinedLayoutEnum `json:"predefinedLayout,omitempty"`

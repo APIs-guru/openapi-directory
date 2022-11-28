@@ -5,8 +5,8 @@ from sdk.models import shared
 
 @dataclass
 class ListWebhooksResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error_response: Optional[shared.ErrorResponse] = field(default=None)
-    status_code: int = field(default=None)
     webhooks: Optional[List[shared.Webhook]] = field(default=None)
     

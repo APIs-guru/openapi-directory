@@ -1,6 +1,11 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 class GetArticlesearchJSONSortEnum(str, Enum):
@@ -22,35 +27,35 @@ class GetArticlesearchJSONQueryParams:
     sort: Optional[GetArticlesearchJSONSortEnum] = field(default=None, metadata={'query_param': { 'field_name': 'sort', 'style': 'form', 'explode': True }})
     
 
-@dataclass
-class GetArticlesearchJSONRequest:
-    query_params: GetArticlesearchJSONQueryParams = field(default=None)
-    
-
 @dataclass_json
 @dataclass
 class GetArticlesearchJSON200ApplicationJSONResponseMeta:
-    hits: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'hits' }})
-    offset: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'offset' }})
-    time: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'time' }})
+    hits: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('hits') }})
+    offset: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('offset') }})
+    time: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('time') }})
     
 
 @dataclass_json
 @dataclass
 class GetArticlesearchJSON200ApplicationJSONResponse:
-    docs: Optional[List[shared.Doc]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'docs' }})
-    meta: Optional[GetArticlesearchJSON200ApplicationJSONResponseMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
+    docs: Optional[List[shared.Doc]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('docs') }})
+    meta: Optional[GetArticlesearchJSON200ApplicationJSONResponseMeta] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('meta') }})
     
 
 @dataclass_json
 @dataclass
 class GetArticlesearchJSON200ApplicationJSON:
-    response: Optional[GetArticlesearchJSON200ApplicationJSONResponse] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'response' }})
+    response: Optional[GetArticlesearchJSON200ApplicationJSONResponse] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('response') }})
+    
+
+@dataclass
+class GetArticlesearchJSONRequest:
+    query_params: GetArticlesearchJSONQueryParams = field()
     
 
 @dataclass
 class GetArticlesearchJSONResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     get_articlesearch_json_200_application_json_object: Optional[GetArticlesearchJSON200ApplicationJSON] = field(default=None)
-    status_code: int = field(default=None)
     

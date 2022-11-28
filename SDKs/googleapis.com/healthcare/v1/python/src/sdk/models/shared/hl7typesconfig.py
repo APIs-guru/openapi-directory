@@ -1,13 +1,17 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import type
-from . import versionsource
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class Hl7TypesConfig:
-    type: Optional[List[type.Type]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
-    version: Optional[List[versionsource.VersionSource]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'version' }})
+    r"""Hl7TypesConfig
+    Root config for HL7v2 datatype definitions for a specific HL7v2 version.
+    """
+    
+    type: Optional[List[Type]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('type') }})
+    version: Optional[List[VersionSource]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('version') }})
     

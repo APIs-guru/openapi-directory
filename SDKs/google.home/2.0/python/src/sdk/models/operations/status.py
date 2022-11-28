@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class StatusResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     example110: Optional[shared.Example110] = field(default=None)
-    status_code: int = field(default=None)
     

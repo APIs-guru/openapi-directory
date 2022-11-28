@@ -1,52 +1,53 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetOrganizationDevicesUplinksLossAndLatencyPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=organizationId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=organizationId" })
   organizationId: string;
 }
 
 export enum GetOrganizationDevicesUplinksLossAndLatencyUplinkEnum {
-    Wan1 = "wan1"
-,    Wan2 = "wan2"
-,    Cellular = "cellular"
+    Wan1 = "wan1",
+    Wan2 = "wan2",
+    Cellular = "cellular"
 }
 
 
 export class GetOrganizationDevicesUplinksLossAndLatencyQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=ip" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=ip" })
   ip?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=t0" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=t0" })
   t0?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=t1" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=t1" })
   t1?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=timespan" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=timespan" })
   timespan?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=uplink" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=uplink" })
   uplink?: GetOrganizationDevicesUplinksLossAndLatencyUplinkEnum;
 }
 
 
 export class GetOrganizationDevicesUplinksLossAndLatencyRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetOrganizationDevicesUplinksLossAndLatencyPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetOrganizationDevicesUplinksLossAndLatencyQueryParams;
 }
 
 
 export class GetOrganizationDevicesUplinksLossAndLatencyResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getOrganizationDevicesUplinksLossAndLatency200ApplicationJsonObject?: Map<string, any>;
 }

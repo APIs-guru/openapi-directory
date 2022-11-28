@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // RenderableTask
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Contains input values for a task.
 **/
 export class RenderableTask extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Input" })
+  @SpeakeasyMetadata({ data: "json, name=Input" })
   input: string;
 }

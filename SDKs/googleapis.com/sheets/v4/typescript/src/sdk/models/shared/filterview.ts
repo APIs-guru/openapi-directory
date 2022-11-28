@@ -1,9 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { FilterCriteria } from "./filtercriteria";
 import { FilterSpec } from "./filterspec";
 import { GridRange } from "./gridrange";
 import { SortSpec } from "./sortspec";
+
 
 
 // FilterView
@@ -11,24 +11,24 @@ import { SortSpec } from "./sortspec";
  * A filter view.
 **/
 export class FilterView extends SpeakeasyBase {
-  @Metadata({ data: "json, name=criteria", elemType: shared.FilterCriteria })
+  @SpeakeasyMetadata({ data: "json, name=criteria", elemType: FilterCriteria })
   criteria?: Map<string, FilterCriteria>;
 
-  @Metadata({ data: "json, name=filterSpecs", elemType: shared.FilterSpec })
+  @SpeakeasyMetadata({ data: "json, name=filterSpecs", elemType: FilterSpec })
   filterSpecs?: FilterSpec[];
 
-  @Metadata({ data: "json, name=filterViewId" })
+  @SpeakeasyMetadata({ data: "json, name=filterViewId" })
   filterViewId?: number;
 
-  @Metadata({ data: "json, name=namedRangeId" })
+  @SpeakeasyMetadata({ data: "json, name=namedRangeId" })
   namedRangeId?: string;
 
-  @Metadata({ data: "json, name=range" })
+  @SpeakeasyMetadata({ data: "json, name=range" })
   range?: GridRange;
 
-  @Metadata({ data: "json, name=sortSpecs", elemType: shared.SortSpec })
+  @SpeakeasyMetadata({ data: "json, name=sortSpecs", elemType: SortSpec })
   sortSpecs?: SortSpec[];
 
-  @Metadata({ data: "json, name=title" })
+  @SpeakeasyMetadata({ data: "json, name=title" })
   title?: string;
 }

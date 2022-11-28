@@ -18,17 +18,9 @@ type GetV4LayersAsHarvestedHeaders struct {
 	XNextToken *string `header:"style=simple,explode=false,name=X-Next-Token"`
 }
 
-type GetV4LayersAsHarvestedSecurityOption1 struct {
-	APIKey shared.SchemeAPIKey `security:"scheme,type=apiKey,subtype=header"`
-}
-
-type GetV4LayersAsHarvestedSecurityOption2 struct {
-	Oauth2AuthorizationCode shared.SchemeOauth2AuthorizationCode `security:"scheme,type=oauth2"`
-}
-
 type GetV4LayersAsHarvestedSecurity struct {
-	Option1 *GetV4LayersAsHarvestedSecurityOption1 `security:"option"`
-	Option2 *GetV4LayersAsHarvestedSecurityOption2 `security:"option"`
+	APIKey                  *shared.SchemeAPIKey                  `security:"scheme,type=apiKey,subtype=header"`
+	Oauth2AuthorizationCode *shared.SchemeOauth2AuthorizationCode `security:"scheme,type=oauth2"`
 }
 
 type GetV4LayersAsHarvestedRequest struct {

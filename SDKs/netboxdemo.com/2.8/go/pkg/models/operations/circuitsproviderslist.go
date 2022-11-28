@@ -68,15 +68,15 @@ type CircuitsProvidersListQueryParams struct {
 	TagN           *string `queryParam:"style=form,explode=true,name=tag__n"`
 }
 
-type CircuitsProvidersListRequest struct {
-	QueryParams CircuitsProvidersListQueryParams
-}
-
 type CircuitsProvidersList200ApplicationJSON struct {
 	Count    int64             `json:"count"`
 	Next     *string           `json:"next,omitempty"`
 	Previous *string           `json:"previous,omitempty"`
 	Results  []shared.Provider `json:"results"`
+}
+
+type CircuitsProvidersListRequest struct {
+	QueryParams CircuitsProvidersListQueryParams
 }
 
 type CircuitsProvidersListResponse struct {

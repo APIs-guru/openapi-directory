@@ -8,6 +8,8 @@ const (
 	ReadOptionsReadConsistencyEnumEventual                   ReadOptionsReadConsistencyEnum = "EVENTUAL"
 )
 
+// ReadOptions
+// The options shared by read requests.
 type ReadOptions struct {
 	ReadConsistency *ReadOptionsReadConsistencyEnum `json:"readConsistency,omitempty"`
 	ReadTime        *string                         `json:"readTime,omitempty"`

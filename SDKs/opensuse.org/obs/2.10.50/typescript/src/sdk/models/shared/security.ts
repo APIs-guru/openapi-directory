@@ -1,7 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class SchemeBasicAuthentication extends SpeakeasyBase {
-  @Metadata({ data: "security, name=Authorization" })
-  authorization: string;
+  @SpeakeasyMetadata({ data: "security, name=password" })
+  password: string;
+
+  @SpeakeasyMetadata({ data: "security, name=username" })
+  username: string;
 }

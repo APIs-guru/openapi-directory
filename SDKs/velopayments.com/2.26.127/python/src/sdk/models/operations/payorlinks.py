@@ -12,14 +12,14 @@ class PayorLinksQueryParams:
 
 @dataclass
 class PayorLinksRequest:
-    query_params: PayorLinksQueryParams = field(default=None)
+    query_params: PayorLinksQueryParams = field()
     
 
 @dataclass
 class PayorLinksResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     payor_links_response: Optional[shared.PayorLinksResponse] = field(default=None)
-    status_code: int = field(default=None)
     inline_response_400: Optional[Any] = field(default=None)
     inline_response_403: Optional[Any] = field(default=None)
     inline_response_404: Optional[Any] = field(default=None)

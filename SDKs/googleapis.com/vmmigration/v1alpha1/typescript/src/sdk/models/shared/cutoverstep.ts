@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ReplicationCycle } from "./replicationcycle";
-import { ReplicationCycle } from "./replicationcycle";
+
 
 
 // CutoverStep
@@ -8,24 +8,24 @@ import { ReplicationCycle } from "./replicationcycle";
  * CutoverStep holds information about the cutover step progress.
 **/
 export class CutoverStep extends SpeakeasyBase {
-  @Metadata({ data: "json, name=endTime" })
+  @SpeakeasyMetadata({ data: "json, name=endTime" })
   endTime?: string;
 
-  @Metadata({ data: "json, name=finalSync" })
+  @SpeakeasyMetadata({ data: "json, name=finalSync" })
   finalSync?: ReplicationCycle;
 
-  @Metadata({ data: "json, name=instantiatingMigratedVm" })
+  @SpeakeasyMetadata({ data: "json, name=instantiatingMigratedVm" })
   instantiatingMigratedVm?: Map<string, any>;
 
-  @Metadata({ data: "json, name=preparingVmDisks" })
+  @SpeakeasyMetadata({ data: "json, name=preparingVmDisks" })
   preparingVmDisks?: Map<string, any>;
 
-  @Metadata({ data: "json, name=previousReplicationCycle" })
+  @SpeakeasyMetadata({ data: "json, name=previousReplicationCycle" })
   previousReplicationCycle?: ReplicationCycle;
 
-  @Metadata({ data: "json, name=shuttingDownSourceVm" })
+  @SpeakeasyMetadata({ data: "json, name=shuttingDownSourceVm" })
   shuttingDownSourceVm?: Map<string, any>;
 
-  @Metadata({ data: "json, name=startTime" })
+  @SpeakeasyMetadata({ data: "json, name=startTime" })
   startTime?: string;
 }

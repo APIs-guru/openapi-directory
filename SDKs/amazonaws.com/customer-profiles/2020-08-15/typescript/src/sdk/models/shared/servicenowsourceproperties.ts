@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ServiceNowSourceProperties
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The properties that are applied when ServiceNow is being used as a source.
 **/
 export class ServiceNowSourceProperties extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Object" })
+  @SpeakeasyMetadata({ data: "json, name=Object" })
   object: string;
 }

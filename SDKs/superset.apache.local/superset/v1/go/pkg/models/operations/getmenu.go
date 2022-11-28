@@ -8,10 +8,6 @@ type GetMenuSecurity struct {
 	Jwt shared.SchemeJwt `security:"scheme,type=http,subtype=bearer"`
 }
 
-type GetMenuRequest struct {
-	Security GetMenuSecurity
-}
-
 type GetMenu200ApplicationJSONResult struct {
 	Childs []map[string]interface{} `json:"childs,omitempty"`
 	Icon   *string                  `json:"icon,omitempty"`
@@ -26,6 +22,10 @@ type GetMenu200ApplicationJSON struct {
 
 type GetMenu401ApplicationJSON struct {
 	Message *string `json:"message,omitempty"`
+}
+
+type GetMenuRequest struct {
+	Security GetMenuSecurity
 }
 
 type GetMenuResponse struct {

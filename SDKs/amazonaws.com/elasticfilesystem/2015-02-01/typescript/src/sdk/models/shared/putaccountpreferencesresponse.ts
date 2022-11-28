@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ResourceIdPreference } from "./resourceidpreference";
 
 
+
 export class PutAccountPreferencesResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ResourceIdPreference" })
+  @SpeakeasyMetadata({ data: "json, name=ResourceIdPreference" })
   resourceIdPreference?: ResourceIdPreference;
 }

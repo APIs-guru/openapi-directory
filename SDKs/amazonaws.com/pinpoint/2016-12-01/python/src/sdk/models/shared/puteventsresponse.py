@@ -1,10 +1,11 @@
 from dataclasses import dataclass, field
 from dataclasses_json import dataclass_json
-from . import eventsresponse
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class PutEventsResponse:
-    events_response: eventsresponse.EventsResponse = field(default=None, metadata={'dataclasses_json': { 'field_name': 'EventsResponse' }})
+    events_response: EventsResponse = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('EventsResponse') }})
     

@@ -1,5 +1,7 @@
 package shared
 
+// UpdateBackendAuthOAuthConfig
+// The OAuth configurations for authenticating users into your Amplify app.
 type UpdateBackendAuthOAuthConfig struct {
 	DomainPrefix           *string                  `json:"DomainPrefix,omitempty"`
 	OAuthGrantType         *OAuthGrantTypeEnum      `json:"OAuthGrantType,omitempty"`

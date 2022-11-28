@@ -1,5 +1,7 @@
 package shared
 
+// EventIntegrationAssociation
+// The event integration association.
 type EventIntegrationAssociation struct {
 	ClientAssociationMetadata      map[string]string `json:"ClientAssociationMetadata,omitempty"`
 	ClientID                       *string           `json:"ClientId,omitempty"`

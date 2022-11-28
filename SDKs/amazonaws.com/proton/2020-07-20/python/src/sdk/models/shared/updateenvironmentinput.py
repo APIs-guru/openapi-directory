@@ -1,18 +1,23 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import deploymentupdatetype_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class UpdateEnvironmentInput:
-    deployment_type: deploymentupdatetype_enum.DeploymentUpdateTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'deploymentType' }})
-    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
-    environment_account_connection_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'environmentAccountConnectionId' }})
-    name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    proton_service_role_arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'protonServiceRoleArn' }})
-    spec: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'spec' }})
-    template_major_version: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'templateMajorVersion' }})
-    template_minor_version: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'templateMinorVersion' }})
+    deployment_type: DeploymentUpdateTypeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('deploymentType') }})
+    name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('description') }})
+    environment_account_connection_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('environmentAccountConnectionId') }})
+    proton_service_role_arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('protonServiceRoleArn') }})
+    spec: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('spec') }})
+    template_major_version: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('templateMajorVersion') }})
+    template_minor_version: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('templateMinorVersion') }})
     

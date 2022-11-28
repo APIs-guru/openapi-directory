@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ContainerVersionHeader } from "./containerversionheader";
+
 
 
 // ListContainerVersionsResponse
@@ -8,9 +8,9 @@ import { ContainerVersionHeader } from "./containerversionheader";
  * List container versions response.
 **/
 export class ListContainerVersionsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=containerVersionHeader", elemType: shared.ContainerVersionHeader })
+  @SpeakeasyMetadata({ data: "json, name=containerVersionHeader", elemType: ContainerVersionHeader })
   containerVersionHeader?: ContainerVersionHeader[];
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 }

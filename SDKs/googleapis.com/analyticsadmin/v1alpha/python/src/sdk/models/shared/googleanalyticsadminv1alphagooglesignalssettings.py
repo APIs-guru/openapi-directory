@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class GoogleAnalyticsAdminV1alphaGoogleSignalsSettingsConsentEnum(str, Enum):
     GOOGLE_SIGNALS_CONSENT_UNSPECIFIED = "GOOGLE_SIGNALS_CONSENT_UNSPECIFIED"
@@ -16,7 +18,11 @@ class GoogleAnalyticsAdminV1alphaGoogleSignalsSettingsStateEnum(str, Enum):
 @dataclass_json
 @dataclass
 class GoogleAnalyticsAdminV1alphaGoogleSignalsSettings:
-    consent: Optional[GoogleAnalyticsAdminV1alphaGoogleSignalsSettingsConsentEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'consent' }})
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    state: Optional[GoogleAnalyticsAdminV1alphaGoogleSignalsSettingsStateEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'state' }})
+    r"""GoogleAnalyticsAdminV1alphaGoogleSignalsSettings
+    Settings values for Google Signals. This is a singleton resource.
+    """
+    
+    consent: Optional[GoogleAnalyticsAdminV1alphaGoogleSignalsSettingsConsentEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('consent') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    state: Optional[GoogleAnalyticsAdminV1alphaGoogleSignalsSettingsStateEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('state') }})
     

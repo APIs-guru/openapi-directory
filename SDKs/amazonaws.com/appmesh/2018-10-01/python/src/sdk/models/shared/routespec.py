@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import httproute
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class RouteSpec:
-    http_route: Optional[httproute.HTTPRoute] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'httpRoute' }})
+    r"""RouteSpec
+    An object representing the specification of a route.
+    """
+    
+    http_route: Optional[HTTPRoute] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('httpRoute') }})
     

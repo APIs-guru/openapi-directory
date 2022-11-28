@@ -1,9 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AssessmentRunNotification } from "./assessmentrunnotification";
 import { AssessmentRunStateEnum } from "./assessmentrunstateenum";
 import { AssessmentRunStateChange } from "./assessmentrunstatechange";
 import { Attribute } from "./attribute";
+
 
 
 // AssessmentRun
@@ -11,48 +11,48 @@ import { Attribute } from "./attribute";
  * <p>A snapshot of an Amazon Inspector assessment run that contains the findings of the assessment run .</p> <p>Used as the response element in the <a>DescribeAssessmentRuns</a> action.</p>
 **/
 export class AssessmentRun extends SpeakeasyBase {
-  @Metadata({ data: "json, name=arn" })
+  @SpeakeasyMetadata({ data: "json, name=arn" })
   arn: string;
 
-  @Metadata({ data: "json, name=assessmentTemplateArn" })
+  @SpeakeasyMetadata({ data: "json, name=assessmentTemplateArn" })
   assessmentTemplateArn: string;
 
-  @Metadata({ data: "json, name=completedAt" })
+  @SpeakeasyMetadata({ data: "json, name=completedAt" })
   completedAt?: Date;
 
-  @Metadata({ data: "json, name=createdAt" })
+  @SpeakeasyMetadata({ data: "json, name=createdAt" })
   createdAt: Date;
 
-  @Metadata({ data: "json, name=dataCollected" })
+  @SpeakeasyMetadata({ data: "json, name=dataCollected" })
   dataCollected: boolean;
 
-  @Metadata({ data: "json, name=durationInSeconds" })
+  @SpeakeasyMetadata({ data: "json, name=durationInSeconds" })
   durationInSeconds: number;
 
-  @Metadata({ data: "json, name=findingCounts" })
+  @SpeakeasyMetadata({ data: "json, name=findingCounts" })
   findingCounts: Map<string, number>;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 
-  @Metadata({ data: "json, name=notifications", elemType: shared.AssessmentRunNotification })
+  @SpeakeasyMetadata({ data: "json, name=notifications", elemType: AssessmentRunNotification })
   notifications: AssessmentRunNotification[];
 
-  @Metadata({ data: "json, name=rulesPackageArns" })
+  @SpeakeasyMetadata({ data: "json, name=rulesPackageArns" })
   rulesPackageArns: string[];
 
-  @Metadata({ data: "json, name=startedAt" })
+  @SpeakeasyMetadata({ data: "json, name=startedAt" })
   startedAt?: Date;
 
-  @Metadata({ data: "json, name=state" })
+  @SpeakeasyMetadata({ data: "json, name=state" })
   state: AssessmentRunStateEnum;
 
-  @Metadata({ data: "json, name=stateChangedAt" })
+  @SpeakeasyMetadata({ data: "json, name=stateChangedAt" })
   stateChangedAt: Date;
 
-  @Metadata({ data: "json, name=stateChanges", elemType: shared.AssessmentRunStateChange })
+  @SpeakeasyMetadata({ data: "json, name=stateChanges", elemType: AssessmentRunStateChange })
   stateChanges: AssessmentRunStateChange[];
 
-  @Metadata({ data: "json, name=userAttributesForFindings", elemType: shared.Attribute })
+  @SpeakeasyMetadata({ data: "json, name=userAttributesForFindings", elemType: Attribute })
   userAttributesForFindings: Attribute[];
 }

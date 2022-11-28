@@ -12,10 +12,6 @@ type ListConversationsQueryParams struct {
 	RecordIndex *float64          `queryParam:"style=form,explode=true,name=record_index"`
 }
 
-type ListConversationsRequest struct {
-	QueryParams ListConversationsQueryParams
-}
-
 type ListConversations200ApplicationJSONEmbeddedConversationsLinksSelf struct {
 	Href *string `json:"href,omitempty"`
 }
@@ -30,6 +26,8 @@ type ListConversations200ApplicationJSONEmbeddedConversations struct {
 	UUID  string                                                         `json:"uuid"`
 }
 
+// ListConversations200ApplicationJSONEmbedded
+// A list of conversation objects. See the [get details of a specific conversation](#retrieveConversation) response fields for a description of the nested objects
 type ListConversations200ApplicationJSONEmbedded struct {
 	Conversations []ListConversations200ApplicationJSONEmbeddedConversations `json:"conversations"`
 }
@@ -40,6 +38,10 @@ type ListConversations200ApplicationJSON struct {
 	Count       float64                                     `json:"count"`
 	PageSize    float64                                     `json:"page_size"`
 	RecordIndex float64                                     `json:"record_index"`
+}
+
+type ListConversationsRequest struct {
+	QueryParams ListConversationsQueryParams
 }
 
 type ListConversationsResponse struct {

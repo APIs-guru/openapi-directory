@@ -1,16 +1,16 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
-import { GoogleAnalyticsAdminV1alphaCreateUserLinkRequest } from "./googleanalyticsadminv1alphacreateuserlinkrequest";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { GoogleAnalyticsAdminV1alphaCreateUserLinkRequestInput } from "./googleanalyticsadminv1alphacreateuserlinkrequest";
 
 
-// GoogleAnalyticsAdminV1alphaBatchCreateUserLinksRequest
+
+// GoogleAnalyticsAdminV1alphaBatchCreateUserLinksRequestInput
 /** 
  * Request message for BatchCreateUserLinks RPC.
 **/
-export class GoogleAnalyticsAdminV1alphaBatchCreateUserLinksRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=notifyNewUsers" })
+export class GoogleAnalyticsAdminV1alphaBatchCreateUserLinksRequestInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=notifyNewUsers" })
   notifyNewUsers?: boolean;
 
-  @Metadata({ data: "json, name=requests", elemType: shared.GoogleAnalyticsAdminV1alphaCreateUserLinkRequest })
-  requests?: GoogleAnalyticsAdminV1alphaCreateUserLinkRequest[];
+  @SpeakeasyMetadata({ data: "json, name=requests", elemType: GoogleAnalyticsAdminV1alphaCreateUserLinkRequestInput })
+  requests?: GoogleAnalyticsAdminV1alphaCreateUserLinkRequestInput[];
 }

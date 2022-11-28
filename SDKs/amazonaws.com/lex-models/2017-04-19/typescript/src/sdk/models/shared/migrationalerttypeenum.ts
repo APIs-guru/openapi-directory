@@ -1,6 +1,7 @@
 
 
+
 export enum MigrationAlertTypeEnum {
-    Error = "ERROR"
-,    Warn = "WARN"
+    Error = "ERROR",
+    Warn = "WARN"
 }

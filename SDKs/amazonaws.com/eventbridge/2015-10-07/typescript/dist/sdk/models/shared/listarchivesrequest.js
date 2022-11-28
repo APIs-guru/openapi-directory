@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ArchiveStateEnum } from "./archivestateenum";
 var ListArchivesRequest = /** @class */ (function (_super) {
     __extends(ListArchivesRequest, _super);
@@ -30,23 +30,23 @@ var ListArchivesRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=EventSourceArn" }),
+        SpeakeasyMetadata({ data: "json, name=EventSourceArn" }),
         __metadata("design:type", String)
     ], ListArchivesRequest.prototype, "eventSourceArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=Limit" }),
+        SpeakeasyMetadata({ data: "json, name=Limit" }),
         __metadata("design:type", Number)
     ], ListArchivesRequest.prototype, "limit", void 0);
     __decorate([
-        Metadata({ data: "json, name=NamePrefix" }),
+        SpeakeasyMetadata({ data: "json, name=NamePrefix" }),
         __metadata("design:type", String)
     ], ListArchivesRequest.prototype, "namePrefix", void 0);
     __decorate([
-        Metadata({ data: "json, name=NextToken" }),
+        SpeakeasyMetadata({ data: "json, name=NextToken" }),
         __metadata("design:type", String)
     ], ListArchivesRequest.prototype, "nextToken", void 0);
     __decorate([
-        Metadata({ data: "json, name=State" }),
+        SpeakeasyMetadata({ data: "json, name=State" }),
         __metadata("design:type", String)
     ], ListArchivesRequest.prototype, "state", void 0);
     return ListArchivesRequest;

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { BankTransferEventTypeEnum } from "./banktransfereventtypeenum";
 export declare enum BankTransferEventListRequestBankTransferTypeEnum {
     Debit = "debit",

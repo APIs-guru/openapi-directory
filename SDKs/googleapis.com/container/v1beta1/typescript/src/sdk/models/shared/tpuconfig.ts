@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // TpuConfig
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Configuration for Cloud TPU.
 **/
 export class TpuConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=enabled" })
+  @SpeakeasyMetadata({ data: "json, name=enabled" })
   enabled?: boolean;
 
-  @Metadata({ data: "json, name=ipv4CidrBlock" })
+  @SpeakeasyMetadata({ data: "json, name=ipv4CidrBlock" })
   ipv4CidrBlock?: string;
 
-  @Metadata({ data: "json, name=useServiceNetworking" })
+  @SpeakeasyMetadata({ data: "json, name=useServiceNetworking" })
   useServiceNetworking?: boolean;
 }

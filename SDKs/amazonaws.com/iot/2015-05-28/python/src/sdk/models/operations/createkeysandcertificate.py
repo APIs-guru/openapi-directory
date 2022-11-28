@@ -1,4 +1,7 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
@@ -21,18 +24,18 @@ class CreateKeysAndCertificateHeaders:
 
 @dataclass
 class CreateKeysAndCertificateRequest:
-    query_params: CreateKeysAndCertificateQueryParams = field(default=None)
-    headers: CreateKeysAndCertificateHeaders = field(default=None)
+    headers: CreateKeysAndCertificateHeaders = field()
+    query_params: CreateKeysAndCertificateQueryParams = field()
     
 
 @dataclass
 class CreateKeysAndCertificateResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     create_keys_and_certificate_response: Optional[shared.CreateKeysAndCertificateResponse] = field(default=None)
     internal_failure_exception: Optional[Any] = field(default=None)
     invalid_request_exception: Optional[Any] = field(default=None)
     service_unavailable_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     unauthorized_exception: Optional[Any] = field(default=None)
     

@@ -1,5 +1,7 @@
 package shared
 
+// TrainingJobDefinition
+// Defines the input needed to run a training job using the algorithm.
 type TrainingJobDefinition struct {
 	HyperParameters   map[string]string     `json:"HyperParameters,omitempty"`
 	InputDataConfig   []Channel             `json:"InputDataConfig"`

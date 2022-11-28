@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostAttachInstancesActionEnum(str, Enum):
     ATTACH_INSTANCES = "AttachInstances"
@@ -10,8 +14,8 @@ class PostAttachInstancesVersionEnum(str, Enum):
 
 @dataclass
 class PostAttachInstancesQueryParams:
-    action: PostAttachInstancesActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostAttachInstancesVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostAttachInstancesActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostAttachInstancesVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostAttachInstancesHeaders:
 
 @dataclass
 class PostAttachInstancesRequest:
-    query_params: PostAttachInstancesQueryParams = field(default=None)
-    headers: PostAttachInstancesHeaders = field(default=None)
+    headers: PostAttachInstancesHeaders = field()
+    query_params: PostAttachInstancesQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostAttachInstancesResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

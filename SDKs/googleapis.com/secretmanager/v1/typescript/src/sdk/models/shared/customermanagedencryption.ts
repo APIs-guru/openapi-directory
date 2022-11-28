@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // CustomerManagedEncryption
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Configuration for encrypting secret payloads using customer-managed encryption keys (CMEK).
 **/
 export class CustomerManagedEncryption extends SpeakeasyBase {
-  @Metadata({ data: "json, name=kmsKeyName" })
+  @SpeakeasyMetadata({ data: "json, name=kmsKeyName" })
   kmsKeyName?: string;
 }

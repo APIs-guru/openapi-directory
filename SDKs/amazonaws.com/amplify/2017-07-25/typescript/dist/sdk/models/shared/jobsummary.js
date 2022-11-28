@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { JobTypeEnum } from "./jobtypeenum";
 import { JobStatusEnum } from "./jobstatusenum";
 // JobSummary
@@ -35,39 +35,39 @@ var JobSummary = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=commitId" }),
+        SpeakeasyMetadata({ data: "json, name=commitId" }),
         __metadata("design:type", String)
     ], JobSummary.prototype, "commitId", void 0);
     __decorate([
-        Metadata({ data: "json, name=commitMessage" }),
+        SpeakeasyMetadata({ data: "json, name=commitMessage" }),
         __metadata("design:type", String)
     ], JobSummary.prototype, "commitMessage", void 0);
     __decorate([
-        Metadata({ data: "json, name=commitTime" }),
+        SpeakeasyMetadata({ data: "json, name=commitTime" }),
         __metadata("design:type", Date)
     ], JobSummary.prototype, "commitTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=endTime" }),
+        SpeakeasyMetadata({ data: "json, name=endTime" }),
         __metadata("design:type", Date)
     ], JobSummary.prototype, "endTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=jobArn" }),
+        SpeakeasyMetadata({ data: "json, name=jobArn" }),
         __metadata("design:type", String)
     ], JobSummary.prototype, "jobArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=jobId" }),
+        SpeakeasyMetadata({ data: "json, name=jobId" }),
         __metadata("design:type", String)
     ], JobSummary.prototype, "jobId", void 0);
     __decorate([
-        Metadata({ data: "json, name=jobType" }),
+        SpeakeasyMetadata({ data: "json, name=jobType" }),
         __metadata("design:type", String)
     ], JobSummary.prototype, "jobType", void 0);
     __decorate([
-        Metadata({ data: "json, name=startTime" }),
+        SpeakeasyMetadata({ data: "json, name=startTime" }),
         __metadata("design:type", Date)
     ], JobSummary.prototype, "startTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=status" }),
+        SpeakeasyMetadata({ data: "json, name=status" }),
         __metadata("design:type", String)
     ], JobSummary.prototype, "status", void 0);
     return JobSummary;

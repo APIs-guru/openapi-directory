@@ -1,28 +1,29 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetHlsAudioSegmentLegacyAacPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=itemId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=itemId" })
   itemId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=segmentId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=segmentId" })
   segmentId: string;
 }
 
 
 export class GetHlsAudioSegmentLegacyAacRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetHlsAudioSegmentLegacyAacPathParams;
 }
 
 
 export class GetHlsAudioSegmentLegacyAacResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getHlsAudioSegmentLegacyAac200AudioWildcardBinaryString?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

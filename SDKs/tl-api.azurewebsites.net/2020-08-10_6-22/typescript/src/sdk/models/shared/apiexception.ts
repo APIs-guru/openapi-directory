@@ -1,40 +1,40 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Exception } from "./exception";
 import { ValidationError } from "./validationerror";
 
 
+
 export class ApiException extends SpeakeasyBase {
-  @Metadata({ data: "json, name=InnerException" })
+  @SpeakeasyMetadata({ data: "json, name=InnerException" })
   innerException?: any;
 
-  @Metadata({ data: "json, name=Message" })
+  @SpeakeasyMetadata({ data: "json, name=Message" })
   message?: string;
 
-  @Metadata({ data: "json, name=Source" })
+  @SpeakeasyMetadata({ data: "json, name=Source" })
   source?: string;
 
-  @Metadata({ data: "json, name=StackTrace" })
+  @SpeakeasyMetadata({ data: "json, name=StackTrace" })
   stackTrace?: string;
 
-  @Metadata({ data: "json, name=customError" })
+  @SpeakeasyMetadata({ data: "json, name=customError" })
   customError?: any;
 
-  @Metadata({ data: "json, name=errors", elemType: shared.ValidationError })
+  @SpeakeasyMetadata({ data: "json, name=errors", elemType: ValidationError })
   errors?: ValidationError[];
 
-  @Metadata({ data: "json, name=isCustomErrorObject" })
+  @SpeakeasyMetadata({ data: "json, name=isCustomErrorObject" })
   isCustomErrorObject?: boolean;
 
-  @Metadata({ data: "json, name=isModelValidatonError" })
+  @SpeakeasyMetadata({ data: "json, name=isModelValidatonError" })
   isModelValidatonError?: boolean;
 
-  @Metadata({ data: "json, name=referenceDocumentLink" })
+  @SpeakeasyMetadata({ data: "json, name=referenceDocumentLink" })
   referenceDocumentLink?: string;
 
-  @Metadata({ data: "json, name=referenceErrorCode" })
+  @SpeakeasyMetadata({ data: "json, name=referenceErrorCode" })
   referenceErrorCode?: string;
 
-  @Metadata({ data: "json, name=statusCode" })
+  @SpeakeasyMetadata({ data: "json, name=statusCode" })
   statusCode?: number;
 }

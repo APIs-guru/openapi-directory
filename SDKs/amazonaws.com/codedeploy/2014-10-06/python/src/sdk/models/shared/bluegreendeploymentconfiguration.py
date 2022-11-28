@@ -1,15 +1,18 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import deploymentreadyoption
-from . import greenfleetprovisioningoption
-from . import blueinstanceterminationoption
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class BlueGreenDeploymentConfiguration:
-    deployment_ready_option: Optional[deploymentreadyoption.DeploymentReadyOption] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'deploymentReadyOption' }})
-    green_fleet_provisioning_option: Optional[greenfleetprovisioningoption.GreenFleetProvisioningOption] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'greenFleetProvisioningOption' }})
-    terminate_blue_instances_on_deployment_success: Optional[blueinstanceterminationoption.BlueInstanceTerminationOption] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'terminateBlueInstancesOnDeploymentSuccess' }})
+    r"""BlueGreenDeploymentConfiguration
+    Information about blue/green deployment options for a deployment group.
+    """
+    
+    deployment_ready_option: Optional[DeploymentReadyOption] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('deploymentReadyOption') }})
+    green_fleet_provisioning_option: Optional[GreenFleetProvisioningOption] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('greenFleetProvisioningOption') }})
+    terminate_blue_instances_on_deployment_success: Optional[BlueInstanceTerminationOption] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('terminateBlueInstancesOnDeploymentSuccess') }})
     

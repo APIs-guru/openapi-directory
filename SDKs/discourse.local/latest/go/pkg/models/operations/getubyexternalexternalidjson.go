@@ -9,11 +9,6 @@ type GetUByExternalExternalIDJSONHeaders struct {
 	APIUsername string `header:"style=simple,explode=false,name=Api-Username"`
 }
 
-type GetUByExternalExternalIDJSONRequest struct {
-	PathParams GetUByExternalExternalIDJSONPathParams
-	Headers    GetUByExternalExternalIDJSONHeaders
-}
-
 type GetUByExternalExternalIDJSON200ApplicationJSONUserGroupUsers struct {
 	GroupID           *int64 `json:"group_id,omitempty"`
 	NotificationLevel *int64 `json:"notification_level,omitempty"`
@@ -175,6 +170,11 @@ type GetUByExternalExternalIDJSON200ApplicationJSONUser struct {
 type GetUByExternalExternalIDJSON200ApplicationJSON struct {
 	User       *GetUByExternalExternalIDJSON200ApplicationJSONUser `json:"user,omitempty"`
 	UserBadges []interface{}                                       `json:"user_badges,omitempty"`
+}
+
+type GetUByExternalExternalIDJSONRequest struct {
+	PathParams GetUByExternalExternalIDJSONPathParams
+	Headers    GetUByExternalExternalIDJSONHeaders
 }
 
 type GetUByExternalExternalIDJSONResponse struct {

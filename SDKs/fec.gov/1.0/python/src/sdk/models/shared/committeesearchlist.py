@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import committeesearch
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class CommitteeSearchList:
-    results: Optional[List[committeesearch.CommitteeSearch]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'results' }})
+    results: Optional[List[CommitteeSearch]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('results') }})
     

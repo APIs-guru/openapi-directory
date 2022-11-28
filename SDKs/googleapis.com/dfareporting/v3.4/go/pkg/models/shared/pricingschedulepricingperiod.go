@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// PricingSchedulePricingPeriod
+// Pricing Period
 type PricingSchedulePricingPeriod struct {
 	EndDate         *time.Time `json:"endDate,omitempty"`
 	PricingComment  *string    `json:"pricingComment,omitempty"`

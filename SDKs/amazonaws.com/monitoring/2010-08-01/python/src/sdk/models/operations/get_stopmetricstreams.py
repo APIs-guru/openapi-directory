@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 
 class GetStopMetricStreamsActionEnum(str, Enum):
     STOP_METRIC_STREAMS = "StopMetricStreams"
@@ -10,9 +14,9 @@ class GetStopMetricStreamsVersionEnum(str, Enum):
 
 @dataclass
 class GetStopMetricStreamsQueryParams:
-    action: GetStopMetricStreamsActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    names: List[str] = field(default=None, metadata={'query_param': { 'field_name': 'Names', 'style': 'form', 'explode': True }})
-    version: GetStopMetricStreamsVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: GetStopMetricStreamsActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    names: List[str] = field(metadata={'query_param': { 'field_name': 'Names', 'style': 'form', 'explode': True }})
+    version: GetStopMetricStreamsVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -28,13 +32,13 @@ class GetStopMetricStreamsHeaders:
 
 @dataclass
 class GetStopMetricStreamsRequest:
-    query_params: GetStopMetricStreamsQueryParams = field(default=None)
-    headers: GetStopMetricStreamsHeaders = field(default=None)
+    headers: GetStopMetricStreamsHeaders = field()
+    query_params: GetStopMetricStreamsQueryParams = field()
     
 
 @dataclass
 class GetStopMetricStreamsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

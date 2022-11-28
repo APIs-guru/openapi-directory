@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleChromeManagementV1DeviceHardwareCountReport
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Report for CountChromeDevicesPerHardwareSpecResponse, contains the count of devices with a unique hardware specification.
 **/
 export class GoogleChromeManagementV1DeviceHardwareCountReport extends SpeakeasyBase {
-  @Metadata({ data: "json, name=bucket" })
+  @SpeakeasyMetadata({ data: "json, name=bucket" })
   bucket?: string;
 
-  @Metadata({ data: "json, name=count" })
+  @SpeakeasyMetadata({ data: "json, name=count" })
   count?: string;
 }

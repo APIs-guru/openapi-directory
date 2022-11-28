@@ -1,5 +1,7 @@
 package shared
 
+// DescribeThingResponse
+// The output from the DescribeThing operation.
 type DescribeThingResponse struct {
 	Attributes       map[string]string `json:"attributes,omitempty"`
 	BillingGroupName *string           `json:"billingGroupName,omitempty"`

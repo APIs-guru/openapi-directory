@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ActiveDirectoryComputerAttribute } from "./activedirectorycomputerattribute";
+
 
 
 // ActiveDirectoryConfiguration
@@ -8,12 +8,12 @@ import { ActiveDirectoryComputerAttribute } from "./activedirectorycomputerattri
  * The configuration for a Microsoft Active Directory (Microsoft AD) studio resource.
 **/
 export class ActiveDirectoryConfiguration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=computerAttributes", elemType: shared.ActiveDirectoryComputerAttribute })
+  @SpeakeasyMetadata({ data: "json, name=computerAttributes", elemType: ActiveDirectoryComputerAttribute })
   computerAttributes?: ActiveDirectoryComputerAttribute[];
 
-  @Metadata({ data: "json, name=directoryId" })
+  @SpeakeasyMetadata({ data: "json, name=directoryId" })
   directoryId?: string;
 
-  @Metadata({ data: "json, name=organizationalUnitDistinguishedName" })
+  @SpeakeasyMetadata({ data: "json, name=organizationalUnitDistinguishedName" })
   organizationalUnitDistinguishedName?: string;
 }

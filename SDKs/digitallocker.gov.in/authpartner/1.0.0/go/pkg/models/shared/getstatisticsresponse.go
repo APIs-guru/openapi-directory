@@ -7,6 +7,8 @@ type GetStatisticsResponseMonthwiseRegistationsDetails2 struct {
 	Year  *int64 `json:"year,omitempty"`
 }
 
+// GetStatisticsResponseMonthwiseRegistations
+// List of last 12 months cumulative user registrations
 type GetStatisticsResponseMonthwiseRegistations struct {
 	Count    *int64                                              `json:"count,omitempty"`
 	Details2 *GetStatisticsResponseMonthwiseRegistationsDetails2 `json:"details2,omitempty"`
@@ -33,6 +35,8 @@ type GetStatisticsResponseYearwiseAuthenticDocumentsDetails2 struct {
 	Year  *int64 `json:"year,omitempty"`
 }
 
+// GetStatisticsResponseYearwiseAuthenticDocuments
+// List of cumulative year-wise counts of authentic documents in DigiLocker.
 type GetStatisticsResponseYearwiseAuthenticDocuments struct {
 	Count    *int64                                                   `json:"count,omitempty"`
 	Details  *GetStatisticsResponseYearwiseAuthenticDocumentsDetails  `json:"details,omitempty"`

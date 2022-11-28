@@ -13,6 +13,23 @@ const (
 	InstanceStateEnumShutdown         InstanceStateEnum = "SHUTDOWN"
 )
 
+// InstanceInput
+// A server.
+type InstanceInput struct {
+	HyperthreadingEnabled *bool                                            `json:"hyperthreadingEnabled,omitempty"`
+	Labels                map[string]string                                `json:"labels,omitempty"`
+	LogicalInterfaces     []GoogleCloudBaremetalsolutionV2LogicalInterface `json:"logicalInterfaces,omitempty"`
+	Luns                  []LunInput                                       `json:"luns,omitempty"`
+	MachineType           *string                                          `json:"machineType,omitempty"`
+	Name                  *string                                          `json:"name,omitempty"`
+	NetworkTemplate       *string                                          `json:"networkTemplate,omitempty"`
+	OsImage               *string                                          `json:"osImage,omitempty"`
+	Pod                   *string                                          `json:"pod,omitempty"`
+	Volumes               []VolumeInput                                    `json:"volumes,omitempty"`
+}
+
+// Instance
+// A server.
 type Instance struct {
 	CreateTime                      *string                                          `json:"createTime,omitempty"`
 	HyperthreadingEnabled           *bool                                            `json:"hyperthreadingEnabled,omitempty"`

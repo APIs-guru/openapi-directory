@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Tag
@@ -6,18 +7,18 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Tag
 **/
 export class Tag extends SpeakeasyBase {
-  @Metadata({ data: "json, name=$id" })
+  @SpeakeasyMetadata({ data: "json, name=$id" })
   dollarId: string;
 
-  @Metadata({ data: "json, name=command" })
+  @SpeakeasyMetadata({ data: "json, name=command" })
   command: string;
 
-  @Metadata({ data: "json, name=dateCreated" })
+  @SpeakeasyMetadata({ data: "json, name=dateCreated" })
   dateCreated: number;
 
-  @Metadata({ data: "json, name=functionId" })
+  @SpeakeasyMetadata({ data: "json, name=functionId" })
   functionId: string;
 
-  @Metadata({ data: "json, name=size" })
+  @SpeakeasyMetadata({ data: "json, name=size" })
   size: string;
 }

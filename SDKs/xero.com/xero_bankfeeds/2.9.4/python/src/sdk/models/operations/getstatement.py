@@ -5,35 +5,35 @@ from sdk.models import shared
 
 @dataclass
 class GetStatementPathParams:
-    statement_id: str = field(default=None, metadata={'path_param': { 'field_name': 'statementID', 'style': 'simple', 'explode': False }})
+    statement_id: str = field(metadata={'path_param': { 'field_name': 'statementID', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetStatementQueryParams:
-    statement_id: str = field(default=None, metadata={'query_param': { 'field_name': 'statementId', 'style': 'form', 'explode': True }})
+    statement_id: str = field(metadata={'query_param': { 'field_name': 'statementId', 'style': 'form', 'explode': True }})
     
 
 @dataclass
 class GetStatementHeaders:
-    xero_tenant_id: str = field(default=None, metadata={'header': { 'field_name': 'Xero-Tenant-Id', 'style': 'simple', 'explode': False }})
+    xero_tenant_id: str = field(metadata={'header': { 'field_name': 'Xero-Tenant-Id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetStatementSecurity:
-    o_auth2: shared.SchemeOAuth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    o_auth2: shared.SchemeOAuth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class GetStatementRequest:
-    path_params: GetStatementPathParams = field(default=None)
-    query_params: GetStatementQueryParams = field(default=None)
-    headers: GetStatementHeaders = field(default=None)
-    security: GetStatementSecurity = field(default=None)
+    headers: GetStatementHeaders = field()
+    path_params: GetStatementPathParams = field()
+    query_params: GetStatementQueryParams = field()
+    security: GetStatementSecurity = field()
     
 
 @dataclass
 class GetStatementResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     statement: Optional[shared.Statement] = field(default=None)
-    status_code: int = field(default=None)
     

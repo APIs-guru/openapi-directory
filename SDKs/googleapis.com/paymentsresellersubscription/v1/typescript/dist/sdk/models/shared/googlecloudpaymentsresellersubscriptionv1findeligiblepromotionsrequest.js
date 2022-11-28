@@ -22,22 +22,22 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var GoogleCloudPaymentsResellerSubscriptionV1FindEligiblePromotionsRequest = /** @class */ (function (_super) {
     __extends(GoogleCloudPaymentsResellerSubscriptionV1FindEligiblePromotionsRequest, _super);
     function GoogleCloudPaymentsResellerSubscriptionV1FindEligiblePromotionsRequest() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=filter" }),
+        SpeakeasyMetadata({ data: "json, name=filter" }),
         __metadata("design:type", String)
     ], GoogleCloudPaymentsResellerSubscriptionV1FindEligiblePromotionsRequest.prototype, "filter", void 0);
     __decorate([
-        Metadata({ data: "json, name=pageSize" }),
+        SpeakeasyMetadata({ data: "json, name=pageSize" }),
         __metadata("design:type", Number)
     ], GoogleCloudPaymentsResellerSubscriptionV1FindEligiblePromotionsRequest.prototype, "pageSize", void 0);
     __decorate([
-        Metadata({ data: "json, name=pageToken" }),
+        SpeakeasyMetadata({ data: "json, name=pageToken" }),
         __metadata("design:type", String)
     ], GoogleCloudPaymentsResellerSubscriptionV1FindEligiblePromotionsRequest.prototype, "pageToken", void 0);
     return GoogleCloudPaymentsResellerSubscriptionV1FindEligiblePromotionsRequest;

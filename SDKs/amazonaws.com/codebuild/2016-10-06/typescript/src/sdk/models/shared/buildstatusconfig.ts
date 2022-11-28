@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // BuildStatusConfig
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Contains information that defines how the CodeBuild build project reports the build status to the source provider. 
 **/
 export class BuildStatusConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=context" })
+  @SpeakeasyMetadata({ data: "json, name=context" })
   context?: string;
 
-  @Metadata({ data: "json, name=targetUrl" })
+  @SpeakeasyMetadata({ data: "json, name=targetUrl" })
   targetUrl?: string;
 }

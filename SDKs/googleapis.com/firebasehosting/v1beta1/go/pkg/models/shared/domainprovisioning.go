@@ -23,6 +23,8 @@ const (
 	DomainProvisioningDNSStatusEnumDNSExtraneousMatch   DomainProvisioningDNSStatusEnum = "DNS_EXTRANEOUS_MATCH"
 )
 
+// DomainProvisioning
+// The current certificate provisioning status information for a domain.
 type DomainProvisioning struct {
 	CertChallengeDiscoveredTxt []string                          `json:"certChallengeDiscoveredTxt,omitempty"`
 	CertChallengeDNS           *CertDNSChallenge                 `json:"certChallengeDns,omitempty"`

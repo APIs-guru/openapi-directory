@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // ExportStats
 /**
  * Progress information for an export.
@@ -33,15 +33,15 @@ var ExportStats = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=exportedArtifactCount" }),
+        SpeakeasyMetadata({ data: "json, name=exportedArtifactCount" }),
         __metadata("design:type", String)
     ], ExportStats.prototype, "exportedArtifactCount", void 0);
     __decorate([
-        Metadata({ data: "json, name=sizeInBytes" }),
+        SpeakeasyMetadata({ data: "json, name=sizeInBytes" }),
         __metadata("design:type", String)
     ], ExportStats.prototype, "sizeInBytes", void 0);
     __decorate([
-        Metadata({ data: "json, name=totalArtifactCount" }),
+        SpeakeasyMetadata({ data: "json, name=totalArtifactCount" }),
         __metadata("design:type", String)
     ], ExportStats.prototype, "totalArtifactCount", void 0);
     return ExportStats;

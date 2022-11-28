@@ -1,9 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class ListDeploymentInstancesQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=nextToken" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=nextToken" })
   nextToken?: string;
 }
 
@@ -13,81 +14,81 @@ export enum ListDeploymentInstancesXAmzTargetEnum {
 
 
 export class ListDeploymentInstancesHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Target" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Target" })
   xAmzTarget: ListDeploymentInstancesXAmzTargetEnum;
 }
 
 
 export class ListDeploymentInstancesRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: ListDeploymentInstancesQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: ListDeploymentInstancesHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: shared.ListDeploymentInstancesInput;
 }
 
 
 export class ListDeploymentInstancesResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   deploymentDoesNotExistException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   deploymentIdRequiredException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   deploymentNotStartedException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidComputePlatformException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidDeploymentIdException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidDeploymentInstanceTypeException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidInstanceStatusException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidInstanceTypeException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidNextTokenException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidTargetFilterNameException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   listDeploymentInstancesOutput?: shared.ListDeploymentInstancesOutput;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

@@ -1,38 +1,39 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class PutSetupV1ResourcesIdRecoverPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" })
   id: string;
 }
 
 
 export class PutSetupV1ResourcesIdRecoverQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=googleAuthReturnUrl" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=googleAuthReturnUrl" })
   googleAuthReturnUrl?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=outlookAuthReturnUrl" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=outlookAuthReturnUrl" })
   outlookAuthReturnUrl?: string;
 }
 
 
 export class PutSetupV1ResourcesIdRecoverRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: PutSetupV1ResourcesIdRecoverPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: PutSetupV1ResourcesIdRecoverQueryParams;
 }
 
 
 export class PutSetupV1ResourcesIdRecoverResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   resourceViewModel?: shared.ResourceViewModel;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

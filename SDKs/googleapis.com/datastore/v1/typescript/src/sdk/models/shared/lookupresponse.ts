@@ -1,8 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Key } from "./key";
 import { EntityResult } from "./entityresult";
-import { EntityResult } from "./entityresult";
+
 
 
 // LookupResponse
@@ -10,15 +9,15 @@ import { EntityResult } from "./entityresult";
  * The response for Datastore.Lookup.
 **/
 export class LookupResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=deferred", elemType: shared.Key })
+  @SpeakeasyMetadata({ data: "json, name=deferred", elemType: Key })
   deferred?: Key[];
 
-  @Metadata({ data: "json, name=found", elemType: shared.EntityResult })
+  @SpeakeasyMetadata({ data: "json, name=found", elemType: EntityResult })
   found?: EntityResult[];
 
-  @Metadata({ data: "json, name=missing", elemType: shared.EntityResult })
+  @SpeakeasyMetadata({ data: "json, name=missing", elemType: EntityResult })
   missing?: EntityResult[];
 
-  @Metadata({ data: "json, name=readTime" })
+  @SpeakeasyMetadata({ data: "json, name=readTime" })
   readTime?: string;
 }

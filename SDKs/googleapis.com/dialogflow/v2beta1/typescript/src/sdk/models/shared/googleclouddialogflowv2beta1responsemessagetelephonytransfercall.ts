@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudDialogflowV2beta1ResponseMessageTelephonyTransferCall
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Represents the signal that telles the client to transfer the phone call connected to the agent to a third-party endpoint.
 **/
 export class GoogleCloudDialogflowV2beta1ResponseMessageTelephonyTransferCall extends SpeakeasyBase {
-  @Metadata({ data: "json, name=phoneNumber" })
+  @SpeakeasyMetadata({ data: "json, name=phoneNumber" })
   phoneNumber?: string;
 
-  @Metadata({ data: "json, name=sipUri" })
+  @SpeakeasyMetadata({ data: "json, name=sipUri" })
   sipUri?: string;
 }

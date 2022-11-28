@@ -1,21 +1,22 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum ThresholdColorEnum {
-    ColorUnspecified = "COLOR_UNSPECIFIED"
-,    Yellow = "YELLOW"
-,    Red = "RED"
+    ColorUnspecified = "COLOR_UNSPECIFIED",
+    Yellow = "YELLOW",
+    Red = "RED"
 }
 
 export enum ThresholdDirectionEnum {
-    DirectionUnspecified = "DIRECTION_UNSPECIFIED"
-,    Above = "ABOVE"
-,    Below = "BELOW"
+    DirectionUnspecified = "DIRECTION_UNSPECIFIED",
+    Above = "ABOVE",
+    Below = "BELOW"
 }
 
 export enum ThresholdTargetAxisEnum {
-    TargetAxisUnspecified = "TARGET_AXIS_UNSPECIFIED"
-,    Y1 = "Y1"
-,    Y2 = "Y2"
+    TargetAxisUnspecified = "TARGET_AXIS_UNSPECIFIED",
+    Y1 = "Y1",
+    Y2 = "Y2"
 }
 
 
@@ -24,18 +25,18 @@ export enum ThresholdTargetAxisEnum {
  * Defines a threshold for categorizing time series values.
 **/
 export class Threshold extends SpeakeasyBase {
-  @Metadata({ data: "json, name=color" })
+  @SpeakeasyMetadata({ data: "json, name=color" })
   color?: ThresholdColorEnum;
 
-  @Metadata({ data: "json, name=direction" })
+  @SpeakeasyMetadata({ data: "json, name=direction" })
   direction?: ThresholdDirectionEnum;
 
-  @Metadata({ data: "json, name=label" })
+  @SpeakeasyMetadata({ data: "json, name=label" })
   label?: string;
 
-  @Metadata({ data: "json, name=targetAxis" })
+  @SpeakeasyMetadata({ data: "json, name=targetAxis" })
   targetAxis?: ThresholdTargetAxisEnum;
 
-  @Metadata({ data: "json, name=value" })
+  @SpeakeasyMetadata({ data: "json, name=value" })
   value?: number;
 }

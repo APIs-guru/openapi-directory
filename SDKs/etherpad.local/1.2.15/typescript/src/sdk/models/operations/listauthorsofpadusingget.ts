@@ -1,88 +1,89 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ListAuthorsOfPadUsingGetQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=padID" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=padID" })
   padId?: string;
 }
 
 
-export class ListAuthorsOfPadUsingGetRequest extends SpeakeasyBase {
-  @Metadata()
-  queryParams: ListAuthorsOfPadUsingGetQueryParams;
-}
-
-
 export class ListAuthorsOfPadUsingGet200ApplicationJsonData extends SpeakeasyBase {
-  @Metadata({ data: "json, name=authorIDs" })
+  @SpeakeasyMetadata({ data: "json, name=authorIDs" })
   authorIDs?: string[];
 }
 
 
 export class ListAuthorsOfPadUsingGet200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=code" })
+  @SpeakeasyMetadata({ data: "json, name=code" })
   code?: number;
 
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data?: ListAuthorsOfPadUsingGet200ApplicationJsonData;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class ListAuthorsOfPadUsingGet400ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=code" })
+  @SpeakeasyMetadata({ data: "json, name=code" })
   code?: number;
 
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data?: Map<string, any>;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class ListAuthorsOfPadUsingGet401ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=code" })
+  @SpeakeasyMetadata({ data: "json, name=code" })
   code?: number;
 
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data?: Map<string, any>;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class ListAuthorsOfPadUsingGet500ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=code" })
+  @SpeakeasyMetadata({ data: "json, name=code" })
   code?: number;
 
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data?: Map<string, any>;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
+export class ListAuthorsOfPadUsingGetRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  queryParams: ListAuthorsOfPadUsingGetQueryParams;
+}
+
+
 export class ListAuthorsOfPadUsingGetResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   listAuthorsOfPadUsingGet200ApplicationJsonObject?: ListAuthorsOfPadUsingGet200ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   listAuthorsOfPadUsingGet400ApplicationJsonObject?: ListAuthorsOfPadUsingGet400ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   listAuthorsOfPadUsingGet401ApplicationJsonObject?: ListAuthorsOfPadUsingGet401ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   listAuthorsOfPadUsingGet500ApplicationJsonObject?: ListAuthorsOfPadUsingGet500ApplicationJson;
 }

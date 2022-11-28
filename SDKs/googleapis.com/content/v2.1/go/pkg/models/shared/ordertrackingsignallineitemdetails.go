@@ -1,5 +1,7 @@
 package shared
 
+// OrderTrackingSignalLineItemDetails
+// The line items of the order.
 type OrderTrackingSignalLineItemDetails struct {
 	Brand              *string `json:"brand,omitempty"`
 	Gtin               *string `json:"gtin,omitempty"`

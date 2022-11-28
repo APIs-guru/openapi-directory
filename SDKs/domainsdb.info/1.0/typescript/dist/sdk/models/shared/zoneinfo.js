@@ -22,30 +22,30 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var ZoneInfo = /** @class */ (function (_super) {
     __extends(ZoneInfo, _super);
     function ZoneInfo() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=description" }),
+        SpeakeasyMetadata({ data: "json, name=description" }),
         __metadata("design:type", Array)
     ], ZoneInfo.prototype, "description", void 0);
     __decorate([
-        Metadata({ data: "json, name=in_bundles" }),
+        SpeakeasyMetadata({ data: "json, name=in_bundles" }),
         __metadata("design:type", Array)
     ], ZoneInfo.prototype, "inBundles", void 0);
     __decorate([
-        Metadata({ data: "json, name=includes" }),
+        SpeakeasyMetadata({ data: "json, name=includes" }),
         __metadata("design:type", Array)
     ], ZoneInfo.prototype, "includes", void 0);
     __decorate([
-        Metadata({ data: "json, name=type" }),
+        SpeakeasyMetadata({ data: "json, name=type" }),
         __metadata("design:type", String)
     ], ZoneInfo.prototype, "type", void 0);
     __decorate([
-        Metadata({ data: "json, name=zone" }),
+        SpeakeasyMetadata({ data: "json, name=zone" }),
         __metadata("design:type", String)
     ], ZoneInfo.prototype, "zone", void 0);
     return ZoneInfo;

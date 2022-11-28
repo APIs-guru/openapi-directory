@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Route } from "./route";
+
 
 
 // NetworkFirewallBlackHoleRouteDetectedViolation
@@ -8,15 +8,15 @@ import { Route } from "./route";
  * Violation detail for an internet gateway route with an inactive state in the customer subnet route table or Network Firewall subnet route table.
 **/
 export class NetworkFirewallBlackHoleRouteDetectedViolation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=RouteTableId" })
+  @SpeakeasyMetadata({ data: "json, name=RouteTableId" })
   routeTableId?: string;
 
-  @Metadata({ data: "json, name=ViolatingRoutes", elemType: shared.Route })
+  @SpeakeasyMetadata({ data: "json, name=ViolatingRoutes", elemType: Route })
   violatingRoutes?: Route[];
 
-  @Metadata({ data: "json, name=ViolationTarget" })
+  @SpeakeasyMetadata({ data: "json, name=ViolationTarget" })
   violationTarget?: string;
 
-  @Metadata({ data: "json, name=VpcId" })
+  @SpeakeasyMetadata({ data: "json, name=VpcId" })
   vpcId?: string;
 }

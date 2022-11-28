@@ -1,13 +1,17 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import portalresource
-from . import projectresource
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class Resource:
-    portal: Optional[portalresource.PortalResource] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'portal' }})
-    project: Optional[projectresource.ProjectResource] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'project' }})
+    r"""Resource
+    Contains an IoT SiteWise Monitor resource ID for a portal or project.
+    """
+    
+    portal: Optional[PortalResource] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('portal') }})
+    project: Optional[ProjectResource] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('project') }})
     

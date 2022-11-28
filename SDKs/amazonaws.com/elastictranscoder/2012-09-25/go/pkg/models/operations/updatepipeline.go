@@ -18,12 +18,16 @@ type UpdatePipelineHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// UpdatePipelineRequestBodyContentConfig
+// The <code>PipelineOutputConfig</code> structure.
 type UpdatePipelineRequestBodyContentConfig struct {
 	Bucket       *string             `json:"Bucket,omitempty"`
 	Permissions  []shared.Permission `json:"Permissions,omitempty"`
 	StorageClass *string             `json:"StorageClass,omitempty"`
 }
 
+// UpdatePipelineRequestBodyNotifications
+// <p>The Amazon Simple Notification Service (Amazon SNS) topic or topics to notify in order to report job status.</p> <important> <p>To receive notifications, you must also subscribe to the new topic in the Amazon SNS console.</p> </important>
 type UpdatePipelineRequestBodyNotifications struct {
 	Completed   *string `json:"Completed,omitempty"`
 	Error       *string `json:"Error,omitempty"`
@@ -31,6 +35,8 @@ type UpdatePipelineRequestBodyNotifications struct {
 	Warning     *string `json:"Warning,omitempty"`
 }
 
+// UpdatePipelineRequestBodyThumbnailConfig
+// The <code>PipelineOutputConfig</code> structure.
 type UpdatePipelineRequestBodyThumbnailConfig struct {
 	Bucket       *string             `json:"Bucket,omitempty"`
 	Permissions  []shared.Permission `json:"Permissions,omitempty"`

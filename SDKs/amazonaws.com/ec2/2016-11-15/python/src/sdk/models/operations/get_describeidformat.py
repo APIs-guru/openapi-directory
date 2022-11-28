@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetDescribeIDFormatActionEnum(str, Enum):
     DESCRIBE_ID_FORMAT = "DescribeIdFormat"
@@ -10,9 +14,9 @@ class GetDescribeIDFormatVersionEnum(str, Enum):
 
 @dataclass
 class GetDescribeIDFormatQueryParams:
-    action: GetDescribeIDFormatActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetDescribeIDFormatActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: GetDescribeIDFormatVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     resource: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'Resource', 'style': 'form', 'explode': True }})
-    version: GetDescribeIDFormatVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -28,13 +32,13 @@ class GetDescribeIDFormatHeaders:
 
 @dataclass
 class GetDescribeIDFormatRequest:
-    query_params: GetDescribeIDFormatQueryParams = field(default=None)
-    headers: GetDescribeIDFormatHeaders = field(default=None)
+    headers: GetDescribeIDFormatHeaders = field()
+    query_params: GetDescribeIDFormatQueryParams = field()
     
 
 @dataclass
 class GetDescribeIDFormatResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

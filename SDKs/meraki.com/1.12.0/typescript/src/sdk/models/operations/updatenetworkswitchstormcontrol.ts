@@ -1,40 +1,41 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class UpdateNetworkSwitchStormControlPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=networkId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=networkId" })
   networkId: string;
 }
 
 
 export class UpdateNetworkSwitchStormControlRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=broadcastThreshold" })
+  @SpeakeasyMetadata({ data: "json, name=broadcastThreshold" })
   broadcastThreshold?: number;
 
-  @Metadata({ data: "json, name=multicastThreshold" })
+  @SpeakeasyMetadata({ data: "json, name=multicastThreshold" })
   multicastThreshold?: number;
 
-  @Metadata({ data: "json, name=unknownUnicastThreshold" })
+  @SpeakeasyMetadata({ data: "json, name=unknownUnicastThreshold" })
   unknownUnicastThreshold?: number;
 }
 
 
 export class UpdateNetworkSwitchStormControlRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: UpdateNetworkSwitchStormControlPathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request?: UpdateNetworkSwitchStormControlRequestBody;
 }
 
 
 export class UpdateNetworkSwitchStormControlResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   updateNetworkSwitchStormControl200ApplicationJsonObject?: Map<string, any>;
 }

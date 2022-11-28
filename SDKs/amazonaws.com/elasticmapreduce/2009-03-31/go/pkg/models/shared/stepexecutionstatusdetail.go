@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// StepExecutionStatusDetail
+// The execution state of a step.
 type StepExecutionStatusDetail struct {
 	CreationDateTime      time.Time              `json:"CreationDateTime"`
 	EndDateTime           *time.Time             `json:"EndDateTime,omitempty"`

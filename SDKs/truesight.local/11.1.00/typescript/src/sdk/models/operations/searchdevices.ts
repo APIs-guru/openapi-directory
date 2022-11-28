@@ -1,40 +1,41 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class SearchDevicesQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=applicationId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=applicationId" })
   applicationId?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=groupId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=groupId" })
   groupId?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=limit" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=limit" })
   limit?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=page" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page" })
   page?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=searchTerms" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=searchTerms" })
   searchTerms: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=serviceId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=serviceId" })
   serviceId?: string;
 }
 
 
 export class SearchDevicesRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: SearchDevicesQueryParams;
 }
 
 
 export class SearchDevicesResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

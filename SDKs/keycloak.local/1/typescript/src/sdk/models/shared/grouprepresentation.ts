@@ -1,30 +1,29 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
-import { GroupRepresentation } from "./grouprepresentation";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GroupRepresentation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=access" })
+  @SpeakeasyMetadata({ data: "json, name=access" })
   access?: Map<string, any>;
 
-  @Metadata({ data: "json, name=attributes" })
+  @SpeakeasyMetadata({ data: "json, name=attributes" })
   attributes?: Map<string, any>;
 
-  @Metadata({ data: "json, name=clientRoles" })
+  @SpeakeasyMetadata({ data: "json, name=clientRoles" })
   clientRoles?: Map<string, any>;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=path" })
+  @SpeakeasyMetadata({ data: "json, name=path" })
   path?: string;
 
-  @Metadata({ data: "json, name=realmRoles" })
+  @SpeakeasyMetadata({ data: "json, name=realmRoles" })
   realmRoles?: string[];
 
-  @Metadata({ data: "json, name=subGroups", elemType: shared.GroupRepresentation })
+  @SpeakeasyMetadata({ data: "json, name=subGroups", elemType: GroupRepresentation })
   subGroups?: GroupRepresentation[];
 }

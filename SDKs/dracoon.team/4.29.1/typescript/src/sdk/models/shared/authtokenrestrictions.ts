@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AuthTokenRestrictions
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Auth token restrictions
 **/
 export class AuthTokenRestrictions extends SpeakeasyBase {
-  @Metadata({ data: "json, name=accessTokenValidity" })
+  @SpeakeasyMetadata({ data: "json, name=accessTokenValidity" })
   accessTokenValidity?: number;
 
-  @Metadata({ data: "json, name=refreshTokenValidity" })
+  @SpeakeasyMetadata({ data: "json, name=refreshTokenValidity" })
   refreshTokenValidity?: number;
 
-  @Metadata({ data: "json, name=restrictionEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=restrictionEnabled" })
   restrictionEnabled?: boolean;
 }

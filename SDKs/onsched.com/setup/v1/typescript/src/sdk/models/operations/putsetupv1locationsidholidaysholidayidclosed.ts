@@ -1,32 +1,33 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class PutSetupV1LocationsIdHolidaysHolidayIdClosedPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=closed" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=closed" })
   closed: boolean;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=holidayId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=holidayId" })
   holidayId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" })
   id: string;
 }
 
 
 export class PutSetupV1LocationsIdHolidaysHolidayIdClosedRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: PutSetupV1LocationsIdHolidaysHolidayIdClosedPathParams;
 }
 
 
 export class PutSetupV1LocationsIdHolidaysHolidayIdClosedResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   locationViewModel?: shared.LocationViewModel;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

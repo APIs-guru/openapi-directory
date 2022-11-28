@@ -1,23 +1,24 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class CreateDestinationDefinitionRequest extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request?: shared.DestinationDefinitionCreate;
 }
 
 
 export class CreateDestinationDefinitionResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   destinationDefinitionRead?: shared.DestinationDefinitionRead;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidInputExceptionInfo?: shared.InvalidInputExceptionInfo;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

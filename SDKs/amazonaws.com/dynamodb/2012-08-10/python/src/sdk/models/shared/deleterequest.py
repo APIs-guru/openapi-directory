@@ -1,10 +1,15 @@
 from dataclasses import dataclass, field
 from dataclasses_json import dataclass_json
-from . import attributevalue
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class DeleteRequest:
-    key: dict[str, attributevalue.AttributeValue] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Key' }})
+    r"""DeleteRequest
+    Represents a request to perform a <code>DeleteItem</code> operation on an item.
+    """
+    
+    key: dict[str, AttributeValue] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Key') }})
     

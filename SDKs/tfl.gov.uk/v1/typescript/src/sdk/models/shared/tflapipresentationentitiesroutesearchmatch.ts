@@ -1,41 +1,41 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TflApiPresentationEntitiesLineRouteSection } from "./tflapipresentationentitieslineroutesection";
 import { TflApiPresentationEntitiesMatchedRouteSections } from "./tflapipresentationentitiesmatchedroutesections";
 import { TflApiPresentationEntitiesMatchedStop } from "./tflapipresentationentitiesmatchedstop";
 
 
+
 export class TflApiPresentationEntitiesRouteSearchMatch extends SpeakeasyBase {
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=lat" })
+  @SpeakeasyMetadata({ data: "json, name=lat" })
   lat?: number;
 
-  @Metadata({ data: "json, name=lineId" })
+  @SpeakeasyMetadata({ data: "json, name=lineId" })
   lineId?: string;
 
-  @Metadata({ data: "json, name=lineName" })
+  @SpeakeasyMetadata({ data: "json, name=lineName" })
   lineName?: string;
 
-  @Metadata({ data: "json, name=lineRouteSection", elemType: shared.TflApiPresentationEntitiesLineRouteSection })
+  @SpeakeasyMetadata({ data: "json, name=lineRouteSection", elemType: TflApiPresentationEntitiesLineRouteSection })
   lineRouteSection?: TflApiPresentationEntitiesLineRouteSection[];
 
-  @Metadata({ data: "json, name=lon" })
+  @SpeakeasyMetadata({ data: "json, name=lon" })
   lon?: number;
 
-  @Metadata({ data: "json, name=matchedRouteSections", elemType: shared.TflApiPresentationEntitiesMatchedRouteSections })
+  @SpeakeasyMetadata({ data: "json, name=matchedRouteSections", elemType: TflApiPresentationEntitiesMatchedRouteSections })
   matchedRouteSections?: TflApiPresentationEntitiesMatchedRouteSections[];
 
-  @Metadata({ data: "json, name=matchedStops", elemType: shared.TflApiPresentationEntitiesMatchedStop })
+  @SpeakeasyMetadata({ data: "json, name=matchedStops", elemType: TflApiPresentationEntitiesMatchedStop })
   matchedStops?: TflApiPresentationEntitiesMatchedStop[];
 
-  @Metadata({ data: "json, name=mode" })
+  @SpeakeasyMetadata({ data: "json, name=mode" })
   mode?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=url" })
+  @SpeakeasyMetadata({ data: "json, name=url" })
   url?: string;
 }

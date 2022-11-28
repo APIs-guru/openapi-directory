@@ -1,44 +1,45 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class PutAbusesAbuseIdPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=abuseId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=abuseId" })
   abuseId: number;
 }
 
 
 export class PutAbusesAbuseIdRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=moderationComment" })
+  @SpeakeasyMetadata({ data: "json, name=moderationComment" })
   moderationComment?: string;
 
-  @Metadata({ data: "json, name=state" })
+  @SpeakeasyMetadata({ data: "json, name=state" })
   state?: number;
 }
 
 
 export class PutAbusesAbuseIdSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   oAuth2: shared.SchemeOAuth2;
 }
 
 
 export class PutAbusesAbuseIdRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: PutAbusesAbuseIdPathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request?: PutAbusesAbuseIdRequestBody;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: PutAbusesAbuseIdSecurity;
 }
 
 
 export class PutAbusesAbuseIdResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

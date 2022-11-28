@@ -1,21 +1,21 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GoalEventDetailsEventConditions extends SpeakeasyBase {
-  @Metadata({ data: "json, name=comparisonType" })
+  @SpeakeasyMetadata({ data: "json, name=comparisonType" })
   comparisonType?: string;
 
-  @Metadata({ data: "json, name=comparisonValue" })
+  @SpeakeasyMetadata({ data: "json, name=comparisonValue" })
   comparisonValue?: string;
 
-  @Metadata({ data: "json, name=expression" })
+  @SpeakeasyMetadata({ data: "json, name=expression" })
   expression?: string;
 
-  @Metadata({ data: "json, name=matchType" })
+  @SpeakeasyMetadata({ data: "json, name=matchType" })
   matchType?: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: string;
 }
 
@@ -25,10 +25,10 @@ export class GoalEventDetailsEventConditions extends SpeakeasyBase {
  * Details for the goal of the type EVENT.
 **/
 export class GoalEventDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=eventConditions", elemType: shared.GoalEventDetailsEventConditions })
+  @SpeakeasyMetadata({ data: "json, name=eventConditions", elemType: GoalEventDetailsEventConditions })
   eventConditions?: GoalEventDetailsEventConditions[];
 
-  @Metadata({ data: "json, name=useEventValue" })
+  @SpeakeasyMetadata({ data: "json, name=useEventValue" })
   useEventValue?: boolean;
 }
 
@@ -38,22 +38,22 @@ export class GoalEventDetails extends SpeakeasyBase {
  * Parent link for a goal. Points to the view (profile) to which this goal belongs.
 **/
 export class GoalParentLink extends SpeakeasyBase {
-  @Metadata({ data: "json, name=href" })
+  @SpeakeasyMetadata({ data: "json, name=href" })
   href?: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: string;
 }
 
 
 export class GoalUrlDestinationDetailsSteps extends SpeakeasyBase {
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=number" })
+  @SpeakeasyMetadata({ data: "json, name=number" })
   number?: number;
 
-  @Metadata({ data: "json, name=url" })
+  @SpeakeasyMetadata({ data: "json, name=url" })
   url?: string;
 }
 
@@ -63,19 +63,19 @@ export class GoalUrlDestinationDetailsSteps extends SpeakeasyBase {
  * Details for the goal of the type URL_DESTINATION.
 **/
 export class GoalUrlDestinationDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=caseSensitive" })
+  @SpeakeasyMetadata({ data: "json, name=caseSensitive" })
   caseSensitive?: boolean;
 
-  @Metadata({ data: "json, name=firstStepRequired" })
+  @SpeakeasyMetadata({ data: "json, name=firstStepRequired" })
   firstStepRequired?: boolean;
 
-  @Metadata({ data: "json, name=matchType" })
+  @SpeakeasyMetadata({ data: "json, name=matchType" })
   matchType?: string;
 
-  @Metadata({ data: "json, name=steps", elemType: shared.GoalUrlDestinationDetailsSteps })
+  @SpeakeasyMetadata({ data: "json, name=steps", elemType: GoalUrlDestinationDetailsSteps })
   steps?: GoalUrlDestinationDetailsSteps[];
 
-  @Metadata({ data: "json, name=url" })
+  @SpeakeasyMetadata({ data: "json, name=url" })
   url?: string;
 }
 
@@ -85,10 +85,10 @@ export class GoalUrlDestinationDetails extends SpeakeasyBase {
  * Details for the goal of the type VISIT_NUM_PAGES.
 **/
 export class GoalVisitNumPagesDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=comparisonType" })
+  @SpeakeasyMetadata({ data: "json, name=comparisonType" })
   comparisonType?: string;
 
-  @Metadata({ data: "json, name=comparisonValue" })
+  @SpeakeasyMetadata({ data: "json, name=comparisonValue" })
   comparisonValue?: string;
 }
 
@@ -98,10 +98,10 @@ export class GoalVisitNumPagesDetails extends SpeakeasyBase {
  * Details for the goal of the type VISIT_TIME_ON_SITE.
 **/
 export class GoalVisitTimeOnSiteDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=comparisonType" })
+  @SpeakeasyMetadata({ data: "json, name=comparisonType" })
   comparisonType?: string;
 
-  @Metadata({ data: "json, name=comparisonValue" })
+  @SpeakeasyMetadata({ data: "json, name=comparisonValue" })
   comparisonValue?: string;
 }
 
@@ -111,57 +111,57 @@ export class GoalVisitTimeOnSiteDetails extends SpeakeasyBase {
  * JSON template for Analytics goal resource.
 **/
 export class Goal extends SpeakeasyBase {
-  @Metadata({ data: "json, name=accountId" })
+  @SpeakeasyMetadata({ data: "json, name=accountId" })
   accountId?: string;
 
-  @Metadata({ data: "json, name=active" })
+  @SpeakeasyMetadata({ data: "json, name=active" })
   active?: boolean;
 
-  @Metadata({ data: "json, name=created" })
+  @SpeakeasyMetadata({ data: "json, name=created" })
   created?: Date;
 
-  @Metadata({ data: "json, name=eventDetails" })
+  @SpeakeasyMetadata({ data: "json, name=eventDetails" })
   eventDetails?: GoalEventDetails;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=internalWebPropertyId" })
+  @SpeakeasyMetadata({ data: "json, name=internalWebPropertyId" })
   internalWebPropertyId?: string;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=parentLink" })
+  @SpeakeasyMetadata({ data: "json, name=parentLink" })
   parentLink?: GoalParentLink;
 
-  @Metadata({ data: "json, name=profileId" })
+  @SpeakeasyMetadata({ data: "json, name=profileId" })
   profileId?: string;
 
-  @Metadata({ data: "json, name=selfLink" })
+  @SpeakeasyMetadata({ data: "json, name=selfLink" })
   selfLink?: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: string;
 
-  @Metadata({ data: "json, name=updated" })
+  @SpeakeasyMetadata({ data: "json, name=updated" })
   updated?: Date;
 
-  @Metadata({ data: "json, name=urlDestinationDetails" })
+  @SpeakeasyMetadata({ data: "json, name=urlDestinationDetails" })
   urlDestinationDetails?: GoalUrlDestinationDetails;
 
-  @Metadata({ data: "json, name=value" })
+  @SpeakeasyMetadata({ data: "json, name=value" })
   value?: number;
 
-  @Metadata({ data: "json, name=visitNumPagesDetails" })
+  @SpeakeasyMetadata({ data: "json, name=visitNumPagesDetails" })
   visitNumPagesDetails?: GoalVisitNumPagesDetails;
 
-  @Metadata({ data: "json, name=visitTimeOnSiteDetails" })
+  @SpeakeasyMetadata({ data: "json, name=visitTimeOnSiteDetails" })
   visitTimeOnSiteDetails?: GoalVisitTimeOnSiteDetails;
 
-  @Metadata({ data: "json, name=webPropertyId" })
+  @SpeakeasyMetadata({ data: "json, name=webPropertyId" })
   webPropertyId?: string;
 }

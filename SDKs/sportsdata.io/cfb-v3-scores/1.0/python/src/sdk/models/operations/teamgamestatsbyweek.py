@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from typing import Any,List,Optional
+from enum import Enum
 
 class TeamGameStatsByWeekFormatEnum(str, Enum):
     XML = "XML"
@@ -8,19 +9,19 @@ class TeamGameStatsByWeekFormatEnum(str, Enum):
 
 @dataclass
 class TeamGameStatsByWeekPathParams:
-    format: TeamGameStatsByWeekFormatEnum = field(default=None, metadata={'path_param': { 'field_name': 'format', 'style': 'simple', 'explode': False }})
-    season: str = field(default=None, metadata={'path_param': { 'field_name': 'season', 'style': 'simple', 'explode': False }})
-    week: str = field(default=None, metadata={'path_param': { 'field_name': 'week', 'style': 'simple', 'explode': False }})
+    format: TeamGameStatsByWeekFormatEnum = field(metadata={'path_param': { 'field_name': 'format', 'style': 'simple', 'explode': False }})
+    season: str = field(metadata={'path_param': { 'field_name': 'season', 'style': 'simple', 'explode': False }})
+    week: str = field(metadata={'path_param': { 'field_name': 'week', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class TeamGameStatsByWeekRequest:
-    path_params: TeamGameStatsByWeekPathParams = field(default=None)
+    path_params: TeamGameStatsByWeekPathParams = field()
     
 
 @dataclass
 class TeamGameStatsByWeekResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     team_games: Optional[List[Any]] = field(default=None)
     

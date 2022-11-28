@@ -1,5 +1,7 @@
 package shared
 
+// ListJobsResponse
+// ListJobsResponse is a list of Jobs resources.
 type ListJobsResponse struct {
 	APIVersion  *string   `json:"apiVersion,omitempty"`
 	Items       []Job     `json:"items,omitempty"`

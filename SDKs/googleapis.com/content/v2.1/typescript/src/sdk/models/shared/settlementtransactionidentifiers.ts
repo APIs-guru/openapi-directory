@@ -1,22 +1,23 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class SettlementTransactionIdentifiers extends SpeakeasyBase {
-  @Metadata({ data: "json, name=adjustmentId" })
+  @SpeakeasyMetadata({ data: "json, name=adjustmentId" })
   adjustmentId?: string;
 
-  @Metadata({ data: "json, name=merchantOrderId" })
+  @SpeakeasyMetadata({ data: "json, name=merchantOrderId" })
   merchantOrderId?: string;
 
-  @Metadata({ data: "json, name=orderItemId" })
+  @SpeakeasyMetadata({ data: "json, name=orderItemId" })
   orderItemId?: string;
 
-  @Metadata({ data: "json, name=settlementEntryId" })
+  @SpeakeasyMetadata({ data: "json, name=settlementEntryId" })
   settlementEntryId?: string;
 
-  @Metadata({ data: "json, name=shipmentIds" })
+  @SpeakeasyMetadata({ data: "json, name=shipmentIds" })
   shipmentIds?: string[];
 
-  @Metadata({ data: "json, name=transactionId" })
+  @SpeakeasyMetadata({ data: "json, name=transactionId" })
   transactionId?: string;
 }

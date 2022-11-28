@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ResourceValue } from "./resourcevalue";
 import { StaticValue } from "./staticvalue";
+
 
 
 // RemediationParameterValue
@@ -8,9 +9,9 @@ import { StaticValue } from "./staticvalue";
  * The value is either a dynamic (resource) value or a static value. You must select either a dynamic value or a static value.
 **/
 export class RemediationParameterValue extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ResourceValue" })
+  @SpeakeasyMetadata({ data: "json, name=ResourceValue" })
   resourceValue?: ResourceValue;
 
-  @Metadata({ data: "json, name=StaticValue" })
+  @SpeakeasyMetadata({ data: "json, name=StaticValue" })
   staticValue?: StaticValue;
 }

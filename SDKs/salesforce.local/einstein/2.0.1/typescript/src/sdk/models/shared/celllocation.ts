@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class CellLocation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=colIndex" })
+  @SpeakeasyMetadata({ data: "json, name=colIndex" })
   colIndex?: number;
 
-  @Metadata({ data: "json, name=rowIndex" })
+  @SpeakeasyMetadata({ data: "json, name=rowIndex" })
   rowIndex?: number;
 }

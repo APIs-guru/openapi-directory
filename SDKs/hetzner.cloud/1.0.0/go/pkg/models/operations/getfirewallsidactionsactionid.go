@@ -5,10 +5,8 @@ type GetFirewallsIDActionsActionIDPathParams struct {
 	ID       int64 `pathParam:"style=simple,explode=false,name=id"`
 }
 
-type GetFirewallsIDActionsActionIDRequest struct {
-	PathParams GetFirewallsIDActionsActionIDPathParams
-}
-
+// GetFirewallsIDActionsActionIDActionResponseActionError
+// Error message for the Action if error occurred, otherwise null
 type GetFirewallsIDActionsActionIDActionResponseActionError struct {
 	Code    string `json:"code"`
 	Message string `json:"message"`
@@ -40,6 +38,10 @@ type GetFirewallsIDActionsActionIDActionResponseAction struct {
 
 type GetFirewallsIDActionsActionIDActionResponse struct {
 	Action GetFirewallsIDActionsActionIDActionResponseAction `json:"action"`
+}
+
+type GetFirewallsIDActionsActionIDRequest struct {
+	PathParams GetFirewallsIDActionsActionIDPathParams
 }
 
 type GetFirewallsIDActionsActionIDResponse struct {

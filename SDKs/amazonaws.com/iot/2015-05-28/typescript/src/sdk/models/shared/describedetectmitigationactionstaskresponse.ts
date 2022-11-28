@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DetectMitigationActionsTaskSummary } from "./detectmitigationactionstasksummary";
 
 
+
 export class DescribeDetectMitigationActionsTaskResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=taskSummary" })
+  @SpeakeasyMetadata({ data: "json, name=taskSummary" })
   taskSummary?: DetectMitigationActionsTaskSummary;
 }

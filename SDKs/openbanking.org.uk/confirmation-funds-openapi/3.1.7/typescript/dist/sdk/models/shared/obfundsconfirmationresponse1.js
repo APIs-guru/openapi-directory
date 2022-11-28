@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Links } from "./links";
 import { Meta } from "./meta";
 // ObFundsConfirmationResponse1DataInstructedAmount
@@ -35,11 +35,11 @@ var ObFundsConfirmationResponse1DataInstructedAmount = /** @class */ (function (
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Amount" }),
+        SpeakeasyMetadata({ data: "json, name=Amount" }),
         __metadata("design:type", String)
     ], ObFundsConfirmationResponse1DataInstructedAmount.prototype, "amount", void 0);
     __decorate([
-        Metadata({ data: "json, name=Currency" }),
+        SpeakeasyMetadata({ data: "json, name=Currency" }),
         __metadata("design:type", String)
     ], ObFundsConfirmationResponse1DataInstructedAmount.prototype, "currency", void 0);
     return ObFundsConfirmationResponse1DataInstructedAmount;
@@ -51,27 +51,27 @@ var ObFundsConfirmationResponse1Data = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=ConsentId" }),
+        SpeakeasyMetadata({ data: "json, name=ConsentId" }),
         __metadata("design:type", String)
     ], ObFundsConfirmationResponse1Data.prototype, "consentId", void 0);
     __decorate([
-        Metadata({ data: "json, name=CreationDateTime" }),
+        SpeakeasyMetadata({ data: "json, name=CreationDateTime" }),
         __metadata("design:type", Date)
     ], ObFundsConfirmationResponse1Data.prototype, "creationDateTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=FundsAvailable" }),
+        SpeakeasyMetadata({ data: "json, name=FundsAvailable" }),
         __metadata("design:type", Boolean)
     ], ObFundsConfirmationResponse1Data.prototype, "fundsAvailable", void 0);
     __decorate([
-        Metadata({ data: "json, name=FundsConfirmationId" }),
+        SpeakeasyMetadata({ data: "json, name=FundsConfirmationId" }),
         __metadata("design:type", String)
     ], ObFundsConfirmationResponse1Data.prototype, "fundsConfirmationId", void 0);
     __decorate([
-        Metadata({ data: "json, name=InstructedAmount" }),
+        SpeakeasyMetadata({ data: "json, name=InstructedAmount" }),
         __metadata("design:type", ObFundsConfirmationResponse1DataInstructedAmount)
     ], ObFundsConfirmationResponse1Data.prototype, "instructedAmount", void 0);
     __decorate([
-        Metadata({ data: "json, name=Reference" }),
+        SpeakeasyMetadata({ data: "json, name=Reference" }),
         __metadata("design:type", String)
     ], ObFundsConfirmationResponse1Data.prototype, "reference", void 0);
     return ObFundsConfirmationResponse1Data;
@@ -83,15 +83,15 @@ var ObFundsConfirmationResponse1 = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Data" }),
+        SpeakeasyMetadata({ data: "json, name=Data" }),
         __metadata("design:type", ObFundsConfirmationResponse1Data)
     ], ObFundsConfirmationResponse1.prototype, "data", void 0);
     __decorate([
-        Metadata({ data: "json, name=Links" }),
+        SpeakeasyMetadata({ data: "json, name=Links" }),
         __metadata("design:type", Links)
     ], ObFundsConfirmationResponse1.prototype, "links", void 0);
     __decorate([
-        Metadata({ data: "json, name=Meta" }),
+        SpeakeasyMetadata({ data: "json, name=Meta" }),
         __metadata("design:type", Meta)
     ], ObFundsConfirmationResponse1.prototype, "meta", void 0);
     return ObFundsConfirmationResponse1;

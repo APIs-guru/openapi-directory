@@ -14,13 +14,13 @@ class AppPackagesGetQueryParams:
 
 @dataclass
 class AppPackagesGetRequest:
-    query_params: AppPackagesGetQueryParams = field(default=None)
+    query_params: AppPackagesGetQueryParams = field()
     
 
 @dataclass
 class AppPackagesGetResponse:
+    content_type: str = field()
+    status_code: int = field()
     app_pkg_infos: Optional[List[shared.AppPkgInfo]] = field(default=None)
-    content_type: str = field(default=None)
     problem_details: Optional[shared.ProblemDetails] = field(default=None)
-    status_code: int = field(default=None)
     

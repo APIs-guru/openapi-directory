@@ -10,13 +10,13 @@ class ConfigConfigGetHeaders:
 
 @dataclass
 class ConfigConfigGetRequest:
-    headers: ConfigConfigGetHeaders = field(default=None)
+    headers: ConfigConfigGetHeaders = field()
     
 
 @dataclass
 class ConfigConfigGetResponse:
+    content_type: str = field()
+    status_code: int = field()
     config: Optional[shared.Config] = field(default=None)
-    content_type: str = field(default=None)
     http_validation_error: Optional[shared.HTTPValidationError] = field(default=None)
-    status_code: int = field(default=None)
     

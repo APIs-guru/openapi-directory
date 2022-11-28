@@ -1,4 +1,18 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
+
+
+// GoogleCloudIntegrationsV1alphaSuspensionApprovalExpirationInput
+/** 
+ * Expiration configs for the approval request.
+**/
+export class GoogleCloudIntegrationsV1alphaSuspensionApprovalExpirationInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=liftWhenExpired" })
+  liftWhenExpired?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=remindTime" })
+  remindTime?: string;
+}
 
 
 // GoogleCloudIntegrationsV1alphaSuspensionApprovalExpiration
@@ -6,12 +20,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Expiration configs for the approval request.
 **/
 export class GoogleCloudIntegrationsV1alphaSuspensionApprovalExpiration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=expireTime" })
+  @SpeakeasyMetadata({ data: "json, name=expireTime" })
   expireTime?: string;
 
-  @Metadata({ data: "json, name=liftWhenExpired" })
+  @SpeakeasyMetadata({ data: "json, name=liftWhenExpired" })
   liftWhenExpired?: boolean;
 
-  @Metadata({ data: "json, name=remindTime" })
+  @SpeakeasyMetadata({ data: "json, name=remindTime" })
   remindTime?: string;
 }

@@ -31,7 +31,7 @@ type NetworksecurityProjectsLocationsAuthorizationPoliciesCreateSecurity struct 
 type NetworksecurityProjectsLocationsAuthorizationPoliciesCreateRequest struct {
 	PathParams  NetworksecurityProjectsLocationsAuthorizationPoliciesCreatePathParams
 	QueryParams NetworksecurityProjectsLocationsAuthorizationPoliciesCreateQueryParams
-	Request     *shared.AuthorizationPolicy `request:"mediaType=application/json"`
+	Request     *shared.AuthorizationPolicyInput `request:"mediaType=application/json"`
 	Security    NetworksecurityProjectsLocationsAuthorizationPoliciesCreateSecurity
 }
 

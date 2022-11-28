@@ -1,0 +1,13 @@
+from dataclasses import dataclass, field
+from . import *
+
+
+@dataclass
+class SynonymOptionsStatus:
+    r"""SynonymOptionsStatus
+    The synonym options configured for this search domain and the current status of those options.
+    """
+    
+    options: str = field()
+    status: OptionStatus = field()
+    

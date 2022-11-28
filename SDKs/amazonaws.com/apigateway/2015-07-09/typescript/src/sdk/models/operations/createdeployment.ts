@@ -1,45 +1,46 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class CreateDeploymentPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=restapi_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=restapi_id" })
   restapiId: string;
 }
 
 
 export class CreateDeploymentHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
 export enum CreateDeploymentRequestBodyCacheClusterSizeEnum {
-    Zero5 = "0.5"
-,    One6 = "1.6"
-,    Six1 = "6.1"
-,    Thirteen5 = "13.5"
-,    TwentyEight4 = "28.4"
-,    FiftyEight2 = "58.2"
-,    OneHundredAndEighteen = "118"
-,    TwoHundredAndThirtySeven = "237"
+    Zero5 = "0.5",
+    One6 = "1.6",
+    Six1 = "6.1",
+    Thirteen5 = "13.5",
+    TwentyEight4 = "28.4",
+    FiftyEight2 = "58.2",
+    OneHundredAndEighteen = "118",
+    TwoHundredAndThirtySeven = "237"
 }
 
 
@@ -48,84 +49,84 @@ export enum CreateDeploymentRequestBodyCacheClusterSizeEnum {
  * The input configuration for a canary deployment.
 **/
 export class CreateDeploymentRequestBodyCanarySettings extends SpeakeasyBase {
-  @Metadata({ data: "json, name=percentTraffic" })
+  @SpeakeasyMetadata({ data: "json, name=percentTraffic" })
   percentTraffic?: number;
 
-  @Metadata({ data: "json, name=stageVariableOverrides" })
+  @SpeakeasyMetadata({ data: "json, name=stageVariableOverrides" })
   stageVariableOverrides?: Map<string, string>;
 
-  @Metadata({ data: "json, name=useStageCache" })
+  @SpeakeasyMetadata({ data: "json, name=useStageCache" })
   useStageCache?: boolean;
 }
 
 
 export class CreateDeploymentRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=cacheClusterEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=cacheClusterEnabled" })
   cacheClusterEnabled?: boolean;
 
-  @Metadata({ data: "json, name=cacheClusterSize" })
+  @SpeakeasyMetadata({ data: "json, name=cacheClusterSize" })
   cacheClusterSize?: CreateDeploymentRequestBodyCacheClusterSizeEnum;
 
-  @Metadata({ data: "json, name=canarySettings" })
+  @SpeakeasyMetadata({ data: "json, name=canarySettings" })
   canarySettings?: CreateDeploymentRequestBodyCanarySettings;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=stageDescription" })
+  @SpeakeasyMetadata({ data: "json, name=stageDescription" })
   stageDescription?: string;
 
-  @Metadata({ data: "json, name=stageName" })
+  @SpeakeasyMetadata({ data: "json, name=stageName" })
   stageName?: string;
 
-  @Metadata({ data: "json, name=tracingEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=tracingEnabled" })
   tracingEnabled?: boolean;
 
-  @Metadata({ data: "json, name=variables" })
+  @SpeakeasyMetadata({ data: "json, name=variables" })
   variables?: Map<string, string>;
 }
 
 
 export class CreateDeploymentRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: CreateDeploymentPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: CreateDeploymentHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: CreateDeploymentRequestBody;
 }
 
 
 export class CreateDeploymentResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   badRequestException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   conflictException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   deployment?: shared.Deployment;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   limitExceededException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   notFoundException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   serviceUnavailableException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   tooManyRequestsException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   unauthorizedException?: any;
 }

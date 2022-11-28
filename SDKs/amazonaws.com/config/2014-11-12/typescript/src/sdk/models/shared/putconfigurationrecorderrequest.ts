@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ConfigurationRecorder } from "./configurationrecorder";
+
 
 
 // PutConfigurationRecorderRequest
@@ -7,6 +8,6 @@ import { ConfigurationRecorder } from "./configurationrecorder";
  * The input for the <a>PutConfigurationRecorder</a> action.
 **/
 export class PutConfigurationRecorderRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ConfigurationRecorder" })
+  @SpeakeasyMetadata({ data: "json, name=ConfigurationRecorder" })
   configurationRecorder: ConfigurationRecorder;
 }

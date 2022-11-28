@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { IntegrationTypeEnum } from "./integrationtypeenum";
+
 
 
 // Product
@@ -7,30 +8,30 @@ import { IntegrationTypeEnum } from "./integrationtypeenum";
  * Contains details about a product.
 **/
 export class Product extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ActivationUrl" })
+  @SpeakeasyMetadata({ data: "json, name=ActivationUrl" })
   activationUrl?: string;
 
-  @Metadata({ data: "json, name=Categories" })
+  @SpeakeasyMetadata({ data: "json, name=Categories" })
   categories?: string[];
 
-  @Metadata({ data: "json, name=CompanyName" })
+  @SpeakeasyMetadata({ data: "json, name=CompanyName" })
   companyName?: string;
 
-  @Metadata({ data: "json, name=Description" })
+  @SpeakeasyMetadata({ data: "json, name=Description" })
   description?: string;
 
-  @Metadata({ data: "json, name=IntegrationTypes" })
+  @SpeakeasyMetadata({ data: "json, name=IntegrationTypes" })
   integrationTypes?: IntegrationTypeEnum[];
 
-  @Metadata({ data: "json, name=MarketplaceUrl" })
+  @SpeakeasyMetadata({ data: "json, name=MarketplaceUrl" })
   marketplaceUrl?: string;
 
-  @Metadata({ data: "json, name=ProductArn" })
+  @SpeakeasyMetadata({ data: "json, name=ProductArn" })
   productArn: string;
 
-  @Metadata({ data: "json, name=ProductName" })
+  @SpeakeasyMetadata({ data: "json, name=ProductName" })
   productName?: string;
 
-  @Metadata({ data: "json, name=ProductSubscriptionResourcePolicy" })
+  @SpeakeasyMetadata({ data: "json, name=ProductSubscriptionResourcePolicy" })
   productSubscriptionResourcePolicy?: string;
 }

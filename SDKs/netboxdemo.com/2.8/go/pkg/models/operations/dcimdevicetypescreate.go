@@ -5,7 +5,7 @@ import (
 )
 
 type DcimDeviceTypesCreateRequest struct {
-	Request shared.WritableDeviceType `request:"mediaType=application/json"`
+	Request shared.WritableDeviceTypeInput `request:"mediaType=application/json"`
 }
 
 type DcimDeviceTypesCreateResponse struct {

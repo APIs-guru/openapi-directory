@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AutoScalingGroupConfiguration } from "./autoscalinggroupconfiguration";
 import { UtilizationMetric } from "./utilizationmetric";
+
 
 
 // AutoScalingGroupRecommendationOption
@@ -9,15 +9,15 @@ import { UtilizationMetric } from "./utilizationmetric";
  * Describes a recommendation option for an Auto Scaling group.
 **/
 export class AutoScalingGroupRecommendationOption extends SpeakeasyBase {
-  @Metadata({ data: "json, name=configuration" })
+  @SpeakeasyMetadata({ data: "json, name=configuration" })
   configuration?: AutoScalingGroupConfiguration;
 
-  @Metadata({ data: "json, name=performanceRisk" })
+  @SpeakeasyMetadata({ data: "json, name=performanceRisk" })
   performanceRisk?: number;
 
-  @Metadata({ data: "json, name=projectedUtilizationMetrics", elemType: shared.UtilizationMetric })
+  @SpeakeasyMetadata({ data: "json, name=projectedUtilizationMetrics", elemType: UtilizationMetric })
   projectedUtilizationMetrics?: UtilizationMetric[];
 
-  @Metadata({ data: "json, name=rank" })
+  @SpeakeasyMetadata({ data: "json, name=rank" })
   rank?: number;
 }

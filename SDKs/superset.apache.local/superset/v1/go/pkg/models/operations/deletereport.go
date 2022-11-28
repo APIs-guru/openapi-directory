@@ -12,11 +12,6 @@ type DeleteReportSecurity struct {
 	Jwt shared.SchemeJwt `security:"scheme,type=http,subtype=bearer"`
 }
 
-type DeleteReportRequest struct {
-	QueryParams DeleteReportQueryParams
-	Security    DeleteReportSecurity
-}
-
 type DeleteReport200ApplicationJSON struct {
 	Message *string `json:"message,omitempty"`
 }
@@ -39,6 +34,11 @@ type DeleteReport422ApplicationJSON struct {
 
 type DeleteReport500ApplicationJSON struct {
 	Message *string `json:"message,omitempty"`
+}
+
+type DeleteReportRequest struct {
+	QueryParams DeleteReportQueryParams
+	Security    DeleteReportSecurity
 }
 
 type DeleteReportResponse struct {

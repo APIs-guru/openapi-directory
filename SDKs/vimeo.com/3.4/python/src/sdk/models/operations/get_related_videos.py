@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class GetRelatedVideosPathParams:
-    video_id: float = field(default=None, metadata={'path_param': { 'field_name': 'video_id', 'style': 'simple', 'explode': False }})
+    video_id: float = field(metadata={'path_param': { 'field_name': 'video_id', 'style': 'simple', 'explode': False }})
     
 class GetRelatedVideosFilterEnum(str, Enum):
     RELATED = "related"
@@ -20,14 +21,14 @@ class GetRelatedVideosQueryParams:
 
 @dataclass
 class GetRelatedVideosRequest:
-    path_params: GetRelatedVideosPathParams = field(default=None)
-    query_params: GetRelatedVideosQueryParams = field(default=None)
+    path_params: GetRelatedVideosPathParams = field()
+    query_params: GetRelatedVideosQueryParams = field()
     
 
 @dataclass
 class GetRelatedVideosResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     legacy_error: Optional[shared.LegacyError] = field(default=None)
     videos: Optional[List[shared.Video]] = field(default=None)
     

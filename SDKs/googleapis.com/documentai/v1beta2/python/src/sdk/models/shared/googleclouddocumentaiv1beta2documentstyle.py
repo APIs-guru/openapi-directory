@@ -1,21 +1,23 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import googletypecolor
-from . import googletypecolor
-from . import googleclouddocumentaiv1beta2documentstylefontsize
-from . import googleclouddocumentaiv1beta2documenttextanchor
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class GoogleCloudDocumentaiV1beta2DocumentStyle:
-    background_color: Optional[googletypecolor.GoogleTypeColor] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'backgroundColor' }})
-    color: Optional[googletypecolor.GoogleTypeColor] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'color' }})
-    font_family: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'fontFamily' }})
-    font_size: Optional[googleclouddocumentaiv1beta2documentstylefontsize.GoogleCloudDocumentaiV1beta2DocumentStyleFontSize] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'fontSize' }})
-    font_weight: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'fontWeight' }})
-    text_anchor: Optional[googleclouddocumentaiv1beta2documenttextanchor.GoogleCloudDocumentaiV1beta2DocumentTextAnchor] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'textAnchor' }})
-    text_decoration: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'textDecoration' }})
-    text_style: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'textStyle' }})
+    r"""GoogleCloudDocumentaiV1beta2DocumentStyle
+    Annotation for common text style attributes. This adheres to CSS conventions as much as possible.
+    """
+    
+    background_color: Optional[GoogleTypeColor] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('backgroundColor') }})
+    color: Optional[GoogleTypeColor] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('color') }})
+    font_family: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('fontFamily') }})
+    font_size: Optional[GoogleCloudDocumentaiV1beta2DocumentStyleFontSize] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('fontSize') }})
+    font_weight: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('fontWeight') }})
+    text_anchor: Optional[GoogleCloudDocumentaiV1beta2DocumentTextAnchor] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('textAnchor') }})
+    text_decoration: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('textDecoration') }})
+    text_style: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('textStyle') }})
     

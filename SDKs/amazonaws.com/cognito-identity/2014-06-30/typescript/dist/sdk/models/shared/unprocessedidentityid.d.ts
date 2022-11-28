@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ErrorCodeEnum } from "./errorcodeenum";
 /**
  * An array of UnprocessedIdentityId objects, each of which contains an ErrorCode and IdentityId.

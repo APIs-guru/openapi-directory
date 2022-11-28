@@ -1,16 +1,21 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import regionname_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class CopySnapshotRequest:
-    restore_date: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'restoreDate' }})
-    source_region: regionname_enum.RegionNameEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'sourceRegion' }})
-    source_resource_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'sourceResourceName' }})
-    source_snapshot_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'sourceSnapshotName' }})
-    target_snapshot_name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'targetSnapshotName' }})
-    use_latest_restorable_auto_snapshot: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'useLatestRestorableAutoSnapshot' }})
+    source_region: RegionNameEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('sourceRegion') }})
+    target_snapshot_name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('targetSnapshotName') }})
+    restore_date: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('restoreDate') }})
+    source_resource_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('sourceResourceName') }})
+    source_snapshot_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('sourceSnapshotName') }})
+    use_latest_restorable_auto_snapshot: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('useLatestRestorableAutoSnapshot') }})
     

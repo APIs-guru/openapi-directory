@@ -11,11 +11,11 @@ class MonthlyActiveUsersForLast30DaysQueryParams:
 
 @dataclass
 class MonthlyActiveUsersForLast30DaysRequest:
-    query_params: MonthlyActiveUsersForLast30DaysQueryParams = field(default=None)
+    query_params: MonthlyActiveUsersForLast30DaysQueryParams = field()
     
 
 @dataclass
 class MonthlyActiveUsersForLast30DaysResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DeploymentmanagerTypeProvidersListTypesPathParams:
-    project: str = field(default=None, metadata={'path_param': { 'field_name': 'project', 'style': 'simple', 'explode': False }})
-    type_provider: str = field(default=None, metadata={'path_param': { 'field_name': 'typeProvider', 'style': 'simple', 'explode': False }})
+    project: str = field(metadata={'path_param': { 'field_name': 'project', 'style': 'simple', 'explode': False }})
+    type_provider: str = field(metadata={'path_param': { 'field_name': 'typeProvider', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -30,26 +31,26 @@ class DeploymentmanagerTypeProvidersListTypesQueryParams:
 
 @dataclass
 class DeploymentmanagerTypeProvidersListTypesSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DeploymentmanagerTypeProvidersListTypesSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DeploymentmanagerTypeProvidersListTypesSecurityOption3:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DeploymentmanagerTypeProvidersListTypesSecurityOption4:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -62,14 +63,14 @@ class DeploymentmanagerTypeProvidersListTypesSecurity:
 
 @dataclass
 class DeploymentmanagerTypeProvidersListTypesRequest:
-    path_params: DeploymentmanagerTypeProvidersListTypesPathParams = field(default=None)
-    query_params: DeploymentmanagerTypeProvidersListTypesQueryParams = field(default=None)
-    security: DeploymentmanagerTypeProvidersListTypesSecurity = field(default=None)
+    path_params: DeploymentmanagerTypeProvidersListTypesPathParams = field()
+    query_params: DeploymentmanagerTypeProvidersListTypesQueryParams = field()
+    security: DeploymentmanagerTypeProvidersListTypesSecurity = field()
     
 
 @dataclass
 class DeploymentmanagerTypeProvidersListTypesResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     type_providers_list_types_response: Optional[shared.TypeProvidersListTypesResponse] = field(default=None)
     

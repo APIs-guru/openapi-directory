@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // OffsetPosition
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Offset Position.
 **/
 export class OffsetPosition extends SpeakeasyBase {
-  @Metadata({ data: "json, name=left" })
+  @SpeakeasyMetadata({ data: "json, name=left" })
   left?: number;
 
-  @Metadata({ data: "json, name=top" })
+  @SpeakeasyMetadata({ data: "json, name=top" })
   top?: number;
 }

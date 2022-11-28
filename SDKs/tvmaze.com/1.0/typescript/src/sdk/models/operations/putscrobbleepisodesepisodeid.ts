@@ -1,29 +1,30 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class PutScrobbleEpisodesEpisodeIdPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=episode_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=episode_id" })
   episodeId: number;
 }
 
 
 export class PutScrobbleEpisodesEpisodeIdRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: PutScrobbleEpisodesEpisodeIdPathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
-  request?: shared.MarkedEpisode;
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request?: shared.MarkedEpisodeInput;
 }
 
 
 export class PutScrobbleEpisodesEpisodeIdResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   markedEpisode?: shared.MarkedEpisode;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

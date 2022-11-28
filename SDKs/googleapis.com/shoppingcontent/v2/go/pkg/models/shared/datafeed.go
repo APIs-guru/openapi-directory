@@ -1,5 +1,7 @@
 package shared
 
+// Datafeed
+// Datafeed configuration data.
 type Datafeed struct {
 	AttributeLanguage    *string                `json:"attributeLanguage,omitempty"`
 	ContentLanguage      *string                `json:"contentLanguage,omitempty"`

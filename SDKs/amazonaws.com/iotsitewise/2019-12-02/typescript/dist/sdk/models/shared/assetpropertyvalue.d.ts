@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { QualityEnum } from "./qualityenum";
 import { TimeInNanos } from "./timeinnanos";
 import { Variant } from "./variant";

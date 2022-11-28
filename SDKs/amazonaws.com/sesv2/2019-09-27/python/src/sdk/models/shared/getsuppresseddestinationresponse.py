@@ -1,10 +1,15 @@
 from dataclasses import dataclass, field
 from dataclasses_json import dataclass_json
-from . import suppresseddestination
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class GetSuppressedDestinationResponse:
-    suppressed_destination: suppresseddestination.SuppressedDestination = field(default=None, metadata={'dataclasses_json': { 'field_name': 'SuppressedDestination' }})
+    r"""GetSuppressedDestinationResponse
+    Information about the suppressed email address.
+    """
+    
+    suppressed_destination: SuppressedDestination = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('SuppressedDestination') }})
     

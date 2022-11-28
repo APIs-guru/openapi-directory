@@ -1,4 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AddBandingRequest } from "./addbandingrequest";
 import { AddChartRequest } from "./addchartrequest";
 import { AddConditionalFormatRuleRequest } from "./addconditionalformatrulerequest";
@@ -66,203 +66,204 @@ import { UpdateSlicerSpecRequest } from "./updateslicerspecrequest";
 import { UpdateSpreadsheetPropertiesRequest } from "./updatespreadsheetpropertiesrequest";
 
 
+
 // Request
 /** 
  * A single kind of update to apply to a spreadsheet.
 **/
 export class Request extends SpeakeasyBase {
-  @Metadata({ data: "json, name=addBanding" })
+  @SpeakeasyMetadata({ data: "json, name=addBanding" })
   addBanding?: AddBandingRequest;
 
-  @Metadata({ data: "json, name=addChart" })
+  @SpeakeasyMetadata({ data: "json, name=addChart" })
   addChart?: AddChartRequest;
 
-  @Metadata({ data: "json, name=addConditionalFormatRule" })
+  @SpeakeasyMetadata({ data: "json, name=addConditionalFormatRule" })
   addConditionalFormatRule?: AddConditionalFormatRuleRequest;
 
-  @Metadata({ data: "json, name=addDataSource" })
+  @SpeakeasyMetadata({ data: "json, name=addDataSource" })
   addDataSource?: AddDataSourceRequest;
 
-  @Metadata({ data: "json, name=addDimensionGroup" })
+  @SpeakeasyMetadata({ data: "json, name=addDimensionGroup" })
   addDimensionGroup?: AddDimensionGroupRequest;
 
-  @Metadata({ data: "json, name=addFilterView" })
+  @SpeakeasyMetadata({ data: "json, name=addFilterView" })
   addFilterView?: AddFilterViewRequest;
 
-  @Metadata({ data: "json, name=addNamedRange" })
+  @SpeakeasyMetadata({ data: "json, name=addNamedRange" })
   addNamedRange?: AddNamedRangeRequest;
 
-  @Metadata({ data: "json, name=addProtectedRange" })
+  @SpeakeasyMetadata({ data: "json, name=addProtectedRange" })
   addProtectedRange?: AddProtectedRangeRequest;
 
-  @Metadata({ data: "json, name=addSheet" })
+  @SpeakeasyMetadata({ data: "json, name=addSheet" })
   addSheet?: AddSheetRequest;
 
-  @Metadata({ data: "json, name=addSlicer" })
+  @SpeakeasyMetadata({ data: "json, name=addSlicer" })
   addSlicer?: AddSlicerRequest;
 
-  @Metadata({ data: "json, name=appendCells" })
+  @SpeakeasyMetadata({ data: "json, name=appendCells" })
   appendCells?: AppendCellsRequest;
 
-  @Metadata({ data: "json, name=appendDimension" })
+  @SpeakeasyMetadata({ data: "json, name=appendDimension" })
   appendDimension?: AppendDimensionRequest;
 
-  @Metadata({ data: "json, name=autoFill" })
+  @SpeakeasyMetadata({ data: "json, name=autoFill" })
   autoFill?: AutoFillRequest;
 
-  @Metadata({ data: "json, name=autoResizeDimensions" })
+  @SpeakeasyMetadata({ data: "json, name=autoResizeDimensions" })
   autoResizeDimensions?: AutoResizeDimensionsRequest;
 
-  @Metadata({ data: "json, name=clearBasicFilter" })
+  @SpeakeasyMetadata({ data: "json, name=clearBasicFilter" })
   clearBasicFilter?: ClearBasicFilterRequest;
 
-  @Metadata({ data: "json, name=copyPaste" })
+  @SpeakeasyMetadata({ data: "json, name=copyPaste" })
   copyPaste?: CopyPasteRequest;
 
-  @Metadata({ data: "json, name=createDeveloperMetadata" })
+  @SpeakeasyMetadata({ data: "json, name=createDeveloperMetadata" })
   createDeveloperMetadata?: CreateDeveloperMetadataRequest;
 
-  @Metadata({ data: "json, name=cutPaste" })
+  @SpeakeasyMetadata({ data: "json, name=cutPaste" })
   cutPaste?: CutPasteRequest;
 
-  @Metadata({ data: "json, name=deleteBanding" })
+  @SpeakeasyMetadata({ data: "json, name=deleteBanding" })
   deleteBanding?: DeleteBandingRequest;
 
-  @Metadata({ data: "json, name=deleteConditionalFormatRule" })
+  @SpeakeasyMetadata({ data: "json, name=deleteConditionalFormatRule" })
   deleteConditionalFormatRule?: DeleteConditionalFormatRuleRequest;
 
-  @Metadata({ data: "json, name=deleteDataSource" })
+  @SpeakeasyMetadata({ data: "json, name=deleteDataSource" })
   deleteDataSource?: DeleteDataSourceRequest;
 
-  @Metadata({ data: "json, name=deleteDeveloperMetadata" })
+  @SpeakeasyMetadata({ data: "json, name=deleteDeveloperMetadata" })
   deleteDeveloperMetadata?: DeleteDeveloperMetadataRequest;
 
-  @Metadata({ data: "json, name=deleteDimension" })
+  @SpeakeasyMetadata({ data: "json, name=deleteDimension" })
   deleteDimension?: DeleteDimensionRequest;
 
-  @Metadata({ data: "json, name=deleteDimensionGroup" })
+  @SpeakeasyMetadata({ data: "json, name=deleteDimensionGroup" })
   deleteDimensionGroup?: DeleteDimensionGroupRequest;
 
-  @Metadata({ data: "json, name=deleteDuplicates" })
+  @SpeakeasyMetadata({ data: "json, name=deleteDuplicates" })
   deleteDuplicates?: DeleteDuplicatesRequest;
 
-  @Metadata({ data: "json, name=deleteEmbeddedObject" })
+  @SpeakeasyMetadata({ data: "json, name=deleteEmbeddedObject" })
   deleteEmbeddedObject?: DeleteEmbeddedObjectRequest;
 
-  @Metadata({ data: "json, name=deleteFilterView" })
+  @SpeakeasyMetadata({ data: "json, name=deleteFilterView" })
   deleteFilterView?: DeleteFilterViewRequest;
 
-  @Metadata({ data: "json, name=deleteNamedRange" })
+  @SpeakeasyMetadata({ data: "json, name=deleteNamedRange" })
   deleteNamedRange?: DeleteNamedRangeRequest;
 
-  @Metadata({ data: "json, name=deleteProtectedRange" })
+  @SpeakeasyMetadata({ data: "json, name=deleteProtectedRange" })
   deleteProtectedRange?: DeleteProtectedRangeRequest;
 
-  @Metadata({ data: "json, name=deleteRange" })
+  @SpeakeasyMetadata({ data: "json, name=deleteRange" })
   deleteRange?: DeleteRangeRequest;
 
-  @Metadata({ data: "json, name=deleteSheet" })
+  @SpeakeasyMetadata({ data: "json, name=deleteSheet" })
   deleteSheet?: DeleteSheetRequest;
 
-  @Metadata({ data: "json, name=duplicateFilterView" })
+  @SpeakeasyMetadata({ data: "json, name=duplicateFilterView" })
   duplicateFilterView?: DuplicateFilterViewRequest;
 
-  @Metadata({ data: "json, name=duplicateSheet" })
+  @SpeakeasyMetadata({ data: "json, name=duplicateSheet" })
   duplicateSheet?: DuplicateSheetRequest;
 
-  @Metadata({ data: "json, name=findReplace" })
+  @SpeakeasyMetadata({ data: "json, name=findReplace" })
   findReplace?: FindReplaceRequest;
 
-  @Metadata({ data: "json, name=insertDimension" })
+  @SpeakeasyMetadata({ data: "json, name=insertDimension" })
   insertDimension?: InsertDimensionRequest;
 
-  @Metadata({ data: "json, name=insertRange" })
+  @SpeakeasyMetadata({ data: "json, name=insertRange" })
   insertRange?: InsertRangeRequest;
 
-  @Metadata({ data: "json, name=mergeCells" })
+  @SpeakeasyMetadata({ data: "json, name=mergeCells" })
   mergeCells?: MergeCellsRequest;
 
-  @Metadata({ data: "json, name=moveDimension" })
+  @SpeakeasyMetadata({ data: "json, name=moveDimension" })
   moveDimension?: MoveDimensionRequest;
 
-  @Metadata({ data: "json, name=pasteData" })
+  @SpeakeasyMetadata({ data: "json, name=pasteData" })
   pasteData?: PasteDataRequest;
 
-  @Metadata({ data: "json, name=randomizeRange" })
+  @SpeakeasyMetadata({ data: "json, name=randomizeRange" })
   randomizeRange?: RandomizeRangeRequest;
 
-  @Metadata({ data: "json, name=refreshDataSource" })
+  @SpeakeasyMetadata({ data: "json, name=refreshDataSource" })
   refreshDataSource?: RefreshDataSourceRequest;
 
-  @Metadata({ data: "json, name=repeatCell" })
+  @SpeakeasyMetadata({ data: "json, name=repeatCell" })
   repeatCell?: RepeatCellRequest;
 
-  @Metadata({ data: "json, name=setBasicFilter" })
+  @SpeakeasyMetadata({ data: "json, name=setBasicFilter" })
   setBasicFilter?: SetBasicFilterRequest;
 
-  @Metadata({ data: "json, name=setDataValidation" })
+  @SpeakeasyMetadata({ data: "json, name=setDataValidation" })
   setDataValidation?: SetDataValidationRequest;
 
-  @Metadata({ data: "json, name=sortRange" })
+  @SpeakeasyMetadata({ data: "json, name=sortRange" })
   sortRange?: SortRangeRequest;
 
-  @Metadata({ data: "json, name=textToColumns" })
+  @SpeakeasyMetadata({ data: "json, name=textToColumns" })
   textToColumns?: TextToColumnsRequest;
 
-  @Metadata({ data: "json, name=trimWhitespace" })
+  @SpeakeasyMetadata({ data: "json, name=trimWhitespace" })
   trimWhitespace?: TrimWhitespaceRequest;
 
-  @Metadata({ data: "json, name=unmergeCells" })
+  @SpeakeasyMetadata({ data: "json, name=unmergeCells" })
   unmergeCells?: UnmergeCellsRequest;
 
-  @Metadata({ data: "json, name=updateBanding" })
+  @SpeakeasyMetadata({ data: "json, name=updateBanding" })
   updateBanding?: UpdateBandingRequest;
 
-  @Metadata({ data: "json, name=updateBorders" })
+  @SpeakeasyMetadata({ data: "json, name=updateBorders" })
   updateBorders?: UpdateBordersRequest;
 
-  @Metadata({ data: "json, name=updateCells" })
+  @SpeakeasyMetadata({ data: "json, name=updateCells" })
   updateCells?: UpdateCellsRequest;
 
-  @Metadata({ data: "json, name=updateChartSpec" })
+  @SpeakeasyMetadata({ data: "json, name=updateChartSpec" })
   updateChartSpec?: UpdateChartSpecRequest;
 
-  @Metadata({ data: "json, name=updateConditionalFormatRule" })
+  @SpeakeasyMetadata({ data: "json, name=updateConditionalFormatRule" })
   updateConditionalFormatRule?: UpdateConditionalFormatRuleRequest;
 
-  @Metadata({ data: "json, name=updateDataSource" })
+  @SpeakeasyMetadata({ data: "json, name=updateDataSource" })
   updateDataSource?: UpdateDataSourceRequest;
 
-  @Metadata({ data: "json, name=updateDeveloperMetadata" })
+  @SpeakeasyMetadata({ data: "json, name=updateDeveloperMetadata" })
   updateDeveloperMetadata?: UpdateDeveloperMetadataRequest;
 
-  @Metadata({ data: "json, name=updateDimensionGroup" })
+  @SpeakeasyMetadata({ data: "json, name=updateDimensionGroup" })
   updateDimensionGroup?: UpdateDimensionGroupRequest;
 
-  @Metadata({ data: "json, name=updateDimensionProperties" })
+  @SpeakeasyMetadata({ data: "json, name=updateDimensionProperties" })
   updateDimensionProperties?: UpdateDimensionPropertiesRequest;
 
-  @Metadata({ data: "json, name=updateEmbeddedObjectBorder" })
+  @SpeakeasyMetadata({ data: "json, name=updateEmbeddedObjectBorder" })
   updateEmbeddedObjectBorder?: UpdateEmbeddedObjectBorderRequest;
 
-  @Metadata({ data: "json, name=updateEmbeddedObjectPosition" })
+  @SpeakeasyMetadata({ data: "json, name=updateEmbeddedObjectPosition" })
   updateEmbeddedObjectPosition?: UpdateEmbeddedObjectPositionRequest;
 
-  @Metadata({ data: "json, name=updateFilterView" })
+  @SpeakeasyMetadata({ data: "json, name=updateFilterView" })
   updateFilterView?: UpdateFilterViewRequest;
 
-  @Metadata({ data: "json, name=updateNamedRange" })
+  @SpeakeasyMetadata({ data: "json, name=updateNamedRange" })
   updateNamedRange?: UpdateNamedRangeRequest;
 
-  @Metadata({ data: "json, name=updateProtectedRange" })
+  @SpeakeasyMetadata({ data: "json, name=updateProtectedRange" })
   updateProtectedRange?: UpdateProtectedRangeRequest;
 
-  @Metadata({ data: "json, name=updateSheetProperties" })
+  @SpeakeasyMetadata({ data: "json, name=updateSheetProperties" })
   updateSheetProperties?: UpdateSheetPropertiesRequest;
 
-  @Metadata({ data: "json, name=updateSlicerSpec" })
+  @SpeakeasyMetadata({ data: "json, name=updateSlicerSpec" })
   updateSlicerSpec?: UpdateSlicerSpecRequest;
 
-  @Metadata({ data: "json, name=updateSpreadsheetProperties" })
+  @SpeakeasyMetadata({ data: "json, name=updateSpreadsheetProperties" })
   updateSpreadsheetProperties?: UpdateSpreadsheetPropertiesRequest;
 }

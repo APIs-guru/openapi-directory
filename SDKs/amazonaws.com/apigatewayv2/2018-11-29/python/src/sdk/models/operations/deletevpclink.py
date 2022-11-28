@@ -1,10 +1,13 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 
 
 @dataclass
 class DeleteVpcLinkPathParams:
-    vpc_link_id: str = field(default=None, metadata={'path_param': { 'field_name': 'vpcLinkId', 'style': 'simple', 'explode': False }})
+    vpc_link_id: str = field(metadata={'path_param': { 'field_name': 'vpcLinkId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -20,15 +23,15 @@ class DeleteVpcLinkHeaders:
 
 @dataclass
 class DeleteVpcLinkRequest:
-    path_params: DeleteVpcLinkPathParams = field(default=None)
-    headers: DeleteVpcLinkHeaders = field(default=None)
+    headers: DeleteVpcLinkHeaders = field()
+    path_params: DeleteVpcLinkPathParams = field()
     
 
 @dataclass
 class DeleteVpcLinkResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     delete_vpc_link_response: Optional[dict[str, Any]] = field(default=None)
     not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     too_many_requests_exception: Optional[Any] = field(default=None)
     

@@ -4,10 +4,6 @@ type GetCustomerPathParams struct {
 	Account int64 `pathParam:"style=simple,explode=false,name=account"`
 }
 
-type GetCustomerRequest struct {
-	PathParams GetCustomerPathParams
-}
-
 type GetCustomer200ApplicationJSON struct {
 	Address        *string `json:"address,omitempty"`
 	Balance        *int64  `json:"balance,omitempty"`
@@ -24,6 +20,10 @@ type GetCustomer200ApplicationJSON struct {
 	Postcode       *string `json:"postcode,omitempty"`
 	State          *string `json:"state,omitempty"`
 	Username       *int64  `json:"username,omitempty"`
+}
+
+type GetCustomerRequest struct {
+	PathParams GetCustomerPathParams
 }
 
 type GetCustomerResponse struct {

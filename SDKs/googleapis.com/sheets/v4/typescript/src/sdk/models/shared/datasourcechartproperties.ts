@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DataExecutionStatus } from "./dataexecutionstatus";
+
 
 
 // DataSourceChartProperties
@@ -7,9 +8,9 @@ import { DataExecutionStatus } from "./dataexecutionstatus";
  * Properties of a data source chart.
 **/
 export class DataSourceChartProperties extends SpeakeasyBase {
-  @Metadata({ data: "json, name=dataExecutionStatus" })
+  @SpeakeasyMetadata({ data: "json, name=dataExecutionStatus" })
   dataExecutionStatus?: DataExecutionStatus;
 
-  @Metadata({ data: "json, name=dataSourceId" })
+  @SpeakeasyMetadata({ data: "json, name=dataSourceId" })
   dataSourceId?: string;
 }

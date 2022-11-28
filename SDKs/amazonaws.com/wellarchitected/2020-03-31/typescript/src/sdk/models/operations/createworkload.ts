@@ -1,118 +1,119 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class CreateWorkloadHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
 export enum CreateWorkloadRequestBodyEnvironmentEnum {
-    Production = "PRODUCTION"
-,    Preproduction = "PREPRODUCTION"
+    Production = "PRODUCTION",
+    Preproduction = "PREPRODUCTION"
 }
 
 
 export class CreateWorkloadRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AccountIds" })
+  @SpeakeasyMetadata({ data: "json, name=AccountIds" })
   accountIds?: string[];
 
-  @Metadata({ data: "json, name=ArchitecturalDesign" })
+  @SpeakeasyMetadata({ data: "json, name=ArchitecturalDesign" })
   architecturalDesign?: string;
 
-  @Metadata({ data: "json, name=AwsRegions" })
+  @SpeakeasyMetadata({ data: "json, name=AwsRegions" })
   awsRegions?: string[];
 
-  @Metadata({ data: "json, name=ClientRequestToken" })
+  @SpeakeasyMetadata({ data: "json, name=ClientRequestToken" })
   clientRequestToken: string;
 
-  @Metadata({ data: "json, name=Description" })
+  @SpeakeasyMetadata({ data: "json, name=Description" })
   description: string;
 
-  @Metadata({ data: "json, name=Environment" })
+  @SpeakeasyMetadata({ data: "json, name=Environment" })
   environment: CreateWorkloadRequestBodyEnvironmentEnum;
 
-  @Metadata({ data: "json, name=Industry" })
+  @SpeakeasyMetadata({ data: "json, name=Industry" })
   industry?: string;
 
-  @Metadata({ data: "json, name=IndustryType" })
+  @SpeakeasyMetadata({ data: "json, name=IndustryType" })
   industryType?: string;
 
-  @Metadata({ data: "json, name=Lenses" })
+  @SpeakeasyMetadata({ data: "json, name=Lenses" })
   lenses: string[];
 
-  @Metadata({ data: "json, name=NonAwsRegions" })
+  @SpeakeasyMetadata({ data: "json, name=NonAwsRegions" })
   nonAwsRegions?: string[];
 
-  @Metadata({ data: "json, name=Notes" })
+  @SpeakeasyMetadata({ data: "json, name=Notes" })
   notes?: string;
 
-  @Metadata({ data: "json, name=PillarPriorities" })
+  @SpeakeasyMetadata({ data: "json, name=PillarPriorities" })
   pillarPriorities?: string[];
 
-  @Metadata({ data: "json, name=ReviewOwner" })
+  @SpeakeasyMetadata({ data: "json, name=ReviewOwner" })
   reviewOwner: string;
 
-  @Metadata({ data: "json, name=Tags" })
+  @SpeakeasyMetadata({ data: "json, name=Tags" })
   tags?: Map<string, string>;
 
-  @Metadata({ data: "json, name=WorkloadName" })
+  @SpeakeasyMetadata({ data: "json, name=WorkloadName" })
   workloadName: string;
 }
 
 
 export class CreateWorkloadRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: CreateWorkloadHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: CreateWorkloadRequestBody;
 }
 
 
 export class CreateWorkloadResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   accessDeniedException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   conflictException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   createWorkloadOutput?: shared.CreateWorkloadOutput;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   internalServerException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   serviceQuotaExceededException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   throttlingException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   validationException?: any;
 }

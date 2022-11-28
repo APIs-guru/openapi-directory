@@ -1,25 +1,26 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetDifferencesInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=MaxResults" })
+  @SpeakeasyMetadata({ data: "json, name=MaxResults" })
   maxResults?: number;
 
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=afterCommitSpecifier" })
+  @SpeakeasyMetadata({ data: "json, name=afterCommitSpecifier" })
   afterCommitSpecifier: string;
 
-  @Metadata({ data: "json, name=afterPath" })
+  @SpeakeasyMetadata({ data: "json, name=afterPath" })
   afterPath?: string;
 
-  @Metadata({ data: "json, name=beforeCommitSpecifier" })
+  @SpeakeasyMetadata({ data: "json, name=beforeCommitSpecifier" })
   beforeCommitSpecifier?: string;
 
-  @Metadata({ data: "json, name=beforePath" })
+  @SpeakeasyMetadata({ data: "json, name=beforePath" })
   beforePath?: string;
 
-  @Metadata({ data: "json, name=repositoryName" })
+  @SpeakeasyMetadata({ data: "json, name=repositoryName" })
   repositoryName: string;
 }

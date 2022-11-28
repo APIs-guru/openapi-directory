@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ThirdPartyOnlyConfig
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Settings for advertisers that use third-party ad servers only.
 **/
 export class ThirdPartyOnlyConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=pixelOrderIdReportingEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=pixelOrderIdReportingEnabled" })
   pixelOrderIdReportingEnabled?: boolean;
 }

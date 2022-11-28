@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// BatchGetCustomDataIdentifierSummary
+// Provides information about a custom data identifier.
 type BatchGetCustomDataIdentifierSummary struct {
 	Arn         *string    `json:"arn,omitempty"`
 	CreatedAt   *time.Time `json:"createdAt,omitempty"`

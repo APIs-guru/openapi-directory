@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare enum PutResourcePolicyXAmzTargetEnum {
     Logs20140328PutResourcePolicy = "Logs_20140328.PutResourcePolicy"

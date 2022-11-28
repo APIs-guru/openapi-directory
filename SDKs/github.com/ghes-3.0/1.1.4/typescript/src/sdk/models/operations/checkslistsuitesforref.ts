@@ -1,62 +1,63 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class ChecksListSuitesForRefPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=owner" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=owner" })
   owner: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=ref" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=ref" })
   ref: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=repo" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=repo" })
   repo: string;
 }
 
 
 export class ChecksListSuitesForRefQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=app_id" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=app_id" })
   appId?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=check_name" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=check_name" })
   checkName?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=page" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page" })
   page?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=per_page" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=per_page" })
   perPage?: number;
 }
 
 
-export class ChecksListSuitesForRefRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: ChecksListSuitesForRefPathParams;
-
-  @Metadata()
-  queryParams: ChecksListSuitesForRefQueryParams;
-}
-
-
 export class ChecksListSuitesForRef200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=check_suites", elemType: shared.CheckSuite })
+  @SpeakeasyMetadata({ data: "json, name=check_suites", elemType: shared.CheckSuite })
   checkSuites: shared.CheckSuite[];
 
-  @Metadata({ data: "json, name=total_count" })
+  @SpeakeasyMetadata({ data: "json, name=total_count" })
   totalCount: number;
 }
 
 
+export class ChecksListSuitesForRefRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: ChecksListSuitesForRefPathParams;
+
+  @SpeakeasyMetadata()
+  queryParams: ChecksListSuitesForRefQueryParams;
+}
+
+
 export class ChecksListSuitesForRefResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: Map<string, string[]>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   checksListSuitesForRef200ApplicationJsonObject?: ChecksListSuitesForRef200ApplicationJson;
 }

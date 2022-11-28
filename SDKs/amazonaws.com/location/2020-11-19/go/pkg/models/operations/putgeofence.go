@@ -19,6 +19,8 @@ type PutGeofenceHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// PutGeofenceRequestBodyGeometry
+// <p>Contains the geofence geometry details.</p> <note> <p>Amazon Location doesn't currently support polygons with holes, multipolygons, polygons that are wound clockwise, or that cross the antimeridian. </p> </note>
 type PutGeofenceRequestBodyGeometry struct {
 	Polygon [][][]float64 `json:"Polygon,omitempty"`
 }

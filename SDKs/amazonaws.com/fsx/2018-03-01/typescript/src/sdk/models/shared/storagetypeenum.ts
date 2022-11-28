@@ -1,6 +1,7 @@
 
 
+
 export enum StorageTypeEnum {
-    Ssd = "SSD"
-,    Hdd = "HDD"
+    Ssd = "SSD",
+    Hdd = "HDD"
 }

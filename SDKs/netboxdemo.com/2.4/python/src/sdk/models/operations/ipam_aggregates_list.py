@@ -1,6 +1,10 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import List,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -17,23 +21,23 @@ class IpamAggregatesListQueryParams:
     tag: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'tag', 'style': 'form', 'explode': True }})
     
 
-@dataclass
-class IpamAggregatesListRequest:
-    query_params: IpamAggregatesListQueryParams = field(default=None)
-    
-
 @dataclass_json
 @dataclass
 class IpamAggregatesList200ApplicationJSON:
-    count: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'count' }})
-    next: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next' }})
-    previous: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'previous' }})
-    results: List[shared.Aggregate] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'results' }})
+    count: int = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('count') }})
+    results: List[shared.Aggregate] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('results') }})
+    next: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('next') }})
+    previous: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('previous') }})
+    
+
+@dataclass
+class IpamAggregatesListRequest:
+    query_params: IpamAggregatesListQueryParams = field()
     
 
 @dataclass
 class IpamAggregatesListResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     ipam_aggregates_list_200_application_json_object: Optional[IpamAggregatesList200ApplicationJSON] = field(default=None)
     

@@ -7,6 +7,8 @@ const (
 	SandboxItemSetVerificationStatusRequestVerificationStatusEnumVerificationExpired   SandboxItemSetVerificationStatusRequestVerificationStatusEnum = "verification_expired"
 )
 
+// SandboxItemSetVerificationStatusRequest
+// SandboxItemSetVerificationStatusRequest defines the request schema for `/sandbox/item/set_verification_status`
 type SandboxItemSetVerificationStatusRequest struct {
 	AccessToken        string                                                        `json:"access_token"`
 	AccountID          string                                                        `json:"account_id"`

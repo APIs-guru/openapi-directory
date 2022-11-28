@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum StateHistoryStateEnum {
-    StateUnspecified = "STATE_UNSPECIFIED"
-,    Pending = "PENDING"
-,    Running = "RUNNING"
-,    Cancelling = "CANCELLING"
-,    Cancelled = "CANCELLED"
-,    Succeeded = "SUCCEEDED"
-,    Failed = "FAILED"
+    StateUnspecified = "STATE_UNSPECIFIED",
+    Pending = "PENDING",
+    Running = "RUNNING",
+    Cancelling = "CANCELLING",
+    Cancelled = "CANCELLED",
+    Succeeded = "SUCCEEDED",
+    Failed = "FAILED"
 }
 
 
@@ -16,12 +17,12 @@ export enum StateHistoryStateEnum {
  * Historical state information.
 **/
 export class StateHistory extends SpeakeasyBase {
-  @Metadata({ data: "json, name=state" })
+  @SpeakeasyMetadata({ data: "json, name=state" })
   state?: StateHistoryStateEnum;
 
-  @Metadata({ data: "json, name=stateMessage" })
+  @SpeakeasyMetadata({ data: "json, name=stateMessage" })
   stateMessage?: string;
 
-  @Metadata({ data: "json, name=stateStartTime" })
+  @SpeakeasyMetadata({ data: "json, name=stateStartTime" })
   stateStartTime?: string;
 }

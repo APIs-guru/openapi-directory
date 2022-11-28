@@ -1,6 +1,7 @@
 
 
+
 export enum EbsFindingEnum {
-    Optimized = "Optimized"
-,    NotOptimized = "NotOptimized"
+    Optimized = "Optimized",
+    NotOptimized = "NotOptimized"
 }

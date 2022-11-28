@@ -1,5 +1,7 @@
 package shared
 
+// Results
+// Artifacts created by the build pipeline.
 type Results struct {
 	ArtifactManifest *string                 `json:"artifactManifest,omitempty"`
 	ArtifactTiming   *TimeSpan               `json:"artifactTiming,omitempty"`

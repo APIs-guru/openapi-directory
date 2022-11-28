@@ -1,5 +1,7 @@
 package shared
 
+// ConsentsResponse201
+// Body of the JSON response for a successful consent request.
 type ConsentsResponse201 struct {
 	Links           map[string]HrefType    `json:"_links"`
 	ChallengeData   *ChallengeData         `json:"challengeData,omitempty"`

@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class ErrorCodeEnum(str, Enum):
     UK_OBIE_FIELD_EXPECTED = "UK.OBIE.Field.Expected"

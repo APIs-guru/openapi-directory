@@ -22,166 +22,166 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var ServiceViewModel = /** @class */ (function (_super) {
     __extends(ServiceViewModel, _super);
     function ServiceViewModel() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=bookAheadUnit" }),
+        SpeakeasyMetadata({ data: "json, name=bookAheadUnit" }),
         __metadata("design:type", Number)
     ], ServiceViewModel.prototype, "bookAheadUnit", void 0);
     __decorate([
-        Metadata({ data: "json, name=bookAheadValue" }),
+        SpeakeasyMetadata({ data: "json, name=bookAheadValue" }),
         __metadata("design:type", Number)
     ], ServiceViewModel.prototype, "bookAheadValue", void 0);
     __decorate([
-        Metadata({ data: "json, name=bookInAdvance" }),
+        SpeakeasyMetadata({ data: "json, name=bookInAdvance" }),
         __metadata("design:type", Number)
     ], ServiceViewModel.prototype, "bookInAdvance", void 0);
     __decorate([
-        Metadata({ data: "json, name=bookingInterval" }),
+        SpeakeasyMetadata({ data: "json, name=bookingInterval" }),
         __metadata("design:type", Number)
     ], ServiceViewModel.prototype, "bookingInterval", void 0);
     __decorate([
-        Metadata({ data: "json, name=bookingLimit" }),
+        SpeakeasyMetadata({ data: "json, name=bookingLimit" }),
         __metadata("design:type", Number)
     ], ServiceViewModel.prototype, "bookingLimit", void 0);
     __decorate([
-        Metadata({ data: "json, name=calendarId" }),
+        SpeakeasyMetadata({ data: "json, name=calendarId" }),
         __metadata("design:type", String)
     ], ServiceViewModel.prototype, "calendarId", void 0);
     __decorate([
-        Metadata({ data: "json, name=calendarResourceGroupId" }),
+        SpeakeasyMetadata({ data: "json, name=calendarResourceGroupId" }),
         __metadata("design:type", String)
     ], ServiceViewModel.prototype, "calendarResourceGroupId", void 0);
     __decorate([
-        Metadata({ data: "json, name=cancellationFeeAmount" }),
+        SpeakeasyMetadata({ data: "json, name=cancellationFeeAmount" }),
         __metadata("design:type", Number)
     ], ServiceViewModel.prototype, "cancellationFeeAmount", void 0);
     __decorate([
-        Metadata({ data: "json, name=cancellationFeeTaxable" }),
+        SpeakeasyMetadata({ data: "json, name=cancellationFeeTaxable" }),
         __metadata("design:type", Boolean)
     ], ServiceViewModel.prototype, "cancellationFeeTaxable", void 0);
     __decorate([
-        Metadata({ data: "json, name=companyId" }),
+        SpeakeasyMetadata({ data: "json, name=companyId" }),
         __metadata("design:type", String)
     ], ServiceViewModel.prototype, "companyId", void 0);
     __decorate([
-        Metadata({ data: "json, name=consumerPadding" }),
+        SpeakeasyMetadata({ data: "json, name=consumerPadding" }),
         __metadata("design:type", Boolean)
     ], ServiceViewModel.prototype, "consumerPadding", void 0);
     __decorate([
-        Metadata({ data: "json, name=dailyBookingLimitCount" }),
+        SpeakeasyMetadata({ data: "json, name=dailyBookingLimitCount" }),
         __metadata("design:type", Number)
     ], ServiceViewModel.prototype, "dailyBookingLimitCount", void 0);
     __decorate([
-        Metadata({ data: "json, name=dailyBookingLimitMinutes" }),
+        SpeakeasyMetadata({ data: "json, name=dailyBookingLimitMinutes" }),
         __metadata("design:type", Number)
     ], ServiceViewModel.prototype, "dailyBookingLimitMinutes", void 0);
     __decorate([
-        Metadata({ data: "json, name=defaultService" }),
+        SpeakeasyMetadata({ data: "json, name=defaultService" }),
         __metadata("design:type", Boolean)
     ], ServiceViewModel.prototype, "defaultService", void 0);
     __decorate([
-        Metadata({ data: "json, name=description" }),
+        SpeakeasyMetadata({ data: "json, name=description" }),
         __metadata("design:type", String)
     ], ServiceViewModel.prototype, "description", void 0);
     __decorate([
-        Metadata({ data: "json, name=duration" }),
+        SpeakeasyMetadata({ data: "json, name=duration" }),
         __metadata("design:type", Number)
     ], ServiceViewModel.prototype, "duration", void 0);
     __decorate([
-        Metadata({ data: "json, name=durationInterval" }),
+        SpeakeasyMetadata({ data: "json, name=durationInterval" }),
         __metadata("design:type", Number)
     ], ServiceViewModel.prototype, "durationInterval", void 0);
     __decorate([
-        Metadata({ data: "json, name=durationMax" }),
+        SpeakeasyMetadata({ data: "json, name=durationMax" }),
         __metadata("design:type", Number)
     ], ServiceViewModel.prototype, "durationMax", void 0);
     __decorate([
-        Metadata({ data: "json, name=durationMin" }),
+        SpeakeasyMetadata({ data: "json, name=durationMin" }),
         __metadata("design:type", Number)
     ], ServiceViewModel.prototype, "durationMin", void 0);
     __decorate([
-        Metadata({ data: "json, name=durationSelect" }),
+        SpeakeasyMetadata({ data: "json, name=durationSelect" }),
         __metadata("design:type", Boolean)
     ], ServiceViewModel.prototype, "durationSelect", void 0);
     __decorate([
-        Metadata({ data: "json, name=feeAmount" }),
+        SpeakeasyMetadata({ data: "json, name=feeAmount" }),
         __metadata("design:type", Number)
     ], ServiceViewModel.prototype, "feeAmount", void 0);
     __decorate([
-        Metadata({ data: "json, name=feeTaxable" }),
+        SpeakeasyMetadata({ data: "json, name=feeTaxable" }),
         __metadata("design:type", Boolean)
     ], ServiceViewModel.prototype, "feeTaxable", void 0);
     __decorate([
-        Metadata({ data: "json, name=id" }),
+        SpeakeasyMetadata({ data: "json, name=id" }),
         __metadata("design:type", String)
     ], ServiceViewModel.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "json, name=imageUrl" }),
+        SpeakeasyMetadata({ data: "json, name=imageUrl" }),
         __metadata("design:type", String)
     ], ServiceViewModel.prototype, "imageUrl", void 0);
     __decorate([
-        Metadata({ data: "json, name=locationId" }),
+        SpeakeasyMetadata({ data: "json, name=locationId" }),
         __metadata("design:type", String)
     ], ServiceViewModel.prototype, "locationId", void 0);
     __decorate([
-        Metadata({ data: "json, name=maxBookingLimit" }),
+        SpeakeasyMetadata({ data: "json, name=maxBookingLimit" }),
         __metadata("design:type", Number)
     ], ServiceViewModel.prototype, "maxBookingLimit", void 0);
     __decorate([
-        Metadata({ data: "json, name=maxCapacity" }),
+        SpeakeasyMetadata({ data: "json, name=maxCapacity" }),
         __metadata("design:type", Number)
     ], ServiceViewModel.prototype, "maxCapacity", void 0);
     __decorate([
-        Metadata({ data: "json, name=maxGroupSize" }),
+        SpeakeasyMetadata({ data: "json, name=maxGroupSize" }),
         __metadata("design:type", Number)
     ], ServiceViewModel.prototype, "maxGroupSize", void 0);
     __decorate([
-        Metadata({ data: "json, name=maxResourceBookingLimit" }),
+        SpeakeasyMetadata({ data: "json, name=maxResourceBookingLimit" }),
         __metadata("design:type", Number)
     ], ServiceViewModel.prototype, "maxResourceBookingLimit", void 0);
     __decorate([
-        Metadata({ data: "json, name=mediaPageUrl" }),
+        SpeakeasyMetadata({ data: "json, name=mediaPageUrl" }),
         __metadata("design:type", String)
     ], ServiceViewModel.prototype, "mediaPageUrl", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], ServiceViewModel.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=nonRefundable" }),
+        SpeakeasyMetadata({ data: "json, name=nonRefundable" }),
         __metadata("design:type", Boolean)
     ], ServiceViewModel.prototype, "nonRefundable", void 0);
     __decorate([
-        Metadata({ data: "json, name=objectName" }),
+        SpeakeasyMetadata({ data: "json, name=objectName" }),
         __metadata("design:type", String)
     ], ServiceViewModel.prototype, "objectName", void 0);
     __decorate([
-        Metadata({ data: "json, name=padding" }),
+        SpeakeasyMetadata({ data: "json, name=padding" }),
         __metadata("design:type", Number)
     ], ServiceViewModel.prototype, "padding", void 0);
     __decorate([
-        Metadata({ data: "json, name=roundRobin" }),
+        SpeakeasyMetadata({ data: "json, name=roundRobin" }),
         __metadata("design:type", Number)
     ], ServiceViewModel.prototype, "roundRobin", void 0);
     __decorate([
-        Metadata({ data: "json, name=serviceGroupId" }),
+        SpeakeasyMetadata({ data: "json, name=serviceGroupId" }),
         __metadata("design:type", Number)
     ], ServiceViewModel.prototype, "serviceGroupId", void 0);
     __decorate([
-        Metadata({ data: "json, name=serviceGroupName" }),
+        SpeakeasyMetadata({ data: "json, name=serviceGroupName" }),
         __metadata("design:type", String)
     ], ServiceViewModel.prototype, "serviceGroupName", void 0);
     __decorate([
-        Metadata({ data: "json, name=showOnline" }),
+        SpeakeasyMetadata({ data: "json, name=showOnline" }),
         __metadata("design:type", Boolean)
     ], ServiceViewModel.prototype, "showOnline", void 0);
     __decorate([
-        Metadata({ data: "json, name=type" }),
+        SpeakeasyMetadata({ data: "json, name=type" }),
         __metadata("design:type", String)
     ], ServiceViewModel.prototype, "type", void 0);
     return ServiceViewModel;

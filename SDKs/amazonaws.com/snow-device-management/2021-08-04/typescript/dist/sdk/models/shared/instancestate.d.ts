@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { InstanceStateNameEnum } from "./instancestatenameenum";
 /**
  * The description of the current state of an instance.

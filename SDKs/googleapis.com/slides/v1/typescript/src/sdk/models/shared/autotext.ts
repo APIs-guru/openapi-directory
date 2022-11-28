@@ -1,9 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TextStyle } from "./textstyle";
 
+
 export enum AutoTextTypeEnum {
-    TypeUnspecified = "TYPE_UNSPECIFIED"
-,    SlideNumber = "SLIDE_NUMBER"
+    TypeUnspecified = "TYPE_UNSPECIFIED",
+    SlideNumber = "SLIDE_NUMBER"
 }
 
 
@@ -12,12 +13,12 @@ export enum AutoTextTypeEnum {
  * A TextElement kind that represents auto text.
 **/
 export class AutoText extends SpeakeasyBase {
-  @Metadata({ data: "json, name=content" })
+  @SpeakeasyMetadata({ data: "json, name=content" })
   content?: string;
 
-  @Metadata({ data: "json, name=style" })
+  @SpeakeasyMetadata({ data: "json, name=style" })
   style?: TextStyle;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: AutoTextTypeEnum;
 }

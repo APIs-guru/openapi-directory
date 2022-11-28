@@ -1,4 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { OAuthFlowTypeEnum } from "./oauthflowtypeenum";
 import { AnalyticsConfigurationType } from "./analyticsconfigurationtype";
 import { ExplicitAuthFlowsTypeEnum } from "./explicitauthflowstypeenum";
@@ -6,68 +6,69 @@ import { PreventUserExistenceErrorTypesEnum } from "./preventuserexistenceerrort
 import { TokenValidityUnitsType } from "./tokenvalidityunitstype";
 
 
+
 // CreateUserPoolClientRequest
 /** 
  * Represents the request to create a user pool client.
 **/
 export class CreateUserPoolClientRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AccessTokenValidity" })
+  @SpeakeasyMetadata({ data: "json, name=AccessTokenValidity" })
   accessTokenValidity?: number;
 
-  @Metadata({ data: "json, name=AllowedOAuthFlows" })
+  @SpeakeasyMetadata({ data: "json, name=AllowedOAuthFlows" })
   allowedOAuthFlows?: OAuthFlowTypeEnum[];
 
-  @Metadata({ data: "json, name=AllowedOAuthFlowsUserPoolClient" })
+  @SpeakeasyMetadata({ data: "json, name=AllowedOAuthFlowsUserPoolClient" })
   allowedOAuthFlowsUserPoolClient?: boolean;
 
-  @Metadata({ data: "json, name=AllowedOAuthScopes" })
+  @SpeakeasyMetadata({ data: "json, name=AllowedOAuthScopes" })
   allowedOAuthScopes?: string[];
 
-  @Metadata({ data: "json, name=AnalyticsConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=AnalyticsConfiguration" })
   analyticsConfiguration?: AnalyticsConfigurationType;
 
-  @Metadata({ data: "json, name=CallbackURLs" })
+  @SpeakeasyMetadata({ data: "json, name=CallbackURLs" })
   callbackUrLs?: string[];
 
-  @Metadata({ data: "json, name=ClientName" })
+  @SpeakeasyMetadata({ data: "json, name=ClientName" })
   clientName: string;
 
-  @Metadata({ data: "json, name=DefaultRedirectURI" })
+  @SpeakeasyMetadata({ data: "json, name=DefaultRedirectURI" })
   defaultRedirectUri?: string;
 
-  @Metadata({ data: "json, name=EnableTokenRevocation" })
+  @SpeakeasyMetadata({ data: "json, name=EnableTokenRevocation" })
   enableTokenRevocation?: boolean;
 
-  @Metadata({ data: "json, name=ExplicitAuthFlows" })
+  @SpeakeasyMetadata({ data: "json, name=ExplicitAuthFlows" })
   explicitAuthFlows?: ExplicitAuthFlowsTypeEnum[];
 
-  @Metadata({ data: "json, name=GenerateSecret" })
+  @SpeakeasyMetadata({ data: "json, name=GenerateSecret" })
   generateSecret?: boolean;
 
-  @Metadata({ data: "json, name=IdTokenValidity" })
+  @SpeakeasyMetadata({ data: "json, name=IdTokenValidity" })
   idTokenValidity?: number;
 
-  @Metadata({ data: "json, name=LogoutURLs" })
+  @SpeakeasyMetadata({ data: "json, name=LogoutURLs" })
   logoutUrLs?: string[];
 
-  @Metadata({ data: "json, name=PreventUserExistenceErrors" })
+  @SpeakeasyMetadata({ data: "json, name=PreventUserExistenceErrors" })
   preventUserExistenceErrors?: PreventUserExistenceErrorTypesEnum;
 
-  @Metadata({ data: "json, name=ReadAttributes" })
+  @SpeakeasyMetadata({ data: "json, name=ReadAttributes" })
   readAttributes?: string[];
 
-  @Metadata({ data: "json, name=RefreshTokenValidity" })
+  @SpeakeasyMetadata({ data: "json, name=RefreshTokenValidity" })
   refreshTokenValidity?: number;
 
-  @Metadata({ data: "json, name=SupportedIdentityProviders" })
+  @SpeakeasyMetadata({ data: "json, name=SupportedIdentityProviders" })
   supportedIdentityProviders?: string[];
 
-  @Metadata({ data: "json, name=TokenValidityUnits" })
+  @SpeakeasyMetadata({ data: "json, name=TokenValidityUnits" })
   tokenValidityUnits?: TokenValidityUnitsType;
 
-  @Metadata({ data: "json, name=UserPoolId" })
+  @SpeakeasyMetadata({ data: "json, name=UserPoolId" })
   userPoolId: string;
 
-  @Metadata({ data: "json, name=WriteAttributes" })
+  @SpeakeasyMetadata({ data: "json, name=WriteAttributes" })
   writeAttributes?: string[];
 }

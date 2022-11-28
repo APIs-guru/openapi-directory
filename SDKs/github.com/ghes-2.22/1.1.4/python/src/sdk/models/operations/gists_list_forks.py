@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class GistsListForksPathParams:
-    gist_id: str = field(default=None, metadata={'path_param': { 'field_name': 'gist_id', 'style': 'simple', 'explode': False }})
+    gist_id: str = field(metadata={'path_param': { 'field_name': 'gist_id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -16,15 +16,15 @@ class GistsListForksQueryParams:
 
 @dataclass
 class GistsListForksRequest:
-    path_params: GistsListForksPathParams = field(default=None)
-    query_params: GistsListForksQueryParams = field(default=None)
+    path_params: GistsListForksPathParams = field()
+    query_params: GistsListForksQueryParams = field()
     
 
 @dataclass
 class GistsListForksResponse:
-    content_type: str = field(default=None)
-    headers: dict[str, List[str]] = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    headers: dict[str, List[str]] = field()
+    status_code: int = field()
     basic_error: Optional[shared.BasicError] = field(default=None)
     gist_simples: Optional[List[shared.GistSimple]] = field(default=None)
     

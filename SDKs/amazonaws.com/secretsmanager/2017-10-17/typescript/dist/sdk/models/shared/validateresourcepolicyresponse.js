@@ -22,19 +22,19 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { ValidationErrorsEntry } from "./validationerrorsentry";
 var ValidateResourcePolicyResponse = /** @class */ (function (_super) {
     __extends(ValidateResourcePolicyResponse, _super);
     function ValidateResourcePolicyResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=PolicyValidationPassed" }),
+        SpeakeasyMetadata({ data: "json, name=PolicyValidationPassed" }),
         __metadata("design:type", Boolean)
     ], ValidateResourcePolicyResponse.prototype, "policyValidationPassed", void 0);
     __decorate([
-        Metadata({ data: "json, name=ValidationErrors", elemType: shared.ValidationErrorsEntry }),
+        SpeakeasyMetadata({ data: "json, name=ValidationErrors", elemType: ValidationErrorsEntry }),
         __metadata("design:type", Array)
     ], ValidateResourcePolicyResponse.prototype, "validationErrors", void 0);
     return ValidateResourcePolicyResponse;

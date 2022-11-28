@@ -1,29 +1,30 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class DeleteTransactionsTransactionIdAttachmentsAttachmentIdPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=attachment_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=attachment_id" })
   attachmentId: number;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=transaction_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=transaction_id" })
   transactionId: number;
 }
 
 
 export class DeleteTransactionsTransactionIdAttachmentsAttachmentIdRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: DeleteTransactionsTransactionIdAttachmentsAttachmentIdPathParams;
 }
 
 
 export class DeleteTransactionsTransactionIdAttachmentsAttachmentIdResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   error?: shared.Error;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { Constraint } from "./constraint";
 // ListAvailableOrgPolicyConstraintsResponse
 /**
  * The response returned from the `ListAvailableOrgPolicyConstraints` method. Returns all `Constraints` that could be set at this level of the hierarchy (contrast with the response from `ListPolicies`, which returns all policies which are set).
@@ -34,11 +34,11 @@ var ListAvailableOrgPolicyConstraintsResponse = /** @class */ (function (_super)
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=constraints", elemType: shared.Constraint }),
+        SpeakeasyMetadata({ data: "json, name=constraints", elemType: Constraint }),
         __metadata("design:type", Array)
     ], ListAvailableOrgPolicyConstraintsResponse.prototype, "constraints", void 0);
     __decorate([
-        Metadata({ data: "json, name=nextPageToken" }),
+        SpeakeasyMetadata({ data: "json, name=nextPageToken" }),
         __metadata("design:type", String)
     ], ListAvailableOrgPolicyConstraintsResponse.prototype, "nextPageToken", void 0);
     return ListAvailableOrgPolicyConstraintsResponse;

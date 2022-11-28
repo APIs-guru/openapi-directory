@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import note
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
-class AddNoteRequest:
-    note: Optional[note.Note] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'note' }})
+class AddNoteRequestInput:
+    r"""AddNoteRequestInput
+    Request to add a note.
+    """
+    
+    note: Optional[NoteInput] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('note') }})
     

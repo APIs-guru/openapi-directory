@@ -6,10 +6,6 @@ type UserSafeScoringDailyValueV1ScoringsIndividualDailyQueryParams struct {
 	Tag       *string `queryParam:"style=form,explode=true,name=Tag"`
 }
 
-type UserSafeScoringDailyValueV1ScoringsIndividualDailyRequest struct {
-	QueryParams UserSafeScoringDailyValueV1ScoringsIndividualDailyQueryParams
-}
-
 type UserSafeScoringDailyValueV1ScoringsIndividualDaily200ApplicationJSONResult struct {
 	AccelerationScore *float64 `json:"AccelerationScore,omitempty"`
 	AppID             *string  `json:"AppId,omitempty"`
@@ -29,6 +25,10 @@ type UserSafeScoringDailyValueV1ScoringsIndividualDaily200ApplicationJSON struct
 	Result []UserSafeScoringDailyValueV1ScoringsIndividualDaily200ApplicationJSONResult `json:"Result,omitempty"`
 	Status *float64                                                                     `json:"Status,omitempty"`
 	Title  *string                                                                      `json:"Title,omitempty"`
+}
+
+type UserSafeScoringDailyValueV1ScoringsIndividualDailyRequest struct {
+	QueryParams UserSafeScoringDailyValueV1ScoringsIndividualDailyQueryParams
 }
 
 type UserSafeScoringDailyValueV1ScoringsIndividualDailyResponse struct {

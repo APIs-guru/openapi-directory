@@ -17,6 +17,8 @@ const (
 	GoogleAdsHomeservicesLocalservicesV1DetailedLeadReportLeadTypeEnumBooking             GoogleAdsHomeservicesLocalservicesV1DetailedLeadReportLeadTypeEnum = "BOOKING"
 )
 
+// GoogleAdsHomeservicesLocalservicesV1DetailedLeadReport
+// A Detailed Lead Report of a lead identified by their lead id and contains consumer, account, monetization, and lead data.
 type GoogleAdsHomeservicesLocalservicesV1DetailedLeadReport struct {
 	AccountID             *string                                                                 `json:"accountId,omitempty"`
 	AggregatorInfo        *GoogleAdsHomeservicesLocalservicesV1AggregatorInfo                     `json:"aggregatorInfo,omitempty"`

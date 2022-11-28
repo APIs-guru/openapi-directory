@@ -1,5 +1,7 @@
 package shared
 
+// Source
+// A source that records can be read and decoded from.
 type Source struct {
 	BaseSpecs            []map[string]interface{} `json:"baseSpecs,omitempty"`
 	Codec                map[string]interface{}   `json:"codec,omitempty"`

@@ -1,12 +1,18 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import conformancepackcompliancetype_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ConformancePackComplianceFilters:
-    compliance_type: Optional[conformancepackcompliancetype_enum.ConformancePackComplianceTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ComplianceType' }})
-    config_rule_names: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ConfigRuleNames' }})
+    r"""ConformancePackComplianceFilters
+    Filters the conformance pack by compliance types and Config rule names.
+    """
+    
+    compliance_type: Optional[ConformancePackComplianceTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ComplianceType') }})
+    config_rule_names: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ConfigRuleNames') }})
     

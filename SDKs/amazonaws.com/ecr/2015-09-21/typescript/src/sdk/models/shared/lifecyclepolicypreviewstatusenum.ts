@@ -1,8 +1,9 @@
 
 
+
 export enum LifecyclePolicyPreviewStatusEnum {
-    InProgress = "IN_PROGRESS"
-,    Complete = "COMPLETE"
-,    Expired = "EXPIRED"
-,    Failed = "FAILED"
+    InProgress = "IN_PROGRESS",
+    Complete = "COMPLETE",
+    Expired = "EXPIRED",
+    Failed = "FAILED"
 }

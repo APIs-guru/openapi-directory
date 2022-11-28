@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DlpProjectsStoredInfoTypesCreatePathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,21 +26,21 @@ class DlpProjectsStoredInfoTypesCreateQueryParams:
 
 @dataclass
 class DlpProjectsStoredInfoTypesCreateSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DlpProjectsStoredInfoTypesCreateRequest:
-    path_params: DlpProjectsStoredInfoTypesCreatePathParams = field(default=None)
-    query_params: DlpProjectsStoredInfoTypesCreateQueryParams = field(default=None)
+    path_params: DlpProjectsStoredInfoTypesCreatePathParams = field()
+    query_params: DlpProjectsStoredInfoTypesCreateQueryParams = field()
+    security: DlpProjectsStoredInfoTypesCreateSecurity = field()
     request: Optional[shared.GooglePrivacyDlpV2CreateStoredInfoTypeRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: DlpProjectsStoredInfoTypesCreateSecurity = field(default=None)
     
 
 @dataclass
 class DlpProjectsStoredInfoTypesCreateResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_privacy_dlp_v2_stored_info_type: Optional[shared.GooglePrivacyDlpV2StoredInfoType] = field(default=None)
-    status_code: int = field(default=None)
     

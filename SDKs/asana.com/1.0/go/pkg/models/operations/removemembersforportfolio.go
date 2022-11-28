@@ -17,14 +17,14 @@ type RemoveMembersForPortfolioRequestBody struct {
 	Data *shared.RemoveMembersRequest `json:"data,omitempty"`
 }
 
+type RemoveMembersForPortfolio200ApplicationJSON struct {
+	Data map[string]interface{} `json:"data,omitempty"`
+}
+
 type RemoveMembersForPortfolioRequest struct {
 	PathParams  RemoveMembersForPortfolioPathParams
 	QueryParams RemoveMembersForPortfolioQueryParams
 	Request     RemoveMembersForPortfolioRequestBody `request:"mediaType=application/json"`
-}
-
-type RemoveMembersForPortfolio200ApplicationJSON struct {
-	Data map[string]interface{} `json:"data,omitempty"`
 }
 
 type RemoveMembersForPortfolioResponse struct {

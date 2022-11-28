@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class PancrRequestBodyCertificateParameters extends SpeakeasyBase {
     dob: string;
@@ -21,10 +21,6 @@ export declare class PancrRequestBody extends SpeakeasyBase {
 export declare class PancrSecurity extends SpeakeasyBase {
     apiKey: shared.SchemeApiKey;
     clientId: shared.SchemeClientId;
-}
-export declare class PancrRequest extends SpeakeasyBase {
-    request?: PancrRequestBody;
-    security: PancrSecurity;
 }
 export declare enum Pancr400ApplicationJsonErrorEnum {
     MissingParameter = "missing_parameter",
@@ -107,6 +103,10 @@ export declare enum Pancr504ApplicationJsonErrorDescriptionEnum {
 export declare class Pancr504ApplicationJson extends SpeakeasyBase {
     error?: Pancr504ApplicationJsonErrorEnum;
     errorDescription?: Pancr504ApplicationJsonErrorDescriptionEnum;
+}
+export declare class PancrRequest extends SpeakeasyBase {
+    request?: PancrRequestBody;
+    security: PancrSecurity;
 }
 export declare class PancrResponse extends SpeakeasyBase {
     body?: Uint8Array;

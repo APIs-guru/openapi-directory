@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from typing import Any,List,Optional
+from enum import Enum
 
 class BatterVsPitcherStatsFormatEnum(str, Enum):
     XML = "XML"
@@ -8,19 +9,19 @@ class BatterVsPitcherStatsFormatEnum(str, Enum):
 
 @dataclass
 class BatterVsPitcherStatsPathParams:
-    format: BatterVsPitcherStatsFormatEnum = field(default=None, metadata={'path_param': { 'field_name': 'format', 'style': 'simple', 'explode': False }})
-    hitterid: str = field(default=None, metadata={'path_param': { 'field_name': 'hitterid', 'style': 'simple', 'explode': False }})
-    pitcherid: str = field(default=None, metadata={'path_param': { 'field_name': 'pitcherid', 'style': 'simple', 'explode': False }})
+    format: BatterVsPitcherStatsFormatEnum = field(metadata={'path_param': { 'field_name': 'format', 'style': 'simple', 'explode': False }})
+    hitterid: str = field(metadata={'path_param': { 'field_name': 'hitterid', 'style': 'simple', 'explode': False }})
+    pitcherid: str = field(metadata={'path_param': { 'field_name': 'pitcherid', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class BatterVsPitcherStatsRequest:
-    path_params: BatterVsPitcherStatsPathParams = field(default=None)
+    path_params: BatterVsPitcherStatsPathParams = field()
     
 
 @dataclass
 class BatterVsPitcherStatsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     player_seasons: Optional[List[Any]] = field(default=None)
-    status_code: int = field(default=None)
     

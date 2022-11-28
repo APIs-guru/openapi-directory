@@ -1,7 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import fieldreference
+from sdk import utils
+from . import *
 
 class UnaryFilterOpEnum(str, Enum):
     OPERATOR_UNSPECIFIED = "OPERATOR_UNSPECIFIED"
@@ -14,6 +16,10 @@ class UnaryFilterOpEnum(str, Enum):
 @dataclass_json
 @dataclass
 class UnaryFilter:
-    field: Optional[fieldreference.FieldReference] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'field' }})
-    op: Optional[UnaryFilterOpEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'op' }})
+    r"""UnaryFilter
+    A filter with a single operand.
+    """
+    
+    field: Optional[FieldReference] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('field') }})
+    op: Optional[UnaryFilterOpEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('op') }})
     

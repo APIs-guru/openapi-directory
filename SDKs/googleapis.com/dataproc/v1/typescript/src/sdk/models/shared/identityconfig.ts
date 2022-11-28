@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // IdentityConfig
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Identity related configuration, including service account based secure multi-tenancy user mappings.
 **/
 export class IdentityConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=userServiceAccountMapping" })
+  @SpeakeasyMetadata({ data: "json, name=userServiceAccountMapping" })
   userServiceAccountMapping?: Map<string, string>;
 }

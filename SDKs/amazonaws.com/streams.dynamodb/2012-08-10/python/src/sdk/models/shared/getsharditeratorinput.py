@@ -1,14 +1,20 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import sharditeratortype_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class GetShardIteratorInput:
-    sequence_number: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'SequenceNumber' }})
-    shard_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ShardId' }})
-    shard_iterator_type: sharditeratortype_enum.ShardIteratorTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ShardIteratorType' }})
-    stream_arn: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'StreamArn' }})
+    r"""GetShardIteratorInput
+    Represents the input of a <code>GetShardIterator</code> operation.
+    """
+    
+    shard_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('ShardId') }})
+    shard_iterator_type: ShardIteratorTypeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('ShardIteratorType') }})
+    stream_arn: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('StreamArn') }})
+    sequence_number: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('SequenceNumber') }})
     

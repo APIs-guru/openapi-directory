@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { StackTrace } from "./stacktrace";
+
 
 
 // Error
@@ -7,12 +8,12 @@ import { StackTrace } from "./stacktrace";
  * Error describes why the execution was abnormally terminated.
 **/
 export class Error extends SpeakeasyBase {
-  @Metadata({ data: "json, name=context" })
+  @SpeakeasyMetadata({ data: "json, name=context" })
   context?: string;
 
-  @Metadata({ data: "json, name=payload" })
+  @SpeakeasyMetadata({ data: "json, name=payload" })
   payload?: string;
 
-  @Metadata({ data: "json, name=stackTrace" })
+  @SpeakeasyMetadata({ data: "json, name=stackTrace" })
   stackTrace?: StackTrace;
 }

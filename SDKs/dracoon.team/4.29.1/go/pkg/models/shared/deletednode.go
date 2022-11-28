@@ -11,6 +11,8 @@ const (
 	DeletedNodeTypeEnumFile   DeletedNodeTypeEnum = "file"
 )
 
+// DeletedNode
+// Deleted node information (Deleted node can be a folder or file)
 type DeletedNode struct {
 	AccessedAt     *time.Time          `json:"accessedAt,omitempty"`
 	Classification *int32              `json:"classification,omitempty"`

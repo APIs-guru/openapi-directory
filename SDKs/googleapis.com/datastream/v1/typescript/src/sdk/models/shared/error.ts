@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Error
@@ -6,18 +7,18 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Represent a user-facing Error.
 **/
 export class Error extends SpeakeasyBase {
-  @Metadata({ data: "json, name=details" })
+  @SpeakeasyMetadata({ data: "json, name=details" })
   details?: Map<string, string>;
 
-  @Metadata({ data: "json, name=errorTime" })
+  @SpeakeasyMetadata({ data: "json, name=errorTime" })
   errorTime?: string;
 
-  @Metadata({ data: "json, name=errorUuid" })
+  @SpeakeasyMetadata({ data: "json, name=errorUuid" })
   errorUuid?: string;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 
-  @Metadata({ data: "json, name=reason" })
+  @SpeakeasyMetadata({ data: "json, name=reason" })
   reason?: string;
 }

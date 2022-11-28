@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // OriginApprovalRuleTemplate
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Returns information about the template that created the approval rule for a pull request.
 **/
 export class OriginApprovalRuleTemplate extends SpeakeasyBase {
-  @Metadata({ data: "json, name=approvalRuleTemplateId" })
+  @SpeakeasyMetadata({ data: "json, name=approvalRuleTemplateId" })
   approvalRuleTemplateId?: string;
 
-  @Metadata({ data: "json, name=approvalRuleTemplateName" })
+  @SpeakeasyMetadata({ data: "json, name=approvalRuleTemplateName" })
   approvalRuleTemplateName?: string;
 }

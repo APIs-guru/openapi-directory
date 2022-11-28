@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { OperationError } from "./operationerror";
+
 
 
 // OperationErrors
@@ -8,9 +8,9 @@ import { OperationError } from "./operationerror";
  * Database instance operation errors list wrapper.
 **/
 export class OperationErrors extends SpeakeasyBase {
-  @Metadata({ data: "json, name=errors", elemType: shared.OperationError })
+  @SpeakeasyMetadata({ data: "json, name=errors", elemType: OperationError })
   errors?: OperationError[];
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 }

@@ -30,15 +30,15 @@ type DcimFrontPortTemplatesListQueryParams struct {
 	TypeN         *string `queryParam:"style=form,explode=true,name=type__n"`
 }
 
-type DcimFrontPortTemplatesListRequest struct {
-	QueryParams DcimFrontPortTemplatesListQueryParams
-}
-
 type DcimFrontPortTemplatesList200ApplicationJSON struct {
 	Count    int64                      `json:"count"`
 	Next     *string                    `json:"next,omitempty"`
 	Previous *string                    `json:"previous,omitempty"`
 	Results  []shared.FrontPortTemplate `json:"results"`
+}
+
+type DcimFrontPortTemplatesListRequest struct {
+	QueryParams DcimFrontPortTemplatesListQueryParams
 }
 
 type DcimFrontPortTemplatesListResponse struct {

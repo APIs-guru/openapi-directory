@@ -1,4 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
+
+
+// GoogleCloudContactcenterinsightsV1DialogflowSourceInput
+/** 
+ * A Dialogflow source of conversation data.
+**/
+export class GoogleCloudContactcenterinsightsV1DialogflowSourceInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=audioUri" })
+  audioUri?: string;
+}
 
 
 // GoogleCloudContactcenterinsightsV1DialogflowSource
@@ -6,9 +17,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A Dialogflow source of conversation data.
 **/
 export class GoogleCloudContactcenterinsightsV1DialogflowSource extends SpeakeasyBase {
-  @Metadata({ data: "json, name=audioUri" })
+  @SpeakeasyMetadata({ data: "json, name=audioUri" })
   audioUri?: string;
 
-  @Metadata({ data: "json, name=dialogflowConversation" })
+  @SpeakeasyMetadata({ data: "json, name=dialogflowConversation" })
   dialogflowConversation?: string;
 }

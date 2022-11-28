@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostCancelConversionTaskActionEnum(str, Enum):
     CANCEL_CONVERSION_TASK = "CancelConversionTask"
@@ -10,8 +14,8 @@ class PostCancelConversionTaskVersionEnum(str, Enum):
 
 @dataclass
 class PostCancelConversionTaskQueryParams:
-    action: PostCancelConversionTaskActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostCancelConversionTaskVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostCancelConversionTaskActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostCancelConversionTaskVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,13 +31,13 @@ class PostCancelConversionTaskHeaders:
 
 @dataclass
 class PostCancelConversionTaskRequest:
-    query_params: PostCancelConversionTaskQueryParams = field(default=None)
-    headers: PostCancelConversionTaskHeaders = field(default=None)
+    headers: PostCancelConversionTaskHeaders = field()
+    query_params: PostCancelConversionTaskQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostCancelConversionTaskResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

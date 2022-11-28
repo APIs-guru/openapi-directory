@@ -17,6 +17,8 @@ const (
 	AnnouncementStateEnumDeleted                      AnnouncementStateEnum = "DELETED"
 )
 
+// Announcement
+// Announcement created by a teacher for students of the course
 type Announcement struct {
 	AlternateLink             *string                       `json:"alternateLink,omitempty"`
 	AssigneeMode              *AnnouncementAssigneeModeEnum `json:"assigneeMode,omitempty"`

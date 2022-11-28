@@ -1,5 +1,7 @@
 package shared
 
+// TargetTrackingScalingPolicyConfiguration
+// Represents a target tracking scaling policy configuration to use with Application Auto Scaling.
 type TargetTrackingScalingPolicyConfiguration struct {
 	CustomizedMetricSpecification *CustomizedMetricSpecification `json:"CustomizedMetricSpecification,omitempty"`
 	DisableScaleIn                *bool                          `json:"DisableScaleIn,omitempty"`

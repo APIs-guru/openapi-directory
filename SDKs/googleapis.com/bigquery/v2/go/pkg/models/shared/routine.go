@@ -26,6 +26,8 @@ const (
 	RoutineRoutineTypeEnumTableValuedFunction    RoutineRoutineTypeEnum = "TABLE_VALUED_FUNCTION"
 )
 
+// Routine
+// A user-defined function or a stored procedure.
 type Routine struct {
 	Arguments             []Argument                   `json:"arguments,omitempty"`
 	CreationTime          *string                      `json:"creationTime,omitempty"`
@@ -36,6 +38,24 @@ type Routine struct {
 	ImportedLibraries     []string                     `json:"importedLibraries,omitempty"`
 	Language              *RoutineLanguageEnum         `json:"language,omitempty"`
 	LastModifiedTime      *string                      `json:"lastModifiedTime,omitempty"`
+	RemoteFunctionOptions *RemoteFunctionOptions       `json:"remoteFunctionOptions,omitempty"`
+	ReturnTableType       *StandardSQLTableType        `json:"returnTableType,omitempty"`
+	ReturnType            *StandardSQLDataType         `json:"returnType,omitempty"`
+	RoutineReference      *RoutineReference            `json:"routineReference,omitempty"`
+	RoutineType           *RoutineRoutineTypeEnum      `json:"routineType,omitempty"`
+	SparkOptions          *SparkOptions                `json:"sparkOptions,omitempty"`
+	StrictMode            *bool                        `json:"strictMode,omitempty"`
+}
+
+// RoutineInput
+// A user-defined function or a stored procedure.
+type RoutineInput struct {
+	Arguments             []Argument                   `json:"arguments,omitempty"`
+	DefinitionBody        *string                      `json:"definitionBody,omitempty"`
+	Description           *string                      `json:"description,omitempty"`
+	DeterminismLevel      *RoutineDeterminismLevelEnum `json:"determinismLevel,omitempty"`
+	ImportedLibraries     []string                     `json:"importedLibraries,omitempty"`
+	Language              *RoutineLanguageEnum         `json:"language,omitempty"`
 	RemoteFunctionOptions *RemoteFunctionOptions       `json:"remoteFunctionOptions,omitempty"`
 	ReturnTableType       *StandardSQLTableType        `json:"returnTableType,omitempty"`
 	ReturnType            *StandardSQLDataType         `json:"returnType,omitempty"`

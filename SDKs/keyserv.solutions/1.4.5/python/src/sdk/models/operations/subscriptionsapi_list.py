@@ -10,13 +10,13 @@ class SubscriptionsAPIListQueryParams:
 
 @dataclass
 class SubscriptionsAPIListRequest:
-    query_params: SubscriptionsAPIListQueryParams = field(default=None)
-    request: Any = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    query_params: SubscriptionsAPIListQueryParams = field()
+    request: Any = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class SubscriptionsAPIListResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     subscription_views: Optional[List[shared.SubscriptionView]] = field(default=None)
     

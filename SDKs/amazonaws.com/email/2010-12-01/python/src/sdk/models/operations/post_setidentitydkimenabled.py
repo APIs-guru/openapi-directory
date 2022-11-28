@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostSetIdentityDkimEnabledActionEnum(str, Enum):
     SET_IDENTITY_DKIM_ENABLED = "SetIdentityDkimEnabled"
@@ -10,8 +14,8 @@ class PostSetIdentityDkimEnabledVersionEnum(str, Enum):
 
 @dataclass
 class PostSetIdentityDkimEnabledQueryParams:
-    action: PostSetIdentityDkimEnabledActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostSetIdentityDkimEnabledVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostSetIdentityDkimEnabledActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostSetIdentityDkimEnabledVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostSetIdentityDkimEnabledHeaders:
 
 @dataclass
 class PostSetIdentityDkimEnabledRequest:
-    query_params: PostSetIdentityDkimEnabledQueryParams = field(default=None)
-    headers: PostSetIdentityDkimEnabledHeaders = field(default=None)
+    headers: PostSetIdentityDkimEnabledHeaders = field()
+    query_params: PostSetIdentityDkimEnabledQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostSetIdentityDkimEnabledResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

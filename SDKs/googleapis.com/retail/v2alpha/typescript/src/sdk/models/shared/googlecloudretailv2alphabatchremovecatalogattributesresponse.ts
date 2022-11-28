@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudRetailV2alphaBatchRemoveCatalogAttributesResponse
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Response of the CatalogService.BatchRemoveCatalogAttributes.
 **/
 export class GoogleCloudRetailV2alphaBatchRemoveCatalogAttributesResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=deletedCatalogAttributes" })
+  @SpeakeasyMetadata({ data: "json, name=deletedCatalogAttributes" })
   deletedCatalogAttributes?: string[];
 
-  @Metadata({ data: "json, name=resetCatalogAttributes" })
+  @SpeakeasyMetadata({ data: "json, name=resetCatalogAttributes" })
   resetCatalogAttributes?: string[];
 }

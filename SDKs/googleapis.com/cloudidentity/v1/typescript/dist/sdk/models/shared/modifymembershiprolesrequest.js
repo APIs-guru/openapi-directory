@@ -22,8 +22,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { MembershipRole1 } from "./membershiprole1";
+import { UpdateMembershipRolesParams } from "./updatemembershiprolesparams";
 // ModifyMembershipRolesRequest
 /**
  * The request message for MembershipsService.ModifyMembershipRoles.
@@ -34,15 +35,15 @@ var ModifyMembershipRolesRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=addRoles", elemType: shared.MembershipRole }),
+        SpeakeasyMetadata({ data: "json, name=addRoles", elemType: MembershipRole1 }),
         __metadata("design:type", Array)
     ], ModifyMembershipRolesRequest.prototype, "addRoles", void 0);
     __decorate([
-        Metadata({ data: "json, name=removeRoles" }),
+        SpeakeasyMetadata({ data: "json, name=removeRoles" }),
         __metadata("design:type", Array)
     ], ModifyMembershipRolesRequest.prototype, "removeRoles", void 0);
     __decorate([
-        Metadata({ data: "json, name=updateRolesParams", elemType: shared.UpdateMembershipRolesParams }),
+        SpeakeasyMetadata({ data: "json, name=updateRolesParams", elemType: UpdateMembershipRolesParams }),
         __metadata("design:type", Array)
     ], ModifyMembershipRolesRequest.prototype, "updateRolesParams", void 0);
     return ModifyMembershipRolesRequest;

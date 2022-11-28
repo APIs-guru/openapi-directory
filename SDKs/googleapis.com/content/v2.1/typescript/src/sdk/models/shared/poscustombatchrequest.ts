@@ -1,9 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PosCustomBatchRequestEntry } from "./poscustombatchrequestentry";
 
 
+
 export class PosCustomBatchRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=entries", elemType: shared.PosCustomBatchRequestEntry })
+  @SpeakeasyMetadata({ data: "json, name=entries", elemType: PosCustomBatchRequestEntry })
   entries?: PosCustomBatchRequestEntry[];
 }

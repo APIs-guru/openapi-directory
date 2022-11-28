@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetSetLoadBalancerListenerSslCertificateActionEnum(str, Enum):
     SET_LOAD_BALANCER_LISTENER_SSL_CERTIFICATE = "SetLoadBalancerListenerSSLCertificate"
@@ -10,11 +14,11 @@ class GetSetLoadBalancerListenerSslCertificateVersionEnum(str, Enum):
 
 @dataclass
 class GetSetLoadBalancerListenerSslCertificateQueryParams:
-    action: GetSetLoadBalancerListenerSslCertificateActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    load_balancer_name: str = field(default=None, metadata={'query_param': { 'field_name': 'LoadBalancerName', 'style': 'form', 'explode': True }})
-    load_balancer_port: int = field(default=None, metadata={'query_param': { 'field_name': 'LoadBalancerPort', 'style': 'form', 'explode': True }})
-    ssl_certificate_id: str = field(default=None, metadata={'query_param': { 'field_name': 'SSLCertificateId', 'style': 'form', 'explode': True }})
-    version: GetSetLoadBalancerListenerSslCertificateVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: GetSetLoadBalancerListenerSslCertificateActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    load_balancer_name: str = field(metadata={'query_param': { 'field_name': 'LoadBalancerName', 'style': 'form', 'explode': True }})
+    load_balancer_port: int = field(metadata={'query_param': { 'field_name': 'LoadBalancerPort', 'style': 'form', 'explode': True }})
+    ssl_certificate_id: str = field(metadata={'query_param': { 'field_name': 'SSLCertificateId', 'style': 'form', 'explode': True }})
+    version: GetSetLoadBalancerListenerSslCertificateVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -30,13 +34,13 @@ class GetSetLoadBalancerListenerSslCertificateHeaders:
 
 @dataclass
 class GetSetLoadBalancerListenerSslCertificateRequest:
-    query_params: GetSetLoadBalancerListenerSslCertificateQueryParams = field(default=None)
-    headers: GetSetLoadBalancerListenerSslCertificateHeaders = field(default=None)
+    headers: GetSetLoadBalancerListenerSslCertificateHeaders = field()
+    query_params: GetSetLoadBalancerListenerSslCertificateQueryParams = field()
     
 
 @dataclass
 class GetSetLoadBalancerListenerSslCertificateResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

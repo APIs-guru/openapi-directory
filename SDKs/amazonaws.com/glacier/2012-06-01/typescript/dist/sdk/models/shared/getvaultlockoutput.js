@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // GetVaultLockOutput
 /**
  * Contains the Amazon S3 Glacier response to your request.
@@ -33,19 +33,19 @@ var GetVaultLockOutput = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=CreationDate" }),
+        SpeakeasyMetadata({ data: "json, name=CreationDate" }),
         __metadata("design:type", String)
     ], GetVaultLockOutput.prototype, "creationDate", void 0);
     __decorate([
-        Metadata({ data: "json, name=ExpirationDate" }),
+        SpeakeasyMetadata({ data: "json, name=ExpirationDate" }),
         __metadata("design:type", String)
     ], GetVaultLockOutput.prototype, "expirationDate", void 0);
     __decorate([
-        Metadata({ data: "json, name=Policy" }),
+        SpeakeasyMetadata({ data: "json, name=Policy" }),
         __metadata("design:type", String)
     ], GetVaultLockOutput.prototype, "policy", void 0);
     __decorate([
-        Metadata({ data: "json, name=State" }),
+        SpeakeasyMetadata({ data: "json, name=State" }),
         __metadata("design:type", String)
     ], GetVaultLockOutput.prototype, "state", void 0);
     return GetVaultLockOutput;

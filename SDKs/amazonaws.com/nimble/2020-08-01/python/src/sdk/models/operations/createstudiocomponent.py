@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
 @dataclass
 class CreateStudioComponentPathParams:
-    studio_id: str = field(default=None, metadata={'path_param': { 'field_name': 'studioId', 'style': 'simple', 'explode': False }})
+    studio_id: str = field(metadata={'path_param': { 'field_name': 'studioId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -24,10 +29,14 @@ class CreateStudioComponentHeaders:
 @dataclass_json
 @dataclass
 class CreateStudioComponentRequestBodyConfiguration:
-    active_directory_configuration: Optional[shared.ActiveDirectoryConfiguration] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'activeDirectoryConfiguration' }})
-    compute_farm_configuration: Optional[shared.ComputeFarmConfiguration] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'computeFarmConfiguration' }})
-    license_service_configuration: Optional[shared.LicenseServiceConfiguration] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'licenseServiceConfiguration' }})
-    shared_file_system_configuration: Optional[shared.SharedFileSystemConfiguration] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'sharedFileSystemConfiguration' }})
+    r"""CreateStudioComponentRequestBodyConfiguration
+    The configuration of the studio component, based on component type.
+    """
+    
+    active_directory_configuration: Optional[shared.ActiveDirectoryConfiguration] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('activeDirectoryConfiguration') }})
+    compute_farm_configuration: Optional[shared.ComputeFarmConfiguration] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('computeFarmConfiguration') }})
+    license_service_configuration: Optional[shared.LicenseServiceConfiguration] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('licenseServiceConfiguration') }})
+    shared_file_system_configuration: Optional[shared.SharedFileSystemConfiguration] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('sharedFileSystemConfiguration') }})
     
 class CreateStudioComponentRequestBodySubtypeEnum(str, Enum):
     AWS_MANAGED_MICROSOFT_AD = "AWS_MANAGED_MICROSOFT_AD"
@@ -46,34 +55,34 @@ class CreateStudioComponentRequestBodyTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class CreateStudioComponentRequestBody:
-    configuration: Optional[CreateStudioComponentRequestBodyConfiguration] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'configuration' }})
-    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
-    ec2_security_group_ids: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ec2SecurityGroupIds' }})
-    initialization_scripts: Optional[List[shared.StudioComponentInitializationScript]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'initializationScripts' }})
-    name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    script_parameters: Optional[List[shared.ScriptParameterKeyValue]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'scriptParameters' }})
-    subtype: Optional[CreateStudioComponentRequestBodySubtypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'subtype' }})
-    tags: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tags' }})
-    type: CreateStudioComponentRequestBodyTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    type: CreateStudioComponentRequestBodyTypeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('type') }})
+    configuration: Optional[CreateStudioComponentRequestBodyConfiguration] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('configuration') }})
+    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('description') }})
+    ec2_security_group_ids: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ec2SecurityGroupIds') }})
+    initialization_scripts: Optional[List[shared.StudioComponentInitializationScript]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('initializationScripts') }})
+    script_parameters: Optional[List[shared.ScriptParameterKeyValue]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('scriptParameters') }})
+    subtype: Optional[CreateStudioComponentRequestBodySubtypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('subtype') }})
+    tags: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('tags') }})
     
 
 @dataclass
 class CreateStudioComponentRequest:
-    path_params: CreateStudioComponentPathParams = field(default=None)
-    headers: CreateStudioComponentHeaders = field(default=None)
-    request: CreateStudioComponentRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: CreateStudioComponentHeaders = field()
+    path_params: CreateStudioComponentPathParams = field()
+    request: CreateStudioComponentRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class CreateStudioComponentResponse:
+    content_type: str = field()
+    status_code: int = field()
     access_denied_exception: Optional[Any] = field(default=None)
     conflict_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     create_studio_component_response: Optional[shared.CreateStudioComponentResponse] = field(default=None)
     internal_server_error_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
     service_quota_exceeded_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     validation_exception: Optional[Any] = field(default=None)
     

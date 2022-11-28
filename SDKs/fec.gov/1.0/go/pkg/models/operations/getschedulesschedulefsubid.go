@@ -15,11 +15,6 @@ type GetSchedulesScheduleFSubIDQueryParams struct {
 	PerPage *int32 `queryParam:"style=form,explode=true,name=per_page"`
 }
 
-type GetSchedulesScheduleFSubIDRequest struct {
-	PathParams  GetSchedulesScheduleFSubIDPathParams
-	QueryParams GetSchedulesScheduleFSubIDQueryParams
-}
-
 type GetSchedulesScheduleFSubIDDefaultApplicationJSONResults struct {
 	ActionCode                                         *string                  `json:"action_code,omitempty"`
 	ActionCodeFull                                     *string                  `json:"action_code_full,omitempty"`
@@ -91,6 +86,11 @@ type GetSchedulesScheduleFSubIDDefaultApplicationJSONResults struct {
 type GetSchedulesScheduleFSubIDDefaultApplicationJSON struct {
 	Pagination *shared.OffsetInfo                                        `json:"pagination,omitempty"`
 	Results    []GetSchedulesScheduleFSubIDDefaultApplicationJSONResults `json:"results,omitempty"`
+}
+
+type GetSchedulesScheduleFSubIDRequest struct {
+	PathParams  GetSchedulesScheduleFSubIDPathParams
+	QueryParams GetSchedulesScheduleFSubIDQueryParams
 }
 
 type GetSchedulesScheduleFSubIDResponse struct {

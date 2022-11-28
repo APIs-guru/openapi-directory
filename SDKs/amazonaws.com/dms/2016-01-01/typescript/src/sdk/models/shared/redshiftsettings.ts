@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { EncryptionModeValueEnum } from "./encryptionmodevalueenum";
+
 
 
 // RedshiftSettings
@@ -7,93 +8,93 @@ import { EncryptionModeValueEnum } from "./encryptionmodevalueenum";
  * Provides information that defines an Amazon Redshift endpoint.
 **/
 export class RedshiftSettings extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AcceptAnyDate" })
+  @SpeakeasyMetadata({ data: "json, name=AcceptAnyDate" })
   acceptAnyDate?: boolean;
 
-  @Metadata({ data: "json, name=AfterConnectScript" })
+  @SpeakeasyMetadata({ data: "json, name=AfterConnectScript" })
   afterConnectScript?: string;
 
-  @Metadata({ data: "json, name=BucketFolder" })
+  @SpeakeasyMetadata({ data: "json, name=BucketFolder" })
   bucketFolder?: string;
 
-  @Metadata({ data: "json, name=BucketName" })
+  @SpeakeasyMetadata({ data: "json, name=BucketName" })
   bucketName?: string;
 
-  @Metadata({ data: "json, name=CaseSensitiveNames" })
+  @SpeakeasyMetadata({ data: "json, name=CaseSensitiveNames" })
   caseSensitiveNames?: boolean;
 
-  @Metadata({ data: "json, name=CompUpdate" })
+  @SpeakeasyMetadata({ data: "json, name=CompUpdate" })
   compUpdate?: boolean;
 
-  @Metadata({ data: "json, name=ConnectionTimeout" })
+  @SpeakeasyMetadata({ data: "json, name=ConnectionTimeout" })
   connectionTimeout?: number;
 
-  @Metadata({ data: "json, name=DatabaseName" })
+  @SpeakeasyMetadata({ data: "json, name=DatabaseName" })
   databaseName?: string;
 
-  @Metadata({ data: "json, name=DateFormat" })
+  @SpeakeasyMetadata({ data: "json, name=DateFormat" })
   dateFormat?: string;
 
-  @Metadata({ data: "json, name=EmptyAsNull" })
+  @SpeakeasyMetadata({ data: "json, name=EmptyAsNull" })
   emptyAsNull?: boolean;
 
-  @Metadata({ data: "json, name=EncryptionMode" })
+  @SpeakeasyMetadata({ data: "json, name=EncryptionMode" })
   encryptionMode?: EncryptionModeValueEnum;
 
-  @Metadata({ data: "json, name=ExplicitIds" })
+  @SpeakeasyMetadata({ data: "json, name=ExplicitIds" })
   explicitIds?: boolean;
 
-  @Metadata({ data: "json, name=FileTransferUploadStreams" })
+  @SpeakeasyMetadata({ data: "json, name=FileTransferUploadStreams" })
   fileTransferUploadStreams?: number;
 
-  @Metadata({ data: "json, name=LoadTimeout" })
+  @SpeakeasyMetadata({ data: "json, name=LoadTimeout" })
   loadTimeout?: number;
 
-  @Metadata({ data: "json, name=MaxFileSize" })
+  @SpeakeasyMetadata({ data: "json, name=MaxFileSize" })
   maxFileSize?: number;
 
-  @Metadata({ data: "json, name=Password" })
+  @SpeakeasyMetadata({ data: "json, name=Password" })
   password?: string;
 
-  @Metadata({ data: "json, name=Port" })
+  @SpeakeasyMetadata({ data: "json, name=Port" })
   port?: number;
 
-  @Metadata({ data: "json, name=RemoveQuotes" })
+  @SpeakeasyMetadata({ data: "json, name=RemoveQuotes" })
   removeQuotes?: boolean;
 
-  @Metadata({ data: "json, name=ReplaceChars" })
+  @SpeakeasyMetadata({ data: "json, name=ReplaceChars" })
   replaceChars?: string;
 
-  @Metadata({ data: "json, name=ReplaceInvalidChars" })
+  @SpeakeasyMetadata({ data: "json, name=ReplaceInvalidChars" })
   replaceInvalidChars?: string;
 
-  @Metadata({ data: "json, name=SecretsManagerAccessRoleArn" })
+  @SpeakeasyMetadata({ data: "json, name=SecretsManagerAccessRoleArn" })
   secretsManagerAccessRoleArn?: string;
 
-  @Metadata({ data: "json, name=SecretsManagerSecretId" })
+  @SpeakeasyMetadata({ data: "json, name=SecretsManagerSecretId" })
   secretsManagerSecretId?: string;
 
-  @Metadata({ data: "json, name=ServerName" })
+  @SpeakeasyMetadata({ data: "json, name=ServerName" })
   serverName?: string;
 
-  @Metadata({ data: "json, name=ServerSideEncryptionKmsKeyId" })
+  @SpeakeasyMetadata({ data: "json, name=ServerSideEncryptionKmsKeyId" })
   serverSideEncryptionKmsKeyId?: string;
 
-  @Metadata({ data: "json, name=ServiceAccessRoleArn" })
+  @SpeakeasyMetadata({ data: "json, name=ServiceAccessRoleArn" })
   serviceAccessRoleArn?: string;
 
-  @Metadata({ data: "json, name=TimeFormat" })
+  @SpeakeasyMetadata({ data: "json, name=TimeFormat" })
   timeFormat?: string;
 
-  @Metadata({ data: "json, name=TrimBlanks" })
+  @SpeakeasyMetadata({ data: "json, name=TrimBlanks" })
   trimBlanks?: boolean;
 
-  @Metadata({ data: "json, name=TruncateColumns" })
+  @SpeakeasyMetadata({ data: "json, name=TruncateColumns" })
   truncateColumns?: boolean;
 
-  @Metadata({ data: "json, name=Username" })
+  @SpeakeasyMetadata({ data: "json, name=Username" })
   username?: string;
 
-  @Metadata({ data: "json, name=WriteBufferSize" })
+  @SpeakeasyMetadata({ data: "json, name=WriteBufferSize" })
   writeBufferSize?: number;
 }

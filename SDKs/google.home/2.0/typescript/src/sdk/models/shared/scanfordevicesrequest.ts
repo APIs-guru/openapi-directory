@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ScanfordevicesRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=clear_results" })
+  @SpeakeasyMetadata({ data: "json, name=clear_results" })
   clearResults: boolean;
 
-  @Metadata({ data: "json, name=enable" })
+  @SpeakeasyMetadata({ data: "json, name=enable" })
   enable: boolean;
 
-  @Metadata({ data: "json, name=timeout" })
+  @SpeakeasyMetadata({ data: "json, name=timeout" })
   timeout: number;
 }

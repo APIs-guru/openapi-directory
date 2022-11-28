@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class GetUserViewsPathParams:
-    user_id: str = field(default=None, metadata={'path_param': { 'field_name': 'userId', 'style': 'simple', 'explode': False }})
+    user_id: str = field(metadata={'path_param': { 'field_name': 'userId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -17,13 +17,13 @@ class GetUserViewsQueryParams:
 
 @dataclass
 class GetUserViewsRequest:
-    path_params: GetUserViewsPathParams = field(default=None)
-    query_params: GetUserViewsQueryParams = field(default=None)
+    path_params: GetUserViewsPathParams = field()
+    query_params: GetUserViewsQueryParams = field()
     
 
 @dataclass
 class GetUserViewsResponse:
+    content_type: str = field()
+    status_code: int = field()
     base_item_dto_query_result: Optional[shared.BaseItemDtoQueryResult] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

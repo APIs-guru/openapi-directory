@@ -1,19 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class UpdateGroupPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=groupId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=groupId" })
   groupId: string;
-}
-
-
-export class UpdateGroupRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: UpdateGroupPathParams;
-
-  @Metadata({ data: "request, media_type=application/json" })
-  request: shared.GroupUpdate;
 }
 
 export enum UpdateGroup200ApplicationJsonActionEnum {
@@ -22,35 +14,44 @@ export enum UpdateGroup200ApplicationJsonActionEnum {
 
 
 export class UpdateGroup200ApplicationJsonData extends SpeakeasyBase {
-  @Metadata({ data: "json, name=groups", elemType: shared.Group })
+  @SpeakeasyMetadata({ data: "json, name=groups", elemType: shared.Group })
   groups: shared.Group[];
 }
 
 export enum UpdateGroup200ApplicationJsonResultEnum {
-    Success = "success"
-,    Error = "error"
+    Success = "success",
+    Error = "error"
 }
 
 
 export class UpdateGroup200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=action" })
+  @SpeakeasyMetadata({ data: "json, name=action" })
   action: UpdateGroup200ApplicationJsonActionEnum;
 
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data: UpdateGroup200ApplicationJsonData;
 
-  @Metadata({ data: "json, name=result" })
+  @SpeakeasyMetadata({ data: "json, name=result" })
   result: UpdateGroup200ApplicationJsonResultEnum;
 }
 
 
+export class UpdateGroupRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: UpdateGroupPathParams;
+
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request: shared.GroupUpdate;
+}
+
+
 export class UpdateGroupResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   updateGroup200ApplicationJsonObject?: UpdateGroup200ApplicationJson;
 }

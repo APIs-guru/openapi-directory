@@ -1,14 +1,18 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class AnalyticsManagementProfileFilterLinksUpdatePathParams:
-    account_id: str = field(default=None, metadata={'path_param': { 'field_name': 'accountId', 'style': 'simple', 'explode': False }})
-    link_id: str = field(default=None, metadata={'path_param': { 'field_name': 'linkId', 'style': 'simple', 'explode': False }})
-    profile_id: str = field(default=None, metadata={'path_param': { 'field_name': 'profileId', 'style': 'simple', 'explode': False }})
-    web_property_id: str = field(default=None, metadata={'path_param': { 'field_name': 'webPropertyId', 'style': 'simple', 'explode': False }})
+    account_id: str = field(metadata={'path_param': { 'field_name': 'accountId', 'style': 'simple', 'explode': False }})
+    link_id: str = field(metadata={'path_param': { 'field_name': 'linkId', 'style': 'simple', 'explode': False }})
+    profile_id: str = field(metadata={'path_param': { 'field_name': 'profileId', 'style': 'simple', 'explode': False }})
+    web_property_id: str = field(metadata={'path_param': { 'field_name': 'webPropertyId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -24,21 +28,21 @@ class AnalyticsManagementProfileFilterLinksUpdateQueryParams:
 
 @dataclass
 class AnalyticsManagementProfileFilterLinksUpdateSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class AnalyticsManagementProfileFilterLinksUpdateRequest:
-    path_params: AnalyticsManagementProfileFilterLinksUpdatePathParams = field(default=None)
-    query_params: AnalyticsManagementProfileFilterLinksUpdateQueryParams = field(default=None)
-    request: Optional[shared.ProfileFilterLink] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: AnalyticsManagementProfileFilterLinksUpdateSecurity = field(default=None)
+    path_params: AnalyticsManagementProfileFilterLinksUpdatePathParams = field()
+    query_params: AnalyticsManagementProfileFilterLinksUpdateQueryParams = field()
+    security: AnalyticsManagementProfileFilterLinksUpdateSecurity = field()
+    request: Optional[shared.ProfileFilterLinkInput] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class AnalyticsManagementProfileFilterLinksUpdateResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     profile_filter_link: Optional[shared.ProfileFilterLink] = field(default=None)
-    status_code: int = field(default=None)
     

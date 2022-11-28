@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 
 class GetRejectVpcEndpointConnectionsActionEnum(str, Enum):
     REJECT_VPC_ENDPOINT_CONNECTIONS = "RejectVpcEndpointConnections"
@@ -10,11 +14,11 @@ class GetRejectVpcEndpointConnectionsVersionEnum(str, Enum):
 
 @dataclass
 class GetRejectVpcEndpointConnectionsQueryParams:
-    action: GetRejectVpcEndpointConnectionsActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetRejectVpcEndpointConnectionsActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    service_id: str = field(metadata={'query_param': { 'field_name': 'ServiceId', 'style': 'form', 'explode': True }})
+    version: GetRejectVpcEndpointConnectionsVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    vpc_endpoint_id: List[str] = field(metadata={'query_param': { 'field_name': 'VpcEndpointId', 'style': 'form', 'explode': True }})
     dry_run: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'DryRun', 'style': 'form', 'explode': True }})
-    service_id: str = field(default=None, metadata={'query_param': { 'field_name': 'ServiceId', 'style': 'form', 'explode': True }})
-    version: GetRejectVpcEndpointConnectionsVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
-    vpc_endpoint_id: List[str] = field(default=None, metadata={'query_param': { 'field_name': 'VpcEndpointId', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -30,13 +34,13 @@ class GetRejectVpcEndpointConnectionsHeaders:
 
 @dataclass
 class GetRejectVpcEndpointConnectionsRequest:
-    query_params: GetRejectVpcEndpointConnectionsQueryParams = field(default=None)
-    headers: GetRejectVpcEndpointConnectionsHeaders = field(default=None)
+    headers: GetRejectVpcEndpointConnectionsHeaders = field()
+    query_params: GetRejectVpcEndpointConnectionsQueryParams = field()
     
 
 @dataclass
 class GetRejectVpcEndpointConnectionsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

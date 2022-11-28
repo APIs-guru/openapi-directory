@@ -1,27 +1,28 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class CreateMapHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
@@ -31,66 +32,66 @@ export class CreateMapHeaders extends SpeakeasyBase {
  * Specifies the map tile style selected from an available provider.
 **/
 export class CreateMapRequestBodyConfiguration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Style" })
+  @SpeakeasyMetadata({ data: "json, name=Style" })
   style?: string;
 }
 
 export enum CreateMapRequestBodyPricingPlanEnum {
-    RequestBasedUsage = "RequestBasedUsage"
-,    MobileAssetTracking = "MobileAssetTracking"
-,    MobileAssetManagement = "MobileAssetManagement"
+    RequestBasedUsage = "RequestBasedUsage",
+    MobileAssetTracking = "MobileAssetTracking",
+    MobileAssetManagement = "MobileAssetManagement"
 }
 
 
 export class CreateMapRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Configuration" })
+  @SpeakeasyMetadata({ data: "json, name=Configuration" })
   configuration: CreateMapRequestBodyConfiguration;
 
-  @Metadata({ data: "json, name=Description" })
+  @SpeakeasyMetadata({ data: "json, name=Description" })
   description?: string;
 
-  @Metadata({ data: "json, name=MapName" })
+  @SpeakeasyMetadata({ data: "json, name=MapName" })
   mapName: string;
 
-  @Metadata({ data: "json, name=PricingPlan" })
+  @SpeakeasyMetadata({ data: "json, name=PricingPlan" })
   pricingPlan: CreateMapRequestBodyPricingPlanEnum;
 
-  @Metadata({ data: "json, name=Tags" })
+  @SpeakeasyMetadata({ data: "json, name=Tags" })
   tags?: Map<string, string>;
 }
 
 
 export class CreateMapRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: CreateMapHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: CreateMapRequestBody;
 }
 
 
 export class CreateMapResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   accessDeniedException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   conflictException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   createMapResponse?: shared.CreateMapResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   internalServerException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   throttlingException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   validationException?: any;
 }

@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ApplicationTransferParam } from "./applicationtransferparam";
+
 
 
 // ApplicationDataTransfer
@@ -8,12 +8,12 @@ import { ApplicationTransferParam } from "./applicationtransferparam";
  * Template to map fields of ApplicationDataTransfer resource.
 **/
 export class ApplicationDataTransfer extends SpeakeasyBase {
-  @Metadata({ data: "json, name=applicationId" })
+  @SpeakeasyMetadata({ data: "json, name=applicationId" })
   applicationId?: string;
 
-  @Metadata({ data: "json, name=applicationTransferParams", elemType: shared.ApplicationTransferParam })
+  @SpeakeasyMetadata({ data: "json, name=applicationTransferParams", elemType: ApplicationTransferParam })
   applicationTransferParams?: ApplicationTransferParam[];
 
-  @Metadata({ data: "json, name=applicationTransferStatus" })
+  @SpeakeasyMetadata({ data: "json, name=applicationTransferStatus" })
   applicationTransferStatus?: string;
 }

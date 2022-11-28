@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 
 class GetDeleteDashboardsActionEnum(str, Enum):
     DELETE_DASHBOARDS = "DeleteDashboards"
@@ -10,9 +14,9 @@ class GetDeleteDashboardsVersionEnum(str, Enum):
 
 @dataclass
 class GetDeleteDashboardsQueryParams:
-    action: GetDeleteDashboardsActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    dashboard_names: List[str] = field(default=None, metadata={'query_param': { 'field_name': 'DashboardNames', 'style': 'form', 'explode': True }})
-    version: GetDeleteDashboardsVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: GetDeleteDashboardsActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    dashboard_names: List[str] = field(metadata={'query_param': { 'field_name': 'DashboardNames', 'style': 'form', 'explode': True }})
+    version: GetDeleteDashboardsVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -28,13 +32,13 @@ class GetDeleteDashboardsHeaders:
 
 @dataclass
 class GetDeleteDashboardsRequest:
-    query_params: GetDeleteDashboardsQueryParams = field(default=None)
-    headers: GetDeleteDashboardsHeaders = field(default=None)
+    headers: GetDeleteDashboardsHeaders = field()
+    query_params: GetDeleteDashboardsQueryParams = field()
     
 
 @dataclass
 class GetDeleteDashboardsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

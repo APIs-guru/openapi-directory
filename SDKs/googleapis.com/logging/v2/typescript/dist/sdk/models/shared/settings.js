@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // Settings
 /**
  * Describes the settings associated with a project, folder, organization, billing account, or flexible resource.
@@ -33,25 +33,49 @@ var Settings = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=disableDefaultSink" }),
+        SpeakeasyMetadata({ data: "json, name=disableDefaultSink" }),
         __metadata("design:type", Boolean)
     ], Settings.prototype, "disableDefaultSink", void 0);
     __decorate([
-        Metadata({ data: "json, name=kmsKeyName" }),
+        SpeakeasyMetadata({ data: "json, name=kmsKeyName" }),
         __metadata("design:type", String)
     ], Settings.prototype, "kmsKeyName", void 0);
     __decorate([
-        Metadata({ data: "json, name=kmsServiceAccountId" }),
+        SpeakeasyMetadata({ data: "json, name=kmsServiceAccountId" }),
         __metadata("design:type", String)
     ], Settings.prototype, "kmsServiceAccountId", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], Settings.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=storageLocation" }),
+        SpeakeasyMetadata({ data: "json, name=storageLocation" }),
         __metadata("design:type", String)
     ], Settings.prototype, "storageLocation", void 0);
     return Settings;
 }(SpeakeasyBase));
 export { Settings };
+// SettingsInput
+/**
+ * Describes the settings associated with a project, folder, organization, billing account, or flexible resource.
+**/
+var SettingsInput = /** @class */ (function (_super) {
+    __extends(SettingsInput, _super);
+    function SettingsInput() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=disableDefaultSink" }),
+        __metadata("design:type", Boolean)
+    ], SettingsInput.prototype, "disableDefaultSink", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=kmsKeyName" }),
+        __metadata("design:type", String)
+    ], SettingsInput.prototype, "kmsKeyName", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=storageLocation" }),
+        __metadata("design:type", String)
+    ], SettingsInput.prototype, "storageLocation", void 0);
+    return SettingsInput;
+}(SpeakeasyBase));
+export { SettingsInput };

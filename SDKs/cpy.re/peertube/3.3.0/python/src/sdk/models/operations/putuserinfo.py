@@ -1,20 +1,21 @@
 from dataclasses import dataclass, field
 from typing import Any
+from sdk.models import shared
 
 
 @dataclass
 class PutUserInfoSecurity:
-    o_auth2: shared.SchemeOAuth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    o_auth2: shared.SchemeOAuth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class PutUserInfoRequest:
-    request: Any = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: PutUserInfoSecurity = field(default=None)
+    request: Any = field(metadata={'request': { 'media_type': 'application/json' }})
+    security: PutUserInfoSecurity = field()
     
 
 @dataclass
 class PutUserInfoResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

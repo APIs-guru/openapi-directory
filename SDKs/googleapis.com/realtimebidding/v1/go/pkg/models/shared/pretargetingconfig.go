@@ -60,6 +60,32 @@ const (
 	PretargetingConfigStateEnumSuspended        PretargetingConfigStateEnum = "SUSPENDED"
 )
 
+// PretargetingConfigInput
+// Pretargeting configuration: a set of targeting dimensions applied at the pretargeting stage of the RTB funnel. These control which inventory a bidder will receive bid requests for.
+type PretargetingConfigInput struct {
+	AllowedUserTargetingModes        []PretargetingConfigAllowedUserTargetingModesEnum `json:"allowedUserTargetingModes,omitempty"`
+	AppTargeting                     *AppTargeting                                     `json:"appTargeting,omitempty"`
+	DisplayName                      *string                                           `json:"displayName,omitempty"`
+	ExcludedContentLabelIds          []string                                          `json:"excludedContentLabelIds,omitempty"`
+	GeoTargeting                     *NumericTargetingDimension                        `json:"geoTargeting,omitempty"`
+	IncludedCreativeDimensions       []CreativeDimensions                              `json:"includedCreativeDimensions,omitempty"`
+	IncludedEnvironments             []PretargetingConfigIncludedEnvironmentsEnum      `json:"includedEnvironments,omitempty"`
+	IncludedFormats                  []PretargetingConfigIncludedFormatsEnum           `json:"includedFormats,omitempty"`
+	IncludedLanguages                []string                                          `json:"includedLanguages,omitempty"`
+	IncludedMobileOperatingSystemIds []string                                          `json:"includedMobileOperatingSystemIds,omitempty"`
+	IncludedPlatforms                []PretargetingConfigIncludedPlatformsEnum         `json:"includedPlatforms,omitempty"`
+	IncludedUserIDTypes              []PretargetingConfigIncludedUserIDTypesEnum       `json:"includedUserIdTypes,omitempty"`
+	InterstitialTargeting            *PretargetingConfigInterstitialTargetingEnum      `json:"interstitialTargeting,omitempty"`
+	MaximumQPS                       *string                                           `json:"maximumQps,omitempty"`
+	MinimumViewabilityDecile         *int32                                            `json:"minimumViewabilityDecile,omitempty"`
+	PublisherTargeting               *StringTargetingDimension                         `json:"publisherTargeting,omitempty"`
+	UserListTargeting                *NumericTargetingDimension                        `json:"userListTargeting,omitempty"`
+	VerticalTargeting                *NumericTargetingDimension                        `json:"verticalTargeting,omitempty"`
+	WebTargeting                     *StringTargetingDimension                         `json:"webTargeting,omitempty"`
+}
+
+// PretargetingConfig
+// Pretargeting configuration: a set of targeting dimensions applied at the pretargeting stage of the RTB funnel. These control which inventory a bidder will receive bid requests for.
 type PretargetingConfig struct {
 	AllowedUserTargetingModes        []PretargetingConfigAllowedUserTargetingModesEnum `json:"allowedUserTargetingModes,omitempty"`
 	AppTargeting                     *AppTargeting                                     `json:"appTargeting,omitempty"`

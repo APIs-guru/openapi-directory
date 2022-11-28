@@ -1,7 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import edit
+from sdk import utils
+from . import *
 
 class RenderResponseDataStatusEnum(str, Enum):
     QUEUED = "queued"
@@ -15,17 +20,21 @@ class RenderResponseDataStatusEnum(str, Enum):
 @dataclass_json
 @dataclass
 class RenderResponseData:
-    created: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'created' }})
-    data: edit.Edit = field(default=None, metadata={'dataclasses_json': { 'field_name': 'data' }})
-    duration: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'duration' }})
-    error: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'error' }})
-    id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
-    owner: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'owner' }})
-    plan: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'plan' }})
-    poster: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'poster' }})
-    render_time: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'renderTime' }})
-    status: RenderResponseDataStatusEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
-    thumbnail: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'thumbnail' }})
-    updated: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'updated' }})
-    url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'url' }})
+    r"""RenderResponseData
+    The response data returned with the [RenderResponse](#tocs_renderresponse) including status and URL.
+    """
+    
+    created: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('created') }})
+    data: Edit = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('data') }})
+    id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('id') }})
+    owner: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('owner') }})
+    status: RenderResponseDataStatusEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('status') }})
+    updated: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('updated') }})
+    duration: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('duration') }})
+    error: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('error') }})
+    plan: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('plan') }})
+    poster: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('poster') }})
+    render_time: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('renderTime') }})
+    thumbnail: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('thumbnail') }})
+    url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('url') }})
     

@@ -1,7 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import channelsectionlocalization
+from sdk import utils
+from . import *
 
 class ChannelSectionSnippetStyleEnum(str, Enum):
     CHANNELSECTION_STYLE_UNSPECIFIED = "channelsectionStyleUnspecified"
@@ -31,11 +33,15 @@ class ChannelSectionSnippetTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class ChannelSectionSnippet:
-    channel_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'channelId' }})
-    default_language: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'defaultLanguage' }})
-    localized: Optional[channelsectionlocalization.ChannelSectionLocalization] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'localized' }})
-    position: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'position' }})
-    style: Optional[ChannelSectionSnippetStyleEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'style' }})
-    title: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'title' }})
-    type: Optional[ChannelSectionSnippetTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    r"""ChannelSectionSnippet
+    Basic details about a channel section, including title, style and position.
+    """
+    
+    channel_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('channelId') }})
+    default_language: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('defaultLanguage') }})
+    localized: Optional[ChannelSectionLocalization] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('localized') }})
+    position: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('position') }})
+    style: Optional[ChannelSectionSnippetStyleEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('style') }})
+    title: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('title') }})
+    type: Optional[ChannelSectionSnippetTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('type') }})
     

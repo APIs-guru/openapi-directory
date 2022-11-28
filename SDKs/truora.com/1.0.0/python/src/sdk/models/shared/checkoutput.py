@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
 from dataclasses_json import dataclass_json
-from . import check
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class CheckOutput:
-    check: check.Check = field(default=None, metadata={'dataclasses_json': { 'field_name': 'check' }})
-    details: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'details' }})
-    self: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'self' }})
+    r"""CheckOutput
+    Represents the result of a background check search
+    """
+    
+    check: Check = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('check') }})
+    details: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('details') }})
+    self: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('self') }})
     

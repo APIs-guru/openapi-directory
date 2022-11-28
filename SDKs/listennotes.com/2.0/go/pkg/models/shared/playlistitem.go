@@ -8,6 +8,8 @@ const (
 	PlaylistItemTypeEnumPodcast     PlaylistItemTypeEnum = "podcast"
 )
 
+// PlaylistItem
+// An item in a playlist
 type PlaylistItem struct {
 	AddedAtMs *int64                `json:"added_at_ms,omitempty"`
 	Data      *interface{}          `json:"data,omitempty"`

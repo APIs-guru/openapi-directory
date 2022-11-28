@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SecurityConfiguration } from "./securityconfiguration";
 
 
+
 export class GetSecurityConfigurationsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=SecurityConfigurations", elemType: shared.SecurityConfiguration })
+  @SpeakeasyMetadata({ data: "json, name=SecurityConfigurations", elemType: SecurityConfiguration })
   securityConfigurations?: SecurityConfiguration[];
 }

@@ -9,8 +9,8 @@ class PostToolsCreateMediaExtendedRequest:
 
 @dataclass
 class PostToolsCreateMediaExtendedResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     post_tools_create_media_extended_200_application_json_any: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

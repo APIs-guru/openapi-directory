@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { InstanceActionEnum } from "./instanceactionenum";
+
 
 
 // BlueInstanceTerminationOption
@@ -7,9 +8,9 @@ import { InstanceActionEnum } from "./instanceactionenum";
  * Information about whether instances in the original environment are terminated when a blue/green deployment is successful. <code>BlueInstanceTerminationOption</code> does not apply to Lambda deployments. 
 **/
 export class BlueInstanceTerminationOption extends SpeakeasyBase {
-  @Metadata({ data: "json, name=action" })
+  @SpeakeasyMetadata({ data: "json, name=action" })
   action?: InstanceActionEnum;
 
-  @Metadata({ data: "json, name=terminationWaitTimeInMinutes" })
+  @SpeakeasyMetadata({ data: "json, name=terminationWaitTimeInMinutes" })
   terminationWaitTimeInMinutes?: number;
 }

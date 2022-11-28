@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class GetLibraryPathParams:
-    organization_uuid: str = field(default=None, metadata={'path_param': { 'field_name': 'organizationUuid', 'style': 'simple', 'explode': False }})
+    organization_uuid: str = field(metadata={'path_param': { 'field_name': 'organizationUuid', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -17,32 +17,22 @@ class GetLibraryQueryParams:
     
 
 @dataclass
-class GetLibrarySecurityOption1:
-    zettle_oauth: shared.SchemeZettleOauth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    
-
-@dataclass
-class GetLibrarySecurityOption2:
-    zettle_api_key: shared.SchemeZettleAPIKey = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
-    
-
-@dataclass
 class GetLibrarySecurity:
-    option1: Optional[GetLibrarySecurityOption1] = field(default=None, metadata={'security': { 'option': True }})
-    option2: Optional[GetLibrarySecurityOption2] = field(default=None, metadata={'security': { 'option': True }})
+    zettle_api_key: Optional[shared.SchemeZettleAPIKey] = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    zettle_oauth: Optional[shared.SchemeZettleOauth] = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class GetLibraryRequest:
-    path_params: GetLibraryPathParams = field(default=None)
-    query_params: GetLibraryQueryParams = field(default=None)
-    security: GetLibrarySecurity = field(default=None)
+    path_params: GetLibraryPathParams = field()
+    query_params: GetLibraryQueryParams = field()
+    security: GetLibrarySecurity = field()
     
 
 @dataclass
 class GetLibraryResponse:
-    content_type: str = field(default=None)
-    headers: dict[str, List[str]] = field(default=None)
+    content_type: str = field()
+    headers: dict[str, List[str]] = field()
+    status_code: int = field()
     library_response: Optional[shared.LibraryResponse] = field(default=None)
-    status_code: int = field(default=None)
     

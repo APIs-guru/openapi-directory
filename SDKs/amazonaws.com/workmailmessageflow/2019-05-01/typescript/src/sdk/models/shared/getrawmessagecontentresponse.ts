@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetRawMessageContentResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=messageContent" })
+  @SpeakeasyMetadata({ data: "json, name=messageContent" })
   messageContent: string;
 }

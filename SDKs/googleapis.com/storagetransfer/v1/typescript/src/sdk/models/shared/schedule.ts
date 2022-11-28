@@ -1,8 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TimeOfDay } from "./timeofday";
 import { Date } from "./date";
-import { Date } from "./date";
-import { TimeOfDay } from "./timeofday";
+
 
 
 // Schedule
@@ -10,18 +9,18 @@ import { TimeOfDay } from "./timeofday";
  * Transfers can be scheduled to recur or to run just once.
 **/
 export class Schedule extends SpeakeasyBase {
-  @Metadata({ data: "json, name=endTimeOfDay" })
+  @SpeakeasyMetadata({ data: "json, name=endTimeOfDay" })
   endTimeOfDay?: TimeOfDay;
 
-  @Metadata({ data: "json, name=repeatInterval" })
+  @SpeakeasyMetadata({ data: "json, name=repeatInterval" })
   repeatInterval?: string;
 
-  @Metadata({ data: "json, name=scheduleEndDate" })
+  @SpeakeasyMetadata({ data: "json, name=scheduleEndDate" })
   scheduleEndDate?: Date;
 
-  @Metadata({ data: "json, name=scheduleStartDate" })
+  @SpeakeasyMetadata({ data: "json, name=scheduleStartDate" })
   scheduleStartDate?: Date;
 
-  @Metadata({ data: "json, name=startTimeOfDay" })
+  @SpeakeasyMetadata({ data: "json, name=startTimeOfDay" })
   startTimeOfDay?: TimeOfDay;
 }

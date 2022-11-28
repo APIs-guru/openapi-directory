@@ -22,46 +22,46 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var DescribeOrganizationResponse = /** @class */ (function (_super) {
     __extends(DescribeOrganizationResponse, _super);
     function DescribeOrganizationResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=ARN" }),
+        SpeakeasyMetadata({ data: "json, name=ARN" }),
         __metadata("design:type", String)
     ], DescribeOrganizationResponse.prototype, "arn", void 0);
     __decorate([
-        Metadata({ data: "json, name=Alias" }),
+        SpeakeasyMetadata({ data: "json, name=Alias" }),
         __metadata("design:type", String)
     ], DescribeOrganizationResponse.prototype, "alias", void 0);
     __decorate([
-        Metadata({ data: "json, name=CompletedDate" }),
+        SpeakeasyMetadata({ data: "json, name=CompletedDate" }),
         __metadata("design:type", Date)
     ], DescribeOrganizationResponse.prototype, "completedDate", void 0);
     __decorate([
-        Metadata({ data: "json, name=DefaultMailDomain" }),
+        SpeakeasyMetadata({ data: "json, name=DefaultMailDomain" }),
         __metadata("design:type", String)
     ], DescribeOrganizationResponse.prototype, "defaultMailDomain", void 0);
     __decorate([
-        Metadata({ data: "json, name=DirectoryId" }),
+        SpeakeasyMetadata({ data: "json, name=DirectoryId" }),
         __metadata("design:type", String)
     ], DescribeOrganizationResponse.prototype, "directoryId", void 0);
     __decorate([
-        Metadata({ data: "json, name=DirectoryType" }),
+        SpeakeasyMetadata({ data: "json, name=DirectoryType" }),
         __metadata("design:type", String)
     ], DescribeOrganizationResponse.prototype, "directoryType", void 0);
     __decorate([
-        Metadata({ data: "json, name=ErrorMessage" }),
+        SpeakeasyMetadata({ data: "json, name=ErrorMessage" }),
         __metadata("design:type", String)
     ], DescribeOrganizationResponse.prototype, "errorMessage", void 0);
     __decorate([
-        Metadata({ data: "json, name=OrganizationId" }),
+        SpeakeasyMetadata({ data: "json, name=OrganizationId" }),
         __metadata("design:type", String)
     ], DescribeOrganizationResponse.prototype, "organizationId", void 0);
     __decorate([
-        Metadata({ data: "json, name=State" }),
+        SpeakeasyMetadata({ data: "json, name=State" }),
         __metadata("design:type", String)
     ], DescribeOrganizationResponse.prototype, "state", void 0);
     return DescribeOrganizationResponse;

@@ -1,16 +1,19 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import partitionconfig
-from . import reservationconfig
-from . import retentionconfig
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class Topic:
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    partition_config: Optional[partitionconfig.PartitionConfig] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'partitionConfig' }})
-    reservation_config: Optional[reservationconfig.ReservationConfig] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'reservationConfig' }})
-    retention_config: Optional[retentionconfig.RetentionConfig] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'retentionConfig' }})
+    r"""Topic
+    Metadata about a topic resource.
+    """
+    
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    partition_config: Optional[PartitionConfig] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('partitionConfig') }})
+    reservation_config: Optional[ReservationConfig] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('reservationConfig') }})
+    retention_config: Optional[RetentionConfig] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('retentionConfig') }})
     

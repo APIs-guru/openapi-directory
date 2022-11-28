@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var CreateConfigHeaders = /** @class */ (function (_super) {
     __extends(CreateConfigHeaders, _super);
@@ -30,31 +30,31 @@ var CreateConfigHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
         __metadata("design:type", String)
     ], CreateConfigHeaders.prototype, "xAmzAlgorithm", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
         __metadata("design:type", String)
     ], CreateConfigHeaders.prototype, "xAmzContentSha256", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
         __metadata("design:type", String)
     ], CreateConfigHeaders.prototype, "xAmzCredential", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
         __metadata("design:type", String)
     ], CreateConfigHeaders.prototype, "xAmzDate", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
         __metadata("design:type", String)
     ], CreateConfigHeaders.prototype, "xAmzSecurityToken", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
         __metadata("design:type", String)
     ], CreateConfigHeaders.prototype, "xAmzSignature", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
         __metadata("design:type", String)
     ], CreateConfigHeaders.prototype, "xAmzSignedHeaders", void 0);
     return CreateConfigHeaders;
@@ -70,31 +70,31 @@ var CreateConfigRequestBodyConfigData = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=antennaDownlinkConfig" }),
+        SpeakeasyMetadata({ data: "json, name=antennaDownlinkConfig" }),
         __metadata("design:type", shared.AntennaDownlinkConfig)
     ], CreateConfigRequestBodyConfigData.prototype, "antennaDownlinkConfig", void 0);
     __decorate([
-        Metadata({ data: "json, name=antennaDownlinkDemodDecodeConfig" }),
+        SpeakeasyMetadata({ data: "json, name=antennaDownlinkDemodDecodeConfig" }),
         __metadata("design:type", shared.AntennaDownlinkDemodDecodeConfig)
     ], CreateConfigRequestBodyConfigData.prototype, "antennaDownlinkDemodDecodeConfig", void 0);
     __decorate([
-        Metadata({ data: "json, name=antennaUplinkConfig" }),
+        SpeakeasyMetadata({ data: "json, name=antennaUplinkConfig" }),
         __metadata("design:type", shared.AntennaUplinkConfig)
     ], CreateConfigRequestBodyConfigData.prototype, "antennaUplinkConfig", void 0);
     __decorate([
-        Metadata({ data: "json, name=dataflowEndpointConfig" }),
+        SpeakeasyMetadata({ data: "json, name=dataflowEndpointConfig" }),
         __metadata("design:type", shared.DataflowEndpointConfig)
     ], CreateConfigRequestBodyConfigData.prototype, "dataflowEndpointConfig", void 0);
     __decorate([
-        Metadata({ data: "json, name=s3RecordingConfig" }),
+        SpeakeasyMetadata({ data: "json, name=s3RecordingConfig" }),
         __metadata("design:type", shared.S3RecordingConfig)
     ], CreateConfigRequestBodyConfigData.prototype, "s3RecordingConfig", void 0);
     __decorate([
-        Metadata({ data: "json, name=trackingConfig" }),
+        SpeakeasyMetadata({ data: "json, name=trackingConfig" }),
         __metadata("design:type", shared.TrackingConfig)
     ], CreateConfigRequestBodyConfigData.prototype, "trackingConfig", void 0);
     __decorate([
-        Metadata({ data: "json, name=uplinkEchoConfig" }),
+        SpeakeasyMetadata({ data: "json, name=uplinkEchoConfig" }),
         __metadata("design:type", shared.UplinkEchoConfig)
     ], CreateConfigRequestBodyConfigData.prototype, "uplinkEchoConfig", void 0);
     return CreateConfigRequestBodyConfigData;
@@ -106,15 +106,15 @@ var CreateConfigRequestBody = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=configData" }),
+        SpeakeasyMetadata({ data: "json, name=configData" }),
         __metadata("design:type", CreateConfigRequestBodyConfigData)
     ], CreateConfigRequestBody.prototype, "configData", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], CreateConfigRequestBody.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=tags" }),
+        SpeakeasyMetadata({ data: "json, name=tags" }),
         __metadata("design:type", Map)
     ], CreateConfigRequestBody.prototype, "tags", void 0);
     return CreateConfigRequestBody;
@@ -126,11 +126,11 @@ var CreateConfigRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", CreateConfigHeaders)
     ], CreateConfigRequest.prototype, "headers", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", CreateConfigRequestBody)
     ], CreateConfigRequest.prototype, "request", void 0);
     return CreateConfigRequest;
@@ -142,31 +142,31 @@ var CreateConfigResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.ConfigIdResponse)
     ], CreateConfigResponse.prototype, "configIdResponse", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], CreateConfigResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], CreateConfigResponse.prototype, "dependencyException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], CreateConfigResponse.prototype, "invalidParameterException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], CreateConfigResponse.prototype, "resourceLimitExceededException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], CreateConfigResponse.prototype, "resourceNotFoundException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], CreateConfigResponse.prototype, "statusCode", void 0);
     return CreateConfigResponse;

@@ -14,15 +14,15 @@ type CodeScanningDeleteAnalysisQueryParams struct {
 	ConfirmDelete *string `queryParam:"style=form,explode=true,name=confirm_delete"`
 }
 
-type CodeScanningDeleteAnalysisRequest struct {
-	PathParams  CodeScanningDeleteAnalysisPathParams
-	QueryParams CodeScanningDeleteAnalysisQueryParams
-}
-
 type CodeScanningDeleteAnalysis503ApplicationJSON struct {
 	Code             *string `json:"code,omitempty"`
 	DocumentationURL *string `json:"documentation_url,omitempty"`
 	Message          *string `json:"message,omitempty"`
+}
+
+type CodeScanningDeleteAnalysisRequest struct {
+	PathParams  CodeScanningDeleteAnalysisPathParams
+	QueryParams CodeScanningDeleteAnalysisQueryParams
 }
 
 type CodeScanningDeleteAnalysisResponse struct {

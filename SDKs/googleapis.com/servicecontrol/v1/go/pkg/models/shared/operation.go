@@ -8,6 +8,8 @@ const (
 	OperationImportanceEnumDebug OperationImportanceEnum = "DEBUG"
 )
 
+// Operation
+// Represents information regarding an operation.
 type Operation struct {
 	ConsumerID      *string                  `json:"consumerId,omitempty"`
 	EndTime         *string                  `json:"endTime,omitempty"`

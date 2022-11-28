@@ -1,0 +1,19 @@
+export var MarketoConnectorOperatorEnum;
+(function (MarketoConnectorOperatorEnum) {
+    MarketoConnectorOperatorEnum["Projection"] = "PROJECTION";
+    MarketoConnectorOperatorEnum["LessThan"] = "LESS_THAN";
+    MarketoConnectorOperatorEnum["GreaterThan"] = "GREATER_THAN";
+    MarketoConnectorOperatorEnum["Between"] = "BETWEEN";
+    MarketoConnectorOperatorEnum["Addition"] = "ADDITION";
+    MarketoConnectorOperatorEnum["Multiplication"] = "MULTIPLICATION";
+    MarketoConnectorOperatorEnum["Division"] = "DIVISION";
+    MarketoConnectorOperatorEnum["Subtraction"] = "SUBTRACTION";
+    MarketoConnectorOperatorEnum["MaskAll"] = "MASK_ALL";
+    MarketoConnectorOperatorEnum["MaskFirstN"] = "MASK_FIRST_N";
+    MarketoConnectorOperatorEnum["MaskLastN"] = "MASK_LAST_N";
+    MarketoConnectorOperatorEnum["ValidateNonNull"] = "VALIDATE_NON_NULL";
+    MarketoConnectorOperatorEnum["ValidateNonZero"] = "VALIDATE_NON_ZERO";
+    MarketoConnectorOperatorEnum["ValidateNonNegative"] = "VALIDATE_NON_NEGATIVE";
+    MarketoConnectorOperatorEnum["ValidateNumeric"] = "VALIDATE_NUMERIC";
+    MarketoConnectorOperatorEnum["NoOp"] = "NO_OP";
+})(MarketoConnectorOperatorEnum || (MarketoConnectorOperatorEnum = {}));

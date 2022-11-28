@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { OrganizationOwner } from "./organizationowner";
 export var OrganizationLifecycleStateEnum;
 (function (OrganizationLifecycleStateEnum) {
@@ -40,27 +40,27 @@ var Organization = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=creationTime" }),
+        SpeakeasyMetadata({ data: "json, name=creationTime" }),
         __metadata("design:type", String)
     ], Organization.prototype, "creationTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=displayName" }),
+        SpeakeasyMetadata({ data: "json, name=displayName" }),
         __metadata("design:type", String)
     ], Organization.prototype, "displayName", void 0);
     __decorate([
-        Metadata({ data: "json, name=lifecycleState" }),
+        SpeakeasyMetadata({ data: "json, name=lifecycleState" }),
         __metadata("design:type", String)
     ], Organization.prototype, "lifecycleState", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], Organization.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=organizationId" }),
+        SpeakeasyMetadata({ data: "json, name=organizationId" }),
         __metadata("design:type", String)
     ], Organization.prototype, "organizationId", void 0);
     __decorate([
-        Metadata({ data: "json, name=owner" }),
+        SpeakeasyMetadata({ data: "json, name=owner" }),
         __metadata("design:type", OrganizationOwner)
     ], Organization.prototype, "owner", void 0);
     return Organization;

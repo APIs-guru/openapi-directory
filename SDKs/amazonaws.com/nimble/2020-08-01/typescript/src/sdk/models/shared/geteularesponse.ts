@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Eula } from "./eula";
 
 
+
 export class GetEulaResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=eula" })
+  @SpeakeasyMetadata({ data: "json, name=eula" })
   eula?: Eula;
 }

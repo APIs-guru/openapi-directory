@@ -1,52 +1,53 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetQuestionsIdsTimelinePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=ids" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=ids" })
   ids: string;
 }
 
 
 export class GetQuestionsIdsTimelineQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=callback" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=callback" })
   callback?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=filter" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=filter" })
   filter?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=fromdate" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=fromdate" })
   fromdate?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=page" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page" })
   page?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=pagesize" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=pagesize" })
   pagesize?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=site" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=site" })
   site: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=todate" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=todate" })
   todate?: number;
 }
 
 
 export class GetQuestionsIdsTimelineRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetQuestionsIdsTimelinePathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetQuestionsIdsTimelineQueryParams;
 }
 
 
 export class GetQuestionsIdsTimelineResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

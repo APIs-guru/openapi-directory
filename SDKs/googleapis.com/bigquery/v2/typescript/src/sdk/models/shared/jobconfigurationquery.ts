@@ -1,5 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Clustering } from "./clustering";
 import { ConnectionProperty } from "./connectionproperty";
 import { DatasetReference } from "./datasetreference";
@@ -12,76 +11,77 @@ import { TimePartitioning } from "./timepartitioning";
 import { UserDefinedFunctionResource } from "./userdefinedfunctionresource";
 
 
+
 export class JobConfigurationQuery extends SpeakeasyBase {
-  @Metadata({ data: "json, name=allowLargeResults" })
+  @SpeakeasyMetadata({ data: "json, name=allowLargeResults" })
   allowLargeResults?: boolean;
 
-  @Metadata({ data: "json, name=clustering" })
+  @SpeakeasyMetadata({ data: "json, name=clustering" })
   clustering?: Clustering;
 
-  @Metadata({ data: "json, name=connectionProperties", elemType: shared.ConnectionProperty })
+  @SpeakeasyMetadata({ data: "json, name=connectionProperties", elemType: ConnectionProperty })
   connectionProperties?: ConnectionProperty[];
 
-  @Metadata({ data: "json, name=createDisposition" })
+  @SpeakeasyMetadata({ data: "json, name=createDisposition" })
   createDisposition?: string;
 
-  @Metadata({ data: "json, name=createSession" })
+  @SpeakeasyMetadata({ data: "json, name=createSession" })
   createSession?: boolean;
 
-  @Metadata({ data: "json, name=defaultDataset" })
+  @SpeakeasyMetadata({ data: "json, name=defaultDataset" })
   defaultDataset?: DatasetReference;
 
-  @Metadata({ data: "json, name=destinationEncryptionConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=destinationEncryptionConfiguration" })
   destinationEncryptionConfiguration?: EncryptionConfiguration;
 
-  @Metadata({ data: "json, name=destinationTable" })
+  @SpeakeasyMetadata({ data: "json, name=destinationTable" })
   destinationTable?: TableReference;
 
-  @Metadata({ data: "json, name=flattenResults" })
+  @SpeakeasyMetadata({ data: "json, name=flattenResults" })
   flattenResults?: boolean;
 
-  @Metadata({ data: "json, name=maximumBillingTier" })
+  @SpeakeasyMetadata({ data: "json, name=maximumBillingTier" })
   maximumBillingTier?: number;
 
-  @Metadata({ data: "json, name=maximumBytesBilled" })
+  @SpeakeasyMetadata({ data: "json, name=maximumBytesBilled" })
   maximumBytesBilled?: string;
 
-  @Metadata({ data: "json, name=parameterMode" })
+  @SpeakeasyMetadata({ data: "json, name=parameterMode" })
   parameterMode?: string;
 
-  @Metadata({ data: "json, name=preserveNulls" })
+  @SpeakeasyMetadata({ data: "json, name=preserveNulls" })
   preserveNulls?: boolean;
 
-  @Metadata({ data: "json, name=priority" })
+  @SpeakeasyMetadata({ data: "json, name=priority" })
   priority?: string;
 
-  @Metadata({ data: "json, name=query" })
+  @SpeakeasyMetadata({ data: "json, name=query" })
   query?: string;
 
-  @Metadata({ data: "json, name=queryParameters", elemType: shared.QueryParameter })
+  @SpeakeasyMetadata({ data: "json, name=queryParameters", elemType: QueryParameter })
   queryParameters?: QueryParameter[];
 
-  @Metadata({ data: "json, name=rangePartitioning" })
+  @SpeakeasyMetadata({ data: "json, name=rangePartitioning" })
   rangePartitioning?: RangePartitioning;
 
-  @Metadata({ data: "json, name=schemaUpdateOptions" })
+  @SpeakeasyMetadata({ data: "json, name=schemaUpdateOptions" })
   schemaUpdateOptions?: string[];
 
-  @Metadata({ data: "json, name=tableDefinitions", elemType: shared.ExternalDataConfiguration })
+  @SpeakeasyMetadata({ data: "json, name=tableDefinitions", elemType: ExternalDataConfiguration })
   tableDefinitions?: Map<string, ExternalDataConfiguration>;
 
-  @Metadata({ data: "json, name=timePartitioning" })
+  @SpeakeasyMetadata({ data: "json, name=timePartitioning" })
   timePartitioning?: TimePartitioning;
 
-  @Metadata({ data: "json, name=useLegacySql" })
+  @SpeakeasyMetadata({ data: "json, name=useLegacySql" })
   useLegacySql?: boolean;
 
-  @Metadata({ data: "json, name=useQueryCache" })
+  @SpeakeasyMetadata({ data: "json, name=useQueryCache" })
   useQueryCache?: boolean;
 
-  @Metadata({ data: "json, name=userDefinedFunctionResources", elemType: shared.UserDefinedFunctionResource })
+  @SpeakeasyMetadata({ data: "json, name=userDefinedFunctionResources", elemType: UserDefinedFunctionResource })
   userDefinedFunctionResources?: UserDefinedFunctionResource[];
 
-  @Metadata({ data: "json, name=writeDisposition" })
+  @SpeakeasyMetadata({ data: "json, name=writeDisposition" })
   writeDisposition?: string;
 }

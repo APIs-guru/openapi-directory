@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetDescribeSynonymOptionsActionEnum(str, Enum):
     DESCRIBE_SYNONYM_OPTIONS = "DescribeSynonymOptions"
@@ -10,9 +14,9 @@ class GetDescribeSynonymOptionsVersionEnum(str, Enum):
 
 @dataclass
 class GetDescribeSynonymOptionsQueryParams:
-    action: GetDescribeSynonymOptionsActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    domain_name: str = field(default=None, metadata={'query_param': { 'field_name': 'DomainName', 'style': 'form', 'explode': True }})
-    version: GetDescribeSynonymOptionsVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: GetDescribeSynonymOptionsActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    domain_name: str = field(metadata={'query_param': { 'field_name': 'DomainName', 'style': 'form', 'explode': True }})
+    version: GetDescribeSynonymOptionsVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -28,13 +32,13 @@ class GetDescribeSynonymOptionsHeaders:
 
 @dataclass
 class GetDescribeSynonymOptionsRequest:
-    query_params: GetDescribeSynonymOptionsQueryParams = field(default=None)
-    headers: GetDescribeSynonymOptionsHeaders = field(default=None)
+    headers: GetDescribeSynonymOptionsHeaders = field()
+    query_params: GetDescribeSynonymOptionsQueryParams = field()
     
 
 @dataclass
 class GetDescribeSynonymOptionsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

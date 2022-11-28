@@ -22,18 +22,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var InitiateLayerUploadResponse = /** @class */ (function (_super) {
     __extends(InitiateLayerUploadResponse, _super);
     function InitiateLayerUploadResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=partSize" }),
+        SpeakeasyMetadata({ data: "json, name=partSize" }),
         __metadata("design:type", Number)
     ], InitiateLayerUploadResponse.prototype, "partSize", void 0);
     __decorate([
-        Metadata({ data: "json, name=uploadId" }),
+        SpeakeasyMetadata({ data: "json, name=uploadId" }),
         __metadata("design:type", String)
     ], InitiateLayerUploadResponse.prototype, "uploadId", void 0);
     return InitiateLayerUploadResponse;

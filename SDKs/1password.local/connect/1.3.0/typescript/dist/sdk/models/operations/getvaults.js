@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetVaultsQueryParams = /** @class */ (function (_super) {
     __extends(GetVaultsQueryParams, _super);
@@ -30,7 +30,7 @@ var GetVaultsQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=filter" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=filter" }),
         __metadata("design:type", String)
     ], GetVaultsQueryParams.prototype, "filter", void 0);
     return GetVaultsQueryParams;
@@ -42,7 +42,7 @@ var GetVaultsSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=http;subtype=bearer" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" }),
         __metadata("design:type", shared.SchemeConnectToken)
     ], GetVaultsSecurity.prototype, "connectToken", void 0);
     return GetVaultsSecurity;
@@ -54,11 +54,11 @@ var GetVaultsRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetVaultsQueryParams)
     ], GetVaultsRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetVaultsSecurity)
     ], GetVaultsRequest.prototype, "security", void 0);
     return GetVaultsRequest;
@@ -70,19 +70,19 @@ var GetVaultsResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetVaultsResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.ErrorResponse)
     ], GetVaultsResponse.prototype, "errorResponse", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetVaultsResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata({ elemType: shared.Vault }),
+        SpeakeasyMetadata({ elemType: shared.Vault }),
         __metadata("design:type", Array)
     ], GetVaultsResponse.prototype, "vaults", void 0);
     return GetVaultsResponse;

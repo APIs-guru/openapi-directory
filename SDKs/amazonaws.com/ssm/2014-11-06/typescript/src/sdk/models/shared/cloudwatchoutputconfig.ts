@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // CloudWatchOutputConfig
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Configuration options for sending command output to Amazon CloudWatch Logs.
 **/
 export class CloudWatchOutputConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CloudWatchLogGroupName" })
+  @SpeakeasyMetadata({ data: "json, name=CloudWatchLogGroupName" })
   cloudWatchLogGroupName?: string;
 
-  @Metadata({ data: "json, name=CloudWatchOutputEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=CloudWatchOutputEnabled" })
   cloudWatchOutputEnabled?: boolean;
 }

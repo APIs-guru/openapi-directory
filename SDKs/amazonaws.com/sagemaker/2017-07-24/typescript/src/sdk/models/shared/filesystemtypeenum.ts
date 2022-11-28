@@ -1,6 +1,7 @@
 
 
+
 export enum FileSystemTypeEnum {
-    Efs = "EFS"
-,    FSxLustre = "FSxLustre"
+    Efs = "EFS",
+    FSxLustre = "FSxLustre"
 }

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { SearchedVersion } from "./searchedversion";
 /**
  * Describes the response received when searching for artifacts.

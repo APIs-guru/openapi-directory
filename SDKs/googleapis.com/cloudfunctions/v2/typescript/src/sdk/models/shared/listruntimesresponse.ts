@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Runtime } from "./runtime";
+
 
 
 // ListRuntimesResponse
@@ -8,6 +8,6 @@ import { Runtime } from "./runtime";
  * Response for the `ListRuntimes` method.
 **/
 export class ListRuntimesResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=runtimes", elemType: shared.Runtime })
+  @SpeakeasyMetadata({ data: "json, name=runtimes", elemType: Runtime })
   runtimes?: Runtime[];
 }

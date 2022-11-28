@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class ValidityPeriodTypeEnum(str, Enum):
     END_DATE = "END_DATE"

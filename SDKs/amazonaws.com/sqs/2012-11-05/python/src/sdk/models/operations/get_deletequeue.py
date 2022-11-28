@@ -1,11 +1,15 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 
 @dataclass
 class GetDeleteQueuePathParams:
-    account_number: int = field(default=None, metadata={'path_param': { 'field_name': 'AccountNumber', 'style': 'simple', 'explode': False }})
-    queue_name: str = field(default=None, metadata={'path_param': { 'field_name': 'QueueName', 'style': 'simple', 'explode': False }})
+    account_number: int = field(metadata={'path_param': { 'field_name': 'AccountNumber', 'style': 'simple', 'explode': False }})
+    queue_name: str = field(metadata={'path_param': { 'field_name': 'QueueName', 'style': 'simple', 'explode': False }})
     
 class GetDeleteQueueActionEnum(str, Enum):
     DELETE_QUEUE = "DeleteQueue"
@@ -16,8 +20,8 @@ class GetDeleteQueueVersionEnum(str, Enum):
 
 @dataclass
 class GetDeleteQueueQueryParams:
-    action: GetDeleteQueueActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: GetDeleteQueueVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: GetDeleteQueueActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: GetDeleteQueueVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -33,13 +37,13 @@ class GetDeleteQueueHeaders:
 
 @dataclass
 class GetDeleteQueueRequest:
-    path_params: GetDeleteQueuePathParams = field(default=None)
-    query_params: GetDeleteQueueQueryParams = field(default=None)
-    headers: GetDeleteQueueHeaders = field(default=None)
+    headers: GetDeleteQueueHeaders = field()
+    path_params: GetDeleteQueuePathParams = field()
+    query_params: GetDeleteQueueQueryParams = field()
     
 
 @dataclass
 class GetDeleteQueueResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

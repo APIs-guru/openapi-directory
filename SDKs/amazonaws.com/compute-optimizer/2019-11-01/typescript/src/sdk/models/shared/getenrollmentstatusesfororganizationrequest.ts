@@ -1,15 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { EnrollmentFilter } from "./enrollmentfilter";
 
 
+
 export class GetEnrollmentStatusesForOrganizationRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=filters", elemType: shared.EnrollmentFilter })
+  @SpeakeasyMetadata({ data: "json, name=filters", elemType: EnrollmentFilter })
   filters?: EnrollmentFilter[];
 
-  @Metadata({ data: "json, name=maxResults" })
+  @SpeakeasyMetadata({ data: "json, name=maxResults" })
   maxResults?: number;
 
-  @Metadata({ data: "json, name=nextToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextToken" })
   nextToken?: string;
 }

@@ -1,5 +1,7 @@
 package shared
 
+// Outage
+// An outage by the Snow Monkey on a service
 type Outage struct {
 	DescriptorID   string `json:"descriptorId"`
 	DescriptorName string `json:"descriptorName"`

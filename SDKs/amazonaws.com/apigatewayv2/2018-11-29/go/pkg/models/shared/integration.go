@@ -1,5 +1,7 @@
 package shared
 
+// Integration
+// Represents an integration.
 type Integration struct {
 	APIGatewayManaged                      *bool                        `json:"ApiGatewayManaged,omitempty"`
 	ConnectionID                           *string                      `json:"ConnectionId,omitempty"`

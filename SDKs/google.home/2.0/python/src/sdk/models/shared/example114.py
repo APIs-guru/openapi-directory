@@ -1,14 +1,15 @@
 from dataclasses import dataclass, field
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass_json
 @dataclass
 class Example114:
-    bssid: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'bssid' }})
-    signal_level: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'signal_level' }})
-    ssid: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ssid' }})
-    wpa_auth: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'wpa_auth' }})
-    wpa_cipher: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'wpa_cipher' }})
-    wpa_id: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'wpa_id' }})
+    bssid: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('bssid') }})
+    signal_level: int = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('signal_level') }})
+    ssid: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('ssid') }})
+    wpa_auth: int = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('wpa_auth') }})
+    wpa_cipher: int = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('wpa_cipher') }})
+    wpa_id: int = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('wpa_id') }})
     

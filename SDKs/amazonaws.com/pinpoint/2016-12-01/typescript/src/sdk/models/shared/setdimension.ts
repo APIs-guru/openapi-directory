@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DimensionTypeEnum } from "./dimensiontypeenum";
+
 
 
 // SetDimension
@@ -7,9 +8,9 @@ import { DimensionTypeEnum } from "./dimensiontypeenum";
  * Specifies the dimension type and values for a segment dimension.
 **/
 export class SetDimension extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DimensionType" })
+  @SpeakeasyMetadata({ data: "json, name=DimensionType" })
   dimensionType?: DimensionTypeEnum;
 
-  @Metadata({ data: "json, name=Values" })
+  @SpeakeasyMetadata({ data: "json, name=Values" })
   values: string[];
 }

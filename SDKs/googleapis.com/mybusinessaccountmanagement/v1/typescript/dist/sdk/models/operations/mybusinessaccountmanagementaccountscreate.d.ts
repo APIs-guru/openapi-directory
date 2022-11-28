@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class MybusinessaccountmanagementAccountsCreateQueryParams extends SpeakeasyBase {
     dollarXgafv?: shared.XgafvEnum;
@@ -15,7 +15,7 @@ export declare class MybusinessaccountmanagementAccountsCreateQueryParams extend
 }
 export declare class MybusinessaccountmanagementAccountsCreateRequest extends SpeakeasyBase {
     queryParams: MybusinessaccountmanagementAccountsCreateQueryParams;
-    request?: shared.Account;
+    request?: shared.AccountInput;
 }
 export declare class MybusinessaccountmanagementAccountsCreateResponse extends SpeakeasyBase {
     account?: shared.Account;

@@ -10,6 +10,8 @@ const (
 	LinkRelativeLinkEnumLastSlide                    LinkRelativeLinkEnum = "LAST_SLIDE"
 )
 
+// Link
+// A hypertext link.
 type Link struct {
 	PageObjectID *string               `json:"pageObjectId,omitempty"`
 	RelativeLink *LinkRelativeLinkEnum `json:"relativeLink,omitempty"`

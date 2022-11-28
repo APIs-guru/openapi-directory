@@ -1,5 +1,7 @@
 package shared
 
+// ConstraintDetail
+// Information about a constraint.
 type ConstraintDetail struct {
 	ConstraintID *string `json:"ConstraintId,omitempty"`
 	Description  *string `json:"Description,omitempty"`

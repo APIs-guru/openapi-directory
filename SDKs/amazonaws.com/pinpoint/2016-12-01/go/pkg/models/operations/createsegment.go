@@ -18,6 +18,8 @@ type CreateSegmentHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// CreateSegmentRequestBodyWriteSegmentRequest
+// Specifies the configuration, dimension, and other settings for a segment. A WriteSegmentRequest object can include a Dimensions object or a SegmentGroups object, but not both.
 type CreateSegmentRequestBodyWriteSegmentRequest struct {
 	Dimensions    *shared.SegmentDimensions `json:"Dimensions,omitempty"`
 	Name          *string                   `json:"Name,omitempty"`

@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// Solution
+// An object that provides information about a solution. A solution is a trained model that can be deployed as a campaign.
 type Solution struct {
 	AutoMlResult          *AutoMlResult           `json:"autoMLResult,omitempty"`
 	CreationDateTime      *time.Time              `json:"creationDateTime,omitempty"`

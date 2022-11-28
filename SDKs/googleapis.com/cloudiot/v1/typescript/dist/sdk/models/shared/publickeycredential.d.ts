@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 export declare enum PublicKeyCredentialFormatEnum {
     UnspecifiedPublicKeyFormat = "UNSPECIFIED_PUBLIC_KEY_FORMAT",
     RsaPem = "RSA_PEM",

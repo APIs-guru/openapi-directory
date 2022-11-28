@@ -1,19 +1,19 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ItemSummary } from "./itemsummary";
 import { ItemList } from "./itemlist";
 import { Person } from "./person";
 
+
 export enum PageEntryTypeEnum {
-    ItemEntry = "ItemEntry"
-,    ItemDetailEntry = "ItemDetailEntry"
-,    ListEntry = "ListEntry"
-,    ListDetailEntry = "ListDetailEntry"
-,    UserEntry = "UserEntry"
-,    TextEntry = "TextEntry"
-,    ImageEntry = "ImageEntry"
-,    CustomEntry = "CustomEntry"
-,    PeopleEntry = "PeopleEntry"
+    ItemEntry = "ItemEntry",
+    ItemDetailEntry = "ItemDetailEntry",
+    ListEntry = "ListEntry",
+    ListDetailEntry = "ListDetailEntry",
+    UserEntry = "UserEntry",
+    TextEntry = "TextEntry",
+    ImageEntry = "ImageEntry",
+    CustomEntry = "CustomEntry",
+    PeopleEntry = "PeopleEntry"
 }
 
 
@@ -25,33 +25,33 @@ export enum PageEntryTypeEnum {
  * 
 **/
 export class PageEntry extends SpeakeasyBase {
-  @Metadata({ data: "json, name=customFields" })
+  @SpeakeasyMetadata({ data: "json, name=customFields" })
   customFields?: Map<string, any>;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: string;
 
-  @Metadata({ data: "json, name=images" })
+  @SpeakeasyMetadata({ data: "json, name=images" })
   images?: Map<string, string>;
 
-  @Metadata({ data: "json, name=item" })
+  @SpeakeasyMetadata({ data: "json, name=item" })
   item?: ItemSummary;
 
-  @Metadata({ data: "json, name=list" })
+  @SpeakeasyMetadata({ data: "json, name=list" })
   list?: ItemList;
 
-  @Metadata({ data: "json, name=people", elemType: shared.Person })
+  @SpeakeasyMetadata({ data: "json, name=people", elemType: Person })
   people?: Person[];
 
-  @Metadata({ data: "json, name=template" })
+  @SpeakeasyMetadata({ data: "json, name=template" })
   template: string;
 
-  @Metadata({ data: "json, name=text" })
+  @SpeakeasyMetadata({ data: "json, name=text" })
   text?: string;
 
-  @Metadata({ data: "json, name=title" })
+  @SpeakeasyMetadata({ data: "json, name=title" })
   title: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type: PageEntryTypeEnum;
 }

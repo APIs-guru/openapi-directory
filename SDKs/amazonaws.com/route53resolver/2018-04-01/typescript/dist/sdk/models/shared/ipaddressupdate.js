@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // IpAddressUpdate
 /**
  * In an <a href="https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_UpdateResolverEndpoint.html">UpdateResolverEndpoint</a> request, information about an IP address to update.
@@ -33,15 +33,15 @@ var IpAddressUpdate = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Ip" }),
+        SpeakeasyMetadata({ data: "json, name=Ip" }),
         __metadata("design:type", String)
     ], IpAddressUpdate.prototype, "ip", void 0);
     __decorate([
-        Metadata({ data: "json, name=IpId" }),
+        SpeakeasyMetadata({ data: "json, name=IpId" }),
         __metadata("design:type", String)
     ], IpAddressUpdate.prototype, "ipId", void 0);
     __decorate([
-        Metadata({ data: "json, name=SubnetId" }),
+        SpeakeasyMetadata({ data: "json, name=SubnetId" }),
         __metadata("design:type", String)
     ], IpAddressUpdate.prototype, "subnetId", void 0);
     return IpAddressUpdate;

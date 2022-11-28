@@ -1,5 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Activity } from "./activity";
 import { JourneyLimits } from "./journeylimits";
 import { QuietTime } from "./quiettime";
@@ -8,59 +7,60 @@ import { StartCondition } from "./startcondition";
 import { StateEnum } from "./stateenum";
 
 
+
 // JourneyResponse
 /** 
  * Provides information about the status, configuration, and other settings for a journey.
 **/
 export class JourneyResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Activities", elemType: shared.Activity })
+  @SpeakeasyMetadata({ data: "json, name=Activities", elemType: Activity })
   activities?: Map<string, Activity>;
 
-  @Metadata({ data: "json, name=ApplicationId" })
+  @SpeakeasyMetadata({ data: "json, name=ApplicationId" })
   applicationId: string;
 
-  @Metadata({ data: "json, name=CreationDate" })
+  @SpeakeasyMetadata({ data: "json, name=CreationDate" })
   creationDate?: string;
 
-  @Metadata({ data: "json, name=Id" })
+  @SpeakeasyMetadata({ data: "json, name=Id" })
   id: string;
 
-  @Metadata({ data: "json, name=LastModifiedDate" })
+  @SpeakeasyMetadata({ data: "json, name=LastModifiedDate" })
   lastModifiedDate?: string;
 
-  @Metadata({ data: "json, name=Limits" })
+  @SpeakeasyMetadata({ data: "json, name=Limits" })
   limits?: JourneyLimits;
 
-  @Metadata({ data: "json, name=LocalTime" })
+  @SpeakeasyMetadata({ data: "json, name=LocalTime" })
   localTime?: boolean;
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name: string;
 
-  @Metadata({ data: "json, name=QuietTime" })
+  @SpeakeasyMetadata({ data: "json, name=QuietTime" })
   quietTime?: QuietTime;
 
-  @Metadata({ data: "json, name=RefreshFrequency" })
+  @SpeakeasyMetadata({ data: "json, name=RefreshFrequency" })
   refreshFrequency?: string;
 
-  @Metadata({ data: "json, name=RefreshOnSegmentUpdate" })
+  @SpeakeasyMetadata({ data: "json, name=RefreshOnSegmentUpdate" })
   refreshOnSegmentUpdate?: boolean;
 
-  @Metadata({ data: "json, name=Schedule" })
+  @SpeakeasyMetadata({ data: "json, name=Schedule" })
   schedule?: JourneySchedule;
 
-  @Metadata({ data: "json, name=StartActivity" })
+  @SpeakeasyMetadata({ data: "json, name=StartActivity" })
   startActivity?: string;
 
-  @Metadata({ data: "json, name=StartCondition" })
+  @SpeakeasyMetadata({ data: "json, name=StartCondition" })
   startCondition?: StartCondition;
 
-  @Metadata({ data: "json, name=State" })
+  @SpeakeasyMetadata({ data: "json, name=State" })
   state?: StateEnum;
 
-  @Metadata({ data: "json, name=WaitForQuietTime" })
+  @SpeakeasyMetadata({ data: "json, name=WaitForQuietTime" })
   waitForQuietTime?: boolean;
 
-  @Metadata({ data: "json, name=tags" })
+  @SpeakeasyMetadata({ data: "json, name=tags" })
   tags?: Map<string, string>;
 }

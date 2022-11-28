@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // PartitionIndex
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A structure for a partition index.
 **/
 export class PartitionIndex extends SpeakeasyBase {
-  @Metadata({ data: "json, name=IndexName" })
+  @SpeakeasyMetadata({ data: "json, name=IndexName" })
   indexName: string;
 
-  @Metadata({ data: "json, name=Keys" })
+  @SpeakeasyMetadata({ data: "json, name=Keys" })
   keys: string[];
 }

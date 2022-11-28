@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AddonHealth } from "./addonhealth";
 import { AddonStatusEnum } from "./addonstatusenum";
 // Addon
@@ -35,43 +35,43 @@ var Addon = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=addonArn" }),
+        SpeakeasyMetadata({ data: "json, name=addonArn" }),
         __metadata("design:type", String)
     ], Addon.prototype, "addonArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=addonName" }),
+        SpeakeasyMetadata({ data: "json, name=addonName" }),
         __metadata("design:type", String)
     ], Addon.prototype, "addonName", void 0);
     __decorate([
-        Metadata({ data: "json, name=addonVersion" }),
+        SpeakeasyMetadata({ data: "json, name=addonVersion" }),
         __metadata("design:type", String)
     ], Addon.prototype, "addonVersion", void 0);
     __decorate([
-        Metadata({ data: "json, name=clusterName" }),
+        SpeakeasyMetadata({ data: "json, name=clusterName" }),
         __metadata("design:type", String)
     ], Addon.prototype, "clusterName", void 0);
     __decorate([
-        Metadata({ data: "json, name=createdAt" }),
+        SpeakeasyMetadata({ data: "json, name=createdAt" }),
         __metadata("design:type", Date)
     ], Addon.prototype, "createdAt", void 0);
     __decorate([
-        Metadata({ data: "json, name=health" }),
+        SpeakeasyMetadata({ data: "json, name=health" }),
         __metadata("design:type", AddonHealth)
     ], Addon.prototype, "health", void 0);
     __decorate([
-        Metadata({ data: "json, name=modifiedAt" }),
+        SpeakeasyMetadata({ data: "json, name=modifiedAt" }),
         __metadata("design:type", Date)
     ], Addon.prototype, "modifiedAt", void 0);
     __decorate([
-        Metadata({ data: "json, name=serviceAccountRoleArn" }),
+        SpeakeasyMetadata({ data: "json, name=serviceAccountRoleArn" }),
         __metadata("design:type", String)
     ], Addon.prototype, "serviceAccountRoleArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=status" }),
+        SpeakeasyMetadata({ data: "json, name=status" }),
         __metadata("design:type", String)
     ], Addon.prototype, "status", void 0);
     __decorate([
-        Metadata({ data: "json, name=tags" }),
+        SpeakeasyMetadata({ data: "json, name=tags" }),
         __metadata("design:type", Map)
     ], Addon.prototype, "tags", void 0);
     return Addon;

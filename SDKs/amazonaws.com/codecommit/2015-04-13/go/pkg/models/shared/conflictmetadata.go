@@ -1,5 +1,7 @@
 package shared
 
+// ConflictMetadata
+// Information about the metadata for a conflict in a merge operation.
 type ConflictMetadata struct {
 	ContentConflict    *bool            `json:"contentConflict,omitempty"`
 	FileModeConflict   *bool            `json:"fileModeConflict,omitempty"`

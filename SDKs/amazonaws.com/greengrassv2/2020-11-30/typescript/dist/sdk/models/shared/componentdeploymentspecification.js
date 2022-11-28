@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ComponentConfigurationUpdate } from "./componentconfigurationupdate";
 import { ComponentRunWith } from "./componentrunwith";
 // ComponentDeploymentSpecification
@@ -35,15 +35,15 @@ var ComponentDeploymentSpecification = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=componentVersion" }),
+        SpeakeasyMetadata({ data: "json, name=componentVersion" }),
         __metadata("design:type", String)
     ], ComponentDeploymentSpecification.prototype, "componentVersion", void 0);
     __decorate([
-        Metadata({ data: "json, name=configurationUpdate" }),
+        SpeakeasyMetadata({ data: "json, name=configurationUpdate" }),
         __metadata("design:type", ComponentConfigurationUpdate)
     ], ComponentDeploymentSpecification.prototype, "configurationUpdate", void 0);
     __decorate([
-        Metadata({ data: "json, name=runWith" }),
+        SpeakeasyMetadata({ data: "json, name=runWith" }),
         __metadata("design:type", ComponentRunWith)
     ], ComponentDeploymentSpecification.prototype, "runWith", void 0);
     return ComponentDeploymentSpecification;

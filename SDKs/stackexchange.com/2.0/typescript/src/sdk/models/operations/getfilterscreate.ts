@@ -1,34 +1,35 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetFiltersCreateQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=base" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=base" })
   base?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=exclude" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=exclude" })
   exclude?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=include" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=include" })
   include?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=unsafe" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=unsafe" })
   unsafe?: boolean;
 }
 
 
 export class GetFiltersCreateRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetFiltersCreateQueryParams;
 }
 
 
 export class GetFiltersCreateResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

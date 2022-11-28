@@ -1,7 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AlgorithmVersionInfo } from "./algorithmversioninfo";
-import { AlgorithmVersionInfo } from "./algorithmversioninfo";
+
 
 
 // AlgorithmVersionInfoList
@@ -9,9 +8,9 @@ import { AlgorithmVersionInfo } from "./algorithmversioninfo";
  * Information of all available algorithms
 **/
 export class AlgorithmVersionInfoList extends SpeakeasyBase {
-  @Metadata({ data: "json, name=fileKeyAlgorithms", elemType: shared.AlgorithmVersionInfo })
+  @SpeakeasyMetadata({ data: "json, name=fileKeyAlgorithms", elemType: AlgorithmVersionInfo })
   fileKeyAlgorithms: AlgorithmVersionInfo[];
 
-  @Metadata({ data: "json, name=keyPairAlgorithms", elemType: shared.AlgorithmVersionInfo })
+  @SpeakeasyMetadata({ data: "json, name=keyPairAlgorithms", elemType: AlgorithmVersionInfo })
   keyPairAlgorithms: AlgorithmVersionInfo[];
 }

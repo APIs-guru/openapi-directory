@@ -9,6 +9,8 @@ const (
 	GoogleCloudDialogflowV2beta1MessageParticipantRoleEnumEndUser         GoogleCloudDialogflowV2beta1MessageParticipantRoleEnum = "END_USER"
 )
 
+// GoogleCloudDialogflowV2beta1Message
+// Represents a message posted into a conversation.
 type GoogleCloudDialogflowV2beta1Message struct {
 	Content           *string                                                 `json:"content,omitempty"`
 	CreateTime        *string                                                 `json:"createTime,omitempty"`
@@ -19,4 +21,15 @@ type GoogleCloudDialogflowV2beta1Message struct {
 	ParticipantRole   *GoogleCloudDialogflowV2beta1MessageParticipantRoleEnum `json:"participantRole,omitempty"`
 	SendTime          *string                                                 `json:"sendTime,omitempty"`
 	SentimentAnalysis *GoogleCloudDialogflowV2beta1SentimentAnalysisResult    `json:"sentimentAnalysis,omitempty"`
+}
+
+// GoogleCloudDialogflowV2beta1MessageInput
+// Represents a message posted into a conversation.
+type GoogleCloudDialogflowV2beta1MessageInput struct {
+	Content           *string                                              `json:"content,omitempty"`
+	LanguageCode      *string                                              `json:"languageCode,omitempty"`
+	MessageAnnotation *GoogleCloudDialogflowV2beta1MessageAnnotation       `json:"messageAnnotation,omitempty"`
+	Name              *string                                              `json:"name,omitempty"`
+	SendTime          *string                                              `json:"sendTime,omitempty"`
+	SentimentAnalysis *GoogleCloudDialogflowV2beta1SentimentAnalysisResult `json:"sentimentAnalysis,omitempty"`
 }

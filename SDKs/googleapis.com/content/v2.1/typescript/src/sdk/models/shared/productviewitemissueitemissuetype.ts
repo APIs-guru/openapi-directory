@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ProductViewItemIssueItemIssueType
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Type of the item issue.
 **/
 export class ProductViewItemIssueItemIssueType extends SpeakeasyBase {
-  @Metadata({ data: "json, name=canonicalAttribute" })
+  @SpeakeasyMetadata({ data: "json, name=canonicalAttribute" })
   canonicalAttribute?: string;
 }

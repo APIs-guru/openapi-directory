@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PythonPackage } from "./pythonpackage";
+
 
 
 // ListPythonPackagesResponse
@@ -8,9 +8,9 @@ import { PythonPackage } from "./pythonpackage";
  * The response from listing python packages.
 **/
 export class ListPythonPackagesResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 
-  @Metadata({ data: "json, name=pythonPackages", elemType: shared.PythonPackage })
+  @SpeakeasyMetadata({ data: "json, name=pythonPackages", elemType: PythonPackage })
   pythonPackages?: PythonPackage[];
 }

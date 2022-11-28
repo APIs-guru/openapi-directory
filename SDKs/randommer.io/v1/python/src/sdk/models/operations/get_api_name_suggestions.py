@@ -4,7 +4,7 @@ from typing import Optional
 
 @dataclass
 class GetAPINameSuggestionsQueryParams:
-    starting_words: str = field(default=None, metadata={'query_param': { 'field_name': 'startingWords', 'style': 'form', 'explode': True }})
+    starting_words: str = field(metadata={'query_param': { 'field_name': 'startingWords', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -14,12 +14,12 @@ class GetAPINameSuggestionsHeaders:
 
 @dataclass
 class GetAPINameSuggestionsRequest:
-    query_params: GetAPINameSuggestionsQueryParams = field(default=None)
-    headers: GetAPINameSuggestionsHeaders = field(default=None)
+    headers: GetAPINameSuggestionsHeaders = field()
+    query_params: GetAPINameSuggestionsQueryParams = field()
     
 
 @dataclass
 class GetAPINameSuggestionsResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

@@ -1,39 +1,40 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BotLocaleStatusEnum } from "./botlocalestatusenum";
 import { VoiceSettings } from "./voicesettings";
 
 
+
 export class UpdateBotLocaleResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=botId" })
+  @SpeakeasyMetadata({ data: "json, name=botId" })
   botId?: string;
 
-  @Metadata({ data: "json, name=botLocaleStatus" })
+  @SpeakeasyMetadata({ data: "json, name=botLocaleStatus" })
   botLocaleStatus?: BotLocaleStatusEnum;
 
-  @Metadata({ data: "json, name=botVersion" })
+  @SpeakeasyMetadata({ data: "json, name=botVersion" })
   botVersion?: string;
 
-  @Metadata({ data: "json, name=creationDateTime" })
+  @SpeakeasyMetadata({ data: "json, name=creationDateTime" })
   creationDateTime?: Date;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=failureReasons" })
+  @SpeakeasyMetadata({ data: "json, name=failureReasons" })
   failureReasons?: string[];
 
-  @Metadata({ data: "json, name=lastUpdatedDateTime" })
+  @SpeakeasyMetadata({ data: "json, name=lastUpdatedDateTime" })
   lastUpdatedDateTime?: Date;
 
-  @Metadata({ data: "json, name=localeId" })
+  @SpeakeasyMetadata({ data: "json, name=localeId" })
   localeId?: string;
 
-  @Metadata({ data: "json, name=localeName" })
+  @SpeakeasyMetadata({ data: "json, name=localeName" })
   localeName?: string;
 
-  @Metadata({ data: "json, name=nluIntentConfidenceThreshold" })
+  @SpeakeasyMetadata({ data: "json, name=nluIntentConfidenceThreshold" })
   nluIntentConfidenceThreshold?: number;
 
-  @Metadata({ data: "json, name=voiceSettings" })
+  @SpeakeasyMetadata({ data: "json, name=voiceSettings" })
   voiceSettings?: VoiceSettings;
 }

@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DescribeDeploymentsRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AppId" })
+  @SpeakeasyMetadata({ data: "json, name=AppId" })
   appId?: string;
 
-  @Metadata({ data: "json, name=DeploymentIds" })
+  @SpeakeasyMetadata({ data: "json, name=DeploymentIds" })
   deploymentIds?: string[];
 
-  @Metadata({ data: "json, name=StackId" })
+  @SpeakeasyMetadata({ data: "json, name=StackId" })
   stackId?: string;
 }

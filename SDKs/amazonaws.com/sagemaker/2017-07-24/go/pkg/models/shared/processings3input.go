@@ -1,5 +1,7 @@
 package shared
 
+// ProcessingS3Input
+// Configuration for downloading input data from Amazon S3 into the processing container.
 type ProcessingS3Input struct {
 	LocalPath              *string                               `json:"LocalPath,omitempty"`
 	S3CompressionType      *ProcessingS3CompressionTypeEnum      `json:"S3CompressionType,omitempty"`

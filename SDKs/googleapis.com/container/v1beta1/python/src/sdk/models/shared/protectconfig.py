@@ -1,7 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import workloadconfig
+from sdk import utils
+from . import *
 
 class ProtectConfigWorkloadVulnerabilityModeEnum(str, Enum):
     WORKLOAD_VULNERABILITY_MODE_UNSPECIFIED = "WORKLOAD_VULNERABILITY_MODE_UNSPECIFIED"
@@ -12,6 +14,10 @@ class ProtectConfigWorkloadVulnerabilityModeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class ProtectConfig:
-    workload_config: Optional[workloadconfig.WorkloadConfig] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'workloadConfig' }})
-    workload_vulnerability_mode: Optional[ProtectConfigWorkloadVulnerabilityModeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'workloadVulnerabilityMode' }})
+    r"""ProtectConfig
+    ProtectConfig defines the flags needed to enable/disable features for the Protect API.
+    """
+    
+    workload_config: Optional[WorkloadConfig] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('workloadConfig') }})
+    workload_vulnerability_mode: Optional[ProtectConfigWorkloadVulnerabilityModeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('workloadVulnerabilityMode') }})
     

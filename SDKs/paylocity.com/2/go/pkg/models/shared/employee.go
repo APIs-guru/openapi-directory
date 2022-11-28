@@ -1,5 +1,7 @@
 package shared
 
+// EmployeeAdditionalDirectDeposit
+// The additional direct deposit model
 type EmployeeAdditionalDirectDeposit struct {
 	AccountNumber *string  `json:"accountNumber,omitempty"`
 	AccountType   *string  `json:"accountType,omitempty"`
@@ -12,6 +14,8 @@ type EmployeeAdditionalDirectDeposit struct {
 	RoutingNumber *string  `json:"routingNumber,omitempty"`
 }
 
+// EmployeeAdditionalRate
+// The additional pay rate model
 type EmployeeAdditionalRate struct {
 	ChangeReason  *string  `json:"changeReason,omitempty"`
 	CostCenter1   *string  `json:"costCenter1,omitempty"`
@@ -27,6 +31,9 @@ type EmployeeAdditionalRate struct {
 	Shift         *string  `json:"shift,omitempty"`
 }
 
+// EmployeeBenefitSetup
+//
+//	Add or update setup values used for employee benefits integration, insurance plan settings, and ACA reporting.
 type EmployeeBenefitSetup struct {
 	BenefitClass                   *string  `json:"benefitClass,omitempty"`
 	BenefitClassEffectiveDate      *string  `json:"benefitClassEffectiveDate,omitempty"`
@@ -96,6 +103,8 @@ type EmployeeCustomTextFields struct {
 	Value    string                               `json:"value"`
 }
 
+// EmployeeDepartmentPosition
+// Add or update home department cost center, position, supervisor, reviewer, employment type, EEO class, pay settings, and union information.
 type EmployeeDepartmentPosition struct {
 	ChangeReason                    *string `json:"changeReason,omitempty"`
 	ClockBadgeNumber                *string `json:"clockBadgeNumber,omitempty"`
@@ -125,6 +134,8 @@ type EmployeeDepartmentPosition struct {
 	WorkersCompensation             *string `json:"workersCompensation,omitempty"`
 }
 
+// EmployeeEmergencyContacts
+// The emergency contact model
 type EmployeeEmergencyContacts struct {
 	Address1         *string `json:"address1,omitempty"`
 	Address2         *string `json:"address2,omitempty"`
@@ -148,6 +159,8 @@ type EmployeeEmergencyContacts struct {
 	Zip              *string `json:"zip,omitempty"`
 }
 
+// EmployeeFederalTax
+// Add or update federal tax amount type (taxCalculationCode), amount or percentage, filing status, and exemptions.
 type EmployeeFederalTax struct {
 	Amount             *float64 `json:"amount,omitempty"`
 	DeductionsAmount   *float64 `json:"deductionsAmount,omitempty"`
@@ -161,6 +174,8 @@ type EmployeeFederalTax struct {
 	W4FormYear         *int64   `json:"w4FormYear,omitempty"`
 }
 
+// EmployeeHomeAddress
+// Add or update employee's home address, personal phone numbers, and personal email.
 type EmployeeHomeAddress struct {
 	Address1     *string `json:"address1,omitempty"`
 	Address2     *string `json:"address2,omitempty"`
@@ -174,6 +189,8 @@ type EmployeeHomeAddress struct {
 	State        *string `json:"state,omitempty"`
 }
 
+// EmployeeLocalTax
+// The Local Tax model
 type EmployeeLocalTax struct {
 	Exemptions   *float64 `json:"exemptions,omitempty"`
 	Exemptions2  *float64 `json:"exemptions2,omitempty"`
@@ -183,6 +200,8 @@ type EmployeeLocalTax struct {
 	WorkPsd      *string  `json:"workPSD,omitempty"`
 }
 
+// EmployeeMainDirectDeposit
+// Add the main direct deposit account. After deposits are made to any additional direct deposit accounts, the remaining net check is deposited in the main direct deposit account. IMPORTANT: A direct deposit update will remove ALL existing main and additional direct deposit information in WebPay and replace with what is provided on the request. GET API will not return direct deposit data.
 type EmployeeMainDirectDeposit struct {
 	AccountNumber *string `json:"accountNumber,omitempty"`
 	AccountType   *string `json:"accountType,omitempty"`
@@ -193,6 +212,8 @@ type EmployeeMainDirectDeposit struct {
 	RoutingNumber *string `json:"routingNumber,omitempty"`
 }
 
+// EmployeeNonPrimaryStateTax
+// Add or update non-primary state tax code, amount type (taxCalculationCode), amount or percentage, filing status, exemptions, supplemental check (specialCheckCalc), and reciprocity code information.
 type EmployeeNonPrimaryStateTax struct {
 	Amount             *float64 `json:"amount,omitempty"`
 	DeductionsAmount   *float64 `json:"deductionsAmount,omitempty"`
@@ -210,6 +231,8 @@ type EmployeeNonPrimaryStateTax struct {
 	W4FormYear         *int64   `json:"w4FormYear,omitempty"`
 }
 
+// EmployeePrimaryPayRate
+// Add or update hourly or salary pay rate, effective date, and pay frequency.
 type EmployeePrimaryPayRate struct {
 	AnnualSalary   *float64 `json:"annualSalary,omitempty"`
 	BaseRate       *float64 `json:"baseRate,omitempty"`
@@ -226,6 +249,8 @@ type EmployeePrimaryPayRate struct {
 	Salary         *float64 `json:"salary,omitempty"`
 }
 
+// EmployeePrimaryStateTax
+// Add or update primary state tax code, amount type (taxCalculationCode), amount or percentage, filing status, exemptions, and supplemental check (specialCheckCalc) information. Only one primary state is allowed. Sending an updated primary state will replace the current primary state.
 type EmployeePrimaryStateTax struct {
 	Amount             *float64 `json:"amount,omitempty"`
 	DeductionsAmount   *float64 `json:"deductionsAmount,omitempty"`
@@ -242,6 +267,8 @@ type EmployeePrimaryStateTax struct {
 	W4FormYear         *int64   `json:"w4FormYear,omitempty"`
 }
 
+// EmployeeStatus
+// Add or update employee status, change reason, effective date, and adjusted seniority date. Note that companies that are still in Implementation cannot hire future employees.
 type EmployeeStatus struct {
 	AdjustedSeniorityDate *string `json:"adjustedSeniorityDate,omitempty"`
 	ChangeReason          *string `json:"changeReason,omitempty"`
@@ -252,6 +279,8 @@ type EmployeeStatus struct {
 	ReHireDate            *string `json:"reHireDate,omitempty"`
 }
 
+// EmployeeTaxSetup
+// Add tax form, 1099 exempt reasons and notes, and 943 agricultural employee information. Once the employee receives wages, this information cannot be updated. Add or update SUI tax state, retirement plan, and statutory information.
 type EmployeeTaxSetup struct {
 	FitwExemptNotes          *string `json:"fitwExemptNotes,omitempty"`
 	FitwExemptReason         *string `json:"fitwExemptReason,omitempty"`
@@ -273,12 +302,16 @@ type EmployeeTaxSetup struct {
 	TaxForm                  *string `json:"taxForm,omitempty"`
 }
 
+// EmployeeWebTime
+// Add or update Web Time badge number and charge rate and synchronize Web Pay and Web Time employee data.
 type EmployeeWebTime struct {
 	BadgeNumber        *string  `json:"badgeNumber,omitempty"`
 	ChargeRate         *float64 `json:"chargeRate,omitempty"`
 	IsTimeLaborEnabled *bool    `json:"isTimeLaborEnabled,omitempty"`
 }
 
+// EmployeeWorkAddress
+// Add or update employee's work address, phone numbers, and email. Work Location drop down field is not included.
 type EmployeeWorkAddress struct {
 	Address1       *string `json:"address1,omitempty"`
 	Address2       *string `json:"address2,omitempty"`
@@ -296,6 +329,8 @@ type EmployeeWorkAddress struct {
 	State          *string `json:"state,omitempty"`
 }
 
+// EmployeeWorkEligibility
+// Add or update I-9 work authorization information.
 type EmployeeWorkEligibility struct {
 	AlienOrAdmissionDocumentNumber *string `json:"alienOrAdmissionDocumentNumber,omitempty"`
 	AttestedDate                   *string `json:"attestedDate,omitempty"`
@@ -313,6 +348,8 @@ type EmployeeWorkEligibility struct {
 	WorkUntil                      *string `json:"workUntil,omitempty"`
 }
 
+// Employee
+// The employee model
 type Employee struct {
 	AdditionalDirectDeposit []EmployeeAdditionalDirectDeposit `json:"additionalDirectDeposit,omitempty"`
 	AdditionalRate          []EmployeeAdditionalRate          `json:"additionalRate,omitempty"`

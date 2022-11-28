@@ -22,9 +22,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AudioConfig } from "./audioconfig";
+import { Timepoint } from "./timepoint";
 // SynthesizeSpeechResponse
 /**
  * The message returned to the client by the `SynthesizeSpeech` method.
@@ -35,15 +35,15 @@ var SynthesizeSpeechResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=audioConfig" }),
+        SpeakeasyMetadata({ data: "json, name=audioConfig" }),
         __metadata("design:type", AudioConfig)
     ], SynthesizeSpeechResponse.prototype, "audioConfig", void 0);
     __decorate([
-        Metadata({ data: "json, name=audioContent" }),
+        SpeakeasyMetadata({ data: "json, name=audioContent" }),
         __metadata("design:type", String)
     ], SynthesizeSpeechResponse.prototype, "audioContent", void 0);
     __decorate([
-        Metadata({ data: "json, name=timepoints", elemType: shared.Timepoint }),
+        SpeakeasyMetadata({ data: "json, name=timepoints", elemType: Timepoint }),
         __metadata("design:type", Array)
     ], SynthesizeSpeechResponse.prototype, "timepoints", void 0);
     return SynthesizeSpeechResponse;

@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ServerTypeEnum } from "./servertypeenum";
 import { VmServer } from "./vmserver";
+
 
 
 // Server
@@ -8,18 +9,18 @@ import { VmServer } from "./vmserver";
  * Represents a server.
 **/
 export class Server extends SpeakeasyBase {
-  @Metadata({ data: "json, name=replicationJobId" })
+  @SpeakeasyMetadata({ data: "json, name=replicationJobId" })
   replicationJobId?: string;
 
-  @Metadata({ data: "json, name=replicationJobTerminated" })
+  @SpeakeasyMetadata({ data: "json, name=replicationJobTerminated" })
   replicationJobTerminated?: boolean;
 
-  @Metadata({ data: "json, name=serverId" })
+  @SpeakeasyMetadata({ data: "json, name=serverId" })
   serverId?: string;
 
-  @Metadata({ data: "json, name=serverType" })
+  @SpeakeasyMetadata({ data: "json, name=serverType" })
   serverType?: ServerTypeEnum;
 
-  @Metadata({ data: "json, name=vmServer" })
+  @SpeakeasyMetadata({ data: "json, name=vmServer" })
   vmServer?: VmServer;
 }

@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 class GetMatrixCurbsideEnum(str, Enum):
@@ -38,14 +39,14 @@ class GetMatrixQueryParams:
 
 @dataclass
 class GetMatrixRequest:
-    query_params: GetMatrixQueryParams = field(default=None)
+    query_params: GetMatrixQueryParams = field()
     
 
 @dataclass
 class GetMatrixResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    headers: dict[str, List[str]] = field()
+    status_code: int = field()
     gh_error: Optional[shared.GhError] = field(default=None)
-    headers: dict[str, List[str]] = field(default=None)
     matrix_response: Optional[shared.MatrixResponse] = field(default=None)
-    status_code: int = field(default=None)
     

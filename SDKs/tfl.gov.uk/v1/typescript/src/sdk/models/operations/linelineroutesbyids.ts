@@ -1,43 +1,44 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class LineLineRoutesByIdsPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=ids" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=ids" })
   ids: string[];
 }
 
 export enum LineLineRoutesByIdsServiceTypesEnum {
-    Regular = "Regular"
-,    Night = "Night"
+    Regular = "Regular",
+    Night = "Night"
 }
 
 
 export class LineLineRoutesByIdsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=serviceTypes" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=serviceTypes" })
   serviceTypes?: LineLineRoutesByIdsServiceTypesEnum[];
 }
 
 
 export class LineLineRoutesByIdsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: LineLineRoutesByIdsPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: LineLineRoutesByIdsQueryParams;
 }
 
 
 export class LineLineRoutesByIdsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata({ elemType: shared.TflApiPresentationEntitiesLine })
+  @SpeakeasyMetadata({ elemType: shared.TflApiPresentationEntitiesLine })
   tflApiPresentationEntitiesLines?: shared.TflApiPresentationEntitiesLine[];
 }

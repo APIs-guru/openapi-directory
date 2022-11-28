@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var TeamSeasonStatsFormatEnum;
 (function (TeamSeasonStatsFormatEnum) {
     TeamSeasonStatsFormatEnum["Xml"] = "xml";
@@ -34,11 +34,11 @@ var TeamSeasonStatsPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=format" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=format" }),
         __metadata("design:type", String)
     ], TeamSeasonStatsPathParams.prototype, "format", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=roundid" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=roundid" }),
         __metadata("design:type", String)
     ], TeamSeasonStatsPathParams.prototype, "roundid", void 0);
     return TeamSeasonStatsPathParams;
@@ -50,7 +50,7 @@ var TeamSeasonStatsRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", TeamSeasonStatsPathParams)
     ], TeamSeasonStatsRequest.prototype, "pathParams", void 0);
     return TeamSeasonStatsRequest;
@@ -62,15 +62,15 @@ var TeamSeasonStatsResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], TeamSeasonStatsResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], TeamSeasonStatsResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Array)
     ], TeamSeasonStatsResponse.prototype, "teamSeasons", void 0);
     return TeamSeasonStatsResponse;

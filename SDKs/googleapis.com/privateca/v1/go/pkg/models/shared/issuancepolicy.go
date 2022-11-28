@@ -1,5 +1,7 @@
 package shared
 
+// IssuancePolicy
+// Defines controls over all certificate issuance within a CaPool.
 type IssuancePolicy struct {
 	AllowedIssuanceModes  *IssuanceModes                   `json:"allowedIssuanceModes,omitempty"`
 	AllowedKeyTypes       []AllowedKeyType                 `json:"allowedKeyTypes,omitempty"`

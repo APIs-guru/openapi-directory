@@ -1,52 +1,53 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetImagePerformanceCountPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=iterationId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=iterationId" })
   iterationId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=projectId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=projectId" })
   projectId: string;
 }
 
 
 export class GetImagePerformanceCountQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=false;name=tagIds" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=tagIds" })
   tagIds?: string[];
 }
 
 
 export class GetImagePerformanceCountHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=Training-Key" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Training-Key" })
   trainingKey: string;
 }
 
 
 export class GetImagePerformanceCountRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetImagePerformanceCountPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetImagePerformanceCountQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: GetImagePerformanceCountHeaders;
 }
 
 
 export class GetImagePerformanceCountResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getImagePerformanceCount200ApplicationJsonInt32Integer?: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getImagePerformanceCount200TextJsonInt32Integer?: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

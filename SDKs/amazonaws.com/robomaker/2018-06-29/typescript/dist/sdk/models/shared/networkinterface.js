@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // NetworkInterface
 /**
  * Describes a network interface.
@@ -33,15 +33,15 @@ var NetworkInterface = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=networkInterfaceId" }),
+        SpeakeasyMetadata({ data: "json, name=networkInterfaceId" }),
         __metadata("design:type", String)
     ], NetworkInterface.prototype, "networkInterfaceId", void 0);
     __decorate([
-        Metadata({ data: "json, name=privateIpAddress" }),
+        SpeakeasyMetadata({ data: "json, name=privateIpAddress" }),
         __metadata("design:type", String)
     ], NetworkInterface.prototype, "privateIpAddress", void 0);
     __decorate([
-        Metadata({ data: "json, name=publicIpAddress" }),
+        SpeakeasyMetadata({ data: "json, name=publicIpAddress" }),
         __metadata("design:type", String)
     ], NetworkInterface.prototype, "publicIpAddress", void 0);
     return NetworkInterface;

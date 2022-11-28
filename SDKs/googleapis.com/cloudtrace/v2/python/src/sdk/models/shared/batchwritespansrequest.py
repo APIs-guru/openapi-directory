@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import span
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class BatchWriteSpansRequest:
-    spans: Optional[List[span.Span]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'spans' }})
+    r"""BatchWriteSpansRequest
+    The request message for the `BatchWriteSpans` method.
+    """
+    
+    spans: Optional[List[Span]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('spans') }})
     

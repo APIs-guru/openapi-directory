@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { WorkspaceStatusCodeEnum } from "./workspacestatuscodeenum";
+
 
 
 // WorkspaceStatus
@@ -7,6 +8,6 @@ import { WorkspaceStatusCodeEnum } from "./workspacestatuscodeenum";
  * Represents the status of a workspace.
 **/
 export class WorkspaceStatus extends SpeakeasyBase {
-  @Metadata({ data: "json, name=statusCode" })
+  @SpeakeasyMetadata({ data: "json, name=statusCode" })
   statusCode: WorkspaceStatusCodeEnum;
 }

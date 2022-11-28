@@ -1,10 +1,13 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 
 
 @dataclass
 class DeleteWorkspacePathParams:
-    workspace_id: str = field(default=None, metadata={'path_param': { 'field_name': 'workspaceId', 'style': 'simple', 'explode': False }})
+    workspace_id: str = field(metadata={'path_param': { 'field_name': 'workspaceId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,18 +28,18 @@ class DeleteWorkspaceHeaders:
 
 @dataclass
 class DeleteWorkspaceRequest:
-    path_params: DeleteWorkspacePathParams = field(default=None)
-    query_params: DeleteWorkspaceQueryParams = field(default=None)
-    headers: DeleteWorkspaceHeaders = field(default=None)
+    headers: DeleteWorkspaceHeaders = field()
+    path_params: DeleteWorkspacePathParams = field()
+    query_params: DeleteWorkspaceQueryParams = field()
     
 
 @dataclass
 class DeleteWorkspaceResponse:
+    content_type: str = field()
+    status_code: int = field()
     access_denied_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     internal_server_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     validation_exception: Optional[Any] = field(default=None)
     

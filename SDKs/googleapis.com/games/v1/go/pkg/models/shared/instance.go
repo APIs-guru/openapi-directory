@@ -9,6 +9,8 @@ const (
 	InstancePlatformTypeEnumWebApp                  InstancePlatformTypeEnum = "WEB_APP"
 )
 
+// Instance
+// The Instance resource.
 type Instance struct {
 	AcquisitionURI  *string                   `json:"acquisitionUri,omitempty"`
 	AndroidInstance *InstanceAndroidDetails   `json:"androidInstance,omitempty"`

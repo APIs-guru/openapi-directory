@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AssetStatus } from "./assetstatus";
 var CreateAssetResponse = /** @class */ (function (_super) {
     __extends(CreateAssetResponse, _super);
@@ -30,15 +30,15 @@ var CreateAssetResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=assetArn" }),
+        SpeakeasyMetadata({ data: "json, name=assetArn" }),
         __metadata("design:type", String)
     ], CreateAssetResponse.prototype, "assetArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=assetId" }),
+        SpeakeasyMetadata({ data: "json, name=assetId" }),
         __metadata("design:type", String)
     ], CreateAssetResponse.prototype, "assetId", void 0);
     __decorate([
-        Metadata({ data: "json, name=assetStatus" }),
+        SpeakeasyMetadata({ data: "json, name=assetStatus" }),
         __metadata("design:type", AssetStatus)
     ], CreateAssetResponse.prototype, "assetStatus", void 0);
     return CreateAssetResponse;

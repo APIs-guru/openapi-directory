@@ -1,47 +1,48 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class DeleteCustomFieldPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=custom_field_gid" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=custom_field_gid" })
   customFieldGid: string;
 }
 
 
 export class DeleteCustomFieldQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=false;name=opt_fields" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=opt_fields" })
   optFields?: string[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=opt_pretty" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=opt_pretty" })
   optPretty?: boolean;
 }
 
 
-export class DeleteCustomFieldRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: DeleteCustomFieldPathParams;
-
-  @Metadata()
-  queryParams: DeleteCustomFieldQueryParams;
-}
-
-
 export class DeleteCustomField200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data?: Map<string, any>;
 }
 
 
+export class DeleteCustomFieldRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: DeleteCustomFieldPathParams;
+
+  @SpeakeasyMetadata()
+  queryParams: DeleteCustomFieldQueryParams;
+}
+
+
 export class DeleteCustomFieldResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   errorResponse?: shared.ErrorResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   deleteCustomField200ApplicationJsonObject?: DeleteCustomField200ApplicationJson;
 }

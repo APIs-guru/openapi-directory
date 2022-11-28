@@ -1,5 +1,7 @@
 package shared
 
+// Grant
+// Describes a grant.
 type Grant struct {
 	GrantArn            string                 `json:"GrantArn"`
 	GrantName           string                 `json:"GrantName"`

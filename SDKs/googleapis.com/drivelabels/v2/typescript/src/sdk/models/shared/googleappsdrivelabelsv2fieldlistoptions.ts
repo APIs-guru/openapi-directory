@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleAppsDriveLabelsV2FieldListOptions
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Options for a multi-valued variant of an associated field type.
 **/
 export class GoogleAppsDriveLabelsV2FieldListOptions extends SpeakeasyBase {
-  @Metadata({ data: "json, name=maxEntries" })
+  @SpeakeasyMetadata({ data: "json, name=maxEntries" })
   maxEntries?: number;
 }

@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
 @dataclass
 class InvokePathParams:
-    function_name: str = field(default=None, metadata={'path_param': { 'field_name': 'FunctionName', 'style': 'simple', 'explode': False }})
+    function_name: str = field(metadata={'path_param': { 'field_name': 'FunctionName', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -40,20 +45,21 @@ class InvokeHeaders:
 @dataclass_json
 @dataclass
 class InvokeRequestBody:
-    payload: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Payload' }})
+    payload: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Payload') }})
     
 
 @dataclass
 class InvokeRequest:
-    path_params: InvokePathParams = field(default=None)
-    query_params: InvokeQueryParams = field(default=None)
-    headers: InvokeHeaders = field(default=None)
-    request: InvokeRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: InvokeHeaders = field()
+    path_params: InvokePathParams = field()
+    query_params: InvokeQueryParams = field()
+    request: InvokeRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class InvokeResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     ec2_access_denied_exception: Optional[Any] = field(default=None)
     ec2_throttled_exception: Optional[Any] = field(default=None)
     ec2_unexpected_exception: Optional[Any] = field(default=None)
@@ -78,7 +84,6 @@ class InvokeResponse:
     resource_not_found_exception: Optional[Any] = field(default=None)
     resource_not_ready_exception: Optional[Any] = field(default=None)
     service_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     subnet_ip_address_limit_reached_exception: Optional[Any] = field(default=None)
     too_many_requests_exception: Optional[Any] = field(default=None)
     unsupported_media_type_exception: Optional[Any] = field(default=None)

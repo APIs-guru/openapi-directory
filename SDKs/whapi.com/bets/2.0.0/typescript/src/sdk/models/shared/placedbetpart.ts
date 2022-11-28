@@ -1,59 +1,60 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PriceFormatted } from "./priceformatted";
 
 
+
 export class PlacedBetPart extends SpeakeasyBase {
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description: string;
 
-  @Metadata({ data: "json, name=eachWayDen" })
+  @SpeakeasyMetadata({ data: "json, name=eachWayDen" })
   eachWayDen?: number;
 
-  @Metadata({ data: "json, name=eachWayNum" })
+  @SpeakeasyMetadata({ data: "json, name=eachWayNum" })
   eachWayNum?: number;
 
-  @Metadata({ data: "json, name=eachWayPlaces" })
+  @SpeakeasyMetadata({ data: "json, name=eachWayPlaces" })
   eachWayPlaces?: number;
 
-  @Metadata({ data: "json, name=eventDescription" })
+  @SpeakeasyMetadata({ data: "json, name=eventDescription" })
   eventDescription: string;
 
-  @Metadata({ data: "json, name=eventId" })
+  @SpeakeasyMetadata({ data: "json, name=eventId" })
   eventId: string;
 
-  @Metadata({ data: "json, name=eventMarketDescription" })
+  @SpeakeasyMetadata({ data: "json, name=eventMarketDescription" })
   eventMarketDescription?: string;
 
-  @Metadata({ data: "json, name=eventTypeDescription" })
+  @SpeakeasyMetadata({ data: "json, name=eventTypeDescription" })
   eventTypeDescription?: string;
 
-  @Metadata({ data: "json, name=handicap" })
+  @SpeakeasyMetadata({ data: "json, name=handicap" })
   handicap?: number;
 
-  @Metadata({ data: "json, name=number" })
+  @SpeakeasyMetadata({ data: "json, name=number" })
   number: number;
 
-  @Metadata({ data: "json, name=priceDen" })
+  @SpeakeasyMetadata({ data: "json, name=priceDen" })
   priceDen: number;
 
-  @Metadata({ data: "json, name=priceFormatted" })
+  @SpeakeasyMetadata({ data: "json, name=priceFormatted" })
   priceFormatted?: PriceFormatted;
 
-  @Metadata({ data: "json, name=priceNum" })
+  @SpeakeasyMetadata({ data: "json, name=priceNum" })
   priceNum: number;
 
-  @Metadata({ data: "json, name=priceType" })
+  @SpeakeasyMetadata({ data: "json, name=priceType" })
   priceType: string;
 
-  @Metadata({ data: "json, name=result" })
+  @SpeakeasyMetadata({ data: "json, name=result" })
   result: string;
 
-  @Metadata({ data: "json, name=rule4Deductions" })
+  @SpeakeasyMetadata({ data: "json, name=rule4Deductions" })
   rule4Deductions?: number;
 
-  @Metadata({ data: "json, name=selectionId" })
+  @SpeakeasyMetadata({ data: "json, name=selectionId" })
   selectionId?: string;
 
-  @Metadata({ data: "json, name=startDateTime" })
+  @SpeakeasyMetadata({ data: "json, name=startDateTime" })
   startDateTime: string;
 }

@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 
 class GetDescribeSuggestersActionEnum(str, Enum):
     DESCRIBE_SUGGESTERS = "DescribeSuggesters"
@@ -10,11 +14,11 @@ class GetDescribeSuggestersVersionEnum(str, Enum):
 
 @dataclass
 class GetDescribeSuggestersQueryParams:
-    action: GetDescribeSuggestersActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetDescribeSuggestersActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    domain_name: str = field(metadata={'query_param': { 'field_name': 'DomainName', 'style': 'form', 'explode': True }})
+    version: GetDescribeSuggestersVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     deployed: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'Deployed', 'style': 'form', 'explode': True }})
-    domain_name: str = field(default=None, metadata={'query_param': { 'field_name': 'DomainName', 'style': 'form', 'explode': True }})
     suggester_names: Optional[List[str]] = field(default=None, metadata={'query_param': { 'field_name': 'SuggesterNames', 'style': 'form', 'explode': True }})
-    version: GetDescribeSuggestersVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -30,13 +34,13 @@ class GetDescribeSuggestersHeaders:
 
 @dataclass
 class GetDescribeSuggestersRequest:
-    query_params: GetDescribeSuggestersQueryParams = field(default=None)
-    headers: GetDescribeSuggestersHeaders = field(default=None)
+    headers: GetDescribeSuggestersHeaders = field()
+    query_params: GetDescribeSuggestersQueryParams = field()
     
 
 @dataclass
 class GetDescribeSuggestersResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

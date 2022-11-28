@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DimensionGroup } from "./dimensiongroup";
+
 
 
 // AddDimensionGroupResponse
@@ -8,6 +8,6 @@ import { DimensionGroup } from "./dimensiongroup";
  * The result of adding a group.
 **/
 export class AddDimensionGroupResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=dimensionGroups", elemType: shared.DimensionGroup })
+  @SpeakeasyMetadata({ data: "json, name=dimensionGroups", elemType: DimensionGroup })
   dimensionGroups?: DimensionGroup[];
 }

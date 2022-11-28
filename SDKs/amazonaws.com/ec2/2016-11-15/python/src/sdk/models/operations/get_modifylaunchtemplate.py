@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetModifyLaunchTemplateActionEnum(str, Enum):
     MODIFY_LAUNCH_TEMPLATE = "ModifyLaunchTemplate"
@@ -10,13 +14,13 @@ class GetModifyLaunchTemplateVersionEnum(str, Enum):
 
 @dataclass
 class GetModifyLaunchTemplateQueryParams:
-    action: GetModifyLaunchTemplateActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetModifyLaunchTemplateActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: GetModifyLaunchTemplateVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     client_token: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'ClientToken', 'style': 'form', 'explode': True }})
     dry_run: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'DryRun', 'style': 'form', 'explode': True }})
     launch_template_id: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'LaunchTemplateId', 'style': 'form', 'explode': True }})
     launch_template_name: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'LaunchTemplateName', 'style': 'form', 'explode': True }})
     set_default_version: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'SetDefaultVersion', 'style': 'form', 'explode': True }})
-    version: GetModifyLaunchTemplateVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -32,13 +36,13 @@ class GetModifyLaunchTemplateHeaders:
 
 @dataclass
 class GetModifyLaunchTemplateRequest:
-    query_params: GetModifyLaunchTemplateQueryParams = field(default=None)
-    headers: GetModifyLaunchTemplateHeaders = field(default=None)
+    headers: GetModifyLaunchTemplateHeaders = field()
+    query_params: GetModifyLaunchTemplateQueryParams = field()
     
 
 @dataclass
 class GetModifyLaunchTemplateResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

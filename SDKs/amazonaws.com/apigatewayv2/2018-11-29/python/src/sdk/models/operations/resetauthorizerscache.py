@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 
 
 @dataclass
 class ResetAuthorizersCachePathParams:
-    api_id: str = field(default=None, metadata={'path_param': { 'field_name': 'apiId', 'style': 'simple', 'explode': False }})
-    stage_name: str = field(default=None, metadata={'path_param': { 'field_name': 'stageName', 'style': 'simple', 'explode': False }})
+    api_id: str = field(metadata={'path_param': { 'field_name': 'apiId', 'style': 'simple', 'explode': False }})
+    stage_name: str = field(metadata={'path_param': { 'field_name': 'stageName', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -21,14 +24,14 @@ class ResetAuthorizersCacheHeaders:
 
 @dataclass
 class ResetAuthorizersCacheRequest:
-    path_params: ResetAuthorizersCachePathParams = field(default=None)
-    headers: ResetAuthorizersCacheHeaders = field(default=None)
+    headers: ResetAuthorizersCacheHeaders = field()
+    path_params: ResetAuthorizersCachePathParams = field()
     
 
 @dataclass
 class ResetAuthorizersCacheResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     too_many_requests_exception: Optional[Any] = field(default=None)
     

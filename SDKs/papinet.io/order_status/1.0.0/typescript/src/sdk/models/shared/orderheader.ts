@@ -1,22 +1,23 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum OrderHeaderOrderStatusEnum {
-    Active = "Active"
-,    Cancelled = "Cancelled"
-,    Completed = "Completed"
+    Active = "Active",
+    Cancelled = "Cancelled",
+    Completed = "Completed"
 }
 
 
 export class OrderHeader extends SpeakeasyBase {
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: string;
 
-  @Metadata({ data: "json, name=numberOfLineItems" })
+  @SpeakeasyMetadata({ data: "json, name=numberOfLineItems" })
   numberOfLineItems: number;
 
-  @Metadata({ data: "json, name=orderNumber" })
+  @SpeakeasyMetadata({ data: "json, name=orderNumber" })
   orderNumber: string;
 
-  @Metadata({ data: "json, name=orderStatus" })
+  @SpeakeasyMetadata({ data: "json, name=orderStatus" })
   orderStatus: OrderHeaderOrderStatusEnum;
 }

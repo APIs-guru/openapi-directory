@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import channelprofiledetails
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class LiveChatModeratorSnippet:
-    live_chat_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'liveChatId' }})
-    moderator_details: Optional[channelprofiledetails.ChannelProfileDetails] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'moderatorDetails' }})
+    live_chat_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('liveChatId') }})
+    moderator_details: Optional[ChannelProfileDetails] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('moderatorDetails') }})
     

@@ -8,6 +8,8 @@ const (
 	DistributionArchitectureEnumX64                     DistributionArchitectureEnum = "X64"
 )
 
+// Distribution
+// This represents a particular channel of distribution for a given package. e.g. Debian's jessie-backports dpkg mirror
 type Distribution struct {
 	Architecture  *DistributionArchitectureEnum `json:"architecture,omitempty"`
 	CpeURI        *string                       `json:"cpeUri,omitempty"`

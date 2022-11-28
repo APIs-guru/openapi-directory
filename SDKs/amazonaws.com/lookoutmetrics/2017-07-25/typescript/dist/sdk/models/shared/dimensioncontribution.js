@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { DimensionValueContribution } from "./dimensionvaluecontribution";
 // DimensionContribution
 /**
  * Details about a dimension that contributed to an anomaly.
@@ -34,11 +34,11 @@ var DimensionContribution = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=DimensionName" }),
+        SpeakeasyMetadata({ data: "json, name=DimensionName" }),
         __metadata("design:type", String)
     ], DimensionContribution.prototype, "dimensionName", void 0);
     __decorate([
-        Metadata({ data: "json, name=DimensionValueContributionList", elemType: shared.DimensionValueContribution }),
+        SpeakeasyMetadata({ data: "json, name=DimensionValueContributionList", elemType: DimensionValueContribution }),
         __metadata("design:type", Array)
     ], DimensionContribution.prototype, "dimensionValueContributionList", void 0);
     return DimensionContribution;

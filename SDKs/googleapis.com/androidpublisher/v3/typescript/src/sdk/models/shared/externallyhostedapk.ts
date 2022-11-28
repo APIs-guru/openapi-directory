@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { UsesPermission } from "./usespermission";
+
 
 
 // ExternallyHostedApk
@@ -8,48 +8,48 @@ import { UsesPermission } from "./usespermission";
  * Defines an APK available for this application that is hosted externally and not uploaded to Google Play. This function is only available to organizations using Managed Play whose application is configured to restrict distribution to the organizations.
 **/
 export class ExternallyHostedApk extends SpeakeasyBase {
-  @Metadata({ data: "json, name=applicationLabel" })
+  @SpeakeasyMetadata({ data: "json, name=applicationLabel" })
   applicationLabel?: string;
 
-  @Metadata({ data: "json, name=certificateBase64s" })
+  @SpeakeasyMetadata({ data: "json, name=certificateBase64s" })
   certificateBase64s?: string[];
 
-  @Metadata({ data: "json, name=externallyHostedUrl" })
+  @SpeakeasyMetadata({ data: "json, name=externallyHostedUrl" })
   externallyHostedUrl?: string;
 
-  @Metadata({ data: "json, name=fileSha1Base64" })
+  @SpeakeasyMetadata({ data: "json, name=fileSha1Base64" })
   fileSha1Base64?: string;
 
-  @Metadata({ data: "json, name=fileSha256Base64" })
+  @SpeakeasyMetadata({ data: "json, name=fileSha256Base64" })
   fileSha256Base64?: string;
 
-  @Metadata({ data: "json, name=fileSize" })
+  @SpeakeasyMetadata({ data: "json, name=fileSize" })
   fileSize?: string;
 
-  @Metadata({ data: "json, name=iconBase64" })
+  @SpeakeasyMetadata({ data: "json, name=iconBase64" })
   iconBase64?: string;
 
-  @Metadata({ data: "json, name=maximumSdk" })
+  @SpeakeasyMetadata({ data: "json, name=maximumSdk" })
   maximumSdk?: number;
 
-  @Metadata({ data: "json, name=minimumSdk" })
+  @SpeakeasyMetadata({ data: "json, name=minimumSdk" })
   minimumSdk?: number;
 
-  @Metadata({ data: "json, name=nativeCodes" })
+  @SpeakeasyMetadata({ data: "json, name=nativeCodes" })
   nativeCodes?: string[];
 
-  @Metadata({ data: "json, name=packageName" })
+  @SpeakeasyMetadata({ data: "json, name=packageName" })
   packageName?: string;
 
-  @Metadata({ data: "json, name=usesFeatures" })
+  @SpeakeasyMetadata({ data: "json, name=usesFeatures" })
   usesFeatures?: string[];
 
-  @Metadata({ data: "json, name=usesPermissions", elemType: shared.UsesPermission })
+  @SpeakeasyMetadata({ data: "json, name=usesPermissions", elemType: UsesPermission })
   usesPermissions?: UsesPermission[];
 
-  @Metadata({ data: "json, name=versionCode" })
+  @SpeakeasyMetadata({ data: "json, name=versionCode" })
   versionCode?: number;
 
-  @Metadata({ data: "json, name=versionName" })
+  @SpeakeasyMetadata({ data: "json, name=versionName" })
   versionName?: string;
 }

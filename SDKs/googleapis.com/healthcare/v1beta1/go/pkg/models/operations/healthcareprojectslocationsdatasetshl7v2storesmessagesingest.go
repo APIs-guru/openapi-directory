@@ -30,7 +30,7 @@ type HealthcareProjectsLocationsDatasetsHl7V2StoresMessagesIngestSecurity struct
 type HealthcareProjectsLocationsDatasetsHl7V2StoresMessagesIngestRequest struct {
 	PathParams  HealthcareProjectsLocationsDatasetsHl7V2StoresMessagesIngestPathParams
 	QueryParams HealthcareProjectsLocationsDatasetsHl7V2StoresMessagesIngestQueryParams
-	Request     *shared.IngestMessageRequest `request:"mediaType=application/json"`
+	Request     *shared.IngestMessageRequestInput `request:"mediaType=application/json"`
 	Security    HealthcareProjectsLocationsDatasetsHl7V2StoresMessagesIngestSecurity
 }
 

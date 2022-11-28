@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Hash } from "./hash";
+
 
 
 // FileHashes
@@ -8,6 +8,6 @@ import { Hash } from "./hash";
  * Container message for hashes of byte content of files, used in Source messages to verify integrity of source input to the build.
 **/
 export class FileHashes extends SpeakeasyBase {
-  @Metadata({ data: "json, name=fileHash", elemType: shared.Hash })
+  @SpeakeasyMetadata({ data: "json, name=fileHash", elemType: Hash })
   fileHash?: Hash[];
 }

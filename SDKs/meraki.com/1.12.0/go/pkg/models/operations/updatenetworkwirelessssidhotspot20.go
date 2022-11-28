@@ -41,6 +41,8 @@ const (
 	UpdateNetworkWirelessSsidHotspot20RequestBodyNetworkAccessTypeEnumWildcard                      UpdateNetworkWirelessSsidHotspot20RequestBodyNetworkAccessTypeEnum = "Wildcard"
 )
 
+// UpdateNetworkWirelessSsidHotspot20RequestBodyOperator
+// Operator settings for this SSID
 type UpdateNetworkWirelessSsidHotspot20RequestBodyOperator struct {
 	Name *string `json:"name,omitempty"`
 }
@@ -116,6 +118,8 @@ const (
 	UpdateNetworkWirelessSsidHotspot20RequestBodyVenueTypeEnumKiosk                              UpdateNetworkWirelessSsidHotspot20RequestBodyVenueTypeEnum = "Kiosk"
 )
 
+// UpdateNetworkWirelessSsidHotspot20RequestBodyVenue
+// Venue settings for this SSID
 type UpdateNetworkWirelessSsidHotspot20RequestBodyVenue struct {
 	Name *string                                                     `json:"name,omitempty"`
 	Type *UpdateNetworkWirelessSsidHotspot20RequestBodyVenueTypeEnum `json:"type,omitempty"`

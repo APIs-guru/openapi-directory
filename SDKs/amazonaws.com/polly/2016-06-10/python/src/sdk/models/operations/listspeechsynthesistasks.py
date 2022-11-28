@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 class ListSpeechSynthesisTasksStatusEnum(str, Enum):
@@ -29,15 +33,15 @@ class ListSpeechSynthesisTasksHeaders:
 
 @dataclass
 class ListSpeechSynthesisTasksRequest:
-    query_params: ListSpeechSynthesisTasksQueryParams = field(default=None)
-    headers: ListSpeechSynthesisTasksHeaders = field(default=None)
+    headers: ListSpeechSynthesisTasksHeaders = field()
+    query_params: ListSpeechSynthesisTasksQueryParams = field()
     
 
 @dataclass
 class ListSpeechSynthesisTasksResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     invalid_next_token_exception: Optional[Any] = field(default=None)
     list_speech_synthesis_tasks_output: Optional[shared.ListSpeechSynthesisTasksOutput] = field(default=None)
     service_failure_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

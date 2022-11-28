@@ -1,11 +1,15 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class GetPortfoliosPathParams:
-    user_id: float = field(default=None, metadata={'path_param': { 'field_name': 'user_id', 'style': 'simple', 'explode': False }})
+    user_id: float = field(metadata={'path_param': { 'field_name': 'user_id', 'style': 'simple', 'explode': False }})
     
 class GetPortfoliosDirectionEnum(str, Enum):
     ASC = "asc"
@@ -27,13 +31,13 @@ class GetPortfoliosQueryParams:
 
 @dataclass
 class GetPortfoliosRequest:
-    path_params: GetPortfoliosPathParams = field(default=None)
-    query_params: GetPortfoliosQueryParams = field(default=None)
+    path_params: GetPortfoliosPathParams = field()
+    query_params: GetPortfoliosQueryParams = field()
     
 
 @dataclass
 class GetPortfoliosResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     portfolios: Optional[List[shared.Portfolio]] = field(default=None)
     

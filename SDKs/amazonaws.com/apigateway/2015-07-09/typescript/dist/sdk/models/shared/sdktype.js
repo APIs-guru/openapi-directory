@@ -22,33 +22,33 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
-// SdkType
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { SDKConfigurationProperty } from "./sdkconfigurationproperty";
+// SDKType
 /**
  * A type of SDK that API Gateway can generate.
 **/
-var SdkType = /** @class */ (function (_super) {
-    __extends(SdkType, _super);
-    function SdkType() {
+var SDKType = /** @class */ (function (_super) {
+    __extends(SDKType, _super);
+    function SDKType() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=configurationProperties", elemType: shared.SdkConfigurationProperty }),
+        SpeakeasyMetadata({ data: "json, name=configurationProperties", elemType: SDKConfigurationProperty }),
         __metadata("design:type", Array)
-    ], SdkType.prototype, "configurationProperties", void 0);
+    ], SDKType.prototype, "configurationProperties", void 0);
     __decorate([
-        Metadata({ data: "json, name=description" }),
+        SpeakeasyMetadata({ data: "json, name=description" }),
         __metadata("design:type", String)
-    ], SdkType.prototype, "description", void 0);
+    ], SDKType.prototype, "description", void 0);
     __decorate([
-        Metadata({ data: "json, name=friendlyName" }),
+        SpeakeasyMetadata({ data: "json, name=friendlyName" }),
         __metadata("design:type", String)
-    ], SdkType.prototype, "friendlyName", void 0);
+    ], SDKType.prototype, "friendlyName", void 0);
     __decorate([
-        Metadata({ data: "json, name=id" }),
+        SpeakeasyMetadata({ data: "json, name=id" }),
         __metadata("design:type", String)
-    ], SdkType.prototype, "id", void 0);
-    return SdkType;
+    ], SDKType.prototype, "id", void 0);
+    return SDKType;
 }(SpeakeasyBase));
-export { SdkType };
+export { SDKType };

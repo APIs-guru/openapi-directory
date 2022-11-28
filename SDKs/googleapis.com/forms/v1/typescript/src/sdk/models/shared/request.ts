@@ -1,32 +1,33 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import { CreateItemRequest } from "./createitemrequest";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { CreateItemRequestInput } from "./createitemrequest";
 import { DeleteItemRequest } from "./deleteitemrequest";
 import { MoveItemRequest } from "./moveitemrequest";
-import { UpdateFormInfoRequest } from "./updateforminforequest";
-import { UpdateItemRequest } from "./updateitemrequest";
+import { UpdateFormInfoRequestInput } from "./updateforminforequest";
+import { UpdateItemRequestInput } from "./updateitemrequest";
 import { UpdateSettingsRequest } from "./updatesettingsrequest";
 
 
-// Request
+
+// RequestInput
 /** 
  * The kinds of update requests that can be made.
 **/
-export class Request extends SpeakeasyBase {
-  @Metadata({ data: "json, name=createItem" })
-  createItem?: CreateItemRequest;
+export class RequestInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=createItem" })
+  createItem?: CreateItemRequestInput;
 
-  @Metadata({ data: "json, name=deleteItem" })
+  @SpeakeasyMetadata({ data: "json, name=deleteItem" })
   deleteItem?: DeleteItemRequest;
 
-  @Metadata({ data: "json, name=moveItem" })
+  @SpeakeasyMetadata({ data: "json, name=moveItem" })
   moveItem?: MoveItemRequest;
 
-  @Metadata({ data: "json, name=updateFormInfo" })
-  updateFormInfo?: UpdateFormInfoRequest;
+  @SpeakeasyMetadata({ data: "json, name=updateFormInfo" })
+  updateFormInfo?: UpdateFormInfoRequestInput;
 
-  @Metadata({ data: "json, name=updateItem" })
-  updateItem?: UpdateItemRequest;
+  @SpeakeasyMetadata({ data: "json, name=updateItem" })
+  updateItem?: UpdateItemRequestInput;
 
-  @Metadata({ data: "json, name=updateSettings" })
+  @SpeakeasyMetadata({ data: "json, name=updateSettings" })
   updateSettings?: UpdateSettingsRequest;
 }

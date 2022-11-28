@@ -1,5 +1,7 @@
 package shared
 
+// ReadRequest
+// The request for Read and StreamingRead.
 type ReadRequest struct {
 	Columns        []string             `json:"columns,omitempty"`
 	Index          *string              `json:"index,omitempty"`

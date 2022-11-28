@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ObPostalAddress6 } from "./obpostaladdress6";
 import { ObRisk1 } from "./obrisk1";
+
 
 
 // ObWriteDomestic2DataInitiationCreditorAccount
@@ -8,16 +9,16 @@ import { ObRisk1 } from "./obrisk1";
  * Unambiguous identification of the account of the creditor to which a credit entry will be posted as a result of the payment transaction.
 **/
 export class ObWriteDomestic2DataInitiationCreditorAccount extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Identification" })
+  @SpeakeasyMetadata({ data: "json, name=Identification" })
   identification: string;
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name: string;
 
-  @Metadata({ data: "json, name=SchemeName" })
+  @SpeakeasyMetadata({ data: "json, name=SchemeName" })
   schemeName: string;
 
-  @Metadata({ data: "json, name=SecondaryIdentification" })
+  @SpeakeasyMetadata({ data: "json, name=SecondaryIdentification" })
   secondaryIdentification?: string;
 }
 
@@ -27,16 +28,16 @@ export class ObWriteDomestic2DataInitiationCreditorAccount extends SpeakeasyBase
  * Unambiguous identification of the account of the debtor to which a debit entry will be made as a result of the transaction.
 **/
 export class ObWriteDomestic2DataInitiationDebtorAccount extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Identification" })
+  @SpeakeasyMetadata({ data: "json, name=Identification" })
   identification: string;
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name?: string;
 
-  @Metadata({ data: "json, name=SchemeName" })
+  @SpeakeasyMetadata({ data: "json, name=SchemeName" })
   schemeName: string;
 
-  @Metadata({ data: "json, name=SecondaryIdentification" })
+  @SpeakeasyMetadata({ data: "json, name=SecondaryIdentification" })
   secondaryIdentification?: string;
 }
 
@@ -47,10 +48,10 @@ export class ObWriteDomestic2DataInitiationDebtorAccount extends SpeakeasyBase {
  * Usage: This amount has to be transported unchanged through the transaction chain.
 **/
 export class ObWriteDomestic2DataInitiationInstructedAmount extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Amount" })
+  @SpeakeasyMetadata({ data: "json, name=Amount" })
   amount: string;
 
-  @Metadata({ data: "json, name=Currency" })
+  @SpeakeasyMetadata({ data: "json, name=Currency" })
   currency: string;
 }
 
@@ -60,10 +61,10 @@ export class ObWriteDomestic2DataInitiationInstructedAmount extends SpeakeasyBas
  * Information supplied to enable the matching of an entry with the items that the transfer is intended to settle, such as commercial invoices in an accounts' receivable system.
 **/
 export class ObWriteDomestic2DataInitiationRemittanceInformation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Reference" })
+  @SpeakeasyMetadata({ data: "json, name=Reference" })
   reference?: string;
 
-  @Metadata({ data: "json, name=Unstructured" })
+  @SpeakeasyMetadata({ data: "json, name=Unstructured" })
   unstructured?: string;
 }
 
@@ -73,48 +74,48 @@ export class ObWriteDomestic2DataInitiationRemittanceInformation extends Speakea
  * The Initiation payload is sent by the initiating party to the ASPSP. It is used to request movement of funds from the debtor account to a creditor for a single domestic payment.
 **/
 export class ObWriteDomestic2DataInitiation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CreditorAccount" })
+  @SpeakeasyMetadata({ data: "json, name=CreditorAccount" })
   creditorAccount: ObWriteDomestic2DataInitiationCreditorAccount;
 
-  @Metadata({ data: "json, name=CreditorPostalAddress" })
+  @SpeakeasyMetadata({ data: "json, name=CreditorPostalAddress" })
   creditorPostalAddress?: ObPostalAddress6;
 
-  @Metadata({ data: "json, name=DebtorAccount" })
+  @SpeakeasyMetadata({ data: "json, name=DebtorAccount" })
   debtorAccount?: ObWriteDomestic2DataInitiationDebtorAccount;
 
-  @Metadata({ data: "json, name=EndToEndIdentification" })
+  @SpeakeasyMetadata({ data: "json, name=EndToEndIdentification" })
   endToEndIdentification: string;
 
-  @Metadata({ data: "json, name=InstructedAmount" })
+  @SpeakeasyMetadata({ data: "json, name=InstructedAmount" })
   instructedAmount: ObWriteDomestic2DataInitiationInstructedAmount;
 
-  @Metadata({ data: "json, name=InstructionIdentification" })
+  @SpeakeasyMetadata({ data: "json, name=InstructionIdentification" })
   instructionIdentification: string;
 
-  @Metadata({ data: "json, name=LocalInstrument" })
+  @SpeakeasyMetadata({ data: "json, name=LocalInstrument" })
   localInstrument?: string;
 
-  @Metadata({ data: "json, name=RemittanceInformation" })
+  @SpeakeasyMetadata({ data: "json, name=RemittanceInformation" })
   remittanceInformation?: ObWriteDomestic2DataInitiationRemittanceInformation;
 
-  @Metadata({ data: "json, name=SupplementaryData" })
+  @SpeakeasyMetadata({ data: "json, name=SupplementaryData" })
   supplementaryData?: Map<string, any>;
 }
 
 
 export class ObWriteDomestic2Data extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ConsentId" })
+  @SpeakeasyMetadata({ data: "json, name=ConsentId" })
   consentId: string;
 
-  @Metadata({ data: "json, name=Initiation" })
+  @SpeakeasyMetadata({ data: "json, name=Initiation" })
   initiation: ObWriteDomestic2DataInitiation;
 }
 
 
 export class ObWriteDomestic2 extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Data" })
+  @SpeakeasyMetadata({ data: "json, name=Data" })
   data: ObWriteDomestic2Data;
 
-  @Metadata({ data: "json, name=Risk" })
+  @SpeakeasyMetadata({ data: "json, name=Risk" })
   risk: ObRisk1;
 }

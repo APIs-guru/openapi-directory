@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import alarmstate_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class TestAlarmRequest:
-    alarm_name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'alarmName' }})
-    state: alarmstate_enum.AlarmStateEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'state' }})
+    alarm_name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('alarmName') }})
+    state: AlarmStateEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('state') }})
     

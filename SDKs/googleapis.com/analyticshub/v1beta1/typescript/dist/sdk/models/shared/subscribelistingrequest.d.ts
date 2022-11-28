@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { DestinationDataset } from "./destinationdataset";
 /**
  * Message for subscribing to a listing.

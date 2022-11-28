@@ -22,26 +22,26 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var ModelYearDistEntry = /** @class */ (function (_super) {
     __extends(ModelYearDistEntry, _super);
     function ModelYearDistEntry() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=brandName" }),
+        SpeakeasyMetadata({ data: "json, name=brandName" }),
         __metadata("design:type", String)
     ], ModelYearDistEntry.prototype, "brandName", void 0);
     __decorate([
-        Metadata({ data: "json, name=modelName" }),
+        SpeakeasyMetadata({ data: "json, name=modelName" }),
         __metadata("design:type", String)
     ], ModelYearDistEntry.prototype, "modelName", void 0);
     __decorate([
-        Metadata({ data: "json, name=percentOfMarket" }),
+        SpeakeasyMetadata({ data: "json, name=percentOfMarket" }),
         __metadata("design:type", Number)
     ], ModelYearDistEntry.prototype, "percentOfMarket", void 0);
     __decorate([
-        Metadata({ data: "json, name=year" }),
+        SpeakeasyMetadata({ data: "json, name=year" }),
         __metadata("design:type", Number)
     ], ModelYearDistEntry.prototype, "year", void 0);
     return ModelYearDistEntry;

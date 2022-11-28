@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AwsCertificateManagerCertificateExtendedKeyUsage
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Contains information about an extended key usage X.509 v3 extension object.
 **/
 export class AwsCertificateManagerCertificateExtendedKeyUsage extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name?: string;
 
-  @Metadata({ data: "json, name=OId" })
+  @SpeakeasyMetadata({ data: "json, name=OId" })
   oId?: string;
 }

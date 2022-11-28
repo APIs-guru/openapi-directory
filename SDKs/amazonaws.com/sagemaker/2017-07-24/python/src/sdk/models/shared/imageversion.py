@@ -1,20 +1,26 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import imageversionstatus_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ImageVersion:
-    creation_time: datetime = field(default=None, metadata={'dataclasses_json': { 'field_name': 'CreationTime', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    failure_reason: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FailureReason' }})
-    image_arn: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ImageArn' }})
-    image_version_arn: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ImageVersionArn' }})
-    image_version_status: imageversionstatus_enum.ImageVersionStatusEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ImageVersionStatus' }})
-    last_modified_time: datetime = field(default=None, metadata={'dataclasses_json': { 'field_name': 'LastModifiedTime', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    version: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Version' }})
+    r"""ImageVersion
+    A version of a SageMaker <code>Image</code>. A version represents an existing container image.
+    """
+    
+    creation_time: datetime = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('CreationTime'), 'encoder': utils.datetimeisoformat(False), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    image_arn: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('ImageArn') }})
+    image_version_arn: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('ImageVersionArn') }})
+    image_version_status: ImageVersionStatusEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('ImageVersionStatus') }})
+    last_modified_time: datetime = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('LastModifiedTime'), 'encoder': utils.datetimeisoformat(False), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    version: int = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Version') }})
+    failure_reason: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('FailureReason') }})
     

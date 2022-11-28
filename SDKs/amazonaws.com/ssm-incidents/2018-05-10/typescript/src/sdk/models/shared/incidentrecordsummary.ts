@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { IncidentRecordSource } from "./incidentrecordsource";
 import { IncidentRecordStatusEnum } from "./incidentrecordstatusenum";
+
 
 
 // IncidentRecordSummary
@@ -8,24 +9,24 @@ import { IncidentRecordStatusEnum } from "./incidentrecordstatusenum";
  * Details describing an incident record.
 **/
 export class IncidentRecordSummary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=arn" })
+  @SpeakeasyMetadata({ data: "json, name=arn" })
   arn: string;
 
-  @Metadata({ data: "json, name=creationTime" })
+  @SpeakeasyMetadata({ data: "json, name=creationTime" })
   creationTime: Date;
 
-  @Metadata({ data: "json, name=impact" })
+  @SpeakeasyMetadata({ data: "json, name=impact" })
   impact: number;
 
-  @Metadata({ data: "json, name=incidentRecordSource" })
+  @SpeakeasyMetadata({ data: "json, name=incidentRecordSource" })
   incidentRecordSource: IncidentRecordSource;
 
-  @Metadata({ data: "json, name=resolvedTime" })
+  @SpeakeasyMetadata({ data: "json, name=resolvedTime" })
   resolvedTime?: Date;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status: IncidentRecordStatusEnum;
 
-  @Metadata({ data: "json, name=title" })
+  @SpeakeasyMetadata({ data: "json, name=title" })
   title: string;
 }

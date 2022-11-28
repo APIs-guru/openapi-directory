@@ -26,7 +26,7 @@ type CloudresourcemanagerTagBindingsCreateSecurity struct {
 
 type CloudresourcemanagerTagBindingsCreateRequest struct {
 	QueryParams CloudresourcemanagerTagBindingsCreateQueryParams
-	Request     *shared.TagBinding `request:"mediaType=application/json"`
+	Request     *shared.TagBindingInput `request:"mediaType=application/json"`
 	Security    CloudresourcemanagerTagBindingsCreateSecurity
 }
 

@@ -10,13 +10,13 @@ class GetAdministrationPlanningLevelsHeaders:
 
 @dataclass
 class GetAdministrationPlanningLevelsRequest:
-    headers: GetAdministrationPlanningLevelsHeaders = field(default=None)
+    headers: GetAdministrationPlanningLevelsHeaders = field()
     
 
 @dataclass
 class GetAdministrationPlanningLevelsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     planning_level_info_responses: Optional[List[shared.PlanningLevelInfoResponse]] = field(default=None)
-    status_code: int = field(default=None)
     

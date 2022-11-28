@@ -22,6 +22,8 @@ const (
 	IamPolicyAnalysisStateCodeEnumDataLoss           IamPolicyAnalysisStateCodeEnum = "DATA_LOSS"
 )
 
+// IamPolicyAnalysisState
+// Represents the detailed state of an entity under analysis, such as a resource, an identity or an access.
 type IamPolicyAnalysisState struct {
 	Cause *string                         `json:"cause,omitempty"`
 	Code  *IamPolicyAnalysisStateCodeEnum `json:"code,omitempty"`

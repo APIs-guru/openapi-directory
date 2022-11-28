@@ -10,6 +10,8 @@ const (
 	ListFindingsResultStateChangeEnumRemoved   ListFindingsResultStateChangeEnum = "REMOVED"
 )
 
+// ListFindingsResult
+// Result containing the Finding and its StateChange.
 type ListFindingsResult struct {
 	Finding     *Finding                           `json:"finding,omitempty"`
 	Resource    *Resource                          `json:"resource,omitempty"`

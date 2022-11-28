@@ -1,5 +1,7 @@
 package shared
 
+// ItemCounts
+// Class LibrarySummary.
 type ItemCounts struct {
 	AlbumCount      *int32 `json:"AlbumCount,omitempty"`
 	ArtistCount     *int32 `json:"ArtistCount,omitempty"`

@@ -1,22 +1,23 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class EnterpriseAdminUpgradeLicenseRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=license" })
+  @SpeakeasyMetadata({ data: "json, name=license" })
   license?: string;
 }
 
 
 export class EnterpriseAdminUpgradeLicenseRequest extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request?: EnterpriseAdminUpgradeLicenseRequestBody;
 }
 
 
 export class EnterpriseAdminUpgradeLicenseResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

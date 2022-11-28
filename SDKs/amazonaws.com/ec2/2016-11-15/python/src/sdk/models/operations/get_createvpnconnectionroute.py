@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetCreateVpnConnectionRouteActionEnum(str, Enum):
     CREATE_VPN_CONNECTION_ROUTE = "CreateVpnConnectionRoute"
@@ -10,10 +14,10 @@ class GetCreateVpnConnectionRouteVersionEnum(str, Enum):
 
 @dataclass
 class GetCreateVpnConnectionRouteQueryParams:
-    action: GetCreateVpnConnectionRouteActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    destination_cidr_block: str = field(default=None, metadata={'query_param': { 'field_name': 'DestinationCidrBlock', 'style': 'form', 'explode': True }})
-    version: GetCreateVpnConnectionRouteVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
-    vpn_connection_id: str = field(default=None, metadata={'query_param': { 'field_name': 'VpnConnectionId', 'style': 'form', 'explode': True }})
+    action: GetCreateVpnConnectionRouteActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    destination_cidr_block: str = field(metadata={'query_param': { 'field_name': 'DestinationCidrBlock', 'style': 'form', 'explode': True }})
+    version: GetCreateVpnConnectionRouteVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    vpn_connection_id: str = field(metadata={'query_param': { 'field_name': 'VpnConnectionId', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -29,12 +33,12 @@ class GetCreateVpnConnectionRouteHeaders:
 
 @dataclass
 class GetCreateVpnConnectionRouteRequest:
-    query_params: GetCreateVpnConnectionRouteQueryParams = field(default=None)
-    headers: GetCreateVpnConnectionRouteHeaders = field(default=None)
+    headers: GetCreateVpnConnectionRouteHeaders = field()
+    query_params: GetCreateVpnConnectionRouteQueryParams = field()
     
 
 @dataclass
 class GetCreateVpnConnectionRouteResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

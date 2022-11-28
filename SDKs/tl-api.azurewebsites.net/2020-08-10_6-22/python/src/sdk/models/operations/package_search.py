@@ -20,14 +20,14 @@ class PackageSearchQueryParams:
 
 @dataclass
 class PackageSearchRequest:
-    query_params: PackageSearchQueryParams = field(default=None)
+    query_params: PackageSearchQueryParams = field()
     
 
 @dataclass
 class PackageSearchResponse:
+    content_type: str = field()
+    status_code: int = field()
     api_exception: Optional[shared.APIException] = field(default=None)
-    content_type: str = field(default=None)
     default_response_dto_of_list_of_package_search_dto: Optional[shared.DefaultResponseDtoOfListOfPackageSearchDto] = field(default=None)
     default_response_dto_of_package_search_dtos: Optional[List[shared.DefaultResponseDtoOfPackageSearchDto]] = field(default=None)
-    status_code: int = field(default=None)
     

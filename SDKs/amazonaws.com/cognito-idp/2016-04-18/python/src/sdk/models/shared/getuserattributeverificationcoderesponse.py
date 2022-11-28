@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import codedeliverydetailstype
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class GetUserAttributeVerificationCodeResponse:
-    code_delivery_details: Optional[codedeliverydetailstype.CodeDeliveryDetailsType] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'CodeDeliveryDetails' }})
+    r"""GetUserAttributeVerificationCodeResponse
+    The verification code response returned by the server response to get the user attribute verification code.
+    """
+    
+    code_delivery_details: Optional[CodeDeliveryDetailsType] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('CodeDeliveryDetails') }})
     

@@ -1,5 +1,7 @@
 package shared
 
+// ThirdPartyJobData
+// Represents information about the job data for a partner action.
 type ThirdPartyJobData struct {
 	ActionConfiguration *ActionConfiguration   `json:"actionConfiguration,omitempty"`
 	ActionTypeID        *ActionTypeID          `json:"actionTypeId,omitempty"`

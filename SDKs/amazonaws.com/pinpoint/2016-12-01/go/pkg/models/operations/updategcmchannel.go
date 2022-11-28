@@ -18,6 +18,8 @@ type UpdateGcmChannelHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// UpdateGcmChannelRequestBodyGcmChannelRequest
+// Specifies the status and settings of the GCM channel for an application. This channel enables Amazon Pinpoint to send push notifications through the Firebase Cloud Messaging (FCM), formerly Google Cloud Messaging (GCM), service.
 type UpdateGcmChannelRequestBodyGcmChannelRequest struct {
 	APIKey  *string `json:"ApiKey,omitempty"`
 	Enabled *bool   `json:"Enabled,omitempty"`

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { EncryptionTypeEnum } from "./encryptiontypeenum";
 /**
  * Contains information about the encryption used to store the job results in Amazon S3.

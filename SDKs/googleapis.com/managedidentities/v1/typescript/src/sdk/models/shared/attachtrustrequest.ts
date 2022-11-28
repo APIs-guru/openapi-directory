@@ -1,12 +1,13 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import { Trust } from "./trust";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { TrustInput } from "./trust";
 
 
-// AttachTrustRequest
+
+// AttachTrustRequestInput
 /** 
  * Request message for AttachTrust
 **/
-export class AttachTrustRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=trust" })
-  trust?: Trust;
+export class AttachTrustRequestInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=trust" })
+  trust?: TrustInput;
 }

@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { StartReplicationTaskTypeValueEnum } from "./startreplicationtasktypevalueenum";
+
 
 
 // StartReplicationTaskMessage
@@ -7,18 +8,18 @@ import { StartReplicationTaskTypeValueEnum } from "./startreplicationtasktypeval
  * <p/>
 **/
 export class StartReplicationTaskMessage extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CdcStartPosition" })
+  @SpeakeasyMetadata({ data: "json, name=CdcStartPosition" })
   cdcStartPosition?: string;
 
-  @Metadata({ data: "json, name=CdcStartTime" })
+  @SpeakeasyMetadata({ data: "json, name=CdcStartTime" })
   cdcStartTime?: Date;
 
-  @Metadata({ data: "json, name=CdcStopPosition" })
+  @SpeakeasyMetadata({ data: "json, name=CdcStopPosition" })
   cdcStopPosition?: string;
 
-  @Metadata({ data: "json, name=ReplicationTaskArn" })
+  @SpeakeasyMetadata({ data: "json, name=ReplicationTaskArn" })
   replicationTaskArn: string;
 
-  @Metadata({ data: "json, name=StartReplicationTaskType" })
+  @SpeakeasyMetadata({ data: "json, name=StartReplicationTaskType" })
   startReplicationTaskType: StartReplicationTaskTypeValueEnum;
 }

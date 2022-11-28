@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import googleanalyticsadminv1alphadisplayvideo360advertiserlink
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class GoogleAnalyticsAdminV1alphaApproveDisplayVideo360AdvertiserLinkProposalResponse:
-    display_video360_advertiser_link: Optional[googleanalyticsadminv1alphadisplayvideo360advertiserlink.GoogleAnalyticsAdminV1alphaDisplayVideo360AdvertiserLink] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'displayVideo360AdvertiserLink' }})
+    r"""GoogleAnalyticsAdminV1alphaApproveDisplayVideo360AdvertiserLinkProposalResponse
+    Response message for ApproveDisplayVideo360AdvertiserLinkProposal RPC.
+    """
+    
+    display_video360_advertiser_link: Optional[GoogleAnalyticsAdminV1alphaDisplayVideo360AdvertiserLink] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('displayVideo360AdvertiserLink') }})
     

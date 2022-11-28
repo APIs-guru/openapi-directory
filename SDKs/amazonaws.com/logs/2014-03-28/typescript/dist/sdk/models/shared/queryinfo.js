@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { QueryStatusEnum } from "./querystatusenum";
 // QueryInfo
 /**
@@ -34,23 +34,23 @@ var QueryInfo = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=createTime" }),
+        SpeakeasyMetadata({ data: "json, name=createTime" }),
         __metadata("design:type", Number)
     ], QueryInfo.prototype, "createTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=logGroupName" }),
+        SpeakeasyMetadata({ data: "json, name=logGroupName" }),
         __metadata("design:type", String)
     ], QueryInfo.prototype, "logGroupName", void 0);
     __decorate([
-        Metadata({ data: "json, name=queryId" }),
+        SpeakeasyMetadata({ data: "json, name=queryId" }),
         __metadata("design:type", String)
     ], QueryInfo.prototype, "queryId", void 0);
     __decorate([
-        Metadata({ data: "json, name=queryString" }),
+        SpeakeasyMetadata({ data: "json, name=queryString" }),
         __metadata("design:type", String)
     ], QueryInfo.prototype, "queryString", void 0);
     __decorate([
-        Metadata({ data: "json, name=status" }),
+        SpeakeasyMetadata({ data: "json, name=status" }),
         __metadata("design:type", String)
     ], QueryInfo.prototype, "status", void 0);
     return QueryInfo;

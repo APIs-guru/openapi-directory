@@ -19,6 +19,8 @@ const (
 	ElectoralDistrictScopeEnumNational      ElectoralDistrictScopeEnum = "national"
 )
 
+// ElectoralDistrict
+// Describes the geographic scope of a contest.
 type ElectoralDistrict struct {
 	ID    *string                     `json:"id,omitempty"`
 	Name  *string                     `json:"name,omitempty"`

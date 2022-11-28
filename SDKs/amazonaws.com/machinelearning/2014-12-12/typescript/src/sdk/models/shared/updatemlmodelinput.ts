@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class UpdateMlModelInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=MLModelId" })
+  @SpeakeasyMetadata({ data: "json, name=MLModelId" })
   mlModelId: string;
 
-  @Metadata({ data: "json, name=MLModelName" })
+  @SpeakeasyMetadata({ data: "json, name=MLModelName" })
   mlModelName?: string;
 
-  @Metadata({ data: "json, name=ScoreThreshold" })
+  @SpeakeasyMetadata({ data: "json, name=ScoreThreshold" })
   scoreThreshold?: number;
 }

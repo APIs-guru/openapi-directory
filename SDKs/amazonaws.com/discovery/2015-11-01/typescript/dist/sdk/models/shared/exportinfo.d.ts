@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ExportStatusEnum } from "./exportstatusenum";
 /**
  * Information regarding the export status of discovered data. The value is an array of objects.

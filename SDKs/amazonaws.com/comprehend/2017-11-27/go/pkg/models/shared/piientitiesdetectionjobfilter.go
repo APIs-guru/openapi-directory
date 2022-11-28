@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// PiiEntitiesDetectionJobFilter
+// Provides information for filtering a list of PII entity detection jobs.
 type PiiEntitiesDetectionJobFilter struct {
 	JobName          *string        `json:"JobName,omitempty"`
 	JobStatus        *JobStatusEnum `json:"JobStatus,omitempty"`

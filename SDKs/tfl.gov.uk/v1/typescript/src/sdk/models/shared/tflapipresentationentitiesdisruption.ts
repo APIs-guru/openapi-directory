@@ -1,16 +1,16 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TflApiPresentationEntitiesRouteSection } from "./tflapipresentationentitiesroutesection";
 import { TflApiPresentationEntitiesStopPoint } from "./tflapipresentationentitiesstoppoint";
 
+
 export enum TflApiPresentationEntitiesDisruptionCategoryEnum {
-    Undefined = "Undefined"
-,    RealTime = "RealTime"
-,    PlannedWork = "PlannedWork"
-,    Information = "Information"
-,    Event = "Event"
-,    Crowding = "Crowding"
-,    StatusAlert = "StatusAlert"
+    Undefined = "Undefined",
+    RealTime = "RealTime",
+    PlannedWork = "PlannedWork",
+    Information = "Information",
+    Event = "Event",
+    Crowding = "Crowding",
+    StatusAlert = "StatusAlert"
 }
 
 
@@ -19,36 +19,36 @@ export enum TflApiPresentationEntitiesDisruptionCategoryEnum {
  * Represents a disruption to a route within the transport network.
 **/
 export class TflApiPresentationEntitiesDisruption extends SpeakeasyBase {
-  @Metadata({ data: "json, name=additionalInfo" })
+  @SpeakeasyMetadata({ data: "json, name=additionalInfo" })
   additionalInfo?: string;
 
-  @Metadata({ data: "json, name=affectedRoutes", elemType: shared.TflApiPresentationEntitiesRouteSection })
+  @SpeakeasyMetadata({ data: "json, name=affectedRoutes", elemType: TflApiPresentationEntitiesRouteSection })
   affectedRoutes?: TflApiPresentationEntitiesRouteSection[];
 
-  @Metadata({ data: "json, name=affectedStops", elemType: shared.TflApiPresentationEntitiesStopPoint })
+  @SpeakeasyMetadata({ data: "json, name=affectedStops", elemType: TflApiPresentationEntitiesStopPoint })
   affectedStops?: TflApiPresentationEntitiesStopPoint[];
 
-  @Metadata({ data: "json, name=category" })
+  @SpeakeasyMetadata({ data: "json, name=category" })
   category?: TflApiPresentationEntitiesDisruptionCategoryEnum;
 
-  @Metadata({ data: "json, name=categoryDescription" })
+  @SpeakeasyMetadata({ data: "json, name=categoryDescription" })
   categoryDescription?: string;
 
-  @Metadata({ data: "json, name=closureText" })
+  @SpeakeasyMetadata({ data: "json, name=closureText" })
   closureText?: string;
 
-  @Metadata({ data: "json, name=created" })
+  @SpeakeasyMetadata({ data: "json, name=created" })
   created?: Date;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=lastUpdate" })
+  @SpeakeasyMetadata({ data: "json, name=lastUpdate" })
   lastUpdate?: Date;
 
-  @Metadata({ data: "json, name=summary" })
+  @SpeakeasyMetadata({ data: "json, name=summary" })
   summary?: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: string;
 }

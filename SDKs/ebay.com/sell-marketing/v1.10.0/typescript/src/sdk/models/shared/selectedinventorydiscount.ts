@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DiscountBenefit } from "./discountbenefit";
 import { InventoryCriterion } from "./inventorycriterion";
+
 
 
 // SelectedInventoryDiscount
@@ -8,15 +9,15 @@ import { InventoryCriterion } from "./inventorycriterion";
  * This type defines the fields that describe the discounts applied to a set of inventory items and the order in which the selection rules are applied.
 **/
 export class SelectedInventoryDiscount extends SpeakeasyBase {
-  @Metadata({ data: "json, name=discountBenefit" })
+  @SpeakeasyMetadata({ data: "json, name=discountBenefit" })
   discountBenefit?: DiscountBenefit;
 
-  @Metadata({ data: "json, name=discountId" })
+  @SpeakeasyMetadata({ data: "json, name=discountId" })
   discountId?: string;
 
-  @Metadata({ data: "json, name=inventoryCriterion" })
+  @SpeakeasyMetadata({ data: "json, name=inventoryCriterion" })
   inventoryCriterion?: InventoryCriterion;
 
-  @Metadata({ data: "json, name=ruleOrder" })
+  @SpeakeasyMetadata({ data: "json, name=ruleOrder" })
   ruleOrder?: number;
 }

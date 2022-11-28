@@ -1,6 +1,10 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -18,26 +22,26 @@ class RegisterThingHeaders:
 @dataclass_json
 @dataclass
 class RegisterThingRequestBody:
-    parameters: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'parameters' }})
-    template_body: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'templateBody' }})
+    template_body: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('templateBody') }})
+    parameters: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('parameters') }})
     
 
 @dataclass
 class RegisterThingRequest:
-    headers: RegisterThingHeaders = field(default=None)
-    request: RegisterThingRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: RegisterThingHeaders = field()
+    request: RegisterThingRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class RegisterThingResponse:
+    content_type: str = field()
+    status_code: int = field()
     conflicting_resource_update_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     internal_failure_exception: Optional[Any] = field(default=None)
     invalid_request_exception: Optional[Any] = field(default=None)
     register_thing_response: Optional[shared.RegisterThingResponse] = field(default=None)
     resource_registration_failure_exception: Optional[Any] = field(default=None)
     service_unavailable_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     unauthorized_exception: Optional[Any] = field(default=None)
     

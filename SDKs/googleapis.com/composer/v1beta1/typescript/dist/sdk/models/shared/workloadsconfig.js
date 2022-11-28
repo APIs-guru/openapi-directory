@@ -22,8 +22,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SchedulerResource } from "./schedulerresource";
+import { TriggererResource } from "./triggererresource";
 import { WebServerResource } from "./webserverresource";
 import { WorkerResource } from "./workerresource";
 // WorkloadsConfig
@@ -36,15 +37,19 @@ var WorkloadsConfig = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=scheduler" }),
+        SpeakeasyMetadata({ data: "json, name=scheduler" }),
         __metadata("design:type", SchedulerResource)
     ], WorkloadsConfig.prototype, "scheduler", void 0);
     __decorate([
-        Metadata({ data: "json, name=webServer" }),
+        SpeakeasyMetadata({ data: "json, name=triggerer" }),
+        __metadata("design:type", TriggererResource)
+    ], WorkloadsConfig.prototype, "triggerer", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=webServer" }),
         __metadata("design:type", WebServerResource)
     ], WorkloadsConfig.prototype, "webServer", void 0);
     __decorate([
-        Metadata({ data: "json, name=worker" }),
+        SpeakeasyMetadata({ data: "json, name=worker" }),
         __metadata("design:type", WorkerResource)
     ], WorkloadsConfig.prototype, "worker", void 0);
     return WorkloadsConfig;

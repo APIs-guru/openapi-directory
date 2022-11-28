@@ -1,0 +1,27 @@
+import { SpeakeasyBase } from "../../../internal/utils";
+import * as shared from "../shared";
+export declare const UpdateDeployedDevicesDeviceServerList: readonly ["https://preview.twilio.com"];
+export declare class UpdateDeployedDevicesDevicePathParams extends SpeakeasyBase {
+    fleetSid: string;
+    sid: string;
+}
+export declare class UpdateDeployedDevicesDeviceUpdateDeployedDevicesDeviceRequest extends SpeakeasyBase {
+    deploymentSid?: string;
+    enabled?: boolean;
+    friendlyName?: string;
+    identity?: string;
+}
+export declare class UpdateDeployedDevicesDeviceSecurity extends SpeakeasyBase {
+    accountSidAuthToken: shared.SchemeAccountSidAuthToken;
+}
+export declare class UpdateDeployedDevicesDeviceRequest extends SpeakeasyBase {
+    serverUrl?: string;
+    pathParams: UpdateDeployedDevicesDevicePathParams;
+    request?: UpdateDeployedDevicesDeviceUpdateDeployedDevicesDeviceRequest;
+    security: UpdateDeployedDevicesDeviceSecurity;
+}
+export declare class UpdateDeployedDevicesDeviceResponse extends SpeakeasyBase {
+    contentType: string;
+    statusCode: number;
+    previewDeployedDevicesFleetDevice?: shared.PreviewDeployedDevicesFleetDevice;
+}

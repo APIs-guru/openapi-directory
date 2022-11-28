@@ -1,14 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BaselineOverride } from "./baselineoverride";
 
 
+
 export class GetDeployablePatchSnapshotForInstanceRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=BaselineOverride" })
+  @SpeakeasyMetadata({ data: "json, name=BaselineOverride" })
   baselineOverride?: BaselineOverride;
 
-  @Metadata({ data: "json, name=InstanceId" })
+  @SpeakeasyMetadata({ data: "json, name=InstanceId" })
   instanceId: string;
 
-  @Metadata({ data: "json, name=SnapshotId" })
+  @SpeakeasyMetadata({ data: "json, name=SnapshotId" })
   snapshotId: string;
 }

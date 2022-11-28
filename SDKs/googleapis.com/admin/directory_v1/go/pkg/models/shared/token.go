@@ -1,5 +1,7 @@
 package shared
 
+// Token
+// JSON template for token resource in Directory API.
 type Token struct {
 	Anonymous   *bool    `json:"anonymous,omitempty"`
 	ClientID    *string  `json:"clientId,omitempty"`

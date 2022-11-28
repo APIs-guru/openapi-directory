@@ -1,5 +1,7 @@
 package shared
 
+// BackendJobRespObj
+// The response object for this operation.
 type BackendJobRespObj struct {
 	AppID                  string  `json:"AppId"`
 	BackendEnvironmentName string  `json:"BackendEnvironmentName"`

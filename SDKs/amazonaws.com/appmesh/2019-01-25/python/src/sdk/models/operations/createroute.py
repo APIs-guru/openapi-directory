@@ -1,13 +1,17 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,List,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
 @dataclass
 class CreateRoutePathParams:
-    mesh_name: str = field(default=None, metadata={'path_param': { 'field_name': 'meshName', 'style': 'simple', 'explode': False }})
-    virtual_router_name: str = field(default=None, metadata={'path_param': { 'field_name': 'virtualRouterName', 'style': 'simple', 'explode': False }})
+    mesh_name: str = field(metadata={'path_param': { 'field_name': 'meshName', 'style': 'simple', 'explode': False }})
+    virtual_router_name: str = field(metadata={'path_param': { 'field_name': 'virtualRouterName', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -29,41 +33,45 @@ class CreateRouteHeaders:
 @dataclass_json
 @dataclass
 class CreateRouteRequestBodySpec:
-    grpc_route: Optional[shared.GrpcRoute] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'grpcRoute' }})
-    http2_route: Optional[shared.HTTPRoute] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'http2Route' }})
-    http_route: Optional[shared.HTTPRoute] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'httpRoute' }})
-    priority: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'priority' }})
-    tcp_route: Optional[shared.TCPRoute] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tcpRoute' }})
+    r"""CreateRouteRequestBodySpec
+    An object that represents a route specification. Specify one route type.
+    """
+    
+    grpc_route: Optional[shared.GrpcRoute] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('grpcRoute') }})
+    http2_route: Optional[shared.HTTPRoute] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('http2Route') }})
+    http_route: Optional[shared.HTTPRoute] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('httpRoute') }})
+    priority: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('priority') }})
+    tcp_route: Optional[shared.TCPRoute] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('tcpRoute') }})
     
 
 @dataclass_json
 @dataclass
 class CreateRouteRequestBody:
-    client_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'clientToken' }})
-    route_name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'routeName' }})
-    spec: CreateRouteRequestBodySpec = field(default=None, metadata={'dataclasses_json': { 'field_name': 'spec' }})
-    tags: Optional[List[shared.TagRef]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tags' }})
+    route_name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('routeName') }})
+    spec: CreateRouteRequestBodySpec = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('spec') }})
+    client_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('clientToken') }})
+    tags: Optional[List[shared.TagRef]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('tags') }})
     
 
 @dataclass
 class CreateRouteRequest:
-    path_params: CreateRoutePathParams = field(default=None)
-    query_params: CreateRouteQueryParams = field(default=None)
-    headers: CreateRouteHeaders = field(default=None)
-    request: CreateRouteRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: CreateRouteHeaders = field()
+    path_params: CreateRoutePathParams = field()
+    query_params: CreateRouteQueryParams = field()
+    request: CreateRouteRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class CreateRouteResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
     conflict_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     create_route_output: Optional[shared.CreateRouteOutput] = field(default=None)
     forbidden_exception: Optional[Any] = field(default=None)
     internal_server_error_exception: Optional[Any] = field(default=None)
     limit_exceeded_exception: Optional[Any] = field(default=None)
     not_found_exception: Optional[Any] = field(default=None)
     service_unavailable_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     too_many_requests_exception: Optional[Any] = field(default=None)
     

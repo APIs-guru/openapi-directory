@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import googleclouddatacatalogv1contacts
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class GoogleCloudDatacatalogV1ModifyEntryContactsRequest:
-    contacts: Optional[googleclouddatacatalogv1contacts.GoogleCloudDatacatalogV1Contacts] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'contacts' }})
+    r"""GoogleCloudDatacatalogV1ModifyEntryContactsRequest
+    Request message for ModifyEntryContacts.
+    """
+    
+    contacts: Optional[GoogleCloudDatacatalogV1Contacts] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('contacts') }})
     

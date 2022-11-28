@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Processor } from "./processor";
+
 
 
 // ProcessingConfiguration
@@ -8,9 +8,9 @@ import { Processor } from "./processor";
  * Describes a data processing configuration.
 **/
 export class ProcessingConfiguration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Enabled" })
+  @SpeakeasyMetadata({ data: "json, name=Enabled" })
   enabled?: boolean;
 
-  @Metadata({ data: "json, name=Processors", elemType: shared.Processor })
+  @SpeakeasyMetadata({ data: "json, name=Processors", elemType: Processor })
   processors?: Processor[];
 }

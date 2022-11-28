@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { CloudBuildOptions } from "./cloudbuildoptions";
 import { ContainerInfo } from "./containerinfo";
 import { FileInfo } from "./fileinfo";

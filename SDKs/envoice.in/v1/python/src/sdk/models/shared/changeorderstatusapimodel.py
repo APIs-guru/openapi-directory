@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class ChangeOrderStatusAPIModelStatusEnum(str, Enum):
     PENDING_PAYMENT = "PendingPayment"
@@ -16,7 +18,7 @@ class ChangeOrderStatusAPIModelStatusEnum(str, Enum):
 @dataclass_json
 @dataclass
 class ChangeOrderStatusAPIModel:
-    id: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Id' }, 'form': { 'field_name': 'Id' }})
-    reason: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Reason' }, 'form': { 'field_name': 'Reason' }})
-    status: Optional[ChangeOrderStatusAPIModelStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Status' }, 'form': { 'field_name': 'Status' }})
+    id: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Id') }, 'form': { 'field_name': 'Id' }})
+    reason: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Reason') }, 'form': { 'field_name': 'Reason' }})
+    status: Optional[ChangeOrderStatusAPIModelStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Status') }, 'form': { 'field_name': 'Status' }})
     

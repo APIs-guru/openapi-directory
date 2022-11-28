@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { MfaOptionType } from "./mfaoptiontype";
 import { AttributeType } from "./attributetype";
+
 
 
 // GetUserResponse
@@ -9,18 +9,18 @@ import { AttributeType } from "./attributetype";
  * Represents the response from the server from the request to get information about the user.
 **/
 export class GetUserResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=MFAOptions", elemType: shared.MfaOptionType })
+  @SpeakeasyMetadata({ data: "json, name=MFAOptions", elemType: MfaOptionType })
   mfaOptions?: MfaOptionType[];
 
-  @Metadata({ data: "json, name=PreferredMfaSetting" })
+  @SpeakeasyMetadata({ data: "json, name=PreferredMfaSetting" })
   preferredMfaSetting?: string;
 
-  @Metadata({ data: "json, name=UserAttributes", elemType: shared.AttributeType })
+  @SpeakeasyMetadata({ data: "json, name=UserAttributes", elemType: AttributeType })
   userAttributes: AttributeType[];
 
-  @Metadata({ data: "json, name=UserMFASettingList" })
+  @SpeakeasyMetadata({ data: "json, name=UserMFASettingList" })
   userMfaSettingList?: string[];
 
-  @Metadata({ data: "json, name=Username" })
+  @SpeakeasyMetadata({ data: "json, name=Username" })
   username: string;
 }

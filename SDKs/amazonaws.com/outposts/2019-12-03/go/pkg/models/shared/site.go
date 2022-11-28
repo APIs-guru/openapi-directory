@@ -1,5 +1,7 @@
 package shared
 
+// Site
+// Information about a site.
 type Site struct {
 	AccountID   *string           `json:"AccountId,omitempty"`
 	Description *string           `json:"Description,omitempty"`

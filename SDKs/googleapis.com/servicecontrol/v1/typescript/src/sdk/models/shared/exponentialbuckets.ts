@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ExponentialBuckets
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Describing buckets with exponentially growing width.
 **/
 export class ExponentialBuckets extends SpeakeasyBase {
-  @Metadata({ data: "json, name=growthFactor" })
+  @SpeakeasyMetadata({ data: "json, name=growthFactor" })
   growthFactor?: number;
 
-  @Metadata({ data: "json, name=numFiniteBuckets" })
+  @SpeakeasyMetadata({ data: "json, name=numFiniteBuckets" })
   numFiniteBuckets?: number;
 
-  @Metadata({ data: "json, name=scale" })
+  @SpeakeasyMetadata({ data: "json, name=scale" })
   scale?: number;
 }

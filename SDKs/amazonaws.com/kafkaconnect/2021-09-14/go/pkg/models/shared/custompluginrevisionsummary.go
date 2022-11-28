@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// CustomPluginRevisionSummary
+// Details about the revision of a custom plugin.
 type CustomPluginRevisionSummary struct {
 	ContentType     *CustomPluginContentTypeEnum     `json:"contentType,omitempty"`
 	CreationTime    *time.Time                       `json:"creationTime,omitempty"`

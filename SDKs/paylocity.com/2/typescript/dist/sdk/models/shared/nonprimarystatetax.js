@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // NonPrimaryStateTax
 /**
  * The Non-Primary State Tax model
@@ -33,59 +33,59 @@ var NonPrimaryStateTax = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=amount" }),
+        SpeakeasyMetadata({ data: "json, name=amount" }),
         __metadata("design:type", Number)
     ], NonPrimaryStateTax.prototype, "amount", void 0);
     __decorate([
-        Metadata({ data: "json, name=deductionsAmount" }),
+        SpeakeasyMetadata({ data: "json, name=deductionsAmount" }),
         __metadata("design:type", Number)
     ], NonPrimaryStateTax.prototype, "deductionsAmount", void 0);
     __decorate([
-        Metadata({ data: "json, name=dependentsAmount" }),
+        SpeakeasyMetadata({ data: "json, name=dependentsAmount" }),
         __metadata("design:type", Number)
     ], NonPrimaryStateTax.prototype, "dependentsAmount", void 0);
     __decorate([
-        Metadata({ data: "json, name=exemptions" }),
+        SpeakeasyMetadata({ data: "json, name=exemptions" }),
         __metadata("design:type", Number)
     ], NonPrimaryStateTax.prototype, "exemptions", void 0);
     __decorate([
-        Metadata({ data: "json, name=exemptions2" }),
+        SpeakeasyMetadata({ data: "json, name=exemptions2" }),
         __metadata("design:type", Number)
     ], NonPrimaryStateTax.prototype, "exemptions2", void 0);
     __decorate([
-        Metadata({ data: "json, name=filingStatus" }),
+        SpeakeasyMetadata({ data: "json, name=filingStatus" }),
         __metadata("design:type", String)
     ], NonPrimaryStateTax.prototype, "filingStatus", void 0);
     __decorate([
-        Metadata({ data: "json, name=higherRate" }),
+        SpeakeasyMetadata({ data: "json, name=higherRate" }),
         __metadata("design:type", Boolean)
     ], NonPrimaryStateTax.prototype, "higherRate", void 0);
     __decorate([
-        Metadata({ data: "json, name=otherIncomeAmount" }),
+        SpeakeasyMetadata({ data: "json, name=otherIncomeAmount" }),
         __metadata("design:type", Number)
     ], NonPrimaryStateTax.prototype, "otherIncomeAmount", void 0);
     __decorate([
-        Metadata({ data: "json, name=percentage" }),
+        SpeakeasyMetadata({ data: "json, name=percentage" }),
         __metadata("design:type", Number)
     ], NonPrimaryStateTax.prototype, "percentage", void 0);
     __decorate([
-        Metadata({ data: "json, name=reciprocityCode" }),
+        SpeakeasyMetadata({ data: "json, name=reciprocityCode" }),
         __metadata("design:type", String)
     ], NonPrimaryStateTax.prototype, "reciprocityCode", void 0);
     __decorate([
-        Metadata({ data: "json, name=specialCheckCalc" }),
+        SpeakeasyMetadata({ data: "json, name=specialCheckCalc" }),
         __metadata("design:type", String)
     ], NonPrimaryStateTax.prototype, "specialCheckCalc", void 0);
     __decorate([
-        Metadata({ data: "json, name=taxCalculationCode" }),
+        SpeakeasyMetadata({ data: "json, name=taxCalculationCode" }),
         __metadata("design:type", String)
     ], NonPrimaryStateTax.prototype, "taxCalculationCode", void 0);
     __decorate([
-        Metadata({ data: "json, name=taxCode" }),
+        SpeakeasyMetadata({ data: "json, name=taxCode" }),
         __metadata("design:type", String)
     ], NonPrimaryStateTax.prototype, "taxCode", void 0);
     __decorate([
-        Metadata({ data: "json, name=w4FormYear" }),
+        SpeakeasyMetadata({ data: "json, name=w4FormYear" }),
         __metadata("design:type", Number)
     ], NonPrimaryStateTax.prototype, "w4FormYear", void 0);
     return NonPrimaryStateTax;

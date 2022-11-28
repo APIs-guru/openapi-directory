@@ -1,14 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SongForApiContract } from "./songforapicontract";
 
 
+
 export class SongInListForApiContract extends SpeakeasyBase {
-  @Metadata({ data: "json, name=notes" })
+  @SpeakeasyMetadata({ data: "json, name=notes" })
   notes?: string;
 
-  @Metadata({ data: "json, name=order" })
+  @SpeakeasyMetadata({ data: "json, name=order" })
   order?: number;
 
-  @Metadata({ data: "json, name=song" })
+  @SpeakeasyMetadata({ data: "json, name=song" })
   song?: SongForApiContract;
 }

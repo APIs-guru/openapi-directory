@@ -1,28 +1,29 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ListHypernymsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=family" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=family" })
   family?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=maxLevel" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=maxLevel" })
   maxLevel?: string;
 }
 
 
 export class ListHypernymsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: ListHypernymsQueryParams;
 }
 
 
 export class ListHypernymsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   listHypernyms200ApplicationJsonArrays?: number[][];
 }

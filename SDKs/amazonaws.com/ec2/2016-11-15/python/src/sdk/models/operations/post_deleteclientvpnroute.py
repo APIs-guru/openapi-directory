@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostDeleteClientVpnRouteActionEnum(str, Enum):
     DELETE_CLIENT_VPN_ROUTE = "DeleteClientVpnRoute"
@@ -10,8 +14,8 @@ class PostDeleteClientVpnRouteVersionEnum(str, Enum):
 
 @dataclass
 class PostDeleteClientVpnRouteQueryParams:
-    action: PostDeleteClientVpnRouteActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostDeleteClientVpnRouteVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostDeleteClientVpnRouteActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostDeleteClientVpnRouteVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostDeleteClientVpnRouteHeaders:
 
 @dataclass
 class PostDeleteClientVpnRouteRequest:
-    query_params: PostDeleteClientVpnRouteQueryParams = field(default=None)
-    headers: PostDeleteClientVpnRouteHeaders = field(default=None)
+    headers: PostDeleteClientVpnRouteHeaders = field()
+    query_params: PostDeleteClientVpnRouteQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostDeleteClientVpnRouteResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

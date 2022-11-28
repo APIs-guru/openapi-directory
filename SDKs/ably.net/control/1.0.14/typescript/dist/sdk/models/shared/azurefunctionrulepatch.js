@@ -22,8 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RuleSource } from "./rulesource";
 export var AzureFunctionRulePatchRequestModeEnum;
 (function (AzureFunctionRulePatchRequestModeEnum) {
@@ -49,11 +48,11 @@ var AzureFunctionRulePatchTargetHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], AzureFunctionRulePatchTargetHeaders.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=value" }),
+        SpeakeasyMetadata({ data: "json, name=value" }),
         __metadata("design:type", String)
     ], AzureFunctionRulePatchTargetHeaders.prototype, "value", void 0);
     return AzureFunctionRulePatchTargetHeaders;
@@ -65,27 +64,27 @@ var AzureFunctionRulePatchTarget = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=azureAppId" }),
+        SpeakeasyMetadata({ data: "json, name=azureAppId" }),
         __metadata("design:type", String)
     ], AzureFunctionRulePatchTarget.prototype, "azureAppId", void 0);
     __decorate([
-        Metadata({ data: "json, name=azureFunctionName" }),
+        SpeakeasyMetadata({ data: "json, name=azureFunctionName" }),
         __metadata("design:type", String)
     ], AzureFunctionRulePatchTarget.prototype, "azureFunctionName", void 0);
     __decorate([
-        Metadata({ data: "json, name=enveloped" }),
+        SpeakeasyMetadata({ data: "json, name=enveloped" }),
         __metadata("design:type", Boolean)
     ], AzureFunctionRulePatchTarget.prototype, "enveloped", void 0);
     __decorate([
-        Metadata({ data: "json, name=format" }),
+        SpeakeasyMetadata({ data: "json, name=format" }),
         __metadata("design:type", String)
     ], AzureFunctionRulePatchTarget.prototype, "format", void 0);
     __decorate([
-        Metadata({ data: "json, name=headers", elemType: shared.AzureFunctionRulePatchTargetHeaders }),
+        SpeakeasyMetadata({ data: "json, name=headers", elemType: AzureFunctionRulePatchTargetHeaders }),
         __metadata("design:type", Array)
     ], AzureFunctionRulePatchTarget.prototype, "headers", void 0);
     __decorate([
-        Metadata({ data: "json, name=signingKeyId" }),
+        SpeakeasyMetadata({ data: "json, name=signingKeyId" }),
         __metadata("design:type", String)
     ], AzureFunctionRulePatchTarget.prototype, "signingKeyId", void 0);
     return AzureFunctionRulePatchTarget;
@@ -97,23 +96,23 @@ var AzureFunctionRulePatch = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=requestMode" }),
+        SpeakeasyMetadata({ data: "json, name=requestMode" }),
         __metadata("design:type", String)
     ], AzureFunctionRulePatch.prototype, "requestMode", void 0);
     __decorate([
-        Metadata({ data: "json, name=ruleType" }),
+        SpeakeasyMetadata({ data: "json, name=ruleType" }),
         __metadata("design:type", String)
     ], AzureFunctionRulePatch.prototype, "ruleType", void 0);
     __decorate([
-        Metadata({ data: "json, name=source" }),
+        SpeakeasyMetadata({ data: "json, name=source" }),
         __metadata("design:type", RuleSource)
     ], AzureFunctionRulePatch.prototype, "source", void 0);
     __decorate([
-        Metadata({ data: "json, name=status" }),
+        SpeakeasyMetadata({ data: "json, name=status" }),
         __metadata("design:type", String)
     ], AzureFunctionRulePatch.prototype, "status", void 0);
     __decorate([
-        Metadata({ data: "json, name=target" }),
+        SpeakeasyMetadata({ data: "json, name=target" }),
         __metadata("design:type", AzureFunctionRulePatchTarget)
     ], AzureFunctionRulePatch.prototype, "target", void 0);
     return AzureFunctionRulePatch;

@@ -9,15 +9,15 @@ type CreatorRolesListQueryParams struct {
 	PageSize *int64 `queryParam:"style=form,explode=true,name=page_size"`
 }
 
-type CreatorRolesListRequest struct {
-	QueryParams CreatorRolesListQueryParams
-}
-
 type CreatorRolesList200ApplicationJSON struct {
 	Count    int64             `json:"count"`
 	Next     *string           `json:"next,omitempty"`
 	Previous *string           `json:"previous,omitempty"`
 	Results  []shared.Position `json:"results"`
+}
+
+type CreatorRolesListRequest struct {
+	QueryParams CreatorRolesListQueryParams
 }
 
 type CreatorRolesListResponse struct {

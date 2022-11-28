@@ -12,12 +12,12 @@ class GetUserCipherUsesQueryParams:
 
 @dataclass
 class GetUserCipherUsesRequest:
-    query_params: GetUserCipherUsesQueryParams = field(default=None)
+    query_params: GetUserCipherUsesQueryParams = field()
     
 
 @dataclass
 class GetUserCipherUsesResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     user_cipher_use_entities: Optional[List[shared.UserCipherUseEntity]] = field(default=None)
     

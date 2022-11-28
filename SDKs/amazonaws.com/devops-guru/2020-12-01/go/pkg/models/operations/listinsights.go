@@ -19,6 +19,9 @@ type ListInsightsHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// ListInsightsRequestBodyStatusFilter
+//
+//	A filter used by <code>ListInsights</code> to specify which insights to return.
 type ListInsightsRequestBodyStatusFilter struct {
 	Any     *shared.ListInsightsAnyStatusFilter     `json:"Any,omitempty"`
 	Closed  *shared.ListInsightsClosedStatusFilter  `json:"Closed,omitempty"`

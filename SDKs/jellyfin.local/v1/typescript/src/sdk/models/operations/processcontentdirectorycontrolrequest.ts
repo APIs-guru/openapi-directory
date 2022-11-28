@@ -1,25 +1,26 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ProcessContentDirectoryControlRequestPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=serverId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=serverId" })
   serverId: string;
 }
 
 
 export class ProcessContentDirectoryControlRequestRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: ProcessContentDirectoryControlRequestPathParams;
 }
 
 
 export class ProcessContentDirectoryControlRequestResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   processContentDirectoryControlRequest200TextXmlBinaryString?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

@@ -1,5 +1,7 @@
 package shared
 
+// DeliveryChannelStatus
+// <p>The status of a specified delivery channel.</p> <p>Valid values: <code>Success</code> | <code>Failure</code> </p>
 type DeliveryChannelStatus struct {
 	ConfigHistoryDeliveryInfo  *ConfigExportDeliveryInfo `json:"configHistoryDeliveryInfo,omitempty"`
 	ConfigSnapshotDeliveryInfo *ConfigExportDeliveryInfo `json:"configSnapshotDeliveryInfo,omitempty"`

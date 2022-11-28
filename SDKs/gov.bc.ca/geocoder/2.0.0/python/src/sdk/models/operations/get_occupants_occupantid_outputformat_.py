@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 
 class GetOccupantsOccupantIDOutputFormatOutputFormatEnum(str, Enum):
     JSON = "json"
@@ -13,8 +14,8 @@ class GetOccupantsOccupantIDOutputFormatOutputFormatEnum(str, Enum):
 
 @dataclass
 class GetOccupantsOccupantIDOutputFormatPathParams:
-    occupant_id: str = field(default=None, metadata={'path_param': { 'field_name': 'occupantID', 'style': 'simple', 'explode': False }})
-    output_format: GetOccupantsOccupantIDOutputFormatOutputFormatEnum = field(default=None, metadata={'path_param': { 'field_name': 'outputFormat', 'style': 'simple', 'explode': False }})
+    occupant_id: str = field(metadata={'path_param': { 'field_name': 'occupantID', 'style': 'simple', 'explode': False }})
+    output_format: GetOccupantsOccupantIDOutputFormatOutputFormatEnum = field(metadata={'path_param': { 'field_name': 'outputFormat', 'style': 'simple', 'explode': False }})
     
 class GetOccupantsOccupantIDOutputFormatLocationDescriptorEnum(str, Enum):
     ANY = "any"
@@ -35,12 +36,12 @@ class GetOccupantsOccupantIDOutputFormatQueryParams:
 
 @dataclass
 class GetOccupantsOccupantIDOutputFormatRequest:
-    path_params: GetOccupantsOccupantIDOutputFormatPathParams = field(default=None)
-    query_params: GetOccupantsOccupantIDOutputFormatQueryParams = field(default=None)
+    path_params: GetOccupantsOccupantIDOutputFormatPathParams = field()
+    query_params: GetOccupantsOccupantIDOutputFormatQueryParams = field()
     
 
 @dataclass
 class GetOccupantsOccupantIDOutputFormatResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

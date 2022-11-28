@@ -1,18 +1,19 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum OrderByOrderTypeEnum {
-    OrderTypeUnspecified = "ORDER_TYPE_UNSPECIFIED"
-,    Value = "VALUE"
-,    Delta = "DELTA"
-,    Smart = "SMART"
-,    HistogramBucket = "HISTOGRAM_BUCKET"
-,    DimensionAsInteger = "DIMENSION_AS_INTEGER"
+    OrderTypeUnspecified = "ORDER_TYPE_UNSPECIFIED",
+    Value = "VALUE",
+    Delta = "DELTA",
+    Smart = "SMART",
+    HistogramBucket = "HISTOGRAM_BUCKET",
+    DimensionAsInteger = "DIMENSION_AS_INTEGER"
 }
 
 export enum OrderBySortOrderEnum {
-    SortOrderUnspecified = "SORT_ORDER_UNSPECIFIED"
-,    Ascending = "ASCENDING"
-,    Descending = "DESCENDING"
+    SortOrderUnspecified = "SORT_ORDER_UNSPECIFIED",
+    Ascending = "ASCENDING",
+    Descending = "DESCENDING"
 }
 
 
@@ -21,12 +22,12 @@ export enum OrderBySortOrderEnum {
  * Specifies the sorting options.
 **/
 export class OrderBy extends SpeakeasyBase {
-  @Metadata({ data: "json, name=fieldName" })
+  @SpeakeasyMetadata({ data: "json, name=fieldName" })
   fieldName?: string;
 
-  @Metadata({ data: "json, name=orderType" })
+  @SpeakeasyMetadata({ data: "json, name=orderType" })
   orderType?: OrderByOrderTypeEnum;
 
-  @Metadata({ data: "json, name=sortOrder" })
+  @SpeakeasyMetadata({ data: "json, name=sortOrder" })
   sortOrder?: OrderBySortOrderEnum;
 }

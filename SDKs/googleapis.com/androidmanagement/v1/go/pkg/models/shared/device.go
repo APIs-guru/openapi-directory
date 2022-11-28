@@ -36,6 +36,8 @@ const (
 	DeviceStateEnumProvisioning           DeviceStateEnum = "PROVISIONING"
 )
 
+// Device
+// A device owned by an enterprise. Unless otherwise noted, all fields are read-only and can't be modified by enterprises.devices.patch.
 type Device struct {
 	APILevel                       *int32                    `json:"apiLevel,omitempty"`
 	ApplicationReports             []ApplicationReport       `json:"applicationReports,omitempty"`

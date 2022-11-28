@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // DetailedServiceHours
@@ -6,24 +7,24 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Standard hours of operation. Currently formatted as descriptive text suitable for display, with no guarantee of a standard parseable format. Hours of operation may vary due to holidays or other events.
 **/
 export class DetailedServiceHours extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Friday" })
+  @SpeakeasyMetadata({ data: "json, name=Friday" })
   friday?: string;
 
-  @Metadata({ data: "json, name=Monday" })
+  @SpeakeasyMetadata({ data: "json, name=Monday" })
   monday?: string;
 
-  @Metadata({ data: "json, name=Saturday" })
+  @SpeakeasyMetadata({ data: "json, name=Saturday" })
   saturday?: string;
 
-  @Metadata({ data: "json, name=Sunday" })
+  @SpeakeasyMetadata({ data: "json, name=Sunday" })
   sunday?: string;
 
-  @Metadata({ data: "json, name=Thursday" })
+  @SpeakeasyMetadata({ data: "json, name=Thursday" })
   thursday?: string;
 
-  @Metadata({ data: "json, name=Tuesday" })
+  @SpeakeasyMetadata({ data: "json, name=Tuesday" })
   tuesday?: string;
 
-  @Metadata({ data: "json, name=Wednesday" })
+  @SpeakeasyMetadata({ data: "json, name=Wednesday" })
   wednesday?: string;
 }

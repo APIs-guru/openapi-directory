@@ -1,15 +1,19 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import datasetdefinition
-from . import processings3input
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ProcessingInput:
-    app_managed: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AppManaged' }})
-    dataset_definition: Optional[datasetdefinition.DatasetDefinition] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'DatasetDefinition' }})
-    input_name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'InputName' }})
-    s3_input: Optional[processings3input.ProcessingS3Input] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'S3Input' }})
+    r"""ProcessingInput
+    The inputs for a processing job. The processing input must specify exactly one of either <code>S3Input</code> or <code>DatasetDefinition</code> types.
+    """
+    
+    input_name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('InputName') }})
+    app_managed: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('AppManaged') }})
+    dataset_definition: Optional[DatasetDefinition] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('DatasetDefinition') }})
+    s3_input: Optional[ProcessingS3Input] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('S3Input') }})
     

@@ -1,5 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Any,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
 from sdk.models import shared
 
 
@@ -22,16 +25,16 @@ class ListJobTemplatesHeaders:
 
 @dataclass
 class ListJobTemplatesRequest:
-    query_params: ListJobTemplatesQueryParams = field(default=None)
-    headers: ListJobTemplatesHeaders = field(default=None)
+    headers: ListJobTemplatesHeaders = field()
+    query_params: ListJobTemplatesQueryParams = field()
     
 
 @dataclass
 class ListJobTemplatesResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     internal_failure_exception: Optional[Any] = field(default=None)
     invalid_request_exception: Optional[Any] = field(default=None)
     list_job_templates_response: Optional[shared.ListJobTemplatesResponse] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     

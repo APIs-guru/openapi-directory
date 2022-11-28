@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ProvisioningArtifactProperties } from "./provisioningartifactproperties";
 export declare class CreateProvisioningArtifactInput extends SpeakeasyBase {
     acceptLanguage?: string;

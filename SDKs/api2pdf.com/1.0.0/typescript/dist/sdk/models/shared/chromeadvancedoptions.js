@@ -22,18 +22,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var ChromeAdvancedOptions = /** @class */ (function (_super) {
     __extends(ChromeAdvancedOptions, _super);
     function ChromeAdvancedOptions() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=landscape" }),
+        SpeakeasyMetadata({ data: "json, name=landscape" }),
         __metadata("design:type", String)
     ], ChromeAdvancedOptions.prototype, "landscape", void 0);
     __decorate([
-        Metadata({ data: "json, name=printBackground" }),
+        SpeakeasyMetadata({ data: "json, name=printBackground" }),
         __metadata("design:type", Boolean)
     ], ChromeAdvancedOptions.prototype, "printBackground", void 0);
     return ChromeAdvancedOptions;

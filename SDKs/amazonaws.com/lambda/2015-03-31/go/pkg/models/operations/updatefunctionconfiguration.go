@@ -18,14 +18,20 @@ type UpdateFunctionConfigurationHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// UpdateFunctionConfigurationRequestBodyDeadLetterConfig
+// The <a href="https://docs.aws.amazon.com/lambda/latest/dg/invocation-async.html#dlq">dead-letter queue</a> for failed asynchronous invocations.
 type UpdateFunctionConfigurationRequestBodyDeadLetterConfig struct {
 	TargetArn *string `json:"TargetArn,omitempty"`
 }
 
+// UpdateFunctionConfigurationRequestBodyEnvironment
+// A function's environment variable settings. You can use environment variables to adjust your function's behavior without updating code. An environment variable is a pair of strings that are stored in a function's version-specific configuration.
 type UpdateFunctionConfigurationRequestBodyEnvironment struct {
 	Variables map[string]string `json:"Variables,omitempty"`
 }
 
+// UpdateFunctionConfigurationRequestBodyImageConfig
+// Configuration values that override the container image Dockerfile settings. See <a href="https://docs.aws.amazon.com/lambda/latest/dg/images-create.html#images-parms">Container settings</a>.
 type UpdateFunctionConfigurationRequestBodyImageConfig struct {
 	Command          []string `json:"Command,omitempty"`
 	EntryPoint       []string `json:"EntryPoint,omitempty"`
@@ -62,10 +68,14 @@ const (
 	UpdateFunctionConfigurationRequestBodyRuntimeEnumProvidedAl2  UpdateFunctionConfigurationRequestBodyRuntimeEnum = "provided.al2"
 )
 
+// UpdateFunctionConfigurationRequestBodyTracingConfig
+// The function's <a href="https://docs.aws.amazon.com/lambda/latest/dg/services-xray.html">X-Ray</a> tracing configuration. To sample and record incoming requests, set <code>Mode</code> to <code>Active</code>.
 type UpdateFunctionConfigurationRequestBodyTracingConfig struct {
 	Mode *shared.TracingModeEnum `json:"Mode,omitempty"`
 }
 
+// UpdateFunctionConfigurationRequestBodyVpcConfig
+// The VPC security groups and subnets that are attached to a Lambda function. For more information, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-vpc.html">VPC Settings</a>.
 type UpdateFunctionConfigurationRequestBodyVpcConfig struct {
 	SecurityGroupIds []string `json:"SecurityGroupIds,omitempty"`
 	SubnetIds        []string `json:"SubnetIds,omitempty"`

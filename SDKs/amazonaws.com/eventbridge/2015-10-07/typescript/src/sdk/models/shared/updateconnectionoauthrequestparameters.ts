@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { UpdateConnectionOAuthClientRequestParameters } from "./updateconnectionoauthclientrequestparameters";
 import { ConnectionOAuthHttpMethodEnum } from "./connectionoauthhttpmethodenum";
 import { ConnectionHttpParameters } from "./connectionhttpparameters";
+
 
 
 // UpdateConnectionOAuthRequestParameters
@@ -9,15 +10,15 @@ import { ConnectionHttpParameters } from "./connectionhttpparameters";
  * Contains the OAuth request parameters to use for the connection.
 **/
 export class UpdateConnectionOAuthRequestParameters extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AuthorizationEndpoint" })
+  @SpeakeasyMetadata({ data: "json, name=AuthorizationEndpoint" })
   authorizationEndpoint?: string;
 
-  @Metadata({ data: "json, name=ClientParameters" })
+  @SpeakeasyMetadata({ data: "json, name=ClientParameters" })
   clientParameters?: UpdateConnectionOAuthClientRequestParameters;
 
-  @Metadata({ data: "json, name=HttpMethod" })
+  @SpeakeasyMetadata({ data: "json, name=HttpMethod" })
   httpMethod?: ConnectionOAuthHttpMethodEnum;
 
-  @Metadata({ data: "json, name=OAuthHttpParameters" })
+  @SpeakeasyMetadata({ data: "json, name=OAuthHttpParameters" })
   oAuthHttpParameters?: ConnectionHttpParameters;
 }

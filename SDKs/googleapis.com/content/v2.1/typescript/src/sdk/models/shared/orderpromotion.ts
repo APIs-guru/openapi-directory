@@ -1,45 +1,43 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
-import { OrderPromotionItem } from "./orderpromotionitem";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { OrderPromotionItem } from "./orderpromotionitem";
 import { Price } from "./price";
-import { Price } from "./price";
+
 
 
 export class OrderPromotion extends SpeakeasyBase {
-  @Metadata({ data: "json, name=applicableItems", elemType: shared.OrderPromotionItem })
+  @SpeakeasyMetadata({ data: "json, name=applicableItems", elemType: OrderPromotionItem })
   applicableItems?: OrderPromotionItem[];
 
-  @Metadata({ data: "json, name=appliedItems", elemType: shared.OrderPromotionItem })
+  @SpeakeasyMetadata({ data: "json, name=appliedItems", elemType: OrderPromotionItem })
   appliedItems?: OrderPromotionItem[];
 
-  @Metadata({ data: "json, name=endTime" })
+  @SpeakeasyMetadata({ data: "json, name=endTime" })
   endTime?: string;
 
-  @Metadata({ data: "json, name=funder" })
+  @SpeakeasyMetadata({ data: "json, name=funder" })
   funder?: string;
 
-  @Metadata({ data: "json, name=merchantPromotionId" })
+  @SpeakeasyMetadata({ data: "json, name=merchantPromotionId" })
   merchantPromotionId?: string;
 
-  @Metadata({ data: "json, name=priceValue" })
+  @SpeakeasyMetadata({ data: "json, name=priceValue" })
   priceValue?: Price;
 
-  @Metadata({ data: "json, name=shortTitle" })
+  @SpeakeasyMetadata({ data: "json, name=shortTitle" })
   shortTitle?: string;
 
-  @Metadata({ data: "json, name=startTime" })
+  @SpeakeasyMetadata({ data: "json, name=startTime" })
   startTime?: string;
 
-  @Metadata({ data: "json, name=subtype" })
+  @SpeakeasyMetadata({ data: "json, name=subtype" })
   subtype?: string;
 
-  @Metadata({ data: "json, name=taxValue" })
+  @SpeakeasyMetadata({ data: "json, name=taxValue" })
   taxValue?: Price;
 
-  @Metadata({ data: "json, name=title" })
+  @SpeakeasyMetadata({ data: "json, name=title" })
   title?: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: string;
 }

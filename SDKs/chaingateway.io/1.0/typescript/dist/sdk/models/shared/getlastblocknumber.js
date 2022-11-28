@@ -22,18 +22,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var GetLastBlockNumber = /** @class */ (function (_super) {
     __extends(GetLastBlockNumber, _super);
     function GetLastBlockNumber() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=blocknumber" }),
+        SpeakeasyMetadata({ data: "json, name=blocknumber" }),
         __metadata("design:type", Number)
     ], GetLastBlockNumber.prototype, "blocknumber", void 0);
     __decorate([
-        Metadata({ data: "json, name=ok" }),
+        SpeakeasyMetadata({ data: "json, name=ok" }),
         __metadata("design:type", Boolean)
     ], GetLastBlockNumber.prototype, "ok", void 0);
     return GetLastBlockNumber;

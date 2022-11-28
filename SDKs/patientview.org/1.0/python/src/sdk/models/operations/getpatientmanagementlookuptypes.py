@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class GetPatientManagementLookupTypesResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     lookup_types: Optional[List[shared.LookupType]] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,47 +1,48 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class AccountCreateOAuth2SessionPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=provider" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=provider" })
   provider: string;
 }
 
 
 export class AccountCreateOAuth2SessionQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=failure" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=failure" })
   failure?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=scopes" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=scopes" })
   scopes?: string[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=success" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=success" })
   success?: string;
 }
 
 
 export class AccountCreateOAuth2SessionSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
   project: shared.SchemeProject;
 }
 
 
 export class AccountCreateOAuth2SessionRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: AccountCreateOAuth2SessionPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: AccountCreateOAuth2SessionQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: AccountCreateOAuth2SessionSecurity;
 }
 
 
 export class AccountCreateOAuth2SessionResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

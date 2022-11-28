@@ -1,15 +1,18 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import spend
-from . import spend
-from . import timeperiod
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class BudgetedAndActualAmounts:
-    actual_amount: Optional[spend.Spend] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ActualAmount' }})
-    budgeted_amount: Optional[spend.Spend] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'BudgetedAmount' }})
-    time_period: Optional[timeperiod.TimePeriod] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'TimePeriod' }})
+    r"""BudgetedAndActualAmounts
+    The amount of cost or usage that you created the budget for, compared to your actual costs or usage.
+    """
+    
+    actual_amount: Optional[Spend] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ActualAmount') }})
+    budgeted_amount: Optional[Spend] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('BudgetedAmount') }})
+    time_period: Optional[TimePeriod] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('TimePeriod') }})
     

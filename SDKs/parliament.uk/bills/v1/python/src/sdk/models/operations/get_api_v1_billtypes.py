@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 
@@ -12,14 +13,14 @@ class GetAPIV1BillTypesQueryParams:
 
 @dataclass
 class GetAPIV1BillTypesRequest:
-    query_params: GetAPIV1BillTypesQueryParams = field(default=None)
+    query_params: GetAPIV1BillTypesQueryParams = field()
     
 
 @dataclass
 class GetAPIV1BillTypesResponse:
+    content_type: str = field()
+    status_code: int = field()
     bill_type_search_result: Optional[shared.BillTypeSearchResult] = field(default=None)
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
+    body: Optional[bytes] = field(default=None)
     problem_details: Optional[dict[str, Any]] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AlignmentEnum } from "./alignmentenum";
+
 
 
 // InAppMessageBodyConfig
@@ -7,12 +8,12 @@ import { AlignmentEnum } from "./alignmentenum";
  * Text config for Message Body.
 **/
 export class InAppMessageBodyConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Alignment" })
+  @SpeakeasyMetadata({ data: "json, name=Alignment" })
   alignment: AlignmentEnum;
 
-  @Metadata({ data: "json, name=Body" })
+  @SpeakeasyMetadata({ data: "json, name=Body" })
   body: string;
 
-  @Metadata({ data: "json, name=TextColor" })
+  @SpeakeasyMetadata({ data: "json, name=TextColor" })
   textColor: string;
 }

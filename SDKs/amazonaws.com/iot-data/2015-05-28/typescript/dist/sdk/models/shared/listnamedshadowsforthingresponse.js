@@ -22,22 +22,22 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var ListNamedShadowsForThingResponse = /** @class */ (function (_super) {
     __extends(ListNamedShadowsForThingResponse, _super);
     function ListNamedShadowsForThingResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=nextToken" }),
+        SpeakeasyMetadata({ data: "json, name=nextToken" }),
         __metadata("design:type", String)
     ], ListNamedShadowsForThingResponse.prototype, "nextToken", void 0);
     __decorate([
-        Metadata({ data: "json, name=results" }),
+        SpeakeasyMetadata({ data: "json, name=results" }),
         __metadata("design:type", Array)
     ], ListNamedShadowsForThingResponse.prototype, "results", void 0);
     __decorate([
-        Metadata({ data: "json, name=timestamp" }),
+        SpeakeasyMetadata({ data: "json, name=timestamp" }),
         __metadata("design:type", Number)
     ], ListNamedShadowsForThingResponse.prototype, "timestamp", void 0);
     return ListNamedShadowsForThingResponse;

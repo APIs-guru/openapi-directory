@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetDeleteClusterActionEnum(str, Enum):
     DELETE_CLUSTER = "DeleteCluster"
@@ -10,12 +14,12 @@ class GetDeleteClusterVersionEnum(str, Enum):
 
 @dataclass
 class GetDeleteClusterQueryParams:
-    action: GetDeleteClusterActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    cluster_identifier: str = field(default=None, metadata={'query_param': { 'field_name': 'ClusterIdentifier', 'style': 'form', 'explode': True }})
+    action: GetDeleteClusterActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    cluster_identifier: str = field(metadata={'query_param': { 'field_name': 'ClusterIdentifier', 'style': 'form', 'explode': True }})
+    version: GetDeleteClusterVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     final_cluster_snapshot_identifier: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'FinalClusterSnapshotIdentifier', 'style': 'form', 'explode': True }})
     final_cluster_snapshot_retention_period: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'FinalClusterSnapshotRetentionPeriod', 'style': 'form', 'explode': True }})
     skip_final_cluster_snapshot: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'SkipFinalClusterSnapshot', 'style': 'form', 'explode': True }})
-    version: GetDeleteClusterVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -31,13 +35,13 @@ class GetDeleteClusterHeaders:
 
 @dataclass
 class GetDeleteClusterRequest:
-    query_params: GetDeleteClusterQueryParams = field(default=None)
-    headers: GetDeleteClusterHeaders = field(default=None)
+    headers: GetDeleteClusterHeaders = field()
+    query_params: GetDeleteClusterQueryParams = field()
     
 
 @dataclass
 class GetDeleteClusterResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

@@ -12,6 +12,8 @@ const (
 	PositionedObjectPositioningLayoutEnumBehindText                        PositionedObjectPositioningLayoutEnum = "BEHIND_TEXT"
 )
 
+// PositionedObjectPositioning
+// The positioning of a PositionedObject. The positioned object is positioned relative to the beginning of the Paragraph it's tethered to.
 type PositionedObjectPositioning struct {
 	Layout     *PositionedObjectPositioningLayoutEnum `json:"layout,omitempty"`
 	LeftOffset *Dimension                             `json:"leftOffset,omitempty"`

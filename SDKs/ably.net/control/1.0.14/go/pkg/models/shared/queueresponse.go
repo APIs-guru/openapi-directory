@@ -5,6 +5,8 @@ type QueueResponseAmqp struct {
 	URI       *string `json:"uri,omitempty"`
 }
 
+// QueueResponseMessages
+// Details of messages in the queue.
 type QueueResponseMessages struct {
 	Ready          *int64 `json:"ready,omitempty"`
 	Total          *int64 `json:"total,omitempty"`

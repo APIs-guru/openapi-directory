@@ -9,10 +9,6 @@ type GetImagesQueryParams struct {
 	PageSize *int64 `queryParam:"style=form,explode=true,name=page_size"`
 }
 
-type GetImagesRequest struct {
-	QueryParams GetImagesQueryParams
-}
-
 type GetImages200ApplicationJSON struct {
 	Data    []shared.ImagePublic `json:"data,omitempty"`
 	Page    *int64               `json:"page,omitempty"`
@@ -22,6 +18,10 @@ type GetImages200ApplicationJSON struct {
 
 type GetImagesDefaultApplicationJSON struct {
 	Errors []shared.ErrorObject `json:"errors,omitempty"`
+}
+
+type GetImagesRequest struct {
+	QueryParams GetImagesQueryParams
 }
 
 type GetImagesResponse struct {

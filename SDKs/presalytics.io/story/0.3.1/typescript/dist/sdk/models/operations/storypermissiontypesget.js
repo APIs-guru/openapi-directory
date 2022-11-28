@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var StoryPermissionTypesGetResponse = /** @class */ (function (_super) {
     __extends(StoryPermissionTypesGetResponse, _super);
@@ -30,19 +30,19 @@ var StoryPermissionTypesGetResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], StoryPermissionTypesGetResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], StoryPermissionTypesGetResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata({ elemType: shared.PermissionType }),
+        SpeakeasyMetadata({ elemType: shared.PermissionType }),
         __metadata("design:type", Array)
     ], StoryPermissionTypesGetResponse.prototype, "permissionTypes", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], StoryPermissionTypesGetResponse.prototype, "problemDetail", void 0);
     return StoryPermissionTypesGetResponse;

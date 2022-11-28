@@ -1,38 +1,39 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class RequestLastAdminRoomsGroupsPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=group_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=group_id" })
   groupId: number;
 }
 
 
 export class RequestLastAdminRoomsGroupsHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Sds-Auth-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Sds-Auth-Token" })
   xSdsAuthToken?: string;
 }
 
 
 export class RequestLastAdminRoomsGroupsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: RequestLastAdminRoomsGroupsPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: RequestLastAdminRoomsGroupsHeaders;
 }
 
 
 export class RequestLastAdminRoomsGroupsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   errorResponse?: shared.ErrorResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   lastAdminGroupRoomList?: shared.LastAdminGroupRoomList;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

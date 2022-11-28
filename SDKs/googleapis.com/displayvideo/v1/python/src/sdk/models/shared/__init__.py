@@ -1,4 +1,4 @@
-from .__xgafv_enum import *
+from ._xgafv_enum import *
 from .activeviewvideoviewabilitymetricconfig import *
 from .adloox import *
 from .advertiser import *
@@ -95,7 +95,7 @@ from .custombiddingscriptref import *
 from .customlist import *
 from .customlistgroup import *
 from .customlisttargetingsetting import *
-from .date import *
+from .date_ import *
 from .daterange import *
 from .dayandtimeassignedtargetingoptiondetails import *
 from .deleteassignedtargetingoptionsrequest import *

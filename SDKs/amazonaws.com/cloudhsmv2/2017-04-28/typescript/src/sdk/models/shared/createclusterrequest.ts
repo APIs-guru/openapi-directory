@@ -1,22 +1,22 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BackupRetentionPolicy } from "./backupretentionpolicy";
 import { Tag } from "./tag";
 
 
+
 export class CreateClusterRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=BackupRetentionPolicy" })
+  @SpeakeasyMetadata({ data: "json, name=BackupRetentionPolicy" })
   backupRetentionPolicy?: BackupRetentionPolicy;
 
-  @Metadata({ data: "json, name=HsmType" })
+  @SpeakeasyMetadata({ data: "json, name=HsmType" })
   hsmType: string;
 
-  @Metadata({ data: "json, name=SourceBackupId" })
+  @SpeakeasyMetadata({ data: "json, name=SourceBackupId" })
   sourceBackupId?: string;
 
-  @Metadata({ data: "json, name=SubnetIds" })
+  @SpeakeasyMetadata({ data: "json, name=SubnetIds" })
   subnetIds: string[];
 
-  @Metadata({ data: "json, name=TagList", elemType: shared.Tag })
+  @SpeakeasyMetadata({ data: "json, name=TagList", elemType: Tag })
   tagList?: Tag[];
 }

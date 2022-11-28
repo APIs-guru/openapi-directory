@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 class GamesApplicationsGetEndPointEndPointTypeEnum(str, Enum):
@@ -27,19 +28,19 @@ class GamesApplicationsGetEndPointQueryParams:
 
 @dataclass
 class GamesApplicationsGetEndPointSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class GamesApplicationsGetEndPointRequest:
-    query_params: GamesApplicationsGetEndPointQueryParams = field(default=None)
-    security: GamesApplicationsGetEndPointSecurity = field(default=None)
+    query_params: GamesApplicationsGetEndPointQueryParams = field()
+    security: GamesApplicationsGetEndPointSecurity = field()
     
 
 @dataclass
 class GamesApplicationsGetEndPointResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     end_point: Optional[shared.EndPoint] = field(default=None)
-    status_code: int = field(default=None)
     

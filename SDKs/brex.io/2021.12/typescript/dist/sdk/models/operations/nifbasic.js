@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var NifBasicPathParams = /** @class */ (function (_super) {
     __extends(NifBasicPathParams, _super);
@@ -30,7 +30,7 @@ var NifBasicPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=country" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=country" }),
         __metadata("design:type", String)
     ], NifBasicPathParams.prototype, "country", void 0);
     return NifBasicPathParams;
@@ -42,15 +42,15 @@ var NifBasicRequestBody = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "form, name=companyAddress;" }),
+        SpeakeasyMetadata({ data: "form, name=companyAddress;" }),
         __metadata("design:type", String)
     ], NifBasicRequestBody.prototype, "companyAddress", void 0);
     __decorate([
-        Metadata({ data: "form, name=companyName;" }),
+        SpeakeasyMetadata({ data: "form, name=companyName;" }),
         __metadata("design:type", String)
     ], NifBasicRequestBody.prototype, "companyName", void 0);
     __decorate([
-        Metadata({ data: "form, name=nifNumber;" }),
+        SpeakeasyMetadata({ data: "form, name=nifNumber;" }),
         __metadata("design:type", String)
     ], NifBasicRequestBody.prototype, "nifNumber", void 0);
     return NifBasicRequestBody;
@@ -62,7 +62,7 @@ var NifBasicSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeUserKey)
     ], NifBasicSecurity.prototype, "userKey", void 0);
     return NifBasicSecurity;
@@ -74,15 +74,15 @@ var NifBasicRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", NifBasicPathParams)
     ], NifBasicRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/x-www-form-urlencoded" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/x-www-form-urlencoded" }),
         __metadata("design:type", NifBasicRequestBody)
     ], NifBasicRequest.prototype, "request", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", NifBasicSecurity)
     ], NifBasicRequest.prototype, "security", void 0);
     return NifBasicRequest;
@@ -94,19 +94,19 @@ var NifBasicResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], NifBasicResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], NifBasicResponse.prototype, "nifBasic200ApplicationJsonAny", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], NifBasicResponse.prototype, "nifBasicDefaultApplicationJsonAny", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], NifBasicResponse.prototype, "statusCode", void 0);
     return NifBasicResponse;

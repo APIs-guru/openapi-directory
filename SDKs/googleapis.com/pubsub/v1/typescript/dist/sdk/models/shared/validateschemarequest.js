@@ -22,21 +22,21 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import { Schema } from "./schema";
-// ValidateSchemaRequest
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { SchemaInput } from "./schema";
+// ValidateSchemaRequestInput
 /**
  * Request for the `ValidateSchema` method.
 **/
-var ValidateSchemaRequest = /** @class */ (function (_super) {
-    __extends(ValidateSchemaRequest, _super);
-    function ValidateSchemaRequest() {
+var ValidateSchemaRequestInput = /** @class */ (function (_super) {
+    __extends(ValidateSchemaRequestInput, _super);
+    function ValidateSchemaRequestInput() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=schema" }),
-        __metadata("design:type", Schema)
-    ], ValidateSchemaRequest.prototype, "schema", void 0);
-    return ValidateSchemaRequest;
+        SpeakeasyMetadata({ data: "json, name=schema" }),
+        __metadata("design:type", SchemaInput)
+    ], ValidateSchemaRequestInput.prototype, "schema", void 0);
+    return ValidateSchemaRequestInput;
 }(SpeakeasyBase));
-export { ValidateSchemaRequest };
+export { ValidateSchemaRequestInput };

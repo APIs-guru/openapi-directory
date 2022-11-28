@@ -1,29 +1,30 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class PostMessageCommentsRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "multipart_form, name=body" })
+  @SpeakeasyMetadata({ data: "multipart_form, name=body" })
   body: string;
 
-  @Metadata({ data: "multipart_form, name=user_id" })
+  @SpeakeasyMetadata({ data: "multipart_form, name=user_id" })
   userId?: number;
 }
 
 
 export class PostMessageCommentsRequest extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=multipart/form-data" })
+  @SpeakeasyMetadata({ data: "request, media_type=multipart/form-data" })
   request?: PostMessageCommentsRequestBody;
 }
 
 
 export class PostMessageCommentsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   messageCommentEntity?: shared.MessageCommentEntity;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

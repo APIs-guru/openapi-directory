@@ -1,14 +1,14 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import algorithmspec_enum
-from . import wrappingkeyspec_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class GetParametersForImportRequest:
-    key_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'KeyId' }})
-    wrapping_algorithm: algorithmspec_enum.AlgorithmSpecEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'WrappingAlgorithm' }})
-    wrapping_key_spec: wrappingkeyspec_enum.WrappingKeySpecEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'WrappingKeySpec' }})
+    key_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('KeyId') }})
+    wrapping_algorithm: AlgorithmSpecEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('WrappingAlgorithm') }})
+    wrapping_key_spec: WrappingKeySpecEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('WrappingKeySpec') }})
     

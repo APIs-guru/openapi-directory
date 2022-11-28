@@ -1,5 +1,7 @@
 package shared
 
+// ListPartsOutput
+// Contains the Amazon S3 Glacier response to your request.
 type ListPartsOutput struct {
 	ArchiveDescription *string           `json:"ArchiveDescription,omitempty"`
 	CreationDate       *string           `json:"CreationDate,omitempty"`

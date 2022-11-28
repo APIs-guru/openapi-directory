@@ -1,4 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AmplitudeSourceProperties } from "./amplitudesourceproperties";
 import { DatadogSourceProperties } from "./datadogsourceproperties";
 import { DynatraceSourceProperties } from "./dynatracesourceproperties";
@@ -16,53 +16,54 @@ import { VeevaSourceProperties } from "./veevasourceproperties";
 import { ZendeskSourceProperties } from "./zendesksourceproperties";
 
 
+
 // SourceConnectorProperties
 /** 
  *  Specifies the information that is required to query a particular connector. 
 **/
 export class SourceConnectorProperties extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Amplitude" })
+  @SpeakeasyMetadata({ data: "json, name=Amplitude" })
   amplitude?: AmplitudeSourceProperties;
 
-  @Metadata({ data: "json, name=Datadog" })
+  @SpeakeasyMetadata({ data: "json, name=Datadog" })
   datadog?: DatadogSourceProperties;
 
-  @Metadata({ data: "json, name=Dynatrace" })
+  @SpeakeasyMetadata({ data: "json, name=Dynatrace" })
   dynatrace?: DynatraceSourceProperties;
 
-  @Metadata({ data: "json, name=GoogleAnalytics" })
+  @SpeakeasyMetadata({ data: "json, name=GoogleAnalytics" })
   googleAnalytics?: GoogleAnalyticsSourceProperties;
 
-  @Metadata({ data: "json, name=InforNexus" })
+  @SpeakeasyMetadata({ data: "json, name=InforNexus" })
   inforNexus?: InforNexusSourceProperties;
 
-  @Metadata({ data: "json, name=Marketo" })
+  @SpeakeasyMetadata({ data: "json, name=Marketo" })
   marketo?: MarketoSourceProperties;
 
-  @Metadata({ data: "json, name=S3" })
+  @SpeakeasyMetadata({ data: "json, name=S3" })
   s3?: S3SourceProperties;
 
-  @Metadata({ data: "json, name=SAPOData" })
+  @SpeakeasyMetadata({ data: "json, name=SAPOData" })
   sapoData?: SapoDataSourceProperties;
 
-  @Metadata({ data: "json, name=Salesforce" })
+  @SpeakeasyMetadata({ data: "json, name=Salesforce" })
   salesforce?: SalesforceSourceProperties;
 
-  @Metadata({ data: "json, name=ServiceNow" })
+  @SpeakeasyMetadata({ data: "json, name=ServiceNow" })
   serviceNow?: ServiceNowSourceProperties;
 
-  @Metadata({ data: "json, name=Singular" })
+  @SpeakeasyMetadata({ data: "json, name=Singular" })
   singular?: SingularSourceProperties;
 
-  @Metadata({ data: "json, name=Slack" })
+  @SpeakeasyMetadata({ data: "json, name=Slack" })
   slack?: SlackSourceProperties;
 
-  @Metadata({ data: "json, name=Trendmicro" })
+  @SpeakeasyMetadata({ data: "json, name=Trendmicro" })
   trendmicro?: TrendmicroSourceProperties;
 
-  @Metadata({ data: "json, name=Veeva" })
+  @SpeakeasyMetadata({ data: "json, name=Veeva" })
   veeva?: VeevaSourceProperties;
 
-  @Metadata({ data: "json, name=Zendesk" })
+  @SpeakeasyMetadata({ data: "json, name=Zendesk" })
   zendesk?: ZendeskSourceProperties;
 }

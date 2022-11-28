@@ -1,29 +1,40 @@
 import { AxiosInstance, AxiosRequestConfig } from "axios";
 import * as operations from "./models/operations";
-declare type OptsFunc = (sdk: SDK) => void;
+type OptsFunc = (sdk: SDK) => void;
+export declare const ServerList: readonly ["https://api.nexmo.com/v3/media"];
 export declare function WithServerURL(serverURL: string, params?: Map<string, string>): OptsFunc;
 export declare function WithClient(client: AxiosInstance): OptsFunc;
 export declare class SDK {
-    defaultClient?: AxiosInstance;
-    securityClient?: AxiosInstance;
-    security?: any;
-    serverURL: string;
+    _defaultClient: AxiosInstance;
+    _securityClient: AxiosInstance;
+    _serverURL: string;
+    private _language;
+    private _sdkVersion;
+    private _genVersion;
     constructor(...opts: OptsFunc[]);
     /**
+     * deleteAMediaItem - Delete a media item
+     *
      * Delete a previously created media item by ID.
     **/
-    DeleteAMediaItem(config?: AxiosRequestConfig): Promise<operations.DeleteAMediaItemResponse>;
+    deleteAMediaItem(config?: AxiosRequestConfig): Promise<operations.DeleteAMediaItemResponse>;
     /**
+     * listAndSearchMediaItems - List and search media items
+     *
      * Retrieve information about multiple media items with the ability to search and paginate.
     **/
-    ListAndSearchMediaItems(req: operations.ListAndSearchMediaItemsRequest, config?: AxiosRequestConfig): Promise<operations.ListAndSearchMediaItemsResponse>;
+    listAndSearchMediaItems(req: operations.ListAndSearchMediaItemsRequest, config?: AxiosRequestConfig): Promise<operations.ListAndSearchMediaItemsResponse>;
     /**
+     * retrieveAMediaItem - Retrieve a media item
+     *
      * Retrieve information about a single media item
     **/
-    RetrieveAMediaItem(config?: AxiosRequestConfig): Promise<operations.RetrieveAMediaItemResponse>;
+    retrieveAMediaItem(config?: AxiosRequestConfig): Promise<operations.RetrieveAMediaItemResponse>;
     /**
+     * updateAMediaItem - Update a media item
+     *
      * Update a previously created media item by ID.
     **/
-    UpdateAMediaItem(req: operations.UpdateAMediaItemRequest, config?: AxiosRequestConfig): Promise<operations.UpdateAMediaItemResponse>;
+    updateAMediaItem(req: operations.UpdateAMediaItemRequest, config?: AxiosRequestConfig): Promise<operations.UpdateAMediaItemResponse>;
 }
 export {};

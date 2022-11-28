@@ -13,6 +13,8 @@ const (
 	DomainStateEnumDown                  DomainStateEnum = "DOWN"
 )
 
+// Domain
+// If the domain is being changed, it will be placed into the UPDATING state, which indicates that the resource is being reconciled. At this point, Get will reflect an intermediate state.
 type Domain struct {
 	AuditLogsEnabled           *bool             `json:"auditLogsEnabled,omitempty"`
 	AuthorizedNetworks         []string          `json:"authorizedNetworks,omitempty"`

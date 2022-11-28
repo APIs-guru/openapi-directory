@@ -1,5 +1,7 @@
 package shared
 
+// S3DestinationDescription
+// Describes a destination in Amazon S3.
 type S3DestinationDescription struct {
 	BucketArn                string                    `json:"BucketARN"`
 	BufferingHints           BufferingHints            `json:"BufferingHints"`

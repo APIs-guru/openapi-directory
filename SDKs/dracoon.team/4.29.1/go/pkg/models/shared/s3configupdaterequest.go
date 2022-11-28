@@ -1,5 +1,7 @@
 package shared
 
+// S3ConfigUpdateRequest
+// Request model for updating a S3 configuration
 type S3ConfigUpdateRequest struct {
 	AccessKey   *string `json:"accessKey,omitempty"`
 	BucketName  *string `json:"bucketName,omitempty"`

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // EdgeModel
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The model on the edge device.
 **/
 export class EdgeModel extends SpeakeasyBase {
-  @Metadata({ data: "json, name=LatestInference" })
+  @SpeakeasyMetadata({ data: "json, name=LatestInference" })
   latestInference?: Date;
 
-  @Metadata({ data: "json, name=LatestSampleTime" })
+  @SpeakeasyMetadata({ data: "json, name=LatestSampleTime" })
   latestSampleTime?: Date;
 
-  @Metadata({ data: "json, name=ModelName" })
+  @SpeakeasyMetadata({ data: "json, name=ModelName" })
   modelName: string;
 
-  @Metadata({ data: "json, name=ModelVersion" })
+  @SpeakeasyMetadata({ data: "json, name=ModelVersion" })
   modelVersion: string;
 }

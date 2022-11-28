@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ProviderTypeEnum } from "./providertypeenum";
 import { RepositoryAssociationStateEnum } from "./repositoryassociationstateenum";
 // RepositoryAssociationSummary
@@ -35,35 +35,35 @@ var RepositoryAssociationSummary = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=AssociationArn" }),
+        SpeakeasyMetadata({ data: "json, name=AssociationArn" }),
         __metadata("design:type", String)
     ], RepositoryAssociationSummary.prototype, "associationArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=AssociationId" }),
+        SpeakeasyMetadata({ data: "json, name=AssociationId" }),
         __metadata("design:type", String)
     ], RepositoryAssociationSummary.prototype, "associationId", void 0);
     __decorate([
-        Metadata({ data: "json, name=ConnectionArn" }),
+        SpeakeasyMetadata({ data: "json, name=ConnectionArn" }),
         __metadata("design:type", String)
     ], RepositoryAssociationSummary.prototype, "connectionArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=LastUpdatedTimeStamp" }),
+        SpeakeasyMetadata({ data: "json, name=LastUpdatedTimeStamp" }),
         __metadata("design:type", Date)
     ], RepositoryAssociationSummary.prototype, "lastUpdatedTimeStamp", void 0);
     __decorate([
-        Metadata({ data: "json, name=Name" }),
+        SpeakeasyMetadata({ data: "json, name=Name" }),
         __metadata("design:type", String)
     ], RepositoryAssociationSummary.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=Owner" }),
+        SpeakeasyMetadata({ data: "json, name=Owner" }),
         __metadata("design:type", String)
     ], RepositoryAssociationSummary.prototype, "owner", void 0);
     __decorate([
-        Metadata({ data: "json, name=ProviderType" }),
+        SpeakeasyMetadata({ data: "json, name=ProviderType" }),
         __metadata("design:type", String)
     ], RepositoryAssociationSummary.prototype, "providerType", void 0);
     __decorate([
-        Metadata({ data: "json, name=State" }),
+        SpeakeasyMetadata({ data: "json, name=State" }),
         __metadata("design:type", String)
     ], RepositoryAssociationSummary.prototype, "state", void 0);
     return RepositoryAssociationSummary;

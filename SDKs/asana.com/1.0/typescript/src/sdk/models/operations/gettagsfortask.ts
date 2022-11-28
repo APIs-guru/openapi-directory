@@ -1,53 +1,54 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetTagsForTaskPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=task_gid" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=task_gid" })
   taskGid: string;
 }
 
 
 export class GetTagsForTaskQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=limit" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=limit" })
   limit?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=offset" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=offset" })
   offset?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=false;name=opt_fields" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=opt_fields" })
   optFields?: string[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=opt_pretty" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=opt_pretty" })
   optPretty?: boolean;
 }
 
 
-export class GetTagsForTaskRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: GetTagsForTaskPathParams;
-
-  @Metadata()
-  queryParams: GetTagsForTaskQueryParams;
-}
-
-
 export class GetTagsForTask200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=data", elemType: shared.TagCompact })
+  @SpeakeasyMetadata({ data: "json, name=data", elemType: shared.TagCompact })
   data?: shared.TagCompact[];
 }
 
 
+export class GetTagsForTaskRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: GetTagsForTaskPathParams;
+
+  @SpeakeasyMetadata()
+  queryParams: GetTagsForTaskQueryParams;
+}
+
+
 export class GetTagsForTaskResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   errorResponse?: shared.ErrorResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getTagsForTask200ApplicationJsonObject?: GetTagsForTask200ApplicationJson;
 }

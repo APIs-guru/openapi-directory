@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // Notification
 /**
  * A subscription to receive Google PubSub notifications.
@@ -33,39 +33,39 @@ var Notification = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=custom_attributes" }),
+        SpeakeasyMetadata({ data: "json, name=custom_attributes" }),
         __metadata("design:type", Map)
     ], Notification.prototype, "customAttributes", void 0);
     __decorate([
-        Metadata({ data: "json, name=etag" }),
+        SpeakeasyMetadata({ data: "json, name=etag" }),
         __metadata("design:type", String)
     ], Notification.prototype, "etag", void 0);
     __decorate([
-        Metadata({ data: "json, name=event_types" }),
+        SpeakeasyMetadata({ data: "json, name=event_types" }),
         __metadata("design:type", Array)
     ], Notification.prototype, "eventTypes", void 0);
     __decorate([
-        Metadata({ data: "json, name=id" }),
+        SpeakeasyMetadata({ data: "json, name=id" }),
         __metadata("design:type", String)
     ], Notification.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "json, name=kind" }),
+        SpeakeasyMetadata({ data: "json, name=kind" }),
         __metadata("design:type", String)
     ], Notification.prototype, "kind", void 0);
     __decorate([
-        Metadata({ data: "json, name=object_name_prefix" }),
+        SpeakeasyMetadata({ data: "json, name=object_name_prefix" }),
         __metadata("design:type", String)
     ], Notification.prototype, "objectNamePrefix", void 0);
     __decorate([
-        Metadata({ data: "json, name=payload_format" }),
+        SpeakeasyMetadata({ data: "json, name=payload_format" }),
         __metadata("design:type", String)
     ], Notification.prototype, "payloadFormat", void 0);
     __decorate([
-        Metadata({ data: "json, name=selfLink" }),
+        SpeakeasyMetadata({ data: "json, name=selfLink" }),
         __metadata("design:type", String)
     ], Notification.prototype, "selfLink", void 0);
     __decorate([
-        Metadata({ data: "json, name=topic" }),
+        SpeakeasyMetadata({ data: "json, name=topic" }),
         __metadata("design:type", String)
     ], Notification.prototype, "topic", void 0);
     return Notification;

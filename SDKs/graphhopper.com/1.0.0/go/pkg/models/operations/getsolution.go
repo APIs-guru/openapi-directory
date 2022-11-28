@@ -8,13 +8,13 @@ type GetSolutionPathParams struct {
 	JobID string `pathParam:"style=simple,explode=false,name=jobId"`
 }
 
-type GetSolutionRequest struct {
-	PathParams GetSolutionPathParams
-}
-
 type GetSolution404ApplicationJSON struct {
 	Message *string `json:"message,omitempty"`
 	Status  *string `json:"status,omitempty"`
+}
+
+type GetSolutionRequest struct {
+	PathParams GetSolutionPathParams
 }
 
 type GetSolutionResponse struct {

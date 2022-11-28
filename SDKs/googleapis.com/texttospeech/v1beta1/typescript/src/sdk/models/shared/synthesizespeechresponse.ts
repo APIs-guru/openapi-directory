@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AudioConfig } from "./audioconfig";
 import { Timepoint } from "./timepoint";
+
 
 
 // SynthesizeSpeechResponse
@@ -9,12 +9,12 @@ import { Timepoint } from "./timepoint";
  * The message returned to the client by the `SynthesizeSpeech` method.
 **/
 export class SynthesizeSpeechResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=audioConfig" })
+  @SpeakeasyMetadata({ data: "json, name=audioConfig" })
   audioConfig?: AudioConfig;
 
-  @Metadata({ data: "json, name=audioContent" })
+  @SpeakeasyMetadata({ data: "json, name=audioContent" })
   audioContent?: string;
 
-  @Metadata({ data: "json, name=timepoints", elemType: shared.Timepoint })
+  @SpeakeasyMetadata({ data: "json, name=timepoints", elemType: Timepoint })
   timepoints?: Timepoint[];
 }

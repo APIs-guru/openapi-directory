@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
 @dataclass
 class UpdateDetectorModelPathParams:
-    detector_model_name: str = field(default=None, metadata={'path_param': { 'field_name': 'detectorModelName', 'style': 'simple', 'explode': False }})
+    detector_model_name: str = field(metadata={'path_param': { 'field_name': 'detectorModelName', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -23,8 +28,12 @@ class UpdateDetectorModelHeaders:
 @dataclass_json
 @dataclass
 class UpdateDetectorModelRequestBodyDetectorModelDefinition:
-    initial_state_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'initialStateName' }})
-    states: Optional[List[shared.State]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'states' }})
+    r"""UpdateDetectorModelRequestBodyDetectorModelDefinition
+    Information that defines how a detector operates.
+    """
+    
+    initial_state_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('initialStateName') }})
+    states: Optional[List[shared.State]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('states') }})
     
 class UpdateDetectorModelRequestBodyEvaluationMethodEnum(str, Enum):
     BATCH = "BATCH"
@@ -34,28 +43,28 @@ class UpdateDetectorModelRequestBodyEvaluationMethodEnum(str, Enum):
 @dataclass_json
 @dataclass
 class UpdateDetectorModelRequestBody:
-    detector_model_definition: UpdateDetectorModelRequestBodyDetectorModelDefinition = field(default=None, metadata={'dataclasses_json': { 'field_name': 'detectorModelDefinition' }})
-    detector_model_description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'detectorModelDescription' }})
-    evaluation_method: Optional[UpdateDetectorModelRequestBodyEvaluationMethodEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'evaluationMethod' }})
-    role_arn: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'roleArn' }})
+    detector_model_definition: UpdateDetectorModelRequestBodyDetectorModelDefinition = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('detectorModelDefinition') }})
+    role_arn: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('roleArn') }})
+    detector_model_description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('detectorModelDescription') }})
+    evaluation_method: Optional[UpdateDetectorModelRequestBodyEvaluationMethodEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('evaluationMethod') }})
     
 
 @dataclass
 class UpdateDetectorModelRequest:
-    path_params: UpdateDetectorModelPathParams = field(default=None)
-    headers: UpdateDetectorModelHeaders = field(default=None)
-    request: UpdateDetectorModelRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: UpdateDetectorModelHeaders = field()
+    path_params: UpdateDetectorModelPathParams = field()
+    request: UpdateDetectorModelRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class UpdateDetectorModelResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     internal_failure_exception: Optional[Any] = field(default=None)
     invalid_request_exception: Optional[Any] = field(default=None)
     resource_in_use_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
     service_unavailable_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     update_detector_model_response: Optional[shared.UpdateDetectorModelResponse] = field(default=None)
     

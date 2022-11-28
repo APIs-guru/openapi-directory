@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var UpdateSettingPathParams = /** @class */ (function (_super) {
     __extends(UpdateSettingPathParams, _super);
@@ -30,7 +30,7 @@ var UpdateSettingPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=settingId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=settingId" }),
         __metadata("design:type", Number)
     ], UpdateSettingPathParams.prototype, "settingId", void 0);
     return UpdateSettingPathParams;
@@ -42,19 +42,19 @@ var UpdateSettingRequests = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "request, media_type=application/*+json", elemType: shared.Operation }),
+        SpeakeasyMetadata({ data: "request, media_type=application/*+json", elemType: shared.Operation }),
         __metadata("design:type", Array)
     ], UpdateSettingRequests.prototype, "operations", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json", elemType: shared.Operation }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json", elemType: shared.Operation }),
         __metadata("design:type", Array)
     ], UpdateSettingRequests.prototype, "operations1", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json-patch+json", elemType: shared.Operation }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json-patch+json", elemType: shared.Operation }),
         __metadata("design:type", Array)
     ], UpdateSettingRequests.prototype, "operations2", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=text/json", elemType: shared.Operation }),
+        SpeakeasyMetadata({ data: "request, media_type=text/json", elemType: shared.Operation }),
         __metadata("design:type", Array)
     ], UpdateSettingRequests.prototype, "operations3", void 0);
     return UpdateSettingRequests;
@@ -66,11 +66,11 @@ var UpdateSettingRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", UpdateSettingPathParams)
     ], UpdateSettingRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", UpdateSettingRequests)
     ], UpdateSettingRequest.prototype, "request", void 0);
     return UpdateSettingRequest;
@@ -82,19 +82,19 @@ var UpdateSettingResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], UpdateSettingResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.SettingModel)
     ], UpdateSettingResponse.prototype, "settingModel", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.SettingModelHaljson)
     ], UpdateSettingResponse.prototype, "settingModelHaljson", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], UpdateSettingResponse.prototype, "statusCode", void 0);
     return UpdateSettingResponse;

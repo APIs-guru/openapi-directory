@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Review } from "./review";
+
 
 
 // LocationReview
@@ -7,9 +8,9 @@ import { Review } from "./review";
  * Represents a review with location information.
 **/
 export class LocationReview extends SpeakeasyBase {
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=review" })
+  @SpeakeasyMetadata({ data: "json, name=review" })
   review?: Review;
 }

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var GetDescribeEventsActionEnum;
 (function (GetDescribeEventsActionEnum) {
     GetDescribeEventsActionEnum["DescribeEvents"] = "DescribeEvents";
@@ -46,59 +46,59 @@ var GetDescribeEventsQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=Action" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Action" }),
         __metadata("design:type", String)
     ], GetDescribeEventsQueryParams.prototype, "action", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=ApplicationName" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=ApplicationName" }),
         __metadata("design:type", String)
     ], GetDescribeEventsQueryParams.prototype, "applicationName", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=EndTime" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=EndTime" }),
         __metadata("design:type", Date)
     ], GetDescribeEventsQueryParams.prototype, "endTime", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=EnvironmentId" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=EnvironmentId" }),
         __metadata("design:type", String)
     ], GetDescribeEventsQueryParams.prototype, "environmentId", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=EnvironmentName" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=EnvironmentName" }),
         __metadata("design:type", String)
     ], GetDescribeEventsQueryParams.prototype, "environmentName", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=MaxRecords" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=MaxRecords" }),
         __metadata("design:type", Number)
     ], GetDescribeEventsQueryParams.prototype, "maxRecords", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=NextToken" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=NextToken" }),
         __metadata("design:type", String)
     ], GetDescribeEventsQueryParams.prototype, "nextToken", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=PlatformArn" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=PlatformArn" }),
         __metadata("design:type", String)
     ], GetDescribeEventsQueryParams.prototype, "platformArn", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=RequestId" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=RequestId" }),
         __metadata("design:type", String)
     ], GetDescribeEventsQueryParams.prototype, "requestId", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=Severity" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Severity" }),
         __metadata("design:type", String)
     ], GetDescribeEventsQueryParams.prototype, "severity", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=StartTime" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=StartTime" }),
         __metadata("design:type", Date)
     ], GetDescribeEventsQueryParams.prototype, "startTime", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=TemplateName" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=TemplateName" }),
         __metadata("design:type", String)
     ], GetDescribeEventsQueryParams.prototype, "templateName", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=Version" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Version" }),
         __metadata("design:type", String)
     ], GetDescribeEventsQueryParams.prototype, "version", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=VersionLabel" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=VersionLabel" }),
         __metadata("design:type", String)
     ], GetDescribeEventsQueryParams.prototype, "versionLabel", void 0);
     return GetDescribeEventsQueryParams;
@@ -110,31 +110,31 @@ var GetDescribeEventsHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
         __metadata("design:type", String)
     ], GetDescribeEventsHeaders.prototype, "xAmzAlgorithm", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
         __metadata("design:type", String)
     ], GetDescribeEventsHeaders.prototype, "xAmzContentSha256", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
         __metadata("design:type", String)
     ], GetDescribeEventsHeaders.prototype, "xAmzCredential", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
         __metadata("design:type", String)
     ], GetDescribeEventsHeaders.prototype, "xAmzDate", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
         __metadata("design:type", String)
     ], GetDescribeEventsHeaders.prototype, "xAmzSecurityToken", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
         __metadata("design:type", String)
     ], GetDescribeEventsHeaders.prototype, "xAmzSignature", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
         __metadata("design:type", String)
     ], GetDescribeEventsHeaders.prototype, "xAmzSignedHeaders", void 0);
     return GetDescribeEventsHeaders;
@@ -146,11 +146,11 @@ var GetDescribeEventsRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetDescribeEventsQueryParams)
     ], GetDescribeEventsRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetDescribeEventsHeaders)
     ], GetDescribeEventsRequest.prototype, "headers", void 0);
     return GetDescribeEventsRequest;
@@ -162,15 +162,15 @@ var GetDescribeEventsResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], GetDescribeEventsResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetDescribeEventsResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetDescribeEventsResponse.prototype, "statusCode", void 0);
     return GetDescribeEventsResponse;

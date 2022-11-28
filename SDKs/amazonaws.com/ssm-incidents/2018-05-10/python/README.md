@@ -1,0 +1,97 @@
+# openapi
+
+<!-- Start SDK Installation -->
+## SDK Installation
+
+```bash
+pip install openapi
+```
+<!-- End SDK Installation -->
+
+<!-- Start SDK Example Usage -->
+## SDK Example Usage
+
+```python
+import sdk
+from sdk.models import operations, shared
+
+s = sdk.SDK()
+s.config_security(
+    security=shared.Security(
+        hmac=shared.SchemeHmac(
+            api_key="YOUR_API_KEY_HERE",
+        ),
+    )
+)
+    
+req = operations.CreateReplicationSetRequest(
+    headers=operations.CreateReplicationSetHeaders(
+        x_amz_algorithm="assumenda",
+        x_amz_content_sha256="incidunt",
+        x_amz_credential="perspiciatis",
+        x_amz_date="quia",
+        x_amz_security_token="unde",
+        x_amz_signature="ipsam",
+        x_amz_signed_headers="ad",
+    ),
+    request=operations.CreateReplicationSetRequestBody(
+        client_token="sint",
+        regions={
+            "illum": shared.RegionMapInputValue(
+                sse_kms_key_id="error",
+            ),
+            "cupiditate": shared.RegionMapInputValue(
+                sse_kms_key_id="sit",
+            ),
+            "sapiente": shared.RegionMapInputValue(
+                sse_kms_key_id="et",
+            ),
+        },
+    ),
+)
+    
+res = s.sdk.create_replication_set(req)
+
+if res.create_replication_set_output is not None:
+    # handle response
+```
+<!-- End SDK Example Usage -->
+
+<!-- Start SDK Available Operations -->
+## SDK Available Operations
+
+### SDK SDK
+
+* `create_replication_set` - A replication set replicates and encrypts your data to the provided Regions with the provided KMS key. 
+* `create_response_plan` - Creates a response plan that automates the initial response to incidents. A response plan engages contacts, starts chat channel collaboration, and initiates runbooks at the beginning of an incident.
+* `create_timeline_event` - Creates a custom timeline event on the incident details page of an incident record. Timeline events are automatically created by Incident Manager, marking key moment during an incident. You can create custom timeline events to mark important events that are automatically detected by Incident Manager.
+* `delete_incident_record` - Delete an incident record from Incident Manager. 
+* `delete_replication_set` - Deletes all Regions in your replication set. Deleting the replication set deletes all Incident Manager data.
+* `delete_resource_policy` - Deletes the resource policy that AWS Resource Access Manager uses to share your Incident Manager resource.
+* `delete_response_plan` - Deletes the specified response plan. Deleting a response plan stops all linked CloudWatch alarms and EventBridge events from creating an incident with this response plan.
+* `delete_timeline_event` - Deletes a timeline event from an incident.
+* `get_incident_record` - Returns the details of the specified incident record.
+* `get_replication_set` - Retrieve your Incident Manager replication set.
+* `get_resource_policies` - Retrieves the resource policies attached to the specified response plan.
+* `get_response_plan` - Retrieves the details of the specified response plan.
+* `get_timeline_event` - Retrieves a timeline event based on its ID and incident record.
+* `list_incident_records` - Lists all incident records in your account. Use this command to retrieve the Amazon Resource Name (ARN) of the incident record you want to update. 
+* `list_related_items` - List all related items for an incident record.
+* `list_replication_sets` - Lists details about the replication set configured in your account. 
+* `list_response_plans` - Lists all response plans in your account.
+* `list_tags_for_resource` - Lists the tags that are attached to the specified response plan.
+* `list_timeline_events` - Lists timeline events of the specified incident record.
+* `put_resource_policy` - Adds a resource policy to the specified response plan.
+* `start_incident` - Used to start an incident from CloudWatch alarms, EventBridge events, or manually. 
+* `tag_resource` - Adds a tag to a response plan.
+* `untag_resource` - Removes a tag from a resource.
+* `update_deletion_protection` - Update deletion protection to either allow or deny deletion of the final Region in a replication set.
+* `update_incident_record` - Update the details of an incident record. You can use this action to update an incident record from the defined chat channel. For more information about using actions in chat channels, see <a href="https://docs.aws.amazon.com/incident-manager/latest/userguide/chat.html#chat-interact">Interacting through chat</a>.
+* `update_related_items` - Add or remove related items from the related items tab of an incident record.
+* `update_replication_set` - Add or delete Regions from your replication set.
+* `update_response_plan` - Updates the specified response plan.
+* `update_timeline_event` - Updates a timeline event. You can update events of type <code>Custom Event</code>.
+
+<!-- End SDK Available Operations -->
+
+### SDK Generated by [Speakeasy](https://docs.speakeasyapi.dev/docs/using-speakeasy/client-sdks)

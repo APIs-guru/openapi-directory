@@ -22,23 +22,23 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { IpRoute } from "./iproute";
 var AddIpRoutesRequest = /** @class */ (function (_super) {
     __extends(AddIpRoutesRequest, _super);
     function AddIpRoutesRequest() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=DirectoryId" }),
+        SpeakeasyMetadata({ data: "json, name=DirectoryId" }),
         __metadata("design:type", String)
     ], AddIpRoutesRequest.prototype, "directoryId", void 0);
     __decorate([
-        Metadata({ data: "json, name=IpRoutes", elemType: shared.IpRoute }),
+        SpeakeasyMetadata({ data: "json, name=IpRoutes", elemType: IpRoute }),
         __metadata("design:type", Array)
     ], AddIpRoutesRequest.prototype, "ipRoutes", void 0);
     __decorate([
-        Metadata({ data: "json, name=UpdateSecurityGroupForDirectoryControllers" }),
+        SpeakeasyMetadata({ data: "json, name=UpdateSecurityGroupForDirectoryControllers" }),
         __metadata("design:type", Boolean)
     ], AddIpRoutesRequest.prototype, "updateSecurityGroupForDirectoryControllers", void 0);
     return AddIpRoutesRequest;

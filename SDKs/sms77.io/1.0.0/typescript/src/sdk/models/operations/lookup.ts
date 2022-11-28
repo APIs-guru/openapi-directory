@@ -1,28 +1,29 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class LookupQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=json" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=json" })
   json?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=false;name=number" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=number" })
   number: string[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=type" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=type" })
   type: string;
 }
 
 
 export class LookupRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: LookupQueryParams;
 }
 
 
 export class LookupResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

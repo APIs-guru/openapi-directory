@@ -35,6 +35,8 @@ const (
 	FirstAndThirdPartyAudienceTargetingSettingRecencyEnumRecency365Days   FirstAndThirdPartyAudienceTargetingSettingRecencyEnum = "RECENCY_365_DAYS"
 )
 
+// FirstAndThirdPartyAudienceTargetingSetting
+// Details of first and third party audience targeting setting.
 type FirstAndThirdPartyAudienceTargetingSetting struct {
 	FirstAndThirdPartyAudienceID *string                                                `json:"firstAndThirdPartyAudienceId,omitempty"`
 	Recency                      *FirstAndThirdPartyAudienceTargetingSettingRecencyEnum `json:"recency,omitempty"`

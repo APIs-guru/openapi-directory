@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import service
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class CreateServiceResponse:
-    service: Optional[service.Service] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Service' }})
+    service: Optional[Service] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Service') }})
     

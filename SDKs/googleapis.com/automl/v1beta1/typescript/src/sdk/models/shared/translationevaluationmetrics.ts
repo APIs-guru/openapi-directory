@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // TranslationEvaluationMetrics
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Evaluation metrics for the dataset.
 **/
 export class TranslationEvaluationMetrics extends SpeakeasyBase {
-  @Metadata({ data: "json, name=baseBleuScore" })
+  @SpeakeasyMetadata({ data: "json, name=baseBleuScore" })
   baseBleuScore?: number;
 
-  @Metadata({ data: "json, name=bleuScore" })
+  @SpeakeasyMetadata({ data: "json, name=bleuScore" })
   bleuScore?: number;
 }

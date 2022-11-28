@@ -1,13 +1,14 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class ContainerProjectsZonesClustersSetMasterAuthPathParams:
-    cluster_id: str = field(default=None, metadata={'path_param': { 'field_name': 'clusterId', 'style': 'simple', 'explode': False }})
-    project_id: str = field(default=None, metadata={'path_param': { 'field_name': 'projectId', 'style': 'simple', 'explode': False }})
-    zone: str = field(default=None, metadata={'path_param': { 'field_name': 'zone', 'style': 'simple', 'explode': False }})
+    cluster_id: str = field(metadata={'path_param': { 'field_name': 'clusterId', 'style': 'simple', 'explode': False }})
+    project_id: str = field(metadata={'path_param': { 'field_name': 'projectId', 'style': 'simple', 'explode': False }})
+    zone: str = field(metadata={'path_param': { 'field_name': 'zone', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -27,21 +28,21 @@ class ContainerProjectsZonesClustersSetMasterAuthQueryParams:
 
 @dataclass
 class ContainerProjectsZonesClustersSetMasterAuthSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class ContainerProjectsZonesClustersSetMasterAuthRequest:
-    path_params: ContainerProjectsZonesClustersSetMasterAuthPathParams = field(default=None)
-    query_params: ContainerProjectsZonesClustersSetMasterAuthQueryParams = field(default=None)
+    path_params: ContainerProjectsZonesClustersSetMasterAuthPathParams = field()
+    query_params: ContainerProjectsZonesClustersSetMasterAuthQueryParams = field()
+    security: ContainerProjectsZonesClustersSetMasterAuthSecurity = field()
     request: Optional[shared.SetMasterAuthRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: ContainerProjectsZonesClustersSetMasterAuthSecurity = field(default=None)
     
 
 @dataclass
 class ContainerProjectsZonesClustersSetMasterAuthResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     operation: Optional[shared.Operation] = field(default=None)
-    status_code: int = field(default=None)
     

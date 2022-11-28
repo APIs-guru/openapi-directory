@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SplitInt64 } from "./splitint64";
+
 
 
 // IntegerGauge
@@ -7,9 +8,9 @@ import { SplitInt64 } from "./splitint64";
  * A metric value representing temporal values of a variable.
 **/
 export class IntegerGauge extends SpeakeasyBase {
-  @Metadata({ data: "json, name=timestamp" })
+  @SpeakeasyMetadata({ data: "json, name=timestamp" })
   timestamp?: string;
 
-  @Metadata({ data: "json, name=value" })
+  @SpeakeasyMetadata({ data: "json, name=value" })
   value?: SplitInt64;
 }

@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Cvssv3 } from "./cvssv3";
 import { Reference } from "./reference";
+
 
 
 // Cve
@@ -9,15 +9,15 @@ import { Reference } from "./reference";
  * CVE stands for Common Vulnerabilities and Exposures. More information: https://cve.mitre.org
 **/
 export class Cve extends SpeakeasyBase {
-  @Metadata({ data: "json, name=cvssv3" })
+  @SpeakeasyMetadata({ data: "json, name=cvssv3" })
   cvssv3?: Cvssv3;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=references", elemType: shared.Reference })
+  @SpeakeasyMetadata({ data: "json, name=references", elemType: Reference })
   references?: Reference[];
 
-  @Metadata({ data: "json, name=upstreamFixAvailable" })
+  @SpeakeasyMetadata({ data: "json, name=upstreamFixAvailable" })
   upstreamFixAvailable?: boolean;
 }

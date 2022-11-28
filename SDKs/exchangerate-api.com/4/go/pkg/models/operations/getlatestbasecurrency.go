@@ -4,10 +4,6 @@ type GetLatestBaseCurrencyPathParams struct {
 	BaseCurrency string `pathParam:"style=simple,explode=false,name=base_currency"`
 }
 
-type GetLatestBaseCurrencyRequest struct {
-	PathParams GetLatestBaseCurrencyPathParams
-}
-
 type GetLatestBaseCurrency200ApplicationJSON struct {
 	Base            *string            `json:"base,omitempty"`
 	Date            *string            `json:"date,omitempty"`
@@ -18,6 +14,10 @@ type GetLatestBaseCurrency200ApplicationJSON struct {
 type GetLatestBaseCurrency404ApplicationJSON struct {
 	ErrorType *string `json:"error_type,omitempty"`
 	Result    *string `json:"result,omitempty"`
+}
+
+type GetLatestBaseCurrencyRequest struct {
+	PathParams GetLatestBaseCurrencyPathParams
 }
 
 type GetLatestBaseCurrencyResponse struct {

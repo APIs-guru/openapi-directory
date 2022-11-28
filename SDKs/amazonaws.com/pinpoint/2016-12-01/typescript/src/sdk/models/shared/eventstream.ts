@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // EventStream
@@ -6,21 +7,21 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Specifies settings for publishing event data to an Amazon Kinesis data stream or an Amazon Kinesis Data Firehose delivery stream.
 **/
 export class EventStream extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ApplicationId" })
+  @SpeakeasyMetadata({ data: "json, name=ApplicationId" })
   applicationId: string;
 
-  @Metadata({ data: "json, name=DestinationStreamArn" })
+  @SpeakeasyMetadata({ data: "json, name=DestinationStreamArn" })
   destinationStreamArn: string;
 
-  @Metadata({ data: "json, name=ExternalId" })
+  @SpeakeasyMetadata({ data: "json, name=ExternalId" })
   externalId?: string;
 
-  @Metadata({ data: "json, name=LastModifiedDate" })
+  @SpeakeasyMetadata({ data: "json, name=LastModifiedDate" })
   lastModifiedDate?: string;
 
-  @Metadata({ data: "json, name=LastUpdatedBy" })
+  @SpeakeasyMetadata({ data: "json, name=LastUpdatedBy" })
   lastUpdatedBy?: string;
 
-  @Metadata({ data: "json, name=RoleArn" })
+  @SpeakeasyMetadata({ data: "json, name=RoleArn" })
   roleArn: string;
 }

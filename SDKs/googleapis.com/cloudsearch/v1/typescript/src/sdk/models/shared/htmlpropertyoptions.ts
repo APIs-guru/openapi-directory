@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { HtmlOperatorOptions } from "./htmloperatoroptions";
 import { RetrievalImportance } from "./retrievalimportance";
+
 
 
 // HtmlPropertyOptions
@@ -8,9 +9,9 @@ import { RetrievalImportance } from "./retrievalimportance";
  * The options for html properties.
 **/
 export class HtmlPropertyOptions extends SpeakeasyBase {
-  @Metadata({ data: "json, name=operatorOptions" })
+  @SpeakeasyMetadata({ data: "json, name=operatorOptions" })
   operatorOptions?: HtmlOperatorOptions;
 
-  @Metadata({ data: "json, name=retrievalImportance" })
+  @SpeakeasyMetadata({ data: "json, name=retrievalImportance" })
   retrievalImportance?: RetrievalImportance;
 }

@@ -8,6 +8,8 @@ const (
 	ProvisioningIssueReasonEnumRateLimited        ProvisioningIssueReasonEnum = "RATE_LIMITED"
 )
 
+// ProvisioningIssue
+// Information about issues with provisioning a Managed Certificate.
 type ProvisioningIssue struct {
 	Details *string                      `json:"details,omitempty"`
 	Reason  *ProvisioningIssueReasonEnum `json:"reason,omitempty"`

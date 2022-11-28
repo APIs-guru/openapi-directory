@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ResponseInfo
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Additional information for your request
 **/
 export class ResponseInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=copyrights" })
+  @SpeakeasyMetadata({ data: "json, name=copyrights" })
   copyrights?: string[];
 
-  @Metadata({ data: "json, name=took" })
+  @SpeakeasyMetadata({ data: "json, name=took" })
   took?: number;
 }

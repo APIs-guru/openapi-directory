@@ -14,6 +14,8 @@ type CreateComputeEnvironmentHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// CreateComputeEnvironmentRequestBodyComputeResources
+// An object representing an Batch compute resource. For more information, see <a href="https://docs.aws.amazon.com/batch/latest/userguide/compute_environments.html">Compute Environments</a> in the <i>Batch User Guide</i>.
 type CreateComputeEnvironmentRequestBodyComputeResources struct {
 	AllocationStrategy *shared.CrAllocationStrategyEnum    `json:"allocationStrategy,omitempty"`
 	BidPercentage      *int64                              `json:"bidPercentage,omitempty"`

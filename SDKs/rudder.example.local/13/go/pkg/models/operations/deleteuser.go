@@ -4,10 +4,6 @@ type DeleteUserPathParams struct {
 	Username string `pathParam:"style=simple,explode=false,name=username"`
 }
 
-type DeleteUserRequest struct {
-	PathParams DeleteUserPathParams
-}
-
 type DeleteUser200ApplicationJSONActionEnum string
 
 const (
@@ -33,6 +29,10 @@ type DeleteUser200ApplicationJSON struct {
 	Action DeleteUser200ApplicationJSONActionEnum `json:"action"`
 	Data   DeleteUser200ApplicationJSONData       `json:"data"`
 	Result DeleteUser200ApplicationJSONResultEnum `json:"result"`
+}
+
+type DeleteUserRequest struct {
+	PathParams DeleteUserPathParams
 }
 
 type DeleteUserResponse struct {

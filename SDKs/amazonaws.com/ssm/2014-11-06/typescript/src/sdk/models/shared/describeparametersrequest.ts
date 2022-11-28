@@ -1,19 +1,19 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ParametersFilter } from "./parametersfilter";
 import { ParameterStringFilter } from "./parameterstringfilter";
 
 
+
 export class DescribeParametersRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Filters", elemType: shared.ParametersFilter })
+  @SpeakeasyMetadata({ data: "json, name=Filters", elemType: ParametersFilter })
   filters?: ParametersFilter[];
 
-  @Metadata({ data: "json, name=MaxResults" })
+  @SpeakeasyMetadata({ data: "json, name=MaxResults" })
   maxResults?: number;
 
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=ParameterFilters", elemType: shared.ParameterStringFilter })
+  @SpeakeasyMetadata({ data: "json, name=ParameterFilters", elemType: ParameterStringFilter })
   parameterFilters?: ParameterStringFilter[];
 }

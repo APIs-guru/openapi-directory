@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Value } from "./value";
+
 
 
 // GqlQueryParameter
@@ -7,9 +8,9 @@ import { Value } from "./value";
  * A binding parameter for a GQL query.
 **/
 export class GqlQueryParameter extends SpeakeasyBase {
-  @Metadata({ data: "json, name=cursor" })
+  @SpeakeasyMetadata({ data: "json, name=cursor" })
   cursor?: string;
 
-  @Metadata({ data: "json, name=value" })
+  @SpeakeasyMetadata({ data: "json, name=value" })
   value?: Value;
 }

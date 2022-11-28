@@ -8,21 +8,23 @@ type UpdateBulkDataExporterConfigSecurity struct {
 	OtoroshiAuth shared.SchemeOtoroshiAuth `security:"scheme,type=http,subtype=basic"`
 }
 
-type UpdateBulkDataExporterConfigRequest struct {
-	Request  *shared.DataExporterConfig `request:"mediaType=application/ndjson"`
-	Security UpdateBulkDataExporterConfigSecurity
-}
-
 type UpdateBulkDataExporterConfig200ApplicationJSONStatusEnum string
 
 const (
 	UpdateBulkDataExporterConfig200ApplicationJSONStatusEnumTwoHundred UpdateBulkDataExporterConfig200ApplicationJSONStatusEnum = "200"
 )
 
+// UpdateBulkDataExporterConfig200ApplicationJSON
+// The bulk response
 type UpdateBulkDataExporterConfig200ApplicationJSON struct {
 	ID      *bool                                                     `json:"id,omitempty"`
 	Status  *UpdateBulkDataExporterConfig200ApplicationJSONStatusEnum `json:"status,omitempty"`
 	Updated *bool                                                     `json:"updated,omitempty"`
+}
+
+type UpdateBulkDataExporterConfigRequest struct {
+	Request  *shared.DataExporterConfig `request:"mediaType=application/ndjson"`
+	Security UpdateBulkDataExporterConfigSecurity
 }
 
 type UpdateBulkDataExporterConfigResponse struct {

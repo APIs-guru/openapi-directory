@@ -1,6 +1,10 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,List,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -18,24 +22,25 @@ class CreateDistributionConfigurationHeaders:
 @dataclass_json
 @dataclass
 class CreateDistributionConfigurationRequestBody:
-    client_token: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'clientToken' }})
-    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
-    distributions: List[shared.Distribution] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'distributions' }})
-    name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    tags: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tags' }})
+    client_token: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('clientToken') }})
+    distributions: List[shared.Distribution] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('distributions') }})
+    name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('description') }})
+    tags: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('tags') }})
     
 
 @dataclass
 class CreateDistributionConfigurationRequest:
-    headers: CreateDistributionConfigurationHeaders = field(default=None)
-    request: CreateDistributionConfigurationRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: CreateDistributionConfigurationHeaders = field()
+    request: CreateDistributionConfigurationRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class CreateDistributionConfigurationResponse:
+    content_type: str = field()
+    status_code: int = field()
     call_rate_limit_exceeded_exception: Optional[Any] = field(default=None)
     client_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     create_distribution_configuration_response: Optional[shared.CreateDistributionConfigurationResponse] = field(default=None)
     forbidden_exception: Optional[Any] = field(default=None)
     idempotent_parameter_mismatch_exception: Optional[Any] = field(default=None)
@@ -46,5 +51,4 @@ class CreateDistributionConfigurationResponse:
     service_exception: Optional[Any] = field(default=None)
     service_quota_exceeded_exception: Optional[Any] = field(default=None)
     service_unavailable_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

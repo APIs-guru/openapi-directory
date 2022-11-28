@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PipelineExecutionSummary } from "./pipelineexecutionsummary";
+
 
 
 // ListPipelineExecutionsOutput
@@ -8,9 +8,9 @@ import { PipelineExecutionSummary } from "./pipelineexecutionsummary";
  * Represents the output of a <code>ListPipelineExecutions</code> action.
 **/
 export class ListPipelineExecutionsOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=nextToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=pipelineExecutionSummaries", elemType: shared.PipelineExecutionSummary })
+  @SpeakeasyMetadata({ data: "json, name=pipelineExecutionSummaries", elemType: PipelineExecutionSummary })
   pipelineExecutionSummaries?: PipelineExecutionSummary[];
 }

@@ -1,5 +1,7 @@
 package shared
 
+// GoogleAnalyticsAdminV1alphaChangeHistoryChangeChangeHistoryResource
+// A snapshot of a resource as before or after the result of a change in change history.
 type GoogleAnalyticsAdminV1alphaChangeHistoryChangeChangeHistoryResource struct {
 	Account                               *GoogleAnalyticsAdminV1alphaAccount                               `json:"account,omitempty"`
 	AttributionSettings                   *GoogleAnalyticsAdminV1alphaAttributionSettings                   `json:"attributionSettings,omitempty"`

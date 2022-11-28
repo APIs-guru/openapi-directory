@@ -1,64 +1,65 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum TflApiPresentationEntitiesRoadProjectPhaseEnum {
-    Unscoped = "Unscoped"
-,    Concept = "Concept"
-,    ConsultationEnded = "ConsultationEnded"
-,    Consultation = "Consultation"
-,    Construction = "Construction"
-,    Complete = "Complete"
+    Unscoped = "Unscoped",
+    Concept = "Concept",
+    ConsultationEnded = "ConsultationEnded",
+    Consultation = "Consultation",
+    Construction = "Construction",
+    Complete = "Complete"
 }
 
 
 export class TflApiPresentationEntitiesRoadProject extends SpeakeasyBase {
-  @Metadata({ data: "json, name=boroughsBenefited" })
+  @SpeakeasyMetadata({ data: "json, name=boroughsBenefited" })
   boroughsBenefited?: string[];
 
-  @Metadata({ data: "json, name=constructionEndDate" })
+  @SpeakeasyMetadata({ data: "json, name=constructionEndDate" })
   constructionEndDate?: Date;
 
-  @Metadata({ data: "json, name=constructionStartDate" })
+  @SpeakeasyMetadata({ data: "json, name=constructionStartDate" })
   constructionStartDate?: Date;
 
-  @Metadata({ data: "json, name=consultationEndDate" })
+  @SpeakeasyMetadata({ data: "json, name=consultationEndDate" })
   consultationEndDate?: Date;
 
-  @Metadata({ data: "json, name=consultationPageUrl" })
+  @SpeakeasyMetadata({ data: "json, name=consultationPageUrl" })
   consultationPageUrl?: string;
 
-  @Metadata({ data: "json, name=consultationStartDate" })
+  @SpeakeasyMetadata({ data: "json, name=consultationStartDate" })
   consultationStartDate?: Date;
 
-  @Metadata({ data: "json, name=contactEmail" })
+  @SpeakeasyMetadata({ data: "json, name=contactEmail" })
   contactEmail?: string;
 
-  @Metadata({ data: "json, name=contactName" })
+  @SpeakeasyMetadata({ data: "json, name=contactName" })
   contactName?: string;
 
-  @Metadata({ data: "json, name=cycleSuperhighwayId" })
+  @SpeakeasyMetadata({ data: "json, name=cycleSuperhighwayId" })
   cycleSuperhighwayId?: string;
 
-  @Metadata({ data: "json, name=externalPageUrl" })
+  @SpeakeasyMetadata({ data: "json, name=externalPageUrl" })
   externalPageUrl?: string;
 
-  @Metadata({ data: "json, name=phase" })
+  @SpeakeasyMetadata({ data: "json, name=phase" })
   phase?: TflApiPresentationEntitiesRoadProjectPhaseEnum;
 
-  @Metadata({ data: "json, name=projectDescription" })
+  @SpeakeasyMetadata({ data: "json, name=projectDescription" })
   projectDescription?: string;
 
-  @Metadata({ data: "json, name=projectId" })
+  @SpeakeasyMetadata({ data: "json, name=projectId" })
   projectId?: string;
 
-  @Metadata({ data: "json, name=projectName" })
+  @SpeakeasyMetadata({ data: "json, name=projectName" })
   projectName?: string;
 
-  @Metadata({ data: "json, name=projectPageUrl" })
+  @SpeakeasyMetadata({ data: "json, name=projectPageUrl" })
   projectPageUrl?: string;
 
-  @Metadata({ data: "json, name=projectSummaryPageUrl" })
+  @SpeakeasyMetadata({ data: "json, name=projectSummaryPageUrl" })
   projectSummaryPageUrl?: string;
 
-  @Metadata({ data: "json, name=schemeName" })
+  @SpeakeasyMetadata({ data: "json, name=schemeName" })
   schemeName?: string;
 }

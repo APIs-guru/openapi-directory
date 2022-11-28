@@ -1,9 +1,17 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass_json
 @dataclass
 class LambdaOutputUpdate:
-    resource_arn_update: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ResourceARNUpdate' }})
+    r"""LambdaOutputUpdate
+    When you update an SQL-based Kinesis Data Analytics application's output configuration using the <a>UpdateApplication</a> operation, provides information about an AWS Lambda function that is configured as the destination.
+    """
+    
+    resource_arn_update: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('ResourceARNUpdate') }})
     

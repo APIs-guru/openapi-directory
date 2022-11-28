@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 
 
 @dataclass
 class DeleteConfigurationSetEventDestinationPathParams:
-    configuration_set_name: str = field(default=None, metadata={'path_param': { 'field_name': 'ConfigurationSetName', 'style': 'simple', 'explode': False }})
-    event_destination_name: str = field(default=None, metadata={'path_param': { 'field_name': 'EventDestinationName', 'style': 'simple', 'explode': False }})
+    configuration_set_name: str = field(metadata={'path_param': { 'field_name': 'ConfigurationSetName', 'style': 'simple', 'explode': False }})
+    event_destination_name: str = field(metadata={'path_param': { 'field_name': 'EventDestinationName', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -21,16 +24,16 @@ class DeleteConfigurationSetEventDestinationHeaders:
 
 @dataclass
 class DeleteConfigurationSetEventDestinationRequest:
-    path_params: DeleteConfigurationSetEventDestinationPathParams = field(default=None)
-    headers: DeleteConfigurationSetEventDestinationHeaders = field(default=None)
+    headers: DeleteConfigurationSetEventDestinationHeaders = field()
+    path_params: DeleteConfigurationSetEventDestinationPathParams = field()
     
 
 @dataclass
 class DeleteConfigurationSetEventDestinationResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     delete_configuration_set_event_destination_response: Optional[dict[str, Any]] = field(default=None)
     not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     too_many_requests_exception: Optional[Any] = field(default=None)
     

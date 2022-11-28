@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { EfsAuthorizationConfigIamEnum } from "./efsauthorizationconfigiamenum";
 /**
  * The authorization configuration details for the Amazon EFS file system.

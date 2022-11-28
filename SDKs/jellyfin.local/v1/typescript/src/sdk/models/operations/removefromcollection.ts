@@ -1,41 +1,42 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class RemoveFromCollectionPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=collectionId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=collectionId" })
   collectionId: string;
 }
 
 
 export class RemoveFromCollectionQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=ids" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=ids" })
   ids: string[];
 }
 
 
 export class RemoveFromCollectionSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
   customAuthentication: shared.SchemeCustomAuthentication;
 }
 
 
 export class RemoveFromCollectionRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: RemoveFromCollectionPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: RemoveFromCollectionQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: RemoveFromCollectionSecurity;
 }
 
 
 export class RemoveFromCollectionResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

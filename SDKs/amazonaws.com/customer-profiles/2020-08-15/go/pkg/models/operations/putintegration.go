@@ -18,6 +18,8 @@ type PutIntegrationHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// PutIntegrationRequestBodyFlowDefinition
+// The configurations that control how Customer Profiles retrieves data from the source, Amazon AppFlow. Customer Profiles uses this information to create an AppFlow flow on behalf of customers.
 type PutIntegrationRequestBodyFlowDefinition struct {
 	Description      *string                  `json:"Description,omitempty"`
 	FlowName         *string                  `json:"FlowName,omitempty"`

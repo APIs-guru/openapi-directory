@@ -1,63 +1,62 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CodeCategory } from "./codecategory";
 import { Lookup } from "./lookup";
 import { CodeExternalStandard } from "./codeexternalstandard";
 import { Link } from "./link";
-import { Lookup } from "./lookup";
+
 
 export enum CodeSourceTypeEnum {
-    Patientview = "PATIENTVIEW"
-,    NhsChoices = "NHS_CHOICES"
+    Patientview = "PATIENTVIEW",
+    NhsChoices = "NHS_CHOICES"
 }
 
 
 export class Code extends SpeakeasyBase {
-  @Metadata({ data: "json, name=code" })
+  @SpeakeasyMetadata({ data: "json, name=code" })
   code?: string;
 
-  @Metadata({ data: "json, name=codeCategories", elemType: shared.CodeCategory })
+  @SpeakeasyMetadata({ data: "json, name=codeCategories", elemType: CodeCategory })
   codeCategories?: CodeCategory[];
 
-  @Metadata({ data: "json, name=codeType" })
+  @SpeakeasyMetadata({ data: "json, name=codeType" })
   codeType?: Lookup;
 
-  @Metadata({ data: "json, name=created" })
+  @SpeakeasyMetadata({ data: "json, name=created" })
   created?: Date;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=displayOrder" })
+  @SpeakeasyMetadata({ data: "json, name=displayOrder" })
   displayOrder?: number;
 
-  @Metadata({ data: "json, name=externalStandards", elemType: shared.CodeExternalStandard })
+  @SpeakeasyMetadata({ data: "json, name=externalStandards", elemType: CodeExternalStandard })
   externalStandards?: CodeExternalStandard[];
 
-  @Metadata({ data: "json, name=fullDescription" })
+  @SpeakeasyMetadata({ data: "json, name=fullDescription" })
   fullDescription?: string;
 
-  @Metadata({ data: "json, name=hideFromPatients" })
+  @SpeakeasyMetadata({ data: "json, name=hideFromPatients" })
   hideFromPatients?: boolean;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: number;
 
-  @Metadata({ data: "json, name=lastUpdate" })
+  @SpeakeasyMetadata({ data: "json, name=lastUpdate" })
   lastUpdate?: Date;
 
-  @Metadata({ data: "json, name=links", elemType: shared.Link })
+  @SpeakeasyMetadata({ data: "json, name=links", elemType: Link })
   links?: Link[];
 
-  @Metadata({ data: "json, name=patientFriendlyName" })
+  @SpeakeasyMetadata({ data: "json, name=patientFriendlyName" })
   patientFriendlyName?: string;
 
-  @Metadata({ data: "json, name=removedExternally" })
+  @SpeakeasyMetadata({ data: "json, name=removedExternally" })
   removedExternally?: boolean;
 
-  @Metadata({ data: "json, name=sourceType" })
+  @SpeakeasyMetadata({ data: "json, name=sourceType" })
   sourceType?: CodeSourceTypeEnum;
 
-  @Metadata({ data: "json, name=standardType" })
+  @SpeakeasyMetadata({ data: "json, name=standardType" })
   standardType?: Lookup;
 }

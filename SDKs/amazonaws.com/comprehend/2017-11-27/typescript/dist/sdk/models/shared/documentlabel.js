@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // DocumentLabel
 /**
  * Specifies one of the label or labels that categorize the document being analyzed.
@@ -33,11 +33,11 @@ var DocumentLabel = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Name" }),
+        SpeakeasyMetadata({ data: "json, name=Name" }),
         __metadata("design:type", String)
     ], DocumentLabel.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=Score" }),
+        SpeakeasyMetadata({ data: "json, name=Score" }),
         __metadata("design:type", Number)
     ], DocumentLabel.prototype, "score", void 0);
     return DocumentLabel;

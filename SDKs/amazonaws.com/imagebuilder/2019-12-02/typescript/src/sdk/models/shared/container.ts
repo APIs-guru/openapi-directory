@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Container
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A container encapsulates the runtime environment for an application.
 **/
 export class Container extends SpeakeasyBase {
-  @Metadata({ data: "json, name=imageUris" })
+  @SpeakeasyMetadata({ data: "json, name=imageUris" })
   imageUris?: string[];
 
-  @Metadata({ data: "json, name=region" })
+  @SpeakeasyMetadata({ data: "json, name=region" })
   region?: string;
 }

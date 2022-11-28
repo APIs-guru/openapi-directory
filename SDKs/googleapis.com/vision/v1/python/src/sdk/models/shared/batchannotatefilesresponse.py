@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import annotatefileresponse
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class BatchAnnotateFilesResponse:
-    responses: Optional[List[annotatefileresponse.AnnotateFileResponse]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'responses' }})
+    r"""BatchAnnotateFilesResponse
+    A list of file annotation responses.
+    """
+    
+    responses: Optional[List[AnnotateFileResponse]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('responses') }})
     

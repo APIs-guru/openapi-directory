@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class MonitoringProjectsAlertPoliciesListPathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -29,20 +30,20 @@ class MonitoringProjectsAlertPoliciesListQueryParams:
 
 @dataclass
 class MonitoringProjectsAlertPoliciesListSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class MonitoringProjectsAlertPoliciesListSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class MonitoringProjectsAlertPoliciesListSecurityOption3:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -54,14 +55,14 @@ class MonitoringProjectsAlertPoliciesListSecurity:
 
 @dataclass
 class MonitoringProjectsAlertPoliciesListRequest:
-    path_params: MonitoringProjectsAlertPoliciesListPathParams = field(default=None)
-    query_params: MonitoringProjectsAlertPoliciesListQueryParams = field(default=None)
-    security: MonitoringProjectsAlertPoliciesListSecurity = field(default=None)
+    path_params: MonitoringProjectsAlertPoliciesListPathParams = field()
+    query_params: MonitoringProjectsAlertPoliciesListQueryParams = field()
+    security: MonitoringProjectsAlertPoliciesListSecurity = field()
     
 
 @dataclass
 class MonitoringProjectsAlertPoliciesListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     list_alert_policies_response: Optional[shared.ListAlertPoliciesResponse] = field(default=None)
-    status_code: int = field(default=None)
     

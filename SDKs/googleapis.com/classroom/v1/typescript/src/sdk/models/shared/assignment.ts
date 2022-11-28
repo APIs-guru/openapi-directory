@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DriveFolder } from "./drivefolder";
+
 
 
 // Assignment
@@ -7,6 +8,6 @@ import { DriveFolder } from "./drivefolder";
  * Additional details for assignments.
 **/
 export class Assignment extends SpeakeasyBase {
-  @Metadata({ data: "json, name=studentWorkFolder" })
+  @SpeakeasyMetadata({ data: "json, name=studentWorkFolder" })
   studentWorkFolder?: DriveFolder;
 }

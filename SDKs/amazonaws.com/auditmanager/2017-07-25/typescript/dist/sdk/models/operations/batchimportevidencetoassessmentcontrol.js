@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var BatchImportEvidenceToAssessmentControlPathParams = /** @class */ (function (_super) {
     __extends(BatchImportEvidenceToAssessmentControlPathParams, _super);
@@ -30,15 +30,15 @@ var BatchImportEvidenceToAssessmentControlPathParams = /** @class */ (function (
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=assessmentId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=assessmentId" }),
         __metadata("design:type", String)
     ], BatchImportEvidenceToAssessmentControlPathParams.prototype, "assessmentId", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=controlId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=controlId" }),
         __metadata("design:type", String)
     ], BatchImportEvidenceToAssessmentControlPathParams.prototype, "controlId", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=controlSetId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=controlSetId" }),
         __metadata("design:type", String)
     ], BatchImportEvidenceToAssessmentControlPathParams.prototype, "controlSetId", void 0);
     return BatchImportEvidenceToAssessmentControlPathParams;
@@ -50,31 +50,31 @@ var BatchImportEvidenceToAssessmentControlHeaders = /** @class */ (function (_su
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
         __metadata("design:type", String)
     ], BatchImportEvidenceToAssessmentControlHeaders.prototype, "xAmzAlgorithm", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
         __metadata("design:type", String)
     ], BatchImportEvidenceToAssessmentControlHeaders.prototype, "xAmzContentSha256", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
         __metadata("design:type", String)
     ], BatchImportEvidenceToAssessmentControlHeaders.prototype, "xAmzCredential", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
         __metadata("design:type", String)
     ], BatchImportEvidenceToAssessmentControlHeaders.prototype, "xAmzDate", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
         __metadata("design:type", String)
     ], BatchImportEvidenceToAssessmentControlHeaders.prototype, "xAmzSecurityToken", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
         __metadata("design:type", String)
     ], BatchImportEvidenceToAssessmentControlHeaders.prototype, "xAmzSignature", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
         __metadata("design:type", String)
     ], BatchImportEvidenceToAssessmentControlHeaders.prototype, "xAmzSignedHeaders", void 0);
     return BatchImportEvidenceToAssessmentControlHeaders;
@@ -86,7 +86,7 @@ var BatchImportEvidenceToAssessmentControlRequestBody = /** @class */ (function 
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=manualEvidence", elemType: shared.ManualEvidence }),
+        SpeakeasyMetadata({ data: "json, name=manualEvidence", elemType: shared.ManualEvidence }),
         __metadata("design:type", Array)
     ], BatchImportEvidenceToAssessmentControlRequestBody.prototype, "manualEvidence", void 0);
     return BatchImportEvidenceToAssessmentControlRequestBody;
@@ -98,15 +98,15 @@ var BatchImportEvidenceToAssessmentControlRequest = /** @class */ (function (_su
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", BatchImportEvidenceToAssessmentControlPathParams)
     ], BatchImportEvidenceToAssessmentControlRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", BatchImportEvidenceToAssessmentControlHeaders)
     ], BatchImportEvidenceToAssessmentControlRequest.prototype, "headers", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", BatchImportEvidenceToAssessmentControlRequestBody)
     ], BatchImportEvidenceToAssessmentControlRequest.prototype, "request", void 0);
     return BatchImportEvidenceToAssessmentControlRequest;
@@ -118,31 +118,31 @@ var BatchImportEvidenceToAssessmentControlResponse = /** @class */ (function (_s
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], BatchImportEvidenceToAssessmentControlResponse.prototype, "accessDeniedException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.BatchImportEvidenceToAssessmentControlResponse)
     ], BatchImportEvidenceToAssessmentControlResponse.prototype, "batchImportEvidenceToAssessmentControlResponse", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], BatchImportEvidenceToAssessmentControlResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], BatchImportEvidenceToAssessmentControlResponse.prototype, "internalServerException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], BatchImportEvidenceToAssessmentControlResponse.prototype, "resourceNotFoundException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], BatchImportEvidenceToAssessmentControlResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], BatchImportEvidenceToAssessmentControlResponse.prototype, "validationException", void 0);
     return BatchImportEvidenceToAssessmentControlResponse;

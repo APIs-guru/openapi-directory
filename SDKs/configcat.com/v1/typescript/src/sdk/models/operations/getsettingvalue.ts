@@ -1,32 +1,33 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetSettingValuePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=environmentId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=environmentId" })
   environmentId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=settingId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=settingId" })
   settingId: number;
 }
 
 
 export class GetSettingValueRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetSettingValuePathParams;
 }
 
 
 export class GetSettingValueResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   settingValueModel?: shared.SettingValueModel;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   settingValueModelHaljson?: shared.SettingValueModelHaljson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

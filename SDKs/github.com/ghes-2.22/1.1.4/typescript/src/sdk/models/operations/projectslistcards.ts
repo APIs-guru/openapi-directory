@@ -1,53 +1,54 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class ProjectsListCardsPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=column_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=column_id" })
   columnId: number;
 }
 
 export enum ProjectsListCardsArchivedStateEnum {
-    All = "all"
-,    Archived = "archived"
-,    NotArchived = "not_archived"
+    All = "all",
+    Archived = "archived",
+    NotArchived = "not_archived"
 }
 
 
 export class ProjectsListCardsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=archived_state" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=archived_state" })
   archivedState?: ProjectsListCardsArchivedStateEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=page" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page" })
   page?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=per_page" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=per_page" })
   perPage?: number;
 }
 
 
 export class ProjectsListCardsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: ProjectsListCardsPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: ProjectsListCardsQueryParams;
 }
 
 
 export class ProjectsListCardsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: Map<string, string[]>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   basicError?: shared.BasicError;
 
-  @Metadata({ elemType: shared.ProjectCard })
+  @SpeakeasyMetadata({ elemType: shared.ProjectCard })
   projectCards?: shared.ProjectCard[];
 }

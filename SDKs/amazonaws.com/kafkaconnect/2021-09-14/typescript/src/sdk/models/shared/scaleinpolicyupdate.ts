@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ScaleInPolicyUpdate
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * An update to the connector's scale-in policy.
 **/
 export class ScaleInPolicyUpdate extends SpeakeasyBase {
-  @Metadata({ data: "json, name=cpuUtilizationPercentage" })
+  @SpeakeasyMetadata({ data: "json, name=cpuUtilizationPercentage" })
   cpuUtilizationPercentage: number;
 }

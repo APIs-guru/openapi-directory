@@ -1,6 +1,7 @@
 
 
+
 export enum OutdatedInstancesStrategyEnum {
-    Update = "UPDATE"
-,    Ignore = "IGNORE"
+    Update = "UPDATE",
+    Ignore = "IGNORE"
 }

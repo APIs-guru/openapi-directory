@@ -1,5 +1,7 @@
 package shared
 
+// GoogleCloudAssetV1p4beta1Access
+// An IAM role or permission under analysis.
 type GoogleCloudAssetV1p4beta1Access struct {
 	AnalysisState *GoogleCloudAssetV1p4beta1AnalysisState `json:"analysisState,omitempty"`
 	Permission    *string                                 `json:"permission,omitempty"`

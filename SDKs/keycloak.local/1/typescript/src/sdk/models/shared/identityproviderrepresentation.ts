@@ -1,40 +1,41 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class IdentityProviderRepresentation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=addReadTokenRoleOnCreate" })
+  @SpeakeasyMetadata({ data: "json, name=addReadTokenRoleOnCreate" })
   addReadTokenRoleOnCreate?: boolean;
 
-  @Metadata({ data: "json, name=alias" })
+  @SpeakeasyMetadata({ data: "json, name=alias" })
   alias?: string;
 
-  @Metadata({ data: "json, name=config" })
+  @SpeakeasyMetadata({ data: "json, name=config" })
   config?: Map<string, any>;
 
-  @Metadata({ data: "json, name=displayName" })
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
   displayName?: string;
 
-  @Metadata({ data: "json, name=enabled" })
+  @SpeakeasyMetadata({ data: "json, name=enabled" })
   enabled?: boolean;
 
-  @Metadata({ data: "json, name=firstBrokerLoginFlowAlias" })
+  @SpeakeasyMetadata({ data: "json, name=firstBrokerLoginFlowAlias" })
   firstBrokerLoginFlowAlias?: string;
 
-  @Metadata({ data: "json, name=internalId" })
+  @SpeakeasyMetadata({ data: "json, name=internalId" })
   internalId?: string;
 
-  @Metadata({ data: "json, name=linkOnly" })
+  @SpeakeasyMetadata({ data: "json, name=linkOnly" })
   linkOnly?: boolean;
 
-  @Metadata({ data: "json, name=postBrokerLoginFlowAlias" })
+  @SpeakeasyMetadata({ data: "json, name=postBrokerLoginFlowAlias" })
   postBrokerLoginFlowAlias?: string;
 
-  @Metadata({ data: "json, name=providerId" })
+  @SpeakeasyMetadata({ data: "json, name=providerId" })
   providerId?: string;
 
-  @Metadata({ data: "json, name=storeToken" })
+  @SpeakeasyMetadata({ data: "json, name=storeToken" })
   storeToken?: boolean;
 
-  @Metadata({ data: "json, name=trustEmail" })
+  @SpeakeasyMetadata({ data: "json, name=trustEmail" })
   trustEmail?: boolean;
 }

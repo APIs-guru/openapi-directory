@@ -1,24 +1,24 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SubscriptionView } from "./subscriptionview";
 
 
+
 export class ProductView extends SpeakeasyBase {
-  @Metadata({ data: "json, name=created" })
+  @SpeakeasyMetadata({ data: "json, name=created" })
   created?: Date;
 
-  @Metadata({ data: "json, name=custom" })
+  @SpeakeasyMetadata({ data: "json, name=custom" })
   custom?: any;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=serial" })
+  @SpeakeasyMetadata({ data: "json, name=serial" })
   serial?: string;
 
-  @Metadata({ data: "json, name=subscriptions", elemType: shared.SubscriptionView })
+  @SpeakeasyMetadata({ data: "json, name=subscriptions", elemType: SubscriptionView })
   subscriptions?: SubscriptionView[];
 
-  @Metadata({ data: "json, name=updated" })
+  @SpeakeasyMetadata({ data: "json, name=updated" })
   updated?: Date;
 }

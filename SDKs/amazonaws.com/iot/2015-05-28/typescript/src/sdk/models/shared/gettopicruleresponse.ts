@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TopicRule } from "./topicrule";
+
 
 
 // GetTopicRuleResponse
@@ -7,9 +8,9 @@ import { TopicRule } from "./topicrule";
  * The output from the GetTopicRule operation.
 **/
 export class GetTopicRuleResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=rule" })
+  @SpeakeasyMetadata({ data: "json, name=rule" })
   rule?: TopicRule;
 
-  @Metadata({ data: "json, name=ruleArn" })
+  @SpeakeasyMetadata({ data: "json, name=ruleArn" })
   ruleArn?: string;
 }

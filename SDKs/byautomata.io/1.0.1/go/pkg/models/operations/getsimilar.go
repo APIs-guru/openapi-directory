@@ -9,16 +9,16 @@ type GetSimilarQueryParams struct {
 	Page *string `queryParam:"style=form,explode=true,name=page"`
 }
 
-type GetSimilarRequest struct {
-	QueryParams GetSimilarQueryParams
-}
-
 type GetSimilar200ApplicationJSON struct {
 	CallsPerMonth  *string                 `json:"calls_per_month,omitempty"`
 	Companies      []shared.SimilarCompany `json:"companies,omitempty"`
 	CountRemaining *string                 `json:"count_remaining,omitempty"`
 	InputCompany   *shared.InputCompany    `json:"input_company,omitempty"`
 	RenewalDate    *string                 `json:"renewal_date,omitempty"`
+}
+
+type GetSimilarRequest struct {
+	QueryParams GetSimilarQueryParams
 }
 
 type GetSimilarResponse struct {

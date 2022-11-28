@@ -80,7 +80,7 @@ var SpeakeasyBase = /** @class */ (function () {
     return SpeakeasyBase;
 }());
 export { SpeakeasyBase };
-export function Metadata(params) {
+export function SpeakeasyMetadata(params) {
     return function (target, propertyKey) {
         if (params === null || params === void 0 ? void 0 : params.data) {
             var annsArr = params.data.split(", ");

@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CustomEmailSenderLambdaVersionTypeEnum } from "./customemailsenderlambdaversiontypeenum";
+
 
 
 // CustomEmailLambdaVersionConfigType
@@ -7,9 +8,9 @@ import { CustomEmailSenderLambdaVersionTypeEnum } from "./customemailsenderlambd
  * A custom email sender Lambda configuration type.
 **/
 export class CustomEmailLambdaVersionConfigType extends SpeakeasyBase {
-  @Metadata({ data: "json, name=LambdaArn" })
+  @SpeakeasyMetadata({ data: "json, name=LambdaArn" })
   lambdaArn: string;
 
-  @Metadata({ data: "json, name=LambdaVersion" })
+  @SpeakeasyMetadata({ data: "json, name=LambdaVersion" })
   lambdaVersion: CustomEmailSenderLambdaVersionTypeEnum;
 }

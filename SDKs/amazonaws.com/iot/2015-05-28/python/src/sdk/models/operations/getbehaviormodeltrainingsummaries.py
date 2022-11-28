@@ -1,4 +1,7 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
@@ -23,17 +26,17 @@ class GetBehaviorModelTrainingSummariesHeaders:
 
 @dataclass
 class GetBehaviorModelTrainingSummariesRequest:
-    query_params: GetBehaviorModelTrainingSummariesQueryParams = field(default=None)
-    headers: GetBehaviorModelTrainingSummariesHeaders = field(default=None)
+    headers: GetBehaviorModelTrainingSummariesHeaders = field()
+    query_params: GetBehaviorModelTrainingSummariesQueryParams = field()
     
 
 @dataclass
 class GetBehaviorModelTrainingSummariesResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     get_behavior_model_training_summaries_response: Optional[shared.GetBehaviorModelTrainingSummariesResponse] = field(default=None)
     internal_failure_exception: Optional[Any] = field(default=None)
     invalid_request_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     

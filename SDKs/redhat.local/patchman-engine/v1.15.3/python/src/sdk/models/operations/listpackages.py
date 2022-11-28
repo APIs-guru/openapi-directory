@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 class ListPackagesSortEnum(str, Enum):
@@ -26,18 +27,18 @@ class ListPackagesQueryParams:
 
 @dataclass
 class ListPackagesSecurity:
-    rh_identity: shared.SchemeRhIdentity = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    rh_identity: shared.SchemeRhIdentity = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
     
 
 @dataclass
 class ListPackagesRequest:
-    query_params: ListPackagesQueryParams = field(default=None)
-    security: ListPackagesSecurity = field(default=None)
+    query_params: ListPackagesQueryParams = field()
+    security: ListPackagesSecurity = field()
     
 
 @dataclass
 class ListPackagesResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     controllers_packages_response: Optional[shared.ControllersPackagesResponse] = field(default=None)
     

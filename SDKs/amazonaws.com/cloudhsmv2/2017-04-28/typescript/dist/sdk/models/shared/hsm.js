@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { HsmStateEnum } from "./hsmstateenum";
 // Hsm
 /**
@@ -34,35 +34,35 @@ var Hsm = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=AvailabilityZone" }),
+        SpeakeasyMetadata({ data: "json, name=AvailabilityZone" }),
         __metadata("design:type", String)
     ], Hsm.prototype, "availabilityZone", void 0);
     __decorate([
-        Metadata({ data: "json, name=ClusterId" }),
+        SpeakeasyMetadata({ data: "json, name=ClusterId" }),
         __metadata("design:type", String)
     ], Hsm.prototype, "clusterId", void 0);
     __decorate([
-        Metadata({ data: "json, name=EniId" }),
+        SpeakeasyMetadata({ data: "json, name=EniId" }),
         __metadata("design:type", String)
     ], Hsm.prototype, "eniId", void 0);
     __decorate([
-        Metadata({ data: "json, name=EniIp" }),
+        SpeakeasyMetadata({ data: "json, name=EniIp" }),
         __metadata("design:type", String)
     ], Hsm.prototype, "eniIp", void 0);
     __decorate([
-        Metadata({ data: "json, name=HsmId" }),
+        SpeakeasyMetadata({ data: "json, name=HsmId" }),
         __metadata("design:type", String)
     ], Hsm.prototype, "hsmId", void 0);
     __decorate([
-        Metadata({ data: "json, name=State" }),
+        SpeakeasyMetadata({ data: "json, name=State" }),
         __metadata("design:type", String)
     ], Hsm.prototype, "state", void 0);
     __decorate([
-        Metadata({ data: "json, name=StateMessage" }),
+        SpeakeasyMetadata({ data: "json, name=StateMessage" }),
         __metadata("design:type", String)
     ], Hsm.prototype, "stateMessage", void 0);
     __decorate([
-        Metadata({ data: "json, name=SubnetId" }),
+        SpeakeasyMetadata({ data: "json, name=SubnetId" }),
         __metadata("design:type", String)
     ], Hsm.prototype, "subnetId", void 0);
     return Hsm;

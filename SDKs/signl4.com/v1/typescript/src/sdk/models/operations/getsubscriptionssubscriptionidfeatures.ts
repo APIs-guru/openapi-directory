@@ -1,32 +1,33 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetSubscriptionsSubscriptionIdFeaturesPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=subscriptionId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=subscriptionId" })
   subscriptionId: string;
 }
 
 
 export class GetSubscriptionsSubscriptionIdFeaturesRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetSubscriptionsSubscriptionIdFeaturesPathParams;
 }
 
 
 export class GetSubscriptionsSubscriptionIdFeaturesResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   errorResponseContent?: shared.ErrorResponseContent;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata({ elemType: shared.SubscriptionFeature })
+  @SpeakeasyMetadata({ elemType: shared.SubscriptionFeature })
   subscriptionFeatures?: shared.SubscriptionFeature[];
 }

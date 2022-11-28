@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { Deployment } from "./deployment";
 export declare enum CreateProfileRequestProfileTypeEnum {
     ProfileTypeUnspecified = "PROFILE_TYPE_UNSPECIFIED",

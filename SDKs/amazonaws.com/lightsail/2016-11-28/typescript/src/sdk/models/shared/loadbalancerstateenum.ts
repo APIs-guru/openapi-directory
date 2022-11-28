@@ -1,9 +1,10 @@
 
 
+
 export enum LoadBalancerStateEnum {
-    Active = "active"
-,    Provisioning = "provisioning"
-,    ActiveImpaired = "active_impaired"
-,    Failed = "failed"
-,    Unknown = "unknown"
+    Active = "active",
+    Provisioning = "provisioning",
+    ActiveImpaired = "active_impaired",
+    Failed = "failed",
+    Unknown = "unknown"
 }

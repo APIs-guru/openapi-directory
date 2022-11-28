@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class ScanRunWarningTraceCodeEnum(str, Enum):
     CODE_UNSPECIFIED = "CODE_UNSPECIFIED"
@@ -14,5 +16,9 @@ class ScanRunWarningTraceCodeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class ScanRunWarningTrace:
-    code: Optional[ScanRunWarningTraceCodeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'code' }})
+    r"""ScanRunWarningTrace
+    Output only. Defines a warning trace message for ScanRun. Warning traces provide customers with useful information that helps make the scanning process more effective.
+    """
+    
+    code: Optional[ScanRunWarningTraceCodeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('code') }})
     

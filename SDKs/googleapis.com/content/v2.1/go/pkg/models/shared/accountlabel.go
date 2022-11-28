@@ -8,6 +8,16 @@ const (
 	AccountLabelLabelTypeEnumAutomatic            AccountLabelLabelTypeEnum = "AUTOMATIC"
 )
 
+// AccountLabelInput
+// Label assigned by CSS domain or CSS group to one of its sub-accounts.
+type AccountLabelInput struct {
+	AccountID   *string `json:"accountId,omitempty"`
+	Description *string `json:"description,omitempty"`
+	Name        *string `json:"name,omitempty"`
+}
+
+// AccountLabel
+// Label assigned by CSS domain or CSS group to one of its sub-accounts.
 type AccountLabel struct {
 	AccountID   *string                    `json:"accountId,omitempty"`
 	Description *string                    `json:"description,omitempty"`

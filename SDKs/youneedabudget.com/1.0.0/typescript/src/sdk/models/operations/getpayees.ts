@@ -1,38 +1,39 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetPayeesPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=budget_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=budget_id" })
   budgetId: string;
 }
 
 
 export class GetPayeesQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=last_knowledge_of_server" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=last_knowledge_of_server" })
   lastKnowledgeOfServer?: number;
 }
 
 
 export class GetPayeesRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetPayeesPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetPayeesQueryParams;
 }
 
 
 export class GetPayeesResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   errorResponse?: shared.ErrorResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   payeesResponse?: shared.PayeesResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

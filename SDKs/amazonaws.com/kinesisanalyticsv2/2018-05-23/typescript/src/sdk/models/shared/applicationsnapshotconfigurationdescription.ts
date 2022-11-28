@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ApplicationSnapshotConfigurationDescription
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Describes whether snapshots are enabled for a Flink-based Kinesis Data Analytics application.
 **/
 export class ApplicationSnapshotConfigurationDescription extends SpeakeasyBase {
-  @Metadata({ data: "json, name=SnapshotsEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=SnapshotsEnabled" })
   snapshotsEnabled: boolean;
 }

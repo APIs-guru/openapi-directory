@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import resourcegroup
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ResourceIntegrations:
-    resource_group: Optional[resourcegroup.ResourceGroup] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'resourceGroup' }})
+    r"""ResourceIntegrations
+    The service integration information about the resource.
+    """
+    
+    resource_group: Optional[ResourceGroup] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('resourceGroup') }})
     

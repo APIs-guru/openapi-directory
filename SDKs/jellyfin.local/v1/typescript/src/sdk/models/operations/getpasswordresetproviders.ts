@@ -1,26 +1,27 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetPasswordResetProvidersSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
   customAuthentication: shared.SchemeCustomAuthentication;
 }
 
 
 export class GetPasswordResetProvidersRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   security: GetPasswordResetProvidersSecurity;
 }
 
 
 export class GetPasswordResetProvidersResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata({ elemType: shared.NameIdPair })
+  @SpeakeasyMetadata({ elemType: shared.NameIdPair })
   nameIdPairs?: shared.NameIdPair[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

@@ -22,19 +22,19 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { EffectiveDeployment } from "./effectivedeployment";
 var ListEffectiveDeploymentsResponse = /** @class */ (function (_super) {
     __extends(ListEffectiveDeploymentsResponse, _super);
     function ListEffectiveDeploymentsResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=effectiveDeployments", elemType: shared.EffectiveDeployment }),
+        SpeakeasyMetadata({ data: "json, name=effectiveDeployments", elemType: EffectiveDeployment }),
         __metadata("design:type", Array)
     ], ListEffectiveDeploymentsResponse.prototype, "effectiveDeployments", void 0);
     __decorate([
-        Metadata({ data: "json, name=nextToken" }),
+        SpeakeasyMetadata({ data: "json, name=nextToken" }),
         __metadata("design:type", String)
     ], ListEffectiveDeploymentsResponse.prototype, "nextToken", void 0);
     return ListEffectiveDeploymentsResponse;

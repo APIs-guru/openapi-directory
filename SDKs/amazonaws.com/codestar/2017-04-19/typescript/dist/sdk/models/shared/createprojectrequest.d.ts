@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { Code } from "./code";
 import { Toolchain } from "./toolchain";
 export declare class CreateProjectRequest extends SpeakeasyBase {

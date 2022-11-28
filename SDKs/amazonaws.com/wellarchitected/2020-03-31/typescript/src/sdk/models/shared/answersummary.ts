@@ -1,9 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ChoiceAnswerSummary } from "./choiceanswersummary";
 import { Choice } from "./choice";
 import { AnswerReasonEnum } from "./answerreasonenum";
 import { RiskEnum } from "./riskenum";
+
 
 
 // AnswerSummary
@@ -11,30 +11,30 @@ import { RiskEnum } from "./riskenum";
  * An answer summary of a lens review in a workload.
 **/
 export class AnswerSummary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ChoiceAnswerSummaries", elemType: shared.ChoiceAnswerSummary })
+  @SpeakeasyMetadata({ data: "json, name=ChoiceAnswerSummaries", elemType: ChoiceAnswerSummary })
   choiceAnswerSummaries?: ChoiceAnswerSummary[];
 
-  @Metadata({ data: "json, name=Choices", elemType: shared.Choice })
+  @SpeakeasyMetadata({ data: "json, name=Choices", elemType: Choice })
   choices?: Choice[];
 
-  @Metadata({ data: "json, name=IsApplicable" })
+  @SpeakeasyMetadata({ data: "json, name=IsApplicable" })
   isApplicable?: boolean;
 
-  @Metadata({ data: "json, name=PillarId" })
+  @SpeakeasyMetadata({ data: "json, name=PillarId" })
   pillarId?: string;
 
-  @Metadata({ data: "json, name=QuestionId" })
+  @SpeakeasyMetadata({ data: "json, name=QuestionId" })
   questionId?: string;
 
-  @Metadata({ data: "json, name=QuestionTitle" })
+  @SpeakeasyMetadata({ data: "json, name=QuestionTitle" })
   questionTitle?: string;
 
-  @Metadata({ data: "json, name=Reason" })
+  @SpeakeasyMetadata({ data: "json, name=Reason" })
   reason?: AnswerReasonEnum;
 
-  @Metadata({ data: "json, name=Risk" })
+  @SpeakeasyMetadata({ data: "json, name=Risk" })
   risk?: RiskEnum;
 
-  @Metadata({ data: "json, name=SelectedChoices" })
+  @SpeakeasyMetadata({ data: "json, name=SelectedChoices" })
   selectedChoices?: string[];
 }

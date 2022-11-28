@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // CallFunctionResponse
 /**
  * Response of `CallFunction` method.
@@ -33,15 +33,15 @@ var CallFunctionResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], CallFunctionResponse.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=executionId" }),
+        SpeakeasyMetadata({ data: "json, name=executionId" }),
         __metadata("design:type", String)
     ], CallFunctionResponse.prototype, "executionId", void 0);
     __decorate([
-        Metadata({ data: "json, name=result" }),
+        SpeakeasyMetadata({ data: "json, name=result" }),
         __metadata("design:type", String)
     ], CallFunctionResponse.prototype, "result", void 0);
     return CallFunctionResponse;

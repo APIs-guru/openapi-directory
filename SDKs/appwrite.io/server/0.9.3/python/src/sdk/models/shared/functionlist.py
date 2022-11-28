@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
 from typing import List
 from dataclasses_json import dataclass_json
-from . import function
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class FunctionList:
-    functions: List[function.Function] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'functions' }})
-    sum: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'sum' }})
+    r"""FunctionList
+    Functions List
+    """
+    
+    functions: List[Function] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('functions') }})
+    sum: int = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('sum') }})
     

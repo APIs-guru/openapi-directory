@@ -1,47 +1,48 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class PostAdministrationUserHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Token" })
   token?: string;
 }
 
 
-export class PostAdministrationUserRequests extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/*+json" })
-  newUserRequest?: shared.NewUserRequest;
+export class PostAdministrationUserRequestsInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "request, media_type=application/*+json" })
+  newUserRequest?: shared.NewUserRequestInput;
 
-  @Metadata({ data: "request, media_type=application/json" })
-  newUserRequest1?: shared.NewUserRequest;
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  newUserRequest1?: shared.NewUserRequestInput;
 
-  @Metadata({ data: "request, media_type=text/json" })
-  newUserRequest2?: shared.NewUserRequest;
+  @SpeakeasyMetadata({ data: "request, media_type=text/json" })
+  newUserRequest2?: shared.NewUserRequestInput;
 }
 
 
 export class PostAdministrationUserRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: PostAdministrationUserHeaders;
 
-  @Metadata()
-  request?: PostAdministrationUserRequests;
+  @SpeakeasyMetadata()
+  request?: PostAdministrationUserRequestsInput;
 }
 
 
 export class PostAdministrationUserResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   postAdministrationUser200ApplicationJsonUuidString?: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   postAdministrationUser200TextJsonUuidString?: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   postAdministrationUser200TextPlainUuidString?: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

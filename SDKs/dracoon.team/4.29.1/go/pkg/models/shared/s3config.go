@@ -1,5 +1,7 @@
 package shared
 
+// S3Config
+// S3 configuration
 type S3Config struct {
 	AccessKeyDefined bool    `json:"accessKeyDefined"`
 	BucketName       *string `json:"bucketName,omitempty"`

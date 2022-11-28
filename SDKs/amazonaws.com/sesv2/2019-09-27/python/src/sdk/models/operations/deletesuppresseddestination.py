@@ -1,10 +1,13 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 
 
 @dataclass
 class DeleteSuppressedDestinationPathParams:
-    email_address: str = field(default=None, metadata={'path_param': { 'field_name': 'EmailAddress', 'style': 'simple', 'explode': False }})
+    email_address: str = field(metadata={'path_param': { 'field_name': 'EmailAddress', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -20,16 +23,16 @@ class DeleteSuppressedDestinationHeaders:
 
 @dataclass
 class DeleteSuppressedDestinationRequest:
-    path_params: DeleteSuppressedDestinationPathParams = field(default=None)
-    headers: DeleteSuppressedDestinationHeaders = field(default=None)
+    headers: DeleteSuppressedDestinationHeaders = field()
+    path_params: DeleteSuppressedDestinationPathParams = field()
     
 
 @dataclass
 class DeleteSuppressedDestinationResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     delete_suppressed_destination_response: Optional[dict[str, Any]] = field(default=None)
     not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     too_many_requests_exception: Optional[Any] = field(default=None)
     

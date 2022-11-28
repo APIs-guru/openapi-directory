@@ -1,27 +1,28 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class RegisterJobDefinitionHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
@@ -31,64 +32,64 @@ export class RegisterJobDefinitionHeaders extends SpeakeasyBase {
  * Container properties are used in job definitions to describe the container that's launched as part of a job.
 **/
 export class RegisterJobDefinitionRequestBodyContainerProperties extends SpeakeasyBase {
-  @Metadata({ data: "json, name=command" })
+  @SpeakeasyMetadata({ data: "json, name=command" })
   command?: string[];
 
-  @Metadata({ data: "json, name=environment", elemType: shared.KeyValuePair })
+  @SpeakeasyMetadata({ data: "json, name=environment", elemType: shared.KeyValuePair })
   environment?: shared.KeyValuePair[];
 
-  @Metadata({ data: "json, name=executionRoleArn" })
+  @SpeakeasyMetadata({ data: "json, name=executionRoleArn" })
   executionRoleArn?: string;
 
-  @Metadata({ data: "json, name=fargatePlatformConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=fargatePlatformConfiguration" })
   fargatePlatformConfiguration?: shared.FargatePlatformConfiguration;
 
-  @Metadata({ data: "json, name=image" })
+  @SpeakeasyMetadata({ data: "json, name=image" })
   image?: string;
 
-  @Metadata({ data: "json, name=instanceType" })
+  @SpeakeasyMetadata({ data: "json, name=instanceType" })
   instanceType?: string;
 
-  @Metadata({ data: "json, name=jobRoleArn" })
+  @SpeakeasyMetadata({ data: "json, name=jobRoleArn" })
   jobRoleArn?: string;
 
-  @Metadata({ data: "json, name=linuxParameters" })
+  @SpeakeasyMetadata({ data: "json, name=linuxParameters" })
   linuxParameters?: shared.LinuxParameters;
 
-  @Metadata({ data: "json, name=logConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=logConfiguration" })
   logConfiguration?: shared.LogConfiguration;
 
-  @Metadata({ data: "json, name=memory" })
+  @SpeakeasyMetadata({ data: "json, name=memory" })
   memory?: number;
 
-  @Metadata({ data: "json, name=mountPoints", elemType: shared.MountPoint })
+  @SpeakeasyMetadata({ data: "json, name=mountPoints", elemType: shared.MountPoint })
   mountPoints?: shared.MountPoint[];
 
-  @Metadata({ data: "json, name=networkConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=networkConfiguration" })
   networkConfiguration?: shared.NetworkConfiguration;
 
-  @Metadata({ data: "json, name=privileged" })
+  @SpeakeasyMetadata({ data: "json, name=privileged" })
   privileged?: boolean;
 
-  @Metadata({ data: "json, name=readonlyRootFilesystem" })
+  @SpeakeasyMetadata({ data: "json, name=readonlyRootFilesystem" })
   readonlyRootFilesystem?: boolean;
 
-  @Metadata({ data: "json, name=resourceRequirements", elemType: shared.ResourceRequirement })
+  @SpeakeasyMetadata({ data: "json, name=resourceRequirements", elemType: shared.ResourceRequirement })
   resourceRequirements?: shared.ResourceRequirement[];
 
-  @Metadata({ data: "json, name=secrets", elemType: shared.Secret })
+  @SpeakeasyMetadata({ data: "json, name=secrets", elemType: shared.Secret })
   secrets?: shared.Secret[];
 
-  @Metadata({ data: "json, name=ulimits", elemType: shared.Ulimit })
+  @SpeakeasyMetadata({ data: "json, name=ulimits", elemType: shared.Ulimit })
   ulimits?: shared.Ulimit[];
 
-  @Metadata({ data: "json, name=user" })
+  @SpeakeasyMetadata({ data: "json, name=user" })
   user?: string;
 
-  @Metadata({ data: "json, name=vcpus" })
+  @SpeakeasyMetadata({ data: "json, name=vcpus" })
   vcpus?: number;
 
-  @Metadata({ data: "json, name=volumes", elemType: shared.Volume })
+  @SpeakeasyMetadata({ data: "json, name=volumes", elemType: shared.Volume })
   volumes?: shared.Volume[];
 }
 
@@ -98,13 +99,13 @@ export class RegisterJobDefinitionRequestBodyContainerProperties extends Speakea
  * An object representing the node properties of a multi-node parallel job.
 **/
 export class RegisterJobDefinitionRequestBodyNodeProperties extends SpeakeasyBase {
-  @Metadata({ data: "json, name=mainNode" })
+  @SpeakeasyMetadata({ data: "json, name=mainNode" })
   mainNode?: number;
 
-  @Metadata({ data: "json, name=nodeRangeProperties", elemType: shared.NodeRangeProperty })
+  @SpeakeasyMetadata({ data: "json, name=nodeRangeProperties", elemType: shared.NodeRangeProperty })
   nodeRangeProperties?: shared.NodeRangeProperty[];
 
-  @Metadata({ data: "json, name=numNodes" })
+  @SpeakeasyMetadata({ data: "json, name=numNodes" })
   numNodes?: number;
 }
 
@@ -114,10 +115,10 @@ export class RegisterJobDefinitionRequestBodyNodeProperties extends SpeakeasyBas
  * The retry strategy associated with a job. For more information, see <a href="https://docs.aws.amazon.com/batch/latest/userguide/job_retries.html">Automated job retries</a> in the <i>Batch User Guide</i>.
 **/
 export class RegisterJobDefinitionRequestBodyRetryStrategy extends SpeakeasyBase {
-  @Metadata({ data: "json, name=attempts" })
+  @SpeakeasyMetadata({ data: "json, name=attempts" })
   attempts?: number;
 
-  @Metadata({ data: "json, name=evaluateOnExit", elemType: shared.EvaluateOnExit })
+  @SpeakeasyMetadata({ data: "json, name=evaluateOnExit", elemType: shared.EvaluateOnExit })
   evaluateOnExit?: shared.EvaluateOnExit[];
 }
 
@@ -127,71 +128,71 @@ export class RegisterJobDefinitionRequestBodyRetryStrategy extends SpeakeasyBase
  * An object representing a job timeout configuration.
 **/
 export class RegisterJobDefinitionRequestBodyTimeout extends SpeakeasyBase {
-  @Metadata({ data: "json, name=attemptDurationSeconds" })
+  @SpeakeasyMetadata({ data: "json, name=attemptDurationSeconds" })
   attemptDurationSeconds?: number;
 }
 
 export enum RegisterJobDefinitionRequestBodyTypeEnum {
-    Container = "container"
-,    Multinode = "multinode"
+    Container = "container",
+    Multinode = "multinode"
 }
 
 
 export class RegisterJobDefinitionRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=containerProperties" })
+  @SpeakeasyMetadata({ data: "json, name=containerProperties" })
   containerProperties?: RegisterJobDefinitionRequestBodyContainerProperties;
 
-  @Metadata({ data: "json, name=jobDefinitionName" })
+  @SpeakeasyMetadata({ data: "json, name=jobDefinitionName" })
   jobDefinitionName: string;
 
-  @Metadata({ data: "json, name=nodeProperties" })
+  @SpeakeasyMetadata({ data: "json, name=nodeProperties" })
   nodeProperties?: RegisterJobDefinitionRequestBodyNodeProperties;
 
-  @Metadata({ data: "json, name=parameters" })
+  @SpeakeasyMetadata({ data: "json, name=parameters" })
   parameters?: Map<string, string>;
 
-  @Metadata({ data: "json, name=platformCapabilities" })
+  @SpeakeasyMetadata({ data: "json, name=platformCapabilities" })
   platformCapabilities?: shared.PlatformCapabilityEnum[];
 
-  @Metadata({ data: "json, name=propagateTags" })
+  @SpeakeasyMetadata({ data: "json, name=propagateTags" })
   propagateTags?: boolean;
 
-  @Metadata({ data: "json, name=retryStrategy" })
+  @SpeakeasyMetadata({ data: "json, name=retryStrategy" })
   retryStrategy?: RegisterJobDefinitionRequestBodyRetryStrategy;
 
-  @Metadata({ data: "json, name=tags" })
+  @SpeakeasyMetadata({ data: "json, name=tags" })
   tags?: Map<string, string>;
 
-  @Metadata({ data: "json, name=timeout" })
+  @SpeakeasyMetadata({ data: "json, name=timeout" })
   timeout?: RegisterJobDefinitionRequestBodyTimeout;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type: RegisterJobDefinitionRequestBodyTypeEnum;
 }
 
 
 export class RegisterJobDefinitionRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: RegisterJobDefinitionHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: RegisterJobDefinitionRequestBody;
 }
 
 
 export class RegisterJobDefinitionResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   clientException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   registerJobDefinitionResponse?: shared.RegisterJobDefinitionResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   serverException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

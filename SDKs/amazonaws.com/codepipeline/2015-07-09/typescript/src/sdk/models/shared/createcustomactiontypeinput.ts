@@ -1,11 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ActionCategoryEnum } from "./actioncategoryenum";
 import { ActionConfigurationProperty } from "./actionconfigurationproperty";
 import { ArtifactDetails } from "./artifactdetails";
-import { ArtifactDetails } from "./artifactdetails";
 import { ActionTypeSettings } from "./actiontypesettings";
 import { Tag } from "./tag";
+
 
 
 // CreateCustomActionTypeInput
@@ -13,27 +12,27 @@ import { Tag } from "./tag";
  * Represents the input of a CreateCustomActionType operation.
 **/
 export class CreateCustomActionTypeInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=category" })
+  @SpeakeasyMetadata({ data: "json, name=category" })
   category: ActionCategoryEnum;
 
-  @Metadata({ data: "json, name=configurationProperties", elemType: shared.ActionConfigurationProperty })
+  @SpeakeasyMetadata({ data: "json, name=configurationProperties", elemType: ActionConfigurationProperty })
   configurationProperties?: ActionConfigurationProperty[];
 
-  @Metadata({ data: "json, name=inputArtifactDetails" })
+  @SpeakeasyMetadata({ data: "json, name=inputArtifactDetails" })
   inputArtifactDetails: ArtifactDetails;
 
-  @Metadata({ data: "json, name=outputArtifactDetails" })
+  @SpeakeasyMetadata({ data: "json, name=outputArtifactDetails" })
   outputArtifactDetails: ArtifactDetails;
 
-  @Metadata({ data: "json, name=provider" })
+  @SpeakeasyMetadata({ data: "json, name=provider" })
   provider: string;
 
-  @Metadata({ data: "json, name=settings" })
+  @SpeakeasyMetadata({ data: "json, name=settings" })
   settings?: ActionTypeSettings;
 
-  @Metadata({ data: "json, name=tags", elemType: shared.Tag })
+  @SpeakeasyMetadata({ data: "json, name=tags", elemType: Tag })
   tags?: Tag[];
 
-  @Metadata({ data: "json, name=version" })
+  @SpeakeasyMetadata({ data: "json, name=version" })
   version: string;
 }

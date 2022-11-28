@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetListInstanceProfilesForRoleActionEnum(str, Enum):
     LIST_INSTANCE_PROFILES_FOR_ROLE = "ListInstanceProfilesForRole"
@@ -10,11 +14,11 @@ class GetListInstanceProfilesForRoleVersionEnum(str, Enum):
 
 @dataclass
 class GetListInstanceProfilesForRoleQueryParams:
-    action: GetListInstanceProfilesForRoleActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetListInstanceProfilesForRoleActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    role_name: str = field(metadata={'query_param': { 'field_name': 'RoleName', 'style': 'form', 'explode': True }})
+    version: GetListInstanceProfilesForRoleVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     marker: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'Marker', 'style': 'form', 'explode': True }})
     max_items: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'MaxItems', 'style': 'form', 'explode': True }})
-    role_name: str = field(default=None, metadata={'query_param': { 'field_name': 'RoleName', 'style': 'form', 'explode': True }})
-    version: GetListInstanceProfilesForRoleVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -30,13 +34,13 @@ class GetListInstanceProfilesForRoleHeaders:
 
 @dataclass
 class GetListInstanceProfilesForRoleRequest:
-    query_params: GetListInstanceProfilesForRoleQueryParams = field(default=None)
-    headers: GetListInstanceProfilesForRoleHeaders = field(default=None)
+    headers: GetListInstanceProfilesForRoleHeaders = field()
+    query_params: GetListInstanceProfilesForRoleQueryParams = field()
     
 
 @dataclass
 class GetListInstanceProfilesForRoleResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

@@ -1,6 +1,11 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class CustomFloodlightVariableTypeEnum(str, Enum):
     U1 = "U1"
@@ -108,7 +113,11 @@ class CustomFloodlightVariableTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class CustomFloodlightVariable:
-    kind: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'kind' }})
-    type: Optional[CustomFloodlightVariableTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
-    value: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'value' }})
+    r"""CustomFloodlightVariable
+    A custom floodlight variable. This field may only be used when calling batchinsert; it is not supported by batchupdate.
+    """
+    
+    kind: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('kind') }})
+    type: Optional[CustomFloodlightVariableTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('type') }})
+    value: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('value') }})
     

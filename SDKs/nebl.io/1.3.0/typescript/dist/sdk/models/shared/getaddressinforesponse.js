@@ -22,35 +22,34 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var GetAddressInfoResponseUtxosTokens = /** @class */ (function (_super) {
     __extends(GetAddressInfoResponseUtxosTokens, _super);
     function GetAddressInfoResponseUtxosTokens() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=aggregationPolicy" }),
+        SpeakeasyMetadata({ data: "json, name=aggregationPolicy" }),
         __metadata("design:type", String)
     ], GetAddressInfoResponseUtxosTokens.prototype, "aggregationPolicy", void 0);
     __decorate([
-        Metadata({ data: "json, name=amount" }),
+        SpeakeasyMetadata({ data: "json, name=amount" }),
         __metadata("design:type", Number)
     ], GetAddressInfoResponseUtxosTokens.prototype, "amount", void 0);
     __decorate([
-        Metadata({ data: "json, name=divisibility" }),
+        SpeakeasyMetadata({ data: "json, name=divisibility" }),
         __metadata("design:type", Number)
     ], GetAddressInfoResponseUtxosTokens.prototype, "divisibility", void 0);
     __decorate([
-        Metadata({ data: "json, name=issueTxid" }),
+        SpeakeasyMetadata({ data: "json, name=issueTxid" }),
         __metadata("design:type", String)
     ], GetAddressInfoResponseUtxosTokens.prototype, "issueTxid", void 0);
     __decorate([
-        Metadata({ data: "json, name=lockStatus" }),
+        SpeakeasyMetadata({ data: "json, name=lockStatus" }),
         __metadata("design:type", Boolean)
     ], GetAddressInfoResponseUtxosTokens.prototype, "lockStatus", void 0);
     __decorate([
-        Metadata({ data: "json, name=tokenId" }),
+        SpeakeasyMetadata({ data: "json, name=tokenId" }),
         __metadata("design:type", String)
     ], GetAddressInfoResponseUtxosTokens.prototype, "tokenId", void 0);
     return GetAddressInfoResponseUtxosTokens;
@@ -62,35 +61,35 @@ var GetAddressInfoResponseUtxos = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=blockheight" }),
+        SpeakeasyMetadata({ data: "json, name=blockheight" }),
         __metadata("design:type", Number)
     ], GetAddressInfoResponseUtxos.prototype, "blockheight", void 0);
     __decorate([
-        Metadata({ data: "json, name=blocktime" }),
+        SpeakeasyMetadata({ data: "json, name=blocktime" }),
         __metadata("design:type", Number)
     ], GetAddressInfoResponseUtxos.prototype, "blocktime", void 0);
     __decorate([
-        Metadata({ data: "json, name=index" }),
+        SpeakeasyMetadata({ data: "json, name=index" }),
         __metadata("design:type", Number)
     ], GetAddressInfoResponseUtxos.prototype, "index", void 0);
     __decorate([
-        Metadata({ data: "json, name=scriptPubKey" }),
+        SpeakeasyMetadata({ data: "json, name=scriptPubKey" }),
         __metadata("design:type", Map)
     ], GetAddressInfoResponseUtxos.prototype, "scriptPubKey", void 0);
     __decorate([
-        Metadata({ data: "json, name=tokens", elemType: shared.GetAddressInfoResponseUtxosTokens }),
+        SpeakeasyMetadata({ data: "json, name=tokens", elemType: GetAddressInfoResponseUtxosTokens }),
         __metadata("design:type", Array)
     ], GetAddressInfoResponseUtxos.prototype, "tokens", void 0);
     __decorate([
-        Metadata({ data: "json, name=txid" }),
+        SpeakeasyMetadata({ data: "json, name=txid" }),
         __metadata("design:type", String)
     ], GetAddressInfoResponseUtxos.prototype, "txid", void 0);
     __decorate([
-        Metadata({ data: "json, name=used" }),
+        SpeakeasyMetadata({ data: "json, name=used" }),
         __metadata("design:type", Boolean)
     ], GetAddressInfoResponseUtxos.prototype, "used", void 0);
     __decorate([
-        Metadata({ data: "json, name=value" }),
+        SpeakeasyMetadata({ data: "json, name=value" }),
         __metadata("design:type", Number)
     ], GetAddressInfoResponseUtxos.prototype, "value", void 0);
     return GetAddressInfoResponseUtxos;
@@ -102,11 +101,11 @@ var GetAddressInfoResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=address" }),
+        SpeakeasyMetadata({ data: "json, name=address" }),
         __metadata("design:type", String)
     ], GetAddressInfoResponse.prototype, "address", void 0);
     __decorate([
-        Metadata({ data: "json, name=utxos", elemType: shared.GetAddressInfoResponseUtxos }),
+        SpeakeasyMetadata({ data: "json, name=utxos", elemType: GetAddressInfoResponseUtxos }),
         __metadata("design:type", Array)
     ], GetAddressInfoResponse.prototype, "utxos", void 0);
     return GetAddressInfoResponse;

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 export declare enum DocumentTypeEnum {
     TypeUnspecified = "TYPE_UNSPECIFIED",
     PlainText = "PLAIN_TEXT",

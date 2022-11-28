@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class AddGoogleAnalyticsRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=analyticsAccountId" })
+  @SpeakeasyMetadata({ data: "json, name=analyticsAccountId" })
   analyticsAccountId?: string;
 
-  @Metadata({ data: "json, name=analyticsPropertyId" })
+  @SpeakeasyMetadata({ data: "json, name=analyticsPropertyId" })
   analyticsPropertyId?: string;
 }

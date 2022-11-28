@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class GetClientClientIDTokenKindKindEnum(str, Enum):
     REGISTRATION_ = "'registration'"
@@ -9,17 +9,17 @@ class GetClientClientIDTokenKindKindEnum(str, Enum):
 
 @dataclass
 class GetClientClientIDTokenKindPathParams:
-    client_id: str = field(default=None, metadata={'path_param': { 'field_name': 'client_id', 'style': 'simple', 'explode': False }})
-    kind: GetClientClientIDTokenKindKindEnum = field(default=None, metadata={'path_param': { 'field_name': 'kind', 'style': 'simple', 'explode': False }})
+    client_id: str = field(metadata={'path_param': { 'field_name': 'client_id', 'style': 'simple', 'explode': False }})
+    kind: GetClientClientIDTokenKindKindEnum = field(metadata={'path_param': { 'field_name': 'kind', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetClientClientIDTokenKindRequest:
-    path_params: GetClientClientIDTokenKindPathParams = field(default=None)
+    path_params: GetClientClientIDTokenKindPathParams = field()
     
 
 @dataclass
 class GetClientClientIDTokenKindResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

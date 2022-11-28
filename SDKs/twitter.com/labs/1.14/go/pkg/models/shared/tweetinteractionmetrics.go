@@ -1,5 +1,7 @@
 package shared
 
+// TweetInteractionMetrics
+// Interaction metrics for a Tweet.
 type TweetInteractionMetrics struct {
 	ImpressionCount *int32 `json:"impression_count,omitempty"`
 	LikeCount       int32  `json:"like_count"`

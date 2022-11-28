@@ -1,5 +1,7 @@
 package shared
 
+// Address
+// JSON template for address of a customer.
 type Address struct {
 	AddressLine1     *string `json:"addressLine1,omitempty"`
 	AddressLine2     *string `json:"addressLine2,omitempty"`

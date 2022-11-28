@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ReplicaSettingsDescription } from "./replicasettingsdescription";
 
 
+
 export class UpdateGlobalTableSettingsOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=GlobalTableName" })
+  @SpeakeasyMetadata({ data: "json, name=GlobalTableName" })
   globalTableName?: string;
 
-  @Metadata({ data: "json, name=ReplicaSettings", elemType: shared.ReplicaSettingsDescription })
+  @SpeakeasyMetadata({ data: "json, name=ReplicaSettings", elemType: ReplicaSettingsDescription })
   replicaSettings?: ReplicaSettingsDescription[];
 }

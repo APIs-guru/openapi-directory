@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetGetInstanceProfileActionEnum(str, Enum):
     GET_INSTANCE_PROFILE = "GetInstanceProfile"
@@ -10,9 +14,9 @@ class GetGetInstanceProfileVersionEnum(str, Enum):
 
 @dataclass
 class GetGetInstanceProfileQueryParams:
-    action: GetGetInstanceProfileActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    instance_profile_name: str = field(default=None, metadata={'query_param': { 'field_name': 'InstanceProfileName', 'style': 'form', 'explode': True }})
-    version: GetGetInstanceProfileVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: GetGetInstanceProfileActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    instance_profile_name: str = field(metadata={'query_param': { 'field_name': 'InstanceProfileName', 'style': 'form', 'explode': True }})
+    version: GetGetInstanceProfileVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -28,13 +32,13 @@ class GetGetInstanceProfileHeaders:
 
 @dataclass
 class GetGetInstanceProfileRequest:
-    query_params: GetGetInstanceProfileQueryParams = field(default=None)
-    headers: GetGetInstanceProfileHeaders = field(default=None)
+    headers: GetGetInstanceProfileHeaders = field()
+    query_params: GetGetInstanceProfileQueryParams = field()
     
 
 @dataclass
 class GetGetInstanceProfileResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

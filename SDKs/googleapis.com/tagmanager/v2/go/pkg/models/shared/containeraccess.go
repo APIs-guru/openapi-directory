@@ -11,6 +11,8 @@ const (
 	ContainerAccessPermissionEnumPublish                        ContainerAccessPermissionEnum = "publish"
 )
 
+// ContainerAccess
+// Defines the Google Tag Manager Container access permissions.
 type ContainerAccess struct {
 	ContainerID *string                        `json:"containerId,omitempty"`
 	Permission  *ContainerAccessPermissionEnum `json:"permission,omitempty"`

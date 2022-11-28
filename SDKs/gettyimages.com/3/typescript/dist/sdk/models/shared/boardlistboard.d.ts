@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { Asset } from "./asset";
 export declare class BoardListBoard extends SpeakeasyBase {
     assetCount?: number;

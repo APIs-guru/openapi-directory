@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetStartActivityStreamActionEnum(str, Enum):
     START_ACTIVITY_STREAM = "StartActivityStream"
@@ -14,13 +18,13 @@ class GetStartActivityStreamVersionEnum(str, Enum):
 
 @dataclass
 class GetStartActivityStreamQueryParams:
-    action: GetStartActivityStreamActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetStartActivityStreamActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    kms_key_id: str = field(metadata={'query_param': { 'field_name': 'KmsKeyId', 'style': 'form', 'explode': True }})
+    mode: GetStartActivityStreamModeEnum = field(metadata={'query_param': { 'field_name': 'Mode', 'style': 'form', 'explode': True }})
+    resource_arn: str = field(metadata={'query_param': { 'field_name': 'ResourceArn', 'style': 'form', 'explode': True }})
+    version: GetStartActivityStreamVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     apply_immediately: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'ApplyImmediately', 'style': 'form', 'explode': True }})
     engine_native_audit_fields_included: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'EngineNativeAuditFieldsIncluded', 'style': 'form', 'explode': True }})
-    kms_key_id: str = field(default=None, metadata={'query_param': { 'field_name': 'KmsKeyId', 'style': 'form', 'explode': True }})
-    mode: GetStartActivityStreamModeEnum = field(default=None, metadata={'query_param': { 'field_name': 'Mode', 'style': 'form', 'explode': True }})
-    resource_arn: str = field(default=None, metadata={'query_param': { 'field_name': 'ResourceArn', 'style': 'form', 'explode': True }})
-    version: GetStartActivityStreamVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -36,13 +40,13 @@ class GetStartActivityStreamHeaders:
 
 @dataclass
 class GetStartActivityStreamRequest:
-    query_params: GetStartActivityStreamQueryParams = field(default=None)
-    headers: GetStartActivityStreamHeaders = field(default=None)
+    headers: GetStartActivityStreamHeaders = field()
+    query_params: GetStartActivityStreamQueryParams = field()
     
 
 @dataclass
 class GetStartActivityStreamResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

@@ -14,7 +14,7 @@ type CreatePayrollCalendarSecurity struct {
 
 type CreatePayrollCalendarRequest struct {
 	Headers  CreatePayrollCalendarHeaders
-	Request  []shared.PayrollCalendar `request:"mediaType=application/json"`
+	Request  []shared.PayrollCalendarInput `request:"mediaType=application/json"`
 	Security CreatePayrollCalendarSecurity
 }
 

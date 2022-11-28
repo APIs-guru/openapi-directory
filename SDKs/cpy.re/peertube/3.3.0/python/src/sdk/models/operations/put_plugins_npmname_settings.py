@@ -1,33 +1,35 @@
 from dataclasses import dataclass, field
 from typing import Any,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
+from sdk.models import shared
 
 
 @dataclass
 class PutPluginsNpmNameSettingsPathParams:
-    npm_name: str = field(default=None, metadata={'path_param': { 'field_name': 'npmName', 'style': 'simple', 'explode': False }})
+    npm_name: str = field(metadata={'path_param': { 'field_name': 'npmName', 'style': 'simple', 'explode': False }})
     
 
 @dataclass_json
 @dataclass
 class PutPluginsNpmNameSettingsRequestBody:
-    settings: Optional[dict[str, Any]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'settings' }})
+    settings: Optional[dict[str, Any]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('settings') }})
     
 
 @dataclass
 class PutPluginsNpmNameSettingsSecurity:
-    o_auth2: shared.SchemeOAuth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    o_auth2: shared.SchemeOAuth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class PutPluginsNpmNameSettingsRequest:
-    path_params: PutPluginsNpmNameSettingsPathParams = field(default=None)
+    path_params: PutPluginsNpmNameSettingsPathParams = field()
+    security: PutPluginsNpmNameSettingsSecurity = field()
     request: Optional[PutPluginsNpmNameSettingsRequestBody] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: PutPluginsNpmNameSettingsSecurity = field(default=None)
     
 
 @dataclass
 class PutPluginsNpmNameSettingsResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

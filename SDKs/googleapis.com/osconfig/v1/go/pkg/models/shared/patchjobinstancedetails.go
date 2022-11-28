@@ -21,6 +21,8 @@ const (
 	PatchJobInstanceDetailsStateEnumNoAgentDetected         PatchJobInstanceDetailsStateEnum = "NO_AGENT_DETECTED"
 )
 
+// PatchJobInstanceDetails
+// Patch details for a VM instance. For more information about reviewing VM instance details, see [Listing all VM instance details for a specific patch job](https://cloud.google.com/compute/docs/os-patch-management/manage-patch-jobs#list-instance-details).
 type PatchJobInstanceDetails struct {
 	AttemptCount     *string                           `json:"attemptCount,omitempty"`
 	FailureReason    *string                           `json:"failureReason,omitempty"`

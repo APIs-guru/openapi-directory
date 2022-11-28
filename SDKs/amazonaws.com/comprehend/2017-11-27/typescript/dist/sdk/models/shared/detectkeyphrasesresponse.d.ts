@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { KeyPhrase } from "./keyphrase";
 export declare class DetectKeyPhrasesResponse extends SpeakeasyBase {
     keyPhrases?: KeyPhrase[];

@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 
 class GetCreateDbSubnetGroupActionEnum(str, Enum):
     CREATE_DB_SUBNET_GROUP = "CreateDBSubnetGroup"
@@ -10,11 +14,11 @@ class GetCreateDbSubnetGroupVersionEnum(str, Enum):
 
 @dataclass
 class GetCreateDbSubnetGroupQueryParams:
-    action: GetCreateDbSubnetGroupActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    db_subnet_group_description: str = field(default=None, metadata={'query_param': { 'field_name': 'DBSubnetGroupDescription', 'style': 'form', 'explode': True }})
-    db_subnet_group_name: str = field(default=None, metadata={'query_param': { 'field_name': 'DBSubnetGroupName', 'style': 'form', 'explode': True }})
-    subnet_ids: List[str] = field(default=None, metadata={'query_param': { 'field_name': 'SubnetIds', 'style': 'form', 'explode': True }})
-    version: GetCreateDbSubnetGroupVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: GetCreateDbSubnetGroupActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    db_subnet_group_description: str = field(metadata={'query_param': { 'field_name': 'DBSubnetGroupDescription', 'style': 'form', 'explode': True }})
+    db_subnet_group_name: str = field(metadata={'query_param': { 'field_name': 'DBSubnetGroupName', 'style': 'form', 'explode': True }})
+    subnet_ids: List[str] = field(metadata={'query_param': { 'field_name': 'SubnetIds', 'style': 'form', 'explode': True }})
+    version: GetCreateDbSubnetGroupVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -30,13 +34,13 @@ class GetCreateDbSubnetGroupHeaders:
 
 @dataclass
 class GetCreateDbSubnetGroupRequest:
-    query_params: GetCreateDbSubnetGroupQueryParams = field(default=None)
-    headers: GetCreateDbSubnetGroupHeaders = field(default=None)
+    headers: GetCreateDbSubnetGroupHeaders = field()
+    query_params: GetCreateDbSubnetGroupQueryParams = field()
     
 
 @dataclass
 class GetCreateDbSubnetGroupResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

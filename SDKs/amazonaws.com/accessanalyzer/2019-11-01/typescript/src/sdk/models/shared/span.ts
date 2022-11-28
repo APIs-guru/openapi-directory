@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Position } from "./position";
-import { Position } from "./position";
+
 
 
 // Span
@@ -8,9 +8,9 @@ import { Position } from "./position";
  * A span in a policy. The span consists of a start position (inclusive) and end position (exclusive).
 **/
 export class Span extends SpeakeasyBase {
-  @Metadata({ data: "json, name=end" })
+  @SpeakeasyMetadata({ data: "json, name=end" })
   end: Position;
 
-  @Metadata({ data: "json, name=start" })
+  @SpeakeasyMetadata({ data: "json, name=start" })
   start: Position;
 }

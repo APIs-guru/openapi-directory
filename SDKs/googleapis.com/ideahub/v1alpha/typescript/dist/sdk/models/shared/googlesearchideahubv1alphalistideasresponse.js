@@ -22,19 +22,19 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { GoogleSearchIdeahubV1alphaIdea } from "./googlesearchideahubv1alphaidea";
 var GoogleSearchIdeahubV1alphaListIdeasResponse = /** @class */ (function (_super) {
     __extends(GoogleSearchIdeahubV1alphaListIdeasResponse, _super);
     function GoogleSearchIdeahubV1alphaListIdeasResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=ideas", elemType: shared.GoogleSearchIdeahubV1alphaIdea }),
+        SpeakeasyMetadata({ data: "json, name=ideas", elemType: GoogleSearchIdeahubV1alphaIdea }),
         __metadata("design:type", Array)
     ], GoogleSearchIdeahubV1alphaListIdeasResponse.prototype, "ideas", void 0);
     __decorate([
-        Metadata({ data: "json, name=nextPageToken" }),
+        SpeakeasyMetadata({ data: "json, name=nextPageToken" }),
         __metadata("design:type", String)
     ], GoogleSearchIdeahubV1alphaListIdeasResponse.prototype, "nextPageToken", void 0);
     return GoogleSearchIdeahubV1alphaListIdeasResponse;

@@ -1,8 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ParameterInlinePolicy } from "./parameterinlinepolicy";
 import { ParameterTierEnum } from "./parametertierenum";
 import { ParameterTypeEnum } from "./parametertypeenum";
+
 
 
 // ParameterHistory
@@ -10,42 +10,42 @@ import { ParameterTypeEnum } from "./parametertypeenum";
  * Information about parameter usage.
 **/
 export class ParameterHistory extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AllowedPattern" })
+  @SpeakeasyMetadata({ data: "json, name=AllowedPattern" })
   allowedPattern?: string;
 
-  @Metadata({ data: "json, name=DataType" })
+  @SpeakeasyMetadata({ data: "json, name=DataType" })
   dataType?: string;
 
-  @Metadata({ data: "json, name=Description" })
+  @SpeakeasyMetadata({ data: "json, name=Description" })
   description?: string;
 
-  @Metadata({ data: "json, name=KeyId" })
+  @SpeakeasyMetadata({ data: "json, name=KeyId" })
   keyId?: string;
 
-  @Metadata({ data: "json, name=Labels" })
+  @SpeakeasyMetadata({ data: "json, name=Labels" })
   labels?: string[];
 
-  @Metadata({ data: "json, name=LastModifiedDate" })
+  @SpeakeasyMetadata({ data: "json, name=LastModifiedDate" })
   lastModifiedDate?: Date;
 
-  @Metadata({ data: "json, name=LastModifiedUser" })
+  @SpeakeasyMetadata({ data: "json, name=LastModifiedUser" })
   lastModifiedUser?: string;
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name?: string;
 
-  @Metadata({ data: "json, name=Policies", elemType: shared.ParameterInlinePolicy })
+  @SpeakeasyMetadata({ data: "json, name=Policies", elemType: ParameterInlinePolicy })
   policies?: ParameterInlinePolicy[];
 
-  @Metadata({ data: "json, name=Tier" })
+  @SpeakeasyMetadata({ data: "json, name=Tier" })
   tier?: ParameterTierEnum;
 
-  @Metadata({ data: "json, name=Type" })
+  @SpeakeasyMetadata({ data: "json, name=Type" })
   type?: ParameterTypeEnum;
 
-  @Metadata({ data: "json, name=Value" })
+  @SpeakeasyMetadata({ data: "json, name=Value" })
   value?: string;
 
-  @Metadata({ data: "json, name=Version" })
+  @SpeakeasyMetadata({ data: "json, name=Version" })
   version?: number;
 }

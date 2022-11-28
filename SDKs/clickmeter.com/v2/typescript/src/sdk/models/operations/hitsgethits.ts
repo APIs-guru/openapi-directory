@@ -1,61 +1,62 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
+
 export enum HitsGetHitsFilterEnum {
-    Spiders = "spiders"
-,    Uniques = "uniques"
-,    Nonuniques = "nonuniques"
-,    Conversions = "conversions"
+    Spiders = "spiders",
+    Uniques = "uniques",
+    Nonuniques = "nonuniques",
+    Conversions = "conversions"
 }
 
 export enum HitsGetHitsTimeframeEnum {
-    Yesterday = "yesterday"
-,    Last7 = "last7"
-,    Last30 = "last30"
-,    Lastmonth = "lastmonth"
-,    Currentmonth = "currentmonth"
-,    Previousmonth = "previousmonth"
-,    Last90 = "last90"
-,    Last120 = "last120"
-,    Last180 = "last180"
-,    Custom = "custom"
+    Yesterday = "yesterday",
+    Last7 = "last7",
+    Last30 = "last30",
+    Lastmonth = "lastmonth",
+    Currentmonth = "currentmonth",
+    Previousmonth = "previousmonth",
+    Last90 = "last90",
+    Last120 = "last120",
+    Last180 = "last180",
+    Custom = "custom"
 }
 
 
 export class HitsGetHitsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=filter" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=filter" })
   filter?: HitsGetHitsFilterEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=fromDay" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=fromDay" })
   fromDay?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=limit" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=limit" })
   limit?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=offset" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=offset" })
   offset?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=timeframe" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=timeframe" })
   timeframe: HitsGetHitsTimeframeEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=toDay" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=toDay" })
   toDay?: string;
 }
 
 
 export class HitsGetHitsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: HitsGetHitsQueryParams;
 }
 
 
 export class HitsGetHitsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   apiCoreDtoClickStreamHitListPage?: shared.ApiCoreDtoClickStreamHitListPage;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

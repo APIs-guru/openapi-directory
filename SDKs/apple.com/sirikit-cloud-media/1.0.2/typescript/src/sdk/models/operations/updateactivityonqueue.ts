@@ -1,38 +1,39 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class UpdateActivityOnQueueHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=Accept-Language" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Accept-Language" })
   acceptLanguage: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=User-Agent" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=User-Agent" })
   userAgent: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=x-applecloudextension-retry-count" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=x-applecloudextension-retry-count" })
   xApplecloudextensionRetryCount?: number;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=x-applecloudextension-session-id" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=x-applecloudextension-session-id" })
   xApplecloudextensionSessionId: string;
 }
 
 
 export class UpdateActivityOnQueueRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: UpdateActivityOnQueueHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request?: shared.UpdateActivityRequest;
 }
 
 
 export class UpdateActivityOnQueueResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   updateActivityResponse?: shared.UpdateActivityResponse;
 }

@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// CallAnalyticsJob
+// Describes an asynchronous analytics job that was created with the <code>StartAnalyticsJob</code> operation.
 type CallAnalyticsJob struct {
 	CallAnalyticsJobName    *string                     `json:"CallAnalyticsJobName,omitempty"`
 	CallAnalyticsJobStatus  *CallAnalyticsJobStatusEnum `json:"CallAnalyticsJobStatus,omitempty"`

@@ -1,15 +1,15 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import datadestination
-from . import tag
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class CreateForecastExportJobRequest:
-    destination: datadestination.DataDestination = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Destination' }})
-    forecast_arn: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ForecastArn' }})
-    forecast_export_job_name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ForecastExportJobName' }})
-    tags: Optional[List[tag.Tag]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Tags' }})
+    destination: DataDestination = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Destination') }})
+    forecast_arn: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('ForecastArn') }})
+    forecast_export_job_name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('ForecastExportJobName') }})
+    tags: Optional[List[Tag]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Tags') }})
     

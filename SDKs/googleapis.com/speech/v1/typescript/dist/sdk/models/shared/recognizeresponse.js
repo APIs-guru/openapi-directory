@@ -22,8 +22,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { SpeechRecognitionResult } from "./speechrecognitionresult";
+import { SpeechAdaptationInfo } from "./speechadaptationinfo";
 // RecognizeResponse
 /**
  * The only message returned to the client by the `Recognize` method. It contains the result as zero or more sequential `SpeechRecognitionResult` messages.
@@ -34,15 +35,19 @@ var RecognizeResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=requestId" }),
+        SpeakeasyMetadata({ data: "json, name=requestId" }),
         __metadata("design:type", String)
     ], RecognizeResponse.prototype, "requestId", void 0);
     __decorate([
-        Metadata({ data: "json, name=results", elemType: shared.SpeechRecognitionResult }),
+        SpeakeasyMetadata({ data: "json, name=results", elemType: SpeechRecognitionResult }),
         __metadata("design:type", Array)
     ], RecognizeResponse.prototype, "results", void 0);
     __decorate([
-        Metadata({ data: "json, name=totalBilledTime" }),
+        SpeakeasyMetadata({ data: "json, name=speechAdaptationInfo" }),
+        __metadata("design:type", SpeechAdaptationInfo)
+    ], RecognizeResponse.prototype, "speechAdaptationInfo", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=totalBilledTime" }),
         __metadata("design:type", String)
     ], RecognizeResponse.prototype, "totalBilledTime", void 0);
     return RecognizeResponse;

@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
 from dataclasses_json import dataclass_json
-from . import describeduser
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class DescribeUserResponse:
-    server_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ServerId' }})
-    user: describeduser.DescribedUser = field(default=None, metadata={'dataclasses_json': { 'field_name': 'User' }})
+    server_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('ServerId') }})
+    user: DescribedUser = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('User') }})
     

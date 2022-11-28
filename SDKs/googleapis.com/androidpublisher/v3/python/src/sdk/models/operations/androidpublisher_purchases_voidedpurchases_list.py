@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class AndroidpublisherPurchasesVoidedpurchasesListPathParams:
-    package_name: str = field(default=None, metadata={'path_param': { 'field_name': 'packageName', 'style': 'simple', 'explode': False }})
+    package_name: str = field(metadata={'path_param': { 'field_name': 'packageName', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -31,20 +32,20 @@ class AndroidpublisherPurchasesVoidedpurchasesListQueryParams:
 
 @dataclass
 class AndroidpublisherPurchasesVoidedpurchasesListSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class AndroidpublisherPurchasesVoidedpurchasesListRequest:
-    path_params: AndroidpublisherPurchasesVoidedpurchasesListPathParams = field(default=None)
-    query_params: AndroidpublisherPurchasesVoidedpurchasesListQueryParams = field(default=None)
-    security: AndroidpublisherPurchasesVoidedpurchasesListSecurity = field(default=None)
+    path_params: AndroidpublisherPurchasesVoidedpurchasesListPathParams = field()
+    query_params: AndroidpublisherPurchasesVoidedpurchasesListQueryParams = field()
+    security: AndroidpublisherPurchasesVoidedpurchasesListSecurity = field()
     
 
 @dataclass
 class AndroidpublisherPurchasesVoidedpurchasesListResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     voided_purchases_list_response: Optional[shared.VoidedPurchasesListResponse] = field(default=None)
     

@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { LocationConfiguration } from "./locationconfiguration";
+
 
 
 // CreateFleetLocationsInput
@@ -8,9 +8,9 @@ import { LocationConfiguration } from "./locationconfiguration";
  * Represents the input for a request operation.
 **/
 export class CreateFleetLocationsInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=FleetId" })
+  @SpeakeasyMetadata({ data: "json, name=FleetId" })
   fleetId: string;
 
-  @Metadata({ data: "json, name=Locations", elemType: shared.LocationConfiguration })
+  @SpeakeasyMetadata({ data: "json, name=Locations", elemType: LocationConfiguration })
   locations: LocationConfiguration[];
 }

@@ -1,5 +1,7 @@
 package shared
 
+// GooglePrivacyDlpV2StorageConfig
+// Shared message indicating Cloud storage type.
 type GooglePrivacyDlpV2StorageConfig struct {
 	BigQueryOptions     *GooglePrivacyDlpV2BigQueryOptions     `json:"bigQueryOptions,omitempty"`
 	CloudStorageOptions *GooglePrivacyDlpV2CloudStorageOptions `json:"cloudStorageOptions,omitempty"`

@@ -1,19 +1,19 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AttributeValue } from "./attributevalue";
 import { Key } from "./key";
 
 
+
 export class QueryOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ConsumedCapacityUnits" })
+  @SpeakeasyMetadata({ data: "json, name=ConsumedCapacityUnits" })
   consumedCapacityUnits?: number;
 
-  @Metadata({ data: "json, name=Count" })
+  @SpeakeasyMetadata({ data: "json, name=Count" })
   count?: number;
 
-  @Metadata({ data: "json, name=Items", elemType: shared.AttributeValue, elemDepth: 2 })
+  @SpeakeasyMetadata({ data: "json, name=Items", elemType: AttributeValue, elemDepth: 2 })
   items?: Map<string, AttributeValue>[];
 
-  @Metadata({ data: "json, name=LastEvaluatedKey" })
+  @SpeakeasyMetadata({ data: "json, name=LastEvaluatedKey" })
   lastEvaluatedKey?: Key;
 }

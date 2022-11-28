@@ -153,6 +153,8 @@ const (
 	ActivitiesWatercraftRentalExceptionEnumDependentOnDayOfWeek ActivitiesWatercraftRentalExceptionEnum = "DEPENDENT_ON_DAY_OF_WEEK"
 )
 
+// Activities
+// Amenities and features related to leisure and play.
 type Activities struct {
 	BeachAccess                   *bool                                        `json:"beachAccess,omitempty"`
 	BeachAccessException          *ActivitiesBeachAccessExceptionEnum          `json:"beachAccessException,omitempty"`

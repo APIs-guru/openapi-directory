@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { IotEventsDestinationConfiguration } from "./ioteventsdestinationconfiguration";
 import { S3DestinationConfiguration } from "./s3destinationconfiguration";
 /**

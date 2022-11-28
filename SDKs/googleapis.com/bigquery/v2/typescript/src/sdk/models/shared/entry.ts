@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Entry
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A single entry in the confusion matrix.
 **/
 export class Entry extends SpeakeasyBase {
-  @Metadata({ data: "json, name=itemCount" })
+  @SpeakeasyMetadata({ data: "json, name=itemCount" })
   itemCount?: string;
 
-  @Metadata({ data: "json, name=predictedLabel" })
+  @SpeakeasyMetadata({ data: "json, name=predictedLabel" })
   predictedLabel?: string;
 }

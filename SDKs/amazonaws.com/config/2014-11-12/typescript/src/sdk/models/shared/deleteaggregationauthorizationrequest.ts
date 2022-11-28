@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DeleteAggregationAuthorizationRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AuthorizedAccountId" })
+  @SpeakeasyMetadata({ data: "json, name=AuthorizedAccountId" })
   authorizedAccountId: string;
 
-  @Metadata({ data: "json, name=AuthorizedAwsRegion" })
+  @SpeakeasyMetadata({ data: "json, name=AuthorizedAwsRegion" })
   authorizedAwsRegion: string;
 }

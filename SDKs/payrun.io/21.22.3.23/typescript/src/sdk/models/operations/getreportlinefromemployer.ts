@@ -1,44 +1,45 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetReportLineFromEmployerPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=EmployerId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=EmployerId" })
   employerId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=ReportLineId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=ReportLineId" })
   reportLineId: string;
 }
 
 
 export class GetReportLineFromEmployerHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=Api-Version" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Api-Version" })
   apiVersion: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=Authorization" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Authorization" })
   authorization: string;
 }
 
 
 export class GetReportLineFromEmployerRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetReportLineFromEmployerPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: GetReportLineFromEmployerHeaders;
 }
 
 
 export class GetReportLineFromEmployerResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   errorModel?: shared.ErrorModel;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   reportLine?: shared.ReportLine;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

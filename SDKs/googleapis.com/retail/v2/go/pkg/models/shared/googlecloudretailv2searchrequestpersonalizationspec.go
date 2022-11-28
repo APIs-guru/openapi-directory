@@ -8,6 +8,8 @@ const (
 	GoogleCloudRetailV2SearchRequestPersonalizationSpecModeEnumDisabled        GoogleCloudRetailV2SearchRequestPersonalizationSpecModeEnum = "DISABLED"
 )
 
+// GoogleCloudRetailV2SearchRequestPersonalizationSpec
+// The specification for personalization.
 type GoogleCloudRetailV2SearchRequestPersonalizationSpec struct {
 	Mode *GoogleCloudRetailV2SearchRequestPersonalizationSpecModeEnum `json:"mode,omitempty"`
 }

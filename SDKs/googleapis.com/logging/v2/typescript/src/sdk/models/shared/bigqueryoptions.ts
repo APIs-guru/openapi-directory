@@ -1,4 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
+
+
+// BigQueryOptionsInput
+/** 
+ * Options that change functionality of a sink exporting data to BigQuery.
+**/
+export class BigQueryOptionsInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=usePartitionedTables" })
+  usePartitionedTables?: boolean;
+}
 
 
 // BigQueryOptions
@@ -6,9 +17,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Options that change functionality of a sink exporting data to BigQuery.
 **/
 export class BigQueryOptions extends SpeakeasyBase {
-  @Metadata({ data: "json, name=usePartitionedTables" })
+  @SpeakeasyMetadata({ data: "json, name=usePartitionedTables" })
   usePartitionedTables?: boolean;
 
-  @Metadata({ data: "json, name=usesTimestampColumnPartitioning" })
+  @SpeakeasyMetadata({ data: "json, name=usesTimestampColumnPartitioning" })
   usesTimestampColumnPartitioning?: boolean;
 }

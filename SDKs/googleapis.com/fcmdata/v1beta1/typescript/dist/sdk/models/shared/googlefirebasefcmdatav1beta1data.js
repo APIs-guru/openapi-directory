@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleFirebaseFcmDataV1beta1DeliveryPerformancePercents } from "./googlefirebasefcmdatav1beta1deliveryperformancepercents";
 import { GoogleFirebaseFcmDataV1beta1MessageInsightPercents } from "./googlefirebasefcmdatav1beta1messageinsightpercents";
 import { GoogleFirebaseFcmDataV1beta1MessageOutcomePercents } from "./googlefirebasefcmdatav1beta1messageoutcomepercents";
@@ -36,19 +36,19 @@ var GoogleFirebaseFcmDataV1beta1Data = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=countMessagesAccepted" }),
+        SpeakeasyMetadata({ data: "json, name=countMessagesAccepted" }),
         __metadata("design:type", String)
     ], GoogleFirebaseFcmDataV1beta1Data.prototype, "countMessagesAccepted", void 0);
     __decorate([
-        Metadata({ data: "json, name=deliveryPerformancePercents" }),
+        SpeakeasyMetadata({ data: "json, name=deliveryPerformancePercents" }),
         __metadata("design:type", GoogleFirebaseFcmDataV1beta1DeliveryPerformancePercents)
     ], GoogleFirebaseFcmDataV1beta1Data.prototype, "deliveryPerformancePercents", void 0);
     __decorate([
-        Metadata({ data: "json, name=messageInsightPercents" }),
+        SpeakeasyMetadata({ data: "json, name=messageInsightPercents" }),
         __metadata("design:type", GoogleFirebaseFcmDataV1beta1MessageInsightPercents)
     ], GoogleFirebaseFcmDataV1beta1Data.prototype, "messageInsightPercents", void 0);
     __decorate([
-        Metadata({ data: "json, name=messageOutcomePercents" }),
+        SpeakeasyMetadata({ data: "json, name=messageOutcomePercents" }),
         __metadata("design:type", GoogleFirebaseFcmDataV1beta1MessageOutcomePercents)
     ], GoogleFirebaseFcmDataV1beta1Data.prototype, "messageOutcomePercents", void 0);
     return GoogleFirebaseFcmDataV1beta1Data;

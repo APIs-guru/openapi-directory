@@ -8,17 +8,9 @@ type GetResourceOwnerPathParams struct {
 	ResourceOwnerID string `pathParam:"style=simple,explode=false,name=resourceOwnerId"`
 }
 
-type GetResourceOwnerSecurityOption1 struct {
-	APIKey shared.SchemeAPIKey `security:"scheme,type=apiKey,subtype=header"`
-}
-
-type GetResourceOwnerSecurityOption2 struct {
-	Oauth2AuthorizationCode shared.SchemeOauth2AuthorizationCode `security:"scheme,type=oauth2"`
-}
-
 type GetResourceOwnerSecurity struct {
-	Option1 *GetResourceOwnerSecurityOption1 `security:"option"`
-	Option2 *GetResourceOwnerSecurityOption2 `security:"option"`
+	APIKey                  *shared.SchemeAPIKey                  `security:"scheme,type=apiKey,subtype=header"`
+	Oauth2AuthorizationCode *shared.SchemeOauth2AuthorizationCode `security:"scheme,type=oauth2"`
 }
 
 type GetResourceOwnerRequest struct {

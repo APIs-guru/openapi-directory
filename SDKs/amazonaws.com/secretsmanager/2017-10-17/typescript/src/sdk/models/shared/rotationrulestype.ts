@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // RotationRulesType
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A structure that defines the rotation configuration for the secret.
 **/
 export class RotationRulesType extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AutomaticallyAfterDays" })
+  @SpeakeasyMetadata({ data: "json, name=AutomaticallyAfterDays" })
   automaticallyAfterDays?: number;
 }

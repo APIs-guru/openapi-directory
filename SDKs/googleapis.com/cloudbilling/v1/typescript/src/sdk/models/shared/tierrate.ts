@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Money } from "./money";
+
 
 
 // TierRate
@@ -7,9 +8,9 @@ import { Money } from "./money";
  * The price rate indicating starting usage and its corresponding price.
 **/
 export class TierRate extends SpeakeasyBase {
-  @Metadata({ data: "json, name=startUsageAmount" })
+  @SpeakeasyMetadata({ data: "json, name=startUsageAmount" })
   startUsageAmount?: number;
 
-  @Metadata({ data: "json, name=unitPrice" })
+  @SpeakeasyMetadata({ data: "json, name=unitPrice" })
   unitPrice?: Money;
 }

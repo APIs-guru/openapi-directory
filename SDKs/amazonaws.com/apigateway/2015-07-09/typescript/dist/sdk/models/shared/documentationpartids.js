@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // DocumentationPartIds
 /**
  * <p>A collection of the imported <a>DocumentationPart</a> identifiers.</p> <div class="remarks">This is used to return the result when documentation parts in an external (e.g., OpenAPI) file are imported into API Gateway</div> <div class="seeAlso"> <a href="https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-documenting-api.html">Documenting an API</a>, <a href="https://docs.aws.amazon.com/apigateway/api-reference/link-relation/documentationpart-import/">documentationpart:import</a>, <a>DocumentationPart</a> </div>
@@ -33,11 +33,11 @@ var DocumentationPartIds = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=ids" }),
+        SpeakeasyMetadata({ data: "json, name=ids" }),
         __metadata("design:type", Array)
     ], DocumentationPartIds.prototype, "ids", void 0);
     __decorate([
-        Metadata({ data: "json, name=warnings" }),
+        SpeakeasyMetadata({ data: "json, name=warnings" }),
         __metadata("design:type", Array)
     ], DocumentationPartIds.prototype, "warnings", void 0);
     return DocumentationPartIds;

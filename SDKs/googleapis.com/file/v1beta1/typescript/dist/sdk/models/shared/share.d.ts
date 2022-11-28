@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { NfsExportOptions } from "./nfsexportoptions";
 export declare enum ShareStateEnum {
     StateUnspecified = "STATE_UNSPECIFIED",
@@ -18,4 +18,14 @@ export declare class Share extends SpeakeasyBase {
     name?: string;
     nfsExportOptions?: NfsExportOptions[];
     state?: ShareStateEnum;
+}
+/**
+ * A Filestore share.
+**/
+export declare class ShareInput extends SpeakeasyBase {
+    capacityGb?: string;
+    description?: string;
+    labels?: Map<string, string>;
+    mountName?: string;
+    nfsExportOptions?: NfsExportOptions[];
 }

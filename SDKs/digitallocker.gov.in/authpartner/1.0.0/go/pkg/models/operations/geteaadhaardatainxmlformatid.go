@@ -8,10 +8,6 @@ type GetEAadhaarDataInXMLFormatIDSecurity struct {
 	BearerAuth shared.SchemeBearerAuth `security:"scheme,type=http,subtype=bearer"`
 }
 
-type GetEAadhaarDataInXMLFormatIDRequest struct {
-	Security GetEAadhaarDataInXMLFormatIDSecurity
-}
-
 type GetEAadhaarDataInXMLFormatID401ApplicationJSON struct {
 	Error            *string `json:"error,omitempty"`
 	ErrorDescription *string `json:"error_description,omitempty"`
@@ -20,6 +16,10 @@ type GetEAadhaarDataInXMLFormatID401ApplicationJSON struct {
 type GetEAadhaarDataInXMLFormatID404ApplicationJSON struct {
 	Error            *interface{} `json:"error,omitempty"`
 	ErrorDescription *interface{} `json:"error_description,omitempty"`
+}
+
+type GetEAadhaarDataInXMLFormatIDRequest struct {
+	Security GetEAadhaarDataInXMLFormatIDSecurity
 }
 
 type GetEAadhaarDataInXMLFormatIDResponse struct {

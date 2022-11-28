@@ -18,7 +18,7 @@ class PostSetupV1CalendarsRequest:
 
 @dataclass
 class PostSetupV1CalendarsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     schedule_view_model: Optional[shared.ScheduleViewModel] = field(default=None)
-    status_code: int = field(default=None)
     

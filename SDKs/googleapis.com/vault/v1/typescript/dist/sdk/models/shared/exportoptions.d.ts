@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { DriveExportOptions } from "./driveexportoptions";
 import { GroupsExportOptions } from "./groupsexportoptions";
 import { HangoutsChatExportOptions } from "./hangoutschatexportoptions";

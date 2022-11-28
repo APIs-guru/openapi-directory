@@ -1,11 +1,8 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 export declare class GlobalpageloadQueryParams extends SpeakeasyBase {
     license: string;
     origin: string;
     url: string;
-}
-export declare class GlobalpageloadRequest extends SpeakeasyBase {
-    queryParams: GlobalpageloadQueryParams;
 }
 export declare class Globalpageload200ApplicationJson extends SpeakeasyBase {
     code?: string;
@@ -14,6 +11,9 @@ export declare class Globalpageload200ApplicationJson extends SpeakeasyBase {
     origin?: string;
     pageResponseStatus?: string;
     seconds?: string;
+}
+export declare class GlobalpageloadRequest extends SpeakeasyBase {
+    queryParams: GlobalpageloadQueryParams;
 }
 export declare class GlobalpageloadResponse extends SpeakeasyBase {
     contentType: string;

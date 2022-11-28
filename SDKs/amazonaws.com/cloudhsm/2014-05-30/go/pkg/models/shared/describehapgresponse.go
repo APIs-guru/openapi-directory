@@ -1,5 +1,7 @@
 package shared
 
+// DescribeHapgResponse
+// Contains the output of the <a>DescribeHapg</a> action.
 type DescribeHapgResponse struct {
 	HapgArn                 *string                  `json:"HapgArn,omitempty"`
 	HapgSerial              *string                  `json:"HapgSerial,omitempty"`

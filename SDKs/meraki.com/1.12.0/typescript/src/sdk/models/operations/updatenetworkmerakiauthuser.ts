@@ -1,55 +1,56 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class UpdateNetworkMerakiAuthUserPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=merakiAuthUserId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=merakiAuthUserId" })
   merakiAuthUserId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=networkId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=networkId" })
   networkId: string;
 }
 
 
 export class UpdateNetworkMerakiAuthUserRequestBodyAuthorizations extends SpeakeasyBase {
-  @Metadata({ data: "json, name=expiresAt" })
+  @SpeakeasyMetadata({ data: "json, name=expiresAt" })
   expiresAt?: string;
 
-  @Metadata({ data: "json, name=ssidNumber" })
+  @SpeakeasyMetadata({ data: "json, name=ssidNumber" })
   ssidNumber: number;
 }
 
 
 export class UpdateNetworkMerakiAuthUserRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=authorizations", elemType: operations.UpdateNetworkMerakiAuthUserRequestBodyAuthorizations })
+  @SpeakeasyMetadata({ data: "json, name=authorizations", elemType: UpdateNetworkMerakiAuthUserRequestBodyAuthorizations })
   authorizations?: UpdateNetworkMerakiAuthUserRequestBodyAuthorizations[];
 
-  @Metadata({ data: "json, name=emailPasswordToUser" })
+  @SpeakeasyMetadata({ data: "json, name=emailPasswordToUser" })
   emailPasswordToUser?: boolean;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=password" })
+  @SpeakeasyMetadata({ data: "json, name=password" })
   password?: string;
 }
 
 
 export class UpdateNetworkMerakiAuthUserRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: UpdateNetworkMerakiAuthUserPathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request?: UpdateNetworkMerakiAuthUserRequestBody;
 }
 
 
 export class UpdateNetworkMerakiAuthUserResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   updateNetworkMerakiAuthUser200ApplicationJsonObject?: Map<string, any>;
 }

@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import webacl
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class GetWebACLResponse:
-    web_acl: Optional[webacl.WebACL] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'WebACL' }})
+    web_acl: Optional[WebACL] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('WebACL') }})
     

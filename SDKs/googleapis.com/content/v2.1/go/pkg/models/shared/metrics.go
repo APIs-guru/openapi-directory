@@ -1,5 +1,7 @@
 package shared
 
+// Metrics
+// Performance metrics. Values are only set for metrics requested explicitly in the request's search query.
 type Metrics struct {
 	Aos                    *float64 `json:"aos,omitempty"`
 	AovMicros              *float64 `json:"aovMicros,omitempty"`

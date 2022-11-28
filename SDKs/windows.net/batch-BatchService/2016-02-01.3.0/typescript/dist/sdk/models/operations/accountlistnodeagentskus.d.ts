@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 export declare class AccountListNodeAgentSkusQueryParams extends SpeakeasyBase {
     dollarFilter?: string;
     apiVersion: string;

@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostDescribeIamInstanceProfileAssociationsActionEnum(str, Enum):
     DESCRIBE_IAM_INSTANCE_PROFILE_ASSOCIATIONS = "DescribeIamInstanceProfileAssociations"
@@ -10,10 +14,10 @@ class PostDescribeIamInstanceProfileAssociationsVersionEnum(str, Enum):
 
 @dataclass
 class PostDescribeIamInstanceProfileAssociationsQueryParams:
-    action: PostDescribeIamInstanceProfileAssociationsActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: PostDescribeIamInstanceProfileAssociationsActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostDescribeIamInstanceProfileAssociationsVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     max_results: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'MaxResults', 'style': 'form', 'explode': True }})
     next_token: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'NextToken', 'style': 'form', 'explode': True }})
-    version: PostDescribeIamInstanceProfileAssociationsVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -29,14 +33,14 @@ class PostDescribeIamInstanceProfileAssociationsHeaders:
 
 @dataclass
 class PostDescribeIamInstanceProfileAssociationsRequest:
-    query_params: PostDescribeIamInstanceProfileAssociationsQueryParams = field(default=None)
-    headers: PostDescribeIamInstanceProfileAssociationsHeaders = field(default=None)
+    headers: PostDescribeIamInstanceProfileAssociationsHeaders = field()
+    query_params: PostDescribeIamInstanceProfileAssociationsQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostDescribeIamInstanceProfileAssociationsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

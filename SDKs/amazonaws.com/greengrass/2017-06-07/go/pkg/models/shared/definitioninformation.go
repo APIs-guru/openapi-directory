@@ -1,5 +1,7 @@
 package shared
 
+// DefinitionInformation
+// Information about a definition.
 type DefinitionInformation struct {
 	Arn                  *string           `json:"Arn,omitempty"`
 	CreationTimestamp    *string           `json:"CreationTimestamp,omitempty"`

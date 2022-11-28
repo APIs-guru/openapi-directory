@@ -27,11 +27,6 @@ type AppendBlockChildrenRequestBody struct {
 	Children []AppendBlockChildrenRequestBodyChildren `json:"children,omitempty"`
 }
 
-type AppendBlockChildrenRequest struct {
-	PathParams AppendBlockChildrenPathParams
-	Request    *AppendBlockChildrenRequestBody `request:"mediaType=application/json"`
-}
-
 type AppendBlockChildren200ApplicationJSONChildPage struct {
 	Title *string `json:"title,omitempty"`
 }
@@ -44,6 +39,11 @@ type AppendBlockChildren200ApplicationJSON struct {
 	LastEditedTime *string                                         `json:"last_edited_time,omitempty"`
 	Object         *string                                         `json:"object,omitempty"`
 	Type           *string                                         `json:"type,omitempty"`
+}
+
+type AppendBlockChildrenRequest struct {
+	PathParams AppendBlockChildrenPathParams
+	Request    *AppendBlockChildrenRequestBody `request:"mediaType=application/json"`
 }
 
 type AppendBlockChildrenResponse struct {

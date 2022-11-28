@@ -1,25 +1,26 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class MemoryInfoRepresentation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=free" })
+  @SpeakeasyMetadata({ data: "json, name=free" })
   free?: number;
 
-  @Metadata({ data: "json, name=freeFormated" })
+  @SpeakeasyMetadata({ data: "json, name=freeFormated" })
   freeFormated?: string;
 
-  @Metadata({ data: "json, name=freePercentage" })
+  @SpeakeasyMetadata({ data: "json, name=freePercentage" })
   freePercentage?: number;
 
-  @Metadata({ data: "json, name=total" })
+  @SpeakeasyMetadata({ data: "json, name=total" })
   total?: number;
 
-  @Metadata({ data: "json, name=totalFormated" })
+  @SpeakeasyMetadata({ data: "json, name=totalFormated" })
   totalFormated?: string;
 
-  @Metadata({ data: "json, name=used" })
+  @SpeakeasyMetadata({ data: "json, name=used" })
   used?: number;
 
-  @Metadata({ data: "json, name=usedFormated" })
+  @SpeakeasyMetadata({ data: "json, name=usedFormated" })
   usedFormated?: string;
 }

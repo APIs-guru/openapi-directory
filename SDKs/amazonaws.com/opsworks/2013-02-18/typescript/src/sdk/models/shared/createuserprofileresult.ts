@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // CreateUserProfileResult
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Contains the response to a <code>CreateUserProfile</code> request.
 **/
 export class CreateUserProfileResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=IamUserArn" })
+  @SpeakeasyMetadata({ data: "json, name=IamUserArn" })
   iamUserArn?: string;
 }

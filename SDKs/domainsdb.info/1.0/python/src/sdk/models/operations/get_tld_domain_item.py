@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Optional
 from sdk.models import shared
 
 
 @dataclass
 class GetTldDomainItemPathParams:
-    zone_id: str = field(default=None, metadata={'path_param': { 'field_name': 'zone_id', 'style': 'simple', 'explode': False }})
+    zone_id: str = field(metadata={'path_param': { 'field_name': 'zone_id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -17,7 +20,7 @@ class GetTldDomainItemQueryParams:
     txt: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'TXT', 'style': 'form', 'explode': True }})
     api_key: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'api_key', 'style': 'form', 'explode': True }})
     country: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'country', 'style': 'form', 'explode': True }})
-    date: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'date', 'style': 'form', 'explode': True }})
+    date_: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'date', 'style': 'form', 'explode': True }})
     domain: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'domain', 'style': 'form', 'explode': True }})
     is_dead: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'isDead', 'style': 'form', 'explode': True }})
     limit: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'limit', 'style': 'form', 'explode': True }})
@@ -26,13 +29,13 @@ class GetTldDomainItemQueryParams:
 
 @dataclass
 class GetTldDomainItemRequest:
-    path_params: GetTldDomainItemPathParams = field(default=None)
-    query_params: GetTldDomainItemQueryParams = field(default=None)
+    path_params: GetTldDomainItemPathParams = field()
+    query_params: GetTldDomainItemQueryParams = field()
     
 
 @dataclass
 class GetTldDomainItemResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     search_results: Optional[shared.SearchResults] = field(default=None)
-    status_code: int = field(default=None)
     

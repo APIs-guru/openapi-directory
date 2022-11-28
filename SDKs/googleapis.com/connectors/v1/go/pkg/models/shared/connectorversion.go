@@ -9,6 +9,8 @@ const (
 	ConnectorVersionLaunchStageEnumDeprecated             ConnectorVersionLaunchStageEnum = "DEPRECATED"
 )
 
+// ConnectorVersion
+// ConnectorVersion indicates a specific version of a connector.
 type ConnectorVersion struct {
 	AuthConfigTemplates      []AuthConfigTemplate             `json:"authConfigTemplates,omitempty"`
 	ConfigVariableTemplates  []ConfigVariableTemplate         `json:"configVariableTemplates,omitempty"`

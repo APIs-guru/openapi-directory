@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import List,Optional
+from typing import Optional
 from sdk.models import shared
 
 
@@ -11,18 +11,18 @@ class ListChecksQueryParams:
 
 @dataclass
 class ListChecksSecurity:
-    api_key: shared.SchemeAPIKey = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    api_key: shared.SchemeAPIKey = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
     
 
 @dataclass
 class ListChecksRequest:
-    query_params: ListChecksQueryParams = field(default=None)
-    security: ListChecksSecurity = field(default=None)
+    query_params: ListChecksQueryParams = field()
+    security: ListChecksSecurity = field()
     
 
 @dataclass
 class ListChecksResponse:
+    content_type: str = field()
+    status_code: int = field()
     checks_output: Optional[shared.ChecksOutput] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

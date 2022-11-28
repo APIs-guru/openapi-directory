@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostModifyHostsActionEnum(str, Enum):
     MODIFY_HOSTS = "ModifyHosts"
@@ -10,8 +14,8 @@ class PostModifyHostsVersionEnum(str, Enum):
 
 @dataclass
 class PostModifyHostsQueryParams:
-    action: PostModifyHostsActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostModifyHostsVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostModifyHostsActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostModifyHostsVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostModifyHostsHeaders:
 
 @dataclass
 class PostModifyHostsRequest:
-    query_params: PostModifyHostsQueryParams = field(default=None)
-    headers: PostModifyHostsHeaders = field(default=None)
+    headers: PostModifyHostsHeaders = field()
+    query_params: PostModifyHostsQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostModifyHostsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

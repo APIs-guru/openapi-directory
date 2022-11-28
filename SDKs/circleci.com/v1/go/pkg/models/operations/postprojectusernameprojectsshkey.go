@@ -20,14 +20,14 @@ type PostProjectUsernameProjectSSHKeyRequestBody struct {
 	PrivateKey *string `json:"private_key,omitempty"`
 }
 
+type PostProjectUsernameProjectSSHKeyDefaultApplicationJSON struct {
+	Message *string `json:"message,omitempty"`
+}
+
 type PostProjectUsernameProjectSSHKeyRequest struct {
 	PathParams PostProjectUsernameProjectSSHKeyPathParams
 	Headers    PostProjectUsernameProjectSSHKeyHeaders
 	Request    PostProjectUsernameProjectSSHKeyRequestBody `request:"mediaType=application/json"`
-}
-
-type PostProjectUsernameProjectSSHKeyDefaultApplicationJSON struct {
-	Message *string `json:"message,omitempty"`
 }
 
 type PostProjectUsernameProjectSSHKeyResponse struct {

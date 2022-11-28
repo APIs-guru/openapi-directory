@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetCreateCustomVerificationEmailTemplateActionEnum(str, Enum):
     CREATE_CUSTOM_VERIFICATION_EMAIL_TEMPLATE = "CreateCustomVerificationEmailTemplate"
@@ -10,14 +14,14 @@ class GetCreateCustomVerificationEmailTemplateVersionEnum(str, Enum):
 
 @dataclass
 class GetCreateCustomVerificationEmailTemplateQueryParams:
-    action: GetCreateCustomVerificationEmailTemplateActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    failure_redirection_url: str = field(default=None, metadata={'query_param': { 'field_name': 'FailureRedirectionURL', 'style': 'form', 'explode': True }})
-    from_email_address: str = field(default=None, metadata={'query_param': { 'field_name': 'FromEmailAddress', 'style': 'form', 'explode': True }})
-    success_redirection_url: str = field(default=None, metadata={'query_param': { 'field_name': 'SuccessRedirectionURL', 'style': 'form', 'explode': True }})
-    template_content: str = field(default=None, metadata={'query_param': { 'field_name': 'TemplateContent', 'style': 'form', 'explode': True }})
-    template_name: str = field(default=None, metadata={'query_param': { 'field_name': 'TemplateName', 'style': 'form', 'explode': True }})
-    template_subject: str = field(default=None, metadata={'query_param': { 'field_name': 'TemplateSubject', 'style': 'form', 'explode': True }})
-    version: GetCreateCustomVerificationEmailTemplateVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: GetCreateCustomVerificationEmailTemplateActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    failure_redirection_url: str = field(metadata={'query_param': { 'field_name': 'FailureRedirectionURL', 'style': 'form', 'explode': True }})
+    from_email_address: str = field(metadata={'query_param': { 'field_name': 'FromEmailAddress', 'style': 'form', 'explode': True }})
+    success_redirection_url: str = field(metadata={'query_param': { 'field_name': 'SuccessRedirectionURL', 'style': 'form', 'explode': True }})
+    template_content: str = field(metadata={'query_param': { 'field_name': 'TemplateContent', 'style': 'form', 'explode': True }})
+    template_name: str = field(metadata={'query_param': { 'field_name': 'TemplateName', 'style': 'form', 'explode': True }})
+    template_subject: str = field(metadata={'query_param': { 'field_name': 'TemplateSubject', 'style': 'form', 'explode': True }})
+    version: GetCreateCustomVerificationEmailTemplateVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -33,13 +37,13 @@ class GetCreateCustomVerificationEmailTemplateHeaders:
 
 @dataclass
 class GetCreateCustomVerificationEmailTemplateRequest:
-    query_params: GetCreateCustomVerificationEmailTemplateQueryParams = field(default=None)
-    headers: GetCreateCustomVerificationEmailTemplateHeaders = field(default=None)
+    headers: GetCreateCustomVerificationEmailTemplateHeaders = field()
+    query_params: GetCreateCustomVerificationEmailTemplateQueryParams = field()
     
 
 @dataclass
 class GetCreateCustomVerificationEmailTemplateResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

@@ -1,6 +1,7 @@
 
 
+
 export enum FacetStyleEnum {
-    Static = "STATIC"
-,    Dynamic = "DYNAMIC"
+    Static = "STATIC",
+    Dynamic = "DYNAMIC"
 }

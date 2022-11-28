@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,List,Optional
 from sdk.models import shared
 
 
 @dataclass
 class GetBlacklistReportsQueryParams:
-    blacklist_item_names: List[str] = field(default=None, metadata={'query_param': { 'field_name': 'BlacklistItemNames', 'style': 'form', 'explode': True }})
+    blacklist_item_names: List[str] = field(metadata={'query_param': { 'field_name': 'BlacklistItemNames', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -21,16 +24,16 @@ class GetBlacklistReportsHeaders:
 
 @dataclass
 class GetBlacklistReportsRequest:
-    query_params: GetBlacklistReportsQueryParams = field(default=None)
-    headers: GetBlacklistReportsHeaders = field(default=None)
+    headers: GetBlacklistReportsHeaders = field()
+    query_params: GetBlacklistReportsQueryParams = field()
     
 
 @dataclass
 class GetBlacklistReportsResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     get_blacklist_reports_response: Optional[shared.GetBlacklistReportsResponse] = field(default=None)
     not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     too_many_requests_exception: Optional[Any] = field(default=None)
     

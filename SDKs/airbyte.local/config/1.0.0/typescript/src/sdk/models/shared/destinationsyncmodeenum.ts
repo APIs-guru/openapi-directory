@@ -1,7 +1,8 @@
 
 
+
 export enum DestinationSyncModeEnum {
-    Append = "append"
-,    Overwrite = "overwrite"
-,    AppendDedup = "append_dedup"
+    Append = "append",
+    Overwrite = "overwrite",
+    AppendDedup = "append_dedup"
 }

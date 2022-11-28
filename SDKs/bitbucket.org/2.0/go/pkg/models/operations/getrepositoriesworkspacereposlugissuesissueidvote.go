@@ -10,22 +10,10 @@ type GetRepositoriesWorkspaceRepoSlugIssuesIssueIDVotePathParams struct {
 	Workspace string `pathParam:"style=simple,explode=false,name=workspace"`
 }
 
-type GetRepositoriesWorkspaceRepoSlugIssuesIssueIDVoteSecurityOption1 struct {
-	Oauth2 shared.SchemeOauth2 `security:"scheme,type=oauth2"`
-}
-
-type GetRepositoriesWorkspaceRepoSlugIssuesIssueIDVoteSecurityOption2 struct {
-	Basic shared.SchemeBasic `security:"scheme,type=http,subtype=basic"`
-}
-
-type GetRepositoriesWorkspaceRepoSlugIssuesIssueIDVoteSecurityOption3 struct {
-	APIKey shared.SchemeAPIKey `security:"scheme,type=apiKey,subtype=header"`
-}
-
 type GetRepositoriesWorkspaceRepoSlugIssuesIssueIDVoteSecurity struct {
-	Option1 *GetRepositoriesWorkspaceRepoSlugIssuesIssueIDVoteSecurityOption1 `security:"option"`
-	Option2 *GetRepositoriesWorkspaceRepoSlugIssuesIssueIDVoteSecurityOption2 `security:"option"`
-	Option3 *GetRepositoriesWorkspaceRepoSlugIssuesIssueIDVoteSecurityOption3 `security:"option"`
+	Oauth2 *shared.SchemeOauth2 `security:"scheme,type=oauth2"`
+	Basic  *shared.SchemeBasic  `security:"scheme,type=http,subtype=basic"`
+	APIKey *shared.SchemeAPIKey `security:"scheme,type=apiKey,subtype=header"`
 }
 
 type GetRepositoriesWorkspaceRepoSlugIssuesIssueIDVoteRequest struct {

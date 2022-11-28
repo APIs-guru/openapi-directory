@@ -1,5 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SslCertificateTypeEnum } from "./sslcertificatetypeenum";
 import { SslSubjectAltName } from "./sslsubjectaltname";
 import { SslCertificateValidationLevelEnum } from "./sslcertificatevalidationlevelenum";
@@ -7,28 +6,29 @@ import { SslCertificateRequestValidation } from "./sslcertificaterequestvalidati
 import { SslCertificateVendorEnum } from "./sslcertificatevendorenum";
 
 
+
 export class SslCertificateRequestDetail extends SpeakeasyBase {
-  @Metadata({ data: "json, name=certificate_type" })
+  @SpeakeasyMetadata({ data: "json, name=certificate_type" })
   certificateType?: SslCertificateTypeEnum;
 
-  @Metadata({ data: "json, name=common_name" })
+  @SpeakeasyMetadata({ data: "json, name=common_name" })
   commonName?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: number;
 
-  @Metadata({ data: "json, name=order_code" })
+  @SpeakeasyMetadata({ data: "json, name=order_code" })
   orderCode?: string;
 
-  @Metadata({ data: "json, name=subject_alt_names", elemType: shared.SslSubjectAltName })
+  @SpeakeasyMetadata({ data: "json, name=subject_alt_names", elemType: SslSubjectAltName })
   subjectAltNames?: SslSubjectAltName[];
 
-  @Metadata({ data: "json, name=validation_level" })
+  @SpeakeasyMetadata({ data: "json, name=validation_level" })
   validationLevel?: SslCertificateValidationLevelEnum;
 
-  @Metadata({ data: "json, name=validations", elemType: shared.SslCertificateRequestValidation })
+  @SpeakeasyMetadata({ data: "json, name=validations", elemType: SslCertificateRequestValidation })
   validations?: SslCertificateRequestValidation[];
 
-  @Metadata({ data: "json, name=vendor" })
+  @SpeakeasyMetadata({ data: "json, name=vendor" })
   vendor?: SslCertificateVendorEnum;
 }

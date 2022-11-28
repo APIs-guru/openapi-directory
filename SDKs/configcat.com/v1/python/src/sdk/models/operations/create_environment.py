@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class CreateEnvironmentPathParams:
-    product_id: str = field(default=None, metadata={'path_param': { 'field_name': 'productId', 'style': 'simple', 'explode': False }})
+    product_id: str = field(metadata={'path_param': { 'field_name': 'productId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -17,14 +17,14 @@ class CreateEnvironmentRequests:
 
 @dataclass
 class CreateEnvironmentRequest:
-    path_params: CreateEnvironmentPathParams = field(default=None)
-    request: CreateEnvironmentRequests = field(default=None)
+    path_params: CreateEnvironmentPathParams = field()
+    request: CreateEnvironmentRequests = field()
     
 
 @dataclass
 class CreateEnvironmentResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     environment_model: Optional[shared.EnvironmentModel] = field(default=None)
     environment_model_haljson: Optional[shared.EnvironmentModelHaljson] = field(default=None)
-    status_code: int = field(default=None)
     

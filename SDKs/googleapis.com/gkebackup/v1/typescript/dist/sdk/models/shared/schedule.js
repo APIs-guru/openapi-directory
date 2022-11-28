@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // Schedule
 /**
  * Schedule defines scheduling parameters for automatically creating Backups via this BackupPlan.
@@ -33,11 +33,11 @@ var Schedule = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=cronSchedule" }),
+        SpeakeasyMetadata({ data: "json, name=cronSchedule" }),
         __metadata("design:type", String)
     ], Schedule.prototype, "cronSchedule", void 0);
     __decorate([
-        Metadata({ data: "json, name=paused" }),
+        SpeakeasyMetadata({ data: "json, name=paused" }),
         __metadata("design:type", Boolean)
     ], Schedule.prototype, "paused", void 0);
     return Schedule;

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var StateHistoryStateEnum;
 (function (StateHistoryStateEnum) {
     StateHistoryStateEnum["StateUnspecified"] = "STATE_UNSPECIFIED";
@@ -42,15 +42,15 @@ var StateHistory = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=actorUserId" }),
+        SpeakeasyMetadata({ data: "json, name=actorUserId" }),
         __metadata("design:type", String)
     ], StateHistory.prototype, "actorUserId", void 0);
     __decorate([
-        Metadata({ data: "json, name=state" }),
+        SpeakeasyMetadata({ data: "json, name=state" }),
         __metadata("design:type", String)
     ], StateHistory.prototype, "state", void 0);
     __decorate([
-        Metadata({ data: "json, name=stateTimestamp" }),
+        SpeakeasyMetadata({ data: "json, name=stateTimestamp" }),
         __metadata("design:type", String)
     ], StateHistory.prototype, "stateTimestamp", void 0);
     return StateHistory;

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // LoginResponse
@@ -6,18 +7,18 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Payload of successful login
 **/
 export class LoginResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=admin" })
+  @SpeakeasyMetadata({ data: "json, name=admin" })
   admin?: boolean;
 
-  @Metadata({ data: "json, name=login_id" })
+  @SpeakeasyMetadata({ data: "json, name=login_id" })
   loginId?: number;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=read_only" })
+  @SpeakeasyMetadata({ data: "json, name=read_only" })
   readOnly?: boolean;
 
-  @Metadata({ data: "json, name=token" })
+  @SpeakeasyMetadata({ data: "json, name=token" })
   token?: string;
 }

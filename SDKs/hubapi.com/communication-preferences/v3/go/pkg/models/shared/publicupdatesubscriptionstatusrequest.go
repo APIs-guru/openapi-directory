@@ -12,6 +12,8 @@ const (
 	PublicUpdateSubscriptionStatusRequestLegalBasisEnumLegitimateInterestOther  PublicUpdateSubscriptionStatusRequestLegalBasisEnum = "LEGITIMATE_INTEREST_OTHER"
 )
 
+// PublicUpdateSubscriptionStatusRequest
+// A request to change the status of a contact's subscription.
 type PublicUpdateSubscriptionStatusRequest struct {
 	EmailAddress          string                                               `json:"emailAddress"`
 	LegalBasis            *PublicUpdateSubscriptionStatusRequestLegalBasisEnum `json:"legalBasis,omitempty"`

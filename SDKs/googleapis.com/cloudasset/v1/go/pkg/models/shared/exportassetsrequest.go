@@ -12,6 +12,8 @@ const (
 	ExportAssetsRequestContentTypeEnumRelationship           ExportAssetsRequestContentTypeEnum = "RELATIONSHIP"
 )
 
+// ExportAssetsRequest
+// Export asset request.
 type ExportAssetsRequest struct {
 	AssetTypes        []string                            `json:"assetTypes,omitempty"`
 	ContentType       *ExportAssetsRequestContentTypeEnum `json:"contentType,omitempty"`

@@ -1,5 +1,7 @@
 package shared
 
+// GoogleCloudApigeeV1DatastoreConfig
+// Configuration detail for datastore
 type GoogleCloudApigeeV1DatastoreConfig struct {
 	BucketName  *string `json:"bucketName,omitempty"`
 	DatasetName *string `json:"datasetName,omitempty"`

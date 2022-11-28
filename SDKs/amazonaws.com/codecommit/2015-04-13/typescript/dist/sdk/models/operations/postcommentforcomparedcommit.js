@@ -1,0 +1,198 @@
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import * as shared from "../shared";
+export var PostCommentForComparedCommitXAmzTargetEnum;
+(function (PostCommentForComparedCommitXAmzTargetEnum) {
+    PostCommentForComparedCommitXAmzTargetEnum["CodeCommit20150413PostCommentForComparedCommit"] = "CodeCommit_20150413.PostCommentForComparedCommit";
+})(PostCommentForComparedCommitXAmzTargetEnum || (PostCommentForComparedCommitXAmzTargetEnum = {}));
+var PostCommentForComparedCommitHeaders = /** @class */ (function (_super) {
+    __extends(PostCommentForComparedCommitHeaders, _super);
+    function PostCommentForComparedCommitHeaders() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
+        __metadata("design:type", String)
+    ], PostCommentForComparedCommitHeaders.prototype, "xAmzAlgorithm", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
+        __metadata("design:type", String)
+    ], PostCommentForComparedCommitHeaders.prototype, "xAmzContentSha256", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
+        __metadata("design:type", String)
+    ], PostCommentForComparedCommitHeaders.prototype, "xAmzCredential", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
+        __metadata("design:type", String)
+    ], PostCommentForComparedCommitHeaders.prototype, "xAmzDate", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
+        __metadata("design:type", String)
+    ], PostCommentForComparedCommitHeaders.prototype, "xAmzSecurityToken", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
+        __metadata("design:type", String)
+    ], PostCommentForComparedCommitHeaders.prototype, "xAmzSignature", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
+        __metadata("design:type", String)
+    ], PostCommentForComparedCommitHeaders.prototype, "xAmzSignedHeaders", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Target" }),
+        __metadata("design:type", String)
+    ], PostCommentForComparedCommitHeaders.prototype, "xAmzTarget", void 0);
+    return PostCommentForComparedCommitHeaders;
+}(SpeakeasyBase));
+export { PostCommentForComparedCommitHeaders };
+var PostCommentForComparedCommitRequest = /** @class */ (function (_super) {
+    __extends(PostCommentForComparedCommitRequest, _super);
+    function PostCommentForComparedCommitRequest() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", PostCommentForComparedCommitHeaders)
+    ], PostCommentForComparedCommitRequest.prototype, "headers", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
+        __metadata("design:type", shared.PostCommentForComparedCommitInput)
+    ], PostCommentForComparedCommitRequest.prototype, "request", void 0);
+    return PostCommentForComparedCommitRequest;
+}(SpeakeasyBase));
+export { PostCommentForComparedCommitRequest };
+var PostCommentForComparedCommitResponse = /** @class */ (function (_super) {
+    __extends(PostCommentForComparedCommitResponse, _super);
+    function PostCommentForComparedCommitResponse() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", Object)
+    ], PostCommentForComparedCommitResponse.prototype, "beforeCommitIdAndAfterCommitIdAreSameException", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", Object)
+    ], PostCommentForComparedCommitResponse.prototype, "clientRequestTokenRequiredException", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", Object)
+    ], PostCommentForComparedCommitResponse.prototype, "commentContentRequiredException", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", Object)
+    ], PostCommentForComparedCommitResponse.prototype, "commentContentSizeLimitExceededException", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", Object)
+    ], PostCommentForComparedCommitResponse.prototype, "commitDoesNotExistException", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", Object)
+    ], PostCommentForComparedCommitResponse.prototype, "commitIdRequiredException", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", String)
+    ], PostCommentForComparedCommitResponse.prototype, "contentType", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", Object)
+    ], PostCommentForComparedCommitResponse.prototype, "encryptionIntegrityChecksFailedException", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", Object)
+    ], PostCommentForComparedCommitResponse.prototype, "encryptionKeyAccessDeniedException", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", Object)
+    ], PostCommentForComparedCommitResponse.prototype, "encryptionKeyDisabledException", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", Object)
+    ], PostCommentForComparedCommitResponse.prototype, "encryptionKeyNotFoundException", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", Object)
+    ], PostCommentForComparedCommitResponse.prototype, "encryptionKeyUnavailableException", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", Object)
+    ], PostCommentForComparedCommitResponse.prototype, "idempotencyParameterMismatchException", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", Object)
+    ], PostCommentForComparedCommitResponse.prototype, "invalidClientRequestTokenException", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", Object)
+    ], PostCommentForComparedCommitResponse.prototype, "invalidCommitIdException", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", Object)
+    ], PostCommentForComparedCommitResponse.prototype, "invalidFileLocationException", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", Object)
+    ], PostCommentForComparedCommitResponse.prototype, "invalidFilePositionException", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", Object)
+    ], PostCommentForComparedCommitResponse.prototype, "invalidPathException", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", Object)
+    ], PostCommentForComparedCommitResponse.prototype, "invalidRelativeFileVersionEnumException", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", Object)
+    ], PostCommentForComparedCommitResponse.prototype, "invalidRepositoryNameException", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", Object)
+    ], PostCommentForComparedCommitResponse.prototype, "pathDoesNotExistException", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", Object)
+    ], PostCommentForComparedCommitResponse.prototype, "pathRequiredException", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", shared.PostCommentForComparedCommitOutput)
+    ], PostCommentForComparedCommitResponse.prototype, "postCommentForComparedCommitOutput", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", Object)
+    ], PostCommentForComparedCommitResponse.prototype, "repositoryDoesNotExistException", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", Object)
+    ], PostCommentForComparedCommitResponse.prototype, "repositoryNameRequiredException", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", Number)
+    ], PostCommentForComparedCommitResponse.prototype, "statusCode", void 0);
+    return PostCommentForComparedCommitResponse;
+}(SpeakeasyBase));
+export { PostCommentForComparedCommitResponse };

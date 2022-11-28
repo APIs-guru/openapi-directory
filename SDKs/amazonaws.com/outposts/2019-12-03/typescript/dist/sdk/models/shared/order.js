@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { LineItem } from "./lineitem";
 import { PaymentOptionEnum } from "./paymentoptionenum";
 import { OrderStatusEnum } from "./orderstatusenum";
 // Order
@@ -36,31 +36,31 @@ var Order = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=LineItems", elemType: shared.LineItem }),
+        SpeakeasyMetadata({ data: "json, name=LineItems", elemType: LineItem }),
         __metadata("design:type", Array)
     ], Order.prototype, "lineItems", void 0);
     __decorate([
-        Metadata({ data: "json, name=OrderFulfilledDate" }),
+        SpeakeasyMetadata({ data: "json, name=OrderFulfilledDate" }),
         __metadata("design:type", Date)
     ], Order.prototype, "orderFulfilledDate", void 0);
     __decorate([
-        Metadata({ data: "json, name=OrderId" }),
+        SpeakeasyMetadata({ data: "json, name=OrderId" }),
         __metadata("design:type", String)
     ], Order.prototype, "orderId", void 0);
     __decorate([
-        Metadata({ data: "json, name=OrderSubmissionDate" }),
+        SpeakeasyMetadata({ data: "json, name=OrderSubmissionDate" }),
         __metadata("design:type", Date)
     ], Order.prototype, "orderSubmissionDate", void 0);
     __decorate([
-        Metadata({ data: "json, name=OutpostId" }),
+        SpeakeasyMetadata({ data: "json, name=OutpostId" }),
         __metadata("design:type", String)
     ], Order.prototype, "outpostId", void 0);
     __decorate([
-        Metadata({ data: "json, name=PaymentOption" }),
+        SpeakeasyMetadata({ data: "json, name=PaymentOption" }),
         __metadata("design:type", String)
     ], Order.prototype, "paymentOption", void 0);
     __decorate([
-        Metadata({ data: "json, name=Status" }),
+        SpeakeasyMetadata({ data: "json, name=Status" }),
         __metadata("design:type", String)
     ], Order.prototype, "status", void 0);
     return Order;

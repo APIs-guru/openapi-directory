@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// CardResponse
+// Current state of Card Definition
 type CardResponse struct {
 	Actions   CardActions     `json:"actions"`
 	CreatedAt *time.Time      `json:"createdAt,omitempty"`

@@ -1,9 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum CustomVoiceParamsReportedUsageEnum {
-    ReportedUsageUnspecified = "REPORTED_USAGE_UNSPECIFIED"
-,    Realtime = "REALTIME"
-,    Offline = "OFFLINE"
+    ReportedUsageUnspecified = "REPORTED_USAGE_UNSPECIFIED",
+    Realtime = "REALTIME",
+    Offline = "OFFLINE"
 }
 
 
@@ -12,9 +13,9 @@ export enum CustomVoiceParamsReportedUsageEnum {
  * Description of the custom voice to be synthesized.
 **/
 export class CustomVoiceParams extends SpeakeasyBase {
-  @Metadata({ data: "json, name=model" })
+  @SpeakeasyMetadata({ data: "json, name=model" })
   model?: string;
 
-  @Metadata({ data: "json, name=reportedUsage" })
+  @SpeakeasyMetadata({ data: "json, name=reportedUsage" })
   reportedUsage?: CustomVoiceParamsReportedUsageEnum;
 }

@@ -1,5 +1,7 @@
 package shared
 
+// ServicePrincipalUpdateParameters
+// Request parameters for update an existing service principal.
 type ServicePrincipalUpdateParameters struct {
 	AccountEnabled            *bool                               `json:"accountEnabled,omitempty"`
 	AppRoleAssignmentRequired *bool                               `json:"appRoleAssignmentRequired,omitempty"`

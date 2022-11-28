@@ -1,25 +1,25 @@
 from dataclasses import dataclass, field
-
+from sdk.models import shared
 
 
 @dataclass
 class GetShopsShopIDShippingProfilesPathParams:
-    shop_id: str = field(default=None, metadata={'path_param': { 'field_name': 'shop_id', 'style': 'simple', 'explode': False }})
+    shop_id: str = field(metadata={'path_param': { 'field_name': 'shop_id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetShopsShopIDShippingProfilesSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class GetShopsShopIDShippingProfilesRequest:
-    path_params: GetShopsShopIDShippingProfilesPathParams = field(default=None)
-    security: GetShopsShopIDShippingProfilesSecurity = field(default=None)
+    path_params: GetShopsShopIDShippingProfilesPathParams = field()
+    security: GetShopsShopIDShippingProfilesSecurity = field()
     
 
 @dataclass
 class GetShopsShopIDShippingProfilesResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

@@ -4,8 +4,8 @@ from typing import Optional
 
 @dataclass
 class PutInstancesIDMetadataNamePathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -15,13 +15,13 @@ class PutInstancesIDMetadataNameHeaders:
 
 @dataclass
 class PutInstancesIDMetadataNameRequest:
-    path_params: PutInstancesIDMetadataNamePathParams = field(default=None)
-    headers: PutInstancesIDMetadataNameHeaders = field(default=None)
+    headers: PutInstancesIDMetadataNameHeaders = field()
+    path_params: PutInstancesIDMetadataNamePathParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/plain' }})
     
 
 @dataclass
 class PutInstancesIDMetadataNameResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

@@ -1,4 +1,4 @@
-from .__xgafv_enum import *
+from ._xgafv_enum import *
 from .alt_enum import *
 from .googleprivacydlpv2action import *
 from .googleprivacydlpv2analyzedatasourceriskdetails import *
@@ -55,6 +55,7 @@ from .googleprivacydlpv2dlpjob import *
 from .googleprivacydlpv2documentlocation import *
 from .googleprivacydlpv2entityid import *
 from .googleprivacydlpv2error import *
+from .googleprivacydlpv2excludebyhotword import *
 from .googleprivacydlpv2excludeinfotypes import *
 from .googleprivacydlpv2exclusionrule import *
 from .googleprivacydlpv2expressions import *
@@ -151,6 +152,7 @@ from .googleprivacydlpv2row import *
 from .googleprivacydlpv2savefindings import *
 from .googleprivacydlpv2schedule import *
 from .googleprivacydlpv2selectedinfotypes import *
+from .googleprivacydlpv2sensitivityscore import *
 from .googleprivacydlpv2statisticaltable import *
 from .googleprivacydlpv2storageconfig import *
 from .googleprivacydlpv2storagemetadatalabel import *

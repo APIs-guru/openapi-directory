@@ -1,12 +1,15 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class DeleteResourcePolicyStatementPathParams:
-    resource_arn: str = field(default=None, metadata={'path_param': { 'field_name': 'resourceArn', 'style': 'simple', 'explode': False }})
-    statement_id: str = field(default=None, metadata={'path_param': { 'field_name': 'statementId', 'style': 'simple', 'explode': False }})
+    resource_arn: str = field(metadata={'path_param': { 'field_name': 'resourceArn', 'style': 'simple', 'explode': False }})
+    statement_id: str = field(metadata={'path_param': { 'field_name': 'statementId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -27,18 +30,18 @@ class DeleteResourcePolicyStatementHeaders:
 
 @dataclass
 class DeleteResourcePolicyStatementRequest:
-    path_params: DeleteResourcePolicyStatementPathParams = field(default=None)
-    query_params: DeleteResourcePolicyStatementQueryParams = field(default=None)
-    headers: DeleteResourcePolicyStatementHeaders = field(default=None)
+    headers: DeleteResourcePolicyStatementHeaders = field()
+    path_params: DeleteResourcePolicyStatementPathParams = field()
+    query_params: DeleteResourcePolicyStatementQueryParams = field()
     
 
 @dataclass
 class DeleteResourcePolicyStatementResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     delete_resource_policy_statement_response: Optional[shared.DeleteResourcePolicyStatementResponse] = field(default=None)
     internal_server_exception: Optional[Any] = field(default=None)
     precondition_failed_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     

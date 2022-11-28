@@ -25,6 +25,8 @@ const (
 	RestoreConfigVolumeDataRestorePolicyEnumNoVolumeDataRestoration            RestoreConfigVolumeDataRestorePolicyEnum = "NO_VOLUME_DATA_RESTORATION"
 )
 
+// RestoreConfig
+// Configuration of a restore. Next id: 9
 type RestoreConfig struct {
 	AllNamespaces                 *bool                                           `json:"allNamespaces,omitempty"`
 	ClusterResourceConflictPolicy *RestoreConfigClusterResourceConflictPolicyEnum `json:"clusterResourceConflictPolicy,omitempty"`

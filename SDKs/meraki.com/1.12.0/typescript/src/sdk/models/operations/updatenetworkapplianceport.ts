@@ -1,52 +1,53 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class UpdateNetworkAppliancePortPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=networkId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=networkId" })
   networkId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=portId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=portId" })
   portId: string;
 }
 
 
 export class UpdateNetworkAppliancePortRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=accessPolicy" })
+  @SpeakeasyMetadata({ data: "json, name=accessPolicy" })
   accessPolicy?: string;
 
-  @Metadata({ data: "json, name=allowedVlans" })
+  @SpeakeasyMetadata({ data: "json, name=allowedVlans" })
   allowedVlans?: string;
 
-  @Metadata({ data: "json, name=dropUntaggedTraffic" })
+  @SpeakeasyMetadata({ data: "json, name=dropUntaggedTraffic" })
   dropUntaggedTraffic?: boolean;
 
-  @Metadata({ data: "json, name=enabled" })
+  @SpeakeasyMetadata({ data: "json, name=enabled" })
   enabled?: boolean;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: string;
 
-  @Metadata({ data: "json, name=vlan" })
+  @SpeakeasyMetadata({ data: "json, name=vlan" })
   vlan?: number;
 }
 
 
 export class UpdateNetworkAppliancePortRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: UpdateNetworkAppliancePortPathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request?: UpdateNetworkAppliancePortRequestBody;
 }
 
 
 export class UpdateNetworkAppliancePortResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   updateNetworkAppliancePort200ApplicationJsonObject?: Map<string, any>;
 }

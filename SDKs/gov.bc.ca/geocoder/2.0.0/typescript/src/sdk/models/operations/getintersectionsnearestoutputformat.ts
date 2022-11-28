@@ -1,53 +1,54 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum GetIntersectionsNearestOutputFormatOutputFormatEnum {
-    Json = "json"
-,    Geojson = "geojson"
-,    Xhtml = "xhtml"
-,    Kml = "kml"
-,    Gml = "gml"
-,    Csv = "csv"
-,    Shpz = "shpz"
+    Json = "json",
+    Geojson = "geojson",
+    Xhtml = "xhtml",
+    Kml = "kml",
+    Gml = "gml",
+    Csv = "csv",
+    Shpz = "shpz"
 }
 
 
 export class GetIntersectionsNearestOutputFormatPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=outputFormat" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=outputFormat" })
   outputFormat: GetIntersectionsNearestOutputFormatOutputFormatEnum;
 }
 
 
 export class GetIntersectionsNearestOutputFormatQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=maxDegree" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=maxDegree" })
   maxDegree?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=maxDistance" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=maxDistance" })
   maxDistance?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=minDegree" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=minDegree" })
   minDegree?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=outputSRS" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=outputSRS" })
   outputSrs?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=point" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=point" })
   point: string;
 }
 
 
 export class GetIntersectionsNearestOutputFormatRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetIntersectionsNearestOutputFormatPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetIntersectionsNearestOutputFormatQueryParams;
 }
 
 
 export class GetIntersectionsNearestOutputFormatResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

@@ -4,11 +4,15 @@ type PostAdminRecordingsStartRequestBodyCaptureHeaders struct {
 	CaseInsensitive *bool `json:"caseInsensitive,omitempty"`
 }
 
+// PostAdminRecordingsStartRequestBodyExtractBodyCriteria
+// Criteria for extracting response bodies to a separate file instead of including it in the stub mapping
 type PostAdminRecordingsStartRequestBodyExtractBodyCriteria struct {
 	BinarySizeThreshold *string `json:"binarySizeThreshold,omitempty"`
 	TextSizeThreshold   *string `json:"textSizeThreshold,omitempty"`
 }
 
+// PostAdminRecordingsStartRequestBodyFiltersBasicAuthCredentials
+// Pre-emptive basic auth credentials to match against
 type PostAdminRecordingsStartRequestBodyFiltersBasicAuthCredentials struct {
 	Password string `json:"password"`
 	Username string `json:"username"`

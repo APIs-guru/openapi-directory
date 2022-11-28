@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class RequestGroupPathParams:
-    group_id: int = field(default=None, metadata={'path_param': { 'field_name': 'group_id', 'style': 'simple', 'explode': False }})
+    group_id: int = field(metadata={'path_param': { 'field_name': 'group_id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -16,14 +19,14 @@ class RequestGroupHeaders:
 
 @dataclass
 class RequestGroupRequest:
-    path_params: RequestGroupPathParams = field(default=None)
-    headers: RequestGroupHeaders = field(default=None)
+    headers: RequestGroupHeaders = field()
+    path_params: RequestGroupPathParams = field()
     
 
 @dataclass
 class RequestGroupResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error_response: Optional[shared.ErrorResponse] = field(default=None)
     group: Optional[shared.Group] = field(default=None)
-    status_code: int = field(default=None)
     

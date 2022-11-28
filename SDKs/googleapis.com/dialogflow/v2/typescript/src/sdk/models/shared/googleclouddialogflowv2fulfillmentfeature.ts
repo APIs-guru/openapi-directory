@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum GoogleCloudDialogflowV2FulfillmentFeatureTypeEnum {
-    TypeUnspecified = "TYPE_UNSPECIFIED"
-,    Smalltalk = "SMALLTALK"
+    TypeUnspecified = "TYPE_UNSPECIFIED",
+    Smalltalk = "SMALLTALK"
 }
 
 
@@ -11,6 +12,6 @@ export enum GoogleCloudDialogflowV2FulfillmentFeatureTypeEnum {
  * Whether fulfillment is enabled for the specific feature.
 **/
 export class GoogleCloudDialogflowV2FulfillmentFeature extends SpeakeasyBase {
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: GoogleCloudDialogflowV2FulfillmentFeatureTypeEnum;
 }

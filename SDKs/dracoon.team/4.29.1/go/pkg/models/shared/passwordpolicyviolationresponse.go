@@ -1,5 +1,7 @@
 package shared
 
+// PasswordPolicyViolationResponse
+// List of violated password policies
 type PasswordPolicyViolationResponse struct {
 	Code                     int32                    `json:"code"`
 	DebugInfo                *string                  `json:"debugInfo,omitempty"`

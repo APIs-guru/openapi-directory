@@ -1,8 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { LineItem } from "./lineitem";
 import { PaymentOptionEnum } from "./paymentoptionenum";
 import { OrderStatusEnum } from "./orderstatusenum";
+
 
 
 // Order
@@ -10,24 +10,24 @@ import { OrderStatusEnum } from "./orderstatusenum";
  * Information about an order.
 **/
 export class Order extends SpeakeasyBase {
-  @Metadata({ data: "json, name=LineItems", elemType: shared.LineItem })
+  @SpeakeasyMetadata({ data: "json, name=LineItems", elemType: LineItem })
   lineItems?: LineItem[];
 
-  @Metadata({ data: "json, name=OrderFulfilledDate" })
+  @SpeakeasyMetadata({ data: "json, name=OrderFulfilledDate" })
   orderFulfilledDate?: Date;
 
-  @Metadata({ data: "json, name=OrderId" })
+  @SpeakeasyMetadata({ data: "json, name=OrderId" })
   orderId?: string;
 
-  @Metadata({ data: "json, name=OrderSubmissionDate" })
+  @SpeakeasyMetadata({ data: "json, name=OrderSubmissionDate" })
   orderSubmissionDate?: Date;
 
-  @Metadata({ data: "json, name=OutpostId" })
+  @SpeakeasyMetadata({ data: "json, name=OutpostId" })
   outpostId?: string;
 
-  @Metadata({ data: "json, name=PaymentOption" })
+  @SpeakeasyMetadata({ data: "json, name=PaymentOption" })
   paymentOption?: PaymentOptionEnum;
 
-  @Metadata({ data: "json, name=Status" })
+  @SpeakeasyMetadata({ data: "json, name=Status" })
   status?: OrderStatusEnum;
 }

@@ -1,5 +1,7 @@
 package shared
 
+// OsInfo
+// Operating system information for the VM.
 type OsInfo struct {
 	Architecture         *string `json:"architecture,omitempty"`
 	Hostname             *string `json:"hostname,omitempty"`

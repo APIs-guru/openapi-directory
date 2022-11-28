@@ -1,6 +1,7 @@
 
 
+
 export enum KafkaClusterEncryptionInTransitTypeEnum {
-    Plaintext = "PLAINTEXT"
-,    Tls = "TLS"
+    Plaintext = "PLAINTEXT",
+    Tls = "TLS"
 }

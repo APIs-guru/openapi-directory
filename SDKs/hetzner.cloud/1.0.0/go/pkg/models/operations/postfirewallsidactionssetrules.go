@@ -34,11 +34,8 @@ type PostFirewallsIDActionsSetRulesSetRulesRequest struct {
 	Rules []PostFirewallsIDActionsSetRulesSetRulesRequestRule `json:"rules"`
 }
 
-type PostFirewallsIDActionsSetRulesRequest struct {
-	PathParams PostFirewallsIDActionsSetRulesPathParams
-	Request    *PostFirewallsIDActionsSetRulesSetRulesRequest `request:"mediaType=application/json"`
-}
-
+// PostFirewallsIDActionsSetRulesActionsResponseActionError
+// Error message for the Action if error occurred, otherwise null
 type PostFirewallsIDActionsSetRulesActionsResponseActionError struct {
 	Code    string `json:"code"`
 	Message string `json:"message"`
@@ -84,6 +81,11 @@ type PostFirewallsIDActionsSetRulesActionsResponseMeta struct {
 type PostFirewallsIDActionsSetRulesActionsResponse struct {
 	Actions []PostFirewallsIDActionsSetRulesActionsResponseAction `json:"actions"`
 	Meta    *PostFirewallsIDActionsSetRulesActionsResponseMeta    `json:"meta,omitempty"`
+}
+
+type PostFirewallsIDActionsSetRulesRequest struct {
+	PathParams PostFirewallsIDActionsSetRulesPathParams
+	Request    *PostFirewallsIDActionsSetRulesSetRulesRequest `request:"mediaType=application/json"`
 }
 
 type PostFirewallsIDActionsSetRulesResponse struct {

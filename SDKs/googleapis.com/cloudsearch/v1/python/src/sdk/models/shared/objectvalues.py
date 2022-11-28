@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import structureddataobject
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ObjectValues:
-    values: Optional[List[structureddataobject.StructuredDataObject]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'values' }})
+    r"""ObjectValues
+    List of object values.
+    """
+    
+    values: Optional[List[StructuredDataObject]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('values') }})
     

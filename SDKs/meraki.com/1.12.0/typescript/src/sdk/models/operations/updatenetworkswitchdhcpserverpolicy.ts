@@ -1,45 +1,46 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class UpdateNetworkSwitchDhcpServerPolicyPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=networkId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=networkId" })
   networkId: string;
 }
 
 export enum UpdateNetworkSwitchDhcpServerPolicyRequestBodyDefaultPolicyEnum {
-    Allow = "allow"
-,    Block = "block"
+    Allow = "allow",
+    Block = "block"
 }
 
 
 export class UpdateNetworkSwitchDhcpServerPolicyRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=allowedServers" })
+  @SpeakeasyMetadata({ data: "json, name=allowedServers" })
   allowedServers?: string[];
 
-  @Metadata({ data: "json, name=blockedServers" })
+  @SpeakeasyMetadata({ data: "json, name=blockedServers" })
   blockedServers?: string[];
 
-  @Metadata({ data: "json, name=defaultPolicy" })
+  @SpeakeasyMetadata({ data: "json, name=defaultPolicy" })
   defaultPolicy?: UpdateNetworkSwitchDhcpServerPolicyRequestBodyDefaultPolicyEnum;
 }
 
 
 export class UpdateNetworkSwitchDhcpServerPolicyRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: UpdateNetworkSwitchDhcpServerPolicyPathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request?: UpdateNetworkSwitchDhcpServerPolicyRequestBody;
 }
 
 
 export class UpdateNetworkSwitchDhcpServerPolicyResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   updateNetworkSwitchDhcpServerPolicy200ApplicationJsonObject?: Map<string, any>;
 }

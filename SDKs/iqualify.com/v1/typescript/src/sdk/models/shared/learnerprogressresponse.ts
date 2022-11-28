@@ -1,25 +1,26 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class LearnerProgressResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=completion" })
+  @SpeakeasyMetadata({ data: "json, name=completion" })
   completion?: string;
 
-  @Metadata({ data: "json, name=courseId" })
+  @SpeakeasyMetadata({ data: "json, name=courseId" })
   courseId?: string;
 
-  @Metadata({ data: "json, name=email" })
+  @SpeakeasyMetadata({ data: "json, name=email" })
   email?: string;
 
-  @Metadata({ data: "json, name=firstName" })
+  @SpeakeasyMetadata({ data: "json, name=firstName" })
   firstName?: string;
 
-  @Metadata({ data: "json, name=lastLoggedInAt" })
+  @SpeakeasyMetadata({ data: "json, name=lastLoggedInAt" })
   lastLoggedInAt?: Date;
 
-  @Metadata({ data: "json, name=lastName" })
+  @SpeakeasyMetadata({ data: "json, name=lastName" })
   lastName?: string;
 
-  @Metadata({ data: "json, name=personId" })
+  @SpeakeasyMetadata({ data: "json, name=personId" })
   personId?: string;
 }

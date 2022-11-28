@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostCreateUserGroupActionEnum(str, Enum):
     CREATE_USER_GROUP = "CreateUserGroup"
@@ -10,8 +14,8 @@ class PostCreateUserGroupVersionEnum(str, Enum):
 
 @dataclass
 class PostCreateUserGroupQueryParams:
-    action: PostCreateUserGroupActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostCreateUserGroupVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostCreateUserGroupActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostCreateUserGroupVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostCreateUserGroupHeaders:
 
 @dataclass
 class PostCreateUserGroupRequest:
-    query_params: PostCreateUserGroupQueryParams = field(default=None)
-    headers: PostCreateUserGroupHeaders = field(default=None)
+    headers: PostCreateUserGroupHeaders = field()
+    query_params: PostCreateUserGroupQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostCreateUserGroupResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

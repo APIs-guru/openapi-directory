@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ComponentPlatform } from "./componentplatform";
+
 
 
 // ComponentLatestVersion
@@ -8,21 +8,21 @@ import { ComponentPlatform } from "./componentplatform";
  * Contains information about the latest version of a component.
 **/
 export class ComponentLatestVersion extends SpeakeasyBase {
-  @Metadata({ data: "json, name=arn" })
+  @SpeakeasyMetadata({ data: "json, name=arn" })
   arn?: string;
 
-  @Metadata({ data: "json, name=componentVersion" })
+  @SpeakeasyMetadata({ data: "json, name=componentVersion" })
   componentVersion?: string;
 
-  @Metadata({ data: "json, name=creationTimestamp" })
+  @SpeakeasyMetadata({ data: "json, name=creationTimestamp" })
   creationTimestamp?: Date;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=platforms", elemType: shared.ComponentPlatform })
+  @SpeakeasyMetadata({ data: "json, name=platforms", elemType: ComponentPlatform })
   platforms?: ComponentPlatform[];
 
-  @Metadata({ data: "json, name=publisher" })
+  @SpeakeasyMetadata({ data: "json, name=publisher" })
   publisher?: string;
 }

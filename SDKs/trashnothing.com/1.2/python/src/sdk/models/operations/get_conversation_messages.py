@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
 @dataclass
 class GetConversationMessagesPathParams:
-    conversation_id: str = field(default=None, metadata={'path_param': { 'field_name': 'conversation_id', 'style': 'simple', 'explode': False }})
+    conversation_id: str = field(metadata={'path_param': { 'field_name': 'conversation_id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -17,24 +18,24 @@ class GetConversationMessagesQueryParams:
     per_page: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'per_page', 'style': 'form', 'explode': True }})
     
 
-@dataclass
-class GetConversationMessagesRequest:
-    path_params: GetConversationMessagesPathParams = field(default=None)
-    query_params: GetConversationMessagesQueryParams = field(default=None)
-    
-
 @dataclass_json
 @dataclass
 class GetConversationMessages200ApplicationJSON:
-    conversation: Optional[shared.Conversation] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'conversation' }})
-    messages: Optional[List[shared.Message]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'messages' }})
-    page: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'page' }})
-    per_page: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'per_page' }})
+    conversation: Optional[shared.Conversation] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('conversation') }})
+    messages: Optional[List[shared.Message]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('messages') }})
+    page: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('page') }})
+    per_page: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('per_page') }})
+    
+
+@dataclass
+class GetConversationMessagesRequest:
+    path_params: GetConversationMessagesPathParams = field()
+    query_params: GetConversationMessagesQueryParams = field()
     
 
 @dataclass
 class GetConversationMessagesResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     get_conversation_messages_200_application_json_object: Optional[GetConversationMessages200ApplicationJSON] = field(default=None)
     

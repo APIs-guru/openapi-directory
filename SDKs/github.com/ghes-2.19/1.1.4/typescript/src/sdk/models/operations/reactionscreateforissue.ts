@@ -1,67 +1,68 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class ReactionsCreateForIssuePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=issue_number" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=issue_number" })
   issueNumber: number;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=owner" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=owner" })
   owner: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=repo" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=repo" })
   repo: string;
 }
 
 export enum ReactionsCreateForIssueRequestBodyContentEnum {
-    Plus1 = "+1"
-,    Minus1 = "-1"
-,    Laugh = "laugh"
-,    Confused = "confused"
-,    Heart = "heart"
-,    Hooray = "hooray"
-,    Rocket = "rocket"
-,    Eyes = "eyes"
+    Plus1 = "+1",
+    Minus1 = "-1",
+    Laugh = "laugh",
+    Confused = "confused",
+    Heart = "heart",
+    Hooray = "hooray",
+    Rocket = "rocket",
+    Eyes = "eyes"
 }
 
 
 export class ReactionsCreateForIssueRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=content" })
+  @SpeakeasyMetadata({ data: "json, name=content" })
   content: ReactionsCreateForIssueRequestBodyContentEnum;
 }
 
 
-export class ReactionsCreateForIssueRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: ReactionsCreateForIssuePathParams;
-
-  @Metadata({ data: "request, media_type=application/json" })
-  request?: ReactionsCreateForIssueRequestBody;
-}
-
-
 export class ReactionsCreateForIssue415ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=documentation_url" })
+  @SpeakeasyMetadata({ data: "json, name=documentation_url" })
   documentationUrl: string;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message: string;
 }
 
 
+export class ReactionsCreateForIssueRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: ReactionsCreateForIssuePathParams;
+
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request?: ReactionsCreateForIssueRequestBody;
+}
+
+
 export class ReactionsCreateForIssueResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   reaction?: shared.Reaction;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   reactionsCreateForIssue415ApplicationJsonObject?: ReactionsCreateForIssue415ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   validationError?: shared.ValidationError;
 }

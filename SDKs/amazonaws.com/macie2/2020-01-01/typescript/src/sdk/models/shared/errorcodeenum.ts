@@ -1,6 +1,7 @@
 
 
+
 export enum ErrorCodeEnum {
-    ClientError = "ClientError"
-,    InternalError = "InternalError"
+    ClientError = "ClientError",
+    InternalError = "InternalError"
 }

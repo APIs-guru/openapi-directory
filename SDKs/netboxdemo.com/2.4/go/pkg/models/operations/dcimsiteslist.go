@@ -24,15 +24,15 @@ type DcimSitesListQueryParams struct {
 	TenantID     *string  `queryParam:"style=form,explode=true,name=tenant_id"`
 }
 
-type DcimSitesListRequest struct {
-	QueryParams DcimSitesListQueryParams
-}
-
 type DcimSitesList200ApplicationJSON struct {
 	Count    int64         `json:"count"`
 	Next     *string       `json:"next,omitempty"`
 	Previous *string       `json:"previous,omitempty"`
 	Results  []shared.Site `json:"results"`
+}
+
+type DcimSitesListRequest struct {
+	QueryParams DcimSitesListQueryParams
 }
 
 type DcimSitesListResponse struct {

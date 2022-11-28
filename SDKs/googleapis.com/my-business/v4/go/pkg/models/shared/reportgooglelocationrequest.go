@@ -22,6 +22,8 @@ const (
 	ReportGoogleLocationRequestReportReasonBadRecommendationEnumIrrelevant                         ReportGoogleLocationRequestReportReasonBadRecommendationEnum = "IRRELEVANT"
 )
 
+// ReportGoogleLocationRequest
+// Request message for reporting a GoogleLocation.
 type ReportGoogleLocationRequest struct {
 	LocationGroupName             *string                                                       `json:"locationGroupName,omitempty"`
 	ReportReasonBadLocation       *ReportGoogleLocationRequestReportReasonBadLocationEnum       `json:"reportReasonBadLocation,omitempty"`

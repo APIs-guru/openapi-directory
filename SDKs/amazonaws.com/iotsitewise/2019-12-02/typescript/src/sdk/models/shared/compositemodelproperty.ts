@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Property } from "./property";
+
 
 
 // CompositeModelProperty
@@ -7,12 +8,12 @@ import { Property } from "./property";
  * Contains information about a composite model property on an asset.
 **/
 export class CompositeModelProperty extends SpeakeasyBase {
-  @Metadata({ data: "json, name=assetProperty" })
+  @SpeakeasyMetadata({ data: "json, name=assetProperty" })
   assetProperty: Property;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type: string;
 }

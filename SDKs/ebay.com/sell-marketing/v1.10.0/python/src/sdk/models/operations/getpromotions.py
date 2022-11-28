@@ -5,8 +5,8 @@ from sdk.models import shared
 
 @dataclass
 class GetPromotionsQueryParams:
+    marketplace_id: str = field(metadata={'query_param': { 'field_name': 'marketplace_id', 'style': 'form', 'explode': True }})
     limit: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'limit', 'style': 'form', 'explode': True }})
-    marketplace_id: str = field(default=None, metadata={'query_param': { 'field_name': 'marketplace_id', 'style': 'form', 'explode': True }})
     offset: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'offset', 'style': 'form', 'explode': True }})
     promotion_status: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'promotion_status', 'style': 'form', 'explode': True }})
     promotion_type: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'promotion_type', 'style': 'form', 'explode': True }})
@@ -16,18 +16,18 @@ class GetPromotionsQueryParams:
 
 @dataclass
 class GetPromotionsSecurity:
-    api_auth: shared.SchemeAPIAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    api_auth: shared.SchemeAPIAuth = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class GetPromotionsRequest:
-    query_params: GetPromotionsQueryParams = field(default=None)
-    security: GetPromotionsSecurity = field(default=None)
+    query_params: GetPromotionsQueryParams = field()
+    security: GetPromotionsSecurity = field()
     
 
 @dataclass
 class GetPromotionsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     promotions_paged_collection: Optional[shared.PromotionsPagedCollection] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,19 +1,25 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import projectstatus_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ProjectSummary:
-    creation_time: datetime = field(default=None, metadata={'dataclasses_json': { 'field_name': 'CreationTime', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    project_arn: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ProjectArn' }})
-    project_description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ProjectDescription' }})
-    project_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ProjectId' }})
-    project_name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ProjectName' }})
-    project_status: projectstatus_enum.ProjectStatusEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ProjectStatus' }})
+    r"""ProjectSummary
+    Information about a project.
+    """
+    
+    creation_time: datetime = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('CreationTime'), 'encoder': utils.datetimeisoformat(False), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    project_arn: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('ProjectArn') }})
+    project_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('ProjectId') }})
+    project_name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('ProjectName') }})
+    project_status: ProjectStatusEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('ProjectStatus') }})
+    project_description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ProjectDescription') }})
     

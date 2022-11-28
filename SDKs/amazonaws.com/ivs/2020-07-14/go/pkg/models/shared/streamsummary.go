@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// StreamSummary
+// Summary information about a stream.
 type StreamSummary struct {
 	ChannelArn  *string           `json:"channelArn,omitempty"`
 	Health      *StreamHealthEnum `json:"health,omitempty"`

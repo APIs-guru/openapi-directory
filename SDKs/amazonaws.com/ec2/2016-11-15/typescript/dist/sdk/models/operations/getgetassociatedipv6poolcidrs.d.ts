@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 export declare enum GetGetAssociatedIpv6PoolCidrsActionEnum {
     GetAssociatedIpv6PoolCidrs = "GetAssociatedIpv6PoolCidrs"
 }

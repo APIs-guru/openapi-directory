@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class PostcodeToAddressesPathParams:
-    postcode: str = field(default=None, metadata={'path_param': { 'field_name': 'postcode', 'style': 'simple', 'explode': False }})
+    postcode: str = field(metadata={'path_param': { 'field_name': 'postcode', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -17,22 +17,22 @@ class PostcodeToAddressesQueryParams:
 
 @dataclass
 class PostcodeToAddressesSecurity:
-    api_key: shared.SchemeAPIKey = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'query' }})
-    user_token: shared.SchemeUserToken = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'query' }})
+    api_key: shared.SchemeAPIKey = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'query' }})
+    user_token: shared.SchemeUserToken = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'query' }})
     
 
 @dataclass
 class PostcodeToAddressesRequest:
-    path_params: PostcodeToAddressesPathParams = field(default=None)
-    query_params: PostcodeToAddressesQueryParams = field(default=None)
-    security: PostcodeToAddressesSecurity = field(default=None)
+    path_params: PostcodeToAddressesPathParams = field()
+    query_params: PostcodeToAddressesQueryParams = field()
+    security: PostcodeToAddressesSecurity = field()
     
 
 @dataclass
 class PostcodeToAddressesResponse:
+    content_type: str = field()
+    status_code: int = field()
     address_lookup_response_schema: Optional[shared.AddressLookupResponseSchema] = field(default=None)
-    content_type: str = field(default=None)
     error_response_schema: Optional[shared.ErrorResponseSchema] = field(default=None)
     postcode_to_address_response_schema: Optional[shared.PostcodeToAddressResponseSchema] = field(default=None)
-    status_code: int = field(default=None)
     

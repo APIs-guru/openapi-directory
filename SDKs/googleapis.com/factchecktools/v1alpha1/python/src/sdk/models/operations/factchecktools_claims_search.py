@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
@@ -27,12 +28,12 @@ class FactchecktoolsClaimsSearchQueryParams:
 
 @dataclass
 class FactchecktoolsClaimsSearchRequest:
-    query_params: FactchecktoolsClaimsSearchQueryParams = field(default=None)
+    query_params: FactchecktoolsClaimsSearchQueryParams = field()
     
 
 @dataclass
 class FactchecktoolsClaimsSearchResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_factchecking_factchecktools_v1alpha1_fact_checked_claim_search_response: Optional[shared.GoogleFactcheckingFactchecktoolsV1alpha1FactCheckedClaimSearchResponse] = field(default=None)
-    status_code: int = field(default=None)
     

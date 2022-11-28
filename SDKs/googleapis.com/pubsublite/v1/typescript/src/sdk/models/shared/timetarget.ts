@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // TimeTarget
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A target publish or event time. Can be used for seeking to or retrieving the corresponding cursor.
 **/
 export class TimeTarget extends SpeakeasyBase {
-  @Metadata({ data: "json, name=eventTime" })
+  @SpeakeasyMetadata({ data: "json, name=eventTime" })
   eventTime?: string;
 
-  @Metadata({ data: "json, name=publishTime" })
+  @SpeakeasyMetadata({ data: "json, name=publishTime" })
   publishTime?: string;
 }

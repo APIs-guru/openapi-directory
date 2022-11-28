@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SystemInstanceDeploymentStatusEnum } from "./systeminstancedeploymentstatusenum";
 import { DeploymentTargetEnum } from "./deploymenttargetenum";
+
 
 
 // SystemInstanceSummary
@@ -8,30 +9,30 @@ import { DeploymentTargetEnum } from "./deploymenttargetenum";
  * An object that contains summary information about a system instance.
 **/
 export class SystemInstanceSummary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=arn" })
+  @SpeakeasyMetadata({ data: "json, name=arn" })
   arn?: string;
 
-  @Metadata({ data: "json, name=createdAt" })
+  @SpeakeasyMetadata({ data: "json, name=createdAt" })
   createdAt?: Date;
 
-  @Metadata({ data: "json, name=greengrassGroupId" })
+  @SpeakeasyMetadata({ data: "json, name=greengrassGroupId" })
   greengrassGroupId?: string;
 
-  @Metadata({ data: "json, name=greengrassGroupName" })
+  @SpeakeasyMetadata({ data: "json, name=greengrassGroupName" })
   greengrassGroupName?: string;
 
-  @Metadata({ data: "json, name=greengrassGroupVersionId" })
+  @SpeakeasyMetadata({ data: "json, name=greengrassGroupVersionId" })
   greengrassGroupVersionId?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: SystemInstanceDeploymentStatusEnum;
 
-  @Metadata({ data: "json, name=target" })
+  @SpeakeasyMetadata({ data: "json, name=target" })
   target?: DeploymentTargetEnum;
 
-  @Metadata({ data: "json, name=updatedAt" })
+  @SpeakeasyMetadata({ data: "json, name=updatedAt" })
   updatedAt?: Date;
 }

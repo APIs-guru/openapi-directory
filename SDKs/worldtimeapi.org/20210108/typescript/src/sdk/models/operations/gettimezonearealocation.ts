@@ -1,31 +1,32 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetTimezoneAreaLocationPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=area" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=area" })
   area: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=location" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=location" })
   location: string;
 }
 
 
 export class GetTimezoneAreaLocationRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetTimezoneAreaLocationPathParams;
 }
 
 
 export class GetTimezoneAreaLocationResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   dateTimeJsonResponse?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   errorJsonResponse?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

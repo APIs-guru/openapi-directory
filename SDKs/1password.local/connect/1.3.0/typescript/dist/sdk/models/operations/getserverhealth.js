@@ -22,58 +22,58 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
-export var GETSERVERHEALTH_SERVERS = [
+export var GetServerHealthServerList = [
     "http://localhost:8080",
 ];
-var GetServerHealthRequest = /** @class */ (function (_super) {
-    __extends(GetServerHealthRequest, _super);
-    function GetServerHealthRequest() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    __decorate([
-        Metadata(),
-        __metadata("design:type", String)
-    ], GetServerHealthRequest.prototype, "serverUrl", void 0);
-    return GetServerHealthRequest;
-}(SpeakeasyBase));
-export { GetServerHealthRequest };
 var GetServerHealth200ApplicationJson = /** @class */ (function (_super) {
     __extends(GetServerHealth200ApplicationJson, _super);
     function GetServerHealth200ApplicationJson() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=dependencies", elemType: shared.ServiceDependency }),
+        SpeakeasyMetadata({ data: "json, name=dependencies", elemType: shared.ServiceDependency }),
         __metadata("design:type", Array)
     ], GetServerHealth200ApplicationJson.prototype, "dependencies", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], GetServerHealth200ApplicationJson.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=version" }),
+        SpeakeasyMetadata({ data: "json, name=version" }),
         __metadata("design:type", String)
     ], GetServerHealth200ApplicationJson.prototype, "version", void 0);
     return GetServerHealth200ApplicationJson;
 }(SpeakeasyBase));
 export { GetServerHealth200ApplicationJson };
+var GetServerHealthRequest = /** @class */ (function (_super) {
+    __extends(GetServerHealthRequest, _super);
+    function GetServerHealthRequest() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", String)
+    ], GetServerHealthRequest.prototype, "serverUrl", void 0);
+    return GetServerHealthRequest;
+}(SpeakeasyBase));
+export { GetServerHealthRequest };
 var GetServerHealthResponse = /** @class */ (function (_super) {
     __extends(GetServerHealthResponse, _super);
     function GetServerHealthResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetServerHealthResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetServerHealth200ApplicationJson)
     ], GetServerHealthResponse.prototype, "getServerHealth200ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetServerHealthResponse.prototype, "statusCode", void 0);
     return GetServerHealthResponse;

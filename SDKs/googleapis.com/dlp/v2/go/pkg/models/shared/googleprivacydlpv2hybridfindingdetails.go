@@ -1,5 +1,7 @@
 package shared
 
+// GooglePrivacyDlpV2HybridFindingDetails
+// Populate to associate additional data with each finding.
 type GooglePrivacyDlpV2HybridFindingDetails struct {
 	ContainerDetails *GooglePrivacyDlpV2Container    `json:"containerDetails,omitempty"`
 	FileOffset       *string                         `json:"fileOffset,omitempty"`

@@ -1,21 +1,33 @@
 import { AxiosInstance, AxiosRequestConfig } from "axios";
 import * as operations from "./models/operations";
 import { Security } from "./models/shared";
-declare type OptsFunc = (sdk: SDK) => void;
+type OptsFunc = (sdk: SDK) => void;
+export declare const ServerList: readonly ["http://api.sportsdata.io", "https://api.sportsdata.io", "http://azure-api.sportsdata.io", "https://azure-api.sportsdata.io"];
 export declare function WithServerURL(serverURL: string, params?: Map<string, string>): OptsFunc;
 export declare function WithClient(client: AxiosInstance): OptsFunc;
 export declare function WithSecurity(security: Security): OptsFunc;
 export declare class SDK {
-    defaultClient?: AxiosInstance;
-    securityClient?: AxiosInstance;
-    security?: any;
-    serverURL: string;
+    _defaultClient: AxiosInstance;
+    _securityClient: AxiosInstance;
+    _security?: Security;
+    _serverURL: string;
+    private _language;
+    private _sdkVersion;
+    private _genVersion;
     constructor(...opts: OptsFunc[]);
-    PlayByPlay(req: operations.PlayByPlayRequest, config?: AxiosRequestConfig): Promise<operations.PlayByPlayResponse>;
-    PlayByPlayDelta(req: operations.PlayByPlayDeltaRequest, config?: AxiosRequestConfig): Promise<operations.PlayByPlayDeltaResponse>;
     /**
+     * playByPlay - Play By Play
+    **/
+    playByPlay(req: operations.PlayByPlayRequest, config?: AxiosRequestConfig): Promise<operations.PlayByPlayResponse>;
+    /**
+     * playByPlayDelta - Play By Play Delta
+    **/
+    playByPlayDelta(req: operations.PlayByPlayDeltaRequest, config?: AxiosRequestConfig): Promise<operations.PlayByPlayDeltaResponse>;
+    /**
+     * playByPlaySimulation - Play By Play Simulation
+     *
      * Gets simulated live play-by-play of NFL games, covering the Conference Championship games on January 21, 2018.
     **/
-    PlayByPlaySimulation(req: operations.PlayByPlaySimulationRequest, config?: AxiosRequestConfig): Promise<operations.PlayByPlaySimulationResponse>;
+    playByPlaySimulation(req: operations.PlayByPlaySimulationRequest, config?: AxiosRequestConfig): Promise<operations.PlayByPlaySimulationResponse>;
 }
 export {};

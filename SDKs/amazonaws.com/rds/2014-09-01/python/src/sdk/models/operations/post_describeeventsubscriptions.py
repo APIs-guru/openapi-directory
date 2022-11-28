@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostDescribeEventSubscriptionsActionEnum(str, Enum):
     DESCRIBE_EVENT_SUBSCRIPTIONS = "DescribeEventSubscriptions"
@@ -10,8 +14,8 @@ class PostDescribeEventSubscriptionsVersionEnum(str, Enum):
 
 @dataclass
 class PostDescribeEventSubscriptionsQueryParams:
-    action: PostDescribeEventSubscriptionsActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostDescribeEventSubscriptionsVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostDescribeEventSubscriptionsActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostDescribeEventSubscriptionsVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostDescribeEventSubscriptionsHeaders:
 
 @dataclass
 class PostDescribeEventSubscriptionsRequest:
-    query_params: PostDescribeEventSubscriptionsQueryParams = field(default=None)
-    headers: PostDescribeEventSubscriptionsHeaders = field(default=None)
+    headers: PostDescribeEventSubscriptionsHeaders = field()
+    query_params: PostDescribeEventSubscriptionsQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostDescribeEventSubscriptionsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

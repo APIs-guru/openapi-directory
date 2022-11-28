@@ -1,46 +1,47 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class StopPointDirectionPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" })
   id: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=toStopPointId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=toStopPointId" })
   toStopPointId: string;
 }
 
 
 export class StopPointDirectionQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=lineId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=lineId" })
   lineId?: string;
 }
 
 
 export class StopPointDirectionRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: StopPointDirectionPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: StopPointDirectionQueryParams;
 }
 
 
 export class StopPointDirectionResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   stopPointDirection200ApplicationJsonString?: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   stopPointDirection200ApplicationXmlString?: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   stopPointDirection200TextJsonString?: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   stopPointDirection200TextXmlString?: string;
 }

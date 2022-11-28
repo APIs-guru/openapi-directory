@@ -9,7 +9,7 @@ class PostUploadsJSONRequest:
 
 @dataclass
 class PostUploadsJSONResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     post_uploads_json_200_application_json_any: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

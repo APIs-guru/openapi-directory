@@ -22,23 +22,24 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { AutoScalingGroupRecommendation } from "./autoscalinggrouprecommendation";
+import { GetRecommendationError } from "./getrecommendationerror";
 var GetAutoScalingGroupRecommendationsResponse = /** @class */ (function (_super) {
     __extends(GetAutoScalingGroupRecommendationsResponse, _super);
     function GetAutoScalingGroupRecommendationsResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=autoScalingGroupRecommendations", elemType: shared.AutoScalingGroupRecommendation }),
+        SpeakeasyMetadata({ data: "json, name=autoScalingGroupRecommendations", elemType: AutoScalingGroupRecommendation }),
         __metadata("design:type", Array)
     ], GetAutoScalingGroupRecommendationsResponse.prototype, "autoScalingGroupRecommendations", void 0);
     __decorate([
-        Metadata({ data: "json, name=errors", elemType: shared.GetRecommendationError }),
+        SpeakeasyMetadata({ data: "json, name=errors", elemType: GetRecommendationError }),
         __metadata("design:type", Array)
     ], GetAutoScalingGroupRecommendationsResponse.prototype, "errors", void 0);
     __decorate([
-        Metadata({ data: "json, name=nextToken" }),
+        SpeakeasyMetadata({ data: "json, name=nextToken" }),
         __metadata("design:type", String)
     ], GetAutoScalingGroupRecommendationsResponse.prototype, "nextToken", void 0);
     return GetAutoScalingGroupRecommendationsResponse;

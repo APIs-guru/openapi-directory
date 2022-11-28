@@ -1,19 +1,20 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class QueryjobStats extends SpeakeasyBase {
-  @Metadata({ data: "json, name=failed" })
+  @SpeakeasyMetadata({ data: "json, name=failed" })
   failed?: number;
 
-  @Metadata({ data: "json, name=pending" })
+  @SpeakeasyMetadata({ data: "json, name=pending" })
   pending?: number;
 
-  @Metadata({ data: "json, name=success-with-result" })
+  @SpeakeasyMetadata({ data: "json, name=success-with-result" })
   successWithResult?: number;
 
-  @Metadata({ data: "json, name=success-without-result" })
+  @SpeakeasyMetadata({ data: "json, name=success-without-result" })
   successWithoutResult?: number;
 
-  @Metadata({ data: "json, name=successful" })
+  @SpeakeasyMetadata({ data: "json, name=successful" })
   successful?: number;
 }

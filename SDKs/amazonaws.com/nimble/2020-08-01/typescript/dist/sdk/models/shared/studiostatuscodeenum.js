@@ -1,0 +1,21 @@
+export var StudioStatusCodeEnum;
+(function (StudioStatusCodeEnum) {
+    StudioStatusCodeEnum["StudioCreated"] = "STUDIO_CREATED";
+    StudioStatusCodeEnum["StudioDeleted"] = "STUDIO_DELETED";
+    StudioStatusCodeEnum["StudioUpdated"] = "STUDIO_UPDATED";
+    StudioStatusCodeEnum["StudioCreateInProgress"] = "STUDIO_CREATE_IN_PROGRESS";
+    StudioStatusCodeEnum["StudioUpdateInProgress"] = "STUDIO_UPDATE_IN_PROGRESS";
+    StudioStatusCodeEnum["StudioDeleteInProgress"] = "STUDIO_DELETE_IN_PROGRESS";
+    StudioStatusCodeEnum["StudioWithLaunchProfilesNotDeleted"] = "STUDIO_WITH_LAUNCH_PROFILES_NOT_DELETED";
+    StudioStatusCodeEnum["StudioWithStudioComponentsNotDeleted"] = "STUDIO_WITH_STUDIO_COMPONENTS_NOT_DELETED";
+    StudioStatusCodeEnum["StudioWithStreamingImagesNotDeleted"] = "STUDIO_WITH_STREAMING_IMAGES_NOT_DELETED";
+    StudioStatusCodeEnum["AwsSsoNotEnabled"] = "AWS_SSO_NOT_ENABLED";
+    StudioStatusCodeEnum["AwsSsoAccessDenied"] = "AWS_SSO_ACCESS_DENIED";
+    StudioStatusCodeEnum["RoleNotOwnedByStudioOwner"] = "ROLE_NOT_OWNED_BY_STUDIO_OWNER";
+    StudioStatusCodeEnum["RoleCouldNotBeAssumed"] = "ROLE_COULD_NOT_BE_ASSUMED";
+    StudioStatusCodeEnum["InternalError"] = "INTERNAL_ERROR";
+    StudioStatusCodeEnum["EncryptionKeyNotFound"] = "ENCRYPTION_KEY_NOT_FOUND";
+    StudioStatusCodeEnum["EncryptionKeyAccessDenied"] = "ENCRYPTION_KEY_ACCESS_DENIED";
+    StudioStatusCodeEnum["AwsSsoConfigurationRepaired"] = "AWS_SSO_CONFIGURATION_REPAIRED";
+    StudioStatusCodeEnum["AwsSsoConfigurationRepairInProgress"] = "AWS_SSO_CONFIGURATION_REPAIR_IN_PROGRESS";
+})(StudioStatusCodeEnum || (StudioStatusCodeEnum = {}));

@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class CivicinfoRepresentativesRepresentativeInfoByDivisionPathParams:
-    ocd_id: str = field(default=None, metadata={'path_param': { 'field_name': 'ocdId', 'style': 'simple', 'explode': False }})
+    ocd_id: str = field(metadata={'path_param': { 'field_name': 'ocdId', 'style': 'simple', 'explode': False }})
     
 class CivicinfoRepresentativesRepresentativeInfoByDivisionLevelsEnum(str, Enum):
     INTERNATIONAL = "international"
@@ -53,13 +54,13 @@ class CivicinfoRepresentativesRepresentativeInfoByDivisionQueryParams:
 
 @dataclass
 class CivicinfoRepresentativesRepresentativeInfoByDivisionRequest:
-    path_params: CivicinfoRepresentativesRepresentativeInfoByDivisionPathParams = field(default=None)
-    query_params: CivicinfoRepresentativesRepresentativeInfoByDivisionQueryParams = field(default=None)
+    path_params: CivicinfoRepresentativesRepresentativeInfoByDivisionPathParams = field()
+    query_params: CivicinfoRepresentativesRepresentativeInfoByDivisionQueryParams = field()
     
 
 @dataclass
 class CivicinfoRepresentativesRepresentativeInfoByDivisionResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     representative_info_data: Optional[shared.RepresentativeInfoData] = field(default=None)
-    status_code: int = field(default=None)
     

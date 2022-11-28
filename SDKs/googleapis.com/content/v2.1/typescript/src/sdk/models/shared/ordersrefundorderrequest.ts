@@ -1,20 +1,21 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { MonetaryAmount } from "./monetaryamount";
 
 
+
 export class OrdersRefundOrderRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=amount" })
+  @SpeakeasyMetadata({ data: "json, name=amount" })
   amount?: MonetaryAmount;
 
-  @Metadata({ data: "json, name=fullRefund" })
+  @SpeakeasyMetadata({ data: "json, name=fullRefund" })
   fullRefund?: boolean;
 
-  @Metadata({ data: "json, name=operationId" })
+  @SpeakeasyMetadata({ data: "json, name=operationId" })
   operationId?: string;
 
-  @Metadata({ data: "json, name=reason" })
+  @SpeakeasyMetadata({ data: "json, name=reason" })
   reason?: string;
 
-  @Metadata({ data: "json, name=reasonText" })
+  @SpeakeasyMetadata({ data: "json, name=reasonText" })
   reasonText?: string;
 }

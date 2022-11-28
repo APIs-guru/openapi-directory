@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // DatasetSchema
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Provides information about the data schema used with the given dataset. 
 **/
 export class DatasetSchema extends SpeakeasyBase {
-  @Metadata({ data: "json, name=InlineDataSchema" })
+  @SpeakeasyMetadata({ data: "json, name=InlineDataSchema" })
   inlineDataSchema?: string;
 }

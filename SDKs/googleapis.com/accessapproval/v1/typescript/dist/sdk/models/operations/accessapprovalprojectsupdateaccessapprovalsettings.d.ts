@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class AccessapprovalProjectsUpdateAccessApprovalSettingsPathParams extends SpeakeasyBase {
     name: string;
@@ -24,7 +24,7 @@ export declare class AccessapprovalProjectsUpdateAccessApprovalSettingsSecurity 
 export declare class AccessapprovalProjectsUpdateAccessApprovalSettingsRequest extends SpeakeasyBase {
     pathParams: AccessapprovalProjectsUpdateAccessApprovalSettingsPathParams;
     queryParams: AccessapprovalProjectsUpdateAccessApprovalSettingsQueryParams;
-    request?: shared.AccessApprovalSettings;
+    request?: shared.AccessApprovalSettingsInput;
     security: AccessapprovalProjectsUpdateAccessApprovalSettingsSecurity;
 }
 export declare class AccessapprovalProjectsUpdateAccessApprovalSettingsResponse extends SpeakeasyBase {

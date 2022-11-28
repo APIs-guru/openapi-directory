@@ -31,7 +31,7 @@ type DisplayvideoPartnersChannelsSitesReplaceSecurity struct {
 type DisplayvideoPartnersChannelsSitesReplaceRequest struct {
 	PathParams  DisplayvideoPartnersChannelsSitesReplacePathParams
 	QueryParams DisplayvideoPartnersChannelsSitesReplaceQueryParams
-	Request     *shared.ReplaceSitesRequest `request:"mediaType=application/json"`
+	Request     *shared.ReplaceSitesRequestInput `request:"mediaType=application/json"`
 	Security    DisplayvideoPartnersChannelsSitesReplaceSecurity
 }
 

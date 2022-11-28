@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
 from typing import Optional
@@ -8,24 +8,24 @@ from sdk.models import shared
 
 @dataclass
 class MeterValuesGetPathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class MeterValuesGetQueryParams:
-    date: datetime = field(default=None, metadata={'query_param': { 'field_name': 'date', 'style': 'form', 'explode': True }})
+    date_: datetime = field(metadata={'query_param': { 'field_name': 'date', 'style': 'form', 'explode': True }})
     
 
 @dataclass
 class MeterValuesGetRequest:
-    path_params: MeterValuesGetPathParams = field(default=None)
-    query_params: MeterValuesGetQueryParams = field(default=None)
+    path_params: MeterValuesGetPathParams = field()
+    query_params: MeterValuesGetQueryParams = field()
     
 
 @dataclass
 class MeterValuesGetResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     device_in_past: Optional[shared.DeviceInPast] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,13 +1,19 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import unit_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ServiceLimit:
-    is_service_limited: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'isServiceLimited' }})
-    unit: Optional[unit_enum.UnitEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'unit' }})
-    value: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'value' }})
+    r"""ServiceLimit
+    Specifies a current quota for an Amazon Macie account.
+    """
+    
+    is_service_limited: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('isServiceLimited') }})
+    unit: Optional[UnitEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('unit') }})
+    value: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('value') }})
     

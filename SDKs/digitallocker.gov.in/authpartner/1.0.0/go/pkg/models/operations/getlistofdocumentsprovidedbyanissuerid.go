@@ -8,11 +8,6 @@ type GetListOfDocumentsProvidedByAnIssuerIDSecurity struct {
 	Oauthsecurity shared.SchemeOauthsecurity `security:"scheme,type=oauth2"`
 }
 
-type GetListOfDocumentsProvidedByAnIssuerIDRequest struct {
-	Request  *interface{} `request:"mediaType=application/x-www-form-urlencoded"`
-	Security GetListOfDocumentsProvidedByAnIssuerIDSecurity
-}
-
 type GetListOfDocumentsProvidedByAnIssuerID400ApplicationJSON struct {
 	Error            *interface{} `json:"error,omitempty"`
 	ErrorDescription *interface{} `json:"error_description,omitempty"`
@@ -26,6 +21,11 @@ type GetListOfDocumentsProvidedByAnIssuerID401ApplicationJSON struct {
 type GetListOfDocumentsProvidedByAnIssuerID500ApplicationJSON struct {
 	Error            *interface{} `json:"error,omitempty"`
 	ErrorDescription *interface{} `json:"error_description,omitempty"`
+}
+
+type GetListOfDocumentsProvidedByAnIssuerIDRequest struct {
+	Request  *interface{} `request:"mediaType=application/x-www-form-urlencoded"`
+	Security GetListOfDocumentsProvidedByAnIssuerIDSecurity
 }
 
 type GetListOfDocumentsProvidedByAnIssuerIDResponse struct {

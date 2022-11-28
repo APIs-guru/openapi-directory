@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { PropertyGroup } from "./propertygroup";
 /**
  * Describes the execution properties for an Apache Flink runtime.

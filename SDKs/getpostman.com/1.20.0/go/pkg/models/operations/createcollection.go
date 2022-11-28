@@ -43,10 +43,6 @@ type CreateCollectionRequestBody struct {
 	Collection *CreateCollectionRequestBodyCollection `json:"collection,omitempty"`
 }
 
-type CreateCollectionRequest struct {
-	Request *CreateCollectionRequestBody `request:"mediaType=application/json"`
-}
-
 type CreateCollection200ApplicationJSONCollection struct {
 	ID   *string `json:"id,omitempty"`
 	Name *string `json:"name,omitempty"`
@@ -64,6 +60,10 @@ type CreateCollection400ApplicationJSONError struct {
 
 type CreateCollection400ApplicationJSON struct {
 	Error *CreateCollection400ApplicationJSONError `json:"error,omitempty"`
+}
+
+type CreateCollectionRequest struct {
+	Request *CreateCollectionRequestBody `request:"mediaType=application/json"`
 }
 
 type CreateCollectionResponse struct {

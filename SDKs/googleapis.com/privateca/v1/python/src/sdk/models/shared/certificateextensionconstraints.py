@@ -1,7 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import objectid
+from sdk import utils
+from . import *
 
 class CertificateExtensionConstraintsKnownExtensionsEnum(str, Enum):
     KNOWN_CERTIFICATE_EXTENSION_UNSPECIFIED = "KNOWN_CERTIFICATE_EXTENSION_UNSPECIFIED"
@@ -15,6 +17,10 @@ class CertificateExtensionConstraintsKnownExtensionsEnum(str, Enum):
 @dataclass_json
 @dataclass
 class CertificateExtensionConstraints:
-    additional_extensions: Optional[List[objectid.ObjectID]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'additionalExtensions' }})
-    known_extensions: Optional[List[CertificateExtensionConstraintsKnownExtensionsEnum]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'knownExtensions' }})
+    r"""CertificateExtensionConstraints
+    Describes a set of X.509 extensions that may be part of some certificate issuance controls.
+    """
+    
+    additional_extensions: Optional[List[ObjectID]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('additionalExtensions') }})
+    known_extensions: Optional[List[CertificateExtensionConstraintsKnownExtensionsEnum]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('knownExtensions') }})
     

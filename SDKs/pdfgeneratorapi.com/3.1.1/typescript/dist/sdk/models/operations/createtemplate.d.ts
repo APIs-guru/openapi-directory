@@ -1,8 +1,5 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
-export declare class CreateTemplateRequest extends SpeakeasyBase {
-    request: shared.TemplateDefinitionNew;
-}
 export declare class CreateTemplate200ApplicationJson extends SpeakeasyBase {
     response?: shared.TemplateDefinition;
 }
@@ -51,6 +48,9 @@ export declare class CreateTemplate422ApplicationJson extends SpeakeasyBase {
 export declare class CreateTemplate500ApplicationJson extends SpeakeasyBase {
     error?: string;
     status?: number;
+}
+export declare class CreateTemplateRequest extends SpeakeasyBase {
+    request: shared.TemplateDefinitionNew;
 }
 export declare class CreateTemplateResponse extends SpeakeasyBase {
     contentType: string;

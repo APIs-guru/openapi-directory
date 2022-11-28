@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // FileEvidence
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * This type is used to store the unique identifier of an evidence file. Evidence files are used by seller to contest a payment dispute.
 **/
 export class FileEvidence extends SpeakeasyBase {
-  @Metadata({ data: "json, name=fileId" })
+  @SpeakeasyMetadata({ data: "json, name=fileId" })
   fileId?: string;
 }

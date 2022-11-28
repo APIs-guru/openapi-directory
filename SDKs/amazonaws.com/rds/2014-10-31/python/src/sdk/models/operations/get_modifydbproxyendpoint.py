@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 
 class GetModifyDbProxyEndpointActionEnum(str, Enum):
     MODIFY_DB_PROXY_ENDPOINT = "ModifyDBProxyEndpoint"
@@ -10,10 +14,10 @@ class GetModifyDbProxyEndpointVersionEnum(str, Enum):
 
 @dataclass
 class GetModifyDbProxyEndpointQueryParams:
-    action: GetModifyDbProxyEndpointActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    db_proxy_endpoint_name: str = field(default=None, metadata={'query_param': { 'field_name': 'DBProxyEndpointName', 'style': 'form', 'explode': True }})
+    action: GetModifyDbProxyEndpointActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    db_proxy_endpoint_name: str = field(metadata={'query_param': { 'field_name': 'DBProxyEndpointName', 'style': 'form', 'explode': True }})
+    version: GetModifyDbProxyEndpointVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     new_db_proxy_endpoint_name: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'NewDBProxyEndpointName', 'style': 'form', 'explode': True }})
-    version: GetModifyDbProxyEndpointVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     vpc_security_group_ids: Optional[List[str]] = field(default=None, metadata={'query_param': { 'field_name': 'VpcSecurityGroupIds', 'style': 'form', 'explode': True }})
     
 
@@ -30,13 +34,13 @@ class GetModifyDbProxyEndpointHeaders:
 
 @dataclass
 class GetModifyDbProxyEndpointRequest:
-    query_params: GetModifyDbProxyEndpointQueryParams = field(default=None)
-    headers: GetModifyDbProxyEndpointHeaders = field(default=None)
+    headers: GetModifyDbProxyEndpointHeaders = field()
+    query_params: GetModifyDbProxyEndpointQueryParams = field()
     
 
 @dataclass
 class GetModifyDbProxyEndpointResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

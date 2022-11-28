@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // SpellingCorrection
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Spell check result.
 **/
 export class SpellingCorrection extends SpeakeasyBase {
-  @Metadata({ data: "json, name=corrected" })
+  @SpeakeasyMetadata({ data: "json, name=corrected" })
   corrected?: boolean;
 
-  @Metadata({ data: "json, name=correctedHtml" })
+  @SpeakeasyMetadata({ data: "json, name=correctedHtml" })
   correctedHtml?: string;
 
-  @Metadata({ data: "json, name=correctedText" })
+  @SpeakeasyMetadata({ data: "json, name=correctedText" })
   correctedText?: string;
 }

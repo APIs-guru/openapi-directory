@@ -15,14 +15,20 @@ type AttachTypedLinkHeaders struct {
 	XAmzDataPartition string  `header:"style=simple,explode=false,name=x-amz-data-partition"`
 }
 
+// AttachTypedLinkRequestBodySourceObjectReference
+// The reference that identifies an object.
 type AttachTypedLinkRequestBodySourceObjectReference struct {
 	Selector *string `json:"Selector,omitempty"`
 }
 
+// AttachTypedLinkRequestBodyTargetObjectReference
+// The reference that identifies an object.
 type AttachTypedLinkRequestBodyTargetObjectReference struct {
 	Selector *string `json:"Selector,omitempty"`
 }
 
+// AttachTypedLinkRequestBodyTypedLinkFacet
+// Identifies the schema Amazon Resource Name (ARN) and facet name for the typed link.
 type AttachTypedLinkRequestBodyTypedLinkFacet struct {
 	SchemaArn     *string `json:"SchemaArn,omitempty"`
 	TypedLinkName *string `json:"TypedLinkName,omitempty"`

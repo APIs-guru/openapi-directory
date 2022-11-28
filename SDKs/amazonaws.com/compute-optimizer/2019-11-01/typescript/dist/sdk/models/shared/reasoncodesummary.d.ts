@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { FindingReasonCodeEnum } from "./findingreasoncodeenum";
 /**
  * A summary of a finding reason code.

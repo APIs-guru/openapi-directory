@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// UploadShare
+// Upload Share information
 type UploadShare struct {
 	AccessKey           string     `json:"accessKey"`
 	CntFiles            *int32     `json:"cntFiles,omitempty"`

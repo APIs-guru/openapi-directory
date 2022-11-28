@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // EntityRecognizerEvaluationMetrics
 /**
  * Detailed information about the accuracy of an entity recognizer.
@@ -33,15 +33,15 @@ var EntityRecognizerEvaluationMetrics = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=F1Score" }),
+        SpeakeasyMetadata({ data: "json, name=F1Score" }),
         __metadata("design:type", Number)
     ], EntityRecognizerEvaluationMetrics.prototype, "f1Score", void 0);
     __decorate([
-        Metadata({ data: "json, name=Precision" }),
+        SpeakeasyMetadata({ data: "json, name=Precision" }),
         __metadata("design:type", Number)
     ], EntityRecognizerEvaluationMetrics.prototype, "precision", void 0);
     __decorate([
-        Metadata({ data: "json, name=Recall" }),
+        SpeakeasyMetadata({ data: "json, name=Recall" }),
         __metadata("design:type", Number)
     ], EntityRecognizerEvaluationMetrics.prototype, "recall", void 0);
     return EntityRecognizerEvaluationMetrics;

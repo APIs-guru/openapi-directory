@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Range } from "./range";
-import { Range } from "./range";
+
 
 
 // Page
@@ -8,12 +8,12 @@ import { Range } from "./range";
  * An occurrence of sensitive data in an Adobe Portable Document Format (PDF) file.
 **/
 export class Page extends SpeakeasyBase {
-  @Metadata({ data: "json, name=LineRange" })
+  @SpeakeasyMetadata({ data: "json, name=LineRange" })
   lineRange?: Range;
 
-  @Metadata({ data: "json, name=OffsetRange" })
+  @SpeakeasyMetadata({ data: "json, name=OffsetRange" })
   offsetRange?: Range;
 
-  @Metadata({ data: "json, name=PageNumber" })
+  @SpeakeasyMetadata({ data: "json, name=PageNumber" })
   pageNumber?: number;
 }

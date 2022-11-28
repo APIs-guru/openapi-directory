@@ -20,15 +20,15 @@ type PatchChargeStationVariableRequestBody struct {
 	Variable *PatchChargeStationVariableRequestBodyVariableEnum `json:"variable,omitempty"`
 }
 
-type PatchChargeStationVariableRequest struct {
-	PathParams PatchChargeStationVariablePathParams
-	Request    PatchChargeStationVariableRequestBody `request:"mediaType=application/json"`
-}
-
 type PatchChargeStationVariable201ApplicationJSON struct {
 	Message *string                `json:"message,omitempty"`
 	Ok      *bool                  `json:"ok,omitempty"`
 	Result  map[string]interface{} `json:"result,omitempty"`
+}
+
+type PatchChargeStationVariableRequest struct {
+	PathParams PatchChargeStationVariablePathParams
+	Request    PatchChargeStationVariableRequestBody `request:"mediaType=application/json"`
 }
 
 type PatchChargeStationVariableResponse struct {

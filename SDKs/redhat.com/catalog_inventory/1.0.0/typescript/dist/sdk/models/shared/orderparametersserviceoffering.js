@@ -22,24 +22,20 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-var OrderParametersServiceOffering = /** @class */ (function (_super) {
-    __extends(OrderParametersServiceOffering, _super);
-    function OrderParametersServiceOffering() {
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+var OrderParametersServiceOfferingInput = /** @class */ (function (_super) {
+    __extends(OrderParametersServiceOfferingInput, _super);
+    function OrderParametersServiceOfferingInput() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=provider_control_parameters" }),
+        SpeakeasyMetadata({ data: "json, name=provider_control_parameters" }),
         __metadata("design:type", Map)
-    ], OrderParametersServiceOffering.prototype, "providerControlParameters", void 0);
+    ], OrderParametersServiceOfferingInput.prototype, "providerControlParameters", void 0);
     __decorate([
-        Metadata({ data: "json, name=service_parameters" }),
+        SpeakeasyMetadata({ data: "json, name=service_parameters" }),
         __metadata("design:type", Map)
-    ], OrderParametersServiceOffering.prototype, "serviceParameters", void 0);
-    __decorate([
-        Metadata({ data: "json, name=service_plan_id" }),
-        __metadata("design:type", String)
-    ], OrderParametersServiceOffering.prototype, "servicePlanId", void 0);
-    return OrderParametersServiceOffering;
+    ], OrderParametersServiceOfferingInput.prototype, "serviceParameters", void 0);
+    return OrderParametersServiceOfferingInput;
 }(SpeakeasyBase));
-export { OrderParametersServiceOffering };
+export { OrderParametersServiceOfferingInput };

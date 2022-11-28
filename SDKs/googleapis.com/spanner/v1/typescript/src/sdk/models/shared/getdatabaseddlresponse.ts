@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GetDatabaseDdlResponse
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The response for GetDatabaseDdl.
 **/
 export class GetDatabaseDdlResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=statements" })
+  @SpeakeasyMetadata({ data: "json, name=statements" })
   statements?: string[];
 }

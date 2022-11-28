@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// PipelineExecution
+// An execution of a pipeline.
 type PipelineExecution struct {
 	CreatedBy                    *UserContext                 `json:"CreatedBy,omitempty"`
 	CreationTime                 *time.Time                   `json:"CreationTime,omitempty"`

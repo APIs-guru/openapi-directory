@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { IdentityServiceMembershipSpec } from "./identityservicemembershipspec";
 export var IdentityServiceMembershipStateStateEnum;
 (function (IdentityServiceMembershipStateStateEnum) {
@@ -40,19 +40,19 @@ var IdentityServiceMembershipState = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=failureReason" }),
+        SpeakeasyMetadata({ data: "json, name=failureReason" }),
         __metadata("design:type", String)
     ], IdentityServiceMembershipState.prototype, "failureReason", void 0);
     __decorate([
-        Metadata({ data: "json, name=installedVersion" }),
+        SpeakeasyMetadata({ data: "json, name=installedVersion" }),
         __metadata("design:type", String)
     ], IdentityServiceMembershipState.prototype, "installedVersion", void 0);
     __decorate([
-        Metadata({ data: "json, name=memberConfig" }),
+        SpeakeasyMetadata({ data: "json, name=memberConfig" }),
         __metadata("design:type", IdentityServiceMembershipSpec)
     ], IdentityServiceMembershipState.prototype, "memberConfig", void 0);
     __decorate([
-        Metadata({ data: "json, name=state" }),
+        SpeakeasyMetadata({ data: "json, name=state" }),
         __metadata("design:type", String)
     ], IdentityServiceMembershipState.prototype, "state", void 0);
     return IdentityServiceMembershipState;

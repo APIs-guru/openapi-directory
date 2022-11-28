@@ -1,6 +1,10 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,List,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -18,22 +22,22 @@ class BatchDisableAlarmHeaders:
 @dataclass_json
 @dataclass
 class BatchDisableAlarmRequestBody:
-    disable_action_requests: List[shared.DisableAlarmActionRequest] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'disableActionRequests' }})
+    disable_action_requests: List[shared.DisableAlarmActionRequest] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('disableActionRequests') }})
     
 
 @dataclass
 class BatchDisableAlarmRequest:
-    headers: BatchDisableAlarmHeaders = field(default=None)
-    request: BatchDisableAlarmRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: BatchDisableAlarmHeaders = field()
+    request: BatchDisableAlarmRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class BatchDisableAlarmResponse:
+    content_type: str = field()
+    status_code: int = field()
     batch_disable_alarm_response: Optional[shared.BatchDisableAlarmResponse] = field(default=None)
-    content_type: str = field(default=None)
     internal_failure_exception: Optional[Any] = field(default=None)
     invalid_request_exception: Optional[Any] = field(default=None)
     service_unavailable_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     

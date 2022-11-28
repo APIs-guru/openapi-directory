@@ -1,68 +1,69 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetSpinsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=count" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=count" })
   count?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=end" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=end" })
   end?: Date;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=expand" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=expand" })
   expand?: string[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=fields" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=fields" })
   fields?: string[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=page" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page" })
   page?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=playlist_id" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=playlist_id" })
   playlistId?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=show_id" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=show_id" })
   showId?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=start" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=start" })
   start?: Date;
 }
 
 
-export class GetSpinsRequest extends SpeakeasyBase {
-  @Metadata()
-  queryParams: GetSpinsQueryParams;
-}
-
-
 export class GetSpins200ApplicationJsonLinks extends SpeakeasyBase {
-  @Metadata({ data: "json, name=self" })
+  @SpeakeasyMetadata({ data: "json, name=self" })
   self?: shared.Link;
 }
 
 
 export class GetSpins200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=_links" })
+  @SpeakeasyMetadata({ data: "json, name=_links" })
   links?: GetSpins200ApplicationJsonLinks;
 
-  @Metadata({ data: "json, name=_meta" })
+  @SpeakeasyMetadata({ data: "json, name=_meta" })
   meta?: shared.Pagination;
 
-  @Metadata({ data: "json, name=items", elemType: shared.Spin })
+  @SpeakeasyMetadata({ data: "json, name=items", elemType: shared.Spin })
   items?: shared.Spin[];
 }
 
 
+export class GetSpinsRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  queryParams: GetSpinsQueryParams;
+}
+
+
 export class GetSpinsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getSpins200ApplicationJsonObject?: GetSpins200ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

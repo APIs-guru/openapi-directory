@@ -1,5 +1,7 @@
 package shared
 
+// CalendarResources
+// Public API: Resources.calendars
 type CalendarResources struct {
 	Etag          *string            `json:"etag,omitempty"`
 	Items         []CalendarResource `json:"items,omitempty"`

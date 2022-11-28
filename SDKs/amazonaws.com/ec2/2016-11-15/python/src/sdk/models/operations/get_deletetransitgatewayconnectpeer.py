@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetDeleteTransitGatewayConnectPeerActionEnum(str, Enum):
     DELETE_TRANSIT_GATEWAY_CONNECT_PEER = "DeleteTransitGatewayConnectPeer"
@@ -10,10 +14,10 @@ class GetDeleteTransitGatewayConnectPeerVersionEnum(str, Enum):
 
 @dataclass
 class GetDeleteTransitGatewayConnectPeerQueryParams:
-    action: GetDeleteTransitGatewayConnectPeerActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetDeleteTransitGatewayConnectPeerActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    transit_gateway_connect_peer_id: str = field(metadata={'query_param': { 'field_name': 'TransitGatewayConnectPeerId', 'style': 'form', 'explode': True }})
+    version: GetDeleteTransitGatewayConnectPeerVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     dry_run: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'DryRun', 'style': 'form', 'explode': True }})
-    transit_gateway_connect_peer_id: str = field(default=None, metadata={'query_param': { 'field_name': 'TransitGatewayConnectPeerId', 'style': 'form', 'explode': True }})
-    version: GetDeleteTransitGatewayConnectPeerVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -29,13 +33,13 @@ class GetDeleteTransitGatewayConnectPeerHeaders:
 
 @dataclass
 class GetDeleteTransitGatewayConnectPeerRequest:
-    query_params: GetDeleteTransitGatewayConnectPeerQueryParams = field(default=None)
-    headers: GetDeleteTransitGatewayConnectPeerHeaders = field(default=None)
+    headers: GetDeleteTransitGatewayConnectPeerHeaders = field()
+    query_params: GetDeleteTransitGatewayConnectPeerQueryParams = field()
     
 
 @dataclass
 class GetDeleteTransitGatewayConnectPeerResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

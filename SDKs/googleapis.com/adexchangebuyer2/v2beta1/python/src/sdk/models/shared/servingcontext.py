@@ -1,11 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import appcontext
-from . import auctioncontext
-from . import locationcontext
-from . import platformcontext
-from . import securitycontext
+from sdk import utils
+from . import *
 
 class ServingContextAllEnum(str, Enum):
     SIMPLE_CONTEXT = "SIMPLE_CONTEXT"
@@ -14,10 +12,14 @@ class ServingContextAllEnum(str, Enum):
 @dataclass_json
 @dataclass
 class ServingContext:
-    all: Optional[ServingContextAllEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'all' }})
-    app_type: Optional[appcontext.AppContext] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'appType' }})
-    auction_type: Optional[auctioncontext.AuctionContext] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'auctionType' }})
-    location: Optional[locationcontext.LocationContext] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'location' }})
-    platform: Optional[platformcontext.PlatformContext] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'platform' }})
-    security_type: Optional[securitycontext.SecurityContext] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'securityType' }})
+    r"""ServingContext
+    The serving context for this restriction.
+    """
+    
+    all: Optional[ServingContextAllEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('all') }})
+    app_type: Optional[AppContext] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('appType') }})
+    auction_type: Optional[AuctionContext] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('auctionType') }})
+    location: Optional[LocationContext] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('location') }})
+    platform: Optional[PlatformContext] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('platform') }})
+    security_type: Optional[SecurityContext] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('securityType') }})
     

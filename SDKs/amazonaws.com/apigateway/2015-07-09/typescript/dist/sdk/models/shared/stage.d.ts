@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { AccessLogSettings } from "./accesslogsettings";
 import { CacheClusterSizeEnum } from "./cacheclustersizeenum";
 import { CacheClusterStatusEnum } from "./cacheclusterstatusenum";

@@ -1,25 +1,23 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import applicationcodeconfigurationdescription
-from . import applicationsnapshotconfigurationdescription
-from . import environmentpropertydescriptions
-from . import flinkapplicationconfigurationdescription
-from . import runconfigurationdescription
-from . import sqlapplicationconfigurationdescription
-from . import vpcconfigurationdescription
-from . import zeppelinapplicationconfigurationdescription
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ApplicationConfigurationDescription:
-    application_code_configuration_description: Optional[applicationcodeconfigurationdescription.ApplicationCodeConfigurationDescription] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ApplicationCodeConfigurationDescription' }})
-    application_snapshot_configuration_description: Optional[applicationsnapshotconfigurationdescription.ApplicationSnapshotConfigurationDescription] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ApplicationSnapshotConfigurationDescription' }})
-    environment_property_descriptions: Optional[environmentpropertydescriptions.EnvironmentPropertyDescriptions] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'EnvironmentPropertyDescriptions' }})
-    flink_application_configuration_description: Optional[flinkapplicationconfigurationdescription.FlinkApplicationConfigurationDescription] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FlinkApplicationConfigurationDescription' }})
-    run_configuration_description: Optional[runconfigurationdescription.RunConfigurationDescription] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'RunConfigurationDescription' }})
-    sql_application_configuration_description: Optional[sqlapplicationconfigurationdescription.SQLApplicationConfigurationDescription] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'SqlApplicationConfigurationDescription' }})
-    vpc_configuration_descriptions: Optional[List[vpcconfigurationdescription.VpcConfigurationDescription]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'VpcConfigurationDescriptions' }})
-    zeppelin_application_configuration_description: Optional[zeppelinapplicationconfigurationdescription.ZeppelinApplicationConfigurationDescription] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ZeppelinApplicationConfigurationDescription' }})
+    r"""ApplicationConfigurationDescription
+    Describes details about the application code and starting parameters for a Kinesis Data Analytics application.
+    """
+    
+    application_code_configuration_description: Optional[ApplicationCodeConfigurationDescription] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ApplicationCodeConfigurationDescription') }})
+    application_snapshot_configuration_description: Optional[ApplicationSnapshotConfigurationDescription] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ApplicationSnapshotConfigurationDescription') }})
+    environment_property_descriptions: Optional[EnvironmentPropertyDescriptions] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('EnvironmentPropertyDescriptions') }})
+    flink_application_configuration_description: Optional[FlinkApplicationConfigurationDescription] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('FlinkApplicationConfigurationDescription') }})
+    run_configuration_description: Optional[RunConfigurationDescription] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('RunConfigurationDescription') }})
+    sql_application_configuration_description: Optional[SQLApplicationConfigurationDescription] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('SqlApplicationConfigurationDescription') }})
+    vpc_configuration_descriptions: Optional[List[VpcConfigurationDescription]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('VpcConfigurationDescriptions') }})
+    zeppelin_application_configuration_description: Optional[ZeppelinApplicationConfigurationDescription] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ZeppelinApplicationConfigurationDescription') }})
     

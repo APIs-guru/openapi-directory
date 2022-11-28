@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { WltRecord } from "./wltrecord";
-import { WltRecord } from "./wltrecord";
+
 
 
 // EliminationAllianceBackup
@@ -8,45 +8,45 @@ import { WltRecord } from "./wltrecord";
  * Backup team called in, may be null.
 **/
 export class EliminationAllianceBackup extends SpeakeasyBase {
-  @Metadata({ data: "json, name=in" })
+  @SpeakeasyMetadata({ data: "json, name=in" })
   in?: string;
 
-  @Metadata({ data: "json, name=out" })
+  @SpeakeasyMetadata({ data: "json, name=out" })
   out?: string;
 }
 
 
 export class EliminationAllianceStatus extends SpeakeasyBase {
-  @Metadata({ data: "json, name=current_level_record" })
+  @SpeakeasyMetadata({ data: "json, name=current_level_record" })
   currentLevelRecord?: WltRecord;
 
-  @Metadata({ data: "json, name=level" })
+  @SpeakeasyMetadata({ data: "json, name=level" })
   level?: string;
 
-  @Metadata({ data: "json, name=playoff_average" })
+  @SpeakeasyMetadata({ data: "json, name=playoff_average" })
   playoffAverage?: number;
 
-  @Metadata({ data: "json, name=record" })
+  @SpeakeasyMetadata({ data: "json, name=record" })
   record?: WltRecord;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: string;
 }
 
 
 export class EliminationAlliance extends SpeakeasyBase {
-  @Metadata({ data: "json, name=backup" })
+  @SpeakeasyMetadata({ data: "json, name=backup" })
   backup?: EliminationAllianceBackup;
 
-  @Metadata({ data: "json, name=declines" })
+  @SpeakeasyMetadata({ data: "json, name=declines" })
   declines?: string[];
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=picks" })
+  @SpeakeasyMetadata({ data: "json, name=picks" })
   picks: string[];
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: EliminationAllianceStatus;
 }

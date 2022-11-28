@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ClearValuesResponse
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The response when clearing a range of values in a spreadsheet.
 **/
 export class ClearValuesResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=clearedRange" })
+  @SpeakeasyMetadata({ data: "json, name=clearedRange" })
   clearedRange?: string;
 
-  @Metadata({ data: "json, name=spreadsheetId" })
+  @SpeakeasyMetadata({ data: "json, name=spreadsheetId" })
   spreadsheetId?: string;
 }

@@ -1,18 +1,19 @@
-import { AxiosInstance, AxiosRequestConfig } from "axios";
-import * as operations from "./models/operations";
-declare type OptsFunc = (sdk: SDK) => void;
+import { AxiosInstance } from "axios";
+import { AgentUsers } from "./agentusers";
+import { Devices } from "./devices";
+type OptsFunc = (sdk: SDK) => void;
+export declare const ServerList: readonly ["https://homegraph.googleapis.com/"];
 export declare function WithServerURL(serverURL: string, params?: Map<string, string>): OptsFunc;
 export declare function WithClient(client: AxiosInstance): OptsFunc;
 export declare class SDK {
-    defaultClient?: AxiosInstance;
-    securityClient?: AxiosInstance;
-    security?: any;
-    serverURL: string;
+    agentUsers: AgentUsers;
+    devices: Devices;
+    _defaultClient: AxiosInstance;
+    _securityClient: AxiosInstance;
+    _serverURL: string;
+    private _language;
+    private _sdkVersion;
+    private _genVersion;
     constructor(...opts: OptsFunc[]);
-    HomegraphAgentUsersDelete(req: operations.HomegraphAgentUsersDeleteRequest, config?: AxiosRequestConfig): Promise<operations.HomegraphAgentUsersDeleteResponse>;
-    HomegraphDevicesQuery(req: operations.HomegraphDevicesQueryRequest, config?: AxiosRequestConfig): Promise<operations.HomegraphDevicesQueryResponse>;
-    HomegraphDevicesReportStateAndNotification(req: operations.HomegraphDevicesReportStateAndNotificationRequest, config?: AxiosRequestConfig): Promise<operations.HomegraphDevicesReportStateAndNotificationResponse>;
-    HomegraphDevicesRequestSync(req: operations.HomegraphDevicesRequestSyncRequest, config?: AxiosRequestConfig): Promise<operations.HomegraphDevicesRequestSyncResponse>;
-    HomegraphDevicesSync(req: operations.HomegraphDevicesSyncRequest, config?: AxiosRequestConfig): Promise<operations.HomegraphDevicesSyncResponse>;
 }
 export {};

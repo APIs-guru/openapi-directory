@@ -1,16 +1,20 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import filesystemlifecycle_enum
-from . import deletefilesystemlustreresponse
-from . import deletefilesystemwindowsresponse
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class DeleteFileSystemResponse:
-    file_system_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FileSystemId' }})
-    lifecycle: Optional[filesystemlifecycle_enum.FileSystemLifecycleEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Lifecycle' }})
-    lustre_response: Optional[deletefilesystemlustreresponse.DeleteFileSystemLustreResponse] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'LustreResponse' }})
-    windows_response: Optional[deletefilesystemwindowsresponse.DeleteFileSystemWindowsResponse] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'WindowsResponse' }})
+    r"""DeleteFileSystemResponse
+    The response object for the <code>DeleteFileSystem</code> operation.
+    """
+    
+    file_system_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('FileSystemId') }})
+    lifecycle: Optional[FileSystemLifecycleEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Lifecycle') }})
+    lustre_response: Optional[DeleteFileSystemLustreResponse] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('LustreResponse') }})
+    windows_response: Optional[DeleteFileSystemWindowsResponse] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('WindowsResponse') }})
     

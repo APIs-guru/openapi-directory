@@ -1,86 +1,87 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class DescribeSavingsPlansOfferingRatesHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
 
 export class DescribeSavingsPlansOfferingRatesRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=filters", elemType: shared.SavingsPlanOfferingRateFilterElement })
+  @SpeakeasyMetadata({ data: "json, name=filters", elemType: shared.SavingsPlanOfferingRateFilterElement })
   filters?: shared.SavingsPlanOfferingRateFilterElement[];
 
-  @Metadata({ data: "json, name=maxResults" })
+  @SpeakeasyMetadata({ data: "json, name=maxResults" })
   maxResults?: number;
 
-  @Metadata({ data: "json, name=nextToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=operations" })
+  @SpeakeasyMetadata({ data: "json, name=operations" })
   operations?: string[];
 
-  @Metadata({ data: "json, name=products" })
+  @SpeakeasyMetadata({ data: "json, name=products" })
   products?: shared.SavingsPlanProductTypeEnum[];
 
-  @Metadata({ data: "json, name=savingsPlanOfferingIds" })
+  @SpeakeasyMetadata({ data: "json, name=savingsPlanOfferingIds" })
   savingsPlanOfferingIds?: string[];
 
-  @Metadata({ data: "json, name=savingsPlanPaymentOptions" })
+  @SpeakeasyMetadata({ data: "json, name=savingsPlanPaymentOptions" })
   savingsPlanPaymentOptions?: shared.SavingsPlanPaymentOptionEnum[];
 
-  @Metadata({ data: "json, name=savingsPlanTypes" })
+  @SpeakeasyMetadata({ data: "json, name=savingsPlanTypes" })
   savingsPlanTypes?: shared.SavingsPlanTypeEnum[];
 
-  @Metadata({ data: "json, name=serviceCodes" })
+  @SpeakeasyMetadata({ data: "json, name=serviceCodes" })
   serviceCodes?: shared.SavingsPlanRateServiceCodeEnum[];
 
-  @Metadata({ data: "json, name=usageTypes" })
+  @SpeakeasyMetadata({ data: "json, name=usageTypes" })
   usageTypes?: string[];
 }
 
 
 export class DescribeSavingsPlansOfferingRatesRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: DescribeSavingsPlansOfferingRatesHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: DescribeSavingsPlansOfferingRatesRequestBody;
 }
 
 
 export class DescribeSavingsPlansOfferingRatesResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   describeSavingsPlansOfferingRatesResponse?: shared.DescribeSavingsPlansOfferingRatesResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   internalServerException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   validationException?: any;
 }

@@ -22,26 +22,26 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var GetApiTextPasswordQueryParams = /** @class */ (function (_super) {
     __extends(GetApiTextPasswordQueryParams, _super);
     function GetApiTextPasswordQueryParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=hasDigits" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=hasDigits" }),
         __metadata("design:type", Boolean)
     ], GetApiTextPasswordQueryParams.prototype, "hasDigits", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=hasSpecial" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=hasSpecial" }),
         __metadata("design:type", Boolean)
     ], GetApiTextPasswordQueryParams.prototype, "hasSpecial", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=hasUppercase" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=hasUppercase" }),
         __metadata("design:type", Boolean)
     ], GetApiTextPasswordQueryParams.prototype, "hasUppercase", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=length" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=length" }),
         __metadata("design:type", Number)
     ], GetApiTextPasswordQueryParams.prototype, "length", void 0);
     return GetApiTextPasswordQueryParams;
@@ -53,7 +53,7 @@ var GetApiTextPasswordHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Api-Key" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Api-Key" }),
         __metadata("design:type", String)
     ], GetApiTextPasswordHeaders.prototype, "xApiKey", void 0);
     return GetApiTextPasswordHeaders;
@@ -65,11 +65,11 @@ var GetApiTextPasswordRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetApiTextPasswordQueryParams)
     ], GetApiTextPasswordRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetApiTextPasswordHeaders)
     ], GetApiTextPasswordRequest.prototype, "headers", void 0);
     return GetApiTextPasswordRequest;
@@ -81,11 +81,11 @@ var GetApiTextPasswordResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetApiTextPasswordResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetApiTextPasswordResponse.prototype, "statusCode", void 0);
     return GetApiTextPasswordResponse;

@@ -1,5 +1,7 @@
 package shared
 
+// Icd10CmAttribute
+// The detected attributes that relate to an entity. This includes an extracted segment of the text that is an attribute of an entity, or otherwise related to an entity. InferICD10CM detects the following attributes: <code>Direction</code>, <code>System, Organ or Site</code>, and <code>Acuity</code>.
 type Icd10CmAttribute struct {
 	BeginOffset       *int64                       `json:"BeginOffset,omitempty"`
 	Category          *Icd10CmEntityTypeEnum       `json:"Category,omitempty"`

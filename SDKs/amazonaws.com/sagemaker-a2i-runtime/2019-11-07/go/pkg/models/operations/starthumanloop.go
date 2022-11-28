@@ -14,10 +14,14 @@ type StartHumanLoopHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// StartHumanLoopRequestBodyDataAttributes
+// Attributes of the data specified by the customer. Use these to describe the data to be labeled.
 type StartHumanLoopRequestBodyDataAttributes struct {
 	ContentClassifiers []shared.ContentClassifierEnum `json:"ContentClassifiers,omitempty"`
 }
 
+// StartHumanLoopRequestBodyHumanLoopInput
+// An object containing the human loop input in JSON format.
 type StartHumanLoopRequestBodyHumanLoopInput struct {
 	InputContent *string `json:"InputContent,omitempty"`
 }

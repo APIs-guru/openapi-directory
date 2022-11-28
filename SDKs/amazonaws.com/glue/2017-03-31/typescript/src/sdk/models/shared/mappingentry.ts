@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // MappingEntry
@@ -6,21 +7,21 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Defines a mapping.
 **/
 export class MappingEntry extends SpeakeasyBase {
-  @Metadata({ data: "json, name=SourcePath" })
+  @SpeakeasyMetadata({ data: "json, name=SourcePath" })
   sourcePath?: string;
 
-  @Metadata({ data: "json, name=SourceTable" })
+  @SpeakeasyMetadata({ data: "json, name=SourceTable" })
   sourceTable?: string;
 
-  @Metadata({ data: "json, name=SourceType" })
+  @SpeakeasyMetadata({ data: "json, name=SourceType" })
   sourceType?: string;
 
-  @Metadata({ data: "json, name=TargetPath" })
+  @SpeakeasyMetadata({ data: "json, name=TargetPath" })
   targetPath?: string;
 
-  @Metadata({ data: "json, name=TargetTable" })
+  @SpeakeasyMetadata({ data: "json, name=TargetTable" })
   targetTable?: string;
 
-  @Metadata({ data: "json, name=TargetType" })
+  @SpeakeasyMetadata({ data: "json, name=TargetType" })
   targetType?: string;
 }

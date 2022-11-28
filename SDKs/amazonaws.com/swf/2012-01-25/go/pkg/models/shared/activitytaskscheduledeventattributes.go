@@ -1,5 +1,7 @@
 package shared
 
+// ActivityTaskScheduledEventAttributes
+// Provides the details of the <code>ActivityTaskScheduled</code> event.
 type ActivityTaskScheduledEventAttributes struct {
 	ActivityID                   string       `json:"activityId"`
 	ActivityType                 ActivityType `json:"activityType"`

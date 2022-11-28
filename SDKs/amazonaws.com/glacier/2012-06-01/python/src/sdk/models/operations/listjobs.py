@@ -1,12 +1,15 @@
 from dataclasses import dataclass, field
-from typing import Any,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class ListJobsPathParams:
-    account_id: str = field(default=None, metadata={'path_param': { 'field_name': 'accountId', 'style': 'simple', 'explode': False }})
-    vault_name: str = field(default=None, metadata={'path_param': { 'field_name': 'vaultName', 'style': 'simple', 'explode': False }})
+    account_id: str = field(metadata={'path_param': { 'field_name': 'accountId', 'style': 'simple', 'explode': False }})
+    vault_name: str = field(metadata={'path_param': { 'field_name': 'vaultName', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -30,18 +33,18 @@ class ListJobsHeaders:
 
 @dataclass
 class ListJobsRequest:
-    path_params: ListJobsPathParams = field(default=None)
-    query_params: ListJobsQueryParams = field(default=None)
-    headers: ListJobsHeaders = field(default=None)
+    headers: ListJobsHeaders = field()
+    path_params: ListJobsPathParams = field()
+    query_params: ListJobsQueryParams = field()
     
 
 @dataclass
 class ListJobsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     invalid_parameter_value_exception: Optional[Any] = field(default=None)
     list_jobs_output: Optional[shared.ListJobsOutput] = field(default=None)
     missing_parameter_value_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
     service_unavailable_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

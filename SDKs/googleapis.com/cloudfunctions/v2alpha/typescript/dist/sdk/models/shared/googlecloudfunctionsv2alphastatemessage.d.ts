@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 export declare enum GoogleCloudFunctionsV2alphaStateMessageSeverityEnum {
     SeverityUnspecified = "SEVERITY_UNSPECIFIED",
     Error = "ERROR",

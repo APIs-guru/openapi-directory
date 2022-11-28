@@ -1,11 +1,15 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class RecommenderProjectsLocationsRecommendersUpdateConfigPathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -27,21 +31,21 @@ class RecommenderProjectsLocationsRecommendersUpdateConfigQueryParams:
 
 @dataclass
 class RecommenderProjectsLocationsRecommendersUpdateConfigSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class RecommenderProjectsLocationsRecommendersUpdateConfigRequest:
-    path_params: RecommenderProjectsLocationsRecommendersUpdateConfigPathParams = field(default=None)
-    query_params: RecommenderProjectsLocationsRecommendersUpdateConfigQueryParams = field(default=None)
-    request: Optional[shared.GoogleCloudRecommenderV1beta1RecommenderConfig] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: RecommenderProjectsLocationsRecommendersUpdateConfigSecurity = field(default=None)
+    path_params: RecommenderProjectsLocationsRecommendersUpdateConfigPathParams = field()
+    query_params: RecommenderProjectsLocationsRecommendersUpdateConfigQueryParams = field()
+    security: RecommenderProjectsLocationsRecommendersUpdateConfigSecurity = field()
+    request: Optional[shared.GoogleCloudRecommenderV1beta1RecommenderConfigInput] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class RecommenderProjectsLocationsRecommendersUpdateConfigResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_cloud_recommender_v1beta1_recommender_config: Optional[shared.GoogleCloudRecommenderV1beta1RecommenderConfig] = field(default=None)
-    status_code: int = field(default=None)
     

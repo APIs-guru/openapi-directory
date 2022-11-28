@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 export declare enum GoogleCloudVideointelligenceV1p3beta1LabelDetectionConfigLabelDetectionModeEnum {
     LabelDetectionModeUnspecified = "LABEL_DETECTION_MODE_UNSPECIFIED",
     ShotMode = "SHOT_MODE",

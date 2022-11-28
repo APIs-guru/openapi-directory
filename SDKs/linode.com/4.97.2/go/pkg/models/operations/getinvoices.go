@@ -9,22 +9,9 @@ type GetInvoicesQueryParams struct {
 	PageSize *int64 `queryParam:"style=form,explode=true,name=page_size"`
 }
 
-type GetInvoicesSecurityOption1 struct {
-	PersonalAccessToken shared.SchemePersonalAccessToken `security:"scheme,type=http,subtype=bearer"`
-}
-
-type GetInvoicesSecurityOption2 struct {
-	Oauth shared.SchemeOauth `security:"scheme,type=oauth2"`
-}
-
 type GetInvoicesSecurity struct {
-	Option1 *GetInvoicesSecurityOption1 `security:"option"`
-	Option2 *GetInvoicesSecurityOption2 `security:"option"`
-}
-
-type GetInvoicesRequest struct {
-	QueryParams GetInvoicesQueryParams
-	Security    GetInvoicesSecurity
+	PersonalAccessToken *shared.SchemePersonalAccessToken `security:"scheme,type=http,subtype=bearer"`
+	Oauth               *shared.SchemeOauth               `security:"scheme,type=oauth2"`
 }
 
 type GetInvoices200ApplicationJSON struct {
@@ -36,6 +23,11 @@ type GetInvoices200ApplicationJSON struct {
 
 type GetInvoicesDefaultApplicationJSON struct {
 	Errors []shared.ErrorObject `json:"errors,omitempty"`
+}
+
+type GetInvoicesRequest struct {
+	QueryParams GetInvoicesQueryParams
+	Security    GetInvoicesSecurity
 }
 
 type GetInvoicesResponse struct {

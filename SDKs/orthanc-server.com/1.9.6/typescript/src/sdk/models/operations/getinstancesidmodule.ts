@@ -1,40 +1,41 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetInstancesIdModulePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" })
   id: string;
 }
 
 
 export class GetInstancesIdModuleQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=ignore-length" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=ignore-length" })
   ignoreLength?: string[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=short" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=short" })
   short?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=simplify" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=simplify" })
   simplify?: boolean;
 }
 
 
 export class GetInstancesIdModuleRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetInstancesIdModulePathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetInstancesIdModuleQueryParams;
 }
 
 
 export class GetInstancesIdModuleResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getInstancesIdModule200ApplicationJsonAny?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

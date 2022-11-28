@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // OutputConfig
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The S3 bucket and folder location where training output is placed.
 **/
 export class OutputConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=S3Bucket" })
+  @SpeakeasyMetadata({ data: "json, name=S3Bucket" })
   s3Bucket?: string;
 
-  @Metadata({ data: "json, name=S3KeyPrefix" })
+  @SpeakeasyMetadata({ data: "json, name=S3KeyPrefix" })
   s3KeyPrefix?: string;
 }

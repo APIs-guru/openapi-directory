@@ -1,6 +1,7 @@
 
 
+
 export enum ModelPackageGroupSortByEnum {
-    Name = "Name"
-,    CreationTime = "CreationTime"
+    Name = "Name",
+    CreationTime = "CreationTime"
 }

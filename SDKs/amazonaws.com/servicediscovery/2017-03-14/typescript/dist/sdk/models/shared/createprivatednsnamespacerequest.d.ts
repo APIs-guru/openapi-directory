@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { PrivateDnsNamespaceProperties } from "./privatednsnamespaceproperties";
 import { Tag } from "./tag";
 export declare class CreatePrivateDnsNamespaceRequest extends SpeakeasyBase {

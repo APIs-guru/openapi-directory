@@ -1,15 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SystemInstanceFilter } from "./systeminstancefilter";
 
 
+
 export class SearchSystemInstancesRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=filters", elemType: shared.SystemInstanceFilter })
+  @SpeakeasyMetadata({ data: "json, name=filters", elemType: SystemInstanceFilter })
   filters?: SystemInstanceFilter[];
 
-  @Metadata({ data: "json, name=maxResults" })
+  @SpeakeasyMetadata({ data: "json, name=maxResults" })
   maxResults?: number;
 
-  @Metadata({ data: "json, name=nextToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextToken" })
   nextToken?: string;
 }

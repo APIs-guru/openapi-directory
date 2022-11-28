@@ -1,5 +1,7 @@
 package shared
 
+// SoftwarePackage
+// Software package information of the operating system.
 type SoftwarePackage struct {
 	AptPackage         *VersionedPackage                  `json:"aptPackage,omitempty"`
 	CosPackage         *VersionedPackage                  `json:"cosPackage,omitempty"`

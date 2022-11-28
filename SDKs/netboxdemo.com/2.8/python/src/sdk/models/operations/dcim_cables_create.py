@@ -5,12 +5,12 @@ from sdk.models import shared
 
 @dataclass
 class DcimCablesCreateRequest:
-    request: shared.WritableCable = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    request: shared.WritableCableInput = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class DcimCablesCreateResponse:
+    content_type: str = field()
+    status_code: int = field()
     cable: Optional[shared.Cable] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

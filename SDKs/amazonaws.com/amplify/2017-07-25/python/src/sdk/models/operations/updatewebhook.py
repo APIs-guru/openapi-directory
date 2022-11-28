@@ -1,12 +1,16 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
 @dataclass
 class UpdateWebhookPathParams:
-    webhook_id: str = field(default=None, metadata={'path_param': { 'field_name': 'webhookId', 'style': 'simple', 'explode': False }})
+    webhook_id: str = field(metadata={'path_param': { 'field_name': 'webhookId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -23,25 +27,25 @@ class UpdateWebhookHeaders:
 @dataclass_json
 @dataclass
 class UpdateWebhookRequestBody:
-    branch_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'branchName' }})
-    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
+    branch_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('branchName') }})
+    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('description') }})
     
 
 @dataclass
 class UpdateWebhookRequest:
-    path_params: UpdateWebhookPathParams = field(default=None)
-    headers: UpdateWebhookHeaders = field(default=None)
-    request: UpdateWebhookRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: UpdateWebhookHeaders = field()
+    path_params: UpdateWebhookPathParams = field()
+    request: UpdateWebhookRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class UpdateWebhookResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     dependent_service_failure_exception: Optional[Any] = field(default=None)
     internal_failure_exception: Optional[Any] = field(default=None)
     not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     unauthorized_exception: Optional[Any] = field(default=None)
     update_webhook_result: Optional[shared.UpdateWebhookResult] = field(default=None)
     

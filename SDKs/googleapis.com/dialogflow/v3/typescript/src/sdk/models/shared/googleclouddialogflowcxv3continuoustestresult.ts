@@ -1,9 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum GoogleCloudDialogflowCxV3ContinuousTestResultResultEnum {
-    AggregatedTestResultUnspecified = "AGGREGATED_TEST_RESULT_UNSPECIFIED"
-,    Passed = "PASSED"
-,    Failed = "FAILED"
+    AggregatedTestResultUnspecified = "AGGREGATED_TEST_RESULT_UNSPECIFIED",
+    Passed = "PASSED",
+    Failed = "FAILED"
 }
 
 
@@ -12,15 +13,15 @@ export enum GoogleCloudDialogflowCxV3ContinuousTestResultResultEnum {
  * Represents a result from running a test case in an agent environment.
 **/
 export class GoogleCloudDialogflowCxV3ContinuousTestResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=result" })
+  @SpeakeasyMetadata({ data: "json, name=result" })
   result?: GoogleCloudDialogflowCxV3ContinuousTestResultResultEnum;
 
-  @Metadata({ data: "json, name=runTime" })
+  @SpeakeasyMetadata({ data: "json, name=runTime" })
   runTime?: string;
 
-  @Metadata({ data: "json, name=testCaseResults" })
+  @SpeakeasyMetadata({ data: "json, name=testCaseResults" })
   testCaseResults?: string[];
 }

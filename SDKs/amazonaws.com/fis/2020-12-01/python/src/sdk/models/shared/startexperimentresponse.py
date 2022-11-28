@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import experiment
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class StartExperimentResponse:
-    experiment: Optional[experiment.Experiment] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'experiment' }})
+    experiment: Optional[Experiment] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('experiment') }})
     

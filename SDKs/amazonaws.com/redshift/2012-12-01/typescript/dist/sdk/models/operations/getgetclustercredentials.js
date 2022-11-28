@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var GetGetClusterCredentialsActionEnum;
 (function (GetGetClusterCredentialsActionEnum) {
     GetGetClusterCredentialsActionEnum["GetClusterCredentials"] = "GetClusterCredentials";
@@ -37,35 +37,35 @@ var GetGetClusterCredentialsQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=Action" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Action" }),
         __metadata("design:type", String)
     ], GetGetClusterCredentialsQueryParams.prototype, "action", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=AutoCreate" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=AutoCreate" }),
         __metadata("design:type", Boolean)
     ], GetGetClusterCredentialsQueryParams.prototype, "autoCreate", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=ClusterIdentifier" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=ClusterIdentifier" }),
         __metadata("design:type", String)
     ], GetGetClusterCredentialsQueryParams.prototype, "clusterIdentifier", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=DbGroups" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=DbGroups" }),
         __metadata("design:type", Array)
     ], GetGetClusterCredentialsQueryParams.prototype, "dbGroups", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=DbName" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=DbName" }),
         __metadata("design:type", String)
     ], GetGetClusterCredentialsQueryParams.prototype, "dbName", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=DbUser" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=DbUser" }),
         __metadata("design:type", String)
     ], GetGetClusterCredentialsQueryParams.prototype, "dbUser", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=DurationSeconds" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=DurationSeconds" }),
         __metadata("design:type", Number)
     ], GetGetClusterCredentialsQueryParams.prototype, "durationSeconds", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=Version" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Version" }),
         __metadata("design:type", String)
     ], GetGetClusterCredentialsQueryParams.prototype, "version", void 0);
     return GetGetClusterCredentialsQueryParams;
@@ -77,31 +77,31 @@ var GetGetClusterCredentialsHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
         __metadata("design:type", String)
     ], GetGetClusterCredentialsHeaders.prototype, "xAmzAlgorithm", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
         __metadata("design:type", String)
     ], GetGetClusterCredentialsHeaders.prototype, "xAmzContentSha256", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
         __metadata("design:type", String)
     ], GetGetClusterCredentialsHeaders.prototype, "xAmzCredential", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
         __metadata("design:type", String)
     ], GetGetClusterCredentialsHeaders.prototype, "xAmzDate", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
         __metadata("design:type", String)
     ], GetGetClusterCredentialsHeaders.prototype, "xAmzSecurityToken", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
         __metadata("design:type", String)
     ], GetGetClusterCredentialsHeaders.prototype, "xAmzSignature", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
         __metadata("design:type", String)
     ], GetGetClusterCredentialsHeaders.prototype, "xAmzSignedHeaders", void 0);
     return GetGetClusterCredentialsHeaders;
@@ -113,11 +113,11 @@ var GetGetClusterCredentialsRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetGetClusterCredentialsQueryParams)
     ], GetGetClusterCredentialsRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetGetClusterCredentialsHeaders)
     ], GetGetClusterCredentialsRequest.prototype, "headers", void 0);
     return GetGetClusterCredentialsRequest;
@@ -129,15 +129,15 @@ var GetGetClusterCredentialsResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], GetGetClusterCredentialsResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetGetClusterCredentialsResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetGetClusterCredentialsResponse.prototype, "statusCode", void 0);
     return GetGetClusterCredentialsResponse;

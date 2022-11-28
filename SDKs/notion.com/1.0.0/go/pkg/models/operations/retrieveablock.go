@@ -4,10 +4,6 @@ type RetrieveABlockPathParams struct {
 	ID string `pathParam:"style=simple,explode=false,name=id"`
 }
 
-type RetrieveABlockRequest struct {
-	PathParams RetrieveABlockPathParams
-}
-
 type RetrieveABlock200ApplicationJSONParagraphTextAnnotations struct {
 	Bold          *bool   `json:"bold,omitempty"`
 	Code          *bool   `json:"code,omitempty"`
@@ -42,6 +38,10 @@ type RetrieveABlock200ApplicationJSON struct {
 	Object         *string                                    `json:"object,omitempty"`
 	Paragraph      *RetrieveABlock200ApplicationJSONParagraph `json:"paragraph,omitempty"`
 	Type           *string                                    `json:"type,omitempty"`
+}
+
+type RetrieveABlockRequest struct {
+	PathParams RetrieveABlockPathParams
 }
 
 type RetrieveABlockResponse struct {

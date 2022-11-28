@@ -1,6 +1,7 @@
 
 
+
 export enum ProtocolTypeEnum {
-    Websocket = "WEBSOCKET"
-,    Http = "HTTP"
+    Websocket = "WEBSOCKET",
+    Http = "HTTP"
 }

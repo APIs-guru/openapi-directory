@@ -1,80 +1,81 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetDatabasePkSchemasPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=pk" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=pk" })
   pk: number;
 }
 
 
 export class GetDatabasePkSchemasQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, serialization=json;name=q" })
+  @SpeakeasyMetadata({ data: "queryParam, serialization=json;name=q" })
   q?: shared.DatabaseSchemasQuerySchema;
 }
 
 
 export class GetDatabasePkSchemasSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=bearer" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" })
   jwt: shared.SchemeJwt;
 }
 
 
-export class GetDatabasePkSchemasRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: GetDatabasePkSchemasPathParams;
-
-  @Metadata()
-  queryParams: GetDatabasePkSchemasQueryParams;
-
-  @Metadata()
-  security: GetDatabasePkSchemasSecurity;
-}
-
-
 export class GetDatabasePkSchemas400ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class GetDatabasePkSchemas401ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class GetDatabasePkSchemas404ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class GetDatabasePkSchemas500ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
+export class GetDatabasePkSchemasRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: GetDatabasePkSchemasPathParams;
+
+  @SpeakeasyMetadata()
+  queryParams: GetDatabasePkSchemasQueryParams;
+
+  @SpeakeasyMetadata()
+  security: GetDatabasePkSchemasSecurity;
+}
+
+
 export class GetDatabasePkSchemasResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getDatabasePkSchemas400ApplicationJsonObject?: GetDatabasePkSchemas400ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getDatabasePkSchemas401ApplicationJsonObject?: GetDatabasePkSchemas401ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getDatabasePkSchemas404ApplicationJsonObject?: GetDatabasePkSchemas404ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getDatabasePkSchemas500ApplicationJsonObject?: GetDatabasePkSchemas500ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   schemasResponseSchema?: shared.SchemasResponseSchema;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

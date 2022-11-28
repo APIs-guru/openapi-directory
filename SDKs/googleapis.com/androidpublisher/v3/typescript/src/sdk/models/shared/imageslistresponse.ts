@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Image } from "./image";
+
 
 
 // ImagesListResponse
@@ -8,6 +8,6 @@ import { Image } from "./image";
  * Response listing all images.
 **/
 export class ImagesListResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=images", elemType: shared.Image })
+  @SpeakeasyMetadata({ data: "json, name=images", elemType: Image })
   images?: Image[];
 }

@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetCreateOptionGroupActionEnum(str, Enum):
     CREATE_OPTION_GROUP = "CreateOptionGroup"
@@ -10,12 +14,12 @@ class GetCreateOptionGroupVersionEnum(str, Enum):
 
 @dataclass
 class GetCreateOptionGroupQueryParams:
-    action: GetCreateOptionGroupActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    engine_name: str = field(default=None, metadata={'query_param': { 'field_name': 'EngineName', 'style': 'form', 'explode': True }})
-    major_engine_version: str = field(default=None, metadata={'query_param': { 'field_name': 'MajorEngineVersion', 'style': 'form', 'explode': True }})
-    option_group_description: str = field(default=None, metadata={'query_param': { 'field_name': 'OptionGroupDescription', 'style': 'form', 'explode': True }})
-    option_group_name: str = field(default=None, metadata={'query_param': { 'field_name': 'OptionGroupName', 'style': 'form', 'explode': True }})
-    version: GetCreateOptionGroupVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: GetCreateOptionGroupActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    engine_name: str = field(metadata={'query_param': { 'field_name': 'EngineName', 'style': 'form', 'explode': True }})
+    major_engine_version: str = field(metadata={'query_param': { 'field_name': 'MajorEngineVersion', 'style': 'form', 'explode': True }})
+    option_group_description: str = field(metadata={'query_param': { 'field_name': 'OptionGroupDescription', 'style': 'form', 'explode': True }})
+    option_group_name: str = field(metadata={'query_param': { 'field_name': 'OptionGroupName', 'style': 'form', 'explode': True }})
+    version: GetCreateOptionGroupVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -31,13 +35,13 @@ class GetCreateOptionGroupHeaders:
 
 @dataclass
 class GetCreateOptionGroupRequest:
-    query_params: GetCreateOptionGroupQueryParams = field(default=None)
-    headers: GetCreateOptionGroupHeaders = field(default=None)
+    headers: GetCreateOptionGroupHeaders = field()
+    query_params: GetCreateOptionGroupQueryParams = field()
     
 
 @dataclass
 class GetCreateOptionGroupResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

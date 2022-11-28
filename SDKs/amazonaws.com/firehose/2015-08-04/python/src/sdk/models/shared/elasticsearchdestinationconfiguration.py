@@ -1,30 +1,29 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import elasticsearchbufferinghints
-from . import cloudwatchloggingoptions
-from . import elasticsearchindexrotationperiod_enum
-from . import processingconfiguration
-from . import elasticsearchretryoptions
-from . import elasticsearchs3backupmode_enum
-from . import s3destinationconfiguration
-from . import vpcconfiguration
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ElasticsearchDestinationConfiguration:
-    buffering_hints: Optional[elasticsearchbufferinghints.ElasticsearchBufferingHints] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'BufferingHints' }})
-    cloud_watch_logging_options: Optional[cloudwatchloggingoptions.CloudWatchLoggingOptions] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'CloudWatchLoggingOptions' }})
-    cluster_endpoint: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ClusterEndpoint' }})
-    domain_arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'DomainARN' }})
-    index_name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'IndexName' }})
-    index_rotation_period: Optional[elasticsearchindexrotationperiod_enum.ElasticsearchIndexRotationPeriodEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'IndexRotationPeriod' }})
-    processing_configuration: Optional[processingconfiguration.ProcessingConfiguration] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ProcessingConfiguration' }})
-    retry_options: Optional[elasticsearchretryoptions.ElasticsearchRetryOptions] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'RetryOptions' }})
-    role_arn: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'RoleARN' }})
-    s3_backup_mode: Optional[elasticsearchs3backupmode_enum.ElasticsearchS3BackupModeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'S3BackupMode' }})
-    s3_configuration: s3destinationconfiguration.S3DestinationConfiguration = field(default=None, metadata={'dataclasses_json': { 'field_name': 'S3Configuration' }})
-    type_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'TypeName' }})
-    vpc_configuration: Optional[vpcconfiguration.VpcConfiguration] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'VpcConfiguration' }})
+    r"""ElasticsearchDestinationConfiguration
+    Describes the configuration of a destination in Amazon ES.
+    """
+    
+    index_name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('IndexName') }})
+    role_arn: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('RoleARN') }})
+    s3_configuration: S3DestinationConfiguration = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('S3Configuration') }})
+    buffering_hints: Optional[ElasticsearchBufferingHints] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('BufferingHints') }})
+    cloud_watch_logging_options: Optional[CloudWatchLoggingOptions] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('CloudWatchLoggingOptions') }})
+    cluster_endpoint: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ClusterEndpoint') }})
+    domain_arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('DomainARN') }})
+    index_rotation_period: Optional[ElasticsearchIndexRotationPeriodEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('IndexRotationPeriod') }})
+    processing_configuration: Optional[ProcessingConfiguration] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ProcessingConfiguration') }})
+    retry_options: Optional[ElasticsearchRetryOptions] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('RetryOptions') }})
+    s3_backup_mode: Optional[ElasticsearchS3BackupModeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('S3BackupMode') }})
+    type_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('TypeName') }})
+    vpc_configuration: Optional[VpcConfiguration] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('VpcConfiguration') }})
     

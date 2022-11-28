@@ -1,18 +1,19 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import { TransferJob } from "./transferjob";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { TransferJobInput } from "./transferjob";
 
 
-// UpdateTransferJobRequest
+
+// UpdateTransferJobRequestInput
 /** 
  * Request passed to UpdateTransferJob.
 **/
-export class UpdateTransferJobRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=projectId" })
+export class UpdateTransferJobRequestInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=projectId" })
   projectId?: string;
 
-  @Metadata({ data: "json, name=transferJob" })
-  transferJob?: TransferJob;
+  @SpeakeasyMetadata({ data: "json, name=transferJob" })
+  transferJob?: TransferJobInput;
 
-  @Metadata({ data: "json, name=updateTransferJobFieldMask" })
+  @SpeakeasyMetadata({ data: "json, name=updateTransferJobFieldMask" })
   updateTransferJobFieldMask?: string;
 }

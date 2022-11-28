@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { MemberTypeEnum } from "./membertypeenum";
+
 
 
 // Delegate
@@ -7,9 +8,9 @@ import { MemberTypeEnum } from "./membertypeenum";
  * The name of the attribute, which is one of the values defined in the UserAttribute enumeration.
 **/
 export class Delegate extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Id" })
+  @SpeakeasyMetadata({ data: "json, name=Id" })
   id: string;
 
-  @Metadata({ data: "json, name=Type" })
+  @SpeakeasyMetadata({ data: "json, name=Type" })
   type: MemberTypeEnum;
 }

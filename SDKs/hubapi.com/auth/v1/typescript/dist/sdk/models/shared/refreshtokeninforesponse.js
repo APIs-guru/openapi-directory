@@ -22,42 +22,42 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var RefreshTokenInfoResponse = /** @class */ (function (_super) {
     __extends(RefreshTokenInfoResponse, _super);
     function RefreshTokenInfoResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=client_id" }),
+        SpeakeasyMetadata({ data: "json, name=client_id" }),
         __metadata("design:type", String)
     ], RefreshTokenInfoResponse.prototype, "clientId", void 0);
     __decorate([
-        Metadata({ data: "json, name=hub_domain" }),
+        SpeakeasyMetadata({ data: "json, name=hub_domain" }),
         __metadata("design:type", String)
     ], RefreshTokenInfoResponse.prototype, "hubDomain", void 0);
     __decorate([
-        Metadata({ data: "json, name=hub_id" }),
+        SpeakeasyMetadata({ data: "json, name=hub_id" }),
         __metadata("design:type", Number)
     ], RefreshTokenInfoResponse.prototype, "hubId", void 0);
     __decorate([
-        Metadata({ data: "json, name=scopes" }),
+        SpeakeasyMetadata({ data: "json, name=scopes" }),
         __metadata("design:type", Array)
     ], RefreshTokenInfoResponse.prototype, "scopes", void 0);
     __decorate([
-        Metadata({ data: "json, name=token" }),
+        SpeakeasyMetadata({ data: "json, name=token" }),
         __metadata("design:type", String)
     ], RefreshTokenInfoResponse.prototype, "token", void 0);
     __decorate([
-        Metadata({ data: "json, name=token_type" }),
+        SpeakeasyMetadata({ data: "json, name=token_type" }),
         __metadata("design:type", String)
     ], RefreshTokenInfoResponse.prototype, "tokenType", void 0);
     __decorate([
-        Metadata({ data: "json, name=user" }),
+        SpeakeasyMetadata({ data: "json, name=user" }),
         __metadata("design:type", String)
     ], RefreshTokenInfoResponse.prototype, "user", void 0);
     __decorate([
-        Metadata({ data: "json, name=user_id" }),
+        SpeakeasyMetadata({ data: "json, name=user_id" }),
         __metadata("design:type", Number)
     ], RefreshTokenInfoResponse.prototype, "userId", void 0);
     return RefreshTokenInfoResponse;

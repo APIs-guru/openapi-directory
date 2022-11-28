@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var SystemPackagesPathParams = /** @class */ (function (_super) {
     __extends(SystemPackagesPathParams, _super);
@@ -30,7 +30,7 @@ var SystemPackagesPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=inventory_id" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=inventory_id" }),
         __metadata("design:type", String)
     ], SystemPackagesPathParams.prototype, "inventoryId", void 0);
     return SystemPackagesPathParams;
@@ -42,35 +42,35 @@ var SystemPackagesQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=filter[description]" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=filter[description]" }),
         __metadata("design:type", String)
     ], SystemPackagesQueryParams.prototype, "filterDescription", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=filter[evra]" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=filter[evra]" }),
         __metadata("design:type", String)
     ], SystemPackagesQueryParams.prototype, "filterEvra", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=filter[name]" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=filter[name]" }),
         __metadata("design:type", String)
     ], SystemPackagesQueryParams.prototype, "filterName", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=filter[summary]" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=filter[summary]" }),
         __metadata("design:type", String)
     ], SystemPackagesQueryParams.prototype, "filterSummary", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=filter[updatable]" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=filter[updatable]" }),
         __metadata("design:type", Boolean)
     ], SystemPackagesQueryParams.prototype, "filterUpdatable", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=limit" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=limit" }),
         __metadata("design:type", Number)
     ], SystemPackagesQueryParams.prototype, "limit", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=offset" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=offset" }),
         __metadata("design:type", Number)
     ], SystemPackagesQueryParams.prototype, "offset", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=search" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=search" }),
         __metadata("design:type", String)
     ], SystemPackagesQueryParams.prototype, "search", void 0);
     return SystemPackagesQueryParams;
@@ -82,7 +82,7 @@ var SystemPackagesSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeRhIdentity)
     ], SystemPackagesSecurity.prototype, "rhIdentity", void 0);
     return SystemPackagesSecurity;
@@ -94,15 +94,15 @@ var SystemPackagesRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", SystemPackagesPathParams)
     ], SystemPackagesRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", SystemPackagesQueryParams)
     ], SystemPackagesRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", SystemPackagesSecurity)
     ], SystemPackagesRequest.prototype, "security", void 0);
     return SystemPackagesRequest;
@@ -114,15 +114,15 @@ var SystemPackagesResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], SystemPackagesResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], SystemPackagesResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.ControllersSystemPackageResponse)
     ], SystemPackagesResponse.prototype, "controllersSystemPackageResponse", void 0);
     return SystemPackagesResponse;

@@ -1,5 +1,7 @@
 package shared
 
+// ACLRuleScope
+// The extent to which calendar access is granted by this ACL rule.
 type ACLRuleScope struct {
 	Type  *string `json:"type,omitempty"`
 	Value *string `json:"value,omitempty"`

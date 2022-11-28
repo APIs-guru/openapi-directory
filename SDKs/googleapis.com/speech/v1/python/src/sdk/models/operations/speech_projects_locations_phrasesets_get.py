@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class SpeechProjectsLocationsPhraseSetsGetPathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,20 +26,20 @@ class SpeechProjectsLocationsPhraseSetsGetQueryParams:
 
 @dataclass
 class SpeechProjectsLocationsPhraseSetsGetSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class SpeechProjectsLocationsPhraseSetsGetRequest:
-    path_params: SpeechProjectsLocationsPhraseSetsGetPathParams = field(default=None)
-    query_params: SpeechProjectsLocationsPhraseSetsGetQueryParams = field(default=None)
-    security: SpeechProjectsLocationsPhraseSetsGetSecurity = field(default=None)
+    path_params: SpeechProjectsLocationsPhraseSetsGetPathParams = field()
+    query_params: SpeechProjectsLocationsPhraseSetsGetQueryParams = field()
+    security: SpeechProjectsLocationsPhraseSetsGetSecurity = field()
     
 
 @dataclass
 class SpeechProjectsLocationsPhraseSetsGetResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     phrase_set: Optional[shared.PhraseSet] = field(default=None)
-    status_code: int = field(default=None)
     

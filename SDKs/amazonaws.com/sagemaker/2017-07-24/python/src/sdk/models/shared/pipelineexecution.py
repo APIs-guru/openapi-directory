@@ -1,29 +1,31 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import usercontext
-from . import usercontext
-from . import pipelineexecutionstatus_enum
-from . import pipelineexperimentconfig
-from . import parameter
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class PipelineExecution:
-    created_by: Optional[usercontext.UserContext] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'CreatedBy' }})
-    creation_time: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'CreationTime', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    failure_reason: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FailureReason' }})
-    last_modified_by: Optional[usercontext.UserContext] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'LastModifiedBy' }})
-    last_modified_time: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'LastModifiedTime', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    pipeline_arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'PipelineArn' }})
-    pipeline_execution_arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'PipelineExecutionArn' }})
-    pipeline_execution_description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'PipelineExecutionDescription' }})
-    pipeline_execution_display_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'PipelineExecutionDisplayName' }})
-    pipeline_execution_status: Optional[pipelineexecutionstatus_enum.PipelineExecutionStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'PipelineExecutionStatus' }})
-    pipeline_experiment_config: Optional[pipelineexperimentconfig.PipelineExperimentConfig] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'PipelineExperimentConfig' }})
-    pipeline_parameters: Optional[List[parameter.Parameter]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'PipelineParameters' }})
+    r"""PipelineExecution
+    An execution of a pipeline.
+    """
+    
+    created_by: Optional[UserContext] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('CreatedBy') }})
+    creation_time: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('CreationTime'), 'encoder': utils.datetimeisoformat(True), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    failure_reason: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('FailureReason') }})
+    last_modified_by: Optional[UserContext] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('LastModifiedBy') }})
+    last_modified_time: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('LastModifiedTime'), 'encoder': utils.datetimeisoformat(True), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    pipeline_arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('PipelineArn') }})
+    pipeline_execution_arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('PipelineExecutionArn') }})
+    pipeline_execution_description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('PipelineExecutionDescription') }})
+    pipeline_execution_display_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('PipelineExecutionDisplayName') }})
+    pipeline_execution_status: Optional[PipelineExecutionStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('PipelineExecutionStatus') }})
+    pipeline_experiment_config: Optional[PipelineExperimentConfig] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('PipelineExperimentConfig') }})
+    pipeline_parameters: Optional[List[Parameter]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('PipelineParameters') }})
     

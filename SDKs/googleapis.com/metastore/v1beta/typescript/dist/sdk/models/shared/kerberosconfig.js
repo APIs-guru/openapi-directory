@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Secret } from "./secret";
 // KerberosConfig
 /**
@@ -34,15 +34,15 @@ var KerberosConfig = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=keytab" }),
+        SpeakeasyMetadata({ data: "json, name=keytab" }),
         __metadata("design:type", Secret)
     ], KerberosConfig.prototype, "keytab", void 0);
     __decorate([
-        Metadata({ data: "json, name=krb5ConfigGcsUri" }),
+        SpeakeasyMetadata({ data: "json, name=krb5ConfigGcsUri" }),
         __metadata("design:type", String)
     ], KerberosConfig.prototype, "krb5ConfigGcsUri", void 0);
     __decorate([
-        Metadata({ data: "json, name=principal" }),
+        SpeakeasyMetadata({ data: "json, name=principal" }),
         __metadata("design:type", String)
     ], KerberosConfig.prototype, "principal", void 0);
     return KerberosConfig;

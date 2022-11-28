@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
 @dataclass
 class CreateResourcePolicyStatementPathParams:
-    resource_arn: str = field(default=None, metadata={'path_param': { 'field_name': 'resourceArn', 'style': 'simple', 'explode': False }})
+    resource_arn: str = field(metadata={'path_param': { 'field_name': 'resourceArn', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -32,31 +37,31 @@ class CreateResourcePolicyStatementRequestBodyEffectEnum(str, Enum):
 @dataclass_json
 @dataclass
 class CreateResourcePolicyStatementRequestBody:
-    action: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'action' }})
-    condition: Optional[dict[str, dict[str, str]]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'condition' }})
-    effect: CreateResourcePolicyStatementRequestBodyEffectEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'effect' }})
-    principal: List[shared.Principal] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'principal' }})
-    statement_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'statementId' }})
+    action: List[str] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('action') }})
+    effect: CreateResourcePolicyStatementRequestBodyEffectEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('effect') }})
+    principal: List[shared.Principal] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('principal') }})
+    statement_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('statementId') }})
+    condition: Optional[dict[str, dict[str, str]]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('condition') }})
     
 
 @dataclass
 class CreateResourcePolicyStatementRequest:
-    path_params: CreateResourcePolicyStatementPathParams = field(default=None)
-    query_params: CreateResourcePolicyStatementQueryParams = field(default=None)
-    headers: CreateResourcePolicyStatementHeaders = field(default=None)
-    request: CreateResourcePolicyStatementRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: CreateResourcePolicyStatementHeaders = field()
+    path_params: CreateResourcePolicyStatementPathParams = field()
+    query_params: CreateResourcePolicyStatementQueryParams = field()
+    request: CreateResourcePolicyStatementRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class CreateResourcePolicyStatementResponse:
+    content_type: str = field()
+    status_code: int = field()
     conflict_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     create_resource_policy_statement_response: Optional[shared.CreateResourcePolicyStatementResponse] = field(default=None)
     internal_server_exception: Optional[Any] = field(default=None)
     precondition_failed_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
     service_quota_exceeded_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     validation_exception: Optional[Any] = field(default=None)
     

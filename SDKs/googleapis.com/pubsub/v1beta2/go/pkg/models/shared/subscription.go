@@ -1,5 +1,7 @@
 package shared
 
+// Subscription
+// A subscription resource.
 type Subscription struct {
 	AckDeadlineSeconds *int32      `json:"ackDeadlineSeconds,omitempty"`
 	Name               *string     `json:"name,omitempty"`

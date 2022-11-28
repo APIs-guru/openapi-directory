@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetDeleteAccountPasswordPolicyActionEnum(str, Enum):
     DELETE_ACCOUNT_PASSWORD_POLICY = "DeleteAccountPasswordPolicy"
@@ -10,8 +14,8 @@ class GetDeleteAccountPasswordPolicyVersionEnum(str, Enum):
 
 @dataclass
 class GetDeleteAccountPasswordPolicyQueryParams:
-    action: GetDeleteAccountPasswordPolicyActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: GetDeleteAccountPasswordPolicyVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: GetDeleteAccountPasswordPolicyActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: GetDeleteAccountPasswordPolicyVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,13 +31,13 @@ class GetDeleteAccountPasswordPolicyHeaders:
 
 @dataclass
 class GetDeleteAccountPasswordPolicyRequest:
-    query_params: GetDeleteAccountPasswordPolicyQueryParams = field(default=None)
-    headers: GetDeleteAccountPasswordPolicyHeaders = field(default=None)
+    headers: GetDeleteAccountPasswordPolicyHeaders = field()
+    query_params: GetDeleteAccountPasswordPolicyQueryParams = field()
     
 
 @dataclass
 class GetDeleteAccountPasswordPolicyResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

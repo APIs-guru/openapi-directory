@@ -22,8 +22,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { Condition } from "./condition";
+import { LogConfig } from "./logconfig";
 export var RuleActionEnum;
 (function (RuleActionEnum) {
     RuleActionEnum["NoAction"] = "NO_ACTION";
@@ -43,31 +44,31 @@ var Rule = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=action" }),
+        SpeakeasyMetadata({ data: "json, name=action" }),
         __metadata("design:type", String)
     ], Rule.prototype, "action", void 0);
     __decorate([
-        Metadata({ data: "json, name=conditions", elemType: shared.Condition }),
+        SpeakeasyMetadata({ data: "json, name=conditions", elemType: Condition }),
         __metadata("design:type", Array)
     ], Rule.prototype, "conditions", void 0);
     __decorate([
-        Metadata({ data: "json, name=description" }),
+        SpeakeasyMetadata({ data: "json, name=description" }),
         __metadata("design:type", String)
     ], Rule.prototype, "description", void 0);
     __decorate([
-        Metadata({ data: "json, name=in" }),
+        SpeakeasyMetadata({ data: "json, name=in" }),
         __metadata("design:type", Array)
     ], Rule.prototype, "in", void 0);
     __decorate([
-        Metadata({ data: "json, name=logConfig", elemType: shared.LogConfig }),
+        SpeakeasyMetadata({ data: "json, name=logConfig", elemType: LogConfig }),
         __metadata("design:type", Array)
     ], Rule.prototype, "logConfig", void 0);
     __decorate([
-        Metadata({ data: "json, name=notIn" }),
+        SpeakeasyMetadata({ data: "json, name=notIn" }),
         __metadata("design:type", Array)
     ], Rule.prototype, "notIn", void 0);
     __decorate([
-        Metadata({ data: "json, name=permissions" }),
+        SpeakeasyMetadata({ data: "json, name=permissions" }),
         __metadata("design:type", Array)
     ], Rule.prototype, "permissions", void 0);
     return Rule;

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // PlayerEvent
@@ -6,18 +7,18 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * An event status resource.
 **/
 export class PlayerEvent extends SpeakeasyBase {
-  @Metadata({ data: "json, name=definitionId" })
+  @SpeakeasyMetadata({ data: "json, name=definitionId" })
   definitionId?: string;
 
-  @Metadata({ data: "json, name=formattedNumEvents" })
+  @SpeakeasyMetadata({ data: "json, name=formattedNumEvents" })
   formattedNumEvents?: string;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=numEvents" })
+  @SpeakeasyMetadata({ data: "json, name=numEvents" })
   numEvents?: string;
 
-  @Metadata({ data: "json, name=playerId" })
+  @SpeakeasyMetadata({ data: "json, name=playerId" })
   playerId?: string;
 }

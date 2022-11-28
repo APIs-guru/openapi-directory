@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SelfManagedActiveDirectoryConfiguration } from "./selfmanagedactivedirectoryconfiguration";
+
 
 
 // CreateSvmActiveDirectoryConfiguration
@@ -7,9 +8,9 @@ import { SelfManagedActiveDirectoryConfiguration } from "./selfmanagedactivedire
  * The configuration that Amazon FSx uses to join the ONTAP storage virtual machine (SVM) to your self-managed (including on-premises) Microsoft Active Directory (AD) directory.
 **/
 export class CreateSvmActiveDirectoryConfiguration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=NetBiosName" })
+  @SpeakeasyMetadata({ data: "json, name=NetBiosName" })
   netBiosName: string;
 
-  @Metadata({ data: "json, name=SelfManagedActiveDirectoryConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=SelfManagedActiveDirectoryConfiguration" })
   selfManagedActiveDirectoryConfiguration?: SelfManagedActiveDirectoryConfiguration;
 }

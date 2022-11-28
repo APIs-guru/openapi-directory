@@ -1,5 +1,7 @@
 package shared
 
+// VolumeConfiguration
+// Describes the configuration of an Amazon Elastic Block Store (Amazon EBS) volume.
 type VolumeConfiguration struct {
 	VolumeBaselineIops       *int64  `json:"volumeBaselineIOPS,omitempty"`
 	VolumeBaselineThroughput *int64  `json:"volumeBaselineThroughput,omitempty"`

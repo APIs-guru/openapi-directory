@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AppGateway } from "./appgateway";
+
 
 
 // ListAppGatewaysResponse
@@ -8,12 +8,12 @@ import { AppGateway } from "./appgateway";
  * Response message for BeyondCorp.ListAppGateways.
 **/
 export class ListAppGatewaysResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=appGateways", elemType: shared.AppGateway })
+  @SpeakeasyMetadata({ data: "json, name=appGateways", elemType: AppGateway })
   appGateways?: AppGateway[];
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 
-  @Metadata({ data: "json, name=unreachable" })
+  @SpeakeasyMetadata({ data: "json, name=unreachable" })
   unreachable?: string[];
 }

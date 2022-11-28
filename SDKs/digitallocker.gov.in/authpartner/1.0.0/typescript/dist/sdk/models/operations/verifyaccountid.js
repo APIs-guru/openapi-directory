@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var VerifyAccountIdSecurity = /** @class */ (function (_super) {
     __extends(VerifyAccountIdSecurity, _super);
@@ -30,39 +30,23 @@ var VerifyAccountIdSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauthsecurity)
     ], VerifyAccountIdSecurity.prototype, "oauthsecurity", void 0);
     return VerifyAccountIdSecurity;
 }(SpeakeasyBase));
 export { VerifyAccountIdSecurity };
-var VerifyAccountIdRequest = /** @class */ (function (_super) {
-    __extends(VerifyAccountIdRequest, _super);
-    function VerifyAccountIdRequest() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    __decorate([
-        Metadata({ data: "request, media_type=multipart/form-data" }),
-        __metadata("design:type", Object)
-    ], VerifyAccountIdRequest.prototype, "request", void 0);
-    __decorate([
-        Metadata(),
-        __metadata("design:type", VerifyAccountIdSecurity)
-    ], VerifyAccountIdRequest.prototype, "security", void 0);
-    return VerifyAccountIdRequest;
-}(SpeakeasyBase));
-export { VerifyAccountIdRequest };
 var VerifyAccountId400ApplicationJson = /** @class */ (function (_super) {
     __extends(VerifyAccountId400ApplicationJson, _super);
     function VerifyAccountId400ApplicationJson() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", Object)
     ], VerifyAccountId400ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=error_description" }),
+        SpeakeasyMetadata({ data: "json, name=error_description" }),
         __metadata("design:type", Object)
     ], VerifyAccountId400ApplicationJson.prototype, "errorDescription", void 0);
     return VerifyAccountId400ApplicationJson;
@@ -74,11 +58,11 @@ var VerifyAccountId401ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], VerifyAccountId401ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=error_description" }),
+        SpeakeasyMetadata({ data: "json, name=error_description" }),
         __metadata("design:type", String)
     ], VerifyAccountId401ApplicationJson.prototype, "errorDescription", void 0);
     return VerifyAccountId401ApplicationJson;
@@ -90,43 +74,59 @@ var VerifyAccountId500ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", Object)
     ], VerifyAccountId500ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=error_description" }),
+        SpeakeasyMetadata({ data: "json, name=error_description" }),
         __metadata("design:type", Object)
     ], VerifyAccountId500ApplicationJson.prototype, "errorDescription", void 0);
     return VerifyAccountId500ApplicationJson;
 }(SpeakeasyBase));
 export { VerifyAccountId500ApplicationJson };
+var VerifyAccountIdRequest = /** @class */ (function (_super) {
+    __extends(VerifyAccountIdRequest, _super);
+    function VerifyAccountIdRequest() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "request, media_type=multipart/form-data" }),
+        __metadata("design:type", Object)
+    ], VerifyAccountIdRequest.prototype, "request", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", VerifyAccountIdSecurity)
+    ], VerifyAccountIdRequest.prototype, "security", void 0);
+    return VerifyAccountIdRequest;
+}(SpeakeasyBase));
+export { VerifyAccountIdRequest };
 var VerifyAccountIdResponse = /** @class */ (function (_super) {
     __extends(VerifyAccountIdResponse, _super);
     function VerifyAccountIdResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], VerifyAccountIdResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], VerifyAccountIdResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", VerifyAccountId400ApplicationJson)
     ], VerifyAccountIdResponse.prototype, "verifyAccountId400ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", VerifyAccountId401ApplicationJson)
     ], VerifyAccountIdResponse.prototype, "verifyAccountId401ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", VerifyAccountId500ApplicationJson)
     ], VerifyAccountIdResponse.prototype, "verifyAccountId500ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.VerifyAccountResponse)
     ], VerifyAccountIdResponse.prototype, "verifyAccountResponse", void 0);
     return VerifyAccountIdResponse;

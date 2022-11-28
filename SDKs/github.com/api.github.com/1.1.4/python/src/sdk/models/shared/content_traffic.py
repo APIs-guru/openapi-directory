@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass_json
 @dataclass
 class ContentTraffic:
-    count: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'count' }})
-    path: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'path' }})
-    title: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'title' }})
-    uniques: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'uniques' }})
+    r"""ContentTraffic
+    Content Traffic
+    """
+    
+    count: int = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('count') }})
+    path: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('path') }})
+    title: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('title') }})
+    uniques: int = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('uniques') }})
     

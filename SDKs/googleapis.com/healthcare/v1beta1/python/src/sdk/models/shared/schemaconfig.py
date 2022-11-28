@@ -1,6 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
+from . import *
 
 class SchemaConfigSchemaTypeEnum(str, Enum):
     SCHEMA_TYPE_UNSPECIFIED = "SCHEMA_TYPE_UNSPECIFIED"
@@ -12,6 +18,11 @@ class SchemaConfigSchemaTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class SchemaConfig:
-    recursive_structure_depth: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'recursiveStructureDepth' }})
-    schema_type: Optional[SchemaConfigSchemaTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'schemaType' }})
+    r"""SchemaConfig
+    Configuration for the FHIR BigQuery schema. Determines how the server generates the schema.
+    """
+    
+    last_updated_partition_config: Optional[TimePartitioning] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('lastUpdatedPartitionConfig') }})
+    recursive_structure_depth: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('recursiveStructureDepth') }})
+    schema_type: Optional[SchemaConfigSchemaTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('schemaType') }})
     

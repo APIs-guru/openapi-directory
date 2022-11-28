@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ContactListDestination } from "./contactlistdestination";
 import { SuppressionListDestination } from "./suppressionlistdestination";
+
 
 
 // ImportDestination
@@ -8,9 +9,9 @@ import { SuppressionListDestination } from "./suppressionlistdestination";
  * An object that contains details about the resource destination the import job is going to target.
 **/
 export class ImportDestination extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ContactListDestination" })
+  @SpeakeasyMetadata({ data: "json, name=ContactListDestination" })
   contactListDestination?: ContactListDestination;
 
-  @Metadata({ data: "json, name=SuppressionListDestination" })
+  @SpeakeasyMetadata({ data: "json, name=SuppressionListDestination" })
   suppressionListDestination?: SuppressionListDestination;
 }

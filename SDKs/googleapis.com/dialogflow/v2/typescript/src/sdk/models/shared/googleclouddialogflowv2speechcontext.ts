@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudDialogflowV2SpeechContext
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Hints for the speech recognizer to help with recognition in a specific conversation state.
 **/
 export class GoogleCloudDialogflowV2SpeechContext extends SpeakeasyBase {
-  @Metadata({ data: "json, name=boost" })
+  @SpeakeasyMetadata({ data: "json, name=boost" })
   boost?: number;
 
-  @Metadata({ data: "json, name=phrases" })
+  @SpeakeasyMetadata({ data: "json, name=phrases" })
   phrases?: string[];
 }

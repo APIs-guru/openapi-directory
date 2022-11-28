@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // LastActiveDefinition
@@ -6,18 +7,18 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * When there are multiple versions of a blueprint and the latest version has some errors, this attribute indicates the last successful blueprint definition that is available with the service.
 **/
 export class LastActiveDefinition extends SpeakeasyBase {
-  @Metadata({ data: "json, name=BlueprintLocation" })
+  @SpeakeasyMetadata({ data: "json, name=BlueprintLocation" })
   blueprintLocation?: string;
 
-  @Metadata({ data: "json, name=BlueprintServiceLocation" })
+  @SpeakeasyMetadata({ data: "json, name=BlueprintServiceLocation" })
   blueprintServiceLocation?: string;
 
-  @Metadata({ data: "json, name=Description" })
+  @SpeakeasyMetadata({ data: "json, name=Description" })
   description?: string;
 
-  @Metadata({ data: "json, name=LastModifiedOn" })
+  @SpeakeasyMetadata({ data: "json, name=LastModifiedOn" })
   lastModifiedOn?: Date;
 
-  @Metadata({ data: "json, name=ParameterSpec" })
+  @SpeakeasyMetadata({ data: "json, name=ParameterSpec" })
   parameterSpec?: string;
 }

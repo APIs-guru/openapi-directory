@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
 from typing import Optional
@@ -18,14 +18,14 @@ class AuthorizationContactInformationGetQueryParams:
 
 @dataclass
 class AuthorizationContactInformationGetRequest:
-    query_params: AuthorizationContactInformationGetQueryParams = field(default=None)
+    query_params: AuthorizationContactInformationGetQueryParams = field()
     
 
 @dataclass
 class AuthorizationContactInformationGetResponse:
+    content_type: str = field()
+    status_code: int = field()
     api_i_paged_response_authorization_codes_shared_models_authorization_contact_information_: Optional[shared.APIIPagedResponseAuthorizationCodesSharedModelsAuthorizationContactInformation] = field(default=None)
     api_models_api_error: Optional[shared.APIModelsAPIError] = field(default=None)
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    body: Optional[bytes] = field(default=None)
     

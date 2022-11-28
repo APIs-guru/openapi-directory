@@ -1,20 +1,20 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ItemSummary } from "./itemsummary";
 import { ListData } from "./listdata";
 import { Pagination } from "./pagination";
 import { Theme } from "./theme";
 
+
 export enum ItemListItemTypesEnum {
-    Movie = "movie"
-,    Show = "show"
-,    Season = "season"
-,    Episode = "episode"
-,    Program = "program"
-,    Link = "link"
-,    Trailer = "trailer"
-,    Channel = "channel"
-,    CustomAsset = "customAsset"
+    Movie = "movie",
+    Show = "show",
+    Season = "season",
+    Episode = "episode",
+    Program = "program",
+    Link = "link",
+    Trailer = "trailer",
+    Channel = "channel",
+    CustomAsset = "customAsset"
 }
 
 
@@ -23,48 +23,48 @@ export enum ItemListItemTypesEnum {
  * A pageable list of items.
 **/
 export class ItemList extends SpeakeasyBase {
-  @Metadata({ data: "json, name=customFields" })
+  @SpeakeasyMetadata({ data: "json, name=customFields" })
   customFields?: Map<string, any>;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: string;
 
-  @Metadata({ data: "json, name=images" })
+  @SpeakeasyMetadata({ data: "json, name=images" })
   images?: Map<string, string>;
 
-  @Metadata({ data: "json, name=itemTypes" })
+  @SpeakeasyMetadata({ data: "json, name=itemTypes" })
   itemTypes?: ItemListItemTypesEnum[];
 
-  @Metadata({ data: "json, name=items", elemType: shared.ItemSummary })
+  @SpeakeasyMetadata({ data: "json, name=items", elemType: ItemSummary })
   items: ItemSummary[];
 
-  @Metadata({ data: "json, name=listData" })
+  @SpeakeasyMetadata({ data: "json, name=listData" })
   listData?: ListData;
 
-  @Metadata({ data: "json, name=paging" })
+  @SpeakeasyMetadata({ data: "json, name=paging" })
   paging: Pagination;
 
-  @Metadata({ data: "json, name=parameter" })
+  @SpeakeasyMetadata({ data: "json, name=parameter" })
   parameter?: string;
 
-  @Metadata({ data: "json, name=path" })
+  @SpeakeasyMetadata({ data: "json, name=path" })
   path: string;
 
-  @Metadata({ data: "json, name=shortDescription" })
+  @SpeakeasyMetadata({ data: "json, name=shortDescription" })
   shortDescription?: string;
 
-  @Metadata({ data: "json, name=size" })
+  @SpeakeasyMetadata({ data: "json, name=size" })
   size: number;
 
-  @Metadata({ data: "json, name=tagline" })
+  @SpeakeasyMetadata({ data: "json, name=tagline" })
   tagline?: string;
 
-  @Metadata({ data: "json, name=themes", elemType: shared.Theme })
+  @SpeakeasyMetadata({ data: "json, name=themes", elemType: Theme })
   themes?: Theme[];
 
-  @Metadata({ data: "json, name=title" })
+  @SpeakeasyMetadata({ data: "json, name=title" })
   title?: string;
 }

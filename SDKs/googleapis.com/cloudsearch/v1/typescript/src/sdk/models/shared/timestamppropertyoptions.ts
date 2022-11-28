@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TimestampOperatorOptions } from "./timestampoperatoroptions";
+
 
 
 // TimestampPropertyOptions
@@ -7,6 +8,6 @@ import { TimestampOperatorOptions } from "./timestampoperatoroptions";
  * The options for timestamp properties.
 **/
 export class TimestampPropertyOptions extends SpeakeasyBase {
-  @Metadata({ data: "json, name=operatorOptions" })
+  @SpeakeasyMetadata({ data: "json, name=operatorOptions" })
   operatorOptions?: TimestampOperatorOptions;
 }

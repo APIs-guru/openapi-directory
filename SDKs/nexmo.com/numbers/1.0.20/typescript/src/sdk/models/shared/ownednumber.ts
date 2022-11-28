@@ -1,31 +1,32 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class Ownednumber extends SpeakeasyBase {
-  @Metadata({ data: "json, name=country" })
+  @SpeakeasyMetadata({ data: "json, name=country" })
   country?: string;
 
-  @Metadata({ data: "json, name=features" })
+  @SpeakeasyMetadata({ data: "json, name=features" })
   features?: string[];
 
-  @Metadata({ data: "json, name=messagesCallbackType" })
+  @SpeakeasyMetadata({ data: "json, name=messagesCallbackType" })
   messagesCallbackType?: string;
 
-  @Metadata({ data: "json, name=messagesCallbackValue" })
+  @SpeakeasyMetadata({ data: "json, name=messagesCallbackValue" })
   messagesCallbackValue?: string;
 
-  @Metadata({ data: "json, name=moHttpUrl" })
+  @SpeakeasyMetadata({ data: "json, name=moHttpUrl" })
   moHttpUrl?: string;
 
-  @Metadata({ data: "json, name=msisdn" })
+  @SpeakeasyMetadata({ data: "json, name=msisdn" })
   msisdn?: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: string;
 
-  @Metadata({ data: "json, name=voiceCallbackType" })
+  @SpeakeasyMetadata({ data: "json, name=voiceCallbackType" })
   voiceCallbackType?: string;
 
-  @Metadata({ data: "json, name=voiceCallbackValue" })
+  @SpeakeasyMetadata({ data: "json, name=voiceCallbackValue" })
   voiceCallbackValue?: string;
 }

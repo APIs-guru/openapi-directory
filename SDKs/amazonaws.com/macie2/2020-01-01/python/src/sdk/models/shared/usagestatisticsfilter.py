@@ -1,14 +1,19 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import usagestatisticsfiltercomparator_enum
-from . import usagestatisticsfilterkey_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class UsageStatisticsFilter:
-    comparator: Optional[usagestatisticsfiltercomparator_enum.UsageStatisticsFilterComparatorEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'comparator' }})
-    key: Optional[usagestatisticsfilterkey_enum.UsageStatisticsFilterKeyEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
-    values: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'values' }})
+    r"""UsageStatisticsFilter
+    Specifies a condition for filtering the results of a query for quota and usage data for one or more Amazon Macie accounts.
+    """
+    
+    comparator: Optional[UsageStatisticsFilterComparatorEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('comparator') }})
+    key: Optional[UsageStatisticsFilterKeyEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('key') }})
+    values: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('values') }})
     

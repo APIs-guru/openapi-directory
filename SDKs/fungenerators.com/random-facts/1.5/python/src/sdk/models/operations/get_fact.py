@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
 from typing import Optional
+from sdk.models import shared
 
 
 @dataclass
@@ -9,17 +10,17 @@ class GetFactQueryParams:
 
 @dataclass
 class GetFactSecurity:
-    x_fungenerators_api_secret: shared.SchemeXFungeneratorsAPISecret = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    x_fungenerators_api_secret: shared.SchemeXFungeneratorsAPISecret = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
     
 
 @dataclass
 class GetFactRequest:
-    query_params: GetFactQueryParams = field(default=None)
-    security: GetFactSecurity = field(default=None)
+    query_params: GetFactQueryParams = field()
+    security: GetFactSecurity = field()
     
 
 @dataclass
 class GetFactResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

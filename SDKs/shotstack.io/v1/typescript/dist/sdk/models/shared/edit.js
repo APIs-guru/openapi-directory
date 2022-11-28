@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Output } from "./output";
 import { Timeline } from "./timeline";
 export var EditDiskEnum;
@@ -40,19 +40,19 @@ var Edit = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=callback" }),
+        SpeakeasyMetadata({ data: "json, name=callback" }),
         __metadata("design:type", String)
     ], Edit.prototype, "callback", void 0);
     __decorate([
-        Metadata({ data: "json, name=disk" }),
+        SpeakeasyMetadata({ data: "json, name=disk" }),
         __metadata("design:type", String)
     ], Edit.prototype, "disk", void 0);
     __decorate([
-        Metadata({ data: "json, name=output" }),
+        SpeakeasyMetadata({ data: "json, name=output" }),
         __metadata("design:type", Output)
     ], Edit.prototype, "output", void 0);
     __decorate([
-        Metadata({ data: "json, name=timeline" }),
+        SpeakeasyMetadata({ data: "json, name=timeline" }),
         __metadata("design:type", Timeline)
     ], Edit.prototype, "timeline", void 0);
     return Edit;

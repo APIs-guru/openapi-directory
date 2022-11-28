@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RetryActionEnum } from "./retryactionenum";
 // EvaluateOnExit
 /**
@@ -34,19 +34,19 @@ var EvaluateOnExit = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=action" }),
+        SpeakeasyMetadata({ data: "json, name=action" }),
         __metadata("design:type", String)
     ], EvaluateOnExit.prototype, "action", void 0);
     __decorate([
-        Metadata({ data: "json, name=onExitCode" }),
+        SpeakeasyMetadata({ data: "json, name=onExitCode" }),
         __metadata("design:type", String)
     ], EvaluateOnExit.prototype, "onExitCode", void 0);
     __decorate([
-        Metadata({ data: "json, name=onReason" }),
+        SpeakeasyMetadata({ data: "json, name=onReason" }),
         __metadata("design:type", String)
     ], EvaluateOnExit.prototype, "onReason", void 0);
     __decorate([
-        Metadata({ data: "json, name=onStatusReason" }),
+        SpeakeasyMetadata({ data: "json, name=onStatusReason" }),
         __metadata("design:type", String)
     ], EvaluateOnExit.prototype, "onStatusReason", void 0);
     return EvaluateOnExit;

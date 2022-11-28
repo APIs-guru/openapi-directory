@@ -1,6 +1,11 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -22,24 +27,24 @@ class CreateJobQueueRequestBodyStateEnum(str, Enum):
 @dataclass_json
 @dataclass
 class CreateJobQueueRequestBody:
-    compute_environment_order: List[shared.ComputeEnvironmentOrder] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'computeEnvironmentOrder' }})
-    job_queue_name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'jobQueueName' }})
-    priority: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'priority' }})
-    state: Optional[CreateJobQueueRequestBodyStateEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'state' }})
-    tags: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tags' }})
+    compute_environment_order: List[shared.ComputeEnvironmentOrder] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('computeEnvironmentOrder') }})
+    job_queue_name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('jobQueueName') }})
+    priority: int = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('priority') }})
+    state: Optional[CreateJobQueueRequestBodyStateEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('state') }})
+    tags: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('tags') }})
     
 
 @dataclass
 class CreateJobQueueRequest:
-    headers: CreateJobQueueHeaders = field(default=None)
-    request: CreateJobQueueRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: CreateJobQueueHeaders = field()
+    request: CreateJobQueueRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class CreateJobQueueResponse:
+    content_type: str = field()
+    status_code: int = field()
     client_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     create_job_queue_response: Optional[shared.CreateJobQueueResponse] = field(default=None)
     server_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

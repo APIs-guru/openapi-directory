@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class MybusinessqandaLocationsQuestionsAnswersUpsertPathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,14 +26,14 @@ class MybusinessqandaLocationsQuestionsAnswersUpsertQueryParams:
 
 @dataclass
 class MybusinessqandaLocationsQuestionsAnswersUpsertRequest:
-    path_params: MybusinessqandaLocationsQuestionsAnswersUpsertPathParams = field(default=None)
-    query_params: MybusinessqandaLocationsQuestionsAnswersUpsertQueryParams = field(default=None)
-    request: Optional[shared.UpsertAnswerRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    path_params: MybusinessqandaLocationsQuestionsAnswersUpsertPathParams = field()
+    query_params: MybusinessqandaLocationsQuestionsAnswersUpsertQueryParams = field()
+    request: Optional[shared.UpsertAnswerRequestInput] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class MybusinessqandaLocationsQuestionsAnswersUpsertResponse:
+    content_type: str = field()
+    status_code: int = field()
     answer: Optional[shared.Answer] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

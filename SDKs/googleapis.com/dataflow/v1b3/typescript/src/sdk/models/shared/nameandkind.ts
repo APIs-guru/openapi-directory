@@ -1,16 +1,17 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum NameAndKindKindEnum {
-    Invalid = "INVALID"
-,    Sum = "SUM"
-,    Max = "MAX"
-,    Min = "MIN"
-,    Mean = "MEAN"
-,    Or = "OR"
-,    And = "AND"
-,    Set = "SET"
-,    Distribution = "DISTRIBUTION"
-,    LatestValue = "LATEST_VALUE"
+    Invalid = "INVALID",
+    Sum = "SUM",
+    Max = "MAX",
+    Min = "MIN",
+    Mean = "MEAN",
+    Or = "OR",
+    And = "AND",
+    Set = "SET",
+    Distribution = "DISTRIBUTION",
+    LatestValue = "LATEST_VALUE"
 }
 
 
@@ -19,9 +20,9 @@ export enum NameAndKindKindEnum {
  * Basic metadata about a counter.
 **/
 export class NameAndKind extends SpeakeasyBase {
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: NameAndKindKindEnum;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 }

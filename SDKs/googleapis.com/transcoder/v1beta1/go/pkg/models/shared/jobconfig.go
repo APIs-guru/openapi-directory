@@ -1,5 +1,7 @@
 package shared
 
+// JobConfig
+// Job configuration
 type JobConfig struct {
 	AdBreaks          []AdBreak          `json:"adBreaks,omitempty"`
 	EditList          []EditAtom         `json:"editList,omitempty"`

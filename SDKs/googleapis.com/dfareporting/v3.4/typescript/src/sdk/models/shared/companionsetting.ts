@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Size } from "./size";
+
 
 
 // CompanionSetting
@@ -8,15 +8,15 @@ import { Size } from "./size";
  * Companion Settings
 **/
 export class CompanionSetting extends SpeakeasyBase {
-  @Metadata({ data: "json, name=companionsDisabled" })
+  @SpeakeasyMetadata({ data: "json, name=companionsDisabled" })
   companionsDisabled?: boolean;
 
-  @Metadata({ data: "json, name=enabledSizes", elemType: shared.Size })
+  @SpeakeasyMetadata({ data: "json, name=enabledSizes", elemType: Size })
   enabledSizes?: Size[];
 
-  @Metadata({ data: "json, name=imageOnly" })
+  @SpeakeasyMetadata({ data: "json, name=imageOnly" })
   imageOnly?: boolean;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 }

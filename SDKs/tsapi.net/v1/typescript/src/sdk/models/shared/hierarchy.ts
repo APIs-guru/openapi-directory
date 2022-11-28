@@ -1,46 +1,46 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Language } from "./language";
 import { Variable } from "./variable";
 
 
+
 export class HierarchyMetadata extends SpeakeasyBase {
-  @Metadata({ data: "json, name=interviewCount" })
+  @SpeakeasyMetadata({ data: "json, name=interviewCount" })
   interviewCount?: number;
 
-  @Metadata({ data: "json, name=languages", elemType: shared.Language })
+  @SpeakeasyMetadata({ data: "json, name=languages", elemType: Language })
   languages?: Language[];
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=title" })
+  @SpeakeasyMetadata({ data: "json, name=title" })
   title?: string;
 
-  @Metadata({ data: "json, name=variables", elemType: shared.Variable })
+  @SpeakeasyMetadata({ data: "json, name=variables", elemType: Variable })
   variables?: Variable[];
 }
 
 
 export class HierarchyParent extends SpeakeasyBase {
-  @Metadata({ data: "json, name=level" })
+  @SpeakeasyMetadata({ data: "json, name=level" })
   level?: string;
 
-  @Metadata({ data: "json, name=linkVar" })
+  @SpeakeasyMetadata({ data: "json, name=linkVar" })
   linkVar?: string;
 
-  @Metadata({ data: "json, name=ordered" })
+  @SpeakeasyMetadata({ data: "json, name=ordered" })
   ordered?: boolean;
 }
 
 
 export class Hierarchy extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ident" })
+  @SpeakeasyMetadata({ data: "json, name=ident" })
   ident?: string;
 
-  @Metadata({ data: "json, name=metadata" })
+  @SpeakeasyMetadata({ data: "json, name=metadata" })
   metadata?: HierarchyMetadata;
 
-  @Metadata({ data: "json, name=parent" })
+  @SpeakeasyMetadata({ data: "json, name=parent" })
   parent?: HierarchyParent;
 }

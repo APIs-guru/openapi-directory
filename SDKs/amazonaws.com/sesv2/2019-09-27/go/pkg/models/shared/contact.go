@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// Contact
+// A contact is the end-user who is receiving the email.
 type Contact struct {
 	EmailAddress            *string           `json:"EmailAddress,omitempty"`
 	LastUpdatedTimestamp    *time.Time        `json:"LastUpdatedTimestamp,omitempty"`

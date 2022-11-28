@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from typing import Any,List,Optional
+from enum import Enum
 
 class FantasyPlayerOwnershipPercentagesSeasonLongFormatEnum(str, Enum):
     XML = "XML"
@@ -8,19 +9,19 @@ class FantasyPlayerOwnershipPercentagesSeasonLongFormatEnum(str, Enum):
 
 @dataclass
 class FantasyPlayerOwnershipPercentagesSeasonLongPathParams:
-    format: FantasyPlayerOwnershipPercentagesSeasonLongFormatEnum = field(default=None, metadata={'path_param': { 'field_name': 'format', 'style': 'simple', 'explode': False }})
-    season: str = field(default=None, metadata={'path_param': { 'field_name': 'season', 'style': 'simple', 'explode': False }})
-    week: str = field(default=None, metadata={'path_param': { 'field_name': 'week', 'style': 'simple', 'explode': False }})
+    format: FantasyPlayerOwnershipPercentagesSeasonLongFormatEnum = field(metadata={'path_param': { 'field_name': 'format', 'style': 'simple', 'explode': False }})
+    season: str = field(metadata={'path_param': { 'field_name': 'season', 'style': 'simple', 'explode': False }})
+    week: str = field(metadata={'path_param': { 'field_name': 'week', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class FantasyPlayerOwnershipPercentagesSeasonLongRequest:
-    path_params: FantasyPlayerOwnershipPercentagesSeasonLongPathParams = field(default=None)
+    path_params: FantasyPlayerOwnershipPercentagesSeasonLongPathParams = field()
     
 
 @dataclass
 class FantasyPlayerOwnershipPercentagesSeasonLongResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     player_ownerships: Optional[List[Any]] = field(default=None)
-    status_code: int = field(default=None)
     

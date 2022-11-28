@@ -22,8 +22,11 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { CloudWatchLoggingOptionUpdate } from "./cloudwatchloggingoptionupdate";
+import { InputUpdate } from "./inputupdate";
+import { OutputUpdate } from "./outputupdate";
+import { ReferenceDataSourceUpdate } from "./referencedatasourceupdate";
 // ApplicationUpdate
 /**
  * Describes updates to apply to an existing Amazon Kinesis Analytics application.
@@ -34,23 +37,23 @@ var ApplicationUpdate = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=ApplicationCodeUpdate" }),
+        SpeakeasyMetadata({ data: "json, name=ApplicationCodeUpdate" }),
         __metadata("design:type", String)
     ], ApplicationUpdate.prototype, "applicationCodeUpdate", void 0);
     __decorate([
-        Metadata({ data: "json, name=CloudWatchLoggingOptionUpdates", elemType: shared.CloudWatchLoggingOptionUpdate }),
+        SpeakeasyMetadata({ data: "json, name=CloudWatchLoggingOptionUpdates", elemType: CloudWatchLoggingOptionUpdate }),
         __metadata("design:type", Array)
     ], ApplicationUpdate.prototype, "cloudWatchLoggingOptionUpdates", void 0);
     __decorate([
-        Metadata({ data: "json, name=InputUpdates", elemType: shared.InputUpdate }),
+        SpeakeasyMetadata({ data: "json, name=InputUpdates", elemType: InputUpdate }),
         __metadata("design:type", Array)
     ], ApplicationUpdate.prototype, "inputUpdates", void 0);
     __decorate([
-        Metadata({ data: "json, name=OutputUpdates", elemType: shared.OutputUpdate }),
+        SpeakeasyMetadata({ data: "json, name=OutputUpdates", elemType: OutputUpdate }),
         __metadata("design:type", Array)
     ], ApplicationUpdate.prototype, "outputUpdates", void 0);
     __decorate([
-        Metadata({ data: "json, name=ReferenceDataSourceUpdates", elemType: shared.ReferenceDataSourceUpdate }),
+        SpeakeasyMetadata({ data: "json, name=ReferenceDataSourceUpdates", elemType: ReferenceDataSourceUpdate }),
         __metadata("design:type", Array)
     ], ApplicationUpdate.prototype, "referenceDataSourceUpdates", void 0);
     return ApplicationUpdate;

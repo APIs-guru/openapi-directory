@@ -10,7 +10,7 @@ import (
 	"strings"
 )
 
-var Servers = []string{
+var ServerList = []string{
 	"http://wellarchitected.{region}.amazonaws.com",
 	"https://wellarchitected.{region}.amazonaws.com",
 	"http://wellarchitected.{region}.amazonaws.com.cn",
@@ -21,10 +21,15 @@ type HTTPClient interface {
 	Do(req *http.Request) (*http.Response, error)
 }
 
+// SDK Documentation: https://docs.aws.amazon.com/wellarchitected/ - Amazon Web Services documentation
 type SDK struct {
-	defaultClient  HTTPClient
-	securityClient HTTPClient
-	serverURL      string
+	_defaultClient  HTTPClient
+	_securityClient HTTPClient
+	_security       *shared.Security
+	_serverURL      string
+	_language       string
+	_sdkVersion     string
+	_genVersion     string
 }
 
 type SDKOption func(*SDK)
@@ -35,33 +40,55 @@ func WithServerURL(serverURL string, params map[string]string) SDKOption {
 			serverURL = utils.ReplaceParameters(serverURL, params)
 		}
 
-		sdk.serverURL = serverURL
+		sdk._serverURL = serverURL
+	}
+}
+
+func WithClient(client HTTPClient) SDKOption {
+	return func(sdk *SDK) {
+		sdk._defaultClient = client
 	}
 }
 
 func WithSecurity(security shared.Security) SDKOption {
 	return func(sdk *SDK) {
-		sdk.securityClient = utils.CreateSecurityClient(security)
+		sdk._security = &security
 	}
 }
 
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
-		defaultClient:  http.DefaultClient,
-		securityClient: http.DefaultClient,
+		_language:   "go",
+		_sdkVersion: "",
+		_genVersion: "internal",
 	}
 	for _, opt := range opts {
 		opt(sdk)
 	}
-	if sdk.serverURL == "" {
-		sdk.serverURL = Servers[0]
+
+	if sdk._defaultClient == nil {
+		sdk._defaultClient = http.DefaultClient
+	}
+	if sdk._securityClient == nil {
+
+		if sdk._security != nil {
+			sdk._securityClient = utils.ConfigureSecurityClient(sdk._defaultClient, sdk._security)
+		} else {
+			sdk._securityClient = sdk._defaultClient
+		}
+
+	}
+
+	if sdk._serverURL == "" {
+		sdk._serverURL = ServerList[0]
 	}
 
 	return sdk
 }
 
+// AssociateLenses - Associate a lens to a workload.
 func (s *SDK) AssociateLenses(ctx context.Context, request operations.AssociateLensesRequest) (*operations.AssociateLensesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/workloads/{WorkloadId}/associateLenses", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -81,7 +108,7 @@ func (s *SDK) AssociateLenses(ctx context.Context, request operations.AssociateL
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -162,8 +189,9 @@ func (s *SDK) AssociateLenses(ctx context.Context, request operations.AssociateL
 	return res, nil
 }
 
+// CreateMilestone - Create a milestone for an existing workload.
 func (s *SDK) CreateMilestone(ctx context.Context, request operations.CreateMilestoneRequest) (*operations.CreateMilestoneResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/workloads/{WorkloadId}/milestones", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -183,7 +211,7 @@ func (s *SDK) CreateMilestone(ctx context.Context, request operations.CreateMile
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -283,8 +311,9 @@ func (s *SDK) CreateMilestone(ctx context.Context, request operations.CreateMile
 	return res, nil
 }
 
+// CreateWorkload - <p>Create a new workload.</p> <p>The owner of a workload can share the workload with other AWS accounts and IAM users in the same AWS Region. Only the owner of a workload can delete it.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/wellarchitected/latest/userguide/define-workload.html">Defining a Workload</a> in the <i>AWS Well-Architected Tool User Guide</i>.</p>
 func (s *SDK) CreateWorkload(ctx context.Context, request operations.CreateWorkloadRequest) (*operations.CreateWorkloadResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/workloads"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -304,7 +333,7 @@ func (s *SDK) CreateWorkload(ctx context.Context, request operations.CreateWorkl
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -394,8 +423,9 @@ func (s *SDK) CreateWorkload(ctx context.Context, request operations.CreateWorkl
 	return res, nil
 }
 
+// CreateWorkloadShare - <p>Create a workload share.</p> <p>The owner of a workload can share it with other AWS accounts and IAM users in the same AWS Region. Shared access to a workload is not removed until the workload invitation is deleted.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/wellarchitected/latest/userguide/workloads-sharing.html">Sharing a Workload</a> in the <i>AWS Well-Architected Tool User Guide</i>.</p>
 func (s *SDK) CreateWorkloadShare(ctx context.Context, request operations.CreateWorkloadShareRequest) (*operations.CreateWorkloadShareResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/workloads/{WorkloadId}/shares", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -415,7 +445,7 @@ func (s *SDK) CreateWorkloadShare(ctx context.Context, request operations.Create
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -515,8 +545,9 @@ func (s *SDK) CreateWorkloadShare(ctx context.Context, request operations.Create
 	return res, nil
 }
 
+// DeleteWorkload - Delete an existing workload.
 func (s *SDK) DeleteWorkload(ctx context.Context, request operations.DeleteWorkloadRequest) (*operations.DeleteWorkloadResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/workloads/{WorkloadId}#ClientRequestToken", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -528,7 +559,7 @@ func (s *SDK) DeleteWorkload(ctx context.Context, request operations.DeleteWorkl
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -609,8 +640,9 @@ func (s *SDK) DeleteWorkload(ctx context.Context, request operations.DeleteWorkl
 	return res, nil
 }
 
+// DeleteWorkloadShare - Delete a workload share.
 func (s *SDK) DeleteWorkloadShare(ctx context.Context, request operations.DeleteWorkloadShareRequest) (*operations.DeleteWorkloadShareResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/workloads/{WorkloadId}/shares/{ShareId}#ClientRequestToken", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -622,7 +654,7 @@ func (s *SDK) DeleteWorkloadShare(ctx context.Context, request operations.Delete
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -703,8 +735,9 @@ func (s *SDK) DeleteWorkloadShare(ctx context.Context, request operations.Delete
 	return res, nil
 }
 
+// DisassociateLenses - <p>Disassociate a lens from a workload.</p> <note> <p>The AWS Well-Architected Framework lens (<code>wellarchitected</code>) cannot be removed from a workload.</p> </note>
 func (s *SDK) DisassociateLenses(ctx context.Context, request operations.DisassociateLensesRequest) (*operations.DisassociateLensesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/workloads/{WorkloadId}/disassociateLenses", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -724,7 +757,7 @@ func (s *SDK) DisassociateLenses(ctx context.Context, request operations.Disasso
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -805,8 +838,9 @@ func (s *SDK) DisassociateLenses(ctx context.Context, request operations.Disasso
 	return res, nil
 }
 
+// GetAnswer - Get the answer to a specific question in a workload review.
 func (s *SDK) GetAnswer(ctx context.Context, request operations.GetAnswerRequest) (*operations.GetAnswerResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/workloads/{WorkloadId}/lensReviews/{LensAlias}/answers/{QuestionId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -818,7 +852,7 @@ func (s *SDK) GetAnswer(ctx context.Context, request operations.GetAnswerRequest
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -898,8 +932,9 @@ func (s *SDK) GetAnswer(ctx context.Context, request operations.GetAnswerRequest
 	return res, nil
 }
 
+// GetLensReview - Get lens review.
 func (s *SDK) GetLensReview(ctx context.Context, request operations.GetLensReviewRequest) (*operations.GetLensReviewResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/workloads/{WorkloadId}/lensReviews/{LensAlias}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -911,7 +946,7 @@ func (s *SDK) GetLensReview(ctx context.Context, request operations.GetLensRevie
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -991,8 +1026,9 @@ func (s *SDK) GetLensReview(ctx context.Context, request operations.GetLensRevie
 	return res, nil
 }
 
+// GetLensReviewReport - Get lens review report.
 func (s *SDK) GetLensReviewReport(ctx context.Context, request operations.GetLensReviewReportRequest) (*operations.GetLensReviewReportResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/workloads/{WorkloadId}/lensReviews/{LensAlias}/report", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1004,7 +1040,7 @@ func (s *SDK) GetLensReviewReport(ctx context.Context, request operations.GetLen
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1084,8 +1120,9 @@ func (s *SDK) GetLensReviewReport(ctx context.Context, request operations.GetLen
 	return res, nil
 }
 
+// GetLensVersionDifference - Get lens version differences.
 func (s *SDK) GetLensVersionDifference(ctx context.Context, request operations.GetLensVersionDifferenceRequest) (*operations.GetLensVersionDifferenceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/lenses/{LensAlias}/versionDifference#BaseLensVersion", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1097,7 +1134,7 @@ func (s *SDK) GetLensVersionDifference(ctx context.Context, request operations.G
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1177,8 +1214,9 @@ func (s *SDK) GetLensVersionDifference(ctx context.Context, request operations.G
 	return res, nil
 }
 
+// GetMilestone - Get a milestone for an existing workload.
 func (s *SDK) GetMilestone(ctx context.Context, request operations.GetMilestoneRequest) (*operations.GetMilestoneResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/workloads/{WorkloadId}/milestones/{MilestoneNumber}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1188,7 +1226,7 @@ func (s *SDK) GetMilestone(ctx context.Context, request operations.GetMilestoneR
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1268,8 +1306,9 @@ func (s *SDK) GetMilestone(ctx context.Context, request operations.GetMilestoneR
 	return res, nil
 }
 
+// GetWorkload - Get an existing workload.
 func (s *SDK) GetWorkload(ctx context.Context, request operations.GetWorkloadRequest) (*operations.GetWorkloadResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/workloads/{WorkloadId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1279,7 +1318,7 @@ func (s *SDK) GetWorkload(ctx context.Context, request operations.GetWorkloadReq
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1359,8 +1398,9 @@ func (s *SDK) GetWorkload(ctx context.Context, request operations.GetWorkloadReq
 	return res, nil
 }
 
+// ListAnswers - List of answers.
 func (s *SDK) ListAnswers(ctx context.Context, request operations.ListAnswersRequest) (*operations.ListAnswersResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/workloads/{WorkloadId}/lensReviews/{LensAlias}/answers", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1372,7 +1412,7 @@ func (s *SDK) ListAnswers(ctx context.Context, request operations.ListAnswersReq
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1452,8 +1492,9 @@ func (s *SDK) ListAnswers(ctx context.Context, request operations.ListAnswersReq
 	return res, nil
 }
 
+// ListLensReviewImprovements - List lens review improvements.
 func (s *SDK) ListLensReviewImprovements(ctx context.Context, request operations.ListLensReviewImprovementsRequest) (*operations.ListLensReviewImprovementsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/workloads/{WorkloadId}/lensReviews/{LensAlias}/improvements", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1465,7 +1506,7 @@ func (s *SDK) ListLensReviewImprovements(ctx context.Context, request operations
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1545,8 +1586,9 @@ func (s *SDK) ListLensReviewImprovements(ctx context.Context, request operations
 	return res, nil
 }
 
+// ListLensReviews - List lens reviews.
 func (s *SDK) ListLensReviews(ctx context.Context, request operations.ListLensReviewsRequest) (*operations.ListLensReviewsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/workloads/{WorkloadId}/lensReviews", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1558,7 +1600,7 @@ func (s *SDK) ListLensReviews(ctx context.Context, request operations.ListLensRe
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1638,8 +1680,9 @@ func (s *SDK) ListLensReviews(ctx context.Context, request operations.ListLensRe
 	return res, nil
 }
 
+// ListLenses - List the available lenses.
 func (s *SDK) ListLenses(ctx context.Context, request operations.ListLensesRequest) (*operations.ListLensesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/lenses"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1651,7 +1694,7 @@ func (s *SDK) ListLenses(ctx context.Context, request operations.ListLensesReque
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1721,8 +1764,9 @@ func (s *SDK) ListLenses(ctx context.Context, request operations.ListLensesReque
 	return res, nil
 }
 
+// ListMilestones - List all milestones for an existing workload.
 func (s *SDK) ListMilestones(ctx context.Context, request operations.ListMilestonesRequest) (*operations.ListMilestonesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/workloads/{WorkloadId}/milestonesSummaries", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1744,7 +1788,7 @@ func (s *SDK) ListMilestones(ctx context.Context, request operations.ListMilesto
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1824,8 +1868,9 @@ func (s *SDK) ListMilestones(ctx context.Context, request operations.ListMilesto
 	return res, nil
 }
 
+// ListNotifications - List lens notifications.
 func (s *SDK) ListNotifications(ctx context.Context, request operations.ListNotificationsRequest) (*operations.ListNotificationsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/notifications"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1847,7 +1892,7 @@ func (s *SDK) ListNotifications(ctx context.Context, request operations.ListNoti
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1917,8 +1962,9 @@ func (s *SDK) ListNotifications(ctx context.Context, request operations.ListNoti
 	return res, nil
 }
 
+// ListShareInvitations - List the workload invitations.
 func (s *SDK) ListShareInvitations(ctx context.Context, request operations.ListShareInvitationsRequest) (*operations.ListShareInvitationsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/shareInvitations"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1930,7 +1976,7 @@ func (s *SDK) ListShareInvitations(ctx context.Context, request operations.ListS
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2000,8 +2046,9 @@ func (s *SDK) ListShareInvitations(ctx context.Context, request operations.ListS
 	return res, nil
 }
 
+// ListTagsForResource - List the tags for a resource.
 func (s *SDK) ListTagsForResource(ctx context.Context, request operations.ListTagsForResourceRequest) (*operations.ListTagsForResourceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/tags/{WorkloadArn}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2011,7 +2058,7 @@ func (s *SDK) ListTagsForResource(ctx context.Context, request operations.ListTa
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2061,8 +2108,9 @@ func (s *SDK) ListTagsForResource(ctx context.Context, request operations.ListTa
 	return res, nil
 }
 
+// ListWorkloadShares - List the workload shares associated with the workload.
 func (s *SDK) ListWorkloadShares(ctx context.Context, request operations.ListWorkloadSharesRequest) (*operations.ListWorkloadSharesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/workloads/{WorkloadId}/shares", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2074,7 +2122,7 @@ func (s *SDK) ListWorkloadShares(ctx context.Context, request operations.ListWor
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2154,8 +2202,9 @@ func (s *SDK) ListWorkloadShares(ctx context.Context, request operations.ListWor
 	return res, nil
 }
 
+// ListWorkloads - List workloads. Paginated.
 func (s *SDK) ListWorkloads(ctx context.Context, request operations.ListWorkloadsRequest) (*operations.ListWorkloadsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/workloadsSummaries"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2177,7 +2226,7 @@ func (s *SDK) ListWorkloads(ctx context.Context, request operations.ListWorkload
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2247,8 +2296,9 @@ func (s *SDK) ListWorkloads(ctx context.Context, request operations.ListWorkload
 	return res, nil
 }
 
+// TagResource - Adds one or more tags to the specified resource.
 func (s *SDK) TagResource(ctx context.Context, request operations.TagResourceRequest) (*operations.TagResourceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/tags/{WorkloadArn}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2268,7 +2318,7 @@ func (s *SDK) TagResource(ctx context.Context, request operations.TagResourceReq
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2318,8 +2368,9 @@ func (s *SDK) TagResource(ctx context.Context, request operations.TagResourceReq
 	return res, nil
 }
 
+// UntagResource - <p>Deletes specified tags from a resource.</p> <p>To specify multiple tags, use separate <b>tagKeys</b> parameters, for example:</p> <p> <code>DELETE /tags/WorkloadArn?tagKeys=key1&amp;tagKeys=key2</code> </p>
 func (s *SDK) UntagResource(ctx context.Context, request operations.UntagResourceRequest) (*operations.UntagResourceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/tags/{WorkloadArn}#tagKeys", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -2331,7 +2382,7 @@ func (s *SDK) UntagResource(ctx context.Context, request operations.UntagResourc
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2381,8 +2432,9 @@ func (s *SDK) UntagResource(ctx context.Context, request operations.UntagResourc
 	return res, nil
 }
 
+// UpdateAnswer - Update the answer to a specific question in a workload review.
 func (s *SDK) UpdateAnswer(ctx context.Context, request operations.UpdateAnswerRequest) (*operations.UpdateAnswerResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/workloads/{WorkloadId}/lensReviews/{LensAlias}/answers/{QuestionId}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2402,7 +2454,7 @@ func (s *SDK) UpdateAnswer(ctx context.Context, request operations.UpdateAnswerR
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2492,8 +2544,9 @@ func (s *SDK) UpdateAnswer(ctx context.Context, request operations.UpdateAnswerR
 	return res, nil
 }
 
+// UpdateLensReview - Update lens review.
 func (s *SDK) UpdateLensReview(ctx context.Context, request operations.UpdateLensReviewRequest) (*operations.UpdateLensReviewResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/workloads/{WorkloadId}/lensReviews/{LensAlias}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2513,7 +2566,7 @@ func (s *SDK) UpdateLensReview(ctx context.Context, request operations.UpdateLen
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2603,8 +2656,9 @@ func (s *SDK) UpdateLensReview(ctx context.Context, request operations.UpdateLen
 	return res, nil
 }
 
+// UpdateShareInvitation - Update a workload invitation.
 func (s *SDK) UpdateShareInvitation(ctx context.Context, request operations.UpdateShareInvitationRequest) (*operations.UpdateShareInvitationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/shareInvitations/{ShareInvitationId}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2624,7 +2678,7 @@ func (s *SDK) UpdateShareInvitation(ctx context.Context, request operations.Upda
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2714,8 +2768,9 @@ func (s *SDK) UpdateShareInvitation(ctx context.Context, request operations.Upda
 	return res, nil
 }
 
+// UpdateWorkload - Update an existing workload.
 func (s *SDK) UpdateWorkload(ctx context.Context, request operations.UpdateWorkloadRequest) (*operations.UpdateWorkloadResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/workloads/{WorkloadId}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2735,7 +2790,7 @@ func (s *SDK) UpdateWorkload(ctx context.Context, request operations.UpdateWorkl
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2825,8 +2880,9 @@ func (s *SDK) UpdateWorkload(ctx context.Context, request operations.UpdateWorkl
 	return res, nil
 }
 
+// UpdateWorkloadShare - Update a workload share.
 func (s *SDK) UpdateWorkloadShare(ctx context.Context, request operations.UpdateWorkloadShareRequest) (*operations.UpdateWorkloadShareResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/workloads/{WorkloadId}/shares/{ShareId}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2846,7 +2902,7 @@ func (s *SDK) UpdateWorkloadShare(ctx context.Context, request operations.Update
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2936,8 +2992,9 @@ func (s *SDK) UpdateWorkloadShare(ctx context.Context, request operations.Update
 	return res, nil
 }
 
+// UpgradeLensReview - Upgrade lens review.
 func (s *SDK) UpgradeLensReview(ctx context.Context, request operations.UpgradeLensReviewRequest) (*operations.UpgradeLensReviewResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/workloads/{WorkloadId}/lensReviews/{LensAlias}/upgrade", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2957,7 +3014,7 @@ func (s *SDK) UpgradeLensReview(ctx context.Context, request operations.UpgradeL
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {

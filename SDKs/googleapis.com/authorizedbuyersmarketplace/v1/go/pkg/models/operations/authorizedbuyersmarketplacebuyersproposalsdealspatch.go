@@ -31,7 +31,7 @@ type AuthorizedbuyersmarketplaceBuyersProposalsDealsPatchSecurity struct {
 type AuthorizedbuyersmarketplaceBuyersProposalsDealsPatchRequest struct {
 	PathParams  AuthorizedbuyersmarketplaceBuyersProposalsDealsPatchPathParams
 	QueryParams AuthorizedbuyersmarketplaceBuyersProposalsDealsPatchQueryParams
-	Request     *shared.Deal `request:"mediaType=application/json"`
+	Request     *shared.DealInput `request:"mediaType=application/json"`
 	Security    AuthorizedbuyersmarketplaceBuyersProposalsDealsPatchSecurity
 }
 

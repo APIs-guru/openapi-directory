@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ValidationErrorMessage extends SpeakeasyBase {
-  @Metadata({ data: "json, name=error_code" })
+  @SpeakeasyMetadata({ data: "json, name=error_code" })
   errorCode?: string;
 
-  @Metadata({ data: "json, name=error_text" })
+  @SpeakeasyMetadata({ data: "json, name=error_text" })
   errorText?: string;
 }

@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ReactionEnum } from "./reactionenum";
+
 
 
 // RecommendationFeedbackSummary
@@ -7,12 +8,12 @@ import { ReactionEnum } from "./reactionenum";
  *  Information about recommendation feedback summaries. 
 **/
 export class RecommendationFeedbackSummary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Reactions" })
+  @SpeakeasyMetadata({ data: "json, name=Reactions" })
   reactions?: ReactionEnum[];
 
-  @Metadata({ data: "json, name=RecommendationId" })
+  @SpeakeasyMetadata({ data: "json, name=RecommendationId" })
   recommendationId?: string;
 
-  @Metadata({ data: "json, name=UserId" })
+  @SpeakeasyMetadata({ data: "json, name=UserId" })
   userId?: string;
 }

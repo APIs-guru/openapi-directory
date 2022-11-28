@@ -1,13 +1,22 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import vmwarevmsdetails
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class FetchInventoryResponse:
-    next_page_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'nextPageToken' }})
-    update_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'updateTime' }})
-    vmware_vms: Optional[vmwarevmsdetails.VmwareVmsDetails] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'vmwareVms' }})
+    r"""FetchInventoryResponse
+    Response message for fetchInventory.
+    """
+    
+    aws_vms: Optional[AwsVmsDetails] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('awsVms') }})
+    next_page_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('nextPageToken') }})
+    update_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('updateTime') }})
+    vmware_vms: Optional[VmwareVmsDetails] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('vmwareVms') }})
     

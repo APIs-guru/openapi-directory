@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetAllEmployeesPathParams = /** @class */ (function (_super) {
     __extends(GetAllEmployeesPathParams, _super);
@@ -30,7 +30,7 @@ var GetAllEmployeesPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=companyId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=companyId" }),
         __metadata("design:type", String)
     ], GetAllEmployeesPathParams.prototype, "companyId", void 0);
     return GetAllEmployeesPathParams;
@@ -42,15 +42,15 @@ var GetAllEmployeesQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=includetotalcount" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=includetotalcount" }),
         __metadata("design:type", Boolean)
     ], GetAllEmployeesQueryParams.prototype, "includetotalcount", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=pagenumber" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=pagenumber" }),
         __metadata("design:type", Number)
     ], GetAllEmployeesQueryParams.prototype, "pagenumber", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=pagesize" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=pagesize" }),
         __metadata("design:type", Number)
     ], GetAllEmployeesQueryParams.prototype, "pagesize", void 0);
     return GetAllEmployeesQueryParams;
@@ -62,7 +62,7 @@ var GetAllEmployeesSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemePaylocityAuth)
     ], GetAllEmployeesSecurity.prototype, "paylocityAuth", void 0);
     return GetAllEmployeesSecurity;
@@ -74,15 +74,15 @@ var GetAllEmployeesRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetAllEmployeesPathParams)
     ], GetAllEmployeesRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetAllEmployeesQueryParams)
     ], GetAllEmployeesRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetAllEmployeesSecurity)
     ], GetAllEmployeesRequest.prototype, "security", void 0);
     return GetAllEmployeesRequest;
@@ -94,19 +94,19 @@ var GetAllEmployeesResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetAllEmployeesResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetAllEmployeesResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata({ elemType: shared.EmployeeInfo }),
+        SpeakeasyMetadata({ elemType: shared.EmployeeInfo }),
         __metadata("design:type", Array)
     ], GetAllEmployeesResponse.prototype, "employeeInfos", void 0);
     __decorate([
-        Metadata({ elemType: shared.Error }),
+        SpeakeasyMetadata({ elemType: shared.Error }),
         __metadata("design:type", Array)
     ], GetAllEmployeesResponse.prototype, "errors", void 0);
     return GetAllEmployeesResponse;

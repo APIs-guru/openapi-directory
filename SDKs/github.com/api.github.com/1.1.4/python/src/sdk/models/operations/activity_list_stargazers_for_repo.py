@@ -5,8 +5,8 @@ from sdk.models import shared
 
 @dataclass
 class ActivityListStargazersForRepoPathParams:
-    owner: str = field(default=None, metadata={'path_param': { 'field_name': 'owner', 'style': 'simple', 'explode': False }})
-    repo: str = field(default=None, metadata={'path_param': { 'field_name': 'repo', 'style': 'simple', 'explode': False }})
+    owner: str = field(metadata={'path_param': { 'field_name': 'owner', 'style': 'simple', 'explode': False }})
+    repo: str = field(metadata={'path_param': { 'field_name': 'repo', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -17,15 +17,15 @@ class ActivityListStargazersForRepoQueryParams:
 
 @dataclass
 class ActivityListStargazersForRepoRequest:
-    path_params: ActivityListStargazersForRepoPathParams = field(default=None)
-    query_params: ActivityListStargazersForRepoQueryParams = field(default=None)
+    path_params: ActivityListStargazersForRepoPathParams = field()
+    query_params: ActivityListStargazersForRepoQueryParams = field()
     
 
 @dataclass
 class ActivityListStargazersForRepoResponse:
-    content_type: str = field(default=None)
-    headers: dict[str, List[str]] = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    headers: dict[str, List[str]] = field()
+    status_code: int = field()
     simple_users: Optional[List[shared.SimpleUser]] = field(default=None)
     stargazers: Optional[List[shared.Stargazer]] = field(default=None)
     validation_error: Optional[shared.ValidationError] = field(default=None)

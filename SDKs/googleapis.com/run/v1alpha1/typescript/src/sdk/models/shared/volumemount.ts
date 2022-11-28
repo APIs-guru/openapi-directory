@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // VolumeMount
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * VolumeMount describes a mounting of a Volume within a container.
 **/
 export class VolumeMount extends SpeakeasyBase {
-  @Metadata({ data: "json, name=mountPath" })
+  @SpeakeasyMetadata({ data: "json, name=mountPath" })
   mountPath?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=readOnly" })
+  @SpeakeasyMetadata({ data: "json, name=readOnly" })
   readOnly?: boolean;
 
-  @Metadata({ data: "json, name=subPath" })
+  @SpeakeasyMetadata({ data: "json, name=subPath" })
   subPath?: string;
 }

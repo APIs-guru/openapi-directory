@@ -1,6 +1,10 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,List,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -18,23 +22,23 @@ class DeleteMembersHeaders:
 @dataclass_json
 @dataclass
 class DeleteMembersRequestBody:
-    account_ids: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AccountIds' }})
+    account_ids: List[str] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('AccountIds') }})
     
 
 @dataclass
 class DeleteMembersRequest:
-    headers: DeleteMembersHeaders = field(default=None)
-    request: DeleteMembersRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: DeleteMembersHeaders = field()
+    request: DeleteMembersRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class DeleteMembersResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     delete_members_response: Optional[shared.DeleteMembersResponse] = field(default=None)
     internal_exception: Optional[Any] = field(default=None)
     invalid_access_exception: Optional[Any] = field(default=None)
     invalid_input_exception: Optional[Any] = field(default=None)
     limit_exceeded_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

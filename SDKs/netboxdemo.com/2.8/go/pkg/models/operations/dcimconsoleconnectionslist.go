@@ -24,15 +24,15 @@ type DcimConsoleConnectionsListQueryParams struct {
 	Site              *string `queryParam:"style=form,explode=true,name=site"`
 }
 
-type DcimConsoleConnectionsListRequest struct {
-	QueryParams DcimConsoleConnectionsListQueryParams
-}
-
 type DcimConsoleConnectionsList200ApplicationJSON struct {
 	Count    int64                `json:"count"`
 	Next     *string              `json:"next,omitempty"`
 	Previous *string              `json:"previous,omitempty"`
 	Results  []shared.ConsolePort `json:"results"`
+}
+
+type DcimConsoleConnectionsListRequest struct {
+	QueryParams DcimConsoleConnectionsListQueryParams
 }
 
 type DcimConsoleConnectionsListResponse struct {

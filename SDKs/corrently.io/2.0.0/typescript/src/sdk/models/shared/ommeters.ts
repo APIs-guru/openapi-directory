@@ -1,34 +1,35 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class Ommeters extends SpeakeasyBase {
-  @Metadata({ data: "json, name=currentScalingFactor" })
+  @SpeakeasyMetadata({ data: "json, name=currentScalingFactor" })
   currentScalingFactor?: number;
 
-  @Metadata({ data: "json, name=loadProfileType" })
+  @SpeakeasyMetadata({ data: "json, name=loadProfileType" })
   loadProfileType?: string;
 
-  @Metadata({ data: "json, name=location" })
+  @SpeakeasyMetadata({ data: "json, name=location" })
   location?: string;
 
-  @Metadata({ data: "json, name=manufacturerId" })
+  @SpeakeasyMetadata({ data: "json, name=manufacturerId" })
   manufacturerId?: string;
 
-  @Metadata({ data: "json, name=measurementType" })
+  @SpeakeasyMetadata({ data: "json, name=measurementType" })
   measurementType?: string;
 
-  @Metadata({ data: "json, name=meta" })
+  @SpeakeasyMetadata({ data: "json, name=meta" })
   meta?: string;
 
-  @Metadata({ data: "json, name=meterId" })
+  @SpeakeasyMetadata({ data: "json, name=meterId" })
   meterId?: string;
 
-  @Metadata({ data: "json, name=scalingFactor" })
+  @SpeakeasyMetadata({ data: "json, name=scalingFactor" })
   scalingFactor?: number;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: string;
 
-  @Metadata({ data: "json, name=voltageScalingFactor" })
+  @SpeakeasyMetadata({ data: "json, name=voltageScalingFactor" })
   voltageScalingFactor?: number;
 }

@@ -18,6 +18,8 @@ type CreateThingHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// CreateThingRequestBodyAttributePayload
+// The attribute payload.
 type CreateThingRequestBodyAttributePayload struct {
 	Attributes map[string]string `json:"attributes,omitempty"`
 	Merge      *bool             `json:"merge,omitempty"`

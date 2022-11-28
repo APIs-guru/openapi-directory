@@ -1,21 +1,22 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum GoogleCloudEssentialcontactsV1ContactNotificationCategorySubscriptionsEnum {
-    NotificationCategoryUnspecified = "NOTIFICATION_CATEGORY_UNSPECIFIED"
-,    All = "ALL"
-,    Suspension = "SUSPENSION"
-,    Security = "SECURITY"
-,    Technical = "TECHNICAL"
-,    Billing = "BILLING"
-,    Legal = "LEGAL"
-,    ProductUpdates = "PRODUCT_UPDATES"
-,    TechnicalIncidents = "TECHNICAL_INCIDENTS"
+    NotificationCategoryUnspecified = "NOTIFICATION_CATEGORY_UNSPECIFIED",
+    All = "ALL",
+    Suspension = "SUSPENSION",
+    Security = "SECURITY",
+    Technical = "TECHNICAL",
+    Billing = "BILLING",
+    Legal = "LEGAL",
+    ProductUpdates = "PRODUCT_UPDATES",
+    TechnicalIncidents = "TECHNICAL_INCIDENTS"
 }
 
 export enum GoogleCloudEssentialcontactsV1ContactValidationStateEnum {
-    ValidationStateUnspecified = "VALIDATION_STATE_UNSPECIFIED"
-,    Valid = "VALID"
-,    Invalid = "INVALID"
+    ValidationStateUnspecified = "VALIDATION_STATE_UNSPECIFIED",
+    Valid = "VALID",
+    Invalid = "INVALID"
 }
 
 
@@ -24,21 +25,43 @@ export enum GoogleCloudEssentialcontactsV1ContactValidationStateEnum {
  * A contact that will receive notifications from Google Cloud.
 **/
 export class GoogleCloudEssentialcontactsV1Contact extends SpeakeasyBase {
-  @Metadata({ data: "json, name=email" })
+  @SpeakeasyMetadata({ data: "json, name=email" })
   email?: string;
 
-  @Metadata({ data: "json, name=languageTag" })
+  @SpeakeasyMetadata({ data: "json, name=languageTag" })
   languageTag?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=notificationCategorySubscriptions" })
+  @SpeakeasyMetadata({ data: "json, name=notificationCategorySubscriptions" })
   notificationCategorySubscriptions?: GoogleCloudEssentialcontactsV1ContactNotificationCategorySubscriptionsEnum[];
 
-  @Metadata({ data: "json, name=validateTime" })
+  @SpeakeasyMetadata({ data: "json, name=validateTime" })
   validateTime?: string;
 
-  @Metadata({ data: "json, name=validationState" })
+  @SpeakeasyMetadata({ data: "json, name=validationState" })
+  validationState?: GoogleCloudEssentialcontactsV1ContactValidationStateEnum;
+}
+
+
+// GoogleCloudEssentialcontactsV1ContactInput
+/** 
+ * A contact that will receive notifications from Google Cloud.
+**/
+export class GoogleCloudEssentialcontactsV1ContactInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=email" })
+  email?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=languageTag" })
+  languageTag?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=notificationCategorySubscriptions" })
+  notificationCategorySubscriptions?: GoogleCloudEssentialcontactsV1ContactNotificationCategorySubscriptionsEnum[];
+
+  @SpeakeasyMetadata({ data: "json, name=validateTime" })
+  validateTime?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=validationState" })
   validationState?: GoogleCloudEssentialcontactsV1ContactValidationStateEnum;
 }

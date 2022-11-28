@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
 @dataclass
 class GetRecordsFormatPathParams:
-    format: shared.FormatEnum = field(default=None, metadata={'path_param': { 'field_name': 'format', 'style': 'simple', 'explode': False }})
+    format: shared.FormatEnum = field(metadata={'path_param': { 'field_name': 'format', 'style': 'simple', 'explode': False }})
     
 class GetRecordsFormatAndCategoryEnum(str, Enum):
     NEWSPAPERS = "Newspapers"
@@ -67,6 +72,7 @@ class GetRecordsFormatSortEnum(str, Enum):
 
 @dataclass
 class GetRecordsFormatQueryParams:
+    api_key: str = field(metadata={'query_param': { 'field_name': 'api_key', 'style': 'form', 'explode': True }})
     and_category_: Optional[GetRecordsFormatAndCategoryEnum] = field(default=None, metadata={'query_param': { 'field_name': 'and[category][]', 'style': 'form', 'explode': True }})
     and_century_: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'and[century]', 'style': 'form', 'explode': True }})
     and_collection_: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'and[collection][]', 'style': 'form', 'explode': True }})
@@ -86,7 +92,6 @@ class GetRecordsFormatQueryParams:
     and_title_: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'and[title][]', 'style': 'form', 'explode': True }})
     and_usage_: Optional[GetRecordsFormatAndUsageEnum] = field(default=None, metadata={'query_param': { 'field_name': 'and[usage][]', 'style': 'form', 'explode': True }})
     and_year_: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'and[year]', 'style': 'form', 'explode': True }})
-    api_key: str = field(default=None, metadata={'query_param': { 'field_name': 'api_key', 'style': 'form', 'explode': True }})
     direction: Optional[GetRecordsFormatDirectionEnum] = field(default=None, metadata={'query_param': { 'field_name': 'direction', 'style': 'form', 'explode': True }})
     exclude_filters_from_facets: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'exclude_filters_from_facets', 'style': 'form', 'explode': True }})
     facets: Optional[List[GetRecordsFormatFacetsEnum]] = field(default=None, metadata={'query_param': { 'field_name': 'facets', 'style': 'form', 'explode': False }})
@@ -101,29 +106,29 @@ class GetRecordsFormatQueryParams:
     without_filter_field_: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'without[{filter_field}]', 'style': 'form', 'explode': True }})
     
 
-@dataclass
-class GetRecordsFormatRequest:
-    path_params: GetRecordsFormatPathParams = field(default=None)
-    query_params: GetRecordsFormatQueryParams = field(default=None)
-    
-
 @dataclass_json
 @dataclass
 class GetRecordsFormat200ApplicationJSON:
-    facets: Optional[dict[str, dict[str, int]]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'facets' }})
-    page: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'page' }})
-    per_page: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'per_page' }})
-    records: Optional[List[shared.Record]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'records' }})
-    request_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'request_url' }})
-    result_count: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'result_count' }})
+    facets: Optional[dict[str, dict[str, int]]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('facets') }})
+    page: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('page') }})
+    per_page: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('per_page') }})
+    records: Optional[List[shared.Record]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('records') }})
+    request_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('request_url') }})
+    result_count: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('result_count') }})
+    
+
+@dataclass
+class GetRecordsFormatRequest:
+    path_params: GetRecordsFormatPathParams = field()
+    query_params: GetRecordsFormatQueryParams = field()
     
 
 @dataclass
 class GetRecordsFormatResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     get_records_format_200_application_json_object: Optional[GetRecordsFormat200ApplicationJSON] = field(default=None)
     get_records_format_400_application_json_object: Optional[dict[str, Any]] = field(default=None)
     get_records_format_403_application_json_object: Optional[dict[str, Any]] = field(default=None)
-    status_code: int = field(default=None)
     

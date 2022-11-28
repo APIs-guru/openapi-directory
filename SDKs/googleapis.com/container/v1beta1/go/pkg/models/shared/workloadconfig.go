@@ -10,6 +10,8 @@ const (
 	WorkloadConfigAuditModeEnumRestricted      WorkloadConfigAuditModeEnum = "RESTRICTED"
 )
 
+// WorkloadConfig
+// WorkloadConfig defines the flags to enable or disable the workload configurations for the cluster.
 type WorkloadConfig struct {
 	AuditMode *WorkloadConfigAuditModeEnum `json:"auditMode,omitempty"`
 }

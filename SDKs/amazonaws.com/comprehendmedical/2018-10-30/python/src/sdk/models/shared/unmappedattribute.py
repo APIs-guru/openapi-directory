@@ -1,13 +1,18 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import attribute
-from . import entitytype_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class UnmappedAttribute:
-    attribute: Optional[attribute.Attribute] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Attribute' }})
-    type: Optional[entitytype_enum.EntityTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Type' }})
+    r"""UnmappedAttribute
+     An attribute that we extracted, but were unable to relate to an entity. 
+    """
+    
+    attribute: Optional[Attribute] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Attribute') }})
+    type: Optional[EntityTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Type') }})
     

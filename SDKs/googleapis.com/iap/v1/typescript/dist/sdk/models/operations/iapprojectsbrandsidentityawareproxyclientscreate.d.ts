@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class IapProjectsBrandsIdentityAwareProxyClientsCreatePathParams extends SpeakeasyBase {
     parent: string;
@@ -23,7 +23,7 @@ export declare class IapProjectsBrandsIdentityAwareProxyClientsCreateSecurity ex
 export declare class IapProjectsBrandsIdentityAwareProxyClientsCreateRequest extends SpeakeasyBase {
     pathParams: IapProjectsBrandsIdentityAwareProxyClientsCreatePathParams;
     queryParams: IapProjectsBrandsIdentityAwareProxyClientsCreateQueryParams;
-    request?: shared.IdentityAwareProxyClient;
+    request?: shared.IdentityAwareProxyClientInput;
     security: IapProjectsBrandsIdentityAwareProxyClientsCreateSecurity;
 }
 export declare class IapProjectsBrandsIdentityAwareProxyClientsCreateResponse extends SpeakeasyBase {

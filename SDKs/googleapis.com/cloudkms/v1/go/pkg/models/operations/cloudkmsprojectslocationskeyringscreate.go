@@ -41,7 +41,6 @@ type CloudkmsProjectsLocationsKeyRingsCreateSecurity struct {
 type CloudkmsProjectsLocationsKeyRingsCreateRequest struct {
 	PathParams  CloudkmsProjectsLocationsKeyRingsCreatePathParams
 	QueryParams CloudkmsProjectsLocationsKeyRingsCreateQueryParams
-	Request     *shared.KeyRing `request:"mediaType=application/json"`
 	Security    CloudkmsProjectsLocationsKeyRingsCreateSecurity
 }
 

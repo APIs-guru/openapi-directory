@@ -22,22 +22,22 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var ConfigIpmi = /** @class */ (function (_super) {
     __extends(ConfigIpmi, _super);
     function ConfigIpmi() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=primary_port" }),
+        SpeakeasyMetadata({ data: "json, name=primary_port" }),
         __metadata("design:type", Number)
     ], ConfigIpmi.prototype, "primaryPort", void 0);
     __decorate([
-        Metadata({ data: "json, name=secure_port" }),
+        SpeakeasyMetadata({ data: "json, name=secure_port" }),
         __metadata("design:type", Number)
     ], ConfigIpmi.prototype, "securePort", void 0);
     __decorate([
-        Metadata({ data: "json, name=version" }),
+        SpeakeasyMetadata({ data: "json, name=version" }),
         __metadata("design:type", String)
     ], ConfigIpmi.prototype, "version", void 0);
     return ConfigIpmi;

@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// WorkflowRun
+// An invocation of a workflow
 type WorkflowRun struct {
 	ArtifactsURL     string               `json:"artifacts_url"`
 	CancelURL        string               `json:"cancel_url"`

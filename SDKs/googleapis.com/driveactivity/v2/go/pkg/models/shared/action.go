@@ -1,5 +1,7 @@
 package shared
 
+// Action
+// Information about the action.
 type Action struct {
 	Actor     *Actor        `json:"actor,omitempty"`
 	Detail    *ActionDetail `json:"detail,omitempty"`

@@ -5,12 +5,12 @@ from sdk.models import shared
 
 @dataclass
 class DcimPowerPanelsCreateRequest:
-    request: shared.WritablePowerPanel = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    request: shared.WritablePowerPanelInput = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class DcimPowerPanelsCreateResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     power_panel: Optional[shared.PowerPanel] = field(default=None)
-    status_code: int = field(default=None)
     

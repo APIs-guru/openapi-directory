@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
@@ -20,20 +21,20 @@ class FirebasedynamiclinksReopenAttributionQueryParams:
 
 @dataclass
 class FirebasedynamiclinksReopenAttributionSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class FirebasedynamiclinksReopenAttributionRequest:
-    query_params: FirebasedynamiclinksReopenAttributionQueryParams = field(default=None)
+    query_params: FirebasedynamiclinksReopenAttributionQueryParams = field()
+    security: FirebasedynamiclinksReopenAttributionSecurity = field()
     request: Optional[shared.GetIosReopenAttributionRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: FirebasedynamiclinksReopenAttributionSecurity = field(default=None)
     
 
 @dataclass
 class FirebasedynamiclinksReopenAttributionResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     get_ios_reopen_attribution_response: Optional[shared.GetIosReopenAttributionResponse] = field(default=None)
-    status_code: int = field(default=None)
     

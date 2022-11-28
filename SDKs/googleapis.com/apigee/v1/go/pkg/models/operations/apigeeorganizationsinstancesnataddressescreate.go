@@ -30,7 +30,7 @@ type ApigeeOrganizationsInstancesNatAddressesCreateSecurity struct {
 type ApigeeOrganizationsInstancesNatAddressesCreateRequest struct {
 	PathParams  ApigeeOrganizationsInstancesNatAddressesCreatePathParams
 	QueryParams ApigeeOrganizationsInstancesNatAddressesCreateQueryParams
-	Request     *shared.GoogleCloudApigeeV1NatAddress `request:"mediaType=application/json"`
+	Request     *shared.GoogleCloudApigeeV1NatAddressInput `request:"mediaType=application/json"`
 	Security    ApigeeOrganizationsInstancesNatAddressesCreateSecurity
 }
 

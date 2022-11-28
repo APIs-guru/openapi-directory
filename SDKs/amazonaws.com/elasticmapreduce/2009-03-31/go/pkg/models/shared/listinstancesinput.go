@@ -1,5 +1,7 @@
 package shared
 
+// ListInstancesInput
+// This input determines which instances to list.
 type ListInstancesInput struct {
 	ClusterID          string                  `json:"ClusterId"`
 	InstanceFleetID    *string                 `json:"InstanceFleetId,omitempty"`

@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DeploymentInfo } from "./deploymentinfo";
+
 
 
 // BatchGetDeploymentsOutput
@@ -8,6 +8,6 @@ import { DeploymentInfo } from "./deploymentinfo";
  *  Represents the output of a <code>BatchGetDeployments</code> operation. 
 **/
 export class BatchGetDeploymentsOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=deploymentsInfo", elemType: shared.DeploymentInfo })
+  @SpeakeasyMetadata({ data: "json, name=deploymentsInfo", elemType: DeploymentInfo })
   deploymentsInfo?: DeploymentInfo[];
 }

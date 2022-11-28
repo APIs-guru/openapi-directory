@@ -1,4 +1,18 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
+
+
+// GoogleAnalyticsAdminV1alphaGoogleAdsLinkInput
+/** 
+ * A link between a GA4 property and a Google Ads account.
+**/
+export class GoogleAnalyticsAdminV1alphaGoogleAdsLinkInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=adsPersonalizationEnabled" })
+  adsPersonalizationEnabled?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=customerId" })
+  customerId?: string;
+}
 
 
 // GoogleAnalyticsAdminV1alphaGoogleAdsLink
@@ -6,24 +20,24 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A link between a GA4 property and a Google Ads account.
 **/
 export class GoogleAnalyticsAdminV1alphaGoogleAdsLink extends SpeakeasyBase {
-  @Metadata({ data: "json, name=adsPersonalizationEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=adsPersonalizationEnabled" })
   adsPersonalizationEnabled?: boolean;
 
-  @Metadata({ data: "json, name=canManageClients" })
+  @SpeakeasyMetadata({ data: "json, name=canManageClients" })
   canManageClients?: boolean;
 
-  @Metadata({ data: "json, name=createTime" })
+  @SpeakeasyMetadata({ data: "json, name=createTime" })
   createTime?: string;
 
-  @Metadata({ data: "json, name=creatorEmailAddress" })
+  @SpeakeasyMetadata({ data: "json, name=creatorEmailAddress" })
   creatorEmailAddress?: string;
 
-  @Metadata({ data: "json, name=customerId" })
+  @SpeakeasyMetadata({ data: "json, name=customerId" })
   customerId?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=updateTime" })
+  @SpeakeasyMetadata({ data: "json, name=updateTime" })
   updateTime?: string;
 }

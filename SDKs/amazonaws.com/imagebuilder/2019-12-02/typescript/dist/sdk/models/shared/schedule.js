@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PipelineExecutionStartConditionEnum } from "./pipelineexecutionstartconditionenum";
 // Schedule
 /**
@@ -34,15 +34,15 @@ var Schedule = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=pipelineExecutionStartCondition" }),
+        SpeakeasyMetadata({ data: "json, name=pipelineExecutionStartCondition" }),
         __metadata("design:type", String)
     ], Schedule.prototype, "pipelineExecutionStartCondition", void 0);
     __decorate([
-        Metadata({ data: "json, name=scheduleExpression" }),
+        SpeakeasyMetadata({ data: "json, name=scheduleExpression" }),
         __metadata("design:type", String)
     ], Schedule.prototype, "scheduleExpression", void 0);
     __decorate([
-        Metadata({ data: "json, name=timezone" }),
+        SpeakeasyMetadata({ data: "json, name=timezone" }),
         __metadata("design:type", String)
     ], Schedule.prototype, "timezone", void 0);
     return Schedule;

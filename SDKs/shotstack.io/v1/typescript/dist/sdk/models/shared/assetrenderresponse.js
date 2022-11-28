@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { AssetResponseData } from "./assetresponsedata";
 // AssetRenderResponse
 /**
  * The response returned by the Serve API [get asset by render id](#get-asset-by-render-id) request. The response  is an array of asset resources, including video, image, audio, thumbnail and poster image. The response follows  the [json:api](https://jsonapi.org/) specification.
@@ -34,7 +34,7 @@ var AssetRenderResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=data", elemType: shared.AssetResponseData }),
+        SpeakeasyMetadata({ data: "json, name=data", elemType: AssetResponseData }),
         __metadata("design:type", Array)
     ], AssetRenderResponse.prototype, "data", void 0);
     return AssetRenderResponse;

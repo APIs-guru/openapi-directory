@@ -1,17 +1,16 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Category } from "./category";
 import { EmbedSettings } from "./embedsettings";
 import { User } from "./user";
 import { Picture } from "./picture";
 import { Tag } from "./tag";
-import { Picture } from "./picture";
+
 
 export enum VideoContextActionEnum {
-    AddedTo = "Added to"
-,    AppearanceBy = "Appearance by"
-,    LikedBy = "Liked by"
-,    UploadedBy = "Uploaded by"
+    AddedTo = "Added to",
+    AppearanceBy = "Appearance by",
+    LikedBy = "Liked by",
+    UploadedBy = "Uploaded by"
 }
 
 
@@ -20,24 +19,24 @@ export enum VideoContextActionEnum {
  * The context of the video's subscription, if this video is part of a subscription.
 **/
 export class VideoContext extends SpeakeasyBase {
-  @Metadata({ data: "json, name=action" })
+  @SpeakeasyMetadata({ data: "json, name=action" })
   action: VideoContextActionEnum;
 
-  @Metadata({ data: "json, name=resource" })
+  @SpeakeasyMetadata({ data: "json, name=resource" })
   resource: Map<string, any>;
 
-  @Metadata({ data: "json, name=resource_type" })
+  @SpeakeasyMetadata({ data: "json, name=resource_type" })
   resourceType: string;
 }
 
 export enum VideoLicenseEnum {
-    By = "by"
-,    ByNc = "by-nc"
-,    ByNcNd = "by-nc-nd"
-,    ByNcSa = "by-nc-sa"
-,    ByNd = "by-nd"
-,    BySa = "by-sa"
-,    Cc0 = "cc0"
+    By = "by",
+    ByNc = "by-nc",
+    ByNcNd = "by-nc-nd",
+    ByNcSa = "by-nc-sa",
+    ByNd = "by-nd",
+    BySa = "by-sa",
+    Cc0 = "cc0"
 }
 
 
@@ -46,13 +45,13 @@ export enum VideoLicenseEnum {
  * Information about the comments on this video.
 **/
 export class VideoMetadataConnectionsComments extends SpeakeasyBase {
-  @Metadata({ data: "json, name=options" })
+  @SpeakeasyMetadata({ data: "json, name=options" })
   options: string[];
 
-  @Metadata({ data: "json, name=total" })
+  @SpeakeasyMetadata({ data: "json, name=total" })
   total: number;
 
-  @Metadata({ data: "json, name=uri" })
+  @SpeakeasyMetadata({ data: "json, name=uri" })
   uri: string;
 }
 
@@ -62,13 +61,13 @@ export class VideoMetadataConnectionsComments extends SpeakeasyBase {
  * Information about the users credited in this video.
 **/
 export class VideoMetadataConnectionsCredits extends SpeakeasyBase {
-  @Metadata({ data: "json, name=options" })
+  @SpeakeasyMetadata({ data: "json, name=options" })
   options?: string[];
 
-  @Metadata({ data: "json, name=total" })
+  @SpeakeasyMetadata({ data: "json, name=total" })
   total?: number;
 
-  @Metadata({ data: "json, name=uri" })
+  @SpeakeasyMetadata({ data: "json, name=uri" })
   uri?: string;
 }
 
@@ -78,13 +77,13 @@ export class VideoMetadataConnectionsCredits extends SpeakeasyBase {
  * Information about the users who have liked this video.
 **/
 export class VideoMetadataConnectionsLikes extends SpeakeasyBase {
-  @Metadata({ data: "json, name=options" })
+  @SpeakeasyMetadata({ data: "json, name=options" })
   options: string[];
 
-  @Metadata({ data: "json, name=total" })
+  @SpeakeasyMetadata({ data: "json, name=total" })
   total: number;
 
-  @Metadata({ data: "json, name=uri" })
+  @SpeakeasyMetadata({ data: "json, name=uri" })
   uri: string;
 }
 
@@ -94,13 +93,13 @@ export class VideoMetadataConnectionsLikes extends SpeakeasyBase {
  * Information about this video's ondemand data.
 **/
 export class VideoMetadataConnectionsOndemand extends SpeakeasyBase {
-  @Metadata({ data: "json, name=options" })
+  @SpeakeasyMetadata({ data: "json, name=options" })
   options: string[];
 
-  @Metadata({ data: "json, name=resource_key" })
+  @SpeakeasyMetadata({ data: "json, name=resource_key" })
   resourceKey: string;
 
-  @Metadata({ data: "json, name=uri" })
+  @SpeakeasyMetadata({ data: "json, name=uri" })
   uri: string;
 }
 
@@ -110,13 +109,13 @@ export class VideoMetadataConnectionsOndemand extends SpeakeasyBase {
  * Information about this video's thumbnails.
 **/
 export class VideoMetadataConnectionsPictures extends SpeakeasyBase {
-  @Metadata({ data: "json, name=options" })
+  @SpeakeasyMetadata({ data: "json, name=options" })
   options: string[];
 
-  @Metadata({ data: "json, name=total" })
+  @SpeakeasyMetadata({ data: "json, name=total" })
   total: number;
 
-  @Metadata({ data: "json, name=uri" })
+  @SpeakeasyMetadata({ data: "json, name=uri" })
   uri: string;
 }
 
@@ -126,10 +125,10 @@ export class VideoMetadataConnectionsPictures extends SpeakeasyBase {
  * The DRM playback status connection for this video.
 **/
 export class VideoMetadataConnectionsPlayback extends SpeakeasyBase {
-  @Metadata({ data: "json, name=options" })
+  @SpeakeasyMetadata({ data: "json, name=options" })
   options: string[];
 
-  @Metadata({ data: "json, name=uri" })
+  @SpeakeasyMetadata({ data: "json, name=uri" })
   uri: string;
 }
 
@@ -139,10 +138,10 @@ export class VideoMetadataConnectionsPlayback extends SpeakeasyBase {
  * The recommendations for this video.
 **/
 export class VideoMetadataConnectionsRecommendations extends SpeakeasyBase {
-  @Metadata({ data: "json, name=options" })
+  @SpeakeasyMetadata({ data: "json, name=options" })
   options?: string[];
 
-  @Metadata({ data: "json, name=uri" })
+  @SpeakeasyMetadata({ data: "json, name=uri" })
   uri?: string;
 }
 
@@ -152,10 +151,10 @@ export class VideoMetadataConnectionsRecommendations extends SpeakeasyBase {
  * Related content for this video.
 **/
 export class VideoMetadataConnectionsRelated extends SpeakeasyBase {
-  @Metadata({ data: "json, name=options" })
+  @SpeakeasyMetadata({ data: "json, name=options" })
   options?: string[];
 
-  @Metadata({ data: "json, name=uri" })
+  @SpeakeasyMetadata({ data: "json, name=uri" })
   uri?: string;
 }
 
@@ -165,13 +164,13 @@ export class VideoMetadataConnectionsRelated extends SpeakeasyBase {
  * Information about the video's season.
 **/
 export class VideoMetadataConnectionsSeason extends SpeakeasyBase {
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 
-  @Metadata({ data: "json, name=options" })
+  @SpeakeasyMetadata({ data: "json, name=options" })
   options: string[];
 
-  @Metadata({ data: "json, name=uri" })
+  @SpeakeasyMetadata({ data: "json, name=uri" })
   uri: string;
 }
 
@@ -181,13 +180,13 @@ export class VideoMetadataConnectionsSeason extends SpeakeasyBase {
  * Information about this video's text tracks.
 **/
 export class VideoMetadataConnectionsTexttracks extends SpeakeasyBase {
-  @Metadata({ data: "json, name=options" })
+  @SpeakeasyMetadata({ data: "json, name=options" })
   options: string[];
 
-  @Metadata({ data: "json, name=total" })
+  @SpeakeasyMetadata({ data: "json, name=total" })
   total: number;
 
-  @Metadata({ data: "json, name=uri" })
+  @SpeakeasyMetadata({ data: "json, name=uri" })
   uri: string;
 }
 
@@ -197,13 +196,13 @@ export class VideoMetadataConnectionsTexttracks extends SpeakeasyBase {
  * Information about this video's VOD trailer.
 **/
 export class VideoMetadataConnectionsTrailer extends SpeakeasyBase {
-  @Metadata({ data: "json, name=options" })
+  @SpeakeasyMetadata({ data: "json, name=options" })
   options: string[];
 
-  @Metadata({ data: "json, name=resource_key" })
+  @SpeakeasyMetadata({ data: "json, name=resource_key" })
   resourceKey: string;
 
-  @Metadata({ data: "json, name=uri" })
+  @SpeakeasyMetadata({ data: "json, name=uri" })
   uri: string;
 }
 
@@ -213,13 +212,13 @@ export class VideoMetadataConnectionsTrailer extends SpeakeasyBase {
  * Information about the user privacy of this video, if the video privacy is `users`.
 **/
 export class VideoMetadataConnectionsUsersWithAccess extends SpeakeasyBase {
-  @Metadata({ data: "json, name=options" })
+  @SpeakeasyMetadata({ data: "json, name=options" })
   options: string[];
 
-  @Metadata({ data: "json, name=total" })
+  @SpeakeasyMetadata({ data: "json, name=total" })
   total: number;
 
-  @Metadata({ data: "json, name=uri" })
+  @SpeakeasyMetadata({ data: "json, name=uri" })
   uri: string;
 }
 
@@ -229,16 +228,16 @@ export class VideoMetadataConnectionsUsersWithAccess extends SpeakeasyBase {
  * Information about the versions of this video.
 **/
 export class VideoMetadataConnectionsVersions extends SpeakeasyBase {
-  @Metadata({ data: "json, name=current_uri" })
+  @SpeakeasyMetadata({ data: "json, name=current_uri" })
   currentUri?: string;
 
-  @Metadata({ data: "json, name=options" })
+  @SpeakeasyMetadata({ data: "json, name=options" })
   options: string[];
 
-  @Metadata({ data: "json, name=total" })
+  @SpeakeasyMetadata({ data: "json, name=total" })
   total: number;
 
-  @Metadata({ data: "json, name=uri" })
+  @SpeakeasyMetadata({ data: "json, name=uri" })
   uri: string;
 }
 
@@ -248,58 +247,58 @@ export class VideoMetadataConnectionsVersions extends SpeakeasyBase {
  * A list of resource URIs related to the video.
 **/
 export class VideoMetadataConnections extends SpeakeasyBase {
-  @Metadata({ data: "json, name=comments" })
+  @SpeakeasyMetadata({ data: "json, name=comments" })
   comments: VideoMetadataConnectionsComments;
 
-  @Metadata({ data: "json, name=credits" })
+  @SpeakeasyMetadata({ data: "json, name=credits" })
   credits: VideoMetadataConnectionsCredits;
 
-  @Metadata({ data: "json, name=likes" })
+  @SpeakeasyMetadata({ data: "json, name=likes" })
   likes: VideoMetadataConnectionsLikes;
 
-  @Metadata({ data: "json, name=ondemand" })
+  @SpeakeasyMetadata({ data: "json, name=ondemand" })
   ondemand: VideoMetadataConnectionsOndemand;
 
-  @Metadata({ data: "json, name=pictures" })
+  @SpeakeasyMetadata({ data: "json, name=pictures" })
   pictures: VideoMetadataConnectionsPictures;
 
-  @Metadata({ data: "json, name=playback" })
+  @SpeakeasyMetadata({ data: "json, name=playback" })
   playback: VideoMetadataConnectionsPlayback;
 
-  @Metadata({ data: "json, name=recommendations" })
+  @SpeakeasyMetadata({ data: "json, name=recommendations" })
   recommendations: VideoMetadataConnectionsRecommendations;
 
-  @Metadata({ data: "json, name=related" })
+  @SpeakeasyMetadata({ data: "json, name=related" })
   related: VideoMetadataConnectionsRelated;
 
-  @Metadata({ data: "json, name=season" })
+  @SpeakeasyMetadata({ data: "json, name=season" })
   season: VideoMetadataConnectionsSeason;
 
-  @Metadata({ data: "json, name=texttracks" })
+  @SpeakeasyMetadata({ data: "json, name=texttracks" })
   texttracks: VideoMetadataConnectionsTexttracks;
 
-  @Metadata({ data: "json, name=trailer" })
+  @SpeakeasyMetadata({ data: "json, name=trailer" })
   trailer: VideoMetadataConnectionsTrailer;
 
-  @Metadata({ data: "json, name=users_with_access" })
+  @SpeakeasyMetadata({ data: "json, name=users_with_access" })
   usersWithAccess: VideoMetadataConnectionsUsersWithAccess;
 
-  @Metadata({ data: "json, name=versions" })
+  @SpeakeasyMetadata({ data: "json, name=versions" })
   versions: VideoMetadataConnectionsVersions;
 }
 
 export enum VideoMetadataInteractionsBuyDownloadEnum {
-    Available = "available"
-,    Purchased = "purchased"
-,    Restricted = "restricted"
-,    Unavailable = "unavailable"
+    Available = "available",
+    Purchased = "purchased",
+    Restricted = "restricted",
+    Unavailable = "unavailable"
 }
 
 export enum VideoMetadataInteractionsBuyStreamEnum {
-    Available = "available"
-,    Purchased = "purchased"
-,    Restricted = "restricted"
-,    Unavailable = "unavailable"
+    Available = "available",
+    Purchased = "purchased",
+    Restricted = "restricted",
+    Unavailable = "unavailable"
 }
 
 
@@ -308,31 +307,31 @@ export enum VideoMetadataInteractionsBuyStreamEnum {
  * The Buy interaction for a On Demand video.
 **/
 export class VideoMetadataInteractionsBuy extends SpeakeasyBase {
-  @Metadata({ data: "json, name=currency" })
+  @SpeakeasyMetadata({ data: "json, name=currency" })
   currency: string;
 
-  @Metadata({ data: "json, name=display_price" })
+  @SpeakeasyMetadata({ data: "json, name=display_price" })
   displayPrice: string;
 
-  @Metadata({ data: "json, name=download" })
+  @SpeakeasyMetadata({ data: "json, name=download" })
   download: VideoMetadataInteractionsBuyDownloadEnum;
 
-  @Metadata({ data: "json, name=drm" })
+  @SpeakeasyMetadata({ data: "json, name=drm" })
   drm: boolean;
 
-  @Metadata({ data: "json, name=link" })
+  @SpeakeasyMetadata({ data: "json, name=link" })
   link: string;
 
-  @Metadata({ data: "json, name=price" })
+  @SpeakeasyMetadata({ data: "json, name=price" })
   price: number;
 
-  @Metadata({ data: "json, name=purchase_time" })
+  @SpeakeasyMetadata({ data: "json, name=purchase_time" })
   purchaseTime: string;
 
-  @Metadata({ data: "json, name=stream" })
+  @SpeakeasyMetadata({ data: "json, name=stream" })
   stream: VideoMetadataInteractionsBuyStreamEnum;
 
-  @Metadata({ data: "json, name=uri" })
+  @SpeakeasyMetadata({ data: "json, name=uri" })
   uri: string;
 }
 
@@ -342,10 +341,10 @@ export class VideoMetadataInteractionsBuy extends SpeakeasyBase {
  * When a video is referenced by a channel URI, if the user is a moderator of the channel, include information about removing the video from the channel.
 **/
 export class VideoMetadataInteractionsChannel extends SpeakeasyBase {
-  @Metadata({ data: "json, name=options" })
+  @SpeakeasyMetadata({ data: "json, name=options" })
   options: string[];
 
-  @Metadata({ data: "json, name=uri" })
+  @SpeakeasyMetadata({ data: "json, name=uri" })
   uri: string;
 }
 
@@ -355,24 +354,24 @@ export class VideoMetadataInteractionsChannel extends SpeakeasyBase {
  * Information about whether the authenticated user has liked this video.
 **/
 export class VideoMetadataInteractionsLike extends SpeakeasyBase {
-  @Metadata({ data: "json, name=added" })
+  @SpeakeasyMetadata({ data: "json, name=added" })
   added: boolean;
 
-  @Metadata({ data: "json, name=added_time" })
+  @SpeakeasyMetadata({ data: "json, name=added_time" })
   addedTime: string;
 
-  @Metadata({ data: "json, name=options" })
+  @SpeakeasyMetadata({ data: "json, name=options" })
   options: string[];
 
-  @Metadata({ data: "json, name=uri" })
+  @SpeakeasyMetadata({ data: "json, name=uri" })
   uri: string;
 }
 
 export enum VideoMetadataInteractionsRentStreamEnum {
-    Available = "available"
-,    Purchased = "purchased"
-,    Restricted = "restricted"
-,    Unavailable = "unavailable"
+    Available = "available",
+    Purchased = "purchased",
+    Restricted = "restricted",
+    Unavailable = "unavailable"
 }
 
 
@@ -381,31 +380,31 @@ export enum VideoMetadataInteractionsRentStreamEnum {
  * The Rent interaction for an On Demand video.
 **/
 export class VideoMetadataInteractionsRent extends SpeakeasyBase {
-  @Metadata({ data: "json, name=currency" })
+  @SpeakeasyMetadata({ data: "json, name=currency" })
   currency: string;
 
-  @Metadata({ data: "json, name=display_price" })
+  @SpeakeasyMetadata({ data: "json, name=display_price" })
   displayPrice: string;
 
-  @Metadata({ data: "json, name=drm" })
+  @SpeakeasyMetadata({ data: "json, name=drm" })
   drm: boolean;
 
-  @Metadata({ data: "json, name=expires_time" })
+  @SpeakeasyMetadata({ data: "json, name=expires_time" })
   expiresTime: string;
 
-  @Metadata({ data: "json, name=link" })
+  @SpeakeasyMetadata({ data: "json, name=link" })
   link: string;
 
-  @Metadata({ data: "json, name=price" })
+  @SpeakeasyMetadata({ data: "json, name=price" })
   price: number;
 
-  @Metadata({ data: "json, name=purchase_time" })
+  @SpeakeasyMetadata({ data: "json, name=purchase_time" })
   purchaseTime: string;
 
-  @Metadata({ data: "json, name=stream" })
+  @SpeakeasyMetadata({ data: "json, name=stream" })
   stream: VideoMetadataInteractionsRentStreamEnum;
 
-  @Metadata({ data: "json, name=uri" })
+  @SpeakeasyMetadata({ data: "json, name=uri" })
   uri: string;
 }
 
@@ -415,13 +414,13 @@ export class VideoMetadataInteractionsRent extends SpeakeasyBase {
  * Information about where and how to report a video.
 **/
 export class VideoMetadataInteractionsReport extends SpeakeasyBase {
-  @Metadata({ data: "json, name=options" })
+  @SpeakeasyMetadata({ data: "json, name=options" })
   options: string[];
 
-  @Metadata({ data: "json, name=reason" })
+  @SpeakeasyMetadata({ data: "json, name=reason" })
   reason: string[];
 
-  @Metadata({ data: "json, name=uri" })
+  @SpeakeasyMetadata({ data: "json, name=uri" })
   uri: string;
 }
 
@@ -431,16 +430,16 @@ export class VideoMetadataInteractionsReport extends SpeakeasyBase {
  * Subscription information for an On Demand video.
 **/
 export class VideoMetadataInteractionsSubscribe extends SpeakeasyBase {
-  @Metadata({ data: "json, name=drm" })
+  @SpeakeasyMetadata({ data: "json, name=drm" })
   drm?: boolean;
 
-  @Metadata({ data: "json, name=expires_time" })
+  @SpeakeasyMetadata({ data: "json, name=expires_time" })
   expiresTime?: string;
 
-  @Metadata({ data: "json, name=purchase_time" })
+  @SpeakeasyMetadata({ data: "json, name=purchase_time" })
   purchaseTime?: string;
 
-  @Metadata({ data: "json, name=stream" })
+  @SpeakeasyMetadata({ data: "json, name=stream" })
   stream?: string;
 }
 
@@ -450,16 +449,16 @@ export class VideoMetadataInteractionsSubscribe extends SpeakeasyBase {
  * Information about removing this video from the user's list of watched videos.
 **/
 export class VideoMetadataInteractionsWatched extends SpeakeasyBase {
-  @Metadata({ data: "json, name=added" })
+  @SpeakeasyMetadata({ data: "json, name=added" })
   added: boolean;
 
-  @Metadata({ data: "json, name=added_time" })
+  @SpeakeasyMetadata({ data: "json, name=added_time" })
   addedTime: string;
 
-  @Metadata({ data: "json, name=options" })
+  @SpeakeasyMetadata({ data: "json, name=options" })
   options: string[];
 
-  @Metadata({ data: "json, name=uri" })
+  @SpeakeasyMetadata({ data: "json, name=uri" })
   uri: string;
 }
 
@@ -469,16 +468,16 @@ export class VideoMetadataInteractionsWatched extends SpeakeasyBase {
  * Information about whether this video appears on the authenticated user's Watch Later list.
 **/
 export class VideoMetadataInteractionsWatchlater extends SpeakeasyBase {
-  @Metadata({ data: "json, name=added" })
+  @SpeakeasyMetadata({ data: "json, name=added" })
   added: boolean;
 
-  @Metadata({ data: "json, name=added_time" })
+  @SpeakeasyMetadata({ data: "json, name=added_time" })
   addedTime: string;
 
-  @Metadata({ data: "json, name=options" })
+  @SpeakeasyMetadata({ data: "json, name=options" })
   options: string[];
 
-  @Metadata({ data: "json, name=uri" })
+  @SpeakeasyMetadata({ data: "json, name=uri" })
   uri: string;
 }
 
@@ -488,28 +487,28 @@ export class VideoMetadataInteractionsWatchlater extends SpeakeasyBase {
  * A list of resource URIs related to the video.
 **/
 export class VideoMetadataInteractions extends SpeakeasyBase {
-  @Metadata({ data: "json, name=buy" })
+  @SpeakeasyMetadata({ data: "json, name=buy" })
   buy: VideoMetadataInteractionsBuy;
 
-  @Metadata({ data: "json, name=channel" })
+  @SpeakeasyMetadata({ data: "json, name=channel" })
   channel: VideoMetadataInteractionsChannel;
 
-  @Metadata({ data: "json, name=like" })
+  @SpeakeasyMetadata({ data: "json, name=like" })
   like: VideoMetadataInteractionsLike;
 
-  @Metadata({ data: "json, name=rent" })
+  @SpeakeasyMetadata({ data: "json, name=rent" })
   rent: VideoMetadataInteractionsRent;
 
-  @Metadata({ data: "json, name=report" })
+  @SpeakeasyMetadata({ data: "json, name=report" })
   report: VideoMetadataInteractionsReport;
 
-  @Metadata({ data: "json, name=subscribe" })
+  @SpeakeasyMetadata({ data: "json, name=subscribe" })
   subscribe?: VideoMetadataInteractionsSubscribe;
 
-  @Metadata({ data: "json, name=watched" })
+  @SpeakeasyMetadata({ data: "json, name=watched" })
   watched: VideoMetadataInteractionsWatched;
 
-  @Metadata({ data: "json, name=watchlater" })
+  @SpeakeasyMetadata({ data: "json, name=watchlater" })
   watchlater: VideoMetadataInteractionsWatchlater;
 }
 
@@ -519,10 +518,10 @@ export class VideoMetadataInteractions extends SpeakeasyBase {
  * The video's metadata.
 **/
 export class VideoMetadata extends SpeakeasyBase {
-  @Metadata({ data: "json, name=connections" })
+  @SpeakeasyMetadata({ data: "json, name=connections" })
   connections: VideoMetadataConnections;
 
-  @Metadata({ data: "json, name=interactions" })
+  @SpeakeasyMetadata({ data: "json, name=interactions" })
   interactions: VideoMetadataInteractions;
 }
 
@@ -532,13 +531,13 @@ export class VideoMetadata extends SpeakeasyBase {
  * A standard connection object indicating how to get all the videos in this project.
 **/
 export class VideoProjectMetadataConnectionsVideos extends SpeakeasyBase {
-  @Metadata({ data: "json, name=options" })
+  @SpeakeasyMetadata({ data: "json, name=options" })
   options: string[];
 
-  @Metadata({ data: "json, name=total" })
+  @SpeakeasyMetadata({ data: "json, name=total" })
   total: number;
 
-  @Metadata({ data: "json, name=uri" })
+  @SpeakeasyMetadata({ data: "json, name=uri" })
   uri: string;
 }
 
@@ -548,7 +547,7 @@ export class VideoProjectMetadataConnectionsVideos extends SpeakeasyBase {
  * A list of resource URIs related to the project.
 **/
 export class VideoProjectMetadataConnections extends SpeakeasyBase {
-  @Metadata({ data: "json, name=videos" })
+  @SpeakeasyMetadata({ data: "json, name=videos" })
   videos: VideoProjectMetadataConnectionsVideos;
 }
 
@@ -558,7 +557,7 @@ export class VideoProjectMetadataConnections extends SpeakeasyBase {
  * The project's metadata.
 **/
 export class VideoProjectMetadata extends SpeakeasyBase {
-  @Metadata({ data: "json, name=connections" })
+  @SpeakeasyMetadata({ data: "json, name=connections" })
   connections: VideoProjectMetadataConnections;
 }
 
@@ -568,47 +567,47 @@ export class VideoProjectMetadata extends SpeakeasyBase {
  * Information about the folder that contains this video.
 **/
 export class VideoProject extends SpeakeasyBase {
-  @Metadata({ data: "json, name=created_time" })
+  @SpeakeasyMetadata({ data: "json, name=created_time" })
   createdTime: string;
 
-  @Metadata({ data: "json, name=metadata" })
+  @SpeakeasyMetadata({ data: "json, name=metadata" })
   metadata: VideoProjectMetadata;
 
-  @Metadata({ data: "json, name=modified_time" })
+  @SpeakeasyMetadata({ data: "json, name=modified_time" })
   modifiedTime: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 
-  @Metadata({ data: "json, name=resource_key" })
+  @SpeakeasyMetadata({ data: "json, name=resource_key" })
   resourceKey: string;
 
-  @Metadata({ data: "json, name=uri" })
+  @SpeakeasyMetadata({ data: "json, name=uri" })
   uri: string;
 
-  @Metadata({ data: "json, name=user" })
+  @SpeakeasyMetadata({ data: "json, name=user" })
   user: User;
 }
 
 export enum VideoPrivacyCommentsEnum {
-    Anybody = "anybody"
-,    Contacts = "contacts"
-,    Nobody = "nobody"
+    Anybody = "anybody",
+    Contacts = "contacts",
+    Nobody = "nobody"
 }
 
 export enum VideoPrivacyEmbedEnum {
-    Private = "private"
-,    Public = "public"
+    Private = "private",
+    Public = "public"
 }
 
 export enum VideoPrivacyViewEnum {
-    Anybody = "anybody"
-,    Contacts = "contacts"
-,    Disable = "disable"
-,    Nobody = "nobody"
-,    Password = "password"
-,    Unlisted = "unlisted"
-,    Users = "users"
+    Anybody = "anybody",
+    Contacts = "contacts",
+    Disable = "disable",
+    Nobody = "nobody",
+    Password = "password",
+    Unlisted = "unlisted",
+    Users = "users"
 }
 
 
@@ -617,49 +616,49 @@ export enum VideoPrivacyViewEnum {
  * The video's privacy setting.
 **/
 export class VideoPrivacy extends SpeakeasyBase {
-  @Metadata({ data: "json, name=add" })
+  @SpeakeasyMetadata({ data: "json, name=add" })
   add: boolean;
 
-  @Metadata({ data: "json, name=comments" })
+  @SpeakeasyMetadata({ data: "json, name=comments" })
   comments: VideoPrivacyCommentsEnum;
 
-  @Metadata({ data: "json, name=download" })
+  @SpeakeasyMetadata({ data: "json, name=download" })
   download: boolean;
 
-  @Metadata({ data: "json, name=embed" })
+  @SpeakeasyMetadata({ data: "json, name=embed" })
   embed: VideoPrivacyEmbedEnum;
 
-  @Metadata({ data: "json, name=view" })
+  @SpeakeasyMetadata({ data: "json, name=view" })
   view: VideoPrivacyViewEnum;
 }
 
 
 export class VideoSpatialDirectorTimeline extends SpeakeasyBase {
-  @Metadata({ data: "json, name=pitch" })
+  @SpeakeasyMetadata({ data: "json, name=pitch" })
   pitch?: number;
 
-  @Metadata({ data: "json, name=roll" })
+  @SpeakeasyMetadata({ data: "json, name=roll" })
   roll?: number;
 
-  @Metadata({ data: "json, name=time_code" })
+  @SpeakeasyMetadata({ data: "json, name=time_code" })
   timeCode?: number;
 
-  @Metadata({ data: "json, name=yaw" })
+  @SpeakeasyMetadata({ data: "json, name=yaw" })
   yaw?: number;
 }
 
 export enum VideoSpatialProjectionEnum {
-    Cubical = "cubical"
-,    Cylindrical = "cylindrical"
-,    Dome = "dome"
-,    Equirectangular = "equirectangular"
-,    Pyramid = "pyramid"
+    Cubical = "cubical",
+    Cylindrical = "cylindrical",
+    Dome = "dome",
+    Equirectangular = "equirectangular",
+    Pyramid = "pyramid"
 }
 
 export enum VideoSpatialStereoFormatEnum {
-    LeftRight = "left-right"
-,    Mono = "mono"
-,    TopBottom = "top-bottom"
+    LeftRight = "left-right",
+    Mono = "mono",
+    TopBottom = "top-bottom"
 }
 
 
@@ -668,16 +667,16 @@ export enum VideoSpatialStereoFormatEnum {
  * 360 spatial data.
 **/
 export class VideoSpatial extends SpeakeasyBase {
-  @Metadata({ data: "json, name=director_timeline", elemType: shared.VideoSpatialDirectorTimeline })
+  @SpeakeasyMetadata({ data: "json, name=director_timeline", elemType: VideoSpatialDirectorTimeline })
   directorTimeline: VideoSpatialDirectorTimeline[];
 
-  @Metadata({ data: "json, name=field_of_view" })
+  @SpeakeasyMetadata({ data: "json, name=field_of_view" })
   fieldOfView: number;
 
-  @Metadata({ data: "json, name=projection" })
+  @SpeakeasyMetadata({ data: "json, name=projection" })
   projection: VideoSpatialProjectionEnum;
 
-  @Metadata({ data: "json, name=stereo_format" })
+  @SpeakeasyMetadata({ data: "json, name=stereo_format" })
   stereoFormat: VideoSpatialStereoFormatEnum;
 }
 
@@ -687,26 +686,26 @@ export class VideoSpatial extends SpeakeasyBase {
  * A collection of stats associated with this video.
 **/
 export class VideoStats extends SpeakeasyBase {
-  @Metadata({ data: "json, name=plays" })
+  @SpeakeasyMetadata({ data: "json, name=plays" })
   plays: number;
 }
 
 export enum VideoStatusEnum {
-    Available = "available"
-,    QuotaExceeded = "quota_exceeded"
-,    TotalCapExceeded = "total_cap_exceeded"
-,    TranscodeStarting = "transcode_starting"
-,    Transcoding = "transcoding"
-,    TranscodingError = "transcoding_error"
-,    Unavailable = "unavailable"
-,    Uploading = "uploading"
-,    UploadingError = "uploading_error"
+    Available = "available",
+    QuotaExceeded = "quota_exceeded",
+    TotalCapExceeded = "total_cap_exceeded",
+    TranscodeStarting = "transcode_starting",
+    Transcoding = "transcoding",
+    TranscodingError = "transcoding_error",
+    Unavailable = "unavailable",
+    Uploading = "uploading",
+    UploadingError = "uploading_error"
 }
 
 export enum VideoTranscodeStatusEnum {
-    Complete = "complete"
-,    Error = "error"
-,    InProgress = "in_progress"
+    Complete = "complete",
+    Error = "error",
+    InProgress = "in_progress"
 }
 
 
@@ -715,21 +714,21 @@ export enum VideoTranscodeStatusEnum {
  * The transcode information for a video upload.
 **/
 export class VideoTranscode extends SpeakeasyBase {
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: VideoTranscodeStatusEnum;
 }
 
 export enum VideoUploadApproachEnum {
-    Post = "post"
-,    Pull = "pull"
-,    Streaming = "streaming"
-,    Tus = "tus"
+    Post = "post",
+    Pull = "pull",
+    Streaming = "streaming",
+    Tus = "tus"
 }
 
 export enum VideoUploadStatusEnum {
-    Complete = "complete"
-,    Error = "error"
-,    InProgress = "in_progress"
+    Complete = "complete",
+    Error = "error",
+    InProgress = "in_progress"
 }
 
 
@@ -738,41 +737,41 @@ export enum VideoUploadStatusEnum {
  * The upload information for this video.
 **/
 export class VideoUpload extends SpeakeasyBase {
-  @Metadata({ data: "json, name=approach" })
+  @SpeakeasyMetadata({ data: "json, name=approach" })
   approach?: VideoUploadApproachEnum;
 
-  @Metadata({ data: "json, name=complete_uri" })
+  @SpeakeasyMetadata({ data: "json, name=complete_uri" })
   completeUri?: string;
 
-  @Metadata({ data: "json, name=form" })
+  @SpeakeasyMetadata({ data: "json, name=form" })
   form?: string;
 
-  @Metadata({ data: "json, name=link" })
+  @SpeakeasyMetadata({ data: "json, name=link" })
   link?: string;
 
-  @Metadata({ data: "json, name=redirect_url" })
+  @SpeakeasyMetadata({ data: "json, name=redirect_url" })
   redirectUrl?: string;
 
-  @Metadata({ data: "json, name=size" })
+  @SpeakeasyMetadata({ data: "json, name=size" })
   size?: number;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status: VideoUploadStatusEnum;
 
-  @Metadata({ data: "json, name=upload_link" })
+  @SpeakeasyMetadata({ data: "json, name=upload_link" })
   uploadLink?: string;
 }
 
 export enum VideoUserAccountEnum {
-    Basic = "basic"
-,    Business = "business"
-,    LiveBusiness = "live_business"
-,    LivePremium = "live_premium"
-,    LivePro = "live_pro"
-,    Plus = "plus"
-,    Pro = "pro"
-,    ProUnlimited = "pro_unlimited"
-,    Producer = "producer"
+    Basic = "basic",
+    Business = "business",
+    LiveBusiness = "live_business",
+    LivePremium = "live_premium",
+    LivePro = "live_pro",
+    Plus = "plus",
+    Pro = "pro",
+    ProUnlimited = "pro_unlimited",
+    Producer = "producer"
 }
 
 
@@ -781,13 +780,13 @@ export enum VideoUserAccountEnum {
  * Information about the albums created by this user.
 **/
 export class VideoUserMetadataConnectionsAlbums extends SpeakeasyBase {
-  @Metadata({ data: "json, name=options" })
+  @SpeakeasyMetadata({ data: "json, name=options" })
   options: string[];
 
-  @Metadata({ data: "json, name=total" })
+  @SpeakeasyMetadata({ data: "json, name=total" })
   total: number;
 
-  @Metadata({ data: "json, name=uri" })
+  @SpeakeasyMetadata({ data: "json, name=uri" })
   uri: string;
 }
 
@@ -797,13 +796,13 @@ export class VideoUserMetadataConnectionsAlbums extends SpeakeasyBase {
  * Information about the appearances of this user in other videos.
 **/
 export class VideoUserMetadataConnectionsAppearances extends SpeakeasyBase {
-  @Metadata({ data: "json, name=options" })
+  @SpeakeasyMetadata({ data: "json, name=options" })
   options: string[];
 
-  @Metadata({ data: "json, name=total" })
+  @SpeakeasyMetadata({ data: "json, name=total" })
   total: number;
 
-  @Metadata({ data: "json, name=uri" })
+  @SpeakeasyMetadata({ data: "json, name=uri" })
   uri: string;
 }
 
@@ -813,13 +812,13 @@ export class VideoUserMetadataConnectionsAppearances extends SpeakeasyBase {
  * Information on the users that the current user has blocked. This data requires a bearer token with the `private` scope.
 **/
 export class VideoUserMetadataConnectionsBlock extends SpeakeasyBase {
-  @Metadata({ data: "json, name=options" })
+  @SpeakeasyMetadata({ data: "json, name=options" })
   options: string[];
 
-  @Metadata({ data: "json, name=total" })
+  @SpeakeasyMetadata({ data: "json, name=total" })
   total: number;
 
-  @Metadata({ data: "json, name=uri" })
+  @SpeakeasyMetadata({ data: "json, name=uri" })
   uri: string;
 }
 
@@ -829,13 +828,13 @@ export class VideoUserMetadataConnectionsBlock extends SpeakeasyBase {
  * Information about this user's followed categories.
 **/
 export class VideoUserMetadataConnectionsCategories extends SpeakeasyBase {
-  @Metadata({ data: "json, name=options" })
+  @SpeakeasyMetadata({ data: "json, name=options" })
   options: string[];
 
-  @Metadata({ data: "json, name=total" })
+  @SpeakeasyMetadata({ data: "json, name=total" })
   total: number;
 
-  @Metadata({ data: "json, name=uri" })
+  @SpeakeasyMetadata({ data: "json, name=uri" })
   uri: string;
 }
 
@@ -845,13 +844,13 @@ export class VideoUserMetadataConnectionsCategories extends SpeakeasyBase {
  * Information about this user's subscribed channels.
 **/
 export class VideoUserMetadataConnectionsChannels extends SpeakeasyBase {
-  @Metadata({ data: "json, name=options" })
+  @SpeakeasyMetadata({ data: "json, name=options" })
   options: string[];
 
-  @Metadata({ data: "json, name=total" })
+  @SpeakeasyMetadata({ data: "json, name=total" })
   total: number;
 
-  @Metadata({ data: "json, name=uri" })
+  @SpeakeasyMetadata({ data: "json, name=uri" })
   uri: string;
 }
 
@@ -861,10 +860,10 @@ export class VideoUserMetadataConnectionsChannels extends SpeakeasyBase {
  * Information about this user's feed.
 **/
 export class VideoUserMetadataConnectionsFeed extends SpeakeasyBase {
-  @Metadata({ data: "json, name=options" })
+  @SpeakeasyMetadata({ data: "json, name=options" })
   options: string[];
 
-  @Metadata({ data: "json, name=uri" })
+  @SpeakeasyMetadata({ data: "json, name=uri" })
   uri: string;
 }
 
@@ -874,13 +873,13 @@ export class VideoUserMetadataConnectionsFeed extends SpeakeasyBase {
  * Information about this user's folders.
 **/
 export class VideoUserMetadataConnectionsFolders extends SpeakeasyBase {
-  @Metadata({ data: "json, name=options" })
+  @SpeakeasyMetadata({ data: "json, name=options" })
   options: string[];
 
-  @Metadata({ data: "json, name=total" })
+  @SpeakeasyMetadata({ data: "json, name=total" })
   total: number;
 
-  @Metadata({ data: "json, name=uri" })
+  @SpeakeasyMetadata({ data: "json, name=uri" })
   uri: string;
 }
 
@@ -890,13 +889,13 @@ export class VideoUserMetadataConnectionsFolders extends SpeakeasyBase {
  * Information about the user's followers.
 **/
 export class VideoUserMetadataConnectionsFollowers extends SpeakeasyBase {
-  @Metadata({ data: "json, name=options" })
+  @SpeakeasyMetadata({ data: "json, name=options" })
   options: string[];
 
-  @Metadata({ data: "json, name=total" })
+  @SpeakeasyMetadata({ data: "json, name=total" })
   total: number;
 
-  @Metadata({ data: "json, name=uri" })
+  @SpeakeasyMetadata({ data: "json, name=uri" })
   uri: string;
 }
 
@@ -906,13 +905,13 @@ export class VideoUserMetadataConnectionsFollowers extends SpeakeasyBase {
  * Information about the users that the current user is following.
 **/
 export class VideoUserMetadataConnectionsFollowing extends SpeakeasyBase {
-  @Metadata({ data: "json, name=options" })
+  @SpeakeasyMetadata({ data: "json, name=options" })
   options: string[];
 
-  @Metadata({ data: "json, name=total" })
+  @SpeakeasyMetadata({ data: "json, name=total" })
   total: number;
 
-  @Metadata({ data: "json, name=uri" })
+  @SpeakeasyMetadata({ data: "json, name=uri" })
   uri: string;
 }
 
@@ -922,13 +921,13 @@ export class VideoUserMetadataConnectionsFollowing extends SpeakeasyBase {
  * Information about the groups created by this user.
 **/
 export class VideoUserMetadataConnectionsGroups extends SpeakeasyBase {
-  @Metadata({ data: "json, name=options" })
+  @SpeakeasyMetadata({ data: "json, name=options" })
   options: string[];
 
-  @Metadata({ data: "json, name=total" })
+  @SpeakeasyMetadata({ data: "json, name=total" })
   total: number;
 
-  @Metadata({ data: "json, name=uri" })
+  @SpeakeasyMetadata({ data: "json, name=uri" })
   uri: string;
 }
 
@@ -938,13 +937,13 @@ export class VideoUserMetadataConnectionsGroups extends SpeakeasyBase {
  * Information about the videos that this user has liked.
 **/
 export class VideoUserMetadataConnectionsLikes extends SpeakeasyBase {
-  @Metadata({ data: "json, name=options" })
+  @SpeakeasyMetadata({ data: "json, name=options" })
   options: string[];
 
-  @Metadata({ data: "json, name=total" })
+  @SpeakeasyMetadata({ data: "json, name=total" })
   total: number;
 
-  @Metadata({ data: "json, name=uri" })
+  @SpeakeasyMetadata({ data: "json, name=uri" })
   uri: string;
 }
 
@@ -954,13 +953,13 @@ export class VideoUserMetadataConnectionsLikes extends SpeakeasyBase {
  * Information about the channels that this user moderates.
 **/
 export class VideoUserMetadataConnectionsModeratedChannels extends SpeakeasyBase {
-  @Metadata({ data: "json, name=options" })
+  @SpeakeasyMetadata({ data: "json, name=options" })
   options: string[];
 
-  @Metadata({ data: "json, name=total" })
+  @SpeakeasyMetadata({ data: "json, name=total" })
   total: number;
 
-  @Metadata({ data: "json, name=uri" })
+  @SpeakeasyMetadata({ data: "json, name=uri" })
   uri: string;
 }
 
@@ -970,13 +969,13 @@ export class VideoUserMetadataConnectionsModeratedChannels extends SpeakeasyBase
  * Information about this user's portraits.
 **/
 export class VideoUserMetadataConnectionsPictures extends SpeakeasyBase {
-  @Metadata({ data: "json, name=options" })
+  @SpeakeasyMetadata({ data: "json, name=options" })
   options: string[];
 
-  @Metadata({ data: "json, name=total" })
+  @SpeakeasyMetadata({ data: "json, name=total" })
   total: number;
 
-  @Metadata({ data: "json, name=uri" })
+  @SpeakeasyMetadata({ data: "json, name=uri" })
   uri: string;
 }
 
@@ -986,13 +985,13 @@ export class VideoUserMetadataConnectionsPictures extends SpeakeasyBase {
  * Information about this user's portfolios.
 **/
 export class VideoUserMetadataConnectionsPortfolios extends SpeakeasyBase {
-  @Metadata({ data: "json, name=options" })
+  @SpeakeasyMetadata({ data: "json, name=options" })
   options: string[];
 
-  @Metadata({ data: "json, name=total" })
+  @SpeakeasyMetadata({ data: "json, name=total" })
   total: number;
 
-  @Metadata({ data: "json, name=uri" })
+  @SpeakeasyMetadata({ data: "json, name=uri" })
   uri: string;
 }
 
@@ -1002,13 +1001,13 @@ export class VideoUserMetadataConnectionsPortfolios extends SpeakeasyBase {
  * A collection of recommended channels for the current user to follow. This data requires a bearer token with the `private` scope.
 **/
 export class VideoUserMetadataConnectionsRecommendedChannels extends SpeakeasyBase {
-  @Metadata({ data: "json, name=options" })
+  @SpeakeasyMetadata({ data: "json, name=options" })
   options: string[];
 
-  @Metadata({ data: "json, name=total" })
+  @SpeakeasyMetadata({ data: "json, name=total" })
   total: number;
 
-  @Metadata({ data: "json, name=uri" })
+  @SpeakeasyMetadata({ data: "json, name=uri" })
   uri: string;
 }
 
@@ -1018,13 +1017,13 @@ export class VideoUserMetadataConnectionsRecommendedChannels extends SpeakeasyBa
  * A Collection of recommended users for the current user to follow. This data requires a bearer token with the `private` scope.
 **/
 export class VideoUserMetadataConnectionsRecommendedUsers extends SpeakeasyBase {
-  @Metadata({ data: "json, name=options" })
+  @SpeakeasyMetadata({ data: "json, name=options" })
   options: string[];
 
-  @Metadata({ data: "json, name=total" })
+  @SpeakeasyMetadata({ data: "json, name=total" })
   total: number;
 
-  @Metadata({ data: "json, name=uri" })
+  @SpeakeasyMetadata({ data: "json, name=uri" })
   uri: string;
 }
 
@@ -1034,13 +1033,13 @@ export class VideoUserMetadataConnectionsRecommendedUsers extends SpeakeasyBase 
  * Information about the videos that have been shared with this user.
 **/
 export class VideoUserMetadataConnectionsShared extends SpeakeasyBase {
-  @Metadata({ data: "json, name=options" })
+  @SpeakeasyMetadata({ data: "json, name=options" })
   options: string[];
 
-  @Metadata({ data: "json, name=total" })
+  @SpeakeasyMetadata({ data: "json, name=total" })
   total: number;
 
-  @Metadata({ data: "json, name=uri" })
+  @SpeakeasyMetadata({ data: "json, name=uri" })
   uri: string;
 }
 
@@ -1050,13 +1049,13 @@ export class VideoUserMetadataConnectionsShared extends SpeakeasyBase {
  * Information about the videos uploaded by this user.
 **/
 export class VideoUserMetadataConnectionsVideos extends SpeakeasyBase {
-  @Metadata({ data: "json, name=options" })
+  @SpeakeasyMetadata({ data: "json, name=options" })
   options: string[];
 
-  @Metadata({ data: "json, name=total" })
+  @SpeakeasyMetadata({ data: "json, name=total" })
   total: number;
 
-  @Metadata({ data: "json, name=uri" })
+  @SpeakeasyMetadata({ data: "json, name=uri" })
   uri: string;
 }
 
@@ -1066,13 +1065,13 @@ export class VideoUserMetadataConnectionsVideos extends SpeakeasyBase {
  * Information about the videos that this user has watched.
 **/
 export class VideoUserMetadataConnectionsWatchedVideos extends SpeakeasyBase {
-  @Metadata({ data: "json, name=options" })
+  @SpeakeasyMetadata({ data: "json, name=options" })
   options: string[];
 
-  @Metadata({ data: "json, name=total" })
+  @SpeakeasyMetadata({ data: "json, name=total" })
   total: number;
 
-  @Metadata({ data: "json, name=uri" })
+  @SpeakeasyMetadata({ data: "json, name=uri" })
   uri: string;
 }
 
@@ -1082,13 +1081,13 @@ export class VideoUserMetadataConnectionsWatchedVideos extends SpeakeasyBase {
  * Information about the videos that this user wants to watch later.
 **/
 export class VideoUserMetadataConnectionsWatchlater extends SpeakeasyBase {
-  @Metadata({ data: "json, name=options" })
+  @SpeakeasyMetadata({ data: "json, name=options" })
   options: string[];
 
-  @Metadata({ data: "json, name=total" })
+  @SpeakeasyMetadata({ data: "json, name=total" })
   total: number;
 
-  @Metadata({ data: "json, name=uri" })
+  @SpeakeasyMetadata({ data: "json, name=uri" })
   uri: string;
 }
 
@@ -1098,73 +1097,73 @@ export class VideoUserMetadataConnectionsWatchlater extends SpeakeasyBase {
  * The list of resource URIs related to the user.
 **/
 export class VideoUserMetadataConnections extends SpeakeasyBase {
-  @Metadata({ data: "json, name=albums" })
+  @SpeakeasyMetadata({ data: "json, name=albums" })
   albums: VideoUserMetadataConnectionsAlbums;
 
-  @Metadata({ data: "json, name=appearances" })
+  @SpeakeasyMetadata({ data: "json, name=appearances" })
   appearances: VideoUserMetadataConnectionsAppearances;
 
-  @Metadata({ data: "json, name=block" })
+  @SpeakeasyMetadata({ data: "json, name=block" })
   block: VideoUserMetadataConnectionsBlock;
 
-  @Metadata({ data: "json, name=categories" })
+  @SpeakeasyMetadata({ data: "json, name=categories" })
   categories: VideoUserMetadataConnectionsCategories;
 
-  @Metadata({ data: "json, name=channels" })
+  @SpeakeasyMetadata({ data: "json, name=channels" })
   channels: VideoUserMetadataConnectionsChannels;
 
-  @Metadata({ data: "json, name=feed" })
+  @SpeakeasyMetadata({ data: "json, name=feed" })
   feed: VideoUserMetadataConnectionsFeed;
 
-  @Metadata({ data: "json, name=folders" })
+  @SpeakeasyMetadata({ data: "json, name=folders" })
   folders: VideoUserMetadataConnectionsFolders;
 
-  @Metadata({ data: "json, name=followers" })
+  @SpeakeasyMetadata({ data: "json, name=followers" })
   followers: VideoUserMetadataConnectionsFollowers;
 
-  @Metadata({ data: "json, name=following" })
+  @SpeakeasyMetadata({ data: "json, name=following" })
   following: VideoUserMetadataConnectionsFollowing;
 
-  @Metadata({ data: "json, name=groups" })
+  @SpeakeasyMetadata({ data: "json, name=groups" })
   groups: VideoUserMetadataConnectionsGroups;
 
-  @Metadata({ data: "json, name=likes" })
+  @SpeakeasyMetadata({ data: "json, name=likes" })
   likes: VideoUserMetadataConnectionsLikes;
 
-  @Metadata({ data: "json, name=moderated_channels" })
+  @SpeakeasyMetadata({ data: "json, name=moderated_channels" })
   moderatedChannels: VideoUserMetadataConnectionsModeratedChannels;
 
-  @Metadata({ data: "json, name=pictures" })
+  @SpeakeasyMetadata({ data: "json, name=pictures" })
   pictures: VideoUserMetadataConnectionsPictures;
 
-  @Metadata({ data: "json, name=portfolios" })
+  @SpeakeasyMetadata({ data: "json, name=portfolios" })
   portfolios: VideoUserMetadataConnectionsPortfolios;
 
-  @Metadata({ data: "json, name=recommended_channels" })
+  @SpeakeasyMetadata({ data: "json, name=recommended_channels" })
   recommendedChannels: VideoUserMetadataConnectionsRecommendedChannels;
 
-  @Metadata({ data: "json, name=recommended_users" })
+  @SpeakeasyMetadata({ data: "json, name=recommended_users" })
   recommendedUsers: VideoUserMetadataConnectionsRecommendedUsers;
 
-  @Metadata({ data: "json, name=shared" })
+  @SpeakeasyMetadata({ data: "json, name=shared" })
   shared: VideoUserMetadataConnectionsShared;
 
-  @Metadata({ data: "json, name=videos" })
+  @SpeakeasyMetadata({ data: "json, name=videos" })
   videos: VideoUserMetadataConnectionsVideos;
 
-  @Metadata({ data: "json, name=watched_videos" })
+  @SpeakeasyMetadata({ data: "json, name=watched_videos" })
   watchedVideos: VideoUserMetadataConnectionsWatchedVideos;
 
-  @Metadata({ data: "json, name=watchlater" })
+  @SpeakeasyMetadata({ data: "json, name=watchlater" })
   watchlater: VideoUserMetadataConnectionsWatchlater;
 }
 
 
 export class VideoUserMetadataInteractionsAddPrivacyUser extends SpeakeasyBase {
-  @Metadata({ data: "json, name=options" })
+  @SpeakeasyMetadata({ data: "json, name=options" })
   options?: string[];
 
-  @Metadata({ data: "json, name=uri" })
+  @SpeakeasyMetadata({ data: "json, name=uri" })
   uri?: string;
 }
 
@@ -1174,16 +1173,16 @@ export class VideoUserMetadataInteractionsAddPrivacyUser extends SpeakeasyBase {
  * Information related to the block status of this user.
 **/
 export class VideoUserMetadataInteractionsBlock extends SpeakeasyBase {
-  @Metadata({ data: "json, name=added" })
+  @SpeakeasyMetadata({ data: "json, name=added" })
   added: boolean;
 
-  @Metadata({ data: "json, name=added_time" })
+  @SpeakeasyMetadata({ data: "json, name=added_time" })
   addedTime: string;
 
-  @Metadata({ data: "json, name=options" })
+  @SpeakeasyMetadata({ data: "json, name=options" })
   options: string[];
 
-  @Metadata({ data: "json, name=uri" })
+  @SpeakeasyMetadata({ data: "json, name=uri" })
   uri: string;
 }
 
@@ -1193,13 +1192,13 @@ export class VideoUserMetadataInteractionsBlock extends SpeakeasyBase {
  * Information related to the followed status of this user.
 **/
 export class VideoUserMetadataInteractionsFollow extends SpeakeasyBase {
-  @Metadata({ data: "json, name=added" })
+  @SpeakeasyMetadata({ data: "json, name=added" })
   added: boolean;
 
-  @Metadata({ data: "json, name=options" })
+  @SpeakeasyMetadata({ data: "json, name=options" })
   options: string[];
 
-  @Metadata({ data: "json, name=uri" })
+  @SpeakeasyMetadata({ data: "json, name=uri" })
   uri: string;
 }
 
@@ -1209,28 +1208,28 @@ export class VideoUserMetadataInteractionsFollow extends SpeakeasyBase {
  * Information regarding where and how to report a user.
 **/
 export class VideoUserMetadataInteractionsReport extends SpeakeasyBase {
-  @Metadata({ data: "json, name=options" })
+  @SpeakeasyMetadata({ data: "json, name=options" })
   options: string[];
 
-  @Metadata({ data: "json, name=reason" })
+  @SpeakeasyMetadata({ data: "json, name=reason" })
   reason: string[];
 
-  @Metadata({ data: "json, name=uri" })
+  @SpeakeasyMetadata({ data: "json, name=uri" })
   uri: string;
 }
 
 
 export class VideoUserMetadataInteractions extends SpeakeasyBase {
-  @Metadata({ data: "json, name=add_privacy_user" })
+  @SpeakeasyMetadata({ data: "json, name=add_privacy_user" })
   addPrivacyUser?: VideoUserMetadataInteractionsAddPrivacyUser;
 
-  @Metadata({ data: "json, name=block" })
+  @SpeakeasyMetadata({ data: "json, name=block" })
   block: VideoUserMetadataInteractionsBlock;
 
-  @Metadata({ data: "json, name=follow" })
+  @SpeakeasyMetadata({ data: "json, name=follow" })
   follow: VideoUserMetadataInteractionsFollow;
 
-  @Metadata({ data: "json, name=report" })
+  @SpeakeasyMetadata({ data: "json, name=report" })
   report: VideoUserMetadataInteractionsReport;
 }
 
@@ -1240,62 +1239,62 @@ export class VideoUserMetadataInteractions extends SpeakeasyBase {
  * The user's metadata.
 **/
 export class VideoUserMetadata extends SpeakeasyBase {
-  @Metadata({ data: "json, name=connections" })
+  @SpeakeasyMetadata({ data: "json, name=connections" })
   connections: VideoUserMetadataConnections;
 
-  @Metadata({ data: "json, name=interactions" })
+  @SpeakeasyMetadata({ data: "json, name=interactions" })
   interactions: VideoUserMetadataInteractions;
 }
 
 export enum VideoUserPreferencesVideosPrivacyCommentsEnum {
-    Anybody = "anybody"
-,    Contacts = "contacts"
-,    Nobody = "nobody"
+    Anybody = "anybody",
+    Contacts = "contacts",
+    Nobody = "nobody"
 }
 
 export enum VideoUserPreferencesVideosPrivacyEmbedEnum {
-    Private = "private"
-,    Public = "public"
-,    Whitelist = "whitelist"
+    Private = "private",
+    Public = "public",
+    Whitelist = "whitelist"
 }
 
 export enum VideoUserPreferencesVideosPrivacyViewEnum {
-    Anybody = "anybody"
-,    Contacts = "contacts"
-,    Disable = "disable"
-,    Nobody = "nobody"
-,    Password = "password"
-,    Unlisted = "unlisted"
-,    Users = "users"
+    Anybody = "anybody",
+    Contacts = "contacts",
+    Disable = "disable",
+    Nobody = "nobody",
+    Password = "password",
+    Unlisted = "unlisted",
+    Users = "users"
 }
 
 
 export class VideoUserPreferencesVideosPrivacy extends SpeakeasyBase {
-  @Metadata({ data: "json, name=add" })
+  @SpeakeasyMetadata({ data: "json, name=add" })
   add?: boolean;
 
-  @Metadata({ data: "json, name=comments" })
+  @SpeakeasyMetadata({ data: "json, name=comments" })
   comments?: VideoUserPreferencesVideosPrivacyCommentsEnum;
 
-  @Metadata({ data: "json, name=download" })
+  @SpeakeasyMetadata({ data: "json, name=download" })
   download?: boolean;
 
-  @Metadata({ data: "json, name=embed" })
+  @SpeakeasyMetadata({ data: "json, name=embed" })
   embed?: VideoUserPreferencesVideosPrivacyEmbedEnum;
 
-  @Metadata({ data: "json, name=view" })
+  @SpeakeasyMetadata({ data: "json, name=view" })
   view?: VideoUserPreferencesVideosPrivacyViewEnum;
 }
 
 
 export class VideoUserPreferencesVideos extends SpeakeasyBase {
-  @Metadata({ data: "json, name=privacy" })
+  @SpeakeasyMetadata({ data: "json, name=privacy" })
   privacy?: VideoUserPreferencesVideosPrivacy;
 }
 
 
 export class VideoUserPreferences extends SpeakeasyBase {
-  @Metadata({ data: "json, name=videos" })
+  @SpeakeasyMetadata({ data: "json, name=videos" })
   videos?: VideoUserPreferencesVideos;
 }
 
@@ -1305,13 +1304,13 @@ export class VideoUserPreferences extends SpeakeasyBase {
  * Information about the user's lifetime upload usage.
 **/
 export class VideoUserUploadQuotaLifetime extends SpeakeasyBase {
-  @Metadata({ data: "json, name=free" })
+  @SpeakeasyMetadata({ data: "json, name=free" })
   free: number;
 
-  @Metadata({ data: "json, name=max" })
+  @SpeakeasyMetadata({ data: "json, name=max" })
   max: number;
 
-  @Metadata({ data: "json, name=used" })
+  @SpeakeasyMetadata({ data: "json, name=used" })
   used: number;
 }
 
@@ -1321,22 +1320,22 @@ export class VideoUserUploadQuotaLifetime extends SpeakeasyBase {
  * Information about the user's usage for the current period.
 **/
 export class VideoUserUploadQuotaPeriodic extends SpeakeasyBase {
-  @Metadata({ data: "json, name=free" })
+  @SpeakeasyMetadata({ data: "json, name=free" })
   free: number;
 
-  @Metadata({ data: "json, name=max" })
+  @SpeakeasyMetadata({ data: "json, name=max" })
   max: number;
 
-  @Metadata({ data: "json, name=reset_date" })
+  @SpeakeasyMetadata({ data: "json, name=reset_date" })
   resetDate: string;
 
-  @Metadata({ data: "json, name=used" })
+  @SpeakeasyMetadata({ data: "json, name=used" })
   used: number;
 }
 
 export enum VideoUserUploadQuotaSpaceShowingEnum {
-    Lifetime = "lifetime"
-,    Periodic = "periodic"
+    Lifetime = "lifetime",
+    Periodic = "periodic"
 }
 
 
@@ -1345,16 +1344,16 @@ export enum VideoUserUploadQuotaSpaceShowingEnum {
  * Information about the user's upload space remaining for the current period.
 **/
 export class VideoUserUploadQuotaSpace extends SpeakeasyBase {
-  @Metadata({ data: "json, name=free" })
+  @SpeakeasyMetadata({ data: "json, name=free" })
   free: number;
 
-  @Metadata({ data: "json, name=max" })
+  @SpeakeasyMetadata({ data: "json, name=max" })
   max: number;
 
-  @Metadata({ data: "json, name=showing" })
+  @SpeakeasyMetadata({ data: "json, name=showing" })
   showing: VideoUserUploadQuotaSpaceShowingEnum;
 
-  @Metadata({ data: "json, name=used" })
+  @SpeakeasyMetadata({ data: "json, name=used" })
   used: number;
 }
 
@@ -1364,25 +1363,25 @@ export class VideoUserUploadQuotaSpace extends SpeakeasyBase {
  * Appears only when the user has upload access and is looking at their own user record.
 **/
 export class VideoUserUploadQuota extends SpeakeasyBase {
-  @Metadata({ data: "json, name=lifetime" })
+  @SpeakeasyMetadata({ data: "json, name=lifetime" })
   lifetime: VideoUserUploadQuotaLifetime;
 
-  @Metadata({ data: "json, name=periodic" })
+  @SpeakeasyMetadata({ data: "json, name=periodic" })
   periodic: VideoUserUploadQuotaPeriodic;
 
-  @Metadata({ data: "json, name=space" })
+  @SpeakeasyMetadata({ data: "json, name=space" })
   space: VideoUserUploadQuotaSpace;
 }
 
 
 export class VideoUserWebsites extends SpeakeasyBase {
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description: string;
 
-  @Metadata({ data: "json, name=link" })
+  @SpeakeasyMetadata({ data: "json, name=link" })
   link: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 }
 
@@ -1392,141 +1391,141 @@ export class VideoUserWebsites extends SpeakeasyBase {
  * The video owner.
 **/
 export class VideoUser extends SpeakeasyBase {
-  @Metadata({ data: "json, name=account" })
+  @SpeakeasyMetadata({ data: "json, name=account" })
   account: VideoUserAccountEnum;
 
-  @Metadata({ data: "json, name=bio" })
+  @SpeakeasyMetadata({ data: "json, name=bio" })
   bio: string;
 
-  @Metadata({ data: "json, name=content_filter" })
+  @SpeakeasyMetadata({ data: "json, name=content_filter" })
   contentFilter?: string[];
 
-  @Metadata({ data: "json, name=created_time" })
+  @SpeakeasyMetadata({ data: "json, name=created_time" })
   createdTime: string;
 
-  @Metadata({ data: "json, name=email" })
+  @SpeakeasyMetadata({ data: "json, name=email" })
   email?: string;
 
-  @Metadata({ data: "json, name=link" })
+  @SpeakeasyMetadata({ data: "json, name=link" })
   link: string;
 
-  @Metadata({ data: "json, name=location" })
+  @SpeakeasyMetadata({ data: "json, name=location" })
   location: string;
 
-  @Metadata({ data: "json, name=metadata" })
+  @SpeakeasyMetadata({ data: "json, name=metadata" })
   metadata: VideoUserMetadata;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 
-  @Metadata({ data: "json, name=pictures" })
+  @SpeakeasyMetadata({ data: "json, name=pictures" })
   pictures: Picture;
 
-  @Metadata({ data: "json, name=preferences" })
+  @SpeakeasyMetadata({ data: "json, name=preferences" })
   preferences?: VideoUserPreferences;
 
-  @Metadata({ data: "json, name=resource_key" })
+  @SpeakeasyMetadata({ data: "json, name=resource_key" })
   resourceKey: string;
 
-  @Metadata({ data: "json, name=upload_quota" })
+  @SpeakeasyMetadata({ data: "json, name=upload_quota" })
   uploadQuota: VideoUserUploadQuota;
 
-  @Metadata({ data: "json, name=uri" })
+  @SpeakeasyMetadata({ data: "json, name=uri" })
   uri: string;
 
-  @Metadata({ data: "json, name=websites", elemType: shared.VideoUserWebsites })
+  @SpeakeasyMetadata({ data: "json, name=websites", elemType: VideoUserWebsites })
   websites: VideoUserWebsites[];
 }
 
 
 export class Video extends SpeakeasyBase {
-  @Metadata({ data: "json, name=categories", elemType: shared.Category })
+  @SpeakeasyMetadata({ data: "json, name=categories", elemType: Category })
   categories: Category[];
 
-  @Metadata({ data: "json, name=content_rating" })
+  @SpeakeasyMetadata({ data: "json, name=content_rating" })
   contentRating: string[];
 
-  @Metadata({ data: "json, name=context" })
+  @SpeakeasyMetadata({ data: "json, name=context" })
   context: VideoContext;
 
-  @Metadata({ data: "json, name=created_time" })
+  @SpeakeasyMetadata({ data: "json, name=created_time" })
   createdTime: string;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description: string;
 
-  @Metadata({ data: "json, name=duration" })
+  @SpeakeasyMetadata({ data: "json, name=duration" })
   duration: number;
 
-  @Metadata({ data: "json, name=embed" })
+  @SpeakeasyMetadata({ data: "json, name=embed" })
   embed: EmbedSettings;
 
-  @Metadata({ data: "json, name=height" })
+  @SpeakeasyMetadata({ data: "json, name=height" })
   height: number;
 
-  @Metadata({ data: "json, name=language" })
+  @SpeakeasyMetadata({ data: "json, name=language" })
   language: string;
 
-  @Metadata({ data: "json, name=last_user_action_event_date" })
+  @SpeakeasyMetadata({ data: "json, name=last_user_action_event_date" })
   lastUserActionEventDate?: string;
 
-  @Metadata({ data: "json, name=license" })
+  @SpeakeasyMetadata({ data: "json, name=license" })
   license: VideoLicenseEnum;
 
-  @Metadata({ data: "json, name=link" })
+  @SpeakeasyMetadata({ data: "json, name=link" })
   link: string;
 
-  @Metadata({ data: "json, name=metadata" })
+  @SpeakeasyMetadata({ data: "json, name=metadata" })
   metadata: VideoMetadata;
 
-  @Metadata({ data: "json, name=modified_time" })
+  @SpeakeasyMetadata({ data: "json, name=modified_time" })
   modifiedTime: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 
-  @Metadata({ data: "json, name=parent_folder" })
+  @SpeakeasyMetadata({ data: "json, name=parent_folder" })
   parentFolder?: VideoProject;
 
-  @Metadata({ data: "json, name=password" })
+  @SpeakeasyMetadata({ data: "json, name=password" })
   password?: string;
 
-  @Metadata({ data: "json, name=pictures" })
+  @SpeakeasyMetadata({ data: "json, name=pictures" })
   pictures: Picture;
 
-  @Metadata({ data: "json, name=privacy" })
+  @SpeakeasyMetadata({ data: "json, name=privacy" })
   privacy: VideoPrivacy;
 
-  @Metadata({ data: "json, name=release_time" })
+  @SpeakeasyMetadata({ data: "json, name=release_time" })
   releaseTime: string;
 
-  @Metadata({ data: "json, name=resource_key" })
+  @SpeakeasyMetadata({ data: "json, name=resource_key" })
   resourceKey: string;
 
-  @Metadata({ data: "json, name=spatial" })
+  @SpeakeasyMetadata({ data: "json, name=spatial" })
   spatial: VideoSpatial;
 
-  @Metadata({ data: "json, name=stats" })
+  @SpeakeasyMetadata({ data: "json, name=stats" })
   stats: VideoStats;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status: VideoStatusEnum;
 
-  @Metadata({ data: "json, name=tags", elemType: shared.Tag })
+  @SpeakeasyMetadata({ data: "json, name=tags", elemType: Tag })
   tags: Tag[];
 
-  @Metadata({ data: "json, name=transcode" })
+  @SpeakeasyMetadata({ data: "json, name=transcode" })
   transcode: VideoTranscode;
 
-  @Metadata({ data: "json, name=upload" })
+  @SpeakeasyMetadata({ data: "json, name=upload" })
   upload: VideoUpload;
 
-  @Metadata({ data: "json, name=uri" })
+  @SpeakeasyMetadata({ data: "json, name=uri" })
   uri: string;
 
-  @Metadata({ data: "json, name=user" })
+  @SpeakeasyMetadata({ data: "json, name=user" })
   user: VideoUser;
 
-  @Metadata({ data: "json, name=width" })
+  @SpeakeasyMetadata({ data: "json, name=width" })
   width: number;
 }

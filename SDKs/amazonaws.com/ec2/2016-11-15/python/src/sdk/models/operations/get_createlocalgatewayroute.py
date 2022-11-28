@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetCreateLocalGatewayRouteActionEnum(str, Enum):
     CREATE_LOCAL_GATEWAY_ROUTE = "CreateLocalGatewayRoute"
@@ -10,12 +14,12 @@ class GetCreateLocalGatewayRouteVersionEnum(str, Enum):
 
 @dataclass
 class GetCreateLocalGatewayRouteQueryParams:
-    action: GetCreateLocalGatewayRouteActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    destination_cidr_block: str = field(default=None, metadata={'query_param': { 'field_name': 'DestinationCidrBlock', 'style': 'form', 'explode': True }})
+    action: GetCreateLocalGatewayRouteActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    destination_cidr_block: str = field(metadata={'query_param': { 'field_name': 'DestinationCidrBlock', 'style': 'form', 'explode': True }})
+    local_gateway_route_table_id: str = field(metadata={'query_param': { 'field_name': 'LocalGatewayRouteTableId', 'style': 'form', 'explode': True }})
+    local_gateway_virtual_interface_group_id: str = field(metadata={'query_param': { 'field_name': 'LocalGatewayVirtualInterfaceGroupId', 'style': 'form', 'explode': True }})
+    version: GetCreateLocalGatewayRouteVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     dry_run: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'DryRun', 'style': 'form', 'explode': True }})
-    local_gateway_route_table_id: str = field(default=None, metadata={'query_param': { 'field_name': 'LocalGatewayRouteTableId', 'style': 'form', 'explode': True }})
-    local_gateway_virtual_interface_group_id: str = field(default=None, metadata={'query_param': { 'field_name': 'LocalGatewayVirtualInterfaceGroupId', 'style': 'form', 'explode': True }})
-    version: GetCreateLocalGatewayRouteVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -31,13 +35,13 @@ class GetCreateLocalGatewayRouteHeaders:
 
 @dataclass
 class GetCreateLocalGatewayRouteRequest:
-    query_params: GetCreateLocalGatewayRouteQueryParams = field(default=None)
-    headers: GetCreateLocalGatewayRouteHeaders = field(default=None)
+    headers: GetCreateLocalGatewayRouteHeaders = field()
+    query_params: GetCreateLocalGatewayRouteQueryParams = field()
     
 
 @dataclass
 class GetCreateLocalGatewayRouteResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

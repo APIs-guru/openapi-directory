@@ -22,9 +22,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ExecutionTemplate } from "./executiontemplate";
+import { Execution } from "./execution";
 export var ScheduleStateEnum;
 (function (ScheduleStateEnum) {
     ScheduleStateEnum["StateUnspecified"] = "STATE_UNSPECIFIED";
@@ -35,6 +35,38 @@ export var ScheduleStateEnum;
     ScheduleStateEnum["Initializing"] = "INITIALIZING";
     ScheduleStateEnum["Deleting"] = "DELETING";
 })(ScheduleStateEnum || (ScheduleStateEnum = {}));
+// ScheduleInput
+/**
+ * The definition of a schedule.
+**/
+var ScheduleInput = /** @class */ (function (_super) {
+    __extends(ScheduleInput, _super);
+    function ScheduleInput() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=cronSchedule" }),
+        __metadata("design:type", String)
+    ], ScheduleInput.prototype, "cronSchedule", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=description" }),
+        __metadata("design:type", String)
+    ], ScheduleInput.prototype, "description", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=executionTemplate" }),
+        __metadata("design:type", ExecutionTemplate)
+    ], ScheduleInput.prototype, "executionTemplate", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=state" }),
+        __metadata("design:type", String)
+    ], ScheduleInput.prototype, "state", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=timeZone" }),
+        __metadata("design:type", String)
+    ], ScheduleInput.prototype, "timeZone", void 0);
+    return ScheduleInput;
+}(SpeakeasyBase));
+export { ScheduleInput };
 // Schedule
 /**
  * The definition of a schedule.
@@ -45,43 +77,43 @@ var Schedule = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=createTime" }),
+        SpeakeasyMetadata({ data: "json, name=createTime" }),
         __metadata("design:type", String)
     ], Schedule.prototype, "createTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=cronSchedule" }),
+        SpeakeasyMetadata({ data: "json, name=cronSchedule" }),
         __metadata("design:type", String)
     ], Schedule.prototype, "cronSchedule", void 0);
     __decorate([
-        Metadata({ data: "json, name=description" }),
+        SpeakeasyMetadata({ data: "json, name=description" }),
         __metadata("design:type", String)
     ], Schedule.prototype, "description", void 0);
     __decorate([
-        Metadata({ data: "json, name=displayName" }),
+        SpeakeasyMetadata({ data: "json, name=displayName" }),
         __metadata("design:type", String)
     ], Schedule.prototype, "displayName", void 0);
     __decorate([
-        Metadata({ data: "json, name=executionTemplate" }),
+        SpeakeasyMetadata({ data: "json, name=executionTemplate" }),
         __metadata("design:type", ExecutionTemplate)
     ], Schedule.prototype, "executionTemplate", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], Schedule.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=recentExecutions", elemType: shared.Execution }),
+        SpeakeasyMetadata({ data: "json, name=recentExecutions", elemType: Execution }),
         __metadata("design:type", Array)
     ], Schedule.prototype, "recentExecutions", void 0);
     __decorate([
-        Metadata({ data: "json, name=state" }),
+        SpeakeasyMetadata({ data: "json, name=state" }),
         __metadata("design:type", String)
     ], Schedule.prototype, "state", void 0);
     __decorate([
-        Metadata({ data: "json, name=timeZone" }),
+        SpeakeasyMetadata({ data: "json, name=timeZone" }),
         __metadata("design:type", String)
     ], Schedule.prototype, "timeZone", void 0);
     __decorate([
-        Metadata({ data: "json, name=updateTime" }),
+        SpeakeasyMetadata({ data: "json, name=updateTime" }),
         __metadata("design:type", String)
     ], Schedule.prototype, "updateTime", void 0);
     return Schedule;

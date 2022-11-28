@@ -1,9 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Date } from "./date";
 import { HourlyMetrics } from "./hourlymetrics";
-import { Date } from "./date";
 import { WeekDayMetrics } from "./weekdaymetrics";
+
 
 
 // AggregateMetrics
@@ -11,21 +10,21 @@ import { WeekDayMetrics } from "./weekdaymetrics";
  * Metrics aggregated over the input time range.
 **/
 export class AggregateMetrics extends SpeakeasyBase {
-  @Metadata({ data: "json, name=answeredCallsCount" })
+  @SpeakeasyMetadata({ data: "json, name=answeredCallsCount" })
   answeredCallsCount?: number;
 
-  @Metadata({ data: "json, name=endDate" })
+  @SpeakeasyMetadata({ data: "json, name=endDate" })
   endDate?: Date;
 
-  @Metadata({ data: "json, name=hourlyMetrics", elemType: shared.HourlyMetrics })
+  @SpeakeasyMetadata({ data: "json, name=hourlyMetrics", elemType: HourlyMetrics })
   hourlyMetrics?: HourlyMetrics[];
 
-  @Metadata({ data: "json, name=missedCallsCount" })
+  @SpeakeasyMetadata({ data: "json, name=missedCallsCount" })
   missedCallsCount?: number;
 
-  @Metadata({ data: "json, name=startDate" })
+  @SpeakeasyMetadata({ data: "json, name=startDate" })
   startDate?: Date;
 
-  @Metadata({ data: "json, name=weekdayMetrics", elemType: shared.WeekDayMetrics })
+  @SpeakeasyMetadata({ data: "json, name=weekdayMetrics", elemType: WeekDayMetrics })
   weekdayMetrics?: WeekDayMetrics[];
 }

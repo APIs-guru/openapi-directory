@@ -1,16 +1,17 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class PutServiceQuotaIncreaseRequestIntoTemplateRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AwsRegion" })
+  @SpeakeasyMetadata({ data: "json, name=AwsRegion" })
   awsRegion: string;
 
-  @Metadata({ data: "json, name=DesiredValue" })
+  @SpeakeasyMetadata({ data: "json, name=DesiredValue" })
   desiredValue: number;
 
-  @Metadata({ data: "json, name=QuotaCode" })
+  @SpeakeasyMetadata({ data: "json, name=QuotaCode" })
   quotaCode: string;
 
-  @Metadata({ data: "json, name=ServiceCode" })
+  @SpeakeasyMetadata({ data: "json, name=ServiceCode" })
   serviceCode: string;
 }

@@ -26,11 +26,6 @@ type LccepSecurity struct {
 	ClientID shared.SchemeClientID `security:"scheme,type=apiKey,subtype=header"`
 }
 
-type LccepRequest struct {
-	Request  *LccepRequestBody `request:"mediaType=application/json"`
-	Security LccepSecurity
-}
-
 type Lccep400ApplicationJSONErrorEnum string
 
 const (
@@ -160,6 +155,11 @@ const (
 type Lccep504ApplicationJSON struct {
 	Error            *Lccep504ApplicationJSONErrorEnum            `json:"error,omitempty"`
 	ErrorDescription *Lccep504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
+}
+
+type LccepRequest struct {
+	Request  *LccepRequestBody `request:"mediaType=application/json"`
+	Security LccepSecurity
 }
 
 type LccepResponse struct {

@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { UpdateActionTypeEnum } from "./updateactiontypeenum";
 import { TypedAttributeValue } from "./typedattributevalue";
+
 
 
 // ObjectAttributeAction
@@ -8,9 +9,9 @@ import { TypedAttributeValue } from "./typedattributevalue";
  * The action to take on the object attribute.
 **/
 export class ObjectAttributeAction extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ObjectAttributeActionType" })
+  @SpeakeasyMetadata({ data: "json, name=ObjectAttributeActionType" })
   objectAttributeActionType?: UpdateActionTypeEnum;
 
-  @Metadata({ data: "json, name=ObjectAttributeUpdateValue" })
+  @SpeakeasyMetadata({ data: "json, name=ObjectAttributeUpdateValue" })
   objectAttributeUpdateValue?: TypedAttributeValue;
 }

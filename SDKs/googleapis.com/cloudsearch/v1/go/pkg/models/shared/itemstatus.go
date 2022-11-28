@@ -10,6 +10,8 @@ const (
 	ItemStatusCodeEnumAccepted        ItemStatusCodeEnum = "ACCEPTED"
 )
 
+// ItemStatus
+// This contains item's status and any errors.
 type ItemStatus struct {
 	Code             *ItemStatusCodeEnum `json:"code,omitempty"`
 	ProcessingErrors []ProcessingError   `json:"processingErrors,omitempty"`

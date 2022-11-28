@@ -1,5 +1,7 @@
 package shared
 
+// UserIdentity
+// Provides information about the type and other characteristics of an entity that performed an action on an affected resource.
 type UserIdentity struct {
 	AssumedRole   *AssumedRole          `json:"assumedRole,omitempty"`
 	AwsAccount    *AwsAccount           `json:"awsAccount,omitempty"`

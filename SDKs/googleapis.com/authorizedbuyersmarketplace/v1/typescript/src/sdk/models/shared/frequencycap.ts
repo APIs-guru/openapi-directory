@@ -1,15 +1,16 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum FrequencyCapTimeUnitTypeEnum {
-    TimeUnitTypeUnspecified = "TIME_UNIT_TYPE_UNSPECIFIED"
-,    Minute = "MINUTE"
-,    Hour = "HOUR"
-,    Day = "DAY"
-,    Week = "WEEK"
-,    Month = "MONTH"
-,    Lifetime = "LIFETIME"
-,    Pod = "POD"
-,    Stream = "STREAM"
+    TimeUnitTypeUnspecified = "TIME_UNIT_TYPE_UNSPECIFIED",
+    Minute = "MINUTE",
+    Hour = "HOUR",
+    Day = "DAY",
+    Week = "WEEK",
+    Month = "MONTH",
+    Lifetime = "LIFETIME",
+    Pod = "POD",
+    Stream = "STREAM"
 }
 
 
@@ -18,12 +19,12 @@ export enum FrequencyCapTimeUnitTypeEnum {
  * Message contains details about publisher-set frequency caps of the delivery.
 **/
 export class FrequencyCap extends SpeakeasyBase {
-  @Metadata({ data: "json, name=maxImpressions" })
+  @SpeakeasyMetadata({ data: "json, name=maxImpressions" })
   maxImpressions?: number;
 
-  @Metadata({ data: "json, name=timeUnitType" })
+  @SpeakeasyMetadata({ data: "json, name=timeUnitType" })
   timeUnitType?: FrequencyCapTimeUnitTypeEnum;
 
-  @Metadata({ data: "json, name=timeUnitsCount" })
+  @SpeakeasyMetadata({ data: "json, name=timeUnitsCount" })
   timeUnitsCount?: number;
 }

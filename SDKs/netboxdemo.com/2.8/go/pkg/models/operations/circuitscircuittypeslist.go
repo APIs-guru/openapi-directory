@@ -36,15 +36,15 @@ type CircuitsCircuitTypesListQueryParams struct {
 	SlugNisw *string `queryParam:"style=form,explode=true,name=slug__nisw"`
 }
 
-type CircuitsCircuitTypesListRequest struct {
-	QueryParams CircuitsCircuitTypesListQueryParams
-}
-
 type CircuitsCircuitTypesList200ApplicationJSON struct {
 	Count    int64                `json:"count"`
 	Next     *string              `json:"next,omitempty"`
 	Previous *string              `json:"previous,omitempty"`
 	Results  []shared.CircuitType `json:"results"`
+}
+
+type CircuitsCircuitTypesListRequest struct {
+	QueryParams CircuitsCircuitTypesListQueryParams
 }
 
 type CircuitsCircuitTypesListResponse struct {

@@ -19,27 +19,19 @@ type CloneLinodeInstanceRequestBody struct {
 	Type           string  `json:"type"`
 }
 
-type CloneLinodeInstanceSecurityOption1 struct {
-	PersonalAccessToken shared.SchemePersonalAccessToken `security:"scheme,type=http,subtype=bearer"`
-}
-
-type CloneLinodeInstanceSecurityOption2 struct {
-	Oauth shared.SchemeOauth `security:"scheme,type=oauth2"`
-}
-
 type CloneLinodeInstanceSecurity struct {
-	Option1 *CloneLinodeInstanceSecurityOption1 `security:"option"`
-	Option2 *CloneLinodeInstanceSecurityOption2 `security:"option"`
+	PersonalAccessToken *shared.SchemePersonalAccessToken `security:"scheme,type=http,subtype=bearer"`
+	Oauth               *shared.SchemeOauth               `security:"scheme,type=oauth2"`
+}
+
+type CloneLinodeInstanceDefaultApplicationJSON struct {
+	Errors []shared.ErrorObject `json:"errors,omitempty"`
 }
 
 type CloneLinodeInstanceRequest struct {
 	PathParams CloneLinodeInstancePathParams
 	Request    CloneLinodeInstanceRequestBody `request:"mediaType=application/json"`
 	Security   CloneLinodeInstanceSecurity
-}
-
-type CloneLinodeInstanceDefaultApplicationJSON struct {
-	Errors []shared.ErrorObject `json:"errors,omitempty"`
 }
 
 type CloneLinodeInstanceResponse struct {

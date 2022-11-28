@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class CheckVoucherPathParams:
-    platform: str = field(default=None, metadata={'path_param': { 'field_name': 'platform', 'style': 'simple', 'explode': False }})
+    platform: str = field(metadata={'path_param': { 'field_name': 'platform', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -15,21 +15,21 @@ class CheckVoucherQueryParams:
 
 @dataclass
 class CheckVoucherSecurity:
-    account_auth: shared.SchemeAccountAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    account_auth: shared.SchemeAccountAuth = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class CheckVoucherRequest:
-    path_params: CheckVoucherPathParams = field(default=None)
-    query_params: CheckVoucherQueryParams = field(default=None)
-    request: shared.ItvVoucherRequest = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: CheckVoucherSecurity = field(default=None)
+    path_params: CheckVoucherPathParams = field()
+    query_params: CheckVoucherQueryParams = field()
+    request: shared.ItvVoucherRequest = field(metadata={'request': { 'media_type': 'application/json' }})
+    security: CheckVoucherSecurity = field()
     
 
 @dataclass
 class CheckVoucherResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     itv_voucher: Optional[shared.ItvVoucher] = field(default=None)
     service_error: Optional[shared.ServiceError] = field(default=None)
-    status_code: int = field(default=None)
     

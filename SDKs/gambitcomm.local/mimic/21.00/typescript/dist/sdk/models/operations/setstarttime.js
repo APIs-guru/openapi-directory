@@ -22,18 +22,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var SetStarttimePathParams = /** @class */ (function (_super) {
     __extends(SetStarttimePathParams, _super);
     function SetStarttimePathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=agentNum" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=agentNum" }),
         __metadata("design:type", Number)
     ], SetStarttimePathParams.prototype, "agentNum", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=start" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=start" }),
         __metadata("design:type", Number)
     ], SetStarttimePathParams.prototype, "start", void 0);
     return SetStarttimePathParams;
@@ -45,7 +45,7 @@ var SetStarttimeRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", SetStarttimePathParams)
     ], SetStarttimeRequest.prototype, "pathParams", void 0);
     return SetStarttimeRequest;
@@ -57,15 +57,15 @@ var SetStarttimeResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], SetStarttimeResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], SetStarttimeResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], SetStarttimeResponse.prototype, "setStarttime200ApplicationJsonString", void 0);
     return SetStarttimeResponse;

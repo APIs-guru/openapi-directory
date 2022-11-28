@@ -1,92 +1,93 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class PostDatabaseImportRequestBodyFormData extends SpeakeasyBase {
-  @Metadata({ data: "multipart_form, content=true" })
+  @SpeakeasyMetadata({ data: "multipart_form, content=true" })
   content: Uint8Array;
 
-  @Metadata({ data: "multipart_form, name=formData" })
+  @SpeakeasyMetadata({ data: "multipart_form, name=formData" })
   formData: string;
 }
 
 
 export class PostDatabaseImportRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "multipart_form, file=true" })
+  @SpeakeasyMetadata({ data: "multipart_form, file=true" })
   formData?: PostDatabaseImportRequestBodyFormData;
 
-  @Metadata({ data: "multipart_form, name=overwrite" })
+  @SpeakeasyMetadata({ data: "multipart_form, name=overwrite" })
   overwrite?: boolean;
 
-  @Metadata({ data: "multipart_form, name=passwords" })
+  @SpeakeasyMetadata({ data: "multipart_form, name=passwords" })
   passwords?: string;
 }
 
 
 export class PostDatabaseImportSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=bearer" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" })
   jwt: shared.SchemeJwt;
 }
 
 
-export class PostDatabaseImportRequest extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=multipart/form-data" })
-  request: PostDatabaseImportRequestBody;
-
-  @Metadata()
-  security: PostDatabaseImportSecurity;
-}
-
-
 export class PostDatabaseImport200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class PostDatabaseImport400ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class PostDatabaseImport401ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class PostDatabaseImport422ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class PostDatabaseImport500ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
+export class PostDatabaseImportRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "request, media_type=multipart/form-data" })
+  request: PostDatabaseImportRequestBody;
+
+  @SpeakeasyMetadata()
+  security: PostDatabaseImportSecurity;
+}
+
+
 export class PostDatabaseImportResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   postDatabaseImport200ApplicationJsonObject?: PostDatabaseImport200ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   postDatabaseImport400ApplicationJsonObject?: PostDatabaseImport400ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   postDatabaseImport401ApplicationJsonObject?: PostDatabaseImport401ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   postDatabaseImport422ApplicationJsonObject?: PostDatabaseImport422ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   postDatabaseImport500ApplicationJsonObject?: PostDatabaseImport500ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

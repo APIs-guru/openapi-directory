@@ -1,21 +1,21 @@
 from dataclasses import dataclass, field
-
+from typing import Optional
 
 
 @dataclass
 class PreprintsCitationReadPathParams:
-    preprint_id: str = field(default=None, metadata={'path_param': { 'field_name': 'preprint_id', 'style': 'simple', 'explode': False }})
-    style_id: str = field(default=None, metadata={'path_param': { 'field_name': 'style_id', 'style': 'simple', 'explode': False }})
+    preprint_id: str = field(metadata={'path_param': { 'field_name': 'preprint_id', 'style': 'simple', 'explode': False }})
+    style_id: str = field(metadata={'path_param': { 'field_name': 'style_id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class PreprintsCitationReadRequest:
-    path_params: PreprintsCitationReadPathParams = field(default=None)
+    path_params: PreprintsCitationReadPathParams = field()
     
 
 @dataclass
 class PreprintsCitationReadResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

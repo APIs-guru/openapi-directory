@@ -1,32 +1,33 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetConfigurationPagesQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=enableInMainMenu" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=enableInMainMenu" })
   enableInMainMenu?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=pageType" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=pageType" })
   pageType?: shared.ConfigurationPageTypeEnum;
 }
 
 
 export class GetConfigurationPagesRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetConfigurationPagesQueryParams;
 }
 
 
 export class GetConfigurationPagesResponse extends SpeakeasyBase {
-  @Metadata({ elemType: shared.ConfigurationPageInfo })
+  @SpeakeasyMetadata({ elemType: shared.ConfigurationPageInfo })
   configurationPageInfos?: shared.ConfigurationPageInfo[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   problemDetails?: Map<string, any>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

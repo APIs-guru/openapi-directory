@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { FhirStore } from "./fhirstore";
+
 
 
 // ListFhirStoresResponse
@@ -8,9 +8,9 @@ import { FhirStore } from "./fhirstore";
  * Lists the FHIR stores in the given dataset.
 **/
 export class ListFhirStoresResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=fhirStores", elemType: shared.FhirStore })
+  @SpeakeasyMetadata({ data: "json, name=fhirStores", elemType: FhirStore })
   fhirStores?: FhirStore[];
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 }

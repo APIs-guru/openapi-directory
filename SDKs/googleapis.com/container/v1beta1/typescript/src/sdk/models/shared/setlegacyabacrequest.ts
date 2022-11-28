@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // SetLegacyAbacRequest
@@ -6,18 +7,18 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * SetLegacyAbacRequest enables or disables the ABAC authorization mechanism for a cluster.
 **/
 export class SetLegacyAbacRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=clusterId" })
+  @SpeakeasyMetadata({ data: "json, name=clusterId" })
   clusterId?: string;
 
-  @Metadata({ data: "json, name=enabled" })
+  @SpeakeasyMetadata({ data: "json, name=enabled" })
   enabled?: boolean;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=projectId" })
+  @SpeakeasyMetadata({ data: "json, name=projectId" })
   projectId?: string;
 
-  @Metadata({ data: "json, name=zone" })
+  @SpeakeasyMetadata({ data: "json, name=zone" })
   zone?: string;
 }

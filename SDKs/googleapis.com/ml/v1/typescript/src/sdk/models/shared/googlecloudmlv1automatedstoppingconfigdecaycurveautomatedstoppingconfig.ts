@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GoogleCloudMlV1AutomatedStoppingConfigDecayCurveAutomatedStoppingConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=useElapsedTime" })
+  @SpeakeasyMetadata({ data: "json, name=useElapsedTime" })
   useElapsedTime?: boolean;
 }

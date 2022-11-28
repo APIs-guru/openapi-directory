@@ -1,5 +1,7 @@
 package shared
 
+// WorkflowExecutionContinuedAsNewEventAttributes
+// Provides the details of the <code>WorkflowExecutionContinuedAsNew</code> event.
 type WorkflowExecutionContinuedAsNewEventAttributes struct {
 	ChildPolicy                  ChildPolicyEnum `json:"childPolicy"`
 	DecisionTaskCompletedEventID int64           `json:"decisionTaskCompletedEventId"`

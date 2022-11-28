@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var PlayerGameStatsDeltaFormatEnum;
 (function (PlayerGameStatsDeltaFormatEnum) {
     PlayerGameStatsDeltaFormatEnum["Xml"] = "XML";
@@ -34,11 +34,11 @@ var PlayerGameStatsDeltaPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=format" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=format" }),
         __metadata("design:type", String)
     ], PlayerGameStatsDeltaPathParams.prototype, "format", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=minutes" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=minutes" }),
         __metadata("design:type", String)
     ], PlayerGameStatsDeltaPathParams.prototype, "minutes", void 0);
     return PlayerGameStatsDeltaPathParams;
@@ -50,7 +50,7 @@ var PlayerGameStatsDeltaRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PlayerGameStatsDeltaPathParams)
     ], PlayerGameStatsDeltaRequest.prototype, "pathParams", void 0);
     return PlayerGameStatsDeltaRequest;
@@ -62,15 +62,15 @@ var PlayerGameStatsDeltaResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], PlayerGameStatsDeltaResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Array)
     ], PlayerGameStatsDeltaResponse.prototype, "playerGames", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], PlayerGameStatsDeltaResponse.prototype, "statusCode", void 0);
     return PlayerGameStatsDeltaResponse;

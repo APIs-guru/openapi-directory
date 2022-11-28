@@ -1,41 +1,42 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetApiInvoiceAllcategoriesQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=query" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=query" })
   query?: string;
 }
 
 
 export class GetApiInvoiceAllcategoriesHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=x-auth-key" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=x-auth-key" })
   xAuthKey: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=x-auth-secret" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=x-auth-secret" })
   xAuthSecret: string;
 }
 
 
 export class GetApiInvoiceAllcategoriesRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetApiInvoiceAllcategoriesQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: GetApiInvoiceAllcategoriesHeaders;
 }
 
 
 export class GetApiInvoiceAllcategoriesResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   listResultInvoiceCategoryApiModel?: shared.ListResultInvoiceCategoryApiModel;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

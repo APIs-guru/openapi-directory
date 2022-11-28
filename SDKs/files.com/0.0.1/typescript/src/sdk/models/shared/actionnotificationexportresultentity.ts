@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ActionNotificationExportResultEntity
@@ -6,33 +7,33 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * List Action Notification Export Results
 **/
 export class ActionNotificationExportResultEntity extends SpeakeasyBase {
-  @Metadata({ data: "json, name=created_at" })
+  @SpeakeasyMetadata({ data: "json, name=created_at" })
   createdAt?: number;
 
-  @Metadata({ data: "json, name=folder" })
+  @SpeakeasyMetadata({ data: "json, name=folder" })
   folder?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: number;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 
-  @Metadata({ data: "json, name=path" })
+  @SpeakeasyMetadata({ data: "json, name=path" })
   path?: string;
 
-  @Metadata({ data: "json, name=request_headers" })
+  @SpeakeasyMetadata({ data: "json, name=request_headers" })
   requestHeaders?: string;
 
-  @Metadata({ data: "json, name=request_method" })
+  @SpeakeasyMetadata({ data: "json, name=request_method" })
   requestMethod?: string;
 
-  @Metadata({ data: "json, name=request_url" })
+  @SpeakeasyMetadata({ data: "json, name=request_url" })
   requestUrl?: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: number;
 
-  @Metadata({ data: "json, name=success" })
+  @SpeakeasyMetadata({ data: "json, name=success" })
   success?: boolean;
 }

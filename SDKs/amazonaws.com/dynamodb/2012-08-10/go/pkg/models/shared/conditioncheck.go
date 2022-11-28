@@ -1,5 +1,7 @@
 package shared
 
+// ConditionCheck
+// Represents a request to perform a check that an item exists or to check the condition of specific attributes of the item.
 type ConditionCheck struct {
 	ConditionExpression                 string                                   `json:"ConditionExpression"`
 	ExpressionAttributeNames            map[string]string                        `json:"ExpressionAttributeNames,omitempty"`

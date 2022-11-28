@@ -1,28 +1,29 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class SegmentAnalyticsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=ending_at" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=ending_at" })
   endingAt?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=length" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=length" })
   length?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=segment_id" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=segment_id" })
   segmentId?: string;
 }
 
 
 export class SegmentAnalyticsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: SegmentAnalyticsQueryParams;
 }
 
 
 export class SegmentAnalyticsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class GetVMPathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -15,20 +15,20 @@ class GetVMQueryParams:
 
 @dataclass
 class GetVMSecurity:
-    api_key_auth: shared.SchemeAPIKeyAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    api_key_auth: shared.SchemeAPIKeyAuth = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
     
 
 @dataclass
 class GetVMRequest:
-    path_params: GetVMPathParams = field(default=None)
-    query_params: GetVMQueryParams = field(default=None)
-    security: GetVMSecurity = field(default=None)
+    path_params: GetVMPathParams = field()
+    query_params: GetVMQueryParams = field()
+    security: GetVMSecurity = field()
     
 
 @dataclass
 class GetVMResponse:
+    content_type: str = field()
+    status_code: int = field()
     api_error: Optional[shared.APIError] = field(default=None)
     base_virtual_machine: Optional[shared.BaseVirtualMachine] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

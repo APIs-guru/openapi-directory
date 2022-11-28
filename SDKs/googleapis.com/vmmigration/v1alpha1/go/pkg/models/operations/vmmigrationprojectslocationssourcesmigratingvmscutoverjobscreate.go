@@ -32,7 +32,7 @@ type VmmigrationProjectsLocationsSourcesMigratingVmsCutoverJobsCreateSecurity st
 type VmmigrationProjectsLocationsSourcesMigratingVmsCutoverJobsCreateRequest struct {
 	PathParams  VmmigrationProjectsLocationsSourcesMigratingVmsCutoverJobsCreatePathParams
 	QueryParams VmmigrationProjectsLocationsSourcesMigratingVmsCutoverJobsCreateQueryParams
-	Request     *shared.CutoverJob `request:"mediaType=application/json"`
+	Request     *shared.CutoverJobInput `request:"mediaType=application/json"`
 	Security    VmmigrationProjectsLocationsSourcesMigratingVmsCutoverJobsCreateSecurity
 }
 

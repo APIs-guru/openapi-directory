@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// RelationalDatabase
+// Describes a database.
 type RelationalDatabase struct {
 	Arn                           *string                                  `json:"arn,omitempty"`
 	BackupRetentionEnabled        *bool                                    `json:"backupRetentionEnabled,omitempty"`

@@ -22,18 +22,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var RemoveRegionsFromReplicationRequest = /** @class */ (function (_super) {
     __extends(RemoveRegionsFromReplicationRequest, _super);
     function RemoveRegionsFromReplicationRequest() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=RemoveReplicaRegions" }),
+        SpeakeasyMetadata({ data: "json, name=RemoveReplicaRegions" }),
         __metadata("design:type", Array)
     ], RemoveRegionsFromReplicationRequest.prototype, "removeReplicaRegions", void 0);
     __decorate([
-        Metadata({ data: "json, name=SecretId" }),
+        SpeakeasyMetadata({ data: "json, name=SecretId" }),
         __metadata("design:type", String)
     ], RemoveRegionsFromReplicationRequest.prototype, "secretId", void 0);
     return RemoveRegionsFromReplicationRequest;

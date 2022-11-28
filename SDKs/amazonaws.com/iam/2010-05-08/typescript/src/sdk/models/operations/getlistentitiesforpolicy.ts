@@ -1,20 +1,21 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum GetListEntitiesForPolicyActionEnum {
     ListEntitiesForPolicy = "ListEntitiesForPolicy"
 }
 
 export enum GetListEntitiesForPolicyEntityFilterEnum {
-    User = "User"
-,    Role = "Role"
-,    Group = "Group"
-,    LocalManagedPolicy = "LocalManagedPolicy"
-,    AwsManagedPolicy = "AWSManagedPolicy"
+    User = "User",
+    Role = "Role",
+    Group = "Group",
+    LocalManagedPolicy = "LocalManagedPolicy",
+    AwsManagedPolicy = "AWSManagedPolicy"
 }
 
 export enum GetListEntitiesForPolicyPolicyUsageFilterEnum {
-    PermissionsPolicy = "PermissionsPolicy"
-,    PermissionsBoundary = "PermissionsBoundary"
+    PermissionsPolicy = "PermissionsPolicy",
+    PermissionsBoundary = "PermissionsBoundary"
 }
 
 export enum GetListEntitiesForPolicyVersionEnum {
@@ -23,72 +24,72 @@ export enum GetListEntitiesForPolicyVersionEnum {
 
 
 export class GetListEntitiesForPolicyQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Action" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Action" })
   action: GetListEntitiesForPolicyActionEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=EntityFilter" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=EntityFilter" })
   entityFilter?: GetListEntitiesForPolicyEntityFilterEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Marker" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Marker" })
   marker?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=MaxItems" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=MaxItems" })
   maxItems?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=PathPrefix" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=PathPrefix" })
   pathPrefix?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=PolicyArn" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=PolicyArn" })
   policyArn: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=PolicyUsageFilter" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=PolicyUsageFilter" })
   policyUsageFilter?: GetListEntitiesForPolicyPolicyUsageFilterEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Version" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Version" })
   version: GetListEntitiesForPolicyVersionEnum;
 }
 
 
 export class GetListEntitiesForPolicyHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
 
 export class GetListEntitiesForPolicyRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetListEntitiesForPolicyQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: GetListEntitiesForPolicyHeaders;
 }
 
 
 export class GetListEntitiesForPolicyResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

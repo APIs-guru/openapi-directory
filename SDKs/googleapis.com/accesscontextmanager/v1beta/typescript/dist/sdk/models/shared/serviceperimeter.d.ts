@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ServicePerimeterConfig } from "./serviceperimeterconfig";
 export declare enum ServicePerimeterPerimeterTypeEnum {
     PerimeterTypeRegular = "PERIMETER_TYPE_REGULAR",

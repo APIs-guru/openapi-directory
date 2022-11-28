@@ -1,6 +1,7 @@
 
 
+
 export enum AppNetworkAccessTypeEnum {
-    PublicInternetOnly = "PublicInternetOnly"
-,    VpcOnly = "VpcOnly"
+    PublicInternetOnly = "PublicInternetOnly",
+    VpcOnly = "VpcOnly"
 }

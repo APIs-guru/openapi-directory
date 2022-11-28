@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GuaranteedOrder } from "./guaranteedorder";
 
 
+
 export class ListGuaranteedOrdersResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=guaranteedOrders", elemType: shared.GuaranteedOrder })
+  @SpeakeasyMetadata({ data: "json, name=guaranteedOrders", elemType: GuaranteedOrder })
   guaranteedOrders?: GuaranteedOrder[];
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 }

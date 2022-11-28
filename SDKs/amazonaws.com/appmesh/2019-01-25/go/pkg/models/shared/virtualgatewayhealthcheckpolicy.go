@@ -1,5 +1,7 @@
 package shared
 
+// VirtualGatewayHealthCheckPolicy
+// An object that represents the health check policy for a virtual gateway's listener.
 type VirtualGatewayHealthCheckPolicy struct {
 	HealthyThreshold   int64                          `json:"healthyThreshold"`
 	IntervalMillis     int64                          `json:"intervalMillis"`

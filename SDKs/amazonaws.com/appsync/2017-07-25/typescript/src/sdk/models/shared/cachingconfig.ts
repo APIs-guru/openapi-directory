@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // CachingConfig
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The caching configuration for a resolver that has caching enabled.
 **/
 export class CachingConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=cachingKeys" })
+  @SpeakeasyMetadata({ data: "json, name=cachingKeys" })
   cachingKeys?: string[];
 
-  @Metadata({ data: "json, name=ttl" })
+  @SpeakeasyMetadata({ data: "json, name=ttl" })
   ttl?: number;
 }

@@ -1,28 +1,29 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ReleasePostReleaseBundlePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=BundleId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=BundleId" })
   bundleId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=ReleaseId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=ReleaseId" })
   releaseId: number;
 }
 
 
 export class ReleasePostReleaseBundleRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: ReleasePostReleaseBundlePathParams;
 }
 
 
 export class ReleasePostReleaseBundleResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

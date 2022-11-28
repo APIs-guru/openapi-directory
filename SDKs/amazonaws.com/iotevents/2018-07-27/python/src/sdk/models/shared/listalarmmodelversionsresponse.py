@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import alarmmodelversionsummary
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ListAlarmModelVersionsResponse:
-    alarm_model_version_summaries: Optional[List[alarmmodelversionsummary.AlarmModelVersionSummary]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'alarmModelVersionSummaries' }})
-    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'nextToken' }})
+    alarm_model_version_summaries: Optional[List[AlarmModelVersionSummary]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('alarmModelVersionSummaries') }})
+    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('nextToken') }})
     

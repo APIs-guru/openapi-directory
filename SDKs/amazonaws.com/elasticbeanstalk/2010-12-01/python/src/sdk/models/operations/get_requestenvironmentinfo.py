@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetRequestEnvironmentInfoActionEnum(str, Enum):
     REQUEST_ENVIRONMENT_INFO = "RequestEnvironmentInfo"
@@ -14,11 +18,11 @@ class GetRequestEnvironmentInfoVersionEnum(str, Enum):
 
 @dataclass
 class GetRequestEnvironmentInfoQueryParams:
-    action: GetRequestEnvironmentInfoActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetRequestEnvironmentInfoActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    info_type: GetRequestEnvironmentInfoInfoTypeEnum = field(metadata={'query_param': { 'field_name': 'InfoType', 'style': 'form', 'explode': True }})
+    version: GetRequestEnvironmentInfoVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     environment_id: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'EnvironmentId', 'style': 'form', 'explode': True }})
     environment_name: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'EnvironmentName', 'style': 'form', 'explode': True }})
-    info_type: GetRequestEnvironmentInfoInfoTypeEnum = field(default=None, metadata={'query_param': { 'field_name': 'InfoType', 'style': 'form', 'explode': True }})
-    version: GetRequestEnvironmentInfoVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -34,12 +38,12 @@ class GetRequestEnvironmentInfoHeaders:
 
 @dataclass
 class GetRequestEnvironmentInfoRequest:
-    query_params: GetRequestEnvironmentInfoQueryParams = field(default=None)
-    headers: GetRequestEnvironmentInfoHeaders = field(default=None)
+    headers: GetRequestEnvironmentInfoHeaders = field()
+    query_params: GetRequestEnvironmentInfoQueryParams = field()
     
 
 @dataclass
 class GetRequestEnvironmentInfoResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

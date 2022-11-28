@@ -22,35 +22,35 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { Window } from "./window";
 var NightModeParams = /** @class */ (function (_super) {
     __extends(NightModeParams, _super);
     function NightModeParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=device_override_do_not_disturb" }),
+        SpeakeasyMetadata({ data: "json, name=device_override_do_not_disturb" }),
         __metadata("design:type", Number)
     ], NightModeParams.prototype, "deviceOverrideDoNotDisturb", void 0);
     __decorate([
-        Metadata({ data: "json, name=do_not_disturb" }),
+        SpeakeasyMetadata({ data: "json, name=do_not_disturb" }),
         __metadata("design:type", Boolean)
     ], NightModeParams.prototype, "doNotDisturb", void 0);
     __decorate([
-        Metadata({ data: "json, name=enabled" }),
+        SpeakeasyMetadata({ data: "json, name=enabled" }),
         __metadata("design:type", Boolean)
     ], NightModeParams.prototype, "enabled", void 0);
     __decorate([
-        Metadata({ data: "json, name=led_brightness" }),
+        SpeakeasyMetadata({ data: "json, name=led_brightness" }),
         __metadata("design:type", Number)
     ], NightModeParams.prototype, "ledBrightness", void 0);
     __decorate([
-        Metadata({ data: "json, name=volume" }),
+        SpeakeasyMetadata({ data: "json, name=volume" }),
         __metadata("design:type", Number)
     ], NightModeParams.prototype, "volume", void 0);
     __decorate([
-        Metadata({ data: "json, name=windows", elemType: shared.Window }),
+        SpeakeasyMetadata({ data: "json, name=windows", elemType: Window }),
         __metadata("design:type", Array)
     ], NightModeParams.prototype, "windows", void 0);
     return NightModeParams;

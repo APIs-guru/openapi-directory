@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // DocumentMetadata
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Information about the input document.
 **/
 export class DocumentMetadata extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Pages" })
+  @SpeakeasyMetadata({ data: "json, name=Pages" })
   pages?: number;
 }

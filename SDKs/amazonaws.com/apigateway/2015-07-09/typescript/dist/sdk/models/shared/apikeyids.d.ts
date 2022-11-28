@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 /**
  * The identifier of an <a>ApiKey</a> used in a <a>UsagePlan</a>.
 **/

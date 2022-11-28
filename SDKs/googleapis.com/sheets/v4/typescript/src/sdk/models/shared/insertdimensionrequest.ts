@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DimensionRange } from "./dimensionrange";
+
 
 
 // InsertDimensionRequest
@@ -7,9 +8,9 @@ import { DimensionRange } from "./dimensionrange";
  * Inserts rows or columns in a sheet at a particular index.
 **/
 export class InsertDimensionRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=inheritFromBefore" })
+  @SpeakeasyMetadata({ data: "json, name=inheritFromBefore" })
   inheritFromBefore?: boolean;
 
-  @Metadata({ data: "json, name=range" })
+  @SpeakeasyMetadata({ data: "json, name=range" })
   range?: DimensionRange;
 }

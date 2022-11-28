@@ -13,12 +13,12 @@ class GetPatientsQueryParams:
 
 @dataclass
 class GetPatientsRequest:
-    query_params: GetPatientsQueryParams = field(default=None)
+    query_params: GetPatientsQueryParams = field()
     
 
 @dataclass
 class GetPatientsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     get_patients_200_application_json_any: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

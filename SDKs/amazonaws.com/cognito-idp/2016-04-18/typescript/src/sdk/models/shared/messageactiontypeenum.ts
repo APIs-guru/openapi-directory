@@ -1,6 +1,7 @@
 
 
+
 export enum MessageActionTypeEnum {
-    Resend = "RESEND"
-,    Suppress = "SUPPRESS"
+    Resend = "RESEND",
+    Suppress = "SUPPRESS"
 }

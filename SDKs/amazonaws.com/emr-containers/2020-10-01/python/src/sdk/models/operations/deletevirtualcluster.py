@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class DeleteVirtualClusterPathParams:
-    virtual_cluster_id: str = field(default=None, metadata={'path_param': { 'field_name': 'virtualClusterId', 'style': 'simple', 'explode': False }})
+    virtual_cluster_id: str = field(metadata={'path_param': { 'field_name': 'virtualClusterId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -21,15 +24,15 @@ class DeleteVirtualClusterHeaders:
 
 @dataclass
 class DeleteVirtualClusterRequest:
-    path_params: DeleteVirtualClusterPathParams = field(default=None)
-    headers: DeleteVirtualClusterHeaders = field(default=None)
+    headers: DeleteVirtualClusterHeaders = field()
+    path_params: DeleteVirtualClusterPathParams = field()
     
 
 @dataclass
 class DeleteVirtualClusterResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     delete_virtual_cluster_response: Optional[shared.DeleteVirtualClusterResponse] = field(default=None)
     internal_server_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     validation_exception: Optional[Any] = field(default=None)
     

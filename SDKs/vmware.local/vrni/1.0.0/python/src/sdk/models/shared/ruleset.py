@@ -1,8 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import reference
-from . import reference
+from sdk import utils
+from . import *
 
 class RuleSetRuleSetTypeEnum(str, Enum):
     NSX_STANDARD = "NSX_STANDARD"
@@ -13,7 +14,7 @@ class RuleSetRuleSetTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class RuleSet:
-    firewall: Optional[reference.Reference] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'firewall' }})
-    rule_set_type: Optional[RuleSetRuleSetTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'rule_set_type' }})
-    rules: Optional[List[reference.Reference]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'rules' }})
+    firewall: Optional[Reference] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('firewall') }})
+    rule_set_type: Optional[RuleSetRuleSetTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('rule_set_type') }})
+    rules: Optional[List[Reference]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('rules') }})
     

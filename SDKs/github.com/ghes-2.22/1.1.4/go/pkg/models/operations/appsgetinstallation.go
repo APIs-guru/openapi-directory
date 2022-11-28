@@ -8,13 +8,13 @@ type AppsGetInstallationPathParams struct {
 	InstallationID int64 `pathParam:"style=simple,explode=false,name=installation_id"`
 }
 
-type AppsGetInstallationRequest struct {
-	PathParams AppsGetInstallationPathParams
-}
-
 type AppsGetInstallation415ApplicationJSON struct {
 	DocumentationURL string `json:"documentation_url"`
 	Message          string `json:"message"`
+}
+
+type AppsGetInstallationRequest struct {
+	PathParams AppsGetInstallationPathParams
 }
 
 type AppsGetInstallationResponse struct {

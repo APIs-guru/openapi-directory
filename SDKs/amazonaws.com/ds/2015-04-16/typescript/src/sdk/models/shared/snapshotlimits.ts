@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // SnapshotLimits
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Contains manual snapshot limit information for a directory.
 **/
 export class SnapshotLimits extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ManualSnapshotsCurrentCount" })
+  @SpeakeasyMetadata({ data: "json, name=ManualSnapshotsCurrentCount" })
   manualSnapshotsCurrentCount?: number;
 
-  @Metadata({ data: "json, name=ManualSnapshotsLimit" })
+  @SpeakeasyMetadata({ data: "json, name=ManualSnapshotsLimit" })
   manualSnapshotsLimit?: number;
 
-  @Metadata({ data: "json, name=ManualSnapshotsLimitReached" })
+  @SpeakeasyMetadata({ data: "json, name=ManualSnapshotsLimitReached" })
   manualSnapshotsLimitReached?: boolean;
 }

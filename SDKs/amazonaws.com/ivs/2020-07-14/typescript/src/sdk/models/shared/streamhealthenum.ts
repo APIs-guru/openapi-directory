@@ -1,7 +1,8 @@
 
 
+
 export enum StreamHealthEnum {
-    Healthy = "HEALTHY"
-,    Starving = "STARVING"
-,    Unknown = "UNKNOWN"
+    Healthy = "HEALTHY",
+    Starving = "STARVING",
+    Unknown = "UNKNOWN"
 }

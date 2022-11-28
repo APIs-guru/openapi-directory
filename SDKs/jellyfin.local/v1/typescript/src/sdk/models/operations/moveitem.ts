@@ -1,38 +1,39 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class MoveItemPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=itemId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=itemId" })
   itemId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=newIndex" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=newIndex" })
   newIndex: number;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=playlistId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=playlistId" })
   playlistId: string;
 }
 
 
 export class MoveItemSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
   customAuthentication: shared.SchemeCustomAuthentication;
 }
 
 
 export class MoveItemRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: MoveItemPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: MoveItemSecurity;
 }
 
 
 export class MoveItemResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

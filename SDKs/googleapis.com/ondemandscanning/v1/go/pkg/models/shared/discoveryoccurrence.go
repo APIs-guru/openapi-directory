@@ -20,6 +20,8 @@ const (
 	DiscoveryOccurrenceContinuousAnalysisEnumInactive                      DiscoveryOccurrenceContinuousAnalysisEnum = "INACTIVE"
 )
 
+// DiscoveryOccurrence
+// Provides information about the analysis status of a discovered resource.
 type DiscoveryOccurrence struct {
 	AnalysisCompleted   *AnalysisCompleted                         `json:"analysisCompleted,omitempty"`
 	AnalysisError       []Status                                   `json:"analysisError,omitempty"`

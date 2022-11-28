@@ -1,5 +1,7 @@
 package shared
 
+// ThemeMediaResult
+// Class ThemeMediaResult.
 type ThemeMediaResult struct {
 	Items            []BaseItemDto `json:"Items,omitempty"`
 	OwnerID          *string       `json:"OwnerId,omitempty"`

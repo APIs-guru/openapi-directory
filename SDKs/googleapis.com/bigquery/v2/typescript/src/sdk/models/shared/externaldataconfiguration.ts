@@ -1,4 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AvroOptions } from "./avrooptions";
 import { BigtableOptions } from "./bigtableoptions";
 import { CsvOptions } from "./csvoptions";
@@ -8,52 +8,59 @@ import { ParquetOptions } from "./parquetoptions";
 import { TableSchema } from "./tableschema";
 
 
+
 export class ExternalDataConfiguration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=autodetect" })
+  @SpeakeasyMetadata({ data: "json, name=autodetect" })
   autodetect?: boolean;
 
-  @Metadata({ data: "json, name=avroOptions" })
+  @SpeakeasyMetadata({ data: "json, name=avroOptions" })
   avroOptions?: AvroOptions;
 
-  @Metadata({ data: "json, name=bigtableOptions" })
+  @SpeakeasyMetadata({ data: "json, name=bigtableOptions" })
   bigtableOptions?: BigtableOptions;
 
-  @Metadata({ data: "json, name=compression" })
+  @SpeakeasyMetadata({ data: "json, name=compression" })
   compression?: string;
 
-  @Metadata({ data: "json, name=connectionId" })
+  @SpeakeasyMetadata({ data: "json, name=connectionId" })
   connectionId?: string;
 
-  @Metadata({ data: "json, name=csvOptions" })
+  @SpeakeasyMetadata({ data: "json, name=csvOptions" })
   csvOptions?: CsvOptions;
 
-  @Metadata({ data: "json, name=decimalTargetTypes" })
+  @SpeakeasyMetadata({ data: "json, name=decimalTargetTypes" })
   decimalTargetTypes?: string[];
 
-  @Metadata({ data: "json, name=googleSheetsOptions" })
+  @SpeakeasyMetadata({ data: "json, name=googleSheetsOptions" })
   googleSheetsOptions?: GoogleSheetsOptions;
 
-  @Metadata({ data: "json, name=hivePartitioningOptions" })
+  @SpeakeasyMetadata({ data: "json, name=hivePartitioningOptions" })
   hivePartitioningOptions?: HivePartitioningOptions;
 
-  @Metadata({ data: "json, name=ignoreUnknownValues" })
+  @SpeakeasyMetadata({ data: "json, name=ignoreUnknownValues" })
   ignoreUnknownValues?: boolean;
 
-  @Metadata({ data: "json, name=maxBadRecords" })
+  @SpeakeasyMetadata({ data: "json, name=maxBadRecords" })
   maxBadRecords?: number;
 
-  @Metadata({ data: "json, name=parquetOptions" })
+  @SpeakeasyMetadata({ data: "json, name=metadataCacheMode" })
+  metadataCacheMode?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=objectMetadata" })
+  objectMetadata?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=parquetOptions" })
   parquetOptions?: ParquetOptions;
 
-  @Metadata({ data: "json, name=referenceFileSchemaUri" })
+  @SpeakeasyMetadata({ data: "json, name=referenceFileSchemaUri" })
   referenceFileSchemaUri?: string;
 
-  @Metadata({ data: "json, name=schema" })
+  @SpeakeasyMetadata({ data: "json, name=schema" })
   schema?: TableSchema;
 
-  @Metadata({ data: "json, name=sourceFormat" })
+  @SpeakeasyMetadata({ data: "json, name=sourceFormat" })
   sourceFormat?: string;
 
-  @Metadata({ data: "json, name=sourceUris" })
+  @SpeakeasyMetadata({ data: "json, name=sourceUris" })
   sourceUris?: string[];
 }

@@ -1,29 +1,30 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class RequestOpenIdAuthInfoQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=is_global_available" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=is_global_available" })
   isGlobalAvailable?: boolean;
 }
 
 
 export class RequestOpenIdAuthInfoRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: RequestOpenIdAuthInfoQueryParams;
 }
 
 
 export class RequestOpenIdAuthInfoResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   errorResponse?: shared.ErrorResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   openIdAuthInfo?: shared.OpenIdAuthInfo;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

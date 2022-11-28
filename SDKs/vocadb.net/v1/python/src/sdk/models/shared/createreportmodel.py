@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class CreateReportModelReportTypeEnum(str, Enum):
     MALICIOUS_IP = "MaliciousIP"
@@ -12,6 +14,6 @@ class CreateReportModelReportTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class CreateReportModel:
-    reason: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'reason' }, 'form': { 'field_name': 'reason' }})
-    report_type: Optional[CreateReportModelReportTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'reportType' }, 'form': { 'field_name': 'reportType' }})
+    reason: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('reason') }, 'form': { 'field_name': 'reason' }})
+    report_type: Optional[CreateReportModelReportTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('reportType') }, 'form': { 'field_name': 'reportType' }})
     

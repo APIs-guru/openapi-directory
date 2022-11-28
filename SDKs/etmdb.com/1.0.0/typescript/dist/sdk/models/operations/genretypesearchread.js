@@ -22,14 +22,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var GenreTypeSearchReadPathParams = /** @class */ (function (_super) {
     __extends(GenreTypeSearchReadPathParams, _super);
     function GenreTypeSearchReadPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=genre_description" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=genre_description" }),
         __metadata("design:type", String)
     ], GenreTypeSearchReadPathParams.prototype, "genreDescription", void 0);
     return GenreTypeSearchReadPathParams;
@@ -41,7 +41,7 @@ var GenreTypeSearchReadRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GenreTypeSearchReadPathParams)
     ], GenreTypeSearchReadRequest.prototype, "pathParams", void 0);
     return GenreTypeSearchReadRequest;
@@ -53,11 +53,11 @@ var GenreTypeSearchReadResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GenreTypeSearchReadResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GenreTypeSearchReadResponse.prototype, "statusCode", void 0);
     return GenreTypeSearchReadResponse;

@@ -1,17 +1,20 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import authresources_enum
-from . import createbackendauthidentitypoolconfig
-from . import service_enum
-from . import createbackendauthuserpoolconfig
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class CreateBackendAuthResourceConfig:
-    auth_resources: authresources_enum.AuthResourcesEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AuthResources' }})
-    identity_pool_configs: Optional[createbackendauthidentitypoolconfig.CreateBackendAuthIdentityPoolConfig] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'IdentityPoolConfigs' }})
-    service: service_enum.ServiceEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Service' }})
-    user_pool_configs: createbackendauthuserpoolconfig.CreateBackendAuthUserPoolConfig = field(default=None, metadata={'dataclasses_json': { 'field_name': 'UserPoolConfigs' }})
+    r"""CreateBackendAuthResourceConfig
+    Defines the resource configuration when creating an auth resource in your Amplify project.
+    """
+    
+    auth_resources: AuthResourcesEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('AuthResources') }})
+    service: ServiceEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Service') }})
+    user_pool_configs: CreateBackendAuthUserPoolConfig = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('UserPoolConfigs') }})
+    identity_pool_configs: Optional[CreateBackendAuthIdentityPoolConfig] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('IdentityPoolConfigs') }})
     

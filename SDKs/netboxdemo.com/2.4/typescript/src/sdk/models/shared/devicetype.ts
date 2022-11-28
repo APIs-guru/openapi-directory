@@ -1,77 +1,78 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { NestedManufacturer } from "./nestedmanufacturer";
 
 
+
 export class DeviceTypeInterfaceOrdering extends SpeakeasyBase {
-  @Metadata({ data: "json, name=label" })
+  @SpeakeasyMetadata({ data: "json, name=label" })
   label: string;
 
-  @Metadata({ data: "json, name=value" })
+  @SpeakeasyMetadata({ data: "json, name=value" })
   value: number;
 }
 
 
 export class DeviceTypeSubdeviceRole extends SpeakeasyBase {
-  @Metadata({ data: "json, name=label" })
+  @SpeakeasyMetadata({ data: "json, name=label" })
   label: string;
 
-  @Metadata({ data: "json, name=value" })
+  @SpeakeasyMetadata({ data: "json, name=value" })
   value: boolean;
 }
 
 
 export class DeviceType extends SpeakeasyBase {
-  @Metadata({ data: "json, name=comments" })
+  @SpeakeasyMetadata({ data: "json, name=comments" })
   comments?: string;
 
-  @Metadata({ data: "json, name=created" })
+  @SpeakeasyMetadata({ data: "json, name=created" })
   created?: Date;
 
-  @Metadata({ data: "json, name=custom_fields" })
+  @SpeakeasyMetadata({ data: "json, name=custom_fields" })
   customFields?: Map<string, any>;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: number;
 
-  @Metadata({ data: "json, name=instance_count" })
+  @SpeakeasyMetadata({ data: "json, name=instance_count" })
   instanceCount?: number;
 
-  @Metadata({ data: "json, name=interface_ordering" })
+  @SpeakeasyMetadata({ data: "json, name=interface_ordering" })
   interfaceOrdering?: DeviceTypeInterfaceOrdering;
 
-  @Metadata({ data: "json, name=is_console_server" })
+  @SpeakeasyMetadata({ data: "json, name=is_console_server" })
   isConsoleServer?: boolean;
 
-  @Metadata({ data: "json, name=is_full_depth" })
+  @SpeakeasyMetadata({ data: "json, name=is_full_depth" })
   isFullDepth?: boolean;
 
-  @Metadata({ data: "json, name=is_network_device" })
+  @SpeakeasyMetadata({ data: "json, name=is_network_device" })
   isNetworkDevice?: boolean;
 
-  @Metadata({ data: "json, name=is_pdu" })
+  @SpeakeasyMetadata({ data: "json, name=is_pdu" })
   isPdu?: boolean;
 
-  @Metadata({ data: "json, name=last_updated" })
+  @SpeakeasyMetadata({ data: "json, name=last_updated" })
   lastUpdated?: Date;
 
-  @Metadata({ data: "json, name=manufacturer" })
+  @SpeakeasyMetadata({ data: "json, name=manufacturer" })
   manufacturer: NestedManufacturer;
 
-  @Metadata({ data: "json, name=model" })
+  @SpeakeasyMetadata({ data: "json, name=model" })
   model: string;
 
-  @Metadata({ data: "json, name=part_number" })
+  @SpeakeasyMetadata({ data: "json, name=part_number" })
   partNumber?: string;
 
-  @Metadata({ data: "json, name=slug" })
+  @SpeakeasyMetadata({ data: "json, name=slug" })
   slug: string;
 
-  @Metadata({ data: "json, name=subdevice_role" })
+  @SpeakeasyMetadata({ data: "json, name=subdevice_role" })
   subdeviceRole?: DeviceTypeSubdeviceRole;
 
-  @Metadata({ data: "json, name=tags" })
+  @SpeakeasyMetadata({ data: "json, name=tags" })
   tags?: string[];
 
-  @Metadata({ data: "json, name=u_height" })
+  @SpeakeasyMetadata({ data: "json, name=u_height" })
   uHeight?: number;
 }

@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
@@ -20,20 +21,20 @@ class FirebasedynamiclinksInstallAttributionQueryParams:
 
 @dataclass
 class FirebasedynamiclinksInstallAttributionSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class FirebasedynamiclinksInstallAttributionRequest:
-    query_params: FirebasedynamiclinksInstallAttributionQueryParams = field(default=None)
+    query_params: FirebasedynamiclinksInstallAttributionQueryParams = field()
+    security: FirebasedynamiclinksInstallAttributionSecurity = field()
     request: Optional[shared.GetIosPostInstallAttributionRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: FirebasedynamiclinksInstallAttributionSecurity = field(default=None)
     
 
 @dataclass
 class FirebasedynamiclinksInstallAttributionResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     get_ios_post_install_attribution_response: Optional[shared.GetIosPostInstallAttributionResponse] = field(default=None)
-    status_code: int = field(default=None)
     

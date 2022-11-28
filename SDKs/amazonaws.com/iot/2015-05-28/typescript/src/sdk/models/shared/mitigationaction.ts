@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { MitigationActionParams } from "./mitigationactionparams";
+
 
 
 // MitigationAction
@@ -7,15 +8,15 @@ import { MitigationActionParams } from "./mitigationactionparams";
  * Describes which changes should be applied as part of a mitigation action.
 **/
 export class MitigationAction extends SpeakeasyBase {
-  @Metadata({ data: "json, name=actionParams" })
+  @SpeakeasyMetadata({ data: "json, name=actionParams" })
   actionParams?: MitigationActionParams;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=roleArn" })
+  @SpeakeasyMetadata({ data: "json, name=roleArn" })
   roleArn?: string;
 }

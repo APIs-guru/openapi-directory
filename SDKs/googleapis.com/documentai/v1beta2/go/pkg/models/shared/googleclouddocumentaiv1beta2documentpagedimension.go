@@ -1,5 +1,7 @@
 package shared
 
+// GoogleCloudDocumentaiV1beta2DocumentPageDimension
+// Dimension for the page.
 type GoogleCloudDocumentaiV1beta2DocumentPageDimension struct {
 	Height *float32 `json:"height,omitempty"`
 	Unit   *string  `json:"unit,omitempty"`

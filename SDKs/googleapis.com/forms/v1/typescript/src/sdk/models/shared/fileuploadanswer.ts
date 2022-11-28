@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // FileUploadAnswer
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Info for a single file submitted to a file upload question.
 **/
 export class FileUploadAnswer extends SpeakeasyBase {
-  @Metadata({ data: "json, name=fileId" })
+  @SpeakeasyMetadata({ data: "json, name=fileId" })
   fileId?: string;
 
-  @Metadata({ data: "json, name=fileName" })
+  @SpeakeasyMetadata({ data: "json, name=fileName" })
   fileName?: string;
 
-  @Metadata({ data: "json, name=mimeType" })
+  @SpeakeasyMetadata({ data: "json, name=mimeType" })
   mimeType?: string;
 }

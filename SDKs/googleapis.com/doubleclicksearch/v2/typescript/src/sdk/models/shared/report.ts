@@ -1,13 +1,13 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ReportRequest } from "./reportrequest";
 
 
+
 export class ReportFiles extends SpeakeasyBase {
-  @Metadata({ data: "json, name=byteCount" })
+  @SpeakeasyMetadata({ data: "json, name=byteCount" })
   byteCount?: string;
 
-  @Metadata({ data: "json, name=url" })
+  @SpeakeasyMetadata({ data: "json, name=url" })
   url?: string;
 }
 
@@ -17,30 +17,30 @@ export class ReportFiles extends SpeakeasyBase {
  * A DoubleClick Search report. This object contains the report request, some report metadata such as currency code, and the generated report rows or report files.
 **/
 export class Report extends SpeakeasyBase {
-  @Metadata({ data: "json, name=files", elemType: shared.ReportFiles })
+  @SpeakeasyMetadata({ data: "json, name=files", elemType: ReportFiles })
   files?: ReportFiles[];
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=isReportReady" })
+  @SpeakeasyMetadata({ data: "json, name=isReportReady" })
   isReportReady?: boolean;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=request" })
+  @SpeakeasyMetadata({ data: "json, name=request" })
   request?: ReportRequest;
 
-  @Metadata({ data: "json, name=rowCount" })
+  @SpeakeasyMetadata({ data: "json, name=rowCount" })
   rowCount?: number;
 
-  @Metadata({ data: "json, name=rows" })
+  @SpeakeasyMetadata({ data: "json, name=rows" })
   rows?: Map<string, any>[];
 
-  @Metadata({ data: "json, name=statisticsCurrencyCode" })
+  @SpeakeasyMetadata({ data: "json, name=statisticsCurrencyCode" })
   statisticsCurrencyCode?: string;
 
-  @Metadata({ data: "json, name=statisticsTimeZone" })
+  @SpeakeasyMetadata({ data: "json, name=statisticsTimeZone" })
   statisticsTimeZone?: string;
 }

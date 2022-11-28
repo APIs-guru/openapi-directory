@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { VersionedResource } from "./versionedresource";
+
 
 
 // AttachedResource
@@ -8,9 +8,9 @@ import { VersionedResource } from "./versionedresource";
  * Attached resource representation, which is defined by the corresponding service provider. It represents an attached resource's payload.
 **/
 export class AttachedResource extends SpeakeasyBase {
-  @Metadata({ data: "json, name=assetType" })
+  @SpeakeasyMetadata({ data: "json, name=assetType" })
   assetType?: string;
 
-  @Metadata({ data: "json, name=versionedResources", elemType: shared.VersionedResource })
+  @SpeakeasyMetadata({ data: "json, name=versionedResources", elemType: VersionedResource })
   versionedResources?: VersionedResource[];
 }

@@ -1,11 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { EngineAttribute } from "./engineattribute";
 
 
+
 export class ExportServerEngineAttributeResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=EngineAttribute" })
+  @SpeakeasyMetadata({ data: "json, name=EngineAttribute" })
   engineAttribute?: EngineAttribute;
 
-  @Metadata({ data: "json, name=ServerName" })
+  @SpeakeasyMetadata({ data: "json, name=ServerName" })
   serverName?: string;
 }

@@ -33,6 +33,8 @@ const (
 	QueryMetadataFormatEnumXlsx     QueryMetadataFormatEnum = "XLSX"
 )
 
+// QueryMetadata
+// Query metadata.
 type QueryMetadata struct {
 	DataRange                             *QueryMetadataDataRangeEnum `json:"dataRange,omitempty"`
 	Format                                *QueryMetadataFormatEnum    `json:"format,omitempty"`

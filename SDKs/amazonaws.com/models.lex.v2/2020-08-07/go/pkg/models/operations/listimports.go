@@ -19,6 +19,8 @@ type ListImportsHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// ListImportsRequestBodySortBy
+// Provides information for sorting a list of imports.
 type ListImportsRequestBodySortBy struct {
 	Attribute *shared.ImportSortAttributeEnum `json:"attribute,omitempty"`
 	Order     *shared.SortOrderEnum           `json:"order,omitempty"`

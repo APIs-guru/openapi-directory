@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ItemizedMetricStats
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Aggregated statistics about a measure affected by an anomaly.
 **/
 export class ItemizedMetricStats extends SpeakeasyBase {
-  @Metadata({ data: "json, name=MetricName" })
+  @SpeakeasyMetadata({ data: "json, name=MetricName" })
   metricName?: string;
 
-  @Metadata({ data: "json, name=OccurrenceCount" })
+  @SpeakeasyMetadata({ data: "json, name=OccurrenceCount" })
   occurrenceCount?: number;
 }

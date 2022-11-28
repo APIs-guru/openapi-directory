@@ -1,12 +1,16 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
 @dataclass
 class PutFileSystemPolicyPathParams:
-    file_system_id: str = field(default=None, metadata={'path_param': { 'field_name': 'FileSystemId', 'style': 'simple', 'explode': False }})
+    file_system_id: str = field(metadata={'path_param': { 'field_name': 'FileSystemId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -23,24 +27,24 @@ class PutFileSystemPolicyHeaders:
 @dataclass_json
 @dataclass
 class PutFileSystemPolicyRequestBody:
-    bypass_policy_lockout_safety_check: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'BypassPolicyLockoutSafetyCheck' }})
-    policy: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Policy' }})
+    policy: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Policy') }})
+    bypass_policy_lockout_safety_check: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('BypassPolicyLockoutSafetyCheck') }})
     
 
 @dataclass
 class PutFileSystemPolicyRequest:
-    path_params: PutFileSystemPolicyPathParams = field(default=None)
-    headers: PutFileSystemPolicyHeaders = field(default=None)
-    request: PutFileSystemPolicyRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: PutFileSystemPolicyHeaders = field()
+    path_params: PutFileSystemPolicyPathParams = field()
+    request: PutFileSystemPolicyRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class PutFileSystemPolicyResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     file_system_not_found: Optional[Any] = field(default=None)
     file_system_policy_description: Optional[shared.FileSystemPolicyDescription] = field(default=None)
     incorrect_file_system_life_cycle_state: Optional[Any] = field(default=None)
     internal_server_error: Optional[Any] = field(default=None)
     invalid_policy_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

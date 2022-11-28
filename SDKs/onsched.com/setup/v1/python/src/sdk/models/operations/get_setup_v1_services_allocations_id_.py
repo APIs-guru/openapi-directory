@@ -5,17 +5,17 @@ from sdk.models import shared
 
 @dataclass
 class GetSetupV1ServicesAllocationsIDPathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetSetupV1ServicesAllocationsIDRequest:
-    path_params: GetSetupV1ServicesAllocationsIDPathParams = field(default=None)
+    path_params: GetSetupV1ServicesAllocationsIDPathParams = field()
     
 
 @dataclass
 class GetSetupV1ServicesAllocationsIDResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     service_allocation_view_model: Optional[shared.ServiceAllocationViewModel] = field(default=None)
-    status_code: int = field(default=None)
     

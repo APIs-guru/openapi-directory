@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // LogEntrySourceLocation
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Additional information about the source code location that produced the log entry.
 **/
 export class LogEntrySourceLocation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=file" })
+  @SpeakeasyMetadata({ data: "json, name=file" })
   file?: string;
 
-  @Metadata({ data: "json, name=function" })
+  @SpeakeasyMetadata({ data: "json, name=function" })
   function?: string;
 
-  @Metadata({ data: "json, name=line" })
+  @SpeakeasyMetadata({ data: "json, name=line" })
   line?: string;
 }

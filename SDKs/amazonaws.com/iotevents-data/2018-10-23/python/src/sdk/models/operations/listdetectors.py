@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
-from typing import Any,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class ListDetectorsPathParams:
-    detector_model_name: str = field(default=None, metadata={'path_param': { 'field_name': 'detectorModelName', 'style': 'simple', 'explode': False }})
+    detector_model_name: str = field(metadata={'path_param': { 'field_name': 'detectorModelName', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -28,19 +31,19 @@ class ListDetectorsHeaders:
 
 @dataclass
 class ListDetectorsRequest:
-    path_params: ListDetectorsPathParams = field(default=None)
-    query_params: ListDetectorsQueryParams = field(default=None)
-    headers: ListDetectorsHeaders = field(default=None)
+    headers: ListDetectorsHeaders = field()
+    path_params: ListDetectorsPathParams = field()
+    query_params: ListDetectorsQueryParams = field()
     
 
 @dataclass
 class ListDetectorsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     internal_failure_exception: Optional[Any] = field(default=None)
     invalid_request_exception: Optional[Any] = field(default=None)
     list_detectors_response: Optional[shared.ListDetectorsResponse] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
     service_unavailable_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     

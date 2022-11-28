@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var GetGetRecentChangesFormatEnum;
 (function (GetGetRecentChangesFormatEnum) {
     GetGetRecentChangesFormatEnum["Json"] = "json";
@@ -38,11 +38,11 @@ var GetGetRecentChangesQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=format" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=format" }),
         __metadata("design:type", String)
     ], GetGetRecentChangesQueryParams.prototype, "format", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=timestamp" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=timestamp" }),
         __metadata("design:type", String)
     ], GetGetRecentChangesQueryParams.prototype, "timestamp", void 0);
     return GetGetRecentChangesQueryParams;
@@ -54,7 +54,7 @@ var GetGetRecentChangesRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetGetRecentChangesQueryParams)
     ], GetGetRecentChangesRequest.prototype, "queryParams", void 0);
     return GetGetRecentChangesRequest;
@@ -66,11 +66,11 @@ var GetGetRecentChangesResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetGetRecentChangesResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetGetRecentChangesResponse.prototype, "statusCode", void 0);
     return GetGetRecentChangesResponse;

@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import googlecloudpaymentsresellersubscriptionv1subscriptioncancellationdetails
-from . import googlecloudpaymentsresellersubscriptionv1subscriptionlineitem
-from . import googlecloudpaymentsresellersubscriptionv1subscriptionpromotionspec
-from . import googlecloudpaymentsresellersubscriptionv1location
-from . import googlecloudpaymentsresellersubscriptionv1subscriptionupgradedowngradedetails
+from sdk import utils
+from . import *
 
 class GoogleCloudPaymentsResellerSubscriptionV1SubscriptionProcessingStateEnum(str, Enum):
     PROCESSING_STATE_UNSPECIFIED = "PROCESSING_STATE_UNSPECIFIED"
@@ -25,22 +26,44 @@ class GoogleCloudPaymentsResellerSubscriptionV1SubscriptionStateEnum(str, Enum):
 @dataclass_json
 @dataclass
 class GoogleCloudPaymentsResellerSubscriptionV1Subscription:
-    cancellation_details: Optional[googlecloudpaymentsresellersubscriptionv1subscriptioncancellationdetails.GoogleCloudPaymentsResellerSubscriptionV1SubscriptionCancellationDetails] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'cancellationDetails' }})
-    create_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'createTime' }})
-    cycle_end_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'cycleEndTime' }})
-    end_user_entitled: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'endUserEntitled' }})
-    free_trial_end_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'freeTrialEndTime' }})
-    line_items: Optional[List[googlecloudpaymentsresellersubscriptionv1subscriptionlineitem.GoogleCloudPaymentsResellerSubscriptionV1SubscriptionLineItem]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'lineItems' }})
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    partner_user_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'partnerUserToken' }})
-    processing_state: Optional[GoogleCloudPaymentsResellerSubscriptionV1SubscriptionProcessingStateEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'processingState' }})
-    products: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'products' }})
-    promotion_specs: Optional[List[googlecloudpaymentsresellersubscriptionv1subscriptionpromotionspec.GoogleCloudPaymentsResellerSubscriptionV1SubscriptionPromotionSpec]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'promotionSpecs' }})
-    promotions: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'promotions' }})
-    redirect_uri: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'redirectUri' }})
-    renewal_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'renewalTime' }})
-    service_location: Optional[googlecloudpaymentsresellersubscriptionv1location.GoogleCloudPaymentsResellerSubscriptionV1Location] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'serviceLocation' }})
-    state: Optional[GoogleCloudPaymentsResellerSubscriptionV1SubscriptionStateEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'state' }})
-    update_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'updateTime' }})
-    upgrade_downgrade_details: Optional[googlecloudpaymentsresellersubscriptionv1subscriptionupgradedowngradedetails.GoogleCloudPaymentsResellerSubscriptionV1SubscriptionUpgradeDowngradeDetails] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'upgradeDowngradeDetails' }})
+    r"""GoogleCloudPaymentsResellerSubscriptionV1Subscription
+    A Subscription resource managed by 3P Partners.
+    """
+    
+    cancellation_details: Optional[GoogleCloudPaymentsResellerSubscriptionV1SubscriptionCancellationDetails] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('cancellationDetails') }})
+    create_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('createTime') }})
+    cycle_end_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('cycleEndTime') }})
+    end_user_entitled: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('endUserEntitled') }})
+    free_trial_end_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('freeTrialEndTime') }})
+    line_items: Optional[List[GoogleCloudPaymentsResellerSubscriptionV1SubscriptionLineItem]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('lineItems') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    partner_user_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('partnerUserToken') }})
+    processing_state: Optional[GoogleCloudPaymentsResellerSubscriptionV1SubscriptionProcessingStateEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('processingState') }})
+    products: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('products') }})
+    promotion_specs: Optional[List[GoogleCloudPaymentsResellerSubscriptionV1SubscriptionPromotionSpec]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('promotionSpecs') }})
+    promotions: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('promotions') }})
+    redirect_uri: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('redirectUri') }})
+    renewal_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('renewalTime') }})
+    service_location: Optional[GoogleCloudPaymentsResellerSubscriptionV1Location] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('serviceLocation') }})
+    state: Optional[GoogleCloudPaymentsResellerSubscriptionV1SubscriptionStateEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('state') }})
+    update_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('updateTime') }})
+    upgrade_downgrade_details: Optional[GoogleCloudPaymentsResellerSubscriptionV1SubscriptionUpgradeDowngradeDetails] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('upgradeDowngradeDetails') }})
+    
+
+@dataclass_json
+@dataclass
+class GoogleCloudPaymentsResellerSubscriptionV1SubscriptionInput:
+    r"""GoogleCloudPaymentsResellerSubscriptionV1SubscriptionInput
+    A Subscription resource managed by 3P Partners.
+    """
+    
+    cancellation_details: Optional[GoogleCloudPaymentsResellerSubscriptionV1SubscriptionCancellationDetails] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('cancellationDetails') }})
+    line_items: Optional[List[GoogleCloudPaymentsResellerSubscriptionV1SubscriptionLineItemInput]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('lineItems') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    partner_user_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('partnerUserToken') }})
+    products: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('products') }})
+    promotion_specs: Optional[List[GoogleCloudPaymentsResellerSubscriptionV1SubscriptionPromotionSpecInput]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('promotionSpecs') }})
+    promotions: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('promotions') }})
+    service_location: Optional[GoogleCloudPaymentsResellerSubscriptionV1Location] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('serviceLocation') }})
+    upgrade_downgrade_details: Optional[GoogleCloudPaymentsResellerSubscriptionV1SubscriptionUpgradeDowngradeDetails] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('upgradeDowngradeDetails') }})
     

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // Timepoint
 /**
  * This contains a mapping between a certain point in the input text and a corresponding time in the output audio.
@@ -33,11 +33,11 @@ var Timepoint = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=markName" }),
+        SpeakeasyMetadata({ data: "json, name=markName" }),
         __metadata("design:type", String)
     ], Timepoint.prototype, "markName", void 0);
     __decorate([
-        Metadata({ data: "json, name=timeSeconds" }),
+        SpeakeasyMetadata({ data: "json, name=timeSeconds" }),
         __metadata("design:type", Number)
     ], Timepoint.prototype, "timeSeconds", void 0);
     return Timepoint;

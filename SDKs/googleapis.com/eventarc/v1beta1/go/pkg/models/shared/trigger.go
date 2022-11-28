@@ -1,5 +1,7 @@
 package shared
 
+// Trigger
+// A representation of the trigger resource.
 type Trigger struct {
 	CreateTime       *string            `json:"createTime,omitempty"`
 	Destination      *Destination       `json:"destination,omitempty"`
@@ -10,4 +12,15 @@ type Trigger struct {
 	ServiceAccount   *string            `json:"serviceAccount,omitempty"`
 	Transport        *Transport         `json:"transport,omitempty"`
 	UpdateTime       *string            `json:"updateTime,omitempty"`
+}
+
+// TriggerInput
+// A representation of the trigger resource.
+type TriggerInput struct {
+	Destination      *Destination       `json:"destination,omitempty"`
+	Labels           map[string]string  `json:"labels,omitempty"`
+	MatchingCriteria []MatchingCriteria `json:"matchingCriteria,omitempty"`
+	Name             *string            `json:"name,omitempty"`
+	ServiceAccount   *string            `json:"serviceAccount,omitempty"`
+	Transport        *TransportInput    `json:"transport,omitempty"`
 }

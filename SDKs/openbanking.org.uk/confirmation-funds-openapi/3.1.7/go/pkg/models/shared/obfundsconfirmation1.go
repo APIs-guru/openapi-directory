@@ -1,5 +1,7 @@
 package shared
 
+// ObFundsConfirmation1DataInstructedAmount
+// Amount of money to be confirmed as available funds in the debtor account. Contains an Amount and a Currency.
 type ObFundsConfirmation1DataInstructedAmount struct {
 	Amount   string `json:"Amount"`
 	Currency string `json:"Currency"`

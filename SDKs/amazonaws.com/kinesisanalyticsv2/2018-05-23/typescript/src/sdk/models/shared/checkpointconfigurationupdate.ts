@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ConfigurationTypeEnum } from "./configurationtypeenum";
+
 
 
 // CheckpointConfigurationUpdate
@@ -7,15 +8,15 @@ import { ConfigurationTypeEnum } from "./configurationtypeenum";
  * Describes updates to the checkpointing parameters for a Flink-based Kinesis Data Analytics application.
 **/
 export class CheckpointConfigurationUpdate extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CheckpointIntervalUpdate" })
+  @SpeakeasyMetadata({ data: "json, name=CheckpointIntervalUpdate" })
   checkpointIntervalUpdate?: number;
 
-  @Metadata({ data: "json, name=CheckpointingEnabledUpdate" })
+  @SpeakeasyMetadata({ data: "json, name=CheckpointingEnabledUpdate" })
   checkpointingEnabledUpdate?: boolean;
 
-  @Metadata({ data: "json, name=ConfigurationTypeUpdate" })
+  @SpeakeasyMetadata({ data: "json, name=ConfigurationTypeUpdate" })
   configurationTypeUpdate?: ConfigurationTypeEnum;
 
-  @Metadata({ data: "json, name=MinPauseBetweenCheckpointsUpdate" })
+  @SpeakeasyMetadata({ data: "json, name=MinPauseBetweenCheckpointsUpdate" })
   minPauseBetweenCheckpointsUpdate?: number;
 }

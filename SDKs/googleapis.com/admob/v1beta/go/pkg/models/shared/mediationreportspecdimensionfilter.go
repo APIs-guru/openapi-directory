@@ -21,6 +21,8 @@ const (
 	MediationReportSpecDimensionFilterDimensionEnumServingRestriction   MediationReportSpecDimensionFilterDimensionEnum = "SERVING_RESTRICTION"
 )
 
+// MediationReportSpecDimensionFilter
+// Describes which report rows to match based on their dimension values.
 type MediationReportSpecDimensionFilter struct {
 	Dimension  *MediationReportSpecDimensionFilterDimensionEnum `json:"dimension,omitempty"`
 	MatchesAny *StringList                                      `json:"matchesAny,omitempty"`

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Rate } from "./rate";
 var RateResponse = /** @class */ (function (_super) {
     __extends(RateResponse, _super);
@@ -30,27 +30,27 @@ var RateResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=data" }),
+        SpeakeasyMetadata({ data: "json, name=data" }),
         __metadata("design:type", Rate)
     ], RateResponse.prototype, "data", void 0);
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], RateResponse.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=requestedCurrency" }),
+        SpeakeasyMetadata({ data: "json, name=requestedCurrency" }),
         __metadata("design:type", String)
     ], RateResponse.prototype, "requestedCurrency", void 0);
     __decorate([
-        Metadata({ data: "json, name=requestedSymbol" }),
+        SpeakeasyMetadata({ data: "json, name=requestedSymbol" }),
         __metadata("design:type", String)
     ], RateResponse.prototype, "requestedSymbol", void 0);
     __decorate([
-        Metadata({ data: "json, name=requestedUnitOfMeasure" }),
+        SpeakeasyMetadata({ data: "json, name=requestedUnitOfMeasure" }),
         __metadata("design:type", String)
     ], RateResponse.prototype, "requestedUnitOfMeasure", void 0);
     __decorate([
-        Metadata({ data: "json, name=success" }),
+        SpeakeasyMetadata({ data: "json, name=success" }),
         __metadata("design:type", Boolean)
     ], RateResponse.prototype, "success", void 0);
     return RateResponse;

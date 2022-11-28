@@ -22,10 +22,38 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+// ServiceAccountInput
+/**
+ * An IAM service account. A service account is an account for an application or a virtual machine (VM) instance, not a person. You can use a service account to call Google APIs. To learn more, read the [overview of service accounts](https://cloud.google.com/iam/help/service-accounts/overview). When you create a service account, you specify the project ID that owns the service account, as well as a name that must be unique within the project. IAM uses these values to create an email address that identifies the service //
+**/
+var ServiceAccountInput = /** @class */ (function (_super) {
+    __extends(ServiceAccountInput, _super);
+    function ServiceAccountInput() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=description" }),
+        __metadata("design:type", String)
+    ], ServiceAccountInput.prototype, "description", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=displayName" }),
+        __metadata("design:type", String)
+    ], ServiceAccountInput.prototype, "displayName", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=etag" }),
+        __metadata("design:type", String)
+    ], ServiceAccountInput.prototype, "etag", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=name" }),
+        __metadata("design:type", String)
+    ], ServiceAccountInput.prototype, "name", void 0);
+    return ServiceAccountInput;
+}(SpeakeasyBase));
+export { ServiceAccountInput };
 // ServiceAccount
 /**
- * An IAM service account. A service account is an account for an application or a virtual machine (VM) instance, not a person. You can use a service account to call Google APIs. To learn more, read the [overview of service accounts](https://cloud.google.com/iam/help/service-accounts/overview). When you create a service account, you specify the project ID that owns the service account, as well as a name that must be unique within the project. IAM uses these values to create an email address that identifies the service account.
+ * An IAM service account. A service account is an account for an application or a virtual machine (VM) instance, not a person. You can use a service account to call Google APIs. To learn more, read the [overview of service accounts](https://cloud.google.com/iam/help/service-accounts/overview). When you create a service account, you specify the project ID that owns the service account, as well as a name that must be unique within the project. IAM uses these values to create an email address that identifies the service //
 **/
 var ServiceAccount = /** @class */ (function (_super) {
     __extends(ServiceAccount, _super);
@@ -33,39 +61,39 @@ var ServiceAccount = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=description" }),
+        SpeakeasyMetadata({ data: "json, name=description" }),
         __metadata("design:type", String)
     ], ServiceAccount.prototype, "description", void 0);
     __decorate([
-        Metadata({ data: "json, name=disabled" }),
+        SpeakeasyMetadata({ data: "json, name=disabled" }),
         __metadata("design:type", Boolean)
     ], ServiceAccount.prototype, "disabled", void 0);
     __decorate([
-        Metadata({ data: "json, name=displayName" }),
+        SpeakeasyMetadata({ data: "json, name=displayName" }),
         __metadata("design:type", String)
     ], ServiceAccount.prototype, "displayName", void 0);
     __decorate([
-        Metadata({ data: "json, name=email" }),
+        SpeakeasyMetadata({ data: "json, name=email" }),
         __metadata("design:type", String)
     ], ServiceAccount.prototype, "email", void 0);
     __decorate([
-        Metadata({ data: "json, name=etag" }),
+        SpeakeasyMetadata({ data: "json, name=etag" }),
         __metadata("design:type", String)
     ], ServiceAccount.prototype, "etag", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], ServiceAccount.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=oauth2ClientId" }),
+        SpeakeasyMetadata({ data: "json, name=oauth2ClientId" }),
         __metadata("design:type", String)
     ], ServiceAccount.prototype, "oauth2ClientId", void 0);
     __decorate([
-        Metadata({ data: "json, name=projectId" }),
+        SpeakeasyMetadata({ data: "json, name=projectId" }),
         __metadata("design:type", String)
     ], ServiceAccount.prototype, "projectId", void 0);
     __decorate([
-        Metadata({ data: "json, name=uniqueId" }),
+        SpeakeasyMetadata({ data: "json, name=uniqueId" }),
         __metadata("design:type", String)
     ], ServiceAccount.prototype, "uniqueId", void 0);
     return ServiceAccount;

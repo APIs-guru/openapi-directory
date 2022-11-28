@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // MetricFilterMatchRecord
 /**
  * Represents a matched event.
@@ -33,15 +33,15 @@ var MetricFilterMatchRecord = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=eventMessage" }),
+        SpeakeasyMetadata({ data: "json, name=eventMessage" }),
         __metadata("design:type", String)
     ], MetricFilterMatchRecord.prototype, "eventMessage", void 0);
     __decorate([
-        Metadata({ data: "json, name=eventNumber" }),
+        SpeakeasyMetadata({ data: "json, name=eventNumber" }),
         __metadata("design:type", Number)
     ], MetricFilterMatchRecord.prototype, "eventNumber", void 0);
     __decorate([
-        Metadata({ data: "json, name=extractedValues" }),
+        SpeakeasyMetadata({ data: "json, name=extractedValues" }),
         __metadata("design:type", Map)
     ], MetricFilterMatchRecord.prototype, "extractedValues", void 0);
     return MetricFilterMatchRecord;

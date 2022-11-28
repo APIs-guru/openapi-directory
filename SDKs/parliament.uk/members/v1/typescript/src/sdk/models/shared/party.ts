@@ -1,31 +1,32 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class Party extends SpeakeasyBase {
-  @Metadata({ data: "json, name=abbreviation" })
+  @SpeakeasyMetadata({ data: "json, name=abbreviation" })
   abbreviation?: string;
 
-  @Metadata({ data: "json, name=backgroundColour" })
+  @SpeakeasyMetadata({ data: "json, name=backgroundColour" })
   backgroundColour?: string;
 
-  @Metadata({ data: "json, name=foregroundColour" })
+  @SpeakeasyMetadata({ data: "json, name=foregroundColour" })
   foregroundColour?: string;
 
-  @Metadata({ data: "json, name=governmentType" })
+  @SpeakeasyMetadata({ data: "json, name=governmentType" })
   governmentType?: number;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: number;
 
-  @Metadata({ data: "json, name=isIndependentParty" })
+  @SpeakeasyMetadata({ data: "json, name=isIndependentParty" })
   isIndependentParty?: boolean;
 
-  @Metadata({ data: "json, name=isLordsMainParty" })
+  @SpeakeasyMetadata({ data: "json, name=isLordsMainParty" })
   isLordsMainParty?: boolean;
 
-  @Metadata({ data: "json, name=isLordsSpiritualParty" })
+  @SpeakeasyMetadata({ data: "json, name=isLordsSpiritualParty" })
   isLordsSpiritualParty?: boolean;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 }

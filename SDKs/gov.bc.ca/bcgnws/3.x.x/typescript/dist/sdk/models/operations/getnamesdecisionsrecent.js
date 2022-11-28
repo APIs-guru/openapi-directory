@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var GetNamesDecisionsRecentOutputFormatEnum;
 (function (GetNamesDecisionsRecentOutputFormatEnum) {
     GetNamesDecisionsRecentOutputFormatEnum["Json"] = "json";
@@ -47,47 +47,47 @@ var GetNamesDecisionsRecentQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=days" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=days" }),
         __metadata("design:type", Number)
     ], GetNamesDecisionsRecentQueryParams.prototype, "days", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=embed" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=embed" }),
         __metadata("design:type", Number)
     ], GetNamesDecisionsRecentQueryParams.prototype, "embed", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=featureCategory" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=featureCategory" }),
         __metadata("design:type", String)
     ], GetNamesDecisionsRecentQueryParams.prototype, "featureCategory", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=featureClass" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=featureClass" }),
         __metadata("design:type", String)
     ], GetNamesDecisionsRecentQueryParams.prototype, "featureClass", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=featureType" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=featureType" }),
         __metadata("design:type", String)
     ], GetNamesDecisionsRecentQueryParams.prototype, "featureType", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=itemsPerPage" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=itemsPerPage" }),
         __metadata("design:type", Number)
     ], GetNamesDecisionsRecentQueryParams.prototype, "itemsPerPage", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=outputFormat" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=outputFormat" }),
         __metadata("design:type", String)
     ], GetNamesDecisionsRecentQueryParams.prototype, "outputFormat", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=outputSRS" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=outputSRS" }),
         __metadata("design:type", Number)
     ], GetNamesDecisionsRecentQueryParams.prototype, "outputSrs", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=outputStyle" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=outputStyle" }),
         __metadata("design:type", String)
     ], GetNamesDecisionsRecentQueryParams.prototype, "outputStyle", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=sortBy" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sortBy" }),
         __metadata("design:type", String)
     ], GetNamesDecisionsRecentQueryParams.prototype, "sortBy", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=startIndex" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=startIndex" }),
         __metadata("design:type", Number)
     ], GetNamesDecisionsRecentQueryParams.prototype, "startIndex", void 0);
     return GetNamesDecisionsRecentQueryParams;
@@ -99,7 +99,7 @@ var GetNamesDecisionsRecentRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetNamesDecisionsRecentQueryParams)
     ], GetNamesDecisionsRecentRequest.prototype, "queryParams", void 0);
     return GetNamesDecisionsRecentRequest;
@@ -111,11 +111,11 @@ var GetNamesDecisionsRecentResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetNamesDecisionsRecentResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetNamesDecisionsRecentResponse.prototype, "statusCode", void 0);
     return GetNamesDecisionsRecentResponse;

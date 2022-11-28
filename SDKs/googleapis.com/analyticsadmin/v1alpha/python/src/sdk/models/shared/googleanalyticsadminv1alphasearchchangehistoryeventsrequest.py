@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class GoogleAnalyticsAdminV1alphaSearchChangeHistoryEventsRequestActionEnum(str, Enum):
     ACTION_TYPE_UNSPECIFIED = "ACTION_TYPE_UNSPECIFIED"
@@ -26,17 +28,22 @@ class GoogleAnalyticsAdminV1alphaSearchChangeHistoryEventsRequestResourceTypeEnu
     DATA_STREAM = "DATA_STREAM"
     ATTRIBUTION_SETTINGS = "ATTRIBUTION_SETTINGS"
     EXPANDED_DATA_SET = "EXPANDED_DATA_SET"
+    CHANNEL_GROUP = "CHANNEL_GROUP"
 
 
 @dataclass_json
 @dataclass
 class GoogleAnalyticsAdminV1alphaSearchChangeHistoryEventsRequest:
-    action: Optional[List[GoogleAnalyticsAdminV1alphaSearchChangeHistoryEventsRequestActionEnum]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'action' }})
-    actor_email: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'actorEmail' }})
-    earliest_change_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'earliestChangeTime' }})
-    latest_change_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'latestChangeTime' }})
-    page_size: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'pageSize' }})
-    page_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'pageToken' }})
-    property: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'property' }})
-    resource_type: Optional[List[GoogleAnalyticsAdminV1alphaSearchChangeHistoryEventsRequestResourceTypeEnum]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'resourceType' }})
+    r"""GoogleAnalyticsAdminV1alphaSearchChangeHistoryEventsRequest
+    Request message for SearchChangeHistoryEvents RPC.
+    """
+    
+    action: Optional[List[GoogleAnalyticsAdminV1alphaSearchChangeHistoryEventsRequestActionEnum]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('action') }})
+    actor_email: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('actorEmail') }})
+    earliest_change_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('earliestChangeTime') }})
+    latest_change_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('latestChangeTime') }})
+    page_size: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('pageSize') }})
+    page_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('pageToken') }})
+    property: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('property') }})
+    resource_type: Optional[List[GoogleAnalyticsAdminV1alphaSearchChangeHistoryEventsRequestResourceTypeEnum]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('resourceType') }})
     

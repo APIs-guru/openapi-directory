@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // VertexAiParameters
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Parameters used in Vertex AI JobType executions.
 **/
 export class VertexAiParameters extends SpeakeasyBase {
-  @Metadata({ data: "json, name=env" })
+  @SpeakeasyMetadata({ data: "json, name=env" })
   env?: Map<string, string>;
 
-  @Metadata({ data: "json, name=network" })
+  @SpeakeasyMetadata({ data: "json, name=network" })
   network?: string;
 }

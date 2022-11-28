@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from typing import Any,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class ManageEventActionEnum(str, Enum):
     CREATE = "create"
@@ -12,7 +14,7 @@ class ManageEventActionEnum(str, Enum):
 @dataclass_json
 @dataclass
 class ManageEvent:
-    action: Optional[ManageEventActionEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'action' }})
-    action_params: Optional[dict[str, Any]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'action_params' }})
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
+    action: Optional[ManageEventActionEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('action') }})
+    action_params: Optional[dict[str, Any]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('action_params') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
     

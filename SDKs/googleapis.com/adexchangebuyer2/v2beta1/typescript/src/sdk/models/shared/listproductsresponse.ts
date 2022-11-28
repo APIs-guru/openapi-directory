@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Product } from "./product";
+
 
 
 // ListProductsResponse
@@ -8,9 +8,9 @@ import { Product } from "./product";
  * Response message for listing products visible to the buyer.
 **/
 export class ListProductsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 
-  @Metadata({ data: "json, name=products", elemType: shared.Product })
+  @SpeakeasyMetadata({ data: "json, name=products", elemType: Product })
   products?: Product[];
 }

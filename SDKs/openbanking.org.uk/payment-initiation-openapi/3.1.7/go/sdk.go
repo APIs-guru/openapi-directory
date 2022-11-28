@@ -11,7 +11,7 @@ import (
 	"strings"
 )
 
-var Servers = []string{
+var ServerList = []string{
 	"https://openbanking.org.uk",
 	"https://openbanking.org.uk/open-banking/v3.1/pisp",
 }
@@ -21,9 +21,13 @@ type HTTPClient interface {
 }
 
 type SDK struct {
-	defaultClient  HTTPClient
-	securityClient HTTPClient
-	serverURL      string
+	_defaultClient  HTTPClient
+	_securityClient HTTPClient
+
+	_serverURL  string
+	_language   string
+	_sdkVersion string
+	_genVersion string
 }
 
 type SDKOption func(*SDK)
@@ -34,27 +38,45 @@ func WithServerURL(serverURL string, params map[string]string) SDKOption {
 			serverURL = utils.ReplaceParameters(serverURL, params)
 		}
 
-		sdk.serverURL = serverURL
+		sdk._serverURL = serverURL
+	}
+}
+
+func WithClient(client HTTPClient) SDKOption {
+	return func(sdk *SDK) {
+		sdk._defaultClient = client
 	}
 }
 
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
-		defaultClient:  http.DefaultClient,
-		securityClient: http.DefaultClient,
+		_language:   "go",
+		_sdkVersion: "",
+		_genVersion: "internal",
 	}
 	for _, opt := range opts {
 		opt(sdk)
 	}
-	if sdk.serverURL == "" {
-		sdk.serverURL = Servers[0]
+
+	if sdk._defaultClient == nil {
+		sdk._defaultClient = http.DefaultClient
+	}
+	if sdk._securityClient == nil {
+
+		sdk._securityClient = sdk._defaultClient
+
+	}
+
+	if sdk._serverURL == "" {
+		sdk._serverURL = ServerList[0]
 	}
 
 	return sdk
 }
 
+// CreateDomesticPaymentConsents - Create Domestic Payment Consents
 func (s *SDK) CreateDomesticPaymentConsents(ctx context.Context, request operations.CreateDomesticPaymentConsentsRequest) (*operations.CreateDomesticPaymentConsentsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/domestic-payment-consents"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -74,7 +96,7 @@ func (s *SDK) CreateDomesticPaymentConsents(ctx context.Context, request operati
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -213,8 +235,9 @@ func (s *SDK) CreateDomesticPaymentConsents(ctx context.Context, request operati
 	return res, nil
 }
 
+// CreateDomesticPayments - Create Domestic Payments
 func (s *SDK) CreateDomesticPayments(ctx context.Context, request operations.CreateDomesticPaymentsRequest) (*operations.CreateDomesticPaymentsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/domestic-payments"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -234,7 +257,7 @@ func (s *SDK) CreateDomesticPayments(ctx context.Context, request operations.Cre
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -373,8 +396,9 @@ func (s *SDK) CreateDomesticPayments(ctx context.Context, request operations.Cre
 	return res, nil
 }
 
+// CreateDomesticScheduledPaymentConsents - Create Domestic Scheduled Payment Consents
 func (s *SDK) CreateDomesticScheduledPaymentConsents(ctx context.Context, request operations.CreateDomesticScheduledPaymentConsentsRequest) (*operations.CreateDomesticScheduledPaymentConsentsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/domestic-scheduled-payment-consents"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -394,7 +418,7 @@ func (s *SDK) CreateDomesticScheduledPaymentConsents(ctx context.Context, reques
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -536,8 +560,9 @@ func (s *SDK) CreateDomesticScheduledPaymentConsents(ctx context.Context, reques
 	return res, nil
 }
 
+// CreateDomesticScheduledPayments - Create Domestic Scheduled Payments
 func (s *SDK) CreateDomesticScheduledPayments(ctx context.Context, request operations.CreateDomesticScheduledPaymentsRequest) (*operations.CreateDomesticScheduledPaymentsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/domestic-scheduled-payments"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -557,7 +582,7 @@ func (s *SDK) CreateDomesticScheduledPayments(ctx context.Context, request opera
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -699,8 +724,9 @@ func (s *SDK) CreateDomesticScheduledPayments(ctx context.Context, request opera
 	return res, nil
 }
 
+// CreateDomesticStandingOrderConsents - Create Domestic Standing Order Consents
 func (s *SDK) CreateDomesticStandingOrderConsents(ctx context.Context, request operations.CreateDomesticStandingOrderConsentsRequest) (*operations.CreateDomesticStandingOrderConsentsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/domestic-standing-order-consents"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -720,7 +746,7 @@ func (s *SDK) CreateDomesticStandingOrderConsents(ctx context.Context, request o
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -862,8 +888,9 @@ func (s *SDK) CreateDomesticStandingOrderConsents(ctx context.Context, request o
 	return res, nil
 }
 
+// CreateDomesticStandingOrders - Create Domestic Standing Orders
 func (s *SDK) CreateDomesticStandingOrders(ctx context.Context, request operations.CreateDomesticStandingOrdersRequest) (*operations.CreateDomesticStandingOrdersResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/domestic-standing-orders"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -883,7 +910,7 @@ func (s *SDK) CreateDomesticStandingOrders(ctx context.Context, request operatio
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1025,8 +1052,9 @@ func (s *SDK) CreateDomesticStandingOrders(ctx context.Context, request operatio
 	return res, nil
 }
 
+// CreateFilePaymentConsents - Create File Payment Consents
 func (s *SDK) CreateFilePaymentConsents(ctx context.Context, request operations.CreateFilePaymentConsentsRequest) (*operations.CreateFilePaymentConsentsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/file-payment-consents"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1046,7 +1074,7 @@ func (s *SDK) CreateFilePaymentConsents(ctx context.Context, request operations.
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1188,8 +1216,9 @@ func (s *SDK) CreateFilePaymentConsents(ctx context.Context, request operations.
 	return res, nil
 }
 
+// CreateFilePaymentConsentsConsentIDFile - Create File Payment Consents
 func (s *SDK) CreateFilePaymentConsentsConsentIDFile(ctx context.Context, request operations.CreateFilePaymentConsentsConsentIDFileRequest) (*operations.CreateFilePaymentConsentsConsentIDFileResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/file-payment-consents/{ConsentId}/file", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1209,7 +1238,7 @@ func (s *SDK) CreateFilePaymentConsentsConsentIDFile(ctx context.Context, reques
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1328,8 +1357,9 @@ func (s *SDK) CreateFilePaymentConsentsConsentIDFile(ctx context.Context, reques
 	return res, nil
 }
 
+// CreateFilePayments - Create File Payments
 func (s *SDK) CreateFilePayments(ctx context.Context, request operations.CreateFilePaymentsRequest) (*operations.CreateFilePaymentsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/file-payments"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1349,7 +1379,7 @@ func (s *SDK) CreateFilePayments(ctx context.Context, request operations.CreateF
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1491,8 +1521,9 @@ func (s *SDK) CreateFilePayments(ctx context.Context, request operations.CreateF
 	return res, nil
 }
 
+// CreateInternationalPaymentConsents - Create International Payment Consents
 func (s *SDK) CreateInternationalPaymentConsents(ctx context.Context, request operations.CreateInternationalPaymentConsentsRequest) (*operations.CreateInternationalPaymentConsentsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/international-payment-consents"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1512,7 +1543,7 @@ func (s *SDK) CreateInternationalPaymentConsents(ctx context.Context, request op
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1654,8 +1685,9 @@ func (s *SDK) CreateInternationalPaymentConsents(ctx context.Context, request op
 	return res, nil
 }
 
+// CreateInternationalPayments - Create International Payments
 func (s *SDK) CreateInternationalPayments(ctx context.Context, request operations.CreateInternationalPaymentsRequest) (*operations.CreateInternationalPaymentsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/international-payments"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1675,7 +1707,7 @@ func (s *SDK) CreateInternationalPayments(ctx context.Context, request operation
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1817,8 +1849,9 @@ func (s *SDK) CreateInternationalPayments(ctx context.Context, request operation
 	return res, nil
 }
 
+// CreateInternationalScheduledPaymentConsents - Create International Scheduled Payment Consents
 func (s *SDK) CreateInternationalScheduledPaymentConsents(ctx context.Context, request operations.CreateInternationalScheduledPaymentConsentsRequest) (*operations.CreateInternationalScheduledPaymentConsentsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/international-scheduled-payment-consents"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1838,7 +1871,7 @@ func (s *SDK) CreateInternationalScheduledPaymentConsents(ctx context.Context, r
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1980,8 +2013,9 @@ func (s *SDK) CreateInternationalScheduledPaymentConsents(ctx context.Context, r
 	return res, nil
 }
 
+// CreateInternationalScheduledPayments - Create International Scheduled Payments
 func (s *SDK) CreateInternationalScheduledPayments(ctx context.Context, request operations.CreateInternationalScheduledPaymentsRequest) (*operations.CreateInternationalScheduledPaymentsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/international-scheduled-payments"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2001,7 +2035,7 @@ func (s *SDK) CreateInternationalScheduledPayments(ctx context.Context, request 
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2143,8 +2177,9 @@ func (s *SDK) CreateInternationalScheduledPayments(ctx context.Context, request 
 	return res, nil
 }
 
+// CreateInternationalStandingOrderConsents - Create International Standing Order Consents
 func (s *SDK) CreateInternationalStandingOrderConsents(ctx context.Context, request operations.CreateInternationalStandingOrderConsentsRequest) (*operations.CreateInternationalStandingOrderConsentsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/international-standing-order-consents"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2164,7 +2199,7 @@ func (s *SDK) CreateInternationalStandingOrderConsents(ctx context.Context, requ
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2306,8 +2341,9 @@ func (s *SDK) CreateInternationalStandingOrderConsents(ctx context.Context, requ
 	return res, nil
 }
 
+// CreateInternationalStandingOrders - Create International Standing Orders
 func (s *SDK) CreateInternationalStandingOrders(ctx context.Context, request operations.CreateInternationalStandingOrdersRequest) (*operations.CreateInternationalStandingOrdersResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/international-standing-orders"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2327,7 +2363,7 @@ func (s *SDK) CreateInternationalStandingOrders(ctx context.Context, request ope
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2469,8 +2505,9 @@ func (s *SDK) CreateInternationalStandingOrders(ctx context.Context, request ope
 	return res, nil
 }
 
+// GetDomesticPaymentConsentsConsentID - Get Domestic Payment Consents
 func (s *SDK) GetDomesticPaymentConsentsConsentID(ctx context.Context, request operations.GetDomesticPaymentConsentsConsentIDRequest) (*operations.GetDomesticPaymentConsentsConsentIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/domestic-payment-consents/{ConsentId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2480,7 +2517,7 @@ func (s *SDK) GetDomesticPaymentConsentsConsentID(ctx context.Context, request o
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2616,8 +2653,9 @@ func (s *SDK) GetDomesticPaymentConsentsConsentID(ctx context.Context, request o
 	return res, nil
 }
 
+// GetDomesticPaymentConsentsConsentIDFundsConfirmation - Get Domestic Payment Consents Funds Confirmation
 func (s *SDK) GetDomesticPaymentConsentsConsentIDFundsConfirmation(ctx context.Context, request operations.GetDomesticPaymentConsentsConsentIDFundsConfirmationRequest) (*operations.GetDomesticPaymentConsentsConsentIDFundsConfirmationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/domestic-payment-consents/{ConsentId}/funds-confirmation", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2627,7 +2665,7 @@ func (s *SDK) GetDomesticPaymentConsentsConsentIDFundsConfirmation(ctx context.C
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2763,8 +2801,9 @@ func (s *SDK) GetDomesticPaymentConsentsConsentIDFundsConfirmation(ctx context.C
 	return res, nil
 }
 
+// GetDomesticPaymentsDomesticPaymentID - Get Domestic Payments
 func (s *SDK) GetDomesticPaymentsDomesticPaymentID(ctx context.Context, request operations.GetDomesticPaymentsDomesticPaymentIDRequest) (*operations.GetDomesticPaymentsDomesticPaymentIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/domestic-payments/{DomesticPaymentId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2774,7 +2813,7 @@ func (s *SDK) GetDomesticPaymentsDomesticPaymentID(ctx context.Context, request 
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2910,8 +2949,9 @@ func (s *SDK) GetDomesticPaymentsDomesticPaymentID(ctx context.Context, request 
 	return res, nil
 }
 
+// GetDomesticPaymentsDomesticPaymentIDPaymentDetails - Get Payment Details
 func (s *SDK) GetDomesticPaymentsDomesticPaymentIDPaymentDetails(ctx context.Context, request operations.GetDomesticPaymentsDomesticPaymentIDPaymentDetailsRequest) (*operations.GetDomesticPaymentsDomesticPaymentIDPaymentDetailsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/domestic-payments/{DomesticPaymentId}/payment-details", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2921,7 +2961,7 @@ func (s *SDK) GetDomesticPaymentsDomesticPaymentIDPaymentDetails(ctx context.Con
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3060,8 +3100,9 @@ func (s *SDK) GetDomesticPaymentsDomesticPaymentIDPaymentDetails(ctx context.Con
 	return res, nil
 }
 
+// GetDomesticScheduledPaymentConsentsConsentID - Get Domestic Scheduled Payment Consents
 func (s *SDK) GetDomesticScheduledPaymentConsentsConsentID(ctx context.Context, request operations.GetDomesticScheduledPaymentConsentsConsentIDRequest) (*operations.GetDomesticScheduledPaymentConsentsConsentIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/domestic-scheduled-payment-consents/{ConsentId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3071,7 +3112,7 @@ func (s *SDK) GetDomesticScheduledPaymentConsentsConsentID(ctx context.Context, 
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3210,8 +3251,9 @@ func (s *SDK) GetDomesticScheduledPaymentConsentsConsentID(ctx context.Context, 
 	return res, nil
 }
 
+// GetDomesticScheduledPaymentsDomesticScheduledPaymentID - Get Domestic Scheduled Payments
 func (s *SDK) GetDomesticScheduledPaymentsDomesticScheduledPaymentID(ctx context.Context, request operations.GetDomesticScheduledPaymentsDomesticScheduledPaymentIDRequest) (*operations.GetDomesticScheduledPaymentsDomesticScheduledPaymentIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/domestic-scheduled-payments/{DomesticScheduledPaymentId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3221,7 +3263,7 @@ func (s *SDK) GetDomesticScheduledPaymentsDomesticScheduledPaymentID(ctx context
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3360,8 +3402,9 @@ func (s *SDK) GetDomesticScheduledPaymentsDomesticScheduledPaymentID(ctx context
 	return res, nil
 }
 
+// GetDomesticScheduledPaymentsDomesticScheduledPaymentIDPaymentDetails - Get Payment Details
 func (s *SDK) GetDomesticScheduledPaymentsDomesticScheduledPaymentIDPaymentDetails(ctx context.Context, request operations.GetDomesticScheduledPaymentsDomesticScheduledPaymentIDPaymentDetailsRequest) (*operations.GetDomesticScheduledPaymentsDomesticScheduledPaymentIDPaymentDetailsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/domestic-scheduled-payments/{DomesticScheduledPaymentId}/payment-details", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3371,7 +3414,7 @@ func (s *SDK) GetDomesticScheduledPaymentsDomesticScheduledPaymentIDPaymentDetai
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3510,8 +3553,9 @@ func (s *SDK) GetDomesticScheduledPaymentsDomesticScheduledPaymentIDPaymentDetai
 	return res, nil
 }
 
+// GetDomesticStandingOrderConsentsConsentID - Get Domestic Standing Order Consents
 func (s *SDK) GetDomesticStandingOrderConsentsConsentID(ctx context.Context, request operations.GetDomesticStandingOrderConsentsConsentIDRequest) (*operations.GetDomesticStandingOrderConsentsConsentIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/domestic-standing-order-consents/{ConsentId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3521,7 +3565,7 @@ func (s *SDK) GetDomesticStandingOrderConsentsConsentID(ctx context.Context, req
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3660,8 +3704,9 @@ func (s *SDK) GetDomesticStandingOrderConsentsConsentID(ctx context.Context, req
 	return res, nil
 }
 
+// GetDomesticStandingOrdersDomesticStandingOrderID - Get Domestic Standing Orders
 func (s *SDK) GetDomesticStandingOrdersDomesticStandingOrderID(ctx context.Context, request operations.GetDomesticStandingOrdersDomesticStandingOrderIDRequest) (*operations.GetDomesticStandingOrdersDomesticStandingOrderIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/domestic-standing-orders/{DomesticStandingOrderId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3671,7 +3716,7 @@ func (s *SDK) GetDomesticStandingOrdersDomesticStandingOrderID(ctx context.Conte
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3810,8 +3855,9 @@ func (s *SDK) GetDomesticStandingOrdersDomesticStandingOrderID(ctx context.Conte
 	return res, nil
 }
 
+// GetDomesticStandingOrdersDomesticStandingOrderIDPaymentDetails - Get Payment Details
 func (s *SDK) GetDomesticStandingOrdersDomesticStandingOrderIDPaymentDetails(ctx context.Context, request operations.GetDomesticStandingOrdersDomesticStandingOrderIDPaymentDetailsRequest) (*operations.GetDomesticStandingOrdersDomesticStandingOrderIDPaymentDetailsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/domestic-standing-orders/{DomesticStandingOrderId}/payment-details", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3821,7 +3867,7 @@ func (s *SDK) GetDomesticStandingOrdersDomesticStandingOrderIDPaymentDetails(ctx
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3960,8 +4006,9 @@ func (s *SDK) GetDomesticStandingOrdersDomesticStandingOrderIDPaymentDetails(ctx
 	return res, nil
 }
 
+// GetFilePaymentConsentsConsentID - Get File Payment Consents
 func (s *SDK) GetFilePaymentConsentsConsentID(ctx context.Context, request operations.GetFilePaymentConsentsConsentIDRequest) (*operations.GetFilePaymentConsentsConsentIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/file-payment-consents/{ConsentId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3971,7 +4018,7 @@ func (s *SDK) GetFilePaymentConsentsConsentID(ctx context.Context, request opera
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4110,8 +4157,9 @@ func (s *SDK) GetFilePaymentConsentsConsentID(ctx context.Context, request opera
 	return res, nil
 }
 
+// GetFilePaymentConsentsConsentIDFile - Get File Payment Consents
 func (s *SDK) GetFilePaymentConsentsConsentIDFile(ctx context.Context, request operations.GetFilePaymentConsentsConsentIDFileRequest) (*operations.GetFilePaymentConsentsConsentIDFileResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/file-payment-consents/{ConsentId}/file", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -4121,7 +4169,7 @@ func (s *SDK) GetFilePaymentConsentsConsentIDFile(ctx context.Context, request o
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4260,8 +4308,9 @@ func (s *SDK) GetFilePaymentConsentsConsentIDFile(ctx context.Context, request o
 	return res, nil
 }
 
+// GetFilePaymentsFilePaymentID - Get File Payments
 func (s *SDK) GetFilePaymentsFilePaymentID(ctx context.Context, request operations.GetFilePaymentsFilePaymentIDRequest) (*operations.GetFilePaymentsFilePaymentIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/file-payments/{FilePaymentId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -4271,7 +4320,7 @@ func (s *SDK) GetFilePaymentsFilePaymentID(ctx context.Context, request operatio
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4410,8 +4459,9 @@ func (s *SDK) GetFilePaymentsFilePaymentID(ctx context.Context, request operatio
 	return res, nil
 }
 
+// GetFilePaymentsFilePaymentIDPaymentDetails - Get Payment Details
 func (s *SDK) GetFilePaymentsFilePaymentIDPaymentDetails(ctx context.Context, request operations.GetFilePaymentsFilePaymentIDPaymentDetailsRequest) (*operations.GetFilePaymentsFilePaymentIDPaymentDetailsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/file-payments/{FilePaymentId}/payment-details", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -4421,7 +4471,7 @@ func (s *SDK) GetFilePaymentsFilePaymentIDPaymentDetails(ctx context.Context, re
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4560,8 +4610,9 @@ func (s *SDK) GetFilePaymentsFilePaymentIDPaymentDetails(ctx context.Context, re
 	return res, nil
 }
 
+// GetFilePaymentsFilePaymentIDReportFile - Get File Payments
 func (s *SDK) GetFilePaymentsFilePaymentIDReportFile(ctx context.Context, request operations.GetFilePaymentsFilePaymentIDReportFileRequest) (*operations.GetFilePaymentsFilePaymentIDReportFileResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/file-payments/{FilePaymentId}/report-file", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -4571,7 +4622,7 @@ func (s *SDK) GetFilePaymentsFilePaymentIDReportFile(ctx context.Context, reques
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4710,8 +4761,9 @@ func (s *SDK) GetFilePaymentsFilePaymentIDReportFile(ctx context.Context, reques
 	return res, nil
 }
 
+// GetInternationalPaymentConsentsConsentID - Get International Payment Consents
 func (s *SDK) GetInternationalPaymentConsentsConsentID(ctx context.Context, request operations.GetInternationalPaymentConsentsConsentIDRequest) (*operations.GetInternationalPaymentConsentsConsentIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/international-payment-consents/{ConsentId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -4721,7 +4773,7 @@ func (s *SDK) GetInternationalPaymentConsentsConsentID(ctx context.Context, requ
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4860,8 +4912,9 @@ func (s *SDK) GetInternationalPaymentConsentsConsentID(ctx context.Context, requ
 	return res, nil
 }
 
+// GetInternationalPaymentConsentsConsentIDFundsConfirmation - Get International Payment Consents Funds Confirmation
 func (s *SDK) GetInternationalPaymentConsentsConsentIDFundsConfirmation(ctx context.Context, request operations.GetInternationalPaymentConsentsConsentIDFundsConfirmationRequest) (*operations.GetInternationalPaymentConsentsConsentIDFundsConfirmationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/international-payment-consents/{ConsentId}/funds-confirmation", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -4871,7 +4924,7 @@ func (s *SDK) GetInternationalPaymentConsentsConsentIDFundsConfirmation(ctx cont
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5010,8 +5063,9 @@ func (s *SDK) GetInternationalPaymentConsentsConsentIDFundsConfirmation(ctx cont
 	return res, nil
 }
 
+// GetInternationalPaymentsInternationalPaymentID - Get International Payments
 func (s *SDK) GetInternationalPaymentsInternationalPaymentID(ctx context.Context, request operations.GetInternationalPaymentsInternationalPaymentIDRequest) (*operations.GetInternationalPaymentsInternationalPaymentIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/international-payments/{InternationalPaymentId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -5021,7 +5075,7 @@ func (s *SDK) GetInternationalPaymentsInternationalPaymentID(ctx context.Context
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5160,8 +5214,9 @@ func (s *SDK) GetInternationalPaymentsInternationalPaymentID(ctx context.Context
 	return res, nil
 }
 
+// GetInternationalPaymentsInternationalPaymentIDPaymentDetails - Get Payment Details
 func (s *SDK) GetInternationalPaymentsInternationalPaymentIDPaymentDetails(ctx context.Context, request operations.GetInternationalPaymentsInternationalPaymentIDPaymentDetailsRequest) (*operations.GetInternationalPaymentsInternationalPaymentIDPaymentDetailsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/international-payments/{InternationalPaymentId}/payment-details", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -5171,7 +5226,7 @@ func (s *SDK) GetInternationalPaymentsInternationalPaymentIDPaymentDetails(ctx c
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5310,8 +5365,9 @@ func (s *SDK) GetInternationalPaymentsInternationalPaymentIDPaymentDetails(ctx c
 	return res, nil
 }
 
+// GetInternationalScheduledPaymentConsentsConsentID - Get International Scheduled Payment Consents
 func (s *SDK) GetInternationalScheduledPaymentConsentsConsentID(ctx context.Context, request operations.GetInternationalScheduledPaymentConsentsConsentIDRequest) (*operations.GetInternationalScheduledPaymentConsentsConsentIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/international-scheduled-payment-consents/{ConsentId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -5321,7 +5377,7 @@ func (s *SDK) GetInternationalScheduledPaymentConsentsConsentID(ctx context.Cont
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5460,8 +5516,9 @@ func (s *SDK) GetInternationalScheduledPaymentConsentsConsentID(ctx context.Cont
 	return res, nil
 }
 
+// GetInternationalScheduledPaymentConsentsConsentIDFundsConfirmation - Get International Scheduled Payment Consents Funds Confirmation
 func (s *SDK) GetInternationalScheduledPaymentConsentsConsentIDFundsConfirmation(ctx context.Context, request operations.GetInternationalScheduledPaymentConsentsConsentIDFundsConfirmationRequest) (*operations.GetInternationalScheduledPaymentConsentsConsentIDFundsConfirmationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/international-scheduled-payment-consents/{ConsentId}/funds-confirmation", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -5471,7 +5528,7 @@ func (s *SDK) GetInternationalScheduledPaymentConsentsConsentIDFundsConfirmation
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5610,8 +5667,9 @@ func (s *SDK) GetInternationalScheduledPaymentConsentsConsentIDFundsConfirmation
 	return res, nil
 }
 
+// GetInternationalScheduledPaymentsInternationalScheduledPaymentID - Get International Scheduled Payments
 func (s *SDK) GetInternationalScheduledPaymentsInternationalScheduledPaymentID(ctx context.Context, request operations.GetInternationalScheduledPaymentsInternationalScheduledPaymentIDRequest) (*operations.GetInternationalScheduledPaymentsInternationalScheduledPaymentIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/international-scheduled-payments/{InternationalScheduledPaymentId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -5621,7 +5679,7 @@ func (s *SDK) GetInternationalScheduledPaymentsInternationalScheduledPaymentID(c
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5760,8 +5818,9 @@ func (s *SDK) GetInternationalScheduledPaymentsInternationalScheduledPaymentID(c
 	return res, nil
 }
 
+// GetInternationalScheduledPaymentsInternationalScheduledPaymentIDPaymentDetails - Get Payment Details
 func (s *SDK) GetInternationalScheduledPaymentsInternationalScheduledPaymentIDPaymentDetails(ctx context.Context, request operations.GetInternationalScheduledPaymentsInternationalScheduledPaymentIDPaymentDetailsRequest) (*operations.GetInternationalScheduledPaymentsInternationalScheduledPaymentIDPaymentDetailsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/international-scheduled-payments/{InternationalScheduledPaymentId}/payment-details", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -5771,7 +5830,7 @@ func (s *SDK) GetInternationalScheduledPaymentsInternationalScheduledPaymentIDPa
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5910,8 +5969,9 @@ func (s *SDK) GetInternationalScheduledPaymentsInternationalScheduledPaymentIDPa
 	return res, nil
 }
 
+// GetInternationalStandingOrderConsentsConsentID - Get International Standing Order Consents
 func (s *SDK) GetInternationalStandingOrderConsentsConsentID(ctx context.Context, request operations.GetInternationalStandingOrderConsentsConsentIDRequest) (*operations.GetInternationalStandingOrderConsentsConsentIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/international-standing-order-consents/{ConsentId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -5921,7 +5981,7 @@ func (s *SDK) GetInternationalStandingOrderConsentsConsentID(ctx context.Context
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6060,8 +6120,9 @@ func (s *SDK) GetInternationalStandingOrderConsentsConsentID(ctx context.Context
 	return res, nil
 }
 
+// GetInternationalStandingOrdersInternationalStandingOrderPaymentID - Get International Standing Orders
 func (s *SDK) GetInternationalStandingOrdersInternationalStandingOrderPaymentID(ctx context.Context, request operations.GetInternationalStandingOrdersInternationalStandingOrderPaymentIDRequest) (*operations.GetInternationalStandingOrdersInternationalStandingOrderPaymentIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/international-standing-orders/{InternationalStandingOrderPaymentId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -6071,7 +6132,7 @@ func (s *SDK) GetInternationalStandingOrdersInternationalStandingOrderPaymentID(
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6210,8 +6271,9 @@ func (s *SDK) GetInternationalStandingOrdersInternationalStandingOrderPaymentID(
 	return res, nil
 }
 
+// GetInternationalStandingOrdersInternationalStandingOrderPaymentIDPaymentDetails - Get Payment Details
 func (s *SDK) GetInternationalStandingOrdersInternationalStandingOrderPaymentIDPaymentDetails(ctx context.Context, request operations.GetInternationalStandingOrdersInternationalStandingOrderPaymentIDPaymentDetailsRequest) (*operations.GetInternationalStandingOrdersInternationalStandingOrderPaymentIDPaymentDetailsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/international-standing-orders/{InternationalStandingOrderPaymentId}/payment-details", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -6221,7 +6283,7 @@ func (s *SDK) GetInternationalStandingOrdersInternationalStandingOrderPaymentIDP
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {

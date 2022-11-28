@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ViolationReasonEnum } from "./violationreasonenum";
+
 
 
 // ComplianceViolator
@@ -7,12 +8,12 @@ import { ViolationReasonEnum } from "./violationreasonenum";
  * Details of the resource that is not protected by the policy.
 **/
 export class ComplianceViolator extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ResourceId" })
+  @SpeakeasyMetadata({ data: "json, name=ResourceId" })
   resourceId?: string;
 
-  @Metadata({ data: "json, name=ResourceType" })
+  @SpeakeasyMetadata({ data: "json, name=ResourceType" })
   resourceType?: string;
 
-  @Metadata({ data: "json, name=ViolationReason" })
+  @SpeakeasyMetadata({ data: "json, name=ViolationReason" })
   violationReason?: ViolationReasonEnum;
 }

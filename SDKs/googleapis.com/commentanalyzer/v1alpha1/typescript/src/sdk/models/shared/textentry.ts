@@ -1,9 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum TextEntryTypeEnum {
-    TextTypeUnspecified = "TEXT_TYPE_UNSPECIFIED"
-,    PlainText = "PLAIN_TEXT"
-,    Html = "HTML"
+    TextTypeUnspecified = "TEXT_TYPE_UNSPECIFIED",
+    PlainText = "PLAIN_TEXT",
+    Html = "HTML"
 }
 
 
@@ -12,9 +13,9 @@ export enum TextEntryTypeEnum {
  * Represents a body of text.
 **/
 export class TextEntry extends SpeakeasyBase {
-  @Metadata({ data: "json, name=text" })
+  @SpeakeasyMetadata({ data: "json, name=text" })
   text?: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: TextEntryTypeEnum;
 }

@@ -8,6 +8,8 @@ const (
 	WaterfallChartSpecStackedTypeEnumSequential                      WaterfallChartSpecStackedTypeEnum = "SEQUENTIAL"
 )
 
+// WaterfallChartSpec
+// A waterfall chart.
 type WaterfallChartSpec struct {
 	ConnectorLineStyle *LineStyle                         `json:"connectorLineStyle,omitempty"`
 	Domain             *WaterfallChartDomain              `json:"domain,omitempty"`

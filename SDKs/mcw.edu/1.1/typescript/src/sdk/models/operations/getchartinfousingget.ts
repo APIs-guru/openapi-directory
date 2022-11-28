@@ -1,31 +1,32 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetChartInfoUsingGetPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=refRgdId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=refRgdId" })
   refRgdId: number;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=speciesTypeKey" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=speciesTypeKey" })
   speciesTypeKey: number;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=termString" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=termString" })
   termString: string;
 }
 
 
 export class GetChartInfoUsingGetRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetChartInfoUsingGetPathParams;
 }
 
 
 export class GetChartInfoUsingGetResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

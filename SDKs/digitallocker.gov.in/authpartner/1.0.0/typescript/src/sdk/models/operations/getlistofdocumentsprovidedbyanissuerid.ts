@@ -1,65 +1,66 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetListOfDocumentsProvidedByAnIssuerIdSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   oauthsecurity: shared.SchemeOauthsecurity;
 }
 
 
-export class GetListOfDocumentsProvidedByAnIssuerIdRequest extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/x-www-form-urlencoded" })
-  request?: any;
-
-  @Metadata()
-  security: GetListOfDocumentsProvidedByAnIssuerIdSecurity;
-}
-
-
 export class GetListOfDocumentsProvidedByAnIssuerId400ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=error" })
+  @SpeakeasyMetadata({ data: "json, name=error" })
   error?: any;
 
-  @Metadata({ data: "json, name=error_description" })
+  @SpeakeasyMetadata({ data: "json, name=error_description" })
   errorDescription?: any;
 }
 
 
 export class GetListOfDocumentsProvidedByAnIssuerId401ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=error" })
+  @SpeakeasyMetadata({ data: "json, name=error" })
   error?: string;
 
-  @Metadata({ data: "json, name=error_description" })
+  @SpeakeasyMetadata({ data: "json, name=error_description" })
   errorDescription?: string;
 }
 
 
 export class GetListOfDocumentsProvidedByAnIssuerId500ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=error" })
+  @SpeakeasyMetadata({ data: "json, name=error" })
   error?: any;
 
-  @Metadata({ data: "json, name=error_description" })
+  @SpeakeasyMetadata({ data: "json, name=error_description" })
   errorDescription?: any;
 }
 
 
+export class GetListOfDocumentsProvidedByAnIssuerIdRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "request, media_type=application/x-www-form-urlencoded" })
+  request?: any;
+
+  @SpeakeasyMetadata()
+  security: GetListOfDocumentsProvidedByAnIssuerIdSecurity;
+}
+
+
 export class GetListOfDocumentsProvidedByAnIssuerIdResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   docTypeResponse?: shared.DocTypeResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getListOfDocumentsProvidedByAnIssuerId400ApplicationJsonObject?: GetListOfDocumentsProvidedByAnIssuerId400ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getListOfDocumentsProvidedByAnIssuerId401ApplicationJsonObject?: GetListOfDocumentsProvidedByAnIssuerId401ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getListOfDocumentsProvidedByAnIssuerId500ApplicationJsonObject?: GetListOfDocumentsProvidedByAnIssuerId500ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Attribute } from "./attribute";
+
 
 
 // InputDefinition
@@ -8,6 +8,6 @@ import { Attribute } from "./attribute";
  * The definition of the input.
 **/
 export class InputDefinition extends SpeakeasyBase {
-  @Metadata({ data: "json, name=attributes", elemType: shared.Attribute })
+  @SpeakeasyMetadata({ data: "json, name=attributes", elemType: Attribute })
   attributes: Attribute[];
 }

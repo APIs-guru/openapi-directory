@@ -1,13 +1,13 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { LayerFailure } from "./layerfailure";
 import { Layer } from "./layer";
 
 
+
 export class BatchCheckLayerAvailabilityResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=failures", elemType: shared.LayerFailure })
+  @SpeakeasyMetadata({ data: "json, name=failures", elemType: LayerFailure })
   failures?: LayerFailure[];
 
-  @Metadata({ data: "json, name=layers", elemType: shared.Layer })
+  @SpeakeasyMetadata({ data: "json, name=layers", elemType: Layer })
   layers?: Layer[];
 }

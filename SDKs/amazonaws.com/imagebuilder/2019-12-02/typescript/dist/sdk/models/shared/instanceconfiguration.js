@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { InstanceBlockDeviceMapping } from "./instanceblockdevicemapping";
 // InstanceConfiguration
 /**
  * Defines a custom source AMI and block device mapping configurations of an instance used for building and testing container images.
@@ -34,11 +34,11 @@ var InstanceConfiguration = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=blockDeviceMappings", elemType: shared.InstanceBlockDeviceMapping }),
+        SpeakeasyMetadata({ data: "json, name=blockDeviceMappings", elemType: InstanceBlockDeviceMapping }),
         __metadata("design:type", Array)
     ], InstanceConfiguration.prototype, "blockDeviceMappings", void 0);
     __decorate([
-        Metadata({ data: "json, name=image" }),
+        SpeakeasyMetadata({ data: "json, name=image" }),
         __metadata("design:type", String)
     ], InstanceConfiguration.prototype, "image", void 0);
     return InstanceConfiguration;

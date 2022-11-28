@@ -10,7 +10,7 @@ type CircuitsCircuitTerminationsUpdatePathParams struct {
 
 type CircuitsCircuitTerminationsUpdateRequest struct {
 	PathParams CircuitsCircuitTerminationsUpdatePathParams
-	Request    shared.WritableCircuitTermination `request:"mediaType=application/json"`
+	Request    shared.WritableCircuitTerminationInput `request:"mediaType=application/json"`
 }
 
 type CircuitsCircuitTerminationsUpdateResponse struct {

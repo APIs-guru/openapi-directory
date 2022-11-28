@@ -1,13 +1,18 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import triggerproperties
-from . import triggertype_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class TriggerConfig:
-    trigger_properties: Optional[triggerproperties.TriggerProperties] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'TriggerProperties' }})
-    trigger_type: triggertype_enum.TriggerTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'TriggerType' }})
+    r"""TriggerConfig
+    The trigger settings that determine how and when Amazon AppFlow runs the specified flow.
+    """
+    
+    trigger_type: TriggerTypeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('TriggerType') }})
+    trigger_properties: Optional[TriggerProperties] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('TriggerProperties') }})
     

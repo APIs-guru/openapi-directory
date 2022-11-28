@@ -1,32 +1,33 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetNumbersIsSquareQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=number" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=number" })
   number?: number;
 }
 
 
 export class GetNumbersIsSquareSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
   xMathtoolsApiSecret: shared.SchemeXMathtoolsApiSecret;
 }
 
 
 export class GetNumbersIsSquareRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetNumbersIsSquareQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: GetNumbersIsSquareSecurity;
 }
 
 
 export class GetNumbersIsSquareResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

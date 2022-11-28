@@ -1,35 +1,36 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetSettingsOrganizationsOrganizationNamePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=organizationName" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=organizationName" })
   organizationName: string;
 }
 
 
 export class GetSettingsOrganizationsOrganizationNameSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   oAuth2: shared.SchemeOAuth2;
 }
 
 
 export class GetSettingsOrganizationsOrganizationNameRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetSettingsOrganizationsOrganizationNamePathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: GetSettingsOrganizationsOrganizationNameSecurity;
 }
 
 
 export class GetSettingsOrganizationsOrganizationNameResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   organization?: shared.Organization;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

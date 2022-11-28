@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // LogsPanel
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A widget that displays a stream of log.
 **/
 export class LogsPanel extends SpeakeasyBase {
-  @Metadata({ data: "json, name=filter" })
+  @SpeakeasyMetadata({ data: "json, name=filter" })
   filter?: string;
 
-  @Metadata({ data: "json, name=resourceNames" })
+  @SpeakeasyMetadata({ data: "json, name=resourceNames" })
   resourceNames?: string[];
 }

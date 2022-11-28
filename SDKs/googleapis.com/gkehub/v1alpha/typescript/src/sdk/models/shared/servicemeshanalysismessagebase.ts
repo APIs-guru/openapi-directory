@@ -1,11 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ServiceMeshType } from "./servicemeshtype";
 
+
 export enum ServiceMeshAnalysisMessageBaseLevelEnum {
-    LevelUnspecified = "LEVEL_UNSPECIFIED"
-,    Error = "ERROR"
-,    Warning = "WARNING"
-,    Info = "INFO"
+    LevelUnspecified = "LEVEL_UNSPECIFIED",
+    Error = "ERROR",
+    Warning = "WARNING",
+    Info = "INFO"
 }
 
 
@@ -14,12 +15,12 @@ export enum ServiceMeshAnalysisMessageBaseLevelEnum {
  * AnalysisMessageBase describes some common information that is needed for all messages.
 **/
 export class ServiceMeshAnalysisMessageBase extends SpeakeasyBase {
-  @Metadata({ data: "json, name=documentationUrl" })
+  @SpeakeasyMetadata({ data: "json, name=documentationUrl" })
   documentationUrl?: string;
 
-  @Metadata({ data: "json, name=level" })
+  @SpeakeasyMetadata({ data: "json, name=level" })
   level?: ServiceMeshAnalysisMessageBaseLevelEnum;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: ServiceMeshType;
 }

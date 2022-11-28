@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { HttpUrlDestinationSummary } from "./httpurldestinationsummary";
 import { TopicRuleDestinationStatusEnum } from "./topicruledestinationstatusenum";
 import { VpcDestinationSummary } from "./vpcdestinationsummary";
+
 
 
 // TopicRuleDestinationSummary
@@ -9,24 +10,24 @@ import { VpcDestinationSummary } from "./vpcdestinationsummary";
  * Information about the topic rule destination.
 **/
 export class TopicRuleDestinationSummary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=arn" })
+  @SpeakeasyMetadata({ data: "json, name=arn" })
   arn?: string;
 
-  @Metadata({ data: "json, name=createdAt" })
+  @SpeakeasyMetadata({ data: "json, name=createdAt" })
   createdAt?: Date;
 
-  @Metadata({ data: "json, name=httpUrlSummary" })
+  @SpeakeasyMetadata({ data: "json, name=httpUrlSummary" })
   httpUrlSummary?: HttpUrlDestinationSummary;
 
-  @Metadata({ data: "json, name=lastUpdatedAt" })
+  @SpeakeasyMetadata({ data: "json, name=lastUpdatedAt" })
   lastUpdatedAt?: Date;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: TopicRuleDestinationStatusEnum;
 
-  @Metadata({ data: "json, name=statusReason" })
+  @SpeakeasyMetadata({ data: "json, name=statusReason" })
   statusReason?: string;
 
-  @Metadata({ data: "json, name=vpcDestinationSummary" })
+  @SpeakeasyMetadata({ data: "json, name=vpcDestinationSummary" })
   vpcDestinationSummary?: VpcDestinationSummary;
 }

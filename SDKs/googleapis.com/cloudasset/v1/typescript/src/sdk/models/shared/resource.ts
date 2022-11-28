@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Resource
@@ -6,24 +7,24 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A representation of a Google Cloud resource.
 **/
 export class Resource extends SpeakeasyBase {
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data?: Map<string, any>;
 
-  @Metadata({ data: "json, name=discoveryDocumentUri" })
+  @SpeakeasyMetadata({ data: "json, name=discoveryDocumentUri" })
   discoveryDocumentUri?: string;
 
-  @Metadata({ data: "json, name=discoveryName" })
+  @SpeakeasyMetadata({ data: "json, name=discoveryName" })
   discoveryName?: string;
 
-  @Metadata({ data: "json, name=location" })
+  @SpeakeasyMetadata({ data: "json, name=location" })
   location?: string;
 
-  @Metadata({ data: "json, name=parent" })
+  @SpeakeasyMetadata({ data: "json, name=parent" })
   parent?: string;
 
-  @Metadata({ data: "json, name=resourceUrl" })
+  @SpeakeasyMetadata({ data: "json, name=resourceUrl" })
   resourceUrl?: string;
 
-  @Metadata({ data: "json, name=version" })
+  @SpeakeasyMetadata({ data: "json, name=version" })
   version?: string;
 }

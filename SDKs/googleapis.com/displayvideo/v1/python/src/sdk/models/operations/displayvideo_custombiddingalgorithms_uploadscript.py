@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DisplayvideoCustomBiddingAlgorithmsUploadScriptPathParams:
-    custom_bidding_algorithm_id: str = field(default=None, metadata={'path_param': { 'field_name': 'customBiddingAlgorithmId', 'style': 'simple', 'explode': False }})
+    custom_bidding_algorithm_id: str = field(metadata={'path_param': { 'field_name': 'customBiddingAlgorithmId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -27,20 +28,20 @@ class DisplayvideoCustomBiddingAlgorithmsUploadScriptQueryParams:
 
 @dataclass
 class DisplayvideoCustomBiddingAlgorithmsUploadScriptSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DisplayvideoCustomBiddingAlgorithmsUploadScriptRequest:
-    path_params: DisplayvideoCustomBiddingAlgorithmsUploadScriptPathParams = field(default=None)
-    query_params: DisplayvideoCustomBiddingAlgorithmsUploadScriptQueryParams = field(default=None)
-    security: DisplayvideoCustomBiddingAlgorithmsUploadScriptSecurity = field(default=None)
+    path_params: DisplayvideoCustomBiddingAlgorithmsUploadScriptPathParams = field()
+    query_params: DisplayvideoCustomBiddingAlgorithmsUploadScriptQueryParams = field()
+    security: DisplayvideoCustomBiddingAlgorithmsUploadScriptSecurity = field()
     
 
 @dataclass
 class DisplayvideoCustomBiddingAlgorithmsUploadScriptResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     custom_bidding_script_ref: Optional[shared.CustomBiddingScriptRef] = field(default=None)
-    status_code: int = field(default=None)
     

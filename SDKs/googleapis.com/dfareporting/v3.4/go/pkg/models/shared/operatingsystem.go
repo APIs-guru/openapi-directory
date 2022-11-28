@@ -1,5 +1,7 @@
 package shared
 
+// OperatingSystem
+// Contains information about an operating system that can be targeted by ads.
 type OperatingSystem struct {
 	DartID  *string `json:"dartId,omitempty"`
 	Desktop *bool   `json:"desktop,omitempty"`

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { WorkspaceStatus } from "./workspacestatus";
 /**
  * Represents the properties of a workspace.

@@ -5,8 +5,8 @@ from sdk.models import shared
 
 @dataclass
 class GetOrganizationsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     organization_model_haljsons: Optional[List[shared.OrganizationModelHaljson]] = field(default=None)
     organization_models: Optional[List[shared.OrganizationModel]] = field(default=None)
-    status_code: int = field(default=None)
     

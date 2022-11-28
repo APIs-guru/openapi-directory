@@ -1,5 +1,7 @@
 package shared
 
+// EmbedSettingsButtons
+// A collection of information about the buttons that appear on the interface of the embeddable player.
 type EmbedSettingsButtons struct {
 	Embed      bool `json:"embed"`
 	Fullscreen bool `json:"fullscreen"`
@@ -10,12 +12,16 @@ type EmbedSettingsButtons struct {
 	Watchlater bool `json:"watchlater"`
 }
 
+// EmbedSettingsLogosCustom
+// A collection of information relating to custom logos in the embeddable player.
 type EmbedSettingsLogosCustom struct {
 	Active bool   `json:"active"`
 	Link   string `json:"link"`
 	Sticky bool   `json:"sticky"`
 }
 
+// EmbedSettingsLogos
+// A collection of information about the logo in the corner of the embeddable player.
 type EmbedSettingsLogos struct {
 	Custom EmbedSettingsLogosCustom `json:"custom"`
 	Vimeo  bool                     `json:"vimeo"`
@@ -45,6 +51,8 @@ const (
 	EmbedSettingsTitlePortraitEnumUser EmbedSettingsTitlePortraitEnum = "user"
 )
 
+// EmbedSettingsTitle
+// A collection of information relating to the embeddable player's title bar.
 type EmbedSettingsTitle struct {
 	Name     EmbedSettingsTitleNameEnum     `json:"name"`
 	Owner    EmbedSettingsTitleOwnerEnum    `json:"owner"`

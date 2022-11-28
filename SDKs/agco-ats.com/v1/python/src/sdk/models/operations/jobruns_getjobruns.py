@@ -12,13 +12,13 @@ class JobRunsGetJobRunsQueryParams:
 
 @dataclass
 class JobRunsGetJobRunsRequest:
-    query_params: JobRunsGetJobRunsQueryParams = field(default=None)
+    query_params: JobRunsGetJobRunsQueryParams = field()
     
 
 @dataclass
 class JobRunsGetJobRunsResponse:
+    content_type: str = field()
+    status_code: int = field()
     api_models_api_error: Optional[shared.APIModelsAPIError] = field(default=None)
     api_paged_response_build_system_shared_dto_job_run_: Optional[shared.APIPagedResponseBuildSystemSharedDtoJobRun] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

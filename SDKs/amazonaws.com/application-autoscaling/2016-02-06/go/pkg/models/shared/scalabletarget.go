@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// ScalableTarget
+// Represents a scalable target.
 type ScalableTarget struct {
 	CreationTime      time.Time             `json:"CreationTime"`
 	MaxCapacity       int64                 `json:"MaxCapacity"`

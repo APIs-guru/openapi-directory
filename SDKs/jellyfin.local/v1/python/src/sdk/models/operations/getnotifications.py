@@ -5,23 +5,23 @@ from sdk.models import shared
 
 @dataclass
 class GetNotificationsPathParams:
-    user_id: str = field(default=None, metadata={'path_param': { 'field_name': 'userId', 'style': 'simple', 'explode': False }})
+    user_id: str = field(metadata={'path_param': { 'field_name': 'userId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetNotificationsSecurity:
-    custom_authentication: shared.SchemeCustomAuthentication = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    custom_authentication: shared.SchemeCustomAuthentication = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
     
 
 @dataclass
 class GetNotificationsRequest:
-    path_params: GetNotificationsPathParams = field(default=None)
-    security: GetNotificationsSecurity = field(default=None)
+    path_params: GetNotificationsPathParams = field()
+    security: GetNotificationsSecurity = field()
     
 
 @dataclass
 class GetNotificationsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     notification_result_dto: Optional[shared.NotificationResultDto] = field(default=None)
-    status_code: int = field(default=None)
     

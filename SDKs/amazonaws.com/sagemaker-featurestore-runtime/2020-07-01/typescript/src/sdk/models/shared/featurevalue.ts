@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // FeatureValue
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The value associated with a feature.
 **/
 export class FeatureValue extends SpeakeasyBase {
-  @Metadata({ data: "json, name=FeatureName" })
+  @SpeakeasyMetadata({ data: "json, name=FeatureName" })
   featureName: string;
 
-  @Metadata({ data: "json, name=ValueAsString" })
+  @SpeakeasyMetadata({ data: "json, name=ValueAsString" })
   valueAsString: string;
 }

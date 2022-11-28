@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// IdentityProviderType
+// A container for information about an identity provider.
 type IdentityProviderType struct {
 	AttributeMapping map[string]string             `json:"AttributeMapping,omitempty"`
 	CreationDate     *time.Time                    `json:"CreationDate,omitempty"`

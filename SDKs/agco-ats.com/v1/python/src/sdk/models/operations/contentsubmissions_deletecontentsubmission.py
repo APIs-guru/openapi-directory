@@ -1,20 +1,20 @@
 from dataclasses import dataclass, field
-
+from typing import Optional
 
 
 @dataclass
 class ContentSubmissionsDeleteContentSubmissionPathParams:
-    content_submission_id: int = field(default=None, metadata={'path_param': { 'field_name': 'contentSubmissionID', 'style': 'simple', 'explode': False }})
+    content_submission_id: int = field(metadata={'path_param': { 'field_name': 'contentSubmissionID', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class ContentSubmissionsDeleteContentSubmissionRequest:
-    path_params: ContentSubmissionsDeleteContentSubmissionPathParams = field(default=None)
+    path_params: ContentSubmissionsDeleteContentSubmissionPathParams = field()
     
 
 @dataclass
 class ContentSubmissionsDeleteContentSubmissionResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

@@ -4,7 +4,7 @@ from typing import Any,List,Optional
 
 @dataclass
 class GetOrganizationAPIRequestsPathParams:
-    organization_id: str = field(default=None, metadata={'path_param': { 'field_name': 'organizationId', 'style': 'simple', 'explode': False }})
+    organization_id: str = field(metadata={'path_param': { 'field_name': 'organizationId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -24,14 +24,14 @@ class GetOrganizationAPIRequestsQueryParams:
 
 @dataclass
 class GetOrganizationAPIRequestsRequest:
-    path_params: GetOrganizationAPIRequestsPathParams = field(default=None)
-    query_params: GetOrganizationAPIRequestsQueryParams = field(default=None)
+    path_params: GetOrganizationAPIRequestsPathParams = field()
+    query_params: GetOrganizationAPIRequestsQueryParams = field()
     
 
 @dataclass
 class GetOrganizationAPIRequestsResponse:
-    content_type: str = field(default=None)
-    headers: dict[str, List[str]] = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    headers: dict[str, List[str]] = field()
+    status_code: int = field()
     get_organization_api_requests_200_application_json_object: Optional[dict[str, Any]] = field(default=None)
     

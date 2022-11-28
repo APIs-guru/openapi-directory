@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class InputFormatEnum(str, Enum):
     ONE_DOC_PER_FILE = "ONE_DOC_PER_FILE"

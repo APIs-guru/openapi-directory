@@ -1,10 +1,13 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 
 
 @dataclass
 class DeleteCoreDefinitionPathParams:
-    core_definition_id: str = field(default=None, metadata={'path_param': { 'field_name': 'CoreDefinitionId', 'style': 'simple', 'explode': False }})
+    core_definition_id: str = field(metadata={'path_param': { 'field_name': 'CoreDefinitionId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -20,14 +23,14 @@ class DeleteCoreDefinitionHeaders:
 
 @dataclass
 class DeleteCoreDefinitionRequest:
-    path_params: DeleteCoreDefinitionPathParams = field(default=None)
-    headers: DeleteCoreDefinitionHeaders = field(default=None)
+    headers: DeleteCoreDefinitionHeaders = field()
+    path_params: DeleteCoreDefinitionPathParams = field()
     
 
 @dataclass
 class DeleteCoreDefinitionResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     delete_core_definition_response: Optional[dict[str, Any]] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class UpdateRegistryResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=RegistryArn" })
+  @SpeakeasyMetadata({ data: "json, name=RegistryArn" })
   registryArn?: string;
 
-  @Metadata({ data: "json, name=RegistryName" })
+  @SpeakeasyMetadata({ data: "json, name=RegistryName" })
   registryName?: string;
 }

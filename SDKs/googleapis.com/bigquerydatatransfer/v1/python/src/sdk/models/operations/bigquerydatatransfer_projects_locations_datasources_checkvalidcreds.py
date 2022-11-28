@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class BigquerydatatransferProjectsLocationsDataSourcesCheckValidCredsPathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,20 +26,20 @@ class BigquerydatatransferProjectsLocationsDataSourcesCheckValidCredsQueryParams
 
 @dataclass
 class BigquerydatatransferProjectsLocationsDataSourcesCheckValidCredsSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class BigquerydatatransferProjectsLocationsDataSourcesCheckValidCredsSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class BigquerydatatransferProjectsLocationsDataSourcesCheckValidCredsSecurityOption3:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -50,15 +51,15 @@ class BigquerydatatransferProjectsLocationsDataSourcesCheckValidCredsSecurity:
 
 @dataclass
 class BigquerydatatransferProjectsLocationsDataSourcesCheckValidCredsRequest:
-    path_params: BigquerydatatransferProjectsLocationsDataSourcesCheckValidCredsPathParams = field(default=None)
-    query_params: BigquerydatatransferProjectsLocationsDataSourcesCheckValidCredsQueryParams = field(default=None)
+    path_params: BigquerydatatransferProjectsLocationsDataSourcesCheckValidCredsPathParams = field()
+    query_params: BigquerydatatransferProjectsLocationsDataSourcesCheckValidCredsQueryParams = field()
+    security: BigquerydatatransferProjectsLocationsDataSourcesCheckValidCredsSecurity = field()
     request: Optional[dict[str, Any]] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: BigquerydatatransferProjectsLocationsDataSourcesCheckValidCredsSecurity = field(default=None)
     
 
 @dataclass
 class BigquerydatatransferProjectsLocationsDataSourcesCheckValidCredsResponse:
+    content_type: str = field()
+    status_code: int = field()
     check_valid_creds_response: Optional[shared.CheckValidCredsResponse] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

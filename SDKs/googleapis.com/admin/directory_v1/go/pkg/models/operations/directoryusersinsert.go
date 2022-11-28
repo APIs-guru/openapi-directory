@@ -25,7 +25,7 @@ type DirectoryUsersInsertSecurity struct {
 
 type DirectoryUsersInsertRequest struct {
 	QueryParams DirectoryUsersInsertQueryParams
-	Request     *shared.User `request:"mediaType=application/json"`
+	Request     *shared.UserInput `request:"mediaType=application/json"`
 	Security    DirectoryUsersInsertSecurity
 }
 

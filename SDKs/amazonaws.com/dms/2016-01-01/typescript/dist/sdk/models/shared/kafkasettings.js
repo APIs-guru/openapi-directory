@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { MessageFormatValueEnum } from "./messageformatvalueenum";
 import { KafkaSecurityProtocolEnum } from "./kafkasecurityprotocolenum";
 // KafkaSettings
@@ -35,75 +35,75 @@ var KafkaSettings = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Broker" }),
+        SpeakeasyMetadata({ data: "json, name=Broker" }),
         __metadata("design:type", String)
     ], KafkaSettings.prototype, "broker", void 0);
     __decorate([
-        Metadata({ data: "json, name=IncludeControlDetails" }),
+        SpeakeasyMetadata({ data: "json, name=IncludeControlDetails" }),
         __metadata("design:type", Boolean)
     ], KafkaSettings.prototype, "includeControlDetails", void 0);
     __decorate([
-        Metadata({ data: "json, name=IncludeNullAndEmpty" }),
+        SpeakeasyMetadata({ data: "json, name=IncludeNullAndEmpty" }),
         __metadata("design:type", Boolean)
     ], KafkaSettings.prototype, "includeNullAndEmpty", void 0);
     __decorate([
-        Metadata({ data: "json, name=IncludePartitionValue" }),
+        SpeakeasyMetadata({ data: "json, name=IncludePartitionValue" }),
         __metadata("design:type", Boolean)
     ], KafkaSettings.prototype, "includePartitionValue", void 0);
     __decorate([
-        Metadata({ data: "json, name=IncludeTableAlterOperations" }),
+        SpeakeasyMetadata({ data: "json, name=IncludeTableAlterOperations" }),
         __metadata("design:type", Boolean)
     ], KafkaSettings.prototype, "includeTableAlterOperations", void 0);
     __decorate([
-        Metadata({ data: "json, name=IncludeTransactionDetails" }),
+        SpeakeasyMetadata({ data: "json, name=IncludeTransactionDetails" }),
         __metadata("design:type", Boolean)
     ], KafkaSettings.prototype, "includeTransactionDetails", void 0);
     __decorate([
-        Metadata({ data: "json, name=MessageFormat" }),
+        SpeakeasyMetadata({ data: "json, name=MessageFormat" }),
         __metadata("design:type", String)
     ], KafkaSettings.prototype, "messageFormat", void 0);
     __decorate([
-        Metadata({ data: "json, name=MessageMaxBytes" }),
+        SpeakeasyMetadata({ data: "json, name=MessageMaxBytes" }),
         __metadata("design:type", Number)
     ], KafkaSettings.prototype, "messageMaxBytes", void 0);
     __decorate([
-        Metadata({ data: "json, name=NoHexPrefix" }),
+        SpeakeasyMetadata({ data: "json, name=NoHexPrefix" }),
         __metadata("design:type", Boolean)
     ], KafkaSettings.prototype, "noHexPrefix", void 0);
     __decorate([
-        Metadata({ data: "json, name=PartitionIncludeSchemaTable" }),
+        SpeakeasyMetadata({ data: "json, name=PartitionIncludeSchemaTable" }),
         __metadata("design:type", Boolean)
     ], KafkaSettings.prototype, "partitionIncludeSchemaTable", void 0);
     __decorate([
-        Metadata({ data: "json, name=SaslPassword" }),
+        SpeakeasyMetadata({ data: "json, name=SaslPassword" }),
         __metadata("design:type", String)
     ], KafkaSettings.prototype, "saslPassword", void 0);
     __decorate([
-        Metadata({ data: "json, name=SaslUsername" }),
+        SpeakeasyMetadata({ data: "json, name=SaslUsername" }),
         __metadata("design:type", String)
     ], KafkaSettings.prototype, "saslUsername", void 0);
     __decorate([
-        Metadata({ data: "json, name=SecurityProtocol" }),
+        SpeakeasyMetadata({ data: "json, name=SecurityProtocol" }),
         __metadata("design:type", String)
     ], KafkaSettings.prototype, "securityProtocol", void 0);
     __decorate([
-        Metadata({ data: "json, name=SslCaCertificateArn" }),
+        SpeakeasyMetadata({ data: "json, name=SslCaCertificateArn" }),
         __metadata("design:type", String)
     ], KafkaSettings.prototype, "sslCaCertificateArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=SslClientCertificateArn" }),
+        SpeakeasyMetadata({ data: "json, name=SslClientCertificateArn" }),
         __metadata("design:type", String)
     ], KafkaSettings.prototype, "sslClientCertificateArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=SslClientKeyArn" }),
+        SpeakeasyMetadata({ data: "json, name=SslClientKeyArn" }),
         __metadata("design:type", String)
     ], KafkaSettings.prototype, "sslClientKeyArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=SslClientKeyPassword" }),
+        SpeakeasyMetadata({ data: "json, name=SslClientKeyPassword" }),
         __metadata("design:type", String)
     ], KafkaSettings.prototype, "sslClientKeyPassword", void 0);
     __decorate([
-        Metadata({ data: "json, name=Topic" }),
+        SpeakeasyMetadata({ data: "json, name=Topic" }),
         __metadata("design:type", String)
     ], KafkaSettings.prototype, "topic", void 0);
     return KafkaSettings;

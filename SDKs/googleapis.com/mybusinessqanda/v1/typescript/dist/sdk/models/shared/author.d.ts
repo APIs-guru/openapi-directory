@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 export declare enum AuthorTypeEnum {
     AuthorTypeUnspecified = "AUTHOR_TYPE_UNSPECIFIED",
     RegularUser = "REGULAR_USER",

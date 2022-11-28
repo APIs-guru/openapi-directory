@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Artwork } from "./artwork";
+
 
 
 // JobAlbumArt
@@ -8,9 +8,9 @@ import { Artwork } from "./artwork";
  * The .jpg or .png file associated with an audio file.
 **/
 export class JobAlbumArt extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Artwork", elemType: shared.Artwork })
+  @SpeakeasyMetadata({ data: "json, name=Artwork", elemType: Artwork })
   artwork?: Artwork[];
 
-  @Metadata({ data: "json, name=MergePolicy" })
+  @SpeakeasyMetadata({ data: "json, name=MergePolicy" })
   mergePolicy?: string;
 }

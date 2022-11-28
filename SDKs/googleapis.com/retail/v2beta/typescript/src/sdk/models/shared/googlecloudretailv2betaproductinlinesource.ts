@@ -1,13 +1,13 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
-import { GoogleCloudRetailV2betaProduct } from "./googlecloudretailv2betaproduct";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { GoogleCloudRetailV2betaProductInput } from "./googlecloudretailv2betaproduct";
 
 
-// GoogleCloudRetailV2betaProductInlineSource
+
+// GoogleCloudRetailV2betaProductInlineSourceInput
 /** 
  * The inline source for the input config for ImportProducts method.
 **/
-export class GoogleCloudRetailV2betaProductInlineSource extends SpeakeasyBase {
-  @Metadata({ data: "json, name=products", elemType: shared.GoogleCloudRetailV2betaProduct })
-  products?: GoogleCloudRetailV2betaProduct[];
+export class GoogleCloudRetailV2betaProductInlineSourceInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=products", elemType: GoogleCloudRetailV2betaProductInput })
+  products?: GoogleCloudRetailV2betaProductInput[];
 }

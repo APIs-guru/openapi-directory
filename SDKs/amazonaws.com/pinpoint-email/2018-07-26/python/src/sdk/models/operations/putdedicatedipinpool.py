@@ -1,11 +1,15 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass
 class PutDedicatedIPInPoolPathParams:
-    ip: str = field(default=None, metadata={'path_param': { 'field_name': 'IP', 'style': 'simple', 'explode': False }})
+    ip: str = field(metadata={'path_param': { 'field_name': 'IP', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -22,22 +26,22 @@ class PutDedicatedIPInPoolHeaders:
 @dataclass_json
 @dataclass
 class PutDedicatedIPInPoolRequestBody:
-    destination_pool_name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'DestinationPoolName' }})
+    destination_pool_name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('DestinationPoolName') }})
     
 
 @dataclass
 class PutDedicatedIPInPoolRequest:
-    path_params: PutDedicatedIPInPoolPathParams = field(default=None)
-    headers: PutDedicatedIPInPoolHeaders = field(default=None)
-    request: PutDedicatedIPInPoolRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: PutDedicatedIPInPoolHeaders = field()
+    path_params: PutDedicatedIPInPoolPathParams = field()
+    request: PutDedicatedIPInPoolRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class PutDedicatedIPInPoolResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     not_found_exception: Optional[Any] = field(default=None)
     put_dedicated_ip_in_pool_response: Optional[dict[str, Any]] = field(default=None)
-    status_code: int = field(default=None)
     too_many_requests_exception: Optional[Any] = field(default=None)
     

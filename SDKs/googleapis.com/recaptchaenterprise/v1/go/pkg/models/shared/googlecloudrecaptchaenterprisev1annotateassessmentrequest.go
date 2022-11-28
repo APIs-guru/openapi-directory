@@ -30,6 +30,8 @@ const (
 	GoogleCloudRecaptchaenterpriseV1AnnotateAssessmentRequestReasonsEnumSocialSpam          GoogleCloudRecaptchaenterpriseV1AnnotateAssessmentRequestReasonsEnum = "SOCIAL_SPAM"
 )
 
+// GoogleCloudRecaptchaenterpriseV1AnnotateAssessmentRequest
+// The request message to annotate an Assessment.
 type GoogleCloudRecaptchaenterpriseV1AnnotateAssessmentRequest struct {
 	Annotation      *GoogleCloudRecaptchaenterpriseV1AnnotateAssessmentRequestAnnotationEnum `json:"annotation,omitempty"`
 	HashedAccountID *string                                                                  `json:"hashedAccountId,omitempty"`

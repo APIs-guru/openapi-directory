@@ -13,15 +13,15 @@ type DcimPlatformsListQueryParams struct {
 	Slug           *string `queryParam:"style=form,explode=true,name=slug"`
 }
 
-type DcimPlatformsListRequest struct {
-	QueryParams DcimPlatformsListQueryParams
-}
-
 type DcimPlatformsList200ApplicationJSON struct {
 	Count    int64             `json:"count"`
 	Next     *string           `json:"next,omitempty"`
 	Previous *string           `json:"previous,omitempty"`
 	Results  []shared.Platform `json:"results"`
+}
+
+type DcimPlatformsListRequest struct {
+	QueryParams DcimPlatformsListQueryParams
 }
 
 type DcimPlatformsListResponse struct {

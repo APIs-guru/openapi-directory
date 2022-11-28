@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// MetricDatum
+// Internal only API.
 type MetricDatum struct {
 	Dimensions      []Dimension   `json:"Dimensions,omitempty"`
 	MetricName      string        `json:"MetricName"`

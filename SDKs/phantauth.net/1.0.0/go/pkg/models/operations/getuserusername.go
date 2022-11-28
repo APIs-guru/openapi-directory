@@ -4,10 +4,8 @@ type GetUserUsernamePathParams struct {
 	Username string `pathParam:"style=simple,explode=false,name=username"`
 }
 
-type GetUserUsernameRequest struct {
-	PathParams GetUserUsernamePathParams
-}
-
+// GetUserUsername200ApplicationJSONAddress
+// The user's preferred postal address.
 type GetUserUsername200ApplicationJSONAddress struct {
 	Country       *string `json:"country,omitempty"`
 	Formatted     *string `json:"formatted,omitempty"`
@@ -43,6 +41,10 @@ type GetUserUsername200ApplicationJSON struct {
 	Webmail             *string                                   `json:"webmail,omitempty"`
 	Website             *string                                   `json:"website,omitempty"`
 	Zoneinfo            *string                                   `json:"zoneinfo,omitempty"`
+}
+
+type GetUserUsernameRequest struct {
+	PathParams GetUserUsernamePathParams
 }
 
 type GetUserUsernameResponse struct {

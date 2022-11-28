@@ -4,7 +4,7 @@ import (
 	"openapi/pkg/models/shared"
 )
 
-var JSONRPCServers = []string{
+var JSONRPCServerList = []string{
 	"http://127.0.0.1:6326",
 	"http://127.0.0.1:16326",
 }

@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CustomFieldEditFields } from "./customfieldeditfields";
 
 
+
 export class CustomFieldEdit extends SpeakeasyBase {
-  @Metadata({ data: "json, name=custom_field" })
+  @SpeakeasyMetadata({ data: "json, name=custom_field" })
   customField?: CustomFieldEditFields;
 }

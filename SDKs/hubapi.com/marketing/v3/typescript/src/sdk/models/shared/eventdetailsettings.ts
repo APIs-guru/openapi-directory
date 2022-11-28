@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class EventDetailSettings extends SpeakeasyBase {
-  @Metadata({ data: "json, name=appId" })
+  @SpeakeasyMetadata({ data: "json, name=appId" })
   appId: number;
 
-  @Metadata({ data: "json, name=eventDetailsUrl" })
+  @SpeakeasyMetadata({ data: "json, name=eventDetailsUrl" })
   eventDetailsUrl: string;
 }

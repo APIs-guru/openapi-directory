@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { InsightResultValue } from "./insightresultvalue";
+
 
 
 // InsightResults
@@ -8,12 +8,12 @@ import { InsightResultValue } from "./insightresultvalue";
  * The insight results returned by the <code>GetInsightResults</code> operation.
 **/
 export class InsightResults extends SpeakeasyBase {
-  @Metadata({ data: "json, name=GroupByAttribute" })
+  @SpeakeasyMetadata({ data: "json, name=GroupByAttribute" })
   groupByAttribute: string;
 
-  @Metadata({ data: "json, name=InsightArn" })
+  @SpeakeasyMetadata({ data: "json, name=InsightArn" })
   insightArn: string;
 
-  @Metadata({ data: "json, name=ResultValues", elemType: shared.InsightResultValue })
+  @SpeakeasyMetadata({ data: "json, name=ResultValues", elemType: InsightResultValue })
   resultValues: InsightResultValue[];
 }

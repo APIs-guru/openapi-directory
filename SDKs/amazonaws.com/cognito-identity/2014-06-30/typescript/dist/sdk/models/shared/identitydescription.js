@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // IdentityDescription
 /**
  * A description of the identity.
@@ -33,19 +33,19 @@ var IdentityDescription = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=CreationDate" }),
+        SpeakeasyMetadata({ data: "json, name=CreationDate" }),
         __metadata("design:type", Date)
     ], IdentityDescription.prototype, "creationDate", void 0);
     __decorate([
-        Metadata({ data: "json, name=IdentityId" }),
+        SpeakeasyMetadata({ data: "json, name=IdentityId" }),
         __metadata("design:type", String)
     ], IdentityDescription.prototype, "identityId", void 0);
     __decorate([
-        Metadata({ data: "json, name=LastModifiedDate" }),
+        SpeakeasyMetadata({ data: "json, name=LastModifiedDate" }),
         __metadata("design:type", Date)
     ], IdentityDescription.prototype, "lastModifiedDate", void 0);
     __decorate([
-        Metadata({ data: "json, name=Logins" }),
+        SpeakeasyMetadata({ data: "json, name=Logins" }),
         __metadata("design:type", Array)
     ], IdentityDescription.prototype, "logins", void 0);
     return IdentityDescription;

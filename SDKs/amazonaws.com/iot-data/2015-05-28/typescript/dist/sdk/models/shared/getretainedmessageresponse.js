@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // GetRetainedMessageResponse
 /**
  * The output from the GetRetainedMessage operation.
@@ -33,19 +33,19 @@ var GetRetainedMessageResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=lastModifiedTime" }),
+        SpeakeasyMetadata({ data: "json, name=lastModifiedTime" }),
         __metadata("design:type", Number)
     ], GetRetainedMessageResponse.prototype, "lastModifiedTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=payload" }),
+        SpeakeasyMetadata({ data: "json, name=payload" }),
         __metadata("design:type", String)
     ], GetRetainedMessageResponse.prototype, "payload", void 0);
     __decorate([
-        Metadata({ data: "json, name=qos" }),
+        SpeakeasyMetadata({ data: "json, name=qos" }),
         __metadata("design:type", Number)
     ], GetRetainedMessageResponse.prototype, "qos", void 0);
     __decorate([
-        Metadata({ data: "json, name=topic" }),
+        SpeakeasyMetadata({ data: "json, name=topic" }),
         __metadata("design:type", String)
     ], GetRetainedMessageResponse.prototype, "topic", void 0);
     return GetRetainedMessageResponse;

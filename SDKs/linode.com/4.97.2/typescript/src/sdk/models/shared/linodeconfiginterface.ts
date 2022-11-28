@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum LinodeConfigInterfacePurposeEnum {
-    Public = "public"
-,    Vlan = "vlan"
+    Public = "public",
+    Vlan = "vlan"
 }
 
 
@@ -12,12 +13,12 @@ export enum LinodeConfigInterfacePurposeEnum {
  * 
 **/
 export class LinodeConfigInterface extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ipam_address" })
+  @SpeakeasyMetadata({ data: "json, name=ipam_address" })
   ipamAddress?: string;
 
-  @Metadata({ data: "json, name=label" })
+  @SpeakeasyMetadata({ data: "json, name=label" })
   label?: string;
 
-  @Metadata({ data: "json, name=purpose" })
+  @SpeakeasyMetadata({ data: "json, name=purpose" })
   purpose?: LinodeConfigInterfacePurposeEnum;
 }

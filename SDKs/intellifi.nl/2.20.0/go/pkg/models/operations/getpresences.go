@@ -30,10 +30,6 @@ type GetPresencesQueryParams struct {
 	UntilID     *string                `queryParam:"style=form,explode=true,name=until_id"`
 }
 
-type GetPresencesRequest struct {
-	QueryParams GetPresencesQueryParams
-}
-
 type GetPresences200ApplicationJSON struct {
 	Count           *int64            `json:"count,omitempty"`
 	CountCurrent    *int64            `json:"count_current,omitempty"`
@@ -42,6 +38,10 @@ type GetPresences200ApplicationJSON struct {
 	QueryDurationMs *int64            `json:"query_duration_ms,omitempty"`
 	Results         []shared.Presence `json:"results,omitempty"`
 	URL             *string           `json:"url,omitempty"`
+}
+
+type GetPresencesRequest struct {
+	QueryParams GetPresencesQueryParams
 }
 
 type GetPresencesResponse struct {

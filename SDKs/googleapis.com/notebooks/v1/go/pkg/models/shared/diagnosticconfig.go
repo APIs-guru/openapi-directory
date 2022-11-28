@@ -1,5 +1,7 @@
 package shared
 
+// DiagnosticConfig
+// Defines flags that are used to run the diagnostic tool
 type DiagnosticConfig struct {
 	CopyHomeFilesFlagEnabled *bool   `json:"copyHomeFilesFlagEnabled,omitempty"`
 	GcsBucket                *string `json:"gcsBucket,omitempty"`

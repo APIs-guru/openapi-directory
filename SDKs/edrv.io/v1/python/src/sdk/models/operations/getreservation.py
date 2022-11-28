@@ -4,7 +4,7 @@ from typing import Optional
 
 @dataclass
 class GetReservationPathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -15,12 +15,12 @@ class GetReservationQueryParams:
 
 @dataclass
 class GetReservationRequest:
-    path_params: GetReservationPathParams = field(default=None)
-    query_params: GetReservationQueryParams = field(default=None)
+    path_params: GetReservationPathParams = field()
+    query_params: GetReservationQueryParams = field()
     
 
 @dataclass
 class GetReservationResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

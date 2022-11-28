@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import imagebuilder
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class CreateImageBuilderResult:
-    image_builder: Optional[imagebuilder.ImageBuilder] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ImageBuilder' }})
+    image_builder: Optional[ImageBuilder] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ImageBuilder') }})
     

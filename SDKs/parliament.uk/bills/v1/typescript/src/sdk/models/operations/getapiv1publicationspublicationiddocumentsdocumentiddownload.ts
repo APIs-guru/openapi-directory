@@ -1,31 +1,32 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetApiV1PublicationsPublicationIdDocumentsDocumentIdDownloadPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=documentId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=documentId" })
   documentId: number;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=publicationId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=publicationId" })
   publicationId: number;
 }
 
 
 export class GetApiV1PublicationsPublicationIdDocumentsDocumentIdDownloadRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetApiV1PublicationsPublicationIdDocumentsDocumentIdDownloadPathParams;
 }
 
 
 export class GetApiV1PublicationsPublicationIdDocumentsDocumentIdDownloadResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   problemDetails?: Map<string, any>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

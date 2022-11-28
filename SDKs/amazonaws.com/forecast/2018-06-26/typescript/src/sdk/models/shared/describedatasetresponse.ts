@@ -1,38 +1,39 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DatasetTypeEnum } from "./datasettypeenum";
 import { DomainEnum } from "./domainenum";
 import { EncryptionConfig } from "./encryptionconfig";
 import { Schema } from "./schema";
 
 
+
 export class DescribeDatasetResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CreationTime" })
+  @SpeakeasyMetadata({ data: "json, name=CreationTime" })
   creationTime?: Date;
 
-  @Metadata({ data: "json, name=DataFrequency" })
+  @SpeakeasyMetadata({ data: "json, name=DataFrequency" })
   dataFrequency?: string;
 
-  @Metadata({ data: "json, name=DatasetArn" })
+  @SpeakeasyMetadata({ data: "json, name=DatasetArn" })
   datasetArn?: string;
 
-  @Metadata({ data: "json, name=DatasetName" })
+  @SpeakeasyMetadata({ data: "json, name=DatasetName" })
   datasetName?: string;
 
-  @Metadata({ data: "json, name=DatasetType" })
+  @SpeakeasyMetadata({ data: "json, name=DatasetType" })
   datasetType?: DatasetTypeEnum;
 
-  @Metadata({ data: "json, name=Domain" })
+  @SpeakeasyMetadata({ data: "json, name=Domain" })
   domain?: DomainEnum;
 
-  @Metadata({ data: "json, name=EncryptionConfig" })
+  @SpeakeasyMetadata({ data: "json, name=EncryptionConfig" })
   encryptionConfig?: EncryptionConfig;
 
-  @Metadata({ data: "json, name=LastModificationTime" })
+  @SpeakeasyMetadata({ data: "json, name=LastModificationTime" })
   lastModificationTime?: Date;
 
-  @Metadata({ data: "json, name=Schema" })
+  @SpeakeasyMetadata({ data: "json, name=Schema" })
   schema?: Schema;
 
-  @Metadata({ data: "json, name=Status" })
+  @SpeakeasyMetadata({ data: "json, name=Status" })
   status?: string;
 }

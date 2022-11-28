@@ -1,8 +1,9 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 class GetPurchaseReservedInstancesOfferingActionEnum(str, Enum):
@@ -11,6 +12,10 @@ class GetPurchaseReservedInstancesOfferingActionEnum(str, Enum):
 
 @dataclass
 class GetPurchaseReservedInstancesOfferingLimitPrice:
+    r"""GetPurchaseReservedInstancesOfferingLimitPrice
+    Describes the limit price of a Reserved Instance offering.
+    """
+    
     amount: Optional[float] = field(default=None, metadata={'query_param': { 'field_name': 'Amount' }})
     currency_code: Optional[shared.CurrencyCodeValuesEnum] = field(default=None, metadata={'query_param': { 'field_name': 'CurrencyCode' }})
     
@@ -20,13 +25,13 @@ class GetPurchaseReservedInstancesOfferingVersionEnum(str, Enum):
 
 @dataclass
 class GetPurchaseReservedInstancesOfferingQueryParams:
-    action: GetPurchaseReservedInstancesOfferingActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetPurchaseReservedInstancesOfferingActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    instance_count: int = field(metadata={'query_param': { 'field_name': 'InstanceCount', 'style': 'form', 'explode': True }})
+    reserved_instances_offering_id: str = field(metadata={'query_param': { 'field_name': 'ReservedInstancesOfferingId', 'style': 'form', 'explode': True }})
+    version: GetPurchaseReservedInstancesOfferingVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     dry_run: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'DryRun', 'style': 'form', 'explode': True }})
-    instance_count: int = field(default=None, metadata={'query_param': { 'field_name': 'InstanceCount', 'style': 'form', 'explode': True }})
     limit_price: Optional[GetPurchaseReservedInstancesOfferingLimitPrice] = field(default=None, metadata={'query_param': { 'field_name': 'LimitPrice', 'style': 'form', 'explode': True }})
     purchase_time: Optional[datetime] = field(default=None, metadata={'query_param': { 'field_name': 'PurchaseTime', 'style': 'form', 'explode': True }})
-    reserved_instances_offering_id: str = field(default=None, metadata={'query_param': { 'field_name': 'ReservedInstancesOfferingId', 'style': 'form', 'explode': True }})
-    version: GetPurchaseReservedInstancesOfferingVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -42,13 +47,13 @@ class GetPurchaseReservedInstancesOfferingHeaders:
 
 @dataclass
 class GetPurchaseReservedInstancesOfferingRequest:
-    query_params: GetPurchaseReservedInstancesOfferingQueryParams = field(default=None)
-    headers: GetPurchaseReservedInstancesOfferingHeaders = field(default=None)
+    headers: GetPurchaseReservedInstancesOfferingHeaders = field()
+    query_params: GetPurchaseReservedInstancesOfferingQueryParams = field()
     
 
 @dataclass
 class GetPurchaseReservedInstancesOfferingResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

@@ -1,12 +1,29 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum GoogleCloudApigeeV1DataCollectorTypeEnum {
-    TypeUnspecified = "TYPE_UNSPECIFIED"
-,    Integer = "INTEGER"
-,    Float = "FLOAT"
-,    String = "STRING"
-,    Boolean = "BOOLEAN"
-,    Datetime = "DATETIME"
+    TypeUnspecified = "TYPE_UNSPECIFIED",
+    Integer = "INTEGER",
+    Float = "FLOAT",
+    String = "STRING",
+    Boolean = "BOOLEAN",
+    Datetime = "DATETIME"
+}
+
+
+// GoogleCloudApigeeV1DataCollectorInput
+/** 
+ * Data collector configuration.
+**/
+export class GoogleCloudApigeeV1DataCollectorInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=description" })
+  description?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=name" })
+  name?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=type" })
+  type?: GoogleCloudApigeeV1DataCollectorTypeEnum;
 }
 
 
@@ -15,18 +32,18 @@ export enum GoogleCloudApigeeV1DataCollectorTypeEnum {
  * Data collector configuration.
 **/
 export class GoogleCloudApigeeV1DataCollector extends SpeakeasyBase {
-  @Metadata({ data: "json, name=createdAt" })
+  @SpeakeasyMetadata({ data: "json, name=createdAt" })
   createdAt?: string;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=lastModifiedAt" })
+  @SpeakeasyMetadata({ data: "json, name=lastModifiedAt" })
   lastModifiedAt?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: GoogleCloudApigeeV1DataCollectorTypeEnum;
 }

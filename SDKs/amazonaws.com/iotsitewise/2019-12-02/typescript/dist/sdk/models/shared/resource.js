@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PortalResource } from "./portalresource";
 import { ProjectResource } from "./projectresource";
 // Resource
@@ -35,11 +35,11 @@ var Resource = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=portal" }),
+        SpeakeasyMetadata({ data: "json, name=portal" }),
         __metadata("design:type", PortalResource)
     ], Resource.prototype, "portal", void 0);
     __decorate([
-        Metadata({ data: "json, name=project" }),
+        SpeakeasyMetadata({ data: "json, name=project" }),
         __metadata("design:type", ProjectResource)
     ], Resource.prototype, "project", void 0);
     return Resource;

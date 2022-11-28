@@ -1,26 +1,26 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
-import { ContactToCreate } from "./contacttocreate";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { ContactToCreateInput } from "./contacttocreate";
+
 
 export enum BatchCreateContactsRequestSourcesEnum {
-    ReadSourceTypeUnspecified = "READ_SOURCE_TYPE_UNSPECIFIED"
-,    ReadSourceTypeProfile = "READ_SOURCE_TYPE_PROFILE"
-,    ReadSourceTypeContact = "READ_SOURCE_TYPE_CONTACT"
-,    ReadSourceTypeDomainContact = "READ_SOURCE_TYPE_DOMAIN_CONTACT"
+    ReadSourceTypeUnspecified = "READ_SOURCE_TYPE_UNSPECIFIED",
+    ReadSourceTypeProfile = "READ_SOURCE_TYPE_PROFILE",
+    ReadSourceTypeContact = "READ_SOURCE_TYPE_CONTACT",
+    ReadSourceTypeDomainContact = "READ_SOURCE_TYPE_DOMAIN_CONTACT"
 }
 
 
-// BatchCreateContactsRequest
+// BatchCreateContactsRequestInput
 /** 
  * A request to create a batch of contacts.
 **/
-export class BatchCreateContactsRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=contacts", elemType: shared.ContactToCreate })
-  contacts?: ContactToCreate[];
+export class BatchCreateContactsRequestInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=contacts", elemType: ContactToCreateInput })
+  contacts?: ContactToCreateInput[];
 
-  @Metadata({ data: "json, name=readMask" })
+  @SpeakeasyMetadata({ data: "json, name=readMask" })
   readMask?: string;
 
-  @Metadata({ data: "json, name=sources" })
+  @SpeakeasyMetadata({ data: "json, name=sources" })
   sources?: BatchCreateContactsRequestSourcesEnum[];
 }

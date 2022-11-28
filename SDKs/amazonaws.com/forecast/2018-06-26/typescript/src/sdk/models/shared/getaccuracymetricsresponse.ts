@@ -1,17 +1,17 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AutoMlOverrideStrategyEnum } from "./automloverridestrategyenum";
 import { OptimizationMetricEnum } from "./optimizationmetricenum";
 import { EvaluationResult } from "./evaluationresult";
 
 
+
 export class GetAccuracyMetricsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AutoMLOverrideStrategy" })
+  @SpeakeasyMetadata({ data: "json, name=AutoMLOverrideStrategy" })
   autoMlOverrideStrategy?: AutoMlOverrideStrategyEnum;
 
-  @Metadata({ data: "json, name=OptimizationMetric" })
+  @SpeakeasyMetadata({ data: "json, name=OptimizationMetric" })
   optimizationMetric?: OptimizationMetricEnum;
 
-  @Metadata({ data: "json, name=PredictorEvaluationResults", elemType: shared.EvaluationResult })
+  @SpeakeasyMetadata({ data: "json, name=PredictorEvaluationResults", elemType: EvaluationResult })
   predictorEvaluationResults?: EvaluationResult[];
 }

@@ -1,18 +1,22 @@
 from dataclasses import dataclass, field
-from typing import Enum,List
+from typing import List
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import webhookauthenticationtype_enum
-from . import webhookauthconfiguration
-from . import webhookfilterrule
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class WebhookDefinition:
-    authentication: webhookauthenticationtype_enum.WebhookAuthenticationTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'authentication' }})
-    authentication_configuration: webhookauthconfiguration.WebhookAuthConfiguration = field(default=None, metadata={'dataclasses_json': { 'field_name': 'authenticationConfiguration' }})
-    filters: List[webhookfilterrule.WebhookFilterRule] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'filters' }})
-    name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    target_action: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'targetAction' }})
-    target_pipeline: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'targetPipeline' }})
+    r"""WebhookDefinition
+    Represents information about a webhook and its definition.
+    """
+    
+    authentication: WebhookAuthenticationTypeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('authentication') }})
+    authentication_configuration: WebhookAuthConfiguration = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('authenticationConfiguration') }})
+    filters: List[WebhookFilterRule] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('filters') }})
+    name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    target_action: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('targetAction') }})
+    target_pipeline: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('targetPipeline') }})
     

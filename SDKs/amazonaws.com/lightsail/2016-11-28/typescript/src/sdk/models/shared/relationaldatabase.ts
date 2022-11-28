@@ -1,5 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RelationalDatabaseHardware } from "./relationaldatabasehardware";
 import { ResourceLocation } from "./resourcelocation";
 import { RelationalDatabaseEndpoint } from "./relationaldatabaseendpoint";
@@ -9,86 +8,87 @@ import { ResourceTypeEnum } from "./resourcetypeenum";
 import { Tag } from "./tag";
 
 
+
 // RelationalDatabase
 /** 
  * Describes a database.
 **/
 export class RelationalDatabase extends SpeakeasyBase {
-  @Metadata({ data: "json, name=arn" })
+  @SpeakeasyMetadata({ data: "json, name=arn" })
   arn?: string;
 
-  @Metadata({ data: "json, name=backupRetentionEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=backupRetentionEnabled" })
   backupRetentionEnabled?: boolean;
 
-  @Metadata({ data: "json, name=caCertificateIdentifier" })
+  @SpeakeasyMetadata({ data: "json, name=caCertificateIdentifier" })
   caCertificateIdentifier?: string;
 
-  @Metadata({ data: "json, name=createdAt" })
+  @SpeakeasyMetadata({ data: "json, name=createdAt" })
   createdAt?: Date;
 
-  @Metadata({ data: "json, name=engine" })
+  @SpeakeasyMetadata({ data: "json, name=engine" })
   engine?: string;
 
-  @Metadata({ data: "json, name=engineVersion" })
+  @SpeakeasyMetadata({ data: "json, name=engineVersion" })
   engineVersion?: string;
 
-  @Metadata({ data: "json, name=hardware" })
+  @SpeakeasyMetadata({ data: "json, name=hardware" })
   hardware?: RelationalDatabaseHardware;
 
-  @Metadata({ data: "json, name=latestRestorableTime" })
+  @SpeakeasyMetadata({ data: "json, name=latestRestorableTime" })
   latestRestorableTime?: Date;
 
-  @Metadata({ data: "json, name=location" })
+  @SpeakeasyMetadata({ data: "json, name=location" })
   location?: ResourceLocation;
 
-  @Metadata({ data: "json, name=masterDatabaseName" })
+  @SpeakeasyMetadata({ data: "json, name=masterDatabaseName" })
   masterDatabaseName?: string;
 
-  @Metadata({ data: "json, name=masterEndpoint" })
+  @SpeakeasyMetadata({ data: "json, name=masterEndpoint" })
   masterEndpoint?: RelationalDatabaseEndpoint;
 
-  @Metadata({ data: "json, name=masterUsername" })
+  @SpeakeasyMetadata({ data: "json, name=masterUsername" })
   masterUsername?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=parameterApplyStatus" })
+  @SpeakeasyMetadata({ data: "json, name=parameterApplyStatus" })
   parameterApplyStatus?: string;
 
-  @Metadata({ data: "json, name=pendingMaintenanceActions", elemType: shared.PendingMaintenanceAction })
+  @SpeakeasyMetadata({ data: "json, name=pendingMaintenanceActions", elemType: PendingMaintenanceAction })
   pendingMaintenanceActions?: PendingMaintenanceAction[];
 
-  @Metadata({ data: "json, name=pendingModifiedValues" })
+  @SpeakeasyMetadata({ data: "json, name=pendingModifiedValues" })
   pendingModifiedValues?: PendingModifiedRelationalDatabaseValues;
 
-  @Metadata({ data: "json, name=preferredBackupWindow" })
+  @SpeakeasyMetadata({ data: "json, name=preferredBackupWindow" })
   preferredBackupWindow?: string;
 
-  @Metadata({ data: "json, name=preferredMaintenanceWindow" })
+  @SpeakeasyMetadata({ data: "json, name=preferredMaintenanceWindow" })
   preferredMaintenanceWindow?: string;
 
-  @Metadata({ data: "json, name=publiclyAccessible" })
+  @SpeakeasyMetadata({ data: "json, name=publiclyAccessible" })
   publiclyAccessible?: boolean;
 
-  @Metadata({ data: "json, name=relationalDatabaseBlueprintId" })
+  @SpeakeasyMetadata({ data: "json, name=relationalDatabaseBlueprintId" })
   relationalDatabaseBlueprintId?: string;
 
-  @Metadata({ data: "json, name=relationalDatabaseBundleId" })
+  @SpeakeasyMetadata({ data: "json, name=relationalDatabaseBundleId" })
   relationalDatabaseBundleId?: string;
 
-  @Metadata({ data: "json, name=resourceType" })
+  @SpeakeasyMetadata({ data: "json, name=resourceType" })
   resourceType?: ResourceTypeEnum;
 
-  @Metadata({ data: "json, name=secondaryAvailabilityZone" })
+  @SpeakeasyMetadata({ data: "json, name=secondaryAvailabilityZone" })
   secondaryAvailabilityZone?: string;
 
-  @Metadata({ data: "json, name=state" })
+  @SpeakeasyMetadata({ data: "json, name=state" })
   state?: string;
 
-  @Metadata({ data: "json, name=supportCode" })
+  @SpeakeasyMetadata({ data: "json, name=supportCode" })
   supportCode?: string;
 
-  @Metadata({ data: "json, name=tags", elemType: shared.Tag })
+  @SpeakeasyMetadata({ data: "json, name=tags", elemType: Tag })
   tags?: Tag[];
 }

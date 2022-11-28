@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ReportMetadata } from "./reportmetadata";
+
 
 
 // ReportMetadatas
@@ -8,6 +8,6 @@ import { ReportMetadata } from "./reportmetadata";
  * This type defines the metadata used by the all report types.
 **/
 export class ReportMetadatas extends SpeakeasyBase {
-  @Metadata({ data: "json, name=reportMetadata", elemType: shared.ReportMetadata })
+  @SpeakeasyMetadata({ data: "json, name=reportMetadata", elemType: ReportMetadata })
   reportMetadata?: ReportMetadata[];
 }

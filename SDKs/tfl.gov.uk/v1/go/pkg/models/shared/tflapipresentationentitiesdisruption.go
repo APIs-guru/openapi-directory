@@ -16,6 +16,8 @@ const (
 	TflAPIPresentationEntitiesDisruptionCategoryEnumStatusAlert TflAPIPresentationEntitiesDisruptionCategoryEnum = "StatusAlert"
 )
 
+// TflAPIPresentationEntitiesDisruption
+// Represents a disruption to a route within the transport network.
 type TflAPIPresentationEntitiesDisruption struct {
 	AdditionalInfo      *string                                           `json:"additionalInfo,omitempty"`
 	AffectedRoutes      []TflAPIPresentationEntitiesRouteSection          `json:"affectedRoutes,omitempty"`

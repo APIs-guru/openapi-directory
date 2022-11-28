@@ -1,28 +1,29 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class TrendingGetTrendingEntryDetailPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=identifier" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=identifier" })
   identifier: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=trendingEntryType" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=trendingEntryType" })
   trendingEntryType: number;
 }
 
 
 export class TrendingGetTrendingEntryDetailRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: TrendingGetTrendingEntryDetailPathParams;
 }
 
 
 export class TrendingGetTrendingEntryDetailResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

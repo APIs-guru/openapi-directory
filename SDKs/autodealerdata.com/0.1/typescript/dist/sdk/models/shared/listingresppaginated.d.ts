@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { Listing } from "./listing";
 export declare class ListingRespPaginated extends SpeakeasyBase {
     listings: Listing[];

@@ -1,12 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DrivelabelsLabelsRevisionsPermissionsBatchDeletePathParams:
-    labels_id: str = field(default=None, metadata={'path_param': { 'field_name': 'labelsId', 'style': 'simple', 'explode': False }})
-    revisions_id: str = field(default=None, metadata={'path_param': { 'field_name': 'revisionsId', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,14 +26,14 @@ class DrivelabelsLabelsRevisionsPermissionsBatchDeleteQueryParams:
 
 @dataclass
 class DrivelabelsLabelsRevisionsPermissionsBatchDeleteRequest:
-    path_params: DrivelabelsLabelsRevisionsPermissionsBatchDeletePathParams = field(default=None)
-    query_params: DrivelabelsLabelsRevisionsPermissionsBatchDeleteQueryParams = field(default=None)
+    path_params: DrivelabelsLabelsRevisionsPermissionsBatchDeletePathParams = field()
+    query_params: DrivelabelsLabelsRevisionsPermissionsBatchDeleteQueryParams = field()
     request: Optional[shared.GoogleAppsDriveLabelsV2betaBatchDeleteLabelPermissionsRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class DrivelabelsLabelsRevisionsPermissionsBatchDeleteResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_protobuf_empty: Optional[dict[str, Any]] = field(default=None)
-    status_code: int = field(default=None)
     

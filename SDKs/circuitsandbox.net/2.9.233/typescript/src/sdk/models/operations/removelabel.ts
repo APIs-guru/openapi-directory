@@ -1,38 +1,39 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class RemoveLabelPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=labelId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=labelId" })
   labelId: string;
 }
 
 
 export class RemoveLabelSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   oauth: shared.SchemeOauth;
 }
 
 
 export class RemoveLabelRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: RemoveLabelPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: RemoveLabelSecurity;
 }
 
 
 export class RemoveLabelResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   label?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

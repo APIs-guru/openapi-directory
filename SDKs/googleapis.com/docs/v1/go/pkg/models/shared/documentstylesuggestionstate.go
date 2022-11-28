@@ -1,5 +1,7 @@
 package shared
 
+// DocumentStyleSuggestionState
+// A mask that indicates which of the fields on the base DocumentStyle have been changed in this suggestion. For any field set to true, there's a new suggested value.
 type DocumentStyleSuggestionState struct {
 	BackgroundSuggestionState             *BackgroundSuggestionState `json:"backgroundSuggestionState,omitempty"`
 	DefaultFooterIDSuggested              *bool                      `json:"defaultFooterIdSuggested,omitempty"`

@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AwsCorsConfiguration } from "./awscorsconfiguration";
+
 
 
 // AwsApiGatewayV2ApiDetails
@@ -7,33 +8,33 @@ import { AwsCorsConfiguration } from "./awscorsconfiguration";
  * Contains information about a version 2 API in Amazon API Gateway.
 **/
 export class AwsApiGatewayV2ApiDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ApiEndpoint" })
+  @SpeakeasyMetadata({ data: "json, name=ApiEndpoint" })
   apiEndpoint?: string;
 
-  @Metadata({ data: "json, name=ApiId" })
+  @SpeakeasyMetadata({ data: "json, name=ApiId" })
   apiId?: string;
 
-  @Metadata({ data: "json, name=ApiKeySelectionExpression" })
+  @SpeakeasyMetadata({ data: "json, name=ApiKeySelectionExpression" })
   apiKeySelectionExpression?: string;
 
-  @Metadata({ data: "json, name=CorsConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=CorsConfiguration" })
   corsConfiguration?: AwsCorsConfiguration;
 
-  @Metadata({ data: "json, name=CreatedDate" })
+  @SpeakeasyMetadata({ data: "json, name=CreatedDate" })
   createdDate?: string;
 
-  @Metadata({ data: "json, name=Description" })
+  @SpeakeasyMetadata({ data: "json, name=Description" })
   description?: string;
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name?: string;
 
-  @Metadata({ data: "json, name=ProtocolType" })
+  @SpeakeasyMetadata({ data: "json, name=ProtocolType" })
   protocolType?: string;
 
-  @Metadata({ data: "json, name=RouteSelectionExpression" })
+  @SpeakeasyMetadata({ data: "json, name=RouteSelectionExpression" })
   routeSelectionExpression?: string;
 
-  @Metadata({ data: "json, name=Version" })
+  @SpeakeasyMetadata({ data: "json, name=Version" })
   version?: string;
 }

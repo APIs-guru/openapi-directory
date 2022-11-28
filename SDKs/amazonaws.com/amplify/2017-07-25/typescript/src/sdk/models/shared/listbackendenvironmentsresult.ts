@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BackendEnvironment } from "./backendenvironment";
+
 
 
 // ListBackendEnvironmentsResult
@@ -8,9 +8,9 @@ import { BackendEnvironment } from "./backendenvironment";
  *  The result structure for the list backend environments result. 
 **/
 export class ListBackendEnvironmentsResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=backendEnvironments", elemType: shared.BackendEnvironment })
+  @SpeakeasyMetadata({ data: "json, name=backendEnvironments", elemType: BackendEnvironment })
   backendEnvironments: BackendEnvironment[];
 
-  @Metadata({ data: "json, name=nextToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextToken" })
   nextToken?: string;
 }

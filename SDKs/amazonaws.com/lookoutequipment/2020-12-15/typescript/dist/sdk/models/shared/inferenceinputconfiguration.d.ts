@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { InferenceInputNameConfiguration } from "./inferenceinputnameconfiguration";
 import { InferenceS3InputConfiguration } from "./inferences3inputconfiguration";
 /**

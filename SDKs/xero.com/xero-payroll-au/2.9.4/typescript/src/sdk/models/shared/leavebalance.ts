@@ -1,16 +1,17 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class LeaveBalance extends SpeakeasyBase {
-  @Metadata({ data: "json, name=LeaveName" })
+  @SpeakeasyMetadata({ data: "json, name=LeaveName" })
   leaveName?: string;
 
-  @Metadata({ data: "json, name=LeaveTypeID" })
+  @SpeakeasyMetadata({ data: "json, name=LeaveTypeID" })
   leaveTypeId?: string;
 
-  @Metadata({ data: "json, name=NumberOfUnits" })
+  @SpeakeasyMetadata({ data: "json, name=NumberOfUnits" })
   numberOfUnits?: number;
 
-  @Metadata({ data: "json, name=TypeOfUnits" })
+  @SpeakeasyMetadata({ data: "json, name=TypeOfUnits" })
   typeOfUnits?: string;
 }

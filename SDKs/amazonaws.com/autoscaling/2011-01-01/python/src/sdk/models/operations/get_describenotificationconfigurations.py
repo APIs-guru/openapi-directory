@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 
 class GetDescribeNotificationConfigurationsActionEnum(str, Enum):
     DESCRIBE_NOTIFICATION_CONFIGURATIONS = "DescribeNotificationConfigurations"
@@ -10,11 +14,11 @@ class GetDescribeNotificationConfigurationsVersionEnum(str, Enum):
 
 @dataclass
 class GetDescribeNotificationConfigurationsQueryParams:
-    action: GetDescribeNotificationConfigurationsActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetDescribeNotificationConfigurationsActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: GetDescribeNotificationConfigurationsVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     auto_scaling_group_names: Optional[List[str]] = field(default=None, metadata={'query_param': { 'field_name': 'AutoScalingGroupNames', 'style': 'form', 'explode': True }})
     max_records: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'MaxRecords', 'style': 'form', 'explode': True }})
     next_token: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'NextToken', 'style': 'form', 'explode': True }})
-    version: GetDescribeNotificationConfigurationsVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -30,13 +34,13 @@ class GetDescribeNotificationConfigurationsHeaders:
 
 @dataclass
 class GetDescribeNotificationConfigurationsRequest:
-    query_params: GetDescribeNotificationConfigurationsQueryParams = field(default=None)
-    headers: GetDescribeNotificationConfigurationsHeaders = field(default=None)
+    headers: GetDescribeNotificationConfigurationsHeaders = field()
+    query_params: GetDescribeNotificationConfigurationsQueryParams = field()
     
 
 @dataclass
 class GetDescribeNotificationConfigurationsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

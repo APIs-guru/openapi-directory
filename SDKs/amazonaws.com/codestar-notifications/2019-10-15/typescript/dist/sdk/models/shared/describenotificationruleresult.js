@@ -22,57 +22,58 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DetailTypeEnum } from "./detailtypeenum";
+import { EventTypeSummary } from "./eventtypesummary";
 import { NotificationRuleStatusEnum } from "./notificationrulestatusenum";
+import { TargetSummary } from "./targetsummary";
 var DescribeNotificationRuleResult = /** @class */ (function (_super) {
     __extends(DescribeNotificationRuleResult, _super);
     function DescribeNotificationRuleResult() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Arn" }),
+        SpeakeasyMetadata({ data: "json, name=Arn" }),
         __metadata("design:type", String)
     ], DescribeNotificationRuleResult.prototype, "arn", void 0);
     __decorate([
-        Metadata({ data: "json, name=CreatedBy" }),
+        SpeakeasyMetadata({ data: "json, name=CreatedBy" }),
         __metadata("design:type", String)
     ], DescribeNotificationRuleResult.prototype, "createdBy", void 0);
     __decorate([
-        Metadata({ data: "json, name=CreatedTimestamp" }),
+        SpeakeasyMetadata({ data: "json, name=CreatedTimestamp" }),
         __metadata("design:type", Date)
     ], DescribeNotificationRuleResult.prototype, "createdTimestamp", void 0);
     __decorate([
-        Metadata({ data: "json, name=DetailType" }),
+        SpeakeasyMetadata({ data: "json, name=DetailType" }),
         __metadata("design:type", String)
     ], DescribeNotificationRuleResult.prototype, "detailType", void 0);
     __decorate([
-        Metadata({ data: "json, name=EventTypes", elemType: shared.EventTypeSummary }),
+        SpeakeasyMetadata({ data: "json, name=EventTypes", elemType: EventTypeSummary }),
         __metadata("design:type", Array)
     ], DescribeNotificationRuleResult.prototype, "eventTypes", void 0);
     __decorate([
-        Metadata({ data: "json, name=LastModifiedTimestamp" }),
+        SpeakeasyMetadata({ data: "json, name=LastModifiedTimestamp" }),
         __metadata("design:type", Date)
     ], DescribeNotificationRuleResult.prototype, "lastModifiedTimestamp", void 0);
     __decorate([
-        Metadata({ data: "json, name=Name" }),
+        SpeakeasyMetadata({ data: "json, name=Name" }),
         __metadata("design:type", String)
     ], DescribeNotificationRuleResult.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=Resource" }),
+        SpeakeasyMetadata({ data: "json, name=Resource" }),
         __metadata("design:type", String)
     ], DescribeNotificationRuleResult.prototype, "resource", void 0);
     __decorate([
-        Metadata({ data: "json, name=Status" }),
+        SpeakeasyMetadata({ data: "json, name=Status" }),
         __metadata("design:type", String)
     ], DescribeNotificationRuleResult.prototype, "status", void 0);
     __decorate([
-        Metadata({ data: "json, name=Tags" }),
+        SpeakeasyMetadata({ data: "json, name=Tags" }),
         __metadata("design:type", Map)
     ], DescribeNotificationRuleResult.prototype, "tags", void 0);
     __decorate([
-        Metadata({ data: "json, name=Targets", elemType: shared.TargetSummary }),
+        SpeakeasyMetadata({ data: "json, name=Targets", elemType: TargetSummary }),
         __metadata("design:type", Array)
     ], DescribeNotificationRuleResult.prototype, "targets", void 0);
     return DescribeNotificationRuleResult;

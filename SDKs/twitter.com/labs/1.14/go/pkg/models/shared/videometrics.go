@@ -1,5 +1,7 @@
 package shared
 
+// VideoMetrics
+// Metrics corresponding to a Video.
 type VideoMetrics struct {
 	MediaKey         string `json:"media_key"`
 	Playback0Count   *int32 `json:"playback_0_count,omitempty"`

@@ -20,6 +20,8 @@ const (
 	CreateExportRequestBodyFileFormatEnumLexJSON CreateExportRequestBodyFileFormatEnum = "LexJson"
 )
 
+// CreateExportRequestBodyResourceSpecification
+// Provides information about the bot or bot locale that you want to export. You can specify the <code>botExportSpecification</code> or the <code>botLocaleExportSpecification</code>, but not both.
 type CreateExportRequestBodyResourceSpecification struct {
 	BotExportSpecification       *shared.BotExportSpecification       `json:"botExportSpecification,omitempty"`
 	BotLocaleExportSpecification *shared.BotLocaleExportSpecification `json:"botLocaleExportSpecification,omitempty"`

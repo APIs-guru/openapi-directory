@@ -26,6 +26,8 @@ type TeamDiscussionCommentSimpleUser struct {
 	URL               string  `json:"url"`
 }
 
+// TeamDiscussionComment
+// A reply to a discussion within a team.
 type TeamDiscussionComment struct {
 	Author        TeamDiscussionCommentSimpleUser `json:"author"`
 	Body          string                          `json:"body"`

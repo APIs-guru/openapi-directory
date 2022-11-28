@@ -1,11 +1,15 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DataplexProjectsLocationsLakesZonesEntitiesPartitionsCreatePathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,21 +30,21 @@ class DataplexProjectsLocationsLakesZonesEntitiesPartitionsCreateQueryParams:
 
 @dataclass
 class DataplexProjectsLocationsLakesZonesEntitiesPartitionsCreateSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DataplexProjectsLocationsLakesZonesEntitiesPartitionsCreateRequest:
-    path_params: DataplexProjectsLocationsLakesZonesEntitiesPartitionsCreatePathParams = field(default=None)
-    query_params: DataplexProjectsLocationsLakesZonesEntitiesPartitionsCreateQueryParams = field(default=None)
-    request: Optional[shared.GoogleCloudDataplexV1Partition] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: DataplexProjectsLocationsLakesZonesEntitiesPartitionsCreateSecurity = field(default=None)
+    path_params: DataplexProjectsLocationsLakesZonesEntitiesPartitionsCreatePathParams = field()
+    query_params: DataplexProjectsLocationsLakesZonesEntitiesPartitionsCreateQueryParams = field()
+    security: DataplexProjectsLocationsLakesZonesEntitiesPartitionsCreateSecurity = field()
+    request: Optional[shared.GoogleCloudDataplexV1PartitionInput] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class DataplexProjectsLocationsLakesZonesEntitiesPartitionsCreateResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_cloud_dataplex_v1_partition: Optional[shared.GoogleCloudDataplexV1Partition] = field(default=None)
-    status_code: int = field(default=None)
     

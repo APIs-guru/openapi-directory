@@ -1,8 +1,10 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
+from sdk.models import shared
 
 class AddRecentSpaceSearchRequestBodyScopeEnum(str, Enum):
     ALL = "ALL"
@@ -16,25 +18,25 @@ class AddRecentSpaceSearchRequestBodyScopeEnum(str, Enum):
 
 @dataclass
 class AddRecentSpaceSearchRequestBody:
+    scope: AddRecentSpaceSearchRequestBodyScopeEnum = field(metadata={'form': { 'field_name': 'scope' }})
+    search_term: str = field(metadata={'form': { 'field_name': 'searchTerm' }})
     end_time: Optional[datetime] = field(default=None, metadata={'form': { 'field_name': 'endTime' }})
-    scope: AddRecentSpaceSearchRequestBodyScopeEnum = field(default=None, metadata={'form': { 'field_name': 'scope' }})
-    search_term: str = field(default=None, metadata={'form': { 'field_name': 'searchTerm' }})
     start_time: Optional[datetime] = field(default=None, metadata={'form': { 'field_name': 'startTime' }})
     
 
 @dataclass
 class AddRecentSpaceSearchSecurity:
-    oauth: shared.SchemeOauth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth: shared.SchemeOauth = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class AddRecentSpaceSearchRequest:
-    request: AddRecentSpaceSearchRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
-    security: AddRecentSpaceSearchSecurity = field(default=None)
+    request: AddRecentSpaceSearchRequestBody = field(metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    security: AddRecentSpaceSearchSecurity = field()
     
 
 @dataclass
 class AddRecentSpaceSearchResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

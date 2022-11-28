@@ -1,4 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CallbackStepMetadata } from "./callbackstepmetadata";
 import { ConditionStepMetadata } from "./conditionstepmetadata";
 import { LambdaStepMetadata } from "./lambdastepmetadata";
@@ -10,35 +10,36 @@ import { TransformJobStepMetadata } from "./transformjobstepmetadata";
 import { TuningJobStepMetaData } from "./tuningjobstepmetadata";
 
 
+
 // PipelineExecutionStepMetadata
 /** 
  * Metadata for a step execution.
 **/
 export class PipelineExecutionStepMetadata extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Callback" })
+  @SpeakeasyMetadata({ data: "json, name=Callback" })
   callback?: CallbackStepMetadata;
 
-  @Metadata({ data: "json, name=Condition" })
+  @SpeakeasyMetadata({ data: "json, name=Condition" })
   condition?: ConditionStepMetadata;
 
-  @Metadata({ data: "json, name=Lambda" })
+  @SpeakeasyMetadata({ data: "json, name=Lambda" })
   lambda?: LambdaStepMetadata;
 
-  @Metadata({ data: "json, name=Model" })
+  @SpeakeasyMetadata({ data: "json, name=Model" })
   model?: ModelStepMetadata;
 
-  @Metadata({ data: "json, name=ProcessingJob" })
+  @SpeakeasyMetadata({ data: "json, name=ProcessingJob" })
   processingJob?: ProcessingJobStepMetadata;
 
-  @Metadata({ data: "json, name=RegisterModel" })
+  @SpeakeasyMetadata({ data: "json, name=RegisterModel" })
   registerModel?: RegisterModelStepMetadata;
 
-  @Metadata({ data: "json, name=TrainingJob" })
+  @SpeakeasyMetadata({ data: "json, name=TrainingJob" })
   trainingJob?: TrainingJobStepMetadata;
 
-  @Metadata({ data: "json, name=TransformJob" })
+  @SpeakeasyMetadata({ data: "json, name=TransformJob" })
   transformJob?: TransformJobStepMetadata;
 
-  @Metadata({ data: "json, name=TuningJob" })
+  @SpeakeasyMetadata({ data: "json, name=TuningJob" })
   tuningJob?: TuningJobStepMetaData;
 }

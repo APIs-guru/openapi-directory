@@ -1,11 +1,15 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class GetCandidateCandidateIDCommitteesPathParams:
-    candidate_id: str = field(default=None, metadata={'path_param': { 'field_name': 'candidate_id', 'style': 'simple', 'explode': False }})
+    candidate_id: str = field(metadata={'path_param': { 'field_name': 'candidate_id', 'style': 'simple', 'explode': False }})
     
 class GetCandidateCandidateIDCommitteesCommitteeTypeEnum(str, Enum):
     UNKNOWN = ""
@@ -58,7 +62,7 @@ class GetCandidateCandidateIDCommitteesOrganizationTypeEnum(str, Enum):
 
 @dataclass
 class GetCandidateCandidateIDCommitteesQueryParams:
-    api_key: str = field(default=None, metadata={'query_param': { 'field_name': 'api_key', 'style': 'form', 'explode': True }})
+    api_key: str = field(metadata={'query_param': { 'field_name': 'api_key', 'style': 'form', 'explode': True }})
     committee_type: Optional[List[GetCandidateCandidateIDCommitteesCommitteeTypeEnum]] = field(default=None, metadata={'query_param': { 'field_name': 'committee_type', 'style': 'form', 'explode': True }})
     cycle: Optional[List[int]] = field(default=None, metadata={'query_param': { 'field_name': 'cycle', 'style': 'form', 'explode': True }})
     designation: Optional[List[GetCandidateCandidateIDCommitteesDesignationEnum]] = field(default=None, metadata={'query_param': { 'field_name': 'designation', 'style': 'form', 'explode': True }})
@@ -75,13 +79,13 @@ class GetCandidateCandidateIDCommitteesQueryParams:
 
 @dataclass
 class GetCandidateCandidateIDCommitteesRequest:
-    path_params: GetCandidateCandidateIDCommitteesPathParams = field(default=None)
-    query_params: GetCandidateCandidateIDCommitteesQueryParams = field(default=None)
+    path_params: GetCandidateCandidateIDCommitteesPathParams = field()
+    query_params: GetCandidateCandidateIDCommitteesQueryParams = field()
     
 
 @dataclass
 class GetCandidateCandidateIDCommitteesResponse:
+    content_type: str = field()
+    status_code: int = field()
     committee_detail_page: Optional[shared.CommitteeDetailPage] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

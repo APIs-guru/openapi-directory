@@ -22,45 +22,25 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
-var PostEventsV3SendSecurityOption1 = /** @class */ (function (_super) {
-    __extends(PostEventsV3SendSecurityOption1, _super);
-    function PostEventsV3SendSecurityOption1() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=query" }),
-        __metadata("design:type", shared.SchemeHapikey)
-    ], PostEventsV3SendSecurityOption1.prototype, "hapikey", void 0);
-    return PostEventsV3SendSecurityOption1;
-}(SpeakeasyBase));
-export { PostEventsV3SendSecurityOption1 };
-var PostEventsV3SendSecurityOption2 = /** @class */ (function (_super) {
-    __extends(PostEventsV3SendSecurityOption2, _super);
-    function PostEventsV3SendSecurityOption2() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
-        __metadata("design:type", shared.SchemeOauth2Legacy)
-    ], PostEventsV3SendSecurityOption2.prototype, "oauth2Legacy", void 0);
-    return PostEventsV3SendSecurityOption2;
-}(SpeakeasyBase));
-export { PostEventsV3SendSecurityOption2 };
 var PostEventsV3SendSecurity = /** @class */ (function (_super) {
     __extends(PostEventsV3SendSecurity, _super);
     function PostEventsV3SendSecurity() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, option=true" }),
-        __metadata("design:type", PostEventsV3SendSecurityOption1)
-    ], PostEventsV3SendSecurity.prototype, "option1", void 0);
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=query" }),
+        __metadata("design:type", shared.SchemeHapikey)
+    ], PostEventsV3SendSecurity.prototype, "hapikey", void 0);
     __decorate([
-        Metadata({ data: "security, option=true" }),
-        __metadata("design:type", PostEventsV3SendSecurityOption2)
-    ], PostEventsV3SendSecurity.prototype, "option2", void 0);
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        __metadata("design:type", shared.SchemePrivateAppsLegacy)
+    ], PostEventsV3SendSecurity.prototype, "privateAppsLegacy", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
+        __metadata("design:type", shared.SchemeOauth2Legacy)
+    ], PostEventsV3SendSecurity.prototype, "oauth2Legacy", void 0);
     return PostEventsV3SendSecurity;
 }(SpeakeasyBase));
 export { PostEventsV3SendSecurity };
@@ -70,11 +50,11 @@ var PostEventsV3SendRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", shared.BehavioralEventHttpCompletionRequest)
     ], PostEventsV3SendRequest.prototype, "request", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PostEventsV3SendSecurity)
     ], PostEventsV3SendRequest.prototype, "security", void 0);
     return PostEventsV3SendRequest;
@@ -86,15 +66,15 @@ var PostEventsV3SendResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], PostEventsV3SendResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], PostEventsV3SendResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], PostEventsV3SendResponse.prototype, "statusCode", void 0);
     return PostEventsV3SendResponse;

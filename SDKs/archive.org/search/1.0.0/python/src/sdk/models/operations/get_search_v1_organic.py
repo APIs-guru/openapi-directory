@@ -14,14 +14,14 @@ class GetSearchV1OrganicQueryParams:
 
 @dataclass
 class GetSearchV1OrganicRequest:
-    query_params: GetSearchV1OrganicQueryParams = field(default=None)
+    query_params: GetSearchV1OrganicQueryParams = field()
     
 
 @dataclass
 class GetSearchV1OrganicResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     error: Optional[Any] = field(default=None)
     organic_result: Optional[shared.OrganicResult] = field(default=None)
-    status_code: int = field(default=None)
     

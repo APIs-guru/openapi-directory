@@ -6,14 +6,14 @@ type SavePostLocationRequestBody struct {
 	Name      string  `multipartForm:"name=name"`
 }
 
-type SavePostLocationRequest struct {
-	Request SavePostLocationRequestBody `request:"mediaType=multipart/form-data"`
-}
-
 type SavePostLocation200ApplicationJSON struct {
 	Latitude  *float64 `json:"latitude,omitempty"`
 	Longitude *float64 `json:"longitude,omitempty"`
 	Name      *string  `json:"name,omitempty"`
+}
+
+type SavePostLocationRequest struct {
+	Request SavePostLocationRequestBody `request:"mediaType=multipart/form-data"`
 }
 
 type SavePostLocationResponse struct {

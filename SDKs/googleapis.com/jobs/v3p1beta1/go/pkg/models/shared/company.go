@@ -13,6 +13,8 @@ const (
 	CompanySizeEnumGiant                  CompanySizeEnum = "GIANT"
 )
 
+// Company
+// A Company resource represents a company in the service. A company is the entity that owns job postings, that is, the hiring entity responsible for employing applicants for the job position.
 type Company struct {
 	CareerSiteURI                        *string             `json:"careerSiteUri,omitempty"`
 	DerivedInfo                          *CompanyDerivedInfo `json:"derivedInfo,omitempty"`

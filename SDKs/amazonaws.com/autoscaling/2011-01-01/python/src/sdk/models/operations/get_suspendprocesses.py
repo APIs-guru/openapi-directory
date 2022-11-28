@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 
 class GetSuspendProcessesActionEnum(str, Enum):
     SUSPEND_PROCESSES = "SuspendProcesses"
@@ -10,10 +14,10 @@ class GetSuspendProcessesVersionEnum(str, Enum):
 
 @dataclass
 class GetSuspendProcessesQueryParams:
-    action: GetSuspendProcessesActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    auto_scaling_group_name: str = field(default=None, metadata={'query_param': { 'field_name': 'AutoScalingGroupName', 'style': 'form', 'explode': True }})
+    action: GetSuspendProcessesActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    auto_scaling_group_name: str = field(metadata={'query_param': { 'field_name': 'AutoScalingGroupName', 'style': 'form', 'explode': True }})
+    version: GetSuspendProcessesVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     scaling_processes: Optional[List[str]] = field(default=None, metadata={'query_param': { 'field_name': 'ScalingProcesses', 'style': 'form', 'explode': True }})
-    version: GetSuspendProcessesVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -29,13 +33,13 @@ class GetSuspendProcessesHeaders:
 
 @dataclass
 class GetSuspendProcessesRequest:
-    query_params: GetSuspendProcessesQueryParams = field(default=None)
-    headers: GetSuspendProcessesHeaders = field(default=None)
+    headers: GetSuspendProcessesHeaders = field()
+    query_params: GetSuspendProcessesQueryParams = field()
     
 
 @dataclass
 class GetSuspendProcessesResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

@@ -1,46 +1,47 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ContentSearchContentByTagAndTypePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=locale" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=locale" })
   locale: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=tag" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=tag" })
   tag: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=type" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=type" })
   type: string;
 }
 
 
 export class ContentSearchContentByTagAndTypeQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=currentpage" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=currentpage" })
   currentpage?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=head" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=head" })
   head?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=itemsperpage" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=itemsperpage" })
   itemsperpage?: number;
 }
 
 
 export class ContentSearchContentByTagAndTypeRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: ContentSearchContentByTagAndTypePathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: ContentSearchContentByTagAndTypeQueryParams;
 }
 
 
 export class ContentSearchContentByTagAndTypeResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

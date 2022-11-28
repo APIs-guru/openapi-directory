@@ -9,6 +9,8 @@ const (
 	AnnotateTextRequestEncodingTypeEnumUtf32 AnnotateTextRequestEncodingTypeEnum = "UTF32"
 )
 
+// AnnotateTextRequest
+// The request message for the text annotation API, which can perform multiple analysis types (sentiment, entities, and syntax) in one call.
 type AnnotateTextRequest struct {
 	Document     *Document                            `json:"document,omitempty"`
 	EncodingType *AnnotateTextRequestEncodingTypeEnum `json:"encodingType,omitempty"`

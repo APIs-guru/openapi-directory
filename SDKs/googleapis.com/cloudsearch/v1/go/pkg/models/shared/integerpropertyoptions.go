@@ -8,6 +8,8 @@ const (
 	IntegerPropertyOptionsOrderedRankingEnumDescending IntegerPropertyOptionsOrderedRankingEnum = "DESCENDING"
 )
 
+// IntegerPropertyOptions
+// The options for integer properties.
 type IntegerPropertyOptions struct {
 	MaximumValue    *string                                   `json:"maximumValue,omitempty"`
 	MinimumValue    *string                                   `json:"minimumValue,omitempty"`

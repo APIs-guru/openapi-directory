@@ -1,7 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GooglePrivacyDlpV2FieldId } from "./googleprivacydlpv2fieldid";
-import { GooglePrivacyDlpV2FieldId } from "./googleprivacydlpv2fieldid";
+
 
 
 // GooglePrivacyDlpV2LDiversityConfig
@@ -9,9 +8,9 @@ import { GooglePrivacyDlpV2FieldId } from "./googleprivacydlpv2fieldid";
  * l-diversity metric, used for analysis of reidentification risk.
 **/
 export class GooglePrivacyDlpV2LDiversityConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=quasiIds", elemType: shared.GooglePrivacyDlpV2FieldId })
+  @SpeakeasyMetadata({ data: "json, name=quasiIds", elemType: GooglePrivacyDlpV2FieldId })
   quasiIds?: GooglePrivacyDlpV2FieldId[];
 
-  @Metadata({ data: "json, name=sensitiveAttribute" })
+  @SpeakeasyMetadata({ data: "json, name=sensitiveAttribute" })
   sensitiveAttribute?: GooglePrivacyDlpV2FieldId;
 }

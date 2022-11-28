@@ -1,5 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudDialogflowCxV3Fulfillment } from "./googleclouddialogflowcxv3fulfillment";
+import { GoogleCloudDialogflowCxV3FulfillmentInput } from "./googleclouddialogflowcxv3fulfillment";
+
 
 
 // GoogleCloudDialogflowCxV3EventHandler
@@ -7,18 +9,37 @@ import { GoogleCloudDialogflowCxV3Fulfillment } from "./googleclouddialogflowcxv
  * An event handler specifies an event that can be handled during a session. When the specified event happens, the following actions are taken in order: * If there is a `trigger_fulfillment` associated with the event, it will be called. * If there is a `target_page` associated with the event, the session will transition into the specified page. * If there is a `target_flow` associated with the event, the session will transition into the specified flow.
 **/
 export class GoogleCloudDialogflowCxV3EventHandler extends SpeakeasyBase {
-  @Metadata({ data: "json, name=event" })
+  @SpeakeasyMetadata({ data: "json, name=event" })
   event?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=targetFlow" })
+  @SpeakeasyMetadata({ data: "json, name=targetFlow" })
   targetFlow?: string;
 
-  @Metadata({ data: "json, name=targetPage" })
+  @SpeakeasyMetadata({ data: "json, name=targetPage" })
   targetPage?: string;
 
-  @Metadata({ data: "json, name=triggerFulfillment" })
+  @SpeakeasyMetadata({ data: "json, name=triggerFulfillment" })
   triggerFulfillment?: GoogleCloudDialogflowCxV3Fulfillment;
+}
+
+
+// GoogleCloudDialogflowCxV3EventHandlerInput
+/** 
+ * An event handler specifies an event that can be handled during a session. When the specified event happens, the following actions are taken in order: * If there is a `trigger_fulfillment` associated with the event, it will be called. * If there is a `target_page` associated with the event, the session will transition into the specified page. * If there is a `target_flow` associated with the event, the session will transition into the specified flow.
+**/
+export class GoogleCloudDialogflowCxV3EventHandlerInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=event" })
+  event?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=targetFlow" })
+  targetFlow?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=targetPage" })
+  targetPage?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=triggerFulfillment" })
+  triggerFulfillment?: GoogleCloudDialogflowCxV3FulfillmentInput;
 }

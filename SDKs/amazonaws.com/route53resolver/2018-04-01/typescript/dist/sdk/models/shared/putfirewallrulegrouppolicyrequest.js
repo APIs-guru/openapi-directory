@@ -22,18 +22,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var PutFirewallRuleGroupPolicyRequest = /** @class */ (function (_super) {
     __extends(PutFirewallRuleGroupPolicyRequest, _super);
     function PutFirewallRuleGroupPolicyRequest() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Arn" }),
+        SpeakeasyMetadata({ data: "json, name=Arn" }),
         __metadata("design:type", String)
     ], PutFirewallRuleGroupPolicyRequest.prototype, "arn", void 0);
     __decorate([
-        Metadata({ data: "json, name=FirewallRuleGroupPolicy" }),
+        SpeakeasyMetadata({ data: "json, name=FirewallRuleGroupPolicy" }),
         __metadata("design:type", String)
     ], PutFirewallRuleGroupPolicyRequest.prototype, "firewallRuleGroupPolicy", void 0);
     return PutFirewallRuleGroupPolicyRequest;

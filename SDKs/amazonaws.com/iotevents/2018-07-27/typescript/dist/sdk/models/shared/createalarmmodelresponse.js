@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AlarmModelVersionStatusEnum } from "./alarmmodelversionstatusenum";
 var CreateAlarmModelResponse = /** @class */ (function (_super) {
     __extends(CreateAlarmModelResponse, _super);
@@ -30,23 +30,23 @@ var CreateAlarmModelResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=alarmModelArn" }),
+        SpeakeasyMetadata({ data: "json, name=alarmModelArn" }),
         __metadata("design:type", String)
     ], CreateAlarmModelResponse.prototype, "alarmModelArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=alarmModelVersion" }),
+        SpeakeasyMetadata({ data: "json, name=alarmModelVersion" }),
         __metadata("design:type", String)
     ], CreateAlarmModelResponse.prototype, "alarmModelVersion", void 0);
     __decorate([
-        Metadata({ data: "json, name=creationTime" }),
+        SpeakeasyMetadata({ data: "json, name=creationTime" }),
         __metadata("design:type", Date)
     ], CreateAlarmModelResponse.prototype, "creationTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=lastUpdateTime" }),
+        SpeakeasyMetadata({ data: "json, name=lastUpdateTime" }),
         __metadata("design:type", Date)
     ], CreateAlarmModelResponse.prototype, "lastUpdateTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=status" }),
+        SpeakeasyMetadata({ data: "json, name=status" }),
         __metadata("design:type", String)
     ], CreateAlarmModelResponse.prototype, "status", void 0);
     return CreateAlarmModelResponse;

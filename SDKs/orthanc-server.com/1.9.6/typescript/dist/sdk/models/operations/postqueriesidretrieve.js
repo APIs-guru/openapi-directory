@@ -22,14 +22,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var PostQueriesIdRetrievePathParams = /** @class */ (function (_super) {
     __extends(PostQueriesIdRetrievePathParams, _super);
     function PostQueriesIdRetrievePathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=id" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" }),
         __metadata("design:type", String)
     ], PostQueriesIdRetrievePathParams.prototype, "id", void 0);
     return PostQueriesIdRetrievePathParams;
@@ -41,11 +41,11 @@ var PostQueriesIdRetrieveRequests = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", Object)
     ], PostQueriesIdRetrieveRequests.prototype, "any", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=text/plain" }),
+        SpeakeasyMetadata({ data: "request, media_type=text/plain" }),
         __metadata("design:type", Uint8Array)
     ], PostQueriesIdRetrieveRequests.prototype, "textPlain", void 0);
     return PostQueriesIdRetrieveRequests;
@@ -57,11 +57,11 @@ var PostQueriesIdRetrieveRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PostQueriesIdRetrievePathParams)
     ], PostQueriesIdRetrieveRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PostQueriesIdRetrieveRequests)
     ], PostQueriesIdRetrieveRequest.prototype, "request", void 0);
     return PostQueriesIdRetrieveRequest;
@@ -73,15 +73,15 @@ var PostQueriesIdRetrieveResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], PostQueriesIdRetrieveResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], PostQueriesIdRetrieveResponse.prototype, "postQueriesIdRetrieve200ApplicationJsonAny", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], PostQueriesIdRetrieveResponse.prototype, "statusCode", void 0);
     return PostQueriesIdRetrieveResponse;

@@ -1,6 +1,7 @@
 
 
+
 export enum HyperParameterTuningJobObjectiveTypeEnum {
-    Maximize = "Maximize"
-,    Minimize = "Minimize"
+    Maximize = "Maximize",
+    Minimize = "Minimize"
 }

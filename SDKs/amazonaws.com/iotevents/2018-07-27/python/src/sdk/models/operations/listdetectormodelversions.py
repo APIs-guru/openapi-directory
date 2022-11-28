@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
-from typing import Any,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class ListDetectorModelVersionsPathParams:
-    detector_model_name: str = field(default=None, metadata={'path_param': { 'field_name': 'detectorModelName', 'style': 'simple', 'explode': False }})
+    detector_model_name: str = field(metadata={'path_param': { 'field_name': 'detectorModelName', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -27,19 +30,19 @@ class ListDetectorModelVersionsHeaders:
 
 @dataclass
 class ListDetectorModelVersionsRequest:
-    path_params: ListDetectorModelVersionsPathParams = field(default=None)
-    query_params: ListDetectorModelVersionsQueryParams = field(default=None)
-    headers: ListDetectorModelVersionsHeaders = field(default=None)
+    headers: ListDetectorModelVersionsHeaders = field()
+    path_params: ListDetectorModelVersionsPathParams = field()
+    query_params: ListDetectorModelVersionsQueryParams = field()
     
 
 @dataclass
 class ListDetectorModelVersionsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     internal_failure_exception: Optional[Any] = field(default=None)
     invalid_request_exception: Optional[Any] = field(default=None)
     list_detector_model_versions_response: Optional[shared.ListDetectorModelVersionsResponse] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
     service_unavailable_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     

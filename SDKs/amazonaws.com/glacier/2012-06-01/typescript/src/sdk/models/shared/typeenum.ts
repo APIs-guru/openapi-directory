@@ -1,7 +1,8 @@
 
 
+
 export enum TypeEnum {
-    AmazonCustomerByEmail = "AmazonCustomerByEmail"
-,    CanonicalUser = "CanonicalUser"
-,    Group = "Group"
+    AmazonCustomerByEmail = "AmazonCustomerByEmail",
+    CanonicalUser = "CanonicalUser",
+    Group = "Group"
 }

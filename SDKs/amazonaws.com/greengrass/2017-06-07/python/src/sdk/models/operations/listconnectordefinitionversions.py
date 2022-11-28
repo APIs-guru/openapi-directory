@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
-from typing import Any,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class ListConnectorDefinitionVersionsPathParams:
-    connector_definition_id: str = field(default=None, metadata={'path_param': { 'field_name': 'ConnectorDefinitionId', 'style': 'simple', 'explode': False }})
+    connector_definition_id: str = field(metadata={'path_param': { 'field_name': 'ConnectorDefinitionId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -27,15 +30,15 @@ class ListConnectorDefinitionVersionsHeaders:
 
 @dataclass
 class ListConnectorDefinitionVersionsRequest:
-    path_params: ListConnectorDefinitionVersionsPathParams = field(default=None)
-    query_params: ListConnectorDefinitionVersionsQueryParams = field(default=None)
-    headers: ListConnectorDefinitionVersionsHeaders = field(default=None)
+    headers: ListConnectorDefinitionVersionsHeaders = field()
+    path_params: ListConnectorDefinitionVersionsPathParams = field()
+    query_params: ListConnectorDefinitionVersionsQueryParams = field()
     
 
 @dataclass
 class ListConnectorDefinitionVersionsResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     list_connector_definition_versions_response: Optional[shared.ListConnectorDefinitionVersionsResponse] = field(default=None)
-    status_code: int = field(default=None)
     

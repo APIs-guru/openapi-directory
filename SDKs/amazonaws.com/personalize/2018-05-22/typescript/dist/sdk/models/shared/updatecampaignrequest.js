@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CampaignConfig } from "./campaignconfig";
 var UpdateCampaignRequest = /** @class */ (function (_super) {
     __extends(UpdateCampaignRequest, _super);
@@ -30,19 +30,19 @@ var UpdateCampaignRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=campaignArn" }),
+        SpeakeasyMetadata({ data: "json, name=campaignArn" }),
         __metadata("design:type", String)
     ], UpdateCampaignRequest.prototype, "campaignArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=campaignConfig" }),
+        SpeakeasyMetadata({ data: "json, name=campaignConfig" }),
         __metadata("design:type", CampaignConfig)
     ], UpdateCampaignRequest.prototype, "campaignConfig", void 0);
     __decorate([
-        Metadata({ data: "json, name=minProvisionedTPS" }),
+        SpeakeasyMetadata({ data: "json, name=minProvisionedTPS" }),
         __metadata("design:type", Number)
     ], UpdateCampaignRequest.prototype, "minProvisionedTps", void 0);
     __decorate([
-        Metadata({ data: "json, name=solutionVersionArn" }),
+        SpeakeasyMetadata({ data: "json, name=solutionVersionArn" }),
         __metadata("design:type", String)
     ], UpdateCampaignRequest.prototype, "solutionVersionArn", void 0);
     return UpdateCampaignRequest;

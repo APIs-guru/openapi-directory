@@ -1,9 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { NameRequestParam } from "./namerequestparam";
 
 
+
 export class NamesRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=entities", elemType: shared.NameRequestParam })
+  @SpeakeasyMetadata({ data: "json, name=entities", elemType: NameRequestParam })
   entities?: NameRequestParam[];
 }

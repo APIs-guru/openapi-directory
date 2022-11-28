@@ -1,12 +1,16 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DisplayvideoAdvertisersNegativeKeywordListsPatchPathParams:
-    advertiser_id: str = field(default=None, metadata={'path_param': { 'field_name': 'advertiserId', 'style': 'simple', 'explode': False }})
-    negative_keyword_list_id: str = field(default=None, metadata={'path_param': { 'field_name': 'negativeKeywordListId', 'style': 'simple', 'explode': False }})
+    advertiser_id: str = field(metadata={'path_param': { 'field_name': 'advertiserId', 'style': 'simple', 'explode': False }})
+    negative_keyword_list_id: str = field(metadata={'path_param': { 'field_name': 'negativeKeywordListId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -27,21 +31,21 @@ class DisplayvideoAdvertisersNegativeKeywordListsPatchQueryParams:
 
 @dataclass
 class DisplayvideoAdvertisersNegativeKeywordListsPatchSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DisplayvideoAdvertisersNegativeKeywordListsPatchRequest:
-    path_params: DisplayvideoAdvertisersNegativeKeywordListsPatchPathParams = field(default=None)
-    query_params: DisplayvideoAdvertisersNegativeKeywordListsPatchQueryParams = field(default=None)
-    request: Optional[shared.NegativeKeywordList] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: DisplayvideoAdvertisersNegativeKeywordListsPatchSecurity = field(default=None)
+    path_params: DisplayvideoAdvertisersNegativeKeywordListsPatchPathParams = field()
+    query_params: DisplayvideoAdvertisersNegativeKeywordListsPatchQueryParams = field()
+    security: DisplayvideoAdvertisersNegativeKeywordListsPatchSecurity = field()
+    request: Optional[shared.NegativeKeywordListInput] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class DisplayvideoAdvertisersNegativeKeywordListsPatchResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     negative_keyword_list: Optional[shared.NegativeKeywordList] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,25 +1,26 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ProfileUpdateRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=heroAutoplay" })
+  @SpeakeasyMetadata({ data: "json, name=heroAutoplay" })
   heroAutoplay?: boolean;
 
-  @Metadata({ data: "json, name=heroWithAudio" })
+  @SpeakeasyMetadata({ data: "json, name=heroWithAudio" })
   heroWithAudio?: boolean;
 
-  @Metadata({ data: "json, name=languageCode" })
+  @SpeakeasyMetadata({ data: "json, name=languageCode" })
   languageCode?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=pinEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=pinEnabled" })
   pinEnabled?: boolean;
 
-  @Metadata({ data: "json, name=purchaseEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=purchaseEnabled" })
   purchaseEnabled?: boolean;
 
-  @Metadata({ data: "json, name=segments" })
+  @SpeakeasyMetadata({ data: "json, name=segments" })
   segments?: string[];
 }

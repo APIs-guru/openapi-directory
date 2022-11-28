@@ -1,33 +1,34 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class UpdateApnsChannelPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=application-id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=application-id" })
   applicationId: string;
 }
 
 
 export class UpdateApnsChannelHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
@@ -37,78 +38,78 @@ export class UpdateApnsChannelHeaders extends SpeakeasyBase {
  * Specifies the status and settings of the APNs (Apple Push Notification service) channel for an application.
 **/
 export class UpdateApnsChannelRequestBodyApnsChannelRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=BundleId" })
+  @SpeakeasyMetadata({ data: "json, name=BundleId" })
   bundleId?: string;
 
-  @Metadata({ data: "json, name=Certificate" })
+  @SpeakeasyMetadata({ data: "json, name=Certificate" })
   certificate?: string;
 
-  @Metadata({ data: "json, name=DefaultAuthenticationMethod" })
+  @SpeakeasyMetadata({ data: "json, name=DefaultAuthenticationMethod" })
   defaultAuthenticationMethod?: string;
 
-  @Metadata({ data: "json, name=Enabled" })
+  @SpeakeasyMetadata({ data: "json, name=Enabled" })
   enabled?: boolean;
 
-  @Metadata({ data: "json, name=PrivateKey" })
+  @SpeakeasyMetadata({ data: "json, name=PrivateKey" })
   privateKey?: string;
 
-  @Metadata({ data: "json, name=TeamId" })
+  @SpeakeasyMetadata({ data: "json, name=TeamId" })
   teamId?: string;
 
-  @Metadata({ data: "json, name=TokenKey" })
+  @SpeakeasyMetadata({ data: "json, name=TokenKey" })
   tokenKey?: string;
 
-  @Metadata({ data: "json, name=TokenKeyId" })
+  @SpeakeasyMetadata({ data: "json, name=TokenKeyId" })
   tokenKeyId?: string;
 }
 
 
 export class UpdateApnsChannelRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=APNSChannelRequest" })
+  @SpeakeasyMetadata({ data: "json, name=APNSChannelRequest" })
   apnsChannelRequest: UpdateApnsChannelRequestBodyApnsChannelRequest;
 }
 
 
 export class UpdateApnsChannelRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: UpdateApnsChannelPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: UpdateApnsChannelHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: UpdateApnsChannelRequestBody;
 }
 
 
 export class UpdateApnsChannelResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   badRequestException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   forbiddenException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   internalServerErrorException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   methodNotAllowedException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   notFoundException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   payloadTooLargeException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   tooManyRequestsException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   updateApnsChannelResponse?: shared.UpdateApnsChannelResponse;
 }

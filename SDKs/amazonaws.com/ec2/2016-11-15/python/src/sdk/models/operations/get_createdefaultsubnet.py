@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetCreateDefaultSubnetActionEnum(str, Enum):
     CREATE_DEFAULT_SUBNET = "CreateDefaultSubnet"
@@ -10,10 +14,10 @@ class GetCreateDefaultSubnetVersionEnum(str, Enum):
 
 @dataclass
 class GetCreateDefaultSubnetQueryParams:
-    action: GetCreateDefaultSubnetActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    availability_zone: str = field(default=None, metadata={'query_param': { 'field_name': 'AvailabilityZone', 'style': 'form', 'explode': True }})
+    action: GetCreateDefaultSubnetActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    availability_zone: str = field(metadata={'query_param': { 'field_name': 'AvailabilityZone', 'style': 'form', 'explode': True }})
+    version: GetCreateDefaultSubnetVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     dry_run: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'DryRun', 'style': 'form', 'explode': True }})
-    version: GetCreateDefaultSubnetVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -29,13 +33,13 @@ class GetCreateDefaultSubnetHeaders:
 
 @dataclass
 class GetCreateDefaultSubnetRequest:
-    query_params: GetCreateDefaultSubnetQueryParams = field(default=None)
-    headers: GetCreateDefaultSubnetHeaders = field(default=None)
+    headers: GetCreateDefaultSubnetHeaders = field()
+    query_params: GetCreateDefaultSubnetQueryParams = field()
     
 
 @dataclass
 class GetCreateDefaultSubnetResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

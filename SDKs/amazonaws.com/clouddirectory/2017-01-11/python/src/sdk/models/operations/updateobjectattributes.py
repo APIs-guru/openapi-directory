@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,List,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
 @dataclass
 class UpdateObjectAttributesHeaders:
+    x_amz_data_partition: str = field(metadata={'header': { 'field_name': 'x-amz-data-partition', 'style': 'simple', 'explode': False }})
     x_amz_algorithm: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Algorithm', 'style': 'simple', 'explode': False }})
     x_amz_content_sha256: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Content-Sha256', 'style': 'simple', 'explode': False }})
     x_amz_credential: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Credential', 'style': 'simple', 'explode': False }})
@@ -13,32 +18,36 @@ class UpdateObjectAttributesHeaders:
     x_amz_security_token: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Security-Token', 'style': 'simple', 'explode': False }})
     x_amz_signature: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Signature', 'style': 'simple', 'explode': False }})
     x_amz_signed_headers: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-SignedHeaders', 'style': 'simple', 'explode': False }})
-    x_amz_data_partition: str = field(default=None, metadata={'header': { 'field_name': 'x-amz-data-partition', 'style': 'simple', 'explode': False }})
     
 
 @dataclass_json
 @dataclass
 class UpdateObjectAttributesRequestBodyObjectReference:
-    selector: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Selector' }})
+    r"""UpdateObjectAttributesRequestBodyObjectReference
+    The reference that identifies an object.
+    """
+    
+    selector: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Selector') }})
     
 
 @dataclass_json
 @dataclass
 class UpdateObjectAttributesRequestBody:
-    attribute_updates: List[shared.ObjectAttributeUpdate] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AttributeUpdates' }})
-    object_reference: UpdateObjectAttributesRequestBodyObjectReference = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ObjectReference' }})
+    attribute_updates: List[shared.ObjectAttributeUpdate] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('AttributeUpdates') }})
+    object_reference: UpdateObjectAttributesRequestBodyObjectReference = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('ObjectReference') }})
     
 
 @dataclass
 class UpdateObjectAttributesRequest:
-    headers: UpdateObjectAttributesHeaders = field(default=None)
-    request: UpdateObjectAttributesRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: UpdateObjectAttributesHeaders = field()
+    request: UpdateObjectAttributesRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class UpdateObjectAttributesResponse:
+    content_type: str = field()
+    status_code: int = field()
     access_denied_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     directory_not_enabled_exception: Optional[Any] = field(default=None)
     facet_validation_exception: Optional[Any] = field(default=None)
     internal_service_exception: Optional[Any] = field(default=None)
@@ -47,7 +56,6 @@ class UpdateObjectAttributesResponse:
     link_name_already_in_use_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
     retryable_conflict_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     update_object_attributes_response: Optional[shared.UpdateObjectAttributesResponse] = field(default=None)
     validation_exception: Optional[Any] = field(default=None)
     

@@ -1,8 +1,9 @@
 
 
+
 export enum StatusEnum {
-    Active = "Active"
-,    Inactive = "Inactive"
-,    Pending = "Pending"
-,    Failed = "Failed"
+    Active = "Active",
+    Inactive = "Inactive",
+    Pending = "Pending",
+    Failed = "Failed"
 }

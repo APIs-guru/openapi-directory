@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ElasticIp } from "./elasticip";
+
 
 
 // DescribeElasticIpsResult
@@ -8,6 +8,6 @@ import { ElasticIp } from "./elasticip";
  * Contains the response to a <code>DescribeElasticIps</code> request.
 **/
 export class DescribeElasticIpsResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ElasticIps", elemType: shared.ElasticIp })
+  @SpeakeasyMetadata({ data: "json, name=ElasticIps", elemType: ElasticIp })
   elasticIps?: ElasticIp[];
 }

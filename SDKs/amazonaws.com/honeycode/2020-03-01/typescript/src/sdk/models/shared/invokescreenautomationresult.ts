@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class InvokeScreenAutomationResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=workbookCursor" })
+  @SpeakeasyMetadata({ data: "json, name=workbookCursor" })
   workbookCursor: number;
 }

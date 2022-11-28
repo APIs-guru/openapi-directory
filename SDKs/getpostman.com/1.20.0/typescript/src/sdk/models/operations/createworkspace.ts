@@ -1,118 +1,119 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class CreateWorkspaceRequestBodyWorkspaceCollections extends SpeakeasyBase {
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=uid" })
+  @SpeakeasyMetadata({ data: "json, name=uid" })
   uid?: string;
 }
 
 
 export class CreateWorkspaceRequestBodyWorkspaceEnvironments extends SpeakeasyBase {
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=uid" })
+  @SpeakeasyMetadata({ data: "json, name=uid" })
   uid?: string;
 }
 
 
 export class CreateWorkspaceRequestBodyWorkspaceMocks extends SpeakeasyBase {
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 }
 
 
 export class CreateWorkspaceRequestBodyWorkspaceMonitors extends SpeakeasyBase {
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 }
 
 
 export class CreateWorkspaceRequestBodyWorkspace extends SpeakeasyBase {
-  @Metadata({ data: "json, name=collections", elemType: operations.CreateWorkspaceRequestBodyWorkspaceCollections })
+  @SpeakeasyMetadata({ data: "json, name=collections", elemType: CreateWorkspaceRequestBodyWorkspaceCollections })
   collections?: CreateWorkspaceRequestBodyWorkspaceCollections[];
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=environments", elemType: operations.CreateWorkspaceRequestBodyWorkspaceEnvironments })
+  @SpeakeasyMetadata({ data: "json, name=environments", elemType: CreateWorkspaceRequestBodyWorkspaceEnvironments })
   environments?: CreateWorkspaceRequestBodyWorkspaceEnvironments[];
 
-  @Metadata({ data: "json, name=mocks", elemType: operations.CreateWorkspaceRequestBodyWorkspaceMocks })
+  @SpeakeasyMetadata({ data: "json, name=mocks", elemType: CreateWorkspaceRequestBodyWorkspaceMocks })
   mocks?: CreateWorkspaceRequestBodyWorkspaceMocks[];
 
-  @Metadata({ data: "json, name=monitors", elemType: operations.CreateWorkspaceRequestBodyWorkspaceMonitors })
+  @SpeakeasyMetadata({ data: "json, name=monitors", elemType: CreateWorkspaceRequestBodyWorkspaceMonitors })
   monitors?: CreateWorkspaceRequestBodyWorkspaceMonitors[];
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: string;
 }
 
 
 export class CreateWorkspaceRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=workspace" })
+  @SpeakeasyMetadata({ data: "json, name=workspace" })
   workspace?: CreateWorkspaceRequestBodyWorkspace;
 }
 
 
-export class CreateWorkspaceRequest extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/json" })
-  request?: CreateWorkspaceRequestBody;
-}
-
-
 export class CreateWorkspace200ApplicationJsonWorkspace extends SpeakeasyBase {
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 }
 
 
 export class CreateWorkspace200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=workspace" })
+  @SpeakeasyMetadata({ data: "json, name=workspace" })
   workspace?: CreateWorkspace200ApplicationJsonWorkspace;
 }
 
 
 export class CreateWorkspace400ApplicationJsonError extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 }
 
 
 export class CreateWorkspace400ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=error" })
+  @SpeakeasyMetadata({ data: "json, name=error" })
   error?: CreateWorkspace400ApplicationJsonError;
 }
 
 
+export class CreateWorkspaceRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request?: CreateWorkspaceRequestBody;
+}
+
+
 export class CreateWorkspaceResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   createWorkspace200ApplicationJsonObject?: CreateWorkspace200ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   createWorkspace400ApplicationJsonObject?: CreateWorkspace400ApplicationJson;
 }

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { PreloadDataTypeEnum } from "./preloaddatatypeenum";
 /**
  *  The input properties for the preloaded Data Store. Only data preloaded from Synthea is supported.

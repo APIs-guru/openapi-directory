@@ -1,15 +1,16 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum DomainDomainTypeEnum {
-    Ldap = "LDAP"
-,    Local = "LOCAL"
+    Ldap = "LDAP",
+    Local = "LOCAL"
 }
 
 
 export class Domain extends SpeakeasyBase {
-  @Metadata({ data: "json, name=domain_type" })
+  @SpeakeasyMetadata({ data: "json, name=domain_type" })
   domainType?: DomainDomainTypeEnum;
 
-  @Metadata({ data: "json, name=value" })
+  @SpeakeasyMetadata({ data: "json, name=value" })
   value?: string;
 }

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var MetadataExportDatabaseDumpTypeEnum;
 (function (MetadataExportDatabaseDumpTypeEnum) {
     MetadataExportDatabaseDumpTypeEnum["TypeUnspecified"] = "TYPE_UNSPECIFIED";
@@ -47,23 +47,23 @@ var MetadataExport = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=databaseDumpType" }),
+        SpeakeasyMetadata({ data: "json, name=databaseDumpType" }),
         __metadata("design:type", String)
     ], MetadataExport.prototype, "databaseDumpType", void 0);
     __decorate([
-        Metadata({ data: "json, name=destinationGcsUri" }),
+        SpeakeasyMetadata({ data: "json, name=destinationGcsUri" }),
         __metadata("design:type", String)
     ], MetadataExport.prototype, "destinationGcsUri", void 0);
     __decorate([
-        Metadata({ data: "json, name=endTime" }),
+        SpeakeasyMetadata({ data: "json, name=endTime" }),
         __metadata("design:type", String)
     ], MetadataExport.prototype, "endTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=startTime" }),
+        SpeakeasyMetadata({ data: "json, name=startTime" }),
         __metadata("design:type", String)
     ], MetadataExport.prototype, "startTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=state" }),
+        SpeakeasyMetadata({ data: "json, name=state" }),
         __metadata("design:type", String)
     ], MetadataExport.prototype, "state", void 0);
     return MetadataExport;

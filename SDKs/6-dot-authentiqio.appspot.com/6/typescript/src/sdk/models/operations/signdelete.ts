@@ -1,37 +1,38 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class SignDeletePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=job" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=job" })
   job: string;
 }
 
 
-export class SignDeleteRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: SignDeletePathParams;
-}
-
-
 export class SignDelete200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: string;
 }
 
 
+export class SignDeleteRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: SignDeletePathParams;
+}
+
+
 export class SignDeleteResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   error?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   signDelete200ApplicationJsonObject?: SignDelete200ApplicationJson;
 }

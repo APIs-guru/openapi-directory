@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class BeyondcorpProjectsLocationsAppConnectorsResolveInstanceConfigPathParams:
-    app_connector: str = field(default=None, metadata={'path_param': { 'field_name': 'appConnector', 'style': 'simple', 'explode': False }})
+    app_connector: str = field(metadata={'path_param': { 'field_name': 'appConnector', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,20 +26,20 @@ class BeyondcorpProjectsLocationsAppConnectorsResolveInstanceConfigQueryParams:
 
 @dataclass
 class BeyondcorpProjectsLocationsAppConnectorsResolveInstanceConfigSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class BeyondcorpProjectsLocationsAppConnectorsResolveInstanceConfigRequest:
-    path_params: BeyondcorpProjectsLocationsAppConnectorsResolveInstanceConfigPathParams = field(default=None)
-    query_params: BeyondcorpProjectsLocationsAppConnectorsResolveInstanceConfigQueryParams = field(default=None)
-    security: BeyondcorpProjectsLocationsAppConnectorsResolveInstanceConfigSecurity = field(default=None)
+    path_params: BeyondcorpProjectsLocationsAppConnectorsResolveInstanceConfigPathParams = field()
+    query_params: BeyondcorpProjectsLocationsAppConnectorsResolveInstanceConfigQueryParams = field()
+    security: BeyondcorpProjectsLocationsAppConnectorsResolveInstanceConfigSecurity = field()
     
 
 @dataclass
 class BeyondcorpProjectsLocationsAppConnectorsResolveInstanceConfigResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_cloud_beyondcorp_appconnectors_v1_resolve_instance_config_response: Optional[shared.GoogleCloudBeyondcorpAppconnectorsV1ResolveInstanceConfigResponse] = field(default=None)
-    status_code: int = field(default=None)
     

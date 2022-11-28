@@ -1,32 +1,33 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class RetrieveSentryRiskDataQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=is_active" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=is_active" })
   isActive?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=page" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page" })
   page?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=size" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=size" })
   size?: number;
 }
 
 
 export class RetrieveSentryRiskDataRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: RetrieveSentryRiskDataQueryParams;
 }
 
 
 export class RetrieveSentryRiskDataResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   sentryObjectPagingDto?: shared.SentryObjectPagingDto;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

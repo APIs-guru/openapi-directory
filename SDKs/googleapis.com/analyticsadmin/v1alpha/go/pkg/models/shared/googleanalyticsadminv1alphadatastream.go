@@ -9,6 +9,18 @@ const (
 	GoogleAnalyticsAdminV1alphaDataStreamTypeEnumIosAppDataStream          GoogleAnalyticsAdminV1alphaDataStreamTypeEnum = "IOS_APP_DATA_STREAM"
 )
 
+// GoogleAnalyticsAdminV1alphaDataStreamInput
+// A resource message representing a data stream.
+type GoogleAnalyticsAdminV1alphaDataStreamInput struct {
+	AndroidAppStreamData *GoogleAnalyticsAdminV1alphaDataStreamAndroidAppStreamDataInput `json:"androidAppStreamData,omitempty"`
+	DisplayName          *string                                                         `json:"displayName,omitempty"`
+	IosAppStreamData     *GoogleAnalyticsAdminV1alphaDataStreamIosAppStreamDataInput     `json:"iosAppStreamData,omitempty"`
+	Type                 *GoogleAnalyticsAdminV1alphaDataStreamTypeEnum                  `json:"type,omitempty"`
+	WebStreamData        *GoogleAnalyticsAdminV1alphaDataStreamWebStreamDataInput        `json:"webStreamData,omitempty"`
+}
+
+// GoogleAnalyticsAdminV1alphaDataStream
+// A resource message representing a data stream.
 type GoogleAnalyticsAdminV1alphaDataStream struct {
 	AndroidAppStreamData *GoogleAnalyticsAdminV1alphaDataStreamAndroidAppStreamData `json:"androidAppStreamData,omitempty"`
 	CreateTime           *string                                                    `json:"createTime,omitempty"`

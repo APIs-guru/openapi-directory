@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ComputeEnvironmentOrder } from "./computeenvironmentorder";
 import { JqStateEnum } from "./jqstateenum";
 import { JqStatusEnum } from "./jqstatusenum";

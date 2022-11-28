@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { QueryRequestPayload } from "./queryrequestpayload";
+
 
 
 // QueryRequestInput
@@ -7,6 +8,6 @@ import { QueryRequestPayload } from "./queryrequestpayload";
  * Device ID inputs to QueryRequest.
 **/
 export class QueryRequestInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=payload" })
+  @SpeakeasyMetadata({ data: "json, name=payload" })
   payload?: QueryRequestPayload;
 }

@@ -20,11 +20,11 @@ class PostConfigApacheHTTPComponentsProxyConfigurationQueryParams:
 
 @dataclass
 class PostConfigApacheHTTPComponentsProxyConfigurationRequest:
-    query_params: PostConfigApacheHTTPComponentsProxyConfigurationQueryParams = field(default=None)
+    query_params: PostConfigApacheHTTPComponentsProxyConfigurationQueryParams = field()
     
 
 @dataclass
 class PostConfigApacheHTTPComponentsProxyConfigurationResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

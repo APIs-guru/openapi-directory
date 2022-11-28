@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ProvidedSoftwareCatalog
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The currently provided software environment on the devices under test.
 **/
 export class ProvidedSoftwareCatalog extends SpeakeasyBase {
-  @Metadata({ data: "json, name=androidxOrchestratorVersion" })
+  @SpeakeasyMetadata({ data: "json, name=androidxOrchestratorVersion" })
   androidxOrchestratorVersion?: string;
 
-  @Metadata({ data: "json, name=orchestratorVersion" })
+  @SpeakeasyMetadata({ data: "json, name=orchestratorVersion" })
   orchestratorVersion?: string;
 }

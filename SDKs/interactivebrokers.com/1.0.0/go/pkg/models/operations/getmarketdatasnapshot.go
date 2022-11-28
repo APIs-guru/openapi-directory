@@ -8,10 +8,6 @@ type GetMarketdataSnapshotRequestBody struct {
 	Type     *string  `json:"type,omitempty"`
 }
 
-type GetMarketdataSnapshotRequest struct {
-	Request []GetMarketdataSnapshotRequestBody `request:"mediaType=application/json"`
-}
-
 type GetMarketdataSnapshot200ApplicationJSONBid struct {
 	Market *float64 `json:"market,omitempty"`
 	Price  *float64 `json:"price,omitempty"`
@@ -43,6 +39,10 @@ type GetMarketdataSnapshot200ApplicationJSON struct {
 	Offer       *GetMarketdataSnapshot200ApplicationJSONOffer   `json:"Offer,omitempty"`
 	Temporality *float64                                        `json:"Temporality,omitempty"`
 	Trade       *GetMarketdataSnapshot200ApplicationJSONTrade   `json:"Trade,omitempty"`
+}
+
+type GetMarketdataSnapshotRequest struct {
+	Request []GetMarketdataSnapshotRequestBody `request:"mediaType=application/json"`
 }
 
 type GetMarketdataSnapshotResponse struct {

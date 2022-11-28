@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { HttpRouteAction } from "./httprouteaction";
 import { HttpRouteMatch } from "./httproutematch";
 import { HttpRetryPolicy } from "./httpretrypolicy";
 import { HttpTimeout } from "./httptimeout";
+
 
 
 // HttpRoute
@@ -10,15 +11,15 @@ import { HttpTimeout } from "./httptimeout";
  * An object that represents an HTTP or HTTP/2 route type.
 **/
 export class HttpRoute extends SpeakeasyBase {
-  @Metadata({ data: "json, name=action" })
+  @SpeakeasyMetadata({ data: "json, name=action" })
   action: HttpRouteAction;
 
-  @Metadata({ data: "json, name=match" })
+  @SpeakeasyMetadata({ data: "json, name=match" })
   match: HttpRouteMatch;
 
-  @Metadata({ data: "json, name=retryPolicy" })
+  @SpeakeasyMetadata({ data: "json, name=retryPolicy" })
   retryPolicy?: HttpRetryPolicy;
 
-  @Metadata({ data: "json, name=timeout" })
+  @SpeakeasyMetadata({ data: "json, name=timeout" })
   timeout?: HttpTimeout;
 }

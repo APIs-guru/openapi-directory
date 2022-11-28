@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class StatementLinkTypeEnumEnum(str, Enum):
     CORRECTED_STATEMENT = "CorrectedStatement"

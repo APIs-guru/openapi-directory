@@ -1,7 +1,8 @@
 
 
+
 export enum AuditLogIncludeEnum {
-    Web = "web"
-,    Git = "git"
-,    All = "all"
+    Web = "web",
+    Git = "git",
+    All = "all"
 }

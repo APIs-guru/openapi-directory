@@ -13,6 +13,8 @@ const (
 	ServiceLevelObjectiveCalendarPeriodEnumYear                      ServiceLevelObjectiveCalendarPeriodEnum = "YEAR"
 )
 
+// ServiceLevelObjective
+// A Service-Level Objective (SLO) describes a level of desired good service. It consists of a service-level indicator (SLI), a performance goal, and a period over which the objective is to be evaluated against that goal. The SLO can use SLIs defined in a number of different manners. Typical SLOs might include "99% of requests in each rolling week have latency below 200 milliseconds" or "99.5% of requests in each calendar month return successfully."
 type ServiceLevelObjective struct {
 	CalendarPeriod        *ServiceLevelObjectiveCalendarPeriodEnum `json:"calendarPeriod,omitempty"`
 	DisplayName           *string                                  `json:"displayName,omitempty"`

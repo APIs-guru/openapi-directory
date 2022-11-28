@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class CreateTaskOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=taskArn" })
+  @SpeakeasyMetadata({ data: "json, name=taskArn" })
   taskArn?: string;
 
-  @Metadata({ data: "json, name=taskId" })
+  @SpeakeasyMetadata({ data: "json, name=taskId" })
   taskId?: string;
 }

@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AwsEcsTaskDefinitionContainerDefinitionsLogConfigurationSecretOptionsDetails } from "./awsecstaskdefinitioncontainerdefinitionslogconfigurationsecretoptionsdetails";
+
 
 
 // AwsEcsTaskDefinitionContainerDefinitionsLogConfigurationDetails
@@ -8,12 +8,12 @@ import { AwsEcsTaskDefinitionContainerDefinitionsLogConfigurationSecretOptionsDe
  * The log configuration specification for the container.
 **/
 export class AwsEcsTaskDefinitionContainerDefinitionsLogConfigurationDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=LogDriver" })
+  @SpeakeasyMetadata({ data: "json, name=LogDriver" })
   logDriver?: string;
 
-  @Metadata({ data: "json, name=Options" })
+  @SpeakeasyMetadata({ data: "json, name=Options" })
   options?: Map<string, string>;
 
-  @Metadata({ data: "json, name=SecretOptions", elemType: shared.AwsEcsTaskDefinitionContainerDefinitionsLogConfigurationSecretOptionsDetails })
+  @SpeakeasyMetadata({ data: "json, name=SecretOptions", elemType: AwsEcsTaskDefinitionContainerDefinitionsLogConfigurationSecretOptionsDetails })
   secretOptions?: AwsEcsTaskDefinitionContainerDefinitionsLogConfigurationSecretOptionsDetails[];
 }

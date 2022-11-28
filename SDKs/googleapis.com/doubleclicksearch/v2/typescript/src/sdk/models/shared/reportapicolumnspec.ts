@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ReportApiColumnSpec
@@ -6,33 +7,33 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A request object used to create a DoubleClick Search report.
 **/
 export class ReportApiColumnSpec extends SpeakeasyBase {
-  @Metadata({ data: "json, name=columnName" })
+  @SpeakeasyMetadata({ data: "json, name=columnName" })
   columnName?: string;
 
-  @Metadata({ data: "json, name=customDimensionName" })
+  @SpeakeasyMetadata({ data: "json, name=customDimensionName" })
   customDimensionName?: string;
 
-  @Metadata({ data: "json, name=customMetricName" })
+  @SpeakeasyMetadata({ data: "json, name=customMetricName" })
   customMetricName?: string;
 
-  @Metadata({ data: "json, name=endDate" })
+  @SpeakeasyMetadata({ data: "json, name=endDate" })
   endDate?: string;
 
-  @Metadata({ data: "json, name=groupByColumn" })
+  @SpeakeasyMetadata({ data: "json, name=groupByColumn" })
   groupByColumn?: boolean;
 
-  @Metadata({ data: "json, name=headerText" })
+  @SpeakeasyMetadata({ data: "json, name=headerText" })
   headerText?: string;
 
-  @Metadata({ data: "json, name=platformSource" })
+  @SpeakeasyMetadata({ data: "json, name=platformSource" })
   platformSource?: string;
 
-  @Metadata({ data: "json, name=productReportPerspective" })
+  @SpeakeasyMetadata({ data: "json, name=productReportPerspective" })
   productReportPerspective?: string;
 
-  @Metadata({ data: "json, name=savedColumnName" })
+  @SpeakeasyMetadata({ data: "json, name=savedColumnName" })
   savedColumnName?: string;
 
-  @Metadata({ data: "json, name=startDate" })
+  @SpeakeasyMetadata({ data: "json, name=startDate" })
   startDate?: string;
 }

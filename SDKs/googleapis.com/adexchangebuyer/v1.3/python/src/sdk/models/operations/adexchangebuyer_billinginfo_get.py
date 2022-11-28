@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class AdexchangebuyerBillingInfoGetPathParams:
-    account_id: int = field(default=None, metadata={'path_param': { 'field_name': 'accountId', 'style': 'simple', 'explode': False }})
+    account_id: int = field(metadata={'path_param': { 'field_name': 'accountId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -21,20 +22,20 @@ class AdexchangebuyerBillingInfoGetQueryParams:
 
 @dataclass
 class AdexchangebuyerBillingInfoGetSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class AdexchangebuyerBillingInfoGetRequest:
-    path_params: AdexchangebuyerBillingInfoGetPathParams = field(default=None)
-    query_params: AdexchangebuyerBillingInfoGetQueryParams = field(default=None)
-    security: AdexchangebuyerBillingInfoGetSecurity = field(default=None)
+    path_params: AdexchangebuyerBillingInfoGetPathParams = field()
+    query_params: AdexchangebuyerBillingInfoGetQueryParams = field()
+    security: AdexchangebuyerBillingInfoGetSecurity = field()
     
 
 @dataclass
 class AdexchangebuyerBillingInfoGetResponse:
+    content_type: str = field()
+    status_code: int = field()
     billing_info: Optional[shared.BillingInfo] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

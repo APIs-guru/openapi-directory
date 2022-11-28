@@ -1,5 +1,7 @@
 package shared
 
+// TextElement
+// A TextElement describes the content of a range of indices in the text content of a Shape or TableCell.
 type TextElement struct {
 	AutoText        *AutoText        `json:"autoText,omitempty"`
 	EndIndex        *int32           `json:"endIndex,omitempty"`

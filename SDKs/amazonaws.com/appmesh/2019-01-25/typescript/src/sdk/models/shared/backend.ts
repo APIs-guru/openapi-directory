@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { VirtualServiceBackend } from "./virtualservicebackend";
+
 
 
 // Backend
@@ -7,6 +8,6 @@ import { VirtualServiceBackend } from "./virtualservicebackend";
  * An object that represents the backends that a virtual node is expected to send outbound traffic to.
 **/
 export class Backend extends SpeakeasyBase {
-  @Metadata({ data: "json, name=virtualService" })
+  @SpeakeasyMetadata({ data: "json, name=virtualService" })
   virtualService?: VirtualServiceBackend;
 }

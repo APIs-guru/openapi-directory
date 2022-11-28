@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // RdsHttpEndpointConfig
@@ -6,18 +7,18 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The Amazon RDS HTTP endpoint configuration.
 **/
 export class RdsHttpEndpointConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=awsRegion" })
+  @SpeakeasyMetadata({ data: "json, name=awsRegion" })
   awsRegion?: string;
 
-  @Metadata({ data: "json, name=awsSecretStoreArn" })
+  @SpeakeasyMetadata({ data: "json, name=awsSecretStoreArn" })
   awsSecretStoreArn?: string;
 
-  @Metadata({ data: "json, name=databaseName" })
+  @SpeakeasyMetadata({ data: "json, name=databaseName" })
   databaseName?: string;
 
-  @Metadata({ data: "json, name=dbClusterIdentifier" })
+  @SpeakeasyMetadata({ data: "json, name=dbClusterIdentifier" })
   dbClusterIdentifier?: string;
 
-  @Metadata({ data: "json, name=schema" })
+  @SpeakeasyMetadata({ data: "json, name=schema" })
   schema?: string;
 }

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // RdsDbInstance
@@ -6,30 +7,30 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Describes an Amazon RDS instance.
 **/
 export class RdsDbInstance extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Address" })
+  @SpeakeasyMetadata({ data: "json, name=Address" })
   address?: string;
 
-  @Metadata({ data: "json, name=DbInstanceIdentifier" })
+  @SpeakeasyMetadata({ data: "json, name=DbInstanceIdentifier" })
   dbInstanceIdentifier?: string;
 
-  @Metadata({ data: "json, name=DbPassword" })
+  @SpeakeasyMetadata({ data: "json, name=DbPassword" })
   dbPassword?: string;
 
-  @Metadata({ data: "json, name=DbUser" })
+  @SpeakeasyMetadata({ data: "json, name=DbUser" })
   dbUser?: string;
 
-  @Metadata({ data: "json, name=Engine" })
+  @SpeakeasyMetadata({ data: "json, name=Engine" })
   engine?: string;
 
-  @Metadata({ data: "json, name=MissingOnRds" })
+  @SpeakeasyMetadata({ data: "json, name=MissingOnRds" })
   missingOnRds?: boolean;
 
-  @Metadata({ data: "json, name=RdsDbInstanceArn" })
+  @SpeakeasyMetadata({ data: "json, name=RdsDbInstanceArn" })
   rdsDbInstanceArn?: string;
 
-  @Metadata({ data: "json, name=Region" })
+  @SpeakeasyMetadata({ data: "json, name=Region" })
   region?: string;
 
-  @Metadata({ data: "json, name=StackId" })
+  @SpeakeasyMetadata({ data: "json, name=StackId" })
   stackId?: string;
 }

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { AcLsUpdateStatus } from "./aclsupdatestatus";
 import { ReshardingStatus } from "./reshardingstatus";
 import { PendingModifiedServiceUpdate } from "./pendingmodifiedserviceupdate";

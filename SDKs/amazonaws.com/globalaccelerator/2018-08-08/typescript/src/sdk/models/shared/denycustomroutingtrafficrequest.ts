@@ -1,19 +1,20 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DenyCustomRoutingTrafficRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DenyAllTrafficToEndpoint" })
+  @SpeakeasyMetadata({ data: "json, name=DenyAllTrafficToEndpoint" })
   denyAllTrafficToEndpoint?: boolean;
 
-  @Metadata({ data: "json, name=DestinationAddresses" })
+  @SpeakeasyMetadata({ data: "json, name=DestinationAddresses" })
   destinationAddresses?: string[];
 
-  @Metadata({ data: "json, name=DestinationPorts" })
+  @SpeakeasyMetadata({ data: "json, name=DestinationPorts" })
   destinationPorts?: number[];
 
-  @Metadata({ data: "json, name=EndpointGroupArn" })
+  @SpeakeasyMetadata({ data: "json, name=EndpointGroupArn" })
   endpointGroupArn: string;
 
-  @Metadata({ data: "json, name=EndpointId" })
+  @SpeakeasyMetadata({ data: "json, name=EndpointId" })
   endpointId: string;
 }

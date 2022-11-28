@@ -1,7 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import googlecloudretailv2rule
+from sdk import utils
+from . import *
 
 class GoogleCloudRetailV2ControlSearchSolutionUseCaseEnum(str, Enum):
     SEARCH_SOLUTION_USE_CASE_UNSPECIFIED = "SEARCH_SOLUTION_USE_CASE_UNSPECIFIED"
@@ -16,11 +18,29 @@ class GoogleCloudRetailV2ControlSolutionTypesEnum(str, Enum):
 
 @dataclass_json
 @dataclass
+class GoogleCloudRetailV2ControlInput:
+    r"""GoogleCloudRetailV2ControlInput
+    Configures dynamic metadata that can be linked to a ServingConfig and affect search or recommendation results at serving time.
+    """
+    
+    display_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('displayName') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    rule: Optional[GoogleCloudRetailV2Rule] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('rule') }})
+    search_solution_use_case: Optional[List[GoogleCloudRetailV2ControlSearchSolutionUseCaseEnum]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('searchSolutionUseCase') }})
+    solution_types: Optional[List[GoogleCloudRetailV2ControlSolutionTypesEnum]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('solutionTypes') }})
+    
+
+@dataclass_json
+@dataclass
 class GoogleCloudRetailV2Control:
-    associated_serving_config_ids: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'associatedServingConfigIds' }})
-    display_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'displayName' }})
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    rule: Optional[googlecloudretailv2rule.GoogleCloudRetailV2Rule] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'rule' }})
-    search_solution_use_case: Optional[List[GoogleCloudRetailV2ControlSearchSolutionUseCaseEnum]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'searchSolutionUseCase' }})
-    solution_types: Optional[List[GoogleCloudRetailV2ControlSolutionTypesEnum]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'solutionTypes' }})
+    r"""GoogleCloudRetailV2Control
+    Configures dynamic metadata that can be linked to a ServingConfig and affect search or recommendation results at serving time.
+    """
+    
+    associated_serving_config_ids: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('associatedServingConfigIds') }})
+    display_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('displayName') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    rule: Optional[GoogleCloudRetailV2Rule] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('rule') }})
+    search_solution_use_case: Optional[List[GoogleCloudRetailV2ControlSearchSolutionUseCaseEnum]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('searchSolutionUseCase') }})
+    solution_types: Optional[List[GoogleCloudRetailV2ControlSolutionTypesEnum]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('solutionTypes') }})
     

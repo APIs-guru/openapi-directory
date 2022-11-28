@@ -5,8 +5,8 @@ from sdk.models import shared
 
 @dataclass
 class GetQueryJobResultsForProjectPathParams:
-    project_id: str = field(default=None, metadata={'path_param': { 'field_name': 'project-id', 'style': 'simple', 'explode': False }})
-    queryjob_id: str = field(default=None, metadata={'path_param': { 'field_name': 'queryjob-id', 'style': 'simple', 'explode': False }})
+    project_id: str = field(metadata={'path_param': { 'field_name': 'project-id', 'style': 'simple', 'explode': False }})
+    queryjob_id: str = field(metadata={'path_param': { 'field_name': 'queryjob-id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -18,19 +18,19 @@ class GetQueryJobResultsForProjectQueryParams:
 
 @dataclass
 class GetQueryJobResultsForProjectSecurity:
-    access_token: shared.SchemeAccessToken = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer' }})
+    access_token: shared.SchemeAccessToken = field(metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer' }})
     
 
 @dataclass
 class GetQueryJobResultsForProjectRequest:
-    path_params: GetQueryJobResultsForProjectPathParams = field(default=None)
-    query_params: GetQueryJobResultsForProjectQueryParams = field(default=None)
-    security: GetQueryJobResultsForProjectSecurity = field(default=None)
+    path_params: GetQueryJobResultsForProjectPathParams = field()
+    query_params: GetQueryJobResultsForProjectQueryParams = field()
+    security: GetQueryJobResultsForProjectSecurity = field()
     
 
 @dataclass
 class GetQueryJobResultsForProjectResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     queryjob_project_results: Optional[shared.QueryjobProjectResults] = field(default=None)
     

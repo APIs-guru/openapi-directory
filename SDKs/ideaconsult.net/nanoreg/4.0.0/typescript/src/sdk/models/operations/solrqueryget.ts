@@ -1,43 +1,44 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
+
 export enum SolrqueryGetWtEnum {
-    Json = "json"
-,    Xml = "xml"
+    Json = "json",
+    Xml = "xml"
 }
 
 
 export class SolrqueryGetQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=q" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=q" })
   q?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=rows" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=rows" })
   rows?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=start" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=start" })
   start?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=wt" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=wt" })
   wt?: SolrqueryGetWtEnum;
 }
 
 
 export class SolrqueryGetRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: SolrqueryGetQueryParams;
 }
 
 
 export class SolrqueryGetResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   solrResponse?: shared.SolrResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

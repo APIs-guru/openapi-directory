@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import createrowrequest
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class BatchCreateRowsRequest:
-    requests: Optional[List[createrowrequest.CreateRowRequest]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'requests' }})
+    r"""BatchCreateRowsRequest
+    Request message for TablesService.BatchCreateRows.
+    """
+    
+    requests: Optional[List[CreateRowRequest]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('requests') }})
     

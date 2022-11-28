@@ -1,0 +1,81 @@
+import { SpeakeasyBase } from "../../../internal/utils";
+import { NestedCableInput } from "./nestedcable";
+export declare enum WritablePowerPortTypeEnum {
+    Iec60320C6 = "iec-60320-c6",
+    Iec60320C8 = "iec-60320-c8",
+    Iec60320C14 = "iec-60320-c14",
+    Iec60320C16 = "iec-60320-c16",
+    Iec60320C20 = "iec-60320-c20",
+    Iec60309PNE4h = "iec-60309-p-n-e-4h",
+    Iec60309PNE6h = "iec-60309-p-n-e-6h",
+    Iec60309PNE9h = "iec-60309-p-n-e-9h",
+    Iec603092pE4h = "iec-60309-2p-e-4h",
+    Iec603092pE6h = "iec-60309-2p-e-6h",
+    Iec603092pE9h = "iec-60309-2p-e-9h",
+    Iec603093pE4h = "iec-60309-3p-e-4h",
+    Iec603093pE6h = "iec-60309-3p-e-6h",
+    Iec603093pE9h = "iec-60309-3p-e-9h",
+    Iec603093pNE4h = "iec-60309-3p-n-e-4h",
+    Iec603093pNE6h = "iec-60309-3p-n-e-6h",
+    Iec603093pNE9h = "iec-60309-3p-n-e-9h",
+    Nema115p = "nema-1-15p",
+    Nema515p = "nema-5-15p",
+    Nema520p = "nema-5-20p",
+    Nema530p = "nema-5-30p",
+    Nema550p = "nema-5-50p",
+    Nema615p = "nema-6-15p",
+    Nema620p = "nema-6-20p",
+    Nema630p = "nema-6-30p",
+    Nema650p = "nema-6-50p",
+    Nema1030p = "nema-10-30p",
+    Nema1050p = "nema-10-50p",
+    Nema1420p = "nema-14-20p",
+    Nema1430p = "nema-14-30p",
+    Nema1450p = "nema-14-50p",
+    Nema1460p = "nema-14-60p",
+    NemaL115p = "nema-l1-15p",
+    NemaL515p = "nema-l5-15p",
+    NemaL520p = "nema-l5-20p",
+    NemaL530p = "nema-l5-30p",
+    NemaL550p = "nema-l5-50p",
+    NemaL615p = "nema-l6-15p",
+    NemaL620p = "nema-l6-20p",
+    NemaL630p = "nema-l6-30p",
+    NemaL650p = "nema-l6-50p",
+    NemaL1030p = "nema-l10-30p",
+    NemaL1420p = "nema-l14-20p",
+    NemaL1430p = "nema-l14-30p",
+    NemaL1450p = "nema-l14-50p",
+    NemaL1460p = "nema-l14-60p",
+    NemaL2120p = "nema-l21-20p",
+    NemaL2130p = "nema-l21-30p",
+    Cs6361c = "cs6361c",
+    Cs6365c = "cs6365c",
+    Cs8165c = "cs8165c",
+    Cs8265c = "cs8265c",
+    Cs8365c = "cs8365c",
+    Cs8465c = "cs8465c",
+    ItaE = "ita-e",
+    ItaF = "ita-f",
+    ItaEf = "ita-ef",
+    ItaG = "ita-g",
+    ItaH = "ita-h",
+    ItaI = "ita-i",
+    ItaJ = "ita-j",
+    ItaK = "ita-k",
+    ItaL = "ita-l",
+    ItaM = "ita-m",
+    ItaN = "ita-n",
+    ItaO = "ita-o"
+}
+export declare class WritablePowerPortInput extends SpeakeasyBase {
+    allocatedDraw?: number;
+    cable?: NestedCableInput;
+    connectionStatus?: boolean;
+    description?: string;
+    device: number;
+    maximumDraw?: number;
+    name: string;
+    tags?: string[];
+    type?: WritablePowerPortTypeEnum;
+}

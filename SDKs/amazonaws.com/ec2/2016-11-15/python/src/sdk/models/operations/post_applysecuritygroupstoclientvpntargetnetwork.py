@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostApplySecurityGroupsToClientVpnTargetNetworkActionEnum(str, Enum):
     APPLY_SECURITY_GROUPS_TO_CLIENT_VPN_TARGET_NETWORK = "ApplySecurityGroupsToClientVpnTargetNetwork"
@@ -10,8 +14,8 @@ class PostApplySecurityGroupsToClientVpnTargetNetworkVersionEnum(str, Enum):
 
 @dataclass
 class PostApplySecurityGroupsToClientVpnTargetNetworkQueryParams:
-    action: PostApplySecurityGroupsToClientVpnTargetNetworkActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostApplySecurityGroupsToClientVpnTargetNetworkVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostApplySecurityGroupsToClientVpnTargetNetworkActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostApplySecurityGroupsToClientVpnTargetNetworkVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostApplySecurityGroupsToClientVpnTargetNetworkHeaders:
 
 @dataclass
 class PostApplySecurityGroupsToClientVpnTargetNetworkRequest:
-    query_params: PostApplySecurityGroupsToClientVpnTargetNetworkQueryParams = field(default=None)
-    headers: PostApplySecurityGroupsToClientVpnTargetNetworkHeaders = field(default=None)
+    headers: PostApplySecurityGroupsToClientVpnTargetNetworkHeaders = field()
+    query_params: PostApplySecurityGroupsToClientVpnTargetNetworkQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostApplySecurityGroupsToClientVpnTargetNetworkResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

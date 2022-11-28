@@ -1,19 +1,20 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class Availablenumber extends SpeakeasyBase {
-  @Metadata({ data: "json, name=cost" })
+  @SpeakeasyMetadata({ data: "json, name=cost" })
   cost?: string;
 
-  @Metadata({ data: "json, name=country" })
+  @SpeakeasyMetadata({ data: "json, name=country" })
   country?: string;
 
-  @Metadata({ data: "json, name=features" })
+  @SpeakeasyMetadata({ data: "json, name=features" })
   features?: string[];
 
-  @Metadata({ data: "json, name=msisdn" })
+  @SpeakeasyMetadata({ data: "json, name=msisdn" })
   msisdn?: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: string;
 }

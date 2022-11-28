@@ -4,10 +4,6 @@ type GetAttributePoolUsingPostQueryParams struct {
 	PadID *string `queryParam:"style=form,explode=true,name=padID"`
 }
 
-type GetAttributePoolUsingPostRequest struct {
-	QueryParams GetAttributePoolUsingPostQueryParams
-}
-
 type GetAttributePoolUsingPost200ApplicationJSON struct {
 	Code    *int64                 `json:"code,omitempty"`
 	Data    map[string]interface{} `json:"data,omitempty"`
@@ -30,6 +26,10 @@ type GetAttributePoolUsingPost500ApplicationJSON struct {
 	Code    *int64                 `json:"code,omitempty"`
 	Data    map[string]interface{} `json:"data,omitempty"`
 	Message *string                `json:"message,omitempty"`
+}
+
+type GetAttributePoolUsingPostRequest struct {
+	QueryParams GetAttributePoolUsingPostQueryParams
 }
 
 type GetAttributePoolUsingPostResponse struct {

@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ReviewActionDetail } from "./reviewactiondetail";
 import { ReviewResultDetail } from "./reviewresultdetail";
+
 
 
 // ReviewReport
@@ -9,9 +9,9 @@ import { ReviewResultDetail } from "./reviewresultdetail";
  *  Contains both ReviewResult and ReviewAction elements for a particular HIT. 
 **/
 export class ReviewReport extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ReviewActions", elemType: shared.ReviewActionDetail })
+  @SpeakeasyMetadata({ data: "json, name=ReviewActions", elemType: ReviewActionDetail })
   reviewActions?: ReviewActionDetail[];
 
-  @Metadata({ data: "json, name=ReviewResults", elemType: shared.ReviewResultDetail })
+  @SpeakeasyMetadata({ data: "json, name=ReviewResults", elemType: ReviewResultDetail })
   reviewResults?: ReviewResultDetail[];
 }

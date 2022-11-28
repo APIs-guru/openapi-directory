@@ -1,8 +1,11 @@
-import warnings
+
+
 import requests
 from typing import Any,Optional
 from sdk.models import operations
 from . import utils
+
+
 
 
 SERVERS = [
@@ -11,28 +14,51 @@ SERVERS = [
 
 
 class SDK:
-    client = requests.Session()
-    server_url = SERVERS[0]
+    
+
+    _client: requests.Session
+    _security_client: requests.Session
+    
+    _server_url: str = SERVERS[0]
+    _language: str = "python"
+    _sdk_version: str = "0.0.1"
+    _gen_version: str = "internal"
+
+    def __init__(self) -> None:
+        self._client = requests.Session()
+        self._security_client = requests.Session()
+        
+
 
     def config_server_url(self, server_url: str, params: dict[str, str]):
-        if not params is None:
-            self.server_url = utils.replace_parameters(server_url, params)
+        if params is not None:
+            self._server_url = utils.replace_parameters(server_url, params)
         else:
-            self.server_url = server_url
-            
+            self._server_url = server_url
+
+        
     
 
+    def config_client(self, client: requests.Session):
+        self._client = client
+        
+    
+    
     
     def retrieve_prefix_pricing(self, request: operations.RetrievePrefixPricingRequest) -> operations.RetrievePrefixPricingResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieve outbound pricing for a specific dialing prefix.
+        Retrieves the pricing information based on the dialing prefix.
+        
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/get-prefix-pricing/outbound/{type}", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -59,15 +85,19 @@ class SDK:
 
     
     def retrieve_pricing_all_countries(self, request: operations.RetrievePricingAllCountriesRequest) -> operations.RetrievePricingAllCountriesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieve outbound pricing for all countries.
+        Retrieves the pricing information for all countries.
+        
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/get-full-pricing/outbound/{type}", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -94,15 +124,19 @@ class SDK:
 
     
     def retrieve_pricing_country(self, request: operations.RetrievePricingCountryRequest) -> operations.RetrievePricingCountryResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieve outbound pricing for a specific country.
+        Retrieves the pricing information based on the specified country.
+        
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/get-pricing/outbound/{type}", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 

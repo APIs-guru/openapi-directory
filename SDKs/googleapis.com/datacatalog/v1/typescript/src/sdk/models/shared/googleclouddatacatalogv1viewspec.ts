@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudDatacatalogV1ViewSpec
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Table view specification.
 **/
 export class GoogleCloudDatacatalogV1ViewSpec extends SpeakeasyBase {
-  @Metadata({ data: "json, name=viewQuery" })
+  @SpeakeasyMetadata({ data: "json, name=viewQuery" })
   viewQuery?: string;
 }

@@ -1,70 +1,71 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class User extends SpeakeasyBase {
-  @Metadata({ data: "json, name=administrator" })
+  @SpeakeasyMetadata({ data: "json, name=administrator" })
   administrator?: boolean;
 
-  @Metadata({ data: "json, name=attributes" })
+  @SpeakeasyMetadata({ data: "json, name=attributes" })
   attributes?: Map<string, any>;
 
-  @Metadata({ data: "json, name=coordinateFormat" })
+  @SpeakeasyMetadata({ data: "json, name=coordinateFormat" })
   coordinateFormat?: string;
 
-  @Metadata({ data: "json, name=deviceLimit" })
+  @SpeakeasyMetadata({ data: "json, name=deviceLimit" })
   deviceLimit?: number;
 
-  @Metadata({ data: "json, name=deviceReadonly" })
+  @SpeakeasyMetadata({ data: "json, name=deviceReadonly" })
   deviceReadonly?: boolean;
 
-  @Metadata({ data: "json, name=disabled" })
+  @SpeakeasyMetadata({ data: "json, name=disabled" })
   disabled?: boolean;
 
-  @Metadata({ data: "json, name=email" })
+  @SpeakeasyMetadata({ data: "json, name=email" })
   email?: string;
 
-  @Metadata({ data: "json, name=expirationTime" })
+  @SpeakeasyMetadata({ data: "json, name=expirationTime" })
   expirationTime?: Date;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: number;
 
-  @Metadata({ data: "json, name=latitude" })
+  @SpeakeasyMetadata({ data: "json, name=latitude" })
   latitude?: number;
 
-  @Metadata({ data: "json, name=limitCommands" })
+  @SpeakeasyMetadata({ data: "json, name=limitCommands" })
   limitCommands?: boolean;
 
-  @Metadata({ data: "json, name=longitude" })
+  @SpeakeasyMetadata({ data: "json, name=longitude" })
   longitude?: number;
 
-  @Metadata({ data: "json, name=map" })
+  @SpeakeasyMetadata({ data: "json, name=map" })
   map?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=password" })
+  @SpeakeasyMetadata({ data: "json, name=password" })
   password?: string;
 
-  @Metadata({ data: "json, name=phone" })
+  @SpeakeasyMetadata({ data: "json, name=phone" })
   phone?: string;
 
-  @Metadata({ data: "json, name=poiLayer" })
+  @SpeakeasyMetadata({ data: "json, name=poiLayer" })
   poiLayer?: string;
 
-  @Metadata({ data: "json, name=readonly" })
+  @SpeakeasyMetadata({ data: "json, name=readonly" })
   readonly?: boolean;
 
-  @Metadata({ data: "json, name=token" })
+  @SpeakeasyMetadata({ data: "json, name=token" })
   token?: string;
 
-  @Metadata({ data: "json, name=twelveHourFormat" })
+  @SpeakeasyMetadata({ data: "json, name=twelveHourFormat" })
   twelveHourFormat?: boolean;
 
-  @Metadata({ data: "json, name=userLimit" })
+  @SpeakeasyMetadata({ data: "json, name=userLimit" })
   userLimit?: number;
 
-  @Metadata({ data: "json, name=zoom" })
+  @SpeakeasyMetadata({ data: "json, name=zoom" })
   zoom?: number;
 }

@@ -1,7 +1,8 @@
 
 
+
 export enum ConnectionStatusEnum {
-    Pending = "PENDING"
-,    Available = "AVAILABLE"
-,    Error = "ERROR"
+    Pending = "PENDING",
+    Available = "AVAILABLE",
+    Error = "ERROR"
 }

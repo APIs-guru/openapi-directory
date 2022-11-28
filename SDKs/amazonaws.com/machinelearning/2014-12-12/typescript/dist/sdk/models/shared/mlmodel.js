@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AlgorithmEnum } from "./algorithmenum";
 import { RealtimeEndpointInfo } from "./realtimeendpointinfo";
 import { MlModelTypeEnum } from "./mlmodeltypeenum";
@@ -37,79 +37,79 @@ var MlModel = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Algorithm" }),
+        SpeakeasyMetadata({ data: "json, name=Algorithm" }),
         __metadata("design:type", String)
     ], MlModel.prototype, "algorithm", void 0);
     __decorate([
-        Metadata({ data: "json, name=ComputeTime" }),
+        SpeakeasyMetadata({ data: "json, name=ComputeTime" }),
         __metadata("design:type", Number)
     ], MlModel.prototype, "computeTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=CreatedAt" }),
+        SpeakeasyMetadata({ data: "json, name=CreatedAt" }),
         __metadata("design:type", Date)
     ], MlModel.prototype, "createdAt", void 0);
     __decorate([
-        Metadata({ data: "json, name=CreatedByIamUser" }),
+        SpeakeasyMetadata({ data: "json, name=CreatedByIamUser" }),
         __metadata("design:type", String)
     ], MlModel.prototype, "createdByIamUser", void 0);
     __decorate([
-        Metadata({ data: "json, name=EndpointInfo" }),
+        SpeakeasyMetadata({ data: "json, name=EndpointInfo" }),
         __metadata("design:type", RealtimeEndpointInfo)
     ], MlModel.prototype, "endpointInfo", void 0);
     __decorate([
-        Metadata({ data: "json, name=FinishedAt" }),
+        SpeakeasyMetadata({ data: "json, name=FinishedAt" }),
         __metadata("design:type", Date)
     ], MlModel.prototype, "finishedAt", void 0);
     __decorate([
-        Metadata({ data: "json, name=InputDataLocationS3" }),
+        SpeakeasyMetadata({ data: "json, name=InputDataLocationS3" }),
         __metadata("design:type", String)
     ], MlModel.prototype, "inputDataLocationS3", void 0);
     __decorate([
-        Metadata({ data: "json, name=LastUpdatedAt" }),
+        SpeakeasyMetadata({ data: "json, name=LastUpdatedAt" }),
         __metadata("design:type", Date)
     ], MlModel.prototype, "lastUpdatedAt", void 0);
     __decorate([
-        Metadata({ data: "json, name=MLModelId" }),
+        SpeakeasyMetadata({ data: "json, name=MLModelId" }),
         __metadata("design:type", String)
     ], MlModel.prototype, "mlModelId", void 0);
     __decorate([
-        Metadata({ data: "json, name=MLModelType" }),
+        SpeakeasyMetadata({ data: "json, name=MLModelType" }),
         __metadata("design:type", String)
     ], MlModel.prototype, "mlModelType", void 0);
     __decorate([
-        Metadata({ data: "json, name=Message" }),
+        SpeakeasyMetadata({ data: "json, name=Message" }),
         __metadata("design:type", String)
     ], MlModel.prototype, "message", void 0);
     __decorate([
-        Metadata({ data: "json, name=Name" }),
+        SpeakeasyMetadata({ data: "json, name=Name" }),
         __metadata("design:type", String)
     ], MlModel.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=ScoreThreshold" }),
+        SpeakeasyMetadata({ data: "json, name=ScoreThreshold" }),
         __metadata("design:type", Number)
     ], MlModel.prototype, "scoreThreshold", void 0);
     __decorate([
-        Metadata({ data: "json, name=ScoreThresholdLastUpdatedAt" }),
+        SpeakeasyMetadata({ data: "json, name=ScoreThresholdLastUpdatedAt" }),
         __metadata("design:type", Date)
     ], MlModel.prototype, "scoreThresholdLastUpdatedAt", void 0);
     __decorate([
-        Metadata({ data: "json, name=SizeInBytes" }),
+        SpeakeasyMetadata({ data: "json, name=SizeInBytes" }),
         __metadata("design:type", Number)
     ], MlModel.prototype, "sizeInBytes", void 0);
     __decorate([
-        Metadata({ data: "json, name=StartedAt" }),
+        SpeakeasyMetadata({ data: "json, name=StartedAt" }),
         __metadata("design:type", Date)
     ], MlModel.prototype, "startedAt", void 0);
     __decorate([
-        Metadata({ data: "json, name=Status" }),
+        SpeakeasyMetadata({ data: "json, name=Status" }),
         __metadata("design:type", String)
     ], MlModel.prototype, "status", void 0);
     __decorate([
-        Metadata({ data: "json, name=TrainingDataSourceId" }),
+        SpeakeasyMetadata({ data: "json, name=TrainingDataSourceId" }),
         __metadata("design:type", String)
     ], MlModel.prototype, "trainingDataSourceId", void 0);
     __decorate([
-        Metadata({ data: "json, name=TrainingParameters" }),
+        SpeakeasyMetadata({ data: "json, name=TrainingParameters" }),
         __metadata("design:type", Map)
     ], MlModel.prototype, "trainingParameters", void 0);
     return MlModel;

@@ -1,7 +1,8 @@
 
 
+
 export enum NamespaceDeletionStatusEnum {
-    InProgress = "IN_PROGRESS"
-,    Succeeded = "SUCCEEDED"
-,    Failed = "FAILED"
+    InProgress = "IN_PROGRESS",
+    Succeeded = "SUCCEEDED",
+    Failed = "FAILED"
 }

@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AnswerSummary } from "./answersummary";
+
 
 
 // ListAnswersOutput
@@ -8,18 +8,18 @@ import { AnswerSummary } from "./answersummary";
  * Output of a list answers call.
 **/
 export class ListAnswersOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AnswerSummaries", elemType: shared.AnswerSummary })
+  @SpeakeasyMetadata({ data: "json, name=AnswerSummaries", elemType: AnswerSummary })
   answerSummaries?: AnswerSummary[];
 
-  @Metadata({ data: "json, name=LensAlias" })
+  @SpeakeasyMetadata({ data: "json, name=LensAlias" })
   lensAlias?: string;
 
-  @Metadata({ data: "json, name=MilestoneNumber" })
+  @SpeakeasyMetadata({ data: "json, name=MilestoneNumber" })
   milestoneNumber?: number;
 
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=WorkloadId" })
+  @SpeakeasyMetadata({ data: "json, name=WorkloadId" })
   workloadId?: string;
 }

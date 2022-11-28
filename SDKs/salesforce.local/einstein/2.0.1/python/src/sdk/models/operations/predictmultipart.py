@@ -11,18 +11,18 @@ class PredictMultipartRequests:
 
 @dataclass
 class PredictMultipartSecurity:
-    bearer_token: shared.SchemeBearerToken = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer' }})
+    bearer_token: shared.SchemeBearerToken = field(metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer' }})
     
 
 @dataclass
 class PredictMultipartRequest:
+    security: PredictMultipartSecurity = field()
     request: Optional[PredictMultipartRequests] = field(default=None)
-    security: PredictMultipartSecurity = field(default=None)
     
 
 @dataclass
 class PredictMultipartResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     image_classification_response: Optional[shared.ImageClassificationResponse] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { AlgorithmEnum } from "./algorithmenum";
 import { RealtimeEndpointInfo } from "./realtimeendpointinfo";
 import { MlModelTypeEnum } from "./mlmodeltypeenum";

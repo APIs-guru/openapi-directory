@@ -22,45 +22,21 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
-var FetchUploadStatusesSecurityOption1 = /** @class */ (function (_super) {
-    __extends(FetchUploadStatusesSecurityOption1, _super);
-    function FetchUploadStatusesSecurityOption1() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
-        __metadata("design:type", shared.SchemeApiKey)
-    ], FetchUploadStatusesSecurityOption1.prototype, "apiKey", void 0);
-    return FetchUploadStatusesSecurityOption1;
-}(SpeakeasyBase));
-export { FetchUploadStatusesSecurityOption1 };
-var FetchUploadStatusesSecurityOption2 = /** @class */ (function (_super) {
-    __extends(FetchUploadStatusesSecurityOption2, _super);
-    function FetchUploadStatusesSecurityOption2() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
-        __metadata("design:type", shared.SchemeOauth2AuthorizationCode)
-    ], FetchUploadStatusesSecurityOption2.prototype, "oauth2AuthorizationCode", void 0);
-    return FetchUploadStatusesSecurityOption2;
-}(SpeakeasyBase));
-export { FetchUploadStatusesSecurityOption2 };
 var FetchUploadStatusesSecurity = /** @class */ (function (_super) {
     __extends(FetchUploadStatusesSecurity, _super);
     function FetchUploadStatusesSecurity() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, option=true" }),
-        __metadata("design:type", FetchUploadStatusesSecurityOption1)
-    ], FetchUploadStatusesSecurity.prototype, "option1", void 0);
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        __metadata("design:type", shared.SchemeApiKey)
+    ], FetchUploadStatusesSecurity.prototype, "apiKey", void 0);
     __decorate([
-        Metadata({ data: "security, option=true" }),
-        __metadata("design:type", FetchUploadStatusesSecurityOption2)
-    ], FetchUploadStatusesSecurity.prototype, "option2", void 0);
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
+        __metadata("design:type", shared.SchemeOauth2AuthorizationCode)
+    ], FetchUploadStatusesSecurity.prototype, "oauth2AuthorizationCode", void 0);
     return FetchUploadStatusesSecurity;
 }(SpeakeasyBase));
 export { FetchUploadStatusesSecurity };
@@ -70,11 +46,11 @@ var FetchUploadStatusesRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", shared.UploadStatusQuery)
     ], FetchUploadStatusesRequest.prototype, "request", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", FetchUploadStatusesSecurity)
     ], FetchUploadStatusesRequest.prototype, "security", void 0);
     return FetchUploadStatusesRequest;
@@ -86,23 +62,23 @@ var FetchUploadStatusesResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], FetchUploadStatusesResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.Error)
     ], FetchUploadStatusesResponse.prototype, "error", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Map)
     ], FetchUploadStatusesResponse.prototype, "headers", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], FetchUploadStatusesResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.UploadStatuses)
     ], FetchUploadStatusesResponse.prototype, "uploadStatuses", void 0);
     return FetchUploadStatusesResponse;

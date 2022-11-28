@@ -18,6 +18,8 @@ type PublishLayerVersionHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// PublishLayerVersionRequestBodyContent
+// A ZIP archive that contains the contents of an <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html">Lambda layer</a>. You can specify either an Amazon S3 location, or upload a layer archive directly.
 type PublishLayerVersionRequestBodyContent struct {
 	S3Bucket        *string `json:"S3Bucket,omitempty"`
 	S3Key           *string `json:"S3Key,omitempty"`

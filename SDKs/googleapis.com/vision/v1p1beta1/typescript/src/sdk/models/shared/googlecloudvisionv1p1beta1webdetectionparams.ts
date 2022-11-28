@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudVisionV1p1beta1WebDetectionParams
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Parameters for web detection request.
 **/
 export class GoogleCloudVisionV1p1beta1WebDetectionParams extends SpeakeasyBase {
-  @Metadata({ data: "json, name=includeGeoResults" })
+  @SpeakeasyMetadata({ data: "json, name=includeGeoResults" })
   includeGeoResults?: boolean;
 }

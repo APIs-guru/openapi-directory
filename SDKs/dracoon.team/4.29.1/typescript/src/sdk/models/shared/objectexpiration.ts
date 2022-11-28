@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ObjectExpiration
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Expiration information
 **/
 export class ObjectExpiration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=enableExpiration" })
+  @SpeakeasyMetadata({ data: "json, name=enableExpiration" })
   enableExpiration: boolean;
 
-  @Metadata({ data: "json, name=expireAt" })
+  @SpeakeasyMetadata({ data: "json, name=expireAt" })
   expireAt?: Date;
 }

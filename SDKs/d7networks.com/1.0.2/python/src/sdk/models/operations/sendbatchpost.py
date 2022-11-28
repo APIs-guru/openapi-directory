@@ -4,18 +4,18 @@ from sdk.models import shared
 
 @dataclass
 class SendbatchPostHeaders:
-    accept: str = field(default=None, metadata={'header': { 'field_name': 'Accept', 'style': 'simple', 'explode': False }})
-    content_type: str = field(default=None, metadata={'header': { 'field_name': 'Content-Type', 'style': 'simple', 'explode': False }})
+    accept: str = field(metadata={'header': { 'field_name': 'Accept', 'style': 'simple', 'explode': False }})
+    content_type: str = field(metadata={'header': { 'field_name': 'Content-Type', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class SendbatchPostRequest:
-    headers: SendbatchPostHeaders = field(default=None)
-    request: shared.BulkSmsRequest = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: SendbatchPostHeaders = field()
+    request: shared.BulkSmsRequest = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class SendbatchPostResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

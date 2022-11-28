@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class GetAPI10ProgramsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     programs: Optional[List[shared.Program]] = field(default=None)
-    status_code: int = field(default=None)
     

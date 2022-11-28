@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AwsLambdaFunctionDeadLetterConfig
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The dead-letter queue for failed asynchronous invocations.
 **/
 export class AwsLambdaFunctionDeadLetterConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=TargetArn" })
+  @SpeakeasyMetadata({ data: "json, name=TargetArn" })
   targetArn?: string;
 }

@@ -1,15 +1,20 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import templateversionstatus_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class UpdateEnvironmentTemplateVersionInput:
-    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
-    major_version: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'majorVersion' }})
-    minor_version: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'minorVersion' }})
-    status: Optional[templateversionstatus_enum.TemplateVersionStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
-    template_name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'templateName' }})
+    major_version: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('majorVersion') }})
+    minor_version: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('minorVersion') }})
+    template_name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('templateName') }})
+    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('description') }})
+    status: Optional[TemplateVersionStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('status') }})
     

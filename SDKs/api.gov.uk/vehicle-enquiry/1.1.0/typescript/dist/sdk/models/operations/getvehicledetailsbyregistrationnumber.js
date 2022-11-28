@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetVehicleDetailsByRegistrationNumberHeaders = /** @class */ (function (_super) {
     __extends(GetVehicleDetailsByRegistrationNumberHeaders, _super);
@@ -30,11 +30,11 @@ var GetVehicleDetailsByRegistrationNumberHeaders = /** @class */ (function (_sup
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Correlation-Id" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Correlation-Id" }),
         __metadata("design:type", String)
     ], GetVehicleDetailsByRegistrationNumberHeaders.prototype, "xCorrelationId", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=x-api-key" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=x-api-key" }),
         __metadata("design:type", String)
     ], GetVehicleDetailsByRegistrationNumberHeaders.prototype, "xApiKey", void 0);
     return GetVehicleDetailsByRegistrationNumberHeaders;
@@ -46,11 +46,11 @@ var GetVehicleDetailsByRegistrationNumberRequest = /** @class */ (function (_sup
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetVehicleDetailsByRegistrationNumberHeaders)
     ], GetVehicleDetailsByRegistrationNumberRequest.prototype, "headers", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", shared.VehicleRequest)
     ], GetVehicleDetailsByRegistrationNumberRequest.prototype, "request", void 0);
     return GetVehicleDetailsByRegistrationNumberRequest;
@@ -62,19 +62,19 @@ var GetVehicleDetailsByRegistrationNumberResponse = /** @class */ (function (_su
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetVehicleDetailsByRegistrationNumberResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.ErrorResponse)
     ], GetVehicleDetailsByRegistrationNumberResponse.prototype, "errorResponse", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetVehicleDetailsByRegistrationNumberResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.Vehicle)
     ], GetVehicleDetailsByRegistrationNumberResponse.prototype, "vehicle", void 0);
     return GetVehicleDetailsByRegistrationNumberResponse;

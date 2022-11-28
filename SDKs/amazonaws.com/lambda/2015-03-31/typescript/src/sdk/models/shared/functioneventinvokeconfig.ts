@@ -1,20 +1,21 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DestinationConfig } from "./destinationconfig";
 
 
+
 export class FunctionEventInvokeConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DestinationConfig" })
+  @SpeakeasyMetadata({ data: "json, name=DestinationConfig" })
   destinationConfig?: DestinationConfig;
 
-  @Metadata({ data: "json, name=FunctionArn" })
+  @SpeakeasyMetadata({ data: "json, name=FunctionArn" })
   functionArn?: string;
 
-  @Metadata({ data: "json, name=LastModified" })
+  @SpeakeasyMetadata({ data: "json, name=LastModified" })
   lastModified?: Date;
 
-  @Metadata({ data: "json, name=MaximumEventAgeInSeconds" })
+  @SpeakeasyMetadata({ data: "json, name=MaximumEventAgeInSeconds" })
   maximumEventAgeInSeconds?: number;
 
-  @Metadata({ data: "json, name=MaximumRetryAttempts" })
+  @SpeakeasyMetadata({ data: "json, name=MaximumRetryAttempts" })
   maximumRetryAttempts?: number;
 }

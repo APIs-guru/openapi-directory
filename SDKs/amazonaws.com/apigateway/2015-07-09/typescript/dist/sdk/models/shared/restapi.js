@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ApiKeySourceTypeEnum } from "./apikeysourcetypeenum";
 import { EndpointConfiguration } from "./endpointconfiguration";
 // RestApi
@@ -35,55 +35,55 @@ var RestApi = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=apiKeySource" }),
+        SpeakeasyMetadata({ data: "json, name=apiKeySource" }),
         __metadata("design:type", String)
     ], RestApi.prototype, "apiKeySource", void 0);
     __decorate([
-        Metadata({ data: "json, name=binaryMediaTypes" }),
+        SpeakeasyMetadata({ data: "json, name=binaryMediaTypes" }),
         __metadata("design:type", Array)
     ], RestApi.prototype, "binaryMediaTypes", void 0);
     __decorate([
-        Metadata({ data: "json, name=createdDate" }),
+        SpeakeasyMetadata({ data: "json, name=createdDate" }),
         __metadata("design:type", Date)
     ], RestApi.prototype, "createdDate", void 0);
     __decorate([
-        Metadata({ data: "json, name=description" }),
+        SpeakeasyMetadata({ data: "json, name=description" }),
         __metadata("design:type", String)
     ], RestApi.prototype, "description", void 0);
     __decorate([
-        Metadata({ data: "json, name=disableExecuteApiEndpoint" }),
+        SpeakeasyMetadata({ data: "json, name=disableExecuteApiEndpoint" }),
         __metadata("design:type", Boolean)
     ], RestApi.prototype, "disableExecuteApiEndpoint", void 0);
     __decorate([
-        Metadata({ data: "json, name=endpointConfiguration" }),
+        SpeakeasyMetadata({ data: "json, name=endpointConfiguration" }),
         __metadata("design:type", EndpointConfiguration)
     ], RestApi.prototype, "endpointConfiguration", void 0);
     __decorate([
-        Metadata({ data: "json, name=id" }),
+        SpeakeasyMetadata({ data: "json, name=id" }),
         __metadata("design:type", String)
     ], RestApi.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "json, name=minimumCompressionSize" }),
+        SpeakeasyMetadata({ data: "json, name=minimumCompressionSize" }),
         __metadata("design:type", Number)
     ], RestApi.prototype, "minimumCompressionSize", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], RestApi.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=policy" }),
+        SpeakeasyMetadata({ data: "json, name=policy" }),
         __metadata("design:type", String)
     ], RestApi.prototype, "policy", void 0);
     __decorate([
-        Metadata({ data: "json, name=tags" }),
+        SpeakeasyMetadata({ data: "json, name=tags" }),
         __metadata("design:type", Map)
     ], RestApi.prototype, "tags", void 0);
     __decorate([
-        Metadata({ data: "json, name=version" }),
+        SpeakeasyMetadata({ data: "json, name=version" }),
         __metadata("design:type", String)
     ], RestApi.prototype, "version", void 0);
     __decorate([
-        Metadata({ data: "json, name=warnings" }),
+        SpeakeasyMetadata({ data: "json, name=warnings" }),
         __metadata("design:type", Array)
     ], RestApi.prototype, "warnings", void 0);
     return RestApi;

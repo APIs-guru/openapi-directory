@@ -4,10 +4,8 @@ type PostServersIDActionsPoweronPathParams struct {
 	ID int64 `pathParam:"style=simple,explode=false,name=id"`
 }
 
-type PostServersIDActionsPoweronRequest struct {
-	PathParams PostServersIDActionsPoweronPathParams
-}
-
+// PostServersIDActionsPoweronActionResponseActionError
+// Error message for the Action if error occurred, otherwise null
 type PostServersIDActionsPoweronActionResponseActionError struct {
 	Code    string `json:"code"`
 	Message string `json:"message"`
@@ -39,6 +37,10 @@ type PostServersIDActionsPoweronActionResponseAction struct {
 
 type PostServersIDActionsPoweronActionResponse struct {
 	Action PostServersIDActionsPoweronActionResponseAction `json:"action"`
+}
+
+type PostServersIDActionsPoweronRequest struct {
+	PathParams PostServersIDActionsPoweronPathParams
 }
 
 type PostServersIDActionsPoweronResponse struct {

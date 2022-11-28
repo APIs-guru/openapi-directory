@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AutomationExecution
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The Systems Manager automation document process to start as the runbook at the beginning of the incident.
 **/
 export class AutomationExecution extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ssmExecutionArn" })
+  @SpeakeasyMetadata({ data: "json, name=ssmExecutionArn" })
   ssmExecutionArn?: string;
 }

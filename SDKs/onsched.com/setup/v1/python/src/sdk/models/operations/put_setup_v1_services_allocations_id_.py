@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Optional
 from sdk.models import shared
 
 
 @dataclass
 class PutSetupV1ServicesAllocationsIDPathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -18,13 +21,13 @@ class PutSetupV1ServicesAllocationsIDRequests:
 
 @dataclass
 class PutSetupV1ServicesAllocationsIDRequest:
-    path_params: PutSetupV1ServicesAllocationsIDPathParams = field(default=None)
+    path_params: PutSetupV1ServicesAllocationsIDPathParams = field()
     request: Optional[PutSetupV1ServicesAllocationsIDRequests] = field(default=None)
     
 
 @dataclass
 class PutSetupV1ServicesAllocationsIDResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     service_allocation_view_model: Optional[shared.ServiceAllocationViewModel] = field(default=None)
-    status_code: int = field(default=None)
     

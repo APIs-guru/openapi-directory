@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { OsConstraint } from "./osconstraint";
 export var DevicePolicyAllowedDeviceManagementLevelsEnum;
 (function (DevicePolicyAllowedDeviceManagementLevelsEnum) {
     DevicePolicyAllowedDeviceManagementLevelsEnum["ManagementUnspecified"] = "MANAGEMENT_UNSPECIFIED";
@@ -48,27 +48,27 @@ var DevicePolicy = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=allowedDeviceManagementLevels" }),
+        SpeakeasyMetadata({ data: "json, name=allowedDeviceManagementLevels" }),
         __metadata("design:type", Array)
     ], DevicePolicy.prototype, "allowedDeviceManagementLevels", void 0);
     __decorate([
-        Metadata({ data: "json, name=allowedEncryptionStatuses" }),
+        SpeakeasyMetadata({ data: "json, name=allowedEncryptionStatuses" }),
         __metadata("design:type", Array)
     ], DevicePolicy.prototype, "allowedEncryptionStatuses", void 0);
     __decorate([
-        Metadata({ data: "json, name=osConstraints", elemType: shared.OsConstraint }),
+        SpeakeasyMetadata({ data: "json, name=osConstraints", elemType: OsConstraint }),
         __metadata("design:type", Array)
     ], DevicePolicy.prototype, "osConstraints", void 0);
     __decorate([
-        Metadata({ data: "json, name=requireAdminApproval" }),
+        SpeakeasyMetadata({ data: "json, name=requireAdminApproval" }),
         __metadata("design:type", Boolean)
     ], DevicePolicy.prototype, "requireAdminApproval", void 0);
     __decorate([
-        Metadata({ data: "json, name=requireCorpOwned" }),
+        SpeakeasyMetadata({ data: "json, name=requireCorpOwned" }),
         __metadata("design:type", Boolean)
     ], DevicePolicy.prototype, "requireCorpOwned", void 0);
     __decorate([
-        Metadata({ data: "json, name=requireScreenlock" }),
+        SpeakeasyMetadata({ data: "json, name=requireScreenlock" }),
         __metadata("design:type", Boolean)
     ], DevicePolicy.prototype, "requireScreenlock", void 0);
     return DevicePolicy;

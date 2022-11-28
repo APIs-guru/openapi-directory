@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { DeviceStatusEnum } from "./devicestatusenum";
 export declare class DescribeDeviceResponse extends SpeakeasyBase {
     firstAccessedTime?: Date;

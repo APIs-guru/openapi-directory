@@ -5,17 +5,17 @@ from sdk.models import shared
 
 @dataclass
 class GetOrdersOrderIDPathParams:
-    order_id: str = field(default=None, metadata={'path_param': { 'field_name': 'orderId', 'style': 'simple', 'explode': False }})
+    order_id: str = field(metadata={'path_param': { 'field_name': 'orderId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetOrdersOrderIDRequest:
-    path_params: GetOrdersOrderIDPathParams = field(default=None)
+    path_params: GetOrdersOrderIDPathParams = field()
     
 
 @dataclass
 class GetOrdersOrderIDResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     get_order: Optional[shared.GetOrder] = field(default=None)
-    status_code: int = field(default=None)
     

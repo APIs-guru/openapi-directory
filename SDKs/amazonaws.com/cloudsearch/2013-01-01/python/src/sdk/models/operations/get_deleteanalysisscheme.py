@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetDeleteAnalysisSchemeActionEnum(str, Enum):
     DELETE_ANALYSIS_SCHEME = "DeleteAnalysisScheme"
@@ -10,10 +14,10 @@ class GetDeleteAnalysisSchemeVersionEnum(str, Enum):
 
 @dataclass
 class GetDeleteAnalysisSchemeQueryParams:
-    action: GetDeleteAnalysisSchemeActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    analysis_scheme_name: str = field(default=None, metadata={'query_param': { 'field_name': 'AnalysisSchemeName', 'style': 'form', 'explode': True }})
-    domain_name: str = field(default=None, metadata={'query_param': { 'field_name': 'DomainName', 'style': 'form', 'explode': True }})
-    version: GetDeleteAnalysisSchemeVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: GetDeleteAnalysisSchemeActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    analysis_scheme_name: str = field(metadata={'query_param': { 'field_name': 'AnalysisSchemeName', 'style': 'form', 'explode': True }})
+    domain_name: str = field(metadata={'query_param': { 'field_name': 'DomainName', 'style': 'form', 'explode': True }})
+    version: GetDeleteAnalysisSchemeVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -29,13 +33,13 @@ class GetDeleteAnalysisSchemeHeaders:
 
 @dataclass
 class GetDeleteAnalysisSchemeRequest:
-    query_params: GetDeleteAnalysisSchemeQueryParams = field(default=None)
-    headers: GetDeleteAnalysisSchemeHeaders = field(default=None)
+    headers: GetDeleteAnalysisSchemeHeaders = field()
+    query_params: GetDeleteAnalysisSchemeQueryParams = field()
     
 
 @dataclass
 class GetDeleteAnalysisSchemeResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

@@ -1,11 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum GoogleCloudDocumentaiV1HumanReviewStatusStateEnum {
-    StateUnspecified = "STATE_UNSPECIFIED"
-,    Skipped = "SKIPPED"
-,    ValidationPassed = "VALIDATION_PASSED"
-,    InProgress = "IN_PROGRESS"
-,    Error = "ERROR"
+    StateUnspecified = "STATE_UNSPECIFIED",
+    Skipped = "SKIPPED",
+    ValidationPassed = "VALIDATION_PASSED",
+    InProgress = "IN_PROGRESS",
+    Error = "ERROR"
 }
 
 
@@ -14,12 +15,12 @@ export enum GoogleCloudDocumentaiV1HumanReviewStatusStateEnum {
  * The status of human review on a processed document.
 **/
 export class GoogleCloudDocumentaiV1HumanReviewStatus extends SpeakeasyBase {
-  @Metadata({ data: "json, name=humanReviewOperation" })
+  @SpeakeasyMetadata({ data: "json, name=humanReviewOperation" })
   humanReviewOperation?: string;
 
-  @Metadata({ data: "json, name=state" })
+  @SpeakeasyMetadata({ data: "json, name=state" })
   state?: GoogleCloudDocumentaiV1HumanReviewStatusStateEnum;
 
-  @Metadata({ data: "json, name=stateMessage" })
+  @SpeakeasyMetadata({ data: "json, name=stateMessage" })
   stateMessage?: string;
 }

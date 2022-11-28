@@ -13,18 +13,18 @@ type UpdateGoalQueryParams struct {
 	OptPretty *bool    `queryParam:"style=form,explode=true,name=opt_pretty"`
 }
 
-type UpdateGoalRequestBody struct {
-	Data *shared.GoalRequest `json:"data,omitempty"`
+type UpdateGoalRequestBodyInput struct {
+	Data *shared.GoalRequestInput `json:"data,omitempty"`
+}
+
+type UpdateGoal200ApplicationJSON struct {
+	Data *shared.GoalResponse `json:"data,omitempty"`
 }
 
 type UpdateGoalRequest struct {
 	PathParams  UpdateGoalPathParams
 	QueryParams UpdateGoalQueryParams
-	Request     UpdateGoalRequestBody `request:"mediaType=application/json"`
-}
-
-type UpdateGoal200ApplicationJSON struct {
-	Data *shared.GoalResponse `json:"data,omitempty"`
+	Request     UpdateGoalRequestBodyInput `request:"mediaType=application/json"`
 }
 
 type UpdateGoalResponse struct {

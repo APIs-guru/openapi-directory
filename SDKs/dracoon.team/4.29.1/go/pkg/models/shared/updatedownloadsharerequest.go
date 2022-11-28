@@ -1,5 +1,7 @@
 package shared
 
+// UpdateDownloadShareRequest
+// Request model for updating a Download Share
 type UpdateDownloadShareRequest struct {
 	DefaultCountry        *string           `json:"defaultCountry,omitempty"`
 	Expiration            *ObjectExpiration `json:"expiration,omitempty"`

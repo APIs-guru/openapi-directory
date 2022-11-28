@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ActivityTypeInfo } from "./activitytypeinfo";
+
 
 
 // ActivityTypeInfos
@@ -8,9 +8,9 @@ import { ActivityTypeInfo } from "./activitytypeinfo";
  * Contains a paginated list of activity type information structures.
 **/
 export class ActivityTypeInfos extends SpeakeasyBase {
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 
-  @Metadata({ data: "json, name=typeInfos", elemType: shared.ActivityTypeInfo })
+  @SpeakeasyMetadata({ data: "json, name=typeInfos", elemType: ActivityTypeInfo })
   typeInfos: ActivityTypeInfo[];
 }

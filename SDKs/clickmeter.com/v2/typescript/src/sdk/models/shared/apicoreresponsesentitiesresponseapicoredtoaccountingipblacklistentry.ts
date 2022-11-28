@@ -1,9 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ApiCoreDtoAccountingIpBlacklistEntry } from "./apicoredtoaccountingipblacklistentry";
 
 
+
 export class ApiCoreResponsesEntitiesResponseApiCoreDtoAccountingIpBlacklistEntry extends SpeakeasyBase {
-  @Metadata({ data: "json, name=entities", elemType: shared.ApiCoreDtoAccountingIpBlacklistEntry })
+  @SpeakeasyMetadata({ data: "json, name=entities", elemType: ApiCoreDtoAccountingIpBlacklistEntry })
   entities?: ApiCoreDtoAccountingIpBlacklistEntry[];
 }

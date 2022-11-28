@@ -4,10 +4,6 @@ type ListAuthorsOfPadUsingGetQueryParams struct {
 	PadID *string `queryParam:"style=form,explode=true,name=padID"`
 }
 
-type ListAuthorsOfPadUsingGetRequest struct {
-	QueryParams ListAuthorsOfPadUsingGetQueryParams
-}
-
 type ListAuthorsOfPadUsingGet200ApplicationJSONData struct {
 	AuthorIDs []string `json:"authorIDs,omitempty"`
 }
@@ -34,6 +30,10 @@ type ListAuthorsOfPadUsingGet500ApplicationJSON struct {
 	Code    *int64                 `json:"code,omitempty"`
 	Data    map[string]interface{} `json:"data,omitempty"`
 	Message *string                `json:"message,omitempty"`
+}
+
+type ListAuthorsOfPadUsingGetRequest struct {
+	QueryParams ListAuthorsOfPadUsingGetQueryParams
 }
 
 type ListAuthorsOfPadUsingGetResponse struct {

@@ -1,59 +1,60 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum SongListApiGetFeaturedListNamesFeaturedCategoryEnum {
-    Nothing = "Nothing"
-,    Concerts = "Concerts"
-,    VocaloidRanking = "VocaloidRanking"
-,    Pools = "Pools"
-,    Other = "Other"
+    Nothing = "Nothing",
+    Concerts = "Concerts",
+    VocaloidRanking = "VocaloidRanking",
+    Pools = "Pools",
+    Other = "Other"
 }
 
 export enum SongListApiGetFeaturedListNamesNameMatchModeEnum {
-    Auto = "Auto"
-,    Partial = "Partial"
-,    StartsWith = "StartsWith"
-,    Exact = "Exact"
-,    Words = "Words"
+    Auto = "Auto",
+    Partial = "Partial",
+    StartsWith = "StartsWith",
+    Exact = "Exact",
+    Words = "Words"
 }
 
 
 export class SongListApiGetFeaturedListNamesQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=featuredCategory" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=featuredCategory" })
   featuredCategory?: SongListApiGetFeaturedListNamesFeaturedCategoryEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=maxResults" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=maxResults" })
   maxResults?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=nameMatchMode" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=nameMatchMode" })
   nameMatchMode?: SongListApiGetFeaturedListNamesNameMatchModeEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=query" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=query" })
   query?: string;
 }
 
 
 export class SongListApiGetFeaturedListNamesRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: SongListApiGetFeaturedListNamesQueryParams;
 }
 
 
 export class SongListApiGetFeaturedListNamesResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   songListApiGetFeaturedListNames200ApplicationJsonStrings?: string[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   songListApiGetFeaturedListNames200ApplicationJsonpStrings?: string[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   songListApiGetFeaturedListNames200TextJsonStrings?: string[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

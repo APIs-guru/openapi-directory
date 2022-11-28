@@ -1,20 +1,20 @@
 from dataclasses import dataclass, field
-
+from typing import Optional
 
 
 @dataclass
 class HeadKeyPkPathParams:
-    pk: str = field(default=None, metadata={'path_param': { 'field_name': 'PK', 'style': 'simple', 'explode': False }})
+    pk: str = field(metadata={'path_param': { 'field_name': 'PK', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class HeadKeyPkRequest:
-    path_params: HeadKeyPkPathParams = field(default=None)
+    path_params: HeadKeyPkPathParams = field()
     
 
 @dataclass
 class HeadKeyPkResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

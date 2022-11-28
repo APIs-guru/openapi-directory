@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var GenerateRandomBytesRequestProtectionLevelEnum;
 (function (GenerateRandomBytesRequestProtectionLevelEnum) {
     GenerateRandomBytesRequestProtectionLevelEnum["ProtectionLevelUnspecified"] = "PROTECTION_LEVEL_UNSPECIFIED";
@@ -41,11 +41,11 @@ var GenerateRandomBytesRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=lengthBytes" }),
+        SpeakeasyMetadata({ data: "json, name=lengthBytes" }),
         __metadata("design:type", Number)
     ], GenerateRandomBytesRequest.prototype, "lengthBytes", void 0);
     __decorate([
-        Metadata({ data: "json, name=protectionLevel" }),
+        SpeakeasyMetadata({ data: "json, name=protectionLevel" }),
         __metadata("design:type", String)
     ], GenerateRandomBytesRequest.prototype, "protectionLevel", void 0);
     return GenerateRandomBytesRequest;

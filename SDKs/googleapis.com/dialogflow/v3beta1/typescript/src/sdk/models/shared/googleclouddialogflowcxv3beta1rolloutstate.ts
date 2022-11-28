@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudDialogflowCxV3beta1RolloutState
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * State of the auto-rollout process.
 **/
 export class GoogleCloudDialogflowCxV3beta1RolloutState extends SpeakeasyBase {
-  @Metadata({ data: "json, name=startTime" })
+  @SpeakeasyMetadata({ data: "json, name=startTime" })
   startTime?: string;
 
-  @Metadata({ data: "json, name=step" })
+  @SpeakeasyMetadata({ data: "json, name=step" })
   step?: string;
 
-  @Metadata({ data: "json, name=stepIndex" })
+  @SpeakeasyMetadata({ data: "json, name=stepIndex" })
   stepIndex?: number;
 }

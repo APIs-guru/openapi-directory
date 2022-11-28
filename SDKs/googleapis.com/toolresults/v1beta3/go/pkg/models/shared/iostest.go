@@ -1,5 +1,7 @@
 package shared
 
+// IosTest
+// A iOS mobile test specification
 type IosTest struct {
 	IosAppInfo  *IosAppInfo            `json:"iosAppInfo,omitempty"`
 	IosRoboTest map[string]interface{} `json:"iosRoboTest,omitempty"`

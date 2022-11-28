@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class OperationalDisconnectProblemDisconnectTypeEnum(str, Enum):
     OPERATIONAL_DISCONNECT = "OperationalDisconnect"
@@ -17,8 +19,12 @@ class OperationalDisconnectProblemDisconnectTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class OperationalDisconnectProblem:
-    detail: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'detail' }})
-    disconnect_type: Optional[OperationalDisconnectProblemDisconnectTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'disconnect_type' }})
-    title: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'title' }})
-    type: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    r"""OperationalDisconnectProblem
+    You have been disconnected for operational reasons.
+    """
+    
+    detail: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('detail') }})
+    title: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('title') }})
+    type: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('type') }})
+    disconnect_type: Optional[OperationalDisconnectProblemDisconnectTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('disconnect_type') }})
     

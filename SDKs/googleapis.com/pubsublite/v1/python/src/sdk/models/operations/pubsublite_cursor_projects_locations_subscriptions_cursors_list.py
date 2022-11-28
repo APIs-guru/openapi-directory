@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class PubsubliteCursorProjectsLocationsSubscriptionsCursorsListPathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -27,20 +28,20 @@ class PubsubliteCursorProjectsLocationsSubscriptionsCursorsListQueryParams:
 
 @dataclass
 class PubsubliteCursorProjectsLocationsSubscriptionsCursorsListSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class PubsubliteCursorProjectsLocationsSubscriptionsCursorsListRequest:
-    path_params: PubsubliteCursorProjectsLocationsSubscriptionsCursorsListPathParams = field(default=None)
-    query_params: PubsubliteCursorProjectsLocationsSubscriptionsCursorsListQueryParams = field(default=None)
-    security: PubsubliteCursorProjectsLocationsSubscriptionsCursorsListSecurity = field(default=None)
+    path_params: PubsubliteCursorProjectsLocationsSubscriptionsCursorsListPathParams = field()
+    query_params: PubsubliteCursorProjectsLocationsSubscriptionsCursorsListQueryParams = field()
+    security: PubsubliteCursorProjectsLocationsSubscriptionsCursorsListSecurity = field()
     
 
 @dataclass
 class PubsubliteCursorProjectsLocationsSubscriptionsCursorsListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     list_partition_cursors_response: Optional[shared.ListPartitionCursorsResponse] = field(default=None)
-    status_code: int = field(default=None)
     

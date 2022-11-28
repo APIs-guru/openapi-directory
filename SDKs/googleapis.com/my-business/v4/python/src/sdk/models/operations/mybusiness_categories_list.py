@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 class MybusinessCategoriesListViewEnum(str, Enum):
@@ -31,12 +32,12 @@ class MybusinessCategoriesListQueryParams:
 
 @dataclass
 class MybusinessCategoriesListRequest:
-    query_params: MybusinessCategoriesListQueryParams = field(default=None)
+    query_params: MybusinessCategoriesListQueryParams = field()
     
 
 @dataclass
 class MybusinessCategoriesListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     list_business_categories_response: Optional[shared.ListBusinessCategoriesResponse] = field(default=None)
-    status_code: int = field(default=None)
     

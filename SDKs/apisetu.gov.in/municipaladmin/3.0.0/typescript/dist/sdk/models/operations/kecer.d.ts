@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class KecerRequestBodyCertificateParameters extends SpeakeasyBase {
     documentNumber: string;
@@ -15,10 +15,6 @@ export declare class KecerRequestBody extends SpeakeasyBase {
 export declare class KecerSecurity extends SpeakeasyBase {
     apiKey: shared.SchemeApiKey;
     clientId: shared.SchemeClientId;
-}
-export declare class KecerRequest extends SpeakeasyBase {
-    request?: KecerRequestBody;
-    security: KecerSecurity;
 }
 export declare enum Kecer400ApplicationJsonErrorEnum {
     MissingParameter = "missing_parameter",
@@ -101,6 +97,10 @@ export declare enum Kecer504ApplicationJsonErrorDescriptionEnum {
 export declare class Kecer504ApplicationJson extends SpeakeasyBase {
     error?: Kecer504ApplicationJsonErrorEnum;
     errorDescription?: Kecer504ApplicationJsonErrorDescriptionEnum;
+}
+export declare class KecerRequest extends SpeakeasyBase {
+    request?: KecerRequestBody;
+    security: KecerSecurity;
 }
 export declare class KecerResponse extends SpeakeasyBase {
     contentType: string;

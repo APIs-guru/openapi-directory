@@ -1,107 +1,108 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class MeasurementsGetV1V1MeasurementsGetQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=city" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=city" })
   city?: string[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=coordinates" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=coordinates" })
   coordinates?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=country" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=country" })
   country?: string[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=country_id" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=country_id" })
   countryId?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=date_from" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=date_from" })
   dateFrom?: any;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=date_to" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=date_to" })
   dateTo?: any;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=entity" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=entity" })
   entity?: shared.EntityTypesEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=format" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=format" })
   format?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=has_geo" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=has_geo" })
   hasGeo?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=include_fields" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=include_fields" })
   includeFields?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=isAnalysis" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=isAnalysis" })
   isAnalysis?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=isMobile" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=isMobile" })
   isMobile?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=limit" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=limit" })
   limit?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=location" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=location" })
   location?: any[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=location_id" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=location_id" })
   locationId?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=offset" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=offset" })
   offset?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=order_by" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=order_by" })
   orderBy?: shared.MeasOrderEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=page" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page" })
   page?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=parameter" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=parameter" })
   parameter?: any[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=parameter_id" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=parameter_id" })
   parameterId?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=project" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=project" })
   project?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=radius" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=radius" })
   radius?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=sensorType" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sensorType" })
   sensorType?: shared.SensorTypesEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=sort" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sort" })
   sort?: shared.SortEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=unit" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=unit" })
   unit?: string[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=value_from" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=value_from" })
   valueFrom?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=value_to" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=value_to" })
   valueTo?: number;
 }
 
 
 export class MeasurementsGetV1V1MeasurementsGetRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: MeasurementsGetV1V1MeasurementsGetQueryParams;
 }
 
 
 export class MeasurementsGetV1V1MeasurementsGetResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   httpValidationError?: shared.HttpValidationError;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   measurementsGetV1V1MeasurementsGet200ApplicationJsonAny?: any;
 }

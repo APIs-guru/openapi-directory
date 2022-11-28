@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class UserAPIGetSongListsPathParams:
-    id: int = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: int = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 class UserAPIGetSongListsFieldsEnum(str, Enum):
     NONE = "None"
@@ -43,14 +44,14 @@ class UserAPIGetSongListsQueryParams:
 
 @dataclass
 class UserAPIGetSongListsRequest:
-    path_params: UserAPIGetSongListsPathParams = field(default=None)
-    query_params: UserAPIGetSongListsQueryParams = field(default=None)
+    path_params: UserAPIGetSongListsPathParams = field()
+    query_params: UserAPIGetSongListsQueryParams = field()
     
 
 @dataclass
 class UserAPIGetSongListsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     partial_find_result_song_list_for_api_contract_: Optional[shared.PartialFindResultSongListForAPIContract] = field(default=None)
-    status_code: int = field(default=None)
     

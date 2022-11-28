@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ConstraintSummary } from "./constraintsummary";
 import { ProvisioningArtifactOutput } from "./provisioningartifactoutput";
 import { ProvisioningArtifactParameter } from "./provisioningartifactparameter";

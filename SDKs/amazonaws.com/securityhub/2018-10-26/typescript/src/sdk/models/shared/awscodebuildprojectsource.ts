@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AwsCodeBuildProjectSource
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Information about the build input source code for this build project.
 **/
 export class AwsCodeBuildProjectSource extends SpeakeasyBase {
-  @Metadata({ data: "json, name=GitCloneDepth" })
+  @SpeakeasyMetadata({ data: "json, name=GitCloneDepth" })
   gitCloneDepth?: number;
 
-  @Metadata({ data: "json, name=InsecureSsl" })
+  @SpeakeasyMetadata({ data: "json, name=InsecureSsl" })
   insecureSsl?: boolean;
 
-  @Metadata({ data: "json, name=Location" })
+  @SpeakeasyMetadata({ data: "json, name=Location" })
   location?: string;
 
-  @Metadata({ data: "json, name=Type" })
+  @SpeakeasyMetadata({ data: "json, name=Type" })
   type?: string;
 }

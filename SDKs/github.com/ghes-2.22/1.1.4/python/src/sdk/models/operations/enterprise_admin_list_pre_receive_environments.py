@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 class EnterpriseAdminListPreReceiveEnvironmentsSortEnum(str, Enum):
@@ -18,12 +22,12 @@ class EnterpriseAdminListPreReceiveEnvironmentsQueryParams:
 
 @dataclass
 class EnterpriseAdminListPreReceiveEnvironmentsRequest:
-    query_params: EnterpriseAdminListPreReceiveEnvironmentsQueryParams = field(default=None)
+    query_params: EnterpriseAdminListPreReceiveEnvironmentsQueryParams = field()
     
 
 @dataclass
 class EnterpriseAdminListPreReceiveEnvironmentsResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     pre_receive_environments: Optional[List[shared.PreReceiveEnvironment]] = field(default=None)
     

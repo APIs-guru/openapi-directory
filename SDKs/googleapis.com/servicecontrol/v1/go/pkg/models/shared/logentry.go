@@ -14,6 +14,8 @@ const (
 	LogEntrySeverityEnumEmergency LogEntrySeverityEnum = "EMERGENCY"
 )
 
+// LogEntry
+// An individual log entry.
 type LogEntry struct {
 	HTTPRequest    *HTTPRequest            `json:"httpRequest,omitempty"`
 	InsertID       *string                 `json:"insertId,omitempty"`

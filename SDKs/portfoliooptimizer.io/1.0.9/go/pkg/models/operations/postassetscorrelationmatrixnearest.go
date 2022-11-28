@@ -6,12 +6,12 @@ type PostAssetsCorrelationMatrixNearestRequestBody struct {
 	AssetsFixedCorrelations            [][]int64   `json:"assetsFixedCorrelations,omitempty"`
 }
 
-type PostAssetsCorrelationMatrixNearestRequest struct {
-	Request PostAssetsCorrelationMatrixNearestRequestBody `request:"mediaType=application/json"`
-}
-
 type PostAssetsCorrelationMatrixNearest200ApplicationJSON struct {
 	AssetsCorrelationMatrix [][]float64 `json:"assetsCorrelationMatrix"`
+}
+
+type PostAssetsCorrelationMatrixNearestRequest struct {
+	Request PostAssetsCorrelationMatrixNearestRequestBody `request:"mediaType=application/json"`
 }
 
 type PostAssetsCorrelationMatrixNearestResponse struct {

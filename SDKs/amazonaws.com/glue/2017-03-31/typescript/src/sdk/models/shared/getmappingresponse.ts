@@ -1,9 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { MappingEntry } from "./mappingentry";
 
 
+
 export class GetMappingResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Mapping", elemType: shared.MappingEntry })
+  @SpeakeasyMetadata({ data: "json, name=Mapping", elemType: MappingEntry })
   mapping: MappingEntry[];
 }

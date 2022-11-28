@@ -1,7 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import policycontrolleronclusterstate
+from sdk import utils
+from . import *
 
 class PolicyControllerMembershipStateStateEnum(str, Enum):
     LIFECYCLE_STATE_UNSPECIFIED = "LIFECYCLE_STATE_UNSPECIFIED"
@@ -18,7 +20,10 @@ class PolicyControllerMembershipStateStateEnum(str, Enum):
 @dataclass_json
 @dataclass
 class PolicyControllerMembershipState:
-    cluster_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'clusterName' }})
-    component_states: Optional[dict[str, policycontrolleronclusterstate.PolicyControllerOnClusterState]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'componentStates' }})
-    state: Optional[PolicyControllerMembershipStateStateEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'state' }})
+    r"""PolicyControllerMembershipState
+    **Policy Controller**: State for a single cluster.
+    """
+    
+    component_states: Optional[dict[str, PolicyControllerOnClusterState]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('componentStates') }})
+    state: Optional[PolicyControllerMembershipStateStateEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('state') }})
     

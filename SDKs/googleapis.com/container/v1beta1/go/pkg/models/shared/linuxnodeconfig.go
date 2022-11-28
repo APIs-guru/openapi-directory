@@ -8,6 +8,8 @@ const (
 	LinuxNodeConfigCgroupModeEnumCgroupModeV2          LinuxNodeConfigCgroupModeEnum = "CGROUP_MODE_V2"
 )
 
+// LinuxNodeConfig
+// Parameters that can be configured on Linux nodes.
 type LinuxNodeConfig struct {
 	CgroupMode *LinuxNodeConfigCgroupModeEnum `json:"cgroupMode,omitempty"`
 	Sysctls    map[string]string              `json:"sysctls,omitempty"`

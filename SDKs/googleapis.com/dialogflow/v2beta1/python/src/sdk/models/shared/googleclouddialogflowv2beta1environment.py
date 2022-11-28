@@ -1,8 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import googleclouddialogflowv2beta1fulfillment
-from . import googleclouddialogflowv2beta1texttospeechsettings
+from sdk import utils
+from . import *
 
 class GoogleCloudDialogflowV2beta1EnvironmentStateEnum(str, Enum):
     STATE_UNSPECIFIED = "STATE_UNSPECIFIED"
@@ -13,12 +17,29 @@ class GoogleCloudDialogflowV2beta1EnvironmentStateEnum(str, Enum):
 
 @dataclass_json
 @dataclass
+class GoogleCloudDialogflowV2beta1EnvironmentInput:
+    r"""GoogleCloudDialogflowV2beta1EnvironmentInput
+    You can create multiple versions of your agent and publish them to separate environments. When you edit an agent, you are editing the draft agent. At any point, you can save the draft agent as an agent version, which is an immutable snapshot of your agent. When you save the draft agent, it is published to the default environment. When you create agent versions, you can publish them to custom environments. You can create a variety of custom environments for: - testing - development - production - etc. For more information, see the [versions and environments guide](https://cloud.google.com/dialogflow/docs/agents-versions).
+    """
+    
+    agent_version: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('agentVersion') }})
+    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('description') }})
+    fulfillment: Optional[GoogleCloudDialogflowV2beta1Fulfillment] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('fulfillment') }})
+    text_to_speech_settings: Optional[GoogleCloudDialogflowV2beta1TextToSpeechSettings] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('textToSpeechSettings') }})
+    
+
+@dataclass_json
+@dataclass
 class GoogleCloudDialogflowV2beta1Environment:
-    agent_version: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'agentVersion' }})
-    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
-    fulfillment: Optional[googleclouddialogflowv2beta1fulfillment.GoogleCloudDialogflowV2beta1Fulfillment] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'fulfillment' }})
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    state: Optional[GoogleCloudDialogflowV2beta1EnvironmentStateEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'state' }})
-    text_to_speech_settings: Optional[googleclouddialogflowv2beta1texttospeechsettings.GoogleCloudDialogflowV2beta1TextToSpeechSettings] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'textToSpeechSettings' }})
-    update_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'updateTime' }})
+    r"""GoogleCloudDialogflowV2beta1Environment
+    You can create multiple versions of your agent and publish them to separate environments. When you edit an agent, you are editing the draft agent. At any point, you can save the draft agent as an agent version, which is an immutable snapshot of your agent. When you save the draft agent, it is published to the default environment. When you create agent versions, you can publish them to custom environments. You can create a variety of custom environments for: - testing - development - production - etc. For more information, see the [versions and environments guide](https://cloud.google.com/dialogflow/docs/agents-versions).
+    """
+    
+    agent_version: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('agentVersion') }})
+    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('description') }})
+    fulfillment: Optional[GoogleCloudDialogflowV2beta1Fulfillment] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('fulfillment') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    state: Optional[GoogleCloudDialogflowV2beta1EnvironmentStateEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('state') }})
+    text_to_speech_settings: Optional[GoogleCloudDialogflowV2beta1TextToSpeechSettings] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('textToSpeechSettings') }})
+    update_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('updateTime') }})
     

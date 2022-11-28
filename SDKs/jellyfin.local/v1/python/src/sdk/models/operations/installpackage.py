@@ -1,10 +1,11 @@
 from dataclasses import dataclass, field
 from typing import Any,Optional
+from sdk.models import shared
 
 
 @dataclass
 class InstallPackagePathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -16,19 +17,19 @@ class InstallPackageQueryParams:
 
 @dataclass
 class InstallPackageSecurity:
-    custom_authentication: shared.SchemeCustomAuthentication = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    custom_authentication: shared.SchemeCustomAuthentication = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
     
 
 @dataclass
 class InstallPackageRequest:
-    path_params: InstallPackagePathParams = field(default=None)
-    query_params: InstallPackageQueryParams = field(default=None)
-    security: InstallPackageSecurity = field(default=None)
+    path_params: InstallPackagePathParams = field()
+    query_params: InstallPackageQueryParams = field()
+    security: InstallPackageSecurity = field()
     
 
 @dataclass
 class InstallPackageResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     problem_details: Optional[dict[str, Any]] = field(default=None)
-    status_code: int = field(default=None)
     

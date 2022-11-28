@@ -1,50 +1,51 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetAccountsAccountIdTransactionsPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=accountId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=accountId" })
   accountId: string;
 }
 
 
 export class GetAccountsAccountIdTransactionsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=filter[category]" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=filter[category]" })
   filterCategory?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=filter[since]" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=filter[since]" })
   filterSince?: Date;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=filter[status]" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=filter[status]" })
   filterStatus?: any;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=filter[tag]" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=filter[tag]" })
   filterTag?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=filter[until]" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=filter[until]" })
   filterUntil?: Date;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=page[size]" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page[size]" })
   pageSize?: number;
 }
 
 
 export class GetAccountsAccountIdTransactionsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetAccountsAccountIdTransactionsPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetAccountsAccountIdTransactionsQueryParams;
 }
 
 
 export class GetAccountsAccountIdTransactionsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   listTransactionsResponse?: shared.ListTransactionsResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

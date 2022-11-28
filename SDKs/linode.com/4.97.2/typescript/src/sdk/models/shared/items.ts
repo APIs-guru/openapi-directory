@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum ItemsTypeEnum {
-    Raw = "raw"
-,    Ext4 = "ext4"
+    Raw = "raw",
+    Ext4 = "ext4"
 }
 
 
@@ -12,9 +13,9 @@ export enum ItemsTypeEnum {
  * 
 **/
 export class Items extends SpeakeasyBase {
-  @Metadata({ data: "json, name=size" })
+  @SpeakeasyMetadata({ data: "json, name=size" })
   size?: number;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: ItemsTypeEnum;
 }

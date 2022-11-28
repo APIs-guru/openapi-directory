@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // BatchDeleteAlertsRequest
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A request to perform batch delete on alerts.
 **/
 export class BatchDeleteAlertsRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=alertId" })
+  @SpeakeasyMetadata({ data: "json, name=alertId" })
   alertId?: string[];
 
-  @Metadata({ data: "json, name=customerId" })
+  @SpeakeasyMetadata({ data: "json, name=customerId" })
   customerId?: string;
 }

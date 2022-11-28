@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AutoScalingThresholds } from "./autoscalingthresholds";
-import { AutoScalingThresholds } from "./autoscalingthresholds";
+
 
 
 // LoadBasedAutoScalingConfiguration
@@ -8,15 +8,15 @@ import { AutoScalingThresholds } from "./autoscalingthresholds";
  * Describes a layer's load-based auto scaling configuration.
 **/
 export class LoadBasedAutoScalingConfiguration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DownScaling" })
+  @SpeakeasyMetadata({ data: "json, name=DownScaling" })
   downScaling?: AutoScalingThresholds;
 
-  @Metadata({ data: "json, name=Enable" })
+  @SpeakeasyMetadata({ data: "json, name=Enable" })
   enable?: boolean;
 
-  @Metadata({ data: "json, name=LayerId" })
+  @SpeakeasyMetadata({ data: "json, name=LayerId" })
   layerId?: string;
 
-  @Metadata({ data: "json, name=UpScaling" })
+  @SpeakeasyMetadata({ data: "json, name=UpScaling" })
   upScaling?: AutoScalingThresholds;
 }

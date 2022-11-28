@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // RestoreFromSnapshotRequest
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * An object representing the inputs for the <a>RestoreFromSnapshot</a> operation.
 **/
 export class RestoreFromSnapshotRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=SnapshotId" })
+  @SpeakeasyMetadata({ data: "json, name=SnapshotId" })
   snapshotId: string;
 }

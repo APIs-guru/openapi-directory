@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Location } from "./location";
+
 
 
 // DeleteItemRequest
@@ -7,6 +8,6 @@ import { Location } from "./location";
  * Delete an item in a form.
 **/
 export class DeleteItemRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=location" })
+  @SpeakeasyMetadata({ data: "json, name=location" })
   location?: Location;
 }

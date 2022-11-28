@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // RateTable
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A complex type that contains information pertaining to a shipping rate table.
 **/
 export class RateTable extends SpeakeasyBase {
-  @Metadata({ data: "json, name=countryCode" })
+  @SpeakeasyMetadata({ data: "json, name=countryCode" })
   countryCode?: string;
 
-  @Metadata({ data: "json, name=locality" })
+  @SpeakeasyMetadata({ data: "json, name=locality" })
   locality?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=rateTableId" })
+  @SpeakeasyMetadata({ data: "json, name=rateTableId" })
   rateTableId?: string;
 }

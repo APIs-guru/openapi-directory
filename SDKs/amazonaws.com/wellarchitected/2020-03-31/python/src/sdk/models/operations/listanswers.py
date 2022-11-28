@@ -1,12 +1,15 @@
 from dataclasses import dataclass, field
-from typing import Any,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class ListAnswersPathParams:
-    lens_alias: str = field(default=None, metadata={'path_param': { 'field_name': 'LensAlias', 'style': 'simple', 'explode': False }})
-    workload_id: str = field(default=None, metadata={'path_param': { 'field_name': 'WorkloadId', 'style': 'simple', 'explode': False }})
+    lens_alias: str = field(metadata={'path_param': { 'field_name': 'LensAlias', 'style': 'simple', 'explode': False }})
+    workload_id: str = field(metadata={'path_param': { 'field_name': 'WorkloadId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -30,19 +33,19 @@ class ListAnswersHeaders:
 
 @dataclass
 class ListAnswersRequest:
-    path_params: ListAnswersPathParams = field(default=None)
-    query_params: ListAnswersQueryParams = field(default=None)
-    headers: ListAnswersHeaders = field(default=None)
+    headers: ListAnswersHeaders = field()
+    path_params: ListAnswersPathParams = field()
+    query_params: ListAnswersQueryParams = field()
     
 
 @dataclass
 class ListAnswersResponse:
+    content_type: str = field()
+    status_code: int = field()
     access_denied_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     internal_server_exception: Optional[Any] = field(default=None)
     list_answers_output: Optional[shared.ListAnswersOutput] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     validation_exception: Optional[Any] = field(default=None)
     

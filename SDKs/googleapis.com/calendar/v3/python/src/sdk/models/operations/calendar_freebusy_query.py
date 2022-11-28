@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
@@ -16,14 +17,14 @@ class CalendarFreebusyQueryQueryParams:
 
 @dataclass
 class CalendarFreebusyQuerySecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class CalendarFreebusyQuerySecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -34,14 +35,14 @@ class CalendarFreebusyQuerySecurity:
 
 @dataclass
 class CalendarFreebusyQueryRequest:
-    query_params: CalendarFreebusyQueryQueryParams = field(default=None)
+    query_params: CalendarFreebusyQueryQueryParams = field()
+    security: CalendarFreebusyQuerySecurity = field()
     request: Optional[shared.FreeBusyRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: CalendarFreebusyQuerySecurity = field(default=None)
     
 
 @dataclass
 class CalendarFreebusyQueryResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     free_busy_response: Optional[shared.FreeBusyResponse] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,8 +1,11 @@
-import warnings
+
+
 import requests
 from typing import Any,List,Optional
-from sdk.models import operations, shared
+from sdk.models import shared, operations
 from . import utils
+
+
 
 
 SERVERS = [
@@ -11,28 +14,49 @@ SERVERS = [
 
 
 class SDK:
-    client = requests.Session()
-    server_url = SERVERS[0]
+    
+
+    _client: requests.Session
+    _security_client: requests.Session
+    
+    _server_url: str = SERVERS[0]
+    _language: str = "python"
+    _sdk_version: str = "0.0.1"
+    _gen_version: str = "internal"
+
+    def __init__(self) -> None:
+        self._client = requests.Session()
+        self._security_client = requests.Session()
+        
+
 
     def config_server_url(self, server_url: str, params: dict[str, str]):
-        if not params is None:
-            self.server_url = utils.replace_parameters(server_url, params)
+        if params is not None:
+            self._server_url = utils.replace_parameters(server_url, params)
         else:
-            self.server_url = server_url
-            
+            self._server_url = server_url
+
+        
     
 
+    def config_client(self, client: requests.Session):
+        self._client = client
+        
+    
+    
     
     def branch_controller_get_branches(self, request: operations.BranchControllerGetBranchesRequest) -> operations.BranchControllerGetBranchesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""All branches defined for a company
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v2/customer/{shortName}/branch/branches", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -54,13 +78,16 @@ class SDK:
 
     
     def get_v2_customer_short_name_branch_branches_branch_id_(self, request: operations.GetV2CustomerShortNameBranchBranchesBranchIDRequest) -> operations.GetV2CustomerShortNameBranchBranchesBranchIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get a specific branch given its unique Object ID (OID)
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v2/customer/{shortName}/branch/branches/{branchID}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -82,15 +109,17 @@ class SDK:
 
     
     def landlord_controller_create_maintenance_preference(self, request: operations.LandlordControllerCreateMaintenancePreferenceRequest) -> operations.LandlordControllerCreateMaintenancePreferenceResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Post tenancy maintenance preferences:-
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v2/customer/{shortName}/landlord/tenancy/maintenance/preference", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -110,15 +139,17 @@ class SDK:
 
     
     def landlord_controller_get_accounts(self, request: operations.LandlordControllerGetAccountsRequest) -> operations.LandlordControllerGetAccountsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get the accounting details for the landlord.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v2/customer/{shortName}/landlord/accounting", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -136,15 +167,17 @@ class SDK:
 
     
     def landlord_controller_get_document(self, request: operations.LandlordControllerGetDocumentRequest) -> operations.LandlordControllerGetDocumentResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Download a Document
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v2/customer/{shortName}/landlord/document", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -166,15 +199,17 @@ class SDK:
 
     
     def landlord_controller_get_invetory_report(self, request: operations.LandlordControllerGetInvetoryReportRequest) -> operations.LandlordControllerGetInvetoryReportResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Generate a Inventory PDF for a tenancy
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v2/customer/{shortName}/landlord/inventory", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -196,15 +231,17 @@ class SDK:
 
     
     def landlord_controller_get_invoice(self, request: operations.LandlordControllerGetInvoiceRequest) -> operations.LandlordControllerGetInvoiceResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get an invoice pdf belonging to the landlord.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v2/customer/{shortName}/landlord/invoice", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -226,15 +263,17 @@ class SDK:
 
     
     def landlord_controller_get_landlord_crm_entries(self, request: operations.LandlordControllerGetLandlordCrmEntriesRequest) -> operations.LandlordControllerGetLandlordCrmEntriesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieve landlord's CRM ID
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v2/customer/{shortName}/landlord/landlordcrmentries", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -256,15 +295,17 @@ class SDK:
 
     
     def landlord_controller_get_maintenance_jobs(self, request: operations.LandlordControllerGetMaintenanceJobsRequest) -> operations.LandlordControllerGetMaintenanceJobsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get Active maintenance jobs.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v2/customer/{shortName}/landlord/maintenance", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -282,15 +323,17 @@ class SDK:
 
     
     def landlord_controller_get_profit_loss_report(self, request: operations.LandlordControllerGetProfitLossReportRequest) -> operations.LandlordControllerGetProfitLossReportResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Generate a Profit and Loss Report
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v2/customer/{shortName}/landlord/profitloss", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -308,15 +351,17 @@ class SDK:
 
     
     def landlord_controller_get_rent_arrears(self, request: operations.LandlordControllerGetRentArrearsRequest) -> operations.LandlordControllerGetRentArrearsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Rent Arrears
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v2/customer/{shortName}/landlord/rentarrears", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -334,15 +379,17 @@ class SDK:
 
     
     def landlord_controller_get_sas_report(self, request: operations.LandlordControllerGetSasReportRequest) -> operations.LandlordControllerGetSasReportResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Generate a Self Assessment Tax Report
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v2/customer/{shortName}/landlord/sas", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -364,15 +411,17 @@ class SDK:
 
     
     def landlord_controller_get_settings(self, request: operations.LandlordControllerGetSettingsRequest) -> operations.LandlordControllerGetSettingsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get contact details of all linked landlords.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v2/customer/{shortName}/landlord/settings", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -390,15 +439,17 @@ class SDK:
 
     
     def landlord_controller_get_summary_details(self, request: operations.LandlordControllerGetSummaryDetailsRequest) -> operations.LandlordControllerGetSummaryDetailsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get the summary details for the landlord.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v2/customer/{shortName}/landlord/summary", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -416,15 +467,17 @@ class SDK:
 
     
     def landlord_controller_get_tenancy(self, request: operations.LandlordControllerGetTenancyRequest) -> operations.LandlordControllerGetTenancyResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get tenancy details.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v2/customer/{shortName}/landlord/tenancy", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -442,15 +495,17 @@ class SDK:
 
     
     def landlord_controller_get_tenancy_agreement_report(self, request: operations.LandlordControllerGetTenancyAgreementReportRequest) -> operations.LandlordControllerGetTenancyAgreementReportResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Generate a Tenancy Agreement Copy (PDF)
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v2/customer/{shortName}/landlord/tenancyagreement", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -472,15 +527,17 @@ class SDK:
 
     
     def photo_controller_get_photo_download(self, request: operations.PhotoControllerGetPhotoDownloadRequest) -> operations.PhotoControllerGetPhotoDownloadResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Downloads the photo of a property given the photo ID.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v2/customer/{shortName}/photo/download", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -502,15 +559,17 @@ class SDK:
 
     
     def property_controller_get_properties_photos(self, request: operations.PropertyControllerGetPropertiesPhotosRequest) -> operations.PropertyControllerGetPropertiesPhotosResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""A collection showing all the photos linked to a specific block, property or room
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v2/customer/{shortName}/property/{propertyID}/photos", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -532,15 +591,17 @@ class SDK:
 
     
     def session_controller_change_password(self, request: operations.SessionControllerChangePasswordRequest) -> operations.SessionControllerChangePasswordResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Change the password of a customer given their existing and new password.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v2/customer/{shortName}/session/password", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("PUT", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -553,15 +614,17 @@ class SDK:
 
     
     def session_controller_create_landlord_login(self, request: operations.SessionControllerCreateLandlordLoginRequest) -> operations.SessionControllerCreateLandlordLoginResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Send a request to the in-tray to create a landlord login.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v2/customer/{shortName}/session/createlandlordlogin", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -574,15 +637,17 @@ class SDK:
 
     
     def session_controller_get_session_info(self, request: operations.SessionControllerGetSessionInfoRequest) -> operations.SessionControllerGetSessionInfoResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Gets information about the currently logged on customer.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v2/customer/{shortName}/session", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -602,15 +667,17 @@ class SDK:
 
     
     def session_controller_login(self, request: operations.SessionControllerLoginRequest) -> operations.SessionControllerLoginResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Login as a customer given their username and password.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v2/customer/{shortName}/session", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -630,15 +697,17 @@ class SDK:
 
     
     def session_controller_logout(self, request: operations.SessionControllerLogoutRequest) -> operations.SessionControllerLogoutResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Logout a customer previously logged in via the Login endpoint.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v2/customer/{shortName}/session", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("DELETE", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -651,15 +720,17 @@ class SDK:
 
     
     def session_controller_reset_password(self, request: operations.SessionControllerResetPasswordRequest) -> operations.SessionControllerResetPasswordResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Reset the customer's password. An email will be sent out to reset.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v2/customer/{shortName}/session/resetpassword", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 

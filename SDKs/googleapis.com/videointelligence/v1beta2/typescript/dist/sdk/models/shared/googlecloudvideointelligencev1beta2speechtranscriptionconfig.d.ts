@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudVideointelligenceV1beta2SpeechContext } from "./googlecloudvideointelligencev1beta2speechcontext";
 /**
  * Config for SPEECH_TRANSCRIPTION.

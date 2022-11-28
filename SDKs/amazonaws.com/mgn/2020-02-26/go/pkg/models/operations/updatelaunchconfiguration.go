@@ -21,6 +21,8 @@ const (
 	UpdateLaunchConfigurationRequestBodyLaunchDispositionEnumStarted UpdateLaunchConfigurationRequestBodyLaunchDispositionEnum = "STARTED"
 )
 
+// UpdateLaunchConfigurationRequestBodyLicensing
+// Configure Licensing.
 type UpdateLaunchConfigurationRequestBodyLicensing struct {
 	OsByol *bool `json:"osByol,omitempty"`
 }

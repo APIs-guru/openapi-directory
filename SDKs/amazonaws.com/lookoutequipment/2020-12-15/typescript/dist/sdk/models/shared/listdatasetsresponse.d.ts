@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { DatasetSummary } from "./datasetsummary";
 export declare class ListDatasetsResponse extends SpeakeasyBase {
     datasetSummaries?: DatasetSummary[];

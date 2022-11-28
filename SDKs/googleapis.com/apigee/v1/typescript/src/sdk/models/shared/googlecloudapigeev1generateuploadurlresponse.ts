@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudApigeeV1GenerateUploadUrlResponse
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Response for GenerateUploadUrl method.
 **/
 export class GoogleCloudApigeeV1GenerateUploadUrlResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=uploadUri" })
+  @SpeakeasyMetadata({ data: "json, name=uploadUri" })
   uploadUri?: string;
 }

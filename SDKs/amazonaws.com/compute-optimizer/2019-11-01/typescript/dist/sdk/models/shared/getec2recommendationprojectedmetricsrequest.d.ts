@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { RecommendationPreferences } from "./recommendationpreferences";
 import { MetricStatisticEnum } from "./metricstatisticenum";
 export declare class GetEc2RecommendationProjectedMetricsRequest extends SpeakeasyBase {

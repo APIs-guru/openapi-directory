@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import queryjob_results_overview_entry
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class QueryjobResultsOverview:
-    data: Optional[List[queryjob_results_overview_entry.QueryjobResultsOverviewEntry]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'data' }})
-    next: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next' }})
+    data: Optional[List[QueryjobResultsOverviewEntry]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('data') }})
+    next: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('next') }})
     

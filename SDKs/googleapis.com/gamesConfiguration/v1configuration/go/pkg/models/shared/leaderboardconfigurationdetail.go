@@ -1,5 +1,7 @@
 package shared
 
+// LeaderboardConfigurationDetail
+// A leaderboard configuration detail.
 type LeaderboardConfigurationDetail struct {
 	IconURL     *string                         `json:"iconUrl,omitempty"`
 	Kind        *string                         `json:"kind,omitempty"`

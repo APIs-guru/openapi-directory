@@ -36,6 +36,8 @@ const (
 	AccessibilityMobilityAccessiblePoolExceptionEnumDependentOnDayOfWeek AccessibilityMobilityAccessiblePoolExceptionEnum = "DEPENDENT_ON_DAY_OF_WEEK"
 )
 
+// Accessibility
+// Physical adaptations made to the property in consideration of varying levels of human physical ability.
 type Accessibility struct {
 	MobilityAccessible                  *bool                                                 `json:"mobilityAccessible,omitempty"`
 	MobilityAccessibleElevator          *bool                                                 `json:"mobilityAccessibleElevator,omitempty"`

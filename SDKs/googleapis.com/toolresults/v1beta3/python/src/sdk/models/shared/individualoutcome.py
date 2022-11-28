@@ -1,7 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import duration
+from sdk import utils
+from . import *
 
 class IndividualOutcomeOutcomeSummaryEnum(str, Enum):
     UNSET = "unset"
@@ -15,8 +17,12 @@ class IndividualOutcomeOutcomeSummaryEnum(str, Enum):
 @dataclass_json
 @dataclass
 class IndividualOutcome:
-    multistep_number: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'multistepNumber' }})
-    outcome_summary: Optional[IndividualOutcomeOutcomeSummaryEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'outcomeSummary' }})
-    run_duration: Optional[duration.Duration] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'runDuration' }})
-    step_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'stepId' }})
+    r"""IndividualOutcome
+    Step Id and outcome of each individual step that was run as a group with other steps with the same configuration.
+    """
+    
+    multistep_number: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('multistepNumber') }})
+    outcome_summary: Optional[IndividualOutcomeOutcomeSummaryEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('outcomeSummary') }})
+    run_duration: Optional[Duration] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('runDuration') }})
+    step_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('stepId') }})
     

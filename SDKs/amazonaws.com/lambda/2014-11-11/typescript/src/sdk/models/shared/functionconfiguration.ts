@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ModeEnum } from "./modeenum";
 import { RuntimeEnum } from "./runtimeenum";
+
 
 
 // FunctionConfiguration
@@ -8,39 +9,39 @@ import { RuntimeEnum } from "./runtimeenum";
  * A complex type that describes function metadata.
 **/
 export class FunctionConfiguration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CodeSize" })
+  @SpeakeasyMetadata({ data: "json, name=CodeSize" })
   codeSize?: number;
 
-  @Metadata({ data: "json, name=ConfigurationId" })
+  @SpeakeasyMetadata({ data: "json, name=ConfigurationId" })
   configurationId?: string;
 
-  @Metadata({ data: "json, name=Description" })
+  @SpeakeasyMetadata({ data: "json, name=Description" })
   description?: string;
 
-  @Metadata({ data: "json, name=FunctionARN" })
+  @SpeakeasyMetadata({ data: "json, name=FunctionARN" })
   functionArn?: string;
 
-  @Metadata({ data: "json, name=FunctionName" })
+  @SpeakeasyMetadata({ data: "json, name=FunctionName" })
   functionName?: string;
 
-  @Metadata({ data: "json, name=Handler" })
+  @SpeakeasyMetadata({ data: "json, name=Handler" })
   handler?: string;
 
-  @Metadata({ data: "json, name=LastModified" })
+  @SpeakeasyMetadata({ data: "json, name=LastModified" })
   lastModified?: Date;
 
-  @Metadata({ data: "json, name=MemorySize" })
+  @SpeakeasyMetadata({ data: "json, name=MemorySize" })
   memorySize?: number;
 
-  @Metadata({ data: "json, name=Mode" })
+  @SpeakeasyMetadata({ data: "json, name=Mode" })
   mode?: ModeEnum;
 
-  @Metadata({ data: "json, name=Role" })
+  @SpeakeasyMetadata({ data: "json, name=Role" })
   role?: string;
 
-  @Metadata({ data: "json, name=Runtime" })
+  @SpeakeasyMetadata({ data: "json, name=Runtime" })
   runtime?: RuntimeEnum;
 
-  @Metadata({ data: "json, name=Timeout" })
+  @SpeakeasyMetadata({ data: "json, name=Timeout" })
   timeout?: number;
 }

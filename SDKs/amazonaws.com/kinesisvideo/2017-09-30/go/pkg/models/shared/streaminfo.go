@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// StreamInfo
+// An object describing a Kinesis video stream.
 type StreamInfo struct {
 	CreationTime         *time.Time  `json:"CreationTime,omitempty"`
 	DataRetentionInHours *int64      `json:"DataRetentionInHours,omitempty"`

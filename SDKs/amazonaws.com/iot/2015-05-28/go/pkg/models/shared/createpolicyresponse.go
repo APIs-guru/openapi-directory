@@ -1,5 +1,7 @@
 package shared
 
+// CreatePolicyResponse
+// The output from the CreatePolicy operation.
 type CreatePolicyResponse struct {
 	PolicyArn       *string `json:"policyArn,omitempty"`
 	PolicyDocument  *string `json:"policyDocument,omitempty"`

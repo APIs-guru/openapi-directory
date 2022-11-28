@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostAssociateIamInstanceProfileActionEnum(str, Enum):
     ASSOCIATE_IAM_INSTANCE_PROFILE = "AssociateIamInstanceProfile"
@@ -10,8 +14,8 @@ class PostAssociateIamInstanceProfileVersionEnum(str, Enum):
 
 @dataclass
 class PostAssociateIamInstanceProfileQueryParams:
-    action: PostAssociateIamInstanceProfileActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostAssociateIamInstanceProfileVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostAssociateIamInstanceProfileActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostAssociateIamInstanceProfileVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostAssociateIamInstanceProfileHeaders:
 
 @dataclass
 class PostAssociateIamInstanceProfileRequest:
-    query_params: PostAssociateIamInstanceProfileQueryParams = field(default=None)
-    headers: PostAssociateIamInstanceProfileHeaders = field(default=None)
+    headers: PostAssociateIamInstanceProfileHeaders = field()
+    query_params: PostAssociateIamInstanceProfileQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostAssociateIamInstanceProfileResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

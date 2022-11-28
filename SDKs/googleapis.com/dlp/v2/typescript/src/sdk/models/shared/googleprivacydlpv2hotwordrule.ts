@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GooglePrivacyDlpV2Regex } from "./googleprivacydlpv2regex";
 import { GooglePrivacyDlpV2LikelihoodAdjustment } from "./googleprivacydlpv2likelihoodadjustment";
 import { GooglePrivacyDlpV2Proximity } from "./googleprivacydlpv2proximity";
+
 
 
 // GooglePrivacyDlpV2HotwordRule
@@ -9,12 +10,12 @@ import { GooglePrivacyDlpV2Proximity } from "./googleprivacydlpv2proximity";
  * The rule that adjusts the likelihood of findings within a certain proximity of hotwords.
 **/
 export class GooglePrivacyDlpV2HotwordRule extends SpeakeasyBase {
-  @Metadata({ data: "json, name=hotwordRegex" })
+  @SpeakeasyMetadata({ data: "json, name=hotwordRegex" })
   hotwordRegex?: GooglePrivacyDlpV2Regex;
 
-  @Metadata({ data: "json, name=likelihoodAdjustment" })
+  @SpeakeasyMetadata({ data: "json, name=likelihoodAdjustment" })
   likelihoodAdjustment?: GooglePrivacyDlpV2LikelihoodAdjustment;
 
-  @Metadata({ data: "json, name=proximity" })
+  @SpeakeasyMetadata({ data: "json, name=proximity" })
   proximity?: GooglePrivacyDlpV2Proximity;
 }

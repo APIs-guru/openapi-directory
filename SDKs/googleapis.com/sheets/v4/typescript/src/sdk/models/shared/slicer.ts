@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { EmbeddedObjectPosition } from "./embeddedobjectposition";
 import { SlicerSpec } from "./slicerspec";
+
 
 
 // Slicer
@@ -8,12 +9,12 @@ import { SlicerSpec } from "./slicerspec";
  * A slicer in a sheet.
 **/
 export class Slicer extends SpeakeasyBase {
-  @Metadata({ data: "json, name=position" })
+  @SpeakeasyMetadata({ data: "json, name=position" })
   position?: EmbeddedObjectPosition;
 
-  @Metadata({ data: "json, name=slicerId" })
+  @SpeakeasyMetadata({ data: "json, name=slicerId" })
   slicerId?: number;
 
-  @Metadata({ data: "json, name=spec" })
+  @SpeakeasyMetadata({ data: "json, name=spec" })
   spec?: SlicerSpec;
 }

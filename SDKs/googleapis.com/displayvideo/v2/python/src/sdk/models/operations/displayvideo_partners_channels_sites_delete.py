@@ -1,13 +1,14 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DisplayvideoPartnersChannelsSitesDeletePathParams:
-    channel_id: str = field(default=None, metadata={'path_param': { 'field_name': 'channelId', 'style': 'simple', 'explode': False }})
-    partner_id: str = field(default=None, metadata={'path_param': { 'field_name': 'partnerId', 'style': 'simple', 'explode': False }})
-    url_or_app_id: str = field(default=None, metadata={'path_param': { 'field_name': 'urlOrAppId', 'style': 'simple', 'explode': False }})
+    channel_id: str = field(metadata={'path_param': { 'field_name': 'channelId', 'style': 'simple', 'explode': False }})
+    partner_id: str = field(metadata={'path_param': { 'field_name': 'partnerId', 'style': 'simple', 'explode': False }})
+    url_or_app_id: str = field(metadata={'path_param': { 'field_name': 'urlOrAppId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -28,20 +29,20 @@ class DisplayvideoPartnersChannelsSitesDeleteQueryParams:
 
 @dataclass
 class DisplayvideoPartnersChannelsSitesDeleteSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DisplayvideoPartnersChannelsSitesDeleteRequest:
-    path_params: DisplayvideoPartnersChannelsSitesDeletePathParams = field(default=None)
-    query_params: DisplayvideoPartnersChannelsSitesDeleteQueryParams = field(default=None)
-    security: DisplayvideoPartnersChannelsSitesDeleteSecurity = field(default=None)
+    path_params: DisplayvideoPartnersChannelsSitesDeletePathParams = field()
+    query_params: DisplayvideoPartnersChannelsSitesDeleteQueryParams = field()
+    security: DisplayvideoPartnersChannelsSitesDeleteSecurity = field()
     
 
 @dataclass
 class DisplayvideoPartnersChannelsSitesDeleteResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     empty: Optional[dict[str, Any]] = field(default=None)
-    status_code: int = field(default=None)
     

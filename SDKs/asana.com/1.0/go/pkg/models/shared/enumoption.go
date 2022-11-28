@@ -7,3 +7,9 @@ type EnumOption struct {
 	Name         *string `json:"name,omitempty"`
 	ResourceType *string `json:"resource_type,omitempty"`
 }
+
+type EnumOptionInput struct {
+	Color   *string `json:"color,omitempty"`
+	Enabled *bool   `json:"enabled,omitempty"`
+	Name    *string `json:"name,omitempty"`
+}

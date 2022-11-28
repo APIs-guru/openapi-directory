@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // PermissionType
@@ -6,33 +7,33 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A permission type that can be applied to story collaborator
 **/
 export class PermissionType extends SpeakeasyBase {
-  @Metadata({ data: "json, name=can_add_collaborators" })
+  @SpeakeasyMetadata({ data: "json, name=can_add_collaborators" })
   canAddCollaborators?: boolean;
 
-  @Metadata({ data: "json, name=can_delete" })
+  @SpeakeasyMetadata({ data: "json, name=can_delete" })
   canDelete?: boolean;
 
-  @Metadata({ data: "json, name=can_edit" })
+  @SpeakeasyMetadata({ data: "json, name=can_edit" })
   canEdit?: boolean;
 
-  @Metadata({ data: "json, name=can_view" })
+  @SpeakeasyMetadata({ data: "json, name=can_view" })
   canView?: boolean;
 
-  @Metadata({ data: "json, name=created_at" })
+  @SpeakeasyMetadata({ data: "json, name=created_at" })
   createdAt?: Date;
 
-  @Metadata({ data: "json, name=created_by" })
+  @SpeakeasyMetadata({ data: "json, name=created_by" })
   createdBy?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=updated_at" })
+  @SpeakeasyMetadata({ data: "json, name=updated_at" })
   updatedAt?: Date;
 
-  @Metadata({ data: "json, name=updated_by" })
+  @SpeakeasyMetadata({ data: "json, name=updated_by" })
   updatedBy?: string;
 }

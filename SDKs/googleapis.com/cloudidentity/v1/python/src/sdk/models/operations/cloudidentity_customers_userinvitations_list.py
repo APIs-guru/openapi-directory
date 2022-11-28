@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class CloudidentityCustomersUserinvitationsListPathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -29,13 +30,13 @@ class CloudidentityCustomersUserinvitationsListQueryParams:
 
 @dataclass
 class CloudidentityCustomersUserinvitationsListRequest:
-    path_params: CloudidentityCustomersUserinvitationsListPathParams = field(default=None)
-    query_params: CloudidentityCustomersUserinvitationsListQueryParams = field(default=None)
+    path_params: CloudidentityCustomersUserinvitationsListPathParams = field()
+    query_params: CloudidentityCustomersUserinvitationsListQueryParams = field()
     
 
 @dataclass
 class CloudidentityCustomersUserinvitationsListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     list_user_invitations_response: Optional[shared.ListUserInvitationsResponse] = field(default=None)
-    status_code: int = field(default=None)
     

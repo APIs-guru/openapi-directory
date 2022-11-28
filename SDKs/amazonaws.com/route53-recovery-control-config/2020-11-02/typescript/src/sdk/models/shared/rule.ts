@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AssertionRule } from "./assertionrule";
 import { GatingRule } from "./gatingrule";
+
 
 
 // Rule
@@ -8,9 +9,9 @@ import { GatingRule } from "./gatingrule";
  * A safety rule. A safety rule can be an assertion rule or a gating rule.
 **/
 export class Rule extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ASSERTION" })
+  @SpeakeasyMetadata({ data: "json, name=ASSERTION" })
   assertion?: AssertionRule;
 
-  @Metadata({ data: "json, name=GATING" })
+  @SpeakeasyMetadata({ data: "json, name=GATING" })
   gating?: GatingRule;
 }

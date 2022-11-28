@@ -1,16 +1,16 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { NameFound } from "./namefound";
 
+
 export enum SummaryGenderEnum {
-    Male = "male"
-,    Female = "female"
+    Male = "male",
+    Female = "female"
 }
 
 export enum SummaryIdentityStatusEnum {
-    Found = "found"
-,    NotFound = "not_found"
-,    Dead = "dead"
+    Found = "found",
+    NotFound = "not_found",
+    Dead = "dead"
 }
 
 
@@ -19,27 +19,27 @@ export enum SummaryIdentityStatusEnum {
  * Represents a background check summary
 **/
 export class Summary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=date_of_birth" })
+  @SpeakeasyMetadata({ data: "json, name=date_of_birth" })
   dateOfBirth?: Date;
 
-  @Metadata({ data: "json, name=death_date" })
+  @SpeakeasyMetadata({ data: "json, name=death_date" })
   deathDate?: Date;
 
-  @Metadata({ data: "json, name=drivers_license" })
+  @SpeakeasyMetadata({ data: "json, name=drivers_license" })
   driversLicense?: string;
 
-  @Metadata({ data: "json, name=gender" })
+  @SpeakeasyMetadata({ data: "json, name=gender" })
   gender?: SummaryGenderEnum;
 
-  @Metadata({ data: "json, name=identity_status" })
+  @SpeakeasyMetadata({ data: "json, name=identity_status" })
   identityStatus?: SummaryIdentityStatusEnum;
 
-  @Metadata({ data: "json, name=names_found", elemType: shared.NameFound })
+  @SpeakeasyMetadata({ data: "json, name=names_found", elemType: NameFound })
   namesFound: NameFound[];
 
-  @Metadata({ data: "json, name=nss" })
+  @SpeakeasyMetadata({ data: "json, name=nss" })
   nss?: string;
 
-  @Metadata({ data: "json, name=rfc" })
+  @SpeakeasyMetadata({ data: "json, name=rfc" })
   rfc?: string;
 }

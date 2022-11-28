@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudDialogflowCxV3Webhook } from "./googleclouddialogflowcxv3webhook";
+
 
 
 // GoogleCloudDialogflowCxV3EnvironmentWebhookConfig
@@ -8,6 +8,6 @@ import { GoogleCloudDialogflowCxV3Webhook } from "./googleclouddialogflowcxv3web
  * Configuration for webhooks.
 **/
 export class GoogleCloudDialogflowCxV3EnvironmentWebhookConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=webhookOverrides", elemType: shared.GoogleCloudDialogflowCxV3Webhook })
+  @SpeakeasyMetadata({ data: "json, name=webhookOverrides", elemType: GoogleCloudDialogflowCxV3Webhook })
   webhookOverrides?: GoogleCloudDialogflowCxV3Webhook[];
 }

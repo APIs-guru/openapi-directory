@@ -1,25 +1,25 @@
 from dataclasses import dataclass, field
-
+from sdk.models import shared
 
 
 @dataclass
 class RemoveWirelessLanPathParams:
-    wireless_id: str = field(default=None, metadata={'path_param': { 'field_name': 'wireless_id', 'style': 'simple', 'explode': False }})
+    wireless_id: str = field(metadata={'path_param': { 'field_name': 'wireless_id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class RemoveWirelessLanSecurity:
-    bearer_auth: shared.SchemeBearerAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer' }})
+    bearer_auth: shared.SchemeBearerAuth = field(metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer' }})
     
 
 @dataclass
 class RemoveWirelessLanRequest:
-    path_params: RemoveWirelessLanPathParams = field(default=None)
-    security: RemoveWirelessLanSecurity = field(default=None)
+    path_params: RemoveWirelessLanPathParams = field()
+    security: RemoveWirelessLanSecurity = field()
     
 
 @dataclass
 class RemoveWirelessLanResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

@@ -4,6 +4,9 @@ import (
 	"time"
 )
 
+// Control
+//
+//	A control in Audit Manager.
 type Control struct {
 	ActionPlanInstructions *string                `json:"actionPlanInstructions,omitempty"`
 	ActionPlanTitle        *string                `json:"actionPlanTitle,omitempty"`

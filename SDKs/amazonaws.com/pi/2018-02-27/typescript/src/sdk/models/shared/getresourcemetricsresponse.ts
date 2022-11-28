@@ -1,21 +1,21 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { MetricKeyDataPoints } from "./metrickeydatapoints";
 
 
+
 export class GetResourceMetricsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AlignedEndTime" })
+  @SpeakeasyMetadata({ data: "json, name=AlignedEndTime" })
   alignedEndTime?: Date;
 
-  @Metadata({ data: "json, name=AlignedStartTime" })
+  @SpeakeasyMetadata({ data: "json, name=AlignedStartTime" })
   alignedStartTime?: Date;
 
-  @Metadata({ data: "json, name=Identifier" })
+  @SpeakeasyMetadata({ data: "json, name=Identifier" })
   identifier?: string;
 
-  @Metadata({ data: "json, name=MetricList", elemType: shared.MetricKeyDataPoints })
+  @SpeakeasyMetadata({ data: "json, name=MetricList", elemType: MetricKeyDataPoints })
   metricList?: MetricKeyDataPoints[];
 
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 }

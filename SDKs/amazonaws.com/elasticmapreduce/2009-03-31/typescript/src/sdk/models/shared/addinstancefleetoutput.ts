@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class AddInstanceFleetOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ClusterArn" })
+  @SpeakeasyMetadata({ data: "json, name=ClusterArn" })
   clusterArn?: string;
 
-  @Metadata({ data: "json, name=ClusterId" })
+  @SpeakeasyMetadata({ data: "json, name=ClusterId" })
   clusterId?: string;
 
-  @Metadata({ data: "json, name=InstanceFleetId" })
+  @SpeakeasyMetadata({ data: "json, name=InstanceFleetId" })
   instanceFleetId?: string;
 }

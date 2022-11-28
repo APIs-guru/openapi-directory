@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ManagedZoneForwardingConfigNameServerTarget } from "./managedzoneforwardingconfignameservertarget";
 
 
+
 export class ManagedZoneForwardingConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=targetNameServers", elemType: shared.ManagedZoneForwardingConfigNameServerTarget })
+  @SpeakeasyMetadata({ data: "json, name=targetNameServers", elemType: ManagedZoneForwardingConfigNameServerTarget })
   targetNameServers?: ManagedZoneForwardingConfigNameServerTarget[];
 }

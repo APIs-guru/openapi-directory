@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ChannelTargetInfo
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Information about the contact channel that Incident Manager uses to engage the contact.
 **/
 export class ChannelTargetInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ContactChannelId" })
+  @SpeakeasyMetadata({ data: "json, name=ContactChannelId" })
   contactChannelId: string;
 
-  @Metadata({ data: "json, name=RetryIntervalInMinutes" })
+  @SpeakeasyMetadata({ data: "json, name=RetryIntervalInMinutes" })
   retryIntervalInMinutes?: number;
 }

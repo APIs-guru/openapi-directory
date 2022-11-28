@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
 @dataclass
 class UpdateAPICachePathParams:
-    api_id: str = field(default=None, metadata={'path_param': { 'field_name': 'apiId', 'style': 'simple', 'explode': False }})
+    api_id: str = field(metadata={'path_param': { 'field_name': 'apiId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -44,26 +49,26 @@ class UpdateAPICacheRequestBodyTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class UpdateAPICacheRequestBody:
-    api_caching_behavior: UpdateAPICacheRequestBodyAPICachingBehaviorEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'apiCachingBehavior' }})
-    ttl: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ttl' }})
-    type: UpdateAPICacheRequestBodyTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    api_caching_behavior: UpdateAPICacheRequestBodyAPICachingBehaviorEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('apiCachingBehavior') }})
+    ttl: int = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('ttl') }})
+    type: UpdateAPICacheRequestBodyTypeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('type') }})
     
 
 @dataclass
 class UpdateAPICacheRequest:
-    path_params: UpdateAPICachePathParams = field(default=None)
-    headers: UpdateAPICacheHeaders = field(default=None)
-    request: UpdateAPICacheRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: UpdateAPICacheHeaders = field()
+    path_params: UpdateAPICachePathParams = field()
+    request: UpdateAPICacheRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class UpdateAPICacheResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
     concurrent_modification_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     internal_failure_exception: Optional[Any] = field(default=None)
     not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     unauthorized_exception: Optional[Any] = field(default=None)
     update_api_cache_response: Optional[shared.UpdateAPICacheResponse] = field(default=None)
     

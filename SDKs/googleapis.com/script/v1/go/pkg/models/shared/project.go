@@ -1,5 +1,7 @@
 package shared
 
+// Project
+// The script project resource.
 type Project struct {
 	CreateTime     *string                   `json:"createTime,omitempty"`
 	Creator        *GoogleAppsScriptTypeUser `json:"creator,omitempty"`

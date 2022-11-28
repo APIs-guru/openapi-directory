@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ProtectedRange } from "./protectedrange";
+
 
 
 // UpdateProtectedRangeRequest
@@ -7,9 +8,9 @@ import { ProtectedRange } from "./protectedrange";
  * Updates an existing protected range with the specified protectedRangeId.
 **/
 export class UpdateProtectedRangeRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=fields" })
+  @SpeakeasyMetadata({ data: "json, name=fields" })
   fields?: string;
 
-  @Metadata({ data: "json, name=protectedRange" })
+  @SpeakeasyMetadata({ data: "json, name=protectedRange" })
   protectedRange?: ProtectedRange;
 }

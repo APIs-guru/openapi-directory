@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class UsersGetContextForUserPathParams:
-    username: str = field(default=None, metadata={'path_param': { 'field_name': 'username', 'style': 'simple', 'explode': False }})
+    username: str = field(metadata={'path_param': { 'field_name': 'username', 'style': 'simple', 'explode': False }})
     
 class UsersGetContextForUserSubjectTypeEnum(str, Enum):
     ORGANIZATION = "organization"
@@ -22,14 +23,14 @@ class UsersGetContextForUserQueryParams:
 
 @dataclass
 class UsersGetContextForUserRequest:
-    path_params: UsersGetContextForUserPathParams = field(default=None)
-    query_params: UsersGetContextForUserQueryParams = field(default=None)
+    path_params: UsersGetContextForUserPathParams = field()
+    query_params: UsersGetContextForUserQueryParams = field()
     
 
 @dataclass
 class UsersGetContextForUserResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     basic_error: Optional[shared.BasicError] = field(default=None)
     hovercard: Optional[shared.Hovercard] = field(default=None)
     validation_error: Optional[shared.ValidationError] = field(default=None)

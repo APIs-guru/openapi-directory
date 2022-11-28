@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum FailureInfoTypeEnum {
-    FailureTypeUnspecified = "FAILURE_TYPE_UNSPECIFIED"
-,    PushFailed = "PUSH_FAILED"
-,    PushImageNotFound = "PUSH_IMAGE_NOT_FOUND"
-,    PushNotAuthorized = "PUSH_NOT_AUTHORIZED"
-,    LoggingFailure = "LOGGING_FAILURE"
-,    UserBuildStep = "USER_BUILD_STEP"
-,    FetchSourceFailed = "FETCH_SOURCE_FAILED"
+    FailureTypeUnspecified = "FAILURE_TYPE_UNSPECIFIED",
+    PushFailed = "PUSH_FAILED",
+    PushImageNotFound = "PUSH_IMAGE_NOT_FOUND",
+    PushNotAuthorized = "PUSH_NOT_AUTHORIZED",
+    LoggingFailure = "LOGGING_FAILURE",
+    UserBuildStep = "USER_BUILD_STEP",
+    FetchSourceFailed = "FETCH_SOURCE_FAILED"
 }
 
 
@@ -16,9 +17,9 @@ export enum FailureInfoTypeEnum {
  * A fatal problem encountered during the execution of the build.
 **/
 export class FailureInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=detail" })
+  @SpeakeasyMetadata({ data: "json, name=detail" })
   detail?: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: FailureInfoTypeEnum;
 }

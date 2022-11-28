@@ -1,25 +1,26 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ReadingPosition extends SpeakeasyBase {
-  @Metadata({ data: "json, name=epubCfiPosition" })
+  @SpeakeasyMetadata({ data: "json, name=epubCfiPosition" })
   epubCfiPosition?: string;
 
-  @Metadata({ data: "json, name=gbImagePosition" })
+  @SpeakeasyMetadata({ data: "json, name=gbImagePosition" })
   gbImagePosition?: string;
 
-  @Metadata({ data: "json, name=gbTextPosition" })
+  @SpeakeasyMetadata({ data: "json, name=gbTextPosition" })
   gbTextPosition?: string;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=pdfPosition" })
+  @SpeakeasyMetadata({ data: "json, name=pdfPosition" })
   pdfPosition?: string;
 
-  @Metadata({ data: "json, name=updated" })
+  @SpeakeasyMetadata({ data: "json, name=updated" })
   updated?: string;
 
-  @Metadata({ data: "json, name=volumeId" })
+  @SpeakeasyMetadata({ data: "json, name=volumeId" })
   volumeId?: string;
 }

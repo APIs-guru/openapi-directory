@@ -1,14 +1,18 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Optional
+from sdk.models import shared
 
 
 @dataclass
 class FireteamSearchPublicAvailableClanFireteamsPathParams:
-    activity_type: int = field(default=None, metadata={'path_param': { 'field_name': 'activityType', 'style': 'simple', 'explode': False }})
-    date_range: int = field(default=None, metadata={'path_param': { 'field_name': 'dateRange', 'style': 'simple', 'explode': False }})
-    page: int = field(default=None, metadata={'path_param': { 'field_name': 'page', 'style': 'simple', 'explode': False }})
-    platform: int = field(default=None, metadata={'path_param': { 'field_name': 'platform', 'style': 'simple', 'explode': False }})
-    slot_filter: int = field(default=None, metadata={'path_param': { 'field_name': 'slotFilter', 'style': 'simple', 'explode': False }})
+    activity_type: int = field(metadata={'path_param': { 'field_name': 'activityType', 'style': 'simple', 'explode': False }})
+    date_range: int = field(metadata={'path_param': { 'field_name': 'dateRange', 'style': 'simple', 'explode': False }})
+    page: int = field(metadata={'path_param': { 'field_name': 'page', 'style': 'simple', 'explode': False }})
+    platform: int = field(metadata={'path_param': { 'field_name': 'platform', 'style': 'simple', 'explode': False }})
+    slot_filter: int = field(metadata={'path_param': { 'field_name': 'slotFilter', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -18,19 +22,19 @@ class FireteamSearchPublicAvailableClanFireteamsQueryParams:
 
 @dataclass
 class FireteamSearchPublicAvailableClanFireteamsSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class FireteamSearchPublicAvailableClanFireteamsRequest:
-    path_params: FireteamSearchPublicAvailableClanFireteamsPathParams = field(default=None)
-    query_params: FireteamSearchPublicAvailableClanFireteamsQueryParams = field(default=None)
-    security: FireteamSearchPublicAvailableClanFireteamsSecurity = field(default=None)
+    path_params: FireteamSearchPublicAvailableClanFireteamsPathParams = field()
+    query_params: FireteamSearchPublicAvailableClanFireteamsQueryParams = field()
+    security: FireteamSearchPublicAvailableClanFireteamsSecurity = field()
     
 
 @dataclass
 class FireteamSearchPublicAvailableClanFireteamsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

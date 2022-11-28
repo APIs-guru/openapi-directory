@@ -1,15 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class StatusRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=endpoint" })
+  @SpeakeasyMetadata({ data: "json, name=endpoint" })
   endpoint: string;
-}
-
-
-export class StatusRequest extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/json" })
-  request?: StatusRequestBody;
 }
 
 
@@ -18,75 +13,81 @@ export class StatusRequest extends SpeakeasyBase {
  * Structure holding detailed information about the connection
 **/
 export class Status200ApplicationJsonLastHandshake extends SpeakeasyBase {
-  @Metadata({ data: "json, name=agent" })
+  @SpeakeasyMetadata({ data: "json, name=agent" })
   agent?: string;
 
-  @Metadata({ data: "json, name=chain_id" })
+  @SpeakeasyMetadata({ data: "json, name=chain_id" })
   chainId?: string;
 
-  @Metadata({ data: "json, name=generation" })
+  @SpeakeasyMetadata({ data: "json, name=generation" })
   generation?: number;
 
-  @Metadata({ data: "json, name=head_id" })
+  @SpeakeasyMetadata({ data: "json, name=head_id" })
   headId?: string;
 
-  @Metadata({ data: "json, name=head_num" })
+  @SpeakeasyMetadata({ data: "json, name=head_num" })
   headNum?: number;
 
-  @Metadata({ data: "json, name=key" })
+  @SpeakeasyMetadata({ data: "json, name=key" })
   key?: string;
 
-  @Metadata({ data: "json, name=last_irreversible_block_id" })
+  @SpeakeasyMetadata({ data: "json, name=last_irreversible_block_id" })
   lastIrreversibleBlockId?: string;
 
-  @Metadata({ data: "json, name=last_irreversible_block_num" })
+  @SpeakeasyMetadata({ data: "json, name=last_irreversible_block_num" })
   lastIrreversibleBlockNum?: number;
 
-  @Metadata({ data: "json, name=network_version" })
+  @SpeakeasyMetadata({ data: "json, name=network_version" })
   networkVersion?: number;
 
-  @Metadata({ data: "json, name=node_id" })
+  @SpeakeasyMetadata({ data: "json, name=node_id" })
   nodeId?: string;
 
-  @Metadata({ data: "json, name=os" })
+  @SpeakeasyMetadata({ data: "json, name=os" })
   os?: string;
 
-  @Metadata({ data: "json, name=p2p_address" })
+  @SpeakeasyMetadata({ data: "json, name=p2p_address" })
   p2pAddress?: string;
 
-  @Metadata({ data: "json, name=sig" })
+  @SpeakeasyMetadata({ data: "json, name=sig" })
   sig?: string;
 
-  @Metadata({ data: "json, name=time" })
+  @SpeakeasyMetadata({ data: "json, name=time" })
   time?: string;
 
-  @Metadata({ data: "json, name=token" })
+  @SpeakeasyMetadata({ data: "json, name=token" })
   token?: string;
 }
 
 
 export class Status200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=connecting" })
+  @SpeakeasyMetadata({ data: "json, name=connecting" })
   connecting?: boolean;
 
-  @Metadata({ data: "json, name=last_handshake" })
+  @SpeakeasyMetadata({ data: "json, name=last_handshake" })
   lastHandshake?: Status200ApplicationJsonLastHandshake;
 
-  @Metadata({ data: "json, name=peer" })
+  @SpeakeasyMetadata({ data: "json, name=peer" })
   peer?: string;
 
-  @Metadata({ data: "json, name=syncing" })
+  @SpeakeasyMetadata({ data: "json, name=syncing" })
   syncing?: boolean;
 }
 
 
+export class StatusRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request?: StatusRequestBody;
+}
+
+
 export class StatusResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   status200ApplicationJsonObject?: Status200ApplicationJson;
 }

@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetCreateAppCookieStickinessPolicyActionEnum(str, Enum):
     CREATE_APP_COOKIE_STICKINESS_POLICY = "CreateAppCookieStickinessPolicy"
@@ -10,11 +14,11 @@ class GetCreateAppCookieStickinessPolicyVersionEnum(str, Enum):
 
 @dataclass
 class GetCreateAppCookieStickinessPolicyQueryParams:
-    action: GetCreateAppCookieStickinessPolicyActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    cookie_name: str = field(default=None, metadata={'query_param': { 'field_name': 'CookieName', 'style': 'form', 'explode': True }})
-    load_balancer_name: str = field(default=None, metadata={'query_param': { 'field_name': 'LoadBalancerName', 'style': 'form', 'explode': True }})
-    policy_name: str = field(default=None, metadata={'query_param': { 'field_name': 'PolicyName', 'style': 'form', 'explode': True }})
-    version: GetCreateAppCookieStickinessPolicyVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: GetCreateAppCookieStickinessPolicyActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    cookie_name: str = field(metadata={'query_param': { 'field_name': 'CookieName', 'style': 'form', 'explode': True }})
+    load_balancer_name: str = field(metadata={'query_param': { 'field_name': 'LoadBalancerName', 'style': 'form', 'explode': True }})
+    policy_name: str = field(metadata={'query_param': { 'field_name': 'PolicyName', 'style': 'form', 'explode': True }})
+    version: GetCreateAppCookieStickinessPolicyVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -30,13 +34,13 @@ class GetCreateAppCookieStickinessPolicyHeaders:
 
 @dataclass
 class GetCreateAppCookieStickinessPolicyRequest:
-    query_params: GetCreateAppCookieStickinessPolicyQueryParams = field(default=None)
-    headers: GetCreateAppCookieStickinessPolicyHeaders = field(default=None)
+    headers: GetCreateAppCookieStickinessPolicyHeaders = field()
+    query_params: GetCreateAppCookieStickinessPolicyQueryParams = field()
     
 
 @dataclass
 class GetCreateAppCookieStickinessPolicyResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

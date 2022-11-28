@@ -1,13 +1,14 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class TagmanagerAccountsContainersVersionsPublishPathParams:
-    account_id: str = field(default=None, metadata={'path_param': { 'field_name': 'accountId', 'style': 'simple', 'explode': False }})
-    container_id: str = field(default=None, metadata={'path_param': { 'field_name': 'containerId', 'style': 'simple', 'explode': False }})
-    container_version_id: str = field(default=None, metadata={'path_param': { 'field_name': 'containerVersionId', 'style': 'simple', 'explode': False }})
+    account_id: str = field(metadata={'path_param': { 'field_name': 'accountId', 'style': 'simple', 'explode': False }})
+    container_id: str = field(metadata={'path_param': { 'field_name': 'containerId', 'style': 'simple', 'explode': False }})
+    container_version_id: str = field(metadata={'path_param': { 'field_name': 'containerVersionId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -28,20 +29,20 @@ class TagmanagerAccountsContainersVersionsPublishQueryParams:
 
 @dataclass
 class TagmanagerAccountsContainersVersionsPublishSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class TagmanagerAccountsContainersVersionsPublishRequest:
-    path_params: TagmanagerAccountsContainersVersionsPublishPathParams = field(default=None)
-    query_params: TagmanagerAccountsContainersVersionsPublishQueryParams = field(default=None)
-    security: TagmanagerAccountsContainersVersionsPublishSecurity = field(default=None)
+    path_params: TagmanagerAccountsContainersVersionsPublishPathParams = field()
+    query_params: TagmanagerAccountsContainersVersionsPublishQueryParams = field()
+    security: TagmanagerAccountsContainersVersionsPublishSecurity = field()
     
 
 @dataclass
 class TagmanagerAccountsContainersVersionsPublishResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     publish_container_version_response: Optional[shared.PublishContainerVersionResponse] = field(default=None)
-    status_code: int = field(default=None)
     

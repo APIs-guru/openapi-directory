@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // WebpushFcmOptions
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Options for features provided by the FCM SDK for Web.
 **/
 export class WebpushFcmOptions extends SpeakeasyBase {
-  @Metadata({ data: "json, name=analyticsLabel" })
+  @SpeakeasyMetadata({ data: "json, name=analyticsLabel" })
   analyticsLabel?: string;
 
-  @Metadata({ data: "json, name=link" })
+  @SpeakeasyMetadata({ data: "json, name=link" })
   link?: string;
 }

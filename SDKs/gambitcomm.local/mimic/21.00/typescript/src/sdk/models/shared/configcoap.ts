@@ -1,16 +1,17 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ConfigCoap extends SpeakeasyBase {
-  @Metadata({ data: "json, name=keystore" })
+  @SpeakeasyMetadata({ data: "json, name=keystore" })
   keystore?: string;
 
-  @Metadata({ data: "json, name=primary_port" })
+  @SpeakeasyMetadata({ data: "json, name=primary_port" })
   primaryPort?: number;
 
-  @Metadata({ data: "json, name=rule" })
+  @SpeakeasyMetadata({ data: "json, name=rule" })
   rule?: string;
 
-  @Metadata({ data: "json, name=secure_port" })
+  @SpeakeasyMetadata({ data: "json, name=secure_port" })
   securePort?: number;
 }

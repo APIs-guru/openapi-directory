@@ -31,7 +31,7 @@ type SecuritycenterProjectsNotificationConfigsCreateSecurity struct {
 type SecuritycenterProjectsNotificationConfigsCreateRequest struct {
 	PathParams  SecuritycenterProjectsNotificationConfigsCreatePathParams
 	QueryParams SecuritycenterProjectsNotificationConfigsCreateQueryParams
-	Request     *shared.NotificationConfig `request:"mediaType=application/json"`
+	Request     *shared.NotificationConfigInput `request:"mediaType=application/json"`
 	Security    SecuritycenterProjectsNotificationConfigsCreateSecurity
 }
 

@@ -1,13 +1,16 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class GetSessionPathParams:
-    bot_alias: str = field(default=None, metadata={'path_param': { 'field_name': 'botAlias', 'style': 'simple', 'explode': False }})
-    bot_name: str = field(default=None, metadata={'path_param': { 'field_name': 'botName', 'style': 'simple', 'explode': False }})
-    user_id: str = field(default=None, metadata={'path_param': { 'field_name': 'userId', 'style': 'simple', 'explode': False }})
+    bot_alias: str = field(metadata={'path_param': { 'field_name': 'botAlias', 'style': 'simple', 'explode': False }})
+    bot_name: str = field(metadata={'path_param': { 'field_name': 'botName', 'style': 'simple', 'explode': False }})
+    user_id: str = field(metadata={'path_param': { 'field_name': 'userId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -28,18 +31,18 @@ class GetSessionHeaders:
 
 @dataclass
 class GetSessionRequest:
-    path_params: GetSessionPathParams = field(default=None)
-    query_params: GetSessionQueryParams = field(default=None)
-    headers: GetSessionHeaders = field(default=None)
+    headers: GetSessionHeaders = field()
+    path_params: GetSessionPathParams = field()
+    query_params: GetSessionQueryParams = field()
     
 
 @dataclass
 class GetSessionResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     get_session_response: Optional[shared.GetSessionResponse] = field(default=None)
     internal_failure_exception: Optional[Any] = field(default=None)
     limit_exceeded_exception: Optional[Any] = field(default=None)
     not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

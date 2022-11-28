@@ -19,6 +19,8 @@ type CreateFunctionDefinitionVersionHeaders struct {
 	XAmznClientToken  *string `header:"style=simple,explode=false,name=X-Amzn-Client-Token"`
 }
 
+// CreateFunctionDefinitionVersionRequestBodyDefaultConfig
+// The default configuration that applies to all Lambda functions in the group. Individual Lambda functions can override these settings.
 type CreateFunctionDefinitionVersionRequestBodyDefaultConfig struct {
 	Execution *shared.FunctionDefaultExecutionConfig `json:"Execution,omitempty"`
 }

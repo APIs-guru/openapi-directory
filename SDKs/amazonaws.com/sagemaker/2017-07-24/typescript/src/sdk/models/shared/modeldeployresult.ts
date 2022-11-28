@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ModelDeployResult
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Provides information about the endpoint of the model deployment.
 **/
 export class ModelDeployResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=EndpointName" })
+  @SpeakeasyMetadata({ data: "json, name=EndpointName" })
   endpointName?: string;
 }

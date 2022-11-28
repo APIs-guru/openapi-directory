@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ThingGroupDocument
@@ -6,18 +7,18 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The thing group search index document.
 **/
 export class ThingGroupDocument extends SpeakeasyBase {
-  @Metadata({ data: "json, name=attributes" })
+  @SpeakeasyMetadata({ data: "json, name=attributes" })
   attributes?: Map<string, string>;
 
-  @Metadata({ data: "json, name=parentGroupNames" })
+  @SpeakeasyMetadata({ data: "json, name=parentGroupNames" })
   parentGroupNames?: string[];
 
-  @Metadata({ data: "json, name=thingGroupDescription" })
+  @SpeakeasyMetadata({ data: "json, name=thingGroupDescription" })
   thingGroupDescription?: string;
 
-  @Metadata({ data: "json, name=thingGroupId" })
+  @SpeakeasyMetadata({ data: "json, name=thingGroupId" })
   thingGroupId?: string;
 
-  @Metadata({ data: "json, name=thingGroupName" })
+  @SpeakeasyMetadata({ data: "json, name=thingGroupName" })
   thingGroupName?: string;
 }

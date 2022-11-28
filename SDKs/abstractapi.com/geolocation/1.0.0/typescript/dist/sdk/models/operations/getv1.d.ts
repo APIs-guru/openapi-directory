@@ -1,6 +1,6 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
-export declare const GETV1_SERVERS: string[];
+export declare const GetV1ServerList: readonly ["https://ipgeolocation.abstractapi.com"];
 export declare class GetV1QueryParams extends SpeakeasyBase {
     apiKey: string;
     fields?: string;

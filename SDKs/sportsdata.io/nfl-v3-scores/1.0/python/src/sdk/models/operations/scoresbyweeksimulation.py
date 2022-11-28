@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from typing import Any,List,Optional
+from enum import Enum
 
 class ScoresByWeekSimulationFormatEnum(str, Enum):
     XML = "XML"
@@ -8,18 +9,18 @@ class ScoresByWeekSimulationFormatEnum(str, Enum):
 
 @dataclass
 class ScoresByWeekSimulationPathParams:
-    format: ScoresByWeekSimulationFormatEnum = field(default=None, metadata={'path_param': { 'field_name': 'format', 'style': 'simple', 'explode': False }})
-    numberofplays: str = field(default=None, metadata={'path_param': { 'field_name': 'numberofplays', 'style': 'simple', 'explode': False }})
+    format: ScoresByWeekSimulationFormatEnum = field(metadata={'path_param': { 'field_name': 'format', 'style': 'simple', 'explode': False }})
+    numberofplays: str = field(metadata={'path_param': { 'field_name': 'numberofplays', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class ScoresByWeekSimulationRequest:
-    path_params: ScoresByWeekSimulationPathParams = field(default=None)
+    path_params: ScoresByWeekSimulationPathParams = field()
     
 
 @dataclass
 class ScoresByWeekSimulationResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     scores: Optional[List[Any]] = field(default=None)
-    status_code: int = field(default=None)
     

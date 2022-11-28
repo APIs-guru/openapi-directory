@@ -1,5 +1,7 @@
 package shared
 
+// AuditRespEmbedded
+// Container containing the `events` array.
 type AuditRespEmbedded struct {
 	Events []AuditEvent `json:"events,omitempty"`
 }

@@ -1,26 +1,27 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetSetupV1CompaniesTimezonesDatePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=date" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=date" })
   date: Date;
 }
 
 
 export class GetSetupV1CompaniesTimezonesDateRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetSetupV1CompaniesTimezonesDatePathParams;
 }
 
 
 export class GetSetupV1CompaniesTimezonesDateResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   timezoneViewModel?: shared.TimezoneViewModel;
 }

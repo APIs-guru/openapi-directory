@@ -12,6 +12,8 @@ const (
 	OrganizationActionsSecretVisibilityEnumSelected OrganizationActionsSecretVisibilityEnum = "selected"
 )
 
+// OrganizationActionsSecret
+// Secrets for GitHub Actions for an organization.
 type OrganizationActionsSecret struct {
 	CreatedAt               time.Time                               `json:"created_at"`
 	Name                    string                                  `json:"name"`

@@ -26,11 +26,6 @@ type TapcnSecurity struct {
 	ClientID shared.SchemeClientID `security:"scheme,type=apiKey,subtype=header"`
 }
 
-type TapcnRequest struct {
-	Request  *TapcnRequestBody `request:"mediaType=application/json"`
-	Security TapcnSecurity
-}
-
 type Tapcn400ApplicationJSONErrorEnum string
 
 const (
@@ -160,6 +155,11 @@ const (
 type Tapcn504ApplicationJSON struct {
 	Error            *Tapcn504ApplicationJSONErrorEnum            `json:"error,omitempty"`
 	ErrorDescription *Tapcn504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
+}
+
+type TapcnRequest struct {
+	Request  *TapcnRequestBody `request:"mediaType=application/json"`
+	Security TapcnSecurity
 }
 
 type TapcnResponse struct {

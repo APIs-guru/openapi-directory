@@ -1,10 +1,13 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 
 
 @dataclass
 class DeleteThingGroupPathParams:
-    thing_group_name: str = field(default=None, metadata={'path_param': { 'field_name': 'thingGroupName', 'style': 'simple', 'explode': False }})
+    thing_group_name: str = field(metadata={'path_param': { 'field_name': 'thingGroupName', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,18 +28,18 @@ class DeleteThingGroupHeaders:
 
 @dataclass
 class DeleteThingGroupRequest:
-    path_params: DeleteThingGroupPathParams = field(default=None)
-    query_params: DeleteThingGroupQueryParams = field(default=None)
-    headers: DeleteThingGroupHeaders = field(default=None)
+    headers: DeleteThingGroupHeaders = field()
+    path_params: DeleteThingGroupPathParams = field()
+    query_params: DeleteThingGroupQueryParams = field()
     
 
 @dataclass
 class DeleteThingGroupResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     delete_thing_group_response: Optional[dict[str, Any]] = field(default=None)
     internal_failure_exception: Optional[Any] = field(default=None)
     invalid_request_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     version_conflict_exception: Optional[Any] = field(default=None)
     

@@ -1,4 +1,4 @@
-from .__xgafv_enum import *
+from ._xgafv_enum import *
 from .alt_enum import *
 from .appprofile import *
 from .auditconfig import *
@@ -15,6 +15,8 @@ from .clusterautoscalingconfig import *
 from .clusterconfig import *
 from .clusterstate import *
 from .columnfamily import *
+from .columnfamilystats import *
+from .copybackuprequest import *
 from .createinstancerequest import *
 from .createtablerequest import *
 from .droprowrangerequest import *
@@ -43,6 +45,7 @@ from .multiclusterroutinguseany import *
 from .operation import *
 from .policy import *
 from .restoreinfo import *
+from .restoreinfo1 import *
 from .restoretablerequest import *
 from .security import *
 from .setiampolicyrequest import *
@@ -50,6 +53,7 @@ from .singleclusterrouting import *
 from .split import *
 from .status import *
 from .table import *
+from .tablestats import *
 from .testiampermissionsrequest import *
 from .testiampermissionsresponse import *
 from .union import *

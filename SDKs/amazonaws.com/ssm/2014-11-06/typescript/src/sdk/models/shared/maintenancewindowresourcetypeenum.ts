@@ -1,6 +1,7 @@
 
 
+
 export enum MaintenanceWindowResourceTypeEnum {
-    Instance = "INSTANCE"
-,    ResourceGroup = "RESOURCE_GROUP"
+    Instance = "INSTANCE",
+    ResourceGroup = "RESOURCE_GROUP"
 }

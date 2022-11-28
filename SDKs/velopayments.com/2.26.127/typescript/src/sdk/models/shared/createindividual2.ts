@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class CreateIndividual2 extends SpeakeasyBase {
-  @Metadata({ data: "json, name=dateOfBirth" })
+  @SpeakeasyMetadata({ data: "json, name=dateOfBirth" })
   dateOfBirth: Date;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: any;
 
-  @Metadata({ data: "json, name=nationalIdentification" })
+  @SpeakeasyMetadata({ data: "json, name=nationalIdentification" })
   nationalIdentification?: string;
 }

@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetGetCallerIdentityActionEnum(str, Enum):
     GET_CALLER_IDENTITY = "GetCallerIdentity"
@@ -10,8 +14,8 @@ class GetGetCallerIdentityVersionEnum(str, Enum):
 
 @dataclass
 class GetGetCallerIdentityQueryParams:
-    action: GetGetCallerIdentityActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: GetGetCallerIdentityVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: GetGetCallerIdentityActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: GetGetCallerIdentityVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,13 +31,13 @@ class GetGetCallerIdentityHeaders:
 
 @dataclass
 class GetGetCallerIdentityRequest:
-    query_params: GetGetCallerIdentityQueryParams = field(default=None)
-    headers: GetGetCallerIdentityHeaders = field(default=None)
+    headers: GetGetCallerIdentityHeaders = field()
+    query_params: GetGetCallerIdentityQueryParams = field()
     
 
 @dataclass
 class GetGetCallerIdentityResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 
@@ -14,6 +18,7 @@ class ListWorkflowsXAmzTargetEnum(str, Enum):
 
 @dataclass
 class ListWorkflowsHeaders:
+    x_amz_target: ListWorkflowsXAmzTargetEnum = field(metadata={'header': { 'field_name': 'X-Amz-Target', 'style': 'simple', 'explode': False }})
     x_amz_algorithm: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Algorithm', 'style': 'simple', 'explode': False }})
     x_amz_content_sha256: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Content-Sha256', 'style': 'simple', 'explode': False }})
     x_amz_credential: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Credential', 'style': 'simple', 'explode': False }})
@@ -21,22 +26,21 @@ class ListWorkflowsHeaders:
     x_amz_security_token: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Security-Token', 'style': 'simple', 'explode': False }})
     x_amz_signature: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Signature', 'style': 'simple', 'explode': False }})
     x_amz_signed_headers: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-SignedHeaders', 'style': 'simple', 'explode': False }})
-    x_amz_target: ListWorkflowsXAmzTargetEnum = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Target', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class ListWorkflowsRequest:
-    query_params: ListWorkflowsQueryParams = field(default=None)
-    headers: ListWorkflowsHeaders = field(default=None)
-    request: shared.ListWorkflowsRequest = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: ListWorkflowsHeaders = field()
+    query_params: ListWorkflowsQueryParams = field()
+    request: shared.ListWorkflowsRequest = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class ListWorkflowsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     internal_service_exception: Optional[Any] = field(default=None)
     invalid_input_exception: Optional[Any] = field(default=None)
     list_workflows_response: Optional[shared.ListWorkflowsResponse] = field(default=None)
     operation_timeout_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

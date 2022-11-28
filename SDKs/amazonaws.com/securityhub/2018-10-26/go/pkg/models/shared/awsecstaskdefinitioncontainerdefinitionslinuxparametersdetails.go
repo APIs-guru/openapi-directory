@@ -1,5 +1,7 @@
 package shared
 
+// AwsEcsTaskDefinitionContainerDefinitionsLinuxParametersDetails
+// &gt;Linux-specific modifications that are applied to the container, such as Linux kernel capabilities.
 type AwsEcsTaskDefinitionContainerDefinitionsLinuxParametersDetails struct {
 	Capabilities       *AwsEcsTaskDefinitionContainerDefinitionsLinuxParametersCapabilitiesDetails `json:"Capabilities,omitempty"`
 	Devices            []AwsEcsTaskDefinitionContainerDefinitionsLinuxParametersDevicesDetails     `json:"Devices,omitempty"`

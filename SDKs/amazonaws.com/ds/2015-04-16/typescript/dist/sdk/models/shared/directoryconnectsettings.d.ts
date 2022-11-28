@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 /**
  * Contains information for the <a>ConnectDirectory</a> operation when an AD Connector directory is being created.
 **/

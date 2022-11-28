@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class ErrorCodeEnum(str, Enum):
     AGENT_ISSUE = "AGENT_ISSUE"

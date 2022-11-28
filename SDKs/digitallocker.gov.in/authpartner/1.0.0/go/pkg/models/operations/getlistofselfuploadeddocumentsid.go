@@ -12,11 +12,6 @@ type GetListOfSelfUploadedDocumentsIDSecurity struct {
 	BearerAuth shared.SchemeBearerAuth `security:"scheme,type=http,subtype=bearer"`
 }
 
-type GetListOfSelfUploadedDocumentsIDRequest struct {
-	PathParams GetListOfSelfUploadedDocumentsIDPathParams
-	Security   GetListOfSelfUploadedDocumentsIDSecurity
-}
-
 type GetListOfSelfUploadedDocumentsID401ApplicationJSON struct {
 	Error            *string `json:"error,omitempty"`
 	ErrorDescription *string `json:"error_description,omitempty"`
@@ -30,6 +25,11 @@ type GetListOfSelfUploadedDocumentsID404ApplicationJSON struct {
 type GetListOfSelfUploadedDocumentsID500ApplicationJSON struct {
 	Error            *string `json:"error,omitempty"`
 	ErrorDescription *string `json:"error_description,omitempty"`
+}
+
+type GetListOfSelfUploadedDocumentsIDRequest struct {
+	PathParams GetListOfSelfUploadedDocumentsIDPathParams
+	Security   GetListOfSelfUploadedDocumentsIDSecurity
 }
 
 type GetListOfSelfUploadedDocumentsIDResponse struct {

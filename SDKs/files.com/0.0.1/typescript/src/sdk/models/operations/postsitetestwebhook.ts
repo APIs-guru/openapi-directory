@@ -1,41 +1,42 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class PostSiteTestWebhookRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "multipart_form, name=action" })
+  @SpeakeasyMetadata({ data: "multipart_form, name=action" })
   action?: string;
 
-  @Metadata({ data: "multipart_form, name=body;json=true" })
+  @SpeakeasyMetadata({ data: "multipart_form, name=body;json=true" })
   body?: Map<string, any>;
 
-  @Metadata({ data: "multipart_form, name=encoding" })
+  @SpeakeasyMetadata({ data: "multipart_form, name=encoding" })
   encoding?: string;
 
-  @Metadata({ data: "multipart_form, name=headers;json=true" })
+  @SpeakeasyMetadata({ data: "multipart_form, name=headers;json=true" })
   headers?: Map<string, any>;
 
-  @Metadata({ data: "multipart_form, name=method" })
+  @SpeakeasyMetadata({ data: "multipart_form, name=method" })
   method?: string;
 
-  @Metadata({ data: "multipart_form, name=url" })
+  @SpeakeasyMetadata({ data: "multipart_form, name=url" })
   url: string;
 }
 
 
 export class PostSiteTestWebhookRequest extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=multipart/form-data" })
+  @SpeakeasyMetadata({ data: "request, media_type=multipart/form-data" })
   request: PostSiteTestWebhookRequestBody;
 }
 
 
 export class PostSiteTestWebhookResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusEntity?: shared.StatusEntity;
 }

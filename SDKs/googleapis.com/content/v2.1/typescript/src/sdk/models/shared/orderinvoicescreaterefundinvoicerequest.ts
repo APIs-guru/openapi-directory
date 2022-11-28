@@ -1,23 +1,23 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { OrderinvoicesCustomBatchRequestEntryCreateRefundInvoiceRefundOption } from "./orderinvoicescustombatchrequestentrycreaterefundinvoicerefundoption";
 import { OrderinvoicesCustomBatchRequestEntryCreateRefundInvoiceReturnOption } from "./orderinvoicescustombatchrequestentrycreaterefundinvoicereturnoption";
 import { ShipmentInvoice } from "./shipmentinvoice";
 
 
+
 export class OrderinvoicesCreateRefundInvoiceRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=invoiceId" })
+  @SpeakeasyMetadata({ data: "json, name=invoiceId" })
   invoiceId?: string;
 
-  @Metadata({ data: "json, name=operationId" })
+  @SpeakeasyMetadata({ data: "json, name=operationId" })
   operationId?: string;
 
-  @Metadata({ data: "json, name=refundOnlyOption" })
+  @SpeakeasyMetadata({ data: "json, name=refundOnlyOption" })
   refundOnlyOption?: OrderinvoicesCustomBatchRequestEntryCreateRefundInvoiceRefundOption;
 
-  @Metadata({ data: "json, name=returnOption" })
+  @SpeakeasyMetadata({ data: "json, name=returnOption" })
   returnOption?: OrderinvoicesCustomBatchRequestEntryCreateRefundInvoiceReturnOption;
 
-  @Metadata({ data: "json, name=shipmentInvoices", elemType: shared.ShipmentInvoice })
+  @SpeakeasyMetadata({ data: "json, name=shipmentInvoices", elemType: ShipmentInvoice })
   shipmentInvoices?: ShipmentInvoice[];
 }

@@ -1,14 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { HashKeyRange } from "./hashkeyrange";
 
 
+
 export class ChildShard extends SpeakeasyBase {
-  @Metadata({ data: "json, name=HashKeyRange" })
+  @SpeakeasyMetadata({ data: "json, name=HashKeyRange" })
   hashKeyRange: HashKeyRange;
 
-  @Metadata({ data: "json, name=ParentShards" })
+  @SpeakeasyMetadata({ data: "json, name=ParentShards" })
   parentShards: string[];
 
-  @Metadata({ data: "json, name=ShardId" })
+  @SpeakeasyMetadata({ data: "json, name=ShardId" })
   shardId: string;
 }

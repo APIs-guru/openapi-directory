@@ -1,28 +1,29 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum EnterpriseCrmLoggingGwsSanitizeOptionsLogTypeEnum {
-    LogTypeUnspecified = "LOG_TYPE_UNSPECIFIED"
-,    Gws = "GWS"
-,    Gts = "GTS"
-,    All = "ALL"
+    LogTypeUnspecified = "LOG_TYPE_UNSPECIFIED",
+    Gws = "GWS",
+    Gts = "GTS",
+    All = "ALL"
 }
 
 export enum EnterpriseCrmLoggingGwsSanitizeOptionsPrivacyEnum {
-    PrivacyTypeUnspecified = "PRIVACY_TYPE_UNSPECIFIED"
-,    NotPii = "NOT_PII"
-,    Pii = "PII"
-,    Spii = "SPII"
-,    Unsure = "UNSURE"
+    PrivacyTypeUnspecified = "PRIVACY_TYPE_UNSPECIFIED",
+    NotPii = "NOT_PII",
+    Pii = "PII",
+    Spii = "SPII",
+    Unsure = "UNSURE"
 }
 
 export enum EnterpriseCrmLoggingGwsSanitizeOptionsSanitizeTypeEnum {
-    SanitizeTypeUnspecified = "SANITIZE_TYPE_UNSPECIFIED"
-,    Scrub = "SCRUB"
-,    Anonymize = "ANONYMIZE"
-,    AnonymizeLimitedRepeatable = "ANONYMIZE_LIMITED_REPEATABLE"
-,    Obfuscate = "OBFUSCATE"
-,    Encrypt = "ENCRYPT"
-,    DoNotSanitize = "DO_NOT_SANITIZE"
+    SanitizeTypeUnspecified = "SANITIZE_TYPE_UNSPECIFIED",
+    Scrub = "SCRUB",
+    Anonymize = "ANONYMIZE",
+    AnonymizeLimitedRepeatable = "ANONYMIZE_LIMITED_REPEATABLE",
+    Obfuscate = "OBFUSCATE",
+    Encrypt = "ENCRYPT",
+    DoNotSanitize = "DO_NOT_SANITIZE"
 }
 
 
@@ -31,15 +32,15 @@ export enum EnterpriseCrmLoggingGwsSanitizeOptionsSanitizeTypeEnum {
  * Identifies whether a field contains, or may contain, PII or sensitive data, and how to sanitize the field if it does. If a field's privacy type cannot be determined then it is sanitized (e.g., scrubbed). The specific sanitizer implementation is determined by run-time configuration and environment options (e.g., prod vs. qa). next_id: 5
 **/
 export class EnterpriseCrmLoggingGwsSanitizeOptions extends SpeakeasyBase {
-  @Metadata({ data: "json, name=isAlreadySanitized" })
+  @SpeakeasyMetadata({ data: "json, name=isAlreadySanitized" })
   isAlreadySanitized?: boolean;
 
-  @Metadata({ data: "json, name=logType" })
+  @SpeakeasyMetadata({ data: "json, name=logType" })
   logType?: EnterpriseCrmLoggingGwsSanitizeOptionsLogTypeEnum[];
 
-  @Metadata({ data: "json, name=privacy" })
+  @SpeakeasyMetadata({ data: "json, name=privacy" })
   privacy?: EnterpriseCrmLoggingGwsSanitizeOptionsPrivacyEnum;
 
-  @Metadata({ data: "json, name=sanitizeType" })
+  @SpeakeasyMetadata({ data: "json, name=sanitizeType" })
   sanitizeType?: EnterpriseCrmLoggingGwsSanitizeOptionsSanitizeTypeEnum;
 }

@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { S3ContentLocation } from "./s3contentlocation";
+
 
 
 // CodeContent
@@ -7,12 +8,12 @@ import { S3ContentLocation } from "./s3contentlocation";
  * Specifies either the application code, or the location of the application code, for a Flink-based Kinesis Data Analytics application. 
 **/
 export class CodeContent extends SpeakeasyBase {
-  @Metadata({ data: "json, name=S3ContentLocation" })
+  @SpeakeasyMetadata({ data: "json, name=S3ContentLocation" })
   s3ContentLocation?: S3ContentLocation;
 
-  @Metadata({ data: "json, name=TextContent" })
+  @SpeakeasyMetadata({ data: "json, name=TextContent" })
   textContent?: string;
 
-  @Metadata({ data: "json, name=ZipFileContent" })
+  @SpeakeasyMetadata({ data: "json, name=ZipFileContent" })
   zipFileContent?: string;
 }

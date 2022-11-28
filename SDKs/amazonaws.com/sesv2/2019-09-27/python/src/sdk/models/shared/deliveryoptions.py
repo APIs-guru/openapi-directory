@@ -1,12 +1,18 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import tlspolicy_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class DeliveryOptions:
-    sending_pool_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'SendingPoolName' }})
-    tls_policy: Optional[tlspolicy_enum.TLSPolicyEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'TlsPolicy' }})
+    r"""DeliveryOptions
+    Used to associate a configuration set with a dedicated IP pool.
+    """
+    
+    sending_pool_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('SendingPoolName') }})
+    tls_policy: Optional[TLSPolicyEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('TlsPolicy') }})
     

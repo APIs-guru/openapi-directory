@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleDevtoolsRemotebuildexecutionAdminV1alphaWorkerPool } from "./googledevtoolsremotebuildexecutionadminv1alphaworkerpool";
+
 
 
 // GoogleDevtoolsRemotebuildexecutionAdminV1alphaCreateWorkerPoolRequest
@@ -7,12 +8,12 @@ import { GoogleDevtoolsRemotebuildexecutionAdminV1alphaWorkerPool } from "./goog
  * The request used for `CreateWorkerPool`.
 **/
 export class GoogleDevtoolsRemotebuildexecutionAdminV1alphaCreateWorkerPoolRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=parent" })
+  @SpeakeasyMetadata({ data: "json, name=parent" })
   parent?: string;
 
-  @Metadata({ data: "json, name=poolId" })
+  @SpeakeasyMetadata({ data: "json, name=poolId" })
   poolId?: string;
 
-  @Metadata({ data: "json, name=workerPool" })
+  @SpeakeasyMetadata({ data: "json, name=workerPool" })
   workerPool?: GoogleDevtoolsRemotebuildexecutionAdminV1alphaWorkerPool;
 }

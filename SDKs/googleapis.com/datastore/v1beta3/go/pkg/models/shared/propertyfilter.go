@@ -15,6 +15,8 @@ const (
 	PropertyFilterOpEnumNotIn               PropertyFilterOpEnum = "NOT_IN"
 )
 
+// PropertyFilter
+// A filter on a specific property.
 type PropertyFilter struct {
 	Op       *PropertyFilterOpEnum `json:"op,omitempty"`
 	Property *PropertyReference    `json:"property,omitempty"`

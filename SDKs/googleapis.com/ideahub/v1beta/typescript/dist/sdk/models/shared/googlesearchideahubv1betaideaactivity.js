@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var GoogleSearchIdeahubV1betaIdeaActivityTypeEnum;
 (function (GoogleSearchIdeahubV1betaIdeaActivityTypeEnum) {
     GoogleSearchIdeahubV1betaIdeaActivityTypeEnum["TypeUnspecified"] = "TYPE_UNSPECIFIED";
@@ -41,23 +41,23 @@ var GoogleSearchIdeahubV1betaIdeaActivity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=ideas" }),
+        SpeakeasyMetadata({ data: "json, name=ideas" }),
         __metadata("design:type", Array)
     ], GoogleSearchIdeahubV1betaIdeaActivity.prototype, "ideas", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], GoogleSearchIdeahubV1betaIdeaActivity.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=topics" }),
+        SpeakeasyMetadata({ data: "json, name=topics" }),
         __metadata("design:type", Array)
     ], GoogleSearchIdeahubV1betaIdeaActivity.prototype, "topics", void 0);
     __decorate([
-        Metadata({ data: "json, name=type" }),
+        SpeakeasyMetadata({ data: "json, name=type" }),
         __metadata("design:type", String)
     ], GoogleSearchIdeahubV1betaIdeaActivity.prototype, "type", void 0);
     __decorate([
-        Metadata({ data: "json, name=uri" }),
+        SpeakeasyMetadata({ data: "json, name=uri" }),
         __metadata("design:type", String)
     ], GoogleSearchIdeahubV1betaIdeaActivity.prototype, "uri", void 0);
     return GoogleSearchIdeahubV1betaIdeaActivity;

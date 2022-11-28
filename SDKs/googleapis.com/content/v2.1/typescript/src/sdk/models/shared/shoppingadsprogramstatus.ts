@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ShoppingAdsProgramStatusRegionStatus } from "./shoppingadsprogramstatusregionstatus";
 
+
 export enum ShoppingAdsProgramStatusGlobalStateEnum {
-    ProgramStateUnspecified = "PROGRAM_STATE_UNSPECIFIED"
-,    NotEnabled = "NOT_ENABLED"
-,    NoOffersUploaded = "NO_OFFERS_UPLOADED"
-,    Enabled = "ENABLED"
+    ProgramStateUnspecified = "PROGRAM_STATE_UNSPECIFIED",
+    NotEnabled = "NOT_ENABLED",
+    NoOffersUploaded = "NO_OFFERS_UPLOADED",
+    Enabled = "ENABLED"
 }
 
 
@@ -15,9 +15,9 @@ export enum ShoppingAdsProgramStatusGlobalStateEnum {
  * Response message for GetShoppingAdsProgramStatus.
 **/
 export class ShoppingAdsProgramStatus extends SpeakeasyBase {
-  @Metadata({ data: "json, name=globalState" })
+  @SpeakeasyMetadata({ data: "json, name=globalState" })
   globalState?: ShoppingAdsProgramStatusGlobalStateEnum;
 
-  @Metadata({ data: "json, name=regionStatuses", elemType: shared.ShoppingAdsProgramStatusRegionStatus })
+  @SpeakeasyMetadata({ data: "json, name=regionStatuses", elemType: ShoppingAdsProgramStatusRegionStatus })
   regionStatuses?: ShoppingAdsProgramStatusRegionStatus[];
 }

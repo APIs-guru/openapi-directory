@@ -1,6 +1,7 @@
 
 
+
 export enum ArtifactPackagingEnum {
-    None = "NONE"
-,    Zip = "ZIP"
+    None = "NONE",
+    Zip = "ZIP"
 }

@@ -1,19 +1,20 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum VerificationMethodEnum {
-    VerificationMethodUnspecified = "VERIFICATION_METHOD_UNSPECIFIED"
-,    Address = "ADDRESS"
-,    Email = "EMAIL"
-,    PhoneCall = "PHONE_CALL"
-,    Sms = "SMS"
-,    Auto = "AUTO"
+    VerificationMethodUnspecified = "VERIFICATION_METHOD_UNSPECIFIED",
+    Address = "ADDRESS",
+    Email = "EMAIL",
+    PhoneCall = "PHONE_CALL",
+    Sms = "SMS",
+    Auto = "AUTO"
 }
 
 export enum VerificationStateEnum {
-    VerificationStateUnspecified = "VERIFICATION_STATE_UNSPECIFIED"
-,    Pending = "PENDING"
-,    Completed = "COMPLETED"
-,    Failed = "FAILED"
+    VerificationStateUnspecified = "VERIFICATION_STATE_UNSPECIFIED",
+    Pending = "PENDING",
+    Completed = "COMPLETED",
+    Failed = "FAILED"
 }
 
 
@@ -22,15 +23,15 @@ export enum VerificationStateEnum {
  * A verification represents a verification attempt on a location.
 **/
 export class Verification extends SpeakeasyBase {
-  @Metadata({ data: "json, name=createTime" })
+  @SpeakeasyMetadata({ data: "json, name=createTime" })
   createTime?: string;
 
-  @Metadata({ data: "json, name=method" })
+  @SpeakeasyMetadata({ data: "json, name=method" })
   method?: VerificationMethodEnum;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=state" })
+  @SpeakeasyMetadata({ data: "json, name=state" })
   state?: VerificationStateEnum;
 }

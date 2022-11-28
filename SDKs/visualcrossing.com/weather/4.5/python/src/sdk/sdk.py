@@ -1,7 +1,10 @@
-import warnings
+
+__doc__ = """ SDK Documentation: https://www.visualcrossing.com/weather-api-documentation - https://www.visualcrossing.com/weather-api-documentation"""
 import requests
 from sdk.models import operations
 from . import utils
+
+
 
 
 SERVERS = [
@@ -10,30 +13,53 @@ SERVERS = [
 
 
 class SDK:
-    client = requests.Session()
-    server_url = SERVERS[0]
+    r"""SDK Documentation: https://www.visualcrossing.com/weather-api-documentation - https://www.visualcrossing.com/weather-api-documentation"""
+
+    _client: requests.Session
+    _security_client: requests.Session
+    
+    _server_url: str = SERVERS[0]
+    _language: str = "python"
+    _sdk_version: str = "0.0.1"
+    _gen_version: str = "internal"
+
+    def __init__(self) -> None:
+        self._client = requests.Session()
+        self._security_client = requests.Session()
+        
+
 
     def config_server_url(self, server_url: str, params: dict[str, str]):
-        if not params is None:
-            self.server_url = utils.replace_parameters(server_url, params)
+        if params is not None:
+            self._server_url = utils.replace_parameters(server_url, params)
         else:
-            self.server_url = server_url
-            
+            self._server_url = server_url
+
+        
     
 
+    def config_client(self, client: requests.Session):
+        self._client = client
+        
+    
+    
     
     def get_visual_crossing_web_services_rest_services_weatherdata_forecast(self, request: operations.GetVisualCrossingWebServicesRestServicesWeatherdataForecastRequest) -> operations.GetVisualCrossingWebServicesRestServicesWeatherdataForecastResponse:
-        warnings.simplefilter("ignore")
-
+        r"""Weather Forecast API
+        Provides access to weather forecast information. The forecast is available for up to 15 days at the hourly, 12 hour and daily summary level.
+        """
+        
         base_url = operations.GET_VISUAL_CROSSING_WEB_SERVICES_REST_SERVICES_WEATHERDATA_FORECAST_SERVERS[0]
-        if not request.server_url is None:
+        if request.server_url is not None:
             base_url = request.server_url
+        
+        
         url = base_url.removesuffix("/") + "/VisualCrossingWebServices/rest/services/weatherdata/forecast"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -46,17 +72,21 @@ class SDK:
 
     
     def get_visual_crossing_web_services_rest_services_weatherdata_history(self, request: operations.GetVisualCrossingWebServicesRestServicesWeatherdataHistoryRequest) -> operations.GetVisualCrossingWebServicesRestServicesWeatherdataHistoryResponse:
-        warnings.simplefilter("ignore")
-
+        r"""Retrieves hourly or daily historical weather records.
+        The weather history data is suitable for retrieving hourly or daily historical weather records.
+        """
+        
         base_url = operations.GET_VISUAL_CROSSING_WEB_SERVICES_REST_SERVICES_WEATHERDATA_HISTORY_SERVERS[0]
-        if not request.server_url is None:
+        if request.server_url is not None:
             base_url = request.server_url
+        
+        
         url = base_url.removesuffix("/") + "/VisualCrossingWebServices/rest/services/weatherdata/history"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 

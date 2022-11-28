@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetTokenMetadataPathParams = /** @class */ (function (_super) {
     __extends(GetTokenMetadataPathParams, _super);
@@ -30,7 +30,7 @@ var GetTokenMetadataPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=tokenid" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=tokenid" }),
         __metadata("design:type", String)
     ], GetTokenMetadataPathParams.prototype, "tokenid", void 0);
     return GetTokenMetadataPathParams;
@@ -42,7 +42,7 @@ var GetTokenMetadataQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=verbosity" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=verbosity" }),
         __metadata("design:type", Number)
     ], GetTokenMetadataQueryParams.prototype, "verbosity", void 0);
     return GetTokenMetadataQueryParams;
@@ -54,11 +54,11 @@ var GetTokenMetadataRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetTokenMetadataPathParams)
     ], GetTokenMetadataRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetTokenMetadataQueryParams)
     ], GetTokenMetadataRequest.prototype, "queryParams", void 0);
     return GetTokenMetadataRequest;
@@ -70,19 +70,19 @@ var GetTokenMetadataResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetTokenMetadataResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.Error)
     ], GetTokenMetadataResponse.prototype, "error", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetTokenMetadataResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.GetTokenMetadataResponse)
     ], GetTokenMetadataResponse.prototype, "getTokenMetadataResponse", void 0);
     return GetTokenMetadataResponse;

@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// TaskRun
+// The sampling parameters that are associated with the machine learning transform.
 type TaskRun struct {
 	CompletedOn    *time.Time          `json:"CompletedOn,omitempty"`
 	ErrorString    *string             `json:"ErrorString,omitempty"`

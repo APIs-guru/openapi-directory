@@ -1,71 +1,60 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetV4LayersAsHarvestedActivityIdContentsPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=activityId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=activityId" })
   activityId: string;
 }
 
 
 export class GetV4LayersAsHarvestedActivityIdContentsHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=Accept" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Accept" })
   accept: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=Range" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Range" })
   range: string;
 }
 
 
-export class GetV4LayersAsHarvestedActivityIdContentsSecurityOption1 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
-  apiKey: shared.SchemeApiKey;
-}
-
-
-export class GetV4LayersAsHarvestedActivityIdContentsSecurityOption2 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
-  oauth2AuthorizationCode: shared.SchemeOauth2AuthorizationCode;
-}
-
-
 export class GetV4LayersAsHarvestedActivityIdContentsSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, option=true" })
-  option1?: GetV4LayersAsHarvestedActivityIdContentsSecurityOption1;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  apiKey?: shared.SchemeApiKey;
 
-  @Metadata({ data: "security, option=true" })
-  option2?: GetV4LayersAsHarvestedActivityIdContentsSecurityOption2;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
+  oauth2AuthorizationCode?: shared.SchemeOauth2AuthorizationCode;
 }
 
 
 export class GetV4LayersAsHarvestedActivityIdContentsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetV4LayersAsHarvestedActivityIdContentsPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: GetV4LayersAsHarvestedActivityIdContentsHeaders;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: GetV4LayersAsHarvestedActivityIdContentsSecurity;
 }
 
 
 export class GetV4LayersAsHarvestedActivityIdContentsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   empty?: Map<string, any>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   error?: shared.Error;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: Map<string, string[]>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

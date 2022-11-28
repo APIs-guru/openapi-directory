@@ -1,13 +1,18 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import userasset
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ListUserAssetsResponse:
-    next_page_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'nextPageToken' }})
-    total_size: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'totalSize' }})
-    user_assets: Optional[List[userasset.UserAsset]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'userAssets' }})
+    r"""ListUserAssetsResponse
+    A response message from a request to list.
+    """
+    
+    next_page_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('nextPageToken') }})
+    total_size: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('totalSize') }})
+    user_assets: Optional[List[UserAsset]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('userAssets') }})
     

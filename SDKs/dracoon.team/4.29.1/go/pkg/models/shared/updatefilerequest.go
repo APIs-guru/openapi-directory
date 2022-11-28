@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// UpdateFileRequest
+// Request model for updating file's metadata
 type UpdateFileRequest struct {
 	Classification        *int32            `json:"classification,omitempty"`
 	Expiration            *ObjectExpiration `json:"expiration,omitempty"`

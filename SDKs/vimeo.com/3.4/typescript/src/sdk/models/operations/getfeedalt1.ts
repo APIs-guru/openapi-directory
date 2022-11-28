@@ -1,59 +1,60 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
+
 export enum GetFeedAlt1TypeEnum {
-    Appears = "appears"
-,    CategoryFeatured = "category_featured"
-,    Channel = "channel"
-,    FacebookFeed = "facebook_feed"
-,    Following = "following"
-,    Group = "group"
-,    Likes = "likes"
-,    OndemandPublish = "ondemand_publish"
-,    Share = "share"
-,    TaggedWith = "tagged_with"
-,    TwitterTimeline = "twitter_timeline"
-,    Uploads = "uploads"
+    Appears = "appears",
+    CategoryFeatured = "category_featured",
+    Channel = "channel",
+    FacebookFeed = "facebook_feed",
+    Following = "following",
+    Group = "group",
+    Likes = "likes",
+    OndemandPublish = "ondemand_publish",
+    Share = "share",
+    TaggedWith = "tagged_with",
+    TwitterTimeline = "twitter_timeline",
+    Uploads = "uploads"
 }
 
 
 export class GetFeedAlt1QueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=offset" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=offset" })
   offset?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=page" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page" })
   page?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=per_page" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=per_page" })
   perPage?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=type" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=type" })
   type?: GetFeedAlt1TypeEnum;
 }
 
 
 export class GetFeedAlt1Security extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   oauth2: shared.SchemeOauth2;
 }
 
 
 export class GetFeedAlt1Request extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetFeedAlt1QueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: GetFeedAlt1Security;
 }
 
 
 export class GetFeedAlt1Response extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata({ elemType: shared.Activity31 })
+  @SpeakeasyMetadata({ elemType: shared.Activity31 })
   activity31s?: shared.Activity31[];
 }

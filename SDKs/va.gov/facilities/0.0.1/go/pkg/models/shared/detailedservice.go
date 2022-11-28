@@ -1,5 +1,7 @@
 package shared
 
+// DetailedService
+// Detailed information of a facility service.
 type DetailedService struct {
 	AppointmentLeadin         *string                   `json:"appointment_leadin,omitempty"`
 	AppointmentPhones         []AppointmentPhoneNumber  `json:"appointment_phones,omitempty"`

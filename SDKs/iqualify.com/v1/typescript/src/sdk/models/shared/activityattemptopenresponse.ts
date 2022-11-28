@@ -1,27 +1,28 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ActivityAttemptOpenResponseFeedback } from "./activityattemptopenresponsefeedback";
 import { ActivityAttemptOpenResponseFiles } from "./activityattemptopenresponsefiles";
 
 
+
 export class ActivityAttemptOpenResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=activityId" })
+  @SpeakeasyMetadata({ data: "json, name=activityId" })
   activityId?: string;
 
-  @Metadata({ data: "json, name=activityType" })
+  @SpeakeasyMetadata({ data: "json, name=activityType" })
   activityType?: string;
 
-  @Metadata({ data: "json, name=feedback" })
+  @SpeakeasyMetadata({ data: "json, name=feedback" })
   feedback?: ActivityAttemptOpenResponseFeedback;
 
-  @Metadata({ data: "json, name=learnerEmail" })
+  @SpeakeasyMetadata({ data: "json, name=learnerEmail" })
   learnerEmail?: string;
 
-  @Metadata({ data: "json, name=offeringId" })
+  @SpeakeasyMetadata({ data: "json, name=offeringId" })
   offeringId?: string;
 
-  @Metadata({ data: "json, name=responseText" })
+  @SpeakeasyMetadata({ data: "json, name=responseText" })
   responseText?: string;
 
-  @Metadata({ data: "json, name=uploadedFiles" })
+  @SpeakeasyMetadata({ data: "json, name=uploadedFiles" })
   uploadedFiles?: ActivityAttemptOpenResponseFiles;
 }

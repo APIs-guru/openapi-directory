@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// Datastore
+// Information about a data store.
 type Datastore struct {
 	Arn                     *string                  `json:"arn,omitempty"`
 	CreationTime            *time.Time               `json:"creationTime,omitempty"`

@@ -1,27 +1,28 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class CreateAssessmentHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
@@ -31,10 +32,10 @@ export class CreateAssessmentHeaders extends SpeakeasyBase {
  *  The location in which Audit Manager saves assessment reports for the given assessment. 
 **/
 export class CreateAssessmentRequestBodyAssessmentReportsDestination extends SpeakeasyBase {
-  @Metadata({ data: "json, name=destination" })
+  @SpeakeasyMetadata({ data: "json, name=destination" })
   destination?: string;
 
-  @Metadata({ data: "json, name=destinationType" })
+  @SpeakeasyMetadata({ data: "json, name=destinationType" })
   destinationType?: shared.AssessmentReportDestinationTypeEnum;
 }
 
@@ -44,66 +45,66 @@ export class CreateAssessmentRequestBodyAssessmentReportsDestination extends Spe
  *  The wrapper that contains the accounts and services in scope for the assessment. 
 **/
 export class CreateAssessmentRequestBodyScope extends SpeakeasyBase {
-  @Metadata({ data: "json, name=awsAccounts", elemType: shared.AwsAccount })
+  @SpeakeasyMetadata({ data: "json, name=awsAccounts", elemType: shared.AwsAccount })
   awsAccounts?: shared.AwsAccount[];
 
-  @Metadata({ data: "json, name=awsServices", elemType: shared.AwsService })
+  @SpeakeasyMetadata({ data: "json, name=awsServices", elemType: shared.AwsService })
   awsServices?: shared.AwsService[];
 }
 
 
 export class CreateAssessmentRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=assessmentReportsDestination" })
+  @SpeakeasyMetadata({ data: "json, name=assessmentReportsDestination" })
   assessmentReportsDestination: CreateAssessmentRequestBodyAssessmentReportsDestination;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=frameworkId" })
+  @SpeakeasyMetadata({ data: "json, name=frameworkId" })
   frameworkId: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 
-  @Metadata({ data: "json, name=roles", elemType: shared.Role })
+  @SpeakeasyMetadata({ data: "json, name=roles", elemType: shared.Role })
   roles: shared.Role[];
 
-  @Metadata({ data: "json, name=scope" })
+  @SpeakeasyMetadata({ data: "json, name=scope" })
   scope: CreateAssessmentRequestBodyScope;
 
-  @Metadata({ data: "json, name=tags" })
+  @SpeakeasyMetadata({ data: "json, name=tags" })
   tags?: Map<string, string>;
 }
 
 
 export class CreateAssessmentRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: CreateAssessmentHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: CreateAssessmentRequestBody;
 }
 
 
 export class CreateAssessmentResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   accessDeniedException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   createAssessmentResponse?: shared.CreateAssessmentResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   internalServerException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   resourceNotFoundException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   validationException?: any;
 }

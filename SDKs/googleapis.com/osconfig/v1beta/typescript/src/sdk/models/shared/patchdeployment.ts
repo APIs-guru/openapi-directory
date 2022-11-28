@@ -1,14 +1,16 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PatchInstanceFilter } from "./patchinstancefilter";
 import { OneTimeSchedule } from "./onetimeschedule";
 import { PatchConfig } from "./patchconfig";
 import { RecurringSchedule } from "./recurringschedule";
 import { PatchRollout } from "./patchrollout";
+import { RecurringScheduleInput } from "./recurringschedule";
+
 
 export enum PatchDeploymentStateEnum {
-    StateUnspecified = "STATE_UNSPECIFIED"
-,    Active = "ACTIVE"
-,    Paused = "PAUSED"
+    StateUnspecified = "STATE_UNSPECIFIED",
+    Active = "ACTIVE",
+    Paused = "PAUSED"
 }
 
 
@@ -17,39 +19,70 @@ export enum PatchDeploymentStateEnum {
  * Patch deployments are configurations that individual patch jobs use to complete a patch. These configurations include instance filter, package repository settings, and a schedule. For more information about creating and managing patch deployments, see [Scheduling patch jobs](https://cloud.google.com/compute/docs/os-patch-management/schedule-patch-jobs).
 **/
 export class PatchDeployment extends SpeakeasyBase {
-  @Metadata({ data: "json, name=createTime" })
+  @SpeakeasyMetadata({ data: "json, name=createTime" })
   createTime?: string;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=duration" })
+  @SpeakeasyMetadata({ data: "json, name=duration" })
   duration?: string;
 
-  @Metadata({ data: "json, name=instanceFilter" })
+  @SpeakeasyMetadata({ data: "json, name=instanceFilter" })
   instanceFilter?: PatchInstanceFilter;
 
-  @Metadata({ data: "json, name=lastExecuteTime" })
+  @SpeakeasyMetadata({ data: "json, name=lastExecuteTime" })
   lastExecuteTime?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=oneTimeSchedule" })
+  @SpeakeasyMetadata({ data: "json, name=oneTimeSchedule" })
   oneTimeSchedule?: OneTimeSchedule;
 
-  @Metadata({ data: "json, name=patchConfig" })
+  @SpeakeasyMetadata({ data: "json, name=patchConfig" })
   patchConfig?: PatchConfig;
 
-  @Metadata({ data: "json, name=recurringSchedule" })
+  @SpeakeasyMetadata({ data: "json, name=recurringSchedule" })
   recurringSchedule?: RecurringSchedule;
 
-  @Metadata({ data: "json, name=rollout" })
+  @SpeakeasyMetadata({ data: "json, name=rollout" })
   rollout?: PatchRollout;
 
-  @Metadata({ data: "json, name=state" })
+  @SpeakeasyMetadata({ data: "json, name=state" })
   state?: PatchDeploymentStateEnum;
 
-  @Metadata({ data: "json, name=updateTime" })
+  @SpeakeasyMetadata({ data: "json, name=updateTime" })
   updateTime?: string;
+}
+
+
+// PatchDeploymentInput
+/** 
+ * Patch deployments are configurations that individual patch jobs use to complete a patch. These configurations include instance filter, package repository settings, and a schedule. For more information about creating and managing patch deployments, see [Scheduling patch jobs](https://cloud.google.com/compute/docs/os-patch-management/schedule-patch-jobs).
+**/
+export class PatchDeploymentInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=description" })
+  description?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=duration" })
+  duration?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=instanceFilter" })
+  instanceFilter?: PatchInstanceFilter;
+
+  @SpeakeasyMetadata({ data: "json, name=name" })
+  name?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=oneTimeSchedule" })
+  oneTimeSchedule?: OneTimeSchedule;
+
+  @SpeakeasyMetadata({ data: "json, name=patchConfig" })
+  patchConfig?: PatchConfig;
+
+  @SpeakeasyMetadata({ data: "json, name=recurringSchedule" })
+  recurringSchedule?: RecurringScheduleInput;
+
+  @SpeakeasyMetadata({ data: "json, name=rollout" })
+  rollout?: PatchRollout;
 }

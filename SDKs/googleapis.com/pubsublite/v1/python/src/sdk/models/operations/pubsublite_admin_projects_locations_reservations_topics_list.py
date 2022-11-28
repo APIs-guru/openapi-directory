@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class PubsubliteAdminProjectsLocationsReservationsTopicsListPathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -27,20 +28,20 @@ class PubsubliteAdminProjectsLocationsReservationsTopicsListQueryParams:
 
 @dataclass
 class PubsubliteAdminProjectsLocationsReservationsTopicsListSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class PubsubliteAdminProjectsLocationsReservationsTopicsListRequest:
-    path_params: PubsubliteAdminProjectsLocationsReservationsTopicsListPathParams = field(default=None)
-    query_params: PubsubliteAdminProjectsLocationsReservationsTopicsListQueryParams = field(default=None)
-    security: PubsubliteAdminProjectsLocationsReservationsTopicsListSecurity = field(default=None)
+    path_params: PubsubliteAdminProjectsLocationsReservationsTopicsListPathParams = field()
+    query_params: PubsubliteAdminProjectsLocationsReservationsTopicsListQueryParams = field()
+    security: PubsubliteAdminProjectsLocationsReservationsTopicsListSecurity = field()
     
 
 @dataclass
 class PubsubliteAdminProjectsLocationsReservationsTopicsListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     list_reservation_topics_response: Optional[shared.ListReservationTopicsResponse] = field(default=None)
-    status_code: int = field(default=None)
     

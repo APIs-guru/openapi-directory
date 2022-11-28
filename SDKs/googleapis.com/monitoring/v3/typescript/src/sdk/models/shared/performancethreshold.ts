@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BasicSli } from "./basicsli";
 import { RequestBasedSli } from "./requestbasedsli";
+
 
 
 // PerformanceThreshold
@@ -8,12 +9,12 @@ import { RequestBasedSli } from "./requestbasedsli";
  * A PerformanceThreshold is used when each window is good when that window has a sufficiently high performance.
 **/
 export class PerformanceThreshold extends SpeakeasyBase {
-  @Metadata({ data: "json, name=basicSliPerformance" })
+  @SpeakeasyMetadata({ data: "json, name=basicSliPerformance" })
   basicSliPerformance?: BasicSli;
 
-  @Metadata({ data: "json, name=performance" })
+  @SpeakeasyMetadata({ data: "json, name=performance" })
   performance?: RequestBasedSli;
 
-  @Metadata({ data: "json, name=threshold" })
+  @SpeakeasyMetadata({ data: "json, name=threshold" })
   threshold?: number;
 }

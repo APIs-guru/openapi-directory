@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var StartHumanLoopHeaders = /** @class */ (function (_super) {
     __extends(StartHumanLoopHeaders, _super);
@@ -30,31 +30,31 @@ var StartHumanLoopHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
         __metadata("design:type", String)
     ], StartHumanLoopHeaders.prototype, "xAmzAlgorithm", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
         __metadata("design:type", String)
     ], StartHumanLoopHeaders.prototype, "xAmzContentSha256", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
         __metadata("design:type", String)
     ], StartHumanLoopHeaders.prototype, "xAmzCredential", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
         __metadata("design:type", String)
     ], StartHumanLoopHeaders.prototype, "xAmzDate", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
         __metadata("design:type", String)
     ], StartHumanLoopHeaders.prototype, "xAmzSecurityToken", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
         __metadata("design:type", String)
     ], StartHumanLoopHeaders.prototype, "xAmzSignature", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
         __metadata("design:type", String)
     ], StartHumanLoopHeaders.prototype, "xAmzSignedHeaders", void 0);
     return StartHumanLoopHeaders;
@@ -70,7 +70,7 @@ var StartHumanLoopRequestBodyDataAttributes = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=ContentClassifiers" }),
+        SpeakeasyMetadata({ data: "json, name=ContentClassifiers" }),
         __metadata("design:type", Array)
     ], StartHumanLoopRequestBodyDataAttributes.prototype, "contentClassifiers", void 0);
     return StartHumanLoopRequestBodyDataAttributes;
@@ -86,7 +86,7 @@ var StartHumanLoopRequestBodyHumanLoopInput = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=InputContent" }),
+        SpeakeasyMetadata({ data: "json, name=InputContent" }),
         __metadata("design:type", String)
     ], StartHumanLoopRequestBodyHumanLoopInput.prototype, "inputContent", void 0);
     return StartHumanLoopRequestBodyHumanLoopInput;
@@ -98,19 +98,19 @@ var StartHumanLoopRequestBody = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=DataAttributes" }),
+        SpeakeasyMetadata({ data: "json, name=DataAttributes" }),
         __metadata("design:type", StartHumanLoopRequestBodyDataAttributes)
     ], StartHumanLoopRequestBody.prototype, "dataAttributes", void 0);
     __decorate([
-        Metadata({ data: "json, name=FlowDefinitionArn" }),
+        SpeakeasyMetadata({ data: "json, name=FlowDefinitionArn" }),
         __metadata("design:type", String)
     ], StartHumanLoopRequestBody.prototype, "flowDefinitionArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=HumanLoopInput" }),
+        SpeakeasyMetadata({ data: "json, name=HumanLoopInput" }),
         __metadata("design:type", StartHumanLoopRequestBodyHumanLoopInput)
     ], StartHumanLoopRequestBody.prototype, "humanLoopInput", void 0);
     __decorate([
-        Metadata({ data: "json, name=HumanLoopName" }),
+        SpeakeasyMetadata({ data: "json, name=HumanLoopName" }),
         __metadata("design:type", String)
     ], StartHumanLoopRequestBody.prototype, "humanLoopName", void 0);
     return StartHumanLoopRequestBody;
@@ -122,11 +122,11 @@ var StartHumanLoopRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", StartHumanLoopHeaders)
     ], StartHumanLoopRequest.prototype, "headers", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", StartHumanLoopRequestBody)
     ], StartHumanLoopRequest.prototype, "request", void 0);
     return StartHumanLoopRequest;
@@ -138,35 +138,35 @@ var StartHumanLoopResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], StartHumanLoopResponse.prototype, "conflictException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], StartHumanLoopResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], StartHumanLoopResponse.prototype, "internalServerException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], StartHumanLoopResponse.prototype, "serviceQuotaExceededException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.StartHumanLoopResponse)
     ], StartHumanLoopResponse.prototype, "startHumanLoopResponse", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], StartHumanLoopResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], StartHumanLoopResponse.prototype, "throttlingException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], StartHumanLoopResponse.prototype, "validationException", void 0);
     return StartHumanLoopResponse;

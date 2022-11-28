@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import key
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class AllocateIdsRequest:
-    database_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'databaseId' }})
-    keys: Optional[List[key.Key]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'keys' }})
+    r"""AllocateIdsRequest
+    The request for Datastore.AllocateIds.
+    """
+    
+    database_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('databaseId') }})
+    keys: Optional[List[Key]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('keys') }})
     

@@ -1,43 +1,44 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class OverviewEvent extends SpeakeasyBase {
-  @Metadata({ data: "json, name=acknowledgedAlerts" })
+  @SpeakeasyMetadata({ data: "json, name=acknowledgedAlerts" })
   acknowledgedAlerts?: string[];
 
-  @Metadata({ data: "json, name=alertId" })
+  @SpeakeasyMetadata({ data: "json, name=alertId" })
   alertId?: string;
 
-  @Metadata({ data: "json, name=categoryId" })
+  @SpeakeasyMetadata({ data: "json, name=categoryId" })
   categoryId?: string;
 
-  @Metadata({ data: "json, name=closedAlerts" })
+  @SpeakeasyMetadata({ data: "json, name=closedAlerts" })
   closedAlerts?: string[];
 
-  @Metadata({ data: "json, name=creationTime" })
+  @SpeakeasyMetadata({ data: "json, name=creationTime" })
   creationTime?: Date;
 
-  @Metadata({ data: "json, name=eventSourceType" })
+  @SpeakeasyMetadata({ data: "json, name=eventSourceType" })
   eventSourceType?: number;
 
-  @Metadata({ data: "json, name=eventStatus" })
+  @SpeakeasyMetadata({ data: "json, name=eventStatus" })
   eventStatus?: number;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=lastModified" })
+  @SpeakeasyMetadata({ data: "json, name=lastModified" })
   lastModified?: Date;
 
-  @Metadata({ data: "json, name=severity" })
+  @SpeakeasyMetadata({ data: "json, name=severity" })
   severity?: number;
 
-  @Metadata({ data: "json, name=teamId" })
+  @SpeakeasyMetadata({ data: "json, name=teamId" })
   teamId?: string;
 
-  @Metadata({ data: "json, name=text" })
+  @SpeakeasyMetadata({ data: "json, name=text" })
   text?: string;
 
-  @Metadata({ data: "json, name=title" })
+  @SpeakeasyMetadata({ data: "json, name=title" })
   title?: string;
 }

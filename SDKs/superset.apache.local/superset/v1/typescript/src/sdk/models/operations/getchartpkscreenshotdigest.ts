@@ -1,74 +1,75 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetChartPkScreenshotDigestPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=digest" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=digest" })
   digest: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=pk" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=pk" })
   pk: number;
 }
 
 
 export class GetChartPkScreenshotDigestSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=bearer" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" })
   jwt: shared.SchemeJwt;
 }
 
 
-export class GetChartPkScreenshotDigestRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: GetChartPkScreenshotDigestPathParams;
-
-  @Metadata()
-  security: GetChartPkScreenshotDigestSecurity;
-}
-
-
 export class GetChartPkScreenshotDigest400ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class GetChartPkScreenshotDigest401ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class GetChartPkScreenshotDigest404ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class GetChartPkScreenshotDigest500ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
+export class GetChartPkScreenshotDigestRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: GetChartPkScreenshotDigestPathParams;
+
+  @SpeakeasyMetadata()
+  security: GetChartPkScreenshotDigestSecurity;
+}
+
+
 export class GetChartPkScreenshotDigestResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getChartPkScreenshotDigest200ImageWildcardBinaryString?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getChartPkScreenshotDigest400ApplicationJsonObject?: GetChartPkScreenshotDigest400ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getChartPkScreenshotDigest401ApplicationJsonObject?: GetChartPkScreenshotDigest401ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getChartPkScreenshotDigest404ApplicationJsonObject?: GetChartPkScreenshotDigest404ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getChartPkScreenshotDigest500ApplicationJsonObject?: GetChartPkScreenshotDigest500ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

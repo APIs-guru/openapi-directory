@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ChartCustomNumberFormatOptions
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Custom number formatting options for chart attributes.
 **/
 export class ChartCustomNumberFormatOptions extends SpeakeasyBase {
-  @Metadata({ data: "json, name=prefix" })
+  @SpeakeasyMetadata({ data: "json, name=prefix" })
   prefix?: string;
 
-  @Metadata({ data: "json, name=suffix" })
+  @SpeakeasyMetadata({ data: "json, name=suffix" })
   suffix?: string;
 }

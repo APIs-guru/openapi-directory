@@ -14,11 +14,15 @@ type CreateDomainNameHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// CreateDomainNameRequestBodyEndpointConfiguration
+// The endpoint configuration to indicate the types of endpoints an API (<a>RestApi</a>) or its custom domain name (<a>DomainName</a>) has.
 type CreateDomainNameRequestBodyEndpointConfiguration struct {
 	Types          []shared.EndpointTypeEnum `json:"types,omitempty"`
 	VpcEndpointIds []string                  `json:"vpcEndpointIds,omitempty"`
 }
 
+// CreateDomainNameRequestBodyMutualTLSAuthentication
+// If specified, API Gateway performs two-way authentication between the client and the server. Clients must present a trusted certificate to access your custom domain name.
 type CreateDomainNameRequestBodyMutualTLSAuthentication struct {
 	TruststoreURI     *string `json:"truststoreUri,omitempty"`
 	TruststoreVersion *string `json:"truststoreVersion,omitempty"`

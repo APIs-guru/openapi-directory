@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostDescribeHostReservationOfferingsActionEnum(str, Enum):
     DESCRIBE_HOST_RESERVATION_OFFERINGS = "DescribeHostReservationOfferings"
@@ -10,10 +14,10 @@ class PostDescribeHostReservationOfferingsVersionEnum(str, Enum):
 
 @dataclass
 class PostDescribeHostReservationOfferingsQueryParams:
-    action: PostDescribeHostReservationOfferingsActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: PostDescribeHostReservationOfferingsActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostDescribeHostReservationOfferingsVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     max_results: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'MaxResults', 'style': 'form', 'explode': True }})
     next_token: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'NextToken', 'style': 'form', 'explode': True }})
-    version: PostDescribeHostReservationOfferingsVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -29,14 +33,14 @@ class PostDescribeHostReservationOfferingsHeaders:
 
 @dataclass
 class PostDescribeHostReservationOfferingsRequest:
-    query_params: PostDescribeHostReservationOfferingsQueryParams = field(default=None)
-    headers: PostDescribeHostReservationOfferingsHeaders = field(default=None)
+    headers: PostDescribeHostReservationOfferingsHeaders = field()
+    query_params: PostDescribeHostReservationOfferingsQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostDescribeHostReservationOfferingsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

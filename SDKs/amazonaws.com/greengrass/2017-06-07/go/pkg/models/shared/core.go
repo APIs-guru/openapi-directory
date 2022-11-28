@@ -1,5 +1,7 @@
 package shared
 
+// Core
+// Information about a core.
 type Core struct {
 	CertificateArn string `json:"CertificateArn"`
 	ID             string `json:"Id"`

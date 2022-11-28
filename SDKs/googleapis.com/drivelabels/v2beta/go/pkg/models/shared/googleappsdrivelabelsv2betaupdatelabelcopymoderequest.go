@@ -16,6 +16,8 @@ const (
 	GoogleAppsDriveLabelsV2betaUpdateLabelCopyModeRequestViewEnumLabelViewFull  GoogleAppsDriveLabelsV2betaUpdateLabelCopyModeRequestViewEnum = "LABEL_VIEW_FULL"
 )
 
+// GoogleAppsDriveLabelsV2betaUpdateLabelCopyModeRequest
+// Request to update the `CopyMode` of the given Label. Changes to this policy are not revisioned, do not require publishing, and take effect immediately. \
 type GoogleAppsDriveLabelsV2betaUpdateLabelCopyModeRequest struct {
 	CopyMode       *GoogleAppsDriveLabelsV2betaUpdateLabelCopyModeRequestCopyModeEnum `json:"copyMode,omitempty"`
 	LanguageCode   *string                                                            `json:"languageCode,omitempty"`

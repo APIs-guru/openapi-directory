@@ -1,9 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ObExternalAccountSubType1CodeEnum } from "./obexternalaccountsubtype1codeenum";
 import { ObExternalAccountType1CodeEnum } from "./obexternalaccounttype1codeenum";
 import { ObBranchAndFinancialInstitutionIdentification50 } from "./obbranchandfinancialinstitutionidentification50";
 import { ObAccountStatus1CodeEnum } from "./obaccountstatus1codeenum";
+
 
 
 // ObAccount6Account
@@ -11,16 +11,16 @@ import { ObAccountStatus1CodeEnum } from "./obaccountstatus1codeenum";
  * Provides the details to identify an account.
 **/
 export class ObAccount6Account extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Identification" })
+  @SpeakeasyMetadata({ data: "json, name=Identification" })
   identification: string;
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name?: string;
 
-  @Metadata({ data: "json, name=SchemeName" })
+  @SpeakeasyMetadata({ data: "json, name=SchemeName" })
   schemeName: string;
 
-  @Metadata({ data: "json, name=SecondaryIdentification" })
+  @SpeakeasyMetadata({ data: "json, name=SecondaryIdentification" })
   secondaryIdentification?: string;
 }
 
@@ -36,42 +36,42 @@ export class ObAccount6Account extends SpeakeasyBase {
  * For all other accounts, the fields must be populated by the ASPSP.
 **/
 export class ObAccount6 extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Account", elemType: shared.ObAccount6Account })
+  @SpeakeasyMetadata({ data: "json, name=Account", elemType: ObAccount6Account })
   account?: ObAccount6Account[];
 
-  @Metadata({ data: "json, name=AccountId" })
+  @SpeakeasyMetadata({ data: "json, name=AccountId" })
   accountId: string;
 
-  @Metadata({ data: "json, name=AccountSubType" })
+  @SpeakeasyMetadata({ data: "json, name=AccountSubType" })
   accountSubType?: ObExternalAccountSubType1CodeEnum;
 
-  @Metadata({ data: "json, name=AccountType" })
+  @SpeakeasyMetadata({ data: "json, name=AccountType" })
   accountType?: ObExternalAccountType1CodeEnum;
 
-  @Metadata({ data: "json, name=Currency" })
+  @SpeakeasyMetadata({ data: "json, name=Currency" })
   currency?: string;
 
-  @Metadata({ data: "json, name=Description" })
+  @SpeakeasyMetadata({ data: "json, name=Description" })
   description?: string;
 
-  @Metadata({ data: "json, name=MaturityDate" })
+  @SpeakeasyMetadata({ data: "json, name=MaturityDate" })
   maturityDate?: Date;
 
-  @Metadata({ data: "json, name=Nickname" })
+  @SpeakeasyMetadata({ data: "json, name=Nickname" })
   nickname?: string;
 
-  @Metadata({ data: "json, name=OpeningDate" })
+  @SpeakeasyMetadata({ data: "json, name=OpeningDate" })
   openingDate?: Date;
 
-  @Metadata({ data: "json, name=Servicer" })
+  @SpeakeasyMetadata({ data: "json, name=Servicer" })
   servicer?: ObBranchAndFinancialInstitutionIdentification50;
 
-  @Metadata({ data: "json, name=Status" })
+  @SpeakeasyMetadata({ data: "json, name=Status" })
   status?: ObAccountStatus1CodeEnum;
 
-  @Metadata({ data: "json, name=StatusUpdateDateTime" })
+  @SpeakeasyMetadata({ data: "json, name=StatusUpdateDateTime" })
   statusUpdateDateTime?: Date;
 
-  @Metadata({ data: "json, name=SwitchStatus" })
+  @SpeakeasyMetadata({ data: "json, name=SwitchStatus" })
   switchStatus?: string;
 }

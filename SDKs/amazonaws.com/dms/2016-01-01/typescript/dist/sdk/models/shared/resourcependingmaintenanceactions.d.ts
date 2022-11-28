@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { PendingMaintenanceAction } from "./pendingmaintenanceaction";
 /**
  * Identifies an DMS resource and any pending actions for it.

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AccountItemUpdatesSettings
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Settings for the Automatic Item Updates.
 **/
 export class AccountItemUpdatesSettings extends SpeakeasyBase {
-  @Metadata({ data: "json, name=allowAvailabilityUpdates" })
+  @SpeakeasyMetadata({ data: "json, name=allowAvailabilityUpdates" })
   allowAvailabilityUpdates?: boolean;
 
-  @Metadata({ data: "json, name=allowConditionUpdates" })
+  @SpeakeasyMetadata({ data: "json, name=allowConditionUpdates" })
   allowConditionUpdates?: boolean;
 
-  @Metadata({ data: "json, name=allowPriceUpdates" })
+  @SpeakeasyMetadata({ data: "json, name=allowPriceUpdates" })
   allowPriceUpdates?: boolean;
 
-  @Metadata({ data: "json, name=allowStrictAvailabilityUpdates" })
+  @SpeakeasyMetadata({ data: "json, name=allowStrictAvailabilityUpdates" })
   allowStrictAvailabilityUpdates?: boolean;
 }

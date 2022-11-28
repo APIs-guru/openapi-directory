@@ -1,5 +1,7 @@
 package shared
 
+// VideoProperties
+// The properties of the Video.
 type VideoProperties struct {
 	AutoPlay *bool    `json:"autoPlay,omitempty"`
 	End      *int64   `json:"end,omitempty"`

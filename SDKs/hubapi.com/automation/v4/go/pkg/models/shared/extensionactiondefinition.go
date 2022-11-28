@@ -1,5 +1,7 @@
 package shared
 
+// ExtensionActionDefinition
+// Configuration for custom workflow action.
 type ExtensionActionDefinition struct {
 	ActionURL              string                     `json:"actionUrl"`
 	ArchivedAt             *int64                     `json:"archivedAt,omitempty"`

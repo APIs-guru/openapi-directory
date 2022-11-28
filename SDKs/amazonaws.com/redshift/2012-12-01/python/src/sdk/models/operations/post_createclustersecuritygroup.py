@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostCreateClusterSecurityGroupActionEnum(str, Enum):
     CREATE_CLUSTER_SECURITY_GROUP = "CreateClusterSecurityGroup"
@@ -10,8 +14,8 @@ class PostCreateClusterSecurityGroupVersionEnum(str, Enum):
 
 @dataclass
 class PostCreateClusterSecurityGroupQueryParams:
-    action: PostCreateClusterSecurityGroupActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostCreateClusterSecurityGroupVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostCreateClusterSecurityGroupActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostCreateClusterSecurityGroupVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostCreateClusterSecurityGroupHeaders:
 
 @dataclass
 class PostCreateClusterSecurityGroupRequest:
-    query_params: PostCreateClusterSecurityGroupQueryParams = field(default=None)
-    headers: PostCreateClusterSecurityGroupHeaders = field(default=None)
+    headers: PostCreateClusterSecurityGroupHeaders = field()
+    query_params: PostCreateClusterSecurityGroupQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostCreateClusterSecurityGroupResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

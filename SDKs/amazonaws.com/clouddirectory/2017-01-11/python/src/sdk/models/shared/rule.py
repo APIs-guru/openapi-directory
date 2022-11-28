@@ -1,12 +1,18 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import ruletype_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class Rule:
-    parameters: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Parameters' }})
-    type: Optional[ruletype_enum.RuleTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Type' }})
+    r"""Rule
+    Contains an Amazon Resource Name (ARN) and parameters that are associated with the rule.
+    """
+    
+    parameters: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Parameters') }})
+    type: Optional[RuleTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Type') }})
     

@@ -4,8 +4,8 @@ from typing import Optional
 
 @dataclass
 class UserAPIPostSettingPathParams:
-    id: int = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
-    setting_name: str = field(default=None, metadata={'path_param': { 'field_name': 'settingName', 'style': 'simple', 'explode': False }})
+    id: int = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    setting_name: str = field(metadata={'path_param': { 'field_name': 'settingName', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -19,12 +19,12 @@ class UserAPIPostSettingRequests:
 
 @dataclass
 class UserAPIPostSettingRequest:
-    path_params: UserAPIPostSettingPathParams = field(default=None)
-    request: UserAPIPostSettingRequests = field(default=None)
+    path_params: UserAPIPostSettingPathParams = field()
+    request: UserAPIPostSettingRequests = field()
     
 
 @dataclass
 class UserAPIPostSettingResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

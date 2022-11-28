@@ -5,17 +5,17 @@ from sdk.models import shared
 
 @dataclass
 class AccountCreateJwtSecurity:
-    project: shared.SchemeProject = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    project: shared.SchemeProject = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
     
 
 @dataclass
 class AccountCreateJwtRequest:
-    security: AccountCreateJwtSecurity = field(default=None)
+    security: AccountCreateJwtSecurity = field()
     
 
 @dataclass
 class AccountCreateJwtResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     jwt: Optional[shared.Jwt] = field(default=None)
     

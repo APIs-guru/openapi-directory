@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudDialogflowV2OutputAudioConfig } from "./googleclouddialogflowv2outputaudioconfig";
+
 
 
 // GoogleCloudDialogflowV2OutputAudio
@@ -7,9 +8,9 @@ import { GoogleCloudDialogflowV2OutputAudioConfig } from "./googleclouddialogflo
  * Represents the natural language speech audio to be played to the end user.
 **/
 export class GoogleCloudDialogflowV2OutputAudio extends SpeakeasyBase {
-  @Metadata({ data: "json, name=audio" })
+  @SpeakeasyMetadata({ data: "json, name=audio" })
   audio?: string;
 
-  @Metadata({ data: "json, name=config" })
+  @SpeakeasyMetadata({ data: "json, name=config" })
   config?: GoogleCloudDialogflowV2OutputAudioConfig;
 }

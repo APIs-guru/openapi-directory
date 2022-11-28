@@ -1,19 +1,20 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class PostPerUserInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=blogId" })
+  @SpeakeasyMetadata({ data: "json, name=blogId" })
   blogId?: string;
 
-  @Metadata({ data: "json, name=hasEditAccess" })
+  @SpeakeasyMetadata({ data: "json, name=hasEditAccess" })
   hasEditAccess?: boolean;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=postId" })
+  @SpeakeasyMetadata({ data: "json, name=postId" })
   postId?: string;
 
-  @Metadata({ data: "json, name=userId" })
+  @SpeakeasyMetadata({ data: "json, name=userId" })
   userId?: string;
 }

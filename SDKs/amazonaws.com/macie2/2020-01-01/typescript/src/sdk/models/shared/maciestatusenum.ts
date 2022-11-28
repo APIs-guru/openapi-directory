@@ -1,6 +1,7 @@
 
 
+
 export enum MacieStatusEnum {
-    Paused = "PAUSED"
-,    Enabled = "ENABLED"
+    Paused = "PAUSED",
+    Enabled = "ENABLED"
 }

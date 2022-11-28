@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import pipelineexecutionsummary
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ListPipelineExecutionsResponse:
-    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'NextToken' }})
-    pipeline_execution_summaries: Optional[List[pipelineexecutionsummary.PipelineExecutionSummary]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'PipelineExecutionSummaries' }})
+    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('NextToken') }})
+    pipeline_execution_summaries: Optional[List[PipelineExecutionSummary]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('PipelineExecutionSummaries') }})
     

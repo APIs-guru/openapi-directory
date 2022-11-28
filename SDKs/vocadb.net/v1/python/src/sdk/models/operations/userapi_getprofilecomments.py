@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class UserAPIGetProfileCommentsPathParams:
-    id: int = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: int = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -17,14 +17,14 @@ class UserAPIGetProfileCommentsQueryParams:
 
 @dataclass
 class UserAPIGetProfileCommentsRequest:
-    path_params: UserAPIGetProfileCommentsPathParams = field(default=None)
-    query_params: UserAPIGetProfileCommentsQueryParams = field(default=None)
+    path_params: UserAPIGetProfileCommentsPathParams = field()
+    query_params: UserAPIGetProfileCommentsQueryParams = field()
     
 
 @dataclass
 class UserAPIGetProfileCommentsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     partial_find_result_comment_for_api_contract_: Optional[shared.PartialFindResultCommentForAPIContract] = field(default=None)
-    status_code: int = field(default=None)
     

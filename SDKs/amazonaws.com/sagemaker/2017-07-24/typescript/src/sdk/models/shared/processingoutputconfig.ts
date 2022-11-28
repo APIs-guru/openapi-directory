@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ProcessingOutput } from "./processingoutput";
+
 
 
 // ProcessingOutputConfig
@@ -8,9 +8,9 @@ import { ProcessingOutput } from "./processingoutput";
  * Configuration for uploading output from the processing container.
 **/
 export class ProcessingOutputConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=KmsKeyId" })
+  @SpeakeasyMetadata({ data: "json, name=KmsKeyId" })
   kmsKeyId?: string;
 
-  @Metadata({ data: "json, name=Outputs", elemType: shared.ProcessingOutput })
+  @SpeakeasyMetadata({ data: "json, name=Outputs", elemType: ProcessingOutput })
   outputs: ProcessingOutput[];
 }

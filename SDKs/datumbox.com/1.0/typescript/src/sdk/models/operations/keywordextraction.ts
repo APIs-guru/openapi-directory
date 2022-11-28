@@ -1,28 +1,29 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class KeywordExtractionRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "form, name=api_key;" })
+  @SpeakeasyMetadata({ data: "form, name=api_key;" })
   apiKey: string;
 
-  @Metadata({ data: "form, name=n;" })
+  @SpeakeasyMetadata({ data: "form, name=n;" })
   n?: number;
 
-  @Metadata({ data: "form, name=text;" })
+  @SpeakeasyMetadata({ data: "form, name=text;" })
   text?: string;
 }
 
 
 export class KeywordExtractionRequest extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/x-www-form-urlencoded" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/x-www-form-urlencoded" })
   request?: KeywordExtractionRequestBody;
 }
 
 
 export class KeywordExtractionResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

@@ -6,6 +6,8 @@ type AboutDriveThemes struct {
 	ID                  *string `json:"id,omitempty"`
 }
 
+// AboutStorageQuota
+// The user's storage quota limits and usage. All fields are measured in bytes.
 type AboutStorageQuota struct {
 	Limit             *string `json:"limit,omitempty"`
 	Usage             *string `json:"usage,omitempty"`
@@ -19,6 +21,8 @@ type AboutTeamDriveThemes struct {
 	ID                  *string `json:"id,omitempty"`
 }
 
+// About
+// Information about the user, the user's Drive, and system capabilities.
 type About struct {
 	AppInstalled        *bool                  `json:"appInstalled,omitempty"`
 	CanCreateDrives     *bool                  `json:"canCreateDrives,omitempty"`

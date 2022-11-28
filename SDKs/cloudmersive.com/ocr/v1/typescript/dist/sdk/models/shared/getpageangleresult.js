@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // GetPageAngleResult
 /**
  * Result of performing a get-page-angle operation
@@ -33,11 +33,11 @@ var GetPageAngleResult = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Angle" }),
+        SpeakeasyMetadata({ data: "json, name=Angle" }),
         __metadata("design:type", Number)
     ], GetPageAngleResult.prototype, "angle", void 0);
     __decorate([
-        Metadata({ data: "json, name=Successful" }),
+        SpeakeasyMetadata({ data: "json, name=Successful" }),
         __metadata("design:type", Boolean)
     ], GetPageAngleResult.prototype, "successful", void 0);
     return GetPageAngleResult;

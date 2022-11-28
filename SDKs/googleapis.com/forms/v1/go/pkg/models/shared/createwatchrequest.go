@@ -1,6 +1,8 @@
 package shared
 
-type CreateWatchRequest struct {
-	Watch   *Watch  `json:"watch,omitempty"`
-	WatchID *string `json:"watchId,omitempty"`
+// CreateWatchRequestInput
+// Create a new watch.
+type CreateWatchRequestInput struct {
+	Watch   *WatchInput `json:"watch,omitempty"`
+	WatchID *string     `json:"watchId,omitempty"`
 }

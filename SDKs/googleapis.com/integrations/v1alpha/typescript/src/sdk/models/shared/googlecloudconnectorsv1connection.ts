@@ -1,5 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudConnectorsV1AuthConfig } from "./googlecloudconnectorsv1authconfig";
 import { GoogleCloudConnectorsV1ConfigVariable } from "./googlecloudconnectorsv1configvariable";
 import { GoogleCloudConnectorsV1DestinationConfig } from "./googlecloudconnectorsv1destinationconfig";
@@ -8,59 +7,60 @@ import { GoogleCloudConnectorsV1NodeConfig } from "./googlecloudconnectorsv1node
 import { GoogleCloudConnectorsV1ConnectionStatus } from "./googlecloudconnectorsv1connectionstatus";
 
 
+
 // GoogleCloudConnectorsV1Connection
 /** 
  * Connection represents an instance of connector.
 **/
 export class GoogleCloudConnectorsV1Connection extends SpeakeasyBase {
-  @Metadata({ data: "json, name=authConfig" })
+  @SpeakeasyMetadata({ data: "json, name=authConfig" })
   authConfig?: GoogleCloudConnectorsV1AuthConfig;
 
-  @Metadata({ data: "json, name=configVariables", elemType: shared.GoogleCloudConnectorsV1ConfigVariable })
+  @SpeakeasyMetadata({ data: "json, name=configVariables", elemType: GoogleCloudConnectorsV1ConfigVariable })
   configVariables?: GoogleCloudConnectorsV1ConfigVariable[];
 
-  @Metadata({ data: "json, name=connectorVersion" })
+  @SpeakeasyMetadata({ data: "json, name=connectorVersion" })
   connectorVersion?: string;
 
-  @Metadata({ data: "json, name=createTime" })
+  @SpeakeasyMetadata({ data: "json, name=createTime" })
   createTime?: string;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=destinationConfigs", elemType: shared.GoogleCloudConnectorsV1DestinationConfig })
+  @SpeakeasyMetadata({ data: "json, name=destinationConfigs", elemType: GoogleCloudConnectorsV1DestinationConfig })
   destinationConfigs?: GoogleCloudConnectorsV1DestinationConfig[];
 
-  @Metadata({ data: "json, name=envoyImageLocation" })
+  @SpeakeasyMetadata({ data: "json, name=envoyImageLocation" })
   envoyImageLocation?: string;
 
-  @Metadata({ data: "json, name=imageLocation" })
+  @SpeakeasyMetadata({ data: "json, name=imageLocation" })
   imageLocation?: string;
 
-  @Metadata({ data: "json, name=labels" })
+  @SpeakeasyMetadata({ data: "json, name=labels" })
   labels?: Map<string, string>;
 
-  @Metadata({ data: "json, name=lockConfig" })
+  @SpeakeasyMetadata({ data: "json, name=lockConfig" })
   lockConfig?: GoogleCloudConnectorsV1LockConfig;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=nodeConfig" })
+  @SpeakeasyMetadata({ data: "json, name=nodeConfig" })
   nodeConfig?: GoogleCloudConnectorsV1NodeConfig;
 
-  @Metadata({ data: "json, name=serviceAccount" })
+  @SpeakeasyMetadata({ data: "json, name=serviceAccount" })
   serviceAccount?: string;
 
-  @Metadata({ data: "json, name=serviceDirectory" })
+  @SpeakeasyMetadata({ data: "json, name=serviceDirectory" })
   serviceDirectory?: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: GoogleCloudConnectorsV1ConnectionStatus;
 
-  @Metadata({ data: "json, name=suspended" })
+  @SpeakeasyMetadata({ data: "json, name=suspended" })
   suspended?: boolean;
 
-  @Metadata({ data: "json, name=updateTime" })
+  @SpeakeasyMetadata({ data: "json, name=updateTime" })
   updateTime?: string;
 }

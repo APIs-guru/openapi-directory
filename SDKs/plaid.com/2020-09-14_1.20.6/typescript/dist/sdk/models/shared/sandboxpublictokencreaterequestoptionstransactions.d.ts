@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 /**
  * SandboxPublicTokenCreateRequestOptionsTransactions is an optional set of parameters corresponding to transactions options.
 **/

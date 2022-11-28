@@ -1,18 +1,18 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DisplaySize } from "./displaysize";
 
 
+
 export class Asset extends SpeakeasyBase {
-  @Metadata({ data: "json, name=asset_type" })
+  @SpeakeasyMetadata({ data: "json, name=asset_type" })
   assetType?: string;
 
-  @Metadata({ data: "json, name=date_added" })
+  @SpeakeasyMetadata({ data: "json, name=date_added" })
   dateAdded?: Date;
 
-  @Metadata({ data: "json, name=display_sizes", elemType: shared.DisplaySize })
+  @SpeakeasyMetadata({ data: "json, name=display_sizes", elemType: DisplaySize })
   displaySizes?: DisplaySize[];
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 }

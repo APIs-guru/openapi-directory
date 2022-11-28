@@ -10,7 +10,7 @@ type DcimPowerPanelsPartialUpdatePathParams struct {
 
 type DcimPowerPanelsPartialUpdateRequest struct {
 	PathParams DcimPowerPanelsPartialUpdatePathParams
-	Request    shared.WritablePowerPanel `request:"mediaType=application/json"`
+	Request    shared.WritablePowerPanelInput `request:"mediaType=application/json"`
 }
 
 type DcimPowerPanelsPartialUpdateResponse struct {

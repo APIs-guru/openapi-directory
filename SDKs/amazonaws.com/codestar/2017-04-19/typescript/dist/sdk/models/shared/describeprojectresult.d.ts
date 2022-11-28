@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ProjectStatus } from "./projectstatus";
 export declare class DescribeProjectResult extends SpeakeasyBase {
     arn?: string;

@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostCreateSpotDatafeedSubscriptionActionEnum(str, Enum):
     CREATE_SPOT_DATAFEED_SUBSCRIPTION = "CreateSpotDatafeedSubscription"
@@ -10,8 +14,8 @@ class PostCreateSpotDatafeedSubscriptionVersionEnum(str, Enum):
 
 @dataclass
 class PostCreateSpotDatafeedSubscriptionQueryParams:
-    action: PostCreateSpotDatafeedSubscriptionActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostCreateSpotDatafeedSubscriptionVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostCreateSpotDatafeedSubscriptionActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostCreateSpotDatafeedSubscriptionVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostCreateSpotDatafeedSubscriptionHeaders:
 
 @dataclass
 class PostCreateSpotDatafeedSubscriptionRequest:
-    query_params: PostCreateSpotDatafeedSubscriptionQueryParams = field(default=None)
-    headers: PostCreateSpotDatafeedSubscriptionHeaders = field(default=None)
+    headers: PostCreateSpotDatafeedSubscriptionHeaders = field()
+    query_params: PostCreateSpotDatafeedSubscriptionQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostCreateSpotDatafeedSubscriptionResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

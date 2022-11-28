@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AwsEcsTaskDefinitionContainerDefinitionsPortMappingsDetails
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A port mapping for the container.
 **/
 export class AwsEcsTaskDefinitionContainerDefinitionsPortMappingsDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ContainerPort" })
+  @SpeakeasyMetadata({ data: "json, name=ContainerPort" })
   containerPort?: number;
 
-  @Metadata({ data: "json, name=HostPort" })
+  @SpeakeasyMetadata({ data: "json, name=HostPort" })
   hostPort?: number;
 
-  @Metadata({ data: "json, name=Protocol" })
+  @SpeakeasyMetadata({ data: "json, name=Protocol" })
   protocol?: string;
 }

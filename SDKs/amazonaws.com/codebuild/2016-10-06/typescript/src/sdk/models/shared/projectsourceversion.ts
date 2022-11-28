@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ProjectSourceVersion
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  *  A source identifier and its corresponding version. 
 **/
 export class ProjectSourceVersion extends SpeakeasyBase {
-  @Metadata({ data: "json, name=sourceIdentifier" })
+  @SpeakeasyMetadata({ data: "json, name=sourceIdentifier" })
   sourceIdentifier: string;
 
-  @Metadata({ data: "json, name=sourceVersion" })
+  @SpeakeasyMetadata({ data: "json, name=sourceVersion" })
   sourceVersion: string;
 }

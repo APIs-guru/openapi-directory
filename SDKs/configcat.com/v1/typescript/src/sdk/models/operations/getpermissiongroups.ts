@@ -1,26 +1,27 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetPermissionGroupsPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=productId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=productId" })
   productId: string;
 }
 
 
 export class GetPermissionGroupsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetPermissionGroupsPathParams;
 }
 
 
 export class GetPermissionGroupsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata({ elemType: shared.PermissionGroupModel })
+  @SpeakeasyMetadata({ elemType: shared.PermissionGroupModel })
   permissionGroupModels?: shared.PermissionGroupModel[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

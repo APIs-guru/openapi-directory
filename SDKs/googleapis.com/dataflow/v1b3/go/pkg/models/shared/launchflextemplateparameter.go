@@ -1,5 +1,7 @@
 package shared
 
+// LaunchFlexTemplateParameter
+// Launch FlexTemplate Parameter.
 type LaunchFlexTemplateParameter struct {
 	ContainerSpec         *ContainerSpec                  `json:"containerSpec,omitempty"`
 	ContainerSpecGcsPath  *string                         `json:"containerSpecGcsPath,omitempty"`

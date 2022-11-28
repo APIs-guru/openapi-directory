@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import firewallpolicymetadata
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ListFirewallPoliciesResponse:
-    firewall_policies: Optional[List[firewallpolicymetadata.FirewallPolicyMetadata]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FirewallPolicies' }})
-    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'NextToken' }})
+    firewall_policies: Optional[List[FirewallPolicyMetadata]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('FirewallPolicies') }})
+    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('NextToken') }})
     

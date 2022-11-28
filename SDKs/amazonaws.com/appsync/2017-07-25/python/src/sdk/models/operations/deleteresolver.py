@@ -1,12 +1,15 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 
 
 @dataclass
 class DeleteResolverPathParams:
-    api_id: str = field(default=None, metadata={'path_param': { 'field_name': 'apiId', 'style': 'simple', 'explode': False }})
-    field_name: str = field(default=None, metadata={'path_param': { 'field_name': 'fieldName', 'style': 'simple', 'explode': False }})
-    type_name: str = field(default=None, metadata={'path_param': { 'field_name': 'typeName', 'style': 'simple', 'explode': False }})
+    api_id: str = field(metadata={'path_param': { 'field_name': 'apiId', 'style': 'simple', 'explode': False }})
+    field_name: str = field(metadata={'path_param': { 'field_name': 'fieldName', 'style': 'simple', 'explode': False }})
+    type_name: str = field(metadata={'path_param': { 'field_name': 'typeName', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -22,17 +25,17 @@ class DeleteResolverHeaders:
 
 @dataclass
 class DeleteResolverRequest:
-    path_params: DeleteResolverPathParams = field(default=None)
-    headers: DeleteResolverHeaders = field(default=None)
+    headers: DeleteResolverHeaders = field()
+    path_params: DeleteResolverPathParams = field()
     
 
 @dataclass
 class DeleteResolverResponse:
+    content_type: str = field()
+    status_code: int = field()
     concurrent_modification_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     delete_resolver_response: Optional[dict[str, Any]] = field(default=None)
     internal_failure_exception: Optional[Any] = field(default=None)
     not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     unauthorized_exception: Optional[Any] = field(default=None)
     

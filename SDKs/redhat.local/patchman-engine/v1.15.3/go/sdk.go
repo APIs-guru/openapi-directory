@@ -11,7 +11,7 @@ import (
 	"strings"
 )
 
-var Servers = []string{
+var ServerList = []string{
 	"http://redhat.local",
 	"https://redhat.local/",
 }
@@ -21,9 +21,13 @@ type HTTPClient interface {
 }
 
 type SDK struct {
-	defaultClient  HTTPClient
-	securityClient HTTPClient
-	serverURL      string
+	_defaultClient  HTTPClient
+	_securityClient HTTPClient
+
+	_serverURL  string
+	_language   string
+	_sdkVersion string
+	_genVersion string
 }
 
 type SDKOption func(*SDK)
@@ -34,27 +38,46 @@ func WithServerURL(serverURL string, params map[string]string) SDKOption {
 			serverURL = utils.ReplaceParameters(serverURL, params)
 		}
 
-		sdk.serverURL = serverURL
+		sdk._serverURL = serverURL
+	}
+}
+
+func WithClient(client HTTPClient) SDKOption {
+	return func(sdk *SDK) {
+		sdk._defaultClient = client
 	}
 }
 
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
-		defaultClient:  http.DefaultClient,
-		securityClient: http.DefaultClient,
+		_language:   "go",
+		_sdkVersion: "",
+		_genVersion: "internal",
 	}
 	for _, opt := range opts {
 		opt(sdk)
 	}
-	if sdk.serverURL == "" {
-		sdk.serverURL = Servers[0]
+
+	if sdk._defaultClient == nil {
+		sdk._defaultClient = http.DefaultClient
+	}
+	if sdk._securityClient == nil {
+
+		sdk._securityClient = sdk._defaultClient
+
+	}
+
+	if sdk._serverURL == "" {
+		sdk._serverURL = ServerList[0]
 	}
 
 	return sdk
 }
 
+// LatestPackage - Show me metadata of selected package
+// Show me metadata of selected package
 func (s *SDK) LatestPackage(ctx context.Context, request operations.LatestPackageRequest) (*operations.LatestPackageResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/api/patch/v1/packages/{package_name}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -62,7 +85,7 @@ func (s *SDK) LatestPackage(ctx context.Context, request operations.LatestPackag
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -92,8 +115,10 @@ func (s *SDK) LatestPackage(ctx context.Context, request operations.LatestPackag
 	return res, nil
 }
 
+// Deletesystem - Delete system by inventory id
+// Delete system by inventory id
 func (s *SDK) Deletesystem(ctx context.Context, request operations.DeletesystemRequest) (*operations.DeletesystemResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/api/patch/v1/systems/{inventory_id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -101,7 +126,7 @@ func (s *SDK) Deletesystem(ctx context.Context, request operations.DeletesystemR
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -122,8 +147,10 @@ func (s *SDK) Deletesystem(ctx context.Context, request operations.DeletesystemR
 	return res, nil
 }
 
+// DetailAdvisory - Show me details an advisory by given advisory name
+// Show me details an advisory by given advisory name
 func (s *SDK) DetailAdvisory(ctx context.Context, request operations.DetailAdvisoryRequest) (*operations.DetailAdvisoryResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/api/patch/v1/advisories/{advisory_id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -131,7 +158,7 @@ func (s *SDK) DetailAdvisory(ctx context.Context, request operations.DetailAdvis
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -161,8 +188,10 @@ func (s *SDK) DetailAdvisory(ctx context.Context, request operations.DetailAdvis
 	return res, nil
 }
 
+// DetailSystem - Show me details about a system by given inventory id
+// Show me details about a system by given inventory id
 func (s *SDK) DetailSystem(ctx context.Context, request operations.DetailSystemRequest) (*operations.DetailSystemResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/api/patch/v1/systems/{inventory_id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -170,7 +199,7 @@ func (s *SDK) DetailSystem(ctx context.Context, request operations.DetailSystemR
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -200,8 +229,10 @@ func (s *SDK) DetailSystem(ctx context.Context, request operations.DetailSystemR
 	return res, nil
 }
 
+// ExportAdvisories - Export applicable advisories for all my systems
+// Export applicable advisories for all my systems
 func (s *SDK) ExportAdvisories(ctx context.Context, request operations.ExportAdvisoriesRequest) (*operations.ExportAdvisoriesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/api/patch/v1/export/advisories"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -211,7 +242,7 @@ func (s *SDK) ExportAdvisories(ctx context.Context, request operations.ExportAdv
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -248,8 +279,10 @@ func (s *SDK) ExportAdvisories(ctx context.Context, request operations.ExportAdv
 	return res, nil
 }
 
+// ExportAdvisorySystems - Export systems for my account
+// Export systems for my account
 func (s *SDK) ExportAdvisorySystems(ctx context.Context, request operations.ExportAdvisorySystemsRequest) (*operations.ExportAdvisorySystemsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/api/patch/v1/export/advisories/{advisory_id}/systems", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -259,7 +292,7 @@ func (s *SDK) ExportAdvisorySystems(ctx context.Context, request operations.Expo
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -296,8 +329,10 @@ func (s *SDK) ExportAdvisorySystems(ctx context.Context, request operations.Expo
 	return res, nil
 }
 
+// ExportPackageSystems - Show me all my systems which have a package installed
+// Show me all my systems which have a package installed
 func (s *SDK) ExportPackageSystems(ctx context.Context, request operations.ExportPackageSystemsRequest) (*operations.ExportPackageSystemsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/api/patch/v1/export/packages/{package_name}/systems", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -307,7 +342,7 @@ func (s *SDK) ExportPackageSystems(ctx context.Context, request operations.Expor
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -337,8 +372,10 @@ func (s *SDK) ExportPackageSystems(ctx context.Context, request operations.Expor
 	return res, nil
 }
 
+// ExportPackages - Show me all installed packages across my systems
+// Show me all installed packages across my systems
 func (s *SDK) ExportPackages(ctx context.Context, request operations.ExportPackagesRequest) (*operations.ExportPackagesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/api/patch/v1/export/packages"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -348,7 +385,7 @@ func (s *SDK) ExportPackages(ctx context.Context, request operations.ExportPacka
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -385,8 +422,10 @@ func (s *SDK) ExportPackages(ctx context.Context, request operations.ExportPacka
 	return res, nil
 }
 
+// ExportSystemAdvisories - Export applicable advisories for all my systems
+// Export applicable advisories for all my systems
 func (s *SDK) ExportSystemAdvisories(ctx context.Context, request operations.ExportSystemAdvisoriesRequest) (*operations.ExportSystemAdvisoriesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/api/patch/v1/export/systems/{inventory_id}/advisories", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -396,7 +435,7 @@ func (s *SDK) ExportSystemAdvisories(ctx context.Context, request operations.Exp
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -433,8 +472,10 @@ func (s *SDK) ExportSystemAdvisories(ctx context.Context, request operations.Exp
 	return res, nil
 }
 
+// ExportSystemPackages - Show me details about a system packages by given inventory id
+// Show me details about a system packages by given inventory id
 func (s *SDK) ExportSystemPackages(ctx context.Context, request operations.ExportSystemPackagesRequest) (*operations.ExportSystemPackagesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/api/patch/v1/export/systems/{inventory_id}/packages", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -444,7 +485,7 @@ func (s *SDK) ExportSystemPackages(ctx context.Context, request operations.Expor
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -474,8 +515,10 @@ func (s *SDK) ExportSystemPackages(ctx context.Context, request operations.Expor
 	return res, nil
 }
 
+// ExportSystems - Export systems for my account
+// Export systems for my account
 func (s *SDK) ExportSystems(ctx context.Context, request operations.ExportSystemsRequest) (*operations.ExportSystemsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/api/patch/v1/export/systems"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -485,7 +528,7 @@ func (s *SDK) ExportSystems(ctx context.Context, request operations.ExportSystem
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -522,8 +565,10 @@ func (s *SDK) ExportSystems(ctx context.Context, request operations.ExportSystem
 	return res, nil
 }
 
+// ListAdvisories - Show me all applicable advisories for all my systems
+// Show me all applicable advisories for all my systems
 func (s *SDK) ListAdvisories(ctx context.Context, request operations.ListAdvisoriesRequest) (*operations.ListAdvisoriesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/api/patch/v1/advisories"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -533,7 +578,7 @@ func (s *SDK) ListAdvisories(ctx context.Context, request operations.ListAdvisor
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -563,8 +608,10 @@ func (s *SDK) ListAdvisories(ctx context.Context, request operations.ListAdvisor
 	return res, nil
 }
 
+// ListAdvisorySystems - Show me systems on which the given advisory is applicable
+// Show me systems on which the given advisory is applicable
 func (s *SDK) ListAdvisorySystems(ctx context.Context, request operations.ListAdvisorySystemsRequest) (*operations.ListAdvisorySystemsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/api/patch/v1/advisories/{advisory_id}/systems", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -574,7 +621,7 @@ func (s *SDK) ListAdvisorySystems(ctx context.Context, request operations.ListAd
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -604,8 +651,10 @@ func (s *SDK) ListAdvisorySystems(ctx context.Context, request operations.ListAd
 	return res, nil
 }
 
+// ListPackages - Show me all installed packages across my systems
+// Show me all installed packages across my systems
 func (s *SDK) ListPackages(ctx context.Context, request operations.ListPackagesRequest) (*operations.ListPackagesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/api/patch/v1/packages/"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -615,7 +664,7 @@ func (s *SDK) ListPackages(ctx context.Context, request operations.ListPackagesR
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -645,8 +694,10 @@ func (s *SDK) ListPackages(ctx context.Context, request operations.ListPackagesR
 	return res, nil
 }
 
+// ListSystemAdvisories - Show me advisories for a system by given inventory id
+// Show me advisories for a system by given inventory id
 func (s *SDK) ListSystemAdvisories(ctx context.Context, request operations.ListSystemAdvisoriesRequest) (*operations.ListSystemAdvisoriesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/api/patch/v1/systems/{inventory_id}/advisories", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -656,7 +707,7 @@ func (s *SDK) ListSystemAdvisories(ctx context.Context, request operations.ListS
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -686,8 +737,10 @@ func (s *SDK) ListSystemAdvisories(ctx context.Context, request operations.ListS
 	return res, nil
 }
 
+// ListSystems - Show me all my systems
+// Show me all my systems
 func (s *SDK) ListSystems(ctx context.Context, request operations.ListSystemsRequest) (*operations.ListSystemsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/api/patch/v1/systems"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -697,7 +750,7 @@ func (s *SDK) ListSystems(ctx context.Context, request operations.ListSystemsReq
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -727,8 +780,10 @@ func (s *SDK) ListSystems(ctx context.Context, request operations.ListSystemsReq
 	return res, nil
 }
 
+// PackageSystems - Show me all my systems which have a package installed
+// Show me all my systems which have a package installed
 func (s *SDK) PackageSystems(ctx context.Context, request operations.PackageSystemsRequest) (*operations.PackageSystemsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/api/patch/v1/packages/{package_name}/systems", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -738,7 +793,7 @@ func (s *SDK) PackageSystems(ctx context.Context, request operations.PackageSyst
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -768,8 +823,10 @@ func (s *SDK) PackageSystems(ctx context.Context, request operations.PackageSyst
 	return res, nil
 }
 
+// PackageVersions - Show me all package versions installed on some system
+// Show me all package versions installed on some system
 func (s *SDK) PackageVersions(ctx context.Context, request operations.PackageVersionsRequest) (*operations.PackageVersionsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/api/patch/v1/packages/{package_name}/versions", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -779,7 +836,7 @@ func (s *SDK) PackageVersions(ctx context.Context, request operations.PackageVer
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -809,8 +866,10 @@ func (s *SDK) PackageVersions(ctx context.Context, request operations.PackageVer
 	return res, nil
 }
 
+// SystemPackages - Show me details about a system packages by given inventory id
+// Show me details about a system packages by given inventory id
 func (s *SDK) SystemPackages(ctx context.Context, request operations.SystemPackagesRequest) (*operations.SystemPackagesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/api/patch/v1/systems/{inventory_id}/packages", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -820,7 +879,7 @@ func (s *SDK) SystemPackages(ctx context.Context, request operations.SystemPacka
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -850,8 +909,10 @@ func (s *SDK) SystemPackages(ctx context.Context, request operations.SystemPacka
 	return res, nil
 }
 
+// ViewAdvisoriesSystems - View advisory-system pairs for selected systems and advisories
+// View advisory-system pairs for selected systems and advisories
 func (s *SDK) ViewAdvisoriesSystems(ctx context.Context, request operations.ViewAdvisoriesSystemsRequest) (*operations.ViewAdvisoriesSystemsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/api/patch/v1/views/advisories/systems"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -869,7 +930,7 @@ func (s *SDK) ViewAdvisoriesSystems(ctx context.Context, request operations.View
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -899,8 +960,10 @@ func (s *SDK) ViewAdvisoriesSystems(ctx context.Context, request operations.View
 	return res, nil
 }
 
+// ViewSystemsAdvisories - View system-advisory pairs for selected systems and advisories
+// View system-advisory pairs for selected systems and advisories
 func (s *SDK) ViewSystemsAdvisories(ctx context.Context, request operations.ViewSystemsAdvisoriesRequest) (*operations.ViewSystemsAdvisoriesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/api/patch/v1/views/systems/advisories"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -918,7 +981,7 @@ func (s *SDK) ViewSystemsAdvisories(ctx context.Context, request operations.View
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {

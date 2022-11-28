@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// ImportSummary
+// Provides summary information about an import in an import list.
 type ImportSummary struct {
 	CreationDateTime     *time.Time         `json:"creationDateTime,omitempty"`
 	ImportID             *string            `json:"importId,omitempty"`

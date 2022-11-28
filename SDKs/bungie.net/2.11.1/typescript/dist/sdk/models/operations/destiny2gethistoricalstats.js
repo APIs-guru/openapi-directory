@@ -22,22 +22,22 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var Destiny2GetHistoricalStatsPathParams = /** @class */ (function (_super) {
     __extends(Destiny2GetHistoricalStatsPathParams, _super);
     function Destiny2GetHistoricalStatsPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=characterId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=characterId" }),
         __metadata("design:type", Number)
     ], Destiny2GetHistoricalStatsPathParams.prototype, "characterId", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=destinyMembershipId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=destinyMembershipId" }),
         __metadata("design:type", Number)
     ], Destiny2GetHistoricalStatsPathParams.prototype, "destinyMembershipId", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=membershipType" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=membershipType" }),
         __metadata("design:type", Number)
     ], Destiny2GetHistoricalStatsPathParams.prototype, "membershipType", void 0);
     return Destiny2GetHistoricalStatsPathParams;
@@ -49,23 +49,23 @@ var Destiny2GetHistoricalStatsQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=dayend" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=dayend" }),
         __metadata("design:type", Date)
     ], Destiny2GetHistoricalStatsQueryParams.prototype, "dayend", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=daystart" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=daystart" }),
         __metadata("design:type", Date)
     ], Destiny2GetHistoricalStatsQueryParams.prototype, "daystart", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=false;name=groups" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=groups" }),
         __metadata("design:type", Array)
     ], Destiny2GetHistoricalStatsQueryParams.prototype, "groups", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=false;name=modes" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=modes" }),
         __metadata("design:type", Array)
     ], Destiny2GetHistoricalStatsQueryParams.prototype, "modes", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=periodType" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=periodType" }),
         __metadata("design:type", Number)
     ], Destiny2GetHistoricalStatsQueryParams.prototype, "periodType", void 0);
     return Destiny2GetHistoricalStatsQueryParams;
@@ -77,11 +77,11 @@ var Destiny2GetHistoricalStatsRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Destiny2GetHistoricalStatsPathParams)
     ], Destiny2GetHistoricalStatsRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Destiny2GetHistoricalStatsQueryParams)
     ], Destiny2GetHistoricalStatsRequest.prototype, "queryParams", void 0);
     return Destiny2GetHistoricalStatsRequest;
@@ -93,15 +93,15 @@ var Destiny2GetHistoricalStatsResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], Destiny2GetHistoricalStatsResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], Destiny2GetHistoricalStatsResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], Destiny2GetHistoricalStatsResponse.prototype, "statusCode", void 0);
     return Destiny2GetHistoricalStatsResponse;

@@ -4,10 +4,6 @@ type GetTopicsPrivateMessagesUsernameJSONPathParams struct {
 	Username string `pathParam:"style=simple,explode=false,name=username"`
 }
 
-type GetTopicsPrivateMessagesUsernameJSONRequest struct {
-	PathParams GetTopicsPrivateMessagesUsernameJSONPathParams
-}
-
 type GetTopicsPrivateMessagesUsernameJSON200ApplicationJSONTopicListTopicsParticipants struct {
 	Description    *string `json:"description,omitempty"`
 	Extras         *string `json:"extras,omitempty"`
@@ -79,6 +75,10 @@ type GetTopicsPrivateMessagesUsernameJSON200ApplicationJSON struct {
 	PrimaryGroups []interface{}                                                    `json:"primary_groups,omitempty"`
 	TopicList     *GetTopicsPrivateMessagesUsernameJSON200ApplicationJSONTopicList `json:"topic_list,omitempty"`
 	Users         []GetTopicsPrivateMessagesUsernameJSON200ApplicationJSONUsers    `json:"users,omitempty"`
+}
+
+type GetTopicsPrivateMessagesUsernameJSONRequest struct {
+	PathParams GetTopicsPrivateMessagesUsernameJSONPathParams
 }
 
 type GetTopicsPrivateMessagesUsernameJSONResponse struct {

@@ -5,23 +5,23 @@ from sdk.models import shared
 
 @dataclass
 class GetTimerPathParams:
-    timer_id: str = field(default=None, metadata={'path_param': { 'field_name': 'timerId', 'style': 'simple', 'explode': False }})
+    timer_id: str = field(metadata={'path_param': { 'field_name': 'timerId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetTimerSecurity:
-    custom_authentication: shared.SchemeCustomAuthentication = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    custom_authentication: shared.SchemeCustomAuthentication = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
     
 
 @dataclass
 class GetTimerRequest:
-    path_params: GetTimerPathParams = field(default=None)
-    security: GetTimerSecurity = field(default=None)
+    path_params: GetTimerPathParams = field()
+    security: GetTimerSecurity = field()
     
 
 @dataclass
 class GetTimerResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     timer_info_dto: Optional[shared.TimerInfoDto] = field(default=None)
     

@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 class DiscussionAPIGetTopicsFieldsEnum(str, Enum):
@@ -29,13 +30,13 @@ class DiscussionAPIGetTopicsQueryParams:
 
 @dataclass
 class DiscussionAPIGetTopicsRequest:
-    query_params: DiscussionAPIGetTopicsQueryParams = field(default=None)
+    query_params: DiscussionAPIGetTopicsQueryParams = field()
     
 
 @dataclass
 class DiscussionAPIGetTopicsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     partial_find_result_discussion_topic_contract_: Optional[shared.PartialFindResultDiscussionTopicContract] = field(default=None)
-    status_code: int = field(default=None)
     

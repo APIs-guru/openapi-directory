@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetDescribeDataSharesForConsumerActionEnum(str, Enum):
     DESCRIBE_DATA_SHARES_FOR_CONSUMER = "DescribeDataSharesForConsumer"
@@ -14,12 +18,12 @@ class GetDescribeDataSharesForConsumerVersionEnum(str, Enum):
 
 @dataclass
 class GetDescribeDataSharesForConsumerQueryParams:
-    action: GetDescribeDataSharesForConsumerActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetDescribeDataSharesForConsumerActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: GetDescribeDataSharesForConsumerVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     consumer_arn: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'ConsumerArn', 'style': 'form', 'explode': True }})
     marker: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'Marker', 'style': 'form', 'explode': True }})
     max_records: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'MaxRecords', 'style': 'form', 'explode': True }})
     status: Optional[GetDescribeDataSharesForConsumerStatusEnum] = field(default=None, metadata={'query_param': { 'field_name': 'Status', 'style': 'form', 'explode': True }})
-    version: GetDescribeDataSharesForConsumerVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -35,13 +39,13 @@ class GetDescribeDataSharesForConsumerHeaders:
 
 @dataclass
 class GetDescribeDataSharesForConsumerRequest:
-    query_params: GetDescribeDataSharesForConsumerQueryParams = field(default=None)
-    headers: GetDescribeDataSharesForConsumerHeaders = field(default=None)
+    headers: GetDescribeDataSharesForConsumerHeaders = field()
+    query_params: GetDescribeDataSharesForConsumerQueryParams = field()
     
 
 @dataclass
 class GetDescribeDataSharesForConsumerResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

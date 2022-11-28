@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class CloudsupportCasesCreatePathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,21 +26,21 @@ class CloudsupportCasesCreateQueryParams:
 
 @dataclass
 class CloudsupportCasesCreateSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class CloudsupportCasesCreateRequest:
-    path_params: CloudsupportCasesCreatePathParams = field(default=None)
-    query_params: CloudsupportCasesCreateQueryParams = field(default=None)
-    request: Optional[shared.Case] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: CloudsupportCasesCreateSecurity = field(default=None)
+    path_params: CloudsupportCasesCreatePathParams = field()
+    query_params: CloudsupportCasesCreateQueryParams = field()
+    security: CloudsupportCasesCreateSecurity = field()
+    request: Optional[shared.CaseInput] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class CloudsupportCasesCreateResponse:
+    content_type: str = field()
+    status_code: int = field()
     case: Optional[shared.Case] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

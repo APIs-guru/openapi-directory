@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AssessmentControlSet } from "./assessmentcontrolset";
 
 
+
 export class UpdateAssessmentControlSetStatusResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=controlSet" })
+  @SpeakeasyMetadata({ data: "json, name=controlSet" })
   controlSet?: AssessmentControlSet;
 }

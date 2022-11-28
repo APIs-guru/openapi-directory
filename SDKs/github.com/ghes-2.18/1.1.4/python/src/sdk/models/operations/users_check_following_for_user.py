@@ -4,17 +4,17 @@ from dataclasses import dataclass, field
 
 @dataclass
 class UsersCheckFollowingForUserPathParams:
-    target_user: str = field(default=None, metadata={'path_param': { 'field_name': 'target_user', 'style': 'simple', 'explode': False }})
-    username: str = field(default=None, metadata={'path_param': { 'field_name': 'username', 'style': 'simple', 'explode': False }})
+    target_user: str = field(metadata={'path_param': { 'field_name': 'target_user', 'style': 'simple', 'explode': False }})
+    username: str = field(metadata={'path_param': { 'field_name': 'username', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class UsersCheckFollowingForUserRequest:
-    path_params: UsersCheckFollowingForUserPathParams = field(default=None)
+    path_params: UsersCheckFollowingForUserPathParams = field()
     
 
 @dataclass
 class UsersCheckFollowingForUserResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

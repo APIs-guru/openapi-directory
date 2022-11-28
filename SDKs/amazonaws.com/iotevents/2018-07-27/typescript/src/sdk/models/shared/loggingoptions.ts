@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DetectorDebugOption } from "./detectordebugoption";
 import { LoggingLevelEnum } from "./logginglevelenum";
+
 
 
 // LoggingOptions
@@ -9,15 +9,15 @@ import { LoggingLevelEnum } from "./logginglevelenum";
  * The values of the AWS IoT Events logging options.
 **/
 export class LoggingOptions extends SpeakeasyBase {
-  @Metadata({ data: "json, name=detectorDebugOptions", elemType: shared.DetectorDebugOption })
+  @SpeakeasyMetadata({ data: "json, name=detectorDebugOptions", elemType: DetectorDebugOption })
   detectorDebugOptions?: DetectorDebugOption[];
 
-  @Metadata({ data: "json, name=enabled" })
+  @SpeakeasyMetadata({ data: "json, name=enabled" })
   enabled: boolean;
 
-  @Metadata({ data: "json, name=level" })
+  @SpeakeasyMetadata({ data: "json, name=level" })
   level: LoggingLevelEnum;
 
-  @Metadata({ data: "json, name=roleArn" })
+  @SpeakeasyMetadata({ data: "json, name=roleArn" })
   roleArn: string;
 }

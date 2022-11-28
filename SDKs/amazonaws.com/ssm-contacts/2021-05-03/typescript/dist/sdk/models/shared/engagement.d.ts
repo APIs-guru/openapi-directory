@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 /**
  * Incident Manager reaching out to a contact or escalation plan to engage contact during an incident.
 **/

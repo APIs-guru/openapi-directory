@@ -4,16 +4,16 @@ from dataclasses import dataclass, field
 
 @dataclass
 class DeleteLocationPathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class DeleteLocationRequest:
-    path_params: DeleteLocationPathParams = field(default=None)
+    path_params: DeleteLocationPathParams = field()
     
 
 @dataclass
 class DeleteLocationResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

@@ -22,31 +22,31 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { Tag } from "./tag";
 var CreateApplicationRequest = /** @class */ (function (_super) {
     __extends(CreateApplicationRequest, _super);
     function CreateApplicationRequest() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=CWEMonitorEnabled" }),
+        SpeakeasyMetadata({ data: "json, name=CWEMonitorEnabled" }),
         __metadata("design:type", Boolean)
     ], CreateApplicationRequest.prototype, "cweMonitorEnabled", void 0);
     __decorate([
-        Metadata({ data: "json, name=OpsCenterEnabled" }),
+        SpeakeasyMetadata({ data: "json, name=OpsCenterEnabled" }),
         __metadata("design:type", Boolean)
     ], CreateApplicationRequest.prototype, "opsCenterEnabled", void 0);
     __decorate([
-        Metadata({ data: "json, name=OpsItemSNSTopicArn" }),
+        SpeakeasyMetadata({ data: "json, name=OpsItemSNSTopicArn" }),
         __metadata("design:type", String)
     ], CreateApplicationRequest.prototype, "opsItemSnsTopicArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=ResourceGroupName" }),
+        SpeakeasyMetadata({ data: "json, name=ResourceGroupName" }),
         __metadata("design:type", String)
     ], CreateApplicationRequest.prototype, "resourceGroupName", void 0);
     __decorate([
-        Metadata({ data: "json, name=Tags", elemType: shared.Tag }),
+        SpeakeasyMetadata({ data: "json, name=Tags", elemType: Tag }),
         __metadata("design:type", Array)
     ], CreateApplicationRequest.prototype, "tags", void 0);
     return CreateApplicationRequest;

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { MessageFormatValueEnum } from "./messageformatvalueenum";
 // KinesisSettings
 /**
@@ -34,43 +34,43 @@ var KinesisSettings = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=IncludeControlDetails" }),
+        SpeakeasyMetadata({ data: "json, name=IncludeControlDetails" }),
         __metadata("design:type", Boolean)
     ], KinesisSettings.prototype, "includeControlDetails", void 0);
     __decorate([
-        Metadata({ data: "json, name=IncludeNullAndEmpty" }),
+        SpeakeasyMetadata({ data: "json, name=IncludeNullAndEmpty" }),
         __metadata("design:type", Boolean)
     ], KinesisSettings.prototype, "includeNullAndEmpty", void 0);
     __decorate([
-        Metadata({ data: "json, name=IncludePartitionValue" }),
+        SpeakeasyMetadata({ data: "json, name=IncludePartitionValue" }),
         __metadata("design:type", Boolean)
     ], KinesisSettings.prototype, "includePartitionValue", void 0);
     __decorate([
-        Metadata({ data: "json, name=IncludeTableAlterOperations" }),
+        SpeakeasyMetadata({ data: "json, name=IncludeTableAlterOperations" }),
         __metadata("design:type", Boolean)
     ], KinesisSettings.prototype, "includeTableAlterOperations", void 0);
     __decorate([
-        Metadata({ data: "json, name=IncludeTransactionDetails" }),
+        SpeakeasyMetadata({ data: "json, name=IncludeTransactionDetails" }),
         __metadata("design:type", Boolean)
     ], KinesisSettings.prototype, "includeTransactionDetails", void 0);
     __decorate([
-        Metadata({ data: "json, name=MessageFormat" }),
+        SpeakeasyMetadata({ data: "json, name=MessageFormat" }),
         __metadata("design:type", String)
     ], KinesisSettings.prototype, "messageFormat", void 0);
     __decorate([
-        Metadata({ data: "json, name=NoHexPrefix" }),
+        SpeakeasyMetadata({ data: "json, name=NoHexPrefix" }),
         __metadata("design:type", Boolean)
     ], KinesisSettings.prototype, "noHexPrefix", void 0);
     __decorate([
-        Metadata({ data: "json, name=PartitionIncludeSchemaTable" }),
+        SpeakeasyMetadata({ data: "json, name=PartitionIncludeSchemaTable" }),
         __metadata("design:type", Boolean)
     ], KinesisSettings.prototype, "partitionIncludeSchemaTable", void 0);
     __decorate([
-        Metadata({ data: "json, name=ServiceAccessRoleArn" }),
+        SpeakeasyMetadata({ data: "json, name=ServiceAccessRoleArn" }),
         __metadata("design:type", String)
     ], KinesisSettings.prototype, "serviceAccessRoleArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=StreamArn" }),
+        SpeakeasyMetadata({ data: "json, name=StreamArn" }),
         __metadata("design:type", String)
     ], KinesisSettings.prototype, "streamArn", void 0);
     return KinesisSettings;

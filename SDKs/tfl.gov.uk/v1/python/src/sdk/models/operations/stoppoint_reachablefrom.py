@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class StopPointReachableFromPathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
-    line_id: str = field(default=None, metadata={'path_param': { 'field_name': 'lineId', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    line_id: str = field(metadata={'path_param': { 'field_name': 'lineId', 'style': 'simple', 'explode': False }})
     
 class StopPointReachableFromServiceTypesEnum(str, Enum):
     REGULAR = "Regular"
@@ -20,14 +21,14 @@ class StopPointReachableFromQueryParams:
 
 @dataclass
 class StopPointReachableFromRequest:
-    path_params: StopPointReachableFromPathParams = field(default=None)
-    query_params: StopPointReachableFromQueryParams = field(default=None)
+    path_params: StopPointReachableFromPathParams = field()
+    query_params: StopPointReachableFromQueryParams = field()
     
 
 @dataclass
 class StopPointReachableFromResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     tfl_api_presentation_entities_stop_points: Optional[List[shared.TflAPIPresentationEntitiesStopPoint]] = field(default=None)
     

@@ -1,5 +1,7 @@
 package shared
 
+// DescribeFleetPortSettingsOutput
+// Represents the returned data in response to a request operation.
 type DescribeFleetPortSettingsOutput struct {
 	FleetArn           *string                   `json:"FleetArn,omitempty"`
 	FleetID            *string                   `json:"FleetId,omitempty"`

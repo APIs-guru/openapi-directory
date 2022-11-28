@@ -34,12 +34,6 @@ type UpdateInventoryForAnItemRequests struct {
 	Object         *UpdateInventoryForAnItemApplicationJSON `request:"mediaType=application/json"`
 }
 
-type UpdateInventoryForAnItemRequest struct {
-	QueryParams UpdateInventoryForAnItemQueryParams
-	Headers     UpdateInventoryForAnItemHeaders
-	Request     UpdateInventoryForAnItemRequests
-}
-
 type UpdateInventoryForAnItem200ApplicationJSONQuantityUnitEnum string
 
 const (
@@ -54,6 +48,12 @@ type UpdateInventoryForAnItem200ApplicationJSONQuantity struct {
 type UpdateInventoryForAnItem200ApplicationJSON struct {
 	Quantity UpdateInventoryForAnItem200ApplicationJSONQuantity `json:"quantity"`
 	Sku      string                                             `json:"sku"`
+}
+
+type UpdateInventoryForAnItemRequest struct {
+	QueryParams UpdateInventoryForAnItemQueryParams
+	Headers     UpdateInventoryForAnItemHeaders
+	Request     UpdateInventoryForAnItemRequests
 }
 
 type UpdateInventoryForAnItemResponse struct {

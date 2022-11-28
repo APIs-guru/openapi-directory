@@ -10,7 +10,7 @@ type DcimInterfaceConnectionsPartialUpdatePathParams struct {
 
 type DcimInterfaceConnectionsPartialUpdateRequest struct {
 	PathParams DcimInterfaceConnectionsPartialUpdatePathParams
-	Request    shared.WritableInterfaceConnection `request:"mediaType=application/json"`
+	Request    shared.WritableInterfaceConnectionInput `request:"mediaType=application/json"`
 }
 
 type DcimInterfaceConnectionsPartialUpdateResponse struct {

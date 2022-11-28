@@ -1,12 +1,16 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
 @dataclass
 class UpdateApnsChannelPathParams:
-    application_id: str = field(default=None, metadata={'path_param': { 'field_name': 'application-id', 'style': 'simple', 'explode': False }})
+    application_id: str = field(metadata={'path_param': { 'field_name': 'application-id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -23,39 +27,43 @@ class UpdateApnsChannelHeaders:
 @dataclass_json
 @dataclass
 class UpdateApnsChannelRequestBodyApnsChannelRequest:
-    bundle_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'BundleId' }})
-    certificate: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Certificate' }})
-    default_authentication_method: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'DefaultAuthenticationMethod' }})
-    enabled: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Enabled' }})
-    private_key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'PrivateKey' }})
-    team_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'TeamId' }})
-    token_key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'TokenKey' }})
-    token_key_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'TokenKeyId' }})
+    r"""UpdateApnsChannelRequestBodyApnsChannelRequest
+    Specifies the status and settings of the APNs (Apple Push Notification service) channel for an application.
+    """
+    
+    bundle_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('BundleId') }})
+    certificate: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Certificate') }})
+    default_authentication_method: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('DefaultAuthenticationMethod') }})
+    enabled: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Enabled') }})
+    private_key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('PrivateKey') }})
+    team_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('TeamId') }})
+    token_key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('TokenKey') }})
+    token_key_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('TokenKeyId') }})
     
 
 @dataclass_json
 @dataclass
 class UpdateApnsChannelRequestBody:
-    apns_channel_request: UpdateApnsChannelRequestBodyApnsChannelRequest = field(default=None, metadata={'dataclasses_json': { 'field_name': 'APNSChannelRequest' }})
+    apns_channel_request: UpdateApnsChannelRequestBodyApnsChannelRequest = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('APNSChannelRequest') }})
     
 
 @dataclass
 class UpdateApnsChannelRequest:
-    path_params: UpdateApnsChannelPathParams = field(default=None)
-    headers: UpdateApnsChannelHeaders = field(default=None)
-    request: UpdateApnsChannelRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: UpdateApnsChannelHeaders = field()
+    path_params: UpdateApnsChannelPathParams = field()
+    request: UpdateApnsChannelRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class UpdateApnsChannelResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     forbidden_exception: Optional[Any] = field(default=None)
     internal_server_error_exception: Optional[Any] = field(default=None)
     method_not_allowed_exception: Optional[Any] = field(default=None)
     not_found_exception: Optional[Any] = field(default=None)
     payload_too_large_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     too_many_requests_exception: Optional[Any] = field(default=None)
     update_apns_channel_response: Optional[shared.UpdateApnsChannelResponse] = field(default=None)
     

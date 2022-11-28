@@ -1,5 +1,7 @@
 package shared
 
+// IdentitytoolkitRelyingpartyResetPasswordRequest
+// Request to reset the password.
 type IdentitytoolkitRelyingpartyResetPasswordRequest struct {
 	Email       *string `json:"email,omitempty"`
 	NewPassword *string `json:"newPassword,omitempty"`

@@ -10,6 +10,8 @@ const (
 	MacSignResponseProtectionLevelEnumExternalVpc                MacSignResponseProtectionLevelEnum = "EXTERNAL_VPC"
 )
 
+// MacSignResponse
+// Response message for KeyManagementService.MacSign.
 type MacSignResponse struct {
 	Mac                *string                             `json:"mac,omitempty"`
 	MacCrc32c          *string                             `json:"macCrc32c,omitempty"`

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // TrimWhitespaceResponse
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The result of trimming whitespace in cells.
 **/
 export class TrimWhitespaceResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=cellsChangedCount" })
+  @SpeakeasyMetadata({ data: "json, name=cellsChangedCount" })
   cellsChangedCount?: number;
 }

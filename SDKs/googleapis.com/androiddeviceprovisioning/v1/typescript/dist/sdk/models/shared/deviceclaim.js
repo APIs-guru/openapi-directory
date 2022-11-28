@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var DeviceClaimAdditionalServiceEnum;
 (function (DeviceClaimAdditionalServiceEnum) {
     DeviceClaimAdditionalServiceEnum["AdditionalServiceUnspecified"] = "ADDITIONAL_SERVICE_UNSPECIFIED";
@@ -44,27 +44,31 @@ var DeviceClaim = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=additionalService" }),
+        SpeakeasyMetadata({ data: "json, name=additionalService" }),
         __metadata("design:type", String)
     ], DeviceClaim.prototype, "additionalService", void 0);
     __decorate([
-        Metadata({ data: "json, name=ownerCompanyId" }),
+        SpeakeasyMetadata({ data: "json, name=googleWorkspaceCustomerId" }),
+        __metadata("design:type", String)
+    ], DeviceClaim.prototype, "googleWorkspaceCustomerId", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=ownerCompanyId" }),
         __metadata("design:type", String)
     ], DeviceClaim.prototype, "ownerCompanyId", void 0);
     __decorate([
-        Metadata({ data: "json, name=resellerId" }),
+        SpeakeasyMetadata({ data: "json, name=resellerId" }),
         __metadata("design:type", String)
     ], DeviceClaim.prototype, "resellerId", void 0);
     __decorate([
-        Metadata({ data: "json, name=sectionType" }),
+        SpeakeasyMetadata({ data: "json, name=sectionType" }),
         __metadata("design:type", String)
     ], DeviceClaim.prototype, "sectionType", void 0);
     __decorate([
-        Metadata({ data: "json, name=vacationModeExpireTime" }),
+        SpeakeasyMetadata({ data: "json, name=vacationModeExpireTime" }),
         __metadata("design:type", String)
     ], DeviceClaim.prototype, "vacationModeExpireTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=vacationModeStartTime" }),
+        SpeakeasyMetadata({ data: "json, name=vacationModeStartTime" }),
         __metadata("design:type", String)
     ], DeviceClaim.prototype, "vacationModeStartTime", void 0);
     return DeviceClaim;

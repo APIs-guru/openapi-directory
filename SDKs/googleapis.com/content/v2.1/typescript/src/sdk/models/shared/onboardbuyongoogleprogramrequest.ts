@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // OnboardBuyOnGoogleProgramRequest
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Request message for the OnboardProgram method.
 **/
 export class OnboardBuyOnGoogleProgramRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=customerServiceEmail" })
+  @SpeakeasyMetadata({ data: "json, name=customerServiceEmail" })
   customerServiceEmail?: string;
 }

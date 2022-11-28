@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// Record
+// The basic data structure of a dataset.
 type Record struct {
 	DeviceLastModifiedDate *time.Time `json:"DeviceLastModifiedDate,omitempty"`
 	Key                    *string    `json:"Key,omitempty"`

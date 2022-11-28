@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { ScoutingTag } from "./scoutingtag";
 export var ScoutingObservationLocationDisplayColorEnum;
 (function (ScoutingObservationLocationDisplayColorEnum) {
     ScoutingObservationLocationDisplayColorEnum["Number307af7"] = "#307af7";
@@ -50,51 +50,51 @@ var ScoutingObservation = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=endTime" }),
+        SpeakeasyMetadata({ data: "json, name=endTime" }),
         __metadata("design:type", Date)
     ], ScoutingObservation.prototype, "endTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=fieldIds" }),
+        SpeakeasyMetadata({ data: "json, name=fieldIds" }),
         __metadata("design:type", Array)
     ], ScoutingObservation.prototype, "fieldIds", void 0);
     __decorate([
-        Metadata({ data: "json, name=id" }),
+        SpeakeasyMetadata({ data: "json, name=id" }),
         __metadata("design:type", String)
     ], ScoutingObservation.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "json, name=location" }),
+        SpeakeasyMetadata({ data: "json, name=location" }),
         __metadata("design:type", Object)
     ], ScoutingObservation.prototype, "location", void 0);
     __decorate([
-        Metadata({ data: "json, name=locationDisplayColor" }),
+        SpeakeasyMetadata({ data: "json, name=locationDisplayColor" }),
         __metadata("design:type", String)
     ], ScoutingObservation.prototype, "locationDisplayColor", void 0);
     __decorate([
-        Metadata({ data: "json, name=note" }),
+        SpeakeasyMetadata({ data: "json, name=note" }),
         __metadata("design:type", String)
     ], ScoutingObservation.prototype, "note", void 0);
     __decorate([
-        Metadata({ data: "json, name=startTime" }),
+        SpeakeasyMetadata({ data: "json, name=startTime" }),
         __metadata("design:type", Date)
     ], ScoutingObservation.prototype, "startTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=status" }),
+        SpeakeasyMetadata({ data: "json, name=status" }),
         __metadata("design:type", String)
     ], ScoutingObservation.prototype, "status", void 0);
     __decorate([
-        Metadata({ data: "json, name=tags", elemType: shared.ScoutingTag }),
+        SpeakeasyMetadata({ data: "json, name=tags", elemType: ScoutingTag }),
         __metadata("design:type", Array)
     ], ScoutingObservation.prototype, "tags", void 0);
     __decorate([
-        Metadata({ data: "json, name=timespan" }),
+        SpeakeasyMetadata({ data: "json, name=timespan" }),
         __metadata("design:type", String)
     ], ScoutingObservation.prototype, "timespan", void 0);
     __decorate([
-        Metadata({ data: "json, name=title" }),
+        SpeakeasyMetadata({ data: "json, name=title" }),
         __metadata("design:type", String)
     ], ScoutingObservation.prototype, "title", void 0);
     __decorate([
-        Metadata({ data: "json, name=updatedAt" }),
+        SpeakeasyMetadata({ data: "json, name=updatedAt" }),
         __metadata("design:type", Date)
     ], ScoutingObservation.prototype, "updatedAt", void 0);
     return ScoutingObservation;

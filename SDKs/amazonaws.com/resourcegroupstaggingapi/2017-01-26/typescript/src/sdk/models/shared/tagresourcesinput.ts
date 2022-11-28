@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class TagResourcesInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ResourceARNList" })
+  @SpeakeasyMetadata({ data: "json, name=ResourceARNList" })
   resourceArnList: string[];
 
-  @Metadata({ data: "json, name=Tags" })
+  @SpeakeasyMetadata({ data: "json, name=Tags" })
   tags: Map<string, string>;
 }

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // SocketAddress
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * An IP address/port combination.
 **/
 export class SocketAddress extends SpeakeasyBase {
-  @Metadata({ data: "json, name=IpAddress" })
+  @SpeakeasyMetadata({ data: "json, name=IpAddress" })
   ipAddress?: string;
 
-  @Metadata({ data: "json, name=Port" })
+  @SpeakeasyMetadata({ data: "json, name=Port" })
   port?: number;
 }

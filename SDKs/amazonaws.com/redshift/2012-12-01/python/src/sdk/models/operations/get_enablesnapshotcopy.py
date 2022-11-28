@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetEnableSnapshotCopyActionEnum(str, Enum):
     ENABLE_SNAPSHOT_COPY = "EnableSnapshotCopy"
@@ -10,13 +14,13 @@ class GetEnableSnapshotCopyVersionEnum(str, Enum):
 
 @dataclass
 class GetEnableSnapshotCopyQueryParams:
-    action: GetEnableSnapshotCopyActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    cluster_identifier: str = field(default=None, metadata={'query_param': { 'field_name': 'ClusterIdentifier', 'style': 'form', 'explode': True }})
-    destination_region: str = field(default=None, metadata={'query_param': { 'field_name': 'DestinationRegion', 'style': 'form', 'explode': True }})
+    action: GetEnableSnapshotCopyActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    cluster_identifier: str = field(metadata={'query_param': { 'field_name': 'ClusterIdentifier', 'style': 'form', 'explode': True }})
+    destination_region: str = field(metadata={'query_param': { 'field_name': 'DestinationRegion', 'style': 'form', 'explode': True }})
+    version: GetEnableSnapshotCopyVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     manual_snapshot_retention_period: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'ManualSnapshotRetentionPeriod', 'style': 'form', 'explode': True }})
     retention_period: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'RetentionPeriod', 'style': 'form', 'explode': True }})
     snapshot_copy_grant_name: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'SnapshotCopyGrantName', 'style': 'form', 'explode': True }})
-    version: GetEnableSnapshotCopyVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -32,13 +36,13 @@ class GetEnableSnapshotCopyHeaders:
 
 @dataclass
 class GetEnableSnapshotCopyRequest:
-    query_params: GetEnableSnapshotCopyQueryParams = field(default=None)
-    headers: GetEnableSnapshotCopyHeaders = field(default=None)
+    headers: GetEnableSnapshotCopyHeaders = field()
+    query_params: GetEnableSnapshotCopyQueryParams = field()
     
 
 @dataclass
 class GetEnableSnapshotCopyResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

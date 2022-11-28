@@ -4,6 +4,9 @@ import (
 	"time"
 )
 
+// ConfigurationEvent
+//
+//	The event information.
 type ConfigurationEvent struct {
 	EventDetail          *string                             `json:"EventDetail,omitempty"`
 	EventResourceName    *string                             `json:"EventResourceName,omitempty"`

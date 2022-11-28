@@ -1,5 +1,7 @@
 package shared
 
+// DescribeHsmResponse
+// Contains the output of the <a>DescribeHsm</a> operation.
 type DescribeHsmResponse struct {
 	AvailabilityZone      *string               `json:"AvailabilityZone,omitempty"`
 	EniID                 *string               `json:"EniId,omitempty"`

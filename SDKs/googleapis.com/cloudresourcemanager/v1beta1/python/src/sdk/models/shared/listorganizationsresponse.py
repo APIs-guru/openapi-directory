@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import organization
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ListOrganizationsResponse:
-    next_page_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'nextPageToken' }})
-    organizations: Optional[List[organization.Organization]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'organizations' }})
+    r"""ListOrganizationsResponse
+    The response returned from the `ListOrganizations` method.
+    """
+    
+    next_page_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('nextPageToken') }})
+    organizations: Optional[List[Organization]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('organizations') }})
     

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ListStreamsOutput
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Represents the output for <code>ListStreams</code>.
 **/
 export class ListStreamsOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=HasMoreStreams" })
+  @SpeakeasyMetadata({ data: "json, name=HasMoreStreams" })
   hasMoreStreams: boolean;
 
-  @Metadata({ data: "json, name=StreamNames" })
+  @SpeakeasyMetadata({ data: "json, name=StreamNames" })
   streamNames: string[];
 }

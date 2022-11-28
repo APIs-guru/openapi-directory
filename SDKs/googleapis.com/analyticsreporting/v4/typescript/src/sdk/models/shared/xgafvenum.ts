@@ -1,6 +1,7 @@
 
 
+
 export enum XgafvEnum {
-    One = "1"
-,    Two = "2"
+    One = "1",
+    Two = "2"
 }

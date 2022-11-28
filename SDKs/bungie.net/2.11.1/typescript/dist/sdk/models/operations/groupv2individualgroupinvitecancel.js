@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GroupV2IndividualGroupInviteCancelPathParams = /** @class */ (function (_super) {
     __extends(GroupV2IndividualGroupInviteCancelPathParams, _super);
@@ -30,15 +30,15 @@ var GroupV2IndividualGroupInviteCancelPathParams = /** @class */ (function (_sup
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=groupId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=groupId" }),
         __metadata("design:type", Number)
     ], GroupV2IndividualGroupInviteCancelPathParams.prototype, "groupId", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=membershipId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=membershipId" }),
         __metadata("design:type", Number)
     ], GroupV2IndividualGroupInviteCancelPathParams.prototype, "membershipId", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=membershipType" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=membershipType" }),
         __metadata("design:type", Number)
     ], GroupV2IndividualGroupInviteCancelPathParams.prototype, "membershipType", void 0);
     return GroupV2IndividualGroupInviteCancelPathParams;
@@ -50,7 +50,7 @@ var GroupV2IndividualGroupInviteCancelSecurity = /** @class */ (function (_super
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2)
     ], GroupV2IndividualGroupInviteCancelSecurity.prototype, "oauth2", void 0);
     return GroupV2IndividualGroupInviteCancelSecurity;
@@ -62,11 +62,11 @@ var GroupV2IndividualGroupInviteCancelRequest = /** @class */ (function (_super)
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GroupV2IndividualGroupInviteCancelPathParams)
     ], GroupV2IndividualGroupInviteCancelRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GroupV2IndividualGroupInviteCancelSecurity)
     ], GroupV2IndividualGroupInviteCancelRequest.prototype, "security", void 0);
     return GroupV2IndividualGroupInviteCancelRequest;
@@ -78,15 +78,15 @@ var GroupV2IndividualGroupInviteCancelResponse = /** @class */ (function (_super
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], GroupV2IndividualGroupInviteCancelResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GroupV2IndividualGroupInviteCancelResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GroupV2IndividualGroupInviteCancelResponse.prototype, "statusCode", void 0);
     return GroupV2IndividualGroupInviteCancelResponse;

@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class CreateLicenseManagerReportGeneratorResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=LicenseManagerReportGeneratorArn" })
+  @SpeakeasyMetadata({ data: "json, name=LicenseManagerReportGeneratorArn" })
   licenseManagerReportGeneratorArn?: string;
 }

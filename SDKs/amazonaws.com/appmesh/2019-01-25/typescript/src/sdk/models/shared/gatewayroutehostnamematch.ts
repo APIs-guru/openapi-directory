@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GatewayRouteHostnameMatch
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * An object representing the gateway route host name to match.
 **/
 export class GatewayRouteHostnameMatch extends SpeakeasyBase {
-  @Metadata({ data: "json, name=exact" })
+  @SpeakeasyMetadata({ data: "json, name=exact" })
   exact?: string;
 
-  @Metadata({ data: "json, name=suffix" })
+  @SpeakeasyMetadata({ data: "json, name=suffix" })
   suffix?: string;
 }

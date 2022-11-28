@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DatastoreStatusEnum } from "./datastorestatusenum";
 var CreateFhirDatastoreResponse = /** @class */ (function (_super) {
     __extends(CreateFhirDatastoreResponse, _super);
@@ -30,19 +30,19 @@ var CreateFhirDatastoreResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=DatastoreArn" }),
+        SpeakeasyMetadata({ data: "json, name=DatastoreArn" }),
         __metadata("design:type", String)
     ], CreateFhirDatastoreResponse.prototype, "datastoreArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=DatastoreEndpoint" }),
+        SpeakeasyMetadata({ data: "json, name=DatastoreEndpoint" }),
         __metadata("design:type", String)
     ], CreateFhirDatastoreResponse.prototype, "datastoreEndpoint", void 0);
     __decorate([
-        Metadata({ data: "json, name=DatastoreId" }),
+        SpeakeasyMetadata({ data: "json, name=DatastoreId" }),
         __metadata("design:type", String)
     ], CreateFhirDatastoreResponse.prototype, "datastoreId", void 0);
     __decorate([
-        Metadata({ data: "json, name=DatastoreStatus" }),
+        SpeakeasyMetadata({ data: "json, name=DatastoreStatus" }),
         __metadata("design:type", String)
     ], CreateFhirDatastoreResponse.prototype, "datastoreStatus", void 0);
     return CreateFhirDatastoreResponse;

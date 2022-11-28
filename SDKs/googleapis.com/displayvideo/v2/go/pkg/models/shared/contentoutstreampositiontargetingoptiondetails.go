@@ -11,6 +11,8 @@ const (
 	ContentOutstreamPositionTargetingOptionDetailsContentOutstreamPositionEnumContentOutstreamPositionInterstitial ContentOutstreamPositionTargetingOptionDetailsContentOutstreamPositionEnum = "CONTENT_OUTSTREAM_POSITION_INTERSTITIAL"
 )
 
+// ContentOutstreamPositionTargetingOptionDetails
+// Represents a targetable content outstream position, which could be used by display and video ads. This will be populated in the content_outstream_position_details field when targeting_type is `TARGETING_TYPE_CONTENT_OUTSTREAM_POSITION`.
 type ContentOutstreamPositionTargetingOptionDetails struct {
 	ContentOutstreamPosition *ContentOutstreamPositionTargetingOptionDetailsContentOutstreamPositionEnum `json:"contentOutstreamPosition,omitempty"`
 }

@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CustomAccount } from "./customaccount";
 import { GoogleAccount } from "./googleaccount";
 import { IapCredential } from "./iapcredential";
+
 
 
 // Authentication
@@ -9,12 +10,12 @@ import { IapCredential } from "./iapcredential";
  * Scan authentication configuration.
 **/
 export class Authentication extends SpeakeasyBase {
-  @Metadata({ data: "json, name=customAccount" })
+  @SpeakeasyMetadata({ data: "json, name=customAccount" })
   customAccount?: CustomAccount;
 
-  @Metadata({ data: "json, name=googleAccount" })
+  @SpeakeasyMetadata({ data: "json, name=googleAccount" })
   googleAccount?: GoogleAccount;
 
-  @Metadata({ data: "json, name=iapCredential" })
+  @SpeakeasyMetadata({ data: "json, name=iapCredential" })
   iapCredential?: IapCredential;
 }

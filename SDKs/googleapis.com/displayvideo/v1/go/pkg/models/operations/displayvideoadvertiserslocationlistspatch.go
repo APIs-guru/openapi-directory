@@ -32,7 +32,7 @@ type DisplayvideoAdvertisersLocationListsPatchSecurity struct {
 type DisplayvideoAdvertisersLocationListsPatchRequest struct {
 	PathParams  DisplayvideoAdvertisersLocationListsPatchPathParams
 	QueryParams DisplayvideoAdvertisersLocationListsPatchQueryParams
-	Request     *shared.LocationList `request:"mediaType=application/json"`
+	Request     *shared.LocationListInput `request:"mediaType=application/json"`
 	Security    DisplayvideoAdvertisersLocationListsPatchSecurity
 }
 

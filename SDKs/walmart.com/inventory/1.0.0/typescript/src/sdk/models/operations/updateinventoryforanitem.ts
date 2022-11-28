@@ -1,29 +1,30 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class UpdateInventoryForAnItemQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=shipNode" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=shipNode" })
   shipNode?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=sku" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sku" })
   sku: string;
 }
 
 
 export class UpdateInventoryForAnItemHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=Authorization" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Authorization" })
   authorization: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=WM_CONSUMER.CHANNEL.TYPE" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=WM_CONSUMER.CHANNEL.TYPE" })
   wmConsumerChannelType: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=WM_QOS.CORRELATION_ID" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=WM_QOS.CORRELATION_ID" })
   wmQosCorrelationId: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=WM_SEC.ACCESS_TOKEN" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=WM_SEC.ACCESS_TOKEN" })
   wmSecAccessToken: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=WM_SVC.NAME" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=WM_SVC.NAME" })
   wmSvcName: string;
 }
 
@@ -33,41 +34,29 @@ export enum UpdateInventoryForAnItemApplicationJsonQuantityUnitEnum {
 
 
 export class UpdateInventoryForAnItemApplicationJsonQuantity extends SpeakeasyBase {
-  @Metadata({ data: "json, name=amount" })
+  @SpeakeasyMetadata({ data: "json, name=amount" })
   amount: number;
 
-  @Metadata({ data: "json, name=unit" })
+  @SpeakeasyMetadata({ data: "json, name=unit" })
   unit: UpdateInventoryForAnItemApplicationJsonQuantityUnitEnum;
 }
 
 
 export class UpdateInventoryForAnItemApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=quantity" })
+  @SpeakeasyMetadata({ data: "json, name=quantity" })
   quantity: UpdateInventoryForAnItemApplicationJsonQuantity;
 
-  @Metadata({ data: "json, name=sku" })
+  @SpeakeasyMetadata({ data: "json, name=sku" })
   sku: string;
 }
 
 
 export class UpdateInventoryForAnItemRequests extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/xml" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/xml" })
   applicationXml: Uint8Array;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   object?: UpdateInventoryForAnItemApplicationJson;
-}
-
-
-export class UpdateInventoryForAnItemRequest extends SpeakeasyBase {
-  @Metadata()
-  queryParams: UpdateInventoryForAnItemQueryParams;
-
-  @Metadata()
-  headers: UpdateInventoryForAnItemHeaders;
-
-  @Metadata()
-  request: UpdateInventoryForAnItemRequests;
 }
 
 export enum UpdateInventoryForAnItem200ApplicationJsonQuantityUnitEnum {
@@ -76,33 +65,45 @@ export enum UpdateInventoryForAnItem200ApplicationJsonQuantityUnitEnum {
 
 
 export class UpdateInventoryForAnItem200ApplicationJsonQuantity extends SpeakeasyBase {
-  @Metadata({ data: "json, name=amount" })
+  @SpeakeasyMetadata({ data: "json, name=amount" })
   amount: number;
 
-  @Metadata({ data: "json, name=unit" })
+  @SpeakeasyMetadata({ data: "json, name=unit" })
   unit: UpdateInventoryForAnItem200ApplicationJsonQuantityUnitEnum;
 }
 
 
 export class UpdateInventoryForAnItem200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=quantity" })
+  @SpeakeasyMetadata({ data: "json, name=quantity" })
   quantity: UpdateInventoryForAnItem200ApplicationJsonQuantity;
 
-  @Metadata({ data: "json, name=sku" })
+  @SpeakeasyMetadata({ data: "json, name=sku" })
   sku: string;
 }
 
 
+export class UpdateInventoryForAnItemRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  queryParams: UpdateInventoryForAnItemQueryParams;
+
+  @SpeakeasyMetadata()
+  headers: UpdateInventoryForAnItemHeaders;
+
+  @SpeakeasyMetadata()
+  request: UpdateInventoryForAnItemRequests;
+}
+
+
 export class UpdateInventoryForAnItemResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   updateInventoryForAnItem200ApplicationJsonObject?: UpdateInventoryForAnItem200ApplicationJson;
 }

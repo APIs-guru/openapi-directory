@@ -22,19 +22,19 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { AlarmModelVersionSummary } from "./alarmmodelversionsummary";
 var ListAlarmModelVersionsResponse = /** @class */ (function (_super) {
     __extends(ListAlarmModelVersionsResponse, _super);
     function ListAlarmModelVersionsResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=alarmModelVersionSummaries", elemType: shared.AlarmModelVersionSummary }),
+        SpeakeasyMetadata({ data: "json, name=alarmModelVersionSummaries", elemType: AlarmModelVersionSummary }),
         __metadata("design:type", Array)
     ], ListAlarmModelVersionsResponse.prototype, "alarmModelVersionSummaries", void 0);
     __decorate([
-        Metadata({ data: "json, name=nextToken" }),
+        SpeakeasyMetadata({ data: "json, name=nextToken" }),
         __metadata("design:type", String)
     ], ListAlarmModelVersionsResponse.prototype, "nextToken", void 0);
     return ListAlarmModelVersionsResponse;

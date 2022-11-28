@@ -10,8 +10,8 @@ class CreateSourceDefinitionRequest:
 
 @dataclass
 class CreateSourceDefinitionResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     invalid_input_exception_info: Optional[shared.InvalidInputExceptionInfo] = field(default=None)
     source_definition_read: Optional[shared.SourceDefinitionRead] = field(default=None)
-    status_code: int = field(default=None)
     

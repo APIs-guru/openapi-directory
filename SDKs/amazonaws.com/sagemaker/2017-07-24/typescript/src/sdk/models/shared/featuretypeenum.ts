@@ -1,7 +1,8 @@
 
 
+
 export enum FeatureTypeEnum {
-    Integral = "Integral"
-,    Fractional = "Fractional"
-,    String = "String"
+    Integral = "Integral",
+    Fractional = "Fractional",
+    String = "String"
 }

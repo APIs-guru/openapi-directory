@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GSuitePrincipal extends SpeakeasyBase {
-  @Metadata({ data: "json, name=gsuiteDomain" })
+  @SpeakeasyMetadata({ data: "json, name=gsuiteDomain" })
   gsuiteDomain?: boolean;
 
-  @Metadata({ data: "json, name=gsuiteGroupEmail" })
+  @SpeakeasyMetadata({ data: "json, name=gsuiteGroupEmail" })
   gsuiteGroupEmail?: string;
 
-  @Metadata({ data: "json, name=gsuiteUserEmail" })
+  @SpeakeasyMetadata({ data: "json, name=gsuiteUserEmail" })
   gsuiteUserEmail?: string;
 }

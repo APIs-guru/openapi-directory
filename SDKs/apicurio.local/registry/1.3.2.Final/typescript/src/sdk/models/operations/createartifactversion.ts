@@ -1,55 +1,56 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class CreateArtifactVersionPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=artifactId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=artifactId" })
   artifactId: string;
 }
 
 export enum CreateArtifactVersionXRegistryArtifactTypeEnum {
-    Avro = "AVRO"
-,    Protobuf = "PROTOBUF"
-,    ProtobufFd = "PROTOBUF_FD"
-,    Json = "JSON"
-,    Openapi = "OPENAPI"
-,    Asyncapi = "ASYNCAPI"
-,    Graphql = "GRAPHQL"
-,    Kconnect = "KCONNECT"
-,    Wsdl = "WSDL"
-,    Xsd = "XSD"
-,    Xml = "XML"
+    Avro = "AVRO",
+    Protobuf = "PROTOBUF",
+    ProtobufFd = "PROTOBUF_FD",
+    Json = "JSON",
+    Openapi = "OPENAPI",
+    Asyncapi = "ASYNCAPI",
+    Graphql = "GRAPHQL",
+    Kconnect = "KCONNECT",
+    Wsdl = "WSDL",
+    Xsd = "XSD",
+    Xml = "XML"
 }
 
 
 export class CreateArtifactVersionHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Registry-ArtifactType" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Registry-ArtifactType" })
   xRegistryArtifactType?: CreateArtifactVersionXRegistryArtifactTypeEnum;
 }
 
 
 export class CreateArtifactVersionRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: CreateArtifactVersionPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: CreateArtifactVersionHeaders;
 
-  @Metadata({ data: "request, media_type=*/*" })
+  @SpeakeasyMetadata({ data: "request, media_type=*/*" })
   request: Uint8Array;
 }
 
 
 export class CreateArtifactVersionResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   error?: shared.Error;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   versionMetaData?: shared.VersionMetaData;
 }

@@ -7,10 +7,6 @@ type AppendChatMessageUsingPostQueryParams struct {
 	Time     *string `queryParam:"style=form,explode=true,name=time"`
 }
 
-type AppendChatMessageUsingPostRequest struct {
-	QueryParams AppendChatMessageUsingPostQueryParams
-}
-
 type AppendChatMessageUsingPost200ApplicationJSON struct {
 	Code    *int64                 `json:"code,omitempty"`
 	Data    map[string]interface{} `json:"data,omitempty"`
@@ -33,6 +29,10 @@ type AppendChatMessageUsingPost500ApplicationJSON struct {
 	Code    *int64                 `json:"code,omitempty"`
 	Data    map[string]interface{} `json:"data,omitempty"`
 	Message *string                `json:"message,omitempty"`
+}
+
+type AppendChatMessageUsingPostRequest struct {
+	QueryParams AppendChatMessageUsingPostQueryParams
 }
 
 type AppendChatMessageUsingPostResponse struct {

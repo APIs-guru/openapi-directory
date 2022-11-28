@@ -1,22 +1,23 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetAbsoluteRedirectNPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=n" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=n" })
   n: number;
 }
 
 
 export class GetAbsoluteRedirectNRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetAbsoluteRedirectNPathParams;
 }
 
 
 export class GetAbsoluteRedirectNResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

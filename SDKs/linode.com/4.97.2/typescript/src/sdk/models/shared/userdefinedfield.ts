@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // UserDefinedField
@@ -7,21 +8,21 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * 
 **/
 export class UserDefinedField extends SpeakeasyBase {
-  @Metadata({ data: "json, name=default" })
+  @SpeakeasyMetadata({ data: "json, name=default" })
   default?: string;
 
-  @Metadata({ data: "json, name=example" })
+  @SpeakeasyMetadata({ data: "json, name=example" })
   example: string;
 
-  @Metadata({ data: "json, name=label" })
+  @SpeakeasyMetadata({ data: "json, name=label" })
   label: string;
 
-  @Metadata({ data: "json, name=manyOf" })
+  @SpeakeasyMetadata({ data: "json, name=manyOf" })
   manyOf?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 
-  @Metadata({ data: "json, name=oneOf" })
+  @SpeakeasyMetadata({ data: "json, name=oneOf" })
   oneOf?: string;
 }

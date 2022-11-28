@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class AccountAccessPermissionEnum(str, Enum):
     READ = "read"
@@ -14,5 +16,9 @@ class AccountAccessPermissionEnum(str, Enum):
 @dataclass_json
 @dataclass
 class AccountAccess:
-    permission: Optional[List[AccountAccessPermissionEnum]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'permission' }})
+    r"""AccountAccess
+    Defines the Google Tag Manager Account access permissions.
+    """
+    
+    permission: Optional[List[AccountAccessPermissionEnum]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('permission') }})
     

@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class MessagesCreateBulkPathParams:
-    log_id: str = field(default=None, metadata={'path_param': { 'field_name': 'logId', 'style': 'simple', 'explode': False }})
+    log_id: str = field(metadata={'path_param': { 'field_name': 'logId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -18,14 +18,14 @@ class MessagesCreateBulkRequests:
 
 @dataclass
 class MessagesCreateBulkRequest:
-    path_params: MessagesCreateBulkPathParams = field(default=None)
+    path_params: MessagesCreateBulkPathParams = field()
     request: Optional[MessagesCreateBulkRequests] = field(default=None)
     
 
 @dataclass
 class MessagesCreateBulkResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     create_bulk_message_results: Optional[List[shared.CreateBulkMessageResult]] = field(default=None)
-    status_code: int = field(default=None)
     

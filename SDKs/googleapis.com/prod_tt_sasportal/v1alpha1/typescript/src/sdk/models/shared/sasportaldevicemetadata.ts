@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SasPortalNrqzValidation } from "./sasportalnrqzvalidation";
+
 
 
 // SasPortalDeviceMetadata
@@ -7,18 +8,37 @@ import { SasPortalNrqzValidation } from "./sasportalnrqzvalidation";
  * Device data overridable by both SAS Portal and registration requests.
 **/
 export class SasPortalDeviceMetadata extends SpeakeasyBase {
-  @Metadata({ data: "json, name=antennaModel" })
+  @SpeakeasyMetadata({ data: "json, name=antennaModel" })
   antennaModel?: string;
 
-  @Metadata({ data: "json, name=commonChannelGroup" })
+  @SpeakeasyMetadata({ data: "json, name=commonChannelGroup" })
   commonChannelGroup?: string;
 
-  @Metadata({ data: "json, name=interferenceCoordinationGroup" })
+  @SpeakeasyMetadata({ data: "json, name=interferenceCoordinationGroup" })
   interferenceCoordinationGroup?: string;
 
-  @Metadata({ data: "json, name=nrqzValidated" })
+  @SpeakeasyMetadata({ data: "json, name=nrqzValidated" })
   nrqzValidated?: boolean;
 
-  @Metadata({ data: "json, name=nrqzValidation" })
+  @SpeakeasyMetadata({ data: "json, name=nrqzValidation" })
+  nrqzValidation?: SasPortalNrqzValidation;
+}
+
+
+// SasPortalDeviceMetadataInput
+/** 
+ * Device data overridable by both SAS Portal and registration requests.
+**/
+export class SasPortalDeviceMetadataInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=antennaModel" })
+  antennaModel?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=commonChannelGroup" })
+  commonChannelGroup?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=interferenceCoordinationGroup" })
+  interferenceCoordinationGroup?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=nrqzValidation" })
   nrqzValidation?: SasPortalNrqzValidation;
 }

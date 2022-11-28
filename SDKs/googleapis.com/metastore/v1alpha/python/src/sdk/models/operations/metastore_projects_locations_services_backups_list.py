@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class MetastoreProjectsLocationsServicesBackupsListPathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -29,20 +30,20 @@ class MetastoreProjectsLocationsServicesBackupsListQueryParams:
 
 @dataclass
 class MetastoreProjectsLocationsServicesBackupsListSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class MetastoreProjectsLocationsServicesBackupsListRequest:
-    path_params: MetastoreProjectsLocationsServicesBackupsListPathParams = field(default=None)
-    query_params: MetastoreProjectsLocationsServicesBackupsListQueryParams = field(default=None)
-    security: MetastoreProjectsLocationsServicesBackupsListSecurity = field(default=None)
+    path_params: MetastoreProjectsLocationsServicesBackupsListPathParams = field()
+    query_params: MetastoreProjectsLocationsServicesBackupsListQueryParams = field()
+    security: MetastoreProjectsLocationsServicesBackupsListSecurity = field()
     
 
 @dataclass
 class MetastoreProjectsLocationsServicesBackupsListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     list_backups_response: Optional[shared.ListBackupsResponse] = field(default=None)
-    status_code: int = field(default=None)
     

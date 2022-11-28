@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SqlInjectionMatchSetSummary } from "./sqlinjectionmatchsetsummary";
+
 
 
 // ListSqlInjectionMatchSetsResponse
@@ -8,9 +8,9 @@ import { SqlInjectionMatchSetSummary } from "./sqlinjectionmatchsetsummary";
  * The response to a <a>ListSqlInjectionMatchSets</a> request.
 **/
 export class ListSqlInjectionMatchSetsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=NextMarker" })
+  @SpeakeasyMetadata({ data: "json, name=NextMarker" })
   nextMarker?: string;
 
-  @Metadata({ data: "json, name=SqlInjectionMatchSets", elemType: shared.SqlInjectionMatchSetSummary })
+  @SpeakeasyMetadata({ data: "json, name=SqlInjectionMatchSets", elemType: SqlInjectionMatchSetSummary })
   sqlInjectionMatchSets?: SqlInjectionMatchSetSummary[];
 }

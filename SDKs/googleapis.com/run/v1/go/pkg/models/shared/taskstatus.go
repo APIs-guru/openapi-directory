@@ -1,5 +1,7 @@
 package shared
 
+// TaskStatus
+// TaskStatus represents the status of a task.
 type TaskStatus struct {
 	CompletionTime     *string                     `json:"completionTime,omitempty"`
 	Conditions         []GoogleCloudRunV1Condition `json:"conditions,omitempty"`

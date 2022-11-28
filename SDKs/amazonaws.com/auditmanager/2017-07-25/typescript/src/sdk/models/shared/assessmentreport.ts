@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AssessmentReportStatusEnum } from "./assessmentreportstatusenum";
+
 
 
 // AssessmentReport
@@ -7,30 +8,30 @@ import { AssessmentReportStatusEnum } from "./assessmentreportstatusenum";
  *  A finalized document generated from an Audit Manager assessment. These reports summarize the relevant evidence collected for your audit, and link to the relevant evidence folders which are named and organized according to the controls specified in your assessment. 
 **/
 export class AssessmentReport extends SpeakeasyBase {
-  @Metadata({ data: "json, name=assessmentId" })
+  @SpeakeasyMetadata({ data: "json, name=assessmentId" })
   assessmentId?: string;
 
-  @Metadata({ data: "json, name=assessmentName" })
+  @SpeakeasyMetadata({ data: "json, name=assessmentName" })
   assessmentName?: string;
 
-  @Metadata({ data: "json, name=author" })
+  @SpeakeasyMetadata({ data: "json, name=author" })
   author?: string;
 
-  @Metadata({ data: "json, name=awsAccountId" })
+  @SpeakeasyMetadata({ data: "json, name=awsAccountId" })
   awsAccountId?: string;
 
-  @Metadata({ data: "json, name=creationTime" })
+  @SpeakeasyMetadata({ data: "json, name=creationTime" })
   creationTime?: Date;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: AssessmentReportStatusEnum;
 }

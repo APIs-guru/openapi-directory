@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var CompanyAlternativeSearchPathParams = /** @class */ (function (_super) {
     __extends(CompanyAlternativeSearchPathParams, _super);
@@ -30,7 +30,7 @@ var CompanyAlternativeSearchPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=country" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=country" }),
         __metadata("design:type", String)
     ], CompanyAlternativeSearchPathParams.prototype, "country", void 0);
     return CompanyAlternativeSearchPathParams;
@@ -42,27 +42,27 @@ var CompanyAlternativeSearchRequestBody = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "form, name=address;" }),
+        SpeakeasyMetadata({ data: "form, name=address;" }),
         __metadata("design:type", String)
     ], CompanyAlternativeSearchRequestBody.prototype, "address", void 0);
     __decorate([
-        Metadata({ data: "form, name=name;" }),
+        SpeakeasyMetadata({ data: "form, name=name;" }),
         __metadata("design:type", String)
     ], CompanyAlternativeSearchRequestBody.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "form, name=number;" }),
+        SpeakeasyMetadata({ data: "form, name=number;" }),
         __metadata("design:type", String)
     ], CompanyAlternativeSearchRequestBody.prototype, "number", void 0);
     __decorate([
-        Metadata({ data: "form, name=phone;" }),
+        SpeakeasyMetadata({ data: "form, name=phone;" }),
         __metadata("design:type", String)
     ], CompanyAlternativeSearchRequestBody.prototype, "phone", void 0);
     __decorate([
-        Metadata({ data: "form, name=url;" }),
+        SpeakeasyMetadata({ data: "form, name=url;" }),
         __metadata("design:type", String)
     ], CompanyAlternativeSearchRequestBody.prototype, "url", void 0);
     __decorate([
-        Metadata({ data: "form, name=vat;" }),
+        SpeakeasyMetadata({ data: "form, name=vat;" }),
         __metadata("design:type", String)
     ], CompanyAlternativeSearchRequestBody.prototype, "vat", void 0);
     return CompanyAlternativeSearchRequestBody;
@@ -74,7 +74,7 @@ var CompanyAlternativeSearchSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeUserKey)
     ], CompanyAlternativeSearchSecurity.prototype, "userKey", void 0);
     return CompanyAlternativeSearchSecurity;
@@ -86,15 +86,15 @@ var CompanyAlternativeSearchRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", CompanyAlternativeSearchPathParams)
     ], CompanyAlternativeSearchRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/x-www-form-urlencoded" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/x-www-form-urlencoded" }),
         __metadata("design:type", CompanyAlternativeSearchRequestBody)
     ], CompanyAlternativeSearchRequest.prototype, "request", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", CompanyAlternativeSearchSecurity)
     ], CompanyAlternativeSearchRequest.prototype, "security", void 0);
     return CompanyAlternativeSearchRequest;
@@ -106,19 +106,19 @@ var CompanyAlternativeSearchResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Array)
     ], CompanyAlternativeSearchResponse.prototype, "companyAlternativeSearch200ApplicationJsonAnies", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], CompanyAlternativeSearchResponse.prototype, "companyAlternativeSearchDefaultApplicationJsonAny", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], CompanyAlternativeSearchResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], CompanyAlternativeSearchResponse.prototype, "statusCode", void 0);
     return CompanyAlternativeSearchResponse;

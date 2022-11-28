@@ -1,34 +1,35 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DeleteProjectUsernameProjectBuildCachePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=project" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=project" })
   project: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=username" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=username" })
   username: string;
 }
 
 
-export class DeleteProjectUsernameProjectBuildCacheRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: DeleteProjectUsernameProjectBuildCachePathParams;
-}
-
-
 export class DeleteProjectUsernameProjectBuildCache200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: string;
 }
 
 
+export class DeleteProjectUsernameProjectBuildCacheRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: DeleteProjectUsernameProjectBuildCachePathParams;
+}
+
+
 export class DeleteProjectUsernameProjectBuildCacheResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   deleteProjectUsernameProjectBuildCache200ApplicationJsonObject?: DeleteProjectUsernameProjectBuildCache200ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

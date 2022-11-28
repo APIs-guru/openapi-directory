@@ -1,31 +1,32 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ResourceGroupViewModel extends SpeakeasyBase {
-  @Metadata({ data: "json, name=bookingNotification" })
+  @SpeakeasyMetadata({ data: "json, name=bookingNotification" })
   bookingNotification?: number;
 
-  @Metadata({ data: "json, name=deletedStatus" })
+  @SpeakeasyMetadata({ data: "json, name=deletedStatus" })
   deletedStatus?: boolean;
 
-  @Metadata({ data: "json, name=deletedTime" })
+  @SpeakeasyMetadata({ data: "json, name=deletedTime" })
   deletedTime?: Date;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=email" })
+  @SpeakeasyMetadata({ data: "json, name=email" })
   email?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=locationId" })
+  @SpeakeasyMetadata({ data: "json, name=locationId" })
   locationId?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=objectName" })
+  @SpeakeasyMetadata({ data: "json, name=objectName" })
   objectName?: string;
 }

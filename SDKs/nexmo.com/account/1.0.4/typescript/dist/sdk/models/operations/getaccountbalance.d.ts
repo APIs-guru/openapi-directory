@@ -1,6 +1,6 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
-export declare const GETACCOUNTBALANCE_SERVERS: string[];
+export declare const GetAccountBalanceServerList: readonly ["https://rest.nexmo.com"];
 export declare class GetAccountBalanceQueryParams extends SpeakeasyBase {
     apiKey: string;
     apiSecret: string;

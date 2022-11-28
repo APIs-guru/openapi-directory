@@ -1,13 +1,19 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import aggregationfunction_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class Metric:
-    aggregation_function: aggregationfunction_enum.AggregationFunctionEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AggregationFunction' }})
-    metric_name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'MetricName' }})
-    namespace: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Namespace' }})
+    r"""Metric
+    A calculation made by contrasting a measure and a dimension from your source data.
+    """
+    
+    aggregation_function: AggregationFunctionEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('AggregationFunction') }})
+    metric_name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('MetricName') }})
+    namespace: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Namespace') }})
     

@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// GatewayRouteRef
+// An object that represents a gateway route returned by a list operation.
 type GatewayRouteRef struct {
 	Arn                string    `json:"arn"`
 	CreatedAt          time.Time `json:"createdAt"`

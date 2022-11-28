@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RevisionLocation } from "./revisionlocation";
+
 
 
 // ListApplicationRevisionsOutput
@@ -8,9 +8,9 @@ import { RevisionLocation } from "./revisionlocation";
  * Represents the output of a <code>ListApplicationRevisions</code> operation.
 **/
 export class ListApplicationRevisionsOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=nextToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=revisions", elemType: shared.RevisionLocation })
+  @SpeakeasyMetadata({ data: "json, name=revisions", elemType: RevisionLocation })
   revisions?: RevisionLocation[];
 }

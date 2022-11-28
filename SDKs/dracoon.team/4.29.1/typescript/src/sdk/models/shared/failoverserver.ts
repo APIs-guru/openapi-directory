@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // FailoverServer
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Failover server information
 **/
 export class FailoverServer extends SpeakeasyBase {
-  @Metadata({ data: "json, name=failoverEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=failoverEnabled" })
   failoverEnabled: boolean;
 
-  @Metadata({ data: "json, name=failoverIpAddress" })
+  @SpeakeasyMetadata({ data: "json, name=failoverIpAddress" })
   failoverIpAddress: string;
 
-  @Metadata({ data: "json, name=failoverPort" })
+  @SpeakeasyMetadata({ data: "json, name=failoverPort" })
   failoverPort: number;
 }

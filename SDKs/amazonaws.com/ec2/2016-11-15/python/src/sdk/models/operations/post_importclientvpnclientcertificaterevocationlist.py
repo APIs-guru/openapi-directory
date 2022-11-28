@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostImportClientVpnClientCertificateRevocationListActionEnum(str, Enum):
     IMPORT_CLIENT_VPN_CLIENT_CERTIFICATE_REVOCATION_LIST = "ImportClientVpnClientCertificateRevocationList"
@@ -10,8 +14,8 @@ class PostImportClientVpnClientCertificateRevocationListVersionEnum(str, Enum):
 
 @dataclass
 class PostImportClientVpnClientCertificateRevocationListQueryParams:
-    action: PostImportClientVpnClientCertificateRevocationListActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostImportClientVpnClientCertificateRevocationListVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostImportClientVpnClientCertificateRevocationListActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostImportClientVpnClientCertificateRevocationListVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostImportClientVpnClientCertificateRevocationListHeaders:
 
 @dataclass
 class PostImportClientVpnClientCertificateRevocationListRequest:
-    query_params: PostImportClientVpnClientCertificateRevocationListQueryParams = field(default=None)
-    headers: PostImportClientVpnClientCertificateRevocationListHeaders = field(default=None)
+    headers: PostImportClientVpnClientCertificateRevocationListHeaders = field()
+    query_params: PostImportClientVpnClientCertificateRevocationListQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostImportClientVpnClientCertificateRevocationListResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

@@ -1,22 +1,22 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
-from typing import Any,List,Optional
+from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class ListDomainDeliverabilityCampaignsPathParams:
-    subscribed_domain: str = field(default=None, metadata={'path_param': { 'field_name': 'SubscribedDomain', 'style': 'simple', 'explode': False }})
+    subscribed_domain: str = field(metadata={'path_param': { 'field_name': 'SubscribedDomain', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class ListDomainDeliverabilityCampaignsQueryParams:
-    end_date: datetime = field(default=None, metadata={'query_param': { 'field_name': 'EndDate', 'style': 'form', 'explode': True }})
+    end_date: datetime = field(metadata={'query_param': { 'field_name': 'EndDate', 'style': 'form', 'explode': True }})
+    start_date: datetime = field(metadata={'query_param': { 'field_name': 'StartDate', 'style': 'form', 'explode': True }})
     next_token: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'NextToken', 'style': 'form', 'explode': True }})
     page_size: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'PageSize', 'style': 'form', 'explode': True }})
-    start_date: datetime = field(default=None, metadata={'query_param': { 'field_name': 'StartDate', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -32,17 +32,17 @@ class ListDomainDeliverabilityCampaignsHeaders:
 
 @dataclass
 class ListDomainDeliverabilityCampaignsRequest:
-    path_params: ListDomainDeliverabilityCampaignsPathParams = field(default=None)
-    query_params: ListDomainDeliverabilityCampaignsQueryParams = field(default=None)
-    headers: ListDomainDeliverabilityCampaignsHeaders = field(default=None)
+    headers: ListDomainDeliverabilityCampaignsHeaders = field()
+    path_params: ListDomainDeliverabilityCampaignsPathParams = field()
+    query_params: ListDomainDeliverabilityCampaignsQueryParams = field()
     
 
 @dataclass
 class ListDomainDeliverabilityCampaignsResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     list_domain_deliverability_campaigns_response: Optional[shared.ListDomainDeliverabilityCampaignsResponse] = field(default=None)
     not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     too_many_requests_exception: Optional[Any] = field(default=None)
     

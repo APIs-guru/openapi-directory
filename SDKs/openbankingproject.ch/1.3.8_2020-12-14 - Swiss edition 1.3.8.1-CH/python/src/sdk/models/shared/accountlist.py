@@ -1,11 +1,17 @@
 from dataclasses import dataclass, field
 from typing import List
 from dataclasses_json import dataclass_json
-from . import accountdetails
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class AccountList:
-    accounts: List[accountdetails.AccountDetails] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'accounts' }})
+    r"""AccountList
+    List of accounts with details.
+    
+    """
+    
+    accounts: List[AccountDetails] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('accounts') }})
     

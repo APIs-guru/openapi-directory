@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Company } from "./company";
+
 
 
 // CustomerListCustomersResponse
@@ -8,9 +8,9 @@ import { Company } from "./company";
  * Response message for listing my customers.
 **/
 export class CustomerListCustomersResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=customers", elemType: shared.Company })
+  @SpeakeasyMetadata({ data: "json, name=customers", elemType: Company })
   customers?: Company[];
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 }

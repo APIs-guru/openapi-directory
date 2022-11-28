@@ -1,8 +1,9 @@
 
 
+
 export enum AuditFrequencyEnum {
-    Daily = "DAILY"
-,    Weekly = "WEEKLY"
-,    Biweekly = "BIWEEKLY"
-,    Monthly = "MONTHLY"
+    Daily = "DAILY",
+    Weekly = "WEEKLY",
+    Biweekly = "BIWEEKLY",
+    Monthly = "MONTHLY"
 }

@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class PutConsumerV1AppointmentsIDReservePathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -23,13 +23,13 @@ class PutConsumerV1AppointmentsIDReserveRequests:
 
 @dataclass
 class PutConsumerV1AppointmentsIDReserveRequest:
-    path_params: PutConsumerV1AppointmentsIDReservePathParams = field(default=None)
-    query_params: PutConsumerV1AppointmentsIDReserveQueryParams = field(default=None)
+    path_params: PutConsumerV1AppointmentsIDReservePathParams = field()
+    query_params: PutConsumerV1AppointmentsIDReserveQueryParams = field()
     request: Optional[PutConsumerV1AppointmentsIDReserveRequests] = field(default=None)
     
 
 @dataclass
 class PutConsumerV1AppointmentsIDReserveResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

@@ -1,5 +1,26 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { GoogleCloudDatacatalogV1SystemTimestampsInput } from "./googleclouddatacatalogv1systemtimestamps";
 import { GoogleCloudDatacatalogV1SystemTimestamps } from "./googleclouddatacatalogv1systemtimestamps";
+
+
+
+// GoogleCloudDatacatalogV1EntryGroupInput
+/** 
+ * Entry group metadata. An `EntryGroup` resource represents a logical grouping of zero or more Data Catalog Entry resources.
+**/
+export class GoogleCloudDatacatalogV1EntryGroupInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=dataCatalogTimestamps" })
+  dataCatalogTimestamps?: GoogleCloudDatacatalogV1SystemTimestampsInput;
+
+  @SpeakeasyMetadata({ data: "json, name=description" })
+  description?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
+  displayName?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=name" })
+  name?: string;
+}
 
 
 // GoogleCloudDatacatalogV1EntryGroup
@@ -7,15 +28,15 @@ import { GoogleCloudDatacatalogV1SystemTimestamps } from "./googleclouddatacatal
  * Entry group metadata. An `EntryGroup` resource represents a logical grouping of zero or more Data Catalog Entry resources.
 **/
 export class GoogleCloudDatacatalogV1EntryGroup extends SpeakeasyBase {
-  @Metadata({ data: "json, name=dataCatalogTimestamps" })
+  @SpeakeasyMetadata({ data: "json, name=dataCatalogTimestamps" })
   dataCatalogTimestamps?: GoogleCloudDatacatalogV1SystemTimestamps;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=displayName" })
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
   displayName?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 }

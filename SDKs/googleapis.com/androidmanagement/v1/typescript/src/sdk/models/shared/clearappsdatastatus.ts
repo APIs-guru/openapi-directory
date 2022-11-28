@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PerAppResult } from "./perappresult";
+
 
 
 // ClearAppsDataStatus
@@ -8,6 +8,6 @@ import { PerAppResult } from "./perappresult";
  * Status of the CLEAR_APP_DATA command to clear the data of specified apps from the device.
 **/
 export class ClearAppsDataStatus extends SpeakeasyBase {
-  @Metadata({ data: "json, name=results", elemType: shared.PerAppResult })
+  @SpeakeasyMetadata({ data: "json, name=results", elemType: PerAppResult })
   results?: Map<string, PerAppResult>;
 }

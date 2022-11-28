@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Acl } from "./acl";
 
 
+
 export class DescribeAcLsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ACLs", elemType: shared.Acl })
+  @SpeakeasyMetadata({ data: "json, name=ACLs", elemType: Acl })
   acLs?: Acl[];
 
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 }

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // IncidentRecordSource
 /**
  * Details about how the incident record was created and when.
@@ -33,19 +33,19 @@ var IncidentRecordSource = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=createdBy" }),
+        SpeakeasyMetadata({ data: "json, name=createdBy" }),
         __metadata("design:type", String)
     ], IncidentRecordSource.prototype, "createdBy", void 0);
     __decorate([
-        Metadata({ data: "json, name=invokedBy" }),
+        SpeakeasyMetadata({ data: "json, name=invokedBy" }),
         __metadata("design:type", String)
     ], IncidentRecordSource.prototype, "invokedBy", void 0);
     __decorate([
-        Metadata({ data: "json, name=resourceArn" }),
+        SpeakeasyMetadata({ data: "json, name=resourceArn" }),
         __metadata("design:type", String)
     ], IncidentRecordSource.prototype, "resourceArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=source" }),
+        SpeakeasyMetadata({ data: "json, name=source" }),
         __metadata("design:type", String)
     ], IncidentRecordSource.prototype, "source", void 0);
     return IncidentRecordSource;

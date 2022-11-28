@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class RegisterSmsRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=smsNumber" })
+  @SpeakeasyMetadata({ data: "json, name=smsNumber" })
   smsNumber: string;
 }

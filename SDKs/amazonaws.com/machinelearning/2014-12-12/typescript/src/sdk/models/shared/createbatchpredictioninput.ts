@@ -1,19 +1,20 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class CreateBatchPredictionInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=BatchPredictionDataSourceId" })
+  @SpeakeasyMetadata({ data: "json, name=BatchPredictionDataSourceId" })
   batchPredictionDataSourceId: string;
 
-  @Metadata({ data: "json, name=BatchPredictionId" })
+  @SpeakeasyMetadata({ data: "json, name=BatchPredictionId" })
   batchPredictionId: string;
 
-  @Metadata({ data: "json, name=BatchPredictionName" })
+  @SpeakeasyMetadata({ data: "json, name=BatchPredictionName" })
   batchPredictionName?: string;
 
-  @Metadata({ data: "json, name=MLModelId" })
+  @SpeakeasyMetadata({ data: "json, name=MLModelId" })
   mlModelId: string;
 
-  @Metadata({ data: "json, name=OutputUri" })
+  @SpeakeasyMetadata({ data: "json, name=OutputUri" })
   outputUri: string;
 }

@@ -1,22 +1,23 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class RewindTimeSeriesResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=customerError" })
+  @SpeakeasyMetadata({ data: "json, name=customerError" })
   customerError?: number;
 
-  @Metadata({ data: "json, name=errorDiff" })
+  @SpeakeasyMetadata({ data: "json, name=errorDiff" })
   errorDiff?: number;
 
-  @Metadata({ data: "json, name=icueError" })
+  @SpeakeasyMetadata({ data: "json, name=icueError" })
   icueError?: number;
 
-  @Metadata({ data: "json, name=timeSeries" })
+  @SpeakeasyMetadata({ data: "json, name=timeSeries" })
   timeSeries?: string;
 
-  @Metadata({ data: "json, name=totalCost" })
+  @SpeakeasyMetadata({ data: "json, name=totalCost" })
   totalCost?: number;
 
-  @Metadata({ data: "json, name=useIcue" })
+  @SpeakeasyMetadata({ data: "json, name=useIcue" })
   useIcue?: boolean;
 }

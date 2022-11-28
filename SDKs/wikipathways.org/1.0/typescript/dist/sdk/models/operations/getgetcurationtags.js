@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var GetGetCurationTagsFormatEnum;
 (function (GetGetCurationTagsFormatEnum) {
     GetGetCurationTagsFormatEnum["Json"] = "json";
@@ -38,11 +38,11 @@ var GetGetCurationTagsQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=format" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=format" }),
         __metadata("design:type", String)
     ], GetGetCurationTagsQueryParams.prototype, "format", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=pwId" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=pwId" }),
         __metadata("design:type", String)
     ], GetGetCurationTagsQueryParams.prototype, "pwId", void 0);
     return GetGetCurationTagsQueryParams;
@@ -54,7 +54,7 @@ var GetGetCurationTagsRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetGetCurationTagsQueryParams)
     ], GetGetCurationTagsRequest.prototype, "queryParams", void 0);
     return GetGetCurationTagsRequest;
@@ -66,11 +66,11 @@ var GetGetCurationTagsResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetGetCurationTagsResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetGetCurationTagsResponse.prototype, "statusCode", void 0);
     return GetGetCurationTagsResponse;

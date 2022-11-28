@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DialogflowProjectsLocationsAgentsFlowsTransitionRouteGroupsListPathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -28,14 +29,14 @@ class DialogflowProjectsLocationsAgentsFlowsTransitionRouteGroupsListQueryParams
 
 @dataclass
 class DialogflowProjectsLocationsAgentsFlowsTransitionRouteGroupsListSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DialogflowProjectsLocationsAgentsFlowsTransitionRouteGroupsListSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -46,14 +47,14 @@ class DialogflowProjectsLocationsAgentsFlowsTransitionRouteGroupsListSecurity:
 
 @dataclass
 class DialogflowProjectsLocationsAgentsFlowsTransitionRouteGroupsListRequest:
-    path_params: DialogflowProjectsLocationsAgentsFlowsTransitionRouteGroupsListPathParams = field(default=None)
-    query_params: DialogflowProjectsLocationsAgentsFlowsTransitionRouteGroupsListQueryParams = field(default=None)
-    security: DialogflowProjectsLocationsAgentsFlowsTransitionRouteGroupsListSecurity = field(default=None)
+    path_params: DialogflowProjectsLocationsAgentsFlowsTransitionRouteGroupsListPathParams = field()
+    query_params: DialogflowProjectsLocationsAgentsFlowsTransitionRouteGroupsListQueryParams = field()
+    security: DialogflowProjectsLocationsAgentsFlowsTransitionRouteGroupsListSecurity = field()
     
 
 @dataclass
 class DialogflowProjectsLocationsAgentsFlowsTransitionRouteGroupsListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_cloud_dialogflow_cx_v3beta1_list_transition_route_groups_response: Optional[shared.GoogleCloudDialogflowCxV3beta1ListTransitionRouteGroupsResponse] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostUpdateApplicationVersionActionEnum(str, Enum):
     UPDATE_APPLICATION_VERSION = "UpdateApplicationVersion"
@@ -10,8 +14,8 @@ class PostUpdateApplicationVersionVersionEnum(str, Enum):
 
 @dataclass
 class PostUpdateApplicationVersionQueryParams:
-    action: PostUpdateApplicationVersionActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostUpdateApplicationVersionVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostUpdateApplicationVersionActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostUpdateApplicationVersionVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostUpdateApplicationVersionHeaders:
 
 @dataclass
 class PostUpdateApplicationVersionRequest:
-    query_params: PostUpdateApplicationVersionQueryParams = field(default=None)
-    headers: PostUpdateApplicationVersionHeaders = field(default=None)
+    headers: PostUpdateApplicationVersionHeaders = field()
+    query_params: PostUpdateApplicationVersionQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostUpdateApplicationVersionResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

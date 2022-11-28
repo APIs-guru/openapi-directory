@@ -1,10 +1,13 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 
 
 @dataclass
 class DeleteMountTargetPathParams:
-    mount_target_id: str = field(default=None, metadata={'path_param': { 'field_name': 'MountTargetId', 'style': 'simple', 'explode': False }})
+    mount_target_id: str = field(metadata={'path_param': { 'field_name': 'MountTargetId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -20,16 +23,16 @@ class DeleteMountTargetHeaders:
 
 @dataclass
 class DeleteMountTargetRequest:
-    path_params: DeleteMountTargetPathParams = field(default=None)
-    headers: DeleteMountTargetHeaders = field(default=None)
+    headers: DeleteMountTargetHeaders = field()
+    path_params: DeleteMountTargetPathParams = field()
     
 
 @dataclass
 class DeleteMountTargetResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     dependency_timeout: Optional[Any] = field(default=None)
     internal_server_error: Optional[Any] = field(default=None)
     mount_target_not_found: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -11,19 +11,19 @@ class EnterpriseAdminListGlobalWebhooksQueryParams:
 
 @dataclass
 class EnterpriseAdminListGlobalWebhooksHeaders:
-    accept: str = field(default=None, metadata={'header': { 'field_name': 'accept', 'style': 'simple', 'explode': False }})
+    accept: str = field(metadata={'header': { 'field_name': 'accept', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class EnterpriseAdminListGlobalWebhooksRequest:
-    query_params: EnterpriseAdminListGlobalWebhooksQueryParams = field(default=None)
-    headers: EnterpriseAdminListGlobalWebhooksHeaders = field(default=None)
+    headers: EnterpriseAdminListGlobalWebhooksHeaders = field()
+    query_params: EnterpriseAdminListGlobalWebhooksQueryParams = field()
     
 
 @dataclass
 class EnterpriseAdminListGlobalWebhooksResponse:
-    content_type: str = field(default=None)
-    headers: dict[str, List[str]] = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    headers: dict[str, List[str]] = field()
+    status_code: int = field()
     global_hooks: Optional[List[shared.GlobalHook]] = field(default=None)
     

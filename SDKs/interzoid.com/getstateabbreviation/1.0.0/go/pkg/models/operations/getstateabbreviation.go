@@ -5,15 +5,15 @@ type GetstateabbreviationQueryParams struct {
 	State   string `queryParam:"style=form,explode=true,name=state"`
 }
 
-type GetstateabbreviationRequest struct {
-	QueryParams GetstateabbreviationQueryParams
-}
-
 type Getstateabbreviation200ApplicationJSON struct {
 	Abbreviation *string `json:"Abbreviation,omitempty"`
 	Code         *string `json:"Code,omitempty"`
 	Credits      *string `json:"Credits,omitempty"`
 	State        *string `json:"State,omitempty"`
+}
+
+type GetstateabbreviationRequest struct {
+	QueryParams GetstateabbreviationQueryParams
 }
 
 type GetstateabbreviationResponse struct {

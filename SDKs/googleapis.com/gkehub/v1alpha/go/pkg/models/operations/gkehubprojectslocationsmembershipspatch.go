@@ -32,7 +32,7 @@ type GkehubProjectsLocationsMembershipsPatchSecurity struct {
 type GkehubProjectsLocationsMembershipsPatchRequest struct {
 	PathParams  GkehubProjectsLocationsMembershipsPatchPathParams
 	QueryParams GkehubProjectsLocationsMembershipsPatchQueryParams
-	Request     *shared.Membership `request:"mediaType=application/json"`
+	Request     *shared.MembershipInput `request:"mediaType=application/json"`
 	Security    GkehubProjectsLocationsMembershipsPatchSecurity
 }
 

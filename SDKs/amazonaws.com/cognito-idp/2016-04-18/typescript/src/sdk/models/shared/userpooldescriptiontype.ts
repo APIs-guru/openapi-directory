@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { LambdaConfigType } from "./lambdaconfigtype";
 import { StatusTypeEnum } from "./statustypeenum";
+
 
 
 // UserPoolDescriptionType
@@ -8,21 +9,21 @@ import { StatusTypeEnum } from "./statustypeenum";
  * A user pool description.
 **/
 export class UserPoolDescriptionType extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CreationDate" })
+  @SpeakeasyMetadata({ data: "json, name=CreationDate" })
   creationDate?: Date;
 
-  @Metadata({ data: "json, name=Id" })
+  @SpeakeasyMetadata({ data: "json, name=Id" })
   id?: string;
 
-  @Metadata({ data: "json, name=LambdaConfig" })
+  @SpeakeasyMetadata({ data: "json, name=LambdaConfig" })
   lambdaConfig?: LambdaConfigType;
 
-  @Metadata({ data: "json, name=LastModifiedDate" })
+  @SpeakeasyMetadata({ data: "json, name=LastModifiedDate" })
   lastModifiedDate?: Date;
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name?: string;
 
-  @Metadata({ data: "json, name=Status" })
+  @SpeakeasyMetadata({ data: "json, name=Status" })
   status?: StatusTypeEnum;
 }

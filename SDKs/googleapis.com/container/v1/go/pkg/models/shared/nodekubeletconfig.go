@@ -1,5 +1,7 @@
 package shared
 
+// NodeKubeletConfig
+// Node kubelet configs.
 type NodeKubeletConfig struct {
 	CPUCfsQuota       *bool   `json:"cpuCfsQuota,omitempty"`
 	CPUCfsQuotaPeriod *string `json:"cpuCfsQuotaPeriod,omitempty"`

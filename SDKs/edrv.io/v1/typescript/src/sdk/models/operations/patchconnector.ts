@@ -1,61 +1,62 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class PatchConnectorPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" })
   id: string;
 }
 
 
 export class PatchConnectorRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=chargestation" })
+  @SpeakeasyMetadata({ data: "json, name=chargestation" })
   chargestation?: string;
 
-  @Metadata({ data: "json, name=format" })
+  @SpeakeasyMetadata({ data: "json, name=format" })
   format?: string;
 
-  @Metadata({ data: "json, name=power" })
+  @SpeakeasyMetadata({ data: "json, name=power" })
   power?: number;
 
-  @Metadata({ data: "json, name=power_type" })
+  @SpeakeasyMetadata({ data: "json, name=power_type" })
   powerType?: string;
 
-  @Metadata({ data: "json, name=rate" })
+  @SpeakeasyMetadata({ data: "json, name=rate" })
   rate?: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: string;
 }
 
 
-export class PatchConnectorRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: PatchConnectorPathParams;
-
-  @Metadata({ data: "request, media_type=application/json" })
-  request: PatchConnectorRequestBody;
-}
-
-
 export class PatchConnector201ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 
-  @Metadata({ data: "json, name=ok" })
+  @SpeakeasyMetadata({ data: "json, name=ok" })
   ok?: boolean;
 
-  @Metadata({ data: "json, name=result" })
+  @SpeakeasyMetadata({ data: "json, name=result" })
   result?: Map<string, any>;
 }
 
 
+export class PatchConnectorRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: PatchConnectorPathParams;
+
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request: PatchConnectorRequestBody;
+}
+
+
 export class PatchConnectorResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   patchConnector201ApplicationJsonObject?: PatchConnector201ApplicationJson;
 }

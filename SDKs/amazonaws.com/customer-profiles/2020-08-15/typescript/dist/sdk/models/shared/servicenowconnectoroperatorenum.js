@@ -1,0 +1,24 @@
+export var ServiceNowConnectorOperatorEnum;
+(function (ServiceNowConnectorOperatorEnum) {
+    ServiceNowConnectorOperatorEnum["Projection"] = "PROJECTION";
+    ServiceNowConnectorOperatorEnum["Contains"] = "CONTAINS";
+    ServiceNowConnectorOperatorEnum["LessThan"] = "LESS_THAN";
+    ServiceNowConnectorOperatorEnum["GreaterThan"] = "GREATER_THAN";
+    ServiceNowConnectorOperatorEnum["Between"] = "BETWEEN";
+    ServiceNowConnectorOperatorEnum["LessThanOrEqualTo"] = "LESS_THAN_OR_EQUAL_TO";
+    ServiceNowConnectorOperatorEnum["GreaterThanOrEqualTo"] = "GREATER_THAN_OR_EQUAL_TO";
+    ServiceNowConnectorOperatorEnum["EqualTo"] = "EQUAL_TO";
+    ServiceNowConnectorOperatorEnum["NotEqualTo"] = "NOT_EQUAL_TO";
+    ServiceNowConnectorOperatorEnum["Addition"] = "ADDITION";
+    ServiceNowConnectorOperatorEnum["Multiplication"] = "MULTIPLICATION";
+    ServiceNowConnectorOperatorEnum["Division"] = "DIVISION";
+    ServiceNowConnectorOperatorEnum["Subtraction"] = "SUBTRACTION";
+    ServiceNowConnectorOperatorEnum["MaskAll"] = "MASK_ALL";
+    ServiceNowConnectorOperatorEnum["MaskFirstN"] = "MASK_FIRST_N";
+    ServiceNowConnectorOperatorEnum["MaskLastN"] = "MASK_LAST_N";
+    ServiceNowConnectorOperatorEnum["ValidateNonNull"] = "VALIDATE_NON_NULL";
+    ServiceNowConnectorOperatorEnum["ValidateNonZero"] = "VALIDATE_NON_ZERO";
+    ServiceNowConnectorOperatorEnum["ValidateNonNegative"] = "VALIDATE_NON_NEGATIVE";
+    ServiceNowConnectorOperatorEnum["ValidateNumeric"] = "VALIDATE_NUMERIC";
+    ServiceNowConnectorOperatorEnum["NoOp"] = "NO_OP";
+})(ServiceNowConnectorOperatorEnum || (ServiceNowConnectorOperatorEnum = {}));

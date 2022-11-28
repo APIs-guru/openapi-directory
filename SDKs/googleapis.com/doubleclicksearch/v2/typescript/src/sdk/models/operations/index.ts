@@ -1,3 +1,5 @@
+export * from "./doubleclicksearchconversionget";
+export * from "./doubleclicksearchconversiongetbycustomerid";
 export * from "./doubleclicksearchconversioninsert";
 export * from "./doubleclicksearchconversionupdate";
 export * from "./doubleclicksearchconversionupdateavailability";

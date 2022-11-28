@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ComparatorEnum } from "./comparatorenum";
+
 
 
 // PropertyPredicate
@@ -7,12 +8,12 @@ import { ComparatorEnum } from "./comparatorenum";
  * Defines a property predicate.
 **/
 export class PropertyPredicate extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Comparator" })
+  @SpeakeasyMetadata({ data: "json, name=Comparator" })
   comparator?: ComparatorEnum;
 
-  @Metadata({ data: "json, name=Key" })
+  @SpeakeasyMetadata({ data: "json, name=Key" })
   key?: string;
 
-  @Metadata({ data: "json, name=Value" })
+  @SpeakeasyMetadata({ data: "json, name=Value" })
   value?: string;
 }

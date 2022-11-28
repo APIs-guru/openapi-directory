@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // LifecyclePolicyPreviewSummary
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The summary of the lifecycle policy preview request.
 **/
 export class LifecyclePolicyPreviewSummary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=expiringImageTotalCount" })
+  @SpeakeasyMetadata({ data: "json, name=expiringImageTotalCount" })
   expiringImageTotalCount?: number;
 }

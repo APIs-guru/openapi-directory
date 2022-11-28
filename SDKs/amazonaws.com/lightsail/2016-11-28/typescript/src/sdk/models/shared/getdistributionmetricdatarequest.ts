@@ -1,28 +1,29 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DistributionMetricNameEnum } from "./distributionmetricnameenum";
 import { MetricStatisticEnum } from "./metricstatisticenum";
 import { MetricUnitEnum } from "./metricunitenum";
 
 
+
 export class GetDistributionMetricDataRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=distributionName" })
+  @SpeakeasyMetadata({ data: "json, name=distributionName" })
   distributionName: string;
 
-  @Metadata({ data: "json, name=endTime" })
+  @SpeakeasyMetadata({ data: "json, name=endTime" })
   endTime: Date;
 
-  @Metadata({ data: "json, name=metricName" })
+  @SpeakeasyMetadata({ data: "json, name=metricName" })
   metricName: DistributionMetricNameEnum;
 
-  @Metadata({ data: "json, name=period" })
+  @SpeakeasyMetadata({ data: "json, name=period" })
   period: number;
 
-  @Metadata({ data: "json, name=startTime" })
+  @SpeakeasyMetadata({ data: "json, name=startTime" })
   startTime: Date;
 
-  @Metadata({ data: "json, name=statistics" })
+  @SpeakeasyMetadata({ data: "json, name=statistics" })
   statistics: MetricStatisticEnum[];
 
-  @Metadata({ data: "json, name=unit" })
+  @SpeakeasyMetadata({ data: "json, name=unit" })
   unit: MetricUnitEnum;
 }

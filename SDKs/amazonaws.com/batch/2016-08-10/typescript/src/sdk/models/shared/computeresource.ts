@@ -1,9 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CrAllocationStrategyEnum } from "./crallocationstrategyenum";
 import { Ec2Configuration } from "./ec2configuration";
 import { LaunchTemplateSpecification } from "./launchtemplatespecification";
 import { CrTypeEnum } from "./crtypeenum";
+
 
 
 // ComputeResource
@@ -11,54 +11,54 @@ import { CrTypeEnum } from "./crtypeenum";
  * An object representing an Batch compute resource. For more information, see <a href="https://docs.aws.amazon.com/batch/latest/userguide/compute_environments.html">Compute Environments</a> in the <i>Batch User Guide</i>.
 **/
 export class ComputeResource extends SpeakeasyBase {
-  @Metadata({ data: "json, name=allocationStrategy" })
+  @SpeakeasyMetadata({ data: "json, name=allocationStrategy" })
   allocationStrategy?: CrAllocationStrategyEnum;
 
-  @Metadata({ data: "json, name=bidPercentage" })
+  @SpeakeasyMetadata({ data: "json, name=bidPercentage" })
   bidPercentage?: number;
 
-  @Metadata({ data: "json, name=desiredvCpus" })
+  @SpeakeasyMetadata({ data: "json, name=desiredvCpus" })
   desiredvCpus?: number;
 
-  @Metadata({ data: "json, name=ec2Configuration", elemType: shared.Ec2Configuration })
+  @SpeakeasyMetadata({ data: "json, name=ec2Configuration", elemType: Ec2Configuration })
   ec2Configuration?: Ec2Configuration[];
 
-  @Metadata({ data: "json, name=ec2KeyPair" })
+  @SpeakeasyMetadata({ data: "json, name=ec2KeyPair" })
   ec2KeyPair?: string;
 
-  @Metadata({ data: "json, name=imageId" })
+  @SpeakeasyMetadata({ data: "json, name=imageId" })
   imageId?: string;
 
-  @Metadata({ data: "json, name=instanceRole" })
+  @SpeakeasyMetadata({ data: "json, name=instanceRole" })
   instanceRole?: string;
 
-  @Metadata({ data: "json, name=instanceTypes" })
+  @SpeakeasyMetadata({ data: "json, name=instanceTypes" })
   instanceTypes?: string[];
 
-  @Metadata({ data: "json, name=launchTemplate" })
+  @SpeakeasyMetadata({ data: "json, name=launchTemplate" })
   launchTemplate?: LaunchTemplateSpecification;
 
-  @Metadata({ data: "json, name=maxvCpus" })
+  @SpeakeasyMetadata({ data: "json, name=maxvCpus" })
   maxvCpus: number;
 
-  @Metadata({ data: "json, name=minvCpus" })
+  @SpeakeasyMetadata({ data: "json, name=minvCpus" })
   minvCpus?: number;
 
-  @Metadata({ data: "json, name=placementGroup" })
+  @SpeakeasyMetadata({ data: "json, name=placementGroup" })
   placementGroup?: string;
 
-  @Metadata({ data: "json, name=securityGroupIds" })
+  @SpeakeasyMetadata({ data: "json, name=securityGroupIds" })
   securityGroupIds?: string[];
 
-  @Metadata({ data: "json, name=spotIamFleetRole" })
+  @SpeakeasyMetadata({ data: "json, name=spotIamFleetRole" })
   spotIamFleetRole?: string;
 
-  @Metadata({ data: "json, name=subnets" })
+  @SpeakeasyMetadata({ data: "json, name=subnets" })
   subnets: string[];
 
-  @Metadata({ data: "json, name=tags" })
+  @SpeakeasyMetadata({ data: "json, name=tags" })
   tags?: Map<string, string>;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type: CrTypeEnum;
 }

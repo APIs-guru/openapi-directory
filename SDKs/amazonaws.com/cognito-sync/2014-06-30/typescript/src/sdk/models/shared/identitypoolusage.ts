@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // IdentityPoolUsage
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Usage information for the identity pool.
 **/
 export class IdentityPoolUsage extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DataStorage" })
+  @SpeakeasyMetadata({ data: "json, name=DataStorage" })
   dataStorage?: number;
 
-  @Metadata({ data: "json, name=IdentityPoolId" })
+  @SpeakeasyMetadata({ data: "json, name=IdentityPoolId" })
   identityPoolId?: string;
 
-  @Metadata({ data: "json, name=LastModifiedDate" })
+  @SpeakeasyMetadata({ data: "json, name=LastModifiedDate" })
   lastModifiedDate?: Date;
 
-  @Metadata({ data: "json, name=SyncSessionsCount" })
+  @SpeakeasyMetadata({ data: "json, name=SyncSessionsCount" })
   syncSessionsCount?: number;
 }

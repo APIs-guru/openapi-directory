@@ -1,12 +1,16 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
 @dataclass
 class UpdateBackendConfigPathParams:
-    app_id: str = field(default=None, metadata={'path_param': { 'field_name': 'appId', 'style': 'simple', 'explode': False }})
+    app_id: str = field(metadata={'path_param': { 'field_name': 'appId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -23,32 +27,36 @@ class UpdateBackendConfigHeaders:
 @dataclass_json
 @dataclass
 class UpdateBackendConfigRequestBodyLoginAuthConfig:
-    aws_cognito_identity_pool_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AwsCognitoIdentityPoolId' }})
-    aws_cognito_region: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AwsCognitoRegion' }})
-    aws_user_pools_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AwsUserPoolsId' }})
-    aws_user_pools_web_client_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AwsUserPoolsWebClientId' }})
+    r"""UpdateBackendConfigRequestBodyLoginAuthConfig
+    The request object for this operation.
+    """
+    
+    aws_cognito_identity_pool_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('AwsCognitoIdentityPoolId') }})
+    aws_cognito_region: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('AwsCognitoRegion') }})
+    aws_user_pools_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('AwsUserPoolsId') }})
+    aws_user_pools_web_client_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('AwsUserPoolsWebClientId') }})
     
 
 @dataclass_json
 @dataclass
 class UpdateBackendConfigRequestBody:
-    login_auth_config: Optional[UpdateBackendConfigRequestBodyLoginAuthConfig] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'loginAuthConfig' }})
+    login_auth_config: Optional[UpdateBackendConfigRequestBodyLoginAuthConfig] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('loginAuthConfig') }})
     
 
 @dataclass
 class UpdateBackendConfigRequest:
-    path_params: UpdateBackendConfigPathParams = field(default=None)
-    headers: UpdateBackendConfigHeaders = field(default=None)
-    request: UpdateBackendConfigRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: UpdateBackendConfigHeaders = field()
+    path_params: UpdateBackendConfigPathParams = field()
+    request: UpdateBackendConfigRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class UpdateBackendConfigResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     gateway_timeout_exception: Optional[Any] = field(default=None)
     not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     too_many_requests_exception: Optional[Any] = field(default=None)
     update_backend_config_response: Optional[shared.UpdateBackendConfigResponse] = field(default=None)
     

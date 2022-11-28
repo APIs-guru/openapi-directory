@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ValidationAuthority
@@ -6,42 +7,42 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Settings to access a validation authority server
 **/
 export class ValidationAuthority extends SpeakeasyBase {
-  @Metadata({ data: "json, name=alwaysValid" })
+  @SpeakeasyMetadata({ data: "json, name=alwaysValid" })
   alwaysValid: boolean;
 
-  @Metadata({ data: "json, name=badTtl" })
+  @SpeakeasyMetadata({ data: "json, name=badTtl" })
   badTtl: number;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description: string;
 
-  @Metadata({ data: "json, name=goodTtl" })
+  @SpeakeasyMetadata({ data: "json, name=goodTtl" })
   goodTtl: number;
 
-  @Metadata({ data: "json, name=headers" })
+  @SpeakeasyMetadata({ data: "json, name=headers" })
   headers: Map<string, string>;
 
-  @Metadata({ data: "json, name=host" })
+  @SpeakeasyMetadata({ data: "json, name=host" })
   host: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: string;
 
-  @Metadata({ data: "json, name=method" })
+  @SpeakeasyMetadata({ data: "json, name=method" })
   method: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 
-  @Metadata({ data: "json, name=noCache" })
+  @SpeakeasyMetadata({ data: "json, name=noCache" })
   noCache: boolean;
 
-  @Metadata({ data: "json, name=path" })
+  @SpeakeasyMetadata({ data: "json, name=path" })
   path: string;
 
-  @Metadata({ data: "json, name=timeout" })
+  @SpeakeasyMetadata({ data: "json, name=timeout" })
   timeout: number;
 
-  @Metadata({ data: "json, name=url" })
+  @SpeakeasyMetadata({ data: "json, name=url" })
   url: string;
 }

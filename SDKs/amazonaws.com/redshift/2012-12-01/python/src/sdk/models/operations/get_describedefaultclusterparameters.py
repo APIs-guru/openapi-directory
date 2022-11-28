@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetDescribeDefaultClusterParametersActionEnum(str, Enum):
     DESCRIBE_DEFAULT_CLUSTER_PARAMETERS = "DescribeDefaultClusterParameters"
@@ -10,11 +14,11 @@ class GetDescribeDefaultClusterParametersVersionEnum(str, Enum):
 
 @dataclass
 class GetDescribeDefaultClusterParametersQueryParams:
-    action: GetDescribeDefaultClusterParametersActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetDescribeDefaultClusterParametersActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    parameter_group_family: str = field(metadata={'query_param': { 'field_name': 'ParameterGroupFamily', 'style': 'form', 'explode': True }})
+    version: GetDescribeDefaultClusterParametersVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     marker: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'Marker', 'style': 'form', 'explode': True }})
     max_records: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'MaxRecords', 'style': 'form', 'explode': True }})
-    parameter_group_family: str = field(default=None, metadata={'query_param': { 'field_name': 'ParameterGroupFamily', 'style': 'form', 'explode': True }})
-    version: GetDescribeDefaultClusterParametersVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -30,13 +34,13 @@ class GetDescribeDefaultClusterParametersHeaders:
 
 @dataclass
 class GetDescribeDefaultClusterParametersRequest:
-    query_params: GetDescribeDefaultClusterParametersQueryParams = field(default=None)
-    headers: GetDescribeDefaultClusterParametersHeaders = field(default=None)
+    headers: GetDescribeDefaultClusterParametersHeaders = field()
+    query_params: GetDescribeDefaultClusterParametersQueryParams = field()
     
 
 @dataclass
 class GetDescribeDefaultClusterParametersResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

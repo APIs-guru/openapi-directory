@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
-from typing import List,Optional
+from typing import Optional
 from dataclasses_json import dataclass_json
-from . import marketingrecommendation
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ListingRecommendation:
-    listing_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'listingId' }})
-    marketing: Optional[marketingrecommendation.MarketingRecommendation] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'marketing' }})
+    r"""ListingRecommendation
+    A complex type that contains the ID of an actively listed item and a set of related listing recommendations. The recommendations contain information the seller can use to optimize their listing configurations.
+    """
+    
+    listing_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('listingId') }})
+    marketing: Optional[MarketingRecommendation] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('marketing') }})
     

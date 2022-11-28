@@ -1,15 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RxNormEntity } from "./rxnormentity";
 
 
+
 export class InferRxNormResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Entities", elemType: shared.RxNormEntity })
+  @SpeakeasyMetadata({ data: "json, name=Entities", elemType: RxNormEntity })
   entities: RxNormEntity[];
 
-  @Metadata({ data: "json, name=ModelVersion" })
+  @SpeakeasyMetadata({ data: "json, name=ModelVersion" })
   modelVersion?: string;
 
-  @Metadata({ data: "json, name=PaginationToken" })
+  @SpeakeasyMetadata({ data: "json, name=PaginationToken" })
   paginationToken?: string;
 }

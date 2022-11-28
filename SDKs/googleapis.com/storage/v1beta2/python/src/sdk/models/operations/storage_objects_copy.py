@@ -1,14 +1,15 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class StorageObjectsCopyPathParams:
-    destination_bucket: str = field(default=None, metadata={'path_param': { 'field_name': 'destinationBucket', 'style': 'simple', 'explode': False }})
-    destination_object: str = field(default=None, metadata={'path_param': { 'field_name': 'destinationObject', 'style': 'simple', 'explode': False }})
-    source_bucket: str = field(default=None, metadata={'path_param': { 'field_name': 'sourceBucket', 'style': 'simple', 'explode': False }})
-    source_object: str = field(default=None, metadata={'path_param': { 'field_name': 'sourceObject', 'style': 'simple', 'explode': False }})
+    destination_bucket: str = field(metadata={'path_param': { 'field_name': 'destinationBucket', 'style': 'simple', 'explode': False }})
+    destination_object: str = field(metadata={'path_param': { 'field_name': 'destinationObject', 'style': 'simple', 'explode': False }})
+    source_bucket: str = field(metadata={'path_param': { 'field_name': 'sourceBucket', 'style': 'simple', 'explode': False }})
+    source_object: str = field(metadata={'path_param': { 'field_name': 'sourceObject', 'style': 'simple', 'explode': False }})
     
 class StorageObjectsCopyProjectionEnum(str, Enum):
     FULL = "full"
@@ -38,14 +39,14 @@ class StorageObjectsCopyQueryParams:
 
 @dataclass
 class StorageObjectsCopySecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class StorageObjectsCopySecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -56,15 +57,15 @@ class StorageObjectsCopySecurity:
 
 @dataclass
 class StorageObjectsCopyRequest:
-    path_params: StorageObjectsCopyPathParams = field(default=None)
-    query_params: StorageObjectsCopyQueryParams = field(default=None)
+    path_params: StorageObjectsCopyPathParams = field()
+    query_params: StorageObjectsCopyQueryParams = field()
+    security: StorageObjectsCopySecurity = field()
     request: Optional[shared.Object] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: StorageObjectsCopySecurity = field(default=None)
     
 
 @dataclass
 class StorageObjectsCopyResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     object: Optional[shared.Object] = field(default=None)
-    status_code: int = field(default=None)
     

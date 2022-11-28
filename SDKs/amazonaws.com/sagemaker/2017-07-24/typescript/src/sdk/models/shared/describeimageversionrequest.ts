@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DescribeImageVersionRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ImageName" })
+  @SpeakeasyMetadata({ data: "json, name=ImageName" })
   imageName: string;
 
-  @Metadata({ data: "json, name=Version" })
+  @SpeakeasyMetadata({ data: "json, name=Version" })
   version?: number;
 }

@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { App } from "./app";
+
 
 
 // AppsListDataSummary
@@ -8,15 +8,15 @@ import { App } from "./app";
  * Details of the Firewall Manager applications list.
 **/
 export class AppsListDataSummary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AppsList", elemType: shared.App })
+  @SpeakeasyMetadata({ data: "json, name=AppsList", elemType: App })
   appsList?: App[];
 
-  @Metadata({ data: "json, name=ListArn" })
+  @SpeakeasyMetadata({ data: "json, name=ListArn" })
   listArn?: string;
 
-  @Metadata({ data: "json, name=ListId" })
+  @SpeakeasyMetadata({ data: "json, name=ListId" })
   listId?: string;
 
-  @Metadata({ data: "json, name=ListName" })
+  @SpeakeasyMetadata({ data: "json, name=ListName" })
   listName?: string;
 }

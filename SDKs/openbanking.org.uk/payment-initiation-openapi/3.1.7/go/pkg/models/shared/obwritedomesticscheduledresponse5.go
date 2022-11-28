@@ -4,12 +4,16 @@ import (
 	"time"
 )
 
+// ObWriteDomesticScheduledResponse5DataCharges
+// Set of elements used to provide details of a charge for the payment initiation.
 type ObWriteDomesticScheduledResponse5DataCharges struct {
 	Amount       ObActiveOrHistoricCurrencyAndAmount `json:"Amount"`
 	ChargeBearer ObChargeBearerType1CodeEnum         `json:"ChargeBearer"`
 	Type         string                              `json:"Type"`
 }
 
+// ObWriteDomesticScheduledResponse5DataInitiationCreditorAccount
+// Unambiguous identification of the account of the creditor to which a credit entry will be posted as a result of the payment transaction.
 type ObWriteDomesticScheduledResponse5DataInitiationCreditorAccount struct {
 	Identification          string  `json:"Identification"`
 	Name                    string  `json:"Name"`
@@ -17,6 +21,8 @@ type ObWriteDomesticScheduledResponse5DataInitiationCreditorAccount struct {
 	SecondaryIdentification *string `json:"SecondaryIdentification,omitempty"`
 }
 
+// ObWriteDomesticScheduledResponse5DataInitiationDebtorAccount
+// Unambiguous identification of the account of the debtor to which a debit entry will be made as a result of the transaction.
 type ObWriteDomesticScheduledResponse5DataInitiationDebtorAccount struct {
 	Identification          string  `json:"Identification"`
 	Name                    *string `json:"Name,omitempty"`
@@ -24,16 +30,23 @@ type ObWriteDomesticScheduledResponse5DataInitiationDebtorAccount struct {
 	SecondaryIdentification *string `json:"SecondaryIdentification,omitempty"`
 }
 
+// ObWriteDomesticScheduledResponse5DataInitiationInstructedAmount
+// Amount of money to be moved between the debtor and creditor, before deduction of charges, expressed in the currency as ordered by the initiating party.
+// Usage: This amount has to be transported unchanged through the transaction chain.
 type ObWriteDomesticScheduledResponse5DataInitiationInstructedAmount struct {
 	Amount   string `json:"Amount"`
 	Currency string `json:"Currency"`
 }
 
+// ObWriteDomesticScheduledResponse5DataInitiationRemittanceInformation
+// Information supplied to enable the matching of an entry with the items that the transfer is intended to settle, such as commercial invoices in an accounts' receivable system.
 type ObWriteDomesticScheduledResponse5DataInitiationRemittanceInformation struct {
 	Reference    *string `json:"Reference,omitempty"`
 	Unstructured *string `json:"Unstructured,omitempty"`
 }
 
+// ObWriteDomesticScheduledResponse5DataInitiation
+// The Initiation payload is sent by the initiating party to the ASPSP. It is used to request movement of funds from the debtor account to a creditor for a single scheduled domestic payment.
 type ObWriteDomesticScheduledResponse5DataInitiation struct {
 	CreditorAccount            ObWriteDomesticScheduledResponse5DataInitiationCreditorAccount        `json:"CreditorAccount"`
 	CreditorPostalAddress      *ObPostalAddress6                                                     `json:"CreditorPostalAddress,omitempty"`
@@ -55,6 +68,8 @@ const (
 	ObWriteDomesticScheduledResponse5DataMultiAuthorisationStatusEnumRejected                     ObWriteDomesticScheduledResponse5DataMultiAuthorisationStatusEnum = "Rejected"
 )
 
+// ObWriteDomesticScheduledResponse5DataMultiAuthorisation
+// The multiple authorisation flow response from the ASPSP.
 type ObWriteDomesticScheduledResponse5DataMultiAuthorisation struct {
 	ExpirationDateTime *time.Time                                                        `json:"ExpirationDateTime,omitempty"`
 	LastUpdateDateTime *time.Time                                                        `json:"LastUpdateDateTime,omitempty"`
@@ -63,6 +78,8 @@ type ObWriteDomesticScheduledResponse5DataMultiAuthorisation struct {
 	Status             ObWriteDomesticScheduledResponse5DataMultiAuthorisationStatusEnum `json:"Status"`
 }
 
+// ObWriteDomesticScheduledResponse5DataRefundAccount
+// Provides the details to identify an account.
 type ObWriteDomesticScheduledResponse5DataRefundAccount struct {
 	Identification          string  `json:"Identification"`
 	Name                    string  `json:"Name"`
@@ -70,6 +87,8 @@ type ObWriteDomesticScheduledResponse5DataRefundAccount struct {
 	SecondaryIdentification *string `json:"SecondaryIdentification,omitempty"`
 }
 
+// ObWriteDomesticScheduledResponse5DataRefund
+// Unambiguous identification of the refund account to which a refund will be made as a result of the transaction.
 type ObWriteDomesticScheduledResponse5DataRefund struct {
 	Account ObWriteDomesticScheduledResponse5DataRefundAccount `json:"Account"`
 }

@@ -4,7 +4,7 @@ from typing import Optional
 
 @dataclass
 class GetAccessTokensAccessTokensPathParams:
-    access_tokens: str = field(default=None, metadata={'path_param': { 'field_name': 'accessTokens', 'style': 'simple', 'explode': False }})
+    access_tokens: str = field(metadata={'path_param': { 'field_name': 'accessTokens', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -17,13 +17,13 @@ class GetAccessTokensAccessTokensQueryParams:
 
 @dataclass
 class GetAccessTokensAccessTokensRequest:
-    path_params: GetAccessTokensAccessTokensPathParams = field(default=None)
-    query_params: GetAccessTokensAccessTokensQueryParams = field(default=None)
+    path_params: GetAccessTokensAccessTokensPathParams = field()
+    query_params: GetAccessTokensAccessTokensQueryParams = field()
     
 
 @dataclass
 class GetAccessTokensAccessTokensResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

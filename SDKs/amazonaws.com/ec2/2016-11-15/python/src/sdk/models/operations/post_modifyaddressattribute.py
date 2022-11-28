@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostModifyAddressAttributeActionEnum(str, Enum):
     MODIFY_ADDRESS_ATTRIBUTE = "ModifyAddressAttribute"
@@ -10,8 +14,8 @@ class PostModifyAddressAttributeVersionEnum(str, Enum):
 
 @dataclass
 class PostModifyAddressAttributeQueryParams:
-    action: PostModifyAddressAttributeActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostModifyAddressAttributeVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostModifyAddressAttributeActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostModifyAddressAttributeVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostModifyAddressAttributeHeaders:
 
 @dataclass
 class PostModifyAddressAttributeRequest:
-    query_params: PostModifyAddressAttributeQueryParams = field(default=None)
-    headers: PostModifyAddressAttributeHeaders = field(default=None)
+    headers: PostModifyAddressAttributeHeaders = field()
+    query_params: PostModifyAddressAttributeQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostModifyAddressAttributeResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

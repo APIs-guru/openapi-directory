@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // RelationshipData
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Information of all parent and children locations related to this one.
 **/
 export class RelationshipData extends SpeakeasyBase {
-  @Metadata({ data: "json, name=parentChain" })
+  @SpeakeasyMetadata({ data: "json, name=parentChain" })
   parentChain?: string;
 }

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var FunctionsUpdatePathParams = /** @class */ (function (_super) {
     __extends(FunctionsUpdatePathParams, _super);
@@ -30,7 +30,7 @@ var FunctionsUpdatePathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=functionId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=functionId" }),
         __metadata("design:type", String)
     ], FunctionsUpdatePathParams.prototype, "functionId", void 0);
     return FunctionsUpdatePathParams;
@@ -42,27 +42,27 @@ var FunctionsUpdateRequestBody = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=events" }),
+        SpeakeasyMetadata({ data: "json, name=events" }),
         __metadata("design:type", Array)
     ], FunctionsUpdateRequestBody.prototype, "events", void 0);
     __decorate([
-        Metadata({ data: "json, name=execute" }),
+        SpeakeasyMetadata({ data: "json, name=execute" }),
         __metadata("design:type", Array)
     ], FunctionsUpdateRequestBody.prototype, "execute", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], FunctionsUpdateRequestBody.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=schedule" }),
+        SpeakeasyMetadata({ data: "json, name=schedule" }),
         __metadata("design:type", String)
     ], FunctionsUpdateRequestBody.prototype, "schedule", void 0);
     __decorate([
-        Metadata({ data: "json, name=timeout" }),
+        SpeakeasyMetadata({ data: "json, name=timeout" }),
         __metadata("design:type", Number)
     ], FunctionsUpdateRequestBody.prototype, "timeout", void 0);
     __decorate([
-        Metadata({ data: "json, name=vars" }),
+        SpeakeasyMetadata({ data: "json, name=vars" }),
         __metadata("design:type", Map)
     ], FunctionsUpdateRequestBody.prototype, "vars", void 0);
     return FunctionsUpdateRequestBody;
@@ -74,11 +74,11 @@ var FunctionsUpdateSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeKey)
     ], FunctionsUpdateSecurity.prototype, "key", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeProject)
     ], FunctionsUpdateSecurity.prototype, "project", void 0);
     return FunctionsUpdateSecurity;
@@ -90,15 +90,15 @@ var FunctionsUpdateRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", FunctionsUpdatePathParams)
     ], FunctionsUpdateRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", FunctionsUpdateRequestBody)
     ], FunctionsUpdateRequest.prototype, "request", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", FunctionsUpdateSecurity)
     ], FunctionsUpdateRequest.prototype, "security", void 0);
     return FunctionsUpdateRequest;
@@ -110,15 +110,15 @@ var FunctionsUpdateResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], FunctionsUpdateResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], FunctionsUpdateResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.Function)
     ], FunctionsUpdateResponse.prototype, "function", void 0);
     return FunctionsUpdateResponse;

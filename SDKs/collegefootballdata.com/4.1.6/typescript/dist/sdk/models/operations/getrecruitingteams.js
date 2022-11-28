@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetRecruitingTeamsQueryParams = /** @class */ (function (_super) {
     __extends(GetRecruitingTeamsQueryParams, _super);
@@ -30,11 +30,11 @@ var GetRecruitingTeamsQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=team" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=team" }),
         __metadata("design:type", String)
     ], GetRecruitingTeamsQueryParams.prototype, "team", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=year" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=year" }),
         __metadata("design:type", Number)
     ], GetRecruitingTeamsQueryParams.prototype, "year", void 0);
     return GetRecruitingTeamsQueryParams;
@@ -46,7 +46,7 @@ var GetRecruitingTeamsRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetRecruitingTeamsQueryParams)
     ], GetRecruitingTeamsRequest.prototype, "queryParams", void 0);
     return GetRecruitingTeamsRequest;
@@ -58,15 +58,15 @@ var GetRecruitingTeamsResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetRecruitingTeamsResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetRecruitingTeamsResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata({ elemType: shared.TeamRecruitingRank }),
+        SpeakeasyMetadata({ elemType: shared.TeamRecruitingRank }),
         __metadata("design:type", Array)
     ], GetRecruitingTeamsResponse.prototype, "teamRecruitingRanks", void 0);
     return GetRecruitingTeamsResponse;

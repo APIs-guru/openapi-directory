@@ -4,10 +4,6 @@ type GetTagGroupsIDJSONPathParams struct {
 	ID string `pathParam:"style=simple,explode=false,name=id"`
 }
 
-type GetTagGroupsIDJSONRequest struct {
-	PathParams GetTagGroupsIDJSONPathParams
-}
-
 type GetTagGroupsIDJSON200ApplicationJSONTagGroupPermissions struct {
 	Everyone *int64 `json:"everyone,omitempty"`
 }
@@ -23,6 +19,10 @@ type GetTagGroupsIDJSON200ApplicationJSONTagGroup struct {
 
 type GetTagGroupsIDJSON200ApplicationJSON struct {
 	TagGroup *GetTagGroupsIDJSON200ApplicationJSONTagGroup `json:"tag_group,omitempty"`
+}
+
+type GetTagGroupsIDJSONRequest struct {
+	PathParams GetTagGroupsIDJSONPathParams
 }
 
 type GetTagGroupsIDJSONResponse struct {

@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SchemaRestrictionResponse } from "./schemarestrictionresponse";
+
 
 
 // ResponseMetaData
@@ -7,21 +8,21 @@ import { SchemaRestrictionResponse } from "./schemarestrictionresponse";
  * Response's metadata carrying additional information about the report content.
 **/
 export class ResponseMetaData extends SpeakeasyBase {
-  @Metadata({ data: "json, name=currencyCode" })
+  @SpeakeasyMetadata({ data: "json, name=currencyCode" })
   currencyCode?: string;
 
-  @Metadata({ data: "json, name=dataLossFromOtherRow" })
+  @SpeakeasyMetadata({ data: "json, name=dataLossFromOtherRow" })
   dataLossFromOtherRow?: boolean;
 
-  @Metadata({ data: "json, name=emptyReason" })
+  @SpeakeasyMetadata({ data: "json, name=emptyReason" })
   emptyReason?: string;
 
-  @Metadata({ data: "json, name=schemaRestrictionResponse" })
+  @SpeakeasyMetadata({ data: "json, name=schemaRestrictionResponse" })
   schemaRestrictionResponse?: SchemaRestrictionResponse;
 
-  @Metadata({ data: "json, name=subjectToThresholding" })
+  @SpeakeasyMetadata({ data: "json, name=subjectToThresholding" })
   subjectToThresholding?: boolean;
 
-  @Metadata({ data: "json, name=timeZone" })
+  @SpeakeasyMetadata({ data: "json, name=timeZone" })
   timeZone?: string;
 }

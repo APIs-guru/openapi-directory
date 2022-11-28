@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostCreateApplicationActionEnum(str, Enum):
     CREATE_APPLICATION = "CreateApplication"
@@ -10,8 +14,8 @@ class PostCreateApplicationVersionEnum(str, Enum):
 
 @dataclass
 class PostCreateApplicationQueryParams:
-    action: PostCreateApplicationActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostCreateApplicationVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostCreateApplicationActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostCreateApplicationVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostCreateApplicationHeaders:
 
 @dataclass
 class PostCreateApplicationRequest:
-    query_params: PostCreateApplicationQueryParams = field(default=None)
-    headers: PostCreateApplicationHeaders = field(default=None)
+    headers: PostCreateApplicationHeaders = field()
+    query_params: PostCreateApplicationQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostCreateApplicationResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

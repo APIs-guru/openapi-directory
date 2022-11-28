@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DescribeRemediationConfigurationsRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ConfigRuleNames" })
+  @SpeakeasyMetadata({ data: "json, name=ConfigRuleNames" })
   configRuleNames: string[];
 }

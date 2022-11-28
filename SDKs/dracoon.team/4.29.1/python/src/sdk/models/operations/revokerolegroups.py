@@ -1,11 +1,11 @@
 from dataclasses import dataclass, field
-from typing import List,Optional
+from typing import Optional
 from sdk.models import shared
 
 
 @dataclass
 class RevokeRoleGroupsPathParams:
-    role_id: int = field(default=None, metadata={'path_param': { 'field_name': 'role_id', 'style': 'simple', 'explode': False }})
+    role_id: int = field(metadata={'path_param': { 'field_name': 'role_id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -15,15 +15,15 @@ class RevokeRoleGroupsHeaders:
 
 @dataclass
 class RevokeRoleGroupsRequest:
-    path_params: RevokeRoleGroupsPathParams = field(default=None)
-    headers: RevokeRoleGroupsHeaders = field(default=None)
-    request: shared.GroupIds = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: RevokeRoleGroupsHeaders = field()
+    path_params: RevokeRoleGroupsPathParams = field()
+    request: shared.GroupIds = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class RevokeRoleGroupsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error_response: Optional[shared.ErrorResponse] = field(default=None)
     role_group_list: Optional[shared.RoleGroupList] = field(default=None)
-    status_code: int = field(default=None)
     

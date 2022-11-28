@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // RuleOption
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Additional settings for a stateful rule. This is part of the <a>StatefulRule</a> configuration.
 **/
 export class RuleOption extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Keyword" })
+  @SpeakeasyMetadata({ data: "json, name=Keyword" })
   keyword: string;
 
-  @Metadata({ data: "json, name=Settings" })
+  @SpeakeasyMetadata({ data: "json, name=Settings" })
   settings?: string[];
 }

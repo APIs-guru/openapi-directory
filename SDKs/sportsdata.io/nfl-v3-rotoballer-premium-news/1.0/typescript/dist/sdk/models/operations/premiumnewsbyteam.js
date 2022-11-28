@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var PremiumNewsByTeamFormatEnum;
 (function (PremiumNewsByTeamFormatEnum) {
     PremiumNewsByTeamFormatEnum["Xml"] = "xml";
@@ -34,11 +34,11 @@ var PremiumNewsByTeamPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=format" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=format" }),
         __metadata("design:type", String)
     ], PremiumNewsByTeamPathParams.prototype, "format", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=team" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=team" }),
         __metadata("design:type", String)
     ], PremiumNewsByTeamPathParams.prototype, "team", void 0);
     return PremiumNewsByTeamPathParams;
@@ -50,7 +50,7 @@ var PremiumNewsByTeamRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PremiumNewsByTeamPathParams)
     ], PremiumNewsByTeamRequest.prototype, "pathParams", void 0);
     return PremiumNewsByTeamRequest;
@@ -62,15 +62,15 @@ var PremiumNewsByTeamResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], PremiumNewsByTeamResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Array)
     ], PremiumNewsByTeamResponse.prototype, "news", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], PremiumNewsByTeamResponse.prototype, "statusCode", void 0);
     return PremiumNewsByTeamResponse;

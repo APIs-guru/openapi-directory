@@ -1,13 +1,16 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class GetStreamingSessionStreamPathParams:
-    session_id: str = field(default=None, metadata={'path_param': { 'field_name': 'sessionId', 'style': 'simple', 'explode': False }})
-    stream_id: str = field(default=None, metadata={'path_param': { 'field_name': 'streamId', 'style': 'simple', 'explode': False }})
-    studio_id: str = field(default=None, metadata={'path_param': { 'field_name': 'studioId', 'style': 'simple', 'explode': False }})
+    session_id: str = field(metadata={'path_param': { 'field_name': 'sessionId', 'style': 'simple', 'explode': False }})
+    stream_id: str = field(metadata={'path_param': { 'field_name': 'streamId', 'style': 'simple', 'explode': False }})
+    studio_id: str = field(metadata={'path_param': { 'field_name': 'studioId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -23,20 +26,20 @@ class GetStreamingSessionStreamHeaders:
 
 @dataclass
 class GetStreamingSessionStreamRequest:
-    path_params: GetStreamingSessionStreamPathParams = field(default=None)
-    headers: GetStreamingSessionStreamHeaders = field(default=None)
+    headers: GetStreamingSessionStreamHeaders = field()
+    path_params: GetStreamingSessionStreamPathParams = field()
     
 
 @dataclass
 class GetStreamingSessionStreamResponse:
+    content_type: str = field()
+    status_code: int = field()
     access_denied_exception: Optional[Any] = field(default=None)
     conflict_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     get_streaming_session_stream_response: Optional[shared.GetStreamingSessionStreamResponse] = field(default=None)
     internal_server_error_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
     service_quota_exceeded_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     validation_exception: Optional[Any] = field(default=None)
     

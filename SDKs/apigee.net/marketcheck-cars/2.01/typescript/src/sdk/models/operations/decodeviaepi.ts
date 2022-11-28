@@ -1,38 +1,39 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class DecodeViaEpiPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=vin" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=vin" })
   vin: string;
 }
 
 
 export class DecodeViaEpiQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=api_key" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=api_key" })
   apiKey?: string;
 }
 
 
 export class DecodeViaEpiRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: DecodeViaEpiPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: DecodeViaEpiQueryParams;
 }
 
 
 export class DecodeViaEpiResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   build?: shared.Build;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   error?: shared.Error;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

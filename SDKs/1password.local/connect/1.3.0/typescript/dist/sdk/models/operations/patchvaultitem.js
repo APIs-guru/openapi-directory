@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var PatchVaultItemPathParams = /** @class */ (function (_super) {
     __extends(PatchVaultItemPathParams, _super);
@@ -30,11 +30,11 @@ var PatchVaultItemPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=itemUuid" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=itemUuid" }),
         __metadata("design:type", String)
     ], PatchVaultItemPathParams.prototype, "itemUuid", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=vaultUuid" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=vaultUuid" }),
         __metadata("design:type", String)
     ], PatchVaultItemPathParams.prototype, "vaultUuid", void 0);
     return PatchVaultItemPathParams;
@@ -46,7 +46,7 @@ var PatchVaultItemSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=http;subtype=bearer" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" }),
         __metadata("design:type", shared.SchemeConnectToken)
     ], PatchVaultItemSecurity.prototype, "connectToken", void 0);
     return PatchVaultItemSecurity;
@@ -58,15 +58,15 @@ var PatchVaultItemRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PatchVaultItemPathParams)
     ], PatchVaultItemRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json", elemType: shared.Patch }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json", elemType: shared.Patch }),
         __metadata("design:type", Array)
     ], PatchVaultItemRequest.prototype, "request", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PatchVaultItemSecurity)
     ], PatchVaultItemRequest.prototype, "security", void 0);
     return PatchVaultItemRequest;
@@ -78,19 +78,19 @@ var PatchVaultItemResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], PatchVaultItemResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.ErrorResponse)
     ], PatchVaultItemResponse.prototype, "errorResponse", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.FullItem)
     ], PatchVaultItemResponse.prototype, "fullItem", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], PatchVaultItemResponse.prototype, "statusCode", void 0);
     return PatchVaultItemResponse;

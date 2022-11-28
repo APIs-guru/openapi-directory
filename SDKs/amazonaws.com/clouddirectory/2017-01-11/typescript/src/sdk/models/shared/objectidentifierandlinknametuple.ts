@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ObjectIdentifierAndLinkNameTuple
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A pair of ObjectIdentifier and LinkName.
 **/
 export class ObjectIdentifierAndLinkNameTuple extends SpeakeasyBase {
-  @Metadata({ data: "json, name=LinkName" })
+  @SpeakeasyMetadata({ data: "json, name=LinkName" })
   linkName?: string;
 
-  @Metadata({ data: "json, name=ObjectIdentifier" })
+  @SpeakeasyMetadata({ data: "json, name=ObjectIdentifier" })
   objectIdentifier?: string;
 }

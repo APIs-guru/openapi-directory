@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class ApikeysProjectsLocationsKeysPatchPathParams extends SpeakeasyBase {
     name: string;
@@ -24,7 +24,7 @@ export declare class ApikeysProjectsLocationsKeysPatchSecurity extends Speakeasy
 export declare class ApikeysProjectsLocationsKeysPatchRequest extends SpeakeasyBase {
     pathParams: ApikeysProjectsLocationsKeysPatchPathParams;
     queryParams: ApikeysProjectsLocationsKeysPatchQueryParams;
-    request?: shared.V2Key;
+    request?: shared.V2KeyInput;
     security: ApikeysProjectsLocationsKeysPatchSecurity;
 }
 export declare class ApikeysProjectsLocationsKeysPatchResponse extends SpeakeasyBase {

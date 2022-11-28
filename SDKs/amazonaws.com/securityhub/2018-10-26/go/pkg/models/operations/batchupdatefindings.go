@@ -14,11 +14,15 @@ type BatchUpdateFindingsHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// BatchUpdateFindingsRequestBodyNote
+// The updated note.
 type BatchUpdateFindingsRequestBodyNote struct {
 	Text      *string `json:"Text,omitempty"`
 	UpdatedBy *string `json:"UpdatedBy,omitempty"`
 }
 
+// BatchUpdateFindingsRequestBodySeverity
+// Updates to the severity information for a finding.
 type BatchUpdateFindingsRequestBodySeverity struct {
 	Label      *shared.SeverityLabelEnum `json:"Label,omitempty"`
 	Normalized *int64                    `json:"Normalized,omitempty"`
@@ -34,6 +38,8 @@ const (
 	BatchUpdateFindingsRequestBodyVerificationStateEnumBenignPositive BatchUpdateFindingsRequestBodyVerificationStateEnum = "BENIGN_POSITIVE"
 )
 
+// BatchUpdateFindingsRequestBodyWorkflow
+// Used to update information about the investigation into the finding.
 type BatchUpdateFindingsRequestBodyWorkflow struct {
 	Status *shared.WorkflowStatusEnum `json:"Status,omitempty"`
 }

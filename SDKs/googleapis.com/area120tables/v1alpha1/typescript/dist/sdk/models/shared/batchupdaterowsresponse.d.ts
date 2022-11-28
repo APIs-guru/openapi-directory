@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { Row } from "./row";
 /**
  * Response message for TablesService.BatchUpdateRows.

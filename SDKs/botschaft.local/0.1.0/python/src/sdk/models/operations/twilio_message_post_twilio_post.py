@@ -10,14 +10,14 @@ class TwilioMessagePostTwilioPostHeaders:
 
 @dataclass
 class TwilioMessagePostTwilioPostRequest:
-    headers: TwilioMessagePostTwilioPostHeaders = field(default=None)
-    request: shared.TwilioMessageRequest = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: TwilioMessagePostTwilioPostHeaders = field()
+    request: shared.TwilioMessageRequest = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class TwilioMessagePostTwilioPostResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     http_validation_error: Optional[shared.HTTPValidationError] = field(default=None)
-    status_code: int = field(default=None)
     twilio_message_post_twilio_post_200_application_json_any: Optional[Any] = field(default=None)
     

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // SendVoiceMessageResponse
 /**
  * An object that that contains the Message ID of a Voice message that was sent successfully.
@@ -33,7 +33,7 @@ var SendVoiceMessageResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=MessageId" }),
+        SpeakeasyMetadata({ data: "json, name=MessageId" }),
         __metadata("design:type", String)
     ], SendVoiceMessageResponse.prototype, "messageId", void 0);
     return SendVoiceMessageResponse;

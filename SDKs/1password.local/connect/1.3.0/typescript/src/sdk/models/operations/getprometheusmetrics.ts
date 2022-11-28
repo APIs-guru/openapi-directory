@@ -1,23 +1,23 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-export const GETPROMETHEUSMETRICS_SERVERS = [
-	"http://localhost:8080",
-];
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 
+export const GetPrometheusMetricsServerList = [
+	"http://localhost:8080",
+] as const;
 
 
 export class GetPrometheusMetricsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   serverUrl?: string;
 }
 
 
 export class GetPrometheusMetricsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getPrometheusMetrics200TextPlainString?: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

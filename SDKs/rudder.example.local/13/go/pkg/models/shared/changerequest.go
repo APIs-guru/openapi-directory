@@ -18,6 +18,8 @@ const (
 	ChangeRequestStatusEnumOpen              ChangeRequestStatusEnum = "Open"
 )
 
+// ChangeRequest
+// Content of the change request
 type ChangeRequest struct {
 	Acceptable  *bool                    `json:"acceptable,omitempty"`
 	Changes     *ChangeRequestChanges    `json:"changes,omitempty"`

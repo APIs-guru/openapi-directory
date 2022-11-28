@@ -1,47 +1,48 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetStopPointSearchQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=faresOnly" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=faresOnly" })
   faresOnly?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=includeHubs" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=includeHubs" })
   includeHubs?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=lines" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=lines" })
   lines?: string[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=maxResults" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=maxResults" })
   maxResults?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=modes" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=modes" })
   modes?: string[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=query" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=query" })
   query: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=tflOperatedNationalRailStationsOnly" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=tflOperatedNationalRailStationsOnly" })
   tflOperatedNationalRailStationsOnly?: boolean;
 }
 
 
 export class GetStopPointSearchRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetStopPointSearchQueryParams;
 }
 
 
 export class GetStopPointSearchResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   tflApiPresentationEntitiesSearchResponse?: shared.TflApiPresentationEntitiesSearchResponse;
 }

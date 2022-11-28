@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var AnimatedGifTypeEnum;
 (function (AnimatedGifTypeEnum) {
     AnimatedGifTypeEnum["AnimatedGif"] = "animated_gif";
@@ -33,23 +33,23 @@ var AnimatedGif = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=height" }),
+        SpeakeasyMetadata({ data: "json, name=height" }),
         __metadata("design:type", Number)
     ], AnimatedGif.prototype, "height", void 0);
     __decorate([
-        Metadata({ data: "json, name=media_key" }),
+        SpeakeasyMetadata({ data: "json, name=media_key" }),
         __metadata("design:type", String)
     ], AnimatedGif.prototype, "mediaKey", void 0);
     __decorate([
-        Metadata({ data: "json, name=preview_image_url" }),
+        SpeakeasyMetadata({ data: "json, name=preview_image_url" }),
         __metadata("design:type", String)
     ], AnimatedGif.prototype, "previewImageUrl", void 0);
     __decorate([
-        Metadata({ data: "json, name=type" }),
+        SpeakeasyMetadata({ data: "json, name=type" }),
         __metadata("design:type", String)
     ], AnimatedGif.prototype, "type", void 0);
     __decorate([
-        Metadata({ data: "json, name=width" }),
+        SpeakeasyMetadata({ data: "json, name=width" }),
         __metadata("design:type", Number)
     ], AnimatedGif.prototype, "width", void 0);
     return AnimatedGif;

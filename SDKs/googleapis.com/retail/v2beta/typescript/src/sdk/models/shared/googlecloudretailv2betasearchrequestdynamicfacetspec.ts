@@ -1,9 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum GoogleCloudRetailV2betaSearchRequestDynamicFacetSpecModeEnum {
-    ModeUnspecified = "MODE_UNSPECIFIED"
-,    Disabled = "DISABLED"
-,    Enabled = "ENABLED"
+    ModeUnspecified = "MODE_UNSPECIFIED",
+    Disabled = "DISABLED",
+    Enabled = "ENABLED"
 }
 
 
@@ -12,6 +13,6 @@ export enum GoogleCloudRetailV2betaSearchRequestDynamicFacetSpecModeEnum {
  * The specifications of dynamically generated facets.
 **/
 export class GoogleCloudRetailV2betaSearchRequestDynamicFacetSpec extends SpeakeasyBase {
-  @Metadata({ data: "json, name=mode" })
+  @SpeakeasyMetadata({ data: "json, name=mode" })
   mode?: GoogleCloudRetailV2betaSearchRequestDynamicFacetSpecModeEnum;
 }

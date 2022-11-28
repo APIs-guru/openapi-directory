@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 /**
  * ItemPublicTokenCreateRequest defines the request schema for `/item/public_token/create`
 **/

@@ -22,18 +22,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var DeleteV3BoardsBoardIdAssetsAssetIdPathParams = /** @class */ (function (_super) {
     __extends(DeleteV3BoardsBoardIdAssetsAssetIdPathParams, _super);
     function DeleteV3BoardsBoardIdAssetsAssetIdPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=asset_id" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=asset_id" }),
         __metadata("design:type", String)
     ], DeleteV3BoardsBoardIdAssetsAssetIdPathParams.prototype, "assetId", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=board_id" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=board_id" }),
         __metadata("design:type", String)
     ], DeleteV3BoardsBoardIdAssetsAssetIdPathParams.prototype, "boardId", void 0);
     return DeleteV3BoardsBoardIdAssetsAssetIdPathParams;
@@ -45,7 +45,7 @@ var DeleteV3BoardsBoardIdAssetsAssetIdRequest = /** @class */ (function (_super)
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", DeleteV3BoardsBoardIdAssetsAssetIdPathParams)
     ], DeleteV3BoardsBoardIdAssetsAssetIdRequest.prototype, "pathParams", void 0);
     return DeleteV3BoardsBoardIdAssetsAssetIdRequest;
@@ -57,11 +57,11 @@ var DeleteV3BoardsBoardIdAssetsAssetIdResponse = /** @class */ (function (_super
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], DeleteV3BoardsBoardIdAssetsAssetIdResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], DeleteV3BoardsBoardIdAssetsAssetIdResponse.prototype, "statusCode", void 0);
     return DeleteV3BoardsBoardIdAssetsAssetIdResponse;

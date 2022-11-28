@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // DataDiskAssignment
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Data disk assignment for a given VM instance.
 **/
 export class DataDiskAssignment extends SpeakeasyBase {
-  @Metadata({ data: "json, name=dataDisks" })
+  @SpeakeasyMetadata({ data: "json, name=dataDisks" })
   dataDisks?: string[];
 
-  @Metadata({ data: "json, name=vmInstance" })
+  @SpeakeasyMetadata({ data: "json, name=vmInstance" })
   vmInstance?: string;
 }

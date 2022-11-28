@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PostalAddress } from "./postaladdress";
 // AddressVerificationData
 /**
@@ -34,15 +34,15 @@ var AddressVerificationData = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=address" }),
+        SpeakeasyMetadata({ data: "json, name=address" }),
         __metadata("design:type", PostalAddress)
     ], AddressVerificationData.prototype, "address", void 0);
     __decorate([
-        Metadata({ data: "json, name=business" }),
+        SpeakeasyMetadata({ data: "json, name=business" }),
         __metadata("design:type", String)
     ], AddressVerificationData.prototype, "business", void 0);
     __decorate([
-        Metadata({ data: "json, name=expectedDeliveryDaysRegion" }),
+        SpeakeasyMetadata({ data: "json, name=expectedDeliveryDaysRegion" }),
         __metadata("design:type", Number)
     ], AddressVerificationData.prototype, "expectedDeliveryDaysRegion", void 0);
     return AddressVerificationData;

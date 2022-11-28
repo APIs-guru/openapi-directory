@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // RequestDetails
 /**
  * Contains the integrity request information.
@@ -33,15 +33,15 @@ var RequestDetails = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=nonce" }),
+        SpeakeasyMetadata({ data: "json, name=nonce" }),
         __metadata("design:type", String)
     ], RequestDetails.prototype, "nonce", void 0);
     __decorate([
-        Metadata({ data: "json, name=requestPackageName" }),
+        SpeakeasyMetadata({ data: "json, name=requestPackageName" }),
         __metadata("design:type", String)
     ], RequestDetails.prototype, "requestPackageName", void 0);
     __decorate([
-        Metadata({ data: "json, name=timestampMillis" }),
+        SpeakeasyMetadata({ data: "json, name=timestampMillis" }),
         __metadata("design:type", String)
     ], RequestDetails.prototype, "timestampMillis", void 0);
     return RequestDetails;

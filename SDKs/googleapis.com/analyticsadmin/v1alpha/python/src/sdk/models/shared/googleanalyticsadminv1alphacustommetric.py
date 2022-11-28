@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class GoogleAnalyticsAdminV1alphaCustomMetricMeasurementUnitEnum(str, Enum):
     MEASUREMENT_UNIT_UNSPECIFIED = "MEASUREMENT_UNIT_UNSPECIFIED"
@@ -28,11 +30,30 @@ class GoogleAnalyticsAdminV1alphaCustomMetricScopeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class GoogleAnalyticsAdminV1alphaCustomMetric:
-    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
-    display_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'displayName' }})
-    measurement_unit: Optional[GoogleAnalyticsAdminV1alphaCustomMetricMeasurementUnitEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'measurementUnit' }})
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    parameter_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'parameterName' }})
-    restricted_metric_type: Optional[List[GoogleAnalyticsAdminV1alphaCustomMetricRestrictedMetricTypeEnum]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'restrictedMetricType' }})
-    scope: Optional[GoogleAnalyticsAdminV1alphaCustomMetricScopeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'scope' }})
+    r"""GoogleAnalyticsAdminV1alphaCustomMetric
+    A definition for a custom metric.
+    """
+    
+    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('description') }})
+    display_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('displayName') }})
+    measurement_unit: Optional[GoogleAnalyticsAdminV1alphaCustomMetricMeasurementUnitEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('measurementUnit') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    parameter_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('parameterName') }})
+    restricted_metric_type: Optional[List[GoogleAnalyticsAdminV1alphaCustomMetricRestrictedMetricTypeEnum]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('restrictedMetricType') }})
+    scope: Optional[GoogleAnalyticsAdminV1alphaCustomMetricScopeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('scope') }})
+    
+
+@dataclass_json
+@dataclass
+class GoogleAnalyticsAdminV1alphaCustomMetricInput:
+    r"""GoogleAnalyticsAdminV1alphaCustomMetricInput
+    A definition for a custom metric.
+    """
+    
+    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('description') }})
+    display_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('displayName') }})
+    measurement_unit: Optional[GoogleAnalyticsAdminV1alphaCustomMetricMeasurementUnitEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('measurementUnit') }})
+    parameter_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('parameterName') }})
+    restricted_metric_type: Optional[List[GoogleAnalyticsAdminV1alphaCustomMetricRestrictedMetricTypeEnum]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('restrictedMetricType') }})
+    scope: Optional[GoogleAnalyticsAdminV1alphaCustomMetricScopeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('scope') }})
     

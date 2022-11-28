@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ClassificationCategory } from "./classificationcategory";
+
 
 
 // ClassifyTextResponse
@@ -8,6 +8,6 @@ import { ClassificationCategory } from "./classificationcategory";
  * The document classification response message.
 **/
 export class ClassifyTextResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=categories", elemType: shared.ClassificationCategory })
+  @SpeakeasyMetadata({ data: "json, name=categories", elemType: ClassificationCategory })
   categories?: ClassificationCategory[];
 }

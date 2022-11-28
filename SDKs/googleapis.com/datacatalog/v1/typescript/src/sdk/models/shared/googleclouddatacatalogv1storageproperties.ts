@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudDatacatalogV1StorageProperties
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Details the properties of the underlying storage.
 **/
 export class GoogleCloudDatacatalogV1StorageProperties extends SpeakeasyBase {
-  @Metadata({ data: "json, name=filePattern" })
+  @SpeakeasyMetadata({ data: "json, name=filePattern" })
   filePattern?: string[];
 
-  @Metadata({ data: "json, name=fileType" })
+  @SpeakeasyMetadata({ data: "json, name=fileType" })
   fileType?: string;
 }

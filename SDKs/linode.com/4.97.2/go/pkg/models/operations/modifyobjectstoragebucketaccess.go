@@ -4,7 +4,7 @@ import (
 	"openapi/pkg/models/shared"
 )
 
-var ModifyObjectStorageBucketAccessServers = []string{
+var ModifyObjectStorageBucketAccessServerList = []string{
 	"https://api.linode.com/v4",
 }
 
@@ -13,17 +13,13 @@ type ModifyObjectStorageBucketAccessPathParams struct {
 	ClusterID string `pathParam:"style=simple,explode=false,name=clusterId"`
 }
 
-type ModifyObjectStorageBucketAccessSecurityOption1 struct {
-	PersonalAccessToken shared.SchemePersonalAccessToken `security:"scheme,type=http,subtype=bearer"`
-}
-
-type ModifyObjectStorageBucketAccessSecurityOption2 struct {
-	Oauth shared.SchemeOauth `security:"scheme,type=oauth2"`
-}
-
 type ModifyObjectStorageBucketAccessSecurity struct {
-	Option1 *ModifyObjectStorageBucketAccessSecurityOption1 `security:"option"`
-	Option2 *ModifyObjectStorageBucketAccessSecurityOption2 `security:"option"`
+	PersonalAccessToken *shared.SchemePersonalAccessToken `security:"scheme,type=http,subtype=bearer"`
+	Oauth               *shared.SchemeOauth               `security:"scheme,type=oauth2"`
+}
+
+type ModifyObjectStorageBucketAccessDefaultApplicationJSON struct {
+	Errors []shared.ErrorObject `json:"errors,omitempty"`
 }
 
 type ModifyObjectStorageBucketAccessRequest struct {
@@ -31,10 +27,6 @@ type ModifyObjectStorageBucketAccessRequest struct {
 	PathParams ModifyObjectStorageBucketAccessPathParams
 	Request    *interface{} `request:"mediaType=application/json"`
 	Security   ModifyObjectStorageBucketAccessSecurity
-}
-
-type ModifyObjectStorageBucketAccessDefaultApplicationJSON struct {
-	Errors []shared.ErrorObject `json:"errors,omitempty"`
 }
 
 type ModifyObjectStorageBucketAccessResponse struct {

@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class LogicalNetworkInterfaceNetworkTypeEnum(str, Enum):
     TYPE_UNSPECIFIED = "TYPE_UNSPECIFIED"
@@ -11,9 +13,13 @@ class LogicalNetworkInterfaceNetworkTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class LogicalNetworkInterface:
-    default_gateway: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'defaultGateway' }})
-    id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
-    ip_address: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ipAddress' }})
-    network: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'network' }})
-    network_type: Optional[LogicalNetworkInterfaceNetworkTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'networkType' }})
+    r"""LogicalNetworkInterface
+    Each logical network interface is effectively a network and IP pair.
+    """
+    
+    default_gateway: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('defaultGateway') }})
+    id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('id') }})
+    ip_address: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ipAddress') }})
+    network: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('network') }})
+    network_type: Optional[LogicalNetworkInterfaceNetworkTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('networkType') }})
     

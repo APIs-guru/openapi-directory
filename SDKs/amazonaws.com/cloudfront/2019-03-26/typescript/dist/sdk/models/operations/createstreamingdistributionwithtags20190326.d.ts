@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 export declare class CreateStreamingDistributionWithTags20190326QueryParams extends SpeakeasyBase {
     withTags: boolean;
 }

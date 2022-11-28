@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DescribeNodeAssociationStatusRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=NodeAssociationStatusToken" })
+  @SpeakeasyMetadata({ data: "json, name=NodeAssociationStatusToken" })
   nodeAssociationStatusToken: string;
 
-  @Metadata({ data: "json, name=ServerName" })
+  @SpeakeasyMetadata({ data: "json, name=ServerName" })
   serverName: string;
 }

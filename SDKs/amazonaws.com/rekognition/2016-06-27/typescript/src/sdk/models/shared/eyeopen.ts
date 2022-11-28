@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // EyeOpen
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Indicates whether or not the eyes on the face are open, and the confidence level in the determination.
 **/
 export class EyeOpen extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Confidence" })
+  @SpeakeasyMetadata({ data: "json, name=Confidence" })
   confidence?: number;
 
-  @Metadata({ data: "json, name=Value" })
+  @SpeakeasyMetadata({ data: "json, name=Value" })
   value?: boolean;
 }

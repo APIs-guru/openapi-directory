@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // SkewedInfo
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Specifies skewed values in a table. Skewed values are those that occur with very high frequency.
 **/
 export class SkewedInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=SkewedColumnNames" })
+  @SpeakeasyMetadata({ data: "json, name=SkewedColumnNames" })
   skewedColumnNames?: string[];
 
-  @Metadata({ data: "json, name=SkewedColumnValueLocationMaps" })
+  @SpeakeasyMetadata({ data: "json, name=SkewedColumnValueLocationMaps" })
   skewedColumnValueLocationMaps?: Map<string, string>;
 
-  @Metadata({ data: "json, name=SkewedColumnValues" })
+  @SpeakeasyMetadata({ data: "json, name=SkewedColumnValues" })
   skewedColumnValues?: string[];
 }

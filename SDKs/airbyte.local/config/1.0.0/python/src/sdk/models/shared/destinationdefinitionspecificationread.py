@@ -1,18 +1,19 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from typing import Any,List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import synchronousjobread
-from . import destinationsyncmode_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class DestinationDefinitionSpecificationRead:
-    connection_specification: Optional[Any] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'connectionSpecification' }})
-    destination_definition_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'destinationDefinitionId' }})
-    documentation_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'documentationUrl' }})
-    job_info: synchronousjobread.SynchronousJobRead = field(default=None, metadata={'dataclasses_json': { 'field_name': 'jobInfo' }})
-    supported_destination_sync_modes: Optional[List[destinationsyncmode_enum.DestinationSyncModeEnum]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'supportedDestinationSyncModes' }})
-    supports_dbt: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'supportsDbt' }})
-    supports_normalization: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'supportsNormalization' }})
+    destination_definition_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('destinationDefinitionId') }})
+    job_info: SynchronousJobRead = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('jobInfo') }})
+    connection_specification: Optional[Any] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('connectionSpecification') }})
+    documentation_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('documentationUrl') }})
+    supported_destination_sync_modes: Optional[List[DestinationSyncModeEnum]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('supportedDestinationSyncModes') }})
+    supports_dbt: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('supportsDbt') }})
+    supports_normalization: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('supportsNormalization') }})
     

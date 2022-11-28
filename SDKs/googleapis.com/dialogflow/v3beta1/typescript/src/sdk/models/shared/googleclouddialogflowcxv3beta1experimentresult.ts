@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudDialogflowCxV3beta1ExperimentResultVersionMetrics } from "./googleclouddialogflowcxv3beta1experimentresultversionmetrics";
+
 
 
 // GoogleCloudDialogflowCxV3beta1ExperimentResult
@@ -8,9 +8,9 @@ import { GoogleCloudDialogflowCxV3beta1ExperimentResultVersionMetrics } from "./
  * The inference result which includes an objective metric to optimize and the confidence interval.
 **/
 export class GoogleCloudDialogflowCxV3beta1ExperimentResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=lastUpdateTime" })
+  @SpeakeasyMetadata({ data: "json, name=lastUpdateTime" })
   lastUpdateTime?: string;
 
-  @Metadata({ data: "json, name=versionMetrics", elemType: shared.GoogleCloudDialogflowCxV3beta1ExperimentResultVersionMetrics })
+  @SpeakeasyMetadata({ data: "json, name=versionMetrics", elemType: GoogleCloudDialogflowCxV3beta1ExperimentResultVersionMetrics })
   versionMetrics?: GoogleCloudDialogflowCxV3beta1ExperimentResultVersionMetrics[];
 }

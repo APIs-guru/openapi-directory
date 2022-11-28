@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class SavingsPlanRateServiceCodeEnum(str, Enum):
     AMAZON_EC2 = "AmazonEC2"

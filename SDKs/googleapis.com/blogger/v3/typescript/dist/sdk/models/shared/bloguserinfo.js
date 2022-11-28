@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Blog } from "./blog";
 import { BlogPerUserInfo } from "./blogperuserinfo";
 var BlogUserInfo = /** @class */ (function (_super) {
@@ -31,15 +31,15 @@ var BlogUserInfo = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=blog" }),
+        SpeakeasyMetadata({ data: "json, name=blog" }),
         __metadata("design:type", Blog)
     ], BlogUserInfo.prototype, "blog", void 0);
     __decorate([
-        Metadata({ data: "json, name=blog_user_info" }),
+        SpeakeasyMetadata({ data: "json, name=blog_user_info" }),
         __metadata("design:type", BlogPerUserInfo)
     ], BlogUserInfo.prototype, "blogUserInfo", void 0);
     __decorate([
-        Metadata({ data: "json, name=kind" }),
+        SpeakeasyMetadata({ data: "json, name=kind" }),
         __metadata("design:type", String)
     ], BlogUserInfo.prototype, "kind", void 0);
     return BlogUserInfo;

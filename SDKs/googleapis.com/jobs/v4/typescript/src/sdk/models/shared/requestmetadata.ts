@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DeviceInfo } from "./deviceinfo";
+
 
 
 // RequestMetadata
@@ -7,18 +8,18 @@ import { DeviceInfo } from "./deviceinfo";
  * Meta information related to the job searcher or entity conducting the job search. This information is used to improve the performance of the service.
 **/
 export class RequestMetadata extends SpeakeasyBase {
-  @Metadata({ data: "json, name=allowMissingIds" })
+  @SpeakeasyMetadata({ data: "json, name=allowMissingIds" })
   allowMissingIds?: boolean;
 
-  @Metadata({ data: "json, name=deviceInfo" })
+  @SpeakeasyMetadata({ data: "json, name=deviceInfo" })
   deviceInfo?: DeviceInfo;
 
-  @Metadata({ data: "json, name=domain" })
+  @SpeakeasyMetadata({ data: "json, name=domain" })
   domain?: string;
 
-  @Metadata({ data: "json, name=sessionId" })
+  @SpeakeasyMetadata({ data: "json, name=sessionId" })
   sessionId?: string;
 
-  @Metadata({ data: "json, name=userId" })
+  @SpeakeasyMetadata({ data: "json, name=userId" })
   userId?: string;
 }

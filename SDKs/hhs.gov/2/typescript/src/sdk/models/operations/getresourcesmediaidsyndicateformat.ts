@@ -1,68 +1,69 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetResourcesMediaIdSyndicateFormatPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=format" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=format" })
   format: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" })
   id: number;
 }
 
 
 export class GetResourcesMediaIdSyndicateFormatQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=false;name=autoplay" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=autoplay" })
   autoplay?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=false;name=cssClass" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=cssClass" })
   cssClass?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=false;name=font-size" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=font-size" })
   fontSize?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=false;name=imageFloat" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=imageFloat" })
   imageFloat?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=false;name=imageMargin" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=imageMargin" })
   imageMargin?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=false;name=rel" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=rel" })
   rel?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=false;name=stripBreaks" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=stripBreaks" })
   stripBreaks?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=false;name=stripClasses" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=stripClasses" })
   stripClasses?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=false;name=stripImages" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=stripImages" })
   stripImages?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=false;name=stripScripts" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=stripScripts" })
   stripScripts?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=false;name=stripStyles" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=stripStyles" })
   stripStyles?: boolean;
 }
 
 
 export class GetResourcesMediaIdSyndicateFormatRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetResourcesMediaIdSyndicateFormatPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetResourcesMediaIdSyndicateFormatQueryParams;
 }
 
 
 export class GetResourcesMediaIdSyndicateFormatResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   syndicateMarshallerWrapped?: shared.SyndicateMarshallerWrapped;
 }

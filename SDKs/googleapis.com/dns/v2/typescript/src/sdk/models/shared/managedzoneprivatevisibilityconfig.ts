@@ -1,16 +1,16 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ManagedZonePrivateVisibilityConfigGkeCluster } from "./managedzoneprivatevisibilityconfiggkecluster";
 import { ManagedZonePrivateVisibilityConfigNetwork } from "./managedzoneprivatevisibilityconfignetwork";
 
 
+
 export class ManagedZonePrivateVisibilityConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=gkeClusters", elemType: shared.ManagedZonePrivateVisibilityConfigGkeCluster })
+  @SpeakeasyMetadata({ data: "json, name=gkeClusters", elemType: ManagedZonePrivateVisibilityConfigGkeCluster })
   gkeClusters?: ManagedZonePrivateVisibilityConfigGkeCluster[];
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=networks", elemType: shared.ManagedZonePrivateVisibilityConfigNetwork })
+  @SpeakeasyMetadata({ data: "json, name=networks", elemType: ManagedZonePrivateVisibilityConfigNetwork })
   networks?: ManagedZonePrivateVisibilityConfigNetwork[];
 }

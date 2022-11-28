@@ -5,10 +5,6 @@ type GetzipcodeinfoQueryParams struct {
 	Zip     string `queryParam:"style=form,explode=true,name=zip"`
 }
 
-type GetzipcodeinfoRequest struct {
-	QueryParams GetzipcodeinfoQueryParams
-}
-
 type Getzipcodeinfo200ApplicationJSON struct {
 	AreaSquareMiles         *string `json:"AreaSquareMiles,omitempty"`
 	City                    *string `json:"City,omitempty"`
@@ -25,6 +21,10 @@ type Getzipcodeinfo200ApplicationJSON struct {
 	Population              *string `json:"Population,omitempty"`
 	State                   *string `json:"State,omitempty"`
 	ZipCode                 *string `json:"ZipCode,omitempty"`
+}
+
+type GetzipcodeinfoRequest struct {
+	QueryParams GetzipcodeinfoQueryParams
 }
 
 type GetzipcodeinfoResponse struct {

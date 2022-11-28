@@ -1,97 +1,142 @@
 import { AxiosInstance, AxiosRequestConfig } from "axios";
 import * as operations from "./models/operations";
-declare type OptsFunc = (sdk: SDK) => void;
+type OptsFunc = (sdk: SDK) => void;
+export declare const ServerList: readonly ["http://redhat.local", "https://redhat.local/"];
 export declare function WithServerURL(serverURL: string, params?: Map<string, string>): OptsFunc;
 export declare function WithClient(client: AxiosInstance): OptsFunc;
 export declare class SDK {
-    defaultClient?: AxiosInstance;
-    securityClient?: AxiosInstance;
-    security?: any;
-    serverURL: string;
+    _defaultClient: AxiosInstance;
+    _securityClient: AxiosInstance;
+    _serverURL: string;
+    private _language;
+    private _sdkVersion;
+    private _genVersion;
     constructor(...opts: OptsFunc[]);
     /**
+     * latestPackage - Show me metadata of selected package
+     *
      * Show me metadata of selected package
     **/
-    LatestPackage(req: operations.LatestPackageRequest, config?: AxiosRequestConfig): Promise<operations.LatestPackageResponse>;
+    latestPackage(req: operations.LatestPackageRequest, config?: AxiosRequestConfig): Promise<operations.LatestPackageResponse>;
     /**
+     * deletesystem - Delete system by inventory id
+     *
      * Delete system by inventory id
     **/
-    Deletesystem(req: operations.DeletesystemRequest, config?: AxiosRequestConfig): Promise<operations.DeletesystemResponse>;
+    deletesystem(req: operations.DeletesystemRequest, config?: AxiosRequestConfig): Promise<operations.DeletesystemResponse>;
     /**
+     * detailAdvisory - Show me details an advisory by given advisory name
+     *
      * Show me details an advisory by given advisory name
     **/
-    DetailAdvisory(req: operations.DetailAdvisoryRequest, config?: AxiosRequestConfig): Promise<operations.DetailAdvisoryResponse>;
+    detailAdvisory(req: operations.DetailAdvisoryRequest, config?: AxiosRequestConfig): Promise<operations.DetailAdvisoryResponse>;
     /**
+     * detailSystem - Show me details about a system by given inventory id
+     *
      * Show me details about a system by given inventory id
     **/
-    DetailSystem(req: operations.DetailSystemRequest, config?: AxiosRequestConfig): Promise<operations.DetailSystemResponse>;
+    detailSystem(req: operations.DetailSystemRequest, config?: AxiosRequestConfig): Promise<operations.DetailSystemResponse>;
     /**
+     * exportAdvisories - Export applicable advisories for all my systems
+     *
      * Export applicable advisories for all my systems
     **/
-    ExportAdvisories(req: operations.ExportAdvisoriesRequest, config?: AxiosRequestConfig): Promise<operations.ExportAdvisoriesResponse>;
+    exportAdvisories(req: operations.ExportAdvisoriesRequest, config?: AxiosRequestConfig): Promise<operations.ExportAdvisoriesResponse>;
     /**
+     * exportAdvisorySystems - Export systems for my account
+     *
      * Export systems for my account
     **/
-    ExportAdvisorySystems(req: operations.ExportAdvisorySystemsRequest, config?: AxiosRequestConfig): Promise<operations.ExportAdvisorySystemsResponse>;
+    exportAdvisorySystems(req: operations.ExportAdvisorySystemsRequest, config?: AxiosRequestConfig): Promise<operations.ExportAdvisorySystemsResponse>;
     /**
+     * exportPackageSystems - Show me all my systems which have a package installed
+     *
      * Show me all my systems which have a package installed
     **/
-    ExportPackageSystems(req: operations.ExportPackageSystemsRequest, config?: AxiosRequestConfig): Promise<operations.ExportPackageSystemsResponse>;
+    exportPackageSystems(req: operations.ExportPackageSystemsRequest, config?: AxiosRequestConfig): Promise<operations.ExportPackageSystemsResponse>;
     /**
+     * exportPackages - Show me all installed packages across my systems
+     *
      * Show me all installed packages across my systems
     **/
-    ExportPackages(req: operations.ExportPackagesRequest, config?: AxiosRequestConfig): Promise<operations.ExportPackagesResponse>;
+    exportPackages(req: operations.ExportPackagesRequest, config?: AxiosRequestConfig): Promise<operations.ExportPackagesResponse>;
     /**
+     * exportSystemAdvisories - Export applicable advisories for all my systems
+     *
      * Export applicable advisories for all my systems
     **/
-    ExportSystemAdvisories(req: operations.ExportSystemAdvisoriesRequest, config?: AxiosRequestConfig): Promise<operations.ExportSystemAdvisoriesResponse>;
+    exportSystemAdvisories(req: operations.ExportSystemAdvisoriesRequest, config?: AxiosRequestConfig): Promise<operations.ExportSystemAdvisoriesResponse>;
     /**
+     * exportSystemPackages - Show me details about a system packages by given inventory id
+     *
      * Show me details about a system packages by given inventory id
     **/
-    ExportSystemPackages(req: operations.ExportSystemPackagesRequest, config?: AxiosRequestConfig): Promise<operations.ExportSystemPackagesResponse>;
+    exportSystemPackages(req: operations.ExportSystemPackagesRequest, config?: AxiosRequestConfig): Promise<operations.ExportSystemPackagesResponse>;
     /**
+     * exportSystems - Export systems for my account
+     *
      * Export systems for my account
     **/
-    ExportSystems(req: operations.ExportSystemsRequest, config?: AxiosRequestConfig): Promise<operations.ExportSystemsResponse>;
+    exportSystems(req: operations.ExportSystemsRequest, config?: AxiosRequestConfig): Promise<operations.ExportSystemsResponse>;
     /**
+     * listAdvisories - Show me all applicable advisories for all my systems
+     *
      * Show me all applicable advisories for all my systems
     **/
-    ListAdvisories(req: operations.ListAdvisoriesRequest, config?: AxiosRequestConfig): Promise<operations.ListAdvisoriesResponse>;
+    listAdvisories(req: operations.ListAdvisoriesRequest, config?: AxiosRequestConfig): Promise<operations.ListAdvisoriesResponse>;
     /**
+     * listAdvisorySystems - Show me systems on which the given advisory is applicable
+     *
      * Show me systems on which the given advisory is applicable
     **/
-    ListAdvisorySystems(req: operations.ListAdvisorySystemsRequest, config?: AxiosRequestConfig): Promise<operations.ListAdvisorySystemsResponse>;
+    listAdvisorySystems(req: operations.ListAdvisorySystemsRequest, config?: AxiosRequestConfig): Promise<operations.ListAdvisorySystemsResponse>;
     /**
+     * listPackages - Show me all installed packages across my systems
+     *
      * Show me all installed packages across my systems
     **/
-    ListPackages(req: operations.ListPackagesRequest, config?: AxiosRequestConfig): Promise<operations.ListPackagesResponse>;
+    listPackages(req: operations.ListPackagesRequest, config?: AxiosRequestConfig): Promise<operations.ListPackagesResponse>;
     /**
+     * listSystemAdvisories - Show me advisories for a system by given inventory id
+     *
      * Show me advisories for a system by given inventory id
     **/
-    ListSystemAdvisories(req: operations.ListSystemAdvisoriesRequest, config?: AxiosRequestConfig): Promise<operations.ListSystemAdvisoriesResponse>;
+    listSystemAdvisories(req: operations.ListSystemAdvisoriesRequest, config?: AxiosRequestConfig): Promise<operations.ListSystemAdvisoriesResponse>;
     /**
+     * listSystems - Show me all my systems
+     *
      * Show me all my systems
     **/
-    ListSystems(req: operations.ListSystemsRequest, config?: AxiosRequestConfig): Promise<operations.ListSystemsResponse>;
+    listSystems(req: operations.ListSystemsRequest, config?: AxiosRequestConfig): Promise<operations.ListSystemsResponse>;
     /**
+     * packageSystems - Show me all my systems which have a package installed
+     *
      * Show me all my systems which have a package installed
     **/
-    PackageSystems(req: operations.PackageSystemsRequest, config?: AxiosRequestConfig): Promise<operations.PackageSystemsResponse>;
+    packageSystems(req: operations.PackageSystemsRequest, config?: AxiosRequestConfig): Promise<operations.PackageSystemsResponse>;
     /**
+     * packageVersions - Show me all package versions installed on some system
+     *
      * Show me all package versions installed on some system
     **/
-    PackageVersions(req: operations.PackageVersionsRequest, config?: AxiosRequestConfig): Promise<operations.PackageVersionsResponse>;
+    packageVersions(req: operations.PackageVersionsRequest, config?: AxiosRequestConfig): Promise<operations.PackageVersionsResponse>;
     /**
+     * systemPackages - Show me details about a system packages by given inventory id
+     *
      * Show me details about a system packages by given inventory id
     **/
-    SystemPackages(req: operations.SystemPackagesRequest, config?: AxiosRequestConfig): Promise<operations.SystemPackagesResponse>;
+    systemPackages(req: operations.SystemPackagesRequest, config?: AxiosRequestConfig): Promise<operations.SystemPackagesResponse>;
     /**
+     * viewAdvisoriesSystems - View advisory-system pairs for selected systems and advisories
+     *
      * View advisory-system pairs for selected systems and advisories
     **/
-    ViewAdvisoriesSystems(req: operations.ViewAdvisoriesSystemsRequest, config?: AxiosRequestConfig): Promise<operations.ViewAdvisoriesSystemsResponse>;
+    viewAdvisoriesSystems(req: operations.ViewAdvisoriesSystemsRequest, config?: AxiosRequestConfig): Promise<operations.ViewAdvisoriesSystemsResponse>;
     /**
+     * viewSystemsAdvisories - View system-advisory pairs for selected systems and advisories
+     *
      * View system-advisory pairs for selected systems and advisories
     **/
-    ViewSystemsAdvisories(req: operations.ViewSystemsAdvisoriesRequest, config?: AxiosRequestConfig): Promise<operations.ViewSystemsAdvisoriesResponse>;
+    viewSystemsAdvisories(req: operations.ViewSystemsAdvisoriesRequest, config?: AxiosRequestConfig): Promise<operations.ViewSystemsAdvisoriesResponse>;
 }
 export {};

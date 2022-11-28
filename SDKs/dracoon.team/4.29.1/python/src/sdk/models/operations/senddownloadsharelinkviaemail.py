@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class SendDownloadShareLinkViaEmailPathParams:
-    share_id: int = field(default=None, metadata={'path_param': { 'field_name': 'share_id', 'style': 'simple', 'explode': False }})
+    share_id: int = field(metadata={'path_param': { 'field_name': 'share_id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -15,14 +15,14 @@ class SendDownloadShareLinkViaEmailHeaders:
 
 @dataclass
 class SendDownloadShareLinkViaEmailRequest:
-    path_params: SendDownloadShareLinkViaEmailPathParams = field(default=None)
-    headers: SendDownloadShareLinkViaEmailHeaders = field(default=None)
-    request: shared.DownloadShareLinkEmail = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: SendDownloadShareLinkViaEmailHeaders = field()
+    path_params: SendDownloadShareLinkViaEmailPathParams = field()
+    request: shared.DownloadShareLinkEmail = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class SendDownloadShareLinkViaEmailResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error_response: Optional[shared.ErrorResponse] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,20 +1,20 @@
 from dataclasses import dataclass, field
-
+from typing import Optional
 
 
 @dataclass
 class ForumGetPollPathParams:
-    topic_id: int = field(default=None, metadata={'path_param': { 'field_name': 'topicId', 'style': 'simple', 'explode': False }})
+    topic_id: int = field(metadata={'path_param': { 'field_name': 'topicId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class ForumGetPollRequest:
-    path_params: ForumGetPollPathParams = field(default=None)
+    path_params: ForumGetPollPathParams = field()
     
 
 @dataclass
 class ForumGetPollResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { MessageStoragePolicy } from "./messagestoragepolicy";
 import { SchemaSettings } from "./schemasettings";
 // Topic
@@ -35,31 +35,31 @@ var Topic = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=kmsKeyName" }),
+        SpeakeasyMetadata({ data: "json, name=kmsKeyName" }),
         __metadata("design:type", String)
     ], Topic.prototype, "kmsKeyName", void 0);
     __decorate([
-        Metadata({ data: "json, name=labels" }),
+        SpeakeasyMetadata({ data: "json, name=labels" }),
         __metadata("design:type", Map)
     ], Topic.prototype, "labels", void 0);
     __decorate([
-        Metadata({ data: "json, name=messageRetentionDuration" }),
+        SpeakeasyMetadata({ data: "json, name=messageRetentionDuration" }),
         __metadata("design:type", String)
     ], Topic.prototype, "messageRetentionDuration", void 0);
     __decorate([
-        Metadata({ data: "json, name=messageStoragePolicy" }),
+        SpeakeasyMetadata({ data: "json, name=messageStoragePolicy" }),
         __metadata("design:type", MessageStoragePolicy)
     ], Topic.prototype, "messageStoragePolicy", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], Topic.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=satisfiesPzs" }),
+        SpeakeasyMetadata({ data: "json, name=satisfiesPzs" }),
         __metadata("design:type", Boolean)
     ], Topic.prototype, "satisfiesPzs", void 0);
     __decorate([
-        Metadata({ data: "json, name=schemaSettings" }),
+        SpeakeasyMetadata({ data: "json, name=schemaSettings" }),
         __metadata("design:type", SchemaSettings)
     ], Topic.prototype, "schemaSettings", void 0);
     return Topic;

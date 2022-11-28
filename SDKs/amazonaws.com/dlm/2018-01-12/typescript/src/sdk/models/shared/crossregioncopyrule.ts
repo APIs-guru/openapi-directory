@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CrossRegionCopyDeprecateRule } from "./crossregioncopydeprecaterule";
 import { CrossRegionCopyRetainRule } from "./crossregioncopyretainrule";
+
 
 
 // CrossRegionCopyRule
@@ -8,24 +9,24 @@ import { CrossRegionCopyRetainRule } from "./crossregioncopyretainrule";
  * Specifies a rule for cross-Region snapshot copies.
 **/
 export class CrossRegionCopyRule extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CmkArn" })
+  @SpeakeasyMetadata({ data: "json, name=CmkArn" })
   cmkArn?: string;
 
-  @Metadata({ data: "json, name=CopyTags" })
+  @SpeakeasyMetadata({ data: "json, name=CopyTags" })
   copyTags?: boolean;
 
-  @Metadata({ data: "json, name=DeprecateRule" })
+  @SpeakeasyMetadata({ data: "json, name=DeprecateRule" })
   deprecateRule?: CrossRegionCopyDeprecateRule;
 
-  @Metadata({ data: "json, name=Encrypted" })
+  @SpeakeasyMetadata({ data: "json, name=Encrypted" })
   encrypted: boolean;
 
-  @Metadata({ data: "json, name=RetainRule" })
+  @SpeakeasyMetadata({ data: "json, name=RetainRule" })
   retainRule?: CrossRegionCopyRetainRule;
 
-  @Metadata({ data: "json, name=Target" })
+  @SpeakeasyMetadata({ data: "json, name=Target" })
   target?: string;
 
-  @Metadata({ data: "json, name=TargetRegion" })
+  @SpeakeasyMetadata({ data: "json, name=TargetRegion" })
   targetRegion?: string;
 }

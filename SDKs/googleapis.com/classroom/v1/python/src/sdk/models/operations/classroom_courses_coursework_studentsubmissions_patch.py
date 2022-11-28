@@ -1,13 +1,17 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class ClassroomCoursesCourseWorkStudentSubmissionsPatchPathParams:
-    course_id: str = field(default=None, metadata={'path_param': { 'field_name': 'courseId', 'style': 'simple', 'explode': False }})
-    course_work_id: str = field(default=None, metadata={'path_param': { 'field_name': 'courseWorkId', 'style': 'simple', 'explode': False }})
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    course_id: str = field(metadata={'path_param': { 'field_name': 'courseId', 'style': 'simple', 'explode': False }})
+    course_work_id: str = field(metadata={'path_param': { 'field_name': 'courseWorkId', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -28,14 +32,14 @@ class ClassroomCoursesCourseWorkStudentSubmissionsPatchQueryParams:
 
 @dataclass
 class ClassroomCoursesCourseWorkStudentSubmissionsPatchSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class ClassroomCoursesCourseWorkStudentSubmissionsPatchSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -46,15 +50,15 @@ class ClassroomCoursesCourseWorkStudentSubmissionsPatchSecurity:
 
 @dataclass
 class ClassroomCoursesCourseWorkStudentSubmissionsPatchRequest:
-    path_params: ClassroomCoursesCourseWorkStudentSubmissionsPatchPathParams = field(default=None)
-    query_params: ClassroomCoursesCourseWorkStudentSubmissionsPatchQueryParams = field(default=None)
+    path_params: ClassroomCoursesCourseWorkStudentSubmissionsPatchPathParams = field()
+    query_params: ClassroomCoursesCourseWorkStudentSubmissionsPatchQueryParams = field()
+    security: ClassroomCoursesCourseWorkStudentSubmissionsPatchSecurity = field()
     request: Optional[shared.StudentSubmission] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: ClassroomCoursesCourseWorkStudentSubmissionsPatchSecurity = field(default=None)
     
 
 @dataclass
 class ClassroomCoursesCourseWorkStudentSubmissionsPatchResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     student_submission: Optional[shared.StudentSubmission] = field(default=None)
     

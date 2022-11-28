@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudAssuredworkloadsV1beta1ViolationRemediation } from "./googlecloudassuredworkloadsv1beta1violationremediation";
 export var GoogleCloudAssuredworkloadsV1beta1ViolationStateEnum;
 (function (GoogleCloudAssuredworkloadsV1beta1ViolationStateEnum) {
@@ -41,59 +41,59 @@ var GoogleCloudAssuredworkloadsV1beta1Violation = /** @class */ (function (_supe
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=acknowledged" }),
+        SpeakeasyMetadata({ data: "json, name=acknowledged" }),
         __metadata("design:type", Boolean)
     ], GoogleCloudAssuredworkloadsV1beta1Violation.prototype, "acknowledged", void 0);
     __decorate([
-        Metadata({ data: "json, name=acknowledgementTime" }),
+        SpeakeasyMetadata({ data: "json, name=acknowledgementTime" }),
         __metadata("design:type", String)
     ], GoogleCloudAssuredworkloadsV1beta1Violation.prototype, "acknowledgementTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=auditLogLink" }),
+        SpeakeasyMetadata({ data: "json, name=auditLogLink" }),
         __metadata("design:type", String)
     ], GoogleCloudAssuredworkloadsV1beta1Violation.prototype, "auditLogLink", void 0);
     __decorate([
-        Metadata({ data: "json, name=beginTime" }),
+        SpeakeasyMetadata({ data: "json, name=beginTime" }),
         __metadata("design:type", String)
     ], GoogleCloudAssuredworkloadsV1beta1Violation.prototype, "beginTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=category" }),
+        SpeakeasyMetadata({ data: "json, name=category" }),
         __metadata("design:type", String)
     ], GoogleCloudAssuredworkloadsV1beta1Violation.prototype, "category", void 0);
     __decorate([
-        Metadata({ data: "json, name=description" }),
+        SpeakeasyMetadata({ data: "json, name=description" }),
         __metadata("design:type", String)
     ], GoogleCloudAssuredworkloadsV1beta1Violation.prototype, "description", void 0);
     __decorate([
-        Metadata({ data: "json, name=exceptionAuditLogLink" }),
+        SpeakeasyMetadata({ data: "json, name=exceptionAuditLogLink" }),
         __metadata("design:type", String)
     ], GoogleCloudAssuredworkloadsV1beta1Violation.prototype, "exceptionAuditLogLink", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], GoogleCloudAssuredworkloadsV1beta1Violation.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=nonCompliantOrgPolicy" }),
+        SpeakeasyMetadata({ data: "json, name=nonCompliantOrgPolicy" }),
         __metadata("design:type", String)
     ], GoogleCloudAssuredworkloadsV1beta1Violation.prototype, "nonCompliantOrgPolicy", void 0);
     __decorate([
-        Metadata({ data: "json, name=orgPolicyConstraint" }),
+        SpeakeasyMetadata({ data: "json, name=orgPolicyConstraint" }),
         __metadata("design:type", String)
     ], GoogleCloudAssuredworkloadsV1beta1Violation.prototype, "orgPolicyConstraint", void 0);
     __decorate([
-        Metadata({ data: "json, name=remediation" }),
+        SpeakeasyMetadata({ data: "json, name=remediation" }),
         __metadata("design:type", GoogleCloudAssuredworkloadsV1beta1ViolationRemediation)
     ], GoogleCloudAssuredworkloadsV1beta1Violation.prototype, "remediation", void 0);
     __decorate([
-        Metadata({ data: "json, name=resolveTime" }),
+        SpeakeasyMetadata({ data: "json, name=resolveTime" }),
         __metadata("design:type", String)
     ], GoogleCloudAssuredworkloadsV1beta1Violation.prototype, "resolveTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=state" }),
+        SpeakeasyMetadata({ data: "json, name=state" }),
         __metadata("design:type", String)
     ], GoogleCloudAssuredworkloadsV1beta1Violation.prototype, "state", void 0);
     __decorate([
-        Metadata({ data: "json, name=updateTime" }),
+        SpeakeasyMetadata({ data: "json, name=updateTime" }),
         __metadata("design:type", String)
     ], GoogleCloudAssuredworkloadsV1beta1Violation.prototype, "updateTime", void 0);
     return GoogleCloudAssuredworkloadsV1beta1Violation;

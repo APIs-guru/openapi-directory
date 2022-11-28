@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 export declare enum EndpointWebsocketContentTypeEnum {
     AudioL16RateEqual8000 = "audio/l16;rate=8000",
     AudioL16RateEqual16000 = "audio/l16;rate=16000"

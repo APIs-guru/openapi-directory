@@ -33,7 +33,7 @@ type IntegrationsProjectsLocationsSfdcInstancesSfdcChannelsPatchSecurity struct 
 type IntegrationsProjectsLocationsSfdcInstancesSfdcChannelsPatchRequest struct {
 	PathParams  IntegrationsProjectsLocationsSfdcInstancesSfdcChannelsPatchPathParams
 	QueryParams IntegrationsProjectsLocationsSfdcInstancesSfdcChannelsPatchQueryParams
-	Request     *shared.GoogleCloudIntegrationsV1alphaSfdcChannel `request:"mediaType=application/json"`
+	Request     *shared.GoogleCloudIntegrationsV1alphaSfdcChannelInput `request:"mediaType=application/json"`
 	Security    IntegrationsProjectsLocationsSfdcInstancesSfdcChannelsPatchSecurity
 }
 

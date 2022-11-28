@@ -40,7 +40,7 @@ type DialogflowProjectsLocationsConversationsMessagesBatchCreateSecurity struct 
 type DialogflowProjectsLocationsConversationsMessagesBatchCreateRequest struct {
 	PathParams  DialogflowProjectsLocationsConversationsMessagesBatchCreatePathParams
 	QueryParams DialogflowProjectsLocationsConversationsMessagesBatchCreateQueryParams
-	Request     *shared.GoogleCloudDialogflowV2beta1BatchCreateMessagesRequest `request:"mediaType=application/json"`
+	Request     *shared.GoogleCloudDialogflowV2beta1BatchCreateMessagesRequestInput `request:"mediaType=application/json"`
 	Security    DialogflowProjectsLocationsConversationsMessagesBatchCreateSecurity
 }
 

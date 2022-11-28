@@ -1,8 +1,11 @@
-import warnings
+
+
 import requests
-from typing import List,Optional
+from typing import Optional
 from sdk.models import operations
 from . import utils
+
+
 
 
 SERVERS = [
@@ -11,28 +14,49 @@ SERVERS = [
 
 
 class SDK:
-    client = requests.Session()
-    server_url = SERVERS[0]
+    
+
+    _client: requests.Session
+    _security_client: requests.Session
+    
+    _server_url: str = SERVERS[0]
+    _language: str = "python"
+    _sdk_version: str = "0.0.1"
+    _gen_version: str = "internal"
+
+    def __init__(self) -> None:
+        self._client = requests.Session()
+        self._security_client = requests.Session()
+        
+
 
     def config_server_url(self, server_url: str, params: dict[str, str]):
-        if not params is None:
-            self.server_url = utils.replace_parameters(server_url, params)
+        if params is not None:
+            self._server_url = utils.replace_parameters(server_url, params)
         else:
-            self.server_url = server_url
-            
+            self._server_url = server_url
+
+        
     
 
+    def config_client(self, client: requests.Session):
+        self._client = client
+        
+    
+    
     
     def get_api_v2_list_federations(self, request: operations.GetAPIV2ListFederationsRequest) -> operations.GetAPIV2ListFederationsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns an array of all the available federations.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/v2/list-federations"
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -51,15 +75,17 @@ class SDK:
 
     
     def get_api_v2_list_markets(self, request: operations.GetAPIV2ListMarketsRequest) -> operations.GetAPIV2ListMarketsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns an array of all the supported prediction markets
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/v2/list-markets"
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -78,15 +104,17 @@ class SDK:
 
     
     def get_api_v2_performance_stats(self, request: operations.GetAPIV2PerformanceStatsRequest) -> operations.GetAPIV2PerformanceStatsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns predictions accuracy in the last 1, 7, 14, 30 days.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/v2/performance-stats"
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -105,15 +133,17 @@ class SDK:
 
     
     def get_api_v2_predictions(self, request: operations.GetAPIV2PredictionsRequest) -> operations.GetAPIV2PredictionsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""This endpoint returns by default the next non-expired football predictions. URL parameters can be specified to show specific date in the past or future or to filter by federation and prediction market name.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/v2/predictions"
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -130,13 +160,16 @@ class SDK:
 
     
     def get_api_v2_predictions_id_(self, request: operations.GetAPIV2PredictionsIDRequest) -> operations.GetAPIV2PredictionsIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns all predictions available for a match id.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/v2/predictions/{id}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 

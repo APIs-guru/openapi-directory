@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class TimeWindow extends SpeakeasyBase {
-  @Metadata({ data: "json, name=earliest" })
+  @SpeakeasyMetadata({ data: "json, name=earliest" })
   earliest?: number;
 
-  @Metadata({ data: "json, name=latest" })
+  @SpeakeasyMetadata({ data: "json, name=latest" })
   latest?: number;
 }

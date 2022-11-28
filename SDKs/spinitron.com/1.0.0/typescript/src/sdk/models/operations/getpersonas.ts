@@ -1,59 +1,60 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetPersonasQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=count" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=count" })
   count?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=expand" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=expand" })
   expand?: string[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=fields" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=fields" })
   fields?: string[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=name" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=name" })
   name?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=page" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page" })
   page?: number;
 }
 
 
-export class GetPersonasRequest extends SpeakeasyBase {
-  @Metadata()
-  queryParams: GetPersonasQueryParams;
-}
-
-
 export class GetPersonas200ApplicationJsonLinks extends SpeakeasyBase {
-  @Metadata({ data: "json, name=self" })
+  @SpeakeasyMetadata({ data: "json, name=self" })
   self?: shared.Link;
 }
 
 
 export class GetPersonas200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=_links" })
+  @SpeakeasyMetadata({ data: "json, name=_links" })
   links?: GetPersonas200ApplicationJsonLinks;
 
-  @Metadata({ data: "json, name=_meta" })
+  @SpeakeasyMetadata({ data: "json, name=_meta" })
   meta?: shared.Pagination;
 
-  @Metadata({ data: "json, name=items", elemType: shared.Persona })
+  @SpeakeasyMetadata({ data: "json, name=items", elemType: shared.Persona })
   items?: shared.Persona[];
 }
 
 
+export class GetPersonasRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  queryParams: GetPersonasQueryParams;
+}
+
+
 export class GetPersonasResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getPersonas200ApplicationJsonObject?: GetPersonas200ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

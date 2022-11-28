@@ -1,7 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import asset
+from sdk import utils
+from . import *
 
 class ListAssetsResultStateEnum(str, Enum):
     STATE_UNSPECIFIED = "STATE_UNSPECIFIED"
@@ -14,6 +16,10 @@ class ListAssetsResultStateEnum(str, Enum):
 @dataclass_json
 @dataclass
 class ListAssetsResult:
-    asset: Optional[asset.Asset] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'asset' }})
-    state: Optional[ListAssetsResultStateEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'state' }})
+    r"""ListAssetsResult
+    Result containing the Asset and its State.
+    """
+    
+    asset: Optional[Asset] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('asset') }})
+    state: Optional[ListAssetsResultStateEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('state') }})
     

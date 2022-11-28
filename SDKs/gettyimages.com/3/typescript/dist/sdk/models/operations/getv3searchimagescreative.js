@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetV3SearchImagesCreativeQueryParams = /** @class */ (function (_super) {
     __extends(GetV3SearchImagesCreativeQueryParams, _super);
@@ -30,115 +30,115 @@ var GetV3SearchImagesCreativeQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=false;name=age_of_people" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=age_of_people" }),
         __metadata("design:type", Array)
     ], GetV3SearchImagesCreativeQueryParams.prototype, "ageOfPeople", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=artists" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=artists" }),
         __metadata("design:type", String)
     ], GetV3SearchImagesCreativeQueryParams.prototype, "artists", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=false;name=collection_codes" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=collection_codes" }),
         __metadata("design:type", Array)
     ], GetV3SearchImagesCreativeQueryParams.prototype, "collectionCodes", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=collections_filter_type" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=collections_filter_type" }),
         __metadata("design:type", String)
     ], GetV3SearchImagesCreativeQueryParams.prototype, "collectionsFilterType", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=color" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=color" }),
         __metadata("design:type", String)
     ], GetV3SearchImagesCreativeQueryParams.prototype, "color", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=false;name=compositions" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=compositions" }),
         __metadata("design:type", Array)
     ], GetV3SearchImagesCreativeQueryParams.prototype, "compositions", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=download_product" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=download_product" }),
         __metadata("design:type", String)
     ], GetV3SearchImagesCreativeQueryParams.prototype, "downloadProduct", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=embed_content_only" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=embed_content_only" }),
         __metadata("design:type", Boolean)
     ], GetV3SearchImagesCreativeQueryParams.prototype, "embedContentOnly", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=false;name=ethnicity" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=ethnicity" }),
         __metadata("design:type", Array)
     ], GetV3SearchImagesCreativeQueryParams.prototype, "ethnicity", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=exclude_editorial_use_only" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=exclude_editorial_use_only" }),
         __metadata("design:type", Boolean)
     ], GetV3SearchImagesCreativeQueryParams.prototype, "excludeEditorialUseOnly", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=exclude_nudity" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=exclude_nudity" }),
         __metadata("design:type", Boolean)
     ], GetV3SearchImagesCreativeQueryParams.prototype, "excludeNudity", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=false;name=facet_fields" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=facet_fields" }),
         __metadata("design:type", Array)
     ], GetV3SearchImagesCreativeQueryParams.prototype, "facetFields", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=facet_max_count" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=facet_max_count" }),
         __metadata("design:type", Number)
     ], GetV3SearchImagesCreativeQueryParams.prototype, "facetMaxCount", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=false;name=fields" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=fields" }),
         __metadata("design:type", Array)
     ], GetV3SearchImagesCreativeQueryParams.prototype, "fields", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=false;name=file_types" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=file_types" }),
         __metadata("design:type", Array)
     ], GetV3SearchImagesCreativeQueryParams.prototype, "fileTypes", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=false;name=graphical_styles" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=graphical_styles" }),
         __metadata("design:type", Array)
     ], GetV3SearchImagesCreativeQueryParams.prototype, "graphicalStyles", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=graphical_styles_filter_type" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=graphical_styles_filter_type" }),
         __metadata("design:type", String)
     ], GetV3SearchImagesCreativeQueryParams.prototype, "graphicalStylesFilterType", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=include_facets" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=include_facets" }),
         __metadata("design:type", Boolean)
     ], GetV3SearchImagesCreativeQueryParams.prototype, "includeFacets", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=include_related_searches" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=include_related_searches" }),
         __metadata("design:type", Boolean)
     ], GetV3SearchImagesCreativeQueryParams.prototype, "includeRelatedSearches", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=false;name=keyword_ids" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=keyword_ids" }),
         __metadata("design:type", Array)
     ], GetV3SearchImagesCreativeQueryParams.prototype, "keywordIds", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=minimum_size" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=minimum_size" }),
         __metadata("design:type", String)
     ], GetV3SearchImagesCreativeQueryParams.prototype, "minimumSize", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=false;name=number_of_people" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=number_of_people" }),
         __metadata("design:type", Array)
     ], GetV3SearchImagesCreativeQueryParams.prototype, "numberOfPeople", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=false;name=orientations" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=orientations" }),
         __metadata("design:type", Array)
     ], GetV3SearchImagesCreativeQueryParams.prototype, "orientations", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=page" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page" }),
         __metadata("design:type", Number)
     ], GetV3SearchImagesCreativeQueryParams.prototype, "page", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=page_size" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page_size" }),
         __metadata("design:type", Number)
     ], GetV3SearchImagesCreativeQueryParams.prototype, "pageSize", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=phrase" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=phrase" }),
         __metadata("design:type", String)
     ], GetV3SearchImagesCreativeQueryParams.prototype, "phrase", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=safe_search" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=safe_search" }),
         __metadata("design:type", Boolean)
     ], GetV3SearchImagesCreativeQueryParams.prototype, "safeSearch", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=sort_order" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sort_order" }),
         __metadata("design:type", String)
     ], GetV3SearchImagesCreativeQueryParams.prototype, "sortOrder", void 0);
     return GetV3SearchImagesCreativeQueryParams;
@@ -150,11 +150,11 @@ var GetV3SearchImagesCreativeHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=Accept-Language" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Accept-Language" }),
         __metadata("design:type", String)
     ], GetV3SearchImagesCreativeHeaders.prototype, "acceptLanguage", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=GI-Country-Code" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=GI-Country-Code" }),
         __metadata("design:type", String)
     ], GetV3SearchImagesCreativeHeaders.prototype, "giCountryCode", void 0);
     return GetV3SearchImagesCreativeHeaders;
@@ -166,11 +166,11 @@ var GetV3SearchImagesCreativeRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetV3SearchImagesCreativeQueryParams)
     ], GetV3SearchImagesCreativeRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetV3SearchImagesCreativeHeaders)
     ], GetV3SearchImagesCreativeRequest.prototype, "headers", void 0);
     return GetV3SearchImagesCreativeRequest;
@@ -182,15 +182,15 @@ var GetV3SearchImagesCreativeResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetV3SearchImagesCreativeResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.CreativeImageSearchResults)
     ], GetV3SearchImagesCreativeResponse.prototype, "creativeImageSearchResults", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetV3SearchImagesCreativeResponse.prototype, "statusCode", void 0);
     return GetV3SearchImagesCreativeResponse;

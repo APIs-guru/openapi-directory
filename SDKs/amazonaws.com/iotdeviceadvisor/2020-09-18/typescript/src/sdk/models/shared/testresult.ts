@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GroupResult } from "./groupresult";
+
 
 
 // TestResult
@@ -8,6 +8,6 @@ import { GroupResult } from "./groupresult";
  * Show each group result.
 **/
 export class TestResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=groups", elemType: shared.GroupResult })
+  @SpeakeasyMetadata({ data: "json, name=groups", elemType: GroupResult })
   groups?: GroupResult[];
 }

@@ -1,13 +1,19 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import worldgenerationjoberrorcode_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class WorldFailure:
-    failure_code: Optional[worldgenerationjoberrorcode_enum.WorldGenerationJobErrorCodeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'failureCode' }})
-    failure_count: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'failureCount' }})
-    sample_failure_reason: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'sampleFailureReason' }})
+    r"""WorldFailure
+    Information about a failed world.
+    """
+    
+    failure_code: Optional[WorldGenerationJobErrorCodeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('failureCode') }})
+    failure_count: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('failureCount') }})
+    sample_failure_reason: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('sampleFailureReason') }})
     

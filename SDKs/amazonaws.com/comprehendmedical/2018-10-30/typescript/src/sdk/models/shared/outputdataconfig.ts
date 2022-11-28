@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // OutputDataConfig
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The output properties for a detection job.
 **/
 export class OutputDataConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=S3Bucket" })
+  @SpeakeasyMetadata({ data: "json, name=S3Bucket" })
   s3Bucket: string;
 
-  @Metadata({ data: "json, name=S3Key" })
+  @SpeakeasyMetadata({ data: "json, name=S3Key" })
   s3Key?: string;
 }

@@ -9,13 +9,13 @@ class GetSearchV1FieldsQueryParams:
 
 @dataclass
 class GetSearchV1FieldsRequest:
-    query_params: GetSearchV1FieldsQueryParams = field(default=None)
+    query_params: GetSearchV1FieldsQueryParams = field()
     
 
 @dataclass
 class GetSearchV1FieldsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     fields: Optional[List[str]] = field(default=None)
-    status_code: int = field(default=None)
     

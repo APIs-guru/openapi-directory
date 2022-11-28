@@ -5,17 +5,17 @@ from sdk.models import shared
 
 @dataclass
 class GetRegistrierkassePathParams:
-    registrierkasse_uuid: str = field(default=None, metadata={'path_param': { 'field_name': 'registrierkasseUuid', 'style': 'simple', 'explode': False }})
+    registrierkasse_uuid: str = field(metadata={'path_param': { 'field_name': 'registrierkasseUuid', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetRegistrierkasseRequest:
-    path_params: GetRegistrierkassePathParams = field(default=None)
+    path_params: GetRegistrierkassePathParams = field()
     
 
 @dataclass
 class GetRegistrierkasseResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     registrierkasse: Optional[shared.Registrierkasse] = field(default=None)
-    status_code: int = field(default=None)
     

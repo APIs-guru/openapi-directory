@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RoleMapping } from "./rolemapping";
+
 
 
 // GetIdentityPoolRolesResponse
@@ -8,12 +8,12 @@ import { RoleMapping } from "./rolemapping";
  * Returned in response to a successful <code>GetIdentityPoolRoles</code> operation.
 **/
 export class GetIdentityPoolRolesResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=IdentityPoolId" })
+  @SpeakeasyMetadata({ data: "json, name=IdentityPoolId" })
   identityPoolId?: string;
 
-  @Metadata({ data: "json, name=RoleMappings", elemType: shared.RoleMapping })
+  @SpeakeasyMetadata({ data: "json, name=RoleMappings", elemType: RoleMapping })
   roleMappings?: Map<string, RoleMapping>;
 
-  @Metadata({ data: "json, name=Roles" })
+  @SpeakeasyMetadata({ data: "json, name=Roles" })
   roles?: Map<string, string>;
 }

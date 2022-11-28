@@ -1,5 +1,7 @@
 package shared
 
+// MerchantOrderReturn
+// Order return. Production access (all methods) requires the order manager role. Sandbox access does not.
 type MerchantOrderReturn struct {
 	CreationDate      *string                   `json:"creationDate,omitempty"`
 	MerchantOrderID   *string                   `json:"merchantOrderId,omitempty"`

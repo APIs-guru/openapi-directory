@@ -1,61 +1,62 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class CreateMockRequestBodyMock extends SpeakeasyBase {
-  @Metadata({ data: "json, name=collection" })
+  @SpeakeasyMetadata({ data: "json, name=collection" })
   collection?: string;
 
-  @Metadata({ data: "json, name=environment" })
+  @SpeakeasyMetadata({ data: "json, name=environment" })
   environment?: string;
 }
 
 
 export class CreateMockRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=mock" })
+  @SpeakeasyMetadata({ data: "json, name=mock" })
   mock?: CreateMockRequestBodyMock;
 }
 
 
-export class CreateMockRequest extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/json" })
-  request?: CreateMockRequestBody;
-}
-
-
 export class CreateMock200ApplicationJsonMock extends SpeakeasyBase {
-  @Metadata({ data: "json, name=collection" })
+  @SpeakeasyMetadata({ data: "json, name=collection" })
   collection?: string;
 
-  @Metadata({ data: "json, name=environment" })
+  @SpeakeasyMetadata({ data: "json, name=environment" })
   environment?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=mockUrl" })
+  @SpeakeasyMetadata({ data: "json, name=mockUrl" })
   mockUrl?: string;
 
-  @Metadata({ data: "json, name=owner" })
+  @SpeakeasyMetadata({ data: "json, name=owner" })
   owner?: string;
 
-  @Metadata({ data: "json, name=uid" })
+  @SpeakeasyMetadata({ data: "json, name=uid" })
   uid?: string;
 }
 
 
 export class CreateMock200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=mock" })
+  @SpeakeasyMetadata({ data: "json, name=mock" })
   mock?: CreateMock200ApplicationJsonMock;
 }
 
 
+export class CreateMockRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request?: CreateMockRequestBody;
+}
+
+
 export class CreateMockResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   createMock200ApplicationJsonObject?: CreateMock200ApplicationJson;
 }

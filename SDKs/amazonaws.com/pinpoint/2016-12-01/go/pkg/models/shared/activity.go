@@ -1,5 +1,7 @@
 package shared
 
+// Activity
+// Specifies the configuration and other settings for an activity in a journey.
 type Activity struct {
 	Custom           *CustomMessageActivity         `json:"CUSTOM,omitempty"`
 	ConditionalSplit *ConditionalSplitActivity      `json:"ConditionalSplit,omitempty"`

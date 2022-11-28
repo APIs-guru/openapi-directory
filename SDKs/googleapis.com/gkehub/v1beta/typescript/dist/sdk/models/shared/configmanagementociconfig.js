@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // ConfigManagementOciConfig
 /**
  * OCI repo configuration for a single cluster
@@ -33,23 +33,23 @@ var ConfigManagementOciConfig = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=gcpServiceAccountEmail" }),
+        SpeakeasyMetadata({ data: "json, name=gcpServiceAccountEmail" }),
         __metadata("design:type", String)
     ], ConfigManagementOciConfig.prototype, "gcpServiceAccountEmail", void 0);
     __decorate([
-        Metadata({ data: "json, name=policyDir" }),
+        SpeakeasyMetadata({ data: "json, name=policyDir" }),
         __metadata("design:type", String)
     ], ConfigManagementOciConfig.prototype, "policyDir", void 0);
     __decorate([
-        Metadata({ data: "json, name=secretType" }),
+        SpeakeasyMetadata({ data: "json, name=secretType" }),
         __metadata("design:type", String)
     ], ConfigManagementOciConfig.prototype, "secretType", void 0);
     __decorate([
-        Metadata({ data: "json, name=syncRepo" }),
+        SpeakeasyMetadata({ data: "json, name=syncRepo" }),
         __metadata("design:type", String)
     ], ConfigManagementOciConfig.prototype, "syncRepo", void 0);
     __decorate([
-        Metadata({ data: "json, name=syncWaitSecs" }),
+        SpeakeasyMetadata({ data: "json, name=syncWaitSecs" }),
         __metadata("design:type", String)
     ], ConfigManagementOciConfig.prototype, "syncWaitSecs", void 0);
     return ConfigManagementOciConfig;

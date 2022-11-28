@@ -10,7 +10,7 @@ type PayeeDetailsUpdateV3PathParams struct {
 
 type PayeeDetailsUpdateV3Request struct {
 	PathParams PayeeDetailsUpdateV3PathParams
-	Request    shared.UpdatePayeeDetailsRequest `request:"mediaType=application/json"`
+	Request    shared.UpdatePayeeDetailsRequestInput `request:"mediaType=application/json"`
 }
 
 type PayeeDetailsUpdateV3Response struct {

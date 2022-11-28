@@ -1,5 +1,7 @@
 package shared
 
+// UpdateUploadShareRequest
+// Request model for updating an Upload Share
 type UpdateUploadShareRequest struct {
 	DefaultCountry         *string           `json:"defaultCountry,omitempty"`
 	Expiration             *ObjectExpiration `json:"expiration,omitempty"`

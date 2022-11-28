@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ItemRouting extends SpeakeasyBase {
-  @Metadata({ data: "json, name=destinations" })
+  @SpeakeasyMetadata({ data: "json, name=destinations" })
   destinations?: string[];
 
-  @Metadata({ data: "json, name=reportIndex" })
+  @SpeakeasyMetadata({ data: "json, name=reportIndex" })
   reportIndex?: number;
 
-  @Metadata({ data: "json, name=trackingId" })
+  @SpeakeasyMetadata({ data: "json, name=trackingId" })
   trackingId?: string;
 }

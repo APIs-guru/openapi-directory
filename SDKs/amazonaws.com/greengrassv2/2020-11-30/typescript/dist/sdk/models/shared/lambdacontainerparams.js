@@ -22,8 +22,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { LambdaDeviceMount } from "./lambdadevicemount";
+import { LambdaVolumeMount } from "./lambdavolumemount";
 // LambdaContainerParams
 /**
  * Contains information about a container in which Lambda functions run on Greengrass core devices.
@@ -34,19 +35,19 @@ var LambdaContainerParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=devices", elemType: shared.LambdaDeviceMount }),
+        SpeakeasyMetadata({ data: "json, name=devices", elemType: LambdaDeviceMount }),
         __metadata("design:type", Array)
     ], LambdaContainerParams.prototype, "devices", void 0);
     __decorate([
-        Metadata({ data: "json, name=memorySizeInKB" }),
+        SpeakeasyMetadata({ data: "json, name=memorySizeInKB" }),
         __metadata("design:type", Number)
     ], LambdaContainerParams.prototype, "memorySizeInKb", void 0);
     __decorate([
-        Metadata({ data: "json, name=mountROSysfs" }),
+        SpeakeasyMetadata({ data: "json, name=mountROSysfs" }),
         __metadata("design:type", Boolean)
     ], LambdaContainerParams.prototype, "mountRoSysfs", void 0);
     __decorate([
-        Metadata({ data: "json, name=volumes", elemType: shared.LambdaVolumeMount }),
+        SpeakeasyMetadata({ data: "json, name=volumes", elemType: LambdaVolumeMount }),
         __metadata("design:type", Array)
     ], LambdaContainerParams.prototype, "volumes", void 0);
     return LambdaContainerParams;

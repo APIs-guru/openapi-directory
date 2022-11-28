@@ -1,5 +1,7 @@
 package shared
 
+// SchemaGroup
+// An HL7v2 logical group construct.
 type SchemaGroup struct {
 	Choice    *bool            `json:"choice,omitempty"`
 	MaxOccurs *int32           `json:"maxOccurs,omitempty"`

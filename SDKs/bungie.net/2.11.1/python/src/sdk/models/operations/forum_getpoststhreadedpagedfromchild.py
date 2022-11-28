@@ -4,12 +4,12 @@ from typing import Optional
 
 @dataclass
 class ForumGetPostsThreadedPagedFromChildPathParams:
-    child_post_id: int = field(default=None, metadata={'path_param': { 'field_name': 'childPostId', 'style': 'simple', 'explode': False }})
-    page: int = field(default=None, metadata={'path_param': { 'field_name': 'page', 'style': 'simple', 'explode': False }})
-    page_size: int = field(default=None, metadata={'path_param': { 'field_name': 'pageSize', 'style': 'simple', 'explode': False }})
-    reply_size: int = field(default=None, metadata={'path_param': { 'field_name': 'replySize', 'style': 'simple', 'explode': False }})
-    root_thread_mode: bool = field(default=None, metadata={'path_param': { 'field_name': 'rootThreadMode', 'style': 'simple', 'explode': False }})
-    sort_mode: int = field(default=None, metadata={'path_param': { 'field_name': 'sortMode', 'style': 'simple', 'explode': False }})
+    child_post_id: int = field(metadata={'path_param': { 'field_name': 'childPostId', 'style': 'simple', 'explode': False }})
+    page: int = field(metadata={'path_param': { 'field_name': 'page', 'style': 'simple', 'explode': False }})
+    page_size: int = field(metadata={'path_param': { 'field_name': 'pageSize', 'style': 'simple', 'explode': False }})
+    reply_size: int = field(metadata={'path_param': { 'field_name': 'replySize', 'style': 'simple', 'explode': False }})
+    root_thread_mode: bool = field(metadata={'path_param': { 'field_name': 'rootThreadMode', 'style': 'simple', 'explode': False }})
+    sort_mode: int = field(metadata={'path_param': { 'field_name': 'sortMode', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -19,13 +19,13 @@ class ForumGetPostsThreadedPagedFromChildQueryParams:
 
 @dataclass
 class ForumGetPostsThreadedPagedFromChildRequest:
-    path_params: ForumGetPostsThreadedPagedFromChildPathParams = field(default=None)
-    query_params: ForumGetPostsThreadedPagedFromChildQueryParams = field(default=None)
+    path_params: ForumGetPostsThreadedPagedFromChildPathParams = field()
+    query_params: ForumGetPostsThreadedPagedFromChildQueryParams = field()
     
 
 @dataclass
 class ForumGetPostsThreadedPagedFromChildResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

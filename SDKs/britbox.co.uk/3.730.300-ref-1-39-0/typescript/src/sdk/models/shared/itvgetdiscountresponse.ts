@@ -1,31 +1,32 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ItvGetDiscountResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=currency" })
+  @SpeakeasyMetadata({ data: "json, name=currency" })
   currency?: string;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=headline" })
+  @SpeakeasyMetadata({ data: "json, name=headline" })
   headline?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: string;
 
-  @Metadata({ data: "json, name=initialCost" })
+  @SpeakeasyMetadata({ data: "json, name=initialCost" })
   initialCost?: number;
 
-  @Metadata({ data: "json, name=longDescription" })
+  @SpeakeasyMetadata({ data: "json, name=longDescription" })
   longDescription?: string;
 
-  @Metadata({ data: "json, name=nickname" })
+  @SpeakeasyMetadata({ data: "json, name=nickname" })
   nickname?: string;
 
-  @Metadata({ data: "json, name=offerdurationperiod" })
+  @SpeakeasyMetadata({ data: "json, name=offerdurationperiod" })
   offerdurationperiod?: string;
 
-  @Metadata({ data: "json, name=shortDescription" })
+  @SpeakeasyMetadata({ data: "json, name=shortDescription" })
   shortDescription?: string;
 }

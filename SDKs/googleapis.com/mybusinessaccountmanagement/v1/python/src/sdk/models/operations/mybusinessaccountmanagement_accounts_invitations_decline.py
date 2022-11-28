@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class MybusinessaccountmanagementAccountsInvitationsDeclinePathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,14 +26,14 @@ class MybusinessaccountmanagementAccountsInvitationsDeclineQueryParams:
 
 @dataclass
 class MybusinessaccountmanagementAccountsInvitationsDeclineRequest:
-    path_params: MybusinessaccountmanagementAccountsInvitationsDeclinePathParams = field(default=None)
-    query_params: MybusinessaccountmanagementAccountsInvitationsDeclineQueryParams = field(default=None)
+    path_params: MybusinessaccountmanagementAccountsInvitationsDeclinePathParams = field()
+    query_params: MybusinessaccountmanagementAccountsInvitationsDeclineQueryParams = field()
     request: Optional[dict[str, Any]] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class MybusinessaccountmanagementAccountsInvitationsDeclineResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     empty: Optional[dict[str, Any]] = field(default=None)
-    status_code: int = field(default=None)
     

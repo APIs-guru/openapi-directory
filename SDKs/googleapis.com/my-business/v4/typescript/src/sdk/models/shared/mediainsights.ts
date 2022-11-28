@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // MediaInsights
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Insights and statistics for the media item.
 **/
 export class MediaInsights extends SpeakeasyBase {
-  @Metadata({ data: "json, name=viewCount" })
+  @SpeakeasyMetadata({ data: "json, name=viewCount" })
   viewCount?: string;
 }

@@ -1,41 +1,42 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class UploadResumableInitHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Upload-Content-Length" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Upload-Content-Length" })
   xUploadContentLength: number;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Upload-Content-Type" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Upload-Content-Type" })
   xUploadContentType: string;
 }
 
 
 export class UploadResumableInitSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   oAuth2: shared.SchemeOAuth2;
 }
 
 
 export class UploadResumableInitRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: UploadResumableInitHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request?: shared.VideoUploadRequestResumable;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: UploadResumableInitSecurity;
 }
 
 
 export class UploadResumableInitResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: Map<string, string[]>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

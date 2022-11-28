@@ -1,4 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DistributionUpdate } from "./distributionupdate";
 import { FloatingPointList } from "./floatingpointlist";
 import { FloatingPointMean } from "./floatingpointmean";
@@ -11,53 +11,54 @@ import { StringList } from "./stringlist";
 import { CounterStructuredNameAndMetadata } from "./counterstructurednameandmetadata";
 
 
+
 // CounterUpdate
 /** 
  * An update to a Counter sent from a worker.
 **/
 export class CounterUpdate extends SpeakeasyBase {
-  @Metadata({ data: "json, name=boolean" })
+  @SpeakeasyMetadata({ data: "json, name=boolean" })
   boolean?: boolean;
 
-  @Metadata({ data: "json, name=cumulative" })
+  @SpeakeasyMetadata({ data: "json, name=cumulative" })
   cumulative?: boolean;
 
-  @Metadata({ data: "json, name=distribution" })
+  @SpeakeasyMetadata({ data: "json, name=distribution" })
   distribution?: DistributionUpdate;
 
-  @Metadata({ data: "json, name=floatingPoint" })
+  @SpeakeasyMetadata({ data: "json, name=floatingPoint" })
   floatingPoint?: number;
 
-  @Metadata({ data: "json, name=floatingPointList" })
+  @SpeakeasyMetadata({ data: "json, name=floatingPointList" })
   floatingPointList?: FloatingPointList;
 
-  @Metadata({ data: "json, name=floatingPointMean" })
+  @SpeakeasyMetadata({ data: "json, name=floatingPointMean" })
   floatingPointMean?: FloatingPointMean;
 
-  @Metadata({ data: "json, name=integer" })
+  @SpeakeasyMetadata({ data: "json, name=integer" })
   integer?: SplitInt64;
 
-  @Metadata({ data: "json, name=integerGauge" })
+  @SpeakeasyMetadata({ data: "json, name=integerGauge" })
   integerGauge?: IntegerGauge;
 
-  @Metadata({ data: "json, name=integerList" })
+  @SpeakeasyMetadata({ data: "json, name=integerList" })
   integerList?: IntegerList;
 
-  @Metadata({ data: "json, name=integerMean" })
+  @SpeakeasyMetadata({ data: "json, name=integerMean" })
   integerMean?: IntegerMean;
 
-  @Metadata({ data: "json, name=internal" })
+  @SpeakeasyMetadata({ data: "json, name=internal" })
   internal?: any;
 
-  @Metadata({ data: "json, name=nameAndKind" })
+  @SpeakeasyMetadata({ data: "json, name=nameAndKind" })
   nameAndKind?: NameAndKind;
 
-  @Metadata({ data: "json, name=shortId" })
+  @SpeakeasyMetadata({ data: "json, name=shortId" })
   shortId?: string;
 
-  @Metadata({ data: "json, name=stringList" })
+  @SpeakeasyMetadata({ data: "json, name=stringList" })
   stringList?: StringList;
 
-  @Metadata({ data: "json, name=structuredNameAndMetadata" })
+  @SpeakeasyMetadata({ data: "json, name=structuredNameAndMetadata" })
   structuredNameAndMetadata?: CounterStructuredNameAndMetadata;
 }

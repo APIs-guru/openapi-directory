@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // RtiTransactionBaseRtiTransactionBaseEmployerCore
@@ -6,53 +7,53 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The rti transaction bases' employer core
 **/
 export class RtiTransactionBaseRtiTransactionBaseEmployerCore extends SpeakeasyBase {
-  @Metadata({ data: "json, name=@href" })
+  @SpeakeasyMetadata({ data: "json, name=@href" })
   atHref?: string;
 
-  @Metadata({ data: "json, name=@rel" })
+  @SpeakeasyMetadata({ data: "json, name=@rel" })
   atRel?: string;
 
-  @Metadata({ data: "json, name=@title" })
+  @SpeakeasyMetadata({ data: "json, name=@title" })
   atTitle?: string;
 }
 
 export enum RtiTransactionBaseRtiTransactionBaseTransactionStatusEnum {
-    New = "New"
-,    RequestGenerated = "RequestGenerated"
-,    CompletedWithError = "CompletedWithError"
-,    CompletedWithSuccess = "CompletedWithSuccess"
-,    TimeOut = "TimeOut"
+    New = "New",
+    RequestGenerated = "RequestGenerated",
+    CompletedWithError = "CompletedWithError",
+    CompletedWithSuccess = "CompletedWithSuccess",
+    TimeOut = "TimeOut"
 }
 
 
 export class RtiTransactionBaseRtiTransactionBase extends SpeakeasyBase {
-  @Metadata({ data: "json, name=EmployerCore" })
+  @SpeakeasyMetadata({ data: "json, name=EmployerCore" })
   employerCore?: RtiTransactionBaseRtiTransactionBaseEmployerCore;
 
-  @Metadata({ data: "json, name=RequestData" })
+  @SpeakeasyMetadata({ data: "json, name=RequestData" })
   requestData?: string;
 
-  @Metadata({ data: "json, name=ResponseData" })
+  @SpeakeasyMetadata({ data: "json, name=ResponseData" })
   responseData?: string;
 
-  @Metadata({ data: "json, name=RtiType" })
+  @SpeakeasyMetadata({ data: "json, name=RtiType" })
   rtiType?: string;
 
-  @Metadata({ data: "json, name=TaxYear" })
+  @SpeakeasyMetadata({ data: "json, name=TaxYear" })
   taxYear?: number;
 
-  @Metadata({ data: "json, name=Timestamp" })
+  @SpeakeasyMetadata({ data: "json, name=Timestamp" })
   timestamp?: Date;
 
-  @Metadata({ data: "json, name=TransactionStatus" })
+  @SpeakeasyMetadata({ data: "json, name=TransactionStatus" })
   transactionStatus?: RtiTransactionBaseRtiTransactionBaseTransactionStatusEnum;
 
-  @Metadata({ data: "json, name=TransmissionDate" })
+  @SpeakeasyMetadata({ data: "json, name=TransmissionDate" })
   transmissionDate?: Date;
 }
 
 
 export class RtiTransactionBase extends SpeakeasyBase {
-  @Metadata({ data: "json, name=RtiTransactionBase" })
+  @SpeakeasyMetadata({ data: "json, name=RtiTransactionBase" })
   rtiTransactionBase?: RtiTransactionBaseRtiTransactionBase;
 }

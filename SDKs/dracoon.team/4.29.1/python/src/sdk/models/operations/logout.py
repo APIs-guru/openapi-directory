@@ -15,13 +15,13 @@ class LogoutHeaders:
 
 @dataclass
 class LogoutRequest:
-    query_params: LogoutQueryParams = field(default=None)
-    headers: LogoutHeaders = field(default=None)
+    headers: LogoutHeaders = field()
+    query_params: LogoutQueryParams = field()
     
 
 @dataclass
 class LogoutResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error_response: Optional[shared.ErrorResponse] = field(default=None)
-    status_code: int = field(default=None)
     

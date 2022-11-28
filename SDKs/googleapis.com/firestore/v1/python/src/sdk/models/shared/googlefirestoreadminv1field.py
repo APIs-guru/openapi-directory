@@ -1,14 +1,18 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import googlefirestoreadminv1indexconfig
-from . import googlefirestoreadminv1ttlconfig
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class GoogleFirestoreAdminV1Field:
-    index_config: Optional[googlefirestoreadminv1indexconfig.GoogleFirestoreAdminV1IndexConfig] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'indexConfig' }})
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    ttl_config: Optional[googlefirestoreadminv1ttlconfig.GoogleFirestoreAdminV1TTLConfig] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ttlConfig' }})
+    r"""GoogleFirestoreAdminV1Field
+    Represents a single field in the database. Fields are grouped by their \"Collection Group\", which represent all collections in the database with the same id.
+    """
+    
+    index_config: Optional[GoogleFirestoreAdminV1IndexConfig] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('indexConfig') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    ttl_config: Optional[GoogleFirestoreAdminV1TTLConfig] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ttlConfig') }})
     

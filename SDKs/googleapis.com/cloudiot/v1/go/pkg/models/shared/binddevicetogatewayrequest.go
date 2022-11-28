@@ -1,5 +1,7 @@
 package shared
 
+// BindDeviceToGatewayRequest
+// Request for `BindDeviceToGateway`.
 type BindDeviceToGatewayRequest struct {
 	DeviceID  *string `json:"deviceId,omitempty"`
 	GatewayID *string `json:"gatewayId,omitempty"`

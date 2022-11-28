@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AnthosObservabilityFeatureSpec } from "./anthosobservabilityfeaturespec";
 import { CloudAuditLoggingFeatureSpec } from "./cloudauditloggingfeaturespec";
 import { MultiClusterIngressFeatureSpec } from "./multiclusteringressfeaturespec";
 import { FeatureSpec } from "./featurespec";
+
 
 
 // CommonFeatureSpec
@@ -10,18 +11,21 @@ import { FeatureSpec } from "./featurespec";
  * CommonFeatureSpec contains Hub-wide configuration information
 **/
 export class CommonFeatureSpec extends SpeakeasyBase {
-  @Metadata({ data: "json, name=anthosobservability" })
+  @SpeakeasyMetadata({ data: "json, name=anthosobservability" })
   anthosobservability?: AnthosObservabilityFeatureSpec;
 
-  @Metadata({ data: "json, name=appdevexperience" })
+  @SpeakeasyMetadata({ data: "json, name=appdevexperience" })
   appdevexperience?: Map<string, any>;
 
-  @Metadata({ data: "json, name=cloudauditlogging" })
+  @SpeakeasyMetadata({ data: "json, name=cloudauditlogging" })
   cloudauditlogging?: CloudAuditLoggingFeatureSpec;
 
-  @Metadata({ data: "json, name=multiclusteringress" })
+  @SpeakeasyMetadata({ data: "json, name=fleetobservability" })
+  fleetobservability?: Map<string, any>;
+
+  @SpeakeasyMetadata({ data: "json, name=multiclusteringress" })
   multiclusteringress?: MultiClusterIngressFeatureSpec;
 
-  @Metadata({ data: "json, name=workloadcertificate" })
+  @SpeakeasyMetadata({ data: "json, name=workloadcertificate" })
   workloadcertificate?: FeatureSpec;
 }

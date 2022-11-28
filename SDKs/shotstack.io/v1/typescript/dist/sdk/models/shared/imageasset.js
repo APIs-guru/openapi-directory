@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Crop } from "./crop";
 // ImageAsset
 /**
@@ -34,15 +34,15 @@ var ImageAsset = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=crop" }),
+        SpeakeasyMetadata({ data: "json, name=crop" }),
         __metadata("design:type", Crop)
     ], ImageAsset.prototype, "crop", void 0);
     __decorate([
-        Metadata({ data: "json, name=src" }),
+        SpeakeasyMetadata({ data: "json, name=src" }),
         __metadata("design:type", String)
     ], ImageAsset.prototype, "src", void 0);
     __decorate([
-        Metadata({ data: "json, name=type" }),
+        SpeakeasyMetadata({ data: "json, name=type" }),
         __metadata("design:type", String)
     ], ImageAsset.prototype, "type", void 0);
     return ImageAsset;

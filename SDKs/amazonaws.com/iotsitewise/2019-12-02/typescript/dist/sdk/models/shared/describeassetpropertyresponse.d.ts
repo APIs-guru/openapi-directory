@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { Property } from "./property";
 import { CompositeModelProperty } from "./compositemodelproperty";
 export declare class DescribeAssetPropertyResponse extends SpeakeasyBase {

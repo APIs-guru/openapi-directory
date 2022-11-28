@@ -1,18 +1,18 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
-from typing import Enum
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import patientauthpurpose_enum
-from . import patientauthrequester
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class AccessTokenValidity:
-    expiry: datetime = field(default=None, metadata={'dataclasses_json': { 'field_name': 'expiry', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    limit: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'limit' }})
-    purpose: patientauthpurpose_enum.PatientAuthPurposeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'purpose' }})
-    requester: patientauthrequester.PatientAuthRequester = field(default=None, metadata={'dataclasses_json': { 'field_name': 'requester' }})
+    expiry: datetime = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('expiry'), 'encoder': utils.datetimeisoformat(False), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    limit: int = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('limit') }})
+    purpose: PatientAuthPurposeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('purpose') }})
+    requester: PatientAuthRequester = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('requester') }})
     

@@ -1,5 +1,7 @@
 package shared
 
+// Actor
+// Actor
 type Actor struct {
 	AvatarURL    string  `json:"avatar_url"`
 	DisplayLogin *string `json:"display_login,omitempty"`

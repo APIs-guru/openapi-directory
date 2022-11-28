@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { Phrase } from "./phrase";
 // PhraseSet
 /**
  * Provides "hints" to the speech recognizer to favor specific words and phrases in the results.
@@ -34,15 +34,15 @@ var PhraseSet = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=boost" }),
+        SpeakeasyMetadata({ data: "json, name=boost" }),
         __metadata("design:type", Number)
     ], PhraseSet.prototype, "boost", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], PhraseSet.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=phrases", elemType: shared.Phrase }),
+        SpeakeasyMetadata({ data: "json, name=phrases", elemType: Phrase }),
         __metadata("design:type", Array)
     ], PhraseSet.prototype, "phrases", void 0);
     return PhraseSet;

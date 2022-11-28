@@ -22,22 +22,22 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var StartSuiteRunResponse = /** @class */ (function (_super) {
     __extends(StartSuiteRunResponse, _super);
     function StartSuiteRunResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=createdAt" }),
+        SpeakeasyMetadata({ data: "json, name=createdAt" }),
         __metadata("design:type", Date)
     ], StartSuiteRunResponse.prototype, "createdAt", void 0);
     __decorate([
-        Metadata({ data: "json, name=suiteRunArn" }),
+        SpeakeasyMetadata({ data: "json, name=suiteRunArn" }),
         __metadata("design:type", String)
     ], StartSuiteRunResponse.prototype, "suiteRunArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=suiteRunId" }),
+        SpeakeasyMetadata({ data: "json, name=suiteRunId" }),
         __metadata("design:type", String)
     ], StartSuiteRunResponse.prototype, "suiteRunId", void 0);
     return StartSuiteRunResponse;

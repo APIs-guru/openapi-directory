@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { NotificationConfig } from "./notificationconfig";
+
 
 
 // DicomStore
@@ -7,12 +8,12 @@ import { NotificationConfig } from "./notificationconfig";
  * Represents a DICOM store.
 **/
 export class DicomStore extends SpeakeasyBase {
-  @Metadata({ data: "json, name=labels" })
+  @SpeakeasyMetadata({ data: "json, name=labels" })
   labels?: Map<string, string>;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=notificationConfig" })
+  @SpeakeasyMetadata({ data: "json, name=notificationConfig" })
   notificationConfig?: NotificationConfig;
 }

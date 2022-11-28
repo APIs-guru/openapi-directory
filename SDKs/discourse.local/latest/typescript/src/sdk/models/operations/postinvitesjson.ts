@@ -1,94 +1,95 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class PostInvitesJsonHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=Api-Key" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Api-Key" })
   apiKey: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=Api-Username" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Api-Username" })
   apiUsername: string;
 }
 
 
 export class PostInvitesJsonRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=custom_message" })
+  @SpeakeasyMetadata({ data: "json, name=custom_message" })
   customMessage?: string;
 
-  @Metadata({ data: "json, name=email" })
+  @SpeakeasyMetadata({ data: "json, name=email" })
   email?: string;
 
-  @Metadata({ data: "json, name=expires_at" })
+  @SpeakeasyMetadata({ data: "json, name=expires_at" })
   expiresAt?: string;
 
-  @Metadata({ data: "json, name=group_id" })
+  @SpeakeasyMetadata({ data: "json, name=group_id" })
   groupId?: number;
 
-  @Metadata({ data: "json, name=group_names" })
+  @SpeakeasyMetadata({ data: "json, name=group_names" })
   groupNames?: string;
 
-  @Metadata({ data: "json, name=max_redemptions_allowed" })
+  @SpeakeasyMetadata({ data: "json, name=max_redemptions_allowed" })
   maxRedemptionsAllowed?: number;
 
-  @Metadata({ data: "json, name=skip_email" })
+  @SpeakeasyMetadata({ data: "json, name=skip_email" })
   skipEmail?: boolean;
 
-  @Metadata({ data: "json, name=topic_id" })
+  @SpeakeasyMetadata({ data: "json, name=topic_id" })
   topicId?: number;
 }
 
 
-export class PostInvitesJsonRequest extends SpeakeasyBase {
-  @Metadata()
-  headers: PostInvitesJsonHeaders;
-
-  @Metadata({ data: "request, media_type=application/json" })
-  request?: PostInvitesJsonRequestBody;
-}
-
-
 export class PostInvitesJson200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=created_at" })
+  @SpeakeasyMetadata({ data: "json, name=created_at" })
   createdAt?: string;
 
-  @Metadata({ data: "json, name=custom_message" })
+  @SpeakeasyMetadata({ data: "json, name=custom_message" })
   customMessage?: string;
 
-  @Metadata({ data: "json, name=email" })
+  @SpeakeasyMetadata({ data: "json, name=email" })
   email?: string;
 
-  @Metadata({ data: "json, name=emailed" })
+  @SpeakeasyMetadata({ data: "json, name=emailed" })
   emailed?: boolean;
 
-  @Metadata({ data: "json, name=expired" })
+  @SpeakeasyMetadata({ data: "json, name=expired" })
   expired?: boolean;
 
-  @Metadata({ data: "json, name=expires_at" })
+  @SpeakeasyMetadata({ data: "json, name=expires_at" })
   expiresAt?: string;
 
-  @Metadata({ data: "json, name=groups" })
+  @SpeakeasyMetadata({ data: "json, name=groups" })
   groups?: any[];
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: number;
 
-  @Metadata({ data: "json, name=link" })
+  @SpeakeasyMetadata({ data: "json, name=link" })
   link?: string;
 
-  @Metadata({ data: "json, name=topics" })
+  @SpeakeasyMetadata({ data: "json, name=topics" })
   topics?: any[];
 
-  @Metadata({ data: "json, name=updated_at" })
+  @SpeakeasyMetadata({ data: "json, name=updated_at" })
   updatedAt?: string;
 }
 
 
+export class PostInvitesJsonRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  headers: PostInvitesJsonHeaders;
+
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request?: PostInvitesJsonRequestBody;
+}
+
+
 export class PostInvitesJsonResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   postInvitesJson200ApplicationJsonObject?: PostInvitesJson200ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

@@ -1,5 +1,7 @@
 package shared
 
+// GoogleCloudVisionV1p2beta1AnnotateImageResponse
+// Response to an image annotation request.
 type GoogleCloudVisionV1p2beta1AnnotateImageResponse struct {
 	Context                    *GoogleCloudVisionV1p2beta1ImageAnnotationContext     `json:"context,omitempty"`
 	CropHintsAnnotation        *GoogleCloudVisionV1p2beta1CropHintsAnnotation        `json:"cropHintsAnnotation,omitempty"`

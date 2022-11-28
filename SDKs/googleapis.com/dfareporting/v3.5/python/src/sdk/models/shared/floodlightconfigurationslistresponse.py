@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import floodlightconfiguration
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class FloodlightConfigurationsListResponse:
-    floodlight_configurations: Optional[List[floodlightconfiguration.FloodlightConfiguration]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'floodlightConfigurations' }})
-    kind: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'kind' }})
+    r"""FloodlightConfigurationsListResponse
+    Floodlight Configuration List Response
+    """
+    
+    floodlight_configurations: Optional[List[FloodlightConfiguration]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('floodlightConfigurations') }})
+    kind: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('kind') }})
     

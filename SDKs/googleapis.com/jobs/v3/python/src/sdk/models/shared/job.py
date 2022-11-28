@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import applicationinfo
-from . import compensationinfo
-from . import customattribute
-from . import jobderivedinfo
-from . import processingoptions
+from sdk import utils
+from . import *
 
 class JobDegreeTypesEnum(str, Enum):
     DEGREE_TYPE_UNSPECIFIED = "DEGREE_TYPE_UNSPECIFIED"
@@ -69,34 +70,38 @@ class JobVisibilityEnum(str, Enum):
 @dataclass_json
 @dataclass
 class Job:
-    addresses: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'addresses' }})
-    application_info: Optional[applicationinfo.ApplicationInfo] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'applicationInfo' }})
-    company_display_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'companyDisplayName' }})
-    company_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'companyName' }})
-    compensation_info: Optional[compensationinfo.CompensationInfo] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'compensationInfo' }})
-    custom_attributes: Optional[dict[str, customattribute.CustomAttribute]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'customAttributes' }})
-    degree_types: Optional[List[JobDegreeTypesEnum]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'degreeTypes' }})
-    department: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'department' }})
-    derived_info: Optional[jobderivedinfo.JobDerivedInfo] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'derivedInfo' }})
-    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
-    employment_types: Optional[List[JobEmploymentTypesEnum]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'employmentTypes' }})
-    incentives: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'incentives' }})
-    job_benefits: Optional[List[JobJobBenefitsEnum]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'jobBenefits' }})
-    job_end_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'jobEndTime' }})
-    job_level: Optional[JobJobLevelEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'jobLevel' }})
-    job_start_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'jobStartTime' }})
-    language_code: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'languageCode' }})
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    posting_create_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'postingCreateTime' }})
-    posting_expire_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'postingExpireTime' }})
-    posting_publish_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'postingPublishTime' }})
-    posting_region: Optional[JobPostingRegionEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'postingRegion' }})
-    posting_update_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'postingUpdateTime' }})
-    processing_options: Optional[processingoptions.ProcessingOptions] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'processingOptions' }})
-    promotion_value: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'promotionValue' }})
-    qualifications: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'qualifications' }})
-    requisition_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'requisitionId' }})
-    responsibilities: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'responsibilities' }})
-    title: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'title' }})
-    visibility: Optional[JobVisibilityEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'visibility' }})
+    r"""Job
+    A Job resource represents a job posting (also referred to as a \"job listing\" or \"job requisition\"). A job belongs to a Company, which is the hiring entity responsible for the job.
+    """
+    
+    addresses: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('addresses') }})
+    application_info: Optional[ApplicationInfo] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('applicationInfo') }})
+    company_display_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('companyDisplayName') }})
+    company_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('companyName') }})
+    compensation_info: Optional[CompensationInfo] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('compensationInfo') }})
+    custom_attributes: Optional[dict[str, CustomAttribute]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('customAttributes') }})
+    degree_types: Optional[List[JobDegreeTypesEnum]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('degreeTypes') }})
+    department: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('department') }})
+    derived_info: Optional[JobDerivedInfo] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('derivedInfo') }})
+    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('description') }})
+    employment_types: Optional[List[JobEmploymentTypesEnum]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('employmentTypes') }})
+    incentives: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('incentives') }})
+    job_benefits: Optional[List[JobJobBenefitsEnum]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('jobBenefits') }})
+    job_end_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('jobEndTime') }})
+    job_level: Optional[JobJobLevelEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('jobLevel') }})
+    job_start_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('jobStartTime') }})
+    language_code: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('languageCode') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    posting_create_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('postingCreateTime') }})
+    posting_expire_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('postingExpireTime') }})
+    posting_publish_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('postingPublishTime') }})
+    posting_region: Optional[JobPostingRegionEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('postingRegion') }})
+    posting_update_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('postingUpdateTime') }})
+    processing_options: Optional[ProcessingOptions] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('processingOptions') }})
+    promotion_value: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('promotionValue') }})
+    qualifications: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('qualifications') }})
+    requisition_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('requisitionId') }})
+    responsibilities: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('responsibilities') }})
+    title: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('title') }})
+    visibility: Optional[JobVisibilityEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('visibility') }})
     

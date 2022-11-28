@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class GetMostemailedSectionTimePeriodJsonPathParams extends SpeakeasyBase {
     section: shared.SectionEnum;
@@ -6,10 +6,6 @@ export declare class GetMostemailedSectionTimePeriodJsonPathParams extends Speak
 }
 export declare class GetMostemailedSectionTimePeriodJsonSecurity extends SpeakeasyBase {
     apiKey: shared.SchemeApiKey;
-}
-export declare class GetMostemailedSectionTimePeriodJsonRequest extends SpeakeasyBase {
-    pathParams: GetMostemailedSectionTimePeriodJsonPathParams;
-    security: GetMostemailedSectionTimePeriodJsonSecurity;
 }
 export declare class GetMostemailedSectionTimePeriodJson200ApplicationJson extends SpeakeasyBase {
     copyright?: string;
@@ -22,6 +18,10 @@ export declare class GetMostemailedSectionTimePeriodJson400ApplicationJson exten
     errors?: string[];
     results?: any[];
     status?: string;
+}
+export declare class GetMostemailedSectionTimePeriodJsonRequest extends SpeakeasyBase {
+    pathParams: GetMostemailedSectionTimePeriodJsonPathParams;
+    security: GetMostemailedSectionTimePeriodJsonSecurity;
 }
 export declare class GetMostemailedSectionTimePeriodJsonResponse extends SpeakeasyBase {
     body?: Uint8Array;

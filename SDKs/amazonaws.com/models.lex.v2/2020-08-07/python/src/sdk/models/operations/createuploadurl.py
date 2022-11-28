@@ -1,4 +1,7 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
@@ -16,17 +19,17 @@ class CreateUploadURLHeaders:
 
 @dataclass
 class CreateUploadURLRequest:
-    headers: CreateUploadURLHeaders = field(default=None)
+    headers: CreateUploadURLHeaders = field()
     
 
 @dataclass
 class CreateUploadURLResponse:
+    content_type: str = field()
+    status_code: int = field()
     conflict_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     create_upload_url_response: Optional[shared.CreateUploadURLResponse] = field(default=None)
     internal_server_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     validation_exception: Optional[Any] = field(default=None)
     

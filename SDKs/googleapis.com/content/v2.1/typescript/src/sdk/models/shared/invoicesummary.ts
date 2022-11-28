@@ -1,13 +1,13 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { InvoiceSummaryAdditionalChargeSummary } from "./invoicesummaryadditionalchargesummary";
 import { Amount } from "./amount";
 
 
+
 export class InvoiceSummary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=additionalChargeSummaries", elemType: shared.InvoiceSummaryAdditionalChargeSummary })
+  @SpeakeasyMetadata({ data: "json, name=additionalChargeSummaries", elemType: InvoiceSummaryAdditionalChargeSummary })
   additionalChargeSummaries?: InvoiceSummaryAdditionalChargeSummary[];
 
-  @Metadata({ data: "json, name=productTotal" })
+  @SpeakeasyMetadata({ data: "json, name=productTotal" })
   productTotal?: Amount;
 }

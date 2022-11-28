@@ -1,45 +1,46 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum ServicesBenefitsEnum {
-    ApplyingForBenefits = "ApplyingForBenefits"
-,    BurialClaimAssistance = "BurialClaimAssistance"
-,    DisabilityClaimAssistance = "DisabilityClaimAssistance"
-,    EBenefitsRegistrationAssistance = "eBenefitsRegistrationAssistance"
-,    EducationAndCareerCounseling = "EducationAndCareerCounseling"
-,    EducationClaimAssistance = "EducationClaimAssistance"
-,    FamilyMemberClaimAssistance = "FamilyMemberClaimAssistance"
-,    HomelessAssistance = "HomelessAssistance"
-,    InsuranceClaimAssistanceAndFinancialCounseling = "InsuranceClaimAssistanceAndFinancialCounseling"
-,    IntegratedDisabilityEvaluationSystemAssistance = "IntegratedDisabilityEvaluationSystemAssistance"
-,    Pensions = "Pensions"
-,    PreDischargeClaimAssistance = "PreDischargeClaimAssistance"
-,    TransitionAssistance = "TransitionAssistance"
-,    UpdatingDirectDepositInformation = "UpdatingDirectDepositInformation"
-,    VaHomeLoanAssistance = "VAHomeLoanAssistance"
-,    VocationalRehabilitationAndEmploymentAssistance = "VocationalRehabilitationAndEmploymentAssistance"
+    ApplyingForBenefits = "ApplyingForBenefits",
+    BurialClaimAssistance = "BurialClaimAssistance",
+    DisabilityClaimAssistance = "DisabilityClaimAssistance",
+    EBenefitsRegistrationAssistance = "eBenefitsRegistrationAssistance",
+    EducationAndCareerCounseling = "EducationAndCareerCounseling",
+    EducationClaimAssistance = "EducationClaimAssistance",
+    FamilyMemberClaimAssistance = "FamilyMemberClaimAssistance",
+    HomelessAssistance = "HomelessAssistance",
+    InsuranceClaimAssistanceAndFinancialCounseling = "InsuranceClaimAssistanceAndFinancialCounseling",
+    IntegratedDisabilityEvaluationSystemAssistance = "IntegratedDisabilityEvaluationSystemAssistance",
+    Pensions = "Pensions",
+    PreDischargeClaimAssistance = "PreDischargeClaimAssistance",
+    TransitionAssistance = "TransitionAssistance",
+    UpdatingDirectDepositInformation = "UpdatingDirectDepositInformation",
+    VaHomeLoanAssistance = "VAHomeLoanAssistance",
+    VocationalRehabilitationAndEmploymentAssistance = "VocationalRehabilitationAndEmploymentAssistance"
 }
 
 export enum ServicesHealthEnum {
-    Audiology = "Audiology"
-,    Cardiology = "Cardiology"
-,    CaregiverSupport = "CaregiverSupport"
-,    Covid19Vaccine = "Covid19Vaccine"
-,    DentalServices = "DentalServices"
-,    Dermatology = "Dermatology"
-,    EmergencyCare = "EmergencyCare"
-,    Gastroenterology = "Gastroenterology"
-,    Gynecology = "Gynecology"
-,    MentalHealthCare = "MentalHealthCare"
-,    Ophthalmology = "Ophthalmology"
-,    Optometry = "Optometry"
-,    Orthopedics = "Orthopedics"
-,    Nutrition = "Nutrition"
-,    Podiatry = "Podiatry"
-,    PrimaryCare = "PrimaryCare"
-,    SpecialtyCare = "SpecialtyCare"
-,    UrgentCare = "UrgentCare"
-,    Urology = "Urology"
-,    WomensHealth = "WomensHealth"
+    Audiology = "Audiology",
+    Cardiology = "Cardiology",
+    CaregiverSupport = "CaregiverSupport",
+    Covid19Vaccine = "Covid19Vaccine",
+    DentalServices = "DentalServices",
+    Dermatology = "Dermatology",
+    EmergencyCare = "EmergencyCare",
+    Gastroenterology = "Gastroenterology",
+    Gynecology = "Gynecology",
+    MentalHealthCare = "MentalHealthCare",
+    Ophthalmology = "Ophthalmology",
+    Optometry = "Optometry",
+    Orthopedics = "Orthopedics",
+    Nutrition = "Nutrition",
+    Podiatry = "Podiatry",
+    PrimaryCare = "PrimaryCare",
+    SpecialtyCare = "SpecialtyCare",
+    UrgentCare = "UrgentCare",
+    Urology = "Urology",
+    WomensHealth = "WomensHealth"
 }
 
 export enum ServicesOtherEnum {
@@ -48,15 +49,15 @@ export enum ServicesOtherEnum {
 
 
 export class Services extends SpeakeasyBase {
-  @Metadata({ data: "json, name=benefits" })
+  @SpeakeasyMetadata({ data: "json, name=benefits" })
   benefits?: ServicesBenefitsEnum[];
 
-  @Metadata({ data: "json, name=health" })
+  @SpeakeasyMetadata({ data: "json, name=health" })
   health?: ServicesHealthEnum[];
 
-  @Metadata({ data: "json, name=last_updated" })
+  @SpeakeasyMetadata({ data: "json, name=last_updated" })
   lastUpdated?: Date;
 
-  @Metadata({ data: "json, name=other" })
+  @SpeakeasyMetadata({ data: "json, name=other" })
   other?: ServicesOtherEnum[];
 }

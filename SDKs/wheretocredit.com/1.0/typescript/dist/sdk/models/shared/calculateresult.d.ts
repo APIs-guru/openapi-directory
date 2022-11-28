@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { CalculateItineraryResult } from "./calculateitineraryresult";
 export declare class CalculateResult extends SpeakeasyBase {
     errorMessage?: string;

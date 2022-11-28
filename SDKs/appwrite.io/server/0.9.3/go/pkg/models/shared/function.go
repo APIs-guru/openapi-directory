@@ -1,5 +1,7 @@
 package shared
 
+// Function
+// Function
 type Function struct {
 	DollarID          string                 `json:"$id"`
 	DollarPermissions map[string]interface{} `json:"$permissions"`

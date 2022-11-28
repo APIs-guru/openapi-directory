@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DatasetContentStatus } from "./datasetcontentstatus";
+
 
 
 // DatasetContentSummary
@@ -7,18 +8,18 @@ import { DatasetContentStatus } from "./datasetcontentstatus";
  * Summary information about dataset contents.
 **/
 export class DatasetContentSummary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=completionTime" })
+  @SpeakeasyMetadata({ data: "json, name=completionTime" })
   completionTime?: Date;
 
-  @Metadata({ data: "json, name=creationTime" })
+  @SpeakeasyMetadata({ data: "json, name=creationTime" })
   creationTime?: Date;
 
-  @Metadata({ data: "json, name=scheduleTime" })
+  @SpeakeasyMetadata({ data: "json, name=scheduleTime" })
   scheduleTime?: Date;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: DatasetContentStatus;
 
-  @Metadata({ data: "json, name=version" })
+  @SpeakeasyMetadata({ data: "json, name=version" })
   version?: string;
 }

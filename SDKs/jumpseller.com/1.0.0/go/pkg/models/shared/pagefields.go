@@ -1,5 +1,7 @@
 package shared
 
+// PageFieldsImage
+// Image of the Page
 type PageFieldsImage struct {
 	ID  *int64  `json:"id,omitempty"`
 	URL *string `json:"url,omitempty"`

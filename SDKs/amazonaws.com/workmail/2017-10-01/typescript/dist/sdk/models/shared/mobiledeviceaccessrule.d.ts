@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { MobileDeviceAccessRuleEffectEnum } from "./mobiledeviceaccessruleeffectenum";
 /**
  * A rule that controls access to mobile devices for an Amazon WorkMail group.

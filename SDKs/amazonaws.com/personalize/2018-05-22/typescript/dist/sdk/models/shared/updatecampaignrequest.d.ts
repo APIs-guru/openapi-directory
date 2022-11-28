@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { CampaignConfig } from "./campaignconfig";
 export declare class UpdateCampaignRequest extends SpeakeasyBase {
     campaignArn: string;

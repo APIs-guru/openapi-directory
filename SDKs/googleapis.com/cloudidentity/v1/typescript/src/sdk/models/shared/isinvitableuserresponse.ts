@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // IsInvitableUserResponse
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Response for IsInvitableUser RPC.
 **/
 export class IsInvitableUserResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=isInvitableUser" })
+  @SpeakeasyMetadata({ data: "json, name=isInvitableUser" })
   isInvitableUser?: boolean;
 }

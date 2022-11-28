@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DeleteMedicalVocabularyRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=VocabularyName" })
+  @SpeakeasyMetadata({ data: "json, name=VocabularyName" })
   vocabularyName: string;
 }

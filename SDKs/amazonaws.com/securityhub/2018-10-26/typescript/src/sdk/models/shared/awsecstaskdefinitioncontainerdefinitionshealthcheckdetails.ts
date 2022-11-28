@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AwsEcsTaskDefinitionContainerDefinitionsHealthCheckDetails
@@ -6,18 +7,18 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The container health check command and associated configuration parameters for the container.
 **/
 export class AwsEcsTaskDefinitionContainerDefinitionsHealthCheckDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Command" })
+  @SpeakeasyMetadata({ data: "json, name=Command" })
   command?: string[];
 
-  @Metadata({ data: "json, name=Interval" })
+  @SpeakeasyMetadata({ data: "json, name=Interval" })
   interval?: number;
 
-  @Metadata({ data: "json, name=Retries" })
+  @SpeakeasyMetadata({ data: "json, name=Retries" })
   retries?: number;
 
-  @Metadata({ data: "json, name=StartPeriod" })
+  @SpeakeasyMetadata({ data: "json, name=StartPeriod" })
   startPeriod?: number;
 
-  @Metadata({ data: "json, name=Timeout" })
+  @SpeakeasyMetadata({ data: "json, name=Timeout" })
   timeout?: number;
 }

@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AccessControlAttribute } from "./accesscontrolattribute";
+
 
 
 // InstanceAccessControlAttributeConfiguration
@@ -8,6 +8,6 @@ import { AccessControlAttribute } from "./accesscontrolattribute";
  * Specifies the attributes to add to your attribute-based access control (ABAC) configuration.
 **/
 export class InstanceAccessControlAttributeConfiguration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AccessControlAttributes", elemType: shared.AccessControlAttribute })
+  @SpeakeasyMetadata({ data: "json, name=AccessControlAttributes", elemType: AccessControlAttribute })
   accessControlAttributes: AccessControlAttribute[];
 }

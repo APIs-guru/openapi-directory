@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AudioVideoOffset
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The length an audio or a video has been played.
 **/
 export class AudioVideoOffset extends SpeakeasyBase {
-  @Metadata({ data: "json, name=percentage" })
+  @SpeakeasyMetadata({ data: "json, name=percentage" })
   percentage?: string;
 
-  @Metadata({ data: "json, name=seconds" })
+  @SpeakeasyMetadata({ data: "json, name=seconds" })
   seconds?: string;
 }

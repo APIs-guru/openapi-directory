@@ -1,49 +1,50 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class SessionControllerCreateLandlordLoginPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=shortName" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=shortName" })
   shortName: string;
 }
 
 
 export class SessionControllerCreateLandlordLoginQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=branchID" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=branchID" })
   branchId?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=contactDetails" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=contactDetails" })
   contactDetails: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=email" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=email" })
   email: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=forename" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=forename" })
   forename: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=propertyAddress" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=propertyAddress" })
   propertyAddress: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=surname" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=surname" })
   surname: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=title" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=title" })
   title: string;
 }
 
 
 export class SessionControllerCreateLandlordLoginRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: SessionControllerCreateLandlordLoginPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: SessionControllerCreateLandlordLoginQueryParams;
 }
 
 
 export class SessionControllerCreateLandlordLoginResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

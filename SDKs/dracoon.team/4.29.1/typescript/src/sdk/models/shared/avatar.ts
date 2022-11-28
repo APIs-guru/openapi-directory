@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Avatar
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * User avatar information
 **/
 export class Avatar extends SpeakeasyBase {
-  @Metadata({ data: "json, name=avatarUri" })
+  @SpeakeasyMetadata({ data: "json, name=avatarUri" })
   avatarUri: string;
 
-  @Metadata({ data: "json, name=avatarUuid" })
+  @SpeakeasyMetadata({ data: "json, name=avatarUuid" })
   avatarUuid: string;
 
-  @Metadata({ data: "json, name=isCustomAvatar" })
+  @SpeakeasyMetadata({ data: "json, name=isCustomAvatar" })
   isCustomAvatar: boolean;
 }

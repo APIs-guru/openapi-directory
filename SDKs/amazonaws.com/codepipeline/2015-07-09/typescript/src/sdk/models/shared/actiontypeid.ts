@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ActionCategoryEnum } from "./actioncategoryenum";
 import { ActionOwnerEnum } from "./actionownerenum";
+
 
 
 // ActionTypeId
@@ -8,15 +9,15 @@ import { ActionOwnerEnum } from "./actionownerenum";
  * Represents information about an action type.
 **/
 export class ActionTypeId extends SpeakeasyBase {
-  @Metadata({ data: "json, name=category" })
+  @SpeakeasyMetadata({ data: "json, name=category" })
   category: ActionCategoryEnum;
 
-  @Metadata({ data: "json, name=owner" })
+  @SpeakeasyMetadata({ data: "json, name=owner" })
   owner: ActionOwnerEnum;
 
-  @Metadata({ data: "json, name=provider" })
+  @SpeakeasyMetadata({ data: "json, name=provider" })
   provider: string;
 
-  @Metadata({ data: "json, name=version" })
+  @SpeakeasyMetadata({ data: "json, name=version" })
   version: string;
 }

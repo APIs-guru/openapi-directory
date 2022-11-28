@@ -1,85 +1,86 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class Organization extends SpeakeasyBase {
-  @Metadata({ data: "json, name=asset_count" })
+  @SpeakeasyMetadata({ data: "json, name=asset_count" })
   assetCount?: number;
 
-  @Metadata({ data: "json, name=client_id" })
+  @SpeakeasyMetadata({ data: "json, name=client_id" })
   clientId?: string;
 
-  @Metadata({ data: "json, name=created_at" })
+  @SpeakeasyMetadata({ data: "json, name=created_at" })
   createdAt?: number;
 
-  @Metadata({ data: "json, name=deactivated_at" })
+  @SpeakeasyMetadata({ data: "json, name=deactivated_at" })
   deactivatedAt?: number;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=download_token" })
+  @SpeakeasyMetadata({ data: "json, name=download_token" })
   downloadToken?: string;
 
-  @Metadata({ data: "json, name=download_token_created_at" })
+  @SpeakeasyMetadata({ data: "json, name=download_token_created_at" })
   downloadTokenCreatedAt?: number;
 
-  @Metadata({ data: "json, name=expiration_assets_offline" })
+  @SpeakeasyMetadata({ data: "json, name=expiration_assets_offline" })
   expirationAssetsOffline?: number;
 
-  @Metadata({ data: "json, name=expiration_assets_stale" })
+  @SpeakeasyMetadata({ data: "json, name=expiration_assets_stale" })
   expirationAssetsStale?: number;
 
-  @Metadata({ data: "json, name=expiration_scans" })
+  @SpeakeasyMetadata({ data: "json, name=expiration_scans" })
   expirationScans?: number;
 
-  @Metadata({ data: "json, name=export_token" })
+  @SpeakeasyMetadata({ data: "json, name=export_token" })
   exportToken?: string;
 
-  @Metadata({ data: "json, name=export_token_counter" })
+  @SpeakeasyMetadata({ data: "json, name=export_token_counter" })
   exportTokenCounter?: number;
 
-  @Metadata({ data: "json, name=export_token_created_at" })
+  @SpeakeasyMetadata({ data: "json, name=export_token_created_at" })
   exportTokenCreatedAt?: number;
 
-  @Metadata({ data: "json, name=export_token_last_used_at" })
+  @SpeakeasyMetadata({ data: "json, name=export_token_last_used_at" })
   exportTokenLastUsedAt?: number;
 
-  @Metadata({ data: "json, name=export_token_last_used_by" })
+  @SpeakeasyMetadata({ data: "json, name=export_token_last_used_by" })
   exportTokenLastUsedBy?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: string;
 
-  @Metadata({ data: "json, name=inactive" })
+  @SpeakeasyMetadata({ data: "json, name=inactive" })
   inactive?: boolean;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 
-  @Metadata({ data: "json, name=parent_id" })
+  @SpeakeasyMetadata({ data: "json, name=parent_id" })
   parentId?: string;
 
-  @Metadata({ data: "json, name=permanent" })
+  @SpeakeasyMetadata({ data: "json, name=permanent" })
   permanent?: boolean;
 
-  @Metadata({ data: "json, name=project" })
+  @SpeakeasyMetadata({ data: "json, name=project" })
   project?: boolean;
 
-  @Metadata({ data: "json, name=service_count" })
+  @SpeakeasyMetadata({ data: "json, name=service_count" })
   serviceCount?: number;
 
-  @Metadata({ data: "json, name=service_count_arp" })
+  @SpeakeasyMetadata({ data: "json, name=service_count_arp" })
   serviceCountArp?: number;
 
-  @Metadata({ data: "json, name=service_count_icmp" })
+  @SpeakeasyMetadata({ data: "json, name=service_count_icmp" })
   serviceCountIcmp?: number;
 
-  @Metadata({ data: "json, name=service_count_tcp" })
+  @SpeakeasyMetadata({ data: "json, name=service_count_tcp" })
   serviceCountTcp?: number;
 
-  @Metadata({ data: "json, name=service_count_udp" })
+  @SpeakeasyMetadata({ data: "json, name=service_count_udp" })
   serviceCountUdp?: number;
 
-  @Metadata({ data: "json, name=updated_at" })
+  @SpeakeasyMetadata({ data: "json, name=updated_at" })
   updatedAt?: number;
 }

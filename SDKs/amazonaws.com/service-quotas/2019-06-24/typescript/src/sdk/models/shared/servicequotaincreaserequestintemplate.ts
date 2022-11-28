@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ServiceQuotaIncreaseRequestInTemplate
@@ -6,27 +7,27 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Information about a quota increase request.
 **/
 export class ServiceQuotaIncreaseRequestInTemplate extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AwsRegion" })
+  @SpeakeasyMetadata({ data: "json, name=AwsRegion" })
   awsRegion?: string;
 
-  @Metadata({ data: "json, name=DesiredValue" })
+  @SpeakeasyMetadata({ data: "json, name=DesiredValue" })
   desiredValue?: number;
 
-  @Metadata({ data: "json, name=GlobalQuota" })
+  @SpeakeasyMetadata({ data: "json, name=GlobalQuota" })
   globalQuota?: boolean;
 
-  @Metadata({ data: "json, name=QuotaCode" })
+  @SpeakeasyMetadata({ data: "json, name=QuotaCode" })
   quotaCode?: string;
 
-  @Metadata({ data: "json, name=QuotaName" })
+  @SpeakeasyMetadata({ data: "json, name=QuotaName" })
   quotaName?: string;
 
-  @Metadata({ data: "json, name=ServiceCode" })
+  @SpeakeasyMetadata({ data: "json, name=ServiceCode" })
   serviceCode?: string;
 
-  @Metadata({ data: "json, name=ServiceName" })
+  @SpeakeasyMetadata({ data: "json, name=ServiceName" })
   serviceName?: string;
 
-  @Metadata({ data: "json, name=Unit" })
+  @SpeakeasyMetadata({ data: "json, name=Unit" })
   unit?: string;
 }

@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetModifyCertificatesActionEnum(str, Enum):
     MODIFY_CERTIFICATES = "ModifyCertificates"
@@ -10,10 +14,10 @@ class GetModifyCertificatesVersionEnum(str, Enum):
 
 @dataclass
 class GetModifyCertificatesQueryParams:
-    action: GetModifyCertificatesActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetModifyCertificatesActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: GetModifyCertificatesVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     certificate_identifier: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'CertificateIdentifier', 'style': 'form', 'explode': True }})
     remove_customer_override: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'RemoveCustomerOverride', 'style': 'form', 'explode': True }})
-    version: GetModifyCertificatesVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -29,13 +33,13 @@ class GetModifyCertificatesHeaders:
 
 @dataclass
 class GetModifyCertificatesRequest:
-    query_params: GetModifyCertificatesQueryParams = field(default=None)
-    headers: GetModifyCertificatesHeaders = field(default=None)
+    headers: GetModifyCertificatesHeaders = field()
+    query_params: GetModifyCertificatesQueryParams = field()
     
 
 @dataclass
 class GetModifyCertificatesResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

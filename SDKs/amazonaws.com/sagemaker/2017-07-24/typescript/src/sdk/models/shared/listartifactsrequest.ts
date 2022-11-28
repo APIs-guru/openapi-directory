@@ -1,30 +1,31 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SortArtifactsByEnum } from "./sortartifactsbyenum";
 import { SortOrderEnum } from "./sortorderenum";
 
 
+
 export class ListArtifactsRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ArtifactType" })
+  @SpeakeasyMetadata({ data: "json, name=ArtifactType" })
   artifactType?: string;
 
-  @Metadata({ data: "json, name=CreatedAfter" })
+  @SpeakeasyMetadata({ data: "json, name=CreatedAfter" })
   createdAfter?: Date;
 
-  @Metadata({ data: "json, name=CreatedBefore" })
+  @SpeakeasyMetadata({ data: "json, name=CreatedBefore" })
   createdBefore?: Date;
 
-  @Metadata({ data: "json, name=MaxResults" })
+  @SpeakeasyMetadata({ data: "json, name=MaxResults" })
   maxResults?: number;
 
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=SortBy" })
+  @SpeakeasyMetadata({ data: "json, name=SortBy" })
   sortBy?: SortArtifactsByEnum;
 
-  @Metadata({ data: "json, name=SortOrder" })
+  @SpeakeasyMetadata({ data: "json, name=SortOrder" })
   sortOrder?: SortOrderEnum;
 
-  @Metadata({ data: "json, name=SourceUri" })
+  @SpeakeasyMetadata({ data: "json, name=SourceUri" })
   sourceUri?: string;
 }

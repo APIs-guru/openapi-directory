@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PhotoResponse } from "./photoresponse";
+
 
 
 // BatchUpdatePhotosResponse
@@ -8,6 +8,6 @@ import { PhotoResponse } from "./photoresponse";
  * Response to batch update of metadata of one or more Photos.
 **/
 export class BatchUpdatePhotosResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=results", elemType: shared.PhotoResponse })
+  @SpeakeasyMetadata({ data: "json, name=results", elemType: PhotoResponse })
   results?: PhotoResponse[];
 }

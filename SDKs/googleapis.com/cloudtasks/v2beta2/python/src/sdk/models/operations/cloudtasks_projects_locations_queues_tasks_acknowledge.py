@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class CloudtasksProjectsLocationsQueuesTasksAcknowledgePathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,21 +26,21 @@ class CloudtasksProjectsLocationsQueuesTasksAcknowledgeQueryParams:
 
 @dataclass
 class CloudtasksProjectsLocationsQueuesTasksAcknowledgeSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class CloudtasksProjectsLocationsQueuesTasksAcknowledgeRequest:
-    path_params: CloudtasksProjectsLocationsQueuesTasksAcknowledgePathParams = field(default=None)
-    query_params: CloudtasksProjectsLocationsQueuesTasksAcknowledgeQueryParams = field(default=None)
+    path_params: CloudtasksProjectsLocationsQueuesTasksAcknowledgePathParams = field()
+    query_params: CloudtasksProjectsLocationsQueuesTasksAcknowledgeQueryParams = field()
+    security: CloudtasksProjectsLocationsQueuesTasksAcknowledgeSecurity = field()
     request: Optional[shared.AcknowledgeTaskRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: CloudtasksProjectsLocationsQueuesTasksAcknowledgeSecurity = field(default=None)
     
 
 @dataclass
 class CloudtasksProjectsLocationsQueuesTasksAcknowledgeResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     empty: Optional[dict[str, Any]] = field(default=None)
-    status_code: int = field(default=None)
     

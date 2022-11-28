@@ -1,0 +1,68 @@
+# openapi
+
+<!-- Start SDK Installation -->
+## SDK Installation
+```bash
+go get openapi
+```
+<!-- End SDK Installation -->
+
+<!-- Start SDK Example Usage -->
+## SDK Example Usage
+```go
+package main
+
+import (
+	"openapi"
+	"openapi/pkg/models/shared"
+	"openapi/pkg/models/operations"
+)
+
+func main() {
+	s := sdk.New()
+    
+    req := operations.CreateMediaProcessorRequest{
+        Security: operations.CreateMediaProcessorSecurity{
+            AccountSidAuthToken: shared.SchemeAccountSidAuthToken{
+                Password: "YOUR_PASSWORD_HERE",
+                Username: "YOUR_USERNAME_HERE",
+            },
+        },
+        Request: &operations.CreateMediaProcessorCreateMediaProcessorRequest{
+            Extension: "animi",
+            ExtensionContext: "ut",
+            ExtensionEnvironment: "ad",
+            MaxDuration: 1820943278312777402,
+            StatusCallback: "aut",
+            StatusCallbackMethod: "HEAD",
+        },
+    }
+    
+    res, err := s.CreateMediaProcessor(ctx, req)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    if res.MediaV1MediaProcessor != nil {
+        // handle response
+    }
+```
+<!-- End SDK Example Usage -->
+
+<!-- Start SDK Available Operations -->
+## SDK Available Operations
+* `CreateMediaProcessor`
+* `CreatePlayerStreamer`
+* `CreatePlayerStreamerPlaybackGrant`
+* `DeleteMediaRecording` - Deletes a MediaRecording resource identified by a SID.
+* `FetchMediaProcessor` - Returns a single MediaProcessor resource identified by a SID.
+* `FetchMediaRecording` - Returns a single MediaRecording resource identified by a SID.
+* `FetchPlayerStreamer` - Returns a single PlayerStreamer resource identified by a SID.
+* `FetchPlayerStreamerPlaybackGrant` - **This method is not enabled.** Returns a single PlaybackGrant resource identified by a SID.
+* `ListMediaProcessor` - Returns a list of MediaProcessors.
+* `ListMediaRecording` - Returns a list of MediaRecordings.
+* `ListPlayerStreamer` - Returns a list of PlayerStreamers.
+* `UpdateMediaProcessor` - Updates a MediaProcessor resource identified by a SID.
+* `UpdatePlayerStreamer` - Updates a PlayerStreamer resource identified by a SID.
+
+<!-- End SDK Available Operations -->

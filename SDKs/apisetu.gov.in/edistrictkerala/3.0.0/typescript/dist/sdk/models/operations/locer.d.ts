@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class LocerRequestBodyCertificateParameters extends SpeakeasyBase {
     aplno: string;
@@ -17,10 +17,6 @@ export declare class LocerRequestBody extends SpeakeasyBase {
 export declare class LocerSecurity extends SpeakeasyBase {
     apiKey: shared.SchemeApiKey;
     clientId: shared.SchemeClientId;
-}
-export declare class LocerRequest extends SpeakeasyBase {
-    request?: LocerRequestBody;
-    security: LocerSecurity;
 }
 export declare enum Locer400ApplicationJsonErrorEnum {
     MissingParameter = "missing_parameter",
@@ -103,6 +99,10 @@ export declare enum Locer504ApplicationJsonErrorDescriptionEnum {
 export declare class Locer504ApplicationJson extends SpeakeasyBase {
     error?: Locer504ApplicationJsonErrorEnum;
     errorDescription?: Locer504ApplicationJsonErrorDescriptionEnum;
+}
+export declare class LocerRequest extends SpeakeasyBase {
+    request?: LocerRequestBody;
+    security: LocerSecurity;
 }
 export declare class LocerResponse extends SpeakeasyBase {
     contentType: string;

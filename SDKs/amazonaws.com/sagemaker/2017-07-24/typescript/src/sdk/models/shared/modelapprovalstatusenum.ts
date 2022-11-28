@@ -1,7 +1,8 @@
 
 
+
 export enum ModelApprovalStatusEnum {
-    Approved = "Approved"
-,    Rejected = "Rejected"
-,    PendingManualApproval = "PendingManualApproval"
+    Approved = "Approved",
+    Rejected = "Rejected",
+    PendingManualApproval = "PendingManualApproval"
 }

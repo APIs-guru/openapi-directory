@@ -1,25 +1,25 @@
 from dataclasses import dataclass, field
-
+from sdk.models import shared
 
 
 @dataclass
 class DeleteMyFollowsShopsSlugPathParams:
-    slug: str = field(default=None, metadata={'path_param': { 'field_name': 'slug', 'style': 'simple', 'explode': False }})
+    slug: str = field(metadata={'path_param': { 'field_name': 'slug', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class DeleteMyFollowsShopsSlugSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DeleteMyFollowsShopsSlugRequest:
-    path_params: DeleteMyFollowsShopsSlugPathParams = field(default=None)
-    security: DeleteMyFollowsShopsSlugSecurity = field(default=None)
+    path_params: DeleteMyFollowsShopsSlugPathParams = field()
+    security: DeleteMyFollowsShopsSlugSecurity = field()
     
 
 @dataclass
 class DeleteMyFollowsShopsSlugResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

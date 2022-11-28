@@ -1,80 +1,81 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetChartDataCacheKeyPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=cache_key" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=cache_key" })
   cacheKey: string;
 }
 
 
 export class GetChartDataCacheKeySecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=bearer" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" })
   jwt: shared.SchemeJwt;
 }
 
 
-export class GetChartDataCacheKeyRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: GetChartDataCacheKeyPathParams;
-
-  @Metadata()
-  security: GetChartDataCacheKeySecurity;
-}
-
-
 export class GetChartDataCacheKey400ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class GetChartDataCacheKey401ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class GetChartDataCacheKey404ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class GetChartDataCacheKey422ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class GetChartDataCacheKey500ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
+export class GetChartDataCacheKeyRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: GetChartDataCacheKeyPathParams;
+
+  @SpeakeasyMetadata()
+  security: GetChartDataCacheKeySecurity;
+}
+
+
 export class GetChartDataCacheKeyResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   chartDataResponseSchema?: shared.ChartDataResponseSchema;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getChartDataCacheKey400ApplicationJsonObject?: GetChartDataCacheKey400ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getChartDataCacheKey401ApplicationJsonObject?: GetChartDataCacheKey401ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getChartDataCacheKey404ApplicationJsonObject?: GetChartDataCacheKey404ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getChartDataCacheKey422ApplicationJsonObject?: GetChartDataCacheKey422ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getChartDataCacheKey500ApplicationJsonObject?: GetChartDataCacheKey500ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

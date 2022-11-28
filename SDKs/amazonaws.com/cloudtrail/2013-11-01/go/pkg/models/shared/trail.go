@@ -1,5 +1,7 @@
 package shared
 
+// Trail
+// The settings for a trail.
 type Trail struct {
 	CloudWatchLogsLogGroupArn  *string `json:"CloudWatchLogsLogGroupArn,omitempty"`
 	CloudWatchLogsRoleArn      *string `json:"CloudWatchLogsRoleArn,omitempty"`

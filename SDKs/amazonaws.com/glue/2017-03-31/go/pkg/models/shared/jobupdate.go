@@ -1,5 +1,7 @@
 package shared
 
+// JobUpdate
+// Specifies information used to update an existing job definition. The previous job definition is completely overwritten by this information.
 type JobUpdate struct {
 	AllocatedCapacity       *int64                `json:"AllocatedCapacity,omitempty"`
 	Command                 *JobCommand           `json:"Command,omitempty"`

@@ -19,12 +19,18 @@ type StartDetectMitigationActionsTaskHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// StartDetectMitigationActionsTaskRequestBodyTarget
+//
+//	The target of a mitigation action task.
 type StartDetectMitigationActionsTaskRequestBodyTarget struct {
 	BehaviorName        *string  `json:"behaviorName,omitempty"`
 	SecurityProfileName *string  `json:"securityProfileName,omitempty"`
 	ViolationIds        []string `json:"violationIds,omitempty"`
 }
 
+// StartDetectMitigationActionsTaskRequestBodyViolationEventOccurrenceRange
+//
+//	Specifies the time period of which violation events occurred between.
 type StartDetectMitigationActionsTaskRequestBodyViolationEventOccurrenceRange struct {
 	EndTime   *time.Time `json:"endTime,omitempty"`
 	StartTime *time.Time `json:"startTime,omitempty"`

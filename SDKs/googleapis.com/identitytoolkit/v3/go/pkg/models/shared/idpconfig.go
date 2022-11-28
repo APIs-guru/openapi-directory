@@ -1,5 +1,7 @@
 package shared
 
+// IdpConfig
+// Template for a single idp configuration.
 type IdpConfig struct {
 	ClientID             *string  `json:"clientId,omitempty"`
 	Enabled              *bool    `json:"enabled,omitempty"`

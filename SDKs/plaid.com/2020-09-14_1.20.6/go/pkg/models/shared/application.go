@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// Application
+// Metadata about the application
 type Application struct {
 	ApplicationID   string    `json:"application_id"`
 	ApplicationURL  string    `json:"application_url"`

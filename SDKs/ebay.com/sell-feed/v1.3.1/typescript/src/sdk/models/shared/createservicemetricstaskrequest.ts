@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CustomerServiceMetricsFilterCriteria } from "./customerservicemetricsfiltercriteria";
+
 
 
 // CreateServiceMetricsTaskRequest
@@ -7,12 +8,12 @@ import { CustomerServiceMetricsFilterCriteria } from "./customerservicemetricsfi
  * The type that defines the fields for the Customer Service Metric reports generated with the Feed API.
 **/
 export class CreateServiceMetricsTaskRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=feedType" })
+  @SpeakeasyMetadata({ data: "json, name=feedType" })
   feedType?: string;
 
-  @Metadata({ data: "json, name=filterCriteria" })
+  @SpeakeasyMetadata({ data: "json, name=filterCriteria" })
   filterCriteria?: CustomerServiceMetricsFilterCriteria;
 
-  @Metadata({ data: "json, name=schemaVersion" })
+  @SpeakeasyMetadata({ data: "json, name=schemaVersion" })
   schemaVersion?: string;
 }

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // MediaUpdateInfoDto
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Media Update Info Dto.
 **/
 export class MediaUpdateInfoDto extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Path" })
+  @SpeakeasyMetadata({ data: "json, name=Path" })
   path?: string;
 
-  @Metadata({ data: "json, name=UpdateType" })
+  @SpeakeasyMetadata({ data: "json, name=UpdateType" })
   updateType?: string;
 }

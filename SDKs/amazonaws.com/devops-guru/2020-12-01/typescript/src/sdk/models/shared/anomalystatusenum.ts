@@ -1,6 +1,7 @@
 
 
+
 export enum AnomalyStatusEnum {
-    Ongoing = "ONGOING"
-,    Closed = "CLOSED"
+    Ongoing = "ONGOING",
+    Closed = "CLOSED"
 }

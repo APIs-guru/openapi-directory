@@ -1,5 +1,7 @@
 package shared
 
+// Deployment
+// Describes a deployment of a stack or app.
 type Deployment struct {
 	AppID        *string            `json:"AppId,omitempty"`
 	Command      *DeploymentCommand `json:"Command,omitempty"`

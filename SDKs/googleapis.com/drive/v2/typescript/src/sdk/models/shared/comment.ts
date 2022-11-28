@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { User } from "./user";
 import { CommentReply } from "./commentreply";
+
 
 
 // CommentContext
@@ -9,10 +9,10 @@ import { CommentReply } from "./commentreply";
  * The context of the file which is being commented on.
 **/
 export class CommentContext extends SpeakeasyBase {
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: string;
 
-  @Metadata({ data: "json, name=value" })
+  @SpeakeasyMetadata({ data: "json, name=value" })
   value?: string;
 }
 
@@ -22,48 +22,48 @@ export class CommentContext extends SpeakeasyBase {
  * A comment on a file in Google Drive.
 **/
 export class Comment extends SpeakeasyBase {
-  @Metadata({ data: "json, name=anchor" })
+  @SpeakeasyMetadata({ data: "json, name=anchor" })
   anchor?: string;
 
-  @Metadata({ data: "json, name=author" })
+  @SpeakeasyMetadata({ data: "json, name=author" })
   author?: User;
 
-  @Metadata({ data: "json, name=commentId" })
+  @SpeakeasyMetadata({ data: "json, name=commentId" })
   commentId?: string;
 
-  @Metadata({ data: "json, name=content" })
+  @SpeakeasyMetadata({ data: "json, name=content" })
   content?: string;
 
-  @Metadata({ data: "json, name=context" })
+  @SpeakeasyMetadata({ data: "json, name=context" })
   context?: CommentContext;
 
-  @Metadata({ data: "json, name=createdDate" })
+  @SpeakeasyMetadata({ data: "json, name=createdDate" })
   createdDate?: Date;
 
-  @Metadata({ data: "json, name=deleted" })
+  @SpeakeasyMetadata({ data: "json, name=deleted" })
   deleted?: boolean;
 
-  @Metadata({ data: "json, name=fileId" })
+  @SpeakeasyMetadata({ data: "json, name=fileId" })
   fileId?: string;
 
-  @Metadata({ data: "json, name=fileTitle" })
+  @SpeakeasyMetadata({ data: "json, name=fileTitle" })
   fileTitle?: string;
 
-  @Metadata({ data: "json, name=htmlContent" })
+  @SpeakeasyMetadata({ data: "json, name=htmlContent" })
   htmlContent?: string;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=modifiedDate" })
+  @SpeakeasyMetadata({ data: "json, name=modifiedDate" })
   modifiedDate?: Date;
 
-  @Metadata({ data: "json, name=replies", elemType: shared.CommentReply })
+  @SpeakeasyMetadata({ data: "json, name=replies", elemType: CommentReply })
   replies?: CommentReply[];
 
-  @Metadata({ data: "json, name=selfLink" })
+  @SpeakeasyMetadata({ data: "json, name=selfLink" })
   selfLink?: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: string;
 }

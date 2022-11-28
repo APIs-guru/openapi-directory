@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AddonIssueCodeEnum } from "./addonissuecodeenum";
+
 
 
 // AddonIssue
@@ -7,12 +8,12 @@ import { AddonIssueCodeEnum } from "./addonissuecodeenum";
  * An issue related to an add-on.
 **/
 export class AddonIssue extends SpeakeasyBase {
-  @Metadata({ data: "json, name=code" })
+  @SpeakeasyMetadata({ data: "json, name=code" })
   code?: AddonIssueCodeEnum;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 
-  @Metadata({ data: "json, name=resourceIds" })
+  @SpeakeasyMetadata({ data: "json, name=resourceIds" })
   resourceIds?: string[];
 }

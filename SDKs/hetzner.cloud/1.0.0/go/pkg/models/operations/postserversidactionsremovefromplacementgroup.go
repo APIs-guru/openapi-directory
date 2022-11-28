@@ -4,10 +4,8 @@ type PostServersIDActionsRemoveFromPlacementGroupPathParams struct {
 	ID int64 `pathParam:"style=simple,explode=false,name=id"`
 }
 
-type PostServersIDActionsRemoveFromPlacementGroupRequest struct {
-	PathParams PostServersIDActionsRemoveFromPlacementGroupPathParams
-}
-
+// PostServersIDActionsRemoveFromPlacementGroupActionResponseActionError
+// Error message for the Action if error occurred, otherwise null
 type PostServersIDActionsRemoveFromPlacementGroupActionResponseActionError struct {
 	Code    string `json:"code"`
 	Message string `json:"message"`
@@ -39,6 +37,10 @@ type PostServersIDActionsRemoveFromPlacementGroupActionResponseAction struct {
 
 type PostServersIDActionsRemoveFromPlacementGroupActionResponse struct {
 	Action PostServersIDActionsRemoveFromPlacementGroupActionResponseAction `json:"action"`
+}
+
+type PostServersIDActionsRemoveFromPlacementGroupRequest struct {
+	PathParams PostServersIDActionsRemoveFromPlacementGroupPathParams
 }
 
 type PostServersIDActionsRemoveFromPlacementGroupResponse struct {

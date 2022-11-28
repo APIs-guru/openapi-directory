@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class GetRealmClientsPathParams:
-    realm: str = field(default=None, metadata={'path_param': { 'field_name': 'realm', 'style': 'simple', 'explode': False }})
+    realm: str = field(metadata={'path_param': { 'field_name': 'realm', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -19,13 +19,13 @@ class GetRealmClientsQueryParams:
 
 @dataclass
 class GetRealmClientsRequest:
-    path_params: GetRealmClientsPathParams = field(default=None)
-    query_params: GetRealmClientsQueryParams = field(default=None)
+    path_params: GetRealmClientsPathParams = field()
+    query_params: GetRealmClientsQueryParams = field()
     
 
 @dataclass
 class GetRealmClientsResponse:
+    content_type: str = field()
+    status_code: int = field()
     client_representations: Optional[List[shared.ClientRepresentation]] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

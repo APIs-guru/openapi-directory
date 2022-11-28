@@ -1,5 +1,7 @@
 package shared
 
+// IPv6Range
+// An object representing an IPv6 range.
 type IPv6Range struct {
 	Prefix      *int64  `json:"prefix,omitempty"`
 	Range       *string `json:"range,omitempty"`

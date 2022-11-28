@@ -1,12 +1,16 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
 @dataclass
 class ConfigureAgentPathParams:
-    profiling_group_name: str = field(default=None, metadata={'path_param': { 'field_name': 'profilingGroupName', 'style': 'simple', 'explode': False }})
+    profiling_group_name: str = field(metadata={'path_param': { 'field_name': 'profilingGroupName', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -23,24 +27,24 @@ class ConfigureAgentHeaders:
 @dataclass_json
 @dataclass
 class ConfigureAgentRequestBody:
-    fleet_instance_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'fleetInstanceId' }})
-    metadata: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'metadata' }})
+    fleet_instance_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('fleetInstanceId') }})
+    metadata: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('metadata') }})
     
 
 @dataclass
 class ConfigureAgentRequest:
-    path_params: ConfigureAgentPathParams = field(default=None)
-    headers: ConfigureAgentHeaders = field(default=None)
-    request: ConfigureAgentRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: ConfigureAgentHeaders = field()
+    path_params: ConfigureAgentPathParams = field()
+    request: ConfigureAgentRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class ConfigureAgentResponse:
+    content_type: str = field()
+    status_code: int = field()
     configure_agent_response: Optional[shared.ConfigureAgentResponse] = field(default=None)
-    content_type: str = field(default=None)
     internal_server_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     validation_exception: Optional[Any] = field(default=None)
     

@@ -1,44 +1,45 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class TwilioMessageGetTwilioGetQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=base64_message" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=base64_message" })
   base64Message?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=message" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=message" })
   message?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=to" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=to" })
   to: string;
 }
 
 
 export class TwilioMessageGetTwilioGetHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=authorization" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=authorization" })
   authorization?: string;
 }
 
 
 export class TwilioMessageGetTwilioGetRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: TwilioMessageGetTwilioGetQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: TwilioMessageGetTwilioGetHeaders;
 }
 
 
 export class TwilioMessageGetTwilioGetResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   httpValidationError?: shared.HttpValidationError;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   twilioMessageGetTwilioGet200ApplicationJsonAny?: any;
 }

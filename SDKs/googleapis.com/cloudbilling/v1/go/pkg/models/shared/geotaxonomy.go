@@ -9,6 +9,8 @@ const (
 	GeoTaxonomyTypeEnumMultiRegional   GeoTaxonomyTypeEnum = "MULTI_REGIONAL"
 )
 
+// GeoTaxonomy
+// Encapsulates the geographic taxonomy data for a sku.
 type GeoTaxonomy struct {
 	Regions []string             `json:"regions,omitempty"`
 	Type    *GeoTaxonomyTypeEnum `json:"type,omitempty"`

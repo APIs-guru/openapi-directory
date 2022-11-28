@@ -5,17 +5,17 @@ from sdk.models import shared
 
 @dataclass
 class GetSpotByIDPathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetSpotByIDRequest:
-    path_params: GetSpotByIDPathParams = field(default=None)
+    path_params: GetSpotByIDPathParams = field()
     
 
 @dataclass
 class GetSpotByIDResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     spot_get: Optional[shared.SpotGet] = field(default=None)
-    status_code: int = field(default=None)
     

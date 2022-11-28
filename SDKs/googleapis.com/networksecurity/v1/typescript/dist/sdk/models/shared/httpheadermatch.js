@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // HttpHeaderMatch
 /**
  * Specification of HTTP header match attributes.
@@ -33,11 +33,11 @@ var HttpHeaderMatch = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=headerName" }),
+        SpeakeasyMetadata({ data: "json, name=headerName" }),
         __metadata("design:type", String)
     ], HttpHeaderMatch.prototype, "headerName", void 0);
     __decorate([
-        Metadata({ data: "json, name=regexMatch" }),
+        SpeakeasyMetadata({ data: "json, name=regexMatch" }),
         __metadata("design:type", String)
     ], HttpHeaderMatch.prototype, "regexMatch", void 0);
     return HttpHeaderMatch;

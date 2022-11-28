@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class UsageReportExecutionErrorCodeEnum(str, Enum):
     RESOURCE_NOT_FOUND = "RESOURCE_NOT_FOUND"

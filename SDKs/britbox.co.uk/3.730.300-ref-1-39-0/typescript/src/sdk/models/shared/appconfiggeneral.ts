@@ -1,34 +1,35 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class AppConfigGeneral extends SpeakeasyBase {
-  @Metadata({ data: "json, name=currencyCode" })
+  @SpeakeasyMetadata({ data: "json, name=currencyCode" })
   currencyCode?: string;
 
-  @Metadata({ data: "json, name=customFields" })
+  @SpeakeasyMetadata({ data: "json, name=customFields" })
   customFields?: Map<string, any>;
 
-  @Metadata({ data: "json, name=defaultTimeZone" })
+  @SpeakeasyMetadata({ data: "json, name=defaultTimeZone" })
   defaultTimeZone?: string;
 
-  @Metadata({ data: "json, name=facebookAppId" })
+  @SpeakeasyMetadata({ data: "json, name=facebookAppId" })
   facebookAppId?: string;
 
-  @Metadata({ data: "json, name=gaToken" })
+  @SpeakeasyMetadata({ data: "json, name=gaToken" })
   gaToken?: string;
 
-  @Metadata({ data: "json, name=itemImageTypes" })
+  @SpeakeasyMetadata({ data: "json, name=itemImageTypes" })
   itemImageTypes?: Map<string, string>;
 
-  @Metadata({ data: "json, name=mandatorySignIn" })
+  @SpeakeasyMetadata({ data: "json, name=mandatorySignIn" })
   mandatorySignIn?: boolean;
 
-  @Metadata({ data: "json, name=maxUserRating" })
+  @SpeakeasyMetadata({ data: "json, name=maxUserRating" })
   maxUserRating?: number;
 
-  @Metadata({ data: "json, name=stripeKey" })
+  @SpeakeasyMetadata({ data: "json, name=stripeKey" })
   stripeKey?: string;
 
-  @Metadata({ data: "json, name=websiteUrl" })
+  @SpeakeasyMetadata({ data: "json, name=websiteUrl" })
   websiteUrl?: string;
 }

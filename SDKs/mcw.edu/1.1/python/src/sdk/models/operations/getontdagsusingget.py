@@ -1,20 +1,20 @@
 from dataclasses import dataclass, field
-
+from typing import Optional
 
 
 @dataclass
 class GetOntDagsUsingGetPathParams:
-    acc_id: str = field(default=None, metadata={'path_param': { 'field_name': 'accId', 'style': 'simple', 'explode': False }})
+    acc_id: str = field(metadata={'path_param': { 'field_name': 'accId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetOntDagsUsingGetRequest:
-    path_params: GetOntDagsUsingGetPathParams = field(default=None)
+    path_params: GetOntDagsUsingGetPathParams = field()
     
 
 @dataclass
 class GetOntDagsUsingGetResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

@@ -1,5 +1,7 @@
 package shared
 
-type CreateCustomerRequest struct {
-	Customer *Company `json:"customer,omitempty"`
+// CreateCustomerRequestInput
+// Request message to create a customer.
+type CreateCustomerRequestInput struct {
+	Customer *CompanyInput `json:"customer,omitempty"`
 }

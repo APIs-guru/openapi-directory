@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { FilterView } from "./filterview";
+
 
 
 // DuplicateFilterViewResponse
@@ -7,6 +8,6 @@ import { FilterView } from "./filterview";
  * The result of a filter view being duplicated.
 **/
 export class DuplicateFilterViewResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=filter" })
+  @SpeakeasyMetadata({ data: "json, name=filter" })
   filter?: FilterView;
 }

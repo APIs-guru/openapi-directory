@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AdWordsLocationExtensions
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Additional information that is surfaced in AdWords.
 **/
 export class AdWordsLocationExtensions extends SpeakeasyBase {
-  @Metadata({ data: "json, name=adPhone" })
+  @SpeakeasyMetadata({ data: "json, name=adPhone" })
   adPhone?: string;
 }

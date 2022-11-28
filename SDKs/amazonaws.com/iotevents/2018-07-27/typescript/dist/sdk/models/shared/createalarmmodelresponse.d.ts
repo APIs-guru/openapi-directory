@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { AlarmModelVersionStatusEnum } from "./alarmmodelversionstatusenum";
 export declare class CreateAlarmModelResponse extends SpeakeasyBase {
     alarmModelArn?: string;

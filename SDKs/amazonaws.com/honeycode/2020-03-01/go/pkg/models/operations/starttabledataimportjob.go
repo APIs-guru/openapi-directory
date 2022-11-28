@@ -25,10 +25,14 @@ const (
 	StartTableDataImportJobRequestBodyDataFormatEnumDelimitedText StartTableDataImportJobRequestBodyDataFormatEnum = "DELIMITED_TEXT"
 )
 
+// StartTableDataImportJobRequestBodyDataSource
+// An object that has details about the source of the data that was submitted for import.
 type StartTableDataImportJobRequestBodyDataSource struct {
 	DataSourceConfig *shared.ImportDataSourceConfig `json:"dataSourceConfig,omitempty"`
 }
 
+// StartTableDataImportJobRequestBodyImportOptions
+// An object that contains the options specified by the sumitter of the import request.
 type StartTableDataImportJobRequestBodyImportOptions struct {
 	DelimitedTextOptions *shared.DelimitedTextImportOptions `json:"delimitedTextOptions,omitempty"`
 	DestinationOptions   *shared.DestinationOptions         `json:"destinationOptions,omitempty"`

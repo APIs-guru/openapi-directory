@@ -1,9 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { IosModel } from "./iosmodel";
 import { IosRuntimeConfiguration } from "./iosruntimeconfiguration";
 import { IosVersion } from "./iosversion";
 import { XcodeVersion } from "./xcodeversion";
+
 
 
 // IosDeviceCatalog
@@ -11,15 +11,15 @@ import { XcodeVersion } from "./xcodeversion";
  * The currently supported iOS devices.
 **/
 export class IosDeviceCatalog extends SpeakeasyBase {
-  @Metadata({ data: "json, name=models", elemType: shared.IosModel })
+  @SpeakeasyMetadata({ data: "json, name=models", elemType: IosModel })
   models?: IosModel[];
 
-  @Metadata({ data: "json, name=runtimeConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=runtimeConfiguration" })
   runtimeConfiguration?: IosRuntimeConfiguration;
 
-  @Metadata({ data: "json, name=versions", elemType: shared.IosVersion })
+  @SpeakeasyMetadata({ data: "json, name=versions", elemType: IosVersion })
   versions?: IosVersion[];
 
-  @Metadata({ data: "json, name=xcodeVersions", elemType: shared.XcodeVersion })
+  @SpeakeasyMetadata({ data: "json, name=xcodeVersions", elemType: XcodeVersion })
   xcodeVersions?: XcodeVersion[];
 }

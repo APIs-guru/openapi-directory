@@ -22,22 +22,22 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var PostContactEnrichHeaders = /** @class */ (function (_super) {
     __extends(PostContactEnrichHeaders, _super);
     function PostContactEnrichHeaders() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=galaxy-ap-name" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=galaxy-ap-name" }),
         __metadata("design:type", String)
     ], PostContactEnrichHeaders.prototype, "galaxyApName", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=galaxy-ap-password" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=galaxy-ap-password" }),
         __metadata("design:type", String)
     ], PostContactEnrichHeaders.prototype, "galaxyApPassword", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=galaxy-search-type" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=galaxy-search-type" }),
         __metadata("design:type", String)
     ], PostContactEnrichHeaders.prototype, "galaxySearchType", void 0);
     return PostContactEnrichHeaders;
@@ -49,11 +49,11 @@ var PostContactEnrichRequestBodyAddress = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=addressLine1" }),
+        SpeakeasyMetadata({ data: "json, name=addressLine1" }),
         __metadata("design:type", String)
     ], PostContactEnrichRequestBodyAddress.prototype, "addressLine1", void 0);
     __decorate([
-        Metadata({ data: "json, name=addressLine2" }),
+        SpeakeasyMetadata({ data: "json, name=addressLine2" }),
         __metadata("design:type", String)
     ], PostContactEnrichRequestBodyAddress.prototype, "addressLine2", void 0);
     return PostContactEnrichRequestBodyAddress;
@@ -65,35 +65,35 @@ var PostContactEnrichRequestBody = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Address" }),
+        SpeakeasyMetadata({ data: "json, name=Address" }),
         __metadata("design:type", PostContactEnrichRequestBodyAddress)
     ], PostContactEnrichRequestBody.prototype, "address", void 0);
     __decorate([
-        Metadata({ data: "json, name=Age" }),
+        SpeakeasyMetadata({ data: "json, name=Age" }),
         __metadata("design:type", Number)
     ], PostContactEnrichRequestBody.prototype, "age", void 0);
     __decorate([
-        Metadata({ data: "json, name=Dob" }),
+        SpeakeasyMetadata({ data: "json, name=Dob" }),
         __metadata("design:type", String)
     ], PostContactEnrichRequestBody.prototype, "dob", void 0);
     __decorate([
-        Metadata({ data: "json, name=Email" }),
+        SpeakeasyMetadata({ data: "json, name=Email" }),
         __metadata("design:type", String)
     ], PostContactEnrichRequestBody.prototype, "email", void 0);
     __decorate([
-        Metadata({ data: "json, name=FirstName" }),
+        SpeakeasyMetadata({ data: "json, name=FirstName" }),
         __metadata("design:type", String)
     ], PostContactEnrichRequestBody.prototype, "firstName", void 0);
     __decorate([
-        Metadata({ data: "json, name=LastName" }),
+        SpeakeasyMetadata({ data: "json, name=LastName" }),
         __metadata("design:type", String)
     ], PostContactEnrichRequestBody.prototype, "lastName", void 0);
     __decorate([
-        Metadata({ data: "json, name=MiddleName" }),
+        SpeakeasyMetadata({ data: "json, name=MiddleName" }),
         __metadata("design:type", String)
     ], PostContactEnrichRequestBody.prototype, "middleName", void 0);
     __decorate([
-        Metadata({ data: "json, name=PhoneNumber" }),
+        SpeakeasyMetadata({ data: "json, name=PhoneNumber" }),
         __metadata("design:type", String)
     ], PostContactEnrichRequestBody.prototype, "phoneNumber", void 0);
     return PostContactEnrichRequestBody;
@@ -105,11 +105,11 @@ var PostContactEnrichRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PostContactEnrichHeaders)
     ], PostContactEnrichRequest.prototype, "headers", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", PostContactEnrichRequestBody)
     ], PostContactEnrichRequest.prototype, "request", void 0);
     return PostContactEnrichRequest;
@@ -121,11 +121,11 @@ var PostContactEnrichResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], PostContactEnrichResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], PostContactEnrichResponse.prototype, "statusCode", void 0);
     return PostContactEnrichResponse;

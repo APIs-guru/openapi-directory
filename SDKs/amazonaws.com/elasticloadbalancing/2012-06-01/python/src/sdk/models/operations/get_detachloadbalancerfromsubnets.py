@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 
 class GetDetachLoadBalancerFromSubnetsActionEnum(str, Enum):
     DETACH_LOAD_BALANCER_FROM_SUBNETS = "DetachLoadBalancerFromSubnets"
@@ -10,10 +14,10 @@ class GetDetachLoadBalancerFromSubnetsVersionEnum(str, Enum):
 
 @dataclass
 class GetDetachLoadBalancerFromSubnetsQueryParams:
-    action: GetDetachLoadBalancerFromSubnetsActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    load_balancer_name: str = field(default=None, metadata={'query_param': { 'field_name': 'LoadBalancerName', 'style': 'form', 'explode': True }})
-    subnets: List[str] = field(default=None, metadata={'query_param': { 'field_name': 'Subnets', 'style': 'form', 'explode': True }})
-    version: GetDetachLoadBalancerFromSubnetsVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: GetDetachLoadBalancerFromSubnetsActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    load_balancer_name: str = field(metadata={'query_param': { 'field_name': 'LoadBalancerName', 'style': 'form', 'explode': True }})
+    subnets: List[str] = field(metadata={'query_param': { 'field_name': 'Subnets', 'style': 'form', 'explode': True }})
+    version: GetDetachLoadBalancerFromSubnetsVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -29,13 +33,13 @@ class GetDetachLoadBalancerFromSubnetsHeaders:
 
 @dataclass
 class GetDetachLoadBalancerFromSubnetsRequest:
-    query_params: GetDetachLoadBalancerFromSubnetsQueryParams = field(default=None)
-    headers: GetDetachLoadBalancerFromSubnetsHeaders = field(default=None)
+    headers: GetDetachLoadBalancerFromSubnetsHeaders = field()
+    query_params: GetDetachLoadBalancerFromSubnetsQueryParams = field()
     
 
 @dataclass
 class GetDetachLoadBalancerFromSubnetsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

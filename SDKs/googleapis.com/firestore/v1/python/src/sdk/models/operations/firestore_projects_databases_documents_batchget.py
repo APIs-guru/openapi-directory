@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class FirestoreProjectsDatabasesDocumentsBatchGetPathParams:
-    database: str = field(default=None, metadata={'path_param': { 'field_name': 'database', 'style': 'simple', 'explode': False }})
+    database: str = field(metadata={'path_param': { 'field_name': 'database', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,14 +26,14 @@ class FirestoreProjectsDatabasesDocumentsBatchGetQueryParams:
 
 @dataclass
 class FirestoreProjectsDatabasesDocumentsBatchGetSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class FirestoreProjectsDatabasesDocumentsBatchGetSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -43,15 +44,15 @@ class FirestoreProjectsDatabasesDocumentsBatchGetSecurity:
 
 @dataclass
 class FirestoreProjectsDatabasesDocumentsBatchGetRequest:
-    path_params: FirestoreProjectsDatabasesDocumentsBatchGetPathParams = field(default=None)
-    query_params: FirestoreProjectsDatabasesDocumentsBatchGetQueryParams = field(default=None)
+    path_params: FirestoreProjectsDatabasesDocumentsBatchGetPathParams = field()
+    query_params: FirestoreProjectsDatabasesDocumentsBatchGetQueryParams = field()
+    security: FirestoreProjectsDatabasesDocumentsBatchGetSecurity = field()
     request: Optional[shared.BatchGetDocumentsRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: FirestoreProjectsDatabasesDocumentsBatchGetSecurity = field(default=None)
     
 
 @dataclass
 class FirestoreProjectsDatabasesDocumentsBatchGetResponse:
+    content_type: str = field()
+    status_code: int = field()
     batch_get_documents_response: Optional[shared.BatchGetDocumentsResponse] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

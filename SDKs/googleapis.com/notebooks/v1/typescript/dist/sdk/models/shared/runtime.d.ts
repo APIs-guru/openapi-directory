@@ -1,4 +1,7 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
+import { RuntimeAccessConfigInput } from "./runtimeaccessconfig";
+import { RuntimeSoftwareConfigInput } from "./runtimesoftwareconfig";
+import { VirtualMachineInput } from "./virtualmachine";
 import { RuntimeAccessConfig } from "./runtimeaccessconfig";
 import { RuntimeMetrics } from "./runtimemetrics";
 import { RuntimeSoftwareConfig } from "./runtimesoftwareconfig";
@@ -20,6 +23,14 @@ export declare enum RuntimeStateEnum {
     Deleting = "DELETING",
     Upgrading = "UPGRADING",
     Initializing = "INITIALIZING"
+}
+/**
+ * The definition of a Runtime for a managed notebook instance.
+**/
+export declare class RuntimeInput extends SpeakeasyBase {
+    accessConfig?: RuntimeAccessConfigInput;
+    softwareConfig?: RuntimeSoftwareConfigInput;
+    virtualMachine?: VirtualMachineInput;
 }
 /**
  * The definition of a Runtime for a managed notebook instance.

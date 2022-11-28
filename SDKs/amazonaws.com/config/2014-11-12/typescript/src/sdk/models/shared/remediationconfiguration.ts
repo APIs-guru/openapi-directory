@@ -1,8 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ExecutionControls } from "./executioncontrols";
 import { RemediationParameterValue } from "./remediationparametervalue";
 import { RemediationTargetTypeEnum } from "./remediationtargettypeenum";
+
 
 
 // RemediationConfiguration
@@ -10,39 +10,39 @@ import { RemediationTargetTypeEnum } from "./remediationtargettypeenum";
  * An object that represents the details about the remediation configuration that includes the remediation action, parameters, and data to execute the action.
 **/
 export class RemediationConfiguration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Arn" })
+  @SpeakeasyMetadata({ data: "json, name=Arn" })
   arn?: string;
 
-  @Metadata({ data: "json, name=Automatic" })
+  @SpeakeasyMetadata({ data: "json, name=Automatic" })
   automatic?: boolean;
 
-  @Metadata({ data: "json, name=ConfigRuleName" })
+  @SpeakeasyMetadata({ data: "json, name=ConfigRuleName" })
   configRuleName: string;
 
-  @Metadata({ data: "json, name=CreatedByService" })
+  @SpeakeasyMetadata({ data: "json, name=CreatedByService" })
   createdByService?: string;
 
-  @Metadata({ data: "json, name=ExecutionControls" })
+  @SpeakeasyMetadata({ data: "json, name=ExecutionControls" })
   executionControls?: ExecutionControls;
 
-  @Metadata({ data: "json, name=MaximumAutomaticAttempts" })
+  @SpeakeasyMetadata({ data: "json, name=MaximumAutomaticAttempts" })
   maximumAutomaticAttempts?: number;
 
-  @Metadata({ data: "json, name=Parameters", elemType: shared.RemediationParameterValue })
+  @SpeakeasyMetadata({ data: "json, name=Parameters", elemType: RemediationParameterValue })
   parameters?: Map<string, RemediationParameterValue>;
 
-  @Metadata({ data: "json, name=ResourceType" })
+  @SpeakeasyMetadata({ data: "json, name=ResourceType" })
   resourceType?: string;
 
-  @Metadata({ data: "json, name=RetryAttemptSeconds" })
+  @SpeakeasyMetadata({ data: "json, name=RetryAttemptSeconds" })
   retryAttemptSeconds?: number;
 
-  @Metadata({ data: "json, name=TargetId" })
+  @SpeakeasyMetadata({ data: "json, name=TargetId" })
   targetId: string;
 
-  @Metadata({ data: "json, name=TargetType" })
+  @SpeakeasyMetadata({ data: "json, name=TargetType" })
   targetType: RemediationTargetTypeEnum;
 
-  @Metadata({ data: "json, name=TargetVersion" })
+  @SpeakeasyMetadata({ data: "json, name=TargetVersion" })
   targetVersion?: string;
 }

@@ -1,17 +1,18 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Money } from "./money";
 
+
 export enum TransferParametersSupportedPrivacyEnum {
-    ContactPrivacyUnspecified = "CONTACT_PRIVACY_UNSPECIFIED"
-,    PublicContactData = "PUBLIC_CONTACT_DATA"
-,    PrivateContactData = "PRIVATE_CONTACT_DATA"
-,    RedactedContactData = "REDACTED_CONTACT_DATA"
+    ContactPrivacyUnspecified = "CONTACT_PRIVACY_UNSPECIFIED",
+    PublicContactData = "PUBLIC_CONTACT_DATA",
+    PrivateContactData = "PRIVATE_CONTACT_DATA",
+    RedactedContactData = "REDACTED_CONTACT_DATA"
 }
 
 export enum TransferParametersTransferLockStateEnum {
-    TransferLockStateUnspecified = "TRANSFER_LOCK_STATE_UNSPECIFIED"
-,    Unlocked = "UNLOCKED"
-,    Locked = "LOCKED"
+    TransferLockStateUnspecified = "TRANSFER_LOCK_STATE_UNSPECIFIED",
+    Unlocked = "UNLOCKED",
+    Locked = "LOCKED"
 }
 
 
@@ -20,24 +21,24 @@ export enum TransferParametersTransferLockStateEnum {
  * Parameters required to transfer a domain from another registrar.
 **/
 export class TransferParameters extends SpeakeasyBase {
-  @Metadata({ data: "json, name=currentRegistrar" })
+  @SpeakeasyMetadata({ data: "json, name=currentRegistrar" })
   currentRegistrar?: string;
 
-  @Metadata({ data: "json, name=currentRegistrarUri" })
+  @SpeakeasyMetadata({ data: "json, name=currentRegistrarUri" })
   currentRegistrarUri?: string;
 
-  @Metadata({ data: "json, name=domainName" })
+  @SpeakeasyMetadata({ data: "json, name=domainName" })
   domainName?: string;
 
-  @Metadata({ data: "json, name=nameServers" })
+  @SpeakeasyMetadata({ data: "json, name=nameServers" })
   nameServers?: string[];
 
-  @Metadata({ data: "json, name=supportedPrivacy" })
+  @SpeakeasyMetadata({ data: "json, name=supportedPrivacy" })
   supportedPrivacy?: TransferParametersSupportedPrivacyEnum[];
 
-  @Metadata({ data: "json, name=transferLockState" })
+  @SpeakeasyMetadata({ data: "json, name=transferLockState" })
   transferLockState?: TransferParametersTransferLockStateEnum;
 
-  @Metadata({ data: "json, name=yearlyPrice" })
+  @SpeakeasyMetadata({ data: "json, name=yearlyPrice" })
   yearlyPrice?: Money;
 }

@@ -1,21 +1,21 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ColumnStatistics } from "./columnstatistics";
 
 
+
 export class UpdateColumnStatisticsForPartitionRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CatalogId" })
+  @SpeakeasyMetadata({ data: "json, name=CatalogId" })
   catalogId?: string;
 
-  @Metadata({ data: "json, name=ColumnStatisticsList", elemType: shared.ColumnStatistics })
+  @SpeakeasyMetadata({ data: "json, name=ColumnStatisticsList", elemType: ColumnStatistics })
   columnStatisticsList: ColumnStatistics[];
 
-  @Metadata({ data: "json, name=DatabaseName" })
+  @SpeakeasyMetadata({ data: "json, name=DatabaseName" })
   databaseName: string;
 
-  @Metadata({ data: "json, name=PartitionValues" })
+  @SpeakeasyMetadata({ data: "json, name=PartitionValues" })
   partitionValues: string[];
 
-  @Metadata({ data: "json, name=TableName" })
+  @SpeakeasyMetadata({ data: "json, name=TableName" })
   tableName: string;
 }

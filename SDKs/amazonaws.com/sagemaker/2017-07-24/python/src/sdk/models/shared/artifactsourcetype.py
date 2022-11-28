@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import artifactsourceidtype_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ArtifactSourceType:
-    source_id_type: artifactsourceidtype_enum.ArtifactSourceIDTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'SourceIdType' }})
-    value: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Value' }})
+    r"""ArtifactSourceType
+    The ID and ID type of an artifact source.
+    """
+    
+    source_id_type: ArtifactSourceIDTypeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('SourceIdType') }})
+    value: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Value') }})
     

@@ -31,7 +31,7 @@ type SecuritycenterProjectsMuteConfigsCreateSecurity struct {
 type SecuritycenterProjectsMuteConfigsCreateRequest struct {
 	PathParams  SecuritycenterProjectsMuteConfigsCreatePathParams
 	QueryParams SecuritycenterProjectsMuteConfigsCreateQueryParams
-	Request     *shared.GoogleCloudSecuritycenterV1MuteConfig `request:"mediaType=application/json"`
+	Request     *shared.GoogleCloudSecuritycenterV1MuteConfigInput `request:"mediaType=application/json"`
 	Security    SecuritycenterProjectsMuteConfigsCreateSecurity
 }
 

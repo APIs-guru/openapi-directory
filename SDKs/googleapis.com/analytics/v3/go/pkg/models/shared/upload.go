@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// Upload
+// Metadata returned for an upload operation.
 type Upload struct {
 	AccountID          *string    `json:"accountId,omitempty"`
 	CustomDataSourceID *string    `json:"customDataSourceId,omitempty"`

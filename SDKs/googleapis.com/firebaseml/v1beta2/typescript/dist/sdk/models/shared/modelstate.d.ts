@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { Status } from "./status";
 /**
  * State common to all model types. Includes publishing and validation information.

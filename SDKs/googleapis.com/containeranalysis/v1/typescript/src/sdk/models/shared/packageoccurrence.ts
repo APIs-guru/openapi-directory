@@ -1,13 +1,13 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { License } from "./license";
 import { Location } from "./location";
 import { Version } from "./version";
 
+
 export enum PackageOccurrenceArchitectureEnum {
-    ArchitectureUnspecified = "ARCHITECTURE_UNSPECIFIED"
-,    X86 = "X86"
-,    X64 = "X64"
+    ArchitectureUnspecified = "ARCHITECTURE_UNSPECIFIED",
+    X86 = "X86",
+    X64 = "X64"
 }
 
 
@@ -16,24 +16,40 @@ export enum PackageOccurrenceArchitectureEnum {
  * Details on how a particular software package was installed on a system.
 **/
 export class PackageOccurrence extends SpeakeasyBase {
-  @Metadata({ data: "json, name=architecture" })
+  @SpeakeasyMetadata({ data: "json, name=architecture" })
   architecture?: PackageOccurrenceArchitectureEnum;
 
-  @Metadata({ data: "json, name=cpeUri" })
+  @SpeakeasyMetadata({ data: "json, name=cpeUri" })
   cpeUri?: string;
 
-  @Metadata({ data: "json, name=license" })
+  @SpeakeasyMetadata({ data: "json, name=license" })
   license?: License;
 
-  @Metadata({ data: "json, name=location", elemType: shared.Location })
+  @SpeakeasyMetadata({ data: "json, name=location", elemType: Location })
   location?: Location[];
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=packageType" })
+  @SpeakeasyMetadata({ data: "json, name=packageType" })
   packageType?: string;
 
-  @Metadata({ data: "json, name=version" })
+  @SpeakeasyMetadata({ data: "json, name=version" })
+  version?: Version;
+}
+
+
+// PackageOccurrenceInput
+/** 
+ * Details on how a particular software package was installed on a system.
+**/
+export class PackageOccurrenceInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=license" })
+  license?: License;
+
+  @SpeakeasyMetadata({ data: "json, name=location", elemType: Location })
+  location?: Location[];
+
+  @SpeakeasyMetadata({ data: "json, name=version" })
   version?: Version;
 }

@@ -1,12 +1,18 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import errorcode_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ErrorInformation:
-    code: Optional[errorcode_enum.ErrorCodeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'code' }})
-    message: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'message' }})
+    r"""ErrorInformation
+    Information about a deployment error.
+    """
+    
+    code: Optional[ErrorCodeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('code') }})
+    message: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('message') }})
     

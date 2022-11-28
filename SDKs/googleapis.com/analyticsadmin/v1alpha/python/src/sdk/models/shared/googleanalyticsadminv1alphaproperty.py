@@ -1,6 +1,11 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class GoogleAnalyticsAdminV1alphaPropertyIndustryCategoryEnum(str, Enum):
     INDUSTRY_CATEGORY_UNSPECIFIED = "INDUSTRY_CATEGORY_UNSPECIFIED"
@@ -46,17 +51,37 @@ class GoogleAnalyticsAdminV1alphaPropertyServiceLevelEnum(str, Enum):
 @dataclass_json
 @dataclass
 class GoogleAnalyticsAdminV1alphaProperty:
-    account: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'account' }})
-    create_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'createTime' }})
-    currency_code: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'currencyCode' }})
-    delete_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'deleteTime' }})
-    display_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'displayName' }})
-    expire_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'expireTime' }})
-    industry_category: Optional[GoogleAnalyticsAdminV1alphaPropertyIndustryCategoryEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'industryCategory' }})
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    parent: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'parent' }})
-    property_type: Optional[GoogleAnalyticsAdminV1alphaPropertyPropertyTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'propertyType' }})
-    service_level: Optional[GoogleAnalyticsAdminV1alphaPropertyServiceLevelEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'serviceLevel' }})
-    time_zone: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'timeZone' }})
-    update_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'updateTime' }})
+    r"""GoogleAnalyticsAdminV1alphaProperty
+    A resource message representing a Google Analytics GA4 property.
+    """
+    
+    account: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('account') }})
+    create_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('createTime') }})
+    currency_code: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('currencyCode') }})
+    delete_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('deleteTime') }})
+    display_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('displayName') }})
+    expire_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('expireTime') }})
+    industry_category: Optional[GoogleAnalyticsAdminV1alphaPropertyIndustryCategoryEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('industryCategory') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    parent: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('parent') }})
+    property_type: Optional[GoogleAnalyticsAdminV1alphaPropertyPropertyTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('propertyType') }})
+    service_level: Optional[GoogleAnalyticsAdminV1alphaPropertyServiceLevelEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('serviceLevel') }})
+    time_zone: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('timeZone') }})
+    update_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('updateTime') }})
+    
+
+@dataclass_json
+@dataclass
+class GoogleAnalyticsAdminV1alphaPropertyInput:
+    r"""GoogleAnalyticsAdminV1alphaPropertyInput
+    A resource message representing a Google Analytics GA4 property.
+    """
+    
+    account: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('account') }})
+    currency_code: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('currencyCode') }})
+    display_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('displayName') }})
+    industry_category: Optional[GoogleAnalyticsAdminV1alphaPropertyIndustryCategoryEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('industryCategory') }})
+    parent: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('parent') }})
+    property_type: Optional[GoogleAnalyticsAdminV1alphaPropertyPropertyTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('propertyType') }})
+    time_zone: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('timeZone') }})
     

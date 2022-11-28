@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AccountAccess } from "./accountaccess";
+
 
 
 // Consents
@@ -8,18 +9,18 @@ import { AccountAccess } from "./accountaccess";
  * 
 **/
 export class Consents extends SpeakeasyBase {
-  @Metadata({ data: "json, name=access" })
+  @SpeakeasyMetadata({ data: "json, name=access" })
   access: AccountAccess;
 
-  @Metadata({ data: "json, name=combinedServiceIndicator" })
+  @SpeakeasyMetadata({ data: "json, name=combinedServiceIndicator" })
   combinedServiceIndicator: boolean;
 
-  @Metadata({ data: "json, name=frequencyPerDay" })
+  @SpeakeasyMetadata({ data: "json, name=frequencyPerDay" })
   frequencyPerDay: number;
 
-  @Metadata({ data: "json, name=recurringIndicator" })
+  @SpeakeasyMetadata({ data: "json, name=recurringIndicator" })
   recurringIndicator: boolean;
 
-  @Metadata({ data: "json, name=validUntil" })
+  @SpeakeasyMetadata({ data: "json, name=validUntil" })
   validUntil: Date;
 }

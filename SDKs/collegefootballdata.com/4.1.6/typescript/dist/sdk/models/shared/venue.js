@@ -22,18 +22,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var VenueLocation = /** @class */ (function (_super) {
     __extends(VenueLocation, _super);
     function VenueLocation() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=x" }),
+        SpeakeasyMetadata({ data: "json, name=x" }),
         __metadata("design:type", Number)
     ], VenueLocation.prototype, "x", void 0);
     __decorate([
-        Metadata({ data: "json, name=y" }),
+        SpeakeasyMetadata({ data: "json, name=y" }),
         __metadata("design:type", Number)
     ], VenueLocation.prototype, "y", void 0);
     return VenueLocation;
@@ -45,55 +45,55 @@ var Venue = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=capacity" }),
+        SpeakeasyMetadata({ data: "json, name=capacity" }),
         __metadata("design:type", Number)
     ], Venue.prototype, "capacity", void 0);
     __decorate([
-        Metadata({ data: "json, name=city" }),
+        SpeakeasyMetadata({ data: "json, name=city" }),
         __metadata("design:type", String)
     ], Venue.prototype, "city", void 0);
     __decorate([
-        Metadata({ data: "json, name=country_code" }),
+        SpeakeasyMetadata({ data: "json, name=country_code" }),
         __metadata("design:type", String)
     ], Venue.prototype, "countryCode", void 0);
     __decorate([
-        Metadata({ data: "json, name=dome" }),
+        SpeakeasyMetadata({ data: "json, name=dome" }),
         __metadata("design:type", Boolean)
     ], Venue.prototype, "dome", void 0);
     __decorate([
-        Metadata({ data: "json, name=elevation" }),
+        SpeakeasyMetadata({ data: "json, name=elevation" }),
         __metadata("design:type", Number)
     ], Venue.prototype, "elevation", void 0);
     __decorate([
-        Metadata({ data: "json, name=grass" }),
+        SpeakeasyMetadata({ data: "json, name=grass" }),
         __metadata("design:type", Boolean)
     ], Venue.prototype, "grass", void 0);
     __decorate([
-        Metadata({ data: "json, name=id" }),
+        SpeakeasyMetadata({ data: "json, name=id" }),
         __metadata("design:type", Number)
     ], Venue.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "json, name=location" }),
+        SpeakeasyMetadata({ data: "json, name=location" }),
         __metadata("design:type", VenueLocation)
     ], Venue.prototype, "location", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], Venue.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=state" }),
+        SpeakeasyMetadata({ data: "json, name=state" }),
         __metadata("design:type", String)
     ], Venue.prototype, "state", void 0);
     __decorate([
-        Metadata({ data: "json, name=timezone" }),
+        SpeakeasyMetadata({ data: "json, name=timezone" }),
         __metadata("design:type", String)
     ], Venue.prototype, "timezone", void 0);
     __decorate([
-        Metadata({ data: "json, name=year" }),
+        SpeakeasyMetadata({ data: "json, name=year" }),
         __metadata("design:type", Number)
     ], Venue.prototype, "year", void 0);
     __decorate([
-        Metadata({ data: "json, name=zip" }),
+        SpeakeasyMetadata({ data: "json, name=zip" }),
         __metadata("design:type", String)
     ], Venue.prototype, "zip", void 0);
     return Venue;

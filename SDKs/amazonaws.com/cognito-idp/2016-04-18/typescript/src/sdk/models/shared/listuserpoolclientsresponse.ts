@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { UserPoolClientDescription } from "./userpoolclientdescription";
+
 
 
 // ListUserPoolClientsResponse
@@ -8,9 +8,9 @@ import { UserPoolClientDescription } from "./userpoolclientdescription";
  * Represents the response from the server that lists user pool clients.
 **/
 export class ListUserPoolClientsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=UserPoolClients", elemType: shared.UserPoolClientDescription })
+  @SpeakeasyMetadata({ data: "json, name=UserPoolClients", elemType: UserPoolClientDescription })
   userPoolClients?: UserPoolClientDescription[];
 }

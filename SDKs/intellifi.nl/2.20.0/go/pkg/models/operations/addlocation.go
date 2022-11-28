@@ -5,7 +5,7 @@ import (
 )
 
 type AddLocationRequest struct {
-	Request shared.Location `request:"mediaType=application/json"`
+	Request shared.LocationInput `request:"mediaType=application/json"`
 }
 
 type AddLocationResponse struct {

@@ -1,10 +1,14 @@
 package shared
 
+// BucketAccessControlProjectTeam
+// The project team associated with the entity, if any.
 type BucketAccessControlProjectTeam struct {
 	ProjectNumber *string `json:"projectNumber,omitempty"`
 	Team          *string `json:"team,omitempty"`
 }
 
+// BucketAccessControl
+// An access-control entry.
 type BucketAccessControl struct {
 	Bucket      *string                         `json:"bucket,omitempty"`
 	Domain      *string                         `json:"domain,omitempty"`

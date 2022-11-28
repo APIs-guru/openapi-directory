@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // UpdateCveRequestBody
@@ -6,17 +7,11 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * CVE update config
 **/
 export class UpdateCveRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=url" })
+  @SpeakeasyMetadata({ data: "json, name=url" })
   url?: string;
 
-  @Metadata({ data: "json, name=years" })
+  @SpeakeasyMetadata({ data: "json, name=years" })
   years?: string[];
-}
-
-
-export class UpdateCveRequest extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/json" })
-  request?: UpdateCveRequestBody;
 }
 
 export enum UpdateCve200ApplicationJsonActionEnum {
@@ -25,35 +20,41 @@ export enum UpdateCve200ApplicationJsonActionEnum {
 
 
 export class UpdateCve200ApplicationJsonData extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CVEs" })
+  @SpeakeasyMetadata({ data: "json, name=CVEs" })
   cvEs: number;
 }
 
 export enum UpdateCve200ApplicationJsonResultEnum {
-    Success = "success"
-,    Error = "error"
+    Success = "success",
+    Error = "error"
 }
 
 
 export class UpdateCve200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=action" })
+  @SpeakeasyMetadata({ data: "json, name=action" })
   action: UpdateCve200ApplicationJsonActionEnum;
 
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data: UpdateCve200ApplicationJsonData;
 
-  @Metadata({ data: "json, name=result" })
+  @SpeakeasyMetadata({ data: "json, name=result" })
   result: UpdateCve200ApplicationJsonResultEnum;
 }
 
 
+export class UpdateCveRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request?: UpdateCveRequestBody;
+}
+
+
 export class UpdateCveResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   updateCve200ApplicationJsonObject?: UpdateCve200ApplicationJson;
 }

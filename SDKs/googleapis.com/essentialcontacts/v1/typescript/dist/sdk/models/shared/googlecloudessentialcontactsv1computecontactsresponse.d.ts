@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudEssentialcontactsV1Contact } from "./googlecloudessentialcontactsv1contact";
 /**
  * Response message for the ComputeContacts method.

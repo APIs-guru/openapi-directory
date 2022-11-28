@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { LayerAvailabilityEnum } from "./layeravailabilityenum";
 // Layer
 /**
@@ -34,19 +34,19 @@ var Layer = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=layerAvailability" }),
+        SpeakeasyMetadata({ data: "json, name=layerAvailability" }),
         __metadata("design:type", String)
     ], Layer.prototype, "layerAvailability", void 0);
     __decorate([
-        Metadata({ data: "json, name=layerDigest" }),
+        SpeakeasyMetadata({ data: "json, name=layerDigest" }),
         __metadata("design:type", String)
     ], Layer.prototype, "layerDigest", void 0);
     __decorate([
-        Metadata({ data: "json, name=layerSize" }),
+        SpeakeasyMetadata({ data: "json, name=layerSize" }),
         __metadata("design:type", Number)
     ], Layer.prototype, "layerSize", void 0);
     __decorate([
-        Metadata({ data: "json, name=mediaType" }),
+        SpeakeasyMetadata({ data: "json, name=mediaType" }),
         __metadata("design:type", String)
     ], Layer.prototype, "mediaType", void 0);
     return Layer;

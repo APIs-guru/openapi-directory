@@ -5,17 +5,17 @@ from sdk.models import shared
 
 @dataclass
 class TeamsGetPathParams:
-    team_id: int = field(default=None, metadata={'path_param': { 'field_name': 'team_id', 'style': 'simple', 'explode': False }})
+    team_id: int = field(metadata={'path_param': { 'field_name': 'team_id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class TeamsGetRequest:
-    path_params: TeamsGetPathParams = field(default=None)
+    path_params: TeamsGetPathParams = field()
     
 
 @dataclass
 class TeamsGetResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     team_full: Optional[shared.TeamFull] = field(default=None)
     

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // BuildInfo
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Google Cloud Build information.
 **/
 export class BuildInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=cloudBuildId" })
+  @SpeakeasyMetadata({ data: "json, name=cloudBuildId" })
   cloudBuildId?: string;
 }

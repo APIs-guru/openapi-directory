@@ -1,4 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CompilationJobStatusEnum } from "./compilationjobstatusenum";
 import { TargetDeviceEnum } from "./targetdeviceenum";
 import { TargetPlatformAcceleratorEnum } from "./targetplatformacceleratorenum";
@@ -6,41 +6,42 @@ import { TargetPlatformArchEnum } from "./targetplatformarchenum";
 import { TargetPlatformOsEnum } from "./targetplatformosenum";
 
 
+
 // CompilationJobSummary
 /** 
  * A summary of a model compilation job.
 **/
 export class CompilationJobSummary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CompilationEndTime" })
+  @SpeakeasyMetadata({ data: "json, name=CompilationEndTime" })
   compilationEndTime?: Date;
 
-  @Metadata({ data: "json, name=CompilationJobArn" })
+  @SpeakeasyMetadata({ data: "json, name=CompilationJobArn" })
   compilationJobArn: string;
 
-  @Metadata({ data: "json, name=CompilationJobName" })
+  @SpeakeasyMetadata({ data: "json, name=CompilationJobName" })
   compilationJobName: string;
 
-  @Metadata({ data: "json, name=CompilationJobStatus" })
+  @SpeakeasyMetadata({ data: "json, name=CompilationJobStatus" })
   compilationJobStatus: CompilationJobStatusEnum;
 
-  @Metadata({ data: "json, name=CompilationStartTime" })
+  @SpeakeasyMetadata({ data: "json, name=CompilationStartTime" })
   compilationStartTime?: Date;
 
-  @Metadata({ data: "json, name=CompilationTargetDevice" })
+  @SpeakeasyMetadata({ data: "json, name=CompilationTargetDevice" })
   compilationTargetDevice?: TargetDeviceEnum;
 
-  @Metadata({ data: "json, name=CompilationTargetPlatformAccelerator" })
+  @SpeakeasyMetadata({ data: "json, name=CompilationTargetPlatformAccelerator" })
   compilationTargetPlatformAccelerator?: TargetPlatformAcceleratorEnum;
 
-  @Metadata({ data: "json, name=CompilationTargetPlatformArch" })
+  @SpeakeasyMetadata({ data: "json, name=CompilationTargetPlatformArch" })
   compilationTargetPlatformArch?: TargetPlatformArchEnum;
 
-  @Metadata({ data: "json, name=CompilationTargetPlatformOs" })
+  @SpeakeasyMetadata({ data: "json, name=CompilationTargetPlatformOs" })
   compilationTargetPlatformOs?: TargetPlatformOsEnum;
 
-  @Metadata({ data: "json, name=CreationTime" })
+  @SpeakeasyMetadata({ data: "json, name=CreationTime" })
   creationTime: Date;
 
-  @Metadata({ data: "json, name=LastModifiedTime" })
+  @SpeakeasyMetadata({ data: "json, name=LastModifiedTime" })
   lastModifiedTime?: Date;
 }

@@ -19,9 +19,9 @@ type UpdateUserAttributesRequest struct {
 	Request    shared.UserAttributes `request:"mediaType=application/json"`
 }
 
-type UpdateUserAttributesResponse struct {
+type UpdateUserAttributesResponseOutput struct {
 	ContentType   string
 	ErrorResponse *shared.ErrorResponse
 	StatusCode    int64
-	UserData      *shared.UserData
+	UserData      *shared.UserDataOutput
 }

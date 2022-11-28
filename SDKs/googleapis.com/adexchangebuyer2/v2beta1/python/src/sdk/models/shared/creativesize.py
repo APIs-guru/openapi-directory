@@ -1,8 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import size
-from . import size
+from sdk import utils
+from . import *
 
 class CreativeSizeAllowedFormatsEnum(str, Enum):
     UNKNOWN = "UNKNOWN"
@@ -32,10 +33,14 @@ class CreativeSizeSkippableAdTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class CreativeSize:
-    allowed_formats: Optional[List[CreativeSizeAllowedFormatsEnum]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'allowedFormats' }})
-    companion_sizes: Optional[List[size.Size]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'companionSizes' }})
-    creative_size_type: Optional[CreativeSizeCreativeSizeTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'creativeSizeType' }})
-    native_template: Optional[CreativeSizeNativeTemplateEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'nativeTemplate' }})
-    size: Optional[size.Size] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'size' }})
-    skippable_ad_type: Optional[CreativeSizeSkippableAdTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'skippableAdType' }})
+    r"""CreativeSize
+    Specifies the size of the creative.
+    """
+    
+    allowed_formats: Optional[List[CreativeSizeAllowedFormatsEnum]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('allowedFormats') }})
+    companion_sizes: Optional[List[Size]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('companionSizes') }})
+    creative_size_type: Optional[CreativeSizeCreativeSizeTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('creativeSizeType') }})
+    native_template: Optional[CreativeSizeNativeTemplateEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('nativeTemplate') }})
+    size: Optional[Size] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('size') }})
+    skippable_ad_type: Optional[CreativeSizeSkippableAdTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('skippableAdType') }})
     

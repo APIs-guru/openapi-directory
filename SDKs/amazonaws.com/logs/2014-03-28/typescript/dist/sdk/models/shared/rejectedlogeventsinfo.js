@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // RejectedLogEventsInfo
 /**
  * Represents the rejected events.
@@ -33,15 +33,15 @@ var RejectedLogEventsInfo = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=expiredLogEventEndIndex" }),
+        SpeakeasyMetadata({ data: "json, name=expiredLogEventEndIndex" }),
         __metadata("design:type", Number)
     ], RejectedLogEventsInfo.prototype, "expiredLogEventEndIndex", void 0);
     __decorate([
-        Metadata({ data: "json, name=tooNewLogEventStartIndex" }),
+        SpeakeasyMetadata({ data: "json, name=tooNewLogEventStartIndex" }),
         __metadata("design:type", Number)
     ], RejectedLogEventsInfo.prototype, "tooNewLogEventStartIndex", void 0);
     __decorate([
-        Metadata({ data: "json, name=tooOldLogEventEndIndex" }),
+        SpeakeasyMetadata({ data: "json, name=tooOldLogEventEndIndex" }),
         __metadata("design:type", Number)
     ], RejectedLogEventsInfo.prototype, "tooOldLogEventEndIndex", void 0);
     return RejectedLogEventsInfo;

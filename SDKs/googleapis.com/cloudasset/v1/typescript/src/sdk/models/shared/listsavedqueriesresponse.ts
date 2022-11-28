@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SavedQuery } from "./savedquery";
+
 
 
 // ListSavedQueriesResponse
@@ -8,9 +8,9 @@ import { SavedQuery } from "./savedquery";
  * Response of listing saved queries.
 **/
 export class ListSavedQueriesResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 
-  @Metadata({ data: "json, name=savedQueries", elemType: shared.SavedQuery })
+  @SpeakeasyMetadata({ data: "json, name=savedQueries", elemType: SavedQuery })
   savedQueries?: SavedQuery[];
 }

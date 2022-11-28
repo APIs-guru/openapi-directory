@@ -1,14 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ListTagOptionsFilters } from "./listtagoptionsfilters";
 
 
+
 export class ListTagOptionsInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Filters" })
+  @SpeakeasyMetadata({ data: "json, name=Filters" })
   filters?: ListTagOptionsFilters;
 
-  @Metadata({ data: "json, name=PageSize" })
+  @SpeakeasyMetadata({ data: "json, name=PageSize" })
   pageSize?: number;
 
-  @Metadata({ data: "json, name=PageToken" })
+  @SpeakeasyMetadata({ data: "json, name=PageToken" })
   pageToken?: string;
 }

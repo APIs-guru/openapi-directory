@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CodeHookSpecification } from "./codehookspecification";
+
 
 
 // BotAliasLocaleSettings
@@ -7,9 +8,9 @@ import { CodeHookSpecification } from "./codehookspecification";
  * Specifies settings that are unique to a locale. For example, you can use different Lambda function depending on the bot's locale.
 **/
 export class BotAliasLocaleSettings extends SpeakeasyBase {
-  @Metadata({ data: "json, name=codeHookSpecification" })
+  @SpeakeasyMetadata({ data: "json, name=codeHookSpecification" })
   codeHookSpecification?: CodeHookSpecification;
 
-  @Metadata({ data: "json, name=enabled" })
+  @SpeakeasyMetadata({ data: "json, name=enabled" })
   enabled: boolean;
 }

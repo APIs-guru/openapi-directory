@@ -1,49 +1,50 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ApiCoreDtoAccountingPlan extends SpeakeasyBase {
-  @Metadata({ data: "json, name=allowedPersonalDomains" })
+  @SpeakeasyMetadata({ data: "json, name=allowedPersonalDomains" })
   allowedPersonalDomains?: number;
 
-  @Metadata({ data: "json, name=allowedPersonalUrls" })
+  @SpeakeasyMetadata({ data: "json, name=allowedPersonalUrls" })
   allowedPersonalUrls?: number;
 
-  @Metadata({ data: "json, name=billingPeriodEnd" })
+  @SpeakeasyMetadata({ data: "json, name=billingPeriodEnd" })
   billingPeriodEnd?: string;
 
-  @Metadata({ data: "json, name=billingPeriodStart" })
+  @SpeakeasyMetadata({ data: "json, name=billingPeriodStart" })
   billingPeriodStart?: string;
 
-  @Metadata({ data: "json, name=bonusMonthlyEvents" })
+  @SpeakeasyMetadata({ data: "json, name=bonusMonthlyEvents" })
   bonusMonthlyEvents?: number;
 
-  @Metadata({ data: "json, name=maximumDatapoints" })
+  @SpeakeasyMetadata({ data: "json, name=maximumDatapoints" })
   maximumDatapoints?: number;
 
-  @Metadata({ data: "json, name=maximumGuests" })
+  @SpeakeasyMetadata({ data: "json, name=maximumGuests" })
   maximumGuests?: number;
 
-  @Metadata({ data: "json, name=monthlyEvents" })
+  @SpeakeasyMetadata({ data: "json, name=monthlyEvents" })
   monthlyEvents?: number;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=price" })
+  @SpeakeasyMetadata({ data: "json, name=price" })
   price?: number;
 
-  @Metadata({ data: "json, name=profileId" })
+  @SpeakeasyMetadata({ data: "json, name=profileId" })
   profileId?: number;
 
-  @Metadata({ data: "json, name=recurring" })
+  @SpeakeasyMetadata({ data: "json, name=recurring" })
   recurring?: boolean;
 
-  @Metadata({ data: "json, name=recurringPeriod" })
+  @SpeakeasyMetadata({ data: "json, name=recurringPeriod" })
   recurringPeriod?: number;
 
-  @Metadata({ data: "json, name=usedDatapoints" })
+  @SpeakeasyMetadata({ data: "json, name=usedDatapoints" })
   usedDatapoints?: number;
 
-  @Metadata({ data: "json, name=usedMonthlyEvents" })
+  @SpeakeasyMetadata({ data: "json, name=usedMonthlyEvents" })
   usedMonthlyEvents?: number;
 }

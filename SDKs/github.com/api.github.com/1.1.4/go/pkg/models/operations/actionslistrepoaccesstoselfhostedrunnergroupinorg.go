@@ -14,14 +14,14 @@ type ActionsListRepoAccessToSelfHostedRunnerGroupInOrgQueryParams struct {
 	PerPage *int64 `queryParam:"style=form,explode=true,name=per_page"`
 }
 
-type ActionsListRepoAccessToSelfHostedRunnerGroupInOrgRequest struct {
-	PathParams  ActionsListRepoAccessToSelfHostedRunnerGroupInOrgPathParams
-	QueryParams ActionsListRepoAccessToSelfHostedRunnerGroupInOrgQueryParams
-}
-
 type ActionsListRepoAccessToSelfHostedRunnerGroupInOrg200ApplicationJSON struct {
 	Repositories []shared.Repository `json:"repositories"`
 	TotalCount   float64             `json:"total_count"`
+}
+
+type ActionsListRepoAccessToSelfHostedRunnerGroupInOrgRequest struct {
+	PathParams  ActionsListRepoAccessToSelfHostedRunnerGroupInOrgPathParams
+	QueryParams ActionsListRepoAccessToSelfHostedRunnerGroupInOrgQueryParams
 }
 
 type ActionsListRepoAccessToSelfHostedRunnerGroupInOrgResponse struct {

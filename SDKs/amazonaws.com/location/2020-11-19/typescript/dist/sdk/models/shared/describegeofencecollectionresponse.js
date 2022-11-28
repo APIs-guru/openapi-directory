@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PricingPlanEnum } from "./pricingplanenum";
 var DescribeGeofenceCollectionResponse = /** @class */ (function (_super) {
     __extends(DescribeGeofenceCollectionResponse, _super);
@@ -30,39 +30,39 @@ var DescribeGeofenceCollectionResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=CollectionArn" }),
+        SpeakeasyMetadata({ data: "json, name=CollectionArn" }),
         __metadata("design:type", String)
     ], DescribeGeofenceCollectionResponse.prototype, "collectionArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=CollectionName" }),
+        SpeakeasyMetadata({ data: "json, name=CollectionName" }),
         __metadata("design:type", String)
     ], DescribeGeofenceCollectionResponse.prototype, "collectionName", void 0);
     __decorate([
-        Metadata({ data: "json, name=CreateTime" }),
+        SpeakeasyMetadata({ data: "json, name=CreateTime" }),
         __metadata("design:type", Date)
     ], DescribeGeofenceCollectionResponse.prototype, "createTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=Description" }),
+        SpeakeasyMetadata({ data: "json, name=Description" }),
         __metadata("design:type", String)
     ], DescribeGeofenceCollectionResponse.prototype, "description", void 0);
     __decorate([
-        Metadata({ data: "json, name=KmsKeyId" }),
+        SpeakeasyMetadata({ data: "json, name=KmsKeyId" }),
         __metadata("design:type", String)
     ], DescribeGeofenceCollectionResponse.prototype, "kmsKeyId", void 0);
     __decorate([
-        Metadata({ data: "json, name=PricingPlan" }),
+        SpeakeasyMetadata({ data: "json, name=PricingPlan" }),
         __metadata("design:type", String)
     ], DescribeGeofenceCollectionResponse.prototype, "pricingPlan", void 0);
     __decorate([
-        Metadata({ data: "json, name=PricingPlanDataSource" }),
+        SpeakeasyMetadata({ data: "json, name=PricingPlanDataSource" }),
         __metadata("design:type", String)
     ], DescribeGeofenceCollectionResponse.prototype, "pricingPlanDataSource", void 0);
     __decorate([
-        Metadata({ data: "json, name=Tags" }),
+        SpeakeasyMetadata({ data: "json, name=Tags" }),
         __metadata("design:type", Map)
     ], DescribeGeofenceCollectionResponse.prototype, "tags", void 0);
     __decorate([
-        Metadata({ data: "json, name=UpdateTime" }),
+        SpeakeasyMetadata({ data: "json, name=UpdateTime" }),
         __metadata("design:type", Date)
     ], DescribeGeofenceCollectionResponse.prototype, "updateTime", void 0);
     return DescribeGeofenceCollectionResponse;

@@ -1,99 +1,100 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class ReposCreateInOrgPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=org" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=org" })
   org: string;
 }
 
 export enum ReposCreateInOrgRequestBodyVisibilityEnum {
-    Public = "public"
-,    Private = "private"
-,    Visibility = "visibility"
-,    Internal = "internal"
+    Public = "public",
+    Private = "private",
+    Visibility = "visibility",
+    Internal = "internal"
 }
 
 
 export class ReposCreateInOrgRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=allow_merge_commit" })
+  @SpeakeasyMetadata({ data: "json, name=allow_merge_commit" })
   allowMergeCommit?: boolean;
 
-  @Metadata({ data: "json, name=allow_rebase_merge" })
+  @SpeakeasyMetadata({ data: "json, name=allow_rebase_merge" })
   allowRebaseMerge?: boolean;
 
-  @Metadata({ data: "json, name=allow_squash_merge" })
+  @SpeakeasyMetadata({ data: "json, name=allow_squash_merge" })
   allowSquashMerge?: boolean;
 
-  @Metadata({ data: "json, name=auto_init" })
+  @SpeakeasyMetadata({ data: "json, name=auto_init" })
   autoInit?: boolean;
 
-  @Metadata({ data: "json, name=delete_branch_on_merge" })
+  @SpeakeasyMetadata({ data: "json, name=delete_branch_on_merge" })
   deleteBranchOnMerge?: boolean;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=gitignore_template" })
+  @SpeakeasyMetadata({ data: "json, name=gitignore_template" })
   gitignoreTemplate?: string;
 
-  @Metadata({ data: "json, name=has_issues" })
+  @SpeakeasyMetadata({ data: "json, name=has_issues" })
   hasIssues?: boolean;
 
-  @Metadata({ data: "json, name=has_projects" })
+  @SpeakeasyMetadata({ data: "json, name=has_projects" })
   hasProjects?: boolean;
 
-  @Metadata({ data: "json, name=has_wiki" })
+  @SpeakeasyMetadata({ data: "json, name=has_wiki" })
   hasWiki?: boolean;
 
-  @Metadata({ data: "json, name=homepage" })
+  @SpeakeasyMetadata({ data: "json, name=homepage" })
   homepage?: string;
 
-  @Metadata({ data: "json, name=is_template" })
+  @SpeakeasyMetadata({ data: "json, name=is_template" })
   isTemplate?: boolean;
 
-  @Metadata({ data: "json, name=license_template" })
+  @SpeakeasyMetadata({ data: "json, name=license_template" })
   licenseTemplate?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 
-  @Metadata({ data: "json, name=private" })
+  @SpeakeasyMetadata({ data: "json, name=private" })
   private?: boolean;
 
-  @Metadata({ data: "json, name=team_id" })
+  @SpeakeasyMetadata({ data: "json, name=team_id" })
   teamId?: number;
 
-  @Metadata({ data: "json, name=visibility" })
+  @SpeakeasyMetadata({ data: "json, name=visibility" })
   visibility?: ReposCreateInOrgRequestBodyVisibilityEnum;
 }
 
 
 export class ReposCreateInOrgRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: ReposCreateInOrgPathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request?: ReposCreateInOrgRequestBody;
 }
 
 
 export class ReposCreateInOrgResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: Map<string, string[]>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   basicError?: shared.BasicError;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   repository?: shared.Repository;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   validationError?: shared.ValidationError;
 }

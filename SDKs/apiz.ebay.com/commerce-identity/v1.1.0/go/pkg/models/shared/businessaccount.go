@@ -1,5 +1,7 @@
 package shared
 
+// BusinessAccount
+// The type that defines the fields for the business account information.
 type BusinessAccount struct {
 	Address         *Address `json:"address,omitempty"`
 	DoingBusinessAs *string  `json:"doingBusinessAs,omitempty"`

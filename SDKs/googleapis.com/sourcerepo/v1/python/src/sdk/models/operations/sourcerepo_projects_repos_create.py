@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class SourcerepoProjectsReposCreatePathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,14 +26,14 @@ class SourcerepoProjectsReposCreateQueryParams:
 
 @dataclass
 class SourcerepoProjectsReposCreateSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class SourcerepoProjectsReposCreateSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -43,15 +44,15 @@ class SourcerepoProjectsReposCreateSecurity:
 
 @dataclass
 class SourcerepoProjectsReposCreateRequest:
-    path_params: SourcerepoProjectsReposCreatePathParams = field(default=None)
-    query_params: SourcerepoProjectsReposCreateQueryParams = field(default=None)
+    path_params: SourcerepoProjectsReposCreatePathParams = field()
+    query_params: SourcerepoProjectsReposCreateQueryParams = field()
+    security: SourcerepoProjectsReposCreateSecurity = field()
     request: Optional[shared.Repo] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: SourcerepoProjectsReposCreateSecurity = field(default=None)
     
 
 @dataclass
 class SourcerepoProjectsReposCreateResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     repo: Optional[shared.Repo] = field(default=None)
-    status_code: int = field(default=None)
     

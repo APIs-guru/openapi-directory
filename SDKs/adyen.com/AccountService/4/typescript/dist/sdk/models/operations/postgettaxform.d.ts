@@ -1,14 +1,8 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
-export declare class PostGetTaxFormSecurityOption1 extends SpeakeasyBase {
-    basicAuth: shared.SchemeBasicAuth;
-}
-export declare class PostGetTaxFormSecurityOption2 extends SpeakeasyBase {
-    apiKeyAuth: shared.SchemeApiKeyAuth;
-}
 export declare class PostGetTaxFormSecurity extends SpeakeasyBase {
-    option1?: PostGetTaxFormSecurityOption1;
-    option2?: PostGetTaxFormSecurityOption2;
+    basicAuth?: shared.SchemeBasicAuth;
+    apiKeyAuth?: shared.SchemeApiKeyAuth;
 }
 export declare class PostGetTaxFormRequest extends SpeakeasyBase {
     request?: any;

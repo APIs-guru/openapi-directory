@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ServiceIdentity } from "./serviceidentity";
+
 
 
 // GenerateServiceIdentityResponse
@@ -7,6 +8,6 @@ import { ServiceIdentity } from "./serviceidentity";
  * Response for GenerateServiceIdentity.
 **/
 export class GenerateServiceIdentityResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=identity" })
+  @SpeakeasyMetadata({ data: "json, name=identity" })
   identity?: ServiceIdentity;
 }

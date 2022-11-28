@@ -4,7 +4,7 @@ import (
 	"openapi/pkg/models/shared"
 )
 
-var GetActivitiesServers = []string{
+var GetActivitiesServerList = []string{
 	"https://apiz.ebay.com{basePath}",
 }
 

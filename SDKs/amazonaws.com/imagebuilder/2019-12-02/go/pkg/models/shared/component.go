@@ -1,5 +1,7 @@
 package shared
 
+// Component
+// A detailed view of a component.
 type Component struct {
 	Arn                 *string                    `json:"arn,omitempty"`
 	ChangeDescription   *string                    `json:"changeDescription,omitempty"`

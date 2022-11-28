@@ -1,36 +1,37 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SuperStickerMetadata } from "./superstickermetadata";
 import { ChannelProfileDetails } from "./channelprofiledetails";
 
 
+
 export class SuperChatEventSnippet extends SpeakeasyBase {
-  @Metadata({ data: "json, name=amountMicros" })
+  @SpeakeasyMetadata({ data: "json, name=amountMicros" })
   amountMicros?: string;
 
-  @Metadata({ data: "json, name=channelId" })
+  @SpeakeasyMetadata({ data: "json, name=channelId" })
   channelId?: string;
 
-  @Metadata({ data: "json, name=commentText" })
+  @SpeakeasyMetadata({ data: "json, name=commentText" })
   commentText?: string;
 
-  @Metadata({ data: "json, name=createdAt" })
+  @SpeakeasyMetadata({ data: "json, name=createdAt" })
   createdAt?: Date;
 
-  @Metadata({ data: "json, name=currency" })
+  @SpeakeasyMetadata({ data: "json, name=currency" })
   currency?: string;
 
-  @Metadata({ data: "json, name=displayString" })
+  @SpeakeasyMetadata({ data: "json, name=displayString" })
   displayString?: string;
 
-  @Metadata({ data: "json, name=isSuperStickerEvent" })
+  @SpeakeasyMetadata({ data: "json, name=isSuperStickerEvent" })
   isSuperStickerEvent?: boolean;
 
-  @Metadata({ data: "json, name=messageType" })
+  @SpeakeasyMetadata({ data: "json, name=messageType" })
   messageType?: number;
 
-  @Metadata({ data: "json, name=superStickerMetadata" })
+  @SpeakeasyMetadata({ data: "json, name=superStickerMetadata" })
   superStickerMetadata?: SuperStickerMetadata;
 
-  @Metadata({ data: "json, name=supporterDetails" })
+  @SpeakeasyMetadata({ data: "json, name=supporterDetails" })
   supporterDetails?: ChannelProfileDetails;
 }

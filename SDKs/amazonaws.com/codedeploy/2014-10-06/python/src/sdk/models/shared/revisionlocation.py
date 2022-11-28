@@ -1,19 +1,21 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import appspeccontent
-from . import githublocation
-from . import revisionlocationtype_enum
-from . import s3location
-from . import rawstring
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class RevisionLocation:
-    app_spec_content: Optional[appspeccontent.AppSpecContent] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'appSpecContent' }})
-    git_hub_location: Optional[githublocation.GitHubLocation] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'gitHubLocation' }})
-    revision_type: Optional[revisionlocationtype_enum.RevisionLocationTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'revisionType' }})
-    s3_location: Optional[s3location.S3Location] = field(default=None, metadata={'dataclasses_json': { 'field_name': 's3Location' }})
-    string: Optional[rawstring.RawString] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'string' }})
+    r"""RevisionLocation
+    Information about the location of an application revision.
+    """
+    
+    app_spec_content: Optional[AppSpecContent] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('appSpecContent') }})
+    git_hub_location: Optional[GitHubLocation] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('gitHubLocation') }})
+    revision_type: Optional[RevisionLocationTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('revisionType') }})
+    s3_location: Optional[S3Location] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('s3Location') }})
+    string: Optional[RawString] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('string') }})
     

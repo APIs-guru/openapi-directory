@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare enum DescribeContainerXAmzTargetEnum {
     MediaStore20170901DescribeContainer = "MediaStore_20170901.DescribeContainer"

@@ -5,30 +5,30 @@ from sdk.models import shared
 
 @dataclass
 class EndpointGetPlaylistCoverPathParams:
-    playlist_id: str = field(default=None, metadata={'path_param': { 'field_name': 'playlist_id', 'style': 'simple', 'explode': False }})
+    playlist_id: str = field(metadata={'path_param': { 'field_name': 'playlist_id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class EndpointGetPlaylistCoverHeaders:
-    authorization: str = field(default=None, metadata={'header': { 'field_name': 'Authorization', 'style': 'simple', 'explode': False }})
+    authorization: str = field(metadata={'header': { 'field_name': 'Authorization', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class EndpointGetPlaylistCoverSecurity:
-    spotify_auth: shared.SchemeSpotifyAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    spotify_auth: shared.SchemeSpotifyAuth = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class EndpointGetPlaylistCoverRequest:
-    path_params: EndpointGetPlaylistCoverPathParams = field(default=None)
-    headers: EndpointGetPlaylistCoverHeaders = field(default=None)
-    security: EndpointGetPlaylistCoverSecurity = field(default=None)
+    headers: EndpointGetPlaylistCoverHeaders = field()
+    path_params: EndpointGetPlaylistCoverPathParams = field()
+    security: EndpointGetPlaylistCoverSecurity = field()
     
 
 @dataclass
 class EndpointGetPlaylistCoverResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error_response_object: Optional[shared.ErrorResponseObject] = field(default=None)
     image_objects: Optional[List[shared.ImageObject]] = field(default=None)
-    status_code: int = field(default=None)
     

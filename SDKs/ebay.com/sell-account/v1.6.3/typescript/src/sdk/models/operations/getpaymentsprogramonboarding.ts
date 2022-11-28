@@ -1,38 +1,39 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetPaymentsProgramOnboardingPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=marketplace_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=marketplace_id" })
   marketplaceId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=payments_program_type" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=payments_program_type" })
   paymentsProgramType: string;
 }
 
 
 export class GetPaymentsProgramOnboardingSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   apiAuth: shared.SchemeApiAuth;
 }
 
 
 export class GetPaymentsProgramOnboardingRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetPaymentsProgramOnboardingPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: GetPaymentsProgramOnboardingSecurity;
 }
 
 
 export class GetPaymentsProgramOnboardingResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   paymentsProgramOnboardingResponse?: shared.PaymentsProgramOnboardingResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

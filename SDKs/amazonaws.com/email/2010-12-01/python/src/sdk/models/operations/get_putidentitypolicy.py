@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetPutIdentityPolicyActionEnum(str, Enum):
     PUT_IDENTITY_POLICY = "PutIdentityPolicy"
@@ -10,11 +14,11 @@ class GetPutIdentityPolicyVersionEnum(str, Enum):
 
 @dataclass
 class GetPutIdentityPolicyQueryParams:
-    action: GetPutIdentityPolicyActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    identity: str = field(default=None, metadata={'query_param': { 'field_name': 'Identity', 'style': 'form', 'explode': True }})
-    policy: str = field(default=None, metadata={'query_param': { 'field_name': 'Policy', 'style': 'form', 'explode': True }})
-    policy_name: str = field(default=None, metadata={'query_param': { 'field_name': 'PolicyName', 'style': 'form', 'explode': True }})
-    version: GetPutIdentityPolicyVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: GetPutIdentityPolicyActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    identity: str = field(metadata={'query_param': { 'field_name': 'Identity', 'style': 'form', 'explode': True }})
+    policy: str = field(metadata={'query_param': { 'field_name': 'Policy', 'style': 'form', 'explode': True }})
+    policy_name: str = field(metadata={'query_param': { 'field_name': 'PolicyName', 'style': 'form', 'explode': True }})
+    version: GetPutIdentityPolicyVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -30,13 +34,13 @@ class GetPutIdentityPolicyHeaders:
 
 @dataclass
 class GetPutIdentityPolicyRequest:
-    query_params: GetPutIdentityPolicyQueryParams = field(default=None)
-    headers: GetPutIdentityPolicyHeaders = field(default=None)
+    headers: GetPutIdentityPolicyHeaders = field()
+    query_params: GetPutIdentityPolicyQueryParams = field()
     
 
 @dataclass
 class GetPutIdentityPolicyResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

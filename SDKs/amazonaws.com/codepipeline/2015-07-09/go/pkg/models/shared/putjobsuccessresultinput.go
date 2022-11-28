@@ -1,5 +1,7 @@
 package shared
 
+// PutJobSuccessResultInput
+// Represents the input of a <code>PutJobSuccessResult</code> action.
 type PutJobSuccessResultInput struct {
 	ContinuationToken *string           `json:"continuationToken,omitempty"`
 	CurrentRevision   *CurrentRevision  `json:"currentRevision,omitempty"`

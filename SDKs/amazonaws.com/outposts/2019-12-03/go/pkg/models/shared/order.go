@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// Order
+// Information about an order.
 type Order struct {
 	LineItems           []LineItem         `json:"LineItems,omitempty"`
 	OrderFulfilledDate  *time.Time         `json:"OrderFulfilledDate,omitempty"`

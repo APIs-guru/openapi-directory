@@ -1,4 +1,7 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
@@ -21,17 +24,17 @@ class DescribeEndpointHeaders:
 
 @dataclass
 class DescribeEndpointRequest:
-    query_params: DescribeEndpointQueryParams = field(default=None)
-    headers: DescribeEndpointHeaders = field(default=None)
+    headers: DescribeEndpointHeaders = field()
+    query_params: DescribeEndpointQueryParams = field()
     
 
 @dataclass
 class DescribeEndpointResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     describe_endpoint_response: Optional[shared.DescribeEndpointResponse] = field(default=None)
     internal_failure_exception: Optional[Any] = field(default=None)
     invalid_request_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     unauthorized_exception: Optional[Any] = field(default=None)
     

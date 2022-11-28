@@ -1,5 +1,7 @@
 package shared
 
+// TagOptionDetail
+// Information about a TagOption.
 type TagOptionDetail struct {
 	Active *bool   `json:"Active,omitempty"`
 	ID     *string `json:"Id,omitempty"`

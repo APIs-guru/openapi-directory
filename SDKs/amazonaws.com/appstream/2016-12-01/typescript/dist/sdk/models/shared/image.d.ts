@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { Application } from "./application";
 import { ResourceError } from "./resourceerror";
 import { ImagePermissions } from "./imagepermissions";

@@ -1,15 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ColumnMetadata } from "./columnmetadata";
 
 
+
 export class DescribeTableResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ColumnList", elemType: shared.ColumnMetadata })
+  @SpeakeasyMetadata({ data: "json, name=ColumnList", elemType: ColumnMetadata })
   columnList?: ColumnMetadata[];
 
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=TableName" })
+  @SpeakeasyMetadata({ data: "json, name=TableName" })
   tableName?: string;
 }

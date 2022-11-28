@@ -1,8 +1,11 @@
-import warnings
+
+__doc__ = """ SDK Documentation: https://docs.aws.amazon.com/amplifybackend/ - Amazon Web Services documentation"""
 import requests
-from typing import Any,List,Optional
-from sdk.models import operations, shared
+from typing import Any,Optional
+from sdk.models import shared, operations
 from . import utils
+
+
 
 
 SERVERS = [
@@ -14,37 +17,63 @@ SERVERS = [
 
 
 class SDK:
-    client = requests.Session()
-    server_url = SERVERS[0]
+    r"""SDK Documentation: https://docs.aws.amazon.com/amplifybackend/ - Amazon Web Services documentation"""
+
+    _client: requests.Session
+    _security_client: requests.Session
+    _security: shared.Security
+    _server_url: str = SERVERS[0]
+    _language: str = "python"
+    _sdk_version: str = "0.0.1"
+    _gen_version: str = "internal"
+
+    def __init__(self) -> None:
+        self._client = requests.Session()
+        self._security_client = requests.Session()
+        
+
 
     def config_server_url(self, server_url: str, params: dict[str, str]):
-        if not params is None:
-            self.server_url = utils.replace_parameters(server_url, params)
+        if params is not None:
+            self._server_url = utils.replace_parameters(server_url, params)
         else:
-            self.server_url = server_url
-            
-    
-    def config_security(self, security: shared.Security):
-        self.client = utils.configure_security_client(security)
+            self._server_url = server_url
 
+        
+    
+
+    def config_client(self, client: requests.Session):
+        self._client = client
+        
+        if self._security is not None:
+            self._security_client = utils.configure_security_client(self._client, self._security)
+        
+    
+
+    def config_security(self, security: shared.Security):
+        self._security = security
+        self._security_client = utils.configure_security_client(self._client, security)
+        
+    
+    
     
     def clone_backend(self, request: operations.CloneBackendRequest) -> operations.CloneBackendResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""This operation clones an existing backend.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/backend/{appId}/environments/{backendEnvironmentName}/clone", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -75,22 +104,22 @@ class SDK:
 
     
     def create_backend(self, request: operations.CreateBackendRequest) -> operations.CreateBackendResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""This operation creates a backend for an Amplify app. Backends are automatically created at the time of app creation.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/backend"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -121,22 +150,22 @@ class SDK:
 
     
     def create_backend_api(self, request: operations.CreateBackendAPIRequest) -> operations.CreateBackendAPIResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Creates a new backend API resource.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/backend/{appId}/api", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -167,22 +196,22 @@ class SDK:
 
     
     def create_backend_auth(self, request: operations.CreateBackendAuthRequest) -> operations.CreateBackendAuthResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Creates a new backend authentication resource.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/backend/{appId}/auth", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -213,22 +242,22 @@ class SDK:
 
     
     def create_backend_config(self, request: operations.CreateBackendConfigRequest) -> operations.CreateBackendConfigResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Creates a config object for a backend.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/backend/{appId}/config", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -259,15 +288,17 @@ class SDK:
 
     
     def create_token(self, request: operations.CreateTokenRequest) -> operations.CreateTokenResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Generates a one-time challenge code to authenticate a user into your Amplify Admin UI.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/backend/{appId}/challenge", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -298,15 +329,17 @@ class SDK:
 
     
     def delete_backend(self, request: operations.DeleteBackendRequest) -> operations.DeleteBackendResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Removes an existing environment from your Amplify project.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/backend/{appId}/environments/{backendEnvironmentName}/remove", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -337,22 +370,22 @@ class SDK:
 
     
     def delete_backend_api(self, request: operations.DeleteBackendAPIRequest) -> operations.DeleteBackendAPIResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Deletes an existing backend API resource.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/backend/{appId}/api/{backendEnvironmentName}/remove", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -383,22 +416,22 @@ class SDK:
 
     
     def delete_backend_auth(self, request: operations.DeleteBackendAuthRequest) -> operations.DeleteBackendAuthResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Deletes an existing backend authentication resource.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/backend/{appId}/auth/{backendEnvironmentName}/remove", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -429,15 +462,17 @@ class SDK:
 
     
     def delete_token(self, request: operations.DeleteTokenRequest) -> operations.DeleteTokenResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Deletes the challenge token based on the given appId and sessionId.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/backend/{appId}/challenge/{sessionId}/remove", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -468,22 +503,22 @@ class SDK:
 
     
     def generate_backend_api_models(self, request: operations.GenerateBackendAPIModelsRequest) -> operations.GenerateBackendAPIModelsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Generates a model schema for an existing backend API resource.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/backend/{appId}/api/{backendEnvironmentName}/generateModels", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -514,22 +549,22 @@ class SDK:
 
     
     def get_backend(self, request: operations.GetBackendRequest) -> operations.GetBackendResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Provides project-level details for your Amplify UI project.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/backend/{appId}/details", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -560,22 +595,22 @@ class SDK:
 
     
     def get_backend_api(self, request: operations.GetBackendAPIRequest) -> operations.GetBackendAPIResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Gets the details for a backend API.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/backend/{appId}/api/{backendEnvironmentName}/details", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -606,22 +641,22 @@ class SDK:
 
     
     def get_backend_api_models(self, request: operations.GetBackendAPIModelsRequest) -> operations.GetBackendAPIModelsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Generates a model schema for existing backend API resource.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/backend/{appId}/api/{backendEnvironmentName}/getModels", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -652,22 +687,22 @@ class SDK:
 
     
     def get_backend_auth(self, request: operations.GetBackendAuthRequest) -> operations.GetBackendAuthResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Gets a backend auth details.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/backend/{appId}/auth/{backendEnvironmentName}/details", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -698,15 +733,17 @@ class SDK:
 
     
     def get_backend_job(self, request: operations.GetBackendJobRequest) -> operations.GetBackendJobResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns information about a specific job.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/backend/{appId}/job/{backendEnvironmentName}/{jobId}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -737,15 +774,17 @@ class SDK:
 
     
     def get_token(self, request: operations.GetTokenRequest) -> operations.GetTokenResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Gets the challenge token based on the given appId and sessionId.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/backend/{appId}/challenge/{sessionId}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -776,22 +815,22 @@ class SDK:
 
     
     def import_backend_auth(self, request: operations.ImportBackendAuthRequest) -> operations.ImportBackendAuthResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Imports an existing backend authentication resource.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/backend/{appId}/auth/{backendEnvironmentName}/import", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -822,24 +861,23 @@ class SDK:
 
     
     def list_backend_jobs(self, request: operations.ListBackendJobsRequest) -> operations.ListBackendJobsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Lists the jobs for the backend of an Amplify app.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/backend/{appId}/job/{backendEnvironmentName}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -870,22 +908,22 @@ class SDK:
 
     
     def remove_all_backends(self, request: operations.RemoveAllBackendsRequest) -> operations.RemoveAllBackendsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Removes all backend environments from your Amplify project.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/backend/{appId}/remove", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -916,15 +954,17 @@ class SDK:
 
     
     def remove_backend_config(self, request: operations.RemoveBackendConfigRequest) -> operations.RemoveBackendConfigResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Removes the AWS resources required to access the Amplify Admin UI.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/backend/{appId}/config/remove", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -955,22 +995,22 @@ class SDK:
 
     
     def update_backend_api(self, request: operations.UpdateBackendAPIRequest) -> operations.UpdateBackendAPIResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Updates an existing backend API resource.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/backend/{appId}/api/{backendEnvironmentName}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1001,22 +1041,22 @@ class SDK:
 
     
     def update_backend_auth(self, request: operations.UpdateBackendAuthRequest) -> operations.UpdateBackendAuthResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Updates an existing backend authentication resource.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/backend/{appId}/auth/{backendEnvironmentName}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1047,22 +1087,22 @@ class SDK:
 
     
     def update_backend_config(self, request: operations.UpdateBackendConfigRequest) -> operations.UpdateBackendConfigResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Updates the AWS resources required to access the Amplify Admin UI.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/backend/{appId}/config/update", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1093,22 +1133,22 @@ class SDK:
 
     
     def update_backend_job(self, request: operations.UpdateBackendJobRequest) -> operations.UpdateBackendJobResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Updates a specific job.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/backend/{appId}/job/{backendEnvironmentName}/{jobId}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 

@@ -57,12 +57,16 @@ function ParseSecurityOption(client, optionType) {
         var securityDecorator = ParseSecurityDecorator(securityAnn);
         if (securityDecorator != null && securityDecorator.Scheme)
             return;
-        if (securityDecorator.Scheme)
+        if (securityDecorator.Scheme) {
             return ParseSecurityScheme(client, securityDecorator, optionType[fname]);
+        }
     });
     return client;
 }
 function ParseSecurityScheme(client, schemeDecorator, scheme) {
+    if (schemeDecorator.Type === "http" && schemeDecorator.SubType === "basic") {
+        return ParseBasicAuthScheme(client, scheme);
+    }
     var fieldNames = Object.getOwnPropertyNames(scheme);
     fieldNames.forEach(function (fname) {
         var securityAnn = Reflect.getMetadata(securityMetadataKey, scheme, fname);
@@ -112,6 +116,28 @@ function ParseSecurityScheme(client, schemeDecorator, scheme) {
                 throw new Error("not supported");
         }
     });
+    return client;
+}
+function ParseBasicAuthScheme(client, scheme) {
+    var username, password = "";
+    var fieldNames = Object.getOwnPropertyNames(scheme);
+    fieldNames.forEach(function (fname) {
+        var securityAnn = Reflect.getMetadata(securityMetadataKey, scheme, fname);
+        if (securityAnn == null)
+            return;
+        var securityDecorator = ParseSecurityDecorator(securityAnn);
+        if (securityDecorator == null || securityDecorator.Name === "")
+            return;
+        switch (securityDecorator.Name) {
+            case "username":
+                username = scheme[fname];
+                break;
+            case "password":
+                password = scheme[fname];
+                break;
+        }
+    });
+    client.defaults.headers.common["Authorization"] = "Basic ".concat(Buffer.from("".concat(username, ":").concat(password)).toString("base64"));
     return client;
 }
 var SecurityDecorator = /** @class */ (function () {

@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 
 class GetDetachLoadBalancerTargetGroupsActionEnum(str, Enum):
     DETACH_LOAD_BALANCER_TARGET_GROUPS = "DetachLoadBalancerTargetGroups"
@@ -10,10 +14,10 @@ class GetDetachLoadBalancerTargetGroupsVersionEnum(str, Enum):
 
 @dataclass
 class GetDetachLoadBalancerTargetGroupsQueryParams:
-    action: GetDetachLoadBalancerTargetGroupsActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    auto_scaling_group_name: str = field(default=None, metadata={'query_param': { 'field_name': 'AutoScalingGroupName', 'style': 'form', 'explode': True }})
-    target_group_ar_ns: List[str] = field(default=None, metadata={'query_param': { 'field_name': 'TargetGroupARNs', 'style': 'form', 'explode': True }})
-    version: GetDetachLoadBalancerTargetGroupsVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: GetDetachLoadBalancerTargetGroupsActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    auto_scaling_group_name: str = field(metadata={'query_param': { 'field_name': 'AutoScalingGroupName', 'style': 'form', 'explode': True }})
+    target_group_ar_ns: List[str] = field(metadata={'query_param': { 'field_name': 'TargetGroupARNs', 'style': 'form', 'explode': True }})
+    version: GetDetachLoadBalancerTargetGroupsVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -29,13 +33,13 @@ class GetDetachLoadBalancerTargetGroupsHeaders:
 
 @dataclass
 class GetDetachLoadBalancerTargetGroupsRequest:
-    query_params: GetDetachLoadBalancerTargetGroupsQueryParams = field(default=None)
-    headers: GetDetachLoadBalancerTargetGroupsHeaders = field(default=None)
+    headers: GetDetachLoadBalancerTargetGroupsHeaders = field()
+    query_params: GetDetachLoadBalancerTargetGroupsQueryParams = field()
     
 
 @dataclass
 class GetDetachLoadBalancerTargetGroupsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

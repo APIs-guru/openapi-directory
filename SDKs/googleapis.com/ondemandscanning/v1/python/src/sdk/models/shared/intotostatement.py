@@ -1,19 +1,21 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import intotoprovenance
-from . import slsaprovenance
-from . import slsaprovenancezerotwo
-from . import subject
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class InTotoStatement:
-    type: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': '_type' }})
-    predicate_type: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'predicateType' }})
-    provenance: Optional[intotoprovenance.InTotoProvenance] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'provenance' }})
-    slsa_provenance: Optional[slsaprovenance.SlsaProvenance] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'slsaProvenance' }})
-    slsa_provenance_zero_two: Optional[slsaprovenancezerotwo.SlsaProvenanceZeroTwo] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'slsaProvenanceZeroTwo' }})
-    subject: Optional[List[subject.Subject]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'subject' }})
+    r"""InTotoStatement
+    Spec defined at https://github.com/in-toto/attestation/tree/main/spec#statement The serialized InTotoStatement will be stored as Envelope.payload. Envelope.payloadType is always \"application/vnd.in-toto+json\".
+    """
+    
+    type: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('_type') }})
+    predicate_type: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('predicateType') }})
+    provenance: Optional[InTotoProvenance] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('provenance') }})
+    slsa_provenance: Optional[SlsaProvenance] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('slsaProvenance') }})
+    slsa_provenance_zero_two: Optional[SlsaProvenanceZeroTwo] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('slsaProvenanceZeroTwo') }})
+    subject: Optional[List[Subject]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('subject') }})
     

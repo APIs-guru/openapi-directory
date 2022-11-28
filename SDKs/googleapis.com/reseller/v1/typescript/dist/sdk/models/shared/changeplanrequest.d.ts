@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { Seats } from "./seats";
 /**
  * JSON template for the ChangePlan rpc request.

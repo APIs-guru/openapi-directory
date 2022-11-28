@@ -1,41 +1,42 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetCachedImagePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=imageID" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=imageID" })
   imageId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=listingID" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=listingID" })
   listingId: string;
 }
 
 
 export class GetCachedImageQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=api_key" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=api_key" })
   apiKey?: string;
 }
 
 
 export class GetCachedImageRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetCachedImagePathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetCachedImageQueryParams;
 }
 
 
 export class GetCachedImageResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   cacheImageResponse?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   error?: shared.Error;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

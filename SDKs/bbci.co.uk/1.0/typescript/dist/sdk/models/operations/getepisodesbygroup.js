@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetEpisodesByGroupPathParams = /** @class */ (function (_super) {
     __extends(GetEpisodesByGroupPathParams, _super);
@@ -30,7 +30,7 @@ var GetEpisodesByGroupPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=pid" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=pid" }),
         __metadata("design:type", String)
     ], GetEpisodesByGroupPathParams.prototype, "pid", void 0);
     return GetEpisodesByGroupPathParams;
@@ -42,35 +42,35 @@ var GetEpisodesByGroupQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=availability" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=availability" }),
         __metadata("design:type", String)
     ], GetEpisodesByGroupQueryParams.prototype, "availability", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=initial_child_count" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=initial_child_count" }),
         __metadata("design:type", Number)
     ], GetEpisodesByGroupQueryParams.prototype, "initialChildCount", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=mixin" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=mixin" }),
         __metadata("design:type", Array)
     ], GetEpisodesByGroupQueryParams.prototype, "mixin", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=page" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page" }),
         __metadata("design:type", Number)
     ], GetEpisodesByGroupQueryParams.prototype, "page", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=per_page" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=per_page" }),
         __metadata("design:type", Number)
     ], GetEpisodesByGroupQueryParams.prototype, "perPage", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=rights" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=rights" }),
         __metadata("design:type", String)
     ], GetEpisodesByGroupQueryParams.prototype, "rights", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=sort" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sort" }),
         __metadata("design:type", String)
     ], GetEpisodesByGroupQueryParams.prototype, "sort", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=sort_direction" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sort_direction" }),
         __metadata("design:type", String)
     ], GetEpisodesByGroupQueryParams.prototype, "sortDirection", void 0);
     return GetEpisodesByGroupQueryParams;
@@ -82,11 +82,11 @@ var GetEpisodesByGroupRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetEpisodesByGroupPathParams)
     ], GetEpisodesByGroupRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetEpisodesByGroupQueryParams)
     ], GetEpisodesByGroupRequest.prototype, "queryParams", void 0);
     return GetEpisodesByGroupRequest;
@@ -98,15 +98,15 @@ var GetEpisodesByGroupResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetEpisodesByGroupResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetEpisodesByGroupResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], GetEpisodesByGroupResponse.prototype, "ibl", void 0);
     return GetEpisodesByGroupResponse;

@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import usageplankey
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class UsagePlanKeys:
-    items: Optional[List[usageplankey.UsagePlanKey]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'items' }})
-    position: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'position' }})
+    r"""UsagePlanKeys
+    <p>Represents the collection of usage plan keys added to usage plans for the associated API keys and, possibly, other types of keys.</p> <div class=\"seeAlso\"> <a href=\"https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-api-usage-plans.html\">Create and Use Usage Plans</a> </div>
+    """
+    
+    items: Optional[List[UsagePlanKey]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('items') }})
+    position: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('position') }})
     

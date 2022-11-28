@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class GetObjectPathParams:
-    path: str = field(default=None, metadata={'path_param': { 'field_name': 'Path', 'style': 'simple', 'explode': False }})
+    path: str = field(metadata={'path_param': { 'field_name': 'Path', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -22,17 +25,17 @@ class GetObjectHeaders:
 
 @dataclass
 class GetObjectRequest:
-    path_params: GetObjectPathParams = field(default=None)
-    headers: GetObjectHeaders = field(default=None)
+    headers: GetObjectHeaders = field()
+    path_params: GetObjectPathParams = field()
     
 
 @dataclass
 class GetObjectResponse:
+    content_type: str = field()
+    status_code: int = field()
     container_not_found_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     get_object_response: Optional[shared.GetObjectResponse] = field(default=None)
     internal_server_error: Optional[Any] = field(default=None)
     object_not_found_exception: Optional[Any] = field(default=None)
     requested_range_not_satisfiable_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

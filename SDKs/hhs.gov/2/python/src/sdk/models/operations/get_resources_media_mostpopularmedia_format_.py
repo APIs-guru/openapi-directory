@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class GetResourcesMediaMostPopularMediaFormatPathParams:
-    format: str = field(default=None, metadata={'path_param': { 'field_name': 'format', 'style': 'simple', 'explode': False }})
+    format: str = field(metadata={'path_param': { 'field_name': 'format', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -16,13 +16,13 @@ class GetResourcesMediaMostPopularMediaFormatQueryParams:
 
 @dataclass
 class GetResourcesMediaMostPopularMediaFormatRequest:
-    path_params: GetResourcesMediaMostPopularMediaFormatPathParams = field(default=None)
-    query_params: GetResourcesMediaMostPopularMediaFormatQueryParams = field(default=None)
+    path_params: GetResourcesMediaMostPopularMediaFormatPathParams = field()
+    query_params: GetResourcesMediaMostPopularMediaFormatQueryParams = field()
     
 
 @dataclass
 class GetResourcesMediaMostPopularMediaFormatResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     media_item_wrappeds: Optional[List[shared.MediaItemWrapped]] = field(default=None)
-    status_code: int = field(default=None)
     

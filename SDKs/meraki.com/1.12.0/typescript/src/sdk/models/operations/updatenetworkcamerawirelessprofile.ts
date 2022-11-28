@@ -1,11 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class UpdateNetworkCameraWirelessProfilePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=networkId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=networkId" })
   networkId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=wirelessProfileId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=wirelessProfileId" })
   wirelessProfileId: string;
 }
 
@@ -15,16 +16,16 @@ export class UpdateNetworkCameraWirelessProfilePathParams extends SpeakeasyBase 
  * The identity of the wireless profile. Required for creating wireless profiles in 8021x-radius auth mode.
 **/
 export class UpdateNetworkCameraWirelessProfileRequestBodyIdentity extends SpeakeasyBase {
-  @Metadata({ data: "json, name=password" })
+  @SpeakeasyMetadata({ data: "json, name=password" })
   password?: string;
 
-  @Metadata({ data: "json, name=username" })
+  @SpeakeasyMetadata({ data: "json, name=username" })
   username?: string;
 }
 
 export enum UpdateNetworkCameraWirelessProfileRequestBodySsidAuthModeEnum {
-    Psk = "psk"
-,    EightThousandAndTwentyOnexRadius = "8021x-radius"
+    Psk = "psk",
+    EightThousandAndTwentyOnexRadius = "8021x-radius"
 }
 
 
@@ -33,48 +34,48 @@ export enum UpdateNetworkCameraWirelessProfileRequestBodySsidAuthModeEnum {
  * The details of the SSID config.
 **/
 export class UpdateNetworkCameraWirelessProfileRequestBodySsid extends SpeakeasyBase {
-  @Metadata({ data: "json, name=authMode" })
+  @SpeakeasyMetadata({ data: "json, name=authMode" })
   authMode?: UpdateNetworkCameraWirelessProfileRequestBodySsidAuthModeEnum;
 
-  @Metadata({ data: "json, name=encryptionMode" })
+  @SpeakeasyMetadata({ data: "json, name=encryptionMode" })
   encryptionMode?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=psk" })
+  @SpeakeasyMetadata({ data: "json, name=psk" })
   psk?: string;
 }
 
 
 export class UpdateNetworkCameraWirelessProfileRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=identity" })
+  @SpeakeasyMetadata({ data: "json, name=identity" })
   identity?: UpdateNetworkCameraWirelessProfileRequestBodyIdentity;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=ssid" })
+  @SpeakeasyMetadata({ data: "json, name=ssid" })
   ssid?: UpdateNetworkCameraWirelessProfileRequestBodySsid;
 }
 
 
 export class UpdateNetworkCameraWirelessProfileRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: UpdateNetworkCameraWirelessProfilePathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request?: UpdateNetworkCameraWirelessProfileRequestBody;
 }
 
 
 export class UpdateNetworkCameraWirelessProfileResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   updateNetworkCameraWirelessProfile200ApplicationJsonObject?: Map<string, any>;
 }

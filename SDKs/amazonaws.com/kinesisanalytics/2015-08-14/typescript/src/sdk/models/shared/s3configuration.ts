@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // S3Configuration
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Provides a description of an Amazon S3 data source, including the Amazon Resource Name (ARN) of the S3 bucket, the ARN of the IAM role that is used to access the bucket, and the name of the Amazon S3 object that contains the data.
 **/
 export class S3Configuration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=BucketARN" })
+  @SpeakeasyMetadata({ data: "json, name=BucketARN" })
   bucketArn: string;
 
-  @Metadata({ data: "json, name=FileKey" })
+  @SpeakeasyMetadata({ data: "json, name=FileKey" })
   fileKey: string;
 
-  @Metadata({ data: "json, name=RoleARN" })
+  @SpeakeasyMetadata({ data: "json, name=RoleARN" })
   roleArn: string;
 }

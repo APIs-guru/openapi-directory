@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AndroidDevice } from "./androiddevice";
+
 
 
 // AndroidDeviceList
@@ -8,6 +8,6 @@ import { AndroidDevice } from "./androiddevice";
  * A list of Android device configurations in which the test is to be executed.
 **/
 export class AndroidDeviceList extends SpeakeasyBase {
-  @Metadata({ data: "json, name=androidDevices", elemType: shared.AndroidDevice })
+  @SpeakeasyMetadata({ data: "json, name=androidDevices", elemType: AndroidDevice })
   androidDevices?: AndroidDevice[];
 }

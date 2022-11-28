@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Step } from "./step";
 import { JobSummary } from "./jobsummary";
+
 
 
 // Job
@@ -9,9 +9,9 @@ import { JobSummary } from "./jobsummary";
  *  Describes an execution job for an Amplify app. 
 **/
 export class Job extends SpeakeasyBase {
-  @Metadata({ data: "json, name=steps", elemType: shared.Step })
+  @SpeakeasyMetadata({ data: "json, name=steps", elemType: Step })
   steps: Step[];
 
-  @Metadata({ data: "json, name=summary" })
+  @SpeakeasyMetadata({ data: "json, name=summary" })
   summary: JobSummary;
 }

@@ -1,13 +1,16 @@
 from dataclasses import dataclass, field
-from typing import Any,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class ListRecordsPathParams:
-    dataset_name: str = field(default=None, metadata={'path_param': { 'field_name': 'DatasetName', 'style': 'simple', 'explode': False }})
-    identity_id: str = field(default=None, metadata={'path_param': { 'field_name': 'IdentityId', 'style': 'simple', 'explode': False }})
-    identity_pool_id: str = field(default=None, metadata={'path_param': { 'field_name': 'IdentityPoolId', 'style': 'simple', 'explode': False }})
+    dataset_name: str = field(metadata={'path_param': { 'field_name': 'DatasetName', 'style': 'simple', 'explode': False }})
+    identity_id: str = field(metadata={'path_param': { 'field_name': 'IdentityId', 'style': 'simple', 'explode': False }})
+    identity_pool_id: str = field(metadata={'path_param': { 'field_name': 'IdentityPoolId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -31,18 +34,18 @@ class ListRecordsHeaders:
 
 @dataclass
 class ListRecordsRequest:
-    path_params: ListRecordsPathParams = field(default=None)
-    query_params: ListRecordsQueryParams = field(default=None)
-    headers: ListRecordsHeaders = field(default=None)
+    headers: ListRecordsHeaders = field()
+    path_params: ListRecordsPathParams = field()
+    query_params: ListRecordsQueryParams = field()
     
 
 @dataclass
 class ListRecordsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     internal_error_exception: Optional[Any] = field(default=None)
     invalid_parameter_exception: Optional[Any] = field(default=None)
     list_records_response: Optional[shared.ListRecordsResponse] = field(default=None)
     not_authorized_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     too_many_requests_exception: Optional[Any] = field(default=None)
     

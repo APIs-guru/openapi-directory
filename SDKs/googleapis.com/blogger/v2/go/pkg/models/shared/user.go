@@ -1,9 +1,13 @@
 package shared
 
+// UserBlogs
+// The container of blogs for this user.
 type UserBlogs struct {
 	SelfLink *string `json:"selfLink,omitempty"`
 }
 
+// UserLocale
+// This user's locale
 type UserLocale struct {
 	Country  *string `json:"country,omitempty"`
 	Language *string `json:"language,omitempty"`

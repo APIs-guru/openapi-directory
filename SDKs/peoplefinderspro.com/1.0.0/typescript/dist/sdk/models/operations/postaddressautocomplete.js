@@ -22,22 +22,22 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var PostAddressAutocompleteHeaders = /** @class */ (function (_super) {
     __extends(PostAddressAutocompleteHeaders, _super);
     function PostAddressAutocompleteHeaders() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=galaxy-ap-name" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=galaxy-ap-name" }),
         __metadata("design:type", String)
     ], PostAddressAutocompleteHeaders.prototype, "galaxyApName", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=galaxy-ap-password" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=galaxy-ap-password" }),
         __metadata("design:type", String)
     ], PostAddressAutocompleteHeaders.prototype, "galaxyApPassword", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=galaxy-search-type" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=galaxy-search-type" }),
         __metadata("design:type", String)
     ], PostAddressAutocompleteHeaders.prototype, "galaxySearchType", void 0);
     return PostAddressAutocompleteHeaders;
@@ -49,7 +49,7 @@ var PostAddressAutocompleteRequestBody = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Input" }),
+        SpeakeasyMetadata({ data: "json, name=Input" }),
         __metadata("design:type", String)
     ], PostAddressAutocompleteRequestBody.prototype, "input", void 0);
     return PostAddressAutocompleteRequestBody;
@@ -61,11 +61,11 @@ var PostAddressAutocompleteRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PostAddressAutocompleteHeaders)
     ], PostAddressAutocompleteRequest.prototype, "headers", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", PostAddressAutocompleteRequestBody)
     ], PostAddressAutocompleteRequest.prototype, "request", void 0);
     return PostAddressAutocompleteRequest;
@@ -77,11 +77,11 @@ var PostAddressAutocompleteResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], PostAddressAutocompleteResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], PostAddressAutocompleteResponse.prototype, "statusCode", void 0);
     return PostAddressAutocompleteResponse;

@@ -1,5 +1,7 @@
 package shared
 
+// Route
+// Represents a route.
 type Route struct {
 	APIGatewayManaged                *bool                           `json:"ApiGatewayManaged,omitempty"`
 	APIKeyRequired                   *bool                           `json:"ApiKeyRequired,omitempty"`

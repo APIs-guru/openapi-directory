@@ -10,12 +10,12 @@ class HeadPersonalCurrentAccountsHeaders:
 
 @dataclass
 class HeadPersonalCurrentAccountsRequest:
-    headers: HeadPersonalCurrentAccountsHeaders = field(default=None)
+    headers: HeadPersonalCurrentAccountsHeaders = field()
     
 
 @dataclass
 class HeadPersonalCurrentAccountsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     no_response: Optional[dict[str, Any]] = field(default=None)
-    status_code: int = field(default=None)
     

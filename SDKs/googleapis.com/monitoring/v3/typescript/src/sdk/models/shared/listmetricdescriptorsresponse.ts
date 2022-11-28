@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { MetricDescriptor } from "./metricdescriptor";
+
 
 
 // ListMetricDescriptorsResponse
@@ -8,9 +8,9 @@ import { MetricDescriptor } from "./metricdescriptor";
  * The ListMetricDescriptors response.
 **/
 export class ListMetricDescriptorsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=metricDescriptors", elemType: shared.MetricDescriptor })
+  @SpeakeasyMetadata({ data: "json, name=metricDescriptors", elemType: MetricDescriptor })
   metricDescriptors?: MetricDescriptor[];
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 }

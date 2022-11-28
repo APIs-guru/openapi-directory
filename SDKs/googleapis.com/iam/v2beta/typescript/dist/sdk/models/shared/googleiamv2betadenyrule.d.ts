@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { GoogleTypeExpr } from "./googletypeexpr";
 /**
  * A deny rule in an IAM deny policy.

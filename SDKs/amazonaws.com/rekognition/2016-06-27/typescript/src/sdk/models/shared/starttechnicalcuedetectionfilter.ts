@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BlackFrame } from "./blackframe";
+
 
 
 // StartTechnicalCueDetectionFilter
@@ -7,9 +8,9 @@ import { BlackFrame } from "./blackframe";
  * Filters for the technical segments returned by <a>GetSegmentDetection</a>. For more information, see <a>StartSegmentDetectionFilters</a>.
 **/
 export class StartTechnicalCueDetectionFilter extends SpeakeasyBase {
-  @Metadata({ data: "json, name=BlackFrame" })
+  @SpeakeasyMetadata({ data: "json, name=BlackFrame" })
   blackFrame?: BlackFrame;
 
-  @Metadata({ data: "json, name=MinSegmentConfidence" })
+  @SpeakeasyMetadata({ data: "json, name=MinSegmentConfidence" })
   minSegmentConfidence?: number;
 }

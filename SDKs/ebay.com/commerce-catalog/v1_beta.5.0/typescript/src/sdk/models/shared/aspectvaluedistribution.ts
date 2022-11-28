@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AspectValueDistribution
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * This type contains information about one value of a specified aspect. This value serves as a product refinement.
 **/
 export class AspectValueDistribution extends SpeakeasyBase {
-  @Metadata({ data: "json, name=localizedAspectValue" })
+  @SpeakeasyMetadata({ data: "json, name=localizedAspectValue" })
   localizedAspectValue?: string;
 
-  @Metadata({ data: "json, name=matchCount" })
+  @SpeakeasyMetadata({ data: "json, name=matchCount" })
   matchCount?: number;
 
-  @Metadata({ data: "json, name=refinementHref" })
+  @SpeakeasyMetadata({ data: "json, name=refinementHref" })
   refinementHref?: string;
 }

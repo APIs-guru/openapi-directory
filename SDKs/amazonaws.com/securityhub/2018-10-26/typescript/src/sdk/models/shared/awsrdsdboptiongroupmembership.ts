@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AwsRdsDbOptionGroupMembership
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * An option group membership.
 **/
 export class AwsRdsDbOptionGroupMembership extends SpeakeasyBase {
-  @Metadata({ data: "json, name=OptionGroupName" })
+  @SpeakeasyMetadata({ data: "json, name=OptionGroupName" })
   optionGroupName?: string;
 
-  @Metadata({ data: "json, name=Status" })
+  @SpeakeasyMetadata({ data: "json, name=Status" })
   status?: string;
 }

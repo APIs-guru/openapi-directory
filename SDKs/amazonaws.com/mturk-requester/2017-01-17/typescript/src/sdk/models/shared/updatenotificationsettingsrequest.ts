@@ -1,14 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { NotificationSpecification } from "./notificationspecification";
 
 
+
 export class UpdateNotificationSettingsRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Active" })
+  @SpeakeasyMetadata({ data: "json, name=Active" })
   active?: boolean;
 
-  @Metadata({ data: "json, name=HITTypeId" })
+  @SpeakeasyMetadata({ data: "json, name=HITTypeId" })
   hitTypeId: string;
 
-  @Metadata({ data: "json, name=Notification" })
+  @SpeakeasyMetadata({ data: "json, name=Notification" })
   notification?: NotificationSpecification;
 }

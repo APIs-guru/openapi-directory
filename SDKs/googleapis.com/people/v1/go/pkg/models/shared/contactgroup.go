@@ -8,6 +8,8 @@ const (
 	ContactGroupGroupTypeEnumSystemContactGroup   ContactGroupGroupTypeEnum = "SYSTEM_CONTACT_GROUP"
 )
 
+// ContactGroup
+// A contact group.
 type ContactGroup struct {
 	ClientData          []GroupClientData          `json:"clientData,omitempty"`
 	Etag                *string                    `json:"etag,omitempty"`
@@ -18,4 +20,13 @@ type ContactGroup struct {
 	Metadata            *ContactGroupMetadata      `json:"metadata,omitempty"`
 	Name                *string                    `json:"name,omitempty"`
 	ResourceName        *string                    `json:"resourceName,omitempty"`
+}
+
+// ContactGroupInput
+// A contact group.
+type ContactGroupInput struct {
+	ClientData   []GroupClientData `json:"clientData,omitempty"`
+	Etag         *string           `json:"etag,omitempty"`
+	Name         *string           `json:"name,omitempty"`
+	ResourceName *string           `json:"resourceName,omitempty"`
 }

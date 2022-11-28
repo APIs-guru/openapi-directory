@@ -1,5 +1,7 @@
 package shared
 
+// CollectdPayload
+// A collection of data points sent from a collectd-based plugin. See the collectd documentation for more information.
 type CollectdPayload struct {
 	EndTime        *string               `json:"endTime,omitempty"`
 	Metadata       map[string]TypedValue `json:"metadata,omitempty"`

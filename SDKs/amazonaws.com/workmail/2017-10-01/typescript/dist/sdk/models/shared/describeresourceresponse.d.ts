@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { BookingOptions } from "./bookingoptions";
 import { EntityStateEnum } from "./entitystateenum";
 import { ResourceTypeEnum } from "./resourcetypeenum";

@@ -1,5 +1,7 @@
 package shared
 
+// AwsIamPolicyDetails
+// Represents an IAM permissions policy.
 type AwsIamPolicyDetails struct {
 	AttachmentCount               *int64                `json:"AttachmentCount,omitempty"`
 	CreateDate                    *string               `json:"CreateDate,omitempty"`

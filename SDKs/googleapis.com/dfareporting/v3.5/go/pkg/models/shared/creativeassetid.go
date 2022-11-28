@@ -11,6 +11,8 @@ const (
 	CreativeAssetIDTypeEnumAudio     CreativeAssetIDTypeEnum = "AUDIO"
 )
 
+// CreativeAssetID
+// Creative Asset ID.
 type CreativeAssetID struct {
 	Name *string                  `json:"name,omitempty"`
 	Type *CreativeAssetIDTypeEnum `json:"type,omitempty"`

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // StreamingStageLocation
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Identifies the location of a streaming computation stage, for stage-to-stage communication.
 **/
 export class StreamingStageLocation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=streamId" })
+  @SpeakeasyMetadata({ data: "json, name=streamId" })
   streamId?: string;
 }

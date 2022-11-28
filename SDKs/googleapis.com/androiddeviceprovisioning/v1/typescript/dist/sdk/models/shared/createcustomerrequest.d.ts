@@ -1,8 +1,8 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
-import { Company } from "./company";
+import { SpeakeasyBase } from "../../../internal/utils";
+import { CompanyInput } from "./company";
 /**
  * Request message to create a customer.
 **/
-export declare class CreateCustomerRequest extends SpeakeasyBase {
-    customer?: Company;
+export declare class CreateCustomerRequestInput extends SpeakeasyBase {
+    customer?: CompanyInput;
 }

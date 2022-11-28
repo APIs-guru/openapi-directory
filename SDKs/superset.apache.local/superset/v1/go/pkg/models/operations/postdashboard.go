@@ -8,11 +8,6 @@ type PostDashboardSecurity struct {
 	Jwt shared.SchemeJwt `security:"scheme,type=http,subtype=bearer"`
 }
 
-type PostDashboardRequest struct {
-	Request  shared.DashboardRestAPIPost `request:"mediaType=application/json"`
-	Security PostDashboardSecurity
-}
-
 type PostDashboard201ApplicationJSON struct {
 	ID     *float64                     `json:"id,omitempty"`
 	Result *shared.DashboardRestAPIPost `json:"result,omitempty"`
@@ -32,6 +27,11 @@ type PostDashboard404ApplicationJSON struct {
 
 type PostDashboard500ApplicationJSON struct {
 	Message *string `json:"message,omitempty"`
+}
+
+type PostDashboardRequest struct {
+	Request  shared.DashboardRestAPIPost `request:"mediaType=application/json"`
+	Security PostDashboardSecurity
 }
 
 type PostDashboardResponse struct {

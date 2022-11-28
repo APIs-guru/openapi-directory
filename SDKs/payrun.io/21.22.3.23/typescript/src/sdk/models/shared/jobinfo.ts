@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // JobInfoJobInfoErrors
@@ -6,51 +7,51 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The job infos' errors
 **/
 export class JobInfoJobInfoErrors extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Error" })
+  @SpeakeasyMetadata({ data: "json, name=Error" })
   error?: string[];
 }
 
 export enum JobInfoJobInfoJobStatusEnum {
-    New = "New"
-,    Pending = "Pending"
-,    InProgress = "InProgress"
-,    Success = "Success"
-,    Failed = "Failed"
-,    OnHold = "OnHold"
+    New = "New",
+    Pending = "Pending",
+    InProgress = "InProgress",
+    Success = "Success",
+    Failed = "Failed",
+    OnHold = "OnHold"
 }
 
 
 export class JobInfoJobInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Created" })
+  @SpeakeasyMetadata({ data: "json, name=Created" })
   created?: Date;
 
-  @Metadata({ data: "json, name=EmployerKey" })
+  @SpeakeasyMetadata({ data: "json, name=EmployerKey" })
   employerKey?: string;
 
-  @Metadata({ data: "json, name=Errors" })
+  @SpeakeasyMetadata({ data: "json, name=Errors" })
   errors?: JobInfoJobInfoErrors;
 
-  @Metadata({ data: "json, name=HoldingDate" })
+  @SpeakeasyMetadata({ data: "json, name=HoldingDate" })
   holdingDate?: Date;
 
-  @Metadata({ data: "json, name=JobId" })
+  @SpeakeasyMetadata({ data: "json, name=JobId" })
   jobId?: string;
 
-  @Metadata({ data: "json, name=JobStatus" })
+  @SpeakeasyMetadata({ data: "json, name=JobStatus" })
   jobStatus?: JobInfoJobInfoJobStatusEnum;
 
-  @Metadata({ data: "json, name=JobType" })
+  @SpeakeasyMetadata({ data: "json, name=JobType" })
   jobType?: string;
 
-  @Metadata({ data: "json, name=LastUpdated" })
+  @SpeakeasyMetadata({ data: "json, name=LastUpdated" })
   lastUpdated?: Date;
 
-  @Metadata({ data: "json, name=Progress" })
+  @SpeakeasyMetadata({ data: "json, name=Progress" })
   progress?: number;
 }
 
 
 export class JobInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=JobInfo" })
+  @SpeakeasyMetadata({ data: "json, name=JobInfo" })
   jobInfo?: JobInfoJobInfo;
 }

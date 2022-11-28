@@ -1,4 +1,4 @@
-from .__xgafv_enum import *
+from ._xgafv_enum import *
 from .alt_enum import *
 from .appprofile import *
 from .auditconfig import *
@@ -36,6 +36,7 @@ from .modifycolumnfamiliesrequest import *
 from .operation import *
 from .policy import *
 from .restoreinfo import *
+from .restoreinfo1 import *
 from .restoretablerequest import *
 from .security import *
 from .setiampolicyrequest import *

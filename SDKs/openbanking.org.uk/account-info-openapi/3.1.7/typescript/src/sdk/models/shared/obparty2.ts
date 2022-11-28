@@ -1,8 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ObAddressTypeCodeEnum } from "./obaddresstypecodeenum";
 import { ObExternalPartyType1CodeEnum } from "./obexternalpartytype1codeenum";
 import { ObPartyRelationships1 } from "./obpartyrelationships1";
+
 
 
 // ObParty2Address
@@ -10,69 +10,69 @@ import { ObPartyRelationships1 } from "./obpartyrelationships1";
  * Postal address of a party.
 **/
 export class ObParty2Address extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AddressLine" })
+  @SpeakeasyMetadata({ data: "json, name=AddressLine" })
   addressLine?: string[];
 
-  @Metadata({ data: "json, name=AddressType" })
+  @SpeakeasyMetadata({ data: "json, name=AddressType" })
   addressType?: ObAddressTypeCodeEnum;
 
-  @Metadata({ data: "json, name=BuildingNumber" })
+  @SpeakeasyMetadata({ data: "json, name=BuildingNumber" })
   buildingNumber?: string;
 
-  @Metadata({ data: "json, name=Country" })
+  @SpeakeasyMetadata({ data: "json, name=Country" })
   country: string;
 
-  @Metadata({ data: "json, name=CountrySubDivision" })
+  @SpeakeasyMetadata({ data: "json, name=CountrySubDivision" })
   countrySubDivision?: string;
 
-  @Metadata({ data: "json, name=PostCode" })
+  @SpeakeasyMetadata({ data: "json, name=PostCode" })
   postCode?: string;
 
-  @Metadata({ data: "json, name=StreetName" })
+  @SpeakeasyMetadata({ data: "json, name=StreetName" })
   streetName?: string;
 
-  @Metadata({ data: "json, name=TownName" })
+  @SpeakeasyMetadata({ data: "json, name=TownName" })
   townName?: string;
 }
 
 
 export class ObParty2 extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AccountRole" })
+  @SpeakeasyMetadata({ data: "json, name=AccountRole" })
   accountRole?: string;
 
-  @Metadata({ data: "json, name=Address", elemType: shared.ObParty2Address })
+  @SpeakeasyMetadata({ data: "json, name=Address", elemType: ObParty2Address })
   address?: ObParty2Address[];
 
-  @Metadata({ data: "json, name=BeneficialOwnership" })
+  @SpeakeasyMetadata({ data: "json, name=BeneficialOwnership" })
   beneficialOwnership?: boolean;
 
-  @Metadata({ data: "json, name=EmailAddress" })
+  @SpeakeasyMetadata({ data: "json, name=EmailAddress" })
   emailAddress?: string;
 
-  @Metadata({ data: "json, name=FullLegalName" })
+  @SpeakeasyMetadata({ data: "json, name=FullLegalName" })
   fullLegalName?: string;
 
-  @Metadata({ data: "json, name=LegalStructure" })
+  @SpeakeasyMetadata({ data: "json, name=LegalStructure" })
   legalStructure?: string;
 
-  @Metadata({ data: "json, name=Mobile" })
+  @SpeakeasyMetadata({ data: "json, name=Mobile" })
   mobile?: string;
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name?: string;
 
-  @Metadata({ data: "json, name=PartyId" })
+  @SpeakeasyMetadata({ data: "json, name=PartyId" })
   partyId: string;
 
-  @Metadata({ data: "json, name=PartyNumber" })
+  @SpeakeasyMetadata({ data: "json, name=PartyNumber" })
   partyNumber?: string;
 
-  @Metadata({ data: "json, name=PartyType" })
+  @SpeakeasyMetadata({ data: "json, name=PartyType" })
   partyType?: ObExternalPartyType1CodeEnum;
 
-  @Metadata({ data: "json, name=Phone" })
+  @SpeakeasyMetadata({ data: "json, name=Phone" })
   phone?: string;
 
-  @Metadata({ data: "json, name=Relationships" })
+  @SpeakeasyMetadata({ data: "json, name=Relationships" })
   relationships?: ObPartyRelationships1;
 }

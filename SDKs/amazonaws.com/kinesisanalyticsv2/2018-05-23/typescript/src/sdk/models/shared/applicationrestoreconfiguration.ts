@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ApplicationRestoreTypeEnum } from "./applicationrestoretypeenum";
+
 
 
 // ApplicationRestoreConfiguration
@@ -7,9 +8,9 @@ import { ApplicationRestoreTypeEnum } from "./applicationrestoretypeenum";
  * Specifies the method and snapshot to use when restarting an application using previously saved application state.
 **/
 export class ApplicationRestoreConfiguration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ApplicationRestoreType" })
+  @SpeakeasyMetadata({ data: "json, name=ApplicationRestoreType" })
   applicationRestoreType: ApplicationRestoreTypeEnum;
 
-  @Metadata({ data: "json, name=SnapshotName" })
+  @SpeakeasyMetadata({ data: "json, name=SnapshotName" })
   snapshotName?: string;
 }

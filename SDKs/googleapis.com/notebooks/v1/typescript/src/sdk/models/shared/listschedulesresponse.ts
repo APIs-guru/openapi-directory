@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Schedule } from "./schedule";
+
 
 
 // ListSchedulesResponse
@@ -8,12 +8,12 @@ import { Schedule } from "./schedule";
  * Response for listing scheduled notebook job.
 **/
 export class ListSchedulesResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 
-  @Metadata({ data: "json, name=schedules", elemType: shared.Schedule })
+  @SpeakeasyMetadata({ data: "json, name=schedules", elemType: Schedule })
   schedules?: Schedule[];
 
-  @Metadata({ data: "json, name=unreachable" })
+  @SpeakeasyMetadata({ data: "json, name=unreachable" })
   unreachable?: string[];
 }

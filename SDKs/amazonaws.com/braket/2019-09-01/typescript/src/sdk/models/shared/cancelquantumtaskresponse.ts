@@ -1,11 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CancellationStatusEnum } from "./cancellationstatusenum";
 
 
+
 export class CancelQuantumTaskResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=cancellationStatus" })
+  @SpeakeasyMetadata({ data: "json, name=cancellationStatus" })
   cancellationStatus: CancellationStatusEnum;
 
-  @Metadata({ data: "json, name=quantumTaskArn" })
+  @SpeakeasyMetadata({ data: "json, name=quantumTaskArn" })
   quantumTaskArn: string;
 }

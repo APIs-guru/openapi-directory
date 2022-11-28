@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetWirelessLaNsQueryParams = /** @class */ (function (_super) {
     __extends(GetWirelessLaNsQueryParams, _super);
@@ -30,7 +30,7 @@ var GetWirelessLaNsQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=search" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=search" }),
         __metadata("design:type", String)
     ], GetWirelessLaNsQueryParams.prototype, "search", void 0);
     return GetWirelessLaNsQueryParams;
@@ -42,7 +42,7 @@ var GetWirelessLaNsSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=http;subtype=bearer" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" }),
         __metadata("design:type", shared.SchemeBearerAuth)
     ], GetWirelessLaNsSecurity.prototype, "bearerAuth", void 0);
     return GetWirelessLaNsSecurity;
@@ -54,11 +54,11 @@ var GetWirelessLaNsRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetWirelessLaNsQueryParams)
     ], GetWirelessLaNsRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetWirelessLaNsSecurity)
     ], GetWirelessLaNsRequest.prototype, "security", void 0);
     return GetWirelessLaNsRequest;
@@ -70,15 +70,15 @@ var GetWirelessLaNsResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetWirelessLaNsResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetWirelessLaNsResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata({ elemType: shared.Wireless }),
+        SpeakeasyMetadata({ elemType: shared.Wireless }),
         __metadata("design:type", Array)
     ], GetWirelessLaNsResponse.prototype, "wirelesses", void 0);
     return GetWirelessLaNsResponse;

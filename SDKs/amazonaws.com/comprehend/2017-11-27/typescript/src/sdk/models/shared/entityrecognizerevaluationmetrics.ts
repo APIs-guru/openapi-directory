@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // EntityRecognizerEvaluationMetrics
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Detailed information about the accuracy of an entity recognizer. 
 **/
 export class EntityRecognizerEvaluationMetrics extends SpeakeasyBase {
-  @Metadata({ data: "json, name=F1Score" })
+  @SpeakeasyMetadata({ data: "json, name=F1Score" })
   f1Score?: number;
 
-  @Metadata({ data: "json, name=Precision" })
+  @SpeakeasyMetadata({ data: "json, name=Precision" })
   precision?: number;
 
-  @Metadata({ data: "json, name=Recall" })
+  @SpeakeasyMetadata({ data: "json, name=Recall" })
   recall?: number;
 }

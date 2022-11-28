@@ -1,6 +1,7 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -59,23 +60,23 @@ class DcimRackGroupsListQueryParams:
     slug_nisw: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'slug__nisw', 'style': 'form', 'explode': True }})
     
 
-@dataclass
-class DcimRackGroupsListRequest:
-    query_params: DcimRackGroupsListQueryParams = field(default=None)
-    
-
 @dataclass_json
 @dataclass
 class DcimRackGroupsList200ApplicationJSON:
-    count: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'count' }})
-    next: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next' }})
-    previous: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'previous' }})
-    results: List[shared.RackGroup] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'results' }})
+    count: int = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('count') }})
+    results: List[shared.RackGroup] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('results') }})
+    next: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('next') }})
+    previous: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('previous') }})
+    
+
+@dataclass
+class DcimRackGroupsListRequest:
+    query_params: DcimRackGroupsListQueryParams = field()
     
 
 @dataclass
 class DcimRackGroupsListResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     dcim_rack_groups_list_200_application_json_object: Optional[DcimRackGroupsList200ApplicationJSON] = field(default=None)
     

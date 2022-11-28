@@ -1,7 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import userfacingmessage
+from sdk import utils
+from . import *
 
 class PostureDetailSecurityRiskEnum(str, Enum):
     SECURITY_RISK_UNSPECIFIED = "SECURITY_RISK_UNSPECIFIED"
@@ -13,6 +15,10 @@ class PostureDetailSecurityRiskEnum(str, Enum):
 @dataclass_json
 @dataclass
 class PostureDetail:
-    advice: Optional[List[userfacingmessage.UserFacingMessage]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'advice' }})
-    security_risk: Optional[PostureDetailSecurityRiskEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'securityRisk' }})
+    r"""PostureDetail
+    Additional details regarding the security posture of the device.
+    """
+    
+    advice: Optional[List[UserFacingMessage]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('advice') }})
+    security_risk: Optional[PostureDetailSecurityRiskEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('securityRisk') }})
     

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class LpgsvRequestBodyCertificateParameters extends SpeakeasyBase {
     lpgid: string;
@@ -16,10 +16,6 @@ export declare class LpgsvRequestBody extends SpeakeasyBase {
 export declare class LpgsvSecurity extends SpeakeasyBase {
     apiKey: shared.SchemeApiKey;
     clientId: shared.SchemeClientId;
-}
-export declare class LpgsvRequest extends SpeakeasyBase {
-    request?: LpgsvRequestBody;
-    security: LpgsvSecurity;
 }
 export declare enum Lpgsv400ApplicationJsonErrorEnum {
     MissingParameter = "missing_parameter",
@@ -102,6 +98,10 @@ export declare enum Lpgsv504ApplicationJsonErrorDescriptionEnum {
 export declare class Lpgsv504ApplicationJson extends SpeakeasyBase {
     error?: Lpgsv504ApplicationJsonErrorEnum;
     errorDescription?: Lpgsv504ApplicationJsonErrorDescriptionEnum;
+}
+export declare class LpgsvRequest extends SpeakeasyBase {
+    request?: LpgsvRequestBody;
+    security: LpgsvSecurity;
 }
 export declare class LpgsvResponse extends SpeakeasyBase {
     contentType: string;

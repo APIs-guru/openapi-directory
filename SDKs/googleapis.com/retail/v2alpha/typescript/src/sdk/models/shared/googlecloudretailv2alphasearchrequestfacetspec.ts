@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudRetailV2alphaSearchRequestFacetSpecFacetKey } from "./googlecloudretailv2alphasearchrequestfacetspecfacetkey";
+
 
 
 // GoogleCloudRetailV2alphaSearchRequestFacetSpec
@@ -7,15 +8,15 @@ import { GoogleCloudRetailV2alphaSearchRequestFacetSpecFacetKey } from "./google
  * A facet specification to perform faceted search.
 **/
 export class GoogleCloudRetailV2alphaSearchRequestFacetSpec extends SpeakeasyBase {
-  @Metadata({ data: "json, name=enableDynamicPosition" })
+  @SpeakeasyMetadata({ data: "json, name=enableDynamicPosition" })
   enableDynamicPosition?: boolean;
 
-  @Metadata({ data: "json, name=excludedFilterKeys" })
+  @SpeakeasyMetadata({ data: "json, name=excludedFilterKeys" })
   excludedFilterKeys?: string[];
 
-  @Metadata({ data: "json, name=facetKey" })
+  @SpeakeasyMetadata({ data: "json, name=facetKey" })
   facetKey?: GoogleCloudRetailV2alphaSearchRequestFacetSpecFacetKey;
 
-  @Metadata({ data: "json, name=limit" })
+  @SpeakeasyMetadata({ data: "json, name=limit" })
   limit?: number;
 }

@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum InventoryTypeTargetingInventoryTypesEnum {
-    InventoryTypeUnspecified = "INVENTORY_TYPE_UNSPECIFIED"
-,    Browser = "BROWSER"
-,    MobileApp = "MOBILE_APP"
-,    VideoPlayer = "VIDEO_PLAYER"
+    InventoryTypeUnspecified = "INVENTORY_TYPE_UNSPECIFIED",
+    Browser = "BROWSER",
+    MobileApp = "MOBILE_APP",
+    VideoPlayer = "VIDEO_PLAYER"
 }
 
 
@@ -13,6 +14,6 @@ export enum InventoryTypeTargetingInventoryTypesEnum {
  * Targeting of the inventory types a bid request can originate from.
 **/
 export class InventoryTypeTargeting extends SpeakeasyBase {
-  @Metadata({ data: "json, name=inventoryTypes" })
+  @SpeakeasyMetadata({ data: "json, name=inventoryTypes" })
   inventoryTypes?: InventoryTypeTargetingInventoryTypesEnum[];
 }

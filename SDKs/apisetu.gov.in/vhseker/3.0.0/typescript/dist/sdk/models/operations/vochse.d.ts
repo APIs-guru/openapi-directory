@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class VochseRequestBodyCertificateParameters extends SpeakeasyBase {
     dob: string;
@@ -19,10 +19,6 @@ export declare class VochseRequestBody extends SpeakeasyBase {
 export declare class VochseSecurity extends SpeakeasyBase {
     apiKey: shared.SchemeApiKey;
     clientId: shared.SchemeClientId;
-}
-export declare class VochseRequest extends SpeakeasyBase {
-    request?: VochseRequestBody;
-    security: VochseSecurity;
 }
 export declare enum Vochse400ApplicationJsonErrorEnum {
     MissingParameter = "missing_parameter",
@@ -105,6 +101,10 @@ export declare enum Vochse504ApplicationJsonErrorDescriptionEnum {
 export declare class Vochse504ApplicationJson extends SpeakeasyBase {
     error?: Vochse504ApplicationJsonErrorEnum;
     errorDescription?: Vochse504ApplicationJsonErrorDescriptionEnum;
+}
+export declare class VochseRequest extends SpeakeasyBase {
+    request?: VochseRequestBody;
+    security: VochseSecurity;
 }
 export declare class VochseResponse extends SpeakeasyBase {
     contentType: string;

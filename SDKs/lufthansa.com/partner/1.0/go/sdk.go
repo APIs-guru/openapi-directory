@@ -10,7 +10,7 @@ import (
 	"strings"
 )
 
-var Servers = []string{
+var ServerList = []string{
 	"https://api.lufthansa.com/v1",
 }
 
@@ -19,9 +19,13 @@ type HTTPClient interface {
 }
 
 type SDK struct {
-	defaultClient  HTTPClient
-	securityClient HTTPClient
-	serverURL      string
+	_defaultClient  HTTPClient
+	_securityClient HTTPClient
+
+	_serverURL  string
+	_language   string
+	_sdkVersion string
+	_genVersion string
 }
 
 type SDKOption func(*SDK)
@@ -32,27 +36,46 @@ func WithServerURL(serverURL string, params map[string]string) SDKOption {
 			serverURL = utils.ReplaceParameters(serverURL, params)
 		}
 
-		sdk.serverURL = serverURL
+		sdk._serverURL = serverURL
+	}
+}
+
+func WithClient(client HTTPClient) SDKOption {
+	return func(sdk *SDK) {
+		sdk._defaultClient = client
 	}
 }
 
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
-		defaultClient:  http.DefaultClient,
-		securityClient: http.DefaultClient,
+		_language:   "go",
+		_sdkVersion: "",
+		_genVersion: "internal",
 	}
 	for _, opt := range opts {
 		opt(sdk)
 	}
-	if sdk.serverURL == "" {
-		sdk.serverURL = Servers[0]
+
+	if sdk._defaultClient == nil {
+		sdk._defaultClient = http.DefaultClient
+	}
+	if sdk._securityClient == nil {
+
+		sdk._securityClient = sdk._defaultClient
+
+	}
+
+	if sdk._serverURL == "" {
+		sdk._serverURL = ServerList[0]
 	}
 
 	return sdk
 }
 
+// AllFares - All Fares
+// Retrieves all available fares for a specific Origin & Destination pair on a given date. Available fares are: One-way and Return for 4U. Return only for OS
 func (s *SDK) AllFares(ctx context.Context, request operations.AllFaresRequest) (*operations.AllFaresResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/offers/fares/allfares"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -64,7 +87,7 @@ func (s *SDK) AllFares(ctx context.Context, request operations.AllFaresRequest) 
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -95,8 +118,10 @@ func (s *SDK) AllFares(ctx context.Context, request operations.AllFaresRequest) 
 	return res, nil
 }
 
+// AutoCheckIn - Auto Check-In
+// Trigger an automatic check-in given a ticket number. This service is only accessible for LH privileged partners
 func (s *SDK) AutoCheckIn(ctx context.Context, request operations.AutoCheckInRequest) (*operations.AutoCheckInResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/preflight/autocheckin/{ticketnumber}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "PUT", url, nil)
@@ -108,7 +133,7 @@ func (s *SDK) AutoCheckIn(ctx context.Context, request operations.AutoCheckInReq
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -139,8 +164,10 @@ func (s *SDK) AutoCheckIn(ctx context.Context, request operations.AutoCheckInReq
 	return res, nil
 }
 
+// BaggageTripAndContact - Baggage Trip and Contact
+// Retrieve passenger trip, contact and baggage details. This service is only accessible for LH privileged partners
 func (s *SDK) BaggageTripAndContact(ctx context.Context, request operations.BaggageTripAndContactRequest) (*operations.BaggageTripAndContactResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/baggage/baggagetripandcontact/{searchID}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -150,7 +177,7 @@ func (s *SDK) BaggageTripAndContact(ctx context.Context, request operations.Bagg
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -181,8 +208,10 @@ func (s *SDK) BaggageTripAndContact(ctx context.Context, request operations.Bagg
 	return res, nil
 }
 
+// BestFares - Best Fares
+// Retrieve best fares for the requested journey across multiple days or multiple months.
 func (s *SDK) BestFares(ctx context.Context, request operations.BestFaresRequest) (*operations.BestFaresResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/offers/fares/bestfares"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -194,7 +223,7 @@ func (s *SDK) BestFares(ctx context.Context, request operations.BestFaresRequest
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -225,8 +254,10 @@ func (s *SDK) BestFares(ctx context.Context, request operations.BestFaresRequest
 	return res, nil
 }
 
+// DeepLinks - Deep Links
+// Returns valid deep links for the provided input parameters
 func (s *SDK) DeepLinks(ctx context.Context, request operations.DeepLinksRequest) (*operations.DeepLinksResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/offers/fares/deeplink"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -238,7 +269,7 @@ func (s *SDK) DeepLinks(ctx context.Context, request operations.DeepLinksRequest
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -269,8 +300,10 @@ func (s *SDK) DeepLinks(ctx context.Context, request operations.DeepLinksRequest
 	return res, nil
 }
 
+// Fares - Fares
+// Retrieve all available fares per fare family for a specific Origin & Destination on a given date
 func (s *SDK) Fares(ctx context.Context, request operations.FaresRequest) (*operations.FaresResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/offers/fares/fares"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -282,7 +315,7 @@ func (s *SDK) Fares(ctx context.Context, request operations.FaresRequest) (*oper
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -313,8 +346,10 @@ func (s *SDK) Fares(ctx context.Context, request operations.FaresRequest) (*oper
 	return res, nil
 }
 
+// FaresSubscriptions - Fares Subscriptions
+// Create a subscription for best price O&D. Receive regular updates on lowest fares
 func (s *SDK) FaresSubscriptions(ctx context.Context, request operations.FaresSubscriptionsRequest) (*operations.FaresSubscriptionsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/offers/fares/subscriptions"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -326,7 +361,7 @@ func (s *SDK) FaresSubscriptions(ctx context.Context, request operations.FaresSu
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -357,8 +392,10 @@ func (s *SDK) FaresSubscriptions(ctx context.Context, request operations.FaresSu
 	return res, nil
 }
 
+// LhDeepLinksFfp - LH Deep Links - FFP
+// Returns valid LH deep links (FFP - links to flight selection screen on LH.COM)
 func (s *SDK) LhDeepLinksFfp(ctx context.Context, request operations.LhDeepLinksFfpRequest) (*operations.LhDeepLinksFfpResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/offers/fares/deeplink/ffp"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -370,7 +407,7 @@ func (s *SDK) LhDeepLinksFfp(ctx context.Context, request operations.LhDeepLinks
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -401,8 +438,10 @@ func (s *SDK) LhDeepLinksFfp(ctx context.Context, request operations.LhDeepLinks
 	return res, nil
 }
 
+// LhDeepLinksItco - LH Deep Links - ITCO
+// Returns valid LH deep links (ITCO - links to shopping cart on LH.COM)
 func (s *SDK) LhDeepLinksItco(ctx context.Context, request operations.LhDeepLinksItcoRequest) (*operations.LhDeepLinksItcoResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/offers/fares/deeplink/itco"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -414,7 +453,7 @@ func (s *SDK) LhDeepLinksItco(ctx context.Context, request operations.LhDeepLink
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -445,8 +484,10 @@ func (s *SDK) LhDeepLinksItco(ctx context.Context, request operations.LhDeepLink
 	return res, nil
 }
 
+// LowestFares - Lowest Fares
+// Retrieve lowest fare for a specific Origin & Destination pair on a given date. Available fares are: One-way and Return for 4U. Return only for OS & LH
 func (s *SDK) LowestFares(ctx context.Context, request operations.LowestFaresRequest) (*operations.LowestFaresResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/offers/fares/lowestfares"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -458,7 +499,7 @@ func (s *SDK) LowestFares(ctx context.Context, request operations.LowestFaresReq
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -489,8 +530,10 @@ func (s *SDK) LowestFares(ctx context.Context, request operations.LowestFaresReq
 	return res, nil
 }
 
+// OndRoute - OND Route
+// Returns LH route origin & destination information
 func (s *SDK) OndRoute(ctx context.Context, request operations.OndRouteRequest) (*operations.OndRouteResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/offers/ond/route/{origin}/{destination}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -502,7 +545,7 @@ func (s *SDK) OndRoute(ctx context.Context, request operations.OndRouteRequest) 
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -533,8 +576,10 @@ func (s *SDK) OndRoute(ctx context.Context, request operations.OndRouteRequest) 
 	return res, nil
 }
 
+// OndStatus - OND Status
+// Returns LH network route status information. Search for recently added or retired routes
 func (s *SDK) OndStatus(ctx context.Context, request operations.OndStatusRequest) (*operations.OndStatusResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/offers/ond/status"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -546,7 +591,7 @@ func (s *SDK) OndStatus(ctx context.Context, request operations.OndStatusRequest
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -577,8 +622,10 @@ func (s *SDK) OndStatus(ctx context.Context, request operations.OndStatusRequest
 	return res, nil
 }
 
+// Orders - Orders
+// Retrieve order by ID and optionally name. This service is only accessible for LH privileged partners
 func (s *SDK) Orders(ctx context.Context, request operations.OrdersRequest) (*operations.OrdersResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/orders/orders/{orderID}/{name}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -588,7 +635,7 @@ func (s *SDK) Orders(ctx context.Context, request operations.OrdersRequest) (*op
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -619,8 +666,10 @@ func (s *SDK) Orders(ctx context.Context, request operations.OrdersRequest) (*op
 	return res, nil
 }
 
+// PriceOffers - Price Offers
+// Retrieve a best price offer given an origin and destination.
 func (s *SDK) PriceOffers(ctx context.Context, request operations.PriceOffersRequest) (*operations.PriceOffersResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/promotions/priceoffers/flights/ond/{origin}/{destination}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -630,7 +679,7 @@ func (s *SDK) PriceOffers(ctx context.Context, request operations.PriceOffersReq
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -661,8 +710,10 @@ func (s *SDK) PriceOffers(ctx context.Context, request operations.PriceOffersReq
 	return res, nil
 }
 
+// SeatDetails - Seat Details
+// A description of all available seat details by aircraft type. You can retrieve the full set or details for a particular aircraft type.
 func (s *SDK) SeatDetails(ctx context.Context, request operations.SeatDetailsRequest) (*operations.SeatDetailsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/references/seatdetails/{aircraftCode}/{cabinCode}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -674,7 +725,7 @@ func (s *SDK) SeatDetails(ctx context.Context, request operations.SeatDetailsReq
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -705,8 +756,10 @@ func (s *SDK) SeatDetails(ctx context.Context, request operations.SeatDetailsReq
 	return res, nil
 }
 
+// TopOnd - Top OND
+// Returns LH Top routes per country or across all countries
 func (s *SDK) TopOnd(ctx context.Context, request operations.TopOndRequest) (*operations.TopOndResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/offers/ond/top"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -718,7 +771,7 @@ func (s *SDK) TopOnd(ctx context.Context, request operations.TopOndRequest) (*op
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {

@@ -1,22 +1,27 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import accountreference16_ch
-from . import paymentinitiationbulkelement_json
-from . import transactionstatus_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class BulkPaymentInitiationWithStatusResponse:
-    acceptor_transaction_date_time: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'acceptorTransactionDateTime', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    batch_booking_preferred: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'batchBookingPreferred' }})
-    debtor_account: accountreference16_ch.AccountReference16Ch = field(default=None, metadata={'dataclasses_json': { 'field_name': 'debtorAccount' }})
-    payment_information_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'paymentInformationId' }})
-    payments: List[paymentinitiationbulkelement_json.PaymentInitiationBulkElementJSON] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'payments' }})
-    requested_execution_date: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'requestedExecutionDate', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    transaction_status: Optional[transactionstatus_enum.TransactionStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'transactionStatus' }})
+    r"""BulkPaymentInitiationWithStatusResponse
+    Generic JSON response body consistion of the corresponding bulk payment initation JSON body together with an optional transaction status field.
+    
+    """
+    
+    debtor_account: AccountReference16Ch = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('debtorAccount') }})
+    payments: List[PaymentInitiationBulkElementJSON] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('payments') }})
+    acceptor_transaction_date_time: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('acceptorTransactionDateTime'), 'encoder': utils.datetimeisoformat(True), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    batch_booking_preferred: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('batchBookingPreferred') }})
+    payment_information_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('paymentInformationId') }})
+    requested_execution_date: Optional[date] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('requestedExecutionDate'), 'encoder': utils.dateisoformat(True), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    transaction_status: Optional[TransactionStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('transactionStatus') }})
     

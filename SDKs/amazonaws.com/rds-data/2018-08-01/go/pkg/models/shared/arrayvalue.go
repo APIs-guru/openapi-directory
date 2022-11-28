@@ -1,5 +1,7 @@
 package shared
 
+// ArrayValue
+// Contains an array.
 type ArrayValue struct {
 	ArrayValues   []ArrayValue `json:"arrayValues,omitempty"`
 	BooleanValues []bool       `json:"booleanValues,omitempty"`

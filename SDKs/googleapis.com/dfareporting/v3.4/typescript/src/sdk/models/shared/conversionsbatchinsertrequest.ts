@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Conversion } from "./conversion";
 import { EncryptionInfo } from "./encryptioninfo";
+
 
 
 // ConversionsBatchInsertRequest
@@ -9,12 +9,12 @@ import { EncryptionInfo } from "./encryptioninfo";
  * Insert Conversions Request.
 **/
 export class ConversionsBatchInsertRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=conversions", elemType: shared.Conversion })
+  @SpeakeasyMetadata({ data: "json, name=conversions", elemType: Conversion })
   conversions?: Conversion[];
 
-  @Metadata({ data: "json, name=encryptionInfo" })
+  @SpeakeasyMetadata({ data: "json, name=encryptionInfo" })
   encryptionInfo?: EncryptionInfo;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 }

@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DisassociateTrialComponentRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=TrialComponentName" })
+  @SpeakeasyMetadata({ data: "json, name=TrialComponentName" })
   trialComponentName: string;
 
-  @Metadata({ data: "json, name=TrialName" })
+  @SpeakeasyMetadata({ data: "json, name=TrialName" })
   trialName: string;
 }

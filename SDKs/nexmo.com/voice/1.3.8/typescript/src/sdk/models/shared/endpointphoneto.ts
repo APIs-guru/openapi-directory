@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // EndpointPhoneTo
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Connect to a Phone (PSTN) number
 **/
 export class EndpointPhoneTo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=dtmfAnswer" })
+  @SpeakeasyMetadata({ data: "json, name=dtmfAnswer" })
   dtmfAnswer?: string;
 
-  @Metadata({ data: "json, name=number" })
+  @SpeakeasyMetadata({ data: "json, name=number" })
   number: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type: string;
 }

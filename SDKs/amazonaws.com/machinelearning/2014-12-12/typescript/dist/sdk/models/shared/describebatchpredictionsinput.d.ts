@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { BatchPredictionFilterVariableEnum } from "./batchpredictionfiltervariableenum";
 import { SortOrderEnum } from "./sortorderenum";
 export declare class DescribeBatchPredictionsInput extends SpeakeasyBase {

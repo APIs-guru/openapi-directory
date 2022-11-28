@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // DeviceInPast
@@ -6,60 +7,60 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Container Class for the Web API. Conatinas the MeterValues in the Past
 **/
 export class DeviceInPast extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CounterReading" })
+  @SpeakeasyMetadata({ data: "json, name=CounterReading" })
   counterReading?: number;
 
-  @Metadata({ data: "json, name=CounterReadingExport" })
+  @SpeakeasyMetadata({ data: "json, name=CounterReadingExport" })
   counterReadingExport?: number;
 
-  @Metadata({ data: "json, name=CounterReadingExportT1" })
+  @SpeakeasyMetadata({ data: "json, name=CounterReadingExportT1" })
   counterReadingExportT1?: number;
 
-  @Metadata({ data: "json, name=CounterReadingExportT2" })
+  @SpeakeasyMetadata({ data: "json, name=CounterReadingExportT2" })
   counterReadingExportT2?: number;
 
-  @Metadata({ data: "json, name=CounterReadingExportT3" })
+  @SpeakeasyMetadata({ data: "json, name=CounterReadingExportT3" })
   counterReadingExportT3?: number;
 
-  @Metadata({ data: "json, name=CounterReadingExportT4" })
+  @SpeakeasyMetadata({ data: "json, name=CounterReadingExportT4" })
   counterReadingExportT4?: number;
 
-  @Metadata({ data: "json, name=CounterReadingImport" })
+  @SpeakeasyMetadata({ data: "json, name=CounterReadingImport" })
   counterReadingImport?: number;
 
-  @Metadata({ data: "json, name=CounterReadingImportT1" })
+  @SpeakeasyMetadata({ data: "json, name=CounterReadingImportT1" })
   counterReadingImportT1?: number;
 
-  @Metadata({ data: "json, name=CounterReadingImportT2" })
+  @SpeakeasyMetadata({ data: "json, name=CounterReadingImportT2" })
   counterReadingImportT2?: number;
 
-  @Metadata({ data: "json, name=CounterReadingImportT3" })
+  @SpeakeasyMetadata({ data: "json, name=CounterReadingImportT3" })
   counterReadingImportT3?: number;
 
-  @Metadata({ data: "json, name=CounterReadingImportT4" })
+  @SpeakeasyMetadata({ data: "json, name=CounterReadingImportT4" })
   counterReadingImportT4?: number;
 
-  @Metadata({ data: "json, name=CounterReadingT1" })
+  @SpeakeasyMetadata({ data: "json, name=CounterReadingT1" })
   counterReadingT1?: number;
 
-  @Metadata({ data: "json, name=CounterReadingT2" })
+  @SpeakeasyMetadata({ data: "json, name=CounterReadingT2" })
   counterReadingT2?: number;
 
-  @Metadata({ data: "json, name=CounterReadingT3" })
+  @SpeakeasyMetadata({ data: "json, name=CounterReadingT3" })
   counterReadingT3?: number;
 
-  @Metadata({ data: "json, name=CounterReadingT4" })
+  @SpeakeasyMetadata({ data: "json, name=CounterReadingT4" })
   counterReadingT4?: number;
 
-  @Metadata({ data: "json, name=CounterReadingUnit" })
+  @SpeakeasyMetadata({ data: "json, name=CounterReadingUnit" })
   counterReadingUnit?: string;
 
-  @Metadata({ data: "json, name=Date" })
+  @SpeakeasyMetadata({ data: "json, name=Date" })
   date?: Date;
 
-  @Metadata({ data: "json, name=Id" })
+  @SpeakeasyMetadata({ data: "json, name=Id" })
   id?: string;
 
-  @Metadata({ data: "json, name=Serial" })
+  @SpeakeasyMetadata({ data: "json, name=Serial" })
   serial?: number;
 }

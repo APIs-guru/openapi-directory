@@ -1,5 +1,7 @@
 package shared
 
+// Person
+// Object to represent a person.
 type Person struct {
 	EmailAddresses []EmailAddress `json:"emailAddresses,omitempty"`
 	Name           *string        `json:"name,omitempty"`

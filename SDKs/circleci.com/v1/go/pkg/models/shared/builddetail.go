@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// BuildDetail
+// previous build
 type BuildDetail struct {
 	AllCommitDetails        []CommitDetail `json:"all_commit_details,omitempty"`
 	Compare                 *string        `json:"compare,omitempty"`

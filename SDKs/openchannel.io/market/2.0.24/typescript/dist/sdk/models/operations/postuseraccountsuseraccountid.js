@@ -22,14 +22,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var PostUserAccountsUserAccountIdPathParams = /** @class */ (function (_super) {
     __extends(PostUserAccountsUserAccountIdPathParams, _super);
     function PostUserAccountsUserAccountIdPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=userAccountId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=userAccountId" }),
         __metadata("design:type", String)
     ], PostUserAccountsUserAccountIdPathParams.prototype, "userAccountId", void 0);
     return PostUserAccountsUserAccountIdPathParams;
@@ -41,19 +41,19 @@ var PostUserAccountsUserAccountIdQueryParams = /** @class */ (function (_super) 
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=customData" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=customData" }),
         __metadata("design:type", String)
     ], PostUserAccountsUserAccountIdQueryParams.prototype, "customData", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=email" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=email" }),
         __metadata("design:type", String)
     ], PostUserAccountsUserAccountIdQueryParams.prototype, "email", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=name" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=name" }),
         __metadata("design:type", String)
     ], PostUserAccountsUserAccountIdQueryParams.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=userId" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=userId" }),
         __metadata("design:type", String)
     ], PostUserAccountsUserAccountIdQueryParams.prototype, "userId", void 0);
     return PostUserAccountsUserAccountIdQueryParams;
@@ -65,11 +65,11 @@ var PostUserAccountsUserAccountIdRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PostUserAccountsUserAccountIdPathParams)
     ], PostUserAccountsUserAccountIdRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PostUserAccountsUserAccountIdQueryParams)
     ], PostUserAccountsUserAccountIdRequest.prototype, "queryParams", void 0);
     return PostUserAccountsUserAccountIdRequest;
@@ -81,15 +81,15 @@ var PostUserAccountsUserAccountIdResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], PostUserAccountsUserAccountIdResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], PostUserAccountsUserAccountIdResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], PostUserAccountsUserAccountIdResponse.prototype, "statusCode", void 0);
     return PostUserAccountsUserAccountIdResponse;

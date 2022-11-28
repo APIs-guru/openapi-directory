@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Cardinality } from "./cardinality";
+
 
 
 // EndCondition
@@ -7,6 +8,6 @@ import { Cardinality } from "./cardinality";
  * The condition that a Waiter resource is waiting for.
 **/
 export class EndCondition extends SpeakeasyBase {
-  @Metadata({ data: "json, name=cardinality" })
+  @SpeakeasyMetadata({ data: "json, name=cardinality" })
   cardinality?: Cardinality;
 }

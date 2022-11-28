@@ -1,27 +1,19 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class PostServersIdActionsChangeProtectionPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" })
   id: number;
 }
 
 
 export class PostServersIdActionsChangeProtectionRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=delete" })
+  @SpeakeasyMetadata({ data: "json, name=delete" })
   delete?: boolean;
 
-  @Metadata({ data: "json, name=rebuild" })
+  @SpeakeasyMetadata({ data: "json, name=rebuild" })
   rebuild?: boolean;
-}
-
-
-export class PostServersIdActionsChangeProtectionRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: PostServersIdActionsChangeProtectionPathParams;
-
-  @Metadata({ data: "request, media_type=application/json" })
-  request?: PostServersIdActionsChangeProtectionRequestBody;
 }
 
 
@@ -30,69 +22,78 @@ export class PostServersIdActionsChangeProtectionRequest extends SpeakeasyBase {
  * Error message for the Action if error occurred, otherwise null
 **/
 export class PostServersIdActionsChangeProtectionActionResponseActionError extends SpeakeasyBase {
-  @Metadata({ data: "json, name=code" })
+  @SpeakeasyMetadata({ data: "json, name=code" })
   code: string;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message: string;
 }
 
 
 export class PostServersIdActionsChangeProtectionActionResponseActionResources extends SpeakeasyBase {
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: number;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type: string;
 }
 
 export enum PostServersIdActionsChangeProtectionActionResponseActionStatusEnum {
-    Success = "success"
-,    Running = "running"
-,    Error = "error"
+    Success = "success",
+    Running = "running",
+    Error = "error"
 }
 
 
 export class PostServersIdActionsChangeProtectionActionResponseAction extends SpeakeasyBase {
-  @Metadata({ data: "json, name=command" })
+  @SpeakeasyMetadata({ data: "json, name=command" })
   command: string;
 
-  @Metadata({ data: "json, name=error" })
+  @SpeakeasyMetadata({ data: "json, name=error" })
   error: PostServersIdActionsChangeProtectionActionResponseActionError;
 
-  @Metadata({ data: "json, name=finished" })
+  @SpeakeasyMetadata({ data: "json, name=finished" })
   finished: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: number;
 
-  @Metadata({ data: "json, name=progress" })
+  @SpeakeasyMetadata({ data: "json, name=progress" })
   progress: number;
 
-  @Metadata({ data: "json, name=resources", elemType: operations.PostServersIdActionsChangeProtectionActionResponseActionResources })
+  @SpeakeasyMetadata({ data: "json, name=resources", elemType: PostServersIdActionsChangeProtectionActionResponseActionResources })
   resources: PostServersIdActionsChangeProtectionActionResponseActionResources[];
 
-  @Metadata({ data: "json, name=started" })
+  @SpeakeasyMetadata({ data: "json, name=started" })
   started: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status: PostServersIdActionsChangeProtectionActionResponseActionStatusEnum;
 }
 
 
 export class PostServersIdActionsChangeProtectionActionResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=action" })
+  @SpeakeasyMetadata({ data: "json, name=action" })
   action: PostServersIdActionsChangeProtectionActionResponseAction;
 }
 
 
+export class PostServersIdActionsChangeProtectionRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: PostServersIdActionsChangeProtectionPathParams;
+
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request?: PostServersIdActionsChangeProtectionRequestBody;
+}
+
+
 export class PostServersIdActionsChangeProtectionResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   actionResponse?: PostServersIdActionsChangeProtectionActionResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

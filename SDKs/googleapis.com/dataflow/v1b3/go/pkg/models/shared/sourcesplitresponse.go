@@ -8,6 +8,8 @@ const (
 	SourceSplitResponseOutcomeEnumSourceSplitOutcomeSplittingHappened SourceSplitResponseOutcomeEnum = "SOURCE_SPLIT_OUTCOME_SPLITTING_HAPPENED"
 )
 
+// SourceSplitResponse
+// The response to a SourceSplitRequest.
 type SourceSplitResponse struct {
 	Bundles []DerivedSource                 `json:"bundles,omitempty"`
 	Outcome *SourceSplitResponseOutcomeEnum `json:"outcome,omitempty"`

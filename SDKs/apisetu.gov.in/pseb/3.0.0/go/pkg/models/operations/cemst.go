@@ -29,11 +29,6 @@ type CemstSecurity struct {
 	ClientID shared.SchemeClientID `security:"scheme,type=apiKey,subtype=header"`
 }
 
-type CemstRequest struct {
-	Request  *CemstRequestBody `request:"mediaType=application/json"`
-	Security CemstSecurity
-}
-
 type Cemst400ApplicationJSONErrorEnum string
 
 const (
@@ -163,6 +158,11 @@ const (
 type Cemst504ApplicationJSON struct {
 	Error            *Cemst504ApplicationJSONErrorEnum            `json:"error,omitempty"`
 	ErrorDescription *Cemst504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
+}
+
+type CemstRequest struct {
+	Request  *CemstRequestBody `request:"mediaType=application/json"`
+	Security CemstSecurity
 }
 
 type CemstResponse struct {

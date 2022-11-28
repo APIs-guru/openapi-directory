@@ -1,11 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import googleclouddialogflowv2beta1intentfollowupintentinfo
-from . import googleclouddialogflowv2beta1intentmessage
-from . import googleclouddialogflowv2beta1context
-from . import googleclouddialogflowv2beta1intentparameter
-from . import googleclouddialogflowv2beta1intenttrainingphrase
+from sdk import utils
+from . import *
 
 class GoogleCloudDialogflowV2beta1IntentDefaultResponsePlatformsEnum(str, Enum):
     PLATFORM_UNSPECIFIED = "PLATFORM_UNSPECIFIED"
@@ -29,25 +27,57 @@ class GoogleCloudDialogflowV2beta1IntentWebhookStateEnum(str, Enum):
 @dataclass_json
 @dataclass
 class GoogleCloudDialogflowV2beta1Intent:
-    action: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'action' }})
-    default_response_platforms: Optional[List[GoogleCloudDialogflowV2beta1IntentDefaultResponsePlatformsEnum]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'defaultResponsePlatforms' }})
-    display_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'displayName' }})
-    end_interaction: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'endInteraction' }})
-    events: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'events' }})
-    followup_intent_info: Optional[List[googleclouddialogflowv2beta1intentfollowupintentinfo.GoogleCloudDialogflowV2beta1IntentFollowupIntentInfo]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'followupIntentInfo' }})
-    input_context_names: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'inputContextNames' }})
-    is_fallback: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'isFallback' }})
-    live_agent_handoff: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'liveAgentHandoff' }})
-    messages: Optional[List[googleclouddialogflowv2beta1intentmessage.GoogleCloudDialogflowV2beta1IntentMessage]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'messages' }})
-    ml_disabled: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'mlDisabled' }})
-    ml_enabled: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'mlEnabled' }})
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    output_contexts: Optional[List[googleclouddialogflowv2beta1context.GoogleCloudDialogflowV2beta1Context]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'outputContexts' }})
-    parameters: Optional[List[googleclouddialogflowv2beta1intentparameter.GoogleCloudDialogflowV2beta1IntentParameter]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'parameters' }})
-    parent_followup_intent_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'parentFollowupIntentName' }})
-    priority: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'priority' }})
-    reset_contexts: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'resetContexts' }})
-    root_followup_intent_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'rootFollowupIntentName' }})
-    training_phrases: Optional[List[googleclouddialogflowv2beta1intenttrainingphrase.GoogleCloudDialogflowV2beta1IntentTrainingPhrase]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'trainingPhrases' }})
-    webhook_state: Optional[GoogleCloudDialogflowV2beta1IntentWebhookStateEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'webhookState' }})
+    r"""GoogleCloudDialogflowV2beta1Intent
+    An intent categorizes an end-user's intention for one conversation turn. For each agent, you define many intents, where your combined intents can handle a complete conversation. When an end-user writes or says something, referred to as an end-user expression or end-user input, Dialogflow matches the end-user input to the best intent in your agent. Matching an intent is also known as intent classification. For more information, see the [intent guide](https://cloud.google.com/dialogflow/docs/intents-overview).
+    """
+    
+    action: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('action') }})
+    default_response_platforms: Optional[List[GoogleCloudDialogflowV2beta1IntentDefaultResponsePlatformsEnum]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('defaultResponsePlatforms') }})
+    display_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('displayName') }})
+    end_interaction: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('endInteraction') }})
+    events: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('events') }})
+    followup_intent_info: Optional[List[GoogleCloudDialogflowV2beta1IntentFollowupIntentInfo]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('followupIntentInfo') }})
+    input_context_names: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('inputContextNames') }})
+    is_fallback: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('isFallback') }})
+    live_agent_handoff: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('liveAgentHandoff') }})
+    messages: Optional[List[GoogleCloudDialogflowV2beta1IntentMessage]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('messages') }})
+    ml_disabled: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('mlDisabled') }})
+    ml_enabled: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('mlEnabled') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    output_contexts: Optional[List[GoogleCloudDialogflowV2beta1Context]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('outputContexts') }})
+    parameters: Optional[List[GoogleCloudDialogflowV2beta1IntentParameter]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('parameters') }})
+    parent_followup_intent_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('parentFollowupIntentName') }})
+    priority: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('priority') }})
+    reset_contexts: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('resetContexts') }})
+    root_followup_intent_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('rootFollowupIntentName') }})
+    training_phrases: Optional[List[GoogleCloudDialogflowV2beta1IntentTrainingPhrase]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('trainingPhrases') }})
+    webhook_state: Optional[GoogleCloudDialogflowV2beta1IntentWebhookStateEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('webhookState') }})
+    
+
+@dataclass_json
+@dataclass
+class GoogleCloudDialogflowV2beta1IntentInput:
+    r"""GoogleCloudDialogflowV2beta1IntentInput
+    An intent categorizes an end-user's intention for one conversation turn. For each agent, you define many intents, where your combined intents can handle a complete conversation. When an end-user writes or says something, referred to as an end-user expression or end-user input, Dialogflow matches the end-user input to the best intent in your agent. Matching an intent is also known as intent classification. For more information, see the [intent guide](https://cloud.google.com/dialogflow/docs/intents-overview).
+    """
+    
+    action: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('action') }})
+    default_response_platforms: Optional[List[GoogleCloudDialogflowV2beta1IntentDefaultResponsePlatformsEnum]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('defaultResponsePlatforms') }})
+    display_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('displayName') }})
+    end_interaction: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('endInteraction') }})
+    events: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('events') }})
+    input_context_names: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('inputContextNames') }})
+    is_fallback: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('isFallback') }})
+    live_agent_handoff: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('liveAgentHandoff') }})
+    messages: Optional[List[GoogleCloudDialogflowV2beta1IntentMessage]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('messages') }})
+    ml_disabled: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('mlDisabled') }})
+    ml_enabled: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('mlEnabled') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    output_contexts: Optional[List[GoogleCloudDialogflowV2beta1Context]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('outputContexts') }})
+    parameters: Optional[List[GoogleCloudDialogflowV2beta1IntentParameter]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('parameters') }})
+    parent_followup_intent_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('parentFollowupIntentName') }})
+    priority: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('priority') }})
+    reset_contexts: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('resetContexts') }})
+    training_phrases: Optional[List[GoogleCloudDialogflowV2beta1IntentTrainingPhrase]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('trainingPhrases') }})
+    webhook_state: Optional[GoogleCloudDialogflowV2beta1IntentWebhookStateEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('webhookState') }})
     

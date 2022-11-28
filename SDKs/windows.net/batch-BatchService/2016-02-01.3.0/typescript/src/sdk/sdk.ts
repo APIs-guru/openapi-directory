@@ -1,19 +1,14 @@
-import axios, { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
-import { MatchContentType } from "../internal/utils/contenttype";
+import axios, { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse, ParamsSerializerOptions } from "axios";
+import FormData from "form-data";
 import * as operations from "./models/operations";
-import { ParamsSerializerOptions } from "axios";
-import { GetQueryParamSerializer } from "../internal/utils/queryparams";
-import { SerializeRequestBody } from "../internal/utils/requestbody";
-import FormData from 'form-data';
-import {GetHeadersFromRequest} from "../internal/utils/headers";
-import {GetHeadersFromResponse} from "../internal/utils/headers";
-import { CreateSecurityClient } from "../internal/utils/security";
-import * as utils from "../internal/utils/utils";
+import * as utils from "../internal/utils";
+
+
 
 type OptsFunc = (sdk: SDK) => void;
 
-const Servers = [
-  "https://batch.core.windows.net",
+export const ServerList = [
+	"https://batch.core.windows.net",
 ] as const;
 
 export function WithServerURL(
@@ -24,47 +19,47 @@ export function WithServerURL(
     if (params != null) {
       serverURL = utils.ReplaceParameters(serverURL, params);
     }
-    sdk.serverURL = serverURL;
+    sdk._serverURL = serverURL;
   };
 }
 
 export function WithClient(client: AxiosInstance): OptsFunc {
   return (sdk: SDK) => {
-    sdk.defaultClient = client;
+    sdk._defaultClient = client;
   };
 }
 
 
 export class SDK {
-  defaultClient?: AxiosInstance;
-  securityClient?: AxiosInstance;
-  security?: any;
-  serverURL: string;
+
+  public _defaultClient: AxiosInstance;
+  public _securityClient: AxiosInstance;
+  
+  public _serverURL: string;
+  private _language = "typescript";
+  private _sdkVersion = "0.0.1";
+  private _genVersion = "internal";
 
   constructor(...opts: OptsFunc[]) {
     opts.forEach((o) => o(this));
-    if (this.serverURL == "") {
-      this.serverURL = Servers[0];
+    if (this._serverURL == "") {
+      this._serverURL = ServerList[0];
     }
 
-    if (!this.defaultClient) {
-      this.defaultClient = axios.create({ baseURL: this.serverURL });
+    if (!this._defaultClient) {
+      this._defaultClient = axios.create({ baseURL: this._serverURL });
     }
 
-    if (!this.securityClient) {
-      if (this.security) {
-        this.securityClient = CreateSecurityClient(
-          this.defaultClient,
-          this.security
-        );
-      } else {
-        this.securityClient = this.defaultClient;
-      }
+    if (!this._securityClient) {
+      this._securityClient = this._defaultClient;
     }
+    
   }
   
-  // AccountListNodeAgentSkus - Lists all node agent SKUs supported by the Azure Batch service.
-  AccountListNodeAgentSkus(
+  /**
+   * accountListNodeAgentSkus - Lists all node agent SKUs supported by the Azure Batch service.
+  **/
+  accountListNodeAgentSkus(
     req: operations.AccountListNodeAgentSkusRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.AccountListNodeAgentSkusResponse> {
@@ -72,13 +67,11 @@ export class SDK {
       req = new operations.AccountListNodeAgentSkusRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/nodeagentskus";
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...GetHeadersFromRequest(req.headers), ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;const headers = {...utils.GetHeadersFromRequest(req.headers), ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -87,22 +80,24 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
+        headers: headers,
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.AccountListNodeAgentSkusResponse = {statusCode: httpRes.status, contentType: contentType, headers: GetHeadersFromResponse(httpRes.headers)};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.AccountListNodeAgentSkusResponse = {statusCode: httpRes.status, contentType: contentType, headers: utils.GetHeadersFromResponse(httpRes.headers)};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.accountListNodeAgentSkusResult = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.batchError = httpRes?.data;
             }
             break;
@@ -114,8 +109,10 @@ export class SDK {
   }
 
   
-  // ApplicationGet - Gets information about the specified application.
-  ApplicationGet(
+  /**
+   * applicationGet - Gets information about the specified application.
+  **/
+  applicationGet(
     req: operations.ApplicationGetRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.ApplicationGetResponse> {
@@ -123,13 +120,11 @@ export class SDK {
       req = new operations.ApplicationGetRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/applications/{applicationId}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...GetHeadersFromRequest(req.headers), ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;const headers = {...utils.GetHeadersFromRequest(req.headers), ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -138,22 +133,24 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
+        headers: headers,
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.ApplicationGetResponse = {statusCode: httpRes.status, contentType: contentType, headers: GetHeadersFromResponse(httpRes.headers)};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.ApplicationGetResponse = {statusCode: httpRes.status, contentType: contentType, headers: utils.GetHeadersFromResponse(httpRes.headers)};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.applicationSummary = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.batchError = httpRes?.data;
             }
             break;
@@ -165,8 +162,10 @@ export class SDK {
   }
 
   
-  // ApplicationList - Lists all of the applications available in the specified account.
-  ApplicationList(
+  /**
+   * applicationList - Lists all of the applications available in the specified account.
+  **/
+  applicationList(
     req: operations.ApplicationListRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.ApplicationListResponse> {
@@ -174,13 +173,11 @@ export class SDK {
       req = new operations.ApplicationListRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/applications";
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...GetHeadersFromRequest(req.headers), ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;const headers = {...utils.GetHeadersFromRequest(req.headers), ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -189,22 +186,24 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
+        headers: headers,
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.ApplicationListResponse = {statusCode: httpRes.status, contentType: contentType, headers: GetHeadersFromResponse(httpRes.headers)};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.ApplicationListResponse = {statusCode: httpRes.status, contentType: contentType, headers: utils.GetHeadersFromResponse(httpRes.headers)};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.applicationListResult = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.batchError = httpRes?.data;
             }
             break;
@@ -216,8 +215,10 @@ export class SDK {
   }
 
   
-  // CertificateAdd - Adds a certificate to the specified account.
-  CertificateAdd(
+  /**
+   * certificateAdd - Adds a certificate to the specified account.
+  **/
+  certificateAdd(
     req: operations.CertificateAddRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.CertificateAddResponse> {
@@ -225,23 +226,21 @@ export class SDK {
       req = new operations.CertificateAddRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/certificates";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -252,24 +251,24 @@ export class SDK {
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CertificateAddResponse = {statusCode: httpRes.status, contentType: contentType, headers: GetHeadersFromResponse(httpRes.headers)};
-        switch (httpRes?.status) {
-          case 201:
+        const res: operations.CertificateAddResponse = {statusCode: httpRes.status, contentType: contentType, headers: utils.GetHeadersFromResponse(httpRes.headers)};
+        switch (true) {
+          case httpRes?.status == 201:
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.batchError = httpRes?.data;
             }
             break;
@@ -281,8 +280,10 @@ export class SDK {
   }
 
   
-  // CertificateCancelDeletion - Cancels a failed deletion of a certificate from the specified account.
-  CertificateCancelDeletion(
+  /**
+   * certificateCancelDeletion - Cancels a failed deletion of a certificate from the specified account.
+  **/
+  certificateCancelDeletion(
     req: operations.CertificateCancelDeletionRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.CertificateCancelDeletionResponse> {
@@ -290,13 +291,11 @@ export class SDK {
       req = new operations.CertificateCancelDeletionRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/certificates(thumbprintAlgorithm={thumbprintAlgorithm},thumbprint={thumbprint})/canceldelete", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...GetHeadersFromRequest(req.headers), ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;const headers = {...utils.GetHeadersFromRequest(req.headers), ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -305,19 +304,21 @@ export class SDK {
     };
     
     return client
-      .post(url, {
+      .request({
+        url: url,
+        method: "post",
+        headers: headers,
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CertificateCancelDeletionResponse = {statusCode: httpRes.status, contentType: contentType, headers: GetHeadersFromResponse(httpRes.headers)};
-        switch (httpRes?.status) {
-          case 204:
+        const res: operations.CertificateCancelDeletionResponse = {statusCode: httpRes.status, contentType: contentType, headers: utils.GetHeadersFromResponse(httpRes.headers)};
+        switch (true) {
+          case httpRes?.status == 204:
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.batchError = httpRes?.data;
             }
             break;
@@ -329,8 +330,10 @@ export class SDK {
   }
 
   
-  // CertificateDelete - Deletes a certificate from the specified account.
-  CertificateDelete(
+  /**
+   * certificateDelete - Deletes a certificate from the specified account.
+  **/
+  certificateDelete(
     req: operations.CertificateDeleteRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.CertificateDeleteResponse> {
@@ -338,13 +341,11 @@ export class SDK {
       req = new operations.CertificateDeleteRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/certificates(thumbprintAlgorithm={thumbprintAlgorithm},thumbprint={thumbprint})", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...GetHeadersFromRequest(req.headers), ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;const headers = {...utils.GetHeadersFromRequest(req.headers), ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -353,19 +354,21 @@ export class SDK {
     };
     
     return client
-      .delete(url, {
+      .request({
+        url: url,
+        method: "delete",
+        headers: headers,
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CertificateDeleteResponse = {statusCode: httpRes.status, contentType: contentType, headers: GetHeadersFromResponse(httpRes.headers)};
-        switch (httpRes?.status) {
-          case 202:
+        const res: operations.CertificateDeleteResponse = {statusCode: httpRes.status, contentType: contentType, headers: utils.GetHeadersFromResponse(httpRes.headers)};
+        switch (true) {
+          case httpRes?.status == 202:
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.batchError = httpRes?.data;
             }
             break;
@@ -377,8 +380,10 @@ export class SDK {
   }
 
   
-  // CertificateGet - Gets information about the specified certificate.
-  CertificateGet(
+  /**
+   * certificateGet - Gets information about the specified certificate.
+  **/
+  certificateGet(
     req: operations.CertificateGetRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.CertificateGetResponse> {
@@ -386,13 +391,11 @@ export class SDK {
       req = new operations.CertificateGetRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/certificates(thumbprintAlgorithm={thumbprintAlgorithm},thumbprint={thumbprint})", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...GetHeadersFromRequest(req.headers), ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;const headers = {...utils.GetHeadersFromRequest(req.headers), ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -401,22 +404,24 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
+        headers: headers,
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CertificateGetResponse = {statusCode: httpRes.status, contentType: contentType, headers: GetHeadersFromResponse(httpRes.headers)};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.CertificateGetResponse = {statusCode: httpRes.status, contentType: contentType, headers: utils.GetHeadersFromResponse(httpRes.headers)};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.certificate = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.batchError = httpRes?.data;
             }
             break;
@@ -428,8 +433,10 @@ export class SDK {
   }
 
   
-  // CertificateList - Lists all of the certificates that have been added to the specified account.
-  CertificateList(
+  /**
+   * certificateList - Lists all of the certificates that have been added to the specified account.
+  **/
+  certificateList(
     req: operations.CertificateListRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.CertificateListResponse> {
@@ -437,13 +444,11 @@ export class SDK {
       req = new operations.CertificateListRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/certificates";
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...GetHeadersFromRequest(req.headers), ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;const headers = {...utils.GetHeadersFromRequest(req.headers), ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -452,22 +457,24 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
+        headers: headers,
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CertificateListResponse = {statusCode: httpRes.status, contentType: contentType, headers: GetHeadersFromResponse(httpRes.headers)};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.CertificateListResponse = {statusCode: httpRes.status, contentType: contentType, headers: utils.GetHeadersFromResponse(httpRes.headers)};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.certificateListResult = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.batchError = httpRes?.data;
             }
             break;
@@ -479,8 +486,10 @@ export class SDK {
   }
 
   
-  // ComputeNodeAddUser - Adds a user account to the specified compute node.
-  ComputeNodeAddUser(
+  /**
+   * computeNodeAddUser - Adds a user account to the specified compute node.
+  **/
+  computeNodeAddUser(
     req: operations.ComputeNodeAddUserRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.ComputeNodeAddUserResponse> {
@@ -488,23 +497,21 @@ export class SDK {
       req = new operations.ComputeNodeAddUserRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/pools/{poolId}/nodes/{nodeId}/users", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -515,24 +522,24 @@ export class SDK {
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.ComputeNodeAddUserResponse = {statusCode: httpRes.status, contentType: contentType, headers: GetHeadersFromResponse(httpRes.headers)};
-        switch (httpRes?.status) {
-          case 201:
+        const res: operations.ComputeNodeAddUserResponse = {statusCode: httpRes.status, contentType: contentType, headers: utils.GetHeadersFromResponse(httpRes.headers)};
+        switch (true) {
+          case httpRes?.status == 201:
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.batchError = httpRes?.data;
             }
             break;
@@ -544,8 +551,10 @@ export class SDK {
   }
 
   
-  // ComputeNodeDeleteUser - Deletes a user account from the specified compute node.
-  ComputeNodeDeleteUser(
+  /**
+   * computeNodeDeleteUser - Deletes a user account from the specified compute node.
+  **/
+  computeNodeDeleteUser(
     req: operations.ComputeNodeDeleteUserRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.ComputeNodeDeleteUserResponse> {
@@ -553,13 +562,11 @@ export class SDK {
       req = new operations.ComputeNodeDeleteUserRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/pools/{poolId}/nodes/{nodeId}/users/{userName}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...GetHeadersFromRequest(req.headers), ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;const headers = {...utils.GetHeadersFromRequest(req.headers), ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -568,19 +575,21 @@ export class SDK {
     };
     
     return client
-      .delete(url, {
+      .request({
+        url: url,
+        method: "delete",
+        headers: headers,
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.ComputeNodeDeleteUserResponse = {statusCode: httpRes.status, contentType: contentType, headers: GetHeadersFromResponse(httpRes.headers)};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.ComputeNodeDeleteUserResponse = {statusCode: httpRes.status, contentType: contentType, headers: utils.GetHeadersFromResponse(httpRes.headers)};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.batchError = httpRes?.data;
             }
             break;
@@ -592,8 +601,10 @@ export class SDK {
   }
 
   
-  // ComputeNodeDisableScheduling - Disable task scheduling of the specified compute node.
-  ComputeNodeDisableScheduling(
+  /**
+   * computeNodeDisableScheduling - Disable task scheduling of the specified compute node.
+  **/
+  computeNodeDisableScheduling(
     req: operations.ComputeNodeDisableSchedulingRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.ComputeNodeDisableSchedulingResponse> {
@@ -601,23 +612,21 @@ export class SDK {
       req = new operations.ComputeNodeDisableSchedulingRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/pools/{poolId}/nodes/{nodeId}/disablescheduling", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -628,22 +637,23 @@ export class SDK {
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.ComputeNodeDisableSchedulingResponse = {statusCode: httpRes.status, contentType: contentType, headers: GetHeadersFromResponse(httpRes.headers)};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.ComputeNodeDisableSchedulingResponse = {statusCode: httpRes.status, contentType: contentType, headers: utils.GetHeadersFromResponse(httpRes.headers)};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.batchError = httpRes?.data;
             }
             break;
@@ -655,8 +665,10 @@ export class SDK {
   }
 
   
-  // ComputeNodeEnableScheduling - Enable task scheduling of the specified compute node.
-  ComputeNodeEnableScheduling(
+  /**
+   * computeNodeEnableScheduling - Enable task scheduling of the specified compute node.
+  **/
+  computeNodeEnableScheduling(
     req: operations.ComputeNodeEnableSchedulingRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.ComputeNodeEnableSchedulingResponse> {
@@ -664,13 +676,11 @@ export class SDK {
       req = new operations.ComputeNodeEnableSchedulingRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/pools/{poolId}/nodes/{nodeId}/enablescheduling", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...GetHeadersFromRequest(req.headers), ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;const headers = {...utils.GetHeadersFromRequest(req.headers), ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -679,19 +689,21 @@ export class SDK {
     };
     
     return client
-      .post(url, {
+      .request({
+        url: url,
+        method: "post",
+        headers: headers,
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.ComputeNodeEnableSchedulingResponse = {statusCode: httpRes.status, contentType: contentType, headers: GetHeadersFromResponse(httpRes.headers)};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.ComputeNodeEnableSchedulingResponse = {statusCode: httpRes.status, contentType: contentType, headers: utils.GetHeadersFromResponse(httpRes.headers)};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.batchError = httpRes?.data;
             }
             break;
@@ -703,8 +715,10 @@ export class SDK {
   }
 
   
-  // ComputeNodeGet - Gets information about the specified compute node.
-  ComputeNodeGet(
+  /**
+   * computeNodeGet - Gets information about the specified compute node.
+  **/
+  computeNodeGet(
     req: operations.ComputeNodeGetRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.ComputeNodeGetResponse> {
@@ -712,13 +726,11 @@ export class SDK {
       req = new operations.ComputeNodeGetRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/pools/{poolId}/nodes/{nodeId}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...GetHeadersFromRequest(req.headers), ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;const headers = {...utils.GetHeadersFromRequest(req.headers), ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -727,22 +739,24 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
+        headers: headers,
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.ComputeNodeGetResponse = {statusCode: httpRes.status, contentType: contentType, headers: GetHeadersFromResponse(httpRes.headers)};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.ComputeNodeGetResponse = {statusCode: httpRes.status, contentType: contentType, headers: utils.GetHeadersFromResponse(httpRes.headers)};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.computeNode = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.batchError = httpRes?.data;
             }
             break;
@@ -754,8 +768,10 @@ export class SDK {
   }
 
   
-  // ComputeNodeGetRemoteDesktop - Gets the Remote Desktop Protocol file for the specified compute node.
-  ComputeNodeGetRemoteDesktop(
+  /**
+   * computeNodeGetRemoteDesktop - Gets the Remote Desktop Protocol file for the specified compute node.
+  **/
+  computeNodeGetRemoteDesktop(
     req: operations.ComputeNodeGetRemoteDesktopRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.ComputeNodeGetRemoteDesktopResponse> {
@@ -763,13 +779,11 @@ export class SDK {
       req = new operations.ComputeNodeGetRemoteDesktopRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/pools/{poolId}/nodes/{nodeId}/rdp", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...GetHeadersFromRequest(req.headers), ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;const headers = {...utils.GetHeadersFromRequest(req.headers), ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -778,22 +792,24 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
+        headers: headers,
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.ComputeNodeGetRemoteDesktopResponse = {statusCode: httpRes.status, contentType: contentType, headers: GetHeadersFromResponse(httpRes.headers)};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.ComputeNodeGetRemoteDesktopResponse = {statusCode: httpRes.status, contentType: contentType, headers: utils.GetHeadersFromResponse(httpRes.headers)};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.computeNodeGetRemoteDesktop200ApplicationJsonBinaryString = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.batchError = httpRes?.data;
             }
             break;
@@ -805,8 +821,10 @@ export class SDK {
   }
 
   
-  // ComputeNodeGetRemoteLoginSettings - Gets the settings required for remote login to a compute node.
-  ComputeNodeGetRemoteLoginSettings(
+  /**
+   * computeNodeGetRemoteLoginSettings - Gets the settings required for remote login to a compute node.
+  **/
+  computeNodeGetRemoteLoginSettings(
     req: operations.ComputeNodeGetRemoteLoginSettingsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.ComputeNodeGetRemoteLoginSettingsResponse> {
@@ -814,13 +832,11 @@ export class SDK {
       req = new operations.ComputeNodeGetRemoteLoginSettingsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/pools/{poolId}/nodes/{nodeId}/remoteloginsettings", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...GetHeadersFromRequest(req.headers), ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;const headers = {...utils.GetHeadersFromRequest(req.headers), ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -829,22 +845,24 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
+        headers: headers,
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.ComputeNodeGetRemoteLoginSettingsResponse = {statusCode: httpRes.status, contentType: contentType, headers: GetHeadersFromResponse(httpRes.headers)};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.ComputeNodeGetRemoteLoginSettingsResponse = {statusCode: httpRes.status, contentType: contentType, headers: utils.GetHeadersFromResponse(httpRes.headers)};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.computeNodeGetRemoteLoginSettingsResult = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.batchError = httpRes?.data;
             }
             break;
@@ -856,8 +874,10 @@ export class SDK {
   }
 
   
-  // ComputeNodeList - Lists the compute nodes in the specified pool.
-  ComputeNodeList(
+  /**
+   * computeNodeList - Lists the compute nodes in the specified pool.
+  **/
+  computeNodeList(
     req: operations.ComputeNodeListRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.ComputeNodeListResponse> {
@@ -865,13 +885,11 @@ export class SDK {
       req = new operations.ComputeNodeListRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/pools/{poolId}/nodes", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...GetHeadersFromRequest(req.headers), ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;const headers = {...utils.GetHeadersFromRequest(req.headers), ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -880,22 +898,24 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
+        headers: headers,
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.ComputeNodeListResponse = {statusCode: httpRes.status, contentType: contentType, headers: GetHeadersFromResponse(httpRes.headers)};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.ComputeNodeListResponse = {statusCode: httpRes.status, contentType: contentType, headers: utils.GetHeadersFromResponse(httpRes.headers)};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.computeNodeListResult = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.batchError = httpRes?.data;
             }
             break;
@@ -907,8 +927,10 @@ export class SDK {
   }
 
   
-  // ComputeNodeReboot - Restarts the specified compute node.
-  ComputeNodeReboot(
+  /**
+   * computeNodeReboot - Restarts the specified compute node.
+  **/
+  computeNodeReboot(
     req: operations.ComputeNodeRebootRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.ComputeNodeRebootResponse> {
@@ -916,23 +938,21 @@ export class SDK {
       req = new operations.ComputeNodeRebootRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/pools/{poolId}/nodes/{nodeId}/reboot", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -943,22 +963,23 @@ export class SDK {
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.ComputeNodeRebootResponse = {statusCode: httpRes.status, contentType: contentType, headers: GetHeadersFromResponse(httpRes.headers)};
-        switch (httpRes?.status) {
-          case 202:
+        const res: operations.ComputeNodeRebootResponse = {statusCode: httpRes.status, contentType: contentType, headers: utils.GetHeadersFromResponse(httpRes.headers)};
+        switch (true) {
+          case httpRes?.status == 202:
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.batchError = httpRes?.data;
             }
             break;
@@ -970,8 +991,10 @@ export class SDK {
   }
 
   
-  // ComputeNodeReimage - Reinstalls the operating system on the specified compute node.
-  ComputeNodeReimage(
+  /**
+   * computeNodeReimage - Reinstalls the operating system on the specified compute node.
+  **/
+  computeNodeReimage(
     req: operations.ComputeNodeReimageRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.ComputeNodeReimageResponse> {
@@ -979,23 +1002,21 @@ export class SDK {
       req = new operations.ComputeNodeReimageRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/pools/{poolId}/nodes/{nodeId}/reimage", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -1006,22 +1027,23 @@ export class SDK {
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.ComputeNodeReimageResponse = {statusCode: httpRes.status, contentType: contentType, headers: GetHeadersFromResponse(httpRes.headers)};
-        switch (httpRes?.status) {
-          case 202:
+        const res: operations.ComputeNodeReimageResponse = {statusCode: httpRes.status, contentType: contentType, headers: utils.GetHeadersFromResponse(httpRes.headers)};
+        switch (true) {
+          case httpRes?.status == 202:
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.batchError = httpRes?.data;
             }
             break;
@@ -1033,8 +1055,10 @@ export class SDK {
   }
 
   
-  // ComputeNodeUpdateUser - Updates the password or expiration time of a user account on the specified compute node.
-  ComputeNodeUpdateUser(
+  /**
+   * computeNodeUpdateUser - Updates the password or expiration time of a user account on the specified compute node.
+  **/
+  computeNodeUpdateUser(
     req: operations.ComputeNodeUpdateUserRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.ComputeNodeUpdateUserResponse> {
@@ -1042,23 +1066,21 @@ export class SDK {
       req = new operations.ComputeNodeUpdateUserRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/pools/{poolId}/nodes/{nodeId}/users/{userName}", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -1069,24 +1091,24 @@ export class SDK {
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .put(url, body, {
+      .request({
+        url: url,
+        method: "put",
         headers: headers,
+        data: body, 
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.ComputeNodeUpdateUserResponse = {statusCode: httpRes.status, contentType: contentType, headers: GetHeadersFromResponse(httpRes.headers)};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.ComputeNodeUpdateUserResponse = {statusCode: httpRes.status, contentType: contentType, headers: utils.GetHeadersFromResponse(httpRes.headers)};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.batchError = httpRes?.data;
             }
             break;
@@ -1098,8 +1120,10 @@ export class SDK {
   }
 
   
-  // FileDeleteFromComputeNode - Deletes the specified task file from the compute node.
-  FileDeleteFromComputeNode(
+  /**
+   * fileDeleteFromComputeNode - Deletes the specified task file from the compute node.
+  **/
+  fileDeleteFromComputeNode(
     req: operations.FileDeleteFromComputeNodeRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.FileDeleteFromComputeNodeResponse> {
@@ -1107,13 +1131,11 @@ export class SDK {
       req = new operations.FileDeleteFromComputeNodeRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/pools/{poolId}/nodes/{nodeId}/files/{fileName}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...GetHeadersFromRequest(req.headers), ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;const headers = {...utils.GetHeadersFromRequest(req.headers), ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -1122,19 +1144,21 @@ export class SDK {
     };
     
     return client
-      .delete(url, {
+      .request({
+        url: url,
+        method: "delete",
+        headers: headers,
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.FileDeleteFromComputeNodeResponse = {statusCode: httpRes.status, contentType: contentType, headers: GetHeadersFromResponse(httpRes.headers)};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.FileDeleteFromComputeNodeResponse = {statusCode: httpRes.status, contentType: contentType, headers: utils.GetHeadersFromResponse(httpRes.headers)};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.batchError = httpRes?.data;
             }
             break;
@@ -1146,8 +1170,10 @@ export class SDK {
   }
 
   
-  // FileDeleteFromTask - Deletes the specified task file from the compute node where the task ran.
-  FileDeleteFromTask(
+  /**
+   * fileDeleteFromTask - Deletes the specified task file from the compute node where the task ran.
+  **/
+  fileDeleteFromTask(
     req: operations.FileDeleteFromTaskRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.FileDeleteFromTaskResponse> {
@@ -1155,13 +1181,11 @@ export class SDK {
       req = new operations.FileDeleteFromTaskRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/jobs/{jobId}/tasks/{taskId}/files/{fileName}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...GetHeadersFromRequest(req.headers), ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;const headers = {...utils.GetHeadersFromRequest(req.headers), ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -1170,19 +1194,21 @@ export class SDK {
     };
     
     return client
-      .delete(url, {
+      .request({
+        url: url,
+        method: "delete",
+        headers: headers,
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.FileDeleteFromTaskResponse = {statusCode: httpRes.status, contentType: contentType, headers: GetHeadersFromResponse(httpRes.headers)};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.FileDeleteFromTaskResponse = {statusCode: httpRes.status, contentType: contentType, headers: utils.GetHeadersFromResponse(httpRes.headers)};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.batchError = httpRes?.data;
             }
             break;
@@ -1194,8 +1220,10 @@ export class SDK {
   }
 
   
-  // FileGetFromComputeNode - Returns the content of the specified task file.
-  FileGetFromComputeNode(
+  /**
+   * fileGetFromComputeNode - Returns the content of the specified task file.
+  **/
+  fileGetFromComputeNode(
     req: operations.FileGetFromComputeNodeRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.FileGetFromComputeNodeResponse> {
@@ -1203,13 +1231,11 @@ export class SDK {
       req = new operations.FileGetFromComputeNodeRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/pools/{poolId}/nodes/{nodeId}/files/{fileName}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...GetHeadersFromRequest(req.headers), ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;const headers = {...utils.GetHeadersFromRequest(req.headers), ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -1218,22 +1244,24 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
+        headers: headers,
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.FileGetFromComputeNodeResponse = {statusCode: httpRes.status, contentType: contentType, headers: GetHeadersFromResponse(httpRes.headers)};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.FileGetFromComputeNodeResponse = {statusCode: httpRes.status, contentType: contentType, headers: utils.GetHeadersFromResponse(httpRes.headers)};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.fileGetFromComputeNode200ApplicationJsonBinaryString = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.batchError = httpRes?.data;
             }
             break;
@@ -1245,8 +1273,10 @@ export class SDK {
   }
 
   
-  // FileGetFromTask - Returns the content of the specified task file.
-  FileGetFromTask(
+  /**
+   * fileGetFromTask - Returns the content of the specified task file.
+  **/
+  fileGetFromTask(
     req: operations.FileGetFromTaskRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.FileGetFromTaskResponse> {
@@ -1254,13 +1284,11 @@ export class SDK {
       req = new operations.FileGetFromTaskRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/jobs/{jobId}/tasks/{taskId}/files/{fileName}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...GetHeadersFromRequest(req.headers), ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;const headers = {...utils.GetHeadersFromRequest(req.headers), ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -1269,22 +1297,24 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
+        headers: headers,
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.FileGetFromTaskResponse = {statusCode: httpRes.status, contentType: contentType, headers: GetHeadersFromResponse(httpRes.headers)};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.FileGetFromTaskResponse = {statusCode: httpRes.status, contentType: contentType, headers: utils.GetHeadersFromResponse(httpRes.headers)};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.fileGetFromTask200ApplicationJsonBinaryString = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.batchError = httpRes?.data;
             }
             break;
@@ -1296,8 +1326,10 @@ export class SDK {
   }
 
   
-  // FileGetNodeFilePropertiesFromComputeNode - Gets the properties of the specified compute node file.
-  FileGetNodeFilePropertiesFromComputeNode(
+  /**
+   * fileGetNodeFilePropertiesFromComputeNode - Gets the properties of the specified compute node file.
+  **/
+  fileGetNodeFilePropertiesFromComputeNode(
     req: operations.FileGetNodeFilePropertiesFromComputeNodeRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.FileGetNodeFilePropertiesFromComputeNodeResponse> {
@@ -1305,13 +1337,11 @@ export class SDK {
       req = new operations.FileGetNodeFilePropertiesFromComputeNodeRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/pools/{poolId}/nodes/{nodeId}/files/{fileName}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...GetHeadersFromRequest(req.headers), ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;const headers = {...utils.GetHeadersFromRequest(req.headers), ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -1320,19 +1350,21 @@ export class SDK {
     };
     
     return client
-      .head(url, {
+      .request({
+        url: url,
+        method: "head",
+        headers: headers,
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.FileGetNodeFilePropertiesFromComputeNodeResponse = {statusCode: httpRes.status, contentType: contentType, headers: GetHeadersFromResponse(httpRes.headers)};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.FileGetNodeFilePropertiesFromComputeNodeResponse = {statusCode: httpRes.status, contentType: contentType, headers: utils.GetHeadersFromResponse(httpRes.headers)};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.batchError = httpRes?.data;
             }
             break;
@@ -1344,8 +1376,10 @@ export class SDK {
   }
 
   
-  // FileGetNodeFilePropertiesFromTask - Gets the properties of the specified task file.
-  FileGetNodeFilePropertiesFromTask(
+  /**
+   * fileGetNodeFilePropertiesFromTask - Gets the properties of the specified task file.
+  **/
+  fileGetNodeFilePropertiesFromTask(
     req: operations.FileGetNodeFilePropertiesFromTaskRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.FileGetNodeFilePropertiesFromTaskResponse> {
@@ -1353,13 +1387,11 @@ export class SDK {
       req = new operations.FileGetNodeFilePropertiesFromTaskRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/jobs/{jobId}/tasks/{taskId}/files/{fileName}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...GetHeadersFromRequest(req.headers), ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;const headers = {...utils.GetHeadersFromRequest(req.headers), ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -1368,19 +1400,21 @@ export class SDK {
     };
     
     return client
-      .head(url, {
+      .request({
+        url: url,
+        method: "head",
+        headers: headers,
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.FileGetNodeFilePropertiesFromTaskResponse = {statusCode: httpRes.status, contentType: contentType, headers: GetHeadersFromResponse(httpRes.headers)};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.FileGetNodeFilePropertiesFromTaskResponse = {statusCode: httpRes.status, contentType: contentType, headers: utils.GetHeadersFromResponse(httpRes.headers)};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.batchError = httpRes?.data;
             }
             break;
@@ -1392,8 +1426,10 @@ export class SDK {
   }
 
   
-  // FileListFromComputeNode - Lists all of the files in task directories on the specified compute node.
-  FileListFromComputeNode(
+  /**
+   * fileListFromComputeNode - Lists all of the files in task directories on the specified compute node.
+  **/
+  fileListFromComputeNode(
     req: operations.FileListFromComputeNodeRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.FileListFromComputeNodeResponse> {
@@ -1401,13 +1437,11 @@ export class SDK {
       req = new operations.FileListFromComputeNodeRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/pools/{poolId}/nodes/{nodeId}/files", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...GetHeadersFromRequest(req.headers), ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;const headers = {...utils.GetHeadersFromRequest(req.headers), ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -1416,22 +1450,24 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
+        headers: headers,
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.FileListFromComputeNodeResponse = {statusCode: httpRes.status, contentType: contentType, headers: GetHeadersFromResponse(httpRes.headers)};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.FileListFromComputeNodeResponse = {statusCode: httpRes.status, contentType: contentType, headers: utils.GetHeadersFromResponse(httpRes.headers)};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.nodeFileListResult = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.batchError = httpRes?.data;
             }
             break;
@@ -1443,8 +1479,10 @@ export class SDK {
   }
 
   
-  // FileListFromTask - Lists the files in a task's directory on its compute node.
-  FileListFromTask(
+  /**
+   * fileListFromTask - Lists the files in a task's directory on its compute node.
+  **/
+  fileListFromTask(
     req: operations.FileListFromTaskRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.FileListFromTaskResponse> {
@@ -1452,13 +1490,11 @@ export class SDK {
       req = new operations.FileListFromTaskRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/jobs/{jobId}/tasks/{taskId}/files", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...GetHeadersFromRequest(req.headers), ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;const headers = {...utils.GetHeadersFromRequest(req.headers), ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -1467,22 +1503,24 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
+        headers: headers,
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.FileListFromTaskResponse = {statusCode: httpRes.status, contentType: contentType, headers: GetHeadersFromResponse(httpRes.headers)};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.FileListFromTaskResponse = {statusCode: httpRes.status, contentType: contentType, headers: utils.GetHeadersFromResponse(httpRes.headers)};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.nodeFileListResult = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.batchError = httpRes?.data;
             }
             break;
@@ -1494,8 +1532,10 @@ export class SDK {
   }
 
   
-  // JobScheduleAdd - Adds a job schedule to the specified account.
-  JobScheduleAdd(
+  /**
+   * jobScheduleAdd - Adds a job schedule to the specified account.
+  **/
+  jobScheduleAdd(
     req: operations.JobScheduleAddRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.JobScheduleAddResponse> {
@@ -1503,23 +1543,21 @@ export class SDK {
       req = new operations.JobScheduleAddRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/jobschedules";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -1530,24 +1568,24 @@ export class SDK {
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.JobScheduleAddResponse = {statusCode: httpRes.status, contentType: contentType, headers: GetHeadersFromResponse(httpRes.headers)};
-        switch (httpRes?.status) {
-          case 201:
+        const res: operations.JobScheduleAddResponse = {statusCode: httpRes.status, contentType: contentType, headers: utils.GetHeadersFromResponse(httpRes.headers)};
+        switch (true) {
+          case httpRes?.status == 201:
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.batchError = httpRes?.data;
             }
             break;
@@ -1559,8 +1597,10 @@ export class SDK {
   }
 
   
-  // JobScheduleDelete - Deletes a job schedule from the specified account.
-  JobScheduleDelete(
+  /**
+   * jobScheduleDelete - Deletes a job schedule from the specified account.
+  **/
+  jobScheduleDelete(
     req: operations.JobScheduleDeleteRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.JobScheduleDeleteResponse> {
@@ -1568,13 +1608,11 @@ export class SDK {
       req = new operations.JobScheduleDeleteRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/jobschedules/{jobScheduleId}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...GetHeadersFromRequest(req.headers), ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;const headers = {...utils.GetHeadersFromRequest(req.headers), ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -1583,19 +1621,21 @@ export class SDK {
     };
     
     return client
-      .delete(url, {
+      .request({
+        url: url,
+        method: "delete",
+        headers: headers,
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.JobScheduleDeleteResponse = {statusCode: httpRes.status, contentType: contentType, headers: GetHeadersFromResponse(httpRes.headers)};
-        switch (httpRes?.status) {
-          case 202:
+        const res: operations.JobScheduleDeleteResponse = {statusCode: httpRes.status, contentType: contentType, headers: utils.GetHeadersFromResponse(httpRes.headers)};
+        switch (true) {
+          case httpRes?.status == 202:
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.batchError = httpRes?.data;
             }
             break;
@@ -1607,8 +1647,10 @@ export class SDK {
   }
 
   
-  // JobScheduleDisable - Disables a job schedule.
-  JobScheduleDisable(
+  /**
+   * jobScheduleDisable - Disables a job schedule.
+  **/
+  jobScheduleDisable(
     req: operations.JobScheduleDisableRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.JobScheduleDisableResponse> {
@@ -1616,13 +1658,11 @@ export class SDK {
       req = new operations.JobScheduleDisableRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/jobschedules/{jobScheduleId}/disable", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...GetHeadersFromRequest(req.headers), ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;const headers = {...utils.GetHeadersFromRequest(req.headers), ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -1631,19 +1671,21 @@ export class SDK {
     };
     
     return client
-      .post(url, {
+      .request({
+        url: url,
+        method: "post",
+        headers: headers,
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.JobScheduleDisableResponse = {statusCode: httpRes.status, contentType: contentType, headers: GetHeadersFromResponse(httpRes.headers)};
-        switch (httpRes?.status) {
-          case 204:
+        const res: operations.JobScheduleDisableResponse = {statusCode: httpRes.status, contentType: contentType, headers: utils.GetHeadersFromResponse(httpRes.headers)};
+        switch (true) {
+          case httpRes?.status == 204:
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.batchError = httpRes?.data;
             }
             break;
@@ -1655,8 +1697,10 @@ export class SDK {
   }
 
   
-  // JobScheduleEnable - Enables a job schedule.
-  JobScheduleEnable(
+  /**
+   * jobScheduleEnable - Enables a job schedule.
+  **/
+  jobScheduleEnable(
     req: operations.JobScheduleEnableRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.JobScheduleEnableResponse> {
@@ -1664,13 +1708,11 @@ export class SDK {
       req = new operations.JobScheduleEnableRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/jobschedules/{jobScheduleId}/enable", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...GetHeadersFromRequest(req.headers), ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;const headers = {...utils.GetHeadersFromRequest(req.headers), ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -1679,19 +1721,21 @@ export class SDK {
     };
     
     return client
-      .post(url, {
+      .request({
+        url: url,
+        method: "post",
+        headers: headers,
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.JobScheduleEnableResponse = {statusCode: httpRes.status, contentType: contentType, headers: GetHeadersFromResponse(httpRes.headers)};
-        switch (httpRes?.status) {
-          case 204:
+        const res: operations.JobScheduleEnableResponse = {statusCode: httpRes.status, contentType: contentType, headers: utils.GetHeadersFromResponse(httpRes.headers)};
+        switch (true) {
+          case httpRes?.status == 204:
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.batchError = httpRes?.data;
             }
             break;
@@ -1703,8 +1747,10 @@ export class SDK {
   }
 
   
-  // JobScheduleExists - Checks the specified job schedule exists.
-  JobScheduleExists(
+  /**
+   * jobScheduleExists - Checks the specified job schedule exists.
+  **/
+  jobScheduleExists(
     req: operations.JobScheduleExistsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.JobScheduleExistsResponse> {
@@ -1712,13 +1758,11 @@ export class SDK {
       req = new operations.JobScheduleExistsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/jobschedules/{jobScheduleId}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...GetHeadersFromRequest(req.headers), ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;const headers = {...utils.GetHeadersFromRequest(req.headers), ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -1727,21 +1771,23 @@ export class SDK {
     };
     
     return client
-      .head(url, {
+      .request({
+        url: url,
+        method: "head",
+        headers: headers,
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.JobScheduleExistsResponse = {statusCode: httpRes.status, contentType: contentType, headers: GetHeadersFromResponse(httpRes.headers)};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.JobScheduleExistsResponse = {statusCode: httpRes.status, contentType: contentType, headers: utils.GetHeadersFromResponse(httpRes.headers)};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.batchError = httpRes?.data;
             }
             break;
@@ -1753,8 +1799,10 @@ export class SDK {
   }
 
   
-  // JobScheduleGet - Gets information about the specified job schedule.
-  JobScheduleGet(
+  /**
+   * jobScheduleGet - Gets information about the specified job schedule.
+  **/
+  jobScheduleGet(
     req: operations.JobScheduleGetRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.JobScheduleGetResponse> {
@@ -1762,13 +1810,11 @@ export class SDK {
       req = new operations.JobScheduleGetRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/jobschedules/{jobScheduleId}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...GetHeadersFromRequest(req.headers), ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;const headers = {...utils.GetHeadersFromRequest(req.headers), ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -1777,22 +1823,24 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
+        headers: headers,
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.JobScheduleGetResponse = {statusCode: httpRes.status, contentType: contentType, headers: GetHeadersFromResponse(httpRes.headers)};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.JobScheduleGetResponse = {statusCode: httpRes.status, contentType: contentType, headers: utils.GetHeadersFromResponse(httpRes.headers)};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.cloudJobSchedule = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.batchError = httpRes?.data;
             }
             break;
@@ -1804,8 +1852,10 @@ export class SDK {
   }
 
   
-  // JobScheduleList - Lists all of the job schedules in the specified account.
-  JobScheduleList(
+  /**
+   * jobScheduleList - Lists all of the job schedules in the specified account.
+  **/
+  jobScheduleList(
     req: operations.JobScheduleListRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.JobScheduleListResponse> {
@@ -1813,13 +1863,11 @@ export class SDK {
       req = new operations.JobScheduleListRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/jobschedules";
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...GetHeadersFromRequest(req.headers), ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;const headers = {...utils.GetHeadersFromRequest(req.headers), ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -1828,22 +1876,24 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
+        headers: headers,
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.JobScheduleListResponse = {statusCode: httpRes.status, contentType: contentType, headers: GetHeadersFromResponse(httpRes.headers)};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.JobScheduleListResponse = {statusCode: httpRes.status, contentType: contentType, headers: utils.GetHeadersFromResponse(httpRes.headers)};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.cloudJobScheduleListResult = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.batchError = httpRes?.data;
             }
             break;
@@ -1855,8 +1905,10 @@ export class SDK {
   }
 
   
-  // JobSchedulePatch - Updates the properties of the specified job schedule.
-  JobSchedulePatch(
+  /**
+   * jobSchedulePatch - Updates the properties of the specified job schedule.
+  **/
+  jobSchedulePatch(
     req: operations.JobSchedulePatchRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.JobSchedulePatchResponse> {
@@ -1864,23 +1916,21 @@ export class SDK {
       req = new operations.JobSchedulePatchRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/jobschedules/{jobScheduleId}", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -1891,24 +1941,24 @@ export class SDK {
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .patch(url, body, {
+      .request({
+        url: url,
+        method: "patch",
         headers: headers,
+        data: body, 
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.JobSchedulePatchResponse = {statusCode: httpRes.status, contentType: contentType, headers: GetHeadersFromResponse(httpRes.headers)};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.JobSchedulePatchResponse = {statusCode: httpRes.status, contentType: contentType, headers: utils.GetHeadersFromResponse(httpRes.headers)};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.batchError = httpRes?.data;
             }
             break;
@@ -1920,8 +1970,10 @@ export class SDK {
   }
 
   
-  // JobScheduleTerminate - Terminates a job schedule.
-  JobScheduleTerminate(
+  /**
+   * jobScheduleTerminate - Terminates a job schedule.
+  **/
+  jobScheduleTerminate(
     req: operations.JobScheduleTerminateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.JobScheduleTerminateResponse> {
@@ -1929,13 +1981,11 @@ export class SDK {
       req = new operations.JobScheduleTerminateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/jobschedules/{jobScheduleId}/terminate", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...GetHeadersFromRequest(req.headers), ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;const headers = {...utils.GetHeadersFromRequest(req.headers), ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -1944,19 +1994,21 @@ export class SDK {
     };
     
     return client
-      .post(url, {
+      .request({
+        url: url,
+        method: "post",
+        headers: headers,
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.JobScheduleTerminateResponse = {statusCode: httpRes.status, contentType: contentType, headers: GetHeadersFromResponse(httpRes.headers)};
-        switch (httpRes?.status) {
-          case 202:
+        const res: operations.JobScheduleTerminateResponse = {statusCode: httpRes.status, contentType: contentType, headers: utils.GetHeadersFromResponse(httpRes.headers)};
+        switch (true) {
+          case httpRes?.status == 202:
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.batchError = httpRes?.data;
             }
             break;
@@ -1968,8 +2020,10 @@ export class SDK {
   }
 
   
-  // JobScheduleUpdate - Updates the properties of the specified job schedule.
-  JobScheduleUpdate(
+  /**
+   * jobScheduleUpdate - Updates the properties of the specified job schedule.
+  **/
+  jobScheduleUpdate(
     req: operations.JobScheduleUpdateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.JobScheduleUpdateResponse> {
@@ -1977,23 +2031,21 @@ export class SDK {
       req = new operations.JobScheduleUpdateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/jobschedules/{jobScheduleId}", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -2004,24 +2056,24 @@ export class SDK {
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .put(url, body, {
+      .request({
+        url: url,
+        method: "put",
         headers: headers,
+        data: body, 
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.JobScheduleUpdateResponse = {statusCode: httpRes.status, contentType: contentType, headers: GetHeadersFromResponse(httpRes.headers)};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.JobScheduleUpdateResponse = {statusCode: httpRes.status, contentType: contentType, headers: utils.GetHeadersFromResponse(httpRes.headers)};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.batchError = httpRes?.data;
             }
             break;
@@ -2033,8 +2085,10 @@ export class SDK {
   }
 
   
-  // JobAdd - Adds a job to the specified account.
-  JobAdd(
+  /**
+   * jobAdd - Adds a job to the specified account.
+  **/
+  jobAdd(
     req: operations.JobAddRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.JobAddResponse> {
@@ -2042,23 +2096,21 @@ export class SDK {
       req = new operations.JobAddRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/jobs";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -2069,24 +2121,24 @@ export class SDK {
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.JobAddResponse = {statusCode: httpRes.status, contentType: contentType, headers: GetHeadersFromResponse(httpRes.headers)};
-        switch (httpRes?.status) {
-          case 201:
+        const res: operations.JobAddResponse = {statusCode: httpRes.status, contentType: contentType, headers: utils.GetHeadersFromResponse(httpRes.headers)};
+        switch (true) {
+          case httpRes?.status == 201:
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.batchError = httpRes?.data;
             }
             break;
@@ -2098,8 +2150,10 @@ export class SDK {
   }
 
   
-  // JobDelete - Deletes a job.
-  JobDelete(
+  /**
+   * jobDelete - Deletes a job.
+  **/
+  jobDelete(
     req: operations.JobDeleteRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.JobDeleteResponse> {
@@ -2107,13 +2161,11 @@ export class SDK {
       req = new operations.JobDeleteRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/jobs/{jobId}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...GetHeadersFromRequest(req.headers), ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;const headers = {...utils.GetHeadersFromRequest(req.headers), ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -2122,19 +2174,21 @@ export class SDK {
     };
     
     return client
-      .delete(url, {
+      .request({
+        url: url,
+        method: "delete",
+        headers: headers,
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.JobDeleteResponse = {statusCode: httpRes.status, contentType: contentType, headers: GetHeadersFromResponse(httpRes.headers)};
-        switch (httpRes?.status) {
-          case 202:
+        const res: operations.JobDeleteResponse = {statusCode: httpRes.status, contentType: contentType, headers: utils.GetHeadersFromResponse(httpRes.headers)};
+        switch (true) {
+          case httpRes?.status == 202:
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.batchError = httpRes?.data;
             }
             break;
@@ -2146,8 +2200,10 @@ export class SDK {
   }
 
   
-  // JobDisable - Disables the specified job, preventing new tasks from running.
-  JobDisable(
+  /**
+   * jobDisable - Disables the specified job, preventing new tasks from running.
+  **/
+  jobDisable(
     req: operations.JobDisableRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.JobDisableResponse> {
@@ -2155,23 +2211,21 @@ export class SDK {
       req = new operations.JobDisableRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/jobs/{jobId}/disable", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -2182,24 +2236,24 @@ export class SDK {
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.JobDisableResponse = {statusCode: httpRes.status, contentType: contentType, headers: GetHeadersFromResponse(httpRes.headers)};
-        switch (httpRes?.status) {
-          case 202:
+        const res: operations.JobDisableResponse = {statusCode: httpRes.status, contentType: contentType, headers: utils.GetHeadersFromResponse(httpRes.headers)};
+        switch (true) {
+          case httpRes?.status == 202:
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.batchError = httpRes?.data;
             }
             break;
@@ -2211,8 +2265,10 @@ export class SDK {
   }
 
   
-  // JobEnable - Enables the specified job, allowing new tasks to run.
-  JobEnable(
+  /**
+   * jobEnable - Enables the specified job, allowing new tasks to run.
+  **/
+  jobEnable(
     req: operations.JobEnableRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.JobEnableResponse> {
@@ -2220,13 +2276,11 @@ export class SDK {
       req = new operations.JobEnableRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/jobs/{jobId}/enable", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...GetHeadersFromRequest(req.headers), ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;const headers = {...utils.GetHeadersFromRequest(req.headers), ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -2235,19 +2289,21 @@ export class SDK {
     };
     
     return client
-      .post(url, {
+      .request({
+        url: url,
+        method: "post",
+        headers: headers,
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.JobEnableResponse = {statusCode: httpRes.status, contentType: contentType, headers: GetHeadersFromResponse(httpRes.headers)};
-        switch (httpRes?.status) {
-          case 202:
+        const res: operations.JobEnableResponse = {statusCode: httpRes.status, contentType: contentType, headers: utils.GetHeadersFromResponse(httpRes.headers)};
+        switch (true) {
+          case httpRes?.status == 202:
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.batchError = httpRes?.data;
             }
             break;
@@ -2259,8 +2315,10 @@ export class SDK {
   }
 
   
-  // JobGet - Gets information about the specified job.
-  JobGet(
+  /**
+   * jobGet - Gets information about the specified job.
+  **/
+  jobGet(
     req: operations.JobGetRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.JobGetResponse> {
@@ -2268,13 +2326,11 @@ export class SDK {
       req = new operations.JobGetRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/jobs/{jobId}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...GetHeadersFromRequest(req.headers), ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;const headers = {...utils.GetHeadersFromRequest(req.headers), ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -2283,22 +2339,24 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
+        headers: headers,
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.JobGetResponse = {statusCode: httpRes.status, contentType: contentType, headers: GetHeadersFromResponse(httpRes.headers)};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.JobGetResponse = {statusCode: httpRes.status, contentType: contentType, headers: utils.GetHeadersFromResponse(httpRes.headers)};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.cloudJob = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.batchError = httpRes?.data;
             }
             break;
@@ -2310,8 +2368,10 @@ export class SDK {
   }
 
   
-  // JobGetAllJobsLifetimeStatistics - Gets lifetime summary statistics for all of the jobs in the specified account. Statistics are aggregated across all jobs that have ever existed in the account, from account creation to the last update time of the statistics.
-  JobGetAllJobsLifetimeStatistics(
+  /**
+   * jobGetAllJobsLifetimeStatistics - Gets lifetime summary statistics for all of the jobs in the specified account. Statistics are aggregated across all jobs that have ever existed in the account, from account creation to the last update time of the statistics.
+  **/
+  jobGetAllJobsLifetimeStatistics(
     req: operations.JobGetAllJobsLifetimeStatisticsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.JobGetAllJobsLifetimeStatisticsResponse> {
@@ -2319,13 +2379,11 @@ export class SDK {
       req = new operations.JobGetAllJobsLifetimeStatisticsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/lifetimejobstats";
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...GetHeadersFromRequest(req.headers), ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;const headers = {...utils.GetHeadersFromRequest(req.headers), ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -2334,22 +2392,24 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
+        headers: headers,
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.JobGetAllJobsLifetimeStatisticsResponse = {statusCode: httpRes.status, contentType: contentType, headers: GetHeadersFromResponse(httpRes.headers)};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.JobGetAllJobsLifetimeStatisticsResponse = {statusCode: httpRes.status, contentType: contentType, headers: utils.GetHeadersFromResponse(httpRes.headers)};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.jobStatistics = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.batchError = httpRes?.data;
             }
             break;
@@ -2361,8 +2421,10 @@ export class SDK {
   }
 
   
-  // JobList - Lists all of the jobs in the specified account.
-  JobList(
+  /**
+   * jobList - Lists all of the jobs in the specified account.
+  **/
+  jobList(
     req: operations.JobListRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.JobListResponse> {
@@ -2370,13 +2432,11 @@ export class SDK {
       req = new operations.JobListRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/jobs";
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...GetHeadersFromRequest(req.headers), ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;const headers = {...utils.GetHeadersFromRequest(req.headers), ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -2385,22 +2445,24 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
+        headers: headers,
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.JobListResponse = {statusCode: httpRes.status, contentType: contentType, headers: GetHeadersFromResponse(httpRes.headers)};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.JobListResponse = {statusCode: httpRes.status, contentType: contentType, headers: utils.GetHeadersFromResponse(httpRes.headers)};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.cloudJobListResult = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.batchError = httpRes?.data;
             }
             break;
@@ -2412,8 +2474,10 @@ export class SDK {
   }
 
   
-  // JobListFromJobSchedule - Lists the jobs that have been created under the specified job schedule.
-  JobListFromJobSchedule(
+  /**
+   * jobListFromJobSchedule - Lists the jobs that have been created under the specified job schedule.
+  **/
+  jobListFromJobSchedule(
     req: operations.JobListFromJobScheduleRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.JobListFromJobScheduleResponse> {
@@ -2421,13 +2485,11 @@ export class SDK {
       req = new operations.JobListFromJobScheduleRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/jobschedules/{jobScheduleId}/jobs", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...GetHeadersFromRequest(req.headers), ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;const headers = {...utils.GetHeadersFromRequest(req.headers), ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -2436,22 +2498,24 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
+        headers: headers,
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.JobListFromJobScheduleResponse = {statusCode: httpRes.status, contentType: contentType, headers: GetHeadersFromResponse(httpRes.headers)};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.JobListFromJobScheduleResponse = {statusCode: httpRes.status, contentType: contentType, headers: utils.GetHeadersFromResponse(httpRes.headers)};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.cloudJobListResult = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.batchError = httpRes?.data;
             }
             break;
@@ -2463,8 +2527,10 @@ export class SDK {
   }
 
   
-  // JobListPreparationAndReleaseTaskStatus - Lists the execution status of the Job Preparation and Job Release task for the specified job across the compute nodes where the job has run.
-  JobListPreparationAndReleaseTaskStatus(
+  /**
+   * jobListPreparationAndReleaseTaskStatus - Lists the execution status of the Job Preparation and Job Release task for the specified job across the compute nodes where the job has run.
+  **/
+  jobListPreparationAndReleaseTaskStatus(
     req: operations.JobListPreparationAndReleaseTaskStatusRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.JobListPreparationAndReleaseTaskStatusResponse> {
@@ -2472,13 +2538,11 @@ export class SDK {
       req = new operations.JobListPreparationAndReleaseTaskStatusRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/jobs/{jobId}/jobpreparationandreleasetaskstatus", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...GetHeadersFromRequest(req.headers), ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;const headers = {...utils.GetHeadersFromRequest(req.headers), ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -2487,22 +2551,24 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
+        headers: headers,
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.JobListPreparationAndReleaseTaskStatusResponse = {statusCode: httpRes.status, contentType: contentType, headers: GetHeadersFromResponse(httpRes.headers)};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.JobListPreparationAndReleaseTaskStatusResponse = {statusCode: httpRes.status, contentType: contentType, headers: utils.GetHeadersFromResponse(httpRes.headers)};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.cloudJobListPreparationAndReleaseTaskStatusResult = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.batchError = httpRes?.data;
             }
             break;
@@ -2514,8 +2580,10 @@ export class SDK {
   }
 
   
-  // JobPatch - Updates the properties of a job.
-  JobPatch(
+  /**
+   * jobPatch - Updates the properties of a job.
+  **/
+  jobPatch(
     req: operations.JobPatchRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.JobPatchResponse> {
@@ -2523,23 +2591,21 @@ export class SDK {
       req = new operations.JobPatchRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/jobs/{jobId}", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -2550,24 +2616,24 @@ export class SDK {
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .patch(url, body, {
+      .request({
+        url: url,
+        method: "patch",
         headers: headers,
+        data: body, 
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.JobPatchResponse = {statusCode: httpRes.status, contentType: contentType, headers: GetHeadersFromResponse(httpRes.headers)};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.JobPatchResponse = {statusCode: httpRes.status, contentType: contentType, headers: utils.GetHeadersFromResponse(httpRes.headers)};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.batchError = httpRes?.data;
             }
             break;
@@ -2579,8 +2645,10 @@ export class SDK {
   }
 
   
-  // JobTerminate - Terminates the specified job, marking it as completed.
-  JobTerminate(
+  /**
+   * jobTerminate - Terminates the specified job, marking it as completed.
+  **/
+  jobTerminate(
     req: operations.JobTerminateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.JobTerminateResponse> {
@@ -2588,23 +2656,21 @@ export class SDK {
       req = new operations.JobTerminateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/jobs/{jobId}/terminate", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -2615,22 +2681,23 @@ export class SDK {
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.JobTerminateResponse = {statusCode: httpRes.status, contentType: contentType, headers: GetHeadersFromResponse(httpRes.headers)};
-        switch (httpRes?.status) {
-          case 202:
+        const res: operations.JobTerminateResponse = {statusCode: httpRes.status, contentType: contentType, headers: utils.GetHeadersFromResponse(httpRes.headers)};
+        switch (true) {
+          case httpRes?.status == 202:
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.batchError = httpRes?.data;
             }
             break;
@@ -2642,8 +2709,10 @@ export class SDK {
   }
 
   
-  // JobUpdate - Updates the properties of a job.
-  JobUpdate(
+  /**
+   * jobUpdate - Updates the properties of a job.
+  **/
+  jobUpdate(
     req: operations.JobUpdateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.JobUpdateResponse> {
@@ -2651,23 +2720,21 @@ export class SDK {
       req = new operations.JobUpdateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/jobs/{jobId}", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -2678,24 +2745,24 @@ export class SDK {
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .put(url, body, {
+      .request({
+        url: url,
+        method: "put",
         headers: headers,
+        data: body, 
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.JobUpdateResponse = {statusCode: httpRes.status, contentType: contentType, headers: GetHeadersFromResponse(httpRes.headers)};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.JobUpdateResponse = {statusCode: httpRes.status, contentType: contentType, headers: utils.GetHeadersFromResponse(httpRes.headers)};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.batchError = httpRes?.data;
             }
             break;
@@ -2707,8 +2774,10 @@ export class SDK {
   }
 
   
-  // PoolAdd - Adds a pool to the specified account.
-  PoolAdd(
+  /**
+   * poolAdd - Adds a pool to the specified account.
+  **/
+  poolAdd(
     req: operations.PoolAddRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PoolAddResponse> {
@@ -2716,23 +2785,21 @@ export class SDK {
       req = new operations.PoolAddRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/pools";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -2743,24 +2810,24 @@ export class SDK {
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PoolAddResponse = {statusCode: httpRes.status, contentType: contentType, headers: GetHeadersFromResponse(httpRes.headers)};
-        switch (httpRes?.status) {
-          case 201:
+        const res: operations.PoolAddResponse = {statusCode: httpRes.status, contentType: contentType, headers: utils.GetHeadersFromResponse(httpRes.headers)};
+        switch (true) {
+          case httpRes?.status == 201:
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.batchError = httpRes?.data;
             }
             break;
@@ -2772,8 +2839,10 @@ export class SDK {
   }
 
   
-  // PoolDelete - Deletes a pool from the specified account.
-  PoolDelete(
+  /**
+   * poolDelete - Deletes a pool from the specified account.
+  **/
+  poolDelete(
     req: operations.PoolDeleteRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PoolDeleteResponse> {
@@ -2781,13 +2850,11 @@ export class SDK {
       req = new operations.PoolDeleteRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/pools/{poolId}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...GetHeadersFromRequest(req.headers), ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;const headers = {...utils.GetHeadersFromRequest(req.headers), ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -2796,19 +2863,21 @@ export class SDK {
     };
     
     return client
-      .delete(url, {
+      .request({
+        url: url,
+        method: "delete",
+        headers: headers,
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PoolDeleteResponse = {statusCode: httpRes.status, contentType: contentType, headers: GetHeadersFromResponse(httpRes.headers)};
-        switch (httpRes?.status) {
-          case 202:
+        const res: operations.PoolDeleteResponse = {statusCode: httpRes.status, contentType: contentType, headers: utils.GetHeadersFromResponse(httpRes.headers)};
+        switch (true) {
+          case httpRes?.status == 202:
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.batchError = httpRes?.data;
             }
             break;
@@ -2820,8 +2889,10 @@ export class SDK {
   }
 
   
-  // PoolDisableAutoScale - Disables automatic scaling for a pool.
-  PoolDisableAutoScale(
+  /**
+   * poolDisableAutoScale - Disables automatic scaling for a pool.
+  **/
+  poolDisableAutoScale(
     req: operations.PoolDisableAutoScaleRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PoolDisableAutoScaleResponse> {
@@ -2829,13 +2900,11 @@ export class SDK {
       req = new operations.PoolDisableAutoScaleRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/pools/{poolId}/disableautoscale", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...GetHeadersFromRequest(req.headers), ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;const headers = {...utils.GetHeadersFromRequest(req.headers), ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -2844,19 +2913,21 @@ export class SDK {
     };
     
     return client
-      .post(url, {
+      .request({
+        url: url,
+        method: "post",
+        headers: headers,
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PoolDisableAutoScaleResponse = {statusCode: httpRes.status, contentType: contentType, headers: GetHeadersFromResponse(httpRes.headers)};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.PoolDisableAutoScaleResponse = {statusCode: httpRes.status, contentType: contentType, headers: utils.GetHeadersFromResponse(httpRes.headers)};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.batchError = httpRes?.data;
             }
             break;
@@ -2868,8 +2939,10 @@ export class SDK {
   }
 
   
-  // PoolEnableAutoScale - Enables automatic scaling for a pool.
-  PoolEnableAutoScale(
+  /**
+   * poolEnableAutoScale - Enables automatic scaling for a pool.
+  **/
+  poolEnableAutoScale(
     req: operations.PoolEnableAutoScaleRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PoolEnableAutoScaleResponse> {
@@ -2877,23 +2950,21 @@ export class SDK {
       req = new operations.PoolEnableAutoScaleRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/pools/{poolId}/enableautoscale", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -2904,24 +2975,24 @@ export class SDK {
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PoolEnableAutoScaleResponse = {statusCode: httpRes.status, contentType: contentType, headers: GetHeadersFromResponse(httpRes.headers)};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.PoolEnableAutoScaleResponse = {statusCode: httpRes.status, contentType: contentType, headers: utils.GetHeadersFromResponse(httpRes.headers)};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.batchError = httpRes?.data;
             }
             break;
@@ -2933,8 +3004,10 @@ export class SDK {
   }
 
   
-  // PoolEvaluateAutoScale - Gets the result of evaluating an automatic scaling formula on the pool.
-  PoolEvaluateAutoScale(
+  /**
+   * poolEvaluateAutoScale - Gets the result of evaluating an automatic scaling formula on the pool.
+  **/
+  poolEvaluateAutoScale(
     req: operations.PoolEvaluateAutoScaleRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PoolEvaluateAutoScaleResponse> {
@@ -2942,23 +3015,21 @@ export class SDK {
       req = new operations.PoolEvaluateAutoScaleRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/pools/{poolId}/evaluateautoscale", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -2969,27 +3040,27 @@ export class SDK {
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PoolEvaluateAutoScaleResponse = {statusCode: httpRes.status, contentType: contentType, headers: GetHeadersFromResponse(httpRes.headers)};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.PoolEvaluateAutoScaleResponse = {statusCode: httpRes.status, contentType: contentType, headers: utils.GetHeadersFromResponse(httpRes.headers)};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.autoScaleRun = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.batchError = httpRes?.data;
             }
             break;
@@ -3001,8 +3072,10 @@ export class SDK {
   }
 
   
-  // PoolExists - Gets basic properties of a pool.
-  PoolExists(
+  /**
+   * poolExists - Gets basic properties of a pool.
+  **/
+  poolExists(
     req: operations.PoolExistsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PoolExistsResponse> {
@@ -3010,13 +3083,11 @@ export class SDK {
       req = new operations.PoolExistsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/pools/{poolId}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...GetHeadersFromRequest(req.headers), ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;const headers = {...utils.GetHeadersFromRequest(req.headers), ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -3025,21 +3096,23 @@ export class SDK {
     };
     
     return client
-      .head(url, {
+      .request({
+        url: url,
+        method: "head",
+        headers: headers,
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PoolExistsResponse = {statusCode: httpRes.status, contentType: contentType, headers: GetHeadersFromResponse(httpRes.headers)};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.PoolExistsResponse = {statusCode: httpRes.status, contentType: contentType, headers: utils.GetHeadersFromResponse(httpRes.headers)};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.batchError = httpRes?.data;
             }
             break;
@@ -3051,8 +3124,10 @@ export class SDK {
   }
 
   
-  // PoolGet - Gets information about the specified pool.
-  PoolGet(
+  /**
+   * poolGet - Gets information about the specified pool.
+  **/
+  poolGet(
     req: operations.PoolGetRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PoolGetResponse> {
@@ -3060,13 +3135,11 @@ export class SDK {
       req = new operations.PoolGetRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/pools/{poolId}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...GetHeadersFromRequest(req.headers), ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;const headers = {...utils.GetHeadersFromRequest(req.headers), ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -3075,22 +3148,24 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
+        headers: headers,
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PoolGetResponse = {statusCode: httpRes.status, contentType: contentType, headers: GetHeadersFromResponse(httpRes.headers)};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.PoolGetResponse = {statusCode: httpRes.status, contentType: contentType, headers: utils.GetHeadersFromResponse(httpRes.headers)};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.cloudPool = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.batchError = httpRes?.data;
             }
             break;
@@ -3102,8 +3177,10 @@ export class SDK {
   }
 
   
-  // PoolGetAllPoolsLifetimeStatistics - Gets lifetime summary statistics for all of the pools in the specified account. Statistics are aggregated across all pools that have ever existed in the account, from account creation to the last update time of the statistics.
-  PoolGetAllPoolsLifetimeStatistics(
+  /**
+   * poolGetAllPoolsLifetimeStatistics - Gets lifetime summary statistics for all of the pools in the specified account. Statistics are aggregated across all pools that have ever existed in the account, from account creation to the last update time of the statistics.
+  **/
+  poolGetAllPoolsLifetimeStatistics(
     req: operations.PoolGetAllPoolsLifetimeStatisticsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PoolGetAllPoolsLifetimeStatisticsResponse> {
@@ -3111,13 +3188,11 @@ export class SDK {
       req = new operations.PoolGetAllPoolsLifetimeStatisticsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/lifetimepoolstats";
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...GetHeadersFromRequest(req.headers), ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;const headers = {...utils.GetHeadersFromRequest(req.headers), ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -3126,22 +3201,24 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
+        headers: headers,
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PoolGetAllPoolsLifetimeStatisticsResponse = {statusCode: httpRes.status, contentType: contentType, headers: GetHeadersFromResponse(httpRes.headers)};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.PoolGetAllPoolsLifetimeStatisticsResponse = {statusCode: httpRes.status, contentType: contentType, headers: utils.GetHeadersFromResponse(httpRes.headers)};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.poolStatistics = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.batchError = httpRes?.data;
             }
             break;
@@ -3153,8 +3230,10 @@ export class SDK {
   }
 
   
-  // PoolList - Lists all of the pools in the specified account.
-  PoolList(
+  /**
+   * poolList - Lists all of the pools in the specified account.
+  **/
+  poolList(
     req: operations.PoolListRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PoolListResponse> {
@@ -3162,13 +3241,11 @@ export class SDK {
       req = new operations.PoolListRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/pools";
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...GetHeadersFromRequest(req.headers), ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;const headers = {...utils.GetHeadersFromRequest(req.headers), ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -3177,22 +3254,24 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
+        headers: headers,
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PoolListResponse = {statusCode: httpRes.status, contentType: contentType, headers: GetHeadersFromResponse(httpRes.headers)};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.PoolListResponse = {statusCode: httpRes.status, contentType: contentType, headers: utils.GetHeadersFromResponse(httpRes.headers)};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.cloudPoolListResult = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.batchError = httpRes?.data;
             }
             break;
@@ -3204,8 +3283,10 @@ export class SDK {
   }
 
   
-  // PoolListPoolUsageMetrics - Lists the usage metrics, aggregated by pool across individual time intervals, for the specified account.
-  PoolListPoolUsageMetrics(
+  /**
+   * poolListPoolUsageMetrics - Lists the usage metrics, aggregated by pool across individual time intervals, for the specified account.
+  **/
+  poolListPoolUsageMetrics(
     req: operations.PoolListPoolUsageMetricsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PoolListPoolUsageMetricsResponse> {
@@ -3213,13 +3294,11 @@ export class SDK {
       req = new operations.PoolListPoolUsageMetricsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/poolusagemetrics";
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...GetHeadersFromRequest(req.headers), ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;const headers = {...utils.GetHeadersFromRequest(req.headers), ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -3228,22 +3307,24 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
+        headers: headers,
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PoolListPoolUsageMetricsResponse = {statusCode: httpRes.status, contentType: contentType, headers: GetHeadersFromResponse(httpRes.headers)};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.PoolListPoolUsageMetricsResponse = {statusCode: httpRes.status, contentType: contentType, headers: utils.GetHeadersFromResponse(httpRes.headers)};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.poolListPoolUsageMetricsResult = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.batchError = httpRes?.data;
             }
             break;
@@ -3255,8 +3336,10 @@ export class SDK {
   }
 
   
-  // PoolPatch - Updates the properties of a pool.
-  PoolPatch(
+  /**
+   * poolPatch - Updates the properties of a pool.
+  **/
+  poolPatch(
     req: operations.PoolPatchRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PoolPatchResponse> {
@@ -3264,23 +3347,21 @@ export class SDK {
       req = new operations.PoolPatchRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/pools/{poolId}", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -3291,24 +3372,24 @@ export class SDK {
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .patch(url, body, {
+      .request({
+        url: url,
+        method: "patch",
         headers: headers,
+        data: body, 
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PoolPatchResponse = {statusCode: httpRes.status, contentType: contentType, headers: GetHeadersFromResponse(httpRes.headers)};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.PoolPatchResponse = {statusCode: httpRes.status, contentType: contentType, headers: utils.GetHeadersFromResponse(httpRes.headers)};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.batchError = httpRes?.data;
             }
             break;
@@ -3320,8 +3401,10 @@ export class SDK {
   }
 
   
-  // PoolRemoveNodes - Removes compute nodes from the specified pool.
-  PoolRemoveNodes(
+  /**
+   * poolRemoveNodes - Removes compute nodes from the specified pool.
+  **/
+  poolRemoveNodes(
     req: operations.PoolRemoveNodesRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PoolRemoveNodesResponse> {
@@ -3329,23 +3412,21 @@ export class SDK {
       req = new operations.PoolRemoveNodesRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/pools/{poolId}/removenodes", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -3356,24 +3437,24 @@ export class SDK {
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PoolRemoveNodesResponse = {statusCode: httpRes.status, contentType: contentType, headers: GetHeadersFromResponse(httpRes.headers)};
-        switch (httpRes?.status) {
-          case 202:
+        const res: operations.PoolRemoveNodesResponse = {statusCode: httpRes.status, contentType: contentType, headers: utils.GetHeadersFromResponse(httpRes.headers)};
+        switch (true) {
+          case httpRes?.status == 202:
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.batchError = httpRes?.data;
             }
             break;
@@ -3385,8 +3466,10 @@ export class SDK {
   }
 
   
-  // PoolResize - Changes the number of compute nodes that are assigned to a pool.
-  PoolResize(
+  /**
+   * poolResize - Changes the number of compute nodes that are assigned to a pool.
+  **/
+  poolResize(
     req: operations.PoolResizeRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PoolResizeResponse> {
@@ -3394,23 +3477,21 @@ export class SDK {
       req = new operations.PoolResizeRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/pools/{poolId}/resize", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -3421,24 +3502,24 @@ export class SDK {
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PoolResizeResponse = {statusCode: httpRes.status, contentType: contentType, headers: GetHeadersFromResponse(httpRes.headers)};
-        switch (httpRes?.status) {
-          case 202:
+        const res: operations.PoolResizeResponse = {statusCode: httpRes.status, contentType: contentType, headers: utils.GetHeadersFromResponse(httpRes.headers)};
+        switch (true) {
+          case httpRes?.status == 202:
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.batchError = httpRes?.data;
             }
             break;
@@ -3450,8 +3531,10 @@ export class SDK {
   }
 
   
-  // PoolStopResize - Stops an ongoing resize operation on the pool. This does not restore the pool to its previous state before the resize operation: it only stops any further changes being made, and the pool maintains its current state.
-  PoolStopResize(
+  /**
+   * poolStopResize - Stops an ongoing resize operation on the pool. This does not restore the pool to its previous state before the resize operation: it only stops any further changes being made, and the pool maintains its current state.
+  **/
+  poolStopResize(
     req: operations.PoolStopResizeRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PoolStopResizeResponse> {
@@ -3459,13 +3542,11 @@ export class SDK {
       req = new operations.PoolStopResizeRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/pools/{poolId}/stopresize", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...GetHeadersFromRequest(req.headers), ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;const headers = {...utils.GetHeadersFromRequest(req.headers), ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -3474,19 +3555,21 @@ export class SDK {
     };
     
     return client
-      .post(url, {
+      .request({
+        url: url,
+        method: "post",
+        headers: headers,
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PoolStopResizeResponse = {statusCode: httpRes.status, contentType: contentType, headers: GetHeadersFromResponse(httpRes.headers)};
-        switch (httpRes?.status) {
-          case 202:
+        const res: operations.PoolStopResizeResponse = {statusCode: httpRes.status, contentType: contentType, headers: utils.GetHeadersFromResponse(httpRes.headers)};
+        switch (true) {
+          case httpRes?.status == 202:
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.batchError = httpRes?.data;
             }
             break;
@@ -3498,8 +3581,10 @@ export class SDK {
   }
 
   
-  // PoolUpdateProperties - Updates the properties of a pool.
-  PoolUpdateProperties(
+  /**
+   * poolUpdateProperties - Updates the properties of a pool.
+  **/
+  poolUpdateProperties(
     req: operations.PoolUpdatePropertiesRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PoolUpdatePropertiesResponse> {
@@ -3507,23 +3592,21 @@ export class SDK {
       req = new operations.PoolUpdatePropertiesRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/pools/{poolId}/updateproperties", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -3534,24 +3617,24 @@ export class SDK {
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PoolUpdatePropertiesResponse = {statusCode: httpRes.status, contentType: contentType, headers: GetHeadersFromResponse(httpRes.headers)};
-        switch (httpRes?.status) {
-          case 204:
+        const res: operations.PoolUpdatePropertiesResponse = {statusCode: httpRes.status, contentType: contentType, headers: utils.GetHeadersFromResponse(httpRes.headers)};
+        switch (true) {
+          case httpRes?.status == 204:
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.batchError = httpRes?.data;
             }
             break;
@@ -3563,8 +3646,10 @@ export class SDK {
   }
 
   
-  // PoolUpgradeOs - Upgrades the operating system of the specified pool.
-  PoolUpgradeOs(
+  /**
+   * poolUpgradeOs - Upgrades the operating system of the specified pool.
+  **/
+  poolUpgradeOs(
     req: operations.PoolUpgradeOsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PoolUpgradeOsResponse> {
@@ -3572,23 +3657,21 @@ export class SDK {
       req = new operations.PoolUpgradeOsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/pools/{poolId}/upgradeos", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -3599,24 +3682,24 @@ export class SDK {
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PoolUpgradeOsResponse = {statusCode: httpRes.status, contentType: contentType, headers: GetHeadersFromResponse(httpRes.headers)};
-        switch (httpRes?.status) {
-          case 202:
+        const res: operations.PoolUpgradeOsResponse = {statusCode: httpRes.status, contentType: contentType, headers: utils.GetHeadersFromResponse(httpRes.headers)};
+        switch (true) {
+          case httpRes?.status == 202:
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.batchError = httpRes?.data;
             }
             break;
@@ -3628,8 +3711,10 @@ export class SDK {
   }
 
   
-  // TaskAdd - Adds a task to the specified job.
-  TaskAdd(
+  /**
+   * taskAdd - Adds a task to the specified job.
+  **/
+  taskAdd(
     req: operations.TaskAddRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.TaskAddResponse> {
@@ -3637,23 +3722,21 @@ export class SDK {
       req = new operations.TaskAddRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/jobs/{jobId}/tasks", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -3664,24 +3747,24 @@ export class SDK {
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.TaskAddResponse = {statusCode: httpRes.status, contentType: contentType, headers: GetHeadersFromResponse(httpRes.headers)};
-        switch (httpRes?.status) {
-          case 201:
+        const res: operations.TaskAddResponse = {statusCode: httpRes.status, contentType: contentType, headers: utils.GetHeadersFromResponse(httpRes.headers)};
+        switch (true) {
+          case httpRes?.status == 201:
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.batchError = httpRes?.data;
             }
             break;
@@ -3693,8 +3776,10 @@ export class SDK {
   }
 
   
-  // TaskAddCollection - Adds a collection of tasks to the specified job.
-  TaskAddCollection(
+  /**
+   * taskAddCollection - Adds a collection of tasks to the specified job.
+  **/
+  taskAddCollection(
     req: operations.TaskAddCollectionRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.TaskAddCollectionResponse> {
@@ -3702,23 +3787,21 @@ export class SDK {
       req = new operations.TaskAddCollectionRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/jobs/{jobId}/addtaskcollection", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -3729,27 +3812,27 @@ export class SDK {
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.TaskAddCollectionResponse = {statusCode: httpRes.status, contentType: contentType, headers: GetHeadersFromResponse(httpRes.headers)};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.TaskAddCollectionResponse = {statusCode: httpRes.status, contentType: contentType, headers: utils.GetHeadersFromResponse(httpRes.headers)};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.taskAddCollectionResult = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.batchError = httpRes?.data;
             }
             break;
@@ -3761,8 +3844,10 @@ export class SDK {
   }
 
   
-  // TaskDelete - Deletes a task from the specified job.
-  TaskDelete(
+  /**
+   * taskDelete - Deletes a task from the specified job.
+  **/
+  taskDelete(
     req: operations.TaskDeleteRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.TaskDeleteResponse> {
@@ -3770,13 +3855,11 @@ export class SDK {
       req = new operations.TaskDeleteRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/jobs/{jobId}/tasks/{taskId}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...GetHeadersFromRequest(req.headers), ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;const headers = {...utils.GetHeadersFromRequest(req.headers), ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -3785,19 +3868,21 @@ export class SDK {
     };
     
     return client
-      .delete(url, {
+      .request({
+        url: url,
+        method: "delete",
+        headers: headers,
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.TaskDeleteResponse = {statusCode: httpRes.status, contentType: contentType, headers: GetHeadersFromResponse(httpRes.headers)};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.TaskDeleteResponse = {statusCode: httpRes.status, contentType: contentType, headers: utils.GetHeadersFromResponse(httpRes.headers)};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.batchError = httpRes?.data;
             }
             break;
@@ -3809,8 +3894,10 @@ export class SDK {
   }
 
   
-  // TaskGet - Gets information about the specified task.
-  TaskGet(
+  /**
+   * taskGet - Gets information about the specified task.
+  **/
+  taskGet(
     req: operations.TaskGetRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.TaskGetResponse> {
@@ -3818,13 +3905,11 @@ export class SDK {
       req = new operations.TaskGetRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/jobs/{jobId}/tasks/{taskId}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...GetHeadersFromRequest(req.headers), ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;const headers = {...utils.GetHeadersFromRequest(req.headers), ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -3833,22 +3918,24 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
+        headers: headers,
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.TaskGetResponse = {statusCode: httpRes.status, contentType: contentType, headers: GetHeadersFromResponse(httpRes.headers)};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.TaskGetResponse = {statusCode: httpRes.status, contentType: contentType, headers: utils.GetHeadersFromResponse(httpRes.headers)};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.cloudTask = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.batchError = httpRes?.data;
             }
             break;
@@ -3860,8 +3947,10 @@ export class SDK {
   }
 
   
-  // TaskList - Lists all of the tasks that are associated with the specified job.
-  TaskList(
+  /**
+   * taskList - Lists all of the tasks that are associated with the specified job.
+  **/
+  taskList(
     req: operations.TaskListRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.TaskListResponse> {
@@ -3869,13 +3958,11 @@ export class SDK {
       req = new operations.TaskListRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/jobs/{jobId}/tasks", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...GetHeadersFromRequest(req.headers), ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;const headers = {...utils.GetHeadersFromRequest(req.headers), ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -3884,22 +3971,24 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
+        headers: headers,
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.TaskListResponse = {statusCode: httpRes.status, contentType: contentType, headers: GetHeadersFromResponse(httpRes.headers)};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.TaskListResponse = {statusCode: httpRes.status, contentType: contentType, headers: utils.GetHeadersFromResponse(httpRes.headers)};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.cloudTaskListResult = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.batchError = httpRes?.data;
             }
             break;
@@ -3911,8 +4000,10 @@ export class SDK {
   }
 
   
-  // TaskListSubtasks - Lists all of the subtasks that are associated with the specified multi-instance task.
-  TaskListSubtasks(
+  /**
+   * taskListSubtasks - Lists all of the subtasks that are associated with the specified multi-instance task.
+  **/
+  taskListSubtasks(
     req: operations.TaskListSubtasksRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.TaskListSubtasksResponse> {
@@ -3920,13 +4011,11 @@ export class SDK {
       req = new operations.TaskListSubtasksRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/jobs/{jobId}/tasks/{taskId}/subtasksinfo", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...GetHeadersFromRequest(req.headers), ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;const headers = {...utils.GetHeadersFromRequest(req.headers), ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -3935,22 +4024,24 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
+        headers: headers,
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.TaskListSubtasksResponse = {statusCode: httpRes.status, contentType: contentType, headers: GetHeadersFromResponse(httpRes.headers)};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.TaskListSubtasksResponse = {statusCode: httpRes.status, contentType: contentType, headers: utils.GetHeadersFromResponse(httpRes.headers)};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.cloudTaskListSubtasksResult = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.batchError = httpRes?.data;
             }
             break;
@@ -3962,8 +4053,10 @@ export class SDK {
   }
 
   
-  // TaskTerminate - Terminates the specified task.
-  TaskTerminate(
+  /**
+   * taskTerminate - Terminates the specified task.
+  **/
+  taskTerminate(
     req: operations.TaskTerminateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.TaskTerminateResponse> {
@@ -3971,13 +4064,11 @@ export class SDK {
       req = new operations.TaskTerminateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/jobs/{jobId}/tasks/{taskId}/terminate", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...GetHeadersFromRequest(req.headers), ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;const headers = {...utils.GetHeadersFromRequest(req.headers), ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -3986,19 +4077,21 @@ export class SDK {
     };
     
     return client
-      .post(url, {
+      .request({
+        url: url,
+        method: "post",
+        headers: headers,
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.TaskTerminateResponse = {statusCode: httpRes.status, contentType: contentType, headers: GetHeadersFromResponse(httpRes.headers)};
-        switch (httpRes?.status) {
-          case 204:
+        const res: operations.TaskTerminateResponse = {statusCode: httpRes.status, contentType: contentType, headers: utils.GetHeadersFromResponse(httpRes.headers)};
+        switch (true) {
+          case httpRes?.status == 204:
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.batchError = httpRes?.data;
             }
             break;
@@ -4010,8 +4103,10 @@ export class SDK {
   }
 
   
-  // TaskUpdate - Updates the properties of the specified task.
-  TaskUpdate(
+  /**
+   * taskUpdate - Updates the properties of the specified task.
+  **/
+  taskUpdate(
     req: operations.TaskUpdateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.TaskUpdateResponse> {
@@ -4019,23 +4114,21 @@ export class SDK {
       req = new operations.TaskUpdateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/jobs/{jobId}/tasks/{taskId}", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -4046,24 +4139,24 @@ export class SDK {
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .put(url, body, {
+      .request({
+        url: url,
+        method: "put",
         headers: headers,
+        data: body, 
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.TaskUpdateResponse = {statusCode: httpRes.status, contentType: contentType, headers: GetHeadersFromResponse(httpRes.headers)};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.TaskUpdateResponse = {statusCode: httpRes.status, contentType: contentType, headers: utils.GetHeadersFromResponse(httpRes.headers)};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.batchError = httpRes?.data;
             }
             break;

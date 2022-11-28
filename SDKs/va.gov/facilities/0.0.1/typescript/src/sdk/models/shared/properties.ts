@@ -1,5 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Addresses } from "./addresses";
 import { DetailedService } from "./detailedservice";
 import { Hours } from "./hours";
@@ -9,71 +8,72 @@ import { Satisfaction } from "./satisfaction";
 import { Services } from "./services";
 import { WaitTimes } from "./waittimes";
 
+
 export enum PropertiesActiveStatusEnum {
-    A = "A"
-,    T = "T"
+    A = "A",
+    T = "T"
 }
 
 export enum PropertiesFacilityTypeEnum {
-    VaBenefitsFacility = "va_benefits_facility"
-,    VaCemetery = "va_cemetery"
-,    VaHealthFacility = "va_health_facility"
-,    VetCenter = "vet_center"
+    VaBenefitsFacility = "va_benefits_facility",
+    VaCemetery = "va_cemetery",
+    VaHealthFacility = "va_health_facility",
+    VetCenter = "vet_center"
 }
 
 
 export class Properties extends SpeakeasyBase {
-  @Metadata({ data: "json, name=active_status" })
+  @SpeakeasyMetadata({ data: "json, name=active_status" })
   activeStatus?: PropertiesActiveStatusEnum;
 
-  @Metadata({ data: "json, name=address" })
+  @SpeakeasyMetadata({ data: "json, name=address" })
   address?: Addresses;
 
-  @Metadata({ data: "json, name=classification" })
+  @SpeakeasyMetadata({ data: "json, name=classification" })
   classification?: string;
 
-  @Metadata({ data: "json, name=detailed_services", elemType: shared.DetailedService })
+  @SpeakeasyMetadata({ data: "json, name=detailed_services", elemType: DetailedService })
   detailedServices?: DetailedService[];
 
-  @Metadata({ data: "json, name=facility_type" })
+  @SpeakeasyMetadata({ data: "json, name=facility_type" })
   facilityType: PropertiesFacilityTypeEnum;
 
-  @Metadata({ data: "json, name=hours" })
+  @SpeakeasyMetadata({ data: "json, name=hours" })
   hours?: Hours;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: string;
 
-  @Metadata({ data: "json, name=mobile" })
+  @SpeakeasyMetadata({ data: "json, name=mobile" })
   mobile?: boolean;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=operating_status" })
+  @SpeakeasyMetadata({ data: "json, name=operating_status" })
   operatingStatus: OperatingStatus;
 
-  @Metadata({ data: "json, name=operational_hours_special_instructions" })
+  @SpeakeasyMetadata({ data: "json, name=operational_hours_special_instructions" })
   operationalHoursSpecialInstructions?: string;
 
-  @Metadata({ data: "json, name=phone" })
+  @SpeakeasyMetadata({ data: "json, name=phone" })
   phone?: Phone;
 
-  @Metadata({ data: "json, name=satisfaction" })
+  @SpeakeasyMetadata({ data: "json, name=satisfaction" })
   satisfaction?: Satisfaction;
 
-  @Metadata({ data: "json, name=services" })
+  @SpeakeasyMetadata({ data: "json, name=services" })
   services?: Services;
 
-  @Metadata({ data: "json, name=time_zone" })
+  @SpeakeasyMetadata({ data: "json, name=time_zone" })
   timeZone?: string;
 
-  @Metadata({ data: "json, name=visn" })
+  @SpeakeasyMetadata({ data: "json, name=visn" })
   visn?: string;
 
-  @Metadata({ data: "json, name=wait_times" })
+  @SpeakeasyMetadata({ data: "json, name=wait_times" })
   waitTimes?: WaitTimes;
 
-  @Metadata({ data: "json, name=website" })
+  @SpeakeasyMetadata({ data: "json, name=website" })
   website?: string;
 }

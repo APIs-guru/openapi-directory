@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { WorkflowExecution } from "./workflowexecution";
 import { WorkflowType } from "./workflowtype";
+
 
 
 // ChildWorkflowExecutionStartedEventAttributes
@@ -8,12 +9,12 @@ import { WorkflowType } from "./workflowtype";
  * Provides the details of the <code>ChildWorkflowExecutionStarted</code> event.
 **/
 export class ChildWorkflowExecutionStartedEventAttributes extends SpeakeasyBase {
-  @Metadata({ data: "json, name=initiatedEventId" })
+  @SpeakeasyMetadata({ data: "json, name=initiatedEventId" })
   initiatedEventId: number;
 
-  @Metadata({ data: "json, name=workflowExecution" })
+  @SpeakeasyMetadata({ data: "json, name=workflowExecution" })
   workflowExecution: WorkflowExecution;
 
-  @Metadata({ data: "json, name=workflowType" })
+  @SpeakeasyMetadata({ data: "json, name=workflowType" })
   workflowType: WorkflowType;
 }

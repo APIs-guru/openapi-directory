@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ActionOnFailureEnum } from "./actiononfailureenum";
 import { HadoopJarStepConfig } from "./hadoopjarstepconfig";
+
 
 
 // StepConfig
@@ -8,12 +9,12 @@ import { HadoopJarStepConfig } from "./hadoopjarstepconfig";
  * Specification for a cluster (job flow) step.
 **/
 export class StepConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ActionOnFailure" })
+  @SpeakeasyMetadata({ data: "json, name=ActionOnFailure" })
   actionOnFailure?: ActionOnFailureEnum;
 
-  @Metadata({ data: "json, name=HadoopJarStep" })
+  @SpeakeasyMetadata({ data: "json, name=HadoopJarStep" })
   hadoopJarStep: HadoopJarStepConfig;
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name: string;
 }

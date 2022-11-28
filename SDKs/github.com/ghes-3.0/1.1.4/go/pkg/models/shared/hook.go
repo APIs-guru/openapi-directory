@@ -17,6 +17,8 @@ type HookConfig struct {
 	URL         *string      `json:"url,omitempty"`
 }
 
+// Hook
+// Webhooks for repositories.
 type Hook struct {
 	Active       bool         `json:"active"`
 	Config       HookConfig   `json:"config"`

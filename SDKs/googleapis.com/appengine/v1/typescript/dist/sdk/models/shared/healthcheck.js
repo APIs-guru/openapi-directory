@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // HealthCheck
 /**
  * Health checking configuration for VM instances. Unhealthy instances are killed and replaced with new instances. Only applicable for instances in App Engine flexible environment.
@@ -33,31 +33,31 @@ var HealthCheck = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=checkInterval" }),
+        SpeakeasyMetadata({ data: "json, name=checkInterval" }),
         __metadata("design:type", String)
     ], HealthCheck.prototype, "checkInterval", void 0);
     __decorate([
-        Metadata({ data: "json, name=disableHealthCheck" }),
+        SpeakeasyMetadata({ data: "json, name=disableHealthCheck" }),
         __metadata("design:type", Boolean)
     ], HealthCheck.prototype, "disableHealthCheck", void 0);
     __decorate([
-        Metadata({ data: "json, name=healthyThreshold" }),
+        SpeakeasyMetadata({ data: "json, name=healthyThreshold" }),
         __metadata("design:type", Number)
     ], HealthCheck.prototype, "healthyThreshold", void 0);
     __decorate([
-        Metadata({ data: "json, name=host" }),
+        SpeakeasyMetadata({ data: "json, name=host" }),
         __metadata("design:type", String)
     ], HealthCheck.prototype, "host", void 0);
     __decorate([
-        Metadata({ data: "json, name=restartThreshold" }),
+        SpeakeasyMetadata({ data: "json, name=restartThreshold" }),
         __metadata("design:type", Number)
     ], HealthCheck.prototype, "restartThreshold", void 0);
     __decorate([
-        Metadata({ data: "json, name=timeout" }),
+        SpeakeasyMetadata({ data: "json, name=timeout" }),
         __metadata("design:type", String)
     ], HealthCheck.prototype, "timeout", void 0);
     __decorate([
-        Metadata({ data: "json, name=unhealthyThreshold" }),
+        SpeakeasyMetadata({ data: "json, name=unhealthyThreshold" }),
         __metadata("design:type", Number)
     ], HealthCheck.prototype, "unhealthyThreshold", void 0);
     return HealthCheck;

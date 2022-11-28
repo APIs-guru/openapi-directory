@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 /**
  * A Pub/Sub topic which Secret Manager will publish to when control plane events occur on this secret.
 **/

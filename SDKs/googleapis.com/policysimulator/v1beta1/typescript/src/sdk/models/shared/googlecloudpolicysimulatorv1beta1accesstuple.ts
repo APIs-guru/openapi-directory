@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudPolicysimulatorV1beta1AccessTuple
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Information about the principal, resource, and permission to check.
 **/
 export class GoogleCloudPolicysimulatorV1beta1AccessTuple extends SpeakeasyBase {
-  @Metadata({ data: "json, name=fullResourceName" })
+  @SpeakeasyMetadata({ data: "json, name=fullResourceName" })
   fullResourceName?: string;
 
-  @Metadata({ data: "json, name=permission" })
+  @SpeakeasyMetadata({ data: "json, name=permission" })
   permission?: string;
 
-  @Metadata({ data: "json, name=principal" })
+  @SpeakeasyMetadata({ data: "json, name=principal" })
   principal?: string;
 }

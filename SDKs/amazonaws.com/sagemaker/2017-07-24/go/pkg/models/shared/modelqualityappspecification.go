@@ -1,5 +1,7 @@
 package shared
 
+// ModelQualityAppSpecification
+// Container image configuration object for the monitoring job.
 type ModelQualityAppSpecification struct {
 	ContainerArguments              []string                   `json:"ContainerArguments,omitempty"`
 	ContainerEntrypoint             []string                   `json:"ContainerEntrypoint,omitempty"`

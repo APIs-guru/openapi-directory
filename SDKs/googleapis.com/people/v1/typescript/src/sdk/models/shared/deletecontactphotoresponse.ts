@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Person } from "./person";
+
 
 
 // DeleteContactPhotoResponse
@@ -7,6 +8,6 @@ import { Person } from "./person";
  * The response for deleting a contact's photo.
 **/
 export class DeleteContactPhotoResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=person" })
+  @SpeakeasyMetadata({ data: "json, name=person" })
   person?: Person;
 }

@@ -17,6 +17,8 @@ const (
 	ConditionTypeEnumURLMatches               ConditionTypeEnum = "urlMatches"
 )
 
+// Condition
+// Represents a predicate.
 type Condition struct {
 	Parameter []Parameter        `json:"parameter,omitempty"`
 	Type      *ConditionTypeEnum `json:"type,omitempty"`

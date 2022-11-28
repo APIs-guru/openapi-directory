@@ -1,25 +1,26 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ReportLineReportLine extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Description" })
+  @SpeakeasyMetadata({ data: "json, name=Description" })
   description?: string;
 
-  @Metadata({ data: "json, name=Generated" })
+  @SpeakeasyMetadata({ data: "json, name=Generated" })
   generated?: Date;
 
-  @Metadata({ data: "json, name=TaxMonth" })
+  @SpeakeasyMetadata({ data: "json, name=TaxMonth" })
   taxMonth?: number;
 
-  @Metadata({ data: "json, name=TaxYear" })
+  @SpeakeasyMetadata({ data: "json, name=TaxYear" })
   taxYear?: number;
 
-  @Metadata({ data: "json, name=Value" })
+  @SpeakeasyMetadata({ data: "json, name=Value" })
   value?: number;
 }
 
 
 export class ReportLine extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ReportLine" })
+  @SpeakeasyMetadata({ data: "json, name=ReportLine" })
   reportLine?: ReportLineReportLine;
 }

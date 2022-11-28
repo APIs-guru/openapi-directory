@@ -1,4 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { OrdersCustomBatchRequestEntryCancel } from "./orderscustombatchrequestentrycancel";
 import { OrdersCustomBatchRequestEntryCancelLineItem } from "./orderscustombatchrequestentrycancellineitem";
 import { OrdersCustomBatchRequestEntryInStoreRefundLineItem } from "./orderscustombatchrequestentryinstorerefundlineitem";
@@ -12,55 +12,56 @@ import { OrdersCustomBatchRequestEntryUpdateLineItemShippingDetails } from "./or
 import { OrdersCustomBatchRequestEntryUpdateShipment } from "./orderscustombatchrequestentryupdateshipment";
 
 
+
 export class OrdersCustomBatchRequestEntry extends SpeakeasyBase {
-  @Metadata({ data: "json, name=batchId" })
+  @SpeakeasyMetadata({ data: "json, name=batchId" })
   batchId?: number;
 
-  @Metadata({ data: "json, name=cancel" })
+  @SpeakeasyMetadata({ data: "json, name=cancel" })
   cancel?: OrdersCustomBatchRequestEntryCancel;
 
-  @Metadata({ data: "json, name=cancelLineItem" })
+  @SpeakeasyMetadata({ data: "json, name=cancelLineItem" })
   cancelLineItem?: OrdersCustomBatchRequestEntryCancelLineItem;
 
-  @Metadata({ data: "json, name=inStoreRefundLineItem" })
+  @SpeakeasyMetadata({ data: "json, name=inStoreRefundLineItem" })
   inStoreRefundLineItem?: OrdersCustomBatchRequestEntryInStoreRefundLineItem;
 
-  @Metadata({ data: "json, name=merchantId" })
+  @SpeakeasyMetadata({ data: "json, name=merchantId" })
   merchantId?: string;
 
-  @Metadata({ data: "json, name=merchantOrderId" })
+  @SpeakeasyMetadata({ data: "json, name=merchantOrderId" })
   merchantOrderId?: string;
 
-  @Metadata({ data: "json, name=method" })
+  @SpeakeasyMetadata({ data: "json, name=method" })
   method?: string;
 
-  @Metadata({ data: "json, name=operationId" })
+  @SpeakeasyMetadata({ data: "json, name=operationId" })
   operationId?: string;
 
-  @Metadata({ data: "json, name=orderId" })
+  @SpeakeasyMetadata({ data: "json, name=orderId" })
   orderId?: string;
 
-  @Metadata({ data: "json, name=refund" })
+  @SpeakeasyMetadata({ data: "json, name=refund" })
   refund?: OrdersCustomBatchRequestEntryRefund;
 
-  @Metadata({ data: "json, name=rejectReturnLineItem" })
+  @SpeakeasyMetadata({ data: "json, name=rejectReturnLineItem" })
   rejectReturnLineItem?: OrdersCustomBatchRequestEntryRejectReturnLineItem;
 
-  @Metadata({ data: "json, name=returnLineItem" })
+  @SpeakeasyMetadata({ data: "json, name=returnLineItem" })
   returnLineItem?: OrdersCustomBatchRequestEntryReturnLineItem;
 
-  @Metadata({ data: "json, name=returnRefundLineItem" })
+  @SpeakeasyMetadata({ data: "json, name=returnRefundLineItem" })
   returnRefundLineItem?: OrdersCustomBatchRequestEntryReturnRefundLineItem;
 
-  @Metadata({ data: "json, name=setLineItemMetadata" })
+  @SpeakeasyMetadata({ data: "json, name=setLineItemMetadata" })
   setLineItemMetadata?: OrdersCustomBatchRequestEntrySetLineItemMetadata;
 
-  @Metadata({ data: "json, name=shipLineItems" })
+  @SpeakeasyMetadata({ data: "json, name=shipLineItems" })
   shipLineItems?: OrdersCustomBatchRequestEntryShipLineItems;
 
-  @Metadata({ data: "json, name=updateLineItemShippingDetails" })
+  @SpeakeasyMetadata({ data: "json, name=updateLineItemShippingDetails" })
   updateLineItemShippingDetails?: OrdersCustomBatchRequestEntryUpdateLineItemShippingDetails;
 
-  @Metadata({ data: "json, name=updateShipment" })
+  @SpeakeasyMetadata({ data: "json, name=updateShipment" })
   updateShipment?: OrdersCustomBatchRequestEntryUpdateShipment;
 }

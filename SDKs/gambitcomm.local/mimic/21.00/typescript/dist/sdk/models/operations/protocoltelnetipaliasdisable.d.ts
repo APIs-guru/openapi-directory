@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 export declare class ProtocolTelnetIpaliasDisablePathParams extends SpeakeasyBase {
     agentNum: number;
     ipaddress: string;

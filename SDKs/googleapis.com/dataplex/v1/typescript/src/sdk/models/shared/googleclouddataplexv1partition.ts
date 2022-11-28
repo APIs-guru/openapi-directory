@@ -1,4 +1,21 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
+
+
+// GoogleCloudDataplexV1PartitionInput
+/** 
+ * Represents partition metadata contained within entity instances.
+**/
+export class GoogleCloudDataplexV1PartitionInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=etag" })
+  etag?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=location" })
+  location?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=values" })
+  values?: string[];
+}
 
 
 // GoogleCloudDataplexV1Partition
@@ -6,15 +23,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Represents partition metadata contained within entity instances.
 **/
 export class GoogleCloudDataplexV1Partition extends SpeakeasyBase {
-  @Metadata({ data: "json, name=etag" })
+  @SpeakeasyMetadata({ data: "json, name=etag" })
   etag?: string;
 
-  @Metadata({ data: "json, name=location" })
+  @SpeakeasyMetadata({ data: "json, name=location" })
   location?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=values" })
+  @SpeakeasyMetadata({ data: "json, name=values" })
   values?: string[];
 }

@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CloudSqlCredential } from "./cloudsqlcredential";
+
 
 
 // ConnectionCredential
@@ -7,6 +8,6 @@ import { CloudSqlCredential } from "./cloudsqlcredential";
  * Credential to use with a connection.
 **/
 export class ConnectionCredential extends SpeakeasyBase {
-  @Metadata({ data: "json, name=cloudSql" })
+  @SpeakeasyMetadata({ data: "json, name=cloudSql" })
   cloudSql?: CloudSqlCredential;
 }

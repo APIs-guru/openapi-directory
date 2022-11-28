@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class ChromepolicyMediaUploadPathParams:
-    customer: str = field(default=None, metadata={'path_param': { 'field_name': 'customer', 'style': 'simple', 'explode': False }})
+    customer: str = field(metadata={'path_param': { 'field_name': 'customer', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,21 +26,21 @@ class ChromepolicyMediaUploadQueryParams:
 
 @dataclass
 class ChromepolicyMediaUploadSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class ChromepolicyMediaUploadRequest:
-    path_params: ChromepolicyMediaUploadPathParams = field(default=None)
-    query_params: ChromepolicyMediaUploadQueryParams = field(default=None)
+    path_params: ChromepolicyMediaUploadPathParams = field()
+    query_params: ChromepolicyMediaUploadQueryParams = field()
+    security: ChromepolicyMediaUploadSecurity = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'application/octet-stream' }})
-    security: ChromepolicyMediaUploadSecurity = field(default=None)
     
 
 @dataclass
 class ChromepolicyMediaUploadResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_chrome_policy_versions_v1_upload_policy_file_response: Optional[shared.GoogleChromePolicyVersionsV1UploadPolicyFileResponse] = field(default=None)
-    status_code: int = field(default=None)
     

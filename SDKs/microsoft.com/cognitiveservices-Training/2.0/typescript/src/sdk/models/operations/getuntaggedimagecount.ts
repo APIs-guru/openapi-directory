@@ -1,49 +1,50 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetUntaggedImageCountPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=projectId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=projectId" })
   projectId: string;
 }
 
 
 export class GetUntaggedImageCountQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=iterationId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=iterationId" })
   iterationId?: string;
 }
 
 
 export class GetUntaggedImageCountHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=Training-Key" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Training-Key" })
   trainingKey: string;
 }
 
 
 export class GetUntaggedImageCountRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetUntaggedImageCountPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetUntaggedImageCountQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: GetUntaggedImageCountHeaders;
 }
 
 
 export class GetUntaggedImageCountResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getUntaggedImageCount200ApplicationJsonInt32Integer?: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getUntaggedImageCount200TextJsonInt32Integer?: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

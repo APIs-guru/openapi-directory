@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // MonthlyTransfer
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Describes the monthly data transfer in and out of your virtual private server (or <i>instance</i>).
 **/
 export class MonthlyTransfer extends SpeakeasyBase {
-  @Metadata({ data: "json, name=gbPerMonthAllocated" })
+  @SpeakeasyMetadata({ data: "json, name=gbPerMonthAllocated" })
   gbPerMonthAllocated?: number;
 }

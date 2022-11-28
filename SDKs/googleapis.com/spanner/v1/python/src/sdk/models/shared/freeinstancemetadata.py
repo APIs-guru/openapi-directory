@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class FreeInstanceMetadataExpireBehaviorEnum(str, Enum):
     EXPIRE_BEHAVIOR_UNSPECIFIED = "EXPIRE_BEHAVIOR_UNSPECIFIED"
@@ -11,7 +13,21 @@ class FreeInstanceMetadataExpireBehaviorEnum(str, Enum):
 @dataclass_json
 @dataclass
 class FreeInstanceMetadata:
-    expire_behavior: Optional[FreeInstanceMetadataExpireBehaviorEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'expireBehavior' }})
-    expire_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'expireTime' }})
-    upgrade_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'upgradeTime' }})
+    r"""FreeInstanceMetadata
+    Free instance specific metadata that is kept even after an instance has been upgraded for tracking purposes.
+    """
+    
+    expire_behavior: Optional[FreeInstanceMetadataExpireBehaviorEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('expireBehavior') }})
+    expire_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('expireTime') }})
+    upgrade_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('upgradeTime') }})
+    
+
+@dataclass_json
+@dataclass
+class FreeInstanceMetadataInput:
+    r"""FreeInstanceMetadataInput
+    Free instance specific metadata that is kept even after an instance has been upgraded for tracking purposes.
+    """
+    
+    expire_behavior: Optional[FreeInstanceMetadataExpireBehaviorEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('expireBehavior') }})
     

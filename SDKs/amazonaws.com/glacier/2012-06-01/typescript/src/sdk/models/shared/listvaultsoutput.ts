@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DescribeVaultOutput } from "./describevaultoutput";
+
 
 
 // ListVaultsOutput
@@ -8,9 +8,9 @@ import { DescribeVaultOutput } from "./describevaultoutput";
  * Contains the Amazon S3 Glacier response to your request.
 **/
 export class ListVaultsOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Marker" })
+  @SpeakeasyMetadata({ data: "json, name=Marker" })
   marker?: string;
 
-  @Metadata({ data: "json, name=VaultList", elemType: shared.DescribeVaultOutput })
+  @SpeakeasyMetadata({ data: "json, name=VaultList", elemType: DescribeVaultOutput })
   vaultList?: DescribeVaultOutput[];
 }

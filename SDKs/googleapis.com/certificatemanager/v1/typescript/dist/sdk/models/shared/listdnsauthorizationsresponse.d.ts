@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { DnsAuthorization } from "./dnsauthorization";
 /**
  * Response for the `ListDnsAuthorizations` method.

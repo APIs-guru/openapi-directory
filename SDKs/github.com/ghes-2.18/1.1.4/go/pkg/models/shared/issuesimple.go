@@ -82,6 +82,8 @@ type IssueSimplePullRequest struct {
 	URL      string     `json:"url"`
 }
 
+// IssueSimple
+// Issue Simple
 type IssueSimple struct {
 	ActiveLockReason      *string                 `json:"active_lock_reason,omitempty"`
 	Assignee              IssueSimpleSimpleUser   `json:"assignee"`

@@ -1,15 +1,16 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import { Session } from "./session";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { SessionInput } from "./session";
 
 
-// BatchCreateSessionsRequest
+
+// BatchCreateSessionsRequestInput
 /** 
  * The request for BatchCreateSessions.
 **/
-export class BatchCreateSessionsRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=sessionCount" })
+export class BatchCreateSessionsRequestInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=sessionCount" })
   sessionCount?: number;
 
-  @Metadata({ data: "json, name=sessionTemplate" })
-  sessionTemplate?: Session;
+  @SpeakeasyMetadata({ data: "json, name=sessionTemplate" })
+  sessionTemplate?: SessionInput;
 }

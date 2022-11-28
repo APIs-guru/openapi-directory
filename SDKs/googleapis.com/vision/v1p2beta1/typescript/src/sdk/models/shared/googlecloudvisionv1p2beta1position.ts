@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudVisionV1p2beta1Position
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A 3D position in the image, used primarily for Face detection landmarks. A valid Position must have both x and y coordinates. The position coordinates are in the same scale as the original image.
 **/
 export class GoogleCloudVisionV1p2beta1Position extends SpeakeasyBase {
-  @Metadata({ data: "json, name=x" })
+  @SpeakeasyMetadata({ data: "json, name=x" })
   x?: number;
 
-  @Metadata({ data: "json, name=y" })
+  @SpeakeasyMetadata({ data: "json, name=y" })
   y?: number;
 
-  @Metadata({ data: "json, name=z" })
+  @SpeakeasyMetadata({ data: "json, name=z" })
   z?: number;
 }

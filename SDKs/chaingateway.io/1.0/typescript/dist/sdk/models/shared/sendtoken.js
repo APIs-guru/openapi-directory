@@ -22,38 +22,38 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var SendToken = /** @class */ (function (_super) {
     __extends(SendToken, _super);
     function SendToken() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=amount" }),
+        SpeakeasyMetadata({ data: "json, name=amount" }),
         __metadata("design:type", Number)
     ], SendToken.prototype, "amount", void 0);
     __decorate([
-        Metadata({ data: "json, name=contractaddress" }),
+        SpeakeasyMetadata({ data: "json, name=contractaddress" }),
         __metadata("design:type", String)
     ], SendToken.prototype, "contractaddress", void 0);
     __decorate([
-        Metadata({ data: "json, name=from" }),
+        SpeakeasyMetadata({ data: "json, name=from" }),
         __metadata("design:type", String)
     ], SendToken.prototype, "from", void 0);
     __decorate([
-        Metadata({ data: "json, name=identifier" }),
+        SpeakeasyMetadata({ data: "json, name=identifier" }),
         __metadata("design:type", String)
     ], SendToken.prototype, "identifier", void 0);
     __decorate([
-        Metadata({ data: "json, name=ok" }),
+        SpeakeasyMetadata({ data: "json, name=ok" }),
         __metadata("design:type", Boolean)
     ], SendToken.prototype, "ok", void 0);
     __decorate([
-        Metadata({ data: "json, name=to" }),
+        SpeakeasyMetadata({ data: "json, name=to" }),
         __metadata("design:type", String)
     ], SendToken.prototype, "to", void 0);
     __decorate([
-        Metadata({ data: "json, name=txid" }),
+        SpeakeasyMetadata({ data: "json, name=txid" }),
         __metadata("design:type", String)
     ], SendToken.prototype, "txid", void 0);
     return SendToken;

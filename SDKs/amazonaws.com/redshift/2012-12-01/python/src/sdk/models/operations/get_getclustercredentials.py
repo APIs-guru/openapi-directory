@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 
 class GetGetClusterCredentialsActionEnum(str, Enum):
     GET_CLUSTER_CREDENTIALS = "GetClusterCredentials"
@@ -10,14 +14,14 @@ class GetGetClusterCredentialsVersionEnum(str, Enum):
 
 @dataclass
 class GetGetClusterCredentialsQueryParams:
-    action: GetGetClusterCredentialsActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetGetClusterCredentialsActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    cluster_identifier: str = field(metadata={'query_param': { 'field_name': 'ClusterIdentifier', 'style': 'form', 'explode': True }})
+    db_user: str = field(metadata={'query_param': { 'field_name': 'DbUser', 'style': 'form', 'explode': True }})
+    version: GetGetClusterCredentialsVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     auto_create: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'AutoCreate', 'style': 'form', 'explode': True }})
-    cluster_identifier: str = field(default=None, metadata={'query_param': { 'field_name': 'ClusterIdentifier', 'style': 'form', 'explode': True }})
     db_groups: Optional[List[str]] = field(default=None, metadata={'query_param': { 'field_name': 'DbGroups', 'style': 'form', 'explode': True }})
     db_name: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'DbName', 'style': 'form', 'explode': True }})
-    db_user: str = field(default=None, metadata={'query_param': { 'field_name': 'DbUser', 'style': 'form', 'explode': True }})
     duration_seconds: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'DurationSeconds', 'style': 'form', 'explode': True }})
-    version: GetGetClusterCredentialsVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -33,13 +37,13 @@ class GetGetClusterCredentialsHeaders:
 
 @dataclass
 class GetGetClusterCredentialsRequest:
-    query_params: GetGetClusterCredentialsQueryParams = field(default=None)
-    headers: GetGetClusterCredentialsHeaders = field(default=None)
+    headers: GetGetClusterCredentialsHeaders = field()
+    query_params: GetGetClusterCredentialsQueryParams = field()
     
 
 @dataclass
 class GetGetClusterCredentialsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

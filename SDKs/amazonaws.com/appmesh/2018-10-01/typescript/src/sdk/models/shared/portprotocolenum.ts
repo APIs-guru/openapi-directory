@@ -1,6 +1,7 @@
 
 
+
 export enum PortProtocolEnum {
-    Http = "http"
-,    Tcp = "tcp"
+    Http = "http",
+    Tcp = "tcp"
 }

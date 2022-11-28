@@ -1,6 +1,7 @@
 
 
+
 export enum DataFormatValueEnum {
-    Csv = "csv"
-,    Parquet = "parquet"
+    Csv = "csv",
+    Parquet = "parquet"
 }

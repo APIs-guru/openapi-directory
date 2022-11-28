@@ -22,19 +22,19 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { RecommendationSummary } from "./recommendationsummary";
 var GetRecommendationSummariesResponse = /** @class */ (function (_super) {
     __extends(GetRecommendationSummariesResponse, _super);
     function GetRecommendationSummariesResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=nextToken" }),
+        SpeakeasyMetadata({ data: "json, name=nextToken" }),
         __metadata("design:type", String)
     ], GetRecommendationSummariesResponse.prototype, "nextToken", void 0);
     __decorate([
-        Metadata({ data: "json, name=recommendationSummaries", elemType: shared.RecommendationSummary }),
+        SpeakeasyMetadata({ data: "json, name=recommendationSummaries", elemType: RecommendationSummary }),
         __metadata("design:type", Array)
     ], GetRecommendationSummariesResponse.prototype, "recommendationSummaries", void 0);
     return GetRecommendationSummariesResponse;

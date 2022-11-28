@@ -1,9 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum ActiveMetricRestrictionRestrictedMetricTypesEnum {
-    RestrictedMetricTypeUnspecified = "RESTRICTED_METRIC_TYPE_UNSPECIFIED"
-,    CostData = "COST_DATA"
-,    RevenueData = "REVENUE_DATA"
+    RestrictedMetricTypeUnspecified = "RESTRICTED_METRIC_TYPE_UNSPECIFIED",
+    CostData = "COST_DATA",
+    RevenueData = "REVENUE_DATA"
 }
 
 
@@ -12,9 +13,9 @@ export enum ActiveMetricRestrictionRestrictedMetricTypesEnum {
  * A metric actively restricted in creating the report.
 **/
 export class ActiveMetricRestriction extends SpeakeasyBase {
-  @Metadata({ data: "json, name=metricName" })
+  @SpeakeasyMetadata({ data: "json, name=metricName" })
   metricName?: string;
 
-  @Metadata({ data: "json, name=restrictedMetricTypes" })
+  @SpeakeasyMetadata({ data: "json, name=restrictedMetricTypes" })
   restrictedMetricTypes?: ActiveMetricRestrictionRestrictedMetricTypesEnum[];
 }

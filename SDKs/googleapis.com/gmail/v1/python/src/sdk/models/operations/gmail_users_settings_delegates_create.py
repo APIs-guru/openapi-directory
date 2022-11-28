@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class GmailUsersSettingsDelegatesCreatePathParams:
-    user_id: str = field(default=None, metadata={'path_param': { 'field_name': 'userId', 'style': 'simple', 'explode': False }})
+    user_id: str = field(metadata={'path_param': { 'field_name': 'userId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,21 +26,21 @@ class GmailUsersSettingsDelegatesCreateQueryParams:
 
 @dataclass
 class GmailUsersSettingsDelegatesCreateSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class GmailUsersSettingsDelegatesCreateRequest:
-    path_params: GmailUsersSettingsDelegatesCreatePathParams = field(default=None)
-    query_params: GmailUsersSettingsDelegatesCreateQueryParams = field(default=None)
+    path_params: GmailUsersSettingsDelegatesCreatePathParams = field()
+    query_params: GmailUsersSettingsDelegatesCreateQueryParams = field()
+    security: GmailUsersSettingsDelegatesCreateSecurity = field()
     request: Optional[shared.Delegate] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: GmailUsersSettingsDelegatesCreateSecurity = field(default=None)
     
 
 @dataclass
 class GmailUsersSettingsDelegatesCreateResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     delegate: Optional[shared.Delegate] = field(default=None)
-    status_code: int = field(default=None)
     

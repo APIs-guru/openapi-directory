@@ -22,9 +22,11 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { Cpu } from "./cpu";
+import { Disk } from "./disk";
 import { IdentificationHints } from "./identificationhints";
+import { NetworkInterface } from "./networkinterface";
 import { Os } from "./os";
 // SourceProperties
 /**
@@ -36,35 +38,35 @@ var SourceProperties = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=cpus", elemType: shared.Cpu }),
+        SpeakeasyMetadata({ data: "json, name=cpus", elemType: Cpu }),
         __metadata("design:type", Array)
     ], SourceProperties.prototype, "cpus", void 0);
     __decorate([
-        Metadata({ data: "json, name=disks", elemType: shared.Disk }),
+        SpeakeasyMetadata({ data: "json, name=disks", elemType: Disk }),
         __metadata("design:type", Array)
     ], SourceProperties.prototype, "disks", void 0);
     __decorate([
-        Metadata({ data: "json, name=identificationHints" }),
+        SpeakeasyMetadata({ data: "json, name=identificationHints" }),
         __metadata("design:type", IdentificationHints)
     ], SourceProperties.prototype, "identificationHints", void 0);
     __decorate([
-        Metadata({ data: "json, name=lastUpdatedDateTime" }),
+        SpeakeasyMetadata({ data: "json, name=lastUpdatedDateTime" }),
         __metadata("design:type", String)
     ], SourceProperties.prototype, "lastUpdatedDateTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=networkInterfaces", elemType: shared.NetworkInterface }),
+        SpeakeasyMetadata({ data: "json, name=networkInterfaces", elemType: NetworkInterface }),
         __metadata("design:type", Array)
     ], SourceProperties.prototype, "networkInterfaces", void 0);
     __decorate([
-        Metadata({ data: "json, name=os" }),
+        SpeakeasyMetadata({ data: "json, name=os" }),
         __metadata("design:type", Os)
     ], SourceProperties.prototype, "os", void 0);
     __decorate([
-        Metadata({ data: "json, name=ramBytes" }),
+        SpeakeasyMetadata({ data: "json, name=ramBytes" }),
         __metadata("design:type", Number)
     ], SourceProperties.prototype, "ramBytes", void 0);
     __decorate([
-        Metadata({ data: "json, name=recommendedInstanceType" }),
+        SpeakeasyMetadata({ data: "json, name=recommendedInstanceType" }),
         __metadata("design:type", String)
     ], SourceProperties.prototype, "recommendedInstanceType", void 0);
     return SourceProperties;

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // DescribeHsmRequest
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Contains the inputs for the <a>DescribeHsm</a> operation.
 **/
 export class DescribeHsmRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=HsmArn" })
+  @SpeakeasyMetadata({ data: "json, name=HsmArn" })
   hsmArn?: string;
 
-  @Metadata({ data: "json, name=HsmSerialNumber" })
+  @SpeakeasyMetadata({ data: "json, name=HsmSerialNumber" })
   hsmSerialNumber?: string;
 }

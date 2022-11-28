@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { StopStatusEnum } from "./stopstatusenum";
+
 
 
 // StopDeploymentOutput
@@ -7,9 +8,9 @@ import { StopStatusEnum } from "./stopstatusenum";
  *  Represents the output of a <code>StopDeployment</code> operation. 
 **/
 export class StopDeploymentOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: StopStatusEnum;
 
-  @Metadata({ data: "json, name=statusMessage" })
+  @SpeakeasyMetadata({ data: "json, name=statusMessage" })
   statusMessage?: string;
 }

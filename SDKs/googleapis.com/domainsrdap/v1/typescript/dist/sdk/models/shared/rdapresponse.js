@@ -22,9 +22,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { HttpBody } from "./httpbody";
+import { Notice } from "./notice";
 // RdapResponse
 /**
  * Response to a general RDAP query.
@@ -35,31 +35,31 @@ var RdapResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=description" }),
+        SpeakeasyMetadata({ data: "json, name=description" }),
         __metadata("design:type", Array)
     ], RdapResponse.prototype, "description", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorCode" }),
+        SpeakeasyMetadata({ data: "json, name=errorCode" }),
         __metadata("design:type", Number)
     ], RdapResponse.prototype, "errorCode", void 0);
     __decorate([
-        Metadata({ data: "json, name=jsonResponse" }),
+        SpeakeasyMetadata({ data: "json, name=jsonResponse" }),
         __metadata("design:type", HttpBody)
     ], RdapResponse.prototype, "jsonResponse", void 0);
     __decorate([
-        Metadata({ data: "json, name=lang" }),
+        SpeakeasyMetadata({ data: "json, name=lang" }),
         __metadata("design:type", String)
     ], RdapResponse.prototype, "lang", void 0);
     __decorate([
-        Metadata({ data: "json, name=notices", elemType: shared.Notice }),
+        SpeakeasyMetadata({ data: "json, name=notices", elemType: Notice }),
         __metadata("design:type", Array)
     ], RdapResponse.prototype, "notices", void 0);
     __decorate([
-        Metadata({ data: "json, name=rdapConformance" }),
+        SpeakeasyMetadata({ data: "json, name=rdapConformance" }),
         __metadata("design:type", Array)
     ], RdapResponse.prototype, "rdapConformance", void 0);
     __decorate([
-        Metadata({ data: "json, name=title" }),
+        SpeakeasyMetadata({ data: "json, name=title" }),
         __metadata("design:type", String)
     ], RdapResponse.prototype, "title", void 0);
     return RdapResponse;

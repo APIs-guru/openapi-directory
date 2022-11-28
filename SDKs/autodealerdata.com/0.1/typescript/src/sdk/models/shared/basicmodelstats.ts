@@ -1,19 +1,20 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class BasicModelStats extends SpeakeasyBase {
-  @Metadata({ data: "json, name=average" })
+  @SpeakeasyMetadata({ data: "json, name=average" })
   average: number;
 
-  @Metadata({ data: "json, name=median" })
+  @SpeakeasyMetadata({ data: "json, name=median" })
   median: number;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 
-  @Metadata({ data: "json, name=pVariance" })
+  @SpeakeasyMetadata({ data: "json, name=pVariance" })
   pVariance: number;
 
-  @Metadata({ data: "json, name=stdDev" })
+  @SpeakeasyMetadata({ data: "json, name=stdDev" })
   stdDev: number;
 }

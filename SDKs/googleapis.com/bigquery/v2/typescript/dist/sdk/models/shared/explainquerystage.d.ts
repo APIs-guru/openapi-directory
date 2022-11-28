@@ -1,0 +1,34 @@
+import { SpeakeasyBase } from "../../../internal/utils";
+import { ExplainQueryStep } from "./explainquerystep";
+export declare class ExplainQueryStage extends SpeakeasyBase {
+    completedParallelInputs?: string;
+    computeMsAvg?: string;
+    computeMsMax?: string;
+    computeRatioAvg?: number;
+    computeRatioMax?: number;
+    endMs?: string;
+    id?: string;
+    inputStages?: string[];
+    name?: string;
+    parallelInputs?: string;
+    readMsAvg?: string;
+    readMsMax?: string;
+    readRatioAvg?: number;
+    readRatioMax?: number;
+    recordsRead?: string;
+    recordsWritten?: string;
+    shuffleOutputBytes?: string;
+    shuffleOutputBytesSpilled?: string;
+    slotMs?: string;
+    startMs?: string;
+    status?: string;
+    steps?: ExplainQueryStep[];
+    waitMsAvg?: string;
+    waitMsMax?: string;
+    waitRatioAvg?: number;
+    waitRatioMax?: number;
+    writeMsAvg?: string;
+    writeMsMax?: string;
+    writeRatioAvg?: number;
+    writeRatioMax?: number;
+}

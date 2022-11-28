@@ -1,136 +1,137 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class CreateCollectionRequestBodyCollectionInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=schema" })
+  @SpeakeasyMetadata({ data: "json, name=schema" })
   schema?: string;
 }
 
 
 export class CreateCollectionRequestBodyCollectionItemItemRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=mode" })
+  @SpeakeasyMetadata({ data: "json, name=mode" })
   mode?: string;
 
-  @Metadata({ data: "json, name=raw" })
+  @SpeakeasyMetadata({ data: "json, name=raw" })
   raw?: string;
 }
 
 
 export class CreateCollectionRequestBodyCollectionItemItemRequestHeader extends SpeakeasyBase {
-  @Metadata({ data: "json, name=key" })
+  @SpeakeasyMetadata({ data: "json, name=key" })
   key?: string;
 
-  @Metadata({ data: "json, name=value" })
+  @SpeakeasyMetadata({ data: "json, name=value" })
   value?: string;
 }
 
 
 export class CreateCollectionRequestBodyCollectionItemItemRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=body" })
+  @SpeakeasyMetadata({ data: "json, name=body" })
   body?: CreateCollectionRequestBodyCollectionItemItemRequestBody;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=header", elemType: operations.CreateCollectionRequestBodyCollectionItemItemRequestHeader })
+  @SpeakeasyMetadata({ data: "json, name=header", elemType: CreateCollectionRequestBodyCollectionItemItemRequestHeader })
   header?: CreateCollectionRequestBodyCollectionItemItemRequestHeader[];
 
-  @Metadata({ data: "json, name=method" })
+  @SpeakeasyMetadata({ data: "json, name=method" })
   method?: string;
 
-  @Metadata({ data: "json, name=url" })
+  @SpeakeasyMetadata({ data: "json, name=url" })
   url?: string;
 }
 
 
 export class CreateCollectionRequestBodyCollectionItemItem extends SpeakeasyBase {
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=request" })
+  @SpeakeasyMetadata({ data: "json, name=request" })
   request?: CreateCollectionRequestBodyCollectionItemItemRequest;
 }
 
 
 export class CreateCollectionRequestBodyCollectionItem extends SpeakeasyBase {
-  @Metadata({ data: "json, name=item", elemType: operations.CreateCollectionRequestBodyCollectionItemItem })
+  @SpeakeasyMetadata({ data: "json, name=item", elemType: CreateCollectionRequestBodyCollectionItemItem })
   item?: CreateCollectionRequestBodyCollectionItemItem[];
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 }
 
 
 export class CreateCollectionRequestBodyCollection extends SpeakeasyBase {
-  @Metadata({ data: "json, name=info" })
+  @SpeakeasyMetadata({ data: "json, name=info" })
   info?: CreateCollectionRequestBodyCollectionInfo;
 
-  @Metadata({ data: "json, name=item", elemType: operations.CreateCollectionRequestBodyCollectionItem })
+  @SpeakeasyMetadata({ data: "json, name=item", elemType: CreateCollectionRequestBodyCollectionItem })
   item?: CreateCollectionRequestBodyCollectionItem[];
 }
 
 
 export class CreateCollectionRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=collection" })
+  @SpeakeasyMetadata({ data: "json, name=collection" })
   collection?: CreateCollectionRequestBodyCollection;
 }
 
 
-export class CreateCollectionRequest extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/json" })
-  request?: CreateCollectionRequestBody;
-}
-
-
 export class CreateCollection200ApplicationJsonCollection extends SpeakeasyBase {
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=uid" })
+  @SpeakeasyMetadata({ data: "json, name=uid" })
   uid?: string;
 }
 
 
 export class CreateCollection200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=collection" })
+  @SpeakeasyMetadata({ data: "json, name=collection" })
   collection?: CreateCollection200ApplicationJsonCollection;
 }
 
 
 export class CreateCollection400ApplicationJsonError extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 }
 
 
 export class CreateCollection400ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=error" })
+  @SpeakeasyMetadata({ data: "json, name=error" })
   error?: CreateCollection400ApplicationJsonError;
 }
 
 
+export class CreateCollectionRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request?: CreateCollectionRequestBody;
+}
+
+
 export class CreateCollectionResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   createCollection200ApplicationJsonObject?: CreateCollection200ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   createCollection400ApplicationJsonObject?: CreateCollection400ApplicationJson;
 }

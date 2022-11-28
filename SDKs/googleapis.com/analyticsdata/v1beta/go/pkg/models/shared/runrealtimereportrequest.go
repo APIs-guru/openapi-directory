@@ -10,6 +10,8 @@ const (
 	RunRealtimeReportRequestMetricAggregationsEnumCount                        RunRealtimeReportRequestMetricAggregationsEnum = "COUNT"
 )
 
+// RunRealtimeReportRequest
+// The request to generate a realtime report.
 type RunRealtimeReportRequest struct {
 	DimensionFilter     *FilterExpression                                `json:"dimensionFilter,omitempty"`
 	Dimensions          []Dimension                                      `json:"dimensions,omitempty"`

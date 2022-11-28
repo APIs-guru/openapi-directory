@@ -7,6 +7,8 @@ const (
 	GoogleAppsCardV1CardHeaderImageTypeEnumCircle GoogleAppsCardV1CardHeaderImageTypeEnum = "CIRCLE"
 )
 
+// GoogleAppsCardV1CardHeader
+// Represents a card header.
 type GoogleAppsCardV1CardHeader struct {
 	ImageAltText *string                                  `json:"imageAltText,omitempty"`
 	ImageType    *GoogleAppsCardV1CardHeaderImageTypeEnum `json:"imageType,omitempty"`

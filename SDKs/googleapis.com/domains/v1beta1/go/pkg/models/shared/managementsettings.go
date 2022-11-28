@@ -16,6 +16,14 @@ const (
 	ManagementSettingsTransferLockStateEnumLocked                       ManagementSettingsTransferLockStateEnum = "LOCKED"
 )
 
+// ManagementSettingsInput
+// Defines renewal, billing, and transfer settings for a `Registration`.
+type ManagementSettingsInput struct {
+	TransferLockState *ManagementSettingsTransferLockStateEnum `json:"transferLockState,omitempty"`
+}
+
+// ManagementSettings
+// Defines renewal, billing, and transfer settings for a `Registration`.
 type ManagementSettings struct {
 	RenewalMethod     *ManagementSettingsRenewalMethodEnum     `json:"renewalMethod,omitempty"`
 	TransferLockState *ManagementSettingsTransferLockStateEnum `json:"transferLockState,omitempty"`

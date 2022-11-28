@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AndroidFcmOptions } from "./androidfcmoptions";
 import { AndroidNotification } from "./androidnotification";
 export var AndroidConfigPriorityEnum;
@@ -40,35 +40,35 @@ var AndroidConfig = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=collapseKey" }),
+        SpeakeasyMetadata({ data: "json, name=collapseKey" }),
         __metadata("design:type", String)
     ], AndroidConfig.prototype, "collapseKey", void 0);
     __decorate([
-        Metadata({ data: "json, name=data" }),
+        SpeakeasyMetadata({ data: "json, name=data" }),
         __metadata("design:type", Map)
     ], AndroidConfig.prototype, "data", void 0);
     __decorate([
-        Metadata({ data: "json, name=directBootOk" }),
+        SpeakeasyMetadata({ data: "json, name=directBootOk" }),
         __metadata("design:type", Boolean)
     ], AndroidConfig.prototype, "directBootOk", void 0);
     __decorate([
-        Metadata({ data: "json, name=fcmOptions" }),
+        SpeakeasyMetadata({ data: "json, name=fcmOptions" }),
         __metadata("design:type", AndroidFcmOptions)
     ], AndroidConfig.prototype, "fcmOptions", void 0);
     __decorate([
-        Metadata({ data: "json, name=notification" }),
+        SpeakeasyMetadata({ data: "json, name=notification" }),
         __metadata("design:type", AndroidNotification)
     ], AndroidConfig.prototype, "notification", void 0);
     __decorate([
-        Metadata({ data: "json, name=priority" }),
+        SpeakeasyMetadata({ data: "json, name=priority" }),
         __metadata("design:type", String)
     ], AndroidConfig.prototype, "priority", void 0);
     __decorate([
-        Metadata({ data: "json, name=restrictedPackageName" }),
+        SpeakeasyMetadata({ data: "json, name=restrictedPackageName" }),
         __metadata("design:type", String)
     ], AndroidConfig.prototype, "restrictedPackageName", void 0);
     __decorate([
-        Metadata({ data: "json, name=ttl" }),
+        SpeakeasyMetadata({ data: "json, name=ttl" }),
         __metadata("design:type", String)
     ], AndroidConfig.prototype, "ttl", void 0);
     return AndroidConfig;

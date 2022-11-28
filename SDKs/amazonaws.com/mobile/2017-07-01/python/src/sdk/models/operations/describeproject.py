@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Optional
 from sdk.models import shared
 
 
 @dataclass
 class DescribeProjectQueryParams:
-    project_id: str = field(default=None, metadata={'query_param': { 'field_name': 'projectId', 'style': 'form', 'explode': True }})
+    project_id: str = field(metadata={'query_param': { 'field_name': 'projectId', 'style': 'form', 'explode': True }})
     sync_from_resources: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'syncFromResources', 'style': 'form', 'explode': True }})
     
 
@@ -22,19 +25,19 @@ class DescribeProjectHeaders:
 
 @dataclass
 class DescribeProjectRequest:
-    query_params: DescribeProjectQueryParams = field(default=None)
-    headers: DescribeProjectHeaders = field(default=None)
+    headers: DescribeProjectHeaders = field()
+    query_params: DescribeProjectQueryParams = field()
     
 
 @dataclass
 class DescribeProjectResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[shared.BadRequestException] = field(default=None)
-    content_type: str = field(default=None)
     describe_project_result: Optional[shared.DescribeProjectResult] = field(default=None)
     internal_failure_exception: Optional[shared.InternalFailureException] = field(default=None)
     not_found_exception: Optional[shared.NotFoundException] = field(default=None)
     service_unavailable_exception: Optional[shared.ServiceUnavailableException] = field(default=None)
-    status_code: int = field(default=None)
     too_many_requests_exception: Optional[shared.TooManyRequestsException] = field(default=None)
     unauthorized_exception: Optional[shared.UnauthorizedException] = field(default=None)
     

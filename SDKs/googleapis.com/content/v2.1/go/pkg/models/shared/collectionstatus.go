@@ -1,5 +1,7 @@
 package shared
 
+// CollectionStatus
+// The collectionstatus message.
 type CollectionStatus struct {
 	CollectionLevelIssuses []CollectionStatusItemLevelIssue    `json:"collectionLevelIssuses,omitempty"`
 	CreationDate           *string                             `json:"creationDate,omitempty"`

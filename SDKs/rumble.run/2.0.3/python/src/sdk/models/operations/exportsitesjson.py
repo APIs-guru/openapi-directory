@@ -11,18 +11,18 @@ class ExportSitesJSONQueryParams:
 
 @dataclass
 class ExportSitesJSONSecurity:
-    bearer_auth: shared.SchemeBearerAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer' }})
+    bearer_auth: shared.SchemeBearerAuth = field(metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer' }})
     
 
 @dataclass
 class ExportSitesJSONRequest:
-    query_params: ExportSitesJSONQueryParams = field(default=None)
-    security: ExportSitesJSONSecurity = field(default=None)
+    query_params: ExportSitesJSONQueryParams = field()
+    security: ExportSitesJSONSecurity = field()
     
 
 @dataclass
 class ExportSitesJSONResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     sites: Optional[List[shared.Site]] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -16,14 +16,14 @@ class GetGeocodeQueryParams:
 
 @dataclass
 class GetGeocodeRequest:
-    query_params: GetGeocodeQueryParams = field(default=None)
+    query_params: GetGeocodeQueryParams = field()
     
 
 @dataclass
 class GetGeocodeResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    headers: dict[str, List[str]] = field()
+    status_code: int = field()
     gh_error: Optional[shared.GhError] = field(default=None)
     geocoding_response: Optional[Any] = field(default=None)
-    headers: dict[str, List[str]] = field(default=None)
-    status_code: int = field(default=None)
     

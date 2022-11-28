@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ProperNounCategorizedOut } from "./propernouncategorizedout";
+
 
 
 // BatchProperNounCategorizedOut
@@ -8,6 +8,6 @@ import { ProperNounCategorizedOut } from "./propernouncategorizedout";
  * Represents the output of inferring the common type (anthroponym, toponym, brand, etc.) from a list of proper names.
 **/
 export class BatchProperNounCategorizedOut extends SpeakeasyBase {
-  @Metadata({ data: "json, name=properNouns", elemType: shared.ProperNounCategorizedOut })
+  @SpeakeasyMetadata({ data: "json, name=properNouns", elemType: ProperNounCategorizedOut })
   properNouns?: ProperNounCategorizedOut[];
 }

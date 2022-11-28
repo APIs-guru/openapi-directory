@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TenantProjectConfig } from "./tenantprojectconfig";
+
 
 
 // AddTenantProjectRequest
@@ -7,9 +8,9 @@ import { TenantProjectConfig } from "./tenantprojectconfig";
  * Request to add a newly created and configured tenant project to a tenancy unit.
 **/
 export class AddTenantProjectRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=projectConfig" })
+  @SpeakeasyMetadata({ data: "json, name=projectConfig" })
   projectConfig?: TenantProjectConfig;
 
-  @Metadata({ data: "json, name=tag" })
+  @SpeakeasyMetadata({ data: "json, name=tag" })
   tag?: string;
 }

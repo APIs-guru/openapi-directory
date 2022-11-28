@@ -8,17 +8,9 @@ type FetchUploadStatusByIDPathParams struct {
 	UploadID string `pathParam:"style=simple,explode=false,name=uploadId"`
 }
 
-type FetchUploadStatusByIDSecurityOption1 struct {
-	APIKey shared.SchemeAPIKey `security:"scheme,type=apiKey,subtype=header"`
-}
-
-type FetchUploadStatusByIDSecurityOption2 struct {
-	Oauth2AuthorizationCode shared.SchemeOauth2AuthorizationCode `security:"scheme,type=oauth2"`
-}
-
 type FetchUploadStatusByIDSecurity struct {
-	Option1 *FetchUploadStatusByIDSecurityOption1 `security:"option"`
-	Option2 *FetchUploadStatusByIDSecurityOption2 `security:"option"`
+	APIKey                  *shared.SchemeAPIKey                  `security:"scheme,type=apiKey,subtype=header"`
+	Oauth2AuthorizationCode *shared.SchemeOauth2AuthorizationCode `security:"scheme,type=oauth2"`
 }
 
 type FetchUploadStatusByIDRequest struct {

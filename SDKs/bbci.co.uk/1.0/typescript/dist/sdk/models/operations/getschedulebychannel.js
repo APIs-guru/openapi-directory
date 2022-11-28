@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetScheduleByChannelPathParams = /** @class */ (function (_super) {
     __extends(GetScheduleByChannelPathParams, _super);
@@ -30,11 +30,11 @@ var GetScheduleByChannelPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=channel" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=channel" }),
         __metadata("design:type", String)
     ], GetScheduleByChannelPathParams.prototype, "channel", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=date" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=date" }),
         __metadata("design:type", String)
     ], GetScheduleByChannelPathParams.prototype, "date", void 0);
     return GetScheduleByChannelPathParams;
@@ -46,15 +46,15 @@ var GetScheduleByChannelQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=availability" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=availability" }),
         __metadata("design:type", String)
     ], GetScheduleByChannelQueryParams.prototype, "availability", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=lang" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=lang" }),
         __metadata("design:type", String)
     ], GetScheduleByChannelQueryParams.prototype, "lang", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=rights" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=rights" }),
         __metadata("design:type", String)
     ], GetScheduleByChannelQueryParams.prototype, "rights", void 0);
     return GetScheduleByChannelQueryParams;
@@ -66,11 +66,11 @@ var GetScheduleByChannelRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetScheduleByChannelPathParams)
     ], GetScheduleByChannelRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetScheduleByChannelQueryParams)
     ], GetScheduleByChannelRequest.prototype, "queryParams", void 0);
     return GetScheduleByChannelRequest;
@@ -82,15 +82,15 @@ var GetScheduleByChannelResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetScheduleByChannelResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetScheduleByChannelResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], GetScheduleByChannelResponse.prototype, "ibl", void 0);
     return GetScheduleByChannelResponse;

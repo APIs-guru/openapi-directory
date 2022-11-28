@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class ArtifactregistryProjectsLocationsRepositoriesPythonPackagesGetPathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 class ArtifactregistryProjectsLocationsRepositoriesPythonPackagesGetViewEnum(str, Enum):
     VERSION_VIEW_UNSPECIFIED = "VERSION_VIEW_UNSPECIFIED"
@@ -31,14 +32,14 @@ class ArtifactregistryProjectsLocationsRepositoriesPythonPackagesGetQueryParams:
 
 @dataclass
 class ArtifactregistryProjectsLocationsRepositoriesPythonPackagesGetSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class ArtifactregistryProjectsLocationsRepositoriesPythonPackagesGetSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -49,14 +50,14 @@ class ArtifactregistryProjectsLocationsRepositoriesPythonPackagesGetSecurity:
 
 @dataclass
 class ArtifactregistryProjectsLocationsRepositoriesPythonPackagesGetRequest:
-    path_params: ArtifactregistryProjectsLocationsRepositoriesPythonPackagesGetPathParams = field(default=None)
-    query_params: ArtifactregistryProjectsLocationsRepositoriesPythonPackagesGetQueryParams = field(default=None)
-    security: ArtifactregistryProjectsLocationsRepositoriesPythonPackagesGetSecurity = field(default=None)
+    path_params: ArtifactregistryProjectsLocationsRepositoriesPythonPackagesGetPathParams = field()
+    query_params: ArtifactregistryProjectsLocationsRepositoriesPythonPackagesGetQueryParams = field()
+    security: ArtifactregistryProjectsLocationsRepositoriesPythonPackagesGetSecurity = field()
     
 
 @dataclass
 class ArtifactregistryProjectsLocationsRepositoriesPythonPackagesGetResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     python_package: Optional[shared.PythonPackage] = field(default=None)
-    status_code: int = field(default=None)
     

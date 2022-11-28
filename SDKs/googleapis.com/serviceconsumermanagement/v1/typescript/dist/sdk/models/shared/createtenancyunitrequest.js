@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // CreateTenancyUnitRequest
 /**
  * Request to create a tenancy unit for a service consumer of a managed service.
@@ -33,7 +33,7 @@ var CreateTenancyUnitRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=tenancyUnitId" }),
+        SpeakeasyMetadata({ data: "json, name=tenancyUnitId" }),
         __metadata("design:type", String)
     ], CreateTenancyUnitRequest.prototype, "tenancyUnitId", void 0);
     return CreateTenancyUnitRequest;

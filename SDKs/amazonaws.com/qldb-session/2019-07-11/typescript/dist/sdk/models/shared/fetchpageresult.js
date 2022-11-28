@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { IoUsage } from "./iousage";
 import { Page } from "./page";
 import { TimingInformation } from "./timinginformation";
@@ -36,15 +36,15 @@ var FetchPageResult = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=ConsumedIOs" }),
+        SpeakeasyMetadata({ data: "json, name=ConsumedIOs" }),
         __metadata("design:type", IoUsage)
     ], FetchPageResult.prototype, "consumedIOs", void 0);
     __decorate([
-        Metadata({ data: "json, name=Page" }),
+        SpeakeasyMetadata({ data: "json, name=Page" }),
         __metadata("design:type", Page)
     ], FetchPageResult.prototype, "page", void 0);
     __decorate([
-        Metadata({ data: "json, name=TimingInformation" }),
+        SpeakeasyMetadata({ data: "json, name=TimingInformation" }),
         __metadata("design:type", TimingInformation)
     ], FetchPageResult.prototype, "timingInformation", void 0);
     return FetchPageResult;

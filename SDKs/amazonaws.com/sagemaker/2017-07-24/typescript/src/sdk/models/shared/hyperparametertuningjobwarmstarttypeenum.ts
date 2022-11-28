@@ -1,6 +1,7 @@
 
 
+
 export enum HyperParameterTuningJobWarmStartTypeEnum {
-    IdenticalDataAndAlgorithm = "IdenticalDataAndAlgorithm"
-,    TransferLearning = "TransferLearning"
+    IdenticalDataAndAlgorithm = "IdenticalDataAndAlgorithm",
+    TransferLearning = "TransferLearning"
 }

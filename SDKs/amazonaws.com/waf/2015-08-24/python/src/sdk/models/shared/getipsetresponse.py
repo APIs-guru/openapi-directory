@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import ipset
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class GetIPSetResponse:
-    ip_set: Optional[ipset.IPSet] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'IPSet' }})
+    ip_set: Optional[IPSet] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('IPSet') }})
     

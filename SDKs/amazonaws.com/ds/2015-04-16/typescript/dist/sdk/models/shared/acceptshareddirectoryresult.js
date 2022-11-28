@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SharedDirectory } from "./shareddirectory";
 var AcceptSharedDirectoryResult = /** @class */ (function (_super) {
     __extends(AcceptSharedDirectoryResult, _super);
@@ -30,7 +30,7 @@ var AcceptSharedDirectoryResult = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=SharedDirectory" }),
+        SpeakeasyMetadata({ data: "json, name=SharedDirectory" }),
         __metadata("design:type", SharedDirectory)
     ], AcceptSharedDirectoryResult.prototype, "sharedDirectory", void 0);
     return AcceptSharedDirectoryResult;

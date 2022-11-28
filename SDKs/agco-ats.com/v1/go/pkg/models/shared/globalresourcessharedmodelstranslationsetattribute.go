@@ -1,5 +1,7 @@
 package shared
 
+// GlobalResourcesSharedModelsTranslationSetAttribute
+// An attribute of a
 type GlobalResourcesSharedModelsTranslationSetAttribute struct {
 	ID               *int32  `json:"ID,omitempty" form:"name=ID"`
 	Name             string  `json:"Name" form:"name=Name"`

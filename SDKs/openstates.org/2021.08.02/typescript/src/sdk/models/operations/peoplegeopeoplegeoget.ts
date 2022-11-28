@@ -1,47 +1,48 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class PeopleGeoPeopleGeoGetQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=apikey" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=apikey" })
   apikey?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=include" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=include" })
   include?: shared.PersonIncludeEnum[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=lat" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=lat" })
   lat: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=lng" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=lng" })
   lng: number;
 }
 
 
 export class PeopleGeoPeopleGeoGetHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=x-api-key" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=x-api-key" })
   xApiKey?: string;
 }
 
 
 export class PeopleGeoPeopleGeoGetRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: PeopleGeoPeopleGeoGetQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: PeopleGeoPeopleGeoGetHeaders;
 }
 
 
 export class PeopleGeoPeopleGeoGetResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   httpValidationError?: shared.HttpValidationError;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   personList?: shared.PersonList;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

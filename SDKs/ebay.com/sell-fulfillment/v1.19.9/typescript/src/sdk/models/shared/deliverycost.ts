@@ -1,7 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Amount } from "./amount";
-import { Amount } from "./amount";
-import { Amount } from "./amount";
+
 
 
 // DeliveryCost
@@ -9,12 +8,12 @@ import { Amount } from "./amount";
  * This type contains a breakdown of all costs associated with the fulfillment of a line item.
 **/
 export class DeliveryCost extends SpeakeasyBase {
-  @Metadata({ data: "json, name=importCharges" })
+  @SpeakeasyMetadata({ data: "json, name=importCharges" })
   importCharges?: Amount;
 
-  @Metadata({ data: "json, name=shippingCost" })
+  @SpeakeasyMetadata({ data: "json, name=shippingCost" })
   shippingCost?: Amount;
 
-  @Metadata({ data: "json, name=shippingIntermediationFee" })
+  @SpeakeasyMetadata({ data: "json, name=shippingIntermediationFee" })
   shippingIntermediationFee?: Amount;
 }

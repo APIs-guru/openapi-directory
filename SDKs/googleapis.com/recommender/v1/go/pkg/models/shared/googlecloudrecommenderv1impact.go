@@ -12,6 +12,8 @@ const (
 	GoogleCloudRecommenderV1ImpactCategoryEnumReliability         GoogleCloudRecommenderV1ImpactCategoryEnum = "RELIABILITY"
 )
 
+// GoogleCloudRecommenderV1Impact
+// Contains the impact a recommendation can have for a given category.
 type GoogleCloudRecommenderV1Impact struct {
 	Category                 *GoogleCloudRecommenderV1ImpactCategoryEnum       `json:"category,omitempty"`
 	CostProjection           *GoogleCloudRecommenderV1CostProjection           `json:"costProjection,omitempty"`

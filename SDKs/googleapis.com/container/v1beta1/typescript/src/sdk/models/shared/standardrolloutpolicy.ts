@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // StandardRolloutPolicy
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Standard rollout policy is the default policy for blue-green.
 **/
 export class StandardRolloutPolicy extends SpeakeasyBase {
-  @Metadata({ data: "json, name=batchNodeCount" })
+  @SpeakeasyMetadata({ data: "json, name=batchNodeCount" })
   batchNodeCount?: number;
 
-  @Metadata({ data: "json, name=batchPercentage" })
+  @SpeakeasyMetadata({ data: "json, name=batchPercentage" })
   batchPercentage?: number;
 
-  @Metadata({ data: "json, name=batchSoakDuration" })
+  @SpeakeasyMetadata({ data: "json, name=batchSoakDuration" })
   batchSoakDuration?: string;
 }

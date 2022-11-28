@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class AutomationExecutionFilterKeyEnum(str, Enum):
     DOCUMENT_NAME_PREFIX = "DocumentNamePrefix"

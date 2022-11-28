@@ -1,12 +1,13 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import { GoogleCloudDialogflowV2ConversationModelEvaluation } from "./googleclouddialogflowv2conversationmodelevaluation";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { GoogleCloudDialogflowV2ConversationModelEvaluationInput } from "./googleclouddialogflowv2conversationmodelevaluation";
 
 
-// GoogleCloudDialogflowV2CreateConversationModelEvaluationRequest
+
+// GoogleCloudDialogflowV2CreateConversationModelEvaluationRequestInput
 /** 
  * The request message for ConversationModels.CreateConversationModelEvaluation
 **/
-export class GoogleCloudDialogflowV2CreateConversationModelEvaluationRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=conversationModelEvaluation" })
-  conversationModelEvaluation?: GoogleCloudDialogflowV2ConversationModelEvaluation;
+export class GoogleCloudDialogflowV2CreateConversationModelEvaluationRequestInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=conversationModelEvaluation" })
+  conversationModelEvaluation?: GoogleCloudDialogflowV2ConversationModelEvaluationInput;
 }

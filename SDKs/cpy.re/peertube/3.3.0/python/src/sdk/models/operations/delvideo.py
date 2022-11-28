@@ -1,25 +1,26 @@
 from dataclasses import dataclass, field
 from typing import Any
+from sdk.models import shared
 
 
 @dataclass
 class DelVideoPathParams:
-    id: Any = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: Any = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class DelVideoSecurity:
-    o_auth2: shared.SchemeOAuth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    o_auth2: shared.SchemeOAuth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DelVideoRequest:
-    path_params: DelVideoPathParams = field(default=None)
-    security: DelVideoSecurity = field(default=None)
+    path_params: DelVideoPathParams = field()
+    security: DelVideoSecurity = field()
     
 
 @dataclass
 class DelVideoResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

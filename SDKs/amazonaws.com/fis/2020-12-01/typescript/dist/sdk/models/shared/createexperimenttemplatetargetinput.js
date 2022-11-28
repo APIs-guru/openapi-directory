@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { ExperimentTemplateTargetInputFilter } from "./experimenttemplatetargetinputfilter";
 // CreateExperimentTemplateTargetInput
 /**
  * Specifies a target for an experiment. You must specify at least one Amazon Resource Name (ARN) or at least one resource tag. You cannot specify both ARNs and tags.
@@ -34,23 +34,23 @@ var CreateExperimentTemplateTargetInput = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=filters", elemType: shared.ExperimentTemplateTargetInputFilter }),
+        SpeakeasyMetadata({ data: "json, name=filters", elemType: ExperimentTemplateTargetInputFilter }),
         __metadata("design:type", Array)
     ], CreateExperimentTemplateTargetInput.prototype, "filters", void 0);
     __decorate([
-        Metadata({ data: "json, name=resourceArns" }),
+        SpeakeasyMetadata({ data: "json, name=resourceArns" }),
         __metadata("design:type", Array)
     ], CreateExperimentTemplateTargetInput.prototype, "resourceArns", void 0);
     __decorate([
-        Metadata({ data: "json, name=resourceTags" }),
+        SpeakeasyMetadata({ data: "json, name=resourceTags" }),
         __metadata("design:type", Map)
     ], CreateExperimentTemplateTargetInput.prototype, "resourceTags", void 0);
     __decorate([
-        Metadata({ data: "json, name=resourceType" }),
+        SpeakeasyMetadata({ data: "json, name=resourceType" }),
         __metadata("design:type", String)
     ], CreateExperimentTemplateTargetInput.prototype, "resourceType", void 0);
     __decorate([
-        Metadata({ data: "json, name=selectionMode" }),
+        SpeakeasyMetadata({ data: "json, name=selectionMode" }),
         __metadata("design:type", String)
     ], CreateExperimentTemplateTargetInput.prototype, "selectionMode", void 0);
     return CreateExperimentTemplateTargetInput;

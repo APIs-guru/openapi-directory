@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GroupNotice
@@ -6,18 +7,18 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Group notices are created by group moderators in order to provide useful information to the group members (eg. group rules and guidelines).
 **/
 export class GroupNotice extends SpeakeasyBase {
-  @Metadata({ data: "json, name=content" })
+  @SpeakeasyMetadata({ data: "json, name=content" })
   content?: string;
 
-  @Metadata({ data: "json, name=date" })
+  @SpeakeasyMetadata({ data: "json, name=date" })
   date?: Date;
 
-  @Metadata({ data: "json, name=group_id" })
+  @SpeakeasyMetadata({ data: "json, name=group_id" })
   groupId?: string;
 
-  @Metadata({ data: "json, name=notice_id" })
+  @SpeakeasyMetadata({ data: "json, name=notice_id" })
   noticeId?: string;
 
-  @Metadata({ data: "json, name=title" })
+  @SpeakeasyMetadata({ data: "json, name=title" })
   title?: string;
 }

@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SqlInjectionMatchSetUpdate } from "./sqlinjectionmatchsetupdate";
+
 
 
 // UpdateSqlInjectionMatchSetRequest
@@ -8,12 +8,12 @@ import { SqlInjectionMatchSetUpdate } from "./sqlinjectionmatchsetupdate";
  * A request to update a <a>SqlInjectionMatchSet</a>.
 **/
 export class UpdateSqlInjectionMatchSetRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ChangeToken" })
+  @SpeakeasyMetadata({ data: "json, name=ChangeToken" })
   changeToken: string;
 
-  @Metadata({ data: "json, name=SqlInjectionMatchSetId" })
+  @SpeakeasyMetadata({ data: "json, name=SqlInjectionMatchSetId" })
   sqlInjectionMatchSetId: string;
 
-  @Metadata({ data: "json, name=Updates", elemType: shared.SqlInjectionMatchSetUpdate })
+  @SpeakeasyMetadata({ data: "json, name=Updates", elemType: SqlInjectionMatchSetUpdate })
   updates: SqlInjectionMatchSetUpdate[];
 }

@@ -1,35 +1,36 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GenderFullPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=fullName" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=fullName" })
   fullName: string;
 }
 
 
 export class GenderFullSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
   apiKey: shared.SchemeApiKey;
 }
 
 
 export class GenderFullRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GenderFullPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: GenderFullSecurity;
 }
 
 
 export class GenderFullResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   personalNameGenderedOut?: shared.PersonalNameGenderedOut;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

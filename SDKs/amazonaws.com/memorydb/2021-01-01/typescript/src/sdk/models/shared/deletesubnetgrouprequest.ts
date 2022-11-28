@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DeleteSubnetGroupRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=SubnetGroupName" })
+  @SpeakeasyMetadata({ data: "json, name=SubnetGroupName" })
   subnetGroupName: string;
 }

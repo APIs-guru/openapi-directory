@@ -24,6 +24,8 @@ const (
 	EnterpriseCrmEventbusProtoWorkflowAlertConfigThresholdTypeEnumExpectedMax              EnterpriseCrmEventbusProtoWorkflowAlertConfigThresholdTypeEnum = "EXPECTED_MAX"
 )
 
+// EnterpriseCrmEventbusProtoWorkflowAlertConfig
+// Message to be used to configure custom alerting in the {@code EventConfig} protos for an event. See go/eventbus-alert-config-examples for examples of the different alerts that can be configured.
 type EnterpriseCrmEventbusProtoWorkflowAlertConfig struct {
 	AggregationPeriod     *string                                                         `json:"aggregationPeriod,omitempty"`
 	AlertDisabled         *bool                                                           `json:"alertDisabled,omitempty"`

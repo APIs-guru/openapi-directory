@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AwsElbLoadBalancerBackendServerDescription
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Provides information about the configuration of an EC2 instance for the load balancer.
 **/
 export class AwsElbLoadBalancerBackendServerDescription extends SpeakeasyBase {
-  @Metadata({ data: "json, name=InstancePort" })
+  @SpeakeasyMetadata({ data: "json, name=InstancePort" })
   instancePort?: number;
 
-  @Metadata({ data: "json, name=PolicyNames" })
+  @SpeakeasyMetadata({ data: "json, name=PolicyNames" })
   policyNames?: string[];
 }

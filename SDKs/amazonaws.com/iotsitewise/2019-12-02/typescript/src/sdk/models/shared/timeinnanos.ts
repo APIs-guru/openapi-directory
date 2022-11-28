@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // TimeInNanos
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Contains a timestamp with optional nanosecond granularity.
 **/
 export class TimeInNanos extends SpeakeasyBase {
-  @Metadata({ data: "json, name=offsetInNanos" })
+  @SpeakeasyMetadata({ data: "json, name=offsetInNanos" })
   offsetInNanos?: number;
 
-  @Metadata({ data: "json, name=timeInSeconds" })
+  @SpeakeasyMetadata({ data: "json, name=timeInSeconds" })
   timeInSeconds: number;
 }

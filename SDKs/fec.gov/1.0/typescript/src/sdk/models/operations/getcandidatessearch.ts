@@ -1,117 +1,118 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
+
 export enum GetCandidatesSearchCandidateStatusEnum {
-    Unknown = ""
-,    C = "C"
-,    F = "F"
-,    N = "N"
-,    P = "P"
+    Unknown = "",
+    C = "C",
+    F = "F",
+    N = "N",
+    P = "P"
 }
 
 export enum GetCandidatesSearchIncumbentChallengeEnum {
-    Unknown = ""
-,    I = "I"
-,    C = "C"
-,    O = "O"
+    Unknown = "",
+    I = "I",
+    C = "C",
+    O = "O"
 }
 
 export enum GetCandidatesSearchOfficeEnum {
-    Unknown = ""
-,    H = "H"
-,    S = "S"
-,    P = "P"
+    Unknown = "",
+    H = "H",
+    S = "S",
+    P = "P"
 }
 
 
 export class GetCandidatesSearchQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=api_key" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=api_key" })
   apiKey: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=candidate_id" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=candidate_id" })
   candidateId?: string[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=candidate_status" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=candidate_status" })
   candidateStatus?: GetCandidatesSearchCandidateStatusEnum[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=cycle" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=cycle" })
   cycle?: number[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=district" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=district" })
   district?: string[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=election_year" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=election_year" })
   electionYear?: number[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=federal_funds_flag" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=federal_funds_flag" })
   federalFundsFlag?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=has_raised_funds" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=has_raised_funds" })
   hasRaisedFunds?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=incumbent_challenge" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=incumbent_challenge" })
   incumbentChallenge?: GetCandidatesSearchIncumbentChallengeEnum[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=is_active_candidate" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=is_active_candidate" })
   isActiveCandidate?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=max_first_file_date" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=max_first_file_date" })
   maxFirstFileDate?: Date;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=min_first_file_date" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=min_first_file_date" })
   minFirstFileDate?: Date;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=name" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=name" })
   name?: string[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=office" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=office" })
   office?: GetCandidatesSearchOfficeEnum[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=page" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page" })
   page?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=party" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=party" })
   party?: string[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=per_page" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=per_page" })
   perPage?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=q" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=q" })
   q?: string[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=sort" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sort" })
   sort?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=sort_hide_null" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sort_hide_null" })
   sortHideNull?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=sort_null_only" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sort_null_only" })
   sortNullOnly?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=sort_nulls_last" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sort_nulls_last" })
   sortNullsLast?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=state" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=state" })
   state?: string[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=year" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=year" })
   year?: string;
 }
 
 
 export class GetCandidatesSearchRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetCandidatesSearchQueryParams;
 }
 
 
 export class GetCandidatesSearchResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   candidatePage?: shared.CandidatePage;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

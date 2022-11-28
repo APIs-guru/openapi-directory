@@ -8,13 +8,13 @@ type ReactionsDeleteLegacyPathParams struct {
 	ReactionID int64 `pathParam:"style=simple,explode=false,name=reaction_id"`
 }
 
-type ReactionsDeleteLegacyRequest struct {
-	PathParams ReactionsDeleteLegacyPathParams
-}
-
 type ReactionsDeleteLegacy415ApplicationJSON struct {
 	DocumentationURL string `json:"documentation_url"`
 	Message          string `json:"message"`
+}
+
+type ReactionsDeleteLegacyRequest struct {
+	PathParams ReactionsDeleteLegacyPathParams
 }
 
 type ReactionsDeleteLegacyResponse struct {

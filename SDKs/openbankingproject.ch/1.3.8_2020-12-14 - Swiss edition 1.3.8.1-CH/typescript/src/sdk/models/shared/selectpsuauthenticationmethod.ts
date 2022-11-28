@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // SelectPsuAuthenticationMethod
@@ -7,6 +8,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * 
 **/
 export class SelectPsuAuthenticationMethod extends SpeakeasyBase {
-  @Metadata({ data: "json, name=authenticationMethodId" })
+  @SpeakeasyMetadata({ data: "json, name=authenticationMethodId" })
   authenticationMethodId: string;
 }

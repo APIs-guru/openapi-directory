@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // DivisionSearchResult
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Represents a political geographic division that matches the requested query.
 **/
 export class DivisionSearchResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=aliases" })
+  @SpeakeasyMetadata({ data: "json, name=aliases" })
   aliases?: string[];
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=ocdId" })
+  @SpeakeasyMetadata({ data: "json, name=ocdId" })
   ocdId?: string;
 }

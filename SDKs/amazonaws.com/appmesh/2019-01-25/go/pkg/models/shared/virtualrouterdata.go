@@ -1,5 +1,7 @@
 package shared
 
+// VirtualRouterData
+// An object that represents a virtual router returned by a describe operation.
 type VirtualRouterData struct {
 	MeshName          string              `json:"meshName"`
 	Metadata          ResourceMetadata    `json:"metadata"`

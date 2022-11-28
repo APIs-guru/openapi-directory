@@ -1,26 +1,36 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import hreftype
-from . import messagecode401_piis_enum
-from . import messagecode401_pis_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class Error401PiisAdditionalErrors:
-    code: messagecode401_piis_enum.MessageCode401PiisEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'code' }})
-    detail: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'detail' }})
-    title: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'title' }})
+    r"""Error401PiisAdditionalErrors
+    This is a data element to support the declaration of additional errors in the context of [RFC7807].
+    """
+    
+    code: MessageCode401PiisEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('code') }})
+    detail: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('detail') }})
+    title: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('title') }})
     
 
 @dataclass_json
 @dataclass
 class Error401Piis:
-    links: Optional[dict[str, hreftype.HrefType]] = field(default=None, metadata={'dataclasses_json': { 'field_name': '_links' }})
-    additional_errors: Optional[List[Error401PiisAdditionalErrors]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'additionalErrors' }})
-    code: messagecode401_pis_enum.MessageCode401PisEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'code' }})
-    detail: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'detail' }})
-    title: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'title' }})
-    type: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    r"""Error401Piis
+    Standardised definition of reporting error information according to [RFC7807]
+    in case of a HTTP error code 401 for PIIS.
+    
+    """
+    
+    code: MessageCode401PisEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('code') }})
+    type: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('type') }})
+    links: Optional[dict[str, HrefType]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('_links') }})
+    additional_errors: Optional[List[Error401PiisAdditionalErrors]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('additionalErrors') }})
+    detail: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('detail') }})
+    title: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('title') }})
     

@@ -1,5 +1,7 @@
 package shared
 
+// PasswordPolicyType
+// The password policy type.
 type PasswordPolicyType struct {
 	MinimumLength                 *int64 `json:"MinimumLength,omitempty"`
 	RequireLowercase              *bool  `json:"RequireLowercase,omitempty"`

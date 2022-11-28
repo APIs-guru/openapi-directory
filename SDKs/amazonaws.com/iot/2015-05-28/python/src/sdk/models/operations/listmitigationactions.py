@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 class ListMitigationActionsActionTypeEnum(str, Enum):
@@ -31,16 +35,16 @@ class ListMitigationActionsHeaders:
 
 @dataclass
 class ListMitigationActionsRequest:
-    query_params: ListMitigationActionsQueryParams = field(default=None)
-    headers: ListMitigationActionsHeaders = field(default=None)
+    headers: ListMitigationActionsHeaders = field()
+    query_params: ListMitigationActionsQueryParams = field()
     
 
 @dataclass
 class ListMitigationActionsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     internal_failure_exception: Optional[Any] = field(default=None)
     invalid_request_exception: Optional[Any] = field(default=None)
     list_mitigation_actions_response: Optional[shared.ListMitigationActionsResponse] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     

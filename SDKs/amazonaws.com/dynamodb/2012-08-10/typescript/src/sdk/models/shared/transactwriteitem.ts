@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ConditionCheck } from "./conditioncheck";
 import { Delete } from "./delete";
 import { Put } from "./put";
 import { Update } from "./update";
+
 
 
 // TransactWriteItem
@@ -10,15 +11,15 @@ import { Update } from "./update";
  * A list of requests that can perform update, put, delete, or check operations on multiple items in one or more tables atomically.
 **/
 export class TransactWriteItem extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ConditionCheck" })
+  @SpeakeasyMetadata({ data: "json, name=ConditionCheck" })
   conditionCheck?: ConditionCheck;
 
-  @Metadata({ data: "json, name=Delete" })
+  @SpeakeasyMetadata({ data: "json, name=Delete" })
   delete?: Delete;
 
-  @Metadata({ data: "json, name=Put" })
+  @SpeakeasyMetadata({ data: "json, name=Put" })
   put?: Put;
 
-  @Metadata({ data: "json, name=Update" })
+  @SpeakeasyMetadata({ data: "json, name=Update" })
   update?: Update;
 }

@@ -1,56 +1,57 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class FunctionsCreateRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=events" })
+  @SpeakeasyMetadata({ data: "json, name=events" })
   events?: string[];
 
-  @Metadata({ data: "json, name=execute" })
+  @SpeakeasyMetadata({ data: "json, name=execute" })
   execute: string[];
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 
-  @Metadata({ data: "json, name=runtime" })
+  @SpeakeasyMetadata({ data: "json, name=runtime" })
   runtime: string;
 
-  @Metadata({ data: "json, name=schedule" })
+  @SpeakeasyMetadata({ data: "json, name=schedule" })
   schedule?: string;
 
-  @Metadata({ data: "json, name=timeout" })
+  @SpeakeasyMetadata({ data: "json, name=timeout" })
   timeout?: number;
 
-  @Metadata({ data: "json, name=vars" })
+  @SpeakeasyMetadata({ data: "json, name=vars" })
   vars?: Map<string, any>;
 }
 
 
 export class FunctionsCreateSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
   key: shared.SchemeKey;
 
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
   project: shared.SchemeProject;
 }
 
 
 export class FunctionsCreateRequest extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request?: FunctionsCreateRequestBody;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: FunctionsCreateSecurity;
 }
 
 
 export class FunctionsCreateResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   function?: shared.Function;
 }

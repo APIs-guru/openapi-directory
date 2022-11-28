@@ -1,48 +1,48 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AddOnRequest } from "./addonrequest";
 import { DiskMap } from "./diskmap";
 import { IpAddressTypeEnum } from "./ipaddresstypeenum";
 import { Tag } from "./tag";
 
 
+
 export class CreateInstancesFromSnapshotRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=addOns", elemType: shared.AddOnRequest })
+  @SpeakeasyMetadata({ data: "json, name=addOns", elemType: AddOnRequest })
   addOns?: AddOnRequest[];
 
-  @Metadata({ data: "json, name=attachedDiskMapping", elemType: shared.DiskMap, elemDepth: 2 })
+  @SpeakeasyMetadata({ data: "json, name=attachedDiskMapping", elemType: DiskMap, elemDepth: 2 })
   attachedDiskMapping?: Map<string, DiskMap[]>;
 
-  @Metadata({ data: "json, name=availabilityZone" })
+  @SpeakeasyMetadata({ data: "json, name=availabilityZone" })
   availabilityZone: string;
 
-  @Metadata({ data: "json, name=bundleId" })
+  @SpeakeasyMetadata({ data: "json, name=bundleId" })
   bundleId: string;
 
-  @Metadata({ data: "json, name=instanceNames" })
+  @SpeakeasyMetadata({ data: "json, name=instanceNames" })
   instanceNames: string[];
 
-  @Metadata({ data: "json, name=instanceSnapshotName" })
+  @SpeakeasyMetadata({ data: "json, name=instanceSnapshotName" })
   instanceSnapshotName?: string;
 
-  @Metadata({ data: "json, name=ipAddressType" })
+  @SpeakeasyMetadata({ data: "json, name=ipAddressType" })
   ipAddressType?: IpAddressTypeEnum;
 
-  @Metadata({ data: "json, name=keyPairName" })
+  @SpeakeasyMetadata({ data: "json, name=keyPairName" })
   keyPairName?: string;
 
-  @Metadata({ data: "json, name=restoreDate" })
+  @SpeakeasyMetadata({ data: "json, name=restoreDate" })
   restoreDate?: string;
 
-  @Metadata({ data: "json, name=sourceInstanceName" })
+  @SpeakeasyMetadata({ data: "json, name=sourceInstanceName" })
   sourceInstanceName?: string;
 
-  @Metadata({ data: "json, name=tags", elemType: shared.Tag })
+  @SpeakeasyMetadata({ data: "json, name=tags", elemType: Tag })
   tags?: Tag[];
 
-  @Metadata({ data: "json, name=useLatestRestorableAutoSnapshot" })
+  @SpeakeasyMetadata({ data: "json, name=useLatestRestorableAutoSnapshot" })
   useLatestRestorableAutoSnapshot?: boolean;
 
-  @Metadata({ data: "json, name=userData" })
+  @SpeakeasyMetadata({ data: "json, name=userData" })
   userData?: string;
 }

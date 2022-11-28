@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetTagFromSubContractorRevisionPathParams = /** @class */ (function (_super) {
     __extends(GetTagFromSubContractorRevisionPathParams, _super);
@@ -30,19 +30,19 @@ var GetTagFromSubContractorRevisionPathParams = /** @class */ (function (_super)
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=EffectiveDate" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=EffectiveDate" }),
         __metadata("design:type", Date)
     ], GetTagFromSubContractorRevisionPathParams.prototype, "effectiveDate", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=EmployerId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=EmployerId" }),
         __metadata("design:type", String)
     ], GetTagFromSubContractorRevisionPathParams.prototype, "employerId", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=SubContractorId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=SubContractorId" }),
         __metadata("design:type", String)
     ], GetTagFromSubContractorRevisionPathParams.prototype, "subContractorId", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=TagId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=TagId" }),
         __metadata("design:type", String)
     ], GetTagFromSubContractorRevisionPathParams.prototype, "tagId", void 0);
     return GetTagFromSubContractorRevisionPathParams;
@@ -54,11 +54,11 @@ var GetTagFromSubContractorRevisionHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=Api-Version" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Api-Version" }),
         __metadata("design:type", String)
     ], GetTagFromSubContractorRevisionHeaders.prototype, "apiVersion", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=Authorization" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Authorization" }),
         __metadata("design:type", String)
     ], GetTagFromSubContractorRevisionHeaders.prototype, "authorization", void 0);
     return GetTagFromSubContractorRevisionHeaders;
@@ -70,11 +70,11 @@ var GetTagFromSubContractorRevisionRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetTagFromSubContractorRevisionPathParams)
     ], GetTagFromSubContractorRevisionRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetTagFromSubContractorRevisionHeaders)
     ], GetTagFromSubContractorRevisionRequest.prototype, "headers", void 0);
     return GetTagFromSubContractorRevisionRequest;
@@ -86,19 +86,19 @@ var GetTagFromSubContractorRevisionResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetTagFromSubContractorRevisionResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.ErrorModel)
     ], GetTagFromSubContractorRevisionResponse.prototype, "errorModel", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetTagFromSubContractorRevisionResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.Tag)
     ], GetTagFromSubContractorRevisionResponse.prototype, "tag", void 0);
     return GetTagFromSubContractorRevisionResponse;

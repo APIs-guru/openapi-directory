@@ -1,5 +1,7 @@
 package shared
 
+// LandlordSummaryTenancyModel
+// Landlord Summary - Landing Page.
 type LandlordSummaryTenancyModel struct {
 	Bond            *float64 `json:"Bond,omitempty"`
 	BranchID        *string  `json:"BranchID,omitempty"`

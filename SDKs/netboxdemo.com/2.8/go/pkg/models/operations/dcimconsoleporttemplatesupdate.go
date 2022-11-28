@@ -10,7 +10,7 @@ type DcimConsolePortTemplatesUpdatePathParams struct {
 
 type DcimConsolePortTemplatesUpdateRequest struct {
 	PathParams DcimConsolePortTemplatesUpdatePathParams
-	Request    shared.WritableConsolePortTemplate `request:"mediaType=application/json"`
+	Request    shared.WritableConsolePortTemplateInput `request:"mediaType=application/json"`
 }
 
 type DcimConsolePortTemplatesUpdateResponse struct {

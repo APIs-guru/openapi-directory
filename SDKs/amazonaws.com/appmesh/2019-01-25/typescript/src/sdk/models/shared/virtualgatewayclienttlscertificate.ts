@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { VirtualGatewayListenerTlsFileCertificate } from "./virtualgatewaylistenertlsfilecertificate";
 import { VirtualGatewayListenerTlsSdsCertificate } from "./virtualgatewaylistenertlssdscertificate";
+
 
 
 // VirtualGatewayClientTlsCertificate
@@ -8,9 +9,9 @@ import { VirtualGatewayListenerTlsSdsCertificate } from "./virtualgatewaylistene
  * An object that represents the virtual gateway's client's Transport Layer Security (TLS) certificate.
 **/
 export class VirtualGatewayClientTlsCertificate extends SpeakeasyBase {
-  @Metadata({ data: "json, name=file" })
+  @SpeakeasyMetadata({ data: "json, name=file" })
   file?: VirtualGatewayListenerTlsFileCertificate;
 
-  @Metadata({ data: "json, name=sds" })
+  @SpeakeasyMetadata({ data: "json, name=sds" })
   sds?: VirtualGatewayListenerTlsSdsCertificate;
 }

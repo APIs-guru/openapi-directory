@@ -33,7 +33,7 @@ type BigquerydatatransferProjectsTransferConfigsCreateSecurity struct {
 type BigquerydatatransferProjectsTransferConfigsCreateRequest struct {
 	PathParams  BigquerydatatransferProjectsTransferConfigsCreatePathParams
 	QueryParams BigquerydatatransferProjectsTransferConfigsCreateQueryParams
-	Request     *shared.TransferConfig `request:"mediaType=application/json"`
+	Request     *shared.TransferConfigInput `request:"mediaType=application/json"`
 	Security    BigquerydatatransferProjectsTransferConfigsCreateSecurity
 }
 

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // KeyUsage
@@ -6,30 +7,30 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Defines one or more purposes for which the key contained in the certificate can be used. Default value for each option is false.
 **/
 export class KeyUsage extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CRLSign" })
+  @SpeakeasyMetadata({ data: "json, name=CRLSign" })
   crlSign?: boolean;
 
-  @Metadata({ data: "json, name=DataEncipherment" })
+  @SpeakeasyMetadata({ data: "json, name=DataEncipherment" })
   dataEncipherment?: boolean;
 
-  @Metadata({ data: "json, name=DecipherOnly" })
+  @SpeakeasyMetadata({ data: "json, name=DecipherOnly" })
   decipherOnly?: boolean;
 
-  @Metadata({ data: "json, name=DigitalSignature" })
+  @SpeakeasyMetadata({ data: "json, name=DigitalSignature" })
   digitalSignature?: boolean;
 
-  @Metadata({ data: "json, name=EncipherOnly" })
+  @SpeakeasyMetadata({ data: "json, name=EncipherOnly" })
   encipherOnly?: boolean;
 
-  @Metadata({ data: "json, name=KeyAgreement" })
+  @SpeakeasyMetadata({ data: "json, name=KeyAgreement" })
   keyAgreement?: boolean;
 
-  @Metadata({ data: "json, name=KeyCertSign" })
+  @SpeakeasyMetadata({ data: "json, name=KeyCertSign" })
   keyCertSign?: boolean;
 
-  @Metadata({ data: "json, name=KeyEncipherment" })
+  @SpeakeasyMetadata({ data: "json, name=KeyEncipherment" })
   keyEncipherment?: boolean;
 
-  @Metadata({ data: "json, name=NonRepudiation" })
+  @SpeakeasyMetadata({ data: "json, name=NonRepudiation" })
   nonRepudiation?: boolean;
 }

@@ -1,13 +1,17 @@
 from dataclasses import dataclass, field
 from typing import List
 from dataclasses_json import dataclass_json
-from . import downloadshare
-from . import range
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class DownloadShareList:
-    items: List[downloadshare.DownloadShare] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'items' }})
-    range: range.Range = field(default=None, metadata={'dataclasses_json': { 'field_name': 'range' }})
+    r"""DownloadShareList
+    List of Download Shares
+    """
+    
+    items: List[DownloadShare] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('items') }})
+    range: Range = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('range') }})
     

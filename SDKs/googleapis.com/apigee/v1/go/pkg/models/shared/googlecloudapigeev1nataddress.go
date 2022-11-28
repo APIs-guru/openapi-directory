@@ -10,6 +10,14 @@ const (
 	GoogleCloudApigeeV1NatAddressStateEnumDeleting         GoogleCloudApigeeV1NatAddressStateEnum = "DELETING"
 )
 
+// GoogleCloudApigeeV1NatAddressInput
+// Apigee NAT(network address translation) address. A NAT address is a static external IP address used for Internet egress traffic.
+type GoogleCloudApigeeV1NatAddressInput struct {
+	Name *string `json:"name,omitempty"`
+}
+
+// GoogleCloudApigeeV1NatAddress
+// Apigee NAT(network address translation) address. A NAT address is a static external IP address used for Internet egress traffic.
 type GoogleCloudApigeeV1NatAddress struct {
 	IPAddress *string                                 `json:"ipAddress,omitempty"`
 	Name      *string                                 `json:"name,omitempty"`

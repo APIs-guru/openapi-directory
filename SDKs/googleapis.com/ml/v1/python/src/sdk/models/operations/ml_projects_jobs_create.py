@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class MlProjectsJobsCreatePathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,21 +26,21 @@ class MlProjectsJobsCreateQueryParams:
 
 @dataclass
 class MlProjectsJobsCreateSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class MlProjectsJobsCreateRequest:
-    path_params: MlProjectsJobsCreatePathParams = field(default=None)
-    query_params: MlProjectsJobsCreateQueryParams = field(default=None)
-    request: Optional[shared.GoogleCloudMlV1Job] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: MlProjectsJobsCreateSecurity = field(default=None)
+    path_params: MlProjectsJobsCreatePathParams = field()
+    query_params: MlProjectsJobsCreateQueryParams = field()
+    security: MlProjectsJobsCreateSecurity = field()
+    request: Optional[shared.GoogleCloudMlV1JobInput] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class MlProjectsJobsCreateResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_cloud_ml_v1_job: Optional[shared.GoogleCloudMlV1Job] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum AlertSeverityEnum {
-    SeverityUnspecified = "SEVERITY_UNSPECIFIED"
-,    Info = "INFO"
-,    Warning = "WARNING"
-,    Severe = "SEVERE"
+    SeverityUnspecified = "SEVERITY_UNSPECIFIED",
+    Info = "INFO",
+    Warning = "WARNING",
+    Severe = "SEVERE"
 }
 
 
@@ -13,15 +14,15 @@ export enum AlertSeverityEnum {
  * Representation of an alert.
 **/
 export class Alert extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=severity" })
+  @SpeakeasyMetadata({ data: "json, name=severity" })
   severity?: AlertSeverityEnum;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: string;
 }

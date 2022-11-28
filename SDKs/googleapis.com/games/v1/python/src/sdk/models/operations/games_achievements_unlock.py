@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class GamesAchievementsUnlockPathParams:
-    achievement_id: str = field(default=None, metadata={'path_param': { 'field_name': 'achievementId', 'style': 'simple', 'explode': False }})
+    achievement_id: str = field(metadata={'path_param': { 'field_name': 'achievementId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,20 +26,20 @@ class GamesAchievementsUnlockQueryParams:
 
 @dataclass
 class GamesAchievementsUnlockSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class GamesAchievementsUnlockRequest:
-    path_params: GamesAchievementsUnlockPathParams = field(default=None)
-    query_params: GamesAchievementsUnlockQueryParams = field(default=None)
-    security: GamesAchievementsUnlockSecurity = field(default=None)
+    path_params: GamesAchievementsUnlockPathParams = field()
+    query_params: GamesAchievementsUnlockQueryParams = field()
+    security: GamesAchievementsUnlockSecurity = field()
     
 
 @dataclass
 class GamesAchievementsUnlockResponse:
+    content_type: str = field()
+    status_code: int = field()
     achievement_unlock_response: Optional[shared.AchievementUnlockResponse] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

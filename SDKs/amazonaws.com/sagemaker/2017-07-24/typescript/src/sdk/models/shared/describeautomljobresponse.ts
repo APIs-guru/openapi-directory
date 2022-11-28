@@ -1,5 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AutoMlJobArtifacts } from "./automljobartifacts";
 import { AutoMlJobConfig } from "./automljobconfig";
 import { AutoMlJobObjective } from "./automljobobjective";
@@ -15,67 +14,68 @@ import { ProblemTypeEnum } from "./problemtypeenum";
 import { ResolvedAttributes } from "./resolvedattributes";
 
 
+
 export class DescribeAutoMlJobResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AutoMLJobArn" })
+  @SpeakeasyMetadata({ data: "json, name=AutoMLJobArn" })
   autoMlJobArn: string;
 
-  @Metadata({ data: "json, name=AutoMLJobArtifacts" })
+  @SpeakeasyMetadata({ data: "json, name=AutoMLJobArtifacts" })
   autoMlJobArtifacts?: AutoMlJobArtifacts;
 
-  @Metadata({ data: "json, name=AutoMLJobConfig" })
+  @SpeakeasyMetadata({ data: "json, name=AutoMLJobConfig" })
   autoMlJobConfig?: AutoMlJobConfig;
 
-  @Metadata({ data: "json, name=AutoMLJobName" })
+  @SpeakeasyMetadata({ data: "json, name=AutoMLJobName" })
   autoMlJobName: string;
 
-  @Metadata({ data: "json, name=AutoMLJobObjective" })
+  @SpeakeasyMetadata({ data: "json, name=AutoMLJobObjective" })
   autoMlJobObjective?: AutoMlJobObjective;
 
-  @Metadata({ data: "json, name=AutoMLJobSecondaryStatus" })
+  @SpeakeasyMetadata({ data: "json, name=AutoMLJobSecondaryStatus" })
   autoMlJobSecondaryStatus: AutoMlJobSecondaryStatusEnum;
 
-  @Metadata({ data: "json, name=AutoMLJobStatus" })
+  @SpeakeasyMetadata({ data: "json, name=AutoMLJobStatus" })
   autoMlJobStatus: AutoMlJobStatusEnum;
 
-  @Metadata({ data: "json, name=BestCandidate" })
+  @SpeakeasyMetadata({ data: "json, name=BestCandidate" })
   bestCandidate?: AutoMlCandidate;
 
-  @Metadata({ data: "json, name=CreationTime" })
+  @SpeakeasyMetadata({ data: "json, name=CreationTime" })
   creationTime: Date;
 
-  @Metadata({ data: "json, name=EndTime" })
+  @SpeakeasyMetadata({ data: "json, name=EndTime" })
   endTime?: Date;
 
-  @Metadata({ data: "json, name=FailureReason" })
+  @SpeakeasyMetadata({ data: "json, name=FailureReason" })
   failureReason?: string;
 
-  @Metadata({ data: "json, name=GenerateCandidateDefinitionsOnly" })
+  @SpeakeasyMetadata({ data: "json, name=GenerateCandidateDefinitionsOnly" })
   generateCandidateDefinitionsOnly?: boolean;
 
-  @Metadata({ data: "json, name=InputDataConfig", elemType: shared.AutoMlChannel })
+  @SpeakeasyMetadata({ data: "json, name=InputDataConfig", elemType: AutoMlChannel })
   inputDataConfig: AutoMlChannel[];
 
-  @Metadata({ data: "json, name=LastModifiedTime" })
+  @SpeakeasyMetadata({ data: "json, name=LastModifiedTime" })
   lastModifiedTime: Date;
 
-  @Metadata({ data: "json, name=ModelDeployConfig" })
+  @SpeakeasyMetadata({ data: "json, name=ModelDeployConfig" })
   modelDeployConfig?: ModelDeployConfig;
 
-  @Metadata({ data: "json, name=ModelDeployResult" })
+  @SpeakeasyMetadata({ data: "json, name=ModelDeployResult" })
   modelDeployResult?: ModelDeployResult;
 
-  @Metadata({ data: "json, name=OutputDataConfig" })
+  @SpeakeasyMetadata({ data: "json, name=OutputDataConfig" })
   outputDataConfig: AutoMlOutputDataConfig;
 
-  @Metadata({ data: "json, name=PartialFailureReasons", elemType: shared.AutoMlPartialFailureReason })
+  @SpeakeasyMetadata({ data: "json, name=PartialFailureReasons", elemType: AutoMlPartialFailureReason })
   partialFailureReasons?: AutoMlPartialFailureReason[];
 
-  @Metadata({ data: "json, name=ProblemType" })
+  @SpeakeasyMetadata({ data: "json, name=ProblemType" })
   problemType?: ProblemTypeEnum;
 
-  @Metadata({ data: "json, name=ResolvedAttributes" })
+  @SpeakeasyMetadata({ data: "json, name=ResolvedAttributes" })
   resolvedAttributes?: ResolvedAttributes;
 
-  @Metadata({ data: "json, name=RoleArn" })
+  @SpeakeasyMetadata({ data: "json, name=RoleArn" })
   roleArn: string;
 }

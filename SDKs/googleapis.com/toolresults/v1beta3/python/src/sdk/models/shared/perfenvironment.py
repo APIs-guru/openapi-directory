@@ -1,13 +1,17 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import cpuinfo
-from . import memoryinfo
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class PerfEnvironment:
-    cpu_info: Optional[cpuinfo.CPUInfo] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'cpuInfo' }})
-    memory_info: Optional[memoryinfo.MemoryInfo] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'memoryInfo' }})
+    r"""PerfEnvironment
+    Encapsulates performance environment info
+    """
+    
+    cpu_info: Optional[CPUInfo] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('cpuInfo') }})
+    memory_info: Optional[MemoryInfo] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('memoryInfo') }})
     

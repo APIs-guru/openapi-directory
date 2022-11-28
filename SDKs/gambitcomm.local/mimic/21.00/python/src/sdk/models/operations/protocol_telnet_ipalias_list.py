@@ -5,17 +5,17 @@ from sdk.models import shared
 
 @dataclass
 class ProtocolTelnetIpaliasListPathParams:
-    agent_num: int = field(default=None, metadata={'path_param': { 'field_name': 'agentNum', 'style': 'simple', 'explode': False }})
+    agent_num: int = field(metadata={'path_param': { 'field_name': 'agentNum', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class ProtocolTelnetIpaliasListRequest:
-    path_params: ProtocolTelnetIpaliasListPathParams = field(default=None)
+    path_params: ProtocolTelnetIpaliasListPathParams = field()
     
 
 @dataclass
 class ProtocolTelnetIpaliasListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     ip_aliases: Optional[List[shared.IPAlias]] = field(default=None)
-    status_code: int = field(default=None)
     

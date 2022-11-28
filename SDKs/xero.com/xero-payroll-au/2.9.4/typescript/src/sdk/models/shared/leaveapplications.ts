@@ -1,9 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { LeaveApplication } from "./leaveapplication";
 
 
+
 export class LeaveApplications extends SpeakeasyBase {
-  @Metadata({ data: "json, name=LeaveApplications", elemType: shared.LeaveApplication })
+  @SpeakeasyMetadata({ data: "json, name=LeaveApplications", elemType: LeaveApplication })
   leaveApplications?: LeaveApplication[];
 }

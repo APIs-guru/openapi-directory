@@ -1,7 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from typing import Any,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import reference
+from sdk import utils
+from . import *
 
 class FieldDataTypeEnum(str, Enum):
     DATA_TYPE_UNSPECIFIED = "DATA_TYPE_UNSPECIFIED"
@@ -54,12 +56,16 @@ class FieldDataTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class Field:
-    additional_details: Optional[dict[str, Any]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'additionalDetails' }})
-    data_type: Optional[FieldDataTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'dataType' }})
-    default_value: Optional[Any] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'defaultValue' }})
-    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
-    key: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    nullable: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'nullable' }})
-    reference: Optional[reference.Reference] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'reference' }})
+    r"""Field
+    Message contains EntityType's Field metadata.
+    """
+    
+    additional_details: Optional[dict[str, Any]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('additionalDetails') }})
+    data_type: Optional[FieldDataTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('dataType') }})
+    default_value: Optional[Any] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('defaultValue') }})
+    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('description') }})
+    key: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('key') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    nullable: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('nullable') }})
+    reference: Optional[Reference] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('reference') }})
     

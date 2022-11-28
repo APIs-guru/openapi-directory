@@ -10,14 +10,14 @@ class PackageDeleteQueryParams:
 
 @dataclass
 class PackageDeleteRequest:
-    query_params: PackageDeleteQueryParams = field(default=None)
+    query_params: PackageDeleteQueryParams = field()
     
 
 @dataclass
 class PackageDeleteResponse:
+    content_type: str = field()
+    status_code: int = field()
     api_exception: Optional[shared.APIException] = field(default=None)
-    content_type: str = field(default=None)
     default_response_dto_of_boolean: Optional[shared.DefaultResponseDtoOfBoolean] = field(default=None)
     default_response_dto_of_string: Optional[shared.DefaultResponseDtoOfString] = field(default=None)
-    status_code: int = field(default=None)
     

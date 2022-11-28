@@ -17,11 +17,15 @@ const (
 	FileStatusEnumQueued          FileStatusEnum = "QUEUED"
 )
 
+// FileUrls
+// The URLs where the completed report file can be downloaded.
 type FileUrls struct {
 	APIURL     *string `json:"apiUrl,omitempty"`
 	BrowserURL *string `json:"browserUrl,omitempty"`
 }
 
+// File
+// Represents a File resource. A file contains the metadata for a report run. It shows the status of the run and holds the URLs to the generated report data if the run is finished and the status is "REPORT_AVAILABLE".
 type File struct {
 	DateRange        *DateRange      `json:"dateRange,omitempty"`
 	Etag             *string         `json:"etag,omitempty"`

@@ -1,7 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import mutation
+from sdk import utils
+from . import *
 
 class CommitRequestModeEnum(str, Enum):
     MODE_UNSPECIFIED = "MODE_UNSPECIFIED"
@@ -12,8 +14,12 @@ class CommitRequestModeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class CommitRequest:
-    database_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'databaseId' }})
-    mode: Optional[CommitRequestModeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'mode' }})
-    mutations: Optional[List[mutation.Mutation]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'mutations' }})
-    transaction: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'transaction' }})
+    r"""CommitRequest
+    The request for Datastore.Commit.
+    """
+    
+    database_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('databaseId') }})
+    mode: Optional[CommitRequestModeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('mode') }})
+    mutations: Optional[List[Mutation]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('mutations') }})
+    transaction: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('transaction') }})
     

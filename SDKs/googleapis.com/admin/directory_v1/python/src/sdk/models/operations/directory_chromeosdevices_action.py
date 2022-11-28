@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DirectoryChromeosdevicesActionPathParams:
-    customer_id: str = field(default=None, metadata={'path_param': { 'field_name': 'customerId', 'style': 'simple', 'explode': False }})
-    resource_id: str = field(default=None, metadata={'path_param': { 'field_name': 'resourceId', 'style': 'simple', 'explode': False }})
+    customer_id: str = field(metadata={'path_param': { 'field_name': 'customerId', 'style': 'simple', 'explode': False }})
+    resource_id: str = field(metadata={'path_param': { 'field_name': 'resourceId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,20 +27,20 @@ class DirectoryChromeosdevicesActionQueryParams:
 
 @dataclass
 class DirectoryChromeosdevicesActionSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DirectoryChromeosdevicesActionRequest:
-    path_params: DirectoryChromeosdevicesActionPathParams = field(default=None)
-    query_params: DirectoryChromeosdevicesActionQueryParams = field(default=None)
+    path_params: DirectoryChromeosdevicesActionPathParams = field()
+    query_params: DirectoryChromeosdevicesActionQueryParams = field()
+    security: DirectoryChromeosdevicesActionSecurity = field()
     request: Optional[shared.ChromeOsDeviceAction] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: DirectoryChromeosdevicesActionSecurity = field(default=None)
     
 
 @dataclass
 class DirectoryChromeosdevicesActionResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

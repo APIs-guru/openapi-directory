@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class NrcerRequestBodyCertificateParameters extends SpeakeasyBase {
     aplno: string;
@@ -17,10 +17,6 @@ export declare class NrcerRequestBody extends SpeakeasyBase {
 export declare class NrcerSecurity extends SpeakeasyBase {
     apiKey: shared.SchemeApiKey;
     clientId: shared.SchemeClientId;
-}
-export declare class NrcerRequest extends SpeakeasyBase {
-    request?: NrcerRequestBody;
-    security: NrcerSecurity;
 }
 export declare enum Nrcer400ApplicationJsonErrorEnum {
     MissingParameter = "missing_parameter",
@@ -103,6 +99,10 @@ export declare enum Nrcer504ApplicationJsonErrorDescriptionEnum {
 export declare class Nrcer504ApplicationJson extends SpeakeasyBase {
     error?: Nrcer504ApplicationJsonErrorEnum;
     errorDescription?: Nrcer504ApplicationJsonErrorDescriptionEnum;
+}
+export declare class NrcerRequest extends SpeakeasyBase {
+    request?: NrcerRequestBody;
+    security: NrcerSecurity;
 }
 export declare class NrcerResponse extends SpeakeasyBase {
     contentType: string;

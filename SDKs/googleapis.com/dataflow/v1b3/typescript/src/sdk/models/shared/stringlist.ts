@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // StringList
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A metric value representing a list of strings.
 **/
 export class StringList extends SpeakeasyBase {
-  @Metadata({ data: "json, name=elements" })
+  @SpeakeasyMetadata({ data: "json, name=elements" })
   elements?: string[];
 }

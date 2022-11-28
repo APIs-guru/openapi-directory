@@ -14,6 +14,8 @@ type CreateTaskHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// CreateTaskRequestBodyCommand
+// The command given to the device to execute.
 type CreateTaskRequestBodyCommand struct {
 	Reboot map[string]interface{} `json:"reboot,omitempty"`
 	Unlock map[string]interface{} `json:"unlock,omitempty"`

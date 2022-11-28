@@ -1,10 +1,13 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 
 
 @dataclass
 class DeleteMitigationActionPathParams:
-    action_name: str = field(default=None, metadata={'path_param': { 'field_name': 'actionName', 'style': 'simple', 'explode': False }})
+    action_name: str = field(metadata={'path_param': { 'field_name': 'actionName', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -20,16 +23,16 @@ class DeleteMitigationActionHeaders:
 
 @dataclass
 class DeleteMitigationActionRequest:
-    path_params: DeleteMitigationActionPathParams = field(default=None)
-    headers: DeleteMitigationActionHeaders = field(default=None)
+    headers: DeleteMitigationActionHeaders = field()
+    path_params: DeleteMitigationActionPathParams = field()
     
 
 @dataclass
 class DeleteMitigationActionResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     delete_mitigation_action_response: Optional[dict[str, Any]] = field(default=None)
     internal_failure_exception: Optional[Any] = field(default=None)
     invalid_request_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     

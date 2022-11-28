@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum MailerSendgridExporterConfigTypeEnum {
     Sendgrid = "sendgrid"
@@ -6,12 +7,12 @@ export enum MailerSendgridExporterConfigTypeEnum {
 
 
 export class MailerSendgridExporterConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=apiKeyPublic" })
+  @SpeakeasyMetadata({ data: "json, name=apiKeyPublic" })
   apiKeyPublic?: string;
 
-  @Metadata({ data: "json, name=to" })
+  @SpeakeasyMetadata({ data: "json, name=to" })
   to?: string[];
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type: MailerSendgridExporterConfigTypeEnum;
 }

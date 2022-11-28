@@ -1,4 +1,7 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Optional
 from sdk.models import shared
 
@@ -12,14 +15,14 @@ class PackageUpdateStatusQueryParams:
 
 @dataclass
 class PackageUpdateStatusRequest:
-    query_params: PackageUpdateStatusQueryParams = field(default=None)
+    query_params: PackageUpdateStatusQueryParams = field()
     
 
 @dataclass
 class PackageUpdateStatusResponse:
+    content_type: str = field()
+    status_code: int = field()
     api_exception: Optional[shared.APIException] = field(default=None)
-    content_type: str = field(default=None)
     default_response_dto_of_boolean: Optional[shared.DefaultResponseDtoOfBoolean] = field(default=None)
     default_response_dto_of_string: Optional[shared.DefaultResponseDtoOfString] = field(default=None)
-    status_code: int = field(default=None)
     

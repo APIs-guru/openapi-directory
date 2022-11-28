@@ -9,7 +9,7 @@ import (
 	"openapi/pkg/models/shared"
 )
 
-var Servers = []string{
+var ServerList = []string{
 	"http://api.sportsdata.io",
 	"https://api.sportsdata.io",
 	"http://azure-api.sportsdata.io",
@@ -21,9 +21,13 @@ type HTTPClient interface {
 }
 
 type SDK struct {
-	defaultClient  HTTPClient
-	securityClient HTTPClient
-	serverURL      string
+	_defaultClient  HTTPClient
+	_securityClient HTTPClient
+	_security       *shared.Security
+	_serverURL      string
+	_language       string
+	_sdkVersion     string
+	_genVersion     string
 }
 
 type SDKOption func(*SDK)
@@ -34,33 +38,55 @@ func WithServerURL(serverURL string, params map[string]string) SDKOption {
 			serverURL = utils.ReplaceParameters(serverURL, params)
 		}
 
-		sdk.serverURL = serverURL
+		sdk._serverURL = serverURL
+	}
+}
+
+func WithClient(client HTTPClient) SDKOption {
+	return func(sdk *SDK) {
+		sdk._defaultClient = client
 	}
 }
 
 func WithSecurity(security shared.Security) SDKOption {
 	return func(sdk *SDK) {
-		sdk.securityClient = utils.CreateSecurityClient(security)
+		sdk._security = &security
 	}
 }
 
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
-		defaultClient:  http.DefaultClient,
-		securityClient: http.DefaultClient,
+		_language:   "go",
+		_sdkVersion: "",
+		_genVersion: "internal",
 	}
 	for _, opt := range opts {
 		opt(sdk)
 	}
-	if sdk.serverURL == "" {
-		sdk.serverURL = Servers[0]
+
+	if sdk._defaultClient == nil {
+		sdk._defaultClient = http.DefaultClient
+	}
+	if sdk._securityClient == nil {
+
+		if sdk._security != nil {
+			sdk._securityClient = utils.ConfigureSecurityClient(sdk._defaultClient, sdk._security)
+		} else {
+			sdk._securityClient = sdk._defaultClient
+		}
+
+	}
+
+	if sdk._serverURL == "" {
+		sdk._serverURL = ServerList[0]
 	}
 
 	return sdk
 }
 
+// DfsSlatesByDate - DFS Slates by Date
 func (s *SDK) DfsSlatesByDate(ctx context.Context, request operations.DfsSlatesByDateRequest) (*operations.DfsSlatesByDateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/{format}/DfsSlatesByDate/{date}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -68,7 +94,7 @@ func (s *SDK) DfsSlatesByDate(ctx context.Context, request operations.DfsSlatesB
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -98,8 +124,9 @@ func (s *SDK) DfsSlatesByDate(ctx context.Context, request operations.DfsSlatesB
 	return res, nil
 }
 
+// DfsSlatesByWeek - DFS Slates by Week
 func (s *SDK) DfsSlatesByWeek(ctx context.Context, request operations.DfsSlatesByWeekRequest) (*operations.DfsSlatesByWeekResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/{format}/DfsSlatesByWeek/{season}/{week}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -107,7 +134,7 @@ func (s *SDK) DfsSlatesByWeek(ctx context.Context, request operations.DfsSlatesB
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -137,8 +164,9 @@ func (s *SDK) DfsSlatesByWeek(ctx context.Context, request operations.DfsSlatesB
 	return res, nil
 }
 
+// IdpProjectedPlayerGameStatsByPlayerWInjuriesLineupsDfsSalaries - IDP Projected Player Game Stats by Player (w/ Injuries, Lineups, DFS Salaries)
 func (s *SDK) IdpProjectedPlayerGameStatsByPlayerWInjuriesLineupsDfsSalaries(ctx context.Context, request operations.IdpProjectedPlayerGameStatsByPlayerWInjuriesLineupsDfsSalariesRequest) (*operations.IdpProjectedPlayerGameStatsByPlayerWInjuriesLineupsDfsSalariesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/{format}/IdpPlayerGameProjectionStatsByPlayerID/{season}/{week}/{playerid}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -146,7 +174,7 @@ func (s *SDK) IdpProjectedPlayerGameStatsByPlayerWInjuriesLineupsDfsSalaries(ctx
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -176,8 +204,9 @@ func (s *SDK) IdpProjectedPlayerGameStatsByPlayerWInjuriesLineupsDfsSalaries(ctx
 	return res, nil
 }
 
+// IdpProjectedPlayerGameStatsByTeamWInjuriesLineupsDfsSalaries - IDP Projected Player Game Stats by Team (w/ Injuries, Lineups, DFS Salaries)
 func (s *SDK) IdpProjectedPlayerGameStatsByTeamWInjuriesLineupsDfsSalaries(ctx context.Context, request operations.IdpProjectedPlayerGameStatsByTeamWInjuriesLineupsDfsSalariesRequest) (*operations.IdpProjectedPlayerGameStatsByTeamWInjuriesLineupsDfsSalariesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/{format}/IdpPlayerGameProjectionStatsByTeam/{season}/{week}/{team}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -185,7 +214,7 @@ func (s *SDK) IdpProjectedPlayerGameStatsByTeamWInjuriesLineupsDfsSalaries(ctx c
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -215,8 +244,9 @@ func (s *SDK) IdpProjectedPlayerGameStatsByTeamWInjuriesLineupsDfsSalaries(ctx c
 	return res, nil
 }
 
+// IdpProjectedPlayerGameStatsByWeekWInjuriesLineupsDfsSalaries - IDP Projected Player Game Stats by Week (w/ Injuries, Lineups, DFS Salaries)
 func (s *SDK) IdpProjectedPlayerGameStatsByWeekWInjuriesLineupsDfsSalaries(ctx context.Context, request operations.IdpProjectedPlayerGameStatsByWeekWInjuriesLineupsDfsSalariesRequest) (*operations.IdpProjectedPlayerGameStatsByWeekWInjuriesLineupsDfsSalariesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/{format}/IdpPlayerGameProjectionStatsByWeek/{season}/{week}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -224,7 +254,7 @@ func (s *SDK) IdpProjectedPlayerGameStatsByWeekWInjuriesLineupsDfsSalaries(ctx c
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -254,8 +284,9 @@ func (s *SDK) IdpProjectedPlayerGameStatsByWeekWInjuriesLineupsDfsSalaries(ctx c
 	return res, nil
 }
 
+// ProjectedFantasyDefenseGameStatsWDfsSalaries - Projected Fantasy Defense Game Stats (w/ DFS Salaries)
 func (s *SDK) ProjectedFantasyDefenseGameStatsWDfsSalaries(ctx context.Context, request operations.ProjectedFantasyDefenseGameStatsWDfsSalariesRequest) (*operations.ProjectedFantasyDefenseGameStatsWDfsSalariesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/{format}/FantasyDefenseProjectionsByGame/{season}/{week}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -263,7 +294,7 @@ func (s *SDK) ProjectedFantasyDefenseGameStatsWDfsSalaries(ctx context.Context, 
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -293,8 +324,9 @@ func (s *SDK) ProjectedFantasyDefenseGameStatsWDfsSalaries(ctx context.Context, 
 	return res, nil
 }
 
+// ProjectedFantasyDefenseSeasonStatsWByeWeekAdp - Projected Fantasy Defense Season Stats (w/ Bye Week, ADP)
 func (s *SDK) ProjectedFantasyDefenseSeasonStatsWByeWeekAdp(ctx context.Context, request operations.ProjectedFantasyDefenseSeasonStatsWByeWeekAdpRequest) (*operations.ProjectedFantasyDefenseSeasonStatsWByeWeekAdpResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/{format}/FantasyDefenseProjectionsBySeason/{season}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -302,7 +334,7 @@ func (s *SDK) ProjectedFantasyDefenseSeasonStatsWByeWeekAdp(ctx context.Context,
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -332,8 +364,9 @@ func (s *SDK) ProjectedFantasyDefenseSeasonStatsWByeWeekAdp(ctx context.Context,
 	return res, nil
 }
 
+// ProjectedPlayerGameStatsByPlayerWInjuriesLineupsDfsSalaries - Projected Player Game Stats by Player (w/ Injuries, Lineups, DFS Salaries)
 func (s *SDK) ProjectedPlayerGameStatsByPlayerWInjuriesLineupsDfsSalaries(ctx context.Context, request operations.ProjectedPlayerGameStatsByPlayerWInjuriesLineupsDfsSalariesRequest) (*operations.ProjectedPlayerGameStatsByPlayerWInjuriesLineupsDfsSalariesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/{format}/PlayerGameProjectionStatsByPlayerID/{season}/{week}/{playerid}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -341,7 +374,7 @@ func (s *SDK) ProjectedPlayerGameStatsByPlayerWInjuriesLineupsDfsSalaries(ctx co
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -371,8 +404,9 @@ func (s *SDK) ProjectedPlayerGameStatsByPlayerWInjuriesLineupsDfsSalaries(ctx co
 	return res, nil
 }
 
+// ProjectedPlayerGameStatsByTeamWInjuriesLineupsDfsSalaries - Projected Player Game Stats by Team (w/ Injuries, Lineups, DFS Salaries)
 func (s *SDK) ProjectedPlayerGameStatsByTeamWInjuriesLineupsDfsSalaries(ctx context.Context, request operations.ProjectedPlayerGameStatsByTeamWInjuriesLineupsDfsSalariesRequest) (*operations.ProjectedPlayerGameStatsByTeamWInjuriesLineupsDfsSalariesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/{format}/PlayerGameProjectionStatsByTeam/{season}/{week}/{team}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -380,7 +414,7 @@ func (s *SDK) ProjectedPlayerGameStatsByTeamWInjuriesLineupsDfsSalaries(ctx cont
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -410,8 +444,9 @@ func (s *SDK) ProjectedPlayerGameStatsByTeamWInjuriesLineupsDfsSalaries(ctx cont
 	return res, nil
 }
 
+// ProjectedPlayerGameStatsByWeekWInjuriesLineupsDfsSalaries - Projected Player Game Stats by Week (w/ Injuries, Lineups, DFS Salaries)
 func (s *SDK) ProjectedPlayerGameStatsByWeekWInjuriesLineupsDfsSalaries(ctx context.Context, request operations.ProjectedPlayerGameStatsByWeekWInjuriesLineupsDfsSalariesRequest) (*operations.ProjectedPlayerGameStatsByWeekWInjuriesLineupsDfsSalariesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/{format}/PlayerGameProjectionStatsByWeek/{season}/{week}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -419,7 +454,7 @@ func (s *SDK) ProjectedPlayerGameStatsByWeekWInjuriesLineupsDfsSalaries(ctx cont
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -449,8 +484,9 @@ func (s *SDK) ProjectedPlayerGameStatsByWeekWInjuriesLineupsDfsSalaries(ctx cont
 	return res, nil
 }
 
+// ProjectedPlayerSeasonStatsByPlayerWByeWeekAdp - Projected Player Season Stats by Player (w/ Bye Week, ADP)
 func (s *SDK) ProjectedPlayerSeasonStatsByPlayerWByeWeekAdp(ctx context.Context, request operations.ProjectedPlayerSeasonStatsByPlayerWByeWeekAdpRequest) (*operations.ProjectedPlayerSeasonStatsByPlayerWByeWeekAdpResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/{format}/PlayerSeasonProjectionStatsByPlayerID/{season}/{playerid}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -458,7 +494,7 @@ func (s *SDK) ProjectedPlayerSeasonStatsByPlayerWByeWeekAdp(ctx context.Context,
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -488,8 +524,9 @@ func (s *SDK) ProjectedPlayerSeasonStatsByPlayerWByeWeekAdp(ctx context.Context,
 	return res, nil
 }
 
+// ProjectedPlayerSeasonStatsByTeamWByeWeekAdp - Projected Player Season Stats by Team (w/ Bye Week, ADP)
 func (s *SDK) ProjectedPlayerSeasonStatsByTeamWByeWeekAdp(ctx context.Context, request operations.ProjectedPlayerSeasonStatsByTeamWByeWeekAdpRequest) (*operations.ProjectedPlayerSeasonStatsByTeamWByeWeekAdpResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/{format}/PlayerSeasonProjectionStatsByTeam/{season}/{team}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -497,7 +534,7 @@ func (s *SDK) ProjectedPlayerSeasonStatsByTeamWByeWeekAdp(ctx context.Context, r
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -527,8 +564,9 @@ func (s *SDK) ProjectedPlayerSeasonStatsByTeamWByeWeekAdp(ctx context.Context, r
 	return res, nil
 }
 
+// ProjectedPlayerSeasonStatsWByeWeekAdp - Projected Player Season Stats (w/ Bye Week, ADP)
 func (s *SDK) ProjectedPlayerSeasonStatsWByeWeekAdp(ctx context.Context, request operations.ProjectedPlayerSeasonStatsWByeWeekAdpRequest) (*operations.ProjectedPlayerSeasonStatsWByeWeekAdpResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/{format}/PlayerSeasonProjectionStats/{season}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -536,7 +574,7 @@ func (s *SDK) ProjectedPlayerSeasonStatsWByeWeekAdp(ctx context.Context, request
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {

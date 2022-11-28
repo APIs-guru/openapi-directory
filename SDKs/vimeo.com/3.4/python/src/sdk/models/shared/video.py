@@ -1,12 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import category
-from . import embed_settings
-from . import user
-from . import picture
-from . import tag
-from . import picture
+from sdk import utils
+from . import *
 
 class VideoContextActionEnum(str, Enum):
     ADDED_TO = "Added to"
@@ -18,9 +18,13 @@ class VideoContextActionEnum(str, Enum):
 @dataclass_json
 @dataclass
 class VideoContext:
-    action: VideoContextActionEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'action' }})
-    resource: dict[str, Any] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'resource' }})
-    resource_type: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'resource_type' }})
+    r"""VideoContext
+    The context of the video's subscription, if this video is part of a subscription.
+    """
+    
+    action: VideoContextActionEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('action') }})
+    resource: dict[str, Any] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('resource') }})
+    resource_type: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('resource_type') }})
     
 class VideoLicenseEnum(str, Enum):
     BY = "by"
@@ -35,121 +39,177 @@ class VideoLicenseEnum(str, Enum):
 @dataclass_json
 @dataclass
 class VideoMetadataConnectionsComments:
-    options: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'options' }})
-    total: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'total' }})
-    uri: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'uri' }})
+    r"""VideoMetadataConnectionsComments
+    Information about the comments on this video.
+    """
+    
+    options: List[str] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('options') }})
+    total: float = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('total') }})
+    uri: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('uri') }})
     
 
 @dataclass_json
 @dataclass
 class VideoMetadataConnectionsCredits:
-    options: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'options' }})
-    total: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'total' }})
-    uri: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'uri' }})
+    r"""VideoMetadataConnectionsCredits
+    Information about the users credited in this video.
+    """
+    
+    options: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('options') }})
+    total: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('total') }})
+    uri: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('uri') }})
     
 
 @dataclass_json
 @dataclass
 class VideoMetadataConnectionsLikes:
-    options: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'options' }})
-    total: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'total' }})
-    uri: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'uri' }})
+    r"""VideoMetadataConnectionsLikes
+    Information about the users who have liked this video.
+    """
+    
+    options: List[str] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('options') }})
+    total: float = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('total') }})
+    uri: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('uri') }})
     
 
 @dataclass_json
 @dataclass
 class VideoMetadataConnectionsOndemand:
-    options: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'options' }})
-    resource_key: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'resource_key' }})
-    uri: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'uri' }})
+    r"""VideoMetadataConnectionsOndemand
+    Information about this video's ondemand data.
+    """
+    
+    options: List[str] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('options') }})
+    resource_key: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('resource_key') }})
+    uri: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('uri') }})
     
 
 @dataclass_json
 @dataclass
 class VideoMetadataConnectionsPictures:
-    options: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'options' }})
-    total: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'total' }})
-    uri: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'uri' }})
+    r"""VideoMetadataConnectionsPictures
+    Information about this video's thumbnails.
+    """
+    
+    options: List[str] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('options') }})
+    total: float = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('total') }})
+    uri: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('uri') }})
     
 
 @dataclass_json
 @dataclass
 class VideoMetadataConnectionsPlayback:
-    options: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'options' }})
-    uri: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'uri' }})
+    r"""VideoMetadataConnectionsPlayback
+    The DRM playback status connection for this video.
+    """
+    
+    options: List[str] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('options') }})
+    uri: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('uri') }})
     
 
 @dataclass_json
 @dataclass
 class VideoMetadataConnectionsRecommendations:
-    options: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'options' }})
-    uri: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'uri' }})
+    r"""VideoMetadataConnectionsRecommendations
+    The recommendations for this video.
+    """
+    
+    options: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('options') }})
+    uri: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('uri') }})
     
 
 @dataclass_json
 @dataclass
 class VideoMetadataConnectionsRelated:
-    options: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'options' }})
-    uri: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'uri' }})
+    r"""VideoMetadataConnectionsRelated
+    Related content for this video.
+    """
+    
+    options: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('options') }})
+    uri: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('uri') }})
     
 
 @dataclass_json
 @dataclass
 class VideoMetadataConnectionsSeason:
-    name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    options: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'options' }})
-    uri: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'uri' }})
+    r"""VideoMetadataConnectionsSeason
+    Information about the video's season.
+    """
+    
+    name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    options: List[str] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('options') }})
+    uri: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('uri') }})
     
 
 @dataclass_json
 @dataclass
 class VideoMetadataConnectionsTexttracks:
-    options: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'options' }})
-    total: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'total' }})
-    uri: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'uri' }})
+    r"""VideoMetadataConnectionsTexttracks
+    Information about this video's text tracks.
+    """
+    
+    options: List[str] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('options') }})
+    total: float = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('total') }})
+    uri: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('uri') }})
     
 
 @dataclass_json
 @dataclass
 class VideoMetadataConnectionsTrailer:
-    options: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'options' }})
-    resource_key: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'resource_key' }})
-    uri: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'uri' }})
+    r"""VideoMetadataConnectionsTrailer
+    Information about this video's VOD trailer.
+    """
+    
+    options: List[str] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('options') }})
+    resource_key: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('resource_key') }})
+    uri: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('uri') }})
     
 
 @dataclass_json
 @dataclass
 class VideoMetadataConnectionsUsersWithAccess:
-    options: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'options' }})
-    total: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'total' }})
-    uri: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'uri' }})
+    r"""VideoMetadataConnectionsUsersWithAccess
+    Information about the user privacy of this video, if the video privacy is `users`.
+    """
+    
+    options: List[str] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('options') }})
+    total: float = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('total') }})
+    uri: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('uri') }})
     
 
 @dataclass_json
 @dataclass
 class VideoMetadataConnectionsVersions:
-    current_uri: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'current_uri' }})
-    options: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'options' }})
-    total: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'total' }})
-    uri: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'uri' }})
+    r"""VideoMetadataConnectionsVersions
+    Information about the versions of this video.
+    """
+    
+    options: List[str] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('options') }})
+    total: float = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('total') }})
+    uri: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('uri') }})
+    current_uri: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('current_uri') }})
     
 
 @dataclass_json
 @dataclass
 class VideoMetadataConnections:
-    comments: VideoMetadataConnectionsComments = field(default=None, metadata={'dataclasses_json': { 'field_name': 'comments' }})
-    credits: VideoMetadataConnectionsCredits = field(default=None, metadata={'dataclasses_json': { 'field_name': 'credits' }})
-    likes: VideoMetadataConnectionsLikes = field(default=None, metadata={'dataclasses_json': { 'field_name': 'likes' }})
-    ondemand: VideoMetadataConnectionsOndemand = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ondemand' }})
-    pictures: VideoMetadataConnectionsPictures = field(default=None, metadata={'dataclasses_json': { 'field_name': 'pictures' }})
-    playback: VideoMetadataConnectionsPlayback = field(default=None, metadata={'dataclasses_json': { 'field_name': 'playback' }})
-    recommendations: VideoMetadataConnectionsRecommendations = field(default=None, metadata={'dataclasses_json': { 'field_name': 'recommendations' }})
-    related: VideoMetadataConnectionsRelated = field(default=None, metadata={'dataclasses_json': { 'field_name': 'related' }})
-    season: VideoMetadataConnectionsSeason = field(default=None, metadata={'dataclasses_json': { 'field_name': 'season' }})
-    texttracks: VideoMetadataConnectionsTexttracks = field(default=None, metadata={'dataclasses_json': { 'field_name': 'texttracks' }})
-    trailer: VideoMetadataConnectionsTrailer = field(default=None, metadata={'dataclasses_json': { 'field_name': 'trailer' }})
-    users_with_access: VideoMetadataConnectionsUsersWithAccess = field(default=None, metadata={'dataclasses_json': { 'field_name': 'users_with_access' }})
-    versions: VideoMetadataConnectionsVersions = field(default=None, metadata={'dataclasses_json': { 'field_name': 'versions' }})
+    r"""VideoMetadataConnections
+    A list of resource URIs related to the video.
+    """
+    
+    comments: VideoMetadataConnectionsComments = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('comments') }})
+    credits: VideoMetadataConnectionsCredits = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('credits') }})
+    likes: VideoMetadataConnectionsLikes = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('likes') }})
+    ondemand: VideoMetadataConnectionsOndemand = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('ondemand') }})
+    pictures: VideoMetadataConnectionsPictures = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('pictures') }})
+    playback: VideoMetadataConnectionsPlayback = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('playback') }})
+    recommendations: VideoMetadataConnectionsRecommendations = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('recommendations') }})
+    related: VideoMetadataConnectionsRelated = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('related') }})
+    season: VideoMetadataConnectionsSeason = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('season') }})
+    texttracks: VideoMetadataConnectionsTexttracks = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('texttracks') }})
+    trailer: VideoMetadataConnectionsTrailer = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('trailer') }})
+    users_with_access: VideoMetadataConnectionsUsersWithAccess = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('users_with_access') }})
+    versions: VideoMetadataConnectionsVersions = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('versions') }})
     
 class VideoMetadataInteractionsBuyDownloadEnum(str, Enum):
     AVAILABLE = "available"
@@ -167,31 +227,43 @@ class VideoMetadataInteractionsBuyStreamEnum(str, Enum):
 @dataclass_json
 @dataclass
 class VideoMetadataInteractionsBuy:
-    currency: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'currency' }})
-    display_price: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'display_price' }})
-    download: VideoMetadataInteractionsBuyDownloadEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'download' }})
-    drm: bool = field(default=None, metadata={'dataclasses_json': { 'field_name': 'drm' }})
-    link: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'link' }})
-    price: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'price' }})
-    purchase_time: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'purchase_time' }})
-    stream: VideoMetadataInteractionsBuyStreamEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'stream' }})
-    uri: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'uri' }})
+    r"""VideoMetadataInteractionsBuy
+    The Buy interaction for a On Demand video.
+    """
+    
+    currency: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('currency') }})
+    display_price: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('display_price') }})
+    download: VideoMetadataInteractionsBuyDownloadEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('download') }})
+    drm: bool = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('drm') }})
+    link: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('link') }})
+    price: float = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('price') }})
+    purchase_time: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('purchase_time') }})
+    stream: VideoMetadataInteractionsBuyStreamEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('stream') }})
+    uri: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('uri') }})
     
 
 @dataclass_json
 @dataclass
 class VideoMetadataInteractionsChannel:
-    options: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'options' }})
-    uri: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'uri' }})
+    r"""VideoMetadataInteractionsChannel
+    When a video is referenced by a channel URI, if the user is a moderator of the channel, include information about removing the video from the channel.
+    """
+    
+    options: List[str] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('options') }})
+    uri: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('uri') }})
     
 
 @dataclass_json
 @dataclass
 class VideoMetadataInteractionsLike:
-    added: bool = field(default=None, metadata={'dataclasses_json': { 'field_name': 'added' }})
-    added_time: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'added_time' }})
-    options: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'options' }})
-    uri: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'uri' }})
+    r"""VideoMetadataInteractionsLike
+    Information about whether the authenticated user has liked this video.
+    """
+    
+    added: bool = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('added') }})
+    added_time: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('added_time') }})
+    options: List[str] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('options') }})
+    uri: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('uri') }})
     
 class VideoMetadataInteractionsRentStreamEnum(str, Enum):
     AVAILABLE = "available"
@@ -203,102 +275,146 @@ class VideoMetadataInteractionsRentStreamEnum(str, Enum):
 @dataclass_json
 @dataclass
 class VideoMetadataInteractionsRent:
-    currency: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'currency' }})
-    display_price: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'display_price' }})
-    drm: bool = field(default=None, metadata={'dataclasses_json': { 'field_name': 'drm' }})
-    expires_time: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'expires_time' }})
-    link: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'link' }})
-    price: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'price' }})
-    purchase_time: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'purchase_time' }})
-    stream: VideoMetadataInteractionsRentStreamEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'stream' }})
-    uri: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'uri' }})
+    r"""VideoMetadataInteractionsRent
+    The Rent interaction for an On Demand video.
+    """
+    
+    currency: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('currency') }})
+    display_price: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('display_price') }})
+    drm: bool = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('drm') }})
+    expires_time: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('expires_time') }})
+    link: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('link') }})
+    price: float = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('price') }})
+    purchase_time: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('purchase_time') }})
+    stream: VideoMetadataInteractionsRentStreamEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('stream') }})
+    uri: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('uri') }})
     
 
 @dataclass_json
 @dataclass
 class VideoMetadataInteractionsReport:
-    options: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'options' }})
-    reason: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'reason' }})
-    uri: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'uri' }})
+    r"""VideoMetadataInteractionsReport
+    Information about where and how to report a video.
+    """
+    
+    options: List[str] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('options') }})
+    reason: List[str] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('reason') }})
+    uri: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('uri') }})
     
 
 @dataclass_json
 @dataclass
 class VideoMetadataInteractionsSubscribe:
-    drm: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'drm' }})
-    expires_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'expires_time' }})
-    purchase_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'purchase_time' }})
-    stream: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'stream' }})
+    r"""VideoMetadataInteractionsSubscribe
+    Subscription information for an On Demand video.
+    """
+    
+    drm: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('drm') }})
+    expires_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('expires_time') }})
+    purchase_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('purchase_time') }})
+    stream: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('stream') }})
     
 
 @dataclass_json
 @dataclass
 class VideoMetadataInteractionsWatched:
-    added: bool = field(default=None, metadata={'dataclasses_json': { 'field_name': 'added' }})
-    added_time: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'added_time' }})
-    options: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'options' }})
-    uri: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'uri' }})
+    r"""VideoMetadataInteractionsWatched
+    Information about removing this video from the user's list of watched videos.
+    """
+    
+    added: bool = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('added') }})
+    added_time: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('added_time') }})
+    options: List[str] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('options') }})
+    uri: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('uri') }})
     
 
 @dataclass_json
 @dataclass
 class VideoMetadataInteractionsWatchlater:
-    added: bool = field(default=None, metadata={'dataclasses_json': { 'field_name': 'added' }})
-    added_time: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'added_time' }})
-    options: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'options' }})
-    uri: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'uri' }})
+    r"""VideoMetadataInteractionsWatchlater
+    Information about whether this video appears on the authenticated user's Watch Later list.
+    """
+    
+    added: bool = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('added') }})
+    added_time: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('added_time') }})
+    options: List[str] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('options') }})
+    uri: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('uri') }})
     
 
 @dataclass_json
 @dataclass
 class VideoMetadataInteractions:
-    buy: VideoMetadataInteractionsBuy = field(default=None, metadata={'dataclasses_json': { 'field_name': 'buy' }})
-    channel: VideoMetadataInteractionsChannel = field(default=None, metadata={'dataclasses_json': { 'field_name': 'channel' }})
-    like: VideoMetadataInteractionsLike = field(default=None, metadata={'dataclasses_json': { 'field_name': 'like' }})
-    rent: VideoMetadataInteractionsRent = field(default=None, metadata={'dataclasses_json': { 'field_name': 'rent' }})
-    report: VideoMetadataInteractionsReport = field(default=None, metadata={'dataclasses_json': { 'field_name': 'report' }})
-    subscribe: Optional[VideoMetadataInteractionsSubscribe] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'subscribe' }})
-    watched: VideoMetadataInteractionsWatched = field(default=None, metadata={'dataclasses_json': { 'field_name': 'watched' }})
-    watchlater: VideoMetadataInteractionsWatchlater = field(default=None, metadata={'dataclasses_json': { 'field_name': 'watchlater' }})
+    r"""VideoMetadataInteractions
+    A list of resource URIs related to the video.
+    """
+    
+    buy: VideoMetadataInteractionsBuy = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('buy') }})
+    channel: VideoMetadataInteractionsChannel = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('channel') }})
+    like: VideoMetadataInteractionsLike = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('like') }})
+    rent: VideoMetadataInteractionsRent = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('rent') }})
+    report: VideoMetadataInteractionsReport = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('report') }})
+    watched: VideoMetadataInteractionsWatched = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('watched') }})
+    watchlater: VideoMetadataInteractionsWatchlater = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('watchlater') }})
+    subscribe: Optional[VideoMetadataInteractionsSubscribe] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('subscribe') }})
     
 
 @dataclass_json
 @dataclass
 class VideoMetadata:
-    connections: VideoMetadataConnections = field(default=None, metadata={'dataclasses_json': { 'field_name': 'connections' }})
-    interactions: VideoMetadataInteractions = field(default=None, metadata={'dataclasses_json': { 'field_name': 'interactions' }})
+    r"""VideoMetadata
+    The video's metadata.
+    """
+    
+    connections: VideoMetadataConnections = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('connections') }})
+    interactions: VideoMetadataInteractions = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('interactions') }})
     
 
 @dataclass_json
 @dataclass
 class VideoProjectMetadataConnectionsVideos:
-    options: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'options' }})
-    total: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'total' }})
-    uri: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'uri' }})
+    r"""VideoProjectMetadataConnectionsVideos
+    A standard connection object indicating how to get all the videos in this project.
+    """
+    
+    options: List[str] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('options') }})
+    total: float = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('total') }})
+    uri: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('uri') }})
     
 
 @dataclass_json
 @dataclass
 class VideoProjectMetadataConnections:
-    videos: VideoProjectMetadataConnectionsVideos = field(default=None, metadata={'dataclasses_json': { 'field_name': 'videos' }})
+    r"""VideoProjectMetadataConnections
+    A list of resource URIs related to the project.
+    """
+    
+    videos: VideoProjectMetadataConnectionsVideos = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('videos') }})
     
 
 @dataclass_json
 @dataclass
 class VideoProjectMetadata:
-    connections: VideoProjectMetadataConnections = field(default=None, metadata={'dataclasses_json': { 'field_name': 'connections' }})
+    r"""VideoProjectMetadata
+    The project's metadata.
+    """
+    
+    connections: VideoProjectMetadataConnections = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('connections') }})
     
 
 @dataclass_json
 @dataclass
 class VideoProject:
-    created_time: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'created_time' }})
-    metadata: VideoProjectMetadata = field(default=None, metadata={'dataclasses_json': { 'field_name': 'metadata' }})
-    modified_time: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'modified_time' }})
-    name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    resource_key: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'resource_key' }})
-    uri: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'uri' }})
-    user: user.User = field(default=None, metadata={'dataclasses_json': { 'field_name': 'user' }})
+    r"""VideoProject
+    Information about the folder that contains this video.
+    """
+    
+    created_time: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('created_time') }})
+    metadata: VideoProjectMetadata = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('metadata') }})
+    modified_time: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('modified_time') }})
+    name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    resource_key: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('resource_key') }})
+    uri: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('uri') }})
+    user: User = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('user') }})
     
 class VideoPrivacyCommentsEnum(str, Enum):
     ANYBODY = "anybody"
@@ -322,20 +438,24 @@ class VideoPrivacyViewEnum(str, Enum):
 @dataclass_json
 @dataclass
 class VideoPrivacy:
-    add: bool = field(default=None, metadata={'dataclasses_json': { 'field_name': 'add' }})
-    comments: VideoPrivacyCommentsEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'comments' }})
-    download: bool = field(default=None, metadata={'dataclasses_json': { 'field_name': 'download' }})
-    embed: VideoPrivacyEmbedEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'embed' }})
-    view: VideoPrivacyViewEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'view' }})
+    r"""VideoPrivacy
+    The video's privacy setting.
+    """
+    
+    add: bool = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('add') }})
+    comments: VideoPrivacyCommentsEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('comments') }})
+    download: bool = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('download') }})
+    embed: VideoPrivacyEmbedEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('embed') }})
+    view: VideoPrivacyViewEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('view') }})
     
 
 @dataclass_json
 @dataclass
 class VideoSpatialDirectorTimeline:
-    pitch: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'pitch' }})
-    roll: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'roll' }})
-    time_code: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'time_code' }})
-    yaw: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'yaw' }})
+    pitch: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('pitch') }})
+    roll: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('roll') }})
+    time_code: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('time_code') }})
+    yaw: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('yaw') }})
     
 class VideoSpatialProjectionEnum(str, Enum):
     CUBICAL = "cubical"
@@ -353,16 +473,24 @@ class VideoSpatialStereoFormatEnum(str, Enum):
 @dataclass_json
 @dataclass
 class VideoSpatial:
-    director_timeline: List[VideoSpatialDirectorTimeline] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'director_timeline' }})
-    field_of_view: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'field_of_view' }})
-    projection: VideoSpatialProjectionEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'projection' }})
-    stereo_format: VideoSpatialStereoFormatEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'stereo_format' }})
+    r"""VideoSpatial
+    360 spatial data.
+    """
+    
+    director_timeline: List[VideoSpatialDirectorTimeline] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('director_timeline') }})
+    field_of_view: float = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('field_of_view') }})
+    projection: VideoSpatialProjectionEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('projection') }})
+    stereo_format: VideoSpatialStereoFormatEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('stereo_format') }})
     
 
 @dataclass_json
 @dataclass
 class VideoStats:
-    plays: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'plays' }})
+    r"""VideoStats
+    A collection of stats associated with this video.
+    """
+    
+    plays: float = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('plays') }})
     
 class VideoStatusEnum(str, Enum):
     AVAILABLE = "available"
@@ -384,7 +512,11 @@ class VideoTranscodeStatusEnum(str, Enum):
 @dataclass_json
 @dataclass
 class VideoTranscode:
-    status: Optional[VideoTranscodeStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+    r"""VideoTranscode
+    The transcode information for a video upload.
+    """
+    
+    status: Optional[VideoTranscodeStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('status') }})
     
 class VideoUploadApproachEnum(str, Enum):
     POST = "post"
@@ -401,14 +533,18 @@ class VideoUploadStatusEnum(str, Enum):
 @dataclass_json
 @dataclass
 class VideoUpload:
-    approach: Optional[VideoUploadApproachEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'approach' }})
-    complete_uri: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'complete_uri' }})
-    form: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'form' }})
-    link: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'link' }})
-    redirect_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'redirect_url' }})
-    size: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'size' }})
-    status: VideoUploadStatusEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
-    upload_link: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'upload_link' }})
+    r"""VideoUpload
+    The upload information for this video.
+    """
+    
+    status: VideoUploadStatusEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('status') }})
+    approach: Optional[VideoUploadApproachEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('approach') }})
+    complete_uri: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('complete_uri') }})
+    form: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('form') }})
+    link: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('link') }})
+    redirect_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('redirect_url') }})
+    size: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('size') }})
+    upload_link: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('upload_link') }})
     
 class VideoUserAccountEnum(str, Enum):
     BASIC = "basic"
@@ -425,233 +561,333 @@ class VideoUserAccountEnum(str, Enum):
 @dataclass_json
 @dataclass
 class VideoUserMetadataConnectionsAlbums:
-    options: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'options' }})
-    total: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'total' }})
-    uri: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'uri' }})
+    r"""VideoUserMetadataConnectionsAlbums
+    Information about the albums created by this user.
+    """
+    
+    options: List[str] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('options') }})
+    total: float = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('total') }})
+    uri: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('uri') }})
     
 
 @dataclass_json
 @dataclass
 class VideoUserMetadataConnectionsAppearances:
-    options: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'options' }})
-    total: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'total' }})
-    uri: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'uri' }})
+    r"""VideoUserMetadataConnectionsAppearances
+    Information about the appearances of this user in other videos.
+    """
+    
+    options: List[str] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('options') }})
+    total: float = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('total') }})
+    uri: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('uri') }})
     
 
 @dataclass_json
 @dataclass
 class VideoUserMetadataConnectionsBlock:
-    options: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'options' }})
-    total: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'total' }})
-    uri: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'uri' }})
+    r"""VideoUserMetadataConnectionsBlock
+    Information on the users that the current user has blocked. This data requires a bearer token with the `private` scope.
+    """
+    
+    options: List[str] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('options') }})
+    total: float = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('total') }})
+    uri: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('uri') }})
     
 
 @dataclass_json
 @dataclass
 class VideoUserMetadataConnectionsCategories:
-    options: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'options' }})
-    total: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'total' }})
-    uri: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'uri' }})
+    r"""VideoUserMetadataConnectionsCategories
+    Information about this user's followed categories.
+    """
+    
+    options: List[str] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('options') }})
+    total: float = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('total') }})
+    uri: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('uri') }})
     
 
 @dataclass_json
 @dataclass
 class VideoUserMetadataConnectionsChannels:
-    options: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'options' }})
-    total: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'total' }})
-    uri: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'uri' }})
+    r"""VideoUserMetadataConnectionsChannels
+    Information about this user's subscribed channels.
+    """
+    
+    options: List[str] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('options') }})
+    total: float = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('total') }})
+    uri: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('uri') }})
     
 
 @dataclass_json
 @dataclass
 class VideoUserMetadataConnectionsFeed:
-    options: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'options' }})
-    uri: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'uri' }})
+    r"""VideoUserMetadataConnectionsFeed
+    Information about this user's feed.
+    """
+    
+    options: List[str] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('options') }})
+    uri: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('uri') }})
     
 
 @dataclass_json
 @dataclass
 class VideoUserMetadataConnectionsFolders:
-    options: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'options' }})
-    total: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'total' }})
-    uri: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'uri' }})
+    r"""VideoUserMetadataConnectionsFolders
+    Information about this user's folders.
+    """
+    
+    options: List[str] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('options') }})
+    total: float = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('total') }})
+    uri: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('uri') }})
     
 
 @dataclass_json
 @dataclass
 class VideoUserMetadataConnectionsFollowers:
-    options: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'options' }})
-    total: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'total' }})
-    uri: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'uri' }})
+    r"""VideoUserMetadataConnectionsFollowers
+    Information about the user's followers.
+    """
+    
+    options: List[str] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('options') }})
+    total: float = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('total') }})
+    uri: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('uri') }})
     
 
 @dataclass_json
 @dataclass
 class VideoUserMetadataConnectionsFollowing:
-    options: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'options' }})
-    total: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'total' }})
-    uri: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'uri' }})
+    r"""VideoUserMetadataConnectionsFollowing
+    Information about the users that the current user is following.
+    """
+    
+    options: List[str] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('options') }})
+    total: float = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('total') }})
+    uri: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('uri') }})
     
 
 @dataclass_json
 @dataclass
 class VideoUserMetadataConnectionsGroups:
-    options: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'options' }})
-    total: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'total' }})
-    uri: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'uri' }})
+    r"""VideoUserMetadataConnectionsGroups
+    Information about the groups created by this user.
+    """
+    
+    options: List[str] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('options') }})
+    total: float = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('total') }})
+    uri: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('uri') }})
     
 
 @dataclass_json
 @dataclass
 class VideoUserMetadataConnectionsLikes:
-    options: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'options' }})
-    total: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'total' }})
-    uri: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'uri' }})
+    r"""VideoUserMetadataConnectionsLikes
+    Information about the videos that this user has liked.
+    """
+    
+    options: List[str] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('options') }})
+    total: float = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('total') }})
+    uri: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('uri') }})
     
 
 @dataclass_json
 @dataclass
 class VideoUserMetadataConnectionsModeratedChannels:
-    options: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'options' }})
-    total: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'total' }})
-    uri: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'uri' }})
+    r"""VideoUserMetadataConnectionsModeratedChannels
+    Information about the channels that this user moderates.
+    """
+    
+    options: List[str] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('options') }})
+    total: float = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('total') }})
+    uri: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('uri') }})
     
 
 @dataclass_json
 @dataclass
 class VideoUserMetadataConnectionsPictures:
-    options: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'options' }})
-    total: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'total' }})
-    uri: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'uri' }})
+    r"""VideoUserMetadataConnectionsPictures
+    Information about this user's portraits.
+    """
+    
+    options: List[str] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('options') }})
+    total: float = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('total') }})
+    uri: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('uri') }})
     
 
 @dataclass_json
 @dataclass
 class VideoUserMetadataConnectionsPortfolios:
-    options: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'options' }})
-    total: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'total' }})
-    uri: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'uri' }})
+    r"""VideoUserMetadataConnectionsPortfolios
+    Information about this user's portfolios.
+    """
+    
+    options: List[str] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('options') }})
+    total: float = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('total') }})
+    uri: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('uri') }})
     
 
 @dataclass_json
 @dataclass
 class VideoUserMetadataConnectionsRecommendedChannels:
-    options: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'options' }})
-    total: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'total' }})
-    uri: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'uri' }})
+    r"""VideoUserMetadataConnectionsRecommendedChannels
+    A collection of recommended channels for the current user to follow. This data requires a bearer token with the `private` scope.
+    """
+    
+    options: List[str] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('options') }})
+    total: float = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('total') }})
+    uri: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('uri') }})
     
 
 @dataclass_json
 @dataclass
 class VideoUserMetadataConnectionsRecommendedUsers:
-    options: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'options' }})
-    total: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'total' }})
-    uri: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'uri' }})
+    r"""VideoUserMetadataConnectionsRecommendedUsers
+    A Collection of recommended users for the current user to follow. This data requires a bearer token with the `private` scope.
+    """
+    
+    options: List[str] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('options') }})
+    total: float = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('total') }})
+    uri: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('uri') }})
     
 
 @dataclass_json
 @dataclass
 class VideoUserMetadataConnectionsShared:
-    options: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'options' }})
-    total: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'total' }})
-    uri: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'uri' }})
+    r"""VideoUserMetadataConnectionsShared
+    Information about the videos that have been shared with this user.
+    """
+    
+    options: List[str] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('options') }})
+    total: float = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('total') }})
+    uri: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('uri') }})
     
 
 @dataclass_json
 @dataclass
 class VideoUserMetadataConnectionsVideos:
-    options: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'options' }})
-    total: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'total' }})
-    uri: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'uri' }})
+    r"""VideoUserMetadataConnectionsVideos
+    Information about the videos uploaded by this user.
+    """
+    
+    options: List[str] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('options') }})
+    total: float = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('total') }})
+    uri: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('uri') }})
     
 
 @dataclass_json
 @dataclass
 class VideoUserMetadataConnectionsWatchedVideos:
-    options: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'options' }})
-    total: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'total' }})
-    uri: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'uri' }})
+    r"""VideoUserMetadataConnectionsWatchedVideos
+    Information about the videos that this user has watched.
+    """
+    
+    options: List[str] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('options') }})
+    total: float = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('total') }})
+    uri: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('uri') }})
     
 
 @dataclass_json
 @dataclass
 class VideoUserMetadataConnectionsWatchlater:
-    options: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'options' }})
-    total: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'total' }})
-    uri: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'uri' }})
+    r"""VideoUserMetadataConnectionsWatchlater
+    Information about the videos that this user wants to watch later.
+    """
+    
+    options: List[str] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('options') }})
+    total: float = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('total') }})
+    uri: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('uri') }})
     
 
 @dataclass_json
 @dataclass
 class VideoUserMetadataConnections:
-    albums: VideoUserMetadataConnectionsAlbums = field(default=None, metadata={'dataclasses_json': { 'field_name': 'albums' }})
-    appearances: VideoUserMetadataConnectionsAppearances = field(default=None, metadata={'dataclasses_json': { 'field_name': 'appearances' }})
-    block: VideoUserMetadataConnectionsBlock = field(default=None, metadata={'dataclasses_json': { 'field_name': 'block' }})
-    categories: VideoUserMetadataConnectionsCategories = field(default=None, metadata={'dataclasses_json': { 'field_name': 'categories' }})
-    channels: VideoUserMetadataConnectionsChannels = field(default=None, metadata={'dataclasses_json': { 'field_name': 'channels' }})
-    feed: VideoUserMetadataConnectionsFeed = field(default=None, metadata={'dataclasses_json': { 'field_name': 'feed' }})
-    folders: VideoUserMetadataConnectionsFolders = field(default=None, metadata={'dataclasses_json': { 'field_name': 'folders' }})
-    followers: VideoUserMetadataConnectionsFollowers = field(default=None, metadata={'dataclasses_json': { 'field_name': 'followers' }})
-    following: VideoUserMetadataConnectionsFollowing = field(default=None, metadata={'dataclasses_json': { 'field_name': 'following' }})
-    groups: VideoUserMetadataConnectionsGroups = field(default=None, metadata={'dataclasses_json': { 'field_name': 'groups' }})
-    likes: VideoUserMetadataConnectionsLikes = field(default=None, metadata={'dataclasses_json': { 'field_name': 'likes' }})
-    moderated_channels: VideoUserMetadataConnectionsModeratedChannels = field(default=None, metadata={'dataclasses_json': { 'field_name': 'moderated_channels' }})
-    pictures: VideoUserMetadataConnectionsPictures = field(default=None, metadata={'dataclasses_json': { 'field_name': 'pictures' }})
-    portfolios: VideoUserMetadataConnectionsPortfolios = field(default=None, metadata={'dataclasses_json': { 'field_name': 'portfolios' }})
-    recommended_channels: VideoUserMetadataConnectionsRecommendedChannels = field(default=None, metadata={'dataclasses_json': { 'field_name': 'recommended_channels' }})
-    recommended_users: VideoUserMetadataConnectionsRecommendedUsers = field(default=None, metadata={'dataclasses_json': { 'field_name': 'recommended_users' }})
-    shared: VideoUserMetadataConnectionsShared = field(default=None, metadata={'dataclasses_json': { 'field_name': 'shared' }})
-    videos: VideoUserMetadataConnectionsVideos = field(default=None, metadata={'dataclasses_json': { 'field_name': 'videos' }})
-    watched_videos: VideoUserMetadataConnectionsWatchedVideos = field(default=None, metadata={'dataclasses_json': { 'field_name': 'watched_videos' }})
-    watchlater: VideoUserMetadataConnectionsWatchlater = field(default=None, metadata={'dataclasses_json': { 'field_name': 'watchlater' }})
+    r"""VideoUserMetadataConnections
+    The list of resource URIs related to the user.
+    """
+    
+    albums: VideoUserMetadataConnectionsAlbums = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('albums') }})
+    appearances: VideoUserMetadataConnectionsAppearances = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('appearances') }})
+    block: VideoUserMetadataConnectionsBlock = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('block') }})
+    categories: VideoUserMetadataConnectionsCategories = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('categories') }})
+    channels: VideoUserMetadataConnectionsChannels = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('channels') }})
+    feed: VideoUserMetadataConnectionsFeed = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('feed') }})
+    folders: VideoUserMetadataConnectionsFolders = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('folders') }})
+    followers: VideoUserMetadataConnectionsFollowers = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('followers') }})
+    following: VideoUserMetadataConnectionsFollowing = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('following') }})
+    groups: VideoUserMetadataConnectionsGroups = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('groups') }})
+    likes: VideoUserMetadataConnectionsLikes = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('likes') }})
+    moderated_channels: VideoUserMetadataConnectionsModeratedChannels = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('moderated_channels') }})
+    pictures: VideoUserMetadataConnectionsPictures = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('pictures') }})
+    portfolios: VideoUserMetadataConnectionsPortfolios = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('portfolios') }})
+    recommended_channels: VideoUserMetadataConnectionsRecommendedChannels = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('recommended_channels') }})
+    recommended_users: VideoUserMetadataConnectionsRecommendedUsers = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('recommended_users') }})
+    shared: VideoUserMetadataConnectionsShared = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('shared') }})
+    videos: VideoUserMetadataConnectionsVideos = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('videos') }})
+    watched_videos: VideoUserMetadataConnectionsWatchedVideos = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('watched_videos') }})
+    watchlater: VideoUserMetadataConnectionsWatchlater = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('watchlater') }})
     
 
 @dataclass_json
 @dataclass
 class VideoUserMetadataInteractionsAddPrivacyUser:
-    options: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'options' }})
-    uri: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'uri' }})
+    options: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('options') }})
+    uri: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('uri') }})
     
 
 @dataclass_json
 @dataclass
 class VideoUserMetadataInteractionsBlock:
-    added: bool = field(default=None, metadata={'dataclasses_json': { 'field_name': 'added' }})
-    added_time: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'added_time' }})
-    options: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'options' }})
-    uri: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'uri' }})
+    r"""VideoUserMetadataInteractionsBlock
+    Information related to the block status of this user.
+    """
+    
+    added: bool = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('added') }})
+    added_time: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('added_time') }})
+    options: List[str] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('options') }})
+    uri: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('uri') }})
     
 
 @dataclass_json
 @dataclass
 class VideoUserMetadataInteractionsFollow:
-    added: bool = field(default=None, metadata={'dataclasses_json': { 'field_name': 'added' }})
-    options: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'options' }})
-    uri: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'uri' }})
+    r"""VideoUserMetadataInteractionsFollow
+    Information related to the followed status of this user.
+    """
+    
+    added: bool = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('added') }})
+    options: List[str] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('options') }})
+    uri: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('uri') }})
     
 
 @dataclass_json
 @dataclass
 class VideoUserMetadataInteractionsReport:
-    options: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'options' }})
-    reason: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'reason' }})
-    uri: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'uri' }})
+    r"""VideoUserMetadataInteractionsReport
+    Information regarding where and how to report a user.
+    """
+    
+    options: List[str] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('options') }})
+    reason: List[str] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('reason') }})
+    uri: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('uri') }})
     
 
 @dataclass_json
 @dataclass
 class VideoUserMetadataInteractions:
-    add_privacy_user: Optional[VideoUserMetadataInteractionsAddPrivacyUser] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'add_privacy_user' }})
-    block: VideoUserMetadataInteractionsBlock = field(default=None, metadata={'dataclasses_json': { 'field_name': 'block' }})
-    follow: VideoUserMetadataInteractionsFollow = field(default=None, metadata={'dataclasses_json': { 'field_name': 'follow' }})
-    report: VideoUserMetadataInteractionsReport = field(default=None, metadata={'dataclasses_json': { 'field_name': 'report' }})
+    block: VideoUserMetadataInteractionsBlock = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('block') }})
+    follow: VideoUserMetadataInteractionsFollow = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('follow') }})
+    report: VideoUserMetadataInteractionsReport = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('report') }})
+    add_privacy_user: Optional[VideoUserMetadataInteractionsAddPrivacyUser] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('add_privacy_user') }})
     
 
 @dataclass_json
 @dataclass
 class VideoUserMetadata:
-    connections: VideoUserMetadataConnections = field(default=None, metadata={'dataclasses_json': { 'field_name': 'connections' }})
-    interactions: VideoUserMetadataInteractions = field(default=None, metadata={'dataclasses_json': { 'field_name': 'interactions' }})
+    r"""VideoUserMetadata
+    The user's metadata.
+    """
+    
+    connections: VideoUserMetadataConnections = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('connections') }})
+    interactions: VideoUserMetadataInteractions = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('interactions') }})
     
 class VideoUserPreferencesVideosPrivacyCommentsEnum(str, Enum):
     ANYBODY = "anybody"
@@ -676,40 +912,48 @@ class VideoUserPreferencesVideosPrivacyViewEnum(str, Enum):
 @dataclass_json
 @dataclass
 class VideoUserPreferencesVideosPrivacy:
-    add: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'add' }})
-    comments: Optional[VideoUserPreferencesVideosPrivacyCommentsEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'comments' }})
-    download: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'download' }})
-    embed: Optional[VideoUserPreferencesVideosPrivacyEmbedEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'embed' }})
-    view: Optional[VideoUserPreferencesVideosPrivacyViewEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'view' }})
+    add: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('add') }})
+    comments: Optional[VideoUserPreferencesVideosPrivacyCommentsEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('comments') }})
+    download: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('download') }})
+    embed: Optional[VideoUserPreferencesVideosPrivacyEmbedEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('embed') }})
+    view: Optional[VideoUserPreferencesVideosPrivacyViewEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('view') }})
     
 
 @dataclass_json
 @dataclass
 class VideoUserPreferencesVideos:
-    privacy: Optional[VideoUserPreferencesVideosPrivacy] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'privacy' }})
+    privacy: Optional[VideoUserPreferencesVideosPrivacy] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('privacy') }})
     
 
 @dataclass_json
 @dataclass
 class VideoUserPreferences:
-    videos: Optional[VideoUserPreferencesVideos] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'videos' }})
+    videos: Optional[VideoUserPreferencesVideos] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('videos') }})
     
 
 @dataclass_json
 @dataclass
 class VideoUserUploadQuotaLifetime:
-    free: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'free' }})
-    max: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'max' }})
-    used: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'used' }})
+    r"""VideoUserUploadQuotaLifetime
+    Information about the user's lifetime upload usage.
+    """
+    
+    free: float = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('free') }})
+    max: float = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('max') }})
+    used: float = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('used') }})
     
 
 @dataclass_json
 @dataclass
 class VideoUserUploadQuotaPeriodic:
-    free: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'free' }})
-    max: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'max' }})
-    reset_date: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'reset_date' }})
-    used: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'used' }})
+    r"""VideoUserUploadQuotaPeriodic
+    Information about the user's usage for the current period.
+    """
+    
+    free: float = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('free') }})
+    max: float = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('max') }})
+    reset_date: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('reset_date') }})
+    used: float = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('used') }})
     
 class VideoUserUploadQuotaSpaceShowingEnum(str, Enum):
     LIFETIME = "lifetime"
@@ -719,79 +963,91 @@ class VideoUserUploadQuotaSpaceShowingEnum(str, Enum):
 @dataclass_json
 @dataclass
 class VideoUserUploadQuotaSpace:
-    free: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'free' }})
-    max: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'max' }})
-    showing: VideoUserUploadQuotaSpaceShowingEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'showing' }})
-    used: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'used' }})
+    r"""VideoUserUploadQuotaSpace
+    Information about the user's upload space remaining for the current period.
+    """
+    
+    free: float = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('free') }})
+    max: float = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('max') }})
+    showing: VideoUserUploadQuotaSpaceShowingEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('showing') }})
+    used: float = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('used') }})
     
 
 @dataclass_json
 @dataclass
 class VideoUserUploadQuota:
-    lifetime: VideoUserUploadQuotaLifetime = field(default=None, metadata={'dataclasses_json': { 'field_name': 'lifetime' }})
-    periodic: VideoUserUploadQuotaPeriodic = field(default=None, metadata={'dataclasses_json': { 'field_name': 'periodic' }})
-    space: VideoUserUploadQuotaSpace = field(default=None, metadata={'dataclasses_json': { 'field_name': 'space' }})
+    r"""VideoUserUploadQuota
+    Appears only when the user has upload access and is looking at their own user record.
+    """
+    
+    lifetime: VideoUserUploadQuotaLifetime = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('lifetime') }})
+    periodic: VideoUserUploadQuotaPeriodic = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('periodic') }})
+    space: VideoUserUploadQuotaSpace = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('space') }})
     
 
 @dataclass_json
 @dataclass
 class VideoUserWebsites:
-    description: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
-    link: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'link' }})
-    name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
+    description: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('description') }})
+    link: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('link') }})
+    name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
     
 
 @dataclass_json
 @dataclass
 class VideoUser:
-    account: VideoUserAccountEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'account' }})
-    bio: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'bio' }})
-    content_filter: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'content_filter' }})
-    created_time: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'created_time' }})
-    email: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'email' }})
-    link: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'link' }})
-    location: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'location' }})
-    metadata: VideoUserMetadata = field(default=None, metadata={'dataclasses_json': { 'field_name': 'metadata' }})
-    name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    pictures: picture.Picture = field(default=None, metadata={'dataclasses_json': { 'field_name': 'pictures' }})
-    preferences: Optional[VideoUserPreferences] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'preferences' }})
-    resource_key: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'resource_key' }})
-    upload_quota: VideoUserUploadQuota = field(default=None, metadata={'dataclasses_json': { 'field_name': 'upload_quota' }})
-    uri: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'uri' }})
-    websites: List[VideoUserWebsites] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'websites' }})
+    r"""VideoUser
+    The video owner.
+    """
+    
+    account: VideoUserAccountEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('account') }})
+    bio: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('bio') }})
+    created_time: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('created_time') }})
+    link: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('link') }})
+    location: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('location') }})
+    metadata: VideoUserMetadata = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('metadata') }})
+    name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    pictures: Picture = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('pictures') }})
+    resource_key: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('resource_key') }})
+    upload_quota: VideoUserUploadQuota = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('upload_quota') }})
+    uri: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('uri') }})
+    websites: List[VideoUserWebsites] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('websites') }})
+    content_filter: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('content_filter') }})
+    email: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('email') }})
+    preferences: Optional[VideoUserPreferences] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('preferences') }})
     
 
 @dataclass_json
 @dataclass
 class Video:
-    categories: List[category.Category] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'categories' }})
-    content_rating: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'content_rating' }})
-    context: VideoContext = field(default=None, metadata={'dataclasses_json': { 'field_name': 'context' }})
-    created_time: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'created_time' }})
-    description: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
-    duration: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'duration' }})
-    embed: embed_settings.EmbedSettings = field(default=None, metadata={'dataclasses_json': { 'field_name': 'embed' }})
-    height: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'height' }})
-    language: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'language' }})
-    last_user_action_event_date: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'last_user_action_event_date' }})
-    license: VideoLicenseEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'license' }})
-    link: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'link' }})
-    metadata: VideoMetadata = field(default=None, metadata={'dataclasses_json': { 'field_name': 'metadata' }})
-    modified_time: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'modified_time' }})
-    name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    parent_folder: Optional[VideoProject] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'parent_folder' }})
-    password: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'password' }})
-    pictures: picture.Picture = field(default=None, metadata={'dataclasses_json': { 'field_name': 'pictures' }})
-    privacy: VideoPrivacy = field(default=None, metadata={'dataclasses_json': { 'field_name': 'privacy' }})
-    release_time: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'release_time' }})
-    resource_key: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'resource_key' }})
-    spatial: VideoSpatial = field(default=None, metadata={'dataclasses_json': { 'field_name': 'spatial' }})
-    stats: VideoStats = field(default=None, metadata={'dataclasses_json': { 'field_name': 'stats' }})
-    status: VideoStatusEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
-    tags: List[tag.Tag] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tags' }})
-    transcode: VideoTranscode = field(default=None, metadata={'dataclasses_json': { 'field_name': 'transcode' }})
-    upload: VideoUpload = field(default=None, metadata={'dataclasses_json': { 'field_name': 'upload' }})
-    uri: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'uri' }})
-    user: VideoUser = field(default=None, metadata={'dataclasses_json': { 'field_name': 'user' }})
-    width: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'width' }})
+    categories: List[Category] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('categories') }})
+    content_rating: List[str] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('content_rating') }})
+    context: VideoContext = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('context') }})
+    created_time: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('created_time') }})
+    description: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('description') }})
+    duration: float = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('duration') }})
+    embed: EmbedSettings = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('embed') }})
+    height: float = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('height') }})
+    language: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('language') }})
+    license: VideoLicenseEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('license') }})
+    link: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('link') }})
+    metadata: VideoMetadata = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('metadata') }})
+    modified_time: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('modified_time') }})
+    name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    pictures: Picture = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('pictures') }})
+    privacy: VideoPrivacy = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('privacy') }})
+    release_time: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('release_time') }})
+    resource_key: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('resource_key') }})
+    spatial: VideoSpatial = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('spatial') }})
+    stats: VideoStats = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('stats') }})
+    status: VideoStatusEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('status') }})
+    tags: List[Tag] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('tags') }})
+    transcode: VideoTranscode = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('transcode') }})
+    upload: VideoUpload = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('upload') }})
+    uri: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('uri') }})
+    user: VideoUser = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('user') }})
+    width: float = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('width') }})
+    last_user_action_event_date: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('last_user_action_event_date') }})
+    parent_folder: Optional[VideoProject] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('parent_folder') }})
+    password: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('password') }})
     

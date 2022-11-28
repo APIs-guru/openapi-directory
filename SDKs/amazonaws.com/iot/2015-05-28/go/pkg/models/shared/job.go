@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// Job
+// The <code>Job</code> object contains details about a job.
 type Job struct {
 	AbortConfig                *AbortConfig                `json:"abortConfig,omitempty"`
 	Comment                    *string                     `json:"comment,omitempty"`

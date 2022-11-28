@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { FunctionIsolationModeEnum } from "./functionisolationmodeenum";
 import { FunctionRunAsConfig } from "./functionrunasconfig";
 // FunctionExecutionConfig
@@ -35,11 +35,11 @@ var FunctionExecutionConfig = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=IsolationMode" }),
+        SpeakeasyMetadata({ data: "json, name=IsolationMode" }),
         __metadata("design:type", String)
     ], FunctionExecutionConfig.prototype, "isolationMode", void 0);
     __decorate([
-        Metadata({ data: "json, name=RunAs" }),
+        SpeakeasyMetadata({ data: "json, name=RunAs" }),
         __metadata("design:type", FunctionRunAsConfig)
     ], FunctionExecutionConfig.prototype, "runAs", void 0);
     return FunctionExecutionConfig;

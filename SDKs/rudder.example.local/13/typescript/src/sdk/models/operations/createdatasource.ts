@@ -1,11 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
-
-export class CreateDataSourceRequest extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/json" })
-  request?: shared.Datasource;
-}
 
 export enum CreateDataSource200ApplicationJsonActionEnum {
     CreateDataSource = "createDataSource"
@@ -17,35 +12,41 @@ export enum CreateDataSource200ApplicationJsonActionEnum {
  * Information about the data sources
 **/
 export class CreateDataSource200ApplicationJsonData extends SpeakeasyBase {
-  @Metadata({ data: "json, name=datasources", elemType: shared.Datasource })
+  @SpeakeasyMetadata({ data: "json, name=datasources", elemType: shared.Datasource })
   datasources: shared.Datasource[];
 }
 
 export enum CreateDataSource200ApplicationJsonResultEnum {
-    Success = "success"
-,    Error = "error"
+    Success = "success",
+    Error = "error"
 }
 
 
 export class CreateDataSource200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=action" })
+  @SpeakeasyMetadata({ data: "json, name=action" })
   action: CreateDataSource200ApplicationJsonActionEnum;
 
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data: CreateDataSource200ApplicationJsonData;
 
-  @Metadata({ data: "json, name=result" })
+  @SpeakeasyMetadata({ data: "json, name=result" })
   result: CreateDataSource200ApplicationJsonResultEnum;
 }
 
 
+export class CreateDataSourceRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request?: shared.Datasource;
+}
+
+
 export class CreateDataSourceResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   createDataSource200ApplicationJsonObject?: CreateDataSource200ApplicationJson;
 }

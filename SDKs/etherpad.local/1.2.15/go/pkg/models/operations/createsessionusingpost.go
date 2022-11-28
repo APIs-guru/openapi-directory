@@ -6,10 +6,6 @@ type CreateSessionUsingPostQueryParams struct {
 	ValidUntil *string `queryParam:"style=form,explode=true,name=validUntil"`
 }
 
-type CreateSessionUsingPostRequest struct {
-	QueryParams CreateSessionUsingPostQueryParams
-}
-
 type CreateSessionUsingPost200ApplicationJSONData struct {
 	SessionID *string `json:"sessionID,omitempty"`
 }
@@ -36,6 +32,10 @@ type CreateSessionUsingPost500ApplicationJSON struct {
 	Code    *int64                 `json:"code,omitempty"`
 	Data    map[string]interface{} `json:"data,omitempty"`
 	Message *string                `json:"message,omitempty"`
+}
+
+type CreateSessionUsingPostRequest struct {
+	QueryParams CreateSessionUsingPostQueryParams
 }
 
 type CreateSessionUsingPostResponse struct {

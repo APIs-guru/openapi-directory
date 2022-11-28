@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var GetCopyImageActionEnum;
 (function (GetCopyImageActionEnum) {
     GetCopyImageActionEnum["CopyImage"] = "CopyImage";
@@ -37,47 +37,47 @@ var GetCopyImageQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=Action" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Action" }),
         __metadata("design:type", String)
     ], GetCopyImageQueryParams.prototype, "action", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=ClientToken" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=ClientToken" }),
         __metadata("design:type", String)
     ], GetCopyImageQueryParams.prototype, "clientToken", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=Description" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Description" }),
         __metadata("design:type", String)
     ], GetCopyImageQueryParams.prototype, "description", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=DestinationOutpostArn" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=DestinationOutpostArn" }),
         __metadata("design:type", String)
     ], GetCopyImageQueryParams.prototype, "destinationOutpostArn", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=DryRun" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=DryRun" }),
         __metadata("design:type", Boolean)
     ], GetCopyImageQueryParams.prototype, "dryRun", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=Encrypted" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Encrypted" }),
         __metadata("design:type", Boolean)
     ], GetCopyImageQueryParams.prototype, "encrypted", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=KmsKeyId" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=KmsKeyId" }),
         __metadata("design:type", String)
     ], GetCopyImageQueryParams.prototype, "kmsKeyId", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=Name" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Name" }),
         __metadata("design:type", String)
     ], GetCopyImageQueryParams.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=SourceImageId" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=SourceImageId" }),
         __metadata("design:type", String)
     ], GetCopyImageQueryParams.prototype, "sourceImageId", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=SourceRegion" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=SourceRegion" }),
         __metadata("design:type", String)
     ], GetCopyImageQueryParams.prototype, "sourceRegion", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=Version" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Version" }),
         __metadata("design:type", String)
     ], GetCopyImageQueryParams.prototype, "version", void 0);
     return GetCopyImageQueryParams;
@@ -89,31 +89,31 @@ var GetCopyImageHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
         __metadata("design:type", String)
     ], GetCopyImageHeaders.prototype, "xAmzAlgorithm", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
         __metadata("design:type", String)
     ], GetCopyImageHeaders.prototype, "xAmzContentSha256", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
         __metadata("design:type", String)
     ], GetCopyImageHeaders.prototype, "xAmzCredential", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
         __metadata("design:type", String)
     ], GetCopyImageHeaders.prototype, "xAmzDate", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
         __metadata("design:type", String)
     ], GetCopyImageHeaders.prototype, "xAmzSecurityToken", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
         __metadata("design:type", String)
     ], GetCopyImageHeaders.prototype, "xAmzSignature", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
         __metadata("design:type", String)
     ], GetCopyImageHeaders.prototype, "xAmzSignedHeaders", void 0);
     return GetCopyImageHeaders;
@@ -125,11 +125,11 @@ var GetCopyImageRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetCopyImageQueryParams)
     ], GetCopyImageRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetCopyImageHeaders)
     ], GetCopyImageRequest.prototype, "headers", void 0);
     return GetCopyImageRequest;
@@ -141,15 +141,15 @@ var GetCopyImageResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], GetCopyImageResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetCopyImageResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetCopyImageResponse.prototype, "statusCode", void 0);
     return GetCopyImageResponse;

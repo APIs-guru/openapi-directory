@@ -5,7 +5,7 @@ import (
 )
 
 type AddItemListRequest struct {
-	Request shared.ItemList `request:"mediaType=application/json"`
+	Request shared.ItemListInput `request:"mediaType=application/json"`
 }
 
 type AddItemListResponse struct {

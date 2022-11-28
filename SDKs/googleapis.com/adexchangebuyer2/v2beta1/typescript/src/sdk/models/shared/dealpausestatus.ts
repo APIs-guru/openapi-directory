@@ -1,9 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum DealPauseStatusFirstPausedByEnum {
-    BuyerSellerRoleUnspecified = "BUYER_SELLER_ROLE_UNSPECIFIED"
-,    Buyer = "BUYER"
-,    Seller = "SELLER"
+    BuyerSellerRoleUnspecified = "BUYER_SELLER_ROLE_UNSPECIFIED",
+    Buyer = "BUYER",
+    Seller = "SELLER"
 }
 
 
@@ -12,18 +13,18 @@ export enum DealPauseStatusFirstPausedByEnum {
  * Tracks which parties (if any) have paused a deal. The deal is considered paused if either hasBuyerPaused or hasSellPaused is true.
 **/
 export class DealPauseStatus extends SpeakeasyBase {
-  @Metadata({ data: "json, name=buyerPauseReason" })
+  @SpeakeasyMetadata({ data: "json, name=buyerPauseReason" })
   buyerPauseReason?: string;
 
-  @Metadata({ data: "json, name=firstPausedBy" })
+  @SpeakeasyMetadata({ data: "json, name=firstPausedBy" })
   firstPausedBy?: DealPauseStatusFirstPausedByEnum;
 
-  @Metadata({ data: "json, name=hasBuyerPaused" })
+  @SpeakeasyMetadata({ data: "json, name=hasBuyerPaused" })
   hasBuyerPaused?: boolean;
 
-  @Metadata({ data: "json, name=hasSellerPaused" })
+  @SpeakeasyMetadata({ data: "json, name=hasSellerPaused" })
   hasSellerPaused?: boolean;
 
-  @Metadata({ data: "json, name=sellerPauseReason" })
+  @SpeakeasyMetadata({ data: "json, name=sellerPauseReason" })
   sellerPauseReason?: string;
 }

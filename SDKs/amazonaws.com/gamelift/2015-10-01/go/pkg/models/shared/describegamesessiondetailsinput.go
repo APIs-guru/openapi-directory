@@ -1,5 +1,7 @@
 package shared
 
+// DescribeGameSessionDetailsInput
+// Represents the input for a request operation.
 type DescribeGameSessionDetailsInput struct {
 	AliasID       *string `json:"AliasId,omitempty"`
 	FleetID       *string `json:"FleetId,omitempty"`

@@ -1,5 +1,7 @@
 package shared
 
+// PreAuthorizedApplication
+// Contains information about pre authorized client application.
 type PreAuthorizedApplication struct {
 	AppID       *string                              `json:"appId,omitempty"`
 	Extensions  []PreAuthorizedApplicationExtension  `json:"extensions,omitempty"`

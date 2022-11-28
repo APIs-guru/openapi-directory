@@ -1,4 +1,7 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
@@ -16,17 +19,17 @@ class GetMasterAccountHeaders:
 
 @dataclass
 class GetMasterAccountRequest:
-    headers: GetMasterAccountHeaders = field(default=None)
+    headers: GetMasterAccountHeaders = field()
     
 
 @dataclass
 class GetMasterAccountResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     get_master_account_response: Optional[shared.GetMasterAccountResponse] = field(default=None)
     internal_exception: Optional[Any] = field(default=None)
     invalid_access_exception: Optional[Any] = field(default=None)
     invalid_input_exception: Optional[Any] = field(default=None)
     limit_exceeded_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AuthorizedApp
@@ -7,24 +8,24 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * 
 **/
 export class AuthorizedApp extends SpeakeasyBase {
-  @Metadata({ data: "json, name=created" })
+  @SpeakeasyMetadata({ data: "json, name=created" })
   created?: Date;
 
-  @Metadata({ data: "json, name=expiry" })
+  @SpeakeasyMetadata({ data: "json, name=expiry" })
   expiry?: Date;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: number;
 
-  @Metadata({ data: "json, name=label" })
+  @SpeakeasyMetadata({ data: "json, name=label" })
   label?: string;
 
-  @Metadata({ data: "json, name=scopes" })
+  @SpeakeasyMetadata({ data: "json, name=scopes" })
   scopes?: string;
 
-  @Metadata({ data: "json, name=thumbnail_url" })
+  @SpeakeasyMetadata({ data: "json, name=thumbnail_url" })
   thumbnailUrl?: string;
 
-  @Metadata({ data: "json, name=website" })
+  @SpeakeasyMetadata({ data: "json, name=website" })
   website?: string;
 }

@@ -1,6 +1,7 @@
 
 
+
 export enum SortExperimentsByEnum {
-    Name = "Name"
-,    CreationTime = "CreationTime"
+    Name = "Name",
+    CreationTime = "CreationTime"
 }

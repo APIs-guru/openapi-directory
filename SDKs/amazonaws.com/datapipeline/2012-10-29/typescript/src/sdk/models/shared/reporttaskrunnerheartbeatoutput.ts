@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ReportTaskRunnerHeartbeatOutput
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Contains the output of ReportTaskRunnerHeartbeat.
 **/
 export class ReportTaskRunnerHeartbeatOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=terminate" })
+  @SpeakeasyMetadata({ data: "json, name=terminate" })
   terminate: boolean;
 }

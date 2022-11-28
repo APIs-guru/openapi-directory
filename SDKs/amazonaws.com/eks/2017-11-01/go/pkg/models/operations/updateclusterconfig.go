@@ -18,10 +18,14 @@ type UpdateClusterConfigHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// UpdateClusterConfigRequestBodyLogging
+// An object representing the logging configuration for resources in your cluster.
 type UpdateClusterConfigRequestBodyLogging struct {
 	ClusterLogging []shared.LogSetup `json:"clusterLogging,omitempty"`
 }
 
+// UpdateClusterConfigRequestBodyResourcesVpcConfig
+// An object representing the VPC configuration to use for an Amazon EKS cluster.
 type UpdateClusterConfigRequestBodyResourcesVpcConfig struct {
 	EndpointPrivateAccess *bool    `json:"endpointPrivateAccess,omitempty"`
 	EndpointPublicAccess  *bool    `json:"endpointPublicAccess,omitempty"`

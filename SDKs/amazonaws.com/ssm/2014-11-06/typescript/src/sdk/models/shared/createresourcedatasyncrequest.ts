@@ -1,18 +1,19 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ResourceDataSyncS3Destination } from "./resourcedatasyncs3destination";
 import { ResourceDataSyncSource } from "./resourcedatasyncsource";
 
 
+
 export class CreateResourceDataSyncRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=S3Destination" })
+  @SpeakeasyMetadata({ data: "json, name=S3Destination" })
   s3Destination?: ResourceDataSyncS3Destination;
 
-  @Metadata({ data: "json, name=SyncName" })
+  @SpeakeasyMetadata({ data: "json, name=SyncName" })
   syncName: string;
 
-  @Metadata({ data: "json, name=SyncSource" })
+  @SpeakeasyMetadata({ data: "json, name=SyncSource" })
   syncSource?: ResourceDataSyncSource;
 
-  @Metadata({ data: "json, name=SyncType" })
+  @SpeakeasyMetadata({ data: "json, name=SyncType" })
   syncType?: string;
 }

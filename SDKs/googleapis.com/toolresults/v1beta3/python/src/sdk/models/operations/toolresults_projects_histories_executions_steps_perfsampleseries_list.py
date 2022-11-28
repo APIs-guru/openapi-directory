@@ -1,14 +1,15 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class ToolresultsProjectsHistoriesExecutionsStepsPerfSampleSeriesListPathParams:
-    execution_id: str = field(default=None, metadata={'path_param': { 'field_name': 'executionId', 'style': 'simple', 'explode': False }})
-    history_id: str = field(default=None, metadata={'path_param': { 'field_name': 'historyId', 'style': 'simple', 'explode': False }})
-    project_id: str = field(default=None, metadata={'path_param': { 'field_name': 'projectId', 'style': 'simple', 'explode': False }})
-    step_id: str = field(default=None, metadata={'path_param': { 'field_name': 'stepId', 'style': 'simple', 'explode': False }})
+    execution_id: str = field(metadata={'path_param': { 'field_name': 'executionId', 'style': 'simple', 'explode': False }})
+    history_id: str = field(metadata={'path_param': { 'field_name': 'historyId', 'style': 'simple', 'explode': False }})
+    project_id: str = field(metadata={'path_param': { 'field_name': 'projectId', 'style': 'simple', 'explode': False }})
+    step_id: str = field(metadata={'path_param': { 'field_name': 'stepId', 'style': 'simple', 'explode': False }})
     
 class ToolresultsProjectsHistoriesExecutionsStepsPerfSampleSeriesListFilterEnum(str, Enum):
     PERF_METRIC_TYPE_UNSPECIFIED = "perfMetricTypeUnspecified"
@@ -36,20 +37,20 @@ class ToolresultsProjectsHistoriesExecutionsStepsPerfSampleSeriesListQueryParams
 
 @dataclass
 class ToolresultsProjectsHistoriesExecutionsStepsPerfSampleSeriesListSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class ToolresultsProjectsHistoriesExecutionsStepsPerfSampleSeriesListRequest:
-    path_params: ToolresultsProjectsHistoriesExecutionsStepsPerfSampleSeriesListPathParams = field(default=None)
-    query_params: ToolresultsProjectsHistoriesExecutionsStepsPerfSampleSeriesListQueryParams = field(default=None)
-    security: ToolresultsProjectsHistoriesExecutionsStepsPerfSampleSeriesListSecurity = field(default=None)
+    path_params: ToolresultsProjectsHistoriesExecutionsStepsPerfSampleSeriesListPathParams = field()
+    query_params: ToolresultsProjectsHistoriesExecutionsStepsPerfSampleSeriesListQueryParams = field()
+    security: ToolresultsProjectsHistoriesExecutionsStepsPerfSampleSeriesListSecurity = field()
     
 
 @dataclass
 class ToolresultsProjectsHistoriesExecutionsStepsPerfSampleSeriesListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     list_perf_sample_series_response: Optional[shared.ListPerfSampleSeriesResponse] = field(default=None)
-    status_code: int = field(default=None)
     

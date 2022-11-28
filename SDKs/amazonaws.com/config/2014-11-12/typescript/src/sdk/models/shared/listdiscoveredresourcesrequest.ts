@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ResourceTypeEnum } from "./resourcetypeenum";
+
 
 
 // ListDiscoveredResourcesRequest
@@ -7,21 +8,21 @@ import { ResourceTypeEnum } from "./resourcetypeenum";
  * <p/>
 **/
 export class ListDiscoveredResourcesRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=includeDeletedResources" })
+  @SpeakeasyMetadata({ data: "json, name=includeDeletedResources" })
   includeDeletedResources?: boolean;
 
-  @Metadata({ data: "json, name=limit" })
+  @SpeakeasyMetadata({ data: "json, name=limit" })
   limit?: number;
 
-  @Metadata({ data: "json, name=nextToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=resourceIds" })
+  @SpeakeasyMetadata({ data: "json, name=resourceIds" })
   resourceIds?: string[];
 
-  @Metadata({ data: "json, name=resourceName" })
+  @SpeakeasyMetadata({ data: "json, name=resourceName" })
   resourceName?: string;
 
-  @Metadata({ data: "json, name=resourceType" })
+  @SpeakeasyMetadata({ data: "json, name=resourceType" })
   resourceType: ResourceTypeEnum;
 }

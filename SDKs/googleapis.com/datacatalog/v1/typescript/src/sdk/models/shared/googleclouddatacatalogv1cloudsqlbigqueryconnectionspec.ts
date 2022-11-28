@@ -1,9 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum GoogleCloudDatacatalogV1CloudSqlBigQueryConnectionSpecTypeEnum {
-    DatabaseTypeUnspecified = "DATABASE_TYPE_UNSPECIFIED"
-,    Postgres = "POSTGRES"
-,    Mysql = "MYSQL"
+    DatabaseTypeUnspecified = "DATABASE_TYPE_UNSPECIFIED",
+    Postgres = "POSTGRES",
+    Mysql = "MYSQL"
 }
 
 
@@ -12,12 +13,12 @@ export enum GoogleCloudDatacatalogV1CloudSqlBigQueryConnectionSpecTypeEnum {
  * Specification for the BigQuery connection to a Cloud SQL instance.
 **/
 export class GoogleCloudDatacatalogV1CloudSqlBigQueryConnectionSpec extends SpeakeasyBase {
-  @Metadata({ data: "json, name=database" })
+  @SpeakeasyMetadata({ data: "json, name=database" })
   database?: string;
 
-  @Metadata({ data: "json, name=instanceId" })
+  @SpeakeasyMetadata({ data: "json, name=instanceId" })
   instanceId?: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: GoogleCloudDatacatalogV1CloudSqlBigQueryConnectionSpecTypeEnum;
 }

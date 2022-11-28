@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AugmentedManifestsDocumentTypeFormatEnum } from "./augmentedmanifestsdocumenttypeformatenum";
 // AugmentedManifestsListItem
 /**
@@ -34,23 +34,23 @@ var AugmentedManifestsListItem = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=AnnotationDataS3Uri" }),
+        SpeakeasyMetadata({ data: "json, name=AnnotationDataS3Uri" }),
         __metadata("design:type", String)
     ], AugmentedManifestsListItem.prototype, "annotationDataS3Uri", void 0);
     __decorate([
-        Metadata({ data: "json, name=AttributeNames" }),
+        SpeakeasyMetadata({ data: "json, name=AttributeNames" }),
         __metadata("design:type", Array)
     ], AugmentedManifestsListItem.prototype, "attributeNames", void 0);
     __decorate([
-        Metadata({ data: "json, name=DocumentType" }),
+        SpeakeasyMetadata({ data: "json, name=DocumentType" }),
         __metadata("design:type", String)
     ], AugmentedManifestsListItem.prototype, "documentType", void 0);
     __decorate([
-        Metadata({ data: "json, name=S3Uri" }),
+        SpeakeasyMetadata({ data: "json, name=S3Uri" }),
         __metadata("design:type", String)
     ], AugmentedManifestsListItem.prototype, "s3Uri", void 0);
     __decorate([
-        Metadata({ data: "json, name=SourceDocumentsS3Uri" }),
+        SpeakeasyMetadata({ data: "json, name=SourceDocumentsS3Uri" }),
         __metadata("design:type", String)
     ], AugmentedManifestsListItem.prototype, "sourceDocumentsS3Uri", void 0);
     return AugmentedManifestsListItem;

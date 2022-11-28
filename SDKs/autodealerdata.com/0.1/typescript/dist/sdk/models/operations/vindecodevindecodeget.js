@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var VinDecodeVinDecodeGetQueryParams = /** @class */ (function (_super) {
     __extends(VinDecodeVinDecodeGetQueryParams, _super);
@@ -30,19 +30,19 @@ var VinDecodeVinDecodeGetQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=includeRecall" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=includeRecall" }),
         __metadata("design:type", Boolean)
     ], VinDecodeVinDecodeGetQueryParams.prototype, "includeRecall", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=jwt" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=jwt" }),
         __metadata("design:type", String)
     ], VinDecodeVinDecodeGetQueryParams.prototype, "jwt", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=passEmpty" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=passEmpty" }),
         __metadata("design:type", Boolean)
     ], VinDecodeVinDecodeGetQueryParams.prototype, "passEmpty", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=vin" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=vin" }),
         __metadata("design:type", String)
     ], VinDecodeVinDecodeGetQueryParams.prototype, "vin", void 0);
     return VinDecodeVinDecodeGetQueryParams;
@@ -54,7 +54,7 @@ var VinDecodeVinDecodeGetRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", VinDecodeVinDecodeGetQueryParams)
     ], VinDecodeVinDecodeGetRequest.prototype, "queryParams", void 0);
     return VinDecodeVinDecodeGetRequest;
@@ -66,19 +66,19 @@ var VinDecodeVinDecodeGetResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], VinDecodeVinDecodeGetResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.GenericResponse)
     ], VinDecodeVinDecodeGetResponse.prototype, "genericResponse", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.HttpValidationError)
     ], VinDecodeVinDecodeGetResponse.prototype, "httpValidationError", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], VinDecodeVinDecodeGetResponse.prototype, "statusCode", void 0);
     return VinDecodeVinDecodeGetResponse;

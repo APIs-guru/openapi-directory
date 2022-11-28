@@ -1,19 +1,20 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class SendBonusRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AssignmentId" })
+  @SpeakeasyMetadata({ data: "json, name=AssignmentId" })
   assignmentId: string;
 
-  @Metadata({ data: "json, name=BonusAmount" })
+  @SpeakeasyMetadata({ data: "json, name=BonusAmount" })
   bonusAmount: string;
 
-  @Metadata({ data: "json, name=Reason" })
+  @SpeakeasyMetadata({ data: "json, name=Reason" })
   reason: string;
 
-  @Metadata({ data: "json, name=UniqueRequestToken" })
+  @SpeakeasyMetadata({ data: "json, name=UniqueRequestToken" })
   uniqueRequestToken?: string;
 
-  @Metadata({ data: "json, name=WorkerId" })
+  @SpeakeasyMetadata({ data: "json, name=WorkerId" })
   workerId: string;
 }

@@ -1,16 +1,17 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class SetUiCustomizationRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CSS" })
+  @SpeakeasyMetadata({ data: "json, name=CSS" })
   css?: string;
 
-  @Metadata({ data: "json, name=ClientId" })
+  @SpeakeasyMetadata({ data: "json, name=ClientId" })
   clientId?: string;
 
-  @Metadata({ data: "json, name=ImageFile" })
+  @SpeakeasyMetadata({ data: "json, name=ImageFile" })
   imageFile?: string;
 
-  @Metadata({ data: "json, name=UserPoolId" })
+  @SpeakeasyMetadata({ data: "json, name=UserPoolId" })
   userPoolId: string;
 }

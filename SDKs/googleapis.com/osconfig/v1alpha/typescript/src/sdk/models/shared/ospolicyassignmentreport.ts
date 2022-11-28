@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { OsPolicyAssignmentReportOsPolicyCompliance } from "./ospolicyassignmentreportospolicycompliance";
+
 
 
 // OsPolicyAssignmentReport
@@ -8,21 +8,21 @@ import { OsPolicyAssignmentReportOsPolicyCompliance } from "./ospolicyassignment
  * A report of the OS policy assignment status for a given instance.
 **/
 export class OsPolicyAssignmentReport extends SpeakeasyBase {
-  @Metadata({ data: "json, name=instance" })
+  @SpeakeasyMetadata({ data: "json, name=instance" })
   instance?: string;
 
-  @Metadata({ data: "json, name=lastRunId" })
+  @SpeakeasyMetadata({ data: "json, name=lastRunId" })
   lastRunId?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=osPolicyAssignment" })
+  @SpeakeasyMetadata({ data: "json, name=osPolicyAssignment" })
   osPolicyAssignment?: string;
 
-  @Metadata({ data: "json, name=osPolicyCompliances", elemType: shared.OsPolicyAssignmentReportOsPolicyCompliance })
+  @SpeakeasyMetadata({ data: "json, name=osPolicyCompliances", elemType: OsPolicyAssignmentReportOsPolicyCompliance })
   osPolicyCompliances?: OsPolicyAssignmentReportOsPolicyCompliance[];
 
-  @Metadata({ data: "json, name=updateTime" })
+  @SpeakeasyMetadata({ data: "json, name=updateTime" })
   updateTime?: string;
 }

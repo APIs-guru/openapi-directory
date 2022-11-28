@@ -1,21 +1,22 @@
 from dataclasses import dataclass, field
+from typing import Optional
 from sdk.models import shared
 
 
 @dataclass
 class PublishExtensionHeaders:
-    tmps_correlation_id: str = field(default=None, metadata={'header': { 'field_name': 'TMPS-Correlation-Id', 'style': 'simple', 'explode': False }})
+    tmps_correlation_id: str = field(metadata={'header': { 'field_name': 'TMPS-Correlation-Id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class PublishExtensionRequest:
-    headers: PublishExtensionHeaders = field(default=None)
-    request: shared.ExtensionData = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: PublishExtensionHeaders = field()
+    request: shared.ExtensionData = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class PublishExtensionResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

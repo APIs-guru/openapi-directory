@@ -1,6 +1,7 @@
 
 
+
 export enum LiveTvServiceStatusEnum {
-    Ok = "Ok"
-,    Unavailable = "Unavailable"
+    Ok = "Ok",
+    Unavailable = "Unavailable"
 }

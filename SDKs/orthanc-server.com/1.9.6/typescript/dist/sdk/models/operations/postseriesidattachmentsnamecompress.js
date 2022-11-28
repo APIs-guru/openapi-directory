@@ -22,18 +22,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var PostSeriesIdAttachmentsNameCompressPathParams = /** @class */ (function (_super) {
     __extends(PostSeriesIdAttachmentsNameCompressPathParams, _super);
     function PostSeriesIdAttachmentsNameCompressPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=id" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" }),
         __metadata("design:type", String)
     ], PostSeriesIdAttachmentsNameCompressPathParams.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=name" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=name" }),
         __metadata("design:type", String)
     ], PostSeriesIdAttachmentsNameCompressPathParams.prototype, "name", void 0);
     return PostSeriesIdAttachmentsNameCompressPathParams;
@@ -45,7 +45,7 @@ var PostSeriesIdAttachmentsNameCompressRequest = /** @class */ (function (_super
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PostSeriesIdAttachmentsNameCompressPathParams)
     ], PostSeriesIdAttachmentsNameCompressRequest.prototype, "pathParams", void 0);
     return PostSeriesIdAttachmentsNameCompressRequest;
@@ -57,11 +57,11 @@ var PostSeriesIdAttachmentsNameCompressResponse = /** @class */ (function (_supe
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], PostSeriesIdAttachmentsNameCompressResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], PostSeriesIdAttachmentsNameCompressResponse.prototype, "statusCode", void 0);
     return PostSeriesIdAttachmentsNameCompressResponse;

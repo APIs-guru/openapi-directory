@@ -14,12 +14,12 @@ class GetDraftPicksQueryParams:
 
 @dataclass
 class GetDraftPicksRequest:
-    query_params: GetDraftPicksQueryParams = field(default=None)
+    query_params: GetDraftPicksQueryParams = field()
     
 
 @dataclass
 class GetDraftPicksResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     draft_picks: Optional[List[shared.DraftPick]] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetDisassociateAddressActionEnum(str, Enum):
     DISASSOCIATE_ADDRESS = "DisassociateAddress"
@@ -10,11 +14,11 @@ class GetDisassociateAddressVersionEnum(str, Enum):
 
 @dataclass
 class GetDisassociateAddressQueryParams:
-    action: GetDisassociateAddressActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetDisassociateAddressActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: GetDisassociateAddressVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     association_id: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'AssociationId', 'style': 'form', 'explode': True }})
     dry_run: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'DryRun', 'style': 'form', 'explode': True }})
     public_ip: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'PublicIp', 'style': 'form', 'explode': True }})
-    version: GetDisassociateAddressVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -30,12 +34,12 @@ class GetDisassociateAddressHeaders:
 
 @dataclass
 class GetDisassociateAddressRequest:
-    query_params: GetDisassociateAddressQueryParams = field(default=None)
-    headers: GetDisassociateAddressHeaders = field(default=None)
+    headers: GetDisassociateAddressHeaders = field()
+    query_params: GetDisassociateAddressQueryParams = field()
     
 
 @dataclass
 class GetDisassociateAddressResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

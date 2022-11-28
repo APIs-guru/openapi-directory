@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// Revision
+// A revision of a file.
 type Revision struct {
 	DownloadURL            *string           `json:"downloadUrl,omitempty"`
 	Etag                   *string           `json:"etag,omitempty"`

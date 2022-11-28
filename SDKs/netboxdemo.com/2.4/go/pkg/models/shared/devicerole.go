@@ -7,3 +7,10 @@ type DeviceRole struct {
 	Slug   string `json:"slug"`
 	VMRole *bool  `json:"vm_role,omitempty"`
 }
+
+type DeviceRoleInput struct {
+	Color  string `json:"color"`
+	Name   string `json:"name"`
+	Slug   string `json:"slug"`
+	VMRole *bool  `json:"vm_role,omitempty"`
+}

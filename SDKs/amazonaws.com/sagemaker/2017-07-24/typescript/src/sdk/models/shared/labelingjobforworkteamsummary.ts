@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { LabelCountersForWorkteam } from "./labelcountersforworkteam";
+
 
 
 // LabelingJobForWorkteamSummary
@@ -7,21 +8,21 @@ import { LabelCountersForWorkteam } from "./labelcountersforworkteam";
  * Provides summary information for a work team.
 **/
 export class LabelingJobForWorkteamSummary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CreationTime" })
+  @SpeakeasyMetadata({ data: "json, name=CreationTime" })
   creationTime: Date;
 
-  @Metadata({ data: "json, name=JobReferenceCode" })
+  @SpeakeasyMetadata({ data: "json, name=JobReferenceCode" })
   jobReferenceCode: string;
 
-  @Metadata({ data: "json, name=LabelCounters" })
+  @SpeakeasyMetadata({ data: "json, name=LabelCounters" })
   labelCounters?: LabelCountersForWorkteam;
 
-  @Metadata({ data: "json, name=LabelingJobName" })
+  @SpeakeasyMetadata({ data: "json, name=LabelingJobName" })
   labelingJobName?: string;
 
-  @Metadata({ data: "json, name=NumberOfHumanWorkersPerDataObject" })
+  @SpeakeasyMetadata({ data: "json, name=NumberOfHumanWorkersPerDataObject" })
   numberOfHumanWorkersPerDataObject?: number;
 
-  @Metadata({ data: "json, name=WorkRequesterAccountId" })
+  @SpeakeasyMetadata({ data: "json, name=WorkRequesterAccountId" })
   workRequesterAccountId: string;
 }

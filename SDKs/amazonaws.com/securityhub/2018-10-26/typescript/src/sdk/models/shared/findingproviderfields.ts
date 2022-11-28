@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RelatedFinding } from "./relatedfinding";
 import { FindingProviderSeverity } from "./findingproviderseverity";
+
 
 
 // FindingProviderFields
@@ -9,18 +9,18 @@ import { FindingProviderSeverity } from "./findingproviderseverity";
  * In a <code>BatchImportFindings</code> request, finding providers use <code>FindingProviderFields</code> to provide and update values for confidence, criticality, related findings, severity, and types.
 **/
 export class FindingProviderFields extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Confidence" })
+  @SpeakeasyMetadata({ data: "json, name=Confidence" })
   confidence?: number;
 
-  @Metadata({ data: "json, name=Criticality" })
+  @SpeakeasyMetadata({ data: "json, name=Criticality" })
   criticality?: number;
 
-  @Metadata({ data: "json, name=RelatedFindings", elemType: shared.RelatedFinding })
+  @SpeakeasyMetadata({ data: "json, name=RelatedFindings", elemType: RelatedFinding })
   relatedFindings?: RelatedFinding[];
 
-  @Metadata({ data: "json, name=Severity" })
+  @SpeakeasyMetadata({ data: "json, name=Severity" })
   severity?: FindingProviderSeverity;
 
-  @Metadata({ data: "json, name=Types" })
+  @SpeakeasyMetadata({ data: "json, name=Types" })
   types?: string[];
 }

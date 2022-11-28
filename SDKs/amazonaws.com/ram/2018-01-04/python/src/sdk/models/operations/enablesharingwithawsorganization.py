@@ -1,4 +1,7 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
@@ -16,15 +19,15 @@ class EnableSharingWithAwsOrganizationHeaders:
 
 @dataclass
 class EnableSharingWithAwsOrganizationRequest:
-    headers: EnableSharingWithAwsOrganizationHeaders = field(default=None)
+    headers: EnableSharingWithAwsOrganizationHeaders = field()
     
 
 @dataclass
 class EnableSharingWithAwsOrganizationResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     enable_sharing_with_aws_organization_response: Optional[shared.EnableSharingWithAwsOrganizationResponse] = field(default=None)
     operation_not_permitted_exception: Optional[Any] = field(default=None)
     server_internal_exception: Optional[Any] = field(default=None)
     service_unavailable_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

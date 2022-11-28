@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DfareportingRemarketingListsListPathParams:
-    profile_id: str = field(default=None, metadata={'path_param': { 'field_name': 'profileId', 'style': 'simple', 'explode': False }})
+    profile_id: str = field(metadata={'path_param': { 'field_name': 'profileId', 'style': 'simple', 'explode': False }})
     
 class DfareportingRemarketingListsListSortFieldEnum(str, Enum):
     ID = "ID"
@@ -18,10 +19,10 @@ class DfareportingRemarketingListsListSortOrderEnum(str, Enum):
 
 @dataclass
 class DfareportingRemarketingListsListQueryParams:
+    advertiser_id: str = field(metadata={'query_param': { 'field_name': 'advertiserId', 'style': 'form', 'explode': True }})
     dollar_xgafv: Optional[shared.XgafvEnum] = field(default=None, metadata={'query_param': { 'field_name': '$.xgafv', 'style': 'form', 'explode': True }})
     access_token: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'access_token', 'style': 'form', 'explode': True }})
     active: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'active', 'style': 'form', 'explode': True }})
-    advertiser_id: str = field(default=None, metadata={'query_param': { 'field_name': 'advertiserId', 'style': 'form', 'explode': True }})
     alt: Optional[shared.AltEnum] = field(default=None, metadata={'query_param': { 'field_name': 'alt', 'style': 'form', 'explode': True }})
     callback: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'callback', 'style': 'form', 'explode': True }})
     fields: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'fields', 'style': 'form', 'explode': True }})
@@ -41,20 +42,20 @@ class DfareportingRemarketingListsListQueryParams:
 
 @dataclass
 class DfareportingRemarketingListsListSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DfareportingRemarketingListsListRequest:
-    path_params: DfareportingRemarketingListsListPathParams = field(default=None)
-    query_params: DfareportingRemarketingListsListQueryParams = field(default=None)
-    security: DfareportingRemarketingListsListSecurity = field(default=None)
+    path_params: DfareportingRemarketingListsListPathParams = field()
+    query_params: DfareportingRemarketingListsListQueryParams = field()
+    security: DfareportingRemarketingListsListSecurity = field()
     
 
 @dataclass
 class DfareportingRemarketingListsListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     remarketing_lists_list_response: Optional[shared.RemarketingListsListResponse] = field(default=None)
-    status_code: int = field(default=None)
     

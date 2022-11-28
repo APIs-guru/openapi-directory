@@ -13,6 +13,8 @@ const (
 	WeekDayOfMonthDayOfWeekEnumSunday               WeekDayOfMonthDayOfWeekEnum = "SUNDAY"
 )
 
+// WeekDayOfMonth
+// Represents one week day in a month. An example is "the 4th Sunday".
 type WeekDayOfMonth struct {
 	DayOfWeek   *WeekDayOfMonthDayOfWeekEnum `json:"dayOfWeek,omitempty"`
 	DayOffset   *int32                       `json:"dayOffset,omitempty"`

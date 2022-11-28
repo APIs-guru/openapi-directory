@@ -1,15 +1,18 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,List,Optional
 
 
 @dataclass
 class UntagResourcePathParams:
-    resource_arn: str = field(default=None, metadata={'path_param': { 'field_name': 'resourceArn', 'style': 'simple', 'explode': False }})
+    resource_arn: str = field(metadata={'path_param': { 'field_name': 'resourceArn', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class UntagResourceQueryParams:
-    tag_keys: List[str] = field(default=None, metadata={'query_param': { 'field_name': 'tagKeys', 'style': 'form', 'explode': True }})
+    tag_keys: List[str] = field(metadata={'query_param': { 'field_name': 'tagKeys', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -25,18 +28,18 @@ class UntagResourceHeaders:
 
 @dataclass
 class UntagResourceRequest:
-    path_params: UntagResourcePathParams = field(default=None)
-    query_params: UntagResourceQueryParams = field(default=None)
-    headers: UntagResourceHeaders = field(default=None)
+    headers: UntagResourceHeaders = field()
+    path_params: UntagResourcePathParams = field()
+    query_params: UntagResourceQueryParams = field()
     
 
 @dataclass
 class UntagResourceResponse:
+    content_type: str = field()
+    status_code: int = field()
     access_denied_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     internal_server_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     validation_exception: Optional[Any] = field(default=None)
     

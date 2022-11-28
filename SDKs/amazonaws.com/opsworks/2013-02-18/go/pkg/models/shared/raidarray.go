@@ -1,5 +1,7 @@
 package shared
 
+// RaidArray
+// Describes an instance's RAID array.
 type RaidArray struct {
 	AvailabilityZone *string `json:"AvailabilityZone,omitempty"`
 	CreatedAt        *string `json:"CreatedAt,omitempty"`

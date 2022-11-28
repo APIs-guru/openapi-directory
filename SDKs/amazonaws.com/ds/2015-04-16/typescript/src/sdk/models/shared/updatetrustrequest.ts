@@ -1,11 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SelectiveAuthEnum } from "./selectiveauthenum";
 
 
+
 export class UpdateTrustRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=SelectiveAuth" })
+  @SpeakeasyMetadata({ data: "json, name=SelectiveAuth" })
   selectiveAuth?: SelectiveAuthEnum;
 
-  @Metadata({ data: "json, name=TrustId" })
+  @SpeakeasyMetadata({ data: "json, name=TrustId" })
   trustId: string;
 }

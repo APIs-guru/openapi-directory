@@ -1,8 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import ipmapping
-from . import sslcert
+from sdk import utils
+from . import *
 
 class ConnectSettingsBackendTypeEnum(str, Enum):
     SQL_BACKEND_TYPE_UNSPECIFIED = "SQL_BACKEND_TYPE_UNSPECIFIED"
@@ -42,10 +43,14 @@ class ConnectSettingsDatabaseVersionEnum(str, Enum):
 @dataclass_json
 @dataclass
 class ConnectSettings:
-    backend_type: Optional[ConnectSettingsBackendTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'backendType' }})
-    database_version: Optional[ConnectSettingsDatabaseVersionEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'databaseVersion' }})
-    ip_addresses: Optional[List[ipmapping.IPMapping]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ipAddresses' }})
-    kind: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'kind' }})
-    region: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'region' }})
-    server_ca_cert: Optional[sslcert.SslCert] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'serverCaCert' }})
+    r"""ConnectSettings
+    Connect settings retrieval response.
+    """
+    
+    backend_type: Optional[ConnectSettingsBackendTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('backendType') }})
+    database_version: Optional[ConnectSettingsDatabaseVersionEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('databaseVersion') }})
+    ip_addresses: Optional[List[IPMapping]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ipAddresses') }})
+    kind: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('kind') }})
+    region: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('region') }})
+    server_ca_cert: Optional[SslCert] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('serverCaCert') }})
     

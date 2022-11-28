@@ -22,21 +22,21 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import { Company } from "./company";
-// CreateCustomerRequest
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { CompanyInput } from "./company";
+// CreateCustomerRequestInput
 /**
  * Request message to create a customer.
 **/
-var CreateCustomerRequest = /** @class */ (function (_super) {
-    __extends(CreateCustomerRequest, _super);
-    function CreateCustomerRequest() {
+var CreateCustomerRequestInput = /** @class */ (function (_super) {
+    __extends(CreateCustomerRequestInput, _super);
+    function CreateCustomerRequestInput() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=customer" }),
-        __metadata("design:type", Company)
-    ], CreateCustomerRequest.prototype, "customer", void 0);
-    return CreateCustomerRequest;
+        SpeakeasyMetadata({ data: "json, name=customer" }),
+        __metadata("design:type", CompanyInput)
+    ], CreateCustomerRequestInput.prototype, "customer", void 0);
+    return CreateCustomerRequestInput;
 }(SpeakeasyBase));
-export { CreateCustomerRequest };
+export { CreateCustomerRequestInput };

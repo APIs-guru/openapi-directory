@@ -1,46 +1,37 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
 @dataclass
 class GetProfileAppPathParams:
-    app_id: int = field(default=None, metadata={'path_param': { 'field_name': 'appId', 'style': 'simple', 'explode': False }})
-    
-
-@dataclass
-class GetProfileAppSecurityOption1:
-    personal_access_token: shared.SchemePersonalAccessToken = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer' }})
-    
-
-@dataclass
-class GetProfileAppSecurityOption2:
-    oauth: shared.SchemeOauth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    app_id: int = field(metadata={'path_param': { 'field_name': 'appId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetProfileAppSecurity:
-    option1: Optional[GetProfileAppSecurityOption1] = field(default=None, metadata={'security': { 'option': True }})
-    option2: Optional[GetProfileAppSecurityOption2] = field(default=None, metadata={'security': { 'option': True }})
-    
-
-@dataclass
-class GetProfileAppRequest:
-    path_params: GetProfileAppPathParams = field(default=None)
-    security: GetProfileAppSecurity = field(default=None)
+    oauth: Optional[shared.SchemeOauth] = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    personal_access_token: Optional[shared.SchemePersonalAccessToken] = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer' }})
     
 
 @dataclass_json
 @dataclass
 class GetProfileAppDefaultApplicationJSON:
-    errors: Optional[List[shared.ErrorObject]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'errors' }})
+    errors: Optional[List[shared.ErrorObject]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('errors') }})
+    
+
+@dataclass
+class GetProfileAppRequest:
+    path_params: GetProfileAppPathParams = field()
+    security: GetProfileAppSecurity = field()
     
 
 @dataclass
 class GetProfileAppResponse:
+    content_type: str = field()
+    status_code: int = field()
     authorized_app: Optional[shared.AuthorizedApp] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     get_profile_app_default_application_json_object: Optional[GetProfileAppDefaultApplicationJSON] = field(default=None)
     

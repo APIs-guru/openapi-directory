@@ -1,16 +1,21 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import valuedata
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ValuesData:
-    date: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Date', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    device_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'DeviceId' }})
-    values: Optional[List[valuedata.ValueData]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Values' }})
+    r"""ValuesData
+    API Container for a Meter Value
+    """
+    
+    date_: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Date'), 'encoder': utils.datetimeisoformat(True), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    device_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('DeviceId') }})
+    values: Optional[List[ValueData]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Values') }})
     

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { LocalDeviceResourceData } from "./localdeviceresourcedata";
 import { LocalVolumeResourceData } from "./localvolumeresourcedata";
 import { S3MachineLearningModelResourceData } from "./s3machinelearningmodelresourcedata";
@@ -38,23 +38,23 @@ var ResourceDataContainer = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=LocalDeviceResourceData" }),
+        SpeakeasyMetadata({ data: "json, name=LocalDeviceResourceData" }),
         __metadata("design:type", LocalDeviceResourceData)
     ], ResourceDataContainer.prototype, "localDeviceResourceData", void 0);
     __decorate([
-        Metadata({ data: "json, name=LocalVolumeResourceData" }),
+        SpeakeasyMetadata({ data: "json, name=LocalVolumeResourceData" }),
         __metadata("design:type", LocalVolumeResourceData)
     ], ResourceDataContainer.prototype, "localVolumeResourceData", void 0);
     __decorate([
-        Metadata({ data: "json, name=S3MachineLearningModelResourceData" }),
+        SpeakeasyMetadata({ data: "json, name=S3MachineLearningModelResourceData" }),
         __metadata("design:type", S3MachineLearningModelResourceData)
     ], ResourceDataContainer.prototype, "s3MachineLearningModelResourceData", void 0);
     __decorate([
-        Metadata({ data: "json, name=SageMakerMachineLearningModelResourceData" }),
+        SpeakeasyMetadata({ data: "json, name=SageMakerMachineLearningModelResourceData" }),
         __metadata("design:type", SageMakerMachineLearningModelResourceData)
     ], ResourceDataContainer.prototype, "sageMakerMachineLearningModelResourceData", void 0);
     __decorate([
-        Metadata({ data: "json, name=SecretsManagerSecretResourceData" }),
+        SpeakeasyMetadata({ data: "json, name=SecretsManagerSecretResourceData" }),
         __metadata("design:type", SecretsManagerSecretResourceData)
     ], ResourceDataContainer.prototype, "secretsManagerSecretResourceData", void 0);
     return ResourceDataContainer;

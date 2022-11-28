@@ -1,8 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Dimension } from "./dimension";
 import { TableCell } from "./tablecell";
 import { TableRowProperties } from "./tablerowproperties";
+
 
 
 // TableRow
@@ -10,12 +10,12 @@ import { TableRowProperties } from "./tablerowproperties";
  * Properties and contents of each row in a table.
 **/
 export class TableRow extends SpeakeasyBase {
-  @Metadata({ data: "json, name=rowHeight" })
+  @SpeakeasyMetadata({ data: "json, name=rowHeight" })
   rowHeight?: Dimension;
 
-  @Metadata({ data: "json, name=tableCells", elemType: shared.TableCell })
+  @SpeakeasyMetadata({ data: "json, name=tableCells", elemType: TableCell })
   tableCells?: TableCell[];
 
-  @Metadata({ data: "json, name=tableRowProperties" })
+  @SpeakeasyMetadata({ data: "json, name=tableRowProperties" })
   tableRowProperties?: TableRowProperties;
 }

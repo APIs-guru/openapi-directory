@@ -5,25 +5,25 @@ from sdk.models import shared
 
 @dataclass
 class CreateStatementsHeaders:
-    xero_tenant_id: str = field(default=None, metadata={'header': { 'field_name': 'Xero-Tenant-Id', 'style': 'simple', 'explode': False }})
+    xero_tenant_id: str = field(metadata={'header': { 'field_name': 'Xero-Tenant-Id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class CreateStatementsSecurity:
-    o_auth2: shared.SchemeOAuth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    o_auth2: shared.SchemeOAuth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class CreateStatementsRequest:
-    headers: CreateStatementsHeaders = field(default=None)
+    headers: CreateStatementsHeaders = field()
+    security: CreateStatementsSecurity = field()
     request: Optional[shared.Statements] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: CreateStatementsSecurity = field(default=None)
     
 
 @dataclass
 class CreateStatementsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error: Optional[shared.Error] = field(default=None)
     statements: Optional[shared.Statements] = field(default=None)
-    status_code: int = field(default=None)
     

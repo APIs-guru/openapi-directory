@@ -1,14 +1,22 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import choicereason_enum
-from . import choicestatus_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ChoiceUpdate:
-    notes: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Notes' }})
-    reason: Optional[choicereason_enum.ChoiceReasonEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Reason' }})
-    status: choicestatus_enum.ChoiceStatusEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Status' }})
+    r"""ChoiceUpdate
+    A list of choices to be updated.
+    """
+    
+    status: ChoiceStatusEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Status') }})
+    notes: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Notes') }})
+    reason: Optional[ChoiceReasonEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Reason') }})
     

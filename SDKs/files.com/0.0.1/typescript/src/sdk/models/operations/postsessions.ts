@@ -1,35 +1,36 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class PostSessionsRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "multipart_form, name=otp" })
+  @SpeakeasyMetadata({ data: "multipart_form, name=otp" })
   otp?: string;
 
-  @Metadata({ data: "multipart_form, name=partial_session_id" })
+  @SpeakeasyMetadata({ data: "multipart_form, name=partial_session_id" })
   partialSessionId?: string;
 
-  @Metadata({ data: "multipart_form, name=password" })
+  @SpeakeasyMetadata({ data: "multipart_form, name=password" })
   password?: string;
 
-  @Metadata({ data: "multipart_form, name=username" })
+  @SpeakeasyMetadata({ data: "multipart_form, name=username" })
   username?: string;
 }
 
 
 export class PostSessionsRequest extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=multipart/form-data" })
+  @SpeakeasyMetadata({ data: "request, media_type=multipart/form-data" })
   request?: PostSessionsRequestBody;
 }
 
 
 export class PostSessionsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   sessionEntity?: shared.SessionEntity;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

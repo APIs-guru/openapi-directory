@@ -4,16 +4,16 @@ from typing import Any
 
 @dataclass
 class PutAnythingAnythingPathParams:
-    anything: str = field(default=None, metadata={'path_param': { 'field_name': 'anything', 'style': 'simple', 'explode': False }})
+    anything: str = field(metadata={'path_param': { 'field_name': 'anything', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class PutAnythingAnythingRequest:
-    path_params: PutAnythingAnythingPathParams = field(default=None)
+    path_params: PutAnythingAnythingPathParams = field()
     
 
 @dataclass
 class PutAnythingAnythingResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

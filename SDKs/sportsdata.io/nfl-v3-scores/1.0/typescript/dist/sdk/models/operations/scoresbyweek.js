@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var ScoresByWeekFormatEnum;
 (function (ScoresByWeekFormatEnum) {
     ScoresByWeekFormatEnum["Xml"] = "XML";
@@ -34,15 +34,15 @@ var ScoresByWeekPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=format" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=format" }),
         __metadata("design:type", String)
     ], ScoresByWeekPathParams.prototype, "format", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=season" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=season" }),
         __metadata("design:type", String)
     ], ScoresByWeekPathParams.prototype, "season", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=week" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=week" }),
         __metadata("design:type", String)
     ], ScoresByWeekPathParams.prototype, "week", void 0);
     return ScoresByWeekPathParams;
@@ -54,7 +54,7 @@ var ScoresByWeekRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ScoresByWeekPathParams)
     ], ScoresByWeekRequest.prototype, "pathParams", void 0);
     return ScoresByWeekRequest;
@@ -66,15 +66,15 @@ var ScoresByWeekResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], ScoresByWeekResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Array)
     ], ScoresByWeekResponse.prototype, "scores", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], ScoresByWeekResponse.prototype, "statusCode", void 0);
     return ScoresByWeekResponse;

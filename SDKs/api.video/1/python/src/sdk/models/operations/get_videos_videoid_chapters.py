@@ -1,11 +1,11 @@
 from dataclasses import dataclass, field
-from typing import List,Optional
+from typing import Optional
 from sdk.models import shared
 
 
 @dataclass
 class GetVideosVideoIDChaptersPathParams:
-    video_id: str = field(default=None, metadata={'path_param': { 'field_name': 'videoId', 'style': 'simple', 'explode': False }})
+    video_id: str = field(metadata={'path_param': { 'field_name': 'videoId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -16,20 +16,20 @@ class GetVideosVideoIDChaptersQueryParams:
 
 @dataclass
 class GetVideosVideoIDChaptersSecurity:
-    bearer_auth: shared.SchemeBearerAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer' }})
+    bearer_auth: shared.SchemeBearerAuth = field(metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer' }})
     
 
 @dataclass
 class GetVideosVideoIDChaptersRequest:
-    path_params: GetVideosVideoIDChaptersPathParams = field(default=None)
-    query_params: GetVideosVideoIDChaptersQueryParams = field(default=None)
-    security: GetVideosVideoIDChaptersSecurity = field(default=None)
+    path_params: GetVideosVideoIDChaptersPathParams = field()
+    query_params: GetVideosVideoIDChaptersQueryParams = field()
+    security: GetVideosVideoIDChaptersSecurity = field()
     
 
 @dataclass
 class GetVideosVideoIDChaptersResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     chapters_list_response: Optional[shared.ChaptersListResponse] = field(default=None)
     not_found: Optional[shared.NotFound] = field(default=None)
     

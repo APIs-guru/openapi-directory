@@ -1,6 +1,7 @@
 
 
+
 export enum SubscriptionTypeEnum {
-    Sns = "SNS"
-,    Email = "EMAIL"
+    Sns = "SNS",
+    Email = "EMAIL"
 }

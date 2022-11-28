@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum PathReportDimensionValueMatchTypeEnum {
-    Exact = "EXACT"
-,    BeginsWith = "BEGINS_WITH"
-,    Contains = "CONTAINS"
-,    WildcardExpression = "WILDCARD_EXPRESSION"
+    Exact = "EXACT",
+    BeginsWith = "BEGINS_WITH",
+    Contains = "CONTAINS",
+    WildcardExpression = "WILDCARD_EXPRESSION"
 }
 
 
@@ -13,18 +14,18 @@ export enum PathReportDimensionValueMatchTypeEnum {
  * Represents a PathReportDimensionValue resource.
 **/
 export class PathReportDimensionValue extends SpeakeasyBase {
-  @Metadata({ data: "json, name=dimensionName" })
+  @SpeakeasyMetadata({ data: "json, name=dimensionName" })
   dimensionName?: string;
 
-  @Metadata({ data: "json, name=ids" })
+  @SpeakeasyMetadata({ data: "json, name=ids" })
   ids?: string[];
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=matchType" })
+  @SpeakeasyMetadata({ data: "json, name=matchType" })
   matchType?: PathReportDimensionValueMatchTypeEnum;
 
-  @Metadata({ data: "json, name=values" })
+  @SpeakeasyMetadata({ data: "json, name=values" })
   values?: string[];
 }

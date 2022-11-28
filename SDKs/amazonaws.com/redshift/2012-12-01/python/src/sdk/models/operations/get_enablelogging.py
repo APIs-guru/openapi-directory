@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetEnableLoggingActionEnum(str, Enum):
     ENABLE_LOGGING = "EnableLogging"
@@ -10,11 +14,11 @@ class GetEnableLoggingVersionEnum(str, Enum):
 
 @dataclass
 class GetEnableLoggingQueryParams:
-    action: GetEnableLoggingActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    bucket_name: str = field(default=None, metadata={'query_param': { 'field_name': 'BucketName', 'style': 'form', 'explode': True }})
-    cluster_identifier: str = field(default=None, metadata={'query_param': { 'field_name': 'ClusterIdentifier', 'style': 'form', 'explode': True }})
+    action: GetEnableLoggingActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    bucket_name: str = field(metadata={'query_param': { 'field_name': 'BucketName', 'style': 'form', 'explode': True }})
+    cluster_identifier: str = field(metadata={'query_param': { 'field_name': 'ClusterIdentifier', 'style': 'form', 'explode': True }})
+    version: GetEnableLoggingVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     s3_key_prefix: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'S3KeyPrefix', 'style': 'form', 'explode': True }})
-    version: GetEnableLoggingVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -30,13 +34,13 @@ class GetEnableLoggingHeaders:
 
 @dataclass
 class GetEnableLoggingRequest:
-    query_params: GetEnableLoggingQueryParams = field(default=None)
-    headers: GetEnableLoggingHeaders = field(default=None)
+    headers: GetEnableLoggingHeaders = field()
+    query_params: GetEnableLoggingQueryParams = field()
     
 
 @dataclass
 class GetEnableLoggingResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

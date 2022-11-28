@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ModifyCloudToDeviceConfigRequest
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Request for `ModifyCloudToDeviceConfig`.
 **/
 export class ModifyCloudToDeviceConfigRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=binaryData" })
+  @SpeakeasyMetadata({ data: "json, name=binaryData" })
   binaryData?: string;
 
-  @Metadata({ data: "json, name=versionToUpdate" })
+  @SpeakeasyMetadata({ data: "json, name=versionToUpdate" })
   versionToUpdate?: string;
 }

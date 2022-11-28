@@ -12,12 +12,12 @@ class GetOwnershipQueryParams:
 
 @dataclass
 class GetOwnershipRequest:
-    query_params: GetOwnershipQueryParams = field(default=None)
+    query_params: GetOwnershipQueryParams = field()
     
 
 @dataclass
 class GetOwnershipResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

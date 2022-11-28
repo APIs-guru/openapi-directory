@@ -77,6 +77,8 @@ const (
 	FaceAnnotationUnderExposedLikelihoodEnumVeryLikely   FaceAnnotationUnderExposedLikelihoodEnum = "VERY_LIKELY"
 )
 
+// FaceAnnotation
+// A face annotation object contains the results of face detection.
 type FaceAnnotation struct {
 	AngerLikelihood        *FaceAnnotationAngerLikelihoodEnum        `json:"angerLikelihood,omitempty"`
 	BlurredLikelihood      *FaceAnnotationBlurredLikelihoodEnum      `json:"blurredLikelihood,omitempty"`

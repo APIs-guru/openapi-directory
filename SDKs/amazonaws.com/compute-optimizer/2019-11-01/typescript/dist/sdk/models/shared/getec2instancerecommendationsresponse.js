@@ -22,23 +22,24 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { GetRecommendationError } from "./getrecommendationerror";
+import { InstanceRecommendation } from "./instancerecommendation";
 var GetEc2InstanceRecommendationsResponse = /** @class */ (function (_super) {
     __extends(GetEc2InstanceRecommendationsResponse, _super);
     function GetEc2InstanceRecommendationsResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=errors", elemType: shared.GetRecommendationError }),
+        SpeakeasyMetadata({ data: "json, name=errors", elemType: GetRecommendationError }),
         __metadata("design:type", Array)
     ], GetEc2InstanceRecommendationsResponse.prototype, "errors", void 0);
     __decorate([
-        Metadata({ data: "json, name=instanceRecommendations", elemType: shared.InstanceRecommendation }),
+        SpeakeasyMetadata({ data: "json, name=instanceRecommendations", elemType: InstanceRecommendation }),
         __metadata("design:type", Array)
     ], GetEc2InstanceRecommendationsResponse.prototype, "instanceRecommendations", void 0);
     __decorate([
-        Metadata({ data: "json, name=nextToken" }),
+        SpeakeasyMetadata({ data: "json, name=nextToken" }),
         __metadata("design:type", String)
     ], GetEc2InstanceRecommendationsResponse.prototype, "nextToken", void 0);
     return GetEc2InstanceRecommendationsResponse;

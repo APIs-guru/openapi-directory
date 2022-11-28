@@ -1,5 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Source } from "./source";
 import { DataSource } from "./datasource";
 import { EnvironmentVariable } from "./environmentvariable";
@@ -7,37 +6,38 @@ import { SslConfiguration } from "./sslconfiguration";
 import { AppTypeEnum } from "./apptypeenum";
 
 
+
 export class UpdateAppRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AppId" })
+  @SpeakeasyMetadata({ data: "json, name=AppId" })
   appId: string;
 
-  @Metadata({ data: "json, name=AppSource" })
+  @SpeakeasyMetadata({ data: "json, name=AppSource" })
   appSource?: Source;
 
-  @Metadata({ data: "json, name=Attributes" })
+  @SpeakeasyMetadata({ data: "json, name=Attributes" })
   attributes?: Map<string, string>;
 
-  @Metadata({ data: "json, name=DataSources", elemType: shared.DataSource })
+  @SpeakeasyMetadata({ data: "json, name=DataSources", elemType: DataSource })
   dataSources?: DataSource[];
 
-  @Metadata({ data: "json, name=Description" })
+  @SpeakeasyMetadata({ data: "json, name=Description" })
   description?: string;
 
-  @Metadata({ data: "json, name=Domains" })
+  @SpeakeasyMetadata({ data: "json, name=Domains" })
   domains?: string[];
 
-  @Metadata({ data: "json, name=EnableSsl" })
+  @SpeakeasyMetadata({ data: "json, name=EnableSsl" })
   enableSsl?: boolean;
 
-  @Metadata({ data: "json, name=Environment", elemType: shared.EnvironmentVariable })
+  @SpeakeasyMetadata({ data: "json, name=Environment", elemType: EnvironmentVariable })
   environment?: EnvironmentVariable[];
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name?: string;
 
-  @Metadata({ data: "json, name=SslConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=SslConfiguration" })
   sslConfiguration?: SslConfiguration;
 
-  @Metadata({ data: "json, name=Type" })
+  @SpeakeasyMetadata({ data: "json, name=Type" })
   type?: AppTypeEnum;
 }

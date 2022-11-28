@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ProcessorParameter } from "./processorparameter";
 import { ProcessorTypeEnum } from "./processortypeenum";
+
 
 
 // Processor
@@ -9,9 +9,9 @@ import { ProcessorTypeEnum } from "./processortypeenum";
  * Describes a data processor.
 **/
 export class Processor extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Parameters", elemType: shared.ProcessorParameter })
+  @SpeakeasyMetadata({ data: "json, name=Parameters", elemType: ProcessorParameter })
   parameters?: ProcessorParameter[];
 
-  @Metadata({ data: "json, name=Type" })
+  @SpeakeasyMetadata({ data: "json, name=Type" })
   type: ProcessorTypeEnum;
 }

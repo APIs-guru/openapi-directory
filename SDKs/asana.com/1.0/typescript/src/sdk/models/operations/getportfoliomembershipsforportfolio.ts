@@ -1,56 +1,57 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetPortfolioMembershipsForPortfolioPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=portfolio_gid" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=portfolio_gid" })
   portfolioGid: string;
 }
 
 
 export class GetPortfolioMembershipsForPortfolioQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=limit" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=limit" })
   limit?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=offset" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=offset" })
   offset?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=false;name=opt_fields" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=opt_fields" })
   optFields?: string[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=opt_pretty" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=opt_pretty" })
   optPretty?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=user" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=user" })
   user?: string;
 }
 
 
-export class GetPortfolioMembershipsForPortfolioRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: GetPortfolioMembershipsForPortfolioPathParams;
-
-  @Metadata()
-  queryParams: GetPortfolioMembershipsForPortfolioQueryParams;
-}
-
-
 export class GetPortfolioMembershipsForPortfolio200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=data", elemType: shared.PortfolioMembershipCompact })
+  @SpeakeasyMetadata({ data: "json, name=data", elemType: shared.PortfolioMembershipCompact })
   data?: shared.PortfolioMembershipCompact[];
 }
 
 
+export class GetPortfolioMembershipsForPortfolioRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: GetPortfolioMembershipsForPortfolioPathParams;
+
+  @SpeakeasyMetadata()
+  queryParams: GetPortfolioMembershipsForPortfolioQueryParams;
+}
+
+
 export class GetPortfolioMembershipsForPortfolioResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   errorResponse?: shared.ErrorResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getPortfolioMembershipsForPortfolio200ApplicationJsonObject?: GetPortfolioMembershipsForPortfolio200ApplicationJson;
 }

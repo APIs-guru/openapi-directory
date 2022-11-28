@@ -1,9 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { LfTagError } from "./lftagerror";
 
 
+
 export class RemoveLfTagsFromResourceResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Failures", elemType: shared.LfTagError })
+  @SpeakeasyMetadata({ data: "json, name=Failures", elemType: LfTagError })
   failures?: LfTagError[];
 }

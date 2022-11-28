@@ -1,6 +1,11 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass
@@ -21,21 +26,21 @@ class PutSuppressedDestinationRequestBodyReasonEnum(str, Enum):
 @dataclass_json
 @dataclass
 class PutSuppressedDestinationRequestBody:
-    email_address: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'EmailAddress' }})
-    reason: PutSuppressedDestinationRequestBodyReasonEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Reason' }})
+    email_address: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('EmailAddress') }})
+    reason: PutSuppressedDestinationRequestBodyReasonEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Reason') }})
     
 
 @dataclass
 class PutSuppressedDestinationRequest:
-    headers: PutSuppressedDestinationHeaders = field(default=None)
-    request: PutSuppressedDestinationRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: PutSuppressedDestinationHeaders = field()
+    request: PutSuppressedDestinationRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class PutSuppressedDestinationResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     put_suppressed_destination_response: Optional[dict[str, Any]] = field(default=None)
-    status_code: int = field(default=None)
     too_many_requests_exception: Optional[Any] = field(default=None)
     

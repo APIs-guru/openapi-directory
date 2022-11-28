@@ -1,5 +1,7 @@
 package shared
 
+// Webproperties
+// A web property collection lists Analytics web properties to which the user has access. Each resource in the collection corresponds to a single Analytics web property.
 type Webproperties struct {
 	Items        []Webproperty `json:"items,omitempty"`
 	ItemsPerPage *int32        `json:"itemsPerPage,omitempty"`

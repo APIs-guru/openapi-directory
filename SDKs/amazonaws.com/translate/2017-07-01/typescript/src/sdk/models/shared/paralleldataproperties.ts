@@ -1,8 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { EncryptionKey } from "./encryptionkey";
 import { ParallelDataStatusEnum } from "./paralleldatastatusenum";
 import { ParallelDataConfig } from "./paralleldataconfig";
-import { ParallelDataStatusEnum } from "./paralleldatastatusenum";
+
 
 
 // ParallelDataProperties
@@ -10,54 +10,54 @@ import { ParallelDataStatusEnum } from "./paralleldatastatusenum";
  * The properties of a parallel data resource.
 **/
 export class ParallelDataProperties extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Arn" })
+  @SpeakeasyMetadata({ data: "json, name=Arn" })
   arn?: string;
 
-  @Metadata({ data: "json, name=CreatedAt" })
+  @SpeakeasyMetadata({ data: "json, name=CreatedAt" })
   createdAt?: Date;
 
-  @Metadata({ data: "json, name=Description" })
+  @SpeakeasyMetadata({ data: "json, name=Description" })
   description?: string;
 
-  @Metadata({ data: "json, name=EncryptionKey" })
+  @SpeakeasyMetadata({ data: "json, name=EncryptionKey" })
   encryptionKey?: EncryptionKey;
 
-  @Metadata({ data: "json, name=FailedRecordCount" })
+  @SpeakeasyMetadata({ data: "json, name=FailedRecordCount" })
   failedRecordCount?: number;
 
-  @Metadata({ data: "json, name=ImportedDataSize" })
+  @SpeakeasyMetadata({ data: "json, name=ImportedDataSize" })
   importedDataSize?: number;
 
-  @Metadata({ data: "json, name=ImportedRecordCount" })
+  @SpeakeasyMetadata({ data: "json, name=ImportedRecordCount" })
   importedRecordCount?: number;
 
-  @Metadata({ data: "json, name=LastUpdatedAt" })
+  @SpeakeasyMetadata({ data: "json, name=LastUpdatedAt" })
   lastUpdatedAt?: Date;
 
-  @Metadata({ data: "json, name=LatestUpdateAttemptAt" })
+  @SpeakeasyMetadata({ data: "json, name=LatestUpdateAttemptAt" })
   latestUpdateAttemptAt?: Date;
 
-  @Metadata({ data: "json, name=LatestUpdateAttemptStatus" })
+  @SpeakeasyMetadata({ data: "json, name=LatestUpdateAttemptStatus" })
   latestUpdateAttemptStatus?: ParallelDataStatusEnum;
 
-  @Metadata({ data: "json, name=Message" })
+  @SpeakeasyMetadata({ data: "json, name=Message" })
   message?: string;
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name?: string;
 
-  @Metadata({ data: "json, name=ParallelDataConfig" })
+  @SpeakeasyMetadata({ data: "json, name=ParallelDataConfig" })
   parallelDataConfig?: ParallelDataConfig;
 
-  @Metadata({ data: "json, name=SkippedRecordCount" })
+  @SpeakeasyMetadata({ data: "json, name=SkippedRecordCount" })
   skippedRecordCount?: number;
 
-  @Metadata({ data: "json, name=SourceLanguageCode" })
+  @SpeakeasyMetadata({ data: "json, name=SourceLanguageCode" })
   sourceLanguageCode?: string;
 
-  @Metadata({ data: "json, name=Status" })
+  @SpeakeasyMetadata({ data: "json, name=Status" })
   status?: ParallelDataStatusEnum;
 
-  @Metadata({ data: "json, name=TargetLanguageCodes" })
+  @SpeakeasyMetadata({ data: "json, name=TargetLanguageCodes" })
   targetLanguageCodes?: string[];
 }

@@ -1,6 +1,7 @@
 
 
+
 export enum AuthorizerTypeEnum {
-    Request = "REQUEST"
-,    Jwt = "JWT"
+    Request = "REQUEST",
+    Jwt = "JWT"
 }

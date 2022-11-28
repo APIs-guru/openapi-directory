@@ -1,11 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class UpdateNetworkWirelessSsidEapOverridePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=networkId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=networkId" })
   networkId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=number" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=number" })
   number: string;
 }
 
@@ -15,10 +16,10 @@ export class UpdateNetworkWirelessSsidEapOverridePathParams extends SpeakeasyBas
  * EAPOL Key settings.
 **/
 export class UpdateNetworkWirelessSsidEapOverrideRequestBodyEapolKey extends SpeakeasyBase {
-  @Metadata({ data: "json, name=retries" })
+  @SpeakeasyMetadata({ data: "json, name=retries" })
   retries?: number;
 
-  @Metadata({ data: "json, name=timeoutInMs" })
+  @SpeakeasyMetadata({ data: "json, name=timeoutInMs" })
   timeoutInMs?: number;
 }
 
@@ -28,45 +29,45 @@ export class UpdateNetworkWirelessSsidEapOverrideRequestBodyEapolKey extends Spe
  * EAP settings for identity requests.
 **/
 export class UpdateNetworkWirelessSsidEapOverrideRequestBodyIdentity extends SpeakeasyBase {
-  @Metadata({ data: "json, name=retries" })
+  @SpeakeasyMetadata({ data: "json, name=retries" })
   retries?: number;
 
-  @Metadata({ data: "json, name=timeout" })
+  @SpeakeasyMetadata({ data: "json, name=timeout" })
   timeout?: number;
 }
 
 
 export class UpdateNetworkWirelessSsidEapOverrideRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=eapolKey" })
+  @SpeakeasyMetadata({ data: "json, name=eapolKey" })
   eapolKey?: UpdateNetworkWirelessSsidEapOverrideRequestBodyEapolKey;
 
-  @Metadata({ data: "json, name=identity" })
+  @SpeakeasyMetadata({ data: "json, name=identity" })
   identity?: UpdateNetworkWirelessSsidEapOverrideRequestBodyIdentity;
 
-  @Metadata({ data: "json, name=maxRetries" })
+  @SpeakeasyMetadata({ data: "json, name=maxRetries" })
   maxRetries?: number;
 
-  @Metadata({ data: "json, name=timeout" })
+  @SpeakeasyMetadata({ data: "json, name=timeout" })
   timeout?: number;
 }
 
 
 export class UpdateNetworkWirelessSsidEapOverrideRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: UpdateNetworkWirelessSsidEapOverridePathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request?: UpdateNetworkWirelessSsidEapOverrideRequestBody;
 }
 
 
 export class UpdateNetworkWirelessSsidEapOverrideResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   updateNetworkWirelessSsidEapOverride200ApplicationJsonObject?: Map<string, any>;
 }

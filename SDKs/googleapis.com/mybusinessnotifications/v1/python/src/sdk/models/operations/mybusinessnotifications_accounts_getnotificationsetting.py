@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class MybusinessnotificationsAccountsGetNotificationSettingPathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,13 +26,13 @@ class MybusinessnotificationsAccountsGetNotificationSettingQueryParams:
 
 @dataclass
 class MybusinessnotificationsAccountsGetNotificationSettingRequest:
-    path_params: MybusinessnotificationsAccountsGetNotificationSettingPathParams = field(default=None)
-    query_params: MybusinessnotificationsAccountsGetNotificationSettingQueryParams = field(default=None)
+    path_params: MybusinessnotificationsAccountsGetNotificationSettingPathParams = field()
+    query_params: MybusinessnotificationsAccountsGetNotificationSettingQueryParams = field()
     
 
 @dataclass
 class MybusinessnotificationsAccountsGetNotificationSettingResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     notification_setting: Optional[shared.NotificationSetting] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -18,6 +18,8 @@ type UpdateBackendConfigHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// UpdateBackendConfigRequestBodyLoginAuthConfig
+// The request object for this operation.
 type UpdateBackendConfigRequestBodyLoginAuthConfig struct {
 	AwsCognitoIdentityPoolID *string `json:"AwsCognitoIdentityPoolId,omitempty"`
 	AwsCognitoRegion         *string `json:"AwsCognitoRegion,omitempty"`

@@ -1,17 +1,17 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ServiceCredentialType } from "./servicecredentialtype";
 import { CollectionLinks } from "./collectionlinks";
 import { CollectionMetadata } from "./collectionmetadata";
 
 
+
 export class ServiceCredentialTypesCollection extends SpeakeasyBase {
-  @Metadata({ data: "json, name=data", elemType: shared.ServiceCredentialType })
+  @SpeakeasyMetadata({ data: "json, name=data", elemType: ServiceCredentialType })
   data?: ServiceCredentialType[];
 
-  @Metadata({ data: "json, name=links" })
+  @SpeakeasyMetadata({ data: "json, name=links" })
   links?: CollectionLinks;
 
-  @Metadata({ data: "json, name=meta" })
+  @SpeakeasyMetadata({ data: "json, name=meta" })
   meta?: CollectionMetadata;
 }

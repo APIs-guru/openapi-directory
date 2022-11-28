@@ -1,44 +1,45 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetApiV1BillsBillIdStagesPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=billId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=billId" })
   billId: number;
 }
 
 
 export class GetApiV1BillsBillIdStagesQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Skip" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Skip" })
   skip?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Take" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Take" })
   take?: number;
 }
 
 
 export class GetApiV1BillsBillIdStagesRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetApiV1BillsBillIdStagesPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetApiV1BillsBillIdStagesQueryParams;
 }
 
 
 export class GetApiV1BillsBillIdStagesResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   problemDetails?: Map<string, any>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   stageSummarySearchResult?: shared.StageSummarySearchResult;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

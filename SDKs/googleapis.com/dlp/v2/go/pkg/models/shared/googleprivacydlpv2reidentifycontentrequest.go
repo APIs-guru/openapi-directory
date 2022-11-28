@@ -1,5 +1,7 @@
 package shared
 
+// GooglePrivacyDlpV2ReidentifyContentRequest
+// Request to re-identify an item.
 type GooglePrivacyDlpV2ReidentifyContentRequest struct {
 	InspectConfig          *GooglePrivacyDlpV2InspectConfig    `json:"inspectConfig,omitempty"`
 	InspectTemplateName    *string                             `json:"inspectTemplateName,omitempty"`

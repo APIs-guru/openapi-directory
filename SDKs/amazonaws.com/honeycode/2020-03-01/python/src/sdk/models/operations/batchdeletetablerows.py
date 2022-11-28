@@ -1,13 +1,17 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,List,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
 @dataclass
 class BatchDeleteTableRowsPathParams:
-    table_id: str = field(default=None, metadata={'path_param': { 'field_name': 'tableId', 'style': 'simple', 'explode': False }})
-    workbook_id: str = field(default=None, metadata={'path_param': { 'field_name': 'workbookId', 'style': 'simple', 'explode': False }})
+    table_id: str = field(metadata={'path_param': { 'field_name': 'tableId', 'style': 'simple', 'explode': False }})
+    workbook_id: str = field(metadata={'path_param': { 'field_name': 'workbookId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -24,27 +28,27 @@ class BatchDeleteTableRowsHeaders:
 @dataclass_json
 @dataclass
 class BatchDeleteTableRowsRequestBody:
-    client_request_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'clientRequestToken' }})
-    row_ids: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'rowIds' }})
+    row_ids: List[str] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('rowIds') }})
+    client_request_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('clientRequestToken') }})
     
 
 @dataclass
 class BatchDeleteTableRowsRequest:
-    path_params: BatchDeleteTableRowsPathParams = field(default=None)
-    headers: BatchDeleteTableRowsHeaders = field(default=None)
-    request: BatchDeleteTableRowsRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: BatchDeleteTableRowsHeaders = field()
+    path_params: BatchDeleteTableRowsPathParams = field()
+    request: BatchDeleteTableRowsRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class BatchDeleteTableRowsResponse:
+    content_type: str = field()
+    status_code: int = field()
     access_denied_exception: Optional[Any] = field(default=None)
     batch_delete_table_rows_result: Optional[shared.BatchDeleteTableRowsResult] = field(default=None)
-    content_type: str = field(default=None)
     internal_server_exception: Optional[Any] = field(default=None)
     request_timeout_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
     service_unavailable_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     validation_exception: Optional[Any] = field(default=None)
     

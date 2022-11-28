@@ -1,35 +1,36 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class PostStoreCreateJsonQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=auth_token" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=auth_token" })
   authToken: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=partner_code" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=partner_code" })
   partnerCode: string;
 }
 
 
 export class PostStoreCreateJsonRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: PostStoreCreateJsonQueryParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: shared.PartnerStoreCreate;
 }
 
 
 export class PostStoreCreateJsonResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   partnerError?: shared.PartnerError;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   partnerStoreCode?: shared.PartnerStoreCode;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

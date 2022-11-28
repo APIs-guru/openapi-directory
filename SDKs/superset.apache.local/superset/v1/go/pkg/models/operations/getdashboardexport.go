@@ -12,11 +12,6 @@ type GetDashboardExportSecurity struct {
 	Jwt shared.SchemeJwt `security:"scheme,type=http,subtype=bearer"`
 }
 
-type GetDashboardExportRequest struct {
-	QueryParams GetDashboardExportQueryParams
-	Security    GetDashboardExportSecurity
-}
-
 type GetDashboardExport400ApplicationJSON struct {
 	Message *string `json:"message,omitempty"`
 }
@@ -35,6 +30,11 @@ type GetDashboardExport422ApplicationJSON struct {
 
 type GetDashboardExport500ApplicationJSON struct {
 	Message *string `json:"message,omitempty"`
+}
+
+type GetDashboardExportRequest struct {
+	QueryParams GetDashboardExportQueryParams
+	Security    GetDashboardExportSecurity
 }
 
 type GetDashboardExportResponse struct {

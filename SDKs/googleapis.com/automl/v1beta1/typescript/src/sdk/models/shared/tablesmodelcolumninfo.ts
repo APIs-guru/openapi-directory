@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // TablesModelColumnInfo
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * An information specific to given column and Tables Model, in context of the Model and the predictions created by it.
 **/
 export class TablesModelColumnInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=columnDisplayName" })
+  @SpeakeasyMetadata({ data: "json, name=columnDisplayName" })
   columnDisplayName?: string;
 
-  @Metadata({ data: "json, name=columnSpecName" })
+  @SpeakeasyMetadata({ data: "json, name=columnSpecName" })
   columnSpecName?: string;
 
-  @Metadata({ data: "json, name=featureImportance" })
+  @SpeakeasyMetadata({ data: "json, name=featureImportance" })
   featureImportance?: number;
 }

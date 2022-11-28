@@ -4,27 +4,39 @@ import (
 	"time"
 )
 
+// ActivityActorClientSpecificActorInfoYoutubeActorInfo
+// Actor info specific to YouTube clients.
 type ActivityActorClientSpecificActorInfoYoutubeActorInfo struct {
 	ChannelID *string `json:"channelId,omitempty"`
 }
 
+// ActivityActorClientSpecificActorInfo
+// Actor info specific to particular clients.
 type ActivityActorClientSpecificActorInfo struct {
 	YoutubeActorInfo *ActivityActorClientSpecificActorInfoYoutubeActorInfo `json:"youtubeActorInfo,omitempty"`
 }
 
+// ActivityActorImage
+// The image representation of the actor.
 type ActivityActorImage struct {
 	URL *string `json:"url,omitempty"`
 }
 
+// ActivityActorName
+// An object representation of the individual components of name.
 type ActivityActorName struct {
 	FamilyName *string `json:"familyName,omitempty"`
 	GivenName  *string `json:"givenName,omitempty"`
 }
 
+// ActivityActorVerification
+// Verification status of actor.
 type ActivityActorVerification struct {
 	AdHocVerified *string `json:"adHocVerified,omitempty"`
 }
 
+// ActivityActor
+// The person who performed this activity.
 type ActivityActor struct {
 	ClientSpecificActorInfo *ActivityActorClientSpecificActorInfo `json:"clientSpecificActorInfo,omitempty"`
 	DisplayName             *string                               `json:"displayName,omitempty"`
@@ -35,22 +47,32 @@ type ActivityActor struct {
 	Verification            *ActivityActorVerification            `json:"verification,omitempty"`
 }
 
+// ActivityObjectActorClientSpecificActorInfoYoutubeActorInfo
+// Actor info specific to YouTube clients.
 type ActivityObjectActorClientSpecificActorInfoYoutubeActorInfo struct {
 	ChannelID *string `json:"channelId,omitempty"`
 }
 
+// ActivityObjectActorClientSpecificActorInfo
+// Actor info specific to particular clients.
 type ActivityObjectActorClientSpecificActorInfo struct {
 	YoutubeActorInfo *ActivityObjectActorClientSpecificActorInfoYoutubeActorInfo `json:"youtubeActorInfo,omitempty"`
 }
 
+// ActivityObjectActorImage
+// The image representation of the original actor.
 type ActivityObjectActorImage struct {
 	URL *string `json:"url,omitempty"`
 }
 
+// ActivityObjectActorVerification
+// Verification status of actor.
 type ActivityObjectActorVerification struct {
 	AdHocVerified *string `json:"adHocVerified,omitempty"`
 }
 
+// ActivityObjectActor
+// If this activity's object is itself another activity, such as when a person reshares an activity, this property specifies the original activity's actor.
 type ActivityObjectActor struct {
 	ClientSpecificActorInfo *ActivityObjectActorClientSpecificActorInfo `json:"clientSpecificActorInfo,omitempty"`
 	DisplayName             *string                                     `json:"displayName,omitempty"`
@@ -60,11 +82,15 @@ type ActivityObjectActor struct {
 	Verification            *ActivityObjectActorVerification            `json:"verification,omitempty"`
 }
 
+// ActivityObjectAttachmentsEmbed
+// If the attachment is a video, the embeddable link.
 type ActivityObjectAttachmentsEmbed struct {
 	Type *string `json:"type,omitempty"`
 	URL  *string `json:"url,omitempty"`
 }
 
+// ActivityObjectAttachmentsFullImage
+// The full image URL for photo attachments.
 type ActivityObjectAttachmentsFullImage struct {
 	Height *int64  `json:"height,omitempty"`
 	Type   *string `json:"type,omitempty"`
@@ -72,6 +98,8 @@ type ActivityObjectAttachmentsFullImage struct {
 	Width  *int64  `json:"width,omitempty"`
 }
 
+// ActivityObjectAttachmentsImage
+// The preview image for photos or videos.
 type ActivityObjectAttachmentsImage struct {
 	Height *int64  `json:"height,omitempty"`
 	Type   *string `json:"type,omitempty"`
@@ -79,6 +107,8 @@ type ActivityObjectAttachmentsImage struct {
 	Width  *int64  `json:"width,omitempty"`
 }
 
+// ActivityObjectAttachmentsThumbnailsImage
+// Image resource.
 type ActivityObjectAttachmentsThumbnailsImage struct {
 	Height *int64  `json:"height,omitempty"`
 	Type   *string `json:"type,omitempty"`
@@ -104,21 +134,29 @@ type ActivityObjectAttachments struct {
 	URL         *string                               `json:"url,omitempty"`
 }
 
+// ActivityObjectPlusoners
+// People who +1'd this activity.
 type ActivityObjectPlusoners struct {
 	SelfLink   *string `json:"selfLink,omitempty"`
 	TotalItems *int64  `json:"totalItems,omitempty"`
 }
 
+// ActivityObjectReplies
+// Comments in reply to this activity.
 type ActivityObjectReplies struct {
 	SelfLink   *string `json:"selfLink,omitempty"`
 	TotalItems *int64  `json:"totalItems,omitempty"`
 }
 
+// ActivityObjectResharers
+// People who reshared this activity.
 type ActivityObjectResharers struct {
 	SelfLink   *string `json:"selfLink,omitempty"`
 	TotalItems *int64  `json:"totalItems,omitempty"`
 }
 
+// ActivityObject
+// The object of this activity.
 type ActivityObject struct {
 	Actor           *ActivityObjectActor        `json:"actor,omitempty"`
 	Attachments     []ActivityObjectAttachments `json:"attachments,omitempty"`
@@ -132,6 +170,8 @@ type ActivityObject struct {
 	URL             *string                     `json:"url,omitempty"`
 }
 
+// ActivityProvider
+// The service provider that initially published this activity.
 type ActivityProvider struct {
 	Title *string `json:"title,omitempty"`
 }

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var FireteamSearchPublicAvailableClanFireteamsPathParams = /** @class */ (function (_super) {
     __extends(FireteamSearchPublicAvailableClanFireteamsPathParams, _super);
@@ -30,23 +30,23 @@ var FireteamSearchPublicAvailableClanFireteamsPathParams = /** @class */ (functi
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=activityType" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=activityType" }),
         __metadata("design:type", Number)
     ], FireteamSearchPublicAvailableClanFireteamsPathParams.prototype, "activityType", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=dateRange" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=dateRange" }),
         __metadata("design:type", Number)
     ], FireteamSearchPublicAvailableClanFireteamsPathParams.prototype, "dateRange", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=page" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=page" }),
         __metadata("design:type", Number)
     ], FireteamSearchPublicAvailableClanFireteamsPathParams.prototype, "page", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=platform" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=platform" }),
         __metadata("design:type", Number)
     ], FireteamSearchPublicAvailableClanFireteamsPathParams.prototype, "platform", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=slotFilter" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=slotFilter" }),
         __metadata("design:type", Number)
     ], FireteamSearchPublicAvailableClanFireteamsPathParams.prototype, "slotFilter", void 0);
     return FireteamSearchPublicAvailableClanFireteamsPathParams;
@@ -58,7 +58,7 @@ var FireteamSearchPublicAvailableClanFireteamsQueryParams = /** @class */ (funct
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=langFilter" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=langFilter" }),
         __metadata("design:type", String)
     ], FireteamSearchPublicAvailableClanFireteamsQueryParams.prototype, "langFilter", void 0);
     return FireteamSearchPublicAvailableClanFireteamsQueryParams;
@@ -70,7 +70,7 @@ var FireteamSearchPublicAvailableClanFireteamsSecurity = /** @class */ (function
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2)
     ], FireteamSearchPublicAvailableClanFireteamsSecurity.prototype, "oauth2", void 0);
     return FireteamSearchPublicAvailableClanFireteamsSecurity;
@@ -82,15 +82,15 @@ var FireteamSearchPublicAvailableClanFireteamsRequest = /** @class */ (function 
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", FireteamSearchPublicAvailableClanFireteamsPathParams)
     ], FireteamSearchPublicAvailableClanFireteamsRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", FireteamSearchPublicAvailableClanFireteamsQueryParams)
     ], FireteamSearchPublicAvailableClanFireteamsRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", FireteamSearchPublicAvailableClanFireteamsSecurity)
     ], FireteamSearchPublicAvailableClanFireteamsRequest.prototype, "security", void 0);
     return FireteamSearchPublicAvailableClanFireteamsRequest;
@@ -102,15 +102,15 @@ var FireteamSearchPublicAvailableClanFireteamsResponse = /** @class */ (function
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], FireteamSearchPublicAvailableClanFireteamsResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], FireteamSearchPublicAvailableClanFireteamsResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], FireteamSearchPublicAvailableClanFireteamsResponse.prototype, "statusCode", void 0);
     return FireteamSearchPublicAvailableClanFireteamsResponse;

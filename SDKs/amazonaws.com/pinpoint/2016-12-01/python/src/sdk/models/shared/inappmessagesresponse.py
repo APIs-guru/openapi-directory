@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import inappmessagecampaign
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class InAppMessagesResponse:
-    in_app_message_campaigns: Optional[List[inappmessagecampaign.InAppMessageCampaign]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'InAppMessageCampaigns' }})
+    r"""InAppMessagesResponse
+    Get in-app messages response object.
+    """
+    
+    in_app_message_campaigns: Optional[List[InAppMessageCampaign]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('InAppMessageCampaigns') }})
     

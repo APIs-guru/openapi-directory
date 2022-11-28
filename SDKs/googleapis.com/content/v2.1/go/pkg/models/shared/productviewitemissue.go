@@ -8,6 +8,8 @@ const (
 	ProductViewItemIssueResolutionEnumPendingProcessing ProductViewItemIssueResolutionEnum = "PENDING_PROCESSING"
 )
 
+// ProductViewItemIssue
+// Item issue associated with the product.
 type ProductViewItemIssue struct {
 	IssueType  *ProductViewItemIssueItemIssueType     `json:"issueType,omitempty"`
 	Resolution *ProductViewItemIssueResolutionEnum    `json:"resolution,omitempty"`

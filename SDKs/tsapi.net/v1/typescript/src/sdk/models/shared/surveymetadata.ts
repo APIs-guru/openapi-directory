@@ -1,26 +1,26 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Hierarchy } from "./hierarchy";
 import { Language } from "./language";
 import { Variable } from "./variable";
 
 
+
 export class SurveyMetadata extends SpeakeasyBase {
-  @Metadata({ data: "json, name=hierarchies", elemType: shared.Hierarchy })
+  @SpeakeasyMetadata({ data: "json, name=hierarchies", elemType: Hierarchy })
   hierarchies?: Hierarchy[];
 
-  @Metadata({ data: "json, name=interviewCount" })
+  @SpeakeasyMetadata({ data: "json, name=interviewCount" })
   interviewCount?: number;
 
-  @Metadata({ data: "json, name=languages", elemType: shared.Language })
+  @SpeakeasyMetadata({ data: "json, name=languages", elemType: Language })
   languages?: Language[];
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=title" })
+  @SpeakeasyMetadata({ data: "json, name=title" })
   title?: string;
 
-  @Metadata({ data: "json, name=variables", elemType: shared.Variable })
+  @SpeakeasyMetadata({ data: "json, name=variables", elemType: Variable })
   variables?: Variable[];
 }

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { RecommendationRelatedEventResource } from "./recommendationrelatedeventresource";
 /**
  *  Information about an event that is related to a recommendation.

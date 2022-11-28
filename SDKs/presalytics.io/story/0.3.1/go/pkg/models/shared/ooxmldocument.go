@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// OoxmlDocument
+// A reference to an Ooxml Automation Document from the Presalytics Ooxml Automation API
 type OoxmlDocument struct {
 	CreatedAt                 *time.Time `json:"created_at,omitempty"`
 	CreatedBy                 *string    `json:"created_by,omitempty"`

@@ -1,7 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import row
+from sdk import utils
+from . import *
 
 class CreateRowRequestViewEnum(str, Enum):
     VIEW_UNSPECIFIED = "VIEW_UNSPECIFIED"
@@ -11,7 +13,11 @@ class CreateRowRequestViewEnum(str, Enum):
 @dataclass_json
 @dataclass
 class CreateRowRequest:
-    parent: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'parent' }})
-    row: Optional[row.Row] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'row' }})
-    view: Optional[CreateRowRequestViewEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'view' }})
+    r"""CreateRowRequest
+    Request message for TablesService.CreateRow.
+    """
+    
+    parent: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('parent') }})
+    row: Optional[Row] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('row') }})
+    view: Optional[CreateRowRequestViewEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('view') }})
     

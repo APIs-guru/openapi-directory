@@ -1,41 +1,42 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class ExtensionCtrlGetAccountExtensionByIdPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=account_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=account_id" })
   accountId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=extension_number" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=extension_number" })
   extensionNumber: number;
 }
 
 
 export class ExtensionCtrlGetAccountExtensionByIdSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=bearer" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" })
   bearerAuth: shared.SchemeBearerAuth;
 }
 
 
 export class ExtensionCtrlGetAccountExtensionByIdRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: ExtensionCtrlGetAccountExtensionByIdPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: ExtensionCtrlGetAccountExtensionByIdSecurity;
 }
 
 
 export class ExtensionCtrlGetAccountExtensionByIdResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   endUserRouteHalResponse?: shared.EndUserRouteHalResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   errorResponse?: shared.ErrorResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

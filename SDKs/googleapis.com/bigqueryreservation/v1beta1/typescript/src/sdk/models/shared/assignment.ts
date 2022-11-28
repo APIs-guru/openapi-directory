@@ -1,16 +1,30 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum AssignmentJobTypeEnum {
-    JobTypeUnspecified = "JOB_TYPE_UNSPECIFIED"
-,    Pipeline = "PIPELINE"
-,    Query = "QUERY"
-,    MlExternal = "ML_EXTERNAL"
+    JobTypeUnspecified = "JOB_TYPE_UNSPECIFIED",
+    Pipeline = "PIPELINE",
+    Query = "QUERY",
+    MlExternal = "ML_EXTERNAL"
 }
 
 export enum AssignmentStateEnum {
-    StateUnspecified = "STATE_UNSPECIFIED"
-,    Pending = "PENDING"
-,    Active = "ACTIVE"
+    StateUnspecified = "STATE_UNSPECIFIED",
+    Pending = "PENDING",
+    Active = "ACTIVE"
+}
+
+
+// AssignmentInput
+/** 
+ * An assignment allows a project to submit jobs of a certain type using slots from the specified reservation.
+**/
+export class AssignmentInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=assignee" })
+  assignee?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=jobType" })
+  jobType?: AssignmentJobTypeEnum;
 }
 
 
@@ -19,15 +33,15 @@ export enum AssignmentStateEnum {
  * An assignment allows a project to submit jobs of a certain type using slots from the specified reservation.
 **/
 export class Assignment extends SpeakeasyBase {
-  @Metadata({ data: "json, name=assignee" })
+  @SpeakeasyMetadata({ data: "json, name=assignee" })
   assignee?: string;
 
-  @Metadata({ data: "json, name=jobType" })
+  @SpeakeasyMetadata({ data: "json, name=jobType" })
   jobType?: AssignmentJobTypeEnum;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=state" })
+  @SpeakeasyMetadata({ data: "json, name=state" })
   state?: AssignmentStateEnum;
 }

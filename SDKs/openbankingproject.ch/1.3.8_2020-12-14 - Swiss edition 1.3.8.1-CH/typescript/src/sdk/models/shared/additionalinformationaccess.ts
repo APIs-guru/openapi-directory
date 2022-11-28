@@ -1,7 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AccountReference16Ch } from "./accountreference16ch";
-import { AccountReference16Ch } from "./accountreference16ch";
+
 
 
 // AdditionalInformationAccess
@@ -17,9 +16,9 @@ import { AccountReference16Ch } from "./accountreference16ch";
  * 
 **/
 export class AdditionalInformationAccess extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ownerName", elemType: shared.AccountReference16Ch })
+  @SpeakeasyMetadata({ data: "json, name=ownerName", elemType: AccountReference16Ch })
   ownerName?: AccountReference16Ch[];
 
-  @Metadata({ data: "json, name=trustedBeneficiaries", elemType: shared.AccountReference16Ch })
+  @SpeakeasyMetadata({ data: "json, name=trustedBeneficiaries", elemType: AccountReference16Ch })
   trustedBeneficiaries?: AccountReference16Ch[];
 }

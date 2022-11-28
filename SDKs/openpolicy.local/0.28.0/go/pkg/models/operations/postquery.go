@@ -10,11 +10,6 @@ type PostQueryQueryParams struct {
 	Pretty  *bool   `queryParam:"style=form,explode=true,name=pretty"`
 }
 
-type PostQueryRequest struct {
-	QueryParams PostQueryQueryParams
-	Request     []byte `request:"mediaType=application/x-yaml"`
-}
-
 type PostQuery200ApplicationJSONExplanationLocalsKey struct {
 	Type  *string `json:"type,omitempty"`
 	Value *string `json:"value,omitempty"`
@@ -35,6 +30,9 @@ type PostQuery200ApplicationJSONExplanationNodeTerms struct {
 	Value *string `json:"value,omitempty"`
 }
 
+// PostQuery200ApplicationJSONExplanationNode
+// The AST element associated with the evaluation step.
+// https://godoc.org/github.com/open-policy-agent/opa/ast - AST
 type PostQuery200ApplicationJSONExplanationNode struct {
 	Index *float64                                          `json:"index,omitempty"`
 	Terms []PostQuery200ApplicationJSONExplanationNodeTerms `json:"terms,omitempty"`
@@ -95,6 +93,11 @@ type PostQuery200ApplicationJSON struct {
 	Explanation []PostQuery200ApplicationJSONExplanation `json:"explanation,omitempty"`
 	Metrics     *PostQuery200ApplicationJSONMetrics      `json:"metrics,omitempty"`
 	Result      []interface{}                            `json:"result,omitempty"`
+}
+
+type PostQueryRequest struct {
+	QueryParams PostQueryQueryParams
+	Request     []byte `request:"mediaType=application/x-yaml"`
 }
 
 type PostQueryResponse struct {

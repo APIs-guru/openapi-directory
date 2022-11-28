@@ -1,17 +1,17 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Tag } from "./tag";
 import { CollectionLinks } from "./collectionlinks";
 import { CollectionMetadata } from "./collectionmetadata";
 
 
+
 export class TagsCollection extends SpeakeasyBase {
-  @Metadata({ data: "json, name=data", elemType: shared.Tag })
+  @SpeakeasyMetadata({ data: "json, name=data", elemType: Tag })
   data?: Tag[];
 
-  @Metadata({ data: "json, name=links" })
+  @SpeakeasyMetadata({ data: "json, name=links" })
   links?: CollectionLinks;
 
-  @Metadata({ data: "json, name=meta" })
+  @SpeakeasyMetadata({ data: "json, name=meta" })
   meta?: CollectionMetadata;
 }

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ConnectivityInfo
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Information about a Greengrass core's connectivity.
 **/
 export class ConnectivityInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=HostAddress" })
+  @SpeakeasyMetadata({ data: "json, name=HostAddress" })
   hostAddress?: string;
 
-  @Metadata({ data: "json, name=Id" })
+  @SpeakeasyMetadata({ data: "json, name=Id" })
   id?: string;
 
-  @Metadata({ data: "json, name=Metadata" })
+  @SpeakeasyMetadata({ data: "json, name=Metadata" })
   metadata?: string;
 
-  @Metadata({ data: "json, name=PortNumber" })
+  @SpeakeasyMetadata({ data: "json, name=PortNumber" })
   portNumber?: number;
 }

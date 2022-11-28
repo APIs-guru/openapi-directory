@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { GoogleFirebaseAppcheckV1SafetyNetConfig } from "./googlefirebaseappcheckv1safetynetconfig";
 /**
  * Response message for the BatchGetSafetyNetConfigs method.

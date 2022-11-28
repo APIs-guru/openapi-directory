@@ -1,37 +1,38 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetAppsBySafeNameSafeNamePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=safeName" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=safeName" })
   safeName: string;
 }
 
 
 export class GetAppsBySafeNameSafeNameQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=trackViews" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=trackViews" })
   trackViews?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=userId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=userId" })
   userId?: string;
 }
 
 
 export class GetAppsBySafeNameSafeNameRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetAppsBySafeNameSafeNamePathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetAppsBySafeNameSafeNameQueryParams;
 }
 
 
 export class GetAppsBySafeNameSafeNameResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

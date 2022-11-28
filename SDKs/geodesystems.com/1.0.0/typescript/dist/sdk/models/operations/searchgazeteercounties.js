@@ -22,110 +22,110 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var SearchGazeteerCountiesQueryParams = /** @class */ (function (_super) {
     __extends(SearchGazeteerCountiesQueryParams, _super);
     function SearchGazeteerCountiesQueryParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=changedate.from" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=changedate.from" }),
         __metadata("design:type", Date)
     ], SearchGazeteerCountiesQueryParams.prototype, "changedateFrom", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=changedate.to" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=changedate.to" }),
         __metadata("design:type", Date)
     ], SearchGazeteerCountiesQueryParams.prototype, "changedateTo", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=createdate.from" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=createdate.from" }),
         __metadata("design:type", Date)
     ], SearchGazeteerCountiesQueryParams.prototype, "createdateFrom", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=createdate.to" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=createdate.to" }),
         __metadata("design:type", Date)
     ], SearchGazeteerCountiesQueryParams.prototype, "createdateTo", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=description" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=description" }),
         __metadata("design:type", String)
     ], SearchGazeteerCountiesQueryParams.prototype, "description", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=filesuffix" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=filesuffix" }),
         __metadata("design:type", String)
     ], SearchGazeteerCountiesQueryParams.prototype, "filesuffix", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=fromdate" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=fromdate" }),
         __metadata("design:type", Date)
     ], SearchGazeteerCountiesQueryParams.prototype, "fromdate", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=group" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=group" }),
         __metadata("design:type", String)
     ], SearchGazeteerCountiesQueryParams.prototype, "group", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=max" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=max" }),
         __metadata("design:type", Number)
     ], SearchGazeteerCountiesQueryParams.prototype, "max", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=maxlatitude" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=maxlatitude" }),
         __metadata("design:type", Number)
     ], SearchGazeteerCountiesQueryParams.prototype, "maxlatitude", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=maxlongitude" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=maxlongitude" }),
         __metadata("design:type", Number)
     ], SearchGazeteerCountiesQueryParams.prototype, "maxlongitude", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=minlatitude" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=minlatitude" }),
         __metadata("design:type", Number)
     ], SearchGazeteerCountiesQueryParams.prototype, "minlatitude", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=minlongitude" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=minlongitude" }),
         __metadata("design:type", Number)
     ], SearchGazeteerCountiesQueryParams.prototype, "minlongitude", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=name" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=name" }),
         __metadata("design:type", String)
     ], SearchGazeteerCountiesQueryParams.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=search.db_gazeteer_counties.area_land" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=search.db_gazeteer_counties.area_land" }),
         __metadata("design:type", Number)
     ], SearchGazeteerCountiesQueryParams.prototype, "searchDbGazeteerCountiesAreaLand", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=search.db_gazeteer_counties.area_water" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=search.db_gazeteer_counties.area_water" }),
         __metadata("design:type", Number)
     ], SearchGazeteerCountiesQueryParams.prototype, "searchDbGazeteerCountiesAreaWater", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=search.db_gazeteer_counties.county_fips" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=search.db_gazeteer_counties.county_fips" }),
         __metadata("design:type", String)
     ], SearchGazeteerCountiesQueryParams.prototype, "searchDbGazeteerCountiesCountyFips", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=search.db_gazeteer_counties.county_name" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=search.db_gazeteer_counties.county_name" }),
         __metadata("design:type", String)
     ], SearchGazeteerCountiesQueryParams.prototype, "searchDbGazeteerCountiesCountyName", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=search.db_gazeteer_counties.full_county_fips" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=search.db_gazeteer_counties.full_county_fips" }),
         __metadata("design:type", String)
     ], SearchGazeteerCountiesQueryParams.prototype, "searchDbGazeteerCountiesFullCountyFips", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=search.db_gazeteer_counties.location" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=search.db_gazeteer_counties.location" }),
         __metadata("design:type", String)
     ], SearchGazeteerCountiesQueryParams.prototype, "searchDbGazeteerCountiesLocation", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=search.db_gazeteer_counties.state_abbreviation" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=search.db_gazeteer_counties.state_abbreviation" }),
         __metadata("design:type", String)
     ], SearchGazeteerCountiesQueryParams.prototype, "searchDbGazeteerCountiesStateAbbreviation", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=search.db_gazeteer_counties.state_fips" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=search.db_gazeteer_counties.state_fips" }),
         __metadata("design:type", String)
     ], SearchGazeteerCountiesQueryParams.prototype, "searchDbGazeteerCountiesStateFips", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=skip" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=skip" }),
         __metadata("design:type", Number)
     ], SearchGazeteerCountiesQueryParams.prototype, "skip", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=text" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=text" }),
         __metadata("design:type", String)
     ], SearchGazeteerCountiesQueryParams.prototype, "text", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=todate" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=todate" }),
         __metadata("design:type", Date)
     ], SearchGazeteerCountiesQueryParams.prototype, "todate", void 0);
     return SearchGazeteerCountiesQueryParams;
@@ -137,7 +137,7 @@ var SearchGazeteerCountiesRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", SearchGazeteerCountiesQueryParams)
     ], SearchGazeteerCountiesRequest.prototype, "queryParams", void 0);
     return SearchGazeteerCountiesRequest;
@@ -149,11 +149,11 @@ var SearchGazeteerCountiesResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], SearchGazeteerCountiesResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], SearchGazeteerCountiesResponse.prototype, "statusCode", void 0);
     return SearchGazeteerCountiesResponse;

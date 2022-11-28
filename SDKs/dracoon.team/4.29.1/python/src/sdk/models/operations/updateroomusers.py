@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Optional
 from sdk.models import shared
 
 
 @dataclass
 class UpdateRoomUsersPathParams:
-    room_id: int = field(default=None, metadata={'path_param': { 'field_name': 'room_id', 'style': 'simple', 'explode': False }})
+    room_id: int = field(metadata={'path_param': { 'field_name': 'room_id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -15,14 +18,14 @@ class UpdateRoomUsersHeaders:
 
 @dataclass
 class UpdateRoomUsersRequest:
-    path_params: UpdateRoomUsersPathParams = field(default=None)
-    headers: UpdateRoomUsersHeaders = field(default=None)
-    request: shared.RoomUsersAddBatchRequest = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: UpdateRoomUsersHeaders = field()
+    path_params: UpdateRoomUsersPathParams = field()
+    request: shared.RoomUsersAddBatchRequest = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class UpdateRoomUsersResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error_response: Optional[shared.ErrorResponse] = field(default=None)
-    status_code: int = field(default=None)
     

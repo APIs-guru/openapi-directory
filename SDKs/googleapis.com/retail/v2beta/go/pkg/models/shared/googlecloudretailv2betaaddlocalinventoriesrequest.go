@@ -1,5 +1,7 @@
 package shared
 
+// GoogleCloudRetailV2betaAddLocalInventoriesRequest
+// Request message for ProductService.AddLocalInventories method.
 type GoogleCloudRetailV2betaAddLocalInventoriesRequest struct {
 	AddMask          *string                                 `json:"addMask,omitempty"`
 	AddTime          *string                                 `json:"addTime,omitempty"`

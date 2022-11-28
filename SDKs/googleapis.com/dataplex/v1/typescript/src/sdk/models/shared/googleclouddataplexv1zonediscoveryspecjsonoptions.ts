@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudDataplexV1ZoneDiscoverySpecJsonOptions
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Describe JSON data format.
 **/
 export class GoogleCloudDataplexV1ZoneDiscoverySpecJsonOptions extends SpeakeasyBase {
-  @Metadata({ data: "json, name=disableTypeInference" })
+  @SpeakeasyMetadata({ data: "json, name=disableTypeInference" })
   disableTypeInference?: boolean;
 
-  @Metadata({ data: "json, name=encoding" })
+  @SpeakeasyMetadata({ data: "json, name=encoding" })
   encoding?: string;
 }

@@ -1,5 +1,7 @@
 package shared
 
+// JobSpec
+// JobSpec describes how the job execution will look like.
 type JobSpec struct {
 	ActiveDeadlineSeconds   *string               `json:"activeDeadlineSeconds,omitempty"`
 	BackoffLimit            *int32                `json:"backoffLimit,omitempty"`

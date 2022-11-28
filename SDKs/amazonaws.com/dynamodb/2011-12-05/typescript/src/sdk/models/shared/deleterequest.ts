@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Key } from "./key";
+
 
 
 // DeleteRequest
@@ -7,6 +8,6 @@ import { Key } from "./key";
  * A container for a Delete BatchWrite request
 **/
 export class DeleteRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Key" })
+  @SpeakeasyMetadata({ data: "json, name=Key" })
   key: Key;
 }

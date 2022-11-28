@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import assigneduserrole
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class BulkEditAssignedUserRolesResponse:
-    created_assigned_user_roles: Optional[List[assigneduserrole.AssignedUserRole]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'createdAssignedUserRoles' }})
+    created_assigned_user_roles: Optional[List[AssignedUserRole]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('createdAssignedUserRoles') }})
     

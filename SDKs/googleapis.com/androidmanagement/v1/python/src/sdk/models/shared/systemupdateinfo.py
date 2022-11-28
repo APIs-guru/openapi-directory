@@ -1,6 +1,11 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class SystemUpdateInfoUpdateStatusEnum(str, Enum):
     UPDATE_STATUS_UNKNOWN = "UPDATE_STATUS_UNKNOWN"
@@ -13,6 +18,10 @@ class SystemUpdateInfoUpdateStatusEnum(str, Enum):
 @dataclass_json
 @dataclass
 class SystemUpdateInfo:
-    update_received_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'updateReceivedTime' }})
-    update_status: Optional[SystemUpdateInfoUpdateStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'updateStatus' }})
+    r"""SystemUpdateInfo
+    Information about a potential pending system update.
+    """
+    
+    update_received_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('updateReceivedTime') }})
+    update_status: Optional[SystemUpdateInfoUpdateStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('updateStatus') }})
     

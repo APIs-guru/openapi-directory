@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // CollectionSelector
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A selection of a collection, such as `messages as m1`.
 **/
 export class CollectionSelector extends SpeakeasyBase {
-  @Metadata({ data: "json, name=allDescendants" })
+  @SpeakeasyMetadata({ data: "json, name=allDescendants" })
   allDescendants?: boolean;
 
-  @Metadata({ data: "json, name=collectionId" })
+  @SpeakeasyMetadata({ data: "json, name=collectionId" })
   collectionId?: string;
 }

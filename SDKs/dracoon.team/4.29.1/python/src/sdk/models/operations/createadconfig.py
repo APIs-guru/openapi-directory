@@ -10,14 +10,14 @@ class CreateAdConfigHeaders:
 
 @dataclass
 class CreateAdConfigRequest:
-    headers: CreateAdConfigHeaders = field(default=None)
-    request: shared.CreateActiveDirectoryConfigRequest = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: CreateAdConfigHeaders = field()
+    request: shared.CreateActiveDirectoryConfigRequest = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class CreateAdConfigResponse:
+    content_type: str = field()
+    status_code: int = field()
     active_directory_config: Optional[shared.ActiveDirectoryConfig] = field(default=None)
-    content_type: str = field(default=None)
     error_response: Optional[shared.ErrorResponse] = field(default=None)
-    status_code: int = field(default=None)
     

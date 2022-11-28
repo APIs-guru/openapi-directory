@@ -22,6 +22,8 @@ const (
 	HistogramFacetsSimpleHistogramFacetsEnumBaseCompensationUnit  HistogramFacetsSimpleHistogramFacetsEnum = "BASE_COMPENSATION_UNIT"
 )
 
+// HistogramFacets
+// Input only. Histogram facets to be specified in SearchJobsRequest.
 type HistogramFacets struct {
 	CompensationHistogramFacets    []CompensationHistogramRequest             `json:"compensationHistogramFacets,omitempty"`
 	CustomAttributeHistogramFacets []CustomAttributeHistogramRequest          `json:"customAttributeHistogramFacets,omitempty"`

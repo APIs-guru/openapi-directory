@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BackupRetentionSettings } from "./backupretentionsettings";
+
 
 
 // BackupConfiguration
@@ -7,30 +8,30 @@ import { BackupRetentionSettings } from "./backupretentionsettings";
  * Database instance backup configuration.
 **/
 export class BackupConfiguration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=backupRetentionSettings" })
+  @SpeakeasyMetadata({ data: "json, name=backupRetentionSettings" })
   backupRetentionSettings?: BackupRetentionSettings;
 
-  @Metadata({ data: "json, name=binaryLogEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=binaryLogEnabled" })
   binaryLogEnabled?: boolean;
 
-  @Metadata({ data: "json, name=enabled" })
+  @SpeakeasyMetadata({ data: "json, name=enabled" })
   enabled?: boolean;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=location" })
+  @SpeakeasyMetadata({ data: "json, name=location" })
   location?: string;
 
-  @Metadata({ data: "json, name=pointInTimeRecoveryEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=pointInTimeRecoveryEnabled" })
   pointInTimeRecoveryEnabled?: boolean;
 
-  @Metadata({ data: "json, name=replicationLogArchivingEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=replicationLogArchivingEnabled" })
   replicationLogArchivingEnabled?: boolean;
 
-  @Metadata({ data: "json, name=startTime" })
+  @SpeakeasyMetadata({ data: "json, name=startTime" })
   startTime?: string;
 
-  @Metadata({ data: "json, name=transactionLogRetentionDays" })
+  @SpeakeasyMetadata({ data: "json, name=transactionLogRetentionDays" })
   transactionLogRetentionDays?: number;
 }

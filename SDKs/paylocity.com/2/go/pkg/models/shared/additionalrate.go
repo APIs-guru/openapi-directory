@@ -1,5 +1,7 @@
 package shared
 
+// AdditionalRate
+// The additional pay rate model
 type AdditionalRate struct {
 	ChangeReason  *string  `json:"changeReason,omitempty"`
 	CostCenter1   *string  `json:"costCenter1,omitempty"`

@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { UserType } from "./usertype";
+
 
 
 // AdminCreateUserResponse
@@ -7,6 +8,6 @@ import { UserType } from "./usertype";
  * Represents the response from the server to the request to create the user.
 **/
 export class AdminCreateUserResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=User" })
+  @SpeakeasyMetadata({ data: "json, name=User" })
   user?: UserType;
 }

@@ -1,12 +1,16 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DisplayvideoAdvertisersLocationListsPatchPathParams:
-    advertiser_id: str = field(default=None, metadata={'path_param': { 'field_name': 'advertiserId', 'style': 'simple', 'explode': False }})
-    location_list_id: str = field(default=None, metadata={'path_param': { 'field_name': 'locationListId', 'style': 'simple', 'explode': False }})
+    advertiser_id: str = field(metadata={'path_param': { 'field_name': 'advertiserId', 'style': 'simple', 'explode': False }})
+    location_list_id: str = field(metadata={'path_param': { 'field_name': 'locationListId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -27,21 +31,21 @@ class DisplayvideoAdvertisersLocationListsPatchQueryParams:
 
 @dataclass
 class DisplayvideoAdvertisersLocationListsPatchSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DisplayvideoAdvertisersLocationListsPatchRequest:
-    path_params: DisplayvideoAdvertisersLocationListsPatchPathParams = field(default=None)
-    query_params: DisplayvideoAdvertisersLocationListsPatchQueryParams = field(default=None)
-    request: Optional[shared.LocationList] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: DisplayvideoAdvertisersLocationListsPatchSecurity = field(default=None)
+    path_params: DisplayvideoAdvertisersLocationListsPatchPathParams = field()
+    query_params: DisplayvideoAdvertisersLocationListsPatchQueryParams = field()
+    security: DisplayvideoAdvertisersLocationListsPatchSecurity = field()
+    request: Optional[shared.LocationListInput] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class DisplayvideoAdvertisersLocationListsPatchResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     location_list: Optional[shared.LocationList] = field(default=None)
-    status_code: int = field(default=None)
     

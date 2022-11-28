@@ -1,27 +1,28 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class CreateDatastoreHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
@@ -31,7 +32,7 @@ export class CreateDatastoreHeaders extends SpeakeasyBase {
  *  Contains information about the partition dimensions in a data store. 
 **/
 export class CreateDatastoreRequestBodyDatastorePartitions extends SpeakeasyBase {
-  @Metadata({ data: "json, name=partitions", elemType: shared.DatastorePartition })
+  @SpeakeasyMetadata({ data: "json, name=partitions", elemType: shared.DatastorePartition })
   partitions?: shared.DatastorePartition[];
 }
 
@@ -41,13 +42,13 @@ export class CreateDatastoreRequestBodyDatastorePartitions extends SpeakeasyBase
  * Where data in a data store is stored.. You can choose <code>serviceManagedS3</code> storage, <code>customerManagedS3</code> storage, or <code>iotSiteWiseMultiLayerStorage</code> storage. The default is <code>serviceManagedS3</code>. You can't change the choice of Amazon S3 storage after your data store is created. 
 **/
 export class CreateDatastoreRequestBodyDatastoreStorage extends SpeakeasyBase {
-  @Metadata({ data: "json, name=customerManagedS3" })
+  @SpeakeasyMetadata({ data: "json, name=customerManagedS3" })
   customerManagedS3?: shared.CustomerManagedDatastoreS3Storage;
 
-  @Metadata({ data: "json, name=iotSiteWiseMultiLayerStorage" })
+  @SpeakeasyMetadata({ data: "json, name=iotSiteWiseMultiLayerStorage" })
   iotSiteWiseMultiLayerStorage?: shared.DatastoreIotSiteWiseMultiLayerStorage;
 
-  @Metadata({ data: "json, name=serviceManagedS3" })
+  @SpeakeasyMetadata({ data: "json, name=serviceManagedS3" })
   serviceManagedS3?: Map<string, any>;
 }
 
@@ -57,10 +58,10 @@ export class CreateDatastoreRequestBodyDatastoreStorage extends SpeakeasyBase {
  * <p>Contains the configuration information of file formats. IoT Analytics data stores support JSON and <a href="https://parquet.apache.org/">Parquet</a>.</p> <p>The default file format is JSON. You can specify only one format.</p> <p>You can't change the file format after you create the data store.</p>
 **/
 export class CreateDatastoreRequestBodyFileFormatConfiguration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=jsonConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=jsonConfiguration" })
   jsonConfiguration?: Map<string, any>;
 
-  @Metadata({ data: "json, name=parquetConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=parquetConfiguration" })
   parquetConfiguration?: shared.ParquetConfiguration;
 }
 
@@ -70,69 +71,69 @@ export class CreateDatastoreRequestBodyFileFormatConfiguration extends Speakeasy
  * How long, in days, message data is kept.
 **/
 export class CreateDatastoreRequestBodyRetentionPeriod extends SpeakeasyBase {
-  @Metadata({ data: "json, name=numberOfDays" })
+  @SpeakeasyMetadata({ data: "json, name=numberOfDays" })
   numberOfDays?: number;
 
-  @Metadata({ data: "json, name=unlimited" })
+  @SpeakeasyMetadata({ data: "json, name=unlimited" })
   unlimited?: boolean;
 }
 
 
 export class CreateDatastoreRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=datastoreName" })
+  @SpeakeasyMetadata({ data: "json, name=datastoreName" })
   datastoreName: string;
 
-  @Metadata({ data: "json, name=datastorePartitions" })
+  @SpeakeasyMetadata({ data: "json, name=datastorePartitions" })
   datastorePartitions?: CreateDatastoreRequestBodyDatastorePartitions;
 
-  @Metadata({ data: "json, name=datastoreStorage" })
+  @SpeakeasyMetadata({ data: "json, name=datastoreStorage" })
   datastoreStorage?: CreateDatastoreRequestBodyDatastoreStorage;
 
-  @Metadata({ data: "json, name=fileFormatConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=fileFormatConfiguration" })
   fileFormatConfiguration?: CreateDatastoreRequestBodyFileFormatConfiguration;
 
-  @Metadata({ data: "json, name=retentionPeriod" })
+  @SpeakeasyMetadata({ data: "json, name=retentionPeriod" })
   retentionPeriod?: CreateDatastoreRequestBodyRetentionPeriod;
 
-  @Metadata({ data: "json, name=tags", elemType: shared.Tag })
+  @SpeakeasyMetadata({ data: "json, name=tags", elemType: shared.Tag })
   tags?: shared.Tag[];
 }
 
 
 export class CreateDatastoreRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: CreateDatastoreHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: CreateDatastoreRequestBody;
 }
 
 
 export class CreateDatastoreResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   createDatastoreResponse?: shared.CreateDatastoreResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   internalFailureException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidRequestException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   limitExceededException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   resourceAlreadyExistsException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   serviceUnavailableException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   throttlingException?: any;
 }

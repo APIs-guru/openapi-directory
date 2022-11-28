@@ -1,5 +1,22 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { V2Restrictions } from "./v2restrictions";
+
+
+
+// V2KeyInput
+/** 
+ * The representation of a key managed by the API Keys API.
+**/
+export class V2KeyInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=annotations" })
+  annotations?: Map<string, string>;
+
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
+  displayName?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=restrictions" })
+  restrictions?: V2Restrictions;
+}
 
 
 // V2Key
@@ -7,33 +24,33 @@ import { V2Restrictions } from "./v2restrictions";
  * The representation of a key managed by the API Keys API.
 **/
 export class V2Key extends SpeakeasyBase {
-  @Metadata({ data: "json, name=annotations" })
+  @SpeakeasyMetadata({ data: "json, name=annotations" })
   annotations?: Map<string, string>;
 
-  @Metadata({ data: "json, name=createTime" })
+  @SpeakeasyMetadata({ data: "json, name=createTime" })
   createTime?: string;
 
-  @Metadata({ data: "json, name=deleteTime" })
+  @SpeakeasyMetadata({ data: "json, name=deleteTime" })
   deleteTime?: string;
 
-  @Metadata({ data: "json, name=displayName" })
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
   displayName?: string;
 
-  @Metadata({ data: "json, name=etag" })
+  @SpeakeasyMetadata({ data: "json, name=etag" })
   etag?: string;
 
-  @Metadata({ data: "json, name=keyString" })
+  @SpeakeasyMetadata({ data: "json, name=keyString" })
   keyString?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=restrictions" })
+  @SpeakeasyMetadata({ data: "json, name=restrictions" })
   restrictions?: V2Restrictions;
 
-  @Metadata({ data: "json, name=uid" })
+  @SpeakeasyMetadata({ data: "json, name=uid" })
   uid?: string;
 
-  @Metadata({ data: "json, name=updateTime" })
+  @SpeakeasyMetadata({ data: "json, name=updateTime" })
   updateTime?: string;
 }

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum CreatePayorLinkRequestLinkTypeEnum {
     ParentOf = "PARENT_OF"
@@ -6,12 +7,12 @@ export enum CreatePayorLinkRequestLinkTypeEnum {
 
 
 export class CreatePayorLinkRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=fromPayorId" })
+  @SpeakeasyMetadata({ data: "json, name=fromPayorId" })
   fromPayorId: string;
 
-  @Metadata({ data: "json, name=linkType" })
+  @SpeakeasyMetadata({ data: "json, name=linkType" })
   linkType: CreatePayorLinkRequestLinkTypeEnum;
 
-  @Metadata({ data: "json, name=toPayorId" })
+  @SpeakeasyMetadata({ data: "json, name=toPayorId" })
   toPayorId: string;
 }

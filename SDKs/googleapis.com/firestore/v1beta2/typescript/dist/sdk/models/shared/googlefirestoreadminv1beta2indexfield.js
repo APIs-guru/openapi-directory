@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var GoogleFirestoreAdminV1beta2IndexFieldArrayConfigEnum;
 (function (GoogleFirestoreAdminV1beta2IndexFieldArrayConfigEnum) {
     GoogleFirestoreAdminV1beta2IndexFieldArrayConfigEnum["ArrayConfigUnspecified"] = "ARRAY_CONFIG_UNSPECIFIED";
@@ -44,15 +44,15 @@ var GoogleFirestoreAdminV1beta2IndexField = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=arrayConfig" }),
+        SpeakeasyMetadata({ data: "json, name=arrayConfig" }),
         __metadata("design:type", String)
     ], GoogleFirestoreAdminV1beta2IndexField.prototype, "arrayConfig", void 0);
     __decorate([
-        Metadata({ data: "json, name=fieldPath" }),
+        SpeakeasyMetadata({ data: "json, name=fieldPath" }),
         __metadata("design:type", String)
     ], GoogleFirestoreAdminV1beta2IndexField.prototype, "fieldPath", void 0);
     __decorate([
-        Metadata({ data: "json, name=order" }),
+        SpeakeasyMetadata({ data: "json, name=order" }),
         __metadata("design:type", String)
     ], GoogleFirestoreAdminV1beta2IndexField.prototype, "order", void 0);
     return GoogleFirestoreAdminV1beta2IndexField;

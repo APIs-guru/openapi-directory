@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // CryptoKeyConfig
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The crypto key configuration. This field is used by the Customer-managed encryption keys (CMEK) feature.
 **/
 export class CryptoKeyConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=keyReference" })
+  @SpeakeasyMetadata({ data: "json, name=keyReference" })
   keyReference?: string;
 }

@@ -1,6 +1,7 @@
 
 
+
 export enum DeviceProfileTypeEnum {
-    System = "System"
-,    User = "User"
+    System = "System",
+    User = "User"
 }

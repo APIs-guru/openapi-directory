@@ -1,5 +1,7 @@
 package shared
 
+// MaintenanceWindowTarget
+// The target registered with the maintenance window.
 type MaintenanceWindowTarget struct {
 	Description      *string                            `json:"Description,omitempty"`
 	Name             *string                            `json:"Name,omitempty"`

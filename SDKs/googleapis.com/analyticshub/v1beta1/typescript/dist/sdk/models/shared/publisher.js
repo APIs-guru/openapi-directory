@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // Publisher
 /**
  * Contains details of the listing publisher.
@@ -33,11 +33,11 @@ var Publisher = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], Publisher.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=primaryContact" }),
+        SpeakeasyMetadata({ data: "json, name=primaryContact" }),
         __metadata("design:type", String)
     ], Publisher.prototype, "primaryContact", void 0);
     return Publisher;

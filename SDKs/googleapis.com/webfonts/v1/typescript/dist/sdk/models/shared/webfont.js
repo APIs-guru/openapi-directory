@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // Webfont
 /**
  * Metadata describing a family of fonts.
@@ -33,35 +33,35 @@ var Webfont = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=category" }),
+        SpeakeasyMetadata({ data: "json, name=category" }),
         __metadata("design:type", String)
     ], Webfont.prototype, "category", void 0);
     __decorate([
-        Metadata({ data: "json, name=family" }),
+        SpeakeasyMetadata({ data: "json, name=family" }),
         __metadata("design:type", String)
     ], Webfont.prototype, "family", void 0);
     __decorate([
-        Metadata({ data: "json, name=files" }),
+        SpeakeasyMetadata({ data: "json, name=files" }),
         __metadata("design:type", Map)
     ], Webfont.prototype, "files", void 0);
     __decorate([
-        Metadata({ data: "json, name=kind" }),
+        SpeakeasyMetadata({ data: "json, name=kind" }),
         __metadata("design:type", String)
     ], Webfont.prototype, "kind", void 0);
     __decorate([
-        Metadata({ data: "json, name=lastModified" }),
+        SpeakeasyMetadata({ data: "json, name=lastModified" }),
         __metadata("design:type", String)
     ], Webfont.prototype, "lastModified", void 0);
     __decorate([
-        Metadata({ data: "json, name=subsets" }),
+        SpeakeasyMetadata({ data: "json, name=subsets" }),
         __metadata("design:type", Array)
     ], Webfont.prototype, "subsets", void 0);
     __decorate([
-        Metadata({ data: "json, name=variants" }),
+        SpeakeasyMetadata({ data: "json, name=variants" }),
         __metadata("design:type", Array)
     ], Webfont.prototype, "variants", void 0);
     __decorate([
-        Metadata({ data: "json, name=version" }),
+        SpeakeasyMetadata({ data: "json, name=version" }),
         __metadata("design:type", String)
     ], Webfont.prototype, "version", void 0);
     return Webfont;

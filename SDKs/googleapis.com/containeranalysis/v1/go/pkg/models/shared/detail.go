@@ -1,5 +1,7 @@
 package shared
 
+// Detail
+// A detail for a distro and package affected by this vulnerability and its associated fix (if one is available).
 type Detail struct {
 	AffectedCpeURI       *string  `json:"affectedCpeUri,omitempty"`
 	AffectedPackage      *string  `json:"affectedPackage,omitempty"`

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ErrorContext } from "./errorcontext";
 import { ServiceContext } from "./servicecontext";
 // ReportedErrorEvent
@@ -35,19 +35,19 @@ var ReportedErrorEvent = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=context" }),
+        SpeakeasyMetadata({ data: "json, name=context" }),
         __metadata("design:type", ErrorContext)
     ], ReportedErrorEvent.prototype, "context", void 0);
     __decorate([
-        Metadata({ data: "json, name=eventTime" }),
+        SpeakeasyMetadata({ data: "json, name=eventTime" }),
         __metadata("design:type", String)
     ], ReportedErrorEvent.prototype, "eventTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=message" }),
+        SpeakeasyMetadata({ data: "json, name=message" }),
         __metadata("design:type", String)
     ], ReportedErrorEvent.prototype, "message", void 0);
     __decorate([
-        Metadata({ data: "json, name=serviceContext" }),
+        SpeakeasyMetadata({ data: "json, name=serviceContext" }),
         __metadata("design:type", ServiceContext)
     ], ReportedErrorEvent.prototype, "serviceContext", void 0);
     return ReportedErrorEvent;

@@ -1,8 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PersonProperties } from "./personproperties";
 import { SuggestedTextStyle } from "./suggestedtextstyle";
 import { TextStyle } from "./textstyle";
+
 
 
 // Person
@@ -10,21 +10,40 @@ import { TextStyle } from "./textstyle";
  * A person or email address mentioned in a document. These mentions behave as a single, immutable element containing the person's name or email address.
 **/
 export class Person extends SpeakeasyBase {
-  @Metadata({ data: "json, name=personId" })
+  @SpeakeasyMetadata({ data: "json, name=personId" })
   personId?: string;
 
-  @Metadata({ data: "json, name=personProperties" })
+  @SpeakeasyMetadata({ data: "json, name=personProperties" })
   personProperties?: PersonProperties;
 
-  @Metadata({ data: "json, name=suggestedDeletionIds" })
+  @SpeakeasyMetadata({ data: "json, name=suggestedDeletionIds" })
   suggestedDeletionIds?: string[];
 
-  @Metadata({ data: "json, name=suggestedInsertionIds" })
+  @SpeakeasyMetadata({ data: "json, name=suggestedInsertionIds" })
   suggestedInsertionIds?: string[];
 
-  @Metadata({ data: "json, name=suggestedTextStyleChanges", elemType: shared.SuggestedTextStyle })
+  @SpeakeasyMetadata({ data: "json, name=suggestedTextStyleChanges", elemType: SuggestedTextStyle })
   suggestedTextStyleChanges?: Map<string, SuggestedTextStyle>;
 
-  @Metadata({ data: "json, name=textStyle" })
+  @SpeakeasyMetadata({ data: "json, name=textStyle" })
+  textStyle?: TextStyle;
+}
+
+
+// PersonInput
+/** 
+ * A person or email address mentioned in a document. These mentions behave as a single, immutable element containing the person's name or email address.
+**/
+export class PersonInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=suggestedDeletionIds" })
+  suggestedDeletionIds?: string[];
+
+  @SpeakeasyMetadata({ data: "json, name=suggestedInsertionIds" })
+  suggestedInsertionIds?: string[];
+
+  @SpeakeasyMetadata({ data: "json, name=suggestedTextStyleChanges", elemType: SuggestedTextStyle })
+  suggestedTextStyleChanges?: Map<string, SuggestedTextStyle>;
+
+  @SpeakeasyMetadata({ data: "json, name=textStyle" })
   textStyle?: TextStyle;
 }

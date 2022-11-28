@@ -1,41 +1,42 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class RequestPublicUploadShareInfoPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=access_key" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=access_key" })
   accessKey: string;
 }
 
 
 export class RequestPublicUploadShareInfoHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Sds-Date-Format" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Sds-Date-Format" })
   xSdsDateFormat?: any;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Sds-Share-Password" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Sds-Share-Password" })
   xSdsSharePassword?: string;
 }
 
 
 export class RequestPublicUploadShareInfoRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: RequestPublicUploadShareInfoPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: RequestPublicUploadShareInfoHeaders;
 }
 
 
-export class RequestPublicUploadShareInfoResponse extends SpeakeasyBase {
-  @Metadata()
+export class RequestPublicUploadShareInfoResponseOutput extends SpeakeasyBase {
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   errorResponse?: shared.ErrorResponse;
 
-  @Metadata()
-  publicUploadShare?: shared.PublicUploadShare;
+  @SpeakeasyMetadata()
+  publicUploadShare?: shared.PublicUploadShareOutput;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

@@ -18,6 +18,23 @@ const (
 	ApplicationServingStatusEnumSystemDisabled ApplicationServingStatusEnum = "SYSTEM_DISABLED"
 )
 
+// ApplicationInput
+// An Application resource contains the top-level configuration of an App Engine application.
+type ApplicationInput struct {
+	AuthDomain              *string                       `json:"authDomain,omitempty"`
+	DatabaseType            *ApplicationDatabaseTypeEnum  `json:"databaseType,omitempty"`
+	DefaultCookieExpiration *string                       `json:"defaultCookieExpiration,omitempty"`
+	DispatchRules           []URLDispatchRule             `json:"dispatchRules,omitempty"`
+	FeatureSettings         *FeatureSettings              `json:"featureSettings,omitempty"`
+	Iap                     *IdentityAwareProxyInput      `json:"iap,omitempty"`
+	ID                      *string                       `json:"id,omitempty"`
+	LocationID              *string                       `json:"locationId,omitempty"`
+	ServiceAccount          *string                       `json:"serviceAccount,omitempty"`
+	ServingStatus           *ApplicationServingStatusEnum `json:"servingStatus,omitempty"`
+}
+
+// Application
+// An Application resource contains the top-level configuration of an App Engine application.
 type Application struct {
 	AuthDomain              *string                       `json:"authDomain,omitempty"`
 	CodeBucket              *string                       `json:"codeBucket,omitempty"`

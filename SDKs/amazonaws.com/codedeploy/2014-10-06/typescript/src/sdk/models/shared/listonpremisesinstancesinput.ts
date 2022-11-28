@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RegistrationStatusEnum } from "./registrationstatusenum";
 import { TagFilter } from "./tagfilter";
+
 
 
 // ListOnPremisesInstancesInput
@@ -9,12 +9,12 @@ import { TagFilter } from "./tagfilter";
  * Represents the input of a <code>ListOnPremisesInstances</code> operation.
 **/
 export class ListOnPremisesInstancesInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=nextToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=registrationStatus" })
+  @SpeakeasyMetadata({ data: "json, name=registrationStatus" })
   registrationStatus?: RegistrationStatusEnum;
 
-  @Metadata({ data: "json, name=tagFilters", elemType: shared.TagFilter })
+  @SpeakeasyMetadata({ data: "json, name=tagFilters", elemType: TagFilter })
   tagFilters?: TagFilter[];
 }

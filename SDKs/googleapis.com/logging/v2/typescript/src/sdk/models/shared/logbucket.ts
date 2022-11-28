@@ -1,12 +1,39 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { CmekSettingsInput } from "./cmeksettings";
+import { IndexConfigInput } from "./indexconfig";
 import { CmekSettings } from "./cmeksettings";
 import { IndexConfig } from "./indexconfig";
 
+
 export enum LogBucketLifecycleStateEnum {
-    LifecycleStateUnspecified = "LIFECYCLE_STATE_UNSPECIFIED"
-,    Active = "ACTIVE"
-,    DeleteRequested = "DELETE_REQUESTED"
+    LifecycleStateUnspecified = "LIFECYCLE_STATE_UNSPECIFIED",
+    Active = "ACTIVE",
+    DeleteRequested = "DELETE_REQUESTED"
+}
+
+
+// LogBucketInput
+/** 
+ * Describes a repository in which log entries are stored.
+**/
+export class LogBucketInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=cmekSettings" })
+  cmekSettings?: CmekSettingsInput;
+
+  @SpeakeasyMetadata({ data: "json, name=description" })
+  description?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=indexConfigs", elemType: IndexConfigInput })
+  indexConfigs?: IndexConfigInput[];
+
+  @SpeakeasyMetadata({ data: "json, name=locked" })
+  locked?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=restrictedFields" })
+  restrictedFields?: string[];
+
+  @SpeakeasyMetadata({ data: "json, name=retentionDays" })
+  retentionDays?: number;
 }
 
 
@@ -15,33 +42,33 @@ export enum LogBucketLifecycleStateEnum {
  * Describes a repository in which log entries are stored.
 **/
 export class LogBucket extends SpeakeasyBase {
-  @Metadata({ data: "json, name=cmekSettings" })
+  @SpeakeasyMetadata({ data: "json, name=cmekSettings" })
   cmekSettings?: CmekSettings;
 
-  @Metadata({ data: "json, name=createTime" })
+  @SpeakeasyMetadata({ data: "json, name=createTime" })
   createTime?: string;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=indexConfigs", elemType: shared.IndexConfig })
+  @SpeakeasyMetadata({ data: "json, name=indexConfigs", elemType: IndexConfig })
   indexConfigs?: IndexConfig[];
 
-  @Metadata({ data: "json, name=lifecycleState" })
+  @SpeakeasyMetadata({ data: "json, name=lifecycleState" })
   lifecycleState?: LogBucketLifecycleStateEnum;
 
-  @Metadata({ data: "json, name=locked" })
+  @SpeakeasyMetadata({ data: "json, name=locked" })
   locked?: boolean;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=restrictedFields" })
+  @SpeakeasyMetadata({ data: "json, name=restrictedFields" })
   restrictedFields?: string[];
 
-  @Metadata({ data: "json, name=retentionDays" })
+  @SpeakeasyMetadata({ data: "json, name=retentionDays" })
   retentionDays?: number;
 
-  @Metadata({ data: "json, name=updateTime" })
+  @SpeakeasyMetadata({ data: "json, name=updateTime" })
   updateTime?: string;
 }

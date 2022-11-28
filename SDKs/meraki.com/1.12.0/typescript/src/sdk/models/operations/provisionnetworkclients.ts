@@ -1,32 +1,33 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ProvisionNetworkClientsPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=networkId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=networkId" })
   networkId: string;
 }
 
 
 export class ProvisionNetworkClientsRequestBodyClients extends SpeakeasyBase {
-  @Metadata({ data: "json, name=mac" })
+  @SpeakeasyMetadata({ data: "json, name=mac" })
   mac: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 }
 
 export enum ProvisionNetworkClientsRequestBodyDevicePolicyEnum {
-    GroupPolicy = "Group policy"
-,    Allowed = "Allowed"
-,    Blocked = "Blocked"
-,    PerConnection = "Per connection"
-,    Normal = "Normal"
+    GroupPolicy = "Group policy",
+    Allowed = "Allowed",
+    Blocked = "Blocked",
+    PerConnection = "Per connection",
+    Normal = "Normal"
 }
 
 export enum ProvisionNetworkClientsRequestBodyPoliciesBySecurityApplianceDevicePolicyEnum {
-    Allowed = "Allowed"
-,    Blocked = "Blocked"
-,    Normal = "Normal"
+    Allowed = "Allowed",
+    Blocked = "Blocked",
+    Normal = "Normal"
 }
 
 
@@ -35,15 +36,15 @@ export enum ProvisionNetworkClientsRequestBodyPoliciesBySecurityApplianceDeviceP
  * An object, describing what the policy-connection association is for the security appliance. (Only relevant if the security appliance is actually within the network)
 **/
 export class ProvisionNetworkClientsRequestBodyPoliciesBySecurityAppliance extends SpeakeasyBase {
-  @Metadata({ data: "json, name=devicePolicy" })
+  @SpeakeasyMetadata({ data: "json, name=devicePolicy" })
   devicePolicy?: ProvisionNetworkClientsRequestBodyPoliciesBySecurityApplianceDevicePolicyEnum;
 }
 
 export enum ProvisionNetworkClientsRequestBodyPoliciesBySsid0DevicePolicyEnum {
-    Allowed = "Allowed"
-,    Blocked = "Blocked"
-,    Normal = "Normal"
-,    GroupPolicy = "Group policy"
+    Allowed = "Allowed",
+    Blocked = "Blocked",
+    Normal = "Normal",
+    GroupPolicy = "Group policy"
 }
 
 
@@ -52,18 +53,18 @@ export enum ProvisionNetworkClientsRequestBodyPoliciesBySsid0DevicePolicyEnum {
  * The number for the SSID
 **/
 export class ProvisionNetworkClientsRequestBodyPoliciesBySsid0 extends SpeakeasyBase {
-  @Metadata({ data: "json, name=devicePolicy" })
+  @SpeakeasyMetadata({ data: "json, name=devicePolicy" })
   devicePolicy: ProvisionNetworkClientsRequestBodyPoliciesBySsid0DevicePolicyEnum;
 
-  @Metadata({ data: "json, name=groupPolicyId" })
+  @SpeakeasyMetadata({ data: "json, name=groupPolicyId" })
   groupPolicyId?: string;
 }
 
 export enum ProvisionNetworkClientsRequestBodyPoliciesBySsid1DevicePolicyEnum {
-    Allowed = "Allowed"
-,    Blocked = "Blocked"
-,    Normal = "Normal"
-,    GroupPolicy = "Group policy"
+    Allowed = "Allowed",
+    Blocked = "Blocked",
+    Normal = "Normal",
+    GroupPolicy = "Group policy"
 }
 
 
@@ -72,18 +73,18 @@ export enum ProvisionNetworkClientsRequestBodyPoliciesBySsid1DevicePolicyEnum {
  * The number for the SSID
 **/
 export class ProvisionNetworkClientsRequestBodyPoliciesBySsid1 extends SpeakeasyBase {
-  @Metadata({ data: "json, name=devicePolicy" })
+  @SpeakeasyMetadata({ data: "json, name=devicePolicy" })
   devicePolicy: ProvisionNetworkClientsRequestBodyPoliciesBySsid1DevicePolicyEnum;
 
-  @Metadata({ data: "json, name=groupPolicyId" })
+  @SpeakeasyMetadata({ data: "json, name=groupPolicyId" })
   groupPolicyId?: string;
 }
 
 export enum ProvisionNetworkClientsRequestBodyPoliciesBySsid10DevicePolicyEnum {
-    Allowed = "Allowed"
-,    Blocked = "Blocked"
-,    Normal = "Normal"
-,    GroupPolicy = "Group policy"
+    Allowed = "Allowed",
+    Blocked = "Blocked",
+    Normal = "Normal",
+    GroupPolicy = "Group policy"
 }
 
 
@@ -92,18 +93,18 @@ export enum ProvisionNetworkClientsRequestBodyPoliciesBySsid10DevicePolicyEnum {
  * The number for the SSID
 **/
 export class ProvisionNetworkClientsRequestBodyPoliciesBySsid10 extends SpeakeasyBase {
-  @Metadata({ data: "json, name=devicePolicy" })
+  @SpeakeasyMetadata({ data: "json, name=devicePolicy" })
   devicePolicy: ProvisionNetworkClientsRequestBodyPoliciesBySsid10DevicePolicyEnum;
 
-  @Metadata({ data: "json, name=groupPolicyId" })
+  @SpeakeasyMetadata({ data: "json, name=groupPolicyId" })
   groupPolicyId?: string;
 }
 
 export enum ProvisionNetworkClientsRequestBodyPoliciesBySsid11DevicePolicyEnum {
-    Allowed = "Allowed"
-,    Blocked = "Blocked"
-,    Normal = "Normal"
-,    GroupPolicy = "Group policy"
+    Allowed = "Allowed",
+    Blocked = "Blocked",
+    Normal = "Normal",
+    GroupPolicy = "Group policy"
 }
 
 
@@ -112,18 +113,18 @@ export enum ProvisionNetworkClientsRequestBodyPoliciesBySsid11DevicePolicyEnum {
  * The number for the SSID
 **/
 export class ProvisionNetworkClientsRequestBodyPoliciesBySsid11 extends SpeakeasyBase {
-  @Metadata({ data: "json, name=devicePolicy" })
+  @SpeakeasyMetadata({ data: "json, name=devicePolicy" })
   devicePolicy: ProvisionNetworkClientsRequestBodyPoliciesBySsid11DevicePolicyEnum;
 
-  @Metadata({ data: "json, name=groupPolicyId" })
+  @SpeakeasyMetadata({ data: "json, name=groupPolicyId" })
   groupPolicyId?: string;
 }
 
 export enum ProvisionNetworkClientsRequestBodyPoliciesBySsid12DevicePolicyEnum {
-    Allowed = "Allowed"
-,    Blocked = "Blocked"
-,    Normal = "Normal"
-,    GroupPolicy = "Group policy"
+    Allowed = "Allowed",
+    Blocked = "Blocked",
+    Normal = "Normal",
+    GroupPolicy = "Group policy"
 }
 
 
@@ -132,18 +133,18 @@ export enum ProvisionNetworkClientsRequestBodyPoliciesBySsid12DevicePolicyEnum {
  * The number for the SSID
 **/
 export class ProvisionNetworkClientsRequestBodyPoliciesBySsid12 extends SpeakeasyBase {
-  @Metadata({ data: "json, name=devicePolicy" })
+  @SpeakeasyMetadata({ data: "json, name=devicePolicy" })
   devicePolicy: ProvisionNetworkClientsRequestBodyPoliciesBySsid12DevicePolicyEnum;
 
-  @Metadata({ data: "json, name=groupPolicyId" })
+  @SpeakeasyMetadata({ data: "json, name=groupPolicyId" })
   groupPolicyId?: string;
 }
 
 export enum ProvisionNetworkClientsRequestBodyPoliciesBySsid13DevicePolicyEnum {
-    Allowed = "Allowed"
-,    Blocked = "Blocked"
-,    Normal = "Normal"
-,    GroupPolicy = "Group policy"
+    Allowed = "Allowed",
+    Blocked = "Blocked",
+    Normal = "Normal",
+    GroupPolicy = "Group policy"
 }
 
 
@@ -152,18 +153,18 @@ export enum ProvisionNetworkClientsRequestBodyPoliciesBySsid13DevicePolicyEnum {
  * The number for the SSID
 **/
 export class ProvisionNetworkClientsRequestBodyPoliciesBySsid13 extends SpeakeasyBase {
-  @Metadata({ data: "json, name=devicePolicy" })
+  @SpeakeasyMetadata({ data: "json, name=devicePolicy" })
   devicePolicy: ProvisionNetworkClientsRequestBodyPoliciesBySsid13DevicePolicyEnum;
 
-  @Metadata({ data: "json, name=groupPolicyId" })
+  @SpeakeasyMetadata({ data: "json, name=groupPolicyId" })
   groupPolicyId?: string;
 }
 
 export enum ProvisionNetworkClientsRequestBodyPoliciesBySsid14DevicePolicyEnum {
-    Allowed = "Allowed"
-,    Blocked = "Blocked"
-,    Normal = "Normal"
-,    GroupPolicy = "Group policy"
+    Allowed = "Allowed",
+    Blocked = "Blocked",
+    Normal = "Normal",
+    GroupPolicy = "Group policy"
 }
 
 
@@ -172,18 +173,18 @@ export enum ProvisionNetworkClientsRequestBodyPoliciesBySsid14DevicePolicyEnum {
  * The number for the SSID
 **/
 export class ProvisionNetworkClientsRequestBodyPoliciesBySsid14 extends SpeakeasyBase {
-  @Metadata({ data: "json, name=devicePolicy" })
+  @SpeakeasyMetadata({ data: "json, name=devicePolicy" })
   devicePolicy: ProvisionNetworkClientsRequestBodyPoliciesBySsid14DevicePolicyEnum;
 
-  @Metadata({ data: "json, name=groupPolicyId" })
+  @SpeakeasyMetadata({ data: "json, name=groupPolicyId" })
   groupPolicyId?: string;
 }
 
 export enum ProvisionNetworkClientsRequestBodyPoliciesBySsid2DevicePolicyEnum {
-    Allowed = "Allowed"
-,    Blocked = "Blocked"
-,    Normal = "Normal"
-,    GroupPolicy = "Group policy"
+    Allowed = "Allowed",
+    Blocked = "Blocked",
+    Normal = "Normal",
+    GroupPolicy = "Group policy"
 }
 
 
@@ -192,18 +193,18 @@ export enum ProvisionNetworkClientsRequestBodyPoliciesBySsid2DevicePolicyEnum {
  * The number for the SSID
 **/
 export class ProvisionNetworkClientsRequestBodyPoliciesBySsid2 extends SpeakeasyBase {
-  @Metadata({ data: "json, name=devicePolicy" })
+  @SpeakeasyMetadata({ data: "json, name=devicePolicy" })
   devicePolicy: ProvisionNetworkClientsRequestBodyPoliciesBySsid2DevicePolicyEnum;
 
-  @Metadata({ data: "json, name=groupPolicyId" })
+  @SpeakeasyMetadata({ data: "json, name=groupPolicyId" })
   groupPolicyId?: string;
 }
 
 export enum ProvisionNetworkClientsRequestBodyPoliciesBySsid3DevicePolicyEnum {
-    Allowed = "Allowed"
-,    Blocked = "Blocked"
-,    Normal = "Normal"
-,    GroupPolicy = "Group policy"
+    Allowed = "Allowed",
+    Blocked = "Blocked",
+    Normal = "Normal",
+    GroupPolicy = "Group policy"
 }
 
 
@@ -212,18 +213,18 @@ export enum ProvisionNetworkClientsRequestBodyPoliciesBySsid3DevicePolicyEnum {
  * The number for the SSID
 **/
 export class ProvisionNetworkClientsRequestBodyPoliciesBySsid3 extends SpeakeasyBase {
-  @Metadata({ data: "json, name=devicePolicy" })
+  @SpeakeasyMetadata({ data: "json, name=devicePolicy" })
   devicePolicy: ProvisionNetworkClientsRequestBodyPoliciesBySsid3DevicePolicyEnum;
 
-  @Metadata({ data: "json, name=groupPolicyId" })
+  @SpeakeasyMetadata({ data: "json, name=groupPolicyId" })
   groupPolicyId?: string;
 }
 
 export enum ProvisionNetworkClientsRequestBodyPoliciesBySsid4DevicePolicyEnum {
-    Allowed = "Allowed"
-,    Blocked = "Blocked"
-,    Normal = "Normal"
-,    GroupPolicy = "Group policy"
+    Allowed = "Allowed",
+    Blocked = "Blocked",
+    Normal = "Normal",
+    GroupPolicy = "Group policy"
 }
 
 
@@ -232,18 +233,18 @@ export enum ProvisionNetworkClientsRequestBodyPoliciesBySsid4DevicePolicyEnum {
  * The number for the SSID
 **/
 export class ProvisionNetworkClientsRequestBodyPoliciesBySsid4 extends SpeakeasyBase {
-  @Metadata({ data: "json, name=devicePolicy" })
+  @SpeakeasyMetadata({ data: "json, name=devicePolicy" })
   devicePolicy: ProvisionNetworkClientsRequestBodyPoliciesBySsid4DevicePolicyEnum;
 
-  @Metadata({ data: "json, name=groupPolicyId" })
+  @SpeakeasyMetadata({ data: "json, name=groupPolicyId" })
   groupPolicyId?: string;
 }
 
 export enum ProvisionNetworkClientsRequestBodyPoliciesBySsid5DevicePolicyEnum {
-    Allowed = "Allowed"
-,    Blocked = "Blocked"
-,    Normal = "Normal"
-,    GroupPolicy = "Group policy"
+    Allowed = "Allowed",
+    Blocked = "Blocked",
+    Normal = "Normal",
+    GroupPolicy = "Group policy"
 }
 
 
@@ -252,18 +253,18 @@ export enum ProvisionNetworkClientsRequestBodyPoliciesBySsid5DevicePolicyEnum {
  * The number for the SSID
 **/
 export class ProvisionNetworkClientsRequestBodyPoliciesBySsid5 extends SpeakeasyBase {
-  @Metadata({ data: "json, name=devicePolicy" })
+  @SpeakeasyMetadata({ data: "json, name=devicePolicy" })
   devicePolicy: ProvisionNetworkClientsRequestBodyPoliciesBySsid5DevicePolicyEnum;
 
-  @Metadata({ data: "json, name=groupPolicyId" })
+  @SpeakeasyMetadata({ data: "json, name=groupPolicyId" })
   groupPolicyId?: string;
 }
 
 export enum ProvisionNetworkClientsRequestBodyPoliciesBySsid6DevicePolicyEnum {
-    Allowed = "Allowed"
-,    Blocked = "Blocked"
-,    Normal = "Normal"
-,    GroupPolicy = "Group policy"
+    Allowed = "Allowed",
+    Blocked = "Blocked",
+    Normal = "Normal",
+    GroupPolicy = "Group policy"
 }
 
 
@@ -272,18 +273,18 @@ export enum ProvisionNetworkClientsRequestBodyPoliciesBySsid6DevicePolicyEnum {
  * The number for the SSID
 **/
 export class ProvisionNetworkClientsRequestBodyPoliciesBySsid6 extends SpeakeasyBase {
-  @Metadata({ data: "json, name=devicePolicy" })
+  @SpeakeasyMetadata({ data: "json, name=devicePolicy" })
   devicePolicy: ProvisionNetworkClientsRequestBodyPoliciesBySsid6DevicePolicyEnum;
 
-  @Metadata({ data: "json, name=groupPolicyId" })
+  @SpeakeasyMetadata({ data: "json, name=groupPolicyId" })
   groupPolicyId?: string;
 }
 
 export enum ProvisionNetworkClientsRequestBodyPoliciesBySsid7DevicePolicyEnum {
-    Allowed = "Allowed"
-,    Blocked = "Blocked"
-,    Normal = "Normal"
-,    GroupPolicy = "Group policy"
+    Allowed = "Allowed",
+    Blocked = "Blocked",
+    Normal = "Normal",
+    GroupPolicy = "Group policy"
 }
 
 
@@ -292,18 +293,18 @@ export enum ProvisionNetworkClientsRequestBodyPoliciesBySsid7DevicePolicyEnum {
  * The number for the SSID
 **/
 export class ProvisionNetworkClientsRequestBodyPoliciesBySsid7 extends SpeakeasyBase {
-  @Metadata({ data: "json, name=devicePolicy" })
+  @SpeakeasyMetadata({ data: "json, name=devicePolicy" })
   devicePolicy: ProvisionNetworkClientsRequestBodyPoliciesBySsid7DevicePolicyEnum;
 
-  @Metadata({ data: "json, name=groupPolicyId" })
+  @SpeakeasyMetadata({ data: "json, name=groupPolicyId" })
   groupPolicyId?: string;
 }
 
 export enum ProvisionNetworkClientsRequestBodyPoliciesBySsid8DevicePolicyEnum {
-    Allowed = "Allowed"
-,    Blocked = "Blocked"
-,    Normal = "Normal"
-,    GroupPolicy = "Group policy"
+    Allowed = "Allowed",
+    Blocked = "Blocked",
+    Normal = "Normal",
+    GroupPolicy = "Group policy"
 }
 
 
@@ -312,18 +313,18 @@ export enum ProvisionNetworkClientsRequestBodyPoliciesBySsid8DevicePolicyEnum {
  * The number for the SSID
 **/
 export class ProvisionNetworkClientsRequestBodyPoliciesBySsid8 extends SpeakeasyBase {
-  @Metadata({ data: "json, name=devicePolicy" })
+  @SpeakeasyMetadata({ data: "json, name=devicePolicy" })
   devicePolicy: ProvisionNetworkClientsRequestBodyPoliciesBySsid8DevicePolicyEnum;
 
-  @Metadata({ data: "json, name=groupPolicyId" })
+  @SpeakeasyMetadata({ data: "json, name=groupPolicyId" })
   groupPolicyId?: string;
 }
 
 export enum ProvisionNetworkClientsRequestBodyPoliciesBySsid9DevicePolicyEnum {
-    Allowed = "Allowed"
-,    Blocked = "Blocked"
-,    Normal = "Normal"
-,    GroupPolicy = "Group policy"
+    Allowed = "Allowed",
+    Blocked = "Blocked",
+    Normal = "Normal",
+    GroupPolicy = "Group policy"
 }
 
 
@@ -332,10 +333,10 @@ export enum ProvisionNetworkClientsRequestBodyPoliciesBySsid9DevicePolicyEnum {
  * The number for the SSID
 **/
 export class ProvisionNetworkClientsRequestBodyPoliciesBySsid9 extends SpeakeasyBase {
-  @Metadata({ data: "json, name=devicePolicy" })
+  @SpeakeasyMetadata({ data: "json, name=devicePolicy" })
   devicePolicy: ProvisionNetworkClientsRequestBodyPoliciesBySsid9DevicePolicyEnum;
 
-  @Metadata({ data: "json, name=groupPolicyId" })
+  @SpeakeasyMetadata({ data: "json, name=groupPolicyId" })
   groupPolicyId?: string;
 }
 
@@ -345,87 +346,87 @@ export class ProvisionNetworkClientsRequestBodyPoliciesBySsid9 extends Speakeasy
  * An object, describing the policy-connection associations for each active SSID within the network. Keys should be the number of enabled SSIDs, mapping to an object describing the client's policy
 **/
 export class ProvisionNetworkClientsRequestBodyPoliciesBySsid extends SpeakeasyBase {
-  @Metadata({ data: "json, name=0" })
+  @SpeakeasyMetadata({ data: "json, name=0" })
   zero?: ProvisionNetworkClientsRequestBodyPoliciesBySsid0;
 
-  @Metadata({ data: "json, name=1" })
+  @SpeakeasyMetadata({ data: "json, name=1" })
   one?: ProvisionNetworkClientsRequestBodyPoliciesBySsid1;
 
-  @Metadata({ data: "json, name=10" })
+  @SpeakeasyMetadata({ data: "json, name=10" })
   ten?: ProvisionNetworkClientsRequestBodyPoliciesBySsid10;
 
-  @Metadata({ data: "json, name=11" })
+  @SpeakeasyMetadata({ data: "json, name=11" })
   eleven?: ProvisionNetworkClientsRequestBodyPoliciesBySsid11;
 
-  @Metadata({ data: "json, name=12" })
+  @SpeakeasyMetadata({ data: "json, name=12" })
   twelve?: ProvisionNetworkClientsRequestBodyPoliciesBySsid12;
 
-  @Metadata({ data: "json, name=13" })
+  @SpeakeasyMetadata({ data: "json, name=13" })
   thirteen?: ProvisionNetworkClientsRequestBodyPoliciesBySsid13;
 
-  @Metadata({ data: "json, name=14" })
+  @SpeakeasyMetadata({ data: "json, name=14" })
   fourteen?: ProvisionNetworkClientsRequestBodyPoliciesBySsid14;
 
-  @Metadata({ data: "json, name=2" })
+  @SpeakeasyMetadata({ data: "json, name=2" })
   two?: ProvisionNetworkClientsRequestBodyPoliciesBySsid2;
 
-  @Metadata({ data: "json, name=3" })
+  @SpeakeasyMetadata({ data: "json, name=3" })
   three?: ProvisionNetworkClientsRequestBodyPoliciesBySsid3;
 
-  @Metadata({ data: "json, name=4" })
+  @SpeakeasyMetadata({ data: "json, name=4" })
   four?: ProvisionNetworkClientsRequestBodyPoliciesBySsid4;
 
-  @Metadata({ data: "json, name=5" })
+  @SpeakeasyMetadata({ data: "json, name=5" })
   five?: ProvisionNetworkClientsRequestBodyPoliciesBySsid5;
 
-  @Metadata({ data: "json, name=6" })
+  @SpeakeasyMetadata({ data: "json, name=6" })
   six?: ProvisionNetworkClientsRequestBodyPoliciesBySsid6;
 
-  @Metadata({ data: "json, name=7" })
+  @SpeakeasyMetadata({ data: "json, name=7" })
   seven?: ProvisionNetworkClientsRequestBodyPoliciesBySsid7;
 
-  @Metadata({ data: "json, name=8" })
+  @SpeakeasyMetadata({ data: "json, name=8" })
   eight?: ProvisionNetworkClientsRequestBodyPoliciesBySsid8;
 
-  @Metadata({ data: "json, name=9" })
+  @SpeakeasyMetadata({ data: "json, name=9" })
   nine?: ProvisionNetworkClientsRequestBodyPoliciesBySsid9;
 }
 
 
 export class ProvisionNetworkClientsRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=clients", elemType: operations.ProvisionNetworkClientsRequestBodyClients })
+  @SpeakeasyMetadata({ data: "json, name=clients", elemType: ProvisionNetworkClientsRequestBodyClients })
   clients: ProvisionNetworkClientsRequestBodyClients[];
 
-  @Metadata({ data: "json, name=devicePolicy" })
+  @SpeakeasyMetadata({ data: "json, name=devicePolicy" })
   devicePolicy: ProvisionNetworkClientsRequestBodyDevicePolicyEnum;
 
-  @Metadata({ data: "json, name=groupPolicyId" })
+  @SpeakeasyMetadata({ data: "json, name=groupPolicyId" })
   groupPolicyId?: string;
 
-  @Metadata({ data: "json, name=policiesBySecurityAppliance" })
+  @SpeakeasyMetadata({ data: "json, name=policiesBySecurityAppliance" })
   policiesBySecurityAppliance?: ProvisionNetworkClientsRequestBodyPoliciesBySecurityAppliance;
 
-  @Metadata({ data: "json, name=policiesBySsid" })
+  @SpeakeasyMetadata({ data: "json, name=policiesBySsid" })
   policiesBySsid?: ProvisionNetworkClientsRequestBodyPoliciesBySsid;
 }
 
 
 export class ProvisionNetworkClientsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: ProvisionNetworkClientsPathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: ProvisionNetworkClientsRequestBody;
 }
 
 
 export class ProvisionNetworkClientsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   provisionNetworkClients201ApplicationJsonObject?: Map<string, any>;
 }

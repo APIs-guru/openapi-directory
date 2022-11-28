@@ -18,17 +18,9 @@ type GetV4LayersAsAppliedHeaders struct {
 	XNextToken *string `header:"style=simple,explode=false,name=X-Next-Token"`
 }
 
-type GetV4LayersAsAppliedSecurityOption1 struct {
-	APIKey shared.SchemeAPIKey `security:"scheme,type=apiKey,subtype=header"`
-}
-
-type GetV4LayersAsAppliedSecurityOption2 struct {
-	Oauth2AuthorizationCode shared.SchemeOauth2AuthorizationCode `security:"scheme,type=oauth2"`
-}
-
 type GetV4LayersAsAppliedSecurity struct {
-	Option1 *GetV4LayersAsAppliedSecurityOption1 `security:"option"`
-	Option2 *GetV4LayersAsAppliedSecurityOption2 `security:"option"`
+	APIKey                  *shared.SchemeAPIKey                  `security:"scheme,type=apiKey,subtype=header"`
+	Oauth2AuthorizationCode *shared.SchemeOauth2AuthorizationCode `security:"scheme,type=oauth2"`
 }
 
 type GetV4LayersAsAppliedRequest struct {

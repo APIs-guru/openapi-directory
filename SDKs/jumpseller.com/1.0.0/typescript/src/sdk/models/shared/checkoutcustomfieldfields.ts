@@ -1,41 +1,42 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum CheckoutCustomFieldFieldsAreaEnum {
-    Contact = "contact"
-,    BillingShipping = "billing_shipping"
-,    Other = "other"
+    Contact = "contact",
+    BillingShipping = "billing_shipping",
+    Other = "other"
 }
 
 export enum CheckoutCustomFieldFieldsTypeEnum {
-    Text = "text"
-,    Select = "select"
-,    Input = "input"
-,    Checkbox = "checkbox"
+    Text = "text",
+    Select = "select",
+    Input = "input",
+    Checkbox = "checkbox"
 }
 
 
 export class CheckoutCustomFieldFields extends SpeakeasyBase {
-  @Metadata({ data: "json, name=area" })
+  @SpeakeasyMetadata({ data: "json, name=area" })
   area?: CheckoutCustomFieldFieldsAreaEnum;
 
-  @Metadata({ data: "json, name=custom_field_select_options" })
+  @SpeakeasyMetadata({ data: "json, name=custom_field_select_options" })
   customFieldSelectOptions?: string[];
 
-  @Metadata({ data: "json, name=deletable" })
+  @SpeakeasyMetadata({ data: "json, name=deletable" })
   deletable?: boolean;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: number;
 
-  @Metadata({ data: "json, name=label" })
+  @SpeakeasyMetadata({ data: "json, name=label" })
   label?: string;
 
-  @Metadata({ data: "json, name=position" })
+  @SpeakeasyMetadata({ data: "json, name=position" })
   position?: number;
 
-  @Metadata({ data: "json, name=required" })
+  @SpeakeasyMetadata({ data: "json, name=required" })
   required?: boolean;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: CheckoutCustomFieldFieldsTypeEnum;
 }

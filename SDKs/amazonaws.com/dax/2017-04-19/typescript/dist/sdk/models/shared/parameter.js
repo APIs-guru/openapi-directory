@@ -22,10 +22,10 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ChangeTypeEnum } from "./changetypeenum";
 import { IsModifiableEnum } from "./ismodifiableenum";
+import { NodeTypeSpecificValue } from "./nodetypespecificvalue";
 import { ParameterTypeEnum } from "./parametertypeenum";
 // Parameter
 /**
@@ -37,43 +37,43 @@ var Parameter = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=AllowedValues" }),
+        SpeakeasyMetadata({ data: "json, name=AllowedValues" }),
         __metadata("design:type", String)
     ], Parameter.prototype, "allowedValues", void 0);
     __decorate([
-        Metadata({ data: "json, name=ChangeType" }),
+        SpeakeasyMetadata({ data: "json, name=ChangeType" }),
         __metadata("design:type", String)
     ], Parameter.prototype, "changeType", void 0);
     __decorate([
-        Metadata({ data: "json, name=DataType" }),
+        SpeakeasyMetadata({ data: "json, name=DataType" }),
         __metadata("design:type", String)
     ], Parameter.prototype, "dataType", void 0);
     __decorate([
-        Metadata({ data: "json, name=Description" }),
+        SpeakeasyMetadata({ data: "json, name=Description" }),
         __metadata("design:type", String)
     ], Parameter.prototype, "description", void 0);
     __decorate([
-        Metadata({ data: "json, name=IsModifiable" }),
+        SpeakeasyMetadata({ data: "json, name=IsModifiable" }),
         __metadata("design:type", String)
     ], Parameter.prototype, "isModifiable", void 0);
     __decorate([
-        Metadata({ data: "json, name=NodeTypeSpecificValues", elemType: shared.NodeTypeSpecificValue }),
+        SpeakeasyMetadata({ data: "json, name=NodeTypeSpecificValues", elemType: NodeTypeSpecificValue }),
         __metadata("design:type", Array)
     ], Parameter.prototype, "nodeTypeSpecificValues", void 0);
     __decorate([
-        Metadata({ data: "json, name=ParameterName" }),
+        SpeakeasyMetadata({ data: "json, name=ParameterName" }),
         __metadata("design:type", String)
     ], Parameter.prototype, "parameterName", void 0);
     __decorate([
-        Metadata({ data: "json, name=ParameterType" }),
+        SpeakeasyMetadata({ data: "json, name=ParameterType" }),
         __metadata("design:type", String)
     ], Parameter.prototype, "parameterType", void 0);
     __decorate([
-        Metadata({ data: "json, name=ParameterValue" }),
+        SpeakeasyMetadata({ data: "json, name=ParameterValue" }),
         __metadata("design:type", String)
     ], Parameter.prototype, "parameterValue", void 0);
     __decorate([
-        Metadata({ data: "json, name=Source" }),
+        SpeakeasyMetadata({ data: "json, name=Source" }),
         __metadata("design:type", String)
     ], Parameter.prototype, "source", void 0);
     return Parameter;

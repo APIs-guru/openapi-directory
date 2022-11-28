@@ -14,6 +14,8 @@ type CreateWorldTemplateHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// CreateWorldTemplateRequestBodyTemplateLocation
+// Information about a template location.
 type CreateWorldTemplateRequestBodyTemplateLocation struct {
 	S3Bucket *string `json:"s3Bucket,omitempty"`
 	S3Key    *string `json:"s3Key,omitempty"`

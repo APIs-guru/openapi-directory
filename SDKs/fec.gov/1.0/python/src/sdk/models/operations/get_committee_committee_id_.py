@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class GetCommitteeCommitteeIDPathParams:
-    committee_id: str = field(default=None, metadata={'path_param': { 'field_name': 'committee_id', 'style': 'simple', 'explode': False }})
+    committee_id: str = field(metadata={'path_param': { 'field_name': 'committee_id', 'style': 'simple', 'explode': False }})
     
 class GetCommitteeCommitteeIDCommitteeTypeEnum(str, Enum):
     UNKNOWN = ""
@@ -58,7 +59,7 @@ class GetCommitteeCommitteeIDOrganizationTypeEnum(str, Enum):
 
 @dataclass
 class GetCommitteeCommitteeIDQueryParams:
-    api_key: str = field(default=None, metadata={'query_param': { 'field_name': 'api_key', 'style': 'form', 'explode': True }})
+    api_key: str = field(metadata={'query_param': { 'field_name': 'api_key', 'style': 'form', 'explode': True }})
     committee_type: Optional[List[GetCommitteeCommitteeIDCommitteeTypeEnum]] = field(default=None, metadata={'query_param': { 'field_name': 'committee_type', 'style': 'form', 'explode': True }})
     cycle: Optional[List[int]] = field(default=None, metadata={'query_param': { 'field_name': 'cycle', 'style': 'form', 'explode': True }})
     designation: Optional[List[GetCommitteeCommitteeIDDesignationEnum]] = field(default=None, metadata={'query_param': { 'field_name': 'designation', 'style': 'form', 'explode': True }})
@@ -75,13 +76,13 @@ class GetCommitteeCommitteeIDQueryParams:
 
 @dataclass
 class GetCommitteeCommitteeIDRequest:
-    path_params: GetCommitteeCommitteeIDPathParams = field(default=None)
-    query_params: GetCommitteeCommitteeIDQueryParams = field(default=None)
+    path_params: GetCommitteeCommitteeIDPathParams = field()
+    query_params: GetCommitteeCommitteeIDQueryParams = field()
     
 
 @dataclass
 class GetCommitteeCommitteeIDResponse:
+    content_type: str = field()
+    status_code: int = field()
     committee_detail_page: Optional[shared.CommitteeDetailPage] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

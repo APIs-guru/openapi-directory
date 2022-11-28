@@ -1,10 +1,15 @@
 from dataclasses import dataclass, field
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass_json
 @dataclass
 class CreateXSSMatchSetRequest:
-    change_token: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ChangeToken' }})
-    name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Name' }})
+    r"""CreateXSSMatchSetRequest
+    A request to create an <a>XssMatchSet</a>.
+    """
+    
+    change_token: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('ChangeToken') }})
+    name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Name') }})
     

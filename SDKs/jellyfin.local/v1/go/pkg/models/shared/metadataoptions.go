@@ -1,5 +1,7 @@
 package shared
 
+// MetadataOptions
+// Class MetadataOptions.
 type MetadataOptions struct {
 	DisabledImageFetchers    []string `json:"DisabledImageFetchers,omitempty"`
 	DisabledMetadataFetchers []string `json:"DisabledMetadataFetchers,omitempty"`

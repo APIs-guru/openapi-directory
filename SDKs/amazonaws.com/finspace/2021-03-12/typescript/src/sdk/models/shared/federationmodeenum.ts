@@ -1,6 +1,7 @@
 
 
+
 export enum FederationModeEnum {
-    Federated = "FEDERATED"
-,    Local = "LOCAL"
+    Federated = "FEDERATED",
+    Local = "LOCAL"
 }

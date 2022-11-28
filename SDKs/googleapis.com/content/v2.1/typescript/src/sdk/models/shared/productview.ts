@@ -1,76 +1,76 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Date } from "./date";
 import { ProductViewItemIssue } from "./productviewitemissue";
 
+
 export enum ProductViewAggregatedDestinationStatusEnum {
-    AggregatedStatusUnspecified = "AGGREGATED_STATUS_UNSPECIFIED"
-,    NotEligibleOrDisapproved = "NOT_ELIGIBLE_OR_DISAPPROVED"
-,    Pending = "PENDING"
-,    EligibleLimited = "ELIGIBLE_LIMITED"
-,    Eligible = "ELIGIBLE"
+    AggregatedStatusUnspecified = "AGGREGATED_STATUS_UNSPECIFIED",
+    NotEligibleOrDisapproved = "NOT_ELIGIBLE_OR_DISAPPROVED",
+    Pending = "PENDING",
+    EligibleLimited = "ELIGIBLE_LIMITED",
+    Eligible = "ELIGIBLE"
 }
 
 export enum ProductViewChannelEnum {
-    ChannelUnspecified = "CHANNEL_UNSPECIFIED"
-,    Local = "LOCAL"
-,    Online = "ONLINE"
+    ChannelUnspecified = "CHANNEL_UNSPECIFIED",
+    Local = "LOCAL",
+    Online = "ONLINE"
 }
 
 
 // ProductView
 /** 
- * Product fields. Values are only set for fields requested explicitly in the request's search query.
+ * Product fields. Values are only set for fields requested explicitly in the request's search query. Available only to selected merchants. Submit the [interest form](https://forms.gle/7Uy8htzAN8oNokz9A) to request access.
 **/
 export class ProductView extends SpeakeasyBase {
-  @Metadata({ data: "json, name=aggregatedDestinationStatus" })
+  @SpeakeasyMetadata({ data: "json, name=aggregatedDestinationStatus" })
   aggregatedDestinationStatus?: ProductViewAggregatedDestinationStatusEnum;
 
-  @Metadata({ data: "json, name=availability" })
+  @SpeakeasyMetadata({ data: "json, name=availability" })
   availability?: string;
 
-  @Metadata({ data: "json, name=brand" })
+  @SpeakeasyMetadata({ data: "json, name=brand" })
   brand?: string;
 
-  @Metadata({ data: "json, name=channel" })
+  @SpeakeasyMetadata({ data: "json, name=channel" })
   channel?: ProductViewChannelEnum;
 
-  @Metadata({ data: "json, name=condition" })
+  @SpeakeasyMetadata({ data: "json, name=condition" })
   condition?: string;
 
-  @Metadata({ data: "json, name=creationTime" })
+  @SpeakeasyMetadata({ data: "json, name=creationTime" })
   creationTime?: string;
 
-  @Metadata({ data: "json, name=currencyCode" })
+  @SpeakeasyMetadata({ data: "json, name=currencyCode" })
   currencyCode?: string;
 
-  @Metadata({ data: "json, name=expirationDate" })
+  @SpeakeasyMetadata({ data: "json, name=expirationDate" })
   expirationDate?: Date;
 
-  @Metadata({ data: "json, name=gtin" })
+  @SpeakeasyMetadata({ data: "json, name=gtin" })
   gtin?: string[];
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=itemGroupId" })
+  @SpeakeasyMetadata({ data: "json, name=itemGroupId" })
   itemGroupId?: string;
 
-  @Metadata({ data: "json, name=itemIssues", elemType: shared.ProductViewItemIssue })
+  @SpeakeasyMetadata({ data: "json, name=itemIssues", elemType: ProductViewItemIssue })
   itemIssues?: ProductViewItemIssue[];
 
-  @Metadata({ data: "json, name=languageCode" })
+  @SpeakeasyMetadata({ data: "json, name=languageCode" })
   languageCode?: string;
 
-  @Metadata({ data: "json, name=offerId" })
+  @SpeakeasyMetadata({ data: "json, name=offerId" })
   offerId?: string;
 
-  @Metadata({ data: "json, name=priceMicros" })
+  @SpeakeasyMetadata({ data: "json, name=priceMicros" })
   priceMicros?: string;
 
-  @Metadata({ data: "json, name=shippingLabel" })
+  @SpeakeasyMetadata({ data: "json, name=shippingLabel" })
   shippingLabel?: string;
 
-  @Metadata({ data: "json, name=title" })
+  @SpeakeasyMetadata({ data: "json, name=title" })
   title?: string;
 }

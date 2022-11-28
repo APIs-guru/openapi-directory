@@ -1,10 +1,13 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Optional
 
 
 @dataclass
 class CreateStreamingDistributionWithTags20171030QueryParams:
-    with_tags: bool = field(default=None, metadata={'query_param': { 'field_name': 'WithTags', 'style': 'form', 'explode': True }})
+    with_tags: bool = field(metadata={'query_param': { 'field_name': 'WithTags', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -20,14 +23,14 @@ class CreateStreamingDistributionWithTags20171030Headers:
 
 @dataclass
 class CreateStreamingDistributionWithTags20171030Request:
-    query_params: CreateStreamingDistributionWithTags20171030QueryParams = field(default=None)
-    headers: CreateStreamingDistributionWithTags20171030Headers = field(default=None)
-    request: bytes = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
+    headers: CreateStreamingDistributionWithTags20171030Headers = field()
+    query_params: CreateStreamingDistributionWithTags20171030QueryParams = field()
+    request: bytes = field(metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class CreateStreamingDistributionWithTags20171030Response:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

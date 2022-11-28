@@ -1,8 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import metricvalue
-from . import rowdimensions
+from sdk import utils
+from . import *
 
 class NonBillableWinningBidStatusRowStatusEnum(str, Enum):
     STATUS_UNSPECIFIED = "STATUS_UNSPECIFIED"
@@ -15,7 +16,11 @@ class NonBillableWinningBidStatusRowStatusEnum(str, Enum):
 @dataclass_json
 @dataclass
 class NonBillableWinningBidStatusRow:
-    bid_count: Optional[metricvalue.MetricValue] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'bidCount' }})
-    row_dimensions: Optional[rowdimensions.RowDimensions] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'rowDimensions' }})
-    status: Optional[NonBillableWinningBidStatusRowStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+    r"""NonBillableWinningBidStatusRow
+    The number of winning bids with the specified dimension values for which the buyer was not billed, as described by the specified status.
+    """
+    
+    bid_count: Optional[MetricValue] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('bidCount') }})
+    row_dimensions: Optional[RowDimensions] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('rowDimensions') }})
+    status: Optional[NonBillableWinningBidStatusRowStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('status') }})
     

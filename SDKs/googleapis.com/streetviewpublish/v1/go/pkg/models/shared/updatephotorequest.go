@@ -1,6 +1,8 @@
 package shared
 
-type UpdatePhotoRequest struct {
-	Photo      *Photo  `json:"photo,omitempty"`
-	UpdateMask *string `json:"updateMask,omitempty"`
+// UpdatePhotoRequestInput
+// Request to update the metadata of a Photo. Updating the pixels of a photo is not supported.
+type UpdatePhotoRequestInput struct {
+	Photo      *PhotoInput `json:"photo,omitempty"`
+	UpdateMask *string     `json:"updateMask,omitempty"`
 }

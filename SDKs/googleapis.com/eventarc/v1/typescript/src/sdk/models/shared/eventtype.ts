@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { FilteringAttribute } from "./filteringattribute";
+
 
 
 // EventType
@@ -8,15 +8,15 @@ import { FilteringAttribute } from "./filteringattribute";
  * A representation of the event type resource.
 **/
 export class EventType extends SpeakeasyBase {
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=eventSchemaUri" })
+  @SpeakeasyMetadata({ data: "json, name=eventSchemaUri" })
   eventSchemaUri?: string;
 
-  @Metadata({ data: "json, name=filteringAttributes", elemType: shared.FilteringAttribute })
+  @SpeakeasyMetadata({ data: "json, name=filteringAttributes", elemType: FilteringAttribute })
   filteringAttributes?: FilteringAttribute[];
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: string;
 }

@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class WorkloadImprovementStatusEnum(str, Enum):
     NOT_APPLICABLE = "NOT_APPLICABLE"

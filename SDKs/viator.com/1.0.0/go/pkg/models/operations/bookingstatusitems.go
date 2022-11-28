@@ -8,6 +8,8 @@ type BookingStatusItemsHeaders struct {
 	AcceptLanguage string `header:"style=simple,explode=false,name=Accept-Language"`
 }
 
+// BookingStatusItemsRequestBody
+// **note**: all items are optional, but at least one needs to be included
 type BookingStatusItemsRequestBody struct {
 	BookingDateFrom     *string  `json:"bookingDateFrom,omitempty"`
 	BookingDateTo       *string  `json:"bookingDateTo,omitempty"`
@@ -17,11 +19,6 @@ type BookingStatusItemsRequestBody struct {
 	LeadFirstName       *string  `json:"leadFirstName,omitempty"`
 	LeadSurname         *string  `json:"leadSurname,omitempty"`
 	Test                *bool    `json:"test,omitempty"`
-}
-
-type BookingStatusItemsRequest struct {
-	Headers BookingStatusItemsHeaders
-	Request *BookingStatusItemsRequestBody `request:"mediaType=application/json"`
 }
 
 type BookingStatusItems200ApplicationJSONData struct {
@@ -44,6 +41,11 @@ type BookingStatusItems200ApplicationJSON struct {
 	Success          *bool                                      `json:"success,omitempty"`
 	TotalCount       *int64                                     `json:"totalCount,omitempty"`
 	Vmid             *string                                    `json:"vmid,omitempty"`
+}
+
+type BookingStatusItemsRequest struct {
+	Headers BookingStatusItemsHeaders
+	Request *BookingStatusItemsRequestBody `request:"mediaType=application/json"`
 }
 
 type BookingStatusItemsResponse struct {

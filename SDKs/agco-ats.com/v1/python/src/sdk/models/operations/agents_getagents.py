@@ -11,13 +11,13 @@ class AgentsGetAgentsQueryParams:
 
 @dataclass
 class AgentsGetAgentsRequest:
-    query_params: AgentsGetAgentsQueryParams = field(default=None)
+    query_params: AgentsGetAgentsQueryParams = field()
     
 
 @dataclass
 class AgentsGetAgentsResponse:
+    content_type: str = field()
+    status_code: int = field()
     api_models_api_error: Optional[shared.APIModelsAPIError] = field(default=None)
     api_paged_response_build_system_shared_dto_agent_: Optional[shared.APIPagedResponseBuildSystemSharedDtoAgent] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

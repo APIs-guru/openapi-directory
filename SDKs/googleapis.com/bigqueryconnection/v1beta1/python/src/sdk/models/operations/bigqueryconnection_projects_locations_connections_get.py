@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class BigqueryconnectionProjectsLocationsConnectionsGetPathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,14 +26,14 @@ class BigqueryconnectionProjectsLocationsConnectionsGetQueryParams:
 
 @dataclass
 class BigqueryconnectionProjectsLocationsConnectionsGetSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class BigqueryconnectionProjectsLocationsConnectionsGetSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -43,14 +44,14 @@ class BigqueryconnectionProjectsLocationsConnectionsGetSecurity:
 
 @dataclass
 class BigqueryconnectionProjectsLocationsConnectionsGetRequest:
-    path_params: BigqueryconnectionProjectsLocationsConnectionsGetPathParams = field(default=None)
-    query_params: BigqueryconnectionProjectsLocationsConnectionsGetQueryParams = field(default=None)
-    security: BigqueryconnectionProjectsLocationsConnectionsGetSecurity = field(default=None)
+    path_params: BigqueryconnectionProjectsLocationsConnectionsGetPathParams = field()
+    query_params: BigqueryconnectionProjectsLocationsConnectionsGetQueryParams = field()
+    security: BigqueryconnectionProjectsLocationsConnectionsGetSecurity = field()
     
 
 @dataclass
 class BigqueryconnectionProjectsLocationsConnectionsGetResponse:
+    content_type: str = field()
+    status_code: int = field()
     connection: Optional[shared.Connection] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { PlanData } from "./plandata";
 export declare class ApiUsage extends SpeakeasyBase {
     endsAt?: Date;

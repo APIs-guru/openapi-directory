@@ -1,8 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { LocationIdSet } from "./locationidset";
 import { Price } from "./price";
 import { Weight } from "./weight";
+
 
 
 // Headers
@@ -10,18 +10,18 @@ import { Weight } from "./weight";
  * A non-empty list of row or column headers for a table. Exactly one of `prices`, `weights`, `numItems`, `postalCodeGroupNames`, or `location` must be set.
 **/
 export class Headers extends SpeakeasyBase {
-  @Metadata({ data: "json, name=locations", elemType: shared.LocationIdSet })
+  @SpeakeasyMetadata({ data: "json, name=locations", elemType: LocationIdSet })
   locations?: LocationIdSet[];
 
-  @Metadata({ data: "json, name=numberOfItems" })
+  @SpeakeasyMetadata({ data: "json, name=numberOfItems" })
   numberOfItems?: string[];
 
-  @Metadata({ data: "json, name=postalCodeGroupNames" })
+  @SpeakeasyMetadata({ data: "json, name=postalCodeGroupNames" })
   postalCodeGroupNames?: string[];
 
-  @Metadata({ data: "json, name=prices", elemType: shared.Price })
+  @SpeakeasyMetadata({ data: "json, name=prices", elemType: Price })
   prices?: Price[];
 
-  @Metadata({ data: "json, name=weights", elemType: shared.Weight })
+  @SpeakeasyMetadata({ data: "json, name=weights", elemType: Weight })
   weights?: Weight[];
 }

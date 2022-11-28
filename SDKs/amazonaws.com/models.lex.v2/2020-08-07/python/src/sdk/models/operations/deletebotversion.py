@@ -1,12 +1,15 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class DeleteBotVersionPathParams:
-    bot_id: str = field(default=None, metadata={'path_param': { 'field_name': 'botId', 'style': 'simple', 'explode': False }})
-    bot_version: str = field(default=None, metadata={'path_param': { 'field_name': 'botVersion', 'style': 'simple', 'explode': False }})
+    bot_id: str = field(metadata={'path_param': { 'field_name': 'botId', 'style': 'simple', 'explode': False }})
+    bot_version: str = field(metadata={'path_param': { 'field_name': 'botVersion', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -27,20 +30,20 @@ class DeleteBotVersionHeaders:
 
 @dataclass
 class DeleteBotVersionRequest:
-    path_params: DeleteBotVersionPathParams = field(default=None)
-    query_params: DeleteBotVersionQueryParams = field(default=None)
-    headers: DeleteBotVersionHeaders = field(default=None)
+    headers: DeleteBotVersionHeaders = field()
+    path_params: DeleteBotVersionPathParams = field()
+    query_params: DeleteBotVersionQueryParams = field()
     
 
 @dataclass
 class DeleteBotVersionResponse:
+    content_type: str = field()
+    status_code: int = field()
     conflict_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     delete_bot_version_response: Optional[shared.DeleteBotVersionResponse] = field(default=None)
     internal_server_exception: Optional[Any] = field(default=None)
     precondition_failed_exception: Optional[Any] = field(default=None)
     service_quota_exceeded_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     validation_exception: Optional[Any] = field(default=None)
     

@@ -5,7 +5,7 @@ import (
 	"time"
 )
 
-var ListFaxServers = []string{
+var ListFaxServerList = []string{
 	"https://fax.twilio.com",
 }
 
@@ -21,12 +21,6 @@ type ListFaxSecurity struct {
 	AccountSidAuthToken shared.SchemeAccountSidAuthToken `security:"scheme,type=http,subtype=basic"`
 }
 
-type ListFaxRequest struct {
-	ServerURL   *string
-	QueryParams ListFaxQueryParams
-	Security    ListFaxSecurity
-}
-
 type ListFaxListFaxResponseMeta struct {
 	FirstPageURL    *string `json:"first_page_url,omitempty"`
 	Key             *string `json:"key,omitempty"`
@@ -40,6 +34,12 @@ type ListFaxListFaxResponseMeta struct {
 type ListFaxListFaxResponse struct {
 	Faxes []shared.FaxV1Fax           `json:"faxes,omitempty"`
 	Meta  *ListFaxListFaxResponseMeta `json:"meta,omitempty"`
+}
+
+type ListFaxRequest struct {
+	ServerURL   *string
+	QueryParams ListFaxQueryParams
+	Security    ListFaxSecurity
 }
 
 type ListFaxResponse struct {

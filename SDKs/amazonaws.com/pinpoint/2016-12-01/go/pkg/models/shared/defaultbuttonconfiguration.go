@@ -1,5 +1,7 @@
 package shared
 
+// DefaultButtonConfiguration
+// Default button configuration.
 type DefaultButtonConfiguration struct {
 	BackgroundColor *string          `json:"BackgroundColor,omitempty"`
 	BorderRadius    *int64           `json:"BorderRadius,omitempty"`

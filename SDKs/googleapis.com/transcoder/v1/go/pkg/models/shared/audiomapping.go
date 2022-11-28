@@ -1,5 +1,7 @@
 package shared
 
+// AudioMapping
+// The mapping for the `Job.edit_list` atoms with audio `EditAtom.inputs`.
 type AudioMapping struct {
 	AtomKey       *string  `json:"atomKey,omitempty"`
 	GainDb        *float64 `json:"gainDb,omitempty"`

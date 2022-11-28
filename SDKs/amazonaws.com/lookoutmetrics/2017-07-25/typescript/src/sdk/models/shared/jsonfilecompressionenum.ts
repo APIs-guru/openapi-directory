@@ -1,6 +1,7 @@
 
 
+
 export enum JsonFileCompressionEnum {
-    None = "NONE"
-,    Gzip = "GZIP"
+    None = "NONE",
+    Gzip = "GZIP"
 }

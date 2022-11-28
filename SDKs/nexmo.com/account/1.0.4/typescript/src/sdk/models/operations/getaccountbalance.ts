@@ -1,42 +1,42 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
-export const GETACCOUNTBALANCE_SERVERS = [
-	"https://rest.nexmo.com",
-];
 
+export const GetAccountBalanceServerList = [
+	"https://rest.nexmo.com",
+] as const;
 
 
 export class GetAccountBalanceQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=api_key" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=api_key" })
   apiKey: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=api_secret" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=api_secret" })
   apiSecret: string;
 }
 
 
 export class GetAccountBalanceRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   serverUrl?: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetAccountBalanceQueryParams;
 }
 
 
 export class GetAccountBalanceResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   errorAuthenticationFailedAccountBalance?: shared.ErrorAuthenticationFailedAccountBalance;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   accountBalance?: shared.AccountBalance;
 }

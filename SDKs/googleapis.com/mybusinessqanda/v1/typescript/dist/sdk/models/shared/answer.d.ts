@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { Author } from "./author";
 /**
  * Represents an answer to a question
@@ -10,4 +10,11 @@ export declare class Answer extends SpeakeasyBase {
     text?: string;
     updateTime?: string;
     upvoteCount?: number;
+}
+/**
+ * Represents an answer to a question
+**/
+export declare class AnswerInput extends SpeakeasyBase {
+    author?: Author;
+    text?: string;
 }

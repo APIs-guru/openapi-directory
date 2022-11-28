@@ -5,17 +5,17 @@ from sdk.models import shared
 
 @dataclass
 class FindAllDataExportersSecurity:
-    otoroshi_auth: shared.SchemeOtoroshiAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'basic' }})
+    otoroshi_auth: shared.SchemeOtoroshiAuth = field(metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'basic' }})
     
 
 @dataclass
 class FindAllDataExportersRequest:
-    security: FindAllDataExportersSecurity = field(default=None)
+    security: FindAllDataExportersSecurity = field()
     
 
 @dataclass
 class FindAllDataExportersResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     data_exporter_configs: Optional[List[shared.DataExporterConfig]] = field(default=None)
-    status_code: int = field(default=None)
     

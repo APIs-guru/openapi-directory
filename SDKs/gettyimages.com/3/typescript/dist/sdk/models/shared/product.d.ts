@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { DownloadRequirements } from "./downloadrequirements";
 import { OverageDetails } from "./overagedetails";
 import { ProductStatusEnum } from "./productstatusenum";

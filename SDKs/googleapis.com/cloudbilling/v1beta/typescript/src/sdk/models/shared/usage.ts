@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { UsageRateTimeline } from "./usageratetimeline";
+
 
 
 // Usage
@@ -7,6 +8,6 @@ import { UsageRateTimeline } from "./usageratetimeline";
  * An amount of usage over a time frame.
 **/
 export class Usage extends SpeakeasyBase {
-  @Metadata({ data: "json, name=usageRateTimeline" })
+  @SpeakeasyMetadata({ data: "json, name=usageRateTimeline" })
   usageRateTimeline?: UsageRateTimeline;
 }

@@ -1,5 +1,7 @@
 package shared
 
+// BatchWriteOperationResponse
+// Represents the output of a <code>BatchWrite</code> response operation.
 type BatchWriteOperationResponse struct {
 	AddFacetToObject       map[string]interface{}               `json:"AddFacetToObject,omitempty"`
 	AttachObject           *BatchAttachObjectResponse           `json:"AttachObject,omitempty"`

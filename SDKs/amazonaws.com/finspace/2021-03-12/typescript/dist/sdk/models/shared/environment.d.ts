@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { FederationModeEnum } from "./federationmodeenum";
 import { FederationParameters } from "./federationparameters";
 import { EnvironmentStatusEnum } from "./environmentstatusenum";

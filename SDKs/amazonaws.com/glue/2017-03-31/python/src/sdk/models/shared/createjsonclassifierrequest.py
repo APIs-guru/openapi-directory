@@ -1,10 +1,15 @@
 from dataclasses import dataclass, field
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass_json
 @dataclass
 class CreateJSONClassifierRequest:
-    json_path: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'JsonPath' }})
-    name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Name' }})
+    r"""CreateJSONClassifierRequest
+    Specifies a JSON classifier for <code>CreateClassifier</code> to create.
+    """
+    
+    json_path: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('JsonPath') }})
+    name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Name') }})
     

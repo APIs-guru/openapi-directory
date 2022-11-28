@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 /**
  * Encapsulates an *App Check token*, which are used to access Firebase services protected by App Check.
 **/

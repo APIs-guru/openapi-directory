@@ -1,12 +1,16 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DisplayvideoAdvertisersManualTriggersPatchPathParams:
-    advertiser_id: str = field(default=None, metadata={'path_param': { 'field_name': 'advertiserId', 'style': 'simple', 'explode': False }})
-    trigger_id: str = field(default=None, metadata={'path_param': { 'field_name': 'triggerId', 'style': 'simple', 'explode': False }})
+    advertiser_id: str = field(metadata={'path_param': { 'field_name': 'advertiserId', 'style': 'simple', 'explode': False }})
+    trigger_id: str = field(metadata={'path_param': { 'field_name': 'triggerId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -27,21 +31,21 @@ class DisplayvideoAdvertisersManualTriggersPatchQueryParams:
 
 @dataclass
 class DisplayvideoAdvertisersManualTriggersPatchSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DisplayvideoAdvertisersManualTriggersPatchRequest:
-    path_params: DisplayvideoAdvertisersManualTriggersPatchPathParams = field(default=None)
-    query_params: DisplayvideoAdvertisersManualTriggersPatchQueryParams = field(default=None)
-    request: Optional[shared.ManualTrigger] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: DisplayvideoAdvertisersManualTriggersPatchSecurity = field(default=None)
+    path_params: DisplayvideoAdvertisersManualTriggersPatchPathParams = field()
+    query_params: DisplayvideoAdvertisersManualTriggersPatchQueryParams = field()
+    security: DisplayvideoAdvertisersManualTriggersPatchSecurity = field()
+    request: Optional[shared.ManualTriggerInput] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class DisplayvideoAdvertisersManualTriggersPatchResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     manual_trigger: Optional[shared.ManualTrigger] = field(default=None)
-    status_code: int = field(default=None)
     

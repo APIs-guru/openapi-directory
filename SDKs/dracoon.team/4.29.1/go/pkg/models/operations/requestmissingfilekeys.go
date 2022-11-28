@@ -22,9 +22,9 @@ type RequestMissingFileKeysRequest struct {
 	Headers     RequestMissingFileKeysHeaders
 }
 
-type RequestMissingFileKeysResponse struct {
+type RequestMissingFileKeysResponseOutput struct {
 	ContentType         string
 	ErrorResponse       *shared.ErrorResponse
-	MissingKeysResponse *shared.MissingKeysResponse
+	MissingKeysResponse *shared.MissingKeysResponseOutput
 	StatusCode          int64
 }

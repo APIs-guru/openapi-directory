@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // TopicPartitions
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Response for GetTopicPartitions.
 **/
 export class TopicPartitions extends SpeakeasyBase {
-  @Metadata({ data: "json, name=partitionCount" })
+  @SpeakeasyMetadata({ data: "json, name=partitionCount" })
   partitionCount?: string;
 }

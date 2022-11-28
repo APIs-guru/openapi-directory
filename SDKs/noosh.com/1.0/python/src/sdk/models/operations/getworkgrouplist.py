@@ -10,14 +10,14 @@ class GetWorkgroupListQueryParams:
 
 @dataclass
 class GetWorkgroupListRequest:
-    query_params: GetWorkgroupListQueryParams = field(default=None)
+    query_params: GetWorkgroupListQueryParams = field()
     
 
 @dataclass
 class GetWorkgroupListResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     http_status_vo: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     workgroup_list_vo: Optional[Any] = field(default=None)
     

@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// TeamDriveBackgroundImageFile
+// An image file and cropping parameters from which a background image for this Team Drive is set. This is a write only field; it can only be set on drive.teamdrives.update requests that don't set themeId. When specified, all fields of the backgroundImageFile must be set.
 type TeamDriveBackgroundImageFile struct {
 	ID          *string  `json:"id,omitempty"`
 	Width       *float32 `json:"width,omitempty"`
@@ -11,6 +13,8 @@ type TeamDriveBackgroundImageFile struct {
 	YCoordinate *float32 `json:"yCoordinate,omitempty"`
 }
 
+// TeamDriveCapabilities
+// Capabilities the current user has on this Team Drive.
 type TeamDriveCapabilities struct {
 	CanAddChildren                                   *bool `json:"canAddChildren,omitempty"`
 	CanChangeCopyRequiresWriterPermissionRestriction *bool `json:"canChangeCopyRequiresWriterPermissionRestriction,omitempty"`
@@ -34,6 +38,8 @@ type TeamDriveCapabilities struct {
 	CanTrashChildren                                 *bool `json:"canTrashChildren,omitempty"`
 }
 
+// TeamDriveRestrictions
+// A set of restrictions that apply to this Team Drive or items inside this Team Drive.
 type TeamDriveRestrictions struct {
 	AdminManagedRestrictions     *bool `json:"adminManagedRestrictions,omitempty"`
 	CopyRequiresWriterPermission *bool `json:"copyRequiresWriterPermission,omitempty"`
@@ -41,6 +47,8 @@ type TeamDriveRestrictions struct {
 	TeamMembersOnly              *bool `json:"teamMembersOnly,omitempty"`
 }
 
+// TeamDrive
+// Deprecated: use the drive collection instead.
 type TeamDrive struct {
 	BackgroundImageFile *TeamDriveBackgroundImageFile `json:"backgroundImageFile,omitempty"`
 	BackgroundImageLink *string                       `json:"backgroundImageLink,omitempty"`

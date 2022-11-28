@@ -1,50 +1,51 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class TrainRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "multipart_form, name=algorithm" })
+  @SpeakeasyMetadata({ data: "multipart_form, name=algorithm" })
   algorithm?: string;
 
-  @Metadata({ data: "multipart_form, name=datasetId" })
+  @SpeakeasyMetadata({ data: "multipart_form, name=datasetId" })
   datasetId?: number;
 
-  @Metadata({ data: "multipart_form, name=epochs" })
+  @SpeakeasyMetadata({ data: "multipart_form, name=epochs" })
   epochs?: number;
 
-  @Metadata({ data: "multipart_form, name=learningRate" })
+  @SpeakeasyMetadata({ data: "multipart_form, name=learningRate" })
   learningRate?: number;
 
-  @Metadata({ data: "multipart_form, name=name" })
+  @SpeakeasyMetadata({ data: "multipart_form, name=name" })
   name?: string;
 
-  @Metadata({ data: "multipart_form, name=trainParams;json=true" })
+  @SpeakeasyMetadata({ data: "multipart_form, name=trainParams;json=true" })
   trainParams?: shared.V2LanguageTrainParams;
 }
 
 
 export class TrainSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=bearer" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" })
   bearerToken: shared.SchemeBearerToken;
 }
 
 
 export class TrainRequest extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=multipart/form-data" })
+  @SpeakeasyMetadata({ data: "request, media_type=multipart/form-data" })
   request?: TrainRequestBody;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: TrainSecurity;
 }
 
 
 export class TrainResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   trainResponse?: shared.TrainResponse;
 }

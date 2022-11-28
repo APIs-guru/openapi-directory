@@ -1,28 +1,29 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class OrgOptions extends SpeakeasyBase {
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=expiration_assets_offline" })
+  @SpeakeasyMetadata({ data: "json, name=expiration_assets_offline" })
   expirationAssetsOffline?: string;
 
-  @Metadata({ data: "json, name=expiration_assets_stale" })
+  @SpeakeasyMetadata({ data: "json, name=expiration_assets_stale" })
   expirationAssetsStale?: string;
 
-  @Metadata({ data: "json, name=expiration_scans" })
+  @SpeakeasyMetadata({ data: "json, name=expiration_scans" })
   expirationScans?: string;
 
-  @Metadata({ data: "json, name=export_token" })
+  @SpeakeasyMetadata({ data: "json, name=export_token" })
   exportToken?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=parent_id" })
+  @SpeakeasyMetadata({ data: "json, name=parent_id" })
   parentId?: string;
 
-  @Metadata({ data: "json, name=project" })
+  @SpeakeasyMetadata({ data: "json, name=project" })
   project?: string;
 }

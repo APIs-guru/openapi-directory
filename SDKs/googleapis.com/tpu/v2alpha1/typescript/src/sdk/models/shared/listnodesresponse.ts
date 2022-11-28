@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Node } from "./node";
+
 
 
 // ListNodesResponse
@@ -8,12 +8,12 @@ import { Node } from "./node";
  * Response for ListNodes.
 **/
 export class ListNodesResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 
-  @Metadata({ data: "json, name=nodes", elemType: shared.Node })
+  @SpeakeasyMetadata({ data: "json, name=nodes", elemType: Node })
   nodes?: Node[];
 
-  @Metadata({ data: "json, name=unreachable" })
+  @SpeakeasyMetadata({ data: "json, name=unreachable" })
   unreachable?: string[];
 }

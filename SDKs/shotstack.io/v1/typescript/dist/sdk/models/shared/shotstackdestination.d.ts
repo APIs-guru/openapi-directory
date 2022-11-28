@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 /**
  * Send rendered assets to the Shotstack hosting and CDN service. This destination is enabled by default.
 **/

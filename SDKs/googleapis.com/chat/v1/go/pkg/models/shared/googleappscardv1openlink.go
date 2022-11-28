@@ -14,6 +14,8 @@ const (
 	GoogleAppsCardV1OpenLinkOpenAsEnumOverlay  GoogleAppsCardV1OpenLinkOpenAsEnum = "OVERLAY"
 )
 
+// GoogleAppsCardV1OpenLink
+// Represents an `onClick` event that opens a hyperlink.
 type GoogleAppsCardV1OpenLink struct {
 	OnClose *GoogleAppsCardV1OpenLinkOnCloseEnum `json:"onClose,omitempty"`
 	OpenAs  *GoogleAppsCardV1OpenLinkOpenAsEnum  `json:"openAs,omitempty"`

@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetListAttachedUserPoliciesActionEnum(str, Enum):
     LIST_ATTACHED_USER_POLICIES = "ListAttachedUserPolicies"
@@ -10,12 +14,12 @@ class GetListAttachedUserPoliciesVersionEnum(str, Enum):
 
 @dataclass
 class GetListAttachedUserPoliciesQueryParams:
-    action: GetListAttachedUserPoliciesActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetListAttachedUserPoliciesActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    user_name: str = field(metadata={'query_param': { 'field_name': 'UserName', 'style': 'form', 'explode': True }})
+    version: GetListAttachedUserPoliciesVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     marker: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'Marker', 'style': 'form', 'explode': True }})
     max_items: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'MaxItems', 'style': 'form', 'explode': True }})
     path_prefix: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'PathPrefix', 'style': 'form', 'explode': True }})
-    user_name: str = field(default=None, metadata={'query_param': { 'field_name': 'UserName', 'style': 'form', 'explode': True }})
-    version: GetListAttachedUserPoliciesVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -31,13 +35,13 @@ class GetListAttachedUserPoliciesHeaders:
 
 @dataclass
 class GetListAttachedUserPoliciesRequest:
-    query_params: GetListAttachedUserPoliciesQueryParams = field(default=None)
-    headers: GetListAttachedUserPoliciesHeaders = field(default=None)
+    headers: GetListAttachedUserPoliciesHeaders = field()
+    query_params: GetListAttachedUserPoliciesQueryParams = field()
     
 
 @dataclass
 class GetListAttachedUserPoliciesResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

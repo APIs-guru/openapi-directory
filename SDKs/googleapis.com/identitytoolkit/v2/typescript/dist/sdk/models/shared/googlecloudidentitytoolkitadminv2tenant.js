@@ -22,8 +22,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudIdentitytoolkitAdminV2ClientPermissionConfig } from "./googlecloudidentitytoolkitadminv2clientpermissionconfig";
+import { GoogleCloudIdentitytoolkitAdminV2EmailPrivacyConfig } from "./googlecloudidentitytoolkitadminv2emailprivacyconfig";
 import { GoogleCloudIdentitytoolkitAdminV2HashConfig } from "./googlecloudidentitytoolkitadminv2hashconfig";
 import { GoogleCloudIdentitytoolkitAdminV2Inheritance } from "./googlecloudidentitytoolkitadminv2inheritance";
 import { GoogleCloudIdentitytoolkitAdminV2MultiFactorAuthConfig } from "./googlecloudidentitytoolkitadminv2multifactorauthconfig";
@@ -39,61 +40,129 @@ var GoogleCloudIdentitytoolkitAdminV2Tenant = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=allowPasswordSignup" }),
+        SpeakeasyMetadata({ data: "json, name=allowPasswordSignup" }),
         __metadata("design:type", Boolean)
     ], GoogleCloudIdentitytoolkitAdminV2Tenant.prototype, "allowPasswordSignup", void 0);
     __decorate([
-        Metadata({ data: "json, name=autodeleteAnonymousUsers" }),
+        SpeakeasyMetadata({ data: "json, name=autodeleteAnonymousUsers" }),
         __metadata("design:type", Boolean)
     ], GoogleCloudIdentitytoolkitAdminV2Tenant.prototype, "autodeleteAnonymousUsers", void 0);
     __decorate([
-        Metadata({ data: "json, name=client" }),
+        SpeakeasyMetadata({ data: "json, name=client" }),
         __metadata("design:type", GoogleCloudIdentitytoolkitAdminV2ClientPermissionConfig)
     ], GoogleCloudIdentitytoolkitAdminV2Tenant.prototype, "client", void 0);
     __decorate([
-        Metadata({ data: "json, name=disableAuth" }),
+        SpeakeasyMetadata({ data: "json, name=disableAuth" }),
         __metadata("design:type", Boolean)
     ], GoogleCloudIdentitytoolkitAdminV2Tenant.prototype, "disableAuth", void 0);
     __decorate([
-        Metadata({ data: "json, name=displayName" }),
+        SpeakeasyMetadata({ data: "json, name=displayName" }),
         __metadata("design:type", String)
     ], GoogleCloudIdentitytoolkitAdminV2Tenant.prototype, "displayName", void 0);
     __decorate([
-        Metadata({ data: "json, name=enableAnonymousUser" }),
+        SpeakeasyMetadata({ data: "json, name=emailPrivacyConfig" }),
+        __metadata("design:type", GoogleCloudIdentitytoolkitAdminV2EmailPrivacyConfig)
+    ], GoogleCloudIdentitytoolkitAdminV2Tenant.prototype, "emailPrivacyConfig", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=enableAnonymousUser" }),
         __metadata("design:type", Boolean)
     ], GoogleCloudIdentitytoolkitAdminV2Tenant.prototype, "enableAnonymousUser", void 0);
     __decorate([
-        Metadata({ data: "json, name=enableEmailLinkSignin" }),
+        SpeakeasyMetadata({ data: "json, name=enableEmailLinkSignin" }),
         __metadata("design:type", Boolean)
     ], GoogleCloudIdentitytoolkitAdminV2Tenant.prototype, "enableEmailLinkSignin", void 0);
     __decorate([
-        Metadata({ data: "json, name=hashConfig" }),
+        SpeakeasyMetadata({ data: "json, name=hashConfig" }),
         __metadata("design:type", GoogleCloudIdentitytoolkitAdminV2HashConfig)
     ], GoogleCloudIdentitytoolkitAdminV2Tenant.prototype, "hashConfig", void 0);
     __decorate([
-        Metadata({ data: "json, name=inheritance" }),
+        SpeakeasyMetadata({ data: "json, name=inheritance" }),
         __metadata("design:type", GoogleCloudIdentitytoolkitAdminV2Inheritance)
     ], GoogleCloudIdentitytoolkitAdminV2Tenant.prototype, "inheritance", void 0);
     __decorate([
-        Metadata({ data: "json, name=mfaConfig" }),
+        SpeakeasyMetadata({ data: "json, name=mfaConfig" }),
         __metadata("design:type", GoogleCloudIdentitytoolkitAdminV2MultiFactorAuthConfig)
     ], GoogleCloudIdentitytoolkitAdminV2Tenant.prototype, "mfaConfig", void 0);
     __decorate([
-        Metadata({ data: "json, name=monitoring" }),
+        SpeakeasyMetadata({ data: "json, name=monitoring" }),
         __metadata("design:type", GoogleCloudIdentitytoolkitAdminV2MonitoringConfig)
     ], GoogleCloudIdentitytoolkitAdminV2Tenant.prototype, "monitoring", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], GoogleCloudIdentitytoolkitAdminV2Tenant.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=smsRegionConfig" }),
+        SpeakeasyMetadata({ data: "json, name=smsRegionConfig" }),
         __metadata("design:type", GoogleCloudIdentitytoolkitAdminV2SmsRegionConfig)
     ], GoogleCloudIdentitytoolkitAdminV2Tenant.prototype, "smsRegionConfig", void 0);
     __decorate([
-        Metadata({ data: "json, name=testPhoneNumbers" }),
+        SpeakeasyMetadata({ data: "json, name=testPhoneNumbers" }),
         __metadata("design:type", Map)
     ], GoogleCloudIdentitytoolkitAdminV2Tenant.prototype, "testPhoneNumbers", void 0);
     return GoogleCloudIdentitytoolkitAdminV2Tenant;
 }(SpeakeasyBase));
 export { GoogleCloudIdentitytoolkitAdminV2Tenant };
+// GoogleCloudIdentitytoolkitAdminV2TenantInput
+/**
+ * A Tenant contains configuration for the tenant in a multi-tenant project.
+**/
+var GoogleCloudIdentitytoolkitAdminV2TenantInput = /** @class */ (function (_super) {
+    __extends(GoogleCloudIdentitytoolkitAdminV2TenantInput, _super);
+    function GoogleCloudIdentitytoolkitAdminV2TenantInput() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=allowPasswordSignup" }),
+        __metadata("design:type", Boolean)
+    ], GoogleCloudIdentitytoolkitAdminV2TenantInput.prototype, "allowPasswordSignup", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=autodeleteAnonymousUsers" }),
+        __metadata("design:type", Boolean)
+    ], GoogleCloudIdentitytoolkitAdminV2TenantInput.prototype, "autodeleteAnonymousUsers", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=client" }),
+        __metadata("design:type", GoogleCloudIdentitytoolkitAdminV2ClientPermissionConfig)
+    ], GoogleCloudIdentitytoolkitAdminV2TenantInput.prototype, "client", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=disableAuth" }),
+        __metadata("design:type", Boolean)
+    ], GoogleCloudIdentitytoolkitAdminV2TenantInput.prototype, "disableAuth", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=displayName" }),
+        __metadata("design:type", String)
+    ], GoogleCloudIdentitytoolkitAdminV2TenantInput.prototype, "displayName", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=emailPrivacyConfig" }),
+        __metadata("design:type", GoogleCloudIdentitytoolkitAdminV2EmailPrivacyConfig)
+    ], GoogleCloudIdentitytoolkitAdminV2TenantInput.prototype, "emailPrivacyConfig", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=enableAnonymousUser" }),
+        __metadata("design:type", Boolean)
+    ], GoogleCloudIdentitytoolkitAdminV2TenantInput.prototype, "enableAnonymousUser", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=enableEmailLinkSignin" }),
+        __metadata("design:type", Boolean)
+    ], GoogleCloudIdentitytoolkitAdminV2TenantInput.prototype, "enableEmailLinkSignin", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=inheritance" }),
+        __metadata("design:type", GoogleCloudIdentitytoolkitAdminV2Inheritance)
+    ], GoogleCloudIdentitytoolkitAdminV2TenantInput.prototype, "inheritance", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=mfaConfig" }),
+        __metadata("design:type", GoogleCloudIdentitytoolkitAdminV2MultiFactorAuthConfig)
+    ], GoogleCloudIdentitytoolkitAdminV2TenantInput.prototype, "mfaConfig", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=monitoring" }),
+        __metadata("design:type", GoogleCloudIdentitytoolkitAdminV2MonitoringConfig)
+    ], GoogleCloudIdentitytoolkitAdminV2TenantInput.prototype, "monitoring", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=smsRegionConfig" }),
+        __metadata("design:type", GoogleCloudIdentitytoolkitAdminV2SmsRegionConfig)
+    ], GoogleCloudIdentitytoolkitAdminV2TenantInput.prototype, "smsRegionConfig", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=testPhoneNumbers" }),
+        __metadata("design:type", Map)
+    ], GoogleCloudIdentitytoolkitAdminV2TenantInput.prototype, "testPhoneNumbers", void 0);
+    return GoogleCloudIdentitytoolkitAdminV2TenantInput;
+}(SpeakeasyBase));
+export { GoogleCloudIdentitytoolkitAdminV2TenantInput };

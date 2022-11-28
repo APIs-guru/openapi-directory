@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostResetInstanceAttributeActionEnum(str, Enum):
     RESET_INSTANCE_ATTRIBUTE = "ResetInstanceAttribute"
@@ -10,8 +14,8 @@ class PostResetInstanceAttributeVersionEnum(str, Enum):
 
 @dataclass
 class PostResetInstanceAttributeQueryParams:
-    action: PostResetInstanceAttributeActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostResetInstanceAttributeVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostResetInstanceAttributeActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostResetInstanceAttributeVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,13 +31,13 @@ class PostResetInstanceAttributeHeaders:
 
 @dataclass
 class PostResetInstanceAttributeRequest:
-    query_params: PostResetInstanceAttributeQueryParams = field(default=None)
-    headers: PostResetInstanceAttributeHeaders = field(default=None)
+    headers: PostResetInstanceAttributeHeaders = field()
+    query_params: PostResetInstanceAttributeQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostResetInstanceAttributeResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

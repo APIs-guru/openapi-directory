@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class DeliveryConfigDeliveryRequirementEnum(str, Enum):
     DELIVERY_REQUIREMENT_UNSPECIFIED = "DELIVERY_REQUIREMENT_UNSPECIFIED"
@@ -11,5 +13,9 @@ class DeliveryConfigDeliveryRequirementEnum(str, Enum):
 @dataclass_json
 @dataclass
 class DeliveryConfig:
-    delivery_requirement: Optional[DeliveryConfigDeliveryRequirementEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'deliveryRequirement' }})
+    r"""DeliveryConfig
+    The settings for a subscription's message delivery.
+    """
+    
+    delivery_requirement: Optional[DeliveryConfigDeliveryRequirementEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('deliveryRequirement') }})
     

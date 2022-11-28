@@ -1,9 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum VpcAccessConnectorEgressSettingEnum {
-    EgressSettingUnspecified = "EGRESS_SETTING_UNSPECIFIED"
-,    AllTraffic = "ALL_TRAFFIC"
-,    PrivateIpRanges = "PRIVATE_IP_RANGES"
+    EgressSettingUnspecified = "EGRESS_SETTING_UNSPECIFIED",
+    AllTraffic = "ALL_TRAFFIC",
+    PrivateIpRanges = "PRIVATE_IP_RANGES"
 }
 
 
@@ -12,9 +13,9 @@ export enum VpcAccessConnectorEgressSettingEnum {
  * VPC access connector specification.
 **/
 export class VpcAccessConnector extends SpeakeasyBase {
-  @Metadata({ data: "json, name=egressSetting" })
+  @SpeakeasyMetadata({ data: "json, name=egressSetting" })
   egressSetting?: VpcAccessConnectorEgressSettingEnum;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 }

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // BillingDetails
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * An object that describes workflow billing details.
 **/
 export class BillingDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=billedDurationInMilliseconds" })
+  @SpeakeasyMetadata({ data: "json, name=billedDurationInMilliseconds" })
   billedDurationInMilliseconds?: number;
 
-  @Metadata({ data: "json, name=billedMemoryUsedInMB" })
+  @SpeakeasyMetadata({ data: "json, name=billedMemoryUsedInMB" })
   billedMemoryUsedInMb?: number;
 }

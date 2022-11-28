@@ -1,5 +1,7 @@
 package shared
 
+// AwsIamGroupDetails
+// Contains details about an IAM group.
 type AwsIamGroupDetails struct {
 	AttachedManagedPolicies []AwsIamAttachedManagedPolicy `json:"AttachedManagedPolicies,omitempty"`
 	CreateDate              *string                       `json:"CreateDate,omitempty"`

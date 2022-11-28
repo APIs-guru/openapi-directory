@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 export declare class ReportHeaders extends SpeakeasyBase {
     currency?: string;
     name?: string;

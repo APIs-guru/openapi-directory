@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class IdentitytoolkitProjectsTenantsCreatePathParams extends SpeakeasyBase {
     parent: string;
@@ -31,7 +31,7 @@ export declare class IdentitytoolkitProjectsTenantsCreateSecurity extends Speake
 export declare class IdentitytoolkitProjectsTenantsCreateRequest extends SpeakeasyBase {
     pathParams: IdentitytoolkitProjectsTenantsCreatePathParams;
     queryParams: IdentitytoolkitProjectsTenantsCreateQueryParams;
-    request?: shared.GoogleCloudIdentitytoolkitAdminV2Tenant;
+    request?: shared.GoogleCloudIdentitytoolkitAdminV2TenantInput;
     security: IdentitytoolkitProjectsTenantsCreateSecurity;
 }
 export declare class IdentitytoolkitProjectsTenantsCreateResponse extends SpeakeasyBase {

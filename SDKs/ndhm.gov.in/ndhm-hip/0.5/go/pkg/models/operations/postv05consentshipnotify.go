@@ -4,7 +4,7 @@ import (
 	"openapi/pkg/models/shared"
 )
 
-var PostV05ConsentsHipNotifyServers = []string{
+var PostV05ConsentsHipNotifyServerList = []string{
 	"https://your-hrp-server.com",
 }
 

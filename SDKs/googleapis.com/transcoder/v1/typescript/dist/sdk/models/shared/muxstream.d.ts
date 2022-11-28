@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { SegmentSettings } from "./segmentsettings";
 /**
  * Multiplexing settings for output stream.

@@ -1,6 +1,7 @@
 
 
+
 export enum FilterTypeEnum {
-    System = "SYSTEM"
-,    Endpoint = "ENDPOINT"
+    System = "SYSTEM",
+    Endpoint = "ENDPOINT"
 }

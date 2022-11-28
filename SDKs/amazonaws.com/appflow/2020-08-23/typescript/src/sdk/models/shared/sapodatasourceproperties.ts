@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // SapoDataSourceProperties
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  *  The properties that are applied when using SAPOData as a flow source. 
 **/
 export class SapoDataSourceProperties extends SpeakeasyBase {
-  @Metadata({ data: "json, name=objectPath" })
+  @SpeakeasyMetadata({ data: "json, name=objectPath" })
   objectPath?: string;
 }

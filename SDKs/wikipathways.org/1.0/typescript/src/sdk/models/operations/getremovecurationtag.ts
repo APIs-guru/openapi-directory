@@ -1,43 +1,44 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum GetRemoveCurationTagFormatEnum {
-    Json = "json"
-,    Xml = "xml"
-,    Html = "html"
-,    Dump = "dump"
-,    Jpg = "jpg"
-,    Pdf = "pdf"
+    Json = "json",
+    Xml = "xml",
+    Html = "html",
+    Dump = "dump",
+    Jpg = "jpg",
+    Pdf = "pdf"
 }
 
 
 export class GetRemoveCurationTagQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=auth" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=auth" })
   auth: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=format" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=format" })
   format?: GetRemoveCurationTagFormatEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=pwId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=pwId" })
   pwId: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=tagName" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=tagName" })
   tagName: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=username" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=username" })
   username: string;
 }
 
 
 export class GetRemoveCurationTagRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetRemoveCurationTagQueryParams;
 }
 
 
 export class GetRemoveCurationTagResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

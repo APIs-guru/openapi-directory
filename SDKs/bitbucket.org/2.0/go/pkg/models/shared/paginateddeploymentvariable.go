@@ -1,5 +1,7 @@
 package shared
 
+// PaginatedDeploymentVariable
+// A paged list of deployment variables.
 type PaginatedDeploymentVariable struct {
 	Next     *string                  `json:"next,omitempty"`
 	Page     *int64                   `json:"page,omitempty"`

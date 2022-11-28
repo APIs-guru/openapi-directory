@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import lake
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class DataplexConfig:
-    lake_resources: Optional[dict[str, lake.Lake]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'lakeResources' }})
+    r"""DataplexConfig
+    Specifies how metastore metadata should be integrated with the Dataplex service.
+    """
+    
+    lake_resources: Optional[dict[str, Lake]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('lakeResources') }})
     

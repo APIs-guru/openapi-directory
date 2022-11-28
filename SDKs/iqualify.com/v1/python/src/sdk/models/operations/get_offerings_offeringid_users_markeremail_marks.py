@@ -5,19 +5,19 @@ from sdk.models import shared
 
 @dataclass
 class GetOfferingsOfferingIDUsersMarkerEmailMarksPathParams:
-    marker_email: str = field(default=None, metadata={'path_param': { 'field_name': 'markerEmail', 'style': 'simple', 'explode': False }})
-    offering_id: str = field(default=None, metadata={'path_param': { 'field_name': 'offeringId', 'style': 'simple', 'explode': False }})
+    marker_email: str = field(metadata={'path_param': { 'field_name': 'markerEmail', 'style': 'simple', 'explode': False }})
+    offering_id: str = field(metadata={'path_param': { 'field_name': 'offeringId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetOfferingsOfferingIDUsersMarkerEmailMarksRequest:
-    path_params: GetOfferingsOfferingIDUsersMarkerEmailMarksPathParams = field(default=None)
+    path_params: GetOfferingsOfferingIDUsersMarkerEmailMarksPathParams = field()
     
 
 @dataclass
 class GetOfferingsOfferingIDUsersMarkerEmailMarksResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error: Optional[shared.Error] = field(default=None)
     offering_users: Optional[List[shared.OfferingUser]] = field(default=None)
-    status_code: int = field(default=None)
     

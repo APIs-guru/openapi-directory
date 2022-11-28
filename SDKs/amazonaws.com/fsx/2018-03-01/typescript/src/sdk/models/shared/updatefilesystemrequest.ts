@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { UpdateFileSystemLustreConfiguration } from "./updatefilesystemlustreconfiguration";
 import { UpdateFileSystemOntapConfiguration } from "./updatefilesystemontapconfiguration";
 import { UpdateFileSystemWindowsConfiguration } from "./updatefilesystemwindowsconfiguration";
+
 
 
 // UpdateFileSystemRequest
@@ -9,21 +10,21 @@ import { UpdateFileSystemWindowsConfiguration } from "./updatefilesystemwindowsc
  * The request object for the <code>UpdateFileSystem</code> operation.
 **/
 export class UpdateFileSystemRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ClientRequestToken" })
+  @SpeakeasyMetadata({ data: "json, name=ClientRequestToken" })
   clientRequestToken?: string;
 
-  @Metadata({ data: "json, name=FileSystemId" })
+  @SpeakeasyMetadata({ data: "json, name=FileSystemId" })
   fileSystemId: string;
 
-  @Metadata({ data: "json, name=LustreConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=LustreConfiguration" })
   lustreConfiguration?: UpdateFileSystemLustreConfiguration;
 
-  @Metadata({ data: "json, name=OntapConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=OntapConfiguration" })
   ontapConfiguration?: UpdateFileSystemOntapConfiguration;
 
-  @Metadata({ data: "json, name=StorageCapacity" })
+  @SpeakeasyMetadata({ data: "json, name=StorageCapacity" })
   storageCapacity?: number;
 
-  @Metadata({ data: "json, name=WindowsConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=WindowsConfiguration" })
   windowsConfiguration?: UpdateFileSystemWindowsConfiguration;
 }

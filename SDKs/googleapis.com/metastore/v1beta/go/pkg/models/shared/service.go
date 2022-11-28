@@ -37,6 +37,8 @@ const (
 	ServiceTierEnumEnterprise      ServiceTierEnum = "ENTERPRISE"
 )
 
+// Service
+// A managed metastore service that serves metadata queries.
 type Service struct {
 	ArtifactGcsURI             *string                     `json:"artifactGcsUri,omitempty"`
 	CreateTime                 *string                     `json:"createTime,omitempty"`
@@ -55,7 +57,26 @@ type Service struct {
 	ReleaseChannel             *ServiceReleaseChannelEnum  `json:"releaseChannel,omitempty"`
 	State                      *ServiceStateEnum           `json:"state,omitempty"`
 	StateMessage               *string                     `json:"stateMessage,omitempty"`
+	TelemetryConfig            *TelemetryConfig            `json:"telemetryConfig,omitempty"`
 	Tier                       *ServiceTierEnum            `json:"tier,omitempty"`
 	UID                        *string                     `json:"uid,omitempty"`
 	UpdateTime                 *string                     `json:"updateTime,omitempty"`
+}
+
+// ServiceInput
+// A managed metastore service that serves metadata queries.
+type ServiceInput struct {
+	DatabaseType        *ServiceDatabaseTypeEnum   `json:"databaseType,omitempty"`
+	EncryptionConfig    *EncryptionConfig          `json:"encryptionConfig,omitempty"`
+	HiveMetastoreConfig *HiveMetastoreConfigInput  `json:"hiveMetastoreConfig,omitempty"`
+	Labels              map[string]string          `json:"labels,omitempty"`
+	MaintenanceWindow   *MaintenanceWindow         `json:"maintenanceWindow,omitempty"`
+	MetadataIntegration *MetadataIntegration       `json:"metadataIntegration,omitempty"`
+	Name                *string                    `json:"name,omitempty"`
+	Network             *string                    `json:"network,omitempty"`
+	NetworkConfig       *NetworkConfigInput        `json:"networkConfig,omitempty"`
+	Port                *int32                     `json:"port,omitempty"`
+	ReleaseChannel      *ServiceReleaseChannelEnum `json:"releaseChannel,omitempty"`
+	TelemetryConfig     *TelemetryConfig           `json:"telemetryConfig,omitempty"`
+	Tier                *ServiceTierEnum           `json:"tier,omitempty"`
 }

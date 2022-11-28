@@ -1,7 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import encryptioninfo
+from sdk import utils
+from . import *
 
 class ClusterStateReplicationStateEnum(str, Enum):
     STATE_NOT_KNOWN = "STATE_NOT_KNOWN"
@@ -15,6 +17,10 @@ class ClusterStateReplicationStateEnum(str, Enum):
 @dataclass_json
 @dataclass
 class ClusterState:
-    encryption_info: Optional[List[encryptioninfo.EncryptionInfo]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'encryptionInfo' }})
-    replication_state: Optional[ClusterStateReplicationStateEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'replicationState' }})
+    r"""ClusterState
+    The state of a table's data in a particular cluster.
+    """
+    
+    encryption_info: Optional[List[EncryptionInfo]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('encryptionInfo') }})
+    replication_state: Optional[ClusterStateReplicationStateEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('replicationState') }})
     

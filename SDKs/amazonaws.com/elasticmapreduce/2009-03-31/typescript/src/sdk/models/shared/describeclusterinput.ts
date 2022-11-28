@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // DescribeClusterInput
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * This input determines which cluster to describe.
 **/
 export class DescribeClusterInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ClusterId" })
+  @SpeakeasyMetadata({ data: "json, name=ClusterId" })
   clusterId: string;
 }

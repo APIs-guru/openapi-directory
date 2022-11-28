@@ -1,8 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import filekey
-from . import s3fileuploadpart
+from sdk import utils
+from . import *
 
 class CompleteS3FileUploadRequestResolutionStrategyEnum(str, Enum):
     AUTORENAME = "autorename"
@@ -13,9 +14,13 @@ class CompleteS3FileUploadRequestResolutionStrategyEnum(str, Enum):
 @dataclass_json
 @dataclass
 class CompleteS3FileUploadRequest:
-    file_key: Optional[filekey.FileKey] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'fileKey' }})
-    file_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'fileName' }})
-    keep_share_links: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'keepShareLinks' }})
-    parts: List[s3fileuploadpart.S3FileUploadPart] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'parts' }})
-    resolution_strategy: Optional[CompleteS3FileUploadRequestResolutionStrategyEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'resolutionStrategy' }})
+    r"""CompleteS3FileUploadRequest
+    Request model for completing a S3 file upload
+    """
+    
+    parts: List[S3FileUploadPart] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('parts') }})
+    file_key: Optional[FileKey] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('fileKey') }})
+    file_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('fileName') }})
+    keep_share_links: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('keepShareLinks') }})
+    resolution_strategy: Optional[CompleteS3FileUploadRequestResolutionStrategyEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('resolutionStrategy') }})
     

@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 
 class CurrentWeekFormatEnum(str, Enum):
     XML = "XML"
@@ -8,17 +9,17 @@ class CurrentWeekFormatEnum(str, Enum):
 
 @dataclass
 class CurrentWeekPathParams:
-    format: CurrentWeekFormatEnum = field(default=None, metadata={'path_param': { 'field_name': 'format', 'style': 'simple', 'explode': False }})
+    format: CurrentWeekFormatEnum = field(metadata={'path_param': { 'field_name': 'format', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class CurrentWeekRequest:
-    path_params: CurrentWeekPathParams = field(default=None)
+    path_params: CurrentWeekPathParams = field()
     
 
 @dataclass
 class CurrentWeekResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     current_week_200_application_json_integer: Optional[int] = field(default=None)
-    status_code: int = field(default=None)
     

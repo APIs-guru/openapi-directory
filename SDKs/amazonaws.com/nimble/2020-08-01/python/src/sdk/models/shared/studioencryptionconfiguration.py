@@ -1,12 +1,18 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import studioencryptionconfigurationkeytype_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class StudioEncryptionConfiguration:
-    key_arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'keyArn' }})
-    key_type: studioencryptionconfigurationkeytype_enum.StudioEncryptionConfigurationKeyTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'keyType' }})
+    r"""StudioEncryptionConfiguration
+    Configuration of the encryption method that is used for the studio.
+    """
+    
+    key_type: StudioEncryptionConfigurationKeyTypeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('keyType') }})
+    key_arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('keyArn') }})
     

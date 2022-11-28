@@ -17,6 +17,8 @@ const (
 	ArgumentModeEnumInout           ArgumentModeEnum = "INOUT"
 )
 
+// Argument
+// Input/output argument of a function or a stored procedure.
 type Argument struct {
 	ArgumentKind *ArgumentArgumentKindEnum `json:"argumentKind,omitempty"`
 	DataType     *StandardSQLDataType      `json:"dataType,omitempty"`

@@ -20,6 +20,8 @@ const (
 	CreativeConfigCreativeTypeEnumCreativeTypeTemplatedAppInstallVideo        CreativeConfigCreativeTypeEnum = "CREATIVE_TYPE_TEMPLATED_APP_INSTALL_VIDEO"
 )
 
+// CreativeConfig
+// Creative requirements configuration for the inventory source.
 type CreativeConfig struct {
 	CreativeType          *CreativeConfigCreativeTypeEnum       `json:"creativeType,omitempty"`
 	DisplayCreativeConfig *InventorySourceDisplayCreativeConfig `json:"displayCreativeConfig,omitempty"`

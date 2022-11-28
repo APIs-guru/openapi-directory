@@ -1,56 +1,57 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetRealmEventsPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=realm" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=realm" })
   realm: string;
 }
 
 
 export class GetRealmEventsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=client" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=client" })
   client?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=dateFrom" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=dateFrom" })
   dateFrom?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=dateTo" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=dateTo" })
   dateTo?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=first" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=first" })
   first?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=ipAddress" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=ipAddress" })
   ipAddress?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=max" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=max" })
   max?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=type" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=type" })
   type?: string[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=user" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=user" })
   user?: string;
 }
 
 
 export class GetRealmEventsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetRealmEventsPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetRealmEventsQueryParams;
 }
 
 
 export class GetRealmEventsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata({ elemType: shared.EventRepresentation })
+  @SpeakeasyMetadata({ elemType: shared.EventRepresentation })
   eventRepresentations?: shared.EventRepresentation[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

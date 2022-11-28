@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// ServiceSummary
+// A complex type that contains information about a specified service.
 type ServiceSummary struct {
 	Arn                     *string                  `json:"Arn,omitempty"`
 	CreateDate              *time.Time               `json:"CreateDate,omitempty"`

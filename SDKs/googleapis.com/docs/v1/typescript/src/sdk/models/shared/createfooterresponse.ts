@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // CreateFooterResponse
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The result of creating a footer.
 **/
 export class CreateFooterResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=footerId" })
+  @SpeakeasyMetadata({ data: "json, name=footerId" })
   footerId?: string;
 }

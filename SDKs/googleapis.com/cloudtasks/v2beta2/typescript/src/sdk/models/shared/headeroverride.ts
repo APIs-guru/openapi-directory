@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Header } from "./header";
+
 
 
 // HeaderOverride
@@ -7,6 +8,6 @@ import { Header } from "./header";
  * Wraps the Header object.
 **/
 export class HeaderOverride extends SpeakeasyBase {
-  @Metadata({ data: "json, name=header" })
+  @SpeakeasyMetadata({ data: "json, name=header" })
   header?: Header;
 }

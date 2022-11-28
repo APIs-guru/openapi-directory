@@ -1,104 +1,105 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class BooksLayersAnnotationDataGetPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=annotationDataId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=annotationDataId" })
   annotationDataId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=layerId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=layerId" })
   layerId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=volumeId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=volumeId" })
   volumeId: string;
 }
 
 
 export class BooksLayersAnnotationDataGetQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=$.xgafv" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=$.xgafv" })
   dollarXgafv?: shared.XgafvEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=access_token" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=access_token" })
   accessToken?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=allowWebDefinitions" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=allowWebDefinitions" })
   allowWebDefinitions?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=alt" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=alt" })
   alt?: shared.AltEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=callback" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=callback" })
   callback?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=contentVersion" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=contentVersion" })
   contentVersion: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=fields" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=fields" })
   fields?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=h" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=h" })
   h?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=key" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=key" })
   key?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=locale" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=locale" })
   locale?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=oauth_token" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=oauth_token" })
   oauthToken?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=prettyPrint" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=prettyPrint" })
   prettyPrint?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=quotaUser" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=quotaUser" })
   quotaUser?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=scale" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=scale" })
   scale?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=source" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=source" })
   source?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=uploadType" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=uploadType" })
   uploadType?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=upload_protocol" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=upload_protocol" })
   uploadProtocol?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=w" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=w" })
   w?: number;
 }
 
 
 export class BooksLayersAnnotationDataGetSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   oauth2: shared.SchemeOauth2;
 
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   oauth2c: shared.SchemeOauth2c;
 }
 
 
 export class BooksLayersAnnotationDataGetRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: BooksLayersAnnotationDataGetPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: BooksLayersAnnotationDataGetQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: BooksLayersAnnotationDataGetSecurity;
 }
 
 
 export class BooksLayersAnnotationDataGetResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   dictionaryAnnotationdata?: shared.DictionaryAnnotationdata;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GooglePrivacyDlpV2StoredInfoType } from "./googleprivacydlpv2storedinfotype";
+
 
 
 // GooglePrivacyDlpV2ListStoredInfoTypesResponse
@@ -8,9 +8,9 @@ import { GooglePrivacyDlpV2StoredInfoType } from "./googleprivacydlpv2storedinfo
  * Response message for ListStoredInfoTypes.
 **/
 export class GooglePrivacyDlpV2ListStoredInfoTypesResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 
-  @Metadata({ data: "json, name=storedInfoTypes", elemType: shared.GooglePrivacyDlpV2StoredInfoType })
+  @SpeakeasyMetadata({ data: "json, name=storedInfoTypes", elemType: GooglePrivacyDlpV2StoredInfoType })
   storedInfoTypes?: GooglePrivacyDlpV2StoredInfoType[];
 }

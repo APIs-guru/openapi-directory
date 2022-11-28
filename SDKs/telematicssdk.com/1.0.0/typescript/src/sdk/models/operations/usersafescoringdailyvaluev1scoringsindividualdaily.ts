@@ -1,85 +1,86 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class UserSafeScoringDailyValueV1ScoringsIndividualDailyQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=EndDate" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=EndDate" })
   endDate?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=StartDate" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=StartDate" })
   startDate?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Tag" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Tag" })
   tag?: string;
 }
 
 
-export class UserSafeScoringDailyValueV1ScoringsIndividualDailyRequest extends SpeakeasyBase {
-  @Metadata()
-  queryParams: UserSafeScoringDailyValueV1ScoringsIndividualDailyQueryParams;
-}
-
-
 export class UserSafeScoringDailyValueV1ScoringsIndividualDaily200ApplicationJsonResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AccelerationScore" })
+  @SpeakeasyMetadata({ data: "json, name=AccelerationScore" })
   accelerationScore?: number;
 
-  @Metadata({ data: "json, name=AppId" })
+  @SpeakeasyMetadata({ data: "json, name=AppId" })
   appId?: string;
 
-  @Metadata({ data: "json, name=BrakingScore" })
+  @SpeakeasyMetadata({ data: "json, name=BrakingScore" })
   brakingScore?: number;
 
-  @Metadata({ data: "json, name=CalcDate" })
+  @SpeakeasyMetadata({ data: "json, name=CalcDate" })
   calcDate?: string;
 
-  @Metadata({ data: "json, name=CompanyId" })
+  @SpeakeasyMetadata({ data: "json, name=CompanyId" })
   companyId?: string;
 
-  @Metadata({ data: "json, name=CorneringScore" })
+  @SpeakeasyMetadata({ data: "json, name=CorneringScore" })
   corneringScore?: number;
 
-  @Metadata({ data: "json, name=DeviceToken" })
+  @SpeakeasyMetadata({ data: "json, name=DeviceToken" })
   deviceToken?: string;
 
-  @Metadata({ data: "json, name=DistractedScore" })
+  @SpeakeasyMetadata({ data: "json, name=DistractedScore" })
   distractedScore?: number;
 
-  @Metadata({ data: "json, name=InstanceId" })
+  @SpeakeasyMetadata({ data: "json, name=InstanceId" })
   instanceId?: string;
 
-  @Metadata({ data: "json, name=OverallScore" })
+  @SpeakeasyMetadata({ data: "json, name=OverallScore" })
   overallScore?: number;
 
-  @Metadata({ data: "json, name=SpeedingScore" })
+  @SpeakeasyMetadata({ data: "json, name=SpeedingScore" })
   speedingScore?: number;
 }
 
 
 export class UserSafeScoringDailyValueV1ScoringsIndividualDaily200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Errors" })
+  @SpeakeasyMetadata({ data: "json, name=Errors" })
   errors?: any[];
 
-  @Metadata({ data: "json, name=Result", elemType: operations.UserSafeScoringDailyValueV1ScoringsIndividualDaily200ApplicationJsonResult })
+  @SpeakeasyMetadata({ data: "json, name=Result", elemType: UserSafeScoringDailyValueV1ScoringsIndividualDaily200ApplicationJsonResult })
   result?: UserSafeScoringDailyValueV1ScoringsIndividualDaily200ApplicationJsonResult[];
 
-  @Metadata({ data: "json, name=Status" })
+  @SpeakeasyMetadata({ data: "json, name=Status" })
   status?: number;
 
-  @Metadata({ data: "json, name=Title" })
+  @SpeakeasyMetadata({ data: "json, name=Title" })
   title?: string;
 }
 
 
+export class UserSafeScoringDailyValueV1ScoringsIndividualDailyRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  queryParams: UserSafeScoringDailyValueV1ScoringsIndividualDailyQueryParams;
+}
+
+
 export class UserSafeScoringDailyValueV1ScoringsIndividualDailyResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: Map<string, string[]>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   userSafeScoringDailyValueV1ScoringsIndividualDaily200ApplicationJsonObject?: UserSafeScoringDailyValueV1ScoringsIndividualDaily200ApplicationJson;
 }

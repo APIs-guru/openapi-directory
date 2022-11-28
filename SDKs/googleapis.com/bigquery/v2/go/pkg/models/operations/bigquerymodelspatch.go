@@ -38,7 +38,7 @@ type BigqueryModelsPatchSecurity struct {
 type BigqueryModelsPatchRequest struct {
 	PathParams  BigqueryModelsPatchPathParams
 	QueryParams BigqueryModelsPatchQueryParams
-	Request     *shared.Model `request:"mediaType=application/json"`
+	Request     *shared.ModelInput `request:"mediaType=application/json"`
 	Security    BigqueryModelsPatchSecurity
 }
 

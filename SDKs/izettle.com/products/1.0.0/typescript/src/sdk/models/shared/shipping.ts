@@ -1,19 +1,20 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Weight } from "./weight";
 
+
 export enum ShippingShippingPricingModelEnum {
-    Free = "FREE"
-,    Standard = "STANDARD"
+    Free = "FREE",
+    Standard = "STANDARD"
 }
 
 
 export class Shipping extends SpeakeasyBase {
-  @Metadata({ data: "json, name=shippingPricingModel" })
+  @SpeakeasyMetadata({ data: "json, name=shippingPricingModel" })
   shippingPricingModel?: ShippingShippingPricingModelEnum;
 
-  @Metadata({ data: "json, name=weight" })
+  @SpeakeasyMetadata({ data: "json, name=weight" })
   weight?: Weight;
 
-  @Metadata({ data: "json, name=weightInGrams" })
+  @SpeakeasyMetadata({ data: "json, name=weightInGrams" })
   weightInGrams?: number;
 }

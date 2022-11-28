@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Zone } from "./zone";
+
 
 
 // RevertZoneResponse
@@ -7,6 +8,6 @@ import { Zone } from "./zone";
  * The result of reverting a zone in a workspace.
 **/
 export class RevertZoneResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=zone" })
+  @SpeakeasyMetadata({ data: "json, name=zone" })
   zone?: Zone;
 }

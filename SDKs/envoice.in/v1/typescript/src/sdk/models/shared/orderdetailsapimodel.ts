@@ -1,84 +1,85 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CurrencyDetailsApiModel } from "./currencydetailsapimodel";
 import { OrderBillingDetailsApiModel } from "./orderbillingdetailsapimodel";
 import { OrderShippingDetailsApiModel } from "./ordershippingdetailsapimodel";
 
+
 export enum OrderDetailsApiModelStatusEnum {
-    PendingPayment = "PendingPayment"
-,    Processing = "Processing"
-,    Shipped = "Shipped"
-,    Completed = "Completed"
-,    OnHold = "OnHold"
-,    Cancelled = "Cancelled"
-,    Refunded = "Refunded"
-,    Failed = "Failed"
+    PendingPayment = "PendingPayment",
+    Processing = "Processing",
+    Shipped = "Shipped",
+    Completed = "Completed",
+    OnHold = "OnHold",
+    Cancelled = "Cancelled",
+    Refunded = "Refunded",
+    Failed = "Failed"
 }
 
 
 export class OrderDetailsApiModel extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AccessToken" })
+  @SpeakeasyMetadata({ data: "json, name=AccessToken" })
   accessToken?: string;
 
-  @Metadata({ data: "json, name=AfterPaymentDescription" })
+  @SpeakeasyMetadata({ data: "json, name=AfterPaymentDescription" })
   afterPaymentDescription?: string;
 
-  @Metadata({ data: "json, name=CouponCode" })
+  @SpeakeasyMetadata({ data: "json, name=CouponCode" })
   couponCode?: string;
 
-  @Metadata({ data: "json, name=Currency" })
+  @SpeakeasyMetadata({ data: "json, name=Currency" })
   currency?: CurrencyDetailsApiModel;
 
-  @Metadata({ data: "json, name=CurrencyId" })
+  @SpeakeasyMetadata({ data: "json, name=CurrencyId" })
   currencyId?: number;
 
-  @Metadata({ data: "json, name=Description" })
+  @SpeakeasyMetadata({ data: "json, name=Description" })
   description?: string;
 
-  @Metadata({ data: "json, name=DiscountAmount" })
+  @SpeakeasyMetadata({ data: "json, name=DiscountAmount" })
   discountAmount?: number;
 
-  @Metadata({ data: "json, name=Id" })
+  @SpeakeasyMetadata({ data: "json, name=Id" })
   id?: number;
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name?: string;
 
-  @Metadata({ data: "json, name=Note" })
+  @SpeakeasyMetadata({ data: "json, name=Note" })
   note?: string;
 
-  @Metadata({ data: "json, name=OrderBillingDetails" })
+  @SpeakeasyMetadata({ data: "json, name=OrderBillingDetails" })
   orderBillingDetails?: OrderBillingDetailsApiModel;
 
-  @Metadata({ data: "json, name=OrderShippingDetails" })
+  @SpeakeasyMetadata({ data: "json, name=OrderShippingDetails" })
   orderShippingDetails?: OrderShippingDetailsApiModel;
 
-  @Metadata({ data: "json, name=ProductId" })
+  @SpeakeasyMetadata({ data: "json, name=ProductId" })
   productId?: number;
 
-  @Metadata({ data: "json, name=Referral" })
+  @SpeakeasyMetadata({ data: "json, name=Referral" })
   referral?: string;
 
-  @Metadata({ data: "json, name=ShippingAmount" })
+  @SpeakeasyMetadata({ data: "json, name=ShippingAmount" })
   shippingAmount?: number;
 
-  @Metadata({ data: "json, name=ShippingDescription" })
+  @SpeakeasyMetadata({ data: "json, name=ShippingDescription" })
   shippingDescription?: string;
 
-  @Metadata({ data: "json, name=Status" })
+  @SpeakeasyMetadata({ data: "json, name=Status" })
   status?: OrderDetailsApiModelStatusEnum;
 
-  @Metadata({ data: "json, name=SubTotalAmount" })
+  @SpeakeasyMetadata({ data: "json, name=SubTotalAmount" })
   subTotalAmount?: number;
 
-  @Metadata({ data: "json, name=TaxAmount" })
+  @SpeakeasyMetadata({ data: "json, name=TaxAmount" })
   taxAmount?: number;
 
-  @Metadata({ data: "json, name=TotalAmount" })
+  @SpeakeasyMetadata({ data: "json, name=TotalAmount" })
   totalAmount?: number;
 
-  @Metadata({ data: "json, name=TotalWithShipping" })
+  @SpeakeasyMetadata({ data: "json, name=TotalWithShipping" })
   totalWithShipping?: number;
 
-  @Metadata({ data: "json, name=WhatHappensNextDescription" })
+  @SpeakeasyMetadata({ data: "json, name=WhatHappensNextDescription" })
   whatHappensNextDescription?: string;
 }

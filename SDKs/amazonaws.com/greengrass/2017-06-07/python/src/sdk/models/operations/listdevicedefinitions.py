@@ -1,5 +1,8 @@
 from dataclasses import dataclass, field
-from typing import List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
 from sdk.models import shared
 
 
@@ -22,13 +25,13 @@ class ListDeviceDefinitionsHeaders:
 
 @dataclass
 class ListDeviceDefinitionsRequest:
-    query_params: ListDeviceDefinitionsQueryParams = field(default=None)
-    headers: ListDeviceDefinitionsHeaders = field(default=None)
+    headers: ListDeviceDefinitionsHeaders = field()
+    query_params: ListDeviceDefinitionsQueryParams = field()
     
 
 @dataclass
 class ListDeviceDefinitionsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     list_device_definitions_response: Optional[shared.ListDeviceDefinitionsResponse] = field(default=None)
-    status_code: int = field(default=None)
     

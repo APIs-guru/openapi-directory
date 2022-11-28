@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export var CreateTransactionRequestBodySourceEnum;
 (function (CreateTransactionRequestBodySourceEnum) {
@@ -40,35 +40,35 @@ var CreateTransactionRequestBody = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "form, name=active;" }),
+        SpeakeasyMetadata({ data: "form, name=active;" }),
         __metadata("design:type", Boolean)
     ], CreateTransactionRequestBody.prototype, "active", void 0);
     __decorate([
-        Metadata({ data: "form, name=dateClosed;" }),
+        SpeakeasyMetadata({ data: "form, name=dateClosed;" }),
         __metadata("design:type", Date)
     ], CreateTransactionRequestBody.prototype, "dateClosed", void 0);
     __decorate([
-        Metadata({ data: "form, name=dateCreated;" }),
+        SpeakeasyMetadata({ data: "form, name=dateCreated;" }),
         __metadata("design:type", Date)
     ], CreateTransactionRequestBody.prototype, "dateCreated", void 0);
     __decorate([
-        Metadata({ data: "form, name=licenseeNumber;" }),
+        SpeakeasyMetadata({ data: "form, name=licenseeNumber;" }),
         __metadata("design:type", String)
     ], CreateTransactionRequestBody.prototype, "licenseeNumber", void 0);
     __decorate([
-        Metadata({ data: "form, name=number;" }),
+        SpeakeasyMetadata({ data: "form, name=number;" }),
         __metadata("design:type", String)
     ], CreateTransactionRequestBody.prototype, "number", void 0);
     __decorate([
-        Metadata({ data: "form, name=paymentMethod;" }),
+        SpeakeasyMetadata({ data: "form, name=paymentMethod;" }),
         __metadata("design:type", String)
     ], CreateTransactionRequestBody.prototype, "paymentMethod", void 0);
     __decorate([
-        Metadata({ data: "form, name=source;" }),
+        SpeakeasyMetadata({ data: "form, name=source;" }),
         __metadata("design:type", String)
     ], CreateTransactionRequestBody.prototype, "source", void 0);
     __decorate([
-        Metadata({ data: "form, name=status;" }),
+        SpeakeasyMetadata({ data: "form, name=status;" }),
         __metadata("design:type", String)
     ], CreateTransactionRequestBody.prototype, "status", void 0);
     return CreateTransactionRequestBody;
@@ -80,7 +80,7 @@ var CreateTransactionSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=http;subtype=basic" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=basic" }),
         __metadata("design:type", shared.SchemeBasicAuth)
     ], CreateTransactionSecurity.prototype, "basicAuth", void 0);
     return CreateTransactionSecurity;
@@ -92,11 +92,11 @@ var CreateTransactionRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "request, media_type=application/x-www-form-urlencoded" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/x-www-form-urlencoded" }),
         __metadata("design:type", CreateTransactionRequestBody)
     ], CreateTransactionRequest.prototype, "request", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", CreateTransactionSecurity)
     ], CreateTransactionRequest.prototype, "security", void 0);
     return CreateTransactionRequest;
@@ -108,19 +108,19 @@ var CreateTransactionResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], CreateTransactionResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], CreateTransactionResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], CreateTransactionResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], CreateTransactionResponse.prototype, "netlicensing", void 0);
     return CreateTransactionResponse;

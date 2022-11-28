@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RegionalinventoryCustomBatchResponseEntry } from "./regionalinventorycustombatchresponseentry";
 
 
+
 export class RegionalinventoryCustomBatchResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=entries", elemType: shared.RegionalinventoryCustomBatchResponseEntry })
+  @SpeakeasyMetadata({ data: "json, name=entries", elemType: RegionalinventoryCustomBatchResponseEntry })
   entries?: RegionalinventoryCustomBatchResponseEntry[];
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 }

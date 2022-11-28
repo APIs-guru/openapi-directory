@@ -12,6 +12,8 @@ const (
 	ManagedCertificateStatusEnumFailedRetryingCaaChecking   ManagedCertificateStatusEnum = "FAILED_RETRYING_CAA_CHECKING"
 )
 
+// ManagedCertificate
+// A certificate managed by App Engine.
 type ManagedCertificate struct {
 	LastRenewalTime *string                       `json:"lastRenewalTime,omitempty"`
 	Status          *ManagedCertificateStatusEnum `json:"status,omitempty"`

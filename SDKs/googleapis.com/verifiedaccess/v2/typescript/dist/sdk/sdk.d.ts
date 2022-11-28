@@ -1,15 +1,17 @@
-import { AxiosInstance, AxiosRequestConfig } from "axios";
-import * as operations from "./models/operations";
-declare type OptsFunc = (sdk: SDK) => void;
+import { AxiosInstance } from "axios";
+import { Challenge } from "./challenge";
+type OptsFunc = (sdk: SDK) => void;
+export declare const ServerList: readonly ["https://verifiedaccess.googleapis.com/"];
 export declare function WithServerURL(serverURL: string, params?: Map<string, string>): OptsFunc;
 export declare function WithClient(client: AxiosInstance): OptsFunc;
 export declare class SDK {
-    defaultClient?: AxiosInstance;
-    securityClient?: AxiosInstance;
-    security?: any;
-    serverURL: string;
+    challenge: Challenge;
+    _defaultClient: AxiosInstance;
+    _securityClient: AxiosInstance;
+    _serverURL: string;
+    private _language;
+    private _sdkVersion;
+    private _genVersion;
     constructor(...opts: OptsFunc[]);
-    VerifiedaccessChallengeGenerate(req: operations.VerifiedaccessChallengeGenerateRequest, config?: AxiosRequestConfig): Promise<operations.VerifiedaccessChallengeGenerateResponse>;
-    VerifiedaccessChallengeVerify(req: operations.VerifiedaccessChallengeVerifyRequest, config?: AxiosRequestConfig): Promise<operations.VerifiedaccessChallengeVerifyResponse>;
 }
 export {};

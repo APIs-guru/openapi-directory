@@ -1,5 +1,7 @@
 package shared
 
+// AdvancedFieldSelector
+// A single selector statement in an advanced event selector.
 type AdvancedFieldSelector struct {
 	EndsWith      []string `json:"EndsWith,omitempty"`
 	Equals        []string `json:"Equals,omitempty"`

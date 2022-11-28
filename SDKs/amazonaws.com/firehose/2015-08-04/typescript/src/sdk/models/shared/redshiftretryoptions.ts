@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // RedshiftRetryOptions
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Configures retry behavior in case Kinesis Data Firehose is unable to deliver documents to Amazon Redshift.
 **/
 export class RedshiftRetryOptions extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DurationInSeconds" })
+  @SpeakeasyMetadata({ data: "json, name=DurationInSeconds" })
   durationInSeconds?: number;
 }

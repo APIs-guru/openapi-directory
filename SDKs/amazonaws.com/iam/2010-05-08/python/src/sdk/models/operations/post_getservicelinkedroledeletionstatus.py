@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostGetServiceLinkedRoleDeletionStatusActionEnum(str, Enum):
     GET_SERVICE_LINKED_ROLE_DELETION_STATUS = "GetServiceLinkedRoleDeletionStatus"
@@ -10,8 +14,8 @@ class PostGetServiceLinkedRoleDeletionStatusVersionEnum(str, Enum):
 
 @dataclass
 class PostGetServiceLinkedRoleDeletionStatusQueryParams:
-    action: PostGetServiceLinkedRoleDeletionStatusActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostGetServiceLinkedRoleDeletionStatusVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostGetServiceLinkedRoleDeletionStatusActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostGetServiceLinkedRoleDeletionStatusVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostGetServiceLinkedRoleDeletionStatusHeaders:
 
 @dataclass
 class PostGetServiceLinkedRoleDeletionStatusRequest:
-    query_params: PostGetServiceLinkedRoleDeletionStatusQueryParams = field(default=None)
-    headers: PostGetServiceLinkedRoleDeletionStatusHeaders = field(default=None)
+    headers: PostGetServiceLinkedRoleDeletionStatusHeaders = field()
+    query_params: PostGetServiceLinkedRoleDeletionStatusQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostGetServiceLinkedRoleDeletionStatusResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

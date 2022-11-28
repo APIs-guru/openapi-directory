@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { State } from "./state";
+
 
 
 // DetectorModelDefinition
@@ -8,9 +8,9 @@ import { State } from "./state";
  * Information that defines how a detector operates.
 **/
 export class DetectorModelDefinition extends SpeakeasyBase {
-  @Metadata({ data: "json, name=initialStateName" })
+  @SpeakeasyMetadata({ data: "json, name=initialStateName" })
   initialStateName: string;
 
-  @Metadata({ data: "json, name=states", elemType: shared.State })
+  @SpeakeasyMetadata({ data: "json, name=states", elemType: State })
   states: State[];
 }

@@ -1,14 +1,19 @@
 from dataclasses import dataclass, field
-from typing import Enum,List
+from typing import List
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import slottypefiltername_enum
-from . import slottypefilteroperator_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class SlotTypeFilter:
-    name: slottypefiltername_enum.SlotTypeFilterNameEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    operator: slottypefilteroperator_enum.SlotTypeFilterOperatorEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'operator' }})
-    values: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'values' }})
+    r"""SlotTypeFilter
+    Filters the response from the <code>ListSlotTypes</code> operation.
+    """
+    
+    name: SlotTypeFilterNameEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    operator: SlotTypeFilterOperatorEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('operator') }})
+    values: List[str] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('values') }})
     

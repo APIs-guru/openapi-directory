@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 class GetAssetsOrderByEnum(str, Enum):
@@ -18,34 +19,34 @@ class GetAssetsSortDirectionEnum(str, Enum):
 
 @dataclass
 class GetAssetsQueryParams:
+    status: shared.AssetStatusQueryParamEnum = field(metadata={'query_param': { 'field_name': 'status', 'style': 'form', 'explode': True }})
     filter_by: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'filterBy', 'style': 'form', 'explode': True }})
     order_by: Optional[GetAssetsOrderByEnum] = field(default=None, metadata={'query_param': { 'field_name': 'orderBy', 'style': 'form', 'explode': True }})
     page: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'page', 'style': 'form', 'explode': True }})
     page_size: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'pageSize', 'style': 'form', 'explode': True }})
     sort_direction: Optional[GetAssetsSortDirectionEnum] = field(default=None, metadata={'query_param': { 'field_name': 'sortDirection', 'style': 'form', 'explode': True }})
-    status: shared.AssetStatusQueryParamEnum = field(default=None, metadata={'query_param': { 'field_name': 'status', 'style': 'form', 'explode': True }})
     
 
 @dataclass
 class GetAssetsHeaders:
-    xero_tenant_id: str = field(default=None, metadata={'header': { 'field_name': 'xero-tenant-id', 'style': 'simple', 'explode': False }})
+    xero_tenant_id: str = field(metadata={'header': { 'field_name': 'xero-tenant-id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetAssetsSecurity:
-    o_auth2: shared.SchemeOAuth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    o_auth2: shared.SchemeOAuth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class GetAssetsRequest:
-    query_params: GetAssetsQueryParams = field(default=None)
-    headers: GetAssetsHeaders = field(default=None)
-    security: GetAssetsSecurity = field(default=None)
+    headers: GetAssetsHeaders = field()
+    query_params: GetAssetsQueryParams = field()
+    security: GetAssetsSecurity = field()
     
 
 @dataclass
 class GetAssetsResponse:
+    content_type: str = field()
+    status_code: int = field()
     assets: Optional[shared.Assets] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

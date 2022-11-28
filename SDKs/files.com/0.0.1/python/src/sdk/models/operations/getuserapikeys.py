@@ -19,12 +19,12 @@ class GetUserAPIKeysQueryParams:
 
 @dataclass
 class GetUserAPIKeysRequest:
-    query_params: GetUserAPIKeysQueryParams = field(default=None)
+    query_params: GetUserAPIKeysQueryParams = field()
     
 
 @dataclass
 class GetUserAPIKeysResponse:
+    content_type: str = field()
+    status_code: int = field()
     api_key_entities: Optional[List[shared.APIKeyEntity]] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

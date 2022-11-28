@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ApplicationInfo
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Application related details of a job posting.
 **/
 export class ApplicationInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=emails" })
+  @SpeakeasyMetadata({ data: "json, name=emails" })
   emails?: string[];
 
-  @Metadata({ data: "json, name=instruction" })
+  @SpeakeasyMetadata({ data: "json, name=instruction" })
   instruction?: string;
 
-  @Metadata({ data: "json, name=uris" })
+  @SpeakeasyMetadata({ data: "json, name=uris" })
   uris?: string[];
 }

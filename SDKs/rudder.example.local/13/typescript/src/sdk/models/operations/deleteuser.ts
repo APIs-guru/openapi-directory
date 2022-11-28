@@ -1,15 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DeleteUserPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=username" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=username" })
   username: string;
-}
-
-
-export class DeleteUserRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: DeleteUserPathParams;
 }
 
 export enum DeleteUser200ApplicationJsonActionEnum {
@@ -18,41 +13,47 @@ export enum DeleteUser200ApplicationJsonActionEnum {
 
 
 export class DeleteUser200ApplicationJsonDataDeletedUser extends SpeakeasyBase {
-  @Metadata({ data: "json, name=username" })
+  @SpeakeasyMetadata({ data: "json, name=username" })
   username: string;
 }
 
 
 export class DeleteUser200ApplicationJsonData extends SpeakeasyBase {
-  @Metadata({ data: "json, name=deletedUser" })
+  @SpeakeasyMetadata({ data: "json, name=deletedUser" })
   deletedUser: DeleteUser200ApplicationJsonDataDeletedUser;
 }
 
 export enum DeleteUser200ApplicationJsonResultEnum {
-    Success = "success"
-,    Error = "error"
+    Success = "success",
+    Error = "error"
 }
 
 
 export class DeleteUser200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=action" })
+  @SpeakeasyMetadata({ data: "json, name=action" })
   action: DeleteUser200ApplicationJsonActionEnum;
 
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data: DeleteUser200ApplicationJsonData;
 
-  @Metadata({ data: "json, name=result" })
+  @SpeakeasyMetadata({ data: "json, name=result" })
   result: DeleteUser200ApplicationJsonResultEnum;
 }
 
 
+export class DeleteUserRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: DeleteUserPathParams;
+}
+
+
 export class DeleteUserResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   deleteUser200ApplicationJsonObject?: DeleteUser200ApplicationJson;
 }

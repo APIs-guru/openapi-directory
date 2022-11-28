@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 export declare enum SubscriptionCreateRequestEventTypeEnum {
     ContactPropertyChange = "contact.propertyChange",
     CompanyPropertyChange = "company.propertyChange",

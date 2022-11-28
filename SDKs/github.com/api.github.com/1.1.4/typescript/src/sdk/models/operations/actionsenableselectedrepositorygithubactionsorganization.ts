@@ -1,25 +1,26 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ActionsEnableSelectedRepositoryGithubActionsOrganizationPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=org" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=org" })
   org: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=repository_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=repository_id" })
   repositoryId: number;
 }
 
 
 export class ActionsEnableSelectedRepositoryGithubActionsOrganizationRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: ActionsEnableSelectedRepositoryGithubActionsOrganizationPathParams;
 }
 
 
 export class ActionsEnableSelectedRepositoryGithubActionsOrganizationResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

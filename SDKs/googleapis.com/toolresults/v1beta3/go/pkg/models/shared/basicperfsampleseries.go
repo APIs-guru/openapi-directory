@@ -39,6 +39,8 @@ const (
 	BasicPerfSampleSeriesSampleSeriesLabelEnumGraphicsFrameRate           BasicPerfSampleSeriesSampleSeriesLabelEnum = "graphicsFrameRate"
 )
 
+// BasicPerfSampleSeries
+// Encapsulates the metadata for basic sample series represented by a line chart
 type BasicPerfSampleSeries struct {
 	PerfMetricType    *BasicPerfSampleSeriesPerfMetricTypeEnum    `json:"perfMetricType,omitempty"`
 	PerfUnit          *BasicPerfSampleSeriesPerfUnitEnum          `json:"perfUnit,omitempty"`

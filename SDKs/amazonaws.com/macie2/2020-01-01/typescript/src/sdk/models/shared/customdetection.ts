@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Occurrences } from "./occurrences";
+
 
 
 // CustomDetection
@@ -7,15 +8,15 @@ import { Occurrences } from "./occurrences";
  * Provides information about a custom data identifier that produced a sensitive data finding, and the sensitive data that it detected for the finding.
 **/
 export class CustomDetection extends SpeakeasyBase {
-  @Metadata({ data: "json, name=arn" })
+  @SpeakeasyMetadata({ data: "json, name=arn" })
   arn?: string;
 
-  @Metadata({ data: "json, name=count" })
+  @SpeakeasyMetadata({ data: "json, name=count" })
   count?: number;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=occurrences" })
+  @SpeakeasyMetadata({ data: "json, name=occurrences" })
   occurrences?: Occurrences;
 }

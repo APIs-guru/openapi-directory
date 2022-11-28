@@ -1,7 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import dimensionfilter
+from sdk import utils
+from . import *
 
 class DimensionFilterClauseOperatorEnum(str, Enum):
     OPERATOR_UNSPECIFIED = "OPERATOR_UNSPECIFIED"
@@ -12,6 +14,10 @@ class DimensionFilterClauseOperatorEnum(str, Enum):
 @dataclass_json
 @dataclass
 class DimensionFilterClause:
-    filters: Optional[List[dimensionfilter.DimensionFilter]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'filters' }})
-    operator: Optional[DimensionFilterClauseOperatorEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'operator' }})
+    r"""DimensionFilterClause
+    A group of dimension filters. Set the operator value to specify how the filters are logically combined.
+    """
+    
+    filters: Optional[List[DimensionFilter]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('filters') }})
+    operator: Optional[DimensionFilterClauseOperatorEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('operator') }})
     

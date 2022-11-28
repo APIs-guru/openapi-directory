@@ -1,10 +1,10 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 
 @dataclass
 class ReleaseEventAPIPostReportPathParams:
-    event_id: int = field(default=None, metadata={'path_param': { 'field_name': 'eventId', 'style': 'simple', 'explode': False }})
+    event_id: int = field(metadata={'path_param': { 'field_name': 'eventId', 'style': 'simple', 'explode': False }})
     
 class ReleaseEventAPIPostReportReportTypeEnum(str, Enum):
     INVALID_INFO = "InvalidInfo"
@@ -15,19 +15,19 @@ class ReleaseEventAPIPostReportReportTypeEnum(str, Enum):
 
 @dataclass
 class ReleaseEventAPIPostReportQueryParams:
-    notes: str = field(default=None, metadata={'query_param': { 'field_name': 'notes', 'style': 'form', 'explode': True }})
-    report_type: ReleaseEventAPIPostReportReportTypeEnum = field(default=None, metadata={'query_param': { 'field_name': 'reportType', 'style': 'form', 'explode': True }})
-    version_number: int = field(default=None, metadata={'query_param': { 'field_name': 'versionNumber', 'style': 'form', 'explode': True }})
+    notes: str = field(metadata={'query_param': { 'field_name': 'notes', 'style': 'form', 'explode': True }})
+    report_type: ReleaseEventAPIPostReportReportTypeEnum = field(metadata={'query_param': { 'field_name': 'reportType', 'style': 'form', 'explode': True }})
+    version_number: int = field(metadata={'query_param': { 'field_name': 'versionNumber', 'style': 'form', 'explode': True }})
     
 
 @dataclass
 class ReleaseEventAPIPostReportRequest:
-    path_params: ReleaseEventAPIPostReportPathParams = field(default=None)
-    query_params: ReleaseEventAPIPostReportQueryParams = field(default=None)
+    path_params: ReleaseEventAPIPostReportPathParams = field()
+    query_params: ReleaseEventAPIPostReportQueryParams = field()
     
 
 @dataclass
 class ReleaseEventAPIPostReportResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

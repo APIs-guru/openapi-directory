@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudApigeeV1ScoreComponentRecommendationActionActionContext
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Action context are all the relevant details for the action.
 **/
 export class GoogleCloudApigeeV1ScoreComponentRecommendationActionActionContext extends SpeakeasyBase {
-  @Metadata({ data: "json, name=documentationLink" })
+  @SpeakeasyMetadata({ data: "json, name=documentationLink" })
   documentationLink?: string;
 }

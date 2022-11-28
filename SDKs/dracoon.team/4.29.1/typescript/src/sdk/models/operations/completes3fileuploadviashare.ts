@@ -1,32 +1,33 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class CompleteS3FileUploadViaSharePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=access_key" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=access_key" })
   accessKey: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=upload_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=upload_id" })
   uploadId: string;
 }
 
 
 export class CompleteS3FileUploadViaShareRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: CompleteS3FileUploadViaSharePathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: shared.CompleteS3ShareUploadRequest;
 }
 
 
 export class CompleteS3FileUploadViaShareResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   errorResponse?: shared.ErrorResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

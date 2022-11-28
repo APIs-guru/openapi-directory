@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // X509CertificateDetails
 /**
  * Details of an X.509 certificate. For informational purposes only.
@@ -33,27 +33,27 @@ var X509CertificateDetails = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=expiryTime" }),
+        SpeakeasyMetadata({ data: "json, name=expiryTime" }),
         __metadata("design:type", String)
     ], X509CertificateDetails.prototype, "expiryTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=issuer" }),
+        SpeakeasyMetadata({ data: "json, name=issuer" }),
         __metadata("design:type", String)
     ], X509CertificateDetails.prototype, "issuer", void 0);
     __decorate([
-        Metadata({ data: "json, name=publicKeyType" }),
+        SpeakeasyMetadata({ data: "json, name=publicKeyType" }),
         __metadata("design:type", String)
     ], X509CertificateDetails.prototype, "publicKeyType", void 0);
     __decorate([
-        Metadata({ data: "json, name=signatureAlgorithm" }),
+        SpeakeasyMetadata({ data: "json, name=signatureAlgorithm" }),
         __metadata("design:type", String)
     ], X509CertificateDetails.prototype, "signatureAlgorithm", void 0);
     __decorate([
-        Metadata({ data: "json, name=startTime" }),
+        SpeakeasyMetadata({ data: "json, name=startTime" }),
         __metadata("design:type", String)
     ], X509CertificateDetails.prototype, "startTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=subject" }),
+        SpeakeasyMetadata({ data: "json, name=subject" }),
         __metadata("design:type", String)
     ], X509CertificateDetails.prototype, "subject", void 0);
     return X509CertificateDetails;

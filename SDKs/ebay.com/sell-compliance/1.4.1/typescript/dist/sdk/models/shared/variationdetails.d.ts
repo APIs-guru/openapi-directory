@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { NameValueList } from "./namevaluelist";
 /**
  * This type is used to identify the product variation that has the listing violation.

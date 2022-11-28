@@ -1,14 +1,17 @@
 from dataclasses import dataclass, field
 from dataclasses_json import dataclass_json
-from . import decodeconfig
-from . import demodulationconfig
-from . import spectrumconfig
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class AntennaDownlinkDemodDecodeConfig:
-    decode_config: decodeconfig.DecodeConfig = field(default=None, metadata={'dataclasses_json': { 'field_name': 'decodeConfig' }})
-    demodulation_config: demodulationconfig.DemodulationConfig = field(default=None, metadata={'dataclasses_json': { 'field_name': 'demodulationConfig' }})
-    spectrum_config: spectrumconfig.SpectrumConfig = field(default=None, metadata={'dataclasses_json': { 'field_name': 'spectrumConfig' }})
+    r"""AntennaDownlinkDemodDecodeConfig
+    Information about how AWS Ground Station should conﬁgure an antenna for downlink demod decode during a contact.
+    """
+    
+    decode_config: DecodeConfig = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('decodeConfig') }})
+    demodulation_config: DemodulationConfig = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('demodulationConfig') }})
+    spectrum_config: SpectrumConfig = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('spectrumConfig') }})
     

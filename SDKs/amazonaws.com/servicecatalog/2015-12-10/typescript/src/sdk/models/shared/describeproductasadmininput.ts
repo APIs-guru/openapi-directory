@@ -1,16 +1,17 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DescribeProductAsAdminInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AcceptLanguage" })
+  @SpeakeasyMetadata({ data: "json, name=AcceptLanguage" })
   acceptLanguage?: string;
 
-  @Metadata({ data: "json, name=Id" })
+  @SpeakeasyMetadata({ data: "json, name=Id" })
   id?: string;
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name?: string;
 
-  @Metadata({ data: "json, name=SourcePortfolioId" })
+  @SpeakeasyMetadata({ data: "json, name=SourcePortfolioId" })
   sourcePortfolioId?: string;
 }

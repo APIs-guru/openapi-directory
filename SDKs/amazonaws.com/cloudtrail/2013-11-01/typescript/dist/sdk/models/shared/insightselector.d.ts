@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { InsightTypeEnum } from "./insighttypeenum";
 /**
  * A JSON string that contains a list of insight types that are logged on a trail.

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { UserProfile } from "./userprofile";
 // Guardian
 /**
@@ -34,19 +34,19 @@ var Guardian = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=guardianId" }),
+        SpeakeasyMetadata({ data: "json, name=guardianId" }),
         __metadata("design:type", String)
     ], Guardian.prototype, "guardianId", void 0);
     __decorate([
-        Metadata({ data: "json, name=guardianProfile" }),
+        SpeakeasyMetadata({ data: "json, name=guardianProfile" }),
         __metadata("design:type", UserProfile)
     ], Guardian.prototype, "guardianProfile", void 0);
     __decorate([
-        Metadata({ data: "json, name=invitedEmailAddress" }),
+        SpeakeasyMetadata({ data: "json, name=invitedEmailAddress" }),
         __metadata("design:type", String)
     ], Guardian.prototype, "invitedEmailAddress", void 0);
     __decorate([
-        Metadata({ data: "json, name=studentId" }),
+        SpeakeasyMetadata({ data: "json, name=studentId" }),
         __metadata("design:type", String)
     ], Guardian.prototype, "studentId", void 0);
     return Guardian;

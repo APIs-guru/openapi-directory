@@ -1,28 +1,29 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class NodesProvidersReadPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=node_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=node_id" })
   nodeId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=provider" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=provider" })
   provider: string;
 }
 
 
 export class NodesProvidersReadRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: NodesProvidersReadPathParams;
 }
 
 
 export class NodesProvidersReadResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

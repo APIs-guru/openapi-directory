@@ -1,8 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import googleprivacydlpv2infotypecategory
-from . import googleprivacydlpv2versiondescription
+from sdk import utils
+from . import *
 
 class GooglePrivacyDlpV2InfoTypeDescriptionSupportedByEnum(str, Enum):
     ENUM_TYPE_UNSPECIFIED = "ENUM_TYPE_UNSPECIFIED"
@@ -13,10 +14,15 @@ class GooglePrivacyDlpV2InfoTypeDescriptionSupportedByEnum(str, Enum):
 @dataclass_json
 @dataclass
 class GooglePrivacyDlpV2InfoTypeDescription:
-    categories: Optional[List[googleprivacydlpv2infotypecategory.GooglePrivacyDlpV2InfoTypeCategory]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'categories' }})
-    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
-    display_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'displayName' }})
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    supported_by: Optional[List[GooglePrivacyDlpV2InfoTypeDescriptionSupportedByEnum]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'supportedBy' }})
-    versions: Optional[List[googleprivacydlpv2versiondescription.GooglePrivacyDlpV2VersionDescription]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'versions' }})
+    r"""GooglePrivacyDlpV2InfoTypeDescription
+    InfoType description.
+    """
+    
+    categories: Optional[List[GooglePrivacyDlpV2InfoTypeCategory]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('categories') }})
+    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('description') }})
+    display_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('displayName') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    sensitivity_score: Optional[GooglePrivacyDlpV2SensitivityScore] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('sensitivityScore') }})
+    supported_by: Optional[List[GooglePrivacyDlpV2InfoTypeDescriptionSupportedByEnum]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('supportedBy') }})
+    versions: Optional[List[GooglePrivacyDlpV2VersionDescription]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('versions') }})
     

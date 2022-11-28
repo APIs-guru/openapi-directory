@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum LkeNodeStatusStatusEnum {
-    Ready = "ready"
-,    NotReady = "not_ready"
+    Ready = "ready",
+    NotReady = "not_ready"
 }
 
 
@@ -12,12 +13,12 @@ export enum LkeNodeStatusStatusEnum {
  * 
 **/
 export class LkeNodeStatus extends SpeakeasyBase {
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=instance_id" })
+  @SpeakeasyMetadata({ data: "json, name=instance_id" })
   instanceId?: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: LkeNodeStatusStatusEnum;
 }

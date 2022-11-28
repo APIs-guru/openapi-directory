@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class GetCanaryPathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -21,15 +24,15 @@ class GetCanaryHeaders:
 
 @dataclass
 class GetCanaryRequest:
-    path_params: GetCanaryPathParams = field(default=None)
-    headers: GetCanaryHeaders = field(default=None)
+    headers: GetCanaryHeaders = field()
+    path_params: GetCanaryPathParams = field()
     
 
 @dataclass
 class GetCanaryResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     get_canary_response: Optional[shared.GetCanaryResponse] = field(default=None)
     internal_server_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     validation_exception: Optional[Any] = field(default=None)
     

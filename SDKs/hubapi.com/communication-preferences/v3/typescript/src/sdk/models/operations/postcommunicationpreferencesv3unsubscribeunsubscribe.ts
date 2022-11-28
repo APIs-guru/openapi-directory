@@ -1,56 +1,45 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
-export class PostCommunicationPreferencesV3UnsubscribeUnsubscribeSecurityOption1 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
-  oauth2Legacy: shared.SchemeOauth2Legacy;
-}
-
-
-export class PostCommunicationPreferencesV3UnsubscribeUnsubscribeSecurityOption2 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=query" })
-  hapikey: shared.SchemeHapikey;
-}
-
-
-export class PostCommunicationPreferencesV3UnsubscribeUnsubscribeSecurityOption3 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
-  oauth2Legacy: shared.SchemeOauth2Legacy;
-}
-
 
 export class PostCommunicationPreferencesV3UnsubscribeUnsubscribeSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, option=true" })
-  option1?: PostCommunicationPreferencesV3UnsubscribeUnsubscribeSecurityOption1;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
+  oauth2Legacy?: shared.SchemeOauth2Legacy;
 
-  @Metadata({ data: "security, option=true" })
-  option2?: PostCommunicationPreferencesV3UnsubscribeUnsubscribeSecurityOption2;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=query" })
+  hapikey?: shared.SchemeHapikey;
 
-  @Metadata({ data: "security, option=true" })
-  option3?: PostCommunicationPreferencesV3UnsubscribeUnsubscribeSecurityOption3;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
+  oauth2Legacy1?: shared.SchemeOauth2Legacy;
+
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  privateAppsLegacy?: shared.SchemePrivateAppsLegacy;
+
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  privateAppsLegacy1?: shared.SchemePrivateAppsLegacy;
 }
 
 
 export class PostCommunicationPreferencesV3UnsubscribeUnsubscribeRequest extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: shared.PublicUpdateSubscriptionStatusRequest;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: PostCommunicationPreferencesV3UnsubscribeUnsubscribeSecurity;
 }
 
 
 export class PostCommunicationPreferencesV3UnsubscribeUnsubscribeResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   publicSubscriptionStatus?: shared.PublicSubscriptionStatus;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

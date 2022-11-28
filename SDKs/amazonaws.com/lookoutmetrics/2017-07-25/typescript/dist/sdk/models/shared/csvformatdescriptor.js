@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CsvFileCompressionEnum } from "./csvfilecompressionenum";
 // CsvFormatDescriptor
 /**
@@ -34,27 +34,27 @@ var CsvFormatDescriptor = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Charset" }),
+        SpeakeasyMetadata({ data: "json, name=Charset" }),
         __metadata("design:type", String)
     ], CsvFormatDescriptor.prototype, "charset", void 0);
     __decorate([
-        Metadata({ data: "json, name=ContainsHeader" }),
+        SpeakeasyMetadata({ data: "json, name=ContainsHeader" }),
         __metadata("design:type", Boolean)
     ], CsvFormatDescriptor.prototype, "containsHeader", void 0);
     __decorate([
-        Metadata({ data: "json, name=Delimiter" }),
+        SpeakeasyMetadata({ data: "json, name=Delimiter" }),
         __metadata("design:type", String)
     ], CsvFormatDescriptor.prototype, "delimiter", void 0);
     __decorate([
-        Metadata({ data: "json, name=FileCompression" }),
+        SpeakeasyMetadata({ data: "json, name=FileCompression" }),
         __metadata("design:type", String)
     ], CsvFormatDescriptor.prototype, "fileCompression", void 0);
     __decorate([
-        Metadata({ data: "json, name=HeaderList" }),
+        SpeakeasyMetadata({ data: "json, name=HeaderList" }),
         __metadata("design:type", Array)
     ], CsvFormatDescriptor.prototype, "headerList", void 0);
     __decorate([
-        Metadata({ data: "json, name=QuoteSymbol" }),
+        SpeakeasyMetadata({ data: "json, name=QuoteSymbol" }),
         __metadata("design:type", String)
     ], CsvFormatDescriptor.prototype, "quoteSymbol", void 0);
     return CsvFormatDescriptor;

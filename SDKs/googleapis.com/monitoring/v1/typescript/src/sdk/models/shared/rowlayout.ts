@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Row } from "./row";
+
 
 
 // RowLayout
@@ -8,6 +8,6 @@ import { Row } from "./row";
  * A simplified layout that divides the available space into rows and arranges a set of widgets horizontally in each row.
 **/
 export class RowLayout extends SpeakeasyBase {
-  @Metadata({ data: "json, name=rows", elemType: shared.Row })
+  @SpeakeasyMetadata({ data: "json, name=rows", elemType: Row })
   rows?: Row[];
 }

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Program
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A seller program in to which a seller can opt-in.
 **/
 export class Program extends SpeakeasyBase {
-  @Metadata({ data: "json, name=programType" })
+  @SpeakeasyMetadata({ data: "json, name=programType" })
   programType?: string;
 }

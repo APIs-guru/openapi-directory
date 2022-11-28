@@ -23,6 +23,8 @@ type UpdateVoiceTemplateHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// UpdateVoiceTemplateRequestBodyVoiceTemplateRequest
+// Specifies the content and settings for a message template that can be used in messages that are sent through the voice channel.
 type UpdateVoiceTemplateRequestBodyVoiceTemplateRequest struct {
 	Body                 *string           `json:"Body,omitempty"`
 	DefaultSubstitutions *string           `json:"DefaultSubstitutions,omitempty"`

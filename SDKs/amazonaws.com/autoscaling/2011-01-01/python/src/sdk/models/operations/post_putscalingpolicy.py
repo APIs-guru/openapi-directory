@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostPutScalingPolicyActionEnum(str, Enum):
     PUT_SCALING_POLICY = "PutScalingPolicy"
@@ -10,8 +14,8 @@ class PostPutScalingPolicyVersionEnum(str, Enum):
 
 @dataclass
 class PostPutScalingPolicyQueryParams:
-    action: PostPutScalingPolicyActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostPutScalingPolicyVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostPutScalingPolicyActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostPutScalingPolicyVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostPutScalingPolicyHeaders:
 
 @dataclass
 class PostPutScalingPolicyRequest:
-    query_params: PostPutScalingPolicyQueryParams = field(default=None)
-    headers: PostPutScalingPolicyHeaders = field(default=None)
+    headers: PostPutScalingPolicyHeaders = field()
+    query_params: PostPutScalingPolicyQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostPutScalingPolicyResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

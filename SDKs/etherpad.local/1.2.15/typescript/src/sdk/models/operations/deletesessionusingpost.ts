@@ -1,82 +1,83 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DeleteSessionUsingPostQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=sessionID" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sessionID" })
   sessionId?: string;
 }
 
 
-export class DeleteSessionUsingPostRequest extends SpeakeasyBase {
-  @Metadata()
-  queryParams: DeleteSessionUsingPostQueryParams;
-}
-
-
 export class DeleteSessionUsingPost200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=code" })
+  @SpeakeasyMetadata({ data: "json, name=code" })
   code?: number;
 
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data?: Map<string, any>;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class DeleteSessionUsingPost400ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=code" })
+  @SpeakeasyMetadata({ data: "json, name=code" })
   code?: number;
 
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data?: Map<string, any>;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class DeleteSessionUsingPost401ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=code" })
+  @SpeakeasyMetadata({ data: "json, name=code" })
   code?: number;
 
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data?: Map<string, any>;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class DeleteSessionUsingPost500ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=code" })
+  @SpeakeasyMetadata({ data: "json, name=code" })
   code?: number;
 
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data?: Map<string, any>;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
+export class DeleteSessionUsingPostRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  queryParams: DeleteSessionUsingPostQueryParams;
+}
+
+
 export class DeleteSessionUsingPostResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   deleteSessionUsingPost200ApplicationJsonObject?: DeleteSessionUsingPost200ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   deleteSessionUsingPost400ApplicationJsonObject?: DeleteSessionUsingPost400ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   deleteSessionUsingPost401ApplicationJsonObject?: DeleteSessionUsingPost401ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   deleteSessionUsingPost500ApplicationJsonObject?: DeleteSessionUsingPost500ApplicationJson;
 }

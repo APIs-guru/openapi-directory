@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RuleConfig } from "./ruleconfig";
 import { StatusEnum } from "./statusenum";
+
 
 
 // GatingRule
@@ -8,27 +9,27 @@ import { StatusEnum } from "./statusenum";
  * A gating rule verifies that a set of gating controls evaluates as true, based on a rule configuration that you specify. If the gating rule evaluates to true, Amazon Route 53 Application Recovery Controller allows a set of routing control state changes to run and complete against the set of target controls.
 **/
 export class GatingRule extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ControlPanelArn" })
+  @SpeakeasyMetadata({ data: "json, name=ControlPanelArn" })
   controlPanelArn: string;
 
-  @Metadata({ data: "json, name=GatingControls" })
+  @SpeakeasyMetadata({ data: "json, name=GatingControls" })
   gatingControls: string[];
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name: string;
 
-  @Metadata({ data: "json, name=RuleConfig" })
+  @SpeakeasyMetadata({ data: "json, name=RuleConfig" })
   ruleConfig: RuleConfig;
 
-  @Metadata({ data: "json, name=SafetyRuleArn" })
+  @SpeakeasyMetadata({ data: "json, name=SafetyRuleArn" })
   safetyRuleArn: string;
 
-  @Metadata({ data: "json, name=Status" })
+  @SpeakeasyMetadata({ data: "json, name=Status" })
   status: StatusEnum;
 
-  @Metadata({ data: "json, name=TargetControls" })
+  @SpeakeasyMetadata({ data: "json, name=TargetControls" })
   targetControls: string[];
 
-  @Metadata({ data: "json, name=WaitPeriodMs" })
+  @SpeakeasyMetadata({ data: "json, name=WaitPeriodMs" })
   waitPeriodMs: number;
 }

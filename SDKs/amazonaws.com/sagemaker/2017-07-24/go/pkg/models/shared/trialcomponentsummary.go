@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// TrialComponentSummary
+// A summary of the properties of a trial component. To get all the properties, call the <a>DescribeTrialComponent</a> API and provide the <code>TrialComponentName</code>.
 type TrialComponentSummary struct {
 	CreatedBy            *UserContext          `json:"CreatedBy,omitempty"`
 	CreationTime         *time.Time            `json:"CreationTime,omitempty"`

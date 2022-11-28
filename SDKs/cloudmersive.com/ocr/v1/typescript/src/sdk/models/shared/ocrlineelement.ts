@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { OcrWordElement } from "./ocrwordelement";
+
 
 
 // OcrLineElement
@@ -8,9 +8,9 @@ import { OcrWordElement } from "./ocrwordelement";
  * A contiguous line of text in an OCR document
 **/
 export class OcrLineElement extends SpeakeasyBase {
-  @Metadata({ data: "json, name=LineText" })
+  @SpeakeasyMetadata({ data: "json, name=LineText" })
   lineText?: string;
 
-  @Metadata({ data: "json, name=Words", elemType: shared.OcrWordElement })
+  @SpeakeasyMetadata({ data: "json, name=Words", elemType: OcrWordElement })
   words?: OcrWordElement[];
 }

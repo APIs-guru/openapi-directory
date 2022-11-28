@@ -1,4 +1,7 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
@@ -16,16 +19,16 @@ class GetInvitationsCountHeaders:
 
 @dataclass
 class GetInvitationsCountRequest:
-    headers: GetInvitationsCountHeaders = field(default=None)
+    headers: GetInvitationsCountHeaders = field()
     
 
 @dataclass
 class GetInvitationsCountResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     get_invitations_count_response: Optional[shared.GetInvitationsCountResponse] = field(default=None)
     internal_exception: Optional[Any] = field(default=None)
     invalid_access_exception: Optional[Any] = field(default=None)
     invalid_input_exception: Optional[Any] = field(default=None)
     limit_exceeded_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

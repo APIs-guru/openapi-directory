@@ -1,62 +1,51 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class CloneLinodeDiskPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=diskId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=diskId" })
   diskId: number;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=linodeId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=linodeId" })
   linodeId: number;
 }
 
 
-export class CloneLinodeDiskSecurityOption1 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=bearer" })
-  personalAccessToken: shared.SchemePersonalAccessToken;
-}
-
-
-export class CloneLinodeDiskSecurityOption2 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
-  oauth: shared.SchemeOauth;
-}
-
-
 export class CloneLinodeDiskSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, option=true" })
-  option1?: CloneLinodeDiskSecurityOption1;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" })
+  personalAccessToken?: shared.SchemePersonalAccessToken;
 
-  @Metadata({ data: "security, option=true" })
-  option2?: CloneLinodeDiskSecurityOption2;
-}
-
-
-export class CloneLinodeDiskRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: CloneLinodeDiskPathParams;
-
-  @Metadata()
-  security: CloneLinodeDiskSecurity;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
+  oauth?: shared.SchemeOauth;
 }
 
 
 export class CloneLinodeDiskDefaultApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=errors", elemType: shared.ErrorObject })
+  @SpeakeasyMetadata({ data: "json, name=errors", elemType: shared.ErrorObject })
   errors?: shared.ErrorObject[];
 }
 
 
+export class CloneLinodeDiskRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: CloneLinodeDiskPathParams;
+
+  @SpeakeasyMetadata()
+  security: CloneLinodeDiskSecurity;
+}
+
+
 export class CloneLinodeDiskResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   disk?: shared.Disk;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   cloneLinodeDiskDefaultApplicationJsonObject?: CloneLinodeDiskDefaultApplicationJson;
 }

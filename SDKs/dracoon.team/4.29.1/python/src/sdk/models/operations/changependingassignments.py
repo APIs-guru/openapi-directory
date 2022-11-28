@@ -10,13 +10,13 @@ class ChangePendingAssignmentsHeaders:
 
 @dataclass
 class ChangePendingAssignmentsRequest:
-    headers: ChangePendingAssignmentsHeaders = field(default=None)
-    request: shared.PendingAssignmentsRequest = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: ChangePendingAssignmentsHeaders = field()
+    request: shared.PendingAssignmentsRequest = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class ChangePendingAssignmentsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error_response: Optional[shared.ErrorResponse] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,12 +1,16 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class HealthcareProjectsLocationsDatasetsFhirStoresFhirResourceValidatePathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
-    type: str = field(default=None, metadata={'path_param': { 'field_name': 'type', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    type: str = field(metadata={'path_param': { 'field_name': 'type', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -27,21 +31,21 @@ class HealthcareProjectsLocationsDatasetsFhirStoresFhirResourceValidateQueryPara
 
 @dataclass
 class HealthcareProjectsLocationsDatasetsFhirStoresFhirResourceValidateSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class HealthcareProjectsLocationsDatasetsFhirStoresFhirResourceValidateRequest:
-    path_params: HealthcareProjectsLocationsDatasetsFhirStoresFhirResourceValidatePathParams = field(default=None)
-    query_params: HealthcareProjectsLocationsDatasetsFhirStoresFhirResourceValidateQueryParams = field(default=None)
+    path_params: HealthcareProjectsLocationsDatasetsFhirStoresFhirResourceValidatePathParams = field()
+    query_params: HealthcareProjectsLocationsDatasetsFhirStoresFhirResourceValidateQueryParams = field()
+    security: HealthcareProjectsLocationsDatasetsFhirStoresFhirResourceValidateSecurity = field()
     request: Optional[shared.HTTPBody] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: HealthcareProjectsLocationsDatasetsFhirStoresFhirResourceValidateSecurity = field(default=None)
     
 
 @dataclass
 class HealthcareProjectsLocationsDatasetsFhirStoresFhirResourceValidateResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     http_body: Optional[shared.HTTPBody] = field(default=None)
-    status_code: int = field(default=None)
     

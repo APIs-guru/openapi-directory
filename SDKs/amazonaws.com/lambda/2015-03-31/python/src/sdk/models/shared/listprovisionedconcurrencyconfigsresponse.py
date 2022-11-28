@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import provisionedconcurrencyconfiglistitem
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ListProvisionedConcurrencyConfigsResponse:
-    next_marker: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'NextMarker' }})
-    provisioned_concurrency_configs: Optional[List[provisionedconcurrencyconfiglistitem.ProvisionedConcurrencyConfigListItem]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ProvisionedConcurrencyConfigs' }})
+    next_marker: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('NextMarker') }})
+    provisioned_concurrency_configs: Optional[List[ProvisionedConcurrencyConfigListItem]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ProvisionedConcurrencyConfigs') }})
     

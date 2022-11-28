@@ -1,7 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import position
+from sdk import utils
+from . import *
 
 class LandmarkTypeEnum(str, Enum):
     UNKNOWN_LANDMARK = "UNKNOWN_LANDMARK"
@@ -46,6 +48,10 @@ class LandmarkTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class Landmark:
-    position: Optional[position.Position] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'position' }})
-    type: Optional[LandmarkTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    r"""Landmark
+    A face-specific landmark (for example, a face feature).
+    """
+    
+    position: Optional[Position] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('position') }})
+    type: Optional[LandmarkTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('type') }})
     

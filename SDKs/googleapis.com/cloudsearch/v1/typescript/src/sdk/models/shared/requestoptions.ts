@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DebugOptions } from "./debugoptions";
+
 
 
 // RequestOptions
@@ -7,15 +8,15 @@ import { DebugOptions } from "./debugoptions";
  * Shared request options for all RPC methods.
 **/
 export class RequestOptions extends SpeakeasyBase {
-  @Metadata({ data: "json, name=debugOptions" })
+  @SpeakeasyMetadata({ data: "json, name=debugOptions" })
   debugOptions?: DebugOptions;
 
-  @Metadata({ data: "json, name=languageCode" })
+  @SpeakeasyMetadata({ data: "json, name=languageCode" })
   languageCode?: string;
 
-  @Metadata({ data: "json, name=searchApplicationId" })
+  @SpeakeasyMetadata({ data: "json, name=searchApplicationId" })
   searchApplicationId?: string;
 
-  @Metadata({ data: "json, name=timeZone" })
+  @SpeakeasyMetadata({ data: "json, name=timeZone" })
   timeZone?: string;
 }

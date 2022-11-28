@@ -10,7 +10,7 @@ import (
 	"strings"
 )
 
-var Servers = []string{
+var ServerList = []string{
 	"http://devops-guru.{region}.amazonaws.com",
 	"https://devops-guru.{region}.amazonaws.com",
 	"http://devops-guru.{region}.amazonaws.com.cn",
@@ -21,10 +21,15 @@ type HTTPClient interface {
 	Do(req *http.Request) (*http.Response, error)
 }
 
+// SDK Documentation: https://docs.aws.amazon.com/devops-guru/ - Amazon Web Services documentation
 type SDK struct {
-	defaultClient  HTTPClient
-	securityClient HTTPClient
-	serverURL      string
+	_defaultClient  HTTPClient
+	_securityClient HTTPClient
+	_security       *shared.Security
+	_serverURL      string
+	_language       string
+	_sdkVersion     string
+	_genVersion     string
 }
 
 type SDKOption func(*SDK)
@@ -35,33 +40,55 @@ func WithServerURL(serverURL string, params map[string]string) SDKOption {
 			serverURL = utils.ReplaceParameters(serverURL, params)
 		}
 
-		sdk.serverURL = serverURL
+		sdk._serverURL = serverURL
+	}
+}
+
+func WithClient(client HTTPClient) SDKOption {
+	return func(sdk *SDK) {
+		sdk._defaultClient = client
 	}
 }
 
 func WithSecurity(security shared.Security) SDKOption {
 	return func(sdk *SDK) {
-		sdk.securityClient = utils.CreateSecurityClient(security)
+		sdk._security = &security
 	}
 }
 
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
-		defaultClient:  http.DefaultClient,
-		securityClient: http.DefaultClient,
+		_language:   "go",
+		_sdkVersion: "",
+		_genVersion: "internal",
 	}
 	for _, opt := range opts {
 		opt(sdk)
 	}
-	if sdk.serverURL == "" {
-		sdk.serverURL = Servers[0]
+
+	if sdk._defaultClient == nil {
+		sdk._defaultClient = http.DefaultClient
+	}
+	if sdk._securityClient == nil {
+
+		if sdk._security != nil {
+			sdk._securityClient = utils.ConfigureSecurityClient(sdk._defaultClient, sdk._security)
+		} else {
+			sdk._securityClient = sdk._defaultClient
+		}
+
+	}
+
+	if sdk._serverURL == "" {
+		sdk._serverURL = ServerList[0]
 	}
 
 	return sdk
 }
 
+// AddNotificationChannel - <p> Adds a notification channel to DevOps Guru. A notification channel is used to notify you about important DevOps Guru events, such as when an insight is generated. </p> <p>If you use an Amazon SNS topic in another account, you must attach a policy to it that grants DevOps Guru permission to it notifications. DevOps Guru adds the required policy on your behalf to send notifications using Amazon SNS in your account. For more information, see <a href="https://docs.aws.amazon.com/devops-guru/latest/userguide/sns-required-permissions.html">Permissions for cross account Amazon SNS topics</a>.</p> <p>If you use an Amazon SNS topic that is encrypted by an AWS Key Management Service customer-managed key (CMK), then you must add permissions to the CMK. For more information, see <a href="https://docs.aws.amazon.com/devops-guru/latest/userguide/sns-kms-permissions.html">Permissions for AWS KMS–encrypted Amazon SNS topics</a>.</p>
 func (s *SDK) AddNotificationChannel(ctx context.Context, request operations.AddNotificationChannelRequest) (*operations.AddNotificationChannelResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/channels"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -81,7 +108,7 @@ func (s *SDK) AddNotificationChannel(ctx context.Context, request operations.Add
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -181,8 +208,9 @@ func (s *SDK) AddNotificationChannel(ctx context.Context, request operations.Add
 	return res, nil
 }
 
+// DescribeAccountHealth -  Returns the number of open reactive insights, the number of open proactive insights, and the number of metrics analyzed in your AWS account. Use these numbers to gauge the health of operations in your AWS account.
 func (s *SDK) DescribeAccountHealth(ctx context.Context, request operations.DescribeAccountHealthRequest) (*operations.DescribeAccountHealthResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/accounts/health"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -192,7 +220,7 @@ func (s *SDK) DescribeAccountHealth(ctx context.Context, request operations.Desc
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -262,8 +290,9 @@ func (s *SDK) DescribeAccountHealth(ctx context.Context, request operations.Desc
 	return res, nil
 }
 
+// DescribeAccountOverview -  For the time range passed in, returns the number of open reactive insight that were created, the number of open proactive insights that were created, and the Mean Time to Recover (MTTR) for all closed reactive insights.
 func (s *SDK) DescribeAccountOverview(ctx context.Context, request operations.DescribeAccountOverviewRequest) (*operations.DescribeAccountOverviewResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/accounts/overview"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -283,7 +312,7 @@ func (s *SDK) DescribeAccountOverview(ctx context.Context, request operations.De
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -353,8 +382,9 @@ func (s *SDK) DescribeAccountOverview(ctx context.Context, request operations.De
 	return res, nil
 }
 
+// DescribeAnomaly -  Returns details about an anomaly that you specify using its ID.
 func (s *SDK) DescribeAnomaly(ctx context.Context, request operations.DescribeAnomalyRequest) (*operations.DescribeAnomalyResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/anomalies/{Id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -364,7 +394,7 @@ func (s *SDK) DescribeAnomaly(ctx context.Context, request operations.DescribeAn
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -444,8 +474,9 @@ func (s *SDK) DescribeAnomaly(ctx context.Context, request operations.DescribeAn
 	return res, nil
 }
 
+// DescribeFeedback -  Returns the most recent feedback submitted in the current AWS account and Region.
 func (s *SDK) DescribeFeedback(ctx context.Context, request operations.DescribeFeedbackRequest) (*operations.DescribeFeedbackResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/feedback"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -465,7 +496,7 @@ func (s *SDK) DescribeFeedback(ctx context.Context, request operations.DescribeF
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -545,8 +576,9 @@ func (s *SDK) DescribeFeedback(ctx context.Context, request operations.DescribeF
 	return res, nil
 }
 
+// DescribeInsight -  Returns details about an insight that you specify using its ID.
 func (s *SDK) DescribeInsight(ctx context.Context, request operations.DescribeInsightRequest) (*operations.DescribeInsightResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/insights/{Id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -556,7 +588,7 @@ func (s *SDK) DescribeInsight(ctx context.Context, request operations.DescribeIn
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -636,8 +668,9 @@ func (s *SDK) DescribeInsight(ctx context.Context, request operations.DescribeIn
 	return res, nil
 }
 
+// DescribeResourceCollectionHealth -  Returns the number of open proactive insights, open reactive insights, and the Mean Time to Recover (MTTR) for all closed insights in resource collections in your account. You specify the type of AWS resources collection. The one type of AWS resource collection supported is AWS CloudFormation stacks. DevOps Guru can be configured to analyze only the AWS resources that are defined in the stacks. You can specify up to 500 AWS CloudFormation stacks.
 func (s *SDK) DescribeResourceCollectionHealth(ctx context.Context, request operations.DescribeResourceCollectionHealthRequest) (*operations.DescribeResourceCollectionHealthResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/accounts/health/resource-collection/{ResourceCollectionType}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -649,7 +682,7 @@ func (s *SDK) DescribeResourceCollectionHealth(ctx context.Context, request oper
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -719,8 +752,9 @@ func (s *SDK) DescribeResourceCollectionHealth(ctx context.Context, request oper
 	return res, nil
 }
 
+// DescribeServiceIntegration -  Returns the integration status of services that are integrated with DevOps Guru. The one service that can be integrated with DevOps Guru is AWS Systems Manager, which can be used to create an OpsItem for each generated insight.
 func (s *SDK) DescribeServiceIntegration(ctx context.Context, request operations.DescribeServiceIntegrationRequest) (*operations.DescribeServiceIntegrationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/service-integrations"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -730,7 +764,7 @@ func (s *SDK) DescribeServiceIntegration(ctx context.Context, request operations
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -800,8 +834,9 @@ func (s *SDK) DescribeServiceIntegration(ctx context.Context, request operations
 	return res, nil
 }
 
+// GetCostEstimation - Returns an estimate of the monthly cost for DevOps Guru to analyze your AWS resources. For more information, see <a href="https://docs.aws.amazon.com/devops-guru/latest/userguide/cost-estimate.html">Estimate your Amazon DevOps Guru costs</a> and <a href="http://aws.amazon.com/devops-guru/pricing/">Amazon DevOps Guru pricing</a>.
 func (s *SDK) GetCostEstimation(ctx context.Context, request operations.GetCostEstimationRequest) (*operations.GetCostEstimationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/cost-estimation"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -813,7 +848,7 @@ func (s *SDK) GetCostEstimation(ctx context.Context, request operations.GetCostE
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -893,8 +928,9 @@ func (s *SDK) GetCostEstimation(ctx context.Context, request operations.GetCostE
 	return res, nil
 }
 
+// GetResourceCollection -  Returns lists AWS resources that are of the specified resource collection type. The one type of AWS resource collection supported is AWS CloudFormation stacks. DevOps Guru can be configured to analyze only the AWS resources that are defined in the stacks. You can specify up to 500 AWS CloudFormation stacks.
 func (s *SDK) GetResourceCollection(ctx context.Context, request operations.GetResourceCollectionRequest) (*operations.GetResourceCollectionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/resource-collections/{ResourceCollectionType}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -906,7 +942,7 @@ func (s *SDK) GetResourceCollection(ctx context.Context, request operations.GetR
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -986,8 +1022,9 @@ func (s *SDK) GetResourceCollection(ctx context.Context, request operations.GetR
 	return res, nil
 }
 
+// ListAnomaliesForInsight -  Returns a list of the anomalies that belong to an insight that you specify using its ID.
 func (s *SDK) ListAnomaliesForInsight(ctx context.Context, request operations.ListAnomaliesForInsightRequest) (*operations.ListAnomaliesForInsightResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/anomalies/insight/{InsightId}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1009,7 +1046,7 @@ func (s *SDK) ListAnomaliesForInsight(ctx context.Context, request operations.Li
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1089,8 +1126,9 @@ func (s *SDK) ListAnomaliesForInsight(ctx context.Context, request operations.Li
 	return res, nil
 }
 
+// ListEvents -  Returns a list of the events emitted by the resources that are evaluated by DevOps Guru. You can use filters to specify which events are returned.
 func (s *SDK) ListEvents(ctx context.Context, request operations.ListEventsRequest) (*operations.ListEventsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/events"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1112,7 +1150,7 @@ func (s *SDK) ListEvents(ctx context.Context, request operations.ListEventsReque
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1192,8 +1230,9 @@ func (s *SDK) ListEvents(ctx context.Context, request operations.ListEventsReque
 	return res, nil
 }
 
+// ListInsights -  Returns a list of insights in your AWS account. You can specify which insights are returned by their start time and status (<code>ONGOING</code>, <code>CLOSED</code>, or <code>ANY</code>).
 func (s *SDK) ListInsights(ctx context.Context, request operations.ListInsightsRequest) (*operations.ListInsightsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/insights"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1215,7 +1254,7 @@ func (s *SDK) ListInsights(ctx context.Context, request operations.ListInsightsR
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1285,8 +1324,9 @@ func (s *SDK) ListInsights(ctx context.Context, request operations.ListInsightsR
 	return res, nil
 }
 
+// ListNotificationChannels -  Returns a list of notification channels configured for DevOps Guru. Each notification channel is used to notify you when DevOps Guru generates an insight that contains information about how to improve your operations. The one supported notification channel is Amazon Simple Notification Service (Amazon SNS).
 func (s *SDK) ListNotificationChannels(ctx context.Context, request operations.ListNotificationChannelsRequest) (*operations.ListNotificationChannelsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/channels"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1308,7 +1348,7 @@ func (s *SDK) ListNotificationChannels(ctx context.Context, request operations.L
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1378,8 +1418,9 @@ func (s *SDK) ListNotificationChannels(ctx context.Context, request operations.L
 	return res, nil
 }
 
+// ListRecommendations -  Returns a list of a specified insight's recommendations. Each recommendation includes a list of related metrics and a list of related events.
 func (s *SDK) ListRecommendations(ctx context.Context, request operations.ListRecommendationsRequest) (*operations.ListRecommendationsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/recommendations"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1401,7 +1442,7 @@ func (s *SDK) ListRecommendations(ctx context.Context, request operations.ListRe
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1481,8 +1522,9 @@ func (s *SDK) ListRecommendations(ctx context.Context, request operations.ListRe
 	return res, nil
 }
 
+// PutFeedback -  Collects customer feedback about the specified insight.
 func (s *SDK) PutFeedback(ctx context.Context, request operations.PutFeedbackRequest) (*operations.PutFeedbackResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/feedback"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1502,7 +1544,7 @@ func (s *SDK) PutFeedback(ctx context.Context, request operations.PutFeedbackReq
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1592,8 +1634,9 @@ func (s *SDK) PutFeedback(ctx context.Context, request operations.PutFeedbackReq
 	return res, nil
 }
 
+// RemoveNotificationChannel -  Removes a notification channel from DevOps Guru. A notification channel is used to notify you when DevOps Guru generates an insight that contains information about how to improve your operations.
 func (s *SDK) RemoveNotificationChannel(ctx context.Context, request operations.RemoveNotificationChannelRequest) (*operations.RemoveNotificationChannelResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/channels/{Id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -1603,7 +1646,7 @@ func (s *SDK) RemoveNotificationChannel(ctx context.Context, request operations.
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1693,8 +1736,9 @@ func (s *SDK) RemoveNotificationChannel(ctx context.Context, request operations.
 	return res, nil
 }
 
+// SearchInsights - <p> Returns a list of insights in your AWS account. You can specify which insights are returned by their start time, one or more statuses (<code>ONGOING</code>, <code>CLOSED</code>, and <code>CLOSED</code>), one or more severities (<code>LOW</code>, <code>MEDIUM</code>, and <code>HIGH</code>), and type (<code>REACTIVE</code> or <code>PROACTIVE</code>). </p> <p> Use the <code>Filters</code> parameter to specify status and severity search parameters. Use the <code>Type</code> parameter to specify <code>REACTIVE</code> or <code>PROACTIVE</code> in your search. </p>
 func (s *SDK) SearchInsights(ctx context.Context, request operations.SearchInsightsRequest) (*operations.SearchInsightsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/insights/search"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1716,7 +1760,7 @@ func (s *SDK) SearchInsights(ctx context.Context, request operations.SearchInsig
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1786,8 +1830,9 @@ func (s *SDK) SearchInsights(ctx context.Context, request operations.SearchInsig
 	return res, nil
 }
 
+// StartCostEstimation - Starts the creation of an estimate of the monthly cost to analyze your AWS resources.
 func (s *SDK) StartCostEstimation(ctx context.Context, request operations.StartCostEstimationRequest) (*operations.StartCostEstimationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/cost-estimation"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1807,7 +1852,7 @@ func (s *SDK) StartCostEstimation(ctx context.Context, request operations.StartC
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1897,8 +1942,9 @@ func (s *SDK) StartCostEstimation(ctx context.Context, request operations.StartC
 	return res, nil
 }
 
+// UpdateResourceCollection -  Updates the collection of resources that DevOps Guru analyzes. The one type of AWS resource collection supported is AWS CloudFormation stacks. DevOps Guru can be configured to analyze only the AWS resources that are defined in the stacks. You can specify up to 500 AWS CloudFormation stacks. This method also creates the IAM role required for you to use DevOps Guru.
 func (s *SDK) UpdateResourceCollection(ctx context.Context, request operations.UpdateResourceCollectionRequest) (*operations.UpdateResourceCollectionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/resource-collections"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1918,7 +1964,7 @@ func (s *SDK) UpdateResourceCollection(ctx context.Context, request operations.U
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1998,8 +2044,9 @@ func (s *SDK) UpdateResourceCollection(ctx context.Context, request operations.U
 	return res, nil
 }
 
+// UpdateServiceIntegration -  Enables or disables integration with a service that can be integrated with DevOps Guru. The one service that can be integrated with DevOps Guru is AWS Systems Manager, which can be used to create an OpsItem for each generated insight.
 func (s *SDK) UpdateServiceIntegration(ctx context.Context, request operations.UpdateServiceIntegrationRequest) (*operations.UpdateServiceIntegrationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/service-integrations"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2019,7 +2066,7 @@ func (s *SDK) UpdateServiceIntegration(ctx context.Context, request operations.U
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {

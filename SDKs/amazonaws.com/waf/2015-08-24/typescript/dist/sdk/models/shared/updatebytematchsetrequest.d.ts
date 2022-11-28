@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ByteMatchSetUpdate } from "./bytematchsetupdate";
 export declare class UpdateByteMatchSetRequest extends SpeakeasyBase {
     byteMatchSetId: string;

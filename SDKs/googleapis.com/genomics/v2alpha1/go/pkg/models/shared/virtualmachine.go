@@ -1,5 +1,7 @@
 package shared
 
+// VirtualMachine
+// Carries information about a Compute Engine VM resource.
 type VirtualMachine struct {
 	Accelerators                []Accelerator     `json:"accelerators,omitempty"`
 	BootDiskSizeGb              *int32            `json:"bootDiskSizeGb,omitempty"`

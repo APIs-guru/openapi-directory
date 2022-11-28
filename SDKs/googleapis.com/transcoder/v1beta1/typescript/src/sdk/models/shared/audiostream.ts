@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AudioAtom } from "./audioatom";
+
 
 
 // AudioStream
@@ -8,21 +8,21 @@ import { AudioAtom } from "./audioatom";
  * Audio stream resource.
 **/
 export class AudioStream extends SpeakeasyBase {
-  @Metadata({ data: "json, name=bitrateBps" })
+  @SpeakeasyMetadata({ data: "json, name=bitrateBps" })
   bitrateBps?: number;
 
-  @Metadata({ data: "json, name=channelCount" })
+  @SpeakeasyMetadata({ data: "json, name=channelCount" })
   channelCount?: number;
 
-  @Metadata({ data: "json, name=channelLayout" })
+  @SpeakeasyMetadata({ data: "json, name=channelLayout" })
   channelLayout?: string[];
 
-  @Metadata({ data: "json, name=codec" })
+  @SpeakeasyMetadata({ data: "json, name=codec" })
   codec?: string;
 
-  @Metadata({ data: "json, name=mapping", elemType: shared.AudioAtom })
+  @SpeakeasyMetadata({ data: "json, name=mapping", elemType: AudioAtom })
   mapping?: AudioAtom[];
 
-  @Metadata({ data: "json, name=sampleRateHertz" })
+  @SpeakeasyMetadata({ data: "json, name=sampleRateHertz" })
   sampleRateHertz?: number;
 }

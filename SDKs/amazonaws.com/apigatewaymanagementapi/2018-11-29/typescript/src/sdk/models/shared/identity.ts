@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class Identity extends SpeakeasyBase {
-  @Metadata({ data: "json, name=SourceIp" })
+  @SpeakeasyMetadata({ data: "json, name=SourceIp" })
   sourceIp: string;
 
-  @Metadata({ data: "json, name=UserAgent" })
+  @SpeakeasyMetadata({ data: "json, name=UserAgent" })
   userAgent: string;
 }

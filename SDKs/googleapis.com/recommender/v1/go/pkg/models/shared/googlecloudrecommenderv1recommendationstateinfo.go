@@ -11,6 +11,8 @@ const (
 	GoogleCloudRecommenderV1RecommendationStateInfoStateEnumDismissed        GoogleCloudRecommenderV1RecommendationStateInfoStateEnum = "DISMISSED"
 )
 
+// GoogleCloudRecommenderV1RecommendationStateInfo
+// Information for state. Contains state and metadata.
 type GoogleCloudRecommenderV1RecommendationStateInfo struct {
 	State         *GoogleCloudRecommenderV1RecommendationStateInfoStateEnum `json:"state,omitempty"`
 	StateMetadata map[string]string                                         `json:"stateMetadata,omitempty"`

@@ -1,76 +1,77 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class UpdateOrganizationApplianceVpnVpnFirewallRulesPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=organizationId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=organizationId" })
   organizationId: string;
 }
 
 export enum UpdateOrganizationApplianceVpnVpnFirewallRulesRequestBodyRulesPolicyEnum {
-    Allow = "allow"
-,    Deny = "deny"
+    Allow = "allow",
+    Deny = "deny"
 }
 
 export enum UpdateOrganizationApplianceVpnVpnFirewallRulesRequestBodyRulesProtocolEnum {
-    Tcp = "tcp"
-,    Udp = "udp"
-,    Icmp = "icmp"
-,    Any = "any"
+    Tcp = "tcp",
+    Udp = "udp",
+    Icmp = "icmp",
+    Any = "any"
 }
 
 
 export class UpdateOrganizationApplianceVpnVpnFirewallRulesRequestBodyRules extends SpeakeasyBase {
-  @Metadata({ data: "json, name=comment" })
+  @SpeakeasyMetadata({ data: "json, name=comment" })
   comment?: string;
 
-  @Metadata({ data: "json, name=destCidr" })
+  @SpeakeasyMetadata({ data: "json, name=destCidr" })
   destCidr: string;
 
-  @Metadata({ data: "json, name=destPort" })
+  @SpeakeasyMetadata({ data: "json, name=destPort" })
   destPort?: string;
 
-  @Metadata({ data: "json, name=policy" })
+  @SpeakeasyMetadata({ data: "json, name=policy" })
   policy: UpdateOrganizationApplianceVpnVpnFirewallRulesRequestBodyRulesPolicyEnum;
 
-  @Metadata({ data: "json, name=protocol" })
+  @SpeakeasyMetadata({ data: "json, name=protocol" })
   protocol: UpdateOrganizationApplianceVpnVpnFirewallRulesRequestBodyRulesProtocolEnum;
 
-  @Metadata({ data: "json, name=srcCidr" })
+  @SpeakeasyMetadata({ data: "json, name=srcCidr" })
   srcCidr: string;
 
-  @Metadata({ data: "json, name=srcPort" })
+  @SpeakeasyMetadata({ data: "json, name=srcPort" })
   srcPort?: string;
 
-  @Metadata({ data: "json, name=syslogEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=syslogEnabled" })
   syslogEnabled?: boolean;
 }
 
 
 export class UpdateOrganizationApplianceVpnVpnFirewallRulesRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=rules", elemType: operations.UpdateOrganizationApplianceVpnVpnFirewallRulesRequestBodyRules })
+  @SpeakeasyMetadata({ data: "json, name=rules", elemType: UpdateOrganizationApplianceVpnVpnFirewallRulesRequestBodyRules })
   rules?: UpdateOrganizationApplianceVpnVpnFirewallRulesRequestBodyRules[];
 
-  @Metadata({ data: "json, name=syslogDefaultRule" })
+  @SpeakeasyMetadata({ data: "json, name=syslogDefaultRule" })
   syslogDefaultRule?: boolean;
 }
 
 
 export class UpdateOrganizationApplianceVpnVpnFirewallRulesRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: UpdateOrganizationApplianceVpnVpnFirewallRulesPathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request?: UpdateOrganizationApplianceVpnVpnFirewallRulesRequestBody;
 }
 
 
 export class UpdateOrganizationApplianceVpnVpnFirewallRulesResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   updateOrganizationApplianceVpnVpnFirewallRules200ApplicationJsonObject?: Map<string, any>;
 }

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetApiUsagePlansV2Security = /** @class */ (function (_super) {
     __extends(GetApiUsagePlansV2Security, _super);
@@ -30,7 +30,7 @@ var GetApiUsagePlansV2Security = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=http;subtype=bearer" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" }),
         __metadata("design:type", shared.SchemeBearerToken)
     ], GetApiUsagePlansV2Security.prototype, "bearerToken", void 0);
     return GetApiUsagePlansV2Security;
@@ -42,7 +42,7 @@ var GetApiUsagePlansV2Request = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetApiUsagePlansV2Security)
     ], GetApiUsagePlansV2Request.prototype, "security", void 0);
     return GetApiUsagePlansV2Request;
@@ -54,15 +54,15 @@ var GetApiUsagePlansV2Response = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.ApiUsageList)
     ], GetApiUsagePlansV2Response.prototype, "apiUsageList", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetApiUsagePlansV2Response.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetApiUsagePlansV2Response.prototype, "statusCode", void 0);
     return GetApiUsagePlansV2Response;

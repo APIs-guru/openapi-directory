@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ServicePrincipalObjectResult
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Service Principal Object Result.
 **/
 export class ServicePrincipalObjectResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=odata.metadata" })
+  @SpeakeasyMetadata({ data: "json, name=odata.metadata" })
   odataMetadata?: string;
 
-  @Metadata({ data: "json, name=value" })
+  @SpeakeasyMetadata({ data: "json, name=value" })
   value?: string;
 }

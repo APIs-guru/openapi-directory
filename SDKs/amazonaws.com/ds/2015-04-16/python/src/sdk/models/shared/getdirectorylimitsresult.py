@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import directorylimits
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class GetDirectoryLimitsResult:
-    directory_limits: Optional[directorylimits.DirectoryLimits] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'DirectoryLimits' }})
+    r"""GetDirectoryLimitsResult
+    Contains the results of the <a>GetDirectoryLimits</a> operation.
+    """
+    
+    directory_limits: Optional[DirectoryLimits] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('DirectoryLimits') }})
     

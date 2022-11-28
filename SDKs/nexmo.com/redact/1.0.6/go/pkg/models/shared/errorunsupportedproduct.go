@@ -1,5 +1,7 @@
 package shared
 
+// ErrorUnsupportedProduct
+// Unsupported Product
 type ErrorUnsupportedProduct struct {
 	Detail   string `json:"detail"`
 	Instance string `json:"instance"`

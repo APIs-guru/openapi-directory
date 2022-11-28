@@ -1,14 +1,15 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DataflowProjectsLocationsJobsStagesGetExecutionDetailsPathParams:
-    job_id: str = field(default=None, metadata={'path_param': { 'field_name': 'jobId', 'style': 'simple', 'explode': False }})
-    location: str = field(default=None, metadata={'path_param': { 'field_name': 'location', 'style': 'simple', 'explode': False }})
-    project_id: str = field(default=None, metadata={'path_param': { 'field_name': 'projectId', 'style': 'simple', 'explode': False }})
-    stage_id: str = field(default=None, metadata={'path_param': { 'field_name': 'stageId', 'style': 'simple', 'explode': False }})
+    job_id: str = field(metadata={'path_param': { 'field_name': 'jobId', 'style': 'simple', 'explode': False }})
+    location: str = field(metadata={'path_param': { 'field_name': 'location', 'style': 'simple', 'explode': False }})
+    project_id: str = field(metadata={'path_param': { 'field_name': 'projectId', 'style': 'simple', 'explode': False }})
+    stage_id: str = field(metadata={'path_param': { 'field_name': 'stageId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -32,26 +33,26 @@ class DataflowProjectsLocationsJobsStagesGetExecutionDetailsQueryParams:
 
 @dataclass
 class DataflowProjectsLocationsJobsStagesGetExecutionDetailsSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DataflowProjectsLocationsJobsStagesGetExecutionDetailsSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DataflowProjectsLocationsJobsStagesGetExecutionDetailsSecurityOption3:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DataflowProjectsLocationsJobsStagesGetExecutionDetailsSecurityOption4:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -64,14 +65,14 @@ class DataflowProjectsLocationsJobsStagesGetExecutionDetailsSecurity:
 
 @dataclass
 class DataflowProjectsLocationsJobsStagesGetExecutionDetailsRequest:
-    path_params: DataflowProjectsLocationsJobsStagesGetExecutionDetailsPathParams = field(default=None)
-    query_params: DataflowProjectsLocationsJobsStagesGetExecutionDetailsQueryParams = field(default=None)
-    security: DataflowProjectsLocationsJobsStagesGetExecutionDetailsSecurity = field(default=None)
+    path_params: DataflowProjectsLocationsJobsStagesGetExecutionDetailsPathParams = field()
+    query_params: DataflowProjectsLocationsJobsStagesGetExecutionDetailsQueryParams = field()
+    security: DataflowProjectsLocationsJobsStagesGetExecutionDetailsSecurity = field()
     
 
 @dataclass
 class DataflowProjectsLocationsJobsStagesGetExecutionDetailsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     stage_execution_details: Optional[shared.StageExecutionDetails] = field(default=None)
-    status_code: int = field(default=None)
     

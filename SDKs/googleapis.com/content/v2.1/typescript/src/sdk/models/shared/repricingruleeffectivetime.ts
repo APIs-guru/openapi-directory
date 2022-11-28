@@ -1,9 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RepricingRuleEffectiveTimeFixedTimePeriod } from "./repricingruleeffectivetimefixedtimeperiod";
 
 
+
 export class RepricingRuleEffectiveTime extends SpeakeasyBase {
-  @Metadata({ data: "json, name=fixedTimePeriods", elemType: shared.RepricingRuleEffectiveTimeFixedTimePeriod })
+  @SpeakeasyMetadata({ data: "json, name=fixedTimePeriods", elemType: RepricingRuleEffectiveTimeFixedTimePeriod })
   fixedTimePeriods?: RepricingRuleEffectiveTimeFixedTimePeriod[];
 }

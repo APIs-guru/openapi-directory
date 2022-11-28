@@ -1,59 +1,48 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class CloseTicketPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=ticketId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=ticketId" })
   ticketId: number;
 }
 
 
-export class CloseTicketSecurityOption1 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=bearer" })
-  personalAccessToken: shared.SchemePersonalAccessToken;
-}
-
-
-export class CloseTicketSecurityOption2 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
-  oauth: shared.SchemeOauth;
-}
-
-
 export class CloseTicketSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, option=true" })
-  option1?: CloseTicketSecurityOption1;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" })
+  personalAccessToken?: shared.SchemePersonalAccessToken;
 
-  @Metadata({ data: "security, option=true" })
-  option2?: CloseTicketSecurityOption2;
-}
-
-
-export class CloseTicketRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: CloseTicketPathParams;
-
-  @Metadata()
-  security: CloseTicketSecurity;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
+  oauth?: shared.SchemeOauth;
 }
 
 
 export class CloseTicketDefaultApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=errors", elemType: shared.ErrorObject })
+  @SpeakeasyMetadata({ data: "json, name=errors", elemType: shared.ErrorObject })
   errors?: shared.ErrorObject[];
 }
 
 
+export class CloseTicketRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: CloseTicketPathParams;
+
+  @SpeakeasyMetadata()
+  security: CloseTicketSecurity;
+}
+
+
 export class CloseTicketResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   closeTicket200ApplicationJsonObject?: Map<string, any>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   closeTicketDefaultApplicationJsonObject?: CloseTicketDefaultApplicationJson;
 }

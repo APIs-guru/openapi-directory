@@ -19,6 +19,9 @@ type ListEventsHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// ListEventsRequestBodyFilters
+//
+//	Filters you can use to specify which events are returned when <code>ListEvents</code> is called.
 type ListEventsRequestBodyFilters struct {
 	DataSource         *shared.EventDataSourceEnum `json:"DataSource,omitempty"`
 	EventClass         *shared.EventClassEnum      `json:"EventClass,omitempty"`

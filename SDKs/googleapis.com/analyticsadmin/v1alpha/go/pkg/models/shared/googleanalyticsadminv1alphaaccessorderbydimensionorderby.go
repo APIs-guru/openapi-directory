@@ -9,6 +9,8 @@ const (
 	GoogleAnalyticsAdminV1alphaAccessOrderByDimensionOrderByOrderTypeEnumNumeric                     GoogleAnalyticsAdminV1alphaAccessOrderByDimensionOrderByOrderTypeEnum = "NUMERIC"
 )
 
+// GoogleAnalyticsAdminV1alphaAccessOrderByDimensionOrderBy
+// Sorts by dimension values.
 type GoogleAnalyticsAdminV1alphaAccessOrderByDimensionOrderBy struct {
 	DimensionName *string                                                                `json:"dimensionName,omitempty"`
 	OrderType     *GoogleAnalyticsAdminV1alphaAccessOrderByDimensionOrderByOrderTypeEnum `json:"orderType,omitempty"`

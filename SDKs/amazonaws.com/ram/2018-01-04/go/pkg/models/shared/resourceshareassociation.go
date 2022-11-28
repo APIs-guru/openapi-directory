@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// ResourceShareAssociation
+// Describes an association with a resource share.
 type ResourceShareAssociation struct {
 	AssociatedEntity  *string                             `json:"associatedEntity,omitempty"`
 	AssociationType   *ResourceShareAssociationTypeEnum   `json:"associationType,omitempty"`

@@ -22,9 +22,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ChannelGrouping } from "./channelgrouping";
+import { PathFilter } from "./pathfilter";
 // PathQueryOptions
 /**
  * Path Query Options for Report Options.
@@ -35,11 +35,11 @@ var PathQueryOptions = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=channelGrouping" }),
+        SpeakeasyMetadata({ data: "json, name=channelGrouping" }),
         __metadata("design:type", ChannelGrouping)
     ], PathQueryOptions.prototype, "channelGrouping", void 0);
     __decorate([
-        Metadata({ data: "json, name=pathFilters", elemType: shared.PathFilter }),
+        SpeakeasyMetadata({ data: "json, name=pathFilters", elemType: PathFilter }),
         __metadata("design:type", Array)
     ], PathQueryOptions.prototype, "pathFilters", void 0);
     return PathQueryOptions;

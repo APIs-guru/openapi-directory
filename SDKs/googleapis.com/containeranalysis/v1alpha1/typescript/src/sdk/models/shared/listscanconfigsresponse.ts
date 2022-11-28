@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ScanConfig } from "./scanconfig";
+
 
 
 // ListScanConfigsResponse
@@ -8,9 +8,9 @@ import { ScanConfig } from "./scanconfig";
  * A list of scan configs for the project.
 **/
 export class ListScanConfigsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 
-  @Metadata({ data: "json, name=scanConfigs", elemType: shared.ScanConfig })
+  @SpeakeasyMetadata({ data: "json, name=scanConfigs", elemType: ScanConfig })
   scanConfigs?: ScanConfig[];
 }

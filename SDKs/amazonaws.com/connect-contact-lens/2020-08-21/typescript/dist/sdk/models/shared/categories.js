@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { CategoryDetails } from "./categorydetails";
 // Categories
 /**
  * Provides the category rules that are used to automatically categorize contacts based on uttered keywords and phrases.
@@ -34,11 +34,11 @@ var Categories = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=MatchedCategories" }),
+        SpeakeasyMetadata({ data: "json, name=MatchedCategories" }),
         __metadata("design:type", Array)
     ], Categories.prototype, "matchedCategories", void 0);
     __decorate([
-        Metadata({ data: "json, name=MatchedDetails", elemType: shared.CategoryDetails }),
+        SpeakeasyMetadata({ data: "json, name=MatchedDetails", elemType: CategoryDetails }),
         __metadata("design:type", Map)
     ], Categories.prototype, "matchedDetails", void 0);
     return Categories;

@@ -1,6 +1,7 @@
 
 
+
 export enum BotFilterOperatorEnum {
-    Co = "CO"
-,    Eq = "EQ"
+    Co = "CO",
+    Eq = "EQ"
 }

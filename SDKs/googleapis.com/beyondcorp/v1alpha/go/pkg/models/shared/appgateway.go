@@ -25,6 +25,18 @@ const (
 	AppGatewayTypeEnumTCPProxy        AppGatewayTypeEnum = "TCP_PROXY"
 )
 
+// AppGatewayInput
+// A BeyondCorp AppGateway resource represents a BeyondCorp protected AppGateway to a remote application. It creates all the necessary GCP components needed for creating a BeyondCorp protected AppGateway. Multiple connectors can be authorised for a single AppGateway.
+type AppGatewayInput struct {
+	DisplayName *string                 `json:"displayName,omitempty"`
+	HostType    *AppGatewayHostTypeEnum `json:"hostType,omitempty"`
+	Labels      map[string]string       `json:"labels,omitempty"`
+	Name        *string                 `json:"name,omitempty"`
+	Type        *AppGatewayTypeEnum     `json:"type,omitempty"`
+}
+
+// AppGateway
+// A BeyondCorp AppGateway resource represents a BeyondCorp protected AppGateway to a remote application. It creates all the necessary GCP components needed for creating a BeyondCorp protected AppGateway. Multiple connectors can be authorised for a single AppGateway.
 type AppGateway struct {
 	AllocatedConnections []AllocatedConnection   `json:"allocatedConnections,omitempty"`
 	CreateTime           *string                 `json:"createTime,omitempty"`

@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum InvitationRoleEnum {
-    CourseRoleUnspecified = "COURSE_ROLE_UNSPECIFIED"
-,    Student = "STUDENT"
-,    Teacher = "TEACHER"
-,    Owner = "OWNER"
+    CourseRoleUnspecified = "COURSE_ROLE_UNSPECIFIED",
+    Student = "STUDENT",
+    Teacher = "TEACHER",
+    Owner = "OWNER"
 }
 
 
@@ -13,15 +14,15 @@ export enum InvitationRoleEnum {
  * An invitation to join a course.
 **/
 export class Invitation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=courseId" })
+  @SpeakeasyMetadata({ data: "json, name=courseId" })
   courseId?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=role" })
+  @SpeakeasyMetadata({ data: "json, name=role" })
   role?: InvitationRoleEnum;
 
-  @Metadata({ data: "json, name=userId" })
+  @SpeakeasyMetadata({ data: "json, name=userId" })
   userId?: string;
 }

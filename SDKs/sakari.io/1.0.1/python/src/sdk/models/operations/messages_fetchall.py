@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class MessagesFetchAllPathParams:
-    account_id: str = field(default=None, metadata={'path_param': { 'field_name': 'accountId', 'style': 'simple', 'explode': False }})
+    account_id: str = field(metadata={'path_param': { 'field_name': 'accountId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -18,19 +18,19 @@ class MessagesFetchAllQueryParams:
 
 @dataclass
 class MessagesFetchAllSecurity:
-    sakari_auth: shared.SchemeSakariAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    sakari_auth: shared.SchemeSakariAuth = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class MessagesFetchAllRequest:
-    path_params: MessagesFetchAllPathParams = field(default=None)
-    query_params: MessagesFetchAllQueryParams = field(default=None)
-    security: MessagesFetchAllSecurity = field(default=None)
+    path_params: MessagesFetchAllPathParams = field()
+    query_params: MessagesFetchAllQueryParams = field()
+    security: MessagesFetchAllSecurity = field()
     
 
 @dataclass
 class MessagesFetchAllResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     messages_response: Optional[shared.MessagesResponse] = field(default=None)
-    status_code: int = field(default=None)
     

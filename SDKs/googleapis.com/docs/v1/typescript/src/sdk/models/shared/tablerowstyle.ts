@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Dimension } from "./dimension";
+
 
 
 // TableRowStyle
@@ -7,12 +8,12 @@ import { Dimension } from "./dimension";
  * Styles that apply to a table row.
 **/
 export class TableRowStyle extends SpeakeasyBase {
-  @Metadata({ data: "json, name=minRowHeight" })
+  @SpeakeasyMetadata({ data: "json, name=minRowHeight" })
   minRowHeight?: Dimension;
 
-  @Metadata({ data: "json, name=preventOverflow" })
+  @SpeakeasyMetadata({ data: "json, name=preventOverflow" })
   preventOverflow?: boolean;
 
-  @Metadata({ data: "json, name=tableHeader" })
+  @SpeakeasyMetadata({ data: "json, name=tableHeader" })
   tableHeader?: boolean;
 }

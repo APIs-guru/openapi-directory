@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// DatastoreSummary
+// A summary of information about a data store.
 type DatastoreSummary struct {
 	CreationTime           *time.Time               `json:"creationTime,omitempty"`
 	DatastoreName          *string                  `json:"datastoreName,omitempty"`

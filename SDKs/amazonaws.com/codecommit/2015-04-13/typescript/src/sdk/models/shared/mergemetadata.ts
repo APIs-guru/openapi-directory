@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { MergeOptionTypeEnumEnum } from "./mergeoptiontypeenumenum";
+
 
 
 // MergeMetadata
@@ -7,15 +8,15 @@ import { MergeOptionTypeEnumEnum } from "./mergeoptiontypeenumenum";
  * Returns information about a merge or potential merge between a source reference and a destination reference in a pull request.
 **/
 export class MergeMetadata extends SpeakeasyBase {
-  @Metadata({ data: "json, name=isMerged" })
+  @SpeakeasyMetadata({ data: "json, name=isMerged" })
   isMerged?: boolean;
 
-  @Metadata({ data: "json, name=mergeCommitId" })
+  @SpeakeasyMetadata({ data: "json, name=mergeCommitId" })
   mergeCommitId?: string;
 
-  @Metadata({ data: "json, name=mergeOption" })
+  @SpeakeasyMetadata({ data: "json, name=mergeOption" })
   mergeOption?: MergeOptionTypeEnumEnum;
 
-  @Metadata({ data: "json, name=mergedBy" })
+  @SpeakeasyMetadata({ data: "json, name=mergedBy" })
   mergedBy?: string;
 }

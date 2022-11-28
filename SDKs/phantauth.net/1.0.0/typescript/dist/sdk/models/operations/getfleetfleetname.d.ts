@@ -1,9 +1,6 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 export declare class GetFleetFleetnamePathParams extends SpeakeasyBase {
     fleetname: string;
-}
-export declare class GetFleetFleetnameRequest extends SpeakeasyBase {
-    pathParams: GetFleetFleetnamePathParams;
 }
 export declare class GetFleetFleetname200ApplicationJson extends SpeakeasyBase {
     atId?: string;
@@ -13,6 +10,9 @@ export declare class GetFleetFleetname200ApplicationJson extends SpeakeasyBase {
     name?: string;
     profile?: string;
     sub: string;
+}
+export declare class GetFleetFleetnameRequest extends SpeakeasyBase {
+    pathParams: GetFleetFleetnamePathParams;
 }
 export declare class GetFleetFleetnameResponse extends SpeakeasyBase {
     contentType: string;

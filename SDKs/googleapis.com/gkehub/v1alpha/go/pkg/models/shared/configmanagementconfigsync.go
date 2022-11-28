@@ -1,5 +1,7 @@
 package shared
 
+// ConfigManagementConfigSync
+// Configuration for Config Sync
 type ConfigManagementConfigSync struct {
 	AllowVerticalScale *bool                      `json:"allowVerticalScale,omitempty"`
 	Enabled            *bool                      `json:"enabled,omitempty"`

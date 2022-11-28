@@ -1,20 +1,21 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { WorkerConfigurationRevisionDescription } from "./workerconfigurationrevisiondescription";
 
 
+
 export class DescribeWorkerConfigurationResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=creationTime" })
+  @SpeakeasyMetadata({ data: "json, name=creationTime" })
   creationTime?: Date;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=latestRevision" })
+  @SpeakeasyMetadata({ data: "json, name=latestRevision" })
   latestRevision?: WorkerConfigurationRevisionDescription;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=workerConfigurationArn" })
+  @SpeakeasyMetadata({ data: "json, name=workerConfigurationArn" })
   workerConfigurationArn?: string;
 }

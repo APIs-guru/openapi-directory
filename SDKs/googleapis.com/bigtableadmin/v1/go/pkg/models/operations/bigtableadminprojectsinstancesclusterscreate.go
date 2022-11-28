@@ -65,7 +65,7 @@ type BigtableadminProjectsInstancesClustersCreateSecurity struct {
 type BigtableadminProjectsInstancesClustersCreateRequest struct {
 	PathParams  BigtableadminProjectsInstancesClustersCreatePathParams
 	QueryParams BigtableadminProjectsInstancesClustersCreateQueryParams
-	Request     *shared.Cluster `request:"mediaType=application/json"`
+	Request     *shared.ClusterInput `request:"mediaType=application/json"`
 	Security    BigtableadminProjectsInstancesClustersCreateSecurity
 }
 

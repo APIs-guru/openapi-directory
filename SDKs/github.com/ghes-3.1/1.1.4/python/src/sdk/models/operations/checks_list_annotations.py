@@ -5,9 +5,9 @@ from sdk.models import shared
 
 @dataclass
 class ChecksListAnnotationsPathParams:
-    check_run_id: int = field(default=None, metadata={'path_param': { 'field_name': 'check_run_id', 'style': 'simple', 'explode': False }})
-    owner: str = field(default=None, metadata={'path_param': { 'field_name': 'owner', 'style': 'simple', 'explode': False }})
-    repo: str = field(default=None, metadata={'path_param': { 'field_name': 'repo', 'style': 'simple', 'explode': False }})
+    check_run_id: int = field(metadata={'path_param': { 'field_name': 'check_run_id', 'style': 'simple', 'explode': False }})
+    owner: str = field(metadata={'path_param': { 'field_name': 'owner', 'style': 'simple', 'explode': False }})
+    repo: str = field(metadata={'path_param': { 'field_name': 'repo', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -18,14 +18,14 @@ class ChecksListAnnotationsQueryParams:
 
 @dataclass
 class ChecksListAnnotationsRequest:
-    path_params: ChecksListAnnotationsPathParams = field(default=None)
-    query_params: ChecksListAnnotationsQueryParams = field(default=None)
+    path_params: ChecksListAnnotationsPathParams = field()
+    query_params: ChecksListAnnotationsQueryParams = field()
     
 
 @dataclass
 class ChecksListAnnotationsResponse:
-    content_type: str = field(default=None)
-    headers: dict[str, List[str]] = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    headers: dict[str, List[str]] = field()
+    status_code: int = field()
     check_annotations: Optional[List[shared.CheckAnnotation]] = field(default=None)
     

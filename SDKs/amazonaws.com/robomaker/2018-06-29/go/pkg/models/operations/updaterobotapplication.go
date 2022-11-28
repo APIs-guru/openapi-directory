@@ -14,10 +14,14 @@ type UpdateRobotApplicationHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// UpdateRobotApplicationRequestBodyEnvironment
+// The object that contains the Docker image URI for either your robot or simulation applications.
 type UpdateRobotApplicationRequestBodyEnvironment struct {
 	URI *string `json:"uri,omitempty"`
 }
 
+// UpdateRobotApplicationRequestBodyRobotSoftwareSuite
+// Information about a robot software suite (ROS distribution).
 type UpdateRobotApplicationRequestBodyRobotSoftwareSuite struct {
 	Name    *shared.RobotSoftwareSuiteTypeEnum        `json:"name,omitempty"`
 	Version *shared.RobotSoftwareSuiteVersionTypeEnum `json:"version,omitempty"`

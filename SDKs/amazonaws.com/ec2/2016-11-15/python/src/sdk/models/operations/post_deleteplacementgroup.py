@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostDeletePlacementGroupActionEnum(str, Enum):
     DELETE_PLACEMENT_GROUP = "DeletePlacementGroup"
@@ -10,8 +14,8 @@ class PostDeletePlacementGroupVersionEnum(str, Enum):
 
 @dataclass
 class PostDeletePlacementGroupQueryParams:
-    action: PostDeletePlacementGroupActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostDeletePlacementGroupVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostDeletePlacementGroupActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostDeletePlacementGroupVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,13 +31,13 @@ class PostDeletePlacementGroupHeaders:
 
 @dataclass
 class PostDeletePlacementGroupRequest:
-    query_params: PostDeletePlacementGroupQueryParams = field(default=None)
-    headers: PostDeletePlacementGroupHeaders = field(default=None)
+    headers: PostDeletePlacementGroupHeaders = field()
+    query_params: PostDeletePlacementGroupQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostDeletePlacementGroupResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

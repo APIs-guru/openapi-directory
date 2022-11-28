@@ -8,6 +8,8 @@ const (
 	RegisterRealtimeAPIDataRegistrationTypeEnumUserRegistration        RegisterRealtimeAPIDataRegistrationTypeEnum = "UserRegistration"
 )
 
+// RegisterRealtimeAPIData
+// Container class for the register realtime API API
 type RegisterRealtimeAPIData struct {
 	APIURL            *string                                      `json:"ApiUrl,omitempty" form:"name=ApiUrl"`
 	BasicAuthPassword *string                                      `json:"BasicAuthPassword,omitempty" form:"name=BasicAuthPassword"`

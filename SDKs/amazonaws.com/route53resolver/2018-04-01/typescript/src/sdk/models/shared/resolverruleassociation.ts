@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ResolverRuleAssociationStatusEnum } from "./resolverruleassociationstatusenum";
+
 
 
 // ResolverRuleAssociation
@@ -7,21 +8,21 @@ import { ResolverRuleAssociationStatusEnum } from "./resolverruleassociationstat
  * In the response to an <a href="https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_AssociateResolverRule.html">AssociateResolverRule</a>, <a href="https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_DisassociateResolverRule.html">DisassociateResolverRule</a>, or <a href="https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_ListResolverRuleAssociations.html">ListResolverRuleAssociations</a> request, provides information about an association between a Resolver rule and a VPC. The association determines which DNS queries that originate in the VPC are forwarded to your network. 
 **/
 export class ResolverRuleAssociation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Id" })
+  @SpeakeasyMetadata({ data: "json, name=Id" })
   id?: string;
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name?: string;
 
-  @Metadata({ data: "json, name=ResolverRuleId" })
+  @SpeakeasyMetadata({ data: "json, name=ResolverRuleId" })
   resolverRuleId?: string;
 
-  @Metadata({ data: "json, name=Status" })
+  @SpeakeasyMetadata({ data: "json, name=Status" })
   status?: ResolverRuleAssociationStatusEnum;
 
-  @Metadata({ data: "json, name=StatusMessage" })
+  @SpeakeasyMetadata({ data: "json, name=StatusMessage" })
   statusMessage?: string;
 
-  @Metadata({ data: "json, name=VPCId" })
+  @SpeakeasyMetadata({ data: "json, name=VPCId" })
   vpcId?: string;
 }

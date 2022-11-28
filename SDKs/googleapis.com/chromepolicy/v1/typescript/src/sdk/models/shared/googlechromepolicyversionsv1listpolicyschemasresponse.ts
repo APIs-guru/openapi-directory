@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleChromePolicyVersionsV1PolicySchema } from "./googlechromepolicyversionsv1policyschema";
+
 
 
 // GoogleChromePolicyVersionsV1ListPolicySchemasResponse
@@ -8,9 +8,9 @@ import { GoogleChromePolicyVersionsV1PolicySchema } from "./googlechromepolicyve
  * Response message for listing policy schemas that match a filter.
 **/
 export class GoogleChromePolicyVersionsV1ListPolicySchemasResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 
-  @Metadata({ data: "json, name=policySchemas", elemType: shared.GoogleChromePolicyVersionsV1PolicySchema })
+  @SpeakeasyMetadata({ data: "json, name=policySchemas", elemType: GoogleChromePolicyVersionsV1PolicySchema })
   policySchemas?: GoogleChromePolicyVersionsV1PolicySchema[];
 }

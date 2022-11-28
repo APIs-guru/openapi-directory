@@ -1,12 +1,16 @@
 from dataclasses import dataclass, field
 from dataclasses_json import dataclass_json
-from . import prompt
-from . import statement
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class FollowUpPrompt:
-    prompt: prompt.Prompt = field(default=None, metadata={'dataclasses_json': { 'field_name': 'prompt' }})
-    rejection_statement: statement.Statement = field(default=None, metadata={'dataclasses_json': { 'field_name': 'rejectionStatement' }})
+    r"""FollowUpPrompt
+    A prompt for additional activity after an intent is fulfilled. For example, after the <code>OrderPizza</code> intent is fulfilled, you might prompt the user to find out whether the user wants to order drinks.
+    """
+    
+    prompt: Prompt = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('prompt') }})
+    rejection_statement: Statement = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('rejectionStatement') }})
     

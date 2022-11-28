@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class SecretmanagerProjectsSecretsPatchPathParams extends SpeakeasyBase {
     name: string;
@@ -24,7 +24,7 @@ export declare class SecretmanagerProjectsSecretsPatchSecurity extends Speakeasy
 export declare class SecretmanagerProjectsSecretsPatchRequest extends SpeakeasyBase {
     pathParams: SecretmanagerProjectsSecretsPatchPathParams;
     queryParams: SecretmanagerProjectsSecretsPatchQueryParams;
-    request?: shared.Secret;
+    request?: shared.SecretInput;
     security: SecretmanagerProjectsSecretsPatchSecurity;
 }
 export declare class SecretmanagerProjectsSecretsPatchResponse extends SpeakeasyBase {

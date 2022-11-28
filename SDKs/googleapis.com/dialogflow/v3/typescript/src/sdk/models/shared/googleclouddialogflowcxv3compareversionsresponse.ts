@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudDialogflowCxV3CompareVersionsResponse
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The response message for Versions.CompareVersions.
 **/
 export class GoogleCloudDialogflowCxV3CompareVersionsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=baseVersionContentJson" })
+  @SpeakeasyMetadata({ data: "json, name=baseVersionContentJson" })
   baseVersionContentJson?: string;
 
-  @Metadata({ data: "json, name=compareTime" })
+  @SpeakeasyMetadata({ data: "json, name=compareTime" })
   compareTime?: string;
 
-  @Metadata({ data: "json, name=targetVersionContentJson" })
+  @SpeakeasyMetadata({ data: "json, name=targetVersionContentJson" })
   targetVersionContentJson?: string;
 }

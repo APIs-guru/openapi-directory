@@ -1,47 +1,48 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class EnterpriseAdminProvisionAndInviteEnterpriseGroupPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=enterprise" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=enterprise" })
   enterprise: string;
 }
 
 
 export class EnterpriseAdminProvisionAndInviteEnterpriseGroupRequestBodyMembers extends SpeakeasyBase {
-  @Metadata({ data: "json, name=value" })
+  @SpeakeasyMetadata({ data: "json, name=value" })
   value: string;
 }
 
 
 export class EnterpriseAdminProvisionAndInviteEnterpriseGroupRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=displayName" })
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
   displayName: string;
 
-  @Metadata({ data: "json, name=members", elemType: operations.EnterpriseAdminProvisionAndInviteEnterpriseGroupRequestBodyMembers })
+  @SpeakeasyMetadata({ data: "json, name=members", elemType: EnterpriseAdminProvisionAndInviteEnterpriseGroupRequestBodyMembers })
   members?: EnterpriseAdminProvisionAndInviteEnterpriseGroupRequestBodyMembers[];
 
-  @Metadata({ data: "json, name=schemas" })
+  @SpeakeasyMetadata({ data: "json, name=schemas" })
   schemas: string[];
 }
 
 
 export class EnterpriseAdminProvisionAndInviteEnterpriseGroupRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: EnterpriseAdminProvisionAndInviteEnterpriseGroupPathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request?: EnterpriseAdminProvisionAndInviteEnterpriseGroupRequestBody;
 }
 
 
 export class EnterpriseAdminProvisionAndInviteEnterpriseGroupResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   scimEnterpriseGroup?: shared.ScimEnterpriseGroup;
 }

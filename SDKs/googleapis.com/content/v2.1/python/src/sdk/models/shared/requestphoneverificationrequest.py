@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class RequestPhoneVerificationRequestPhoneVerificationMethodEnum(str, Enum):
     PHONE_VERIFICATION_METHOD_UNSPECIFIED = "PHONE_VERIFICATION_METHOD_UNSPECIFIED"
@@ -11,8 +13,12 @@ class RequestPhoneVerificationRequestPhoneVerificationMethodEnum(str, Enum):
 @dataclass_json
 @dataclass
 class RequestPhoneVerificationRequest:
-    language_code: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'languageCode' }})
-    phone_number: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'phoneNumber' }})
-    phone_region_code: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'phoneRegionCode' }})
-    phone_verification_method: Optional[RequestPhoneVerificationRequestPhoneVerificationMethodEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'phoneVerificationMethod' }})
+    r"""RequestPhoneVerificationRequest
+    Request message for the RequestPhoneVerification method.
+    """
+    
+    language_code: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('languageCode') }})
+    phone_number: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('phoneNumber') }})
+    phone_region_code: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('phoneRegionCode') }})
+    phone_verification_method: Optional[RequestPhoneVerificationRequestPhoneVerificationMethodEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('phoneVerificationMethod') }})
     

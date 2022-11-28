@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostDeleteReceiptRuleSetActionEnum(str, Enum):
     DELETE_RECEIPT_RULE_SET = "DeleteReceiptRuleSet"
@@ -10,8 +14,8 @@ class PostDeleteReceiptRuleSetVersionEnum(str, Enum):
 
 @dataclass
 class PostDeleteReceiptRuleSetQueryParams:
-    action: PostDeleteReceiptRuleSetActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostDeleteReceiptRuleSetVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostDeleteReceiptRuleSetActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostDeleteReceiptRuleSetVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostDeleteReceiptRuleSetHeaders:
 
 @dataclass
 class PostDeleteReceiptRuleSetRequest:
-    query_params: PostDeleteReceiptRuleSetQueryParams = field(default=None)
-    headers: PostDeleteReceiptRuleSetHeaders = field(default=None)
+    headers: PostDeleteReceiptRuleSetHeaders = field()
+    query_params: PostDeleteReceiptRuleSetQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostDeleteReceiptRuleSetResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

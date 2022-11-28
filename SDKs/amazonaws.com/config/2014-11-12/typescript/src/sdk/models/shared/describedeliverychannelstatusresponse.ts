@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DeliveryChannelStatus } from "./deliverychannelstatus";
+
 
 
 // DescribeDeliveryChannelStatusResponse
@@ -8,6 +8,6 @@ import { DeliveryChannelStatus } from "./deliverychannelstatus";
  * The output for the <a>DescribeDeliveryChannelStatus</a> action.
 **/
 export class DescribeDeliveryChannelStatusResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DeliveryChannelsStatus", elemType: shared.DeliveryChannelStatus })
+  @SpeakeasyMetadata({ data: "json, name=DeliveryChannelsStatus", elemType: DeliveryChannelStatus })
   deliveryChannelsStatus?: DeliveryChannelStatus[];
 }

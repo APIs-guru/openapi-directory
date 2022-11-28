@@ -9,6 +9,8 @@ const (
 	EscalationReasonEnumBusinessImpact     EscalationReasonEnum = "BUSINESS_IMPACT"
 )
 
+// Escalation
+// An escalation of a support case.
 type Escalation struct {
 	Justification *string               `json:"justification,omitempty"`
 	Reason        *EscalationReasonEnum `json:"reason,omitempty"`

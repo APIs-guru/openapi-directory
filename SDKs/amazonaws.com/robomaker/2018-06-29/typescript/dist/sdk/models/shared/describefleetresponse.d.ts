@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { DeploymentStatusEnum } from "./deploymentstatusenum";
 import { Robot } from "./robot";
 export declare class DescribeFleetResponse extends SpeakeasyBase {

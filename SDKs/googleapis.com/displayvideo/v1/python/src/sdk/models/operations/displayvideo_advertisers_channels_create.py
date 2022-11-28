@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DisplayvideoAdvertisersChannelsCreatePathParams:
-    advertiser_id: str = field(default=None, metadata={'path_param': { 'field_name': 'advertiserId', 'style': 'simple', 'explode': False }})
+    advertiser_id: str = field(metadata={'path_param': { 'field_name': 'advertiserId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,21 +27,21 @@ class DisplayvideoAdvertisersChannelsCreateQueryParams:
 
 @dataclass
 class DisplayvideoAdvertisersChannelsCreateSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DisplayvideoAdvertisersChannelsCreateRequest:
-    path_params: DisplayvideoAdvertisersChannelsCreatePathParams = field(default=None)
-    query_params: DisplayvideoAdvertisersChannelsCreateQueryParams = field(default=None)
-    request: Optional[shared.Channel] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: DisplayvideoAdvertisersChannelsCreateSecurity = field(default=None)
+    path_params: DisplayvideoAdvertisersChannelsCreatePathParams = field()
+    query_params: DisplayvideoAdvertisersChannelsCreateQueryParams = field()
+    security: DisplayvideoAdvertisersChannelsCreateSecurity = field()
+    request: Optional[shared.ChannelInput] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class DisplayvideoAdvertisersChannelsCreateResponse:
+    content_type: str = field()
+    status_code: int = field()
     channel: Optional[shared.Channel] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,19 +1,20 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class AutomotivePartsCompatibilityPolicy extends SpeakeasyBase {
-  @Metadata({ data: "json, name=categoryId" })
+  @SpeakeasyMetadata({ data: "json, name=categoryId" })
   categoryId?: string;
 
-  @Metadata({ data: "json, name=categoryTreeId" })
+  @SpeakeasyMetadata({ data: "json, name=categoryTreeId" })
   categoryTreeId?: string;
 
-  @Metadata({ data: "json, name=compatibilityBasedOn" })
+  @SpeakeasyMetadata({ data: "json, name=compatibilityBasedOn" })
   compatibilityBasedOn?: string;
 
-  @Metadata({ data: "json, name=compatibleVehicleTypes" })
+  @SpeakeasyMetadata({ data: "json, name=compatibleVehicleTypes" })
   compatibleVehicleTypes?: string[];
 
-  @Metadata({ data: "json, name=maxNumberOfCompatibleVehicles" })
+  @SpeakeasyMetadata({ data: "json, name=maxNumberOfCompatibleVehicles" })
   maxNumberOfCompatibleVehicles?: number;
 }

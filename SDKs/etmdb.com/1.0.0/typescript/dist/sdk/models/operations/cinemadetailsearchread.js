@@ -22,14 +22,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var CinemaDetailSearchReadPathParams = /** @class */ (function (_super) {
     __extends(CinemaDetailSearchReadPathParams, _super);
     function CinemaDetailSearchReadPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=cinema_name" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=cinema_name" }),
         __metadata("design:type", String)
     ], CinemaDetailSearchReadPathParams.prototype, "cinemaName", void 0);
     return CinemaDetailSearchReadPathParams;
@@ -41,7 +41,7 @@ var CinemaDetailSearchReadRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", CinemaDetailSearchReadPathParams)
     ], CinemaDetailSearchReadRequest.prototype, "pathParams", void 0);
     return CinemaDetailSearchReadRequest;
@@ -53,11 +53,11 @@ var CinemaDetailSearchReadResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], CinemaDetailSearchReadResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], CinemaDetailSearchReadResponse.prototype, "statusCode", void 0);
     return CinemaDetailSearchReadResponse;

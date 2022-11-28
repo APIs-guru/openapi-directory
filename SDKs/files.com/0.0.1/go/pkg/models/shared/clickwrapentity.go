@@ -23,6 +23,8 @@ const (
 	ClickwrapEntityUseWithUsersEnumRequire ClickwrapEntityUseWithUsersEnum = "require"
 )
 
+// ClickwrapEntity
+// Create Clickwrap
 type ClickwrapEntity struct {
 	Body           *string                            `json:"body,omitempty"`
 	ID             *int32                             `json:"id,omitempty"`

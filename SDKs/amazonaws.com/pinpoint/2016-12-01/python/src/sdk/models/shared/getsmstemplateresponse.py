@@ -1,10 +1,11 @@
 from dataclasses import dataclass, field
 from dataclasses_json import dataclass_json
-from . import smstemplateresponse
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class GetSmsTemplateResponse:
-    sms_template_response: smstemplateresponse.SmsTemplateResponse = field(default=None, metadata={'dataclasses_json': { 'field_name': 'SMSTemplateResponse' }})
+    sms_template_response: SmsTemplateResponse = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('SMSTemplateResponse') }})
     

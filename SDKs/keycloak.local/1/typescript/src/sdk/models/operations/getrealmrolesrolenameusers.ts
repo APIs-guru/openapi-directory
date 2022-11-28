@@ -1,41 +1,42 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetRealmRolesRoleNameUsersPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=realm" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=realm" })
   realm: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=role-name" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=role-name" })
   roleName: string;
 }
 
 
 export class GetRealmRolesRoleNameUsersQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=first" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=first" })
   first?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=max" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=max" })
   max?: number;
 }
 
 
 export class GetRealmRolesRoleNameUsersRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetRealmRolesRoleNameUsersPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetRealmRolesRoleNameUsersQueryParams;
 }
 
 
 export class GetRealmRolesRoleNameUsersResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata({ elemType: shared.UserRepresentation })
+  @SpeakeasyMetadata({ elemType: shared.UserRepresentation })
   userRepresentations?: shared.UserRepresentation[];
 }

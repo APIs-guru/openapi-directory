@@ -5,19 +5,19 @@ from sdk.models import shared
 
 @dataclass
 class UnregisterMfaPathParams:
-    user_id: str = field(default=None, metadata={'path_param': { 'field_name': 'userId', 'style': 'simple', 'explode': False }})
+    user_id: str = field(metadata={'path_param': { 'field_name': 'userId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class UnregisterMfaRequest:
-    path_params: UnregisterMfaPathParams = field(default=None)
-    request: shared.UnregisterMfaRequest = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    path_params: UnregisterMfaPathParams = field()
+    request: shared.UnregisterMfaRequest = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class UnregisterMfaResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     inline_response_400: Optional[Any] = field(default=None)
     inline_response_401: Optional[Any] = field(default=None)
     inline_response_403: Optional[Any] = field(default=None)

@@ -1,6 +1,11 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -132,29 +137,30 @@ class StartSpeechSynthesisTaskRequestBodyVoiceIDEnum(str, Enum):
 @dataclass_json
 @dataclass
 class StartSpeechSynthesisTaskRequestBody:
-    engine: Optional[StartSpeechSynthesisTaskRequestBodyEngineEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Engine' }})
-    language_code: Optional[StartSpeechSynthesisTaskRequestBodyLanguageCodeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'LanguageCode' }})
-    lexicon_names: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'LexiconNames' }})
-    output_format: StartSpeechSynthesisTaskRequestBodyOutputFormatEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'OutputFormat' }})
-    output_s3_bucket_name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'OutputS3BucketName' }})
-    output_s3_key_prefix: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'OutputS3KeyPrefix' }})
-    sample_rate: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'SampleRate' }})
-    sns_topic_arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'SnsTopicArn' }})
-    speech_mark_types: Optional[List[shared.SpeechMarkTypeEnum]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'SpeechMarkTypes' }})
-    text: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Text' }})
-    text_type: Optional[StartSpeechSynthesisTaskRequestBodyTextTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'TextType' }})
-    voice_id: StartSpeechSynthesisTaskRequestBodyVoiceIDEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'VoiceId' }})
+    output_format: StartSpeechSynthesisTaskRequestBodyOutputFormatEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('OutputFormat') }})
+    output_s3_bucket_name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('OutputS3BucketName') }})
+    text: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Text') }})
+    voice_id: StartSpeechSynthesisTaskRequestBodyVoiceIDEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('VoiceId') }})
+    engine: Optional[StartSpeechSynthesisTaskRequestBodyEngineEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Engine') }})
+    language_code: Optional[StartSpeechSynthesisTaskRequestBodyLanguageCodeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('LanguageCode') }})
+    lexicon_names: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('LexiconNames') }})
+    output_s3_key_prefix: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('OutputS3KeyPrefix') }})
+    sample_rate: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('SampleRate') }})
+    sns_topic_arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('SnsTopicArn') }})
+    speech_mark_types: Optional[List[shared.SpeechMarkTypeEnum]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('SpeechMarkTypes') }})
+    text_type: Optional[StartSpeechSynthesisTaskRequestBodyTextTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('TextType') }})
     
 
 @dataclass
 class StartSpeechSynthesisTaskRequest:
-    headers: StartSpeechSynthesisTaskHeaders = field(default=None)
-    request: StartSpeechSynthesisTaskRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: StartSpeechSynthesisTaskHeaders = field()
+    request: StartSpeechSynthesisTaskRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class StartSpeechSynthesisTaskResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     engine_not_supported_exception: Optional[Any] = field(default=None)
     invalid_s3_bucket_exception: Optional[Any] = field(default=None)
     invalid_s3_key_exception: Optional[Any] = field(default=None)
@@ -167,6 +173,5 @@ class StartSpeechSynthesisTaskResponse:
     service_failure_exception: Optional[Any] = field(default=None)
     ssml_marks_not_supported_for_text_type_exception: Optional[Any] = field(default=None)
     start_speech_synthesis_task_output: Optional[shared.StartSpeechSynthesisTaskOutput] = field(default=None)
-    status_code: int = field(default=None)
     text_length_exceeded_exception: Optional[Any] = field(default=None)
     

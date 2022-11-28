@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ImportProductSetsGcsSource } from "./importproductsetsgcssource";
+
 
 
 // ImportProductSetsInputConfig
@@ -7,6 +8,6 @@ import { ImportProductSetsGcsSource } from "./importproductsetsgcssource";
  * The input content for the `ImportProductSets` method.
 **/
 export class ImportProductSetsInputConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=gcsSource" })
+  @SpeakeasyMetadata({ data: "json, name=gcsSource" })
   gcsSource?: ImportProductSetsGcsSource;
 }

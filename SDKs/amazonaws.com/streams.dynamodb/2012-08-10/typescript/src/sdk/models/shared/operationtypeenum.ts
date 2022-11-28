@@ -1,7 +1,8 @@
 
 
+
 export enum OperationTypeEnum {
-    Insert = "INSERT"
-,    Modify = "MODIFY"
-,    Remove = "REMOVE"
+    Insert = "INSERT",
+    Modify = "MODIFY",
+    Remove = "REMOVE"
 }

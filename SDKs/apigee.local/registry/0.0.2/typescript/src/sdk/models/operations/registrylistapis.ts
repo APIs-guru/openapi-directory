@@ -1,40 +1,41 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class RegistryListApisPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=project" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=project" })
   project: string;
 }
 
 
 export class RegistryListApisQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=filter" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=filter" })
   filter?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=page_size" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page_size" })
   pageSize?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=page_token" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page_token" })
   pageToken?: string;
 }
 
 
 export class RegistryListApisRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: RegistryListApisPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: RegistryListApisQueryParams;
 }
 
 
 export class RegistryListApisResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   listApisResponse?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

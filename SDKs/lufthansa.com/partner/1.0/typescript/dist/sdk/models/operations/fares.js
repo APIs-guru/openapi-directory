@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var FaresQueryParams = /** @class */ (function (_super) {
     __extends(FaresQueryParams, _super);
@@ -30,23 +30,23 @@ var FaresQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=carriers" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=carriers" }),
         __metadata("design:type", String)
     ], FaresQueryParams.prototype, "carriers", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=catalogues" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=catalogues" }),
         __metadata("design:type", String)
     ], FaresQueryParams.prototype, "catalogues", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=fare-types" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=fare-types" }),
         __metadata("design:type", String)
     ], FaresQueryParams.prototype, "fareTypes", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=segments" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=segments" }),
         __metadata("design:type", String)
     ], FaresQueryParams.prototype, "segments", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=travelers" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=travelers" }),
         __metadata("design:type", String)
     ], FaresQueryParams.prototype, "travelers", void 0);
     return FaresQueryParams;
@@ -58,7 +58,7 @@ var FaresHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=Accept" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Accept" }),
         __metadata("design:type", String)
     ], FaresHeaders.prototype, "accept", void 0);
     return FaresHeaders;
@@ -70,7 +70,7 @@ var FaresSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeAuth)
     ], FaresSecurity.prototype, "auth", void 0);
     return FaresSecurity;
@@ -82,15 +82,15 @@ var FaresRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", FaresQueryParams)
     ], FaresRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", FaresHeaders)
     ], FaresRequest.prototype, "headers", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", FaresSecurity)
     ], FaresRequest.prototype, "security", void 0);
     return FaresRequest;
@@ -102,15 +102,15 @@ var FaresResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], FaresResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], FaresResponse.prototype, "fares200ApplicationJsonString", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], FaresResponse.prototype, "statusCode", void 0);
     return FaresResponse;

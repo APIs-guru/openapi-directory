@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // GetMinuteUsageResponse
 /**
  * <p/>
@@ -33,23 +33,23 @@ var GetMinuteUsageResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=estimatedMinutesRemaining" }),
+        SpeakeasyMetadata({ data: "json, name=estimatedMinutesRemaining" }),
         __metadata("design:type", Number)
     ], GetMinuteUsageResponse.prototype, "estimatedMinutesRemaining", void 0);
     __decorate([
-        Metadata({ data: "json, name=isReservedMinutesCustomer" }),
+        SpeakeasyMetadata({ data: "json, name=isReservedMinutesCustomer" }),
         __metadata("design:type", Boolean)
     ], GetMinuteUsageResponse.prototype, "isReservedMinutesCustomer", void 0);
     __decorate([
-        Metadata({ data: "json, name=totalReservedMinuteAllocation" }),
+        SpeakeasyMetadata({ data: "json, name=totalReservedMinuteAllocation" }),
         __metadata("design:type", Number)
     ], GetMinuteUsageResponse.prototype, "totalReservedMinuteAllocation", void 0);
     __decorate([
-        Metadata({ data: "json, name=totalScheduledMinutes" }),
+        SpeakeasyMetadata({ data: "json, name=totalScheduledMinutes" }),
         __metadata("design:type", Number)
     ], GetMinuteUsageResponse.prototype, "totalScheduledMinutes", void 0);
     __decorate([
-        Metadata({ data: "json, name=upcomingMinutesScheduled" }),
+        SpeakeasyMetadata({ data: "json, name=upcomingMinutesScheduled" }),
         __metadata("design:type", Number)
     ], GetMinuteUsageResponse.prototype, "upcomingMinutesScheduled", void 0);
     return GetMinuteUsageResponse;

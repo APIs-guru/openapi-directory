@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ZebraTeam extends SpeakeasyBase {
-  @Metadata({ data: "json, name=team_key" })
+  @SpeakeasyMetadata({ data: "json, name=team_key" })
   teamKey: string;
 
-  @Metadata({ data: "json, name=xs" })
+  @SpeakeasyMetadata({ data: "json, name=xs" })
   xs: number[];
 
-  @Metadata({ data: "json, name=ys" })
+  @SpeakeasyMetadata({ data: "json, name=ys" })
   ys: number[];
 }

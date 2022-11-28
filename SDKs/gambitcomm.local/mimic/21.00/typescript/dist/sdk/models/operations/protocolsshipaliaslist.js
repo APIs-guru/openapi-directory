@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var ProtocolSshIpaliasListPathParams = /** @class */ (function (_super) {
     __extends(ProtocolSshIpaliasListPathParams, _super);
@@ -30,7 +30,7 @@ var ProtocolSshIpaliasListPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=agentNum" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=agentNum" }),
         __metadata("design:type", Number)
     ], ProtocolSshIpaliasListPathParams.prototype, "agentNum", void 0);
     return ProtocolSshIpaliasListPathParams;
@@ -42,7 +42,7 @@ var ProtocolSshIpaliasListRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ProtocolSshIpaliasListPathParams)
     ], ProtocolSshIpaliasListRequest.prototype, "pathParams", void 0);
     return ProtocolSshIpaliasListRequest;
@@ -54,15 +54,15 @@ var ProtocolSshIpaliasListResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], ProtocolSshIpaliasListResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata({ elemType: shared.IpAlias }),
+        SpeakeasyMetadata({ elemType: shared.IpAlias }),
         __metadata("design:type", Array)
     ], ProtocolSshIpaliasListResponse.prototype, "ipAliases", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], ProtocolSshIpaliasListResponse.prototype, "statusCode", void 0);
     return ProtocolSshIpaliasListResponse;

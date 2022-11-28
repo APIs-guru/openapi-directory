@@ -1,29 +1,30 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DevEndpointCustomLibraries } from "./devendpointcustomlibraries";
 
 
+
 export class UpdateDevEndpointRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AddArguments" })
+  @SpeakeasyMetadata({ data: "json, name=AddArguments" })
   addArguments?: Map<string, string>;
 
-  @Metadata({ data: "json, name=AddPublicKeys" })
+  @SpeakeasyMetadata({ data: "json, name=AddPublicKeys" })
   addPublicKeys?: string[];
 
-  @Metadata({ data: "json, name=CustomLibraries" })
+  @SpeakeasyMetadata({ data: "json, name=CustomLibraries" })
   customLibraries?: DevEndpointCustomLibraries;
 
-  @Metadata({ data: "json, name=DeleteArguments" })
+  @SpeakeasyMetadata({ data: "json, name=DeleteArguments" })
   deleteArguments?: string[];
 
-  @Metadata({ data: "json, name=DeletePublicKeys" })
+  @SpeakeasyMetadata({ data: "json, name=DeletePublicKeys" })
   deletePublicKeys?: string[];
 
-  @Metadata({ data: "json, name=EndpointName" })
+  @SpeakeasyMetadata({ data: "json, name=EndpointName" })
   endpointName: string;
 
-  @Metadata({ data: "json, name=PublicKey" })
+  @SpeakeasyMetadata({ data: "json, name=PublicKey" })
   publicKey?: string;
 
-  @Metadata({ data: "json, name=UpdateEtlLibraries" })
+  @SpeakeasyMetadata({ data: "json, name=UpdateEtlLibraries" })
   updateEtlLibraries?: boolean;
 }

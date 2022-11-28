@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
+
 
 export enum UpdateDeploymentGroupXAmzTargetEnum {
     CodeDeploy20141006UpdateDeploymentGroup = "CodeDeploy_20141006.UpdateDeploymentGroup"
@@ -7,141 +8,141 @@ export enum UpdateDeploymentGroupXAmzTargetEnum {
 
 
 export class UpdateDeploymentGroupHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Target" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Target" })
   xAmzTarget: UpdateDeploymentGroupXAmzTargetEnum;
 }
 
 
 export class UpdateDeploymentGroupRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: UpdateDeploymentGroupHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: shared.UpdateDeploymentGroupInput;
 }
 
 
 export class UpdateDeploymentGroupResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   alarmsLimitExceededException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   applicationDoesNotExistException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   applicationNameRequiredException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   deploymentConfigDoesNotExistException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   deploymentGroupAlreadyExistsException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   deploymentGroupDoesNotExistException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   deploymentGroupNameRequiredException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   ecsServiceMappingLimitExceededException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidAlarmConfigException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidApplicationNameException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidAutoRollbackConfigException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidAutoScalingGroupException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidBlueGreenDeploymentConfigurationException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidDeploymentConfigNameException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidDeploymentGroupNameException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidDeploymentStyleException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidEc2TagCombinationException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidEc2TagException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidEcsServiceException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidInputException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidLoadBalancerInfoException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidOnPremisesTagCombinationException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidRoleException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidTagException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidTargetGroupPairException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidTrafficRoutingConfigurationException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidTriggerConfigException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   lifecycleHookLimitExceededException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   tagSetListLimitExceededException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   throttlingException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   triggerTargetsLimitExceededException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   updateDeploymentGroupOutput?: shared.UpdateDeploymentGroupOutput;
 }

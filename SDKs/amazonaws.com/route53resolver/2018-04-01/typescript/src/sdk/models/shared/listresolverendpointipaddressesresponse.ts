@@ -1,15 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { IpAddressResponse } from "./ipaddressresponse";
 
 
+
 export class ListResolverEndpointIpAddressesResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=IpAddresses", elemType: shared.IpAddressResponse })
+  @SpeakeasyMetadata({ data: "json, name=IpAddresses", elemType: IpAddressResponse })
   ipAddresses?: IpAddressResponse[];
 
-  @Metadata({ data: "json, name=MaxResults" })
+  @SpeakeasyMetadata({ data: "json, name=MaxResults" })
   maxResults?: number;
 
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 }

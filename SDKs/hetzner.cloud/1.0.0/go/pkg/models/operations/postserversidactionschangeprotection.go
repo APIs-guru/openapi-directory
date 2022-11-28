@@ -9,11 +9,8 @@ type PostServersIDActionsChangeProtectionRequestBody struct {
 	Rebuild *bool `json:"rebuild,omitempty"`
 }
 
-type PostServersIDActionsChangeProtectionRequest struct {
-	PathParams PostServersIDActionsChangeProtectionPathParams
-	Request    *PostServersIDActionsChangeProtectionRequestBody `request:"mediaType=application/json"`
-}
-
+// PostServersIDActionsChangeProtectionActionResponseActionError
+// Error message for the Action if error occurred, otherwise null
 type PostServersIDActionsChangeProtectionActionResponseActionError struct {
 	Code    string `json:"code"`
 	Message string `json:"message"`
@@ -45,6 +42,11 @@ type PostServersIDActionsChangeProtectionActionResponseAction struct {
 
 type PostServersIDActionsChangeProtectionActionResponse struct {
 	Action PostServersIDActionsChangeProtectionActionResponseAction `json:"action"`
+}
+
+type PostServersIDActionsChangeProtectionRequest struct {
+	PathParams PostServersIDActionsChangeProtectionPathParams
+	Request    *PostServersIDActionsChangeProtectionRequestBody `request:"mediaType=application/json"`
 }
 
 type PostServersIDActionsChangeProtectionResponse struct {

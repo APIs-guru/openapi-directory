@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class AutoForward extends SpeakeasyBase {
-  @Metadata({ data: "json, name=copy_to_myself" })
+  @SpeakeasyMetadata({ data: "json, name=copy_to_myself" })
   copyToMyself?: boolean;
 
-  @Metadata({ data: "json, name=email_addresses" })
+  @SpeakeasyMetadata({ data: "json, name=email_addresses" })
   emailAddresses?: string[];
 
-  @Metadata({ data: "json, name=enabled" })
+  @SpeakeasyMetadata({ data: "json, name=enabled" })
   enabled?: boolean;
 }

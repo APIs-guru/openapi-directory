@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import List
 from dataclasses_json import dataclass_json
-from . import airbytestreamandconfiguration
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class AirbyteCatalog:
-    streams: List[airbytestreamandconfiguration.AirbyteStreamAndConfiguration] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'streams' }})
+    r"""AirbyteCatalog
+    describes the available schema (catalog).
+    """
+    
+    streams: List[AirbyteStreamAndConfiguration] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('streams') }})
     

@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class PubsubSubscriptionsGetPathParams:
-    subscription: str = field(default=None, metadata={'path_param': { 'field_name': 'subscription', 'style': 'simple', 'explode': False }})
+    subscription: str = field(metadata={'path_param': { 'field_name': 'subscription', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,14 +26,14 @@ class PubsubSubscriptionsGetQueryParams:
 
 @dataclass
 class PubsubSubscriptionsGetSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class PubsubSubscriptionsGetSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -43,14 +44,14 @@ class PubsubSubscriptionsGetSecurity:
 
 @dataclass
 class PubsubSubscriptionsGetRequest:
-    path_params: PubsubSubscriptionsGetPathParams = field(default=None)
-    query_params: PubsubSubscriptionsGetQueryParams = field(default=None)
-    security: PubsubSubscriptionsGetSecurity = field(default=None)
+    path_params: PubsubSubscriptionsGetPathParams = field()
+    query_params: PubsubSubscriptionsGetQueryParams = field()
+    security: PubsubSubscriptionsGetSecurity = field()
     
 
 @dataclass
 class PubsubSubscriptionsGetResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     subscription: Optional[shared.Subscription] = field(default=None)
     

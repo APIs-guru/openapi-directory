@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudDataplexV1Asset } from "./googleclouddataplexv1asset";
+
 
 
 // GoogleCloudDataplexV1ListAssetsResponse
@@ -8,9 +8,9 @@ import { GoogleCloudDataplexV1Asset } from "./googleclouddataplexv1asset";
  * List assets response.
 **/
 export class GoogleCloudDataplexV1ListAssetsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=assets", elemType: shared.GoogleCloudDataplexV1Asset })
+  @SpeakeasyMetadata({ data: "json, name=assets", elemType: GoogleCloudDataplexV1Asset })
   assets?: GoogleCloudDataplexV1Asset[];
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 }

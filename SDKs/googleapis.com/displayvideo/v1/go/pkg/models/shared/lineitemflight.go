@@ -9,6 +9,8 @@ const (
 	LineItemFlightFlightDateTypeEnumLineItemFlightDateTypeTrigger     LineItemFlightFlightDateTypeEnum = "LINE_ITEM_FLIGHT_DATE_TYPE_TRIGGER"
 )
 
+// LineItemFlight
+// Settings that control the active duration of a line item.
 type LineItemFlight struct {
 	DateRange      *DateRange                        `json:"dateRange,omitempty"`
 	FlightDateType *LineItemFlightFlightDateTypeEnum `json:"flightDateType,omitempty"`

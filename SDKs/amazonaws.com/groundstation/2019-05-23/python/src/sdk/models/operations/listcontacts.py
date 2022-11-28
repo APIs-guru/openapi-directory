@@ -1,9 +1,11 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
-from typing import Any,Enum,List,Optional
+from typing import Any,List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -27,29 +29,29 @@ class ListContactsHeaders:
 @dataclass_json
 @dataclass
 class ListContactsRequestBody:
-    end_time: datetime = field(default=None, metadata={'dataclasses_json': { 'field_name': 'endTime', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    ground_station: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'groundStation' }})
-    max_results: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'maxResults' }})
-    mission_profile_arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'missionProfileArn' }})
-    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'nextToken' }})
-    satellite_arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'satelliteArn' }})
-    start_time: datetime = field(default=None, metadata={'dataclasses_json': { 'field_name': 'startTime', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    status_list: List[shared.ContactStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'statusList' }})
+    end_time: datetime = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('endTime'), 'encoder': utils.datetimeisoformat(False), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    start_time: datetime = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('startTime'), 'encoder': utils.datetimeisoformat(False), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    status_list: List[shared.ContactStatusEnum] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('statusList') }})
+    ground_station: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('groundStation') }})
+    max_results: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('maxResults') }})
+    mission_profile_arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('missionProfileArn') }})
+    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('nextToken') }})
+    satellite_arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('satelliteArn') }})
     
 
 @dataclass
 class ListContactsRequest:
-    query_params: ListContactsQueryParams = field(default=None)
-    headers: ListContactsHeaders = field(default=None)
-    request: ListContactsRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: ListContactsHeaders = field()
+    query_params: ListContactsQueryParams = field()
+    request: ListContactsRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class ListContactsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     dependency_exception: Optional[Any] = field(default=None)
     invalid_parameter_exception: Optional[Any] = field(default=None)
     list_contacts_response: Optional[shared.ListContactsResponse] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

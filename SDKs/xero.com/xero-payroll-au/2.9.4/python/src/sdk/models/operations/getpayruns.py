@@ -12,26 +12,26 @@ class GetPayRunsQueryParams:
 
 @dataclass
 class GetPayRunsHeaders:
+    xero_tenant_id: str = field(metadata={'header': { 'field_name': 'Xero-Tenant-Id', 'style': 'simple', 'explode': False }})
     if_modified_since: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'If-Modified-Since', 'style': 'simple', 'explode': False }})
-    xero_tenant_id: str = field(default=None, metadata={'header': { 'field_name': 'Xero-Tenant-Id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetPayRunsSecurity:
-    o_auth2: shared.SchemeOAuth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    o_auth2: shared.SchemeOAuth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class GetPayRunsRequest:
-    query_params: GetPayRunsQueryParams = field(default=None)
-    headers: GetPayRunsHeaders = field(default=None)
-    security: GetPayRunsSecurity = field(default=None)
+    headers: GetPayRunsHeaders = field()
+    query_params: GetPayRunsQueryParams = field()
+    security: GetPayRunsSecurity = field()
     
 
 @dataclass
 class GetPayRunsResponse:
+    content_type: str = field()
+    status_code: int = field()
     api_exception: Optional[shared.APIException] = field(default=None)
-    content_type: str = field(default=None)
     pay_runs: Optional[shared.PayRuns] = field(default=None)
-    status_code: int = field(default=None)
     

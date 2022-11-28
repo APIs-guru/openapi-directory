@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ContainerSpec } from "./containerspec";
 import { FlexTemplateRuntimeEnvironment } from "./flextemplateruntimeenvironment";
+
 
 
 // LaunchFlexTemplateParameter
@@ -8,27 +9,27 @@ import { FlexTemplateRuntimeEnvironment } from "./flextemplateruntimeenvironment
  * Launch FlexTemplate Parameter.
 **/
 export class LaunchFlexTemplateParameter extends SpeakeasyBase {
-  @Metadata({ data: "json, name=containerSpec" })
+  @SpeakeasyMetadata({ data: "json, name=containerSpec" })
   containerSpec?: ContainerSpec;
 
-  @Metadata({ data: "json, name=containerSpecGcsPath" })
+  @SpeakeasyMetadata({ data: "json, name=containerSpecGcsPath" })
   containerSpecGcsPath?: string;
 
-  @Metadata({ data: "json, name=environment" })
+  @SpeakeasyMetadata({ data: "json, name=environment" })
   environment?: FlexTemplateRuntimeEnvironment;
 
-  @Metadata({ data: "json, name=jobName" })
+  @SpeakeasyMetadata({ data: "json, name=jobName" })
   jobName?: string;
 
-  @Metadata({ data: "json, name=launchOptions" })
+  @SpeakeasyMetadata({ data: "json, name=launchOptions" })
   launchOptions?: Map<string, string>;
 
-  @Metadata({ data: "json, name=parameters" })
+  @SpeakeasyMetadata({ data: "json, name=parameters" })
   parameters?: Map<string, string>;
 
-  @Metadata({ data: "json, name=transformNameMappings" })
+  @SpeakeasyMetadata({ data: "json, name=transformNameMappings" })
   transformNameMappings?: Map<string, string>;
 
-  @Metadata({ data: "json, name=update" })
+  @SpeakeasyMetadata({ data: "json, name=update" })
   update?: boolean;
 }

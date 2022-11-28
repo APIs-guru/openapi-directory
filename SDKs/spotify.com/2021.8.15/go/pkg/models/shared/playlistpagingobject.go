@@ -1,5 +1,8 @@
 package shared
 
+// PlaylistPagingObjectPlaylists
+
+// https://developer.spotify.com/documentation/web-api/reference/#object-pagingobject - Find more info on the official Spotify Web API Reference
 type PlaylistPagingObjectPlaylists struct {
 	Href     *string                    `json:"href,omitempty"`
 	Items    []SimplifiedPlaylistObject `json:"items,omitempty"`

@@ -8,11 +8,6 @@ type GetRuleComplianceQueryParams struct {
 	Level *int64 `queryParam:"style=form,explode=true,name=level"`
 }
 
-type GetRuleComplianceRequest struct {
-	PathParams  GetRuleCompliancePathParams
-	QueryParams GetRuleComplianceQueryParams
-}
-
 type GetRuleCompliance200ApplicationJSONActionEnum string
 
 const (
@@ -59,6 +54,11 @@ type GetRuleCompliance200ApplicationJSON struct {
 	Action GetRuleCompliance200ApplicationJSONActionEnum `json:"action"`
 	Data   GetRuleCompliance200ApplicationJSONData       `json:"data"`
 	Result GetRuleCompliance200ApplicationJSONResultEnum `json:"result"`
+}
+
+type GetRuleComplianceRequest struct {
+	PathParams  GetRuleCompliancePathParams
+	QueryParams GetRuleComplianceQueryParams
 }
 
 type GetRuleComplianceResponse struct {

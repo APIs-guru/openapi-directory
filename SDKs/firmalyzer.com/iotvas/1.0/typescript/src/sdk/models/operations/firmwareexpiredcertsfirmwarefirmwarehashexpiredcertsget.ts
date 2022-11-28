@@ -1,38 +1,39 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class FirmwareExpiredCertsFirmwareFirmwareHashExpiredCertsGetPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=firmware_hash" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=firmware_hash" })
   firmwareHash: string;
 }
 
 
 export class FirmwareExpiredCertsFirmwareFirmwareHashExpiredCertsGetSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
   apiKeyHeader: shared.SchemeApiKeyHeader;
 }
 
 
 export class FirmwareExpiredCertsFirmwareFirmwareHashExpiredCertsGetRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: FirmwareExpiredCertsFirmwareFirmwareHashExpiredCertsGetPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: FirmwareExpiredCertsFirmwareFirmwareHashExpiredCertsGetSecurity;
 }
 
 
 export class FirmwareExpiredCertsFirmwareFirmwareHashExpiredCertsGetResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata({ elemType: shared.ExpiredCert })
+  @SpeakeasyMetadata({ elemType: shared.ExpiredCert })
   expiredCerts?: shared.ExpiredCert[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   httpValidationError?: shared.HttpValidationError;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

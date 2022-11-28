@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ProcessingFeatureStoreOutput } from "./processingfeaturestoreoutput";
 import { ProcessingS3Output } from "./processings3output";
+
 
 
 // ProcessingOutput
@@ -8,15 +9,15 @@ import { ProcessingS3Output } from "./processings3output";
  * Describes the results of a processing job. The processing output must specify exactly one of either <code>S3Output</code> or <code>FeatureStoreOutput</code> types.
 **/
 export class ProcessingOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AppManaged" })
+  @SpeakeasyMetadata({ data: "json, name=AppManaged" })
   appManaged?: boolean;
 
-  @Metadata({ data: "json, name=FeatureStoreOutput" })
+  @SpeakeasyMetadata({ data: "json, name=FeatureStoreOutput" })
   featureStoreOutput?: ProcessingFeatureStoreOutput;
 
-  @Metadata({ data: "json, name=OutputName" })
+  @SpeakeasyMetadata({ data: "json, name=OutputName" })
   outputName: string;
 
-  @Metadata({ data: "json, name=S3Output" })
+  @SpeakeasyMetadata({ data: "json, name=S3Output" })
   s3Output?: ProcessingS3Output;
 }

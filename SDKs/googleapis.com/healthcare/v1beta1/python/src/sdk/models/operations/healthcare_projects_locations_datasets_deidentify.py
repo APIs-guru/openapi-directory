@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class HealthcareProjectsLocationsDatasetsDeidentifyPathParams:
-    source_dataset: str = field(default=None, metadata={'path_param': { 'field_name': 'sourceDataset', 'style': 'simple', 'explode': False }})
+    source_dataset: str = field(metadata={'path_param': { 'field_name': 'sourceDataset', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,21 +26,21 @@ class HealthcareProjectsLocationsDatasetsDeidentifyQueryParams:
 
 @dataclass
 class HealthcareProjectsLocationsDatasetsDeidentifySecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class HealthcareProjectsLocationsDatasetsDeidentifyRequest:
-    path_params: HealthcareProjectsLocationsDatasetsDeidentifyPathParams = field(default=None)
-    query_params: HealthcareProjectsLocationsDatasetsDeidentifyQueryParams = field(default=None)
+    path_params: HealthcareProjectsLocationsDatasetsDeidentifyPathParams = field()
+    query_params: HealthcareProjectsLocationsDatasetsDeidentifyQueryParams = field()
+    security: HealthcareProjectsLocationsDatasetsDeidentifySecurity = field()
     request: Optional[shared.DeidentifyDatasetRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: HealthcareProjectsLocationsDatasetsDeidentifySecurity = field(default=None)
     
 
 @dataclass
 class HealthcareProjectsLocationsDatasetsDeidentifyResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     operation: Optional[shared.Operation] = field(default=None)
-    status_code: int = field(default=None)
     

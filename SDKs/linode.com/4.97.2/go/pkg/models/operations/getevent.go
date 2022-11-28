@@ -8,26 +8,18 @@ type GetEventPathParams struct {
 	EventID int64 `pathParam:"style=simple,explode=false,name=eventId"`
 }
 
-type GetEventSecurityOption1 struct {
-	PersonalAccessToken shared.SchemePersonalAccessToken `security:"scheme,type=http,subtype=bearer"`
-}
-
-type GetEventSecurityOption2 struct {
-	Oauth shared.SchemeOauth `security:"scheme,type=oauth2"`
-}
-
 type GetEventSecurity struct {
-	Option1 *GetEventSecurityOption1 `security:"option"`
-	Option2 *GetEventSecurityOption2 `security:"option"`
+	PersonalAccessToken *shared.SchemePersonalAccessToken `security:"scheme,type=http,subtype=bearer"`
+	Oauth               *shared.SchemeOauth               `security:"scheme,type=oauth2"`
+}
+
+type GetEventDefaultApplicationJSON struct {
+	Errors []shared.ErrorObject `json:"errors,omitempty"`
 }
 
 type GetEventRequest struct {
 	PathParams GetEventPathParams
 	Security   GetEventSecurity
-}
-
-type GetEventDefaultApplicationJSON struct {
-	Errors []shared.ErrorObject `json:"errors,omitempty"`
 }
 
 type GetEventResponse struct {

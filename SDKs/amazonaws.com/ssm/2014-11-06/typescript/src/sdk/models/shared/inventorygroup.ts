@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { InventoryFilter } from "./inventoryfilter";
+
 
 
 // InventoryGroup
@@ -8,9 +8,9 @@ import { InventoryFilter } from "./inventoryfilter";
  * A user-defined set of one or more filters on which to aggregate inventory data. Groups return a count of resources that match and don't match the specified criteria.
 **/
 export class InventoryGroup extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Filters", elemType: shared.InventoryFilter })
+  @SpeakeasyMetadata({ data: "json, name=Filters", elemType: InventoryFilter })
   filters: InventoryFilter[];
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name: string;
 }

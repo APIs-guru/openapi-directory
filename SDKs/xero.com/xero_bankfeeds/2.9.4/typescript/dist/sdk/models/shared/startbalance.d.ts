@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { CreditDebitIndicatorEnum } from "./creditdebitindicatorenum";
 /**
  * The starting balance of the statement

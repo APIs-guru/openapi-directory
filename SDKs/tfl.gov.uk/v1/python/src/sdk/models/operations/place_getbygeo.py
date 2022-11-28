@@ -21,13 +21,13 @@ class PlaceGetByGeoQueryParams:
 
 @dataclass
 class PlaceGetByGeoRequest:
-    query_params: PlaceGetByGeoQueryParams = field(default=None)
+    query_params: PlaceGetByGeoQueryParams = field()
     
 
 @dataclass
 class PlaceGetByGeoResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     tfl_api_presentation_entities_stop_points: Optional[List[shared.TflAPIPresentationEntitiesStopPoint]] = field(default=None)
     

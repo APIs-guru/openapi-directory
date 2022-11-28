@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import postgresqltable
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class PostgresqlSchema:
-    postgresql_tables: Optional[List[postgresqltable.PostgresqlTable]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'postgresqlTables' }})
-    schema: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'schema' }})
+    r"""PostgresqlSchema
+    PostgreSQL schema.
+    """
+    
+    postgresql_tables: Optional[List[PostgresqlTable]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('postgresqlTables') }})
+    schema: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('schema') }})
     

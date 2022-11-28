@@ -1,14 +1,18 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import revocationconfiguration
-from . import certificateauthoritystatus_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class UpdateCertificateAuthorityRequest:
-    certificate_authority_arn: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'CertificateAuthorityArn' }})
-    revocation_configuration: Optional[revocationconfiguration.RevocationConfiguration] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'RevocationConfiguration' }})
-    status: Optional[certificateauthoritystatus_enum.CertificateAuthorityStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Status' }})
+    certificate_authority_arn: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('CertificateAuthorityArn') }})
+    revocation_configuration: Optional[RevocationConfiguration] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('RevocationConfiguration') }})
+    status: Optional[CertificateAuthorityStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Status') }})
     

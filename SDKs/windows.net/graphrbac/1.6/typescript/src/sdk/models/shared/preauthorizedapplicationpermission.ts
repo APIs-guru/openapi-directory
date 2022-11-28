@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // PreAuthorizedApplicationPermission
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Contains information about the pre-authorized permissions.
 **/
 export class PreAuthorizedApplicationPermission extends SpeakeasyBase {
-  @Metadata({ data: "json, name=accessGrants" })
+  @SpeakeasyMetadata({ data: "json, name=accessGrants" })
   accessGrants?: string[];
 
-  @Metadata({ data: "json, name=directAccessGrant" })
+  @SpeakeasyMetadata({ data: "json, name=directAccessGrant" })
   directAccessGrant?: boolean;
 }

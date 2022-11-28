@@ -44,11 +44,6 @@ type GetAdminUsersListFlagJSONQueryParams struct {
 	ShowEmails *bool                               `queryParam:"style=form,explode=true,name=show_emails"`
 }
 
-type GetAdminUsersListFlagJSONRequest struct {
-	PathParams  GetAdminUsersListFlagJSONPathParams
-	QueryParams GetAdminUsersListFlagJSONQueryParams
-}
-
 type GetAdminUsersListFlagJSON200ApplicationJSON struct {
 	Active                 bool          `json:"active"`
 	Admin                  bool          `json:"admin"`
@@ -75,6 +70,11 @@ type GetAdminUsersListFlagJSON200ApplicationJSON struct {
 	TopicsEntered          int64         `json:"topics_entered"`
 	TrustLevel             int64         `json:"trust_level"`
 	Username               string        `json:"username"`
+}
+
+type GetAdminUsersListFlagJSONRequest struct {
+	PathParams  GetAdminUsersListFlagJSONPathParams
+	QueryParams GetAdminUsersListFlagJSONQueryParams
 }
 
 type GetAdminUsersListFlagJSONResponse struct {

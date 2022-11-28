@@ -1,5 +1,7 @@
 package shared
 
+// Field
+// A (sub) field of a type.
 type Field struct {
 	MaxOccurs *int32  `json:"maxOccurs,omitempty"`
 	MinOccurs *int32  `json:"minOccurs,omitempty"`

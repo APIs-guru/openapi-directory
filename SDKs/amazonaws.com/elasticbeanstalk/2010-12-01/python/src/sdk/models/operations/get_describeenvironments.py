@@ -1,8 +1,9 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 
 class GetDescribeEnvironmentsActionEnum(str, Enum):
     DESCRIBE_ENVIRONMENTS = "DescribeEnvironments"
@@ -13,7 +14,8 @@ class GetDescribeEnvironmentsVersionEnum(str, Enum):
 
 @dataclass
 class GetDescribeEnvironmentsQueryParams:
-    action: GetDescribeEnvironmentsActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetDescribeEnvironmentsActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: GetDescribeEnvironmentsVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     application_name: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'ApplicationName', 'style': 'form', 'explode': True }})
     environment_ids: Optional[List[str]] = field(default=None, metadata={'query_param': { 'field_name': 'EnvironmentIds', 'style': 'form', 'explode': True }})
     environment_names: Optional[List[str]] = field(default=None, metadata={'query_param': { 'field_name': 'EnvironmentNames', 'style': 'form', 'explode': True }})
@@ -21,7 +23,6 @@ class GetDescribeEnvironmentsQueryParams:
     included_deleted_back_to: Optional[datetime] = field(default=None, metadata={'query_param': { 'field_name': 'IncludedDeletedBackTo', 'style': 'form', 'explode': True }})
     max_records: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'MaxRecords', 'style': 'form', 'explode': True }})
     next_token: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'NextToken', 'style': 'form', 'explode': True }})
-    version: GetDescribeEnvironmentsVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     version_label: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'VersionLabel', 'style': 'form', 'explode': True }})
     
 
@@ -38,13 +39,13 @@ class GetDescribeEnvironmentsHeaders:
 
 @dataclass
 class GetDescribeEnvironmentsRequest:
-    query_params: GetDescribeEnvironmentsQueryParams = field(default=None)
-    headers: GetDescribeEnvironmentsHeaders = field(default=None)
+    headers: GetDescribeEnvironmentsHeaders = field()
+    query_params: GetDescribeEnvironmentsQueryParams = field()
     
 
 @dataclass
 class GetDescribeEnvironmentsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

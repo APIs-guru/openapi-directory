@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // CveDetailsCvssv2
@@ -6,19 +7,19 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * CVSS V2 of the CVE
 **/
 export class CveDetailsCvssv2 extends SpeakeasyBase {
-  @Metadata({ data: "json, name=baseScore" })
+  @SpeakeasyMetadata({ data: "json, name=baseScore" })
   baseScore?: number;
 
-  @Metadata({ data: "json, name=vector" })
+  @SpeakeasyMetadata({ data: "json, name=vector" })
   vector?: string;
 }
 
 export enum CveDetailsCvssv3BaseSeverityEnum {
-    Critical = "critical"
-,    High = "high"
-,    Medium = "medium"
-,    Low = "low"
-,    None = "none"
+    Critical = "critical",
+    High = "high",
+    Medium = "medium",
+    Low = "low",
+    None = "none"
 }
 
 
@@ -27,36 +28,36 @@ export enum CveDetailsCvssv3BaseSeverityEnum {
  * CVSS V3 of the CVE
 **/
 export class CveDetailsCvssv3 extends SpeakeasyBase {
-  @Metadata({ data: "json, name=baseScore" })
+  @SpeakeasyMetadata({ data: "json, name=baseScore" })
   baseScore?: number;
 
-  @Metadata({ data: "json, name=baseSeverity" })
+  @SpeakeasyMetadata({ data: "json, name=baseSeverity" })
   baseSeverity?: CveDetailsCvssv3BaseSeverityEnum;
 
-  @Metadata({ data: "json, name=vector" })
+  @SpeakeasyMetadata({ data: "json, name=vector" })
   vector?: string;
 }
 
 
 export class CveDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=cvssv2" })
+  @SpeakeasyMetadata({ data: "json, name=cvssv2" })
   cvssv2?: CveDetailsCvssv2;
 
-  @Metadata({ data: "json, name=cvssv3" })
+  @SpeakeasyMetadata({ data: "json, name=cvssv3" })
   cvssv3?: CveDetailsCvssv3;
 
-  @Metadata({ data: "json, name=cweIds" })
+  @SpeakeasyMetadata({ data: "json, name=cweIds" })
   cweIds?: string[];
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: Date;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=lastModifiedDate" })
+  @SpeakeasyMetadata({ data: "json, name=lastModifiedDate" })
   lastModifiedDate?: Date;
 
-  @Metadata({ data: "json, name=publishedDate" })
+  @SpeakeasyMetadata({ data: "json, name=publishedDate" })
   publishedDate?: Date;
 }

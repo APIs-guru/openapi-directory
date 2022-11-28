@@ -22,26 +22,26 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var Download = /** @class */ (function (_super) {
     __extends(Download, _super);
     function Download() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=agreement_name" }),
+        SpeakeasyMetadata({ data: "json, name=agreement_name" }),
         __metadata("design:type", String)
     ], Download.prototype, "agreementName", void 0);
     __decorate([
-        Metadata({ data: "json, name=product_id" }),
+        SpeakeasyMetadata({ data: "json, name=product_id" }),
         __metadata("design:type", String)
     ], Download.prototype, "productId", void 0);
     __decorate([
-        Metadata({ data: "json, name=product_type" }),
+        SpeakeasyMetadata({ data: "json, name=product_type" }),
         __metadata("design:type", String)
     ], Download.prototype, "productType", void 0);
     __decorate([
-        Metadata({ data: "json, name=uri" }),
+        SpeakeasyMetadata({ data: "json, name=uri" }),
         __metadata("design:type", String)
     ], Download.prototype, "uri", void 0);
     return Download;

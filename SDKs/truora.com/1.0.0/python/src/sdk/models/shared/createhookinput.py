@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 
 class CreateHookInputEventTypeEnum(str, Enum):
     ALL = "all"
@@ -54,12 +55,16 @@ class CreateHookInputSubscriberTypeEnum(str, Enum):
 
 @dataclass
 class CreateHookInput:
+    r"""CreateHookInput
+    Creates a hook related to previous created check.
+    """
+    
+    event_type: CreateHookInputEventTypeEnum = field(metadata={'form': { 'field_name': 'event_type' }})
+    subscriber_type: CreateHookInputSubscriberTypeEnum = field(metadata={'form': { 'field_name': 'subscriber_type' }})
     actions: Optional[List[str]] = field(default=None, metadata={'form': { 'field_name': 'actions' }})
-    event_type: CreateHookInputEventTypeEnum = field(default=None, metadata={'form': { 'field_name': 'event_type' }})
     status: Optional[CreateHookInputStatusEnum] = field(default=None, metadata={'form': { 'field_name': 'status' }})
     subscriber_address: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'subscriber_address' }})
     subscriber_language: Optional[CreateHookInputSubscriberLanguageEnum] = field(default=None, metadata={'form': { 'field_name': 'subscriber_language' }})
     subscriber_name: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'subscriber_name' }})
-    subscriber_type: CreateHookInputSubscriberTypeEnum = field(default=None, metadata={'form': { 'field_name': 'subscriber_type' }})
     subscriber_url: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'subscriber_url' }})
     

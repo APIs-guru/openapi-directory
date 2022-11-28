@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// Event
+// Contains information about an event that was returned by a lookup request. The result includes a representation of a CloudTrail event.
 type Event struct {
 	AccessKeyID     *string    `json:"AccessKeyId,omitempty"`
 	CloudTrailEvent *string    `json:"CloudTrailEvent,omitempty"`

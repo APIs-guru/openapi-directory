@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 /**
  * The public route that is mapped to the container group. You can use this route to access your container group from the Internet.
 **/

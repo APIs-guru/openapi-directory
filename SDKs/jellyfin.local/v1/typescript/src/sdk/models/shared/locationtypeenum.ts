@@ -1,8 +1,9 @@
 
 
+
 export enum LocationTypeEnum {
-    FileSystem = "FileSystem"
-,    Remote = "Remote"
-,    Virtual = "Virtual"
-,    Offline = "Offline"
+    FileSystem = "FileSystem",
+    Remote = "Remote",
+    Virtual = "Virtual",
+    Offline = "Offline"
 }

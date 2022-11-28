@@ -1,29 +1,30 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class EnterpriseAdminGetProvisioningInformationForEnterpriseUserPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=enterprise" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=enterprise" })
   enterprise: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=scim_user_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=scim_user_id" })
   scimUserId: string;
 }
 
 
 export class EnterpriseAdminGetProvisioningInformationForEnterpriseUserRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: EnterpriseAdminGetProvisioningInformationForEnterpriseUserPathParams;
 }
 
 
 export class EnterpriseAdminGetProvisioningInformationForEnterpriseUserResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   scimEnterpriseUser?: shared.ScimEnterpriseUser;
 }

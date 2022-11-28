@@ -1,32 +1,33 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Meta43 } from "./meta43";
 
 
+
 export class LogRestApiGet extends SpeakeasyBase {
-  @Metadata({ data: "json, name=action" })
+  @SpeakeasyMetadata({ data: "json, name=action" })
   action?: string;
 
-  @Metadata({ data: "json, name=dashboard_id" })
+  @SpeakeasyMetadata({ data: "json, name=dashboard_id" })
   dashboardId?: number;
 
-  @Metadata({ data: "json, name=dttm" })
+  @SpeakeasyMetadata({ data: "json, name=dttm" })
   dttm?: Date;
 
-  @Metadata({ data: "json, name=duration_ms" })
+  @SpeakeasyMetadata({ data: "json, name=duration_ms" })
   durationMs?: number;
 
-  @Metadata({ data: "json, name=json" })
+  @SpeakeasyMetadata({ data: "json, name=json" })
   json?: string;
 
-  @Metadata({ data: "json, name=referrer" })
+  @SpeakeasyMetadata({ data: "json, name=referrer" })
   referrer?: string;
 
-  @Metadata({ data: "json, name=slice_id" })
+  @SpeakeasyMetadata({ data: "json, name=slice_id" })
   sliceId?: number;
 
-  @Metadata({ data: "json, name=user" })
+  @SpeakeasyMetadata({ data: "json, name=user" })
   user?: Meta43;
 
-  @Metadata({ data: "json, name=user_id" })
+  @SpeakeasyMetadata({ data: "json, name=user_id" })
   userId?: number;
 }

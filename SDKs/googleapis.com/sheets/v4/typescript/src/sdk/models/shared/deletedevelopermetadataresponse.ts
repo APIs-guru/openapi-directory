@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DeveloperMetadata } from "./developermetadata";
+
 
 
 // DeleteDeveloperMetadataResponse
@@ -8,6 +8,6 @@ import { DeveloperMetadata } from "./developermetadata";
  * The response from deleting developer metadata.
 **/
 export class DeleteDeveloperMetadataResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=deletedDeveloperMetadata", elemType: shared.DeveloperMetadata })
+  @SpeakeasyMetadata({ data: "json, name=deletedDeveloperMetadata", elemType: DeveloperMetadata })
   deletedDeveloperMetadata?: DeveloperMetadata[];
 }

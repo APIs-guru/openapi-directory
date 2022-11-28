@@ -1,23 +1,24 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { InferenceExecutionStatusEnum } from "./inferenceexecutionstatusenum";
 
 
+
 export class ListInferenceExecutionsRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DataEndTimeBefore" })
+  @SpeakeasyMetadata({ data: "json, name=DataEndTimeBefore" })
   dataEndTimeBefore?: Date;
 
-  @Metadata({ data: "json, name=DataStartTimeAfter" })
+  @SpeakeasyMetadata({ data: "json, name=DataStartTimeAfter" })
   dataStartTimeAfter?: Date;
 
-  @Metadata({ data: "json, name=InferenceSchedulerName" })
+  @SpeakeasyMetadata({ data: "json, name=InferenceSchedulerName" })
   inferenceSchedulerName: string;
 
-  @Metadata({ data: "json, name=MaxResults" })
+  @SpeakeasyMetadata({ data: "json, name=MaxResults" })
   maxResults?: number;
 
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=Status" })
+  @SpeakeasyMetadata({ data: "json, name=Status" })
   status?: InferenceExecutionStatusEnum;
 }

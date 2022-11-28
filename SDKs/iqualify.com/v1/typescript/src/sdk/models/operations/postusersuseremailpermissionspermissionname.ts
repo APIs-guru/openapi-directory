@@ -1,32 +1,33 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class PostUsersUserEmailPermissionsPermissionNamePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=permissionName" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=permissionName" })
   permissionName: shared.PermissionNameEnum;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=userEmail" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=userEmail" })
   userEmail: string;
 }
 
 
 export class PostUsersUserEmailPermissionsPermissionNameRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: PostUsersUserEmailPermissionsPermissionNamePathParams;
 }
 
 
 export class PostUsersUserEmailPermissionsPermissionNameResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   error?: shared.Error;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   userResponse?: shared.UserResponse;
 }

@@ -1,10 +1,15 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass_json
 @dataclass
 class NotificationRateLimit:
-    period: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'period' }})
+    r"""NotificationRateLimit
+    Control over the rate of notifications sent to this alert policy's notification channels.
+    """
+    
+    period: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('period') }})
     

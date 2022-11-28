@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetConversationsQueryParams = /** @class */ (function (_super) {
     __extends(GetConversationsQueryParams, _super);
@@ -30,23 +30,23 @@ var GetConversationsQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=cursor" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=cursor" }),
         __metadata("design:type", String)
     ], GetConversationsQueryParams.prototype, "cursor", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=date_end" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=date_end" }),
         __metadata("design:type", String)
     ], GetConversationsQueryParams.prototype, "dateEnd", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=date_start" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=date_start" }),
         __metadata("design:type", String)
     ], GetConversationsQueryParams.prototype, "dateStart", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=order" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=order" }),
         __metadata("design:type", String)
     ], GetConversationsQueryParams.prototype, "order", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=page_size" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page_size" }),
         __metadata("design:type", Number)
     ], GetConversationsQueryParams.prototype, "pageSize", void 0);
     return GetConversationsQueryParams;
@@ -58,7 +58,7 @@ var GetConversationsRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetConversationsQueryParams)
     ], GetConversationsRequest.prototype, "queryParams", void 0);
     return GetConversationsRequest;
@@ -70,15 +70,15 @@ var GetConversationsResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetConversationsResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetConversationsResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], GetConversationsResponse.prototype, "getConversations200ApplicationJsonAny", void 0);
     return GetConversationsResponse;

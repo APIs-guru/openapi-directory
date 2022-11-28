@@ -1,5 +1,7 @@
 package shared
 
+// PagedComplianceViolationCollection
+// This type is the base response type of the getListingViolations method.
 type PagedComplianceViolationCollection struct {
 	Href              *string               `json:"href,omitempty"`
 	Limit             *int32                `json:"limit,omitempty"`

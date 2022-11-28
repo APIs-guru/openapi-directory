@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare enum ResetUserPasswordXAmzTargetEnum {
     DirectoryService20150416ResetUserPassword = "DirectoryService_20150416.ResetUserPassword"

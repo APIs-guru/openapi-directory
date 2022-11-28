@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class GetEmbedPresetsPathParams:
-    user_id: float = field(default=None, metadata={'path_param': { 'field_name': 'user_id', 'style': 'simple', 'explode': False }})
+    user_id: float = field(metadata={'path_param': { 'field_name': 'user_id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -16,13 +16,13 @@ class GetEmbedPresetsQueryParams:
 
 @dataclass
 class GetEmbedPresetsRequest:
-    path_params: GetEmbedPresetsPathParams = field(default=None)
-    query_params: GetEmbedPresetsQueryParams = field(default=None)
+    path_params: GetEmbedPresetsPathParams = field()
+    query_params: GetEmbedPresetsQueryParams = field()
     
 
 @dataclass
 class GetEmbedPresetsResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     presets: Optional[List[shared.Presets]] = field(default=None)
     

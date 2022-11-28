@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class AuthorizationLoggingOptionsPermissionTypeEnum(str, Enum):
     PERMISSION_TYPE_UNSPECIFIED = "PERMISSION_TYPE_UNSPECIFIED"
@@ -13,5 +15,9 @@ class AuthorizationLoggingOptionsPermissionTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class AuthorizationLoggingOptions:
-    permission_type: Optional[AuthorizationLoggingOptionsPermissionTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'permissionType' }})
+    r"""AuthorizationLoggingOptions
+    Authorization-related information used by Cloud Audit Logging.
+    """
+    
+    permission_type: Optional[AuthorizationLoggingOptionsPermissionTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('permissionType') }})
     

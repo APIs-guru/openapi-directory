@@ -1,8 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { KeyUsageOptions } from "./keyusageoptions";
 import { ExtendedKeyUsageOptions } from "./extendedkeyusageoptions";
 import { ObjectId } from "./objectid";
+
 
 
 // KeyUsage
@@ -10,12 +10,12 @@ import { ObjectId } from "./objectid";
  * A KeyUsage describes key usage values that may appear in an X.509 certificate.
 **/
 export class KeyUsage extends SpeakeasyBase {
-  @Metadata({ data: "json, name=baseKeyUsage" })
+  @SpeakeasyMetadata({ data: "json, name=baseKeyUsage" })
   baseKeyUsage?: KeyUsageOptions;
 
-  @Metadata({ data: "json, name=extendedKeyUsage" })
+  @SpeakeasyMetadata({ data: "json, name=extendedKeyUsage" })
   extendedKeyUsage?: ExtendedKeyUsageOptions;
 
-  @Metadata({ data: "json, name=unknownExtendedKeyUsages", elemType: shared.ObjectId })
+  @SpeakeasyMetadata({ data: "json, name=unknownExtendedKeyUsages", elemType: ObjectId })
   unknownExtendedKeyUsages?: ObjectId[];
 }

@@ -31,7 +31,7 @@ type AdminCustomersChromePrintServersPatchSecurity struct {
 type AdminCustomersChromePrintServersPatchRequest struct {
 	PathParams  AdminCustomersChromePrintServersPatchPathParams
 	QueryParams AdminCustomersChromePrintServersPatchQueryParams
-	Request     *shared.PrintServer `request:"mediaType=application/json"`
+	Request     *shared.PrintServerInput `request:"mediaType=application/json"`
 	Security    AdminCustomersChromePrintServersPatchSecurity
 }
 

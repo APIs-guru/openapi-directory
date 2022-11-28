@@ -71,6 +71,8 @@ const (
 	AppEntitySsoStrategyTypeEnumScim         AppEntitySsoStrategyTypeEnum = "scim"
 )
 
+// AppEntity
+// List Apps
 type AppEntity struct {
 	AppType             *AppEntityAppTypeEnum            `json:"app_type,omitempty"`
 	DocumentationLinks  *string                          `json:"documentation_links,omitempty"`

@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// OpsItemRelatedItemSummary
+// Summary information about related-item resources for an OpsItem.
 type OpsItemRelatedItemSummary struct {
 	AssociationID    *string          `json:"AssociationId,omitempty"`
 	AssociationType  *string          `json:"AssociationType,omitempty"`

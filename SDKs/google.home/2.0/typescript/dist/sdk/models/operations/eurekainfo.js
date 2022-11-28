@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var EurekaInfoQueryParams = /** @class */ (function (_super) {
     __extends(EurekaInfoQueryParams, _super);
@@ -30,15 +30,15 @@ var EurekaInfoQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=nonce" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=nonce" }),
         __metadata("design:type", Number)
     ], EurekaInfoQueryParams.prototype, "nonce", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=options" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=options" }),
         __metadata("design:type", String)
     ], EurekaInfoQueryParams.prototype, "options", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=params" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=params" }),
         __metadata("design:type", String)
     ], EurekaInfoQueryParams.prototype, "params", void 0);
     return EurekaInfoQueryParams;
@@ -50,7 +50,7 @@ var EurekaInfoRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", EurekaInfoQueryParams)
     ], EurekaInfoRequest.prototype, "queryParams", void 0);
     return EurekaInfoRequest;
@@ -62,15 +62,15 @@ var EurekaInfoResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], EurekaInfoResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.Example1)
     ], EurekaInfoResponse.prototype, "example1", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], EurekaInfoResponse.prototype, "statusCode", void 0);
     return EurekaInfoResponse;

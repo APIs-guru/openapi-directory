@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 class AggregatedGetStatisticsListGroupByEnum(str, Enum):
@@ -26,20 +27,20 @@ class AggregatedGetStatisticsListTimeFrameEnum(str, Enum):
 
 @dataclass
 class AggregatedGetStatisticsListQueryParams:
+    time_frame: AggregatedGetStatisticsListTimeFrameEnum = field(metadata={'query_param': { 'field_name': 'timeFrame', 'style': 'form', 'explode': True }})
     from_day: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'fromDay', 'style': 'form', 'explode': True }})
     group_by: Optional[AggregatedGetStatisticsListGroupByEnum] = field(default=None, metadata={'query_param': { 'field_name': 'groupBy', 'style': 'form', 'explode': True }})
-    time_frame: AggregatedGetStatisticsListTimeFrameEnum = field(default=None, metadata={'query_param': { 'field_name': 'timeFrame', 'style': 'form', 'explode': True }})
     to_day: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'toDay', 'style': 'form', 'explode': True }})
     
 
 @dataclass
 class AggregatedGetStatisticsListRequest:
-    query_params: AggregatedGetStatisticsListQueryParams = field(default=None)
+    query_params: AggregatedGetStatisticsListQueryParams = field()
     
 
 @dataclass
 class AggregatedGetStatisticsListResponse:
+    content_type: str = field()
+    status_code: int = field()
     api_core_responses_entities_response_api_core_dto_aggregated_aggregated_result_: Optional[shared.APICoreResponsesEntitiesResponseAPICoreDtoAggregatedAggregatedResult] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

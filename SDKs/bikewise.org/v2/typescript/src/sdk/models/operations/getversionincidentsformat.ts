@@ -1,52 +1,53 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum GetVersionIncidentsFormatIncidentTypeEnum {
-    Crash = "crash"
-,    Hazard = "hazard"
-,    Theft = "theft"
-,    Unconfirmed = "unconfirmed"
-,    InfrastructureIssue = "infrastructure_issue"
-,    ChopShop = "chop_shop"
+    Crash = "crash",
+    Hazard = "hazard",
+    Theft = "theft",
+    Unconfirmed = "unconfirmed",
+    InfrastructureIssue = "infrastructure_issue",
+    ChopShop = "chop_shop"
 }
 
 
 export class GetVersionIncidentsFormatQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=incident_type" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=incident_type" })
   incidentType?: GetVersionIncidentsFormatIncidentTypeEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=occurred_after" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=occurred_after" })
   occurredAfter?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=occurred_before" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=occurred_before" })
   occurredBefore?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=page" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page" })
   page?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=per_page" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=per_page" })
   perPage?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=proximity" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=proximity" })
   proximity?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=proximity_square" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=proximity_square" })
   proximitySquare?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=query" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=query" })
   query?: string;
 }
 
 
 export class GetVersionIncidentsFormatRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetVersionIncidentsFormatQueryParams;
 }
 
 
 export class GetVersionIncidentsFormatResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

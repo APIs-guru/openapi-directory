@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // Soa
 /**
  * Start of Authority (SOA) properties for a public or private DNS namespace.
@@ -33,7 +33,7 @@ var Soa = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=TTL" }),
+        SpeakeasyMetadata({ data: "json, name=TTL" }),
         __metadata("design:type", Number)
     ], Soa.prototype, "ttl", void 0);
     return Soa;

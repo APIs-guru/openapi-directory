@@ -1,40 +1,41 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class CreateWebhookQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=workspace" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=workspace" })
   workspace?: string;
 }
 
 
 export class CreateWebhookRequestBodyWebhook extends SpeakeasyBase {
-  @Metadata({ data: "json, name=collection" })
+  @SpeakeasyMetadata({ data: "json, name=collection" })
   collection?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 }
 
 
 export class CreateWebhookRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=webhook" })
+  @SpeakeasyMetadata({ data: "json, name=webhook" })
   webhook?: CreateWebhookRequestBodyWebhook;
 }
 
 
 export class CreateWebhookRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: CreateWebhookQueryParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request?: CreateWebhookRequestBody;
 }
 
 
 export class CreateWebhookResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

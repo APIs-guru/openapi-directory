@@ -27,6 +27,8 @@ const (
 	BusinessMeetingRoomsExceptionEnumDependentOnDayOfWeek BusinessMeetingRoomsExceptionEnum = "DEPENDENT_ON_DAY_OF_WEEK"
 )
 
+// Business
+// Features of the property of specific interest to the business traveler.
 type Business struct {
 	BusinessCenter             *bool                                   `json:"businessCenter,omitempty"`
 	BusinessCenterException    *BusinessBusinessCenterExceptionEnum    `json:"businessCenterException,omitempty"`

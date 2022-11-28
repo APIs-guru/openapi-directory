@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var RsbycRequestBodyCertificateParameters = /** @class */ (function (_super) {
     __extends(RsbycRequestBodyCertificateParameters, _super);
@@ -30,7 +30,7 @@ var RsbycRequestBodyCertificateParameters = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=UID" }),
+        SpeakeasyMetadata({ data: "json, name=UID" }),
         __metadata("design:type", String)
     ], RsbycRequestBodyCertificateParameters.prototype, "uid", void 0);
     return RsbycRequestBodyCertificateParameters;
@@ -46,19 +46,19 @@ var RsbycRequestBody = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=certificateParameters" }),
+        SpeakeasyMetadata({ data: "json, name=certificateParameters" }),
         __metadata("design:type", RsbycRequestBodyCertificateParameters)
     ], RsbycRequestBody.prototype, "certificateParameters", void 0);
     __decorate([
-        Metadata({ data: "json, name=consentArtifact" }),
+        SpeakeasyMetadata({ data: "json, name=consentArtifact" }),
         __metadata("design:type", Object)
     ], RsbycRequestBody.prototype, "consentArtifact", void 0);
     __decorate([
-        Metadata({ data: "json, name=format" }),
+        SpeakeasyMetadata({ data: "json, name=format" }),
         __metadata("design:type", String)
     ], RsbycRequestBody.prototype, "format", void 0);
     __decorate([
-        Metadata({ data: "json, name=txnId" }),
+        SpeakeasyMetadata({ data: "json, name=txnId" }),
         __metadata("design:type", String)
     ], RsbycRequestBody.prototype, "txnId", void 0);
     return RsbycRequestBody;
@@ -70,32 +70,16 @@ var RsbycSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeApiKey)
     ], RsbycSecurity.prototype, "apiKey", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeClientId)
     ], RsbycSecurity.prototype, "clientId", void 0);
     return RsbycSecurity;
 }(SpeakeasyBase));
 export { RsbycSecurity };
-var RsbycRequest = /** @class */ (function (_super) {
-    __extends(RsbycRequest, _super);
-    function RsbycRequest() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
-        __metadata("design:type", RsbycRequestBody)
-    ], RsbycRequest.prototype, "request", void 0);
-    __decorate([
-        Metadata(),
-        __metadata("design:type", RsbycSecurity)
-    ], RsbycRequest.prototype, "security", void 0);
-    return RsbycRequest;
-}(SpeakeasyBase));
-export { RsbycRequest };
 export var Rsbyc400ApplicationJsonErrorEnum;
 (function (Rsbyc400ApplicationJsonErrorEnum) {
     Rsbyc400ApplicationJsonErrorEnum["MissingParameter"] = "missing_parameter";
@@ -118,11 +102,11 @@ var Rsbyc400ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Rsbyc400ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Rsbyc400ApplicationJson.prototype, "errorDescription", void 0);
     return Rsbyc400ApplicationJson;
@@ -144,11 +128,11 @@ var Rsbyc401ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Rsbyc401ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Rsbyc401ApplicationJson.prototype, "errorDescription", void 0);
     return Rsbyc401ApplicationJson;
@@ -170,11 +154,11 @@ var Rsbyc404ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Rsbyc404ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Rsbyc404ApplicationJson.prototype, "errorDescription", void 0);
     return Rsbyc404ApplicationJson;
@@ -194,11 +178,11 @@ var Rsbyc500ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Rsbyc500ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Rsbyc500ApplicationJson.prototype, "errorDescription", void 0);
     return Rsbyc500ApplicationJson;
@@ -218,11 +202,11 @@ var Rsbyc502ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Rsbyc502ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Rsbyc502ApplicationJson.prototype, "errorDescription", void 0);
     return Rsbyc502ApplicationJson;
@@ -242,11 +226,11 @@ var Rsbyc503ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Rsbyc503ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Rsbyc503ApplicationJson.prototype, "errorDescription", void 0);
     return Rsbyc503ApplicationJson;
@@ -266,55 +250,71 @@ var Rsbyc504ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Rsbyc504ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Rsbyc504ApplicationJson.prototype, "errorDescription", void 0);
     return Rsbyc504ApplicationJson;
 }(SpeakeasyBase));
 export { Rsbyc504ApplicationJson };
+var RsbycRequest = /** @class */ (function (_super) {
+    __extends(RsbycRequest, _super);
+    function RsbycRequest() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
+        __metadata("design:type", RsbycRequestBody)
+    ], RsbycRequest.prototype, "request", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", RsbycSecurity)
+    ], RsbycRequest.prototype, "security", void 0);
+    return RsbycRequest;
+}(SpeakeasyBase));
+export { RsbycRequest };
 var RsbycResponse = /** @class */ (function (_super) {
     __extends(RsbycResponse, _super);
     function RsbycResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], RsbycResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], RsbycResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Rsbyc400ApplicationJson)
     ], RsbycResponse.prototype, "rsbyc400ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Rsbyc401ApplicationJson)
     ], RsbycResponse.prototype, "rsbyc401ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Rsbyc404ApplicationJson)
     ], RsbycResponse.prototype, "rsbyc404ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Rsbyc500ApplicationJson)
     ], RsbycResponse.prototype, "rsbyc500ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Rsbyc502ApplicationJson)
     ], RsbycResponse.prototype, "rsbyc502ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Rsbyc503ApplicationJson)
     ], RsbycResponse.prototype, "rsbyc503ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Rsbyc504ApplicationJson)
     ], RsbycResponse.prototype, "rsbyc504ApplicationJsonObject", void 0);
     return RsbycResponse;

@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DeviceReference } from "./devicereference";
+
 
 
 // CustomerApplyConfigurationRequest
@@ -7,9 +8,9 @@ import { DeviceReference } from "./devicereference";
  * Request message for customer to assign a configuration to device.
 **/
 export class CustomerApplyConfigurationRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=configuration" })
+  @SpeakeasyMetadata({ data: "json, name=configuration" })
   configuration?: string;
 
-  @Metadata({ data: "json, name=device" })
+  @SpeakeasyMetadata({ data: "json, name=device" })
   device?: DeviceReference;
 }

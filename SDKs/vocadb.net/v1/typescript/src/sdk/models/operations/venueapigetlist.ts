@@ -1,97 +1,98 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
+
 export enum VenueApiGetListDistanceUnitEnum {
-    Kilometers = "Kilometers"
-,    Miles = "Miles"
+    Kilometers = "Kilometers",
+    Miles = "Miles"
 }
 
 export enum VenueApiGetListFieldsEnum {
-    None = "None"
-,    AdditionalNames = "AdditionalNames"
-,    Description = "Description"
-,    Events = "Events"
-,    Names = "Names"
-,    WebLinks = "WebLinks"
+    None = "None",
+    AdditionalNames = "AdditionalNames",
+    Description = "Description",
+    Events = "Events",
+    Names = "Names",
+    WebLinks = "WebLinks"
 }
 
 export enum VenueApiGetListLangEnum {
-    Default = "Default"
-,    Japanese = "Japanese"
-,    Romaji = "Romaji"
-,    English = "English"
+    Default = "Default",
+    Japanese = "Japanese",
+    Romaji = "Romaji",
+    English = "English"
 }
 
 export enum VenueApiGetListNameMatchModeEnum {
-    Auto = "Auto"
-,    Partial = "Partial"
-,    StartsWith = "StartsWith"
-,    Exact = "Exact"
-,    Words = "Words"
+    Auto = "Auto",
+    Partial = "Partial",
+    StartsWith = "StartsWith",
+    Exact = "Exact",
+    Words = "Words"
 }
 
 export enum VenueApiGetListSortRuleEnum {
-    None = "None"
-,    Name = "Name"
-,    Distance = "Distance"
+    None = "None",
+    Name = "Name",
+    Distance = "Distance"
 }
 
 
 export class VenueApiGetListQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=distanceUnit" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=distanceUnit" })
   distanceUnit?: VenueApiGetListDistanceUnitEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=fields" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=fields" })
   fields?: VenueApiGetListFieldsEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=getTotalCount" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=getTotalCount" })
   getTotalCount?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=lang" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=lang" })
   lang?: VenueApiGetListLangEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=latitude" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=latitude" })
   latitude?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=longitude" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=longitude" })
   longitude?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=maxResults" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=maxResults" })
   maxResults?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=nameMatchMode" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=nameMatchMode" })
   nameMatchMode?: VenueApiGetListNameMatchModeEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=query" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=query" })
   query?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=radius" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=radius" })
   radius?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=sortRule" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sortRule" })
   sortRule?: VenueApiGetListSortRuleEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=start" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=start" })
   start?: number;
 }
 
 
 export class VenueApiGetListRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: VenueApiGetListQueryParams;
 }
 
 
 export class VenueApiGetListResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   partialFindResultVenueForApiContract?: shared.PartialFindResultVenueForApiContract;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

@@ -1,12 +1,13 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ActiveViewVideoViewabilityMetricConfig } from "./activeviewvideoviewabilitymetricconfig";
 import { LookbackWindow } from "./lookbackwindow";
 
+
 export enum FloodlightGroupWebTagTypeEnum {
-    WebTagTypeUnspecified = "WEB_TAG_TYPE_UNSPECIFIED"
-,    WebTagTypeNone = "WEB_TAG_TYPE_NONE"
-,    WebTagTypeImage = "WEB_TAG_TYPE_IMAGE"
-,    WebTagTypeDynamic = "WEB_TAG_TYPE_DYNAMIC"
+    WebTagTypeUnspecified = "WEB_TAG_TYPE_UNSPECIFIED",
+    WebTagTypeNone = "WEB_TAG_TYPE_NONE",
+    WebTagTypeImage = "WEB_TAG_TYPE_IMAGE",
+    WebTagTypeDynamic = "WEB_TAG_TYPE_DYNAMIC"
 }
 
 
@@ -15,24 +16,24 @@ export enum FloodlightGroupWebTagTypeEnum {
  * A single Floodlight group.
 **/
 export class FloodlightGroup extends SpeakeasyBase {
-  @Metadata({ data: "json, name=activeViewConfig" })
+  @SpeakeasyMetadata({ data: "json, name=activeViewConfig" })
   activeViewConfig?: ActiveViewVideoViewabilityMetricConfig;
 
-  @Metadata({ data: "json, name=customVariables" })
+  @SpeakeasyMetadata({ data: "json, name=customVariables" })
   customVariables?: Map<string, any>;
 
-  @Metadata({ data: "json, name=displayName" })
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
   displayName?: string;
 
-  @Metadata({ data: "json, name=floodlightGroupId" })
+  @SpeakeasyMetadata({ data: "json, name=floodlightGroupId" })
   floodlightGroupId?: string;
 
-  @Metadata({ data: "json, name=lookbackWindow" })
+  @SpeakeasyMetadata({ data: "json, name=lookbackWindow" })
   lookbackWindow?: LookbackWindow;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=webTagType" })
+  @SpeakeasyMetadata({ data: "json, name=webTagType" })
   webTagType?: FloodlightGroupWebTagTypeEnum;
 }

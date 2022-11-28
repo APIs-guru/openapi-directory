@@ -1,16 +1,38 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ExecutionTemplate } from "./executiontemplate";
 import { Execution } from "./execution";
 
+
 export enum ScheduleStateEnum {
-    StateUnspecified = "STATE_UNSPECIFIED"
-,    Enabled = "ENABLED"
-,    Paused = "PAUSED"
-,    Disabled = "DISABLED"
-,    UpdateFailed = "UPDATE_FAILED"
-,    Initializing = "INITIALIZING"
-,    Deleting = "DELETING"
+    StateUnspecified = "STATE_UNSPECIFIED",
+    Enabled = "ENABLED",
+    Paused = "PAUSED",
+    Disabled = "DISABLED",
+    UpdateFailed = "UPDATE_FAILED",
+    Initializing = "INITIALIZING",
+    Deleting = "DELETING"
+}
+
+
+// ScheduleInput
+/** 
+ * The definition of a schedule.
+**/
+export class ScheduleInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=cronSchedule" })
+  cronSchedule?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=description" })
+  description?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=executionTemplate" })
+  executionTemplate?: ExecutionTemplate;
+
+  @SpeakeasyMetadata({ data: "json, name=state" })
+  state?: ScheduleStateEnum;
+
+  @SpeakeasyMetadata({ data: "json, name=timeZone" })
+  timeZone?: string;
 }
 
 
@@ -19,33 +41,33 @@ export enum ScheduleStateEnum {
  * The definition of a schedule.
 **/
 export class Schedule extends SpeakeasyBase {
-  @Metadata({ data: "json, name=createTime" })
+  @SpeakeasyMetadata({ data: "json, name=createTime" })
   createTime?: string;
 
-  @Metadata({ data: "json, name=cronSchedule" })
+  @SpeakeasyMetadata({ data: "json, name=cronSchedule" })
   cronSchedule?: string;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=displayName" })
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
   displayName?: string;
 
-  @Metadata({ data: "json, name=executionTemplate" })
+  @SpeakeasyMetadata({ data: "json, name=executionTemplate" })
   executionTemplate?: ExecutionTemplate;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=recentExecutions", elemType: shared.Execution })
+  @SpeakeasyMetadata({ data: "json, name=recentExecutions", elemType: Execution })
   recentExecutions?: Execution[];
 
-  @Metadata({ data: "json, name=state" })
+  @SpeakeasyMetadata({ data: "json, name=state" })
   state?: ScheduleStateEnum;
 
-  @Metadata({ data: "json, name=timeZone" })
+  @SpeakeasyMetadata({ data: "json, name=timeZone" })
   timeZone?: string;
 
-  @Metadata({ data: "json, name=updateTime" })
+  @SpeakeasyMetadata({ data: "json, name=updateTime" })
   updateTime?: string;
 }

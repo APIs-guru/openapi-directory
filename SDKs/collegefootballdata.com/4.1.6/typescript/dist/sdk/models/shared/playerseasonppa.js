@@ -22,42 +22,42 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var PlayerSeasonPpaAveragePpa = /** @class */ (function (_super) {
     __extends(PlayerSeasonPpaAveragePpa, _super);
     function PlayerSeasonPpaAveragePpa() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=all" }),
+        SpeakeasyMetadata({ data: "json, name=all" }),
         __metadata("design:type", Number)
     ], PlayerSeasonPpaAveragePpa.prototype, "all", void 0);
     __decorate([
-        Metadata({ data: "json, name=firstDown" }),
+        SpeakeasyMetadata({ data: "json, name=firstDown" }),
         __metadata("design:type", Number)
     ], PlayerSeasonPpaAveragePpa.prototype, "firstDown", void 0);
     __decorate([
-        Metadata({ data: "json, name=pass" }),
+        SpeakeasyMetadata({ data: "json, name=pass" }),
         __metadata("design:type", Number)
     ], PlayerSeasonPpaAveragePpa.prototype, "pass", void 0);
     __decorate([
-        Metadata({ data: "json, name=passingDowns" }),
+        SpeakeasyMetadata({ data: "json, name=passingDowns" }),
         __metadata("design:type", Number)
     ], PlayerSeasonPpaAveragePpa.prototype, "passingDowns", void 0);
     __decorate([
-        Metadata({ data: "json, name=rush" }),
+        SpeakeasyMetadata({ data: "json, name=rush" }),
         __metadata("design:type", Number)
     ], PlayerSeasonPpaAveragePpa.prototype, "rush", void 0);
     __decorate([
-        Metadata({ data: "json, name=secondDown" }),
+        SpeakeasyMetadata({ data: "json, name=secondDown" }),
         __metadata("design:type", Number)
     ], PlayerSeasonPpaAveragePpa.prototype, "secondDown", void 0);
     __decorate([
-        Metadata({ data: "json, name=standardDowns" }),
+        SpeakeasyMetadata({ data: "json, name=standardDowns" }),
         __metadata("design:type", Number)
     ], PlayerSeasonPpaAveragePpa.prototype, "standardDowns", void 0);
     __decorate([
-        Metadata({ data: "json, name=thirdDown" }),
+        SpeakeasyMetadata({ data: "json, name=thirdDown" }),
         __metadata("design:type", Number)
     ], PlayerSeasonPpaAveragePpa.prototype, "thirdDown", void 0);
     return PlayerSeasonPpaAveragePpa;
@@ -69,35 +69,35 @@ var PlayerSeasonPpaTotalPpa = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=all" }),
+        SpeakeasyMetadata({ data: "json, name=all" }),
         __metadata("design:type", Number)
     ], PlayerSeasonPpaTotalPpa.prototype, "all", void 0);
     __decorate([
-        Metadata({ data: "json, name=firstDown" }),
+        SpeakeasyMetadata({ data: "json, name=firstDown" }),
         __metadata("design:type", Number)
     ], PlayerSeasonPpaTotalPpa.prototype, "firstDown", void 0);
     __decorate([
-        Metadata({ data: "json, name=pass" }),
+        SpeakeasyMetadata({ data: "json, name=pass" }),
         __metadata("design:type", Number)
     ], PlayerSeasonPpaTotalPpa.prototype, "pass", void 0);
     __decorate([
-        Metadata({ data: "json, name=passingDowns" }),
+        SpeakeasyMetadata({ data: "json, name=passingDowns" }),
         __metadata("design:type", Number)
     ], PlayerSeasonPpaTotalPpa.prototype, "passingDowns", void 0);
     __decorate([
-        Metadata({ data: "json, name=rush" }),
+        SpeakeasyMetadata({ data: "json, name=rush" }),
         __metadata("design:type", Number)
     ], PlayerSeasonPpaTotalPpa.prototype, "rush", void 0);
     __decorate([
-        Metadata({ data: "json, name=secondDown" }),
+        SpeakeasyMetadata({ data: "json, name=secondDown" }),
         __metadata("design:type", Number)
     ], PlayerSeasonPpaTotalPpa.prototype, "secondDown", void 0);
     __decorate([
-        Metadata({ data: "json, name=standardDowns" }),
+        SpeakeasyMetadata({ data: "json, name=standardDowns" }),
         __metadata("design:type", Number)
     ], PlayerSeasonPpaTotalPpa.prototype, "standardDowns", void 0);
     __decorate([
-        Metadata({ data: "json, name=thirdDown" }),
+        SpeakeasyMetadata({ data: "json, name=thirdDown" }),
         __metadata("design:type", Number)
     ], PlayerSeasonPpaTotalPpa.prototype, "thirdDown", void 0);
     return PlayerSeasonPpaTotalPpa;
@@ -109,35 +109,35 @@ var PlayerSeasonPpa = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=averagePPA" }),
+        SpeakeasyMetadata({ data: "json, name=averagePPA" }),
         __metadata("design:type", PlayerSeasonPpaAveragePpa)
     ], PlayerSeasonPpa.prototype, "averagePpa", void 0);
     __decorate([
-        Metadata({ data: "json, name=conference" }),
+        SpeakeasyMetadata({ data: "json, name=conference" }),
         __metadata("design:type", String)
     ], PlayerSeasonPpa.prototype, "conference", void 0);
     __decorate([
-        Metadata({ data: "json, name=id" }),
+        SpeakeasyMetadata({ data: "json, name=id" }),
         __metadata("design:type", Number)
     ], PlayerSeasonPpa.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], PlayerSeasonPpa.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=position" }),
+        SpeakeasyMetadata({ data: "json, name=position" }),
         __metadata("design:type", String)
     ], PlayerSeasonPpa.prototype, "position", void 0);
     __decorate([
-        Metadata({ data: "json, name=season" }),
+        SpeakeasyMetadata({ data: "json, name=season" }),
         __metadata("design:type", Number)
     ], PlayerSeasonPpa.prototype, "season", void 0);
     __decorate([
-        Metadata({ data: "json, name=team" }),
+        SpeakeasyMetadata({ data: "json, name=team" }),
         __metadata("design:type", String)
     ], PlayerSeasonPpa.prototype, "team", void 0);
     __decorate([
-        Metadata({ data: "json, name=totalPPA" }),
+        SpeakeasyMetadata({ data: "json, name=totalPPA" }),
         __metadata("design:type", PlayerSeasonPpaTotalPpa)
     ], PlayerSeasonPpa.prototype, "totalPpa", void 0);
     return PlayerSeasonPpa;

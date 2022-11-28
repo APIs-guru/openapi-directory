@@ -22,18 +22,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var GetForecastTimeSeriesPathParams = /** @class */ (function (_super) {
     __extends(GetForecastTimeSeriesPathParams, _super);
     function GetForecastTimeSeriesPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=latitude" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=latitude" }),
         __metadata("design:type", Number)
     ], GetForecastTimeSeriesPathParams.prototype, "latitude", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=longitude" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=longitude" }),
         __metadata("design:type", Number)
     ], GetForecastTimeSeriesPathParams.prototype, "longitude", void 0);
     return GetForecastTimeSeriesPathParams;
@@ -45,31 +45,31 @@ var GetForecastTimeSeriesQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=days" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=days" }),
         __metadata("design:type", Number)
     ], GetForecastTimeSeriesQueryParams.prototype, "days", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=endtime" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=endtime" }),
         __metadata("design:type", String)
     ], GetForecastTimeSeriesQueryParams.prototype, "endtime", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=entryid" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=entryid" }),
         __metadata("design:type", String)
     ], GetForecastTimeSeriesQueryParams.prototype, "entryid", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=hours" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=hours" }),
         __metadata("design:type", Number)
     ], GetForecastTimeSeriesQueryParams.prototype, "hours", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=inittime" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=inittime" }),
         __metadata("design:type", String)
     ], GetForecastTimeSeriesQueryParams.prototype, "inittime", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=wave" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=wave" }),
         __metadata("design:type", String)
     ], GetForecastTimeSeriesQueryParams.prototype, "wave", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=weather" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=weather" }),
         __metadata("design:type", String)
     ], GetForecastTimeSeriesQueryParams.prototype, "weather", void 0);
     return GetForecastTimeSeriesQueryParams;
@@ -81,11 +81,11 @@ var GetForecastTimeSeriesRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetForecastTimeSeriesPathParams)
     ], GetForecastTimeSeriesRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetForecastTimeSeriesQueryParams)
     ], GetForecastTimeSeriesRequest.prototype, "queryParams", void 0);
     return GetForecastTimeSeriesRequest;
@@ -97,11 +97,11 @@ var GetForecastTimeSeriesResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetForecastTimeSeriesResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetForecastTimeSeriesResponse.prototype, "statusCode", void 0);
     return GetForecastTimeSeriesResponse;

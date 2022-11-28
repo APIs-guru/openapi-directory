@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class FindingTypeStatsFindingTypeEnum(str, Enum):
     FINDING_TYPE_UNSPECIFIED = "FINDING_TYPE_UNSPECIFIED"
@@ -20,6 +22,10 @@ class FindingTypeStatsFindingTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class FindingTypeStats:
-    finding_count: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'findingCount' }})
-    finding_type: Optional[FindingTypeStatsFindingTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'findingType' }})
+    r"""FindingTypeStats
+    A FindingTypeStats resource represents stats regarding a specific FindingType of Findings under a given ScanRun.
+    """
+    
+    finding_count: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('findingCount') }})
+    finding_type: Optional[FindingTypeStatsFindingTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('findingType') }})
     

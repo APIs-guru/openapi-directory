@@ -12,12 +12,6 @@ type BatchGeneratePdfV1Security struct {
 	APITokenBasic shared.SchemeAPITokenBasic `security:"scheme,type=http,subtype=basic"`
 }
 
-type BatchGeneratePdfV1Request struct {
-	PathParams BatchGeneratePdfV1PathParams
-	Request    []map[string]interface{} `request:"mediaType=application/json"`
-	Security   BatchGeneratePdfV1Security
-}
-
 type BatchGeneratePdfV1CreateSubmissionResponseStatusEnum string
 
 const (
@@ -29,6 +23,12 @@ type BatchGeneratePdfV1CreateSubmissionResponse struct {
 	Errors     []string                                             `json:"errors,omitempty"`
 	Status     BatchGeneratePdfV1CreateSubmissionResponseStatusEnum `json:"status"`
 	Submission shared.Submission                                    `json:"submission"`
+}
+
+type BatchGeneratePdfV1Request struct {
+	PathParams BatchGeneratePdfV1PathParams
+	Request    []map[string]interface{} `request:"mediaType=application/json"`
+	Security   BatchGeneratePdfV1Security
 }
 
 type BatchGeneratePdfV1Response struct {

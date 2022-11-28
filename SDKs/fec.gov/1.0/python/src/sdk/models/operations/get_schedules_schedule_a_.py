@@ -1,8 +1,9 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 class GetSchedulesScheduleAContributorTypeEnum(str, Enum):
@@ -49,7 +50,7 @@ class GetSchedulesScheduleARecipientCommitteeTypeEnum(str, Enum):
 
 @dataclass
 class GetSchedulesScheduleAQueryParams:
-    api_key: str = field(default=None, metadata={'query_param': { 'field_name': 'api_key', 'style': 'form', 'explode': True }})
+    api_key: str = field(metadata={'query_param': { 'field_name': 'api_key', 'style': 'form', 'explode': True }})
     committee_id: Optional[List[str]] = field(default=None, metadata={'query_param': { 'field_name': 'committee_id', 'style': 'form', 'explode': True }})
     contributor_city: Optional[List[str]] = field(default=None, metadata={'query_param': { 'field_name': 'contributor_city', 'style': 'form', 'explode': True }})
     contributor_employer: Optional[List[str]] = field(default=None, metadata={'query_param': { 'field_name': 'contributor_employer', 'style': 'form', 'explode': True }})
@@ -62,17 +63,17 @@ class GetSchedulesScheduleAQueryParams:
     image_number: Optional[List[str]] = field(default=None, metadata={'query_param': { 'field_name': 'image_number', 'style': 'form', 'explode': True }})
     is_individual: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'is_individual', 'style': 'form', 'explode': True }})
     last_contribution_receipt_amount: Optional[float] = field(default=None, metadata={'query_param': { 'field_name': 'last_contribution_receipt_amount', 'style': 'form', 'explode': True }})
-    last_contribution_receipt_date: Optional[datetime] = field(default=None, metadata={'query_param': { 'field_name': 'last_contribution_receipt_date', 'style': 'form', 'explode': True }})
+    last_contribution_receipt_date: Optional[date] = field(default=None, metadata={'query_param': { 'field_name': 'last_contribution_receipt_date', 'style': 'form', 'explode': True }})
     last_index: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'last_index', 'style': 'form', 'explode': True }})
     line_number: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'line_number', 'style': 'form', 'explode': True }})
     max_amount: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'max_amount', 'style': 'form', 'explode': True }})
-    max_date: Optional[datetime] = field(default=None, metadata={'query_param': { 'field_name': 'max_date', 'style': 'form', 'explode': True }})
+    max_date: Optional[date] = field(default=None, metadata={'query_param': { 'field_name': 'max_date', 'style': 'form', 'explode': True }})
     max_image_number: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'max_image_number', 'style': 'form', 'explode': True }})
-    max_load_date: Optional[datetime] = field(default=None, metadata={'query_param': { 'field_name': 'max_load_date', 'style': 'form', 'explode': True }})
+    max_load_date: Optional[date] = field(default=None, metadata={'query_param': { 'field_name': 'max_load_date', 'style': 'form', 'explode': True }})
     min_amount: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'min_amount', 'style': 'form', 'explode': True }})
-    min_date: Optional[datetime] = field(default=None, metadata={'query_param': { 'field_name': 'min_date', 'style': 'form', 'explode': True }})
+    min_date: Optional[date] = field(default=None, metadata={'query_param': { 'field_name': 'min_date', 'style': 'form', 'explode': True }})
     min_image_number: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'min_image_number', 'style': 'form', 'explode': True }})
-    min_load_date: Optional[datetime] = field(default=None, metadata={'query_param': { 'field_name': 'min_load_date', 'style': 'form', 'explode': True }})
+    min_load_date: Optional[date] = field(default=None, metadata={'query_param': { 'field_name': 'min_load_date', 'style': 'form', 'explode': True }})
     per_page: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'per_page', 'style': 'form', 'explode': True }})
     recipient_committee_designation: Optional[List[GetSchedulesScheduleARecipientCommitteeDesignationEnum]] = field(default=None, metadata={'query_param': { 'field_name': 'recipient_committee_designation', 'style': 'form', 'explode': True }})
     recipient_committee_org_type: Optional[List[GetSchedulesScheduleARecipientCommitteeOrgTypeEnum]] = field(default=None, metadata={'query_param': { 'field_name': 'recipient_committee_org_type', 'style': 'form', 'explode': True }})
@@ -85,12 +86,12 @@ class GetSchedulesScheduleAQueryParams:
 
 @dataclass
 class GetSchedulesScheduleARequest:
-    query_params: GetSchedulesScheduleAQueryParams = field(default=None)
+    query_params: GetSchedulesScheduleAQueryParams = field()
     
 
 @dataclass
 class GetSchedulesScheduleAResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     schedule_a_page: Optional[shared.ScheduleAPage] = field(default=None)
-    status_code: int = field(default=None)
     

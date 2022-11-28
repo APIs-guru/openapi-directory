@@ -1,10 +1,12 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import globalresources_shared_models_translationsetattribute
+from sdk import utils
+from . import *
 
 class GlobalResourcesSharedModelsTranslationSetStateEnum(str, Enum):
     OUT_FOR_PROCESSING = "OutForProcessing"
@@ -18,12 +20,16 @@ class GlobalResourcesSharedModelsTranslationSetStateEnum(str, Enum):
 @dataclass_json
 @dataclass
 class GlobalResourcesSharedModelsTranslationSet:
-    attributes: Optional[List[globalresources_shared_models_translationsetattribute.GlobalResourcesSharedModelsTranslationSetAttribute]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Attributes' }})
-    file_i_ds: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FileIDs' }})
-    id: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Id' }})
-    in_date: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'InDate', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    notes: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Notes' }})
-    out_date: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'OutDate', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    state: GlobalResourcesSharedModelsTranslationSetStateEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'State' }})
-    translation_request_id: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'TranslationRequestID' }})
+    r"""GlobalResourcesSharedModelsTranslationSet
+    A set of strings submitted for translation
+    """
+    
+    file_i_ds: List[str] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('FileIDs') }})
+    state: GlobalResourcesSharedModelsTranslationSetStateEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('State') }})
+    attributes: Optional[List[GlobalResourcesSharedModelsTranslationSetAttribute]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Attributes') }})
+    id: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Id') }})
+    in_date: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('InDate'), 'encoder': utils.datetimeisoformat(True), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    notes: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Notes') }})
+    out_date: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('OutDate'), 'encoder': utils.datetimeisoformat(True), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    translation_request_id: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('TranslationRequestID') }})
     

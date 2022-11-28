@@ -1,5 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AccountAdwordsLink } from "./accountadwordslink";
 import { AccountBusinessInformation } from "./accountbusinessinformation";
 import { AccountGoogleMyBusinessLink } from "./accountgooglemybusinesslink";
@@ -7,44 +6,45 @@ import { AccountUser } from "./accountuser";
 import { AccountYouTubeChannelLink } from "./accountyoutubechannellink";
 
 
+
 // Account
 /** 
  * Account data. After the creation of a new account it may take a few minutes before it is fully operational. The methods delete, insert, and update require the admin role.
 **/
 export class Account extends SpeakeasyBase {
-  @Metadata({ data: "json, name=adultContent" })
+  @SpeakeasyMetadata({ data: "json, name=adultContent" })
   adultContent?: boolean;
 
-  @Metadata({ data: "json, name=adwordsLinks", elemType: shared.AccountAdwordsLink })
+  @SpeakeasyMetadata({ data: "json, name=adwordsLinks", elemType: AccountAdwordsLink })
   adwordsLinks?: AccountAdwordsLink[];
 
-  @Metadata({ data: "json, name=businessInformation" })
+  @SpeakeasyMetadata({ data: "json, name=businessInformation" })
   businessInformation?: AccountBusinessInformation;
 
-  @Metadata({ data: "json, name=googleMyBusinessLink" })
+  @SpeakeasyMetadata({ data: "json, name=googleMyBusinessLink" })
   googleMyBusinessLink?: AccountGoogleMyBusinessLink;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=reviewsUrl" })
+  @SpeakeasyMetadata({ data: "json, name=reviewsUrl" })
   reviewsUrl?: string;
 
-  @Metadata({ data: "json, name=sellerId" })
+  @SpeakeasyMetadata({ data: "json, name=sellerId" })
   sellerId?: string;
 
-  @Metadata({ data: "json, name=users", elemType: shared.AccountUser })
+  @SpeakeasyMetadata({ data: "json, name=users", elemType: AccountUser })
   users?: AccountUser[];
 
-  @Metadata({ data: "json, name=websiteUrl" })
+  @SpeakeasyMetadata({ data: "json, name=websiteUrl" })
   websiteUrl?: string;
 
-  @Metadata({ data: "json, name=youtubeChannelLinks", elemType: shared.AccountYouTubeChannelLink })
+  @SpeakeasyMetadata({ data: "json, name=youtubeChannelLinks", elemType: AccountYouTubeChannelLink })
   youtubeChannelLinks?: AccountYouTubeChannelLink[];
 }

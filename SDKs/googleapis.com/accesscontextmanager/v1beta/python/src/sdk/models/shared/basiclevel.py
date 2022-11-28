@@ -1,7 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import condition
+from sdk import utils
+from . import *
 
 class BasicLevelCombiningFunctionEnum(str, Enum):
     AND = "AND"
@@ -11,6 +13,10 @@ class BasicLevelCombiningFunctionEnum(str, Enum):
 @dataclass_json
 @dataclass
 class BasicLevel:
-    combining_function: Optional[BasicLevelCombiningFunctionEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'combiningFunction' }})
-    conditions: Optional[List[condition.Condition]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'conditions' }})
+    r"""BasicLevel
+    `BasicLevel` is an `AccessLevel` using a set of recommended features.
+    """
+    
+    combining_function: Optional[BasicLevelCombiningFunctionEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('combiningFunction') }})
+    conditions: Optional[List[Condition]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('conditions') }})
     

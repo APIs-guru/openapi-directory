@@ -1,8 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ReplicationPendingModifiedValues } from "./replicationpendingmodifiedvalues";
 import { ReplicationSubnetGroup } from "./replicationsubnetgroup";
 import { VpcSecurityGroupMembership } from "./vpcsecuritygroupmembership";
+
 
 
 // ReplicationInstance
@@ -10,72 +10,72 @@ import { VpcSecurityGroupMembership } from "./vpcsecuritygroupmembership";
  * Provides information that defines a replication instance.
 **/
 export class ReplicationInstance extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AllocatedStorage" })
+  @SpeakeasyMetadata({ data: "json, name=AllocatedStorage" })
   allocatedStorage?: number;
 
-  @Metadata({ data: "json, name=AutoMinorVersionUpgrade" })
+  @SpeakeasyMetadata({ data: "json, name=AutoMinorVersionUpgrade" })
   autoMinorVersionUpgrade?: boolean;
 
-  @Metadata({ data: "json, name=AvailabilityZone" })
+  @SpeakeasyMetadata({ data: "json, name=AvailabilityZone" })
   availabilityZone?: string;
 
-  @Metadata({ data: "json, name=DnsNameServers" })
+  @SpeakeasyMetadata({ data: "json, name=DnsNameServers" })
   dnsNameServers?: string;
 
-  @Metadata({ data: "json, name=EngineVersion" })
+  @SpeakeasyMetadata({ data: "json, name=EngineVersion" })
   engineVersion?: string;
 
-  @Metadata({ data: "json, name=FreeUntil" })
+  @SpeakeasyMetadata({ data: "json, name=FreeUntil" })
   freeUntil?: Date;
 
-  @Metadata({ data: "json, name=InstanceCreateTime" })
+  @SpeakeasyMetadata({ data: "json, name=InstanceCreateTime" })
   instanceCreateTime?: Date;
 
-  @Metadata({ data: "json, name=KmsKeyId" })
+  @SpeakeasyMetadata({ data: "json, name=KmsKeyId" })
   kmsKeyId?: string;
 
-  @Metadata({ data: "json, name=MultiAZ" })
+  @SpeakeasyMetadata({ data: "json, name=MultiAZ" })
   multiAz?: boolean;
 
-  @Metadata({ data: "json, name=PendingModifiedValues" })
+  @SpeakeasyMetadata({ data: "json, name=PendingModifiedValues" })
   pendingModifiedValues?: ReplicationPendingModifiedValues;
 
-  @Metadata({ data: "json, name=PreferredMaintenanceWindow" })
+  @SpeakeasyMetadata({ data: "json, name=PreferredMaintenanceWindow" })
   preferredMaintenanceWindow?: string;
 
-  @Metadata({ data: "json, name=PubliclyAccessible" })
+  @SpeakeasyMetadata({ data: "json, name=PubliclyAccessible" })
   publiclyAccessible?: boolean;
 
-  @Metadata({ data: "json, name=ReplicationInstanceArn" })
+  @SpeakeasyMetadata({ data: "json, name=ReplicationInstanceArn" })
   replicationInstanceArn?: string;
 
-  @Metadata({ data: "json, name=ReplicationInstanceClass" })
+  @SpeakeasyMetadata({ data: "json, name=ReplicationInstanceClass" })
   replicationInstanceClass?: string;
 
-  @Metadata({ data: "json, name=ReplicationInstanceIdentifier" })
+  @SpeakeasyMetadata({ data: "json, name=ReplicationInstanceIdentifier" })
   replicationInstanceIdentifier?: string;
 
-  @Metadata({ data: "json, name=ReplicationInstancePrivateIpAddress" })
+  @SpeakeasyMetadata({ data: "json, name=ReplicationInstancePrivateIpAddress" })
   replicationInstancePrivateIpAddress?: string;
 
-  @Metadata({ data: "json, name=ReplicationInstancePrivateIpAddresses" })
+  @SpeakeasyMetadata({ data: "json, name=ReplicationInstancePrivateIpAddresses" })
   replicationInstancePrivateIpAddresses?: string[];
 
-  @Metadata({ data: "json, name=ReplicationInstancePublicIpAddress" })
+  @SpeakeasyMetadata({ data: "json, name=ReplicationInstancePublicIpAddress" })
   replicationInstancePublicIpAddress?: string;
 
-  @Metadata({ data: "json, name=ReplicationInstancePublicIpAddresses" })
+  @SpeakeasyMetadata({ data: "json, name=ReplicationInstancePublicIpAddresses" })
   replicationInstancePublicIpAddresses?: string[];
 
-  @Metadata({ data: "json, name=ReplicationInstanceStatus" })
+  @SpeakeasyMetadata({ data: "json, name=ReplicationInstanceStatus" })
   replicationInstanceStatus?: string;
 
-  @Metadata({ data: "json, name=ReplicationSubnetGroup" })
+  @SpeakeasyMetadata({ data: "json, name=ReplicationSubnetGroup" })
   replicationSubnetGroup?: ReplicationSubnetGroup;
 
-  @Metadata({ data: "json, name=SecondaryAvailabilityZone" })
+  @SpeakeasyMetadata({ data: "json, name=SecondaryAvailabilityZone" })
   secondaryAvailabilityZone?: string;
 
-  @Metadata({ data: "json, name=VpcSecurityGroups", elemType: shared.VpcSecurityGroupMembership })
+  @SpeakeasyMetadata({ data: "json, name=VpcSecurityGroups", elemType: VpcSecurityGroupMembership })
   vpcSecurityGroups?: VpcSecurityGroupMembership[];
 }

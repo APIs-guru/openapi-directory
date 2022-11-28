@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { Metric } from "./metric";
 import { FrequencyEnum } from "./frequencyenum";
 import { MetricSource } from "./metricsource";
 import { TimestampColumn } from "./timestampcolumn";
@@ -33,55 +33,55 @@ var DescribeMetricSetResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=AnomalyDetectorArn" }),
+        SpeakeasyMetadata({ data: "json, name=AnomalyDetectorArn" }),
         __metadata("design:type", String)
     ], DescribeMetricSetResponse.prototype, "anomalyDetectorArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=CreationTime" }),
+        SpeakeasyMetadata({ data: "json, name=CreationTime" }),
         __metadata("design:type", Date)
     ], DescribeMetricSetResponse.prototype, "creationTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=DimensionList" }),
+        SpeakeasyMetadata({ data: "json, name=DimensionList" }),
         __metadata("design:type", Array)
     ], DescribeMetricSetResponse.prototype, "dimensionList", void 0);
     __decorate([
-        Metadata({ data: "json, name=LastModificationTime" }),
+        SpeakeasyMetadata({ data: "json, name=LastModificationTime" }),
         __metadata("design:type", Date)
     ], DescribeMetricSetResponse.prototype, "lastModificationTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=MetricList", elemType: shared.Metric }),
+        SpeakeasyMetadata({ data: "json, name=MetricList", elemType: Metric }),
         __metadata("design:type", Array)
     ], DescribeMetricSetResponse.prototype, "metricList", void 0);
     __decorate([
-        Metadata({ data: "json, name=MetricSetArn" }),
+        SpeakeasyMetadata({ data: "json, name=MetricSetArn" }),
         __metadata("design:type", String)
     ], DescribeMetricSetResponse.prototype, "metricSetArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=MetricSetDescription" }),
+        SpeakeasyMetadata({ data: "json, name=MetricSetDescription" }),
         __metadata("design:type", String)
     ], DescribeMetricSetResponse.prototype, "metricSetDescription", void 0);
     __decorate([
-        Metadata({ data: "json, name=MetricSetFrequency" }),
+        SpeakeasyMetadata({ data: "json, name=MetricSetFrequency" }),
         __metadata("design:type", String)
     ], DescribeMetricSetResponse.prototype, "metricSetFrequency", void 0);
     __decorate([
-        Metadata({ data: "json, name=MetricSetName" }),
+        SpeakeasyMetadata({ data: "json, name=MetricSetName" }),
         __metadata("design:type", String)
     ], DescribeMetricSetResponse.prototype, "metricSetName", void 0);
     __decorate([
-        Metadata({ data: "json, name=MetricSource" }),
+        SpeakeasyMetadata({ data: "json, name=MetricSource" }),
         __metadata("design:type", MetricSource)
     ], DescribeMetricSetResponse.prototype, "metricSource", void 0);
     __decorate([
-        Metadata({ data: "json, name=Offset" }),
+        SpeakeasyMetadata({ data: "json, name=Offset" }),
         __metadata("design:type", Number)
     ], DescribeMetricSetResponse.prototype, "offset", void 0);
     __decorate([
-        Metadata({ data: "json, name=TimestampColumn" }),
+        SpeakeasyMetadata({ data: "json, name=TimestampColumn" }),
         __metadata("design:type", TimestampColumn)
     ], DescribeMetricSetResponse.prototype, "timestampColumn", void 0);
     __decorate([
-        Metadata({ data: "json, name=Timezone" }),
+        SpeakeasyMetadata({ data: "json, name=Timezone" }),
         __metadata("design:type", String)
     ], DescribeMetricSetResponse.prototype, "timezone", void 0);
     return DescribeMetricSetResponse;

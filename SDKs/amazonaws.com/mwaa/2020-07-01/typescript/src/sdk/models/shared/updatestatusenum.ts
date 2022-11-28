@@ -1,7 +1,8 @@
 
 
+
 export enum UpdateStatusEnum {
-    Success = "SUCCESS"
-,    Pending = "PENDING"
-,    Failed = "FAILED"
+    Success = "SUCCESS",
+    Pending = "PENDING",
+    Failed = "FAILED"
 }

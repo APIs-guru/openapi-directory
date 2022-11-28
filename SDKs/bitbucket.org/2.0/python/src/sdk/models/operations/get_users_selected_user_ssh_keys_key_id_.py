@@ -1,45 +1,31 @@
 from dataclasses import dataclass, field
 from typing import Any,Optional
+from sdk.models import shared
 
 
 @dataclass
 class GetUsersSelectedUserSSHKeysKeyIDPathParams:
-    key_id: str = field(default=None, metadata={'path_param': { 'field_name': 'key_id', 'style': 'simple', 'explode': False }})
-    selected_user: str = field(default=None, metadata={'path_param': { 'field_name': 'selected_user', 'style': 'simple', 'explode': False }})
-    
-
-@dataclass
-class GetUsersSelectedUserSSHKeysKeyIDSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    
-
-@dataclass
-class GetUsersSelectedUserSSHKeysKeyIDSecurityOption2:
-    basic: shared.SchemeBasic = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'basic' }})
-    
-
-@dataclass
-class GetUsersSelectedUserSSHKeysKeyIDSecurityOption3:
-    api_key: shared.SchemeAPIKey = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    key_id: str = field(metadata={'path_param': { 'field_name': 'key_id', 'style': 'simple', 'explode': False }})
+    selected_user: str = field(metadata={'path_param': { 'field_name': 'selected_user', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetUsersSelectedUserSSHKeysKeyIDSecurity:
-    option1: Optional[GetUsersSelectedUserSSHKeysKeyIDSecurityOption1] = field(default=None, metadata={'security': { 'option': True }})
-    option2: Optional[GetUsersSelectedUserSSHKeysKeyIDSecurityOption2] = field(default=None, metadata={'security': { 'option': True }})
-    option3: Optional[GetUsersSelectedUserSSHKeysKeyIDSecurityOption3] = field(default=None, metadata={'security': { 'option': True }})
+    api_key: Optional[shared.SchemeAPIKey] = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    basic: Optional[shared.SchemeBasic] = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'basic' }})
+    oauth2: Optional[shared.SchemeOauth2] = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class GetUsersSelectedUserSSHKeysKeyIDRequest:
-    path_params: GetUsersSelectedUserSSHKeysKeyIDPathParams = field(default=None)
-    security: GetUsersSelectedUserSSHKeysKeyIDSecurity = field(default=None)
+    path_params: GetUsersSelectedUserSSHKeysKeyIDPathParams = field()
+    security: GetUsersSelectedUserSSHKeysKeyIDSecurity = field()
     
 
 @dataclass
 class GetUsersSelectedUserSSHKeysKeyIDResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error: Optional[dict[str, Any]] = field(default=None)
     ssh_account_key: Optional[dict[str, Any]] = field(default=None)
     

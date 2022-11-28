@@ -1,59 +1,48 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class AcceptServiceTransferPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=token" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=token" })
   token: string;
 }
 
 
-export class AcceptServiceTransferSecurityOption1 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=bearer" })
-  personalAccessToken: shared.SchemePersonalAccessToken;
-}
-
-
-export class AcceptServiceTransferSecurityOption2 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
-  oauth: shared.SchemeOauth;
-}
-
-
 export class AcceptServiceTransferSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, option=true" })
-  option1?: AcceptServiceTransferSecurityOption1;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" })
+  personalAccessToken?: shared.SchemePersonalAccessToken;
 
-  @Metadata({ data: "security, option=true" })
-  option2?: AcceptServiceTransferSecurityOption2;
-}
-
-
-export class AcceptServiceTransferRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: AcceptServiceTransferPathParams;
-
-  @Metadata()
-  security: AcceptServiceTransferSecurity;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
+  oauth?: shared.SchemeOauth;
 }
 
 
 export class AcceptServiceTransferDefaultApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=errors", elemType: shared.ErrorObject })
+  @SpeakeasyMetadata({ data: "json, name=errors", elemType: shared.ErrorObject })
   errors?: shared.ErrorObject[];
 }
 
 
+export class AcceptServiceTransferRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: AcceptServiceTransferPathParams;
+
+  @SpeakeasyMetadata()
+  security: AcceptServiceTransferSecurity;
+}
+
+
 export class AcceptServiceTransferResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   acceptServiceTransfer200ApplicationJsonObject?: Map<string, any>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   acceptServiceTransferDefaultApplicationJsonObject?: AcceptServiceTransferDefaultApplicationJson;
 }

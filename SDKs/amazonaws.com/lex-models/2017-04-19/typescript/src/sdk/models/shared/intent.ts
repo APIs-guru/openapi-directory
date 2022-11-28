@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Intent
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Identifies the specific version of an intent.
 **/
 export class Intent extends SpeakeasyBase {
-  @Metadata({ data: "json, name=intentName" })
+  @SpeakeasyMetadata({ data: "json, name=intentName" })
   intentName: string;
 
-  @Metadata({ data: "json, name=intentVersion" })
+  @SpeakeasyMetadata({ data: "json, name=intentVersion" })
   intentVersion: string;
 }

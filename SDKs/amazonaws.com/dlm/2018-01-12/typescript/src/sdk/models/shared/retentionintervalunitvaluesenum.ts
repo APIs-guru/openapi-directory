@@ -1,8 +1,9 @@
 
 
+
 export enum RetentionIntervalUnitValuesEnum {
-    Days = "DAYS"
-,    Weeks = "WEEKS"
-,    Months = "MONTHS"
-,    Years = "YEARS"
+    Days = "DAYS",
+    Weeks = "WEEKS",
+    Months = "MONTHS",
+    Years = "YEARS"
 }

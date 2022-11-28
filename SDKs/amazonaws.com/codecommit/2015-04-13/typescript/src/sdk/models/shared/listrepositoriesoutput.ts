@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RepositoryNameIdPair } from "./repositorynameidpair";
+
 
 
 // ListRepositoriesOutput
@@ -8,9 +8,9 @@ import { RepositoryNameIdPair } from "./repositorynameidpair";
  * Represents the output of a list repositories operation.
 **/
 export class ListRepositoriesOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=nextToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=repositories", elemType: shared.RepositoryNameIdPair })
+  @SpeakeasyMetadata({ data: "json, name=repositories", elemType: RepositoryNameIdPair })
   repositories?: RepositoryNameIdPair[];
 }

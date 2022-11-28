@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from typing import Any,List,Optional
+from enum import Enum
 from sdk.models import shared
 
 class ListItemsItemTypeEnum(str, Enum):
@@ -44,14 +45,14 @@ class ListItemsQueryParams:
 
 @dataclass
 class ListItemsRequest:
-    query_params: ListItemsQueryParams = field(default=None)
+    query_params: ListItemsQueryParams = field()
     
 
 @dataclass
 class ListItemsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     error_model: Optional[shared.ErrorModel] = field(default=None)
-    status_code: int = field(default=None)
     nitro: Optional[Any] = field(default=None)
     

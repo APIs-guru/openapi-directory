@@ -22,18 +22,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var PutInstancesIdMetadataNamePathParams = /** @class */ (function (_super) {
     __extends(PutInstancesIdMetadataNamePathParams, _super);
     function PutInstancesIdMetadataNamePathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=id" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" }),
         __metadata("design:type", String)
     ], PutInstancesIdMetadataNamePathParams.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=name" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=name" }),
         __metadata("design:type", String)
     ], PutInstancesIdMetadataNamePathParams.prototype, "name", void 0);
     return PutInstancesIdMetadataNamePathParams;
@@ -45,7 +45,7 @@ var PutInstancesIdMetadataNameHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=If-Match" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=If-Match" }),
         __metadata("design:type", String)
     ], PutInstancesIdMetadataNameHeaders.prototype, "ifMatch", void 0);
     return PutInstancesIdMetadataNameHeaders;
@@ -57,15 +57,15 @@ var PutInstancesIdMetadataNameRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PutInstancesIdMetadataNamePathParams)
     ], PutInstancesIdMetadataNameRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PutInstancesIdMetadataNameHeaders)
     ], PutInstancesIdMetadataNameRequest.prototype, "headers", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=text/plain" }),
+        SpeakeasyMetadata({ data: "request, media_type=text/plain" }),
         __metadata("design:type", Uint8Array)
     ], PutInstancesIdMetadataNameRequest.prototype, "request", void 0);
     return PutInstancesIdMetadataNameRequest;
@@ -77,11 +77,11 @@ var PutInstancesIdMetadataNameResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], PutInstancesIdMetadataNameResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], PutInstancesIdMetadataNameResponse.prototype, "statusCode", void 0);
     return PutInstancesIdMetadataNameResponse;

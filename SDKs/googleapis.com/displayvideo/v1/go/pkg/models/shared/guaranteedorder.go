@@ -74,6 +74,8 @@ const (
 	GuaranteedOrderExchangeEnumExchangeDax               GuaranteedOrderExchangeEnum = "EXCHANGE_DAX"
 )
 
+// GuaranteedOrder
+// A guaranteed order. Guaranteed orders are parent entity of guaranteed inventory sources. When creating a guaranteed inventory source, a guaranteed order ID must be assigned to the inventory source.
 type GuaranteedOrder struct {
 	DefaultAdvertiserID     *string                      `json:"defaultAdvertiserId,omitempty"`
 	DefaultCampaignID       *string                      `json:"defaultCampaignId,omitempty"`
@@ -89,4 +91,18 @@ type GuaranteedOrder struct {
 	ReadWritePartnerID      *string                      `json:"readWritePartnerId,omitempty"`
 	Status                  *GuaranteedOrderStatus       `json:"status,omitempty"`
 	UpdateTime              *string                      `json:"updateTime,omitempty"`
+}
+
+// GuaranteedOrderInput
+// A guaranteed order. Guaranteed orders are parent entity of guaranteed inventory sources. When creating a guaranteed inventory source, a guaranteed order ID must be assigned to the inventory source.
+type GuaranteedOrderInput struct {
+	DefaultCampaignID     *string                      `json:"defaultCampaignId,omitempty"`
+	DisplayName           *string                      `json:"displayName,omitempty"`
+	Exchange              *GuaranteedOrderExchangeEnum `json:"exchange,omitempty"`
+	PublisherName         *string                      `json:"publisherName,omitempty"`
+	ReadAccessInherited   *bool                        `json:"readAccessInherited,omitempty"`
+	ReadAdvertiserIds     []string                     `json:"readAdvertiserIds,omitempty"`
+	ReadWriteAdvertiserID *string                      `json:"readWriteAdvertiserId,omitempty"`
+	ReadWritePartnerID    *string                      `json:"readWritePartnerId,omitempty"`
+	Status                *GuaranteedOrderStatusInput  `json:"status,omitempty"`
 }

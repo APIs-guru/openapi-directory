@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { TagStatusEnum } from "./tagstatusenum";
 /**
  * The filter for the lifecycle policy preview.

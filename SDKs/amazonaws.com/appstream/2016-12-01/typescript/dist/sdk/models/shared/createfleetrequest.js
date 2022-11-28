@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ComputeCapacity } from "./computecapacity";
 import { DomainJoinInfo } from "./domainjoininfo";
 import { FleetTypeEnum } from "./fleettypeenum";
@@ -34,71 +34,71 @@ var CreateFleetRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=ComputeCapacity" }),
+        SpeakeasyMetadata({ data: "json, name=ComputeCapacity" }),
         __metadata("design:type", ComputeCapacity)
     ], CreateFleetRequest.prototype, "computeCapacity", void 0);
     __decorate([
-        Metadata({ data: "json, name=Description" }),
+        SpeakeasyMetadata({ data: "json, name=Description" }),
         __metadata("design:type", String)
     ], CreateFleetRequest.prototype, "description", void 0);
     __decorate([
-        Metadata({ data: "json, name=DisconnectTimeoutInSeconds" }),
+        SpeakeasyMetadata({ data: "json, name=DisconnectTimeoutInSeconds" }),
         __metadata("design:type", Number)
     ], CreateFleetRequest.prototype, "disconnectTimeoutInSeconds", void 0);
     __decorate([
-        Metadata({ data: "json, name=DisplayName" }),
+        SpeakeasyMetadata({ data: "json, name=DisplayName" }),
         __metadata("design:type", String)
     ], CreateFleetRequest.prototype, "displayName", void 0);
     __decorate([
-        Metadata({ data: "json, name=DomainJoinInfo" }),
+        SpeakeasyMetadata({ data: "json, name=DomainJoinInfo" }),
         __metadata("design:type", DomainJoinInfo)
     ], CreateFleetRequest.prototype, "domainJoinInfo", void 0);
     __decorate([
-        Metadata({ data: "json, name=EnableDefaultInternetAccess" }),
+        SpeakeasyMetadata({ data: "json, name=EnableDefaultInternetAccess" }),
         __metadata("design:type", Boolean)
     ], CreateFleetRequest.prototype, "enableDefaultInternetAccess", void 0);
     __decorate([
-        Metadata({ data: "json, name=FleetType" }),
+        SpeakeasyMetadata({ data: "json, name=FleetType" }),
         __metadata("design:type", String)
     ], CreateFleetRequest.prototype, "fleetType", void 0);
     __decorate([
-        Metadata({ data: "json, name=IamRoleArn" }),
+        SpeakeasyMetadata({ data: "json, name=IamRoleArn" }),
         __metadata("design:type", String)
     ], CreateFleetRequest.prototype, "iamRoleArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=IdleDisconnectTimeoutInSeconds" }),
+        SpeakeasyMetadata({ data: "json, name=IdleDisconnectTimeoutInSeconds" }),
         __metadata("design:type", Number)
     ], CreateFleetRequest.prototype, "idleDisconnectTimeoutInSeconds", void 0);
     __decorate([
-        Metadata({ data: "json, name=ImageArn" }),
+        SpeakeasyMetadata({ data: "json, name=ImageArn" }),
         __metadata("design:type", String)
     ], CreateFleetRequest.prototype, "imageArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=ImageName" }),
+        SpeakeasyMetadata({ data: "json, name=ImageName" }),
         __metadata("design:type", String)
     ], CreateFleetRequest.prototype, "imageName", void 0);
     __decorate([
-        Metadata({ data: "json, name=InstanceType" }),
+        SpeakeasyMetadata({ data: "json, name=InstanceType" }),
         __metadata("design:type", String)
     ], CreateFleetRequest.prototype, "instanceType", void 0);
     __decorate([
-        Metadata({ data: "json, name=MaxUserDurationInSeconds" }),
+        SpeakeasyMetadata({ data: "json, name=MaxUserDurationInSeconds" }),
         __metadata("design:type", Number)
     ], CreateFleetRequest.prototype, "maxUserDurationInSeconds", void 0);
     __decorate([
-        Metadata({ data: "json, name=Name" }),
+        SpeakeasyMetadata({ data: "json, name=Name" }),
         __metadata("design:type", String)
     ], CreateFleetRequest.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=StreamView" }),
+        SpeakeasyMetadata({ data: "json, name=StreamView" }),
         __metadata("design:type", String)
     ], CreateFleetRequest.prototype, "streamView", void 0);
     __decorate([
-        Metadata({ data: "json, name=Tags" }),
+        SpeakeasyMetadata({ data: "json, name=Tags" }),
         __metadata("design:type", Map)
     ], CreateFleetRequest.prototype, "tags", void 0);
     __decorate([
-        Metadata({ data: "json, name=VpcConfig" }),
+        SpeakeasyMetadata({ data: "json, name=VpcConfig" }),
         __metadata("design:type", VpcConfig)
     ], CreateFleetRequest.prototype, "vpcConfig", void 0);
     return CreateFleetRequest;

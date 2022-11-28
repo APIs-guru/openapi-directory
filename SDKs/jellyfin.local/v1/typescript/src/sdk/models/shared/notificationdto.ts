@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { NotificationLevelEnum } from "./notificationlevelenum";
+
 
 
 // NotificationDto
@@ -7,27 +8,27 @@ import { NotificationLevelEnum } from "./notificationlevelenum";
  * The notification DTO.
 **/
 export class NotificationDto extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Date" })
+  @SpeakeasyMetadata({ data: "json, name=Date" })
   date?: Date;
 
-  @Metadata({ data: "json, name=Description" })
+  @SpeakeasyMetadata({ data: "json, name=Description" })
   description?: string;
 
-  @Metadata({ data: "json, name=Id" })
+  @SpeakeasyMetadata({ data: "json, name=Id" })
   id?: string;
 
-  @Metadata({ data: "json, name=IsRead" })
+  @SpeakeasyMetadata({ data: "json, name=IsRead" })
   isRead?: boolean;
 
-  @Metadata({ data: "json, name=Level" })
+  @SpeakeasyMetadata({ data: "json, name=Level" })
   level?: NotificationLevelEnum;
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name?: string;
 
-  @Metadata({ data: "json, name=Url" })
+  @SpeakeasyMetadata({ data: "json, name=Url" })
   url?: string;
 
-  @Metadata({ data: "json, name=UserId" })
+  @SpeakeasyMetadata({ data: "json, name=UserId" })
   userId?: string;
 }

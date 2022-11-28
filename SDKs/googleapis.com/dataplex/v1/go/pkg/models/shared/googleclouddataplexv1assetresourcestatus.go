@@ -8,6 +8,8 @@ const (
 	GoogleCloudDataplexV1AssetResourceStatusStateEnumError            GoogleCloudDataplexV1AssetResourceStatusStateEnum = "ERROR"
 )
 
+// GoogleCloudDataplexV1AssetResourceStatus
+// Status of the resource referenced by an asset.
 type GoogleCloudDataplexV1AssetResourceStatus struct {
 	Message    *string                                            `json:"message,omitempty"`
 	State      *GoogleCloudDataplexV1AssetResourceStatusStateEnum `json:"state,omitempty"`

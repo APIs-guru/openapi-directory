@@ -5,14 +5,14 @@ type SixGetTheMinimumPaymentAmountQueryParams struct {
 	CurrencyTo   *string `queryParam:"style=form,explode=true,name=currency_to"`
 }
 
-type SixGetTheMinimumPaymentAmountRequest struct {
-	QueryParams SixGetTheMinimumPaymentAmountQueryParams
-}
-
 type SixGetTheMinimumPaymentAmount200ApplicationJSON struct {
 	CurrencyFrom *string  `json:"currency_from,omitempty"`
 	CurrencyTo   *string  `json:"currency_to,omitempty"`
 	MinAmount    *float64 `json:"min_amount,omitempty"`
+}
+
+type SixGetTheMinimumPaymentAmountRequest struct {
+	QueryParams SixGetTheMinimumPaymentAmountQueryParams
 }
 
 type SixGetTheMinimumPaymentAmountResponse struct {

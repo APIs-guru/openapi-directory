@@ -1,41 +1,42 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class FileActionMetadataPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=path" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=path" })
   path: string;
 }
 
 
 export class FileActionMetadataQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=preview_size" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=preview_size" })
   previewSize?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=with_previews" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=with_previews" })
   withPreviews?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=with_priority_color" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=with_priority_color" })
   withPriorityColor?: boolean;
 }
 
 
 export class FileActionMetadataRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: FileActionMetadataPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: FileActionMetadataQueryParams;
 }
 
 
 export class FileActionMetadataResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   fileEntity?: shared.FileEntity;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

@@ -1,6 +1,10 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -18,36 +22,40 @@ class CreateBotHeaders:
 @dataclass_json
 @dataclass
 class CreateBotRequestBodyDataPrivacy:
-    child_directed: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'childDirected' }})
+    r"""CreateBotRequestBodyDataPrivacy
+    By default, data stored by Amazon Lex is encrypted. The <code>DataPrivacy</code> structure provides settings that determine how Amazon Lex handles special cases of securing the data for your bot. 
+    """
+    
+    child_directed: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('childDirected') }})
     
 
 @dataclass_json
 @dataclass
 class CreateBotRequestBody:
-    bot_name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'botName' }})
-    bot_tags: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'botTags' }})
-    data_privacy: CreateBotRequestBodyDataPrivacy = field(default=None, metadata={'dataclasses_json': { 'field_name': 'dataPrivacy' }})
-    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
-    idle_session_ttl_in_seconds: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'idleSessionTTLInSeconds' }})
-    role_arn: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'roleArn' }})
-    test_bot_alias_tags: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'testBotAliasTags' }})
+    bot_name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('botName') }})
+    data_privacy: CreateBotRequestBodyDataPrivacy = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('dataPrivacy') }})
+    idle_session_ttl_in_seconds: int = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('idleSessionTTLInSeconds') }})
+    role_arn: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('roleArn') }})
+    bot_tags: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('botTags') }})
+    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('description') }})
+    test_bot_alias_tags: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('testBotAliasTags') }})
     
 
 @dataclass
 class CreateBotRequest:
-    headers: CreateBotHeaders = field(default=None)
-    request: CreateBotRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: CreateBotHeaders = field()
+    request: CreateBotRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class CreateBotResponse:
+    content_type: str = field()
+    status_code: int = field()
     conflict_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     create_bot_response: Optional[shared.CreateBotResponse] = field(default=None)
     internal_server_exception: Optional[Any] = field(default=None)
     precondition_failed_exception: Optional[Any] = field(default=None)
     service_quota_exceeded_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     validation_exception: Optional[Any] = field(default=None)
     

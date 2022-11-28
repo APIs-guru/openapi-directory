@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // SetTerminationProtectionInput
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  *  The input argument to the <a>TerminationProtection</a> operation. 
 **/
 export class SetTerminationProtectionInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=JobFlowIds" })
+  @SpeakeasyMetadata({ data: "json, name=JobFlowIds" })
   jobFlowIds: string[];
 
-  @Metadata({ data: "json, name=TerminationProtected" })
+  @SpeakeasyMetadata({ data: "json, name=TerminationProtected" })
   terminationProtected: boolean;
 }

@@ -17,6 +17,8 @@ const (
 	ReturnPolicyOnlineReturnMethodsEnumAtAKiosk                ReturnPolicyOnlineReturnMethodsEnum = "AT_A_KIOSK"
 )
 
+// ReturnPolicyOnline
+// Return policy online object. This is currently used to represent return policies for ads and free listings programs.
 type ReturnPolicyOnline struct {
 	Countries                []string                                     `json:"countries,omitempty"`
 	ItemConditions           []ReturnPolicyOnlineItemConditionsEnum       `json:"itemConditions,omitempty"`
@@ -26,6 +28,20 @@ type ReturnPolicyOnline struct {
 	RestockingFee            *ReturnPolicyOnlineRestockingFee             `json:"restockingFee,omitempty"`
 	ReturnMethods            []ReturnPolicyOnlineReturnMethodsEnum        `json:"returnMethods,omitempty"`
 	ReturnPolicyID           *string                                      `json:"returnPolicyId,omitempty"`
+	ReturnPolicyURI          *string                                      `json:"returnPolicyUri,omitempty"`
+	ReturnReasonCategoryInfo []ReturnPolicyOnlineReturnReasonCategoryInfo `json:"returnReasonCategoryInfo,omitempty"`
+}
+
+// ReturnPolicyOnlineInput
+// Return policy online object. This is currently used to represent return policies for ads and free listings programs.
+type ReturnPolicyOnlineInput struct {
+	Countries                []string                                     `json:"countries,omitempty"`
+	ItemConditions           []ReturnPolicyOnlineItemConditionsEnum       `json:"itemConditions,omitempty"`
+	Label                    *string                                      `json:"label,omitempty"`
+	Name                     *string                                      `json:"name,omitempty"`
+	Policy                   *ReturnPolicyOnlinePolicy                    `json:"policy,omitempty"`
+	RestockingFee            *ReturnPolicyOnlineRestockingFee             `json:"restockingFee,omitempty"`
+	ReturnMethods            []ReturnPolicyOnlineReturnMethodsEnum        `json:"returnMethods,omitempty"`
 	ReturnPolicyURI          *string                                      `json:"returnPolicyUri,omitempty"`
 	ReturnReasonCategoryInfo []ReturnPolicyOnlineReturnReasonCategoryInfo `json:"returnReasonCategoryInfo,omitempty"`
 }

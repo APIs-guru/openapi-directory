@@ -1,5 +1,7 @@
 package shared
 
+// AwsDynamoDbTableGlobalSecondaryIndex
+// Information abut a global secondary index for the table.
 type AwsDynamoDbTableGlobalSecondaryIndex struct {
 	Backfilling           *bool                                  `json:"Backfilling,omitempty"`
 	IndexArn              *string                                `json:"IndexArn,omitempty"`

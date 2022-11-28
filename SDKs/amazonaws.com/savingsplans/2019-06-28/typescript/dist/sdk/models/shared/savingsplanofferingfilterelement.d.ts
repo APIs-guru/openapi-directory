@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { SavingsPlanOfferingFilterAttributeEnum } from "./savingsplanofferingfilterattributeenum";
 /**
  * Information about a filter.

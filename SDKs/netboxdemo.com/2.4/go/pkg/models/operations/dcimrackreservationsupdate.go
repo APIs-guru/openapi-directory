@@ -10,7 +10,7 @@ type DcimRackReservationsUpdatePathParams struct {
 
 type DcimRackReservationsUpdateRequest struct {
 	PathParams DcimRackReservationsUpdatePathParams
-	Request    shared.WritableRackReservation `request:"mediaType=application/json"`
+	Request    shared.WritableRackReservationInput `request:"mediaType=application/json"`
 }
 
 type DcimRackReservationsUpdateResponse struct {

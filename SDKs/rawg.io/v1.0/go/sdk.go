@@ -10,7 +10,7 @@ import (
 	"strings"
 )
 
-var Servers = []string{
+var ServerList = []string{
 	"https://api.rawg.io/api",
 }
 
@@ -19,9 +19,13 @@ type HTTPClient interface {
 }
 
 type SDK struct {
-	defaultClient  HTTPClient
-	securityClient HTTPClient
-	serverURL      string
+	_defaultClient  HTTPClient
+	_securityClient HTTPClient
+
+	_serverURL  string
+	_language   string
+	_sdkVersion string
+	_genVersion string
 }
 
 type SDKOption func(*SDK)
@@ -32,27 +36,45 @@ func WithServerURL(serverURL string, params map[string]string) SDKOption {
 			serverURL = utils.ReplaceParameters(serverURL, params)
 		}
 
-		sdk.serverURL = serverURL
+		sdk._serverURL = serverURL
+	}
+}
+
+func WithClient(client HTTPClient) SDKOption {
+	return func(sdk *SDK) {
+		sdk._defaultClient = client
 	}
 }
 
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
-		defaultClient:  http.DefaultClient,
-		securityClient: http.DefaultClient,
+		_language:   "go",
+		_sdkVersion: "",
+		_genVersion: "internal",
 	}
 	for _, opt := range opts {
 		opt(sdk)
 	}
-	if sdk.serverURL == "" {
-		sdk.serverURL = Servers[0]
+
+	if sdk._defaultClient == nil {
+		sdk._defaultClient = http.DefaultClient
+	}
+	if sdk._securityClient == nil {
+
+		sdk._securityClient = sdk._defaultClient
+
+	}
+
+	if sdk._serverURL == "" {
+		sdk._serverURL = ServerList[0]
 	}
 
 	return sdk
 }
 
+// CreatorRolesList - Get a list of creator positions (jobs).
 func (s *SDK) CreatorRolesList(ctx context.Context, request operations.CreatorRolesListRequest) (*operations.CreatorRolesListResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/creator-roles"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -62,7 +84,7 @@ func (s *SDK) CreatorRolesList(ctx context.Context, request operations.CreatorRo
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -92,8 +114,9 @@ func (s *SDK) CreatorRolesList(ctx context.Context, request operations.CreatorRo
 	return res, nil
 }
 
+// CreatorsList - Get a list of game creators.
 func (s *SDK) CreatorsList(ctx context.Context, request operations.CreatorsListRequest) (*operations.CreatorsListResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/creators"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -103,7 +126,7 @@ func (s *SDK) CreatorsList(ctx context.Context, request operations.CreatorsListR
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -133,8 +156,9 @@ func (s *SDK) CreatorsList(ctx context.Context, request operations.CreatorsListR
 	return res, nil
 }
 
+// CreatorsRead - Get details of the creator.
 func (s *SDK) CreatorsRead(ctx context.Context, request operations.CreatorsReadRequest) (*operations.CreatorsReadResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/creators/{id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -142,7 +166,7 @@ func (s *SDK) CreatorsRead(ctx context.Context, request operations.CreatorsReadR
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -172,8 +196,9 @@ func (s *SDK) CreatorsRead(ctx context.Context, request operations.CreatorsReadR
 	return res, nil
 }
 
+// DevelopersList - Get a list of game developers.
 func (s *SDK) DevelopersList(ctx context.Context, request operations.DevelopersListRequest) (*operations.DevelopersListResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/developers"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -183,7 +208,7 @@ func (s *SDK) DevelopersList(ctx context.Context, request operations.DevelopersL
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -213,8 +238,9 @@ func (s *SDK) DevelopersList(ctx context.Context, request operations.DevelopersL
 	return res, nil
 }
 
+// DevelopersRead - Get details of the developer.
 func (s *SDK) DevelopersRead(ctx context.Context, request operations.DevelopersReadRequest) (*operations.DevelopersReadResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/developers/{id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -222,7 +248,7 @@ func (s *SDK) DevelopersRead(ctx context.Context, request operations.DevelopersR
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -252,8 +278,9 @@ func (s *SDK) DevelopersRead(ctx context.Context, request operations.DevelopersR
 	return res, nil
 }
 
+// GamesAchievementsRead - Get a list of game achievements.
 func (s *SDK) GamesAchievementsRead(ctx context.Context, request operations.GamesAchievementsReadRequest) (*operations.GamesAchievementsReadResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/games/{id}/achievements", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -261,7 +288,7 @@ func (s *SDK) GamesAchievementsRead(ctx context.Context, request operations.Game
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -291,8 +318,9 @@ func (s *SDK) GamesAchievementsRead(ctx context.Context, request operations.Game
 	return res, nil
 }
 
+// GamesAdditionsList - Get a list of DLC's for the game, GOTY and other editions, companion apps, etc.
 func (s *SDK) GamesAdditionsList(ctx context.Context, request operations.GamesAdditionsListRequest) (*operations.GamesAdditionsListResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/games/{game_pk}/additions", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -302,7 +330,7 @@ func (s *SDK) GamesAdditionsList(ctx context.Context, request operations.GamesAd
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -332,8 +360,9 @@ func (s *SDK) GamesAdditionsList(ctx context.Context, request operations.GamesAd
 	return res, nil
 }
 
+// GamesDevelopmentTeamList - Get a list of individual creators that were part of the development team.
 func (s *SDK) GamesDevelopmentTeamList(ctx context.Context, request operations.GamesDevelopmentTeamListRequest) (*operations.GamesDevelopmentTeamListResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/games/{game_pk}/development-team", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -343,7 +372,7 @@ func (s *SDK) GamesDevelopmentTeamList(ctx context.Context, request operations.G
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -373,8 +402,9 @@ func (s *SDK) GamesDevelopmentTeamList(ctx context.Context, request operations.G
 	return res, nil
 }
 
+// GamesGameSeriesList - Get a list of games that are part of the same series.
 func (s *SDK) GamesGameSeriesList(ctx context.Context, request operations.GamesGameSeriesListRequest) (*operations.GamesGameSeriesListResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/games/{game_pk}/game-series", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -384,7 +414,7 @@ func (s *SDK) GamesGameSeriesList(ctx context.Context, request operations.GamesG
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -414,8 +444,9 @@ func (s *SDK) GamesGameSeriesList(ctx context.Context, request operations.GamesG
 	return res, nil
 }
 
+// GamesList - Get a list of games.
 func (s *SDK) GamesList(ctx context.Context, request operations.GamesListRequest) (*operations.GamesListResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/games"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -425,7 +456,7 @@ func (s *SDK) GamesList(ctx context.Context, request operations.GamesListRequest
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -455,8 +486,9 @@ func (s *SDK) GamesList(ctx context.Context, request operations.GamesListRequest
 	return res, nil
 }
 
+// GamesMoviesRead - Get a list of game trailers.
 func (s *SDK) GamesMoviesRead(ctx context.Context, request operations.GamesMoviesReadRequest) (*operations.GamesMoviesReadResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/games/{id}/movies", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -464,7 +496,7 @@ func (s *SDK) GamesMoviesRead(ctx context.Context, request operations.GamesMovie
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -494,8 +526,9 @@ func (s *SDK) GamesMoviesRead(ctx context.Context, request operations.GamesMovie
 	return res, nil
 }
 
+// GamesParentGamesList - Get a list of parent games for DLC's and editions.
 func (s *SDK) GamesParentGamesList(ctx context.Context, request operations.GamesParentGamesListRequest) (*operations.GamesParentGamesListResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/games/{game_pk}/parent-games", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -505,7 +538,7 @@ func (s *SDK) GamesParentGamesList(ctx context.Context, request operations.Games
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -535,8 +568,9 @@ func (s *SDK) GamesParentGamesList(ctx context.Context, request operations.Games
 	return res, nil
 }
 
+// GamesRead - Get details of the game.
 func (s *SDK) GamesRead(ctx context.Context, request operations.GamesReadRequest) (*operations.GamesReadResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/games/{id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -544,7 +578,7 @@ func (s *SDK) GamesRead(ctx context.Context, request operations.GamesReadRequest
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -574,8 +608,9 @@ func (s *SDK) GamesRead(ctx context.Context, request operations.GamesReadRequest
 	return res, nil
 }
 
+// GamesRedditRead - Get a list of most recent posts from the game's subreddit.
 func (s *SDK) GamesRedditRead(ctx context.Context, request operations.GamesRedditReadRequest) (*operations.GamesRedditReadResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/games/{id}/reddit", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -583,7 +618,7 @@ func (s *SDK) GamesRedditRead(ctx context.Context, request operations.GamesReddi
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -613,8 +648,9 @@ func (s *SDK) GamesRedditRead(ctx context.Context, request operations.GamesReddi
 	return res, nil
 }
 
+// GamesScreenshotsList - Get screenshots for the game.
 func (s *SDK) GamesScreenshotsList(ctx context.Context, request operations.GamesScreenshotsListRequest) (*operations.GamesScreenshotsListResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/games/{game_pk}/screenshots", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -624,7 +660,7 @@ func (s *SDK) GamesScreenshotsList(ctx context.Context, request operations.Games
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -654,8 +690,9 @@ func (s *SDK) GamesScreenshotsList(ctx context.Context, request operations.Games
 	return res, nil
 }
 
+// GamesStoresList - Get links to the stores that sell the game.
 func (s *SDK) GamesStoresList(ctx context.Context, request operations.GamesStoresListRequest) (*operations.GamesStoresListResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/games/{game_pk}/stores", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -665,7 +702,7 @@ func (s *SDK) GamesStoresList(ctx context.Context, request operations.GamesStore
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -695,8 +732,9 @@ func (s *SDK) GamesStoresList(ctx context.Context, request operations.GamesStore
 	return res, nil
 }
 
+// GamesSuggestedRead - Get a list of visually similar games, available only for business and enterprise API users.
 func (s *SDK) GamesSuggestedRead(ctx context.Context, request operations.GamesSuggestedReadRequest) (*operations.GamesSuggestedReadResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/games/{id}/suggested", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -704,7 +742,7 @@ func (s *SDK) GamesSuggestedRead(ctx context.Context, request operations.GamesSu
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -734,8 +772,9 @@ func (s *SDK) GamesSuggestedRead(ctx context.Context, request operations.GamesSu
 	return res, nil
 }
 
+// GamesTwitchRead - Get streams on Twitch associated with the game, available only for business and enterprise API users.
 func (s *SDK) GamesTwitchRead(ctx context.Context, request operations.GamesTwitchReadRequest) (*operations.GamesTwitchReadResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/games/{id}/twitch", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -743,7 +782,7 @@ func (s *SDK) GamesTwitchRead(ctx context.Context, request operations.GamesTwitc
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -773,8 +812,9 @@ func (s *SDK) GamesTwitchRead(ctx context.Context, request operations.GamesTwitc
 	return res, nil
 }
 
+// GamesYoutubeRead - Get videos from YouTube associated with the game, available only for business and enterprise API users.
 func (s *SDK) GamesYoutubeRead(ctx context.Context, request operations.GamesYoutubeReadRequest) (*operations.GamesYoutubeReadResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/games/{id}/youtube", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -782,7 +822,7 @@ func (s *SDK) GamesYoutubeRead(ctx context.Context, request operations.GamesYout
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -812,8 +852,9 @@ func (s *SDK) GamesYoutubeRead(ctx context.Context, request operations.GamesYout
 	return res, nil
 }
 
+// GenresList - Get a list of video game genres.
 func (s *SDK) GenresList(ctx context.Context, request operations.GenresListRequest) (*operations.GenresListResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/genres"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -823,7 +864,7 @@ func (s *SDK) GenresList(ctx context.Context, request operations.GenresListReque
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -853,8 +894,9 @@ func (s *SDK) GenresList(ctx context.Context, request operations.GenresListReque
 	return res, nil
 }
 
+// GenresRead - Get details of the genre.
 func (s *SDK) GenresRead(ctx context.Context, request operations.GenresReadRequest) (*operations.GenresReadResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/genres/{id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -862,7 +904,7 @@ func (s *SDK) GenresRead(ctx context.Context, request operations.GenresReadReque
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -892,8 +934,9 @@ func (s *SDK) GenresRead(ctx context.Context, request operations.GenresReadReque
 	return res, nil
 }
 
+// PlatformsList - Get a list of video game platforms.
 func (s *SDK) PlatformsList(ctx context.Context, request operations.PlatformsListRequest) (*operations.PlatformsListResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/platforms"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -903,7 +946,7 @@ func (s *SDK) PlatformsList(ctx context.Context, request operations.PlatformsLis
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -933,8 +976,10 @@ func (s *SDK) PlatformsList(ctx context.Context, request operations.PlatformsLis
 	return res, nil
 }
 
+// PlatformsListsParentsList - Get a list of parent platforms.
+// For instance, for PS2 and PS4 the “parent platform” is PlayStation.
 func (s *SDK) PlatformsListsParentsList(ctx context.Context, request operations.PlatformsListsParentsListRequest) (*operations.PlatformsListsParentsListResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/platforms/lists/parents"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -944,7 +989,7 @@ func (s *SDK) PlatformsListsParentsList(ctx context.Context, request operations.
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -974,8 +1019,9 @@ func (s *SDK) PlatformsListsParentsList(ctx context.Context, request operations.
 	return res, nil
 }
 
+// PlatformsRead - Get details of the platform.
 func (s *SDK) PlatformsRead(ctx context.Context, request operations.PlatformsReadRequest) (*operations.PlatformsReadResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/platforms/{id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -983,7 +1029,7 @@ func (s *SDK) PlatformsRead(ctx context.Context, request operations.PlatformsRea
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1013,8 +1059,9 @@ func (s *SDK) PlatformsRead(ctx context.Context, request operations.PlatformsRea
 	return res, nil
 }
 
+// PublishersList - Get a list of video game publishers.
 func (s *SDK) PublishersList(ctx context.Context, request operations.PublishersListRequest) (*operations.PublishersListResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/publishers"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1024,7 +1071,7 @@ func (s *SDK) PublishersList(ctx context.Context, request operations.PublishersL
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1054,8 +1101,9 @@ func (s *SDK) PublishersList(ctx context.Context, request operations.PublishersL
 	return res, nil
 }
 
+// PublishersRead - Get details of the publisher.
 func (s *SDK) PublishersRead(ctx context.Context, request operations.PublishersReadRequest) (*operations.PublishersReadResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/publishers/{id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1063,7 +1111,7 @@ func (s *SDK) PublishersRead(ctx context.Context, request operations.PublishersR
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1093,8 +1141,9 @@ func (s *SDK) PublishersRead(ctx context.Context, request operations.PublishersR
 	return res, nil
 }
 
+// StoresList - Get a list of video game storefronts.
 func (s *SDK) StoresList(ctx context.Context, request operations.StoresListRequest) (*operations.StoresListResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/stores"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1104,7 +1153,7 @@ func (s *SDK) StoresList(ctx context.Context, request operations.StoresListReque
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1134,8 +1183,9 @@ func (s *SDK) StoresList(ctx context.Context, request operations.StoresListReque
 	return res, nil
 }
 
+// StoresRead - Get details of the store.
 func (s *SDK) StoresRead(ctx context.Context, request operations.StoresReadRequest) (*operations.StoresReadResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/stores/{id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1143,7 +1193,7 @@ func (s *SDK) StoresRead(ctx context.Context, request operations.StoresReadReque
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1173,8 +1223,9 @@ func (s *SDK) StoresRead(ctx context.Context, request operations.StoresReadReque
 	return res, nil
 }
 
+// TagsList - Get a list of tags.
 func (s *SDK) TagsList(ctx context.Context, request operations.TagsListRequest) (*operations.TagsListResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/tags"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1184,7 +1235,7 @@ func (s *SDK) TagsList(ctx context.Context, request operations.TagsListRequest) 
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1214,8 +1265,9 @@ func (s *SDK) TagsList(ctx context.Context, request operations.TagsListRequest) 
 	return res, nil
 }
 
+// TagsRead - Get details of the tag.
 func (s *SDK) TagsRead(ctx context.Context, request operations.TagsReadRequest) (*operations.TagsReadResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/tags/{id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1223,7 +1275,7 @@ func (s *SDK) TagsRead(ctx context.Context, request operations.TagsReadRequest) 
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {

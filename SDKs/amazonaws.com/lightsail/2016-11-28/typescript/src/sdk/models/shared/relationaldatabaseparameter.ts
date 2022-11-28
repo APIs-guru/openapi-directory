@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // RelationalDatabaseParameter
@@ -6,27 +7,27 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Describes the parameters of a database.
 **/
 export class RelationalDatabaseParameter extends SpeakeasyBase {
-  @Metadata({ data: "json, name=allowedValues" })
+  @SpeakeasyMetadata({ data: "json, name=allowedValues" })
   allowedValues?: string;
 
-  @Metadata({ data: "json, name=applyMethod" })
+  @SpeakeasyMetadata({ data: "json, name=applyMethod" })
   applyMethod?: string;
 
-  @Metadata({ data: "json, name=applyType" })
+  @SpeakeasyMetadata({ data: "json, name=applyType" })
   applyType?: string;
 
-  @Metadata({ data: "json, name=dataType" })
+  @SpeakeasyMetadata({ data: "json, name=dataType" })
   dataType?: string;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=isModifiable" })
+  @SpeakeasyMetadata({ data: "json, name=isModifiable" })
   isModifiable?: boolean;
 
-  @Metadata({ data: "json, name=parameterName" })
+  @SpeakeasyMetadata({ data: "json, name=parameterName" })
   parameterName?: string;
 
-  @Metadata({ data: "json, name=parameterValue" })
+  @SpeakeasyMetadata({ data: "json, name=parameterValue" })
   parameterValue?: string;
 }

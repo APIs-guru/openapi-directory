@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // Session
 /**
  * Describes the session. Session information is required on ALL events.
@@ -33,19 +33,19 @@ var Session = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=duration" }),
+        SpeakeasyMetadata({ data: "json, name=duration" }),
         __metadata("design:type", Number)
     ], Session.prototype, "duration", void 0);
     __decorate([
-        Metadata({ data: "json, name=id" }),
+        SpeakeasyMetadata({ data: "json, name=id" }),
         __metadata("design:type", String)
     ], Session.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "json, name=startTimestamp" }),
+        SpeakeasyMetadata({ data: "json, name=startTimestamp" }),
         __metadata("design:type", String)
     ], Session.prototype, "startTimestamp", void 0);
     __decorate([
-        Metadata({ data: "json, name=stopTimestamp" }),
+        SpeakeasyMetadata({ data: "json, name=stopTimestamp" }),
         __metadata("design:type", String)
     ], Session.prototype, "stopTimestamp", void 0);
     return Session;

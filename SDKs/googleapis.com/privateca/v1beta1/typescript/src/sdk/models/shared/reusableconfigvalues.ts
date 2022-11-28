@@ -1,9 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { X509Extension } from "./x509extension";
 import { CaOptions } from "./caoptions";
 import { KeyUsage } from "./keyusage";
 import { ObjectId } from "./objectid";
+
 
 
 // ReusableConfigValues
@@ -11,18 +11,18 @@ import { ObjectId } from "./objectid";
  * A ReusableConfigValues is used to describe certain fields of an X.509 certificate, such as the key usage fields, fields specific to CA certificates, certificate policy extensions and custom extensions.
 **/
 export class ReusableConfigValues extends SpeakeasyBase {
-  @Metadata({ data: "json, name=additionalExtensions", elemType: shared.X509Extension })
+  @SpeakeasyMetadata({ data: "json, name=additionalExtensions", elemType: X509Extension })
   additionalExtensions?: X509Extension[];
 
-  @Metadata({ data: "json, name=aiaOcspServers" })
+  @SpeakeasyMetadata({ data: "json, name=aiaOcspServers" })
   aiaOcspServers?: string[];
 
-  @Metadata({ data: "json, name=caOptions" })
+  @SpeakeasyMetadata({ data: "json, name=caOptions" })
   caOptions?: CaOptions;
 
-  @Metadata({ data: "json, name=keyUsage" })
+  @SpeakeasyMetadata({ data: "json, name=keyUsage" })
   keyUsage?: KeyUsage;
 
-  @Metadata({ data: "json, name=policyIds", elemType: shared.ObjectId })
+  @SpeakeasyMetadata({ data: "json, name=policyIds", elemType: ObjectId })
   policyIds?: ObjectId[];
 }

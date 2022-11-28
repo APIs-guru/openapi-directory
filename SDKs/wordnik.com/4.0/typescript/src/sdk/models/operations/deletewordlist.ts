@@ -1,34 +1,35 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DeleteWordListPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=permalink" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=permalink" })
   permalink: string;
 }
 
 
 export class DeleteWordListHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=auth_token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=auth_token" })
   authToken: string;
 }
 
 
 export class DeleteWordListRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: DeleteWordListPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: DeleteWordListHeaders;
 }
 
 
 export class DeleteWordListResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

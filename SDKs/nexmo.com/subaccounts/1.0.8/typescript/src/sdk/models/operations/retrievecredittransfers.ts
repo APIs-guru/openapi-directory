@@ -1,54 +1,43 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class RetrieveCreditTransfersPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=api_key" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=api_key" })
   apiKey: string;
 }
 
 
 export class RetrieveCreditTransfersQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=end_date" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=end_date" })
   endDate?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=start_date" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=start_date" })
   startDate: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=subaccount" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=subaccount" })
   subaccount?: string;
 }
 
 
 export class RetrieveCreditTransfersSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=basic" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=basic" })
   basicAuth: shared.SchemeBasicAuth;
 }
 
 
-export class RetrieveCreditTransfersRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: RetrieveCreditTransfersPathParams;
-
-  @Metadata()
-  queryParams: RetrieveCreditTransfersQueryParams;
-
-  @Metadata()
-  security: RetrieveCreditTransfersSecurity;
-}
-
-
 export class RetrieveCreditTransfers401ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=detail" })
+  @SpeakeasyMetadata({ data: "json, name=detail" })
   detail: string;
 
-  @Metadata({ data: "json, name=instance" })
+  @SpeakeasyMetadata({ data: "json, name=instance" })
   instance: string;
 
-  @Metadata({ data: "json, name=title" })
+  @SpeakeasyMetadata({ data: "json, name=title" })
   title: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type: string;
 }
 
@@ -58,36 +47,48 @@ export class RetrieveCreditTransfers401ApplicationJson extends SpeakeasyBase {
  * Invalid API Key
 **/
 export class RetrieveCreditTransfers404ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=detail" })
+  @SpeakeasyMetadata({ data: "json, name=detail" })
   detail: string;
 
-  @Metadata({ data: "json, name=instance" })
+  @SpeakeasyMetadata({ data: "json, name=instance" })
   instance: string;
 
-  @Metadata({ data: "json, name=title" })
+  @SpeakeasyMetadata({ data: "json, name=title" })
   title: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type: string;
 }
 
 
+export class RetrieveCreditTransfersRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: RetrieveCreditTransfersPathParams;
+
+  @SpeakeasyMetadata()
+  queryParams: RetrieveCreditTransfersQueryParams;
+
+  @SpeakeasyMetadata()
+  security: RetrieveCreditTransfersSecurity;
+}
+
+
 export class RetrieveCreditTransfersResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   listCreditTransfersResponse?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   unprovisionedErrorResponse?: shared.UnprovisionedErrorResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   retrieveCreditTransfers401ApplicationJsonObject?: RetrieveCreditTransfers401ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   retrieveCreditTransfers404ApplicationJsonObject?: RetrieveCreditTransfers404ApplicationJson;
 }

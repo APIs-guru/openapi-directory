@@ -4,17 +4,17 @@ from typing import Any,Optional
 
 @dataclass
 class PostWalletAccountIDContractPathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class PostWalletAccountIDContractRequest:
-    path_params: PostWalletAccountIDContractPathParams = field(default=None)
+    path_params: PostWalletAccountIDContractPathParams = field()
     
 
 @dataclass
 class PostWalletAccountIDContractResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     empty: Optional[dict[str, Any]] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -22,8 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var OrderLineItemOrderLineItemStatusEnum;
 (function (OrderLineItemOrderLineItemStatusEnum) {
     OrderLineItemOrderLineItemStatusEnum["Cancelled"] = "Cancelled";
@@ -93,19 +92,19 @@ var OrderLineItemQuantities = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=quantityContext" }),
+        SpeakeasyMetadata({ data: "json, name=quantityContext" }),
         __metadata("design:type", String)
     ], OrderLineItemQuantities.prototype, "quantityContext", void 0);
     __decorate([
-        Metadata({ data: "json, name=quantityType" }),
+        SpeakeasyMetadata({ data: "json, name=quantityType" }),
         __metadata("design:type", String)
     ], OrderLineItemQuantities.prototype, "quantityType", void 0);
     __decorate([
-        Metadata({ data: "json, name=quantityUOM" }),
+        SpeakeasyMetadata({ data: "json, name=quantityUOM" }),
         __metadata("design:type", String)
     ], OrderLineItemQuantities.prototype, "quantityUom", void 0);
     __decorate([
-        Metadata({ data: "json, name=quantityValue" }),
+        SpeakeasyMetadata({ data: "json, name=quantityValue" }),
         __metadata("design:type", Number)
     ], OrderLineItemQuantities.prototype, "quantityValue", void 0);
     return OrderLineItemQuantities;
@@ -117,23 +116,23 @@ var OrderLineItem = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=changeable" }),
+        SpeakeasyMetadata({ data: "json, name=changeable" }),
         __metadata("design:type", Boolean)
     ], OrderLineItem.prototype, "changeable", void 0);
     __decorate([
-        Metadata({ data: "json, name=id" }),
+        SpeakeasyMetadata({ data: "json, name=id" }),
         __metadata("design:type", String)
     ], OrderLineItem.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "json, name=orderLineItemNumber" }),
+        SpeakeasyMetadata({ data: "json, name=orderLineItemNumber" }),
         __metadata("design:type", Number)
     ], OrderLineItem.prototype, "orderLineItemNumber", void 0);
     __decorate([
-        Metadata({ data: "json, name=orderLineItemStatus" }),
+        SpeakeasyMetadata({ data: "json, name=orderLineItemStatus" }),
         __metadata("design:type", String)
     ], OrderLineItem.prototype, "orderLineItemStatus", void 0);
     __decorate([
-        Metadata({ data: "json, name=quantities", elemType: shared.OrderLineItemQuantities }),
+        SpeakeasyMetadata({ data: "json, name=quantities", elemType: OrderLineItemQuantities }),
         __metadata("design:type", Array)
     ], OrderLineItem.prototype, "quantities", void 0);
     return OrderLineItem;

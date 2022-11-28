@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Notification
@@ -6,30 +7,30 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A subscription to receive Google PubSub notifications.
 **/
 export class Notification extends SpeakeasyBase {
-  @Metadata({ data: "json, name=custom_attributes" })
+  @SpeakeasyMetadata({ data: "json, name=custom_attributes" })
   customAttributes?: Map<string, string>;
 
-  @Metadata({ data: "json, name=etag" })
+  @SpeakeasyMetadata({ data: "json, name=etag" })
   etag?: string;
 
-  @Metadata({ data: "json, name=event_types" })
+  @SpeakeasyMetadata({ data: "json, name=event_types" })
   eventTypes?: string[];
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=object_name_prefix" })
+  @SpeakeasyMetadata({ data: "json, name=object_name_prefix" })
   objectNamePrefix?: string;
 
-  @Metadata({ data: "json, name=payload_format" })
+  @SpeakeasyMetadata({ data: "json, name=payload_format" })
   payloadFormat?: string;
 
-  @Metadata({ data: "json, name=selfLink" })
+  @SpeakeasyMetadata({ data: "json, name=selfLink" })
   selfLink?: string;
 
-  @Metadata({ data: "json, name=topic" })
+  @SpeakeasyMetadata({ data: "json, name=topic" })
   topic?: string;
 }

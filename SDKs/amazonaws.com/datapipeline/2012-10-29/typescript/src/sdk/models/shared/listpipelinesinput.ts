@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ListPipelinesInput
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Contains the parameters for ListPipelines.
 **/
 export class ListPipelinesInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=marker" })
+  @SpeakeasyMetadata({ data: "json, name=marker" })
   marker?: string;
 }

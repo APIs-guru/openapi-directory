@@ -1,57 +1,57 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Photo } from "./photo";
 
 
+
 export class PostSearchResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=content" })
+  @SpeakeasyMetadata({ data: "json, name=content" })
   content?: string;
 
-  @Metadata({ data: "json, name=date" })
+  @SpeakeasyMetadata({ data: "json, name=date" })
   date?: Date;
 
-  @Metadata({ data: "json, name=expiration" })
+  @SpeakeasyMetadata({ data: "json, name=expiration" })
   expiration?: Date;
 
-  @Metadata({ data: "json, name=footer" })
+  @SpeakeasyMetadata({ data: "json, name=footer" })
   footer?: string;
 
-  @Metadata({ data: "json, name=group_id" })
+  @SpeakeasyMetadata({ data: "json, name=group_id" })
   groupId?: string;
 
-  @Metadata({ data: "json, name=latitude" })
+  @SpeakeasyMetadata({ data: "json, name=latitude" })
   latitude?: number;
 
-  @Metadata({ data: "json, name=longitude" })
+  @SpeakeasyMetadata({ data: "json, name=longitude" })
   longitude?: number;
 
-  @Metadata({ data: "json, name=outcome" })
+  @SpeakeasyMetadata({ data: "json, name=outcome" })
   outcome?: string;
 
-  @Metadata({ data: "json, name=photos", elemType: shared.Photo })
+  @SpeakeasyMetadata({ data: "json, name=photos", elemType: Photo })
   photos?: Photo[];
 
-  @Metadata({ data: "json, name=post_id" })
+  @SpeakeasyMetadata({ data: "json, name=post_id" })
   postId?: string;
 
-  @Metadata({ data: "json, name=search_content" })
+  @SpeakeasyMetadata({ data: "json, name=search_content" })
   searchContent?: string;
 
-  @Metadata({ data: "json, name=search_title" })
+  @SpeakeasyMetadata({ data: "json, name=search_title" })
   searchTitle?: string;
 
-  @Metadata({ data: "json, name=source" })
+  @SpeakeasyMetadata({ data: "json, name=source" })
   source?: string;
 
-  @Metadata({ data: "json, name=title" })
+  @SpeakeasyMetadata({ data: "json, name=title" })
   title?: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: string;
 
-  @Metadata({ data: "json, name=url" })
+  @SpeakeasyMetadata({ data: "json, name=url" })
   url?: string;
 
-  @Metadata({ data: "json, name=user_id" })
+  @SpeakeasyMetadata({ data: "json, name=user_id" })
   userId?: string;
 }

@@ -41,8 +41,10 @@ from .messagecommentreactionentity import *
 from .messageentity import *
 from .messagereactionentity import *
 from .notificationentity import *
+from .patchformfieldsets import *
 from .paymentlineitementity import *
 from .permissionentity import *
+from .postformfieldsets import *
 from .previewentity import *
 from .projectentity import *
 from .publicipaddressentity import *

@@ -1,7 +1,8 @@
 
 
+
 export enum EndpointTypeEnum {
-    Regional = "REGIONAL"
-,    Edge = "EDGE"
-,    Private = "PRIVATE"
+    Regional = "REGIONAL",
+    Edge = "EDGE",
+    Private = "PRIVATE"
 }

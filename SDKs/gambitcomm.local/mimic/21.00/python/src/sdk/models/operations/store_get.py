@@ -4,17 +4,17 @@ from typing import Optional
 
 @dataclass
 class StoreGetPathParams:
-    var: str = field(default=None, metadata={'path_param': { 'field_name': 'var', 'style': 'simple', 'explode': False }})
+    var: str = field(metadata={'path_param': { 'field_name': 'var', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class StoreGetRequest:
-    path_params: StoreGetPathParams = field(default=None)
+    path_params: StoreGetPathParams = field()
     
 
 @dataclass
 class StoreGetResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     store_get_200_application_json_string: Optional[str] = field(default=None)
     

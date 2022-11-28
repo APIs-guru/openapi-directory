@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DNSManagedZonesCreatePathParams:
-    location: str = field(default=None, metadata={'path_param': { 'field_name': 'location', 'style': 'simple', 'explode': False }})
-    project: str = field(default=None, metadata={'path_param': { 'field_name': 'project', 'style': 'simple', 'explode': False }})
+    location: str = field(metadata={'path_param': { 'field_name': 'location', 'style': 'simple', 'explode': False }})
+    project: str = field(metadata={'path_param': { 'field_name': 'project', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -27,14 +28,14 @@ class DNSManagedZonesCreateQueryParams:
 
 @dataclass
 class DNSManagedZonesCreateSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DNSManagedZonesCreateSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -45,15 +46,15 @@ class DNSManagedZonesCreateSecurity:
 
 @dataclass
 class DNSManagedZonesCreateRequest:
-    path_params: DNSManagedZonesCreatePathParams = field(default=None)
-    query_params: DNSManagedZonesCreateQueryParams = field(default=None)
+    path_params: DNSManagedZonesCreatePathParams = field()
+    query_params: DNSManagedZonesCreateQueryParams = field()
+    security: DNSManagedZonesCreateSecurity = field()
     request: Optional[shared.ManagedZone] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: DNSManagedZonesCreateSecurity = field(default=None)
     
 
 @dataclass
 class DNSManagedZonesCreateResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     managed_zone: Optional[shared.ManagedZone] = field(default=None)
-    status_code: int = field(default=None)
     

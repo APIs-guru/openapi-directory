@@ -15,12 +15,12 @@ class UsersGetQueryParams:
 
 @dataclass
 class UsersGetRequest:
-    query_params: UsersGetQueryParams = field(default=None)
+    query_params: UsersGetQueryParams = field()
     
 
 @dataclass
 class UsersGetResponse:
+    content_type: str = field()
+    status_code: int = field()
     api_paged_response_api_models_user_: Optional[shared.APIPagedResponseAPIModelsUser] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

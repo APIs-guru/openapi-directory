@@ -4,10 +4,14 @@ type PostFirewallsIDActionsApplyToResourcesPathParams struct {
 	ID int64 `pathParam:"style=simple,explode=false,name=id"`
 }
 
+// PostFirewallsIDActionsApplyToResourcesApplyToResourcesRequestFirewallApplyToResourcesLabelSelector
+// Configuration for type label_selector, required if type is `label_selector`
 type PostFirewallsIDActionsApplyToResourcesApplyToResourcesRequestFirewallApplyToResourcesLabelSelector struct {
 	Selector string `json:"selector"`
 }
 
+// PostFirewallsIDActionsApplyToResourcesApplyToResourcesRequestFirewallApplyToResourcesServer
+// Configuration for type server, required if type is `server`
 type PostFirewallsIDActionsApplyToResourcesApplyToResourcesRequestFirewallApplyToResourcesServer struct {
 	ID int64 `json:"id"`
 }
@@ -29,11 +33,8 @@ type PostFirewallsIDActionsApplyToResourcesApplyToResourcesRequest struct {
 	ApplyTo []PostFirewallsIDActionsApplyToResourcesApplyToResourcesRequestFirewallApplyToResources `json:"apply_to"`
 }
 
-type PostFirewallsIDActionsApplyToResourcesRequest struct {
-	PathParams PostFirewallsIDActionsApplyToResourcesPathParams
-	Request    *PostFirewallsIDActionsApplyToResourcesApplyToResourcesRequest `request:"mediaType=application/json"`
-}
-
+// PostFirewallsIDActionsApplyToResourcesActionsResponseActionError
+// Error message for the Action if error occurred, otherwise null
 type PostFirewallsIDActionsApplyToResourcesActionsResponseActionError struct {
 	Code    string `json:"code"`
 	Message string `json:"message"`
@@ -79,6 +80,11 @@ type PostFirewallsIDActionsApplyToResourcesActionsResponseMeta struct {
 type PostFirewallsIDActionsApplyToResourcesActionsResponse struct {
 	Actions []PostFirewallsIDActionsApplyToResourcesActionsResponseAction `json:"actions"`
 	Meta    *PostFirewallsIDActionsApplyToResourcesActionsResponseMeta    `json:"meta,omitempty"`
+}
+
+type PostFirewallsIDActionsApplyToResourcesRequest struct {
+	PathParams PostFirewallsIDActionsApplyToResourcesPathParams
+	Request    *PostFirewallsIDActionsApplyToResourcesApplyToResourcesRequest `request:"mediaType=application/json"`
 }
 
 type PostFirewallsIDActionsApplyToResourcesResponse struct {

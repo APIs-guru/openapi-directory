@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // Capacity
 /**
  * The physical capacity of the Amazon Web Services Snow Family device.
@@ -33,23 +33,23 @@ var Capacity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=available" }),
+        SpeakeasyMetadata({ data: "json, name=available" }),
         __metadata("design:type", Number)
     ], Capacity.prototype, "available", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], Capacity.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=total" }),
+        SpeakeasyMetadata({ data: "json, name=total" }),
         __metadata("design:type", Number)
     ], Capacity.prototype, "total", void 0);
     __decorate([
-        Metadata({ data: "json, name=unit" }),
+        SpeakeasyMetadata({ data: "json, name=unit" }),
         __metadata("design:type", String)
     ], Capacity.prototype, "unit", void 0);
     __decorate([
-        Metadata({ data: "json, name=used" }),
+        SpeakeasyMetadata({ data: "json, name=used" }),
         __metadata("design:type", Number)
     ], Capacity.prototype, "used", void 0);
     return Capacity;

@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class AppengineAppsAuthorizedCertificatesGetPathParams:
-    apps_id: str = field(default=None, metadata={'path_param': { 'field_name': 'appsId', 'style': 'simple', 'explode': False }})
-    authorized_certificates_id: str = field(default=None, metadata={'path_param': { 'field_name': 'authorizedCertificatesId', 'style': 'simple', 'explode': False }})
+    apps_id: str = field(metadata={'path_param': { 'field_name': 'appsId', 'style': 'simple', 'explode': False }})
+    authorized_certificates_id: str = field(metadata={'path_param': { 'field_name': 'authorizedCertificatesId', 'style': 'simple', 'explode': False }})
     
 class AppengineAppsAuthorizedCertificatesGetViewEnum(str, Enum):
     BASIC_CERTIFICATE = "BASIC_CERTIFICATE"
@@ -31,20 +32,20 @@ class AppengineAppsAuthorizedCertificatesGetQueryParams:
 
 @dataclass
 class AppengineAppsAuthorizedCertificatesGetSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class AppengineAppsAuthorizedCertificatesGetSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class AppengineAppsAuthorizedCertificatesGetSecurityOption3:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -56,14 +57,14 @@ class AppengineAppsAuthorizedCertificatesGetSecurity:
 
 @dataclass
 class AppengineAppsAuthorizedCertificatesGetRequest:
-    path_params: AppengineAppsAuthorizedCertificatesGetPathParams = field(default=None)
-    query_params: AppengineAppsAuthorizedCertificatesGetQueryParams = field(default=None)
-    security: AppengineAppsAuthorizedCertificatesGetSecurity = field(default=None)
+    path_params: AppengineAppsAuthorizedCertificatesGetPathParams = field()
+    query_params: AppengineAppsAuthorizedCertificatesGetQueryParams = field()
+    security: AppengineAppsAuthorizedCertificatesGetSecurity = field()
     
 
 @dataclass
 class AppengineAppsAuthorizedCertificatesGetResponse:
+    content_type: str = field()
+    status_code: int = field()
     authorized_certificate: Optional[shared.AuthorizedCertificate] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

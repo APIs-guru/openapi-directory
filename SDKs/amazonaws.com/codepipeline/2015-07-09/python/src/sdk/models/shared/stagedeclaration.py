@@ -1,14 +1,18 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import actiondeclaration
-from . import blockerdeclaration
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class StageDeclaration:
-    actions: List[actiondeclaration.ActionDeclaration] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'actions' }})
-    blockers: Optional[List[blockerdeclaration.BlockerDeclaration]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'blockers' }})
-    name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
+    r"""StageDeclaration
+    Represents information about a stage and its definition.
+    """
+    
+    actions: List[ActionDeclaration] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('actions') }})
+    name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    blockers: Optional[List[BlockerDeclaration]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('blockers') }})
     

@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PermissionEnum } from "./permissionenum";
 import { DataLakePrincipal } from "./datalakeprincipal";
+
 
 
 // PrincipalPermissions
@@ -8,9 +9,9 @@ import { DataLakePrincipal } from "./datalakeprincipal";
  * Permissions granted to a principal.
 **/
 export class PrincipalPermissions extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Permissions" })
+  @SpeakeasyMetadata({ data: "json, name=Permissions" })
   permissions?: PermissionEnum[];
 
-  @Metadata({ data: "json, name=Principal" })
+  @SpeakeasyMetadata({ data: "json, name=Principal" })
   principal?: DataLakePrincipal;
 }

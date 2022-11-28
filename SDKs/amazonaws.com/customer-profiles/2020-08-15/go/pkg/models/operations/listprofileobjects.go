@@ -23,6 +23,8 @@ type ListProfileObjectsHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// ListProfileObjectsRequestBodyObjectFilter
+// The filter applied to ListProfileObjects response to include profile objects with the specified index values. This filter is only supported for ObjectTypeName _asset and _case.
 type ListProfileObjectsRequestBodyObjectFilter struct {
 	KeyName *string  `json:"KeyName,omitempty"`
 	Values  []string `json:"Values,omitempty"`

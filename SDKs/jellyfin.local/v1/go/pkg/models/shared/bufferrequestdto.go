@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// BufferRequestDto
+// Class BufferRequestDto.
 type BufferRequestDto struct {
 	IsPlaying      *bool      `json:"IsPlaying,omitempty"`
 	PlaylistItemID *string    `json:"PlaylistItemId,omitempty"`

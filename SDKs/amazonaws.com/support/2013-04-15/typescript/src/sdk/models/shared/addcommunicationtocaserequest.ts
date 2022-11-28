@@ -1,16 +1,17 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class AddCommunicationToCaseRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=attachmentSetId" })
+  @SpeakeasyMetadata({ data: "json, name=attachmentSetId" })
   attachmentSetId?: string;
 
-  @Metadata({ data: "json, name=caseId" })
+  @SpeakeasyMetadata({ data: "json, name=caseId" })
   caseId?: string;
 
-  @Metadata({ data: "json, name=ccEmailAddresses" })
+  @SpeakeasyMetadata({ data: "json, name=ccEmailAddresses" })
   ccEmailAddresses?: string[];
 
-  @Metadata({ data: "json, name=communicationBody" })
+  @SpeakeasyMetadata({ data: "json, name=communicationBody" })
   communicationBody: string;
 }

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetVaultItemByIdPathParams = /** @class */ (function (_super) {
     __extends(GetVaultItemByIdPathParams, _super);
@@ -30,11 +30,11 @@ var GetVaultItemByIdPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=itemUuid" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=itemUuid" }),
         __metadata("design:type", String)
     ], GetVaultItemByIdPathParams.prototype, "itemUuid", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=vaultUuid" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=vaultUuid" }),
         __metadata("design:type", String)
     ], GetVaultItemByIdPathParams.prototype, "vaultUuid", void 0);
     return GetVaultItemByIdPathParams;
@@ -46,7 +46,7 @@ var GetVaultItemByIdSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=http;subtype=bearer" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" }),
         __metadata("design:type", shared.SchemeConnectToken)
     ], GetVaultItemByIdSecurity.prototype, "connectToken", void 0);
     return GetVaultItemByIdSecurity;
@@ -58,11 +58,11 @@ var GetVaultItemByIdRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetVaultItemByIdPathParams)
     ], GetVaultItemByIdRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetVaultItemByIdSecurity)
     ], GetVaultItemByIdRequest.prototype, "security", void 0);
     return GetVaultItemByIdRequest;
@@ -74,19 +74,19 @@ var GetVaultItemByIdResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetVaultItemByIdResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.ErrorResponse)
     ], GetVaultItemByIdResponse.prototype, "errorResponse", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.FullItem)
     ], GetVaultItemByIdResponse.prototype, "fullItem", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetVaultItemByIdResponse.prototype, "statusCode", void 0);
     return GetVaultItemByIdResponse;

@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// DeviceInPast
+// Container Class for the Web API. Conatinas the MeterValues in the Past
 type DeviceInPast struct {
 	CounterReading         *float64   `json:"CounterReading,omitempty"`
 	CounterReadingExport   *float64   `json:"CounterReadingExport,omitempty"`

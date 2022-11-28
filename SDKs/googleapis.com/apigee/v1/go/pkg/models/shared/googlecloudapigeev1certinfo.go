@@ -1,5 +1,7 @@
 package shared
 
+// GoogleCloudApigeeV1CertInfo
+// X.509 certificate as defined in RFC 5280.
 type GoogleCloudApigeeV1CertInfo struct {
 	BasicConstraints        *string  `json:"basicConstraints,omitempty"`
 	ExpiryDate              *string  `json:"expiryDate,omitempty"`

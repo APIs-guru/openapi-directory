@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SasPortalPolicy } from "./sasportalpolicy";
+
 
 
 // SasPortalSetPolicyRequest
@@ -7,12 +8,12 @@ import { SasPortalPolicy } from "./sasportalpolicy";
  * Request message for `SetPolicy` method.
 **/
 export class SasPortalSetPolicyRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=disableNotification" })
+  @SpeakeasyMetadata({ data: "json, name=disableNotification" })
   disableNotification?: boolean;
 
-  @Metadata({ data: "json, name=policy" })
+  @SpeakeasyMetadata({ data: "json, name=policy" })
   policy?: SasPortalPolicy;
 
-  @Metadata({ data: "json, name=resource" })
+  @SpeakeasyMetadata({ data: "json, name=resource" })
   resource?: string;
 }

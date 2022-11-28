@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // Item
 /**
  * Represents item metadata added to an Items dataset using the <code>PutItems</code> API. For more information see <a href="https://docs.aws.amazon.com/personalize/latest/dg/importing-items.html">Importing Items Incrementally</a>.
@@ -33,11 +33,11 @@ var Item = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=itemId" }),
+        SpeakeasyMetadata({ data: "json, name=itemId" }),
         __metadata("design:type", String)
     ], Item.prototype, "itemId", void 0);
     __decorate([
-        Metadata({ data: "json, name=properties" }),
+        SpeakeasyMetadata({ data: "json, name=properties" }),
         __metadata("design:type", Object)
     ], Item.prototype, "properties", void 0);
     return Item;

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // Metrics
 /**
  *  Information about the statistics from the code review.
@@ -33,11 +33,11 @@ var Metrics = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=FindingsCount" }),
+        SpeakeasyMetadata({ data: "json, name=FindingsCount" }),
         __metadata("design:type", Number)
     ], Metrics.prototype, "findingsCount", void 0);
     __decorate([
-        Metadata({ data: "json, name=MeteredLinesOfCodeCount" }),
+        SpeakeasyMetadata({ data: "json, name=MeteredLinesOfCodeCount" }),
         __metadata("design:type", Number)
     ], Metrics.prototype, "meteredLinesOfCodeCount", void 0);
     return Metrics;

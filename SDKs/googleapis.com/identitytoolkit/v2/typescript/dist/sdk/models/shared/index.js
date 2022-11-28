@@ -7,6 +7,7 @@ export * from "./googlecloudidentitytoolkitadminv2clientpermissions";
 export * from "./googlecloudidentitytoolkitadminv2codeflowconfig";
 export * from "./googlecloudidentitytoolkitadminv2defaultsupportedidp";
 export * from "./googlecloudidentitytoolkitadminv2defaultsupportedidpconfig";
+export * from "./googlecloudidentitytoolkitadminv2emailprivacyconfig";
 export * from "./googlecloudidentitytoolkitadminv2hashconfig";
 export * from "./googlecloudidentitytoolkitadminv2idpcertificate";
 export * from "./googlecloudidentitytoolkitadminv2idpconfig";

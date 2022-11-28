@@ -1,5 +1,7 @@
 package shared
 
+// DiffEntry
+// Diff Entry
 type DiffEntry struct {
 	Additions        int64   `json:"additions"`
 	BlobURL          string  `json:"blob_url"`

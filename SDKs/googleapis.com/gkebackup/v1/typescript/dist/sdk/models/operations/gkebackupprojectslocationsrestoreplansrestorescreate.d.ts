@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class GkebackupProjectsLocationsRestorePlansRestoresCreatePathParams extends SpeakeasyBase {
     parent: string;
@@ -24,7 +24,7 @@ export declare class GkebackupProjectsLocationsRestorePlansRestoresCreateSecurit
 export declare class GkebackupProjectsLocationsRestorePlansRestoresCreateRequest extends SpeakeasyBase {
     pathParams: GkebackupProjectsLocationsRestorePlansRestoresCreatePathParams;
     queryParams: GkebackupProjectsLocationsRestorePlansRestoresCreateQueryParams;
-    request?: shared.Restore;
+    request?: shared.RestoreInput;
     security: GkebackupProjectsLocationsRestorePlansRestoresCreateSecurity;
 }
 export declare class GkebackupProjectsLocationsRestorePlansRestoresCreateResponse extends SpeakeasyBase {

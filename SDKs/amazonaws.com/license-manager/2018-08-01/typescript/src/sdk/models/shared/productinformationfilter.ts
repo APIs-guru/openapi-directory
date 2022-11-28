@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ProductInformationFilter
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Describes product information filters.
 **/
 export class ProductInformationFilter extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ProductInformationFilterComparator" })
+  @SpeakeasyMetadata({ data: "json, name=ProductInformationFilterComparator" })
   productInformationFilterComparator: string;
 
-  @Metadata({ data: "json, name=ProductInformationFilterName" })
+  @SpeakeasyMetadata({ data: "json, name=ProductInformationFilterName" })
   productInformationFilterName: string;
 
-  @Metadata({ data: "json, name=ProductInformationFilterValue" })
+  @SpeakeasyMetadata({ data: "json, name=ProductInformationFilterValue" })
   productInformationFilterValue?: string[];
 }

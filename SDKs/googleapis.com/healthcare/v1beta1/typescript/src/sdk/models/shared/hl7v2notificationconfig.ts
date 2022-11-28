@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Hl7V2NotificationConfig
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Specifies where and whether to send notifications upon changes to a data store.
 **/
 export class Hl7V2NotificationConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=filter" })
+  @SpeakeasyMetadata({ data: "json, name=filter" })
   filter?: string;
 
-  @Metadata({ data: "json, name=pubsubTopic" })
+  @SpeakeasyMetadata({ data: "json, name=pubsubTopic" })
   pubsubTopic?: string;
 }

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudDialogflowV2beta1IntentMessageTelephonyPlayAudio
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Plays audio from a file in Telephony Gateway.
 **/
 export class GoogleCloudDialogflowV2beta1IntentMessageTelephonyPlayAudio extends SpeakeasyBase {
-  @Metadata({ data: "json, name=audioUri" })
+  @SpeakeasyMetadata({ data: "json, name=audioUri" })
   audioUri?: string;
 }

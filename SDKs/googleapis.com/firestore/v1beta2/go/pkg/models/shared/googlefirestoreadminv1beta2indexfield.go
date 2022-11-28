@@ -15,6 +15,8 @@ const (
 	GoogleFirestoreAdminV1beta2IndexFieldOrderEnumDescending       GoogleFirestoreAdminV1beta2IndexFieldOrderEnum = "DESCENDING"
 )
 
+// GoogleFirestoreAdminV1beta2IndexField
+// A field in an index. The field_path describes which field is indexed, the value_mode describes how the field value is indexed.
 type GoogleFirestoreAdminV1beta2IndexField struct {
 	ArrayConfig *GoogleFirestoreAdminV1beta2IndexFieldArrayConfigEnum `json:"arrayConfig,omitempty"`
 	FieldPath   *string                                               `json:"fieldPath,omitempty"`

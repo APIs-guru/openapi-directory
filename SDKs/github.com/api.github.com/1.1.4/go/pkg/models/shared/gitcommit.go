@@ -4,12 +4,16 @@ import (
 	"time"
 )
 
+// GitCommitAuthor
+// Identifying information for the git-user
 type GitCommitAuthor struct {
 	Date  time.Time `json:"date"`
 	Email string    `json:"email"`
 	Name  string    `json:"name"`
 }
 
+// GitCommitCommitter
+// Identifying information for the git-user
 type GitCommitCommitter struct {
 	Date  time.Time `json:"date"`
 	Email string    `json:"email"`
@@ -34,6 +38,8 @@ type GitCommitVerification struct {
 	Verified  bool   `json:"verified"`
 }
 
+// GitCommit
+// Low-level Git commit operations within a repository
 type GitCommit struct {
 	Author       GitCommitAuthor       `json:"author"`
 	Committer    GitCommitCommitter    `json:"committer"`

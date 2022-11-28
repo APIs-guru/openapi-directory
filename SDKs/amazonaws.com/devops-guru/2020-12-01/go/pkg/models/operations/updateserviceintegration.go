@@ -14,6 +14,9 @@ type UpdateServiceIntegrationHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// UpdateServiceIntegrationRequestBodyServiceIntegration
+//
+//	Information about updating the integration status of an AWS service, such as AWS Systems Manager, with DevOps Guru.
 type UpdateServiceIntegrationRequestBodyServiceIntegration struct {
 	OpsCenter *shared.OpsCenterIntegrationConfig `json:"OpsCenter,omitempty"`
 }

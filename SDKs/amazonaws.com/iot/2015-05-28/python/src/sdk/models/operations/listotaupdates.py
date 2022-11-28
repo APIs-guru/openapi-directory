@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 class ListOtaUpdatesOtaUpdateStatusEnum(str, Enum):
@@ -29,18 +33,18 @@ class ListOtaUpdatesHeaders:
 
 @dataclass
 class ListOtaUpdatesRequest:
-    query_params: ListOtaUpdatesQueryParams = field(default=None)
-    headers: ListOtaUpdatesHeaders = field(default=None)
+    headers: ListOtaUpdatesHeaders = field()
+    query_params: ListOtaUpdatesQueryParams = field()
     
 
 @dataclass
 class ListOtaUpdatesResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     internal_failure_exception: Optional[Any] = field(default=None)
     invalid_request_exception: Optional[Any] = field(default=None)
     list_ota_updates_response: Optional[shared.ListOtaUpdatesResponse] = field(default=None)
     service_unavailable_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     unauthorized_exception: Optional[Any] = field(default=None)
     

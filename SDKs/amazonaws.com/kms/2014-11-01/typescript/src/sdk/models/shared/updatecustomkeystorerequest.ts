@@ -1,16 +1,17 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class UpdateCustomKeyStoreRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CloudHsmClusterId" })
+  @SpeakeasyMetadata({ data: "json, name=CloudHsmClusterId" })
   cloudHsmClusterId?: string;
 
-  @Metadata({ data: "json, name=CustomKeyStoreId" })
+  @SpeakeasyMetadata({ data: "json, name=CustomKeyStoreId" })
   customKeyStoreId: string;
 
-  @Metadata({ data: "json, name=KeyStorePassword" })
+  @SpeakeasyMetadata({ data: "json, name=KeyStorePassword" })
   keyStorePassword?: string;
 
-  @Metadata({ data: "json, name=NewCustomKeyStoreName" })
+  @SpeakeasyMetadata({ data: "json, name=NewCustomKeyStoreName" })
   newCustomKeyStoreName?: string;
 }

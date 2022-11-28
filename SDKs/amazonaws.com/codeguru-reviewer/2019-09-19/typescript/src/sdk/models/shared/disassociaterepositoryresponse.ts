@@ -1,11 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RepositoryAssociation } from "./repositoryassociation";
 
 
+
 export class DisassociateRepositoryResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=RepositoryAssociation" })
+  @SpeakeasyMetadata({ data: "json, name=RepositoryAssociation" })
   repositoryAssociation?: RepositoryAssociation;
 
-  @Metadata({ data: "json, name=Tags" })
+  @SpeakeasyMetadata({ data: "json, name=Tags" })
   tags?: Map<string, string>;
 }

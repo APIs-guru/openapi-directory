@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetDisableSnapshotCopyActionEnum(str, Enum):
     DISABLE_SNAPSHOT_COPY = "DisableSnapshotCopy"
@@ -10,9 +14,9 @@ class GetDisableSnapshotCopyVersionEnum(str, Enum):
 
 @dataclass
 class GetDisableSnapshotCopyQueryParams:
-    action: GetDisableSnapshotCopyActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    cluster_identifier: str = field(default=None, metadata={'query_param': { 'field_name': 'ClusterIdentifier', 'style': 'form', 'explode': True }})
-    version: GetDisableSnapshotCopyVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: GetDisableSnapshotCopyActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    cluster_identifier: str = field(metadata={'query_param': { 'field_name': 'ClusterIdentifier', 'style': 'form', 'explode': True }})
+    version: GetDisableSnapshotCopyVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -28,13 +32,13 @@ class GetDisableSnapshotCopyHeaders:
 
 @dataclass
 class GetDisableSnapshotCopyRequest:
-    query_params: GetDisableSnapshotCopyQueryParams = field(default=None)
-    headers: GetDisableSnapshotCopyHeaders = field(default=None)
+    headers: GetDisableSnapshotCopyHeaders = field()
+    query_params: GetDisableSnapshotCopyQueryParams = field()
     
 
 @dataclass
 class GetDisableSnapshotCopyResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

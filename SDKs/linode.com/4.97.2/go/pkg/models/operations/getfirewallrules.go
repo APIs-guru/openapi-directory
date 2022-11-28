@@ -4,7 +4,7 @@ import (
 	"openapi/pkg/models/shared"
 )
 
-var GetFirewallRulesServers = []string{
+var GetFirewallRulesServerList = []string{
 	"https://api.linode.com/v4",
 }
 
@@ -12,27 +12,19 @@ type GetFirewallRulesPathParams struct {
 	FirewallID int64 `pathParam:"style=simple,explode=false,name=firewallId"`
 }
 
-type GetFirewallRulesSecurityOption1 struct {
-	PersonalAccessToken shared.SchemePersonalAccessToken `security:"scheme,type=http,subtype=bearer"`
-}
-
-type GetFirewallRulesSecurityOption2 struct {
-	Oauth shared.SchemeOauth `security:"scheme,type=oauth2"`
-}
-
 type GetFirewallRulesSecurity struct {
-	Option1 *GetFirewallRulesSecurityOption1 `security:"option"`
-	Option2 *GetFirewallRulesSecurityOption2 `security:"option"`
+	PersonalAccessToken *shared.SchemePersonalAccessToken `security:"scheme,type=http,subtype=bearer"`
+	Oauth               *shared.SchemeOauth               `security:"scheme,type=oauth2"`
+}
+
+type GetFirewallRulesDefaultApplicationJSON struct {
+	Errors []shared.ErrorObject `json:"errors,omitempty"`
 }
 
 type GetFirewallRulesRequest struct {
 	ServerURL  *string
 	PathParams GetFirewallRulesPathParams
 	Security   GetFirewallRulesSecurity
-}
-
-type GetFirewallRulesDefaultApplicationJSON struct {
-	Errors []shared.ErrorObject `json:"errors,omitempty"`
 }
 
 type GetFirewallRulesResponse struct {

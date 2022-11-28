@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { JobLogEventEnum } from "./joblogeventenum";
 import { JobLogEventData } from "./joblogeventdata";
+
 
 
 // JobLog
@@ -8,12 +9,12 @@ import { JobLogEventData } from "./joblogeventdata";
  * Job log.
 **/
 export class JobLog extends SpeakeasyBase {
-  @Metadata({ data: "json, name=event" })
+  @SpeakeasyMetadata({ data: "json, name=event" })
   event?: JobLogEventEnum;
 
-  @Metadata({ data: "json, name=eventData" })
+  @SpeakeasyMetadata({ data: "json, name=eventData" })
   eventData?: JobLogEventData;
 
-  @Metadata({ data: "json, name=logDateTime" })
+  @SpeakeasyMetadata({ data: "json, name=logDateTime" })
   logDateTime?: string;
 }

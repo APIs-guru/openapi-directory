@@ -1,35 +1,36 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetTeamMatchupQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=maxYear" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=maxYear" })
   maxYear?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=minYear" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=minYear" })
   minYear?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=team1" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=team1" })
   team1: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=team2" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=team2" })
   team2: string;
 }
 
 
 export class GetTeamMatchupRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetTeamMatchupQueryParams;
 }
 
 
 export class GetTeamMatchupResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   teamMatchup?: shared.TeamMatchup;
 }

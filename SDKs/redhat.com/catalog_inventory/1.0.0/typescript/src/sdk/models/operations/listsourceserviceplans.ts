@@ -1,47 +1,48 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class ListSourceServicePlansPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" })
   id: string;
 }
 
 
 export class ListSourceServicePlansQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=deepObject;explode=true;name=filter" })
+  @SpeakeasyMetadata({ data: "queryParam, style=deepObject;explode=true;name=filter" })
   filter?: Map<string, any>;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=limit" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=limit" })
   limit?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=offset" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=offset" })
   offset?: number;
 
-  @Metadata({ data: "queryParam, style=deepObject;explode=true;name=sort_by" })
+  @SpeakeasyMetadata({ data: "queryParam, style=deepObject;explode=true;name=sort_by" })
   sortBy?: Map<string, any>;
 }
 
 
 export class ListSourceServicePlansRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: ListSourceServicePlansPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: ListSourceServicePlansQueryParams;
 }
 
 
 export class ListSourceServicePlansResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   errorNotFound?: shared.ErrorNotFound;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   servicePlansCollection?: shared.ServicePlansCollection;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

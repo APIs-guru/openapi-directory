@@ -1,4 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { InputParallelism } from "./inputparallelism";
 import { InputProcessingConfigurationDescription } from "./inputprocessingconfigurationdescription";
 import { SourceSchema } from "./sourceschema";
@@ -7,35 +7,36 @@ import { KinesisFirehoseInputDescription } from "./kinesisfirehoseinputdescripti
 import { KinesisStreamsInputDescription } from "./kinesisstreamsinputdescription";
 
 
+
 // InputDescription
 /** 
  * Describes the application input configuration for a SQL-based Kinesis Data Analytics application. 
 **/
 export class InputDescription extends SpeakeasyBase {
-  @Metadata({ data: "json, name=InAppStreamNames" })
+  @SpeakeasyMetadata({ data: "json, name=InAppStreamNames" })
   inAppStreamNames?: string[];
 
-  @Metadata({ data: "json, name=InputId" })
+  @SpeakeasyMetadata({ data: "json, name=InputId" })
   inputId?: string;
 
-  @Metadata({ data: "json, name=InputParallelism" })
+  @SpeakeasyMetadata({ data: "json, name=InputParallelism" })
   inputParallelism?: InputParallelism;
 
-  @Metadata({ data: "json, name=InputProcessingConfigurationDescription" })
+  @SpeakeasyMetadata({ data: "json, name=InputProcessingConfigurationDescription" })
   inputProcessingConfigurationDescription?: InputProcessingConfigurationDescription;
 
-  @Metadata({ data: "json, name=InputSchema" })
+  @SpeakeasyMetadata({ data: "json, name=InputSchema" })
   inputSchema?: SourceSchema;
 
-  @Metadata({ data: "json, name=InputStartingPositionConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=InputStartingPositionConfiguration" })
   inputStartingPositionConfiguration?: InputStartingPositionConfiguration;
 
-  @Metadata({ data: "json, name=KinesisFirehoseInputDescription" })
+  @SpeakeasyMetadata({ data: "json, name=KinesisFirehoseInputDescription" })
   kinesisFirehoseInputDescription?: KinesisFirehoseInputDescription;
 
-  @Metadata({ data: "json, name=KinesisStreamsInputDescription" })
+  @SpeakeasyMetadata({ data: "json, name=KinesisStreamsInputDescription" })
   kinesisStreamsInputDescription?: KinesisStreamsInputDescription;
 
-  @Metadata({ data: "json, name=NamePrefix" })
+  @SpeakeasyMetadata({ data: "json, name=NamePrefix" })
   namePrefix?: string;
 }

@@ -22,10 +22,10 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DestinationConfig } from "./destinationconfig";
 import { SelfManagedEventSource } from "./selfmanagedeventsource";
+import { SourceAccessConfiguration } from "./sourceaccessconfiguration";
 import { EventSourcePositionEnum } from "./eventsourcepositionenum";
 // EventSourceMappingConfiguration
 /**
@@ -37,91 +37,91 @@ var EventSourceMappingConfiguration = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=BatchSize" }),
+        SpeakeasyMetadata({ data: "json, name=BatchSize" }),
         __metadata("design:type", Number)
     ], EventSourceMappingConfiguration.prototype, "batchSize", void 0);
     __decorate([
-        Metadata({ data: "json, name=BisectBatchOnFunctionError" }),
+        SpeakeasyMetadata({ data: "json, name=BisectBatchOnFunctionError" }),
         __metadata("design:type", Boolean)
     ], EventSourceMappingConfiguration.prototype, "bisectBatchOnFunctionError", void 0);
     __decorate([
-        Metadata({ data: "json, name=DestinationConfig" }),
+        SpeakeasyMetadata({ data: "json, name=DestinationConfig" }),
         __metadata("design:type", DestinationConfig)
     ], EventSourceMappingConfiguration.prototype, "destinationConfig", void 0);
     __decorate([
-        Metadata({ data: "json, name=EventSourceArn" }),
+        SpeakeasyMetadata({ data: "json, name=EventSourceArn" }),
         __metadata("design:type", String)
     ], EventSourceMappingConfiguration.prototype, "eventSourceArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=FunctionArn" }),
+        SpeakeasyMetadata({ data: "json, name=FunctionArn" }),
         __metadata("design:type", String)
     ], EventSourceMappingConfiguration.prototype, "functionArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=FunctionResponseTypes" }),
+        SpeakeasyMetadata({ data: "json, name=FunctionResponseTypes" }),
         __metadata("design:type", Array)
     ], EventSourceMappingConfiguration.prototype, "functionResponseTypes", void 0);
     __decorate([
-        Metadata({ data: "json, name=LastModified" }),
+        SpeakeasyMetadata({ data: "json, name=LastModified" }),
         __metadata("design:type", Date)
     ], EventSourceMappingConfiguration.prototype, "lastModified", void 0);
     __decorate([
-        Metadata({ data: "json, name=LastProcessingResult" }),
+        SpeakeasyMetadata({ data: "json, name=LastProcessingResult" }),
         __metadata("design:type", String)
     ], EventSourceMappingConfiguration.prototype, "lastProcessingResult", void 0);
     __decorate([
-        Metadata({ data: "json, name=MaximumBatchingWindowInSeconds" }),
+        SpeakeasyMetadata({ data: "json, name=MaximumBatchingWindowInSeconds" }),
         __metadata("design:type", Number)
     ], EventSourceMappingConfiguration.prototype, "maximumBatchingWindowInSeconds", void 0);
     __decorate([
-        Metadata({ data: "json, name=MaximumRecordAgeInSeconds" }),
+        SpeakeasyMetadata({ data: "json, name=MaximumRecordAgeInSeconds" }),
         __metadata("design:type", Number)
     ], EventSourceMappingConfiguration.prototype, "maximumRecordAgeInSeconds", void 0);
     __decorate([
-        Metadata({ data: "json, name=MaximumRetryAttempts" }),
+        SpeakeasyMetadata({ data: "json, name=MaximumRetryAttempts" }),
         __metadata("design:type", Number)
     ], EventSourceMappingConfiguration.prototype, "maximumRetryAttempts", void 0);
     __decorate([
-        Metadata({ data: "json, name=ParallelizationFactor" }),
+        SpeakeasyMetadata({ data: "json, name=ParallelizationFactor" }),
         __metadata("design:type", Number)
     ], EventSourceMappingConfiguration.prototype, "parallelizationFactor", void 0);
     __decorate([
-        Metadata({ data: "json, name=Queues" }),
+        SpeakeasyMetadata({ data: "json, name=Queues" }),
         __metadata("design:type", Array)
     ], EventSourceMappingConfiguration.prototype, "queues", void 0);
     __decorate([
-        Metadata({ data: "json, name=SelfManagedEventSource" }),
+        SpeakeasyMetadata({ data: "json, name=SelfManagedEventSource" }),
         __metadata("design:type", SelfManagedEventSource)
     ], EventSourceMappingConfiguration.prototype, "selfManagedEventSource", void 0);
     __decorate([
-        Metadata({ data: "json, name=SourceAccessConfigurations", elemType: shared.SourceAccessConfiguration }),
+        SpeakeasyMetadata({ data: "json, name=SourceAccessConfigurations", elemType: SourceAccessConfiguration }),
         __metadata("design:type", Array)
     ], EventSourceMappingConfiguration.prototype, "sourceAccessConfigurations", void 0);
     __decorate([
-        Metadata({ data: "json, name=StartingPosition" }),
+        SpeakeasyMetadata({ data: "json, name=StartingPosition" }),
         __metadata("design:type", String)
     ], EventSourceMappingConfiguration.prototype, "startingPosition", void 0);
     __decorate([
-        Metadata({ data: "json, name=StartingPositionTimestamp" }),
+        SpeakeasyMetadata({ data: "json, name=StartingPositionTimestamp" }),
         __metadata("design:type", Date)
     ], EventSourceMappingConfiguration.prototype, "startingPositionTimestamp", void 0);
     __decorate([
-        Metadata({ data: "json, name=State" }),
+        SpeakeasyMetadata({ data: "json, name=State" }),
         __metadata("design:type", String)
     ], EventSourceMappingConfiguration.prototype, "state", void 0);
     __decorate([
-        Metadata({ data: "json, name=StateTransitionReason" }),
+        SpeakeasyMetadata({ data: "json, name=StateTransitionReason" }),
         __metadata("design:type", String)
     ], EventSourceMappingConfiguration.prototype, "stateTransitionReason", void 0);
     __decorate([
-        Metadata({ data: "json, name=Topics" }),
+        SpeakeasyMetadata({ data: "json, name=Topics" }),
         __metadata("design:type", Array)
     ], EventSourceMappingConfiguration.prototype, "topics", void 0);
     __decorate([
-        Metadata({ data: "json, name=TumblingWindowInSeconds" }),
+        SpeakeasyMetadata({ data: "json, name=TumblingWindowInSeconds" }),
         __metadata("design:type", Number)
     ], EventSourceMappingConfiguration.prototype, "tumblingWindowInSeconds", void 0);
     __decorate([
-        Metadata({ data: "json, name=UUID" }),
+        SpeakeasyMetadata({ data: "json, name=UUID" }),
         __metadata("design:type", String)
     ], EventSourceMappingConfiguration.prototype, "uuid", void 0);
     return EventSourceMappingConfiguration;

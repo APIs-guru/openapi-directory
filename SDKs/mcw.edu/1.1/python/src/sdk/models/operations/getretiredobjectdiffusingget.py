@@ -1,22 +1,25 @@
 from dataclasses import dataclass, field
-
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
 
 
 @dataclass
 class GetRetiredObjectDiffUsingGetPathParams:
-    date_from_yyyymmdd: str = field(default=None, metadata={'path_param': { 'field_name': 'dateFromYYYYMMDD', 'style': 'simple', 'explode': False }})
-    date_to_yyyymmdd: str = field(default=None, metadata={'path_param': { 'field_name': 'dateToYYYYMMDD', 'style': 'simple', 'explode': False }})
-    species_type_key: int = field(default=None, metadata={'path_param': { 'field_name': 'speciesTypeKey', 'style': 'simple', 'explode': False }})
+    date_from_yyyymmdd: str = field(metadata={'path_param': { 'field_name': 'dateFromYYYYMMDD', 'style': 'simple', 'explode': False }})
+    date_to_yyyymmdd: str = field(metadata={'path_param': { 'field_name': 'dateToYYYYMMDD', 'style': 'simple', 'explode': False }})
+    species_type_key: int = field(metadata={'path_param': { 'field_name': 'speciesTypeKey', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetRetiredObjectDiffUsingGetRequest:
-    path_params: GetRetiredObjectDiffUsingGetPathParams = field(default=None)
+    path_params: GetRetiredObjectDiffUsingGetPathParams = field()
     
 
 @dataclass
 class GetRetiredObjectDiffUsingGetResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

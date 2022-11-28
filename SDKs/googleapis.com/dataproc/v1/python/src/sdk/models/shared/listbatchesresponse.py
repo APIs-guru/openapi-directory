@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import batch
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ListBatchesResponse:
-    batches: Optional[List[batch.Batch]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'batches' }})
-    next_page_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'nextPageToken' }})
+    r"""ListBatchesResponse
+    A list of batch workloads.
+    """
+    
+    batches: Optional[List[Batch]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('batches') }})
+    next_page_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('nextPageToken') }})
     

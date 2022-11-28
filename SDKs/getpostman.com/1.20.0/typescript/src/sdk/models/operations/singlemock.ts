@@ -1,52 +1,53 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class SingleMockPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=mock_uid" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=mock_uid" })
   mockUid: string;
 }
 
 
-export class SingleMockRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: SingleMockPathParams;
-}
-
-
 export class SingleMock200ApplicationJsonMock extends SpeakeasyBase {
-  @Metadata({ data: "json, name=collection" })
+  @SpeakeasyMetadata({ data: "json, name=collection" })
   collection?: string;
 
-  @Metadata({ data: "json, name=environment" })
+  @SpeakeasyMetadata({ data: "json, name=environment" })
   environment?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=mockUrl" })
+  @SpeakeasyMetadata({ data: "json, name=mockUrl" })
   mockUrl?: string;
 
-  @Metadata({ data: "json, name=owner" })
+  @SpeakeasyMetadata({ data: "json, name=owner" })
   owner?: string;
 
-  @Metadata({ data: "json, name=uid" })
+  @SpeakeasyMetadata({ data: "json, name=uid" })
   uid?: string;
 }
 
 
 export class SingleMock200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=mock" })
+  @SpeakeasyMetadata({ data: "json, name=mock" })
   mock?: SingleMock200ApplicationJsonMock;
 }
 
 
+export class SingleMockRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: SingleMockPathParams;
+}
+
+
 export class SingleMockResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   singleMock200ApplicationJsonObject?: SingleMock200ApplicationJson;
 }

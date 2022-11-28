@@ -1,6 +1,7 @@
 
 
+
 export enum InsightStatusEnum {
-    Ongoing = "ONGOING"
-,    Closed = "CLOSED"
+    Ongoing = "ONGOING",
+    Closed = "CLOSED"
 }

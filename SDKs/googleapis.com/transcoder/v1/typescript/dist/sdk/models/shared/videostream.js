@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { H264CodecSettings } from "./h264codecsettings";
 import { H265CodecSettings } from "./h265codecsettings";
 import { Vp9CodecSettings } from "./vp9codecsettings";
@@ -36,15 +36,15 @@ var VideoStream = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=h264" }),
+        SpeakeasyMetadata({ data: "json, name=h264" }),
         __metadata("design:type", H264CodecSettings)
     ], VideoStream.prototype, "h264", void 0);
     __decorate([
-        Metadata({ data: "json, name=h265" }),
+        SpeakeasyMetadata({ data: "json, name=h265" }),
         __metadata("design:type", H265CodecSettings)
     ], VideoStream.prototype, "h265", void 0);
     __decorate([
-        Metadata({ data: "json, name=vp9" }),
+        SpeakeasyMetadata({ data: "json, name=vp9" }),
         __metadata("design:type", Vp9CodecSettings)
     ], VideoStream.prototype, "vp9", void 0);
     return VideoStream;

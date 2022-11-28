@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // DeleteProtectedRangeRequest
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Deletes the protected range with the given ID.
 **/
 export class DeleteProtectedRangeRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=protectedRangeId" })
+  @SpeakeasyMetadata({ data: "json, name=protectedRangeId" })
   protectedRangeId?: number;
 }

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var PostConsumerV1CustomersRequests = /** @class */ (function (_super) {
     __extends(PostConsumerV1CustomersRequests, _super);
@@ -30,19 +30,19 @@ var PostConsumerV1CustomersRequests = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "request, media_type=application/*+json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/*+json" }),
         __metadata("design:type", shared.CustomerInputModel)
     ], PostConsumerV1CustomersRequests.prototype, "customerInputModel", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", shared.CustomerInputModel)
     ], PostConsumerV1CustomersRequests.prototype, "customerInputModel1", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json-patch+json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json-patch+json" }),
         __metadata("design:type", shared.CustomerInputModel)
     ], PostConsumerV1CustomersRequests.prototype, "customerInputModel2", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=text/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=text/json" }),
         __metadata("design:type", shared.CustomerInputModel)
     ], PostConsumerV1CustomersRequests.prototype, "customerInputModel3", void 0);
     return PostConsumerV1CustomersRequests;
@@ -54,7 +54,7 @@ var PostConsumerV1CustomersRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PostConsumerV1CustomersRequests)
     ], PostConsumerV1CustomersRequest.prototype, "request", void 0);
     return PostConsumerV1CustomersRequest;
@@ -66,15 +66,15 @@ var PostConsumerV1CustomersResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], PostConsumerV1CustomersResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.CustomerViewModel)
     ], PostConsumerV1CustomersResponse.prototype, "customerViewModel", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], PostConsumerV1CustomersResponse.prototype, "statusCode", void 0);
     return PostConsumerV1CustomersResponse;

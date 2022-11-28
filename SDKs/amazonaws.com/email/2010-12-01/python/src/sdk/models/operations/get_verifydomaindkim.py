@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetVerifyDomainDkimActionEnum(str, Enum):
     VERIFY_DOMAIN_DKIM = "VerifyDomainDkim"
@@ -10,9 +14,9 @@ class GetVerifyDomainDkimVersionEnum(str, Enum):
 
 @dataclass
 class GetVerifyDomainDkimQueryParams:
-    action: GetVerifyDomainDkimActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    domain: str = field(default=None, metadata={'query_param': { 'field_name': 'Domain', 'style': 'form', 'explode': True }})
-    version: GetVerifyDomainDkimVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: GetVerifyDomainDkimActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    domain: str = field(metadata={'query_param': { 'field_name': 'Domain', 'style': 'form', 'explode': True }})
+    version: GetVerifyDomainDkimVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -28,13 +32,13 @@ class GetVerifyDomainDkimHeaders:
 
 @dataclass
 class GetVerifyDomainDkimRequest:
-    query_params: GetVerifyDomainDkimQueryParams = field(default=None)
-    headers: GetVerifyDomainDkimHeaders = field(default=None)
+    headers: GetVerifyDomainDkimHeaders = field()
+    query_params: GetVerifyDomainDkimQueryParams = field()
     
 
 @dataclass
 class GetVerifyDomainDkimResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

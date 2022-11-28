@@ -9,27 +9,19 @@ type UpdateLinodeIPPathParams struct {
 	LinodeID int64  `pathParam:"style=simple,explode=false,name=linodeId"`
 }
 
-type UpdateLinodeIPSecurityOption1 struct {
-	PersonalAccessToken shared.SchemePersonalAccessToken `security:"scheme,type=http,subtype=bearer"`
-}
-
-type UpdateLinodeIPSecurityOption2 struct {
-	Oauth shared.SchemeOauth `security:"scheme,type=oauth2"`
-}
-
 type UpdateLinodeIPSecurity struct {
-	Option1 *UpdateLinodeIPSecurityOption1 `security:"option"`
-	Option2 *UpdateLinodeIPSecurityOption2 `security:"option"`
-}
-
-type UpdateLinodeIPRequest struct {
-	PathParams UpdateLinodeIPPathParams
-	Request    *shared.IPAddress `request:"mediaType=application/json"`
-	Security   UpdateLinodeIPSecurity
+	PersonalAccessToken *shared.SchemePersonalAccessToken `security:"scheme,type=http,subtype=bearer"`
+	Oauth               *shared.SchemeOauth               `security:"scheme,type=oauth2"`
 }
 
 type UpdateLinodeIPDefaultApplicationJSON struct {
 	Errors []shared.ErrorObject `json:"errors,omitempty"`
+}
+
+type UpdateLinodeIPRequest struct {
+	PathParams UpdateLinodeIPPathParams
+	Request    *shared.IPAddressInput `request:"mediaType=application/json"`
+	Security   UpdateLinodeIPSecurity
 }
 
 type UpdateLinodeIPResponse struct {

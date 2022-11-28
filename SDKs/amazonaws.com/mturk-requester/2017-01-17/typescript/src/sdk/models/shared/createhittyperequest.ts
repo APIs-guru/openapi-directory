@@ -1,27 +1,27 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { QualificationRequirement } from "./qualificationrequirement";
 
 
+
 export class CreateHitTypeRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AssignmentDurationInSeconds" })
+  @SpeakeasyMetadata({ data: "json, name=AssignmentDurationInSeconds" })
   assignmentDurationInSeconds: number;
 
-  @Metadata({ data: "json, name=AutoApprovalDelayInSeconds" })
+  @SpeakeasyMetadata({ data: "json, name=AutoApprovalDelayInSeconds" })
   autoApprovalDelayInSeconds?: number;
 
-  @Metadata({ data: "json, name=Description" })
+  @SpeakeasyMetadata({ data: "json, name=Description" })
   description: string;
 
-  @Metadata({ data: "json, name=Keywords" })
+  @SpeakeasyMetadata({ data: "json, name=Keywords" })
   keywords?: string;
 
-  @Metadata({ data: "json, name=QualificationRequirements", elemType: shared.QualificationRequirement })
+  @SpeakeasyMetadata({ data: "json, name=QualificationRequirements", elemType: QualificationRequirement })
   qualificationRequirements?: QualificationRequirement[];
 
-  @Metadata({ data: "json, name=Reward" })
+  @SpeakeasyMetadata({ data: "json, name=Reward" })
   reward: string;
 
-  @Metadata({ data: "json, name=Title" })
+  @SpeakeasyMetadata({ data: "json, name=Title" })
   title: string;
 }

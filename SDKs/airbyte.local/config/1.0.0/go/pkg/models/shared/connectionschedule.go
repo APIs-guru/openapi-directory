@@ -10,6 +10,8 @@ const (
 	ConnectionScheduleTimeUnitEnumMonths  ConnectionScheduleTimeUnitEnum = "months"
 )
 
+// ConnectionSchedule
+// if null, then no schedule is set.
 type ConnectionSchedule struct {
 	TimeUnit ConnectionScheduleTimeUnitEnum `json:"timeUnit"`
 	Units    int64                          `json:"units"`

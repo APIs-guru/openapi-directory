@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// LandlordMaintenanceJobModel
+// Maintenance Job
 type LandlordMaintenanceJobModel struct {
 	AssignedTo       *string                           `json:"AssignedTo,omitempty"`
 	ClosedDate       *time.Time                        `json:"ClosedDate,omitempty"`

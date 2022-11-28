@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetDeleteCustomVerificationEmailTemplateActionEnum(str, Enum):
     DELETE_CUSTOM_VERIFICATION_EMAIL_TEMPLATE = "DeleteCustomVerificationEmailTemplate"
@@ -10,9 +14,9 @@ class GetDeleteCustomVerificationEmailTemplateVersionEnum(str, Enum):
 
 @dataclass
 class GetDeleteCustomVerificationEmailTemplateQueryParams:
-    action: GetDeleteCustomVerificationEmailTemplateActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    template_name: str = field(default=None, metadata={'query_param': { 'field_name': 'TemplateName', 'style': 'form', 'explode': True }})
-    version: GetDeleteCustomVerificationEmailTemplateVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: GetDeleteCustomVerificationEmailTemplateActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    template_name: str = field(metadata={'query_param': { 'field_name': 'TemplateName', 'style': 'form', 'explode': True }})
+    version: GetDeleteCustomVerificationEmailTemplateVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -28,12 +32,12 @@ class GetDeleteCustomVerificationEmailTemplateHeaders:
 
 @dataclass
 class GetDeleteCustomVerificationEmailTemplateRequest:
-    query_params: GetDeleteCustomVerificationEmailTemplateQueryParams = field(default=None)
-    headers: GetDeleteCustomVerificationEmailTemplateHeaders = field(default=None)
+    headers: GetDeleteCustomVerificationEmailTemplateHeaders = field()
+    query_params: GetDeleteCustomVerificationEmailTemplateQueryParams = field()
     
 
 @dataclass
 class GetDeleteCustomVerificationEmailTemplateResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

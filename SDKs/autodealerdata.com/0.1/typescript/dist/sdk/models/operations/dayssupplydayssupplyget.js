@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var DaysSupplyDaysSupplyGetQueryParams = /** @class */ (function (_super) {
     __extends(DaysSupplyDaysSupplyGetQueryParams, _super);
@@ -30,15 +30,15 @@ var DaysSupplyDaysSupplyGetQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=brandName" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=brandName" }),
         __metadata("design:type", String)
     ], DaysSupplyDaysSupplyGetQueryParams.prototype, "brandName", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=jwt" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=jwt" }),
         __metadata("design:type", String)
     ], DaysSupplyDaysSupplyGetQueryParams.prototype, "jwt", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=regionName" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=regionName" }),
         __metadata("design:type", String)
     ], DaysSupplyDaysSupplyGetQueryParams.prototype, "regionName", void 0);
     return DaysSupplyDaysSupplyGetQueryParams;
@@ -50,7 +50,7 @@ var DaysSupplyDaysSupplyGetRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", DaysSupplyDaysSupplyGetQueryParams)
     ], DaysSupplyDaysSupplyGetRequest.prototype, "queryParams", void 0);
     return DaysSupplyDaysSupplyGetRequest;
@@ -62,19 +62,19 @@ var DaysSupplyDaysSupplyGetResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], DaysSupplyDaysSupplyGetResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.GenericResponse)
     ], DaysSupplyDaysSupplyGetResponse.prototype, "genericResponse", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.HttpValidationError)
     ], DaysSupplyDaysSupplyGetResponse.prototype, "httpValidationError", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], DaysSupplyDaysSupplyGetResponse.prototype, "statusCode", void 0);
     return DaysSupplyDaysSupplyGetResponse;

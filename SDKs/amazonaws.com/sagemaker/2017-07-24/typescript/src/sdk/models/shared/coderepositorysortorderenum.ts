@@ -1,6 +1,7 @@
 
 
+
 export enum CodeRepositorySortOrderEnum {
-    Ascending = "Ascending"
-,    Descending = "Descending"
+    Ascending = "Ascending",
+    Descending = "Descending"
 }

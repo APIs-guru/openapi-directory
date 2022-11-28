@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { RdsHttpEndpointConfig } from "./rdshttpendpointconfig";
 import { RelationalDatabaseSourceTypeEnum } from "./relationaldatabasesourcetypeenum";
 /**

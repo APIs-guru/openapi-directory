@@ -1,31 +1,32 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class CommunityContentGetCommunityContentPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=mediaFilter" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=mediaFilter" })
   mediaFilter: number;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=page" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=page" })
   page: number;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=sort" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=sort" })
   sort: number;
 }
 
 
 export class CommunityContentGetCommunityContentRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: CommunityContentGetCommunityContentPathParams;
 }
 
 
 export class CommunityContentGetCommunityContentResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

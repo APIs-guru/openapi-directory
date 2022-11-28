@@ -22,27 +22,27 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { Segment } from "./segment";
 var Itinerary = /** @class */ (function (_super) {
     __extends(Itinerary, _super);
     function Itinerary() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=baseFareUSD" }),
+        SpeakeasyMetadata({ data: "json, name=baseFareUSD" }),
         __metadata("design:type", Number)
     ], Itinerary.prototype, "baseFareUsd", void 0);
     __decorate([
-        Metadata({ data: "json, name=id" }),
+        SpeakeasyMetadata({ data: "json, name=id" }),
         __metadata("design:type", String)
     ], Itinerary.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "json, name=segments", elemType: shared.Segment }),
+        SpeakeasyMetadata({ data: "json, name=segments", elemType: Segment }),
         __metadata("design:type", Array)
     ], Itinerary.prototype, "segments", void 0);
     __decorate([
-        Metadata({ data: "json, name=ticketingCarrier" }),
+        SpeakeasyMetadata({ data: "json, name=ticketingCarrier" }),
         __metadata("design:type", String)
     ], Itinerary.prototype, "ticketingCarrier", void 0);
     return Itinerary;

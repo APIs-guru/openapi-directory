@@ -1,12 +1,18 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class ChatSpacesMessagesCreatePathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
+class ChatSpacesMessagesCreateMessageReplyOptionEnum(str, Enum):
+    MESSAGE_REPLY_OPTION_UNSPECIFIED = "MESSAGE_REPLY_OPTION_UNSPECIFIED"
+    REPLY_MESSAGE_FALLBACK_TO_NEW_THREAD = "REPLY_MESSAGE_FALLBACK_TO_NEW_THREAD"
+    REPLY_MESSAGE_OR_FAIL = "REPLY_MESSAGE_OR_FAIL"
+
 
 @dataclass
 class ChatSpacesMessagesCreateQueryParams:
@@ -17,6 +23,7 @@ class ChatSpacesMessagesCreateQueryParams:
     fields: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'fields', 'style': 'form', 'explode': True }})
     key: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'key', 'style': 'form', 'explode': True }})
     message_id: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'messageId', 'style': 'form', 'explode': True }})
+    message_reply_option: Optional[ChatSpacesMessagesCreateMessageReplyOptionEnum] = field(default=None, metadata={'query_param': { 'field_name': 'messageReplyOption', 'style': 'form', 'explode': True }})
     oauth_token: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'oauth_token', 'style': 'form', 'explode': True }})
     pretty_print: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'prettyPrint', 'style': 'form', 'explode': True }})
     quota_user: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'quotaUser', 'style': 'form', 'explode': True }})
@@ -27,15 +34,34 @@ class ChatSpacesMessagesCreateQueryParams:
     
 
 @dataclass
+class ChatSpacesMessagesCreateSecurityOption1:
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    
+
+@dataclass
+class ChatSpacesMessagesCreateSecurityOption2:
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    
+
+@dataclass
+class ChatSpacesMessagesCreateSecurity:
+    option1: Optional[ChatSpacesMessagesCreateSecurityOption1] = field(default=None, metadata={'security': { 'option': True }})
+    option2: Optional[ChatSpacesMessagesCreateSecurityOption2] = field(default=None, metadata={'security': { 'option': True }})
+    
+
+@dataclass
 class ChatSpacesMessagesCreateRequest:
-    path_params: ChatSpacesMessagesCreatePathParams = field(default=None)
-    query_params: ChatSpacesMessagesCreateQueryParams = field(default=None)
-    request: Optional[shared.Message] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    path_params: ChatSpacesMessagesCreatePathParams = field()
+    query_params: ChatSpacesMessagesCreateQueryParams = field()
+    security: ChatSpacesMessagesCreateSecurity = field()
+    request: Optional[shared.MessageInput] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class ChatSpacesMessagesCreateResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     message: Optional[shared.Message] = field(default=None)
-    status_code: int = field(default=None)
     

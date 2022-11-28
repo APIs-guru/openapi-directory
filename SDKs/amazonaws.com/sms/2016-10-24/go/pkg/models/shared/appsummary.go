@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// AppSummary
+// Information about the application.
 type AppSummary struct {
 	AppID                          *string                                `json:"appId,omitempty"`
 	CreationTime                   *time.Time                             `json:"creationTime,omitempty"`

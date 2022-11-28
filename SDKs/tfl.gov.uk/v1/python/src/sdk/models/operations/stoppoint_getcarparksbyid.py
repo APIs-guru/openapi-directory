@@ -5,18 +5,18 @@ from sdk.models import shared
 
 @dataclass
 class StopPointGetCarParksByIDPathParams:
-    stop_point_id: str = field(default=None, metadata={'path_param': { 'field_name': 'stopPointId', 'style': 'simple', 'explode': False }})
+    stop_point_id: str = field(metadata={'path_param': { 'field_name': 'stopPointId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class StopPointGetCarParksByIDRequest:
-    path_params: StopPointGetCarParksByIDPathParams = field(default=None)
+    path_params: StopPointGetCarParksByIDPathParams = field()
     
 
 @dataclass
 class StopPointGetCarParksByIDResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     tfl_api_presentation_entities_places: Optional[List[shared.TflAPIPresentationEntitiesPlace]] = field(default=None)
     

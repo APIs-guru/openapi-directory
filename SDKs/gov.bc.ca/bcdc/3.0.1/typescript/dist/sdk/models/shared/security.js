@@ -22,14 +22,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var SchemeGithubAccessCode = /** @class */ (function (_super) {
     __extends(SchemeGithubAccessCode, _super);
     function SchemeGithubAccessCode() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, name=Authorization" }),
+        SpeakeasyMetadata({ data: "security, name=Authorization" }),
         __metadata("design:type", String)
     ], SchemeGithubAccessCode.prototype, "authorization", void 0);
     return SchemeGithubAccessCode;
@@ -41,49 +41,25 @@ var SchemeInternalApiKey = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, name=ckan_api_key" }),
+        SpeakeasyMetadata({ data: "security, name=ckan_api_key" }),
         __metadata("design:type", String)
     ], SchemeInternalApiKey.prototype, "apiKey", void 0);
     return SchemeInternalApiKey;
 }(SpeakeasyBase));
 export { SchemeInternalApiKey };
-var SecurityOption1 = /** @class */ (function (_super) {
-    __extends(SecurityOption1, _super);
-    function SecurityOption1() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
-        __metadata("design:type", SchemeGithubAccessCode)
-    ], SecurityOption1.prototype, "githubAccessCode", void 0);
-    return SecurityOption1;
-}(SpeakeasyBase));
-export { SecurityOption1 };
-var SecurityOption2 = /** @class */ (function (_super) {
-    __extends(SecurityOption2, _super);
-    function SecurityOption2() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
-        __metadata("design:type", SchemeInternalApiKey)
-    ], SecurityOption2.prototype, "internalApiKey", void 0);
-    return SecurityOption2;
-}(SpeakeasyBase));
-export { SecurityOption2 };
 var Security = /** @class */ (function (_super) {
     __extends(Security, _super);
     function Security() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, option=true" }),
-        __metadata("design:type", SecurityOption1)
-    ], Security.prototype, "option1", void 0);
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
+        __metadata("design:type", SchemeGithubAccessCode)
+    ], Security.prototype, "githubAccessCode", void 0);
     __decorate([
-        Metadata({ data: "security, option=true" }),
-        __metadata("design:type", SecurityOption2)
-    ], Security.prototype, "option2", void 0);
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        __metadata("design:type", SchemeInternalApiKey)
+    ], Security.prototype, "internalApiKey", void 0);
     return Security;
 }(SpeakeasyBase));
 export { Security };

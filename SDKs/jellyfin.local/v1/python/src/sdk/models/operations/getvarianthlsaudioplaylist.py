@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class GetVariantHlsAudioPlaylistPathParams:
-    item_id: str = field(default=None, metadata={'path_param': { 'field_name': 'itemId', 'style': 'simple', 'explode': False }})
+    item_id: str = field(metadata={'path_param': { 'field_name': 'itemId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -62,19 +63,19 @@ class GetVariantHlsAudioPlaylistQueryParams:
 
 @dataclass
 class GetVariantHlsAudioPlaylistSecurity:
-    custom_authentication: shared.SchemeCustomAuthentication = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    custom_authentication: shared.SchemeCustomAuthentication = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
     
 
 @dataclass
 class GetVariantHlsAudioPlaylistRequest:
-    path_params: GetVariantHlsAudioPlaylistPathParams = field(default=None)
-    query_params: GetVariantHlsAudioPlaylistQueryParams = field(default=None)
-    security: GetVariantHlsAudioPlaylistSecurity = field(default=None)
+    path_params: GetVariantHlsAudioPlaylistPathParams = field()
+    query_params: GetVariantHlsAudioPlaylistQueryParams = field()
+    security: GetVariantHlsAudioPlaylistSecurity = field()
     
 
 @dataclass
 class GetVariantHlsAudioPlaylistResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     get_variant_hls_audio_playlist_200_application_x_mpegurl_binary_string: Optional[bytes] = field(default=None)
-    status_code: int = field(default=None)
     

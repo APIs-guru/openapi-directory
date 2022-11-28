@@ -1,5 +1,7 @@
 package shared
 
+// Transcript
+// A list of messages in the session.
 type Transcript struct {
 	BeginOffsetMillis int64              `json:"BeginOffsetMillis"`
 	Content           string             `json:"Content"`

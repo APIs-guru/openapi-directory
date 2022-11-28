@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class VisionProjectsLocationsFilesAsyncBatchAnnotatePathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,14 +26,14 @@ class VisionProjectsLocationsFilesAsyncBatchAnnotateQueryParams:
 
 @dataclass
 class VisionProjectsLocationsFilesAsyncBatchAnnotateSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class VisionProjectsLocationsFilesAsyncBatchAnnotateSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -43,15 +44,15 @@ class VisionProjectsLocationsFilesAsyncBatchAnnotateSecurity:
 
 @dataclass
 class VisionProjectsLocationsFilesAsyncBatchAnnotateRequest:
-    path_params: VisionProjectsLocationsFilesAsyncBatchAnnotatePathParams = field(default=None)
-    query_params: VisionProjectsLocationsFilesAsyncBatchAnnotateQueryParams = field(default=None)
+    path_params: VisionProjectsLocationsFilesAsyncBatchAnnotatePathParams = field()
+    query_params: VisionProjectsLocationsFilesAsyncBatchAnnotateQueryParams = field()
+    security: VisionProjectsLocationsFilesAsyncBatchAnnotateSecurity = field()
     request: Optional[shared.GoogleCloudVisionV1p2beta1AsyncBatchAnnotateFilesRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: VisionProjectsLocationsFilesAsyncBatchAnnotateSecurity = field(default=None)
     
 
 @dataclass
 class VisionProjectsLocationsFilesAsyncBatchAnnotateResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     operation: Optional[shared.Operation] = field(default=None)
-    status_code: int = field(default=None)
     

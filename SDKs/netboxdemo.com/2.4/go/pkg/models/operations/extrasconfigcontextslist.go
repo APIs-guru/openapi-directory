@@ -24,15 +24,15 @@ type ExtrasConfigContextsListQueryParams struct {
 	TenantID      *string `queryParam:"style=form,explode=true,name=tenant_id"`
 }
 
-type ExtrasConfigContextsListRequest struct {
-	QueryParams ExtrasConfigContextsListQueryParams
-}
-
 type ExtrasConfigContextsList200ApplicationJSON struct {
 	Count    int64                  `json:"count"`
 	Next     *string                `json:"next,omitempty"`
 	Previous *string                `json:"previous,omitempty"`
 	Results  []shared.ConfigContext `json:"results"`
+}
+
+type ExtrasConfigContextsListRequest struct {
+	QueryParams ExtrasConfigContextsListQueryParams
 }
 
 type ExtrasConfigContextsListResponse struct {

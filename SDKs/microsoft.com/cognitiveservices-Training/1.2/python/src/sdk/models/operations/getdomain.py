@@ -5,24 +5,24 @@ from sdk.models import shared
 
 @dataclass
 class GetDomainPathParams:
-    domain_id: str = field(default=None, metadata={'path_param': { 'field_name': 'domainId', 'style': 'simple', 'explode': False }})
+    domain_id: str = field(metadata={'path_param': { 'field_name': 'domainId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetDomainHeaders:
-    training_key: str = field(default=None, metadata={'header': { 'field_name': 'Training-Key', 'style': 'simple', 'explode': False }})
+    training_key: str = field(metadata={'header': { 'field_name': 'Training-Key', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetDomainRequest:
-    path_params: GetDomainPathParams = field(default=None)
-    headers: GetDomainHeaders = field(default=None)
+    headers: GetDomainHeaders = field()
+    path_params: GetDomainPathParams = field()
     
 
 @dataclass
 class GetDomainResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     domain: Optional[shared.Domain] = field(default=None)
-    status_code: int = field(default=None)
     

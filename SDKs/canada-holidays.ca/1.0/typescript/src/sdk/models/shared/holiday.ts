@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Province } from "./province";
 
+
 export enum HolidayFederalEnum {
-    Zero = "0"
-,    One = "1"
-,    True = "true"
-,    False = "false"
+    Zero = "0",
+    One = "1",
+    True = "true",
+    False = "false"
 }
 
 
@@ -15,21 +15,21 @@ export enum HolidayFederalEnum {
  * A Canadian holiday. Includes a name, date, and a list of regions that observe this holiday.
 **/
 export class Holiday extends SpeakeasyBase {
-  @Metadata({ data: "json, name=date" })
+  @SpeakeasyMetadata({ data: "json, name=date" })
   date?: Date;
 
-  @Metadata({ data: "json, name=federal" })
+  @SpeakeasyMetadata({ data: "json, name=federal" })
   federal?: HolidayFederalEnum;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: number;
 
-  @Metadata({ data: "json, name=name Fr" })
+  @SpeakeasyMetadata({ data: "json, name=name Fr" })
   nameFr?: string;
 
-  @Metadata({ data: "json, name=nameEn" })
+  @SpeakeasyMetadata({ data: "json, name=nameEn" })
   nameEn?: string;
 
-  @Metadata({ data: "json, name=provinces", elemType: shared.Province })
+  @SpeakeasyMetadata({ data: "json, name=provinces", elemType: Province })
   provinces?: Province[];
 }

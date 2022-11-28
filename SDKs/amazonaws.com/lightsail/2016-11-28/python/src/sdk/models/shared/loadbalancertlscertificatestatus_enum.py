@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class LoadBalancerTLSCertificateStatusEnum(str, Enum):
     PENDING_VALIDATION = "PENDING_VALIDATION"

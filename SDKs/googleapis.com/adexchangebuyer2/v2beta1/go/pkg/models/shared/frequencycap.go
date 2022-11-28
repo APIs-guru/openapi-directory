@@ -14,6 +14,8 @@ const (
 	FrequencyCapTimeUnitTypeEnumStream                  FrequencyCapTimeUnitTypeEnum = "STREAM"
 )
 
+// FrequencyCap
+// Frequency cap.
 type FrequencyCap struct {
 	MaxImpressions *int32                        `json:"maxImpressions,omitempty"`
 	NumTimeUnits   *int32                        `json:"numTimeUnits,omitempty"`

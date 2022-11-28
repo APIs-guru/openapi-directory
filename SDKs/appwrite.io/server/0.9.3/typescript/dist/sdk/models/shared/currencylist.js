@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { Currency } from "./currency";
 // CurrencyList
 /**
  * Currencies List
@@ -34,11 +34,11 @@ var CurrencyList = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=currencies", elemType: shared.Currency }),
+        SpeakeasyMetadata({ data: "json, name=currencies", elemType: Currency }),
         __metadata("design:type", Array)
     ], CurrencyList.prototype, "currencies", void 0);
     __decorate([
-        Metadata({ data: "json, name=sum" }),
+        SpeakeasyMetadata({ data: "json, name=sum" }),
         __metadata("design:type", Number)
     ], CurrencyList.prototype, "sum", void 0);
     return CurrencyList;

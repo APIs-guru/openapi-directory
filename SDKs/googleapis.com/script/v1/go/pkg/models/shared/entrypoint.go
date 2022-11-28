@@ -9,6 +9,8 @@ const (
 	EntryPointEntryPointTypeEnumAddOn                     EntryPointEntryPointTypeEnum = "ADD_ON"
 )
 
+// EntryPoint
+// A configuration that defines how a deployment is accessed externally.
 type EntryPoint struct {
 	AddOn          *GoogleAppsScriptTypeAddOnEntryPoint        `json:"addOn,omitempty"`
 	EntryPointType *EntryPointEntryPointTypeEnum               `json:"entryPointType,omitempty"`

@@ -8,6 +8,8 @@ const (
 	AutoTextTypeEnumPageCount       AutoTextTypeEnum = "PAGE_COUNT"
 )
 
+// AutoText
+// A ParagraphElement representing a spot in the text that's dynamically replaced with content that can change over time, like a page number.
 type AutoText struct {
 	SuggestedDeletionIds      []string                      `json:"suggestedDeletionIds,omitempty"`
 	SuggestedInsertionIds     []string                      `json:"suggestedInsertionIds,omitempty"`

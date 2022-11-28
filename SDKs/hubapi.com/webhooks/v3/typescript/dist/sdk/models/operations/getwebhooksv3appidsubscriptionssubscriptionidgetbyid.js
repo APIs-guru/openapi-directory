@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetWebhooksV3AppIdSubscriptionsSubscriptionIdGetByIdPathParams = /** @class */ (function (_super) {
     __extends(GetWebhooksV3AppIdSubscriptionsSubscriptionIdGetByIdPathParams, _super);
@@ -30,11 +30,11 @@ var GetWebhooksV3AppIdSubscriptionsSubscriptionIdGetByIdPathParams = /** @class 
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=appId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=appId" }),
         __metadata("design:type", Number)
     ], GetWebhooksV3AppIdSubscriptionsSubscriptionIdGetByIdPathParams.prototype, "appId", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=subscriptionId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=subscriptionId" }),
         __metadata("design:type", Number)
     ], GetWebhooksV3AppIdSubscriptionsSubscriptionIdGetByIdPathParams.prototype, "subscriptionId", void 0);
     return GetWebhooksV3AppIdSubscriptionsSubscriptionIdGetByIdPathParams;
@@ -46,7 +46,7 @@ var GetWebhooksV3AppIdSubscriptionsSubscriptionIdGetByIdSecurity = /** @class */
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=query" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=query" }),
         __metadata("design:type", shared.SchemeDeveloperHapikey)
     ], GetWebhooksV3AppIdSubscriptionsSubscriptionIdGetByIdSecurity.prototype, "developerHapikey", void 0);
     return GetWebhooksV3AppIdSubscriptionsSubscriptionIdGetByIdSecurity;
@@ -58,11 +58,11 @@ var GetWebhooksV3AppIdSubscriptionsSubscriptionIdGetByIdRequest = /** @class */ 
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetWebhooksV3AppIdSubscriptionsSubscriptionIdGetByIdPathParams)
     ], GetWebhooksV3AppIdSubscriptionsSubscriptionIdGetByIdRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetWebhooksV3AppIdSubscriptionsSubscriptionIdGetByIdSecurity)
     ], GetWebhooksV3AppIdSubscriptionsSubscriptionIdGetByIdRequest.prototype, "security", void 0);
     return GetWebhooksV3AppIdSubscriptionsSubscriptionIdGetByIdRequest;
@@ -74,19 +74,19 @@ var GetWebhooksV3AppIdSubscriptionsSubscriptionIdGetByIdResponse = /** @class */
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], GetWebhooksV3AppIdSubscriptionsSubscriptionIdGetByIdResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetWebhooksV3AppIdSubscriptionsSubscriptionIdGetByIdResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetWebhooksV3AppIdSubscriptionsSubscriptionIdGetByIdResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.SubscriptionResponse)
     ], GetWebhooksV3AppIdSubscriptionsSubscriptionIdGetByIdResponse.prototype, "subscriptionResponse", void 0);
     return GetWebhooksV3AppIdSubscriptionsSubscriptionIdGetByIdResponse;

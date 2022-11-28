@@ -22,38 +22,38 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var FailedIpn = /** @class */ (function (_super) {
     __extends(FailedIpn, _super);
     function FailedIpn() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=action" }),
+        SpeakeasyMetadata({ data: "json, name=action" }),
         __metadata("design:type", String)
     ], FailedIpn.prototype, "action", void 0);
     __decorate([
-        Metadata({ data: "json, name=amount" }),
+        SpeakeasyMetadata({ data: "json, name=amount" }),
         __metadata("design:type", String)
     ], FailedIpn.prototype, "amount", void 0);
     __decorate([
-        Metadata({ data: "json, name=contractaddress" }),
+        SpeakeasyMetadata({ data: "json, name=contractaddress" }),
         __metadata("design:type", String)
     ], FailedIpn.prototype, "contractaddress", void 0);
     __decorate([
-        Metadata({ data: "json, name=ethereumaddress" }),
+        SpeakeasyMetadata({ data: "json, name=ethereumaddress" }),
         __metadata("design:type", String)
     ], FailedIpn.prototype, "ethereumaddress", void 0);
     __decorate([
-        Metadata({ data: "json, name=id" }),
+        SpeakeasyMetadata({ data: "json, name=id" }),
         __metadata("design:type", String)
     ], FailedIpn.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "json, name=timestamp" }),
+        SpeakeasyMetadata({ data: "json, name=timestamp" }),
         __metadata("design:type", String)
     ], FailedIpn.prototype, "timestamp", void 0);
     __decorate([
-        Metadata({ data: "json, name=url" }),
+        SpeakeasyMetadata({ data: "json, name=url" }),
         __metadata("design:type", String)
     ], FailedIpn.prototype, "url", void 0);
     return FailedIpn;

@@ -5,24 +5,24 @@ from sdk.models import shared
 
 @dataclass
 class StorageGetFilePathParams:
-    file_id: str = field(default=None, metadata={'path_param': { 'field_name': 'fileId', 'style': 'simple', 'explode': False }})
+    file_id: str = field(metadata={'path_param': { 'field_name': 'fileId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class StorageGetFileSecurity:
-    jwt: shared.SchemeJwt = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
-    project: shared.SchemeProject = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    jwt: shared.SchemeJwt = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    project: shared.SchemeProject = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
     
 
 @dataclass
 class StorageGetFileRequest:
-    path_params: StorageGetFilePathParams = field(default=None)
-    security: StorageGetFileSecurity = field(default=None)
+    path_params: StorageGetFilePathParams = field()
+    security: StorageGetFileSecurity = field()
     
 
 @dataclass
 class StorageGetFileResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     file: Optional[shared.File] = field(default=None)
     

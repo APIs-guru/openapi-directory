@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GroupOrSegment } from "./grouporsegment";
+
 
 
 // SchemaGroup
@@ -8,18 +8,18 @@ import { GroupOrSegment } from "./grouporsegment";
  * An HL7v2 logical group construct.
 **/
 export class SchemaGroup extends SpeakeasyBase {
-  @Metadata({ data: "json, name=choice" })
+  @SpeakeasyMetadata({ data: "json, name=choice" })
   choice?: boolean;
 
-  @Metadata({ data: "json, name=maxOccurs" })
+  @SpeakeasyMetadata({ data: "json, name=maxOccurs" })
   maxOccurs?: number;
 
-  @Metadata({ data: "json, name=members", elemType: shared.GroupOrSegment })
+  @SpeakeasyMetadata({ data: "json, name=members", elemType: GroupOrSegment })
   members?: GroupOrSegment[];
 
-  @Metadata({ data: "json, name=minOccurs" })
+  @SpeakeasyMetadata({ data: "json, name=minOccurs" })
   minOccurs?: number;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 }

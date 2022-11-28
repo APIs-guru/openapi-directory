@@ -1,29 +1,30 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetCalendarsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=all" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=all" })
   all?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=userId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=userId" })
   userId?: number;
 }
 
 
 export class GetCalendarsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetCalendarsQueryParams;
 }
 
 
 export class GetCalendarsResponse extends SpeakeasyBase {
-  @Metadata({ elemType: shared.Calendar })
+  @SpeakeasyMetadata({ elemType: shared.Calendar })
   calendars?: shared.Calendar[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

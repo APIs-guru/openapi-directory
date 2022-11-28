@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var UpdateCanaryPathParams = /** @class */ (function (_super) {
     __extends(UpdateCanaryPathParams, _super);
@@ -30,7 +30,7 @@ var UpdateCanaryPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=name" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=name" }),
         __metadata("design:type", String)
     ], UpdateCanaryPathParams.prototype, "name", void 0);
     return UpdateCanaryPathParams;
@@ -42,31 +42,31 @@ var UpdateCanaryHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
         __metadata("design:type", String)
     ], UpdateCanaryHeaders.prototype, "xAmzAlgorithm", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
         __metadata("design:type", String)
     ], UpdateCanaryHeaders.prototype, "xAmzContentSha256", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
         __metadata("design:type", String)
     ], UpdateCanaryHeaders.prototype, "xAmzCredential", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
         __metadata("design:type", String)
     ], UpdateCanaryHeaders.prototype, "xAmzDate", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
         __metadata("design:type", String)
     ], UpdateCanaryHeaders.prototype, "xAmzSecurityToken", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
         __metadata("design:type", String)
     ], UpdateCanaryHeaders.prototype, "xAmzSignature", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
         __metadata("design:type", String)
     ], UpdateCanaryHeaders.prototype, "xAmzSignedHeaders", void 0);
     return UpdateCanaryHeaders;
@@ -82,23 +82,23 @@ var UpdateCanaryRequestBodyCode = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Handler" }),
+        SpeakeasyMetadata({ data: "json, name=Handler" }),
         __metadata("design:type", String)
     ], UpdateCanaryRequestBodyCode.prototype, "handler", void 0);
     __decorate([
-        Metadata({ data: "json, name=S3Bucket" }),
+        SpeakeasyMetadata({ data: "json, name=S3Bucket" }),
         __metadata("design:type", String)
     ], UpdateCanaryRequestBodyCode.prototype, "s3Bucket", void 0);
     __decorate([
-        Metadata({ data: "json, name=S3Key" }),
+        SpeakeasyMetadata({ data: "json, name=S3Key" }),
         __metadata("design:type", String)
     ], UpdateCanaryRequestBodyCode.prototype, "s3Key", void 0);
     __decorate([
-        Metadata({ data: "json, name=S3Version" }),
+        SpeakeasyMetadata({ data: "json, name=S3Version" }),
         __metadata("design:type", String)
     ], UpdateCanaryRequestBodyCode.prototype, "s3Version", void 0);
     __decorate([
-        Metadata({ data: "json, name=ZipFile" }),
+        SpeakeasyMetadata({ data: "json, name=ZipFile" }),
         __metadata("design:type", String)
     ], UpdateCanaryRequestBodyCode.prototype, "zipFile", void 0);
     return UpdateCanaryRequestBodyCode;
@@ -114,19 +114,19 @@ var UpdateCanaryRequestBodyRunConfig = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=ActiveTracing" }),
+        SpeakeasyMetadata({ data: "json, name=ActiveTracing" }),
         __metadata("design:type", Boolean)
     ], UpdateCanaryRequestBodyRunConfig.prototype, "activeTracing", void 0);
     __decorate([
-        Metadata({ data: "json, name=EnvironmentVariables" }),
+        SpeakeasyMetadata({ data: "json, name=EnvironmentVariables" }),
         __metadata("design:type", Map)
     ], UpdateCanaryRequestBodyRunConfig.prototype, "environmentVariables", void 0);
     __decorate([
-        Metadata({ data: "json, name=MemoryInMB" }),
+        SpeakeasyMetadata({ data: "json, name=MemoryInMB" }),
         __metadata("design:type", Number)
     ], UpdateCanaryRequestBodyRunConfig.prototype, "memoryInMb", void 0);
     __decorate([
-        Metadata({ data: "json, name=TimeoutInSeconds" }),
+        SpeakeasyMetadata({ data: "json, name=TimeoutInSeconds" }),
         __metadata("design:type", Number)
     ], UpdateCanaryRequestBodyRunConfig.prototype, "timeoutInSeconds", void 0);
     return UpdateCanaryRequestBodyRunConfig;
@@ -142,11 +142,11 @@ var UpdateCanaryRequestBodySchedule = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=DurationInSeconds" }),
+        SpeakeasyMetadata({ data: "json, name=DurationInSeconds" }),
         __metadata("design:type", Number)
     ], UpdateCanaryRequestBodySchedule.prototype, "durationInSeconds", void 0);
     __decorate([
-        Metadata({ data: "json, name=Expression" }),
+        SpeakeasyMetadata({ data: "json, name=Expression" }),
         __metadata("design:type", String)
     ], UpdateCanaryRequestBodySchedule.prototype, "expression", void 0);
     return UpdateCanaryRequestBodySchedule;
@@ -162,11 +162,11 @@ var UpdateCanaryRequestBodyVisualReference = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=BaseCanaryRunId" }),
+        SpeakeasyMetadata({ data: "json, name=BaseCanaryRunId" }),
         __metadata("design:type", String)
     ], UpdateCanaryRequestBodyVisualReference.prototype, "baseCanaryRunId", void 0);
     __decorate([
-        Metadata({ data: "json, name=BaseScreenshots", elemType: shared.BaseScreenshot }),
+        SpeakeasyMetadata({ data: "json, name=BaseScreenshots", elemType: shared.BaseScreenshot }),
         __metadata("design:type", Array)
     ], UpdateCanaryRequestBodyVisualReference.prototype, "baseScreenshots", void 0);
     return UpdateCanaryRequestBodyVisualReference;
@@ -182,11 +182,11 @@ var UpdateCanaryRequestBodyVpcConfig = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=SecurityGroupIds" }),
+        SpeakeasyMetadata({ data: "json, name=SecurityGroupIds" }),
         __metadata("design:type", Array)
     ], UpdateCanaryRequestBodyVpcConfig.prototype, "securityGroupIds", void 0);
     __decorate([
-        Metadata({ data: "json, name=SubnetIds" }),
+        SpeakeasyMetadata({ data: "json, name=SubnetIds" }),
         __metadata("design:type", Array)
     ], UpdateCanaryRequestBodyVpcConfig.prototype, "subnetIds", void 0);
     return UpdateCanaryRequestBodyVpcConfig;
@@ -198,39 +198,39 @@ var UpdateCanaryRequestBody = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Code" }),
+        SpeakeasyMetadata({ data: "json, name=Code" }),
         __metadata("design:type", UpdateCanaryRequestBodyCode)
     ], UpdateCanaryRequestBody.prototype, "code", void 0);
     __decorate([
-        Metadata({ data: "json, name=ExecutionRoleArn" }),
+        SpeakeasyMetadata({ data: "json, name=ExecutionRoleArn" }),
         __metadata("design:type", String)
     ], UpdateCanaryRequestBody.prototype, "executionRoleArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=FailureRetentionPeriodInDays" }),
+        SpeakeasyMetadata({ data: "json, name=FailureRetentionPeriodInDays" }),
         __metadata("design:type", Number)
     ], UpdateCanaryRequestBody.prototype, "failureRetentionPeriodInDays", void 0);
     __decorate([
-        Metadata({ data: "json, name=RunConfig" }),
+        SpeakeasyMetadata({ data: "json, name=RunConfig" }),
         __metadata("design:type", UpdateCanaryRequestBodyRunConfig)
     ], UpdateCanaryRequestBody.prototype, "runConfig", void 0);
     __decorate([
-        Metadata({ data: "json, name=RuntimeVersion" }),
+        SpeakeasyMetadata({ data: "json, name=RuntimeVersion" }),
         __metadata("design:type", String)
     ], UpdateCanaryRequestBody.prototype, "runtimeVersion", void 0);
     __decorate([
-        Metadata({ data: "json, name=Schedule" }),
+        SpeakeasyMetadata({ data: "json, name=Schedule" }),
         __metadata("design:type", UpdateCanaryRequestBodySchedule)
     ], UpdateCanaryRequestBody.prototype, "schedule", void 0);
     __decorate([
-        Metadata({ data: "json, name=SuccessRetentionPeriodInDays" }),
+        SpeakeasyMetadata({ data: "json, name=SuccessRetentionPeriodInDays" }),
         __metadata("design:type", Number)
     ], UpdateCanaryRequestBody.prototype, "successRetentionPeriodInDays", void 0);
     __decorate([
-        Metadata({ data: "json, name=VisualReference" }),
+        SpeakeasyMetadata({ data: "json, name=VisualReference" }),
         __metadata("design:type", UpdateCanaryRequestBodyVisualReference)
     ], UpdateCanaryRequestBody.prototype, "visualReference", void 0);
     __decorate([
-        Metadata({ data: "json, name=VpcConfig" }),
+        SpeakeasyMetadata({ data: "json, name=VpcConfig" }),
         __metadata("design:type", UpdateCanaryRequestBodyVpcConfig)
     ], UpdateCanaryRequestBody.prototype, "vpcConfig", void 0);
     return UpdateCanaryRequestBody;
@@ -242,15 +242,15 @@ var UpdateCanaryRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", UpdateCanaryPathParams)
     ], UpdateCanaryRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", UpdateCanaryHeaders)
     ], UpdateCanaryRequest.prototype, "headers", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", UpdateCanaryRequestBody)
     ], UpdateCanaryRequest.prototype, "request", void 0);
     return UpdateCanaryRequest;
@@ -262,31 +262,31 @@ var UpdateCanaryResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], UpdateCanaryResponse.prototype, "conflictException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], UpdateCanaryResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], UpdateCanaryResponse.prototype, "internalServerException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], UpdateCanaryResponse.prototype, "resourceNotFoundException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], UpdateCanaryResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Map)
     ], UpdateCanaryResponse.prototype, "updateCanaryResponse", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], UpdateCanaryResponse.prototype, "validationException", void 0);
     return UpdateCanaryResponse;

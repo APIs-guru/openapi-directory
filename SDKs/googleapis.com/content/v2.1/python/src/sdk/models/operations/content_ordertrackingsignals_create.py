@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class ContentOrdertrackingsignalsCreatePathParams:
-    merchant_id: str = field(default=None, metadata={'path_param': { 'field_name': 'merchantId', 'style': 'simple', 'explode': False }})
+    merchant_id: str = field(metadata={'path_param': { 'field_name': 'merchantId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,21 +26,21 @@ class ContentOrdertrackingsignalsCreateQueryParams:
 
 @dataclass
 class ContentOrdertrackingsignalsCreateSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class ContentOrdertrackingsignalsCreateRequest:
-    path_params: ContentOrdertrackingsignalsCreatePathParams = field(default=None)
-    query_params: ContentOrdertrackingsignalsCreateQueryParams = field(default=None)
-    request: Optional[shared.OrderTrackingSignal] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: ContentOrdertrackingsignalsCreateSecurity = field(default=None)
+    path_params: ContentOrdertrackingsignalsCreatePathParams = field()
+    query_params: ContentOrdertrackingsignalsCreateQueryParams = field()
+    security: ContentOrdertrackingsignalsCreateSecurity = field()
+    request: Optional[shared.OrderTrackingSignalInput] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class ContentOrdertrackingsignalsCreateResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     order_tracking_signal: Optional[shared.OrderTrackingSignal] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SchemaExtensionStatusEnum } from "./schemaextensionstatusenum";
 // SchemaExtensionInfo
 /**
@@ -34,31 +34,31 @@ var SchemaExtensionInfo = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Description" }),
+        SpeakeasyMetadata({ data: "json, name=Description" }),
         __metadata("design:type", String)
     ], SchemaExtensionInfo.prototype, "description", void 0);
     __decorate([
-        Metadata({ data: "json, name=DirectoryId" }),
+        SpeakeasyMetadata({ data: "json, name=DirectoryId" }),
         __metadata("design:type", String)
     ], SchemaExtensionInfo.prototype, "directoryId", void 0);
     __decorate([
-        Metadata({ data: "json, name=EndDateTime" }),
+        SpeakeasyMetadata({ data: "json, name=EndDateTime" }),
         __metadata("design:type", Date)
     ], SchemaExtensionInfo.prototype, "endDateTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=SchemaExtensionId" }),
+        SpeakeasyMetadata({ data: "json, name=SchemaExtensionId" }),
         __metadata("design:type", String)
     ], SchemaExtensionInfo.prototype, "schemaExtensionId", void 0);
     __decorate([
-        Metadata({ data: "json, name=SchemaExtensionStatus" }),
+        SpeakeasyMetadata({ data: "json, name=SchemaExtensionStatus" }),
         __metadata("design:type", String)
     ], SchemaExtensionInfo.prototype, "schemaExtensionStatus", void 0);
     __decorate([
-        Metadata({ data: "json, name=SchemaExtensionStatusReason" }),
+        SpeakeasyMetadata({ data: "json, name=SchemaExtensionStatusReason" }),
         __metadata("design:type", String)
     ], SchemaExtensionInfo.prototype, "schemaExtensionStatusReason", void 0);
     __decorate([
-        Metadata({ data: "json, name=StartDateTime" }),
+        SpeakeasyMetadata({ data: "json, name=StartDateTime" }),
         __metadata("design:type", Date)
     ], SchemaExtensionInfo.prototype, "startDateTime", void 0);
     return SchemaExtensionInfo;

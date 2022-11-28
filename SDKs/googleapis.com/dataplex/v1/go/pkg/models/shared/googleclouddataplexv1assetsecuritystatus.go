@@ -9,6 +9,8 @@ const (
 	GoogleCloudDataplexV1AssetSecurityStatusStateEnumError            GoogleCloudDataplexV1AssetSecurityStatusStateEnum = "ERROR"
 )
 
+// GoogleCloudDataplexV1AssetSecurityStatus
+// Security policy status of the asset. Data security policy, i.e., readers, writers & owners, should be specified in the lake/zone/asset IAM policy.
 type GoogleCloudDataplexV1AssetSecurityStatus struct {
 	Message    *string                                            `json:"message,omitempty"`
 	State      *GoogleCloudDataplexV1AssetSecurityStatusStateEnum `json:"state,omitempty"`

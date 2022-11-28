@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { VolumeConfiguration } from "./volumeconfiguration";
 import { EbsFindingEnum } from "./ebsfindingenum";
 import { EbsUtilizationMetric } from "./ebsutilizationmetric";

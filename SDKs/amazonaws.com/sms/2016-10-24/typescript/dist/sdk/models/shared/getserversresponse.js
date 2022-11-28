@@ -22,28 +22,28 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ServerCatalogStatusEnum } from "./servercatalogstatusenum";
+import { Server } from "./server";
 var GetServersResponse = /** @class */ (function (_super) {
     __extends(GetServersResponse, _super);
     function GetServersResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=lastModifiedOn" }),
+        SpeakeasyMetadata({ data: "json, name=lastModifiedOn" }),
         __metadata("design:type", Date)
     ], GetServersResponse.prototype, "lastModifiedOn", void 0);
     __decorate([
-        Metadata({ data: "json, name=nextToken" }),
+        SpeakeasyMetadata({ data: "json, name=nextToken" }),
         __metadata("design:type", String)
     ], GetServersResponse.prototype, "nextToken", void 0);
     __decorate([
-        Metadata({ data: "json, name=serverCatalogStatus" }),
+        SpeakeasyMetadata({ data: "json, name=serverCatalogStatus" }),
         __metadata("design:type", String)
     ], GetServersResponse.prototype, "serverCatalogStatus", void 0);
     __decorate([
-        Metadata({ data: "json, name=serverList", elemType: shared.Server }),
+        SpeakeasyMetadata({ data: "json, name=serverList", elemType: Server }),
         __metadata("design:type", Array)
     ], GetServersResponse.prototype, "serverList", void 0);
     return GetServersResponse;

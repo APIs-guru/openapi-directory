@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ObjectReference } from "./objectreference";
+
 
 
 // BatchListObjectParents
@@ -7,12 +8,12 @@ import { ObjectReference } from "./objectreference";
  * Lists parent objects that are associated with a given object in pagination fashion.
 **/
 export class BatchListObjectParents extends SpeakeasyBase {
-  @Metadata({ data: "json, name=MaxResults" })
+  @SpeakeasyMetadata({ data: "json, name=MaxResults" })
   maxResults?: number;
 
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=ObjectReference" })
+  @SpeakeasyMetadata({ data: "json, name=ObjectReference" })
   objectReference: ObjectReference;
 }

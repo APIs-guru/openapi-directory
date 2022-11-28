@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AwsDynamoDbTableKeySchema
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A component of the key schema for the DynamoDB table, a global secondary index, or a local secondary index.
 **/
 export class AwsDynamoDbTableKeySchema extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AttributeName" })
+  @SpeakeasyMetadata({ data: "json, name=AttributeName" })
   attributeName?: string;
 
-  @Metadata({ data: "json, name=KeyType" })
+  @SpeakeasyMetadata({ data: "json, name=KeyType" })
   keyType?: string;
 }

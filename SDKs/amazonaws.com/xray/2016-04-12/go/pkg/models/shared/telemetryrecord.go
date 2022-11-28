@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// TelemetryRecord
+// <p/>
 type TelemetryRecord struct {
 	BackendConnectionErrors *BackendConnectionErrors `json:"BackendConnectionErrors,omitempty"`
 	SegmentsReceivedCount   *int64                   `json:"SegmentsReceivedCount,omitempty"`

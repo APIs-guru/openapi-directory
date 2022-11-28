@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // CreateMilestoneOutput
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Output of a create milestone call.
 **/
 export class CreateMilestoneOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=MilestoneNumber" })
+  @SpeakeasyMetadata({ data: "json, name=MilestoneNumber" })
   milestoneNumber?: number;
 
-  @Metadata({ data: "json, name=WorkloadId" })
+  @SpeakeasyMetadata({ data: "json, name=WorkloadId" })
   workloadId?: string;
 }

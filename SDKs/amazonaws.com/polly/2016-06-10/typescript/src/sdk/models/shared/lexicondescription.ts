@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { LexiconAttributes } from "./lexiconattributes";
+
 
 
 // LexiconDescription
@@ -7,9 +8,9 @@ import { LexiconAttributes } from "./lexiconattributes";
  * Describes the content of the lexicon.
 **/
 export class LexiconDescription extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Attributes" })
+  @SpeakeasyMetadata({ data: "json, name=Attributes" })
   attributes?: LexiconAttributes;
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name?: string;
 }

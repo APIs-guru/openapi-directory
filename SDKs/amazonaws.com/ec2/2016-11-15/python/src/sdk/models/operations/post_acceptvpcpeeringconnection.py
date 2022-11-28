@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostAcceptVpcPeeringConnectionActionEnum(str, Enum):
     ACCEPT_VPC_PEERING_CONNECTION = "AcceptVpcPeeringConnection"
@@ -10,8 +14,8 @@ class PostAcceptVpcPeeringConnectionVersionEnum(str, Enum):
 
 @dataclass
 class PostAcceptVpcPeeringConnectionQueryParams:
-    action: PostAcceptVpcPeeringConnectionActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostAcceptVpcPeeringConnectionVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostAcceptVpcPeeringConnectionActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostAcceptVpcPeeringConnectionVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostAcceptVpcPeeringConnectionHeaders:
 
 @dataclass
 class PostAcceptVpcPeeringConnectionRequest:
-    query_params: PostAcceptVpcPeeringConnectionQueryParams = field(default=None)
-    headers: PostAcceptVpcPeeringConnectionHeaders = field(default=None)
+    headers: PostAcceptVpcPeeringConnectionHeaders = field()
+    query_params: PostAcceptVpcPeeringConnectionQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostAcceptVpcPeeringConnectionResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

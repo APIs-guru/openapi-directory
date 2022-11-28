@@ -1,14 +1,19 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import typehint_enum
-from . import field
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class SQLParameter:
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    type_hint: Optional[typehint_enum.TypeHintEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'typeHint' }})
-    value: Optional[field.Field] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'value' }})
+    r"""SQLParameter
+    A parameter used in a SQL statement.
+    """
+    
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    type_hint: Optional[TypeHintEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('typeHint') }})
+    value: Optional[Field] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('value') }})
     

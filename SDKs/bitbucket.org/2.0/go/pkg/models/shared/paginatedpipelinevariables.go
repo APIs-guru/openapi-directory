@@ -1,5 +1,7 @@
 package shared
 
+// PaginatedPipelineVariables
+// A paged list of variables.
 type PaginatedPipelineVariables struct {
 	Next     *string                  `json:"next,omitempty"`
 	Page     *int64                   `json:"page,omitempty"`

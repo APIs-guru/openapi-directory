@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { AssetReportCreateRequestOptions } from "./assetreportcreaterequestoptions";
 /**
  * AssetReportCreateRequest defines the request schema for `/asset_report/create`

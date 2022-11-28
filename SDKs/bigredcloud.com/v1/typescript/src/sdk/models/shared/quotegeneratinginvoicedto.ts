@@ -1,11 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SalesInvoiceCreditNoteDto } from "./salesinvoicecreditnotedto";
 
 
+
 export class QuoteGeneratingInvoiceDto extends SpeakeasyBase {
-  @Metadata({ data: "json, name=quoteId" })
+  @SpeakeasyMetadata({ data: "json, name=quoteId" })
   quoteId?: number;
 
-  @Metadata({ data: "json, name=saleInvoice" })
+  @SpeakeasyMetadata({ data: "json, name=saleInvoice" })
   saleInvoice?: SalesInvoiceCreditNoteDto;
 }

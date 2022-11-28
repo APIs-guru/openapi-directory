@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Alarm
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Represents a CloudWatch alarm associated with a scaling policy.
 **/
 export class Alarm extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AlarmARN" })
+  @SpeakeasyMetadata({ data: "json, name=AlarmARN" })
   alarmArn: string;
 
-  @Metadata({ data: "json, name=AlarmName" })
+  @SpeakeasyMetadata({ data: "json, name=AlarmName" })
   alarmName: string;
 }

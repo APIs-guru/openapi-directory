@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudDialogflowCxV3beta1TestConfig
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Represents configurations for a test case.
 **/
 export class GoogleCloudDialogflowCxV3beta1TestConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=flow" })
+  @SpeakeasyMetadata({ data: "json, name=flow" })
   flow?: string;
 
-  @Metadata({ data: "json, name=page" })
+  @SpeakeasyMetadata({ data: "json, name=page" })
   page?: string;
 
-  @Metadata({ data: "json, name=trackingParameters" })
+  @SpeakeasyMetadata({ data: "json, name=trackingParameters" })
   trackingParameters?: string[];
 }

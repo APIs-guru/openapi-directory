@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class ItemFilterEnum(str, Enum):
     IS_FOLDER = "IsFolder"

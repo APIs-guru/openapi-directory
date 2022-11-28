@@ -1,5 +1,7 @@
 package shared
 
+// StatusEntity
+// Test webhook.
 type StatusEntity struct {
 	ClickwrapBody *string       `json:"clickwrap_body,omitempty"`
 	ClickwrapID   *int32        `json:"clickwrap_id,omitempty"`

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Parameter
@@ -6,21 +7,21 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Describes an individual setting that controls some aspect of MemoryDB behavior.
 **/
 export class Parameter extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AllowedValues" })
+  @SpeakeasyMetadata({ data: "json, name=AllowedValues" })
   allowedValues?: string;
 
-  @Metadata({ data: "json, name=DataType" })
+  @SpeakeasyMetadata({ data: "json, name=DataType" })
   dataType?: string;
 
-  @Metadata({ data: "json, name=Description" })
+  @SpeakeasyMetadata({ data: "json, name=Description" })
   description?: string;
 
-  @Metadata({ data: "json, name=MinimumEngineVersion" })
+  @SpeakeasyMetadata({ data: "json, name=MinimumEngineVersion" })
   minimumEngineVersion?: string;
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name?: string;
 
-  @Metadata({ data: "json, name=Value" })
+  @SpeakeasyMetadata({ data: "json, name=Value" })
   value?: string;
 }

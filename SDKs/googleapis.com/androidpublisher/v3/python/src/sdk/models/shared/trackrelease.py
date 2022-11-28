@@ -1,8 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import countrytargeting
-from . import localizedtext
+from sdk import utils
+from . import *
 
 class TrackReleaseStatusEnum(str, Enum):
     STATUS_UNSPECIFIED = "statusUnspecified"
@@ -15,11 +19,15 @@ class TrackReleaseStatusEnum(str, Enum):
 @dataclass_json
 @dataclass
 class TrackRelease:
-    country_targeting: Optional[countrytargeting.CountryTargeting] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'countryTargeting' }})
-    in_app_update_priority: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'inAppUpdatePriority' }})
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    release_notes: Optional[List[localizedtext.LocalizedText]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'releaseNotes' }})
-    status: Optional[TrackReleaseStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
-    user_fraction: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'userFraction' }})
-    version_codes: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'versionCodes' }})
+    r"""TrackRelease
+    A release within a track.
+    """
+    
+    country_targeting: Optional[CountryTargeting] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('countryTargeting') }})
+    in_app_update_priority: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('inAppUpdatePriority') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    release_notes: Optional[List[LocalizedText]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('releaseNotes') }})
+    status: Optional[TrackReleaseStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('status') }})
+    user_fraction: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('userFraction') }})
+    version_codes: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('versionCodes') }})
     

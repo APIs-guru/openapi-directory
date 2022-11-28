@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class ManagedCredentialsStatusEnum(str, Enum):
     ENABLED_ON_CREATE = "ENABLED_ON_CREATE"

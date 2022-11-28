@@ -19,6 +19,8 @@ type UpdateDataSourceHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// UpdateDataSourceRequestBodyDynamodbConfig
+// Describes an Amazon DynamoDB data source configuration.
 type UpdateDataSourceRequestBodyDynamodbConfig struct {
 	AwsRegion            *string                 `json:"awsRegion,omitempty"`
 	DeltaSyncConfig      *shared.DeltaSyncConfig `json:"deltaSyncConfig,omitempty"`
@@ -27,20 +29,28 @@ type UpdateDataSourceRequestBodyDynamodbConfig struct {
 	Versioned            *bool                   `json:"versioned,omitempty"`
 }
 
+// UpdateDataSourceRequestBodyElasticsearchConfig
+// Describes an Elasticsearch data source configuration.
 type UpdateDataSourceRequestBodyElasticsearchConfig struct {
 	AwsRegion *string `json:"awsRegion,omitempty"`
 	Endpoint  *string `json:"endpoint,omitempty"`
 }
 
+// UpdateDataSourceRequestBodyHTTPConfig
+// Describes an HTTP data source configuration.
 type UpdateDataSourceRequestBodyHTTPConfig struct {
 	AuthorizationConfig *shared.AuthorizationConfig `json:"authorizationConfig,omitempty"`
 	Endpoint            *string                     `json:"endpoint,omitempty"`
 }
 
+// UpdateDataSourceRequestBodyLambdaConfig
+// Describes an Amazon Web Services Lambda data source configuration.
 type UpdateDataSourceRequestBodyLambdaConfig struct {
 	LambdaFunctionArn *string `json:"lambdaFunctionArn,omitempty"`
 }
 
+// UpdateDataSourceRequestBodyRelationalDatabaseConfig
+// Describes a relational database data source configuration.
 type UpdateDataSourceRequestBodyRelationalDatabaseConfig struct {
 	RdsHTTPEndpointConfig        *shared.RdsHTTPEndpointConfig            `json:"rdsHttpEndpointConfig,omitempty"`
 	RelationalDatabaseSourceType *shared.RelationalDatabaseSourceTypeEnum `json:"relationalDatabaseSourceType,omitempty"`

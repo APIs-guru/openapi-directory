@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class WritableInterfaceTemplateTypeEnum(str, Enum):
     VIRTUAL = "virtual"
@@ -79,10 +81,9 @@ class WritableInterfaceTemplateTypeEnum(str, Enum):
 
 @dataclass_json
 @dataclass
-class WritableInterfaceTemplate:
-    device_type: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'device_type' }})
-    id: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
-    mgmt_only: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'mgmt_only' }})
-    name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    type: WritableInterfaceTemplateTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+class WritableInterfaceTemplateInput:
+    device_type: int = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('device_type') }})
+    name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    type: WritableInterfaceTemplateTypeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('type') }})
+    mgmt_only: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('mgmt_only') }})
     

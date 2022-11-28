@@ -17,15 +17,15 @@ type OrgsListAppInstallationsHeaders struct {
 	Accept string `header:"style=simple,explode=false,name=accept"`
 }
 
+type OrgsListAppInstallations200ApplicationJSON struct {
+	Installations []shared.InstallationGhes2 `json:"installations"`
+	TotalCount    int64                      `json:"total_count"`
+}
+
 type OrgsListAppInstallationsRequest struct {
 	PathParams  OrgsListAppInstallationsPathParams
 	QueryParams OrgsListAppInstallationsQueryParams
 	Headers     OrgsListAppInstallationsHeaders
-}
-
-type OrgsListAppInstallations200ApplicationJSON struct {
-	Installations []shared.InstallationGhes2 `json:"installations"`
-	TotalCount    int64                      `json:"total_count"`
 }
 
 type OrgsListAppInstallationsResponse struct {

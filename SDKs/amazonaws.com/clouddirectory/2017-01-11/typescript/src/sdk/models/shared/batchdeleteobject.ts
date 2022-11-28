@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ObjectReference } from "./objectreference";
+
 
 
 // BatchDeleteObject
@@ -7,6 +8,6 @@ import { ObjectReference } from "./objectreference";
  * Represents the output of a <a>DeleteObject</a> operation.
 **/
 export class BatchDeleteObject extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ObjectReference" })
+  @SpeakeasyMetadata({ data: "json, name=ObjectReference" })
   objectReference: ObjectReference;
 }

@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudApigeeV1DeveloperBalanceWallet } from "./googlecloudapigeev1developerbalancewallet";
+
 
 
 // GoogleCloudApigeeV1DeveloperBalance
@@ -8,6 +8,6 @@ import { GoogleCloudApigeeV1DeveloperBalanceWallet } from "./googlecloudapigeev1
  * Account balance for the developer.
 **/
 export class GoogleCloudApigeeV1DeveloperBalance extends SpeakeasyBase {
-  @Metadata({ data: "json, name=wallets", elemType: shared.GoogleCloudApigeeV1DeveloperBalanceWallet })
+  @SpeakeasyMetadata({ data: "json, name=wallets", elemType: GoogleCloudApigeeV1DeveloperBalanceWallet })
   wallets?: GoogleCloudApigeeV1DeveloperBalanceWallet[];
 }

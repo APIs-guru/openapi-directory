@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class AccountSelectionCardinalityEnum(str, Enum):
     SINGLE_SELECT = "SINGLE_SELECT"

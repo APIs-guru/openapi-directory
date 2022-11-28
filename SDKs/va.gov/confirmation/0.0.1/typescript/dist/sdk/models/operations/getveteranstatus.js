@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetVeteranStatusSecurity = /** @class */ (function (_super) {
     __extends(GetVeteranStatusSecurity, _super);
@@ -30,7 +30,7 @@ var GetVeteranStatusSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeApikey)
     ], GetVeteranStatusSecurity.prototype, "apikey", void 0);
     return GetVeteranStatusSecurity;
@@ -42,11 +42,11 @@ var GetVeteranStatusRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", shared.VeteranStatusRequest)
     ], GetVeteranStatusRequest.prototype, "request", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetVeteranStatusSecurity)
     ], GetVeteranStatusRequest.prototype, "security", void 0);
     return GetVeteranStatusRequest;
@@ -58,23 +58,23 @@ var GetVeteranStatusResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.ApiError)
     ], GetVeteranStatusResponse.prototype, "apiError", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.AuthorizationError)
     ], GetVeteranStatusResponse.prototype, "authorizationError", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetVeteranStatusResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetVeteranStatusResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.VeteranStatusConfirmation)
     ], GetVeteranStatusResponse.prototype, "veteranStatusConfirmation", void 0);
     return GetVeteranStatusResponse;

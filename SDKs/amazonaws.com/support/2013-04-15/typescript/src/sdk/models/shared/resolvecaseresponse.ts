@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ResolveCaseResponse
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The status of the case returned by the <a>ResolveCase</a> operation.
 **/
 export class ResolveCaseResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=finalCaseStatus" })
+  @SpeakeasyMetadata({ data: "json, name=finalCaseStatus" })
   finalCaseStatus?: string;
 
-  @Metadata({ data: "json, name=initialCaseStatus" })
+  @SpeakeasyMetadata({ data: "json, name=initialCaseStatus" })
   initialCaseStatus?: string;
 }

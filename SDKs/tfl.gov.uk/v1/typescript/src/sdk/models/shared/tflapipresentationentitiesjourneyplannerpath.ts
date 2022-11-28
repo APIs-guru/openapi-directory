@@ -1,16 +1,16 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TflApiCommonJourneyPlannerJpElevation } from "./tflapicommonjourneyplannerjpelevation";
 import { TflApiPresentationEntitiesIdentifier } from "./tflapipresentationentitiesidentifier";
 
 
+
 export class TflApiPresentationEntitiesJourneyPlannerPath extends SpeakeasyBase {
-  @Metadata({ data: "json, name=elevation", elemType: shared.TflApiCommonJourneyPlannerJpElevation })
+  @SpeakeasyMetadata({ data: "json, name=elevation", elemType: TflApiCommonJourneyPlannerJpElevation })
   elevation?: TflApiCommonJourneyPlannerJpElevation[];
 
-  @Metadata({ data: "json, name=lineString" })
+  @SpeakeasyMetadata({ data: "json, name=lineString" })
   lineString?: string;
 
-  @Metadata({ data: "json, name=stopPoints", elemType: shared.TflApiPresentationEntitiesIdentifier })
+  @SpeakeasyMetadata({ data: "json, name=stopPoints", elemType: TflApiPresentationEntitiesIdentifier })
   stopPoints?: TflApiPresentationEntitiesIdentifier[];
 }

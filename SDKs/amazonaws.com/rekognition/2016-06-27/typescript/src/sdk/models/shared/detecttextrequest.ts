@@ -1,12 +1,13 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DetectTextFilters } from "./detecttextfilters";
 import { Image } from "./image";
 
 
+
 export class DetectTextRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Filters" })
+  @SpeakeasyMetadata({ data: "json, name=Filters" })
   filters?: DetectTextFilters;
 
-  @Metadata({ data: "json, name=Image" })
+  @SpeakeasyMetadata({ data: "json, name=Image" })
   image: Image;
 }

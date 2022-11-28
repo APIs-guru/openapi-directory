@@ -1,5 +1,7 @@
 package shared
 
+// LiveStream
+// A live stream describes a live ingestion point.
 type LiveStream struct {
 	Cdn            *CdnSettings              `json:"cdn,omitempty"`
 	ContentDetails *LiveStreamContentDetails `json:"contentDetails,omitempty"`

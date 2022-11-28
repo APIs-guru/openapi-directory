@@ -10,7 +10,7 @@ type IpamServicesPartialUpdatePathParams struct {
 
 type IpamServicesPartialUpdateRequest struct {
 	PathParams IpamServicesPartialUpdatePathParams
-	Request    shared.WritableService `request:"mediaType=application/json"`
+	Request    shared.WritableServiceInput `request:"mediaType=application/json"`
 }
 
 type IpamServicesPartialUpdateResponse struct {

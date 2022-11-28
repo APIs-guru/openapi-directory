@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ThrottleSettings } from "./throttlesettings";
 // Account
 /**
@@ -34,19 +34,19 @@ var Account = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=apiKeyVersion" }),
+        SpeakeasyMetadata({ data: "json, name=apiKeyVersion" }),
         __metadata("design:type", String)
     ], Account.prototype, "apiKeyVersion", void 0);
     __decorate([
-        Metadata({ data: "json, name=cloudwatchRoleArn" }),
+        SpeakeasyMetadata({ data: "json, name=cloudwatchRoleArn" }),
         __metadata("design:type", String)
     ], Account.prototype, "cloudwatchRoleArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=features" }),
+        SpeakeasyMetadata({ data: "json, name=features" }),
         __metadata("design:type", Array)
     ], Account.prototype, "features", void 0);
     __decorate([
-        Metadata({ data: "json, name=throttleSettings" }),
+        SpeakeasyMetadata({ data: "json, name=throttleSettings" }),
         __metadata("design:type", ThrottleSettings)
     ], Account.prototype, "throttleSettings", void 0);
     return Account;

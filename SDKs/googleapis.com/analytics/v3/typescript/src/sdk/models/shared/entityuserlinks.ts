@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { EntityUserLink } from "./entityuserlink";
+
 
 
 // EntityUserLinks
@@ -8,24 +8,24 @@ import { EntityUserLink } from "./entityuserlink";
  * An entity user link collection provides a list of Analytics ACL links Each resource in this collection corresponds to a single link.
 **/
 export class EntityUserLinks extends SpeakeasyBase {
-  @Metadata({ data: "json, name=items", elemType: shared.EntityUserLink })
+  @SpeakeasyMetadata({ data: "json, name=items", elemType: EntityUserLink })
   items?: EntityUserLink[];
 
-  @Metadata({ data: "json, name=itemsPerPage" })
+  @SpeakeasyMetadata({ data: "json, name=itemsPerPage" })
   itemsPerPage?: number;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=nextLink" })
+  @SpeakeasyMetadata({ data: "json, name=nextLink" })
   nextLink?: string;
 
-  @Metadata({ data: "json, name=previousLink" })
+  @SpeakeasyMetadata({ data: "json, name=previousLink" })
   previousLink?: string;
 
-  @Metadata({ data: "json, name=startIndex" })
+  @SpeakeasyMetadata({ data: "json, name=startIndex" })
   startIndex?: number;
 
-  @Metadata({ data: "json, name=totalResults" })
+  @SpeakeasyMetadata({ data: "json, name=totalResults" })
   totalResults?: number;
 }

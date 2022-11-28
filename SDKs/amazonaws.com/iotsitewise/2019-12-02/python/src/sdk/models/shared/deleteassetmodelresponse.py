@@ -1,10 +1,11 @@
 from dataclasses import dataclass, field
 from dataclasses_json import dataclass_json
-from . import assetmodelstatus
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class DeleteAssetModelResponse:
-    asset_model_status: assetmodelstatus.AssetModelStatus = field(default=None, metadata={'dataclasses_json': { 'field_name': 'assetModelStatus' }})
+    asset_model_status: AssetModelStatus = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('assetModelStatus') }})
     

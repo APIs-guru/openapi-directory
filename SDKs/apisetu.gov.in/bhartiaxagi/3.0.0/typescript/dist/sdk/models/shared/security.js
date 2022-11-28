@@ -22,28 +22,28 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-var SchemeApiKey = /** @class */ (function (_super) {
-    __extends(SchemeApiKey, _super);
-    function SchemeApiKey() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    __decorate([
-        Metadata({ data: "security, name=X-APISETU-APIKEY" }),
-        __metadata("design:type", String)
-    ], SchemeApiKey.prototype, "apiKey", void 0);
-    return SchemeApiKey;
-}(SpeakeasyBase));
-export { SchemeApiKey };
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var SchemeClientId = /** @class */ (function (_super) {
     __extends(SchemeClientId, _super);
     function SchemeClientId() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, name=X-APISETU-CLIENTID" }),
+        SpeakeasyMetadata({ data: "security, name=X-APISETU-CLIENTID" }),
         __metadata("design:type", String)
     ], SchemeClientId.prototype, "apiKey", void 0);
     return SchemeClientId;
 }(SpeakeasyBase));
 export { SchemeClientId };
+var SchemeApiKey = /** @class */ (function (_super) {
+    __extends(SchemeApiKey, _super);
+    function SchemeApiKey() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "security, name=X-APISETU-APIKEY" }),
+        __metadata("design:type", String)
+    ], SchemeApiKey.prototype, "apiKey", void 0);
+    return SchemeApiKey;
+}(SpeakeasyBase));
+export { SchemeApiKey };

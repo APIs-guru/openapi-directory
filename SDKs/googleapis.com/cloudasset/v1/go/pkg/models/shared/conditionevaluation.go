@@ -9,6 +9,8 @@ const (
 	ConditionEvaluationEvaluationValueEnumConditional                ConditionEvaluationEvaluationValueEnum = "CONDITIONAL"
 )
 
+// ConditionEvaluation
+// The Condition evaluation.
 type ConditionEvaluation struct {
 	EvaluationValue *ConditionEvaluationEvaluationValueEnum `json:"evaluationValue,omitempty"`
 }

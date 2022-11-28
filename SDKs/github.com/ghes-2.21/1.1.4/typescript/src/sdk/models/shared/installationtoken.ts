@@ -1,25 +1,25 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Repository } from "./repository";
 
 
+
 export class InstallationTokenPermissions extends SpeakeasyBase {
-  @Metadata({ data: "json, name=contents" })
+  @SpeakeasyMetadata({ data: "json, name=contents" })
   contents?: string;
 
-  @Metadata({ data: "json, name=issues" })
+  @SpeakeasyMetadata({ data: "json, name=issues" })
   issues?: string;
 
-  @Metadata({ data: "json, name=metadata" })
+  @SpeakeasyMetadata({ data: "json, name=metadata" })
   metadata?: string;
 
-  @Metadata({ data: "json, name=single_file" })
+  @SpeakeasyMetadata({ data: "json, name=single_file" })
   singleFile?: string;
 }
 
 export enum InstallationTokenRepositorySelectionEnum {
-    All = "all"
-,    Selected = "selected"
+    All = "all",
+    Selected = "selected"
 }
 
 
@@ -28,27 +28,27 @@ export enum InstallationTokenRepositorySelectionEnum {
  * Authentication token for a GitHub App installed on a user or org.
 **/
 export class InstallationToken extends SpeakeasyBase {
-  @Metadata({ data: "json, name=expires_at" })
+  @SpeakeasyMetadata({ data: "json, name=expires_at" })
   expiresAt: string;
 
-  @Metadata({ data: "json, name=has_multiple_single_files" })
+  @SpeakeasyMetadata({ data: "json, name=has_multiple_single_files" })
   hasMultipleSingleFiles?: boolean;
 
-  @Metadata({ data: "json, name=permissions" })
+  @SpeakeasyMetadata({ data: "json, name=permissions" })
   permissions?: InstallationTokenPermissions;
 
-  @Metadata({ data: "json, name=repositories", elemType: shared.Repository })
+  @SpeakeasyMetadata({ data: "json, name=repositories", elemType: Repository })
   repositories?: Repository[];
 
-  @Metadata({ data: "json, name=repository_selection" })
+  @SpeakeasyMetadata({ data: "json, name=repository_selection" })
   repositorySelection?: InstallationTokenRepositorySelectionEnum;
 
-  @Metadata({ data: "json, name=single_file" })
+  @SpeakeasyMetadata({ data: "json, name=single_file" })
   singleFile?: string;
 
-  @Metadata({ data: "json, name=single_file_paths" })
+  @SpeakeasyMetadata({ data: "json, name=single_file_paths" })
   singleFilePaths?: string[];
 
-  @Metadata({ data: "json, name=token" })
+  @SpeakeasyMetadata({ data: "json, name=token" })
   token: string;
 }

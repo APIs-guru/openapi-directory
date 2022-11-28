@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { Greengrass } from "./greengrass";
 import { GreengrassV2 } from "./greengrassv2";
 /**

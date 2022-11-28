@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BatchDeleteImportDataErrorCodeEnum } from "./batchdeleteimportdataerrorcodeenum";
+
 
 
 // BatchDeleteImportDataError
@@ -7,12 +8,12 @@ import { BatchDeleteImportDataErrorCodeEnum } from "./batchdeleteimportdataerror
  * Error messages returned for each import task that you deleted as a response for this command.
 **/
 export class BatchDeleteImportDataError extends SpeakeasyBase {
-  @Metadata({ data: "json, name=errorCode" })
+  @SpeakeasyMetadata({ data: "json, name=errorCode" })
   errorCode?: BatchDeleteImportDataErrorCodeEnum;
 
-  @Metadata({ data: "json, name=errorDescription" })
+  @SpeakeasyMetadata({ data: "json, name=errorDescription" })
   errorDescription?: string;
 
-  @Metadata({ data: "json, name=importTaskId" })
+  @SpeakeasyMetadata({ data: "json, name=importTaskId" })
   importTaskId?: string;
 }

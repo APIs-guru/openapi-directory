@@ -5,25 +5,25 @@ from sdk.models import shared
 
 @dataclass
 class ProductAPIDetailsQueryParams:
-    id: int = field(default=None, metadata={'query_param': { 'field_name': 'id', 'style': 'form', 'explode': True }})
+    id: int = field(metadata={'query_param': { 'field_name': 'id', 'style': 'form', 'explode': True }})
     
 
 @dataclass
 class ProductAPIDetailsHeaders:
-    x_auth_key: str = field(default=None, metadata={'header': { 'field_name': 'x-auth-key', 'style': 'simple', 'explode': False }})
-    x_auth_secret: str = field(default=None, metadata={'header': { 'field_name': 'x-auth-secret', 'style': 'simple', 'explode': False }})
+    x_auth_key: str = field(metadata={'header': { 'field_name': 'x-auth-key', 'style': 'simple', 'explode': False }})
+    x_auth_secret: str = field(metadata={'header': { 'field_name': 'x-auth-secret', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class ProductAPIDetailsRequest:
-    query_params: ProductAPIDetailsQueryParams = field(default=None)
-    headers: ProductAPIDetailsHeaders = field(default=None)
+    headers: ProductAPIDetailsHeaders = field()
+    query_params: ProductAPIDetailsQueryParams = field()
     
 
 @dataclass
 class ProductAPIDetailsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     product_full_details_api_model: Optional[shared.ProductFullDetailsAPIModel] = field(default=None)
-    status_code: int = field(default=None)
     

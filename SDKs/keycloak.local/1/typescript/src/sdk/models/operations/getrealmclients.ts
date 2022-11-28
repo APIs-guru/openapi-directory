@@ -1,47 +1,48 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetRealmClientsPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=realm" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=realm" })
   realm: string;
 }
 
 
 export class GetRealmClientsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=clientId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=clientId" })
   clientId?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=first" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=first" })
   first?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=max" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=max" })
   max?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=search" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=search" })
   search?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=viewableOnly" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=viewableOnly" })
   viewableOnly?: boolean;
 }
 
 
 export class GetRealmClientsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetRealmClientsPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetRealmClientsQueryParams;
 }
 
 
 export class GetRealmClientsResponse extends SpeakeasyBase {
-  @Metadata({ elemType: shared.ClientRepresentation })
+  @SpeakeasyMetadata({ elemType: shared.ClientRepresentation })
   clientRepresentations?: shared.ClientRepresentation[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

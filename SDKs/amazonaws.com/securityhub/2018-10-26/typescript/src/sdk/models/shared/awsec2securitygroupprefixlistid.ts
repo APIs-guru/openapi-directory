@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AwsEc2SecurityGroupPrefixListId
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A prefix list ID.
 **/
 export class AwsEc2SecurityGroupPrefixListId extends SpeakeasyBase {
-  @Metadata({ data: "json, name=PrefixListId" })
+  @SpeakeasyMetadata({ data: "json, name=PrefixListId" })
   prefixListId?: string;
 }

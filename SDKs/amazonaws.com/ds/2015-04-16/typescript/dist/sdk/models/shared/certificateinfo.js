@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CertificateStateEnum } from "./certificatestateenum";
 import { CertificateTypeEnum } from "./certificatetypeenum";
 // CertificateInfo
@@ -35,23 +35,23 @@ var CertificateInfo = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=CertificateId" }),
+        SpeakeasyMetadata({ data: "json, name=CertificateId" }),
         __metadata("design:type", String)
     ], CertificateInfo.prototype, "certificateId", void 0);
     __decorate([
-        Metadata({ data: "json, name=CommonName" }),
+        SpeakeasyMetadata({ data: "json, name=CommonName" }),
         __metadata("design:type", String)
     ], CertificateInfo.prototype, "commonName", void 0);
     __decorate([
-        Metadata({ data: "json, name=ExpiryDateTime" }),
+        SpeakeasyMetadata({ data: "json, name=ExpiryDateTime" }),
         __metadata("design:type", Date)
     ], CertificateInfo.prototype, "expiryDateTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=State" }),
+        SpeakeasyMetadata({ data: "json, name=State" }),
         __metadata("design:type", String)
     ], CertificateInfo.prototype, "state", void 0);
     __decorate([
-        Metadata({ data: "json, name=Type" }),
+        SpeakeasyMetadata({ data: "json, name=Type" }),
         __metadata("design:type", String)
     ], CertificateInfo.prototype, "type", void 0);
     return CertificateInfo;

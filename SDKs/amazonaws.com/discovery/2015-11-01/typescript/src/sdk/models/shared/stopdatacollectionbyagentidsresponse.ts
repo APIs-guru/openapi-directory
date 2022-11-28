@@ -1,9 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AgentConfigurationStatus } from "./agentconfigurationstatus";
 
 
+
 export class StopDataCollectionByAgentIdsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=agentsConfigurationStatus", elemType: shared.AgentConfigurationStatus })
+  @SpeakeasyMetadata({ data: "json, name=agentsConfigurationStatus", elemType: AgentConfigurationStatus })
   agentsConfigurationStatus?: AgentConfigurationStatus[];
 }

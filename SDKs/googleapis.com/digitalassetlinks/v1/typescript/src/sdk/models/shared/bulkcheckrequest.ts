@@ -1,8 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
-import { Asset } from "./asset";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Asset } from "./asset";
 import { StatementTemplate } from "./statementtemplate";
+
 
 
 // BulkCheckRequest
@@ -10,21 +9,21 @@ import { StatementTemplate } from "./statementtemplate";
  * Message used to check for the existence of multiple digital asset links within a single RPC.
 **/
 export class BulkCheckRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=allowGoogleInternalDataSources" })
+  @SpeakeasyMetadata({ data: "json, name=allowGoogleInternalDataSources" })
   allowGoogleInternalDataSources?: boolean;
 
-  @Metadata({ data: "json, name=defaultRelation" })
+  @SpeakeasyMetadata({ data: "json, name=defaultRelation" })
   defaultRelation?: string;
 
-  @Metadata({ data: "json, name=defaultSource" })
+  @SpeakeasyMetadata({ data: "json, name=defaultSource" })
   defaultSource?: Asset;
 
-  @Metadata({ data: "json, name=defaultTarget" })
+  @SpeakeasyMetadata({ data: "json, name=defaultTarget" })
   defaultTarget?: Asset;
 
-  @Metadata({ data: "json, name=skipCacheLookup" })
+  @SpeakeasyMetadata({ data: "json, name=skipCacheLookup" })
   skipCacheLookup?: boolean;
 
-  @Metadata({ data: "json, name=statements", elemType: shared.StatementTemplate })
+  @SpeakeasyMetadata({ data: "json, name=statements", elemType: StatementTemplate })
   statements?: StatementTemplate[];
 }

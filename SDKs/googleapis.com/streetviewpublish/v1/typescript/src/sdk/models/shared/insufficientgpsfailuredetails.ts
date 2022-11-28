@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // InsufficientGpsFailureDetails
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Details related to ProcessingFailureReason#INSUFFICIENT_GPS.
 **/
 export class InsufficientGpsFailureDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=gpsPointsFound" })
+  @SpeakeasyMetadata({ data: "json, name=gpsPointsFound" })
   gpsPointsFound?: number;
 }

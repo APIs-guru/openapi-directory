@@ -1,6 +1,7 @@
 
 
+
 export enum InstanceTypeEnum {
-    Blue = "Blue"
-,    Green = "Green"
+    Blue = "Blue",
+    Green = "Green"
 }

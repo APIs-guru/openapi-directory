@@ -22,9 +22,10 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { NetworkEndpoint } from "./networkendpoint";
 import { SchedulingConfig } from "./schedulingconfig";
+import { Symptom } from "./symptom";
 export var NodeApiVersionEnum;
 (function (NodeApiVersionEnum) {
     NodeApiVersionEnum["ApiVersionUnspecified"] = "API_VERSION_UNSPECIFIED";
@@ -69,81 +70,137 @@ var Node = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=acceleratorType" }),
+        SpeakeasyMetadata({ data: "json, name=acceleratorType" }),
         __metadata("design:type", String)
     ], Node.prototype, "acceleratorType", void 0);
     __decorate([
-        Metadata({ data: "json, name=apiVersion" }),
+        SpeakeasyMetadata({ data: "json, name=apiVersion" }),
         __metadata("design:type", String)
     ], Node.prototype, "apiVersion", void 0);
     __decorate([
-        Metadata({ data: "json, name=cidrBlock" }),
+        SpeakeasyMetadata({ data: "json, name=cidrBlock" }),
         __metadata("design:type", String)
     ], Node.prototype, "cidrBlock", void 0);
     __decorate([
-        Metadata({ data: "json, name=createTime" }),
+        SpeakeasyMetadata({ data: "json, name=createTime" }),
         __metadata("design:type", String)
     ], Node.prototype, "createTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=description" }),
+        SpeakeasyMetadata({ data: "json, name=description" }),
         __metadata("design:type", String)
     ], Node.prototype, "description", void 0);
     __decorate([
-        Metadata({ data: "json, name=health" }),
+        SpeakeasyMetadata({ data: "json, name=health" }),
         __metadata("design:type", String)
     ], Node.prototype, "health", void 0);
     __decorate([
-        Metadata({ data: "json, name=healthDescription" }),
+        SpeakeasyMetadata({ data: "json, name=healthDescription" }),
         __metadata("design:type", String)
     ], Node.prototype, "healthDescription", void 0);
     __decorate([
-        Metadata({ data: "json, name=ipAddress" }),
+        SpeakeasyMetadata({ data: "json, name=ipAddress" }),
         __metadata("design:type", String)
     ], Node.prototype, "ipAddress", void 0);
     __decorate([
-        Metadata({ data: "json, name=labels" }),
+        SpeakeasyMetadata({ data: "json, name=labels" }),
         __metadata("design:type", Map)
     ], Node.prototype, "labels", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], Node.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=network" }),
+        SpeakeasyMetadata({ data: "json, name=network" }),
         __metadata("design:type", String)
     ], Node.prototype, "network", void 0);
     __decorate([
-        Metadata({ data: "json, name=networkEndpoints", elemType: shared.NetworkEndpoint }),
+        SpeakeasyMetadata({ data: "json, name=networkEndpoints", elemType: NetworkEndpoint }),
         __metadata("design:type", Array)
     ], Node.prototype, "networkEndpoints", void 0);
     __decorate([
-        Metadata({ data: "json, name=port" }),
+        SpeakeasyMetadata({ data: "json, name=port" }),
         __metadata("design:type", String)
     ], Node.prototype, "port", void 0);
     __decorate([
-        Metadata({ data: "json, name=schedulingConfig" }),
+        SpeakeasyMetadata({ data: "json, name=schedulingConfig" }),
         __metadata("design:type", SchedulingConfig)
     ], Node.prototype, "schedulingConfig", void 0);
     __decorate([
-        Metadata({ data: "json, name=serviceAccount" }),
+        SpeakeasyMetadata({ data: "json, name=serviceAccount" }),
         __metadata("design:type", String)
     ], Node.prototype, "serviceAccount", void 0);
     __decorate([
-        Metadata({ data: "json, name=state" }),
+        SpeakeasyMetadata({ data: "json, name=state" }),
         __metadata("design:type", String)
     ], Node.prototype, "state", void 0);
     __decorate([
-        Metadata({ data: "json, name=symptoms", elemType: shared.Symptom }),
+        SpeakeasyMetadata({ data: "json, name=symptoms", elemType: Symptom }),
         __metadata("design:type", Array)
     ], Node.prototype, "symptoms", void 0);
     __decorate([
-        Metadata({ data: "json, name=tensorflowVersion" }),
+        SpeakeasyMetadata({ data: "json, name=tensorflowVersion" }),
         __metadata("design:type", String)
     ], Node.prototype, "tensorflowVersion", void 0);
     __decorate([
-        Metadata({ data: "json, name=useServiceNetworking" }),
+        SpeakeasyMetadata({ data: "json, name=useServiceNetworking" }),
         __metadata("design:type", Boolean)
     ], Node.prototype, "useServiceNetworking", void 0);
     return Node;
 }(SpeakeasyBase));
 export { Node };
+// NodeInput
+/**
+ * A TPU instance.
+**/
+var NodeInput = /** @class */ (function (_super) {
+    __extends(NodeInput, _super);
+    function NodeInput() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=acceleratorType" }),
+        __metadata("design:type", String)
+    ], NodeInput.prototype, "acceleratorType", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=cidrBlock" }),
+        __metadata("design:type", String)
+    ], NodeInput.prototype, "cidrBlock", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=description" }),
+        __metadata("design:type", String)
+    ], NodeInput.prototype, "description", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=health" }),
+        __metadata("design:type", String)
+    ], NodeInput.prototype, "health", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=ipAddress" }),
+        __metadata("design:type", String)
+    ], NodeInput.prototype, "ipAddress", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=labels" }),
+        __metadata("design:type", Map)
+    ], NodeInput.prototype, "labels", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=network" }),
+        __metadata("design:type", String)
+    ], NodeInput.prototype, "network", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=port" }),
+        __metadata("design:type", String)
+    ], NodeInput.prototype, "port", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=schedulingConfig" }),
+        __metadata("design:type", SchedulingConfig)
+    ], NodeInput.prototype, "schedulingConfig", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=tensorflowVersion" }),
+        __metadata("design:type", String)
+    ], NodeInput.prototype, "tensorflowVersion", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=useServiceNetworking" }),
+        __metadata("design:type", Boolean)
+    ], NodeInput.prototype, "useServiceNetworking", void 0);
+    return NodeInput;
+}(SpeakeasyBase));
+export { NodeInput };

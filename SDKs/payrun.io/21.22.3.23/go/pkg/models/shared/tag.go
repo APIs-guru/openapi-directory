@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// TagTagTaggedItem
+// The tags' tagged item
 type TagTagTaggedItem struct {
 	AtHref  *string `json:"@href,omitempty"`
 	AtRel   *string `json:"@rel,omitempty"`

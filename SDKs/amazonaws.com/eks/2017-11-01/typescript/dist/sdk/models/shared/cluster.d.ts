@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { Certificate } from "./certificate";
 import { ConnectorConfigResponse } from "./connectorconfigresponse";
 import { EncryptionConfig } from "./encryptionconfig";

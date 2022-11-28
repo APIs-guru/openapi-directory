@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ProvisionedThroughput } from "./provisionedthroughput";
+
 
 
 // UpdateGlobalSecondaryIndexAction
@@ -7,9 +8,9 @@ import { ProvisionedThroughput } from "./provisionedthroughput";
  * Represents the new provisioned throughput settings to be applied to a global secondary index.
 **/
 export class UpdateGlobalSecondaryIndexAction extends SpeakeasyBase {
-  @Metadata({ data: "json, name=IndexName" })
+  @SpeakeasyMetadata({ data: "json, name=IndexName" })
   indexName: string;
 
-  @Metadata({ data: "json, name=ProvisionedThroughput" })
+  @SpeakeasyMetadata({ data: "json, name=ProvisionedThroughput" })
   provisionedThroughput: ProvisionedThroughput;
 }

@@ -1,47 +1,48 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class PullsRequestReviewersPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=owner" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=owner" })
   owner: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=pull_number" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=pull_number" })
   pullNumber: number;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=repo" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=repo" })
   repo: string;
 }
 
 
 export class PullsRequestReviewersRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=reviewers" })
+  @SpeakeasyMetadata({ data: "json, name=reviewers" })
   reviewers?: string[];
 
-  @Metadata({ data: "json, name=team_reviewers" })
+  @SpeakeasyMetadata({ data: "json, name=team_reviewers" })
   teamReviewers?: string[];
 }
 
 
 export class PullsRequestReviewersRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: PullsRequestReviewersPathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request?: PullsRequestReviewersRequestBody;
 }
 
 
 export class PullsRequestReviewersResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   basicError?: shared.BasicError;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   pullRequestSimple?: shared.PullRequestSimple;
 }

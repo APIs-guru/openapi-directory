@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum VpnTunnelInfoRoutingTypeEnum {
-    RoutingTypeUnspecified = "ROUTING_TYPE_UNSPECIFIED"
-,    RouteBased = "ROUTE_BASED"
-,    PolicyBased = "POLICY_BASED"
-,    Dynamic = "DYNAMIC"
+    RoutingTypeUnspecified = "ROUTING_TYPE_UNSPECIFIED",
+    RouteBased = "ROUTE_BASED",
+    PolicyBased = "POLICY_BASED",
+    Dynamic = "DYNAMIC"
 }
 
 
@@ -13,30 +14,30 @@ export enum VpnTunnelInfoRoutingTypeEnum {
  * For display only. Metadata associated with a Compute Engine VPN tunnel.
 **/
 export class VpnTunnelInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=displayName" })
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
   displayName?: string;
 
-  @Metadata({ data: "json, name=networkUri" })
+  @SpeakeasyMetadata({ data: "json, name=networkUri" })
   networkUri?: string;
 
-  @Metadata({ data: "json, name=region" })
+  @SpeakeasyMetadata({ data: "json, name=region" })
   region?: string;
 
-  @Metadata({ data: "json, name=remoteGateway" })
+  @SpeakeasyMetadata({ data: "json, name=remoteGateway" })
   remoteGateway?: string;
 
-  @Metadata({ data: "json, name=remoteGatewayIp" })
+  @SpeakeasyMetadata({ data: "json, name=remoteGatewayIp" })
   remoteGatewayIp?: string;
 
-  @Metadata({ data: "json, name=routingType" })
+  @SpeakeasyMetadata({ data: "json, name=routingType" })
   routingType?: VpnTunnelInfoRoutingTypeEnum;
 
-  @Metadata({ data: "json, name=sourceGateway" })
+  @SpeakeasyMetadata({ data: "json, name=sourceGateway" })
   sourceGateway?: string;
 
-  @Metadata({ data: "json, name=sourceGatewayIp" })
+  @SpeakeasyMetadata({ data: "json, name=sourceGatewayIp" })
   sourceGatewayIp?: string;
 
-  @Metadata({ data: "json, name=uri" })
+  @SpeakeasyMetadata({ data: "json, name=uri" })
   uri?: string;
 }

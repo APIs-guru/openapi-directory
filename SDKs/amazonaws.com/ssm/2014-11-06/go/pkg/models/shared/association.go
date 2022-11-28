@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// Association
+// Describes an association of a Amazon Web Services Systems Manager document (SSM document) and an instance.
 type Association struct {
 	AssociationID      *string              `json:"AssociationId,omitempty"`
 	AssociationName    *string              `json:"AssociationName,omitempty"`

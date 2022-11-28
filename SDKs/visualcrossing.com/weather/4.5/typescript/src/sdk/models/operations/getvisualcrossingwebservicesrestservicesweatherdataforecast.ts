@@ -1,50 +1,50 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-export const GETVISUALCROSSINGWEBSERVICESRESTSERVICESWEATHERDATAFORECAST_SERVERS = [
-	"https://weather.visualcrossing.com",
-];
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 
+export const GetVisualCrossingWebServicesRestServicesWeatherdataForecastServerList = [
+	"https://weather.visualcrossing.com",
+] as const;
 
 
 export class GetVisualCrossingWebServicesRestServicesWeatherdataForecastQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=aggregateHours" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=aggregateHours" })
   aggregateHours?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=allowAsynch" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=allowAsynch" })
   allowAsynch?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=contentType" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=contentType" })
   contentType?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=key" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=key" })
   key?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=locations" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=locations" })
   locations?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=sendAsDatasource" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sendAsDatasource" })
   sendAsDatasource?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=shortColumnNames" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=shortColumnNames" })
   shortColumnNames?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=unitGroup" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=unitGroup" })
   unitGroup?: string;
 }
 
 
 export class GetVisualCrossingWebServicesRestServicesWeatherdataForecastRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   serverUrl?: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetVisualCrossingWebServicesRestServicesWeatherdataForecastQueryParams;
 }
 
 
 export class GetVisualCrossingWebServicesRestServicesWeatherdataForecastResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

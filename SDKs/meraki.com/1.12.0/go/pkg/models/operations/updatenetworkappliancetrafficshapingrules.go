@@ -20,11 +20,16 @@ type UpdateNetworkApplianceTrafficShapingRulesRequestBodyRulesDefinitions struct
 	Value string                                                                       `json:"value"`
 }
 
+// UpdateNetworkApplianceTrafficShapingRulesRequestBodyRulesPerClientBandwidthLimitsBandwidthLimits
+// The bandwidth limits object, specifying the upload ('limitUp') and download ('limitDown') speed in Kbps. These are only enforced if 'settings' is set to 'custom'.
 type UpdateNetworkApplianceTrafficShapingRulesRequestBodyRulesPerClientBandwidthLimitsBandwidthLimits struct {
 	LimitDown *int64 `json:"limitDown,omitempty"`
 	LimitUp   *int64 `json:"limitUp,omitempty"`
 }
 
+// UpdateNetworkApplianceTrafficShapingRulesRequestBodyRulesPerClientBandwidthLimits
+//
+//	An object describing the bandwidth settings for your rule.
 type UpdateNetworkApplianceTrafficShapingRulesRequestBodyRulesPerClientBandwidthLimits struct {
 	BandwidthLimits *UpdateNetworkApplianceTrafficShapingRulesRequestBodyRulesPerClientBandwidthLimitsBandwidthLimits `json:"bandwidthLimits,omitempty"`
 	Settings        *string                                                                                           `json:"settings,omitempty"`

@@ -8,6 +8,8 @@ const (
 	TemplateDefinitionNewLayoutFormatEnumCustom TemplateDefinitionNewLayoutFormatEnum = "custom"
 )
 
+// TemplateDefinitionNewLayoutMargins
+// Page margins in units
 type TemplateDefinitionNewLayoutMargins struct {
 	Bottom *float64 `json:"bottom,omitempty"`
 	Left   *float64 `json:"left,omitempty"`
@@ -30,6 +32,8 @@ const (
 	TemplateDefinitionNewLayoutRepeatLayoutFormatEnumCustom TemplateDefinitionNewLayoutRepeatLayoutFormatEnum = "custom"
 )
 
+// TemplateDefinitionNewLayoutRepeatLayout
+// Defines page size if layout is repeated on the page e.g sheet labels
 type TemplateDefinitionNewLayoutRepeatLayout struct {
 	Format *TemplateDefinitionNewLayoutRepeatLayoutFormatEnum `json:"format,omitempty"`
 	Height *float64                                           `json:"height,omitempty"`
@@ -43,6 +47,8 @@ const (
 	TemplateDefinitionNewLayoutUnitEnumIn TemplateDefinitionNewLayoutUnitEnum = "in"
 )
 
+// TemplateDefinitionNewLayout
+// Defines template layout (e.g page format, margins).
 type TemplateDefinitionNewLayout struct {
 	EmptyLabels  *int64                                      `json:"emptyLabels,omitempty"`
 	Format       *TemplateDefinitionNewLayoutFormatEnum      `json:"format,omitempty"`
@@ -67,6 +73,8 @@ type TemplateDefinitionNewPages struct {
 	Width      *float64                           `json:"width,omitempty"`
 }
 
+// TemplateDefinitionNew
+// Template configuration
 type TemplateDefinitionNew struct {
 	IsDraft *bool                        `json:"isDraft,omitempty"`
 	Layout  *TemplateDefinitionNewLayout `json:"layout,omitempty"`

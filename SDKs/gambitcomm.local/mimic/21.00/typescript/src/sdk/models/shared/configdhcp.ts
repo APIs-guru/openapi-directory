@@ -1,16 +1,17 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ConfigDhcp extends SpeakeasyBase {
-  @Metadata({ data: "json, name=add_options" })
+  @SpeakeasyMetadata({ data: "json, name=add_options" })
   addOptions?: string;
 
-  @Metadata({ data: "json, name=classid" })
+  @SpeakeasyMetadata({ data: "json, name=classid" })
   classid?: string;
 
-  @Metadata({ data: "json, name=hwaddr" })
+  @SpeakeasyMetadata({ data: "json, name=hwaddr" })
   hwaddr?: string;
 
-  @Metadata({ data: "json, name=script" })
+  @SpeakeasyMetadata({ data: "json, name=script" })
   script?: string;
 }

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ComponentCandidate
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Contains information about a component that is a candidate to deploy to a Greengrass core device.
 **/
 export class ComponentCandidate extends SpeakeasyBase {
-  @Metadata({ data: "json, name=componentName" })
+  @SpeakeasyMetadata({ data: "json, name=componentName" })
   componentName?: string;
 
-  @Metadata({ data: "json, name=componentVersion" })
+  @SpeakeasyMetadata({ data: "json, name=componentVersion" })
   componentVersion?: string;
 
-  @Metadata({ data: "json, name=versionRequirements" })
+  @SpeakeasyMetadata({ data: "json, name=versionRequirements" })
   versionRequirements?: Map<string, string>;
 }

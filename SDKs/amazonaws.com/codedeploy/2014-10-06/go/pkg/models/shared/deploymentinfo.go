@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// DeploymentInfo
+// Information about a deployment.
 type DeploymentInfo struct {
 	AdditionalDeploymentStatusInfo     *string                           `json:"additionalDeploymentStatusInfo,omitempty"`
 	ApplicationName                    *string                           `json:"applicationName,omitempty"`

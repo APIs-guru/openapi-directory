@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetShakespeareTranslateQueryParams = /** @class */ (function (_super) {
     __extends(GetShakespeareTranslateQueryParams, _super);
@@ -30,7 +30,7 @@ var GetShakespeareTranslateQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=text" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=text" }),
         __metadata("design:type", String)
     ], GetShakespeareTranslateQueryParams.prototype, "text", void 0);
     return GetShakespeareTranslateQueryParams;
@@ -42,7 +42,7 @@ var GetShakespeareTranslateSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeXFungeneratorsApiSecret)
     ], GetShakespeareTranslateSecurity.prototype, "xFungeneratorsApiSecret", void 0);
     return GetShakespeareTranslateSecurity;
@@ -54,11 +54,11 @@ var GetShakespeareTranslateRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetShakespeareTranslateQueryParams)
     ], GetShakespeareTranslateRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetShakespeareTranslateSecurity)
     ], GetShakespeareTranslateRequest.prototype, "security", void 0);
     return GetShakespeareTranslateRequest;
@@ -70,11 +70,11 @@ var GetShakespeareTranslateResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetShakespeareTranslateResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetShakespeareTranslateResponse.prototype, "statusCode", void 0);
     return GetShakespeareTranslateResponse;

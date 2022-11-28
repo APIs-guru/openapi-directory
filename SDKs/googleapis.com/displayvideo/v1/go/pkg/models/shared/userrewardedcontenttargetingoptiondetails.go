@@ -8,6 +8,8 @@ const (
 	UserRewardedContentTargetingOptionDetailsUserRewardedContentEnumUserRewardedContentNotUserRewarded UserRewardedContentTargetingOptionDetailsUserRewardedContentEnum = "USER_REWARDED_CONTENT_NOT_USER_REWARDED"
 )
 
+// UserRewardedContentTargetingOptionDetails
+// Represents a targetable user rewarded content status for video ads only. This will be populated in the user_rewarded_content_details field when targeting_type is `TARGETING_TYPE_USER_REWARDED_CONTENT`.
 type UserRewardedContentTargetingOptionDetails struct {
 	UserRewardedContent *UserRewardedContentTargetingOptionDetailsUserRewardedContentEnum `json:"userRewardedContent,omitempty"`
 }

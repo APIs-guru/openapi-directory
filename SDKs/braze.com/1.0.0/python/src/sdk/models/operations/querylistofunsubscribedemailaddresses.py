@@ -1,5 +1,8 @@
 from dataclasses import dataclass, field
-from typing import List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
 
 
 @dataclass
@@ -14,11 +17,11 @@ class QueryListOfUnsubscribedEmailAddressesQueryParams:
 
 @dataclass
 class QueryListOfUnsubscribedEmailAddressesRequest:
-    query_params: QueryListOfUnsubscribedEmailAddressesQueryParams = field(default=None)
+    query_params: QueryListOfUnsubscribedEmailAddressesQueryParams = field()
     
 
 @dataclass
 class QueryListOfUnsubscribedEmailAddressesResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

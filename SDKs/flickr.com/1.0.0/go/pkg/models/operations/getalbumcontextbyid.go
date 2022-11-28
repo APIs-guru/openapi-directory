@@ -10,10 +10,6 @@ type GetAlbumContextByIDQueryParams struct {
 	PhotosetID *string `queryParam:"style=form,explode=true,name=photoset_id"`
 }
 
-type GetAlbumContextByIDRequest struct {
-	QueryParams GetAlbumContextByIDQueryParams
-}
-
 type GetAlbumContextByID200ApplicationJSONCount struct {
 	Content *string `json:"_content,omitempty"`
 }
@@ -23,6 +19,10 @@ type GetAlbumContextByID200ApplicationJSON struct {
 	Nextphoto *shared.ContextPhoto                        `json:"nextphoto,omitempty"`
 	Prevphoto *shared.ContextPhoto                        `json:"prevphoto,omitempty"`
 	Stat      *string                                     `json:"stat,omitempty"`
+}
+
+type GetAlbumContextByIDRequest struct {
+	QueryParams GetAlbumContextByIDQueryParams
 }
 
 type GetAlbumContextByIDResponse struct {

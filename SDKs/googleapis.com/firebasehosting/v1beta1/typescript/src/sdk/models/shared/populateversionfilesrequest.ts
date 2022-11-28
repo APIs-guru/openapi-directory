@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class PopulateVersionFilesRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=files" })
+  @SpeakeasyMetadata({ data: "json, name=files" })
   files?: Map<string, string>;
 }

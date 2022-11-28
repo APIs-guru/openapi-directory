@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export var CreateApplicationRequestBodyTypeEnum;
 (function (CreateApplicationRequestBodyTypeEnum) {
@@ -35,51 +35,51 @@ var CreateApplicationRequestBody = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=answer_method" }),
+        SpeakeasyMetadata({ data: "json, name=answer_method" }),
         __metadata("design:type", String)
     ], CreateApplicationRequestBody.prototype, "answerMethod", void 0);
     __decorate([
-        Metadata({ data: "json, name=answer_url" }),
+        SpeakeasyMetadata({ data: "json, name=answer_url" }),
         __metadata("design:type", String)
     ], CreateApplicationRequestBody.prototype, "answerUrl", void 0);
     __decorate([
-        Metadata({ data: "json, name=api_key" }),
+        SpeakeasyMetadata({ data: "json, name=api_key" }),
         __metadata("design:type", String)
     ], CreateApplicationRequestBody.prototype, "apiKey", void 0);
     __decorate([
-        Metadata({ data: "json, name=api_secret" }),
+        SpeakeasyMetadata({ data: "json, name=api_secret" }),
         __metadata("design:type", String)
     ], CreateApplicationRequestBody.prototype, "apiSecret", void 0);
     __decorate([
-        Metadata({ data: "json, name=event_method" }),
+        SpeakeasyMetadata({ data: "json, name=event_method" }),
         __metadata("design:type", String)
     ], CreateApplicationRequestBody.prototype, "eventMethod", void 0);
     __decorate([
-        Metadata({ data: "json, name=event_url" }),
+        SpeakeasyMetadata({ data: "json, name=event_url" }),
         __metadata("design:type", String)
     ], CreateApplicationRequestBody.prototype, "eventUrl", void 0);
     __decorate([
-        Metadata({ data: "json, name=inbound_method" }),
+        SpeakeasyMetadata({ data: "json, name=inbound_method" }),
         __metadata("design:type", String)
     ], CreateApplicationRequestBody.prototype, "inboundMethod", void 0);
     __decorate([
-        Metadata({ data: "json, name=inbound_url" }),
+        SpeakeasyMetadata({ data: "json, name=inbound_url" }),
         __metadata("design:type", String)
     ], CreateApplicationRequestBody.prototype, "inboundUrl", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], CreateApplicationRequestBody.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=status_method" }),
+        SpeakeasyMetadata({ data: "json, name=status_method" }),
         __metadata("design:type", String)
     ], CreateApplicationRequestBody.prototype, "statusMethod", void 0);
     __decorate([
-        Metadata({ data: "json, name=status_url" }),
+        SpeakeasyMetadata({ data: "json, name=status_url" }),
         __metadata("design:type", String)
     ], CreateApplicationRequestBody.prototype, "statusUrl", void 0);
     __decorate([
-        Metadata({ data: "json, name=type" }),
+        SpeakeasyMetadata({ data: "json, name=type" }),
         __metadata("design:type", String)
     ], CreateApplicationRequestBody.prototype, "type", void 0);
     return CreateApplicationRequestBody;
@@ -91,7 +91,7 @@ var CreateApplicationRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", CreateApplicationRequestBody)
     ], CreateApplicationRequest.prototype, "request", void 0);
     return CreateApplicationRequest;
@@ -103,15 +103,15 @@ var CreateApplicationResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], CreateApplicationResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], CreateApplicationResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.ApplicationCreated)
     ], CreateApplicationResponse.prototype, "applicationCreated", void 0);
     return CreateApplicationResponse;

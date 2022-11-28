@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TypeDefinitionFormatEnum } from "./typedefinitionformatenum";
+
 
 
 // Type
@@ -7,18 +8,18 @@ import { TypeDefinitionFormatEnum } from "./typedefinitionformatenum";
  * Describes a type.
 **/
 export class Type extends SpeakeasyBase {
-  @Metadata({ data: "json, name=arn" })
+  @SpeakeasyMetadata({ data: "json, name=arn" })
   arn?: string;
 
-  @Metadata({ data: "json, name=definition" })
+  @SpeakeasyMetadata({ data: "json, name=definition" })
   definition?: string;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=format" })
+  @SpeakeasyMetadata({ data: "json, name=format" })
   format?: TypeDefinitionFormatEnum;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 }

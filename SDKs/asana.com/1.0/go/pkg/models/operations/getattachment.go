@@ -13,13 +13,13 @@ type GetAttachmentQueryParams struct {
 	OptPretty *bool    `queryParam:"style=form,explode=true,name=opt_pretty"`
 }
 
+type GetAttachment200ApplicationJSON struct {
+	Data *shared.AttachmentResponse `json:"data,omitempty"`
+}
+
 type GetAttachmentRequest struct {
 	PathParams  GetAttachmentPathParams
 	QueryParams GetAttachmentQueryParams
-}
-
-type GetAttachment200ApplicationJSON struct {
-	Data *shared.AttachmentResponse `json:"data,omitempty"`
 }
 
 type GetAttachmentResponse struct {

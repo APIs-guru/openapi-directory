@@ -1,35 +1,36 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class DeleteAbusesAbuseIdMessagesAbuseMessageIdPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=abuseId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=abuseId" })
   abuseId: number;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=abuseMessageId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=abuseMessageId" })
   abuseMessageId: number;
 }
 
 
 export class DeleteAbusesAbuseIdMessagesAbuseMessageIdSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   oAuth2: shared.SchemeOAuth2;
 }
 
 
 export class DeleteAbusesAbuseIdMessagesAbuseMessageIdRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: DeleteAbusesAbuseIdMessagesAbuseMessageIdPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: DeleteAbusesAbuseIdMessagesAbuseMessageIdSecurity;
 }
 
 
 export class DeleteAbusesAbuseIdMessagesAbuseMessageIdResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

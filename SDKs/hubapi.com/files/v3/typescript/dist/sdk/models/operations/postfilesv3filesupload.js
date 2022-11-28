@@ -22,45 +22,25 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
-var PostFilesV3FilesUploadSecurityOption1 = /** @class */ (function (_super) {
-    __extends(PostFilesV3FilesUploadSecurityOption1, _super);
-    function PostFilesV3FilesUploadSecurityOption1() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=query" }),
-        __metadata("design:type", shared.SchemeHapikey)
-    ], PostFilesV3FilesUploadSecurityOption1.prototype, "hapikey", void 0);
-    return PostFilesV3FilesUploadSecurityOption1;
-}(SpeakeasyBase));
-export { PostFilesV3FilesUploadSecurityOption1 };
-var PostFilesV3FilesUploadSecurityOption2 = /** @class */ (function (_super) {
-    __extends(PostFilesV3FilesUploadSecurityOption2, _super);
-    function PostFilesV3FilesUploadSecurityOption2() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
-        __metadata("design:type", shared.SchemeOauth2Legacy)
-    ], PostFilesV3FilesUploadSecurityOption2.prototype, "oauth2Legacy", void 0);
-    return PostFilesV3FilesUploadSecurityOption2;
-}(SpeakeasyBase));
-export { PostFilesV3FilesUploadSecurityOption2 };
 var PostFilesV3FilesUploadSecurity = /** @class */ (function (_super) {
     __extends(PostFilesV3FilesUploadSecurity, _super);
     function PostFilesV3FilesUploadSecurity() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, option=true" }),
-        __metadata("design:type", PostFilesV3FilesUploadSecurityOption1)
-    ], PostFilesV3FilesUploadSecurity.prototype, "option1", void 0);
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=query" }),
+        __metadata("design:type", shared.SchemeHapikey)
+    ], PostFilesV3FilesUploadSecurity.prototype, "hapikey", void 0);
     __decorate([
-        Metadata({ data: "security, option=true" }),
-        __metadata("design:type", PostFilesV3FilesUploadSecurityOption2)
-    ], PostFilesV3FilesUploadSecurity.prototype, "option2", void 0);
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        __metadata("design:type", shared.SchemePrivateAppsLegacy)
+    ], PostFilesV3FilesUploadSecurity.prototype, "privateAppsLegacy", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
+        __metadata("design:type", shared.SchemeOauth2Legacy)
+    ], PostFilesV3FilesUploadSecurity.prototype, "oauth2Legacy", void 0);
     return PostFilesV3FilesUploadSecurity;
 }(SpeakeasyBase));
 export { PostFilesV3FilesUploadSecurity };
@@ -70,11 +50,11 @@ var PostFilesV3FilesUploadRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "request, media_type=multipart/form-data" }),
+        SpeakeasyMetadata({ data: "request, media_type=multipart/form-data" }),
         __metadata("design:type", Object)
     ], PostFilesV3FilesUploadRequest.prototype, "request", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PostFilesV3FilesUploadSecurity)
     ], PostFilesV3FilesUploadRequest.prototype, "security", void 0);
     return PostFilesV3FilesUploadRequest;
@@ -86,19 +66,19 @@ var PostFilesV3FilesUploadResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], PostFilesV3FilesUploadResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], PostFilesV3FilesUploadResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.File)
     ], PostFilesV3FilesUploadResponse.prototype, "file", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], PostFilesV3FilesUploadResponse.prototype, "statusCode", void 0);
     return PostFilesV3FilesUploadResponse;

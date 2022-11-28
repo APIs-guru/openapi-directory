@@ -1,5 +1,7 @@
 package shared
 
+// Quota
+// Limits associated with a Project.
 type Quota struct {
 	DNSKeysPerManagedZone                *int32       `json:"dnsKeysPerManagedZone,omitempty"`
 	GkeClustersPerManagedZone            *int32       `json:"gkeClustersPerManagedZone,omitempty"`

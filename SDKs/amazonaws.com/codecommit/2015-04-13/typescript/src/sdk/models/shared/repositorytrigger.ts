@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RepositoryTriggerEventEnumEnum } from "./repositorytriggereventenumenum";
+
 
 
 // RepositoryTrigger
@@ -7,18 +8,18 @@ import { RepositoryTriggerEventEnumEnum } from "./repositorytriggereventenumenum
  * Information about a trigger for a repository.
 **/
 export class RepositoryTrigger extends SpeakeasyBase {
-  @Metadata({ data: "json, name=branches" })
+  @SpeakeasyMetadata({ data: "json, name=branches" })
   branches?: string[];
 
-  @Metadata({ data: "json, name=customData" })
+  @SpeakeasyMetadata({ data: "json, name=customData" })
   customData?: string;
 
-  @Metadata({ data: "json, name=destinationArn" })
+  @SpeakeasyMetadata({ data: "json, name=destinationArn" })
   destinationArn: string;
 
-  @Metadata({ data: "json, name=events" })
+  @SpeakeasyMetadata({ data: "json, name=events" })
   events: RepositoryTriggerEventEnumEnum[];
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 }

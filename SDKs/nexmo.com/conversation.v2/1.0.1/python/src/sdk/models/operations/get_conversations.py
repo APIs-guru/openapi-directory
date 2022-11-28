@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 
@@ -14,12 +18,12 @@ class GetConversationsQueryParams:
 
 @dataclass
 class GetConversationsRequest:
-    query_params: GetConversationsQueryParams = field(default=None)
+    query_params: GetConversationsQueryParams = field()
     
 
 @dataclass
 class GetConversationsResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     get_conversations_200_application_json_any: Optional[Any] = field(default=None)
     

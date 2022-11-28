@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { UserType } from "./usertype";
+
 
 
 // ListUsersResponse
@@ -8,9 +8,9 @@ import { UserType } from "./usertype";
  * The response from the request to list users.
 **/
 export class ListUsersResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=PaginationToken" })
+  @SpeakeasyMetadata({ data: "json, name=PaginationToken" })
   paginationToken?: string;
 
-  @Metadata({ data: "json, name=Users", elemType: shared.UserType })
+  @SpeakeasyMetadata({ data: "json, name=Users", elemType: UserType })
   users?: UserType[];
 }

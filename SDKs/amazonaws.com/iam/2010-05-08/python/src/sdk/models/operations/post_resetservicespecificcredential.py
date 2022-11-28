@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostResetServiceSpecificCredentialActionEnum(str, Enum):
     RESET_SERVICE_SPECIFIC_CREDENTIAL = "ResetServiceSpecificCredential"
@@ -10,8 +14,8 @@ class PostResetServiceSpecificCredentialVersionEnum(str, Enum):
 
 @dataclass
 class PostResetServiceSpecificCredentialQueryParams:
-    action: PostResetServiceSpecificCredentialActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostResetServiceSpecificCredentialVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostResetServiceSpecificCredentialActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostResetServiceSpecificCredentialVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostResetServiceSpecificCredentialHeaders:
 
 @dataclass
 class PostResetServiceSpecificCredentialRequest:
-    query_params: PostResetServiceSpecificCredentialQueryParams = field(default=None)
-    headers: PostResetServiceSpecificCredentialHeaders = field(default=None)
+    headers: PostResetServiceSpecificCredentialHeaders = field()
+    query_params: PostResetServiceSpecificCredentialQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostResetServiceSpecificCredentialResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

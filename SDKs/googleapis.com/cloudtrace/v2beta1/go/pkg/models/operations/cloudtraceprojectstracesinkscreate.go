@@ -40,7 +40,7 @@ type CloudtraceProjectsTraceSinksCreateSecurity struct {
 type CloudtraceProjectsTraceSinksCreateRequest struct {
 	PathParams  CloudtraceProjectsTraceSinksCreatePathParams
 	QueryParams CloudtraceProjectsTraceSinksCreateQueryParams
-	Request     *shared.TraceSink `request:"mediaType=application/json"`
+	Request     *shared.TraceSinkInput `request:"mediaType=application/json"`
 	Security    CloudtraceProjectsTraceSinksCreateSecurity
 }
 

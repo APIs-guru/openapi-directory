@@ -1,5 +1,7 @@
 package shared
 
+// InstitutionsSearchRequest
+// InstitutionsSearchRequest defines the request schema for `/institutions/search`
 type InstitutionsSearchRequest struct {
 	ClientID     *string                           `json:"client_id,omitempty"`
 	CountryCodes []CountryCodeEnum                 `json:"country_codes"`

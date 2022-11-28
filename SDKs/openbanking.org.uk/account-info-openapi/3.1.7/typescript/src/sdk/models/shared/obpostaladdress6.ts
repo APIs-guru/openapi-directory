@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ObAddressTypeCodeEnum } from "./obaddresstypecodeenum";
+
 
 
 // ObPostalAddress6
@@ -7,33 +8,33 @@ import { ObAddressTypeCodeEnum } from "./obaddresstypecodeenum";
  * Information that locates and identifies a specific address, as defined by postal services.
 **/
 export class ObPostalAddress6 extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AddressLine" })
+  @SpeakeasyMetadata({ data: "json, name=AddressLine" })
   addressLine?: string[];
 
-  @Metadata({ data: "json, name=AddressType" })
+  @SpeakeasyMetadata({ data: "json, name=AddressType" })
   addressType?: ObAddressTypeCodeEnum;
 
-  @Metadata({ data: "json, name=BuildingNumber" })
+  @SpeakeasyMetadata({ data: "json, name=BuildingNumber" })
   buildingNumber?: string;
 
-  @Metadata({ data: "json, name=Country" })
+  @SpeakeasyMetadata({ data: "json, name=Country" })
   country?: string;
 
-  @Metadata({ data: "json, name=CountrySubDivision" })
+  @SpeakeasyMetadata({ data: "json, name=CountrySubDivision" })
   countrySubDivision?: string;
 
-  @Metadata({ data: "json, name=Department" })
+  @SpeakeasyMetadata({ data: "json, name=Department" })
   department?: string;
 
-  @Metadata({ data: "json, name=PostCode" })
+  @SpeakeasyMetadata({ data: "json, name=PostCode" })
   postCode?: string;
 
-  @Metadata({ data: "json, name=StreetName" })
+  @SpeakeasyMetadata({ data: "json, name=StreetName" })
   streetName?: string;
 
-  @Metadata({ data: "json, name=SubDepartment" })
+  @SpeakeasyMetadata({ data: "json, name=SubDepartment" })
   subDepartment?: string;
 
-  @Metadata({ data: "json, name=TownName" })
+  @SpeakeasyMetadata({ data: "json, name=TownName" })
   townName?: string;
 }

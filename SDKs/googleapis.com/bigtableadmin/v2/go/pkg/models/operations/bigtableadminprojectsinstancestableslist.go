@@ -16,6 +16,7 @@ const (
 	BigtableadminProjectsInstancesTablesListViewEnumSchemaView      BigtableadminProjectsInstancesTablesListViewEnum = "SCHEMA_VIEW"
 	BigtableadminProjectsInstancesTablesListViewEnumReplicationView BigtableadminProjectsInstancesTablesListViewEnum = "REPLICATION_VIEW"
 	BigtableadminProjectsInstancesTablesListViewEnumEncryptionView  BigtableadminProjectsInstancesTablesListViewEnum = "ENCRYPTION_VIEW"
+	BigtableadminProjectsInstancesTablesListViewEnumStatsView       BigtableadminProjectsInstancesTablesListViewEnum = "STATS_VIEW"
 	BigtableadminProjectsInstancesTablesListViewEnumFull            BigtableadminProjectsInstancesTablesListViewEnum = "FULL"
 )
 

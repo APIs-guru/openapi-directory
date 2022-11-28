@@ -1,6 +1,7 @@
 
 
+
 export enum OwnerEnum {
-    CustomLambda = "CUSTOM_LAMBDA"
-,    Aws = "AWS"
+    CustomLambda = "CUSTOM_LAMBDA",
+    Aws = "AWS"
 }

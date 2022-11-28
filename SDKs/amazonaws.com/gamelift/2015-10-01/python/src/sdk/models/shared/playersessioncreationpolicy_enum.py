@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class PlayerSessionCreationPolicyEnum(str, Enum):
     ACCEPT_ALL = "ACCEPT_ALL"

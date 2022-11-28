@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // VerifyChallengeResponseRequest
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Signed ChallengeResponse.
 **/
 export class VerifyChallengeResponseRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=challengeResponse" })
+  @SpeakeasyMetadata({ data: "json, name=challengeResponse" })
   challengeResponse?: string;
 
-  @Metadata({ data: "json, name=expectedIdentity" })
+  @SpeakeasyMetadata({ data: "json, name=expectedIdentity" })
   expectedIdentity?: string;
 }

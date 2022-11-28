@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { AmiTypesEnum } from "./amitypesenum";
 import { CapacityTypesEnum } from "./capacitytypesenum";
 import { NodegroupHealth } from "./nodegrouphealth";

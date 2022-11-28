@@ -1,38 +1,39 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class FunctionsDeleteTagPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=functionId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=functionId" })
   functionId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=tagId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=tagId" })
   tagId: string;
 }
 
 
 export class FunctionsDeleteTagSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
   key: shared.SchemeKey;
 
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
   project: shared.SchemeProject;
 }
 
 
 export class FunctionsDeleteTagRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: FunctionsDeleteTagPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: FunctionsDeleteTagSecurity;
 }
 
 
 export class FunctionsDeleteTagResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

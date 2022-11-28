@@ -1,35 +1,36 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetAvgSalePriceSalePriceGetQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=brandName" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=brandName" })
   brandName: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=jwt" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=jwt" })
   jwt: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=regionName" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=regionName" })
   regionName?: string;
 }
 
 
 export class GetAvgSalePriceSalePriceGetRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetAvgSalePriceSalePriceGetQueryParams;
 }
 
 
 export class GetAvgSalePriceSalePriceGetResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   basicModelStatsResp?: shared.BasicModelStatsResp;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   httpValidationError?: shared.HttpValidationError;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

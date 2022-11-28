@@ -1,11 +1,15 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class MybusinessAccountsUpdateNotificationsPathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,14 +29,14 @@ class MybusinessAccountsUpdateNotificationsQueryParams:
 
 @dataclass
 class MybusinessAccountsUpdateNotificationsRequest:
-    path_params: MybusinessAccountsUpdateNotificationsPathParams = field(default=None)
-    query_params: MybusinessAccountsUpdateNotificationsQueryParams = field(default=None)
+    path_params: MybusinessAccountsUpdateNotificationsPathParams = field()
+    query_params: MybusinessAccountsUpdateNotificationsQueryParams = field()
     request: Optional[shared.Notifications] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class MybusinessAccountsUpdateNotificationsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     notifications: Optional[shared.Notifications] = field(default=None)
-    status_code: int = field(default=None)
     

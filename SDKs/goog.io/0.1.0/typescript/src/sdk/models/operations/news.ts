@@ -1,122 +1,123 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class NewsPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=query" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=query" })
   query: string;
 }
 
 
-export class NewsRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: NewsPathParams;
-}
-
-
 export class News200ApplicationJsonEntries extends SpeakeasyBase {
-  @Metadata({ data: "json, name=guidislink" })
+  @SpeakeasyMetadata({ data: "json, name=guidislink" })
   guidislink?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=link" })
+  @SpeakeasyMetadata({ data: "json, name=link" })
   link?: string;
 
-  @Metadata({ data: "json, name=links" })
+  @SpeakeasyMetadata({ data: "json, name=links" })
   links?: string;
 
-  @Metadata({ data: "json, name=published" })
+  @SpeakeasyMetadata({ data: "json, name=published" })
   published?: string;
 
-  @Metadata({ data: "json, name=published_parsed" })
+  @SpeakeasyMetadata({ data: "json, name=published_parsed" })
   publishedParsed?: string;
 
-  @Metadata({ data: "json, name=source" })
+  @SpeakeasyMetadata({ data: "json, name=source" })
   source?: string;
 
-  @Metadata({ data: "json, name=sub_articles" })
+  @SpeakeasyMetadata({ data: "json, name=sub_articles" })
   subArticles?: string;
 
-  @Metadata({ data: "json, name=summary" })
+  @SpeakeasyMetadata({ data: "json, name=summary" })
   summary?: string;
 
-  @Metadata({ data: "json, name=summary_detail" })
+  @SpeakeasyMetadata({ data: "json, name=summary_detail" })
   summaryDetail?: string;
 
-  @Metadata({ data: "json, name=title" })
+  @SpeakeasyMetadata({ data: "json, name=title" })
   title?: string;
 
-  @Metadata({ data: "json, name=title_detail" })
+  @SpeakeasyMetadata({ data: "json, name=title_detail" })
   titleDetail?: string;
 }
 
 
 export class News200ApplicationJsonFeed extends SpeakeasyBase {
-  @Metadata({ data: "json, name=generator" })
+  @SpeakeasyMetadata({ data: "json, name=generator" })
   generator?: string;
 
-  @Metadata({ data: "json, name=generator_detail" })
+  @SpeakeasyMetadata({ data: "json, name=generator_detail" })
   generatorDetail?: string;
 
-  @Metadata({ data: "json, name=language" })
+  @SpeakeasyMetadata({ data: "json, name=language" })
   language?: string;
 
-  @Metadata({ data: "json, name=link" })
+  @SpeakeasyMetadata({ data: "json, name=link" })
   link?: string;
 
-  @Metadata({ data: "json, name=links" })
+  @SpeakeasyMetadata({ data: "json, name=links" })
   links?: string;
 
-  @Metadata({ data: "json, name=publisher" })
+  @SpeakeasyMetadata({ data: "json, name=publisher" })
   publisher?: string;
 
-  @Metadata({ data: "json, name=publisher_detail" })
+  @SpeakeasyMetadata({ data: "json, name=publisher_detail" })
   publisherDetail?: string;
 
-  @Metadata({ data: "json, name=rights" })
+  @SpeakeasyMetadata({ data: "json, name=rights" })
   rights?: string;
 
-  @Metadata({ data: "json, name=rights_detail" })
+  @SpeakeasyMetadata({ data: "json, name=rights_detail" })
   rightsDetail?: string;
 
-  @Metadata({ data: "json, name=subtitle" })
+  @SpeakeasyMetadata({ data: "json, name=subtitle" })
   subtitle?: string;
 
-  @Metadata({ data: "json, name=subtitle_detail" })
+  @SpeakeasyMetadata({ data: "json, name=subtitle_detail" })
   subtitleDetail?: string;
 
-  @Metadata({ data: "json, name=title" })
+  @SpeakeasyMetadata({ data: "json, name=title" })
   title?: string;
 
-  @Metadata({ data: "json, name=updated" })
+  @SpeakeasyMetadata({ data: "json, name=updated" })
   updated?: string;
 
-  @Metadata({ data: "json, name=updated_parsed" })
+  @SpeakeasyMetadata({ data: "json, name=updated_parsed" })
   updatedParsed?: string;
 }
 
 
 export class News200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=entries", elemType: operations.News200ApplicationJsonEntries })
+  @SpeakeasyMetadata({ data: "json, name=entries", elemType: News200ApplicationJsonEntries })
   entries?: News200ApplicationJsonEntries[];
 
-  @Metadata({ data: "json, name=feed" })
+  @SpeakeasyMetadata({ data: "json, name=feed" })
   feed?: News200ApplicationJsonFeed;
 }
 
 
+export class NewsRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: NewsPathParams;
+}
+
+
 export class NewsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   httpValidationError?: shared.HttpValidationError;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   news200ApplicationJsonObject?: News200ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

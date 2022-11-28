@@ -9,7 +9,7 @@ import (
 	"strings"
 )
 
-var Servers = []string{
+var ServerList = []string{
 	"https://cal-test.adyen.com/cal/services/Notification/v5",
 }
 
@@ -18,9 +18,13 @@ type HTTPClient interface {
 }
 
 type SDK struct {
-	defaultClient  HTTPClient
-	securityClient HTTPClient
-	serverURL      string
+	_defaultClient  HTTPClient
+	_securityClient HTTPClient
+
+	_serverURL  string
+	_language   string
+	_sdkVersion string
+	_genVersion string
 }
 
 type SDKOption func(*SDK)
@@ -31,27 +35,46 @@ func WithServerURL(serverURL string, params map[string]string) SDKOption {
 			serverURL = utils.ReplaceParameters(serverURL, params)
 		}
 
-		sdk.serverURL = serverURL
+		sdk._serverURL = serverURL
+	}
+}
+
+func WithClient(client HTTPClient) SDKOption {
+	return func(sdk *SDK) {
+		sdk._defaultClient = client
 	}
 }
 
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
-		defaultClient:  http.DefaultClient,
-		securityClient: http.DefaultClient,
+		_language:   "go",
+		_sdkVersion: "",
+		_genVersion: "internal",
 	}
 	for _, opt := range opts {
 		opt(sdk)
 	}
-	if sdk.serverURL == "" {
-		sdk.serverURL = Servers[0]
+
+	if sdk._defaultClient == nil {
+		sdk._defaultClient = http.DefaultClient
+	}
+	if sdk._securityClient == nil {
+
+		sdk._securityClient = sdk._defaultClient
+
+	}
+
+	if sdk._serverURL == "" {
+		sdk._serverURL = ServerList[0]
 	}
 
 	return sdk
 }
 
+// PostCreateNotificationConfiguration - Subscribe to notifications.
+// Creates a subscription to notifications informing you of events on your platform. After the subscription is created, the events specified in the configuration will be sent to the URL specified in the configuration. Subscriptions must be configured on a per-event basis (as opposed to, for example, a per-account holder basis), so all event notifications of a marketplace and of a given type will be sent to the same endpoint(s). A marketplace may have multiple endpoints if desired; an event notification may be sent to as many or as few different endpoints as configured.
 func (s *SDK) PostCreateNotificationConfiguration(ctx context.Context, request operations.PostCreateNotificationConfigurationRequest) (*operations.PostCreateNotificationConfigurationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/createNotificationConfiguration"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -66,7 +89,7 @@ func (s *SDK) PostCreateNotificationConfiguration(ctx context.Context, request o
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -146,8 +169,10 @@ func (s *SDK) PostCreateNotificationConfiguration(ctx context.Context, request o
 	return res, nil
 }
 
+// PostDeleteNotificationConfigurations - Delete an existing notification subscription configuration.
+// This endpoint is used to delete an existing notification subscription configuration. After the subscription is deleted, no further event notifications will be sent to the URL that was in the subscription.
 func (s *SDK) PostDeleteNotificationConfigurations(ctx context.Context, request operations.PostDeleteNotificationConfigurationsRequest) (*operations.PostDeleteNotificationConfigurationsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/deleteNotificationConfigurations"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -162,7 +187,7 @@ func (s *SDK) PostDeleteNotificationConfigurations(ctx context.Context, request 
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -242,8 +267,10 @@ func (s *SDK) PostDeleteNotificationConfigurations(ctx context.Context, request 
 	return res, nil
 }
 
+// PostGetNotificationConfiguration - Retrieve an existing notification subscription configuration.
+// This endpoint is used to retrieve the details of the configuration of a notification subscription.
 func (s *SDK) PostGetNotificationConfiguration(ctx context.Context, request operations.PostGetNotificationConfigurationRequest) (*operations.PostGetNotificationConfigurationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/getNotificationConfiguration"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -258,7 +285,7 @@ func (s *SDK) PostGetNotificationConfiguration(ctx context.Context, request oper
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -338,8 +365,10 @@ func (s *SDK) PostGetNotificationConfiguration(ctx context.Context, request oper
 	return res, nil
 }
 
+// PostGetNotificationConfigurationList - Retrieve a list of existing notification subscription configurations.
+// This endpoint is used to retrieve the details of the configurations of all of the notification subscriptions in the marketplace of the executing user.
 func (s *SDK) PostGetNotificationConfigurationList(ctx context.Context, request operations.PostGetNotificationConfigurationListRequest) (*operations.PostGetNotificationConfigurationListResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/getNotificationConfigurationList"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -354,7 +383,7 @@ func (s *SDK) PostGetNotificationConfigurationList(ctx context.Context, request 
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -434,8 +463,10 @@ func (s *SDK) PostGetNotificationConfigurationList(ctx context.Context, request 
 	return res, nil
 }
 
+// PostTestNotificationConfiguration - Test an existing notification configuration.
+// This endpoint is used to test an existing notification subscription configuration. For each event type specified, a test notification will be generated and sent to the URL configured in the subscription specified.
 func (s *SDK) PostTestNotificationConfiguration(ctx context.Context, request operations.PostTestNotificationConfigurationRequest) (*operations.PostTestNotificationConfigurationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/testNotificationConfiguration"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -450,7 +481,7 @@ func (s *SDK) PostTestNotificationConfiguration(ctx context.Context, request ope
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -530,8 +561,10 @@ func (s *SDK) PostTestNotificationConfiguration(ctx context.Context, request ope
 	return res, nil
 }
 
+// PostUpdateNotificationConfiguration - Update an existing notification subscription configuration.
+// This endpoint is used to update an existing notification subscription configuration. If updating the event types, all event types desired must be provided, otherwise the previous event type configuration will be overwritten.
 func (s *SDK) PostUpdateNotificationConfiguration(ctx context.Context, request operations.PostUpdateNotificationConfigurationRequest) (*operations.PostUpdateNotificationConfigurationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/updateNotificationConfiguration"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -546,7 +579,7 @@ func (s *SDK) PostUpdateNotificationConfiguration(ctx context.Context, request o
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {

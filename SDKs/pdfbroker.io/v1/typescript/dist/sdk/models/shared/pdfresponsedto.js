@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // PdfResponseDto
 /**
  * When setting the Accept-header in the request to "application/json" the content of the pdf file will be return as Base64 encoded string. Note that converting data to Base64 encoded strings increases the response size with approximately 33%, if you can accept the a binary format it's better to use Accept-header "application/pdf".
@@ -33,11 +33,11 @@ var PdfResponseDto = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=ErrorMessage" }),
+        SpeakeasyMetadata({ data: "json, name=ErrorMessage" }),
         __metadata("design:type", String)
     ], PdfResponseDto.prototype, "errorMessage", void 0);
     __decorate([
-        Metadata({ data: "json, name=PdfFileBase64String" }),
+        SpeakeasyMetadata({ data: "json, name=PdfFileBase64String" }),
         __metadata("design:type", String)
     ], PdfResponseDto.prototype, "pdfFileBase64String", void 0);
     return PdfResponseDto;

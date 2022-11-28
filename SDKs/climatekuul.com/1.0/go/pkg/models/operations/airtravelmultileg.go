@@ -4,7 +4,7 @@ import (
 	"openapi/pkg/models/shared"
 )
 
-var AirtravelMultilegServers = []string{
+var AirtravelMultilegServerList = []string{
 	"http://api.climatekuul.com:8000/footprint",
 }
 

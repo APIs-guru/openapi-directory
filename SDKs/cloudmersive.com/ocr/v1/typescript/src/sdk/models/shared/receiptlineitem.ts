@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ReceiptLineItem
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Receipt line item, comprised of a product or item and a price (if available)
 **/
 export class ReceiptLineItem extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ItemDescription" })
+  @SpeakeasyMetadata({ data: "json, name=ItemDescription" })
   itemDescription?: string;
 
-  @Metadata({ data: "json, name=ItemPrice" })
+  @SpeakeasyMetadata({ data: "json, name=ItemPrice" })
   itemPrice?: number;
 }

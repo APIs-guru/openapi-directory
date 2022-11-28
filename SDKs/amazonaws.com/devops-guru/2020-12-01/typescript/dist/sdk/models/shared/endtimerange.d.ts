@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 /**
  *  A range of time that specifies when anomalous behavior in an anomaly or insight ended.
 **/

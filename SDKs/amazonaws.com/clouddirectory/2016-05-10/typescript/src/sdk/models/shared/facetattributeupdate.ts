@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { UpdateActionTypeEnum } from "./updateactiontypeenum";
 import { FacetAttribute } from "./facetattribute";
+
 
 
 // FacetAttributeUpdate
@@ -8,9 +9,9 @@ import { FacetAttribute } from "./facetattribute";
  * A structure that contains information used to update an attribute.
 **/
 export class FacetAttributeUpdate extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Action" })
+  @SpeakeasyMetadata({ data: "json, name=Action" })
   action?: UpdateActionTypeEnum;
 
-  @Metadata({ data: "json, name=Attribute" })
+  @SpeakeasyMetadata({ data: "json, name=Attribute" })
   attribute?: FacetAttribute;
 }

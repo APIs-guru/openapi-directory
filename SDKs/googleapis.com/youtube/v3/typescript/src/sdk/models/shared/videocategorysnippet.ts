@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // VideoCategorySnippet
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Basic details about a video category, such as its localized title.
 **/
 export class VideoCategorySnippet extends SpeakeasyBase {
-  @Metadata({ data: "json, name=assignable" })
+  @SpeakeasyMetadata({ data: "json, name=assignable" })
   assignable?: boolean;
 
-  @Metadata({ data: "json, name=channelId" })
+  @SpeakeasyMetadata({ data: "json, name=channelId" })
   channelId?: string;
 
-  @Metadata({ data: "json, name=title" })
+  @SpeakeasyMetadata({ data: "json, name=title" })
   title?: string;
 }

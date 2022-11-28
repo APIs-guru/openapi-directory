@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetDescribeOrderableDbInstanceOptionsActionEnum(str, Enum):
     DESCRIBE_ORDERABLE_DB_INSTANCE_OPTIONS = "DescribeOrderableDBInstanceOptions"
@@ -10,14 +14,14 @@ class GetDescribeOrderableDbInstanceOptionsVersionEnum(str, Enum):
 
 @dataclass
 class GetDescribeOrderableDbInstanceOptionsQueryParams:
-    action: GetDescribeOrderableDbInstanceOptionsActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetDescribeOrderableDbInstanceOptionsActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    engine: str = field(metadata={'query_param': { 'field_name': 'Engine', 'style': 'form', 'explode': True }})
+    version: GetDescribeOrderableDbInstanceOptionsVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     db_instance_class: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'DBInstanceClass', 'style': 'form', 'explode': True }})
-    engine: str = field(default=None, metadata={'query_param': { 'field_name': 'Engine', 'style': 'form', 'explode': True }})
     engine_version: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'EngineVersion', 'style': 'form', 'explode': True }})
     license_model: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'LicenseModel', 'style': 'form', 'explode': True }})
     marker: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'Marker', 'style': 'form', 'explode': True }})
     max_records: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'MaxRecords', 'style': 'form', 'explode': True }})
-    version: GetDescribeOrderableDbInstanceOptionsVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     vpc: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'Vpc', 'style': 'form', 'explode': True }})
     
 
@@ -34,13 +38,13 @@ class GetDescribeOrderableDbInstanceOptionsHeaders:
 
 @dataclass
 class GetDescribeOrderableDbInstanceOptionsRequest:
-    query_params: GetDescribeOrderableDbInstanceOptionsQueryParams = field(default=None)
-    headers: GetDescribeOrderableDbInstanceOptionsHeaders = field(default=None)
+    headers: GetDescribeOrderableDbInstanceOptionsHeaders = field()
+    query_params: GetDescribeOrderableDbInstanceOptionsQueryParams = field()
     
 
 @dataclass
 class GetDescribeOrderableDbInstanceOptionsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

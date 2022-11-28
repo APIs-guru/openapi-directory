@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var SandboxIncomeFireWebhookRequestVerificationStatusEnum;
 (function (SandboxIncomeFireWebhookRequestVerificationStatusEnum) {
     SandboxIncomeFireWebhookRequestVerificationStatusEnum["VerificationStatusProcessingComplete"] = "VERIFICATION_STATUS_PROCESSING_COMPLETE";
@@ -39,23 +39,23 @@ var SandboxIncomeFireWebhookRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=client_id" }),
+        SpeakeasyMetadata({ data: "json, name=client_id" }),
         __metadata("design:type", String)
     ], SandboxIncomeFireWebhookRequest.prototype, "clientId", void 0);
     __decorate([
-        Metadata({ data: "json, name=income_verification_id" }),
+        SpeakeasyMetadata({ data: "json, name=income_verification_id" }),
         __metadata("design:type", String)
     ], SandboxIncomeFireWebhookRequest.prototype, "incomeVerificationId", void 0);
     __decorate([
-        Metadata({ data: "json, name=secret" }),
+        SpeakeasyMetadata({ data: "json, name=secret" }),
         __metadata("design:type", String)
     ], SandboxIncomeFireWebhookRequest.prototype, "secret", void 0);
     __decorate([
-        Metadata({ data: "json, name=verification_status" }),
+        SpeakeasyMetadata({ data: "json, name=verification_status" }),
         __metadata("design:type", String)
     ], SandboxIncomeFireWebhookRequest.prototype, "verificationStatus", void 0);
     __decorate([
-        Metadata({ data: "json, name=webhook" }),
+        SpeakeasyMetadata({ data: "json, name=webhook" }),
         __metadata("design:type", String)
     ], SandboxIncomeFireWebhookRequest.prototype, "webhook", void 0);
     return SandboxIncomeFireWebhookRequest;

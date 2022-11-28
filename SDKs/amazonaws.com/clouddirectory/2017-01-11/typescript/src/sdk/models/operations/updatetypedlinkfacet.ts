@@ -1,95 +1,96 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class UpdateTypedLinkFacetHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=x-amz-data-partition" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=x-amz-data-partition" })
   xAmzDataPartition: string;
 }
 
 
 export class UpdateTypedLinkFacetRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AttributeUpdates", elemType: shared.TypedLinkFacetAttributeUpdate })
+  @SpeakeasyMetadata({ data: "json, name=AttributeUpdates", elemType: shared.TypedLinkFacetAttributeUpdate })
   attributeUpdates: shared.TypedLinkFacetAttributeUpdate[];
 
-  @Metadata({ data: "json, name=IdentityAttributeOrder" })
+  @SpeakeasyMetadata({ data: "json, name=IdentityAttributeOrder" })
   identityAttributeOrder: string[];
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name: string;
 }
 
 
 export class UpdateTypedLinkFacetRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: UpdateTypedLinkFacetHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: UpdateTypedLinkFacetRequestBody;
 }
 
 
 export class UpdateTypedLinkFacetResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   accessDeniedException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   facetNotFoundException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   facetValidationException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   internalServiceException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidArnException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidFacetUpdateException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidRuleException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   limitExceededException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   resourceNotFoundException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   retryableConflictException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   updateTypedLinkFacetResponse?: Map<string, any>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   validationException?: any;
 }

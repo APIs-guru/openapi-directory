@@ -1,11 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import { DimensionValue } from "./dimensionvalue";
-import { DimensionValue } from "./dimensionvalue";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DimensionValue } from "./dimensionvalue";
 
+
 export enum FloodlightActivityGroupTypeEnum {
-    Counter = "COUNTER"
-,    Sale = "SALE"
+    Counter = "COUNTER",
+    Sale = "SALE"
 }
 
 
@@ -14,39 +13,39 @@ export enum FloodlightActivityGroupTypeEnum {
  * Contains properties of a Floodlight activity group.
 **/
 export class FloodlightActivityGroup extends SpeakeasyBase {
-  @Metadata({ data: "json, name=accountId" })
+  @SpeakeasyMetadata({ data: "json, name=accountId" })
   accountId?: string;
 
-  @Metadata({ data: "json, name=advertiserId" })
+  @SpeakeasyMetadata({ data: "json, name=advertiserId" })
   advertiserId?: string;
 
-  @Metadata({ data: "json, name=advertiserIdDimensionValue" })
+  @SpeakeasyMetadata({ data: "json, name=advertiserIdDimensionValue" })
   advertiserIdDimensionValue?: DimensionValue;
 
-  @Metadata({ data: "json, name=floodlightConfigurationId" })
+  @SpeakeasyMetadata({ data: "json, name=floodlightConfigurationId" })
   floodlightConfigurationId?: string;
 
-  @Metadata({ data: "json, name=floodlightConfigurationIdDimensionValue" })
+  @SpeakeasyMetadata({ data: "json, name=floodlightConfigurationIdDimensionValue" })
   floodlightConfigurationIdDimensionValue?: DimensionValue;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=idDimensionValue" })
+  @SpeakeasyMetadata({ data: "json, name=idDimensionValue" })
   idDimensionValue?: DimensionValue;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=subaccountId" })
+  @SpeakeasyMetadata({ data: "json, name=subaccountId" })
   subaccountId?: string;
 
-  @Metadata({ data: "json, name=tagString" })
+  @SpeakeasyMetadata({ data: "json, name=tagString" })
   tagString?: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: FloodlightActivityGroupTypeEnum;
 }

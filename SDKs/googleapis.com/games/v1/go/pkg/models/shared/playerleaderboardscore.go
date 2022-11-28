@@ -9,6 +9,8 @@ const (
 	PlayerLeaderboardScoreTimeSpanEnumDaily                    PlayerLeaderboardScoreTimeSpanEnum = "DAILY"
 )
 
+// PlayerLeaderboardScore
+// A player leaderboard score object.
 type PlayerLeaderboardScore struct {
 	FriendsRank    *LeaderboardScoreRank               `json:"friendsRank,omitempty"`
 	Kind           *string                             `json:"kind,omitempty"`

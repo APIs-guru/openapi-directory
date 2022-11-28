@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleAppsCardV1Card } from "./googleappscardv1card";
+
 
 
 // Dialog
@@ -7,6 +8,6 @@ import { GoogleAppsCardV1Card } from "./googleappscardv1card";
  * Wrapper around the card body of the dialog.
 **/
 export class Dialog extends SpeakeasyBase {
-  @Metadata({ data: "json, name=body" })
+  @SpeakeasyMetadata({ data: "json, name=body" })
   body?: GoogleAppsCardV1Card;
 }

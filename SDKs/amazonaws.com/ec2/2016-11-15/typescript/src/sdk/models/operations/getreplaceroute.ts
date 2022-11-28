@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum GetReplaceRouteActionEnum {
     ReplaceRoute = "ReplaceRoute"
@@ -10,99 +11,99 @@ export enum GetReplaceRouteVersionEnum {
 
 
 export class GetReplaceRouteQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Action" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Action" })
   action: GetReplaceRouteActionEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=CarrierGatewayId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=CarrierGatewayId" })
   carrierGatewayId?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=DestinationCidrBlock" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=DestinationCidrBlock" })
   destinationCidrBlock?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=DestinationIpv6CidrBlock" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=DestinationIpv6CidrBlock" })
   destinationIpv6CidrBlock?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=DestinationPrefixListId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=DestinationPrefixListId" })
   destinationPrefixListId?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=DryRun" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=DryRun" })
   dryRun?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=EgressOnlyInternetGatewayId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=EgressOnlyInternetGatewayId" })
   egressOnlyInternetGatewayId?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=GatewayId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=GatewayId" })
   gatewayId?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=InstanceId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=InstanceId" })
   instanceId?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=LocalGatewayId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=LocalGatewayId" })
   localGatewayId?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=LocalTarget" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=LocalTarget" })
   localTarget?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=NatGatewayId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=NatGatewayId" })
   natGatewayId?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=NetworkInterfaceId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=NetworkInterfaceId" })
   networkInterfaceId?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=RouteTableId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=RouteTableId" })
   routeTableId: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=TransitGatewayId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=TransitGatewayId" })
   transitGatewayId?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Version" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Version" })
   version: GetReplaceRouteVersionEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=VpcEndpointId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=VpcEndpointId" })
   vpcEndpointId?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=VpcPeeringConnectionId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=VpcPeeringConnectionId" })
   vpcPeeringConnectionId?: string;
 }
 
 
 export class GetReplaceRouteHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
 
 export class GetReplaceRouteRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetReplaceRouteQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: GetReplaceRouteHeaders;
 }
 
 
 export class GetReplaceRouteResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

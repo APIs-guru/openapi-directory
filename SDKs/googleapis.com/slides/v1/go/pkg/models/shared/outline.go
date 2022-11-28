@@ -20,6 +20,8 @@ const (
 	OutlinePropertyStateEnumInherit     OutlinePropertyStateEnum = "INHERIT"
 )
 
+// Outline
+// The outline of a PageElement. If these fields are unset, they may be inherited from a parent placeholder if it exists. If there is no parent, the fields will default to the value used for new page elements created in the Slides editor, which may depend on the page element kind.
 type Outline struct {
 	DashStyle     *OutlineDashStyleEnum     `json:"dashStyle,omitempty"`
 	OutlineFill   *OutlineFill              `json:"outlineFill,omitempty"`

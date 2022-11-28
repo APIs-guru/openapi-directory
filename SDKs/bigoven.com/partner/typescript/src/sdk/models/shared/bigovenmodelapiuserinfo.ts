@@ -1,43 +1,80 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
+
+
+export class BigOvenModelApiUserInfoInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=FirstName" })
+  firstName?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=ImageUrl48" })
+  imageUrl48?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=IsKitchenHelper" })
+  isKitchenHelper?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=IsPremium" })
+  isPremium?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=IsUsingRecurly" })
+  isUsingRecurly?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=LastName" })
+  lastName?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=MemberSince" })
+  memberSince?: Date;
+
+  @SpeakeasyMetadata({ data: "json, name=PhotoUrl" })
+  photoUrl?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=PremiumExpiryDate" })
+  premiumExpiryDate?: Date;
+
+  @SpeakeasyMetadata({ data: "json, name=UserID" })
+  userId?: number;
+
+  @SpeakeasyMetadata({ data: "json, name=UserName" })
+  userName?: string;
+}
 
 
 export class BigOvenModelApiUserInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=FirstName" })
+  @SpeakeasyMetadata({ data: "json, name=FirstName" })
   firstName?: string;
 
-  @Metadata({ data: "json, name=ImageUrl48" })
+  @SpeakeasyMetadata({ data: "json, name=ImageUrl48" })
   imageUrl48?: string;
 
-  @Metadata({ data: "json, name=IsKitchenHelper" })
+  @SpeakeasyMetadata({ data: "json, name=IsKitchenHelper" })
   isKitchenHelper?: boolean;
 
-  @Metadata({ data: "json, name=IsPremium" })
+  @SpeakeasyMetadata({ data: "json, name=IsPremium" })
   isPremium?: boolean;
 
-  @Metadata({ data: "json, name=IsUsingRecurly" })
+  @SpeakeasyMetadata({ data: "json, name=IsUsingRecurly" })
   isUsingRecurly?: boolean;
 
-  @Metadata({ data: "json, name=LastName" })
+  @SpeakeasyMetadata({ data: "json, name=LastName" })
   lastName?: string;
 
-  @Metadata({ data: "json, name=MemberSince" })
+  @SpeakeasyMetadata({ data: "json, name=MemberSince" })
   memberSince?: Date;
 
-  @Metadata({ data: "json, name=PhotoUrl" })
+  @SpeakeasyMetadata({ data: "json, name=PhotoUrl" })
   photoUrl?: string;
 
-  @Metadata({ data: "json, name=PhotoUrl48" })
+  @SpeakeasyMetadata({ data: "json, name=PhotoUrl48" })
   photoUrl48?: string;
 
-  @Metadata({ data: "json, name=PremiumExpiryDate" })
+  @SpeakeasyMetadata({ data: "json, name=PremiumExpiryDate" })
   premiumExpiryDate?: Date;
 
-  @Metadata({ data: "json, name=UserID" })
+  @SpeakeasyMetadata({ data: "json, name=UserID" })
   userId?: number;
 
-  @Metadata({ data: "json, name=UserName" })
+  @SpeakeasyMetadata({ data: "json, name=UserName" })
   userName?: string;
 
-  @Metadata({ data: "json, name=WebUrl" })
+  @SpeakeasyMetadata({ data: "json, name=WebUrl" })
   webUrl?: string;
 }

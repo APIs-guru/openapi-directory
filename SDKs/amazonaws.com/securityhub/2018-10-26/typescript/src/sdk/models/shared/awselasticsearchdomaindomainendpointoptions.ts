@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AwsElasticsearchDomainDomainEndpointOptions
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Additional options for the domain endpoint, such as whether to require HTTPS for all traffic.
 **/
 export class AwsElasticsearchDomainDomainEndpointOptions extends SpeakeasyBase {
-  @Metadata({ data: "json, name=EnforceHTTPS" })
+  @SpeakeasyMetadata({ data: "json, name=EnforceHTTPS" })
   enforceHttps?: boolean;
 
-  @Metadata({ data: "json, name=TLSSecurityPolicy" })
+  @SpeakeasyMetadata({ data: "json, name=TLSSecurityPolicy" })
   tlsSecurityPolicy?: string;
 }

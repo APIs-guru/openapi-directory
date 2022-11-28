@@ -9,6 +9,8 @@ const (
 	GoogleCloudDocumentaiV1beta2DocumentPageTokenDetectedBreakTypeEnumHyphen          GoogleCloudDocumentaiV1beta2DocumentPageTokenDetectedBreakTypeEnum = "HYPHEN"
 )
 
+// GoogleCloudDocumentaiV1beta2DocumentPageTokenDetectedBreak
+// Detected break at the end of a Token.
 type GoogleCloudDocumentaiV1beta2DocumentPageTokenDetectedBreak struct {
 	Type *GoogleCloudDocumentaiV1beta2DocumentPageTokenDetectedBreakTypeEnum `json:"type,omitempty"`
 }

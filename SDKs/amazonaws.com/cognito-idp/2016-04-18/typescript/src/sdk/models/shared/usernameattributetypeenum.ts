@@ -1,6 +1,7 @@
 
 
+
 export enum UsernameAttributeTypeEnum {
-    PhoneNumber = "phone_number"
-,    Email = "email"
+    PhoneNumber = "phone_number",
+    Email = "email"
 }

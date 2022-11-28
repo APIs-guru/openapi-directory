@@ -1,5 +1,7 @@
 package shared
 
+// HealthCheckConfiguration
+// Describes the settings for the health check that AWS App Runner performs to monitor the health of a service.
 type HealthCheckConfiguration struct {
 	HealthyThreshold   *int64                   `json:"HealthyThreshold,omitempty"`
 	Interval           *int64                   `json:"Interval,omitempty"`

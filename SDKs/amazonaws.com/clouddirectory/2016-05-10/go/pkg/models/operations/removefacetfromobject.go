@@ -15,10 +15,14 @@ type RemoveFacetFromObjectHeaders struct {
 	XAmzDataPartition string  `header:"style=simple,explode=false,name=x-amz-data-partition"`
 }
 
+// RemoveFacetFromObjectRequestBodyObjectReference
+// The reference that identifies an object.
 type RemoveFacetFromObjectRequestBodyObjectReference struct {
 	Selector *string `json:"Selector,omitempty"`
 }
 
+// RemoveFacetFromObjectRequestBodySchemaFacet
+// A facet.
 type RemoveFacetFromObjectRequestBodySchemaFacet struct {
 	FacetName *string `json:"FacetName,omitempty"`
 	SchemaArn *string `json:"SchemaArn,omitempty"`

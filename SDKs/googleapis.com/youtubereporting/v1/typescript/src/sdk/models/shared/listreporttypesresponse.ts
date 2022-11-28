@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ReportType } from "./reporttype";
+
 
 
 // ListReportTypesResponse
@@ -8,9 +8,9 @@ import { ReportType } from "./reporttype";
  * Response message for ReportingService.ListReportTypes.
 **/
 export class ListReportTypesResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 
-  @Metadata({ data: "json, name=reportTypes", elemType: shared.ReportType })
+  @SpeakeasyMetadata({ data: "json, name=reportTypes", elemType: ReportType })
   reportTypes?: ReportType[];
 }

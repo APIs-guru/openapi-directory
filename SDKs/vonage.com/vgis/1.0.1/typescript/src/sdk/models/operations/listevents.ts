@@ -1,27 +1,28 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
+
 export enum ListEventsDirectionEnum {
-    Inbound = "INBOUND"
-,    Outbound = "OUTBOUND"
+    Inbound = "INBOUND",
+    Outbound = "OUTBOUND"
 }
 
 export enum ListEventsOrderEnum {
-    Desc = "DESC"
-,    Asc = "ASC"
+    Desc = "DESC",
+    Asc = "ASC"
 }
 
 export enum ListEventsStatesEnum {
-    Initializing = "INITIALIZING"
-,    Ringing = "RINGING"
-,    Active = "ACTIVE"
-,    Held = "HELD"
-,    RemoteHeld = "REMOTE_HELD"
-,    Detached = "DETACHED"
-,    Rejected = "REJECTED"
-,    Cancelled = "CANCELLED"
-,    Answered = "ANSWERED"
-,    Missed = "MISSED"
+    Initializing = "INITIALIZING",
+    Ringing = "RINGING",
+    Active = "ACTIVE",
+    Held = "HELD",
+    RemoteHeld = "REMOTE_HELD",
+    Detached = "DETACHED",
+    Rejected = "REJECTED",
+    Cancelled = "CANCELLED",
+    Answered = "ANSWERED",
+    Missed = "MISSED"
 }
 
 export enum ListEventsTypesEnum {
@@ -30,51 +31,51 @@ export enum ListEventsTypesEnum {
 
 
 export class ListEventsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=direction" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=direction" })
   direction?: ListEventsDirectionEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=fromDate" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=fromDate" })
   fromDate?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=offset" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=offset" })
   offset?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=order" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=order" })
   order?: ListEventsOrderEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=size" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=size" })
   size?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=sort" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sort" })
   sort?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=states" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=states" })
   states?: ListEventsStatesEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=toDate" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=toDate" })
   toDate?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=types" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=types" })
   types?: ListEventsTypesEnum;
 }
 
 
 export class ListEventsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: ListEventsQueryParams;
 }
 
 
 export class ListEventsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   errorResponse?: shared.ErrorResponse;
 
-  @Metadata({ elemType: shared.Event })
+  @SpeakeasyMetadata({ elemType: shared.Event })
   events?: shared.Event[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

@@ -28,6 +28,9 @@ from .cloudchannel_accounts_listtransferableoffers import *
 from .cloudchannel_accounts_listtransferableskus import *
 from .cloudchannel_accounts_offers_list import *
 from .cloudchannel_accounts_register import *
+from .cloudchannel_accounts_reportjobs_fetchreportresults import *
+from .cloudchannel_accounts_reports_list import *
+from .cloudchannel_accounts_reports_run import *
 from .cloudchannel_accounts_unregister import *
 from .cloudchannel_operations_cancel import *
 from .cloudchannel_operations_delete import *

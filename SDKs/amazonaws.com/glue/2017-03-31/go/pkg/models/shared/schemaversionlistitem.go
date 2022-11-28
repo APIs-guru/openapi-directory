@@ -1,5 +1,7 @@
 package shared
 
+// SchemaVersionListItem
+// An object containing the details about a schema version.
 type SchemaVersionListItem struct {
 	CreatedTime     *string                  `json:"CreatedTime,omitempty"`
 	SchemaArn       *string                  `json:"SchemaArn,omitempty"`

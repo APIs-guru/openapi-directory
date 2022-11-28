@@ -1,62 +1,63 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class ReleaseEventApiGetOnePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" })
   id: number;
 }
 
 export enum ReleaseEventApiGetOneFieldsEnum {
-    None = "None"
-,    AdditionalNames = "AdditionalNames"
-,    Artists = "Artists"
-,    Description = "Description"
-,    MainPicture = "MainPicture"
-,    Names = "Names"
-,    Series = "Series"
-,    SongList = "SongList"
-,    Tags = "Tags"
-,    Venue = "Venue"
-,    WebLinks = "WebLinks"
+    None = "None",
+    AdditionalNames = "AdditionalNames",
+    Artists = "Artists",
+    Description = "Description",
+    MainPicture = "MainPicture",
+    Names = "Names",
+    Series = "Series",
+    SongList = "SongList",
+    Tags = "Tags",
+    Venue = "Venue",
+    WebLinks = "WebLinks"
 }
 
 export enum ReleaseEventApiGetOneLangEnum {
-    Default = "Default"
-,    Japanese = "Japanese"
-,    Romaji = "Romaji"
-,    English = "English"
+    Default = "Default",
+    Japanese = "Japanese",
+    Romaji = "Romaji",
+    English = "English"
 }
 
 
 export class ReleaseEventApiGetOneQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=fields" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=fields" })
   fields?: ReleaseEventApiGetOneFieldsEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=lang" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=lang" })
   lang?: ReleaseEventApiGetOneLangEnum;
 }
 
 
 export class ReleaseEventApiGetOneRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: ReleaseEventApiGetOnePathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: ReleaseEventApiGetOneQueryParams;
 }
 
 
 export class ReleaseEventApiGetOneResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   releaseEventForApiContract?: shared.ReleaseEventForApiContract;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

@@ -22,19 +22,19 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { ChangedAssetDetail } from "./changedassetdetail";
 var AssetChanges = /** @class */ (function (_super) {
     __extends(AssetChanges, _super);
     function AssetChanges() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=change_set_id" }),
+        SpeakeasyMetadata({ data: "json, name=change_set_id" }),
         __metadata("design:type", String)
     ], AssetChanges.prototype, "changeSetId", void 0);
     __decorate([
-        Metadata({ data: "json, name=changed_assets", elemType: shared.ChangedAssetDetail }),
+        SpeakeasyMetadata({ data: "json, name=changed_assets", elemType: ChangedAssetDetail }),
         __metadata("design:type", Array)
     ], AssetChanges.prototype, "changedAssets", void 0);
     return AssetChanges;

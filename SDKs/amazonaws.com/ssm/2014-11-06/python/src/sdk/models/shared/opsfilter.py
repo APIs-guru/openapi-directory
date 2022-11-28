@@ -1,13 +1,19 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import opsfilteroperatortype_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class OpsFilter:
-    key: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Key' }})
-    type: Optional[opsfilteroperatortype_enum.OpsFilterOperatorTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Type' }})
-    values: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Values' }})
+    r"""OpsFilter
+    A filter for viewing OpsData summaries.
+    """
+    
+    key: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Key') }})
+    values: List[str] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Values') }})
+    type: Optional[OpsFilterOperatorTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Type') }})
     

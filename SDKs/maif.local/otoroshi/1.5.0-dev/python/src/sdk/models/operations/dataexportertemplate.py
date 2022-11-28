@@ -10,18 +10,18 @@ class DataExporterTemplateQueryParams:
 
 @dataclass
 class DataExporterTemplateSecurity:
-    otoroshi_auth: shared.SchemeOtoroshiAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'basic' }})
+    otoroshi_auth: shared.SchemeOtoroshiAuth = field(metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'basic' }})
     
 
 @dataclass
 class DataExporterTemplateRequest:
-    query_params: DataExporterTemplateQueryParams = field(default=None)
-    security: DataExporterTemplateSecurity = field(default=None)
+    query_params: DataExporterTemplateQueryParams = field()
+    security: DataExporterTemplateSecurity = field()
     
 
 @dataclass
 class DataExporterTemplateResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     data_exporter_config: Optional[shared.DataExporterConfig] = field(default=None)
-    status_code: int = field(default=None)
     

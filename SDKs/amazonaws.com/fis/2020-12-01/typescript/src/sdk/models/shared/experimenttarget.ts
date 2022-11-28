@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ExperimentTargetFilter } from "./experimenttargetfilter";
+
 
 
 // ExperimentTarget
@@ -8,18 +8,18 @@ import { ExperimentTargetFilter } from "./experimenttargetfilter";
  * Describes a target for an experiment.
 **/
 export class ExperimentTarget extends SpeakeasyBase {
-  @Metadata({ data: "json, name=filters", elemType: shared.ExperimentTargetFilter })
+  @SpeakeasyMetadata({ data: "json, name=filters", elemType: ExperimentTargetFilter })
   filters?: ExperimentTargetFilter[];
 
-  @Metadata({ data: "json, name=resourceArns" })
+  @SpeakeasyMetadata({ data: "json, name=resourceArns" })
   resourceArns?: string[];
 
-  @Metadata({ data: "json, name=resourceTags" })
+  @SpeakeasyMetadata({ data: "json, name=resourceTags" })
   resourceTags?: Map<string, string>;
 
-  @Metadata({ data: "json, name=resourceType" })
+  @SpeakeasyMetadata({ data: "json, name=resourceType" })
   resourceType?: string;
 
-  @Metadata({ data: "json, name=selectionMode" })
+  @SpeakeasyMetadata({ data: "json, name=selectionMode" })
   selectionMode?: string;
 }

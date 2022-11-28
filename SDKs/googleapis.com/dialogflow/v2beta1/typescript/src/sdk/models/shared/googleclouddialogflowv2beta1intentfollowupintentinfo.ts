@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudDialogflowV2beta1IntentFollowupIntentInfo
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Represents a single followup intent in the chain.
 **/
 export class GoogleCloudDialogflowV2beta1IntentFollowupIntentInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=followupIntentName" })
+  @SpeakeasyMetadata({ data: "json, name=followupIntentName" })
   followupIntentName?: string;
 
-  @Metadata({ data: "json, name=parentFollowupIntentName" })
+  @SpeakeasyMetadata({ data: "json, name=parentFollowupIntentName" })
   parentFollowupIntentName?: string;
 }

@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// UserPoolClientType
+// Contains information about a user pool client.
 type UserPoolClientType struct {
 	AccessTokenValidity             *int64                              `json:"AccessTokenValidity,omitempty"`
 	AllowedOAuthFlows               []OAuthFlowTypeEnum                 `json:"AllowedOAuthFlows,omitempty"`

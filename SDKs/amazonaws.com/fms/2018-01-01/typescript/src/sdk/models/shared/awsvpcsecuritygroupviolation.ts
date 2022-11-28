@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PartialMatch } from "./partialmatch";
 import { SecurityGroupRemediationAction } from "./securitygroupremediationaction";
+
 
 
 // AwsVpcSecurityGroupViolation
@@ -9,15 +9,15 @@ import { SecurityGroupRemediationAction } from "./securitygroupremediationaction
  * Violation detail for the rule violation in a security group when compared to the primary security group of the Firewall Manager policy.
 **/
 export class AwsVpcSecurityGroupViolation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=PartialMatches", elemType: shared.PartialMatch })
+  @SpeakeasyMetadata({ data: "json, name=PartialMatches", elemType: PartialMatch })
   partialMatches?: PartialMatch[];
 
-  @Metadata({ data: "json, name=PossibleSecurityGroupRemediationActions", elemType: shared.SecurityGroupRemediationAction })
+  @SpeakeasyMetadata({ data: "json, name=PossibleSecurityGroupRemediationActions", elemType: SecurityGroupRemediationAction })
   possibleSecurityGroupRemediationActions?: SecurityGroupRemediationAction[];
 
-  @Metadata({ data: "json, name=ViolationTarget" })
+  @SpeakeasyMetadata({ data: "json, name=ViolationTarget" })
   violationTarget?: string;
 
-  @Metadata({ data: "json, name=ViolationTargetDescription" })
+  @SpeakeasyMetadata({ data: "json, name=ViolationTargetDescription" })
   violationTargetDescription?: string;
 }

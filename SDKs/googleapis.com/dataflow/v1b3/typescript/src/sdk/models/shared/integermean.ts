@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SplitInt64 } from "./splitint64";
-import { SplitInt64 } from "./splitint64";
+
 
 
 // IntegerMean
@@ -8,9 +8,9 @@ import { SplitInt64 } from "./splitint64";
  * A representation of an integer mean metric contribution.
 **/
 export class IntegerMean extends SpeakeasyBase {
-  @Metadata({ data: "json, name=count" })
+  @SpeakeasyMetadata({ data: "json, name=count" })
   count?: SplitInt64;
 
-  @Metadata({ data: "json, name=sum" })
+  @SpeakeasyMetadata({ data: "json, name=sum" })
   sum?: SplitInt64;
 }

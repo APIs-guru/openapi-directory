@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { IntegrationLinkDetail } from "./integrationlinkdetail";
 
 
+
 export class IntegrationLinkDetailsModel extends SpeakeasyBase {
-  @Metadata({ data: "json, name=allIntegrationLinkCount" })
+  @SpeakeasyMetadata({ data: "json, name=allIntegrationLinkCount" })
   allIntegrationLinkCount?: number;
 
-  @Metadata({ data: "json, name=details", elemType: shared.IntegrationLinkDetail })
+  @SpeakeasyMetadata({ data: "json, name=details", elemType: IntegrationLinkDetail })
   details?: IntegrationLinkDetail[];
 }

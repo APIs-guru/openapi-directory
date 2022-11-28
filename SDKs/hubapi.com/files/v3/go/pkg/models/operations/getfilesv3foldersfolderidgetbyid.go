@@ -12,22 +12,12 @@ type GetFilesV3FoldersFolderIDGetByIDQueryParams struct {
 	Properties []string `queryParam:"style=form,explode=true,name=properties"`
 }
 
-type GetFilesV3FoldersFolderIDGetByIDSecurityOption1 struct {
-	Oauth2Legacy shared.SchemeOauth2Legacy `security:"scheme,type=oauth2"`
-}
-
-type GetFilesV3FoldersFolderIDGetByIDSecurityOption2 struct {
-	Hapikey shared.SchemeHapikey `security:"scheme,type=apiKey,subtype=query"`
-}
-
-type GetFilesV3FoldersFolderIDGetByIDSecurityOption3 struct {
-	Oauth2Legacy shared.SchemeOauth2Legacy `security:"scheme,type=oauth2"`
-}
-
 type GetFilesV3FoldersFolderIDGetByIDSecurity struct {
-	Option1 *GetFilesV3FoldersFolderIDGetByIDSecurityOption1 `security:"option"`
-	Option2 *GetFilesV3FoldersFolderIDGetByIDSecurityOption2 `security:"option"`
-	Option3 *GetFilesV3FoldersFolderIDGetByIDSecurityOption3 `security:"option"`
+	PrivateAppsLegacy  *shared.SchemePrivateAppsLegacy `security:"scheme,type=apiKey,subtype=header"`
+	Oauth2Legacy       *shared.SchemeOauth2Legacy      `security:"scheme,type=oauth2"`
+	Hapikey            *shared.SchemeHapikey           `security:"scheme,type=apiKey,subtype=query"`
+	PrivateAppsLegacy1 *shared.SchemePrivateAppsLegacy `security:"scheme,type=apiKey,subtype=header"`
+	Oauth2Legacy1      *shared.SchemeOauth2Legacy      `security:"scheme,type=oauth2"`
 }
 
 type GetFilesV3FoldersFolderIDGetByIDRequest struct {

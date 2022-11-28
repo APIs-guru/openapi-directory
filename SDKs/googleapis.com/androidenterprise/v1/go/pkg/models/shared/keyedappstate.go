@@ -8,6 +8,8 @@ const (
 	KeyedAppStateSeverityEnumSeverityError   KeyedAppStateSeverityEnum = "severityError"
 )
 
+// KeyedAppState
+// Represents a keyed app state containing a key, timestamp, severity level, optional description, and optional data.
 type KeyedAppState struct {
 	Data                 *string                    `json:"data,omitempty"`
 	Key                  *string                    `json:"key,omitempty"`

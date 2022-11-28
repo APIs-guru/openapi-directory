@@ -1,5 +1,7 @@
 package shared
 
+// GoogleCloudApigeeV1SecurityProfile
+// Represents a SecurityProfile resource.
 type GoogleCloudApigeeV1SecurityProfile struct {
 	DisplayName         *string                                           `json:"displayName,omitempty"`
 	Environments        []GoogleCloudApigeeV1SecurityProfileEnvironment   `json:"environments,omitempty"`

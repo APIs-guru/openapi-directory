@@ -1,14 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Action } from "./action";
 
 
+
 export class DescribeBudgetActionResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AccountId" })
+  @SpeakeasyMetadata({ data: "json, name=AccountId" })
   accountId: string;
 
-  @Metadata({ data: "json, name=Action" })
+  @SpeakeasyMetadata({ data: "json, name=Action" })
   action: Action;
 
-  @Metadata({ data: "json, name=BudgetName" })
+  @SpeakeasyMetadata({ data: "json, name=BudgetName" })
   budgetName: string;
 }

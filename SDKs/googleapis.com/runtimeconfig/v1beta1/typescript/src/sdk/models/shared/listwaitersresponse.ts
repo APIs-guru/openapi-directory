@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Waiter } from "./waiter";
+
 
 
 // ListWaitersResponse
@@ -8,9 +8,9 @@ import { Waiter } from "./waiter";
  * Response for the `ListWaiters()` method. Order of returned waiter objects is arbitrary.
 **/
 export class ListWaitersResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 
-  @Metadata({ data: "json, name=waiters", elemType: shared.Waiter })
+  @SpeakeasyMetadata({ data: "json, name=waiters", elemType: Waiter })
   waiters?: Waiter[];
 }

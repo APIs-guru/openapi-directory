@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PiiEntitiesDetectionMaskModeEnum } from "./piientitiesdetectionmaskmodeenum";
 import { PiiEntityTypeEnum } from "./piientitytypeenum";
+
 
 
 // RedactionConfig
@@ -8,12 +9,12 @@ import { PiiEntityTypeEnum } from "./piientitytypeenum";
  * Provides configuration parameters for PII entity redaction.
 **/
 export class RedactionConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=MaskCharacter" })
+  @SpeakeasyMetadata({ data: "json, name=MaskCharacter" })
   maskCharacter?: string;
 
-  @Metadata({ data: "json, name=MaskMode" })
+  @SpeakeasyMetadata({ data: "json, name=MaskMode" })
   maskMode?: PiiEntitiesDetectionMaskModeEnum;
 
-  @Metadata({ data: "json, name=PiiEntityTypes" })
+  @SpeakeasyMetadata({ data: "json, name=PiiEntityTypes" })
   piiEntityTypes?: PiiEntityTypeEnum[];
 }

@@ -1,43 +1,44 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class SignRetrievePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=job" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=job" })
   job: string;
 }
 
 
-export class SignRetrieveRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: SignRetrievePathParams;
-}
-
-
 export class SignRetrieveJwt extends SpeakeasyBase {
-  @Metadata({ data: "json, name=exp" })
+  @SpeakeasyMetadata({ data: "json, name=exp" })
   exp?: number;
 
-  @Metadata({ data: "json, name=field" })
+  @SpeakeasyMetadata({ data: "json, name=field" })
   field?: string;
 
-  @Metadata({ data: "json, name=sub" })
+  @SpeakeasyMetadata({ data: "json, name=sub" })
   sub?: string;
 }
 
 
+export class SignRetrieveRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: SignRetrievePathParams;
+}
+
+
 export class SignRetrieveResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   error?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   jwt?: SignRetrieveJwt;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

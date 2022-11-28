@@ -1,5 +1,7 @@
 package shared
 
+// PutPipelineDefinitionInput
+// Contains the parameters for PutPipelineDefinition.
 type PutPipelineDefinitionInput struct {
 	ParameterObjects []ParameterObject `json:"parameterObjects,omitempty"`
 	ParameterValues  []ParameterValue  `json:"parameterValues,omitempty"`

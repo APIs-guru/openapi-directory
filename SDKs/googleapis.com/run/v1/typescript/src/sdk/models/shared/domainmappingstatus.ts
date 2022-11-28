@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudRunV1Condition } from "./googlecloudrunv1condition";
 import { ResourceRecord } from "./resourcerecord";
+
 
 
 // DomainMappingStatus
@@ -9,18 +9,18 @@ import { ResourceRecord } from "./resourcerecord";
  * The current state of the Domain Mapping.
 **/
 export class DomainMappingStatus extends SpeakeasyBase {
-  @Metadata({ data: "json, name=conditions", elemType: shared.GoogleCloudRunV1Condition })
+  @SpeakeasyMetadata({ data: "json, name=conditions", elemType: GoogleCloudRunV1Condition })
   conditions?: GoogleCloudRunV1Condition[];
 
-  @Metadata({ data: "json, name=mappedRouteName" })
+  @SpeakeasyMetadata({ data: "json, name=mappedRouteName" })
   mappedRouteName?: string;
 
-  @Metadata({ data: "json, name=observedGeneration" })
+  @SpeakeasyMetadata({ data: "json, name=observedGeneration" })
   observedGeneration?: number;
 
-  @Metadata({ data: "json, name=resourceRecords", elemType: shared.ResourceRecord })
+  @SpeakeasyMetadata({ data: "json, name=resourceRecords", elemType: ResourceRecord })
   resourceRecords?: ResourceRecord[];
 
-  @Metadata({ data: "json, name=url" })
+  @SpeakeasyMetadata({ data: "json, name=url" })
   url?: string;
 }

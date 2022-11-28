@@ -1,4 +1,4 @@
-from .__xgafv_enum import *
+from ._xgafv_enum import *
 from .aggregatebucket import *
 from .aggregateby import *
 from .aggregaterequest import *

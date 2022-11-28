@@ -43,3 +43,15 @@ type Task struct {
 	Type                *string                `json:"type,omitempty"`
 	UpdatedAt           *time.Time             `json:"updated_at,omitempty"`
 }
+
+type TaskInput struct {
+	CompletedAt     *time.Time             `json:"completed_at,omitempty"`
+	Message         *string                `json:"message,omitempty"`
+	Name            *string                `json:"name,omitempty"`
+	Output          map[string]interface{} `json:"output,omitempty"`
+	State           *TaskStateEnum         `json:"state,omitempty"`
+	Status          *TaskStatusEnum        `json:"status,omitempty"`
+	TargetSourceRef *string                `json:"target_source_ref,omitempty"`
+	TargetType      *string                `json:"target_type,omitempty"`
+	Type            *string                `json:"type,omitempty"`
+}

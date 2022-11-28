@@ -20,14 +20,14 @@ class RequestMissingFileKeysHeaders:
 
 @dataclass
 class RequestMissingFileKeysRequest:
-    query_params: RequestMissingFileKeysQueryParams = field(default=None)
-    headers: RequestMissingFileKeysHeaders = field(default=None)
+    headers: RequestMissingFileKeysHeaders = field()
+    query_params: RequestMissingFileKeysQueryParams = field()
     
 
 @dataclass
-class RequestMissingFileKeysResponse:
-    content_type: str = field(default=None)
+class RequestMissingFileKeysResponseOutput:
+    content_type: str = field()
+    status_code: int = field()
     error_response: Optional[shared.ErrorResponse] = field(default=None)
-    missing_keys_response: Optional[shared.MissingKeysResponse] = field(default=None)
-    status_code: int = field(default=None)
+    missing_keys_response: Optional[shared.MissingKeysResponseOutput] = field(default=None)
     

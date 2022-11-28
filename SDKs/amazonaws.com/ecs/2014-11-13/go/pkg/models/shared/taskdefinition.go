@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// TaskDefinition
+// The details of a task definition which describes the container and volume definitions of an Amazon Elastic Container Service task. You can specify which Docker images to use, the required resources, and other configurations related to launching the task definition through an Amazon ECS service or task.
 type TaskDefinition struct {
 	Compatibilities         []CompatibilityEnum                 `json:"compatibilities,omitempty"`
 	ContainerDefinitions    []ContainerDefinition               `json:"containerDefinitions,omitempty"`

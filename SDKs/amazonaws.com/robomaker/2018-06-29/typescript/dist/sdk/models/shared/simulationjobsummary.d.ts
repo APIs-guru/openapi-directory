@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { SimulationJobStatusEnum } from "./simulationjobstatusenum";
 /**
  * Summary information for a simulation job.

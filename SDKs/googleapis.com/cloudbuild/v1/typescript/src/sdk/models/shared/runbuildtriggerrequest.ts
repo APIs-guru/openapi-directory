@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RepoSource } from "./reposource";
+
 
 
 // RunBuildTriggerRequest
@@ -7,12 +8,12 @@ import { RepoSource } from "./reposource";
  * Specifies a build trigger to run and the source to use.
 **/
 export class RunBuildTriggerRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=projectId" })
+  @SpeakeasyMetadata({ data: "json, name=projectId" })
   projectId?: string;
 
-  @Metadata({ data: "json, name=source" })
+  @SpeakeasyMetadata({ data: "json, name=source" })
   source?: RepoSource;
 
-  @Metadata({ data: "json, name=triggerId" })
+  @SpeakeasyMetadata({ data: "json, name=triggerId" })
   triggerId?: string;
 }

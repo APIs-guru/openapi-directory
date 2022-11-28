@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Aes128Encryption } from "./aes128encryption";
 import { MpegCommonEncryption } from "./mpegcommonencryption";
 import { SampleAesEncryption } from "./sampleaesencryption";
+
 
 
 // Encryption
@@ -9,18 +10,18 @@ import { SampleAesEncryption } from "./sampleaesencryption";
  * Encryption settings.
 **/
 export class Encryption extends SpeakeasyBase {
-  @Metadata({ data: "json, name=aes128" })
+  @SpeakeasyMetadata({ data: "json, name=aes128" })
   aes128?: Aes128Encryption;
 
-  @Metadata({ data: "json, name=iv" })
+  @SpeakeasyMetadata({ data: "json, name=iv" })
   iv?: string;
 
-  @Metadata({ data: "json, name=key" })
+  @SpeakeasyMetadata({ data: "json, name=key" })
   key?: string;
 
-  @Metadata({ data: "json, name=mpegCenc" })
+  @SpeakeasyMetadata({ data: "json, name=mpegCenc" })
   mpegCenc?: MpegCommonEncryption;
 
-  @Metadata({ data: "json, name=sampleAes" })
+  @SpeakeasyMetadata({ data: "json, name=sampleAes" })
   sampleAes?: SampleAesEncryption;
 }

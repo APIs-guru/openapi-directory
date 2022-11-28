@@ -1,40 +1,41 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class PostStatsIncrementFieldPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=field" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=field" })
   field: string;
 }
 
 
 export class PostStatsIncrementFieldQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=appId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=appId" })
   appId: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=date" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=date" })
   date?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=userId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=userId" })
   userId?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=value" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=value" })
   value?: number;
 }
 
 
 export class PostStatsIncrementFieldRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: PostStatsIncrementFieldPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: PostStatsIncrementFieldQueryParams;
 }
 
 
 export class PostStatsIncrementFieldResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

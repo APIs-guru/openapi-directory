@@ -22,6 +22,8 @@ const (
 	StandardSQLDataTypeTypeKindEnumStruct              StandardSQLDataTypeTypeKindEnum = "STRUCT"
 )
 
+// StandardSQLDataType
+// The data type of a variable such as a function argument. Examples include: * INT64: `{"typeKind": "INT64"}` * ARRAY: { "typeKind": "ARRAY", "arrayElementType": {"typeKind": "STRING"} } * STRUCT>: { "typeKind": "STRUCT", "structType": { "fields": [ { "name": "x", "type": {"typeKind": "STRING"} }, { "name": "y", "type": { "typeKind": "ARRAY", "arrayElementType": {"typeKind": "DATE"} } } ] } }
 type StandardSQLDataType struct {
 	ArrayElementType *StandardSQLDataType             `json:"arrayElementType,omitempty"`
 	StructType       *StandardSQLStructType           `json:"structType,omitempty"`

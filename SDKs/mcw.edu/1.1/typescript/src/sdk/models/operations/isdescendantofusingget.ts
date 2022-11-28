@@ -1,28 +1,29 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class IsDescendantOfUsingGetPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=accId1" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=accId1" })
   accId1: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=accId2" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=accId2" })
   accId2: string;
 }
 
 
 export class IsDescendantOfUsingGetRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: IsDescendantOfUsingGetPathParams;
 }
 
 
 export class IsDescendantOfUsingGetResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

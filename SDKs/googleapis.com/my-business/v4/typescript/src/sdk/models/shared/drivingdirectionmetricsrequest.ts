@@ -1,9 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum DrivingDirectionMetricsRequestNumDaysEnum {
-    Seven = "SEVEN"
-,    Thirty = "THIRTY"
-,    Ninety = "NINETY"
+    Seven = "SEVEN",
+    Thirty = "THIRTY",
+    Ninety = "NINETY"
 }
 
 
@@ -12,9 +13,9 @@ export enum DrivingDirectionMetricsRequestNumDaysEnum {
  * A request for driving direction insights.
 **/
 export class DrivingDirectionMetricsRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=languageCode" })
+  @SpeakeasyMetadata({ data: "json, name=languageCode" })
   languageCode?: string;
 
-  @Metadata({ data: "json, name=numDays" })
+  @SpeakeasyMetadata({ data: "json, name=numDays" })
   numDays?: DrivingDirectionMetricsRequestNumDaysEnum;
 }

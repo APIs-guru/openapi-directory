@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var QualityGetOverallDataQualityForSitesPathParams = /** @class */ (function (_super) {
     __extends(QualityGetOverallDataQualityForSitesPathParams, _super);
@@ -30,7 +30,7 @@ var QualityGetOverallDataQualityForSitesPathParams = /** @class */ (function (_s
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=version" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=version" }),
         __metadata("design:type", String)
     ], QualityGetOverallDataQualityForSitesPathParams.prototype, "version", void 0);
     return QualityGetOverallDataQualityForSitesPathParams;
@@ -42,15 +42,15 @@ var QualityGetOverallDataQualityForSitesQueryParams = /** @class */ (function (_
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=end_date" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=end_date" }),
         __metadata("design:type", String)
     ], QualityGetOverallDataQualityForSitesQueryParams.prototype, "endDate", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=sites" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sites" }),
         __metadata("design:type", String)
     ], QualityGetOverallDataQualityForSitesQueryParams.prototype, "sites", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=start_date" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=start_date" }),
         __metadata("design:type", String)
     ], QualityGetOverallDataQualityForSitesQueryParams.prototype, "startDate", void 0);
     return QualityGetOverallDataQualityForSitesQueryParams;
@@ -62,11 +62,11 @@ var QualityGetOverallDataQualityForSitesRequest = /** @class */ (function (_supe
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", QualityGetOverallDataQualityForSitesPathParams)
     ], QualityGetOverallDataQualityForSitesRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", QualityGetOverallDataQualityForSitesQueryParams)
     ], QualityGetOverallDataQualityForSitesRequest.prototype, "queryParams", void 0);
     return QualityGetOverallDataQualityForSitesRequest;
@@ -78,15 +78,15 @@ var QualityGetOverallDataQualityForSitesResponse = /** @class */ (function (_sup
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], QualityGetOverallDataQualityForSitesResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.OverallQualityResponse)
     ], QualityGetOverallDataQualityForSitesResponse.prototype, "overallQualityResponse", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], QualityGetOverallDataQualityForSitesResponse.prototype, "statusCode", void 0);
     return QualityGetOverallDataQualityForSitesResponse;

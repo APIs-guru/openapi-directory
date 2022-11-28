@@ -1,32 +1,33 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Geolayerdata } from "./geolayerdata";
 
 
+
 export class GeoAnnotationdata extends SpeakeasyBase {
-  @Metadata({ data: "json, name=annotationType" })
+  @SpeakeasyMetadata({ data: "json, name=annotationType" })
   annotationType?: string;
 
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data?: Geolayerdata;
 
-  @Metadata({ data: "json, name=encodedData" })
+  @SpeakeasyMetadata({ data: "json, name=encodedData" })
   encodedData?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=layerId" })
+  @SpeakeasyMetadata({ data: "json, name=layerId" })
   layerId?: string;
 
-  @Metadata({ data: "json, name=selfLink" })
+  @SpeakeasyMetadata({ data: "json, name=selfLink" })
   selfLink?: string;
 
-  @Metadata({ data: "json, name=updated" })
+  @SpeakeasyMetadata({ data: "json, name=updated" })
   updated?: string;
 
-  @Metadata({ data: "json, name=volumeId" })
+  @SpeakeasyMetadata({ data: "json, name=volumeId" })
   volumeId?: string;
 }

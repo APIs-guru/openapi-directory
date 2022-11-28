@@ -1,13 +1,18 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import markettype_enum
-from . import simplescalingpolicyconfiguration
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ScalingAction:
-    market: Optional[markettype_enum.MarketTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Market' }})
-    simple_scaling_policy_configuration: simplescalingpolicyconfiguration.SimpleScalingPolicyConfiguration = field(default=None, metadata={'dataclasses_json': { 'field_name': 'SimpleScalingPolicyConfiguration' }})
+    r"""ScalingAction
+    The type of adjustment the automatic scaling activity makes when triggered, and the periodicity of the adjustment.
+    """
+    
+    simple_scaling_policy_configuration: SimpleScalingPolicyConfiguration = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('SimpleScalingPolicyConfiguration') }})
+    market: Optional[MarketTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Market') }})
     

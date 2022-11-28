@@ -1,46 +1,47 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
+
 export enum PostApiV1DonationsCreateFundingSourceEnum {
-    Merchant = "merchant"
-,    Customer = "customer"
+    Merchant = "merchant",
+    Customer = "customer"
 }
 
 
 export class PostApiV1DonationsCreateQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=amount" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=amount" })
   amount: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=funding_source" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=funding_source" })
   fundingSource: PostApiV1DonationsCreateFundingSourceEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=nonprofit_id" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=nonprofit_id" })
   nonprofitId: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=zip_code" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=zip_code" })
   zipCode?: string;
 }
 
 
 export class PostApiV1DonationsCreateSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=basic" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=basic" })
   basicAuth: shared.SchemeBasicAuth;
 }
 
 
 export class PostApiV1DonationsCreateRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: PostApiV1DonationsCreateQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: PostApiV1DonationsCreateSecurity;
 }
 
 
 export class PostApiV1DonationsCreateResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

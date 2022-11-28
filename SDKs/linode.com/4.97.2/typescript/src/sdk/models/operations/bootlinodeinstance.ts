@@ -1,68 +1,57 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class BootLinodeInstancePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=linodeId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=linodeId" })
   linodeId: number;
 }
 
 
 export class BootLinodeInstanceRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=config_id" })
+  @SpeakeasyMetadata({ data: "json, name=config_id" })
   configId?: number;
 }
 
 
-export class BootLinodeInstanceSecurityOption1 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=bearer" })
-  personalAccessToken: shared.SchemePersonalAccessToken;
-}
-
-
-export class BootLinodeInstanceSecurityOption2 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
-  oauth: shared.SchemeOauth;
-}
-
-
 export class BootLinodeInstanceSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, option=true" })
-  option1?: BootLinodeInstanceSecurityOption1;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" })
+  personalAccessToken?: shared.SchemePersonalAccessToken;
 
-  @Metadata({ data: "security, option=true" })
-  option2?: BootLinodeInstanceSecurityOption2;
-}
-
-
-export class BootLinodeInstanceRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: BootLinodeInstancePathParams;
-
-  @Metadata({ data: "request, media_type=application/json" })
-  request?: BootLinodeInstanceRequestBody;
-
-  @Metadata()
-  security: BootLinodeInstanceSecurity;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
+  oauth?: shared.SchemeOauth;
 }
 
 
 export class BootLinodeInstanceDefaultApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=errors", elemType: shared.ErrorObject })
+  @SpeakeasyMetadata({ data: "json, name=errors", elemType: shared.ErrorObject })
   errors?: shared.ErrorObject[];
 }
 
 
+export class BootLinodeInstanceRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: BootLinodeInstancePathParams;
+
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request?: BootLinodeInstanceRequestBody;
+
+  @SpeakeasyMetadata()
+  security: BootLinodeInstanceSecurity;
+}
+
+
 export class BootLinodeInstanceResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   bootLinodeInstance200ApplicationJsonObject?: Map<string, any>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   bootLinodeInstanceDefaultApplicationJsonObject?: BootLinodeInstanceDefaultApplicationJson;
 }

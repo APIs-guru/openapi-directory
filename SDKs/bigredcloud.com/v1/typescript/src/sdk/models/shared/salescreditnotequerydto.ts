@@ -1,85 +1,85 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AcudfValueDto } from "./acudfvaluedto";
 import { ProductTranQueryDto } from "./producttranquerydto";
 
 
+
 export class SalesCreditNoteQueryDto extends SpeakeasyBase {
-  @Metadata({ data: "json, name=acCode" })
+  @SpeakeasyMetadata({ data: "json, name=acCode" })
   acCode?: string;
 
-  @Metadata({ data: "json, name=bookTranTypeId" })
+  @SpeakeasyMetadata({ data: "json, name=bookTranTypeId" })
   bookTranTypeId?: number;
 
-  @Metadata({ data: "json, name=customFields", elemType: shared.AcudfValueDto })
+  @SpeakeasyMetadata({ data: "json, name=customFields", elemType: AcudfValueDto })
   customFields?: AcudfValueDto[];
 
-  @Metadata({ data: "json, name=customerId" })
+  @SpeakeasyMetadata({ data: "json, name=customerId" })
   customerId?: number;
 
-  @Metadata({ data: "json, name=deliveryTo" })
+  @SpeakeasyMetadata({ data: "json, name=deliveryTo" })
   deliveryTo?: string[];
 
-  @Metadata({ data: "json, name=details" })
+  @SpeakeasyMetadata({ data: "json, name=details" })
   details?: string;
 
-  @Metadata({ data: "json, name=entryDate" })
+  @SpeakeasyMetadata({ data: "json, name=entryDate" })
   entryDate?: Date;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: number;
 
-  @Metadata({ data: "json, name=loType" })
+  @SpeakeasyMetadata({ data: "json, name=loType" })
   loType?: string;
 
-  @Metadata({ data: "json, name=netGoods" })
+  @SpeakeasyMetadata({ data: "json, name=netGoods" })
   netGoods?: number;
 
-  @Metadata({ data: "json, name=netServices" })
+  @SpeakeasyMetadata({ data: "json, name=netServices" })
   netServices?: number;
 
-  @Metadata({ data: "json, name=note" })
+  @SpeakeasyMetadata({ data: "json, name=note" })
   note?: string;
 
-  @Metadata({ data: "json, name=ourReference" })
+  @SpeakeasyMetadata({ data: "json, name=ourReference" })
   ourReference?: string;
 
-  @Metadata({ data: "json, name=procDate" })
+  @SpeakeasyMetadata({ data: "json, name=procDate" })
   procDate?: Date;
 
-  @Metadata({ data: "json, name=productTrans", elemType: shared.ProductTranQueryDto })
+  @SpeakeasyMetadata({ data: "json, name=productTrans", elemType: ProductTranQueryDto })
   productTrans?: ProductTranQueryDto[];
 
-  @Metadata({ data: "json, name=quoteId" })
+  @SpeakeasyMetadata({ data: "json, name=quoteId" })
   quoteId?: number;
 
-  @Metadata({ data: "json, name=reference" })
+  @SpeakeasyMetadata({ data: "json, name=reference" })
   reference?: string;
 
-  @Metadata({ data: "json, name=saleRepCode" })
+  @SpeakeasyMetadata({ data: "json, name=saleRepCode" })
   saleRepCode?: string;
 
-  @Metadata({ data: "json, name=saleRepId" })
+  @SpeakeasyMetadata({ data: "json, name=saleRepId" })
   saleRepId?: number;
 
-  @Metadata({ data: "json, name=timestamp" })
+  @SpeakeasyMetadata({ data: "json, name=timestamp" })
   timestamp?: string;
 
-  @Metadata({ data: "json, name=total" })
+  @SpeakeasyMetadata({ data: "json, name=total" })
   total?: number;
 
-  @Metadata({ data: "json, name=totalNet" })
+  @SpeakeasyMetadata({ data: "json, name=totalNet" })
   totalNet?: number;
 
-  @Metadata({ data: "json, name=totalVAT" })
+  @SpeakeasyMetadata({ data: "json, name=totalVAT" })
   totalVat?: number;
 
-  @Metadata({ data: "json, name=unpaid" })
+  @SpeakeasyMetadata({ data: "json, name=unpaid" })
   unpaid?: number;
 
-  @Metadata({ data: "json, name=vatTypeId" })
+  @SpeakeasyMetadata({ data: "json, name=vatTypeId" })
   vatTypeId?: number;
 
-  @Metadata({ data: "json, name=yourReference" })
+  @SpeakeasyMetadata({ data: "json, name=yourReference" })
   yourReference?: string;
 }

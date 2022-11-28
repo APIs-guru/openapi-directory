@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class CloudresourcemanagerFoldersCreateQueryParams extends SpeakeasyBase {
     dollarXgafv?: shared.XgafvEnum;
@@ -19,7 +19,7 @@ export declare class CloudresourcemanagerFoldersCreateSecurity extends Speakeasy
 }
 export declare class CloudresourcemanagerFoldersCreateRequest extends SpeakeasyBase {
     queryParams: CloudresourcemanagerFoldersCreateQueryParams;
-    request?: shared.Folder;
+    request?: shared.FolderInput;
     security: CloudresourcemanagerFoldersCreateSecurity;
 }
 export declare class CloudresourcemanagerFoldersCreateResponse extends SpeakeasyBase {

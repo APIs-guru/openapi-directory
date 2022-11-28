@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class GetRequestsFoldersPathPathParams:
-    path: str = field(default=None, metadata={'path_param': { 'field_name': 'path', 'style': 'simple', 'explode': False }})
+    path: str = field(metadata={'path_param': { 'field_name': 'path', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -18,13 +18,13 @@ class GetRequestsFoldersPathQueryParams:
 
 @dataclass
 class GetRequestsFoldersPathRequest:
-    path_params: GetRequestsFoldersPathPathParams = field(default=None)
-    query_params: GetRequestsFoldersPathQueryParams = field(default=None)
+    path_params: GetRequestsFoldersPathPathParams = field()
+    query_params: GetRequestsFoldersPathQueryParams = field()
     
 
 @dataclass
 class GetRequestsFoldersPathResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     request_entities: Optional[List[shared.RequestEntity]] = field(default=None)
-    status_code: int = field(default=None)
     

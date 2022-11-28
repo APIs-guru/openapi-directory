@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DeleteCertificateAuthorityRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CertificateAuthorityArn" })
+  @SpeakeasyMetadata({ data: "json, name=CertificateAuthorityArn" })
   certificateAuthorityArn: string;
 
-  @Metadata({ data: "json, name=PermanentDeletionTimeInDays" })
+  @SpeakeasyMetadata({ data: "json, name=PermanentDeletionTimeInDays" })
   permanentDeletionTimeInDays?: number;
 }

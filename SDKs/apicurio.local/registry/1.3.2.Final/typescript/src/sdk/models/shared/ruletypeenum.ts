@@ -1,6 +1,7 @@
 
 
+
 export enum RuleTypeEnum {
-    Validity = "VALIDITY"
-,    Compatibility = "COMPATIBILITY"
+    Validity = "VALIDITY",
+    Compatibility = "COMPATIBILITY"
 }

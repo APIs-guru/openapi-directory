@@ -22,25 +22,25 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import { MemcacheParameters } from "./memcacheparameters";
-// UpdateParametersRequest
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { MemcacheParametersInput } from "./memcacheparameters";
+// UpdateParametersRequestInput
 /**
  * Request for UpdateParameters.
 **/
-var UpdateParametersRequest = /** @class */ (function (_super) {
-    __extends(UpdateParametersRequest, _super);
-    function UpdateParametersRequest() {
+var UpdateParametersRequestInput = /** @class */ (function (_super) {
+    __extends(UpdateParametersRequestInput, _super);
+    function UpdateParametersRequestInput() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=parameters" }),
-        __metadata("design:type", MemcacheParameters)
-    ], UpdateParametersRequest.prototype, "parameters", void 0);
+        SpeakeasyMetadata({ data: "json, name=parameters" }),
+        __metadata("design:type", MemcacheParametersInput)
+    ], UpdateParametersRequestInput.prototype, "parameters", void 0);
     __decorate([
-        Metadata({ data: "json, name=updateMask" }),
+        SpeakeasyMetadata({ data: "json, name=updateMask" }),
         __metadata("design:type", String)
-    ], UpdateParametersRequest.prototype, "updateMask", void 0);
-    return UpdateParametersRequest;
+    ], UpdateParametersRequestInput.prototype, "updateMask", void 0);
+    return UpdateParametersRequestInput;
 }(SpeakeasyBase));
-export { UpdateParametersRequest };
+export { UpdateParametersRequestInput };

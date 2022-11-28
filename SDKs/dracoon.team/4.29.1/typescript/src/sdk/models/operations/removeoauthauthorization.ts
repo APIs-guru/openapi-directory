@@ -1,38 +1,39 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class RemoveOAuthAuthorizationPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=authorization_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=authorization_id" })
   authorizationId: number;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=client_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=client_id" })
   clientId: string;
 }
 
 
 export class RemoveOAuthAuthorizationHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Sds-Auth-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Sds-Auth-Token" })
   xSdsAuthToken?: string;
 }
 
 
 export class RemoveOAuthAuthorizationRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: RemoveOAuthAuthorizationPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: RemoveOAuthAuthorizationHeaders;
 }
 
 
 export class RemoveOAuthAuthorizationResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   errorResponse?: shared.ErrorResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

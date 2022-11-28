@@ -1,5 +1,7 @@
 package shared
 
+// SearchResponse
+// The search API response.
 type SearchResponse struct {
 	DebugInfo           *ResponseDebugInfo   `json:"debugInfo,omitempty"`
 	ErrorInfo           *ErrorInfo           `json:"errorInfo,omitempty"`

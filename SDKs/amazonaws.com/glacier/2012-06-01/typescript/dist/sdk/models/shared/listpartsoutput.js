@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { PartListElement } from "./partlistelement";
 // ListPartsOutput
 /**
  * Contains the Amazon S3 Glacier response to your request.
@@ -34,31 +34,31 @@ var ListPartsOutput = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=ArchiveDescription" }),
+        SpeakeasyMetadata({ data: "json, name=ArchiveDescription" }),
         __metadata("design:type", String)
     ], ListPartsOutput.prototype, "archiveDescription", void 0);
     __decorate([
-        Metadata({ data: "json, name=CreationDate" }),
+        SpeakeasyMetadata({ data: "json, name=CreationDate" }),
         __metadata("design:type", String)
     ], ListPartsOutput.prototype, "creationDate", void 0);
     __decorate([
-        Metadata({ data: "json, name=Marker" }),
+        SpeakeasyMetadata({ data: "json, name=Marker" }),
         __metadata("design:type", String)
     ], ListPartsOutput.prototype, "marker", void 0);
     __decorate([
-        Metadata({ data: "json, name=MultipartUploadId" }),
+        SpeakeasyMetadata({ data: "json, name=MultipartUploadId" }),
         __metadata("design:type", String)
     ], ListPartsOutput.prototype, "multipartUploadId", void 0);
     __decorate([
-        Metadata({ data: "json, name=PartSizeInBytes" }),
+        SpeakeasyMetadata({ data: "json, name=PartSizeInBytes" }),
         __metadata("design:type", Number)
     ], ListPartsOutput.prototype, "partSizeInBytes", void 0);
     __decorate([
-        Metadata({ data: "json, name=Parts", elemType: shared.PartListElement }),
+        SpeakeasyMetadata({ data: "json, name=Parts", elemType: PartListElement }),
         __metadata("design:type", Array)
     ], ListPartsOutput.prototype, "parts", void 0);
     __decorate([
-        Metadata({ data: "json, name=VaultARN" }),
+        SpeakeasyMetadata({ data: "json, name=VaultARN" }),
         __metadata("design:type", String)
     ], ListPartsOutput.prototype, "vaultArn", void 0);
     return ListPartsOutput;

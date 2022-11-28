@@ -1,5 +1,7 @@
 package shared
 
+// Student
+// Student in a course.
 type Student struct {
 	CourseID          *string      `json:"courseId,omitempty"`
 	Profile           *UserProfile `json:"profile,omitempty"`

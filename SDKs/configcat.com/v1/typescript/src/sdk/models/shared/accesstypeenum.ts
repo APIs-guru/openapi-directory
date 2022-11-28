@@ -1,7 +1,8 @@
 
 
+
 export enum AccessTypeEnum {
-    ReadOnly = "readOnly"
-,    Full = "full"
-,    Custom = "custom"
+    ReadOnly = "readOnly",
+    Full = "full",
+    Custom = "custom"
 }

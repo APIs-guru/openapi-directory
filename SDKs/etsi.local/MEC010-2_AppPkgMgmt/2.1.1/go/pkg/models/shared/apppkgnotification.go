@@ -7,6 +7,8 @@ const (
 	AppPkgNotificationOperationalStateEnumEnabled  AppPkgNotificationOperationalStateEnum = "ENABLED"
 )
 
+// AppPkgNotification
+// 'This data type represents an application package management notification for informing the subscribers about onboarding application package resources. The notification is triggered when a new application package is onboarded'
 type AppPkgNotification struct {
 	Links            AppPkgNotificationLinks                `json:"_links"`
 	AppDID           string                                 `json:"appDId"`

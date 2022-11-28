@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // SuspendedState
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Specifies whether the scaling activities for a scalable target are in a suspended state. 
 **/
 export class SuspendedState extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DynamicScalingInSuspended" })
+  @SpeakeasyMetadata({ data: "json, name=DynamicScalingInSuspended" })
   dynamicScalingInSuspended?: boolean;
 
-  @Metadata({ data: "json, name=DynamicScalingOutSuspended" })
+  @SpeakeasyMetadata({ data: "json, name=DynamicScalingOutSuspended" })
   dynamicScalingOutSuspended?: boolean;
 
-  @Metadata({ data: "json, name=ScheduledScalingSuspended" })
+  @SpeakeasyMetadata({ data: "json, name=ScheduledScalingSuspended" })
   scheduledScalingSuspended?: boolean;
 }

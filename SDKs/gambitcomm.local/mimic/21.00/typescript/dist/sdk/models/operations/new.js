@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var NewPathParams = /** @class */ (function (_super) {
     __extends(NewPathParams, _super);
@@ -30,11 +30,11 @@ var NewPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=IP" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=IP" }),
         __metadata("design:type", String)
     ], NewPathParams.prototype, "ip", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=agentNum" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=agentNum" }),
         __metadata("design:type", Number)
     ], NewPathParams.prototype, "agentNum", void 0);
     return NewPathParams;
@@ -46,11 +46,11 @@ var NewRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", NewPathParams)
     ], NewRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json", elemType: shared.Triplet }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json", elemType: shared.Triplet }),
         __metadata("design:type", Array)
     ], NewRequest.prototype, "request", void 0);
     return NewRequest;
@@ -62,15 +62,15 @@ var NewResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], NewResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], NewResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], NewResponse.prototype, "new200ApplicationJsonString", void 0);
     return NewResponse;

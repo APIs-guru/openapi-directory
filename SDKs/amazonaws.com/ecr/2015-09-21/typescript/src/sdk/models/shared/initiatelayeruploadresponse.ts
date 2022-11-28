@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class InitiateLayerUploadResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=partSize" })
+  @SpeakeasyMetadata({ data: "json, name=partSize" })
   partSize?: number;
 
-  @Metadata({ data: "json, name=uploadId" })
+  @SpeakeasyMetadata({ data: "json, name=uploadId" })
   uploadId?: string;
 }

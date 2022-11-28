@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class ApigeeOrganizationsHostQueriesCreatePathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,21 +26,21 @@ class ApigeeOrganizationsHostQueriesCreateQueryParams:
 
 @dataclass
 class ApigeeOrganizationsHostQueriesCreateSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class ApigeeOrganizationsHostQueriesCreateRequest:
-    path_params: ApigeeOrganizationsHostQueriesCreatePathParams = field(default=None)
-    query_params: ApigeeOrganizationsHostQueriesCreateQueryParams = field(default=None)
+    path_params: ApigeeOrganizationsHostQueriesCreatePathParams = field()
+    query_params: ApigeeOrganizationsHostQueriesCreateQueryParams = field()
+    security: ApigeeOrganizationsHostQueriesCreateSecurity = field()
     request: Optional[shared.GoogleCloudApigeeV1Query] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: ApigeeOrganizationsHostQueriesCreateSecurity = field(default=None)
     
 
 @dataclass
 class ApigeeOrganizationsHostQueriesCreateResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_cloud_apigee_v1_async_query: Optional[shared.GoogleCloudApigeeV1AsyncQuery] = field(default=None)
-    status_code: int = field(default=None)
     

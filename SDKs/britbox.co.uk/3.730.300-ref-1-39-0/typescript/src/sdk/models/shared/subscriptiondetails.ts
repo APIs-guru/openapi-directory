@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class SubscriptionDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=itvData_purchased" })
+  @SpeakeasyMetadata({ data: "json, name=itvData_purchased" })
   itvDataPurchased: Map<string, any>;
 }

@@ -1,6 +1,7 @@
 
 
+
 export enum FormatEnum {
-    Csv = "CSV"
-,    Parquet = "PARQUET"
+    Csv = "CSV",
+    Parquet = "PARQUET"
 }

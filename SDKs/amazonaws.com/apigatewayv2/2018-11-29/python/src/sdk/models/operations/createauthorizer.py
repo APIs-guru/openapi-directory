@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
 @dataclass
 class CreateAuthorizerPathParams:
-    api_id: str = field(default=None, metadata={'path_param': { 'field_name': 'apiId', 'style': 'simple', 'explode': False }})
+    api_id: str = field(metadata={'path_param': { 'field_name': 'apiId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -27,39 +32,43 @@ class CreateAuthorizerRequestBodyAuthorizerTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class CreateAuthorizerRequestBodyJwtConfiguration:
-    audience: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Audience' }})
-    issuer: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Issuer' }})
+    r"""CreateAuthorizerRequestBodyJwtConfiguration
+    Represents the configuration of a JWT authorizer. Required for the JWT authorizer type. Supported only for HTTP APIs.
+    """
+    
+    audience: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Audience') }})
+    issuer: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Issuer') }})
     
 
 @dataclass_json
 @dataclass
 class CreateAuthorizerRequestBody:
-    authorizer_credentials_arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'authorizerCredentialsArn' }})
-    authorizer_payload_format_version: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'authorizerPayloadFormatVersion' }})
-    authorizer_result_ttl_in_seconds: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'authorizerResultTtlInSeconds' }})
-    authorizer_type: CreateAuthorizerRequestBodyAuthorizerTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'authorizerType' }})
-    authorizer_uri: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'authorizerUri' }})
-    enable_simple_responses: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'enableSimpleResponses' }})
-    identity_source: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'identitySource' }})
-    identity_validation_expression: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'identityValidationExpression' }})
-    jwt_configuration: Optional[CreateAuthorizerRequestBodyJwtConfiguration] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'jwtConfiguration' }})
-    name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
+    authorizer_type: CreateAuthorizerRequestBodyAuthorizerTypeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('authorizerType') }})
+    identity_source: List[str] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('identitySource') }})
+    name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    authorizer_credentials_arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('authorizerCredentialsArn') }})
+    authorizer_payload_format_version: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('authorizerPayloadFormatVersion') }})
+    authorizer_result_ttl_in_seconds: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('authorizerResultTtlInSeconds') }})
+    authorizer_uri: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('authorizerUri') }})
+    enable_simple_responses: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('enableSimpleResponses') }})
+    identity_validation_expression: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('identityValidationExpression') }})
+    jwt_configuration: Optional[CreateAuthorizerRequestBodyJwtConfiguration] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('jwtConfiguration') }})
     
 
 @dataclass
 class CreateAuthorizerRequest:
-    path_params: CreateAuthorizerPathParams = field(default=None)
-    headers: CreateAuthorizerHeaders = field(default=None)
-    request: CreateAuthorizerRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: CreateAuthorizerHeaders = field()
+    path_params: CreateAuthorizerPathParams = field()
+    request: CreateAuthorizerRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class CreateAuthorizerResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
     conflict_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     create_authorizer_response: Optional[shared.CreateAuthorizerResponse] = field(default=None)
     not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     too_many_requests_exception: Optional[Any] = field(default=None)
     

@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class UpdateNetworkAlertsSettingsPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=networkId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=networkId" })
   networkId: string;
 }
 
@@ -12,31 +13,31 @@ export class UpdateNetworkAlertsSettingsPathParams extends SpeakeasyBase {
  * A hash of destinations for this specific alert
 **/
 export class UpdateNetworkAlertsSettingsRequestBodyAlertsAlertDestinations extends SpeakeasyBase {
-  @Metadata({ data: "json, name=allAdmins" })
+  @SpeakeasyMetadata({ data: "json, name=allAdmins" })
   allAdmins?: boolean;
 
-  @Metadata({ data: "json, name=emails" })
+  @SpeakeasyMetadata({ data: "json, name=emails" })
   emails?: string[];
 
-  @Metadata({ data: "json, name=httpServerIds" })
+  @SpeakeasyMetadata({ data: "json, name=httpServerIds" })
   httpServerIds?: string[];
 
-  @Metadata({ data: "json, name=snmp" })
+  @SpeakeasyMetadata({ data: "json, name=snmp" })
   snmp?: boolean;
 }
 
 
 export class UpdateNetworkAlertsSettingsRequestBodyAlerts extends SpeakeasyBase {
-  @Metadata({ data: "json, name=alertDestinations" })
+  @SpeakeasyMetadata({ data: "json, name=alertDestinations" })
   alertDestinations?: UpdateNetworkAlertsSettingsRequestBodyAlertsAlertDestinations;
 
-  @Metadata({ data: "json, name=enabled" })
+  @SpeakeasyMetadata({ data: "json, name=enabled" })
   enabled?: boolean;
 
-  @Metadata({ data: "json, name=filters" })
+  @SpeakeasyMetadata({ data: "json, name=filters" })
   filters?: Map<string, any>;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type: string;
 }
 
@@ -46,45 +47,45 @@ export class UpdateNetworkAlertsSettingsRequestBodyAlerts extends SpeakeasyBase 
  * The network-wide destinations for all alerts on the network.
 **/
 export class UpdateNetworkAlertsSettingsRequestBodyDefaultDestinations extends SpeakeasyBase {
-  @Metadata({ data: "json, name=allAdmins" })
+  @SpeakeasyMetadata({ data: "json, name=allAdmins" })
   allAdmins?: boolean;
 
-  @Metadata({ data: "json, name=emails" })
+  @SpeakeasyMetadata({ data: "json, name=emails" })
   emails?: string[];
 
-  @Metadata({ data: "json, name=httpServerIds" })
+  @SpeakeasyMetadata({ data: "json, name=httpServerIds" })
   httpServerIds?: string[];
 
-  @Metadata({ data: "json, name=snmp" })
+  @SpeakeasyMetadata({ data: "json, name=snmp" })
   snmp?: boolean;
 }
 
 
 export class UpdateNetworkAlertsSettingsRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=alerts", elemType: operations.UpdateNetworkAlertsSettingsRequestBodyAlerts })
+  @SpeakeasyMetadata({ data: "json, name=alerts", elemType: UpdateNetworkAlertsSettingsRequestBodyAlerts })
   alerts?: UpdateNetworkAlertsSettingsRequestBodyAlerts[];
 
-  @Metadata({ data: "json, name=defaultDestinations" })
+  @SpeakeasyMetadata({ data: "json, name=defaultDestinations" })
   defaultDestinations?: UpdateNetworkAlertsSettingsRequestBodyDefaultDestinations;
 }
 
 
 export class UpdateNetworkAlertsSettingsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: UpdateNetworkAlertsSettingsPathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request?: UpdateNetworkAlertsSettingsRequestBody;
 }
 
 
 export class UpdateNetworkAlertsSettingsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   updateNetworkAlertsSettings200ApplicationJsonObject?: Map<string, any>;
 }

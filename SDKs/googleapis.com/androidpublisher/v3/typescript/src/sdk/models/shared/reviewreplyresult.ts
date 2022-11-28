@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Timestamp } from "./timestamp";
+
 
 
 // ReviewReplyResult
@@ -7,9 +8,9 @@ import { Timestamp } from "./timestamp";
  * The result of replying/updating a reply to review.
 **/
 export class ReviewReplyResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=lastEdited" })
+  @SpeakeasyMetadata({ data: "json, name=lastEdited" })
   lastEdited?: Timestamp;
 
-  @Metadata({ data: "json, name=replyText" })
+  @SpeakeasyMetadata({ data: "json, name=replyText" })
   replyText?: string;
 }

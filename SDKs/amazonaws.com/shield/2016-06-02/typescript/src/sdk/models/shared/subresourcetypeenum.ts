@@ -1,6 +1,7 @@
 
 
+
 export enum SubResourceTypeEnum {
-    Ip = "IP"
-,    Url = "URL"
+    Ip = "IP",
+    Url = "URL"
 }

@@ -6,10 +6,6 @@ type CreateSessionUsingGetQueryParams struct {
 	ValidUntil *string `queryParam:"style=form,explode=true,name=validUntil"`
 }
 
-type CreateSessionUsingGetRequest struct {
-	QueryParams CreateSessionUsingGetQueryParams
-}
-
 type CreateSessionUsingGet200ApplicationJSONData struct {
 	SessionID *string `json:"sessionID,omitempty"`
 }
@@ -36,6 +32,10 @@ type CreateSessionUsingGet500ApplicationJSON struct {
 	Code    *int64                 `json:"code,omitempty"`
 	Data    map[string]interface{} `json:"data,omitempty"`
 	Message *string                `json:"message,omitempty"`
+}
+
+type CreateSessionUsingGetRequest struct {
+	QueryParams CreateSessionUsingGetQueryParams
 }
 
 type CreateSessionUsingGetResponse struct {

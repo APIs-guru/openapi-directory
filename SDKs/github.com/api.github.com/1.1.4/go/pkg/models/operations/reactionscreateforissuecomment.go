@@ -27,14 +27,14 @@ type ReactionsCreateForIssueCommentRequestBody struct {
 	Content ReactionsCreateForIssueCommentRequestBodyContentEnum `json:"content"`
 }
 
-type ReactionsCreateForIssueCommentRequest struct {
-	PathParams ReactionsCreateForIssueCommentPathParams
-	Request    *ReactionsCreateForIssueCommentRequestBody `request:"mediaType=application/json"`
-}
-
 type ReactionsCreateForIssueComment415ApplicationJSON struct {
 	DocumentationURL string `json:"documentation_url"`
 	Message          string `json:"message"`
+}
+
+type ReactionsCreateForIssueCommentRequest struct {
+	PathParams ReactionsCreateForIssueCommentPathParams
+	Request    *ReactionsCreateForIssueCommentRequestBody `request:"mediaType=application/json"`
 }
 
 type ReactionsCreateForIssueCommentResponse struct {

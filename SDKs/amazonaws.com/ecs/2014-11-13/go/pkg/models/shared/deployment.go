@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// Deployment
+// The details of an Amazon ECS service deployment. This is used only when a service uses the <code>ECS</code> deployment controller type.
 type Deployment struct {
 	CapacityProviderStrategy []CapacityProviderStrategyItem `json:"capacityProviderStrategy,omitempty"`
 	CreatedAt                *time.Time                     `json:"createdAt,omitempty"`

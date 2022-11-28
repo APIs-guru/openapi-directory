@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// Receipt
+// Records events during an engagement.
 type Receipt struct {
 	ContactChannelArn *string         `json:"ContactChannelArn,omitempty"`
 	ReceiptInfo       *string         `json:"ReceiptInfo,omitempty"`

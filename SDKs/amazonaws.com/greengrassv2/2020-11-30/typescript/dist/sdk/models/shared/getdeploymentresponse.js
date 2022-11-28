@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { ComponentDeploymentSpecification } from "./componentdeploymentspecification";
 import { DeploymentPolicies } from "./deploymentpolicies";
 import { DeploymentStatusEnum } from "./deploymentstatusenum";
 import { DeploymentIoTJobConfiguration } from "./deploymentiotjobconfiguration";
@@ -33,55 +33,55 @@ var GetDeploymentResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=components", elemType: shared.ComponentDeploymentSpecification }),
+        SpeakeasyMetadata({ data: "json, name=components", elemType: ComponentDeploymentSpecification }),
         __metadata("design:type", Map)
     ], GetDeploymentResponse.prototype, "components", void 0);
     __decorate([
-        Metadata({ data: "json, name=creationTimestamp" }),
+        SpeakeasyMetadata({ data: "json, name=creationTimestamp" }),
         __metadata("design:type", Date)
     ], GetDeploymentResponse.prototype, "creationTimestamp", void 0);
     __decorate([
-        Metadata({ data: "json, name=deploymentId" }),
+        SpeakeasyMetadata({ data: "json, name=deploymentId" }),
         __metadata("design:type", String)
     ], GetDeploymentResponse.prototype, "deploymentId", void 0);
     __decorate([
-        Metadata({ data: "json, name=deploymentName" }),
+        SpeakeasyMetadata({ data: "json, name=deploymentName" }),
         __metadata("design:type", String)
     ], GetDeploymentResponse.prototype, "deploymentName", void 0);
     __decorate([
-        Metadata({ data: "json, name=deploymentPolicies" }),
+        SpeakeasyMetadata({ data: "json, name=deploymentPolicies" }),
         __metadata("design:type", DeploymentPolicies)
     ], GetDeploymentResponse.prototype, "deploymentPolicies", void 0);
     __decorate([
-        Metadata({ data: "json, name=deploymentStatus" }),
+        SpeakeasyMetadata({ data: "json, name=deploymentStatus" }),
         __metadata("design:type", String)
     ], GetDeploymentResponse.prototype, "deploymentStatus", void 0);
     __decorate([
-        Metadata({ data: "json, name=iotJobArn" }),
+        SpeakeasyMetadata({ data: "json, name=iotJobArn" }),
         __metadata("design:type", String)
     ], GetDeploymentResponse.prototype, "iotJobArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=iotJobConfiguration" }),
+        SpeakeasyMetadata({ data: "json, name=iotJobConfiguration" }),
         __metadata("design:type", DeploymentIoTJobConfiguration)
     ], GetDeploymentResponse.prototype, "iotJobConfiguration", void 0);
     __decorate([
-        Metadata({ data: "json, name=iotJobId" }),
+        SpeakeasyMetadata({ data: "json, name=iotJobId" }),
         __metadata("design:type", String)
     ], GetDeploymentResponse.prototype, "iotJobId", void 0);
     __decorate([
-        Metadata({ data: "json, name=isLatestForTarget" }),
+        SpeakeasyMetadata({ data: "json, name=isLatestForTarget" }),
         __metadata("design:type", Boolean)
     ], GetDeploymentResponse.prototype, "isLatestForTarget", void 0);
     __decorate([
-        Metadata({ data: "json, name=revisionId" }),
+        SpeakeasyMetadata({ data: "json, name=revisionId" }),
         __metadata("design:type", String)
     ], GetDeploymentResponse.prototype, "revisionId", void 0);
     __decorate([
-        Metadata({ data: "json, name=tags" }),
+        SpeakeasyMetadata({ data: "json, name=tags" }),
         __metadata("design:type", Map)
     ], GetDeploymentResponse.prototype, "tags", void 0);
     __decorate([
-        Metadata({ data: "json, name=targetArn" }),
+        SpeakeasyMetadata({ data: "json, name=targetArn" }),
         __metadata("design:type", String)
     ], GetDeploymentResponse.prototype, "targetArn", void 0);
     return GetDeploymentResponse;

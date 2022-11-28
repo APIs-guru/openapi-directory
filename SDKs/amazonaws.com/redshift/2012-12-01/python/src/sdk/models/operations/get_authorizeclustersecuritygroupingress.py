@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetAuthorizeClusterSecurityGroupIngressActionEnum(str, Enum):
     AUTHORIZE_CLUSTER_SECURITY_GROUP_INGRESS = "AuthorizeClusterSecurityGroupIngress"
@@ -10,12 +14,12 @@ class GetAuthorizeClusterSecurityGroupIngressVersionEnum(str, Enum):
 
 @dataclass
 class GetAuthorizeClusterSecurityGroupIngressQueryParams:
-    action: GetAuthorizeClusterSecurityGroupIngressActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetAuthorizeClusterSecurityGroupIngressActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    cluster_security_group_name: str = field(metadata={'query_param': { 'field_name': 'ClusterSecurityGroupName', 'style': 'form', 'explode': True }})
+    version: GetAuthorizeClusterSecurityGroupIngressVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     cidrip: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'CIDRIP', 'style': 'form', 'explode': True }})
-    cluster_security_group_name: str = field(default=None, metadata={'query_param': { 'field_name': 'ClusterSecurityGroupName', 'style': 'form', 'explode': True }})
     ec2_security_group_name: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'EC2SecurityGroupName', 'style': 'form', 'explode': True }})
     ec2_security_group_owner_id: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'EC2SecurityGroupOwnerId', 'style': 'form', 'explode': True }})
-    version: GetAuthorizeClusterSecurityGroupIngressVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -31,13 +35,13 @@ class GetAuthorizeClusterSecurityGroupIngressHeaders:
 
 @dataclass
 class GetAuthorizeClusterSecurityGroupIngressRequest:
-    query_params: GetAuthorizeClusterSecurityGroupIngressQueryParams = field(default=None)
-    headers: GetAuthorizeClusterSecurityGroupIngressHeaders = field(default=None)
+    headers: GetAuthorizeClusterSecurityGroupIngressHeaders = field()
+    query_params: GetAuthorizeClusterSecurityGroupIngressQueryParams = field()
     
 
 @dataclass
 class GetAuthorizeClusterSecurityGroupIngressResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { S3Resource } from "./s3resource";
 /**
  * Includes details about the failed S3 resources.

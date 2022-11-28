@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // S3InputFileLocation
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Specifies the details for the S3 file being copied.
 **/
 export class S3InputFileLocation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Bucket" })
+  @SpeakeasyMetadata({ data: "json, name=Bucket" })
   bucket?: string;
 
-  @Metadata({ data: "json, name=Key" })
+  @SpeakeasyMetadata({ data: "json, name=Key" })
   key?: string;
 }

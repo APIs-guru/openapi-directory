@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostDescribeDbParametersActionEnum(str, Enum):
     DESCRIBE_DB_PARAMETERS = "DescribeDBParameters"
@@ -10,8 +14,8 @@ class PostDescribeDbParametersVersionEnum(str, Enum):
 
 @dataclass
 class PostDescribeDbParametersQueryParams:
-    action: PostDescribeDbParametersActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostDescribeDbParametersVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostDescribeDbParametersActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostDescribeDbParametersVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostDescribeDbParametersHeaders:
 
 @dataclass
 class PostDescribeDbParametersRequest:
-    query_params: PostDescribeDbParametersQueryParams = field(default=None)
-    headers: PostDescribeDbParametersHeaders = field(default=None)
+    headers: PostDescribeDbParametersHeaders = field()
+    query_params: PostDescribeDbParametersQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostDescribeDbParametersResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

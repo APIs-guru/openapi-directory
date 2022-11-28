@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // CommentAuthorImage
@@ -6,7 +7,7 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The creator's avatar.
 **/
 export class CommentAuthorImage extends SpeakeasyBase {
-  @Metadata({ data: "json, name=url" })
+  @SpeakeasyMetadata({ data: "json, name=url" })
   url?: string;
 }
 
@@ -16,16 +17,16 @@ export class CommentAuthorImage extends SpeakeasyBase {
  * The author of this Comment.
 **/
 export class CommentAuthor extends SpeakeasyBase {
-  @Metadata({ data: "json, name=displayName" })
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
   displayName?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=image" })
+  @SpeakeasyMetadata({ data: "json, name=image" })
   image?: CommentAuthorImage;
 
-  @Metadata({ data: "json, name=url" })
+  @SpeakeasyMetadata({ data: "json, name=url" })
   url?: string;
 }
 
@@ -35,7 +36,7 @@ export class CommentAuthor extends SpeakeasyBase {
  * Data about the blog containing this comment.
 **/
 export class CommentBlog extends SpeakeasyBase {
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 }
 
@@ -45,7 +46,7 @@ export class CommentBlog extends SpeakeasyBase {
  * Data about the comment this is in reply to.
 **/
 export class CommentInReplyTo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 }
 
@@ -55,49 +56,49 @@ export class CommentInReplyTo extends SpeakeasyBase {
  * Data about the post containing this comment.
 **/
 export class CommentPost extends SpeakeasyBase {
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 }
 
 export enum CommentStatusEnum {
-    Live = "LIVE"
-,    Emptied = "EMPTIED"
-,    Pending = "PENDING"
-,    Spam = "SPAM"
+    Live = "LIVE",
+    Emptied = "EMPTIED",
+    Pending = "PENDING",
+    Spam = "SPAM"
 }
 
 
 export class Comment extends SpeakeasyBase {
-  @Metadata({ data: "json, name=author" })
+  @SpeakeasyMetadata({ data: "json, name=author" })
   author?: CommentAuthor;
 
-  @Metadata({ data: "json, name=blog" })
+  @SpeakeasyMetadata({ data: "json, name=blog" })
   blog?: CommentBlog;
 
-  @Metadata({ data: "json, name=content" })
+  @SpeakeasyMetadata({ data: "json, name=content" })
   content?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=inReplyTo" })
+  @SpeakeasyMetadata({ data: "json, name=inReplyTo" })
   inReplyTo?: CommentInReplyTo;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=post" })
+  @SpeakeasyMetadata({ data: "json, name=post" })
   post?: CommentPost;
 
-  @Metadata({ data: "json, name=published" })
+  @SpeakeasyMetadata({ data: "json, name=published" })
   published?: string;
 
-  @Metadata({ data: "json, name=selfLink" })
+  @SpeakeasyMetadata({ data: "json, name=selfLink" })
   selfLink?: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: CommentStatusEnum;
 
-  @Metadata({ data: "json, name=updated" })
+  @SpeakeasyMetadata({ data: "json, name=updated" })
   updated?: string;
 }

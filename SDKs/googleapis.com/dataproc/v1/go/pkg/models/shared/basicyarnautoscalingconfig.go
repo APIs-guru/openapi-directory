@@ -1,5 +1,7 @@
 package shared
 
+// BasicYarnAutoscalingConfig
+// Basic autoscaling configurations for YARN.
 type BasicYarnAutoscalingConfig struct {
 	GracefulDecommissionTimeout *string  `json:"gracefulDecommissionTimeout,omitempty"`
 	ScaleDownFactor             *float64 `json:"scaleDownFactor,omitempty"`

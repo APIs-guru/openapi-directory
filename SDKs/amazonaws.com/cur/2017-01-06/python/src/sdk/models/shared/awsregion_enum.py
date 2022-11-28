@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class AwsRegionEnum(str, Enum):
     AF_SOUTH_1 = "af-south-1"

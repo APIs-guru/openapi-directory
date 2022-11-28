@@ -1,10 +1,14 @@
 package shared
 
+// CostMatrixDataInfo
+// Additional information for your request
 type CostMatrixDataInfo struct {
 	Copyrights []string `json:"copyrights,omitempty"`
 	Took       *float64 `json:"took,omitempty"`
 }
 
+// CostMatrixData
+// JSON data of matrix response
 type CostMatrixData struct {
 	Distances [][]float64         `json:"distances,omitempty"`
 	Info      *CostMatrixDataInfo `json:"info,omitempty"`

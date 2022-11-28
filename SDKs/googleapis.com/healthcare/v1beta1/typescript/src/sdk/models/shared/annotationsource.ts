@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CloudHealthcareSource } from "./cloudhealthcaresource";
+
 
 
 // AnnotationSource
@@ -7,6 +8,6 @@ import { CloudHealthcareSource } from "./cloudhealthcaresource";
  * AnnotationSource holds the source information of the annotation.
 **/
 export class AnnotationSource extends SpeakeasyBase {
-  @Metadata({ data: "json, name=cloudHealthcareSource" })
+  @SpeakeasyMetadata({ data: "json, name=cloudHealthcareSource" })
   cloudHealthcareSource?: CloudHealthcareSource;
 }

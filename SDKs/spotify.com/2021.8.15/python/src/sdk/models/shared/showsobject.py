@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import simplifiedshowobject
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ShowsObject:
-    shows: Optional[List[simplifiedshowobject.SimplifiedShowObject]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'shows' }})
+    shows: Optional[List[SimplifiedShowObject]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('shows') }})
     

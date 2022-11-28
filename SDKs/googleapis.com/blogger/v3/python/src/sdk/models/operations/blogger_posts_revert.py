@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class BloggerPostsRevertPathParams:
-    blog_id: str = field(default=None, metadata={'path_param': { 'field_name': 'blogId', 'style': 'simple', 'explode': False }})
-    post_id: str = field(default=None, metadata={'path_param': { 'field_name': 'postId', 'style': 'simple', 'explode': False }})
+    blog_id: str = field(metadata={'path_param': { 'field_name': 'blogId', 'style': 'simple', 'explode': False }})
+    post_id: str = field(metadata={'path_param': { 'field_name': 'postId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,20 +27,20 @@ class BloggerPostsRevertQueryParams:
 
 @dataclass
 class BloggerPostsRevertSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class BloggerPostsRevertRequest:
-    path_params: BloggerPostsRevertPathParams = field(default=None)
-    query_params: BloggerPostsRevertQueryParams = field(default=None)
-    security: BloggerPostsRevertSecurity = field(default=None)
+    path_params: BloggerPostsRevertPathParams = field()
+    query_params: BloggerPostsRevertQueryParams = field()
+    security: BloggerPostsRevertSecurity = field()
     
 
 @dataclass
 class BloggerPostsRevertResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     post: Optional[shared.Post] = field(default=None)
-    status_code: int = field(default=None)
     

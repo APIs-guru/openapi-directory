@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetResetFpgaImageAttributeActionEnum(str, Enum):
     RESET_FPGA_IMAGE_ATTRIBUTE = "ResetFpgaImageAttribute"
@@ -13,11 +17,11 @@ class GetResetFpgaImageAttributeVersionEnum(str, Enum):
 
 @dataclass
 class GetResetFpgaImageAttributeQueryParams:
-    action: GetResetFpgaImageAttributeActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetResetFpgaImageAttributeActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    fpga_image_id: str = field(metadata={'query_param': { 'field_name': 'FpgaImageId', 'style': 'form', 'explode': True }})
+    version: GetResetFpgaImageAttributeVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     attribute: Optional[GetResetFpgaImageAttributeAttributeEnum] = field(default=None, metadata={'query_param': { 'field_name': 'Attribute', 'style': 'form', 'explode': True }})
     dry_run: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'DryRun', 'style': 'form', 'explode': True }})
-    fpga_image_id: str = field(default=None, metadata={'query_param': { 'field_name': 'FpgaImageId', 'style': 'form', 'explode': True }})
-    version: GetResetFpgaImageAttributeVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -33,13 +37,13 @@ class GetResetFpgaImageAttributeHeaders:
 
 @dataclass
 class GetResetFpgaImageAttributeRequest:
-    query_params: GetResetFpgaImageAttributeQueryParams = field(default=None)
-    headers: GetResetFpgaImageAttributeHeaders = field(default=None)
+    headers: GetResetFpgaImageAttributeHeaders = field()
+    query_params: GetResetFpgaImageAttributeQueryParams = field()
     
 
 @dataclass
 class GetResetFpgaImageAttributeResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

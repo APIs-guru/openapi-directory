@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // DatafeedFetchSchedule
@@ -6,30 +7,30 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The required fields vary based on the frequency of fetching. For a monthly fetch schedule, day_of_month and hour are required. For a weekly fetch schedule, weekday and hour are required. For a daily fetch schedule, only hour is required.
 **/
 export class DatafeedFetchSchedule extends SpeakeasyBase {
-  @Metadata({ data: "json, name=dayOfMonth" })
+  @SpeakeasyMetadata({ data: "json, name=dayOfMonth" })
   dayOfMonth?: number;
 
-  @Metadata({ data: "json, name=fetchUrl" })
+  @SpeakeasyMetadata({ data: "json, name=fetchUrl" })
   fetchUrl?: string;
 
-  @Metadata({ data: "json, name=hour" })
+  @SpeakeasyMetadata({ data: "json, name=hour" })
   hour?: number;
 
-  @Metadata({ data: "json, name=minuteOfHour" })
+  @SpeakeasyMetadata({ data: "json, name=minuteOfHour" })
   minuteOfHour?: number;
 
-  @Metadata({ data: "json, name=password" })
+  @SpeakeasyMetadata({ data: "json, name=password" })
   password?: string;
 
-  @Metadata({ data: "json, name=paused" })
+  @SpeakeasyMetadata({ data: "json, name=paused" })
   paused?: boolean;
 
-  @Metadata({ data: "json, name=timeZone" })
+  @SpeakeasyMetadata({ data: "json, name=timeZone" })
   timeZone?: string;
 
-  @Metadata({ data: "json, name=username" })
+  @SpeakeasyMetadata({ data: "json, name=username" })
   username?: string;
 
-  @Metadata({ data: "json, name=weekday" })
+  @SpeakeasyMetadata({ data: "json, name=weekday" })
   weekday?: string;
 }

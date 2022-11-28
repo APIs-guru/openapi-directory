@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AccountSettings } from "./accountsettings";
+
 
 
 // GetAccountSettingsResult
@@ -7,6 +8,6 @@ import { AccountSettings } from "./accountsettings";
  * Represents the account settings return values from the <code>GetAccountSettings</code> request.
 **/
 export class GetAccountSettingsResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=accountSettings" })
+  @SpeakeasyMetadata({ data: "json, name=accountSettings" })
   accountSettings?: AccountSettings;
 }

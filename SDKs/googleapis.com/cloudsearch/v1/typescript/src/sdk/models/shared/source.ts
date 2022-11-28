@@ -1,15 +1,16 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum SourcePredefinedSourceEnum {
-    None = "NONE"
-,    QueryHistory = "QUERY_HISTORY"
-,    Person = "PERSON"
-,    GoogleDrive = "GOOGLE_DRIVE"
-,    GoogleGmail = "GOOGLE_GMAIL"
-,    GoogleSites = "GOOGLE_SITES"
-,    GoogleGroups = "GOOGLE_GROUPS"
-,    GoogleCalendar = "GOOGLE_CALENDAR"
-,    GoogleKeep = "GOOGLE_KEEP"
+    None = "NONE",
+    QueryHistory = "QUERY_HISTORY",
+    Person = "PERSON",
+    GoogleDrive = "GOOGLE_DRIVE",
+    GoogleGmail = "GOOGLE_GMAIL",
+    GoogleSites = "GOOGLE_SITES",
+    GoogleGroups = "GOOGLE_GROUPS",
+    GoogleCalendar = "GOOGLE_CALENDAR",
+    GoogleKeep = "GOOGLE_KEEP"
 }
 
 
@@ -18,9 +19,9 @@ export enum SourcePredefinedSourceEnum {
  * Defines sources for the suggest/search APIs.
 **/
 export class Source extends SpeakeasyBase {
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=predefinedSource" })
+  @SpeakeasyMetadata({ data: "json, name=predefinedSource" })
   predefinedSource?: SourcePredefinedSourceEnum;
 }

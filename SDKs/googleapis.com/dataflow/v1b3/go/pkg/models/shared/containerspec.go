@@ -1,5 +1,7 @@
 package shared
 
+// ContainerSpec
+// Container Spec.
 type ContainerSpec struct {
 	DefaultEnvironment              *FlexTemplateRuntimeEnvironment `json:"defaultEnvironment,omitempty"`
 	Image                           *string                         `json:"image,omitempty"`
@@ -7,5 +9,5 @@ type ContainerSpec struct {
 	ImageRepositoryPasswordSecretID *string                         `json:"imageRepositoryPasswordSecretId,omitempty"`
 	ImageRepositoryUsernameSecretID *string                         `json:"imageRepositoryUsernameSecretId,omitempty"`
 	Metadata                        *TemplateMetadata               `json:"metadata,omitempty"`
-	SdkInfo                         *SdkInfo                        `json:"sdkInfo,omitempty"`
+	SdkInfo                         *SDKInfo                        `json:"sdkInfo,omitempty"`
 }

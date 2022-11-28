@@ -16,6 +16,8 @@ const (
 	GoogleCloudRecommendationengineV1beta1CatalogItemLevelConfigPredictItemLevelEnumMaster                      GoogleCloudRecommendationengineV1beta1CatalogItemLevelConfigPredictItemLevelEnum = "MASTER"
 )
 
+// GoogleCloudRecommendationengineV1beta1CatalogItemLevelConfig
+// Configures the catalog level that users send events to, and the level at which predictions are made.
 type GoogleCloudRecommendationengineV1beta1CatalogItemLevelConfig struct {
 	EventItemLevel   *GoogleCloudRecommendationengineV1beta1CatalogItemLevelConfigEventItemLevelEnum   `json:"eventItemLevel,omitempty"`
 	PredictItemLevel *GoogleCloudRecommendationengineV1beta1CatalogItemLevelConfigPredictItemLevelEnum `json:"predictItemLevel,omitempty"`

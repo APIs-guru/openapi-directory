@@ -1,5 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ActionFunctionIdentifier } from "./actionfunctionidentifier";
 import { SingleFieldDependency } from "./singlefielddependency";
 import { ConditionalSingleFieldDependency } from "./conditionalsinglefielddependency";
@@ -8,41 +7,42 @@ import { ActionLabels } from "./actionlabels";
 import { ObjectRequestOptions } from "./objectrequestoptions";
 
 
+
 // ExtensionActionDefinition
 /** 
  * Configuration for custom workflow action.
 **/
 export class ExtensionActionDefinition extends SpeakeasyBase {
-  @Metadata({ data: "json, name=actionUrl" })
+  @SpeakeasyMetadata({ data: "json, name=actionUrl" })
   actionUrl: string;
 
-  @Metadata({ data: "json, name=archivedAt" })
+  @SpeakeasyMetadata({ data: "json, name=archivedAt" })
   archivedAt?: number;
 
-  @Metadata({ data: "json, name=functions", elemType: shared.ActionFunctionIdentifier })
+  @SpeakeasyMetadata({ data: "json, name=functions", elemType: ActionFunctionIdentifier })
   functions: ActionFunctionIdentifier[];
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: string;
 
-  @Metadata({ data: "json, name=inputFieldDependencies" })
+  @SpeakeasyMetadata({ data: "json, name=inputFieldDependencies" })
   inputFieldDependencies?: any[];
 
-  @Metadata({ data: "json, name=inputFields", elemType: shared.InputFieldDefinition })
+  @SpeakeasyMetadata({ data: "json, name=inputFields", elemType: InputFieldDefinition })
   inputFields: InputFieldDefinition[];
 
-  @Metadata({ data: "json, name=labels", elemType: shared.ActionLabels })
+  @SpeakeasyMetadata({ data: "json, name=labels", elemType: ActionLabels })
   labels: Map<string, ActionLabels>;
 
-  @Metadata({ data: "json, name=objectRequestOptions" })
+  @SpeakeasyMetadata({ data: "json, name=objectRequestOptions" })
   objectRequestOptions?: ObjectRequestOptions;
 
-  @Metadata({ data: "json, name=objectTypes" })
+  @SpeakeasyMetadata({ data: "json, name=objectTypes" })
   objectTypes: string[];
 
-  @Metadata({ data: "json, name=published" })
+  @SpeakeasyMetadata({ data: "json, name=published" })
   published: boolean;
 
-  @Metadata({ data: "json, name=revisionId" })
+  @SpeakeasyMetadata({ data: "json, name=revisionId" })
   revisionId: string;
 }

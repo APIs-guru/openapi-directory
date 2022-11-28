@@ -92,6 +92,8 @@ type IssuePullRequest struct {
 	URL      string     `json:"url"`
 }
 
+// Issue
+// Issues are a great way to keep track of tasks, enhancements, and bugs for your projects.
 type Issue struct {
 	ActiveLockReason      *string                `json:"active_lock_reason,omitempty"`
 	Assignee              IssueSimpleUser        `json:"assignee"`

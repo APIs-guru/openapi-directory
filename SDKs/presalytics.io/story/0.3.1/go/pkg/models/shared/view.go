@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// View
+// A Page view within a session-create
 type View struct {
 	ActiveMsecs *int64     `json:"active_msecs,omitempty"`
 	Additional  *string    `json:"additional,omitempty"`

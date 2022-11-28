@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PropertyReference } from "./propertyreference";
+
 
 
 // Projection
@@ -7,6 +8,6 @@ import { PropertyReference } from "./propertyreference";
  * A representation of a property in a projection.
 **/
 export class Projection extends SpeakeasyBase {
-  @Metadata({ data: "json, name=property" })
+  @SpeakeasyMetadata({ data: "json, name=property" })
   property?: PropertyReference;
 }

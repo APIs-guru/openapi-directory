@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AutoScalingGroupConfiguration
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Describes the configuration of an Auto Scaling group.
 **/
 export class AutoScalingGroupConfiguration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=desiredCapacity" })
+  @SpeakeasyMetadata({ data: "json, name=desiredCapacity" })
   desiredCapacity?: number;
 
-  @Metadata({ data: "json, name=instanceType" })
+  @SpeakeasyMetadata({ data: "json, name=instanceType" })
   instanceType?: string;
 
-  @Metadata({ data: "json, name=maxSize" })
+  @SpeakeasyMetadata({ data: "json, name=maxSize" })
   maxSize?: number;
 
-  @Metadata({ data: "json, name=minSize" })
+  @SpeakeasyMetadata({ data: "json, name=minSize" })
   minSize?: number;
 }

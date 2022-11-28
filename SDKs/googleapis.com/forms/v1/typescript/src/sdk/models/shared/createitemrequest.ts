@@ -1,16 +1,17 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import { Item } from "./item";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { ItemInput } from "./item";
 import { Location } from "./location";
 
 
-// CreateItemRequest
+
+// CreateItemRequestInput
 /** 
  * Create an item in a form.
 **/
-export class CreateItemRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=item" })
-  item?: Item;
+export class CreateItemRequestInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=item" })
+  item?: ItemInput;
 
-  @Metadata({ data: "json, name=location" })
+  @SpeakeasyMetadata({ data: "json, name=location" })
   location?: Location;
 }

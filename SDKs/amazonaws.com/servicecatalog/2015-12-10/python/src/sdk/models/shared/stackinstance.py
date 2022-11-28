@@ -1,13 +1,19 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import stackinstancestatus_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class StackInstance:
-    account: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Account' }})
-    region: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Region' }})
-    stack_instance_status: Optional[stackinstancestatus_enum.StackInstanceStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'StackInstanceStatus' }})
+    r"""StackInstance
+    An AWS CloudFormation stack, in a specific account and region, that's part of a stack set operation. A stack instance is a reference to an attempted or actual stack in a given account within a given region. A stack instance can exist without a stack—for example, if the stack couldn't be created for some reason. A stack instance is associated with only one stack set. Each stack instance contains the ID of its associated stack set, as well as the ID of the actual stack and the stack status. 
+    """
+    
+    account: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Account') }})
+    region: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Region') }})
+    stack_instance_status: Optional[StackInstanceStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('StackInstanceStatus') }})
     

@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RevisionTemplate } from "./revisiontemplate";
+
 
 
 // ConfigurationSpec
@@ -7,6 +8,6 @@ import { RevisionTemplate } from "./revisiontemplate";
  * ConfigurationSpec holds the desired state of the Configuration (from the client).
 **/
 export class ConfigurationSpec extends SpeakeasyBase {
-  @Metadata({ data: "json, name=template" })
+  @SpeakeasyMetadata({ data: "json, name=template" })
   template?: RevisionTemplate;
 }

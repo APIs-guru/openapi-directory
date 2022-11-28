@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var BloggerPostUserInfosListPathParams = /** @class */ (function (_super) {
     __extends(BloggerPostUserInfosListPathParams, _super);
@@ -30,11 +30,11 @@ var BloggerPostUserInfosListPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=blogId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=blogId" }),
         __metadata("design:type", String)
     ], BloggerPostUserInfosListPathParams.prototype, "blogId", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=userId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=userId" }),
         __metadata("design:type", String)
     ], BloggerPostUserInfosListPathParams.prototype, "userId", void 0);
     return BloggerPostUserInfosListPathParams;
@@ -66,83 +66,83 @@ var BloggerPostUserInfosListQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=$.xgafv" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=$.xgafv" }),
         __metadata("design:type", String)
     ], BloggerPostUserInfosListQueryParams.prototype, "dollarXgafv", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=access_token" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=access_token" }),
         __metadata("design:type", String)
     ], BloggerPostUserInfosListQueryParams.prototype, "accessToken", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=alt" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=alt" }),
         __metadata("design:type", String)
     ], BloggerPostUserInfosListQueryParams.prototype, "alt", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=callback" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=callback" }),
         __metadata("design:type", String)
     ], BloggerPostUserInfosListQueryParams.prototype, "callback", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=endDate" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=endDate" }),
         __metadata("design:type", String)
     ], BloggerPostUserInfosListQueryParams.prototype, "endDate", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=fetchBodies" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=fetchBodies" }),
         __metadata("design:type", Boolean)
     ], BloggerPostUserInfosListQueryParams.prototype, "fetchBodies", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=fields" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=fields" }),
         __metadata("design:type", String)
     ], BloggerPostUserInfosListQueryParams.prototype, "fields", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=key" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=key" }),
         __metadata("design:type", String)
     ], BloggerPostUserInfosListQueryParams.prototype, "key", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=labels" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=labels" }),
         __metadata("design:type", String)
     ], BloggerPostUserInfosListQueryParams.prototype, "labels", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=maxResults" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=maxResults" }),
         __metadata("design:type", Number)
     ], BloggerPostUserInfosListQueryParams.prototype, "maxResults", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=oauth_token" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=oauth_token" }),
         __metadata("design:type", String)
     ], BloggerPostUserInfosListQueryParams.prototype, "oauthToken", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=orderBy" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=orderBy" }),
         __metadata("design:type", String)
     ], BloggerPostUserInfosListQueryParams.prototype, "orderBy", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=pageToken" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=pageToken" }),
         __metadata("design:type", String)
     ], BloggerPostUserInfosListQueryParams.prototype, "pageToken", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=prettyPrint" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=prettyPrint" }),
         __metadata("design:type", Boolean)
     ], BloggerPostUserInfosListQueryParams.prototype, "prettyPrint", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=quotaUser" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=quotaUser" }),
         __metadata("design:type", String)
     ], BloggerPostUserInfosListQueryParams.prototype, "quotaUser", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=startDate" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=startDate" }),
         __metadata("design:type", String)
     ], BloggerPostUserInfosListQueryParams.prototype, "startDate", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=status" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=status" }),
         __metadata("design:type", Array)
     ], BloggerPostUserInfosListQueryParams.prototype, "status", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=uploadType" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=uploadType" }),
         __metadata("design:type", String)
     ], BloggerPostUserInfosListQueryParams.prototype, "uploadType", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=upload_protocol" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=upload_protocol" }),
         __metadata("design:type", String)
     ], BloggerPostUserInfosListQueryParams.prototype, "uploadProtocol", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=view" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=view" }),
         __metadata("design:type", String)
     ], BloggerPostUserInfosListQueryParams.prototype, "view", void 0);
     return BloggerPostUserInfosListQueryParams;
@@ -154,11 +154,11 @@ var BloggerPostUserInfosListSecurityOption1 = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2)
     ], BloggerPostUserInfosListSecurityOption1.prototype, "oauth2", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2c)
     ], BloggerPostUserInfosListSecurityOption1.prototype, "oauth2c", void 0);
     return BloggerPostUserInfosListSecurityOption1;
@@ -170,11 +170,11 @@ var BloggerPostUserInfosListSecurityOption2 = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2)
     ], BloggerPostUserInfosListSecurityOption2.prototype, "oauth2", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2c)
     ], BloggerPostUserInfosListSecurityOption2.prototype, "oauth2c", void 0);
     return BloggerPostUserInfosListSecurityOption2;
@@ -186,11 +186,11 @@ var BloggerPostUserInfosListSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, option=true" }),
+        SpeakeasyMetadata({ data: "security, option=true" }),
         __metadata("design:type", BloggerPostUserInfosListSecurityOption1)
     ], BloggerPostUserInfosListSecurity.prototype, "option1", void 0);
     __decorate([
-        Metadata({ data: "security, option=true" }),
+        SpeakeasyMetadata({ data: "security, option=true" }),
         __metadata("design:type", BloggerPostUserInfosListSecurityOption2)
     ], BloggerPostUserInfosListSecurity.prototype, "option2", void 0);
     return BloggerPostUserInfosListSecurity;
@@ -202,15 +202,15 @@ var BloggerPostUserInfosListRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", BloggerPostUserInfosListPathParams)
     ], BloggerPostUserInfosListRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", BloggerPostUserInfosListQueryParams)
     ], BloggerPostUserInfosListRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", BloggerPostUserInfosListSecurity)
     ], BloggerPostUserInfosListRequest.prototype, "security", void 0);
     return BloggerPostUserInfosListRequest;
@@ -222,15 +222,15 @@ var BloggerPostUserInfosListResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], BloggerPostUserInfosListResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.PostUserInfosList)
     ], BloggerPostUserInfosListResponse.prototype, "postUserInfosList", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], BloggerPostUserInfosListResponse.prototype, "statusCode", void 0);
     return BloggerPostUserInfosListResponse;

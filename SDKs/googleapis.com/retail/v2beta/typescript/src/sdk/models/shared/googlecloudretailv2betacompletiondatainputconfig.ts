@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudRetailV2betaBigQuerySource } from "./googlecloudretailv2betabigquerysource";
+
 
 
 // GoogleCloudRetailV2betaCompletionDataInputConfig
@@ -7,6 +8,6 @@ import { GoogleCloudRetailV2betaBigQuerySource } from "./googlecloudretailv2beta
  * The input config source for completion data.
 **/
 export class GoogleCloudRetailV2betaCompletionDataInputConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=bigQuerySource" })
+  @SpeakeasyMetadata({ data: "json, name=bigQuerySource" })
   bigQuerySource?: GoogleCloudRetailV2betaBigQuerySource;
 }

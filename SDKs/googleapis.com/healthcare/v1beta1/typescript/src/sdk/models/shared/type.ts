@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Field } from "./field";
 
+
 export enum TypePrimitiveEnum {
-    PrimitiveUnspecified = "PRIMITIVE_UNSPECIFIED"
-,    String = "STRING"
-,    Varies = "VARIES"
-,    UnescapedString = "UNESCAPED_STRING"
+    PrimitiveUnspecified = "PRIMITIVE_UNSPECIFIED",
+    String = "STRING",
+    Varies = "VARIES",
+    UnescapedString = "UNESCAPED_STRING"
 }
 
 
@@ -15,12 +15,12 @@ export enum TypePrimitiveEnum {
  * A type definition for some HL7v2 type (incl. Segments and Datatypes).
 **/
 export class Type extends SpeakeasyBase {
-  @Metadata({ data: "json, name=fields", elemType: shared.Field })
+  @SpeakeasyMetadata({ data: "json, name=fields", elemType: Field })
   fields?: Field[];
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=primitive" })
+  @SpeakeasyMetadata({ data: "json, name=primitive" })
   primitive?: TypePrimitiveEnum;
 }

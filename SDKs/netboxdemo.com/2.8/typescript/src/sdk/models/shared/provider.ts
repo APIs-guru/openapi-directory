@@ -1,46 +1,80 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class Provider extends SpeakeasyBase {
-  @Metadata({ data: "json, name=account" })
+  @SpeakeasyMetadata({ data: "json, name=account" })
   account?: string;
 
-  @Metadata({ data: "json, name=admin_contact" })
+  @SpeakeasyMetadata({ data: "json, name=admin_contact" })
   adminContact?: string;
 
-  @Metadata({ data: "json, name=asn" })
+  @SpeakeasyMetadata({ data: "json, name=asn" })
   asn?: number;
 
-  @Metadata({ data: "json, name=circuit_count" })
+  @SpeakeasyMetadata({ data: "json, name=circuit_count" })
   circuitCount?: number;
 
-  @Metadata({ data: "json, name=comments" })
+  @SpeakeasyMetadata({ data: "json, name=comments" })
   comments?: string;
 
-  @Metadata({ data: "json, name=created" })
+  @SpeakeasyMetadata({ data: "json, name=created" })
   created?: Date;
 
-  @Metadata({ data: "json, name=custom_fields" })
+  @SpeakeasyMetadata({ data: "json, name=custom_fields" })
   customFields?: Map<string, any>;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: number;
 
-  @Metadata({ data: "json, name=last_updated" })
+  @SpeakeasyMetadata({ data: "json, name=last_updated" })
   lastUpdated?: Date;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 
-  @Metadata({ data: "json, name=noc_contact" })
+  @SpeakeasyMetadata({ data: "json, name=noc_contact" })
   nocContact?: string;
 
-  @Metadata({ data: "json, name=portal_url" })
+  @SpeakeasyMetadata({ data: "json, name=portal_url" })
   portalUrl?: string;
 
-  @Metadata({ data: "json, name=slug" })
+  @SpeakeasyMetadata({ data: "json, name=slug" })
   slug: string;
 
-  @Metadata({ data: "json, name=tags" })
+  @SpeakeasyMetadata({ data: "json, name=tags" })
+  tags?: string[];
+}
+
+
+export class ProviderInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=account" })
+  account?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=admin_contact" })
+  adminContact?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=asn" })
+  asn?: number;
+
+  @SpeakeasyMetadata({ data: "json, name=comments" })
+  comments?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=custom_fields" })
+  customFields?: Map<string, any>;
+
+  @SpeakeasyMetadata({ data: "json, name=name" })
+  name: string;
+
+  @SpeakeasyMetadata({ data: "json, name=noc_contact" })
+  nocContact?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=portal_url" })
+  portalUrl?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=slug" })
+  slug: string;
+
+  @SpeakeasyMetadata({ data: "json, name=tags" })
   tags?: string[];
 }

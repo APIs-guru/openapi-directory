@@ -1,50 +1,51 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class EndpointGetMultipleEpisodesQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=ids" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=ids" })
   ids: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=market" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=market" })
   market?: string;
 }
 
 
 export class EndpointGetMultipleEpisodesHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=Authorization" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Authorization" })
   authorization: string;
 }
 
 
 export class EndpointGetMultipleEpisodesSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   spotifyAuth: shared.SchemeSpotifyAuth;
 }
 
 
 export class EndpointGetMultipleEpisodesRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: EndpointGetMultipleEpisodesQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: EndpointGetMultipleEpisodesHeaders;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: EndpointGetMultipleEpisodesSecurity;
 }
 
 
 export class EndpointGetMultipleEpisodesResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   episodesObject?: shared.EpisodesObject;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   errorResponseObject?: shared.ErrorResponseObject;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var ReadSentenceDependenciesV1EnCoreWebSmSentenceDependenciesPostRequest = /** @class */ (function (_super) {
     __extends(ReadSentenceDependenciesV1EnCoreWebSmSentenceDependenciesPostRequest, _super);
@@ -30,7 +30,7 @@ var ReadSentenceDependenciesV1EnCoreWebSmSentenceDependenciesPostRequest = /** @
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", shared.UserRequestIn)
     ], ReadSentenceDependenciesV1EnCoreWebSmSentenceDependenciesPostRequest.prototype, "request", void 0);
     return ReadSentenceDependenciesV1EnCoreWebSmSentenceDependenciesPostRequest;
@@ -42,19 +42,19 @@ var ReadSentenceDependenciesV1EnCoreWebSmSentenceDependenciesPostResponse = /** 
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], ReadSentenceDependenciesV1EnCoreWebSmSentenceDependenciesPostResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.HttpValidationError)
     ], ReadSentenceDependenciesV1EnCoreWebSmSentenceDependenciesPostResponse.prototype, "httpValidationError", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.SentenceDependenciesOut)
     ], ReadSentenceDependenciesV1EnCoreWebSmSentenceDependenciesPostResponse.prototype, "sentenceDependenciesOut", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], ReadSentenceDependenciesV1EnCoreWebSmSentenceDependenciesPostResponse.prototype, "statusCode", void 0);
     return ReadSentenceDependenciesV1EnCoreWebSmSentenceDependenciesPostResponse;

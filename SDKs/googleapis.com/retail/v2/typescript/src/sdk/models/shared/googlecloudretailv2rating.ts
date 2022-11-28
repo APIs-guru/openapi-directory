@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudRetailV2Rating
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The rating of a Product.
 **/
 export class GoogleCloudRetailV2Rating extends SpeakeasyBase {
-  @Metadata({ data: "json, name=averageRating" })
+  @SpeakeasyMetadata({ data: "json, name=averageRating" })
   averageRating?: number;
 
-  @Metadata({ data: "json, name=ratingCount" })
+  @SpeakeasyMetadata({ data: "json, name=ratingCount" })
   ratingCount?: number;
 
-  @Metadata({ data: "json, name=ratingHistogram" })
+  @SpeakeasyMetadata({ data: "json, name=ratingHistogram" })
   ratingHistogram?: number[];
 }

@@ -1,40 +1,41 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DeleteAnApiVersionPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=apiId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=apiId" })
   apiId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=apiVersionId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=apiVersionId" })
   apiVersionId: string;
 }
 
 
-export class DeleteAnApiVersionRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: DeleteAnApiVersionPathParams;
-}
-
-
 export class DeleteAnApiVersion200ApplicationJsonVersion extends SpeakeasyBase {
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 }
 
 
 export class DeleteAnApiVersion200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=version" })
+  @SpeakeasyMetadata({ data: "json, name=version" })
   version?: DeleteAnApiVersion200ApplicationJsonVersion;
 }
 
 
+export class DeleteAnApiVersionRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: DeleteAnApiVersionPathParams;
+}
+
+
 export class DeleteAnApiVersionResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   deleteAnApiVersion200ApplicationJsonObject?: DeleteAnApiVersion200ApplicationJson;
 }

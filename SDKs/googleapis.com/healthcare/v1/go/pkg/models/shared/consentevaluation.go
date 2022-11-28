@@ -10,6 +10,8 @@ const (
 	ConsentEvaluationEvaluationResultEnumHasSatisfiedPolicy          ConsentEvaluationEvaluationResultEnum = "HAS_SATISFIED_POLICY"
 )
 
+// ConsentEvaluation
+// The detailed evaluation of a particular Consent.
 type ConsentEvaluation struct {
 	EvaluationResult *ConsentEvaluationEvaluationResultEnum `json:"evaluationResult,omitempty"`
 }

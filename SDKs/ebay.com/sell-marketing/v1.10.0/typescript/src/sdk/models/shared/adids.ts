@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AdIds
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * This type is a container for a list of ad IDs.
 **/
 export class AdIds extends SpeakeasyBase {
-  @Metadata({ data: "json, name=adIds" })
+  @SpeakeasyMetadata({ data: "json, name=adIds" })
   adIds?: string[];
 }

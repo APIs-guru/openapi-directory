@@ -1,7 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import updatesystem_models_packagetype
+from sdk import utils
+from . import *
 
 class UpdateSystemModelsAvailableSubscriptionSubscriptionTypeEnum(str, Enum):
     REQUIRED = "Required"
@@ -12,6 +17,6 @@ class UpdateSystemModelsAvailableSubscriptionSubscriptionTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class UpdateSystemModelsAvailableSubscription:
-    package_type: Optional[updatesystem_models_packagetype.UpdateSystemModelsPackageType] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'PackageType' }})
-    subscription_type: Optional[UpdateSystemModelsAvailableSubscriptionSubscriptionTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'SubscriptionType' }})
+    package_type: Optional[UpdateSystemModelsPackageType] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('PackageType') }})
+    subscription_type: Optional[UpdateSystemModelsAvailableSubscriptionSubscriptionTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('SubscriptionType') }})
     

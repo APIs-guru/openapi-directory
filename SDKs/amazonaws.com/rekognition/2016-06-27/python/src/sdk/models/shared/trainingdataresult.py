@@ -1,15 +1,18 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import trainingdata
-from . import trainingdata
-from . import validationdata
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class TrainingDataResult:
-    input: Optional[trainingdata.TrainingData] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Input' }})
-    output: Optional[trainingdata.TrainingData] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Output' }})
-    validation: Optional[validationdata.ValidationData] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Validation' }})
+    r"""TrainingDataResult
+    Sagemaker Groundtruth format manifest files for the input, output and validation datasets that are used and created during testing.
+    """
+    
+    input: Optional[TrainingData] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Input') }})
+    output: Optional[TrainingData] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Output') }})
+    validation: Optional[ValidationData] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Validation') }})
     

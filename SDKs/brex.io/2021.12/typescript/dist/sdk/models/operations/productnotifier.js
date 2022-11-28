@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var ProductNotifierPathParams = /** @class */ (function (_super) {
     __extends(ProductNotifierPathParams, _super);
@@ -30,7 +30,7 @@ var ProductNotifierPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=notifierId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=notifierId" }),
         __metadata("design:type", String)
     ], ProductNotifierPathParams.prototype, "notifierId", void 0);
     return ProductNotifierPathParams;
@@ -42,7 +42,7 @@ var ProductNotifierSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeUserKey)
     ], ProductNotifierSecurity.prototype, "userKey", void 0);
     return ProductNotifierSecurity;
@@ -54,11 +54,11 @@ var ProductNotifierRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ProductNotifierPathParams)
     ], ProductNotifierRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ProductNotifierSecurity)
     ], ProductNotifierRequest.prototype, "security", void 0);
     return ProductNotifierRequest;
@@ -70,19 +70,19 @@ var ProductNotifierResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], ProductNotifierResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], ProductNotifierResponse.prototype, "productNotifier200ApplicationJsonAny", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], ProductNotifierResponse.prototype, "productNotifierDefaultApplicationJsonAny", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], ProductNotifierResponse.prototype, "statusCode", void 0);
     return ProductNotifierResponse;

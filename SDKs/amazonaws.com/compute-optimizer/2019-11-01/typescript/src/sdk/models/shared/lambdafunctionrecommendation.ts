@@ -1,9 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { LambdaFunctionRecommendationFindingEnum } from "./lambdafunctionrecommendationfindingenum";
 import { LambdaFunctionRecommendationFindingReasonCodeEnum } from "./lambdafunctionrecommendationfindingreasoncodeenum";
 import { LambdaFunctionMemoryRecommendationOption } from "./lambdafunctionmemoryrecommendationoption";
 import { LambdaFunctionUtilizationMetric } from "./lambdafunctionutilizationmetric";
+
 
 
 // LambdaFunctionRecommendation
@@ -11,36 +11,36 @@ import { LambdaFunctionUtilizationMetric } from "./lambdafunctionutilizationmetr
  * Describes an Lambda function recommendation.
 **/
 export class LambdaFunctionRecommendation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=accountId" })
+  @SpeakeasyMetadata({ data: "json, name=accountId" })
   accountId?: string;
 
-  @Metadata({ data: "json, name=currentMemorySize" })
+  @SpeakeasyMetadata({ data: "json, name=currentMemorySize" })
   currentMemorySize?: number;
 
-  @Metadata({ data: "json, name=finding" })
+  @SpeakeasyMetadata({ data: "json, name=finding" })
   finding?: LambdaFunctionRecommendationFindingEnum;
 
-  @Metadata({ data: "json, name=findingReasonCodes" })
+  @SpeakeasyMetadata({ data: "json, name=findingReasonCodes" })
   findingReasonCodes?: LambdaFunctionRecommendationFindingReasonCodeEnum[];
 
-  @Metadata({ data: "json, name=functionArn" })
+  @SpeakeasyMetadata({ data: "json, name=functionArn" })
   functionArn?: string;
 
-  @Metadata({ data: "json, name=functionVersion" })
+  @SpeakeasyMetadata({ data: "json, name=functionVersion" })
   functionVersion?: string;
 
-  @Metadata({ data: "json, name=lastRefreshTimestamp" })
+  @SpeakeasyMetadata({ data: "json, name=lastRefreshTimestamp" })
   lastRefreshTimestamp?: Date;
 
-  @Metadata({ data: "json, name=lookbackPeriodInDays" })
+  @SpeakeasyMetadata({ data: "json, name=lookbackPeriodInDays" })
   lookbackPeriodInDays?: number;
 
-  @Metadata({ data: "json, name=memorySizeRecommendationOptions", elemType: shared.LambdaFunctionMemoryRecommendationOption })
+  @SpeakeasyMetadata({ data: "json, name=memorySizeRecommendationOptions", elemType: LambdaFunctionMemoryRecommendationOption })
   memorySizeRecommendationOptions?: LambdaFunctionMemoryRecommendationOption[];
 
-  @Metadata({ data: "json, name=numberOfInvocations" })
+  @SpeakeasyMetadata({ data: "json, name=numberOfInvocations" })
   numberOfInvocations?: number;
 
-  @Metadata({ data: "json, name=utilizationMetrics", elemType: shared.LambdaFunctionUtilizationMetric })
+  @SpeakeasyMetadata({ data: "json, name=utilizationMetrics", elemType: LambdaFunctionUtilizationMetric })
   utilizationMetrics?: LambdaFunctionUtilizationMetric[];
 }

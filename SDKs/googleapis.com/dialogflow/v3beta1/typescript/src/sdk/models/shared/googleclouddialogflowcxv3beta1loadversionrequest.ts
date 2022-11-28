@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudDialogflowCxV3beta1LoadVersionRequest
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The request message for Versions.LoadVersion.
 **/
 export class GoogleCloudDialogflowCxV3beta1LoadVersionRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=allowOverrideAgentResources" })
+  @SpeakeasyMetadata({ data: "json, name=allowOverrideAgentResources" })
   allowOverrideAgentResources?: boolean;
 }

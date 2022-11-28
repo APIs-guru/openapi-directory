@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// Stream
+// Specifies a live video stream that has been ingested and distributed.
 type Stream struct {
 	ChannelArn  *string           `json:"channelArn,omitempty"`
 	Health      *StreamHealthEnum `json:"health,omitempty"`

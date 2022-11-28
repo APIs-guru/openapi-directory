@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
 from dataclasses_json import dataclass_json
-from . import portinfo
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class CloseInstancePublicPortsRequest:
-    instance_name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'instanceName' }})
-    port_info: portinfo.PortInfo = field(default=None, metadata={'dataclasses_json': { 'field_name': 'portInfo' }})
+    instance_name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('instanceName') }})
+    port_info: PortInfo = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('portInfo') }})
     

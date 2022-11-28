@@ -9,6 +9,8 @@ const (
 	GoogleCloudChannelV1PeriodPeriodTypeEnumYear                  GoogleCloudChannelV1PeriodPeriodTypeEnum = "YEAR"
 )
 
+// GoogleCloudChannelV1Period
+// Represents period in days/months/years.
 type GoogleCloudChannelV1Period struct {
 	Duration   *int32                                    `json:"duration,omitempty"`
 	PeriodType *GoogleCloudChannelV1PeriodPeriodTypeEnum `json:"periodType,omitempty"`

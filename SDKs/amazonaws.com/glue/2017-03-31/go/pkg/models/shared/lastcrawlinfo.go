@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// LastCrawlInfo
+// Status and error information about the most recent crawl.
 type LastCrawlInfo struct {
 	ErrorMessage  *string              `json:"ErrorMessage,omitempty"`
 	LogGroup      *string              `json:"LogGroup,omitempty"`

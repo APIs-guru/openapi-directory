@@ -1,0 +1,56 @@
+import { SpeakeasyBase } from "../../../internal/utils";
+import { Aws } from "./aws";
+import { ScopeEnum } from "./scopeenum";
+export declare class ProjectFeatureFlags extends SpeakeasyBase {
+    buildForkPrs?: boolean;
+    fleet?: boolean;
+    junit?: boolean;
+    oss?: boolean;
+    osx?: boolean;
+    setGithubStatus?: boolean;
+    trustyBeta?: boolean;
+}
+export declare class Project extends SpeakeasyBase {
+    aws?: Aws;
+    branches?: Map<string, any>;
+    campfireNotifyPrefs?: string;
+    campfireRoom?: string;
+    campfireSubdomain?: string;
+    campfireToken?: string;
+    compile?: string;
+    defaultBranch?: string;
+    dependencies?: string;
+    extra?: string;
+    featureFlags?: ProjectFeatureFlags;
+    flowdockApiToken?: string;
+    followed?: boolean;
+    hasUsableKey?: boolean;
+    herokuDeployUser?: string;
+    hipchatApiToken?: string;
+    hipchatNotify?: string;
+    hipchatNotifyPrefs?: string;
+    hipchatRoom?: string;
+    ircChannel?: string;
+    ircKeyword?: string;
+    ircNotifyPrefs?: string;
+    ircPassword?: string;
+    ircServer?: string;
+    ircUsername?: string;
+    language?: string;
+    oss?: boolean;
+    parallel?: number;
+    reponame?: string;
+    scopes?: ScopeEnum[];
+    setup?: string;
+    slackApiToken?: string;
+    slackChannel?: string;
+    slackChannelOverride?: string;
+    slackNotifyPrefs?: string;
+    slackSubdomain?: string;
+    slackWebhookUrl?: string;
+    sshKeys?: string[];
+    test?: string;
+    username?: string;
+    vcsType?: string;
+    vcsUrl?: string;
+}

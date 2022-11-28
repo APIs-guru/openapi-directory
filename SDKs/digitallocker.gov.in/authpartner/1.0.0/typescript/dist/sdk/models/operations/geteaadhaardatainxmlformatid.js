@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetEAadhaarDataInXmlFormatIdSecurity = /** @class */ (function (_super) {
     __extends(GetEAadhaarDataInXmlFormatIdSecurity, _super);
@@ -30,35 +30,23 @@ var GetEAadhaarDataInXmlFormatIdSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=http;subtype=bearer" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" }),
         __metadata("design:type", shared.SchemeBearerAuth)
     ], GetEAadhaarDataInXmlFormatIdSecurity.prototype, "bearerAuth", void 0);
     return GetEAadhaarDataInXmlFormatIdSecurity;
 }(SpeakeasyBase));
 export { GetEAadhaarDataInXmlFormatIdSecurity };
-var GetEAadhaarDataInXmlFormatIdRequest = /** @class */ (function (_super) {
-    __extends(GetEAadhaarDataInXmlFormatIdRequest, _super);
-    function GetEAadhaarDataInXmlFormatIdRequest() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    __decorate([
-        Metadata(),
-        __metadata("design:type", GetEAadhaarDataInXmlFormatIdSecurity)
-    ], GetEAadhaarDataInXmlFormatIdRequest.prototype, "security", void 0);
-    return GetEAadhaarDataInXmlFormatIdRequest;
-}(SpeakeasyBase));
-export { GetEAadhaarDataInXmlFormatIdRequest };
 var GetEAadhaarDataInXmlFormatId401ApplicationJson = /** @class */ (function (_super) {
     __extends(GetEAadhaarDataInXmlFormatId401ApplicationJson, _super);
     function GetEAadhaarDataInXmlFormatId401ApplicationJson() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], GetEAadhaarDataInXmlFormatId401ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=error_description" }),
+        SpeakeasyMetadata({ data: "json, name=error_description" }),
         __metadata("design:type", String)
     ], GetEAadhaarDataInXmlFormatId401ApplicationJson.prototype, "errorDescription", void 0);
     return GetEAadhaarDataInXmlFormatId401ApplicationJson;
@@ -70,47 +58,59 @@ var GetEAadhaarDataInXmlFormatId404ApplicationJson = /** @class */ (function (_s
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", Object)
     ], GetEAadhaarDataInXmlFormatId404ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=error_description" }),
+        SpeakeasyMetadata({ data: "json, name=error_description" }),
         __metadata("design:type", Object)
     ], GetEAadhaarDataInXmlFormatId404ApplicationJson.prototype, "errorDescription", void 0);
     return GetEAadhaarDataInXmlFormatId404ApplicationJson;
 }(SpeakeasyBase));
 export { GetEAadhaarDataInXmlFormatId404ApplicationJson };
+var GetEAadhaarDataInXmlFormatIdRequest = /** @class */ (function (_super) {
+    __extends(GetEAadhaarDataInXmlFormatIdRequest, _super);
+    function GetEAadhaarDataInXmlFormatIdRequest() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", GetEAadhaarDataInXmlFormatIdSecurity)
+    ], GetEAadhaarDataInXmlFormatIdRequest.prototype, "security", void 0);
+    return GetEAadhaarDataInXmlFormatIdRequest;
+}(SpeakeasyBase));
+export { GetEAadhaarDataInXmlFormatIdRequest };
 var GetEAadhaarDataInXmlFormatIdResponse = /** @class */ (function (_super) {
     __extends(GetEAadhaarDataInXmlFormatIdResponse, _super);
     function GetEAadhaarDataInXmlFormatIdResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], GetEAadhaarDataInXmlFormatIdResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetEAadhaarDataInXmlFormatIdResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetEAadhaarDataInXmlFormatId401ApplicationJson)
     ], GetEAadhaarDataInXmlFormatIdResponse.prototype, "getEAadhaarDataInXmlFormatId401ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetEAadhaarDataInXmlFormatId404ApplicationJson)
     ], GetEAadhaarDataInXmlFormatIdResponse.prototype, "getEAadhaarDataInXmlFormatId404ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], GetEAadhaarDataInXmlFormatIdResponse.prototype, "getEAadhaarDataInXmlFormatId500ApplicationJsonOneOf", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], GetEAadhaarDataInXmlFormatIdResponse.prototype, "getEAadhaarDataInXmlFormatId503ApplicationJsonOneOf", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetEAadhaarDataInXmlFormatIdResponse.prototype, "statusCode", void 0);
     return GetEAadhaarDataInXmlFormatIdResponse;

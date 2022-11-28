@@ -1,70 +1,71 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class PostPackageServiceJsonPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=path" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=path" })
   path: string;
 }
 
 
 export class PostPackageServiceJsonQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=_charset_" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=_charset_" })
   charset?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=cmd" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=cmd" })
   cmd: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=force" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=force" })
   force?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=groupName" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=groupName" })
   groupName?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=packageName" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=packageName" })
   packageName?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=packageVersion" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=packageVersion" })
   packageVersion?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=recursive" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=recursive" })
   recursive?: boolean;
 }
 
 
 export class PostPackageServiceJsonRequestBodyPackage extends SpeakeasyBase {
-  @Metadata({ data: "multipart_form, content=true" })
+  @SpeakeasyMetadata({ data: "multipart_form, content=true" })
   content: Uint8Array;
 
-  @Metadata({ data: "multipart_form, name=package" })
+  @SpeakeasyMetadata({ data: "multipart_form, name=package" })
   package: string;
 }
 
 
 export class PostPackageServiceJsonRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "multipart_form, file=true" })
+  @SpeakeasyMetadata({ data: "multipart_form, file=true" })
   package?: PostPackageServiceJsonRequestBodyPackage;
 }
 
 
 export class PostPackageServiceJsonRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: PostPackageServiceJsonPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: PostPackageServiceJsonQueryParams;
 
-  @Metadata({ data: "request, media_type=multipart/form-data" })
+  @SpeakeasyMetadata({ data: "request, media_type=multipart/form-data" })
   request?: PostPackageServiceJsonRequestBody;
 }
 
 
 export class PostPackageServiceJsonResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   postPackageServiceJsonDefaultApplicationJsonString?: string;
 }

@@ -1,41 +1,42 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class ActivitySetRepoSubscriptionPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=owner" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=owner" })
   owner: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=repo" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=repo" })
   repo: string;
 }
 
 
 export class ActivitySetRepoSubscriptionRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ignored" })
+  @SpeakeasyMetadata({ data: "json, name=ignored" })
   ignored?: boolean;
 
-  @Metadata({ data: "json, name=subscribed" })
+  @SpeakeasyMetadata({ data: "json, name=subscribed" })
   subscribed?: boolean;
 }
 
 
 export class ActivitySetRepoSubscriptionRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: ActivitySetRepoSubscriptionPathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request?: ActivitySetRepoSubscriptionRequestBody;
 }
 
 
 export class ActivitySetRepoSubscriptionResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   repositorySubscription?: shared.RepositorySubscription;
 }

@@ -1,12 +1,16 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
 @dataclass
 class UpdateCustomMetricPathParams:
-    metric_name: str = field(default=None, metadata={'path_param': { 'field_name': 'metricName', 'style': 'simple', 'explode': False }})
+    metric_name: str = field(metadata={'path_param': { 'field_name': 'metricName', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -23,23 +27,23 @@ class UpdateCustomMetricHeaders:
 @dataclass_json
 @dataclass
 class UpdateCustomMetricRequestBody:
-    display_name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'displayName' }})
+    display_name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('displayName') }})
     
 
 @dataclass
 class UpdateCustomMetricRequest:
-    path_params: UpdateCustomMetricPathParams = field(default=None)
-    headers: UpdateCustomMetricHeaders = field(default=None)
-    request: UpdateCustomMetricRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: UpdateCustomMetricHeaders = field()
+    path_params: UpdateCustomMetricPathParams = field()
+    request: UpdateCustomMetricRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class UpdateCustomMetricResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     internal_failure_exception: Optional[Any] = field(default=None)
     invalid_request_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     update_custom_metric_response: Optional[shared.UpdateCustomMetricResponse] = field(default=None)
     

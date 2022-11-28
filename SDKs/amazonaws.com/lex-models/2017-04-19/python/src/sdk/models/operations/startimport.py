@@ -1,6 +1,11 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -27,24 +32,24 @@ class StartImportRequestBodyResourceTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class StartImportRequestBody:
-    merge_strategy: StartImportRequestBodyMergeStrategyEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'mergeStrategy' }})
-    payload: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'payload' }})
-    resource_type: StartImportRequestBodyResourceTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'resourceType' }})
-    tags: Optional[List[shared.Tag]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tags' }})
+    merge_strategy: StartImportRequestBodyMergeStrategyEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('mergeStrategy') }})
+    payload: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('payload') }})
+    resource_type: StartImportRequestBodyResourceTypeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('resourceType') }})
+    tags: Optional[List[shared.Tag]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('tags') }})
     
 
 @dataclass
 class StartImportRequest:
-    headers: StartImportHeaders = field(default=None)
-    request: StartImportRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: StartImportHeaders = field()
+    request: StartImportRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class StartImportResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     internal_failure_exception: Optional[Any] = field(default=None)
     limit_exceeded_exception: Optional[Any] = field(default=None)
     start_import_response: Optional[shared.StartImportResponse] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // UpdateTrailResponse
 /**
  * Returns the objects or data listed below if successful. Otherwise, returns an error.
@@ -33,55 +33,55 @@ var UpdateTrailResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=CloudWatchLogsLogGroupArn" }),
+        SpeakeasyMetadata({ data: "json, name=CloudWatchLogsLogGroupArn" }),
         __metadata("design:type", String)
     ], UpdateTrailResponse.prototype, "cloudWatchLogsLogGroupArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=CloudWatchLogsRoleArn" }),
+        SpeakeasyMetadata({ data: "json, name=CloudWatchLogsRoleArn" }),
         __metadata("design:type", String)
     ], UpdateTrailResponse.prototype, "cloudWatchLogsRoleArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=IncludeGlobalServiceEvents" }),
+        SpeakeasyMetadata({ data: "json, name=IncludeGlobalServiceEvents" }),
         __metadata("design:type", Boolean)
     ], UpdateTrailResponse.prototype, "includeGlobalServiceEvents", void 0);
     __decorate([
-        Metadata({ data: "json, name=IsMultiRegionTrail" }),
+        SpeakeasyMetadata({ data: "json, name=IsMultiRegionTrail" }),
         __metadata("design:type", Boolean)
     ], UpdateTrailResponse.prototype, "isMultiRegionTrail", void 0);
     __decorate([
-        Metadata({ data: "json, name=IsOrganizationTrail" }),
+        SpeakeasyMetadata({ data: "json, name=IsOrganizationTrail" }),
         __metadata("design:type", Boolean)
     ], UpdateTrailResponse.prototype, "isOrganizationTrail", void 0);
     __decorate([
-        Metadata({ data: "json, name=KmsKeyId" }),
+        SpeakeasyMetadata({ data: "json, name=KmsKeyId" }),
         __metadata("design:type", String)
     ], UpdateTrailResponse.prototype, "kmsKeyId", void 0);
     __decorate([
-        Metadata({ data: "json, name=LogFileValidationEnabled" }),
+        SpeakeasyMetadata({ data: "json, name=LogFileValidationEnabled" }),
         __metadata("design:type", Boolean)
     ], UpdateTrailResponse.prototype, "logFileValidationEnabled", void 0);
     __decorate([
-        Metadata({ data: "json, name=Name" }),
+        SpeakeasyMetadata({ data: "json, name=Name" }),
         __metadata("design:type", String)
     ], UpdateTrailResponse.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=S3BucketName" }),
+        SpeakeasyMetadata({ data: "json, name=S3BucketName" }),
         __metadata("design:type", String)
     ], UpdateTrailResponse.prototype, "s3BucketName", void 0);
     __decorate([
-        Metadata({ data: "json, name=S3KeyPrefix" }),
+        SpeakeasyMetadata({ data: "json, name=S3KeyPrefix" }),
         __metadata("design:type", String)
     ], UpdateTrailResponse.prototype, "s3KeyPrefix", void 0);
     __decorate([
-        Metadata({ data: "json, name=SnsTopicARN" }),
+        SpeakeasyMetadata({ data: "json, name=SnsTopicARN" }),
         __metadata("design:type", String)
     ], UpdateTrailResponse.prototype, "snsTopicArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=SnsTopicName" }),
+        SpeakeasyMetadata({ data: "json, name=SnsTopicName" }),
         __metadata("design:type", String)
     ], UpdateTrailResponse.prototype, "snsTopicName", void 0);
     __decorate([
-        Metadata({ data: "json, name=TrailARN" }),
+        SpeakeasyMetadata({ data: "json, name=TrailARN" }),
         __metadata("design:type", String)
     ], UpdateTrailResponse.prototype, "trailArn", void 0);
     return UpdateTrailResponse;

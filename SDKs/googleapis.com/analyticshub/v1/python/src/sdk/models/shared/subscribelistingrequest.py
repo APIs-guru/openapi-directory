@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
-from typing import List,Optional
+from typing import Optional
 from dataclasses_json import dataclass_json
-from . import destinationdataset
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class SubscribeListingRequest:
-    destination_dataset: Optional[destinationdataset.DestinationDataset] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'destinationDataset' }})
+    r"""SubscribeListingRequest
+    Message for subscribing to a listing.
+    """
+    
+    destination_dataset: Optional[DestinationDataset] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('destinationDataset') }})
     

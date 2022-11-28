@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostDescribeElasticGpusActionEnum(str, Enum):
     DESCRIBE_ELASTIC_GPUS = "DescribeElasticGpus"
@@ -10,8 +14,8 @@ class PostDescribeElasticGpusVersionEnum(str, Enum):
 
 @dataclass
 class PostDescribeElasticGpusQueryParams:
-    action: PostDescribeElasticGpusActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostDescribeElasticGpusVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostDescribeElasticGpusActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostDescribeElasticGpusVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostDescribeElasticGpusHeaders:
 
 @dataclass
 class PostDescribeElasticGpusRequest:
-    query_params: PostDescribeElasticGpusQueryParams = field(default=None)
-    headers: PostDescribeElasticGpusHeaders = field(default=None)
+    headers: PostDescribeElasticGpusHeaders = field()
+    query_params: PostDescribeElasticGpusQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostDescribeElasticGpusResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

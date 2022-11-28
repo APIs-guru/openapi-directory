@@ -1,26 +1,27 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetResourcesLanguagesIdJsonPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" })
   id: number;
 }
 
 
 export class GetResourcesLanguagesIdJsonRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetResourcesLanguagesIdJsonPathParams;
 }
 
 
 export class GetResourcesLanguagesIdJsonResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata({ elemType: shared.LanguageWrapped })
+  @SpeakeasyMetadata({ elemType: shared.LanguageWrapped })
   languageWrappeds?: shared.LanguageWrapped[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

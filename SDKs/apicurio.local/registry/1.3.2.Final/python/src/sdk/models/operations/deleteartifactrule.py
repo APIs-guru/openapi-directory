@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 class DeleteArtifactRuleRuleEnum(str, Enum):
@@ -9,18 +10,18 @@ class DeleteArtifactRuleRuleEnum(str, Enum):
 
 @dataclass
 class DeleteArtifactRulePathParams:
-    artifact_id: str = field(default=None, metadata={'path_param': { 'field_name': 'artifactId', 'style': 'simple', 'explode': False }})
-    rule: DeleteArtifactRuleRuleEnum = field(default=None, metadata={'path_param': { 'field_name': 'rule', 'style': 'simple', 'explode': False }})
+    artifact_id: str = field(metadata={'path_param': { 'field_name': 'artifactId', 'style': 'simple', 'explode': False }})
+    rule: DeleteArtifactRuleRuleEnum = field(metadata={'path_param': { 'field_name': 'rule', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class DeleteArtifactRuleRequest:
-    path_params: DeleteArtifactRulePathParams = field(default=None)
+    path_params: DeleteArtifactRulePathParams = field()
     
 
 @dataclass
 class DeleteArtifactRuleResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error: Optional[shared.Error] = field(default=None)
-    status_code: int = field(default=None)
     

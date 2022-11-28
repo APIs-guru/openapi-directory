@@ -1,14 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RetentionPeriod } from "./retentionperiod";
 
 
+
 export class CreateChannelResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=channelArn" })
+  @SpeakeasyMetadata({ data: "json, name=channelArn" })
   channelArn?: string;
 
-  @Metadata({ data: "json, name=channelName" })
+  @SpeakeasyMetadata({ data: "json, name=channelName" })
   channelName?: string;
 
-  @Metadata({ data: "json, name=retentionPeriod" })
+  @SpeakeasyMetadata({ data: "json, name=retentionPeriod" })
   retentionPeriod?: RetentionPeriod;
 }

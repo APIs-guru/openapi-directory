@@ -1,25 +1,26 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DeleteNetworkApplianceTrafficShapingCustomPerformanceClassPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=customPerformanceClassId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=customPerformanceClassId" })
   customPerformanceClassId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=networkId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=networkId" })
   networkId: string;
 }
 
 
 export class DeleteNetworkApplianceTrafficShapingCustomPerformanceClassRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: DeleteNetworkApplianceTrafficShapingCustomPerformanceClassPathParams;
 }
 
 
 export class DeleteNetworkApplianceTrafficShapingCustomPerformanceClassResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

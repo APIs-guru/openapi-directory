@@ -11,7 +11,7 @@ import (
 	"strings"
 )
 
-var Servers = []string{
+var ServerList = []string{
 	"https://adobe.com/",
 	"http://adobe.local",
 }
@@ -21,9 +21,13 @@ type HTTPClient interface {
 }
 
 type SDK struct {
-	defaultClient  HTTPClient
-	securityClient HTTPClient
-	serverURL      string
+	_defaultClient  HTTPClient
+	_securityClient HTTPClient
+	_security       *shared.Security
+	_serverURL      string
+	_language       string
+	_sdkVersion     string
+	_genVersion     string
 }
 
 type SDKOption func(*SDK)
@@ -34,33 +38,54 @@ func WithServerURL(serverURL string, params map[string]string) SDKOption {
 			serverURL = utils.ReplaceParameters(serverURL, params)
 		}
 
-		sdk.serverURL = serverURL
+		sdk._serverURL = serverURL
+	}
+}
+
+func WithClient(client HTTPClient) SDKOption {
+	return func(sdk *SDK) {
+		sdk._defaultClient = client
 	}
 }
 
 func WithSecurity(security shared.Security) SDKOption {
 	return func(sdk *SDK) {
-		sdk.securityClient = utils.CreateSecurityClient(security)
+		sdk._security = &security
 	}
 }
 
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
-		defaultClient:  http.DefaultClient,
-		securityClient: http.DefaultClient,
+		_language:   "go",
+		_sdkVersion: "",
+		_genVersion: "internal",
 	}
 	for _, opt := range opts {
 		opt(sdk)
 	}
-	if sdk.serverURL == "" {
-		sdk.serverURL = Servers[0]
+
+	if sdk._defaultClient == nil {
+		sdk._defaultClient = http.DefaultClient
+	}
+	if sdk._securityClient == nil {
+
+		if sdk._security != nil {
+			sdk._securityClient = utils.ConfigureSecurityClient(sdk._defaultClient, sdk._security)
+		} else {
+			sdk._securityClient = sdk._defaultClient
+		}
+
+	}
+
+	if sdk._serverURL == "" {
+		sdk._serverURL = ServerList[0]
 	}
 
 	return sdk
 }
 
 func (s *SDK) DeleteAgent(ctx context.Context, request operations.DeleteAgentRequest) (*operations.DeleteAgentResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/etc/replication/agents.{runmode}/{name}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -68,7 +93,7 @@ func (s *SDK) DeleteAgent(ctx context.Context, request operations.DeleteAgentReq
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -90,7 +115,7 @@ func (s *SDK) DeleteAgent(ctx context.Context, request operations.DeleteAgentReq
 }
 
 func (s *SDK) DeleteNode(ctx context.Context, request operations.DeleteNodeRequest) (*operations.DeleteNodeResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/{path}/{name}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -98,7 +123,7 @@ func (s *SDK) DeleteNode(ctx context.Context, request operations.DeleteNodeReque
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -120,7 +145,7 @@ func (s *SDK) DeleteNode(ctx context.Context, request operations.DeleteNodeReque
 }
 
 func (s *SDK) GetAemHealthCheck(ctx context.Context, request operations.GetAemHealthCheckRequest) (*operations.GetAemHealthCheckResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/system/health"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -130,7 +155,7 @@ func (s *SDK) GetAemHealthCheck(ctx context.Context, request operations.GetAemHe
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -162,7 +187,7 @@ func (s *SDK) GetAemHealthCheck(ctx context.Context, request operations.GetAemHe
 }
 
 func (s *SDK) GetAemProductInfo(ctx context.Context) (*operations.GetAemProductInfoResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/system/console/status-productinfo.json"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -170,7 +195,7 @@ func (s *SDK) GetAemProductInfo(ctx context.Context) (*operations.GetAemProductI
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -201,7 +226,7 @@ func (s *SDK) GetAemProductInfo(ctx context.Context) (*operations.GetAemProductI
 }
 
 func (s *SDK) GetAgent(ctx context.Context, request operations.GetAgentRequest) (*operations.GetAgentResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/etc/replication/agents.{runmode}/{name}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -209,7 +234,7 @@ func (s *SDK) GetAgent(ctx context.Context, request operations.GetAgentRequest) 
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -231,7 +256,7 @@ func (s *SDK) GetAgent(ctx context.Context, request operations.GetAgentRequest) 
 }
 
 func (s *SDK) GetAgents(ctx context.Context, request operations.GetAgentsRequest) (*operations.GetAgentsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/etc/replication/agents.{runmode}.-1.json", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -239,7 +264,7 @@ func (s *SDK) GetAgents(ctx context.Context, request operations.GetAgentsRequest
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -271,7 +296,7 @@ func (s *SDK) GetAgents(ctx context.Context, request operations.GetAgentsRequest
 }
 
 func (s *SDK) GetAuthorizableKeystore(ctx context.Context, request operations.GetAuthorizableKeystoreRequest) (*operations.GetAuthorizableKeystoreResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/{intermediatePath}/{authorizableId}.ks.json", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -279,7 +304,7 @@ func (s *SDK) GetAuthorizableKeystore(ctx context.Context, request operations.Ge
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -321,7 +346,7 @@ func (s *SDK) GetAuthorizableKeystore(ctx context.Context, request operations.Ge
 }
 
 func (s *SDK) GetConfigMgr(ctx context.Context) (*operations.GetConfigMgrResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/system/console/configMgr"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -329,7 +354,7 @@ func (s *SDK) GetConfigMgr(ctx context.Context) (*operations.GetConfigMgrRespons
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -362,7 +387,7 @@ func (s *SDK) GetConfigMgr(ctx context.Context) (*operations.GetConfigMgrRespons
 }
 
 func (s *SDK) GetCrxdeStatus(ctx context.Context) (*operations.GetCrxdeStatusResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/crx/server/crx.default/jcr:root/.1.json"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -370,7 +395,7 @@ func (s *SDK) GetCrxdeStatus(ctx context.Context) (*operations.GetCrxdeStatusRes
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -413,7 +438,7 @@ func (s *SDK) GetCrxdeStatus(ctx context.Context) (*operations.GetCrxdeStatusRes
 }
 
 func (s *SDK) GetInstallStatus(ctx context.Context) (*operations.GetInstallStatusResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/crx/packmgr/installstatus.jsp"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -421,7 +446,7 @@ func (s *SDK) GetInstallStatus(ctx context.Context) (*operations.GetInstallStatu
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -463,7 +488,7 @@ func (s *SDK) GetInstallStatus(ctx context.Context) (*operations.GetInstallStatu
 }
 
 func (s *SDK) GetKeystore(ctx context.Context, request operations.GetKeystoreRequest) (*operations.GetKeystoreResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/{intermediatePath}/{authorizableId}/keystore/store.p12", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -471,7 +496,7 @@ func (s *SDK) GetKeystore(ctx context.Context, request operations.GetKeystoreReq
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -502,7 +527,7 @@ func (s *SDK) GetKeystore(ctx context.Context, request operations.GetKeystoreReq
 }
 
 func (s *SDK) GetLoginPage(ctx context.Context) (*operations.GetLoginPageResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/libs/granite/core/content/login.html"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -510,7 +535,7 @@ func (s *SDK) GetLoginPage(ctx context.Context) (*operations.GetLoginPageRespons
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -542,7 +567,7 @@ func (s *SDK) GetLoginPage(ctx context.Context) (*operations.GetLoginPageRespons
 }
 
 func (s *SDK) GetNode(ctx context.Context, request operations.GetNodeRequest) (*operations.GetNodeResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/{path}/{name}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -550,7 +575,7 @@ func (s *SDK) GetNode(ctx context.Context, request operations.GetNodeRequest) (*
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -572,7 +597,7 @@ func (s *SDK) GetNode(ctx context.Context, request operations.GetNodeRequest) (*
 }
 
 func (s *SDK) GetPackage(ctx context.Context, request operations.GetPackageRequest) (*operations.GetPackageResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/etc/packages/{group}/{name}-{version}.zip", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -580,7 +605,7 @@ func (s *SDK) GetPackage(ctx context.Context, request operations.GetPackageReque
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -611,7 +636,7 @@ func (s *SDK) GetPackage(ctx context.Context, request operations.GetPackageReque
 }
 
 func (s *SDK) GetPackageFilter(ctx context.Context, request operations.GetPackageFilterRequest) (*operations.GetPackageFilterResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/etc/packages/{group}/{name}-{version}.zip/jcr:content/vlt:definition/filter.tidy.2.json", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -619,7 +644,7 @@ func (s *SDK) GetPackageFilter(ctx context.Context, request operations.GetPackag
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -651,7 +676,7 @@ func (s *SDK) GetPackageFilter(ctx context.Context, request operations.GetPackag
 }
 
 func (s *SDK) GetPackageManagerServlet(ctx context.Context) (*operations.GetPackageManagerServletResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/crx/packmgr/service/script.html"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -659,7 +684,7 @@ func (s *SDK) GetPackageManagerServlet(ctx context.Context) (*operations.GetPack
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -702,7 +727,7 @@ func (s *SDK) GetPackageManagerServlet(ctx context.Context) (*operations.GetPack
 }
 
 func (s *SDK) GetQuery(ctx context.Context, request operations.GetQueryRequest) (*operations.GetQueryResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/bin/querybuilder.json"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -712,7 +737,7 @@ func (s *SDK) GetQuery(ctx context.Context, request operations.GetQueryRequest) 
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -744,7 +769,7 @@ func (s *SDK) GetQuery(ctx context.Context, request operations.GetQueryRequest) 
 }
 
 func (s *SDK) GetTruststore(ctx context.Context) (*operations.GetTruststoreResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/etc/truststore/truststore.p12"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -752,7 +777,7 @@ func (s *SDK) GetTruststore(ctx context.Context) (*operations.GetTruststoreRespo
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -783,7 +808,7 @@ func (s *SDK) GetTruststore(ctx context.Context) (*operations.GetTruststoreRespo
 }
 
 func (s *SDK) GetTruststoreInfo(ctx context.Context) (*operations.GetTruststoreInfoResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/libs/granite/security/truststore.json"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -791,7 +816,7 @@ func (s *SDK) GetTruststoreInfo(ctx context.Context) (*operations.GetTruststoreI
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -833,7 +858,7 @@ func (s *SDK) GetTruststoreInfo(ctx context.Context) (*operations.GetTruststoreI
 }
 
 func (s *SDK) PostAgent(ctx context.Context, request operations.PostAgentRequest) (*operations.PostAgentResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/etc/replication/agents.{runmode}/{name}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -843,7 +868,7 @@ func (s *SDK) PostAgent(ctx context.Context, request operations.PostAgentRequest
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -865,7 +890,7 @@ func (s *SDK) PostAgent(ctx context.Context, request operations.PostAgentRequest
 }
 
 func (s *SDK) PostAuthorizableKeystore(ctx context.Context, request operations.PostAuthorizableKeystoreRequest) (*operations.PostAuthorizableKeystoreResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/{intermediatePath}/{authorizableId}.ks.html", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -882,7 +907,7 @@ func (s *SDK) PostAuthorizableKeystore(ctx context.Context, request operations.P
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -924,7 +949,7 @@ func (s *SDK) PostAuthorizableKeystore(ctx context.Context, request operations.P
 }
 
 func (s *SDK) PostAuthorizables(ctx context.Context, request operations.PostAuthorizablesRequest) (*operations.PostAuthorizablesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/libs/granite/security/post/authorizables"
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -934,7 +959,7 @@ func (s *SDK) PostAuthorizables(ctx context.Context, request operations.PostAuth
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -966,7 +991,7 @@ func (s *SDK) PostAuthorizables(ctx context.Context, request operations.PostAuth
 }
 
 func (s *SDK) PostBundle(ctx context.Context, request operations.PostBundleRequest) (*operations.PostBundleResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/system/console/bundles/{name}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -976,7 +1001,7 @@ func (s *SDK) PostBundle(ctx context.Context, request operations.PostBundleReque
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -998,7 +1023,7 @@ func (s *SDK) PostBundle(ctx context.Context, request operations.PostBundleReque
 }
 
 func (s *SDK) PostConfigAdobeGraniteSamlAuthenticationHandler(ctx context.Context, request operations.PostConfigAdobeGraniteSamlAuthenticationHandlerRequest) (*operations.PostConfigAdobeGraniteSamlAuthenticationHandlerResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/apps/system/config/com.adobe.granite.auth.saml.SamlAuthenticationHandler.config"
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -1008,7 +1033,7 @@ func (s *SDK) PostConfigAdobeGraniteSamlAuthenticationHandler(ctx context.Contex
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1030,7 +1055,7 @@ func (s *SDK) PostConfigAdobeGraniteSamlAuthenticationHandler(ctx context.Contex
 }
 
 func (s *SDK) PostConfigAemHealthCheckServlet(ctx context.Context, request operations.PostConfigAemHealthCheckServletRequest) (*operations.PostConfigAemHealthCheckServletResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/apps/system/config/com.shinesolutions.healthcheck.hc.impl.ActiveBundleHealthCheck"
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -1040,7 +1065,7 @@ func (s *SDK) PostConfigAemHealthCheckServlet(ctx context.Context, request opera
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1062,7 +1087,7 @@ func (s *SDK) PostConfigAemHealthCheckServlet(ctx context.Context, request opera
 }
 
 func (s *SDK) PostConfigAemPasswordReset(ctx context.Context, request operations.PostConfigAemPasswordResetRequest) (*operations.PostConfigAemPasswordResetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/apps/system/config/com.shinesolutions.aem.passwordreset.Activator"
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -1072,7 +1097,7 @@ func (s *SDK) PostConfigAemPasswordReset(ctx context.Context, request operations
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1094,7 +1119,7 @@ func (s *SDK) PostConfigAemPasswordReset(ctx context.Context, request operations
 }
 
 func (s *SDK) PostConfigApacheFelixJettyBasedHTTPService(ctx context.Context, request operations.PostConfigApacheFelixJettyBasedHTTPServiceRequest) (*operations.PostConfigApacheFelixJettyBasedHTTPServiceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/apps/system/config/org.apache.felix.http"
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -1104,7 +1129,7 @@ func (s *SDK) PostConfigApacheFelixJettyBasedHTTPService(ctx context.Context, re
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1126,7 +1151,7 @@ func (s *SDK) PostConfigApacheFelixJettyBasedHTTPService(ctx context.Context, re
 }
 
 func (s *SDK) PostConfigApacheHTTPComponentsProxyConfiguration(ctx context.Context, request operations.PostConfigApacheHTTPComponentsProxyConfigurationRequest) (*operations.PostConfigApacheHTTPComponentsProxyConfigurationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/apps/system/config/org.apache.http.proxyconfigurator.config"
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -1136,7 +1161,7 @@ func (s *SDK) PostConfigApacheHTTPComponentsProxyConfiguration(ctx context.Conte
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1158,7 +1183,7 @@ func (s *SDK) PostConfigApacheHTTPComponentsProxyConfiguration(ctx context.Conte
 }
 
 func (s *SDK) PostConfigApacheSlingDavExServlet(ctx context.Context, request operations.PostConfigApacheSlingDavExServletRequest) (*operations.PostConfigApacheSlingDavExServletResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/apps/system/config/org.apache.sling.jcr.davex.impl.servlets.SlingDavExServlet"
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -1168,7 +1193,7 @@ func (s *SDK) PostConfigApacheSlingDavExServlet(ctx context.Context, request ope
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1190,7 +1215,7 @@ func (s *SDK) PostConfigApacheSlingDavExServlet(ctx context.Context, request ope
 }
 
 func (s *SDK) PostConfigApacheSlingGetServlet(ctx context.Context, request operations.PostConfigApacheSlingGetServletRequest) (*operations.PostConfigApacheSlingGetServletResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/apps/system/config/org.apache.sling.servlets.get.DefaultGetServlet"
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -1200,7 +1225,7 @@ func (s *SDK) PostConfigApacheSlingGetServlet(ctx context.Context, request opera
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1222,7 +1247,7 @@ func (s *SDK) PostConfigApacheSlingGetServlet(ctx context.Context, request opera
 }
 
 func (s *SDK) PostConfigApacheSlingReferrerFilter(ctx context.Context, request operations.PostConfigApacheSlingReferrerFilterRequest) (*operations.PostConfigApacheSlingReferrerFilterResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/apps/system/config/org.apache.sling.security.impl.ReferrerFilter"
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -1232,7 +1257,7 @@ func (s *SDK) PostConfigApacheSlingReferrerFilter(ctx context.Context, request o
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1254,7 +1279,7 @@ func (s *SDK) PostConfigApacheSlingReferrerFilter(ctx context.Context, request o
 }
 
 func (s *SDK) PostConfigProperty(ctx context.Context, request operations.PostConfigPropertyRequest) (*operations.PostConfigPropertyResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/apps/system/config/{configNodeName}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -1262,7 +1287,7 @@ func (s *SDK) PostConfigProperty(ctx context.Context, request operations.PostCon
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1284,7 +1309,7 @@ func (s *SDK) PostConfigProperty(ctx context.Context, request operations.PostCon
 }
 
 func (s *SDK) PostCqActions(ctx context.Context, request operations.PostCqActionsRequest) (*operations.PostCqActionsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/.cqactions.html"
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -1294,7 +1319,7 @@ func (s *SDK) PostCqActions(ctx context.Context, request operations.PostCqAction
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1316,7 +1341,7 @@ func (s *SDK) PostCqActions(ctx context.Context, request operations.PostCqAction
 }
 
 func (s *SDK) PostJmxRepository(ctx context.Context, request operations.PostJmxRepositoryRequest) (*operations.PostJmxRepositoryResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/system/console/jmx/com.adobe.granite:type=Repository/op/{action}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -1324,7 +1349,7 @@ func (s *SDK) PostJmxRepository(ctx context.Context, request operations.PostJmxR
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1346,7 +1371,7 @@ func (s *SDK) PostJmxRepository(ctx context.Context, request operations.PostJmxR
 }
 
 func (s *SDK) PostNode(ctx context.Context, request operations.PostNodeRequest) (*operations.PostNodeResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/{path}/{name}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1363,7 +1388,7 @@ func (s *SDK) PostNode(ctx context.Context, request operations.PostNodeRequest) 
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1385,7 +1410,7 @@ func (s *SDK) PostNode(ctx context.Context, request operations.PostNodeRequest) 
 }
 
 func (s *SDK) PostNodeRw(ctx context.Context, request operations.PostNodeRwRequest) (*operations.PostNodeRwResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/{path}/{name}.rw.html", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -1395,7 +1420,7 @@ func (s *SDK) PostNodeRw(ctx context.Context, request operations.PostNodeRwReque
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1417,7 +1442,7 @@ func (s *SDK) PostNodeRw(ctx context.Context, request operations.PostNodeRwReque
 }
 
 func (s *SDK) PostPackageService(ctx context.Context, request operations.PostPackageServiceRequest) (*operations.PostPackageServiceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/crx/packmgr/service.jsp"
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -1427,7 +1452,7 @@ func (s *SDK) PostPackageService(ctx context.Context, request operations.PostPac
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1459,7 +1484,7 @@ func (s *SDK) PostPackageService(ctx context.Context, request operations.PostPac
 }
 
 func (s *SDK) PostPackageServiceJSON(ctx context.Context, request operations.PostPackageServiceJSONRequest) (*operations.PostPackageServiceJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/crx/packmgr/service/.json/{path}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1476,7 +1501,7 @@ func (s *SDK) PostPackageServiceJSON(ctx context.Context, request operations.Pos
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1508,7 +1533,7 @@ func (s *SDK) PostPackageServiceJSON(ctx context.Context, request operations.Pos
 }
 
 func (s *SDK) PostPackageUpdate(ctx context.Context, request operations.PostPackageUpdateRequest) (*operations.PostPackageUpdateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/crx/packmgr/update.jsp"
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -1518,7 +1543,7 @@ func (s *SDK) PostPackageUpdate(ctx context.Context, request operations.PostPack
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1550,7 +1575,7 @@ func (s *SDK) PostPackageUpdate(ctx context.Context, request operations.PostPack
 }
 
 func (s *SDK) PostPath(ctx context.Context, request operations.PostPathRequest) (*operations.PostPathResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/{path}/", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -1560,7 +1585,7 @@ func (s *SDK) PostPath(ctx context.Context, request operations.PostPathRequest) 
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1582,7 +1607,7 @@ func (s *SDK) PostPath(ctx context.Context, request operations.PostPathRequest) 
 }
 
 func (s *SDK) PostQuery(ctx context.Context, request operations.PostQueryRequest) (*operations.PostQueryResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/bin/querybuilder.json"
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -1592,7 +1617,7 @@ func (s *SDK) PostQuery(ctx context.Context, request operations.PostQueryRequest
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1624,7 +1649,7 @@ func (s *SDK) PostQuery(ctx context.Context, request operations.PostQueryRequest
 }
 
 func (s *SDK) PostSamlConfiguration(ctx context.Context, request operations.PostSamlConfigurationRequest) (*operations.PostSamlConfigurationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/system/console/configMgr/com.adobe.granite.auth.saml.SamlAuthenticationHandler"
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -1634,7 +1659,7 @@ func (s *SDK) PostSamlConfiguration(ctx context.Context, request operations.Post
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1687,7 +1712,7 @@ func (s *SDK) PostSamlConfiguration(ctx context.Context, request operations.Post
 }
 
 func (s *SDK) PostSetPassword(ctx context.Context, request operations.PostSetPasswordRequest) (*operations.PostSetPasswordResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/crx/explorer/ui/setpassword.jsp"
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -1697,7 +1722,7 @@ func (s *SDK) PostSetPassword(ctx context.Context, request operations.PostSetPas
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1729,7 +1754,7 @@ func (s *SDK) PostSetPassword(ctx context.Context, request operations.PostSetPas
 }
 
 func (s *SDK) PostTreeActivation(ctx context.Context, request operations.PostTreeActivationRequest) (*operations.PostTreeActivationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/etc/replication/treeactivation.html"
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -1739,7 +1764,7 @@ func (s *SDK) PostTreeActivation(ctx context.Context, request operations.PostTre
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1761,7 +1786,7 @@ func (s *SDK) PostTreeActivation(ctx context.Context, request operations.PostTre
 }
 
 func (s *SDK) PostTruststore(ctx context.Context, request operations.PostTruststoreRequest) (*operations.PostTruststoreResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/libs/granite/security/post/truststore"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1778,7 +1803,7 @@ func (s *SDK) PostTruststore(ctx context.Context, request operations.PostTrustst
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1810,7 +1835,7 @@ func (s *SDK) PostTruststore(ctx context.Context, request operations.PostTrustst
 }
 
 func (s *SDK) PostTruststorePkcs12(ctx context.Context, request operations.PostTruststorePkcs12Request) (*operations.PostTruststorePkcs12Response, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/etc/truststore"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1825,7 +1850,7 @@ func (s *SDK) PostTruststorePkcs12(ctx context.Context, request operations.PostT
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1857,7 +1882,7 @@ func (s *SDK) PostTruststorePkcs12(ctx context.Context, request operations.PostT
 }
 
 func (s *SDK) SslSetup(ctx context.Context, request operations.SslSetupRequest) (*operations.SslSetupResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/libs/granite/security/post/sslSetup.html"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1874,7 +1899,7 @@ func (s *SDK) SslSetup(ctx context.Context, request operations.SslSetupRequest) 
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {

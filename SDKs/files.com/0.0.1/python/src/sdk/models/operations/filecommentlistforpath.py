@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class FileCommentListForPathPathParams:
-    path: str = field(default=None, metadata={'path_param': { 'field_name': 'path', 'style': 'simple', 'explode': False }})
+    path: str = field(metadata={'path_param': { 'field_name': 'path', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -16,13 +16,13 @@ class FileCommentListForPathQueryParams:
 
 @dataclass
 class FileCommentListForPathRequest:
-    path_params: FileCommentListForPathPathParams = field(default=None)
-    query_params: FileCommentListForPathQueryParams = field(default=None)
+    path_params: FileCommentListForPathPathParams = field()
+    query_params: FileCommentListForPathQueryParams = field()
     
 
 @dataclass
 class FileCommentListForPathResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     file_comment_entities: Optional[List[shared.FileCommentEntity]] = field(default=None)
-    status_code: int = field(default=None)
     

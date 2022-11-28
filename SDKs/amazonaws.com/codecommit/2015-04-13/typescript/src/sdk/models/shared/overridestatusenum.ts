@@ -1,6 +1,7 @@
 
 
+
 export enum OverrideStatusEnum {
-    Override = "OVERRIDE"
-,    Revoke = "REVOKE"
+    Override = "OVERRIDE",
+    Revoke = "REVOKE"
 }

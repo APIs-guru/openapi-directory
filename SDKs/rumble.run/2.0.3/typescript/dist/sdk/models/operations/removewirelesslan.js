@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var RemoveWirelessLanPathParams = /** @class */ (function (_super) {
     __extends(RemoveWirelessLanPathParams, _super);
@@ -30,7 +30,7 @@ var RemoveWirelessLanPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=wireless_id" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=wireless_id" }),
         __metadata("design:type", String)
     ], RemoveWirelessLanPathParams.prototype, "wirelessId", void 0);
     return RemoveWirelessLanPathParams;
@@ -42,7 +42,7 @@ var RemoveWirelessLanSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=http;subtype=bearer" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" }),
         __metadata("design:type", shared.SchemeBearerAuth)
     ], RemoveWirelessLanSecurity.prototype, "bearerAuth", void 0);
     return RemoveWirelessLanSecurity;
@@ -54,11 +54,11 @@ var RemoveWirelessLanRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", RemoveWirelessLanPathParams)
     ], RemoveWirelessLanRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", RemoveWirelessLanSecurity)
     ], RemoveWirelessLanRequest.prototype, "security", void 0);
     return RemoveWirelessLanRequest;
@@ -70,11 +70,11 @@ var RemoveWirelessLanResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], RemoveWirelessLanResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], RemoveWirelessLanResponse.prototype, "statusCode", void 0);
     return RemoveWirelessLanResponse;

@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { OnDemandCapacityReservationPreferenceEnum } from "./ondemandcapacityreservationpreferenceenum";
 import { OnDemandCapacityReservationUsageStrategyEnum } from "./ondemandcapacityreservationusagestrategyenum";
+
 
 
 // OnDemandCapacityReservationOptions
@@ -8,12 +9,12 @@ import { OnDemandCapacityReservationUsageStrategyEnum } from "./ondemandcapacity
  * Describes the strategy for using unused Capacity Reservations for fulfilling On-Demand capacity.
 **/
 export class OnDemandCapacityReservationOptions extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CapacityReservationPreference" })
+  @SpeakeasyMetadata({ data: "json, name=CapacityReservationPreference" })
   capacityReservationPreference?: OnDemandCapacityReservationPreferenceEnum;
 
-  @Metadata({ data: "json, name=CapacityReservationResourceGroupArn" })
+  @SpeakeasyMetadata({ data: "json, name=CapacityReservationResourceGroupArn" })
   capacityReservationResourceGroupArn?: string;
 
-  @Metadata({ data: "json, name=UsageStrategy" })
+  @SpeakeasyMetadata({ data: "json, name=UsageStrategy" })
   usageStrategy?: OnDemandCapacityReservationUsageStrategyEnum;
 }

@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// LogEvent
+// Log event information
 type LogEvent struct {
 	Attribute1       *string   `json:"attribute1,omitempty"`
 	Attribute2       *string   `json:"attribute2,omitempty"`

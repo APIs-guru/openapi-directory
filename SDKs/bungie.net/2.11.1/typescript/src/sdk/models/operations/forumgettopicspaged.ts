@@ -1,52 +1,53 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ForumGetTopicsPagedPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=categoryFilter" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=categoryFilter" })
   categoryFilter: number;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=group" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=group" })
   group: number;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=page" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=page" })
   page: number;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=pageSize" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=pageSize" })
   pageSize: number;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=quickDate" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=quickDate" })
   quickDate: number;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=sort" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=sort" })
   sort: number;
 }
 
 
 export class ForumGetTopicsPagedQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=locales" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=locales" })
   locales?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=tagstring" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=tagstring" })
   tagstring?: string;
 }
 
 
 export class ForumGetTopicsPagedRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: ForumGetTopicsPagedPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: ForumGetTopicsPagedQueryParams;
 }
 
 
 export class ForumGetTopicsPagedResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

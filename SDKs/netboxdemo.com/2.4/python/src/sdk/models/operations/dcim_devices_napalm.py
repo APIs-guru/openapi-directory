@@ -5,17 +5,17 @@ from sdk.models import shared
 
 @dataclass
 class DcimDevicesNapalmPathParams:
-    id: int = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: int = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class DcimDevicesNapalmRequest:
-    path_params: DcimDevicesNapalmPathParams = field(default=None)
+    path_params: DcimDevicesNapalmPathParams = field()
     
 
 @dataclass
 class DcimDevicesNapalmResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     device: Optional[shared.Device] = field(default=None)
-    status_code: int = field(default=None)
     

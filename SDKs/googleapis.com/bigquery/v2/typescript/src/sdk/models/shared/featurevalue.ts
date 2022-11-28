@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CategoricalValue } from "./categoricalvalue";
+
 
 
 // FeatureValue
@@ -7,12 +8,12 @@ import { CategoricalValue } from "./categoricalvalue";
  * Representative value of a single feature within the cluster.
 **/
 export class FeatureValue extends SpeakeasyBase {
-  @Metadata({ data: "json, name=categoricalValue" })
+  @SpeakeasyMetadata({ data: "json, name=categoricalValue" })
   categoricalValue?: CategoricalValue;
 
-  @Metadata({ data: "json, name=featureColumn" })
+  @SpeakeasyMetadata({ data: "json, name=featureColumn" })
   featureColumn?: string;
 
-  @Metadata({ data: "json, name=numericalValue" })
+  @SpeakeasyMetadata({ data: "json, name=numericalValue" })
   numericalValue?: number;
 }

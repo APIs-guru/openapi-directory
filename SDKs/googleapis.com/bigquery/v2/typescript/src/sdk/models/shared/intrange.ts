@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // IntRange
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Range of an int hyperparameter.
 **/
 export class IntRange extends SpeakeasyBase {
-  @Metadata({ data: "json, name=max" })
+  @SpeakeasyMetadata({ data: "json, name=max" })
   max?: string;
 
-  @Metadata({ data: "json, name=min" })
+  @SpeakeasyMetadata({ data: "json, name=min" })
   min?: string;
 }

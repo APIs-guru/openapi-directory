@@ -4,7 +4,7 @@ from typing import Any,Optional
 
 @dataclass
 class GetWebhookInstancesResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     webhook_instance: Optional[Any] = field(default=None)
     

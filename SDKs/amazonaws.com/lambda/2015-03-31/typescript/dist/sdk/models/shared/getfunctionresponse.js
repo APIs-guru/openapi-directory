@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { FunctionCodeLocation } from "./functioncodelocation";
 import { Concurrency } from "./concurrency";
 import { FunctionConfiguration } from "./functionconfiguration";
@@ -32,19 +32,19 @@ var GetFunctionResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Code" }),
+        SpeakeasyMetadata({ data: "json, name=Code" }),
         __metadata("design:type", FunctionCodeLocation)
     ], GetFunctionResponse.prototype, "code", void 0);
     __decorate([
-        Metadata({ data: "json, name=Concurrency" }),
+        SpeakeasyMetadata({ data: "json, name=Concurrency" }),
         __metadata("design:type", Concurrency)
     ], GetFunctionResponse.prototype, "concurrency", void 0);
     __decorate([
-        Metadata({ data: "json, name=Configuration" }),
+        SpeakeasyMetadata({ data: "json, name=Configuration" }),
         __metadata("design:type", FunctionConfiguration)
     ], GetFunctionResponse.prototype, "configuration", void 0);
     __decorate([
-        Metadata({ data: "json, name=Tags" }),
+        SpeakeasyMetadata({ data: "json, name=Tags" }),
         __metadata("design:type", Map)
     ], GetFunctionResponse.prototype, "tags", void 0);
     return GetFunctionResponse;

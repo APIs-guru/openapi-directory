@@ -1,6 +1,7 @@
 
 
+
 export enum StopTypeEnum {
-    Complete = "Complete"
-,    Cancel = "Cancel"
+    Complete = "Complete",
+    Cancel = "Cancel"
 }

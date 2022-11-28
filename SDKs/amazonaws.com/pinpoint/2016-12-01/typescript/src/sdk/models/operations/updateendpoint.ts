@@ -1,36 +1,37 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class UpdateEndpointPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=application-id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=application-id" })
   applicationId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=endpoint-id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=endpoint-id" })
   endpointId: string;
 }
 
 
 export class UpdateEndpointHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
@@ -40,87 +41,87 @@ export class UpdateEndpointHeaders extends SpeakeasyBase {
  * Specifies the channel type and other settings for an endpoint.
 **/
 export class UpdateEndpointRequestBodyEndpointRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Address" })
+  @SpeakeasyMetadata({ data: "json, name=Address" })
   address?: string;
 
-  @Metadata({ data: "json, name=Attributes" })
+  @SpeakeasyMetadata({ data: "json, name=Attributes" })
   attributes?: Map<string, string[]>;
 
-  @Metadata({ data: "json, name=ChannelType" })
+  @SpeakeasyMetadata({ data: "json, name=ChannelType" })
   channelType?: shared.ChannelTypeEnum;
 
-  @Metadata({ data: "json, name=Demographic" })
+  @SpeakeasyMetadata({ data: "json, name=Demographic" })
   demographic?: shared.EndpointDemographic;
 
-  @Metadata({ data: "json, name=EffectiveDate" })
+  @SpeakeasyMetadata({ data: "json, name=EffectiveDate" })
   effectiveDate?: string;
 
-  @Metadata({ data: "json, name=EndpointStatus" })
+  @SpeakeasyMetadata({ data: "json, name=EndpointStatus" })
   endpointStatus?: string;
 
-  @Metadata({ data: "json, name=Location" })
+  @SpeakeasyMetadata({ data: "json, name=Location" })
   location?: shared.EndpointLocation;
 
-  @Metadata({ data: "json, name=Metrics" })
+  @SpeakeasyMetadata({ data: "json, name=Metrics" })
   metrics?: Map<string, number>;
 
-  @Metadata({ data: "json, name=OptOut" })
+  @SpeakeasyMetadata({ data: "json, name=OptOut" })
   optOut?: string;
 
-  @Metadata({ data: "json, name=RequestId" })
+  @SpeakeasyMetadata({ data: "json, name=RequestId" })
   requestId?: string;
 
-  @Metadata({ data: "json, name=User" })
+  @SpeakeasyMetadata({ data: "json, name=User" })
   user?: shared.EndpointUser;
 }
 
 
 export class UpdateEndpointRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=EndpointRequest" })
+  @SpeakeasyMetadata({ data: "json, name=EndpointRequest" })
   endpointRequest: UpdateEndpointRequestBodyEndpointRequest;
 }
 
 
 export class UpdateEndpointRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: UpdateEndpointPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: UpdateEndpointHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: UpdateEndpointRequestBody;
 }
 
 
 export class UpdateEndpointResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   badRequestException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   forbiddenException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   internalServerErrorException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   methodNotAllowedException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   notFoundException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   payloadTooLargeException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   tooManyRequestsException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   updateEndpointResponse?: shared.UpdateEndpointResponse;
 }

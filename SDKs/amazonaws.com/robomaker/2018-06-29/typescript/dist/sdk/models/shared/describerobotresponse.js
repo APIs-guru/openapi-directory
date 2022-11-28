@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ArchitectureEnum } from "./architectureenum";
 import { RobotStatusEnum } from "./robotstatusenum";
 var DescribeRobotResponse = /** @class */ (function (_super) {
@@ -31,43 +31,43 @@ var DescribeRobotResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=architecture" }),
+        SpeakeasyMetadata({ data: "json, name=architecture" }),
         __metadata("design:type", String)
     ], DescribeRobotResponse.prototype, "architecture", void 0);
     __decorate([
-        Metadata({ data: "json, name=arn" }),
+        SpeakeasyMetadata({ data: "json, name=arn" }),
         __metadata("design:type", String)
     ], DescribeRobotResponse.prototype, "arn", void 0);
     __decorate([
-        Metadata({ data: "json, name=createdAt" }),
+        SpeakeasyMetadata({ data: "json, name=createdAt" }),
         __metadata("design:type", Date)
     ], DescribeRobotResponse.prototype, "createdAt", void 0);
     __decorate([
-        Metadata({ data: "json, name=fleetArn" }),
+        SpeakeasyMetadata({ data: "json, name=fleetArn" }),
         __metadata("design:type", String)
     ], DescribeRobotResponse.prototype, "fleetArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=greengrassGroupId" }),
+        SpeakeasyMetadata({ data: "json, name=greengrassGroupId" }),
         __metadata("design:type", String)
     ], DescribeRobotResponse.prototype, "greengrassGroupId", void 0);
     __decorate([
-        Metadata({ data: "json, name=lastDeploymentJob" }),
+        SpeakeasyMetadata({ data: "json, name=lastDeploymentJob" }),
         __metadata("design:type", String)
     ], DescribeRobotResponse.prototype, "lastDeploymentJob", void 0);
     __decorate([
-        Metadata({ data: "json, name=lastDeploymentTime" }),
+        SpeakeasyMetadata({ data: "json, name=lastDeploymentTime" }),
         __metadata("design:type", Date)
     ], DescribeRobotResponse.prototype, "lastDeploymentTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], DescribeRobotResponse.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=status" }),
+        SpeakeasyMetadata({ data: "json, name=status" }),
         __metadata("design:type", String)
     ], DescribeRobotResponse.prototype, "status", void 0);
     __decorate([
-        Metadata({ data: "json, name=tags" }),
+        SpeakeasyMetadata({ data: "json, name=tags" }),
         __metadata("design:type", Map)
     ], DescribeRobotResponse.prototype, "tags", void 0);
     return DescribeRobotResponse;

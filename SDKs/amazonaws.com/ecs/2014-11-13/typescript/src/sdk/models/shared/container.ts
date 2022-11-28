@@ -1,9 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { HealthStatusEnum } from "./healthstatusenum";
 import { ManagedAgent } from "./managedagent";
 import { NetworkBinding } from "./networkbinding";
 import { NetworkInterface } from "./networkinterface";
+
 
 
 // Container
@@ -11,54 +11,54 @@ import { NetworkInterface } from "./networkinterface";
  * A Docker container that is part of a task.
 **/
 export class Container extends SpeakeasyBase {
-  @Metadata({ data: "json, name=containerArn" })
+  @SpeakeasyMetadata({ data: "json, name=containerArn" })
   containerArn?: string;
 
-  @Metadata({ data: "json, name=cpu" })
+  @SpeakeasyMetadata({ data: "json, name=cpu" })
   cpu?: string;
 
-  @Metadata({ data: "json, name=exitCode" })
+  @SpeakeasyMetadata({ data: "json, name=exitCode" })
   exitCode?: number;
 
-  @Metadata({ data: "json, name=gpuIds" })
+  @SpeakeasyMetadata({ data: "json, name=gpuIds" })
   gpuIds?: string[];
 
-  @Metadata({ data: "json, name=healthStatus" })
+  @SpeakeasyMetadata({ data: "json, name=healthStatus" })
   healthStatus?: HealthStatusEnum;
 
-  @Metadata({ data: "json, name=image" })
+  @SpeakeasyMetadata({ data: "json, name=image" })
   image?: string;
 
-  @Metadata({ data: "json, name=imageDigest" })
+  @SpeakeasyMetadata({ data: "json, name=imageDigest" })
   imageDigest?: string;
 
-  @Metadata({ data: "json, name=lastStatus" })
+  @SpeakeasyMetadata({ data: "json, name=lastStatus" })
   lastStatus?: string;
 
-  @Metadata({ data: "json, name=managedAgents", elemType: shared.ManagedAgent })
+  @SpeakeasyMetadata({ data: "json, name=managedAgents", elemType: ManagedAgent })
   managedAgents?: ManagedAgent[];
 
-  @Metadata({ data: "json, name=memory" })
+  @SpeakeasyMetadata({ data: "json, name=memory" })
   memory?: string;
 
-  @Metadata({ data: "json, name=memoryReservation" })
+  @SpeakeasyMetadata({ data: "json, name=memoryReservation" })
   memoryReservation?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=networkBindings", elemType: shared.NetworkBinding })
+  @SpeakeasyMetadata({ data: "json, name=networkBindings", elemType: NetworkBinding })
   networkBindings?: NetworkBinding[];
 
-  @Metadata({ data: "json, name=networkInterfaces", elemType: shared.NetworkInterface })
+  @SpeakeasyMetadata({ data: "json, name=networkInterfaces", elemType: NetworkInterface })
   networkInterfaces?: NetworkInterface[];
 
-  @Metadata({ data: "json, name=reason" })
+  @SpeakeasyMetadata({ data: "json, name=reason" })
   reason?: string;
 
-  @Metadata({ data: "json, name=runtimeId" })
+  @SpeakeasyMetadata({ data: "json, name=runtimeId" })
   runtimeId?: string;
 
-  @Metadata({ data: "json, name=taskArn" })
+  @SpeakeasyMetadata({ data: "json, name=taskArn" })
   taskArn?: string;
 }

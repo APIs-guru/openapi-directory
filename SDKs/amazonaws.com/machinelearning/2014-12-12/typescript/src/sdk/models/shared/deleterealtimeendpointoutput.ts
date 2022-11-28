@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RealtimeEndpointInfo } from "./realtimeendpointinfo";
+
 
 
 // DeleteRealtimeEndpointOutput
@@ -7,9 +8,9 @@ import { RealtimeEndpointInfo } from "./realtimeendpointinfo";
  * <p>Represents the output of an <code>DeleteRealtimeEndpoint</code> operation.</p> <p>The result contains the <code>MLModelId</code> and the endpoint information for the <code>MLModel</code>. </p>
 **/
 export class DeleteRealtimeEndpointOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=MLModelId" })
+  @SpeakeasyMetadata({ data: "json, name=MLModelId" })
   mlModelId?: string;
 
-  @Metadata({ data: "json, name=RealtimeEndpointInfo" })
+  @SpeakeasyMetadata({ data: "json, name=RealtimeEndpointInfo" })
   realtimeEndpointInfo?: RealtimeEndpointInfo;
 }

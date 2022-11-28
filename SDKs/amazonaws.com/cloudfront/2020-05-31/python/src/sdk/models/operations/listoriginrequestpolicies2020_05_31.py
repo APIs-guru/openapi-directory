@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class ListOriginRequestPolicies20200531TypeEnum(str, Enum):
     MANAGED = "managed"
@@ -26,13 +30,13 @@ class ListOriginRequestPolicies20200531Headers:
 
 @dataclass
 class ListOriginRequestPolicies20200531Request:
-    query_params: ListOriginRequestPolicies20200531QueryParams = field(default=None)
-    headers: ListOriginRequestPolicies20200531Headers = field(default=None)
+    headers: ListOriginRequestPolicies20200531Headers = field()
+    query_params: ListOriginRequestPolicies20200531QueryParams = field()
     
 
 @dataclass
 class ListOriginRequestPolicies20200531Response:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

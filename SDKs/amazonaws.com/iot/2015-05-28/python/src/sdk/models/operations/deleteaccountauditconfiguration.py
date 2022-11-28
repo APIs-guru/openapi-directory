@@ -1,4 +1,7 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 
 
@@ -20,17 +23,17 @@ class DeleteAccountAuditConfigurationHeaders:
 
 @dataclass
 class DeleteAccountAuditConfigurationRequest:
-    query_params: DeleteAccountAuditConfigurationQueryParams = field(default=None)
-    headers: DeleteAccountAuditConfigurationHeaders = field(default=None)
+    headers: DeleteAccountAuditConfigurationHeaders = field()
+    query_params: DeleteAccountAuditConfigurationQueryParams = field()
     
 
 @dataclass
 class DeleteAccountAuditConfigurationResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     delete_account_audit_configuration_response: Optional[dict[str, Any]] = field(default=None)
     internal_failure_exception: Optional[Any] = field(default=None)
     invalid_request_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     

@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { EncryptionTypeEnum } from "./encryptiontypeenum";
+
 
 
 // ServerSideEncryption
@@ -7,9 +8,9 @@ import { EncryptionTypeEnum } from "./encryptiontypeenum";
  * Provides information about the server-side encryption settings for an S3 bucket or S3 object.
 **/
 export class ServerSideEncryption extends SpeakeasyBase {
-  @Metadata({ data: "json, name=encryptionType" })
+  @SpeakeasyMetadata({ data: "json, name=encryptionType" })
   encryptionType?: EncryptionTypeEnum;
 
-  @Metadata({ data: "json, name=kmsMasterKeyId" })
+  @SpeakeasyMetadata({ data: "json, name=kmsMasterKeyId" })
   kmsMasterKeyId?: string;
 }

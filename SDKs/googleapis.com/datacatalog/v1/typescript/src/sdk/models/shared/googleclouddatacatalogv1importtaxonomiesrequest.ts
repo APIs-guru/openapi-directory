@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudDatacatalogV1CrossRegionalSource } from "./googleclouddatacatalogv1crossregionalsource";
 import { GoogleCloudDatacatalogV1InlineSource } from "./googleclouddatacatalogv1inlinesource";
+
 
 
 // GoogleCloudDatacatalogV1ImportTaxonomiesRequest
@@ -8,9 +9,9 @@ import { GoogleCloudDatacatalogV1InlineSource } from "./googleclouddatacatalogv1
  * Request message for ImportTaxonomies.
 **/
 export class GoogleCloudDatacatalogV1ImportTaxonomiesRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=crossRegionalSource" })
+  @SpeakeasyMetadata({ data: "json, name=crossRegionalSource" })
   crossRegionalSource?: GoogleCloudDatacatalogV1CrossRegionalSource;
 
-  @Metadata({ data: "json, name=inlineSource" })
+  @SpeakeasyMetadata({ data: "json, name=inlineSource" })
   inlineSource?: GoogleCloudDatacatalogV1InlineSource;
 }

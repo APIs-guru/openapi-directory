@@ -22,70 +22,70 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var GetcitystandardQueryParams = /** @class */ (function (_super) {
     __extends(GetcitystandardQueryParams, _super);
     function GetcitystandardQueryParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=city" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=city" }),
         __metadata("design:type", String)
     ], GetcitystandardQueryParams.prototype, "city", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=license" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=license" }),
         __metadata("design:type", String)
     ], GetcitystandardQueryParams.prototype, "license", void 0);
     return GetcitystandardQueryParams;
 }(SpeakeasyBase));
 export { GetcitystandardQueryParams };
-var GetcitystandardRequest = /** @class */ (function (_super) {
-    __extends(GetcitystandardRequest, _super);
-    function GetcitystandardRequest() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    __decorate([
-        Metadata(),
-        __metadata("design:type", GetcitystandardQueryParams)
-    ], GetcitystandardRequest.prototype, "queryParams", void 0);
-    return GetcitystandardRequest;
-}(SpeakeasyBase));
-export { GetcitystandardRequest };
 var Getcitystandard200ApplicationJson = /** @class */ (function (_super) {
     __extends(Getcitystandard200ApplicationJson, _super);
     function Getcitystandard200ApplicationJson() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=CityStandard" }),
+        SpeakeasyMetadata({ data: "json, name=CityStandard" }),
         __metadata("design:type", String)
     ], Getcitystandard200ApplicationJson.prototype, "cityStandard", void 0);
     __decorate([
-        Metadata({ data: "json, name=Code" }),
+        SpeakeasyMetadata({ data: "json, name=Code" }),
         __metadata("design:type", String)
     ], Getcitystandard200ApplicationJson.prototype, "code", void 0);
     __decorate([
-        Metadata({ data: "json, name=Credits" }),
+        SpeakeasyMetadata({ data: "json, name=Credits" }),
         __metadata("design:type", String)
     ], Getcitystandard200ApplicationJson.prototype, "credits", void 0);
     return Getcitystandard200ApplicationJson;
 }(SpeakeasyBase));
 export { Getcitystandard200ApplicationJson };
+var GetcitystandardRequest = /** @class */ (function (_super) {
+    __extends(GetcitystandardRequest, _super);
+    function GetcitystandardRequest() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", GetcitystandardQueryParams)
+    ], GetcitystandardRequest.prototype, "queryParams", void 0);
+    return GetcitystandardRequest;
+}(SpeakeasyBase));
+export { GetcitystandardRequest };
 var GetcitystandardResponse = /** @class */ (function (_super) {
     __extends(GetcitystandardResponse, _super);
     function GetcitystandardResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetcitystandardResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetcitystandardResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Getcitystandard200ApplicationJson)
     ], GetcitystandardResponse.prototype, "getcitystandard200ApplicationJsonObject", void 0);
     return GetcitystandardResponse;

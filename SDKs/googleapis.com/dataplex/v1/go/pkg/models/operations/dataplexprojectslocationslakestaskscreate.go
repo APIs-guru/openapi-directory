@@ -32,7 +32,7 @@ type DataplexProjectsLocationsLakesTasksCreateSecurity struct {
 type DataplexProjectsLocationsLakesTasksCreateRequest struct {
 	PathParams  DataplexProjectsLocationsLakesTasksCreatePathParams
 	QueryParams DataplexProjectsLocationsLakesTasksCreateQueryParams
-	Request     *shared.GoogleCloudDataplexV1Task `request:"mediaType=application/json"`
+	Request     *shared.GoogleCloudDataplexV1TaskInput `request:"mediaType=application/json"`
 	Security    DataplexProjectsLocationsLakesTasksCreateSecurity
 }
 

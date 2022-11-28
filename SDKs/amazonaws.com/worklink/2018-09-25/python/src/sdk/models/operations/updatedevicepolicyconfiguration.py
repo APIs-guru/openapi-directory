@@ -1,6 +1,10 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass
@@ -17,23 +21,23 @@ class UpdateDevicePolicyConfigurationHeaders:
 @dataclass_json
 @dataclass
 class UpdateDevicePolicyConfigurationRequestBody:
-    device_ca_certificate: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'DeviceCaCertificate' }})
-    fleet_arn: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FleetArn' }})
+    fleet_arn: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('FleetArn') }})
+    device_ca_certificate: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('DeviceCaCertificate') }})
     
 
 @dataclass
 class UpdateDevicePolicyConfigurationRequest:
-    headers: UpdateDevicePolicyConfigurationHeaders = field(default=None)
-    request: UpdateDevicePolicyConfigurationRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: UpdateDevicePolicyConfigurationHeaders = field()
+    request: UpdateDevicePolicyConfigurationRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class UpdateDevicePolicyConfigurationResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     internal_server_error_exception: Optional[Any] = field(default=None)
     invalid_request_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     too_many_requests_exception: Optional[Any] = field(default=None)
     unauthorized_exception: Optional[Any] = field(default=None)
     update_device_policy_configuration_response: Optional[dict[str, Any]] = field(default=None)

@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import queue
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ListQueuesResponse:
-    next_page_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'nextPageToken' }})
-    queues: Optional[List[queue.Queue]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'queues' }})
+    r"""ListQueuesResponse
+    Response message for ListQueues.
+    """
+    
+    next_page_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('nextPageToken') }})
+    queues: Optional[List[Queue1]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('queues') }})
     

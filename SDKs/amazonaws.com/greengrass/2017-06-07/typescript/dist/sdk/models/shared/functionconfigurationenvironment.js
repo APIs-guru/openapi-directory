@@ -22,9 +22,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { FunctionExecutionConfig } from "./functionexecutionconfig";
+import { ResourceAccessPolicy } from "./resourceaccesspolicy";
 // FunctionConfigurationEnvironment
 /**
  * The environment configuration of the function.
@@ -35,19 +35,19 @@ var FunctionConfigurationEnvironment = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=AccessSysfs" }),
+        SpeakeasyMetadata({ data: "json, name=AccessSysfs" }),
         __metadata("design:type", Boolean)
     ], FunctionConfigurationEnvironment.prototype, "accessSysfs", void 0);
     __decorate([
-        Metadata({ data: "json, name=Execution" }),
+        SpeakeasyMetadata({ data: "json, name=Execution" }),
         __metadata("design:type", FunctionExecutionConfig)
     ], FunctionConfigurationEnvironment.prototype, "execution", void 0);
     __decorate([
-        Metadata({ data: "json, name=ResourceAccessPolicies", elemType: shared.ResourceAccessPolicy }),
+        SpeakeasyMetadata({ data: "json, name=ResourceAccessPolicies", elemType: ResourceAccessPolicy }),
         __metadata("design:type", Array)
     ], FunctionConfigurationEnvironment.prototype, "resourceAccessPolicies", void 0);
     __decorate([
-        Metadata({ data: "json, name=Variables" }),
+        SpeakeasyMetadata({ data: "json, name=Variables" }),
         __metadata("design:type", Map)
     ], FunctionConfigurationEnvironment.prototype, "variables", void 0);
     return FunctionConfigurationEnvironment;

@@ -1,19 +1,20 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ProvisioningStatusResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=completedSteps" })
+  @SpeakeasyMetadata({ data: "json, name=completedSteps" })
   completedSteps?: number;
 
-  @Metadata({ data: "json, name=currentStepDescription" })
+  @SpeakeasyMetadata({ data: "json, name=currentStepDescription" })
   currentStepDescription?: string;
 
-  @Metadata({ data: "json, name=isReady" })
+  @SpeakeasyMetadata({ data: "json, name=isReady" })
   isReady?: boolean;
 
-  @Metadata({ data: "json, name=operationStartedTimeUtc" })
+  @SpeakeasyMetadata({ data: "json, name=operationStartedTimeUtc" })
   operationStartedTimeUtc?: string;
 
-  @Metadata({ data: "json, name=totalSteps" })
+  @SpeakeasyMetadata({ data: "json, name=totalSteps" })
   totalSteps?: number;
 }

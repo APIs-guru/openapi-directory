@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudApigeeV1Quota
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Quota contains the essential parameters needed that can be applied on the resources, methods, API source combination associated with this API product. While Quota is optional, setting it prevents requests from exceeding the provisioned parameters.
 **/
 export class GoogleCloudApigeeV1Quota extends SpeakeasyBase {
-  @Metadata({ data: "json, name=interval" })
+  @SpeakeasyMetadata({ data: "json, name=interval" })
   interval?: string;
 
-  @Metadata({ data: "json, name=limit" })
+  @SpeakeasyMetadata({ data: "json, name=limit" })
   limit?: string;
 
-  @Metadata({ data: "json, name=timeUnit" })
+  @SpeakeasyMetadata({ data: "json, name=timeUnit" })
   timeUnit?: string;
 }

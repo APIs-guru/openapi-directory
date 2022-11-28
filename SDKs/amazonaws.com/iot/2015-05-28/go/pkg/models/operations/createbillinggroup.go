@@ -18,6 +18,8 @@ type CreateBillingGroupHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// CreateBillingGroupRequestBodyBillingGroupProperties
+// The properties of a billing group.
 type CreateBillingGroupRequestBodyBillingGroupProperties struct {
 	BillingGroupDescription *string `json:"billingGroupDescription,omitempty"`
 }

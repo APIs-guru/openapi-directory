@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DeviceTierConfig } from "./devicetierconfig";
+
 
 
 // ListDeviceTierConfigsResponse
@@ -8,9 +8,9 @@ import { DeviceTierConfig } from "./devicetierconfig";
  * Response listing existing device tier configs.
 **/
 export class ListDeviceTierConfigsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=deviceTierConfigs", elemType: shared.DeviceTierConfig })
+  @SpeakeasyMetadata({ data: "json, name=deviceTierConfigs", elemType: DeviceTierConfig })
   deviceTierConfigs?: DeviceTierConfig[];
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 }

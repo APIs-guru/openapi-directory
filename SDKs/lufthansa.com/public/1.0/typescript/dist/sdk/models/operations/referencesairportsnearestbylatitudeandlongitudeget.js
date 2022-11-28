@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var ReferencesAirportsNearestByLatitudeAndLongitudeGetPathParams = /** @class */ (function (_super) {
     __extends(ReferencesAirportsNearestByLatitudeAndLongitudeGetPathParams, _super);
@@ -30,11 +30,11 @@ var ReferencesAirportsNearestByLatitudeAndLongitudeGetPathParams = /** @class */
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=latitude" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=latitude" }),
         __metadata("design:type", Number)
     ], ReferencesAirportsNearestByLatitudeAndLongitudeGetPathParams.prototype, "latitude", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=longitude" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=longitude" }),
         __metadata("design:type", Number)
     ], ReferencesAirportsNearestByLatitudeAndLongitudeGetPathParams.prototype, "longitude", void 0);
     return ReferencesAirportsNearestByLatitudeAndLongitudeGetPathParams;
@@ -46,7 +46,7 @@ var ReferencesAirportsNearestByLatitudeAndLongitudeGetQueryParams = /** @class *
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=lang" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=lang" }),
         __metadata("design:type", String)
     ], ReferencesAirportsNearestByLatitudeAndLongitudeGetQueryParams.prototype, "lang", void 0);
     return ReferencesAirportsNearestByLatitudeAndLongitudeGetQueryParams;
@@ -58,7 +58,7 @@ var ReferencesAirportsNearestByLatitudeAndLongitudeGetHeaders = /** @class */ (f
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=Accept" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Accept" }),
         __metadata("design:type", String)
     ], ReferencesAirportsNearestByLatitudeAndLongitudeGetHeaders.prototype, "accept", void 0);
     return ReferencesAirportsNearestByLatitudeAndLongitudeGetHeaders;
@@ -70,7 +70,7 @@ var ReferencesAirportsNearestByLatitudeAndLongitudeGetSecurity = /** @class */ (
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeAuth)
     ], ReferencesAirportsNearestByLatitudeAndLongitudeGetSecurity.prototype, "auth", void 0);
     return ReferencesAirportsNearestByLatitudeAndLongitudeGetSecurity;
@@ -82,19 +82,19 @@ var ReferencesAirportsNearestByLatitudeAndLongitudeGetRequest = /** @class */ (f
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ReferencesAirportsNearestByLatitudeAndLongitudeGetPathParams)
     ], ReferencesAirportsNearestByLatitudeAndLongitudeGetRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ReferencesAirportsNearestByLatitudeAndLongitudeGetQueryParams)
     ], ReferencesAirportsNearestByLatitudeAndLongitudeGetRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ReferencesAirportsNearestByLatitudeAndLongitudeGetHeaders)
     ], ReferencesAirportsNearestByLatitudeAndLongitudeGetRequest.prototype, "headers", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ReferencesAirportsNearestByLatitudeAndLongitudeGetSecurity)
     ], ReferencesAirportsNearestByLatitudeAndLongitudeGetRequest.prototype, "security", void 0);
     return ReferencesAirportsNearestByLatitudeAndLongitudeGetRequest;
@@ -106,15 +106,15 @@ var ReferencesAirportsNearestByLatitudeAndLongitudeGetResponse = /** @class */ (
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], ReferencesAirportsNearestByLatitudeAndLongitudeGetResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Map)
     ], ReferencesAirportsNearestByLatitudeAndLongitudeGetResponse.prototype, "referencesAirportsNearestByLatitudeAndLongitudeGet200ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], ReferencesAirportsNearestByLatitudeAndLongitudeGetResponse.prototype, "statusCode", void 0);
     return ReferencesAirportsNearestByLatitudeAndLongitudeGetResponse;

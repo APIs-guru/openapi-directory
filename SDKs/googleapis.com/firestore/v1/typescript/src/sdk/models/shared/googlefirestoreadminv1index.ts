@@ -1,18 +1,24 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleFirestoreAdminV1IndexField } from "./googlefirestoreadminv1indexfield";
 
+
+export enum GoogleFirestoreAdminV1IndexApiScopeEnum {
+    AnyApi = "ANY_API",
+    DatastoreModeApi = "DATASTORE_MODE_API"
+}
+
 export enum GoogleFirestoreAdminV1IndexQueryScopeEnum {
-    QueryScopeUnspecified = "QUERY_SCOPE_UNSPECIFIED"
-,    Collection = "COLLECTION"
-,    CollectionGroup = "COLLECTION_GROUP"
+    QueryScopeUnspecified = "QUERY_SCOPE_UNSPECIFIED",
+    Collection = "COLLECTION",
+    CollectionGroup = "COLLECTION_GROUP",
+    CollectionRecursive = "COLLECTION_RECURSIVE"
 }
 
 export enum GoogleFirestoreAdminV1IndexStateEnum {
-    StateUnspecified = "STATE_UNSPECIFIED"
-,    Creating = "CREATING"
-,    Ready = "READY"
-,    NeedsRepair = "NEEDS_REPAIR"
+    StateUnspecified = "STATE_UNSPECIFIED",
+    Creating = "CREATING",
+    Ready = "READY",
+    NeedsRepair = "NEEDS_REPAIR"
 }
 
 
@@ -21,15 +27,18 @@ export enum GoogleFirestoreAdminV1IndexStateEnum {
  * Cloud Firestore indexes enable simple and complex queries against documents in a database.
 **/
 export class GoogleFirestoreAdminV1Index extends SpeakeasyBase {
-  @Metadata({ data: "json, name=fields", elemType: shared.GoogleFirestoreAdminV1IndexField })
+  @SpeakeasyMetadata({ data: "json, name=apiScope" })
+  apiScope?: GoogleFirestoreAdminV1IndexApiScopeEnum;
+
+  @SpeakeasyMetadata({ data: "json, name=fields", elemType: GoogleFirestoreAdminV1IndexField })
   fields?: GoogleFirestoreAdminV1IndexField[];
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=queryScope" })
+  @SpeakeasyMetadata({ data: "json, name=queryScope" })
   queryScope?: GoogleFirestoreAdminV1IndexQueryScopeEnum;
 
-  @Metadata({ data: "json, name=state" })
+  @SpeakeasyMetadata({ data: "json, name=state" })
   state?: GoogleFirestoreAdminV1IndexStateEnum;
 }

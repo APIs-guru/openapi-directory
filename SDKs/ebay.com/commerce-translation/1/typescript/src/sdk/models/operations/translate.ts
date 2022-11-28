@@ -1,47 +1,48 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class TranslateSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   apiAuth: shared.SchemeApiAuth;
 }
 
 
-export class TranslateRequest extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/json" })
-  request: shared.TranslateRequest;
-
-  @Metadata()
-  security: TranslateSecurity;
-}
-
-
 export class Translate400ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=errors", elemType: shared.Error })
+  @SpeakeasyMetadata({ data: "json, name=errors", elemType: shared.Error })
   errors?: shared.Error[];
 }
 
 
 export class Translate500ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=errors", elemType: shared.Error })
+  @SpeakeasyMetadata({ data: "json, name=errors", elemType: shared.Error })
   errors?: shared.Error[];
 }
 
 
+export class TranslateRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request: shared.TranslateRequest;
+
+  @SpeakeasyMetadata()
+  security: TranslateSecurity;
+}
+
+
 export class TranslateResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   translateResponse?: shared.TranslateResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   translate400ApplicationJsonObject?: Translate400ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   translate500ApplicationJsonObject?: Translate500ApplicationJson;
 }

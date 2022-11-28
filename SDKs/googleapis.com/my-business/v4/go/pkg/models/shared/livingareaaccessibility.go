@@ -72,6 +72,8 @@ const (
 	LivingAreaAccessibilityMobilityAccessibleUnitExceptionEnumDependentOnDayOfWeek LivingAreaAccessibilityMobilityAccessibleUnitExceptionEnum = "DEPENDENT_ON_DAY_OF_WEEK"
 )
 
+// LivingAreaAccessibility
+// Accessibility features of the living area.
 type LivingAreaAccessibility struct {
 	AdaCompliantUnit                    *bool                                                           `json:"adaCompliantUnit,omitempty"`
 	AdaCompliantUnitException           *LivingAreaAccessibilityAdaCompliantUnitExceptionEnum           `json:"adaCompliantUnitException,omitempty"`

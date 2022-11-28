@@ -18,7 +18,7 @@ class PostSessionsRequest:
 
 @dataclass
 class PostSessionsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     session_entity: Optional[shared.SessionEntity] = field(default=None)
-    status_code: int = field(default=None)
     

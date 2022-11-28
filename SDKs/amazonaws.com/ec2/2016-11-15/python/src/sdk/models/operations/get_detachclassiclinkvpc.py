@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetDetachClassicLinkVpcActionEnum(str, Enum):
     DETACH_CLASSIC_LINK_VPC = "DetachClassicLinkVpc"
@@ -10,11 +14,11 @@ class GetDetachClassicLinkVpcVersionEnum(str, Enum):
 
 @dataclass
 class GetDetachClassicLinkVpcQueryParams:
-    action: GetDetachClassicLinkVpcActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetDetachClassicLinkVpcActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    instance_id: str = field(metadata={'query_param': { 'field_name': 'InstanceId', 'style': 'form', 'explode': True }})
+    version: GetDetachClassicLinkVpcVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    vpc_id: str = field(metadata={'query_param': { 'field_name': 'VpcId', 'style': 'form', 'explode': True }})
     dry_run: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'DryRun', 'style': 'form', 'explode': True }})
-    instance_id: str = field(default=None, metadata={'query_param': { 'field_name': 'InstanceId', 'style': 'form', 'explode': True }})
-    version: GetDetachClassicLinkVpcVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
-    vpc_id: str = field(default=None, metadata={'query_param': { 'field_name': 'VpcId', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -30,13 +34,13 @@ class GetDetachClassicLinkVpcHeaders:
 
 @dataclass
 class GetDetachClassicLinkVpcRequest:
-    query_params: GetDetachClassicLinkVpcQueryParams = field(default=None)
-    headers: GetDetachClassicLinkVpcHeaders = field(default=None)
+    headers: GetDetachClassicLinkVpcHeaders = field()
+    query_params: GetDetachClassicLinkVpcQueryParams = field()
     
 
 @dataclass
 class GetDetachClassicLinkVpcResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

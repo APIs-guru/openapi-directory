@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { Comment } from "./comment";
 // PostAuthorImage
 /**
  * The creator's avatar.
@@ -34,7 +34,7 @@ var PostAuthorImage = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=url" }),
+        SpeakeasyMetadata({ data: "json, name=url" }),
         __metadata("design:type", String)
     ], PostAuthorImage.prototype, "url", void 0);
     return PostAuthorImage;
@@ -50,19 +50,19 @@ var PostAuthor = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=displayName" }),
+        SpeakeasyMetadata({ data: "json, name=displayName" }),
         __metadata("design:type", String)
     ], PostAuthor.prototype, "displayName", void 0);
     __decorate([
-        Metadata({ data: "json, name=id" }),
+        SpeakeasyMetadata({ data: "json, name=id" }),
         __metadata("design:type", String)
     ], PostAuthor.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "json, name=image" }),
+        SpeakeasyMetadata({ data: "json, name=image" }),
         __metadata("design:type", PostAuthorImage)
     ], PostAuthor.prototype, "image", void 0);
     __decorate([
-        Metadata({ data: "json, name=url" }),
+        SpeakeasyMetadata({ data: "json, name=url" }),
         __metadata("design:type", String)
     ], PostAuthor.prototype, "url", void 0);
     return PostAuthor;
@@ -78,7 +78,7 @@ var PostBlog = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=id" }),
+        SpeakeasyMetadata({ data: "json, name=id" }),
         __metadata("design:type", String)
     ], PostBlog.prototype, "id", void 0);
     return PostBlog;
@@ -90,7 +90,7 @@ var PostImages = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=url" }),
+        SpeakeasyMetadata({ data: "json, name=url" }),
         __metadata("design:type", String)
     ], PostImages.prototype, "url", void 0);
     return PostImages;
@@ -106,19 +106,19 @@ var PostLocation = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=lat" }),
+        SpeakeasyMetadata({ data: "json, name=lat" }),
         __metadata("design:type", Number)
     ], PostLocation.prototype, "lat", void 0);
     __decorate([
-        Metadata({ data: "json, name=lng" }),
+        SpeakeasyMetadata({ data: "json, name=lng" }),
         __metadata("design:type", Number)
     ], PostLocation.prototype, "lng", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], PostLocation.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=span" }),
+        SpeakeasyMetadata({ data: "json, name=span" }),
         __metadata("design:type", String)
     ], PostLocation.prototype, "span", void 0);
     return PostLocation;
@@ -140,15 +140,15 @@ var PostReplies = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=items", elemType: shared.Comment }),
+        SpeakeasyMetadata({ data: "json, name=items", elemType: Comment }),
         __metadata("design:type", Array)
     ], PostReplies.prototype, "items", void 0);
     __decorate([
-        Metadata({ data: "json, name=selfLink" }),
+        SpeakeasyMetadata({ data: "json, name=selfLink" }),
         __metadata("design:type", String)
     ], PostReplies.prototype, "selfLink", void 0);
     __decorate([
-        Metadata({ data: "json, name=totalItems" }),
+        SpeakeasyMetadata({ data: "json, name=totalItems" }),
         __metadata("design:type", String)
     ], PostReplies.prototype, "totalItems", void 0);
     return PostReplies;
@@ -167,83 +167,83 @@ var Post = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=author" }),
+        SpeakeasyMetadata({ data: "json, name=author" }),
         __metadata("design:type", PostAuthor)
     ], Post.prototype, "author", void 0);
     __decorate([
-        Metadata({ data: "json, name=blog" }),
+        SpeakeasyMetadata({ data: "json, name=blog" }),
         __metadata("design:type", PostBlog)
     ], Post.prototype, "blog", void 0);
     __decorate([
-        Metadata({ data: "json, name=content" }),
+        SpeakeasyMetadata({ data: "json, name=content" }),
         __metadata("design:type", String)
     ], Post.prototype, "content", void 0);
     __decorate([
-        Metadata({ data: "json, name=customMetaData" }),
+        SpeakeasyMetadata({ data: "json, name=customMetaData" }),
         __metadata("design:type", String)
     ], Post.prototype, "customMetaData", void 0);
     __decorate([
-        Metadata({ data: "json, name=etag" }),
+        SpeakeasyMetadata({ data: "json, name=etag" }),
         __metadata("design:type", String)
     ], Post.prototype, "etag", void 0);
     __decorate([
-        Metadata({ data: "json, name=id" }),
+        SpeakeasyMetadata({ data: "json, name=id" }),
         __metadata("design:type", String)
     ], Post.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "json, name=images", elemType: shared.PostImages }),
+        SpeakeasyMetadata({ data: "json, name=images", elemType: PostImages }),
         __metadata("design:type", Array)
     ], Post.prototype, "images", void 0);
     __decorate([
-        Metadata({ data: "json, name=kind" }),
+        SpeakeasyMetadata({ data: "json, name=kind" }),
         __metadata("design:type", String)
     ], Post.prototype, "kind", void 0);
     __decorate([
-        Metadata({ data: "json, name=labels" }),
+        SpeakeasyMetadata({ data: "json, name=labels" }),
         __metadata("design:type", Array)
     ], Post.prototype, "labels", void 0);
     __decorate([
-        Metadata({ data: "json, name=location" }),
+        SpeakeasyMetadata({ data: "json, name=location" }),
         __metadata("design:type", PostLocation)
     ], Post.prototype, "location", void 0);
     __decorate([
-        Metadata({ data: "json, name=published" }),
+        SpeakeasyMetadata({ data: "json, name=published" }),
         __metadata("design:type", String)
     ], Post.prototype, "published", void 0);
     __decorate([
-        Metadata({ data: "json, name=readerComments" }),
+        SpeakeasyMetadata({ data: "json, name=readerComments" }),
         __metadata("design:type", String)
     ], Post.prototype, "readerComments", void 0);
     __decorate([
-        Metadata({ data: "json, name=replies" }),
+        SpeakeasyMetadata({ data: "json, name=replies" }),
         __metadata("design:type", PostReplies)
     ], Post.prototype, "replies", void 0);
     __decorate([
-        Metadata({ data: "json, name=selfLink" }),
+        SpeakeasyMetadata({ data: "json, name=selfLink" }),
         __metadata("design:type", String)
     ], Post.prototype, "selfLink", void 0);
     __decorate([
-        Metadata({ data: "json, name=status" }),
+        SpeakeasyMetadata({ data: "json, name=status" }),
         __metadata("design:type", String)
     ], Post.prototype, "status", void 0);
     __decorate([
-        Metadata({ data: "json, name=title" }),
+        SpeakeasyMetadata({ data: "json, name=title" }),
         __metadata("design:type", String)
     ], Post.prototype, "title", void 0);
     __decorate([
-        Metadata({ data: "json, name=titleLink" }),
+        SpeakeasyMetadata({ data: "json, name=titleLink" }),
         __metadata("design:type", String)
     ], Post.prototype, "titleLink", void 0);
     __decorate([
-        Metadata({ data: "json, name=trashed" }),
+        SpeakeasyMetadata({ data: "json, name=trashed" }),
         __metadata("design:type", String)
     ], Post.prototype, "trashed", void 0);
     __decorate([
-        Metadata({ data: "json, name=updated" }),
+        SpeakeasyMetadata({ data: "json, name=updated" }),
         __metadata("design:type", String)
     ], Post.prototype, "updated", void 0);
     __decorate([
-        Metadata({ data: "json, name=url" }),
+        SpeakeasyMetadata({ data: "json, name=url" }),
         __metadata("design:type", String)
     ], Post.prototype, "url", void 0);
     return Post;

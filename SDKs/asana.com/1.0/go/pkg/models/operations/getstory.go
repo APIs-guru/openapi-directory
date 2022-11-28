@@ -15,13 +15,13 @@ type GetStoryQueryParams struct {
 	OptPretty *bool    `queryParam:"style=form,explode=true,name=opt_pretty"`
 }
 
+type GetStory200ApplicationJSON struct {
+	Data *shared.StoryResponse `json:"data,omitempty"`
+}
+
 type GetStoryRequest struct {
 	PathParams  GetStoryPathParams
 	QueryParams GetStoryQueryParams
-}
-
-type GetStory200ApplicationJSON struct {
-	Data *shared.StoryResponse `json:"data,omitempty"`
 }
 
 type GetStoryResponse struct {

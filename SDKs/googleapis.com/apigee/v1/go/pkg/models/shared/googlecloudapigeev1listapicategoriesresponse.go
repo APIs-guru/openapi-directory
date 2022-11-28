@@ -1,5 +1,7 @@
 package shared
 
+// GoogleCloudApigeeV1ListAPICategoriesResponse
+// the response for ListApiCategoriesRequest.
 type GoogleCloudApigeeV1ListAPICategoriesResponse struct {
 	Data      []GoogleCloudApigeeV1APICategoryData `json:"data,omitempty"`
 	ErrorCode *string                              `json:"errorCode,omitempty"`

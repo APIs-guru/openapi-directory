@@ -1,7 +1,8 @@
 
 
+
 export enum UserStatusEnum {
-    Enabled = "ENABLED"
-,    Disabled = "DISABLED"
-,    Pending = "PENDING"
+    Enabled = "ENABLED",
+    Disabled = "DISABLED",
+    Pending = "PENDING"
 }

@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum GoogleFirestoreAdminV1beta1IndexFieldModeEnum {
-    ModeUnspecified = "MODE_UNSPECIFIED"
-,    Ascending = "ASCENDING"
-,    Descending = "DESCENDING"
-,    ArrayContains = "ARRAY_CONTAINS"
+    ModeUnspecified = "MODE_UNSPECIFIED",
+    Ascending = "ASCENDING",
+    Descending = "DESCENDING",
+    ArrayContains = "ARRAY_CONTAINS"
 }
 
 
@@ -13,9 +14,9 @@ export enum GoogleFirestoreAdminV1beta1IndexFieldModeEnum {
  * A field of an index.
 **/
 export class GoogleFirestoreAdminV1beta1IndexField extends SpeakeasyBase {
-  @Metadata({ data: "json, name=fieldPath" })
+  @SpeakeasyMetadata({ data: "json, name=fieldPath" })
   fieldPath?: string;
 
-  @Metadata({ data: "json, name=mode" })
+  @SpeakeasyMetadata({ data: "json, name=mode" })
   mode?: GoogleFirestoreAdminV1beta1IndexFieldModeEnum;
 }

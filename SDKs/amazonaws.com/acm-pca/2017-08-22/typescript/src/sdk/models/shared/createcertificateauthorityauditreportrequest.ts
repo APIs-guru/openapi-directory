@@ -1,14 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AuditReportResponseFormatEnum } from "./auditreportresponseformatenum";
 
 
+
 export class CreateCertificateAuthorityAuditReportRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AuditReportResponseFormat" })
+  @SpeakeasyMetadata({ data: "json, name=AuditReportResponseFormat" })
   auditReportResponseFormat: AuditReportResponseFormatEnum;
 
-  @Metadata({ data: "json, name=CertificateAuthorityArn" })
+  @SpeakeasyMetadata({ data: "json, name=CertificateAuthorityArn" })
   certificateAuthorityArn: string;
 
-  @Metadata({ data: "json, name=S3BucketName" })
+  @SpeakeasyMetadata({ data: "json, name=S3BucketName" })
   s3BucketName: string;
 }

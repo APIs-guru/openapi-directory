@@ -11,17 +11,23 @@ const (
 	ObWriteDomesticStandingOrderConsentResponse6DataAuthorisationAuthorisationTypeEnumSingle ObWriteDomesticStandingOrderConsentResponse6DataAuthorisationAuthorisationTypeEnum = "Single"
 )
 
+// ObWriteDomesticStandingOrderConsentResponse6DataAuthorisation
+// The authorisation type request from the TPP.
 type ObWriteDomesticStandingOrderConsentResponse6DataAuthorisation struct {
 	AuthorisationType  ObWriteDomesticStandingOrderConsentResponse6DataAuthorisationAuthorisationTypeEnum `json:"AuthorisationType"`
 	CompletionDateTime *time.Time                                                                         `json:"CompletionDateTime,omitempty"`
 }
 
+// ObWriteDomesticStandingOrderConsentResponse6DataCharges
+// Set of elements used to provide details of a charge for the payment initiation.
 type ObWriteDomesticStandingOrderConsentResponse6DataCharges struct {
 	Amount       ObActiveOrHistoricCurrencyAndAmount `json:"Amount"`
 	ChargeBearer ObChargeBearerType1CodeEnum         `json:"ChargeBearer"`
 	Type         string                              `json:"Type"`
 }
 
+// ObWriteDomesticStandingOrderConsentResponse6DataInitiationCreditorAccount
+// Identification assigned by an institution to identify an account. This identification is known by the account owner.
 type ObWriteDomesticStandingOrderConsentResponse6DataInitiationCreditorAccount struct {
 	Identification          string  `json:"Identification"`
 	Name                    string  `json:"Name"`
@@ -29,6 +35,8 @@ type ObWriteDomesticStandingOrderConsentResponse6DataInitiationCreditorAccount s
 	SecondaryIdentification *string `json:"SecondaryIdentification,omitempty"`
 }
 
+// ObWriteDomesticStandingOrderConsentResponse6DataInitiationDebtorAccount
+// Unambiguous identification of the account of the debtor to which a debit entry will be made as a result of the transaction.
 type ObWriteDomesticStandingOrderConsentResponse6DataInitiationDebtorAccount struct {
 	Identification          string  `json:"Identification"`
 	Name                    *string `json:"Name,omitempty"`
@@ -36,21 +44,29 @@ type ObWriteDomesticStandingOrderConsentResponse6DataInitiationDebtorAccount str
 	SecondaryIdentification *string `json:"SecondaryIdentification,omitempty"`
 }
 
+// ObWriteDomesticStandingOrderConsentResponse6DataInitiationFinalPaymentAmount
+// The amount of the final Standing Order
 type ObWriteDomesticStandingOrderConsentResponse6DataInitiationFinalPaymentAmount struct {
 	Amount   string `json:"Amount"`
 	Currency string `json:"Currency"`
 }
 
+// ObWriteDomesticStandingOrderConsentResponse6DataInitiationFirstPaymentAmount
+// The amount of the first Standing Order
 type ObWriteDomesticStandingOrderConsentResponse6DataInitiationFirstPaymentAmount struct {
 	Amount   string `json:"Amount"`
 	Currency string `json:"Currency"`
 }
 
+// ObWriteDomesticStandingOrderConsentResponse6DataInitiationRecurringPaymentAmount
+// The amount of the recurring Standing Order
 type ObWriteDomesticStandingOrderConsentResponse6DataInitiationRecurringPaymentAmount struct {
 	Amount   string `json:"Amount"`
 	Currency string `json:"Currency"`
 }
 
+// ObWriteDomesticStandingOrderConsentResponse6DataInitiation
+// The Initiation payload is sent by the initiating party to the ASPSP. It is used to request movement of funds from the debtor account to a creditor for a domestic standing order.
 type ObWriteDomesticStandingOrderConsentResponse6DataInitiation struct {
 	CreditorAccount          ObWriteDomesticStandingOrderConsentResponse6DataInitiationCreditorAccount         `json:"CreditorAccount"`
 	DebtorAccount            *ObWriteDomesticStandingOrderConsentResponse6DataInitiationDebtorAccount          `json:"DebtorAccount,omitempty"`

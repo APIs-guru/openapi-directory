@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class GatewayConfigGatewayAuthMethodEnum(str, Enum):
     GATEWAY_AUTH_METHOD_UNSPECIFIED = "GATEWAY_AUTH_METHOD_UNSPECIFIED"
@@ -17,8 +19,12 @@ class GatewayConfigGatewayTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class GatewayConfig:
-    gateway_auth_method: Optional[GatewayConfigGatewayAuthMethodEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'gatewayAuthMethod' }})
-    gateway_type: Optional[GatewayConfigGatewayTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'gatewayType' }})
-    last_accessed_gateway_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'lastAccessedGatewayId' }})
-    last_accessed_gateway_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'lastAccessedGatewayTime' }})
+    r"""GatewayConfig
+    Gateway-related configuration and state.
+    """
+    
+    gateway_auth_method: Optional[GatewayConfigGatewayAuthMethodEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('gatewayAuthMethod') }})
+    gateway_type: Optional[GatewayConfigGatewayTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('gatewayType') }})
+    last_accessed_gateway_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('lastAccessedGatewayId') }})
+    last_accessed_gateway_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('lastAccessedGatewayTime') }})
     

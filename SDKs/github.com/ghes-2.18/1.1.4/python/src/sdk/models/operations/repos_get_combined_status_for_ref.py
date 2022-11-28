@@ -5,9 +5,9 @@ from sdk.models import shared
 
 @dataclass
 class ReposGetCombinedStatusForRefPathParams:
-    owner: str = field(default=None, metadata={'path_param': { 'field_name': 'owner', 'style': 'simple', 'explode': False }})
-    ref: str = field(default=None, metadata={'path_param': { 'field_name': 'ref', 'style': 'simple', 'explode': False }})
-    repo: str = field(default=None, metadata={'path_param': { 'field_name': 'repo', 'style': 'simple', 'explode': False }})
+    owner: str = field(metadata={'path_param': { 'field_name': 'owner', 'style': 'simple', 'explode': False }})
+    ref: str = field(metadata={'path_param': { 'field_name': 'ref', 'style': 'simple', 'explode': False }})
+    repo: str = field(metadata={'path_param': { 'field_name': 'repo', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -18,14 +18,14 @@ class ReposGetCombinedStatusForRefQueryParams:
 
 @dataclass
 class ReposGetCombinedStatusForRefRequest:
-    path_params: ReposGetCombinedStatusForRefPathParams = field(default=None)
-    query_params: ReposGetCombinedStatusForRefQueryParams = field(default=None)
+    path_params: ReposGetCombinedStatusForRefPathParams = field()
+    query_params: ReposGetCombinedStatusForRefQueryParams = field()
     
 
 @dataclass
 class ReposGetCombinedStatusForRefResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     basic_error: Optional[shared.BasicError] = field(default=None)
     combined_commit_status: Optional[shared.CombinedCommitStatus] = field(default=None)
     

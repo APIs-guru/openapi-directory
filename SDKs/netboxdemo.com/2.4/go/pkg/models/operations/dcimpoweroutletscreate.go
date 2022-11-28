@@ -5,7 +5,7 @@ import (
 )
 
 type DcimPowerOutletsCreateRequest struct {
-	Request shared.WritablePowerOutlet `request:"mediaType=application/json"`
+	Request shared.WritablePowerOutletInput `request:"mediaType=application/json"`
 }
 
 type DcimPowerOutletsCreateResponse struct {

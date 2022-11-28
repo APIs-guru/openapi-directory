@@ -1,32 +1,32 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ApiPassthrough } from "./apipassthrough";
 import { SigningAlgorithmEnum } from "./signingalgorithmenum";
 import { Validity } from "./validity";
-import { Validity } from "./validity";
+
 
 
 export class IssueCertificateRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ApiPassthrough" })
+  @SpeakeasyMetadata({ data: "json, name=ApiPassthrough" })
   apiPassthrough?: ApiPassthrough;
 
-  @Metadata({ data: "json, name=CertificateAuthorityArn" })
+  @SpeakeasyMetadata({ data: "json, name=CertificateAuthorityArn" })
   certificateAuthorityArn: string;
 
-  @Metadata({ data: "json, name=Csr" })
+  @SpeakeasyMetadata({ data: "json, name=Csr" })
   csr: string;
 
-  @Metadata({ data: "json, name=IdempotencyToken" })
+  @SpeakeasyMetadata({ data: "json, name=IdempotencyToken" })
   idempotencyToken?: string;
 
-  @Metadata({ data: "json, name=SigningAlgorithm" })
+  @SpeakeasyMetadata({ data: "json, name=SigningAlgorithm" })
   signingAlgorithm: SigningAlgorithmEnum;
 
-  @Metadata({ data: "json, name=TemplateArn" })
+  @SpeakeasyMetadata({ data: "json, name=TemplateArn" })
   templateArn?: string;
 
-  @Metadata({ data: "json, name=Validity" })
+  @SpeakeasyMetadata({ data: "json, name=Validity" })
   validity: Validity;
 
-  @Metadata({ data: "json, name=ValidityNotBefore" })
+  @SpeakeasyMetadata({ data: "json, name=ValidityNotBefore" })
   validityNotBefore?: Validity;
 }

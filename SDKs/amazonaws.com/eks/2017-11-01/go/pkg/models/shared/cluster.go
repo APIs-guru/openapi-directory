@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// Cluster
+// An object representing an Amazon EKS cluster.
 type Cluster struct {
 	Arn                     *string                          `json:"arn,omitempty"`
 	CertificateAuthority    *Certificate                     `json:"certificateAuthority,omitempty"`

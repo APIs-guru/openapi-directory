@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetEmployersByEffectiveDatePathParams = /** @class */ (function (_super) {
     __extends(GetEmployersByEffectiveDatePathParams, _super);
@@ -30,7 +30,7 @@ var GetEmployersByEffectiveDatePathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=EffectiveDate" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=EffectiveDate" }),
         __metadata("design:type", Date)
     ], GetEmployersByEffectiveDatePathParams.prototype, "effectiveDate", void 0);
     return GetEmployersByEffectiveDatePathParams;
@@ -42,11 +42,11 @@ var GetEmployersByEffectiveDateHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=Api-Version" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Api-Version" }),
         __metadata("design:type", String)
     ], GetEmployersByEffectiveDateHeaders.prototype, "apiVersion", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=Authorization" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Authorization" }),
         __metadata("design:type", String)
     ], GetEmployersByEffectiveDateHeaders.prototype, "authorization", void 0);
     return GetEmployersByEffectiveDateHeaders;
@@ -58,11 +58,11 @@ var GetEmployersByEffectiveDateRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetEmployersByEffectiveDatePathParams)
     ], GetEmployersByEffectiveDateRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetEmployersByEffectiveDateHeaders)
     ], GetEmployersByEffectiveDateRequest.prototype, "headers", void 0);
     return GetEmployersByEffectiveDateRequest;
@@ -74,19 +74,19 @@ var GetEmployersByEffectiveDateResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetEmployersByEffectiveDateResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.ErrorModel)
     ], GetEmployersByEffectiveDateResponse.prototype, "errorModel", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.LinkCollection)
     ], GetEmployersByEffectiveDateResponse.prototype, "linkCollection", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetEmployersByEffectiveDateResponse.prototype, "statusCode", void 0);
     return GetEmployersByEffectiveDateResponse;

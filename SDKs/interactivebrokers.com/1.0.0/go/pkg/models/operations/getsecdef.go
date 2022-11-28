@@ -8,10 +8,6 @@ type GetSecdefRequestBody struct {
 	Type     *string  `json:"type,omitempty"`
 }
 
-type GetSecdefRequest struct {
-	Request GetSecdefRequestBody `request:"mediaType=application/json"`
-}
-
 type GetSecdef200ApplicationJSON struct {
 	CompanyName  *string  `json:"CompanyName,omitempty"`
 	ContractID   *float64 `json:"ContractId,omitempty"`
@@ -19,6 +15,10 @@ type GetSecdef200ApplicationJSON struct {
 	Exchange     *string  `json:"Exchange,omitempty"`
 	SecurityType *string  `json:"SecurityType,omitempty"`
 	Ticker       *string  `json:"Ticker,omitempty"`
+}
+
+type GetSecdefRequest struct {
+	Request GetSecdefRequestBody `request:"mediaType=application/json"`
 }
 
 type GetSecdefResponse struct {

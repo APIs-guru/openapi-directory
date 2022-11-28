@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
 from typing import Optional
@@ -33,11 +33,11 @@ class SearchCommunityResourceQueryParams:
 
 @dataclass
 class SearchCommunityResourceRequest:
-    query_params: SearchCommunityResourceQueryParams = field(default=None)
+    query_params: SearchCommunityResourceQueryParams = field()
     
 
 @dataclass
 class SearchCommunityResourceResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

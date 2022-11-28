@@ -1,84 +1,85 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum PriceBulkUploadsFeedTypeEnum {
-    Price = "price"
-,    CptSellerEligibility = "CPT_SELLER_ELIGIBILITY"
+    Price = "price",
+    CptSellerEligibility = "CPT_SELLER_ELIGIBILITY"
 }
 
 
 export class PriceBulkUploadsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=feedType" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=feedType" })
   feedType: PriceBulkUploadsFeedTypeEnum;
 }
 
 
 export class PriceBulkUploadsHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=Authorization" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Authorization" })
   authorization: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=WM_CONSUMER.CHANNEL.TYPE" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=WM_CONSUMER.CHANNEL.TYPE" })
   wmConsumerChannelType?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=WM_QOS.CORRELATION_ID" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=WM_QOS.CORRELATION_ID" })
   wmQosCorrelationId: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=WM_SEC.ACCESS_TOKEN" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=WM_SEC.ACCESS_TOKEN" })
   wmSecAccessToken: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=WM_SVC.NAME" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=WM_SVC.NAME" })
   wmSvcName: string;
 }
 
 
 export class PriceBulkUploadsRequestBodyFile extends SpeakeasyBase {
-  @Metadata({ data: "multipart_form, content=true" })
+  @SpeakeasyMetadata({ data: "multipart_form, content=true" })
   content: Uint8Array;
 
-  @Metadata({ data: "multipart_form, name=file" })
+  @SpeakeasyMetadata({ data: "multipart_form, name=file" })
   file: string;
 }
 
 
 export class PriceBulkUploadsRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "multipart_form, file=true" })
+  @SpeakeasyMetadata({ data: "multipart_form, file=true" })
   file?: PriceBulkUploadsRequestBodyFile;
 }
 
 
-export class PriceBulkUploadsRequest extends SpeakeasyBase {
-  @Metadata()
-  queryParams: PriceBulkUploadsQueryParams;
-
-  @Metadata()
-  headers: PriceBulkUploadsHeaders;
-
-  @Metadata({ data: "request, media_type=multipart/form-data" })
-  request: PriceBulkUploadsRequestBody;
-}
-
-
 export class PriceBulkUploads200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=additionalAttributes" })
+  @SpeakeasyMetadata({ data: "json, name=additionalAttributes" })
   additionalAttributes?: Map<string, any>;
 
-  @Metadata({ data: "json, name=errors" })
+  @SpeakeasyMetadata({ data: "json, name=errors" })
   errors?: Map<string, any>;
 
-  @Metadata({ data: "json, name=feedId" })
+  @SpeakeasyMetadata({ data: "json, name=feedId" })
   feedId?: string;
 }
 
 
+export class PriceBulkUploadsRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  queryParams: PriceBulkUploadsQueryParams;
+
+  @SpeakeasyMetadata()
+  headers: PriceBulkUploadsHeaders;
+
+  @SpeakeasyMetadata({ data: "request, media_type=multipart/form-data" })
+  request: PriceBulkUploadsRequestBody;
+}
+
+
 export class PriceBulkUploadsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   priceBulkUploads200ApplicationJsonObject?: PriceBulkUploads200ApplicationJson;
 }

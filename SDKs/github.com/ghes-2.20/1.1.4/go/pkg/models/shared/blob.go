@@ -1,5 +1,7 @@
 package shared
 
+// Blob
+// Blob
 type Blob struct {
 	Content            string  `json:"content"`
 	Encoding           string  `json:"encoding"`

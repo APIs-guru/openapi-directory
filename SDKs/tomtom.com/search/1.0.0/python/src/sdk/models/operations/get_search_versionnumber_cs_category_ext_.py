@@ -1,13 +1,14 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class GetSearchVersionNumberCSCategoryExtPathParams:
-    category: str = field(default=None, metadata={'path_param': { 'field_name': 'category', 'style': 'simple', 'explode': False }})
-    ext: shared.ExtEnum = field(default=None, metadata={'path_param': { 'field_name': 'ext', 'style': 'simple', 'explode': False }})
-    version_number: int = field(default=None, metadata={'path_param': { 'field_name': 'versionNumber', 'style': 'simple', 'explode': False }})
+    category: str = field(metadata={'path_param': { 'field_name': 'category', 'style': 'simple', 'explode': False }})
+    ext: shared.ExtEnum = field(metadata={'path_param': { 'field_name': 'ext', 'style': 'simple', 'explode': False }})
+    version_number: int = field(metadata={'path_param': { 'field_name': 'versionNumber', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -28,12 +29,12 @@ class GetSearchVersionNumberCSCategoryExtQueryParams:
 
 @dataclass
 class GetSearchVersionNumberCSCategoryExtRequest:
-    path_params: GetSearchVersionNumberCSCategoryExtPathParams = field(default=None)
-    query_params: GetSearchVersionNumberCSCategoryExtQueryParams = field(default=None)
+    path_params: GetSearchVersionNumberCSCategoryExtPathParams = field()
+    query_params: GetSearchVersionNumberCSCategoryExtQueryParams = field()
     
 
 @dataclass
 class GetSearchVersionNumberCSCategoryExtResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

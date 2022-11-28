@@ -4,7 +4,7 @@ from typing import Optional
 
 @dataclass
 class DeleteSetupV1LocationsIDDeleteallimagesPathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -14,13 +14,13 @@ class DeleteSetupV1LocationsIDDeleteallimagesQueryParams:
 
 @dataclass
 class DeleteSetupV1LocationsIDDeleteallimagesRequest:
-    path_params: DeleteSetupV1LocationsIDDeleteallimagesPathParams = field(default=None)
-    query_params: DeleteSetupV1LocationsIDDeleteallimagesQueryParams = field(default=None)
+    path_params: DeleteSetupV1LocationsIDDeleteallimagesPathParams = field()
+    query_params: DeleteSetupV1LocationsIDDeleteallimagesQueryParams = field()
     
 
 @dataclass
 class DeleteSetupV1LocationsIDDeleteallimagesResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     delete_setup_v1_locations_id_deleteallimages_200_application_json_boolean: Optional[bool] = field(default=None)
-    status_code: int = field(default=None)
     

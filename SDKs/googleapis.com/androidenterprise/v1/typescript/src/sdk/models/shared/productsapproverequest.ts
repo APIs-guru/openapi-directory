@@ -1,16 +1,17 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ApprovalUrlInfo } from "./approvalurlinfo";
 
+
 export enum ProductsApproveRequestApprovedPermissionsEnum {
-    CurrentPermissionsOnly = "currentPermissionsOnly"
-,    AllPermissions = "allPermissions"
+    CurrentPermissionsOnly = "currentPermissionsOnly",
+    AllPermissions = "allPermissions"
 }
 
 
 export class ProductsApproveRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=approvalUrlInfo" })
+  @SpeakeasyMetadata({ data: "json, name=approvalUrlInfo" })
   approvalUrlInfo?: ApprovalUrlInfo;
 
-  @Metadata({ data: "json, name=approvedPermissions" })
+  @SpeakeasyMetadata({ data: "json, name=approvedPermissions" })
   approvedPermissions?: ProductsApproveRequestApprovedPermissionsEnum;
 }

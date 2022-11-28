@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ServerLaunchConfiguration } from "./serverlaunchconfiguration";
+
 
 
 // ServerGroupLaunchConfiguration
@@ -8,12 +8,12 @@ import { ServerLaunchConfiguration } from "./serverlaunchconfiguration";
  * Launch configuration for a server group.
 **/
 export class ServerGroupLaunchConfiguration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=launchOrder" })
+  @SpeakeasyMetadata({ data: "json, name=launchOrder" })
   launchOrder?: number;
 
-  @Metadata({ data: "json, name=serverGroupId" })
+  @SpeakeasyMetadata({ data: "json, name=serverGroupId" })
   serverGroupId?: string;
 
-  @Metadata({ data: "json, name=serverLaunchConfigurations", elemType: shared.ServerLaunchConfiguration })
+  @SpeakeasyMetadata({ data: "json, name=serverLaunchConfigurations", elemType: ServerLaunchConfiguration })
   serverLaunchConfigurations?: ServerLaunchConfiguration[];
 }

@@ -36,15 +36,15 @@ type SecretsSecretRolesListQueryParams struct {
 	SlugNisw *string `queryParam:"style=form,explode=true,name=slug__nisw"`
 }
 
-type SecretsSecretRolesListRequest struct {
-	QueryParams SecretsSecretRolesListQueryParams
-}
-
 type SecretsSecretRolesList200ApplicationJSON struct {
 	Count    int64               `json:"count"`
 	Next     *string             `json:"next,omitempty"`
 	Previous *string             `json:"previous,omitempty"`
 	Results  []shared.SecretRole `json:"results"`
+}
+
+type SecretsSecretRolesListRequest struct {
+	QueryParams SecretsSecretRolesListQueryParams
 }
 
 type SecretsSecretRolesListResponse struct {

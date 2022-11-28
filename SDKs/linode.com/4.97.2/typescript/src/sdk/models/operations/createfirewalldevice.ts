@@ -1,13 +1,13 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
-export const CREATEFIREWALLDEVICE_SERVERS = [
-	"https://api.linode.com/v4",
-];
 
+export const CreateFirewallDeviceServerList = [
+	"https://api.linode.com/v4",
+] as const;
 
 
 export class CreateFirewallDevicePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=firewallId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=firewallId" })
   firewallId: number;
 }
 
@@ -16,73 +16,55 @@ export enum CreateFirewallDeviceRequestBodyTypeEnum {
 }
 
 
-export class CreateFirewallDeviceRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=id" })
+export class CreateFirewallDeviceRequestBodyInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: number;
 
-  @Metadata({ data: "json, name=label" })
-  label?: string;
-
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type: CreateFirewallDeviceRequestBodyTypeEnum;
-
-  @Metadata({ data: "json, name=url" })
-  url?: string;
-}
-
-
-export class CreateFirewallDeviceSecurityOption1 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=bearer" })
-  personalAccessToken: shared.SchemePersonalAccessToken;
-}
-
-
-export class CreateFirewallDeviceSecurityOption2 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
-  oauth: shared.SchemeOauth;
 }
 
 
 export class CreateFirewallDeviceSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, option=true" })
-  option1?: CreateFirewallDeviceSecurityOption1;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" })
+  personalAccessToken?: shared.SchemePersonalAccessToken;
 
-  @Metadata({ data: "security, option=true" })
-  option2?: CreateFirewallDeviceSecurityOption2;
-}
-
-
-export class CreateFirewallDeviceRequest extends SpeakeasyBase {
-  @Metadata()
-  serverUrl?: string;
-
-  @Metadata()
-  pathParams: CreateFirewallDevicePathParams;
-
-  @Metadata({ data: "request, media_type=application/json" })
-  request?: CreateFirewallDeviceRequestBody;
-
-  @Metadata()
-  security: CreateFirewallDeviceSecurity;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
+  oauth?: shared.SchemeOauth;
 }
 
 
 export class CreateFirewallDeviceDefaultApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=errors", elemType: shared.ErrorObject })
+  @SpeakeasyMetadata({ data: "json, name=errors", elemType: shared.ErrorObject })
   errors?: shared.ErrorObject[];
 }
 
 
+export class CreateFirewallDeviceRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  serverUrl?: string;
+
+  @SpeakeasyMetadata()
+  pathParams: CreateFirewallDevicePathParams;
+
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request?: CreateFirewallDeviceRequestBodyInput;
+
+  @SpeakeasyMetadata()
+  security: CreateFirewallDeviceSecurity;
+}
+
+
 export class CreateFirewallDeviceResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   firewallDevices?: shared.FirewallDevices;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   createFirewallDeviceDefaultApplicationJsonObject?: CreateFirewallDeviceDefaultApplicationJson;
 }

@@ -1,15 +1,12 @@
-import axios, { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
-import { MatchContentType } from "../internal/utils/contenttype";
-import * as operations from "./models/operations";
-import { ParamsSerializerOptions } from "axios";
-import { GetQueryParamSerializer } from "../internal/utils/queryparams";
-import { CreateSecurityClient } from "../internal/utils/security";
-import * as utils from "../internal/utils/utils";
+import axios, { AxiosInstance } from "axios";
+import * as utils from "../internal/utils";
+
+import { Archive } from "./archive";
 
 type OptsFunc = (sdk: SDK) => void;
 
-const Servers = [
-  "https://groupsmigration.googleapis.com/",
+export const ServerList = [
+	"https://groupsmigration.googleapis.com/",
 ] as const;
 
 export function WithServerURL(
@@ -20,86 +17,49 @@ export function WithServerURL(
     if (params != null) {
       serverURL = utils.ReplaceParameters(serverURL, params);
     }
-    sdk.serverURL = serverURL;
+    sdk._serverURL = serverURL;
   };
 }
 
 export function WithClient(client: AxiosInstance): OptsFunc {
   return (sdk: SDK) => {
-    sdk.defaultClient = client;
+    sdk._defaultClient = client;
   };
 }
 
-// SDK Documentation: https://developers.google.com/google-apps/groups-migration/
+/* SDK Documentation: https://developers.google.com/google-apps/groups-migration/*/
 export class SDK {
-  defaultClient?: AxiosInstance;
-  securityClient?: AxiosInstance;
-  security?: any;
-  serverURL: string;
+  public archive: Archive;
+
+  public _defaultClient: AxiosInstance;
+  public _securityClient: AxiosInstance;
+  
+  public _serverURL: string;
+  private _language = "typescript";
+  private _sdkVersion = "0.0.1";
+  private _genVersion = "internal";
 
   constructor(...opts: OptsFunc[]) {
     opts.forEach((o) => o(this));
-    if (this.serverURL == "") {
-      this.serverURL = Servers[0];
+    if (this._serverURL == "") {
+      this._serverURL = ServerList[0];
     }
 
-    if (!this.defaultClient) {
-      this.defaultClient = axios.create({ baseURL: this.serverURL });
+    if (!this._defaultClient) {
+      this._defaultClient = axios.create({ baseURL: this._serverURL });
     }
 
-    if (!this.securityClient) {
-      if (this.security) {
-        this.securityClient = CreateSecurityClient(
-          this.defaultClient,
-          this.security
-        );
-      } else {
-        this.securityClient = this.defaultClient;
-      }
+    if (!this._securityClient) {
+      this._securityClient = this._defaultClient;
     }
+    
+    this.archive = new Archive(
+      this._defaultClient,
+      this._securityClient,
+      this._serverURL,
+      this._language,
+      this._sdkVersion,
+      this._genVersion
+    );
   }
-  
-  // GroupsmigrationArchiveInsert - Inserts a new mail into the archive of the Google group.
-  GroupsmigrationArchiveInsert(
-    req: operations.GroupsmigrationArchiveInsertRequest,
-    config?: AxiosRequestConfig
-  ): Promise<operations.GroupsmigrationArchiveInsertResponse> {
-    if (!(req instanceof utils.SpeakeasyBase)) {
-      req = new operations.GroupsmigrationArchiveInsertRequest(req);
-    }
-    
-    let baseURL: string = this.serverURL;
-    const url: string = utils.GenerateURL(baseURL, "/groups/v1/groups/{groupId}/archive", req.pathParams);
-    
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
-
-    const requestConfig: AxiosRequestConfig = {
-      ...config,
-      params: req.queryParams,
-      paramsSerializer: qpSerializer,
-    };
-    
-    return client
-      .post(url, {
-        ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
-        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
-
-        if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GroupsmigrationArchiveInsertResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
-                res.groups = httpRes?.data;
-            }
-            break;
-        }
-
-        return res;
-      })
-      .catch((error: AxiosError) => {throw error});
-  }
-
 }

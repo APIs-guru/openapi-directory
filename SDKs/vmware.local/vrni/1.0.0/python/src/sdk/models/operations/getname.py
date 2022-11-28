@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class GetNamePathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -15,19 +15,19 @@ class GetNameQueryParams:
 
 @dataclass
 class GetNameSecurity:
-    api_key_auth: shared.SchemeAPIKeyAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    api_key_auth: shared.SchemeAPIKeyAuth = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
     
 
 @dataclass
 class GetNameRequest:
-    path_params: GetNamePathParams = field(default=None)
-    query_params: GetNameQueryParams = field(default=None)
-    security: GetNameSecurity = field(default=None)
+    path_params: GetNamePathParams = field()
+    query_params: GetNameQueryParams = field()
+    security: GetNameSecurity = field()
     
 
 @dataclass
 class GetNameResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     entity_name: Optional[shared.EntityName] = field(default=None)
-    status_code: int = field(default=None)
     

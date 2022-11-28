@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ViewBillingRequest
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The ViewBilling request includes the following elements.
 **/
 export class ViewBillingRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=End" })
+  @SpeakeasyMetadata({ data: "json, name=End" })
   end?: Date;
 
-  @Metadata({ data: "json, name=Marker" })
+  @SpeakeasyMetadata({ data: "json, name=Marker" })
   marker?: string;
 
-  @Metadata({ data: "json, name=MaxItems" })
+  @SpeakeasyMetadata({ data: "json, name=MaxItems" })
   maxItems?: number;
 
-  @Metadata({ data: "json, name=Start" })
+  @SpeakeasyMetadata({ data: "json, name=Start" })
   start?: Date;
 }

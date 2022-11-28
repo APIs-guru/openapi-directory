@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // CidrBlock
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * CidrBlock contains an optional name and one CIDR block.
 **/
 export class CidrBlock extends SpeakeasyBase {
-  @Metadata({ data: "json, name=cidrBlock" })
+  @SpeakeasyMetadata({ data: "json, name=cidrBlock" })
   cidrBlock?: string;
 
-  @Metadata({ data: "json, name=displayName" })
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
   displayName?: string;
 }

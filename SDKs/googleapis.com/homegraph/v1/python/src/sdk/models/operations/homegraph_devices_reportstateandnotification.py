@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
@@ -20,20 +21,20 @@ class HomegraphDevicesReportStateAndNotificationQueryParams:
 
 @dataclass
 class HomegraphDevicesReportStateAndNotificationSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class HomegraphDevicesReportStateAndNotificationRequest:
-    query_params: HomegraphDevicesReportStateAndNotificationQueryParams = field(default=None)
+    query_params: HomegraphDevicesReportStateAndNotificationQueryParams = field()
+    security: HomegraphDevicesReportStateAndNotificationSecurity = field()
     request: Optional[shared.ReportStateAndNotificationRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: HomegraphDevicesReportStateAndNotificationSecurity = field(default=None)
     
 
 @dataclass
 class HomegraphDevicesReportStateAndNotificationResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     report_state_and_notification_response: Optional[shared.ReportStateAndNotificationResponse] = field(default=None)
-    status_code: int = field(default=None)
     

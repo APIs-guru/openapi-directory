@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetDeleteDbSubnetGroupActionEnum(str, Enum):
     DELETE_DB_SUBNET_GROUP = "DeleteDBSubnetGroup"
@@ -10,9 +14,9 @@ class GetDeleteDbSubnetGroupVersionEnum(str, Enum):
 
 @dataclass
 class GetDeleteDbSubnetGroupQueryParams:
-    action: GetDeleteDbSubnetGroupActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    db_subnet_group_name: str = field(default=None, metadata={'query_param': { 'field_name': 'DBSubnetGroupName', 'style': 'form', 'explode': True }})
-    version: GetDeleteDbSubnetGroupVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: GetDeleteDbSubnetGroupActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    db_subnet_group_name: str = field(metadata={'query_param': { 'field_name': 'DBSubnetGroupName', 'style': 'form', 'explode': True }})
+    version: GetDeleteDbSubnetGroupVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -28,13 +32,13 @@ class GetDeleteDbSubnetGroupHeaders:
 
 @dataclass
 class GetDeleteDbSubnetGroupRequest:
-    query_params: GetDeleteDbSubnetGroupQueryParams = field(default=None)
-    headers: GetDeleteDbSubnetGroupHeaders = field(default=None)
+    headers: GetDeleteDbSubnetGroupHeaders = field()
+    query_params: GetDeleteDbSubnetGroupQueryParams = field()
     
 
 @dataclass
 class GetDeleteDbSubnetGroupResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

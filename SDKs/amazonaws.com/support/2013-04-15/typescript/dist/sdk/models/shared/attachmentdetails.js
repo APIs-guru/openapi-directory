@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // AttachmentDetails
 /**
  * The file name and ID of an attachment to a case communication. You can use the ID to retrieve the attachment with the <a>DescribeAttachment</a> operation.
@@ -33,11 +33,11 @@ var AttachmentDetails = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=attachmentId" }),
+        SpeakeasyMetadata({ data: "json, name=attachmentId" }),
         __metadata("design:type", String)
     ], AttachmentDetails.prototype, "attachmentId", void 0);
     __decorate([
-        Metadata({ data: "json, name=fileName" }),
+        SpeakeasyMetadata({ data: "json, name=fileName" }),
         __metadata("design:type", String)
     ], AttachmentDetails.prototype, "fileName", void 0);
     return AttachmentDetails;

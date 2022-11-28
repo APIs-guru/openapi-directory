@@ -4,20 +4,20 @@ from typing import Any,Optional
 
 @dataclass
 class GetMediaInfoImagePathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
-    theme: str = field(default=None, metadata={'path_param': { 'field_name': 'theme', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    theme: str = field(metadata={'path_param': { 'field_name': 'theme', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetMediaInfoImageRequest:
-    path_params: GetMediaInfoImagePathParams = field(default=None)
+    path_params: GetMediaInfoImagePathParams = field()
     
 
 @dataclass
 class GetMediaInfoImageResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     get_media_info_image_200_image_wildcard_binary_string: Optional[bytes] = field(default=None)
     problem_details: Optional[dict[str, Any]] = field(default=None)
-    status_code: int = field(default=None)
     

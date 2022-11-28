@@ -1,5 +1,7 @@
 package shared
 
+// DestinationDataset
+// Defines the destination bigquery dataset.
 type DestinationDataset struct {
 	DatasetReference *DestinationDatasetReference `json:"datasetReference,omitempty"`
 	Description      *string                      `json:"description,omitempty"`

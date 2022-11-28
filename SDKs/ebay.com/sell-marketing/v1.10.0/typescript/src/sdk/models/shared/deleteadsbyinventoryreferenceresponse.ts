@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Error } from "./error";
+
 
 
 // DeleteAdsByInventoryReferenceResponse
@@ -8,18 +8,18 @@ import { Error } from "./error";
  * This type defines the fields returned by request to delete a set of ads by inventory reference ID.
 **/
 export class DeleteAdsByInventoryReferenceResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=adIds" })
+  @SpeakeasyMetadata({ data: "json, name=adIds" })
   adIds?: string[];
 
-  @Metadata({ data: "json, name=errors", elemType: shared.Error })
+  @SpeakeasyMetadata({ data: "json, name=errors", elemType: Error })
   errors?: Error[];
 
-  @Metadata({ data: "json, name=inventoryReferenceId" })
+  @SpeakeasyMetadata({ data: "json, name=inventoryReferenceId" })
   inventoryReferenceId?: string;
 
-  @Metadata({ data: "json, name=inventoryReferenceType" })
+  @SpeakeasyMetadata({ data: "json, name=inventoryReferenceType" })
   inventoryReferenceType?: string;
 
-  @Metadata({ data: "json, name=statusCode" })
+  @SpeakeasyMetadata({ data: "json, name=statusCode" })
   statusCode?: number;
 }

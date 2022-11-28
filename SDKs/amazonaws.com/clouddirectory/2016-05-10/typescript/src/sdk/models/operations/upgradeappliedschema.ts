@@ -1,83 +1,84 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class UpgradeAppliedSchemaHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
 
 export class UpgradeAppliedSchemaRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DirectoryArn" })
+  @SpeakeasyMetadata({ data: "json, name=DirectoryArn" })
   directoryArn: string;
 
-  @Metadata({ data: "json, name=DryRun" })
+  @SpeakeasyMetadata({ data: "json, name=DryRun" })
   dryRun?: boolean;
 
-  @Metadata({ data: "json, name=PublishedSchemaArn" })
+  @SpeakeasyMetadata({ data: "json, name=PublishedSchemaArn" })
   publishedSchemaArn: string;
 }
 
 
 export class UpgradeAppliedSchemaRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: UpgradeAppliedSchemaHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: UpgradeAppliedSchemaRequestBody;
 }
 
 
 export class UpgradeAppliedSchemaResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   accessDeniedException?: shared.AccessDeniedException;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   incompatibleSchemaException?: shared.IncompatibleSchemaException;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   internalServiceException?: shared.InternalServiceException;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidArnException?: shared.InvalidArnException;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidAttachmentException?: shared.InvalidAttachmentException;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   resourceNotFoundException?: shared.ResourceNotFoundException;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   retryableConflictException?: shared.RetryableConflictException;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   upgradeAppliedSchemaResponse?: shared.UpgradeAppliedSchemaResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   validationException?: shared.ValidationException;
 }

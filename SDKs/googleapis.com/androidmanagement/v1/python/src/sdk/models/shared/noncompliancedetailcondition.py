@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class NonComplianceDetailConditionNonComplianceReasonEnum(str, Enum):
     NON_COMPLIANCE_REASON_UNSPECIFIED = "NON_COMPLIANCE_REASON_UNSPECIFIED"
@@ -19,7 +21,11 @@ class NonComplianceDetailConditionNonComplianceReasonEnum(str, Enum):
 @dataclass_json
 @dataclass
 class NonComplianceDetailCondition:
-    non_compliance_reason: Optional[NonComplianceDetailConditionNonComplianceReasonEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'nonComplianceReason' }})
-    package_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'packageName' }})
-    setting_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'settingName' }})
+    r"""NonComplianceDetailCondition
+    A compliance rule condition which is satisfied if there exists any matching NonComplianceDetail for the device. A NonComplianceDetail matches a NonComplianceDetailCondition if all the fields which are set within the NonComplianceDetailCondition match the corresponding NonComplianceDetail fields.
+    """
+    
+    non_compliance_reason: Optional[NonComplianceDetailConditionNonComplianceReasonEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('nonComplianceReason') }})
+    package_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('packageName') }})
+    setting_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('settingName') }})
     

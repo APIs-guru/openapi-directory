@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // VideoNonPublicMetrics
 /**
  * Nonpublic engagement metrics for the Media at the time of the request.
@@ -33,23 +33,23 @@ var VideoNonPublicMetrics = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=playback_0_count" }),
+        SpeakeasyMetadata({ data: "json, name=playback_0_count" }),
         __metadata("design:type", Number)
     ], VideoNonPublicMetrics.prototype, "playback0Count", void 0);
     __decorate([
-        Metadata({ data: "json, name=playback_100_count" }),
+        SpeakeasyMetadata({ data: "json, name=playback_100_count" }),
         __metadata("design:type", Number)
     ], VideoNonPublicMetrics.prototype, "playback100Count", void 0);
     __decorate([
-        Metadata({ data: "json, name=playback_25_count" }),
+        SpeakeasyMetadata({ data: "json, name=playback_25_count" }),
         __metadata("design:type", Number)
     ], VideoNonPublicMetrics.prototype, "playback25Count", void 0);
     __decorate([
-        Metadata({ data: "json, name=playback_50_count" }),
+        SpeakeasyMetadata({ data: "json, name=playback_50_count" }),
         __metadata("design:type", Number)
     ], VideoNonPublicMetrics.prototype, "playback50Count", void 0);
     __decorate([
-        Metadata({ data: "json, name=playback_75_count" }),
+        SpeakeasyMetadata({ data: "json, name=playback_75_count" }),
         __metadata("design:type", Number)
     ], VideoNonPublicMetrics.prototype, "playback75Count", void 0);
     return VideoNonPublicMetrics;
@@ -65,27 +65,27 @@ var VideoOrganicMetrics = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=playback_0_count" }),
+        SpeakeasyMetadata({ data: "json, name=playback_0_count" }),
         __metadata("design:type", Number)
     ], VideoOrganicMetrics.prototype, "playback0Count", void 0);
     __decorate([
-        Metadata({ data: "json, name=playback_100_count" }),
+        SpeakeasyMetadata({ data: "json, name=playback_100_count" }),
         __metadata("design:type", Number)
     ], VideoOrganicMetrics.prototype, "playback100Count", void 0);
     __decorate([
-        Metadata({ data: "json, name=playback_25_count" }),
+        SpeakeasyMetadata({ data: "json, name=playback_25_count" }),
         __metadata("design:type", Number)
     ], VideoOrganicMetrics.prototype, "playback25Count", void 0);
     __decorate([
-        Metadata({ data: "json, name=playback_50_count" }),
+        SpeakeasyMetadata({ data: "json, name=playback_50_count" }),
         __metadata("design:type", Number)
     ], VideoOrganicMetrics.prototype, "playback50Count", void 0);
     __decorate([
-        Metadata({ data: "json, name=playback_75_count" }),
+        SpeakeasyMetadata({ data: "json, name=playback_75_count" }),
         __metadata("design:type", Number)
     ], VideoOrganicMetrics.prototype, "playback75Count", void 0);
     __decorate([
-        Metadata({ data: "json, name=view_count" }),
+        SpeakeasyMetadata({ data: "json, name=view_count" }),
         __metadata("design:type", Number)
     ], VideoOrganicMetrics.prototype, "viewCount", void 0);
     return VideoOrganicMetrics;
@@ -101,27 +101,27 @@ var VideoPromotedMetrics = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=playback_0_count" }),
+        SpeakeasyMetadata({ data: "json, name=playback_0_count" }),
         __metadata("design:type", Number)
     ], VideoPromotedMetrics.prototype, "playback0Count", void 0);
     __decorate([
-        Metadata({ data: "json, name=playback_100_count" }),
+        SpeakeasyMetadata({ data: "json, name=playback_100_count" }),
         __metadata("design:type", Number)
     ], VideoPromotedMetrics.prototype, "playback100Count", void 0);
     __decorate([
-        Metadata({ data: "json, name=playback_25_count" }),
+        SpeakeasyMetadata({ data: "json, name=playback_25_count" }),
         __metadata("design:type", Number)
     ], VideoPromotedMetrics.prototype, "playback25Count", void 0);
     __decorate([
-        Metadata({ data: "json, name=playback_50_count" }),
+        SpeakeasyMetadata({ data: "json, name=playback_50_count" }),
         __metadata("design:type", Number)
     ], VideoPromotedMetrics.prototype, "playback50Count", void 0);
     __decorate([
-        Metadata({ data: "json, name=playback_75_count" }),
+        SpeakeasyMetadata({ data: "json, name=playback_75_count" }),
         __metadata("design:type", Number)
     ], VideoPromotedMetrics.prototype, "playback75Count", void 0);
     __decorate([
-        Metadata({ data: "json, name=view_count" }),
+        SpeakeasyMetadata({ data: "json, name=view_count" }),
         __metadata("design:type", Number)
     ], VideoPromotedMetrics.prototype, "viewCount", void 0);
     return VideoPromotedMetrics;
@@ -137,7 +137,7 @@ var VideoPublicMetrics = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=view_count" }),
+        SpeakeasyMetadata({ data: "json, name=view_count" }),
         __metadata("design:type", Number)
     ], VideoPublicMetrics.prototype, "viewCount", void 0);
     return VideoPublicMetrics;
@@ -153,43 +153,43 @@ var Video = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=duration_ms" }),
+        SpeakeasyMetadata({ data: "json, name=duration_ms" }),
         __metadata("design:type", Number)
     ], Video.prototype, "durationMs", void 0);
     __decorate([
-        Metadata({ data: "json, name=height" }),
+        SpeakeasyMetadata({ data: "json, name=height" }),
         __metadata("design:type", Number)
     ], Video.prototype, "height", void 0);
     __decorate([
-        Metadata({ data: "json, name=media_key" }),
+        SpeakeasyMetadata({ data: "json, name=media_key" }),
         __metadata("design:type", String)
     ], Video.prototype, "mediaKey", void 0);
     __decorate([
-        Metadata({ data: "json, name=non_public_metrics" }),
+        SpeakeasyMetadata({ data: "json, name=non_public_metrics" }),
         __metadata("design:type", VideoNonPublicMetrics)
     ], Video.prototype, "nonPublicMetrics", void 0);
     __decorate([
-        Metadata({ data: "json, name=organic_metrics" }),
+        SpeakeasyMetadata({ data: "json, name=organic_metrics" }),
         __metadata("design:type", VideoOrganicMetrics)
     ], Video.prototype, "organicMetrics", void 0);
     __decorate([
-        Metadata({ data: "json, name=preview_image_url" }),
+        SpeakeasyMetadata({ data: "json, name=preview_image_url" }),
         __metadata("design:type", String)
     ], Video.prototype, "previewImageUrl", void 0);
     __decorate([
-        Metadata({ data: "json, name=promoted_metrics" }),
+        SpeakeasyMetadata({ data: "json, name=promoted_metrics" }),
         __metadata("design:type", VideoPromotedMetrics)
     ], Video.prototype, "promotedMetrics", void 0);
     __decorate([
-        Metadata({ data: "json, name=public_metrics" }),
+        SpeakeasyMetadata({ data: "json, name=public_metrics" }),
         __metadata("design:type", VideoPublicMetrics)
     ], Video.prototype, "publicMetrics", void 0);
     __decorate([
-        Metadata({ data: "json, name=type" }),
+        SpeakeasyMetadata({ data: "json, name=type" }),
         __metadata("design:type", String)
     ], Video.prototype, "type", void 0);
     __decorate([
-        Metadata({ data: "json, name=width" }),
+        SpeakeasyMetadata({ data: "json, name=width" }),
         __metadata("design:type", Number)
     ], Video.prototype, "width", void 0);
     return Video;

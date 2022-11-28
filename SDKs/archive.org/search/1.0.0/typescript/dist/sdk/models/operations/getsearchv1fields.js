@@ -22,14 +22,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var GetSearchV1FieldsQueryParams = /** @class */ (function (_super) {
     __extends(GetSearchV1FieldsQueryParams, _super);
     function GetSearchV1FieldsQueryParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=callback" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=callback" }),
         __metadata("design:type", String)
     ], GetSearchV1FieldsQueryParams.prototype, "callback", void 0);
     return GetSearchV1FieldsQueryParams;
@@ -41,7 +41,7 @@ var GetSearchV1FieldsRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetSearchV1FieldsQueryParams)
     ], GetSearchV1FieldsRequest.prototype, "queryParams", void 0);
     return GetSearchV1FieldsRequest;
@@ -53,19 +53,19 @@ var GetSearchV1FieldsResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], GetSearchV1FieldsResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetSearchV1FieldsResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Array)
     ], GetSearchV1FieldsResponse.prototype, "fields", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetSearchV1FieldsResponse.prototype, "statusCode", void 0);
     return GetSearchV1FieldsResponse;

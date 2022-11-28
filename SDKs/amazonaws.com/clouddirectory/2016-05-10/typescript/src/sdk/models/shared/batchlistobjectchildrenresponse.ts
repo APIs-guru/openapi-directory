@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // BatchListObjectChildrenResponse
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Represents the output of a <a>ListObjectChildren</a> response operation.
 **/
 export class BatchListObjectChildrenResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Children" })
+  @SpeakeasyMetadata({ data: "json, name=Children" })
   children?: Map<string, string>;
 
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 }

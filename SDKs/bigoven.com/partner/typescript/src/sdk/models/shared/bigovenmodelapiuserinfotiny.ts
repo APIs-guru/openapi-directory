@@ -1,19 +1,20 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class BigOvenModelApiUserInfoTiny extends SpeakeasyBase {
-  @Metadata({ data: "json, name=FirstName" })
+  @SpeakeasyMetadata({ data: "json, name=FirstName" })
   firstName?: string;
 
-  @Metadata({ data: "json, name=LastName" })
+  @SpeakeasyMetadata({ data: "json, name=LastName" })
   lastName?: string;
 
-  @Metadata({ data: "json, name=PhotoUrl" })
+  @SpeakeasyMetadata({ data: "json, name=PhotoUrl" })
   photoUrl?: string;
 
-  @Metadata({ data: "json, name=UserID" })
+  @SpeakeasyMetadata({ data: "json, name=UserID" })
   userId?: number;
 
-  @Metadata({ data: "json, name=UserName" })
+  @SpeakeasyMetadata({ data: "json, name=UserName" })
   userName?: string;
 }

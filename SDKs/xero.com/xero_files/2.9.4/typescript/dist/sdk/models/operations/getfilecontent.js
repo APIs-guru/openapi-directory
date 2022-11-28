@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetFileContentPathParams = /** @class */ (function (_super) {
     __extends(GetFileContentPathParams, _super);
@@ -30,7 +30,7 @@ var GetFileContentPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=FileId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=FileId" }),
         __metadata("design:type", String)
     ], GetFileContentPathParams.prototype, "fileId", void 0);
     return GetFileContentPathParams;
@@ -42,7 +42,7 @@ var GetFileContentHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=xero-tenant-id" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=xero-tenant-id" }),
         __metadata("design:type", String)
     ], GetFileContentHeaders.prototype, "xeroTenantId", void 0);
     return GetFileContentHeaders;
@@ -54,7 +54,7 @@ var GetFileContentSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOAuth2)
     ], GetFileContentSecurity.prototype, "oAuth2", void 0);
     return GetFileContentSecurity;
@@ -66,15 +66,15 @@ var GetFileContentRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetFileContentPathParams)
     ], GetFileContentRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetFileContentHeaders)
     ], GetFileContentRequest.prototype, "headers", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetFileContentSecurity)
     ], GetFileContentRequest.prototype, "security", void 0);
     return GetFileContentRequest;
@@ -86,15 +86,15 @@ var GetFileContentResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetFileContentResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetFileContentResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], GetFileContentResponse.prototype, "getFileContent200ApplicationOctetStreamBinaryString", void 0);
     return GetFileContentResponse;

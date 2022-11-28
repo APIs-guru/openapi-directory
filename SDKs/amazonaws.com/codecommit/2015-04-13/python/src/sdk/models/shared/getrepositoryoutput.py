@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import repositorymetadata
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class GetRepositoryOutput:
-    repository_metadata: Optional[repositorymetadata.RepositoryMetadata] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'repositoryMetadata' }})
+    r"""GetRepositoryOutput
+    Represents the output of a get repository operation.
+    """
+    
+    repository_metadata: Optional[RepositoryMetadata] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('repositoryMetadata') }})
     

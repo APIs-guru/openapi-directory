@@ -1,13 +1,13 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleAppsCardV1SuggestionItem } from "./googleappscardv1suggestionitem";
+
 
 
 // GoogleAppsCardV1Suggestions
 /** 
- * A container wrapping elements necessary for showing suggestion items used in text input autocomplete.
+ * Suggested values that users can enter. These values appear when users click inside the text input field. As users type, the suggested values dynamically filter to match what the users have typed. For example, a text input field for programming language might suggest Java, JavaScript, Python, and C++. When users start typing "Jav", the list of suggestions filters to show just Java and JavaScript. Suggested values help guide users to enter values that your app can make sense of. When referring to JavaScript, some users might enter "javascript" and others "java script". Suggesting "JavaScript" can standardize how users interact with your app. When specified, `TextInput.type` is always `SINGLE_LINE`, even if it is set to `MULTIPLE_LINE`.
 **/
 export class GoogleAppsCardV1Suggestions extends SpeakeasyBase {
-  @Metadata({ data: "json, name=items", elemType: shared.GoogleAppsCardV1SuggestionItem })
+  @SpeakeasyMetadata({ data: "json, name=items", elemType: GoogleAppsCardV1SuggestionItem })
   items?: GoogleAppsCardV1SuggestionItem[];
 }

@@ -1,6 +1,10 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -18,22 +22,23 @@ class SearchIndexHeaders:
 @dataclass_json
 @dataclass
 class SearchIndexRequestBody:
-    index_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'indexName' }})
-    max_results: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'maxResults' }})
-    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'nextToken' }})
-    query_string: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'queryString' }})
-    query_version: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'queryVersion' }})
+    query_string: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('queryString') }})
+    index_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('indexName') }})
+    max_results: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('maxResults') }})
+    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('nextToken') }})
+    query_version: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('queryVersion') }})
     
 
 @dataclass
 class SearchIndexRequest:
-    headers: SearchIndexHeaders = field(default=None)
-    request: SearchIndexRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: SearchIndexHeaders = field()
+    request: SearchIndexRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class SearchIndexResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     index_not_ready_exception: Optional[Any] = field(default=None)
     internal_failure_exception: Optional[Any] = field(default=None)
     invalid_query_exception: Optional[Any] = field(default=None)
@@ -41,7 +46,6 @@ class SearchIndexResponse:
     resource_not_found_exception: Optional[Any] = field(default=None)
     search_index_response: Optional[shared.SearchIndexResponse] = field(default=None)
     service_unavailable_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     unauthorized_exception: Optional[Any] = field(default=None)
     

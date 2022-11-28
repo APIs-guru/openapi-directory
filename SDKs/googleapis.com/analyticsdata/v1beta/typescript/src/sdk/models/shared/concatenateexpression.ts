@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ConcatenateExpression
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Used to combine dimension values to a single dimension.
 **/
 export class ConcatenateExpression extends SpeakeasyBase {
-  @Metadata({ data: "json, name=delimiter" })
+  @SpeakeasyMetadata({ data: "json, name=delimiter" })
   delimiter?: string;
 
-  @Metadata({ data: "json, name=dimensionNames" })
+  @SpeakeasyMetadata({ data: "json, name=dimensionNames" })
   dimensionNames?: string[];
 }

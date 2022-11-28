@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetModifyTargetGroupActionEnum(str, Enum):
     MODIFY_TARGET_GROUP = "ModifyTargetGroup"
@@ -16,6 +20,10 @@ class GetModifyTargetGroupHealthCheckProtocolEnum(str, Enum):
 
 @dataclass
 class GetModifyTargetGroupMatcher:
+    r"""GetModifyTargetGroupMatcher
+    The codes to use when checking for a successful response from a target. If the protocol version is gRPC, these are gRPC codes. Otherwise, these are HTTP codes.
+    """
+    
     grpc_code: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'GrpcCode' }})
     http_code: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'HttpCode' }})
     
@@ -25,7 +33,9 @@ class GetModifyTargetGroupVersionEnum(str, Enum):
 
 @dataclass
 class GetModifyTargetGroupQueryParams:
-    action: GetModifyTargetGroupActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetModifyTargetGroupActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    target_group_arn: str = field(metadata={'query_param': { 'field_name': 'TargetGroupArn', 'style': 'form', 'explode': True }})
+    version: GetModifyTargetGroupVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     health_check_enabled: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'HealthCheckEnabled', 'style': 'form', 'explode': True }})
     health_check_interval_seconds: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'HealthCheckIntervalSeconds', 'style': 'form', 'explode': True }})
     health_check_path: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'HealthCheckPath', 'style': 'form', 'explode': True }})
@@ -34,9 +44,7 @@ class GetModifyTargetGroupQueryParams:
     health_check_timeout_seconds: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'HealthCheckTimeoutSeconds', 'style': 'form', 'explode': True }})
     healthy_threshold_count: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'HealthyThresholdCount', 'style': 'form', 'explode': True }})
     matcher: Optional[GetModifyTargetGroupMatcher] = field(default=None, metadata={'query_param': { 'field_name': 'Matcher', 'style': 'form', 'explode': True }})
-    target_group_arn: str = field(default=None, metadata={'query_param': { 'field_name': 'TargetGroupArn', 'style': 'form', 'explode': True }})
     unhealthy_threshold_count: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'UnhealthyThresholdCount', 'style': 'form', 'explode': True }})
-    version: GetModifyTargetGroupVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -52,13 +60,13 @@ class GetModifyTargetGroupHeaders:
 
 @dataclass
 class GetModifyTargetGroupRequest:
-    query_params: GetModifyTargetGroupQueryParams = field(default=None)
-    headers: GetModifyTargetGroupHeaders = field(default=None)
+    headers: GetModifyTargetGroupHeaders = field()
+    query_params: GetModifyTargetGroupQueryParams = field()
     
 
 @dataclass
 class GetModifyTargetGroupResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

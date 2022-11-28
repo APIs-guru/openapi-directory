@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { TaggableResourceTypeEnum } from "./taggableresourcetypeenum";
 import { Tag } from "./tag";
 export declare class AddTagsInput extends SpeakeasyBase {

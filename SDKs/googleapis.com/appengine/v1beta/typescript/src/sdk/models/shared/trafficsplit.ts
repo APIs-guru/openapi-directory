@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum TrafficSplitShardByEnum {
-    Unspecified = "UNSPECIFIED"
-,    Cookie = "COOKIE"
-,    Ip = "IP"
-,    Random = "RANDOM"
+    Unspecified = "UNSPECIFIED",
+    Cookie = "COOKIE",
+    Ip = "IP",
+    Random = "RANDOM"
 }
 
 
@@ -13,9 +14,9 @@ export enum TrafficSplitShardByEnum {
  * Traffic routing configuration for versions within a single service. Traffic splits define how traffic directed to the service is assigned to versions.
 **/
 export class TrafficSplit extends SpeakeasyBase {
-  @Metadata({ data: "json, name=allocations" })
+  @SpeakeasyMetadata({ data: "json, name=allocations" })
   allocations?: Map<string, number>;
 
-  @Metadata({ data: "json, name=shardBy" })
+  @SpeakeasyMetadata({ data: "json, name=shardBy" })
   shardBy?: TrafficSplitShardByEnum;
 }

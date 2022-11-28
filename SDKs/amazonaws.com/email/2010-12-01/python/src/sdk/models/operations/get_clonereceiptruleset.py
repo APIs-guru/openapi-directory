@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetCloneReceiptRuleSetActionEnum(str, Enum):
     CLONE_RECEIPT_RULE_SET = "CloneReceiptRuleSet"
@@ -10,10 +14,10 @@ class GetCloneReceiptRuleSetVersionEnum(str, Enum):
 
 @dataclass
 class GetCloneReceiptRuleSetQueryParams:
-    action: GetCloneReceiptRuleSetActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    original_rule_set_name: str = field(default=None, metadata={'query_param': { 'field_name': 'OriginalRuleSetName', 'style': 'form', 'explode': True }})
-    rule_set_name: str = field(default=None, metadata={'query_param': { 'field_name': 'RuleSetName', 'style': 'form', 'explode': True }})
-    version: GetCloneReceiptRuleSetVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: GetCloneReceiptRuleSetActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    original_rule_set_name: str = field(metadata={'query_param': { 'field_name': 'OriginalRuleSetName', 'style': 'form', 'explode': True }})
+    rule_set_name: str = field(metadata={'query_param': { 'field_name': 'RuleSetName', 'style': 'form', 'explode': True }})
+    version: GetCloneReceiptRuleSetVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -29,13 +33,13 @@ class GetCloneReceiptRuleSetHeaders:
 
 @dataclass
 class GetCloneReceiptRuleSetRequest:
-    query_params: GetCloneReceiptRuleSetQueryParams = field(default=None)
-    headers: GetCloneReceiptRuleSetHeaders = field(default=None)
+    headers: GetCloneReceiptRuleSetHeaders = field()
+    query_params: GetCloneReceiptRuleSetQueryParams = field()
     
 
 @dataclass
 class GetCloneReceiptRuleSetResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

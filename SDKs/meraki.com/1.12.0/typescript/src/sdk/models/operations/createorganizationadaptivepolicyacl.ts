@@ -1,76 +1,77 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class CreateOrganizationAdaptivePolicyAclPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=organizationId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=organizationId" })
   organizationId: string;
 }
 
 export enum CreateOrganizationAdaptivePolicyAclRequestBodyIpVersionEnum {
-    Any = "any"
-,    Ipv4 = "ipv4"
-,    Ipv6 = "ipv6"
+    Any = "any",
+    Ipv4 = "ipv4",
+    Ipv6 = "ipv6"
 }
 
 export enum CreateOrganizationAdaptivePolicyAclRequestBodyRulesPolicyEnum {
-    Allow = "allow"
-,    Deny = "deny"
+    Allow = "allow",
+    Deny = "deny"
 }
 
 export enum CreateOrganizationAdaptivePolicyAclRequestBodyRulesProtocolEnum {
-    Tcp = "tcp"
-,    Udp = "udp"
-,    Icmp = "icmp"
-,    Any = "any"
+    Tcp = "tcp",
+    Udp = "udp",
+    Icmp = "icmp",
+    Any = "any"
 }
 
 
 export class CreateOrganizationAdaptivePolicyAclRequestBodyRules extends SpeakeasyBase {
-  @Metadata({ data: "json, name=dstPort" })
+  @SpeakeasyMetadata({ data: "json, name=dstPort" })
   dstPort?: string;
 
-  @Metadata({ data: "json, name=policy" })
+  @SpeakeasyMetadata({ data: "json, name=policy" })
   policy: CreateOrganizationAdaptivePolicyAclRequestBodyRulesPolicyEnum;
 
-  @Metadata({ data: "json, name=protocol" })
+  @SpeakeasyMetadata({ data: "json, name=protocol" })
   protocol: CreateOrganizationAdaptivePolicyAclRequestBodyRulesProtocolEnum;
 
-  @Metadata({ data: "json, name=srcPort" })
+  @SpeakeasyMetadata({ data: "json, name=srcPort" })
   srcPort?: string;
 }
 
 
 export class CreateOrganizationAdaptivePolicyAclRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=ipVersion" })
+  @SpeakeasyMetadata({ data: "json, name=ipVersion" })
   ipVersion: CreateOrganizationAdaptivePolicyAclRequestBodyIpVersionEnum;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 
-  @Metadata({ data: "json, name=rules", elemType: operations.CreateOrganizationAdaptivePolicyAclRequestBodyRules })
+  @SpeakeasyMetadata({ data: "json, name=rules", elemType: CreateOrganizationAdaptivePolicyAclRequestBodyRules })
   rules: CreateOrganizationAdaptivePolicyAclRequestBodyRules[];
 }
 
 
 export class CreateOrganizationAdaptivePolicyAclRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: CreateOrganizationAdaptivePolicyAclPathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: CreateOrganizationAdaptivePolicyAclRequestBody;
 }
 
 
 export class CreateOrganizationAdaptivePolicyAclResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   createOrganizationAdaptivePolicyAcl200ApplicationJsonObject?: Map<string, any>;
 }

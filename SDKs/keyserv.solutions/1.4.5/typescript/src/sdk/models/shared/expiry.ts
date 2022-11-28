@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class Expiry extends SpeakeasyBase {
-  @Metadata({ data: "json, name=expires" })
+  @SpeakeasyMetadata({ data: "json, name=expires" })
   expires?: Date;
 
-  @Metadata({ data: "json, name=time" })
+  @SpeakeasyMetadata({ data: "json, name=time" })
   time?: string;
 }

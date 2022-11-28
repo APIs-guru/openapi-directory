@@ -22,6 +22,8 @@ const (
 	GoogleCloudMlV1PredictionInputOutputDataFormatEnumCsv                   GoogleCloudMlV1PredictionInputOutputDataFormatEnum = "CSV"
 )
 
+// GoogleCloudMlV1PredictionInput
+// Represents input parameters for a prediction job.
 type GoogleCloudMlV1PredictionInput struct {
 	BatchSize        *string                                             `json:"batchSize,omitempty"`
 	DataFormat       *GoogleCloudMlV1PredictionInputDataFormatEnum       `json:"dataFormat,omitempty"`

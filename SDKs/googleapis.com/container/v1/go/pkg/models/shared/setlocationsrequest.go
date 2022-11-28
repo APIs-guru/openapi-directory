@@ -1,5 +1,7 @@
 package shared
 
+// SetLocationsRequest
+// SetLocationsRequest sets the locations of the cluster.
 type SetLocationsRequest struct {
 	ClusterID *string  `json:"clusterId,omitempty"`
 	Locations []string `json:"locations,omitempty"`

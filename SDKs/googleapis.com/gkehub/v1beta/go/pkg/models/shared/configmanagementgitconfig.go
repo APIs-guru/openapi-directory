@@ -1,5 +1,7 @@
 package shared
 
+// ConfigManagementGitConfig
+// Git repo configuration for a single cluster.
 type ConfigManagementGitConfig struct {
 	GcpServiceAccountEmail *string `json:"gcpServiceAccountEmail,omitempty"`
 	HTTPSProxy             *string `json:"httpsProxy,omitempty"`

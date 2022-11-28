@@ -48,15 +48,15 @@ type DcimCablesListQueryParams struct {
 	TypeN       *string `queryParam:"style=form,explode=true,name=type__n"`
 }
 
-type DcimCablesListRequest struct {
-	QueryParams DcimCablesListQueryParams
-}
-
 type DcimCablesList200ApplicationJSON struct {
 	Count    int64          `json:"count"`
 	Next     *string        `json:"next,omitempty"`
 	Previous *string        `json:"previous,omitempty"`
 	Results  []shared.Cable `json:"results"`
+}
+
+type DcimCablesListRequest struct {
+	QueryParams DcimCablesListQueryParams
 }
 
 type DcimCablesListResponse struct {

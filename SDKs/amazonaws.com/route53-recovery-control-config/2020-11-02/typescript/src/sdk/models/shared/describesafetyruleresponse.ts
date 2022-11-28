@@ -1,12 +1,13 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AssertionRule } from "./assertionrule";
 import { GatingRule } from "./gatingrule";
 
 
+
 export class DescribeSafetyRuleResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AssertionRule" })
+  @SpeakeasyMetadata({ data: "json, name=AssertionRule" })
   assertionRule?: AssertionRule;
 
-  @Metadata({ data: "json, name=GatingRule" })
+  @SpeakeasyMetadata({ data: "json, name=GatingRule" })
   gatingRule?: GatingRule;
 }

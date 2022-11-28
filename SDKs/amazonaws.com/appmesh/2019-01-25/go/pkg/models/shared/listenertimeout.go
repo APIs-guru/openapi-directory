@@ -1,5 +1,7 @@
 package shared
 
+// ListenerTimeout
+// An object that represents timeouts for different protocols.
 type ListenerTimeout struct {
 	Grpc  *GrpcTimeout `json:"grpc,omitempty"`
 	HTTP  *HTTPTimeout `json:"http,omitempty"`

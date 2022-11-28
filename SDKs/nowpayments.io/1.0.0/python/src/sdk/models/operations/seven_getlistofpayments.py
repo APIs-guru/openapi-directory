@@ -1,6 +1,10 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import List,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass
@@ -13,43 +17,43 @@ class SevenGetListOfPaymentsQueryParams:
     sort_by: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'sortBy', 'style': 'form', 'explode': True }})
     
 
-@dataclass
-class SevenGetListOfPaymentsRequest:
-    query_params: SevenGetListOfPaymentsQueryParams = field(default=None)
-    
-
 @dataclass_json
 @dataclass
 class SevenGetListOfPayments200ApplicationJSONData:
-    actually_paid: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'actually_paid' }})
-    order_description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'order_description' }})
-    order_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'order_id' }})
-    outcome_amount: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'outcome_amount' }})
-    outcome_currency: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'outcome_currency' }})
-    pay_address: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'pay_address' }})
-    pay_amount: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'pay_amount' }})
-    pay_currency: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'pay_currency' }})
-    payment_id: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'payment_id' }})
-    payment_status: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'payment_status' }})
-    price_amount: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'price_amount' }})
-    price_currency: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'price_currency' }})
-    purchase_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'purchase_id' }})
+    actually_paid: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('actually_paid') }})
+    order_description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('order_description') }})
+    order_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('order_id') }})
+    outcome_amount: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('outcome_amount') }})
+    outcome_currency: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('outcome_currency') }})
+    pay_address: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('pay_address') }})
+    pay_amount: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('pay_amount') }})
+    pay_currency: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('pay_currency') }})
+    payment_id: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('payment_id') }})
+    payment_status: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('payment_status') }})
+    price_amount: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('price_amount') }})
+    price_currency: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('price_currency') }})
+    purchase_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('purchase_id') }})
     
 
 @dataclass_json
 @dataclass
 class SevenGetListOfPayments200ApplicationJSON:
-    data: Optional[List[SevenGetListOfPayments200ApplicationJSONData]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'data' }})
-    limit: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'limit' }})
-    page: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'page' }})
-    pages_count: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'pagesCount' }})
-    total: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'total' }})
+    data: Optional[List[SevenGetListOfPayments200ApplicationJSONData]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('data') }})
+    limit: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('limit') }})
+    page: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('page') }})
+    pages_count: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('pagesCount') }})
+    total: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('total') }})
+    
+
+@dataclass
+class SevenGetListOfPaymentsRequest:
+    query_params: SevenGetListOfPaymentsQueryParams = field()
     
 
 @dataclass
 class SevenGetListOfPaymentsResponse:
+    content_type: str = field()
+    headers: dict[str, List[str]] = field()
+    status_code: int = field()
     seven_get_list_of_payments_200_application_json_object: Optional[SevenGetListOfPayments200ApplicationJSON] = field(default=None)
-    content_type: str = field(default=None)
-    headers: dict[str, List[str]] = field(default=None)
-    status_code: int = field(default=None)
     

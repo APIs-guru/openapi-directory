@@ -1,9 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RestMethod } from "./restmethod";
 import { JsonSchema } from "./jsonschema";
 import { RestResource } from "./restresource";
-import { JsonSchema } from "./jsonschema";
+
 
 
 // RestDescriptionAuthOauth2Scopes
@@ -11,7 +10,7 @@ import { JsonSchema } from "./jsonschema";
  * The scope value.
 **/
 export class RestDescriptionAuthOauth2Scopes extends SpeakeasyBase {
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 }
 
@@ -21,7 +20,7 @@ export class RestDescriptionAuthOauth2Scopes extends SpeakeasyBase {
  * OAuth 2.0 authentication information.
 **/
 export class RestDescriptionAuthOauth2 extends SpeakeasyBase {
-  @Metadata({ data: "json, name=scopes", elemType: shared.RestDescriptionAuthOauth2Scopes })
+  @SpeakeasyMetadata({ data: "json, name=scopes", elemType: RestDescriptionAuthOauth2Scopes })
   scopes?: Map<string, RestDescriptionAuthOauth2Scopes>;
 }
 
@@ -31,7 +30,7 @@ export class RestDescriptionAuthOauth2 extends SpeakeasyBase {
  * Authentication information.
 **/
 export class RestDescriptionAuth extends SpeakeasyBase {
-  @Metadata({ data: "json, name=oauth2" })
+  @SpeakeasyMetadata({ data: "json, name=oauth2" })
   oauth2?: RestDescriptionAuthOauth2;
 }
 
@@ -41,102 +40,102 @@ export class RestDescriptionAuth extends SpeakeasyBase {
  * Links to 16x16 and 32x32 icons representing the API.
 **/
 export class RestDescriptionIcons extends SpeakeasyBase {
-  @Metadata({ data: "json, name=x16" })
+  @SpeakeasyMetadata({ data: "json, name=x16" })
   x16?: string;
 
-  @Metadata({ data: "json, name=x32" })
+  @SpeakeasyMetadata({ data: "json, name=x32" })
   x32?: string;
 }
 
 
 export class RestDescription extends SpeakeasyBase {
-  @Metadata({ data: "json, name=auth" })
+  @SpeakeasyMetadata({ data: "json, name=auth" })
   auth?: RestDescriptionAuth;
 
-  @Metadata({ data: "json, name=basePath" })
+  @SpeakeasyMetadata({ data: "json, name=basePath" })
   basePath?: string;
 
-  @Metadata({ data: "json, name=baseUrl" })
+  @SpeakeasyMetadata({ data: "json, name=baseUrl" })
   baseUrl?: string;
 
-  @Metadata({ data: "json, name=batchPath" })
+  @SpeakeasyMetadata({ data: "json, name=batchPath" })
   batchPath?: string;
 
-  @Metadata({ data: "json, name=canonicalName" })
+  @SpeakeasyMetadata({ data: "json, name=canonicalName" })
   canonicalName?: string;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=discoveryVersion" })
+  @SpeakeasyMetadata({ data: "json, name=discoveryVersion" })
   discoveryVersion?: string;
 
-  @Metadata({ data: "json, name=documentationLink" })
+  @SpeakeasyMetadata({ data: "json, name=documentationLink" })
   documentationLink?: string;
 
-  @Metadata({ data: "json, name=etag" })
+  @SpeakeasyMetadata({ data: "json, name=etag" })
   etag?: string;
 
-  @Metadata({ data: "json, name=exponentialBackoffDefault" })
+  @SpeakeasyMetadata({ data: "json, name=exponentialBackoffDefault" })
   exponentialBackoffDefault?: boolean;
 
-  @Metadata({ data: "json, name=features" })
+  @SpeakeasyMetadata({ data: "json, name=features" })
   features?: string[];
 
-  @Metadata({ data: "json, name=icons" })
+  @SpeakeasyMetadata({ data: "json, name=icons" })
   icons?: RestDescriptionIcons;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=labels" })
+  @SpeakeasyMetadata({ data: "json, name=labels" })
   labels?: string[];
 
-  @Metadata({ data: "json, name=methods", elemType: shared.RestMethod })
+  @SpeakeasyMetadata({ data: "json, name=methods", elemType: RestMethod })
   methods?: Map<string, RestMethod>;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=ownerDomain" })
+  @SpeakeasyMetadata({ data: "json, name=ownerDomain" })
   ownerDomain?: string;
 
-  @Metadata({ data: "json, name=ownerName" })
+  @SpeakeasyMetadata({ data: "json, name=ownerName" })
   ownerName?: string;
 
-  @Metadata({ data: "json, name=packagePath" })
+  @SpeakeasyMetadata({ data: "json, name=packagePath" })
   packagePath?: string;
 
-  @Metadata({ data: "json, name=parameters", elemType: shared.JsonSchema })
+  @SpeakeasyMetadata({ data: "json, name=parameters", elemType: JsonSchema })
   parameters?: Map<string, JsonSchema>;
 
-  @Metadata({ data: "json, name=protocol" })
+  @SpeakeasyMetadata({ data: "json, name=protocol" })
   protocol?: string;
 
-  @Metadata({ data: "json, name=resources", elemType: shared.RestResource })
+  @SpeakeasyMetadata({ data: "json, name=resources", elemType: RestResource })
   resources?: Map<string, RestResource>;
 
-  @Metadata({ data: "json, name=revision" })
+  @SpeakeasyMetadata({ data: "json, name=revision" })
   revision?: string;
 
-  @Metadata({ data: "json, name=rootUrl" })
+  @SpeakeasyMetadata({ data: "json, name=rootUrl" })
   rootUrl?: string;
 
-  @Metadata({ data: "json, name=schemas", elemType: shared.JsonSchema })
+  @SpeakeasyMetadata({ data: "json, name=schemas", elemType: JsonSchema })
   schemas?: Map<string, JsonSchema>;
 
-  @Metadata({ data: "json, name=servicePath" })
+  @SpeakeasyMetadata({ data: "json, name=servicePath" })
   servicePath?: string;
 
-  @Metadata({ data: "json, name=title" })
+  @SpeakeasyMetadata({ data: "json, name=title" })
   title?: string;
 
-  @Metadata({ data: "json, name=version" })
+  @SpeakeasyMetadata({ data: "json, name=version" })
   version?: string;
 
-  @Metadata({ data: "json, name=version_module" })
+  @SpeakeasyMetadata({ data: "json, name=version_module" })
   versionModule?: boolean;
 }

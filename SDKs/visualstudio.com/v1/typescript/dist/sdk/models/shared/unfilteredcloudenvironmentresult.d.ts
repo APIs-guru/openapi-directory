@@ -1,0 +1,35 @@
+import { SpeakeasyBase } from "../../../internal/utils";
+import { ConnectionInfoBody } from "./connectioninfobody";
+import { ContainerInfoBody } from "./containerinfobody";
+import { GitStatus } from "./gitstatus";
+import { SeedInfoBody } from "./seedinfobody";
+import { SubscriptionData } from "./subscriptiondata";
+export declare class UnfilteredCloudEnvironmentResult extends SpeakeasyBase {
+    accessToken?: string;
+    active?: Date;
+    autoShutdownDelayMinutes?: number;
+    connection?: ConnectionInfoBody;
+    container?: ContainerInfoBody;
+    containerImage?: string;
+    created?: Date;
+    exportedBlobUrl?: string;
+    features?: Map<string, string>;
+    friendlyName?: string;
+    gitStatus?: GitStatus;
+    id?: string;
+    lastStateUpdateReason?: string;
+    lastUsed?: Date;
+    location?: string;
+    ownerId?: string;
+    planId?: string;
+    platform?: string;
+    portForwardingConnection?: ConnectionInfoBody;
+    recentFolders?: string[];
+    seed?: SeedInfoBody;
+    skuDisplayName?: string;
+    skuName?: string;
+    state?: string;
+    subscriptionData?: SubscriptionData;
+    type?: string;
+    updated?: Date;
+}

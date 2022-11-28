@@ -30,7 +30,7 @@ type DisplayvideoUsersBulkEditAssignedUserRolesSecurity struct {
 type DisplayvideoUsersBulkEditAssignedUserRolesRequest struct {
 	PathParams  DisplayvideoUsersBulkEditAssignedUserRolesPathParams
 	QueryParams DisplayvideoUsersBulkEditAssignedUserRolesQueryParams
-	Request     *shared.BulkEditAssignedUserRolesRequest `request:"mediaType=application/json"`
+	Request     *shared.BulkEditAssignedUserRolesRequestInput `request:"mediaType=application/json"`
 	Security    DisplayvideoUsersBulkEditAssignedUserRolesSecurity
 }
 

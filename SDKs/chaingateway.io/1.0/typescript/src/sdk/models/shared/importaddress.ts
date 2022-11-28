@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ImportAddress extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ethaddress" })
+  @SpeakeasyMetadata({ data: "json, name=ethaddress" })
   ethaddress: string;
 
-  @Metadata({ data: "json, name=filename" })
+  @SpeakeasyMetadata({ data: "json, name=filename" })
   filename: string;
 
-  @Metadata({ data: "json, name=ok" })
+  @SpeakeasyMetadata({ data: "json, name=ok" })
   ok: boolean;
 }

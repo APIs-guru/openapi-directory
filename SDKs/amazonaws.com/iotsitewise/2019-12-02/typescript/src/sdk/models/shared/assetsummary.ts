@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AssetHierarchy } from "./assethierarchy";
 import { AssetStatus } from "./assetstatus";
+
 
 
 // AssetSummary
@@ -9,27 +9,27 @@ import { AssetStatus } from "./assetstatus";
  * Contains a summary of an asset.
 **/
 export class AssetSummary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=arn" })
+  @SpeakeasyMetadata({ data: "json, name=arn" })
   arn: string;
 
-  @Metadata({ data: "json, name=assetModelId" })
+  @SpeakeasyMetadata({ data: "json, name=assetModelId" })
   assetModelId: string;
 
-  @Metadata({ data: "json, name=creationDate" })
+  @SpeakeasyMetadata({ data: "json, name=creationDate" })
   creationDate: Date;
 
-  @Metadata({ data: "json, name=hierarchies", elemType: shared.AssetHierarchy })
+  @SpeakeasyMetadata({ data: "json, name=hierarchies", elemType: AssetHierarchy })
   hierarchies: AssetHierarchy[];
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: string;
 
-  @Metadata({ data: "json, name=lastUpdateDate" })
+  @SpeakeasyMetadata({ data: "json, name=lastUpdateDate" })
   lastUpdateDate: Date;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status: AssetStatus;
 }

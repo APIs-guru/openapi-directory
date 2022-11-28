@@ -4,10 +4,6 @@ type GetABatchOfBusinessTransactionClassificationResultsPathParams struct {
 	ID string `pathParam:"style=simple,explode=false,name=id"`
 }
 
-type GetABatchOfBusinessTransactionClassificationResultsRequest struct {
-	PathParams GetABatchOfBusinessTransactionClassificationResultsPathParams
-}
-
 type GetABatchOfBusinessTransactionClassificationResults200ApplicationJSONResults struct {
 	Labels        []string `json:"labels,omitempty"`
 	Logo          *string  `json:"logo,omitempty"`
@@ -22,6 +18,10 @@ type GetABatchOfBusinessTransactionClassificationResults200ApplicationJSON struc
 	Results   []GetABatchOfBusinessTransactionClassificationResults200ApplicationJSONResults `json:"results,omitempty"`
 	Status    *string                                                                        `json:"status,omitempty"`
 	UpdatedAt *string                                                                        `json:"updated_at,omitempty"`
+}
+
+type GetABatchOfBusinessTransactionClassificationResultsRequest struct {
+	PathParams GetABatchOfBusinessTransactionClassificationResultsPathParams
 }
 
 type GetABatchOfBusinessTransactionClassificationResultsResponse struct {

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ComponentDependencyTypeEnum } from "./componentdependencytypeenum";
 /**
  * Contains information about a component dependency for a Lambda function component.

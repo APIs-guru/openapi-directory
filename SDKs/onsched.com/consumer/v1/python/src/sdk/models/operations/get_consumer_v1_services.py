@@ -19,12 +19,12 @@ class GetConsumerV1ServicesQueryParams:
 
 @dataclass
 class GetConsumerV1ServicesRequest:
-    query_params: GetConsumerV1ServicesQueryParams = field(default=None)
+    query_params: GetConsumerV1ServicesQueryParams = field()
     
 
 @dataclass
 class GetConsumerV1ServicesResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     service_list_view_model: Optional[dict[str, Any]] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,6 +1,7 @@
 
 
+
 export enum ProxyEnum {
-    Datacenter = "datacenter"
-,    Residential = "residential"
+    Datacenter = "datacenter",
+    Residential = "residential"
 }

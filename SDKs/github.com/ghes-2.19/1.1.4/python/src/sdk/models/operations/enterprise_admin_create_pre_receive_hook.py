@@ -1,18 +1,19 @@
 from dataclasses import dataclass, field
 from typing import Any,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
 @dataclass_json
 @dataclass
 class EnterpriseAdminCreatePreReceiveHookRequestBody:
-    allow_downstream_configuration: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'allow_downstream_configuration' }})
-    enforcement: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'enforcement' }})
-    environment: dict[str, Any] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'environment' }})
-    name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    script: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'script' }})
-    script_repository: dict[str, Any] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'script_repository' }})
+    environment: dict[str, Any] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('environment') }})
+    name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    script: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('script') }})
+    script_repository: dict[str, Any] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('script_repository') }})
+    allow_downstream_configuration: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('allow_downstream_configuration') }})
+    enforcement: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('enforcement') }})
     
 
 @dataclass
@@ -22,7 +23,7 @@ class EnterpriseAdminCreatePreReceiveHookRequest:
 
 @dataclass
 class EnterpriseAdminCreatePreReceiveHookResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     pre_receive_hook: Optional[shared.PreReceiveHook] = field(default=None)
     

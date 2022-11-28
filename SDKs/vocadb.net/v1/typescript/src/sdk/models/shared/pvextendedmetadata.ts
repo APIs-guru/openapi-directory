@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class PvExtendedMetadata extends SpeakeasyBase {
-  @Metadata({ data: "json, name=json" })
+  @SpeakeasyMetadata({ data: "json, name=json" })
   json?: string;
 }

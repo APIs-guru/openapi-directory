@@ -18,6 +18,8 @@ const (
 	GoogleCloudContactcenterinsightsV1EntityTypeEnumPrice           GoogleCloudContactcenterinsightsV1EntityTypeEnum = "PRICE"
 )
 
+// GoogleCloudContactcenterinsightsV1Entity
+// The data for an entity annotation. Represents a phrase in the conversation that is a known entity, such as a person, an organization, or location.
 type GoogleCloudContactcenterinsightsV1Entity struct {
 	DisplayName *string                                           `json:"displayName,omitempty"`
 	Metadata    map[string]string                                 `json:"metadata,omitempty"`

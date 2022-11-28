@@ -1,20 +1,21 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DataSourceEnum } from "./datasourceenum";
 
 
+
 export class StartContinuousExportResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=dataSource" })
+  @SpeakeasyMetadata({ data: "json, name=dataSource" })
   dataSource?: DataSourceEnum;
 
-  @Metadata({ data: "json, name=exportId" })
+  @SpeakeasyMetadata({ data: "json, name=exportId" })
   exportId?: string;
 
-  @Metadata({ data: "json, name=s3Bucket" })
+  @SpeakeasyMetadata({ data: "json, name=s3Bucket" })
   s3Bucket?: string;
 
-  @Metadata({ data: "json, name=schemaStorageConfig" })
+  @SpeakeasyMetadata({ data: "json, name=schemaStorageConfig" })
   schemaStorageConfig?: Map<string, string>;
 
-  @Metadata({ data: "json, name=startTime" })
+  @SpeakeasyMetadata({ data: "json, name=startTime" })
   startTime?: Date;
 }

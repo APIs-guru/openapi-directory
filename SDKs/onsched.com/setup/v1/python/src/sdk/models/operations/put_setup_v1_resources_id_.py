@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Optional
 from sdk.models import shared
 
 
 @dataclass
 class PutSetupV1ResourcesIDPathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -24,14 +27,14 @@ class PutSetupV1ResourcesIDRequests:
 
 @dataclass
 class PutSetupV1ResourcesIDRequest:
-    path_params: PutSetupV1ResourcesIDPathParams = field(default=None)
-    query_params: PutSetupV1ResourcesIDQueryParams = field(default=None)
+    path_params: PutSetupV1ResourcesIDPathParams = field()
+    query_params: PutSetupV1ResourcesIDQueryParams = field()
     request: Optional[PutSetupV1ResourcesIDRequests] = field(default=None)
     
 
 @dataclass
 class PutSetupV1ResourcesIDResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     resource_view_model: Optional[shared.ResourceViewModel] = field(default=None)
-    status_code: int = field(default=None)
     

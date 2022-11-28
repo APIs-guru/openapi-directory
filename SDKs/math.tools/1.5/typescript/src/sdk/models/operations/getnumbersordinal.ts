@@ -1,32 +1,33 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetNumbersOrdinalQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=number" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=number" })
   number?: number;
 }
 
 
 export class GetNumbersOrdinalSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
   xMathtoolsApiSecret: shared.SchemeXMathtoolsApiSecret;
 }
 
 
 export class GetNumbersOrdinalRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetNumbersOrdinalQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: GetNumbersOrdinalSecurity;
 }
 
 
 export class GetNumbersOrdinalResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

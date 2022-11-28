@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// AlgorithmSummary
+// Provides summary information about an algorithm.
 type AlgorithmSummary struct {
 	AlgorithmArn         string              `json:"AlgorithmArn"`
 	AlgorithmDescription *string             `json:"AlgorithmDescription,omitempty"`

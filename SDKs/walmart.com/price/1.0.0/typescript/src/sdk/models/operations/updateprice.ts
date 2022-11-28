@@ -1,26 +1,27 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class UpdatePriceHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=Authorization" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Authorization" })
   authorization: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=WM_CONSUMER.CHANNEL.TYPE" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=WM_CONSUMER.CHANNEL.TYPE" })
   wmConsumerChannelType?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=WM_QOS.CORRELATION_ID" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=WM_QOS.CORRELATION_ID" })
   wmQosCorrelationId: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=WM_SEC.ACCESS_TOKEN" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=WM_SEC.ACCESS_TOKEN" })
   wmSecAccessToken: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=WM_SVC.NAME" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=WM_SVC.NAME" })
   wmSvcName: string;
 }
 
 export enum UpdatePriceRequestBodyPricingComparisonPriceCurrencyEnum {
-    Usd = "USD"
-,    Cad = "CAD"
+    Usd = "USD",
+    Cad = "CAD"
 }
 
 
@@ -29,10 +30,10 @@ export enum UpdatePriceRequestBodyPricingComparisonPriceCurrencyEnum {
  * This is applicable only for promotions
 **/
 export class UpdatePriceRequestBodyPricingComparisonPrice extends SpeakeasyBase {
-  @Metadata({ data: "json, name=amount" })
+  @SpeakeasyMetadata({ data: "json, name=amount" })
   amount?: number;
 
-  @Metadata({ data: "json, name=currency" })
+  @SpeakeasyMetadata({ data: "json, name=currency" })
   currency?: UpdatePriceRequestBodyPricingComparisonPriceCurrencyEnum;
 }
 
@@ -41,199 +42,199 @@ export enum UpdatePriceRequestBodyPricingComparisonPriceTypeEnum {
 }
 
 export enum UpdatePriceRequestBodyPricingCurrentPriceCurrencyEnum {
-    Usd = "USD"
-,    Cad = "CAD"
+    Usd = "USD",
+    Cad = "CAD"
 }
 
 
 export class UpdatePriceRequestBodyPricingCurrentPrice extends SpeakeasyBase {
-  @Metadata({ data: "json, name=amount" })
+  @SpeakeasyMetadata({ data: "json, name=amount" })
   amount?: number;
 
-  @Metadata({ data: "json, name=currency" })
+  @SpeakeasyMetadata({ data: "json, name=currency" })
   currency?: UpdatePriceRequestBodyPricingCurrentPriceCurrencyEnum;
 }
 
 export enum UpdatePriceRequestBodyPricingCurrentPriceTypeEnum {
-    Base = "BASE"
-,    Reduced = "REDUCED"
-,    Clearance = "CLEARANCE"
+    Base = "BASE",
+    Reduced = "REDUCED",
+    Clearance = "CLEARANCE"
 }
 
 export enum UpdatePriceRequestBodyPricingPriceDisplayCodesEnum {
-    Cart = "CART"
-,    Checkout = "CHECKOUT"
+    Cart = "CART",
+    Checkout = "CHECKOUT"
 }
 
 export enum UpdatePriceRequestBodyPricingProcessModeEnum {
-    Upsert = "UPSERT"
-,    Delete = "DELETE"
+    Upsert = "UPSERT",
+    Delete = "DELETE"
 }
 
 
 export class UpdatePriceRequestBodyPricing extends SpeakeasyBase {
-  @Metadata({ data: "json, name=comparisonPrice" })
+  @SpeakeasyMetadata({ data: "json, name=comparisonPrice" })
   comparisonPrice?: UpdatePriceRequestBodyPricingComparisonPrice;
 
-  @Metadata({ data: "json, name=comparisonPriceType" })
+  @SpeakeasyMetadata({ data: "json, name=comparisonPriceType" })
   comparisonPriceType?: UpdatePriceRequestBodyPricingComparisonPriceTypeEnum;
 
-  @Metadata({ data: "json, name=currentPrice" })
+  @SpeakeasyMetadata({ data: "json, name=currentPrice" })
   currentPrice: UpdatePriceRequestBodyPricingCurrentPrice;
 
-  @Metadata({ data: "json, name=currentPriceType" })
+  @SpeakeasyMetadata({ data: "json, name=currentPriceType" })
   currentPriceType: UpdatePriceRequestBodyPricingCurrentPriceTypeEnum;
 
-  @Metadata({ data: "json, name=effectiveDate" })
+  @SpeakeasyMetadata({ data: "json, name=effectiveDate" })
   effectiveDate?: Date;
 
-  @Metadata({ data: "json, name=expirationDate" })
+  @SpeakeasyMetadata({ data: "json, name=expirationDate" })
   expirationDate?: Date;
 
-  @Metadata({ data: "json, name=priceDisplayCodes" })
+  @SpeakeasyMetadata({ data: "json, name=priceDisplayCodes" })
   priceDisplayCodes?: UpdatePriceRequestBodyPricingPriceDisplayCodesEnum;
 
-  @Metadata({ data: "json, name=processMode" })
+  @SpeakeasyMetadata({ data: "json, name=processMode" })
   processMode?: UpdatePriceRequestBodyPricingProcessModeEnum;
 
-  @Metadata({ data: "json, name=promoId" })
+  @SpeakeasyMetadata({ data: "json, name=promoId" })
   promoId?: string;
 }
 
 export enum UpdatePriceRequestBodyReplaceAllEnum {
-    True = "true"
-,    False = "false"
+    True = "true",
+    False = "false"
 }
 
 
 export class UpdatePriceRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=definitions" })
+  @SpeakeasyMetadata({ data: "json, name=definitions" })
   definitions?: Map<string, any>;
 
-  @Metadata({ data: "json, name=offerId" })
+  @SpeakeasyMetadata({ data: "json, name=offerId" })
   offerId?: string;
 
-  @Metadata({ data: "json, name=pricing", elemType: operations.UpdatePriceRequestBodyPricing })
+  @SpeakeasyMetadata({ data: "json, name=pricing", elemType: UpdatePriceRequestBodyPricing })
   pricing: UpdatePriceRequestBodyPricing[];
 
-  @Metadata({ data: "json, name=replaceAll" })
+  @SpeakeasyMetadata({ data: "json, name=replaceAll" })
   replaceAll?: UpdatePriceRequestBodyReplaceAllEnum;
 
-  @Metadata({ data: "json, name=sku" })
+  @SpeakeasyMetadata({ data: "json, name=sku" })
   sku: string;
 }
 
-
-export class UpdatePriceRequest extends SpeakeasyBase {
-  @Metadata()
-  headers: UpdatePriceHeaders;
-
-  @Metadata({ data: "request, media_type=application/json" })
-  request: UpdatePriceRequestBody;
-}
-
 export enum UpdatePrice200ApplicationJsonErrorsCategoryEnum {
-    Application = "APPLICATION"
-,    System = "SYSTEM"
-,    Request = "REQUEST"
-,    Data = "DATA"
+    Application = "APPLICATION",
+    System = "SYSTEM",
+    Request = "REQUEST",
+    Data = "DATA"
 }
 
 
 export class UpdatePrice200ApplicationJsonErrorsCauses extends SpeakeasyBase {
-  @Metadata({ data: "json, name=code" })
+  @SpeakeasyMetadata({ data: "json, name=code" })
   code?: string;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=field" })
+  @SpeakeasyMetadata({ data: "json, name=field" })
   field?: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: string;
 }
 
 export enum UpdatePrice200ApplicationJsonErrorsGatewayErrorCategoryEnum {
-    InternalDataError = "INTERNAL_DATA_ERROR"
-,    ExternalDataError = "EXTERNAL_DATA_ERROR"
-,    SystemError = "SYSTEM_ERROR"
+    InternalDataError = "INTERNAL_DATA_ERROR",
+    ExternalDataError = "EXTERNAL_DATA_ERROR",
+    SystemError = "SYSTEM_ERROR"
 }
 
 export enum UpdatePrice200ApplicationJsonErrorsSeverityEnum {
-    Info = "INFO"
-,    Warn = "WARN"
-,    Error = "ERROR"
+    Info = "INFO",
+    Warn = "WARN",
+    Error = "ERROR"
 }
 
 
 export class UpdatePrice200ApplicationJsonErrors extends SpeakeasyBase {
-  @Metadata({ data: "json, name=category" })
+  @SpeakeasyMetadata({ data: "json, name=category" })
   category?: UpdatePrice200ApplicationJsonErrorsCategoryEnum;
 
-  @Metadata({ data: "json, name=causes", elemType: operations.UpdatePrice200ApplicationJsonErrorsCauses })
+  @SpeakeasyMetadata({ data: "json, name=causes", elemType: UpdatePrice200ApplicationJsonErrorsCauses })
   causes?: UpdatePrice200ApplicationJsonErrorsCauses[];
 
-  @Metadata({ data: "json, name=code" })
+  @SpeakeasyMetadata({ data: "json, name=code" })
   code: string;
 
-  @Metadata({ data: "json, name=component" })
+  @SpeakeasyMetadata({ data: "json, name=component" })
   component?: string;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=errorIdentifiers" })
+  @SpeakeasyMetadata({ data: "json, name=errorIdentifiers" })
   errorIdentifiers?: Map<string, Map<string, any>>;
 
-  @Metadata({ data: "json, name=field" })
+  @SpeakeasyMetadata({ data: "json, name=field" })
   field?: string;
 
-  @Metadata({ data: "json, name=gatewayErrorCategory" })
+  @SpeakeasyMetadata({ data: "json, name=gatewayErrorCategory" })
   gatewayErrorCategory?: UpdatePrice200ApplicationJsonErrorsGatewayErrorCategoryEnum;
 
-  @Metadata({ data: "json, name=info" })
+  @SpeakeasyMetadata({ data: "json, name=info" })
   info?: string;
 
-  @Metadata({ data: "json, name=serviceName" })
+  @SpeakeasyMetadata({ data: "json, name=serviceName" })
   serviceName?: string;
 
-  @Metadata({ data: "json, name=severity" })
+  @SpeakeasyMetadata({ data: "json, name=severity" })
   severity?: UpdatePrice200ApplicationJsonErrorsSeverityEnum;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: string;
 }
 
 
 export class UpdatePrice200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=errors", elemType: operations.UpdatePrice200ApplicationJsonErrors })
+  @SpeakeasyMetadata({ data: "json, name=errors", elemType: UpdatePrice200ApplicationJsonErrors })
   errors?: UpdatePrice200ApplicationJsonErrors[];
 
-  @Metadata({ data: "json, name=mart" })
+  @SpeakeasyMetadata({ data: "json, name=mart" })
   mart?: string;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 
-  @Metadata({ data: "json, name=sku" })
+  @SpeakeasyMetadata({ data: "json, name=sku" })
   sku?: string;
 
-  @Metadata({ data: "json, name=statusCode" })
+  @SpeakeasyMetadata({ data: "json, name=statusCode" })
   statusCode?: number;
 }
 
 
+export class UpdatePriceRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  headers: UpdatePriceHeaders;
+
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request: UpdatePriceRequestBody;
+}
+
+
 export class UpdatePriceResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   updatePrice200ApplicationJsonObject?: UpdatePrice200ApplicationJson;
 }

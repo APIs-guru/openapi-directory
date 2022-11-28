@@ -1,41 +1,42 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class LogsPostLogQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Message" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Message" })
   message: string;
 }
 
 
 export class LogsPostLogRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: LogsPostLogQueryParams;
 }
 
 
 export class LogsPostLogResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   apiModelsApiError?: shared.ApiModelsApiError;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   logsPostLog200ApplicationJsonString?: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   logsPostLog200ApplicationXmlString?: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   logsPostLog200TextJsonString?: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   logsPostLog200TextXmlString?: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

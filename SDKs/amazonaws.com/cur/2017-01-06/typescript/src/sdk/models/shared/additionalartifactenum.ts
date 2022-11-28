@@ -1,7 +1,8 @@
 
 
+
 export enum AdditionalArtifactEnum {
-    Redshift = "REDSHIFT"
-,    Quicksight = "QUICKSIGHT"
-,    Athena = "ATHENA"
+    Redshift = "REDSHIFT",
+    Quicksight = "QUICKSIGHT",
+    Athena = "ATHENA"
 }

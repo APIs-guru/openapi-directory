@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // OnSuccess
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A destination for events that were processed successfully.
 **/
 export class OnSuccess extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Destination" })
+  @SpeakeasyMetadata({ data: "json, name=Destination" })
   destination?: string;
 }

@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DynamicDayOfWeekEnum } from "./dynamicdayofweekenum";
+
 
 
 // AccessSchedule
@@ -7,18 +8,34 @@ import { DynamicDayOfWeekEnum } from "./dynamicdayofweekenum";
  * An entity representing a user's access schedule.
 **/
 export class AccessSchedule extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DayOfWeek" })
+  @SpeakeasyMetadata({ data: "json, name=DayOfWeek" })
   dayOfWeek: DynamicDayOfWeekEnum;
 
-  @Metadata({ data: "json, name=EndHour" })
+  @SpeakeasyMetadata({ data: "json, name=EndHour" })
   endHour: number;
 
-  @Metadata({ data: "json, name=Id" })
+  @SpeakeasyMetadata({ data: "json, name=Id" })
   id: number;
 
-  @Metadata({ data: "json, name=StartHour" })
+  @SpeakeasyMetadata({ data: "json, name=StartHour" })
   startHour: number;
 
-  @Metadata({ data: "json, name=UserId" })
+  @SpeakeasyMetadata({ data: "json, name=UserId" })
   userId: string;
+}
+
+
+// AccessScheduleInput
+/** 
+ * An entity representing a user's access schedule.
+**/
+export class AccessScheduleInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=DayOfWeek" })
+  dayOfWeek: DynamicDayOfWeekEnum;
+
+  @SpeakeasyMetadata({ data: "json, name=EndHour" })
+  endHour: number;
+
+  @SpeakeasyMetadata({ data: "json, name=StartHour" })
+  startHour: number;
 }

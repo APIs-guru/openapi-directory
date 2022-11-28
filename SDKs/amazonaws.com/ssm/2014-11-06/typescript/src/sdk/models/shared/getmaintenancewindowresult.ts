@@ -1,49 +1,50 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetMaintenanceWindowResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AllowUnassociatedTargets" })
+  @SpeakeasyMetadata({ data: "json, name=AllowUnassociatedTargets" })
   allowUnassociatedTargets?: boolean;
 
-  @Metadata({ data: "json, name=CreatedDate" })
+  @SpeakeasyMetadata({ data: "json, name=CreatedDate" })
   createdDate?: Date;
 
-  @Metadata({ data: "json, name=Cutoff" })
+  @SpeakeasyMetadata({ data: "json, name=Cutoff" })
   cutoff?: number;
 
-  @Metadata({ data: "json, name=Description" })
+  @SpeakeasyMetadata({ data: "json, name=Description" })
   description?: string;
 
-  @Metadata({ data: "json, name=Duration" })
+  @SpeakeasyMetadata({ data: "json, name=Duration" })
   duration?: number;
 
-  @Metadata({ data: "json, name=Enabled" })
+  @SpeakeasyMetadata({ data: "json, name=Enabled" })
   enabled?: boolean;
 
-  @Metadata({ data: "json, name=EndDate" })
+  @SpeakeasyMetadata({ data: "json, name=EndDate" })
   endDate?: string;
 
-  @Metadata({ data: "json, name=ModifiedDate" })
+  @SpeakeasyMetadata({ data: "json, name=ModifiedDate" })
   modifiedDate?: Date;
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name?: string;
 
-  @Metadata({ data: "json, name=NextExecutionTime" })
+  @SpeakeasyMetadata({ data: "json, name=NextExecutionTime" })
   nextExecutionTime?: string;
 
-  @Metadata({ data: "json, name=Schedule" })
+  @SpeakeasyMetadata({ data: "json, name=Schedule" })
   schedule?: string;
 
-  @Metadata({ data: "json, name=ScheduleOffset" })
+  @SpeakeasyMetadata({ data: "json, name=ScheduleOffset" })
   scheduleOffset?: number;
 
-  @Metadata({ data: "json, name=ScheduleTimezone" })
+  @SpeakeasyMetadata({ data: "json, name=ScheduleTimezone" })
   scheduleTimezone?: string;
 
-  @Metadata({ data: "json, name=StartDate" })
+  @SpeakeasyMetadata({ data: "json, name=StartDate" })
   startDate?: string;
 
-  @Metadata({ data: "json, name=WindowId" })
+  @SpeakeasyMetadata({ data: "json, name=WindowId" })
   windowId?: string;
 }

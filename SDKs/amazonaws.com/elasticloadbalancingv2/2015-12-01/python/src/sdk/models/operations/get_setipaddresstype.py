@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetSetIPAddressTypeActionEnum(str, Enum):
     SET_IP_ADDRESS_TYPE = "SetIpAddressType"
@@ -14,10 +18,10 @@ class GetSetIPAddressTypeVersionEnum(str, Enum):
 
 @dataclass
 class GetSetIPAddressTypeQueryParams:
-    action: GetSetIPAddressTypeActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    ip_address_type: GetSetIPAddressTypeIPAddressTypeEnum = field(default=None, metadata={'query_param': { 'field_name': 'IpAddressType', 'style': 'form', 'explode': True }})
-    load_balancer_arn: str = field(default=None, metadata={'query_param': { 'field_name': 'LoadBalancerArn', 'style': 'form', 'explode': True }})
-    version: GetSetIPAddressTypeVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: GetSetIPAddressTypeActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    ip_address_type: GetSetIPAddressTypeIPAddressTypeEnum = field(metadata={'query_param': { 'field_name': 'IpAddressType', 'style': 'form', 'explode': True }})
+    load_balancer_arn: str = field(metadata={'query_param': { 'field_name': 'LoadBalancerArn', 'style': 'form', 'explode': True }})
+    version: GetSetIPAddressTypeVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -33,13 +37,13 @@ class GetSetIPAddressTypeHeaders:
 
 @dataclass
 class GetSetIPAddressTypeRequest:
-    query_params: GetSetIPAddressTypeQueryParams = field(default=None)
-    headers: GetSetIPAddressTypeHeaders = field(default=None)
+    headers: GetSetIPAddressTypeHeaders = field()
+    query_params: GetSetIPAddressTypeQueryParams = field()
     
 
 @dataclass
 class GetSetIPAddressTypeResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

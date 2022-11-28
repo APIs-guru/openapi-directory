@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class ReportCodeCoverageSortByTypeEnum(str, Enum):
     LINE_COVERAGE_PERCENTAGE = "LINE_COVERAGE_PERCENTAGE"

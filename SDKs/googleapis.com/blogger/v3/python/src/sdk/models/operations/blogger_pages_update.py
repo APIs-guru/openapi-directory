@@ -1,12 +1,16 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class BloggerPagesUpdatePathParams:
-    blog_id: str = field(default=None, metadata={'path_param': { 'field_name': 'blogId', 'style': 'simple', 'explode': False }})
-    page_id: str = field(default=None, metadata={'path_param': { 'field_name': 'pageId', 'style': 'simple', 'explode': False }})
+    blog_id: str = field(metadata={'path_param': { 'field_name': 'blogId', 'style': 'simple', 'explode': False }})
+    page_id: str = field(metadata={'path_param': { 'field_name': 'pageId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -28,21 +32,21 @@ class BloggerPagesUpdateQueryParams:
 
 @dataclass
 class BloggerPagesUpdateSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class BloggerPagesUpdateRequest:
-    path_params: BloggerPagesUpdatePathParams = field(default=None)
-    query_params: BloggerPagesUpdateQueryParams = field(default=None)
+    path_params: BloggerPagesUpdatePathParams = field()
+    query_params: BloggerPagesUpdateQueryParams = field()
+    security: BloggerPagesUpdateSecurity = field()
     request: Optional[shared.Page] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: BloggerPagesUpdateSecurity = field(default=None)
     
 
 @dataclass
 class BloggerPagesUpdateResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     page: Optional[shared.Page] = field(default=None)
-    status_code: int = field(default=None)
     

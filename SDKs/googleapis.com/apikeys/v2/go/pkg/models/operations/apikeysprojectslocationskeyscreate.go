@@ -31,7 +31,7 @@ type ApikeysProjectsLocationsKeysCreateSecurity struct {
 type ApikeysProjectsLocationsKeysCreateRequest struct {
 	PathParams  ApikeysProjectsLocationsKeysCreatePathParams
 	QueryParams ApikeysProjectsLocationsKeysCreateQueryParams
-	Request     *shared.V2Key `request:"mediaType=application/json"`
+	Request     *shared.V2KeyInput `request:"mediaType=application/json"`
 	Security    ApikeysProjectsLocationsKeysCreateSecurity
 }
 

@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class GetInvestigationResultsPathParams:
-    db: shared.AmbitDatabaseIDEnum = field(default=None, metadata={'path_param': { 'field_name': 'db', 'style': 'simple', 'explode': False }})
+    db: shared.AmbitDatabaseIDEnum = field(metadata={'path_param': { 'field_name': 'db', 'style': 'simple', 'explode': False }})
     
 class GetInvestigationResultsTypeEnum(str, Enum):
     BYINVESTIGATION = "byinvestigation"
@@ -23,24 +24,24 @@ class GetInvestigationResultsTypeEnum(str, Enum):
 
 @dataclass
 class GetInvestigationResultsQueryParams:
+    search: str = field(metadata={'query_param': { 'field_name': 'search', 'style': 'form', 'explode': True }})
+    type: GetInvestigationResultsTypeEnum = field(metadata={'query_param': { 'field_name': 'type', 'style': 'form', 'explode': True }})
     id: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'id', 'style': 'form', 'explode': True }})
     inchikey: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'inchikey', 'style': 'form', 'explode': True }})
     page: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'page', 'style': 'form', 'explode': True }})
     pagesize: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'pagesize', 'style': 'form', 'explode': True }})
-    search: str = field(default=None, metadata={'query_param': { 'field_name': 'search', 'style': 'form', 'explode': True }})
-    type: GetInvestigationResultsTypeEnum = field(default=None, metadata={'query_param': { 'field_name': 'type', 'style': 'form', 'explode': True }})
     
 
 @dataclass
 class GetInvestigationResultsRequest:
-    path_params: GetInvestigationResultsPathParams = field(default=None)
-    query_params: GetInvestigationResultsQueryParams = field(default=None)
+    path_params: GetInvestigationResultsPathParams = field()
+    query_params: GetInvestigationResultsQueryParams = field()
     
 
 @dataclass
 class GetInvestigationResultsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     investigation: Optional[shared.Investigation] = field(default=None)
-    status_code: int = field(default=None)
     

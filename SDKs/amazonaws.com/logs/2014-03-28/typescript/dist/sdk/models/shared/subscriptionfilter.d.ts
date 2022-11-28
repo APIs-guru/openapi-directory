@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { DistributionEnum } from "./distributionenum";
 /**
  * Represents a subscription filter.

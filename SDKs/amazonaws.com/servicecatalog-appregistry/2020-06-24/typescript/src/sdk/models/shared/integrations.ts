@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ResourceGroup } from "./resourcegroup";
+
 
 
 // Integrations
@@ -7,6 +8,6 @@ import { ResourceGroup } from "./resourcegroup";
  *  The information about the service integration.
 **/
 export class Integrations extends SpeakeasyBase {
-  @Metadata({ data: "json, name=resourceGroup" })
+  @SpeakeasyMetadata({ data: "json, name=resourceGroup" })
   resourceGroup?: ResourceGroup;
 }

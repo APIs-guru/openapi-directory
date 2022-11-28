@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AssetUsage } from "./assetusage";
+
 
 
 // ReportUsageBatchRequest
@@ -8,6 +8,6 @@ import { AssetUsage } from "./assetusage";
  * Specifies the request information for the Batch Usages endpoint.
 **/
 export class ReportUsageBatchRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=asset_usages", elemType: shared.AssetUsage })
+  @SpeakeasyMetadata({ data: "json, name=asset_usages", elemType: AssetUsage })
   assetUsages?: AssetUsage[];
 }

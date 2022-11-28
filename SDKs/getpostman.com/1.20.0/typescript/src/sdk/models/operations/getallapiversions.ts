@@ -1,55 +1,56 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetAllApiVersionsPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=apiId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=apiId" })
   apiId: string;
 }
 
 
-export class GetAllApiVersionsRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: GetAllApiVersionsPathParams;
-}
-
-
 export class GetAllApiVersions200ApplicationJsonVersions extends SpeakeasyBase {
-  @Metadata({ data: "json, name=createdAt" })
+  @SpeakeasyMetadata({ data: "json, name=createdAt" })
   createdAt?: string;
 
-  @Metadata({ data: "json, name=createdBy" })
+  @SpeakeasyMetadata({ data: "json, name=createdBy" })
   createdBy?: string;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=summary" })
+  @SpeakeasyMetadata({ data: "json, name=summary" })
   summary?: string;
 
-  @Metadata({ data: "json, name=updatedAt" })
+  @SpeakeasyMetadata({ data: "json, name=updatedAt" })
   updatedAt?: string;
 }
 
 
 export class GetAllApiVersions200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=versions", elemType: operations.GetAllApiVersions200ApplicationJsonVersions })
+  @SpeakeasyMetadata({ data: "json, name=versions", elemType: GetAllApiVersions200ApplicationJsonVersions })
   versions?: GetAllApiVersions200ApplicationJsonVersions[];
 }
 
 
+export class GetAllApiVersionsRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: GetAllApiVersionsPathParams;
+}
+
+
 export class GetAllApiVersionsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getAllApiVersions200ApplicationJsonObject?: GetAllApiVersions200ApplicationJson;
 }

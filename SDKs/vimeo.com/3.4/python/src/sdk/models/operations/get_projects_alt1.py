@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 class GetProjectsAlt1DirectionEnum(str, Enum):
@@ -23,19 +27,19 @@ class GetProjectsAlt1QueryParams:
 
 @dataclass
 class GetProjectsAlt1Security:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class GetProjectsAlt1Request:
-    query_params: GetProjectsAlt1QueryParams = field(default=None)
-    security: GetProjectsAlt1Security = field(default=None)
+    query_params: GetProjectsAlt1QueryParams = field()
+    security: GetProjectsAlt1Security = field()
     
 
 @dataclass
 class GetProjectsAlt1Response:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error: Optional[shared.Error] = field(default=None)
     projects: Optional[List[shared.Project]] = field(default=None)
     

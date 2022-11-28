@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import approvalstatus_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ApprovalResult:
-    status: approvalstatus_enum.ApprovalStatusEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
-    summary: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'summary' }})
+    r"""ApprovalResult
+    Represents information about the result of an approval request.
+    """
+    
+    status: ApprovalStatusEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('status') }})
+    summary: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('summary') }})
     

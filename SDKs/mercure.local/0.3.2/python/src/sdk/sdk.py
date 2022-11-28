@@ -1,8 +1,11 @@
-import warnings
+
+__doc__ = """ SDK Documentation: https://mercure.rocks/spec - The Mercure protocol specification"""
 import requests
 from typing import Optional
-from sdk.models import operations, shared
+from sdk.models import shared, operations
 from . import utils
+
+
 
 
 SERVERS = [
@@ -11,32 +14,60 @@ SERVERS = [
 
 
 class SDK:
-    client = requests.Session()
-    server_url = SERVERS[0]
+    r"""SDK Documentation: https://mercure.rocks/spec - The Mercure protocol specification"""
+
+    _client: requests.Session
+    _security_client: requests.Session
+    _security: shared.Security
+    _server_url: str = SERVERS[0]
+    _language: str = "python"
+    _sdk_version: str = "0.0.1"
+    _gen_version: str = "internal"
+
+    def __init__(self) -> None:
+        self._client = requests.Session()
+        self._security_client = requests.Session()
+        
+
 
     def config_server_url(self, server_url: str, params: dict[str, str]):
-        if not params is None:
-            self.server_url = utils.replace_parameters(server_url, params)
+        if params is not None:
+            self._server_url = utils.replace_parameters(server_url, params)
         else:
-            self.server_url = server_url
-            
-    
-    def config_security(self, security: shared.Security):
-        self.client = utils.configure_security_client(security)
+            self._server_url = server_url
 
+        
+    
+
+    def config_client(self, client: requests.Session):
+        self._client = client
+        
+        if self._security is not None:
+            self._security_client = utils.configure_security_client(self._client, self._security)
+        
+    
+
+    def config_security(self, security: shared.Security):
+        self._security = security
+        self._security_client = utils.configure_security_client(self._client, security)
+        
+    
+    
     
     def get_well_known_mercure(self, request: operations.GetWellKnownMercureRequest) -> operations.GetWellKnownMercureResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Subscribe to updates
+        https://mercure.rocks/spec#subscription - Subscription specification
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/.well-known/mercure"
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -53,13 +84,17 @@ class SDK:
 
     
     def get_well_known_mercure_subscriptions(self) -> operations.GetWellKnownMercureSubscriptionsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Active subscriptions
+        https://mercure.rocks/spec#subscription-api - Subscription API
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/.well-known/mercure/subscriptions"
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -76,13 +111,17 @@ class SDK:
 
     
     def get_well_known_mercure_subscriptions_topic_(self, request: operations.GetWellKnownMercureSubscriptionsTopicRequest) -> operations.GetWellKnownMercureSubscriptionsTopicResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Active subscriptions for the given topic
+        https://mercure.rocks/spec#subscription-api - Subscription API
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/.well-known/mercure/subscriptions/{topic}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -99,13 +138,17 @@ class SDK:
 
     
     def get_well_known_mercure_subscriptions_topic_subscriber_(self, request: operations.GetWellKnownMercureSubscriptionsTopicSubscriberRequest) -> operations.GetWellKnownMercureSubscriptionsTopicSubscriberResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Active subscription for the given topic and subscriber
+        https://mercure.rocks/spec#active-subscriptions - Subscription API
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/.well-known/mercure/subscriptions/{topic}/{subscriber}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -122,19 +165,21 @@ class SDK:
 
     
     def post_well_known_mercure(self, request: operations.PostWellKnownMercureRequest) -> operations.PostWellKnownMercureResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Publish an update
+        https://mercure.rocks/spec#publication - Publishing specification
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/.well-known/mercure"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 

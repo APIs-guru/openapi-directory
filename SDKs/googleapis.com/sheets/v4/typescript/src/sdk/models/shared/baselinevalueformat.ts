@@ -1,15 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Color } from "./color";
 import { ColorStyle } from "./colorstyle";
 import { TextPosition } from "./textposition";
-import { Color } from "./color";
-import { ColorStyle } from "./colorstyle";
 import { TextFormat } from "./textformat";
 
+
 export enum BaselineValueFormatComparisonTypeEnum {
-    ComparisonTypeUndefined = "COMPARISON_TYPE_UNDEFINED"
-,    AbsoluteDifference = "ABSOLUTE_DIFFERENCE"
-,    PercentageDifference = "PERCENTAGE_DIFFERENCE"
+    ComparisonTypeUndefined = "COMPARISON_TYPE_UNDEFINED",
+    AbsoluteDifference = "ABSOLUTE_DIFFERENCE",
+    PercentageDifference = "PERCENTAGE_DIFFERENCE"
 }
 
 
@@ -18,27 +17,27 @@ export enum BaselineValueFormatComparisonTypeEnum {
  * Formatting options for baseline value.
 **/
 export class BaselineValueFormat extends SpeakeasyBase {
-  @Metadata({ data: "json, name=comparisonType" })
+  @SpeakeasyMetadata({ data: "json, name=comparisonType" })
   comparisonType?: BaselineValueFormatComparisonTypeEnum;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=negativeColor" })
+  @SpeakeasyMetadata({ data: "json, name=negativeColor" })
   negativeColor?: Color;
 
-  @Metadata({ data: "json, name=negativeColorStyle" })
+  @SpeakeasyMetadata({ data: "json, name=negativeColorStyle" })
   negativeColorStyle?: ColorStyle;
 
-  @Metadata({ data: "json, name=position" })
+  @SpeakeasyMetadata({ data: "json, name=position" })
   position?: TextPosition;
 
-  @Metadata({ data: "json, name=positiveColor" })
+  @SpeakeasyMetadata({ data: "json, name=positiveColor" })
   positiveColor?: Color;
 
-  @Metadata({ data: "json, name=positiveColorStyle" })
+  @SpeakeasyMetadata({ data: "json, name=positiveColorStyle" })
   positiveColorStyle?: ColorStyle;
 
-  @Metadata({ data: "json, name=textFormat" })
+  @SpeakeasyMetadata({ data: "json, name=textFormat" })
   textFormat?: TextFormat;
 }

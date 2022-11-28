@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { AlarmStateNameEnum } from "./alarmstatenameenum";
 /**
  * Contains a summary of an alarm.

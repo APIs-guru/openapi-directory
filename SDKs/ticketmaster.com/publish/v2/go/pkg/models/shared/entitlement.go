@@ -14,6 +14,8 @@ const (
 	EntitlementSourceEnumTicketmaster EntitlementSourceEnum = "ticketmaster"
 )
 
+// Entitlement
+// This class defines an entitlement data on the Publish API
 type Entitlement struct {
 	Data                map[string]interface{}           `json:"data"`
 	RelatedEntityID     *string                          `json:"relatedEntityId,omitempty"`

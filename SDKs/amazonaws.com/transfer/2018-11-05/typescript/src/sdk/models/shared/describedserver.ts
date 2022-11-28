@@ -1,5 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DomainEnum } from "./domainenum";
 import { EndpointDetails } from "./endpointdetails";
 import { EndpointTypeEnum } from "./endpointtypeenum";
@@ -12,59 +11,60 @@ import { Tag } from "./tag";
 import { WorkflowDetails } from "./workflowdetails";
 
 
+
 // DescribedServer
 /** 
  * Describes the properties of a file transfer protocol-enabled server that was specified.
 **/
 export class DescribedServer extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Arn" })
+  @SpeakeasyMetadata({ data: "json, name=Arn" })
   arn: string;
 
-  @Metadata({ data: "json, name=Certificate" })
+  @SpeakeasyMetadata({ data: "json, name=Certificate" })
   certificate?: string;
 
-  @Metadata({ data: "json, name=Domain" })
+  @SpeakeasyMetadata({ data: "json, name=Domain" })
   domain?: DomainEnum;
 
-  @Metadata({ data: "json, name=EndpointDetails" })
+  @SpeakeasyMetadata({ data: "json, name=EndpointDetails" })
   endpointDetails?: EndpointDetails;
 
-  @Metadata({ data: "json, name=EndpointType" })
+  @SpeakeasyMetadata({ data: "json, name=EndpointType" })
   endpointType?: EndpointTypeEnum;
 
-  @Metadata({ data: "json, name=HostKeyFingerprint" })
+  @SpeakeasyMetadata({ data: "json, name=HostKeyFingerprint" })
   hostKeyFingerprint?: string;
 
-  @Metadata({ data: "json, name=IdentityProviderDetails" })
+  @SpeakeasyMetadata({ data: "json, name=IdentityProviderDetails" })
   identityProviderDetails?: IdentityProviderDetails;
 
-  @Metadata({ data: "json, name=IdentityProviderType" })
+  @SpeakeasyMetadata({ data: "json, name=IdentityProviderType" })
   identityProviderType?: IdentityProviderTypeEnum;
 
-  @Metadata({ data: "json, name=LoggingRole" })
+  @SpeakeasyMetadata({ data: "json, name=LoggingRole" })
   loggingRole?: string;
 
-  @Metadata({ data: "json, name=ProtocolDetails" })
+  @SpeakeasyMetadata({ data: "json, name=ProtocolDetails" })
   protocolDetails?: ProtocolDetails;
 
-  @Metadata({ data: "json, name=Protocols" })
+  @SpeakeasyMetadata({ data: "json, name=Protocols" })
   protocols?: ProtocolEnum[];
 
-  @Metadata({ data: "json, name=SecurityPolicyName" })
+  @SpeakeasyMetadata({ data: "json, name=SecurityPolicyName" })
   securityPolicyName?: string;
 
-  @Metadata({ data: "json, name=ServerId" })
+  @SpeakeasyMetadata({ data: "json, name=ServerId" })
   serverId?: string;
 
-  @Metadata({ data: "json, name=State" })
+  @SpeakeasyMetadata({ data: "json, name=State" })
   state?: StateEnum;
 
-  @Metadata({ data: "json, name=Tags", elemType: shared.Tag })
+  @SpeakeasyMetadata({ data: "json, name=Tags", elemType: Tag })
   tags?: Tag[];
 
-  @Metadata({ data: "json, name=UserCount" })
+  @SpeakeasyMetadata({ data: "json, name=UserCount" })
   userCount?: number;
 
-  @Metadata({ data: "json, name=WorkflowDetails" })
+  @SpeakeasyMetadata({ data: "json, name=WorkflowDetails" })
   workflowDetails?: WorkflowDetails;
 }

@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
 from typing import List
 from dataclasses_json import dataclass_json
-from . import sentencedependencyout
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class SentenceDependenciesOut:
-    sentence_dependencies: List[sentencedependencyout.SentenceDependencyOut] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'sentence_dependencies' }})
+    sentence_dependencies: List[SentenceDependencyOut] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('sentence_dependencies') }})
     

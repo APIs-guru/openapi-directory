@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AggregateConformancePackComplianceCount
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The number of conformance packs that are compliant and noncompliant.
 **/
 export class AggregateConformancePackComplianceCount extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CompliantConformancePackCount" })
+  @SpeakeasyMetadata({ data: "json, name=CompliantConformancePackCount" })
   compliantConformancePackCount?: number;
 
-  @Metadata({ data: "json, name=NonCompliantConformancePackCount" })
+  @SpeakeasyMetadata({ data: "json, name=NonCompliantConformancePackCount" })
   nonCompliantConformancePackCount?: number;
 }

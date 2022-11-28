@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { DataReplicationInitiationStep } from "./datareplicationinitiationstep";
 // DataReplicationInitiation
 /**
  * Data replication initiation.
@@ -34,15 +34,15 @@ var DataReplicationInitiation = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=nextAttemptDateTime" }),
+        SpeakeasyMetadata({ data: "json, name=nextAttemptDateTime" }),
         __metadata("design:type", String)
     ], DataReplicationInitiation.prototype, "nextAttemptDateTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=startDateTime" }),
+        SpeakeasyMetadata({ data: "json, name=startDateTime" }),
         __metadata("design:type", String)
     ], DataReplicationInitiation.prototype, "startDateTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=steps", elemType: shared.DataReplicationInitiationStep }),
+        SpeakeasyMetadata({ data: "json, name=steps", elemType: DataReplicationInitiationStep }),
         __metadata("design:type", Array)
     ], DataReplicationInitiation.prototype, "steps", void 0);
     return DataReplicationInitiation;

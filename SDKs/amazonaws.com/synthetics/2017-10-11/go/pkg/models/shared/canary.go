@@ -1,5 +1,7 @@
 package shared
 
+// Canary
+// This structure contains all information about one canary in your account.
 type Canary struct {
 	ArtifactS3Location           *string                `json:"ArtifactS3Location,omitempty"`
 	Code                         *CanaryCodeOutput      `json:"Code,omitempty"`

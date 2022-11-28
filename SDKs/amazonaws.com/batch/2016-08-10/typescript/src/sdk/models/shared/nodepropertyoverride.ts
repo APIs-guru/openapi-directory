@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ContainerOverrides } from "./containeroverrides";
+
 
 
 // NodePropertyOverride
@@ -7,9 +8,9 @@ import { ContainerOverrides } from "./containeroverrides";
  * Object representing any node overrides to a job definition that's used in a <a>SubmitJob</a> API operation.
 **/
 export class NodePropertyOverride extends SpeakeasyBase {
-  @Metadata({ data: "json, name=containerOverrides" })
+  @SpeakeasyMetadata({ data: "json, name=containerOverrides" })
   containerOverrides?: ContainerOverrides;
 
-  @Metadata({ data: "json, name=targetNodes" })
+  @SpeakeasyMetadata({ data: "json, name=targetNodes" })
   targetNodes: string;
 }

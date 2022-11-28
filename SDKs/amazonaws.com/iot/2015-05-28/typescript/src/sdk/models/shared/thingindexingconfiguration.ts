@@ -1,9 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
-import { Field } from "./field";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Field } from "./field";
 import { ThingConnectivityIndexingModeEnum } from "./thingconnectivityindexingmodeenum";
 import { ThingIndexingModeEnum } from "./thingindexingmodeenum";
+
 
 
 // ThingIndexingConfiguration
@@ -11,15 +10,15 @@ import { ThingIndexingModeEnum } from "./thingindexingmodeenum";
  * The thing indexing configuration. For more information, see <a href="https://docs.aws.amazon.com/iot/latest/developerguide/managing-index.html">Managing Thing Indexing</a>.
 **/
 export class ThingIndexingConfiguration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=customFields", elemType: shared.Field })
+  @SpeakeasyMetadata({ data: "json, name=customFields", elemType: Field })
   customFields?: Field[];
 
-  @Metadata({ data: "json, name=managedFields", elemType: shared.Field })
+  @SpeakeasyMetadata({ data: "json, name=managedFields", elemType: Field })
   managedFields?: Field[];
 
-  @Metadata({ data: "json, name=thingConnectivityIndexingMode" })
+  @SpeakeasyMetadata({ data: "json, name=thingConnectivityIndexingMode" })
   thingConnectivityIndexingMode?: ThingConnectivityIndexingModeEnum;
 
-  @Metadata({ data: "json, name=thingIndexingMode" })
+  @SpeakeasyMetadata({ data: "json, name=thingIndexingMode" })
   thingIndexingMode: ThingIndexingModeEnum;
 }

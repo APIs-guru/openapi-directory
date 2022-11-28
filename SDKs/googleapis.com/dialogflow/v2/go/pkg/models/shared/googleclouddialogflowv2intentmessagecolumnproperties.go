@@ -9,6 +9,8 @@ const (
 	GoogleCloudDialogflowV2IntentMessageColumnPropertiesHorizontalAlignmentEnumTrailing                       GoogleCloudDialogflowV2IntentMessageColumnPropertiesHorizontalAlignmentEnum = "TRAILING"
 )
 
+// GoogleCloudDialogflowV2IntentMessageColumnProperties
+// Column properties for TableCard.
 type GoogleCloudDialogflowV2IntentMessageColumnProperties struct {
 	Header              *string                                                                      `json:"header,omitempty"`
 	HorizontalAlignment *GoogleCloudDialogflowV2IntentMessageColumnPropertiesHorizontalAlignmentEnum `json:"horizontalAlignment,omitempty"`

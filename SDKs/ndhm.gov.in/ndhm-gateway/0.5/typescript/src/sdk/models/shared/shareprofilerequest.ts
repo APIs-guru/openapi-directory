@@ -1,56 +1,56 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PatientAddress } from "./patientaddress";
 import { PatientGenderEnum } from "./patientgenderenum";
 import { Identifier } from "./identifier";
 
 
+
 export class ShareProfileRequestPatientUserDemographics extends SpeakeasyBase {
-  @Metadata({ data: "json, name=address" })
+  @SpeakeasyMetadata({ data: "json, name=address" })
   address?: PatientAddress;
 
-  @Metadata({ data: "json, name=dayOfBirth" })
+  @SpeakeasyMetadata({ data: "json, name=dayOfBirth" })
   dayOfBirth?: number;
 
-  @Metadata({ data: "json, name=gender" })
+  @SpeakeasyMetadata({ data: "json, name=gender" })
   gender: PatientGenderEnum;
 
-  @Metadata({ data: "json, name=healthId" })
+  @SpeakeasyMetadata({ data: "json, name=healthId" })
   healthId: string;
 
-  @Metadata({ data: "json, name=healthIdNumber" })
+  @SpeakeasyMetadata({ data: "json, name=healthIdNumber" })
   healthIdNumber: string;
 
-  @Metadata({ data: "json, name=identifiers", elemType: shared.Identifier })
+  @SpeakeasyMetadata({ data: "json, name=identifiers", elemType: Identifier })
   identifiers?: Identifier[];
 
-  @Metadata({ data: "json, name=monthOfBirth" })
+  @SpeakeasyMetadata({ data: "json, name=monthOfBirth" })
   monthOfBirth?: number;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 
-  @Metadata({ data: "json, name=yearOfBirth" })
+  @SpeakeasyMetadata({ data: "json, name=yearOfBirth" })
   yearOfBirth: number;
 }
 
 
 export class ShareProfileRequestPatient extends SpeakeasyBase {
-  @Metadata({ data: "json, name=hipCode" })
+  @SpeakeasyMetadata({ data: "json, name=hipCode" })
   hipCode?: string;
 
-  @Metadata({ data: "json, name=userDemographics" })
+  @SpeakeasyMetadata({ data: "json, name=userDemographics" })
   userDemographics: ShareProfileRequestPatientUserDemographics;
 }
 
 
 export class ShareProfileRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=patient" })
+  @SpeakeasyMetadata({ data: "json, name=patient" })
   patient: ShareProfileRequestPatient;
 
-  @Metadata({ data: "json, name=requestId" })
+  @SpeakeasyMetadata({ data: "json, name=requestId" })
   requestId: string;
 
-  @Metadata({ data: "json, name=timestamp" })
+  @SpeakeasyMetadata({ data: "json, name=timestamp" })
   timestamp: Date;
 }

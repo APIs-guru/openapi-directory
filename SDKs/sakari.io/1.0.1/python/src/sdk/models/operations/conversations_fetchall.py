@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class ConversationsFetchAllPathParams:
-    account_id: str = field(default=None, metadata={'path_param': { 'field_name': 'accountId', 'style': 'simple', 'explode': False }})
+    account_id: str = field(metadata={'path_param': { 'field_name': 'accountId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -16,20 +16,20 @@ class ConversationsFetchAllQueryParams:
 
 @dataclass
 class ConversationsFetchAllSecurity:
-    sakari_auth: shared.SchemeSakariAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    sakari_auth: shared.SchemeSakariAuth = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class ConversationsFetchAllRequest:
-    path_params: ConversationsFetchAllPathParams = field(default=None)
-    query_params: ConversationsFetchAllQueryParams = field(default=None)
-    security: ConversationsFetchAllSecurity = field(default=None)
+    path_params: ConversationsFetchAllPathParams = field()
+    query_params: ConversationsFetchAllQueryParams = field()
+    security: ConversationsFetchAllSecurity = field()
     
 
 @dataclass
 class ConversationsFetchAllResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     conversations_response: Optional[shared.ConversationsResponse] = field(default=None)
     error_response: Optional[shared.ErrorResponse] = field(default=None)
-    status_code: int = field(default=None)
     

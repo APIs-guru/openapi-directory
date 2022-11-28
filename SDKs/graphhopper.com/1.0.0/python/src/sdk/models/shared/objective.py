@@ -1,6 +1,7 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class ObjectiveTypeEnum(str, Enum):
     MIN = "min"
@@ -16,6 +17,6 @@ class ObjectiveValueEnum(str, Enum):
 @dataclass_json
 @dataclass
 class Objective:
-    type: ObjectiveTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
-    value: ObjectiveValueEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'value' }})
+    type: ObjectiveTypeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('type') }})
+    value: ObjectiveValueEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('value') }})
     

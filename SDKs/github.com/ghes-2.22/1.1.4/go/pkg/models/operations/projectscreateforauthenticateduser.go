@@ -9,13 +9,13 @@ type ProjectsCreateForAuthenticatedUserRequestBody struct {
 	Name string  `json:"name"`
 }
 
-type ProjectsCreateForAuthenticatedUserRequest struct {
-	Request *ProjectsCreateForAuthenticatedUserRequestBody `request:"mediaType=application/json"`
-}
-
 type ProjectsCreateForAuthenticatedUser415ApplicationJSON struct {
 	DocumentationURL string `json:"documentation_url"`
 	Message          string `json:"message"`
+}
+
+type ProjectsCreateForAuthenticatedUserRequest struct {
+	Request *ProjectsCreateForAuthenticatedUserRequestBody `request:"mediaType=application/json"`
 }
 
 type ProjectsCreateForAuthenticatedUserResponse struct {

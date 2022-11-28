@@ -1,5 +1,7 @@
 package shared
 
+// Summary
+// The summary of a recommendation.
 type Summary struct {
 	Name                *FindingEnum        `json:"name,omitempty"`
 	ReasonCodeSummaries []ReasonCodeSummary `json:"reasonCodeSummaries,omitempty"`

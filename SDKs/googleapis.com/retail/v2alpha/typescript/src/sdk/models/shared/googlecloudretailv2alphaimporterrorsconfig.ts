@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudRetailV2alphaImportErrorsConfig
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Configuration of destination for Import related errors.
 **/
 export class GoogleCloudRetailV2alphaImportErrorsConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=gcsPrefix" })
+  @SpeakeasyMetadata({ data: "json, name=gcsPrefix" })
   gcsPrefix?: string;
 }

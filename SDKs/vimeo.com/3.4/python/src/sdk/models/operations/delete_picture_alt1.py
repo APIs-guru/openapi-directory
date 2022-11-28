@@ -1,25 +1,25 @@
 from dataclasses import dataclass, field
-
+from sdk.models import shared
 
 
 @dataclass
 class DeletePictureAlt1PathParams:
-    portraitset_id: float = field(default=None, metadata={'path_param': { 'field_name': 'portraitset_id', 'style': 'simple', 'explode': False }})
+    portraitset_id: float = field(metadata={'path_param': { 'field_name': 'portraitset_id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class DeletePictureAlt1Security:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DeletePictureAlt1Request:
-    path_params: DeletePictureAlt1PathParams = field(default=None)
-    security: DeletePictureAlt1Security = field(default=None)
+    path_params: DeletePictureAlt1PathParams = field()
+    security: DeletePictureAlt1Security = field()
     
 
 @dataclass
 class DeletePictureAlt1Response:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

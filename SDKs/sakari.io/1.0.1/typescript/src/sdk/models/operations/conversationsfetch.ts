@@ -1,38 +1,39 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class ConversationsFetchPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=accountId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=accountId" })
   accountId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=conversationId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=conversationId" })
   conversationId: string;
 }
 
 
 export class ConversationsFetchSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   sakariAuth: shared.SchemeSakariAuth;
 }
 
 
 export class ConversationsFetchRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: ConversationsFetchPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: ConversationsFetchSecurity;
 }
 
 
 export class ConversationsFetchResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   conversationResponse?: shared.ConversationResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

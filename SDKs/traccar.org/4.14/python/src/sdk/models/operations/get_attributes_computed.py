@@ -14,12 +14,12 @@ class GetAttributesComputedQueryParams:
 
 @dataclass
 class GetAttributesComputedRequest:
-    query_params: GetAttributesComputedQueryParams = field(default=None)
+    query_params: GetAttributesComputedQueryParams = field()
     
 
 @dataclass
 class GetAttributesComputedResponse:
+    content_type: str = field()
+    status_code: int = field()
     attributes: Optional[List[shared.Attribute]] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

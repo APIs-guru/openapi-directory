@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AccountLabel } from "./accountlabel";
+
 
 
 // ListAccountLabelsResponse
@@ -8,9 +8,9 @@ import { AccountLabel } from "./accountlabel";
  * Response message for the `ListAccountLabels` method.
 **/
 export class ListAccountLabelsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=accountLabels", elemType: shared.AccountLabel })
+  @SpeakeasyMetadata({ data: "json, name=accountLabels", elemType: AccountLabel })
   accountLabels?: AccountLabel[];
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 }

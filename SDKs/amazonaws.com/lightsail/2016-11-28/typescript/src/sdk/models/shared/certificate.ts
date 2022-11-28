@@ -1,9 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DomainValidationRecord } from "./domainvalidationrecord";
 import { RenewalSummary } from "./renewalsummary";
 import { CertificateStatusEnum } from "./certificatestatusenum";
 import { Tag } from "./tag";
+
 
 
 // Certificate
@@ -11,66 +11,66 @@ import { Tag } from "./tag";
  * <p>Describes the full details of an Amazon Lightsail SSL/TLS certificate.</p> <note> <p>To get a summary of a certificate, use the <code>GetCertificates</code> action and ommit <code>includeCertificateDetails</code> from your request. The response will include only the certificate Amazon Resource Name (ARN), certificate name, domain name, and tags.</p> </note>
 **/
 export class Certificate extends SpeakeasyBase {
-  @Metadata({ data: "json, name=arn" })
+  @SpeakeasyMetadata({ data: "json, name=arn" })
   arn?: string;
 
-  @Metadata({ data: "json, name=createdAt" })
+  @SpeakeasyMetadata({ data: "json, name=createdAt" })
   createdAt?: Date;
 
-  @Metadata({ data: "json, name=domainName" })
+  @SpeakeasyMetadata({ data: "json, name=domainName" })
   domainName?: string;
 
-  @Metadata({ data: "json, name=domainValidationRecords", elemType: shared.DomainValidationRecord })
+  @SpeakeasyMetadata({ data: "json, name=domainValidationRecords", elemType: DomainValidationRecord })
   domainValidationRecords?: DomainValidationRecord[];
 
-  @Metadata({ data: "json, name=eligibleToRenew" })
+  @SpeakeasyMetadata({ data: "json, name=eligibleToRenew" })
   eligibleToRenew?: string;
 
-  @Metadata({ data: "json, name=inUseResourceCount" })
+  @SpeakeasyMetadata({ data: "json, name=inUseResourceCount" })
   inUseResourceCount?: number;
 
-  @Metadata({ data: "json, name=issuedAt" })
+  @SpeakeasyMetadata({ data: "json, name=issuedAt" })
   issuedAt?: Date;
 
-  @Metadata({ data: "json, name=issuerCA" })
+  @SpeakeasyMetadata({ data: "json, name=issuerCA" })
   issuerCa?: string;
 
-  @Metadata({ data: "json, name=keyAlgorithm" })
+  @SpeakeasyMetadata({ data: "json, name=keyAlgorithm" })
   keyAlgorithm?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=notAfter" })
+  @SpeakeasyMetadata({ data: "json, name=notAfter" })
   notAfter?: Date;
 
-  @Metadata({ data: "json, name=notBefore" })
+  @SpeakeasyMetadata({ data: "json, name=notBefore" })
   notBefore?: Date;
 
-  @Metadata({ data: "json, name=renewalSummary" })
+  @SpeakeasyMetadata({ data: "json, name=renewalSummary" })
   renewalSummary?: RenewalSummary;
 
-  @Metadata({ data: "json, name=requestFailureReason" })
+  @SpeakeasyMetadata({ data: "json, name=requestFailureReason" })
   requestFailureReason?: string;
 
-  @Metadata({ data: "json, name=revocationReason" })
+  @SpeakeasyMetadata({ data: "json, name=revocationReason" })
   revocationReason?: string;
 
-  @Metadata({ data: "json, name=revokedAt" })
+  @SpeakeasyMetadata({ data: "json, name=revokedAt" })
   revokedAt?: Date;
 
-  @Metadata({ data: "json, name=serialNumber" })
+  @SpeakeasyMetadata({ data: "json, name=serialNumber" })
   serialNumber?: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: CertificateStatusEnum;
 
-  @Metadata({ data: "json, name=subjectAlternativeNames" })
+  @SpeakeasyMetadata({ data: "json, name=subjectAlternativeNames" })
   subjectAlternativeNames?: string[];
 
-  @Metadata({ data: "json, name=supportCode" })
+  @SpeakeasyMetadata({ data: "json, name=supportCode" })
   supportCode?: string;
 
-  @Metadata({ data: "json, name=tags", elemType: shared.Tag })
+  @SpeakeasyMetadata({ data: "json, name=tags", elemType: Tag })
   tags?: Tag[];
 }

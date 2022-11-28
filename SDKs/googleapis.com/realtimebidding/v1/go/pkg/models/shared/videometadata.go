@@ -10,6 +10,8 @@ const (
 	VideoMetadataVastVersionEnumVastVersion40          VideoMetadataVastVersionEnum = "VAST_VERSION_4_0"
 )
 
+// VideoMetadata
+// Video metadata for a creative.
 type VideoMetadata struct {
 	Duration    *string                       `json:"duration,omitempty"`
 	IsValidVast *bool                         `json:"isValidVast,omitempty"`

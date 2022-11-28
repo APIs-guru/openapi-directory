@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ServerValidationConfiguration } from "./servervalidationconfiguration";
+
 
 
 // ServerGroupValidationConfiguration
@@ -8,9 +8,9 @@ import { ServerValidationConfiguration } from "./servervalidationconfiguration";
  * Configuration for validating an instance.
 **/
 export class ServerGroupValidationConfiguration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=serverGroupId" })
+  @SpeakeasyMetadata({ data: "json, name=serverGroupId" })
   serverGroupId?: string;
 
-  @Metadata({ data: "json, name=serverValidationConfigurations", elemType: shared.ServerValidationConfiguration })
+  @SpeakeasyMetadata({ data: "json, name=serverValidationConfigurations", elemType: ServerValidationConfiguration })
   serverValidationConfigurations?: ServerValidationConfiguration[];
 }

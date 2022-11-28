@@ -1,5 +1,7 @@
 package shared
 
+// SolutionConfig
+// Describes the configuration properties for the solution.
 type SolutionConfig struct {
 	AlgorithmHyperParameters        map[string]string      `json:"algorithmHyperParameters,omitempty"`
 	AutoMlConfig                    *AutoMlConfig          `json:"autoMLConfig,omitempty"`

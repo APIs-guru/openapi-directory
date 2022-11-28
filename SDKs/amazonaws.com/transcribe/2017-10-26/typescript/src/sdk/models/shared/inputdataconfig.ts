@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // InputDataConfig
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The object that contains the Amazon S3 object location and access role required to train and tune your custom language model.
 **/
 export class InputDataConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DataAccessRoleArn" })
+  @SpeakeasyMetadata({ data: "json, name=DataAccessRoleArn" })
   dataAccessRoleArn: string;
 
-  @Metadata({ data: "json, name=S3Uri" })
+  @SpeakeasyMetadata({ data: "json, name=S3Uri" })
   s3Uri: string;
 
-  @Metadata({ data: "json, name=TuningDataS3Uri" })
+  @SpeakeasyMetadata({ data: "json, name=TuningDataS3Uri" })
   tuningDataS3Uri?: string;
 }

@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DeploymentmanagerCompositeTypesInsertPathParams:
-    project: str = field(default=None, metadata={'path_param': { 'field_name': 'project', 'style': 'simple', 'explode': False }})
+    project: str = field(metadata={'path_param': { 'field_name': 'project', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,14 +26,14 @@ class DeploymentmanagerCompositeTypesInsertQueryParams:
 
 @dataclass
 class DeploymentmanagerCompositeTypesInsertSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DeploymentmanagerCompositeTypesInsertSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -43,15 +44,15 @@ class DeploymentmanagerCompositeTypesInsertSecurity:
 
 @dataclass
 class DeploymentmanagerCompositeTypesInsertRequest:
-    path_params: DeploymentmanagerCompositeTypesInsertPathParams = field(default=None)
-    query_params: DeploymentmanagerCompositeTypesInsertQueryParams = field(default=None)
+    path_params: DeploymentmanagerCompositeTypesInsertPathParams = field()
+    query_params: DeploymentmanagerCompositeTypesInsertQueryParams = field()
+    security: DeploymentmanagerCompositeTypesInsertSecurity = field()
     request: Optional[shared.CompositeType] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: DeploymentmanagerCompositeTypesInsertSecurity = field(default=None)
     
 
 @dataclass
 class DeploymentmanagerCompositeTypesInsertResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     operation: Optional[shared.Operation] = field(default=None)
-    status_code: int = field(default=None)
     

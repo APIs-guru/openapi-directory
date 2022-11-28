@@ -1,12 +1,16 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,List,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
 @dataclass
 class CreateVirtualGatewayPathParams:
-    mesh_name: str = field(default=None, metadata={'path_param': { 'field_name': 'meshName', 'style': 'simple', 'explode': False }})
+    mesh_name: str = field(metadata={'path_param': { 'field_name': 'meshName', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -28,39 +32,43 @@ class CreateVirtualGatewayHeaders:
 @dataclass_json
 @dataclass
 class CreateVirtualGatewayRequestBodySpec:
-    backend_defaults: Optional[shared.VirtualGatewayBackendDefaults] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'backendDefaults' }})
-    listeners: Optional[List[shared.VirtualGatewayListener]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'listeners' }})
-    logging: Optional[shared.VirtualGatewayLogging] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'logging' }})
+    r"""CreateVirtualGatewayRequestBodySpec
+    An object that represents the specification of a service mesh resource.
+    """
+    
+    backend_defaults: Optional[shared.VirtualGatewayBackendDefaults] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('backendDefaults') }})
+    listeners: Optional[List[shared.VirtualGatewayListener]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('listeners') }})
+    logging: Optional[shared.VirtualGatewayLogging] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('logging') }})
     
 
 @dataclass_json
 @dataclass
 class CreateVirtualGatewayRequestBody:
-    client_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'clientToken' }})
-    spec: CreateVirtualGatewayRequestBodySpec = field(default=None, metadata={'dataclasses_json': { 'field_name': 'spec' }})
-    tags: Optional[List[shared.TagRef]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tags' }})
-    virtual_gateway_name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'virtualGatewayName' }})
+    spec: CreateVirtualGatewayRequestBodySpec = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('spec') }})
+    virtual_gateway_name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('virtualGatewayName') }})
+    client_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('clientToken') }})
+    tags: Optional[List[shared.TagRef]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('tags') }})
     
 
 @dataclass
 class CreateVirtualGatewayRequest:
-    path_params: CreateVirtualGatewayPathParams = field(default=None)
-    query_params: CreateVirtualGatewayQueryParams = field(default=None)
-    headers: CreateVirtualGatewayHeaders = field(default=None)
-    request: CreateVirtualGatewayRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: CreateVirtualGatewayHeaders = field()
+    path_params: CreateVirtualGatewayPathParams = field()
+    query_params: CreateVirtualGatewayQueryParams = field()
+    request: CreateVirtualGatewayRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class CreateVirtualGatewayResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
     conflict_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     create_virtual_gateway_output: Optional[shared.CreateVirtualGatewayOutput] = field(default=None)
     forbidden_exception: Optional[Any] = field(default=None)
     internal_server_error_exception: Optional[Any] = field(default=None)
     limit_exceeded_exception: Optional[Any] = field(default=None)
     not_found_exception: Optional[Any] = field(default=None)
     service_unavailable_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     too_many_requests_exception: Optional[Any] = field(default=None)
     

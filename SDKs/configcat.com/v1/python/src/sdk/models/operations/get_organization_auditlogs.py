@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
 from typing import Any,List,Optional
@@ -8,7 +8,7 @@ from sdk.models import shared
 
 @dataclass
 class GetOrganizationAuditlogsPathParams:
-    organization_id: str = field(default=None, metadata={'path_param': { 'field_name': 'organizationId', 'style': 'simple', 'explode': False }})
+    organization_id: str = field(metadata={'path_param': { 'field_name': 'organizationId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -23,13 +23,13 @@ class GetOrganizationAuditlogsQueryParams:
 
 @dataclass
 class GetOrganizationAuditlogsRequest:
-    path_params: GetOrganizationAuditlogsPathParams = field(default=None)
-    query_params: GetOrganizationAuditlogsQueryParams = field(default=None)
+    path_params: GetOrganizationAuditlogsPathParams = field()
+    query_params: GetOrganizationAuditlogsQueryParams = field()
     
 
 @dataclass
 class GetOrganizationAuditlogsResponse:
+    content_type: str = field()
+    status_code: int = field()
     audit_log_item_models: Optional[List[shared.AuditLogItemModel]] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

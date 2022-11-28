@@ -1,37 +1,38 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class AddNetworkSwitchStackPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=networkId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=networkId" })
   networkId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=switchStackId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=switchStackId" })
   switchStackId: string;
 }
 
 
 export class AddNetworkSwitchStackRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=serial" })
+  @SpeakeasyMetadata({ data: "json, name=serial" })
   serial: string;
 }
 
 
 export class AddNetworkSwitchStackRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: AddNetworkSwitchStackPathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: AddNetworkSwitchStackRequestBody;
 }
 
 
 export class AddNetworkSwitchStackResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   addNetworkSwitchStack200ApplicationJsonObject?: Map<string, any>;
 }

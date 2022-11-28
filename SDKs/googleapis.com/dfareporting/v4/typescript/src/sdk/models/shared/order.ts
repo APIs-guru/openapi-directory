@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { OrderContact } from "./ordercontact";
 import { LastModifiedInfo } from "./lastmodifiedinfo";
+
 
 
 // Order
@@ -9,63 +9,63 @@ import { LastModifiedInfo } from "./lastmodifiedinfo";
  * Describes properties of a Planning order.
 **/
 export class Order extends SpeakeasyBase {
-  @Metadata({ data: "json, name=accountId" })
+  @SpeakeasyMetadata({ data: "json, name=accountId" })
   accountId?: string;
 
-  @Metadata({ data: "json, name=advertiserId" })
+  @SpeakeasyMetadata({ data: "json, name=advertiserId" })
   advertiserId?: string;
 
-  @Metadata({ data: "json, name=approverUserProfileIds" })
+  @SpeakeasyMetadata({ data: "json, name=approverUserProfileIds" })
   approverUserProfileIds?: string[];
 
-  @Metadata({ data: "json, name=buyerInvoiceId" })
+  @SpeakeasyMetadata({ data: "json, name=buyerInvoiceId" })
   buyerInvoiceId?: string;
 
-  @Metadata({ data: "json, name=buyerOrganizationName" })
+  @SpeakeasyMetadata({ data: "json, name=buyerOrganizationName" })
   buyerOrganizationName?: string;
 
-  @Metadata({ data: "json, name=comments" })
+  @SpeakeasyMetadata({ data: "json, name=comments" })
   comments?: string;
 
-  @Metadata({ data: "json, name=contacts", elemType: shared.OrderContact })
+  @SpeakeasyMetadata({ data: "json, name=contacts", elemType: OrderContact })
   contacts?: OrderContact[];
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=lastModifiedInfo" })
+  @SpeakeasyMetadata({ data: "json, name=lastModifiedInfo" })
   lastModifiedInfo?: LastModifiedInfo;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=notes" })
+  @SpeakeasyMetadata({ data: "json, name=notes" })
   notes?: string;
 
-  @Metadata({ data: "json, name=planningTermId" })
+  @SpeakeasyMetadata({ data: "json, name=planningTermId" })
   planningTermId?: string;
 
-  @Metadata({ data: "json, name=projectId" })
+  @SpeakeasyMetadata({ data: "json, name=projectId" })
   projectId?: string;
 
-  @Metadata({ data: "json, name=sellerOrderId" })
+  @SpeakeasyMetadata({ data: "json, name=sellerOrderId" })
   sellerOrderId?: string;
 
-  @Metadata({ data: "json, name=sellerOrganizationName" })
+  @SpeakeasyMetadata({ data: "json, name=sellerOrganizationName" })
   sellerOrganizationName?: string;
 
-  @Metadata({ data: "json, name=siteId" })
+  @SpeakeasyMetadata({ data: "json, name=siteId" })
   siteId?: string[];
 
-  @Metadata({ data: "json, name=siteNames" })
+  @SpeakeasyMetadata({ data: "json, name=siteNames" })
   siteNames?: string[];
 
-  @Metadata({ data: "json, name=subaccountId" })
+  @SpeakeasyMetadata({ data: "json, name=subaccountId" })
   subaccountId?: string;
 
-  @Metadata({ data: "json, name=termsAndConditions" })
+  @SpeakeasyMetadata({ data: "json, name=termsAndConditions" })
   termsAndConditions?: string;
 }

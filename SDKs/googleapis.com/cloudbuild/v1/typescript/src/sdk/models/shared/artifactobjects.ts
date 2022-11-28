@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TimeSpan } from "./timespan";
+
 
 
 // ArtifactObjects
@@ -7,12 +8,12 @@ import { TimeSpan } from "./timespan";
  * Files in the workspace to upload to Cloud Storage upon successful completion of all build steps.
 **/
 export class ArtifactObjects extends SpeakeasyBase {
-  @Metadata({ data: "json, name=location" })
+  @SpeakeasyMetadata({ data: "json, name=location" })
   location?: string;
 
-  @Metadata({ data: "json, name=paths" })
+  @SpeakeasyMetadata({ data: "json, name=paths" })
   paths?: string[];
 
-  @Metadata({ data: "json, name=timing" })
+  @SpeakeasyMetadata({ data: "json, name=timing" })
   timing?: TimeSpan;
 }

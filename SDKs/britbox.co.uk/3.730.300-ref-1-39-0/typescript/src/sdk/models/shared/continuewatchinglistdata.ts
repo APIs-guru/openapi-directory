@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ContinueWatchingListDataExpansion } from "./continuewatchinglistdataexpansion";
+
 
 
 // ContinueWatchingListData
@@ -8,6 +8,6 @@ import { ContinueWatchingListDataExpansion } from "./continuewatchinglistdataexp
  * List data for ContinueWatching List
 **/
 export class ContinueWatchingListData extends SpeakeasyBase {
-  @Metadata({ data: "json, name=itemInclusions", elemType: shared.ContinueWatchingListDataExpansion })
+  @SpeakeasyMetadata({ data: "json, name=itemInclusions", elemType: ContinueWatchingListDataExpansion })
   itemInclusions?: Map<string, ContinueWatchingListDataExpansion>;
 }

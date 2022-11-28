@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { FieldMetadata } from "./fieldmetadata";
+
 
 
 // FhirConfig
@@ -8,9 +8,9 @@ import { FieldMetadata } from "./fieldmetadata";
  * Specifies how to handle de-identification of a FHIR store.
 **/
 export class FhirConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=defaultKeepExtensions" })
+  @SpeakeasyMetadata({ data: "json, name=defaultKeepExtensions" })
   defaultKeepExtensions?: boolean;
 
-  @Metadata({ data: "json, name=fieldMetadataList", elemType: shared.FieldMetadata })
+  @SpeakeasyMetadata({ data: "json, name=fieldMetadataList", elemType: FieldMetadata })
   fieldMetadataList?: FieldMetadata[];
 }

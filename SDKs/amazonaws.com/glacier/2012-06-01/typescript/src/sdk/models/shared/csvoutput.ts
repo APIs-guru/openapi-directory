@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { QuoteFieldsEnum } from "./quotefieldsenum";
+
 
 
 // CsvOutput
@@ -7,18 +8,18 @@ import { QuoteFieldsEnum } from "./quotefieldsenum";
  * Contains information about the comma-separated value (CSV) file that the job results are stored in.
 **/
 export class CsvOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=FieldDelimiter" })
+  @SpeakeasyMetadata({ data: "json, name=FieldDelimiter" })
   fieldDelimiter?: string;
 
-  @Metadata({ data: "json, name=QuoteCharacter" })
+  @SpeakeasyMetadata({ data: "json, name=QuoteCharacter" })
   quoteCharacter?: string;
 
-  @Metadata({ data: "json, name=QuoteEscapeCharacter" })
+  @SpeakeasyMetadata({ data: "json, name=QuoteEscapeCharacter" })
   quoteEscapeCharacter?: string;
 
-  @Metadata({ data: "json, name=QuoteFields" })
+  @SpeakeasyMetadata({ data: "json, name=QuoteFields" })
   quoteFields?: QuoteFieldsEnum;
 
-  @Metadata({ data: "json, name=RecordDelimiter" })
+  @SpeakeasyMetadata({ data: "json, name=RecordDelimiter" })
   recordDelimiter?: string;
 }

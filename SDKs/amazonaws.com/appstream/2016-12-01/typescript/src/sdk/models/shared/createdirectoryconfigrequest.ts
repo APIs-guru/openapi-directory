@@ -1,14 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ServiceAccountCredentials } from "./serviceaccountcredentials";
 
 
+
 export class CreateDirectoryConfigRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DirectoryName" })
+  @SpeakeasyMetadata({ data: "json, name=DirectoryName" })
   directoryName: string;
 
-  @Metadata({ data: "json, name=OrganizationalUnitDistinguishedNames" })
+  @SpeakeasyMetadata({ data: "json, name=OrganizationalUnitDistinguishedNames" })
   organizationalUnitDistinguishedNames: string[];
 
-  @Metadata({ data: "json, name=ServiceAccountCredentials" })
+  @SpeakeasyMetadata({ data: "json, name=ServiceAccountCredentials" })
   serviceAccountCredentials?: ServiceAccountCredentials;
 }

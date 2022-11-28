@@ -1,14 +1,8 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
-export declare class FetchUploadStatusesSecurityOption1 extends SpeakeasyBase {
-    apiKey: shared.SchemeApiKey;
-}
-export declare class FetchUploadStatusesSecurityOption2 extends SpeakeasyBase {
-    oauth2AuthorizationCode: shared.SchemeOauth2AuthorizationCode;
-}
 export declare class FetchUploadStatusesSecurity extends SpeakeasyBase {
-    option1?: FetchUploadStatusesSecurityOption1;
-    option2?: FetchUploadStatusesSecurityOption2;
+    apiKey?: shared.SchemeApiKey;
+    oauth2AuthorizationCode?: shared.SchemeOauth2AuthorizationCode;
 }
 export declare class FetchUploadStatusesRequest extends SpeakeasyBase {
     request?: shared.UploadStatusQuery;

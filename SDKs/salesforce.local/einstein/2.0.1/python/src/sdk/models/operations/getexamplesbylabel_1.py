@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import List,Optional
+from typing import Optional
 from sdk.models import shared
 
 
@@ -12,18 +12,18 @@ class GetExamplesByLabel1QueryParams:
 
 @dataclass
 class GetExamplesByLabel1Security:
-    bearer_token: shared.SchemeBearerToken = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer' }})
+    bearer_token: shared.SchemeBearerToken = field(metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer' }})
     
 
 @dataclass
 class GetExamplesByLabel1Request:
-    query_params: GetExamplesByLabel1QueryParams = field(default=None)
-    security: GetExamplesByLabel1Security = field(default=None)
+    query_params: GetExamplesByLabel1QueryParams = field()
+    security: GetExamplesByLabel1Security = field()
     
 
 @dataclass
 class GetExamplesByLabel1Response:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     example_list: Optional[shared.ExampleList] = field(default=None)
-    status_code: int = field(default=None)
     

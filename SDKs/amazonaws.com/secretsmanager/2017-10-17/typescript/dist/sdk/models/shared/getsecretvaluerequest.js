@@ -22,22 +22,22 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var GetSecretValueRequest = /** @class */ (function (_super) {
     __extends(GetSecretValueRequest, _super);
     function GetSecretValueRequest() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=SecretId" }),
+        SpeakeasyMetadata({ data: "json, name=SecretId" }),
         __metadata("design:type", String)
     ], GetSecretValueRequest.prototype, "secretId", void 0);
     __decorate([
-        Metadata({ data: "json, name=VersionId" }),
+        SpeakeasyMetadata({ data: "json, name=VersionId" }),
         __metadata("design:type", String)
     ], GetSecretValueRequest.prototype, "versionId", void 0);
     __decorate([
-        Metadata({ data: "json, name=VersionStage" }),
+        SpeakeasyMetadata({ data: "json, name=VersionStage" }),
         __metadata("design:type", String)
     ], GetSecretValueRequest.prototype, "versionStage", void 0);
     return GetSecretValueRequest;

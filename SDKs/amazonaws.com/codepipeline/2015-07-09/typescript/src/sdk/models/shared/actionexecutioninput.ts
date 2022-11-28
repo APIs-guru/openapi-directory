@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ActionTypeId } from "./actiontypeid";
 import { ArtifactDetail } from "./artifactdetail";
+
 
 
 // ActionExecutionInput
@@ -9,24 +9,24 @@ import { ArtifactDetail } from "./artifactdetail";
  * Input information used for an action execution.
 **/
 export class ActionExecutionInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=actionTypeId" })
+  @SpeakeasyMetadata({ data: "json, name=actionTypeId" })
   actionTypeId?: ActionTypeId;
 
-  @Metadata({ data: "json, name=configuration" })
+  @SpeakeasyMetadata({ data: "json, name=configuration" })
   configuration?: Map<string, string>;
 
-  @Metadata({ data: "json, name=inputArtifacts", elemType: shared.ArtifactDetail })
+  @SpeakeasyMetadata({ data: "json, name=inputArtifacts", elemType: ArtifactDetail })
   inputArtifacts?: ArtifactDetail[];
 
-  @Metadata({ data: "json, name=namespace" })
+  @SpeakeasyMetadata({ data: "json, name=namespace" })
   namespace?: string;
 
-  @Metadata({ data: "json, name=region" })
+  @SpeakeasyMetadata({ data: "json, name=region" })
   region?: string;
 
-  @Metadata({ data: "json, name=resolvedConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=resolvedConfiguration" })
   resolvedConfiguration?: Map<string, string>;
 
-  @Metadata({ data: "json, name=roleArn" })
+  @SpeakeasyMetadata({ data: "json, name=roleArn" })
   roleArn?: string;
 }

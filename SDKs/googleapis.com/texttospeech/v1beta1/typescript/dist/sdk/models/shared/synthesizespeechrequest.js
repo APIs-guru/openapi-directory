@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AudioConfig } from "./audioconfig";
 import { SynthesisInput } from "./synthesisinput";
 import { VoiceSelectionParams } from "./voiceselectionparams";
@@ -41,19 +41,19 @@ var SynthesizeSpeechRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=audioConfig" }),
+        SpeakeasyMetadata({ data: "json, name=audioConfig" }),
         __metadata("design:type", AudioConfig)
     ], SynthesizeSpeechRequest.prototype, "audioConfig", void 0);
     __decorate([
-        Metadata({ data: "json, name=enableTimePointing" }),
+        SpeakeasyMetadata({ data: "json, name=enableTimePointing" }),
         __metadata("design:type", Array)
     ], SynthesizeSpeechRequest.prototype, "enableTimePointing", void 0);
     __decorate([
-        Metadata({ data: "json, name=input" }),
+        SpeakeasyMetadata({ data: "json, name=input" }),
         __metadata("design:type", SynthesisInput)
     ], SynthesizeSpeechRequest.prototype, "input", void 0);
     __decorate([
-        Metadata({ data: "json, name=voice" }),
+        SpeakeasyMetadata({ data: "json, name=voice" }),
         __metadata("design:type", VoiceSelectionParams)
     ], SynthesizeSpeechRequest.prototype, "voice", void 0);
     return SynthesizeSpeechRequest;

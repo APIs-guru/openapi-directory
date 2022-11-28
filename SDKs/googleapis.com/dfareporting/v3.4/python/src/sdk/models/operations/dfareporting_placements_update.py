@@ -1,11 +1,15 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DfareportingPlacementsUpdatePathParams:
-    profile_id: str = field(default=None, metadata={'path_param': { 'field_name': 'profileId', 'style': 'simple', 'explode': False }})
+    profile_id: str = field(metadata={'path_param': { 'field_name': 'profileId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,21 +29,21 @@ class DfareportingPlacementsUpdateQueryParams:
 
 @dataclass
 class DfareportingPlacementsUpdateSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DfareportingPlacementsUpdateRequest:
-    path_params: DfareportingPlacementsUpdatePathParams = field(default=None)
-    query_params: DfareportingPlacementsUpdateQueryParams = field(default=None)
+    path_params: DfareportingPlacementsUpdatePathParams = field()
+    query_params: DfareportingPlacementsUpdateQueryParams = field()
+    security: DfareportingPlacementsUpdateSecurity = field()
     request: Optional[shared.Placement] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: DfareportingPlacementsUpdateSecurity = field(default=None)
     
 
 @dataclass
 class DfareportingPlacementsUpdateResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     placement: Optional[shared.Placement] = field(default=None)
-    status_code: int = field(default=None)
     

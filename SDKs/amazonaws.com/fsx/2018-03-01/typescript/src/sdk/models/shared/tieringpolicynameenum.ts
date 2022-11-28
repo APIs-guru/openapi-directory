@@ -1,8 +1,9 @@
 
 
+
 export enum TieringPolicyNameEnum {
-    SnapshotOnly = "SNAPSHOT_ONLY"
-,    Auto = "AUTO"
-,    All = "ALL"
-,    None = "NONE"
+    SnapshotOnly = "SNAPSHOT_ONLY",
+    Auto = "AUTO",
+    All = "ALL",
+    None = "NONE"
 }

@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class AgeRangeTargetingOptionDetailsAgeRangeEnum(str, Enum):
     AGE_RANGE_UNSPECIFIED = "AGE_RANGE_UNSPECIFIED"
@@ -26,5 +28,9 @@ class AgeRangeTargetingOptionDetailsAgeRangeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class AgeRangeTargetingOptionDetails:
-    age_range: Optional[AgeRangeTargetingOptionDetailsAgeRangeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ageRange' }})
+    r"""AgeRangeTargetingOptionDetails
+    Represents a targetable age range. This will be populated in the age_range_details field when targeting_type is `TARGETING_TYPE_AGE_RANGE`.
+    """
+    
+    age_range: Optional[AgeRangeTargetingOptionDetailsAgeRangeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ageRange') }})
     

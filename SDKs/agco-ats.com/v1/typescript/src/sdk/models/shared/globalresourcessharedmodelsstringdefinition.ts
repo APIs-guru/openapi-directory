@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GlobalResourcesSharedModelsStringTranslation } from "./globalresourcessharedmodelsstringtranslation";
+
 
 
 // GlobalResourcesSharedModelsStringDefinition
@@ -8,21 +8,21 @@ import { GlobalResourcesSharedModelsStringTranslation } from "./globalresourcess
  * The definition of a string to be translated
 **/
 export class GlobalResourcesSharedModelsStringDefinition extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DescriptionForTranslator" })
+  @SpeakeasyMetadata({ data: "json, name=DescriptionForTranslator" })
   descriptionForTranslator: string;
 
-  @Metadata({ data: "json, name=DoNotTranslate" })
+  @SpeakeasyMetadata({ data: "json, name=DoNotTranslate" })
   doNotTranslate?: boolean;
 
-  @Metadata({ data: "json, name=Id" })
+  @SpeakeasyMetadata({ data: "json, name=Id" })
   id?: string;
 
-  @Metadata({ data: "json, name=ParameterCount" })
+  @SpeakeasyMetadata({ data: "json, name=ParameterCount" })
   parameterCount?: number;
 
-  @Metadata({ data: "json, name=Timestamp" })
+  @SpeakeasyMetadata({ data: "json, name=Timestamp" })
   timestamp?: string;
 
-  @Metadata({ data: "json, name=Translations", elemType: shared.GlobalResourcesSharedModelsStringTranslation })
+  @SpeakeasyMetadata({ data: "json, name=Translations", elemType: GlobalResourcesSharedModelsStringTranslation })
   translations?: GlobalResourcesSharedModelsStringTranslation[];
 }

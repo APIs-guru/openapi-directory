@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ConnectorStatusEnum } from "./connectorstatusenum";
 import { VmManagerTypeEnum } from "./vmmanagertypeenum";
 // Connector
@@ -35,43 +35,43 @@ var Connector = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=associatedOn" }),
+        SpeakeasyMetadata({ data: "json, name=associatedOn" }),
         __metadata("design:type", Date)
     ], Connector.prototype, "associatedOn", void 0);
     __decorate([
-        Metadata({ data: "json, name=capabilityList" }),
+        SpeakeasyMetadata({ data: "json, name=capabilityList" }),
         __metadata("design:type", Array)
     ], Connector.prototype, "capabilityList", void 0);
     __decorate([
-        Metadata({ data: "json, name=connectorId" }),
+        SpeakeasyMetadata({ data: "json, name=connectorId" }),
         __metadata("design:type", String)
     ], Connector.prototype, "connectorId", void 0);
     __decorate([
-        Metadata({ data: "json, name=ipAddress" }),
+        SpeakeasyMetadata({ data: "json, name=ipAddress" }),
         __metadata("design:type", String)
     ], Connector.prototype, "ipAddress", void 0);
     __decorate([
-        Metadata({ data: "json, name=macAddress" }),
+        SpeakeasyMetadata({ data: "json, name=macAddress" }),
         __metadata("design:type", String)
     ], Connector.prototype, "macAddress", void 0);
     __decorate([
-        Metadata({ data: "json, name=status" }),
+        SpeakeasyMetadata({ data: "json, name=status" }),
         __metadata("design:type", String)
     ], Connector.prototype, "status", void 0);
     __decorate([
-        Metadata({ data: "json, name=version" }),
+        SpeakeasyMetadata({ data: "json, name=version" }),
         __metadata("design:type", String)
     ], Connector.prototype, "version", void 0);
     __decorate([
-        Metadata({ data: "json, name=vmManagerId" }),
+        SpeakeasyMetadata({ data: "json, name=vmManagerId" }),
         __metadata("design:type", String)
     ], Connector.prototype, "vmManagerId", void 0);
     __decorate([
-        Metadata({ data: "json, name=vmManagerName" }),
+        SpeakeasyMetadata({ data: "json, name=vmManagerName" }),
         __metadata("design:type", String)
     ], Connector.prototype, "vmManagerName", void 0);
     __decorate([
-        Metadata({ data: "json, name=vmManagerType" }),
+        SpeakeasyMetadata({ data: "json, name=vmManagerType" }),
         __metadata("design:type", String)
     ], Connector.prototype, "vmManagerType", void 0);
     return Connector;

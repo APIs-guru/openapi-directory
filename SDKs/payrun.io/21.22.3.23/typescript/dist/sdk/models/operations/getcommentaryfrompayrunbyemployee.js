@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetCommentaryFromPayRunByEmployeePathParams = /** @class */ (function (_super) {
     __extends(GetCommentaryFromPayRunByEmployeePathParams, _super);
@@ -30,19 +30,19 @@ var GetCommentaryFromPayRunByEmployeePathParams = /** @class */ (function (_supe
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=EmployeeId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=EmployeeId" }),
         __metadata("design:type", String)
     ], GetCommentaryFromPayRunByEmployeePathParams.prototype, "employeeId", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=EmployerId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=EmployerId" }),
         __metadata("design:type", String)
     ], GetCommentaryFromPayRunByEmployeePathParams.prototype, "employerId", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=PayRunId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=PayRunId" }),
         __metadata("design:type", String)
     ], GetCommentaryFromPayRunByEmployeePathParams.prototype, "payRunId", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=PayScheduleId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=PayScheduleId" }),
         __metadata("design:type", String)
     ], GetCommentaryFromPayRunByEmployeePathParams.prototype, "payScheduleId", void 0);
     return GetCommentaryFromPayRunByEmployeePathParams;
@@ -54,11 +54,11 @@ var GetCommentaryFromPayRunByEmployeeHeaders = /** @class */ (function (_super) 
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=Api-Version" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Api-Version" }),
         __metadata("design:type", String)
     ], GetCommentaryFromPayRunByEmployeeHeaders.prototype, "apiVersion", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=Authorization" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Authorization" }),
         __metadata("design:type", String)
     ], GetCommentaryFromPayRunByEmployeeHeaders.prototype, "authorization", void 0);
     return GetCommentaryFromPayRunByEmployeeHeaders;
@@ -70,11 +70,11 @@ var GetCommentaryFromPayRunByEmployeeRequest = /** @class */ (function (_super) 
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetCommentaryFromPayRunByEmployeePathParams)
     ], GetCommentaryFromPayRunByEmployeeRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetCommentaryFromPayRunByEmployeeHeaders)
     ], GetCommentaryFromPayRunByEmployeeRequest.prototype, "headers", void 0);
     return GetCommentaryFromPayRunByEmployeeRequest;
@@ -86,19 +86,19 @@ var GetCommentaryFromPayRunByEmployeeResponse = /** @class */ (function (_super)
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.Commentary)
     ], GetCommentaryFromPayRunByEmployeeResponse.prototype, "commentary", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetCommentaryFromPayRunByEmployeeResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.ErrorModel)
     ], GetCommentaryFromPayRunByEmployeeResponse.prototype, "errorModel", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetCommentaryFromPayRunByEmployeeResponse.prototype, "statusCode", void 0);
     return GetCommentaryFromPayRunByEmployeeResponse;

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { AuthenticationConfiguration } from "./authenticationconfiguration";
 import { CodeRepository } from "./coderepository";
 import { ImageRepository } from "./imagerepository";

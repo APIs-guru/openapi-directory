@@ -1,38 +1,39 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class StopPointGetPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=ids" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=ids" })
   ids: string[];
 }
 
 
 export class StopPointGetQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=includeCrowdingData" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=includeCrowdingData" })
   includeCrowdingData?: boolean;
 }
 
 
 export class StopPointGetRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: StopPointGetPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: StopPointGetQueryParams;
 }
 
 
 export class StopPointGetResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata({ elemType: shared.TflApiPresentationEntitiesStopPoint })
+  @SpeakeasyMetadata({ elemType: shared.TflApiPresentationEntitiesStopPoint })
   tflApiPresentationEntitiesStopPoints?: shared.TflApiPresentationEntitiesStopPoint[];
 }

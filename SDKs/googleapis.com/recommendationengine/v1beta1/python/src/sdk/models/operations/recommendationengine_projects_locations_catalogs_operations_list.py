@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class RecommendationengineProjectsLocationsCatalogsOperationsListPathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -28,20 +29,20 @@ class RecommendationengineProjectsLocationsCatalogsOperationsListQueryParams:
 
 @dataclass
 class RecommendationengineProjectsLocationsCatalogsOperationsListSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class RecommendationengineProjectsLocationsCatalogsOperationsListRequest:
-    path_params: RecommendationengineProjectsLocationsCatalogsOperationsListPathParams = field(default=None)
-    query_params: RecommendationengineProjectsLocationsCatalogsOperationsListQueryParams = field(default=None)
-    security: RecommendationengineProjectsLocationsCatalogsOperationsListSecurity = field(default=None)
+    path_params: RecommendationengineProjectsLocationsCatalogsOperationsListPathParams = field()
+    query_params: RecommendationengineProjectsLocationsCatalogsOperationsListQueryParams = field()
+    security: RecommendationengineProjectsLocationsCatalogsOperationsListSecurity = field()
     
 
 @dataclass
 class RecommendationengineProjectsLocationsCatalogsOperationsListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_longrunning_list_operations_response: Optional[shared.GoogleLongrunningListOperationsResponse] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class ChromepolicyCustomersPoliciesNetworksRemoveCertificatePathParams:
-    customer: str = field(default=None, metadata={'path_param': { 'field_name': 'customer', 'style': 'simple', 'explode': False }})
+    customer: str = field(metadata={'path_param': { 'field_name': 'customer', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,21 +26,21 @@ class ChromepolicyCustomersPoliciesNetworksRemoveCertificateQueryParams:
 
 @dataclass
 class ChromepolicyCustomersPoliciesNetworksRemoveCertificateSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class ChromepolicyCustomersPoliciesNetworksRemoveCertificateRequest:
-    path_params: ChromepolicyCustomersPoliciesNetworksRemoveCertificatePathParams = field(default=None)
-    query_params: ChromepolicyCustomersPoliciesNetworksRemoveCertificateQueryParams = field(default=None)
+    path_params: ChromepolicyCustomersPoliciesNetworksRemoveCertificatePathParams = field()
+    query_params: ChromepolicyCustomersPoliciesNetworksRemoveCertificateQueryParams = field()
+    security: ChromepolicyCustomersPoliciesNetworksRemoveCertificateSecurity = field()
     request: Optional[shared.GoogleChromePolicyVersionsV1RemoveCertificateRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: ChromepolicyCustomersPoliciesNetworksRemoveCertificateSecurity = field(default=None)
     
 
 @dataclass
 class ChromepolicyCustomersPoliciesNetworksRemoveCertificateResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_chrome_policy_versions_v1_remove_certificate_response: Optional[dict[str, Any]] = field(default=None)
-    status_code: int = field(default=None)
     

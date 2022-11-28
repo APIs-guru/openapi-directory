@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var CloudresourcemanagerProjectsTestIamPermissionsPathParams = /** @class */ (function (_super) {
     __extends(CloudresourcemanagerProjectsTestIamPermissionsPathParams, _super);
@@ -30,7 +30,7 @@ var CloudresourcemanagerProjectsTestIamPermissionsPathParams = /** @class */ (fu
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=resource" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=resource" }),
         __metadata("design:type", String)
     ], CloudresourcemanagerProjectsTestIamPermissionsPathParams.prototype, "resource", void 0);
     return CloudresourcemanagerProjectsTestIamPermissionsPathParams;
@@ -42,47 +42,47 @@ var CloudresourcemanagerProjectsTestIamPermissionsQueryParams = /** @class */ (f
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=$.xgafv" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=$.xgafv" }),
         __metadata("design:type", String)
     ], CloudresourcemanagerProjectsTestIamPermissionsQueryParams.prototype, "dollarXgafv", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=access_token" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=access_token" }),
         __metadata("design:type", String)
     ], CloudresourcemanagerProjectsTestIamPermissionsQueryParams.prototype, "accessToken", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=alt" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=alt" }),
         __metadata("design:type", String)
     ], CloudresourcemanagerProjectsTestIamPermissionsQueryParams.prototype, "alt", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=callback" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=callback" }),
         __metadata("design:type", String)
     ], CloudresourcemanagerProjectsTestIamPermissionsQueryParams.prototype, "callback", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=fields" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=fields" }),
         __metadata("design:type", String)
     ], CloudresourcemanagerProjectsTestIamPermissionsQueryParams.prototype, "fields", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=key" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=key" }),
         __metadata("design:type", String)
     ], CloudresourcemanagerProjectsTestIamPermissionsQueryParams.prototype, "key", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=oauth_token" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=oauth_token" }),
         __metadata("design:type", String)
     ], CloudresourcemanagerProjectsTestIamPermissionsQueryParams.prototype, "oauthToken", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=prettyPrint" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=prettyPrint" }),
         __metadata("design:type", Boolean)
     ], CloudresourcemanagerProjectsTestIamPermissionsQueryParams.prototype, "prettyPrint", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=quotaUser" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=quotaUser" }),
         __metadata("design:type", String)
     ], CloudresourcemanagerProjectsTestIamPermissionsQueryParams.prototype, "quotaUser", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=uploadType" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=uploadType" }),
         __metadata("design:type", String)
     ], CloudresourcemanagerProjectsTestIamPermissionsQueryParams.prototype, "uploadType", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=upload_protocol" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=upload_protocol" }),
         __metadata("design:type", String)
     ], CloudresourcemanagerProjectsTestIamPermissionsQueryParams.prototype, "uploadProtocol", void 0);
     return CloudresourcemanagerProjectsTestIamPermissionsQueryParams;
@@ -94,11 +94,11 @@ var CloudresourcemanagerProjectsTestIamPermissionsSecurityOption1 = /** @class *
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2)
     ], CloudresourcemanagerProjectsTestIamPermissionsSecurityOption1.prototype, "oauth2", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2c)
     ], CloudresourcemanagerProjectsTestIamPermissionsSecurityOption1.prototype, "oauth2c", void 0);
     return CloudresourcemanagerProjectsTestIamPermissionsSecurityOption1;
@@ -110,11 +110,11 @@ var CloudresourcemanagerProjectsTestIamPermissionsSecurityOption2 = /** @class *
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2)
     ], CloudresourcemanagerProjectsTestIamPermissionsSecurityOption2.prototype, "oauth2", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2c)
     ], CloudresourcemanagerProjectsTestIamPermissionsSecurityOption2.prototype, "oauth2c", void 0);
     return CloudresourcemanagerProjectsTestIamPermissionsSecurityOption2;
@@ -126,11 +126,11 @@ var CloudresourcemanagerProjectsTestIamPermissionsSecurity = /** @class */ (func
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, option=true" }),
+        SpeakeasyMetadata({ data: "security, option=true" }),
         __metadata("design:type", CloudresourcemanagerProjectsTestIamPermissionsSecurityOption1)
     ], CloudresourcemanagerProjectsTestIamPermissionsSecurity.prototype, "option1", void 0);
     __decorate([
-        Metadata({ data: "security, option=true" }),
+        SpeakeasyMetadata({ data: "security, option=true" }),
         __metadata("design:type", CloudresourcemanagerProjectsTestIamPermissionsSecurityOption2)
     ], CloudresourcemanagerProjectsTestIamPermissionsSecurity.prototype, "option2", void 0);
     return CloudresourcemanagerProjectsTestIamPermissionsSecurity;
@@ -142,19 +142,19 @@ var CloudresourcemanagerProjectsTestIamPermissionsRequest = /** @class */ (funct
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", CloudresourcemanagerProjectsTestIamPermissionsPathParams)
     ], CloudresourcemanagerProjectsTestIamPermissionsRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", CloudresourcemanagerProjectsTestIamPermissionsQueryParams)
     ], CloudresourcemanagerProjectsTestIamPermissionsRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", shared.TestIamPermissionsRequest)
     ], CloudresourcemanagerProjectsTestIamPermissionsRequest.prototype, "request", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", CloudresourcemanagerProjectsTestIamPermissionsSecurity)
     ], CloudresourcemanagerProjectsTestIamPermissionsRequest.prototype, "security", void 0);
     return CloudresourcemanagerProjectsTestIamPermissionsRequest;
@@ -166,15 +166,15 @@ var CloudresourcemanagerProjectsTestIamPermissionsResponse = /** @class */ (func
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], CloudresourcemanagerProjectsTestIamPermissionsResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], CloudresourcemanagerProjectsTestIamPermissionsResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.TestIamPermissionsResponse)
     ], CloudresourcemanagerProjectsTestIamPermissionsResponse.prototype, "testIamPermissionsResponse", void 0);
     return CloudresourcemanagerProjectsTestIamPermissionsResponse;

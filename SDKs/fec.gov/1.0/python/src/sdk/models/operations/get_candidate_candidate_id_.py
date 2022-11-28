@@ -1,11 +1,15 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class GetCandidateCandidateIDPathParams:
-    candidate_id: str = field(default=None, metadata={'path_param': { 'field_name': 'candidate_id', 'style': 'simple', 'explode': False }})
+    candidate_id: str = field(metadata={'path_param': { 'field_name': 'candidate_id', 'style': 'simple', 'explode': False }})
     
 class GetCandidateCandidateIDCandidateStatusEnum(str, Enum):
     UNKNOWN = ""
@@ -29,7 +33,7 @@ class GetCandidateCandidateIDOfficeEnum(str, Enum):
 
 @dataclass
 class GetCandidateCandidateIDQueryParams:
-    api_key: str = field(default=None, metadata={'query_param': { 'field_name': 'api_key', 'style': 'form', 'explode': True }})
+    api_key: str = field(metadata={'query_param': { 'field_name': 'api_key', 'style': 'form', 'explode': True }})
     candidate_status: Optional[List[GetCandidateCandidateIDCandidateStatusEnum]] = field(default=None, metadata={'query_param': { 'field_name': 'candidate_status', 'style': 'form', 'explode': True }})
     cycle: Optional[List[int]] = field(default=None, metadata={'query_param': { 'field_name': 'cycle', 'style': 'form', 'explode': True }})
     district: Optional[List[str]] = field(default=None, metadata={'query_param': { 'field_name': 'district', 'style': 'form', 'explode': True }})
@@ -52,13 +56,13 @@ class GetCandidateCandidateIDQueryParams:
 
 @dataclass
 class GetCandidateCandidateIDRequest:
-    path_params: GetCandidateCandidateIDPathParams = field(default=None)
-    query_params: GetCandidateCandidateIDQueryParams = field(default=None)
+    path_params: GetCandidateCandidateIDPathParams = field()
+    query_params: GetCandidateCandidateIDQueryParams = field()
     
 
 @dataclass
 class GetCandidateCandidateIDResponse:
+    content_type: str = field()
+    status_code: int = field()
     candidate_detail_page: Optional[shared.CandidateDetailPage] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

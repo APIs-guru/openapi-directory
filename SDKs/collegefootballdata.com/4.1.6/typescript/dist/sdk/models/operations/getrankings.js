@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetRankingsQueryParams = /** @class */ (function (_super) {
     __extends(GetRankingsQueryParams, _super);
@@ -30,15 +30,15 @@ var GetRankingsQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=seasonType" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=seasonType" }),
         __metadata("design:type", String)
     ], GetRankingsQueryParams.prototype, "seasonType", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=week" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=week" }),
         __metadata("design:type", Number)
     ], GetRankingsQueryParams.prototype, "week", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=year" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=year" }),
         __metadata("design:type", Number)
     ], GetRankingsQueryParams.prototype, "year", void 0);
     return GetRankingsQueryParams;
@@ -50,7 +50,7 @@ var GetRankingsRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetRankingsQueryParams)
     ], GetRankingsRequest.prototype, "queryParams", void 0);
     return GetRankingsRequest;
@@ -62,15 +62,15 @@ var GetRankingsResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetRankingsResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata({ elemType: shared.RankingWeek }),
+        SpeakeasyMetadata({ elemType: shared.RankingWeek }),
         __metadata("design:type", Array)
     ], GetRankingsResponse.prototype, "rankingWeeks", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetRankingsResponse.prototype, "statusCode", void 0);
     return GetRankingsResponse;

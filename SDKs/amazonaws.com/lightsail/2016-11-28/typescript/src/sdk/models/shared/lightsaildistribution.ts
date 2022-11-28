@@ -1,5 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CacheSettings } from "./cachesettings";
 import { CacheBehaviorPerPath } from "./cachebehaviorperpath";
 import { CacheBehavior } from "./cachebehavior";
@@ -10,68 +9,69 @@ import { ResourceTypeEnum } from "./resourcetypeenum";
 import { Tag } from "./tag";
 
 
+
 // LightsailDistribution
 /** 
  * Describes an Amazon Lightsail content delivery network (CDN) distribution.
 **/
 export class LightsailDistribution extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ableToUpdateBundle" })
+  @SpeakeasyMetadata({ data: "json, name=ableToUpdateBundle" })
   ableToUpdateBundle?: boolean;
 
-  @Metadata({ data: "json, name=alternativeDomainNames" })
+  @SpeakeasyMetadata({ data: "json, name=alternativeDomainNames" })
   alternativeDomainNames?: string[];
 
-  @Metadata({ data: "json, name=arn" })
+  @SpeakeasyMetadata({ data: "json, name=arn" })
   arn?: string;
 
-  @Metadata({ data: "json, name=bundleId" })
+  @SpeakeasyMetadata({ data: "json, name=bundleId" })
   bundleId?: string;
 
-  @Metadata({ data: "json, name=cacheBehaviorSettings" })
+  @SpeakeasyMetadata({ data: "json, name=cacheBehaviorSettings" })
   cacheBehaviorSettings?: CacheSettings;
 
-  @Metadata({ data: "json, name=cacheBehaviors", elemType: shared.CacheBehaviorPerPath })
+  @SpeakeasyMetadata({ data: "json, name=cacheBehaviors", elemType: CacheBehaviorPerPath })
   cacheBehaviors?: CacheBehaviorPerPath[];
 
-  @Metadata({ data: "json, name=certificateName" })
+  @SpeakeasyMetadata({ data: "json, name=certificateName" })
   certificateName?: string;
 
-  @Metadata({ data: "json, name=createdAt" })
+  @SpeakeasyMetadata({ data: "json, name=createdAt" })
   createdAt?: Date;
 
-  @Metadata({ data: "json, name=defaultCacheBehavior" })
+  @SpeakeasyMetadata({ data: "json, name=defaultCacheBehavior" })
   defaultCacheBehavior?: CacheBehavior;
 
-  @Metadata({ data: "json, name=domainName" })
+  @SpeakeasyMetadata({ data: "json, name=domainName" })
   domainName?: string;
 
-  @Metadata({ data: "json, name=ipAddressType" })
+  @SpeakeasyMetadata({ data: "json, name=ipAddressType" })
   ipAddressType?: IpAddressTypeEnum;
 
-  @Metadata({ data: "json, name=isEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=isEnabled" })
   isEnabled?: boolean;
 
-  @Metadata({ data: "json, name=location" })
+  @SpeakeasyMetadata({ data: "json, name=location" })
   location?: ResourceLocation;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=origin" })
+  @SpeakeasyMetadata({ data: "json, name=origin" })
   origin?: Origin;
 
-  @Metadata({ data: "json, name=originPublicDNS" })
+  @SpeakeasyMetadata({ data: "json, name=originPublicDNS" })
   originPublicDns?: string;
 
-  @Metadata({ data: "json, name=resourceType" })
+  @SpeakeasyMetadata({ data: "json, name=resourceType" })
   resourceType?: ResourceTypeEnum;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: string;
 
-  @Metadata({ data: "json, name=supportCode" })
+  @SpeakeasyMetadata({ data: "json, name=supportCode" })
   supportCode?: string;
 
-  @Metadata({ data: "json, name=tags", elemType: shared.Tag })
+  @SpeakeasyMetadata({ data: "json, name=tags", elemType: Tag })
   tags?: Tag[];
 }

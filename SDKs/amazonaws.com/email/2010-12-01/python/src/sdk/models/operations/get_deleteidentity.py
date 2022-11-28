@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetDeleteIdentityActionEnum(str, Enum):
     DELETE_IDENTITY = "DeleteIdentity"
@@ -10,9 +14,9 @@ class GetDeleteIdentityVersionEnum(str, Enum):
 
 @dataclass
 class GetDeleteIdentityQueryParams:
-    action: GetDeleteIdentityActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    identity: str = field(default=None, metadata={'query_param': { 'field_name': 'Identity', 'style': 'form', 'explode': True }})
-    version: GetDeleteIdentityVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: GetDeleteIdentityActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    identity: str = field(metadata={'query_param': { 'field_name': 'Identity', 'style': 'form', 'explode': True }})
+    version: GetDeleteIdentityVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -28,13 +32,13 @@ class GetDeleteIdentityHeaders:
 
 @dataclass
 class GetDeleteIdentityRequest:
-    query_params: GetDeleteIdentityQueryParams = field(default=None)
-    headers: GetDeleteIdentityHeaders = field(default=None)
+    headers: GetDeleteIdentityHeaders = field()
+    query_params: GetDeleteIdentityQueryParams = field()
     
 
 @dataclass
 class GetDeleteIdentityResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

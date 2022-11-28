@@ -1,9 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AddressAutocompleteHit } from "./addressautocompletehit";
 
 
+
 export class AddressAutocompleteResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=hits", elemType: shared.AddressAutocompleteHit })
+  @SpeakeasyMetadata({ data: "json, name=hits", elemType: AddressAutocompleteHit })
   hits?: AddressAutocompleteHit[];
 }

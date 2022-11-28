@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudDialogflowV2beta1IntentMessageCarouselSelectItem } from "./googleclouddialogflowv2beta1intentmessagecarouselselectitem";
+
 
 
 // GoogleCloudDialogflowV2beta1IntentMessageCarouselSelect
@@ -8,6 +8,6 @@ import { GoogleCloudDialogflowV2beta1IntentMessageCarouselSelectItem } from "./g
  * The card for presenting a carousel of options to select from.
 **/
 export class GoogleCloudDialogflowV2beta1IntentMessageCarouselSelect extends SpeakeasyBase {
-  @Metadata({ data: "json, name=items", elemType: shared.GoogleCloudDialogflowV2beta1IntentMessageCarouselSelectItem })
+  @SpeakeasyMetadata({ data: "json, name=items", elemType: GoogleCloudDialogflowV2beta1IntentMessageCarouselSelectItem })
   items?: GoogleCloudDialogflowV2beta1IntentMessageCarouselSelectItem[];
 }

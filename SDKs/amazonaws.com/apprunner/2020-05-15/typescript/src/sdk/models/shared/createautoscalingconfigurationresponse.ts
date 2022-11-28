@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AutoScalingConfiguration } from "./autoscalingconfiguration";
 
 
+
 export class CreateAutoScalingConfigurationResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AutoScalingConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=AutoScalingConfiguration" })
   autoScalingConfiguration: AutoScalingConfiguration;
 }

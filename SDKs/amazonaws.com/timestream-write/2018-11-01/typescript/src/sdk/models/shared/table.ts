@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RetentionProperties } from "./retentionproperties";
 import { TableStatusEnum } from "./tablestatusenum";
+
 
 
 // Table
@@ -8,24 +9,24 @@ import { TableStatusEnum } from "./tablestatusenum";
  * Table represents a database table in Timestream. Tables contain one or more related time series. You can modify the retention duration of the memory store and the magnetic store for a table. 
 **/
 export class Table extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Arn" })
+  @SpeakeasyMetadata({ data: "json, name=Arn" })
   arn?: string;
 
-  @Metadata({ data: "json, name=CreationTime" })
+  @SpeakeasyMetadata({ data: "json, name=CreationTime" })
   creationTime?: Date;
 
-  @Metadata({ data: "json, name=DatabaseName" })
+  @SpeakeasyMetadata({ data: "json, name=DatabaseName" })
   databaseName?: string;
 
-  @Metadata({ data: "json, name=LastUpdatedTime" })
+  @SpeakeasyMetadata({ data: "json, name=LastUpdatedTime" })
   lastUpdatedTime?: Date;
 
-  @Metadata({ data: "json, name=RetentionProperties" })
+  @SpeakeasyMetadata({ data: "json, name=RetentionProperties" })
   retentionProperties?: RetentionProperties;
 
-  @Metadata({ data: "json, name=TableName" })
+  @SpeakeasyMetadata({ data: "json, name=TableName" })
   tableName?: string;
 
-  @Metadata({ data: "json, name=TableStatus" })
+  @SpeakeasyMetadata({ data: "json, name=TableStatus" })
   tableStatus?: TableStatusEnum;
 }

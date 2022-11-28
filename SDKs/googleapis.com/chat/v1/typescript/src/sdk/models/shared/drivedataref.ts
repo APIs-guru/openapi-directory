@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // DriveDataRef
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A reference to the data of a drive attachment.
 **/
 export class DriveDataRef extends SpeakeasyBase {
-  @Metadata({ data: "json, name=driveFileId" })
+  @SpeakeasyMetadata({ data: "json, name=driveFileId" })
   driveFileId?: string;
 }

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var TeamsDeletePathParams = /** @class */ (function (_super) {
     __extends(TeamsDeletePathParams, _super);
@@ -30,7 +30,7 @@ var TeamsDeletePathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=teamId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=teamId" }),
         __metadata("design:type", String)
     ], TeamsDeletePathParams.prototype, "teamId", void 0);
     return TeamsDeletePathParams;
@@ -42,11 +42,11 @@ var TeamsDeleteSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeJwt)
     ], TeamsDeleteSecurity.prototype, "jwt", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeProject)
     ], TeamsDeleteSecurity.prototype, "project", void 0);
     return TeamsDeleteSecurity;
@@ -58,11 +58,11 @@ var TeamsDeleteRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", TeamsDeletePathParams)
     ], TeamsDeleteRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", TeamsDeleteSecurity)
     ], TeamsDeleteRequest.prototype, "security", void 0);
     return TeamsDeleteRequest;
@@ -74,11 +74,11 @@ var TeamsDeleteResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], TeamsDeleteResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], TeamsDeleteResponse.prototype, "statusCode", void 0);
     return TeamsDeleteResponse;

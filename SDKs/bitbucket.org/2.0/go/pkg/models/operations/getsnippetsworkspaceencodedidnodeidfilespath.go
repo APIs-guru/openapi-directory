@@ -11,22 +11,10 @@ type GetSnippetsWorkspaceEncodedIDNodeIDFilesPathPathParams struct {
 	Workspace string `pathParam:"style=simple,explode=false,name=workspace"`
 }
 
-type GetSnippetsWorkspaceEncodedIDNodeIDFilesPathSecurityOption1 struct {
-	Oauth2 shared.SchemeOauth2 `security:"scheme,type=oauth2"`
-}
-
-type GetSnippetsWorkspaceEncodedIDNodeIDFilesPathSecurityOption2 struct {
-	Basic shared.SchemeBasic `security:"scheme,type=http,subtype=basic"`
-}
-
-type GetSnippetsWorkspaceEncodedIDNodeIDFilesPathSecurityOption3 struct {
-	APIKey shared.SchemeAPIKey `security:"scheme,type=apiKey,subtype=header"`
-}
-
 type GetSnippetsWorkspaceEncodedIDNodeIDFilesPathSecurity struct {
-	Option1 *GetSnippetsWorkspaceEncodedIDNodeIDFilesPathSecurityOption1 `security:"option"`
-	Option2 *GetSnippetsWorkspaceEncodedIDNodeIDFilesPathSecurityOption2 `security:"option"`
-	Option3 *GetSnippetsWorkspaceEncodedIDNodeIDFilesPathSecurityOption3 `security:"option"`
+	Oauth2 *shared.SchemeOauth2 `security:"scheme,type=oauth2"`
+	Basic  *shared.SchemeBasic  `security:"scheme,type=http,subtype=basic"`
+	APIKey *shared.SchemeAPIKey `security:"scheme,type=apiKey,subtype=header"`
 }
 
 type GetSnippetsWorkspaceEncodedIDNodeIDFilesPathRequest struct {

@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class GetInfoTldResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     zone_infos: Optional[List[shared.ZoneInfo]] = field(default=None)
     

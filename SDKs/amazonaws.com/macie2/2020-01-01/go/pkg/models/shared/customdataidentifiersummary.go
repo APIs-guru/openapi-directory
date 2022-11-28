@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// CustomDataIdentifierSummary
+// Provides information about a custom data identifier.
 type CustomDataIdentifierSummary struct {
 	Arn         *string    `json:"arn,omitempty"`
 	CreatedAt   *time.Time `json:"createdAt,omitempty"`

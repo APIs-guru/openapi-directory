@@ -1,33 +1,34 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleAppsCardV1Action } from "./googleappscardv1action";
 
+
 export enum GoogleAppsCardV1DateTimePickerTypeEnum {
-    DateAndTime = "DATE_AND_TIME"
-,    DateOnly = "DATE_ONLY"
-,    TimeOnly = "TIME_ONLY"
+    DateAndTime = "DATE_AND_TIME",
+    DateOnly = "DATE_ONLY",
+    TimeOnly = "TIME_ONLY"
 }
 
 
 // GoogleAppsCardV1DateTimePicker
 /** 
- * The widget that lets users to specify a date and time. Not supported by Google Chat apps.
+ * Lets users specify a date, a time, or both a date and a time. Accepts text input from users, but features an interactive date and time selector that helps users enter correctly-formatted dates and times. If users enter a date or time incorrectly, the widget shows an error that prompts users to enter the correct format. Not supported by Chat apps. Support by Chat apps coming soon.
 **/
 export class GoogleAppsCardV1DateTimePicker extends SpeakeasyBase {
-  @Metadata({ data: "json, name=label" })
+  @SpeakeasyMetadata({ data: "json, name=label" })
   label?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=onChangeAction" })
+  @SpeakeasyMetadata({ data: "json, name=onChangeAction" })
   onChangeAction?: GoogleAppsCardV1Action;
 
-  @Metadata({ data: "json, name=timezoneOffsetDate" })
+  @SpeakeasyMetadata({ data: "json, name=timezoneOffsetDate" })
   timezoneOffsetDate?: number;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: GoogleAppsCardV1DateTimePickerTypeEnum;
 
-  @Metadata({ data: "json, name=valueMsEpoch" })
+  @SpeakeasyMetadata({ data: "json, name=valueMsEpoch" })
   valueMsEpoch?: string;
 }

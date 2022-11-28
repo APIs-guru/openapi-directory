@@ -1,11 +1,15 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class GetGenreVodsPathParams:
-    genre_id: str = field(default=None, metadata={'path_param': { 'field_name': 'genre_id', 'style': 'simple', 'explode': False }})
+    genre_id: str = field(metadata={'path_param': { 'field_name': 'genre_id', 'style': 'simple', 'explode': False }})
     
 class GetGenreVodsDirectionEnum(str, Enum):
     ASC = "asc"
@@ -35,13 +39,13 @@ class GetGenreVodsQueryParams:
 
 @dataclass
 class GetGenreVodsRequest:
-    path_params: GetGenreVodsPathParams = field(default=None)
-    query_params: GetGenreVodsQueryParams = field(default=None)
+    path_params: GetGenreVodsPathParams = field()
+    query_params: GetGenreVodsQueryParams = field()
     
 
 @dataclass
 class GetGenreVodsResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     on_demand_pages: Optional[List[shared.OnDemandPage]] = field(default=None)
     

@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ShapeProperties } from "./shapeproperties";
+
 
 
 // UpdateShapePropertiesRequest
@@ -7,12 +8,12 @@ import { ShapeProperties } from "./shapeproperties";
  * Update the properties of a Shape.
 **/
 export class UpdateShapePropertiesRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=fields" })
+  @SpeakeasyMetadata({ data: "json, name=fields" })
   fields?: string;
 
-  @Metadata({ data: "json, name=objectId" })
+  @SpeakeasyMetadata({ data: "json, name=objectId" })
   objectId?: string;
 
-  @Metadata({ data: "json, name=shapeProperties" })
+  @SpeakeasyMetadata({ data: "json, name=shapeProperties" })
   shapeProperties?: ShapeProperties;
 }

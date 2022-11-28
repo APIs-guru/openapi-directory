@@ -12,33 +12,28 @@ const (
 	NodesContributorsCreateContributorAttributesPermissionEnumAdmin NodesContributorsCreateContributorAttributesPermissionEnum = "admin"
 )
 
-type NodesContributorsCreateContributorAttributes struct {
-	Bibliographic           *bool                                                       `json:"bibliographic,omitempty"`
-	Index                   *int64                                                      `json:"index,omitempty"`
-	Permission              *NodesContributorsCreateContributorAttributesPermissionEnum `json:"permission,omitempty"`
-	UnregisteredContributor *string                                                     `json:"unregistered_contributor,omitempty"`
+// NodesContributorsCreateContributorAttributesInput
+// The properties of the contributor entity.
+type NodesContributorsCreateContributorAttributesInput struct {
+	Bibliographic *bool                                                       `json:"bibliographic,omitempty"`
+	Index         *int64                                                      `json:"index,omitempty"`
+	Permission    *NodesContributorsCreateContributorAttributesPermissionEnum `json:"permission,omitempty"`
 }
 
-type NodesContributorsCreateContributorLinks struct {
-	Self *string `json:"self,omitempty"`
-}
-
-type NodesContributorsCreateContributorRelationships struct {
-	Node string `json:"node"`
+// NodesContributorsCreateContributorRelationshipsInput
+// URLs to other entities or entity collections that have a relationship to the contributor entity.
+type NodesContributorsCreateContributorRelationshipsInput struct {
 	User string `json:"user"`
 }
 
-type NodesContributorsCreateContributor struct {
-	Attributes    *NodesContributorsCreateContributorAttributes   `json:"attributes,omitempty"`
-	ID            *string                                         `json:"id,omitempty"`
-	Links         *NodesContributorsCreateContributorLinks        `json:"links,omitempty"`
-	Relationships NodesContributorsCreateContributorRelationships `json:"relationships"`
-	Type          string                                          `json:"type"`
+type NodesContributorsCreateContributorInput struct {
+	Attributes    *NodesContributorsCreateContributorAttributesInput   `json:"attributes,omitempty"`
+	Relationships NodesContributorsCreateContributorRelationshipsInput `json:"relationships"`
 }
 
 type NodesContributorsCreateRequest struct {
 	PathParams NodesContributorsCreatePathParams
-	Request    NodesContributorsCreateContributor `request:"mediaType=application/json"`
+	Request    NodesContributorsCreateContributorInput `request:"mediaType=application/json"`
 }
 
 type NodesContributorsCreateResponse struct {

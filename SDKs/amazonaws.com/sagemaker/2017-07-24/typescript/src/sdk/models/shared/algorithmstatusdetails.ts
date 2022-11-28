@@ -1,7 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AlgorithmStatusItem } from "./algorithmstatusitem";
-import { AlgorithmStatusItem } from "./algorithmstatusitem";
+
 
 
 // AlgorithmStatusDetails
@@ -9,9 +8,9 @@ import { AlgorithmStatusItem } from "./algorithmstatusitem";
  * Specifies the validation and image scan statuses of the algorithm.
 **/
 export class AlgorithmStatusDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ImageScanStatuses", elemType: shared.AlgorithmStatusItem })
+  @SpeakeasyMetadata({ data: "json, name=ImageScanStatuses", elemType: AlgorithmStatusItem })
   imageScanStatuses?: AlgorithmStatusItem[];
 
-  @Metadata({ data: "json, name=ValidationStatuses", elemType: shared.AlgorithmStatusItem })
+  @SpeakeasyMetadata({ data: "json, name=ValidationStatuses", elemType: AlgorithmStatusItem })
   validationStatuses?: AlgorithmStatusItem[];
 }

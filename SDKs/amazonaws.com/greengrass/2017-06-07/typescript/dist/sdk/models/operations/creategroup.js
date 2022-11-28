@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var CreateGroupHeaders = /** @class */ (function (_super) {
     __extends(CreateGroupHeaders, _super);
@@ -30,35 +30,35 @@ var CreateGroupHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
         __metadata("design:type", String)
     ], CreateGroupHeaders.prototype, "xAmzAlgorithm", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
         __metadata("design:type", String)
     ], CreateGroupHeaders.prototype, "xAmzContentSha256", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
         __metadata("design:type", String)
     ], CreateGroupHeaders.prototype, "xAmzCredential", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
         __metadata("design:type", String)
     ], CreateGroupHeaders.prototype, "xAmzDate", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
         __metadata("design:type", String)
     ], CreateGroupHeaders.prototype, "xAmzSecurityToken", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
         __metadata("design:type", String)
     ], CreateGroupHeaders.prototype, "xAmzSignature", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
         __metadata("design:type", String)
     ], CreateGroupHeaders.prototype, "xAmzSignedHeaders", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amzn-Client-Token" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amzn-Client-Token" }),
         __metadata("design:type", String)
     ], CreateGroupHeaders.prototype, "xAmznClientToken", void 0);
     return CreateGroupHeaders;
@@ -74,31 +74,31 @@ var CreateGroupRequestBodyInitialVersion = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=ConnectorDefinitionVersionArn" }),
+        SpeakeasyMetadata({ data: "json, name=ConnectorDefinitionVersionArn" }),
         __metadata("design:type", String)
     ], CreateGroupRequestBodyInitialVersion.prototype, "connectorDefinitionVersionArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=CoreDefinitionVersionArn" }),
+        SpeakeasyMetadata({ data: "json, name=CoreDefinitionVersionArn" }),
         __metadata("design:type", String)
     ], CreateGroupRequestBodyInitialVersion.prototype, "coreDefinitionVersionArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=DeviceDefinitionVersionArn" }),
+        SpeakeasyMetadata({ data: "json, name=DeviceDefinitionVersionArn" }),
         __metadata("design:type", String)
     ], CreateGroupRequestBodyInitialVersion.prototype, "deviceDefinitionVersionArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=FunctionDefinitionVersionArn" }),
+        SpeakeasyMetadata({ data: "json, name=FunctionDefinitionVersionArn" }),
         __metadata("design:type", String)
     ], CreateGroupRequestBodyInitialVersion.prototype, "functionDefinitionVersionArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=LoggerDefinitionVersionArn" }),
+        SpeakeasyMetadata({ data: "json, name=LoggerDefinitionVersionArn" }),
         __metadata("design:type", String)
     ], CreateGroupRequestBodyInitialVersion.prototype, "loggerDefinitionVersionArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=ResourceDefinitionVersionArn" }),
+        SpeakeasyMetadata({ data: "json, name=ResourceDefinitionVersionArn" }),
         __metadata("design:type", String)
     ], CreateGroupRequestBodyInitialVersion.prototype, "resourceDefinitionVersionArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=SubscriptionDefinitionVersionArn" }),
+        SpeakeasyMetadata({ data: "json, name=SubscriptionDefinitionVersionArn" }),
         __metadata("design:type", String)
     ], CreateGroupRequestBodyInitialVersion.prototype, "subscriptionDefinitionVersionArn", void 0);
     return CreateGroupRequestBodyInitialVersion;
@@ -110,15 +110,15 @@ var CreateGroupRequestBody = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=InitialVersion" }),
+        SpeakeasyMetadata({ data: "json, name=InitialVersion" }),
         __metadata("design:type", CreateGroupRequestBodyInitialVersion)
     ], CreateGroupRequestBody.prototype, "initialVersion", void 0);
     __decorate([
-        Metadata({ data: "json, name=Name" }),
+        SpeakeasyMetadata({ data: "json, name=Name" }),
         __metadata("design:type", String)
     ], CreateGroupRequestBody.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=tags" }),
+        SpeakeasyMetadata({ data: "json, name=tags" }),
         __metadata("design:type", Map)
     ], CreateGroupRequestBody.prototype, "tags", void 0);
     return CreateGroupRequestBody;
@@ -130,11 +130,11 @@ var CreateGroupRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", CreateGroupHeaders)
     ], CreateGroupRequest.prototype, "headers", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", CreateGroupRequestBody)
     ], CreateGroupRequest.prototype, "request", void 0);
     return CreateGroupRequest;
@@ -146,19 +146,19 @@ var CreateGroupResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], CreateGroupResponse.prototype, "badRequestException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], CreateGroupResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.CreateGroupResponse)
     ], CreateGroupResponse.prototype, "createGroupResponse", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], CreateGroupResponse.prototype, "statusCode", void 0);
     return CreateGroupResponse;

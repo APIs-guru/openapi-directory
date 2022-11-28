@@ -1,13 +1,17 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import pipe
-from . import socketaddress
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class Address:
-    pipe: Optional[pipe.Pipe] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'pipe' }})
-    socket_address: Optional[socketaddress.SocketAddress] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'socketAddress' }})
+    r"""Address
+    Addresses specify either a logical or physical address and port, which are used to tell Envoy where to bind/listen, connect to upstream and find management servers.
+    """
+    
+    pipe: Optional[Pipe] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('pipe') }})
+    socket_address: Optional[SocketAddress] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('socketAddress') }})
     

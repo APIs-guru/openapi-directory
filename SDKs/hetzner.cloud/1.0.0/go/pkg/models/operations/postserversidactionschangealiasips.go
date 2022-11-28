@@ -9,11 +9,8 @@ type PostServersIDActionsChangeAliasIpsRequestBody struct {
 	Network  int64    `json:"network"`
 }
 
-type PostServersIDActionsChangeAliasIpsRequest struct {
-	PathParams PostServersIDActionsChangeAliasIpsPathParams
-	Request    *PostServersIDActionsChangeAliasIpsRequestBody `request:"mediaType=application/json"`
-}
-
+// PostServersIDActionsChangeAliasIpsActionResponseActionError
+// Error message for the Action if error occurred, otherwise null
 type PostServersIDActionsChangeAliasIpsActionResponseActionError struct {
 	Code    string `json:"code"`
 	Message string `json:"message"`
@@ -45,6 +42,11 @@ type PostServersIDActionsChangeAliasIpsActionResponseAction struct {
 
 type PostServersIDActionsChangeAliasIpsActionResponse struct {
 	Action PostServersIDActionsChangeAliasIpsActionResponseAction `json:"action"`
+}
+
+type PostServersIDActionsChangeAliasIpsRequest struct {
+	PathParams PostServersIDActionsChangeAliasIpsPathParams
+	Request    *PostServersIDActionsChangeAliasIpsRequestBody `request:"mediaType=application/json"`
 }
 
 type PostServersIDActionsChangeAliasIpsResponse struct {

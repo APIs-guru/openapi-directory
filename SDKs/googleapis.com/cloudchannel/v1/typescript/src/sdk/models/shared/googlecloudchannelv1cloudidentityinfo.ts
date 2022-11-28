@@ -1,10 +1,33 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudChannelV1EduData } from "./googlecloudchannelv1edudata";
 
+
 export enum GoogleCloudChannelV1CloudIdentityInfoCustomerTypeEnum {
-    CustomerTypeUnspecified = "CUSTOMER_TYPE_UNSPECIFIED"
-,    Domain = "DOMAIN"
-,    Team = "TEAM"
+    CustomerTypeUnspecified = "CUSTOMER_TYPE_UNSPECIFIED",
+    Domain = "DOMAIN",
+    Team = "TEAM"
+}
+
+
+// GoogleCloudChannelV1CloudIdentityInfoInput
+/** 
+ * Cloud Identity information for the Cloud Channel Customer.
+**/
+export class GoogleCloudChannelV1CloudIdentityInfoInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=alternateEmail" })
+  alternateEmail?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=customerType" })
+  customerType?: GoogleCloudChannelV1CloudIdentityInfoCustomerTypeEnum;
+
+  @SpeakeasyMetadata({ data: "json, name=eduData" })
+  eduData?: GoogleCloudChannelV1EduData;
+
+  @SpeakeasyMetadata({ data: "json, name=languageCode" })
+  languageCode?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=phoneNumber" })
+  phoneNumber?: string;
 }
 
 
@@ -13,27 +36,27 @@ export enum GoogleCloudChannelV1CloudIdentityInfoCustomerTypeEnum {
  * Cloud Identity information for the Cloud Channel Customer.
 **/
 export class GoogleCloudChannelV1CloudIdentityInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=adminConsoleUri" })
+  @SpeakeasyMetadata({ data: "json, name=adminConsoleUri" })
   adminConsoleUri?: string;
 
-  @Metadata({ data: "json, name=alternateEmail" })
+  @SpeakeasyMetadata({ data: "json, name=alternateEmail" })
   alternateEmail?: string;
 
-  @Metadata({ data: "json, name=customerType" })
+  @SpeakeasyMetadata({ data: "json, name=customerType" })
   customerType?: GoogleCloudChannelV1CloudIdentityInfoCustomerTypeEnum;
 
-  @Metadata({ data: "json, name=eduData" })
+  @SpeakeasyMetadata({ data: "json, name=eduData" })
   eduData?: GoogleCloudChannelV1EduData;
 
-  @Metadata({ data: "json, name=isDomainVerified" })
+  @SpeakeasyMetadata({ data: "json, name=isDomainVerified" })
   isDomainVerified?: boolean;
 
-  @Metadata({ data: "json, name=languageCode" })
+  @SpeakeasyMetadata({ data: "json, name=languageCode" })
   languageCode?: string;
 
-  @Metadata({ data: "json, name=phoneNumber" })
+  @SpeakeasyMetadata({ data: "json, name=phoneNumber" })
   phoneNumber?: string;
 
-  @Metadata({ data: "json, name=primaryDomain" })
+  @SpeakeasyMetadata({ data: "json, name=primaryDomain" })
   primaryDomain?: string;
 }

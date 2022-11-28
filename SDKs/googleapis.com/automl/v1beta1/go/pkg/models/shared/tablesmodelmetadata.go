@@ -1,5 +1,7 @@
 package shared
 
+// TablesModelMetadata
+// Model metadata specific to AutoML Tables.
 type TablesModelMetadata struct {
 	DisableEarlyStopping                *bool                   `json:"disableEarlyStopping,omitempty"`
 	InputFeatureColumnSpecs             []ColumnSpec            `json:"inputFeatureColumnSpecs,omitempty"`

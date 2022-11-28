@@ -30,6 +30,8 @@ const (
 	ChannelSectionSnippetTypeEnumSubscriptions               ChannelSectionSnippetTypeEnum = "subscriptions"
 )
 
+// ChannelSectionSnippet
+// Basic details about a channel section, including title, style and position.
 type ChannelSectionSnippet struct {
 	ChannelID       *string                         `json:"channelId,omitempty"`
 	DefaultLanguage *string                         `json:"defaultLanguage,omitempty"`

@@ -10,7 +10,7 @@ import (
 	"strings"
 )
 
-var Servers = []string{
+var ServerList = []string{
 	"http://devices.iot1click.{region}.amazonaws.com",
 	"https://devices.iot1click.{region}.amazonaws.com",
 	"http://devices.iot1click.{region}.amazonaws.com.cn",
@@ -21,10 +21,15 @@ type HTTPClient interface {
 	Do(req *http.Request) (*http.Response, error)
 }
 
+// SDK Documentation: https://docs.aws.amazon.com/iot1click/ - Amazon Web Services documentation
 type SDK struct {
-	defaultClient  HTTPClient
-	securityClient HTTPClient
-	serverURL      string
+	_defaultClient  HTTPClient
+	_securityClient HTTPClient
+	_security       *shared.Security
+	_serverURL      string
+	_language       string
+	_sdkVersion     string
+	_genVersion     string
 }
 
 type SDKOption func(*SDK)
@@ -35,33 +40,57 @@ func WithServerURL(serverURL string, params map[string]string) SDKOption {
 			serverURL = utils.ReplaceParameters(serverURL, params)
 		}
 
-		sdk.serverURL = serverURL
+		sdk._serverURL = serverURL
+	}
+}
+
+func WithClient(client HTTPClient) SDKOption {
+	return func(sdk *SDK) {
+		sdk._defaultClient = client
 	}
 }
 
 func WithSecurity(security shared.Security) SDKOption {
 	return func(sdk *SDK) {
-		sdk.securityClient = utils.CreateSecurityClient(security)
+		sdk._security = &security
 	}
 }
 
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
-		defaultClient:  http.DefaultClient,
-		securityClient: http.DefaultClient,
+		_language:   "go",
+		_sdkVersion: "",
+		_genVersion: "internal",
 	}
 	for _, opt := range opts {
 		opt(sdk)
 	}
-	if sdk.serverURL == "" {
-		sdk.serverURL = Servers[0]
+
+	if sdk._defaultClient == nil {
+		sdk._defaultClient = http.DefaultClient
+	}
+	if sdk._securityClient == nil {
+
+		if sdk._security != nil {
+			sdk._securityClient = utils.ConfigureSecurityClient(sdk._defaultClient, sdk._security)
+		} else {
+			sdk._securityClient = sdk._defaultClient
+		}
+
+	}
+
+	if sdk._serverURL == "" {
+		sdk._serverURL = ServerList[0]
 	}
 
 	return sdk
 }
 
+// ClaimDevicesByClaimCode - Adds device(s) to your account (i.e., claim one or more devices) if and only if you
+//
+//	received a claim code with the device(s).
 func (s *SDK) ClaimDevicesByClaimCode(ctx context.Context, request operations.ClaimDevicesByClaimCodeRequest) (*operations.ClaimDevicesByClaimCodeResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/claims/{claimCode}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "PUT", url, nil)
@@ -71,7 +100,7 @@ func (s *SDK) ClaimDevicesByClaimCode(ctx context.Context, request operations.Cl
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -131,8 +160,11 @@ func (s *SDK) ClaimDevicesByClaimCode(ctx context.Context, request operations.Cl
 	return res, nil
 }
 
+// DescribeDevice - Given a device ID, returns a DescribeDeviceResponse object describing the
+//
+//	details of the device.
 func (s *SDK) DescribeDevice(ctx context.Context, request operations.DescribeDeviceRequest) (*operations.DescribeDeviceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/devices/{deviceId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -142,7 +174,7 @@ func (s *SDK) DescribeDevice(ctx context.Context, request operations.DescribeDev
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -202,8 +234,14 @@ func (s *SDK) DescribeDevice(ctx context.Context, request operations.DescribeDev
 	return res, nil
 }
 
+// FinalizeDeviceClaim - <p>Given a device ID, finalizes the claim request for the associated device.</p><note>
+//
+//	<p>Claiming a device consists of initiating a claim, then publishing a device event,
+//	and finalizing the claim. For a device of type button, a device event can
+//	be published by simply clicking the device.</p>
+//	</note>
 func (s *SDK) FinalizeDeviceClaim(ctx context.Context, request operations.FinalizeDeviceClaimRequest) (*operations.FinalizeDeviceClaimResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/devices/{deviceId}/finalize-claim", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -223,7 +261,7 @@ func (s *SDK) FinalizeDeviceClaim(ctx context.Context, request operations.Finali
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -303,8 +341,9 @@ func (s *SDK) FinalizeDeviceClaim(ctx context.Context, request operations.Finali
 	return res, nil
 }
 
+// GetDeviceMethods - Given a device ID, returns the invokable methods associated with the device.
 func (s *SDK) GetDeviceMethods(ctx context.Context, request operations.GetDeviceMethodsRequest) (*operations.GetDeviceMethodsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/devices/{deviceId}/methods", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -314,7 +353,7 @@ func (s *SDK) GetDeviceMethods(ctx context.Context, request operations.GetDevice
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -374,8 +413,14 @@ func (s *SDK) GetDeviceMethods(ctx context.Context, request operations.GetDevice
 	return res, nil
 }
 
+// InitiateDeviceClaim - <p>Given a device ID, initiates a claim request for the associated device.</p><note>
+//
+//	<p>Claiming a device consists of initiating a claim, then publishing a device event,
+//	and finalizing the claim. For a device of type button, a device event can
+//	be published by simply clicking the device.</p>
+//	</note>
 func (s *SDK) InitiateDeviceClaim(ctx context.Context, request operations.InitiateDeviceClaimRequest) (*operations.InitiateDeviceClaimResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/devices/{deviceId}/initiate-claim", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "PUT", url, nil)
@@ -385,7 +430,7 @@ func (s *SDK) InitiateDeviceClaim(ctx context.Context, request operations.Initia
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -455,8 +500,11 @@ func (s *SDK) InitiateDeviceClaim(ctx context.Context, request operations.Initia
 	return res, nil
 }
 
+// InvokeDeviceMethod - Given a device ID, issues a request to invoke a named device method (with possible
+//
+//	parameters). See the "Example POST" code snippet below.
 func (s *SDK) InvokeDeviceMethod(ctx context.Context, request operations.InvokeDeviceMethodRequest) (*operations.InvokeDeviceMethodResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/devices/{deviceId}/methods", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -476,7 +524,7 @@ func (s *SDK) InvokeDeviceMethod(ctx context.Context, request operations.InvokeD
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -566,8 +614,11 @@ func (s *SDK) InvokeDeviceMethod(ctx context.Context, request operations.InvokeD
 	return res, nil
 }
 
+// ListDeviceEvents - Using a device ID, returns a DeviceEventsResponse object containing an
+//
+//	array of events for the device.
 func (s *SDK) ListDeviceEvents(ctx context.Context, request operations.ListDeviceEventsRequest) (*operations.ListDeviceEventsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/devices/{deviceId}/events#fromTimeStamp&toTimeStamp", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -579,7 +630,7 @@ func (s *SDK) ListDeviceEvents(ctx context.Context, request operations.ListDevic
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -649,8 +700,9 @@ func (s *SDK) ListDeviceEvents(ctx context.Context, request operations.ListDevic
 	return res, nil
 }
 
+// ListDevices - Lists the 1-Click compatible devices associated with your AWS account.
 func (s *SDK) ListDevices(ctx context.Context, request operations.ListDevicesRequest) (*operations.ListDevicesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/devices"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -662,7 +714,7 @@ func (s *SDK) ListDevices(ctx context.Context, request operations.ListDevicesReq
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -722,8 +774,9 @@ func (s *SDK) ListDevices(ctx context.Context, request operations.ListDevicesReq
 	return res, nil
 }
 
+// ListTagsForResource - Lists the tags associated with the specified resource ARN.
 func (s *SDK) ListTagsForResource(ctx context.Context, request operations.ListTagsForResourceRequest) (*operations.ListTagsForResourceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/tags/{resource-arn}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -733,7 +786,7 @@ func (s *SDK) ListTagsForResource(ctx context.Context, request operations.ListTa
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -783,8 +836,11 @@ func (s *SDK) ListTagsForResource(ctx context.Context, request operations.ListTa
 	return res, nil
 }
 
+// TagResource - Adds or updates the tags associated with the resource ARN. See <a href="https://docs.aws.amazon.com/iot-1-click/latest/developerguide/1click-appendix.html#1click-limits">AWS IoT 1-Click Service Limits</a> for the maximum number of tags allowed per
+//
+//	resource.
 func (s *SDK) TagResource(ctx context.Context, request operations.TagResourceRequest) (*operations.TagResourceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/tags/{resource-arn}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -804,7 +860,7 @@ func (s *SDK) TagResource(ctx context.Context, request operations.TagResourceReq
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -855,8 +911,9 @@ func (s *SDK) TagResource(ctx context.Context, request operations.TagResourceReq
 	return res, nil
 }
 
+// UnclaimDevice - Disassociates a device from your AWS account using its device ID.
 func (s *SDK) UnclaimDevice(ctx context.Context, request operations.UnclaimDeviceRequest) (*operations.UnclaimDeviceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/devices/{deviceId}/unclaim", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "PUT", url, nil)
@@ -866,7 +923,7 @@ func (s *SDK) UnclaimDevice(ctx context.Context, request operations.UnclaimDevic
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -926,8 +983,11 @@ func (s *SDK) UnclaimDevice(ctx context.Context, request operations.UnclaimDevic
 	return res, nil
 }
 
+// UntagResource - Using tag keys, deletes the tags (key/value pairs) associated with the specified
+//
+//	resource ARN.
 func (s *SDK) UntagResource(ctx context.Context, request operations.UntagResourceRequest) (*operations.UntagResourceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/tags/{resource-arn}#tagKeys", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -939,7 +999,7 @@ func (s *SDK) UntagResource(ctx context.Context, request operations.UntagResourc
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -990,8 +1050,11 @@ func (s *SDK) UntagResource(ctx context.Context, request operations.UntagResourc
 	return res, nil
 }
 
+// UpdateDeviceState - Using a Boolean value (true or false), this operation
+//
+//	enables or disables the device given a device ID.
 func (s *SDK) UpdateDeviceState(ctx context.Context, request operations.UpdateDeviceStateRequest) (*operations.UpdateDeviceStateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/devices/{deviceId}/state", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1011,7 +1074,7 @@ func (s *SDK) UpdateDeviceState(ctx context.Context, request operations.UpdateDe
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {

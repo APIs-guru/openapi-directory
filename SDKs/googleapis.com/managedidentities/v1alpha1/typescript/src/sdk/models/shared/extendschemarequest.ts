@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ExtendSchemaRequest
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * ExtendSchemaRequest is the request message for ExtendSchema method.
 **/
 export class ExtendSchemaRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=fileContents" })
+  @SpeakeasyMetadata({ data: "json, name=fileContents" })
   fileContents?: string;
 
-  @Metadata({ data: "json, name=gcsPath" })
+  @SpeakeasyMetadata({ data: "json, name=gcsPath" })
   gcsPath?: string;
 }

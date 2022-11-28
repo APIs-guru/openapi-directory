@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // FileReference
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A reference to a file, used for user inputs.
 **/
 export class FileReference extends SpeakeasyBase {
-  @Metadata({ data: "json, name=gcsPath" })
+  @SpeakeasyMetadata({ data: "json, name=gcsPath" })
   gcsPath?: string;
 }

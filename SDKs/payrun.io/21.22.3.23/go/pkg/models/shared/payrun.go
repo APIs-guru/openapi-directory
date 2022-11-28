@@ -14,12 +14,16 @@ const (
 	PayRunPayRunPayFrequencyEnumYearly     PayRunPayRunPayFrequencyEnum = "Yearly"
 )
 
+// PayRunPayRunPaySchedule
+// The pay runs' pay schedule
 type PayRunPayRunPaySchedule struct {
 	AtHref  *string `json:"@href,omitempty"`
 	AtRel   *string `json:"@rel,omitempty"`
 	AtTitle *string `json:"@title,omitempty"`
 }
 
+// PayRunPayRunProceedingPayRun
+// The pay runs' proceeding pay run
 type PayRunPayRunProceedingPayRun struct {
 	AtHref  *string `json:"@href,omitempty"`
 	AtRel   *string `json:"@rel,omitempty"`

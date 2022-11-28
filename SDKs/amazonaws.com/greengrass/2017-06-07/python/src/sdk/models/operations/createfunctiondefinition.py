@@ -1,6 +1,10 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,List,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -19,28 +23,32 @@ class CreateFunctionDefinitionHeaders:
 @dataclass_json
 @dataclass
 class CreateFunctionDefinitionRequestBodyInitialVersion:
-    default_config: Optional[shared.FunctionDefaultConfig] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'DefaultConfig' }})
-    functions: Optional[List[shared.Function]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Functions' }})
+    r"""CreateFunctionDefinitionRequestBodyInitialVersion
+    Information about a function definition version.
+    """
+    
+    default_config: Optional[shared.FunctionDefaultConfig] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('DefaultConfig') }})
+    functions: Optional[List[shared.Function]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Functions') }})
     
 
 @dataclass_json
 @dataclass
 class CreateFunctionDefinitionRequestBody:
-    initial_version: Optional[CreateFunctionDefinitionRequestBodyInitialVersion] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'InitialVersion' }})
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Name' }})
-    tags: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tags' }})
+    initial_version: Optional[CreateFunctionDefinitionRequestBodyInitialVersion] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('InitialVersion') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Name') }})
+    tags: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('tags') }})
     
 
 @dataclass
 class CreateFunctionDefinitionRequest:
-    headers: CreateFunctionDefinitionHeaders = field(default=None)
-    request: CreateFunctionDefinitionRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: CreateFunctionDefinitionHeaders = field()
+    request: CreateFunctionDefinitionRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class CreateFunctionDefinitionResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     create_function_definition_response: Optional[shared.CreateFunctionDefinitionResponse] = field(default=None)
-    status_code: int = field(default=None)
     

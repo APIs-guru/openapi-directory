@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AssetPropertyTimestamp } from "./assetpropertytimestamp";
 import { AssetPropertyVariant } from "./assetpropertyvariant";
+
 
 
 // AssetPropertyValue
@@ -8,12 +9,12 @@ import { AssetPropertyVariant } from "./assetpropertyvariant";
  * An asset property value entry containing the following information.
 **/
 export class AssetPropertyValue extends SpeakeasyBase {
-  @Metadata({ data: "json, name=quality" })
+  @SpeakeasyMetadata({ data: "json, name=quality" })
   quality?: string;
 
-  @Metadata({ data: "json, name=timestamp" })
+  @SpeakeasyMetadata({ data: "json, name=timestamp" })
   timestamp: AssetPropertyTimestamp;
 
-  @Metadata({ data: "json, name=value" })
+  @SpeakeasyMetadata({ data: "json, name=value" })
   value: AssetPropertyVariant;
 }

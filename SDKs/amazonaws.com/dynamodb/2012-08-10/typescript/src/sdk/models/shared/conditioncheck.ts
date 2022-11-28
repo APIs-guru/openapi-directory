@@ -1,8 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
-import { AttributeValue } from "./attributevalue";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AttributeValue } from "./attributevalue";
 import { ReturnValuesOnConditionCheckFailureEnum } from "./returnvaluesonconditioncheckfailureenum";
+
 
 
 // ConditionCheck
@@ -10,21 +9,21 @@ import { ReturnValuesOnConditionCheckFailureEnum } from "./returnvaluesonconditi
  * Represents a request to perform a check that an item exists or to check the condition of specific attributes of the item.
 **/
 export class ConditionCheck extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ConditionExpression" })
+  @SpeakeasyMetadata({ data: "json, name=ConditionExpression" })
   conditionExpression: string;
 
-  @Metadata({ data: "json, name=ExpressionAttributeNames" })
+  @SpeakeasyMetadata({ data: "json, name=ExpressionAttributeNames" })
   expressionAttributeNames?: Map<string, string>;
 
-  @Metadata({ data: "json, name=ExpressionAttributeValues", elemType: shared.AttributeValue })
+  @SpeakeasyMetadata({ data: "json, name=ExpressionAttributeValues", elemType: AttributeValue })
   expressionAttributeValues?: Map<string, AttributeValue>;
 
-  @Metadata({ data: "json, name=Key", elemType: shared.AttributeValue })
+  @SpeakeasyMetadata({ data: "json, name=Key", elemType: AttributeValue })
   key: Map<string, AttributeValue>;
 
-  @Metadata({ data: "json, name=ReturnValuesOnConditionCheckFailure" })
+  @SpeakeasyMetadata({ data: "json, name=ReturnValuesOnConditionCheckFailure" })
   returnValuesOnConditionCheckFailure?: ReturnValuesOnConditionCheckFailureEnum;
 
-  @Metadata({ data: "json, name=TableName" })
+  @SpeakeasyMetadata({ data: "json, name=TableName" })
   tableName: string;
 }

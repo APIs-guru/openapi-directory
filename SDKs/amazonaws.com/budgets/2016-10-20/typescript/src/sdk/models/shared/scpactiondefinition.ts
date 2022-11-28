@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ScpActionDefinition
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  *  The service control policies (SCP) action definition details. 
 **/
 export class ScpActionDefinition extends SpeakeasyBase {
-  @Metadata({ data: "json, name=PolicyId" })
+  @SpeakeasyMetadata({ data: "json, name=PolicyId" })
   policyId: string;
 
-  @Metadata({ data: "json, name=TargetIds" })
+  @SpeakeasyMetadata({ data: "json, name=TargetIds" })
   targetIds: string[];
 }

@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// FleetSummary
+// The summary of the fleet.
 type FleetSummary struct {
 	CompanyCode     *string           `json:"CompanyCode,omitempty"`
 	CreatedTime     *time.Time        `json:"CreatedTime,omitempty"`

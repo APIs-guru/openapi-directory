@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import List,Optional
+from typing import Optional
 from sdk.models import shared
 
 
@@ -11,20 +11,20 @@ class InvoiceAPIAllQueryParams:
 
 @dataclass
 class InvoiceAPIAllHeaders:
-    x_auth_key: str = field(default=None, metadata={'header': { 'field_name': 'x-auth-key', 'style': 'simple', 'explode': False }})
-    x_auth_secret: str = field(default=None, metadata={'header': { 'field_name': 'x-auth-secret', 'style': 'simple', 'explode': False }})
+    x_auth_key: str = field(metadata={'header': { 'field_name': 'x-auth-key', 'style': 'simple', 'explode': False }})
+    x_auth_secret: str = field(metadata={'header': { 'field_name': 'x-auth-secret', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class InvoiceAPIAllRequest:
-    query_params: InvoiceAPIAllQueryParams = field(default=None)
-    headers: InvoiceAPIAllHeaders = field(default=None)
+    headers: InvoiceAPIAllHeaders = field()
+    query_params: InvoiceAPIAllQueryParams = field()
     
 
 @dataclass
 class InvoiceAPIAllResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     list_result_invoice_details_api_model_: Optional[shared.ListResultInvoiceDetailsAPIModel] = field(default=None)
-    status_code: int = field(default=None)
     

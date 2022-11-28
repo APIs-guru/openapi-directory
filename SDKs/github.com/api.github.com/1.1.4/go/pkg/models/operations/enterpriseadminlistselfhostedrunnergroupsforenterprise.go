@@ -13,14 +13,14 @@ type EnterpriseAdminListSelfHostedRunnerGroupsForEnterpriseQueryParams struct {
 	PerPage *int64 `queryParam:"style=form,explode=true,name=per_page"`
 }
 
-type EnterpriseAdminListSelfHostedRunnerGroupsForEnterpriseRequest struct {
-	PathParams  EnterpriseAdminListSelfHostedRunnerGroupsForEnterprisePathParams
-	QueryParams EnterpriseAdminListSelfHostedRunnerGroupsForEnterpriseQueryParams
-}
-
 type EnterpriseAdminListSelfHostedRunnerGroupsForEnterprise200ApplicationJSON struct {
 	RunnerGroups []shared.RunnerGroupsEnterprise `json:"runner_groups"`
 	TotalCount   float64                         `json:"total_count"`
+}
+
+type EnterpriseAdminListSelfHostedRunnerGroupsForEnterpriseRequest struct {
+	PathParams  EnterpriseAdminListSelfHostedRunnerGroupsForEnterprisePathParams
+	QueryParams EnterpriseAdminListSelfHostedRunnerGroupsForEnterpriseQueryParams
 }
 
 type EnterpriseAdminListSelfHostedRunnerGroupsForEnterpriseResponse struct {

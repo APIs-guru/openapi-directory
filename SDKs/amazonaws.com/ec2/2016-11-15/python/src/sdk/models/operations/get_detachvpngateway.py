@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetDetachVpnGatewayActionEnum(str, Enum):
     DETACH_VPN_GATEWAY = "DetachVpnGateway"
@@ -10,11 +14,11 @@ class GetDetachVpnGatewayVersionEnum(str, Enum):
 
 @dataclass
 class GetDetachVpnGatewayQueryParams:
-    action: GetDetachVpnGatewayActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetDetachVpnGatewayActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: GetDetachVpnGatewayVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    vpc_id: str = field(metadata={'query_param': { 'field_name': 'VpcId', 'style': 'form', 'explode': True }})
+    vpn_gateway_id: str = field(metadata={'query_param': { 'field_name': 'VpnGatewayId', 'style': 'form', 'explode': True }})
     dry_run: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'DryRun', 'style': 'form', 'explode': True }})
-    version: GetDetachVpnGatewayVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
-    vpc_id: str = field(default=None, metadata={'query_param': { 'field_name': 'VpcId', 'style': 'form', 'explode': True }})
-    vpn_gateway_id: str = field(default=None, metadata={'query_param': { 'field_name': 'VpnGatewayId', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -30,12 +34,12 @@ class GetDetachVpnGatewayHeaders:
 
 @dataclass
 class GetDetachVpnGatewayRequest:
-    query_params: GetDetachVpnGatewayQueryParams = field(default=None)
-    headers: GetDetachVpnGatewayHeaders = field(default=None)
+    headers: GetDetachVpnGatewayHeaders = field()
+    query_params: GetDetachVpnGatewayQueryParams = field()
     
 
 @dataclass
 class GetDetachVpnGatewayResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

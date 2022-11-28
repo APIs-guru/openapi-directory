@@ -1,10 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Cell } from "./cell";
-import { Range } from "./range";
 import { Range } from "./range";
 import { Page } from "./page";
 import { Record } from "./record";
+
 
 
 // Occurrences
@@ -12,18 +11,18 @@ import { Record } from "./record";
  * The detected occurrences of sensitive data.
 **/
 export class Occurrences extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Cells", elemType: shared.Cell })
+  @SpeakeasyMetadata({ data: "json, name=Cells", elemType: Cell })
   cells?: Cell[];
 
-  @Metadata({ data: "json, name=LineRanges", elemType: shared.Range })
+  @SpeakeasyMetadata({ data: "json, name=LineRanges", elemType: Range })
   lineRanges?: Range[];
 
-  @Metadata({ data: "json, name=OffsetRanges", elemType: shared.Range })
+  @SpeakeasyMetadata({ data: "json, name=OffsetRanges", elemType: Range })
   offsetRanges?: Range[];
 
-  @Metadata({ data: "json, name=Pages", elemType: shared.Page })
+  @SpeakeasyMetadata({ data: "json, name=Pages", elemType: Page })
   pages?: Page[];
 
-  @Metadata({ data: "json, name=Records", elemType: shared.Record })
+  @SpeakeasyMetadata({ data: "json, name=Records", elemType: Record })
   records?: Record[];
 }

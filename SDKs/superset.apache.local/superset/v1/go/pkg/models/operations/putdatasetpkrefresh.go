@@ -12,11 +12,6 @@ type PutDatasetPkRefreshSecurity struct {
 	Jwt shared.SchemeJwt `security:"scheme,type=http,subtype=bearer"`
 }
 
-type PutDatasetPkRefreshRequest struct {
-	PathParams PutDatasetPkRefreshPathParams
-	Security   PutDatasetPkRefreshSecurity
-}
-
 type PutDatasetPkRefresh200ApplicationJSON struct {
 	Message *string `json:"message,omitempty"`
 }
@@ -39,6 +34,11 @@ type PutDatasetPkRefresh422ApplicationJSON struct {
 
 type PutDatasetPkRefresh500ApplicationJSON struct {
 	Message *string `json:"message,omitempty"`
+}
+
+type PutDatasetPkRefreshRequest struct {
+	PathParams PutDatasetPkRefreshPathParams
+	Security   PutDatasetPkRefreshSecurity
 }
 
 type PutDatasetPkRefreshResponse struct {

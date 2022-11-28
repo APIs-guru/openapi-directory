@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import List,Optional
+from typing import Optional
 from sdk.models import shared
 
 
@@ -18,14 +18,14 @@ class RequestPendingAssignmentsHeaders:
 
 @dataclass
 class RequestPendingAssignmentsRequest:
-    query_params: RequestPendingAssignmentsQueryParams = field(default=None)
-    headers: RequestPendingAssignmentsHeaders = field(default=None)
+    headers: RequestPendingAssignmentsHeaders = field()
+    query_params: RequestPendingAssignmentsQueryParams = field()
     
 
 @dataclass
 class RequestPendingAssignmentsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error_response: Optional[shared.ErrorResponse] = field(default=None)
     pending_assignment_list: Optional[shared.PendingAssignmentList] = field(default=None)
-    status_code: int = field(default=None)
     

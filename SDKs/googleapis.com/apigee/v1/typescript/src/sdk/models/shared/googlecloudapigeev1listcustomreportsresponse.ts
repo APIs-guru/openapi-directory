@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudApigeeV1CustomReport } from "./googlecloudapigeev1customreport";
+
 
 
 // GoogleCloudApigeeV1ListCustomReportsResponse
@@ -8,6 +8,6 @@ import { GoogleCloudApigeeV1CustomReport } from "./googlecloudapigeev1customrepo
  * This message encapsulates a list of custom report definitions
 **/
 export class GoogleCloudApigeeV1ListCustomReportsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=qualifier", elemType: shared.GoogleCloudApigeeV1CustomReport })
+  @SpeakeasyMetadata({ data: "json, name=qualifier", elemType: GoogleCloudApigeeV1CustomReport })
   qualifier?: GoogleCloudApigeeV1CustomReport[];
 }

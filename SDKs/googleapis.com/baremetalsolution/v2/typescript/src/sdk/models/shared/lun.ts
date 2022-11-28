@@ -1,22 +1,57 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum LunMultiprotocolTypeEnum {
-    MultiprotocolTypeUnspecified = "MULTIPROTOCOL_TYPE_UNSPECIFIED"
-,    Linux = "LINUX"
+    MultiprotocolTypeUnspecified = "MULTIPROTOCOL_TYPE_UNSPECIFIED",
+    Linux = "LINUX"
 }
 
 export enum LunStateEnum {
-    StateUnspecified = "STATE_UNSPECIFIED"
-,    Creating = "CREATING"
-,    Updating = "UPDATING"
-,    Ready = "READY"
-,    Deleting = "DELETING"
+    StateUnspecified = "STATE_UNSPECIFIED",
+    Creating = "CREATING",
+    Updating = "UPDATING",
+    Ready = "READY",
+    Deleting = "DELETING"
 }
 
 export enum LunStorageTypeEnum {
-    StorageTypeUnspecified = "STORAGE_TYPE_UNSPECIFIED"
-,    Ssd = "SSD"
-,    Hdd = "HDD"
+    StorageTypeUnspecified = "STORAGE_TYPE_UNSPECIFIED",
+    Ssd = "SSD",
+    Hdd = "HDD"
+}
+
+
+// LunInput
+/** 
+ * A storage volume logical unit number (LUN).
+**/
+export class LunInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=bootLun" })
+  bootLun?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=id" })
+  id?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=multiprotocolType" })
+  multiprotocolType?: LunMultiprotocolTypeEnum;
+
+  @SpeakeasyMetadata({ data: "json, name=shareable" })
+  shareable?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=sizeGb" })
+  sizeGb?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=state" })
+  state?: LunStateEnum;
+
+  @SpeakeasyMetadata({ data: "json, name=storageType" })
+  storageType?: LunStorageTypeEnum;
+
+  @SpeakeasyMetadata({ data: "json, name=storageVolume" })
+  storageVolume?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=wwid" })
+  wwid?: string;
 }
 
 
@@ -25,33 +60,33 @@ export enum LunStorageTypeEnum {
  * A storage volume logical unit number (LUN).
 **/
 export class Lun extends SpeakeasyBase {
-  @Metadata({ data: "json, name=bootLun" })
+  @SpeakeasyMetadata({ data: "json, name=bootLun" })
   bootLun?: boolean;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=multiprotocolType" })
+  @SpeakeasyMetadata({ data: "json, name=multiprotocolType" })
   multiprotocolType?: LunMultiprotocolTypeEnum;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=shareable" })
+  @SpeakeasyMetadata({ data: "json, name=shareable" })
   shareable?: boolean;
 
-  @Metadata({ data: "json, name=sizeGb" })
+  @SpeakeasyMetadata({ data: "json, name=sizeGb" })
   sizeGb?: string;
 
-  @Metadata({ data: "json, name=state" })
+  @SpeakeasyMetadata({ data: "json, name=state" })
   state?: LunStateEnum;
 
-  @Metadata({ data: "json, name=storageType" })
+  @SpeakeasyMetadata({ data: "json, name=storageType" })
   storageType?: LunStorageTypeEnum;
 
-  @Metadata({ data: "json, name=storageVolume" })
+  @SpeakeasyMetadata({ data: "json, name=storageVolume" })
   storageVolume?: string;
 
-  @Metadata({ data: "json, name=wwid" })
+  @SpeakeasyMetadata({ data: "json, name=wwid" })
   wwid?: string;
 }

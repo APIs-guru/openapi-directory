@@ -5,13 +5,13 @@ from sdk.models import shared
 
 @dataclass
 class CreateDocumentSubmissionRequest:
-    request: shared.DocumentSubmission = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    request: shared.DocumentSubmission = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class CreateDocumentSubmissionResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     document_submission_result: Optional[shared.DocumentSubmissionResult] = field(default=None)
     error_models: Optional[List[Any]] = field(default=None)
-    status_code: int = field(default=None)
     

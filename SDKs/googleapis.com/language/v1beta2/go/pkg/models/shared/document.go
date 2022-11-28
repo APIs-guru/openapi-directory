@@ -16,6 +16,8 @@ const (
 	DocumentTypeEnumHTML            DocumentTypeEnum = "HTML"
 )
 
+// Document
+// Represents the input to API methods.
 type Document struct {
 	BoilerplateHandling *DocumentBoilerplateHandlingEnum `json:"boilerplateHandling,omitempty"`
 	Content             *string                          `json:"content,omitempty"`

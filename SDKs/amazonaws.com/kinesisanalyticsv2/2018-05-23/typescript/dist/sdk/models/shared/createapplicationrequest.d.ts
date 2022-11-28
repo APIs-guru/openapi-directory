@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ApplicationConfiguration } from "./applicationconfiguration";
 import { ApplicationModeEnum } from "./applicationmodeenum";
 import { CloudWatchLoggingOption } from "./cloudwatchloggingoption";

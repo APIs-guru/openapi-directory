@@ -1,0 +1,42 @@
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { GoogleCloudDatalabelingV1beta1AnnotationSpecSet } from "./googleclouddatalabelingv1beta1annotationspecset";
+// GoogleCloudDatalabelingV1beta1CreateAnnotationSpecSetRequest
+/**
+ * Request message for CreateAnnotationSpecSet.
+**/
+var GoogleCloudDatalabelingV1beta1CreateAnnotationSpecSetRequest = /** @class */ (function (_super) {
+    __extends(GoogleCloudDatalabelingV1beta1CreateAnnotationSpecSetRequest, _super);
+    function GoogleCloudDatalabelingV1beta1CreateAnnotationSpecSetRequest() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=annotationSpecSet" }),
+        __metadata("design:type", GoogleCloudDatalabelingV1beta1AnnotationSpecSet)
+    ], GoogleCloudDatalabelingV1beta1CreateAnnotationSpecSetRequest.prototype, "annotationSpecSet", void 0);
+    return GoogleCloudDatalabelingV1beta1CreateAnnotationSpecSetRequest;
+}(SpeakeasyBase));
+export { GoogleCloudDatalabelingV1beta1CreateAnnotationSpecSetRequest };

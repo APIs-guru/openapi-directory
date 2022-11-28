@@ -1,6 +1,7 @@
 
 
+
 export enum ConfigurationSourceEnum {
-    Repository = "REPOSITORY"
-,    Api = "API"
+    Repository = "REPOSITORY",
+    Api = "API"
 }

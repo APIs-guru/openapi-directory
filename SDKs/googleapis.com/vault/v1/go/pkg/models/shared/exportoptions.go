@@ -9,6 +9,8 @@ const (
 	ExportOptionsRegionEnumEurope                  ExportOptionsRegionEnum = "EUROPE"
 )
 
+// ExportOptions
+// Additional options for exports
 type ExportOptions struct {
 	DriveOptions        *DriveExportOptions        `json:"driveOptions,omitempty"`
 	GroupsOptions       *GroupsExportOptions       `json:"groupsOptions,omitempty"`

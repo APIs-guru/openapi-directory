@@ -43,10 +43,6 @@ type GetItemsQueryParams struct {
 	UntilID         *string                  `queryParam:"style=form,explode=true,name=until_id"`
 }
 
-type GetItemsRequest struct {
-	QueryParams GetItemsQueryParams
-}
-
 type GetItems200ApplicationJSON struct {
 	Count           *int64        `json:"count,omitempty"`
 	CountCurrent    *int64        `json:"count_current,omitempty"`
@@ -55,6 +51,10 @@ type GetItems200ApplicationJSON struct {
 	QueryDurationMs *int64        `json:"query_duration_ms,omitempty"`
 	Results         []shared.Item `json:"results,omitempty"`
 	URL             *string       `json:"url,omitempty"`
+}
+
+type GetItemsRequest struct {
+	QueryParams GetItemsQueryParams
 }
 
 type GetItemsResponse struct {

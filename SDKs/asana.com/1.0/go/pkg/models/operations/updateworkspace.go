@@ -13,18 +13,18 @@ type UpdateWorkspaceQueryParams struct {
 	OptPretty *bool    `queryParam:"style=form,explode=true,name=opt_pretty"`
 }
 
-type UpdateWorkspaceRequestBody struct {
-	Data *shared.WorkspaceRequest `json:"data,omitempty"`
+type UpdateWorkspaceRequestBodyInput struct {
+	Data *shared.WorkspaceRequestInput `json:"data,omitempty"`
+}
+
+type UpdateWorkspace200ApplicationJSON struct {
+	Data *shared.WorkspaceResponse `json:"data,omitempty"`
 }
 
 type UpdateWorkspaceRequest struct {
 	PathParams  UpdateWorkspacePathParams
 	QueryParams UpdateWorkspaceQueryParams
-	Request     UpdateWorkspaceRequestBody `request:"mediaType=application/json"`
-}
-
-type UpdateWorkspace200ApplicationJSON struct {
-	Data *shared.WorkspaceResponse `json:"data,omitempty"`
+	Request     UpdateWorkspaceRequestBodyInput `request:"mediaType=application/json"`
 }
 
 type UpdateWorkspaceResponse struct {

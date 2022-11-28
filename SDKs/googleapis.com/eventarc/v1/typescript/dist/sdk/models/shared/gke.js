@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // Gke
 /**
  * Represents a GKE destination.
@@ -33,23 +33,23 @@ var Gke = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=cluster" }),
+        SpeakeasyMetadata({ data: "json, name=cluster" }),
         __metadata("design:type", String)
     ], Gke.prototype, "cluster", void 0);
     __decorate([
-        Metadata({ data: "json, name=location" }),
+        SpeakeasyMetadata({ data: "json, name=location" }),
         __metadata("design:type", String)
     ], Gke.prototype, "location", void 0);
     __decorate([
-        Metadata({ data: "json, name=namespace" }),
+        SpeakeasyMetadata({ data: "json, name=namespace" }),
         __metadata("design:type", String)
     ], Gke.prototype, "namespace", void 0);
     __decorate([
-        Metadata({ data: "json, name=path" }),
+        SpeakeasyMetadata({ data: "json, name=path" }),
         __metadata("design:type", String)
     ], Gke.prototype, "path", void 0);
     __decorate([
-        Metadata({ data: "json, name=service" }),
+        SpeakeasyMetadata({ data: "json, name=service" }),
         __metadata("design:type", String)
     ], Gke.prototype, "service", void 0);
     return Gke;

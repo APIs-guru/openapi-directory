@@ -1,8 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import maintenancewindow
-from . import productpolicy
+from sdk import utils
+from . import *
 
 class PolicyAutoUpdatePolicyEnum(str, Enum):
     AUTO_UPDATE_POLICY_UNSPECIFIED = "autoUpdatePolicyUnspecified"
@@ -25,9 +29,13 @@ class PolicyProductAvailabilityPolicyEnum(str, Enum):
 @dataclass_json
 @dataclass
 class Policy:
-    auto_update_policy: Optional[PolicyAutoUpdatePolicyEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'autoUpdatePolicy' }})
-    device_report_policy: Optional[PolicyDeviceReportPolicyEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'deviceReportPolicy' }})
-    maintenance_window: Optional[maintenancewindow.MaintenanceWindow] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'maintenanceWindow' }})
-    product_availability_policy: Optional[PolicyProductAvailabilityPolicyEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'productAvailabilityPolicy' }})
-    product_policy: Optional[List[productpolicy.ProductPolicy]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'productPolicy' }})
+    r"""Policy
+    The device policy for a given managed device.
+    """
+    
+    auto_update_policy: Optional[PolicyAutoUpdatePolicyEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('autoUpdatePolicy') }})
+    device_report_policy: Optional[PolicyDeviceReportPolicyEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('deviceReportPolicy') }})
+    maintenance_window: Optional[MaintenanceWindow] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('maintenanceWindow') }})
+    product_availability_policy: Optional[PolicyProductAvailabilityPolicyEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('productAvailabilityPolicy') }})
+    product_policy: Optional[List[ProductPolicy]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('productPolicy') }})
     

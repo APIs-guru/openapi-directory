@@ -1,11 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Date } from "./date";
 
 
+
 export class SearchApplicationSessionStats extends SpeakeasyBase {
-  @Metadata({ data: "json, name=date" })
+  @SpeakeasyMetadata({ data: "json, name=date" })
   date?: Date;
 
-  @Metadata({ data: "json, name=searchSessionsCount" })
+  @SpeakeasyMetadata({ data: "json, name=searchSessionsCount" })
   searchSessionsCount?: string;
 }

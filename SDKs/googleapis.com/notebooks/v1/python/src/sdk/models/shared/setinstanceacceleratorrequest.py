@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class SetInstanceAcceleratorRequestTypeEnum(str, Enum):
     ACCELERATOR_TYPE_UNSPECIFIED = "ACCELERATOR_TYPE_UNSPECIFIED"
@@ -20,6 +22,10 @@ class SetInstanceAcceleratorRequestTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class SetInstanceAcceleratorRequest:
-    core_count: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'coreCount' }})
-    type: Optional[SetInstanceAcceleratorRequestTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    r"""SetInstanceAcceleratorRequest
+    Request for setting instance accelerator.
+    """
+    
+    core_count: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('coreCount') }})
+    type: Optional[SetInstanceAcceleratorRequestTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('type') }})
     

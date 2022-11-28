@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // CustomChannel
@@ -6,15 +7,28 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Representation of a custom channel.
 **/
 export class CustomChannel extends SpeakeasyBase {
-  @Metadata({ data: "json, name=active" })
+  @SpeakeasyMetadata({ data: "json, name=active" })
   active?: boolean;
 
-  @Metadata({ data: "json, name=displayName" })
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
   displayName?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=reportingDimensionId" })
+  @SpeakeasyMetadata({ data: "json, name=reportingDimensionId" })
   reportingDimensionId?: string;
+}
+
+
+// CustomChannelInput
+/** 
+ * Representation of a custom channel.
+**/
+export class CustomChannelInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=active" })
+  active?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
+  displayName?: string;
 }

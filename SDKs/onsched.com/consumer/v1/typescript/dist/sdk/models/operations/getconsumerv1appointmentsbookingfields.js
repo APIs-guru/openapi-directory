@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetConsumerV1AppointmentsBookingfieldsQueryParams = /** @class */ (function (_super) {
     __extends(GetConsumerV1AppointmentsBookingfieldsQueryParams, _super);
@@ -30,7 +30,7 @@ var GetConsumerV1AppointmentsBookingfieldsQueryParams = /** @class */ (function 
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=locationId" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=locationId" }),
         __metadata("design:type", String)
     ], GetConsumerV1AppointmentsBookingfieldsQueryParams.prototype, "locationId", void 0);
     return GetConsumerV1AppointmentsBookingfieldsQueryParams;
@@ -42,7 +42,7 @@ var GetConsumerV1AppointmentsBookingfieldsRequest = /** @class */ (function (_su
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetConsumerV1AppointmentsBookingfieldsQueryParams)
     ], GetConsumerV1AppointmentsBookingfieldsRequest.prototype, "queryParams", void 0);
     return GetConsumerV1AppointmentsBookingfieldsRequest;
@@ -54,15 +54,15 @@ var GetConsumerV1AppointmentsBookingfieldsResponse = /** @class */ (function (_s
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.BookingFieldListViewModel)
     ], GetConsumerV1AppointmentsBookingfieldsResponse.prototype, "bookingFieldListViewModel", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetConsumerV1AppointmentsBookingfieldsResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetConsumerV1AppointmentsBookingfieldsResponse.prototype, "statusCode", void 0);
     return GetConsumerV1AppointmentsBookingfieldsResponse;

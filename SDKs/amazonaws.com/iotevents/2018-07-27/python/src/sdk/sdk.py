@@ -1,8 +1,11 @@
-import warnings
+
+__doc__ = """ SDK Documentation: https://docs.aws.amazon.com/iotevents/ - Amazon Web Services documentation"""
 import requests
-from typing import Any,List,Optional
-from sdk.models import operations, shared
+from typing import Any,Optional
+from sdk.models import shared, operations
 from . import utils
+
+
 
 
 SERVERS = [
@@ -14,37 +17,63 @@ SERVERS = [
 
 
 class SDK:
-    client = requests.Session()
-    server_url = SERVERS[0]
+    r"""SDK Documentation: https://docs.aws.amazon.com/iotevents/ - Amazon Web Services documentation"""
+
+    _client: requests.Session
+    _security_client: requests.Session
+    _security: shared.Security
+    _server_url: str = SERVERS[0]
+    _language: str = "python"
+    _sdk_version: str = "0.0.1"
+    _gen_version: str = "internal"
+
+    def __init__(self) -> None:
+        self._client = requests.Session()
+        self._security_client = requests.Session()
+        
+
 
     def config_server_url(self, server_url: str, params: dict[str, str]):
-        if not params is None:
-            self.server_url = utils.replace_parameters(server_url, params)
+        if params is not None:
+            self._server_url = utils.replace_parameters(server_url, params)
         else:
-            self.server_url = server_url
-            
-    
-    def config_security(self, security: shared.Security):
-        self.client = utils.configure_security_client(security)
+            self._server_url = server_url
 
+        
+    
+
+    def config_client(self, client: requests.Session):
+        self._client = client
+        
+        if self._security is not None:
+            self._security_client = utils.configure_security_client(self._client, self._security)
+        
+    
+
+    def config_security(self, security: shared.Security):
+        self._security = security
+        self._security_client = utils.configure_security_client(self._client, security)
+        
+    
+    
     
     def create_alarm_model(self, request: operations.CreateAlarmModelRequest) -> operations.CreateAlarmModelResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Creates an alarm model to monitor an AWS IoT Events input attribute. You can use the alarm to get notified when the value is outside a specified range. For more information, see <a href=\"https://docs.aws.amazon.com/iotevents/latest/developerguide/create-alarms.html\">Create an alarm model</a> in the <i>AWS IoT Events Developer Guide</i>.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/alarm-models"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -87,22 +116,22 @@ class SDK:
 
     
     def create_detector_model(self, request: operations.CreateDetectorModelRequest) -> operations.CreateDetectorModelResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Creates a detector model.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/detector-models"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -145,22 +174,22 @@ class SDK:
 
     
     def create_input(self, request: operations.CreateInputRequest) -> operations.CreateInputResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Creates an input.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/inputs"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -195,15 +224,17 @@ class SDK:
 
     
     def delete_alarm_model(self, request: operations.DeleteAlarmModelRequest) -> operations.DeleteAlarmModelResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Deletes an alarm model. Any alarm instances that were created based on this alarm model are also deleted. This action can't be undone.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/alarm-models/{alarmModelName}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -242,15 +273,17 @@ class SDK:
 
     
     def delete_detector_model(self, request: operations.DeleteDetectorModelRequest) -> operations.DeleteDetectorModelResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Deletes a detector model. Any active instances of the detector model are also deleted.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/detector-models/{detectorModelName}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -289,15 +322,17 @@ class SDK:
 
     
     def delete_input(self, request: operations.DeleteInputRequest) -> operations.DeleteInputResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Deletes an input.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/inputs/{inputName}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -336,17 +371,18 @@ class SDK:
 
     
     def describe_alarm_model(self, request: operations.DescribeAlarmModelRequest) -> operations.DescribeAlarmModelResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieves information about an alarm model. If you don't specify a value for the <code>alarmModelVersion</code> parameter, the latest version is returned.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/alarm-models/{alarmModelName}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -381,17 +417,18 @@ class SDK:
 
     
     def describe_detector_model(self, request: operations.DescribeDetectorModelRequest) -> operations.DescribeDetectorModelResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Describes a detector model. If the <code>version</code> parameter is not specified, information about the latest version is returned.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/detector-models/{detectorModelName}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -426,15 +463,17 @@ class SDK:
 
     
     def describe_detector_model_analysis(self, request: operations.DescribeDetectorModelAnalysisRequest) -> operations.DescribeDetectorModelAnalysisResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""<p>Retrieves runtime information about a detector model analysis.</p> <note> <p>After AWS IoT Events starts analyzing your detector model, you have up to 24 hours to retrieve the analysis results.</p> </note>
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/analysis/detector-models/{analysisId}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -469,15 +508,17 @@ class SDK:
 
     
     def describe_input(self, request: operations.DescribeInputRequest) -> operations.DescribeInputResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Describes an input.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/inputs/{inputName}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -512,15 +553,17 @@ class SDK:
 
     
     def describe_logging_options(self, request: operations.DescribeLoggingOptionsRequest) -> operations.DescribeLoggingOptionsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieves the current settings of the AWS IoT Events logging options.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/logging"
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -559,17 +602,18 @@ class SDK:
 
     
     def get_detector_model_analysis_results(self, request: operations.GetDetectorModelAnalysisResultsRequest) -> operations.GetDetectorModelAnalysisResultsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""<p>Retrieves one or more analysis results of the detector model.</p> <note> <p>After AWS IoT Events starts analyzing your detector model, you have up to 24 hours to retrieve the analysis results.</p> </note>
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/analysis/detector-models/{analysisId}/results", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -604,17 +648,18 @@ class SDK:
 
     
     def list_alarm_model_versions(self, request: operations.ListAlarmModelVersionsRequest) -> operations.ListAlarmModelVersionsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Lists all the versions of an alarm model. The operation returns only the metadata associated with each alarm model version.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/alarm-models/{alarmModelName}/versions", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -649,17 +694,18 @@ class SDK:
 
     
     def list_alarm_models(self, request: operations.ListAlarmModelsRequest) -> operations.ListAlarmModelsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Lists the alarm models that you created. The operation returns only the metadata associated with each alarm model.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/alarm-models"
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -690,17 +736,18 @@ class SDK:
 
     
     def list_detector_model_versions(self, request: operations.ListDetectorModelVersionsRequest) -> operations.ListDetectorModelVersionsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Lists all the versions of a detector model. Only the metadata associated with each detector model version is returned.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/detector-models/{detectorModelName}/versions", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -735,17 +782,18 @@ class SDK:
 
     
     def list_detector_models(self, request: operations.ListDetectorModelsRequest) -> operations.ListDetectorModelsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Lists the detector models you have created. Only the metadata associated with each detector model is returned.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/detector-models"
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -776,22 +824,22 @@ class SDK:
 
     
     def list_input_routings(self, request: operations.ListInputRoutingsRequest) -> operations.ListInputRoutingsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r""" Lists one or more input routings. 
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/input-routings"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -826,17 +874,18 @@ class SDK:
 
     
     def list_inputs(self, request: operations.ListInputsRequest) -> operations.ListInputsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Lists the inputs you have created.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/inputs"
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -867,17 +916,18 @@ class SDK:
 
     
     def list_tags_for_resource(self, request: operations.ListTagsForResourceRequest) -> operations.ListTagsForResourceResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Lists the tags (metadata) you have assigned to the resource.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/tags#resourceArn"
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -912,22 +962,22 @@ class SDK:
 
     
     def put_logging_options(self, request: operations.PutLoggingOptionsRequest) -> operations.PutLoggingOptionsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""<p>Sets or updates the AWS IoT Events logging options.</p> <p>If you update the value of any <code>loggingOptions</code> field, it takes up to one minute for the change to take effect. If you change the policy attached to the role you specified in the <code>roleArn</code> field (for example, to correct an invalid policy), it takes up to five minutes for that change to take effect.</p>
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/logging"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -964,22 +1014,22 @@ class SDK:
 
     
     def start_detector_model_analysis(self, request: operations.StartDetectorModelAnalysisRequest) -> operations.StartDetectorModelAnalysisResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Performs an analysis of your detector model. For more information, see <a href=\"https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-analyze-api.html\">Troubleshooting a detector model</a> in the <i>AWS IoT Events Developer Guide</i>.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/analysis/detector-models/"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1014,24 +1064,23 @@ class SDK:
 
     
     def tag_resource(self, request: operations.TagResourceRequest) -> operations.TagResourceResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Adds to or modifies the tags of the given resource. Tags are metadata that can be used to manage a resource.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/tags#resourceArn"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1070,17 +1119,18 @@ class SDK:
 
     
     def untag_resource(self, request: operations.UntagResourceRequest) -> operations.UntagResourceResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Removes the given tags (metadata) from the resource.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/tags#resourceArn&tagKeys"
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1115,22 +1165,22 @@ class SDK:
 
     
     def update_alarm_model(self, request: operations.UpdateAlarmModelRequest) -> operations.UpdateAlarmModelResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Updates an alarm model. Any alarms that were created based on the previous version are deleted and then created again as new data arrives.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/alarm-models/{alarmModelName}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1169,22 +1219,22 @@ class SDK:
 
     
     def update_detector_model(self, request: operations.UpdateDetectorModelRequest) -> operations.UpdateDetectorModelResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Updates a detector model. Detectors (instances) spawned by the previous version are deleted and then re-created as new inputs arrive.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/detector-models/{detectorModelName}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1223,22 +1273,22 @@ class SDK:
 
     
     def update_input(self, request: operations.UpdateInputRequest) -> operations.UpdateInputResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Updates an input.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/inputs/{inputName}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 

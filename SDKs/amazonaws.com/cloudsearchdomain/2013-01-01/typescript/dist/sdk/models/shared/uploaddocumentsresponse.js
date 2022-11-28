@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { DocumentServiceWarning } from "./documentservicewarning";
 // UploadDocumentsResponse
 /**
  * Contains the response to an <code>UploadDocuments</code> request.
@@ -34,19 +34,19 @@ var UploadDocumentsResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=adds" }),
+        SpeakeasyMetadata({ data: "json, name=adds" }),
         __metadata("design:type", Number)
     ], UploadDocumentsResponse.prototype, "adds", void 0);
     __decorate([
-        Metadata({ data: "json, name=deletes" }),
+        SpeakeasyMetadata({ data: "json, name=deletes" }),
         __metadata("design:type", Number)
     ], UploadDocumentsResponse.prototype, "deletes", void 0);
     __decorate([
-        Metadata({ data: "json, name=status" }),
+        SpeakeasyMetadata({ data: "json, name=status" }),
         __metadata("design:type", String)
     ], UploadDocumentsResponse.prototype, "status", void 0);
     __decorate([
-        Metadata({ data: "json, name=warnings", elemType: shared.DocumentServiceWarning }),
+        SpeakeasyMetadata({ data: "json, name=warnings", elemType: DocumentServiceWarning }),
         __metadata("design:type", Array)
     ], UploadDocumentsResponse.prototype, "warnings", void 0);
     return UploadDocumentsResponse;

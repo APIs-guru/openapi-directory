@@ -22,26 +22,26 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var UvIndexResult = /** @class */ (function (_super) {
     __extends(UvIndexResult, _super);
     function UvIndexResult() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=from_time" }),
+        SpeakeasyMetadata({ data: "json, name=from_time" }),
         __metadata("design:type", String)
     ], UvIndexResult.prototype, "fromTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=from_uv" }),
+        SpeakeasyMetadata({ data: "json, name=from_uv" }),
         __metadata("design:type", Number)
     ], UvIndexResult.prototype, "fromUv", void 0);
     __decorate([
-        Metadata({ data: "json, name=to_time" }),
+        SpeakeasyMetadata({ data: "json, name=to_time" }),
         __metadata("design:type", String)
     ], UvIndexResult.prototype, "toTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=to_uv" }),
+        SpeakeasyMetadata({ data: "json, name=to_uv" }),
         __metadata("design:type", Number)
     ], UvIndexResult.prototype, "toUv", void 0);
     return UvIndexResult;

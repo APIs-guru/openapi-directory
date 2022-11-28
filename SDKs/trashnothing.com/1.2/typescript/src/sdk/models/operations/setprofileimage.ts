@@ -1,56 +1,57 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class SetProfileImageRequestBodyPhoto extends SpeakeasyBase {
-  @Metadata({ data: "multipart_form, content=true" })
+  @SpeakeasyMetadata({ data: "multipart_form, content=true" })
   content: Uint8Array;
 
-  @Metadata({ data: "multipart_form, name=photo" })
+  @SpeakeasyMetadata({ data: "multipart_form, name=photo" })
   photo: string;
 }
 
 
 export class SetProfileImageRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "multipart_form, name=crop" })
+  @SpeakeasyMetadata({ data: "multipart_form, name=crop" })
   crop?: string;
 
-  @Metadata({ data: "multipart_form, name=device_pixel_ratio" })
+  @SpeakeasyMetadata({ data: "multipart_form, name=device_pixel_ratio" })
   devicePixelRatio?: number;
 
-  @Metadata({ data: "multipart_form, file=true" })
+  @SpeakeasyMetadata({ data: "multipart_form, file=true" })
   photo?: SetProfileImageRequestBodyPhoto;
 
-  @Metadata({ data: "multipart_form, name=photo_id" })
+  @SpeakeasyMetadata({ data: "multipart_form, name=photo_id" })
   photoId?: string;
 
-  @Metadata({ data: "multipart_form, name=set_default" })
+  @SpeakeasyMetadata({ data: "multipart_form, name=set_default" })
   setDefault?: number;
 }
 
 
-export class SetProfileImageRequest extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=multipart/form-data" })
-  request?: SetProfileImageRequestBody;
-}
-
-
 export class SetProfileImage200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=photo" })
+  @SpeakeasyMetadata({ data: "json, name=photo" })
   photo?: shared.PhotoResult;
 
-  @Metadata({ data: "json, name=user" })
+  @SpeakeasyMetadata({ data: "json, name=user" })
   user?: shared.CurrentUser;
 }
 
 
+export class SetProfileImageRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "request, media_type=multipart/form-data" })
+  request?: SetProfileImageRequestBody;
+}
+
+
 export class SetProfileImageResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   setProfileImage200ApplicationJsonObject?: SetProfileImage200ApplicationJson;
 }

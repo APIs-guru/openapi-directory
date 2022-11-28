@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// ConnectorSummary
+// Summary of a connector.
 type ConnectorSummary struct {
 	Capacity                         *CapacityDescription                         `json:"capacity,omitempty"`
 	ConnectorArn                     *string                                      `json:"connectorArn,omitempty"`

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // S3ArtifactLocation
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The location of the S3 bucket that contains a revision.
 **/
 export class S3ArtifactLocation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=bucketName" })
+  @SpeakeasyMetadata({ data: "json, name=bucketName" })
   bucketName: string;
 
-  @Metadata({ data: "json, name=objectKey" })
+  @SpeakeasyMetadata({ data: "json, name=objectKey" })
   objectKey: string;
 }

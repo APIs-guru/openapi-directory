@@ -1,9 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum SchemaConfigSchemaTypeEnum {
-    SchemaTypeUnspecified = "SCHEMA_TYPE_UNSPECIFIED"
-,    Analytics = "ANALYTICS"
-,    AnalyticsV2 = "ANALYTICS_V2"
+    SchemaTypeUnspecified = "SCHEMA_TYPE_UNSPECIFIED",
+    Analytics = "ANALYTICS",
+    AnalyticsV2 = "ANALYTICS_V2"
 }
 
 
@@ -12,9 +13,9 @@ export enum SchemaConfigSchemaTypeEnum {
  * Configuration for the FHIR BigQuery schema. Determines how the server generates the schema.
 **/
 export class SchemaConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=recursiveStructureDepth" })
+  @SpeakeasyMetadata({ data: "json, name=recursiveStructureDepth" })
   recursiveStructureDepth?: string;
 
-  @Metadata({ data: "json, name=schemaType" })
+  @SpeakeasyMetadata({ data: "json, name=schemaType" })
   schemaType?: SchemaConfigSchemaTypeEnum;
 }

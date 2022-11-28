@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { InputConfiguration } from "./inputconfiguration";
+
 
 
 // StartApplicationRequest
@@ -8,9 +8,9 @@ import { InputConfiguration } from "./inputconfiguration";
  * <p/>
 **/
 export class StartApplicationRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ApplicationName" })
+  @SpeakeasyMetadata({ data: "json, name=ApplicationName" })
   applicationName: string;
 
-  @Metadata({ data: "json, name=InputConfigurations", elemType: shared.InputConfiguration })
+  @SpeakeasyMetadata({ data: "json, name=InputConfigurations", elemType: InputConfiguration })
   inputConfigurations: InputConfiguration[];
 }

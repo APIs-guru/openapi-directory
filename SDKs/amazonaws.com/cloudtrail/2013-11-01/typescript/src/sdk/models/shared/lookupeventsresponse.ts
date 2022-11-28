@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Event } from "./event";
+
 
 
 // LookupEventsResponse
@@ -8,9 +8,9 @@ import { Event } from "./event";
  * Contains a response to a LookupEvents action.
 **/
 export class LookupEventsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Events", elemType: shared.Event })
+  @SpeakeasyMetadata({ data: "json, name=Events", elemType: Event })
   events?: Event[];
 
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 }

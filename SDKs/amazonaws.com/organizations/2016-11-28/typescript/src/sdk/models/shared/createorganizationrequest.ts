@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { OrganizationFeatureSetEnum } from "./organizationfeaturesetenum";
 
 
+
 export class CreateOrganizationRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=FeatureSet" })
+  @SpeakeasyMetadata({ data: "json, name=FeatureSet" })
   featureSet?: OrganizationFeatureSetEnum;
 }

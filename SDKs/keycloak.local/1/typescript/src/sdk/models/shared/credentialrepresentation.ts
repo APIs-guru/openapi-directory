@@ -1,31 +1,32 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class CredentialRepresentation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=createdDate" })
+  @SpeakeasyMetadata({ data: "json, name=createdDate" })
   createdDate?: number;
 
-  @Metadata({ data: "json, name=credentialData" })
+  @SpeakeasyMetadata({ data: "json, name=credentialData" })
   credentialData?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=priority" })
+  @SpeakeasyMetadata({ data: "json, name=priority" })
   priority?: number;
 
-  @Metadata({ data: "json, name=secretData" })
+  @SpeakeasyMetadata({ data: "json, name=secretData" })
   secretData?: string;
 
-  @Metadata({ data: "json, name=temporary" })
+  @SpeakeasyMetadata({ data: "json, name=temporary" })
   temporary?: boolean;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: string;
 
-  @Metadata({ data: "json, name=userLabel" })
+  @SpeakeasyMetadata({ data: "json, name=userLabel" })
   userLabel?: string;
 
-  @Metadata({ data: "json, name=value" })
+  @SpeakeasyMetadata({ data: "json, name=value" })
   value?: string;
 }

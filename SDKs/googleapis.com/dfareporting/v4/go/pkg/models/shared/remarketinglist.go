@@ -16,6 +16,8 @@ const (
 	RemarketingListListSourceEnumRemarketingListSourcePlayStore RemarketingListListSourceEnum = "REMARKETING_LIST_SOURCE_PLAY_STORE"
 )
 
+// RemarketingList
+// Contains properties of a remarketing list. Remarketing enables you to create lists of users who have performed specific actions on a site, then target ads to members of those lists. This resource can be used to manage remarketing lists that are owned by your advertisers. To see all remarketing lists that are visible to your advertisers, including those that are shared to your advertiser or account, use the TargetableRemarketingLists resource.
 type RemarketingList struct {
 	AccountID                  *string                        `json:"accountId,omitempty"`
 	Active                     *bool                          `json:"active,omitempty"`

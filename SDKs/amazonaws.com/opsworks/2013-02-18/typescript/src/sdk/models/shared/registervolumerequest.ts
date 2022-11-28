@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class RegisterVolumeRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Ec2VolumeId" })
+  @SpeakeasyMetadata({ data: "json, name=Ec2VolumeId" })
   ec2VolumeId?: string;
 
-  @Metadata({ data: "json, name=StackId" })
+  @SpeakeasyMetadata({ data: "json, name=StackId" })
   stackId: string;
 }

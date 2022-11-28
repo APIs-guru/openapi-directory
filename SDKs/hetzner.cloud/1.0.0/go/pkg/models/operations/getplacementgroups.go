@@ -27,10 +27,6 @@ type GetPlacementGroupsQueryParams struct {
 	Type          *GetPlacementGroupsTypeParameterTypeEnum `queryParam:"style=form,explode=true,name=type"`
 }
 
-type GetPlacementGroupsRequest struct {
-	QueryParams GetPlacementGroupsQueryParams
-}
-
 type GetPlacementGroupsPlacementGroupsResponseMetaPagination struct {
 	LastPage     float64 `json:"last_page"`
 	NextPage     float64 `json:"next_page"`
@@ -62,6 +58,10 @@ type GetPlacementGroupsPlacementGroupsResponsePlacementGroup struct {
 type GetPlacementGroupsPlacementGroupsResponse struct {
 	Meta            *GetPlacementGroupsPlacementGroupsResponseMeta            `json:"meta,omitempty"`
 	PlacementGroups []GetPlacementGroupsPlacementGroupsResponsePlacementGroup `json:"placement_groups"`
+}
+
+type GetPlacementGroupsRequest struct {
+	QueryParams GetPlacementGroupsQueryParams
 }
 
 type GetPlacementGroupsResponse struct {

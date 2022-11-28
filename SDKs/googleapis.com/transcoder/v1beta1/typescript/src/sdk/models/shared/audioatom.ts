@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AudioChannel } from "./audiochannel";
+
 
 
 // AudioAtom
@@ -8,9 +8,9 @@ import { AudioChannel } from "./audiochannel";
  * The mapping for the `Job.edit_list` atoms with audio `EditAtom.inputs`.
 **/
 export class AudioAtom extends SpeakeasyBase {
-  @Metadata({ data: "json, name=channels", elemType: shared.AudioChannel })
+  @SpeakeasyMetadata({ data: "json, name=channels", elemType: AudioChannel })
   channels?: AudioChannel[];
 
-  @Metadata({ data: "json, name=key" })
+  @SpeakeasyMetadata({ data: "json, name=key" })
   key?: string;
 }

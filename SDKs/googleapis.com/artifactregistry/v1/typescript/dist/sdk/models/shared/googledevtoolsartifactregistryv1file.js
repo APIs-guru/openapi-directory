@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { Hash } from "./hash";
 // GoogleDevtoolsArtifactregistryV1File
 /**
  * Files store content that is potentially associated with Packages or Versions.
@@ -34,27 +34,27 @@ var GoogleDevtoolsArtifactregistryV1File = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=createTime" }),
+        SpeakeasyMetadata({ data: "json, name=createTime" }),
         __metadata("design:type", String)
     ], GoogleDevtoolsArtifactregistryV1File.prototype, "createTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=hashes", elemType: shared.Hash }),
+        SpeakeasyMetadata({ data: "json, name=hashes", elemType: Hash }),
         __metadata("design:type", Array)
     ], GoogleDevtoolsArtifactregistryV1File.prototype, "hashes", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], GoogleDevtoolsArtifactregistryV1File.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=owner" }),
+        SpeakeasyMetadata({ data: "json, name=owner" }),
         __metadata("design:type", String)
     ], GoogleDevtoolsArtifactregistryV1File.prototype, "owner", void 0);
     __decorate([
-        Metadata({ data: "json, name=sizeBytes" }),
+        SpeakeasyMetadata({ data: "json, name=sizeBytes" }),
         __metadata("design:type", String)
     ], GoogleDevtoolsArtifactregistryV1File.prototype, "sizeBytes", void 0);
     __decorate([
-        Metadata({ data: "json, name=updateTime" }),
+        SpeakeasyMetadata({ data: "json, name=updateTime" }),
         __metadata("design:type", String)
     ], GoogleDevtoolsArtifactregistryV1File.prototype, "updateTime", void 0);
     return GoogleDevtoolsArtifactregistryV1File;

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // ThirdPartyJobInstructionThirdPartyJobInstructionEmployer
 /**
  * The third party job instructions' employer
@@ -33,15 +33,15 @@ var ThirdPartyJobInstructionThirdPartyJobInstructionEmployer = /** @class */ (fu
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=@href" }),
+        SpeakeasyMetadata({ data: "json, name=@href" }),
         __metadata("design:type", String)
     ], ThirdPartyJobInstructionThirdPartyJobInstructionEmployer.prototype, "atHref", void 0);
     __decorate([
-        Metadata({ data: "json, name=@rel" }),
+        SpeakeasyMetadata({ data: "json, name=@rel" }),
         __metadata("design:type", String)
     ], ThirdPartyJobInstructionThirdPartyJobInstructionEmployer.prototype, "atRel", void 0);
     __decorate([
-        Metadata({ data: "json, name=@title" }),
+        SpeakeasyMetadata({ data: "json, name=@title" }),
         __metadata("design:type", String)
     ], ThirdPartyJobInstructionThirdPartyJobInstructionEmployer.prototype, "atTitle", void 0);
     return ThirdPartyJobInstructionThirdPartyJobInstructionEmployer;
@@ -53,35 +53,35 @@ var ThirdPartyJobInstructionThirdPartyJobInstruction = /** @class */ (function (
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=ClientIdUniqueKey" }),
+        SpeakeasyMetadata({ data: "json, name=ClientIdUniqueKey" }),
         __metadata("design:type", String)
     ], ThirdPartyJobInstructionThirdPartyJobInstruction.prototype, "clientIdUniqueKey", void 0);
     __decorate([
-        Metadata({ data: "json, name=ClientSecretUniqueKey" }),
+        SpeakeasyMetadata({ data: "json, name=ClientSecretUniqueKey" }),
         __metadata("design:type", String)
     ], ThirdPartyJobInstructionThirdPartyJobInstruction.prototype, "clientSecretUniqueKey", void 0);
     __decorate([
-        Metadata({ data: "json, name=Employer" }),
+        SpeakeasyMetadata({ data: "json, name=Employer" }),
         __metadata("design:type", ThirdPartyJobInstructionThirdPartyJobInstructionEmployer)
     ], ThirdPartyJobInstructionThirdPartyJobInstruction.prototype, "employer", void 0);
     __decorate([
-        Metadata({ data: "json, name=HoldingDate" }),
+        SpeakeasyMetadata({ data: "json, name=HoldingDate" }),
         __metadata("design:type", Date)
     ], ThirdPartyJobInstructionThirdPartyJobInstruction.prototype, "holdingDate", void 0);
     __decorate([
-        Metadata({ data: "json, name=InstructionTypeName" }),
+        SpeakeasyMetadata({ data: "json, name=InstructionTypeName" }),
         __metadata("design:type", String)
     ], ThirdPartyJobInstructionThirdPartyJobInstruction.prototype, "instructionTypeName", void 0);
     __decorate([
-        Metadata({ data: "json, name=PayScheduleUniqueKey" }),
+        SpeakeasyMetadata({ data: "json, name=PayScheduleUniqueKey" }),
         __metadata("design:type", String)
     ], ThirdPartyJobInstructionThirdPartyJobInstruction.prototype, "payScheduleUniqueKey", void 0);
     __decorate([
-        Metadata({ data: "json, name=PaymentDate" }),
+        SpeakeasyMetadata({ data: "json, name=PaymentDate" }),
         __metadata("design:type", Date)
     ], ThirdPartyJobInstructionThirdPartyJobInstruction.prototype, "paymentDate", void 0);
     __decorate([
-        Metadata({ data: "json, name=RemoteEndpoint" }),
+        SpeakeasyMetadata({ data: "json, name=RemoteEndpoint" }),
         __metadata("design:type", String)
     ], ThirdPartyJobInstructionThirdPartyJobInstruction.prototype, "remoteEndpoint", void 0);
     return ThirdPartyJobInstructionThirdPartyJobInstruction;
@@ -93,7 +93,7 @@ var ThirdPartyJobInstruction = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=ThirdPartyJobInstruction" }),
+        SpeakeasyMetadata({ data: "json, name=ThirdPartyJobInstruction" }),
         __metadata("design:type", ThirdPartyJobInstructionThirdPartyJobInstruction)
     ], ThirdPartyJobInstruction.prototype, "thirdPartyJobInstruction", void 0);
     return ThirdPartyJobInstruction;

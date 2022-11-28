@@ -1,0 +1,85 @@
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { ConfigManagementMembershipSpec } from "./configmanagementmembershipspec";
+import { IdentityServiceMembershipSpecInput } from "./identityservicemembershipspec";
+import { ServiceMeshMembershipSpec } from "./servicemeshmembershipspec";
+import { IdentityServiceMembershipSpec } from "./identityservicemembershipspec";
+// MembershipFeatureSpecInput
+/**
+ * MembershipFeatureSpec contains configuration information for a single Membership.
+**/
+var MembershipFeatureSpecInput = /** @class */ (function (_super) {
+    __extends(MembershipFeatureSpecInput, _super);
+    function MembershipFeatureSpecInput() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=configmanagement" }),
+        __metadata("design:type", ConfigManagementMembershipSpec)
+    ], MembershipFeatureSpecInput.prototype, "configmanagement", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=fleetobservability" }),
+        __metadata("design:type", Map)
+    ], MembershipFeatureSpecInput.prototype, "fleetobservability", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=identityservice" }),
+        __metadata("design:type", IdentityServiceMembershipSpecInput)
+    ], MembershipFeatureSpecInput.prototype, "identityservice", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=mesh" }),
+        __metadata("design:type", ServiceMeshMembershipSpec)
+    ], MembershipFeatureSpecInput.prototype, "mesh", void 0);
+    return MembershipFeatureSpecInput;
+}(SpeakeasyBase));
+export { MembershipFeatureSpecInput };
+// MembershipFeatureSpec
+/**
+ * MembershipFeatureSpec contains configuration information for a single Membership.
+**/
+var MembershipFeatureSpec = /** @class */ (function (_super) {
+    __extends(MembershipFeatureSpec, _super);
+    function MembershipFeatureSpec() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=configmanagement" }),
+        __metadata("design:type", ConfigManagementMembershipSpec)
+    ], MembershipFeatureSpec.prototype, "configmanagement", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=fleetobservability" }),
+        __metadata("design:type", Map)
+    ], MembershipFeatureSpec.prototype, "fleetobservability", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=identityservice" }),
+        __metadata("design:type", IdentityServiceMembershipSpec)
+    ], MembershipFeatureSpec.prototype, "identityservice", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=mesh" }),
+        __metadata("design:type", ServiceMeshMembershipSpec)
+    ], MembershipFeatureSpec.prototype, "mesh", void 0);
+    return MembershipFeatureSpec;
+}(SpeakeasyBase));
+export { MembershipFeatureSpec };

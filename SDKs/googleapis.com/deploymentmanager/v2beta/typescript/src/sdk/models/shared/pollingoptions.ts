@@ -1,21 +1,21 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Diagnostic } from "./diagnostic";
 
 
+
 export class PollingOptions extends SpeakeasyBase {
-  @Metadata({ data: "json, name=diagnostics", elemType: shared.Diagnostic })
+  @SpeakeasyMetadata({ data: "json, name=diagnostics", elemType: Diagnostic })
   diagnostics?: Diagnostic[];
 
-  @Metadata({ data: "json, name=failCondition" })
+  @SpeakeasyMetadata({ data: "json, name=failCondition" })
   failCondition?: string;
 
-  @Metadata({ data: "json, name=finishCondition" })
+  @SpeakeasyMetadata({ data: "json, name=finishCondition" })
   finishCondition?: string;
 
-  @Metadata({ data: "json, name=pollingLink" })
+  @SpeakeasyMetadata({ data: "json, name=pollingLink" })
   pollingLink?: string;
 
-  @Metadata({ data: "json, name=targetLink" })
+  @SpeakeasyMetadata({ data: "json, name=targetLink" })
   targetLink?: string;
 }

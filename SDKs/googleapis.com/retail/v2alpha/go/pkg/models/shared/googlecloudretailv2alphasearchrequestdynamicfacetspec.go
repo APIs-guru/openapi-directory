@@ -8,6 +8,8 @@ const (
 	GoogleCloudRetailV2alphaSearchRequestDynamicFacetSpecModeEnumEnabled         GoogleCloudRetailV2alphaSearchRequestDynamicFacetSpecModeEnum = "ENABLED"
 )
 
+// GoogleCloudRetailV2alphaSearchRequestDynamicFacetSpec
+// The specifications of dynamically generated facets.
 type GoogleCloudRetailV2alphaSearchRequestDynamicFacetSpec struct {
 	Mode *GoogleCloudRetailV2alphaSearchRequestDynamicFacetSpecModeEnum `json:"mode,omitempty"`
 }

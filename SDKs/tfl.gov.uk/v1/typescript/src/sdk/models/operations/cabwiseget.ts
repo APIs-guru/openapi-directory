@@ -1,55 +1,56 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class CabwiseGetQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=forceXml" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=forceXml" })
   forceXml?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=lat" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=lat" })
   lat: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=legacyFormat" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=legacyFormat" })
   legacyFormat?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=lon" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=lon" })
   lon: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=maxResults" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=maxResults" })
   maxResults?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=name" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=name" })
   name?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=optype" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=optype" })
   optype?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=radius" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=radius" })
   radius?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=twentyFourSevenOnly" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=twentyFourSevenOnly" })
   twentyFourSevenOnly?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=wc" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=wc" })
   wc?: string;
 }
 
 
 export class CabwiseGetRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: CabwiseGetQueryParams;
 }
 
 
 export class CabwiseGetResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   systemObject?: Map<string, any>;
 }

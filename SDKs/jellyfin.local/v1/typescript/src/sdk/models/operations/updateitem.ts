@@ -1,50 +1,51 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class UpdateItemPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=itemId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=itemId" })
   itemId: string;
 }
 
 
-export class UpdateItemRequests extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/*+json" })
-  baseItemDto?: shared.BaseItemDto;
+export class UpdateItemRequestsInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "request, media_type=application/*+json" })
+  baseItemDto?: shared.BaseItemDtoInput;
 
-  @Metadata({ data: "request, media_type=application/json" })
-  baseItemDto1?: shared.BaseItemDto;
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  baseItemDto1?: shared.BaseItemDtoInput;
 
-  @Metadata({ data: "request, media_type=text/json" })
-  baseItemDto2?: shared.BaseItemDto;
+  @SpeakeasyMetadata({ data: "request, media_type=text/json" })
+  baseItemDto2?: shared.BaseItemDtoInput;
 }
 
 
 export class UpdateItemSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
   customAuthentication: shared.SchemeCustomAuthentication;
 }
 
 
 export class UpdateItemRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: UpdateItemPathParams;
 
-  @Metadata()
-  request: UpdateItemRequests;
+  @SpeakeasyMetadata()
+  request: UpdateItemRequestsInput;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: UpdateItemSecurity;
 }
 
 
 export class UpdateItemResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   problemDetails?: Map<string, any>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

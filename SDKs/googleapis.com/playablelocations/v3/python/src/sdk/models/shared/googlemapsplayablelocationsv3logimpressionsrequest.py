@@ -1,14 +1,18 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import googlemapsunityclientinfo
-from . import googlemapsplayablelocationsv3impression
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class GoogleMapsPlayablelocationsV3LogImpressionsRequest:
-    client_info: Optional[googlemapsunityclientinfo.GoogleMapsUnityClientInfo] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'clientInfo' }})
-    impressions: Optional[List[googlemapsplayablelocationsv3impression.GoogleMapsPlayablelocationsV3Impression]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'impressions' }})
-    request_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'requestId' }})
+    r"""GoogleMapsPlayablelocationsV3LogImpressionsRequest
+    A request for logging impressions.
+    """
+    
+    client_info: Optional[GoogleMapsUnityClientInfo] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('clientInfo') }})
+    impressions: Optional[List[GoogleMapsPlayablelocationsV3Impression]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('impressions') }})
+    request_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('requestId') }})
     

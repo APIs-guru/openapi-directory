@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
+
 
 export enum MigrationsStartForAuthenticatedUserRequestBodyExcludeEnum {
     Repositories = "repositories"
@@ -7,39 +8,39 @@ export enum MigrationsStartForAuthenticatedUserRequestBodyExcludeEnum {
 
 
 export class MigrationsStartForAuthenticatedUserRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=exclude" })
+  @SpeakeasyMetadata({ data: "json, name=exclude" })
   exclude?: MigrationsStartForAuthenticatedUserRequestBodyExcludeEnum[];
 
-  @Metadata({ data: "json, name=exclude_attachments" })
+  @SpeakeasyMetadata({ data: "json, name=exclude_attachments" })
   excludeAttachments?: boolean;
 
-  @Metadata({ data: "json, name=lock_repositories" })
+  @SpeakeasyMetadata({ data: "json, name=lock_repositories" })
   lockRepositories?: boolean;
 
-  @Metadata({ data: "json, name=repositories" })
+  @SpeakeasyMetadata({ data: "json, name=repositories" })
   repositories: string[];
 }
 
 
 export class MigrationsStartForAuthenticatedUserRequest extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request?: MigrationsStartForAuthenticatedUserRequestBody;
 }
 
 
 export class MigrationsStartForAuthenticatedUserResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   basicError?: shared.BasicError;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   migration?: shared.Migration;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   validationError?: shared.ValidationError;
 }

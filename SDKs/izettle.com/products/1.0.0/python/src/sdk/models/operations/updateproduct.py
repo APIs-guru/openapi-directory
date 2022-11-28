@@ -1,12 +1,15 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import List,Optional
 from sdk.models import shared
 
 
 @dataclass
 class UpdateProductPathParams:
-    organization_uuid: str = field(default=None, metadata={'path_param': { 'field_name': 'organizationUuid', 'style': 'simple', 'explode': False }})
-    product_uuid: str = field(default=None, metadata={'path_param': { 'field_name': 'productUuid', 'style': 'simple', 'explode': False }})
+    organization_uuid: str = field(metadata={'path_param': { 'field_name': 'organizationUuid', 'style': 'simple', 'explode': False }})
+    product_uuid: str = field(metadata={'path_param': { 'field_name': 'productUuid', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -15,33 +18,23 @@ class UpdateProductHeaders:
     
 
 @dataclass
-class UpdateProductSecurityOption1:
-    zettle_api_key: shared.SchemeZettleAPIKey = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
-    
-
-@dataclass
-class UpdateProductSecurityOption2:
-    zettle_oauth: shared.SchemeZettleOauth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    
-
-@dataclass
 class UpdateProductSecurity:
-    option1: Optional[UpdateProductSecurityOption1] = field(default=None, metadata={'security': { 'option': True }})
-    option2: Optional[UpdateProductSecurityOption2] = field(default=None, metadata={'security': { 'option': True }})
+    zettle_api_key: Optional[shared.SchemeZettleAPIKey] = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    zettle_oauth: Optional[shared.SchemeZettleOauth] = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class UpdateProductRequest:
-    path_params: UpdateProductPathParams = field(default=None)
-    headers: UpdateProductHeaders = field(default=None)
-    request: shared.ProductUpdateRequest = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: UpdateProductSecurity = field(default=None)
+    headers: UpdateProductHeaders = field()
+    path_params: UpdateProductPathParams = field()
+    request: shared.ProductUpdateRequest = field(metadata={'request': { 'media_type': 'application/json' }})
+    security: UpdateProductSecurity = field()
     
 
 @dataclass
 class UpdateProductResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    headers: dict[str, List[str]] = field()
+    status_code: int = field()
     error_response: Optional[shared.ErrorResponse] = field(default=None)
-    headers: dict[str, List[str]] = field(default=None)
-    status_code: int = field(default=None)
     

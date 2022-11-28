@@ -1,28 +1,29 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class MediaTabularExtractsheetQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=arg1" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=arg1" })
   arg1?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=entryid" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=entryid" })
   entryid: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=output" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=output" })
   output: string;
 }
 
 
 export class MediaTabularExtractsheetRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: MediaTabularExtractsheetQueryParams;
 }
 
 
 export class MediaTabularExtractsheetResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

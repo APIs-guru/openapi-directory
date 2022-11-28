@@ -1,23 +1,24 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TaskList } from "./tasklist";
 
 
+
 export class PollForDecisionTaskInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=domain" })
+  @SpeakeasyMetadata({ data: "json, name=domain" })
   domain: string;
 
-  @Metadata({ data: "json, name=identity" })
+  @SpeakeasyMetadata({ data: "json, name=identity" })
   identity?: string;
 
-  @Metadata({ data: "json, name=maximumPageSize" })
+  @SpeakeasyMetadata({ data: "json, name=maximumPageSize" })
   maximumPageSize?: number;
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 
-  @Metadata({ data: "json, name=reverseOrder" })
+  @SpeakeasyMetadata({ data: "json, name=reverseOrder" })
   reverseOrder?: boolean;
 
-  @Metadata({ data: "json, name=taskList" })
+  @SpeakeasyMetadata({ data: "json, name=taskList" })
   taskList: TaskList;
 }

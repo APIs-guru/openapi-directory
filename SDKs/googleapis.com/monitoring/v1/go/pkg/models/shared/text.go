@@ -8,6 +8,8 @@ const (
 	TextFormatEnumRaw               TextFormatEnum = "RAW"
 )
 
+// Text
+// A widget that displays textual content.
 type Text struct {
 	Content *string         `json:"content,omitempty"`
 	Format  *TextFormatEnum `json:"format,omitempty"`

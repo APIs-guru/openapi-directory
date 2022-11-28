@@ -1,5 +1,7 @@
 package shared
 
+// VirtualFolderInfo
+// Used to hold information about a user's list of configured virtual folders.
 type VirtualFolderInfo struct {
 	CollectionType     *string         `json:"CollectionType,omitempty"`
 	ItemID             *string         `json:"ItemId,omitempty"`

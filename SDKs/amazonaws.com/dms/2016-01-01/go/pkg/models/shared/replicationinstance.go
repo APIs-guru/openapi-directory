@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// ReplicationInstance
+// Provides information that defines a replication instance.
 type ReplicationInstance struct {
 	AllocatedStorage                      *int64                            `json:"AllocatedStorage,omitempty"`
 	AutoMinorVersionUpgrade               *bool                             `json:"AutoMinorVersionUpgrade,omitempty"`

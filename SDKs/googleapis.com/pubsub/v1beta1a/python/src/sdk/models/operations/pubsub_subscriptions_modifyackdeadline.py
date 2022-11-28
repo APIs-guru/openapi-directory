@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 
@@ -20,14 +21,14 @@ class PubsubSubscriptionsModifyAckDeadlineQueryParams:
 
 @dataclass
 class PubsubSubscriptionsModifyAckDeadlineSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class PubsubSubscriptionsModifyAckDeadlineSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -38,14 +39,14 @@ class PubsubSubscriptionsModifyAckDeadlineSecurity:
 
 @dataclass
 class PubsubSubscriptionsModifyAckDeadlineRequest:
-    query_params: PubsubSubscriptionsModifyAckDeadlineQueryParams = field(default=None)
+    query_params: PubsubSubscriptionsModifyAckDeadlineQueryParams = field()
+    security: PubsubSubscriptionsModifyAckDeadlineSecurity = field()
     request: Optional[shared.ModifyAckDeadlineRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: PubsubSubscriptionsModifyAckDeadlineSecurity = field(default=None)
     
 
 @dataclass
 class PubsubSubscriptionsModifyAckDeadlineResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     empty: Optional[dict[str, Any]] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,6 +1,7 @@
 
 
+
 export enum ServerCertificateStatusEnum {
-    Invalid = "INVALID"
-,    Valid = "VALID"
+    Invalid = "INVALID",
+    Valid = "VALID"
 }

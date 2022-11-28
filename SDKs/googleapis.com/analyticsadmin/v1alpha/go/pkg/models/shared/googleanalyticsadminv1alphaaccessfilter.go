@@ -1,5 +1,7 @@
 package shared
 
+// GoogleAnalyticsAdminV1alphaAccessFilter
+// An expression to filter dimension or metric values.
 type GoogleAnalyticsAdminV1alphaAccessFilter struct {
 	BetweenFilter *GoogleAnalyticsAdminV1alphaAccessBetweenFilter `json:"betweenFilter,omitempty"`
 	FieldName     *string                                         `json:"fieldName,omitempty"`

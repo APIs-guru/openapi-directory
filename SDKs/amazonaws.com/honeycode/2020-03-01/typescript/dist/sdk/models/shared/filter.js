@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // Filter
 /**
  *  An object that represents a filter formula along with the id of the context row under which the filter function needs to evaluate.
@@ -33,11 +33,11 @@ var Filter = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=contextRowId" }),
+        SpeakeasyMetadata({ data: "json, name=contextRowId" }),
         __metadata("design:type", String)
     ], Filter.prototype, "contextRowId", void 0);
     __decorate([
-        Metadata({ data: "json, name=formula" }),
+        SpeakeasyMetadata({ data: "json, name=formula" }),
         __metadata("design:type", String)
     ], Filter.prototype, "formula", void 0);
     return Filter;

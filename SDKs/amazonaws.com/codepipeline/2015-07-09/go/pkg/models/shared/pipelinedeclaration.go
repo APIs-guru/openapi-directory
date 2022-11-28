@@ -1,5 +1,7 @@
 package shared
 
+// PipelineDeclaration
+// Represents the structure of actions and stages to be performed in the pipeline.
 type PipelineDeclaration struct {
 	ArtifactStore  *ArtifactStore           `json:"artifactStore,omitempty"`
 	ArtifactStores map[string]ArtifactStore `json:"artifactStores,omitempty"`

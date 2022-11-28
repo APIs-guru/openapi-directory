@@ -1,11 +1,15 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DataflowProjectsTemplatesLaunchPathParams:
-    project_id: str = field(default=None, metadata={'path_param': { 'field_name': 'projectId', 'style': 'simple', 'explode': False }})
+    project_id: str = field(metadata={'path_param': { 'field_name': 'projectId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -30,26 +34,26 @@ class DataflowProjectsTemplatesLaunchQueryParams:
 
 @dataclass
 class DataflowProjectsTemplatesLaunchSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DataflowProjectsTemplatesLaunchSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DataflowProjectsTemplatesLaunchSecurityOption3:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DataflowProjectsTemplatesLaunchSecurityOption4:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -62,15 +66,15 @@ class DataflowProjectsTemplatesLaunchSecurity:
 
 @dataclass
 class DataflowProjectsTemplatesLaunchRequest:
-    path_params: DataflowProjectsTemplatesLaunchPathParams = field(default=None)
-    query_params: DataflowProjectsTemplatesLaunchQueryParams = field(default=None)
+    path_params: DataflowProjectsTemplatesLaunchPathParams = field()
+    query_params: DataflowProjectsTemplatesLaunchQueryParams = field()
+    security: DataflowProjectsTemplatesLaunchSecurity = field()
     request: Optional[shared.LaunchTemplateParameters] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: DataflowProjectsTemplatesLaunchSecurity = field(default=None)
     
 
 @dataclass
 class DataflowProjectsTemplatesLaunchResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     launch_template_response: Optional[shared.LaunchTemplateResponse] = field(default=None)
-    status_code: int = field(default=None)
     

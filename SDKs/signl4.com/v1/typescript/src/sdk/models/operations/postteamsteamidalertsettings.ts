@@ -1,50 +1,51 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class PostTeamsTeamIdAlertSettingsPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=teamId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=teamId" })
   teamId: string;
 }
 
 
 export class PostTeamsTeamIdAlertSettingsRequests extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/*+json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/*+json" })
   alertSettings?: shared.AlertSettings;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   alertSettings1?: shared.AlertSettings;
 
-  @Metadata({ data: "request, media_type=application/json-patch+json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json-patch+json" })
   alertSettings2?: shared.AlertSettings;
 
-  @Metadata({ data: "request, media_type=text/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=text/json" })
   alertSettings3?: shared.AlertSettings;
 }
 
 
 export class PostTeamsTeamIdAlertSettingsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: PostTeamsTeamIdAlertSettingsPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   request?: PostTeamsTeamIdAlertSettingsRequests;
 }
 
 
 export class PostTeamsTeamIdAlertSettingsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   alertSettings?: shared.AlertSettings;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   errorResponseContent?: shared.ErrorResponseContent;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

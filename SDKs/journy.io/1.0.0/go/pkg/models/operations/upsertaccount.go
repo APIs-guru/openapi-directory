@@ -1,27 +1,31 @@
 package operations
 
+// UpsertAccountRequestBodyIdentification
+// Account identification requires an accountId, domain or both
 type UpsertAccountRequestBodyIdentification struct {
 	AccountID *string `json:"accountId,omitempty"`
 	Domain    *string `json:"domain,omitempty"`
 }
 
+// UpsertAccountRequestBodyMembersIdentification
+// User identification requires a userId, email or both
 type UpsertAccountRequestBodyMembersIdentification struct {
 	Email  *string `json:"email,omitempty"`
 	UserID *string `json:"userId,omitempty"`
 }
 
+// UpsertAccountRequestBodyMembers
+// Identification requires an accountId, domain or both
 type UpsertAccountRequestBodyMembers struct {
 	Identification UpsertAccountRequestBodyMembersIdentification `json:"identification"`
 }
 
+// UpsertAccountRequestBody
+// Update properties and/or members of an account
 type UpsertAccountRequestBody struct {
 	Identification UpsertAccountRequestBodyIdentification `json:"identification"`
 	Members        []UpsertAccountRequestBodyMembers      `json:"members,omitempty"`
 	Properties     map[string]interface{}                 `json:"properties,omitempty"`
-}
-
-type UpsertAccountRequest struct {
-	Request UpsertAccountRequestBody `request:"mediaType=application/json"`
 }
 
 type UpsertAccount201ApplicationJSONMeta struct {
@@ -34,12 +38,16 @@ type UpsertAccount201ApplicationJSON struct {
 	Meta    UpsertAccount201ApplicationJSONMeta `json:"meta"`
 }
 
+// UpsertAccount400ApplicationJSONErrorsParameters
+// All query-, header- and path- parameters that seemed incorrect
 type UpsertAccount400ApplicationJSONErrorsParameters struct {
 	Header map[string]string `json:"header,omitempty"`
 	Path   map[string]string `json:"path,omitempty"`
 	Query  map[string]string `json:"query,omitempty"`
 }
 
+// UpsertAccount400ApplicationJSONErrors
+// Map that sums up all received values that seemed incorrect
 type UpsertAccount400ApplicationJSONErrors struct {
 	Fields     map[string]string                                `json:"fields,omitempty"`
 	Parameters *UpsertAccount400ApplicationJSONErrorsParameters `json:"parameters,omitempty"`
@@ -84,6 +92,10 @@ type UpsertAccount500ApplicationJSONMeta struct {
 type UpsertAccount500ApplicationJSON struct {
 	Message string                              `json:"message"`
 	Meta    UpsertAccount500ApplicationJSONMeta `json:"meta"`
+}
+
+type UpsertAccountRequest struct {
+	Request UpsertAccountRequestBody `request:"mediaType=application/json"`
 }
 
 type UpsertAccountResponse struct {

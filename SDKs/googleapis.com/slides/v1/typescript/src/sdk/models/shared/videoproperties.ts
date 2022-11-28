@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Outline } from "./outline";
+
 
 
 // VideoProperties
@@ -7,18 +8,18 @@ import { Outline } from "./outline";
  * The properties of the Video.
 **/
 export class VideoProperties extends SpeakeasyBase {
-  @Metadata({ data: "json, name=autoPlay" })
+  @SpeakeasyMetadata({ data: "json, name=autoPlay" })
   autoPlay?: boolean;
 
-  @Metadata({ data: "json, name=end" })
+  @SpeakeasyMetadata({ data: "json, name=end" })
   end?: number;
 
-  @Metadata({ data: "json, name=mute" })
+  @SpeakeasyMetadata({ data: "json, name=mute" })
   mute?: boolean;
 
-  @Metadata({ data: "json, name=outline" })
+  @SpeakeasyMetadata({ data: "json, name=outline" })
   outline?: Outline;
 
-  @Metadata({ data: "json, name=start" })
+  @SpeakeasyMetadata({ data: "json, name=start" })
   start?: number;
 }

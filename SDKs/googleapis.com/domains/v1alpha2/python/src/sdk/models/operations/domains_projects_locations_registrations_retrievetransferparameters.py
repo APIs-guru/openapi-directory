@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DomainsProjectsLocationsRegistrationsRetrieveTransferParametersPathParams:
-    location: str = field(default=None, metadata={'path_param': { 'field_name': 'location', 'style': 'simple', 'explode': False }})
+    location: str = field(metadata={'path_param': { 'field_name': 'location', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,20 +27,20 @@ class DomainsProjectsLocationsRegistrationsRetrieveTransferParametersQueryParams
 
 @dataclass
 class DomainsProjectsLocationsRegistrationsRetrieveTransferParametersSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DomainsProjectsLocationsRegistrationsRetrieveTransferParametersRequest:
-    path_params: DomainsProjectsLocationsRegistrationsRetrieveTransferParametersPathParams = field(default=None)
-    query_params: DomainsProjectsLocationsRegistrationsRetrieveTransferParametersQueryParams = field(default=None)
-    security: DomainsProjectsLocationsRegistrationsRetrieveTransferParametersSecurity = field(default=None)
+    path_params: DomainsProjectsLocationsRegistrationsRetrieveTransferParametersPathParams = field()
+    query_params: DomainsProjectsLocationsRegistrationsRetrieveTransferParametersQueryParams = field()
+    security: DomainsProjectsLocationsRegistrationsRetrieveTransferParametersSecurity = field()
     
 
 @dataclass
 class DomainsProjectsLocationsRegistrationsRetrieveTransferParametersResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     retrieve_transfer_parameters_response: Optional[shared.RetrieveTransferParametersResponse] = field(default=None)
-    status_code: int = field(default=None)
     

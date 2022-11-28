@@ -31,7 +31,7 @@ type CloudbuildProjectsLocationsWorkerPoolsCreateSecurity struct {
 type CloudbuildProjectsLocationsWorkerPoolsCreateRequest struct {
 	PathParams  CloudbuildProjectsLocationsWorkerPoolsCreatePathParams
 	QueryParams CloudbuildProjectsLocationsWorkerPoolsCreateQueryParams
-	Request     *shared.WorkerPool `request:"mediaType=application/json"`
+	Request     *shared.WorkerPoolInput `request:"mediaType=application/json"`
 	Security    CloudbuildProjectsLocationsWorkerPoolsCreateSecurity
 }
 

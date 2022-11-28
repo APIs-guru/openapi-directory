@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudDialogflowV2beta1SuggestConversationSummaryRequest
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The request message for Conversations.SuggestConversationSummary.
 **/
 export class GoogleCloudDialogflowV2beta1SuggestConversationSummaryRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=contextSize" })
+  @SpeakeasyMetadata({ data: "json, name=contextSize" })
   contextSize?: number;
 
-  @Metadata({ data: "json, name=latestMessage" })
+  @SpeakeasyMetadata({ data: "json, name=latestMessage" })
   latestMessage?: string;
 }

@@ -1,6 +1,7 @@
 
 
+
 export enum FileSystemMaintenanceOperationEnum {
-    Patching = "PATCHING"
-,    BackingUp = "BACKING_UP"
+    Patching = "PATCHING",
+    BackingUp = "BACKING_UP"
 }

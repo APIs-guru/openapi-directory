@@ -10,18 +10,18 @@ class GetAccountCredentialsQueryParams:
 
 @dataclass
 class GetAccountCredentialsSecurity:
-    bearer_auth: shared.SchemeBearerAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer' }})
+    bearer_auth: shared.SchemeBearerAuth = field(metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer' }})
     
 
 @dataclass
 class GetAccountCredentialsRequest:
-    query_params: GetAccountCredentialsQueryParams = field(default=None)
-    security: GetAccountCredentialsSecurity = field(default=None)
+    query_params: GetAccountCredentialsQueryParams = field()
+    security: GetAccountCredentialsSecurity = field()
     
 
 @dataclass
 class GetAccountCredentialsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     credentials: Optional[List[shared.Credential]] = field(default=None)
-    status_code: int = field(default=None)
     

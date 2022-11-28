@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GroupUserEntity
@@ -6,18 +7,18 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Create Group User
 **/
 export class GroupUserEntity extends SpeakeasyBase {
-  @Metadata({ data: "json, name=admin" })
+  @SpeakeasyMetadata({ data: "json, name=admin" })
   admin?: boolean;
 
-  @Metadata({ data: "json, name=group_id" })
+  @SpeakeasyMetadata({ data: "json, name=group_id" })
   groupId?: number;
 
-  @Metadata({ data: "json, name=group_name" })
+  @SpeakeasyMetadata({ data: "json, name=group_name" })
   groupName?: string;
 
-  @Metadata({ data: "json, name=user_id" })
+  @SpeakeasyMetadata({ data: "json, name=user_id" })
   userId?: number;
 
-  @Metadata({ data: "json, name=usernames" })
+  @SpeakeasyMetadata({ data: "json, name=usernames" })
   usernames?: string[];
 }

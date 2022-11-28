@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudDatalabelingV1beta1GcsSource
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Source of the Cloud Storage file to be imported.
 **/
 export class GoogleCloudDatalabelingV1beta1GcsSource extends SpeakeasyBase {
-  @Metadata({ data: "json, name=inputUri" })
+  @SpeakeasyMetadata({ data: "json, name=inputUri" })
   inputUri?: string;
 
-  @Metadata({ data: "json, name=mimeType" })
+  @SpeakeasyMetadata({ data: "json, name=mimeType" })
   mimeType?: string;
 }

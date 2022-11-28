@@ -1,5 +1,7 @@
 package shared
 
+// RobotApplicationConfig
+// Application configuration information for a robot.
 type RobotApplicationConfig struct {
 	Application                    string                `json:"application"`
 	ApplicationVersion             *string               `json:"applicationVersion,omitempty"`

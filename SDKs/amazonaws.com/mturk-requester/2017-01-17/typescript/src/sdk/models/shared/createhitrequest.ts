@@ -1,57 +1,56 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ReviewPolicy } from "./reviewpolicy";
 import { HitLayoutParameter } from "./hitlayoutparameter";
-import { ReviewPolicy } from "./reviewpolicy";
 import { QualificationRequirement } from "./qualificationrequirement";
 
 
+
 export class CreateHitRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AssignmentDurationInSeconds" })
+  @SpeakeasyMetadata({ data: "json, name=AssignmentDurationInSeconds" })
   assignmentDurationInSeconds: number;
 
-  @Metadata({ data: "json, name=AssignmentReviewPolicy" })
+  @SpeakeasyMetadata({ data: "json, name=AssignmentReviewPolicy" })
   assignmentReviewPolicy?: ReviewPolicy;
 
-  @Metadata({ data: "json, name=AutoApprovalDelayInSeconds" })
+  @SpeakeasyMetadata({ data: "json, name=AutoApprovalDelayInSeconds" })
   autoApprovalDelayInSeconds?: number;
 
-  @Metadata({ data: "json, name=Description" })
+  @SpeakeasyMetadata({ data: "json, name=Description" })
   description: string;
 
-  @Metadata({ data: "json, name=HITLayoutId" })
+  @SpeakeasyMetadata({ data: "json, name=HITLayoutId" })
   hitLayoutId?: string;
 
-  @Metadata({ data: "json, name=HITLayoutParameters", elemType: shared.HitLayoutParameter })
+  @SpeakeasyMetadata({ data: "json, name=HITLayoutParameters", elemType: HitLayoutParameter })
   hitLayoutParameters?: HitLayoutParameter[];
 
-  @Metadata({ data: "json, name=HITReviewPolicy" })
+  @SpeakeasyMetadata({ data: "json, name=HITReviewPolicy" })
   hitReviewPolicy?: ReviewPolicy;
 
-  @Metadata({ data: "json, name=Keywords" })
+  @SpeakeasyMetadata({ data: "json, name=Keywords" })
   keywords?: string;
 
-  @Metadata({ data: "json, name=LifetimeInSeconds" })
+  @SpeakeasyMetadata({ data: "json, name=LifetimeInSeconds" })
   lifetimeInSeconds: number;
 
-  @Metadata({ data: "json, name=MaxAssignments" })
+  @SpeakeasyMetadata({ data: "json, name=MaxAssignments" })
   maxAssignments?: number;
 
-  @Metadata({ data: "json, name=QualificationRequirements", elemType: shared.QualificationRequirement })
+  @SpeakeasyMetadata({ data: "json, name=QualificationRequirements", elemType: QualificationRequirement })
   qualificationRequirements?: QualificationRequirement[];
 
-  @Metadata({ data: "json, name=Question" })
+  @SpeakeasyMetadata({ data: "json, name=Question" })
   question?: string;
 
-  @Metadata({ data: "json, name=RequesterAnnotation" })
+  @SpeakeasyMetadata({ data: "json, name=RequesterAnnotation" })
   requesterAnnotation?: string;
 
-  @Metadata({ data: "json, name=Reward" })
+  @SpeakeasyMetadata({ data: "json, name=Reward" })
   reward: string;
 
-  @Metadata({ data: "json, name=Title" })
+  @SpeakeasyMetadata({ data: "json, name=Title" })
   title: string;
 
-  @Metadata({ data: "json, name=UniqueRequestToken" })
+  @SpeakeasyMetadata({ data: "json, name=UniqueRequestToken" })
   uniqueRequestToken?: string;
 }

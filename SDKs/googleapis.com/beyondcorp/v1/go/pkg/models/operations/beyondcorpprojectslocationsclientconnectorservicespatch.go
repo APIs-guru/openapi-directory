@@ -34,7 +34,7 @@ type BeyondcorpProjectsLocationsClientConnectorServicesPatchSecurity struct {
 type BeyondcorpProjectsLocationsClientConnectorServicesPatchRequest struct {
 	PathParams  BeyondcorpProjectsLocationsClientConnectorServicesPatchPathParams
 	QueryParams BeyondcorpProjectsLocationsClientConnectorServicesPatchQueryParams
-	Request     *shared.ClientConnectorService `request:"mediaType=application/json"`
+	Request     *shared.ClientConnectorServiceInput `request:"mediaType=application/json"`
 	Security    BeyondcorpProjectsLocationsClientConnectorServicesPatchSecurity
 }
 

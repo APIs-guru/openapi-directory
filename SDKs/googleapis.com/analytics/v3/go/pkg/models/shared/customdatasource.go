@@ -9,11 +9,15 @@ type CustomDataSourceChildLink struct {
 	Type *string `json:"type,omitempty"`
 }
 
+// CustomDataSourceParentLink
+// Parent link for this custom data source. Points to the web property to which this custom data source belongs.
 type CustomDataSourceParentLink struct {
 	Href *string `json:"href,omitempty"`
 	Type *string `json:"type,omitempty"`
 }
 
+// CustomDataSource
+// JSON template for an Analytics custom data source.
 type CustomDataSource struct {
 	AccountID      *string                     `json:"accountId,omitempty"`
 	ChildLink      *CustomDataSourceChildLink  `json:"childLink,omitempty"`

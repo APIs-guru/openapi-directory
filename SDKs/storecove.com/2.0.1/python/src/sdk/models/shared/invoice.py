@@ -1,14 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import accountingcustomerparty
-from . import accountingsupplierparty
-from . import allowancecharge
-from . import delivery
-from . import currencycode_enum
-from . import invoiceline
-from . import paymentmeans
-from . import taxsubtotal
+from sdk import utils
+from . import *
 
 class InvoiceTypeOfInvoiceEnum(str, Enum):
     THREE_HUNDRED_AND_EIGHTY = "380"
@@ -38,7 +36,11 @@ class InvoicePaymentMeansCodeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class InvoiceThePaymentTerms:
-    note: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'note' }})
+    r"""InvoiceThePaymentTerms
+    The payment terms of the invoice.
+    """
+    
+    note: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('note') }})
     
 class InvoiceTaxExemptReasonEnum(str, Enum):
     EXPORT = "export"
@@ -57,38 +59,42 @@ class InvoiceTaxSystemEnum(str, Enum):
 @dataclass_json
 @dataclass
 class Invoice:
-    accounting_cost: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'accountingCost' }})
-    accounting_customer_party: accountingcustomerparty.AccountingCustomerParty = field(default=None, metadata={'dataclasses_json': { 'field_name': 'accountingCustomerParty' }})
-    accounting_supplier_party: Optional[accountingsupplierparty.AccountingSupplierParty] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'accountingSupplierParty' }})
-    allowance_charges: Optional[List[allowancecharge.AllowanceCharge]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'allowanceCharges' }})
-    amount_including_vat: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'amountIncludingVat' }})
-    billing_reference: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'billingReference' }})
-    buyer_reference: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'buyerReference' }})
-    consumer_tax_mode: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'consumerTaxMode' }})
-    contract_document_reference: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'contractDocumentReference' }})
-    delivery: Optional[delivery.Delivery] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'delivery' }})
-    document_currency_code: Optional[currencycode_enum.CurrencyCodeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'documentCurrencyCode' }})
-    due_date: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'dueDate' }})
-    invoice_lines: List[invoiceline.InvoiceLine] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'invoiceLines' }})
-    invoice_number: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'invoiceNumber' }})
-    invoice_period: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'invoicePeriod' }})
-    invoice_type: Optional[InvoiceTypeOfInvoiceEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'invoiceType' }})
-    issue_date: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'issueDate' }})
-    note: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'note' }})
-    order_reference: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'orderReference' }})
-    payment_means_array: Optional[List[paymentmeans.PaymentMeans]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'paymentMeansArray' }})
-    payment_means_bic: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'paymentMeansBic' }})
-    payment_means_code: Optional[InvoicePaymentMeansCodeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'paymentMeansCode' }})
-    payment_means_iban: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'paymentMeansIban' }})
-    payment_means_payment_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'paymentMeansPaymentId' }})
-    payment_terms: Optional[InvoiceThePaymentTerms] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'paymentTerms' }})
-    prepaid_amount: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'prepaidAmount' }})
-    project_reference: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'projectReference' }})
-    sales_order_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'salesOrderId' }})
-    tax_exempt_reason: Optional[InvoiceTaxExemptReasonEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'taxExemptReason' }})
-    tax_point_date: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'taxPointDate' }})
-    tax_subtotals: Optional[List[taxsubtotal.TaxSubtotal]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'taxSubtotals' }})
-    tax_system: Optional[InvoiceTaxSystemEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'taxSystem' }})
-    ubl_extensions: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ublExtensions' }})
-    vat_reverse_charge: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'vatReverseCharge' }})
+    r"""Invoice
+    The invoice to send.  Provide either invoice, or invoiceData, but not both.
+    """
+    
+    accounting_customer_party: AccountingCustomerParty = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('accountingCustomerParty') }})
+    amount_including_vat: float = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('amountIncludingVat') }})
+    invoice_lines: List[InvoiceLine] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('invoiceLines') }})
+    invoice_number: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('invoiceNumber') }})
+    issue_date: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('issueDate') }})
+    accounting_cost: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('accountingCost') }})
+    accounting_supplier_party: Optional[AccountingSupplierParty] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('accountingSupplierParty') }})
+    allowance_charges: Optional[List[AllowanceCharge]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('allowanceCharges') }})
+    billing_reference: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('billingReference') }})
+    buyer_reference: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('buyerReference') }})
+    consumer_tax_mode: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('consumerTaxMode') }})
+    contract_document_reference: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('contractDocumentReference') }})
+    delivery: Optional[Delivery] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('delivery') }})
+    document_currency_code: Optional[CurrencyCodeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('documentCurrencyCode') }})
+    due_date: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('dueDate') }})
+    invoice_period: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('invoicePeriod') }})
+    invoice_type: Optional[InvoiceTypeOfInvoiceEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('invoiceType') }})
+    note: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('note') }})
+    order_reference: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('orderReference') }})
+    payment_means_array: Optional[List[PaymentMeans]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('paymentMeansArray') }})
+    payment_means_bic: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('paymentMeansBic') }})
+    payment_means_code: Optional[InvoicePaymentMeansCodeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('paymentMeansCode') }})
+    payment_means_iban: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('paymentMeansIban') }})
+    payment_means_payment_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('paymentMeansPaymentId') }})
+    payment_terms: Optional[InvoiceThePaymentTerms] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('paymentTerms') }})
+    prepaid_amount: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('prepaidAmount') }})
+    project_reference: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('projectReference') }})
+    sales_order_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('salesOrderId') }})
+    tax_exempt_reason: Optional[InvoiceTaxExemptReasonEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('taxExemptReason') }})
+    tax_point_date: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('taxPointDate') }})
+    tax_subtotals: Optional[List[TaxSubtotal]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('taxSubtotals') }})
+    tax_system: Optional[InvoiceTaxSystemEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('taxSystem') }})
+    ubl_extensions: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ublExtensions') }})
+    vat_reverse_charge: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('vatReverseCharge') }})
     

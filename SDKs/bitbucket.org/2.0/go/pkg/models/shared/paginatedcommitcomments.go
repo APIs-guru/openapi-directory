@@ -1,5 +1,7 @@
 package shared
 
+// PaginatedCommitComments
+// A paginated list of commit comments.
 type PaginatedCommitComments struct {
 	Next     *string                  `json:"next,omitempty"`
 	Page     *int64                   `json:"page,omitempty"`

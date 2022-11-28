@@ -1,16 +1,16 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AutoSnapshotDetails } from "./autosnapshotdetails";
 import { ResourceTypeEnum } from "./resourcetypeenum";
 
 
+
 export class GetAutoSnapshotsResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=autoSnapshots", elemType: shared.AutoSnapshotDetails })
+  @SpeakeasyMetadata({ data: "json, name=autoSnapshots", elemType: AutoSnapshotDetails })
   autoSnapshots?: AutoSnapshotDetails[];
 
-  @Metadata({ data: "json, name=resourceName" })
+  @SpeakeasyMetadata({ data: "json, name=resourceName" })
   resourceName?: string;
 
-  @Metadata({ data: "json, name=resourceType" })
+  @SpeakeasyMetadata({ data: "json, name=resourceType" })
   resourceType?: ResourceTypeEnum;
 }

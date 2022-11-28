@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ResultDisplayLine } from "./resultdisplayline";
 
 
+
 export class ResultDisplayMetadata extends SpeakeasyBase {
-  @Metadata({ data: "json, name=metalines", elemType: shared.ResultDisplayLine })
+  @SpeakeasyMetadata({ data: "json, name=metalines", elemType: ResultDisplayLine })
   metalines?: ResultDisplayLine[];
 
-  @Metadata({ data: "json, name=objectTypeLabel" })
+  @SpeakeasyMetadata({ data: "json, name=objectTypeLabel" })
   objectTypeLabel?: string;
 }

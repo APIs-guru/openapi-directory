@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // UserRecord
 /**
  * A team member user record
@@ -33,23 +33,23 @@ var UserRecord = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=admin" }),
+        SpeakeasyMetadata({ data: "json, name=admin" }),
         __metadata("design:type", Boolean)
     ], UserRecord.prototype, "admin", void 0);
     __decorate([
-        Metadata({ data: "json, name=email" }),
+        SpeakeasyMetadata({ data: "json, name=email" }),
         __metadata("design:type", String)
     ], UserRecord.prototype, "email", void 0);
     __decorate([
-        Metadata({ data: "json, name=id" }),
+        SpeakeasyMetadata({ data: "json, name=id" }),
         __metadata("design:type", Number)
     ], UserRecord.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], UserRecord.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=read_only" }),
+        SpeakeasyMetadata({ data: "json, name=read_only" }),
         __metadata("design:type", Boolean)
     ], UserRecord.prototype, "readOnly", void 0);
     return UserRecord;

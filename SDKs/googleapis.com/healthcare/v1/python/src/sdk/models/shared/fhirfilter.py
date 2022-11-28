@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import resources
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class FhirFilter:
-    resources: Optional[resources.Resources] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'resources' }})
+    r"""FhirFilter
+    Filter configuration.
+    """
+    
+    resources: Optional[Resources] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('resources') }})
     

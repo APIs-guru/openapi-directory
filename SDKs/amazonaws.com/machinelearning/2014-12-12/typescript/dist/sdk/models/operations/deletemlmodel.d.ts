@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare enum DeleteMlModelXAmzTargetEnum {
     AmazonMl20141212DeleteMlModel = "AmazonML_20141212.DeleteMLModel"

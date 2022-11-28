@@ -1,14 +1,15 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
-from typing import Any,Enum,List,Optional
+from typing import Any,List,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class ListJobRunsPathParams:
-    virtual_cluster_id: str = field(default=None, metadata={'path_param': { 'field_name': 'virtualClusterId', 'style': 'simple', 'explode': False }})
+    virtual_cluster_id: str = field(metadata={'path_param': { 'field_name': 'virtualClusterId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -34,16 +35,16 @@ class ListJobRunsHeaders:
 
 @dataclass
 class ListJobRunsRequest:
-    path_params: ListJobRunsPathParams = field(default=None)
-    query_params: ListJobRunsQueryParams = field(default=None)
-    headers: ListJobRunsHeaders = field(default=None)
+    headers: ListJobRunsHeaders = field()
+    path_params: ListJobRunsPathParams = field()
+    query_params: ListJobRunsQueryParams = field()
     
 
 @dataclass
 class ListJobRunsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     internal_server_exception: Optional[Any] = field(default=None)
     list_job_runs_response: Optional[shared.ListJobRunsResponse] = field(default=None)
-    status_code: int = field(default=None)
     validation_exception: Optional[Any] = field(default=None)
     

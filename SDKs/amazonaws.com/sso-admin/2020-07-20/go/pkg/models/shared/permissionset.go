@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// PermissionSet
+// An entity that contains IAM policies.
 type PermissionSet struct {
 	CreatedDate      *time.Time `json:"CreatedDate,omitempty"`
 	Description      *string    `json:"Description,omitempty"`

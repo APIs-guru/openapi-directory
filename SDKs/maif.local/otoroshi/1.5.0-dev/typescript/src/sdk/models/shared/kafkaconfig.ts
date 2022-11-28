@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // KafkaConfig
@@ -6,18 +7,18 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The configuration for kafka access
 **/
 export class KafkaConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=keyPass" })
+  @SpeakeasyMetadata({ data: "json, name=keyPass" })
   keyPass?: string;
 
-  @Metadata({ data: "json, name=keyStore" })
+  @SpeakeasyMetadata({ data: "json, name=keyStore" })
   keyStore?: string;
 
-  @Metadata({ data: "json, name=servers" })
+  @SpeakeasyMetadata({ data: "json, name=servers" })
   servers: string[];
 
-  @Metadata({ data: "json, name=topic" })
+  @SpeakeasyMetadata({ data: "json, name=topic" })
   topic?: string;
 
-  @Metadata({ data: "json, name=trustore" })
+  @SpeakeasyMetadata({ data: "json, name=trustore" })
   trustore?: string;
 }

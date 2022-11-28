@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TagFilterTypeEnum } from "./tagfiltertypeenum";
+
 
 
 // TagFilter
@@ -7,12 +8,12 @@ import { TagFilterTypeEnum } from "./tagfiltertypeenum";
  * Information about an on-premises instance tag filter.
 **/
 export class TagFilter extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Key" })
+  @SpeakeasyMetadata({ data: "json, name=Key" })
   key?: string;
 
-  @Metadata({ data: "json, name=Type" })
+  @SpeakeasyMetadata({ data: "json, name=Type" })
   type?: TagFilterTypeEnum;
 
-  @Metadata({ data: "json, name=Value" })
+  @SpeakeasyMetadata({ data: "json, name=Value" })
   value?: string;
 }

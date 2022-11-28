@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { KeySchemaElement } from "./keyschemaelement";
 import { Projection } from "./projection";
+
 
 
 // LocalSecondaryIndexDescription
@@ -9,21 +9,21 @@ import { Projection } from "./projection";
  * Represents the properties of a local secondary index.
 **/
 export class LocalSecondaryIndexDescription extends SpeakeasyBase {
-  @Metadata({ data: "json, name=IndexArn" })
+  @SpeakeasyMetadata({ data: "json, name=IndexArn" })
   indexArn?: string;
 
-  @Metadata({ data: "json, name=IndexName" })
+  @SpeakeasyMetadata({ data: "json, name=IndexName" })
   indexName?: string;
 
-  @Metadata({ data: "json, name=IndexSizeBytes" })
+  @SpeakeasyMetadata({ data: "json, name=IndexSizeBytes" })
   indexSizeBytes?: number;
 
-  @Metadata({ data: "json, name=ItemCount" })
+  @SpeakeasyMetadata({ data: "json, name=ItemCount" })
   itemCount?: number;
 
-  @Metadata({ data: "json, name=KeySchema", elemType: shared.KeySchemaElement })
+  @SpeakeasyMetadata({ data: "json, name=KeySchema", elemType: KeySchemaElement })
   keySchema?: KeySchemaElement[];
 
-  @Metadata({ data: "json, name=Projection" })
+  @SpeakeasyMetadata({ data: "json, name=Projection" })
   projection?: Projection;
 }

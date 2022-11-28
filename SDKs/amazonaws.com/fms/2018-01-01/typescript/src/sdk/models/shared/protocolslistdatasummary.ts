@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ProtocolsListDataSummary
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Details of the Firewall Manager protocols list.
 **/
 export class ProtocolsListDataSummary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ListArn" })
+  @SpeakeasyMetadata({ data: "json, name=ListArn" })
   listArn?: string;
 
-  @Metadata({ data: "json, name=ListId" })
+  @SpeakeasyMetadata({ data: "json, name=ListId" })
   listId?: string;
 
-  @Metadata({ data: "json, name=ListName" })
+  @SpeakeasyMetadata({ data: "json, name=ListName" })
   listName?: string;
 
-  @Metadata({ data: "json, name=ProtocolsList" })
+  @SpeakeasyMetadata({ data: "json, name=ProtocolsList" })
   protocolsList?: string[];
 }

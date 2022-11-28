@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class AndroidenterpriseServiceaccountkeysInsertPathParams:
-    enterprise_id: str = field(default=None, metadata={'path_param': { 'field_name': 'enterpriseId', 'style': 'simple', 'explode': False }})
+    enterprise_id: str = field(metadata={'path_param': { 'field_name': 'enterpriseId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,21 +26,21 @@ class AndroidenterpriseServiceaccountkeysInsertQueryParams:
 
 @dataclass
 class AndroidenterpriseServiceaccountkeysInsertSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class AndroidenterpriseServiceaccountkeysInsertRequest:
-    path_params: AndroidenterpriseServiceaccountkeysInsertPathParams = field(default=None)
-    query_params: AndroidenterpriseServiceaccountkeysInsertQueryParams = field(default=None)
+    path_params: AndroidenterpriseServiceaccountkeysInsertPathParams = field()
+    query_params: AndroidenterpriseServiceaccountkeysInsertQueryParams = field()
+    security: AndroidenterpriseServiceaccountkeysInsertSecurity = field()
     request: Optional[shared.ServiceAccountKey] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: AndroidenterpriseServiceaccountkeysInsertSecurity = field(default=None)
     
 
 @dataclass
 class AndroidenterpriseServiceaccountkeysInsertResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     service_account_key: Optional[shared.ServiceAccountKey] = field(default=None)
-    status_code: int = field(default=None)
     

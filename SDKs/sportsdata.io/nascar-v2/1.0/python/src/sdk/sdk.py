@@ -1,8 +1,11 @@
-import warnings
+
+
 import requests
 from typing import Any,List,Optional
-from sdk.models import operations, shared
+from sdk.models import shared, operations
 from . import utils
+
+
 
 
 SERVERS = [
@@ -14,28 +17,57 @@ SERVERS = [
 
 
 class SDK:
-    client = requests.Session()
-    server_url = SERVERS[0]
+    
+
+    _client: requests.Session
+    _security_client: requests.Session
+    _security: shared.Security
+    _server_url: str = SERVERS[0]
+    _language: str = "python"
+    _sdk_version: str = "0.0.1"
+    _gen_version: str = "internal"
+
+    def __init__(self) -> None:
+        self._client = requests.Session()
+        self._security_client = requests.Session()
+        
+
 
     def config_server_url(self, server_url: str, params: dict[str, str]):
-        if not params is None:
-            self.server_url = utils.replace_parameters(server_url, params)
+        if params is not None:
+            self._server_url = utils.replace_parameters(server_url, params)
         else:
-            self.server_url = server_url
-            
-    
-    def config_security(self, security: shared.Security):
-        self.client = utils.configure_security_client(security)
+            self._server_url = server_url
 
+        
+    
+
+    def config_client(self, client: requests.Session):
+        self._client = client
+        
+        if self._security is not None:
+            self._security_client = utils.configure_security_client(self._client, self._security)
+        
+    
+
+    def config_security(self, security: shared.Security):
+        self._security = security
+        self._security_client = utils.configure_security_client(self._client, security)
+        
+    
+    
     
     def driver_details(self, request: operations.DriverDetailsRequest) -> operations.DriverDetailsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Driver Details
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{format}/driver/{driverid}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -50,13 +82,16 @@ class SDK:
 
     
     def driver_race_projections_entry_list(self, request: operations.DriverRaceProjectionsEntryListRequest) -> operations.DriverRaceProjectionsEntryListResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Driver Race Projections (Entry List)
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{format}/DriverRaceProjections/{raceid}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -71,13 +106,16 @@ class SDK:
 
     
     def drivers(self, request: operations.DriversRequest) -> operations.DriversResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Drivers
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{format}/drivers", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -92,13 +130,16 @@ class SDK:
 
     
     def race_results(self, request: operations.RaceResultsRequest) -> operations.RaceResultsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Race Results
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{format}/raceresult/{raceid}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -113,13 +154,16 @@ class SDK:
 
     
     def races_schedule(self, request: operations.RacesScheduleRequest) -> operations.RacesScheduleResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Races / Schedule
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{format}/races/{season}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -134,13 +178,16 @@ class SDK:
 
     
     def series(self, request: operations.SeriesRequest) -> operations.SeriesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Series
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{format}/series", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 

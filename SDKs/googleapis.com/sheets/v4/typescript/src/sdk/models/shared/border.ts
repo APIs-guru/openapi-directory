@@ -1,16 +1,17 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Color } from "./color";
 import { ColorStyle } from "./colorstyle";
 
+
 export enum BorderStyleEnum {
-    StyleUnspecified = "STYLE_UNSPECIFIED"
-,    Dotted = "DOTTED"
-,    Dashed = "DASHED"
-,    Solid = "SOLID"
-,    SolidMedium = "SOLID_MEDIUM"
-,    SolidThick = "SOLID_THICK"
-,    None = "NONE"
-,    Double = "DOUBLE"
+    StyleUnspecified = "STYLE_UNSPECIFIED",
+    Dotted = "DOTTED",
+    Dashed = "DASHED",
+    Solid = "SOLID",
+    SolidMedium = "SOLID_MEDIUM",
+    SolidThick = "SOLID_THICK",
+    None = "NONE",
+    Double = "DOUBLE"
 }
 
 
@@ -19,15 +20,15 @@ export enum BorderStyleEnum {
  * A border along a cell.
 **/
 export class Border extends SpeakeasyBase {
-  @Metadata({ data: "json, name=color" })
+  @SpeakeasyMetadata({ data: "json, name=color" })
   color?: Color;
 
-  @Metadata({ data: "json, name=colorStyle" })
+  @SpeakeasyMetadata({ data: "json, name=colorStyle" })
   colorStyle?: ColorStyle;
 
-  @Metadata({ data: "json, name=style" })
+  @SpeakeasyMetadata({ data: "json, name=style" })
   style?: BorderStyleEnum;
 
-  @Metadata({ data: "json, name=width" })
+  @SpeakeasyMetadata({ data: "json, name=width" })
   width?: number;
 }

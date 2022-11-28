@@ -1,5 +1,7 @@
 package shared
 
+// AdminCreateUserRequest
+// Represents the request to create a user in the specified user pool.
 type AdminCreateUserRequest struct {
 	ClientMetadata         map[string]string        `json:"ClientMetadata,omitempty"`
 	DesiredDeliveryMediums []DeliveryMediumTypeEnum `json:"DesiredDeliveryMediums,omitempty"`

@@ -1,5 +1,7 @@
 package shared
 
+// AchievementConfigurationDetail
+// An achievement configuration detail.
 type AchievementConfigurationDetail struct {
 	Description *LocalizedStringBundle `json:"description,omitempty"`
 	IconURL     *string                `json:"iconUrl,omitempty"`

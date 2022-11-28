@@ -1,31 +1,32 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ApiKeyInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=customer_email" })
+  @SpeakeasyMetadata({ data: "json, name=customer_email" })
   customerEmail?: string;
 
-  @Metadata({ data: "json, name=customer_name" })
+  @SpeakeasyMetadata({ data: "json, name=customer_name" })
   customerName?: string;
 
-  @Metadata({ data: "json, name=expires" })
+  @SpeakeasyMetadata({ data: "json, name=expires" })
   expires?: string;
 
-  @Metadata({ data: "json, name=item_id" })
+  @SpeakeasyMetadata({ data: "json, name=item_id" })
   itemId?: string;
 
-  @Metadata({ data: "json, name=item_name" })
+  @SpeakeasyMetadata({ data: "json, name=item_name" })
   itemName?: string;
 
-  @Metadata({ data: "json, name=license" })
+  @SpeakeasyMetadata({ data: "json, name=license" })
   license?: string;
 
-  @Metadata({ data: "json, name=license_limit" })
+  @SpeakeasyMetadata({ data: "json, name=license_limit" })
   licenseLimit?: string;
 
-  @Metadata({ data: "json, name=price_id" })
+  @SpeakeasyMetadata({ data: "json, name=price_id" })
   priceId?: string;
 
-  @Metadata({ data: "json, name=success" })
+  @SpeakeasyMetadata({ data: "json, name=success" })
   success?: string;
 }

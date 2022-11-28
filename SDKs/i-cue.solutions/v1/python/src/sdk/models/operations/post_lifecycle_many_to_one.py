@@ -17,14 +17,14 @@ class PostLifecycleManyToOneRequests:
 
 @dataclass
 class PostLifecycleManyToOneRequest:
-    headers: PostLifecycleManyToOneHeaders = field(default=None)
+    headers: PostLifecycleManyToOneHeaders = field()
     request: Optional[PostLifecycleManyToOneRequests] = field(default=None)
     
 
 @dataclass
 class PostLifecycleManyToOneResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     planning_level_data_dto: Optional[shared.PlanningLevelDataDto] = field(default=None)
-    status_code: int = field(default=None)
     

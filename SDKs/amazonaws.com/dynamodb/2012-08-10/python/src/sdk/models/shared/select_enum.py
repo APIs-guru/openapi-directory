@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class SelectEnum(str, Enum):
     ALL_ATTRIBUTES = "ALL_ATTRIBUTES"

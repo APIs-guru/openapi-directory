@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
+
 
 export enum GetAllDataSources200ApplicationJsonActionEnum {
     GetAllDataSources = "getAllDataSources"
@@ -7,35 +8,35 @@ export enum GetAllDataSources200ApplicationJsonActionEnum {
 
 
 export class GetAllDataSources200ApplicationJsonData extends SpeakeasyBase {
-  @Metadata({ data: "json, name=datasources", elemType: shared.Datasource })
+  @SpeakeasyMetadata({ data: "json, name=datasources", elemType: shared.Datasource })
   datasources: shared.Datasource[];
 }
 
 export enum GetAllDataSources200ApplicationJsonResultEnum {
-    Success = "success"
-,    Error = "error"
+    Success = "success",
+    Error = "error"
 }
 
 
 export class GetAllDataSources200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=action" })
+  @SpeakeasyMetadata({ data: "json, name=action" })
   action: GetAllDataSources200ApplicationJsonActionEnum;
 
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data: GetAllDataSources200ApplicationJsonData;
 
-  @Metadata({ data: "json, name=result" })
+  @SpeakeasyMetadata({ data: "json, name=result" })
   result: GetAllDataSources200ApplicationJsonResultEnum;
 }
 
 
 export class GetAllDataSourcesResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getAllDataSources200ApplicationJsonObject?: GetAllDataSources200ApplicationJson;
 }

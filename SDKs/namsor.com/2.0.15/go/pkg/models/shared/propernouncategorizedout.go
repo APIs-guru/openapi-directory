@@ -1,5 +1,7 @@
 package shared
 
+// ProperNounCategorizedOut
+// Classified typed proper names
 type ProperNounCategorizedOut struct {
 	CommonType    *string  `json:"commonType,omitempty"`
 	CommonTypeAlt *string  `json:"commonTypeAlt,omitempty"`

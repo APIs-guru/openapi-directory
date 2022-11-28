@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class VisionProjectsLocationsProductsCreatePathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,14 +27,14 @@ class VisionProjectsLocationsProductsCreateQueryParams:
 
 @dataclass
 class VisionProjectsLocationsProductsCreateSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class VisionProjectsLocationsProductsCreateSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -44,15 +45,15 @@ class VisionProjectsLocationsProductsCreateSecurity:
 
 @dataclass
 class VisionProjectsLocationsProductsCreateRequest:
-    path_params: VisionProjectsLocationsProductsCreatePathParams = field(default=None)
-    query_params: VisionProjectsLocationsProductsCreateQueryParams = field(default=None)
+    path_params: VisionProjectsLocationsProductsCreatePathParams = field()
+    query_params: VisionProjectsLocationsProductsCreateQueryParams = field()
+    security: VisionProjectsLocationsProductsCreateSecurity = field()
     request: Optional[shared.Product] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: VisionProjectsLocationsProductsCreateSecurity = field(default=None)
     
 
 @dataclass
 class VisionProjectsLocationsProductsCreateResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     product: Optional[shared.Product] = field(default=None)
-    status_code: int = field(default=None)
     

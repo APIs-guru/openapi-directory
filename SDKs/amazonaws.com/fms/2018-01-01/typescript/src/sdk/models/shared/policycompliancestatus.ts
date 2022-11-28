@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { EvaluationResult } from "./evaluationresult";
+
 
 
 // PolicyComplianceStatus
@@ -8,24 +8,24 @@ import { EvaluationResult } from "./evaluationresult";
  * Indicates whether the account is compliant with the specified policy. An account is considered noncompliant if it includes resources that are not protected by the policy, for WAF and Shield Advanced policies, or that are noncompliant with the policy, for security group policies.
 **/
 export class PolicyComplianceStatus extends SpeakeasyBase {
-  @Metadata({ data: "json, name=EvaluationResults", elemType: shared.EvaluationResult })
+  @SpeakeasyMetadata({ data: "json, name=EvaluationResults", elemType: EvaluationResult })
   evaluationResults?: EvaluationResult[];
 
-  @Metadata({ data: "json, name=IssueInfoMap" })
+  @SpeakeasyMetadata({ data: "json, name=IssueInfoMap" })
   issueInfoMap?: Map<string, string>;
 
-  @Metadata({ data: "json, name=LastUpdated" })
+  @SpeakeasyMetadata({ data: "json, name=LastUpdated" })
   lastUpdated?: Date;
 
-  @Metadata({ data: "json, name=MemberAccount" })
+  @SpeakeasyMetadata({ data: "json, name=MemberAccount" })
   memberAccount?: string;
 
-  @Metadata({ data: "json, name=PolicyId" })
+  @SpeakeasyMetadata({ data: "json, name=PolicyId" })
   policyId?: string;
 
-  @Metadata({ data: "json, name=PolicyName" })
+  @SpeakeasyMetadata({ data: "json, name=PolicyName" })
   policyName?: string;
 
-  @Metadata({ data: "json, name=PolicyOwner" })
+  @SpeakeasyMetadata({ data: "json, name=PolicyOwner" })
   policyOwner?: string;
 }

@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostListAvailableSolutionStacksActionEnum(str, Enum):
     LIST_AVAILABLE_SOLUTION_STACKS = "ListAvailableSolutionStacks"
@@ -10,8 +14,8 @@ class PostListAvailableSolutionStacksVersionEnum(str, Enum):
 
 @dataclass
 class PostListAvailableSolutionStacksQueryParams:
-    action: PostListAvailableSolutionStacksActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostListAvailableSolutionStacksVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostListAvailableSolutionStacksActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostListAvailableSolutionStacksVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,13 +31,13 @@ class PostListAvailableSolutionStacksHeaders:
 
 @dataclass
 class PostListAvailableSolutionStacksRequest:
-    query_params: PostListAvailableSolutionStacksQueryParams = field(default=None)
-    headers: PostListAvailableSolutionStacksHeaders = field(default=None)
+    headers: PostListAvailableSolutionStacksHeaders = field()
+    query_params: PostListAvailableSolutionStacksQueryParams = field()
     
 
 @dataclass
 class PostListAvailableSolutionStacksResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

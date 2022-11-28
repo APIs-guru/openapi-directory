@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { TextAtom } from "./textatom";
 /**
  * Encoding of a text stream. For example, closed captions or subtitles.

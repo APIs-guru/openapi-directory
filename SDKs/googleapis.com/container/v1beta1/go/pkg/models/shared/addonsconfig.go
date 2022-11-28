@@ -1,5 +1,7 @@
 package shared
 
+// AddonsConfig
+// Configuration for the addons that can be automatically spun up in the cluster, enabling additional functionality.
 type AddonsConfig struct {
 	CloudRunConfig                   *CloudRunConfig                   `json:"cloudRunConfig,omitempty"`
 	ConfigConnectorConfig            *ConfigConnectorConfig            `json:"configConnectorConfig,omitempty"`

@@ -20,6 +20,8 @@ const (
 	GoogleAnalyticsAdminV1alphaLinkProposalStatusDetailsLinkProposalStateEnumObsolete                          GoogleAnalyticsAdminV1alphaLinkProposalStatusDetailsLinkProposalStateEnum = "OBSOLETE"
 )
 
+// GoogleAnalyticsAdminV1alphaLinkProposalStatusDetails
+// Status information for a link proposal.
 type GoogleAnalyticsAdminV1alphaLinkProposalStatusDetails struct {
 	LinkProposalInitiatingProduct *GoogleAnalyticsAdminV1alphaLinkProposalStatusDetailsLinkProposalInitiatingProductEnum `json:"linkProposalInitiatingProduct,omitempty"`
 	LinkProposalState             *GoogleAnalyticsAdminV1alphaLinkProposalStatusDetailsLinkProposalStateEnum             `json:"linkProposalState,omitempty"`

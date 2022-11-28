@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ServiceActionDefinitionTypeEnum } from "./serviceactiondefinitiontypeenum";
 /**
  * Detailed information about the self-service action.

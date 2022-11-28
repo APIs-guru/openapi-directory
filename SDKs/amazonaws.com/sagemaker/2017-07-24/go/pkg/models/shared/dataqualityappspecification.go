@@ -1,5 +1,7 @@
 package shared
 
+// DataQualityAppSpecification
+// Information about the container that a data quality monitoring job runs.
 type DataQualityAppSpecification struct {
 	ContainerArguments              []string          `json:"ContainerArguments,omitempty"`
 	ContainerEntrypoint             []string          `json:"ContainerEntrypoint,omitempty"`

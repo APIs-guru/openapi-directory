@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 export declare enum ConditionIamEnum {
     NoAttr = "NO_ATTR",
     Authority = "AUTHORITY",

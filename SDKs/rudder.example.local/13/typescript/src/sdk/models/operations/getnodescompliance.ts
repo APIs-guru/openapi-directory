@@ -1,15 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetNodesComplianceQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=level" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=level" })
   level?: number;
-}
-
-
-export class GetNodesComplianceRequest extends SpeakeasyBase {
-  @Metadata()
-  queryParams: GetNodesComplianceQueryParams;
 }
 
 export enum GetNodesCompliance200ApplicationJsonActionEnum {
@@ -18,80 +13,86 @@ export enum GetNodesCompliance200ApplicationJsonActionEnum {
 
 
 export class GetNodesCompliance200ApplicationJsonDataNodesComplianceDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=error" })
+  @SpeakeasyMetadata({ data: "json, name=error" })
   error?: number;
 
-  @Metadata({ data: "json, name=noReport" })
+  @SpeakeasyMetadata({ data: "json, name=noReport" })
   noReport?: number;
 
-  @Metadata({ data: "json, name=successAlreadyOK" })
+  @SpeakeasyMetadata({ data: "json, name=successAlreadyOK" })
   successAlreadyOk?: number;
 
-  @Metadata({ data: "json, name=successNotApplicable" })
+  @SpeakeasyMetadata({ data: "json, name=successNotApplicable" })
   successNotApplicable?: number;
 
-  @Metadata({ data: "json, name=successRepaired" })
+  @SpeakeasyMetadata({ data: "json, name=successRepaired" })
   successRepaired?: number;
 
-  @Metadata({ data: "json, name=unexpectedMissingComponent" })
+  @SpeakeasyMetadata({ data: "json, name=unexpectedMissingComponent" })
   unexpectedMissingComponent?: number;
 
-  @Metadata({ data: "json, name=unexpectedUnknownComponent" })
+  @SpeakeasyMetadata({ data: "json, name=unexpectedUnknownComponent" })
   unexpectedUnknownComponent?: number;
 }
 
 export enum GetNodesCompliance200ApplicationJsonDataNodesModeEnum {
-    FullCompliance = "full-compliance"
-,    ChangesOnly = "changes-only"
-,    ReportsDisabled = "reports-disabled"
+    FullCompliance = "full-compliance",
+    ChangesOnly = "changes-only",
+    ReportsDisabled = "reports-disabled"
 }
 
 
 export class GetNodesCompliance200ApplicationJsonDataNodes extends SpeakeasyBase {
-  @Metadata({ data: "json, name=compliance" })
+  @SpeakeasyMetadata({ data: "json, name=compliance" })
   compliance: number;
 
-  @Metadata({ data: "json, name=complianceDetails" })
+  @SpeakeasyMetadata({ data: "json, name=complianceDetails" })
   complianceDetails: GetNodesCompliance200ApplicationJsonDataNodesComplianceDetails;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: string;
 
-  @Metadata({ data: "json, name=mode" })
+  @SpeakeasyMetadata({ data: "json, name=mode" })
   mode: GetNodesCompliance200ApplicationJsonDataNodesModeEnum;
 }
 
 
 export class GetNodesCompliance200ApplicationJsonData extends SpeakeasyBase {
-  @Metadata({ data: "json, name=nodes", elemType: operations.GetNodesCompliance200ApplicationJsonDataNodes })
+  @SpeakeasyMetadata({ data: "json, name=nodes", elemType: GetNodesCompliance200ApplicationJsonDataNodes })
   nodes: GetNodesCompliance200ApplicationJsonDataNodes[];
 }
 
 export enum GetNodesCompliance200ApplicationJsonResultEnum {
-    Success = "success"
-,    Error = "error"
+    Success = "success",
+    Error = "error"
 }
 
 
 export class GetNodesCompliance200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=action" })
+  @SpeakeasyMetadata({ data: "json, name=action" })
   action: GetNodesCompliance200ApplicationJsonActionEnum;
 
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data: GetNodesCompliance200ApplicationJsonData;
 
-  @Metadata({ data: "json, name=result" })
+  @SpeakeasyMetadata({ data: "json, name=result" })
   result: GetNodesCompliance200ApplicationJsonResultEnum;
 }
 
 
+export class GetNodesComplianceRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  queryParams: GetNodesComplianceQueryParams;
+}
+
+
 export class GetNodesComplianceResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getNodesCompliance200ApplicationJsonObject?: GetNodesCompliance200ApplicationJson;
 }

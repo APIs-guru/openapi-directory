@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { IpAllocationPolicy } from "./ipallocationpolicy";
 /**
  * The configuration information for the Kubernetes Engine nodes running the Apache Airflow software.

@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ObjectDisplayOptions } from "./objectdisplayoptions";
 import { FreshnessOptions } from "./freshnessoptions";
+
 
 
 // ObjectOptions
@@ -8,12 +9,12 @@ import { FreshnessOptions } from "./freshnessoptions";
  * The options for an object.
 **/
 export class ObjectOptions extends SpeakeasyBase {
-  @Metadata({ data: "json, name=displayOptions" })
+  @SpeakeasyMetadata({ data: "json, name=displayOptions" })
   displayOptions?: ObjectDisplayOptions;
 
-  @Metadata({ data: "json, name=freshnessOptions" })
+  @SpeakeasyMetadata({ data: "json, name=freshnessOptions" })
   freshnessOptions?: FreshnessOptions;
 
-  @Metadata({ data: "json, name=suggestionFilteringOperators" })
+  @SpeakeasyMetadata({ data: "json, name=suggestionFilteringOperators" })
   suggestionFilteringOperators?: string[];
 }

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { VersionDifferences } from "./versiondifferences";
 var GetLensVersionDifferenceOutput = /** @class */ (function (_super) {
     __extends(GetLensVersionDifferenceOutput, _super);
@@ -30,19 +30,19 @@ var GetLensVersionDifferenceOutput = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=BaseLensVersion" }),
+        SpeakeasyMetadata({ data: "json, name=BaseLensVersion" }),
         __metadata("design:type", String)
     ], GetLensVersionDifferenceOutput.prototype, "baseLensVersion", void 0);
     __decorate([
-        Metadata({ data: "json, name=LatestLensVersion" }),
+        SpeakeasyMetadata({ data: "json, name=LatestLensVersion" }),
         __metadata("design:type", String)
     ], GetLensVersionDifferenceOutput.prototype, "latestLensVersion", void 0);
     __decorate([
-        Metadata({ data: "json, name=LensAlias" }),
+        SpeakeasyMetadata({ data: "json, name=LensAlias" }),
         __metadata("design:type", String)
     ], GetLensVersionDifferenceOutput.prototype, "lensAlias", void 0);
     __decorate([
-        Metadata({ data: "json, name=VersionDifferences" }),
+        SpeakeasyMetadata({ data: "json, name=VersionDifferences" }),
         __metadata("design:type", VersionDifferences)
     ], GetLensVersionDifferenceOutput.prototype, "versionDifferences", void 0);
     return GetLensVersionDifferenceOutput;

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { GetRecommendationError } from "./getrecommendationerror";
 import { InstanceRecommendation } from "./instancerecommendation";
 export declare class GetEc2InstanceRecommendationsResponse extends SpeakeasyBase {

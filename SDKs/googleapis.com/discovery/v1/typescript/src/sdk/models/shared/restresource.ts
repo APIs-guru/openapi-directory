@@ -1,13 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RestMethod } from "./restmethod";
-import { RestResource } from "./restresource";
+
 
 
 export class RestResource extends SpeakeasyBase {
-  @Metadata({ data: "json, name=methods", elemType: shared.RestMethod })
+  @SpeakeasyMetadata({ data: "json, name=methods", elemType: RestMethod })
   methods?: Map<string, RestMethod>;
 
-  @Metadata({ data: "json, name=resources", elemType: shared.RestResource })
+  @SpeakeasyMetadata({ data: "json, name=resources", elemType: RestResource })
   resources?: Map<string, RestResource>;
 }

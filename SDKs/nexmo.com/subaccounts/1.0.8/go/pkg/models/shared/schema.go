@@ -1,5 +1,7 @@
 package shared
 
+// Schema
+// Invalid API Key
 type Schema struct {
 	Detail   string `json:"detail"`
 	Instance string `json:"instance"`

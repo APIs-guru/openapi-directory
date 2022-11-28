@@ -1,13 +1,17 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import formaction
-from . import openlink
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class OnClick:
-    action: Optional[formaction.FormAction] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'action' }})
-    open_link: Optional[openlink.OpenLink] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'openLink' }})
+    r"""OnClick
+    An onclick action (e.g. open a link).
+    """
+    
+    action: Optional[FormAction] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('action') }})
+    open_link: Optional[OpenLink] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('openLink') }})
     

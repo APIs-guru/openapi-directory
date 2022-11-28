@@ -1,66 +1,67 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum GetMeTagsOrderEnum {
-    Desc = "desc"
-,    Asc = "asc"
+    Desc = "desc",
+    Asc = "asc"
 }
 
 export enum GetMeTagsSortEnum {
-    Popular = "popular"
-,    Activity = "activity"
-,    Name = "name"
+    Popular = "popular",
+    Activity = "activity",
+    Name = "name"
 }
 
 
 export class GetMeTagsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=callback" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=callback" })
   callback?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=filter" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=filter" })
   filter?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=fromdate" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=fromdate" })
   fromdate?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=max" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=max" })
   max?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=min" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=min" })
   min?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=order" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=order" })
   order?: GetMeTagsOrderEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=page" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page" })
   page?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=pagesize" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=pagesize" })
   pagesize?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=site" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=site" })
   site: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=sort" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sort" })
   sort?: GetMeTagsSortEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=todate" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=todate" })
   todate?: number;
 }
 
 
 export class GetMeTagsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetMeTagsQueryParams;
 }
 
 
 export class GetMeTagsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // CellInput
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  *  CellInput object contains the data needed to create or update cells in a table. 
 **/
 export class CellInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=fact" })
+  @SpeakeasyMetadata({ data: "json, name=fact" })
   fact?: string;
 }

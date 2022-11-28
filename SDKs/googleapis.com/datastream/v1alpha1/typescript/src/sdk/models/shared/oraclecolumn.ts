@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // OracleColumn
@@ -6,30 +7,30 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Oracle Column.
 **/
 export class OracleColumn extends SpeakeasyBase {
-  @Metadata({ data: "json, name=columnName" })
+  @SpeakeasyMetadata({ data: "json, name=columnName" })
   columnName?: string;
 
-  @Metadata({ data: "json, name=dataType" })
+  @SpeakeasyMetadata({ data: "json, name=dataType" })
   dataType?: string;
 
-  @Metadata({ data: "json, name=encoding" })
+  @SpeakeasyMetadata({ data: "json, name=encoding" })
   encoding?: string;
 
-  @Metadata({ data: "json, name=length" })
+  @SpeakeasyMetadata({ data: "json, name=length" })
   length?: number;
 
-  @Metadata({ data: "json, name=nullable" })
+  @SpeakeasyMetadata({ data: "json, name=nullable" })
   nullable?: boolean;
 
-  @Metadata({ data: "json, name=ordinalPosition" })
+  @SpeakeasyMetadata({ data: "json, name=ordinalPosition" })
   ordinalPosition?: number;
 
-  @Metadata({ data: "json, name=precision" })
+  @SpeakeasyMetadata({ data: "json, name=precision" })
   precision?: number;
 
-  @Metadata({ data: "json, name=primaryKey" })
+  @SpeakeasyMetadata({ data: "json, name=primaryKey" })
   primaryKey?: boolean;
 
-  @Metadata({ data: "json, name=scale" })
+  @SpeakeasyMetadata({ data: "json, name=scale" })
   scale?: number;
 }

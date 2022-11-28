@@ -1,11 +1,15 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class GetChannelVideosPathParams:
-    channel_id: float = field(default=None, metadata={'path_param': { 'field_name': 'channel_id', 'style': 'simple', 'explode': False }})
+    channel_id: float = field(metadata={'path_param': { 'field_name': 'channel_id', 'style': 'simple', 'explode': False }})
     
 class GetChannelVideosDirectionEnum(str, Enum):
     ASC = "asc"
@@ -41,14 +45,14 @@ class GetChannelVideosQueryParams:
 
 @dataclass
 class GetChannelVideosRequest:
-    path_params: GetChannelVideosPathParams = field(default=None)
-    query_params: GetChannelVideosQueryParams = field(default=None)
+    path_params: GetChannelVideosPathParams = field()
+    query_params: GetChannelVideosQueryParams = field()
     
 
 @dataclass
 class GetChannelVideosResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     legacy_error: Optional[shared.LegacyError] = field(default=None)
     videos: Optional[List[shared.Video]] = field(default=None)
     

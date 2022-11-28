@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // DirectoryChromeosdevicesIssueCommandResponse
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A response for issuing a command.
 **/
 export class DirectoryChromeosdevicesIssueCommandResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=commandId" })
+  @SpeakeasyMetadata({ data: "json, name=commandId" })
   commandId?: string;
 }

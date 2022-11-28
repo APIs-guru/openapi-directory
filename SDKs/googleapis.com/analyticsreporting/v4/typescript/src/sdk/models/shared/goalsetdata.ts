@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoalData } from "./goaldata";
+
 
 
 // GoalSetData
@@ -8,6 +8,6 @@ import { GoalData } from "./goaldata";
  * Represents a set of goals that were reached in an activity.
 **/
 export class GoalSetData extends SpeakeasyBase {
-  @Metadata({ data: "json, name=goals", elemType: shared.GoalData })
+  @SpeakeasyMetadata({ data: "json, name=goals", elemType: GoalData })
   goals?: GoalData[];
 }

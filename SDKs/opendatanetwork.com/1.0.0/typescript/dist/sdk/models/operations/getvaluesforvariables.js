@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var GetValuesForVariablesFormatEnum;
 (function (GetValuesForVariablesFormatEnum) {
     GetValuesForVariablesFormatEnum["Google"] = "google";
@@ -33,27 +33,27 @@ var GetValuesForVariablesQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=app_token" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=app_token" }),
         __metadata("design:type", String)
     ], GetValuesForVariablesQueryParams.prototype, "appToken", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=describe" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=describe" }),
         __metadata("design:type", Boolean)
     ], GetValuesForVariablesQueryParams.prototype, "describe", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=entity_id" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=entity_id" }),
         __metadata("design:type", String)
     ], GetValuesForVariablesQueryParams.prototype, "entityId", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=forecast" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=forecast" }),
         __metadata("design:type", Number)
     ], GetValuesForVariablesQueryParams.prototype, "forecast", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=format" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=format" }),
         __metadata("design:type", String)
     ], GetValuesForVariablesQueryParams.prototype, "format", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=variable" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=variable" }),
         __metadata("design:type", String)
     ], GetValuesForVariablesQueryParams.prototype, "variable", void 0);
     return GetValuesForVariablesQueryParams;
@@ -65,7 +65,7 @@ var GetValuesForVariablesHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-App-Token" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-App-Token" }),
         __metadata("design:type", String)
     ], GetValuesForVariablesHeaders.prototype, "xAppToken", void 0);
     return GetValuesForVariablesHeaders;
@@ -77,11 +77,11 @@ var GetValuesForVariablesRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetValuesForVariablesQueryParams)
     ], GetValuesForVariablesRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetValuesForVariablesHeaders)
     ], GetValuesForVariablesRequest.prototype, "headers", void 0);
     return GetValuesForVariablesRequest;
@@ -93,11 +93,11 @@ var GetValuesForVariablesResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetValuesForVariablesResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetValuesForVariablesResponse.prototype, "statusCode", void 0);
     return GetValuesForVariablesResponse;

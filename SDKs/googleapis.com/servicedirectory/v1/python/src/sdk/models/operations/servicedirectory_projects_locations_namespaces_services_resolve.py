@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class ServicedirectoryProjectsLocationsNamespacesServicesResolvePathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,21 +26,21 @@ class ServicedirectoryProjectsLocationsNamespacesServicesResolveQueryParams:
 
 @dataclass
 class ServicedirectoryProjectsLocationsNamespacesServicesResolveSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class ServicedirectoryProjectsLocationsNamespacesServicesResolveRequest:
-    path_params: ServicedirectoryProjectsLocationsNamespacesServicesResolvePathParams = field(default=None)
-    query_params: ServicedirectoryProjectsLocationsNamespacesServicesResolveQueryParams = field(default=None)
+    path_params: ServicedirectoryProjectsLocationsNamespacesServicesResolvePathParams = field()
+    query_params: ServicedirectoryProjectsLocationsNamespacesServicesResolveQueryParams = field()
+    security: ServicedirectoryProjectsLocationsNamespacesServicesResolveSecurity = field()
     request: Optional[shared.ResolveServiceRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: ServicedirectoryProjectsLocationsNamespacesServicesResolveSecurity = field(default=None)
     
 
 @dataclass
 class ServicedirectoryProjectsLocationsNamespacesServicesResolveResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     resolve_service_response: Optional[shared.ResolveServiceResponse] = field(default=None)
-    status_code: int = field(default=None)
     

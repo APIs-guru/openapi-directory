@@ -1,6 +1,7 @@
 
 
+
 export enum StatusStatusFlagEnum {
-    Success = "SUCCESS"
-,    Failure = "FAILURE"
+    Success = "SUCCESS",
+    Failure = "FAILURE"
 }

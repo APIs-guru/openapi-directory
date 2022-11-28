@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CertificateTemplate } from "./certificatetemplate";
 
+
 export enum CertificateAttributesValidationStateEnum {
-    CertificateValidationStateUnspecified = "CERTIFICATE_VALIDATION_STATE_UNSPECIFIED"
-,    ValidationSuccessful = "VALIDATION_SUCCESSFUL"
-,    ValidationFailed = "VALIDATION_FAILED"
+    CertificateValidationStateUnspecified = "CERTIFICATE_VALIDATION_STATE_UNSPECIFIED",
+    ValidationSuccessful = "VALIDATION_SUCCESSFUL",
+    ValidationFailed = "VALIDATION_FAILED"
 }
 
 
@@ -13,30 +14,30 @@ export enum CertificateAttributesValidationStateEnum {
  * Stores information about a certificate.
 **/
 export class CertificateAttributes extends SpeakeasyBase {
-  @Metadata({ data: "json, name=certificateTemplate" })
+  @SpeakeasyMetadata({ data: "json, name=certificateTemplate" })
   certificateTemplate?: CertificateTemplate;
 
-  @Metadata({ data: "json, name=fingerprint" })
+  @SpeakeasyMetadata({ data: "json, name=fingerprint" })
   fingerprint?: string;
 
-  @Metadata({ data: "json, name=issuer" })
+  @SpeakeasyMetadata({ data: "json, name=issuer" })
   issuer?: string;
 
-  @Metadata({ data: "json, name=serialNumber" })
+  @SpeakeasyMetadata({ data: "json, name=serialNumber" })
   serialNumber?: string;
 
-  @Metadata({ data: "json, name=subject" })
+  @SpeakeasyMetadata({ data: "json, name=subject" })
   subject?: string;
 
-  @Metadata({ data: "json, name=thumbprint" })
+  @SpeakeasyMetadata({ data: "json, name=thumbprint" })
   thumbprint?: string;
 
-  @Metadata({ data: "json, name=validationState" })
+  @SpeakeasyMetadata({ data: "json, name=validationState" })
   validationState?: CertificateAttributesValidationStateEnum;
 
-  @Metadata({ data: "json, name=validityExpirationTime" })
+  @SpeakeasyMetadata({ data: "json, name=validityExpirationTime" })
   validityExpirationTime?: string;
 
-  @Metadata({ data: "json, name=validityStartTime" })
+  @SpeakeasyMetadata({ data: "json, name=validityStartTime" })
   validityStartTime?: string;
 }

@@ -1,37 +1,38 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class SignConfirmPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=job" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=job" })
   job: string;
 }
 
 
-export class SignConfirmRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: SignConfirmPathParams;
-}
-
-
 export class SignConfirm202ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: string;
 }
 
 
+export class SignConfirmRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: SignConfirmPathParams;
+}
+
+
 export class SignConfirmResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   error?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   signConfirm202ApplicationJsonObject?: SignConfirm202ApplicationJson;
 }

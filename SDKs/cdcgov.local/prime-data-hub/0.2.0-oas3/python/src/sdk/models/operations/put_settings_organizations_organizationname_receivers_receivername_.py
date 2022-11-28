@@ -5,25 +5,25 @@ from sdk.models import shared
 
 @dataclass
 class PutSettingsOrganizationsOrganizationNameReceiversReceiverNamePathParams:
-    organization_name: str = field(default=None, metadata={'path_param': { 'field_name': 'organizationName', 'style': 'simple', 'explode': False }})
-    receiver_name: str = field(default=None, metadata={'path_param': { 'field_name': 'receiverName', 'style': 'simple', 'explode': False }})
+    organization_name: str = field(metadata={'path_param': { 'field_name': 'organizationName', 'style': 'simple', 'explode': False }})
+    receiver_name: str = field(metadata={'path_param': { 'field_name': 'receiverName', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class PutSettingsOrganizationsOrganizationNameReceiversReceiverNameSecurity:
-    o_auth2: shared.SchemeOAuth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    o_auth2: shared.SchemeOAuth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class PutSettingsOrganizationsOrganizationNameReceiversReceiverNameRequest:
-    path_params: PutSettingsOrganizationsOrganizationNameReceiversReceiverNamePathParams = field(default=None)
-    request: Optional[shared.Receiver] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: PutSettingsOrganizationsOrganizationNameReceiversReceiverNameSecurity = field(default=None)
+    path_params: PutSettingsOrganizationsOrganizationNameReceiversReceiverNamePathParams = field()
+    security: PutSettingsOrganizationsOrganizationNameReceiversReceiverNameSecurity = field()
+    request: Optional[shared.ReceiverInput] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class PutSettingsOrganizationsOrganizationNameReceiversReceiverNameResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     receiver: Optional[shared.Receiver] = field(default=None)
-    status_code: int = field(default=None)
     

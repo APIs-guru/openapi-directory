@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum TwitterHandleEnum {
     AtATwitterHandle = "@a Twitter handle"
@@ -10,9 +11,9 @@ export enum TwitterHandleEnum {
  * Twitter data
 **/
 export class Twitter extends SpeakeasyBase {
-  @Metadata({ data: "json, name=handle" })
+  @SpeakeasyMetadata({ data: "json, name=handle" })
   handle?: TwitterHandleEnum;
 
-  @Metadata({ data: "json, name=hashtags" })
+  @SpeakeasyMetadata({ data: "json, name=hashtags" })
   hashtags?: string[];
 }

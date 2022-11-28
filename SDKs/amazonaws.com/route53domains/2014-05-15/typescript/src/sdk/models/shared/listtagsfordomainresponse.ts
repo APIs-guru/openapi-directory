@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Tag } from "./tag";
+
 
 
 // ListTagsForDomainResponse
@@ -8,6 +8,6 @@ import { Tag } from "./tag";
  * The ListTagsForDomain response includes the following elements.
 **/
 export class ListTagsForDomainResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=TagList", elemType: shared.Tag })
+  @SpeakeasyMetadata({ data: "json, name=TagList", elemType: Tag })
   tagList: Tag[];
 }

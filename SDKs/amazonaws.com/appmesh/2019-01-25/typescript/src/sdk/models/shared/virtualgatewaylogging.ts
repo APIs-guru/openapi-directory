@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { VirtualGatewayAccessLog } from "./virtualgatewayaccesslog";
+
 
 
 // VirtualGatewayLogging
@@ -7,6 +8,6 @@ import { VirtualGatewayAccessLog } from "./virtualgatewayaccesslog";
  * An object that represents logging information.
 **/
 export class VirtualGatewayLogging extends SpeakeasyBase {
-  @Metadata({ data: "json, name=accessLog" })
+  @SpeakeasyMetadata({ data: "json, name=accessLog" })
   accessLog?: VirtualGatewayAccessLog;
 }

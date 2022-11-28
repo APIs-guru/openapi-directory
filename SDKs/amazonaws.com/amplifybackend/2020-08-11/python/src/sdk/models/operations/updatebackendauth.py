@@ -1,13 +1,18 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
 @dataclass
 class UpdateBackendAuthPathParams:
-    app_id: str = field(default=None, metadata={'path_param': { 'field_name': 'appId', 'style': 'simple', 'explode': False }})
-    backend_environment_name: str = field(default=None, metadata={'path_param': { 'field_name': 'backendEnvironmentName', 'style': 'simple', 'explode': False }})
+    app_id: str = field(metadata={'path_param': { 'field_name': 'appId', 'style': 'simple', 'explode': False }})
+    backend_environment_name: str = field(metadata={'path_param': { 'field_name': 'backendEnvironmentName', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -24,33 +29,37 @@ class UpdateBackendAuthHeaders:
 @dataclass_json
 @dataclass
 class UpdateBackendAuthRequestBodyResourceConfig:
-    auth_resources: Optional[shared.AuthResourcesEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AuthResources' }})
-    identity_pool_configs: Optional[shared.UpdateBackendAuthIdentityPoolConfig] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'IdentityPoolConfigs' }})
-    service: Optional[shared.ServiceEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Service' }})
-    user_pool_configs: Optional[shared.UpdateBackendAuthUserPoolConfig] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'UserPoolConfigs' }})
+    r"""UpdateBackendAuthRequestBodyResourceConfig
+    Defines the resource configuration when updating an authentication resource in your Amplify project.
+    """
+    
+    auth_resources: Optional[shared.AuthResourcesEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('AuthResources') }})
+    identity_pool_configs: Optional[shared.UpdateBackendAuthIdentityPoolConfig] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('IdentityPoolConfigs') }})
+    service: Optional[shared.ServiceEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Service') }})
+    user_pool_configs: Optional[shared.UpdateBackendAuthUserPoolConfig] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('UserPoolConfigs') }})
     
 
 @dataclass_json
 @dataclass
 class UpdateBackendAuthRequestBody:
-    resource_config: UpdateBackendAuthRequestBodyResourceConfig = field(default=None, metadata={'dataclasses_json': { 'field_name': 'resourceConfig' }})
-    resource_name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'resourceName' }})
+    resource_config: UpdateBackendAuthRequestBodyResourceConfig = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('resourceConfig') }})
+    resource_name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('resourceName') }})
     
 
 @dataclass
 class UpdateBackendAuthRequest:
-    path_params: UpdateBackendAuthPathParams = field(default=None)
-    headers: UpdateBackendAuthHeaders = field(default=None)
-    request: UpdateBackendAuthRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: UpdateBackendAuthHeaders = field()
+    path_params: UpdateBackendAuthPathParams = field()
+    request: UpdateBackendAuthRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class UpdateBackendAuthResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     gateway_timeout_exception: Optional[Any] = field(default=None)
     not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     too_many_requests_exception: Optional[Any] = field(default=None)
     update_backend_auth_response: Optional[shared.UpdateBackendAuthResponse] = field(default=None)
     

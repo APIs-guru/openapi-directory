@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DiscussionAPIGetTopicsForFolderPathParams:
-    folder_id: int = field(default=None, metadata={'path_param': { 'field_name': 'folderId', 'style': 'simple', 'explode': False }})
+    folder_id: int = field(metadata={'path_param': { 'field_name': 'folderId', 'style': 'simple', 'explode': False }})
     
 class DiscussionAPIGetTopicsForFolderFieldsEnum(str, Enum):
     NONE = "None"
@@ -23,14 +24,14 @@ class DiscussionAPIGetTopicsForFolderQueryParams:
 
 @dataclass
 class DiscussionAPIGetTopicsForFolderRequest:
-    path_params: DiscussionAPIGetTopicsForFolderPathParams = field(default=None)
-    query_params: DiscussionAPIGetTopicsForFolderQueryParams = field(default=None)
+    path_params: DiscussionAPIGetTopicsForFolderPathParams = field()
+    query_params: DiscussionAPIGetTopicsForFolderQueryParams = field()
     
 
 @dataclass
 class DiscussionAPIGetTopicsForFolderResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     discussion_topic_contracts: Optional[List[shared.DiscussionTopicContract]] = field(default=None)
-    status_code: int = field(default=None)
     

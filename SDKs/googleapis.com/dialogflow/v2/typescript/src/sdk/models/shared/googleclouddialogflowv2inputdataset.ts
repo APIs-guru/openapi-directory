@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudDialogflowV2InputDataset
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * InputDataset used to create model or do evaluation. NextID:5
 **/
 export class GoogleCloudDialogflowV2InputDataset extends SpeakeasyBase {
-  @Metadata({ data: "json, name=dataset" })
+  @SpeakeasyMetadata({ data: "json, name=dataset" })
   dataset?: string;
 }

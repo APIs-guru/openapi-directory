@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetSentencesQueryParams = /** @class */ (function (_super) {
     __extends(GetSentencesQueryParams, _super);
@@ -30,51 +30,51 @@ var GetSentencesQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=limit" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=limit" }),
         __metadata("design:type", Number)
     ], GetSentencesQueryParams.prototype, "limit", void 0);
     return GetSentencesQueryParams;
 }(SpeakeasyBase));
 export { GetSentencesQueryParams };
-var GetSentencesRequest = /** @class */ (function (_super) {
-    __extends(GetSentencesRequest, _super);
-    function GetSentencesRequest() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    __decorate([
-        Metadata(),
-        __metadata("design:type", GetSentencesQueryParams)
-    ], GetSentencesRequest.prototype, "queryParams", void 0);
-    return GetSentencesRequest;
-}(SpeakeasyBase));
-export { GetSentencesRequest };
 var GetSentences200ApplicationJson = /** @class */ (function (_super) {
     __extends(GetSentences200ApplicationJson, _super);
     function GetSentences200ApplicationJson() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=data", elemType: shared.Sentence }),
+        SpeakeasyMetadata({ data: "json, name=data", elemType: shared.Sentence }),
         __metadata("design:type", Array)
     ], GetSentences200ApplicationJson.prototype, "data", void 0);
     return GetSentences200ApplicationJson;
 }(SpeakeasyBase));
 export { GetSentences200ApplicationJson };
+var GetSentencesRequest = /** @class */ (function (_super) {
+    __extends(GetSentencesRequest, _super);
+    function GetSentencesRequest() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", GetSentencesQueryParams)
+    ], GetSentencesRequest.prototype, "queryParams", void 0);
+    return GetSentencesRequest;
+}(SpeakeasyBase));
+export { GetSentencesRequest };
 var GetSentencesResponse = /** @class */ (function (_super) {
     __extends(GetSentencesResponse, _super);
     function GetSentencesResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetSentencesResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetSentencesResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetSentences200ApplicationJson)
     ], GetSentencesResponse.prototype, "getSentences200ApplicationJsonObject", void 0);
     return GetSentencesResponse;

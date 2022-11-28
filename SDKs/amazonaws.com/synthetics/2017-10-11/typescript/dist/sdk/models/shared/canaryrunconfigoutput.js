@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // CanaryRunConfigOutput
 /**
  * A structure that contains information about a canary run.
@@ -33,15 +33,15 @@ var CanaryRunConfigOutput = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=ActiveTracing" }),
+        SpeakeasyMetadata({ data: "json, name=ActiveTracing" }),
         __metadata("design:type", Boolean)
     ], CanaryRunConfigOutput.prototype, "activeTracing", void 0);
     __decorate([
-        Metadata({ data: "json, name=MemoryInMB" }),
+        SpeakeasyMetadata({ data: "json, name=MemoryInMB" }),
         __metadata("design:type", Number)
     ], CanaryRunConfigOutput.prototype, "memoryInMb", void 0);
     __decorate([
-        Metadata({ data: "json, name=TimeoutInSeconds" }),
+        SpeakeasyMetadata({ data: "json, name=TimeoutInSeconds" }),
         __metadata("design:type", Number)
     ], CanaryRunConfigOutput.prototype, "timeoutInSeconds", void 0);
     return CanaryRunConfigOutput;

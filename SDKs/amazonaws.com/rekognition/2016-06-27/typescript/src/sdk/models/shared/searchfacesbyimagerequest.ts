@@ -1,21 +1,22 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Image } from "./image";
 import { QualityFilterEnum } from "./qualityfilterenum";
 
 
+
 export class SearchFacesByImageRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CollectionId" })
+  @SpeakeasyMetadata({ data: "json, name=CollectionId" })
   collectionId: string;
 
-  @Metadata({ data: "json, name=FaceMatchThreshold" })
+  @SpeakeasyMetadata({ data: "json, name=FaceMatchThreshold" })
   faceMatchThreshold?: number;
 
-  @Metadata({ data: "json, name=Image" })
+  @SpeakeasyMetadata({ data: "json, name=Image" })
   image: Image;
 
-  @Metadata({ data: "json, name=MaxFaces" })
+  @SpeakeasyMetadata({ data: "json, name=MaxFaces" })
   maxFaces?: number;
 
-  @Metadata({ data: "json, name=QualityFilter" })
+  @SpeakeasyMetadata({ data: "json, name=QualityFilter" })
   qualityFilter?: QualityFilterEnum;
 }

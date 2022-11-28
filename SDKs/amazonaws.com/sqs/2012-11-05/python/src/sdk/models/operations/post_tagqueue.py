@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostTagQueueActionEnum(str, Enum):
     TAG_QUEUE = "TagQueue"
@@ -10,8 +14,8 @@ class PostTagQueueVersionEnum(str, Enum):
 
 @dataclass
 class PostTagQueueQueryParams:
-    action: PostTagQueueActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostTagQueueVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostTagQueueActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostTagQueueVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,13 +31,13 @@ class PostTagQueueHeaders:
 
 @dataclass
 class PostTagQueueRequest:
-    query_params: PostTagQueueQueryParams = field(default=None)
-    headers: PostTagQueueHeaders = field(default=None)
+    headers: PostTagQueueHeaders = field()
+    query_params: PostTagQueueQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostTagQueueResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

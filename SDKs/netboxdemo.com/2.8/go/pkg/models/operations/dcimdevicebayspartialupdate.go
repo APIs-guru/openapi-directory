@@ -10,7 +10,7 @@ type DcimDeviceBaysPartialUpdatePathParams struct {
 
 type DcimDeviceBaysPartialUpdateRequest struct {
 	PathParams DcimDeviceBaysPartialUpdatePathParams
-	Request    shared.WritableDeviceBay `request:"mediaType=application/json"`
+	Request    shared.WritableDeviceBayInput `request:"mediaType=application/json"`
 }
 
 type DcimDeviceBaysPartialUpdateResponse struct {

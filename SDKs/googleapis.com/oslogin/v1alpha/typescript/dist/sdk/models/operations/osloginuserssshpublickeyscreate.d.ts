@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class OsloginUsersSshPublicKeysCreatePathParams extends SpeakeasyBase {
     parent: string;
@@ -31,7 +31,7 @@ export declare class OsloginUsersSshPublicKeysCreateSecurity extends SpeakeasyBa
 export declare class OsloginUsersSshPublicKeysCreateRequest extends SpeakeasyBase {
     pathParams: OsloginUsersSshPublicKeysCreatePathParams;
     queryParams: OsloginUsersSshPublicKeysCreateQueryParams;
-    request?: shared.SshPublicKey;
+    request?: shared.SshPublicKeyInput;
     security: OsloginUsersSshPublicKeysCreateSecurity;
 }
 export declare class OsloginUsersSshPublicKeysCreateResponse extends SpeakeasyBase {

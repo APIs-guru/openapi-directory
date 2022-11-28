@@ -1,50 +1,51 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class DiscoveryApisListQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=alt" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=alt" })
   alt?: shared.AltEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=fields" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=fields" })
   fields?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=key" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=key" })
   key?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=name" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=name" })
   name?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=oauth_token" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=oauth_token" })
   oauthToken?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=preferred" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=preferred" })
   preferred?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=prettyPrint" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=prettyPrint" })
   prettyPrint?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=quotaUser" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=quotaUser" })
   quotaUser?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=userIp" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=userIp" })
   userIp?: string;
 }
 
 
 export class DiscoveryApisListRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: DiscoveryApisListQueryParams;
 }
 
 
 export class DiscoveryApisListResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   directoryList?: shared.DirectoryList;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

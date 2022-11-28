@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SearchResourcesSimpleCriterion } from "./searchresourcessimplecriterion";
 import { SearchResourcesTagCriterion } from "./searchresourcestagcriterion";
+
 
 
 // SearchResourcesCriteria
@@ -8,9 +9,9 @@ import { SearchResourcesTagCriterion } from "./searchresourcestagcriterion";
  * Specifies a property- or tag-based filter condition for including or excluding Amazon Web Services resources from the query results.
 **/
 export class SearchResourcesCriteria extends SpeakeasyBase {
-  @Metadata({ data: "json, name=simpleCriterion" })
+  @SpeakeasyMetadata({ data: "json, name=simpleCriterion" })
   simpleCriterion?: SearchResourcesSimpleCriterion;
 
-  @Metadata({ data: "json, name=tagCriterion" })
+  @SpeakeasyMetadata({ data: "json, name=tagCriterion" })
   tagCriterion?: SearchResourcesTagCriterion;
 }

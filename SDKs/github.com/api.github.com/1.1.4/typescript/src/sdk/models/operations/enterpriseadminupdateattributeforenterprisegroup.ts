@@ -1,62 +1,63 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class EnterpriseAdminUpdateAttributeForEnterpriseGroupPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=enterprise" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=enterprise" })
   enterprise: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=scim_group_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=scim_group_id" })
   scimGroupId: string;
 }
 
 export enum EnterpriseAdminUpdateAttributeForEnterpriseGroupRequestBodyOperationsOpEnum {
-    AddLower = "add"
-,    AddMixed = "Add"
-,    RemoveLower = "remove"
-,    RemoveMixed = "Remove"
-,    ReplaceLower = "replace"
-,    ReplaceMixed = "Replace"
+    AddLower = "add",
+    AddMixed = "Add",
+    RemoveLower = "remove",
+    RemoveMixed = "Remove",
+    ReplaceLower = "replace",
+    ReplaceMixed = "Replace"
 }
 
 
 export class EnterpriseAdminUpdateAttributeForEnterpriseGroupRequestBodyOperations extends SpeakeasyBase {
-  @Metadata({ data: "json, name=op" })
+  @SpeakeasyMetadata({ data: "json, name=op" })
   op: EnterpriseAdminUpdateAttributeForEnterpriseGroupRequestBodyOperationsOpEnum;
 
-  @Metadata({ data: "json, name=path" })
+  @SpeakeasyMetadata({ data: "json, name=path" })
   path?: string;
 
-  @Metadata({ data: "json, name=value" })
+  @SpeakeasyMetadata({ data: "json, name=value" })
   value?: any;
 }
 
 
 export class EnterpriseAdminUpdateAttributeForEnterpriseGroupRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Operations", elemType: operations.EnterpriseAdminUpdateAttributeForEnterpriseGroupRequestBodyOperations })
+  @SpeakeasyMetadata({ data: "json, name=Operations", elemType: EnterpriseAdminUpdateAttributeForEnterpriseGroupRequestBodyOperations })
   operations: EnterpriseAdminUpdateAttributeForEnterpriseGroupRequestBodyOperations[];
 
-  @Metadata({ data: "json, name=schemas" })
+  @SpeakeasyMetadata({ data: "json, name=schemas" })
   schemas: string[];
 }
 
 
 export class EnterpriseAdminUpdateAttributeForEnterpriseGroupRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: EnterpriseAdminUpdateAttributeForEnterpriseGroupPathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request?: EnterpriseAdminUpdateAttributeForEnterpriseGroupRequestBody;
 }
 
 
 export class EnterpriseAdminUpdateAttributeForEnterpriseGroupResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   scimEnterpriseGroup?: shared.ScimEnterpriseGroup;
 }

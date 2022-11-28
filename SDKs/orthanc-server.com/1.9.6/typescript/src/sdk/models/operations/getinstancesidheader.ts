@@ -1,37 +1,38 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetInstancesIdHeaderPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" })
   id: string;
 }
 
 
 export class GetInstancesIdHeaderQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=short" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=short" })
   short?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=simplify" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=simplify" })
   simplify?: boolean;
 }
 
 
 export class GetInstancesIdHeaderRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetInstancesIdHeaderPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetInstancesIdHeaderQueryParams;
 }
 
 
 export class GetInstancesIdHeaderResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getInstancesIdHeader200ApplicationJsonAny?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

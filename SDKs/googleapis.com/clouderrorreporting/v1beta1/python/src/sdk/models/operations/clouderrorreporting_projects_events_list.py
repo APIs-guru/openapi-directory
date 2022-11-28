@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class ClouderrorreportingProjectsEventsListPathParams:
-    project_name: str = field(default=None, metadata={'path_param': { 'field_name': 'projectName', 'style': 'simple', 'explode': False }})
+    project_name: str = field(metadata={'path_param': { 'field_name': 'projectName', 'style': 'simple', 'explode': False }})
     
 class ClouderrorreportingProjectsEventsListTimeRangePeriodEnum(str, Enum):
     PERIOD_UNSPECIFIED = "PERIOD_UNSPECIFIED"
@@ -40,20 +41,20 @@ class ClouderrorreportingProjectsEventsListQueryParams:
 
 @dataclass
 class ClouderrorreportingProjectsEventsListSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class ClouderrorreportingProjectsEventsListRequest:
-    path_params: ClouderrorreportingProjectsEventsListPathParams = field(default=None)
-    query_params: ClouderrorreportingProjectsEventsListQueryParams = field(default=None)
-    security: ClouderrorreportingProjectsEventsListSecurity = field(default=None)
+    path_params: ClouderrorreportingProjectsEventsListPathParams = field()
+    query_params: ClouderrorreportingProjectsEventsListQueryParams = field()
+    security: ClouderrorreportingProjectsEventsListSecurity = field()
     
 
 @dataclass
 class ClouderrorreportingProjectsEventsListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     list_events_response: Optional[shared.ListEventsResponse] = field(default=None)
-    status_code: int = field(default=None)
     

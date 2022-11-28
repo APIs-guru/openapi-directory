@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudIdentitytoolkitAdminV2ClientPermissions
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Configuration related to restricting a user's ability to affect their account.
 **/
 export class GoogleCloudIdentitytoolkitAdminV2ClientPermissions extends SpeakeasyBase {
-  @Metadata({ data: "json, name=disabledUserDeletion" })
+  @SpeakeasyMetadata({ data: "json, name=disabledUserDeletion" })
   disabledUserDeletion?: boolean;
 
-  @Metadata({ data: "json, name=disabledUserSignup" })
+  @SpeakeasyMetadata({ data: "json, name=disabledUserSignup" })
   disabledUserSignup?: boolean;
 }

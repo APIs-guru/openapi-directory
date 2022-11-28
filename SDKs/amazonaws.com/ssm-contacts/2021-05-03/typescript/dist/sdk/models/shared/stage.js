@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { Target } from "./target";
 // Stage
 /**
  * A set amount of time that an escalation plan or engagement plan engages the specified contacts or contact methods.
@@ -34,11 +34,11 @@ var Stage = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=DurationInMinutes" }),
+        SpeakeasyMetadata({ data: "json, name=DurationInMinutes" }),
         __metadata("design:type", Number)
     ], Stage.prototype, "durationInMinutes", void 0);
     __decorate([
-        Metadata({ data: "json, name=Targets", elemType: shared.Target }),
+        SpeakeasyMetadata({ data: "json, name=Targets", elemType: Target }),
         __metadata("design:type", Array)
     ], Stage.prototype, "targets", void 0);
     return Stage;

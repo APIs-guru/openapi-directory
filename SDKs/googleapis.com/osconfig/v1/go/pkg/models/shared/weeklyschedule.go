@@ -13,6 +13,8 @@ const (
 	WeeklyScheduleDayOfWeekEnumSunday               WeeklyScheduleDayOfWeekEnum = "SUNDAY"
 )
 
+// WeeklySchedule
+// Represents a weekly schedule.
 type WeeklySchedule struct {
 	DayOfWeek *WeeklyScheduleDayOfWeekEnum `json:"dayOfWeek,omitempty"`
 }

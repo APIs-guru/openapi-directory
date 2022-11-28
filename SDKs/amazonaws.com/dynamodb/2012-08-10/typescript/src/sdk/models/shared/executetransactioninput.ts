@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ParameterizedStatement } from "./parameterizedstatement";
 
 
+
 export class ExecuteTransactionInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ClientRequestToken" })
+  @SpeakeasyMetadata({ data: "json, name=ClientRequestToken" })
   clientRequestToken?: string;
 
-  @Metadata({ data: "json, name=TransactStatements", elemType: shared.ParameterizedStatement })
+  @SpeakeasyMetadata({ data: "json, name=TransactStatements", elemType: ParameterizedStatement })
   transactStatements: ParameterizedStatement[];
 }

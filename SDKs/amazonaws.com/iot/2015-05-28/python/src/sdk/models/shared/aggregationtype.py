@@ -1,12 +1,18 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import aggregationtypename_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class AggregationType:
-    name: aggregationtypename_enum.AggregationTypeNameEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    values: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'values' }})
+    r"""AggregationType
+    The type of aggregation queries.
+    """
+    
+    name: AggregationTypeNameEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    values: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('values') }})
     

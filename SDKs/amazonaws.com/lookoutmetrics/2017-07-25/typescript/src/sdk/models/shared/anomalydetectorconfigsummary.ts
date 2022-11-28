@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { FrequencyEnum } from "./frequencyenum";
+
 
 
 // AnomalyDetectorConfigSummary
@@ -7,6 +8,6 @@ import { FrequencyEnum } from "./frequencyenum";
  * Contains information about a detector's configuration.
 **/
 export class AnomalyDetectorConfigSummary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AnomalyDetectorFrequency" })
+  @SpeakeasyMetadata({ data: "json, name=AnomalyDetectorFrequency" })
   anomalyDetectorFrequency?: FrequencyEnum;
 }

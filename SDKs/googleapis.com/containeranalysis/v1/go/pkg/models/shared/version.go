@@ -9,6 +9,8 @@ const (
 	VersionKindEnumMaximum                VersionKindEnum = "MAXIMUM"
 )
 
+// Version
+// Version contains structured information about the version of a package.
 type Version struct {
 	Epoch     *int32           `json:"epoch,omitempty"`
 	FullName  *string          `json:"fullName,omitempty"`

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 /**
  * Amount of money to be confirmed as available funds in the debtor account. Contains an Amount and a Currency.
 **/

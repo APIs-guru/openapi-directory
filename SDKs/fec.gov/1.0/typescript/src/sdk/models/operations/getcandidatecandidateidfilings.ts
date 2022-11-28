@@ -1,138 +1,139 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetCandidateCandidateIdFilingsPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=candidate_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=candidate_id" })
   candidateId: string;
 }
 
 export enum GetCandidateCandidateIdFilingsAmendmentIndicatorEnum {
-    Unknown = ""
-,    N = "N"
-,    A = "A"
-,    T = "T"
-,    C = "C"
-,    M = "M"
-,    S = "S"
+    Unknown = "",
+    N = "N",
+    A = "A",
+    T = "T",
+    C = "C",
+    M = "M",
+    S = "S"
 }
 
 export enum GetCandidateCandidateIdFilingsFilerTypeEnum {
-    EFile = "e-file"
-,    Paper = "paper"
+    EFile = "e-file",
+    Paper = "paper"
 }
 
 export enum GetCandidateCandidateIdFilingsOfficeEnum {
-    Unknown = ""
-,    H = "H"
-,    S = "S"
-,    P = "P"
+    Unknown = "",
+    H = "H",
+    S = "S",
+    P = "P"
 }
 
 
 export class GetCandidateCandidateIdFilingsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=amendment_indicator" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=amendment_indicator" })
   amendmentIndicator?: GetCandidateCandidateIdFilingsAmendmentIndicatorEnum[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=api_key" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=api_key" })
   apiKey: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=beginning_image_number" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=beginning_image_number" })
   beginningImageNumber?: string[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=committee_type" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=committee_type" })
   committeeType?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=cycle" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=cycle" })
   cycle?: number[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=district" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=district" })
   district?: string[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=document_type" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=document_type" })
   documentType?: string[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=file_number" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=file_number" })
   fileNumber?: number[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=filer_type" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=filer_type" })
   filerType?: GetCandidateCandidateIdFilingsFilerTypeEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=form_category" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=form_category" })
   formCategory?: string[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=form_type" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=form_type" })
   formType?: string[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=is_amended" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=is_amended" })
   isAmended?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=max_receipt_date" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=max_receipt_date" })
   maxReceiptDate?: Date;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=min_receipt_date" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=min_receipt_date" })
   minReceiptDate?: Date;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=most_recent" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=most_recent" })
   mostRecent?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=office" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=office" })
   office?: GetCandidateCandidateIdFilingsOfficeEnum[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=page" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page" })
   page?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=party" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=party" })
   party?: string[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=per_page" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=per_page" })
   perPage?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=primary_general_indicator" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=primary_general_indicator" })
   primaryGeneralIndicator?: string[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=report_type" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=report_type" })
   reportType?: string[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=report_year" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=report_year" })
   reportYear?: number[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=request_type" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=request_type" })
   requestType?: string[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=sort" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sort" })
   sort?: string[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=sort_hide_null" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sort_hide_null" })
   sortHideNull?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=sort_null_only" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sort_null_only" })
   sortNullOnly?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=sort_nulls_last" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sort_nulls_last" })
   sortNullsLast?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=state" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=state" })
   state?: string[];
 }
 
 
 export class GetCandidateCandidateIdFilingsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetCandidateCandidateIdFilingsPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetCandidateCandidateIdFilingsQueryParams;
 }
 
 
 export class GetCandidateCandidateIdFilingsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   filingsPage?: shared.FilingsPage;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

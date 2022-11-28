@@ -50,6 +50,8 @@ const (
 	InputParameterDataTypeEnumTimestampWithTimezone InputParameterDataTypeEnum = "TIMESTAMP_WITH_TIMEZONE"
 )
 
+// InputParameter
+// Input Parameter message contains metadata about the parameters required for executing an Action.
 type InputParameter struct {
 	DataType     *InputParameterDataTypeEnum `json:"dataType,omitempty"`
 	DefaultValue *interface{}                `json:"defaultValue,omitempty"`

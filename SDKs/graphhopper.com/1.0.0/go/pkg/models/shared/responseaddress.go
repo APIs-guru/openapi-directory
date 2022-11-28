@@ -1,5 +1,7 @@
 package shared
 
+// ResponseAddress
+// Address of activity
 type ResponseAddress struct {
 	Lat             *float64         `json:"lat,omitempty"`
 	LocationID      *string          `json:"location_id,omitempty"`

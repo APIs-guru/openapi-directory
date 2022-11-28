@@ -1,5 +1,7 @@
 package shared
 
+// RevisionSpec
+// RevisionSpec holds the desired state of the Revision (from the client).
 type RevisionSpec struct {
 	ContainerConcurrency *int32                 `json:"containerConcurrency,omitempty"`
 	Containers           []Container            `json:"containers,omitempty"`

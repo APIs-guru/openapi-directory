@@ -22,26 +22,26 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var BetDelayed = /** @class */ (function (_super) {
     __extends(BetDelayed, _super);
     function BetDelayed() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=delayPeriodSeconds" }),
+        SpeakeasyMetadata({ data: "json, name=delayPeriodSeconds" }),
         __metadata("design:type", Number)
     ], BetDelayed.prototype, "delayPeriodSeconds", void 0);
     __decorate([
-        Metadata({ data: "json, name=delayedBetId" }),
+        SpeakeasyMetadata({ data: "json, name=delayedBetId" }),
         __metadata("design:type", String)
     ], BetDelayed.prototype, "delayedBetId", void 0);
     __decorate([
-        Metadata({ data: "json, name=id" }),
+        SpeakeasyMetadata({ data: "json, name=id" }),
         __metadata("design:type", String)
     ], BetDelayed.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "json, name=number" }),
+        SpeakeasyMetadata({ data: "json, name=number" }),
         __metadata("design:type", Number)
     ], BetDelayed.prototype, "number", void 0);
     return BetDelayed;

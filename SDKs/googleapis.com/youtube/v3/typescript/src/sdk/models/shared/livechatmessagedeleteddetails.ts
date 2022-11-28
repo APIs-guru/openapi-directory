@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class LiveChatMessageDeletedDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=deletedMessageId" })
+  @SpeakeasyMetadata({ data: "json, name=deletedMessageId" })
   deletedMessageId?: string;
 }

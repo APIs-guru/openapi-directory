@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Form
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Google Forms item.
 **/
 export class Form extends SpeakeasyBase {
-  @Metadata({ data: "json, name=formUrl" })
+  @SpeakeasyMetadata({ data: "json, name=formUrl" })
   formUrl?: string;
 
-  @Metadata({ data: "json, name=responseUrl" })
+  @SpeakeasyMetadata({ data: "json, name=responseUrl" })
   responseUrl?: string;
 
-  @Metadata({ data: "json, name=thumbnailUrl" })
+  @SpeakeasyMetadata({ data: "json, name=thumbnailUrl" })
   thumbnailUrl?: string;
 
-  @Metadata({ data: "json, name=title" })
+  @SpeakeasyMetadata({ data: "json, name=title" })
   title?: string;
 }

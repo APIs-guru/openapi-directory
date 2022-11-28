@@ -1,5 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ApplicationCodeConfiguration } from "./applicationcodeconfiguration";
 import { ApplicationSnapshotConfiguration } from "./applicationsnapshotconfiguration";
 import { EnvironmentProperties } from "./environmentproperties";
@@ -9,29 +8,30 @@ import { VpcConfiguration } from "./vpcconfiguration";
 import { ZeppelinApplicationConfiguration } from "./zeppelinapplicationconfiguration";
 
 
+
 // ApplicationConfiguration
 /** 
  * Specifies the creation parameters for a Kinesis Data Analytics application.
 **/
 export class ApplicationConfiguration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ApplicationCodeConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=ApplicationCodeConfiguration" })
   applicationCodeConfiguration?: ApplicationCodeConfiguration;
 
-  @Metadata({ data: "json, name=ApplicationSnapshotConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=ApplicationSnapshotConfiguration" })
   applicationSnapshotConfiguration?: ApplicationSnapshotConfiguration;
 
-  @Metadata({ data: "json, name=EnvironmentProperties" })
+  @SpeakeasyMetadata({ data: "json, name=EnvironmentProperties" })
   environmentProperties?: EnvironmentProperties;
 
-  @Metadata({ data: "json, name=FlinkApplicationConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=FlinkApplicationConfiguration" })
   flinkApplicationConfiguration?: FlinkApplicationConfiguration;
 
-  @Metadata({ data: "json, name=SqlApplicationConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=SqlApplicationConfiguration" })
   sqlApplicationConfiguration?: SqlApplicationConfiguration;
 
-  @Metadata({ data: "json, name=VpcConfigurations", elemType: shared.VpcConfiguration })
+  @SpeakeasyMetadata({ data: "json, name=VpcConfigurations", elemType: VpcConfiguration })
   vpcConfigurations?: VpcConfiguration[];
 
-  @Metadata({ data: "json, name=ZeppelinApplicationConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=ZeppelinApplicationConfiguration" })
   zeppelinApplicationConfiguration?: ZeppelinApplicationConfiguration;
 }

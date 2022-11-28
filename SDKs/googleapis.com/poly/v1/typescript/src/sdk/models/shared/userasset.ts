@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Asset } from "./asset";
+
 
 
 // UserAsset
@@ -7,6 +8,6 @@ import { Asset } from "./asset";
  * Data about the user's asset.
 **/
 export class UserAsset extends SpeakeasyBase {
-  @Metadata({ data: "json, name=asset" })
+  @SpeakeasyMetadata({ data: "json, name=asset" })
   asset?: Asset;
 }

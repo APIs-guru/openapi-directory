@@ -1,6 +1,8 @@
 package shared
 
-type BulkEditAssignedLocationsRequest struct {
-	CreatedAssignedLocations []AssignedLocation `json:"createdAssignedLocations,omitempty"`
-	DeletedAssignedLocations []string           `json:"deletedAssignedLocations,omitempty"`
+// BulkEditAssignedLocationsRequestInput
+// Request message for AssignedLocationService.BulkEditAssignedLocations.
+type BulkEditAssignedLocationsRequestInput struct {
+	CreatedAssignedLocations []AssignedLocationInput `json:"createdAssignedLocations,omitempty"`
+	DeletedAssignedLocations []string                `json:"deletedAssignedLocations,omitempty"`
 }

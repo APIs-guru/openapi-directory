@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass_json
 @dataclass
 class AudienceSegment:
-    allocation: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'allocation' }})
-    id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
+    r"""AudienceSegment
+    Audience Segment.
+    """
+    
+    allocation: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('allocation') }})
+    id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('id') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
     

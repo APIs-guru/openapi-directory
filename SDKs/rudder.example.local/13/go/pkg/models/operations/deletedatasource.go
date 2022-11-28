@@ -8,10 +8,6 @@ type DeleteDataSourcePathParams struct {
 	DatasourceID string `pathParam:"style=simple,explode=false,name=datasourceId"`
 }
 
-type DeleteDataSourceRequest struct {
-	PathParams DeleteDataSourcePathParams
-}
-
 type DeleteDataSource200ApplicationJSONActionEnum string
 
 const (
@@ -33,6 +29,10 @@ type DeleteDataSource200ApplicationJSON struct {
 	Action DeleteDataSource200ApplicationJSONActionEnum `json:"action"`
 	Data   DeleteDataSource200ApplicationJSONData       `json:"data"`
 	Result DeleteDataSource200ApplicationJSONResultEnum `json:"result"`
+}
+
+type DeleteDataSourceRequest struct {
+	PathParams DeleteDataSourcePathParams
 }
 
 type DeleteDataSourceResponse struct {

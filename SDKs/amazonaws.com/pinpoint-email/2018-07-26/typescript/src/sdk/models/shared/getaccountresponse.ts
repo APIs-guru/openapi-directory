@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SendQuota } from "./sendquota";
+
 
 
 // GetAccountResponse
@@ -7,18 +8,18 @@ import { SendQuota } from "./sendquota";
  * A list of details about the email-sending capabilities of your Amazon Pinpoint account in the current AWS Region.
 **/
 export class GetAccountResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DedicatedIpAutoWarmupEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=DedicatedIpAutoWarmupEnabled" })
   dedicatedIpAutoWarmupEnabled?: boolean;
 
-  @Metadata({ data: "json, name=EnforcementStatus" })
+  @SpeakeasyMetadata({ data: "json, name=EnforcementStatus" })
   enforcementStatus?: string;
 
-  @Metadata({ data: "json, name=ProductionAccessEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=ProductionAccessEnabled" })
   productionAccessEnabled?: boolean;
 
-  @Metadata({ data: "json, name=SendQuota" })
+  @SpeakeasyMetadata({ data: "json, name=SendQuota" })
   sendQuota?: SendQuota;
 
-  @Metadata({ data: "json, name=SendingEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=SendingEnabled" })
   sendingEnabled?: boolean;
 }

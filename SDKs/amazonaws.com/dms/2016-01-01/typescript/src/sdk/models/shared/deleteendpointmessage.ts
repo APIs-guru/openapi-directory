@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // DeleteEndpointMessage
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * <p/>
 **/
 export class DeleteEndpointMessage extends SpeakeasyBase {
-  @Metadata({ data: "json, name=EndpointArn" })
+  @SpeakeasyMetadata({ data: "json, name=EndpointArn" })
   endpointArn: string;
 }

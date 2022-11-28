@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum AuctionContextAuctionTypesEnum {
-    OpenAuction = "OPEN_AUCTION"
-,    DirectDeals = "DIRECT_DEALS"
+    OpenAuction = "OPEN_AUCTION",
+    DirectDeals = "DIRECT_DEALS"
 }
 
 
@@ -11,6 +12,6 @@ export enum AuctionContextAuctionTypesEnum {
  * Output only. The auction type the restriction applies to.
 **/
 export class AuctionContext extends SpeakeasyBase {
-  @Metadata({ data: "json, name=auctionTypes" })
+  @SpeakeasyMetadata({ data: "json, name=auctionTypes" })
   auctionTypes?: AuctionContextAuctionTypesEnum[];
 }

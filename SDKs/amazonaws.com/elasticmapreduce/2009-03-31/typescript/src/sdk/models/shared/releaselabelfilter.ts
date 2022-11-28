@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ReleaseLabelFilter
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The release label filters by application or version prefix.
 **/
 export class ReleaseLabelFilter extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Application" })
+  @SpeakeasyMetadata({ data: "json, name=Application" })
   application?: string;
 
-  @Metadata({ data: "json, name=Prefix" })
+  @SpeakeasyMetadata({ data: "json, name=Prefix" })
   prefix?: string;
 }

@@ -22,18 +22,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var TrendingGetTrendingCategoryPathParams = /** @class */ (function (_super) {
     __extends(TrendingGetTrendingCategoryPathParams, _super);
     function TrendingGetTrendingCategoryPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=categoryId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=categoryId" }),
         __metadata("design:type", String)
     ], TrendingGetTrendingCategoryPathParams.prototype, "categoryId", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=pageNumber" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=pageNumber" }),
         __metadata("design:type", Number)
     ], TrendingGetTrendingCategoryPathParams.prototype, "pageNumber", void 0);
     return TrendingGetTrendingCategoryPathParams;
@@ -45,7 +45,7 @@ var TrendingGetTrendingCategoryRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", TrendingGetTrendingCategoryPathParams)
     ], TrendingGetTrendingCategoryRequest.prototype, "pathParams", void 0);
     return TrendingGetTrendingCategoryRequest;
@@ -57,15 +57,15 @@ var TrendingGetTrendingCategoryResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], TrendingGetTrendingCategoryResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], TrendingGetTrendingCategoryResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], TrendingGetTrendingCategoryResponse.prototype, "statusCode", void 0);
     return TrendingGetTrendingCategoryResponse;

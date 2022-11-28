@@ -1,16 +1,17 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class PutKeyPolicyRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=BypassPolicyLockoutSafetyCheck" })
+  @SpeakeasyMetadata({ data: "json, name=BypassPolicyLockoutSafetyCheck" })
   bypassPolicyLockoutSafetyCheck?: boolean;
 
-  @Metadata({ data: "json, name=KeyId" })
+  @SpeakeasyMetadata({ data: "json, name=KeyId" })
   keyId: string;
 
-  @Metadata({ data: "json, name=Policy" })
+  @SpeakeasyMetadata({ data: "json, name=Policy" })
   policy: string;
 
-  @Metadata({ data: "json, name=PolicyName" })
+  @SpeakeasyMetadata({ data: "json, name=PolicyName" })
   policyName: string;
 }

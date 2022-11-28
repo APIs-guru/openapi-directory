@@ -1,5 +1,7 @@
 package shared
 
+// VerifyChallengeResponseResult
+// Result message for VerifiedAccess.VerifyChallengeResponse.
 type VerifyChallengeResponseResult struct {
 	DeviceEnrollmentID          *string `json:"deviceEnrollmentId,omitempty"`
 	DevicePermanentID           *string `json:"devicePermanentId,omitempty"`

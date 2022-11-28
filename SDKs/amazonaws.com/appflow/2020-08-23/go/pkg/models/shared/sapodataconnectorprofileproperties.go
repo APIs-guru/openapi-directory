@@ -1,5 +1,8 @@
 package shared
 
+// SapoDataConnectorProfileProperties
+//
+//	The connector-specific profile properties required when using SAPOData.
 type SapoDataConnectorProfileProperties struct {
 	ApplicationHostURL     string           `json:"applicationHostUrl"`
 	ApplicationServicePath string           `json:"applicationServicePath"`

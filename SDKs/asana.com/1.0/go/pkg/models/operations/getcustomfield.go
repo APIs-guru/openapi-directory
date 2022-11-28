@@ -13,13 +13,13 @@ type GetCustomFieldQueryParams struct {
 	OptPretty *bool    `queryParam:"style=form,explode=true,name=opt_pretty"`
 }
 
+type GetCustomField200ApplicationJSON struct {
+	Data *shared.CustomFieldResponse `json:"data,omitempty"`
+}
+
 type GetCustomFieldRequest struct {
 	PathParams  GetCustomFieldPathParams
 	QueryParams GetCustomFieldQueryParams
-}
-
-type GetCustomField200ApplicationJSON struct {
-	Data *shared.CustomFieldResponse `json:"data,omitempty"`
 }
 
 type GetCustomFieldResponse struct {

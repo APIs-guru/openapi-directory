@@ -1,27 +1,19 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class PostLoadBalancersIdActionsChangeDnsPtrPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" })
   id: number;
 }
 
 
 export class PostLoadBalancersIdActionsChangeDnsPtrChangeLoadbalancerDnsPtrRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=dns_ptr" })
+  @SpeakeasyMetadata({ data: "json, name=dns_ptr" })
   dnsPtr: string;
 
-  @Metadata({ data: "json, name=ip" })
+  @SpeakeasyMetadata({ data: "json, name=ip" })
   ip: string;
-}
-
-
-export class PostLoadBalancersIdActionsChangeDnsPtrRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: PostLoadBalancersIdActionsChangeDnsPtrPathParams;
-
-  @Metadata({ data: "request, media_type=application/json" })
-  request?: PostLoadBalancersIdActionsChangeDnsPtrChangeLoadbalancerDnsPtrRequest;
 }
 
 
@@ -30,69 +22,78 @@ export class PostLoadBalancersIdActionsChangeDnsPtrRequest extends SpeakeasyBase
  * Error message for the Action if error occurred, otherwise null
 **/
 export class PostLoadBalancersIdActionsChangeDnsPtrActionResponseActionError extends SpeakeasyBase {
-  @Metadata({ data: "json, name=code" })
+  @SpeakeasyMetadata({ data: "json, name=code" })
   code: string;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message: string;
 }
 
 
 export class PostLoadBalancersIdActionsChangeDnsPtrActionResponseActionResources extends SpeakeasyBase {
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: number;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type: string;
 }
 
 export enum PostLoadBalancersIdActionsChangeDnsPtrActionResponseActionStatusEnum {
-    Success = "success"
-,    Running = "running"
-,    Error = "error"
+    Success = "success",
+    Running = "running",
+    Error = "error"
 }
 
 
 export class PostLoadBalancersIdActionsChangeDnsPtrActionResponseAction extends SpeakeasyBase {
-  @Metadata({ data: "json, name=command" })
+  @SpeakeasyMetadata({ data: "json, name=command" })
   command: string;
 
-  @Metadata({ data: "json, name=error" })
+  @SpeakeasyMetadata({ data: "json, name=error" })
   error: PostLoadBalancersIdActionsChangeDnsPtrActionResponseActionError;
 
-  @Metadata({ data: "json, name=finished" })
+  @SpeakeasyMetadata({ data: "json, name=finished" })
   finished: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: number;
 
-  @Metadata({ data: "json, name=progress" })
+  @SpeakeasyMetadata({ data: "json, name=progress" })
   progress: number;
 
-  @Metadata({ data: "json, name=resources", elemType: operations.PostLoadBalancersIdActionsChangeDnsPtrActionResponseActionResources })
+  @SpeakeasyMetadata({ data: "json, name=resources", elemType: PostLoadBalancersIdActionsChangeDnsPtrActionResponseActionResources })
   resources: PostLoadBalancersIdActionsChangeDnsPtrActionResponseActionResources[];
 
-  @Metadata({ data: "json, name=started" })
+  @SpeakeasyMetadata({ data: "json, name=started" })
   started: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status: PostLoadBalancersIdActionsChangeDnsPtrActionResponseActionStatusEnum;
 }
 
 
 export class PostLoadBalancersIdActionsChangeDnsPtrActionResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=action" })
+  @SpeakeasyMetadata({ data: "json, name=action" })
   action: PostLoadBalancersIdActionsChangeDnsPtrActionResponseAction;
 }
 
 
+export class PostLoadBalancersIdActionsChangeDnsPtrRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: PostLoadBalancersIdActionsChangeDnsPtrPathParams;
+
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request?: PostLoadBalancersIdActionsChangeDnsPtrChangeLoadbalancerDnsPtrRequest;
+}
+
+
 export class PostLoadBalancersIdActionsChangeDnsPtrResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   actionResponse?: PostLoadBalancersIdActionsChangeDnsPtrActionResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

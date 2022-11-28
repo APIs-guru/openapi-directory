@@ -22,18 +22,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var PostQueriesIdAnswersIndexQueryInstancesPathParams = /** @class */ (function (_super) {
     __extends(PostQueriesIdAnswersIndexQueryInstancesPathParams, _super);
     function PostQueriesIdAnswersIndexQueryInstancesPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=id" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" }),
         __metadata("design:type", String)
     ], PostQueriesIdAnswersIndexQueryInstancesPathParams.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=index" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=index" }),
         __metadata("design:type", String)
     ], PostQueriesIdAnswersIndexQueryInstancesPathParams.prototype, "index", void 0);
     return PostQueriesIdAnswersIndexQueryInstancesPathParams;
@@ -45,11 +45,11 @@ var PostQueriesIdAnswersIndexQueryInstancesRequest = /** @class */ (function (_s
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PostQueriesIdAnswersIndexQueryInstancesPathParams)
     ], PostQueriesIdAnswersIndexQueryInstancesRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", Object)
     ], PostQueriesIdAnswersIndexQueryInstancesRequest.prototype, "request", void 0);
     return PostQueriesIdAnswersIndexQueryInstancesRequest;
@@ -61,15 +61,15 @@ var PostQueriesIdAnswersIndexQueryInstancesResponse = /** @class */ (function (_
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], PostQueriesIdAnswersIndexQueryInstancesResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], PostQueriesIdAnswersIndexQueryInstancesResponse.prototype, "postQueriesIdAnswersIndexQueryInstances200ApplicationJsonAny", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], PostQueriesIdAnswersIndexQueryInstancesResponse.prototype, "statusCode", void 0);
     return PostQueriesIdAnswersIndexQueryInstancesResponse;

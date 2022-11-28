@@ -1,14 +1,15 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class PatchAPIKeysIDPathParams:
-    id: int = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: int = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 class PatchAPIKeysIDRequestBodyPermissionSetEnum(str, Enum):
     NONE = "none"
@@ -28,13 +29,13 @@ class PatchAPIKeysIDRequestBody:
 
 @dataclass
 class PatchAPIKeysIDRequest:
-    path_params: PatchAPIKeysIDPathParams = field(default=None)
+    path_params: PatchAPIKeysIDPathParams = field()
     request: Optional[PatchAPIKeysIDRequestBody] = field(default=None, metadata={'request': { 'media_type': 'multipart/form-data' }})
     
 
 @dataclass
 class PatchAPIKeysIDResponse:
+    content_type: str = field()
+    status_code: int = field()
     api_key_entity: Optional[shared.APIKeyEntity] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

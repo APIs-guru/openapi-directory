@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 /**
  *  Control entity attributes that uniquely identify an existing control to be added to a framework in Audit Manager.
 **/

@@ -1,5 +1,7 @@
 package shared
 
+// BatchWriteOperation
+// Represents the output of a <code>BatchWrite</code> operation.
 type BatchWriteOperation struct {
 	AddFacetToObject       *BatchAddFacetToObject       `json:"AddFacetToObject,omitempty"`
 	AttachObject           *BatchAttachObject           `json:"AttachObject,omitempty"`

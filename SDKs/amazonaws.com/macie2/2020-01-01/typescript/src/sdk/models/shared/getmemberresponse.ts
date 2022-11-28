@@ -1,32 +1,33 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RelationshipStatusEnum } from "./relationshipstatusenum";
 
 
+
 export class GetMemberResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=accountId" })
+  @SpeakeasyMetadata({ data: "json, name=accountId" })
   accountId?: string;
 
-  @Metadata({ data: "json, name=administratorAccountId" })
+  @SpeakeasyMetadata({ data: "json, name=administratorAccountId" })
   administratorAccountId?: string;
 
-  @Metadata({ data: "json, name=arn" })
+  @SpeakeasyMetadata({ data: "json, name=arn" })
   arn?: string;
 
-  @Metadata({ data: "json, name=email" })
+  @SpeakeasyMetadata({ data: "json, name=email" })
   email?: string;
 
-  @Metadata({ data: "json, name=invitedAt" })
+  @SpeakeasyMetadata({ data: "json, name=invitedAt" })
   invitedAt?: Date;
 
-  @Metadata({ data: "json, name=masterAccountId" })
+  @SpeakeasyMetadata({ data: "json, name=masterAccountId" })
   masterAccountId?: string;
 
-  @Metadata({ data: "json, name=relationshipStatus" })
+  @SpeakeasyMetadata({ data: "json, name=relationshipStatus" })
   relationshipStatus?: RelationshipStatusEnum;
 
-  @Metadata({ data: "json, name=tags" })
+  @SpeakeasyMetadata({ data: "json, name=tags" })
   tags?: Map<string, string>;
 
-  @Metadata({ data: "json, name=updatedAt" })
+  @SpeakeasyMetadata({ data: "json, name=updatedAt" })
   updatedAt?: Date;
 }

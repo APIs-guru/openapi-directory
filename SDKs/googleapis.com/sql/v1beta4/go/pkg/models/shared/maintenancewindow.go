@@ -8,6 +8,8 @@ const (
 	MaintenanceWindowUpdateTrackEnumStable                    MaintenanceWindowUpdateTrackEnum = "stable"
 )
 
+// MaintenanceWindow
+// Maintenance window. This specifies when a Cloud SQL instance is restarted for system maintenance purposes.
 type MaintenanceWindow struct {
 	Day         *int32                            `json:"day,omitempty"`
 	Hour        *int32                            `json:"hour,omitempty"`

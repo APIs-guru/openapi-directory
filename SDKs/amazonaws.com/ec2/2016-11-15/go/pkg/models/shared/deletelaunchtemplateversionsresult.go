@@ -1,0 +1,6 @@
+package shared
+
+type DeleteLaunchTemplateVersionsResult struct {
+	SuccessfullyDeletedLaunchTemplateVersions   []DeleteLaunchTemplateVersionsResponseSuccessItem
+	UnsuccessfullyDeletedLaunchTemplateVersions []DeleteLaunchTemplateVersionsResponseErrorItem
+}

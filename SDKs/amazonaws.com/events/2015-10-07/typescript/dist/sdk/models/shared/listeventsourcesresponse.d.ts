@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { EventSource } from "./eventsource";
 export declare class ListEventSourcesResponse extends SpeakeasyBase {
     eventSources?: EventSource[];

@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import displayedproperty
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class Metaline:
-    properties: Optional[List[displayedproperty.DisplayedProperty]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'properties' }})
+    r"""Metaline
+    A metaline is a list of properties that are displayed along with the search result to provide context.
+    """
+    
+    properties: Optional[List[DisplayedProperty]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('properties') }})
     

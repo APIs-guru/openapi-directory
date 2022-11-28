@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Pipeline } from "./pipeline";
 import { Warning } from "./warning";
+
 
 
 // CreatePipelineResponse
@@ -9,9 +9,9 @@ import { Warning } from "./warning";
  * When you create a pipeline, Elastic Transcoder returns the values that you specified in the request.
 **/
 export class CreatePipelineResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Pipeline" })
+  @SpeakeasyMetadata({ data: "json, name=Pipeline" })
   pipeline?: Pipeline;
 
-  @Metadata({ data: "json, name=Warnings", elemType: shared.Warning })
+  @SpeakeasyMetadata({ data: "json, name=Warnings", elemType: Warning })
   warnings?: Warning[];
 }

@@ -1,25 +1,26 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ScheduleAByZip extends SpeakeasyBase {
-  @Metadata({ data: "json, name=committee_id" })
+  @SpeakeasyMetadata({ data: "json, name=committee_id" })
   committeeId: string;
 
-  @Metadata({ data: "json, name=count" })
+  @SpeakeasyMetadata({ data: "json, name=count" })
   count?: number;
 
-  @Metadata({ data: "json, name=cycle" })
+  @SpeakeasyMetadata({ data: "json, name=cycle" })
   cycle: number;
 
-  @Metadata({ data: "json, name=state" })
+  @SpeakeasyMetadata({ data: "json, name=state" })
   state?: string;
 
-  @Metadata({ data: "json, name=state_full" })
+  @SpeakeasyMetadata({ data: "json, name=state_full" })
   stateFull?: string;
 
-  @Metadata({ data: "json, name=total" })
+  @SpeakeasyMetadata({ data: "json, name=total" })
   total?: number;
 
-  @Metadata({ data: "json, name=zip" })
+  @SpeakeasyMetadata({ data: "json, name=zip" })
   zip: string;
 }

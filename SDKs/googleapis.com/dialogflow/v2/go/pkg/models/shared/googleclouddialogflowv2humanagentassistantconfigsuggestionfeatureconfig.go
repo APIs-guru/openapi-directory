@@ -1,5 +1,7 @@
 package shared
 
+// GoogleCloudDialogflowV2HumanAgentAssistantConfigSuggestionFeatureConfig
+// Config for suggestion features.
 type GoogleCloudDialogflowV2HumanAgentAssistantConfigSuggestionFeatureConfig struct {
 	ConversationModelConfig    *GoogleCloudDialogflowV2HumanAgentAssistantConfigConversationModelConfig   `json:"conversationModelConfig,omitempty"`
 	ConversationProcessConfig  *GoogleCloudDialogflowV2HumanAgentAssistantConfigConversationProcessConfig `json:"conversationProcessConfig,omitempty"`

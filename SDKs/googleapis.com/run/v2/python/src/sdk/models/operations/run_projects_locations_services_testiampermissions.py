@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class RunProjectsLocationsServicesTestIamPermissionsPathParams:
-    resource: str = field(default=None, metadata={'path_param': { 'field_name': 'resource', 'style': 'simple', 'explode': False }})
+    resource: str = field(metadata={'path_param': { 'field_name': 'resource', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,21 +26,21 @@ class RunProjectsLocationsServicesTestIamPermissionsQueryParams:
 
 @dataclass
 class RunProjectsLocationsServicesTestIamPermissionsSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class RunProjectsLocationsServicesTestIamPermissionsRequest:
-    path_params: RunProjectsLocationsServicesTestIamPermissionsPathParams = field(default=None)
-    query_params: RunProjectsLocationsServicesTestIamPermissionsQueryParams = field(default=None)
+    path_params: RunProjectsLocationsServicesTestIamPermissionsPathParams = field()
+    query_params: RunProjectsLocationsServicesTestIamPermissionsQueryParams = field()
+    security: RunProjectsLocationsServicesTestIamPermissionsSecurity = field()
     request: Optional[shared.GoogleIamV1TestIamPermissionsRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: RunProjectsLocationsServicesTestIamPermissionsSecurity = field(default=None)
     
 
 @dataclass
 class RunProjectsLocationsServicesTestIamPermissionsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_iam_v1_test_iam_permissions_response: Optional[shared.GoogleIamV1TestIamPermissionsResponse] = field(default=None)
-    status_code: int = field(default=None)
     

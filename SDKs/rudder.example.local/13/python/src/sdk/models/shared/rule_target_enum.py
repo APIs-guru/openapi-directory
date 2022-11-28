@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class RuleTargetEnum(str, Enum):
     SPECIAL_ALL = "special:all"

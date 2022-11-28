@@ -5,13 +5,13 @@ from sdk.models import shared
 
 @dataclass
 class BankTransferEventSyncRequest:
-    request: shared.BankTransferEventSyncRequest = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    request: shared.BankTransferEventSyncRequest = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class BankTransferEventSyncResponse:
+    content_type: str = field()
+    status_code: int = field()
     bank_transfer_event_sync_response: Optional[dict[str, Any]] = field(default=None)
-    content_type: str = field(default=None)
     error: Optional[dict[str, Any]] = field(default=None)
-    status_code: int = field(default=None)
     

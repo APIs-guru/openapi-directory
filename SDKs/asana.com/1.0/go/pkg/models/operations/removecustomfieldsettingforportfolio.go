@@ -16,14 +16,14 @@ type RemoveCustomFieldSettingForPortfolioRequestBody struct {
 	Data *shared.RemoveCustomFieldSettingRequest `json:"data,omitempty"`
 }
 
+type RemoveCustomFieldSettingForPortfolio200ApplicationJSON struct {
+	Data map[string]interface{} `json:"data,omitempty"`
+}
+
 type RemoveCustomFieldSettingForPortfolioRequest struct {
 	PathParams  RemoveCustomFieldSettingForPortfolioPathParams
 	QueryParams RemoveCustomFieldSettingForPortfolioQueryParams
 	Request     RemoveCustomFieldSettingForPortfolioRequestBody `request:"mediaType=application/json"`
-}
-
-type RemoveCustomFieldSettingForPortfolio200ApplicationJSON struct {
-	Data map[string]interface{} `json:"data,omitempty"`
 }
 
 type RemoveCustomFieldSettingForPortfolioResponse struct {

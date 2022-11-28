@@ -1,5 +1,7 @@
 package shared
 
+// ProductViewSummary
+// Summary information about a product view.
 type ProductViewSummary struct {
 	Distributor        *string          `json:"Distributor,omitempty"`
 	HasDefaultPath     *bool            `json:"HasDefaultPath,omitempty"`

@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Change } from "./change";
+
 
 
 // GetContiuousCheckHistoryOutput
@@ -8,12 +8,12 @@ import { Change } from "./change";
  * GetContiuousCheckHistoryOutput
 **/
 export class GetContiuousCheckHistoryOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=history", elemType: shared.Change })
+  @SpeakeasyMetadata({ data: "json, name=history", elemType: Change })
   history: Change[];
 
-  @Metadata({ data: "json, name=next" })
+  @SpeakeasyMetadata({ data: "json, name=next" })
   next?: string;
 
-  @Metadata({ data: "json, name=self" })
+  @SpeakeasyMetadata({ data: "json, name=self" })
   self?: string;
 }

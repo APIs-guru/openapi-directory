@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export var GetAssetsOrderByEnum;
 (function (GetAssetsOrderByEnum) {
@@ -45,27 +45,27 @@ var GetAssetsQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=filterBy" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=filterBy" }),
         __metadata("design:type", String)
     ], GetAssetsQueryParams.prototype, "filterBy", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=orderBy" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=orderBy" }),
         __metadata("design:type", String)
     ], GetAssetsQueryParams.prototype, "orderBy", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=page" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page" }),
         __metadata("design:type", Number)
     ], GetAssetsQueryParams.prototype, "page", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=pageSize" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=pageSize" }),
         __metadata("design:type", Number)
     ], GetAssetsQueryParams.prototype, "pageSize", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=sortDirection" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sortDirection" }),
         __metadata("design:type", String)
     ], GetAssetsQueryParams.prototype, "sortDirection", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=status" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=status" }),
         __metadata("design:type", String)
     ], GetAssetsQueryParams.prototype, "status", void 0);
     return GetAssetsQueryParams;
@@ -77,7 +77,7 @@ var GetAssetsHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=xero-tenant-id" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=xero-tenant-id" }),
         __metadata("design:type", String)
     ], GetAssetsHeaders.prototype, "xeroTenantId", void 0);
     return GetAssetsHeaders;
@@ -89,7 +89,7 @@ var GetAssetsSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOAuth2)
     ], GetAssetsSecurity.prototype, "oAuth2", void 0);
     return GetAssetsSecurity;
@@ -101,15 +101,15 @@ var GetAssetsRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetAssetsQueryParams)
     ], GetAssetsRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetAssetsHeaders)
     ], GetAssetsRequest.prototype, "headers", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetAssetsSecurity)
     ], GetAssetsRequest.prototype, "security", void 0);
     return GetAssetsRequest;
@@ -121,15 +121,15 @@ var GetAssetsResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.Assets)
     ], GetAssetsResponse.prototype, "assets", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetAssetsResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetAssetsResponse.prototype, "statusCode", void 0);
     return GetAssetsResponse;

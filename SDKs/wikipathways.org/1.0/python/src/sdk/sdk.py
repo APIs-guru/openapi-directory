@@ -1,8 +1,10 @@
-import warnings
+
+
 import requests
-from typing import List
 from sdk.models import operations
 from . import utils
+
+
 
 
 SERVERS = [
@@ -11,28 +13,49 @@ SERVERS = [
 
 
 class SDK:
-    client = requests.Session()
-    server_url = SERVERS[0]
+    
+
+    _client: requests.Session
+    _security_client: requests.Session
+    
+    _server_url: str = SERVERS[0]
+    _language: str = "python"
+    _sdk_version: str = "0.0.1"
+    _gen_version: str = "internal"
+
+    def __init__(self) -> None:
+        self._client = requests.Session()
+        self._security_client = requests.Session()
+        
+
 
     def config_server_url(self, server_url: str, params: dict[str, str]):
-        if not params is None:
-            self.server_url = utils.replace_parameters(server_url, params)
+        if params is not None:
+            self._server_url = utils.replace_parameters(server_url, params)
         else:
-            self.server_url = server_url
-            
+            self._server_url = server_url
+
+        
     
 
+    def config_client(self, client: requests.Session):
+        self._client = client
+        
+    
+    
     
     def get_find_interactions(self, request: operations.GetFindInteractionsRequest) -> operations.GetFindInteractionsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""findInteractionsFind interactions defined in WikiPathways pathways.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/findInteractions"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -45,15 +68,17 @@ class SDK:
 
     
     def get_find_pathways_by_literature(self, request: operations.GetFindPathwaysByLiteratureRequest) -> operations.GetFindPathwaysByLiteratureResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""findPathwaysByLiterature
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/findPathwaysByLiterature"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -66,15 +91,17 @@ class SDK:
 
     
     def get_find_pathways_by_text(self, request: operations.GetFindPathwaysByTextRequest) -> operations.GetFindPathwaysByTextResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""findPathwaysByText
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/findPathwaysByText"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -87,15 +114,17 @@ class SDK:
 
     
     def get_find_pathways_by_xref(self, request: operations.GetFindPathwaysByXrefRequest) -> operations.GetFindPathwaysByXrefResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""findPathwaysByXref
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/findPathwaysByXref"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -108,15 +137,17 @@ class SDK:
 
     
     def get_get_colored_pathway(self, request: operations.GetGetColoredPathwayRequest) -> operations.GetGetColoredPathwayResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""getColoredPathwayGet a colored image version of the pathway.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/getColoredPathway"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -129,15 +160,17 @@ class SDK:
 
     
     def get_get_curation_tag_history(self, request: operations.GetGetCurationTagHistoryRequest) -> operations.GetGetCurationTagHistoryResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""getCurationTagHistory
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/getCurationTagHistory"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -150,15 +183,17 @@ class SDK:
 
     
     def get_get_curation_tags(self, request: operations.GetGetCurationTagsRequest) -> operations.GetGetCurationTagsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""getCurationTagsGet all curation tags for the given tag name. Use this method if you want to find all pathways that are tagged with a specific curation tag.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/getCurationTags"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -171,15 +206,17 @@ class SDK:
 
     
     def get_get_curation_tags_by_name(self, request: operations.GetGetCurationTagsByNameRequest) -> operations.GetGetCurationTagsByNameResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""getCurationTagsByNameGet all curation tags for the given tag name. Use this method if you want to find all pathways that are tagged with a specific curation tag.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/getCurationTagsByName"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -192,15 +229,17 @@ class SDK:
 
     
     def get_get_ontology_terms_by_pathway(self, request: operations.GetGetOntologyTermsByPathwayRequest) -> operations.GetGetOntologyTermsByPathwayResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""getOntologyTermsByPathway
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/getOntologyTermsByPathway"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -213,15 +252,17 @@ class SDK:
 
     
     def get_get_pathway(self, request: operations.GetGetPathwayRequest) -> operations.GetGetPathwayResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""getPathway
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/getPathway"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -234,15 +275,17 @@ class SDK:
 
     
     def get_get_pathway_as(self, request: operations.GetGetPathwayAsRequest) -> operations.GetGetPathwayAsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""getPathwayAsDownload a pathway in the specified file format.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/getPathwayAs"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -255,15 +298,17 @@ class SDK:
 
     
     def get_get_pathway_history(self, request: operations.GetGetPathwayHistoryRequest) -> operations.GetGetPathwayHistoryResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""getPathwayHistoryGet the revision history of a pathway.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/getPathwayHistory"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -276,15 +321,17 @@ class SDK:
 
     
     def get_get_pathway_info(self, request: operations.GetGetPathwayInfoRequest) -> operations.GetGetPathwayInfoResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""getPathwayInfoGet some general info about the pathway, such as the name, species, without downloading the GPML.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/getPathwayInfo"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -297,15 +344,17 @@ class SDK:
 
     
     def get_get_pathways_by_ontology_term(self, request: operations.GetGetPathwaysByOntologyTermRequest) -> operations.GetGetPathwaysByOntologyTermResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""getPathwaysByOntologyTerm
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/getPathwaysByOntologyTerm"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -318,15 +367,17 @@ class SDK:
 
     
     def get_get_pathways_by_parent_ontology_term(self, request: operations.GetGetPathwaysByParentOntologyTermRequest) -> operations.GetGetPathwaysByParentOntologyTermResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""getPathwaysByParentOntologyTerm
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/getPathwaysByParentOntologyTerm"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -339,15 +390,17 @@ class SDK:
 
     
     def get_get_recent_changes(self, request: operations.GetGetRecentChangesRequest) -> operations.GetGetRecentChangesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""getRecentChangesGet the recently changed pathways.<br>Note: the recent changes table only retains items for a limited time (2 months), so there is no guarantee that you will get all changes when the timestamp points to a date that is more than 2 months in the past.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/getRecentChanges"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -360,15 +413,17 @@ class SDK:
 
     
     def get_get_user_by_orcid(self, request: operations.GetGetUserByOrcidRequest) -> operations.GetGetUserByOrcidResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""getUserByOrcid
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/getUserByOrcid"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -381,15 +436,17 @@ class SDK:
 
     
     def get_get_xref_list(self, request: operations.GetGetXrefListRequest) -> operations.GetGetXrefListResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""getXrefList
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/getXrefList"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -402,15 +459,17 @@ class SDK:
 
     
     def get_list_organisms(self, request: operations.GetListOrganismsRequest) -> operations.GetListOrganismsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""listOrganisms
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/listOrganisms"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -423,15 +482,17 @@ class SDK:
 
     
     def get_list_pathways(self, request: operations.GetListPathwaysRequest) -> operations.GetListPathwaysResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""listPathways
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/listPathways"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -444,15 +505,17 @@ class SDK:
 
     
     def get_login(self, request: operations.GetLoginRequest) -> operations.GetLoginResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""loginStart a logged in session, using an existing WikiPathways account. This function will return an authentication code that can be used to excecute methods that need authentication (e.g. updatePathway).
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/login"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -465,15 +528,17 @@ class SDK:
 
     
     def get_remove_curation_tag(self, request: operations.GetRemoveCurationTagRequest) -> operations.GetRemoveCurationTagResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""removeCurationTagRemove a curation tag from a pathway.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/removeCurationTag"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -486,15 +551,17 @@ class SDK:
 
     
     def get_remove_ontology_tag(self, request: operations.GetRemoveOntologyTagRequest) -> operations.GetRemoveOntologyTagResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""removeOntologyTag
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/removeOntologyTag"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -507,15 +574,17 @@ class SDK:
 
     
     def get_save_curation_tag(self, request: operations.GetSaveCurationTagRequest) -> operations.GetSaveCurationTagResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""saveCurationTag
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/saveCurationTag"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -528,15 +597,17 @@ class SDK:
 
     
     def get_save_ontology_tag(self, request: operations.GetSaveOntologyTagRequest) -> operations.GetSaveOntologyTagResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""saveOntologyTag
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/saveOntologyTag"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -549,15 +620,17 @@ class SDK:
 
     
     def get_update_pathway(self, request: operations.GetUpdatePathwayRequest) -> operations.GetUpdatePathwayResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""updatePathwayUpdate a pathway on the wiki with the given GPML code.<br>Note: To create/modify pathways via the web service, you need to have an account with web service write permissions. Please contact us to request write access for the web service.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/updatePathway"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -570,15 +643,17 @@ class SDK:
 
     
     def post_create_pathway(self, request: operations.PostCreatePathwayRequest) -> operations.PostCreatePathwayResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""createPathwayCreate a new pathway on the wiki with the given GPML code.<br>Note: To create/modify pathways via the web service, you need to have an account with web service write permissions. Please contact us to request write access for the web service.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/createPathway"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 

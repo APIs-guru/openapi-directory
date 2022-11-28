@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // BorrowConfiguration
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Details about a borrow configuration.
 **/
 export class BorrowConfiguration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AllowEarlyCheckIn" })
+  @SpeakeasyMetadata({ data: "json, name=AllowEarlyCheckIn" })
   allowEarlyCheckIn: boolean;
 
-  @Metadata({ data: "json, name=MaxTimeToLiveInMinutes" })
+  @SpeakeasyMetadata({ data: "json, name=MaxTimeToLiveInMinutes" })
   maxTimeToLiveInMinutes: number;
 }

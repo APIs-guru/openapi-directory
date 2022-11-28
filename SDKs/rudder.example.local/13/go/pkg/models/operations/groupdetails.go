@@ -8,10 +8,6 @@ type GroupDetailsPathParams struct {
 	GroupID string `pathParam:"style=simple,explode=false,name=groupId"`
 }
 
-type GroupDetailsRequest struct {
-	PathParams GroupDetailsPathParams
-}
-
 type GroupDetails200ApplicationJSONActionEnum string
 
 const (
@@ -33,6 +29,10 @@ type GroupDetails200ApplicationJSON struct {
 	Action GroupDetails200ApplicationJSONActionEnum `json:"action"`
 	Data   GroupDetails200ApplicationJSONData       `json:"data"`
 	Result GroupDetails200ApplicationJSONResultEnum `json:"result"`
+}
+
+type GroupDetailsRequest struct {
+	PathParams GroupDetailsPathParams
 }
 
 type GroupDetailsResponse struct {

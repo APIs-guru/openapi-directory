@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { StandardError } from "./standarderror";
 import { Folder } from "./folder";
 export var FolderActionResponseStatusEnum;
 (function (FolderActionResponseStatusEnum) {
@@ -38,39 +38,39 @@ var FolderActionResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=completedAt" }),
+        SpeakeasyMetadata({ data: "json, name=completedAt" }),
         __metadata("design:type", Date)
     ], FolderActionResponse.prototype, "completedAt", void 0);
     __decorate([
-        Metadata({ data: "json, name=errors", elemType: shared.StandardError }),
+        SpeakeasyMetadata({ data: "json, name=errors", elemType: StandardError }),
         __metadata("design:type", Array)
     ], FolderActionResponse.prototype, "errors", void 0);
     __decorate([
-        Metadata({ data: "json, name=links" }),
+        SpeakeasyMetadata({ data: "json, name=links" }),
         __metadata("design:type", Map)
     ], FolderActionResponse.prototype, "links", void 0);
     __decorate([
-        Metadata({ data: "json, name=numErrors" }),
+        SpeakeasyMetadata({ data: "json, name=numErrors" }),
         __metadata("design:type", Number)
     ], FolderActionResponse.prototype, "numErrors", void 0);
     __decorate([
-        Metadata({ data: "json, name=requestedAt" }),
+        SpeakeasyMetadata({ data: "json, name=requestedAt" }),
         __metadata("design:type", Date)
     ], FolderActionResponse.prototype, "requestedAt", void 0);
     __decorate([
-        Metadata({ data: "json, name=result" }),
+        SpeakeasyMetadata({ data: "json, name=result" }),
         __metadata("design:type", Folder)
     ], FolderActionResponse.prototype, "result", void 0);
     __decorate([
-        Metadata({ data: "json, name=startedAt" }),
+        SpeakeasyMetadata({ data: "json, name=startedAt" }),
         __metadata("design:type", Date)
     ], FolderActionResponse.prototype, "startedAt", void 0);
     __decorate([
-        Metadata({ data: "json, name=status" }),
+        SpeakeasyMetadata({ data: "json, name=status" }),
         __metadata("design:type", String)
     ], FolderActionResponse.prototype, "status", void 0);
     __decorate([
-        Metadata({ data: "json, name=taskId" }),
+        SpeakeasyMetadata({ data: "json, name=taskId" }),
         __metadata("design:type", String)
     ], FolderActionResponse.prototype, "taskId", void 0);
     return FolderActionResponse;

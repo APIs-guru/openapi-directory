@@ -1,6 +1,7 @@
 
 
+
 export enum BackfillModeEnum {
-    Automatic = "AUTOMATIC"
-,    Manual = "MANUAL"
+    Automatic = "AUTOMATIC",
+    Manual = "MANUAL"
 }

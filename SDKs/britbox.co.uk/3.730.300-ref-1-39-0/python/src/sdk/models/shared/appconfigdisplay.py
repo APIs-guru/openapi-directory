@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
 from typing import List
 from dataclasses_json import dataclass_json
-from . import theme
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class AppConfigDisplay:
-    themes: List[theme.Theme] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'themes' }})
+    themes: List[Theme] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('themes') }})
     

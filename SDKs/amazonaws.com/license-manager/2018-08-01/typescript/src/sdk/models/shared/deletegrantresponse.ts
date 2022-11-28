@@ -1,14 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GrantStatusEnum } from "./grantstatusenum";
 
 
+
 export class DeleteGrantResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=GrantArn" })
+  @SpeakeasyMetadata({ data: "json, name=GrantArn" })
   grantArn?: string;
 
-  @Metadata({ data: "json, name=Status" })
+  @SpeakeasyMetadata({ data: "json, name=Status" })
   status?: GrantStatusEnum;
 
-  @Metadata({ data: "json, name=Version" })
+  @SpeakeasyMetadata({ data: "json, name=Version" })
   version?: string;
 }

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // InsightHealth
 /**
  *  Information about the number of open reactive and proactive insights that can be used to gauge the health of your system.
@@ -33,15 +33,15 @@ var InsightHealth = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=MeanTimeToRecoverInMilliseconds" }),
+        SpeakeasyMetadata({ data: "json, name=MeanTimeToRecoverInMilliseconds" }),
         __metadata("design:type", Number)
     ], InsightHealth.prototype, "meanTimeToRecoverInMilliseconds", void 0);
     __decorate([
-        Metadata({ data: "json, name=OpenProactiveInsights" }),
+        SpeakeasyMetadata({ data: "json, name=OpenProactiveInsights" }),
         __metadata("design:type", Number)
     ], InsightHealth.prototype, "openProactiveInsights", void 0);
     __decorate([
-        Metadata({ data: "json, name=OpenReactiveInsights" }),
+        SpeakeasyMetadata({ data: "json, name=OpenReactiveInsights" }),
         __metadata("design:type", Number)
     ], InsightHealth.prototype, "openReactiveInsights", void 0);
     return InsightHealth;

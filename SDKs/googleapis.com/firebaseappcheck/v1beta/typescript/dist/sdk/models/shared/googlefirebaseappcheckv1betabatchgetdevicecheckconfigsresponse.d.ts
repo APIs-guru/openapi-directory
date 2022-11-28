@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { GoogleFirebaseAppcheckV1betaDeviceCheckConfig } from "./googlefirebaseappcheckv1betadevicecheckconfig";
 /**
  * Response message for the BatchGetDeviceCheckConfigs method.

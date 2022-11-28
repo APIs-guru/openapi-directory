@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Commit } from "./commit";
 import { BranchProtection } from "./branchprotection";
 
 
+
 export class BranchWithProtectionLinks extends SpeakeasyBase {
-  @Metadata({ data: "json, name=html" })
+  @SpeakeasyMetadata({ data: "json, name=html" })
   html: string;
 
-  @Metadata({ data: "json, name=self" })
+  @SpeakeasyMetadata({ data: "json, name=self" })
   self: string;
 }
 
@@ -17,27 +18,27 @@ export class BranchWithProtectionLinks extends SpeakeasyBase {
  * Branch With Protection
 **/
 export class BranchWithProtection extends SpeakeasyBase {
-  @Metadata({ data: "json, name=_links" })
+  @SpeakeasyMetadata({ data: "json, name=_links" })
   links: BranchWithProtectionLinks;
 
-  @Metadata({ data: "json, name=commit" })
+  @SpeakeasyMetadata({ data: "json, name=commit" })
   commit: Commit;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 
-  @Metadata({ data: "json, name=pattern" })
+  @SpeakeasyMetadata({ data: "json, name=pattern" })
   pattern?: string;
 
-  @Metadata({ data: "json, name=protected" })
+  @SpeakeasyMetadata({ data: "json, name=protected" })
   protected: boolean;
 
-  @Metadata({ data: "json, name=protection" })
+  @SpeakeasyMetadata({ data: "json, name=protection" })
   protection: BranchProtection;
 
-  @Metadata({ data: "json, name=protection_url" })
+  @SpeakeasyMetadata({ data: "json, name=protection_url" })
   protectionUrl: string;
 
-  @Metadata({ data: "json, name=required_approving_review_count" })
+  @SpeakeasyMetadata({ data: "json, name=required_approving_review_count" })
   requiredApprovingReviewCount?: number;
 }

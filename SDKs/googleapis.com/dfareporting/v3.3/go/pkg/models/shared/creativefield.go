@@ -1,5 +1,7 @@
 package shared
 
+// CreativeField
+// Contains properties of a creative field.
 type CreativeField struct {
 	AccountID                  *string         `json:"accountId,omitempty"`
 	AdvertiserID               *string         `json:"advertiserId,omitempty"`

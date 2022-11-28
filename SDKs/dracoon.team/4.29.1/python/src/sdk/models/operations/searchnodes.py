@@ -1,16 +1,19 @@
 from dataclasses import dataclass, field
-from typing import Any,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class SearchNodesQueryParams:
+    search_string: str = field(metadata={'query_param': { 'field_name': 'search_string', 'style': 'form', 'explode': True }})
     depth_level: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'depth_level', 'style': 'form', 'explode': True }})
     filter: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'filter', 'style': 'form', 'explode': True }})
     limit: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'limit', 'style': 'form', 'explode': True }})
     offset: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'offset', 'style': 'form', 'explode': True }})
     parent_id: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'parent_id', 'style': 'form', 'explode': True }})
-    search_string: str = field(default=None, metadata={'query_param': { 'field_name': 'search_string', 'style': 'form', 'explode': True }})
     sort: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'sort', 'style': 'form', 'explode': True }})
     
 
@@ -22,14 +25,14 @@ class SearchNodesHeaders:
 
 @dataclass
 class SearchNodesRequest:
-    query_params: SearchNodesQueryParams = field(default=None)
-    headers: SearchNodesHeaders = field(default=None)
+    headers: SearchNodesHeaders = field()
+    query_params: SearchNodesQueryParams = field()
     
 
 @dataclass
 class SearchNodesResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error_response: Optional[shared.ErrorResponse] = field(default=None)
     node_list: Optional[shared.NodeList] = field(default=None)
-    status_code: int = field(default=None)
     

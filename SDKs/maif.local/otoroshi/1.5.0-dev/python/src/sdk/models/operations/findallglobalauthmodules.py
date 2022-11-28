@@ -5,17 +5,17 @@ from sdk.models import shared
 
 @dataclass
 class FindAllGlobalAuthModulesSecurity:
-    otoroshi_auth: shared.SchemeOtoroshiAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'basic' }})
+    otoroshi_auth: shared.SchemeOtoroshiAuth = field(metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'basic' }})
     
 
 @dataclass
 class FindAllGlobalAuthModulesRequest:
-    security: FindAllGlobalAuthModulesSecurity = field(default=None)
+    security: FindAllGlobalAuthModulesSecurity = field()
     
 
 @dataclass
 class FindAllGlobalAuthModulesResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     find_all_global_auth_modules_200_application_json_oneoves: Optional[List[Any]] = field(default=None)
     

@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PubsubConfig } from "./pubsubconfig";
+
 
 
 // ProjectConfig
@@ -8,12 +8,12 @@ import { PubsubConfig } from "./pubsubconfig";
  * Cloud Source Repositories configuration of a project.
 **/
 export class ProjectConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=enablePrivateKeyCheck" })
+  @SpeakeasyMetadata({ data: "json, name=enablePrivateKeyCheck" })
   enablePrivateKeyCheck?: boolean;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=pubsubConfigs", elemType: shared.PubsubConfig })
+  @SpeakeasyMetadata({ data: "json, name=pubsubConfigs", elemType: PubsubConfig })
   pubsubConfigs?: Map<string, PubsubConfig>;
 }

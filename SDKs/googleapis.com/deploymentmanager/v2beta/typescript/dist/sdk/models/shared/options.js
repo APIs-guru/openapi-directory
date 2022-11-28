@@ -22,8 +22,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { AsyncOptions } from "./asyncoptions";
+import { InputMapping } from "./inputmapping";
 import { ValidationOptions } from "./validationoptions";
 // Options
 /**
@@ -35,19 +36,19 @@ var Options = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=asyncOptions", elemType: shared.AsyncOptions }),
+        SpeakeasyMetadata({ data: "json, name=asyncOptions", elemType: AsyncOptions }),
         __metadata("design:type", Array)
     ], Options.prototype, "asyncOptions", void 0);
     __decorate([
-        Metadata({ data: "json, name=inputMappings", elemType: shared.InputMapping }),
+        SpeakeasyMetadata({ data: "json, name=inputMappings", elemType: InputMapping }),
         __metadata("design:type", Array)
     ], Options.prototype, "inputMappings", void 0);
     __decorate([
-        Metadata({ data: "json, name=validationOptions" }),
+        SpeakeasyMetadata({ data: "json, name=validationOptions" }),
         __metadata("design:type", ValidationOptions)
     ], Options.prototype, "validationOptions", void 0);
     __decorate([
-        Metadata({ data: "json, name=virtualProperties" }),
+        SpeakeasyMetadata({ data: "json, name=virtualProperties" }),
         __metadata("design:type", String)
     ], Options.prototype, "virtualProperties", void 0);
     return Options;

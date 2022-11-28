@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Twitter } from "./twitter";
+
 
 
 // Social
@@ -7,6 +8,6 @@ import { Twitter } from "./twitter";
  * Social networks data
 **/
 export class Social extends SpeakeasyBase {
-  @Metadata({ data: "json, name=twitter" })
+  @SpeakeasyMetadata({ data: "json, name=twitter" })
   twitter?: Twitter;
 }

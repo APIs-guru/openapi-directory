@@ -1,5 +1,7 @@
 package shared
 
+// IdentitytoolkitRelyingpartySetAccountInfoRequest
+// Request to set the account information.
 type IdentitytoolkitRelyingpartySetAccountInfoRequest struct {
 	CaptchaChallenge        *string  `json:"captchaChallenge,omitempty"`
 	CaptchaResponse         *string  `json:"captchaResponse,omitempty"`

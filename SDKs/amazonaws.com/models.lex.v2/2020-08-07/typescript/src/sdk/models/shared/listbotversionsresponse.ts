@@ -1,15 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BotVersionSummary } from "./botversionsummary";
 
 
+
 export class ListBotVersionsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=botId" })
+  @SpeakeasyMetadata({ data: "json, name=botId" })
   botId?: string;
 
-  @Metadata({ data: "json, name=botVersionSummaries", elemType: shared.BotVersionSummary })
+  @SpeakeasyMetadata({ data: "json, name=botVersionSummaries", elemType: BotVersionSummary })
   botVersionSummaries?: BotVersionSummary[];
 
-  @Metadata({ data: "json, name=nextToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextToken" })
   nextToken?: string;
 }

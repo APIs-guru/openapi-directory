@@ -1,5 +1,7 @@
 package shared
 
+// LocalTax
+// The Local Tax model
 type LocalTax struct {
 	Exemptions   *float64 `json:"exemptions,omitempty"`
 	Exemptions2  *float64 `json:"exemptions2,omitempty"`

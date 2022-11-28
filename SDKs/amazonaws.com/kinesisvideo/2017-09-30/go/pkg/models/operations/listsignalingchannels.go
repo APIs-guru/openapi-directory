@@ -19,6 +19,8 @@ type ListSignalingChannelsHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// ListSignalingChannelsRequestBodyChannelNameCondition
+// An optional input parameter for the <code>ListSignalingChannels</code> API. When this parameter is specified while invoking <code>ListSignalingChannels</code>, the API returns only the channels that satisfy a condition specified in <code>ChannelNameCondition</code>.
 type ListSignalingChannelsRequestBodyChannelNameCondition struct {
 	ComparisonOperator *shared.ComparisonOperatorEnum `json:"ComparisonOperator,omitempty"`
 	ComparisonValue    *string                        `json:"ComparisonValue,omitempty"`

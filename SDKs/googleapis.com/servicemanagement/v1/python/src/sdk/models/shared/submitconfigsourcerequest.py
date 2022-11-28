@@ -1,12 +1,20 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import configsource
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class SubmitConfigSourceRequest:
-    config_source: Optional[configsource.ConfigSource] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'configSource' }})
-    validate_only: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'validateOnly' }})
+    r"""SubmitConfigSourceRequest
+    Request message for SubmitConfigSource method.
+    """
+    
+    config_source: Optional[ConfigSource] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('configSource') }})
+    validate_only: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('validateOnly') }})
     

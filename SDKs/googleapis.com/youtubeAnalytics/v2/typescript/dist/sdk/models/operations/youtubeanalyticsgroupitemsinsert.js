@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var YoutubeAnalyticsGroupItemsInsertQueryParams = /** @class */ (function (_super) {
     __extends(YoutubeAnalyticsGroupItemsInsertQueryParams, _super);
@@ -30,51 +30,51 @@ var YoutubeAnalyticsGroupItemsInsertQueryParams = /** @class */ (function (_supe
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=$.xgafv" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=$.xgafv" }),
         __metadata("design:type", String)
     ], YoutubeAnalyticsGroupItemsInsertQueryParams.prototype, "dollarXgafv", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=access_token" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=access_token" }),
         __metadata("design:type", String)
     ], YoutubeAnalyticsGroupItemsInsertQueryParams.prototype, "accessToken", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=alt" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=alt" }),
         __metadata("design:type", String)
     ], YoutubeAnalyticsGroupItemsInsertQueryParams.prototype, "alt", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=callback" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=callback" }),
         __metadata("design:type", String)
     ], YoutubeAnalyticsGroupItemsInsertQueryParams.prototype, "callback", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=fields" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=fields" }),
         __metadata("design:type", String)
     ], YoutubeAnalyticsGroupItemsInsertQueryParams.prototype, "fields", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=key" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=key" }),
         __metadata("design:type", String)
     ], YoutubeAnalyticsGroupItemsInsertQueryParams.prototype, "key", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=oauth_token" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=oauth_token" }),
         __metadata("design:type", String)
     ], YoutubeAnalyticsGroupItemsInsertQueryParams.prototype, "oauthToken", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=onBehalfOfContentOwner" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=onBehalfOfContentOwner" }),
         __metadata("design:type", String)
     ], YoutubeAnalyticsGroupItemsInsertQueryParams.prototype, "onBehalfOfContentOwner", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=prettyPrint" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=prettyPrint" }),
         __metadata("design:type", Boolean)
     ], YoutubeAnalyticsGroupItemsInsertQueryParams.prototype, "prettyPrint", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=quotaUser" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=quotaUser" }),
         __metadata("design:type", String)
     ], YoutubeAnalyticsGroupItemsInsertQueryParams.prototype, "quotaUser", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=uploadType" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=uploadType" }),
         __metadata("design:type", String)
     ], YoutubeAnalyticsGroupItemsInsertQueryParams.prototype, "uploadType", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=upload_protocol" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=upload_protocol" }),
         __metadata("design:type", String)
     ], YoutubeAnalyticsGroupItemsInsertQueryParams.prototype, "uploadProtocol", void 0);
     return YoutubeAnalyticsGroupItemsInsertQueryParams;
@@ -86,11 +86,11 @@ var YoutubeAnalyticsGroupItemsInsertSecurityOption1 = /** @class */ (function (_
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2)
     ], YoutubeAnalyticsGroupItemsInsertSecurityOption1.prototype, "oauth2", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2c)
     ], YoutubeAnalyticsGroupItemsInsertSecurityOption1.prototype, "oauth2c", void 0);
     return YoutubeAnalyticsGroupItemsInsertSecurityOption1;
@@ -102,11 +102,11 @@ var YoutubeAnalyticsGroupItemsInsertSecurityOption2 = /** @class */ (function (_
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2)
     ], YoutubeAnalyticsGroupItemsInsertSecurityOption2.prototype, "oauth2", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2c)
     ], YoutubeAnalyticsGroupItemsInsertSecurityOption2.prototype, "oauth2c", void 0);
     return YoutubeAnalyticsGroupItemsInsertSecurityOption2;
@@ -118,11 +118,11 @@ var YoutubeAnalyticsGroupItemsInsertSecurityOption3 = /** @class */ (function (_
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2)
     ], YoutubeAnalyticsGroupItemsInsertSecurityOption3.prototype, "oauth2", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2c)
     ], YoutubeAnalyticsGroupItemsInsertSecurityOption3.prototype, "oauth2c", void 0);
     return YoutubeAnalyticsGroupItemsInsertSecurityOption3;
@@ -134,11 +134,11 @@ var YoutubeAnalyticsGroupItemsInsertSecurityOption4 = /** @class */ (function (_
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2)
     ], YoutubeAnalyticsGroupItemsInsertSecurityOption4.prototype, "oauth2", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2c)
     ], YoutubeAnalyticsGroupItemsInsertSecurityOption4.prototype, "oauth2c", void 0);
     return YoutubeAnalyticsGroupItemsInsertSecurityOption4;
@@ -150,11 +150,11 @@ var YoutubeAnalyticsGroupItemsInsertSecurityOption5 = /** @class */ (function (_
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2)
     ], YoutubeAnalyticsGroupItemsInsertSecurityOption5.prototype, "oauth2", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2c)
     ], YoutubeAnalyticsGroupItemsInsertSecurityOption5.prototype, "oauth2c", void 0);
     return YoutubeAnalyticsGroupItemsInsertSecurityOption5;
@@ -166,23 +166,23 @@ var YoutubeAnalyticsGroupItemsInsertSecurity = /** @class */ (function (_super) 
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, option=true" }),
+        SpeakeasyMetadata({ data: "security, option=true" }),
         __metadata("design:type", YoutubeAnalyticsGroupItemsInsertSecurityOption1)
     ], YoutubeAnalyticsGroupItemsInsertSecurity.prototype, "option1", void 0);
     __decorate([
-        Metadata({ data: "security, option=true" }),
+        SpeakeasyMetadata({ data: "security, option=true" }),
         __metadata("design:type", YoutubeAnalyticsGroupItemsInsertSecurityOption2)
     ], YoutubeAnalyticsGroupItemsInsertSecurity.prototype, "option2", void 0);
     __decorate([
-        Metadata({ data: "security, option=true" }),
+        SpeakeasyMetadata({ data: "security, option=true" }),
         __metadata("design:type", YoutubeAnalyticsGroupItemsInsertSecurityOption3)
     ], YoutubeAnalyticsGroupItemsInsertSecurity.prototype, "option3", void 0);
     __decorate([
-        Metadata({ data: "security, option=true" }),
+        SpeakeasyMetadata({ data: "security, option=true" }),
         __metadata("design:type", YoutubeAnalyticsGroupItemsInsertSecurityOption4)
     ], YoutubeAnalyticsGroupItemsInsertSecurity.prototype, "option4", void 0);
     __decorate([
-        Metadata({ data: "security, option=true" }),
+        SpeakeasyMetadata({ data: "security, option=true" }),
         __metadata("design:type", YoutubeAnalyticsGroupItemsInsertSecurityOption5)
     ], YoutubeAnalyticsGroupItemsInsertSecurity.prototype, "option5", void 0);
     return YoutubeAnalyticsGroupItemsInsertSecurity;
@@ -194,15 +194,15 @@ var YoutubeAnalyticsGroupItemsInsertRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", YoutubeAnalyticsGroupItemsInsertQueryParams)
     ], YoutubeAnalyticsGroupItemsInsertRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", shared.GroupItem)
     ], YoutubeAnalyticsGroupItemsInsertRequest.prototype, "request", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", YoutubeAnalyticsGroupItemsInsertSecurity)
     ], YoutubeAnalyticsGroupItemsInsertRequest.prototype, "security", void 0);
     return YoutubeAnalyticsGroupItemsInsertRequest;
@@ -214,15 +214,15 @@ var YoutubeAnalyticsGroupItemsInsertResponse = /** @class */ (function (_super) 
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], YoutubeAnalyticsGroupItemsInsertResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.GroupItem)
     ], YoutubeAnalyticsGroupItemsInsertResponse.prototype, "groupItem", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], YoutubeAnalyticsGroupItemsInsertResponse.prototype, "statusCode", void 0);
     return YoutubeAnalyticsGroupItemsInsertResponse;

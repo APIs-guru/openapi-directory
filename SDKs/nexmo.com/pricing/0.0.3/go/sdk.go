@@ -4,12 +4,11 @@ import (
 	"context"
 	"fmt"
 	"net/http"
-
 	"openapi/internal/utils"
 	"openapi/pkg/models/operations"
 )
 
-var Servers = []string{
+var ServerList = []string{
 	"https://rest.nexmo.com/account",
 }
 
@@ -18,9 +17,13 @@ type HTTPClient interface {
 }
 
 type SDK struct {
-	defaultClient  HTTPClient
-	securityClient HTTPClient
-	serverURL      string
+	_defaultClient  HTTPClient
+	_securityClient HTTPClient
+
+	_serverURL  string
+	_language   string
+	_sdkVersion string
+	_genVersion string
 }
 
 type SDKOption func(*SDK)
@@ -31,27 +34,46 @@ func WithServerURL(serverURL string, params map[string]string) SDKOption {
 			serverURL = utils.ReplaceParameters(serverURL, params)
 		}
 
-		sdk.serverURL = serverURL
+		sdk._serverURL = serverURL
+	}
+}
+
+func WithClient(client HTTPClient) SDKOption {
+	return func(sdk *SDK) {
+		sdk._defaultClient = client
 	}
 }
 
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
-		defaultClient:  http.DefaultClient,
-		securityClient: http.DefaultClient,
+		_language:   "go",
+		_sdkVersion: "",
+		_genVersion: "internal",
 	}
 	for _, opt := range opts {
 		opt(sdk)
 	}
-	if sdk.serverURL == "" {
-		sdk.serverURL = Servers[0]
+
+	if sdk._defaultClient == nil {
+		sdk._defaultClient = http.DefaultClient
+	}
+	if sdk._securityClient == nil {
+
+		sdk._securityClient = sdk._defaultClient
+
+	}
+
+	if sdk._serverURL == "" {
+		sdk._serverURL = ServerList[0]
 	}
 
 	return sdk
 }
 
+// RetrievePrefixPricing - Retrieve outbound pricing for a specific dialing prefix.
+// Retrieves the pricing information based on the dialing prefix.
 func (s *SDK) RetrievePrefixPricing(ctx context.Context, request operations.RetrievePrefixPricingRequest) (*operations.RetrievePrefixPricingResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/get-prefix-pricing/outbound/{type}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -61,7 +83,7 @@ func (s *SDK) RetrievePrefixPricing(ctx context.Context, request operations.Retr
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -113,8 +135,10 @@ func (s *SDK) RetrievePrefixPricing(ctx context.Context, request operations.Retr
 	return res, nil
 }
 
+// RetrievePricingAllCountries - Retrieve outbound pricing for all countries.
+// Retrieves the pricing information for all countries.
 func (s *SDK) RetrievePricingAllCountries(ctx context.Context, request operations.RetrievePricingAllCountriesRequest) (*operations.RetrievePricingAllCountriesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/get-full-pricing/outbound/{type}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -124,7 +148,7 @@ func (s *SDK) RetrievePricingAllCountries(ctx context.Context, request operation
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -176,8 +200,10 @@ func (s *SDK) RetrievePricingAllCountries(ctx context.Context, request operation
 	return res, nil
 }
 
+// RetrievePricingCountry - Retrieve outbound pricing for a specific country.
+// Retrieves the pricing information based on the specified country.
 func (s *SDK) RetrievePricingCountry(ctx context.Context, request operations.RetrievePricingCountryRequest) (*operations.RetrievePricingCountryResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/get-pricing/outbound/{type}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -187,7 +213,7 @@ func (s *SDK) RetrievePricingCountry(ctx context.Context, request operations.Ret
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {

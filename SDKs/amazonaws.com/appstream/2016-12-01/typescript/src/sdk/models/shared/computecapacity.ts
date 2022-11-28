@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ComputeCapacity
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Describes the capacity for a fleet.
 **/
 export class ComputeCapacity extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DesiredInstances" })
+  @SpeakeasyMetadata({ data: "json, name=DesiredInstances" })
   desiredInstances: number;
 }

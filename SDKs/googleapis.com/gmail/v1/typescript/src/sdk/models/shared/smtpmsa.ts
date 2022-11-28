@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum SmtpMsaSecurityModeEnum {
-    SecurityModeUnspecified = "securityModeUnspecified"
-,    None = "none"
-,    Ssl = "ssl"
-,    Starttls = "starttls"
+    SecurityModeUnspecified = "securityModeUnspecified",
+    None = "none",
+    Ssl = "ssl",
+    Starttls = "starttls"
 }
 
 
@@ -13,18 +14,18 @@ export enum SmtpMsaSecurityModeEnum {
  * Configuration for communication with an SMTP service.
 **/
 export class SmtpMsa extends SpeakeasyBase {
-  @Metadata({ data: "json, name=host" })
+  @SpeakeasyMetadata({ data: "json, name=host" })
   host?: string;
 
-  @Metadata({ data: "json, name=password" })
+  @SpeakeasyMetadata({ data: "json, name=password" })
   password?: string;
 
-  @Metadata({ data: "json, name=port" })
+  @SpeakeasyMetadata({ data: "json, name=port" })
   port?: number;
 
-  @Metadata({ data: "json, name=securityMode" })
+  @SpeakeasyMetadata({ data: "json, name=securityMode" })
   securityMode?: SmtpMsaSecurityModeEnum;
 
-  @Metadata({ data: "json, name=username" })
+  @SpeakeasyMetadata({ data: "json, name=username" })
   username?: string;
 }

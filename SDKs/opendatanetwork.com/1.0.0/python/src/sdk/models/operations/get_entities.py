@@ -17,12 +17,12 @@ class GetEntitiesHeaders:
 
 @dataclass
 class GetEntitiesRequest:
-    query_params: GetEntitiesQueryParams = field(default=None)
-    headers: GetEntitiesHeaders = field(default=None)
+    headers: GetEntitiesHeaders = field()
+    query_params: GetEntitiesQueryParams = field()
     
 
 @dataclass
 class GetEntitiesResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

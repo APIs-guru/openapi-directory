@@ -1,5 +1,8 @@
 package shared
 
+// SourceCodeType
+//
+//	Specifies the source code that is analyzed in a code review.
 type SourceCodeType struct {
 	BranchDiff         *BranchDiffSourceCodeType     `json:"BranchDiff,omitempty"`
 	CommitDiff         *CommitDiffSourceCodeType     `json:"CommitDiff,omitempty"`

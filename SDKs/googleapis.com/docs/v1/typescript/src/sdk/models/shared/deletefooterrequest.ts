@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // DeleteFooterRequest
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Deletes a Footer from the document.
 **/
 export class DeleteFooterRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=footerId" })
+  @SpeakeasyMetadata({ data: "json, name=footerId" })
   footerId?: string;
 }

@@ -1,8 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import actinguser
-from . import version
+from sdk import utils
+from . import *
 
 class ReleaseTypeEnum(str, Enum):
     TYPE_UNSPECIFIED = "TYPE_UNSPECIFIED"
@@ -14,10 +15,14 @@ class ReleaseTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class Release:
-    message: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'message' }})
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    release_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'releaseTime' }})
-    release_user: Optional[actinguser.ActingUser] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'releaseUser' }})
-    type: Optional[ReleaseTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
-    version: Optional[version.Version] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'version' }})
+    r"""Release
+     A `Release` is a particular [collection of configurations and files](sites.versions) that is set to be public at a particular time.
+    """
+    
+    message: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('message') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    release_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('releaseTime') }})
+    release_user: Optional[ActingUser] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('releaseUser') }})
+    type: Optional[ReleaseTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('type') }})
+    version: Optional[Version] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('version') }})
     

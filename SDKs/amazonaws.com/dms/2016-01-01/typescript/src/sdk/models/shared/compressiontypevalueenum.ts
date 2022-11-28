@@ -1,6 +1,7 @@
 
 
+
 export enum CompressionTypeValueEnum {
-    None = "none"
-,    Gzip = "gzip"
+    None = "none",
+    Gzip = "gzip"
 }

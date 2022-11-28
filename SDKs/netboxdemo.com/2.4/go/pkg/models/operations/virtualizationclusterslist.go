@@ -19,15 +19,15 @@ type VirtualizationClustersListQueryParams struct {
 	TypeID  *string `queryParam:"style=form,explode=true,name=type_id"`
 }
 
-type VirtualizationClustersListRequest struct {
-	QueryParams VirtualizationClustersListQueryParams
-}
-
 type VirtualizationClustersList200ApplicationJSON struct {
 	Count    int64            `json:"count"`
 	Next     *string          `json:"next,omitempty"`
 	Previous *string          `json:"previous,omitempty"`
 	Results  []shared.Cluster `json:"results"`
+}
+
+type VirtualizationClustersListRequest struct {
+	QueryParams VirtualizationClustersListQueryParams
 }
 
 type VirtualizationClustersListResponse struct {

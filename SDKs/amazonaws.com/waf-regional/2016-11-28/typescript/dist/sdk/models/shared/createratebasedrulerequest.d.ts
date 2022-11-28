@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { RateKeyEnum } from "./ratekeyenum";
 import { Tag } from "./tag";
 export declare class CreateRateBasedRuleRequest extends SpeakeasyBase {

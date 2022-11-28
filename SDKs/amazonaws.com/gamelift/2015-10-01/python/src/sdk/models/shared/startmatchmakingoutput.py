@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import matchmakingticket
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class StartMatchmakingOutput:
-    matchmaking_ticket: Optional[matchmakingticket.MatchmakingTicket] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'MatchmakingTicket' }})
+    r"""StartMatchmakingOutput
+    Represents the returned data in response to a request operation.
+    """
+    
+    matchmaking_ticket: Optional[MatchmakingTicket] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('MatchmakingTicket') }})
     

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var GetAssignIpv6AddressesActionEnum;
 (function (GetAssignIpv6AddressesActionEnum) {
     GetAssignIpv6AddressesActionEnum["AssignIpv6Addresses"] = "AssignIpv6Addresses";
@@ -37,31 +37,31 @@ var GetAssignIpv6AddressesQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=Action" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Action" }),
         __metadata("design:type", String)
     ], GetAssignIpv6AddressesQueryParams.prototype, "action", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=Ipv6AddressCount" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Ipv6AddressCount" }),
         __metadata("design:type", Number)
     ], GetAssignIpv6AddressesQueryParams.prototype, "ipv6AddressCount", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=Ipv6Addresses" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Ipv6Addresses" }),
         __metadata("design:type", Array)
     ], GetAssignIpv6AddressesQueryParams.prototype, "ipv6Addresses", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=Ipv6Prefix" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Ipv6Prefix" }),
         __metadata("design:type", Array)
     ], GetAssignIpv6AddressesQueryParams.prototype, "ipv6Prefix", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=Ipv6PrefixCount" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Ipv6PrefixCount" }),
         __metadata("design:type", Number)
     ], GetAssignIpv6AddressesQueryParams.prototype, "ipv6PrefixCount", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=NetworkInterfaceId" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=NetworkInterfaceId" }),
         __metadata("design:type", String)
     ], GetAssignIpv6AddressesQueryParams.prototype, "networkInterfaceId", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=Version" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Version" }),
         __metadata("design:type", String)
     ], GetAssignIpv6AddressesQueryParams.prototype, "version", void 0);
     return GetAssignIpv6AddressesQueryParams;
@@ -73,31 +73,31 @@ var GetAssignIpv6AddressesHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
         __metadata("design:type", String)
     ], GetAssignIpv6AddressesHeaders.prototype, "xAmzAlgorithm", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
         __metadata("design:type", String)
     ], GetAssignIpv6AddressesHeaders.prototype, "xAmzContentSha256", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
         __metadata("design:type", String)
     ], GetAssignIpv6AddressesHeaders.prototype, "xAmzCredential", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
         __metadata("design:type", String)
     ], GetAssignIpv6AddressesHeaders.prototype, "xAmzDate", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
         __metadata("design:type", String)
     ], GetAssignIpv6AddressesHeaders.prototype, "xAmzSecurityToken", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
         __metadata("design:type", String)
     ], GetAssignIpv6AddressesHeaders.prototype, "xAmzSignature", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
         __metadata("design:type", String)
     ], GetAssignIpv6AddressesHeaders.prototype, "xAmzSignedHeaders", void 0);
     return GetAssignIpv6AddressesHeaders;
@@ -109,11 +109,11 @@ var GetAssignIpv6AddressesRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetAssignIpv6AddressesQueryParams)
     ], GetAssignIpv6AddressesRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetAssignIpv6AddressesHeaders)
     ], GetAssignIpv6AddressesRequest.prototype, "headers", void 0);
     return GetAssignIpv6AddressesRequest;
@@ -125,15 +125,15 @@ var GetAssignIpv6AddressesResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], GetAssignIpv6AddressesResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetAssignIpv6AddressesResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetAssignIpv6AddressesResponse.prototype, "statusCode", void 0);
     return GetAssignIpv6AddressesResponse;

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // ArrayPropertiesDetail
 /**
  * An object representing the array properties of a job.
@@ -33,15 +33,15 @@ var ArrayPropertiesDetail = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=index" }),
+        SpeakeasyMetadata({ data: "json, name=index" }),
         __metadata("design:type", Number)
     ], ArrayPropertiesDetail.prototype, "index", void 0);
     __decorate([
-        Metadata({ data: "json, name=size" }),
+        SpeakeasyMetadata({ data: "json, name=size" }),
         __metadata("design:type", Number)
     ], ArrayPropertiesDetail.prototype, "size", void 0);
     __decorate([
-        Metadata({ data: "json, name=statusSummary" }),
+        SpeakeasyMetadata({ data: "json, name=statusSummary" }),
         __metadata("design:type", Map)
     ], ArrayPropertiesDetail.prototype, "statusSummary", void 0);
     return ArrayPropertiesDetail;

@@ -10,12 +10,9 @@ var __assign = (this && this.__assign) || function () {
     return __assign.apply(this, arguments);
 };
 import axios from "axios";
-import { MatchContentType } from "../internal/utils/contenttype";
 import * as operations from "./models/operations";
-import { GetQueryParamSerializer } from "../internal/utils/queryparams";
-import { CreateSecurityClient } from "../internal/utils/security";
-import * as utils from "../internal/utils/utils";
-var Servers = [
+import * as utils from "../internal/utils";
+export var ServerList = [
     "https://webtris.highwaysengland.co.uk/api",
 ];
 export function WithServerURL(serverURL, params) {
@@ -23,12 +20,12 @@ export function WithServerURL(serverURL, params) {
         if (params != null) {
             serverURL = utils.ReplaceParameters(serverURL, params);
         }
-        sdk.serverURL = serverURL;
+        sdk._serverURL = serverURL;
     };
 }
 export function WithClient(client) {
     return function (sdk) {
-        sdk.defaultClient = client;
+        sdk._defaultClient = client;
     };
 }
 var SDK = /** @class */ (function () {
@@ -38,342 +35,348 @@ var SDK = /** @class */ (function () {
             opts[_i] = arguments[_i];
         }
         var _this = this;
+        this._language = "typescript";
+        this._sdkVersion = "0.0.1";
+        this._genVersion = "internal";
         opts.forEach(function (o) { return o(_this); });
-        if (this.serverURL == "") {
-            this.serverURL = Servers[0];
+        if (this._serverURL == "") {
+            this._serverURL = ServerList[0];
         }
-        if (!this.defaultClient) {
-            this.defaultClient = axios.create({ baseURL: this.serverURL });
+        if (!this._defaultClient) {
+            this._defaultClient = axios.create({ baseURL: this._serverURL });
         }
-        if (!this.securityClient) {
-            if (this.security) {
-                this.securityClient = CreateSecurityClient(this.defaultClient, this.security);
-            }
-            else {
-                this.securityClient = this.defaultClient;
-            }
+        if (!this._securityClient) {
+            this._securityClient = this._defaultClient;
         }
     }
-    // AreasGet - Returns list of areas
-    SDK.prototype.AreasGet = function (req, config) {
+    /**
+     * areasGet - Returns list of areas
+    **/
+    SDK.prototype.areasGet = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.AreasGetRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = utils.GenerateURL(baseURL, "/v{version}/areas", req.pathParams);
-        var client = this.defaultClient;
+        var client = this._defaultClient;
         return client
-            .get(url, __assign({}, config))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get" }, config)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
-                    if (MatchContentType(contentType, "application/json")) {
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
+                    if (utils.MatchContentType(contentType, "application/json")) {
                         res.areaResponse = httpRes === null || httpRes === void 0 ? void 0 : httpRes.data;
                     }
                     break;
-                case 400:
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 400:
                     break;
-                case 500:
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 500:
                     break;
             }
             return res;
         })
             .catch(function (error) { throw error; });
     };
-    // GetVVersionAreasAreaIds - Returns details of selected area
-    SDK.prototype.GetVVersionAreasAreaIds = function (req, config) {
+    /**
+     * getVVersionAreasAreaIds - Returns details of selected area
+    **/
+    SDK.prototype.getVVersionAreasAreaIds = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.GetVVersionAreasAreaIdsRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = utils.GenerateURL(baseURL, "/v{version}/areas/{area_Ids}", req.pathParams);
-        var client = this.defaultClient;
+        var client = this._defaultClient;
         return client
-            .get(url, __assign({}, config))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get" }, config)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
-                    if (MatchContentType(contentType, "application/json")) {
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
+                    if (utils.MatchContentType(contentType, "application/json")) {
                         res.areaResponse = httpRes === null || httpRes === void 0 ? void 0 : httpRes.data;
                     }
                     break;
-                case 400:
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 400:
                     break;
-                case 500:
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 500:
                     break;
             }
             return res;
         })
             .catch(function (error) { throw error; });
     };
-    // GetVVersionReportsStartDateToEndDateReportType - Gets the daily report.
     /**
+     * getVVersionReportsStartDateToEndDateReportType - Gets the daily report.
+     *
      * Get's the report.
     **/
-    SDK.prototype.GetVVersionReportsStartDateToEndDateReportType = function (req, config) {
+    SDK.prototype.getVVersionReportsStartDateToEndDateReportType = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.GetVVersionReportsStartDateToEndDateReportTypeRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = utils.GenerateURL(baseURL, "/v{version}/reports/{start_date}/to/{end_date}/{report_type}", req.pathParams);
-        var client = this.defaultClient;
-        var qpSerializer = GetQueryParamSerializer(req.queryParams);
+        var client = this._defaultClient;
+        var qpSerializer = utils.GetQueryParamSerializer(req.queryParams);
         var requestConfig = __assign(__assign({}, config), { params: req.queryParams, paramsSerializer: qpSerializer });
         return client
-            .get(url, __assign({}, requestConfig))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get" }, requestConfig)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
-                    if (MatchContentType(contentType, "application/json")) {
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
+                    if (utils.MatchContentType(contentType, "application/json")) {
                         res.object = httpRes === null || httpRes === void 0 ? void 0 : httpRes.data;
                     }
                     break;
-                case 400:
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 400:
                     break;
-                case 500:
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 500:
                     break;
             }
             return res;
         })
             .catch(function (error) { throw error; });
     };
-    // GetVVersionSitesSiteIds - Get selected sites
-    SDK.prototype.GetVVersionSitesSiteIds = function (req, config) {
+    /**
+     * getVVersionSitesSiteIds - Get selected sites
+    **/
+    SDK.prototype.getVVersionSitesSiteIds = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.GetVVersionSitesSiteIdsRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = utils.GenerateURL(baseURL, "/v{version}/sites/{site_Ids}", req.pathParams);
-        var client = this.defaultClient;
+        var client = this._defaultClient;
         return client
-            .get(url, __assign({}, config))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get" }, config)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
-                    if (MatchContentType(contentType, "application/json")) {
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
+                    if (utils.MatchContentType(contentType, "application/json")) {
                         res.siteResponse = httpRes === null || httpRes === void 0 ? void 0 : httpRes.data;
                     }
                     break;
-                case 400:
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 400:
                     break;
-                case 500:
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 500:
                     break;
             }
             return res;
         })
             .catch(function (error) { throw error; });
     };
-    // QualityGetDailyDataQualityForSite - Get Site DailyQuality
-    SDK.prototype.QualityGetDailyDataQualityForSite = function (req, config) {
+    /**
+     * qualityGetDailyDataQualityForSite - Get Site DailyQuality
+    **/
+    SDK.prototype.qualityGetDailyDataQualityForSite = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.QualityGetDailyDataQualityForSiteRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = utils.GenerateURL(baseURL, "/v{version}/quality/daily", req.pathParams);
-        var client = this.defaultClient;
-        var qpSerializer = GetQueryParamSerializer(req.queryParams);
+        var client = this._defaultClient;
+        var qpSerializer = utils.GetQueryParamSerializer(req.queryParams);
         var requestConfig = __assign(__assign({}, config), { params: req.queryParams, paramsSerializer: qpSerializer });
         return client
-            .get(url, __assign({}, requestConfig))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get" }, requestConfig)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
-                    if (MatchContentType(contentType, "application/json")) {
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
+                    if (utils.MatchContentType(contentType, "application/json")) {
                         res.dailyQualityResponse = httpRes === null || httpRes === void 0 ? void 0 : httpRes.data;
                     }
                     break;
-                case 400:
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 400:
                     break;
-                case 500:
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 500:
                     break;
             }
             return res;
         })
             .catch(function (error) { throw error; });
     };
-    // QualityGetOverallDataQualityForSites - Get Site OverallQuality
-    SDK.prototype.QualityGetOverallDataQualityForSites = function (req, config) {
+    /**
+     * qualityGetOverallDataQualityForSites - Get Site OverallQuality
+    **/
+    SDK.prototype.qualityGetOverallDataQualityForSites = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.QualityGetOverallDataQualityForSitesRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = utils.GenerateURL(baseURL, "/v{version}/quality/overall", req.pathParams);
-        var client = this.defaultClient;
-        var qpSerializer = GetQueryParamSerializer(req.queryParams);
+        var client = this._defaultClient;
+        var qpSerializer = utils.GetQueryParamSerializer(req.queryParams);
         var requestConfig = __assign(__assign({}, config), { params: req.queryParams, paramsSerializer: qpSerializer });
         return client
-            .get(url, __assign({}, requestConfig))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get" }, requestConfig)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
-                    if (MatchContentType(contentType, "application/json")) {
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
+                    if (utils.MatchContentType(contentType, "application/json")) {
                         res.overallQualityResponse = httpRes === null || httpRes === void 0 ? void 0 : httpRes.data;
                     }
                     break;
-                case 400:
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 400:
                     break;
-                case 500:
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 500:
                     break;
             }
             return res;
         })
             .catch(function (error) { throw error; });
     };
-    // ReportsIndex - Gets the daily report.
     /**
+     * reportsIndex - Gets the daily report.
+     *
      * Get's the report.
     **/
-    SDK.prototype.ReportsIndex = function (req, config) {
+    SDK.prototype.reportsIndex = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.ReportsIndexRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = utils.GenerateURL(baseURL, "/v{version}/reports/{report_type}", req.pathParams);
-        var client = this.defaultClient;
-        var qpSerializer = GetQueryParamSerializer(req.queryParams);
+        var client = this._defaultClient;
+        var qpSerializer = utils.GetQueryParamSerializer(req.queryParams);
         var requestConfig = __assign(__assign({}, config), { params: req.queryParams, paramsSerializer: qpSerializer });
         return client
-            .get(url, __assign({}, requestConfig))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get" }, requestConfig)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
-                    if (MatchContentType(contentType, "application/json")) {
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
+                    if (utils.MatchContentType(contentType, "application/json")) {
                         res.object = httpRes === null || httpRes === void 0 ? void 0 : httpRes.data;
                     }
                     break;
-                case 400:
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 400:
                     break;
-                case 500:
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 500:
                     break;
             }
             return res;
         })
             .catch(function (error) { throw error; });
     };
-    // SiteTypesGetSitesForPublicFacingApi - Returns the layer metadata for the LayerId specified.
-    SDK.prototype.SiteTypesGetSitesForPublicFacingApi = function (req, config) {
+    /**
+     * siteTypesGetSitesForPublicFacingApi - Returns the layer metadata for the LayerId specified.
+    **/
+    SDK.prototype.siteTypesGetSitesForPublicFacingApi = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.SiteTypesGetSitesForPublicFacingApiRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = utils.GenerateURL(baseURL, "/v{version}/sitetypes/{siteType_Id}/sites", req.pathParams);
-        var client = this.defaultClient;
+        var client = this._defaultClient;
         return client
-            .get(url, __assign({}, config))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get" }, config)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
-                    if (MatchContentType(contentType, "application/json")) {
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
+                    if (utils.MatchContentType(contentType, "application/json")) {
                         res.siteTypeLayer = httpRes === null || httpRes === void 0 ? void 0 : httpRes.data;
                     }
                     break;
-                case 400:
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 400:
                     break;
-                case 404:
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 404:
                     break;
-                case 500:
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 500:
                     break;
             }
             return res;
         })
             .catch(function (error) { throw error; });
     };
-    // SiteTypesIndex - Return list of site types
-    SDK.prototype.SiteTypesIndex = function (req, config) {
+    /**
+     * siteTypesIndex - Return list of site types
+    **/
+    SDK.prototype.siteTypesIndex = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.SiteTypesIndexRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = utils.GenerateURL(baseURL, "/v{version}/sitetypes", req.pathParams);
-        var client = this.defaultClient;
+        var client = this._defaultClient;
         return client
-            .get(url, __assign({}, config))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get" }, config)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
-                    if (MatchContentType(contentType, "application/json")) {
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
+                    if (utils.MatchContentType(contentType, "application/json")) {
                         res.siteTypeResponse = httpRes === null || httpRes === void 0 ? void 0 : httpRes.data;
                     }
                     break;
-                case 400:
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 400:
                     break;
-                case 500:
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 500:
                     break;
             }
             return res;
         })
             .catch(function (error) { throw error; });
     };
-    // SitesIndex - Get a list of sites
-    SDK.prototype.SitesIndex = function (req, config) {
+    /**
+     * sitesIndex - Get a list of sites
+    **/
+    SDK.prototype.sitesIndex = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.SitesIndexRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = utils.GenerateURL(baseURL, "/v{version}/sites", req.pathParams);
-        var client = this.defaultClient;
+        var client = this._defaultClient;
         return client
-            .get(url, __assign({}, config))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get" }, config)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
-                    if (MatchContentType(contentType, "application/json")) {
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
+                    if (utils.MatchContentType(contentType, "application/json")) {
                         res.siteResponse = httpRes === null || httpRes === void 0 ? void 0 : httpRes.data;
                     }
                     break;
-                case 400:
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 400:
                     break;
-                case 500:
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 500:
                     break;
             }
             return res;

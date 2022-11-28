@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // DetailedServiceEmailContact
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Email contact information.
 **/
 export class DetailedServiceEmailContact extends SpeakeasyBase {
-  @Metadata({ data: "json, name=email_address" })
+  @SpeakeasyMetadata({ data: "json, name=email_address" })
   emailAddress?: string;
 
-  @Metadata({ data: "json, name=email_label" })
+  @SpeakeasyMetadata({ data: "json, name=email_label" })
   emailLabel?: string;
 }

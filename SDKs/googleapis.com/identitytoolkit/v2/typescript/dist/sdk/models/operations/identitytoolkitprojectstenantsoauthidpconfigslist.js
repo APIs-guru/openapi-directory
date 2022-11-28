@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var IdentitytoolkitProjectsTenantsOauthIdpConfigsListPathParams = /** @class */ (function (_super) {
     __extends(IdentitytoolkitProjectsTenantsOauthIdpConfigsListPathParams, _super);
@@ -30,7 +30,7 @@ var IdentitytoolkitProjectsTenantsOauthIdpConfigsListPathParams = /** @class */ 
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=parent" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=parent" }),
         __metadata("design:type", String)
     ], IdentitytoolkitProjectsTenantsOauthIdpConfigsListPathParams.prototype, "parent", void 0);
     return IdentitytoolkitProjectsTenantsOauthIdpConfigsListPathParams;
@@ -42,55 +42,55 @@ var IdentitytoolkitProjectsTenantsOauthIdpConfigsListQueryParams = /** @class */
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=$.xgafv" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=$.xgafv" }),
         __metadata("design:type", String)
     ], IdentitytoolkitProjectsTenantsOauthIdpConfigsListQueryParams.prototype, "dollarXgafv", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=access_token" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=access_token" }),
         __metadata("design:type", String)
     ], IdentitytoolkitProjectsTenantsOauthIdpConfigsListQueryParams.prototype, "accessToken", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=alt" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=alt" }),
         __metadata("design:type", String)
     ], IdentitytoolkitProjectsTenantsOauthIdpConfigsListQueryParams.prototype, "alt", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=callback" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=callback" }),
         __metadata("design:type", String)
     ], IdentitytoolkitProjectsTenantsOauthIdpConfigsListQueryParams.prototype, "callback", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=fields" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=fields" }),
         __metadata("design:type", String)
     ], IdentitytoolkitProjectsTenantsOauthIdpConfigsListQueryParams.prototype, "fields", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=key" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=key" }),
         __metadata("design:type", String)
     ], IdentitytoolkitProjectsTenantsOauthIdpConfigsListQueryParams.prototype, "key", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=oauth_token" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=oauth_token" }),
         __metadata("design:type", String)
     ], IdentitytoolkitProjectsTenantsOauthIdpConfigsListQueryParams.prototype, "oauthToken", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=pageSize" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=pageSize" }),
         __metadata("design:type", Number)
     ], IdentitytoolkitProjectsTenantsOauthIdpConfigsListQueryParams.prototype, "pageSize", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=pageToken" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=pageToken" }),
         __metadata("design:type", String)
     ], IdentitytoolkitProjectsTenantsOauthIdpConfigsListQueryParams.prototype, "pageToken", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=prettyPrint" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=prettyPrint" }),
         __metadata("design:type", Boolean)
     ], IdentitytoolkitProjectsTenantsOauthIdpConfigsListQueryParams.prototype, "prettyPrint", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=quotaUser" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=quotaUser" }),
         __metadata("design:type", String)
     ], IdentitytoolkitProjectsTenantsOauthIdpConfigsListQueryParams.prototype, "quotaUser", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=uploadType" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=uploadType" }),
         __metadata("design:type", String)
     ], IdentitytoolkitProjectsTenantsOauthIdpConfigsListQueryParams.prototype, "uploadType", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=upload_protocol" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=upload_protocol" }),
         __metadata("design:type", String)
     ], IdentitytoolkitProjectsTenantsOauthIdpConfigsListQueryParams.prototype, "uploadProtocol", void 0);
     return IdentitytoolkitProjectsTenantsOauthIdpConfigsListQueryParams;
@@ -102,11 +102,11 @@ var IdentitytoolkitProjectsTenantsOauthIdpConfigsListSecurityOption1 = /** @clas
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2)
     ], IdentitytoolkitProjectsTenantsOauthIdpConfigsListSecurityOption1.prototype, "oauth2", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2c)
     ], IdentitytoolkitProjectsTenantsOauthIdpConfigsListSecurityOption1.prototype, "oauth2c", void 0);
     return IdentitytoolkitProjectsTenantsOauthIdpConfigsListSecurityOption1;
@@ -118,11 +118,11 @@ var IdentitytoolkitProjectsTenantsOauthIdpConfigsListSecurityOption2 = /** @clas
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2)
     ], IdentitytoolkitProjectsTenantsOauthIdpConfigsListSecurityOption2.prototype, "oauth2", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2c)
     ], IdentitytoolkitProjectsTenantsOauthIdpConfigsListSecurityOption2.prototype, "oauth2c", void 0);
     return IdentitytoolkitProjectsTenantsOauthIdpConfigsListSecurityOption2;
@@ -134,11 +134,11 @@ var IdentitytoolkitProjectsTenantsOauthIdpConfigsListSecurity = /** @class */ (f
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, option=true" }),
+        SpeakeasyMetadata({ data: "security, option=true" }),
         __metadata("design:type", IdentitytoolkitProjectsTenantsOauthIdpConfigsListSecurityOption1)
     ], IdentitytoolkitProjectsTenantsOauthIdpConfigsListSecurity.prototype, "option1", void 0);
     __decorate([
-        Metadata({ data: "security, option=true" }),
+        SpeakeasyMetadata({ data: "security, option=true" }),
         __metadata("design:type", IdentitytoolkitProjectsTenantsOauthIdpConfigsListSecurityOption2)
     ], IdentitytoolkitProjectsTenantsOauthIdpConfigsListSecurity.prototype, "option2", void 0);
     return IdentitytoolkitProjectsTenantsOauthIdpConfigsListSecurity;
@@ -150,15 +150,15 @@ var IdentitytoolkitProjectsTenantsOauthIdpConfigsListRequest = /** @class */ (fu
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", IdentitytoolkitProjectsTenantsOauthIdpConfigsListPathParams)
     ], IdentitytoolkitProjectsTenantsOauthIdpConfigsListRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", IdentitytoolkitProjectsTenantsOauthIdpConfigsListQueryParams)
     ], IdentitytoolkitProjectsTenantsOauthIdpConfigsListRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", IdentitytoolkitProjectsTenantsOauthIdpConfigsListSecurity)
     ], IdentitytoolkitProjectsTenantsOauthIdpConfigsListRequest.prototype, "security", void 0);
     return IdentitytoolkitProjectsTenantsOauthIdpConfigsListRequest;
@@ -170,15 +170,15 @@ var IdentitytoolkitProjectsTenantsOauthIdpConfigsListResponse = /** @class */ (f
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], IdentitytoolkitProjectsTenantsOauthIdpConfigsListResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.GoogleCloudIdentitytoolkitAdminV2ListOAuthIdpConfigsResponse)
     ], IdentitytoolkitProjectsTenantsOauthIdpConfigsListResponse.prototype, "googleCloudIdentitytoolkitAdminV2ListOAuthIdpConfigsResponse", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], IdentitytoolkitProjectsTenantsOauthIdpConfigsListResponse.prototype, "statusCode", void 0);
     return IdentitytoolkitProjectsTenantsOauthIdpConfigsListResponse;

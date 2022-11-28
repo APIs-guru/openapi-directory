@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// ExperimentSummary
+// Provides a summary of an experiment.
 type ExperimentSummary struct {
 	CreationTime         *time.Time        `json:"creationTime,omitempty"`
 	ExperimentTemplateID *string           `json:"experimentTemplateId,omitempty"`

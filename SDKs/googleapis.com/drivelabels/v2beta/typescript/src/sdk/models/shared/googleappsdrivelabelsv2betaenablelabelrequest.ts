@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleAppsDriveLabelsV2betaWriteControl } from "./googleappsdrivelabelsv2betawritecontrol";
+
 
 
 // GoogleAppsDriveLabelsV2betaEnableLabelRequest
@@ -7,12 +8,12 @@ import { GoogleAppsDriveLabelsV2betaWriteControl } from "./googleappsdrivelabels
  * Request to enable a label.
 **/
 export class GoogleAppsDriveLabelsV2betaEnableLabelRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=languageCode" })
+  @SpeakeasyMetadata({ data: "json, name=languageCode" })
   languageCode?: string;
 
-  @Metadata({ data: "json, name=useAdminAccess" })
+  @SpeakeasyMetadata({ data: "json, name=useAdminAccess" })
   useAdminAccess?: boolean;
 
-  @Metadata({ data: "json, name=writeControl" })
+  @SpeakeasyMetadata({ data: "json, name=writeControl" })
   writeControl?: GoogleAppsDriveLabelsV2betaWriteControl;
 }

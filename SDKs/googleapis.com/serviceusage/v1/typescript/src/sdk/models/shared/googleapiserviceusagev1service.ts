@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleApiServiceusageV1ServiceConfig } from "./googleapiserviceusagev1serviceconfig";
 
+
 export enum GoogleApiServiceusageV1ServiceStateEnum {
-    StateUnspecified = "STATE_UNSPECIFIED"
-,    Disabled = "DISABLED"
-,    Enabled = "ENABLED"
+    StateUnspecified = "STATE_UNSPECIFIED",
+    Disabled = "DISABLED",
+    Enabled = "ENABLED"
 }
 
 
@@ -13,15 +14,15 @@ export enum GoogleApiServiceusageV1ServiceStateEnum {
  * A service that is available for use by the consumer.
 **/
 export class GoogleApiServiceusageV1Service extends SpeakeasyBase {
-  @Metadata({ data: "json, name=config" })
+  @SpeakeasyMetadata({ data: "json, name=config" })
   config?: GoogleApiServiceusageV1ServiceConfig;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=parent" })
+  @SpeakeasyMetadata({ data: "json, name=parent" })
   parent?: string;
 
-  @Metadata({ data: "json, name=state" })
+  @SpeakeasyMetadata({ data: "json, name=state" })
   state?: GoogleApiServiceusageV1ServiceStateEnum;
 }

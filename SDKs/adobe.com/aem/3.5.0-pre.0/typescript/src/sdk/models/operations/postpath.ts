@@ -1,34 +1,35 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class PostPathPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=path" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=path" })
   path: string;
 }
 
 
 export class PostPathQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=:name" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=:name" })
   name: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=jcr:primaryType" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=jcr:primaryType" })
   jcrPrimaryType: string;
 }
 
 
 export class PostPathRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: PostPathPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: PostPathQueryParams;
 }
 
 
 export class PostPathResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

@@ -1,43 +1,44 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ImagesUploadRecipeImagePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=recipeId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=recipeId" })
   recipeId: string;
 }
 
 
 export class ImagesUploadRecipeImageQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=caption" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=caption" })
   caption?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=lat" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=lat" })
   lat?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=lng" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=lng" })
   lng?: number;
 }
 
 
 export class ImagesUploadRecipeImageRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: ImagesUploadRecipeImagePathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: ImagesUploadRecipeImageQueryParams;
 }
 
 
 export class ImagesUploadRecipeImageResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   systemObject?: Map<string, any>;
 }

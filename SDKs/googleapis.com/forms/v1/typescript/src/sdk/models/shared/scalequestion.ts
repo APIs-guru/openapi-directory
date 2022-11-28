@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ScaleQuestion
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A scale question. The user has a range of numeric values to choose from.
 **/
 export class ScaleQuestion extends SpeakeasyBase {
-  @Metadata({ data: "json, name=high" })
+  @SpeakeasyMetadata({ data: "json, name=high" })
   high?: number;
 
-  @Metadata({ data: "json, name=highLabel" })
+  @SpeakeasyMetadata({ data: "json, name=highLabel" })
   highLabel?: string;
 
-  @Metadata({ data: "json, name=low" })
+  @SpeakeasyMetadata({ data: "json, name=low" })
   low?: number;
 
-  @Metadata({ data: "json, name=lowLabel" })
+  @SpeakeasyMetadata({ data: "json, name=lowLabel" })
   lowLabel?: string;
 }

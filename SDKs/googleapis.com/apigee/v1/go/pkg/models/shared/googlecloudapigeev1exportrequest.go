@@ -1,5 +1,7 @@
 package shared
 
+// GoogleCloudApigeeV1ExportRequest
+// Request body for [CreateExportRequest]
 type GoogleCloudApigeeV1ExportRequest struct {
 	CsvDelimiter  *string                       `json:"csvDelimiter,omitempty"`
 	DatastoreName *string                       `json:"datastoreName,omitempty"`

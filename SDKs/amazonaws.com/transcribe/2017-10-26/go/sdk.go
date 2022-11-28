@@ -10,7 +10,7 @@ import (
 	"strings"
 )
 
-var Servers = []string{
+var ServerList = []string{
 	"http://transcribe.{region}.amazonaws.com",
 	"https://transcribe.{region}.amazonaws.com",
 	"http://transcribe.{region}.amazonaws.com.cn",
@@ -21,10 +21,15 @@ type HTTPClient interface {
 	Do(req *http.Request) (*http.Response, error)
 }
 
+// SDK Documentation: https://docs.aws.amazon.com/transcribe/ - Amazon Web Services documentation
 type SDK struct {
-	defaultClient  HTTPClient
-	securityClient HTTPClient
-	serverURL      string
+	_defaultClient  HTTPClient
+	_securityClient HTTPClient
+	_security       *shared.Security
+	_serverURL      string
+	_language       string
+	_sdkVersion     string
+	_genVersion     string
 }
 
 type SDKOption func(*SDK)
@@ -35,33 +40,55 @@ func WithServerURL(serverURL string, params map[string]string) SDKOption {
 			serverURL = utils.ReplaceParameters(serverURL, params)
 		}
 
-		sdk.serverURL = serverURL
+		sdk._serverURL = serverURL
+	}
+}
+
+func WithClient(client HTTPClient) SDKOption {
+	return func(sdk *SDK) {
+		sdk._defaultClient = client
 	}
 }
 
 func WithSecurity(security shared.Security) SDKOption {
 	return func(sdk *SDK) {
-		sdk.securityClient = utils.CreateSecurityClient(security)
+		sdk._security = &security
 	}
 }
 
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
-		defaultClient:  http.DefaultClient,
-		securityClient: http.DefaultClient,
+		_language:   "go",
+		_sdkVersion: "",
+		_genVersion: "internal",
 	}
 	for _, opt := range opts {
 		opt(sdk)
 	}
-	if sdk.serverURL == "" {
-		sdk.serverURL = Servers[0]
+
+	if sdk._defaultClient == nil {
+		sdk._defaultClient = http.DefaultClient
+	}
+	if sdk._securityClient == nil {
+
+		if sdk._security != nil {
+			sdk._securityClient = utils.ConfigureSecurityClient(sdk._defaultClient, sdk._security)
+		} else {
+			sdk._securityClient = sdk._defaultClient
+		}
+
+	}
+
+	if sdk._serverURL == "" {
+		sdk._serverURL = ServerList[0]
 	}
 
 	return sdk
 }
 
+// CreateCallAnalyticsCategory - Creates an analytics category. Amazon Transcribe applies the conditions specified by your analytics categories to your call analytics jobs. For each analytics category, you specify one or more rules. For example, you can specify a rule that the customer sentiment was neutral or negative within that category. If you start a call analytics job, Amazon Transcribe applies the category to the analytics job that you've specified.
 func (s *SDK) CreateCallAnalyticsCategory(ctx context.Context, request operations.CreateCallAnalyticsCategoryRequest) (*operations.CreateCallAnalyticsCategoryResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=Transcribe.CreateCallAnalyticsCategory"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -81,7 +108,7 @@ func (s *SDK) CreateCallAnalyticsCategory(ctx context.Context, request operation
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -151,8 +178,9 @@ func (s *SDK) CreateCallAnalyticsCategory(ctx context.Context, request operation
 	return res, nil
 }
 
+// CreateLanguageModel - Creates a new custom language model. Use Amazon S3 prefixes to provide the location of your input files. The time it takes to create your model depends on the size of your training data.
 func (s *SDK) CreateLanguageModel(ctx context.Context, request operations.CreateLanguageModelRequest) (*operations.CreateLanguageModelResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=Transcribe.CreateLanguageModel"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -172,7 +200,7 @@ func (s *SDK) CreateLanguageModel(ctx context.Context, request operations.Create
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -242,8 +270,9 @@ func (s *SDK) CreateLanguageModel(ctx context.Context, request operations.Create
 	return res, nil
 }
 
+// CreateMedicalVocabulary - Creates a new custom vocabulary that you can use to modify how Amazon Transcribe Medical transcribes your audio file.
 func (s *SDK) CreateMedicalVocabulary(ctx context.Context, request operations.CreateMedicalVocabularyRequest) (*operations.CreateMedicalVocabularyResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=Transcribe.CreateMedicalVocabulary"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -263,7 +292,7 @@ func (s *SDK) CreateMedicalVocabulary(ctx context.Context, request operations.Cr
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -333,8 +362,9 @@ func (s *SDK) CreateMedicalVocabulary(ctx context.Context, request operations.Cr
 	return res, nil
 }
 
+// CreateVocabulary - Creates a new custom vocabulary that you can use to change the way Amazon Transcribe handles transcription of an audio file.
 func (s *SDK) CreateVocabulary(ctx context.Context, request operations.CreateVocabularyRequest) (*operations.CreateVocabularyResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=Transcribe.CreateVocabulary"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -354,7 +384,7 @@ func (s *SDK) CreateVocabulary(ctx context.Context, request operations.CreateVoc
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -424,8 +454,9 @@ func (s *SDK) CreateVocabulary(ctx context.Context, request operations.CreateVoc
 	return res, nil
 }
 
+// CreateVocabularyFilter - Creates a new vocabulary filter that you can use to filter words, such as profane words, from the output of a transcription job.
 func (s *SDK) CreateVocabularyFilter(ctx context.Context, request operations.CreateVocabularyFilterRequest) (*operations.CreateVocabularyFilterResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=Transcribe.CreateVocabularyFilter"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -445,7 +476,7 @@ func (s *SDK) CreateVocabularyFilter(ctx context.Context, request operations.Cre
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -515,8 +546,9 @@ func (s *SDK) CreateVocabularyFilter(ctx context.Context, request operations.Cre
 	return res, nil
 }
 
+// DeleteCallAnalyticsCategory - Deletes a call analytics category using its name.
 func (s *SDK) DeleteCallAnalyticsCategory(ctx context.Context, request operations.DeleteCallAnalyticsCategoryRequest) (*operations.DeleteCallAnalyticsCategoryResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=Transcribe.DeleteCallAnalyticsCategory"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -536,7 +568,7 @@ func (s *SDK) DeleteCallAnalyticsCategory(ctx context.Context, request operation
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -606,8 +638,9 @@ func (s *SDK) DeleteCallAnalyticsCategory(ctx context.Context, request operation
 	return res, nil
 }
 
+// DeleteCallAnalyticsJob - Deletes a call analytics job using its name.
 func (s *SDK) DeleteCallAnalyticsJob(ctx context.Context, request operations.DeleteCallAnalyticsJobRequest) (*operations.DeleteCallAnalyticsJobResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=Transcribe.DeleteCallAnalyticsJob"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -627,7 +660,7 @@ func (s *SDK) DeleteCallAnalyticsJob(ctx context.Context, request operations.Del
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -687,8 +720,9 @@ func (s *SDK) DeleteCallAnalyticsJob(ctx context.Context, request operations.Del
 	return res, nil
 }
 
+// DeleteLanguageModel - Deletes a custom language model using its name.
 func (s *SDK) DeleteLanguageModel(ctx context.Context, request operations.DeleteLanguageModelRequest) (*operations.DeleteLanguageModelResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=Transcribe.DeleteLanguageModel"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -708,7 +742,7 @@ func (s *SDK) DeleteLanguageModel(ctx context.Context, request operations.Delete
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -759,8 +793,9 @@ func (s *SDK) DeleteLanguageModel(ctx context.Context, request operations.Delete
 	return res, nil
 }
 
+// DeleteMedicalTranscriptionJob - Deletes a transcription job generated by Amazon Transcribe Medical and any related information.
 func (s *SDK) DeleteMedicalTranscriptionJob(ctx context.Context, request operations.DeleteMedicalTranscriptionJobRequest) (*operations.DeleteMedicalTranscriptionJobResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=Transcribe.DeleteMedicalTranscriptionJob"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -780,7 +815,7 @@ func (s *SDK) DeleteMedicalTranscriptionJob(ctx context.Context, request operati
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -831,8 +866,9 @@ func (s *SDK) DeleteMedicalTranscriptionJob(ctx context.Context, request operati
 	return res, nil
 }
 
+// DeleteMedicalVocabulary - Deletes a vocabulary from Amazon Transcribe Medical.
 func (s *SDK) DeleteMedicalVocabulary(ctx context.Context, request operations.DeleteMedicalVocabularyRequest) (*operations.DeleteMedicalVocabularyResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=Transcribe.DeleteMedicalVocabulary"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -852,7 +888,7 @@ func (s *SDK) DeleteMedicalVocabulary(ctx context.Context, request operations.De
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -913,8 +949,9 @@ func (s *SDK) DeleteMedicalVocabulary(ctx context.Context, request operations.De
 	return res, nil
 }
 
+// DeleteTranscriptionJob - Deletes a previously submitted transcription job along with any other generated results such as the transcription, models, and so on.
 func (s *SDK) DeleteTranscriptionJob(ctx context.Context, request operations.DeleteTranscriptionJobRequest) (*operations.DeleteTranscriptionJobResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=Transcribe.DeleteTranscriptionJob"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -934,7 +971,7 @@ func (s *SDK) DeleteTranscriptionJob(ctx context.Context, request operations.Del
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -985,8 +1022,9 @@ func (s *SDK) DeleteTranscriptionJob(ctx context.Context, request operations.Del
 	return res, nil
 }
 
+// DeleteVocabulary - Deletes a vocabulary from Amazon Transcribe.
 func (s *SDK) DeleteVocabulary(ctx context.Context, request operations.DeleteVocabularyRequest) (*operations.DeleteVocabularyResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=Transcribe.DeleteVocabulary"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1006,7 +1044,7 @@ func (s *SDK) DeleteVocabulary(ctx context.Context, request operations.DeleteVoc
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1067,8 +1105,9 @@ func (s *SDK) DeleteVocabulary(ctx context.Context, request operations.DeleteVoc
 	return res, nil
 }
 
+// DeleteVocabularyFilter - Removes a vocabulary filter.
 func (s *SDK) DeleteVocabularyFilter(ctx context.Context, request operations.DeleteVocabularyFilterRequest) (*operations.DeleteVocabularyFilterResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=Transcribe.DeleteVocabularyFilter"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1088,7 +1127,7 @@ func (s *SDK) DeleteVocabularyFilter(ctx context.Context, request operations.Del
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1149,8 +1188,9 @@ func (s *SDK) DeleteVocabularyFilter(ctx context.Context, request operations.Del
 	return res, nil
 }
 
+// DescribeLanguageModel - Gets information about a single custom language model. Use this information to see details about the language model in your Amazon Web Services account. You can also see whether the base language model used to create your custom language model has been updated. If Amazon Transcribe has updated the base model, you can create a new custom language model using the updated base model. If the language model wasn't created, you can use this operation to understand why Amazon Transcribe couldn't create it.
 func (s *SDK) DescribeLanguageModel(ctx context.Context, request operations.DescribeLanguageModelRequest) (*operations.DescribeLanguageModelResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=Transcribe.DescribeLanguageModel"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1170,7 +1210,7 @@ func (s *SDK) DescribeLanguageModel(ctx context.Context, request operations.Desc
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1240,8 +1280,9 @@ func (s *SDK) DescribeLanguageModel(ctx context.Context, request operations.Desc
 	return res, nil
 }
 
+// GetCallAnalyticsCategory - Retrieves information about a call analytics category.
 func (s *SDK) GetCallAnalyticsCategory(ctx context.Context, request operations.GetCallAnalyticsCategoryRequest) (*operations.GetCallAnalyticsCategoryResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=Transcribe.GetCallAnalyticsCategory"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1261,7 +1302,7 @@ func (s *SDK) GetCallAnalyticsCategory(ctx context.Context, request operations.G
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1331,8 +1372,9 @@ func (s *SDK) GetCallAnalyticsCategory(ctx context.Context, request operations.G
 	return res, nil
 }
 
+// GetCallAnalyticsJob - Returns information about a call analytics job. To see the status of the job, check the <code>CallAnalyticsJobStatus</code> field. If the status is <code>COMPLETED</code>, the job is finished and you can find the results at the location specified in the <code>TranscriptFileUri</code> field. If you enable personally identifiable information (PII) redaction, the redacted transcript appears in the <code>RedactedTranscriptFileUri</code> field.
 func (s *SDK) GetCallAnalyticsJob(ctx context.Context, request operations.GetCallAnalyticsJobRequest) (*operations.GetCallAnalyticsJobResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=Transcribe.GetCallAnalyticsJob"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1352,7 +1394,7 @@ func (s *SDK) GetCallAnalyticsJob(ctx context.Context, request operations.GetCal
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1422,8 +1464,9 @@ func (s *SDK) GetCallAnalyticsJob(ctx context.Context, request operations.GetCal
 	return res, nil
 }
 
+// GetMedicalTranscriptionJob - Returns information about a transcription job from Amazon Transcribe Medical. To see the status of the job, check the <code>TranscriptionJobStatus</code> field. If the status is <code>COMPLETED</code>, the job is finished. You find the results of the completed job in the <code>TranscriptFileUri</code> field.
 func (s *SDK) GetMedicalTranscriptionJob(ctx context.Context, request operations.GetMedicalTranscriptionJobRequest) (*operations.GetMedicalTranscriptionJobResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=Transcribe.GetMedicalTranscriptionJob"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1443,7 +1486,7 @@ func (s *SDK) GetMedicalTranscriptionJob(ctx context.Context, request operations
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1513,8 +1556,9 @@ func (s *SDK) GetMedicalTranscriptionJob(ctx context.Context, request operations
 	return res, nil
 }
 
+// GetMedicalVocabulary - Retrieves information about a medical vocabulary.
 func (s *SDK) GetMedicalVocabulary(ctx context.Context, request operations.GetMedicalVocabularyRequest) (*operations.GetMedicalVocabularyResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=Transcribe.GetMedicalVocabulary"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1534,7 +1578,7 @@ func (s *SDK) GetMedicalVocabulary(ctx context.Context, request operations.GetMe
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1604,8 +1648,9 @@ func (s *SDK) GetMedicalVocabulary(ctx context.Context, request operations.GetMe
 	return res, nil
 }
 
+// GetTranscriptionJob - Returns information about a transcription job. To see the status of the job, check the <code>TranscriptionJobStatus</code> field. If the status is <code>COMPLETED</code>, the job is finished and you can find the results at the location specified in the <code>TranscriptFileUri</code> field. If you enable content redaction, the redacted transcript appears in <code>RedactedTranscriptFileUri</code>.
 func (s *SDK) GetTranscriptionJob(ctx context.Context, request operations.GetTranscriptionJobRequest) (*operations.GetTranscriptionJobResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=Transcribe.GetTranscriptionJob"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1625,7 +1670,7 @@ func (s *SDK) GetTranscriptionJob(ctx context.Context, request operations.GetTra
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1695,8 +1740,9 @@ func (s *SDK) GetTranscriptionJob(ctx context.Context, request operations.GetTra
 	return res, nil
 }
 
+// GetVocabulary - Gets information about a vocabulary.
 func (s *SDK) GetVocabulary(ctx context.Context, request operations.GetVocabularyRequest) (*operations.GetVocabularyResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=Transcribe.GetVocabulary"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1716,7 +1762,7 @@ func (s *SDK) GetVocabulary(ctx context.Context, request operations.GetVocabular
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1786,8 +1832,9 @@ func (s *SDK) GetVocabulary(ctx context.Context, request operations.GetVocabular
 	return res, nil
 }
 
+// GetVocabularyFilter - Returns information about a vocabulary filter.
 func (s *SDK) GetVocabularyFilter(ctx context.Context, request operations.GetVocabularyFilterRequest) (*operations.GetVocabularyFilterResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=Transcribe.GetVocabularyFilter"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1807,7 +1854,7 @@ func (s *SDK) GetVocabularyFilter(ctx context.Context, request operations.GetVoc
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1877,8 +1924,9 @@ func (s *SDK) GetVocabularyFilter(ctx context.Context, request operations.GetVoc
 	return res, nil
 }
 
+// ListCallAnalyticsCategories - Provides more information about the call analytics categories that you've created. You can use the information in this list to find a specific category. You can then use the operation to get more information about it.
 func (s *SDK) ListCallAnalyticsCategories(ctx context.Context, request operations.ListCallAnalyticsCategoriesRequest) (*operations.ListCallAnalyticsCategoriesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=Transcribe.ListCallAnalyticsCategories"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1900,7 +1948,7 @@ func (s *SDK) ListCallAnalyticsCategories(ctx context.Context, request operation
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1960,8 +2008,9 @@ func (s *SDK) ListCallAnalyticsCategories(ctx context.Context, request operation
 	return res, nil
 }
 
+// ListCallAnalyticsJobs - List call analytics jobs with a specified status or substring that matches their names.
 func (s *SDK) ListCallAnalyticsJobs(ctx context.Context, request operations.ListCallAnalyticsJobsRequest) (*operations.ListCallAnalyticsJobsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=Transcribe.ListCallAnalyticsJobs"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1983,7 +2032,7 @@ func (s *SDK) ListCallAnalyticsJobs(ctx context.Context, request operations.List
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2043,8 +2092,9 @@ func (s *SDK) ListCallAnalyticsJobs(ctx context.Context, request operations.List
 	return res, nil
 }
 
+// ListLanguageModels - Provides more information about the custom language models you've created. You can use the information in this list to find a specific custom language model. You can then use the operation to get more information about it.
 func (s *SDK) ListLanguageModels(ctx context.Context, request operations.ListLanguageModelsRequest) (*operations.ListLanguageModelsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=Transcribe.ListLanguageModels"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2066,7 +2116,7 @@ func (s *SDK) ListLanguageModels(ctx context.Context, request operations.ListLan
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2126,8 +2176,9 @@ func (s *SDK) ListLanguageModels(ctx context.Context, request operations.ListLan
 	return res, nil
 }
 
+// ListMedicalTranscriptionJobs - Lists medical transcription jobs with a specified status or substring that matches their names.
 func (s *SDK) ListMedicalTranscriptionJobs(ctx context.Context, request operations.ListMedicalTranscriptionJobsRequest) (*operations.ListMedicalTranscriptionJobsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=Transcribe.ListMedicalTranscriptionJobs"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2149,7 +2200,7 @@ func (s *SDK) ListMedicalTranscriptionJobs(ctx context.Context, request operatio
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2209,8 +2260,9 @@ func (s *SDK) ListMedicalTranscriptionJobs(ctx context.Context, request operatio
 	return res, nil
 }
 
+// ListMedicalVocabularies - Returns a list of vocabularies that match the specified criteria. If you don't enter a value in any of the request parameters, returns the entire list of vocabularies.
 func (s *SDK) ListMedicalVocabularies(ctx context.Context, request operations.ListMedicalVocabulariesRequest) (*operations.ListMedicalVocabulariesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=Transcribe.ListMedicalVocabularies"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2232,7 +2284,7 @@ func (s *SDK) ListMedicalVocabularies(ctx context.Context, request operations.Li
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2292,8 +2344,9 @@ func (s *SDK) ListMedicalVocabularies(ctx context.Context, request operations.Li
 	return res, nil
 }
 
+// ListTagsForResource - Lists all tags associated with a given transcription job, vocabulary, or resource.
 func (s *SDK) ListTagsForResource(ctx context.Context, request operations.ListTagsForResourceRequest) (*operations.ListTagsForResourceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=Transcribe.ListTagsForResource"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2313,7 +2366,7 @@ func (s *SDK) ListTagsForResource(ctx context.Context, request operations.ListTa
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2383,8 +2436,9 @@ func (s *SDK) ListTagsForResource(ctx context.Context, request operations.ListTa
 	return res, nil
 }
 
+// ListTranscriptionJobs - Lists transcription jobs with the specified status.
 func (s *SDK) ListTranscriptionJobs(ctx context.Context, request operations.ListTranscriptionJobsRequest) (*operations.ListTranscriptionJobsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=Transcribe.ListTranscriptionJobs"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2406,7 +2460,7 @@ func (s *SDK) ListTranscriptionJobs(ctx context.Context, request operations.List
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2466,8 +2520,9 @@ func (s *SDK) ListTranscriptionJobs(ctx context.Context, request operations.List
 	return res, nil
 }
 
+// ListVocabularies - Returns a list of vocabularies that match the specified criteria. If no criteria are specified, returns the entire list of vocabularies.
 func (s *SDK) ListVocabularies(ctx context.Context, request operations.ListVocabulariesRequest) (*operations.ListVocabulariesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=Transcribe.ListVocabularies"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2489,7 +2544,7 @@ func (s *SDK) ListVocabularies(ctx context.Context, request operations.ListVocab
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2549,8 +2604,9 @@ func (s *SDK) ListVocabularies(ctx context.Context, request operations.ListVocab
 	return res, nil
 }
 
+// ListVocabularyFilters - Gets information about vocabulary filters.
 func (s *SDK) ListVocabularyFilters(ctx context.Context, request operations.ListVocabularyFiltersRequest) (*operations.ListVocabularyFiltersResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=Transcribe.ListVocabularyFilters"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2572,7 +2628,7 @@ func (s *SDK) ListVocabularyFilters(ctx context.Context, request operations.List
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2632,8 +2688,9 @@ func (s *SDK) ListVocabularyFilters(ctx context.Context, request operations.List
 	return res, nil
 }
 
+// StartCallAnalyticsJob - Starts an asynchronous analytics job that not only transcribes the audio recording of a caller and agent, but also returns additional insights. These insights include how quickly or loudly the caller or agent was speaking. To retrieve additional insights with your analytics jobs, create categories. A category is a way to classify analytics jobs based on attributes, such as a customer's sentiment or a particular phrase being used during the call. For more information, see the operation.
 func (s *SDK) StartCallAnalyticsJob(ctx context.Context, request operations.StartCallAnalyticsJobRequest) (*operations.StartCallAnalyticsJobResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=Transcribe.StartCallAnalyticsJob"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2653,7 +2710,7 @@ func (s *SDK) StartCallAnalyticsJob(ctx context.Context, request operations.Star
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2723,8 +2780,9 @@ func (s *SDK) StartCallAnalyticsJob(ctx context.Context, request operations.Star
 	return res, nil
 }
 
+// StartMedicalTranscriptionJob - Starts a batch job to transcribe medical speech to text.
 func (s *SDK) StartMedicalTranscriptionJob(ctx context.Context, request operations.StartMedicalTranscriptionJobRequest) (*operations.StartMedicalTranscriptionJobResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=Transcribe.StartMedicalTranscriptionJob"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2744,7 +2802,7 @@ func (s *SDK) StartMedicalTranscriptionJob(ctx context.Context, request operatio
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2814,8 +2872,9 @@ func (s *SDK) StartMedicalTranscriptionJob(ctx context.Context, request operatio
 	return res, nil
 }
 
+// StartTranscriptionJob - Starts an asynchronous job to transcribe speech to text.
 func (s *SDK) StartTranscriptionJob(ctx context.Context, request operations.StartTranscriptionJobRequest) (*operations.StartTranscriptionJobResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=Transcribe.StartTranscriptionJob"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2835,7 +2894,7 @@ func (s *SDK) StartTranscriptionJob(ctx context.Context, request operations.Star
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2905,8 +2964,9 @@ func (s *SDK) StartTranscriptionJob(ctx context.Context, request operations.Star
 	return res, nil
 }
 
+// TagResource - Tags a Amazon Transcribe resource with the given list of tags.
 func (s *SDK) TagResource(ctx context.Context, request operations.TagResourceRequest) (*operations.TagResourceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=Transcribe.TagResource"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2926,7 +2986,7 @@ func (s *SDK) TagResource(ctx context.Context, request operations.TagResourceReq
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3006,8 +3066,9 @@ func (s *SDK) TagResource(ctx context.Context, request operations.TagResourceReq
 	return res, nil
 }
 
+// UntagResource - Removes specified tags from a specified Amazon Transcribe resource.
 func (s *SDK) UntagResource(ctx context.Context, request operations.UntagResourceRequest) (*operations.UntagResourceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=Transcribe.UntagResource"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3027,7 +3088,7 @@ func (s *SDK) UntagResource(ctx context.Context, request operations.UntagResourc
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3107,8 +3168,9 @@ func (s *SDK) UntagResource(ctx context.Context, request operations.UntagResourc
 	return res, nil
 }
 
+// UpdateCallAnalyticsCategory - Updates the call analytics category with new values. The <code>UpdateCallAnalyticsCategory</code> operation overwrites all of the existing information with the values that you provide in the request.
 func (s *SDK) UpdateCallAnalyticsCategory(ctx context.Context, request operations.UpdateCallAnalyticsCategoryRequest) (*operations.UpdateCallAnalyticsCategoryResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=Transcribe.UpdateCallAnalyticsCategory"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3128,7 +3190,7 @@ func (s *SDK) UpdateCallAnalyticsCategory(ctx context.Context, request operation
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3208,8 +3270,9 @@ func (s *SDK) UpdateCallAnalyticsCategory(ctx context.Context, request operation
 	return res, nil
 }
 
+// UpdateMedicalVocabulary - Updates a vocabulary with new values that you provide in a different text file from the one you used to create the vocabulary. The <code>UpdateMedicalVocabulary</code> operation overwrites all of the existing information with the values that you provide in the request.
 func (s *SDK) UpdateMedicalVocabulary(ctx context.Context, request operations.UpdateMedicalVocabularyRequest) (*operations.UpdateMedicalVocabularyResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=Transcribe.UpdateMedicalVocabulary"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3229,7 +3292,7 @@ func (s *SDK) UpdateMedicalVocabulary(ctx context.Context, request operations.Up
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3309,8 +3372,9 @@ func (s *SDK) UpdateMedicalVocabulary(ctx context.Context, request operations.Up
 	return res, nil
 }
 
+// UpdateVocabulary - Updates an existing vocabulary with new values. The <code>UpdateVocabulary</code> operation overwrites all of the existing information with the values that you provide in the request.
 func (s *SDK) UpdateVocabulary(ctx context.Context, request operations.UpdateVocabularyRequest) (*operations.UpdateVocabularyResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=Transcribe.UpdateVocabulary"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3330,7 +3394,7 @@ func (s *SDK) UpdateVocabulary(ctx context.Context, request operations.UpdateVoc
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3410,8 +3474,9 @@ func (s *SDK) UpdateVocabulary(ctx context.Context, request operations.UpdateVoc
 	return res, nil
 }
 
+// UpdateVocabularyFilter - Updates a vocabulary filter with a new list of filtered words.
 func (s *SDK) UpdateVocabularyFilter(ctx context.Context, request operations.UpdateVocabularyFilterRequest) (*operations.UpdateVocabularyFilterResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=Transcribe.UpdateVocabularyFilter"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3431,7 +3496,7 @@ func (s *SDK) UpdateVocabularyFilter(ctx context.Context, request operations.Upd
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {

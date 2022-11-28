@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SavedReport } from "./savedreport";
+
 
 
 // ListSavedReportsResponse
@@ -8,9 +8,9 @@ import { SavedReport } from "./savedreport";
  * Response definition for the saved reports list rpc.
 **/
 export class ListSavedReportsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 
-  @Metadata({ data: "json, name=savedReports", elemType: shared.SavedReport })
+  @SpeakeasyMetadata({ data: "json, name=savedReports", elemType: SavedReport })
   savedReports?: SavedReport[];
 }

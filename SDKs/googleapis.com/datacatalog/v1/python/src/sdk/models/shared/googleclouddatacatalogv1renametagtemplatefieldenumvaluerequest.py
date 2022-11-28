@@ -1,10 +1,16 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass_json
 @dataclass
 class GoogleCloudDatacatalogV1RenameTagTemplateFieldEnumValueRequest:
-    new_enum_value_display_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'newEnumValueDisplayName' }})
+    r"""GoogleCloudDatacatalogV1RenameTagTemplateFieldEnumValueRequest
+    Request message for RenameTagTemplateFieldEnumValue.
+    """
+    
+    new_enum_value_display_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('newEnumValueDisplayName') }})
     

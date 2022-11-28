@@ -1,22 +1,23 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ErskineMaySectionSearchResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=chapterNumber" })
+  @SpeakeasyMetadata({ data: "json, name=chapterNumber" })
   chapterNumber?: number;
 
-  @Metadata({ data: "json, name=chapterTitle" })
+  @SpeakeasyMetadata({ data: "json, name=chapterTitle" })
   chapterTitle?: string;
 
-  @Metadata({ data: "json, name=partNumber" })
+  @SpeakeasyMetadata({ data: "json, name=partNumber" })
   partNumber?: number;
 
-  @Metadata({ data: "json, name=sectionId" })
+  @SpeakeasyMetadata({ data: "json, name=sectionId" })
   sectionId?: number;
 
-  @Metadata({ data: "json, name=sectionTitle" })
+  @SpeakeasyMetadata({ data: "json, name=sectionTitle" })
   sectionTitle?: string;
 
-  @Metadata({ data: "json, name=sectionTitleChain" })
+  @SpeakeasyMetadata({ data: "json, name=sectionTitleChain" })
   sectionTitleChain?: string;
 }

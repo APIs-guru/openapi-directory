@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class AndroidenterpriseStorelayoutpagesGetPathParams:
-    enterprise_id: str = field(default=None, metadata={'path_param': { 'field_name': 'enterpriseId', 'style': 'simple', 'explode': False }})
-    page_id: str = field(default=None, metadata={'path_param': { 'field_name': 'pageId', 'style': 'simple', 'explode': False }})
+    enterprise_id: str = field(metadata={'path_param': { 'field_name': 'enterpriseId', 'style': 'simple', 'explode': False }})
+    page_id: str = field(metadata={'path_param': { 'field_name': 'pageId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,20 +27,20 @@ class AndroidenterpriseStorelayoutpagesGetQueryParams:
 
 @dataclass
 class AndroidenterpriseStorelayoutpagesGetSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class AndroidenterpriseStorelayoutpagesGetRequest:
-    path_params: AndroidenterpriseStorelayoutpagesGetPathParams = field(default=None)
-    query_params: AndroidenterpriseStorelayoutpagesGetQueryParams = field(default=None)
-    security: AndroidenterpriseStorelayoutpagesGetSecurity = field(default=None)
+    path_params: AndroidenterpriseStorelayoutpagesGetPathParams = field()
+    query_params: AndroidenterpriseStorelayoutpagesGetQueryParams = field()
+    security: AndroidenterpriseStorelayoutpagesGetSecurity = field()
     
 
 @dataclass
 class AndroidenterpriseStorelayoutpagesGetResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     store_page: Optional[shared.StorePage] = field(default=None)
     

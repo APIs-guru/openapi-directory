@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
 from typing import Optional
@@ -28,11 +28,11 @@ class SearchTypePointIcebridgeMccordsIrmcr3QueryParams:
 
 @dataclass
 class SearchTypePointIcebridgeMccordsIrmcr3Request:
-    query_params: SearchTypePointIcebridgeMccordsIrmcr3QueryParams = field(default=None)
+    query_params: SearchTypePointIcebridgeMccordsIrmcr3QueryParams = field()
     
 
 @dataclass
 class SearchTypePointIcebridgeMccordsIrmcr3Response:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

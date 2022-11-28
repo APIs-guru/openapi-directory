@@ -20,6 +20,8 @@ const (
 	VerificationStateEnumFailed                       VerificationStateEnum = "FAILED"
 )
 
+// Verification
+// A verification represents a verification attempt on a location.
 type Verification struct {
 	CreateTime *string                 `json:"createTime,omitempty"`
 	Method     *VerificationMethodEnum `json:"method,omitempty"`

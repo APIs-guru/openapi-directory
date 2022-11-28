@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ScalarAttributeTypeEnum } from "./scalarattributetypeenum";
+
 
 
 // KeySchemaElement
@@ -7,9 +8,9 @@ import { ScalarAttributeTypeEnum } from "./scalarattributetypeenum";
  * <code>KeySchemaElement</code> is the primary key (hash or hash-and-range) structure for the table.
 **/
 export class KeySchemaElement extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AttributeName" })
+  @SpeakeasyMetadata({ data: "json, name=AttributeName" })
   attributeName: string;
 
-  @Metadata({ data: "json, name=AttributeType" })
+  @SpeakeasyMetadata({ data: "json, name=AttributeType" })
   attributeType: ScalarAttributeTypeEnum;
 }

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // RequestUtilization
 /**
  * Target scaling by request utilization. Only applicable in the App Engine flexible environment.
@@ -33,11 +33,11 @@ var RequestUtilization = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=targetConcurrentRequests" }),
+        SpeakeasyMetadata({ data: "json, name=targetConcurrentRequests" }),
         __metadata("design:type", Number)
     ], RequestUtilization.prototype, "targetConcurrentRequests", void 0);
     __decorate([
-        Metadata({ data: "json, name=targetRequestCountPerSecond" }),
+        SpeakeasyMetadata({ data: "json, name=targetRequestCountPerSecond" }),
         __metadata("design:type", Number)
     ], RequestUtilization.prototype, "targetRequestCountPerSecond", void 0);
     return RequestUtilization;

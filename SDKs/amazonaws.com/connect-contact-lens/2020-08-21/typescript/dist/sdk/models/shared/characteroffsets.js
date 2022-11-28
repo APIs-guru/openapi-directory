@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // CharacterOffsets
 /**
  * For characters that were detected as issues, where they occur in the transcript.
@@ -33,11 +33,11 @@ var CharacterOffsets = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=BeginOffsetChar" }),
+        SpeakeasyMetadata({ data: "json, name=BeginOffsetChar" }),
         __metadata("design:type", Number)
     ], CharacterOffsets.prototype, "beginOffsetChar", void 0);
     __decorate([
-        Metadata({ data: "json, name=EndOffsetChar" }),
+        SpeakeasyMetadata({ data: "json, name=EndOffsetChar" }),
         __metadata("design:type", Number)
     ], CharacterOffsets.prototype, "endOffsetChar", void 0);
     return CharacterOffsets;

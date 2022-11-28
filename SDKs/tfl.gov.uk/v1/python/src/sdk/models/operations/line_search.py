@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class LineSearchPathParams:
-    query: str = field(default=None, metadata={'path_param': { 'field_name': 'query', 'style': 'simple', 'explode': False }})
+    query: str = field(metadata={'path_param': { 'field_name': 'query', 'style': 'simple', 'explode': False }})
     
 class LineSearchServiceTypesEnum(str, Enum):
     REGULAR = "Regular"
@@ -20,14 +21,14 @@ class LineSearchQueryParams:
 
 @dataclass
 class LineSearchRequest:
-    path_params: LineSearchPathParams = field(default=None)
-    query_params: LineSearchQueryParams = field(default=None)
+    path_params: LineSearchPathParams = field()
+    query_params: LineSearchQueryParams = field()
     
 
 @dataclass
 class LineSearchResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     tfl_api_presentation_entities_route_search_response: Optional[shared.TflAPIPresentationEntitiesRouteSearchResponse] = field(default=None)
     

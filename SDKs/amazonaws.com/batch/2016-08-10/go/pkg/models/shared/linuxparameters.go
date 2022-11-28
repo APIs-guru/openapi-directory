@@ -1,5 +1,7 @@
 package shared
 
+// LinuxParameters
+// Linux-specific modifications that are applied to the container, such as details for device mappings.
 type LinuxParameters struct {
 	Devices            []Device `json:"devices,omitempty"`
 	InitProcessEnabled *bool    `json:"initProcessEnabled,omitempty"`

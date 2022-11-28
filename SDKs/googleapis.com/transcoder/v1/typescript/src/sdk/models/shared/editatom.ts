@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // EditAtom
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Edit atom.
 **/
 export class EditAtom extends SpeakeasyBase {
-  @Metadata({ data: "json, name=endTimeOffset" })
+  @SpeakeasyMetadata({ data: "json, name=endTimeOffset" })
   endTimeOffset?: string;
 
-  @Metadata({ data: "json, name=inputs" })
+  @SpeakeasyMetadata({ data: "json, name=inputs" })
   inputs?: string[];
 
-  @Metadata({ data: "json, name=key" })
+  @SpeakeasyMetadata({ data: "json, name=key" })
   key?: string;
 
-  @Metadata({ data: "json, name=startTimeOffset" })
+  @SpeakeasyMetadata({ data: "json, name=startTimeOffset" })
   startTimeOffset?: string;
 }

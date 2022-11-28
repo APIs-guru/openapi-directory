@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class GetEventMatchesSimplePathParams:
-    event_key: str = field(default=None, metadata={'path_param': { 'field_name': 'event_key', 'style': 'simple', 'explode': False }})
+    event_key: str = field(metadata={'path_param': { 'field_name': 'event_key', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -15,20 +15,20 @@ class GetEventMatchesSimpleHeaders:
 
 @dataclass
 class GetEventMatchesSimpleSecurity:
-    api_key: shared.SchemeAPIKey = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    api_key: shared.SchemeAPIKey = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
     
 
 @dataclass
 class GetEventMatchesSimpleRequest:
-    path_params: GetEventMatchesSimplePathParams = field(default=None)
-    headers: GetEventMatchesSimpleHeaders = field(default=None)
-    security: GetEventMatchesSimpleSecurity = field(default=None)
+    headers: GetEventMatchesSimpleHeaders = field()
+    path_params: GetEventMatchesSimplePathParams = field()
+    security: GetEventMatchesSimpleSecurity = field()
     
 
 @dataclass
 class GetEventMatchesSimpleResponse:
-    content_type: str = field(default=None)
-    headers: dict[str, List[str]] = field(default=None)
+    content_type: str = field()
+    headers: dict[str, List[str]] = field()
+    status_code: int = field()
     match_simples: Optional[List[shared.MatchSimple]] = field(default=None)
-    status_code: int = field(default=None)
     

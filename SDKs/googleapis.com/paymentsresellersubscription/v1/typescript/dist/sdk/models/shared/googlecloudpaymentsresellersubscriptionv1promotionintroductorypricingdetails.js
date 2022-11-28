@@ -22,8 +22,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { GoogleCloudPaymentsResellerSubscriptionV1PromotionIntroductoryPricingDetailsIntroductoryPricingSpec } from "./googlecloudpaymentsresellersubscriptionv1promotionintroductorypricingdetailsintroductorypricingspec";
+import { GoogleCloudPaymentsResellerSubscriptionV1PromotionIntroductoryPricingDetailsIntroductoryPricingSpecInput } from "./googlecloudpaymentsresellersubscriptionv1promotionintroductorypricingdetailsintroductorypricingspec";
 // GoogleCloudPaymentsResellerSubscriptionV1PromotionIntroductoryPricingDetails
 /**
  * The details of a introductory pricing promotion.
@@ -34,9 +35,25 @@ var GoogleCloudPaymentsResellerSubscriptionV1PromotionIntroductoryPricingDetails
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=introductoryPricingSpecs", elemType: shared.GoogleCloudPaymentsResellerSubscriptionV1PromotionIntroductoryPricingDetailsIntroductoryPricingSpec }),
+        SpeakeasyMetadata({ data: "json, name=introductoryPricingSpecs", elemType: GoogleCloudPaymentsResellerSubscriptionV1PromotionIntroductoryPricingDetailsIntroductoryPricingSpec }),
         __metadata("design:type", Array)
     ], GoogleCloudPaymentsResellerSubscriptionV1PromotionIntroductoryPricingDetails.prototype, "introductoryPricingSpecs", void 0);
     return GoogleCloudPaymentsResellerSubscriptionV1PromotionIntroductoryPricingDetails;
 }(SpeakeasyBase));
 export { GoogleCloudPaymentsResellerSubscriptionV1PromotionIntroductoryPricingDetails };
+// GoogleCloudPaymentsResellerSubscriptionV1PromotionIntroductoryPricingDetailsInput
+/**
+ * The details of a introductory pricing promotion.
+**/
+var GoogleCloudPaymentsResellerSubscriptionV1PromotionIntroductoryPricingDetailsInput = /** @class */ (function (_super) {
+    __extends(GoogleCloudPaymentsResellerSubscriptionV1PromotionIntroductoryPricingDetailsInput, _super);
+    function GoogleCloudPaymentsResellerSubscriptionV1PromotionIntroductoryPricingDetailsInput() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=introductoryPricingSpecs", elemType: GoogleCloudPaymentsResellerSubscriptionV1PromotionIntroductoryPricingDetailsIntroductoryPricingSpecInput }),
+        __metadata("design:type", Array)
+    ], GoogleCloudPaymentsResellerSubscriptionV1PromotionIntroductoryPricingDetailsInput.prototype, "introductoryPricingSpecs", void 0);
+    return GoogleCloudPaymentsResellerSubscriptionV1PromotionIntroductoryPricingDetailsInput;
+}(SpeakeasyBase));
+export { GoogleCloudPaymentsResellerSubscriptionV1PromotionIntroductoryPricingDetailsInput };

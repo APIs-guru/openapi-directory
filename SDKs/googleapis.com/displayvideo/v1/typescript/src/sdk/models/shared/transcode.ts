@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Dimensions } from "./dimensions";
+
 
 
 // Transcode
@@ -7,30 +8,30 @@ import { Dimensions } from "./dimensions";
  * Represents information about the transcoded audio or video file.
 **/
 export class Transcode extends SpeakeasyBase {
-  @Metadata({ data: "json, name=audioBitRateKbps" })
+  @SpeakeasyMetadata({ data: "json, name=audioBitRateKbps" })
   audioBitRateKbps?: string;
 
-  @Metadata({ data: "json, name=audioSampleRateHz" })
+  @SpeakeasyMetadata({ data: "json, name=audioSampleRateHz" })
   audioSampleRateHz?: string;
 
-  @Metadata({ data: "json, name=bitRateKbps" })
+  @SpeakeasyMetadata({ data: "json, name=bitRateKbps" })
   bitRateKbps?: string;
 
-  @Metadata({ data: "json, name=dimensions" })
+  @SpeakeasyMetadata({ data: "json, name=dimensions" })
   dimensions?: Dimensions;
 
-  @Metadata({ data: "json, name=fileSizeBytes" })
+  @SpeakeasyMetadata({ data: "json, name=fileSizeBytes" })
   fileSizeBytes?: string;
 
-  @Metadata({ data: "json, name=frameRate" })
+  @SpeakeasyMetadata({ data: "json, name=frameRate" })
   frameRate?: number;
 
-  @Metadata({ data: "json, name=mimeType" })
+  @SpeakeasyMetadata({ data: "json, name=mimeType" })
   mimeType?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=transcoded" })
+  @SpeakeasyMetadata({ data: "json, name=transcoded" })
   transcoded?: boolean;
 }

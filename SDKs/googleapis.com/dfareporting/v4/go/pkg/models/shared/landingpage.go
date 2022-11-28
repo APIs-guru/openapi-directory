@@ -1,5 +1,7 @@
 package shared
 
+// LandingPage
+// Contains information about where a user's browser is taken after the user clicks an ad.
 type LandingPage struct {
 	AdvertiserID *string    `json:"advertiserId,omitempty"`
 	Archived     *bool      `json:"archived,omitempty"`

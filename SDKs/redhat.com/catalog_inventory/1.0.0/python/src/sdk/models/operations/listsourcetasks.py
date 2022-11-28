@@ -1,11 +1,11 @@
 from dataclasses import dataclass, field
-from typing import Any,List,Optional
+from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class ListSourceTasksPathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -18,14 +18,14 @@ class ListSourceTasksQueryParams:
 
 @dataclass
 class ListSourceTasksRequest:
-    path_params: ListSourceTasksPathParams = field(default=None)
-    query_params: ListSourceTasksQueryParams = field(default=None)
+    path_params: ListSourceTasksPathParams = field()
+    query_params: ListSourceTasksQueryParams = field()
     
 
 @dataclass
 class ListSourceTasksResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error_not_found: Optional[shared.ErrorNotFound] = field(default=None)
-    status_code: int = field(default=None)
     tasks_collection: Optional[shared.TasksCollection] = field(default=None)
     

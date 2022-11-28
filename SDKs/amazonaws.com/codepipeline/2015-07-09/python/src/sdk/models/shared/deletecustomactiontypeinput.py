@@ -1,13 +1,18 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import actioncategory_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class DeleteCustomActionTypeInput:
-    category: actioncategory_enum.ActionCategoryEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'category' }})
-    provider: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'provider' }})
-    version: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'version' }})
+    r"""DeleteCustomActionTypeInput
+    Represents the input of a <code>DeleteCustomActionType</code> operation. The custom action will be marked as deleted.
+    """
+    
+    category: ActionCategoryEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('category') }})
+    provider: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('provider') }})
+    version: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('version') }})
     

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ExitBehaviorEnum } from "./exitbehaviorenum";
 /**
  * Information about a tool. Tools are used in a simulation job.

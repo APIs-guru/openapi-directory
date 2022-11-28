@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum AppliedLicenseTypeEnum {
-    TypeUnspecified = "TYPE_UNSPECIFIED"
-,    None = "NONE"
-,    Payg = "PAYG"
-,    Byol = "BYOL"
+    TypeUnspecified = "TYPE_UNSPECIFIED",
+    None = "NONE",
+    Payg = "PAYG",
+    Byol = "BYOL"
 }
 
 
@@ -13,9 +14,9 @@ export enum AppliedLicenseTypeEnum {
  * AppliedLicense holds the license data returned by adaptation module report.
 **/
 export class AppliedLicense extends SpeakeasyBase {
-  @Metadata({ data: "json, name=osLicense" })
+  @SpeakeasyMetadata({ data: "json, name=osLicense" })
   osLicense?: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: AppliedLicenseTypeEnum;
 }

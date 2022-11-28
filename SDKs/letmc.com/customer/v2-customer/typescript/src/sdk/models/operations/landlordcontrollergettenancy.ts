@@ -1,38 +1,39 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class LandlordControllerGetTenancyPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=shortName" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=shortName" })
   shortName: string;
 }
 
 
 export class LandlordControllerGetTenancyQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=tenancyID" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=tenancyID" })
   tenancyId: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=token" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=token" })
   token: string;
 }
 
 
 export class LandlordControllerGetTenancyRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: LandlordControllerGetTenancyPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: LandlordControllerGetTenancyQueryParams;
 }
 
 
 export class LandlordControllerGetTenancyResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   landlordTenancyModel?: shared.LandlordTenancyModel;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

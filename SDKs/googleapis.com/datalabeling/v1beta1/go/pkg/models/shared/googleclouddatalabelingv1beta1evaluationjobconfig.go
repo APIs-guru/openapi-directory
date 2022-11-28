@@ -1,5 +1,7 @@
 package shared
 
+// GoogleCloudDatalabelingV1beta1EvaluationJobConfig
+// Configures specific details of how a continuous evaluation job works. Provide this configuration when you create an EvaluationJob.
 type GoogleCloudDatalabelingV1beta1EvaluationJobConfig struct {
 	BigqueryImportKeys        map[string]string                                        `json:"bigqueryImportKeys,omitempty"`
 	BoundingPolyConfig        *GoogleCloudDatalabelingV1beta1BoundingPolyConfig        `json:"boundingPolyConfig,omitempty"`

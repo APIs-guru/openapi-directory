@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ObjectExpiration } from "./objectexpiration";
+
 
 
 // UpdateFilesBulkRequest
@@ -7,12 +8,12 @@ import { ObjectExpiration } from "./objectexpiration";
  * Request model for updating files
 **/
 export class UpdateFilesBulkRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=classification" })
+  @SpeakeasyMetadata({ data: "json, name=classification" })
   classification?: number;
 
-  @Metadata({ data: "json, name=expiration" })
+  @SpeakeasyMetadata({ data: "json, name=expiration" })
   expiration?: ObjectExpiration;
 
-  @Metadata({ data: "json, name=objectIds" })
+  @SpeakeasyMetadata({ data: "json, name=objectIds" })
   objectIds: number[];
 }

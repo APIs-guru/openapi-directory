@@ -1,32 +1,33 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class MakeTokenGetTokenGetQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=apiID" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=apiID" })
   apiId: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=apiKey" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=apiKey" })
   apiKey: string;
 }
 
 
 export class MakeTokenGetTokenGetRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: MakeTokenGetTokenGetQueryParams;
 }
 
 
 export class MakeTokenGetTokenGetResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   httpValidationError?: shared.HttpValidationError;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   jsonWebToken?: shared.JsonWebToken;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

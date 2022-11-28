@@ -78,15 +78,15 @@ type DcimInterfacesListQueryParams struct {
 	VlanID            *string `queryParam:"style=form,explode=true,name=vlan_id"`
 }
 
-type DcimInterfacesListRequest struct {
-	QueryParams DcimInterfacesListQueryParams
-}
-
 type DcimInterfacesList200ApplicationJSON struct {
 	Count    int64                    `json:"count"`
 	Next     *string                  `json:"next,omitempty"`
 	Previous *string                  `json:"previous,omitempty"`
 	Results  []shared.DeviceInterface `json:"results"`
+}
+
+type DcimInterfacesListRequest struct {
+	QueryParams DcimInterfacesListQueryParams
 }
 
 type DcimInterfacesListResponse struct {

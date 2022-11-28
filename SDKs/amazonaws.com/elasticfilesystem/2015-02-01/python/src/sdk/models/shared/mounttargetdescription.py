@@ -1,20 +1,26 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import lifecyclestate_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class MountTargetDescription:
-    availability_zone_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AvailabilityZoneId' }})
-    availability_zone_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AvailabilityZoneName' }})
-    file_system_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FileSystemId' }})
-    ip_address: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'IpAddress' }})
-    life_cycle_state: lifecyclestate_enum.LifeCycleStateEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'LifeCycleState' }})
-    mount_target_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'MountTargetId' }})
-    network_interface_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'NetworkInterfaceId' }})
-    owner_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'OwnerId' }})
-    subnet_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'SubnetId' }})
-    vpc_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'VpcId' }})
+    r"""MountTargetDescription
+    Provides a description of a mount target.
+    """
+    
+    file_system_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('FileSystemId') }})
+    life_cycle_state: LifeCycleStateEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('LifeCycleState') }})
+    mount_target_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('MountTargetId') }})
+    subnet_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('SubnetId') }})
+    availability_zone_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('AvailabilityZoneId') }})
+    availability_zone_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('AvailabilityZoneName') }})
+    ip_address: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('IpAddress') }})
+    network_interface_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('NetworkInterfaceId') }})
+    owner_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('OwnerId') }})
+    vpc_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('VpcId') }})
     

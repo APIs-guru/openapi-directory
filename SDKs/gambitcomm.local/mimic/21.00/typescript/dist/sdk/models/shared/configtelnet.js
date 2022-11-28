@@ -22,34 +22,34 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var ConfigTelnet = /** @class */ (function (_super) {
     __extends(ConfigTelnet, _super);
     function ConfigTelnet() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=keymap" }),
+        SpeakeasyMetadata({ data: "json, name=keymap" }),
         __metadata("design:type", String)
     ], ConfigTelnet.prototype, "keymap", void 0);
     __decorate([
-        Metadata({ data: "json, name=paging_prompt" }),
+        SpeakeasyMetadata({ data: "json, name=paging_prompt" }),
         __metadata("design:type", String)
     ], ConfigTelnet.prototype, "pagingPrompt", void 0);
     __decorate([
-        Metadata({ data: "json, name=port" }),
+        SpeakeasyMetadata({ data: "json, name=port" }),
         __metadata("design:type", Number)
     ], ConfigTelnet.prototype, "port", void 0);
     __decorate([
-        Metadata({ data: "json, name=prompt" }),
+        SpeakeasyMetadata({ data: "json, name=prompt" }),
         __metadata("design:type", String)
     ], ConfigTelnet.prototype, "prompt", void 0);
     __decorate([
-        Metadata({ data: "json, name=rule" }),
+        SpeakeasyMetadata({ data: "json, name=rule" }),
         __metadata("design:type", String)
     ], ConfigTelnet.prototype, "rule", void 0);
     __decorate([
-        Metadata({ data: "json, name=userdb" }),
+        SpeakeasyMetadata({ data: "json, name=userdb" }),
         __metadata("design:type", String)
     ], ConfigTelnet.prototype, "userdb", void 0);
     return ConfigTelnet;

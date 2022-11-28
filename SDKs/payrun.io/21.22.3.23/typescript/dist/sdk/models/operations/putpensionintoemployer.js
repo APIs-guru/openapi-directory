@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var PutPensionIntoEmployerPathParams = /** @class */ (function (_super) {
     __extends(PutPensionIntoEmployerPathParams, _super);
@@ -30,11 +30,11 @@ var PutPensionIntoEmployerPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=EmployerId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=EmployerId" }),
         __metadata("design:type", String)
     ], PutPensionIntoEmployerPathParams.prototype, "employerId", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=PensionId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=PensionId" }),
         __metadata("design:type", String)
     ], PutPensionIntoEmployerPathParams.prototype, "pensionId", void 0);
     return PutPensionIntoEmployerPathParams;
@@ -46,11 +46,11 @@ var PutPensionIntoEmployerHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=Api-Version" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Api-Version" }),
         __metadata("design:type", String)
     ], PutPensionIntoEmployerHeaders.prototype, "apiVersion", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=Authorization" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Authorization" }),
         __metadata("design:type", String)
     ], PutPensionIntoEmployerHeaders.prototype, "authorization", void 0);
     return PutPensionIntoEmployerHeaders;
@@ -62,15 +62,15 @@ var PutPensionIntoEmployerRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PutPensionIntoEmployerPathParams)
     ], PutPensionIntoEmployerRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PutPensionIntoEmployerHeaders)
     ], PutPensionIntoEmployerRequest.prototype, "headers", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", shared.Pension)
     ], PutPensionIntoEmployerRequest.prototype, "request", void 0);
     return PutPensionIntoEmployerRequest;
@@ -82,19 +82,19 @@ var PutPensionIntoEmployerResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], PutPensionIntoEmployerResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.ErrorModel)
     ], PutPensionIntoEmployerResponse.prototype, "errorModel", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.Pension)
     ], PutPensionIntoEmployerResponse.prototype, "pension", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], PutPensionIntoEmployerResponse.prototype, "statusCode", void 0);
     return PutPensionIntoEmployerResponse;

@@ -1,50 +1,51 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetSubtitlePlaylistPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=index" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=index" })
   index: number;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=itemId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=itemId" })
   itemId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=mediaSourceId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=mediaSourceId" })
   mediaSourceId: string;
 }
 
 
 export class GetSubtitlePlaylistQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=segmentLength" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=segmentLength" })
   segmentLength: number;
 }
 
 
 export class GetSubtitlePlaylistSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
   customAuthentication: shared.SchemeCustomAuthentication;
 }
 
 
 export class GetSubtitlePlaylistRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetSubtitlePlaylistPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetSubtitlePlaylistQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: GetSubtitlePlaylistSecurity;
 }
 
 
 export class GetSubtitlePlaylistResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getSubtitlePlaylist200ApplicationXMpegurlBinaryString?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

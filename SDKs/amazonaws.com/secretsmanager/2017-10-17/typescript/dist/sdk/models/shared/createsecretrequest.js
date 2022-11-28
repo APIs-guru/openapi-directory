@@ -22,47 +22,48 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { ReplicaRegionType } from "./replicaregiontype";
+import { Tag } from "./tag";
 var CreateSecretRequest = /** @class */ (function (_super) {
     __extends(CreateSecretRequest, _super);
     function CreateSecretRequest() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=AddReplicaRegions", elemType: shared.ReplicaRegionType }),
+        SpeakeasyMetadata({ data: "json, name=AddReplicaRegions", elemType: ReplicaRegionType }),
         __metadata("design:type", Array)
     ], CreateSecretRequest.prototype, "addReplicaRegions", void 0);
     __decorate([
-        Metadata({ data: "json, name=ClientRequestToken" }),
+        SpeakeasyMetadata({ data: "json, name=ClientRequestToken" }),
         __metadata("design:type", String)
     ], CreateSecretRequest.prototype, "clientRequestToken", void 0);
     __decorate([
-        Metadata({ data: "json, name=Description" }),
+        SpeakeasyMetadata({ data: "json, name=Description" }),
         __metadata("design:type", String)
     ], CreateSecretRequest.prototype, "description", void 0);
     __decorate([
-        Metadata({ data: "json, name=ForceOverwriteReplicaSecret" }),
+        SpeakeasyMetadata({ data: "json, name=ForceOverwriteReplicaSecret" }),
         __metadata("design:type", Boolean)
     ], CreateSecretRequest.prototype, "forceOverwriteReplicaSecret", void 0);
     __decorate([
-        Metadata({ data: "json, name=KmsKeyId" }),
+        SpeakeasyMetadata({ data: "json, name=KmsKeyId" }),
         __metadata("design:type", String)
     ], CreateSecretRequest.prototype, "kmsKeyId", void 0);
     __decorate([
-        Metadata({ data: "json, name=Name" }),
+        SpeakeasyMetadata({ data: "json, name=Name" }),
         __metadata("design:type", String)
     ], CreateSecretRequest.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=SecretBinary" }),
+        SpeakeasyMetadata({ data: "json, name=SecretBinary" }),
         __metadata("design:type", String)
     ], CreateSecretRequest.prototype, "secretBinary", void 0);
     __decorate([
-        Metadata({ data: "json, name=SecretString" }),
+        SpeakeasyMetadata({ data: "json, name=SecretString" }),
         __metadata("design:type", String)
     ], CreateSecretRequest.prototype, "secretString", void 0);
     __decorate([
-        Metadata({ data: "json, name=Tags", elemType: shared.Tag }),
+        SpeakeasyMetadata({ data: "json, name=Tags", elemType: Tag }),
         __metadata("design:type", Array)
     ], CreateSecretRequest.prototype, "tags", void 0);
     return CreateSecretRequest;

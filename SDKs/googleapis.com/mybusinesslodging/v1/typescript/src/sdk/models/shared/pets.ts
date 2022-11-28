@@ -1,31 +1,32 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum PetsCatsAllowedExceptionEnum {
-    ExceptionUnspecified = "EXCEPTION_UNSPECIFIED"
-,    UnderConstruction = "UNDER_CONSTRUCTION"
-,    DependentOnSeason = "DEPENDENT_ON_SEASON"
-,    DependentOnDayOfWeek = "DEPENDENT_ON_DAY_OF_WEEK"
+    ExceptionUnspecified = "EXCEPTION_UNSPECIFIED",
+    UnderConstruction = "UNDER_CONSTRUCTION",
+    DependentOnSeason = "DEPENDENT_ON_SEASON",
+    DependentOnDayOfWeek = "DEPENDENT_ON_DAY_OF_WEEK"
 }
 
 export enum PetsDogsAllowedExceptionEnum {
-    ExceptionUnspecified = "EXCEPTION_UNSPECIFIED"
-,    UnderConstruction = "UNDER_CONSTRUCTION"
-,    DependentOnSeason = "DEPENDENT_ON_SEASON"
-,    DependentOnDayOfWeek = "DEPENDENT_ON_DAY_OF_WEEK"
+    ExceptionUnspecified = "EXCEPTION_UNSPECIFIED",
+    UnderConstruction = "UNDER_CONSTRUCTION",
+    DependentOnSeason = "DEPENDENT_ON_SEASON",
+    DependentOnDayOfWeek = "DEPENDENT_ON_DAY_OF_WEEK"
 }
 
 export enum PetsPetsAllowedExceptionEnum {
-    ExceptionUnspecified = "EXCEPTION_UNSPECIFIED"
-,    UnderConstruction = "UNDER_CONSTRUCTION"
-,    DependentOnSeason = "DEPENDENT_ON_SEASON"
-,    DependentOnDayOfWeek = "DEPENDENT_ON_DAY_OF_WEEK"
+    ExceptionUnspecified = "EXCEPTION_UNSPECIFIED",
+    UnderConstruction = "UNDER_CONSTRUCTION",
+    DependentOnSeason = "DEPENDENT_ON_SEASON",
+    DependentOnDayOfWeek = "DEPENDENT_ON_DAY_OF_WEEK"
 }
 
 export enum PetsPetsAllowedFreeExceptionEnum {
-    ExceptionUnspecified = "EXCEPTION_UNSPECIFIED"
-,    UnderConstruction = "UNDER_CONSTRUCTION"
-,    DependentOnSeason = "DEPENDENT_ON_SEASON"
-,    DependentOnDayOfWeek = "DEPENDENT_ON_DAY_OF_WEEK"
+    ExceptionUnspecified = "EXCEPTION_UNSPECIFIED",
+    UnderConstruction = "UNDER_CONSTRUCTION",
+    DependentOnSeason = "DEPENDENT_ON_SEASON",
+    DependentOnDayOfWeek = "DEPENDENT_ON_DAY_OF_WEEK"
 }
 
 
@@ -34,27 +35,27 @@ export enum PetsPetsAllowedFreeExceptionEnum {
  * Policies regarding guest-owned animals.
 **/
 export class Pets extends SpeakeasyBase {
-  @Metadata({ data: "json, name=catsAllowed" })
+  @SpeakeasyMetadata({ data: "json, name=catsAllowed" })
   catsAllowed?: boolean;
 
-  @Metadata({ data: "json, name=catsAllowedException" })
+  @SpeakeasyMetadata({ data: "json, name=catsAllowedException" })
   catsAllowedException?: PetsCatsAllowedExceptionEnum;
 
-  @Metadata({ data: "json, name=dogsAllowed" })
+  @SpeakeasyMetadata({ data: "json, name=dogsAllowed" })
   dogsAllowed?: boolean;
 
-  @Metadata({ data: "json, name=dogsAllowedException" })
+  @SpeakeasyMetadata({ data: "json, name=dogsAllowedException" })
   dogsAllowedException?: PetsDogsAllowedExceptionEnum;
 
-  @Metadata({ data: "json, name=petsAllowed" })
+  @SpeakeasyMetadata({ data: "json, name=petsAllowed" })
   petsAllowed?: boolean;
 
-  @Metadata({ data: "json, name=petsAllowedException" })
+  @SpeakeasyMetadata({ data: "json, name=petsAllowedException" })
   petsAllowedException?: PetsPetsAllowedExceptionEnum;
 
-  @Metadata({ data: "json, name=petsAllowedFree" })
+  @SpeakeasyMetadata({ data: "json, name=petsAllowedFree" })
   petsAllowedFree?: boolean;
 
-  @Metadata({ data: "json, name=petsAllowedFreeException" })
+  @SpeakeasyMetadata({ data: "json, name=petsAllowedFreeException" })
   petsAllowedFreeException?: PetsPetsAllowedFreeExceptionEnum;
 }

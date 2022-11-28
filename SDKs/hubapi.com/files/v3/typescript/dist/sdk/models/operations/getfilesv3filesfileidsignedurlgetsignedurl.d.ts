@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class GetFilesV3FilesFileIdSignedUrlGetSignedUrlPathParams extends SpeakeasyBase {
     fileId: string;
@@ -14,19 +14,12 @@ export declare class GetFilesV3FilesFileIdSignedUrlGetSignedUrlQueryParams exten
     size?: GetFilesV3FilesFileIdSignedUrlGetSignedUrlSizeEnum;
     upscale?: boolean;
 }
-export declare class GetFilesV3FilesFileIdSignedUrlGetSignedUrlSecurityOption1 extends SpeakeasyBase {
-    oauth2Legacy: shared.SchemeOauth2Legacy;
-}
-export declare class GetFilesV3FilesFileIdSignedUrlGetSignedUrlSecurityOption2 extends SpeakeasyBase {
-    hapikey: shared.SchemeHapikey;
-}
-export declare class GetFilesV3FilesFileIdSignedUrlGetSignedUrlSecurityOption3 extends SpeakeasyBase {
-    oauth2Legacy: shared.SchemeOauth2Legacy;
-}
 export declare class GetFilesV3FilesFileIdSignedUrlGetSignedUrlSecurity extends SpeakeasyBase {
-    option1?: GetFilesV3FilesFileIdSignedUrlGetSignedUrlSecurityOption1;
-    option2?: GetFilesV3FilesFileIdSignedUrlGetSignedUrlSecurityOption2;
-    option3?: GetFilesV3FilesFileIdSignedUrlGetSignedUrlSecurityOption3;
+    privateAppsLegacy?: shared.SchemePrivateAppsLegacy;
+    oauth2Legacy?: shared.SchemeOauth2Legacy;
+    hapikey?: shared.SchemeHapikey;
+    privateAppsLegacy1?: shared.SchemePrivateAppsLegacy;
+    oauth2Legacy1?: shared.SchemeOauth2Legacy;
 }
 export declare class GetFilesV3FilesFileIdSignedUrlGetSignedUrlRequest extends SpeakeasyBase {
     pathParams: GetFilesV3FilesFileIdSignedUrlGetSignedUrlPathParams;

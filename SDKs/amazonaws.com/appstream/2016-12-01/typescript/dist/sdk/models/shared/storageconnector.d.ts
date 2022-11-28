@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { StorageConnectorTypeEnum } from "./storageconnectortypeenum";
 /**
  * Describes a connector that enables persistent storage for users.

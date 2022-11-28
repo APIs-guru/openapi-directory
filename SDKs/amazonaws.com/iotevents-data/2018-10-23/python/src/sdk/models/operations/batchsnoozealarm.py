@@ -1,6 +1,10 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,List,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -18,22 +22,22 @@ class BatchSnoozeAlarmHeaders:
 @dataclass_json
 @dataclass
 class BatchSnoozeAlarmRequestBody:
-    snooze_action_requests: List[shared.SnoozeAlarmActionRequest] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'snoozeActionRequests' }})
+    snooze_action_requests: List[shared.SnoozeAlarmActionRequest] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('snoozeActionRequests') }})
     
 
 @dataclass
 class BatchSnoozeAlarmRequest:
-    headers: BatchSnoozeAlarmHeaders = field(default=None)
-    request: BatchSnoozeAlarmRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: BatchSnoozeAlarmHeaders = field()
+    request: BatchSnoozeAlarmRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class BatchSnoozeAlarmResponse:
+    content_type: str = field()
+    status_code: int = field()
     batch_snooze_alarm_response: Optional[shared.BatchSnoozeAlarmResponse] = field(default=None)
-    content_type: str = field(default=None)
     internal_failure_exception: Optional[Any] = field(default=None)
     invalid_request_exception: Optional[Any] = field(default=None)
     service_unavailable_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     

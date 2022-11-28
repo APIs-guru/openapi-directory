@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class UserInfoUserTypeEnum(str, Enum):
     SYSTEM = "system"
@@ -12,13 +14,17 @@ class UserInfoUserTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class UserInfo:
-    avatar_uuid: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'avatarUuid' }})
-    display_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'displayName' }})
-    email: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'email' }})
-    first_name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'firstName' }})
-    id: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
-    last_name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'lastName' }})
-    title: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'title' }})
-    user_name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'userName' }})
-    user_type: UserInfoUserTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'userType' }})
+    r"""UserInfo
+    User information
+    """
+    
+    avatar_uuid: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('avatarUuid') }})
+    first_name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('firstName') }})
+    id: int = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('id') }})
+    last_name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('lastName') }})
+    user_name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('userName') }})
+    user_type: UserInfoUserTypeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('userType') }})
+    display_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('displayName') }})
+    email: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('email') }})
+    title: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('title') }})
     

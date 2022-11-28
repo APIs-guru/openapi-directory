@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { MetadataImport } from "./metadataimport";
 /**
  * Response message for DataprocMetastore.ListMetadataImports.

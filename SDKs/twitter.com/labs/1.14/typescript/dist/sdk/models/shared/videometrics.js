@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // VideoMetrics
 /**
  * Metrics corresponding to a Video.
@@ -33,31 +33,31 @@ var VideoMetrics = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=media_key" }),
+        SpeakeasyMetadata({ data: "json, name=media_key" }),
         __metadata("design:type", String)
     ], VideoMetrics.prototype, "mediaKey", void 0);
     __decorate([
-        Metadata({ data: "json, name=playback_0_count" }),
+        SpeakeasyMetadata({ data: "json, name=playback_0_count" }),
         __metadata("design:type", Number)
     ], VideoMetrics.prototype, "playback0Count", void 0);
     __decorate([
-        Metadata({ data: "json, name=playback_100_count" }),
+        SpeakeasyMetadata({ data: "json, name=playback_100_count" }),
         __metadata("design:type", Number)
     ], VideoMetrics.prototype, "playback100Count", void 0);
     __decorate([
-        Metadata({ data: "json, name=playback_25_count" }),
+        SpeakeasyMetadata({ data: "json, name=playback_25_count" }),
         __metadata("design:type", Number)
     ], VideoMetrics.prototype, "playback25Count", void 0);
     __decorate([
-        Metadata({ data: "json, name=playback_50_count" }),
+        SpeakeasyMetadata({ data: "json, name=playback_50_count" }),
         __metadata("design:type", Number)
     ], VideoMetrics.prototype, "playback50Count", void 0);
     __decorate([
-        Metadata({ data: "json, name=playback_75_count" }),
+        SpeakeasyMetadata({ data: "json, name=playback_75_count" }),
         __metadata("design:type", Number)
     ], VideoMetrics.prototype, "playback75Count", void 0);
     __decorate([
-        Metadata({ data: "json, name=view_count" }),
+        SpeakeasyMetadata({ data: "json, name=view_count" }),
         __metadata("design:type", Number)
     ], VideoMetrics.prototype, "viewCount", void 0);
     return VideoMetrics;

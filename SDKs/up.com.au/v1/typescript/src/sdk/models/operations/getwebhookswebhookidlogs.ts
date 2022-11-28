@@ -1,35 +1,36 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetWebhooksWebhookIdLogsPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=webhookId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=webhookId" })
   webhookId: string;
 }
 
 
 export class GetWebhooksWebhookIdLogsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=page[size]" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page[size]" })
   pageSize?: number;
 }
 
 
 export class GetWebhooksWebhookIdLogsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetWebhooksWebhookIdLogsPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetWebhooksWebhookIdLogsQueryParams;
 }
 
 
 export class GetWebhooksWebhookIdLogsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   listWebhookDeliveryLogsResponse?: shared.ListWebhookDeliveryLogsResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

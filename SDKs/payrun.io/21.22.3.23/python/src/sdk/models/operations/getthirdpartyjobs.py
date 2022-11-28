@@ -5,19 +5,19 @@ from sdk.models import shared
 
 @dataclass
 class GetThirdPartyJobsHeaders:
-    api_version: str = field(default=None, metadata={'header': { 'field_name': 'Api-Version', 'style': 'simple', 'explode': False }})
-    authorization: str = field(default=None, metadata={'header': { 'field_name': 'Authorization', 'style': 'simple', 'explode': False }})
+    api_version: str = field(metadata={'header': { 'field_name': 'Api-Version', 'style': 'simple', 'explode': False }})
+    authorization: str = field(metadata={'header': { 'field_name': 'Authorization', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetThirdPartyJobsRequest:
-    headers: GetThirdPartyJobsHeaders = field(default=None)
+    headers: GetThirdPartyJobsHeaders = field()
     
 
 @dataclass
 class GetThirdPartyJobsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error_model: Optional[shared.ErrorModel] = field(default=None)
     link_collection: Optional[shared.LinkCollection] = field(default=None)
-    status_code: int = field(default=None)
     

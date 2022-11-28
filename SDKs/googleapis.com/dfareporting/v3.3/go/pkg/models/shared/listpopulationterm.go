@@ -20,6 +20,8 @@ const (
 	ListPopulationTermTypeEnumReferrerTerm       ListPopulationTermTypeEnum = "REFERRER_TERM"
 )
 
+// ListPopulationTerm
+// Remarketing List Population Rule Term.
 type ListPopulationTerm struct {
 	Contains             *bool                           `json:"contains,omitempty"`
 	Negation             *bool                           `json:"negation,omitempty"`

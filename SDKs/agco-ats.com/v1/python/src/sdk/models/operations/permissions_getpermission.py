@@ -5,18 +5,18 @@ from sdk.models import shared
 
 @dataclass
 class PermissionsGetPermissionPathParams:
-    id: int = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: int = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class PermissionsGetPermissionRequest:
-    path_params: PermissionsGetPermissionPathParams = field(default=None)
+    path_params: PermissionsGetPermissionPathParams = field()
     
 
 @dataclass
 class PermissionsGetPermissionResponse:
+    content_type: str = field()
+    status_code: int = field()
     api_models_permission: Optional[shared.APIModelsPermission] = field(default=None)
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    body: Optional[bytes] = field(default=None)
     

@@ -5,17 +5,17 @@ from sdk.models import shared
 
 @dataclass
 class FolderGetPathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class FolderGetRequest:
-    path_params: FolderGetPathParams = field(default=None)
+    path_params: FolderGetPathParams = field()
     
 
 @dataclass
 class FolderGetResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     folder_data: Optional[shared.FolderData] = field(default=None)
-    status_code: int = field(default=None)
     

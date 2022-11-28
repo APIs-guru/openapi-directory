@@ -1,52 +1,53 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetForecastTimeSeriesWrfPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=latitude" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=latitude" })
   latitude: number;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=longitude" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=longitude" })
   longitude: number;
 }
 
 
 export class GetForecastTimeSeriesWrfQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=days" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=days" })
   days?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=endtime" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=endtime" })
   endtime?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=entryid" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=entryid" })
   entryid?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=hours" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=hours" })
   hours?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=inittime" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=inittime" })
   inittime?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=wave" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=wave" })
   wave?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=weather" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=weather" })
   weather: string;
 }
 
 
 export class GetForecastTimeSeriesWrfRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetForecastTimeSeriesWrfPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetForecastTimeSeriesWrfQueryParams;
 }
 
 
 export class GetForecastTimeSeriesWrfResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

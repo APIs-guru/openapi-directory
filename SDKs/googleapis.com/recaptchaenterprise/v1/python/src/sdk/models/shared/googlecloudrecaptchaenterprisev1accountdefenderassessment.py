@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class GoogleCloudRecaptchaenterpriseV1AccountDefenderAssessmentLabelsEnum(str, Enum):
     ACCOUNT_DEFENDER_LABEL_UNSPECIFIED = "ACCOUNT_DEFENDER_LABEL_UNSPECIFIED"
@@ -13,5 +15,9 @@ class GoogleCloudRecaptchaenterpriseV1AccountDefenderAssessmentLabelsEnum(str, E
 @dataclass_json
 @dataclass
 class GoogleCloudRecaptchaenterpriseV1AccountDefenderAssessment:
-    labels: Optional[List[GoogleCloudRecaptchaenterpriseV1AccountDefenderAssessmentLabelsEnum]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'labels' }})
+    r"""GoogleCloudRecaptchaenterpriseV1AccountDefenderAssessment
+    Account defender risk assessment.
+    """
+    
+    labels: Optional[List[GoogleCloudRecaptchaenterpriseV1AccountDefenderAssessmentLabelsEnum]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('labels') }})
     

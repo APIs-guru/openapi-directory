@@ -8,6 +8,8 @@ const (
 	GoogleCloudRetailV2betaAttributesConfigAttributeConfigLevelEnumCatalogLevelAttributeConfig     GoogleCloudRetailV2betaAttributesConfigAttributeConfigLevelEnum = "CATALOG_LEVEL_ATTRIBUTE_CONFIG"
 )
 
+// GoogleCloudRetailV2betaAttributesConfig
+// Catalog level attribute config.
 type GoogleCloudRetailV2betaAttributesConfig struct {
 	AttributeConfigLevel *GoogleCloudRetailV2betaAttributesConfigAttributeConfigLevelEnum `json:"attributeConfigLevel,omitempty"`
 	CatalogAttributes    map[string]GoogleCloudRetailV2betaCatalogAttribute               `json:"catalogAttributes,omitempty"`

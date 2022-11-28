@@ -1,4 +1,4 @@
-from .__xgafv_enum import *
+from ._xgafv_enum import *
 from .alt_enum import *
 from .classitem import *
 from .createcustomclassrequest import *
@@ -20,6 +20,7 @@ from .recognizeresponse import *
 from .security import *
 from .speakerdiarizationconfig import *
 from .speechadaptation import *
+from .speechadaptationinfo import *
 from .speechcontext import *
 from .speechrecognitionalternative import *
 from .speechrecognitionresult import *

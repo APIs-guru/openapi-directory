@@ -1,17 +1,23 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import domainstatus_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class DomainSummary:
-    created_time: datetime = field(default=None, metadata={'dataclasses_json': { 'field_name': 'CreatedTime', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    display_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'DisplayName' }})
-    domain_name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'DomainName' }})
-    domain_status: domainstatus_enum.DomainStatusEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'DomainStatus' }})
+    r"""DomainSummary
+    The summary of the domain.
+    """
+    
+    created_time: datetime = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('CreatedTime'), 'encoder': utils.datetimeisoformat(False), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    domain_name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('DomainName') }})
+    domain_status: DomainStatusEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('DomainStatus') }})
+    display_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('DisplayName') }})
     

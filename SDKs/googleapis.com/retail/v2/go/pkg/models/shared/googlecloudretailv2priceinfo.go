@@ -1,5 +1,7 @@
 package shared
 
+// GoogleCloudRetailV2PriceInfo
+// The price information of a Product.
 type GoogleCloudRetailV2PriceInfo struct {
 	Cost               *float32                                `json:"cost,omitempty"`
 	CurrencyCode       *string                                 `json:"currencyCode,omitempty"`

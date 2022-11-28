@@ -1,12 +1,15 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 
 
 @dataclass
 class DeleteBotChannelAssociationPathParams:
-    alias_name: str = field(default=None, metadata={'path_param': { 'field_name': 'aliasName', 'style': 'simple', 'explode': False }})
-    bot_name: str = field(default=None, metadata={'path_param': { 'field_name': 'botName', 'style': 'simple', 'explode': False }})
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    alias_name: str = field(metadata={'path_param': { 'field_name': 'aliasName', 'style': 'simple', 'explode': False }})
+    bot_name: str = field(metadata={'path_param': { 'field_name': 'botName', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -22,17 +25,17 @@ class DeleteBotChannelAssociationHeaders:
 
 @dataclass
 class DeleteBotChannelAssociationRequest:
-    path_params: DeleteBotChannelAssociationPathParams = field(default=None)
-    headers: DeleteBotChannelAssociationHeaders = field(default=None)
+    headers: DeleteBotChannelAssociationHeaders = field()
+    path_params: DeleteBotChannelAssociationPathParams = field()
     
 
 @dataclass
 class DeleteBotChannelAssociationResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
     conflict_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     internal_failure_exception: Optional[Any] = field(default=None)
     limit_exceeded_exception: Optional[Any] = field(default=None)
     not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

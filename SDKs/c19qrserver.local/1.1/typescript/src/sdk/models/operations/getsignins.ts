@@ -1,35 +1,36 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetSigninsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=less_than" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=less_than" })
   lessThan?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=return_count" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=return_count" })
   returnCount?: number;
 }
 
 
 export class GetSigninsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetSigninsQueryParams;
 }
 
 
 export class GetSigninsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidToken?: shared.InvalidToken;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   keyFailure?: shared.KeyFailure;
 
-  @Metadata({ elemType: shared.Signin })
+  @SpeakeasyMetadata({ elemType: shared.Signin })
   signins?: shared.Signin[];
 }

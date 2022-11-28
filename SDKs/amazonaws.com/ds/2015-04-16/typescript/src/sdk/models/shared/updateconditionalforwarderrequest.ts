@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // UpdateConditionalForwarderRequest
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Updates a conditional forwarder.
 **/
 export class UpdateConditionalForwarderRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DirectoryId" })
+  @SpeakeasyMetadata({ data: "json, name=DirectoryId" })
   directoryId: string;
 
-  @Metadata({ data: "json, name=DnsIpAddrs" })
+  @SpeakeasyMetadata({ data: "json, name=DnsIpAddrs" })
   dnsIpAddrs: string[];
 
-  @Metadata({ data: "json, name=RemoteDomainName" })
+  @SpeakeasyMetadata({ data: "json, name=RemoteDomainName" })
   remoteDomainName: string;
 }

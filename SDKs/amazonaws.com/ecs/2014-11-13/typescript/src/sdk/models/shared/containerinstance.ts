@@ -1,12 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AgentUpdateStatusEnum } from "./agentupdatestatusenum";
 import { Attachment } from "./attachment";
 import { Attribute } from "./attribute";
 import { Resource } from "./resource";
-import { Resource } from "./resource";
 import { Tag } from "./tag";
 import { VersionInfo } from "./versioninfo";
+
 
 
 // ContainerInstance
@@ -14,54 +13,54 @@ import { VersionInfo } from "./versioninfo";
  * An EC2 instance that is running the Amazon ECS agent and has been registered with a cluster.
 **/
 export class ContainerInstance extends SpeakeasyBase {
-  @Metadata({ data: "json, name=agentConnected" })
+  @SpeakeasyMetadata({ data: "json, name=agentConnected" })
   agentConnected?: boolean;
 
-  @Metadata({ data: "json, name=agentUpdateStatus" })
+  @SpeakeasyMetadata({ data: "json, name=agentUpdateStatus" })
   agentUpdateStatus?: AgentUpdateStatusEnum;
 
-  @Metadata({ data: "json, name=attachments", elemType: shared.Attachment })
+  @SpeakeasyMetadata({ data: "json, name=attachments", elemType: Attachment })
   attachments?: Attachment[];
 
-  @Metadata({ data: "json, name=attributes", elemType: shared.Attribute })
+  @SpeakeasyMetadata({ data: "json, name=attributes", elemType: Attribute })
   attributes?: Attribute[];
 
-  @Metadata({ data: "json, name=capacityProviderName" })
+  @SpeakeasyMetadata({ data: "json, name=capacityProviderName" })
   capacityProviderName?: string;
 
-  @Metadata({ data: "json, name=containerInstanceArn" })
+  @SpeakeasyMetadata({ data: "json, name=containerInstanceArn" })
   containerInstanceArn?: string;
 
-  @Metadata({ data: "json, name=ec2InstanceId" })
+  @SpeakeasyMetadata({ data: "json, name=ec2InstanceId" })
   ec2InstanceId?: string;
 
-  @Metadata({ data: "json, name=pendingTasksCount" })
+  @SpeakeasyMetadata({ data: "json, name=pendingTasksCount" })
   pendingTasksCount?: number;
 
-  @Metadata({ data: "json, name=registeredAt" })
+  @SpeakeasyMetadata({ data: "json, name=registeredAt" })
   registeredAt?: Date;
 
-  @Metadata({ data: "json, name=registeredResources", elemType: shared.Resource })
+  @SpeakeasyMetadata({ data: "json, name=registeredResources", elemType: Resource })
   registeredResources?: Resource[];
 
-  @Metadata({ data: "json, name=remainingResources", elemType: shared.Resource })
+  @SpeakeasyMetadata({ data: "json, name=remainingResources", elemType: Resource })
   remainingResources?: Resource[];
 
-  @Metadata({ data: "json, name=runningTasksCount" })
+  @SpeakeasyMetadata({ data: "json, name=runningTasksCount" })
   runningTasksCount?: number;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: string;
 
-  @Metadata({ data: "json, name=statusReason" })
+  @SpeakeasyMetadata({ data: "json, name=statusReason" })
   statusReason?: string;
 
-  @Metadata({ data: "json, name=tags", elemType: shared.Tag })
+  @SpeakeasyMetadata({ data: "json, name=tags", elemType: Tag })
   tags?: Tag[];
 
-  @Metadata({ data: "json, name=version" })
+  @SpeakeasyMetadata({ data: "json, name=version" })
   version?: number;
 
-  @Metadata({ data: "json, name=versionInfo" })
+  @SpeakeasyMetadata({ data: "json, name=versionInfo" })
   versionInfo?: VersionInfo;
 }

@@ -1,12 +1,16 @@
 from dataclasses import dataclass, field
 from dataclasses_json import dataclass_json
-from . import body
-from . import content
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class Message:
-    body: body.Body = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Body' }})
-    subject: content.Content = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Subject' }})
+    r"""Message
+    Represents the email message that you're sending. The <code>Message</code> object consists of a subject line and a message body.
+    """
+    
+    body: Body = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Body') }})
+    subject: Content = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Subject') }})
     

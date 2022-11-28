@@ -1,44 +1,45 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetApiWrittenquestionsQuestionsDateUinPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=date" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=date" })
   date: Date;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=uin" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=uin" })
   uin: string;
 }
 
 
 export class GetApiWrittenquestionsQuestionsDateUinQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=expandMember" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=expandMember" })
   expandMember?: boolean;
 }
 
 
 export class GetApiWrittenquestionsQuestionsDateUinRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetApiWrittenquestionsQuestionsDateUinPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetApiWrittenquestionsQuestionsDateUinQueryParams;
 }
 
 
 export class GetApiWrittenquestionsQuestionsDateUinResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   problemDetails?: Map<string, Map<string, any>>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   questionsViewModelItem?: shared.QuestionsViewModelItem;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

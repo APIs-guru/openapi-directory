@@ -30,7 +30,7 @@ type AnalyticsadminPropertiesDataStreamsCreateSecurity struct {
 type AnalyticsadminPropertiesDataStreamsCreateRequest struct {
 	PathParams  AnalyticsadminPropertiesDataStreamsCreatePathParams
 	QueryParams AnalyticsadminPropertiesDataStreamsCreateQueryParams
-	Request     *shared.GoogleAnalyticsAdminV1alphaDataStream `request:"mediaType=application/json"`
+	Request     *shared.GoogleAnalyticsAdminV1alphaDataStreamInput `request:"mediaType=application/json"`
 	Security    AnalyticsadminPropertiesDataStreamsCreateSecurity
 }
 

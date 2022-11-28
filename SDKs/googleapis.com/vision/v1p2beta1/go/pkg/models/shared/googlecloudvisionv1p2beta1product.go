@@ -1,5 +1,7 @@
 package shared
 
+// GoogleCloudVisionV1p2beta1Product
+// A Product contains ReferenceImages.
 type GoogleCloudVisionV1p2beta1Product struct {
 	Description     *string                                     `json:"description,omitempty"`
 	DisplayName     *string                                     `json:"displayName,omitempty"`

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Category
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Represents the category hierarchy of a SKU.
 **/
 export class Category extends SpeakeasyBase {
-  @Metadata({ data: "json, name=resourceFamily" })
+  @SpeakeasyMetadata({ data: "json, name=resourceFamily" })
   resourceFamily?: string;
 
-  @Metadata({ data: "json, name=resourceGroup" })
+  @SpeakeasyMetadata({ data: "json, name=resourceGroup" })
   resourceGroup?: string;
 
-  @Metadata({ data: "json, name=serviceDisplayName" })
+  @SpeakeasyMetadata({ data: "json, name=serviceDisplayName" })
   serviceDisplayName?: string;
 
-  @Metadata({ data: "json, name=usageType" })
+  @SpeakeasyMetadata({ data: "json, name=usageType" })
   usageType?: string;
 }

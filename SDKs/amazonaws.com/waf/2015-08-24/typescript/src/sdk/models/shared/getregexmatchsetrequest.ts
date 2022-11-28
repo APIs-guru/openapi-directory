@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetRegexMatchSetRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=RegexMatchSetId" })
+  @SpeakeasyMetadata({ data: "json, name=RegexMatchSetId" })
   regexMatchSetId: string;
 }

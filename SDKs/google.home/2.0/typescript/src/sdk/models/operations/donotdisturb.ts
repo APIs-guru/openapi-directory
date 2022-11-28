@@ -1,26 +1,27 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class DoNotDisturbHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=Content-Type" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Content-Type" })
   contentType: string;
 }
 
 
 export class DoNotDisturbRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: DoNotDisturbHeaders;
 }
 
 
 export class DoNotDisturbResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getcurrentstate?: shared.Getcurrentstate;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

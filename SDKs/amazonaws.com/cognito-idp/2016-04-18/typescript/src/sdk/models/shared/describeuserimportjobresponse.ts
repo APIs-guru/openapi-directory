@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { UserImportJobType } from "./userimportjobtype";
+
 
 
 // DescribeUserImportJobResponse
@@ -7,6 +8,6 @@ import { UserImportJobType } from "./userimportjobtype";
  * Represents the response from the server to the request to describe the user import job.
 **/
 export class DescribeUserImportJobResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=UserImportJob" })
+  @SpeakeasyMetadata({ data: "json, name=UserImportJob" })
   userImportJob?: UserImportJobType;
 }

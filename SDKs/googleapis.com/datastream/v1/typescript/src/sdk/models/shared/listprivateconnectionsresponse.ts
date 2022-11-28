@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PrivateConnection } from "./privateconnection";
+
 
 
 // ListPrivateConnectionsResponse
@@ -8,12 +8,12 @@ import { PrivateConnection } from "./privateconnection";
  * Response containing a list of private connection configurations.
 **/
 export class ListPrivateConnectionsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 
-  @Metadata({ data: "json, name=privateConnections", elemType: shared.PrivateConnection })
+  @SpeakeasyMetadata({ data: "json, name=privateConnections", elemType: PrivateConnection })
   privateConnections?: PrivateConnection[];
 
-  @Metadata({ data: "json, name=unreachable" })
+  @SpeakeasyMetadata({ data: "json, name=unreachable" })
   unreachable?: string[];
 }

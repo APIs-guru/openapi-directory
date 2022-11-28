@@ -5,17 +5,17 @@ from sdk.models import shared
 
 @dataclass
 class GetV1SalesRepsIDPathParams:
-    id: int = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: int = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetV1SalesRepsIDRequest:
-    path_params: GetV1SalesRepsIDPathParams = field(default=None)
+    path_params: GetV1SalesRepsIDPathParams = field()
     
 
 @dataclass
 class GetV1SalesRepsIDResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     sale_reps_dto: Optional[shared.SaleRepsDto] = field(default=None)
-    status_code: int = field(default=None)
     

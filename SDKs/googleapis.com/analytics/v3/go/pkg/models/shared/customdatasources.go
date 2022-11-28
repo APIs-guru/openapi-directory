@@ -1,5 +1,7 @@
 package shared
 
+// CustomDataSources
+// Lists Analytics custom data sources to which the user has access. Each resource in the collection corresponds to a single Analytics custom data source.
 type CustomDataSources struct {
 	Items        []CustomDataSource `json:"items,omitempty"`
 	ItemsPerPage *int32             `json:"itemsPerPage,omitempty"`

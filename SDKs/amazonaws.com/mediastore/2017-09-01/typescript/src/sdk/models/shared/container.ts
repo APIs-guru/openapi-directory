@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ContainerStatusEnum } from "./containerstatusenum";
+
 
 
 // Container
@@ -7,21 +8,21 @@ import { ContainerStatusEnum } from "./containerstatusenum";
  * This section describes operations that you can perform on an AWS Elemental MediaStore container.
 **/
 export class Container extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ARN" })
+  @SpeakeasyMetadata({ data: "json, name=ARN" })
   arn?: string;
 
-  @Metadata({ data: "json, name=AccessLoggingEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=AccessLoggingEnabled" })
   accessLoggingEnabled?: boolean;
 
-  @Metadata({ data: "json, name=CreationTime" })
+  @SpeakeasyMetadata({ data: "json, name=CreationTime" })
   creationTime?: Date;
 
-  @Metadata({ data: "json, name=Endpoint" })
+  @SpeakeasyMetadata({ data: "json, name=Endpoint" })
   endpoint?: string;
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name?: string;
 
-  @Metadata({ data: "json, name=Status" })
+  @SpeakeasyMetadata({ data: "json, name=Status" })
   status?: ContainerStatusEnum;
 }

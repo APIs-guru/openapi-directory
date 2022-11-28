@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { GoogleFirebaseFcmDataV1beta1AndroidDeliveryData } from "./googlefirebasefcmdatav1beta1androiddeliverydata";
 // GoogleFirebaseFcmDataV1beta1ListAndroidDeliveryDataResponse
 /**
  * Response message for ListAndroidDeliveryData.
@@ -34,11 +34,11 @@ var GoogleFirebaseFcmDataV1beta1ListAndroidDeliveryDataResponse = /** @class */ 
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=androidDeliveryData", elemType: shared.GoogleFirebaseFcmDataV1beta1AndroidDeliveryData }),
+        SpeakeasyMetadata({ data: "json, name=androidDeliveryData", elemType: GoogleFirebaseFcmDataV1beta1AndroidDeliveryData }),
         __metadata("design:type", Array)
     ], GoogleFirebaseFcmDataV1beta1ListAndroidDeliveryDataResponse.prototype, "androidDeliveryData", void 0);
     __decorate([
-        Metadata({ data: "json, name=nextPageToken" }),
+        SpeakeasyMetadata({ data: "json, name=nextPageToken" }),
         __metadata("design:type", String)
     ], GoogleFirebaseFcmDataV1beta1ListAndroidDeliveryDataResponse.prototype, "nextPageToken", void 0);
     return GoogleFirebaseFcmDataV1beta1ListAndroidDeliveryDataResponse;

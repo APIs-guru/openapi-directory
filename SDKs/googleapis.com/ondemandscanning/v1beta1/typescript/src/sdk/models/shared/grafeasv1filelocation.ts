@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GrafeasV1FileLocation
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Indicates the location at which a package was found.
 **/
 export class GrafeasV1FileLocation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=filePath" })
+  @SpeakeasyMetadata({ data: "json, name=filePath" })
   filePath?: string;
 }

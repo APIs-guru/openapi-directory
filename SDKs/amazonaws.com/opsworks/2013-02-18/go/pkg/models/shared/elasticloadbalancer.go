@@ -1,5 +1,7 @@
 package shared
 
+// ElasticLoadBalancer
+// Describes an Elastic Load Balancing instance.
 type ElasticLoadBalancer struct {
 	AvailabilityZones       []string `json:"AvailabilityZones,omitempty"`
 	DNSName                 *string  `json:"DnsName,omitempty"`

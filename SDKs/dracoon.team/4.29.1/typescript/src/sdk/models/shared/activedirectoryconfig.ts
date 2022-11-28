@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ActiveDirectoryConfig
@@ -6,45 +7,45 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Active Directory configuration
 **/
 export class ActiveDirectoryConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=adExportGroup" })
+  @SpeakeasyMetadata({ data: "json, name=adExportGroup" })
   adExportGroup: string;
 
-  @Metadata({ data: "json, name=alias" })
+  @SpeakeasyMetadata({ data: "json, name=alias" })
   alias: string;
 
-  @Metadata({ data: "json, name=createHomeFolder" })
+  @SpeakeasyMetadata({ data: "json, name=createHomeFolder" })
   createHomeFolder?: boolean;
 
-  @Metadata({ data: "json, name=homeFolderParent" })
+  @SpeakeasyMetadata({ data: "json, name=homeFolderParent" })
   homeFolderParent?: number;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: number;
 
-  @Metadata({ data: "json, name=ldapUsersDomain" })
+  @SpeakeasyMetadata({ data: "json, name=ldapUsersDomain" })
   ldapUsersDomain: string;
 
-  @Metadata({ data: "json, name=sdsImportGroup" })
+  @SpeakeasyMetadata({ data: "json, name=sdsImportGroup" })
   sdsImportGroup?: number;
 
-  @Metadata({ data: "json, name=serverAdminName" })
+  @SpeakeasyMetadata({ data: "json, name=serverAdminName" })
   serverAdminName: string;
 
-  @Metadata({ data: "json, name=serverIp" })
+  @SpeakeasyMetadata({ data: "json, name=serverIp" })
   serverIp: string;
 
-  @Metadata({ data: "json, name=serverPort" })
+  @SpeakeasyMetadata({ data: "json, name=serverPort" })
   serverPort: number;
 
-  @Metadata({ data: "json, name=sslFingerPrint" })
+  @SpeakeasyMetadata({ data: "json, name=sslFingerPrint" })
   sslFingerPrint?: string;
 
-  @Metadata({ data: "json, name=useLdaps" })
+  @SpeakeasyMetadata({ data: "json, name=useLdaps" })
   useLdaps: boolean;
 
-  @Metadata({ data: "json, name=userFilter" })
+  @SpeakeasyMetadata({ data: "json, name=userFilter" })
   userFilter: string;
 
-  @Metadata({ data: "json, name=userImport" })
+  @SpeakeasyMetadata({ data: "json, name=userImport" })
   userImport: boolean;
 }

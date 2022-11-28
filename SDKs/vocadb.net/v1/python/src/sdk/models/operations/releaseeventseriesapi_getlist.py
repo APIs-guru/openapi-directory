@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 class ReleaseEventSeriesAPIGetListFieldsEnum(str, Enum):
@@ -38,13 +39,13 @@ class ReleaseEventSeriesAPIGetListQueryParams:
 
 @dataclass
 class ReleaseEventSeriesAPIGetListRequest:
-    query_params: ReleaseEventSeriesAPIGetListQueryParams = field(default=None)
+    query_params: ReleaseEventSeriesAPIGetListQueryParams = field()
     
 
 @dataclass
 class ReleaseEventSeriesAPIGetListResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     partial_find_result_release_event_series_for_api_contract_: Optional[shared.PartialFindResultReleaseEventSeriesForAPIContract] = field(default=None)
-    status_code: int = field(default=None)
     

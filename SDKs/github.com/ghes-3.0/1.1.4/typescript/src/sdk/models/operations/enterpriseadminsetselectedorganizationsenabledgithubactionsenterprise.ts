@@ -1,31 +1,32 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class EnterpriseAdminSetSelectedOrganizationsEnabledGithubActionsEnterprisePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=enterprise" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=enterprise" })
   enterprise: string;
 }
 
 
 export class EnterpriseAdminSetSelectedOrganizationsEnabledGithubActionsEnterpriseRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=selected_organization_ids" })
+  @SpeakeasyMetadata({ data: "json, name=selected_organization_ids" })
   selectedOrganizationIds: number[];
 }
 
 
 export class EnterpriseAdminSetSelectedOrganizationsEnabledGithubActionsEnterpriseRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: EnterpriseAdminSetSelectedOrganizationsEnabledGithubActionsEnterprisePathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request?: EnterpriseAdminSetSelectedOrganizationsEnabledGithubActionsEnterpriseRequestBody;
 }
 
 
 export class EnterpriseAdminSetSelectedOrganizationsEnabledGithubActionsEnterpriseResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

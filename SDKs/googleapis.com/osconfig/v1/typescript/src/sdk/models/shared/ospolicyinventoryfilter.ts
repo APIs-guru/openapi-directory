@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // OsPolicyInventoryFilter
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Filtering criteria to select VMs based on inventory details.
 **/
 export class OsPolicyInventoryFilter extends SpeakeasyBase {
-  @Metadata({ data: "json, name=osShortName" })
+  @SpeakeasyMetadata({ data: "json, name=osShortName" })
   osShortName?: string;
 
-  @Metadata({ data: "json, name=osVersion" })
+  @SpeakeasyMetadata({ data: "json, name=osVersion" })
   osVersion?: string;
 }

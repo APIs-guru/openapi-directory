@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ApiCoreDtoDatapointsUniqueDestinationItem extends SpeakeasyBase {
-  @Metadata({ data: "json, name=firstDestinationUrl" })
+  @SpeakeasyMetadata({ data: "json, name=firstDestinationUrl" })
   firstDestinationUrl?: string;
 }

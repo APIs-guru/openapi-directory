@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { RecordError } from "./recorderror";
 import { RecordTag } from "./recordtag";
 import { RecordStatusEnum } from "./recordstatusenum";

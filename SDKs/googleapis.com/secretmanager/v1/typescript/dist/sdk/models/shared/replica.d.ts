@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { CustomerManagedEncryption } from "./customermanagedencryption";
 /**
  * Represents a Replica for this Secret.

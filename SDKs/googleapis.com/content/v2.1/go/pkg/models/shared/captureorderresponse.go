@@ -8,6 +8,8 @@ const (
 	CaptureOrderResponseExecutionStatusEnumDuplicate                  CaptureOrderResponseExecutionStatusEnum = "DUPLICATE"
 )
 
+// CaptureOrderResponse
+// Response message for the CaptureOrder method.
 type CaptureOrderResponse struct {
 	ExecutionStatus *CaptureOrderResponseExecutionStatusEnum `json:"executionStatus,omitempty"`
 }

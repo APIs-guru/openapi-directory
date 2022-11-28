@@ -31,7 +31,7 @@ type ApigeeOrganizationsSecurityProfilesEnvironmentsCreateSecurity struct {
 type ApigeeOrganizationsSecurityProfilesEnvironmentsCreateRequest struct {
 	PathParams  ApigeeOrganizationsSecurityProfilesEnvironmentsCreatePathParams
 	QueryParams ApigeeOrganizationsSecurityProfilesEnvironmentsCreateQueryParams
-	Request     *shared.GoogleCloudApigeeV1SecurityProfileEnvironmentAssociation `request:"mediaType=application/json"`
+	Request     *shared.GoogleCloudApigeeV1SecurityProfileEnvironmentAssociationInput `request:"mediaType=application/json"`
 	Security    ApigeeOrganizationsSecurityProfilesEnvironmentsCreateSecurity
 }
 

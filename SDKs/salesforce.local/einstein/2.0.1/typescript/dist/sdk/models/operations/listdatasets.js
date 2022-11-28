@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var ListDatasetsQueryParams = /** @class */ (function (_super) {
     __extends(ListDatasetsQueryParams, _super);
@@ -30,15 +30,15 @@ var ListDatasetsQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=count" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=count" }),
         __metadata("design:type", String)
     ], ListDatasetsQueryParams.prototype, "count", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=global" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=global" }),
         __metadata("design:type", Boolean)
     ], ListDatasetsQueryParams.prototype, "global", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=offset" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=offset" }),
         __metadata("design:type", String)
     ], ListDatasetsQueryParams.prototype, "offset", void 0);
     return ListDatasetsQueryParams;
@@ -50,7 +50,7 @@ var ListDatasetsSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=http;subtype=bearer" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" }),
         __metadata("design:type", shared.SchemeBearerToken)
     ], ListDatasetsSecurity.prototype, "bearerToken", void 0);
     return ListDatasetsSecurity;
@@ -62,11 +62,11 @@ var ListDatasetsRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ListDatasetsQueryParams)
     ], ListDatasetsRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ListDatasetsSecurity)
     ], ListDatasetsRequest.prototype, "security", void 0);
     return ListDatasetsRequest;
@@ -78,15 +78,15 @@ var ListDatasetsResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], ListDatasetsResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.DatasetList)
     ], ListDatasetsResponse.prototype, "datasetList", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], ListDatasetsResponse.prototype, "statusCode", void 0);
     return ListDatasetsResponse;

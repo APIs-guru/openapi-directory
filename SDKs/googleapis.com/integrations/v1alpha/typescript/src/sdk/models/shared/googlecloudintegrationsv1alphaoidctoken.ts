@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudIntegrationsV1alphaOidcToken
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * OIDC Token
 **/
 export class GoogleCloudIntegrationsV1alphaOidcToken extends SpeakeasyBase {
-  @Metadata({ data: "json, name=audience" })
+  @SpeakeasyMetadata({ data: "json, name=audience" })
   audience?: string;
 
-  @Metadata({ data: "json, name=serviceAccountEmail" })
+  @SpeakeasyMetadata({ data: "json, name=serviceAccountEmail" })
   serviceAccountEmail?: string;
 
-  @Metadata({ data: "json, name=token" })
+  @SpeakeasyMetadata({ data: "json, name=token" })
   token?: string;
 
-  @Metadata({ data: "json, name=tokenExpireTime" })
+  @SpeakeasyMetadata({ data: "json, name=tokenExpireTime" })
   tokenExpireTime?: string;
 }

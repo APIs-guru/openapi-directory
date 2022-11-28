@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AwsSecretsManagerSecretRotationRules
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Defines the rotation schedule for the secret.
 **/
 export class AwsSecretsManagerSecretRotationRules extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AutomaticallyAfterDays" })
+  @SpeakeasyMetadata({ data: "json, name=AutomaticallyAfterDays" })
   automaticallyAfterDays?: number;
 }

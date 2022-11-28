@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class IncomeVerificationDocumentsDownloadRequest extends SpeakeasyBase {
     request: shared.IncomeVerificationDocumentsDownloadRequest;

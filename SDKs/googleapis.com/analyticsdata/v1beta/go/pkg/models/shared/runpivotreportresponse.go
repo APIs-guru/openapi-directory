@@ -1,5 +1,7 @@
 package shared
 
+// RunPivotReportResponse
+// The response pivot report table corresponding to a pivot request.
 type RunPivotReportResponse struct {
 	Aggregates       []Row             `json:"aggregates,omitempty"`
 	DimensionHeaders []DimensionHeader `json:"dimensionHeaders,omitempty"`

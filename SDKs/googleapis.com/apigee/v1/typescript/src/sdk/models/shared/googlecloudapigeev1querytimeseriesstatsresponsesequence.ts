@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudApigeeV1QueryTimeSeriesStatsResponseSequence
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A sequence of time series.
 **/
 export class GoogleCloudApigeeV1QueryTimeSeriesStatsResponseSequence extends SpeakeasyBase {
-  @Metadata({ data: "json, name=dimensions" })
+  @SpeakeasyMetadata({ data: "json, name=dimensions" })
   dimensions?: Map<string, string>;
 
-  @Metadata({ data: "json, name=points" })
+  @SpeakeasyMetadata({ data: "json, name=points" })
   points?: any[][];
 }

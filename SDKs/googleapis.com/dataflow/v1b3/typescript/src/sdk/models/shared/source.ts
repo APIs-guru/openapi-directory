@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SourceMetadata } from "./sourcemetadata";
+
 
 
 // Source
@@ -7,18 +8,18 @@ import { SourceMetadata } from "./sourcemetadata";
  * A source that records can be read and decoded from.
 **/
 export class Source extends SpeakeasyBase {
-  @Metadata({ data: "json, name=baseSpecs" })
+  @SpeakeasyMetadata({ data: "json, name=baseSpecs" })
   baseSpecs?: Map<string, any>[];
 
-  @Metadata({ data: "json, name=codec" })
+  @SpeakeasyMetadata({ data: "json, name=codec" })
   codec?: Map<string, any>;
 
-  @Metadata({ data: "json, name=doesNotNeedSplitting" })
+  @SpeakeasyMetadata({ data: "json, name=doesNotNeedSplitting" })
   doesNotNeedSplitting?: boolean;
 
-  @Metadata({ data: "json, name=metadata" })
+  @SpeakeasyMetadata({ data: "json, name=metadata" })
   metadata?: SourceMetadata;
 
-  @Metadata({ data: "json, name=spec" })
+  @SpeakeasyMetadata({ data: "json, name=spec" })
   spec?: Map<string, any>;
 }

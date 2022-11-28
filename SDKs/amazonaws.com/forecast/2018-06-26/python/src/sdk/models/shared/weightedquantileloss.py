@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass_json
 @dataclass
 class WeightedQuantileLoss:
-    loss_value: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'LossValue' }})
-    quantile: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Quantile' }})
+    r"""WeightedQuantileLoss
+    The weighted loss value for a quantile. This object is part of the <a>Metrics</a> object.
+    """
+    
+    loss_value: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('LossValue') }})
+    quantile: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Quantile') }})
     

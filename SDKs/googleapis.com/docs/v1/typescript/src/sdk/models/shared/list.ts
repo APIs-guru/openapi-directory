@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ListProperties } from "./listproperties";
 import { SuggestedListProperties } from "./suggestedlistproperties";
+
 
 
 // List
@@ -9,15 +9,15 @@ import { SuggestedListProperties } from "./suggestedlistproperties";
  * A List represents the list attributes for a group of paragraphs that all belong to the same list. A paragraph that's part of a list has a reference to the list's ID in its bullet.
 **/
 export class List extends SpeakeasyBase {
-  @Metadata({ data: "json, name=listProperties" })
+  @SpeakeasyMetadata({ data: "json, name=listProperties" })
   listProperties?: ListProperties;
 
-  @Metadata({ data: "json, name=suggestedDeletionIds" })
+  @SpeakeasyMetadata({ data: "json, name=suggestedDeletionIds" })
   suggestedDeletionIds?: string[];
 
-  @Metadata({ data: "json, name=suggestedInsertionId" })
+  @SpeakeasyMetadata({ data: "json, name=suggestedInsertionId" })
   suggestedInsertionId?: string;
 
-  @Metadata({ data: "json, name=suggestedListPropertiesChanges", elemType: shared.SuggestedListProperties })
+  @SpeakeasyMetadata({ data: "json, name=suggestedListPropertiesChanges", elemType: SuggestedListProperties })
   suggestedListPropertiesChanges?: Map<string, SuggestedListProperties>;
 }

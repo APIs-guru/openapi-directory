@@ -1,61 +1,62 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class UpdateDeviceCellularGatewayLanPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=serial" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=serial" })
   serial: string;
 }
 
 
 export class UpdateDeviceCellularGatewayLanRequestBodyFixedIpAssignments extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ip" })
+  @SpeakeasyMetadata({ data: "json, name=ip" })
   ip: string;
 
-  @Metadata({ data: "json, name=mac" })
+  @SpeakeasyMetadata({ data: "json, name=mac" })
   mac: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 }
 
 
 export class UpdateDeviceCellularGatewayLanRequestBodyReservedIpRanges extends SpeakeasyBase {
-  @Metadata({ data: "json, name=comment" })
+  @SpeakeasyMetadata({ data: "json, name=comment" })
   comment: string;
 
-  @Metadata({ data: "json, name=end" })
+  @SpeakeasyMetadata({ data: "json, name=end" })
   end: string;
 
-  @Metadata({ data: "json, name=start" })
+  @SpeakeasyMetadata({ data: "json, name=start" })
   start: string;
 }
 
 
 export class UpdateDeviceCellularGatewayLanRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=fixedIpAssignments", elemType: operations.UpdateDeviceCellularGatewayLanRequestBodyFixedIpAssignments })
+  @SpeakeasyMetadata({ data: "json, name=fixedIpAssignments", elemType: UpdateDeviceCellularGatewayLanRequestBodyFixedIpAssignments })
   fixedIpAssignments?: UpdateDeviceCellularGatewayLanRequestBodyFixedIpAssignments[];
 
-  @Metadata({ data: "json, name=reservedIpRanges", elemType: operations.UpdateDeviceCellularGatewayLanRequestBodyReservedIpRanges })
+  @SpeakeasyMetadata({ data: "json, name=reservedIpRanges", elemType: UpdateDeviceCellularGatewayLanRequestBodyReservedIpRanges })
   reservedIpRanges?: UpdateDeviceCellularGatewayLanRequestBodyReservedIpRanges[];
 }
 
 
 export class UpdateDeviceCellularGatewayLanRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: UpdateDeviceCellularGatewayLanPathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request?: UpdateDeviceCellularGatewayLanRequestBody;
 }
 
 
 export class UpdateDeviceCellularGatewayLanResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   updateDeviceCellularGatewayLan200ApplicationJsonObject?: Map<string, any>;
 }

@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CompositeFilter } from "./compositefilter";
 import { PropertyFilter } from "./propertyfilter";
+
 
 
 // Filter
@@ -8,9 +9,9 @@ import { PropertyFilter } from "./propertyfilter";
  * A holder for any type of filter.
 **/
 export class Filter extends SpeakeasyBase {
-  @Metadata({ data: "json, name=compositeFilter" })
+  @SpeakeasyMetadata({ data: "json, name=compositeFilter" })
   compositeFilter?: CompositeFilter;
 
-  @Metadata({ data: "json, name=propertyFilter" })
+  @SpeakeasyMetadata({ data: "json, name=propertyFilter" })
   propertyFilter?: PropertyFilter;
 }

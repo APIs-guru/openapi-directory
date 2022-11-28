@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ChildTypeEnum } from "./childtypeenum";
+
 
 
 // Child
@@ -7,9 +8,9 @@ import { ChildTypeEnum } from "./childtypeenum";
  * Contains a list of child entities, either OUs or accounts.
 **/
 export class Child extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Id" })
+  @SpeakeasyMetadata({ data: "json, name=Id" })
   id?: string;
 
-  @Metadata({ data: "json, name=Type" })
+  @SpeakeasyMetadata({ data: "json, name=Type" })
   type?: ChildTypeEnum;
 }

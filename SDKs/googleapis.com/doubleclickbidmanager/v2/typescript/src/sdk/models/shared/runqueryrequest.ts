@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DataRange } from "./datarange";
+
 
 
 // RunQueryRequest
@@ -7,6 +8,6 @@ import { DataRange } from "./datarange";
  * Request to run a stored query to generate a report.
 **/
 export class RunQueryRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=dataRange" })
+  @SpeakeasyMetadata({ data: "json, name=dataRange" })
   dataRange?: DataRange;
 }

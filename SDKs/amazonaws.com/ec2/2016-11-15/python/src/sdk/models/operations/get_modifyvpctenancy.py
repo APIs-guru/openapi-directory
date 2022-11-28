@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetModifyVpcTenancyActionEnum(str, Enum):
     MODIFY_VPC_TENANCY = "ModifyVpcTenancy"
@@ -13,11 +17,11 @@ class GetModifyVpcTenancyVersionEnum(str, Enum):
 
 @dataclass
 class GetModifyVpcTenancyQueryParams:
-    action: GetModifyVpcTenancyActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetModifyVpcTenancyActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    instance_tenancy: GetModifyVpcTenancyInstanceTenancyEnum = field(metadata={'query_param': { 'field_name': 'InstanceTenancy', 'style': 'form', 'explode': True }})
+    version: GetModifyVpcTenancyVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    vpc_id: str = field(metadata={'query_param': { 'field_name': 'VpcId', 'style': 'form', 'explode': True }})
     dry_run: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'DryRun', 'style': 'form', 'explode': True }})
-    instance_tenancy: GetModifyVpcTenancyInstanceTenancyEnum = field(default=None, metadata={'query_param': { 'field_name': 'InstanceTenancy', 'style': 'form', 'explode': True }})
-    version: GetModifyVpcTenancyVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
-    vpc_id: str = field(default=None, metadata={'query_param': { 'field_name': 'VpcId', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -33,13 +37,13 @@ class GetModifyVpcTenancyHeaders:
 
 @dataclass
 class GetModifyVpcTenancyRequest:
-    query_params: GetModifyVpcTenancyQueryParams = field(default=None)
-    headers: GetModifyVpcTenancyHeaders = field(default=None)
+    headers: GetModifyVpcTenancyHeaders = field()
+    query_params: GetModifyVpcTenancyQueryParams = field()
     
 
 @dataclass
 class GetModifyVpcTenancyResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

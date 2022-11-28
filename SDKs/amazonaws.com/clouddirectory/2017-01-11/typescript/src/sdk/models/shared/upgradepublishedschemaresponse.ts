@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class UpgradePublishedSchemaResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=UpgradedSchemaArn" })
+  @SpeakeasyMetadata({ data: "json, name=UpgradedSchemaArn" })
   upgradedSchemaArn?: string;
 }

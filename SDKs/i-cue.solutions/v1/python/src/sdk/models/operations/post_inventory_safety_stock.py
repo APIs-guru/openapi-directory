@@ -9,11 +9,11 @@ class PostInventorySafetyStockHeaders:
 
 @dataclass
 class PostInventorySafetyStockRequest:
-    headers: PostInventorySafetyStockHeaders = field(default=None)
+    headers: PostInventorySafetyStockHeaders = field()
     
 
 @dataclass
 class PostInventorySafetyStockResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

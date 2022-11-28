@@ -1,47 +1,48 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class RemoveChannelModeratorsPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=channel_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=channel_id" })
   channelId: number;
 }
 
 
 export class RemoveChannelModeratorsRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=user_uri" })
+  @SpeakeasyMetadata({ data: "json, name=user_uri" })
   userUri: string;
 }
 
 
 export class RemoveChannelModeratorsSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   oauth2: shared.SchemeOauth2;
 }
 
 
 export class RemoveChannelModeratorsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: RemoveChannelModeratorsPathParams;
 
-  @Metadata({ data: "request, media_type=application/vnd.vimeo.user+json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/vnd.vimeo.user+json" })
   request: RemoveChannelModeratorsRequestBody;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: RemoveChannelModeratorsSecurity;
 }
 
 
 export class RemoveChannelModeratorsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   legacyError?: shared.LegacyError;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   user?: shared.User;
 }

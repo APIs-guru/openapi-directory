@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// Tunnel
+// A connection between a source computer and a destination device.
 type Tunnel struct {
 	CreatedAt                  *time.Time         `json:"createdAt,omitempty"`
 	Description                *string            `json:"description,omitempty"`

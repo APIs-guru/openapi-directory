@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PutAssetPropertyValueEntry } from "./putassetpropertyvalueentry";
+
 
 
 // IotSiteWiseAction
@@ -8,9 +8,9 @@ import { PutAssetPropertyValueEntry } from "./putassetpropertyvalueentry";
  * Describes an action to send data from an MQTT message that triggered the rule to IoT SiteWise asset properties.
 **/
 export class IotSiteWiseAction extends SpeakeasyBase {
-  @Metadata({ data: "json, name=putAssetPropertyValueEntries", elemType: shared.PutAssetPropertyValueEntry })
+  @SpeakeasyMetadata({ data: "json, name=putAssetPropertyValueEntries", elemType: PutAssetPropertyValueEntry })
   putAssetPropertyValueEntries: PutAssetPropertyValueEntry[];
 
-  @Metadata({ data: "json, name=roleArn" })
+  @SpeakeasyMetadata({ data: "json, name=roleArn" })
   roleArn: string;
 }

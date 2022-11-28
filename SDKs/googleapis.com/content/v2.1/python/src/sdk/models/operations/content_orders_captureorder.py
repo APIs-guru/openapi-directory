@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class ContentOrdersCaptureOrderPathParams:
-    merchant_id: str = field(default=None, metadata={'path_param': { 'field_name': 'merchantId', 'style': 'simple', 'explode': False }})
-    order_id: str = field(default=None, metadata={'path_param': { 'field_name': 'orderId', 'style': 'simple', 'explode': False }})
+    merchant_id: str = field(metadata={'path_param': { 'field_name': 'merchantId', 'style': 'simple', 'explode': False }})
+    order_id: str = field(metadata={'path_param': { 'field_name': 'orderId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,21 +27,21 @@ class ContentOrdersCaptureOrderQueryParams:
 
 @dataclass
 class ContentOrdersCaptureOrderSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class ContentOrdersCaptureOrderRequest:
-    path_params: ContentOrdersCaptureOrderPathParams = field(default=None)
-    query_params: ContentOrdersCaptureOrderQueryParams = field(default=None)
+    path_params: ContentOrdersCaptureOrderPathParams = field()
+    query_params: ContentOrdersCaptureOrderQueryParams = field()
+    security: ContentOrdersCaptureOrderSecurity = field()
     request: Optional[dict[str, Any]] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: ContentOrdersCaptureOrderSecurity = field(default=None)
     
 
 @dataclass
 class ContentOrdersCaptureOrderResponse:
+    content_type: str = field()
+    status_code: int = field()
     capture_order_response: Optional[shared.CaptureOrderResponse] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

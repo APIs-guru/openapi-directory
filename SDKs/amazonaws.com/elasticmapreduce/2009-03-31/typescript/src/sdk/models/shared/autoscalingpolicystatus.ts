@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AutoScalingPolicyStateEnum } from "./autoscalingpolicystateenum";
 import { AutoScalingPolicyStateChangeReason } from "./autoscalingpolicystatechangereason";
+
 
 
 // AutoScalingPolicyStatus
@@ -8,9 +9,9 @@ import { AutoScalingPolicyStateChangeReason } from "./autoscalingpolicystatechan
  * The status of an automatic scaling policy. 
 **/
 export class AutoScalingPolicyStatus extends SpeakeasyBase {
-  @Metadata({ data: "json, name=State" })
+  @SpeakeasyMetadata({ data: "json, name=State" })
   state?: AutoScalingPolicyStateEnum;
 
-  @Metadata({ data: "json, name=StateChangeReason" })
+  @SpeakeasyMetadata({ data: "json, name=StateChangeReason" })
   stateChangeReason?: AutoScalingPolicyStateChangeReason;
 }

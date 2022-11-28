@@ -10,13 +10,13 @@ class GetHyperparameterHeaders:
 
 @dataclass
 class GetHyperparameterRequest:
-    headers: GetHyperparameterHeaders = field(default=None)
+    headers: GetHyperparameterHeaders = field()
     
 
 @dataclass
 class GetHyperparameterResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     hyperparameter_model: Optional[shared.HyperparameterModel] = field(default=None)
-    status_code: int = field(default=None)
     

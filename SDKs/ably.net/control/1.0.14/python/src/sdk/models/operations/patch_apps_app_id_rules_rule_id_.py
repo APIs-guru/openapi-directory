@@ -5,26 +5,26 @@ from sdk.models import shared
 
 @dataclass
 class PatchAppsAppIDRulesRuleIDPathParams:
-    app_id: str = field(default=None, metadata={'path_param': { 'field_name': 'app_id', 'style': 'simple', 'explode': False }})
-    rule_id: str = field(default=None, metadata={'path_param': { 'field_name': 'rule_id', 'style': 'simple', 'explode': False }})
+    app_id: str = field(metadata={'path_param': { 'field_name': 'app_id', 'style': 'simple', 'explode': False }})
+    rule_id: str = field(metadata={'path_param': { 'field_name': 'rule_id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class PatchAppsAppIDRulesRuleIDSecurity:
-    bearer_auth: shared.SchemeBearerAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer' }})
+    bearer_auth: shared.SchemeBearerAuth = field(metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer' }})
     
 
 @dataclass
 class PatchAppsAppIDRulesRuleIDRequest:
-    path_params: PatchAppsAppIDRulesRuleIDPathParams = field(default=None)
+    path_params: PatchAppsAppIDRulesRuleIDPathParams = field()
+    security: PatchAppsAppIDRulesRuleIDSecurity = field()
     request: Optional[Any] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: PatchAppsAppIDRulesRuleIDSecurity = field(default=None)
     
 
 @dataclass
 class PatchAppsAppIDRulesRuleIDResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error: Optional[shared.Error] = field(default=None)
     rule_response: Optional[Any] = field(default=None)
     

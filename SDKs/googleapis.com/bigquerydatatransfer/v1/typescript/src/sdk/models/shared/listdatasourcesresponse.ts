@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DataSource } from "./datasource";
+
 
 
 // ListDataSourcesResponse
@@ -8,9 +8,9 @@ import { DataSource } from "./datasource";
  * Returns list of supported data sources and their metadata.
 **/
 export class ListDataSourcesResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=dataSources", elemType: shared.DataSource })
+  @SpeakeasyMetadata({ data: "json, name=dataSources", elemType: DataSource })
   dataSources?: DataSource[];
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 }

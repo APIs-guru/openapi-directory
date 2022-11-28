@@ -5,17 +5,17 @@ from sdk.models import shared
 
 @dataclass
 class PreviewsReadPathParams:
-    file_id: str = field(default=None, metadata={'path_param': { 'field_name': 'file_id', 'style': 'simple', 'explode': False }})
+    file_id: str = field(metadata={'path_param': { 'field_name': 'file_id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class PreviewsReadRequest:
-    path_params: PreviewsReadPathParams = field(default=None)
+    path_params: PreviewsReadPathParams = field()
     
 
 @dataclass
 class PreviewsReadResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     preview_response: Optional[shared.PreviewResponse] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,5 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DestinationConfig } from "./destinationconfig";
 import { FunctionResponseTypeEnum } from "./functionresponsetypeenum";
 import { SelfManagedEventSource } from "./selfmanagedeventsource";
@@ -7,74 +6,75 @@ import { SourceAccessConfiguration } from "./sourceaccessconfiguration";
 import { EventSourcePositionEnum } from "./eventsourcepositionenum";
 
 
+
 // EventSourceMappingConfiguration
 /** 
  * A mapping between an Amazon Web Services resource and a Lambda function. For details, see <a>CreateEventSourceMapping</a>.
 **/
 export class EventSourceMappingConfiguration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=BatchSize" })
+  @SpeakeasyMetadata({ data: "json, name=BatchSize" })
   batchSize?: number;
 
-  @Metadata({ data: "json, name=BisectBatchOnFunctionError" })
+  @SpeakeasyMetadata({ data: "json, name=BisectBatchOnFunctionError" })
   bisectBatchOnFunctionError?: boolean;
 
-  @Metadata({ data: "json, name=DestinationConfig" })
+  @SpeakeasyMetadata({ data: "json, name=DestinationConfig" })
   destinationConfig?: DestinationConfig;
 
-  @Metadata({ data: "json, name=EventSourceArn" })
+  @SpeakeasyMetadata({ data: "json, name=EventSourceArn" })
   eventSourceArn?: string;
 
-  @Metadata({ data: "json, name=FunctionArn" })
+  @SpeakeasyMetadata({ data: "json, name=FunctionArn" })
   functionArn?: string;
 
-  @Metadata({ data: "json, name=FunctionResponseTypes" })
+  @SpeakeasyMetadata({ data: "json, name=FunctionResponseTypes" })
   functionResponseTypes?: FunctionResponseTypeEnum[];
 
-  @Metadata({ data: "json, name=LastModified" })
+  @SpeakeasyMetadata({ data: "json, name=LastModified" })
   lastModified?: Date;
 
-  @Metadata({ data: "json, name=LastProcessingResult" })
+  @SpeakeasyMetadata({ data: "json, name=LastProcessingResult" })
   lastProcessingResult?: string;
 
-  @Metadata({ data: "json, name=MaximumBatchingWindowInSeconds" })
+  @SpeakeasyMetadata({ data: "json, name=MaximumBatchingWindowInSeconds" })
   maximumBatchingWindowInSeconds?: number;
 
-  @Metadata({ data: "json, name=MaximumRecordAgeInSeconds" })
+  @SpeakeasyMetadata({ data: "json, name=MaximumRecordAgeInSeconds" })
   maximumRecordAgeInSeconds?: number;
 
-  @Metadata({ data: "json, name=MaximumRetryAttempts" })
+  @SpeakeasyMetadata({ data: "json, name=MaximumRetryAttempts" })
   maximumRetryAttempts?: number;
 
-  @Metadata({ data: "json, name=ParallelizationFactor" })
+  @SpeakeasyMetadata({ data: "json, name=ParallelizationFactor" })
   parallelizationFactor?: number;
 
-  @Metadata({ data: "json, name=Queues" })
+  @SpeakeasyMetadata({ data: "json, name=Queues" })
   queues?: string[];
 
-  @Metadata({ data: "json, name=SelfManagedEventSource" })
+  @SpeakeasyMetadata({ data: "json, name=SelfManagedEventSource" })
   selfManagedEventSource?: SelfManagedEventSource;
 
-  @Metadata({ data: "json, name=SourceAccessConfigurations", elemType: shared.SourceAccessConfiguration })
+  @SpeakeasyMetadata({ data: "json, name=SourceAccessConfigurations", elemType: SourceAccessConfiguration })
   sourceAccessConfigurations?: SourceAccessConfiguration[];
 
-  @Metadata({ data: "json, name=StartingPosition" })
+  @SpeakeasyMetadata({ data: "json, name=StartingPosition" })
   startingPosition?: EventSourcePositionEnum;
 
-  @Metadata({ data: "json, name=StartingPositionTimestamp" })
+  @SpeakeasyMetadata({ data: "json, name=StartingPositionTimestamp" })
   startingPositionTimestamp?: Date;
 
-  @Metadata({ data: "json, name=State" })
+  @SpeakeasyMetadata({ data: "json, name=State" })
   state?: string;
 
-  @Metadata({ data: "json, name=StateTransitionReason" })
+  @SpeakeasyMetadata({ data: "json, name=StateTransitionReason" })
   stateTransitionReason?: string;
 
-  @Metadata({ data: "json, name=Topics" })
+  @SpeakeasyMetadata({ data: "json, name=Topics" })
   topics?: string[];
 
-  @Metadata({ data: "json, name=TumblingWindowInSeconds" })
+  @SpeakeasyMetadata({ data: "json, name=TumblingWindowInSeconds" })
   tumblingWindowInSeconds?: number;
 
-  @Metadata({ data: "json, name=UUID" })
+  @SpeakeasyMetadata({ data: "json, name=UUID" })
   uuid?: string;
 }

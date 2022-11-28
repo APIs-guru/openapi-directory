@@ -1,5 +1,7 @@
 package shared
 
+// Delete
+// Represents a request to perform a <code>DeleteItem</code> operation.
 type Delete struct {
 	ConditionExpression                 *string                                  `json:"ConditionExpression,omitempty"`
 	ExpressionAttributeNames            map[string]string                        `json:"ExpressionAttributeNames,omitempty"`

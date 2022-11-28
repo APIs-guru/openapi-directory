@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudRunV2ExecutionReference
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Reference to an Execution. Use /Executions.GetExecution with the given name to get full execution including the latest status.
 **/
 export class GoogleCloudRunV2ExecutionReference extends SpeakeasyBase {
-  @Metadata({ data: "json, name=completionTime" })
+  @SpeakeasyMetadata({ data: "json, name=completionTime" })
   completionTime?: string;
 
-  @Metadata({ data: "json, name=createTime" })
+  @SpeakeasyMetadata({ data: "json, name=createTime" })
   createTime?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 }

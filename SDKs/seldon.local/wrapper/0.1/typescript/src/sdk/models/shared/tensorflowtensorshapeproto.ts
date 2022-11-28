@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TensorShapeProtoDim } from "./tensorshapeprotodim";
+
 
 
 // TensorflowTensorShapeProto
@@ -8,9 +8,9 @@ import { TensorShapeProtoDim } from "./tensorshapeprotodim";
  * Dimensions of a tensor.
 **/
 export class TensorflowTensorShapeProto extends SpeakeasyBase {
-  @Metadata({ data: "json, name=dim", elemType: shared.TensorShapeProtoDim })
+  @SpeakeasyMetadata({ data: "json, name=dim", elemType: TensorShapeProtoDim })
   dim?: TensorShapeProtoDim[];
 
-  @Metadata({ data: "json, name=unknown_rank" })
+  @SpeakeasyMetadata({ data: "json, name=unknown_rank" })
   unknownRank?: boolean;
 }

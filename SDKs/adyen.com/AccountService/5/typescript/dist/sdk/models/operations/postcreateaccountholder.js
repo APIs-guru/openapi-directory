@@ -22,45 +22,21 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
-var PostCreateAccountHolderSecurityOption1 = /** @class */ (function (_super) {
-    __extends(PostCreateAccountHolderSecurityOption1, _super);
-    function PostCreateAccountHolderSecurityOption1() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    __decorate([
-        Metadata({ data: "security, scheme=true;type=http;subtype=basic" }),
-        __metadata("design:type", shared.SchemeBasicAuth)
-    ], PostCreateAccountHolderSecurityOption1.prototype, "basicAuth", void 0);
-    return PostCreateAccountHolderSecurityOption1;
-}(SpeakeasyBase));
-export { PostCreateAccountHolderSecurityOption1 };
-var PostCreateAccountHolderSecurityOption2 = /** @class */ (function (_super) {
-    __extends(PostCreateAccountHolderSecurityOption2, _super);
-    function PostCreateAccountHolderSecurityOption2() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
-        __metadata("design:type", shared.SchemeApiKeyAuth)
-    ], PostCreateAccountHolderSecurityOption2.prototype, "apiKeyAuth", void 0);
-    return PostCreateAccountHolderSecurityOption2;
-}(SpeakeasyBase));
-export { PostCreateAccountHolderSecurityOption2 };
 var PostCreateAccountHolderSecurity = /** @class */ (function (_super) {
     __extends(PostCreateAccountHolderSecurity, _super);
     function PostCreateAccountHolderSecurity() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, option=true" }),
-        __metadata("design:type", PostCreateAccountHolderSecurityOption1)
-    ], PostCreateAccountHolderSecurity.prototype, "option1", void 0);
+        SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=basic" }),
+        __metadata("design:type", shared.SchemeBasicAuth)
+    ], PostCreateAccountHolderSecurity.prototype, "basicAuth", void 0);
     __decorate([
-        Metadata({ data: "security, option=true" }),
-        __metadata("design:type", PostCreateAccountHolderSecurityOption2)
-    ], PostCreateAccountHolderSecurity.prototype, "option2", void 0);
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        __metadata("design:type", shared.SchemeApiKeyAuth)
+    ], PostCreateAccountHolderSecurity.prototype, "apiKeyAuth", void 0);
     return PostCreateAccountHolderSecurity;
 }(SpeakeasyBase));
 export { PostCreateAccountHolderSecurity };
@@ -70,11 +46,11 @@ var PostCreateAccountHolderRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", Object)
     ], PostCreateAccountHolderRequest.prototype, "request", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PostCreateAccountHolderSecurity)
     ], PostCreateAccountHolderRequest.prototype, "security", void 0);
     return PostCreateAccountHolderRequest;
@@ -86,19 +62,19 @@ var PostCreateAccountHolderResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], PostCreateAccountHolderResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], PostCreateAccountHolderResponse.prototype, "createAccountHolderResponse", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], PostCreateAccountHolderResponse.prototype, "serviceError", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], PostCreateAccountHolderResponse.prototype, "statusCode", void 0);
     return PostCreateAccountHolderResponse;

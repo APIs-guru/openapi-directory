@@ -1,34 +1,53 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 
 
-export class User extends SpeakeasyBase {
-  @Metadata({ data: "json, name=email" })
+
+export class UserInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=email" })
   email?: string;
 
-  @Metadata({ data: "json, name=first_name" })
+  @SpeakeasyMetadata({ data: "json, name=first_name" })
   firstName?: string;
 
-  @Metadata({ data: "json, name=id" })
-  id?: string;
-
-  @Metadata({ data: "json, name=is_admin" })
+  @SpeakeasyMetadata({ data: "json, name=is_admin" })
   isAdmin?: boolean;
 
-  @Metadata({ data: "json, name=is_locked" })
+  @SpeakeasyMetadata({ data: "json, name=is_locked" })
   isLocked?: boolean;
 
-  @Metadata({ data: "json, name=last_name" })
+  @SpeakeasyMetadata({ data: "json, name=last_name" })
   lastName?: string;
 
-  @Metadata({ data: "json, name=password" })
+  @SpeakeasyMetadata({ data: "json, name=password" })
   password?: string;
+}
 
-  @Metadata({ data: "json, name=time_created" })
+
+export class UserOutput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=email" })
+  email?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=first_name" })
+  firstName?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=id" })
+  id?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=is_admin" })
+  isAdmin?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=is_locked" })
+  isLocked?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=last_name" })
+  lastName?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=time_created" })
   timeCreated?: string;
 
-  @Metadata({ data: "json, name=time_updated" })
+  @SpeakeasyMetadata({ data: "json, name=time_updated" })
   timeUpdated?: string;
 
-  @Metadata({ data: "json, name=url" })
+  @SpeakeasyMetadata({ data: "json, name=url" })
   url?: string;
 }

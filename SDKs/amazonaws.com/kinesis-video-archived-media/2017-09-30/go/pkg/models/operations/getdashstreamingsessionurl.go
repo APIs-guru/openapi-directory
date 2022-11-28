@@ -14,6 +14,8 @@ type GetDashStreamingSessionURLHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// GetDashStreamingSessionURLRequestBodyDashFragmentSelector
+// Contains the range of timestamps for the requested media, and the source of the timestamps.
 type GetDashStreamingSessionURLRequestBodyDashFragmentSelector struct {
 	FragmentSelectorType *shared.DashFragmentSelectorTypeEnum `json:"FragmentSelectorType,omitempty"`
 	TimestampRange       *shared.DashTimestampRange           `json:"TimestampRange,omitempty"`

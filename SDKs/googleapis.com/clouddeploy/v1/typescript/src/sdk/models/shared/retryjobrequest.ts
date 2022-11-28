@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // RetryJobRequest
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * RetryJobRequest is the request object used by `RetryJob`.
 **/
 export class RetryJobRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=jobId" })
+  @SpeakeasyMetadata({ data: "json, name=jobId" })
   jobId?: string;
 
-  @Metadata({ data: "json, name=phaseId" })
+  @SpeakeasyMetadata({ data: "json, name=phaseId" })
   phaseId?: string;
 }

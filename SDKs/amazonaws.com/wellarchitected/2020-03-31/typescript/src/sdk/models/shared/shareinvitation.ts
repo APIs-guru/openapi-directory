@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ShareInvitation
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The share invitation.
 **/
 export class ShareInvitation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ShareInvitationId" })
+  @SpeakeasyMetadata({ data: "json, name=ShareInvitationId" })
   shareInvitationId?: string;
 
-  @Metadata({ data: "json, name=WorkloadId" })
+  @SpeakeasyMetadata({ data: "json, name=WorkloadId" })
   workloadId?: string;
 }

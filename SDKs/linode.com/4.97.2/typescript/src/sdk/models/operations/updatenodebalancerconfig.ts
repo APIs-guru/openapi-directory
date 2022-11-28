@@ -1,65 +1,54 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class UpdateNodeBalancerConfigPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=configId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=configId" })
   configId: number;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=nodeBalancerId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=nodeBalancerId" })
   nodeBalancerId: number;
 }
 
 
-export class UpdateNodeBalancerConfigSecurityOption1 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=bearer" })
-  personalAccessToken: shared.SchemePersonalAccessToken;
-}
-
-
-export class UpdateNodeBalancerConfigSecurityOption2 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
-  oauth: shared.SchemeOauth;
-}
-
-
 export class UpdateNodeBalancerConfigSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, option=true" })
-  option1?: UpdateNodeBalancerConfigSecurityOption1;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" })
+  personalAccessToken?: shared.SchemePersonalAccessToken;
 
-  @Metadata({ data: "security, option=true" })
-  option2?: UpdateNodeBalancerConfigSecurityOption2;
-}
-
-
-export class UpdateNodeBalancerConfigRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: UpdateNodeBalancerConfigPathParams;
-
-  @Metadata({ data: "request, media_type=application/json" })
-  request: shared.NodeBalancerConfig;
-
-  @Metadata()
-  security: UpdateNodeBalancerConfigSecurity;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
+  oauth?: shared.SchemeOauth;
 }
 
 
 export class UpdateNodeBalancerConfigDefaultApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=errors", elemType: shared.ErrorObject })
+  @SpeakeasyMetadata({ data: "json, name=errors", elemType: shared.ErrorObject })
   errors?: shared.ErrorObject[];
 }
 
 
+export class UpdateNodeBalancerConfigRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: UpdateNodeBalancerConfigPathParams;
+
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request: shared.NodeBalancerConfigInput;
+
+  @SpeakeasyMetadata()
+  security: UpdateNodeBalancerConfigSecurity;
+}
+
+
 export class UpdateNodeBalancerConfigResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   nodeBalancerConfig?: shared.NodeBalancerConfig;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   updateNodeBalancerConfigDefaultApplicationJsonObject?: UpdateNodeBalancerConfigDefaultApplicationJson;
 }

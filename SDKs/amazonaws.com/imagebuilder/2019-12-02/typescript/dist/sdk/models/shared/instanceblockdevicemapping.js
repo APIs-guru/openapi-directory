@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { EbsInstanceBlockDeviceSpecification } from "./ebsinstanceblockdevicespecification";
 // InstanceBlockDeviceMapping
 /**
@@ -34,19 +34,19 @@ var InstanceBlockDeviceMapping = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=deviceName" }),
+        SpeakeasyMetadata({ data: "json, name=deviceName" }),
         __metadata("design:type", String)
     ], InstanceBlockDeviceMapping.prototype, "deviceName", void 0);
     __decorate([
-        Metadata({ data: "json, name=ebs" }),
+        SpeakeasyMetadata({ data: "json, name=ebs" }),
         __metadata("design:type", EbsInstanceBlockDeviceSpecification)
     ], InstanceBlockDeviceMapping.prototype, "ebs", void 0);
     __decorate([
-        Metadata({ data: "json, name=noDevice" }),
+        SpeakeasyMetadata({ data: "json, name=noDevice" }),
         __metadata("design:type", String)
     ], InstanceBlockDeviceMapping.prototype, "noDevice", void 0);
     __decorate([
-        Metadata({ data: "json, name=virtualName" }),
+        SpeakeasyMetadata({ data: "json, name=virtualName" }),
         __metadata("design:type", String)
     ], InstanceBlockDeviceMapping.prototype, "virtualName", void 0);
     return InstanceBlockDeviceMapping;

@@ -1,44 +1,45 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetV3VideosIdDownloadhistoryPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" })
   id: string;
 }
 
 
 export class GetV3VideosIdDownloadhistoryQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=company_downloads" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=company_downloads" })
   companyDownloads?: boolean;
 }
 
 
 export class GetV3VideosIdDownloadhistoryHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=Accept-Language" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Accept-Language" })
   acceptLanguage?: string;
 }
 
 
 export class GetV3VideosIdDownloadhistoryRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetV3VideosIdDownloadhistoryPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetV3VideosIdDownloadhistoryQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: GetV3VideosIdDownloadhistoryHeaders;
 }
 
 
 export class GetV3VideosIdDownloadhistoryResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   assetDownloadHistoryResults?: shared.AssetDownloadHistoryResults;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

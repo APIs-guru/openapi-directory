@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import routestatuscode_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class RouteStatus:
-    status: routestatuscode_enum.RouteStatusCodeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+    r"""RouteStatus
+    An object that represents the current status of a route.
+    """
+    
+    status: RouteStatusCodeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('status') }})
     

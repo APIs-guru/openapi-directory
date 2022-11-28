@@ -1,5 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { HyperParameterAlgorithmSpecification } from "./hyperparameteralgorithmspecification";
 import { CheckpointConfig } from "./checkpointconfig";
 import { ParameterRanges } from "./parameterranges";
@@ -12,56 +11,57 @@ import { HyperParameterTuningJobObjective } from "./hyperparametertuningjobobjec
 import { VpcConfig } from "./vpcconfig";
 
 
+
 // HyperParameterTrainingJobDefinition
 /** 
  * Defines the training jobs launched by a hyperparameter tuning job.
 **/
 export class HyperParameterTrainingJobDefinition extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AlgorithmSpecification" })
+  @SpeakeasyMetadata({ data: "json, name=AlgorithmSpecification" })
   algorithmSpecification: HyperParameterAlgorithmSpecification;
 
-  @Metadata({ data: "json, name=CheckpointConfig" })
+  @SpeakeasyMetadata({ data: "json, name=CheckpointConfig" })
   checkpointConfig?: CheckpointConfig;
 
-  @Metadata({ data: "json, name=DefinitionName" })
+  @SpeakeasyMetadata({ data: "json, name=DefinitionName" })
   definitionName?: string;
 
-  @Metadata({ data: "json, name=EnableInterContainerTrafficEncryption" })
+  @SpeakeasyMetadata({ data: "json, name=EnableInterContainerTrafficEncryption" })
   enableInterContainerTrafficEncryption?: boolean;
 
-  @Metadata({ data: "json, name=EnableManagedSpotTraining" })
+  @SpeakeasyMetadata({ data: "json, name=EnableManagedSpotTraining" })
   enableManagedSpotTraining?: boolean;
 
-  @Metadata({ data: "json, name=EnableNetworkIsolation" })
+  @SpeakeasyMetadata({ data: "json, name=EnableNetworkIsolation" })
   enableNetworkIsolation?: boolean;
 
-  @Metadata({ data: "json, name=HyperParameterRanges" })
+  @SpeakeasyMetadata({ data: "json, name=HyperParameterRanges" })
   hyperParameterRanges?: ParameterRanges;
 
-  @Metadata({ data: "json, name=InputDataConfig", elemType: shared.Channel })
+  @SpeakeasyMetadata({ data: "json, name=InputDataConfig", elemType: Channel })
   inputDataConfig?: Channel[];
 
-  @Metadata({ data: "json, name=OutputDataConfig" })
+  @SpeakeasyMetadata({ data: "json, name=OutputDataConfig" })
   outputDataConfig: OutputDataConfig;
 
-  @Metadata({ data: "json, name=ResourceConfig" })
+  @SpeakeasyMetadata({ data: "json, name=ResourceConfig" })
   resourceConfig: ResourceConfig;
 
-  @Metadata({ data: "json, name=RetryStrategy" })
+  @SpeakeasyMetadata({ data: "json, name=RetryStrategy" })
   retryStrategy?: RetryStrategy;
 
-  @Metadata({ data: "json, name=RoleArn" })
+  @SpeakeasyMetadata({ data: "json, name=RoleArn" })
   roleArn: string;
 
-  @Metadata({ data: "json, name=StaticHyperParameters" })
+  @SpeakeasyMetadata({ data: "json, name=StaticHyperParameters" })
   staticHyperParameters?: Map<string, string>;
 
-  @Metadata({ data: "json, name=StoppingCondition" })
+  @SpeakeasyMetadata({ data: "json, name=StoppingCondition" })
   stoppingCondition: StoppingCondition;
 
-  @Metadata({ data: "json, name=TuningObjective" })
+  @SpeakeasyMetadata({ data: "json, name=TuningObjective" })
   tuningObjective?: HyperParameterTuningJobObjective;
 
-  @Metadata({ data: "json, name=VpcConfig" })
+  @SpeakeasyMetadata({ data: "json, name=VpcConfig" })
   vpcConfig?: VpcConfig;
 }

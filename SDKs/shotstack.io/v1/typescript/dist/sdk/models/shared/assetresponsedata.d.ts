@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { AssetResponseAttributes } from "./assetresponseattributes";
 /**
  * The type of resource (an asset) and attributes of the asset.

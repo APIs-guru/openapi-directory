@@ -1,47 +1,48 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class StringDefinitionsGetDefinitionPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=ID" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=ID" })
   id: string;
 }
 
 
 export class StringDefinitionsGetDefinitionQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=includeDeletedLanguages" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=includeDeletedLanguages" })
   includeDeletedLanguages?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=includeTranslations" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=includeTranslations" })
   includeTranslations?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=languageIds" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=languageIds" })
   languageIds?: string;
 }
 
 
 export class StringDefinitionsGetDefinitionRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: StringDefinitionsGetDefinitionPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: StringDefinitionsGetDefinitionQueryParams;
 }
 
 
 export class StringDefinitionsGetDefinitionResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   apiModelsApiError?: shared.ApiModelsApiError;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   globalResourcesSharedModelsStringDefinition?: shared.GlobalResourcesSharedModelsStringDefinition;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

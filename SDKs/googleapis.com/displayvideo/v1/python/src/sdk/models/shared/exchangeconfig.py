@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import exchangeconfigenabledexchange
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ExchangeConfig:
-    enabled_exchanges: Optional[List[exchangeconfigenabledexchange.ExchangeConfigEnabledExchange]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'enabledExchanges' }})
+    r"""ExchangeConfig
+    Settings that control which exchanges are enabled for a partner.
+    """
+    
+    enabled_exchanges: Optional[List[ExchangeConfigEnabledExchange]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('enabledExchanges') }})
     

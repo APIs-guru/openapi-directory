@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // DeviceConfig
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The device configuration. Eventually delivered to devices.
 **/
 export class DeviceConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=binaryData" })
+  @SpeakeasyMetadata({ data: "json, name=binaryData" })
   binaryData?: string;
 
-  @Metadata({ data: "json, name=cloudUpdateTime" })
+  @SpeakeasyMetadata({ data: "json, name=cloudUpdateTime" })
   cloudUpdateTime?: string;
 
-  @Metadata({ data: "json, name=deviceAckTime" })
+  @SpeakeasyMetadata({ data: "json, name=deviceAckTime" })
   deviceAckTime?: string;
 
-  @Metadata({ data: "json, name=version" })
+  @SpeakeasyMetadata({ data: "json, name=version" })
   version?: string;
 }

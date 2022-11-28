@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { BackendMetastore } from "./backendmetastore";
 export declare enum FederationStateEnum {
     StateUnspecified = "STATE_UNSPECIFIED",
@@ -7,6 +7,15 @@ export declare enum FederationStateEnum {
     Updating = "UPDATING",
     Deleting = "DELETING",
     Error = "ERROR"
+}
+/**
+ * Represents a federation of multiple backend metastores.
+**/
+export declare class FederationInput extends SpeakeasyBase {
+    backendMetastores?: Map<string, BackendMetastore>;
+    labels?: Map<string, string>;
+    name?: string;
+    version?: string;
 }
 /**
  * Represents a federation of multiple backend metastores.

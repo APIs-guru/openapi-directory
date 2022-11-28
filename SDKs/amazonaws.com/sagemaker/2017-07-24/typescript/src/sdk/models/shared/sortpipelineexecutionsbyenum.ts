@@ -1,6 +1,7 @@
 
 
+
 export enum SortPipelineExecutionsByEnum {
-    CreationTime = "CreationTime"
-,    PipelineExecutionArn = "PipelineExecutionArn"
+    CreationTime = "CreationTime",
+    PipelineExecutionArn = "PipelineExecutionArn"
 }

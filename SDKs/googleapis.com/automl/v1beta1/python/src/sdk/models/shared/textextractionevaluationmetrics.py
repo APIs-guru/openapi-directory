@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import textextractionevaluationmetricsconfidencemetricsentry
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class TextExtractionEvaluationMetrics:
-    au_prc: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'auPrc' }})
-    confidence_metrics_entries: Optional[List[textextractionevaluationmetricsconfidencemetricsentry.TextExtractionEvaluationMetricsConfidenceMetricsEntry]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'confidenceMetricsEntries' }})
+    r"""TextExtractionEvaluationMetrics
+    Model evaluation metrics for text extraction problems.
+    """
+    
+    au_prc: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('auPrc') }})
+    confidence_metrics_entries: Optional[List[TextExtractionEvaluationMetricsConfidenceMetricsEntry]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('confidenceMetricsEntries') }})
     

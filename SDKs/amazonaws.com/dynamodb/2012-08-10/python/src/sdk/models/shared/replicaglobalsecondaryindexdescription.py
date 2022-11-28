@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import provisionedthroughputoverride
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ReplicaGlobalSecondaryIndexDescription:
-    index_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'IndexName' }})
-    provisioned_throughput_override: Optional[provisionedthroughputoverride.ProvisionedThroughputOverride] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ProvisionedThroughputOverride' }})
+    r"""ReplicaGlobalSecondaryIndexDescription
+    Represents the properties of a replica global secondary index.
+    """
+    
+    index_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('IndexName') }})
+    provisioned_throughput_override: Optional[ProvisionedThroughputOverride] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ProvisionedThroughputOverride') }})
     

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // CalendarResource
@@ -6,48 +7,48 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Public API: Resources.calendars
 **/
 export class CalendarResource extends SpeakeasyBase {
-  @Metadata({ data: "json, name=buildingId" })
+  @SpeakeasyMetadata({ data: "json, name=buildingId" })
   buildingId?: string;
 
-  @Metadata({ data: "json, name=capacity" })
+  @SpeakeasyMetadata({ data: "json, name=capacity" })
   capacity?: number;
 
-  @Metadata({ data: "json, name=etags" })
+  @SpeakeasyMetadata({ data: "json, name=etags" })
   etags?: string;
 
-  @Metadata({ data: "json, name=featureInstances" })
+  @SpeakeasyMetadata({ data: "json, name=featureInstances" })
   featureInstances?: any;
 
-  @Metadata({ data: "json, name=floorName" })
+  @SpeakeasyMetadata({ data: "json, name=floorName" })
   floorName?: string;
 
-  @Metadata({ data: "json, name=floorSection" })
+  @SpeakeasyMetadata({ data: "json, name=floorSection" })
   floorSection?: string;
 
-  @Metadata({ data: "json, name=generatedResourceName" })
+  @SpeakeasyMetadata({ data: "json, name=generatedResourceName" })
   generatedResourceName?: string;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=resourceCategory" })
+  @SpeakeasyMetadata({ data: "json, name=resourceCategory" })
   resourceCategory?: string;
 
-  @Metadata({ data: "json, name=resourceDescription" })
+  @SpeakeasyMetadata({ data: "json, name=resourceDescription" })
   resourceDescription?: string;
 
-  @Metadata({ data: "json, name=resourceEmail" })
+  @SpeakeasyMetadata({ data: "json, name=resourceEmail" })
   resourceEmail?: string;
 
-  @Metadata({ data: "json, name=resourceId" })
+  @SpeakeasyMetadata({ data: "json, name=resourceId" })
   resourceId?: string;
 
-  @Metadata({ data: "json, name=resourceName" })
+  @SpeakeasyMetadata({ data: "json, name=resourceName" })
   resourceName?: string;
 
-  @Metadata({ data: "json, name=resourceType" })
+  @SpeakeasyMetadata({ data: "json, name=resourceType" })
   resourceType?: string;
 
-  @Metadata({ data: "json, name=userVisibleDescription" })
+  @SpeakeasyMetadata({ data: "json, name=userVisibleDescription" })
   userVisibleDescription?: string;
 }

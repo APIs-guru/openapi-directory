@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class GetFunctionCodeSigningConfigPathParams:
-    function_name: str = field(default=None, metadata={'path_param': { 'field_name': 'FunctionName', 'style': 'simple', 'explode': False }})
+    function_name: str = field(metadata={'path_param': { 'field_name': 'FunctionName', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -21,17 +24,17 @@ class GetFunctionCodeSigningConfigHeaders:
 
 @dataclass
 class GetFunctionCodeSigningConfigRequest:
-    path_params: GetFunctionCodeSigningConfigPathParams = field(default=None)
-    headers: GetFunctionCodeSigningConfigHeaders = field(default=None)
+    headers: GetFunctionCodeSigningConfigHeaders = field()
+    path_params: GetFunctionCodeSigningConfigPathParams = field()
     
 
 @dataclass
 class GetFunctionCodeSigningConfigResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     get_function_code_signing_config_response: Optional[shared.GetFunctionCodeSigningConfigResponse] = field(default=None)
     invalid_parameter_value_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
     service_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     too_many_requests_exception: Optional[Any] = field(default=None)
     

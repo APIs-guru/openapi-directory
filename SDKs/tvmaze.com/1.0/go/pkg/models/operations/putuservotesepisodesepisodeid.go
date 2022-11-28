@@ -10,7 +10,7 @@ type PutUserVotesEpisodesEpisodeIDPathParams struct {
 
 type PutUserVotesEpisodesEpisodeIDRequest struct {
 	PathParams PutUserVotesEpisodesEpisodeIDPathParams
-	Request    *shared.EpisodeVote `request:"mediaType=application/json"`
+	Request    *shared.EpisodeVoteInput `request:"mediaType=application/json"`
 }
 
 type PutUserVotesEpisodesEpisodeIDResponse struct {

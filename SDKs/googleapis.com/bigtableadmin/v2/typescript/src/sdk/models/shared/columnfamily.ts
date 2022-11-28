@@ -1,5 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GcRule } from "./gcrule";
+import { ColumnFamilyStats } from "./columnfamilystats";
+
 
 
 // ColumnFamily
@@ -7,6 +9,9 @@ import { GcRule } from "./gcrule";
  * A set of columns within a table which share a common configuration.
 **/
 export class ColumnFamily extends SpeakeasyBase {
-  @Metadata({ data: "json, name=gcRule" })
+  @SpeakeasyMetadata({ data: "json, name=gcRule" })
   gcRule?: GcRule;
+
+  @SpeakeasyMetadata({ data: "json, name=stats" })
+  stats?: ColumnFamilyStats;
 }

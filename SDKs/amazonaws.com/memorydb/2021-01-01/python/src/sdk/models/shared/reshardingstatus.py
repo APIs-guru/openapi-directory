@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import slotmigration
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ReshardingStatus:
-    slot_migration: Optional[slotmigration.SlotMigration] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'SlotMigration' }})
+    r"""ReshardingStatus
+    The status of the online resharding
+    """
+    
+    slot_migration: Optional[SlotMigration] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('SlotMigration') }})
     

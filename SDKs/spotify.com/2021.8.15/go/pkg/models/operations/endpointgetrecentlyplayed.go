@@ -18,12 +18,9 @@ type EndpointGetRecentlyPlayedSecurity struct {
 	SpotifyAuth shared.SchemeSpotifyAuth `security:"scheme,type=oauth2"`
 }
 
-type EndpointGetRecentlyPlayedRequest struct {
-	QueryParams EndpointGetRecentlyPlayedQueryParams
-	Headers     EndpointGetRecentlyPlayedHeaders
-	Security    EndpointGetRecentlyPlayedSecurity
-}
+// EndpointGetRecentlyPlayed200ApplicationJSON
 
+// https://developer.spotify.com/documentation/web-api/reference/#object-cursorpagingobject - Find more info on the official Spotify Web API Reference
 type EndpointGetRecentlyPlayed200ApplicationJSON struct {
 	Cursors *shared.CursorObject       `json:"cursors,omitempty"`
 	Href    *string                    `json:"href,omitempty"`
@@ -31,6 +28,12 @@ type EndpointGetRecentlyPlayed200ApplicationJSON struct {
 	Limit   *int32                     `json:"limit,omitempty"`
 	Next    *string                    `json:"next,omitempty"`
 	Total   *int32                     `json:"total,omitempty"`
+}
+
+type EndpointGetRecentlyPlayedRequest struct {
+	QueryParams EndpointGetRecentlyPlayedQueryParams
+	Headers     EndpointGetRecentlyPlayedHeaders
+	Security    EndpointGetRecentlyPlayedSecurity
 }
 
 type EndpointGetRecentlyPlayedResponse struct {

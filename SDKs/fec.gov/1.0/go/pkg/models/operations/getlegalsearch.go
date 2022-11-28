@@ -58,10 +58,6 @@ type GetLegalSearchQueryParams struct {
 	Type                 *string                        `queryParam:"style=form,explode=true,name=type"`
 }
 
-type GetLegalSearchRequest struct {
-	QueryParams GetLegalSearchQueryParams
-}
-
 type GetLegalSearchDefaultApplicationJSONAdminFinesCommissionVotes struct {
 	Action   *string    `json:"action,omitempty"`
 	VoteDate *time.Time `json:"vote_date,omitempty"`
@@ -304,6 +300,10 @@ type GetLegalSearchDefaultApplicationJSON struct {
 	TotalMurs             *int64                                                 `json:"total_murs,omitempty"`
 	TotalRegulations      *int64                                                 `json:"total_regulations,omitempty"`
 	TotalStatutes         *int64                                                 `json:"total_statutes,omitempty"`
+}
+
+type GetLegalSearchRequest struct {
+	QueryParams GetLegalSearchQueryParams
 }
 
 type GetLegalSearchResponse struct {

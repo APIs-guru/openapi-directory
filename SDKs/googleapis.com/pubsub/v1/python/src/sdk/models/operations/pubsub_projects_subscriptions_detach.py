@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class PubsubProjectsSubscriptionsDetachPathParams:
-    subscription: str = field(default=None, metadata={'path_param': { 'field_name': 'subscription', 'style': 'simple', 'explode': False }})
+    subscription: str = field(metadata={'path_param': { 'field_name': 'subscription', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,14 +26,14 @@ class PubsubProjectsSubscriptionsDetachQueryParams:
 
 @dataclass
 class PubsubProjectsSubscriptionsDetachSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class PubsubProjectsSubscriptionsDetachSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -43,14 +44,14 @@ class PubsubProjectsSubscriptionsDetachSecurity:
 
 @dataclass
 class PubsubProjectsSubscriptionsDetachRequest:
-    path_params: PubsubProjectsSubscriptionsDetachPathParams = field(default=None)
-    query_params: PubsubProjectsSubscriptionsDetachQueryParams = field(default=None)
-    security: PubsubProjectsSubscriptionsDetachSecurity = field(default=None)
+    path_params: PubsubProjectsSubscriptionsDetachPathParams = field()
+    query_params: PubsubProjectsSubscriptionsDetachQueryParams = field()
+    security: PubsubProjectsSubscriptionsDetachSecurity = field()
     
 
 @dataclass
 class PubsubProjectsSubscriptionsDetachResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     detach_subscription_response: Optional[dict[str, Any]] = field(default=None)
-    status_code: int = field(default=None)
     

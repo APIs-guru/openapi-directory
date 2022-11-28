@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class AnalyticshubProjectsLocationsDataExchangesListingsPatchPathParams extends SpeakeasyBase {
     name: string;
@@ -32,7 +32,7 @@ export declare class AnalyticshubProjectsLocationsDataExchangesListingsPatchSecu
 export declare class AnalyticshubProjectsLocationsDataExchangesListingsPatchRequest extends SpeakeasyBase {
     pathParams: AnalyticshubProjectsLocationsDataExchangesListingsPatchPathParams;
     queryParams: AnalyticshubProjectsLocationsDataExchangesListingsPatchQueryParams;
-    request?: shared.Listing;
+    request?: shared.ListingInput;
     security: AnalyticshubProjectsLocationsDataExchangesListingsPatchSecurity;
 }
 export declare class AnalyticshubProjectsLocationsDataExchangesListingsPatchResponse extends SpeakeasyBase {

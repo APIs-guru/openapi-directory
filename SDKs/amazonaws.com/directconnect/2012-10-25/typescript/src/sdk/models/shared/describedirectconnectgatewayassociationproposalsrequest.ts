@@ -1,19 +1,20 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DescribeDirectConnectGatewayAssociationProposalsRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=associatedGatewayId" })
+  @SpeakeasyMetadata({ data: "json, name=associatedGatewayId" })
   associatedGatewayId?: string;
 
-  @Metadata({ data: "json, name=directConnectGatewayId" })
+  @SpeakeasyMetadata({ data: "json, name=directConnectGatewayId" })
   directConnectGatewayId?: string;
 
-  @Metadata({ data: "json, name=maxResults" })
+  @SpeakeasyMetadata({ data: "json, name=maxResults" })
   maxResults?: number;
 
-  @Metadata({ data: "json, name=nextToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=proposalId" })
+  @SpeakeasyMetadata({ data: "json, name=proposalId" })
   proposalId?: string;
 }

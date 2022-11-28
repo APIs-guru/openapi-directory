@@ -1,44 +1,30 @@
 from dataclasses import dataclass, field
 from typing import Any,Optional
+from sdk.models import shared
 
 
 @dataclass
 class DeleteUsersSelectedUserHooksUIDPathParams:
-    selected_user: str = field(default=None, metadata={'path_param': { 'field_name': 'selected_user', 'style': 'simple', 'explode': False }})
-    uid: str = field(default=None, metadata={'path_param': { 'field_name': 'uid', 'style': 'simple', 'explode': False }})
-    
-
-@dataclass
-class DeleteUsersSelectedUserHooksUIDSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    
-
-@dataclass
-class DeleteUsersSelectedUserHooksUIDSecurityOption2:
-    basic: shared.SchemeBasic = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'basic' }})
-    
-
-@dataclass
-class DeleteUsersSelectedUserHooksUIDSecurityOption3:
-    api_key: shared.SchemeAPIKey = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    selected_user: str = field(metadata={'path_param': { 'field_name': 'selected_user', 'style': 'simple', 'explode': False }})
+    uid: str = field(metadata={'path_param': { 'field_name': 'uid', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class DeleteUsersSelectedUserHooksUIDSecurity:
-    option1: Optional[DeleteUsersSelectedUserHooksUIDSecurityOption1] = field(default=None, metadata={'security': { 'option': True }})
-    option2: Optional[DeleteUsersSelectedUserHooksUIDSecurityOption2] = field(default=None, metadata={'security': { 'option': True }})
-    option3: Optional[DeleteUsersSelectedUserHooksUIDSecurityOption3] = field(default=None, metadata={'security': { 'option': True }})
+    api_key: Optional[shared.SchemeAPIKey] = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    basic: Optional[shared.SchemeBasic] = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'basic' }})
+    oauth2: Optional[shared.SchemeOauth2] = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DeleteUsersSelectedUserHooksUIDRequest:
-    path_params: DeleteUsersSelectedUserHooksUIDPathParams = field(default=None)
-    security: DeleteUsersSelectedUserHooksUIDSecurity = field(default=None)
+    path_params: DeleteUsersSelectedUserHooksUIDPathParams = field()
+    security: DeleteUsersSelectedUserHooksUIDSecurity = field()
     
 
 @dataclass
 class DeleteUsersSelectedUserHooksUIDResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error: Optional[dict[str, Any]] = field(default=None)
     

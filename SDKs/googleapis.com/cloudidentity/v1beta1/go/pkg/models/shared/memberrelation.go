@@ -9,6 +9,8 @@ const (
 	MemberRelationRelationTypeEnumDirectAndIndirect       MemberRelationRelationTypeEnum = "DIRECT_AND_INDIRECT"
 )
 
+// MemberRelation
+// Message representing a transitive membership of a group.
 type MemberRelation struct {
 	Member             *string                         `json:"member,omitempty"`
 	PreferredMemberKey []EntityKey                     `json:"preferredMemberKey,omitempty"`

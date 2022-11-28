@@ -60,6 +60,8 @@ const (
 	ApplicationPolicyInstallTypeEnumKiosk                  ApplicationPolicyInstallTypeEnum = "KIOSK"
 )
 
+// ApplicationPolicy
+// Policy for an individual app.
 type ApplicationPolicy struct {
 	AccessibleTrackIds           []string                                           `json:"accessibleTrackIds,omitempty"`
 	AlwaysOnVpnLockdownExemption *ApplicationPolicyAlwaysOnVpnLockdownExemptionEnum `json:"alwaysOnVpnLockdownExemption,omitempty"`

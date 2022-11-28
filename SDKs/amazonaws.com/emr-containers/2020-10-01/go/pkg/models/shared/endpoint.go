@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// Endpoint
+// This entity represents the endpoint that is managed by Amazon EMR on EKS.
 type Endpoint struct {
 	Arn                    *string                 `json:"arn,omitempty"`
 	CertificateArn         *string                 `json:"certificateArn,omitempty"`

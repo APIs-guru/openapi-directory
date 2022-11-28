@@ -4,32 +4,22 @@ from sdk.models import shared
 
 
 @dataclass
-class FetchBoundariesSecurityOption1:
-    api_key: shared.SchemeAPIKey = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
-    
-
-@dataclass
-class FetchBoundariesSecurityOption2:
-    oauth2_authorization_code: shared.SchemeOauth2AuthorizationCode = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    
-
-@dataclass
 class FetchBoundariesSecurity:
-    option1: Optional[FetchBoundariesSecurityOption1] = field(default=None, metadata={'security': { 'option': True }})
-    option2: Optional[FetchBoundariesSecurityOption2] = field(default=None, metadata={'security': { 'option': True }})
+    api_key: Optional[shared.SchemeAPIKey] = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    oauth2_authorization_code: Optional[shared.SchemeOauth2AuthorizationCode] = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class FetchBoundariesRequest:
+    security: FetchBoundariesSecurity = field()
     request: Optional[shared.BoundariesQuery] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: FetchBoundariesSecurity = field(default=None)
     
 
 @dataclass
 class FetchBoundariesResponse:
+    content_type: str = field()
+    headers: dict[str, List[str]] = field()
+    status_code: int = field()
     boundaries: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     error: Optional[shared.Error] = field(default=None)
-    headers: dict[str, List[str]] = field(default=None)
-    status_code: int = field(default=None)
     

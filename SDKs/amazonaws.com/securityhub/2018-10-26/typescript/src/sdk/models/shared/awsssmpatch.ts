@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AwsSsmComplianceSummary } from "./awsssmcompliancesummary";
+
 
 
 // AwsSsmPatch
@@ -7,6 +8,6 @@ import { AwsSsmComplianceSummary } from "./awsssmcompliancesummary";
  * Provides details about the compliance for a patch.
 **/
 export class AwsSsmPatch extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ComplianceSummary" })
+  @SpeakeasyMetadata({ data: "json, name=ComplianceSummary" })
   complianceSummary?: AwsSsmComplianceSummary;
 }

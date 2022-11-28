@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Suite } from "./suite";
+
 
 
 // GetSuiteResult
@@ -7,6 +8,6 @@ import { Suite } from "./suite";
  * Represents the result of a get suite request.
 **/
 export class GetSuiteResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=suite" })
+  @SpeakeasyMetadata({ data: "json, name=suite" })
   suite?: Suite;
 }

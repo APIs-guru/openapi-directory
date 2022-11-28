@@ -1,33 +1,34 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum BoxScoreByScoreidVFormatEnum {
-    Xml = "XML"
-,    Json = "JSON"
+    Xml = "XML",
+    Json = "JSON"
 }
 
 
 export class BoxScoreByScoreidVPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=format" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=format" })
   format: BoxScoreByScoreidVFormatEnum;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=scoreid" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=scoreid" })
   scoreid: string;
 }
 
 
 export class BoxScoreByScoreidVRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: BoxScoreByScoreidVPathParams;
 }
 
 
 export class BoxScoreByScoreidVResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   boxScoreV3?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

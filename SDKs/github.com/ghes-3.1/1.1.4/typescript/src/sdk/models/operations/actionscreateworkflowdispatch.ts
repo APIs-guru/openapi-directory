@@ -1,40 +1,41 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ActionsCreateWorkflowDispatchPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=owner" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=owner" })
   owner: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=repo" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=repo" })
   repo: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=workflow_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=workflow_id" })
   workflowId: any;
 }
 
 
 export class ActionsCreateWorkflowDispatchRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=inputs" })
+  @SpeakeasyMetadata({ data: "json, name=inputs" })
   inputs?: Map<string, string>;
 
-  @Metadata({ data: "json, name=ref" })
+  @SpeakeasyMetadata({ data: "json, name=ref" })
   ref: string;
 }
 
 
 export class ActionsCreateWorkflowDispatchRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: ActionsCreateWorkflowDispatchPathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request?: ActionsCreateWorkflowDispatchRequestBody;
 }
 
 
 export class ActionsCreateWorkflowDispatchResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

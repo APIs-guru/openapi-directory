@@ -1,5 +1,7 @@
 package shared
 
+// Locale
+// Locale
 type Locale struct {
 	Continent     string `json:"continent"`
 	ContinentCode string `json:"continentCode"`

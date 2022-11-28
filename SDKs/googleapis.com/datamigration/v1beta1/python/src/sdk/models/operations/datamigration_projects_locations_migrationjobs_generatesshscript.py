@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DatamigrationProjectsLocationsMigrationJobsGenerateSSHScriptPathParams:
-    migration_job: str = field(default=None, metadata={'path_param': { 'field_name': 'migrationJob', 'style': 'simple', 'explode': False }})
+    migration_job: str = field(metadata={'path_param': { 'field_name': 'migrationJob', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,21 +26,21 @@ class DatamigrationProjectsLocationsMigrationJobsGenerateSSHScriptQueryParams:
 
 @dataclass
 class DatamigrationProjectsLocationsMigrationJobsGenerateSSHScriptSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DatamigrationProjectsLocationsMigrationJobsGenerateSSHScriptRequest:
-    path_params: DatamigrationProjectsLocationsMigrationJobsGenerateSSHScriptPathParams = field(default=None)
-    query_params: DatamigrationProjectsLocationsMigrationJobsGenerateSSHScriptQueryParams = field(default=None)
+    path_params: DatamigrationProjectsLocationsMigrationJobsGenerateSSHScriptPathParams = field()
+    query_params: DatamigrationProjectsLocationsMigrationJobsGenerateSSHScriptQueryParams = field()
+    security: DatamigrationProjectsLocationsMigrationJobsGenerateSSHScriptSecurity = field()
     request: Optional[shared.GenerateSSHScriptRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: DatamigrationProjectsLocationsMigrationJobsGenerateSSHScriptSecurity = field(default=None)
     
 
 @dataclass
 class DatamigrationProjectsLocationsMigrationJobsGenerateSSHScriptResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     ssh_script: Optional[shared.SSHScript] = field(default=None)
-    status_code: int = field(default=None)
     

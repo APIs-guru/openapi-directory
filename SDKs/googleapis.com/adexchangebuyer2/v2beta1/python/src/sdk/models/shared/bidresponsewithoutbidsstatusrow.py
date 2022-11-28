@@ -1,8 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import metricvalue
-from . import rowdimensions
+from sdk import utils
+from . import *
 
 class BidResponseWithoutBidsStatusRowStatusEnum(str, Enum):
     STATUS_UNSPECIFIED = "STATUS_UNSPECIFIED"
@@ -14,7 +15,11 @@ class BidResponseWithoutBidsStatusRowStatusEnum(str, Enum):
 @dataclass_json
 @dataclass
 class BidResponseWithoutBidsStatusRow:
-    impression_count: Optional[metricvalue.MetricValue] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'impressionCount' }})
-    row_dimensions: Optional[rowdimensions.RowDimensions] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'rowDimensions' }})
-    status: Optional[BidResponseWithoutBidsStatusRowStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+    r"""BidResponseWithoutBidsStatusRow
+    The number of impressions with the specified dimension values that were considered to have no applicable bids, as described by the specified status.
+    """
+    
+    impression_count: Optional[MetricValue] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('impressionCount') }})
+    row_dimensions: Optional[RowDimensions] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('rowDimensions') }})
+    status: Optional[BidResponseWithoutBidsStatusRowStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('status') }})
     

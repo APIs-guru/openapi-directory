@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TrustedAdvisorCheckResult } from "./trustedadvisorcheckresult";
+
 
 
 // DescribeTrustedAdvisorCheckResultResponse
@@ -7,6 +8,6 @@ import { TrustedAdvisorCheckResult } from "./trustedadvisorcheckresult";
  * The result of the Trusted Advisor check returned by the <a>DescribeTrustedAdvisorCheckResult</a> operation.
 **/
 export class DescribeTrustedAdvisorCheckResultResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=result" })
+  @SpeakeasyMetadata({ data: "json, name=result" })
   result?: TrustedAdvisorCheckResult;
 }

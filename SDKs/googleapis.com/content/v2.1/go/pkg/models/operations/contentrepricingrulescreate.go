@@ -31,7 +31,7 @@ type ContentRepricingrulesCreateSecurity struct {
 type ContentRepricingrulesCreateRequest struct {
 	PathParams  ContentRepricingrulesCreatePathParams
 	QueryParams ContentRepricingrulesCreateQueryParams
-	Request     *shared.RepricingRule `request:"mediaType=application/json"`
+	Request     *shared.RepricingRuleInput `request:"mediaType=application/json"`
 	Security    ContentRepricingrulesCreateSecurity
 }
 

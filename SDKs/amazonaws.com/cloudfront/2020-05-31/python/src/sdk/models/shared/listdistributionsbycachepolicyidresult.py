@@ -1,0 +1,9 @@
+from dataclasses import dataclass, field
+from typing import Optional
+from . import *
+
+
+@dataclass
+class ListDistributionsByCachePolicyIDResult:
+    distribution_id_list: Optional[DistributionIDList] = field(default=None)
+    

@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetCreateTrafficMirrorFilterRuleActionEnum(str, Enum):
     CREATE_TRAFFIC_MIRROR_FILTER_RULE = "CreateTrafficMirrorFilterRule"
@@ -7,6 +11,10 @@ class GetCreateTrafficMirrorFilterRuleActionEnum(str, Enum):
 
 @dataclass
 class GetCreateTrafficMirrorFilterRuleDestinationPortRange:
+    r"""GetCreateTrafficMirrorFilterRuleDestinationPortRange
+    Information about the Traffic Mirror filter rule port range.
+    """
+    
     from_port: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'FromPort' }})
     to_port: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'ToPort' }})
     
@@ -17,6 +25,10 @@ class GetCreateTrafficMirrorFilterRuleRuleActionEnum(str, Enum):
 
 @dataclass
 class GetCreateTrafficMirrorFilterRuleSourcePortRange:
+    r"""GetCreateTrafficMirrorFilterRuleSourcePortRange
+    Information about the Traffic Mirror filter rule port range.
+    """
+    
     from_port: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'FromPort' }})
     to_port: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'ToPort' }})
     
@@ -30,20 +42,20 @@ class GetCreateTrafficMirrorFilterRuleVersionEnum(str, Enum):
 
 @dataclass
 class GetCreateTrafficMirrorFilterRuleQueryParams:
-    action: GetCreateTrafficMirrorFilterRuleActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetCreateTrafficMirrorFilterRuleActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    destination_cidr_block: str = field(metadata={'query_param': { 'field_name': 'DestinationCidrBlock', 'style': 'form', 'explode': True }})
+    rule_action: GetCreateTrafficMirrorFilterRuleRuleActionEnum = field(metadata={'query_param': { 'field_name': 'RuleAction', 'style': 'form', 'explode': True }})
+    rule_number: int = field(metadata={'query_param': { 'field_name': 'RuleNumber', 'style': 'form', 'explode': True }})
+    source_cidr_block: str = field(metadata={'query_param': { 'field_name': 'SourceCidrBlock', 'style': 'form', 'explode': True }})
+    traffic_direction: GetCreateTrafficMirrorFilterRuleTrafficDirectionEnum = field(metadata={'query_param': { 'field_name': 'TrafficDirection', 'style': 'form', 'explode': True }})
+    traffic_mirror_filter_id: str = field(metadata={'query_param': { 'field_name': 'TrafficMirrorFilterId', 'style': 'form', 'explode': True }})
+    version: GetCreateTrafficMirrorFilterRuleVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     client_token: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'ClientToken', 'style': 'form', 'explode': True }})
     description: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'Description', 'style': 'form', 'explode': True }})
-    destination_cidr_block: str = field(default=None, metadata={'query_param': { 'field_name': 'DestinationCidrBlock', 'style': 'form', 'explode': True }})
     destination_port_range: Optional[GetCreateTrafficMirrorFilterRuleDestinationPortRange] = field(default=None, metadata={'query_param': { 'field_name': 'DestinationPortRange', 'style': 'form', 'explode': True }})
     dry_run: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'DryRun', 'style': 'form', 'explode': True }})
     protocol: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'Protocol', 'style': 'form', 'explode': True }})
-    rule_action: GetCreateTrafficMirrorFilterRuleRuleActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'RuleAction', 'style': 'form', 'explode': True }})
-    rule_number: int = field(default=None, metadata={'query_param': { 'field_name': 'RuleNumber', 'style': 'form', 'explode': True }})
-    source_cidr_block: str = field(default=None, metadata={'query_param': { 'field_name': 'SourceCidrBlock', 'style': 'form', 'explode': True }})
     source_port_range: Optional[GetCreateTrafficMirrorFilterRuleSourcePortRange] = field(default=None, metadata={'query_param': { 'field_name': 'SourcePortRange', 'style': 'form', 'explode': True }})
-    traffic_direction: GetCreateTrafficMirrorFilterRuleTrafficDirectionEnum = field(default=None, metadata={'query_param': { 'field_name': 'TrafficDirection', 'style': 'form', 'explode': True }})
-    traffic_mirror_filter_id: str = field(default=None, metadata={'query_param': { 'field_name': 'TrafficMirrorFilterId', 'style': 'form', 'explode': True }})
-    version: GetCreateTrafficMirrorFilterRuleVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -59,13 +71,13 @@ class GetCreateTrafficMirrorFilterRuleHeaders:
 
 @dataclass
 class GetCreateTrafficMirrorFilterRuleRequest:
-    query_params: GetCreateTrafficMirrorFilterRuleQueryParams = field(default=None)
-    headers: GetCreateTrafficMirrorFilterRuleHeaders = field(default=None)
+    headers: GetCreateTrafficMirrorFilterRuleHeaders = field()
+    query_params: GetCreateTrafficMirrorFilterRuleQueryParams = field()
     
 
 @dataclass
 class GetCreateTrafficMirrorFilterRuleResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

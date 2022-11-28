@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleFirebaseAppcheckV1Service } from "./googlefirebaseappcheckv1service";
+
 
 
 // GoogleFirebaseAppcheckV1UpdateServiceRequest
@@ -7,9 +8,9 @@ import { GoogleFirebaseAppcheckV1Service } from "./googlefirebaseappcheckv1servi
  * Request message for the UpdateService method as well as an individual update message for the BatchUpdateServices method.
 **/
 export class GoogleFirebaseAppcheckV1UpdateServiceRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=service" })
+  @SpeakeasyMetadata({ data: "json, name=service" })
   service?: GoogleFirebaseAppcheckV1Service;
 
-  @Metadata({ data: "json, name=updateMask" })
+  @SpeakeasyMetadata({ data: "json, name=updateMask" })
   updateMask?: string;
 }

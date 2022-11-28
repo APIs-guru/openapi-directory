@@ -1,4 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CreateImageRequest } from "./createimagerequest";
 import { CreateLineRequest } from "./createlinerequest";
 import { CreateParagraphBulletsRequest } from "./createparagraphbulletsrequest";
@@ -45,140 +45,141 @@ import { UpdateTextStyleRequest } from "./updatetextstylerequest";
 import { UpdateVideoPropertiesRequest } from "./updatevideopropertiesrequest";
 
 
+
 // Request
 /** 
  * A single kind of update to apply to a presentation.
 **/
 export class Request extends SpeakeasyBase {
-  @Metadata({ data: "json, name=createImage" })
+  @SpeakeasyMetadata({ data: "json, name=createImage" })
   createImage?: CreateImageRequest;
 
-  @Metadata({ data: "json, name=createLine" })
+  @SpeakeasyMetadata({ data: "json, name=createLine" })
   createLine?: CreateLineRequest;
 
-  @Metadata({ data: "json, name=createParagraphBullets" })
+  @SpeakeasyMetadata({ data: "json, name=createParagraphBullets" })
   createParagraphBullets?: CreateParagraphBulletsRequest;
 
-  @Metadata({ data: "json, name=createShape" })
+  @SpeakeasyMetadata({ data: "json, name=createShape" })
   createShape?: CreateShapeRequest;
 
-  @Metadata({ data: "json, name=createSheetsChart" })
+  @SpeakeasyMetadata({ data: "json, name=createSheetsChart" })
   createSheetsChart?: CreateSheetsChartRequest;
 
-  @Metadata({ data: "json, name=createSlide" })
+  @SpeakeasyMetadata({ data: "json, name=createSlide" })
   createSlide?: CreateSlideRequest;
 
-  @Metadata({ data: "json, name=createTable" })
+  @SpeakeasyMetadata({ data: "json, name=createTable" })
   createTable?: CreateTableRequest;
 
-  @Metadata({ data: "json, name=createVideo" })
+  @SpeakeasyMetadata({ data: "json, name=createVideo" })
   createVideo?: CreateVideoRequest;
 
-  @Metadata({ data: "json, name=deleteObject" })
+  @SpeakeasyMetadata({ data: "json, name=deleteObject" })
   deleteObject?: DeleteObjectRequest;
 
-  @Metadata({ data: "json, name=deleteParagraphBullets" })
+  @SpeakeasyMetadata({ data: "json, name=deleteParagraphBullets" })
   deleteParagraphBullets?: DeleteParagraphBulletsRequest;
 
-  @Metadata({ data: "json, name=deleteTableColumn" })
+  @SpeakeasyMetadata({ data: "json, name=deleteTableColumn" })
   deleteTableColumn?: DeleteTableColumnRequest;
 
-  @Metadata({ data: "json, name=deleteTableRow" })
+  @SpeakeasyMetadata({ data: "json, name=deleteTableRow" })
   deleteTableRow?: DeleteTableRowRequest;
 
-  @Metadata({ data: "json, name=deleteText" })
+  @SpeakeasyMetadata({ data: "json, name=deleteText" })
   deleteText?: DeleteTextRequest;
 
-  @Metadata({ data: "json, name=duplicateObject" })
+  @SpeakeasyMetadata({ data: "json, name=duplicateObject" })
   duplicateObject?: DuplicateObjectRequest;
 
-  @Metadata({ data: "json, name=groupObjects" })
+  @SpeakeasyMetadata({ data: "json, name=groupObjects" })
   groupObjects?: GroupObjectsRequest;
 
-  @Metadata({ data: "json, name=insertTableColumns" })
+  @SpeakeasyMetadata({ data: "json, name=insertTableColumns" })
   insertTableColumns?: InsertTableColumnsRequest;
 
-  @Metadata({ data: "json, name=insertTableRows" })
+  @SpeakeasyMetadata({ data: "json, name=insertTableRows" })
   insertTableRows?: InsertTableRowsRequest;
 
-  @Metadata({ data: "json, name=insertText" })
+  @SpeakeasyMetadata({ data: "json, name=insertText" })
   insertText?: InsertTextRequest;
 
-  @Metadata({ data: "json, name=mergeTableCells" })
+  @SpeakeasyMetadata({ data: "json, name=mergeTableCells" })
   mergeTableCells?: MergeTableCellsRequest;
 
-  @Metadata({ data: "json, name=refreshSheetsChart" })
+  @SpeakeasyMetadata({ data: "json, name=refreshSheetsChart" })
   refreshSheetsChart?: RefreshSheetsChartRequest;
 
-  @Metadata({ data: "json, name=replaceAllShapesWithImage" })
+  @SpeakeasyMetadata({ data: "json, name=replaceAllShapesWithImage" })
   replaceAllShapesWithImage?: ReplaceAllShapesWithImageRequest;
 
-  @Metadata({ data: "json, name=replaceAllShapesWithSheetsChart" })
+  @SpeakeasyMetadata({ data: "json, name=replaceAllShapesWithSheetsChart" })
   replaceAllShapesWithSheetsChart?: ReplaceAllShapesWithSheetsChartRequest;
 
-  @Metadata({ data: "json, name=replaceAllText" })
+  @SpeakeasyMetadata({ data: "json, name=replaceAllText" })
   replaceAllText?: ReplaceAllTextRequest;
 
-  @Metadata({ data: "json, name=replaceImage" })
+  @SpeakeasyMetadata({ data: "json, name=replaceImage" })
   replaceImage?: ReplaceImageRequest;
 
-  @Metadata({ data: "json, name=rerouteLine" })
+  @SpeakeasyMetadata({ data: "json, name=rerouteLine" })
   rerouteLine?: RerouteLineRequest;
 
-  @Metadata({ data: "json, name=ungroupObjects" })
+  @SpeakeasyMetadata({ data: "json, name=ungroupObjects" })
   ungroupObjects?: UngroupObjectsRequest;
 
-  @Metadata({ data: "json, name=unmergeTableCells" })
+  @SpeakeasyMetadata({ data: "json, name=unmergeTableCells" })
   unmergeTableCells?: UnmergeTableCellsRequest;
 
-  @Metadata({ data: "json, name=updateImageProperties" })
+  @SpeakeasyMetadata({ data: "json, name=updateImageProperties" })
   updateImageProperties?: UpdateImagePropertiesRequest;
 
-  @Metadata({ data: "json, name=updateLineCategory" })
+  @SpeakeasyMetadata({ data: "json, name=updateLineCategory" })
   updateLineCategory?: UpdateLineCategoryRequest;
 
-  @Metadata({ data: "json, name=updateLineProperties" })
+  @SpeakeasyMetadata({ data: "json, name=updateLineProperties" })
   updateLineProperties?: UpdateLinePropertiesRequest;
 
-  @Metadata({ data: "json, name=updatePageElementAltText" })
+  @SpeakeasyMetadata({ data: "json, name=updatePageElementAltText" })
   updatePageElementAltText?: UpdatePageElementAltTextRequest;
 
-  @Metadata({ data: "json, name=updatePageElementTransform" })
+  @SpeakeasyMetadata({ data: "json, name=updatePageElementTransform" })
   updatePageElementTransform?: UpdatePageElementTransformRequest;
 
-  @Metadata({ data: "json, name=updatePageElementsZOrder" })
+  @SpeakeasyMetadata({ data: "json, name=updatePageElementsZOrder" })
   updatePageElementsZOrder?: UpdatePageElementsZOrderRequest;
 
-  @Metadata({ data: "json, name=updatePageProperties" })
+  @SpeakeasyMetadata({ data: "json, name=updatePageProperties" })
   updatePageProperties?: UpdatePagePropertiesRequest;
 
-  @Metadata({ data: "json, name=updateParagraphStyle" })
+  @SpeakeasyMetadata({ data: "json, name=updateParagraphStyle" })
   updateParagraphStyle?: UpdateParagraphStyleRequest;
 
-  @Metadata({ data: "json, name=updateShapeProperties" })
+  @SpeakeasyMetadata({ data: "json, name=updateShapeProperties" })
   updateShapeProperties?: UpdateShapePropertiesRequest;
 
-  @Metadata({ data: "json, name=updateSlideProperties" })
+  @SpeakeasyMetadata({ data: "json, name=updateSlideProperties" })
   updateSlideProperties?: UpdateSlidePropertiesRequest;
 
-  @Metadata({ data: "json, name=updateSlidesPosition" })
+  @SpeakeasyMetadata({ data: "json, name=updateSlidesPosition" })
   updateSlidesPosition?: UpdateSlidesPositionRequest;
 
-  @Metadata({ data: "json, name=updateTableBorderProperties" })
+  @SpeakeasyMetadata({ data: "json, name=updateTableBorderProperties" })
   updateTableBorderProperties?: UpdateTableBorderPropertiesRequest;
 
-  @Metadata({ data: "json, name=updateTableCellProperties" })
+  @SpeakeasyMetadata({ data: "json, name=updateTableCellProperties" })
   updateTableCellProperties?: UpdateTableCellPropertiesRequest;
 
-  @Metadata({ data: "json, name=updateTableColumnProperties" })
+  @SpeakeasyMetadata({ data: "json, name=updateTableColumnProperties" })
   updateTableColumnProperties?: UpdateTableColumnPropertiesRequest;
 
-  @Metadata({ data: "json, name=updateTableRowProperties" })
+  @SpeakeasyMetadata({ data: "json, name=updateTableRowProperties" })
   updateTableRowProperties?: UpdateTableRowPropertiesRequest;
 
-  @Metadata({ data: "json, name=updateTextStyle" })
+  @SpeakeasyMetadata({ data: "json, name=updateTextStyle" })
   updateTextStyle?: UpdateTextStyleRequest;
 
-  @Metadata({ data: "json, name=updateVideoProperties" })
+  @SpeakeasyMetadata({ data: "json, name=updateVideoProperties" })
   updateVideoProperties?: UpdateVideoPropertiesRequest;
 }

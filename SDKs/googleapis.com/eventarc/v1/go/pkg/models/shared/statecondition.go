@@ -22,6 +22,8 @@ const (
 	StateConditionCodeEnumDataLoss           StateConditionCodeEnum = "DATA_LOSS"
 )
 
+// StateCondition
+// A condition that is part of the trigger state computation.
 type StateCondition struct {
 	Code    *StateConditionCodeEnum `json:"code,omitempty"`
 	Message *string                 `json:"message,omitempty"`

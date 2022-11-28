@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import closestatus_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class CloseStatusFilter:
-    status: closestatus_enum.CloseStatusEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+    r"""CloseStatusFilter
+    Used to filter the closed workflow executions in visibility APIs by their close status.
+    """
+    
+    status: CloseStatusEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('status') }})
     

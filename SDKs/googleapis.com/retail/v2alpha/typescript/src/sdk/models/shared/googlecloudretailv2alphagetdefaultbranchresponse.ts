@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudRetailV2alphaGetDefaultBranchResponse
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Response message of CatalogService.GetDefaultBranch.
 **/
 export class GoogleCloudRetailV2alphaGetDefaultBranchResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=branch" })
+  @SpeakeasyMetadata({ data: "json, name=branch" })
   branch?: string;
 
-  @Metadata({ data: "json, name=note" })
+  @SpeakeasyMetadata({ data: "json, name=note" })
   note?: string;
 
-  @Metadata({ data: "json, name=setTime" })
+  @SpeakeasyMetadata({ data: "json, name=setTime" })
   setTime?: string;
 }

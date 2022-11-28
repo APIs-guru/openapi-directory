@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudDialogflowCxV3beta1TransitionRoute } from "./googleclouddialogflowcxv3beta1transitionroute";
+import { GoogleCloudDialogflowCxV3beta1TransitionRouteInput } from "./googleclouddialogflowcxv3beta1transitionroute";
+
 
 
 // GoogleCloudDialogflowCxV3beta1TransitionRouteGroup
@@ -8,12 +9,28 @@ import { GoogleCloudDialogflowCxV3beta1TransitionRoute } from "./googleclouddial
  * An TransitionRouteGroup represents a group of `TransitionRoutes` to be used by a Page.
 **/
 export class GoogleCloudDialogflowCxV3beta1TransitionRouteGroup extends SpeakeasyBase {
-  @Metadata({ data: "json, name=displayName" })
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
   displayName?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=transitionRoutes", elemType: shared.GoogleCloudDialogflowCxV3beta1TransitionRoute })
+  @SpeakeasyMetadata({ data: "json, name=transitionRoutes", elemType: GoogleCloudDialogflowCxV3beta1TransitionRoute })
   transitionRoutes?: GoogleCloudDialogflowCxV3beta1TransitionRoute[];
+}
+
+
+// GoogleCloudDialogflowCxV3beta1TransitionRouteGroupInput
+/** 
+ * An TransitionRouteGroup represents a group of `TransitionRoutes` to be used by a Page.
+**/
+export class GoogleCloudDialogflowCxV3beta1TransitionRouteGroupInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
+  displayName?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=name" })
+  name?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=transitionRoutes", elemType: GoogleCloudDialogflowCxV3beta1TransitionRouteInput })
+  transitionRoutes?: GoogleCloudDialogflowCxV3beta1TransitionRouteInput[];
 }

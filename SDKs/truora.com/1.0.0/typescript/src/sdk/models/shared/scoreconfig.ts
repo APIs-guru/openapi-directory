@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ScoreConfig
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Represents a set of configurations to determine the background check score
 **/
 export class ScoreConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=data_set" })
+  @SpeakeasyMetadata({ data: "json, name=data_set" })
   dataSet: string;
 
-  @Metadata({ data: "json, name=weight" })
+  @SpeakeasyMetadata({ data: "json, name=weight" })
   weight: string;
 }

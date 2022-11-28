@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DeletePullRequestApprovalRuleInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=approvalRuleName" })
+  @SpeakeasyMetadata({ data: "json, name=approvalRuleName" })
   approvalRuleName: string;
 
-  @Metadata({ data: "json, name=pullRequestId" })
+  @SpeakeasyMetadata({ data: "json, name=pullRequestId" })
   pullRequestId: string;
 }

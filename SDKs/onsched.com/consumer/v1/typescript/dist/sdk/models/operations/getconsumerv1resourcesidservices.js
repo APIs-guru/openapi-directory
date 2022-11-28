@@ -22,14 +22,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var GetConsumerV1ResourcesIdServicesPathParams = /** @class */ (function (_super) {
     __extends(GetConsumerV1ResourcesIdServicesPathParams, _super);
     function GetConsumerV1ResourcesIdServicesPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=id" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" }),
         __metadata("design:type", Number)
     ], GetConsumerV1ResourcesIdServicesPathParams.prototype, "id", void 0);
     return GetConsumerV1ResourcesIdServicesPathParams;
@@ -41,11 +41,11 @@ var GetConsumerV1ResourcesIdServicesQueryParams = /** @class */ (function (_supe
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=limit" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=limit" }),
         __metadata("design:type", Number)
     ], GetConsumerV1ResourcesIdServicesQueryParams.prototype, "limit", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=offset" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=offset" }),
         __metadata("design:type", Number)
     ], GetConsumerV1ResourcesIdServicesQueryParams.prototype, "offset", void 0);
     return GetConsumerV1ResourcesIdServicesQueryParams;
@@ -57,11 +57,11 @@ var GetConsumerV1ResourcesIdServicesRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetConsumerV1ResourcesIdServicesPathParams)
     ], GetConsumerV1ResourcesIdServicesRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetConsumerV1ResourcesIdServicesQueryParams)
     ], GetConsumerV1ResourcesIdServicesRequest.prototype, "queryParams", void 0);
     return GetConsumerV1ResourcesIdServicesRequest;
@@ -73,15 +73,15 @@ var GetConsumerV1ResourcesIdServicesResponse = /** @class */ (function (_super) 
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetConsumerV1ResourcesIdServicesResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Map)
     ], GetConsumerV1ResourcesIdServicesResponse.prototype, "resourceServiceListViewModel", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetConsumerV1ResourcesIdServicesResponse.prototype, "statusCode", void 0);
     return GetConsumerV1ResourcesIdServicesResponse;

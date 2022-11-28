@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// Dataset
+// Provides metadata for a dataset.
 type Dataset struct {
 	CreationDateTime    *time.Time `json:"creationDateTime,omitempty"`
 	DatasetArn          *string    `json:"datasetArn,omitempty"`

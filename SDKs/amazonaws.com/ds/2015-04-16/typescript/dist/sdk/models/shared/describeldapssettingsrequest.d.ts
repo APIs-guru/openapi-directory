@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { LdapsTypeEnum } from "./ldapstypeenum";
 export declare class DescribeLdapsSettingsRequest extends SpeakeasyBase {
     directoryId: string;

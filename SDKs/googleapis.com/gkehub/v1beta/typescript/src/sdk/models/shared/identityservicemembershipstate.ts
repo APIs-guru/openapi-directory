@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { IdentityServiceMembershipSpec } from "./identityservicemembershipspec";
 
+
 export enum IdentityServiceMembershipStateStateEnum {
-    DeploymentStateUnspecified = "DEPLOYMENT_STATE_UNSPECIFIED"
-,    Ok = "OK"
-,    Error = "ERROR"
+    DeploymentStateUnspecified = "DEPLOYMENT_STATE_UNSPECIFIED",
+    Ok = "OK",
+    Error = "ERROR"
 }
 
 
@@ -13,15 +14,15 @@ export enum IdentityServiceMembershipStateStateEnum {
  * **Anthos Identity Service**: State for a single Membership.
 **/
 export class IdentityServiceMembershipState extends SpeakeasyBase {
-  @Metadata({ data: "json, name=failureReason" })
+  @SpeakeasyMetadata({ data: "json, name=failureReason" })
   failureReason?: string;
 
-  @Metadata({ data: "json, name=installedVersion" })
+  @SpeakeasyMetadata({ data: "json, name=installedVersion" })
   installedVersion?: string;
 
-  @Metadata({ data: "json, name=memberConfig" })
+  @SpeakeasyMetadata({ data: "json, name=memberConfig" })
   memberConfig?: IdentityServiceMembershipSpec;
 
-  @Metadata({ data: "json, name=state" })
+  @SpeakeasyMetadata({ data: "json, name=state" })
   state?: IdentityServiceMembershipStateStateEnum;
 }

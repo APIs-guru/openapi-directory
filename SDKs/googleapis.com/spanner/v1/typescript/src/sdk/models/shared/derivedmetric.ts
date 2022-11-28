@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { LocalizedString } from "./localizedstring";
-import { LocalizedString } from "./localizedstring";
+
 
 
 // DerivedMetric
@@ -8,9 +8,9 @@ import { LocalizedString } from "./localizedstring";
  * A message representing a derived metric.
 **/
 export class DerivedMetric extends SpeakeasyBase {
-  @Metadata({ data: "json, name=denominator" })
+  @SpeakeasyMetadata({ data: "json, name=denominator" })
   denominator?: LocalizedString;
 
-  @Metadata({ data: "json, name=numerator" })
+  @SpeakeasyMetadata({ data: "json, name=numerator" })
   numerator?: LocalizedString;
 }

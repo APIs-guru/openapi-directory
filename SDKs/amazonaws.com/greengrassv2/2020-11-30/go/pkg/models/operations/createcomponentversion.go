@@ -14,6 +14,8 @@ type CreateComponentVersionHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// CreateComponentVersionRequestBodyLambdaFunction
+// Contains information about an Lambda function to import to create a component.
 type CreateComponentVersionRequestBodyLambdaFunction struct {
 	ComponentDependencies     map[string]shared.ComponentDependencyRequirement `json:"componentDependencies,omitempty"`
 	ComponentLambdaParameters *shared.LambdaExecutionParameters                `json:"componentLambdaParameters,omitempty"`

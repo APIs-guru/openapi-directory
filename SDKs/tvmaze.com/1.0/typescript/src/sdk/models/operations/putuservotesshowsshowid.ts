@@ -1,29 +1,30 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class PutUserVotesShowsShowIdPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=show_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=show_id" })
   showId: number;
 }
 
 
 export class PutUserVotesShowsShowIdRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: PutUserVotesShowsShowIdPathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
-  request?: shared.ShowVote;
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request?: shared.ShowVoteInput;
 }
 
 
 export class PutUserVotesShowsShowIdResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   showVote?: shared.ShowVote;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

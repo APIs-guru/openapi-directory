@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DeviceProfile } from "./deviceprofile";
+
 
 
 // PlaybackInfoDto
@@ -7,48 +8,48 @@ import { DeviceProfile } from "./deviceprofile";
  * Plabyback info dto.
 **/
 export class PlaybackInfoDto extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AllowAudioStreamCopy" })
+  @SpeakeasyMetadata({ data: "json, name=AllowAudioStreamCopy" })
   allowAudioStreamCopy?: boolean;
 
-  @Metadata({ data: "json, name=AllowVideoStreamCopy" })
+  @SpeakeasyMetadata({ data: "json, name=AllowVideoStreamCopy" })
   allowVideoStreamCopy?: boolean;
 
-  @Metadata({ data: "json, name=AudioStreamIndex" })
+  @SpeakeasyMetadata({ data: "json, name=AudioStreamIndex" })
   audioStreamIndex?: number;
 
-  @Metadata({ data: "json, name=AutoOpenLiveStream" })
+  @SpeakeasyMetadata({ data: "json, name=AutoOpenLiveStream" })
   autoOpenLiveStream?: boolean;
 
-  @Metadata({ data: "json, name=DeviceProfile" })
+  @SpeakeasyMetadata({ data: "json, name=DeviceProfile" })
   deviceProfile?: DeviceProfile;
 
-  @Metadata({ data: "json, name=EnableDirectPlay" })
+  @SpeakeasyMetadata({ data: "json, name=EnableDirectPlay" })
   enableDirectPlay?: boolean;
 
-  @Metadata({ data: "json, name=EnableDirectStream" })
+  @SpeakeasyMetadata({ data: "json, name=EnableDirectStream" })
   enableDirectStream?: boolean;
 
-  @Metadata({ data: "json, name=EnableTranscoding" })
+  @SpeakeasyMetadata({ data: "json, name=EnableTranscoding" })
   enableTranscoding?: boolean;
 
-  @Metadata({ data: "json, name=LiveStreamId" })
+  @SpeakeasyMetadata({ data: "json, name=LiveStreamId" })
   liveStreamId?: string;
 
-  @Metadata({ data: "json, name=MaxAudioChannels" })
+  @SpeakeasyMetadata({ data: "json, name=MaxAudioChannels" })
   maxAudioChannels?: number;
 
-  @Metadata({ data: "json, name=MaxStreamingBitrate" })
+  @SpeakeasyMetadata({ data: "json, name=MaxStreamingBitrate" })
   maxStreamingBitrate?: number;
 
-  @Metadata({ data: "json, name=MediaSourceId" })
+  @SpeakeasyMetadata({ data: "json, name=MediaSourceId" })
   mediaSourceId?: string;
 
-  @Metadata({ data: "json, name=StartTimeTicks" })
+  @SpeakeasyMetadata({ data: "json, name=StartTimeTicks" })
   startTimeTicks?: number;
 
-  @Metadata({ data: "json, name=SubtitleStreamIndex" })
+  @SpeakeasyMetadata({ data: "json, name=SubtitleStreamIndex" })
   subtitleStreamIndex?: number;
 
-  @Metadata({ data: "json, name=UserId" })
+  @SpeakeasyMetadata({ data: "json, name=UserId" })
   userId?: string;
 }

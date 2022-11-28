@@ -1,31 +1,32 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetShopsSlugPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=slug" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=slug" })
   slug: string;
 }
 
 
 export class GetShopsSlugQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=include_listing_count" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=include_listing_count" })
   includeListingCount?: boolean;
 }
 
 
 export class GetShopsSlugRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetShopsSlugPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetShopsSlugQueryParams;
 }
 
 
 export class GetShopsSlugResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

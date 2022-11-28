@@ -17,14 +17,14 @@ type AddSupportingWorkForGoalRequestBody struct {
 	Data *shared.GoalAddSupportingWorkRequest `json:"data,omitempty"`
 }
 
+type AddSupportingWorkForGoal200ApplicationJSON struct {
+	Data map[string]interface{} `json:"data,omitempty"`
+}
+
 type AddSupportingWorkForGoalRequest struct {
 	PathParams  AddSupportingWorkForGoalPathParams
 	QueryParams AddSupportingWorkForGoalQueryParams
 	Request     AddSupportingWorkForGoalRequestBody `request:"mediaType=application/json"`
-}
-
-type AddSupportingWorkForGoal200ApplicationJSON struct {
-	Data map[string]interface{} `json:"data,omitempty"`
 }
 
 type AddSupportingWorkForGoalResponse struct {

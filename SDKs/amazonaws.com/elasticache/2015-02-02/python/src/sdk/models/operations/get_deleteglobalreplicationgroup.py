@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetDeleteGlobalReplicationGroupActionEnum(str, Enum):
     DELETE_GLOBAL_REPLICATION_GROUP = "DeleteGlobalReplicationGroup"
@@ -10,10 +14,10 @@ class GetDeleteGlobalReplicationGroupVersionEnum(str, Enum):
 
 @dataclass
 class GetDeleteGlobalReplicationGroupQueryParams:
-    action: GetDeleteGlobalReplicationGroupActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    global_replication_group_id: str = field(default=None, metadata={'query_param': { 'field_name': 'GlobalReplicationGroupId', 'style': 'form', 'explode': True }})
-    retain_primary_replication_group: bool = field(default=None, metadata={'query_param': { 'field_name': 'RetainPrimaryReplicationGroup', 'style': 'form', 'explode': True }})
-    version: GetDeleteGlobalReplicationGroupVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: GetDeleteGlobalReplicationGroupActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    global_replication_group_id: str = field(metadata={'query_param': { 'field_name': 'GlobalReplicationGroupId', 'style': 'form', 'explode': True }})
+    retain_primary_replication_group: bool = field(metadata={'query_param': { 'field_name': 'RetainPrimaryReplicationGroup', 'style': 'form', 'explode': True }})
+    version: GetDeleteGlobalReplicationGroupVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -29,13 +33,13 @@ class GetDeleteGlobalReplicationGroupHeaders:
 
 @dataclass
 class GetDeleteGlobalReplicationGroupRequest:
-    query_params: GetDeleteGlobalReplicationGroupQueryParams = field(default=None)
-    headers: GetDeleteGlobalReplicationGroupHeaders = field(default=None)
+    headers: GetDeleteGlobalReplicationGroupHeaders = field()
+    query_params: GetDeleteGlobalReplicationGroupQueryParams = field()
     
 
 @dataclass
 class GetDeleteGlobalReplicationGroupResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

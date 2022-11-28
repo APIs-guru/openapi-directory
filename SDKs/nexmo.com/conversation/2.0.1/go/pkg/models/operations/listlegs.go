@@ -17,6 +17,8 @@ type ListLegs200ApplicationJSONEmbeddedLegs struct {
 	UUID             string                  `json:"uuid"`
 }
 
+// ListLegs200ApplicationJSONEmbedded
+// A list of conversation objects. See the [get details of a specific conversation](#retrieveConversation) response fields for a description of the nested objects
 type ListLegs200ApplicationJSONEmbedded struct {
 	Legs []ListLegs200ApplicationJSONEmbeddedLegs `json:"legs"`
 }
@@ -29,6 +31,8 @@ type ListLegs200ApplicationJSONLinks struct {
 	Self ListLegs200ApplicationJSONLinksSelf `json:"self"`
 }
 
+// ListLegs200ApplicationJSON
+// List Legs Response Payload Object
 type ListLegs200ApplicationJSON struct {
 	Embedded    ListLegs200ApplicationJSONEmbedded `json:"_embedded"`
 	Links       ListLegs200ApplicationJSONLinks    `json:"_links"`

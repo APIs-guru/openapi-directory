@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AssessmentRunStateEnum } from "./assessmentrunstateenum";
+
 
 
 // AssessmentRunStateChange
@@ -7,9 +8,9 @@ import { AssessmentRunStateEnum } from "./assessmentrunstateenum";
  * Used as one of the elements of the <a>AssessmentRun</a> data type.
 **/
 export class AssessmentRunStateChange extends SpeakeasyBase {
-  @Metadata({ data: "json, name=state" })
+  @SpeakeasyMetadata({ data: "json, name=state" })
   state: AssessmentRunStateEnum;
 
-  @Metadata({ data: "json, name=stateChangedAt" })
+  @SpeakeasyMetadata({ data: "json, name=stateChangedAt" })
   stateChangedAt: Date;
 }

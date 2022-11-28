@@ -1,7 +1,8 @@
 
 
+
 export enum BucketOwnerAccessEnum {
-    None = "NONE"
-,    ReadOnly = "READ_ONLY"
-,    Full = "FULL"
+    None = "NONE",
+    ReadOnly = "READ_ONLY",
+    Full = "FULL"
 }

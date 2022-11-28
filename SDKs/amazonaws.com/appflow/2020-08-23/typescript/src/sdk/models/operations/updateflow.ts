@@ -1,27 +1,28 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class UpdateFlowHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
@@ -31,16 +32,16 @@ export class UpdateFlowHeaders extends SpeakeasyBase {
  *  Contains information about the configuration of the source connector used in the flow. 
 **/
 export class UpdateFlowRequestBodySourceFlowConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=connectorProfileName" })
+  @SpeakeasyMetadata({ data: "json, name=connectorProfileName" })
   connectorProfileName?: string;
 
-  @Metadata({ data: "json, name=connectorType" })
+  @SpeakeasyMetadata({ data: "json, name=connectorType" })
   connectorType?: shared.ConnectorTypeEnum;
 
-  @Metadata({ data: "json, name=incrementalPullConfig" })
+  @SpeakeasyMetadata({ data: "json, name=incrementalPullConfig" })
   incrementalPullConfig?: shared.IncrementalPullConfig;
 
-  @Metadata({ data: "json, name=sourceConnectorProperties" })
+  @SpeakeasyMetadata({ data: "json, name=sourceConnectorProperties" })
   sourceConnectorProperties?: shared.SourceConnectorProperties;
 }
 
@@ -50,72 +51,72 @@ export class UpdateFlowRequestBodySourceFlowConfig extends SpeakeasyBase {
  *  The trigger settings that determine how and when Amazon AppFlow runs the specified flow. 
 **/
 export class UpdateFlowRequestBodyTriggerConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=triggerProperties" })
+  @SpeakeasyMetadata({ data: "json, name=triggerProperties" })
   triggerProperties?: shared.TriggerProperties;
 
-  @Metadata({ data: "json, name=triggerType" })
+  @SpeakeasyMetadata({ data: "json, name=triggerType" })
   triggerType?: shared.TriggerTypeEnum;
 }
 
 
 export class UpdateFlowRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=destinationFlowConfigList", elemType: shared.DestinationFlowConfig })
+  @SpeakeasyMetadata({ data: "json, name=destinationFlowConfigList", elemType: shared.DestinationFlowConfig })
   destinationFlowConfigList: shared.DestinationFlowConfig[];
 
-  @Metadata({ data: "json, name=flowName" })
+  @SpeakeasyMetadata({ data: "json, name=flowName" })
   flowName: string;
 
-  @Metadata({ data: "json, name=sourceFlowConfig" })
+  @SpeakeasyMetadata({ data: "json, name=sourceFlowConfig" })
   sourceFlowConfig: UpdateFlowRequestBodySourceFlowConfig;
 
-  @Metadata({ data: "json, name=tasks", elemType: shared.Task })
+  @SpeakeasyMetadata({ data: "json, name=tasks", elemType: shared.Task })
   tasks: shared.Task[];
 
-  @Metadata({ data: "json, name=triggerConfig" })
+  @SpeakeasyMetadata({ data: "json, name=triggerConfig" })
   triggerConfig: UpdateFlowRequestBodyTriggerConfig;
 }
 
 
 export class UpdateFlowRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: UpdateFlowHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: UpdateFlowRequestBody;
 }
 
 
 export class UpdateFlowResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   conflictException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   connectorAuthenticationException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   connectorServerException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   internalServerException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   resourceNotFoundException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   serviceQuotaExceededException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   updateFlowResponse?: shared.UpdateFlowResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   validationException?: any;
 }

@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { OcrWordElement } from "./ocrwordelement";
+
 
 
 // ImageToWordsWithLocationResult
@@ -8,9 +8,9 @@ import { OcrWordElement } from "./ocrwordelement";
  * Result of an image to words-with-location OCR operation
 **/
 export class ImageToWordsWithLocationResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Successful" })
+  @SpeakeasyMetadata({ data: "json, name=Successful" })
   successful?: boolean;
 
-  @Metadata({ data: "json, name=Words", elemType: shared.OcrWordElement })
+  @SpeakeasyMetadata({ data: "json, name=Words", elemType: OcrWordElement })
   words?: OcrWordElement[];
 }

@@ -1,11 +1,15 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class VaultMattersUpdatePathParams:
-    matter_id: str = field(default=None, metadata={'path_param': { 'field_name': 'matterId', 'style': 'simple', 'explode': False }})
+    matter_id: str = field(metadata={'path_param': { 'field_name': 'matterId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,21 +29,21 @@ class VaultMattersUpdateQueryParams:
 
 @dataclass
 class VaultMattersUpdateSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class VaultMattersUpdateRequest:
-    path_params: VaultMattersUpdatePathParams = field(default=None)
-    query_params: VaultMattersUpdateQueryParams = field(default=None)
+    path_params: VaultMattersUpdatePathParams = field()
+    query_params: VaultMattersUpdateQueryParams = field()
+    security: VaultMattersUpdateSecurity = field()
     request: Optional[shared.Matter] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: VaultMattersUpdateSecurity = field(default=None)
     
 
 @dataclass
 class VaultMattersUpdateResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     matter: Optional[shared.Matter] = field(default=None)
-    status_code: int = field(default=None)
     

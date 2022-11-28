@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Entities
@@ -7,6 +8,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * 
 **/
 export class Entities extends SpeakeasyBase {
-  @Metadata({ data: "json, name=linodes" })
+  @SpeakeasyMetadata({ data: "json, name=linodes" })
   linodes?: number[];
 }

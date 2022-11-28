@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // AllowedDomainsSettings
 /**
  * Configuration for IAP allowed domains. Lets you to restrict access to an app and allow access to only the domains that you list.
@@ -33,11 +33,11 @@ var AllowedDomainsSettings = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=domains" }),
+        SpeakeasyMetadata({ data: "json, name=domains" }),
         __metadata("design:type", Array)
     ], AllowedDomainsSettings.prototype, "domains", void 0);
     __decorate([
-        Metadata({ data: "json, name=enable" }),
+        SpeakeasyMetadata({ data: "json, name=enable" }),
         __metadata("design:type", Boolean)
     ], AllowedDomainsSettings.prototype, "enable", void 0);
     return AllowedDomainsSettings;

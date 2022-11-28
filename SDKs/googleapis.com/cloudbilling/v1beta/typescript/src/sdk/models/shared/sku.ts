@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Price } from "./price";
+
 
 
 // Sku
@@ -8,12 +8,12 @@ import { Price } from "./price";
  * Information about SKUs appearing in the cost estimate.
 **/
 export class Sku extends SpeakeasyBase {
-  @Metadata({ data: "json, name=displayName" })
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
   displayName?: string;
 
-  @Metadata({ data: "json, name=prices", elemType: shared.Price })
+  @SpeakeasyMetadata({ data: "json, name=prices", elemType: Price })
   prices?: Price[];
 
-  @Metadata({ data: "json, name=sku" })
+  @SpeakeasyMetadata({ data: "json, name=sku" })
   sku?: string;
 }

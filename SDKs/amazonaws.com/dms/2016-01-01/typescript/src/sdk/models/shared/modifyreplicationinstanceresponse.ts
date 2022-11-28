@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ReplicationInstance } from "./replicationinstance";
+
 
 
 // ModifyReplicationInstanceResponse
@@ -7,6 +8,6 @@ import { ReplicationInstance } from "./replicationinstance";
  * <p/>
 **/
 export class ModifyReplicationInstanceResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ReplicationInstance" })
+  @SpeakeasyMetadata({ data: "json, name=ReplicationInstance" })
   replicationInstance?: ReplicationInstance;
 }

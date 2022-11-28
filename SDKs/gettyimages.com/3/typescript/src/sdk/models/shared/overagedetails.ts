@@ -1,16 +1,17 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class OverageDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=count" })
+  @SpeakeasyMetadata({ data: "json, name=count" })
   count?: number;
 
-  @Metadata({ data: "json, name=limit" })
+  @SpeakeasyMetadata({ data: "json, name=limit" })
   limit?: number;
 
-  @Metadata({ data: "json, name=overages_reached" })
+  @SpeakeasyMetadata({ data: "json, name=overages_reached" })
   overagesReached?: boolean;
 
-  @Metadata({ data: "json, name=remaining" })
+  @SpeakeasyMetadata({ data: "json, name=remaining" })
   remaining?: number;
 }

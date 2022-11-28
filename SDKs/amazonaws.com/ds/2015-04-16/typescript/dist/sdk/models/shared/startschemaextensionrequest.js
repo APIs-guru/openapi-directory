@@ -22,26 +22,26 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var StartSchemaExtensionRequest = /** @class */ (function (_super) {
     __extends(StartSchemaExtensionRequest, _super);
     function StartSchemaExtensionRequest() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=CreateSnapshotBeforeSchemaExtension" }),
+        SpeakeasyMetadata({ data: "json, name=CreateSnapshotBeforeSchemaExtension" }),
         __metadata("design:type", Boolean)
     ], StartSchemaExtensionRequest.prototype, "createSnapshotBeforeSchemaExtension", void 0);
     __decorate([
-        Metadata({ data: "json, name=Description" }),
+        SpeakeasyMetadata({ data: "json, name=Description" }),
         __metadata("design:type", String)
     ], StartSchemaExtensionRequest.prototype, "description", void 0);
     __decorate([
-        Metadata({ data: "json, name=DirectoryId" }),
+        SpeakeasyMetadata({ data: "json, name=DirectoryId" }),
         __metadata("design:type", String)
     ], StartSchemaExtensionRequest.prototype, "directoryId", void 0);
     __decorate([
-        Metadata({ data: "json, name=LdifContent" }),
+        SpeakeasyMetadata({ data: "json, name=LdifContent" }),
         __metadata("design:type", String)
     ], StartSchemaExtensionRequest.prototype, "ldifContent", void 0);
     return StartSchemaExtensionRequest;

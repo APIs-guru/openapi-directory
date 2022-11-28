@@ -6,10 +6,14 @@ const (
 	GetModifyVpcAttributeActionEnumModifyVpcAttribute GetModifyVpcAttributeActionEnum = "ModifyVpcAttribute"
 )
 
+// GetModifyVpcAttributeEnableDNSHostnames
+// Describes a value for a resource attribute that is a Boolean value.
 type GetModifyVpcAttributeEnableDNSHostnames struct {
 	Value *bool `queryParam:"name=Value"`
 }
 
+// GetModifyVpcAttributeEnableDNSSupport
+// Describes a value for a resource attribute that is a Boolean value.
 type GetModifyVpcAttributeEnableDNSSupport struct {
 	Value *bool `queryParam:"name=Value"`
 }

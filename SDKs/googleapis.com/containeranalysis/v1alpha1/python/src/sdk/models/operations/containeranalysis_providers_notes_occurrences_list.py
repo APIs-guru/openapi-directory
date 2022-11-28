@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class ContaineranalysisProvidersNotesOccurrencesListPathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -28,20 +29,20 @@ class ContaineranalysisProvidersNotesOccurrencesListQueryParams:
 
 @dataclass
 class ContaineranalysisProvidersNotesOccurrencesListSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class ContaineranalysisProvidersNotesOccurrencesListRequest:
-    path_params: ContaineranalysisProvidersNotesOccurrencesListPathParams = field(default=None)
-    query_params: ContaineranalysisProvidersNotesOccurrencesListQueryParams = field(default=None)
-    security: ContaineranalysisProvidersNotesOccurrencesListSecurity = field(default=None)
+    path_params: ContaineranalysisProvidersNotesOccurrencesListPathParams = field()
+    query_params: ContaineranalysisProvidersNotesOccurrencesListQueryParams = field()
+    security: ContaineranalysisProvidersNotesOccurrencesListSecurity = field()
     
 
 @dataclass
 class ContaineranalysisProvidersNotesOccurrencesListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     list_note_occurrences_response: Optional[shared.ListNoteOccurrencesResponse] = field(default=None)
-    status_code: int = field(default=None)
     

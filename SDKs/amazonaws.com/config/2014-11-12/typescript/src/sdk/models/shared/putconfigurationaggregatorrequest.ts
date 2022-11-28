@@ -1,20 +1,20 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AccountAggregationSource } from "./accountaggregationsource";
 import { OrganizationAggregationSource } from "./organizationaggregationsource";
 import { Tag } from "./tag";
 
 
+
 export class PutConfigurationAggregatorRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AccountAggregationSources", elemType: shared.AccountAggregationSource })
+  @SpeakeasyMetadata({ data: "json, name=AccountAggregationSources", elemType: AccountAggregationSource })
   accountAggregationSources?: AccountAggregationSource[];
 
-  @Metadata({ data: "json, name=ConfigurationAggregatorName" })
+  @SpeakeasyMetadata({ data: "json, name=ConfigurationAggregatorName" })
   configurationAggregatorName: string;
 
-  @Metadata({ data: "json, name=OrganizationAggregationSource" })
+  @SpeakeasyMetadata({ data: "json, name=OrganizationAggregationSource" })
   organizationAggregationSource?: OrganizationAggregationSource;
 
-  @Metadata({ data: "json, name=Tags", elemType: shared.Tag })
+  @SpeakeasyMetadata({ data: "json, name=Tags", elemType: Tag })
   tags?: Tag[];
 }

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // SamlIdpConfig
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * SAML IDP (identity provider) configuration.
 **/
 export class SamlIdpConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=changePasswordUri" })
+  @SpeakeasyMetadata({ data: "json, name=changePasswordUri" })
   changePasswordUri?: string;
 
-  @Metadata({ data: "json, name=entityId" })
+  @SpeakeasyMetadata({ data: "json, name=entityId" })
   entityId?: string;
 
-  @Metadata({ data: "json, name=logoutRedirectUri" })
+  @SpeakeasyMetadata({ data: "json, name=logoutRedirectUri" })
   logoutRedirectUri?: string;
 
-  @Metadata({ data: "json, name=singleSignOnServiceUri" })
+  @SpeakeasyMetadata({ data: "json, name=singleSignOnServiceUri" })
   singleSignOnServiceUri?: string;
 }

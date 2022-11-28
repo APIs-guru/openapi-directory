@@ -22,22 +22,22 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var NewAddress = /** @class */ (function (_super) {
     __extends(NewAddress, _super);
     function NewAddress() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=ethereumaddress" }),
+        SpeakeasyMetadata({ data: "json, name=ethereumaddress" }),
         __metadata("design:type", String)
     ], NewAddress.prototype, "ethereumaddress", void 0);
     __decorate([
-        Metadata({ data: "json, name=ok" }),
+        SpeakeasyMetadata({ data: "json, name=ok" }),
         __metadata("design:type", Boolean)
     ], NewAddress.prototype, "ok", void 0);
     __decorate([
-        Metadata({ data: "json, name=password" }),
+        SpeakeasyMetadata({ data: "json, name=password" }),
         __metadata("design:type", String)
     ], NewAddress.prototype, "password", void 0);
     return NewAddress;

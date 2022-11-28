@@ -1,0 +1,28 @@
+export var ViolationReasonEnum;
+(function (ViolationReasonEnum) {
+    ViolationReasonEnum["WebAclMissingRuleGroup"] = "WEB_ACL_MISSING_RULE_GROUP";
+    ViolationReasonEnum["ResourceMissingWebAcl"] = "RESOURCE_MISSING_WEB_ACL";
+    ViolationReasonEnum["ResourceIncorrectWebAcl"] = "RESOURCE_INCORRECT_WEB_ACL";
+    ViolationReasonEnum["ResourceMissingShieldProtection"] = "RESOURCE_MISSING_SHIELD_PROTECTION";
+    ViolationReasonEnum["ResourceMissingWebAclOrShieldProtection"] = "RESOURCE_MISSING_WEB_ACL_OR_SHIELD_PROTECTION";
+    ViolationReasonEnum["ResourceMissingSecurityGroup"] = "RESOURCE_MISSING_SECURITY_GROUP";
+    ViolationReasonEnum["ResourceViolatesAuditSecurityGroup"] = "RESOURCE_VIOLATES_AUDIT_SECURITY_GROUP";
+    ViolationReasonEnum["SecurityGroupUnused"] = "SECURITY_GROUP_UNUSED";
+    ViolationReasonEnum["SecurityGroupRedundant"] = "SECURITY_GROUP_REDUNDANT";
+    ViolationReasonEnum["FmsCreatedSecurityGroupEdited"] = "FMS_CREATED_SECURITY_GROUP_EDITED";
+    ViolationReasonEnum["MissingFirewall"] = "MISSING_FIREWALL";
+    ViolationReasonEnum["MissingFirewallSubnetInAz"] = "MISSING_FIREWALL_SUBNET_IN_AZ";
+    ViolationReasonEnum["MissingExpectedRouteTable"] = "MISSING_EXPECTED_ROUTE_TABLE";
+    ViolationReasonEnum["NetworkFirewallPolicyModified"] = "NETWORK_FIREWALL_POLICY_MODIFIED";
+    ViolationReasonEnum["InternetGatewayMissingExpectedRoute"] = "INTERNET_GATEWAY_MISSING_EXPECTED_ROUTE";
+    ViolationReasonEnum["FirewallSubnetMissingExpectedRoute"] = "FIREWALL_SUBNET_MISSING_EXPECTED_ROUTE";
+    ViolationReasonEnum["UnexpectedFirewallRoutes"] = "UNEXPECTED_FIREWALL_ROUTES";
+    ViolationReasonEnum["UnexpectedTargetGatewayRoutes"] = "UNEXPECTED_TARGET_GATEWAY_ROUTES";
+    ViolationReasonEnum["TrafficInspectionCrossesAzBoundary"] = "TRAFFIC_INSPECTION_CROSSES_AZ_BOUNDARY";
+    ViolationReasonEnum["InvalidRouteConfiguration"] = "INVALID_ROUTE_CONFIGURATION";
+    ViolationReasonEnum["MissingTargetGateway"] = "MISSING_TARGET_GATEWAY";
+    ViolationReasonEnum["InternetTrafficNotInspected"] = "INTERNET_TRAFFIC_NOT_INSPECTED";
+    ViolationReasonEnum["BlackHoleRouteDetected"] = "BLACK_HOLE_ROUTE_DETECTED";
+    ViolationReasonEnum["BlackHoleRouteDetectedInFirewallSubnet"] = "BLACK_HOLE_ROUTE_DETECTED_IN_FIREWALL_SUBNET";
+    ViolationReasonEnum["ResourceMissingDnsFirewall"] = "RESOURCE_MISSING_DNS_FIREWALL";
+})(ViolationReasonEnum || (ViolationReasonEnum = {}));

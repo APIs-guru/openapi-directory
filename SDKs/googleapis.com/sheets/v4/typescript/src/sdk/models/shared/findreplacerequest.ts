@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GridRange } from "./gridrange";
+
 
 
 // FindReplaceRequest
@@ -7,30 +8,30 @@ import { GridRange } from "./gridrange";
  * Finds and replaces data in cells over a range, sheet, or all sheets.
 **/
 export class FindReplaceRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=allSheets" })
+  @SpeakeasyMetadata({ data: "json, name=allSheets" })
   allSheets?: boolean;
 
-  @Metadata({ data: "json, name=find" })
+  @SpeakeasyMetadata({ data: "json, name=find" })
   find?: string;
 
-  @Metadata({ data: "json, name=includeFormulas" })
+  @SpeakeasyMetadata({ data: "json, name=includeFormulas" })
   includeFormulas?: boolean;
 
-  @Metadata({ data: "json, name=matchCase" })
+  @SpeakeasyMetadata({ data: "json, name=matchCase" })
   matchCase?: boolean;
 
-  @Metadata({ data: "json, name=matchEntireCell" })
+  @SpeakeasyMetadata({ data: "json, name=matchEntireCell" })
   matchEntireCell?: boolean;
 
-  @Metadata({ data: "json, name=range" })
+  @SpeakeasyMetadata({ data: "json, name=range" })
   range?: GridRange;
 
-  @Metadata({ data: "json, name=replacement" })
+  @SpeakeasyMetadata({ data: "json, name=replacement" })
   replacement?: string;
 
-  @Metadata({ data: "json, name=searchByRegex" })
+  @SpeakeasyMetadata({ data: "json, name=searchByRegex" })
   searchByRegex?: boolean;
 
-  @Metadata({ data: "json, name=sheetId" })
+  @SpeakeasyMetadata({ data: "json, name=sheetId" })
   sheetId?: number;
 }

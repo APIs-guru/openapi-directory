@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CrawlStateEnum } from "./crawlstateenum";
+
 
 
 // Crawl
@@ -7,21 +8,21 @@ import { CrawlStateEnum } from "./crawlstateenum";
  * The details of a crawl in the workflow.
 **/
 export class Crawl extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CompletedOn" })
+  @SpeakeasyMetadata({ data: "json, name=CompletedOn" })
   completedOn?: Date;
 
-  @Metadata({ data: "json, name=ErrorMessage" })
+  @SpeakeasyMetadata({ data: "json, name=ErrorMessage" })
   errorMessage?: string;
 
-  @Metadata({ data: "json, name=LogGroup" })
+  @SpeakeasyMetadata({ data: "json, name=LogGroup" })
   logGroup?: string;
 
-  @Metadata({ data: "json, name=LogStream" })
+  @SpeakeasyMetadata({ data: "json, name=LogStream" })
   logStream?: string;
 
-  @Metadata({ data: "json, name=StartedOn" })
+  @SpeakeasyMetadata({ data: "json, name=StartedOn" })
   startedOn?: Date;
 
-  @Metadata({ data: "json, name=State" })
+  @SpeakeasyMetadata({ data: "json, name=State" })
   state?: CrawlStateEnum;
 }

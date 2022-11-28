@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // TerminateRequest
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Describes the information used to terminate a WorkSpace.
 **/
 export class TerminateRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=WorkspaceId" })
+  @SpeakeasyMetadata({ data: "json, name=WorkspaceId" })
   workspaceId: string;
 }

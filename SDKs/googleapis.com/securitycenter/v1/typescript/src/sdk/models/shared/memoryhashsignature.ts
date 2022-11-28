@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Detection } from "./detection";
+
 
 
 // MemoryHashSignature
@@ -8,9 +8,9 @@ import { Detection } from "./detection";
  * A signature corresponding to memory page hashes.
 **/
 export class MemoryHashSignature extends SpeakeasyBase {
-  @Metadata({ data: "json, name=binaryFamily" })
+  @SpeakeasyMetadata({ data: "json, name=binaryFamily" })
   binaryFamily?: string;
 
-  @Metadata({ data: "json, name=detections", elemType: shared.Detection })
+  @SpeakeasyMetadata({ data: "json, name=detections", elemType: Detection })
   detections?: Detection[];
 }

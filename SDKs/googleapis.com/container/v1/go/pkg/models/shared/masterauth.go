@@ -1,5 +1,7 @@
 package shared
 
+// MasterAuth
+// The authentication information for accessing the master endpoint. Authentication can be done using HTTP basic auth or using client certificates.
 type MasterAuth struct {
 	ClientCertificate       *string                  `json:"clientCertificate,omitempty"`
 	ClientCertificateConfig *ClientCertificateConfig `json:"clientCertificateConfig,omitempty"`

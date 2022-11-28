@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetConfigureHealthCheckActionEnum(str, Enum):
     CONFIGURE_HEALTH_CHECK = "ConfigureHealthCheck"
@@ -7,11 +11,15 @@ class GetConfigureHealthCheckActionEnum(str, Enum):
 
 @dataclass
 class GetConfigureHealthCheckHealthCheck:
-    healthy_threshold: int = field(default=None, metadata={'query_param': { 'field_name': 'HealthyThreshold' }})
-    interval: int = field(default=None, metadata={'query_param': { 'field_name': 'Interval' }})
-    target: str = field(default=None, metadata={'query_param': { 'field_name': 'Target' }})
-    timeout: int = field(default=None, metadata={'query_param': { 'field_name': 'Timeout' }})
-    unhealthy_threshold: int = field(default=None, metadata={'query_param': { 'field_name': 'UnhealthyThreshold' }})
+    r"""GetConfigureHealthCheckHealthCheck
+    Information about a health check.
+    """
+    
+    healthy_threshold: int = field(metadata={'query_param': { 'field_name': 'HealthyThreshold' }})
+    interval: int = field(metadata={'query_param': { 'field_name': 'Interval' }})
+    target: str = field(metadata={'query_param': { 'field_name': 'Target' }})
+    timeout: int = field(metadata={'query_param': { 'field_name': 'Timeout' }})
+    unhealthy_threshold: int = field(metadata={'query_param': { 'field_name': 'UnhealthyThreshold' }})
     
 class GetConfigureHealthCheckVersionEnum(str, Enum):
     TWO_THOUSAND_AND_TWELVE_06_01 = "2012-06-01"
@@ -19,10 +27,10 @@ class GetConfigureHealthCheckVersionEnum(str, Enum):
 
 @dataclass
 class GetConfigureHealthCheckQueryParams:
-    action: GetConfigureHealthCheckActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    health_check: GetConfigureHealthCheckHealthCheck = field(default=None, metadata={'query_param': { 'field_name': 'HealthCheck', 'style': 'form', 'explode': True }})
-    load_balancer_name: str = field(default=None, metadata={'query_param': { 'field_name': 'LoadBalancerName', 'style': 'form', 'explode': True }})
-    version: GetConfigureHealthCheckVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: GetConfigureHealthCheckActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    health_check: GetConfigureHealthCheckHealthCheck = field(metadata={'query_param': { 'field_name': 'HealthCheck', 'style': 'form', 'explode': True }})
+    load_balancer_name: str = field(metadata={'query_param': { 'field_name': 'LoadBalancerName', 'style': 'form', 'explode': True }})
+    version: GetConfigureHealthCheckVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -38,13 +46,13 @@ class GetConfigureHealthCheckHeaders:
 
 @dataclass
 class GetConfigureHealthCheckRequest:
-    query_params: GetConfigureHealthCheckQueryParams = field(default=None)
-    headers: GetConfigureHealthCheckHeaders = field(default=None)
+    headers: GetConfigureHealthCheckHeaders = field()
+    query_params: GetConfigureHealthCheckQueryParams = field()
     
 
 @dataclass
 class GetConfigureHealthCheckResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

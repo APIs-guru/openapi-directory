@@ -1,22 +1,22 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { LanguageCodeEnum } from "./languagecodeenum";
 import { Tag } from "./tag";
 
 
+
 export class CreateVocabularyRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=LanguageCode" })
+  @SpeakeasyMetadata({ data: "json, name=LanguageCode" })
   languageCode: LanguageCodeEnum;
 
-  @Metadata({ data: "json, name=Phrases" })
+  @SpeakeasyMetadata({ data: "json, name=Phrases" })
   phrases?: string[];
 
-  @Metadata({ data: "json, name=Tags", elemType: shared.Tag })
+  @SpeakeasyMetadata({ data: "json, name=Tags", elemType: Tag })
   tags?: Tag[];
 
-  @Metadata({ data: "json, name=VocabularyFileUri" })
+  @SpeakeasyMetadata({ data: "json, name=VocabularyFileUri" })
   vocabularyFileUri?: string;
 
-  @Metadata({ data: "json, name=VocabularyName" })
+  @SpeakeasyMetadata({ data: "json, name=VocabularyName" })
   vocabularyName: string;
 }

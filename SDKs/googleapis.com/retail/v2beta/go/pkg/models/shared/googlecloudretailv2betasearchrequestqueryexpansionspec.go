@@ -8,6 +8,8 @@ const (
 	GoogleCloudRetailV2betaSearchRequestQueryExpansionSpecConditionEnumAuto                 GoogleCloudRetailV2betaSearchRequestQueryExpansionSpecConditionEnum = "AUTO"
 )
 
+// GoogleCloudRetailV2betaSearchRequestQueryExpansionSpec
+// Specification to determine under which conditions query expansion should occur.
 type GoogleCloudRetailV2betaSearchRequestQueryExpansionSpec struct {
 	Condition            *GoogleCloudRetailV2betaSearchRequestQueryExpansionSpecConditionEnum `json:"condition,omitempty"`
 	PinUnexpandedResults *bool                                                                `json:"pinUnexpandedResults,omitempty"`

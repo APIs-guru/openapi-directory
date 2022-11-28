@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { LifecyclePolicyPreviewResult } from "./lifecyclepolicypreviewresult";
 import { LifecyclePolicyPreviewStatusEnum } from "./lifecyclepolicypreviewstatusenum";
 import { LifecyclePolicyPreviewSummary } from "./lifecyclepolicypreviewsummary";

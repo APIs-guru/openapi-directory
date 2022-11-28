@@ -1,12 +1,16 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
 @dataclass
 class CreateGroupVersionPathParams:
-    group_id: str = field(default=None, metadata={'path_param': { 'field_name': 'GroupId', 'style': 'simple', 'explode': False }})
+    group_id: str = field(metadata={'path_param': { 'field_name': 'GroupId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -24,26 +28,26 @@ class CreateGroupVersionHeaders:
 @dataclass_json
 @dataclass
 class CreateGroupVersionRequestBody:
-    connector_definition_version_arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ConnectorDefinitionVersionArn' }})
-    core_definition_version_arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'CoreDefinitionVersionArn' }})
-    device_definition_version_arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'DeviceDefinitionVersionArn' }})
-    function_definition_version_arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FunctionDefinitionVersionArn' }})
-    logger_definition_version_arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'LoggerDefinitionVersionArn' }})
-    resource_definition_version_arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ResourceDefinitionVersionArn' }})
-    subscription_definition_version_arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'SubscriptionDefinitionVersionArn' }})
+    connector_definition_version_arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ConnectorDefinitionVersionArn') }})
+    core_definition_version_arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('CoreDefinitionVersionArn') }})
+    device_definition_version_arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('DeviceDefinitionVersionArn') }})
+    function_definition_version_arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('FunctionDefinitionVersionArn') }})
+    logger_definition_version_arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('LoggerDefinitionVersionArn') }})
+    resource_definition_version_arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ResourceDefinitionVersionArn') }})
+    subscription_definition_version_arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('SubscriptionDefinitionVersionArn') }})
     
 
 @dataclass
 class CreateGroupVersionRequest:
-    path_params: CreateGroupVersionPathParams = field(default=None)
-    headers: CreateGroupVersionHeaders = field(default=None)
-    request: CreateGroupVersionRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: CreateGroupVersionHeaders = field()
+    path_params: CreateGroupVersionPathParams = field()
+    request: CreateGroupVersionRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class CreateGroupVersionResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     create_group_version_response: Optional[shared.CreateGroupVersionResponse] = field(default=None)
-    status_code: int = field(default=None)
     

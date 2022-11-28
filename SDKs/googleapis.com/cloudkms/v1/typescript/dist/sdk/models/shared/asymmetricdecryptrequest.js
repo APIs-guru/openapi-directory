@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // AsymmetricDecryptRequest
 /**
  * Request message for KeyManagementService.AsymmetricDecrypt.
@@ -33,11 +33,11 @@ var AsymmetricDecryptRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=ciphertext" }),
+        SpeakeasyMetadata({ data: "json, name=ciphertext" }),
         __metadata("design:type", String)
     ], AsymmetricDecryptRequest.prototype, "ciphertext", void 0);
     __decorate([
-        Metadata({ data: "json, name=ciphertextCrc32c" }),
+        SpeakeasyMetadata({ data: "json, name=ciphertextCrc32c" }),
         __metadata("design:type", String)
     ], AsymmetricDecryptRequest.prototype, "ciphertextCrc32c", void 0);
     return AsymmetricDecryptRequest;

@@ -1,5 +1,7 @@
 package shared
 
+// GoogleAppsDriveLabelsV2betaDisableLabelRequest
+// Request to deprecate a published Label.
 type GoogleAppsDriveLabelsV2betaDisableLabelRequest struct {
 	DisabledPolicy *GoogleAppsDriveLabelsV2betaLifecycleDisabledPolicy `json:"disabledPolicy,omitempty"`
 	LanguageCode   *string                                             `json:"languageCode,omitempty"`

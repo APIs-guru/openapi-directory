@@ -1,5 +1,7 @@
 package shared
 
+// APICounterV2Out
+// Detailed usage as reported by the deduplicating API counter.
 type APICounterV2Out struct {
 	APIKey               *APIKeyOut       `json:"apiKey,omitempty"`
 	APIService           *string          `json:"apiService,omitempty"`

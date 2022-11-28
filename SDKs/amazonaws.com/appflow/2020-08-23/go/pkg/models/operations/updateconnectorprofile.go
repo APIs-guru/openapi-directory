@@ -21,6 +21,9 @@ const (
 	UpdateConnectorProfileRequestBodyConnectionModeEnumPrivate UpdateConnectorProfileRequestBodyConnectionModeEnum = "Private"
 )
 
+// UpdateConnectorProfileRequestBodyConnectorProfileConfig
+//
+//	Defines the connector-specific configuration and credentials for the connector profile.
 type UpdateConnectorProfileRequestBodyConnectorProfileConfig struct {
 	ConnectorProfileCredentials *shared.ConnectorProfileCredentials `json:"connectorProfileCredentials,omitempty"`
 	ConnectorProfileProperties  *shared.ConnectorProfileProperties  `json:"connectorProfileProperties,omitempty"`

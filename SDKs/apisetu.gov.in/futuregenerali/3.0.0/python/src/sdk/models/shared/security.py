@@ -3,11 +3,11 @@ from dataclasses import dataclass, field
 
 
 @dataclass
-class SchemeAPIKey:
-    api_key: str = field(default=None, metadata={'security': { 'field_name': 'X-APISETU-APIKEY' }})
+class SchemeClientID:
+    api_key: str = field(metadata={'security': { 'field_name': 'X-APISETU-CLIENTID' }})
     
 
 @dataclass
-class SchemeClientID:
-    api_key: str = field(default=None, metadata={'security': { 'field_name': 'X-APISETU-CLIENTID' }})
+class SchemeAPIKey:
+    api_key: str = field(metadata={'security': { 'field_name': 'X-APISETU-APIKEY' }})
     

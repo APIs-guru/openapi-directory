@@ -10,10 +10,6 @@ type GetFavoritesContextByIDQueryParams struct {
 	UserID  *string `queryParam:"style=form,explode=true,name=user_id"`
 }
 
-type GetFavoritesContextByIDRequest struct {
-	QueryParams GetFavoritesContextByIDQueryParams
-}
-
 type GetFavoritesContextByID200ApplicationJSONCount struct {
 	Content *string `json:"_content,omitempty"`
 }
@@ -23,6 +19,10 @@ type GetFavoritesContextByID200ApplicationJSON struct {
 	Nextphoto *shared.ContextPhoto                            `json:"nextphoto,omitempty"`
 	Prevphoto *shared.ContextPhoto                            `json:"prevphoto,omitempty"`
 	Stat      *string                                         `json:"stat,omitempty"`
+}
+
+type GetFavoritesContextByIDRequest struct {
+	QueryParams GetFavoritesContextByIDQueryParams
 }
 
 type GetFavoritesContextByIDResponse struct {

@@ -1,15 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { IpRoute } from "./iproute";
 
 
+
 export class AddIpRoutesRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DirectoryId" })
+  @SpeakeasyMetadata({ data: "json, name=DirectoryId" })
   directoryId: string;
 
-  @Metadata({ data: "json, name=IpRoutes", elemType: shared.IpRoute })
+  @SpeakeasyMetadata({ data: "json, name=IpRoutes", elemType: IpRoute })
   ipRoutes: IpRoute[];
 
-  @Metadata({ data: "json, name=UpdateSecurityGroupForDirectoryControllers" })
+  @SpeakeasyMetadata({ data: "json, name=UpdateSecurityGroupForDirectoryControllers" })
   updateSecurityGroupForDirectoryControllers?: boolean;
 }

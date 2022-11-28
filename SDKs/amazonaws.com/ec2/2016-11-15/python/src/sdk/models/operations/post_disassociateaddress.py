@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostDisassociateAddressActionEnum(str, Enum):
     DISASSOCIATE_ADDRESS = "DisassociateAddress"
@@ -10,8 +14,8 @@ class PostDisassociateAddressVersionEnum(str, Enum):
 
 @dataclass
 class PostDisassociateAddressQueryParams:
-    action: PostDisassociateAddressActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostDisassociateAddressVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostDisassociateAddressActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostDisassociateAddressVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,13 +31,13 @@ class PostDisassociateAddressHeaders:
 
 @dataclass
 class PostDisassociateAddressRequest:
-    query_params: PostDisassociateAddressQueryParams = field(default=None)
-    headers: PostDisassociateAddressHeaders = field(default=None)
+    headers: PostDisassociateAddressHeaders = field()
+    query_params: PostDisassociateAddressQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostDisassociateAddressResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

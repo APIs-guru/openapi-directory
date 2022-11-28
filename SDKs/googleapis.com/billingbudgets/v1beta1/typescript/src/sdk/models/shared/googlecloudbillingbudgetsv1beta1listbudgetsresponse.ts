@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudBillingBudgetsV1beta1Budget } from "./googlecloudbillingbudgetsv1beta1budget";
+
 
 
 // GoogleCloudBillingBudgetsV1beta1ListBudgetsResponse
@@ -8,9 +8,9 @@ import { GoogleCloudBillingBudgetsV1beta1Budget } from "./googlecloudbillingbudg
  * Response for ListBudgets
 **/
 export class GoogleCloudBillingBudgetsV1beta1ListBudgetsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=budgets", elemType: shared.GoogleCloudBillingBudgetsV1beta1Budget })
+  @SpeakeasyMetadata({ data: "json, name=budgets", elemType: GoogleCloudBillingBudgetsV1beta1Budget })
   budgets?: GoogleCloudBillingBudgetsV1beta1Budget[];
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 }

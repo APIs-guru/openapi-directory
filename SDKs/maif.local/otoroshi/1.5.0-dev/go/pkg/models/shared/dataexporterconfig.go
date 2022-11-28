@@ -12,6 +12,8 @@ const (
 	DataExporterConfigTypEnumCustom  DataExporterConfigTypEnum = "custom"
 )
 
+// DataExporterConfig
+// Settings to export Otorshi events
 type DataExporterConfig struct {
 	BufferSize    *int32                     `json:"bufferSize,omitempty"`
 	Config        *interface{}               `json:"config,omitempty"`

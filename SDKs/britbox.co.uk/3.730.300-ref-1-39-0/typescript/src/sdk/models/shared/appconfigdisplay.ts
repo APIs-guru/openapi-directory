@@ -1,9 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Theme } from "./theme";
 
 
+
 export class AppConfigDisplay extends SpeakeasyBase {
-  @Metadata({ data: "json, name=themes", elemType: shared.Theme })
+  @SpeakeasyMetadata({ data: "json, name=themes", elemType: Theme })
   themes: Theme[];
 }

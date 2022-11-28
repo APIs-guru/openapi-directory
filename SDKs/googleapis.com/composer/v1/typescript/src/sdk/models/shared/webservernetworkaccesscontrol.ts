@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AllowedIpRange } from "./allowediprange";
+
 
 
 // WebServerNetworkAccessControl
@@ -8,6 +8,6 @@ import { AllowedIpRange } from "./allowediprange";
  * Network-level access control policy for the Airflow web server.
 **/
 export class WebServerNetworkAccessControl extends SpeakeasyBase {
-  @Metadata({ data: "json, name=allowedIpRanges", elemType: shared.AllowedIpRange })
+  @SpeakeasyMetadata({ data: "json, name=allowedIpRanges", elemType: AllowedIpRange })
   allowedIpRanges?: AllowedIpRange[];
 }

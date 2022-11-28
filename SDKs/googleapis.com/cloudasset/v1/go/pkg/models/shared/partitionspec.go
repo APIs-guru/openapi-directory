@@ -8,6 +8,8 @@ const (
 	PartitionSpecPartitionKeyEnumRequestTime             PartitionSpecPartitionKeyEnum = "REQUEST_TIME"
 )
 
+// PartitionSpec
+// Specifications of BigQuery partitioned table as export destination.
 type PartitionSpec struct {
 	PartitionKey *PartitionSpecPartitionKeyEnum `json:"partitionKey,omitempty"`
 }

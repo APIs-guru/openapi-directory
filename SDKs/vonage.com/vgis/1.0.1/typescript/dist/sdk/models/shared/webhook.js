@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var WebhookEventsEnum;
 (function (WebhookEventsEnum) {
     WebhookEventsEnum["Call"] = "CALL";
@@ -44,19 +44,19 @@ var WebhookStatistics = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=failed" }),
+        SpeakeasyMetadata({ data: "json, name=failed" }),
         __metadata("design:type", Boolean)
     ], WebhookStatistics.prototype, "failed", void 0);
     __decorate([
-        Metadata({ data: "json, name=totalAttempts" }),
+        SpeakeasyMetadata({ data: "json, name=totalAttempts" }),
         __metadata("design:type", Number)
     ], WebhookStatistics.prototype, "totalAttempts", void 0);
     __decorate([
-        Metadata({ data: "json, name=totalFailures" }),
+        SpeakeasyMetadata({ data: "json, name=totalFailures" }),
         __metadata("design:type", Number)
     ], WebhookStatistics.prototype, "totalFailures", void 0);
     __decorate([
-        Metadata({ data: "json, name=totalSuccesses" }),
+        SpeakeasyMetadata({ data: "json, name=totalSuccesses" }),
         __metadata("design:type", Number)
     ], WebhookStatistics.prototype, "totalSuccesses", void 0);
     return WebhookStatistics;
@@ -73,59 +73,59 @@ var Webhook = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=accountId" }),
+        SpeakeasyMetadata({ data: "json, name=accountId" }),
         __metadata("design:type", String)
     ], Webhook.prototype, "accountId", void 0);
     __decorate([
-        Metadata({ data: "json, name=createdAt" }),
+        SpeakeasyMetadata({ data: "json, name=createdAt" }),
         __metadata("design:type", String)
     ], Webhook.prototype, "createdAt", void 0);
     __decorate([
-        Metadata({ data: "json, name=events" }),
+        SpeakeasyMetadata({ data: "json, name=events" }),
         __metadata("design:type", Array)
     ], Webhook.prototype, "events", void 0);
     __decorate([
-        Metadata({ data: "json, name=expireAt" }),
+        SpeakeasyMetadata({ data: "json, name=expireAt" }),
         __metadata("design:type", String)
     ], Webhook.prototype, "expireAt", void 0);
     __decorate([
-        Metadata({ data: "json, name=id" }),
+        SpeakeasyMetadata({ data: "json, name=id" }),
         __metadata("design:type", String)
     ], Webhook.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "json, name=metadataPolicy" }),
+        SpeakeasyMetadata({ data: "json, name=metadataPolicy" }),
         __metadata("design:type", String)
     ], Webhook.prototype, "metadataPolicy", void 0);
     __decorate([
-        Metadata({ data: "json, name=purgeAt" }),
+        SpeakeasyMetadata({ data: "json, name=purgeAt" }),
         __metadata("design:type", String)
     ], Webhook.prototype, "purgeAt", void 0);
     __decorate([
-        Metadata({ data: "json, name=renewedAt" }),
+        SpeakeasyMetadata({ data: "json, name=renewedAt" }),
         __metadata("design:type", String)
     ], Webhook.prototype, "renewedAt", void 0);
     __decorate([
-        Metadata({ data: "json, name=signingAlgo" }),
+        SpeakeasyMetadata({ data: "json, name=signingAlgo" }),
         __metadata("design:type", String)
     ], Webhook.prototype, "signingAlgo", void 0);
     __decorate([
-        Metadata({ data: "json, name=signingKey" }),
+        SpeakeasyMetadata({ data: "json, name=signingKey" }),
         __metadata("design:type", String)
     ], Webhook.prototype, "signingKey", void 0);
     __decorate([
-        Metadata({ data: "json, name=statistics" }),
+        SpeakeasyMetadata({ data: "json, name=statistics" }),
         __metadata("design:type", WebhookStatistics)
     ], Webhook.prototype, "statistics", void 0);
     __decorate([
-        Metadata({ data: "json, name=status" }),
+        SpeakeasyMetadata({ data: "json, name=status" }),
         __metadata("design:type", String)
     ], Webhook.prototype, "status", void 0);
     __decorate([
-        Metadata({ data: "json, name=url" }),
+        SpeakeasyMetadata({ data: "json, name=url" }),
         __metadata("design:type", String)
     ], Webhook.prototype, "url", void 0);
     __decorate([
-        Metadata({ data: "json, name=userId" }),
+        SpeakeasyMetadata({ data: "json, name=userId" }),
         __metadata("design:type", String)
     ], Webhook.prototype, "userId", void 0);
     return Webhook;

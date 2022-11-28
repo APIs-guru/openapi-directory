@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class CreateCliTokenResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CliToken" })
+  @SpeakeasyMetadata({ data: "json, name=CliToken" })
   cliToken?: string;
 
-  @Metadata({ data: "json, name=WebServerHostname" })
+  @SpeakeasyMetadata({ data: "json, name=WebServerHostname" })
   webServerHostname?: string;
 }

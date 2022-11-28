@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import environmenttemplate
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class DeleteEnvironmentTemplateOutput:
-    environment_template: Optional[environmenttemplate.EnvironmentTemplate] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'environmentTemplate' }})
+    environment_template: Optional[EnvironmentTemplate] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('environmentTemplate') }})
     

@@ -22,8 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var SearchResponseChecksStatusEnum;
 (function (SearchResponseChecksStatusEnum) {
     SearchResponseChecksStatusEnum["Valid"] = "VALID";
@@ -35,19 +34,19 @@ var SearchResponseChecks = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=code" }),
+        SpeakeasyMetadata({ data: "json, name=code" }),
         __metadata("design:type", String)
     ], SearchResponseChecks.prototype, "code", void 0);
     __decorate([
-        Metadata({ data: "json, name=date_received" }),
+        SpeakeasyMetadata({ data: "json, name=date_received" }),
         __metadata("design:type", String)
     ], SearchResponseChecks.prototype, "dateReceived", void 0);
     __decorate([
-        Metadata({ data: "json, name=ip_address" }),
+        SpeakeasyMetadata({ data: "json, name=ip_address" }),
         __metadata("design:type", String)
     ], SearchResponseChecks.prototype, "ipAddress", void 0);
     __decorate([
-        Metadata({ data: "json, name=status" }),
+        SpeakeasyMetadata({ data: "json, name=status" }),
         __metadata("design:type", String)
     ], SearchResponseChecks.prototype, "status", void 0);
     return SearchResponseChecks;
@@ -64,11 +63,11 @@ var SearchResponseEvents = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=id" }),
+        SpeakeasyMetadata({ data: "json, name=id" }),
         __metadata("design:type", String)
     ], SearchResponseEvents.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "json, name=type" }),
+        SpeakeasyMetadata({ data: "json, name=type" }),
         __metadata("design:type", String)
     ], SearchResponseEvents.prototype, "type", void 0);
     return SearchResponseEvents;
@@ -92,59 +91,59 @@ var SearchResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=account_id" }),
+        SpeakeasyMetadata({ data: "json, name=account_id" }),
         __metadata("design:type", String)
     ], SearchResponse.prototype, "accountId", void 0);
     __decorate([
-        Metadata({ data: "json, name=checks", elemType: shared.SearchResponseChecks }),
+        SpeakeasyMetadata({ data: "json, name=checks", elemType: SearchResponseChecks }),
         __metadata("design:type", Array)
     ], SearchResponse.prototype, "checks", void 0);
     __decorate([
-        Metadata({ data: "json, name=currency" }),
+        SpeakeasyMetadata({ data: "json, name=currency" }),
         __metadata("design:type", String)
     ], SearchResponse.prototype, "currency", void 0);
     __decorate([
-        Metadata({ data: "json, name=date_finalized" }),
+        SpeakeasyMetadata({ data: "json, name=date_finalized" }),
         __metadata("design:type", String)
     ], SearchResponse.prototype, "dateFinalized", void 0);
     __decorate([
-        Metadata({ data: "json, name=date_submitted" }),
+        SpeakeasyMetadata({ data: "json, name=date_submitted" }),
         __metadata("design:type", String)
     ], SearchResponse.prototype, "dateSubmitted", void 0);
     __decorate([
-        Metadata({ data: "json, name=estimated_price_messages_sent" }),
+        SpeakeasyMetadata({ data: "json, name=estimated_price_messages_sent" }),
         __metadata("design:type", String)
     ], SearchResponse.prototype, "estimatedPriceMessagesSent", void 0);
     __decorate([
-        Metadata({ data: "json, name=events", elemType: shared.SearchResponseEvents }),
+        SpeakeasyMetadata({ data: "json, name=events", elemType: SearchResponseEvents }),
         __metadata("design:type", Array)
     ], SearchResponse.prototype, "events", void 0);
     __decorate([
-        Metadata({ data: "json, name=first_event_date" }),
+        SpeakeasyMetadata({ data: "json, name=first_event_date" }),
         __metadata("design:type", String)
     ], SearchResponse.prototype, "firstEventDate", void 0);
     __decorate([
-        Metadata({ data: "json, name=last_event_date" }),
+        SpeakeasyMetadata({ data: "json, name=last_event_date" }),
         __metadata("design:type", String)
     ], SearchResponse.prototype, "lastEventDate", void 0);
     __decorate([
-        Metadata({ data: "json, name=number" }),
+        SpeakeasyMetadata({ data: "json, name=number" }),
         __metadata("design:type", String)
     ], SearchResponse.prototype, "number", void 0);
     __decorate([
-        Metadata({ data: "json, name=price" }),
+        SpeakeasyMetadata({ data: "json, name=price" }),
         __metadata("design:type", String)
     ], SearchResponse.prototype, "price", void 0);
     __decorate([
-        Metadata({ data: "json, name=request_id" }),
+        SpeakeasyMetadata({ data: "json, name=request_id" }),
         __metadata("design:type", String)
     ], SearchResponse.prototype, "requestId", void 0);
     __decorate([
-        Metadata({ data: "json, name=sender_id" }),
+        SpeakeasyMetadata({ data: "json, name=sender_id" }),
         __metadata("design:type", String)
     ], SearchResponse.prototype, "senderId", void 0);
     __decorate([
-        Metadata({ data: "json, name=status" }),
+        SpeakeasyMetadata({ data: "json, name=status" }),
         __metadata("design:type", String)
     ], SearchResponse.prototype, "status", void 0);
     return SearchResponse;

@@ -1,5 +1,7 @@
 package shared
 
+// GoogleChromeManagementV1TelemetryDevice
+// Telemetry data collected from a managed device.
 type GoogleChromeManagementV1TelemetryDevice struct {
 	AudioStatusReport        []GoogleChromeManagementV1AudioStatusReport        `json:"audioStatusReport,omitempty"`
 	BatteryInfo              []GoogleChromeManagementV1BatteryInfo              `json:"batteryInfo,omitempty"`

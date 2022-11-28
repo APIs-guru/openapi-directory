@@ -17,6 +17,8 @@ const (
 	CreateOrganizationBrandingPolicyRequestBodyAdminSettingsAppliesToEnumAllSamlAdmins             CreateOrganizationBrandingPolicyRequestBodyAdminSettingsAppliesToEnum = "All SAML admins"
 )
 
+// CreateOrganizationBrandingPolicyRequestBodyAdminSettings
+// Settings for describing which kinds of admins this policy applies to.
 type CreateOrganizationBrandingPolicyRequestBodyAdminSettings struct {
 	AppliesTo *CreateOrganizationBrandingPolicyRequestBodyAdminSettingsAppliesToEnum `json:"appliesTo,omitempty"`
 	Values    []string                                                               `json:"values,omitempty"`
@@ -110,6 +112,13 @@ const (
 	CreateOrganizationBrandingPolicyRequestBodyHelpSettingsUniversalSearchKnowledgeBaseSearchEnumShow             CreateOrganizationBrandingPolicyRequestBodyHelpSettingsUniversalSearchKnowledgeBaseSearchEnum = "show"
 )
 
+// CreateOrganizationBrandingPolicyRequestBodyHelpSettings
+//
+//	   Settings for describing the modifications to various Help page features. Each property in this object accepts one of
+//	   'default or inherit' (do not modify functionality), 'hide' (remove the section from Dashboard), or 'show' (always show
+//	   the section on Dashboard). Some properties in this object also accept custom HTML used to replace the section on
+//	   Dashboard; see the documentation for each property to see the allowed values.
+//	Each property defaults to 'default or inherit' when not provided.
 type CreateOrganizationBrandingPolicyRequestBodyHelpSettings struct {
 	APIDocsSubtab                      *CreateOrganizationBrandingPolicyRequestBodyHelpSettingsAPIDocsSubtabEnum                      `json:"apiDocsSubtab,omitempty"`
 	CasesSubtab                        *CreateOrganizationBrandingPolicyRequestBodyHelpSettingsCasesSubtabEnum                        `json:"casesSubtab,omitempty"`

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { FieldToMatch } from "./fieldtomatch";
 import { PositionalConstraintEnum } from "./positionalconstraintenum";
 import { TextTransformationEnum } from "./texttransformationenum";

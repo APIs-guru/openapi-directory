@@ -10,7 +10,7 @@ import (
 	"strings"
 )
 
-var Servers = []string{
+var ServerList = []string{
 	"https://api.xero.com/bankfeeds.xro/1.0",
 }
 
@@ -19,9 +19,13 @@ type HTTPClient interface {
 }
 
 type SDK struct {
-	defaultClient  HTTPClient
-	securityClient HTTPClient
-	serverURL      string
+	_defaultClient  HTTPClient
+	_securityClient HTTPClient
+
+	_serverURL  string
+	_language   string
+	_sdkVersion string
+	_genVersion string
 }
 
 type SDKOption func(*SDK)
@@ -32,27 +36,46 @@ func WithServerURL(serverURL string, params map[string]string) SDKOption {
 			serverURL = utils.ReplaceParameters(serverURL, params)
 		}
 
-		sdk.serverURL = serverURL
+		sdk._serverURL = serverURL
+	}
+}
+
+func WithClient(client HTTPClient) SDKOption {
+	return func(sdk *SDK) {
+		sdk._defaultClient = client
 	}
 }
 
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
-		defaultClient:  http.DefaultClient,
-		securityClient: http.DefaultClient,
+		_language:   "go",
+		_sdkVersion: "",
+		_genVersion: "internal",
 	}
 	for _, opt := range opts {
 		opt(sdk)
 	}
-	if sdk.serverURL == "" {
-		sdk.serverURL = Servers[0]
+
+	if sdk._defaultClient == nil {
+		sdk._defaultClient = http.DefaultClient
+	}
+	if sdk._securityClient == nil {
+
+		sdk._securityClient = sdk._defaultClient
+
+	}
+
+	if sdk._serverURL == "" {
+		sdk._serverURL = ServerList[0]
 	}
 
 	return sdk
 }
 
+// CreateFeedConnections - Create one or more new feed connection
+// By passing in the FeedConnections array object in the body, you can create one or more new feed connections
 func (s *SDK) CreateFeedConnections(ctx context.Context, request operations.CreateFeedConnectionsRequest) (*operations.CreateFeedConnectionsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/FeedConnections"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -72,7 +95,7 @@ func (s *SDK) CreateFeedConnections(ctx context.Context, request operations.Crea
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -113,8 +136,9 @@ func (s *SDK) CreateFeedConnections(ctx context.Context, request operations.Crea
 	return res, nil
 }
 
+// CreateStatements - Creates one or more new statements
 func (s *SDK) CreateStatements(ctx context.Context, request operations.CreateStatementsRequest) (*operations.CreateStatementsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/Statements"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -131,7 +155,7 @@ func (s *SDK) CreateStatements(ctx context.Context, request operations.CreateSta
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -221,8 +245,10 @@ func (s *SDK) CreateStatements(ctx context.Context, request operations.CreateSta
 	return res, nil
 }
 
+// DeleteFeedConnections - Delete an existing feed connection
+// By passing in FeedConnections array object in the body, you can delete a feed connection.
 func (s *SDK) DeleteFeedConnections(ctx context.Context, request operations.DeleteFeedConnectionsRequest) (*operations.DeleteFeedConnectionsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/FeedConnections/DeleteRequests"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -242,7 +268,7 @@ func (s *SDK) DeleteFeedConnections(ctx context.Context, request operations.Dele
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -273,8 +299,10 @@ func (s *SDK) DeleteFeedConnections(ctx context.Context, request operations.Dele
 	return res, nil
 }
 
+// GetFeedConnection - Retrieve single feed connection based on a unique id provided
+// By passing in a FeedConnection Id options, you can search for matching feed connections
 func (s *SDK) GetFeedConnection(ctx context.Context, request operations.GetFeedConnectionRequest) (*operations.GetFeedConnectionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/FeedConnections/{id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -284,7 +312,7 @@ func (s *SDK) GetFeedConnection(ctx context.Context, request operations.GetFeedC
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -315,8 +343,10 @@ func (s *SDK) GetFeedConnection(ctx context.Context, request operations.GetFeedC
 	return res, nil
 }
 
+// GetFeedConnections - Searches for feed connections
+// By passing in the appropriate options, you can search for available feed connections in the system.
 func (s *SDK) GetFeedConnections(ctx context.Context, request operations.GetFeedConnectionsRequest) (*operations.GetFeedConnectionsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/FeedConnections"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -328,7 +358,7 @@ func (s *SDK) GetFeedConnections(ctx context.Context, request operations.GetFeed
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -359,8 +389,10 @@ func (s *SDK) GetFeedConnections(ctx context.Context, request operations.GetFeed
 	return res, nil
 }
 
+// GetStatement - Retrieve single statement based on unique id provided
+// By passing in a statement id, you can search for matching statements
 func (s *SDK) GetStatement(ctx context.Context, request operations.GetStatementRequest) (*operations.GetStatementResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Statements/{statementID}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -372,7 +404,7 @@ func (s *SDK) GetStatement(ctx context.Context, request operations.GetStatementR
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -403,8 +435,10 @@ func (s *SDK) GetStatement(ctx context.Context, request operations.GetStatementR
 	return res, nil
 }
 
+// GetStatements - Retrieve all statements
+// By passing in parameters, you can search for matching statements
 func (s *SDK) GetStatements(ctx context.Context, request operations.GetStatementsRequest) (*operations.GetStatementsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/Statements"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -416,7 +450,7 @@ func (s *SDK) GetStatements(ctx context.Context, request operations.GetStatement
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {

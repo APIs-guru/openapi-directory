@@ -1,6 +1,7 @@
 
 
+
 export enum NestingLevelValueEnum {
-    None = "none"
-,    One = "one"
+    None = "none",
+    One = "one"
 }

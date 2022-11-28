@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from typing import Any,List,Optional
+from enum import Enum
 
 class PlayerGameLogsBySeasonFormatEnum(str, Enum):
     XML = "XML"
@@ -8,20 +9,20 @@ class PlayerGameLogsBySeasonFormatEnum(str, Enum):
 
 @dataclass
 class PlayerGameLogsBySeasonPathParams:
-    format: PlayerGameLogsBySeasonFormatEnum = field(default=None, metadata={'path_param': { 'field_name': 'format', 'style': 'simple', 'explode': False }})
-    numberofgames: str = field(default=None, metadata={'path_param': { 'field_name': 'numberofgames', 'style': 'simple', 'explode': False }})
-    playerid: str = field(default=None, metadata={'path_param': { 'field_name': 'playerid', 'style': 'simple', 'explode': False }})
-    season: str = field(default=None, metadata={'path_param': { 'field_name': 'season', 'style': 'simple', 'explode': False }})
+    format: PlayerGameLogsBySeasonFormatEnum = field(metadata={'path_param': { 'field_name': 'format', 'style': 'simple', 'explode': False }})
+    numberofgames: str = field(metadata={'path_param': { 'field_name': 'numberofgames', 'style': 'simple', 'explode': False }})
+    playerid: str = field(metadata={'path_param': { 'field_name': 'playerid', 'style': 'simple', 'explode': False }})
+    season: str = field(metadata={'path_param': { 'field_name': 'season', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class PlayerGameLogsBySeasonRequest:
-    path_params: PlayerGameLogsBySeasonPathParams = field(default=None)
+    path_params: PlayerGameLogsBySeasonPathParams = field()
     
 
 @dataclass
 class PlayerGameLogsBySeasonResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     player_games: Optional[List[Any]] = field(default=None)
-    status_code: int = field(default=None)
     

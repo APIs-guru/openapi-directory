@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Css } from "./css";
+
 
 
 // ListCssesResponse
@@ -8,9 +8,9 @@ import { Css } from "./css";
  * The response message for the `ListCsses` method
 **/
 export class ListCssesResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=csses", elemType: shared.Css })
+  @SpeakeasyMetadata({ data: "json, name=csses", elemType: Css })
   csses?: Css[];
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 }

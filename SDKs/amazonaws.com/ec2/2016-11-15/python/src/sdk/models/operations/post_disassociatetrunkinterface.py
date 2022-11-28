@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostDisassociateTrunkInterfaceActionEnum(str, Enum):
     DISASSOCIATE_TRUNK_INTERFACE = "DisassociateTrunkInterface"
@@ -10,8 +14,8 @@ class PostDisassociateTrunkInterfaceVersionEnum(str, Enum):
 
 @dataclass
 class PostDisassociateTrunkInterfaceQueryParams:
-    action: PostDisassociateTrunkInterfaceActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostDisassociateTrunkInterfaceVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostDisassociateTrunkInterfaceActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostDisassociateTrunkInterfaceVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostDisassociateTrunkInterfaceHeaders:
 
 @dataclass
 class PostDisassociateTrunkInterfaceRequest:
-    query_params: PostDisassociateTrunkInterfaceQueryParams = field(default=None)
-    headers: PostDisassociateTrunkInterfaceHeaders = field(default=None)
+    headers: PostDisassociateTrunkInterfaceHeaders = field()
+    query_params: PostDisassociateTrunkInterfaceQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostDisassociateTrunkInterfaceResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

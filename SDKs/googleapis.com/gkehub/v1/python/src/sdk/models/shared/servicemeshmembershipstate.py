@@ -1,13 +1,17 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import servicemeshcontrolplanemanagement
-from . import servicemeshdataplanemanagement
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ServiceMeshMembershipState:
-    control_plane_management: Optional[servicemeshcontrolplanemanagement.ServiceMeshControlPlaneManagement] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'controlPlaneManagement' }})
-    data_plane_management: Optional[servicemeshdataplanemanagement.ServiceMeshDataPlaneManagement] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'dataPlaneManagement' }})
+    r"""ServiceMeshMembershipState
+    **Service Mesh**: State for a single Membership, as analyzed by the Service Mesh Hub Controller.
+    """
+    
+    control_plane_management: Optional[ServiceMeshControlPlaneManagement] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('controlPlaneManagement') }})
+    data_plane_management: Optional[ServiceMeshDataPlaneManagement] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('dataPlaneManagement') }})
     

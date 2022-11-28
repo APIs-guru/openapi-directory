@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class PostAPISocialNumberQueryParams:
-    id_type: shared.IDTypeEnum = field(default=None, metadata={'query_param': { 'field_name': 'idType', 'style': 'form', 'explode': True }})
+    id_type: shared.IDTypeEnum = field(metadata={'query_param': { 'field_name': 'idType', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -23,13 +24,13 @@ class PostAPISocialNumberRequests:
 
 @dataclass
 class PostAPISocialNumberRequest:
-    query_params: PostAPISocialNumberQueryParams = field(default=None)
-    headers: PostAPISocialNumberHeaders = field(default=None)
-    request: PostAPISocialNumberRequests = field(default=None)
+    headers: PostAPISocialNumberHeaders = field()
+    query_params: PostAPISocialNumberQueryParams = field()
+    request: PostAPISocialNumberRequests = field()
     
 
 @dataclass
 class PostAPISocialNumberResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

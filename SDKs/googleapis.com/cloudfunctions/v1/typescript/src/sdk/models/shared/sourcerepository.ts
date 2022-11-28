@@ -1,4 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
+
+
+// SourceRepositoryInput
+/** 
+ * Describes SourceRepository, used to represent parameters related to source repository where a function is hosted.
+**/
+export class SourceRepositoryInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=url" })
+  url?: string;
+}
 
 
 // SourceRepository
@@ -6,9 +17,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Describes SourceRepository, used to represent parameters related to source repository where a function is hosted.
 **/
 export class SourceRepository extends SpeakeasyBase {
-  @Metadata({ data: "json, name=deployedUrl" })
+  @SpeakeasyMetadata({ data: "json, name=deployedUrl" })
   deployedUrl?: string;
 
-  @Metadata({ data: "json, name=url" })
+  @SpeakeasyMetadata({ data: "json, name=url" })
   url?: string;
 }

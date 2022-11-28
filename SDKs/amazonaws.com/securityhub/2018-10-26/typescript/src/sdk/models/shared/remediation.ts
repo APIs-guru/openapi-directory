@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Recommendation } from "./recommendation";
+
 
 
 // Remediation
@@ -7,6 +8,6 @@ import { Recommendation } from "./recommendation";
  * Details about the remediation steps for a finding.
 **/
 export class Remediation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Recommendation" })
+  @SpeakeasyMetadata({ data: "json, name=Recommendation" })
   recommendation?: Recommendation;
 }

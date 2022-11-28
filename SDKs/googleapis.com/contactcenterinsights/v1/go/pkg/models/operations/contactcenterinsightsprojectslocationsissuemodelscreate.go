@@ -30,7 +30,7 @@ type ContactcenterinsightsProjectsLocationsIssueModelsCreateSecurity struct {
 type ContactcenterinsightsProjectsLocationsIssueModelsCreateRequest struct {
 	PathParams  ContactcenterinsightsProjectsLocationsIssueModelsCreatePathParams
 	QueryParams ContactcenterinsightsProjectsLocationsIssueModelsCreateQueryParams
-	Request     *shared.GoogleCloudContactcenterinsightsV1IssueModel `request:"mediaType=application/json"`
+	Request     *shared.GoogleCloudContactcenterinsightsV1IssueModelInput `request:"mediaType=application/json"`
 	Security    ContactcenterinsightsProjectsLocationsIssueModelsCreateSecurity
 }
 

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // SignatureInfo
 /**
  * Information about the digital signature of the resource.
@@ -33,15 +33,15 @@ var SignatureInfo = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=customerKmsKeyVersion" }),
+        SpeakeasyMetadata({ data: "json, name=customerKmsKeyVersion" }),
         __metadata("design:type", String)
     ], SignatureInfo.prototype, "customerKmsKeyVersion", void 0);
     __decorate([
-        Metadata({ data: "json, name=googlePublicKeyPem" }),
+        SpeakeasyMetadata({ data: "json, name=googlePublicKeyPem" }),
         __metadata("design:type", String)
     ], SignatureInfo.prototype, "googlePublicKeyPem", void 0);
     __decorate([
-        Metadata({ data: "json, name=signature" }),
+        SpeakeasyMetadata({ data: "json, name=signature" }),
         __metadata("design:type", String)
     ], SignatureInfo.prototype, "signature", void 0);
     return SignatureInfo;

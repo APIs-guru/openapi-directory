@@ -1,72 +1,72 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class CategoryResourceAttributes extends SpeakeasyBase {
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 }
 
 
 export class CategoryResourceLinks extends SpeakeasyBase {
-  @Metadata({ data: "json, name=self" })
+  @SpeakeasyMetadata({ data: "json, name=self" })
   self: string;
 }
 
 
 export class CategoryResourceRelationshipsChildrenData extends SpeakeasyBase {
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type: string;
 }
 
 
 export class CategoryResourceRelationshipsChildrenLinks extends SpeakeasyBase {
-  @Metadata({ data: "json, name=related" })
+  @SpeakeasyMetadata({ data: "json, name=related" })
   related: string;
 }
 
 
 export class CategoryResourceRelationshipsChildren extends SpeakeasyBase {
-  @Metadata({ data: "json, name=data", elemType: shared.CategoryResourceRelationshipsChildrenData })
+  @SpeakeasyMetadata({ data: "json, name=data", elemType: CategoryResourceRelationshipsChildrenData })
   data: CategoryResourceRelationshipsChildrenData[];
 
-  @Metadata({ data: "json, name=links" })
+  @SpeakeasyMetadata({ data: "json, name=links" })
   links?: CategoryResourceRelationshipsChildrenLinks;
 }
 
 
 export class CategoryResourceRelationshipsParentData extends SpeakeasyBase {
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type: string;
 }
 
 
 export class CategoryResourceRelationshipsParentLinks extends SpeakeasyBase {
-  @Metadata({ data: "json, name=related" })
+  @SpeakeasyMetadata({ data: "json, name=related" })
   related: string;
 }
 
 
 export class CategoryResourceRelationshipsParent extends SpeakeasyBase {
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data: CategoryResourceRelationshipsParentData;
 
-  @Metadata({ data: "json, name=links" })
+  @SpeakeasyMetadata({ data: "json, name=links" })
   links?: CategoryResourceRelationshipsParentLinks;
 }
 
 
 export class CategoryResourceRelationships extends SpeakeasyBase {
-  @Metadata({ data: "json, name=children" })
+  @SpeakeasyMetadata({ data: "json, name=children" })
   children: CategoryResourceRelationshipsChildren;
 
-  @Metadata({ data: "json, name=parent" })
+  @SpeakeasyMetadata({ data: "json, name=parent" })
   parent: CategoryResourceRelationshipsParent;
 }
 
@@ -77,18 +77,18 @@ export class CategoryResourceRelationships extends SpeakeasyBase {
  * 
 **/
 export class CategoryResource extends SpeakeasyBase {
-  @Metadata({ data: "json, name=attributes" })
+  @SpeakeasyMetadata({ data: "json, name=attributes" })
   attributes: CategoryResourceAttributes;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: string;
 
-  @Metadata({ data: "json, name=links" })
+  @SpeakeasyMetadata({ data: "json, name=links" })
   links?: CategoryResourceLinks;
 
-  @Metadata({ data: "json, name=relationships" })
+  @SpeakeasyMetadata({ data: "json, name=relationships" })
   relationships: CategoryResourceRelationships;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type: string;
 }

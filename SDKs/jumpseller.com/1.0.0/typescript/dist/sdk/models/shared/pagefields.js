@@ -1,0 +1,105 @@
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { PageCategory } from "./pagecategory";
+import { PageTemplate } from "./pagetemplate";
+// PageFieldsImage
+/**
+ * Image of the Page
+**/
+var PageFieldsImage = /** @class */ (function (_super) {
+    __extends(PageFieldsImage, _super);
+    function PageFieldsImage() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=id" }),
+        __metadata("design:type", Number)
+    ], PageFieldsImage.prototype, "id", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=url" }),
+        __metadata("design:type", String)
+    ], PageFieldsImage.prototype, "url", void 0);
+    return PageFieldsImage;
+}(SpeakeasyBase));
+export { PageFieldsImage };
+export var PageFieldsStatusEnum;
+(function (PageFieldsStatusEnum) {
+    PageFieldsStatusEnum["Public"] = "public";
+    PageFieldsStatusEnum["Draft"] = "draft";
+    PageFieldsStatusEnum["Hidden"] = "hidden";
+})(PageFieldsStatusEnum || (PageFieldsStatusEnum = {}));
+var PageFields = /** @class */ (function (_super) {
+    __extends(PageFields, _super);
+    function PageFields() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=body" }),
+        __metadata("design:type", String)
+    ], PageFields.prototype, "body", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=categories", elemType: PageCategory }),
+        __metadata("design:type", Array)
+    ], PageFields.prototype, "categories", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=id" }),
+        __metadata("design:type", Number)
+    ], PageFields.prototype, "id", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=image" }),
+        __metadata("design:type", PageFieldsImage)
+    ], PageFields.prototype, "image", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=legal" }),
+        __metadata("design:type", Boolean)
+    ], PageFields.prototype, "legal", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=meta_description" }),
+        __metadata("design:type", String)
+    ], PageFields.prototype, "metaDescription", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=page_title" }),
+        __metadata("design:type", String)
+    ], PageFields.prototype, "pageTitle", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=permalink" }),
+        __metadata("design:type", String)
+    ], PageFields.prototype, "permalink", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=status" }),
+        __metadata("design:type", String)
+    ], PageFields.prototype, "status", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=template" }),
+        __metadata("design:type", PageTemplate)
+    ], PageFields.prototype, "template", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=title" }),
+        __metadata("design:type", String)
+    ], PageFields.prototype, "title", void 0);
+    return PageFields;
+}(SpeakeasyBase));
+export { PageFields };

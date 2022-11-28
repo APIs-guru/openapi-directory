@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare enum TagResourceXAmzTargetEnum {
     Comprehend20171127TagResource = "Comprehend_20171127.TagResource"

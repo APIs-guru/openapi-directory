@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // SearchedLogStream
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Represents the search status of a log stream.
 **/
 export class SearchedLogStream extends SpeakeasyBase {
-  @Metadata({ data: "json, name=logStreamName" })
+  @SpeakeasyMetadata({ data: "json, name=logStreamName" })
   logStreamName?: string;
 
-  @Metadata({ data: "json, name=searchedCompletely" })
+  @SpeakeasyMetadata({ data: "json, name=searchedCompletely" })
   searchedCompletely?: boolean;
 }

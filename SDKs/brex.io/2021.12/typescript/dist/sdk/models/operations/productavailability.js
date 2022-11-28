@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var ProductAvailabilityPathParams = /** @class */ (function (_super) {
     __extends(ProductAvailabilityPathParams, _super);
@@ -30,11 +30,11 @@ var ProductAvailabilityPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=sku" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=sku" }),
         __metadata("design:type", String)
     ], ProductAvailabilityPathParams.prototype, "sku", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=subjectId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=subjectId" }),
         __metadata("design:type", String)
     ], ProductAvailabilityPathParams.prototype, "subjectId", void 0);
     return ProductAvailabilityPathParams;
@@ -46,7 +46,7 @@ var ProductAvailabilitySecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeUserKey)
     ], ProductAvailabilitySecurity.prototype, "userKey", void 0);
     return ProductAvailabilitySecurity;
@@ -58,11 +58,11 @@ var ProductAvailabilityRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ProductAvailabilityPathParams)
     ], ProductAvailabilityRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ProductAvailabilitySecurity)
     ], ProductAvailabilityRequest.prototype, "security", void 0);
     return ProductAvailabilityRequest;
@@ -74,19 +74,19 @@ var ProductAvailabilityResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], ProductAvailabilityResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], ProductAvailabilityResponse.prototype, "productAvailability200ApplicationJsonAny", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], ProductAvailabilityResponse.prototype, "productAvailabilityDefaultApplicationJsonAny", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], ProductAvailabilityResponse.prototype, "statusCode", void 0);
     return ProductAvailabilityResponse;

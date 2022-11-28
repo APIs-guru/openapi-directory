@@ -1,28 +1,28 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ScriptDescriptionData } from "./scriptdescriptiondata";
 import { ScriptLocalizationDetail } from "./scriptlocalizationdetail";
 
 
+
 export class InventoryScriptInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=config" })
+  @SpeakeasyMetadata({ data: "json, name=config" })
   config?: any;
 
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data?: ScriptDescriptionData;
 
-  @Metadata({ data: "json, name=eventPattern" })
+  @SpeakeasyMetadata({ data: "json, name=eventPattern" })
   eventPattern?: any;
 
-  @Metadata({ data: "json, name=scriptId" })
+  @SpeakeasyMetadata({ data: "json, name=scriptId" })
   scriptId?: string;
 
-  @Metadata({ data: "json, name=scriptLocalizationDetails", elemType: shared.ScriptLocalizationDetail })
+  @SpeakeasyMetadata({ data: "json, name=scriptLocalizationDetails", elemType: ScriptLocalizationDetail })
   scriptLocalizationDetails?: ScriptLocalizationDetail[];
 
-  @Metadata({ data: "json, name=scriptName" })
+  @SpeakeasyMetadata({ data: "json, name=scriptName" })
   scriptName?: string;
 
-  @Metadata({ data: "json, name=visibility" })
+  @SpeakeasyMetadata({ data: "json, name=visibility" })
   visibility?: string;
 }

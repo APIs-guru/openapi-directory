@@ -1,8 +1,9 @@
 
 
+
 export enum ConfigurationItemTypeEnum {
-    Server = "SERVER"
-,    Process = "PROCESS"
-,    Connection = "CONNECTION"
-,    Application = "APPLICATION"
+    Server = "SERVER",
+    Process = "PROCESS",
+    Connection = "CONNECTION",
+    Application = "APPLICATION"
 }

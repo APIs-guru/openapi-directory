@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // SearchResponse
 /**
  * Response message includes the context and a list of matching results which contain the detail of associated entities.
@@ -33,15 +33,15 @@ var SearchResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=@context" }),
+        SpeakeasyMetadata({ data: "json, name=@context" }),
         __metadata("design:type", Object)
     ], SearchResponse.prototype, "atContext", void 0);
     __decorate([
-        Metadata({ data: "json, name=@type" }),
+        SpeakeasyMetadata({ data: "json, name=@type" }),
         __metadata("design:type", Object)
     ], SearchResponse.prototype, "atType", void 0);
     __decorate([
-        Metadata({ data: "json, name=itemListElement" }),
+        SpeakeasyMetadata({ data: "json, name=itemListElement" }),
         __metadata("design:type", Array)
     ], SearchResponse.prototype, "itemListElement", void 0);
     return SearchResponse;

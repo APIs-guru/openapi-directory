@@ -29,11 +29,6 @@ type CripcSecurity struct {
 	ClientID shared.SchemeClientID `security:"scheme,type=apiKey,subtype=header"`
 }
 
-type CripcRequest struct {
-	Request  *CripcRequestBody `request:"mediaType=application/json"`
-	Security CripcSecurity
-}
-
 type Cripc400ApplicationJSONErrorEnum string
 
 const (
@@ -163,6 +158,11 @@ const (
 type Cripc504ApplicationJSON struct {
 	Error            *Cripc504ApplicationJSONErrorEnum            `json:"error,omitempty"`
 	ErrorDescription *Cripc504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
+}
+
+type CripcRequest struct {
+	Request  *CripcRequestBody `request:"mediaType=application/json"`
+	Security CripcSecurity
 }
 
 type CripcResponse struct {

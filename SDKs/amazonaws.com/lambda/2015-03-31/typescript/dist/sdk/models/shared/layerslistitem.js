@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { LayerVersionsListItem } from "./layerversionslistitem";
 // LayersListItem
 /**
@@ -34,15 +34,15 @@ var LayersListItem = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=LatestMatchingVersion" }),
+        SpeakeasyMetadata({ data: "json, name=LatestMatchingVersion" }),
         __metadata("design:type", LayerVersionsListItem)
     ], LayersListItem.prototype, "latestMatchingVersion", void 0);
     __decorate([
-        Metadata({ data: "json, name=LayerArn" }),
+        SpeakeasyMetadata({ data: "json, name=LayerArn" }),
         __metadata("design:type", String)
     ], LayersListItem.prototype, "layerArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=LayerName" }),
+        SpeakeasyMetadata({ data: "json, name=LayerName" }),
         __metadata("design:type", String)
     ], LayersListItem.prototype, "layerName", void 0);
     return LayersListItem;

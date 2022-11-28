@@ -1,25 +1,21 @@
 from dataclasses import dataclass, field
 from typing import Any
 from dataclasses_json import dataclass_json
-from . import hsalgosettings
-from . import rsalgosettings
-from . import esalgosettings
-from . import jwksalgosettings
-from . import inqueryparam
-from . import inheader
-from . import incookie
-from . import passthrough
-from . import sign
-from . import transform
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class LocalJwtVerifier:
-    algo_settings: Any = field(default=None, metadata={'dataclasses_json': { 'field_name': 'algoSettings' }})
-    enabled: bool = field(default=None, metadata={'dataclasses_json': { 'field_name': 'enabled' }})
-    source: Any = field(default=None, metadata={'dataclasses_json': { 'field_name': 'source' }})
-    strategy: Any = field(default=None, metadata={'dataclasses_json': { 'field_name': 'strategy' }})
-    strict: bool = field(default=None, metadata={'dataclasses_json': { 'field_name': 'strict' }})
-    type: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    r"""LocalJwtVerifier
+    A JWT verifier used only for the current service descriptor
+    """
+    
+    algo_settings: Any = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('algoSettings') }})
+    enabled: bool = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('enabled') }})
+    source: Any = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('source') }})
+    strategy: Any = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('strategy') }})
+    strict: bool = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('strict') }})
+    type: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('type') }})
     

@@ -1,20 +1,20 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Parameter } from "./parameter";
 
+
 export enum ConditionTypeEnum {
-    ConditionTypeUnspecified = "conditionTypeUnspecified"
-,    Equals = "equals"
-,    Contains = "contains"
-,    StartsWith = "startsWith"
-,    EndsWith = "endsWith"
-,    MatchRegex = "matchRegex"
-,    Greater = "greater"
-,    GreaterOrEquals = "greaterOrEquals"
-,    Less = "less"
-,    LessOrEquals = "lessOrEquals"
-,    CssSelector = "cssSelector"
-,    UrlMatches = "urlMatches"
+    ConditionTypeUnspecified = "conditionTypeUnspecified",
+    Equals = "equals",
+    Contains = "contains",
+    StartsWith = "startsWith",
+    EndsWith = "endsWith",
+    MatchRegex = "matchRegex",
+    Greater = "greater",
+    GreaterOrEquals = "greaterOrEquals",
+    Less = "less",
+    LessOrEquals = "lessOrEquals",
+    CssSelector = "cssSelector",
+    UrlMatches = "urlMatches"
 }
 
 
@@ -23,9 +23,9 @@ export enum ConditionTypeEnum {
  * Represents a predicate.
 **/
 export class Condition extends SpeakeasyBase {
-  @Metadata({ data: "json, name=parameter", elemType: shared.Parameter })
+  @SpeakeasyMetadata({ data: "json, name=parameter", elemType: Parameter })
   parameter?: Parameter[];
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: ConditionTypeEnum;
 }

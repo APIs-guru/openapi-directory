@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ListAvailableZonesResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AZList" })
+  @SpeakeasyMetadata({ data: "json, name=AZList" })
   azList?: string[];
 }

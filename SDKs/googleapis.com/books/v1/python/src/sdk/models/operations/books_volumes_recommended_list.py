@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 class BooksVolumesRecommendedListMaxAllowedMaturityRatingEnum(str, Enum):
@@ -28,19 +29,19 @@ class BooksVolumesRecommendedListQueryParams:
 
 @dataclass
 class BooksVolumesRecommendedListSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class BooksVolumesRecommendedListRequest:
-    query_params: BooksVolumesRecommendedListQueryParams = field(default=None)
-    security: BooksVolumesRecommendedListSecurity = field(default=None)
+    query_params: BooksVolumesRecommendedListQueryParams = field()
+    security: BooksVolumesRecommendedListSecurity = field()
     
 
 @dataclass
 class BooksVolumesRecommendedListResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     volumes: Optional[shared.Volumes] = field(default=None)
     

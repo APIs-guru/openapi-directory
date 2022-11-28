@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetModifyIDFormatActionEnum(str, Enum):
     MODIFY_ID_FORMAT = "ModifyIdFormat"
@@ -10,10 +14,10 @@ class GetModifyIDFormatVersionEnum(str, Enum):
 
 @dataclass
 class GetModifyIDFormatQueryParams:
-    action: GetModifyIDFormatActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    resource: str = field(default=None, metadata={'query_param': { 'field_name': 'Resource', 'style': 'form', 'explode': True }})
-    use_long_ids: bool = field(default=None, metadata={'query_param': { 'field_name': 'UseLongIds', 'style': 'form', 'explode': True }})
-    version: GetModifyIDFormatVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: GetModifyIDFormatActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    resource: str = field(metadata={'query_param': { 'field_name': 'Resource', 'style': 'form', 'explode': True }})
+    use_long_ids: bool = field(metadata={'query_param': { 'field_name': 'UseLongIds', 'style': 'form', 'explode': True }})
+    version: GetModifyIDFormatVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -29,12 +33,12 @@ class GetModifyIDFormatHeaders:
 
 @dataclass
 class GetModifyIDFormatRequest:
-    query_params: GetModifyIDFormatQueryParams = field(default=None)
-    headers: GetModifyIDFormatHeaders = field(default=None)
+    headers: GetModifyIDFormatHeaders = field()
+    query_params: GetModifyIDFormatQueryParams = field()
     
 
 @dataclass
 class GetModifyIDFormatResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

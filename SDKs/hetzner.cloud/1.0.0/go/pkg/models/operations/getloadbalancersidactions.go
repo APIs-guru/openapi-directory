@@ -40,11 +40,8 @@ type GetLoadBalancersIDActionsQueryParams struct {
 	Status *GetLoadBalancersIDActionsStatusParameterStatusEnum `queryParam:"style=form,explode=true,name=status"`
 }
 
-type GetLoadBalancersIDActionsRequest struct {
-	PathParams  GetLoadBalancersIDActionsPathParams
-	QueryParams GetLoadBalancersIDActionsQueryParams
-}
-
+// GetLoadBalancersIDActionsActionsResponseActionError
+// Error message for the Action if error occurred, otherwise null
 type GetLoadBalancersIDActionsActionsResponseActionError struct {
 	Code    string `json:"code"`
 	Message string `json:"message"`
@@ -90,6 +87,11 @@ type GetLoadBalancersIDActionsActionsResponseMeta struct {
 type GetLoadBalancersIDActionsActionsResponse struct {
 	Actions []GetLoadBalancersIDActionsActionsResponseAction `json:"actions"`
 	Meta    *GetLoadBalancersIDActionsActionsResponseMeta    `json:"meta,omitempty"`
+}
+
+type GetLoadBalancersIDActionsRequest struct {
+	PathParams  GetLoadBalancersIDActionsPathParams
+	QueryParams GetLoadBalancersIDActionsQueryParams
 }
 
 type GetLoadBalancersIDActionsResponse struct {

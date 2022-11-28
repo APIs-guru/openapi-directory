@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 
 class UserAPIGetNamesNameMatchModeEnum(str, Enum):
     AUTO = "Auto"
@@ -19,14 +20,14 @@ class UserAPIGetNamesQueryParams:
 
 @dataclass
 class UserAPIGetNamesRequest:
-    query_params: UserAPIGetNamesQueryParams = field(default=None)
+    query_params: UserAPIGetNamesQueryParams = field()
     
 
 @dataclass
 class UserAPIGetNamesResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     user_api_get_names_200_application_json_strings: Optional[List[str]] = field(default=None)
     user_api_get_names_200_application_jsonp_strings: Optional[List[str]] = field(default=None)
     user_api_get_names_200_text_json_strings: Optional[List[str]] = field(default=None)

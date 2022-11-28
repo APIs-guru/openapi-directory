@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SupplementaryFeature } from "./supplementaryfeature";
+
 
 
 // InputDataConfig
@@ -8,9 +8,9 @@ import { SupplementaryFeature } from "./supplementaryfeature";
  * The data used to train a predictor. The data includes a dataset group and any supplementary features. You specify this object in the <a>CreatePredictor</a> request.
 **/
 export class InputDataConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DatasetGroupArn" })
+  @SpeakeasyMetadata({ data: "json, name=DatasetGroupArn" })
   datasetGroupArn: string;
 
-  @Metadata({ data: "json, name=SupplementaryFeatures", elemType: shared.SupplementaryFeature })
+  @SpeakeasyMetadata({ data: "json, name=SupplementaryFeatures", elemType: SupplementaryFeature })
   supplementaryFeatures?: SupplementaryFeature[];
 }

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { FormatEnum } from "./formatenum";
 /**
  * An object that contains attributes about a single column in a table

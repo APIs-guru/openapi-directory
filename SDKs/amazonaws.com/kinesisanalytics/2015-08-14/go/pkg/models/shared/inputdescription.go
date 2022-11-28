@@ -1,5 +1,7 @@
 package shared
 
+// InputDescription
+// Describes the application input configuration. For more information, see <a href="https://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-input.html">Configuring Application Input</a>.
 type InputDescription struct {
 	InAppStreamNames                        []string                                 `json:"InAppStreamNames,omitempty"`
 	InputID                                 *string                                  `json:"InputId,omitempty"`

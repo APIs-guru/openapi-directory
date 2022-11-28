@@ -1,15 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Key } from "./key";
 
 
+
 export class KeysAndAttributes extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AttributesToGet" })
+  @SpeakeasyMetadata({ data: "json, name=AttributesToGet" })
   attributesToGet?: string[];
 
-  @Metadata({ data: "json, name=ConsistentRead" })
+  @SpeakeasyMetadata({ data: "json, name=ConsistentRead" })
   consistentRead?: boolean;
 
-  @Metadata({ data: "json, name=Keys", elemType: shared.Key })
+  @SpeakeasyMetadata({ data: "json, name=Keys", elemType: Key })
   keys: Key[];
 }

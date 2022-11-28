@@ -18,11 +18,15 @@ type PutBotHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// PutBotRequestBodyAbortStatement
+// A collection of messages that convey information to the user. At runtime, Amazon Lex selects the message to convey.
 type PutBotRequestBodyAbortStatement struct {
 	Messages     []shared.Message `json:"messages,omitempty"`
 	ResponseCard *string          `json:"responseCard,omitempty"`
 }
 
+// PutBotRequestBodyClarificationPrompt
+// Obtains information from the user. To define a prompt, provide one or more messages and specify the number of attempts to get information from the user. If you provide more than one message, Amazon Lex chooses one of the messages to use to prompt the user. For more information, see <a>how-it-works</a>.
 type PutBotRequestBodyClarificationPrompt struct {
 	MaxAttempts  *int64           `json:"maxAttempts,omitempty"`
 	Messages     []shared.Message `json:"messages,omitempty"`

@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// ScalingPolicy
+// <p>Represents a scaling policy to use with Application Auto Scaling.</p> <p>For more information about configuring scaling policies for a specific service, see <a href="https://docs.aws.amazon.com/autoscaling/application/userguide/getting-started.html">Getting started with Application Auto Scaling</a> in the <i>Application Auto Scaling User Guide</i>.</p>
 type ScalingPolicy struct {
 	Alarms                                   []Alarm                                   `json:"Alarms,omitempty"`
 	CreationTime                             time.Time                                 `json:"CreationTime"`

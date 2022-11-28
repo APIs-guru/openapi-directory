@@ -1,4 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ClassificationEvaluationMetrics } from "./classificationevaluationmetrics";
 import { ImageObjectDetectionEvaluationMetrics } from "./imageobjectdetectionevaluationmetrics";
 import { RegressionEvaluationMetrics } from "./regressionevaluationmetrics";
@@ -8,44 +8,45 @@ import { TranslationEvaluationMetrics } from "./translationevaluationmetrics";
 import { VideoObjectTrackingEvaluationMetrics } from "./videoobjecttrackingevaluationmetrics";
 
 
+
 // ModelEvaluation
 /** 
  * Evaluation results of a model.
 **/
 export class ModelEvaluation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=annotationSpecId" })
+  @SpeakeasyMetadata({ data: "json, name=annotationSpecId" })
   annotationSpecId?: string;
 
-  @Metadata({ data: "json, name=classificationEvaluationMetrics" })
+  @SpeakeasyMetadata({ data: "json, name=classificationEvaluationMetrics" })
   classificationEvaluationMetrics?: ClassificationEvaluationMetrics;
 
-  @Metadata({ data: "json, name=createTime" })
+  @SpeakeasyMetadata({ data: "json, name=createTime" })
   createTime?: string;
 
-  @Metadata({ data: "json, name=displayName" })
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
   displayName?: string;
 
-  @Metadata({ data: "json, name=evaluatedExampleCount" })
+  @SpeakeasyMetadata({ data: "json, name=evaluatedExampleCount" })
   evaluatedExampleCount?: number;
 
-  @Metadata({ data: "json, name=imageObjectDetectionEvaluationMetrics" })
+  @SpeakeasyMetadata({ data: "json, name=imageObjectDetectionEvaluationMetrics" })
   imageObjectDetectionEvaluationMetrics?: ImageObjectDetectionEvaluationMetrics;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=regressionEvaluationMetrics" })
+  @SpeakeasyMetadata({ data: "json, name=regressionEvaluationMetrics" })
   regressionEvaluationMetrics?: RegressionEvaluationMetrics;
 
-  @Metadata({ data: "json, name=textExtractionEvaluationMetrics" })
+  @SpeakeasyMetadata({ data: "json, name=textExtractionEvaluationMetrics" })
   textExtractionEvaluationMetrics?: TextExtractionEvaluationMetrics;
 
-  @Metadata({ data: "json, name=textSentimentEvaluationMetrics" })
+  @SpeakeasyMetadata({ data: "json, name=textSentimentEvaluationMetrics" })
   textSentimentEvaluationMetrics?: TextSentimentEvaluationMetrics;
 
-  @Metadata({ data: "json, name=translationEvaluationMetrics" })
+  @SpeakeasyMetadata({ data: "json, name=translationEvaluationMetrics" })
   translationEvaluationMetrics?: TranslationEvaluationMetrics;
 
-  @Metadata({ data: "json, name=videoObjectTrackingEvaluationMetrics" })
+  @SpeakeasyMetadata({ data: "json, name=videoObjectTrackingEvaluationMetrics" })
   videoObjectTrackingEvaluationMetrics?: VideoObjectTrackingEvaluationMetrics;
 }

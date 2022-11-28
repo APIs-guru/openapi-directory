@@ -15,14 +15,14 @@ type ReplaceConversationRequestBody struct {
 	Properties  *shared.ConversationProperties `json:"properties,omitempty"`
 }
 
-type ReplaceConversationRequest struct {
-	PathParams ReplaceConversationPathParams
-	Request    *ReplaceConversationRequestBody `request:"mediaType=application/json"`
-}
-
 type ReplaceConversation200ApplicationJSON struct {
 	Href string `json:"href"`
 	ID   string `json:"id"`
+}
+
+type ReplaceConversationRequest struct {
+	PathParams ReplaceConversationPathParams
+	Request    *ReplaceConversationRequestBody `request:"mediaType=application/json"`
 }
 
 type ReplaceConversationResponse struct {

@@ -1,12 +1,16 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class AndroidpublisherInappproductsUpdatePathParams:
-    package_name: str = field(default=None, metadata={'path_param': { 'field_name': 'packageName', 'style': 'simple', 'explode': False }})
-    sku: str = field(default=None, metadata={'path_param': { 'field_name': 'sku', 'style': 'simple', 'explode': False }})
+    package_name: str = field(metadata={'path_param': { 'field_name': 'packageName', 'style': 'simple', 'explode': False }})
+    sku: str = field(metadata={'path_param': { 'field_name': 'sku', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -23,21 +27,21 @@ class AndroidpublisherInappproductsUpdateQueryParams:
 
 @dataclass
 class AndroidpublisherInappproductsUpdateSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class AndroidpublisherInappproductsUpdateRequest:
-    path_params: AndroidpublisherInappproductsUpdatePathParams = field(default=None)
-    query_params: AndroidpublisherInappproductsUpdateQueryParams = field(default=None)
+    path_params: AndroidpublisherInappproductsUpdatePathParams = field()
+    query_params: AndroidpublisherInappproductsUpdateQueryParams = field()
+    security: AndroidpublisherInappproductsUpdateSecurity = field()
     request: Optional[shared.InAppProduct] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: AndroidpublisherInappproductsUpdateSecurity = field(default=None)
     
 
 @dataclass
 class AndroidpublisherInappproductsUpdateResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

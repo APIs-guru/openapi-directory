@@ -1,5 +1,7 @@
 package shared
 
+// ProfilerRuleConfiguration
+// Configuration information for profiling rules.
 type ProfilerRuleConfiguration struct {
 	InstanceType          *ProcessingInstanceTypeEnum `json:"InstanceType,omitempty"`
 	LocalPath             *string                     `json:"LocalPath,omitempty"`

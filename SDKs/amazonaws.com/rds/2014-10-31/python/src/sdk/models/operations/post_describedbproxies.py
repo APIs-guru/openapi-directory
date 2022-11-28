@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostDescribeDbProxiesActionEnum(str, Enum):
     DESCRIBE_DB_PROXIES = "DescribeDBProxies"
@@ -10,10 +14,10 @@ class PostDescribeDbProxiesVersionEnum(str, Enum):
 
 @dataclass
 class PostDescribeDbProxiesQueryParams:
-    action: PostDescribeDbProxiesActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: PostDescribeDbProxiesActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostDescribeDbProxiesVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     marker: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'Marker', 'style': 'form', 'explode': True }})
     max_records: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'MaxRecords', 'style': 'form', 'explode': True }})
-    version: PostDescribeDbProxiesVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -29,14 +33,14 @@ class PostDescribeDbProxiesHeaders:
 
 @dataclass
 class PostDescribeDbProxiesRequest:
-    query_params: PostDescribeDbProxiesQueryParams = field(default=None)
-    headers: PostDescribeDbProxiesHeaders = field(default=None)
+    headers: PostDescribeDbProxiesHeaders = field()
+    query_params: PostDescribeDbProxiesQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostDescribeDbProxiesResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

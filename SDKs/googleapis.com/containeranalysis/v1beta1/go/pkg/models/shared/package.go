@@ -8,6 +8,8 @@ const (
 	PackageArchitectureEnumX64                     PackageArchitectureEnum = "X64"
 )
 
+// Package
+// Package represents a particular package version.
 type Package struct {
 	Architecture *PackageArchitectureEnum `json:"architecture,omitempty"`
 	CpeURI       *string                  `json:"cpeUri,omitempty"`

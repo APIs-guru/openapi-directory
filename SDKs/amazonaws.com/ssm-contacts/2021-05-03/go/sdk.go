@@ -10,7 +10,7 @@ import (
 	"strings"
 )
 
-var Servers = []string{
+var ServerList = []string{
 	"http://ssm-contacts.{region}.amazonaws.com",
 	"https://ssm-contacts.{region}.amazonaws.com",
 	"http://ssm-contacts.{region}.amazonaws.com.cn",
@@ -21,10 +21,15 @@ type HTTPClient interface {
 	Do(req *http.Request) (*http.Response, error)
 }
 
+// SDK Documentation: https://docs.aws.amazon.com/ssm-contacts/ - Amazon Web Services documentation
 type SDK struct {
-	defaultClient  HTTPClient
-	securityClient HTTPClient
-	serverURL      string
+	_defaultClient  HTTPClient
+	_securityClient HTTPClient
+	_security       *shared.Security
+	_serverURL      string
+	_language       string
+	_sdkVersion     string
+	_genVersion     string
 }
 
 type SDKOption func(*SDK)
@@ -35,33 +40,55 @@ func WithServerURL(serverURL string, params map[string]string) SDKOption {
 			serverURL = utils.ReplaceParameters(serverURL, params)
 		}
 
-		sdk.serverURL = serverURL
+		sdk._serverURL = serverURL
+	}
+}
+
+func WithClient(client HTTPClient) SDKOption {
+	return func(sdk *SDK) {
+		sdk._defaultClient = client
 	}
 }
 
 func WithSecurity(security shared.Security) SDKOption {
 	return func(sdk *SDK) {
-		sdk.securityClient = utils.CreateSecurityClient(security)
+		sdk._security = &security
 	}
 }
 
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
-		defaultClient:  http.DefaultClient,
-		securityClient: http.DefaultClient,
+		_language:   "go",
+		_sdkVersion: "",
+		_genVersion: "internal",
 	}
 	for _, opt := range opts {
 		opt(sdk)
 	}
-	if sdk.serverURL == "" {
-		sdk.serverURL = Servers[0]
+
+	if sdk._defaultClient == nil {
+		sdk._defaultClient = http.DefaultClient
+	}
+	if sdk._securityClient == nil {
+
+		if sdk._security != nil {
+			sdk._securityClient = utils.ConfigureSecurityClient(sdk._defaultClient, sdk._security)
+		} else {
+			sdk._securityClient = sdk._defaultClient
+		}
+
+	}
+
+	if sdk._serverURL == "" {
+		sdk._serverURL = ServerList[0]
 	}
 
 	return sdk
 }
 
+// AcceptPage - Used to acknowledge an engagement to a contact channel during an incident.
 func (s *SDK) AcceptPage(ctx context.Context, request operations.AcceptPageRequest) (*operations.AcceptPageResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=SSMContacts.AcceptPage"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -81,7 +108,7 @@ func (s *SDK) AcceptPage(ctx context.Context, request operations.AcceptPageReque
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -161,8 +188,9 @@ func (s *SDK) AcceptPage(ctx context.Context, request operations.AcceptPageReque
 	return res, nil
 }
 
+// ActivateContactChannel - Activates a contact's contact channel. Incident Manager can't engage a contact until the contact channel has been activated.
 func (s *SDK) ActivateContactChannel(ctx context.Context, request operations.ActivateContactChannelRequest) (*operations.ActivateContactChannelResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=SSMContacts.ActivateContactChannel"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -182,7 +210,7 @@ func (s *SDK) ActivateContactChannel(ctx context.Context, request operations.Act
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -262,8 +290,9 @@ func (s *SDK) ActivateContactChannel(ctx context.Context, request operations.Act
 	return res, nil
 }
 
+// CreateContact - Contacts are either the contacts that Incident Manager engages during an incident or the escalation plans that Incident Manager uses to engage contacts in phases during an incident.
 func (s *SDK) CreateContact(ctx context.Context, request operations.CreateContactRequest) (*operations.CreateContactResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=SSMContacts.CreateContact"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -283,7 +312,7 @@ func (s *SDK) CreateContact(ctx context.Context, request operations.CreateContac
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -383,8 +412,9 @@ func (s *SDK) CreateContact(ctx context.Context, request operations.CreateContac
 	return res, nil
 }
 
+// CreateContactChannel - A contact channel is the method that Incident Manager uses to engage your contact.
 func (s *SDK) CreateContactChannel(ctx context.Context, request operations.CreateContactChannelRequest) (*operations.CreateContactChannelResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=SSMContacts.CreateContactChannel"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -404,7 +434,7 @@ func (s *SDK) CreateContactChannel(ctx context.Context, request operations.Creat
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -494,8 +524,9 @@ func (s *SDK) CreateContactChannel(ctx context.Context, request operations.Creat
 	return res, nil
 }
 
+// DeactivateContactChannel - To no longer receive Incident Manager engagements to a contact channel, you can deactivate the channel.
 func (s *SDK) DeactivateContactChannel(ctx context.Context, request operations.DeactivateContactChannelRequest) (*operations.DeactivateContactChannelResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=SSMContacts.DeactivateContactChannel"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -515,7 +546,7 @@ func (s *SDK) DeactivateContactChannel(ctx context.Context, request operations.D
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -595,8 +626,9 @@ func (s *SDK) DeactivateContactChannel(ctx context.Context, request operations.D
 	return res, nil
 }
 
+// DeleteContact - To remove a contact from Incident Manager, you can delete the contact. Deleting a contact removes them from all escalation plans and related response plans. Deleting an escalation plan removes it from all related response plans. You will have to recreate the contact and its contact channels before you can use it again.
 func (s *SDK) DeleteContact(ctx context.Context, request operations.DeleteContactRequest) (*operations.DeleteContactResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=SSMContacts.DeleteContact"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -616,7 +648,7 @@ func (s *SDK) DeleteContact(ctx context.Context, request operations.DeleteContac
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -696,8 +728,9 @@ func (s *SDK) DeleteContact(ctx context.Context, request operations.DeleteContac
 	return res, nil
 }
 
+// DeleteContactChannel - To no longer receive engagements on a contact channel, you can delete the channel from a contact. Deleting the contact channel removes it from the contact's engagement plan. If you delete the only contact channel for a contact, you won't be able to engage that contact during an incident.
 func (s *SDK) DeleteContactChannel(ctx context.Context, request operations.DeleteContactChannelRequest) (*operations.DeleteContactChannelResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=SSMContacts.DeleteContactChannel"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -717,7 +750,7 @@ func (s *SDK) DeleteContactChannel(ctx context.Context, request operations.Delet
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -797,8 +830,9 @@ func (s *SDK) DeleteContactChannel(ctx context.Context, request operations.Delet
 	return res, nil
 }
 
+// DescribeEngagement - Incident Manager uses engagements to engage contacts and escalation plans during an incident. Use this command to describe the engagement that occurred during an incident.
 func (s *SDK) DescribeEngagement(ctx context.Context, request operations.DescribeEngagementRequest) (*operations.DescribeEngagementResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=SSMContacts.DescribeEngagement"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -818,7 +852,7 @@ func (s *SDK) DescribeEngagement(ctx context.Context, request operations.Describ
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -908,8 +942,9 @@ func (s *SDK) DescribeEngagement(ctx context.Context, request operations.Describ
 	return res, nil
 }
 
+// DescribePage - Lists details of the engagement to a contact channel.
 func (s *SDK) DescribePage(ctx context.Context, request operations.DescribePageRequest) (*operations.DescribePageResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=SSMContacts.DescribePage"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -929,7 +964,7 @@ func (s *SDK) DescribePage(ctx context.Context, request operations.DescribePageR
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1019,8 +1054,9 @@ func (s *SDK) DescribePage(ctx context.Context, request operations.DescribePageR
 	return res, nil
 }
 
+// GetContact - Retrieves information about the specified contact or escalation plan.
 func (s *SDK) GetContact(ctx context.Context, request operations.GetContactRequest) (*operations.GetContactResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=SSMContacts.GetContact"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1040,7 +1076,7 @@ func (s *SDK) GetContact(ctx context.Context, request operations.GetContactReque
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1130,8 +1166,9 @@ func (s *SDK) GetContact(ctx context.Context, request operations.GetContactReque
 	return res, nil
 }
 
+// GetContactChannel - List details about a specific contact channel.
 func (s *SDK) GetContactChannel(ctx context.Context, request operations.GetContactChannelRequest) (*operations.GetContactChannelResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=SSMContacts.GetContactChannel"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1151,7 +1188,7 @@ func (s *SDK) GetContactChannel(ctx context.Context, request operations.GetConta
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1241,8 +1278,9 @@ func (s *SDK) GetContactChannel(ctx context.Context, request operations.GetConta
 	return res, nil
 }
 
+// GetContactPolicy - Retrieves the resource policies attached to the specified contact or escalation plan.
 func (s *SDK) GetContactPolicy(ctx context.Context, request operations.GetContactPolicyRequest) (*operations.GetContactPolicyResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=SSMContacts.GetContactPolicy"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1262,7 +1300,7 @@ func (s *SDK) GetContactPolicy(ctx context.Context, request operations.GetContac
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1342,8 +1380,9 @@ func (s *SDK) GetContactPolicy(ctx context.Context, request operations.GetContac
 	return res, nil
 }
 
+// ListContactChannels - Lists all contact channels for the specified contact.
 func (s *SDK) ListContactChannels(ctx context.Context, request operations.ListContactChannelsRequest) (*operations.ListContactChannelsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=SSMContacts.ListContactChannels"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1365,7 +1404,7 @@ func (s *SDK) ListContactChannels(ctx context.Context, request operations.ListCo
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1455,8 +1494,9 @@ func (s *SDK) ListContactChannels(ctx context.Context, request operations.ListCo
 	return res, nil
 }
 
+// ListContacts - Lists all contacts and escalation plans in Incident Manager.
 func (s *SDK) ListContacts(ctx context.Context, request operations.ListContactsRequest) (*operations.ListContactsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=SSMContacts.ListContacts"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1478,7 +1518,7 @@ func (s *SDK) ListContacts(ctx context.Context, request operations.ListContactsR
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1548,8 +1588,9 @@ func (s *SDK) ListContacts(ctx context.Context, request operations.ListContactsR
 	return res, nil
 }
 
+// ListEngagements - Lists all engagements that have happened in an incident.
 func (s *SDK) ListEngagements(ctx context.Context, request operations.ListEngagementsRequest) (*operations.ListEngagementsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=SSMContacts.ListEngagements"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1571,7 +1612,7 @@ func (s *SDK) ListEngagements(ctx context.Context, request operations.ListEngage
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1641,8 +1682,9 @@ func (s *SDK) ListEngagements(ctx context.Context, request operations.ListEngage
 	return res, nil
 }
 
+// ListPageReceipts - Lists all of the engagements to contact channels that have been acknowledged.
 func (s *SDK) ListPageReceipts(ctx context.Context, request operations.ListPageReceiptsRequest) (*operations.ListPageReceiptsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=SSMContacts.ListPageReceipts"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1664,7 +1706,7 @@ func (s *SDK) ListPageReceipts(ctx context.Context, request operations.ListPageR
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1744,8 +1786,9 @@ func (s *SDK) ListPageReceipts(ctx context.Context, request operations.ListPageR
 	return res, nil
 }
 
+// ListPagesByContact - Lists the engagements to a contact's contact channels.
 func (s *SDK) ListPagesByContact(ctx context.Context, request operations.ListPagesByContactRequest) (*operations.ListPagesByContactResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=SSMContacts.ListPagesByContact"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1767,7 +1810,7 @@ func (s *SDK) ListPagesByContact(ctx context.Context, request operations.ListPag
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1847,8 +1890,9 @@ func (s *SDK) ListPagesByContact(ctx context.Context, request operations.ListPag
 	return res, nil
 }
 
+// ListPagesByEngagement - Lists the engagements to contact channels that occurred by engaging a contact.
 func (s *SDK) ListPagesByEngagement(ctx context.Context, request operations.ListPagesByEngagementRequest) (*operations.ListPagesByEngagementResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=SSMContacts.ListPagesByEngagement"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1870,7 +1914,7 @@ func (s *SDK) ListPagesByEngagement(ctx context.Context, request operations.List
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1950,8 +1994,9 @@ func (s *SDK) ListPagesByEngagement(ctx context.Context, request operations.List
 	return res, nil
 }
 
+// ListTagsForResource - Lists the tags of an escalation plan or contact.
 func (s *SDK) ListTagsForResource(ctx context.Context, request operations.ListTagsForResourceRequest) (*operations.ListTagsForResourceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=SSMContacts.ListTagsForResource"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1971,7 +2016,7 @@ func (s *SDK) ListTagsForResource(ctx context.Context, request operations.ListTa
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2051,8 +2096,9 @@ func (s *SDK) ListTagsForResource(ctx context.Context, request operations.ListTa
 	return res, nil
 }
 
+// PutContactPolicy - Adds a resource to the specified contact or escalation plan.
 func (s *SDK) PutContactPolicy(ctx context.Context, request operations.PutContactPolicyRequest) (*operations.PutContactPolicyResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=SSMContacts.PutContactPolicy"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2072,7 +2118,7 @@ func (s *SDK) PutContactPolicy(ctx context.Context, request operations.PutContac
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2162,8 +2208,9 @@ func (s *SDK) PutContactPolicy(ctx context.Context, request operations.PutContac
 	return res, nil
 }
 
+// SendActivationCode - Sends an activation code to a contact channel. The contact can use this code to activate the contact channel in the console or with the <code>ActivateChannel</code> operation. Incident Manager can't engage a contact channel until it has been activated.
 func (s *SDK) SendActivationCode(ctx context.Context, request operations.SendActivationCodeRequest) (*operations.SendActivationCodeResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=SSMContacts.SendActivationCode"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2183,7 +2230,7 @@ func (s *SDK) SendActivationCode(ctx context.Context, request operations.SendAct
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2283,8 +2330,9 @@ func (s *SDK) SendActivationCode(ctx context.Context, request operations.SendAct
 	return res, nil
 }
 
+// StartEngagement - Starts an engagement to a contact or escalation plan. The engagement engages each contact specified in the incident.
 func (s *SDK) StartEngagement(ctx context.Context, request operations.StartEngagementRequest) (*operations.StartEngagementResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=SSMContacts.StartEngagement"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2304,7 +2352,7 @@ func (s *SDK) StartEngagement(ctx context.Context, request operations.StartEngag
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2394,8 +2442,9 @@ func (s *SDK) StartEngagement(ctx context.Context, request operations.StartEngag
 	return res, nil
 }
 
+// StopEngagement - Stops an engagement before it finishes the final stage of the escalation plan or engagement plan. Further contacts aren't engaged.
 func (s *SDK) StopEngagement(ctx context.Context, request operations.StopEngagementRequest) (*operations.StopEngagementResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=SSMContacts.StopEngagement"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2415,7 +2464,7 @@ func (s *SDK) StopEngagement(ctx context.Context, request operations.StopEngagem
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2495,8 +2544,9 @@ func (s *SDK) StopEngagement(ctx context.Context, request operations.StopEngagem
 	return res, nil
 }
 
+// TagResource - Tags a contact or escalation plan. You can tag only contacts and escalation plans in the first region of your replication set.
 func (s *SDK) TagResource(ctx context.Context, request operations.TagResourceRequest) (*operations.TagResourceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=SSMContacts.TagResource"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2516,7 +2566,7 @@ func (s *SDK) TagResource(ctx context.Context, request operations.TagResourceReq
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2606,8 +2656,9 @@ func (s *SDK) TagResource(ctx context.Context, request operations.TagResourceReq
 	return res, nil
 }
 
+// UntagResource - Removes tags from the specified resource.
 func (s *SDK) UntagResource(ctx context.Context, request operations.UntagResourceRequest) (*operations.UntagResourceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=SSMContacts.UntagResource"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2627,7 +2678,7 @@ func (s *SDK) UntagResource(ctx context.Context, request operations.UntagResourc
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2707,8 +2758,9 @@ func (s *SDK) UntagResource(ctx context.Context, request operations.UntagResourc
 	return res, nil
 }
 
+// UpdateContact - Updates the contact or escalation plan specified.
 func (s *SDK) UpdateContact(ctx context.Context, request operations.UpdateContactRequest) (*operations.UpdateContactResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=SSMContacts.UpdateContact"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2728,7 +2780,7 @@ func (s *SDK) UpdateContact(ctx context.Context, request operations.UpdateContac
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2828,8 +2880,9 @@ func (s *SDK) UpdateContact(ctx context.Context, request operations.UpdateContac
 	return res, nil
 }
 
+// UpdateContactChannel - Updates a contact's contact channel.
 func (s *SDK) UpdateContactChannel(ctx context.Context, request operations.UpdateContactChannelRequest) (*operations.UpdateContactChannelResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=SSMContacts.UpdateContactChannel"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2849,7 +2902,7 @@ func (s *SDK) UpdateContactChannel(ctx context.Context, request operations.Updat
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {

@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// SubContractorSubContractorAddress
+// The sub contractors' address
 type SubContractorSubContractorAddress struct {
 	Address1 *string `json:"Address1,omitempty"`
 	Address2 *string `json:"Address2,omitempty"`
@@ -13,6 +15,8 @@ type SubContractorSubContractorAddress struct {
 	Postcode *string `json:"Postcode,omitempty"`
 }
 
+// SubContractorSubContractorBankAccount
+// The sub contractors' bank account
 type SubContractorSubContractorBankAccount struct {
 	AccountName   *string `json:"AccountName,omitempty"`
 	AccountNumber *string `json:"AccountNumber,omitempty"`

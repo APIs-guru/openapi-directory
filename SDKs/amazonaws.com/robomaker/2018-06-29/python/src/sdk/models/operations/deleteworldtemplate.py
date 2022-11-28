@@ -1,6 +1,10 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass
@@ -17,22 +21,22 @@ class DeleteWorldTemplateHeaders:
 @dataclass_json
 @dataclass
 class DeleteWorldTemplateRequestBody:
-    template: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'template' }})
+    template: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('template') }})
     
 
 @dataclass
 class DeleteWorldTemplateRequest:
-    headers: DeleteWorldTemplateHeaders = field(default=None)
-    request: DeleteWorldTemplateRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: DeleteWorldTemplateHeaders = field()
+    request: DeleteWorldTemplateRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class DeleteWorldTemplateResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     delete_world_template_response: Optional[dict[str, Any]] = field(default=None)
     internal_server_exception: Optional[Any] = field(default=None)
     invalid_parameter_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     

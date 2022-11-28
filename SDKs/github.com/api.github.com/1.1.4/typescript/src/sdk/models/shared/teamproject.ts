@@ -1,15 +1,16 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SimpleUser } from "./simpleuser";
 
 
+
 export class TeamProjectPermissions extends SpeakeasyBase {
-  @Metadata({ data: "json, name=admin" })
+  @SpeakeasyMetadata({ data: "json, name=admin" })
   admin: boolean;
 
-  @Metadata({ data: "json, name=read" })
+  @SpeakeasyMetadata({ data: "json, name=read" })
   read: boolean;
 
-  @Metadata({ data: "json, name=write" })
+  @SpeakeasyMetadata({ data: "json, name=write" })
   write: boolean;
 }
 
@@ -19,51 +20,51 @@ export class TeamProjectPermissions extends SpeakeasyBase {
  * A team's access to a project.
 **/
 export class TeamProject extends SpeakeasyBase {
-  @Metadata({ data: "json, name=body" })
+  @SpeakeasyMetadata({ data: "json, name=body" })
   body: string;
 
-  @Metadata({ data: "json, name=columns_url" })
+  @SpeakeasyMetadata({ data: "json, name=columns_url" })
   columnsUrl: string;
 
-  @Metadata({ data: "json, name=created_at" })
+  @SpeakeasyMetadata({ data: "json, name=created_at" })
   createdAt: string;
 
-  @Metadata({ data: "json, name=creator" })
+  @SpeakeasyMetadata({ data: "json, name=creator" })
   creator: SimpleUser;
 
-  @Metadata({ data: "json, name=html_url" })
+  @SpeakeasyMetadata({ data: "json, name=html_url" })
   htmlUrl: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: number;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 
-  @Metadata({ data: "json, name=node_id" })
+  @SpeakeasyMetadata({ data: "json, name=node_id" })
   nodeId: string;
 
-  @Metadata({ data: "json, name=number" })
+  @SpeakeasyMetadata({ data: "json, name=number" })
   number: number;
 
-  @Metadata({ data: "json, name=organization_permission" })
+  @SpeakeasyMetadata({ data: "json, name=organization_permission" })
   organizationPermission?: string;
 
-  @Metadata({ data: "json, name=owner_url" })
+  @SpeakeasyMetadata({ data: "json, name=owner_url" })
   ownerUrl: string;
 
-  @Metadata({ data: "json, name=permissions" })
+  @SpeakeasyMetadata({ data: "json, name=permissions" })
   permissions: TeamProjectPermissions;
 
-  @Metadata({ data: "json, name=private" })
+  @SpeakeasyMetadata({ data: "json, name=private" })
   private?: boolean;
 
-  @Metadata({ data: "json, name=state" })
+  @SpeakeasyMetadata({ data: "json, name=state" })
   state: string;
 
-  @Metadata({ data: "json, name=updated_at" })
+  @SpeakeasyMetadata({ data: "json, name=updated_at" })
   updatedAt: string;
 
-  @Metadata({ data: "json, name=url" })
+  @SpeakeasyMetadata({ data: "json, name=url" })
   url: string;
 }

@@ -1,6 +1,7 @@
 
 
+
 export enum DynamoKeyTypeEnum {
-    String = "STRING"
-,    Number = "NUMBER"
+    String = "STRING",
+    Number = "NUMBER"
 }

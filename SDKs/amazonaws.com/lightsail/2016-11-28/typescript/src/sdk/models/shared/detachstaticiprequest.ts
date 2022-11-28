@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DetachStaticIpRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=staticIpName" })
+  @SpeakeasyMetadata({ data: "json, name=staticIpName" })
   staticIpName: string;
 }

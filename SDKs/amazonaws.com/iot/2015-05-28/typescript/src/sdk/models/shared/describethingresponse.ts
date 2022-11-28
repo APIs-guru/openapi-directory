@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // DescribeThingResponse
@@ -6,27 +7,27 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The output from the DescribeThing operation.
 **/
 export class DescribeThingResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=attributes" })
+  @SpeakeasyMetadata({ data: "json, name=attributes" })
   attributes?: Map<string, string>;
 
-  @Metadata({ data: "json, name=billingGroupName" })
+  @SpeakeasyMetadata({ data: "json, name=billingGroupName" })
   billingGroupName?: string;
 
-  @Metadata({ data: "json, name=defaultClientId" })
+  @SpeakeasyMetadata({ data: "json, name=defaultClientId" })
   defaultClientId?: string;
 
-  @Metadata({ data: "json, name=thingArn" })
+  @SpeakeasyMetadata({ data: "json, name=thingArn" })
   thingArn?: string;
 
-  @Metadata({ data: "json, name=thingId" })
+  @SpeakeasyMetadata({ data: "json, name=thingId" })
   thingId?: string;
 
-  @Metadata({ data: "json, name=thingName" })
+  @SpeakeasyMetadata({ data: "json, name=thingName" })
   thingName?: string;
 
-  @Metadata({ data: "json, name=thingTypeName" })
+  @SpeakeasyMetadata({ data: "json, name=thingTypeName" })
   thingTypeName?: string;
 
-  @Metadata({ data: "json, name=version" })
+  @SpeakeasyMetadata({ data: "json, name=version" })
   version?: number;
 }

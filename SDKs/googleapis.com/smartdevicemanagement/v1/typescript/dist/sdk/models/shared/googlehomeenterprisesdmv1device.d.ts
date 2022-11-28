@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { GoogleHomeEnterpriseSdmV1ParentRelation } from "./googlehomeenterprisesdmv1parentrelation";
 /**
  * Device resource represents an instance of enterprise managed device in the property.

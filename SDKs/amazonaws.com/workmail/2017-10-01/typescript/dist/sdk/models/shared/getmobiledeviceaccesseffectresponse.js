@@ -22,20 +22,20 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { MobileDeviceAccessRuleEffectEnum } from "./mobiledeviceaccessruleeffectenum";
+import { MobileDeviceAccessMatchedRule } from "./mobiledeviceaccessmatchedrule";
 var GetMobileDeviceAccessEffectResponse = /** @class */ (function (_super) {
     __extends(GetMobileDeviceAccessEffectResponse, _super);
     function GetMobileDeviceAccessEffectResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Effect" }),
+        SpeakeasyMetadata({ data: "json, name=Effect" }),
         __metadata("design:type", String)
     ], GetMobileDeviceAccessEffectResponse.prototype, "effect", void 0);
     __decorate([
-        Metadata({ data: "json, name=MatchedRules", elemType: shared.MobileDeviceAccessMatchedRule }),
+        SpeakeasyMetadata({ data: "json, name=MatchedRules", elemType: MobileDeviceAccessMatchedRule }),
         __metadata("design:type", Array)
     ], GetMobileDeviceAccessEffectResponse.prototype, "matchedRules", void 0);
     return GetMobileDeviceAccessEffectResponse;

@@ -1,71 +1,72 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetChartExportQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, serialization=json;name=q" })
+  @SpeakeasyMetadata({ data: "queryParam, serialization=json;name=q" })
   q?: number[];
 }
 
 
 export class GetChartExportSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=bearer" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" })
   jwt: shared.SchemeJwt;
 }
 
 
-export class GetChartExportRequest extends SpeakeasyBase {
-  @Metadata()
-  queryParams: GetChartExportQueryParams;
-
-  @Metadata()
-  security: GetChartExportSecurity;
-}
-
-
 export class GetChartExport400ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class GetChartExport401ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class GetChartExport404ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class GetChartExport500ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
+export class GetChartExportRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  queryParams: GetChartExportQueryParams;
+
+  @SpeakeasyMetadata()
+  security: GetChartExportSecurity;
+}
+
+
 export class GetChartExportResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getChartExport200ApplicationZipBinaryString?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getChartExport400ApplicationJsonObject?: GetChartExport400ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getChartExport401ApplicationJsonObject?: GetChartExport401ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getChartExport404ApplicationJsonObject?: GetChartExport404ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getChartExport500ApplicationJsonObject?: GetChartExport500ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

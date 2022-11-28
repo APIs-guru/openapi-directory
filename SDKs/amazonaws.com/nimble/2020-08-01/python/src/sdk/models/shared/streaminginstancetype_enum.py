@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class StreamingInstanceTypeEnum(str, Enum):
     G4DN_XLARGE = "g4dn.xlarge"

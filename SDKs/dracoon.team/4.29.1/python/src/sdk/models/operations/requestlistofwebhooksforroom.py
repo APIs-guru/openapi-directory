@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
-from typing import Any,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class RequestListOfWebhooksForRoomPathParams:
-    room_id: int = field(default=None, metadata={'path_param': { 'field_name': 'room_id', 'style': 'simple', 'explode': False }})
+    room_id: int = field(metadata={'path_param': { 'field_name': 'room_id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -23,15 +26,15 @@ class RequestListOfWebhooksForRoomHeaders:
 
 @dataclass
 class RequestListOfWebhooksForRoomRequest:
-    path_params: RequestListOfWebhooksForRoomPathParams = field(default=None)
-    query_params: RequestListOfWebhooksForRoomQueryParams = field(default=None)
-    headers: RequestListOfWebhooksForRoomHeaders = field(default=None)
+    headers: RequestListOfWebhooksForRoomHeaders = field()
+    path_params: RequestListOfWebhooksForRoomPathParams = field()
+    query_params: RequestListOfWebhooksForRoomQueryParams = field()
     
 
 @dataclass
 class RequestListOfWebhooksForRoomResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error_response: Optional[shared.ErrorResponse] = field(default=None)
     room_webhook_list: Optional[shared.RoomWebhookList] = field(default=None)
-    status_code: int = field(default=None)
     

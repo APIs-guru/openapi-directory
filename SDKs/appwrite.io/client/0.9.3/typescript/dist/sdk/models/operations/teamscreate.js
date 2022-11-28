@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var TeamsCreateRequestBody = /** @class */ (function (_super) {
     __extends(TeamsCreateRequestBody, _super);
@@ -30,11 +30,11 @@ var TeamsCreateRequestBody = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], TeamsCreateRequestBody.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=roles" }),
+        SpeakeasyMetadata({ data: "json, name=roles" }),
         __metadata("design:type", Array)
     ], TeamsCreateRequestBody.prototype, "roles", void 0);
     return TeamsCreateRequestBody;
@@ -46,11 +46,11 @@ var TeamsCreateSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeJwt)
     ], TeamsCreateSecurity.prototype, "jwt", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeProject)
     ], TeamsCreateSecurity.prototype, "project", void 0);
     return TeamsCreateSecurity;
@@ -62,11 +62,11 @@ var TeamsCreateRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", TeamsCreateRequestBody)
     ], TeamsCreateRequest.prototype, "request", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", TeamsCreateSecurity)
     ], TeamsCreateRequest.prototype, "security", void 0);
     return TeamsCreateRequest;
@@ -78,15 +78,15 @@ var TeamsCreateResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], TeamsCreateResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], TeamsCreateResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.Team)
     ], TeamsCreateResponse.prototype, "team", void 0);
     return TeamsCreateResponse;

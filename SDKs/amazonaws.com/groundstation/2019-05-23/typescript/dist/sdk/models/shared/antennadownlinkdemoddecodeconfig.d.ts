@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { DecodeConfig } from "./decodeconfig";
 import { DemodulationConfig } from "./demodulationconfig";
 import { SpectrumConfig } from "./spectrumconfig";

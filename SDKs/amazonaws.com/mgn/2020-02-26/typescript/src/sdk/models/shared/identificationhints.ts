@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // IdentificationHints
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Identification hints.
 **/
 export class IdentificationHints extends SpeakeasyBase {
-  @Metadata({ data: "json, name=awsInstanceID" })
+  @SpeakeasyMetadata({ data: "json, name=awsInstanceID" })
   awsInstanceId?: string;
 
-  @Metadata({ data: "json, name=fqdn" })
+  @SpeakeasyMetadata({ data: "json, name=fqdn" })
   fqdn?: string;
 
-  @Metadata({ data: "json, name=hostname" })
+  @SpeakeasyMetadata({ data: "json, name=hostname" })
   hostname?: string;
 
-  @Metadata({ data: "json, name=vmWareUuid" })
+  @SpeakeasyMetadata({ data: "json, name=vmWareUuid" })
   vmWareUuid?: string;
 }

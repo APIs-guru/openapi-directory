@@ -18,14 +18,14 @@ class RequestProfileAttributesHeaders:
 
 @dataclass
 class RequestProfileAttributesRequest:
-    query_params: RequestProfileAttributesQueryParams = field(default=None)
-    headers: RequestProfileAttributesHeaders = field(default=None)
+    headers: RequestProfileAttributesHeaders = field()
+    query_params: RequestProfileAttributesQueryParams = field()
     
 
 @dataclass
 class RequestProfileAttributesResponse:
+    content_type: str = field()
+    status_code: int = field()
     attributes_response: Optional[shared.AttributesResponse] = field(default=None)
-    content_type: str = field(default=None)
     error_response: Optional[shared.ErrorResponse] = field(default=None)
-    status_code: int = field(default=None)
     

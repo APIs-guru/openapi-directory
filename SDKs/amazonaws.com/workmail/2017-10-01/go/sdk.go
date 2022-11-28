@@ -10,7 +10,7 @@ import (
 	"strings"
 )
 
-var Servers = []string{
+var ServerList = []string{
 	"http://workmail.{region}.amazonaws.com",
 	"https://workmail.{region}.amazonaws.com",
 	"http://workmail.{region}.amazonaws.com.cn",
@@ -21,10 +21,15 @@ type HTTPClient interface {
 	Do(req *http.Request) (*http.Response, error)
 }
 
+// SDK Documentation: https://docs.aws.amazon.com/workmail/ - Amazon Web Services documentation
 type SDK struct {
-	defaultClient  HTTPClient
-	securityClient HTTPClient
-	serverURL      string
+	_defaultClient  HTTPClient
+	_securityClient HTTPClient
+	_security       *shared.Security
+	_serverURL      string
+	_language       string
+	_sdkVersion     string
+	_genVersion     string
 }
 
 type SDKOption func(*SDK)
@@ -35,33 +40,55 @@ func WithServerURL(serverURL string, params map[string]string) SDKOption {
 			serverURL = utils.ReplaceParameters(serverURL, params)
 		}
 
-		sdk.serverURL = serverURL
+		sdk._serverURL = serverURL
+	}
+}
+
+func WithClient(client HTTPClient) SDKOption {
+	return func(sdk *SDK) {
+		sdk._defaultClient = client
 	}
 }
 
 func WithSecurity(security shared.Security) SDKOption {
 	return func(sdk *SDK) {
-		sdk.securityClient = utils.CreateSecurityClient(security)
+		sdk._security = &security
 	}
 }
 
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
-		defaultClient:  http.DefaultClient,
-		securityClient: http.DefaultClient,
+		_language:   "go",
+		_sdkVersion: "",
+		_genVersion: "internal",
 	}
 	for _, opt := range opts {
 		opt(sdk)
 	}
-	if sdk.serverURL == "" {
-		sdk.serverURL = Servers[0]
+
+	if sdk._defaultClient == nil {
+		sdk._defaultClient = http.DefaultClient
+	}
+	if sdk._securityClient == nil {
+
+		if sdk._security != nil {
+			sdk._securityClient = utils.ConfigureSecurityClient(sdk._defaultClient, sdk._security)
+		} else {
+			sdk._securityClient = sdk._defaultClient
+		}
+
+	}
+
+	if sdk._serverURL == "" {
+		sdk._serverURL = ServerList[0]
 	}
 
 	return sdk
 }
 
+// AssociateDelegateToResource - Adds a member (user or group) to the resource's set of delegates.
 func (s *SDK) AssociateDelegateToResource(ctx context.Context, request operations.AssociateDelegateToResourceRequest) (*operations.AssociateDelegateToResourceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=WorkMailService.AssociateDelegateToResource"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -81,7 +108,7 @@ func (s *SDK) AssociateDelegateToResource(ctx context.Context, request operation
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -161,8 +188,9 @@ func (s *SDK) AssociateDelegateToResource(ctx context.Context, request operation
 	return res, nil
 }
 
+// AssociateMemberToGroup - Adds a member (user or group) to the group's set.
 func (s *SDK) AssociateMemberToGroup(ctx context.Context, request operations.AssociateMemberToGroupRequest) (*operations.AssociateMemberToGroupResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=WorkMailService.AssociateMemberToGroup"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -182,7 +210,7 @@ func (s *SDK) AssociateMemberToGroup(ctx context.Context, request operations.Ass
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -292,8 +320,9 @@ func (s *SDK) AssociateMemberToGroup(ctx context.Context, request operations.Ass
 	return res, nil
 }
 
+// CancelMailboxExportJob - <p>Cancels a mailbox export job.</p> <note> <p>If the mailbox export job is near completion, it might not be possible to cancel it.</p> </note>
 func (s *SDK) CancelMailboxExportJob(ctx context.Context, request operations.CancelMailboxExportJobRequest) (*operations.CancelMailboxExportJobResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=WorkMailService.CancelMailboxExportJob"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -313,7 +342,7 @@ func (s *SDK) CancelMailboxExportJob(ctx context.Context, request operations.Can
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -383,8 +412,9 @@ func (s *SDK) CancelMailboxExportJob(ctx context.Context, request operations.Can
 	return res, nil
 }
 
+// CreateAlias - Adds an alias to the set of a given member (user or group) of Amazon WorkMail.
 func (s *SDK) CreateAlias(ctx context.Context, request operations.CreateAliasRequest) (*operations.CreateAliasResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=WorkMailService.CreateAlias"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -404,7 +434,7 @@ func (s *SDK) CreateAlias(ctx context.Context, request operations.CreateAliasReq
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -524,8 +554,9 @@ func (s *SDK) CreateAlias(ctx context.Context, request operations.CreateAliasReq
 	return res, nil
 }
 
+// CreateGroup - Creates a group that can be used in Amazon WorkMail by calling the <a>RegisterToWorkMail</a> operation.
 func (s *SDK) CreateGroup(ctx context.Context, request operations.CreateGroupRequest) (*operations.CreateGroupResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=WorkMailService.CreateGroup"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -545,7 +576,7 @@ func (s *SDK) CreateGroup(ctx context.Context, request operations.CreateGroupReq
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -655,8 +686,9 @@ func (s *SDK) CreateGroup(ctx context.Context, request operations.CreateGroupReq
 	return res, nil
 }
 
+// CreateMobileDeviceAccessRule - Creates a new mobile device access rule for the specified Amazon WorkMail organization.
 func (s *SDK) CreateMobileDeviceAccessRule(ctx context.Context, request operations.CreateMobileDeviceAccessRuleRequest) (*operations.CreateMobileDeviceAccessRuleResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=WorkMailService.CreateMobileDeviceAccessRule"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -676,7 +708,7 @@ func (s *SDK) CreateMobileDeviceAccessRule(ctx context.Context, request operatio
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -746,8 +778,9 @@ func (s *SDK) CreateMobileDeviceAccessRule(ctx context.Context, request operatio
 	return res, nil
 }
 
+// CreateOrganization - <p>Creates a new Amazon WorkMail organization. Optionally, you can choose to associate an existing AWS Directory Service directory with your organization. If an AWS Directory Service directory ID is specified, the organization alias must match the directory alias. If you choose not to associate an existing directory with your organization, then we create a new Amazon WorkMail directory for you. For more information, see <a href="https://docs.aws.amazon.com/workmail/latest/adminguide/add_new_organization.html">Adding an organization</a> in the <i>Amazon WorkMail Administrator Guide</i>.</p> <p>You can associate multiple email domains with an organization, then set your default email domain from the Amazon WorkMail console. You can also associate a domain that is managed in an Amazon Route 53 public hosted zone. For more information, see <a href="https://docs.aws.amazon.com/workmail/latest/adminguide/add_domain.html">Adding a domain</a> and <a href="https://docs.aws.amazon.com/workmail/latest/adminguide/default_domain.html">Choosing the default domain</a> in the <i>Amazon WorkMail Administrator Guide</i>.</p> <p>Optionally, you can use a customer managed master key from AWS Key Management Service (AWS KMS) to encrypt email for your organization. If you don't associate an AWS KMS key, Amazon WorkMail creates a default AWS managed master key for you.</p>
 func (s *SDK) CreateOrganization(ctx context.Context, request operations.CreateOrganizationRequest) (*operations.CreateOrganizationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=WorkMailService.CreateOrganization"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -767,7 +800,7 @@ func (s *SDK) CreateOrganization(ctx context.Context, request operations.CreateO
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -847,8 +880,9 @@ func (s *SDK) CreateOrganization(ctx context.Context, request operations.CreateO
 	return res, nil
 }
 
+// CreateResource - Creates a new Amazon WorkMail resource.
 func (s *SDK) CreateResource(ctx context.Context, request operations.CreateResourceRequest) (*operations.CreateResourceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=WorkMailService.CreateResource"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -868,7 +902,7 @@ func (s *SDK) CreateResource(ctx context.Context, request operations.CreateResou
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -968,8 +1002,9 @@ func (s *SDK) CreateResource(ctx context.Context, request operations.CreateResou
 	return res, nil
 }
 
+// CreateUser - Creates a user who can be used in Amazon WorkMail by calling the <a>RegisterToWorkMail</a> operation.
 func (s *SDK) CreateUser(ctx context.Context, request operations.CreateUserRequest) (*operations.CreateUserResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=WorkMailService.CreateUser"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -989,7 +1024,7 @@ func (s *SDK) CreateUser(ctx context.Context, request operations.CreateUserReque
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1109,8 +1144,9 @@ func (s *SDK) CreateUser(ctx context.Context, request operations.CreateUserReque
 	return res, nil
 }
 
+// DeleteAccessControlRule - Deletes an access control rule for the specified WorkMail organization.
 func (s *SDK) DeleteAccessControlRule(ctx context.Context, request operations.DeleteAccessControlRuleRequest) (*operations.DeleteAccessControlRuleResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=WorkMailService.DeleteAccessControlRule"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1130,7 +1166,7 @@ func (s *SDK) DeleteAccessControlRule(ctx context.Context, request operations.De
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1180,8 +1216,9 @@ func (s *SDK) DeleteAccessControlRule(ctx context.Context, request operations.De
 	return res, nil
 }
 
+// DeleteAlias - Remove one or more specified aliases from a set of aliases for a given user.
 func (s *SDK) DeleteAlias(ctx context.Context, request operations.DeleteAliasRequest) (*operations.DeleteAliasResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=WorkMailService.DeleteAlias"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1201,7 +1238,7 @@ func (s *SDK) DeleteAlias(ctx context.Context, request operations.DeleteAliasReq
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1281,8 +1318,9 @@ func (s *SDK) DeleteAlias(ctx context.Context, request operations.DeleteAliasReq
 	return res, nil
 }
 
+// DeleteGroup - Deletes a group from Amazon WorkMail.
 func (s *SDK) DeleteGroup(ctx context.Context, request operations.DeleteGroupRequest) (*operations.DeleteGroupResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=WorkMailService.DeleteGroup"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1302,7 +1340,7 @@ func (s *SDK) DeleteGroup(ctx context.Context, request operations.DeleteGroupReq
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1402,8 +1440,9 @@ func (s *SDK) DeleteGroup(ctx context.Context, request operations.DeleteGroupReq
 	return res, nil
 }
 
+// DeleteMailboxPermissions - Deletes permissions granted to a member (user or group).
 func (s *SDK) DeleteMailboxPermissions(ctx context.Context, request operations.DeleteMailboxPermissionsRequest) (*operations.DeleteMailboxPermissionsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=WorkMailService.DeleteMailboxPermissions"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1423,7 +1462,7 @@ func (s *SDK) DeleteMailboxPermissions(ctx context.Context, request operations.D
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1503,8 +1542,9 @@ func (s *SDK) DeleteMailboxPermissions(ctx context.Context, request operations.D
 	return res, nil
 }
 
+// DeleteMobileDeviceAccessRule - Deletes a mobile device access rule for the specified Amazon WorkMail organization.
 func (s *SDK) DeleteMobileDeviceAccessRule(ctx context.Context, request operations.DeleteMobileDeviceAccessRuleRequest) (*operations.DeleteMobileDeviceAccessRuleResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=WorkMailService.DeleteMobileDeviceAccessRule"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1524,7 +1564,7 @@ func (s *SDK) DeleteMobileDeviceAccessRule(ctx context.Context, request operatio
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1584,8 +1624,9 @@ func (s *SDK) DeleteMobileDeviceAccessRule(ctx context.Context, request operatio
 	return res, nil
 }
 
+// DeleteOrganization - Deletes an Amazon WorkMail organization and all underlying AWS resources managed by Amazon WorkMail as part of the organization. You can choose whether to delete the associated directory. For more information, see <a href="https://docs.aws.amazon.com/workmail/latest/adminguide/remove_organization.html">Removing an organization</a> in the <i>Amazon WorkMail Administrator Guide</i>.
 func (s *SDK) DeleteOrganization(ctx context.Context, request operations.DeleteOrganizationRequest) (*operations.DeleteOrganizationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=WorkMailService.DeleteOrganization"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1605,7 +1646,7 @@ func (s *SDK) DeleteOrganization(ctx context.Context, request operations.DeleteO
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1665,8 +1706,9 @@ func (s *SDK) DeleteOrganization(ctx context.Context, request operations.DeleteO
 	return res, nil
 }
 
+// DeleteResource - Deletes the specified resource.
 func (s *SDK) DeleteResource(ctx context.Context, request operations.DeleteResourceRequest) (*operations.DeleteResourceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=WorkMailService.DeleteResource"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1686,7 +1728,7 @@ func (s *SDK) DeleteResource(ctx context.Context, request operations.DeleteResou
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1756,8 +1798,9 @@ func (s *SDK) DeleteResource(ctx context.Context, request operations.DeleteResou
 	return res, nil
 }
 
+// DeleteRetentionPolicy - Deletes the specified retention policy from the specified organization.
 func (s *SDK) DeleteRetentionPolicy(ctx context.Context, request operations.DeleteRetentionPolicyRequest) (*operations.DeleteRetentionPolicyResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=WorkMailService.DeleteRetentionPolicy"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1777,7 +1820,7 @@ func (s *SDK) DeleteRetentionPolicy(ctx context.Context, request operations.Dele
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1837,8 +1880,9 @@ func (s *SDK) DeleteRetentionPolicy(ctx context.Context, request operations.Dele
 	return res, nil
 }
 
+// DeleteUser - <p>Deletes a user from Amazon WorkMail and all subsequent systems. Before you can delete a user, the user state must be <code>DISABLED</code>. Use the <a>DescribeUser</a> action to confirm the user state.</p> <p>Deleting a user is permanent and cannot be undone. WorkMail archives user mailboxes for 30 days before they are permanently removed.</p>
 func (s *SDK) DeleteUser(ctx context.Context, request operations.DeleteUserRequest) (*operations.DeleteUserResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=WorkMailService.DeleteUser"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1858,7 +1902,7 @@ func (s *SDK) DeleteUser(ctx context.Context, request operations.DeleteUserReque
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1958,8 +2002,9 @@ func (s *SDK) DeleteUser(ctx context.Context, request operations.DeleteUserReque
 	return res, nil
 }
 
+// DeregisterFromWorkMail - Mark a user, group, or resource as no longer used in Amazon WorkMail. This action disassociates the mailbox and schedules it for clean-up. WorkMail keeps mailboxes for 30 days before they are permanently removed. The functionality in the console is <i>Disable</i>.
 func (s *SDK) DeregisterFromWorkMail(ctx context.Context, request operations.DeregisterFromWorkMailRequest) (*operations.DeregisterFromWorkMailResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=WorkMailService.DeregisterFromWorkMail"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1979,7 +2024,7 @@ func (s *SDK) DeregisterFromWorkMail(ctx context.Context, request operations.Der
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2059,8 +2104,9 @@ func (s *SDK) DeregisterFromWorkMail(ctx context.Context, request operations.Der
 	return res, nil
 }
 
+// DescribeGroup - Returns the data available for the group.
 func (s *SDK) DescribeGroup(ctx context.Context, request operations.DescribeGroupRequest) (*operations.DescribeGroupResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=WorkMailService.DescribeGroup"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2080,7 +2126,7 @@ func (s *SDK) DescribeGroup(ctx context.Context, request operations.DescribeGrou
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2150,8 +2196,9 @@ func (s *SDK) DescribeGroup(ctx context.Context, request operations.DescribeGrou
 	return res, nil
 }
 
+// DescribeMailboxExportJob - Describes the current status of a mailbox export job.
 func (s *SDK) DescribeMailboxExportJob(ctx context.Context, request operations.DescribeMailboxExportJobRequest) (*operations.DescribeMailboxExportJobResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=WorkMailService.DescribeMailboxExportJob"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2171,7 +2218,7 @@ func (s *SDK) DescribeMailboxExportJob(ctx context.Context, request operations.D
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2241,8 +2288,9 @@ func (s *SDK) DescribeMailboxExportJob(ctx context.Context, request operations.D
 	return res, nil
 }
 
+// DescribeOrganization - Provides more information regarding a given organization based on its identifier.
 func (s *SDK) DescribeOrganization(ctx context.Context, request operations.DescribeOrganizationRequest) (*operations.DescribeOrganizationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=WorkMailService.DescribeOrganization"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2262,7 +2310,7 @@ func (s *SDK) DescribeOrganization(ctx context.Context, request operations.Descr
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2312,8 +2360,9 @@ func (s *SDK) DescribeOrganization(ctx context.Context, request operations.Descr
 	return res, nil
 }
 
+// DescribeResource - Returns the data available for the resource.
 func (s *SDK) DescribeResource(ctx context.Context, request operations.DescribeResourceRequest) (*operations.DescribeResourceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=WorkMailService.DescribeResource"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2333,7 +2382,7 @@ func (s *SDK) DescribeResource(ctx context.Context, request operations.DescribeR
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2403,8 +2452,9 @@ func (s *SDK) DescribeResource(ctx context.Context, request operations.DescribeR
 	return res, nil
 }
 
+// DescribeUser - Provides information regarding the user.
 func (s *SDK) DescribeUser(ctx context.Context, request operations.DescribeUserRequest) (*operations.DescribeUserResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=WorkMailService.DescribeUser"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2424,7 +2474,7 @@ func (s *SDK) DescribeUser(ctx context.Context, request operations.DescribeUserR
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2494,8 +2544,9 @@ func (s *SDK) DescribeUser(ctx context.Context, request operations.DescribeUserR
 	return res, nil
 }
 
+// DisassociateDelegateFromResource - Removes a member from the resource's set of delegates.
 func (s *SDK) DisassociateDelegateFromResource(ctx context.Context, request operations.DisassociateDelegateFromResourceRequest) (*operations.DisassociateDelegateFromResourceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=WorkMailService.DisassociateDelegateFromResource"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2515,7 +2566,7 @@ func (s *SDK) DisassociateDelegateFromResource(ctx context.Context, request oper
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2595,8 +2646,9 @@ func (s *SDK) DisassociateDelegateFromResource(ctx context.Context, request oper
 	return res, nil
 }
 
+// DisassociateMemberFromGroup - Removes a member from a group.
 func (s *SDK) DisassociateMemberFromGroup(ctx context.Context, request operations.DisassociateMemberFromGroupRequest) (*operations.DisassociateMemberFromGroupResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=WorkMailService.DisassociateMemberFromGroup"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2616,7 +2668,7 @@ func (s *SDK) DisassociateMemberFromGroup(ctx context.Context, request operation
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2726,8 +2778,9 @@ func (s *SDK) DisassociateMemberFromGroup(ctx context.Context, request operation
 	return res, nil
 }
 
+// GetAccessControlEffect - Gets the effects of an organization's access control rules as they apply to a specified IPv4 address, access protocol action, or user ID.
 func (s *SDK) GetAccessControlEffect(ctx context.Context, request operations.GetAccessControlEffectRequest) (*operations.GetAccessControlEffectResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=WorkMailService.GetAccessControlEffect"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2747,7 +2800,7 @@ func (s *SDK) GetAccessControlEffect(ctx context.Context, request operations.Get
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2817,8 +2870,9 @@ func (s *SDK) GetAccessControlEffect(ctx context.Context, request operations.Get
 	return res, nil
 }
 
+// GetDefaultRetentionPolicy - Gets the default retention policy details for the specified organization.
 func (s *SDK) GetDefaultRetentionPolicy(ctx context.Context, request operations.GetDefaultRetentionPolicyRequest) (*operations.GetDefaultRetentionPolicyResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=WorkMailService.GetDefaultRetentionPolicy"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2838,7 +2892,7 @@ func (s *SDK) GetDefaultRetentionPolicy(ctx context.Context, request operations.
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2908,8 +2962,9 @@ func (s *SDK) GetDefaultRetentionPolicy(ctx context.Context, request operations.
 	return res, nil
 }
 
+// GetMailboxDetails - Requests a user's mailbox details for a specified organization and user.
 func (s *SDK) GetMailboxDetails(ctx context.Context, request operations.GetMailboxDetailsRequest) (*operations.GetMailboxDetailsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=WorkMailService.GetMailboxDetails"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2929,7 +2984,7 @@ func (s *SDK) GetMailboxDetails(ctx context.Context, request operations.GetMailb
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2989,8 +3044,9 @@ func (s *SDK) GetMailboxDetails(ctx context.Context, request operations.GetMailb
 	return res, nil
 }
 
+// GetMobileDeviceAccessEffect - Simulates the effect of the mobile device access rules for the given attributes of a sample access event. Use this method to test the effects of the current set of mobile device access rules for the Amazon WorkMail organization for a particular user's attributes.
 func (s *SDK) GetMobileDeviceAccessEffect(ctx context.Context, request operations.GetMobileDeviceAccessEffectRequest) (*operations.GetMobileDeviceAccessEffectResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=WorkMailService.GetMobileDeviceAccessEffect"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3010,7 +3066,7 @@ func (s *SDK) GetMobileDeviceAccessEffect(ctx context.Context, request operation
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3070,8 +3126,9 @@ func (s *SDK) GetMobileDeviceAccessEffect(ctx context.Context, request operation
 	return res, nil
 }
 
+// ListAccessControlRules - Lists the access control rules for the specified organization.
 func (s *SDK) ListAccessControlRules(ctx context.Context, request operations.ListAccessControlRulesRequest) (*operations.ListAccessControlRulesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=WorkMailService.ListAccessControlRules"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3091,7 +3148,7 @@ func (s *SDK) ListAccessControlRules(ctx context.Context, request operations.Lis
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3141,8 +3198,9 @@ func (s *SDK) ListAccessControlRules(ctx context.Context, request operations.Lis
 	return res, nil
 }
 
+// ListAliases - Creates a paginated call to list the aliases associated with a given entity.
 func (s *SDK) ListAliases(ctx context.Context, request operations.ListAliasesRequest) (*operations.ListAliasesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=WorkMailService.ListAliases"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3164,7 +3222,7 @@ func (s *SDK) ListAliases(ctx context.Context, request operations.ListAliasesReq
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3244,8 +3302,9 @@ func (s *SDK) ListAliases(ctx context.Context, request operations.ListAliasesReq
 	return res, nil
 }
 
+// ListGroupMembers - Returns an overview of the members of a group. Users and groups can be members of a group.
 func (s *SDK) ListGroupMembers(ctx context.Context, request operations.ListGroupMembersRequest) (*operations.ListGroupMembersResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=WorkMailService.ListGroupMembers"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3267,7 +3326,7 @@ func (s *SDK) ListGroupMembers(ctx context.Context, request operations.ListGroup
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3347,8 +3406,9 @@ func (s *SDK) ListGroupMembers(ctx context.Context, request operations.ListGroup
 	return res, nil
 }
 
+// ListGroups - Returns summaries of the organization's groups.
 func (s *SDK) ListGroups(ctx context.Context, request operations.ListGroupsRequest) (*operations.ListGroupsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=WorkMailService.ListGroups"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3370,7 +3430,7 @@ func (s *SDK) ListGroups(ctx context.Context, request operations.ListGroupsReque
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3440,8 +3500,9 @@ func (s *SDK) ListGroups(ctx context.Context, request operations.ListGroupsReque
 	return res, nil
 }
 
+// ListMailboxExportJobs - Lists the mailbox export jobs started for the specified organization within the last seven days.
 func (s *SDK) ListMailboxExportJobs(ctx context.Context, request operations.ListMailboxExportJobsRequest) (*operations.ListMailboxExportJobsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=WorkMailService.ListMailboxExportJobs"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3463,7 +3524,7 @@ func (s *SDK) ListMailboxExportJobs(ctx context.Context, request operations.List
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3523,8 +3584,9 @@ func (s *SDK) ListMailboxExportJobs(ctx context.Context, request operations.List
 	return res, nil
 }
 
+// ListMailboxPermissions - Lists the mailbox permissions associated with a user, group, or resource mailbox.
 func (s *SDK) ListMailboxPermissions(ctx context.Context, request operations.ListMailboxPermissionsRequest) (*operations.ListMailboxPermissionsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=WorkMailService.ListMailboxPermissions"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3546,7 +3608,7 @@ func (s *SDK) ListMailboxPermissions(ctx context.Context, request operations.Lis
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3616,8 +3678,9 @@ func (s *SDK) ListMailboxPermissions(ctx context.Context, request operations.Lis
 	return res, nil
 }
 
+// ListMobileDeviceAccessRules - Lists the mobile device access rules for the specified Amazon WorkMail organization.
 func (s *SDK) ListMobileDeviceAccessRules(ctx context.Context, request operations.ListMobileDeviceAccessRulesRequest) (*operations.ListMobileDeviceAccessRulesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=WorkMailService.ListMobileDeviceAccessRules"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3637,7 +3700,7 @@ func (s *SDK) ListMobileDeviceAccessRules(ctx context.Context, request operation
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3697,8 +3760,9 @@ func (s *SDK) ListMobileDeviceAccessRules(ctx context.Context, request operation
 	return res, nil
 }
 
+// ListOrganizations - Returns summaries of the customer's organizations.
 func (s *SDK) ListOrganizations(ctx context.Context, request operations.ListOrganizationsRequest) (*operations.ListOrganizationsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=WorkMailService.ListOrganizations"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3720,7 +3784,7 @@ func (s *SDK) ListOrganizations(ctx context.Context, request operations.ListOrga
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3760,8 +3824,9 @@ func (s *SDK) ListOrganizations(ctx context.Context, request operations.ListOrga
 	return res, nil
 }
 
+// ListResourceDelegates - Lists the delegates associated with a resource. Users and groups can be resource delegates and answer requests on behalf of the resource.
 func (s *SDK) ListResourceDelegates(ctx context.Context, request operations.ListResourceDelegatesRequest) (*operations.ListResourceDelegatesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=WorkMailService.ListResourceDelegates"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3783,7 +3848,7 @@ func (s *SDK) ListResourceDelegates(ctx context.Context, request operations.List
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3863,8 +3928,9 @@ func (s *SDK) ListResourceDelegates(ctx context.Context, request operations.List
 	return res, nil
 }
 
+// ListResources - Returns summaries of the organization's resources.
 func (s *SDK) ListResources(ctx context.Context, request operations.ListResourcesRequest) (*operations.ListResourcesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=WorkMailService.ListResources"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3886,7 +3952,7 @@ func (s *SDK) ListResources(ctx context.Context, request operations.ListResource
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3946,8 +4012,9 @@ func (s *SDK) ListResources(ctx context.Context, request operations.ListResource
 	return res, nil
 }
 
+// ListTagsForResource - Lists the tags applied to an Amazon WorkMail organization resource.
 func (s *SDK) ListTagsForResource(ctx context.Context, request operations.ListTagsForResourceRequest) (*operations.ListTagsForResourceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=WorkMailService.ListTagsForResource"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3967,7 +4034,7 @@ func (s *SDK) ListTagsForResource(ctx context.Context, request operations.ListTa
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4007,8 +4074,9 @@ func (s *SDK) ListTagsForResource(ctx context.Context, request operations.ListTa
 	return res, nil
 }
 
+// ListUsers - Returns summaries of the organization's users.
 func (s *SDK) ListUsers(ctx context.Context, request operations.ListUsersRequest) (*operations.ListUsersResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=WorkMailService.ListUsers"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -4030,7 +4098,7 @@ func (s *SDK) ListUsers(ctx context.Context, request operations.ListUsersRequest
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4090,8 +4158,9 @@ func (s *SDK) ListUsers(ctx context.Context, request operations.ListUsersRequest
 	return res, nil
 }
 
+// PutAccessControlRule - Adds a new access control rule for the specified organization. The rule allows or denies access to the organization for the specified IPv4 addresses, access protocol actions, and user IDs. Adding a new rule with the same name as an existing rule replaces the older rule.
 func (s *SDK) PutAccessControlRule(ctx context.Context, request operations.PutAccessControlRuleRequest) (*operations.PutAccessControlRuleResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=WorkMailService.PutAccessControlRule"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -4111,7 +4180,7 @@ func (s *SDK) PutAccessControlRule(ctx context.Context, request operations.PutAc
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4191,8 +4260,9 @@ func (s *SDK) PutAccessControlRule(ctx context.Context, request operations.PutAc
 	return res, nil
 }
 
+// PutMailboxPermissions - Sets permissions for a user, group, or resource. This replaces any pre-existing permissions.
 func (s *SDK) PutMailboxPermissions(ctx context.Context, request operations.PutMailboxPermissionsRequest) (*operations.PutMailboxPermissionsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=WorkMailService.PutMailboxPermissions"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -4212,7 +4282,7 @@ func (s *SDK) PutMailboxPermissions(ctx context.Context, request operations.PutM
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4292,8 +4362,9 @@ func (s *SDK) PutMailboxPermissions(ctx context.Context, request operations.PutM
 	return res, nil
 }
 
+// PutRetentionPolicy - Puts a retention policy to the specified organization.
 func (s *SDK) PutRetentionPolicy(ctx context.Context, request operations.PutRetentionPolicyRequest) (*operations.PutRetentionPolicyResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=WorkMailService.PutRetentionPolicy"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -4313,7 +4384,7 @@ func (s *SDK) PutRetentionPolicy(ctx context.Context, request operations.PutRete
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4383,8 +4454,9 @@ func (s *SDK) PutRetentionPolicy(ctx context.Context, request operations.PutRete
 	return res, nil
 }
 
+// RegisterToWorkMail - <p>Registers an existing and disabled user, group, or resource for Amazon WorkMail use by associating a mailbox and calendaring capabilities. It performs no change if the user, group, or resource is enabled and fails if the user, group, or resource is deleted. This operation results in the accumulation of costs. For more information, see <a href="https://aws.amazon.com/workmail/pricing">Pricing</a>. The equivalent console functionality for this operation is <i>Enable</i>. </p> <p>Users can either be created by calling the <a>CreateUser</a> API operation or they can be synchronized from your directory. For more information, see <a>DeregisterFromWorkMail</a>.</p>
 func (s *SDK) RegisterToWorkMail(ctx context.Context, request operations.RegisterToWorkMailRequest) (*operations.RegisterToWorkMailResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=WorkMailService.RegisterToWorkMail"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -4404,7 +4476,7 @@ func (s *SDK) RegisterToWorkMail(ctx context.Context, request operations.Registe
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4544,8 +4616,9 @@ func (s *SDK) RegisterToWorkMail(ctx context.Context, request operations.Registe
 	return res, nil
 }
 
+// ResetPassword - Allows the administrator to reset the password for a user.
 func (s *SDK) ResetPassword(ctx context.Context, request operations.ResetPasswordRequest) (*operations.ResetPasswordResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=WorkMailService.ResetPassword"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -4565,7 +4638,7 @@ func (s *SDK) ResetPassword(ctx context.Context, request operations.ResetPasswor
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4685,8 +4758,9 @@ func (s *SDK) ResetPassword(ctx context.Context, request operations.ResetPasswor
 	return res, nil
 }
 
+// StartMailboxExportJob - Starts a mailbox export job to export MIME-format email messages and calendar items from the specified mailbox to the specified Amazon Simple Storage Service (Amazon S3) bucket. For more information, see <a href="https://docs.aws.amazon.com/workmail/latest/adminguide/mail-export.html">Exporting mailbox content</a> in the <i>Amazon WorkMail Administrator Guide</i>.
 func (s *SDK) StartMailboxExportJob(ctx context.Context, request operations.StartMailboxExportJobRequest) (*operations.StartMailboxExportJobResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=WorkMailService.StartMailboxExportJob"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -4706,7 +4780,7 @@ func (s *SDK) StartMailboxExportJob(ctx context.Context, request operations.Star
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4786,8 +4860,9 @@ func (s *SDK) StartMailboxExportJob(ctx context.Context, request operations.Star
 	return res, nil
 }
 
+// TagResource - Applies the specified tags to the specified Amazon WorkMail organization resource.
 func (s *SDK) TagResource(ctx context.Context, request operations.TagResourceRequest) (*operations.TagResourceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=WorkMailService.TagResource"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -4807,7 +4882,7 @@ func (s *SDK) TagResource(ctx context.Context, request operations.TagResourceReq
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4867,8 +4942,9 @@ func (s *SDK) TagResource(ctx context.Context, request operations.TagResourceReq
 	return res, nil
 }
 
+// UntagResource - Untags the specified tags from the specified Amazon WorkMail organization resource.
 func (s *SDK) UntagResource(ctx context.Context, request operations.UntagResourceRequest) (*operations.UntagResourceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=WorkMailService.UntagResource"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -4888,7 +4964,7 @@ func (s *SDK) UntagResource(ctx context.Context, request operations.UntagResourc
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4928,8 +5004,9 @@ func (s *SDK) UntagResource(ctx context.Context, request operations.UntagResourc
 	return res, nil
 }
 
+// UpdateMailboxQuota - Updates a user's current mailbox quota for a specified organization and user.
 func (s *SDK) UpdateMailboxQuota(ctx context.Context, request operations.UpdateMailboxQuotaRequest) (*operations.UpdateMailboxQuotaResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=WorkMailService.UpdateMailboxQuota"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -4949,7 +5026,7 @@ func (s *SDK) UpdateMailboxQuota(ctx context.Context, request operations.UpdateM
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5029,8 +5106,9 @@ func (s *SDK) UpdateMailboxQuota(ctx context.Context, request operations.UpdateM
 	return res, nil
 }
 
+// UpdateMobileDeviceAccessRule - Updates a mobile device access rule for the specified Amazon WorkMail organization.
 func (s *SDK) UpdateMobileDeviceAccessRule(ctx context.Context, request operations.UpdateMobileDeviceAccessRuleRequest) (*operations.UpdateMobileDeviceAccessRuleResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=WorkMailService.UpdateMobileDeviceAccessRule"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -5050,7 +5128,7 @@ func (s *SDK) UpdateMobileDeviceAccessRule(ctx context.Context, request operatio
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5120,8 +5198,9 @@ func (s *SDK) UpdateMobileDeviceAccessRule(ctx context.Context, request operatio
 	return res, nil
 }
 
+// UpdatePrimaryEmailAddress - Updates the primary email for a user, group, or resource. The current email is moved into the list of aliases (or swapped between an existing alias and the current primary email), and the email provided in the input is promoted as the primary.
 func (s *SDK) UpdatePrimaryEmailAddress(ctx context.Context, request operations.UpdatePrimaryEmailAddressRequest) (*operations.UpdatePrimaryEmailAddressResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=WorkMailService.UpdatePrimaryEmailAddress"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -5141,7 +5220,7 @@ func (s *SDK) UpdatePrimaryEmailAddress(ctx context.Context, request operations.
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5291,8 +5370,9 @@ func (s *SDK) UpdatePrimaryEmailAddress(ctx context.Context, request operations.
 	return res, nil
 }
 
+// UpdateResource - Updates data for the resource. To have the latest information, it must be preceded by a <a>DescribeResource</a> call. The dataset in the request should be the one expected when performing another <code>DescribeResource</code> call.
 func (s *SDK) UpdateResource(ctx context.Context, request operations.UpdateResourceRequest) (*operations.UpdateResourceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=WorkMailService.UpdateResource"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -5312,7 +5392,7 @@ func (s *SDK) UpdateResource(ctx context.Context, request operations.UpdateResou
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {

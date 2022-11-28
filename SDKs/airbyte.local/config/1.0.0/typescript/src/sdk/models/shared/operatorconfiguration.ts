@@ -1,16 +1,17 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { OperatorDbt } from "./operatordbt";
 import { OperatorNormalization } from "./operatornormalization";
 import { OperatorTypeEnum } from "./operatortypeenum";
 
 
+
 export class OperatorConfiguration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=dbt" })
+  @SpeakeasyMetadata({ data: "json, name=dbt" })
   dbt?: OperatorDbt;
 
-  @Metadata({ data: "json, name=normalization" })
+  @SpeakeasyMetadata({ data: "json, name=normalization" })
   normalization?: OperatorNormalization;
 
-  @Metadata({ data: "json, name=operatorType" })
+  @SpeakeasyMetadata({ data: "json, name=operatorType" })
   operatorType: OperatorTypeEnum;
 }

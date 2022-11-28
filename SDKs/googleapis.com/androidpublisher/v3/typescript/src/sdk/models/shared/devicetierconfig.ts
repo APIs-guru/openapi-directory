@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DeviceGroup } from "./devicegroup";
 import { DeviceTierSet } from "./devicetierset";
+
 
 
 // DeviceTierConfig
@@ -9,12 +9,25 @@ import { DeviceTierSet } from "./devicetierset";
  * LINT.IfChange Configuration describing device targeting criteria for the content of an app.
 **/
 export class DeviceTierConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=deviceGroups", elemType: shared.DeviceGroup })
+  @SpeakeasyMetadata({ data: "json, name=deviceGroups", elemType: DeviceGroup })
   deviceGroups?: DeviceGroup[];
 
-  @Metadata({ data: "json, name=deviceTierConfigId" })
+  @SpeakeasyMetadata({ data: "json, name=deviceTierConfigId" })
   deviceTierConfigId?: string;
 
-  @Metadata({ data: "json, name=deviceTierSet" })
+  @SpeakeasyMetadata({ data: "json, name=deviceTierSet" })
+  deviceTierSet?: DeviceTierSet;
+}
+
+
+// DeviceTierConfigInput
+/** 
+ * LINT.IfChange Configuration describing device targeting criteria for the content of an app.
+**/
+export class DeviceTierConfigInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=deviceGroups", elemType: DeviceGroup })
+  deviceGroups?: DeviceGroup[];
+
+  @SpeakeasyMetadata({ data: "json, name=deviceTierSet" })
   deviceTierSet?: DeviceTierSet;
 }

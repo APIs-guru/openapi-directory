@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { WorldGenerationJobStatusEnum } from "./worldgenerationjobstatusenum";
 import { WorldCount } from "./worldcount";
+
 
 
 // WorldGenerationJobSummary
@@ -8,24 +9,24 @@ import { WorldCount } from "./worldcount";
  * Information about a world generator job.
 **/
 export class WorldGenerationJobSummary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=arn" })
+  @SpeakeasyMetadata({ data: "json, name=arn" })
   arn?: string;
 
-  @Metadata({ data: "json, name=createdAt" })
+  @SpeakeasyMetadata({ data: "json, name=createdAt" })
   createdAt?: Date;
 
-  @Metadata({ data: "json, name=failedWorldCount" })
+  @SpeakeasyMetadata({ data: "json, name=failedWorldCount" })
   failedWorldCount?: number;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: WorldGenerationJobStatusEnum;
 
-  @Metadata({ data: "json, name=succeededWorldCount" })
+  @SpeakeasyMetadata({ data: "json, name=succeededWorldCount" })
   succeededWorldCount?: number;
 
-  @Metadata({ data: "json, name=template" })
+  @SpeakeasyMetadata({ data: "json, name=template" })
   template?: string;
 
-  @Metadata({ data: "json, name=worldCount" })
+  @SpeakeasyMetadata({ data: "json, name=worldCount" })
   worldCount?: WorldCount;
 }

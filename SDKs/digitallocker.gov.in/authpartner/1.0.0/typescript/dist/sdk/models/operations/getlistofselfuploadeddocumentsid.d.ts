@@ -1,14 +1,10 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class GetListOfSelfUploadedDocumentsIdPathParams extends SpeakeasyBase {
     id: string;
 }
 export declare class GetListOfSelfUploadedDocumentsIdSecurity extends SpeakeasyBase {
     bearerAuth: shared.SchemeBearerAuth;
-}
-export declare class GetListOfSelfUploadedDocumentsIdRequest extends SpeakeasyBase {
-    pathParams: GetListOfSelfUploadedDocumentsIdPathParams;
-    security: GetListOfSelfUploadedDocumentsIdSecurity;
 }
 export declare class GetListOfSelfUploadedDocumentsId401ApplicationJson extends SpeakeasyBase {
     error?: string;
@@ -21,6 +17,10 @@ export declare class GetListOfSelfUploadedDocumentsId404ApplicationJson extends 
 export declare class GetListOfSelfUploadedDocumentsId500ApplicationJson extends SpeakeasyBase {
     error?: string;
     errorDescription?: string;
+}
+export declare class GetListOfSelfUploadedDocumentsIdRequest extends SpeakeasyBase {
+    pathParams: GetListOfSelfUploadedDocumentsIdPathParams;
+    security: GetListOfSelfUploadedDocumentsIdSecurity;
 }
 export declare class GetListOfSelfUploadedDocumentsIdResponse extends SpeakeasyBase {
     contentType: string;

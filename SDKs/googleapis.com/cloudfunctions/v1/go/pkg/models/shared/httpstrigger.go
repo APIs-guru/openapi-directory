@@ -8,6 +8,14 @@ const (
 	HTTPSTriggerSecurityLevelEnumSecureOptional           HTTPSTriggerSecurityLevelEnum = "SECURE_OPTIONAL"
 )
 
+// HTTPSTriggerInput
+// Describes HttpsTrigger, could be used to connect web hooks to function.
+type HTTPSTriggerInput struct {
+	SecurityLevel *HTTPSTriggerSecurityLevelEnum `json:"securityLevel,omitempty"`
+}
+
+// HTTPSTrigger
+// Describes HttpsTrigger, could be used to connect web hooks to function.
 type HTTPSTrigger struct {
 	SecurityLevel *HTTPSTriggerSecurityLevelEnum `json:"securityLevel,omitempty"`
 	URL           *string                        `json:"url,omitempty"`

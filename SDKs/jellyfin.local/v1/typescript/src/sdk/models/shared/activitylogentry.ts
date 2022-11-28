@@ -1,35 +1,36 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { LogLevelEnum } from "./loglevelenum";
 
 
+
 export class ActivityLogEntry extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Date" })
+  @SpeakeasyMetadata({ data: "json, name=Date" })
   date?: Date;
 
-  @Metadata({ data: "json, name=Id" })
+  @SpeakeasyMetadata({ data: "json, name=Id" })
   id?: number;
 
-  @Metadata({ data: "json, name=ItemId" })
+  @SpeakeasyMetadata({ data: "json, name=ItemId" })
   itemId?: string;
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name?: string;
 
-  @Metadata({ data: "json, name=Overview" })
+  @SpeakeasyMetadata({ data: "json, name=Overview" })
   overview?: string;
 
-  @Metadata({ data: "json, name=Severity" })
+  @SpeakeasyMetadata({ data: "json, name=Severity" })
   severity?: LogLevelEnum;
 
-  @Metadata({ data: "json, name=ShortOverview" })
+  @SpeakeasyMetadata({ data: "json, name=ShortOverview" })
   shortOverview?: string;
 
-  @Metadata({ data: "json, name=Type" })
+  @SpeakeasyMetadata({ data: "json, name=Type" })
   type?: string;
 
-  @Metadata({ data: "json, name=UserId" })
+  @SpeakeasyMetadata({ data: "json, name=UserId" })
   userId?: string;
 
-  @Metadata({ data: "json, name=UserPrimaryImageTag" })
+  @SpeakeasyMetadata({ data: "json, name=UserPrimaryImageTag" })
   userPrimaryImageTag?: string;
 }

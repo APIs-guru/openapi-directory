@@ -22,9 +22,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ScalableDimensionEnum } from "./scalabledimensionenum";
+import { ScalingPolicy } from "./scalingpolicy";
 import { ScalingStatusCodeEnum } from "./scalingstatuscodeenum";
 import { ServiceNamespaceEnum } from "./servicenamespaceenum";
 // ScalingPlanResource
@@ -37,35 +37,35 @@ var ScalingPlanResource = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=ResourceId" }),
+        SpeakeasyMetadata({ data: "json, name=ResourceId" }),
         __metadata("design:type", String)
     ], ScalingPlanResource.prototype, "resourceId", void 0);
     __decorate([
-        Metadata({ data: "json, name=ScalableDimension" }),
+        SpeakeasyMetadata({ data: "json, name=ScalableDimension" }),
         __metadata("design:type", String)
     ], ScalingPlanResource.prototype, "scalableDimension", void 0);
     __decorate([
-        Metadata({ data: "json, name=ScalingPlanName" }),
+        SpeakeasyMetadata({ data: "json, name=ScalingPlanName" }),
         __metadata("design:type", String)
     ], ScalingPlanResource.prototype, "scalingPlanName", void 0);
     __decorate([
-        Metadata({ data: "json, name=ScalingPlanVersion" }),
+        SpeakeasyMetadata({ data: "json, name=ScalingPlanVersion" }),
         __metadata("design:type", Number)
     ], ScalingPlanResource.prototype, "scalingPlanVersion", void 0);
     __decorate([
-        Metadata({ data: "json, name=ScalingPolicies", elemType: shared.ScalingPolicy }),
+        SpeakeasyMetadata({ data: "json, name=ScalingPolicies", elemType: ScalingPolicy }),
         __metadata("design:type", Array)
     ], ScalingPlanResource.prototype, "scalingPolicies", void 0);
     __decorate([
-        Metadata({ data: "json, name=ScalingStatusCode" }),
+        SpeakeasyMetadata({ data: "json, name=ScalingStatusCode" }),
         __metadata("design:type", String)
     ], ScalingPlanResource.prototype, "scalingStatusCode", void 0);
     __decorate([
-        Metadata({ data: "json, name=ScalingStatusMessage" }),
+        SpeakeasyMetadata({ data: "json, name=ScalingStatusMessage" }),
         __metadata("design:type", String)
     ], ScalingPlanResource.prototype, "scalingStatusMessage", void 0);
     __decorate([
-        Metadata({ data: "json, name=ServiceNamespace" }),
+        SpeakeasyMetadata({ data: "json, name=ServiceNamespace" }),
         __metadata("design:type", String)
     ], ScalingPlanResource.prototype, "serviceNamespace", void 0);
     return ScalingPlanResource;

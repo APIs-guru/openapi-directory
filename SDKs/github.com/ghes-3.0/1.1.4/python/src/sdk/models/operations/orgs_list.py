@@ -11,13 +11,13 @@ class OrgsListQueryParams:
 
 @dataclass
 class OrgsListRequest:
-    query_params: OrgsListQueryParams = field(default=None)
+    query_params: OrgsListQueryParams = field()
     
 
 @dataclass
 class OrgsListResponse:
-    content_type: str = field(default=None)
-    headers: dict[str, List[str]] = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    headers: dict[str, List[str]] = field()
+    status_code: int = field()
     organization_simples: Optional[List[shared.OrganizationSimple]] = field(default=None)
     

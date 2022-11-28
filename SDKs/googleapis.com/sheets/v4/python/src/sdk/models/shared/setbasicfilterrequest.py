@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import basicfilter
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class SetBasicFilterRequest:
-    filter: Optional[basicfilter.BasicFilter] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'filter' }})
+    r"""SetBasicFilterRequest
+    Sets the basic filter associated with a sheet.
+    """
+    
+    filter: Optional[BasicFilter] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('filter') }})
     

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AutoscalingTargets
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The Autoscaling targets for a Cluster. These determine the recommended nodes.
 **/
 export class AutoscalingTargets extends SpeakeasyBase {
-  @Metadata({ data: "json, name=cpuUtilizationPercent" })
+  @SpeakeasyMetadata({ data: "json, name=cpuUtilizationPercent" })
   cpuUtilizationPercent?: number;
 
-  @Metadata({ data: "json, name=storageUtilizationGibPerNode" })
+  @SpeakeasyMetadata({ data: "json, name=storageUtilizationGibPerNode" })
   storageUtilizationGibPerNode?: number;
 }

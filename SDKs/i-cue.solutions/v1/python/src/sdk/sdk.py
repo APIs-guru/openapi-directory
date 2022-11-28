@@ -1,8 +1,11 @@
-import warnings
+
+
 import requests
 from typing import List,Optional
-from sdk.models import operations, shared
+from sdk.models import shared, operations
 from . import utils
+
+
 
 
 SERVERS = [
@@ -11,28 +14,50 @@ SERVERS = [
 
 
 class SDK:
-    client = requests.Session()
-    server_url = SERVERS[0]
+    
+
+    _client: requests.Session
+    _security_client: requests.Session
+    
+    _server_url: str = SERVERS[0]
+    _language: str = "python"
+    _sdk_version: str = "0.0.1"
+    _gen_version: str = "internal"
+
+    def __init__(self) -> None:
+        self._client = requests.Session()
+        self._security_client = requests.Session()
+        
+
 
     def config_server_url(self, server_url: str, params: dict[str, str]):
-        if not params is None:
-            self.server_url = utils.replace_parameters(server_url, params)
+        if params is not None:
+            self._server_url = utils.replace_parameters(server_url, params)
         else:
-            self.server_url = server_url
-            
+            self._server_url = server_url
+
+        
     
 
+    def config_client(self, client: requests.Session):
+        self._client = client
+        
+    
+    
     
     def delete_administration_entity_id_(self, request: operations.DeleteAdministrationEntityIDRequest) -> operations.DeleteAdministrationEntityIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Delete organization
+        This is a iCUE only endpoint or Enterprise feature.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/administration/entity/{id}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("DELETE", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -45,15 +70,18 @@ class SDK:
 
     
     def delete_administration_planning_level(self, request: operations.DeleteAdministrationPlanningLevelRequest) -> operations.DeleteAdministrationPlanningLevelResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Delete planning level
+        Delete planning level. This is an Enterprise feature.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/administration/planning-level"
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("DELETE", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -66,15 +94,18 @@ class SDK:
 
     
     def delete_administration_user_entity_id_id_(self, request: operations.DeleteAdministrationUserEntityIDIDRequest) -> operations.DeleteAdministrationUserEntityIDIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Delete user
+        Delete user
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/administration/user/{entityId}/{id}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("DELETE", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -87,15 +118,18 @@ class SDK:
 
     
     def get_administration_entity(self, request: operations.GetAdministrationEntityRequest) -> operations.GetAdministrationEntityResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get all organizations
+        This is a iCUE only endpoint or Enterprise feature.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/administration/entity"
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -115,15 +149,18 @@ class SDK:
 
     
     def get_administration_planning_levels(self, request: operations.GetAdministrationPlanningLevelsRequest) -> operations.GetAdministrationPlanningLevelsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get all planning levels
+        Get all planning levels.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/administration/planning-levels"
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -143,15 +180,18 @@ class SDK:
 
     
     def get_administration_user_entity_id_(self, request: operations.GetAdministrationUserEntityIDRequest) -> operations.GetAdministrationUserEntityIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get all users
+        Get all users
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/administration/user/{entityId}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -164,15 +204,18 @@ class SDK:
 
     
     def get_forecast_result_job_id_(self, request: operations.GetForecastResultJobIDRequest) -> operations.GetForecastResultJobIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Forecast result
+        Get result for long running forecast job
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/forecast/result/{jobId}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -185,15 +228,18 @@ class SDK:
 
     
     def get_forecast_status_job_id_(self, request: operations.GetForecastStatusJobIDRequest) -> operations.GetForecastStatusJobIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Forecast status
+        Get status for long running forecast job
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/forecast/status/{jobId}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -206,15 +252,18 @@ class SDK:
 
     
     def get_hyperparameter(self, request: operations.GetHyperparameterRequest) -> operations.GetHyperparameterResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get hyperparameters
+        Get entity global hyperparameters.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/hyperparameter"
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -234,15 +283,18 @@ class SDK:
 
     
     def get_report_performance_planning_level_id_(self, request: operations.GetReportPerformancePlanningLevelIDRequest) -> operations.GetReportPerformancePlanningLevelIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Month over month performance per planning level
+        Month over month performance per planning level
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/report/performance/{planningLevelId}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -255,15 +307,18 @@ class SDK:
 
     
     def get_report_performance_sku_rationalization_planning_level_id_(self, request: operations.GetReportPerformanceSkuRationalizationPlanningLevelIDRequest) -> operations.GetReportPerformanceSkuRationalizationPlanningLevelIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""SKU rationalization report
+        SKU rationalization report
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/report/performance/sku-rationalization/{planningLevelId}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -283,15 +338,18 @@ class SDK:
 
     
     def get_report_planning_level_organization(self, request: operations.GetReportPlanningLevelOrganizationRequest) -> operations.GetReportPlanningLevelOrganizationResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get list of plannign levels by organization
+        Get list of plannign levels by organization
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/report/planning-level/organization"
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -304,15 +362,18 @@ class SDK:
 
     
     def get_report_planning_level_user(self, request: operations.GetReportPlanningLevelUserRequest) -> operations.GetReportPlanningLevelUserResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get list of plannign levels by user
+        Get list of plannign levels by user
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/report/planning-level/user"
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -325,15 +386,18 @@ class SDK:
 
     
     def get_report_user(self, request: operations.GetReportUserRequest) -> operations.GetReportUserResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get usage statistics per user
+        Get usage statistics per user
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/report/user"
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -346,19 +410,21 @@ class SDK:
 
     
     def post_administration_entity(self, request: operations.PostAdministrationEntityRequest) -> operations.PostAdministrationEntityResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Create organization
+        This is a iCUE only endpoint or Enterprise feature.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/administration/entity"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -376,15 +442,18 @@ class SDK:
 
     
     def post_administration_planning_level_lock(self, request: operations.PostAdministrationPlanningLevelLockRequest) -> operations.PostAdministrationPlanningLevelLockResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Lock planning level
+        Lock planning level against modification. This is an Enterprise feature.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/administration/planning-level/lock"
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -397,19 +466,21 @@ class SDK:
 
     
     def post_administration_token(self, request: operations.PostAdministrationTokenRequest) -> operations.PostAdministrationTokenResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Issue a token
+        This is a iCUE only endpoint.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/administration/token"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -427,19 +498,21 @@ class SDK:
 
     
     def post_administration_user(self, request: operations.PostAdministrationUserRequest) -> operations.PostAdministrationUserResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Create user
+        Create new user for entity/organization. This can be done by entity administrator.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/administration/user"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -457,19 +530,21 @@ class SDK:
 
     
     def post_forecast(self, request: operations.PostForecastRequest) -> operations.PostForecastResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Forecasts only, for faster results
+        To support maximum operation and integration speed, this endpoint only returns the calculated forecast.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/forecast"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -489,19 +564,21 @@ class SDK:
 
     
     def post_forecast_ai(self, request: operations.PostForecastAiRequest) -> operations.PostForecastAiResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Forecast utilizing advanced machine learning models
+        Forecast utilizing Facebookm Prophet, UBER Orbit, amongst other advanced machine learning models. Please be mindful of enhanced execution times (~2s per timeseries).
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/forecast/AI"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -521,19 +598,21 @@ class SDK:
 
     
     def post_forecast_ai_history_and_forecast(self, request: operations.PostForecastAiHistoryAndForecastRequest) -> operations.PostForecastAiHistoryAndForecastResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""History and forecast utilizing advanced machine learning models
+        History and forecast utilizing Facebookm Prophet, UBER Orbit, amongst other advanced machine learning models. Please be mindful of enhanced execution times (~2s per timeseries).
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/forecast/AI/history-and-forecast"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -553,19 +632,21 @@ class SDK:
 
     
     def post_forecast_forecast_bottom_up(self, request: operations.PostForecastForecastBottomUpRequest) -> operations.PostForecastForecastBottomUpResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Bottom up forecasting
+        Calculate forecast bny timeseries and sum results up to establish forecast for top level timeseries.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/forecast/forecast-bottom-up"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -585,19 +666,21 @@ class SDK:
 
     
     def post_forecast_forecast_top_down(self, request: operations.PostForecastForecastTopDownRequest) -> operations.PostForecastForecastTopDownResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Top down forecasting
+        Calculate forecast based on sum of of lower level timeseries and distribute forecast down based on ratios. Great feature for planning levels with dynamic timeseries.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/forecast/forecast-top-down"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -610,19 +693,21 @@ class SDK:
 
     
     def post_forecast_full_detail(self, request: operations.PostForecastFullDetailRequest) -> operations.PostForecastFullDetailResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Full forecast result details, including error, trend seasonality and outlier
+        Response provides full forecast result details, including error, trend seasonality and outlier. Great for advanced analysis.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/forecast/full-detail"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -642,19 +727,21 @@ class SDK:
 
     
     def post_forecast_history_and_forecast(self, request: operations.PostForecastHistoryAndForecastRequest) -> operations.PostForecastHistoryAndForecastResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""History and forecast for fast timeseries view
+        Reponse provides history and forecast per timeseries. Great for visualizing results.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/forecast/history-and-forecast"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -674,19 +761,21 @@ class SDK:
 
     
     def post_forecast_optimal_parameter(self, request: operations.PostForecastOptimalParameterRequest) -> operations.PostForecastOptimalParameterResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get optimal parameter per method
+        Use the optimal parameter sets created by iCUE to set the method parameters of the internal planning system.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/forecast/optimal-parameter"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -706,19 +795,21 @@ class SDK:
 
     
     def post_forecast_rerun(self, request: operations.PostForecastRerunRequest) -> operations.PostForecastRerunResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Rerun previously uploaded planning level
+        Rerun previously uploaded planning level.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/forecast/rerun"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -738,19 +829,21 @@ class SDK:
 
     
     def post_hyperparameter(self, request: operations.PostHyperparameterRequest) -> operations.PostHyperparameterResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Set hyperparameters
+        Set entity global hyperparameters. Hyperparameters can be overwritten by user and planning level (add to JSON body).
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/hyperparameter"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -763,15 +856,18 @@ class SDK:
 
     
     def post_inventory_amazon_ipi(self, request: operations.PostInventoryAmazonIpiRequest) -> operations.PostInventoryAmazonIpiResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Calculate Amazon Inventory Performance Index (IPI)
+        Calculate Amazon Inventory Performance Index (IPI)
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/inventory/amazon-ipi"
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -784,15 +880,18 @@ class SDK:
 
     
     def post_inventory_caryying_cost(self, request: operations.PostInventoryCaryyingCostRequest) -> operations.PostInventoryCaryyingCostResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Carrying Cost
+        Carrying Cost
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/inventory/caryying-cost"
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -805,15 +904,18 @@ class SDK:
 
     
     def post_inventory_eoq(self, request: operations.PostInventoryEoqRequest) -> operations.PostInventoryEoqResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Calculate economic order quantity
+        Calculate economic order quantity
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/inventory/eoq"
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -826,15 +928,18 @@ class SDK:
 
     
     def post_inventory_fill_rate(self, request: operations.PostInventoryFillRateRequest) -> operations.PostInventoryFillRateResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Calculate fill rate
+        Calculate fill rate
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/inventory/fill-rate"
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -847,15 +952,18 @@ class SDK:
 
     
     def post_inventory_financial_imapct_forecast_accuracy(self, request: operations.PostInventoryFinancialImapctForecastAccuracyRequest) -> operations.PostInventoryFinancialImapctForecastAccuracyResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Calculate financial impact of forecast accuracy
+        Calculate financial impact of forecast accuracy
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/inventory/financial-imapct-forecast-accuracy"
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -868,15 +976,18 @@ class SDK:
 
     
     def post_inventory_inventory_turnover(self, request: operations.PostInventoryInventoryTurnoverRequest) -> operations.PostInventoryInventoryTurnoverResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Inventroy Turn-over
+        Inventroy Turn-over
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/inventory/inventory-turnover"
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -889,15 +1000,18 @@ class SDK:
 
     
     def post_inventory_ltd(self, request: operations.PostInventoryLtdRequest) -> operations.PostInventoryLtdResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Calculate lead time demand
+        Calculate lead time demand
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/inventory/ltd"
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -910,15 +1024,18 @@ class SDK:
 
     
     def post_inventory_moq(self, request: operations.PostInventoryMoqRequest) -> operations.PostInventoryMoqResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Calculate minimum order quantity
+        Calculate minimum order quantity
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/inventory/moq"
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -931,15 +1048,18 @@ class SDK:
 
     
     def post_inventory_optimal_service_level(self, request: operations.PostInventoryOptimalServiceLevelRequest) -> operations.PostInventoryOptimalServiceLevelResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Calculate optimal service level
+        Calculate optimal service level
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/inventory/optimal-service-level"
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -952,15 +1072,18 @@ class SDK:
 
     
     def post_inventory_reorder_point(self, request: operations.PostInventoryReorderPointRequest) -> operations.PostInventoryReorderPointResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Re-order Point
+        Re-order Point
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/inventory/reorder-point"
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -973,15 +1096,18 @@ class SDK:
 
     
     def post_inventory_safety_stock(self, request: operations.PostInventorySafetyStockRequest) -> operations.PostInventorySafetyStockResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Safety Stock
+        Safety Stock
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/inventory/safety-stock"
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -994,15 +1120,18 @@ class SDK:
 
     
     def post_inventory_service_level(self, request: operations.PostInventoryServiceLevelRequest) -> operations.PostInventoryServiceLevelResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Calculate service level
+        Calculate service level
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/inventory/service-level"
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1015,15 +1144,18 @@ class SDK:
 
     
     def post_inventory_turns(self, request: operations.PostInventoryTurnsRequest) -> operations.PostInventoryTurnsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Calculate inventory turns
+        Calculate inventory turns
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/inventory/turns"
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1036,19 +1168,21 @@ class SDK:
 
     
     def post_lifecycle_many_to_one(self, request: operations.PostLifecycleManyToOneRequest) -> operations.PostLifecycleManyToOneResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Map from old product to new product to create artifical history
+        Supports the creation of artificial startup history for new products, based on a flexible mapping of old to new. This is an Enterprise feature.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/lifecycle/many-to-one"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1068,19 +1202,21 @@ class SDK:
 
     
     def post_lifecycle_one_to_one(self, request: operations.PostLifecycleOneToOneRequest) -> operations.PostLifecycleOneToOneResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Map from old product to new product to create artifical history
+        Supports the creation of artificial startup history for new products, based on a flexible mapping of old to new. This is an Enterprise feature.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/lifecycle/one-to-one"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1100,19 +1236,21 @@ class SDK:
 
     
     def post_outlier(self, request: operations.PostOutlierRequest) -> operations.PostOutlierResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get outlier
+        Identify outliers (single and repetitive spikes, seasonality, masked outliers, trend and level jumps, amongst other topics) and use for cleansing of the history stream prior to forecast claculation. Depending on math model used, this approach often improves results dramatically, as it removes disturbances.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/outlier"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1132,19 +1270,21 @@ class SDK:
 
     
     def post_portfolio(self, request: operations.PostPortfolioRequest) -> operations.PostPortfolioResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""ABCxyz Analysis
+        Calculate and retrieve results of ABC (pareto analysis) and xyz (Coefficient of variation) per timeseries and planning level. This analysis is a powerful means to estbalish a proper planning cadence, best accuracy messures and optimal hyperparameters for the organization. It provides a balanced and actionable overview of the entire product portfolio.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/portfolio"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1164,19 +1304,21 @@ class SDK:
 
     
     def post_portfolio_abc(self, request: operations.PostPortfolioAbcRequest) -> operations.PostPortfolioAbcResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""ABC Analysis
+        Calculate and retrieve results of ABC (pareto analysis) per timeseries and planning level.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/portfolio/abc"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1196,19 +1338,21 @@ class SDK:
 
     
     def post_portfolio_forecast_performance_rewind(self, request: operations.PostPortfolioForecastPerformanceRewindRequest) -> operations.PostPortfolioForecastPerformanceRewindResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Planning level rewind to calculate and measure performance potential (internal versus iCUE).
+        Planning level rewind to calculate and measure performance potential (internal versus iCUE).
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/portfolio/forecast-performance-rewind"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1228,19 +1372,21 @@ class SDK:
 
     
     def post_portfolio_xyz(self, request: operations.PostPortfolioXyzRequest) -> operations.PostPortfolioXyzResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""xyz Analysis
+        Calculate and retrieve results of xyz (Coefficient of variation) per timeseries and planning level.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/portfolio/xyz"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1260,15 +1406,18 @@ class SDK:
 
     
     def post_pricing_bundle_pricing(self, request: operations.PostPricingBundlePricingRequest) -> operations.PostPricingBundlePricingResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Bundle pricing
+        Bundle pricing
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/pricing/bundle-pricing"
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1281,15 +1430,14 @@ class SDK:
 
     
     def post_pricing_competitive_pricing(self, request: operations.PostPricingCompetitivePricingRequest) -> operations.PostPricingCompetitivePricingResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/pricing/competitive-pricing"
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1302,15 +1450,14 @@ class SDK:
 
     
     def post_pricing_cost_plus_pricing(self, request: operations.PostPricingCostPlusPricingRequest) -> operations.PostPricingCostPlusPricingResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/pricing/cost-plus-pricing"
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1323,15 +1470,14 @@ class SDK:
 
     
     def post_pricing_decoy_pricing(self, request: operations.PostPricingDecoyPricingRequest) -> operations.PostPricingDecoyPricingResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/pricing/decoy-pricing"
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1344,15 +1490,14 @@ class SDK:
 
     
     def post_pricing_odd_pricing(self, request: operations.PostPricingOddPricingRequest) -> operations.PostPricingOddPricingResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/pricing/odd-pricing"
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1365,15 +1510,14 @@ class SDK:
 
     
     def post_pricing_penetration_pricing(self, request: operations.PostPricingPenetrationPricingRequest) -> operations.PostPricingPenetrationPricingResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/pricing/penetration-pricing"
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1386,15 +1530,14 @@ class SDK:
 
     
     def post_pricing_price_elasticity_of_demand(self, request: operations.PostPricingPriceElasticityOfDemandRequest) -> operations.PostPricingPriceElasticityOfDemandResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/pricing/price-elasticity-of-demand"
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1407,19 +1550,21 @@ class SDK:
 
     
     def put_administration_entity(self, request: operations.PutAdministrationEntityRequest) -> operations.PutAdministrationEntityResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Pause organization
+        This is a iCUE only endpoint or Enterprise feature.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/administration/entity"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1432,15 +1577,18 @@ class SDK:
 
     
     def put_administration_user(self, request: operations.PutAdministrationUserRequest) -> operations.PutAdministrationUserResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Update user
+        Update user
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/administration/user"
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("PUT", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1453,19 +1601,21 @@ class SDK:
 
     
     def put_administration_user_lock(self, request: operations.PutAdministrationUserLockRequest) -> operations.PutAdministrationUserLockResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Lock user
+        After lock user won't be able to use iCUE API endpoints.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/administration/user/lock"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 

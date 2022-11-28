@@ -22,10 +22,10 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AcLsUpdateStatus } from "./aclsupdatestatus";
 import { ReshardingStatus } from "./reshardingstatus";
+import { PendingModifiedServiceUpdate } from "./pendingmodifiedserviceupdate";
 // ClusterPendingUpdates
 /**
  * A list of updates being applied to the cluster
@@ -36,15 +36,15 @@ var ClusterPendingUpdates = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=ACLs" }),
+        SpeakeasyMetadata({ data: "json, name=ACLs" }),
         __metadata("design:type", AcLsUpdateStatus)
     ], ClusterPendingUpdates.prototype, "acLs", void 0);
     __decorate([
-        Metadata({ data: "json, name=Resharding" }),
+        SpeakeasyMetadata({ data: "json, name=Resharding" }),
         __metadata("design:type", ReshardingStatus)
     ], ClusterPendingUpdates.prototype, "resharding", void 0);
     __decorate([
-        Metadata({ data: "json, name=ServiceUpdates", elemType: shared.PendingModifiedServiceUpdate }),
+        SpeakeasyMetadata({ data: "json, name=ServiceUpdates", elemType: PendingModifiedServiceUpdate }),
         __metadata("design:type", Array)
     ], ClusterPendingUpdates.prototype, "serviceUpdates", void 0);
     return ClusterPendingUpdates;

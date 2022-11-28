@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class PutVolumesIdPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" })
   id: string;
 }
 
@@ -12,26 +13,17 @@ export class PutVolumesIdPathParams extends SpeakeasyBase {
  * User-defined labels (key-value pairs)
 **/
 export class PutVolumesIdUpdateVolumeRequestLabels extends SpeakeasyBase {
-  @Metadata({ data: "json, name=labelkey" })
+  @SpeakeasyMetadata({ data: "json, name=labelkey" })
   labelkey?: string;
 }
 
 
 export class PutVolumesIdUpdateVolumeRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=labels" })
+  @SpeakeasyMetadata({ data: "json, name=labels" })
   labels?: PutVolumesIdUpdateVolumeRequestLabels;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
-}
-
-
-export class PutVolumesIdRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: PutVolumesIdPathParams;
-
-  @Metadata({ data: "request, media_type=application/json" })
-  request?: PutVolumesIdUpdateVolumeRequest;
 }
 
 
@@ -40,28 +32,28 @@ export class PutVolumesIdRequest extends SpeakeasyBase {
  * Location of the Volume. Volume can only be attached to Servers in the same Location.
 **/
 export class PutVolumesId200ApplicationJsonVolumeLocation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=city" })
+  @SpeakeasyMetadata({ data: "json, name=city" })
   city: string;
 
-  @Metadata({ data: "json, name=country" })
+  @SpeakeasyMetadata({ data: "json, name=country" })
   country: string;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: number;
 
-  @Metadata({ data: "json, name=latitude" })
+  @SpeakeasyMetadata({ data: "json, name=latitude" })
   latitude: number;
 
-  @Metadata({ data: "json, name=longitude" })
+  @SpeakeasyMetadata({ data: "json, name=longitude" })
   longitude: number;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 
-  @Metadata({ data: "json, name=network_zone" })
+  @SpeakeasyMetadata({ data: "json, name=network_zone" })
   networkZone: string;
 }
 
@@ -71,65 +63,74 @@ export class PutVolumesId200ApplicationJsonVolumeLocation extends SpeakeasyBase 
  * Protection configuration for the Resource
 **/
 export class PutVolumesId200ApplicationJsonVolumeProtection extends SpeakeasyBase {
-  @Metadata({ data: "json, name=delete" })
+  @SpeakeasyMetadata({ data: "json, name=delete" })
   delete: boolean;
 }
 
 export enum PutVolumesId200ApplicationJsonVolumeStatusEnum {
-    Creating = "creating"
-,    Available = "available"
+    Creating = "creating",
+    Available = "available"
 }
 
 
 export class PutVolumesId200ApplicationJsonVolume extends SpeakeasyBase {
-  @Metadata({ data: "json, name=created" })
+  @SpeakeasyMetadata({ data: "json, name=created" })
   created: string;
 
-  @Metadata({ data: "json, name=format" })
+  @SpeakeasyMetadata({ data: "json, name=format" })
   format: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: number;
 
-  @Metadata({ data: "json, name=labels" })
+  @SpeakeasyMetadata({ data: "json, name=labels" })
   labels: Map<string, string>;
 
-  @Metadata({ data: "json, name=linux_device" })
+  @SpeakeasyMetadata({ data: "json, name=linux_device" })
   linuxDevice: string;
 
-  @Metadata({ data: "json, name=location" })
+  @SpeakeasyMetadata({ data: "json, name=location" })
   location: PutVolumesId200ApplicationJsonVolumeLocation;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 
-  @Metadata({ data: "json, name=protection" })
+  @SpeakeasyMetadata({ data: "json, name=protection" })
   protection: PutVolumesId200ApplicationJsonVolumeProtection;
 
-  @Metadata({ data: "json, name=server" })
+  @SpeakeasyMetadata({ data: "json, name=server" })
   server: number;
 
-  @Metadata({ data: "json, name=size" })
+  @SpeakeasyMetadata({ data: "json, name=size" })
   size: number;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status: PutVolumesId200ApplicationJsonVolumeStatusEnum;
 }
 
 
 export class PutVolumesId200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=volume" })
+  @SpeakeasyMetadata({ data: "json, name=volume" })
   volume: PutVolumesId200ApplicationJsonVolume;
 }
 
 
+export class PutVolumesIdRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: PutVolumesIdPathParams;
+
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request?: PutVolumesIdUpdateVolumeRequest;
+}
+
+
 export class PutVolumesIdResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   putVolumesId200ApplicationJsonObject?: PutVolumesId200ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

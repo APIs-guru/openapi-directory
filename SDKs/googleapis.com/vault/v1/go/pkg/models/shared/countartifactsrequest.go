@@ -8,6 +8,8 @@ const (
 	CountArtifactsRequestViewEnumAll                        CountArtifactsRequestViewEnum = "ALL"
 )
 
+// CountArtifactsRequest
+// Count artifacts request.
 type CountArtifactsRequest struct {
 	Query *Query                         `json:"query,omitempty"`
 	View  *CountArtifactsRequestViewEnum `json:"view,omitempty"`

@@ -22,22 +22,22 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var DisassociatePrincipalFromPortfolioInput = /** @class */ (function (_super) {
     __extends(DisassociatePrincipalFromPortfolioInput, _super);
     function DisassociatePrincipalFromPortfolioInput() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=AcceptLanguage" }),
+        SpeakeasyMetadata({ data: "json, name=AcceptLanguage" }),
         __metadata("design:type", String)
     ], DisassociatePrincipalFromPortfolioInput.prototype, "acceptLanguage", void 0);
     __decorate([
-        Metadata({ data: "json, name=PortfolioId" }),
+        SpeakeasyMetadata({ data: "json, name=PortfolioId" }),
         __metadata("design:type", String)
     ], DisassociatePrincipalFromPortfolioInput.prototype, "portfolioId", void 0);
     __decorate([
-        Metadata({ data: "json, name=PrincipalARN" }),
+        SpeakeasyMetadata({ data: "json, name=PrincipalARN" }),
         __metadata("design:type", String)
     ], DisassociatePrincipalFromPortfolioInput.prototype, "principalArn", void 0);
     return DisassociatePrincipalFromPortfolioInput;

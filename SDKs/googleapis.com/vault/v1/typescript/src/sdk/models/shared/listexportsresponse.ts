@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Export } from "./export";
+
 
 
 // ListExportsResponse
@@ -8,9 +8,9 @@ import { Export } from "./export";
  * The exports for a matter.
 **/
 export class ListExportsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=exports", elemType: shared.Export })
+  @SpeakeasyMetadata({ data: "json, name=exports", elemType: Export })
   exports?: Export[];
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 }

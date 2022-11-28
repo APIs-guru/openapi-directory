@@ -1,7 +1,8 @@
 
 
+
 export enum VmManagerTypeEnum {
-    Vsphere = "VSPHERE"
-,    Scvmm = "SCVMM"
-,    HypervManager = "HYPERV-MANAGER"
+    Vsphere = "VSPHERE",
+    Scvmm = "SCVMM",
+    HypervManager = "HYPERV-MANAGER"
 }

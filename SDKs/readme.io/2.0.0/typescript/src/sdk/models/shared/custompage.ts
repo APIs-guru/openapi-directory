@@ -1,19 +1,20 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class CustomPage extends SpeakeasyBase {
-  @Metadata({ data: "json, name=body" })
+  @SpeakeasyMetadata({ data: "json, name=body" })
   body?: string;
 
-  @Metadata({ data: "json, name=hidden" })
+  @SpeakeasyMetadata({ data: "json, name=hidden" })
   hidden?: boolean;
 
-  @Metadata({ data: "json, name=html" })
+  @SpeakeasyMetadata({ data: "json, name=html" })
   html?: string;
 
-  @Metadata({ data: "json, name=htmlmode" })
+  @SpeakeasyMetadata({ data: "json, name=htmlmode" })
   htmlmode?: boolean;
 
-  @Metadata({ data: "json, name=title" })
+  @SpeakeasyMetadata({ data: "json, name=title" })
   title: string;
 }

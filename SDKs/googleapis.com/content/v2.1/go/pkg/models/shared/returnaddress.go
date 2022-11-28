@@ -1,5 +1,7 @@
 package shared
 
+// ReturnAddress
+// Return address resource.
 type ReturnAddress struct {
 	Address         *ReturnAddressAddress `json:"address,omitempty"`
 	Country         *string               `json:"country,omitempty"`

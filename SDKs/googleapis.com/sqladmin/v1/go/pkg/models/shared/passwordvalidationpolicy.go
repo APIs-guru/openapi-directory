@@ -7,6 +7,8 @@ const (
 	PasswordValidationPolicyComplexityEnumComplexityDefault     PasswordValidationPolicyComplexityEnum = "COMPLEXITY_DEFAULT"
 )
 
+// PasswordValidationPolicy
+// Database instance local user password validation policy
 type PasswordValidationPolicy struct {
 	Complexity                *PasswordValidationPolicyComplexityEnum `json:"complexity,omitempty"`
 	DisallowUsernameSubstring *bool                                   `json:"disallowUsernameSubstring,omitempty"`

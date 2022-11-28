@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class OsConstraintOsTypeEnum(str, Enum):
     OS_UNSPECIFIED = "OS_UNSPECIFIED"
@@ -15,7 +17,11 @@ class OsConstraintOsTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class OsConstraint:
-    minimum_version: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'minimumVersion' }})
-    os_type: Optional[OsConstraintOsTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'osType' }})
-    require_verified_chrome_os: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'requireVerifiedChromeOs' }})
+    r"""OsConstraint
+    A restriction on the OS type and version of devices making requests.
+    """
+    
+    minimum_version: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('minimumVersion') }})
+    os_type: Optional[OsConstraintOsTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('osType') }})
+    require_verified_chrome_os: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('requireVerifiedChromeOs') }})
     

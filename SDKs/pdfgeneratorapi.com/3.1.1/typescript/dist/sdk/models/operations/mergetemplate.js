@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var MergeTemplateQueryParams = /** @class */ (function (_super) {
     __extends(MergeTemplateQueryParams, _super);
@@ -30,59 +30,43 @@ var MergeTemplateQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=format" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=format" }),
         __metadata("design:type", String)
     ], MergeTemplateQueryParams.prototype, "format", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=name" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=name" }),
         __metadata("design:type", String)
     ], MergeTemplateQueryParams.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=output" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=output" }),
         __metadata("design:type", String)
     ], MergeTemplateQueryParams.prototype, "output", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=templateId" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=templateId" }),
         __metadata("design:type", Number)
     ], MergeTemplateQueryParams.prototype, "templateId", void 0);
     return MergeTemplateQueryParams;
 }(SpeakeasyBase));
 export { MergeTemplateQueryParams };
-var MergeTemplateRequest = /** @class */ (function (_super) {
-    __extends(MergeTemplateRequest, _super);
-    function MergeTemplateRequest() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    __decorate([
-        Metadata(),
-        __metadata("design:type", MergeTemplateQueryParams)
-    ], MergeTemplateRequest.prototype, "queryParams", void 0);
-    __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
-        __metadata("design:type", shared.Data)
-    ], MergeTemplateRequest.prototype, "request", void 0);
-    return MergeTemplateRequest;
-}(SpeakeasyBase));
-export { MergeTemplateRequest };
 var MergeTemplate200ApplicationJsonMeta = /** @class */ (function (_super) {
     __extends(MergeTemplate200ApplicationJsonMeta, _super);
     function MergeTemplate200ApplicationJsonMeta() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=content-type" }),
+        SpeakeasyMetadata({ data: "json, name=content-type" }),
         __metadata("design:type", String)
     ], MergeTemplate200ApplicationJsonMeta.prototype, "contentType", void 0);
     __decorate([
-        Metadata({ data: "json, name=display_name" }),
+        SpeakeasyMetadata({ data: "json, name=display_name" }),
         __metadata("design:type", String)
     ], MergeTemplate200ApplicationJsonMeta.prototype, "displayName", void 0);
     __decorate([
-        Metadata({ data: "json, name=encoding" }),
+        SpeakeasyMetadata({ data: "json, name=encoding" }),
         __metadata("design:type", String)
     ], MergeTemplate200ApplicationJsonMeta.prototype, "encoding", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], MergeTemplate200ApplicationJsonMeta.prototype, "name", void 0);
     return MergeTemplate200ApplicationJsonMeta;
@@ -94,11 +78,11 @@ var MergeTemplate200ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=meta" }),
+        SpeakeasyMetadata({ data: "json, name=meta" }),
         __metadata("design:type", MergeTemplate200ApplicationJsonMeta)
     ], MergeTemplate200ApplicationJson.prototype, "meta", void 0);
     __decorate([
-        Metadata({ data: "json, name=response" }),
+        SpeakeasyMetadata({ data: "json, name=response" }),
         __metadata("design:type", String)
     ], MergeTemplate200ApplicationJson.prototype, "response", void 0);
     return MergeTemplate200ApplicationJson;
@@ -123,11 +107,11 @@ var MergeTemplate401ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], MergeTemplate401ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=status" }),
+        SpeakeasyMetadata({ data: "json, name=status" }),
         __metadata("design:type", Number)
     ], MergeTemplate401ApplicationJson.prototype, "status", void 0);
     return MergeTemplate401ApplicationJson;
@@ -143,11 +127,11 @@ var MergeTemplate403ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], MergeTemplate403ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=status" }),
+        SpeakeasyMetadata({ data: "json, name=status" }),
         __metadata("design:type", Number)
     ], MergeTemplate403ApplicationJson.prototype, "status", void 0);
     return MergeTemplate403ApplicationJson;
@@ -165,11 +149,11 @@ var MergeTemplate404ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], MergeTemplate404ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=status" }),
+        SpeakeasyMetadata({ data: "json, name=status" }),
         __metadata("design:type", Number)
     ], MergeTemplate404ApplicationJson.prototype, "status", void 0);
     return MergeTemplate404ApplicationJson;
@@ -188,11 +172,11 @@ var MergeTemplate422ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], MergeTemplate422ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=status" }),
+        SpeakeasyMetadata({ data: "json, name=status" }),
         __metadata("design:type", Number)
     ], MergeTemplate422ApplicationJson.prototype, "status", void 0);
     return MergeTemplate422ApplicationJson;
@@ -204,51 +188,67 @@ var MergeTemplate500ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], MergeTemplate500ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=status" }),
+        SpeakeasyMetadata({ data: "json, name=status" }),
         __metadata("design:type", Number)
     ], MergeTemplate500ApplicationJson.prototype, "status", void 0);
     return MergeTemplate500ApplicationJson;
 }(SpeakeasyBase));
 export { MergeTemplate500ApplicationJson };
+var MergeTemplateRequest = /** @class */ (function (_super) {
+    __extends(MergeTemplateRequest, _super);
+    function MergeTemplateRequest() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", MergeTemplateQueryParams)
+    ], MergeTemplateRequest.prototype, "queryParams", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
+        __metadata("design:type", shared.Data)
+    ], MergeTemplateRequest.prototype, "request", void 0);
+    return MergeTemplateRequest;
+}(SpeakeasyBase));
+export { MergeTemplateRequest };
 var MergeTemplateResponse = /** @class */ (function (_super) {
     __extends(MergeTemplateResponse, _super);
     function MergeTemplateResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], MergeTemplateResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], MergeTemplateResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", MergeTemplate200ApplicationJson)
     ], MergeTemplateResponse.prototype, "mergeTemplate200ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", MergeTemplate401ApplicationJson)
     ], MergeTemplateResponse.prototype, "mergeTemplate401ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", MergeTemplate403ApplicationJson)
     ], MergeTemplateResponse.prototype, "mergeTemplate403ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", MergeTemplate404ApplicationJson)
     ], MergeTemplateResponse.prototype, "mergeTemplate404ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", MergeTemplate422ApplicationJson)
     ], MergeTemplateResponse.prototype, "mergeTemplate422ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", MergeTemplate500ApplicationJson)
     ], MergeTemplateResponse.prototype, "mergeTemplate500ApplicationJsonObject", void 0);
     return MergeTemplateResponse;

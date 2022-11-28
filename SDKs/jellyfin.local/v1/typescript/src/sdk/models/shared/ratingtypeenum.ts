@@ -1,6 +1,7 @@
 
 
+
 export enum RatingTypeEnum {
-    Score = "Score"
-,    Likes = "Likes"
+    Score = "Score",
+    Likes = "Likes"
 }

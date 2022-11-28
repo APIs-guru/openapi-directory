@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Value } from "./value";
+
 
 
 // StructValue
@@ -8,6 +8,6 @@ import { Value } from "./value";
  * A structure value returned by a call.
 **/
 export class StructValue extends SpeakeasyBase {
-  @Metadata({ data: "json, name=attributes", elemType: shared.Value })
+  @SpeakeasyMetadata({ data: "json, name=attributes", elemType: Value })
   attributes?: Value[];
 }

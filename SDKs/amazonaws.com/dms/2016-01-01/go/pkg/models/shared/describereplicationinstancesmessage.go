@@ -1,5 +1,7 @@
 package shared
 
+// DescribeReplicationInstancesMessage
+// <p/>
 type DescribeReplicationInstancesMessage struct {
 	Filters    []Filter `json:"Filters,omitempty"`
 	Marker     *string  `json:"Marker,omitempty"`

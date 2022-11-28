@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { DeviceIdentifier } from "./deviceidentifier";
 import { DeviceMetadata } from "./devicemetadata";
 export declare enum PartnerClaimSectionTypeEnum {
@@ -13,5 +13,7 @@ export declare class PartnerClaim extends SpeakeasyBase {
     customerId?: string;
     deviceIdentifier?: DeviceIdentifier;
     deviceMetadata?: DeviceMetadata;
+    googleWorkspaceCustomerId?: string;
+    preProvisioningToken?: string;
     sectionType?: PartnerClaimSectionTypeEnum;
 }

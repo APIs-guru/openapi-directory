@@ -1,15 +1,18 @@
 from dataclasses import dataclass, field
-from typing import List,Optional
+from typing import Optional
 from dataclasses_json import dataclass_json
-from . import androiddevicelist
-from . import androidmatrix
-from . import iosdevicelist
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class EnvironmentMatrix:
-    android_device_list: Optional[androiddevicelist.AndroidDeviceList] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'androidDeviceList' }})
-    android_matrix: Optional[androidmatrix.AndroidMatrix] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'androidMatrix' }})
-    ios_device_list: Optional[iosdevicelist.IosDeviceList] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'iosDeviceList' }})
+    r"""EnvironmentMatrix
+    The matrix of environments in which the test is to be executed.
+    """
+    
+    android_device_list: Optional[AndroidDeviceList] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('androidDeviceList') }})
+    android_matrix: Optional[AndroidMatrix] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('androidMatrix') }})
+    ios_device_list: Optional[IosDeviceList] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('iosDeviceList') }})
     

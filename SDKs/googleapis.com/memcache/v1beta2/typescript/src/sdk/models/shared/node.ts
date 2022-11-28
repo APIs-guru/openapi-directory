@@ -1,34 +1,35 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { MemcacheParameters } from "./memcacheparameters";
 
+
 export enum NodeStateEnum {
-    StateUnspecified = "STATE_UNSPECIFIED"
-,    Creating = "CREATING"
-,    Ready = "READY"
-,    Deleting = "DELETING"
-,    Updating = "UPDATING"
+    StateUnspecified = "STATE_UNSPECIFIED",
+    Creating = "CREATING",
+    Ready = "READY",
+    Deleting = "DELETING",
+    Updating = "UPDATING"
 }
 
 
 export class Node extends SpeakeasyBase {
-  @Metadata({ data: "json, name=host" })
+  @SpeakeasyMetadata({ data: "json, name=host" })
   host?: string;
 
-  @Metadata({ data: "json, name=nodeId" })
+  @SpeakeasyMetadata({ data: "json, name=nodeId" })
   nodeId?: string;
 
-  @Metadata({ data: "json, name=parameters" })
+  @SpeakeasyMetadata({ data: "json, name=parameters" })
   parameters?: MemcacheParameters;
 
-  @Metadata({ data: "json, name=port" })
+  @SpeakeasyMetadata({ data: "json, name=port" })
   port?: number;
 
-  @Metadata({ data: "json, name=state" })
+  @SpeakeasyMetadata({ data: "json, name=state" })
   state?: NodeStateEnum;
 
-  @Metadata({ data: "json, name=updateAvailable" })
+  @SpeakeasyMetadata({ data: "json, name=updateAvailable" })
   updateAvailable?: boolean;
 
-  @Metadata({ data: "json, name=zone" })
+  @SpeakeasyMetadata({ data: "json, name=zone" })
   zone?: string;
 }

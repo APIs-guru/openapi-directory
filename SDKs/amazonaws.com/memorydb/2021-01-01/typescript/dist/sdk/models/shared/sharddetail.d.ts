@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ShardConfiguration } from "./shardconfiguration";
 /**
  * Provides details of a shard in a snapshot

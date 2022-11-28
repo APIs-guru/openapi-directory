@@ -1,5 +1,7 @@
 package shared
 
+// H265CodecSettings
+// H265 codec settings.
 type H265CodecSettings struct {
 	AllowOpenGop    *bool    `json:"allowOpenGop,omitempty"`
 	AqStrength      *float64 `json:"aqStrength,omitempty"`

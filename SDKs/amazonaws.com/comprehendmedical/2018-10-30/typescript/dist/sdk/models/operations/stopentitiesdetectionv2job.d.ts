@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare enum StopEntitiesDetectionV2JobXAmzTargetEnum {
     ComprehendMedical20181030StopEntitiesDetectionV2Job = "ComprehendMedical_20181030.StopEntitiesDetectionV2Job"

@@ -1,8 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DisplayData } from "./displaydata";
 import { ExecutionStageSummary } from "./executionstagesummary";
 import { TransformSummary } from "./transformsummary";
+
 
 
 // PipelineDescription
@@ -10,15 +10,15 @@ import { TransformSummary } from "./transformsummary";
  * A descriptive representation of submitted pipeline as well as the executed form. This data is provided by the Dataflow service for ease of visualizing the pipeline and interpreting Dataflow provided metrics.
 **/
 export class PipelineDescription extends SpeakeasyBase {
-  @Metadata({ data: "json, name=displayData", elemType: shared.DisplayData })
+  @SpeakeasyMetadata({ data: "json, name=displayData", elemType: DisplayData })
   displayData?: DisplayData[];
 
-  @Metadata({ data: "json, name=executionPipelineStage", elemType: shared.ExecutionStageSummary })
+  @SpeakeasyMetadata({ data: "json, name=executionPipelineStage", elemType: ExecutionStageSummary })
   executionPipelineStage?: ExecutionStageSummary[];
 
-  @Metadata({ data: "json, name=originalPipelineTransform", elemType: shared.TransformSummary })
+  @SpeakeasyMetadata({ data: "json, name=originalPipelineTransform", elemType: TransformSummary })
   originalPipelineTransform?: TransformSummary[];
 
-  @Metadata({ data: "json, name=stepNamesHash" })
+  @SpeakeasyMetadata({ data: "json, name=stepNamesHash" })
   stepNamesHash?: string;
 }

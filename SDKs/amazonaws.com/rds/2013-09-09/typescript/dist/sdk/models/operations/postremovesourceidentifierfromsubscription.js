@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var PostRemoveSourceIdentifierFromSubscriptionActionEnum;
 (function (PostRemoveSourceIdentifierFromSubscriptionActionEnum) {
     PostRemoveSourceIdentifierFromSubscriptionActionEnum["RemoveSourceIdentifierFromSubscription"] = "RemoveSourceIdentifierFromSubscription";
@@ -37,11 +37,11 @@ var PostRemoveSourceIdentifierFromSubscriptionQueryParams = /** @class */ (funct
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=Action" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Action" }),
         __metadata("design:type", String)
     ], PostRemoveSourceIdentifierFromSubscriptionQueryParams.prototype, "action", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=Version" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Version" }),
         __metadata("design:type", String)
     ], PostRemoveSourceIdentifierFromSubscriptionQueryParams.prototype, "version", void 0);
     return PostRemoveSourceIdentifierFromSubscriptionQueryParams;
@@ -53,31 +53,31 @@ var PostRemoveSourceIdentifierFromSubscriptionHeaders = /** @class */ (function 
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
         __metadata("design:type", String)
     ], PostRemoveSourceIdentifierFromSubscriptionHeaders.prototype, "xAmzAlgorithm", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
         __metadata("design:type", String)
     ], PostRemoveSourceIdentifierFromSubscriptionHeaders.prototype, "xAmzContentSha256", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
         __metadata("design:type", String)
     ], PostRemoveSourceIdentifierFromSubscriptionHeaders.prototype, "xAmzCredential", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
         __metadata("design:type", String)
     ], PostRemoveSourceIdentifierFromSubscriptionHeaders.prototype, "xAmzDate", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
         __metadata("design:type", String)
     ], PostRemoveSourceIdentifierFromSubscriptionHeaders.prototype, "xAmzSecurityToken", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
         __metadata("design:type", String)
     ], PostRemoveSourceIdentifierFromSubscriptionHeaders.prototype, "xAmzSignature", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
         __metadata("design:type", String)
     ], PostRemoveSourceIdentifierFromSubscriptionHeaders.prototype, "xAmzSignedHeaders", void 0);
     return PostRemoveSourceIdentifierFromSubscriptionHeaders;
@@ -89,15 +89,15 @@ var PostRemoveSourceIdentifierFromSubscriptionRequest = /** @class */ (function 
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PostRemoveSourceIdentifierFromSubscriptionQueryParams)
     ], PostRemoveSourceIdentifierFromSubscriptionRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PostRemoveSourceIdentifierFromSubscriptionHeaders)
     ], PostRemoveSourceIdentifierFromSubscriptionRequest.prototype, "headers", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=text/xml" }),
+        SpeakeasyMetadata({ data: "request, media_type=text/xml" }),
         __metadata("design:type", Uint8Array)
     ], PostRemoveSourceIdentifierFromSubscriptionRequest.prototype, "request", void 0);
     return PostRemoveSourceIdentifierFromSubscriptionRequest;
@@ -109,15 +109,15 @@ var PostRemoveSourceIdentifierFromSubscriptionResponse = /** @class */ (function
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], PostRemoveSourceIdentifierFromSubscriptionResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], PostRemoveSourceIdentifierFromSubscriptionResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], PostRemoveSourceIdentifierFromSubscriptionResponse.prototype, "statusCode", void 0);
     return PostRemoveSourceIdentifierFromSubscriptionResponse;

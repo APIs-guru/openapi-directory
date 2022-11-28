@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ContainerRepositoryServiceEnum } from "./containerrepositoryserviceenum";
+
 
 
 // TargetContainerRepository
@@ -7,9 +8,9 @@ import { ContainerRepositoryServiceEnum } from "./containerrepositoryserviceenum
  * The container repository where the output container image is stored.
 **/
 export class TargetContainerRepository extends SpeakeasyBase {
-  @Metadata({ data: "json, name=repositoryName" })
+  @SpeakeasyMetadata({ data: "json, name=repositoryName" })
   repositoryName: string;
 
-  @Metadata({ data: "json, name=service" })
+  @SpeakeasyMetadata({ data: "json, name=service" })
   service: ContainerRepositoryServiceEnum;
 }

@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { UrlDispatchRule } from "./urldispatchrule";
 import { FeatureSettings } from "./featuresettings";
 import { IdentityAwareProxy } from "./identityawareproxy";
 export var ApplicationDatabaseTypeEnum;
@@ -50,63 +50,63 @@ var Application = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=authDomain" }),
+        SpeakeasyMetadata({ data: "json, name=authDomain" }),
         __metadata("design:type", String)
     ], Application.prototype, "authDomain", void 0);
     __decorate([
-        Metadata({ data: "json, name=codeBucket" }),
+        SpeakeasyMetadata({ data: "json, name=codeBucket" }),
         __metadata("design:type", String)
     ], Application.prototype, "codeBucket", void 0);
     __decorate([
-        Metadata({ data: "json, name=databaseType" }),
+        SpeakeasyMetadata({ data: "json, name=databaseType" }),
         __metadata("design:type", String)
     ], Application.prototype, "databaseType", void 0);
     __decorate([
-        Metadata({ data: "json, name=defaultBucket" }),
+        SpeakeasyMetadata({ data: "json, name=defaultBucket" }),
         __metadata("design:type", String)
     ], Application.prototype, "defaultBucket", void 0);
     __decorate([
-        Metadata({ data: "json, name=defaultCookieExpiration" }),
+        SpeakeasyMetadata({ data: "json, name=defaultCookieExpiration" }),
         __metadata("design:type", String)
     ], Application.prototype, "defaultCookieExpiration", void 0);
     __decorate([
-        Metadata({ data: "json, name=defaultHostname" }),
+        SpeakeasyMetadata({ data: "json, name=defaultHostname" }),
         __metadata("design:type", String)
     ], Application.prototype, "defaultHostname", void 0);
     __decorate([
-        Metadata({ data: "json, name=dispatchRules", elemType: shared.UrlDispatchRule }),
+        SpeakeasyMetadata({ data: "json, name=dispatchRules", elemType: UrlDispatchRule }),
         __metadata("design:type", Array)
     ], Application.prototype, "dispatchRules", void 0);
     __decorate([
-        Metadata({ data: "json, name=featureSettings" }),
+        SpeakeasyMetadata({ data: "json, name=featureSettings" }),
         __metadata("design:type", FeatureSettings)
     ], Application.prototype, "featureSettings", void 0);
     __decorate([
-        Metadata({ data: "json, name=gcrDomain" }),
+        SpeakeasyMetadata({ data: "json, name=gcrDomain" }),
         __metadata("design:type", String)
     ], Application.prototype, "gcrDomain", void 0);
     __decorate([
-        Metadata({ data: "json, name=iap" }),
+        SpeakeasyMetadata({ data: "json, name=iap" }),
         __metadata("design:type", IdentityAwareProxy)
     ], Application.prototype, "iap", void 0);
     __decorate([
-        Metadata({ data: "json, name=id" }),
+        SpeakeasyMetadata({ data: "json, name=id" }),
         __metadata("design:type", String)
     ], Application.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "json, name=locationId" }),
+        SpeakeasyMetadata({ data: "json, name=locationId" }),
         __metadata("design:type", String)
     ], Application.prototype, "locationId", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], Application.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=serviceAccount" }),
+        SpeakeasyMetadata({ data: "json, name=serviceAccount" }),
         __metadata("design:type", String)
     ], Application.prototype, "serviceAccount", void 0);
     __decorate([
-        Metadata({ data: "json, name=servingStatus" }),
+        SpeakeasyMetadata({ data: "json, name=servingStatus" }),
         __metadata("design:type", String)
     ], Application.prototype, "servingStatus", void 0);
     return Application;

@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class BackfillErrorCodeEnum(str, Enum):
     ENCRYPTED_PARTITION_ERROR = "ENCRYPTED_PARTITION_ERROR"

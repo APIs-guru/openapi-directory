@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Datafeed } from "./datafeed";
 import { Errors } from "./errors";
+
 
 
 // DatafeedsCustomBatchResponseEntry
@@ -8,12 +9,12 @@ import { Errors } from "./errors";
  * A batch entry encoding a single non-batch datafeeds response.
 **/
 export class DatafeedsCustomBatchResponseEntry extends SpeakeasyBase {
-  @Metadata({ data: "json, name=batchId" })
+  @SpeakeasyMetadata({ data: "json, name=batchId" })
   batchId?: number;
 
-  @Metadata({ data: "json, name=datafeed" })
+  @SpeakeasyMetadata({ data: "json, name=datafeed" })
   datafeed?: Datafeed;
 
-  @Metadata({ data: "json, name=errors" })
+  @SpeakeasyMetadata({ data: "json, name=errors" })
   errors?: Errors;
 }

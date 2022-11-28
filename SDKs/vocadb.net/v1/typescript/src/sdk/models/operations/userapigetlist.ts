@@ -1,95 +1,96 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
+
 export enum UserApiGetListFieldsEnum {
-    None = "None"
-,    KnownLanguages = "KnownLanguages"
-,    MainPicture = "MainPicture"
-,    OldUsernames = "OldUsernames"
+    None = "None",
+    KnownLanguages = "KnownLanguages",
+    MainPicture = "MainPicture",
+    OldUsernames = "OldUsernames"
 }
 
 export enum UserApiGetListGroupsEnum {
-    Nothing = "Nothing"
-,    Limited = "Limited"
-,    Regular = "Regular"
-,    Trusted = "Trusted"
-,    Moderator = "Moderator"
-,    Admin = "Admin"
+    Nothing = "Nothing",
+    Limited = "Limited",
+    Regular = "Regular",
+    Trusted = "Trusted",
+    Moderator = "Moderator",
+    Admin = "Admin"
 }
 
 export enum UserApiGetListNameMatchModeEnum {
-    Auto = "Auto"
-,    Partial = "Partial"
-,    StartsWith = "StartsWith"
-,    Exact = "Exact"
-,    Words = "Words"
+    Auto = "Auto",
+    Partial = "Partial",
+    StartsWith = "StartsWith",
+    Exact = "Exact",
+    Words = "Words"
 }
 
 export enum UserApiGetListSortEnum {
-    RegisterDate = "RegisterDate"
-,    Name = "Name"
-,    Group = "Group"
+    RegisterDate = "RegisterDate",
+    Name = "Name",
+    Group = "Group"
 }
 
 
 export class UserApiGetListQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=fields" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=fields" })
   fields?: UserApiGetListFieldsEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=getTotalCount" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=getTotalCount" })
   getTotalCount?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=groups" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=groups" })
   groups?: UserApiGetListGroupsEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=includeDisabled" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=includeDisabled" })
   includeDisabled?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=joinDateAfter" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=joinDateAfter" })
   joinDateAfter?: Date;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=joinDateBefore" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=joinDateBefore" })
   joinDateBefore?: Date;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=knowsLanguage" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=knowsLanguage" })
   knowsLanguage?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=maxResults" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=maxResults" })
   maxResults?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=nameMatchMode" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=nameMatchMode" })
   nameMatchMode?: UserApiGetListNameMatchModeEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=onlyVerified" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=onlyVerified" })
   onlyVerified?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=query" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=query" })
   query?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=sort" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sort" })
   sort?: UserApiGetListSortEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=start" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=start" })
   start?: number;
 }
 
 
 export class UserApiGetListRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: UserApiGetListQueryParams;
 }
 
 
 export class UserApiGetListResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   partialFindResultUserForApiContract?: shared.PartialFindResultUserForApiContract;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

@@ -1,50 +1,51 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class SearchStickersQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=lang" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=lang" })
   lang?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=limit" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=limit" })
   limit?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=offset" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=offset" })
   offset?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=q" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=q" })
   q: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=rating" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=rating" })
   rating?: string;
 }
 
 
-export class SearchStickersRequest extends SpeakeasyBase {
-  @Metadata()
-  queryParams: SearchStickersQueryParams;
-}
-
-
 export class SearchStickers200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=data", elemType: shared.Gif })
+  @SpeakeasyMetadata({ data: "json, name=data", elemType: shared.Gif })
   data?: shared.Gif[];
 
-  @Metadata({ data: "json, name=meta" })
+  @SpeakeasyMetadata({ data: "json, name=meta" })
   meta?: shared.Meta;
 
-  @Metadata({ data: "json, name=pagination" })
+  @SpeakeasyMetadata({ data: "json, name=pagination" })
   pagination?: shared.Pagination;
 }
 
 
+export class SearchStickersRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  queryParams: SearchStickersQueryParams;
+}
+
+
 export class SearchStickersResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   searchStickers200ApplicationJsonObject?: SearchStickers200ApplicationJson;
 }

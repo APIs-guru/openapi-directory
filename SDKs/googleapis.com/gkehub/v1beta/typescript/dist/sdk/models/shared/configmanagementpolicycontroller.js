@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ConfigManagementPolicyControllerMonitoring } from "./configmanagementpolicycontrollermonitoring";
 // ConfigManagementPolicyController
 /**
@@ -34,35 +34,35 @@ var ConfigManagementPolicyController = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=auditIntervalSeconds" }),
+        SpeakeasyMetadata({ data: "json, name=auditIntervalSeconds" }),
         __metadata("design:type", String)
     ], ConfigManagementPolicyController.prototype, "auditIntervalSeconds", void 0);
     __decorate([
-        Metadata({ data: "json, name=enabled" }),
+        SpeakeasyMetadata({ data: "json, name=enabled" }),
         __metadata("design:type", Boolean)
     ], ConfigManagementPolicyController.prototype, "enabled", void 0);
     __decorate([
-        Metadata({ data: "json, name=exemptableNamespaces" }),
+        SpeakeasyMetadata({ data: "json, name=exemptableNamespaces" }),
         __metadata("design:type", Array)
     ], ConfigManagementPolicyController.prototype, "exemptableNamespaces", void 0);
     __decorate([
-        Metadata({ data: "json, name=logDeniesEnabled" }),
+        SpeakeasyMetadata({ data: "json, name=logDeniesEnabled" }),
         __metadata("design:type", Boolean)
     ], ConfigManagementPolicyController.prototype, "logDeniesEnabled", void 0);
     __decorate([
-        Metadata({ data: "json, name=monitoring" }),
+        SpeakeasyMetadata({ data: "json, name=monitoring" }),
         __metadata("design:type", ConfigManagementPolicyControllerMonitoring)
     ], ConfigManagementPolicyController.prototype, "monitoring", void 0);
     __decorate([
-        Metadata({ data: "json, name=mutationEnabled" }),
+        SpeakeasyMetadata({ data: "json, name=mutationEnabled" }),
         __metadata("design:type", Boolean)
     ], ConfigManagementPolicyController.prototype, "mutationEnabled", void 0);
     __decorate([
-        Metadata({ data: "json, name=referentialRulesEnabled" }),
+        SpeakeasyMetadata({ data: "json, name=referentialRulesEnabled" }),
         __metadata("design:type", Boolean)
     ], ConfigManagementPolicyController.prototype, "referentialRulesEnabled", void 0);
     __decorate([
-        Metadata({ data: "json, name=templateLibraryInstalled" }),
+        SpeakeasyMetadata({ data: "json, name=templateLibraryInstalled" }),
         __metadata("design:type", Boolean)
     ], ConfigManagementPolicyController.prototype, "templateLibraryInstalled", void 0);
     return ConfigManagementPolicyController;

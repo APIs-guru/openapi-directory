@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var DeleteProductPathParams = /** @class */ (function (_super) {
     __extends(DeleteProductPathParams, _super);
@@ -30,7 +30,7 @@ var DeleteProductPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=productNumber" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=productNumber" }),
         __metadata("design:type", String)
     ], DeleteProductPathParams.prototype, "productNumber", void 0);
     return DeleteProductPathParams;
@@ -42,7 +42,7 @@ var DeleteProductQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=forceCascade" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=forceCascade" }),
         __metadata("design:type", Boolean)
     ], DeleteProductQueryParams.prototype, "forceCascade", void 0);
     return DeleteProductQueryParams;
@@ -54,7 +54,7 @@ var DeleteProductSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=http;subtype=basic" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=basic" }),
         __metadata("design:type", shared.SchemeBasicAuth)
     ], DeleteProductSecurity.prototype, "basicAuth", void 0);
     return DeleteProductSecurity;
@@ -66,15 +66,15 @@ var DeleteProductRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", DeleteProductPathParams)
     ], DeleteProductRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", DeleteProductQueryParams)
     ], DeleteProductRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", DeleteProductSecurity)
     ], DeleteProductRequest.prototype, "security", void 0);
     return DeleteProductRequest;
@@ -86,19 +86,19 @@ var DeleteProductResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], DeleteProductResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], DeleteProductResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], DeleteProductResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], DeleteProductResponse.prototype, "netlicensing", void 0);
     return DeleteProductResponse;

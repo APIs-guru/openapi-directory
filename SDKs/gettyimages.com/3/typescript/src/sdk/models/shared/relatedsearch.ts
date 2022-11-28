@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class RelatedSearch extends SpeakeasyBase {
-  @Metadata({ data: "json, name=phrase" })
+  @SpeakeasyMetadata({ data: "json, name=phrase" })
   phrase?: string;
 
-  @Metadata({ data: "json, name=url" })
+  @SpeakeasyMetadata({ data: "json, name=url" })
   url?: string;
 }

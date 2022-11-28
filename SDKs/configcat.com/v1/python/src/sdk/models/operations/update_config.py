@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Optional
 from sdk.models import shared
 
 
 @dataclass
 class UpdateConfigPathParams:
-    config_id: str = field(default=None, metadata={'path_param': { 'field_name': 'configId', 'style': 'simple', 'explode': False }})
+    config_id: str = field(metadata={'path_param': { 'field_name': 'configId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -17,14 +20,14 @@ class UpdateConfigRequests:
 
 @dataclass
 class UpdateConfigRequest:
-    path_params: UpdateConfigPathParams = field(default=None)
-    request: UpdateConfigRequests = field(default=None)
+    path_params: UpdateConfigPathParams = field()
+    request: UpdateConfigRequests = field()
     
 
 @dataclass
 class UpdateConfigResponse:
+    content_type: str = field()
+    status_code: int = field()
     config_model: Optional[shared.ConfigModel] = field(default=None)
     config_model_haljson: Optional[shared.ConfigModelHaljson] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

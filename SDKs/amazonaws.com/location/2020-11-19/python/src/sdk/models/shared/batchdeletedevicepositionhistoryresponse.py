@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
 from typing import List
 from dataclasses_json import dataclass_json
-from . import batchdeletedevicepositionhistoryerror
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class BatchDeleteDevicePositionHistoryResponse:
-    errors: List[batchdeletedevicepositionhistoryerror.BatchDeleteDevicePositionHistoryError] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Errors' }})
+    errors: List[BatchDeleteDevicePositionHistoryError] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Errors') }})
     

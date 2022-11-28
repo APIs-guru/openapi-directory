@@ -1,38 +1,39 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class PackagesRestorePackageForAuthenticatedUserPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=package_name" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=package_name" })
   packageName: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=package_type" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=package_type" })
   packageType: shared.PackageTypeEnum;
 }
 
 
 export class PackagesRestorePackageForAuthenticatedUserQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=token" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=token" })
   token?: string;
 }
 
 
 export class PackagesRestorePackageForAuthenticatedUserRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: PackagesRestorePackageForAuthenticatedUserPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: PackagesRestorePackageForAuthenticatedUserQueryParams;
 }
 
 
 export class PackagesRestorePackageForAuthenticatedUserResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   basicError?: shared.BasicError;
 }

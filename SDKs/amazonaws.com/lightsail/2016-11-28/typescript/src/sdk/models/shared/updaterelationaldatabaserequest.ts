@@ -1,34 +1,35 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class UpdateRelationalDatabaseRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=applyImmediately" })
+  @SpeakeasyMetadata({ data: "json, name=applyImmediately" })
   applyImmediately?: boolean;
 
-  @Metadata({ data: "json, name=caCertificateIdentifier" })
+  @SpeakeasyMetadata({ data: "json, name=caCertificateIdentifier" })
   caCertificateIdentifier?: string;
 
-  @Metadata({ data: "json, name=disableBackupRetention" })
+  @SpeakeasyMetadata({ data: "json, name=disableBackupRetention" })
   disableBackupRetention?: boolean;
 
-  @Metadata({ data: "json, name=enableBackupRetention" })
+  @SpeakeasyMetadata({ data: "json, name=enableBackupRetention" })
   enableBackupRetention?: boolean;
 
-  @Metadata({ data: "json, name=masterUserPassword" })
+  @SpeakeasyMetadata({ data: "json, name=masterUserPassword" })
   masterUserPassword?: string;
 
-  @Metadata({ data: "json, name=preferredBackupWindow" })
+  @SpeakeasyMetadata({ data: "json, name=preferredBackupWindow" })
   preferredBackupWindow?: string;
 
-  @Metadata({ data: "json, name=preferredMaintenanceWindow" })
+  @SpeakeasyMetadata({ data: "json, name=preferredMaintenanceWindow" })
   preferredMaintenanceWindow?: string;
 
-  @Metadata({ data: "json, name=publiclyAccessible" })
+  @SpeakeasyMetadata({ data: "json, name=publiclyAccessible" })
   publiclyAccessible?: boolean;
 
-  @Metadata({ data: "json, name=relationalDatabaseName" })
+  @SpeakeasyMetadata({ data: "json, name=relationalDatabaseName" })
   relationalDatabaseName: string;
 
-  @Metadata({ data: "json, name=rotateMasterUserPassword" })
+  @SpeakeasyMetadata({ data: "json, name=rotateMasterUserPassword" })
   rotateMasterUserPassword?: boolean;
 }

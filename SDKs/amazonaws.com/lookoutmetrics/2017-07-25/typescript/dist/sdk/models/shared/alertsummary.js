@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AlertStatusEnum } from "./alertstatusenum";
 import { AlertTypeEnum } from "./alerttypeenum";
 // AlertSummary
@@ -35,39 +35,39 @@ var AlertSummary = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=AlertArn" }),
+        SpeakeasyMetadata({ data: "json, name=AlertArn" }),
         __metadata("design:type", String)
     ], AlertSummary.prototype, "alertArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=AlertName" }),
+        SpeakeasyMetadata({ data: "json, name=AlertName" }),
         __metadata("design:type", String)
     ], AlertSummary.prototype, "alertName", void 0);
     __decorate([
-        Metadata({ data: "json, name=AlertSensitivityThreshold" }),
+        SpeakeasyMetadata({ data: "json, name=AlertSensitivityThreshold" }),
         __metadata("design:type", Number)
     ], AlertSummary.prototype, "alertSensitivityThreshold", void 0);
     __decorate([
-        Metadata({ data: "json, name=AlertStatus" }),
+        SpeakeasyMetadata({ data: "json, name=AlertStatus" }),
         __metadata("design:type", String)
     ], AlertSummary.prototype, "alertStatus", void 0);
     __decorate([
-        Metadata({ data: "json, name=AlertType" }),
+        SpeakeasyMetadata({ data: "json, name=AlertType" }),
         __metadata("design:type", String)
     ], AlertSummary.prototype, "alertType", void 0);
     __decorate([
-        Metadata({ data: "json, name=AnomalyDetectorArn" }),
+        SpeakeasyMetadata({ data: "json, name=AnomalyDetectorArn" }),
         __metadata("design:type", String)
     ], AlertSummary.prototype, "anomalyDetectorArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=CreationTime" }),
+        SpeakeasyMetadata({ data: "json, name=CreationTime" }),
         __metadata("design:type", Date)
     ], AlertSummary.prototype, "creationTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=LastModificationTime" }),
+        SpeakeasyMetadata({ data: "json, name=LastModificationTime" }),
         __metadata("design:type", Date)
     ], AlertSummary.prototype, "lastModificationTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=Tags" }),
+        SpeakeasyMetadata({ data: "json, name=Tags" }),
         __metadata("design:type", Map)
     ], AlertSummary.prototype, "tags", void 0);
     return AlertSummary;

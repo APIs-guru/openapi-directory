@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class ReportFormatEnum(str, Enum):
     TEXT_O_RCSV = "textORcsv"

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { LaunchStatusEnum } from "./launchstatusenum";
 /**
  * Server participating in Job.

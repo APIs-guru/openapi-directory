@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ApplicationModeEnum } from "./applicationmodeenum";
 import { ApplicationStatusEnum } from "./applicationstatusenum";
 import { RuntimeEnvironmentEnum } from "./runtimeenvironmentenum";

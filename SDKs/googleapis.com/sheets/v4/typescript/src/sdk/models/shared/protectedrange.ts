@@ -1,8 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Editors } from "./editors";
 import { GridRange } from "./gridrange";
-import { GridRange } from "./gridrange";
+
 
 
 // ProtectedRange
@@ -10,27 +9,27 @@ import { GridRange } from "./gridrange";
  * A protected range.
 **/
 export class ProtectedRange extends SpeakeasyBase {
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=editors" })
+  @SpeakeasyMetadata({ data: "json, name=editors" })
   editors?: Editors;
 
-  @Metadata({ data: "json, name=namedRangeId" })
+  @SpeakeasyMetadata({ data: "json, name=namedRangeId" })
   namedRangeId?: string;
 
-  @Metadata({ data: "json, name=protectedRangeId" })
+  @SpeakeasyMetadata({ data: "json, name=protectedRangeId" })
   protectedRangeId?: number;
 
-  @Metadata({ data: "json, name=range" })
+  @SpeakeasyMetadata({ data: "json, name=range" })
   range?: GridRange;
 
-  @Metadata({ data: "json, name=requestingUserCanEdit" })
+  @SpeakeasyMetadata({ data: "json, name=requestingUserCanEdit" })
   requestingUserCanEdit?: boolean;
 
-  @Metadata({ data: "json, name=unprotectedRanges", elemType: shared.GridRange })
+  @SpeakeasyMetadata({ data: "json, name=unprotectedRanges", elemType: GridRange })
   unprotectedRanges?: GridRange[];
 
-  @Metadata({ data: "json, name=warningOnly" })
+  @SpeakeasyMetadata({ data: "json, name=warningOnly" })
   warningOnly?: boolean;
 }

@@ -1,9 +1,5 @@
 package shared
 
-import (
-	"time"
-)
-
 type WritableRackOuterUnitEnum string
 
 const (
@@ -31,30 +27,24 @@ const (
 	WritableRackTypeEnumWallCabinet     WritableRackTypeEnum = "wall-cabinet"
 )
 
-type WritableRack struct {
-	AssetTag       *string                    `json:"asset_tag,omitempty"`
-	Comments       *string                    `json:"comments,omitempty"`
-	Created        *time.Time                 `json:"created,omitempty"`
-	CustomFields   map[string]interface{}     `json:"custom_fields,omitempty"`
-	DescUnits      *bool                      `json:"desc_units,omitempty"`
-	DeviceCount    *int64                     `json:"device_count,omitempty"`
-	DisplayName    *string                    `json:"display_name,omitempty"`
-	FacilityID     *string                    `json:"facility_id,omitempty"`
-	Group          *int64                     `json:"group,omitempty"`
-	ID             *int64                     `json:"id,omitempty"`
-	LastUpdated    *time.Time                 `json:"last_updated,omitempty"`
-	Name           string                     `json:"name"`
-	OuterDepth     *int64                     `json:"outer_depth,omitempty"`
-	OuterUnit      *WritableRackOuterUnitEnum `json:"outer_unit,omitempty"`
-	OuterWidth     *int64                     `json:"outer_width,omitempty"`
-	PowerfeedCount *int64                     `json:"powerfeed_count,omitempty"`
-	Role           *int64                     `json:"role,omitempty"`
-	Serial         *string                    `json:"serial,omitempty"`
-	Site           int64                      `json:"site"`
-	Status         *WritableRackStatusEnum    `json:"status,omitempty"`
-	Tags           []string                   `json:"tags,omitempty"`
-	Tenant         *int64                     `json:"tenant,omitempty"`
-	Type           *WritableRackTypeEnum      `json:"type,omitempty"`
-	UHeight        *int64                     `json:"u_height,omitempty"`
-	Width          *int64                     `json:"width,omitempty"`
+type WritableRackInput struct {
+	AssetTag     *string                    `json:"asset_tag,omitempty"`
+	Comments     *string                    `json:"comments,omitempty"`
+	CustomFields map[string]interface{}     `json:"custom_fields,omitempty"`
+	DescUnits    *bool                      `json:"desc_units,omitempty"`
+	FacilityID   *string                    `json:"facility_id,omitempty"`
+	Group        *int64                     `json:"group,omitempty"`
+	Name         string                     `json:"name"`
+	OuterDepth   *int64                     `json:"outer_depth,omitempty"`
+	OuterUnit    *WritableRackOuterUnitEnum `json:"outer_unit,omitempty"`
+	OuterWidth   *int64                     `json:"outer_width,omitempty"`
+	Role         *int64                     `json:"role,omitempty"`
+	Serial       *string                    `json:"serial,omitempty"`
+	Site         int64                      `json:"site"`
+	Status       *WritableRackStatusEnum    `json:"status,omitempty"`
+	Tags         []string                   `json:"tags,omitempty"`
+	Tenant       *int64                     `json:"tenant,omitempty"`
+	Type         *WritableRackTypeEnum      `json:"type,omitempty"`
+	UHeight      *int64                     `json:"u_height,omitempty"`
+	Width        *int64                     `json:"width,omitempty"`
 }

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // WriteControl
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Provides control over how write requests are executed.
 **/
 export class WriteControl extends SpeakeasyBase {
-  @Metadata({ data: "json, name=requiredRevisionId" })
+  @SpeakeasyMetadata({ data: "json, name=requiredRevisionId" })
   requiredRevisionId?: string;
 }

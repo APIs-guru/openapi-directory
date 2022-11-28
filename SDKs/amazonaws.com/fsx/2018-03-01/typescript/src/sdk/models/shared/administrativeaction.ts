@@ -1,4 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AdministrativeActionTypeEnum } from "./administrativeactiontypeenum";
 import { AdministrativeActionFailureDetails } from "./administrativeactionfailuredetails";
 import { StatusEnum } from "./statusenum";
@@ -6,29 +6,30 @@ import { FileSystem } from "./filesystem";
 import { Volume } from "./volume";
 
 
+
 // AdministrativeAction
 /** 
  * Describes a specific Amazon FSx administrative action for the current Windows or Lustre file system.
 **/
 export class AdministrativeAction extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AdministrativeActionType" })
+  @SpeakeasyMetadata({ data: "json, name=AdministrativeActionType" })
   administrativeActionType?: AdministrativeActionTypeEnum;
 
-  @Metadata({ data: "json, name=FailureDetails" })
+  @SpeakeasyMetadata({ data: "json, name=FailureDetails" })
   failureDetails?: AdministrativeActionFailureDetails;
 
-  @Metadata({ data: "json, name=ProgressPercent" })
+  @SpeakeasyMetadata({ data: "json, name=ProgressPercent" })
   progressPercent?: number;
 
-  @Metadata({ data: "json, name=RequestTime" })
+  @SpeakeasyMetadata({ data: "json, name=RequestTime" })
   requestTime?: Date;
 
-  @Metadata({ data: "json, name=Status" })
+  @SpeakeasyMetadata({ data: "json, name=Status" })
   status?: StatusEnum;
 
-  @Metadata({ data: "json, name=TargetFileSystemValues" })
+  @SpeakeasyMetadata({ data: "json, name=TargetFileSystemValues" })
   targetFileSystemValues?: FileSystem;
 
-  @Metadata({ data: "json, name=TargetVolumeValues" })
+  @SpeakeasyMetadata({ data: "json, name=TargetVolumeValues" })
   targetVolumeValues?: Volume;
 }

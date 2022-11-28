@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// OpsMetadata
+// Operational metadata for an application in Application Manager.
 type OpsMetadata struct {
 	CreationDate     *time.Time `json:"CreationDate,omitempty"`
 	LastModifiedDate *time.Time `json:"LastModifiedDate,omitempty"`

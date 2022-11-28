@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // InboxRecipientEntity
@@ -6,18 +7,18 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * List Inbox Recipients
 **/
 export class InboxRecipientEntity extends SpeakeasyBase {
-  @Metadata({ data: "json, name=company" })
+  @SpeakeasyMetadata({ data: "json, name=company" })
   company?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=note" })
+  @SpeakeasyMetadata({ data: "json, name=note" })
   note?: string;
 
-  @Metadata({ data: "json, name=recipient" })
+  @SpeakeasyMetadata({ data: "json, name=recipient" })
   recipient?: string;
 
-  @Metadata({ data: "json, name=sent_at" })
+  @SpeakeasyMetadata({ data: "json, name=sent_at" })
   sentAt?: Date;
 }

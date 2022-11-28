@@ -1,5 +1,7 @@
 package shared
 
+// GoogleCloudRecaptchaenterpriseV1Key
+// A key used to identify and configure applications (web and/or mobile) that use reCAPTCHA Enterprise.
 type GoogleCloudRecaptchaenterpriseV1Key struct {
 	AndroidSettings *GoogleCloudRecaptchaenterpriseV1AndroidKeySettings `json:"androidSettings,omitempty"`
 	CreateTime      *string                                             `json:"createTime,omitempty"`

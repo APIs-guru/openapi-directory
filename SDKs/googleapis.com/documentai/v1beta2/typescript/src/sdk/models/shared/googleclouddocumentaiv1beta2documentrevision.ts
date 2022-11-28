@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudDocumentaiV1beta2DocumentRevisionHumanReview } from "./googleclouddocumentaiv1beta2documentrevisionhumanreview";
+
 
 
 // GoogleCloudDocumentaiV1beta2DocumentRevision
@@ -7,24 +8,24 @@ import { GoogleCloudDocumentaiV1beta2DocumentRevisionHumanReview } from "./googl
  * Contains past or forward revisions of this document.
 **/
 export class GoogleCloudDocumentaiV1beta2DocumentRevision extends SpeakeasyBase {
-  @Metadata({ data: "json, name=agent" })
+  @SpeakeasyMetadata({ data: "json, name=agent" })
   agent?: string;
 
-  @Metadata({ data: "json, name=createTime" })
+  @SpeakeasyMetadata({ data: "json, name=createTime" })
   createTime?: string;
 
-  @Metadata({ data: "json, name=humanReview" })
+  @SpeakeasyMetadata({ data: "json, name=humanReview" })
   humanReview?: GoogleCloudDocumentaiV1beta2DocumentRevisionHumanReview;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=parent" })
+  @SpeakeasyMetadata({ data: "json, name=parent" })
   parent?: number[];
 
-  @Metadata({ data: "json, name=parentIds" })
+  @SpeakeasyMetadata({ data: "json, name=parentIds" })
   parentIds?: string[];
 
-  @Metadata({ data: "json, name=processor" })
+  @SpeakeasyMetadata({ data: "json, name=processor" })
   processor?: string;
 }

@@ -1,50 +1,51 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetImagesByIdsPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=projectId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=projectId" })
   projectId: string;
 }
 
 
 export class GetImagesByIdsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=false;name=imageIds" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=imageIds" })
   imageIds?: string[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=iterationId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=iterationId" })
   iterationId?: string;
 }
 
 
 export class GetImagesByIdsHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=Training-Key" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Training-Key" })
   trainingKey: string;
 }
 
 
 export class GetImagesByIdsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetImagesByIdsPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetImagesByIdsQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: GetImagesByIdsHeaders;
 }
 
 
 export class GetImagesByIdsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata({ elemType: shared.Image })
+  @SpeakeasyMetadata({ elemType: shared.Image })
   images?: shared.Image[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

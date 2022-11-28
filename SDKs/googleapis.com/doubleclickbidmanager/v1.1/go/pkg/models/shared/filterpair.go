@@ -299,6 +299,8 @@ const (
 	FilterPairTypeEnumFilterPublisherTrafficSource                             FilterPairTypeEnum = "FILTER_PUBLISHER_TRAFFIC_SOURCE"
 )
 
+// FilterPair
+// Filter used to match traffic data in your report.
 type FilterPair struct {
 	Type  *FilterPairTypeEnum `json:"type,omitempty"`
 	Value *string             `json:"value,omitempty"`

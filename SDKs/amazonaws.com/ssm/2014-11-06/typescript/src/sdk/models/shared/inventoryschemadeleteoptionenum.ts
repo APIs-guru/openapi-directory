@@ -1,6 +1,7 @@
 
 
+
 export enum InventorySchemaDeleteOptionEnum {
-    DisableSchema = "DisableSchema"
-,    DeleteSchema = "DeleteSchema"
+    DisableSchema = "DisableSchema",
+    DeleteSchema = "DeleteSchema"
 }

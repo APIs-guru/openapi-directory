@@ -22,50 +22,50 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var StudentContact = /** @class */ (function (_super) {
     __extends(StudentContact, _super);
     function StudentContact() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=district" }),
+        SpeakeasyMetadata({ data: "json, name=district" }),
         __metadata("design:type", String)
     ], StudentContact.prototype, "district", void 0);
     __decorate([
-        Metadata({ data: "json, name=email" }),
+        SpeakeasyMetadata({ data: "json, name=email" }),
         __metadata("design:type", String)
     ], StudentContact.prototype, "email", void 0);
     __decorate([
-        Metadata({ data: "json, name=id" }),
+        SpeakeasyMetadata({ data: "json, name=id" }),
         __metadata("design:type", String)
     ], StudentContact.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], StudentContact.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=phone" }),
+        SpeakeasyMetadata({ data: "json, name=phone" }),
         __metadata("design:type", String)
     ], StudentContact.prototype, "phone", void 0);
     __decorate([
-        Metadata({ data: "json, name=phone_type" }),
+        SpeakeasyMetadata({ data: "json, name=phone_type" }),
         __metadata("design:type", String)
     ], StudentContact.prototype, "phoneType", void 0);
     __decorate([
-        Metadata({ data: "json, name=relationship" }),
+        SpeakeasyMetadata({ data: "json, name=relationship" }),
         __metadata("design:type", String)
     ], StudentContact.prototype, "relationship", void 0);
     __decorate([
-        Metadata({ data: "json, name=sis_id" }),
+        SpeakeasyMetadata({ data: "json, name=sis_id" }),
         __metadata("design:type", String)
     ], StudentContact.prototype, "sisId", void 0);
     __decorate([
-        Metadata({ data: "json, name=student" }),
+        SpeakeasyMetadata({ data: "json, name=student" }),
         __metadata("design:type", String)
     ], StudentContact.prototype, "student", void 0);
     __decorate([
-        Metadata({ data: "json, name=type" }),
+        SpeakeasyMetadata({ data: "json, name=type" }),
         __metadata("design:type", String)
     ], StudentContact.prototype, "type", void 0);
     return StudentContact;

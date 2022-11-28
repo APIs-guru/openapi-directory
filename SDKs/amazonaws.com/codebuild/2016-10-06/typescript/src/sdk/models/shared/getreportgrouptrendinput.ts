@@ -1,14 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ReportGroupTrendFieldTypeEnum } from "./reportgrouptrendfieldtypeenum";
 
 
+
 export class GetReportGroupTrendInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=numOfReports" })
+  @SpeakeasyMetadata({ data: "json, name=numOfReports" })
   numOfReports?: number;
 
-  @Metadata({ data: "json, name=reportGroupArn" })
+  @SpeakeasyMetadata({ data: "json, name=reportGroupArn" })
   reportGroupArn: string;
 
-  @Metadata({ data: "json, name=trendField" })
+  @SpeakeasyMetadata({ data: "json, name=trendField" })
   trendField: ReportGroupTrendFieldTypeEnum;
 }

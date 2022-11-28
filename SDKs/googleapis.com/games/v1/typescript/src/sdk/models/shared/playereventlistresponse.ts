@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PlayerEvent } from "./playerevent";
+
 
 
 // PlayerEventListResponse
@@ -8,12 +8,12 @@ import { PlayerEvent } from "./playerevent";
  * A ListByPlayer response.
 **/
 export class PlayerEventListResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=items", elemType: shared.PlayerEvent })
+  @SpeakeasyMetadata({ data: "json, name=items", elemType: PlayerEvent })
   items?: PlayerEvent[];
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 }

@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// StatementLine
+// the lines details for a statement
 type StatementLine struct {
 	Amount               *float64                  `json:"amount,omitempty"`
 	ChequeNumber         *string                   `json:"chequeNumber,omitempty"`

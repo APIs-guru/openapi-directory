@@ -17,16 +17,16 @@ type AppsListInstallationReposForAuthenticatedUserHeaders struct {
 	Accept string `header:"style=simple,explode=false,name=accept"`
 }
 
-type AppsListInstallationReposForAuthenticatedUserRequest struct {
-	PathParams  AppsListInstallationReposForAuthenticatedUserPathParams
-	QueryParams AppsListInstallationReposForAuthenticatedUserQueryParams
-	Headers     AppsListInstallationReposForAuthenticatedUserHeaders
-}
-
 type AppsListInstallationReposForAuthenticatedUser200ApplicationJSON struct {
 	Repositories        []shared.Repository `json:"repositories"`
 	RepositorySelection *string             `json:"repository_selection,omitempty"`
 	TotalCount          int64               `json:"total_count"`
+}
+
+type AppsListInstallationReposForAuthenticatedUserRequest struct {
+	PathParams  AppsListInstallationReposForAuthenticatedUserPathParams
+	QueryParams AppsListInstallationReposForAuthenticatedUserQueryParams
+	Headers     AppsListInstallationReposForAuthenticatedUserHeaders
 }
 
 type AppsListInstallationReposForAuthenticatedUserResponse struct {

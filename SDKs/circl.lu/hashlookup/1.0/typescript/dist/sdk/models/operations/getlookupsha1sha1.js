@@ -22,14 +22,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var GetLookupSha1Sha1PathParams = /** @class */ (function (_super) {
     __extends(GetLookupSha1Sha1PathParams, _super);
     function GetLookupSha1Sha1PathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=sha1" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=sha1" }),
         __metadata("design:type", String)
     ], GetLookupSha1Sha1PathParams.prototype, "sha1", void 0);
     return GetLookupSha1Sha1PathParams;
@@ -41,7 +41,7 @@ var GetLookupSha1Sha1Request = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetLookupSha1Sha1PathParams)
     ], GetLookupSha1Sha1Request.prototype, "pathParams", void 0);
     return GetLookupSha1Sha1Request;
@@ -53,11 +53,11 @@ var GetLookupSha1Sha1Response = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetLookupSha1Sha1Response.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetLookupSha1Sha1Response.prototype, "statusCode", void 0);
     return GetLookupSha1Sha1Response;

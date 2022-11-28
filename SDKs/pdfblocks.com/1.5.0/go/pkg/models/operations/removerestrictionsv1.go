@@ -9,15 +9,15 @@ type RemoveRestrictionsV1RequestBody struct {
 	File RemoveRestrictionsV1RequestBodyFile `multipartForm:"file"`
 }
 
-type RemoveRestrictionsV1Request struct {
-	Request RemoveRestrictionsV1RequestBody `request:"mediaType=multipart/form-data"`
-}
-
 type RemoveRestrictionsV14XxApplicationProblemPlusJSON struct {
 	Errors map[string]interface{} `json:"errors,omitempty"`
 	Status *int64                 `json:"status,omitempty"`
 	Title  *string                `json:"title,omitempty"`
 	Type   *string                `json:"type,omitempty"`
+}
+
+type RemoveRestrictionsV1Request struct {
+	Request RemoveRestrictionsV1RequestBody `request:"mediaType=multipart/form-data"`
 }
 
 type RemoveRestrictionsV1Response struct {

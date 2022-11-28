@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 class GetTeamsRoleEnum(str, Enum):
@@ -14,37 +15,22 @@ class GetTeamsQueryParams:
     
 
 @dataclass
-class GetTeamsSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    
-
-@dataclass
-class GetTeamsSecurityOption2:
-    basic: shared.SchemeBasic = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'basic' }})
-    
-
-@dataclass
-class GetTeamsSecurityOption3:
-    api_key: shared.SchemeAPIKey = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
-    
-
-@dataclass
 class GetTeamsSecurity:
-    option1: Optional[GetTeamsSecurityOption1] = field(default=None, metadata={'security': { 'option': True }})
-    option2: Optional[GetTeamsSecurityOption2] = field(default=None, metadata={'security': { 'option': True }})
-    option3: Optional[GetTeamsSecurityOption3] = field(default=None, metadata={'security': { 'option': True }})
+    api_key: Optional[shared.SchemeAPIKey] = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    basic: Optional[shared.SchemeBasic] = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'basic' }})
+    oauth2: Optional[shared.SchemeOauth2] = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class GetTeamsRequest:
-    query_params: GetTeamsQueryParams = field(default=None)
-    security: GetTeamsSecurity = field(default=None)
+    query_params: GetTeamsQueryParams = field()
+    security: GetTeamsSecurity = field()
     
 
 @dataclass
 class GetTeamsResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error: Optional[dict[str, Any]] = field(default=None)
     paginated_teams: Optional[shared.PaginatedTeams] = field(default=None)
     

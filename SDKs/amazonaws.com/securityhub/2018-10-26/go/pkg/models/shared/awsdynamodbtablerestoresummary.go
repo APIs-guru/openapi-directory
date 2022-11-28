@@ -1,5 +1,7 @@
 package shared
 
+// AwsDynamoDbTableRestoreSummary
+// Information about the restore for the table.
 type AwsDynamoDbTableRestoreSummary struct {
 	RestoreDateTime   *string `json:"RestoreDateTime,omitempty"`
 	RestoreInProgress *bool   `json:"RestoreInProgress,omitempty"`

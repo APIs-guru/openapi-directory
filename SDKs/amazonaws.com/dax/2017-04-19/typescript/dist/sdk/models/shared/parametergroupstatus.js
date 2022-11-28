@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // ParameterGroupStatus
 /**
  * The status of a parameter group.
@@ -33,15 +33,15 @@ var ParameterGroupStatus = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=NodeIdsToReboot" }),
+        SpeakeasyMetadata({ data: "json, name=NodeIdsToReboot" }),
         __metadata("design:type", Array)
     ], ParameterGroupStatus.prototype, "nodeIdsToReboot", void 0);
     __decorate([
-        Metadata({ data: "json, name=ParameterApplyStatus" }),
+        SpeakeasyMetadata({ data: "json, name=ParameterApplyStatus" }),
         __metadata("design:type", String)
     ], ParameterGroupStatus.prototype, "parameterApplyStatus", void 0);
     __decorate([
-        Metadata({ data: "json, name=ParameterGroupName" }),
+        SpeakeasyMetadata({ data: "json, name=ParameterGroupName" }),
         __metadata("design:type", String)
     ], ParameterGroupStatus.prototype, "parameterGroupName", void 0);
     return ParameterGroupStatus;

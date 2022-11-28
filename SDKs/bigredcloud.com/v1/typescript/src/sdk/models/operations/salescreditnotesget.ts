@@ -1,14 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class SalesCreditNotesGetResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   pageResultSalesCreditNoteQueryDto?: shared.PageResultSalesCreditNoteQueryDto;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

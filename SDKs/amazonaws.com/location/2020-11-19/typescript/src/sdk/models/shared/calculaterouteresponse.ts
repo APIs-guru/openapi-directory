@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Leg } from "./leg";
 import { CalculateRouteSummary } from "./calculateroutesummary";
+
 
 
 // CalculateRouteResponse
@@ -9,9 +9,9 @@ import { CalculateRouteSummary } from "./calculateroutesummary";
  * Returns the result of the route calculation. Metadata includes legs and route summary.
 **/
 export class CalculateRouteResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Legs", elemType: shared.Leg })
+  @SpeakeasyMetadata({ data: "json, name=Legs", elemType: Leg })
   legs: Leg[];
 
-  @Metadata({ data: "json, name=Summary" })
+  @SpeakeasyMetadata({ data: "json, name=Summary" })
   summary: CalculateRouteSummary;
 }

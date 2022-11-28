@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { File } from "./file";
+
 
 
 // FileList
@@ -8,24 +8,24 @@ import { File } from "./file";
  * A list of files.
 **/
 export class FileList extends SpeakeasyBase {
-  @Metadata({ data: "json, name=etag" })
+  @SpeakeasyMetadata({ data: "json, name=etag" })
   etag?: string;
 
-  @Metadata({ data: "json, name=incompleteSearch" })
+  @SpeakeasyMetadata({ data: "json, name=incompleteSearch" })
   incompleteSearch?: boolean;
 
-  @Metadata({ data: "json, name=items", elemType: shared.File })
+  @SpeakeasyMetadata({ data: "json, name=items", elemType: File })
   items?: File[];
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=nextLink" })
+  @SpeakeasyMetadata({ data: "json, name=nextLink" })
   nextLink?: string;
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 
-  @Metadata({ data: "json, name=selfLink" })
+  @SpeakeasyMetadata({ data: "json, name=selfLink" })
   selfLink?: string;
 }

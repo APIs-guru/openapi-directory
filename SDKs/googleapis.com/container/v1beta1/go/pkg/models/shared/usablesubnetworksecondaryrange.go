@@ -10,6 +10,8 @@ const (
 	UsableSubnetworkSecondaryRangeStatusEnumInUseManagedPod   UsableSubnetworkSecondaryRangeStatusEnum = "IN_USE_MANAGED_POD"
 )
 
+// UsableSubnetworkSecondaryRange
+// Secondary IP range of a usable subnetwork.
 type UsableSubnetworkSecondaryRange struct {
 	IPCidrRange *string                                   `json:"ipCidrRange,omitempty"`
 	RangeName   *string                                   `json:"rangeName,omitempty"`

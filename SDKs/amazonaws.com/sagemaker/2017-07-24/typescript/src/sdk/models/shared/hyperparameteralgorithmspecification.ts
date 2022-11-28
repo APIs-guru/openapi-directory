@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { MetricDefinition } from "./metricdefinition";
 import { TrainingInputModeEnum } from "./traininginputmodeenum";
+
 
 
 // HyperParameterAlgorithmSpecification
@@ -9,15 +9,15 @@ import { TrainingInputModeEnum } from "./traininginputmodeenum";
  * Specifies which training algorithm to use for training jobs that a hyperparameter tuning job launches and the metrics to monitor.
 **/
 export class HyperParameterAlgorithmSpecification extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AlgorithmName" })
+  @SpeakeasyMetadata({ data: "json, name=AlgorithmName" })
   algorithmName?: string;
 
-  @Metadata({ data: "json, name=MetricDefinitions", elemType: shared.MetricDefinition })
+  @SpeakeasyMetadata({ data: "json, name=MetricDefinitions", elemType: MetricDefinition })
   metricDefinitions?: MetricDefinition[];
 
-  @Metadata({ data: "json, name=TrainingImage" })
+  @SpeakeasyMetadata({ data: "json, name=TrainingImage" })
   trainingImage?: string;
 
-  @Metadata({ data: "json, name=TrainingInputMode" })
+  @SpeakeasyMetadata({ data: "json, name=TrainingInputMode" })
   trainingInputMode: TrainingInputModeEnum;
 }

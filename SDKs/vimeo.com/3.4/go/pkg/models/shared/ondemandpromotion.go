@@ -15,16 +15,22 @@ const (
 	OnDemandPromotionDiscountTypeEnumPercent OnDemandPromotionDiscountTypeEnum = "percent"
 )
 
+// OnDemandPromotionMetadataConnectionsCodes
+// Information about the codes associated with this promotion.
 type OnDemandPromotionMetadataConnectionsCodes struct {
 	Options []string `json:"options"`
 	Total   float64  `json:"total"`
 	URI     string   `json:"uri"`
 }
 
+// OnDemandPromotionMetadataConnections
+// A list of resource URIs related to the On Demand promotion.
 type OnDemandPromotionMetadataConnections struct {
 	Codes OnDemandPromotionMetadataConnectionsCodes `json:"codes"`
 }
 
+// OnDemandPromotionMetadata
+// The video's metadata.
 type OnDemandPromotionMetadata struct {
 	Connections OnDemandPromotionMetadataConnections `json:"connections"`
 }

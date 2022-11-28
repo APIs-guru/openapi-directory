@@ -1,5 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { MedicalContentIdentificationTypeEnum } from "./medicalcontentidentificationtypeenum";
 import { LanguageCodeEnum } from "./languagecodeenum";
 import { Media } from "./media";
@@ -12,56 +11,57 @@ import { TranscriptionJobStatusEnum } from "./transcriptionjobstatusenum";
 import { TypeEnum } from "./typeenum";
 
 
+
 // MedicalTranscriptionJob
 /** 
  * The data structure that contains the information for a medical transcription job.
 **/
 export class MedicalTranscriptionJob extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CompletionTime" })
+  @SpeakeasyMetadata({ data: "json, name=CompletionTime" })
   completionTime?: Date;
 
-  @Metadata({ data: "json, name=ContentIdentificationType" })
+  @SpeakeasyMetadata({ data: "json, name=ContentIdentificationType" })
   contentIdentificationType?: MedicalContentIdentificationTypeEnum;
 
-  @Metadata({ data: "json, name=CreationTime" })
+  @SpeakeasyMetadata({ data: "json, name=CreationTime" })
   creationTime?: Date;
 
-  @Metadata({ data: "json, name=FailureReason" })
+  @SpeakeasyMetadata({ data: "json, name=FailureReason" })
   failureReason?: string;
 
-  @Metadata({ data: "json, name=LanguageCode" })
+  @SpeakeasyMetadata({ data: "json, name=LanguageCode" })
   languageCode?: LanguageCodeEnum;
 
-  @Metadata({ data: "json, name=Media" })
+  @SpeakeasyMetadata({ data: "json, name=Media" })
   media?: Media;
 
-  @Metadata({ data: "json, name=MediaFormat" })
+  @SpeakeasyMetadata({ data: "json, name=MediaFormat" })
   mediaFormat?: MediaFormatEnum;
 
-  @Metadata({ data: "json, name=MediaSampleRateHertz" })
+  @SpeakeasyMetadata({ data: "json, name=MediaSampleRateHertz" })
   mediaSampleRateHertz?: number;
 
-  @Metadata({ data: "json, name=MedicalTranscriptionJobName" })
+  @SpeakeasyMetadata({ data: "json, name=MedicalTranscriptionJobName" })
   medicalTranscriptionJobName?: string;
 
-  @Metadata({ data: "json, name=Settings" })
+  @SpeakeasyMetadata({ data: "json, name=Settings" })
   settings?: MedicalTranscriptionSetting;
 
-  @Metadata({ data: "json, name=Specialty" })
+  @SpeakeasyMetadata({ data: "json, name=Specialty" })
   specialty?: SpecialtyEnum;
 
-  @Metadata({ data: "json, name=StartTime" })
+  @SpeakeasyMetadata({ data: "json, name=StartTime" })
   startTime?: Date;
 
-  @Metadata({ data: "json, name=Tags", elemType: shared.Tag })
+  @SpeakeasyMetadata({ data: "json, name=Tags", elemType: Tag })
   tags?: Tag[];
 
-  @Metadata({ data: "json, name=Transcript" })
+  @SpeakeasyMetadata({ data: "json, name=Transcript" })
   transcript?: MedicalTranscript;
 
-  @Metadata({ data: "json, name=TranscriptionJobStatus" })
+  @SpeakeasyMetadata({ data: "json, name=TranscriptionJobStatus" })
   transcriptionJobStatus?: TranscriptionJobStatusEnum;
 
-  @Metadata({ data: "json, name=Type" })
+  @SpeakeasyMetadata({ data: "json, name=Type" })
   type?: TypeEnum;
 }

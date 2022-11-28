@@ -4,7 +4,7 @@ from typing import Optional
 
 @dataclass
 class GetTokenPathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -15,12 +15,12 @@ class GetTokenQueryParams:
 
 @dataclass
 class GetTokenRequest:
-    path_params: GetTokenPathParams = field(default=None)
-    query_params: GetTokenQueryParams = field(default=None)
+    path_params: GetTokenPathParams = field()
+    query_params: GetTokenQueryParams = field()
     
 
 @dataclass
 class GetTokenResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

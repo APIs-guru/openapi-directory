@@ -1,15 +1,18 @@
 from dataclasses import dataclass, field
 from dataclasses_json import dataclass_json
-from . import resourcemetadata
-from . import meshspec
-from . import meshstatus
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class MeshData:
-    mesh_name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meshName' }})
-    metadata: resourcemetadata.ResourceMetadata = field(default=None, metadata={'dataclasses_json': { 'field_name': 'metadata' }})
-    spec: meshspec.MeshSpec = field(default=None, metadata={'dataclasses_json': { 'field_name': 'spec' }})
-    status: meshstatus.MeshStatus = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+    r"""MeshData
+    An object that represents a service mesh returned by a describe operation.
+    """
+    
+    mesh_name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('meshName') }})
+    metadata: ResourceMetadata = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('metadata') }})
+    spec: MeshSpec = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('spec') }})
+    status: MeshStatus = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('status') }})
     

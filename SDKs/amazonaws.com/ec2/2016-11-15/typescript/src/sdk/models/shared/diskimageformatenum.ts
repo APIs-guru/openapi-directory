@@ -1,7 +1,8 @@
 
 
+
 export enum DiskImageFormatEnum {
-    Vmdk = "VMDK"
-,    Raw = "RAW"
-,    Vhd = "VHD"
+    Vmdk = "VMDK",
+    Raw = "RAW",
+    Vhd = "VHD"
 }

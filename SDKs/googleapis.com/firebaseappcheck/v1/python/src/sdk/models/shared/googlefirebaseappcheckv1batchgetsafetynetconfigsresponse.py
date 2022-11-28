@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import googlefirebaseappcheckv1safetynetconfig
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class GoogleFirebaseAppcheckV1BatchGetSafetyNetConfigsResponse:
-    configs: Optional[List[googlefirebaseappcheckv1safetynetconfig.GoogleFirebaseAppcheckV1SafetyNetConfig]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'configs' }})
+    r"""GoogleFirebaseAppcheckV1BatchGetSafetyNetConfigsResponse
+    Response message for the BatchGetSafetyNetConfigs method.
+    """
+    
+    configs: Optional[List[GoogleFirebaseAppcheckV1SafetyNetConfig]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('configs') }})
     

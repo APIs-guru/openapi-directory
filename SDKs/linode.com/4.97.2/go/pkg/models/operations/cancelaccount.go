@@ -4,22 +4,9 @@ import (
 	"openapi/pkg/models/shared"
 )
 
-type CancelAccountSecurityOption1 struct {
-	PersonalAccessToken shared.SchemePersonalAccessToken `security:"scheme,type=http,subtype=bearer"`
-}
-
-type CancelAccountSecurityOption2 struct {
-	Oauth shared.SchemeOauth `security:"scheme,type=oauth2"`
-}
-
 type CancelAccountSecurity struct {
-	Option1 *CancelAccountSecurityOption1 `security:"option"`
-	Option2 *CancelAccountSecurityOption2 `security:"option"`
-}
-
-type CancelAccountRequest struct {
-	Request  interface{} `request:"mediaType=application/json"`
-	Security CancelAccountSecurity
+	PersonalAccessToken *shared.SchemePersonalAccessToken `security:"scheme,type=http,subtype=bearer"`
+	Oauth               *shared.SchemeOauth               `security:"scheme,type=oauth2"`
 }
 
 type CancelAccount200ApplicationJSON struct {
@@ -36,6 +23,11 @@ type CancelAccount409ApplicationJSON struct {
 
 type CancelAccountDefaultApplicationJSON struct {
 	Errors []shared.ErrorObject `json:"errors,omitempty"`
+}
+
+type CancelAccountRequest struct {
+	Request  interface{} `request:"mediaType=application/json"`
+	Security CancelAccountSecurity
 }
 
 type CancelAccountResponse struct {

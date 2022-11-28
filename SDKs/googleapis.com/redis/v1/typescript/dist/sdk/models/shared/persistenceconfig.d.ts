@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 export declare enum PersistenceConfigPersistenceModeEnum {
     PersistenceModeUnspecified = "PERSISTENCE_MODE_UNSPECIFIED",
     Disabled = "DISABLED",
@@ -10,6 +10,14 @@ export declare enum PersistenceConfigRdbSnapshotPeriodEnum {
     SixHours = "SIX_HOURS",
     TwelveHours = "TWELVE_HOURS",
     TwentyFourHours = "TWENTY_FOUR_HOURS"
+}
+/**
+ * Configuration of the persistence functionality.
+**/
+export declare class PersistenceConfigInput extends SpeakeasyBase {
+    persistenceMode?: PersistenceConfigPersistenceModeEnum;
+    rdbSnapshotPeriod?: PersistenceConfigRdbSnapshotPeriodEnum;
+    rdbSnapshotStartTime?: string;
 }
 /**
  * Configuration of the persistence functionality.

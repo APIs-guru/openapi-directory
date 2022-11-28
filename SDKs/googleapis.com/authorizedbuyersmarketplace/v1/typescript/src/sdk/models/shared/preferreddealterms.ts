@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Price } from "./price";
+
 
 
 // PreferredDealTerms
@@ -7,6 +8,6 @@ import { Price } from "./price";
  * Pricing terms for Preferred Deals.
 **/
 export class PreferredDealTerms extends SpeakeasyBase {
-  @Metadata({ data: "json, name=fixedPrice" })
+  @SpeakeasyMetadata({ data: "json, name=fixedPrice" })
   fixedPrice?: Price;
 }

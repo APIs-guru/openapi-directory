@@ -1,5 +1,7 @@
 package shared
 
+// GoogleCloudDialogflowCxV3Intent
+// An intent represents a user's intent to interact with a conversational agent. You can provide information for the Dialogflow API to use to match user input to an intent by adding training phrases (i.e., examples of user input) to your intent.
 type GoogleCloudDialogflowCxV3Intent struct {
 	Description     *string                                         `json:"description,omitempty"`
 	DisplayName     *string                                         `json:"displayName,omitempty"`

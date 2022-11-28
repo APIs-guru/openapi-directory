@@ -1,46 +1,47 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class UpdateNetworkApplianceTrafficShapingCustomPerformanceClassPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=customPerformanceClassId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=customPerformanceClassId" })
   customPerformanceClassId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=networkId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=networkId" })
   networkId: string;
 }
 
 
 export class UpdateNetworkApplianceTrafficShapingCustomPerformanceClassRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=maxJitter" })
+  @SpeakeasyMetadata({ data: "json, name=maxJitter" })
   maxJitter?: number;
 
-  @Metadata({ data: "json, name=maxLatency" })
+  @SpeakeasyMetadata({ data: "json, name=maxLatency" })
   maxLatency?: number;
 
-  @Metadata({ data: "json, name=maxLossPercentage" })
+  @SpeakeasyMetadata({ data: "json, name=maxLossPercentage" })
   maxLossPercentage?: number;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 }
 
 
 export class UpdateNetworkApplianceTrafficShapingCustomPerformanceClassRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: UpdateNetworkApplianceTrafficShapingCustomPerformanceClassPathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request?: UpdateNetworkApplianceTrafficShapingCustomPerformanceClassRequestBody;
 }
 
 
 export class UpdateNetworkApplianceTrafficShapingCustomPerformanceClassResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   updateNetworkApplianceTrafficShapingCustomPerformanceClass200ApplicationJsonObject?: Map<string, any>;
 }

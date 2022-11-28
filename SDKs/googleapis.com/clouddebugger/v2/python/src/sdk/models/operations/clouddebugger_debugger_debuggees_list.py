@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
@@ -23,14 +24,14 @@ class ClouddebuggerDebuggerDebuggeesListQueryParams:
 
 @dataclass
 class ClouddebuggerDebuggerDebuggeesListSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class ClouddebuggerDebuggerDebuggeesListSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -41,13 +42,13 @@ class ClouddebuggerDebuggerDebuggeesListSecurity:
 
 @dataclass
 class ClouddebuggerDebuggerDebuggeesListRequest:
-    query_params: ClouddebuggerDebuggerDebuggeesListQueryParams = field(default=None)
-    security: ClouddebuggerDebuggerDebuggeesListSecurity = field(default=None)
+    query_params: ClouddebuggerDebuggerDebuggeesListQueryParams = field()
+    security: ClouddebuggerDebuggerDebuggeesListSecurity = field()
     
 
 @dataclass
 class ClouddebuggerDebuggerDebuggeesListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     list_debuggees_response: Optional[shared.ListDebuggeesResponse] = field(default=None)
-    status_code: int = field(default=None)
     

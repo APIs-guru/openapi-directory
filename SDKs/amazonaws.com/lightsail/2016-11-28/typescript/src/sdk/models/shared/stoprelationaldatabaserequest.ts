@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class StopRelationalDatabaseRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=relationalDatabaseName" })
+  @SpeakeasyMetadata({ data: "json, name=relationalDatabaseName" })
   relationalDatabaseName: string;
 
-  @Metadata({ data: "json, name=relationalDatabaseSnapshotName" })
+  @SpeakeasyMetadata({ data: "json, name=relationalDatabaseSnapshotName" })
   relationalDatabaseSnapshotName?: string;
 }

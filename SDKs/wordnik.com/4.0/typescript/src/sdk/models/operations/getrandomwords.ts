@@ -1,68 +1,69 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum GetRandomWordsSortByEnum {
-    Alpha = "alpha"
-,    Count = "count"
+    Alpha = "alpha",
+    Count = "count"
 }
 
 export enum GetRandomWordsSortOrderEnum {
-    Asc = "asc"
-,    Desc = "desc"
+    Asc = "asc",
+    Desc = "desc"
 }
 
 
 export class GetRandomWordsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=excludePartOfSpeech" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=excludePartOfSpeech" })
   excludePartOfSpeech?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=hasDictionaryDef" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=hasDictionaryDef" })
   hasDictionaryDef?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=includePartOfSpeech" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=includePartOfSpeech" })
   includePartOfSpeech?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=limit" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=limit" })
   limit?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=maxCorpusCount" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=maxCorpusCount" })
   maxCorpusCount?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=maxDictionaryCount" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=maxDictionaryCount" })
   maxDictionaryCount?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=maxLength" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=maxLength" })
   maxLength?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=minCorpusCount" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=minCorpusCount" })
   minCorpusCount?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=minDictionaryCount" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=minDictionaryCount" })
   minDictionaryCount?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=minLength" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=minLength" })
   minLength?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=sortBy" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sortBy" })
   sortBy?: GetRandomWordsSortByEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=sortOrder" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sortOrder" })
   sortOrder?: GetRandomWordsSortOrderEnum;
 }
 
 
 export class GetRandomWordsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetRandomWordsQueryParams;
 }
 
 
 export class GetRandomWordsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

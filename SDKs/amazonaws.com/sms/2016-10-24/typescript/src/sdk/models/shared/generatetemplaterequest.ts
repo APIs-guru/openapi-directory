@@ -1,11 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { OutputFormatEnum } from "./outputformatenum";
 
 
+
 export class GenerateTemplateRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=appId" })
+  @SpeakeasyMetadata({ data: "json, name=appId" })
   appId?: string;
 
-  @Metadata({ data: "json, name=templateFormat" })
+  @SpeakeasyMetadata({ data: "json, name=templateFormat" })
   templateFormat?: OutputFormatEnum;
 }

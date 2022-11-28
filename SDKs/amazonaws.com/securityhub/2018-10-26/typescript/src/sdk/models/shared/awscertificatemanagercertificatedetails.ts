@@ -1,5 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AwsCertificateManagerCertificateDomainValidationOption } from "./awscertificatemanagercertificatedomainvalidationoption";
 import { AwsCertificateManagerCertificateExtendedKeyUsage } from "./awscertificatemanagercertificateextendedkeyusage";
 import { AwsCertificateManagerCertificateKeyUsage } from "./awscertificatemanagercertificatekeyusage";
@@ -7,77 +6,78 @@ import { AwsCertificateManagerCertificateOptions } from "./awscertificatemanager
 import { AwsCertificateManagerCertificateRenewalSummary } from "./awscertificatemanagercertificaterenewalsummary";
 
 
+
 // AwsCertificateManagerCertificateDetails
 /** 
  * Provides details about an Certificate Manager certificate.
 **/
 export class AwsCertificateManagerCertificateDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CertificateAuthorityArn" })
+  @SpeakeasyMetadata({ data: "json, name=CertificateAuthorityArn" })
   certificateAuthorityArn?: string;
 
-  @Metadata({ data: "json, name=CreatedAt" })
+  @SpeakeasyMetadata({ data: "json, name=CreatedAt" })
   createdAt?: string;
 
-  @Metadata({ data: "json, name=DomainName" })
+  @SpeakeasyMetadata({ data: "json, name=DomainName" })
   domainName?: string;
 
-  @Metadata({ data: "json, name=DomainValidationOptions", elemType: shared.AwsCertificateManagerCertificateDomainValidationOption })
+  @SpeakeasyMetadata({ data: "json, name=DomainValidationOptions", elemType: AwsCertificateManagerCertificateDomainValidationOption })
   domainValidationOptions?: AwsCertificateManagerCertificateDomainValidationOption[];
 
-  @Metadata({ data: "json, name=ExtendedKeyUsages", elemType: shared.AwsCertificateManagerCertificateExtendedKeyUsage })
+  @SpeakeasyMetadata({ data: "json, name=ExtendedKeyUsages", elemType: AwsCertificateManagerCertificateExtendedKeyUsage })
   extendedKeyUsages?: AwsCertificateManagerCertificateExtendedKeyUsage[];
 
-  @Metadata({ data: "json, name=FailureReason" })
+  @SpeakeasyMetadata({ data: "json, name=FailureReason" })
   failureReason?: string;
 
-  @Metadata({ data: "json, name=ImportedAt" })
+  @SpeakeasyMetadata({ data: "json, name=ImportedAt" })
   importedAt?: string;
 
-  @Metadata({ data: "json, name=InUseBy" })
+  @SpeakeasyMetadata({ data: "json, name=InUseBy" })
   inUseBy?: string[];
 
-  @Metadata({ data: "json, name=IssuedAt" })
+  @SpeakeasyMetadata({ data: "json, name=IssuedAt" })
   issuedAt?: string;
 
-  @Metadata({ data: "json, name=Issuer" })
+  @SpeakeasyMetadata({ data: "json, name=Issuer" })
   issuer?: string;
 
-  @Metadata({ data: "json, name=KeyAlgorithm" })
+  @SpeakeasyMetadata({ data: "json, name=KeyAlgorithm" })
   keyAlgorithm?: string;
 
-  @Metadata({ data: "json, name=KeyUsages", elemType: shared.AwsCertificateManagerCertificateKeyUsage })
+  @SpeakeasyMetadata({ data: "json, name=KeyUsages", elemType: AwsCertificateManagerCertificateKeyUsage })
   keyUsages?: AwsCertificateManagerCertificateKeyUsage[];
 
-  @Metadata({ data: "json, name=NotAfter" })
+  @SpeakeasyMetadata({ data: "json, name=NotAfter" })
   notAfter?: string;
 
-  @Metadata({ data: "json, name=NotBefore" })
+  @SpeakeasyMetadata({ data: "json, name=NotBefore" })
   notBefore?: string;
 
-  @Metadata({ data: "json, name=Options" })
+  @SpeakeasyMetadata({ data: "json, name=Options" })
   options?: AwsCertificateManagerCertificateOptions;
 
-  @Metadata({ data: "json, name=RenewalEligibility" })
+  @SpeakeasyMetadata({ data: "json, name=RenewalEligibility" })
   renewalEligibility?: string;
 
-  @Metadata({ data: "json, name=RenewalSummary" })
+  @SpeakeasyMetadata({ data: "json, name=RenewalSummary" })
   renewalSummary?: AwsCertificateManagerCertificateRenewalSummary;
 
-  @Metadata({ data: "json, name=Serial" })
+  @SpeakeasyMetadata({ data: "json, name=Serial" })
   serial?: string;
 
-  @Metadata({ data: "json, name=SignatureAlgorithm" })
+  @SpeakeasyMetadata({ data: "json, name=SignatureAlgorithm" })
   signatureAlgorithm?: string;
 
-  @Metadata({ data: "json, name=Status" })
+  @SpeakeasyMetadata({ data: "json, name=Status" })
   status?: string;
 
-  @Metadata({ data: "json, name=Subject" })
+  @SpeakeasyMetadata({ data: "json, name=Subject" })
   subject?: string;
 
-  @Metadata({ data: "json, name=SubjectAlternativeNames" })
+  @SpeakeasyMetadata({ data: "json, name=SubjectAlternativeNames" })
   subjectAlternativeNames?: string[];
 
-  @Metadata({ data: "json, name=Type" })
+  @SpeakeasyMetadata({ data: "json, name=Type" })
   type?: string;
 }

@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 class GamesScoresListCollectionEnum(str, Enum):
@@ -11,8 +12,8 @@ class GamesScoresListCollectionEnum(str, Enum):
 
 @dataclass
 class GamesScoresListPathParams:
-    collection: GamesScoresListCollectionEnum = field(default=None, metadata={'path_param': { 'field_name': 'collection', 'style': 'simple', 'explode': False }})
-    leaderboard_id: str = field(default=None, metadata={'path_param': { 'field_name': 'leaderboardId', 'style': 'simple', 'explode': False }})
+    collection: GamesScoresListCollectionEnum = field(metadata={'path_param': { 'field_name': 'collection', 'style': 'simple', 'explode': False }})
+    leaderboard_id: str = field(metadata={'path_param': { 'field_name': 'leaderboardId', 'style': 'simple', 'explode': False }})
     
 class GamesScoresListTimeSpanEnum(str, Enum):
     SCORE_TIME_SPAN_UNSPECIFIED = "SCORE_TIME_SPAN_UNSPECIFIED"
@@ -23,6 +24,7 @@ class GamesScoresListTimeSpanEnum(str, Enum):
 
 @dataclass
 class GamesScoresListQueryParams:
+    time_span: GamesScoresListTimeSpanEnum = field(metadata={'query_param': { 'field_name': 'timeSpan', 'style': 'form', 'explode': True }})
     dollar_xgafv: Optional[shared.XgafvEnum] = field(default=None, metadata={'query_param': { 'field_name': '$.xgafv', 'style': 'form', 'explode': True }})
     access_token: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'access_token', 'style': 'form', 'explode': True }})
     alt: Optional[shared.AltEnum] = field(default=None, metadata={'query_param': { 'field_name': 'alt', 'style': 'form', 'explode': True }})
@@ -35,27 +37,26 @@ class GamesScoresListQueryParams:
     page_token: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'pageToken', 'style': 'form', 'explode': True }})
     pretty_print: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'prettyPrint', 'style': 'form', 'explode': True }})
     quota_user: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'quotaUser', 'style': 'form', 'explode': True }})
-    time_span: GamesScoresListTimeSpanEnum = field(default=None, metadata={'query_param': { 'field_name': 'timeSpan', 'style': 'form', 'explode': True }})
     upload_type: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'uploadType', 'style': 'form', 'explode': True }})
     upload_protocol: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'upload_protocol', 'style': 'form', 'explode': True }})
     
 
 @dataclass
 class GamesScoresListSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class GamesScoresListRequest:
-    path_params: GamesScoresListPathParams = field(default=None)
-    query_params: GamesScoresListQueryParams = field(default=None)
-    security: GamesScoresListSecurity = field(default=None)
+    path_params: GamesScoresListPathParams = field()
+    query_params: GamesScoresListQueryParams = field()
+    security: GamesScoresListSecurity = field()
     
 
 @dataclass
 class GamesScoresListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     leaderboard_scores: Optional[shared.LeaderboardScores] = field(default=None)
-    status_code: int = field(default=None)
     

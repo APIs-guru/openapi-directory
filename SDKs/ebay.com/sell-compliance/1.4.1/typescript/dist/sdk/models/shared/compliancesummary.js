@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { ComplianceSummaryInfo } from "./compliancesummaryinfo";
 // ComplianceSummary
 /**
  * This type is the base type for the getListingViolationsSummary response. The violationSummaries container contains an array of policy violation counts for each unique eBay marketplace and compliance type violation.
@@ -34,7 +34,7 @@ var ComplianceSummary = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=violationSummaries", elemType: shared.ComplianceSummaryInfo }),
+        SpeakeasyMetadata({ data: "json, name=violationSummaries", elemType: ComplianceSummaryInfo }),
         __metadata("design:type", Array)
     ], ComplianceSummary.prototype, "violationSummaries", void 0);
     return ComplianceSummary;

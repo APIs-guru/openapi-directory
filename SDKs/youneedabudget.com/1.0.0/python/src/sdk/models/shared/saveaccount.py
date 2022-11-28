@@ -1,6 +1,7 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class SaveAccountTypeEnum(str, Enum):
     CHECKING = "checking"
@@ -15,7 +16,7 @@ class SaveAccountTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class SaveAccount:
-    balance: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'balance' }})
-    name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    type: SaveAccountTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    balance: int = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('balance') }})
+    name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    type: SaveAccountTypeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('type') }})
     

@@ -1,24 +1,25 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum AccessTokenTypeEnum {
-    UserAccount = "UserAccount"
-,    UserProfile = "UserProfile"
+    UserAccount = "UserAccount",
+    UserProfile = "UserProfile"
 }
 
 
 export class AccessToken extends SpeakeasyBase {
-  @Metadata({ data: "json, name=accountCreated" })
+  @SpeakeasyMetadata({ data: "json, name=accountCreated" })
   accountCreated?: boolean;
 
-  @Metadata({ data: "json, name=expirationDate" })
+  @SpeakeasyMetadata({ data: "json, name=expirationDate" })
   expirationDate: Date;
 
-  @Metadata({ data: "json, name=refreshable" })
+  @SpeakeasyMetadata({ data: "json, name=refreshable" })
   refreshable: boolean;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type: AccessTokenTypeEnum;
 
-  @Metadata({ data: "json, name=value" })
+  @SpeakeasyMetadata({ data: "json, name=value" })
   value: string;
 }

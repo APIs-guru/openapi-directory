@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { NetworkPerformanceConfig } from "./networkperformanceconfig";
+
 
 
 // NodeNetworkConfig
@@ -7,15 +8,18 @@ import { NetworkPerformanceConfig } from "./networkperformanceconfig";
  * Parameters for node pool-level network config.
 **/
 export class NodeNetworkConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=createPodRange" })
+  @SpeakeasyMetadata({ data: "json, name=createPodRange" })
   createPodRange?: boolean;
 
-  @Metadata({ data: "json, name=networkPerformanceConfig" })
+  @SpeakeasyMetadata({ data: "json, name=enablePrivateNodes" })
+  enablePrivateNodes?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=networkPerformanceConfig" })
   networkPerformanceConfig?: NetworkPerformanceConfig;
 
-  @Metadata({ data: "json, name=podIpv4CidrBlock" })
+  @SpeakeasyMetadata({ data: "json, name=podIpv4CidrBlock" })
   podIpv4CidrBlock?: string;
 
-  @Metadata({ data: "json, name=podRange" })
+  @SpeakeasyMetadata({ data: "json, name=podRange" })
   podRange?: string;
 }

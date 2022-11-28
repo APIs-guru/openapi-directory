@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// BonusPayment
+// An object representing a Bonus payment paid to a Worker.
 type BonusPayment struct {
 	AssignmentID *string    `json:"AssignmentId,omitempty"`
 	BonusAmount  *string    `json:"BonusAmount,omitempty"`

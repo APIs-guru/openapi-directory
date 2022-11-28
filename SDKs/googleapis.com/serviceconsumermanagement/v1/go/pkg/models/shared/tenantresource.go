@@ -11,6 +11,8 @@ const (
 	TenantResourceStatusEnumDeleted           TenantResourceStatusEnum = "DELETED"
 )
 
+// TenantResource
+// Resource constituting the TenancyUnit.
 type TenantResource struct {
 	Resource *string                   `json:"resource,omitempty"`
 	Status   *TenantResourceStatusEnum `json:"status,omitempty"`

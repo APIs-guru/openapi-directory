@@ -1,16 +1,17 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class CreateEnvironmentAccountConnectionInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=clientToken" })
+  @SpeakeasyMetadata({ data: "json, name=clientToken" })
   clientToken?: string;
 
-  @Metadata({ data: "json, name=environmentName" })
+  @SpeakeasyMetadata({ data: "json, name=environmentName" })
   environmentName: string;
 
-  @Metadata({ data: "json, name=managementAccountId" })
+  @SpeakeasyMetadata({ data: "json, name=managementAccountId" })
   managementAccountId: string;
 
-  @Metadata({ data: "json, name=roleArn" })
+  @SpeakeasyMetadata({ data: "json, name=roleArn" })
   roleArn: string;
 }

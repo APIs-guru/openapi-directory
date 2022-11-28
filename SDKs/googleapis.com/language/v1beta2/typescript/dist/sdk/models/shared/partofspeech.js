@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var PartOfSpeechAspectEnum;
 (function (PartOfSpeechAspectEnum) {
     PartOfSpeechAspectEnum["AspectUnknown"] = "ASPECT_UNKNOWN";
@@ -151,51 +151,51 @@ var PartOfSpeech = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=aspect" }),
+        SpeakeasyMetadata({ data: "json, name=aspect" }),
         __metadata("design:type", String)
     ], PartOfSpeech.prototype, "aspect", void 0);
     __decorate([
-        Metadata({ data: "json, name=case" }),
+        SpeakeasyMetadata({ data: "json, name=case" }),
         __metadata("design:type", String)
     ], PartOfSpeech.prototype, "case", void 0);
     __decorate([
-        Metadata({ data: "json, name=form" }),
+        SpeakeasyMetadata({ data: "json, name=form" }),
         __metadata("design:type", String)
     ], PartOfSpeech.prototype, "form", void 0);
     __decorate([
-        Metadata({ data: "json, name=gender" }),
+        SpeakeasyMetadata({ data: "json, name=gender" }),
         __metadata("design:type", String)
     ], PartOfSpeech.prototype, "gender", void 0);
     __decorate([
-        Metadata({ data: "json, name=mood" }),
+        SpeakeasyMetadata({ data: "json, name=mood" }),
         __metadata("design:type", String)
     ], PartOfSpeech.prototype, "mood", void 0);
     __decorate([
-        Metadata({ data: "json, name=number" }),
+        SpeakeasyMetadata({ data: "json, name=number" }),
         __metadata("design:type", String)
     ], PartOfSpeech.prototype, "number", void 0);
     __decorate([
-        Metadata({ data: "json, name=person" }),
+        SpeakeasyMetadata({ data: "json, name=person" }),
         __metadata("design:type", String)
     ], PartOfSpeech.prototype, "person", void 0);
     __decorate([
-        Metadata({ data: "json, name=proper" }),
+        SpeakeasyMetadata({ data: "json, name=proper" }),
         __metadata("design:type", String)
     ], PartOfSpeech.prototype, "proper", void 0);
     __decorate([
-        Metadata({ data: "json, name=reciprocity" }),
+        SpeakeasyMetadata({ data: "json, name=reciprocity" }),
         __metadata("design:type", String)
     ], PartOfSpeech.prototype, "reciprocity", void 0);
     __decorate([
-        Metadata({ data: "json, name=tag" }),
+        SpeakeasyMetadata({ data: "json, name=tag" }),
         __metadata("design:type", String)
     ], PartOfSpeech.prototype, "tag", void 0);
     __decorate([
-        Metadata({ data: "json, name=tense" }),
+        SpeakeasyMetadata({ data: "json, name=tense" }),
         __metadata("design:type", String)
     ], PartOfSpeech.prototype, "tense", void 0);
     __decorate([
-        Metadata({ data: "json, name=voice" }),
+        SpeakeasyMetadata({ data: "json, name=voice" }),
         __metadata("design:type", String)
     ], PartOfSpeech.prototype, "voice", void 0);
     return PartOfSpeech;

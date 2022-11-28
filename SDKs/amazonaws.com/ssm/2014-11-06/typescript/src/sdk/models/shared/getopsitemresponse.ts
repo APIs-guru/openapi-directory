@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { OpsItem } from "./opsitem";
 
 
+
 export class GetOpsItemResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=OpsItem" })
+  @SpeakeasyMetadata({ data: "json, name=OpsItem" })
   opsItem?: OpsItem;
 }

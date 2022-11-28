@@ -1,69 +1,124 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SecretEnvVar } from "./secretenvvar";
 import { SecretVolume } from "./secretvolume";
 
+
 export enum ServiceConfigIngressSettingsEnum {
-    IngressSettingsUnspecified = "INGRESS_SETTINGS_UNSPECIFIED"
-,    AllowAll = "ALLOW_ALL"
-,    AllowInternalOnly = "ALLOW_INTERNAL_ONLY"
-,    AllowInternalAndGclb = "ALLOW_INTERNAL_AND_GCLB"
+    IngressSettingsUnspecified = "INGRESS_SETTINGS_UNSPECIFIED",
+    AllowAll = "ALLOW_ALL",
+    AllowInternalOnly = "ALLOW_INTERNAL_ONLY",
+    AllowInternalAndGclb = "ALLOW_INTERNAL_AND_GCLB"
+}
+
+export enum ServiceConfigSecurityLevelEnum {
+    SecurityLevelUnspecified = "SECURITY_LEVEL_UNSPECIFIED",
+    SecureAlways = "SECURE_ALWAYS",
+    SecureOptional = "SECURE_OPTIONAL"
 }
 
 export enum ServiceConfigVpcConnectorEgressSettingsEnum {
-    VpcConnectorEgressSettingsUnspecified = "VPC_CONNECTOR_EGRESS_SETTINGS_UNSPECIFIED"
-,    PrivateRangesOnly = "PRIVATE_RANGES_ONLY"
-,    AllTraffic = "ALL_TRAFFIC"
+    VpcConnectorEgressSettingsUnspecified = "VPC_CONNECTOR_EGRESS_SETTINGS_UNSPECIFIED",
+    PrivateRangesOnly = "PRIVATE_RANGES_ONLY",
+    AllTraffic = "ALL_TRAFFIC"
+}
+
+
+// ServiceConfigInput
+/** 
+ * Describes the Service being deployed. Currently Supported : Cloud Run (fully managed). Next tag: 23
+**/
+export class ServiceConfigInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=allTrafficOnLatestRevision" })
+  allTrafficOnLatestRevision?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=availableMemory" })
+  availableMemory?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=environmentVariables" })
+  environmentVariables?: Map<string, string>;
+
+  @SpeakeasyMetadata({ data: "json, name=ingressSettings" })
+  ingressSettings?: ServiceConfigIngressSettingsEnum;
+
+  @SpeakeasyMetadata({ data: "json, name=maxInstanceCount" })
+  maxInstanceCount?: number;
+
+  @SpeakeasyMetadata({ data: "json, name=minInstanceCount" })
+  minInstanceCount?: number;
+
+  @SpeakeasyMetadata({ data: "json, name=secretEnvironmentVariables", elemType: SecretEnvVar })
+  secretEnvironmentVariables?: SecretEnvVar[];
+
+  @SpeakeasyMetadata({ data: "json, name=secretVolumes", elemType: SecretVolume })
+  secretVolumes?: SecretVolume[];
+
+  @SpeakeasyMetadata({ data: "json, name=securityLevel" })
+  securityLevel?: ServiceConfigSecurityLevelEnum;
+
+  @SpeakeasyMetadata({ data: "json, name=serviceAccountEmail" })
+  serviceAccountEmail?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=timeoutSeconds" })
+  timeoutSeconds?: number;
+
+  @SpeakeasyMetadata({ data: "json, name=vpcConnector" })
+  vpcConnector?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=vpcConnectorEgressSettings" })
+  vpcConnectorEgressSettings?: ServiceConfigVpcConnectorEgressSettingsEnum;
 }
 
 
 // ServiceConfig
 /** 
- * Describes the Service being deployed. Currently Supported : Cloud Run (fully managed).
+ * Describes the Service being deployed. Currently Supported : Cloud Run (fully managed). Next tag: 23
 **/
 export class ServiceConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=allTrafficOnLatestRevision" })
+  @SpeakeasyMetadata({ data: "json, name=allTrafficOnLatestRevision" })
   allTrafficOnLatestRevision?: boolean;
 
-  @Metadata({ data: "json, name=availableMemory" })
+  @SpeakeasyMetadata({ data: "json, name=availableMemory" })
   availableMemory?: string;
 
-  @Metadata({ data: "json, name=environmentVariables" })
+  @SpeakeasyMetadata({ data: "json, name=environmentVariables" })
   environmentVariables?: Map<string, string>;
 
-  @Metadata({ data: "json, name=ingressSettings" })
+  @SpeakeasyMetadata({ data: "json, name=ingressSettings" })
   ingressSettings?: ServiceConfigIngressSettingsEnum;
 
-  @Metadata({ data: "json, name=maxInstanceCount" })
+  @SpeakeasyMetadata({ data: "json, name=maxInstanceCount" })
   maxInstanceCount?: number;
 
-  @Metadata({ data: "json, name=minInstanceCount" })
+  @SpeakeasyMetadata({ data: "json, name=minInstanceCount" })
   minInstanceCount?: number;
 
-  @Metadata({ data: "json, name=revision" })
+  @SpeakeasyMetadata({ data: "json, name=revision" })
   revision?: string;
 
-  @Metadata({ data: "json, name=secretEnvironmentVariables", elemType: shared.SecretEnvVar })
+  @SpeakeasyMetadata({ data: "json, name=secretEnvironmentVariables", elemType: SecretEnvVar })
   secretEnvironmentVariables?: SecretEnvVar[];
 
-  @Metadata({ data: "json, name=secretVolumes", elemType: shared.SecretVolume })
+  @SpeakeasyMetadata({ data: "json, name=secretVolumes", elemType: SecretVolume })
   secretVolumes?: SecretVolume[];
 
-  @Metadata({ data: "json, name=service" })
+  @SpeakeasyMetadata({ data: "json, name=securityLevel" })
+  securityLevel?: ServiceConfigSecurityLevelEnum;
+
+  @SpeakeasyMetadata({ data: "json, name=service" })
   service?: string;
 
-  @Metadata({ data: "json, name=serviceAccountEmail" })
+  @SpeakeasyMetadata({ data: "json, name=serviceAccountEmail" })
   serviceAccountEmail?: string;
 
-  @Metadata({ data: "json, name=timeoutSeconds" })
+  @SpeakeasyMetadata({ data: "json, name=timeoutSeconds" })
   timeoutSeconds?: number;
 
-  @Metadata({ data: "json, name=uri" })
+  @SpeakeasyMetadata({ data: "json, name=uri" })
   uri?: string;
 
-  @Metadata({ data: "json, name=vpcConnector" })
+  @SpeakeasyMetadata({ data: "json, name=vpcConnector" })
   vpcConnector?: string;
 
-  @Metadata({ data: "json, name=vpcConnectorEgressSettings" })
+  @SpeakeasyMetadata({ data: "json, name=vpcConnectorEgressSettings" })
   vpcConnectorEgressSettings?: ServiceConfigVpcConnectorEgressSettingsEnum;
 }

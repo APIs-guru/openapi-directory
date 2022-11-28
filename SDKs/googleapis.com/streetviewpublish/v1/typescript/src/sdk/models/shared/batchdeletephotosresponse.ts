@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Status } from "./status";
+
 
 
 // BatchDeletePhotosResponse
@@ -8,6 +8,6 @@ import { Status } from "./status";
  * Response to batch delete of one or more Photos.
 **/
 export class BatchDeletePhotosResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=status", elemType: shared.Status })
+  @SpeakeasyMetadata({ data: "json, name=status", elemType: Status })
   status?: Status[];
 }

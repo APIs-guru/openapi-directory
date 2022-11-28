@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { GoogleFirebaseAppcheckV1SafetyNetConfig } from "./googlefirebaseappcheckv1safetynetconfig";
 // GoogleFirebaseAppcheckV1BatchGetSafetyNetConfigsResponse
 /**
  * Response message for the BatchGetSafetyNetConfigs method.
@@ -34,7 +34,7 @@ var GoogleFirebaseAppcheckV1BatchGetSafetyNetConfigsResponse = /** @class */ (fu
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=configs", elemType: shared.GoogleFirebaseAppcheckV1SafetyNetConfig }),
+        SpeakeasyMetadata({ data: "json, name=configs", elemType: GoogleFirebaseAppcheckV1SafetyNetConfig }),
         __metadata("design:type", Array)
     ], GoogleFirebaseAppcheckV1BatchGetSafetyNetConfigsResponse.prototype, "configs", void 0);
     return GoogleFirebaseAppcheckV1BatchGetSafetyNetConfigsResponse;

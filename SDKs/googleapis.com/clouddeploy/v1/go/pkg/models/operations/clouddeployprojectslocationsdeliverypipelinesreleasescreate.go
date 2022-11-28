@@ -33,7 +33,7 @@ type ClouddeployProjectsLocationsDeliveryPipelinesReleasesCreateSecurity struct 
 type ClouddeployProjectsLocationsDeliveryPipelinesReleasesCreateRequest struct {
 	PathParams  ClouddeployProjectsLocationsDeliveryPipelinesReleasesCreatePathParams
 	QueryParams ClouddeployProjectsLocationsDeliveryPipelinesReleasesCreateQueryParams
-	Request     *shared.Release `request:"mediaType=application/json"`
+	Request     *shared.ReleaseInput `request:"mediaType=application/json"`
 	Security    ClouddeployProjectsLocationsDeliveryPipelinesReleasesCreateSecurity
 }
 

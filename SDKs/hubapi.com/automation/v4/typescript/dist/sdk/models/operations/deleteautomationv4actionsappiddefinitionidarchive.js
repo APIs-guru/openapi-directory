@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var DeleteAutomationV4ActionsAppIdDefinitionIdArchivePathParams = /** @class */ (function (_super) {
     __extends(DeleteAutomationV4ActionsAppIdDefinitionIdArchivePathParams, _super);
@@ -30,11 +30,11 @@ var DeleteAutomationV4ActionsAppIdDefinitionIdArchivePathParams = /** @class */ 
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=appId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=appId" }),
         __metadata("design:type", Number)
     ], DeleteAutomationV4ActionsAppIdDefinitionIdArchivePathParams.prototype, "appId", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=definitionId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=definitionId" }),
         __metadata("design:type", String)
     ], DeleteAutomationV4ActionsAppIdDefinitionIdArchivePathParams.prototype, "definitionId", void 0);
     return DeleteAutomationV4ActionsAppIdDefinitionIdArchivePathParams;
@@ -46,7 +46,7 @@ var DeleteAutomationV4ActionsAppIdDefinitionIdArchiveSecurity = /** @class */ (f
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=query" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=query" }),
         __metadata("design:type", shared.SchemeDeveloperHapikey)
     ], DeleteAutomationV4ActionsAppIdDefinitionIdArchiveSecurity.prototype, "developerHapikey", void 0);
     return DeleteAutomationV4ActionsAppIdDefinitionIdArchiveSecurity;
@@ -58,11 +58,11 @@ var DeleteAutomationV4ActionsAppIdDefinitionIdArchiveRequest = /** @class */ (fu
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", DeleteAutomationV4ActionsAppIdDefinitionIdArchivePathParams)
     ], DeleteAutomationV4ActionsAppIdDefinitionIdArchiveRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", DeleteAutomationV4ActionsAppIdDefinitionIdArchiveSecurity)
     ], DeleteAutomationV4ActionsAppIdDefinitionIdArchiveRequest.prototype, "security", void 0);
     return DeleteAutomationV4ActionsAppIdDefinitionIdArchiveRequest;
@@ -74,15 +74,15 @@ var DeleteAutomationV4ActionsAppIdDefinitionIdArchiveResponse = /** @class */ (f
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], DeleteAutomationV4ActionsAppIdDefinitionIdArchiveResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], DeleteAutomationV4ActionsAppIdDefinitionIdArchiveResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], DeleteAutomationV4ActionsAppIdDefinitionIdArchiveResponse.prototype, "statusCode", void 0);
     return DeleteAutomationV4ActionsAppIdDefinitionIdArchiveResponse;

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { FunctionDefinitionVersion } from "./functiondefinitionversion";
 export declare class GetFunctionDefinitionVersionResponse extends SpeakeasyBase {
     arn?: string;

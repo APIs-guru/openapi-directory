@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetDomainsTldZoneIdSearchPathParams = /** @class */ (function (_super) {
     __extends(GetDomainsTldZoneIdSearchPathParams, _super);
@@ -30,7 +30,7 @@ var GetDomainsTldZoneIdSearchPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=zone_id" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=zone_id" }),
         __metadata("design:type", String)
     ], GetDomainsTldZoneIdSearchPathParams.prototype, "zoneId", void 0);
     return GetDomainsTldZoneIdSearchPathParams;
@@ -42,51 +42,51 @@ var GetDomainsTldZoneIdSearchQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=A" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=A" }),
         __metadata("design:type", String)
     ], GetDomainsTldZoneIdSearchQueryParams.prototype, "a", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=CNAME" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=CNAME" }),
         __metadata("design:type", String)
     ], GetDomainsTldZoneIdSearchQueryParams.prototype, "cname", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=MX" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=MX" }),
         __metadata("design:type", String)
     ], GetDomainsTldZoneIdSearchQueryParams.prototype, "mx", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=NS" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=NS" }),
         __metadata("design:type", String)
     ], GetDomainsTldZoneIdSearchQueryParams.prototype, "ns", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=TXT" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=TXT" }),
         __metadata("design:type", String)
     ], GetDomainsTldZoneIdSearchQueryParams.prototype, "txt", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=api_key" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=api_key" }),
         __metadata("design:type", String)
     ], GetDomainsTldZoneIdSearchQueryParams.prototype, "apiKey", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=country" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=country" }),
         __metadata("design:type", String)
     ], GetDomainsTldZoneIdSearchQueryParams.prototype, "country", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=date" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=date" }),
         __metadata("design:type", String)
     ], GetDomainsTldZoneIdSearchQueryParams.prototype, "date", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=domain" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=domain" }),
         __metadata("design:type", String)
     ], GetDomainsTldZoneIdSearchQueryParams.prototype, "domain", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=isDead" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=isDead" }),
         __metadata("design:type", Boolean)
     ], GetDomainsTldZoneIdSearchQueryParams.prototype, "isDead", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=limit" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=limit" }),
         __metadata("design:type", Number)
     ], GetDomainsTldZoneIdSearchQueryParams.prototype, "limit", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=page" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page" }),
         __metadata("design:type", String)
     ], GetDomainsTldZoneIdSearchQueryParams.prototype, "page", void 0);
     return GetDomainsTldZoneIdSearchQueryParams;
@@ -98,11 +98,11 @@ var GetDomainsTldZoneIdSearchRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetDomainsTldZoneIdSearchPathParams)
     ], GetDomainsTldZoneIdSearchRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetDomainsTldZoneIdSearchQueryParams)
     ], GetDomainsTldZoneIdSearchRequest.prototype, "queryParams", void 0);
     return GetDomainsTldZoneIdSearchRequest;
@@ -114,15 +114,15 @@ var GetDomainsTldZoneIdSearchResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetDomainsTldZoneIdSearchResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.SearchResults)
     ], GetDomainsTldZoneIdSearchResponse.prototype, "searchResults", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetDomainsTldZoneIdSearchResponse.prototype, "statusCode", void 0);
     return GetDomainsTldZoneIdSearchResponse;

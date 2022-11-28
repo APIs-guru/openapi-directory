@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Evaluation } from "./evaluation";
+
 
 
 // PutEvaluationsRequest
@@ -8,12 +8,12 @@ import { Evaluation } from "./evaluation";
  * <p/>
 **/
 export class PutEvaluationsRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Evaluations", elemType: shared.Evaluation })
+  @SpeakeasyMetadata({ data: "json, name=Evaluations", elemType: Evaluation })
   evaluations?: Evaluation[];
 
-  @Metadata({ data: "json, name=ResultToken" })
+  @SpeakeasyMetadata({ data: "json, name=ResultToken" })
   resultToken: string;
 
-  @Metadata({ data: "json, name=TestMode" })
+  @SpeakeasyMetadata({ data: "json, name=TestMode" })
   testMode?: boolean;
 }

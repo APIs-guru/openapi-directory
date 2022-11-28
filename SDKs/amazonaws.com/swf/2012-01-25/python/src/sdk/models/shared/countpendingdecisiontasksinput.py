@@ -1,12 +1,12 @@
 from dataclasses import dataclass, field
-from typing import List
 from dataclasses_json import dataclass_json
-from . import tasklist
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class CountPendingDecisionTasksInput:
-    domain: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'domain' }})
-    task_list: tasklist.TaskList = field(default=None, metadata={'dataclasses_json': { 'field_name': 'taskList' }})
+    domain: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('domain') }})
+    task_list: TaskList = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('taskList') }})
     

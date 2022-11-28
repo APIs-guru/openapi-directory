@@ -1,13 +1,28 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ApprovalConfig } from "./approvalconfig";
+import { ApprovalResultInput } from "./approvalresult";
 import { ApprovalResult } from "./approvalresult";
 
+
 export enum BuildApprovalStateEnum {
-    StateUnspecified = "STATE_UNSPECIFIED"
-,    Pending = "PENDING"
-,    Approved = "APPROVED"
-,    Rejected = "REJECTED"
-,    Cancelled = "CANCELLED"
+    StateUnspecified = "STATE_UNSPECIFIED",
+    Pending = "PENDING",
+    Approved = "APPROVED",
+    Rejected = "REJECTED",
+    Cancelled = "CANCELLED"
+}
+
+
+// BuildApprovalInput
+/** 
+ * BuildApproval describes a build's approval configuration, state, and result.
+**/
+export class BuildApprovalInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=config" })
+  config?: ApprovalConfig;
+
+  @SpeakeasyMetadata({ data: "json, name=result" })
+  result?: ApprovalResultInput;
 }
 
 
@@ -16,12 +31,12 @@ export enum BuildApprovalStateEnum {
  * BuildApproval describes a build's approval configuration, state, and result.
 **/
 export class BuildApproval extends SpeakeasyBase {
-  @Metadata({ data: "json, name=config" })
+  @SpeakeasyMetadata({ data: "json, name=config" })
   config?: ApprovalConfig;
 
-  @Metadata({ data: "json, name=result" })
+  @SpeakeasyMetadata({ data: "json, name=result" })
   result?: ApprovalResult;
 
-  @Metadata({ data: "json, name=state" })
+  @SpeakeasyMetadata({ data: "json, name=state" })
   state?: BuildApprovalStateEnum;
 }

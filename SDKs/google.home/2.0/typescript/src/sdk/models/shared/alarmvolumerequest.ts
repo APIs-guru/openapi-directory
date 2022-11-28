@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class AlarmVolumeRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=volume" })
+  @SpeakeasyMetadata({ data: "json, name=volume" })
   volume: number;
 }

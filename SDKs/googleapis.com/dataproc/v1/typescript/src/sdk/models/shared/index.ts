@@ -97,6 +97,7 @@ export * from "./templateparameter";
 export * from "./testiampermissionsrequest";
 export * from "./testiampermissionsresponse";
 export * from "./trinojob";
+export * from "./usagemetrics";
 export * from "./valuevalidation";
 export * from "./virtualclusterconfig";
 export * from "./workflowtemplate";

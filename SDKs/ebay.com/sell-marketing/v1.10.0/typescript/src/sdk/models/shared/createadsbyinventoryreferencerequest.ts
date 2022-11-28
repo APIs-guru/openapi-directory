@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // CreateAdsByInventoryReferenceRequest
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * This type defines the fields needed to create ads by inventory reference ID request.
 **/
 export class CreateAdsByInventoryReferenceRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=bidPercentage" })
+  @SpeakeasyMetadata({ data: "json, name=bidPercentage" })
   bidPercentage?: string;
 
-  @Metadata({ data: "json, name=inventoryReferenceId" })
+  @SpeakeasyMetadata({ data: "json, name=inventoryReferenceId" })
   inventoryReferenceId?: string;
 
-  @Metadata({ data: "json, name=inventoryReferenceType" })
+  @SpeakeasyMetadata({ data: "json, name=inventoryReferenceType" })
   inventoryReferenceType?: string;
 }

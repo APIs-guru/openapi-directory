@@ -17,6 +17,14 @@ const (
 	CloudFunctionIngressSettingsEnumAllowInternalAndGclb       CloudFunctionIngressSettingsEnum = "ALLOW_INTERNAL_AND_GCLB"
 )
 
+type CloudFunctionVpcConnectorEgressSettingsEnum string
+
+const (
+	CloudFunctionVpcConnectorEgressSettingsEnumVpcConnectorEgressSettingsUnspecified CloudFunctionVpcConnectorEgressSettingsEnum = "VPC_CONNECTOR_EGRESS_SETTINGS_UNSPECIFIED"
+	CloudFunctionVpcConnectorEgressSettingsEnumPrivateRangesOnly                     CloudFunctionVpcConnectorEgressSettingsEnum = "PRIVATE_RANGES_ONLY"
+	CloudFunctionVpcConnectorEgressSettingsEnumAllTraffic                            CloudFunctionVpcConnectorEgressSettingsEnum = "ALL_TRAFFIC"
+)
+
 type CloudFunctionStatusEnum string
 
 const (
@@ -28,14 +36,41 @@ const (
 	CloudFunctionStatusEnumUnknown                        CloudFunctionStatusEnum = "UNKNOWN"
 )
 
-type CloudFunctionVpcConnectorEgressSettingsEnum string
+// CloudFunctionInput
+// Describes a Cloud Function that contains user computation executed in response to an event. It encapsulate function and triggers configurations.
+type CloudFunctionInput struct {
+	AvailableMemoryMb          *int32                                       `json:"availableMemoryMb,omitempty"`
+	BuildEnvironmentVariables  map[string]string                            `json:"buildEnvironmentVariables,omitempty"`
+	BuildWorkerPool            *string                                      `json:"buildWorkerPool,omitempty"`
+	Description                *string                                      `json:"description,omitempty"`
+	DockerRegistry             *CloudFunctionDockerRegistryEnum             `json:"dockerRegistry,omitempty"`
+	DockerRepository           *string                                      `json:"dockerRepository,omitempty"`
+	EntryPoint                 *string                                      `json:"entryPoint,omitempty"`
+	EnvironmentVariables       map[string]string                            `json:"environmentVariables,omitempty"`
+	EventTrigger               *EventTrigger                                `json:"eventTrigger,omitempty"`
+	HTTPSTrigger               *HTTPSTriggerInput                           `json:"httpsTrigger,omitempty"`
+	IngressSettings            *CloudFunctionIngressSettingsEnum            `json:"ingressSettings,omitempty"`
+	KmsKeyName                 *string                                      `json:"kmsKeyName,omitempty"`
+	Labels                     map[string]string                            `json:"labels,omitempty"`
+	MaxInstances               *int32                                       `json:"maxInstances,omitempty"`
+	MinInstances               *int32                                       `json:"minInstances,omitempty"`
+	Name                       *string                                      `json:"name,omitempty"`
+	Network                    *string                                      `json:"network,omitempty"`
+	Runtime                    *string                                      `json:"runtime,omitempty"`
+	SecretEnvironmentVariables []SecretEnvVar                               `json:"secretEnvironmentVariables,omitempty"`
+	SecretVolumes              []SecretVolume                               `json:"secretVolumes,omitempty"`
+	ServiceAccountEmail        *string                                      `json:"serviceAccountEmail,omitempty"`
+	SourceArchiveURL           *string                                      `json:"sourceArchiveUrl,omitempty"`
+	SourceRepository           *SourceRepositoryInput                       `json:"sourceRepository,omitempty"`
+	SourceToken                *string                                      `json:"sourceToken,omitempty"`
+	SourceUploadURL            *string                                      `json:"sourceUploadUrl,omitempty"`
+	Timeout                    *string                                      `json:"timeout,omitempty"`
+	VpcConnector               *string                                      `json:"vpcConnector,omitempty"`
+	VpcConnectorEgressSettings *CloudFunctionVpcConnectorEgressSettingsEnum `json:"vpcConnectorEgressSettings,omitempty"`
+}
 
-const (
-	CloudFunctionVpcConnectorEgressSettingsEnumVpcConnectorEgressSettingsUnspecified CloudFunctionVpcConnectorEgressSettingsEnum = "VPC_CONNECTOR_EGRESS_SETTINGS_UNSPECIFIED"
-	CloudFunctionVpcConnectorEgressSettingsEnumPrivateRangesOnly                     CloudFunctionVpcConnectorEgressSettingsEnum = "PRIVATE_RANGES_ONLY"
-	CloudFunctionVpcConnectorEgressSettingsEnumAllTraffic                            CloudFunctionVpcConnectorEgressSettingsEnum = "ALL_TRAFFIC"
-)
-
+// CloudFunction
+// Describes a Cloud Function that contains user computation executed in response to an event. It encapsulate function and triggers configurations.
 type CloudFunction struct {
 	AvailableMemoryMb          *int32                                       `json:"availableMemoryMb,omitempty"`
 	BuildEnvironmentVariables  map[string]string                            `json:"buildEnvironmentVariables,omitempty"`

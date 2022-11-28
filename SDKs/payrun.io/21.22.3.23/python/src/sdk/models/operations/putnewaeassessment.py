@@ -5,28 +5,28 @@ from sdk.models import shared
 
 @dataclass
 class PutNewAeAssessmentPathParams:
-    ae_assessment_id: str = field(default=None, metadata={'path_param': { 'field_name': 'AEAssessmentId', 'style': 'simple', 'explode': False }})
-    employee_id: str = field(default=None, metadata={'path_param': { 'field_name': 'EmployeeId', 'style': 'simple', 'explode': False }})
-    employer_id: str = field(default=None, metadata={'path_param': { 'field_name': 'EmployerId', 'style': 'simple', 'explode': False }})
+    ae_assessment_id: str = field(metadata={'path_param': { 'field_name': 'AEAssessmentId', 'style': 'simple', 'explode': False }})
+    employee_id: str = field(metadata={'path_param': { 'field_name': 'EmployeeId', 'style': 'simple', 'explode': False }})
+    employer_id: str = field(metadata={'path_param': { 'field_name': 'EmployerId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class PutNewAeAssessmentHeaders:
-    api_version: str = field(default=None, metadata={'header': { 'field_name': 'Api-Version', 'style': 'simple', 'explode': False }})
-    authorization: str = field(default=None, metadata={'header': { 'field_name': 'Authorization', 'style': 'simple', 'explode': False }})
+    api_version: str = field(metadata={'header': { 'field_name': 'Api-Version', 'style': 'simple', 'explode': False }})
+    authorization: str = field(metadata={'header': { 'field_name': 'Authorization', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class PutNewAeAssessmentRequest:
-    path_params: PutNewAeAssessmentPathParams = field(default=None)
-    headers: PutNewAeAssessmentHeaders = field(default=None)
-    request: shared.AeAssessment = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: PutNewAeAssessmentHeaders = field()
+    path_params: PutNewAeAssessmentPathParams = field()
+    request: shared.AeAssessment = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class PutNewAeAssessmentResponse:
+    content_type: str = field()
+    status_code: int = field()
     ae_assessment: Optional[shared.AeAssessment] = field(default=None)
-    content_type: str = field(default=None)
     error_model: Optional[shared.ErrorModel] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,8 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import timeofday
-from . import timerange
+from sdk import utils
+from . import *
 
 class TimeDimensionDayOfWeekEnum(str, Enum):
     DAY_OF_WEEK_UNSPECIFIED = "DAY_OF_WEEK_UNSPECIFIED"
@@ -18,7 +19,11 @@ class TimeDimensionDayOfWeekEnum(str, Enum):
 @dataclass_json
 @dataclass
 class TimeDimension:
-    day_of_week: Optional[TimeDimensionDayOfWeekEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'dayOfWeek' }})
-    time_of_day: Optional[timeofday.TimeOfDay] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'timeOfDay' }})
-    time_range: Optional[timerange.TimeRange] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'timeRange' }})
+    r"""TimeDimension
+    The dimension for which data is divided over.
+    """
+    
+    day_of_week: Optional[TimeDimensionDayOfWeekEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('dayOfWeek') }})
+    time_of_day: Optional[TimeOfDay] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('timeOfDay') }})
+    time_range: Optional[TimeRange] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('timeRange') }})
     

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RetentionPeriod } from "./retentionperiod";
 import { ChannelStatusEnum } from "./channelstatusenum";
 import { ChannelStorage } from "./channelstorage";
@@ -36,35 +36,35 @@ var Channel = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=arn" }),
+        SpeakeasyMetadata({ data: "json, name=arn" }),
         __metadata("design:type", String)
     ], Channel.prototype, "arn", void 0);
     __decorate([
-        Metadata({ data: "json, name=creationTime" }),
+        SpeakeasyMetadata({ data: "json, name=creationTime" }),
         __metadata("design:type", Date)
     ], Channel.prototype, "creationTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=lastMessageArrivalTime" }),
+        SpeakeasyMetadata({ data: "json, name=lastMessageArrivalTime" }),
         __metadata("design:type", Date)
     ], Channel.prototype, "lastMessageArrivalTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=lastUpdateTime" }),
+        SpeakeasyMetadata({ data: "json, name=lastUpdateTime" }),
         __metadata("design:type", Date)
     ], Channel.prototype, "lastUpdateTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], Channel.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=retentionPeriod" }),
+        SpeakeasyMetadata({ data: "json, name=retentionPeriod" }),
         __metadata("design:type", RetentionPeriod)
     ], Channel.prototype, "retentionPeriod", void 0);
     __decorate([
-        Metadata({ data: "json, name=status" }),
+        SpeakeasyMetadata({ data: "json, name=status" }),
         __metadata("design:type", String)
     ], Channel.prototype, "status", void 0);
     __decorate([
-        Metadata({ data: "json, name=storage" }),
+        SpeakeasyMetadata({ data: "json, name=storage" }),
         __metadata("design:type", ChannelStorage)
     ], Channel.prototype, "storage", void 0);
     return Channel;

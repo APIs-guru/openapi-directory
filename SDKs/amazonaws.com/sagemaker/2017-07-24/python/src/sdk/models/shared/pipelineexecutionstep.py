@@ -1,22 +1,26 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import cachehitresult
-from . import pipelineexecutionstepmetadata
-from . import stepstatus_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class PipelineExecutionStep:
-    cache_hit_result: Optional[cachehitresult.CacheHitResult] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'CacheHitResult' }})
-    end_time: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'EndTime', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    failure_reason: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FailureReason' }})
-    metadata: Optional[pipelineexecutionstepmetadata.PipelineExecutionStepMetadata] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Metadata' }})
-    start_time: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'StartTime', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    step_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'StepName' }})
-    step_status: Optional[stepstatus_enum.StepStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'StepStatus' }})
+    r"""PipelineExecutionStep
+    An execution of a step in a pipeline.
+    """
+    
+    cache_hit_result: Optional[CacheHitResult] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('CacheHitResult') }})
+    end_time: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('EndTime'), 'encoder': utils.datetimeisoformat(True), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    failure_reason: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('FailureReason') }})
+    metadata: Optional[PipelineExecutionStepMetadata] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Metadata') }})
+    start_time: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('StartTime'), 'encoder': utils.datetimeisoformat(True), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    step_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('StepName') }})
+    step_status: Optional[StepStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('StepStatus') }})
     

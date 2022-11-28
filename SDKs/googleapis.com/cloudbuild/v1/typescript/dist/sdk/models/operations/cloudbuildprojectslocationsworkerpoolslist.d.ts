@@ -1,0 +1,34 @@
+import { SpeakeasyBase } from "../../../internal/utils";
+import * as shared from "../shared";
+export declare class CloudbuildProjectsLocationsWorkerPoolsListPathParams extends SpeakeasyBase {
+    parent: string;
+}
+export declare class CloudbuildProjectsLocationsWorkerPoolsListQueryParams extends SpeakeasyBase {
+    dollarXgafv?: shared.XgafvEnum;
+    accessToken?: string;
+    alt?: shared.AltEnum;
+    callback?: string;
+    fields?: string;
+    key?: string;
+    oauthToken?: string;
+    pageSize?: number;
+    pageToken?: string;
+    prettyPrint?: boolean;
+    quotaUser?: string;
+    uploadType?: string;
+    uploadProtocol?: string;
+}
+export declare class CloudbuildProjectsLocationsWorkerPoolsListSecurity extends SpeakeasyBase {
+    oauth2: shared.SchemeOauth2;
+    oauth2c: shared.SchemeOauth2c;
+}
+export declare class CloudbuildProjectsLocationsWorkerPoolsListRequest extends SpeakeasyBase {
+    pathParams: CloudbuildProjectsLocationsWorkerPoolsListPathParams;
+    queryParams: CloudbuildProjectsLocationsWorkerPoolsListQueryParams;
+    security: CloudbuildProjectsLocationsWorkerPoolsListSecurity;
+}
+export declare class CloudbuildProjectsLocationsWorkerPoolsListResponse extends SpeakeasyBase {
+    contentType: string;
+    listWorkerPoolsResponse?: shared.ListWorkerPoolsResponse;
+    statusCode: number;
+}

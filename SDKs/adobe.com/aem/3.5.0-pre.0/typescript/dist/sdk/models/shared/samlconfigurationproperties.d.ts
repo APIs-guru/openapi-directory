@@ -1,0 +1,31 @@
+import { SpeakeasyBase } from "../../../internal/utils";
+import { SamlConfigurationPropertyItemsBoolean } from "./samlconfigurationpropertyitemsboolean";
+import { SamlConfigurationPropertyItemsString } from "./samlconfigurationpropertyitemsstring";
+import { SamlConfigurationPropertyItemsLong } from "./samlconfigurationpropertyitemslong";
+import { SamlConfigurationPropertyItemsArray } from "./samlconfigurationpropertyitemsarray";
+export declare class SamlConfigurationProperties extends SpeakeasyBase {
+    addGroupMemberships?: SamlConfigurationPropertyItemsBoolean;
+    assertionConsumerServiceUrl?: SamlConfigurationPropertyItemsString;
+    clockTolerance?: SamlConfigurationPropertyItemsLong;
+    createUser?: SamlConfigurationPropertyItemsBoolean;
+    defaultGroups?: SamlConfigurationPropertyItemsArray;
+    defaultRedirectUrl?: SamlConfigurationPropertyItemsString;
+    digestMethod?: SamlConfigurationPropertyItemsString;
+    groupMembershipAttribute?: SamlConfigurationPropertyItemsString;
+    handleLogout?: SamlConfigurationPropertyItemsBoolean;
+    idpCertAlias?: SamlConfigurationPropertyItemsString;
+    idpHttpRedirect?: SamlConfigurationPropertyItemsBoolean;
+    idpUrl?: SamlConfigurationPropertyItemsString;
+    keyStorePassword?: SamlConfigurationPropertyItemsString;
+    logoutUrl?: SamlConfigurationPropertyItemsString;
+    nameIdFormat?: SamlConfigurationPropertyItemsString;
+    path?: SamlConfigurationPropertyItemsArray;
+    serviceRanking?: SamlConfigurationPropertyItemsLong;
+    serviceProviderEntityId?: SamlConfigurationPropertyItemsString;
+    signatureMethod?: SamlConfigurationPropertyItemsString;
+    spPrivateKeyAlias?: SamlConfigurationPropertyItemsString;
+    synchronizeAttributes?: SamlConfigurationPropertyItemsArray;
+    useEncryption?: SamlConfigurationPropertyItemsBoolean;
+    userIdAttribute?: SamlConfigurationPropertyItemsString;
+    userIntermediatePath?: SamlConfigurationPropertyItemsString;
+}

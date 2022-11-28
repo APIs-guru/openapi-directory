@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class IntegrationsProjectsLocationsProductsIntegrationsVersionsArchivePathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,21 +26,21 @@ class IntegrationsProjectsLocationsProductsIntegrationsVersionsArchiveQueryParam
 
 @dataclass
 class IntegrationsProjectsLocationsProductsIntegrationsVersionsArchiveSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class IntegrationsProjectsLocationsProductsIntegrationsVersionsArchiveRequest:
-    path_params: IntegrationsProjectsLocationsProductsIntegrationsVersionsArchivePathParams = field(default=None)
-    query_params: IntegrationsProjectsLocationsProductsIntegrationsVersionsArchiveQueryParams = field(default=None)
+    path_params: IntegrationsProjectsLocationsProductsIntegrationsVersionsArchivePathParams = field()
+    query_params: IntegrationsProjectsLocationsProductsIntegrationsVersionsArchiveQueryParams = field()
+    security: IntegrationsProjectsLocationsProductsIntegrationsVersionsArchiveSecurity = field()
     request: Optional[dict[str, Any]] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: IntegrationsProjectsLocationsProductsIntegrationsVersionsArchiveSecurity = field(default=None)
     
 
 @dataclass
 class IntegrationsProjectsLocationsProductsIntegrationsVersionsArchiveResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_cloud_integrations_v1alpha_archive_integration_version_response: Optional[dict[str, Any]] = field(default=None)
-    status_code: int = field(default=None)
     

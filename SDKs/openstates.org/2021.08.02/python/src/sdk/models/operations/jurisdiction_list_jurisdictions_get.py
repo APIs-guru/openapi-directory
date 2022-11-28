@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 
@@ -19,14 +20,14 @@ class JurisdictionListJurisdictionsGetHeaders:
 
 @dataclass
 class JurisdictionListJurisdictionsGetRequest:
-    query_params: JurisdictionListJurisdictionsGetQueryParams = field(default=None)
-    headers: JurisdictionListJurisdictionsGetHeaders = field(default=None)
+    headers: JurisdictionListJurisdictionsGetHeaders = field()
+    query_params: JurisdictionListJurisdictionsGetQueryParams = field()
     
 
 @dataclass
 class JurisdictionListJurisdictionsGetResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     http_validation_error: Optional[shared.HTTPValidationError] = field(default=None)
     jurisdiction_list: Optional[shared.JurisdictionList] = field(default=None)
-    status_code: int = field(default=None)
     

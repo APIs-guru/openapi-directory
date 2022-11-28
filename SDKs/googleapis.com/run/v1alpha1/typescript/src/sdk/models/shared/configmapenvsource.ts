@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { LocalObjectReference } from "./localobjectreference";
+
 
 
 // ConfigMapEnvSource
@@ -7,12 +8,12 @@ import { LocalObjectReference } from "./localobjectreference";
  * Not supported by Cloud Run ConfigMapEnvSource selects a ConfigMap to populate the environment variables with. The contents of the target ConfigMap's Data field will represent the key-value pairs as environment variables.
 **/
 export class ConfigMapEnvSource extends SpeakeasyBase {
-  @Metadata({ data: "json, name=localObjectReference" })
+  @SpeakeasyMetadata({ data: "json, name=localObjectReference" })
   localObjectReference?: LocalObjectReference;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=optional" })
+  @SpeakeasyMetadata({ data: "json, name=optional" })
   optional?: boolean;
 }

@@ -1,5 +1,7 @@
 package shared
 
+// AwsAutoScalingLaunchConfigurationDetails
+// Details about a launch configuration.
 type AwsAutoScalingLaunchConfigurationDetails struct {
 	AssociatePublicIPAddress     *bool                                                         `json:"AssociatePublicIpAddress,omitempty"`
 	BlockDeviceMappings          []AwsAutoScalingLaunchConfigurationBlockDeviceMappingsDetails `json:"BlockDeviceMappings,omitempty"`

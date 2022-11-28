@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // CloudWatchMonitoringConfiguration
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A configuration for CloudWatch monitoring. You can configure your jobs to send log information to CloudWatch Logs.
 **/
 export class CloudWatchMonitoringConfiguration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=logGroupName" })
+  @SpeakeasyMetadata({ data: "json, name=logGroupName" })
   logGroupName: string;
 
-  @Metadata({ data: "json, name=logStreamNamePrefix" })
+  @SpeakeasyMetadata({ data: "json, name=logStreamNamePrefix" })
   logStreamNamePrefix?: string;
 }

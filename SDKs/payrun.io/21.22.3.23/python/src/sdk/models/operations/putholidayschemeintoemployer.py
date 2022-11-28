@@ -5,27 +5,27 @@ from sdk.models import shared
 
 @dataclass
 class PutHolidaySchemeIntoEmployerPathParams:
-    employer_id: str = field(default=None, metadata={'path_param': { 'field_name': 'EmployerId', 'style': 'simple', 'explode': False }})
-    holiday_scheme_id: str = field(default=None, metadata={'path_param': { 'field_name': 'HolidaySchemeId', 'style': 'simple', 'explode': False }})
+    employer_id: str = field(metadata={'path_param': { 'field_name': 'EmployerId', 'style': 'simple', 'explode': False }})
+    holiday_scheme_id: str = field(metadata={'path_param': { 'field_name': 'HolidaySchemeId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class PutHolidaySchemeIntoEmployerHeaders:
-    api_version: str = field(default=None, metadata={'header': { 'field_name': 'Api-Version', 'style': 'simple', 'explode': False }})
-    authorization: str = field(default=None, metadata={'header': { 'field_name': 'Authorization', 'style': 'simple', 'explode': False }})
+    api_version: str = field(metadata={'header': { 'field_name': 'Api-Version', 'style': 'simple', 'explode': False }})
+    authorization: str = field(metadata={'header': { 'field_name': 'Authorization', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class PutHolidaySchemeIntoEmployerRequest:
-    path_params: PutHolidaySchemeIntoEmployerPathParams = field(default=None)
-    headers: PutHolidaySchemeIntoEmployerHeaders = field(default=None)
-    request: shared.HolidayScheme = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: PutHolidaySchemeIntoEmployerHeaders = field()
+    path_params: PutHolidaySchemeIntoEmployerPathParams = field()
+    request: shared.HolidayScheme = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class PutHolidaySchemeIntoEmployerResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error_model: Optional[shared.ErrorModel] = field(default=None)
     holiday_scheme: Optional[shared.HolidayScheme] = field(default=None)
-    status_code: int = field(default=None)
     

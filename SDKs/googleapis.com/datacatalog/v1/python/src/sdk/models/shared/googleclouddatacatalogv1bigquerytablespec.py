@@ -1,8 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import googleclouddatacatalogv1tablespec
-from . import googleclouddatacatalogv1viewspec
+from sdk import utils
+from . import *
 
 class GoogleCloudDatacatalogV1BigQueryTableSpecTableSourceTypeEnum(str, Enum):
     TABLE_SOURCE_TYPE_UNSPECIFIED = "TABLE_SOURCE_TYPE_UNSPECIFIED"
@@ -14,7 +15,11 @@ class GoogleCloudDatacatalogV1BigQueryTableSpecTableSourceTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class GoogleCloudDatacatalogV1BigQueryTableSpec:
-    table_source_type: Optional[GoogleCloudDatacatalogV1BigQueryTableSpecTableSourceTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tableSourceType' }})
-    table_spec: Optional[googleclouddatacatalogv1tablespec.GoogleCloudDatacatalogV1TableSpec] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tableSpec' }})
-    view_spec: Optional[googleclouddatacatalogv1viewspec.GoogleCloudDatacatalogV1ViewSpec] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'viewSpec' }})
+    r"""GoogleCloudDatacatalogV1BigQueryTableSpec
+    Describes a BigQuery table.
+    """
+    
+    table_source_type: Optional[GoogleCloudDatacatalogV1BigQueryTableSpecTableSourceTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('tableSourceType') }})
+    table_spec: Optional[GoogleCloudDatacatalogV1TableSpec] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('tableSpec') }})
+    view_spec: Optional[GoogleCloudDatacatalogV1ViewSpec] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('viewSpec') }})
     

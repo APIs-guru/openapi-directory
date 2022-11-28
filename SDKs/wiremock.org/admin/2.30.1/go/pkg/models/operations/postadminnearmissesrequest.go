@@ -9,10 +9,6 @@ type PostAdminNearMissesRequestRequestBody struct {
 	URL         *string                `json:"url,omitempty"`
 }
 
-type PostAdminNearMissesRequestRequest struct {
-	Request PostAdminNearMissesRequestRequestBody `request:"mediaType=application/json"`
-}
-
 type PostAdminNearMissesRequest200ApplicationJSONNearMisses struct {
 	AbsoluteURL *string                `json:"absoluteUrl,omitempty"`
 	Body        *string                `json:"body,omitempty"`
@@ -24,6 +20,10 @@ type PostAdminNearMissesRequest200ApplicationJSONNearMisses struct {
 
 type PostAdminNearMissesRequest200ApplicationJSON struct {
 	NearMisses []PostAdminNearMissesRequest200ApplicationJSONNearMisses `json:"nearMisses,omitempty"`
+}
+
+type PostAdminNearMissesRequestRequest struct {
+	Request PostAdminNearMissesRequestRequestBody `request:"mediaType=application/json"`
 }
 
 type PostAdminNearMissesRequestResponse struct {

@@ -1,41 +1,42 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetRealmClientsIdEvaluateScopesGenerateExampleAccessTokenPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" })
   id: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=realm" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=realm" })
   realm: string;
 }
 
 
 export class GetRealmClientsIdEvaluateScopesGenerateExampleAccessTokenQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=scope" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=scope" })
   scope?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=userId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=userId" })
   userId?: string;
 }
 
 
 export class GetRealmClientsIdEvaluateScopesGenerateExampleAccessTokenRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetRealmClientsIdEvaluateScopesGenerateExampleAccessTokenPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetRealmClientsIdEvaluateScopesGenerateExampleAccessTokenQueryParams;
 }
 
 
 export class GetRealmClientsIdEvaluateScopesGenerateExampleAccessTokenResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   accessToken?: shared.AccessToken;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

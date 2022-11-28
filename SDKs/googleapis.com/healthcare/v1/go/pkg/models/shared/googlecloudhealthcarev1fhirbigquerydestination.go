@@ -9,6 +9,8 @@ const (
 	GoogleCloudHealthcareV1FhirBigQueryDestinationWriteDispositionEnumWriteAppend                 GoogleCloudHealthcareV1FhirBigQueryDestinationWriteDispositionEnum = "WRITE_APPEND"
 )
 
+// GoogleCloudHealthcareV1FhirBigQueryDestination
+// The configuration for exporting to BigQuery.
 type GoogleCloudHealthcareV1FhirBigQueryDestination struct {
 	DatasetURI       *string                                                             `json:"datasetUri,omitempty"`
 	Force            *bool                                                               `json:"force,omitempty"`

@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// BuildBatch
+// Contains information about a batch build.
 type BuildBatch struct {
 	Arn                     *string                     `json:"arn,omitempty"`
 	Artifacts               *BuildArtifacts             `json:"artifacts,omitempty"`

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ErrorParameter } from "./errorparameter";
 /**
  * This type defines the fields that can be returned in an error.

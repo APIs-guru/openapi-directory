@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var FunctionsDeleteTagPathParams = /** @class */ (function (_super) {
     __extends(FunctionsDeleteTagPathParams, _super);
@@ -30,11 +30,11 @@ var FunctionsDeleteTagPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=functionId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=functionId" }),
         __metadata("design:type", String)
     ], FunctionsDeleteTagPathParams.prototype, "functionId", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=tagId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=tagId" }),
         __metadata("design:type", String)
     ], FunctionsDeleteTagPathParams.prototype, "tagId", void 0);
     return FunctionsDeleteTagPathParams;
@@ -46,11 +46,11 @@ var FunctionsDeleteTagSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeKey)
     ], FunctionsDeleteTagSecurity.prototype, "key", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeProject)
     ], FunctionsDeleteTagSecurity.prototype, "project", void 0);
     return FunctionsDeleteTagSecurity;
@@ -62,11 +62,11 @@ var FunctionsDeleteTagRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", FunctionsDeleteTagPathParams)
     ], FunctionsDeleteTagRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", FunctionsDeleteTagSecurity)
     ], FunctionsDeleteTagRequest.prototype, "security", void 0);
     return FunctionsDeleteTagRequest;
@@ -78,11 +78,11 @@ var FunctionsDeleteTagResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], FunctionsDeleteTagResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], FunctionsDeleteTagResponse.prototype, "statusCode", void 0);
     return FunctionsDeleteTagResponse;

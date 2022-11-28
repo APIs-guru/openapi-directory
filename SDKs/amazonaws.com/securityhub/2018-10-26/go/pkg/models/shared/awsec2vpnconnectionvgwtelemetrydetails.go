@@ -1,5 +1,7 @@
 package shared
 
+// AwsEc2VpnConnectionVgwTelemetryDetails
+// Information about the VPN tunnel.
 type AwsEc2VpnConnectionVgwTelemetryDetails struct {
 	AcceptedRouteCount *int64  `json:"AcceptedRouteCount,omitempty"`
 	CertificateArn     *string `json:"CertificateArn,omitempty"`

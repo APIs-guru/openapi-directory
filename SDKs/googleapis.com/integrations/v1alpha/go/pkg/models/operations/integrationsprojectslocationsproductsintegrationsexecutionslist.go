@@ -26,7 +26,6 @@ type IntegrationsProjectsLocationsProductsIntegrationsExecutionsListQueryParams 
 	FilterParamsParameterValue     *string           `queryParam:"style=form,explode=true,name=filterParams.parameterValue"`
 	FilterParamsStartTime          *string           `queryParam:"style=form,explode=true,name=filterParams.startTime"`
 	FilterParamsTaskStatuses       []string          `queryParam:"style=form,explode=true,name=filterParams.taskStatuses"`
-	FilterParamsTriggerID          *string           `queryParam:"style=form,explode=true,name=filterParams.triggerId"`
 	FilterParamsWorkflowName       *string           `queryParam:"style=form,explode=true,name=filterParams.workflowName"`
 	Key                            *string           `queryParam:"style=form,explode=true,name=key"`
 	OauthToken                     *string           `queryParam:"style=form,explode=true,name=oauth_token"`

@@ -30,7 +30,7 @@ type SasportalNodesDevicesSignDeviceSecurity struct {
 type SasportalNodesDevicesSignDeviceRequest struct {
 	PathParams  SasportalNodesDevicesSignDevicePathParams
 	QueryParams SasportalNodesDevicesSignDeviceQueryParams
-	Request     *shared.SasPortalSignDeviceRequest `request:"mediaType=application/json"`
+	Request     *shared.SasPortalSignDeviceRequestInput `request:"mediaType=application/json"`
 	Security    SasportalNodesDevicesSignDeviceSecurity
 }
 

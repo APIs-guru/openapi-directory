@@ -1,8 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
-import { Variable } from "./variable";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Variable } from "./variable";
 import { SourceLocation } from "./sourcelocation";
+
 
 
 // StackFrame
@@ -10,15 +9,15 @@ import { SourceLocation } from "./sourcelocation";
  * Represents a stack frame context.
 **/
 export class StackFrame extends SpeakeasyBase {
-  @Metadata({ data: "json, name=arguments", elemType: shared.Variable })
+  @SpeakeasyMetadata({ data: "json, name=arguments", elemType: Variable })
   arguments?: Variable[];
 
-  @Metadata({ data: "json, name=function" })
+  @SpeakeasyMetadata({ data: "json, name=function" })
   function?: string;
 
-  @Metadata({ data: "json, name=locals", elemType: shared.Variable })
+  @SpeakeasyMetadata({ data: "json, name=locals", elemType: Variable })
   locals?: Variable[];
 
-  @Metadata({ data: "json, name=location" })
+  @SpeakeasyMetadata({ data: "json, name=location" })
   location?: SourceLocation;
 }

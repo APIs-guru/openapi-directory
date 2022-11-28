@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare enum GetMetricPolicyXAmzTargetEnum {
     MediaStore20170901GetMetricPolicy = "MediaStore_20170901.GetMetricPolicy"

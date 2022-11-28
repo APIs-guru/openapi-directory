@@ -4,10 +4,6 @@ type GetServersIDPathParams struct {
 	ID int64 `pathParam:"style=simple,explode=false,name=id"`
 }
 
-type GetServersIDRequest struct {
-	PathParams GetServersIDPathParams
-}
-
 type GetServersID200ApplicationJSONServerDatacenterLocation struct {
 	City        string  `json:"city"`
 	Country     string  `json:"country"`
@@ -19,12 +15,16 @@ type GetServersID200ApplicationJSONServerDatacenterLocation struct {
 	NetworkZone string  `json:"network_zone"`
 }
 
+// GetServersID200ApplicationJSONServerDatacenterServerTypes
+// The Server types the Datacenter can handle
 type GetServersID200ApplicationJSONServerDatacenterServerTypes struct {
 	Available             []float64 `json:"available"`
 	AvailableForMigration []float64 `json:"available_for_migration"`
 	Supported             []float64 `json:"supported"`
 }
 
+// GetServersID200ApplicationJSONServerDatacenter
+// Datacenter this Resource is located at
 type GetServersID200ApplicationJSONServerDatacenter struct {
 	Description string                                                    `json:"description"`
 	ID          int64                                                     `json:"id"`
@@ -33,6 +33,8 @@ type GetServersID200ApplicationJSONServerDatacenter struct {
 	ServerTypes GetServersID200ApplicationJSONServerDatacenterServerTypes `json:"server_types"`
 }
 
+// GetServersID200ApplicationJSONServerImageCreatedFrom
+// Information about the Server the Image was created from
 type GetServersID200ApplicationJSONServerImageCreatedFrom struct {
 	ID   int64  `json:"id"`
 	Name string `json:"name"`
@@ -48,6 +50,8 @@ const (
 	GetServersID200ApplicationJSONServerImageOsFlavorEnumUnknown GetServersID200ApplicationJSONServerImageOsFlavorEnum = "unknown"
 )
 
+// GetServersID200ApplicationJSONServerImageProtection
+// Protection configuration for the Resource
 type GetServersID200ApplicationJSONServerImageProtection struct {
 	Delete bool `json:"delete"`
 }
@@ -98,6 +102,8 @@ const (
 	GetServersID200ApplicationJSONServerIsoTypeEnumPrivate GetServersID200ApplicationJSONServerIsoTypeEnum = "private"
 )
 
+// GetServersID200ApplicationJSONServerIso
+// ISO Image that is attached to this Server. Null if no ISO is attached.
 type GetServersID200ApplicationJSONServerIso struct {
 	Deprecated  string                                          `json:"deprecated"`
 	Description string                                          `json:"description"`
@@ -128,6 +134,8 @@ type GetServersID200ApplicationJSONServerPrivateNet struct {
 	Network    *int64   `json:"network,omitempty"`
 }
 
+// GetServersID200ApplicationJSONServerProtection
+// Protection configuration for the Server
 type GetServersID200ApplicationJSONServerProtection struct {
 	Delete  bool `json:"delete"`
 	Rebuild bool `json:"rebuild"`
@@ -145,6 +153,8 @@ type GetServersID200ApplicationJSONServerPublicNetServerPublicNetFirewall struct
 	Status *GetServersID200ApplicationJSONServerPublicNetServerPublicNetFirewallStatusEnum `json:"status,omitempty"`
 }
 
+// GetServersID200ApplicationJSONServerPublicNetIpv4
+// IP address (v4) and its reverse DNS entry of this Server
 type GetServersID200ApplicationJSONServerPublicNetIpv4 struct {
 	Blocked bool   `json:"blocked"`
 	DNSPtr  string `json:"dns_ptr"`
@@ -156,12 +166,16 @@ type GetServersID200ApplicationJSONServerPublicNetIpv6DNSPtr struct {
 	IP     string `json:"ip"`
 }
 
+// GetServersID200ApplicationJSONServerPublicNetIpv6
+// IPv6 network assigned to this Server and its reverse DNS entry
 type GetServersID200ApplicationJSONServerPublicNetIpv6 struct {
 	Blocked bool                                                      `json:"blocked"`
 	DNSPtr  []GetServersID200ApplicationJSONServerPublicNetIpv6DNSPtr `json:"dns_ptr"`
 	IP      string                                                    `json:"ip"`
 }
 
+// GetServersID200ApplicationJSONServerPublicNet
+// Public network information. The Server's IPv4 address can be found in `public_net->ipv4->ip`
 type GetServersID200ApplicationJSONServerPublicNet struct {
 	Firewalls   []GetServersID200ApplicationJSONServerPublicNetServerPublicNetFirewall `json:"firewalls,omitempty"`
 	FloatingIps []int64                                                                `json:"floating_ips"`
@@ -176,11 +190,15 @@ const (
 	GetServersID200ApplicationJSONServerServerTypeCPUTypeEnumDedicated GetServersID200ApplicationJSONServerServerTypeCPUTypeEnum = "dedicated"
 )
 
+// GetServersID200ApplicationJSONServerServerTypePricesPriceHourly
+// Hourly costs for a Server type in this Location
 type GetServersID200ApplicationJSONServerServerTypePricesPriceHourly struct {
 	Gross string `json:"gross"`
 	Net   string `json:"net"`
 }
 
+// GetServersID200ApplicationJSONServerServerTypePricesPriceMonthly
+// Monthly costs for a Server type in this Location
 type GetServersID200ApplicationJSONServerServerTypePricesPriceMonthly struct {
 	Gross string `json:"gross"`
 	Net   string `json:"net"`
@@ -199,6 +217,8 @@ const (
 	GetServersID200ApplicationJSONServerServerTypeStorageTypeEnumNetwork GetServersID200ApplicationJSONServerServerTypeStorageTypeEnum = "network"
 )
 
+// GetServersID200ApplicationJSONServerServerType
+// Type of Server - determines how much ram, disk and cpu a Server has
 type GetServersID200ApplicationJSONServerServerType struct {
 	Cores       float64                                                       `json:"cores"`
 	CPUType     GetServersID200ApplicationJSONServerServerTypeCPUTypeEnum     `json:"cpu_type"`
@@ -253,6 +273,10 @@ type GetServersID200ApplicationJSONServer struct {
 
 type GetServersID200ApplicationJSON struct {
 	Server *GetServersID200ApplicationJSONServer `json:"server,omitempty"`
+}
+
+type GetServersIDRequest struct {
+	PathParams GetServersIDPathParams
 }
 
 type GetServersIDResponse struct {

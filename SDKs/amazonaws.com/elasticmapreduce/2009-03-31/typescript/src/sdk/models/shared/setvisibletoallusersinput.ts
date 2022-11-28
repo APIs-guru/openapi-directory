@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // SetVisibleToAllUsersInput
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The input to the SetVisibleToAllUsers action.
 **/
 export class SetVisibleToAllUsersInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=JobFlowIds" })
+  @SpeakeasyMetadata({ data: "json, name=JobFlowIds" })
   jobFlowIds: string[];
 
-  @Metadata({ data: "json, name=VisibleToAllUsers" })
+  @SpeakeasyMetadata({ data: "json, name=VisibleToAllUsers" })
   visibleToAllUsers: boolean;
 }

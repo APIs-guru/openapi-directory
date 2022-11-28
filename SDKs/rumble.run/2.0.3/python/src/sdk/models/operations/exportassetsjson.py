@@ -11,18 +11,18 @@ class ExportAssetsJSONQueryParams:
 
 @dataclass
 class ExportAssetsJSONSecurity:
-    bearer_auth: shared.SchemeBearerAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer' }})
+    bearer_auth: shared.SchemeBearerAuth = field(metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer' }})
     
 
 @dataclass
 class ExportAssetsJSONRequest:
-    query_params: ExportAssetsJSONQueryParams = field(default=None)
-    security: ExportAssetsJSONSecurity = field(default=None)
+    query_params: ExportAssetsJSONQueryParams = field()
+    security: ExportAssetsJSONSecurity = field()
     
 
 @dataclass
 class ExportAssetsJSONResponse:
+    content_type: str = field()
+    status_code: int = field()
     assets: Optional[List[shared.Asset]] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

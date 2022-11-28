@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // DatastoreActivity
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The datastore activity that specifies where to store the processed data.
 **/
 export class DatastoreActivity extends SpeakeasyBase {
-  @Metadata({ data: "json, name=datastoreName" })
+  @SpeakeasyMetadata({ data: "json, name=datastoreName" })
   datastoreName: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 }

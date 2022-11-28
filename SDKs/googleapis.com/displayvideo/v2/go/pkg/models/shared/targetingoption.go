@@ -51,6 +51,8 @@ const (
 	TargetingOptionTargetingTypeEnumTargetingTypeContentGenre                 TargetingOptionTargetingTypeEnum = "TARGETING_TYPE_CONTENT_GENRE"
 )
 
+// TargetingOption
+// Represents a single targeting option, which is a targetable concept in DV360.
 type TargetingOption struct {
 	AgeRangeDetails                 *AgeRangeTargetingOptionDetails                 `json:"ageRangeDetails,omitempty"`
 	AppCategoryDetails              *AppCategoryTargetingOptionDetails              `json:"appCategoryDetails,omitempty"`

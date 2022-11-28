@@ -1,5 +1,7 @@
 package shared
 
+// Page
+// Detected page from OCR.
 type Page struct {
 	Blocks     []Block       `json:"blocks,omitempty"`
 	Confidence *float32      `json:"confidence,omitempty"`

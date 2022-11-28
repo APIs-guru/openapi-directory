@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { InstanceAccessDetails } from "./instanceaccessdetails";
 
 
+
 export class GetInstanceAccessDetailsResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=accessDetails" })
+  @SpeakeasyMetadata({ data: "json, name=accessDetails" })
   accessDetails?: InstanceAccessDetails;
 }

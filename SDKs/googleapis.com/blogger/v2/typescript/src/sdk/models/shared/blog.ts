@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Post } from "./post";
+
 
 
 // BlogLocale
@@ -8,13 +8,13 @@ import { Post } from "./post";
  * The locale this Blog is set to.
 **/
 export class BlogLocale extends SpeakeasyBase {
-  @Metadata({ data: "json, name=country" })
+  @SpeakeasyMetadata({ data: "json, name=country" })
   country?: string;
 
-  @Metadata({ data: "json, name=language" })
+  @SpeakeasyMetadata({ data: "json, name=language" })
   language?: string;
 
-  @Metadata({ data: "json, name=variant" })
+  @SpeakeasyMetadata({ data: "json, name=variant" })
   variant?: string;
 }
 
@@ -24,10 +24,10 @@ export class BlogLocale extends SpeakeasyBase {
  * The container of pages in this blog.
 **/
 export class BlogPages extends SpeakeasyBase {
-  @Metadata({ data: "json, name=selfLink" })
+  @SpeakeasyMetadata({ data: "json, name=selfLink" })
   selfLink?: string;
 
-  @Metadata({ data: "json, name=totalItems" })
+  @SpeakeasyMetadata({ data: "json, name=totalItems" })
   totalItems?: number;
 }
 
@@ -37,59 +37,59 @@ export class BlogPages extends SpeakeasyBase {
  * The container of posts in this blog.
 **/
 export class BlogPosts extends SpeakeasyBase {
-  @Metadata({ data: "json, name=items", elemType: shared.Post })
+  @SpeakeasyMetadata({ data: "json, name=items", elemType: Post })
   items?: Post[];
 
-  @Metadata({ data: "json, name=selfLink" })
+  @SpeakeasyMetadata({ data: "json, name=selfLink" })
   selfLink?: string;
 
-  @Metadata({ data: "json, name=totalItems" })
+  @SpeakeasyMetadata({ data: "json, name=totalItems" })
   totalItems?: number;
 }
 
 export enum BlogStatusEnum {
-    Live = "LIVE"
-,    Deleted = "DELETED"
+    Live = "LIVE",
+    Deleted = "DELETED"
 }
 
 
 export class Blog extends SpeakeasyBase {
-  @Metadata({ data: "json, name=customMetaData" })
+  @SpeakeasyMetadata({ data: "json, name=customMetaData" })
   customMetaData?: string;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=locale" })
+  @SpeakeasyMetadata({ data: "json, name=locale" })
   locale?: BlogLocale;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=pages" })
+  @SpeakeasyMetadata({ data: "json, name=pages" })
   pages?: BlogPages;
 
-  @Metadata({ data: "json, name=posts" })
+  @SpeakeasyMetadata({ data: "json, name=posts" })
   posts?: BlogPosts;
 
-  @Metadata({ data: "json, name=published" })
+  @SpeakeasyMetadata({ data: "json, name=published" })
   published?: string;
 
-  @Metadata({ data: "json, name=selfLink" })
+  @SpeakeasyMetadata({ data: "json, name=selfLink" })
   selfLink?: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: BlogStatusEnum;
 
-  @Metadata({ data: "json, name=updated" })
+  @SpeakeasyMetadata({ data: "json, name=updated" })
   updated?: string;
 
-  @Metadata({ data: "json, name=url" })
+  @SpeakeasyMetadata({ data: "json, name=url" })
   url?: string;
 }

@@ -1,41 +1,42 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class FindCampaignByAdReferenceQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=inventory_reference_id" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=inventory_reference_id" })
   inventoryReferenceId?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=inventory_reference_type" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=inventory_reference_type" })
   inventoryReferenceType?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=listing_id" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=listing_id" })
   listingId?: string;
 }
 
 
 export class FindCampaignByAdReferenceSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   apiAuth: shared.SchemeApiAuth;
 }
 
 
 export class FindCampaignByAdReferenceRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: FindCampaignByAdReferenceQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: FindCampaignByAdReferenceSecurity;
 }
 
 
 export class FindCampaignByAdReferenceResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   campaigns?: shared.Campaigns;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TaskStatusEnum } from "./taskstatusenum";
 // SetTaskStatusInput
 /**
@@ -34,23 +34,23 @@ var SetTaskStatusInput = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=errorId" }),
+        SpeakeasyMetadata({ data: "json, name=errorId" }),
         __metadata("design:type", String)
     ], SetTaskStatusInput.prototype, "errorId", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorMessage" }),
+        SpeakeasyMetadata({ data: "json, name=errorMessage" }),
         __metadata("design:type", String)
     ], SetTaskStatusInput.prototype, "errorMessage", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorStackTrace" }),
+        SpeakeasyMetadata({ data: "json, name=errorStackTrace" }),
         __metadata("design:type", String)
     ], SetTaskStatusInput.prototype, "errorStackTrace", void 0);
     __decorate([
-        Metadata({ data: "json, name=taskId" }),
+        SpeakeasyMetadata({ data: "json, name=taskId" }),
         __metadata("design:type", String)
     ], SetTaskStatusInput.prototype, "taskId", void 0);
     __decorate([
-        Metadata({ data: "json, name=taskStatus" }),
+        SpeakeasyMetadata({ data: "json, name=taskStatus" }),
         __metadata("design:type", String)
     ], SetTaskStatusInput.prototype, "taskStatus", void 0);
     return SetTaskStatusInput;

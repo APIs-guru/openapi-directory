@@ -1,24 +1,16 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ModifySettingPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=settingId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=settingId" })
   settingId: string;
 }
 
 
 export class ModifySettingRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=value" })
+  @SpeakeasyMetadata({ data: "json, name=value" })
   value?: string;
-}
-
-
-export class ModifySettingRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: ModifySettingPathParams;
-
-  @Metadata({ data: "request, media_type=application/json" })
-  request: ModifySettingRequestBody;
 }
 
 export enum ModifySetting200ApplicationJsonActionEnum {
@@ -31,38 +23,47 @@ export enum ModifySetting200ApplicationJsonActionEnum {
  * Information about the setting
 **/
 export class ModifySetting200ApplicationJsonData extends SpeakeasyBase {
-  @Metadata({ data: "json, name=settingId" })
+  @SpeakeasyMetadata({ data: "json, name=settingId" })
   settingId?: string;
 }
 
 export enum ModifySetting200ApplicationJsonResultEnum {
-    Success = "success"
-,    Error = "error"
+    Success = "success",
+    Error = "error"
 }
 
 
 export class ModifySetting200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=action" })
+  @SpeakeasyMetadata({ data: "json, name=action" })
   action: ModifySetting200ApplicationJsonActionEnum;
 
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data: ModifySetting200ApplicationJsonData;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: string;
 
-  @Metadata({ data: "json, name=result" })
+  @SpeakeasyMetadata({ data: "json, name=result" })
   result: ModifySetting200ApplicationJsonResultEnum;
 }
 
 
+export class ModifySettingRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: ModifySettingPathParams;
+
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request: ModifySettingRequestBody;
+}
+
+
 export class ModifySettingResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   modifySetting200ApplicationJsonObject?: ModifySetting200ApplicationJson;
 }

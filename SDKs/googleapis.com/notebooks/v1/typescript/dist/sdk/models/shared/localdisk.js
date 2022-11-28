@@ -22,9 +22,41 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { LocalDiskInitializeParams } from "./localdiskinitializeparams";
+import { RuntimeGuestOsFeature } from "./runtimeguestosfeature";
+// LocalDiskInput
+/**
+ * A Local attached disk resource.
+**/
+var LocalDiskInput = /** @class */ (function (_super) {
+    __extends(LocalDiskInput, _super);
+    function LocalDiskInput() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=initializeParams" }),
+        __metadata("design:type", LocalDiskInitializeParams)
+    ], LocalDiskInput.prototype, "initializeParams", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=interface" }),
+        __metadata("design:type", String)
+    ], LocalDiskInput.prototype, "interface", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=mode" }),
+        __metadata("design:type", String)
+    ], LocalDiskInput.prototype, "mode", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=source" }),
+        __metadata("design:type", String)
+    ], LocalDiskInput.prototype, "source", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=type" }),
+        __metadata("design:type", String)
+    ], LocalDiskInput.prototype, "type", void 0);
+    return LocalDiskInput;
+}(SpeakeasyBase));
+export { LocalDiskInput };
 // LocalDisk
 /**
  * A Local attached disk resource.
@@ -35,51 +67,51 @@ var LocalDisk = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=autoDelete" }),
+        SpeakeasyMetadata({ data: "json, name=autoDelete" }),
         __metadata("design:type", Boolean)
     ], LocalDisk.prototype, "autoDelete", void 0);
     __decorate([
-        Metadata({ data: "json, name=boot" }),
+        SpeakeasyMetadata({ data: "json, name=boot" }),
         __metadata("design:type", Boolean)
     ], LocalDisk.prototype, "boot", void 0);
     __decorate([
-        Metadata({ data: "json, name=deviceName" }),
+        SpeakeasyMetadata({ data: "json, name=deviceName" }),
         __metadata("design:type", String)
     ], LocalDisk.prototype, "deviceName", void 0);
     __decorate([
-        Metadata({ data: "json, name=guestOsFeatures", elemType: shared.RuntimeGuestOsFeature }),
+        SpeakeasyMetadata({ data: "json, name=guestOsFeatures", elemType: RuntimeGuestOsFeature }),
         __metadata("design:type", Array)
     ], LocalDisk.prototype, "guestOsFeatures", void 0);
     __decorate([
-        Metadata({ data: "json, name=index" }),
+        SpeakeasyMetadata({ data: "json, name=index" }),
         __metadata("design:type", Number)
     ], LocalDisk.prototype, "index", void 0);
     __decorate([
-        Metadata({ data: "json, name=initializeParams" }),
+        SpeakeasyMetadata({ data: "json, name=initializeParams" }),
         __metadata("design:type", LocalDiskInitializeParams)
     ], LocalDisk.prototype, "initializeParams", void 0);
     __decorate([
-        Metadata({ data: "json, name=interface" }),
+        SpeakeasyMetadata({ data: "json, name=interface" }),
         __metadata("design:type", String)
     ], LocalDisk.prototype, "interface", void 0);
     __decorate([
-        Metadata({ data: "json, name=kind" }),
+        SpeakeasyMetadata({ data: "json, name=kind" }),
         __metadata("design:type", String)
     ], LocalDisk.prototype, "kind", void 0);
     __decorate([
-        Metadata({ data: "json, name=licenses" }),
+        SpeakeasyMetadata({ data: "json, name=licenses" }),
         __metadata("design:type", Array)
     ], LocalDisk.prototype, "licenses", void 0);
     __decorate([
-        Metadata({ data: "json, name=mode" }),
+        SpeakeasyMetadata({ data: "json, name=mode" }),
         __metadata("design:type", String)
     ], LocalDisk.prototype, "mode", void 0);
     __decorate([
-        Metadata({ data: "json, name=source" }),
+        SpeakeasyMetadata({ data: "json, name=source" }),
         __metadata("design:type", String)
     ], LocalDisk.prototype, "source", void 0);
     __decorate([
-        Metadata({ data: "json, name=type" }),
+        SpeakeasyMetadata({ data: "json, name=type" }),
         __metadata("design:type", String)
     ], LocalDisk.prototype, "type", void 0);
     return LocalDisk;

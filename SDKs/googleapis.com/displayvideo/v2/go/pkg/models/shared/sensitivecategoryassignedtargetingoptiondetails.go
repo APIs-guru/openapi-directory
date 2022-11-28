@@ -25,6 +25,8 @@ const (
 	SensitiveCategoryAssignedTargetingOptionDetailsExcludedSensitiveCategoryEnumSensitiveCategoryLiveStreamingVideo      SensitiveCategoryAssignedTargetingOptionDetailsExcludedSensitiveCategoryEnum = "SENSITIVE_CATEGORY_LIVE_STREAMING_VIDEO"
 )
 
+// SensitiveCategoryAssignedTargetingOptionDetails
+// Targeting details for sensitive category. This will be populated in the details field of an AssignedTargetingOption when targeting_type is `TARGETING_TYPE_SENSITIVE_CATEGORY_EXCLUSION`.
 type SensitiveCategoryAssignedTargetingOptionDetails struct {
 	ExcludedSensitiveCategory *SensitiveCategoryAssignedTargetingOptionDetailsExcludedSensitiveCategoryEnum `json:"excludedSensitiveCategory,omitempty"`
 }

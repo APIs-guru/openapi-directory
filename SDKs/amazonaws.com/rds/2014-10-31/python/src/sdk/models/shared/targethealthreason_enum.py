@@ -1,0 +1,10 @@
+from dataclasses import dataclass, field
+from enum import Enum
+
+class TargetHealthReasonEnum(str, Enum):
+    UNREACHABLE = "UNREACHABLE"
+    CONNECTION_FAILED = "CONNECTION_FAILED"
+    AUTH_FAILURE = "AUTH_FAILURE"
+    PENDING_PROXY_CAPACITY = "PENDING_PROXY_CAPACITY"
+    INVALID_REPLICATION_STATE = "INVALID_REPLICATION_STATE"
+

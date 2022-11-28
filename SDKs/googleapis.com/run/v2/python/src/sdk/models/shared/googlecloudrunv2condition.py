@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class GoogleCloudRunV2ConditionExecutionReasonEnum(str, Enum):
     EXECUTION_REASON_UNDEFINED = "EXECUTION_REASON_UNDEFINED"
@@ -56,12 +58,16 @@ class GoogleCloudRunV2ConditionStateEnum(str, Enum):
 @dataclass_json
 @dataclass
 class GoogleCloudRunV2Condition:
-    execution_reason: Optional[GoogleCloudRunV2ConditionExecutionReasonEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'executionReason' }})
-    last_transition_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'lastTransitionTime' }})
-    message: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'message' }})
-    reason: Optional[GoogleCloudRunV2ConditionReasonEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'reason' }})
-    revision_reason: Optional[GoogleCloudRunV2ConditionRevisionReasonEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'revisionReason' }})
-    severity: Optional[GoogleCloudRunV2ConditionSeverityEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'severity' }})
-    state: Optional[GoogleCloudRunV2ConditionStateEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'state' }})
-    type: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    r"""GoogleCloudRunV2Condition
+    Defines a status condition for a resource.
+    """
+    
+    execution_reason: Optional[GoogleCloudRunV2ConditionExecutionReasonEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('executionReason') }})
+    last_transition_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('lastTransitionTime') }})
+    message: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('message') }})
+    reason: Optional[GoogleCloudRunV2ConditionReasonEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('reason') }})
+    revision_reason: Optional[GoogleCloudRunV2ConditionRevisionReasonEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('revisionReason') }})
+    severity: Optional[GoogleCloudRunV2ConditionSeverityEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('severity') }})
+    state: Optional[GoogleCloudRunV2ConditionStateEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('state') }})
+    type: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('type') }})
     

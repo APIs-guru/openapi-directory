@@ -30,7 +30,7 @@ type AnalyticsadminPropertiesDataStreamsMeasurementProtocolSecretsCreateSecurity
 type AnalyticsadminPropertiesDataStreamsMeasurementProtocolSecretsCreateRequest struct {
 	PathParams  AnalyticsadminPropertiesDataStreamsMeasurementProtocolSecretsCreatePathParams
 	QueryParams AnalyticsadminPropertiesDataStreamsMeasurementProtocolSecretsCreateQueryParams
-	Request     *shared.GoogleAnalyticsAdminV1alphaMeasurementProtocolSecret `request:"mediaType=application/json"`
+	Request     *shared.GoogleAnalyticsAdminV1alphaMeasurementProtocolSecretInput `request:"mediaType=application/json"`
 	Security    AnalyticsadminPropertiesDataStreamsMeasurementProtocolSecretsCreateSecurity
 }
 

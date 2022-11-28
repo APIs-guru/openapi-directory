@@ -32,7 +32,7 @@ type DisplayvideoCustomBiddingAlgorithmsScriptsCreateSecurity struct {
 type DisplayvideoCustomBiddingAlgorithmsScriptsCreateRequest struct {
 	PathParams  DisplayvideoCustomBiddingAlgorithmsScriptsCreatePathParams
 	QueryParams DisplayvideoCustomBiddingAlgorithmsScriptsCreateQueryParams
-	Request     *shared.CustomBiddingScript `request:"mediaType=application/json"`
+	Request     *shared.CustomBiddingScriptInput `request:"mediaType=application/json"`
 	Security    DisplayvideoCustomBiddingAlgorithmsScriptsCreateSecurity
 }
 

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Seats } from "./seats";
 // ChangePlanRequest
 /**
@@ -34,23 +34,23 @@ var ChangePlanRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=dealCode" }),
+        SpeakeasyMetadata({ data: "json, name=dealCode" }),
         __metadata("design:type", String)
     ], ChangePlanRequest.prototype, "dealCode", void 0);
     __decorate([
-        Metadata({ data: "json, name=kind" }),
+        SpeakeasyMetadata({ data: "json, name=kind" }),
         __metadata("design:type", String)
     ], ChangePlanRequest.prototype, "kind", void 0);
     __decorate([
-        Metadata({ data: "json, name=planName" }),
+        SpeakeasyMetadata({ data: "json, name=planName" }),
         __metadata("design:type", String)
     ], ChangePlanRequest.prototype, "planName", void 0);
     __decorate([
-        Metadata({ data: "json, name=purchaseOrderId" }),
+        SpeakeasyMetadata({ data: "json, name=purchaseOrderId" }),
         __metadata("design:type", String)
     ], ChangePlanRequest.prototype, "purchaseOrderId", void 0);
     __decorate([
-        Metadata({ data: "json, name=seats" }),
+        SpeakeasyMetadata({ data: "json, name=seats" }),
         __metadata("design:type", Seats)
     ], ChangePlanRequest.prototype, "seats", void 0);
     return ChangePlanRequest;

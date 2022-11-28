@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import cloudrunservice
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class Destination:
-    cloud_run_service: Optional[cloudrunservice.CloudRunService] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'cloudRunService' }})
+    r"""Destination
+    Represents a target of an invocation over HTTP.
+    """
+    
+    cloud_run_service: Optional[CloudRunService] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('cloudRunService') }})
     

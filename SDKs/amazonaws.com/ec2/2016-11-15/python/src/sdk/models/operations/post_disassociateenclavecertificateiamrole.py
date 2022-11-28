@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostDisassociateEnclaveCertificateIamRoleActionEnum(str, Enum):
     DISASSOCIATE_ENCLAVE_CERTIFICATE_IAM_ROLE = "DisassociateEnclaveCertificateIamRole"
@@ -10,8 +14,8 @@ class PostDisassociateEnclaveCertificateIamRoleVersionEnum(str, Enum):
 
 @dataclass
 class PostDisassociateEnclaveCertificateIamRoleQueryParams:
-    action: PostDisassociateEnclaveCertificateIamRoleActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostDisassociateEnclaveCertificateIamRoleVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostDisassociateEnclaveCertificateIamRoleActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostDisassociateEnclaveCertificateIamRoleVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostDisassociateEnclaveCertificateIamRoleHeaders:
 
 @dataclass
 class PostDisassociateEnclaveCertificateIamRoleRequest:
-    query_params: PostDisassociateEnclaveCertificateIamRoleQueryParams = field(default=None)
-    headers: PostDisassociateEnclaveCertificateIamRoleHeaders = field(default=None)
+    headers: PostDisassociateEnclaveCertificateIamRoleHeaders = field()
+    query_params: PostDisassociateEnclaveCertificateIamRoleQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostDisassociateEnclaveCertificateIamRoleResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

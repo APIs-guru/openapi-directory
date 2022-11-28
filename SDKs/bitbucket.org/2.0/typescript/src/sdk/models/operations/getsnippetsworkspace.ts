@@ -1,77 +1,60 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetSnippetsWorkspacePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=workspace" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=workspace" })
   workspace: string;
 }
 
 export enum GetSnippetsWorkspaceRoleEnum {
-    Owner = "owner"
-,    Contributor = "contributor"
-,    Member = "member"
+    Owner = "owner",
+    Contributor = "contributor",
+    Member = "member"
 }
 
 
 export class GetSnippetsWorkspaceQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=role" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=role" })
   role?: GetSnippetsWorkspaceRoleEnum;
 }
 
 
-export class GetSnippetsWorkspaceSecurityOption1 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
-  oauth2: shared.SchemeOauth2;
-}
-
-
-export class GetSnippetsWorkspaceSecurityOption2 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=basic" })
-  basic: shared.SchemeBasic;
-}
-
-
-export class GetSnippetsWorkspaceSecurityOption3 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
-  apiKey: shared.SchemeApiKey;
-}
-
-
 export class GetSnippetsWorkspaceSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, option=true" })
-  option1?: GetSnippetsWorkspaceSecurityOption1;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
+  oauth2?: shared.SchemeOauth2;
 
-  @Metadata({ data: "security, option=true" })
-  option2?: GetSnippetsWorkspaceSecurityOption2;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=basic" })
+  basic?: shared.SchemeBasic;
 
-  @Metadata({ data: "security, option=true" })
-  option3?: GetSnippetsWorkspaceSecurityOption3;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  apiKey?: shared.SchemeApiKey;
 }
 
 
 export class GetSnippetsWorkspaceRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetSnippetsWorkspacePathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetSnippetsWorkspaceQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: GetSnippetsWorkspaceSecurity;
 }
 
 
 export class GetSnippetsWorkspaceResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   error?: Map<string, any>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   paginatedSnippets?: shared.PaginatedSnippets;
 }

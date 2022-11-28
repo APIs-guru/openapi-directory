@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class ApigeeOrganizationsInstancesAttachmentsCreatePathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,21 +26,21 @@ class ApigeeOrganizationsInstancesAttachmentsCreateQueryParams:
 
 @dataclass
 class ApigeeOrganizationsInstancesAttachmentsCreateSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class ApigeeOrganizationsInstancesAttachmentsCreateRequest:
-    path_params: ApigeeOrganizationsInstancesAttachmentsCreatePathParams = field(default=None)
-    query_params: ApigeeOrganizationsInstancesAttachmentsCreateQueryParams = field(default=None)
-    request: Optional[shared.GoogleCloudApigeeV1InstanceAttachment] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: ApigeeOrganizationsInstancesAttachmentsCreateSecurity = field(default=None)
+    path_params: ApigeeOrganizationsInstancesAttachmentsCreatePathParams = field()
+    query_params: ApigeeOrganizationsInstancesAttachmentsCreateQueryParams = field()
+    security: ApigeeOrganizationsInstancesAttachmentsCreateSecurity = field()
+    request: Optional[shared.GoogleCloudApigeeV1InstanceAttachmentInput] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class ApigeeOrganizationsInstancesAttachmentsCreateResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_longrunning_operation: Optional[shared.GoogleLongrunningOperation] = field(default=None)
-    status_code: int = field(default=None)
     

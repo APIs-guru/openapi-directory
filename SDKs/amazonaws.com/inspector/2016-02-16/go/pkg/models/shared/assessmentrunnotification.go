@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// AssessmentRunNotification
+// Used as one of the elements of the <a>AssessmentRun</a> data type.
 type AssessmentRunNotification struct {
 	Date                 time.Time                                   `json:"date"`
 	Error                bool                                        `json:"error"`

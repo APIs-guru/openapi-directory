@@ -1,41 +1,42 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class AddOrUpdateNonPrimaryStateTaxPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=companyId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=companyId" })
   companyId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=employeeId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=employeeId" })
   employeeId: string;
 }
 
 
 export class AddOrUpdateNonPrimaryStateTaxSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   paylocityAuth: shared.SchemePaylocityAuth;
 }
 
 
 export class AddOrUpdateNonPrimaryStateTaxRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: AddOrUpdateNonPrimaryStateTaxPathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: shared.NonPrimaryStateTax;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: AddOrUpdateNonPrimaryStateTaxSecurity;
 }
 
 
 export class AddOrUpdateNonPrimaryStateTaxResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata({ elemType: shared.Error })
+  @SpeakeasyMetadata({ elemType: shared.Error })
   errors?: shared.Error[];
 }

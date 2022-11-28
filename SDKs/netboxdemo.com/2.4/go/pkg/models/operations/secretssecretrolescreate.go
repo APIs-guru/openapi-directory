@@ -5,7 +5,7 @@ import (
 )
 
 type SecretsSecretRolesCreateRequest struct {
-	Request shared.SecretRole `request:"mediaType=application/json"`
+	Request shared.SecretRoleInput `request:"mediaType=application/json"`
 }
 
 type SecretsSecretRolesCreateResponse struct {

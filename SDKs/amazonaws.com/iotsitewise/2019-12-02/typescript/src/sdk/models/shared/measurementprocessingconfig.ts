@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ForwardingConfig } from "./forwardingconfig";
+
 
 
 // MeasurementProcessingConfig
@@ -7,6 +8,6 @@ import { ForwardingConfig } from "./forwardingconfig";
  * The processing configuration for the given measurement property. You can configure measurements to be kept at the edge or forwarded to the Amazon Web Services Cloud. By default, measurements are forwarded to the cloud.
 **/
 export class MeasurementProcessingConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=forwardingConfig" })
+  @SpeakeasyMetadata({ data: "json, name=forwardingConfig" })
   forwardingConfig: ForwardingConfig;
 }

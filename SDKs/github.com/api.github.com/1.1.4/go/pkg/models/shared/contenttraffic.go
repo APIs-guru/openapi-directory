@@ -1,5 +1,7 @@
 package shared
 
+// ContentTraffic
+// Content Traffic
 type ContentTraffic struct {
 	Count   int64  `json:"count"`
 	Path    string `json:"path"`

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 /**
  * Single source file that is part of the version to be deployed. Each source file that is deployed must be specified separately.
 **/

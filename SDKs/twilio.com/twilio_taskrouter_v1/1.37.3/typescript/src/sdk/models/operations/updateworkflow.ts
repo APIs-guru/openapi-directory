@@ -1,0 +1,69 @@
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import * as shared from "../shared";
+
+export const UpdateWorkflowServerList = [
+	"https://taskrouter.twilio.com",
+] as const;
+
+
+export class UpdateWorkflowPathParams extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=Sid" })
+  sid: string;
+
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=WorkspaceSid" })
+  workspaceSid: string;
+}
+
+
+export class UpdateWorkflowUpdateWorkflowRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "form, name=AssignmentCallbackUrl;" })
+  assignmentCallbackUrl?: string;
+
+  @SpeakeasyMetadata({ data: "form, name=Configuration;" })
+  configuration?: string;
+
+  @SpeakeasyMetadata({ data: "form, name=FallbackAssignmentCallbackUrl;" })
+  fallbackAssignmentCallbackUrl?: string;
+
+  @SpeakeasyMetadata({ data: "form, name=FriendlyName;" })
+  friendlyName?: string;
+
+  @SpeakeasyMetadata({ data: "form, name=ReEvaluateTasks;" })
+  reEvaluateTasks?: string;
+
+  @SpeakeasyMetadata({ data: "form, name=TaskReservationTimeout;" })
+  taskReservationTimeout?: number;
+}
+
+
+export class UpdateWorkflowSecurity extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=basic" })
+  accountSidAuthToken: shared.SchemeAccountSidAuthToken;
+}
+
+
+export class UpdateWorkflowRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  serverUrl?: string;
+
+  @SpeakeasyMetadata()
+  pathParams: UpdateWorkflowPathParams;
+
+  @SpeakeasyMetadata({ data: "request, media_type=application/x-www-form-urlencoded" })
+  request?: UpdateWorkflowUpdateWorkflowRequest;
+
+  @SpeakeasyMetadata()
+  security: UpdateWorkflowSecurity;
+}
+
+
+export class UpdateWorkflowResponse extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  contentType: string;
+
+  @SpeakeasyMetadata()
+  statusCode: number;
+
+  @SpeakeasyMetadata()
+  taskrouterV1WorkspaceWorkflow?: shared.TaskrouterV1WorkspaceWorkflow;
+}

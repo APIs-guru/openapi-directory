@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // SendingOptions
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Used to enable or disable email sending for messages that use this configuration set in the current AWS Region.
 **/
 export class SendingOptions extends SpeakeasyBase {
-  @Metadata({ data: "json, name=SendingEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=SendingEnabled" })
   sendingEnabled?: boolean;
 }

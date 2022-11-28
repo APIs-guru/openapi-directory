@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass_json
 @dataclass
 class AwsEcsTaskDefinitionContainerDefinitionsVolumesFromDetails:
-    read_only: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ReadOnly' }})
-    source_container: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'SourceContainer' }})
+    r"""AwsEcsTaskDefinitionContainerDefinitionsVolumesFromDetails
+    A data volume to mount from another container.
+    """
+    
+    read_only: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ReadOnly') }})
+    source_container: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('SourceContainer') }})
     

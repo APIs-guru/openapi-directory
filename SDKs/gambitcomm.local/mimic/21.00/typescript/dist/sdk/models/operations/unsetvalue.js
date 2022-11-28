@@ -22,26 +22,26 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var UnsetValuePathParams = /** @class */ (function (_super) {
     __extends(UnsetValuePathParams, _super);
     function UnsetValuePathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=agentNum" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=agentNum" }),
         __metadata("design:type", Number)
     ], UnsetValuePathParams.prototype, "agentNum", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=instance" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=instance" }),
         __metadata("design:type", String)
     ], UnsetValuePathParams.prototype, "instance", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=object" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=object" }),
         __metadata("design:type", String)
     ], UnsetValuePathParams.prototype, "object", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=variable" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=variable" }),
         __metadata("design:type", String)
     ], UnsetValuePathParams.prototype, "variable", void 0);
     return UnsetValuePathParams;
@@ -53,7 +53,7 @@ var UnsetValueRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", UnsetValuePathParams)
     ], UnsetValueRequest.prototype, "pathParams", void 0);
     return UnsetValueRequest;
@@ -65,15 +65,15 @@ var UnsetValueResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], UnsetValueResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], UnsetValueResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], UnsetValueResponse.prototype, "unsetValue200ApplicationJsonString", void 0);
     return UnsetValueResponse;

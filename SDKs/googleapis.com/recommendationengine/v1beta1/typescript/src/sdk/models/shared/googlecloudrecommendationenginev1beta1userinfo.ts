@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudRecommendationengineV1beta1UserInfo
@@ -6,18 +7,18 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Information of end users.
 **/
 export class GoogleCloudRecommendationengineV1beta1UserInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=directUserRequest" })
+  @SpeakeasyMetadata({ data: "json, name=directUserRequest" })
   directUserRequest?: boolean;
 
-  @Metadata({ data: "json, name=ipAddress" })
+  @SpeakeasyMetadata({ data: "json, name=ipAddress" })
   ipAddress?: string;
 
-  @Metadata({ data: "json, name=userAgent" })
+  @SpeakeasyMetadata({ data: "json, name=userAgent" })
   userAgent?: string;
 
-  @Metadata({ data: "json, name=userId" })
+  @SpeakeasyMetadata({ data: "json, name=userId" })
   userId?: string;
 
-  @Metadata({ data: "json, name=visitorId" })
+  @SpeakeasyMetadata({ data: "json, name=visitorId" })
   visitorId?: string;
 }

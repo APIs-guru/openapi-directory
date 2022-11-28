@@ -1,5 +1,7 @@
 package shared
 
+// VoidedPurchase
+// A VoidedPurchase resource indicates a purchase that was either canceled/refunded/charged-back.
 type VoidedPurchase struct {
 	Kind               *string `json:"kind,omitempty"`
 	OrderID            *string `json:"orderId,omitempty"`

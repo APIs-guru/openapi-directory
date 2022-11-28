@@ -1,34 +1,37 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import List,Optional
 from sdk.models import shared
 
 
 @dataclass
 class UpdateLeaveApplicationPathParams:
-    leave_application_id: str = field(default=None, metadata={'path_param': { 'field_name': 'LeaveApplicationID', 'style': 'simple', 'explode': False }})
+    leave_application_id: str = field(metadata={'path_param': { 'field_name': 'LeaveApplicationID', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class UpdateLeaveApplicationHeaders:
-    xero_tenant_id: str = field(default=None, metadata={'header': { 'field_name': 'Xero-Tenant-Id', 'style': 'simple', 'explode': False }})
+    xero_tenant_id: str = field(metadata={'header': { 'field_name': 'Xero-Tenant-Id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class UpdateLeaveApplicationSecurity:
-    o_auth2: shared.SchemeOAuth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    o_auth2: shared.SchemeOAuth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class UpdateLeaveApplicationRequest:
-    path_params: UpdateLeaveApplicationPathParams = field(default=None)
-    headers: UpdateLeaveApplicationHeaders = field(default=None)
-    request: List[shared.LeaveApplication] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: UpdateLeaveApplicationSecurity = field(default=None)
+    headers: UpdateLeaveApplicationHeaders = field()
+    path_params: UpdateLeaveApplicationPathParams = field()
+    request: List[shared.LeaveApplicationInput] = field(metadata={'request': { 'media_type': 'application/json' }})
+    security: UpdateLeaveApplicationSecurity = field()
     
 
 @dataclass
 class UpdateLeaveApplicationResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     leave_applications: Optional[shared.LeaveApplications] = field(default=None)
-    status_code: int = field(default=None)
     

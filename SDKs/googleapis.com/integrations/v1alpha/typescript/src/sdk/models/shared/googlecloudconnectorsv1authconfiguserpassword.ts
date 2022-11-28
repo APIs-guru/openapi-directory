@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudConnectorsV1Secret } from "./googlecloudconnectorsv1secret";
+
 
 
 // GoogleCloudConnectorsV1AuthConfigUserPassword
@@ -7,9 +8,9 @@ import { GoogleCloudConnectorsV1Secret } from "./googlecloudconnectorsv1secret";
  * Parameters to support Username and Password Authentication.
 **/
 export class GoogleCloudConnectorsV1AuthConfigUserPassword extends SpeakeasyBase {
-  @Metadata({ data: "json, name=password" })
+  @SpeakeasyMetadata({ data: "json, name=password" })
   password?: GoogleCloudConnectorsV1Secret;
 
-  @Metadata({ data: "json, name=username" })
+  @SpeakeasyMetadata({ data: "json, name=username" })
   username?: string;
 }

@@ -8,6 +8,8 @@ const (
 	GrpcRouteHeaderMatchTypeEnumRegularExpression GrpcRouteHeaderMatchTypeEnum = "REGULAR_EXPRESSION"
 )
 
+// GrpcRouteHeaderMatch
+// A match against a collection of headers.
 type GrpcRouteHeaderMatch struct {
 	Key   *string                       `json:"key,omitempty"`
 	Type  *GrpcRouteHeaderMatchTypeEnum `json:"type,omitempty"`

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 /**
  * ItemWebhookUpdateRequest defines the request schema for `/item/webhook/update`
 **/

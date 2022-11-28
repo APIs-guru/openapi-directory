@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // MatchItem
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The Match group object.
 **/
 export class MatchItem extends SpeakeasyBase {
-  @Metadata({ data: "json, name=MatchId" })
+  @SpeakeasyMetadata({ data: "json, name=MatchId" })
   matchId?: string;
 
-  @Metadata({ data: "json, name=ProfileIds" })
+  @SpeakeasyMetadata({ data: "json, name=ProfileIds" })
   profileIds?: string[];
 }

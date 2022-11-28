@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // GoogleCloudPolicytroubleshooterV1AccessTuple
 /**
  * Information about the principal, resource, and permission to check.
@@ -33,15 +33,15 @@ var GoogleCloudPolicytroubleshooterV1AccessTuple = /** @class */ (function (_sup
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=fullResourceName" }),
+        SpeakeasyMetadata({ data: "json, name=fullResourceName" }),
         __metadata("design:type", String)
     ], GoogleCloudPolicytroubleshooterV1AccessTuple.prototype, "fullResourceName", void 0);
     __decorate([
-        Metadata({ data: "json, name=permission" }),
+        SpeakeasyMetadata({ data: "json, name=permission" }),
         __metadata("design:type", String)
     ], GoogleCloudPolicytroubleshooterV1AccessTuple.prototype, "permission", void 0);
     __decorate([
-        Metadata({ data: "json, name=principal" }),
+        SpeakeasyMetadata({ data: "json, name=principal" }),
         __metadata("design:type", String)
     ], GoogleCloudPolicytroubleshooterV1AccessTuple.prototype, "principal", void 0);
     return GoogleCloudPolicytroubleshooterV1AccessTuple;

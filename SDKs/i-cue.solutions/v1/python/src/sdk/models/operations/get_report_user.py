@@ -9,11 +9,11 @@ class GetReportUserHeaders:
 
 @dataclass
 class GetReportUserRequest:
-    headers: GetReportUserHeaders = field(default=None)
+    headers: GetReportUserHeaders = field()
     
 
 @dataclass
 class GetReportUserResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

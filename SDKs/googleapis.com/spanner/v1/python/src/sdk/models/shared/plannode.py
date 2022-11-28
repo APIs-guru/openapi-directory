@@ -1,8 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from typing import Any,List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import childlink
-from . import shortrepresentation
+from sdk import utils
+from . import *
 
 class PlanNodeKindEnum(str, Enum):
     KIND_UNSPECIFIED = "KIND_UNSPECIFIED"
@@ -13,11 +14,15 @@ class PlanNodeKindEnum(str, Enum):
 @dataclass_json
 @dataclass
 class PlanNode:
-    child_links: Optional[List[childlink.ChildLink]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'childLinks' }})
-    display_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'displayName' }})
-    execution_stats: Optional[dict[str, Any]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'executionStats' }})
-    index: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'index' }})
-    kind: Optional[PlanNodeKindEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'kind' }})
-    metadata: Optional[dict[str, Any]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'metadata' }})
-    short_representation: Optional[shortrepresentation.ShortRepresentation] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'shortRepresentation' }})
+    r"""PlanNode
+    Node information for nodes appearing in a QueryPlan.plan_nodes.
+    """
+    
+    child_links: Optional[List[ChildLink]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('childLinks') }})
+    display_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('displayName') }})
+    execution_stats: Optional[dict[str, Any]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('executionStats') }})
+    index: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('index') }})
+    kind: Optional[PlanNodeKindEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('kind') }})
+    metadata: Optional[dict[str, Any]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('metadata') }})
+    short_representation: Optional[ShortRepresentation] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('shortRepresentation') }})
     

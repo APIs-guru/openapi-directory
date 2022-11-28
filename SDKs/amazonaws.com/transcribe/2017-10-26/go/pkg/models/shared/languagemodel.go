@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// LanguageModel
+// The structure used to describe a custom language model.
 type LanguageModel struct {
 	BaseModelName       *BaseModelNameEnum   `json:"BaseModelName,omitempty"`
 	CreateTime          *time.Time           `json:"CreateTime,omitempty"`

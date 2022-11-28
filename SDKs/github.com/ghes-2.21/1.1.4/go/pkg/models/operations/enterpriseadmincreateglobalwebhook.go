@@ -8,6 +8,8 @@ type EnterpriseAdminCreateGlobalWebhookHeaders struct {
 	Accept string `header:"style=simple,explode=false,name=accept"`
 }
 
+// EnterpriseAdminCreateGlobalWebhookRequestBodyConfig
+// Key/value pairs to provide settings for this webhook.
 type EnterpriseAdminCreateGlobalWebhookRequestBodyConfig struct {
 	ContentType *string `json:"content_type,omitempty"`
 	InsecureSsl *string `json:"insecure_ssl,omitempty"`

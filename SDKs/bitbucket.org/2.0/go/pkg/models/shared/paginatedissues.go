@@ -1,5 +1,7 @@
 package shared
 
+// PaginatedIssues
+// A paginated list of issues.
 type PaginatedIssues struct {
 	Next     *string                  `json:"next,omitempty"`
 	Page     *int64                   `json:"page,omitempty"`

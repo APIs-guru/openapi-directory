@@ -1,38 +1,39 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class SetProjectConfigPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=project-id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=project-id" })
   projectId: number;
 }
 
 
 export class SetProjectConfigSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=bearer" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" })
   accessToken: shared.SchemeAccessToken;
 }
 
 
 export class SetProjectConfigRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: SetProjectConfigPathParams;
 
-  @Metadata({ data: "request, media_type=application/x-yaml" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/x-yaml" })
   request: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: SetProjectConfigSecurity;
 }
 
 
 export class SetProjectConfigResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

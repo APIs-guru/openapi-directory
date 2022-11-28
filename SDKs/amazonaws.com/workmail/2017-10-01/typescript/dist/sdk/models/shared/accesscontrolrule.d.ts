@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { AccessControlRuleEffectEnum } from "./accesscontrolruleeffectenum";
 /**
  * A rule that controls access to an Amazon WorkMail organization.

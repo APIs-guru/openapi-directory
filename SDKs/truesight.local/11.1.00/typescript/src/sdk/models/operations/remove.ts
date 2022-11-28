@@ -1,37 +1,38 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class RemovePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=deviceId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=deviceId" })
   deviceId: number;
 }
 
 
 export class RemoveQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=monitorClass" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=monitorClass" })
   monitorClass: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=monitorSid" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=monitorSid" })
   monitorSid: string;
 }
 
 
 export class RemoveRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: RemovePathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: RemoveQueryParams;
 }
 
 
 export class RemoveResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

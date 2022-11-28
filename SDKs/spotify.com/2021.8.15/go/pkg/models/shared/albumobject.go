@@ -1,5 +1,8 @@
 package shared
 
+// AlbumObjectTracks
+// The tracks of the album.
+// https://developer.spotify.com/documentation/web-api/reference/#object-pagingobject - Find more info on the official Spotify Web API Reference
 type AlbumObjectTracks struct {
 	Href     *string                 `json:"href,omitempty"`
 	Items    []SimplifiedTrackObject `json:"items,omitempty"`
@@ -10,6 +13,9 @@ type AlbumObjectTracks struct {
 	Total    *int32                  `json:"total,omitempty"`
 }
 
+// AlbumObject
+
+// https://developer.spotify.com/documentation/web-api/reference/#object-albumobject - Find more info on the official Spotify Web API Reference
 type AlbumObject struct {
 	AlbumType            *string                 `json:"album_type,omitempty"`
 	Artists              []ArtistObject          `json:"artists,omitempty"`

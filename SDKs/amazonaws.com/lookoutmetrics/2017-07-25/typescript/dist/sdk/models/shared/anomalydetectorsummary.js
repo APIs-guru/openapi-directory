@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AnomalyDetectorStatusEnum } from "./anomalydetectorstatusenum";
 // AnomalyDetectorSummary
 /**
@@ -34,31 +34,31 @@ var AnomalyDetectorSummary = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=AnomalyDetectorArn" }),
+        SpeakeasyMetadata({ data: "json, name=AnomalyDetectorArn" }),
         __metadata("design:type", String)
     ], AnomalyDetectorSummary.prototype, "anomalyDetectorArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=AnomalyDetectorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=AnomalyDetectorDescription" }),
         __metadata("design:type", String)
     ], AnomalyDetectorSummary.prototype, "anomalyDetectorDescription", void 0);
     __decorate([
-        Metadata({ data: "json, name=AnomalyDetectorName" }),
+        SpeakeasyMetadata({ data: "json, name=AnomalyDetectorName" }),
         __metadata("design:type", String)
     ], AnomalyDetectorSummary.prototype, "anomalyDetectorName", void 0);
     __decorate([
-        Metadata({ data: "json, name=CreationTime" }),
+        SpeakeasyMetadata({ data: "json, name=CreationTime" }),
         __metadata("design:type", Date)
     ], AnomalyDetectorSummary.prototype, "creationTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=LastModificationTime" }),
+        SpeakeasyMetadata({ data: "json, name=LastModificationTime" }),
         __metadata("design:type", Date)
     ], AnomalyDetectorSummary.prototype, "lastModificationTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=Status" }),
+        SpeakeasyMetadata({ data: "json, name=Status" }),
         __metadata("design:type", String)
     ], AnomalyDetectorSummary.prototype, "status", void 0);
     __decorate([
-        Metadata({ data: "json, name=Tags" }),
+        SpeakeasyMetadata({ data: "json, name=Tags" }),
         __metadata("design:type", Map)
     ], AnomalyDetectorSummary.prototype, "tags", void 0);
     return AnomalyDetectorSummary;

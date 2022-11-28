@@ -1,7 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import solidfill
+from sdk import utils
+from . import *
 
 class TableCellBackgroundFillPropertyStateEnum(str, Enum):
     RENDERED = "RENDERED"
@@ -12,6 +14,10 @@ class TableCellBackgroundFillPropertyStateEnum(str, Enum):
 @dataclass_json
 @dataclass
 class TableCellBackgroundFill:
-    property_state: Optional[TableCellBackgroundFillPropertyStateEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'propertyState' }})
-    solid_fill: Optional[solidfill.SolidFill] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'solidFill' }})
+    r"""TableCellBackgroundFill
+    The table cell background fill.
+    """
+    
+    property_state: Optional[TableCellBackgroundFillPropertyStateEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('propertyState') }})
+    solid_fill: Optional[SolidFill] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('solidFill') }})
     

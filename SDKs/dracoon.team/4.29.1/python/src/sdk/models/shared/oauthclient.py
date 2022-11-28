@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class OAuthClientClientTypeEnum(str, Enum):
     CONFIDENTIAL = "confidential"
@@ -17,16 +19,20 @@ class OAuthClientGrantTypesEnum(str, Enum):
 @dataclass_json
 @dataclass
 class OAuthClient:
-    access_token_validity: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'accessTokenValidity' }})
-    approval_validity: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'approvalValidity' }})
-    client_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'clientId' }})
-    client_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'clientName' }})
-    client_secret: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'clientSecret' }})
-    client_type: Optional[OAuthClientClientTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'clientType' }})
-    grant_types: List[OAuthClientGrantTypesEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'grantTypes' }})
-    is_enabled: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'isEnabled' }})
-    is_external: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'isExternal' }})
-    is_standard: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'isStandard' }})
-    redirect_uris: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'redirectUris' }})
-    refresh_token_validity: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'refreshTokenValidity' }})
+    r"""OAuthClient
+    OAuth client information
+    """
+    
+    client_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('clientId') }})
+    grant_types: List[OAuthClientGrantTypesEnum] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('grantTypes') }})
+    access_token_validity: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('accessTokenValidity') }})
+    approval_validity: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('approvalValidity') }})
+    client_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('clientName') }})
+    client_secret: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('clientSecret') }})
+    client_type: Optional[OAuthClientClientTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('clientType') }})
+    is_enabled: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('isEnabled') }})
+    is_external: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('isExternal') }})
+    is_standard: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('isStandard') }})
+    redirect_uris: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('redirectUris') }})
+    refresh_token_validity: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('refreshTokenValidity') }})
     

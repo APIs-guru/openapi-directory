@@ -1,5 +1,16 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudPaymentsResellerSubscriptionV1Amount } from "./googlecloudpaymentsresellersubscriptionv1amount";
+
+
+
+// GoogleCloudPaymentsResellerSubscriptionV1PromotionIntroductoryPricingDetailsIntroductoryPricingSpecInput
+/** 
+ * The duration of an introductory pricing promotion.
+**/
+export class GoogleCloudPaymentsResellerSubscriptionV1PromotionIntroductoryPricingDetailsIntroductoryPricingSpecInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=discountAmount" })
+  discountAmount?: GoogleCloudPaymentsResellerSubscriptionV1Amount;
+}
 
 
 // GoogleCloudPaymentsResellerSubscriptionV1PromotionIntroductoryPricingDetailsIntroductoryPricingSpec
@@ -7,15 +18,15 @@ import { GoogleCloudPaymentsResellerSubscriptionV1Amount } from "./googlecloudpa
  * The duration of an introductory pricing promotion.
 **/
 export class GoogleCloudPaymentsResellerSubscriptionV1PromotionIntroductoryPricingDetailsIntroductoryPricingSpec extends SpeakeasyBase {
-  @Metadata({ data: "json, name=discountAmount" })
+  @SpeakeasyMetadata({ data: "json, name=discountAmount" })
   discountAmount?: GoogleCloudPaymentsResellerSubscriptionV1Amount;
 
-  @Metadata({ data: "json, name=discountRatioMicros" })
+  @SpeakeasyMetadata({ data: "json, name=discountRatioMicros" })
   discountRatioMicros?: string;
 
-  @Metadata({ data: "json, name=recurrenceCount" })
+  @SpeakeasyMetadata({ data: "json, name=recurrenceCount" })
   recurrenceCount?: number;
 
-  @Metadata({ data: "json, name=regionCode" })
+  @SpeakeasyMetadata({ data: "json, name=regionCode" })
   regionCode?: string;
 }

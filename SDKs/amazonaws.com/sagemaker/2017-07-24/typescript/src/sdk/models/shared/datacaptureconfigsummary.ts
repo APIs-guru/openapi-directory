@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CaptureStatusEnum } from "./capturestatusenum";
+
 
 
 // DataCaptureConfigSummary
@@ -7,18 +8,18 @@ import { CaptureStatusEnum } from "./capturestatusenum";
  * <p/>
 **/
 export class DataCaptureConfigSummary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CaptureStatus" })
+  @SpeakeasyMetadata({ data: "json, name=CaptureStatus" })
   captureStatus: CaptureStatusEnum;
 
-  @Metadata({ data: "json, name=CurrentSamplingPercentage" })
+  @SpeakeasyMetadata({ data: "json, name=CurrentSamplingPercentage" })
   currentSamplingPercentage: number;
 
-  @Metadata({ data: "json, name=DestinationS3Uri" })
+  @SpeakeasyMetadata({ data: "json, name=DestinationS3Uri" })
   destinationS3Uri: string;
 
-  @Metadata({ data: "json, name=EnableCapture" })
+  @SpeakeasyMetadata({ data: "json, name=EnableCapture" })
   enableCapture: boolean;
 
-  @Metadata({ data: "json, name=KmsKeyId" })
+  @SpeakeasyMetadata({ data: "json, name=KmsKeyId" })
   kmsKeyId: string;
 }

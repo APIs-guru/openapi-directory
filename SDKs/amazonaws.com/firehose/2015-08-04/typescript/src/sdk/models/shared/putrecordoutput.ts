@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class PutRecordOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Encrypted" })
+  @SpeakeasyMetadata({ data: "json, name=Encrypted" })
   encrypted?: boolean;
 
-  @Metadata({ data: "json, name=RecordId" })
+  @SpeakeasyMetadata({ data: "json, name=RecordId" })
   recordId: string;
 }

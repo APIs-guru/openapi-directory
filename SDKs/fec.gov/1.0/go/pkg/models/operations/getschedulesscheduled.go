@@ -32,10 +32,6 @@ type GetSchedulesScheduleDQueryParams struct {
 	SortNullsLast                 *bool      `queryParam:"style=form,explode=true,name=sort_nulls_last"`
 }
 
-type GetSchedulesScheduleDRequest struct {
-	QueryParams GetSchedulesScheduleDQueryParams
-}
-
 type GetSchedulesScheduleDDefaultApplicationJSONResults struct {
 	ActionCode                          *string                  `json:"action_code,omitempty"`
 	ActionCodeFull                      *string                  `json:"action_code_full,omitempty"`
@@ -94,6 +90,10 @@ type GetSchedulesScheduleDDefaultApplicationJSONResults struct {
 type GetSchedulesScheduleDDefaultApplicationJSON struct {
 	Pagination *shared.OffsetInfo                                   `json:"pagination,omitempty"`
 	Results    []GetSchedulesScheduleDDefaultApplicationJSONResults `json:"results,omitempty"`
+}
+
+type GetSchedulesScheduleDRequest struct {
+	QueryParams GetSchedulesScheduleDQueryParams
 }
 
 type GetSchedulesScheduleDResponse struct {

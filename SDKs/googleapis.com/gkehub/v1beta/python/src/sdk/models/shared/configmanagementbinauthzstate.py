@@ -1,7 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import configmanagementbinauthzversion
+from sdk import utils
+from . import *
 
 class ConfigManagementBinauthzStateWebhookEnum(str, Enum):
     DEPLOYMENT_STATE_UNSPECIFIED = "DEPLOYMENT_STATE_UNSPECIFIED"
@@ -13,6 +15,10 @@ class ConfigManagementBinauthzStateWebhookEnum(str, Enum):
 @dataclass_json
 @dataclass
 class ConfigManagementBinauthzState:
-    version: Optional[configmanagementbinauthzversion.ConfigManagementBinauthzVersion] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'version' }})
-    webhook: Optional[ConfigManagementBinauthzStateWebhookEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'webhook' }})
+    r"""ConfigManagementBinauthzState
+    State for Binauthz
+    """
+    
+    version: Optional[ConfigManagementBinauthzVersion] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('version') }})
+    webhook: Optional[ConfigManagementBinauthzStateWebhookEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('webhook') }})
     

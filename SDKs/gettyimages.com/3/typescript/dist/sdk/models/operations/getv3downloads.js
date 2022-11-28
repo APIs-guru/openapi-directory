@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetV3DownloadsQueryParams = /** @class */ (function (_super) {
     __extends(GetV3DownloadsQueryParams, _super);
@@ -30,31 +30,31 @@ var GetV3DownloadsQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=company_downloads" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=company_downloads" }),
         __metadata("design:type", Boolean)
     ], GetV3DownloadsQueryParams.prototype, "companyDownloads", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=date_from" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=date_from" }),
         __metadata("design:type", Date)
     ], GetV3DownloadsQueryParams.prototype, "dateFrom", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=date_to" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=date_to" }),
         __metadata("design:type", Date)
     ], GetV3DownloadsQueryParams.prototype, "dateTo", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=page" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page" }),
         __metadata("design:type", Number)
     ], GetV3DownloadsQueryParams.prototype, "page", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=page_size" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page_size" }),
         __metadata("design:type", Number)
     ], GetV3DownloadsQueryParams.prototype, "pageSize", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=product_type" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=product_type" }),
         __metadata("design:type", String)
     ], GetV3DownloadsQueryParams.prototype, "productType", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=use_time" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=use_time" }),
         __metadata("design:type", Boolean)
     ], GetV3DownloadsQueryParams.prototype, "useTime", void 0);
     return GetV3DownloadsQueryParams;
@@ -66,7 +66,7 @@ var GetV3DownloadsHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=Accept-Language" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Accept-Language" }),
         __metadata("design:type", String)
     ], GetV3DownloadsHeaders.prototype, "acceptLanguage", void 0);
     return GetV3DownloadsHeaders;
@@ -78,11 +78,11 @@ var GetV3DownloadsRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetV3DownloadsQueryParams)
     ], GetV3DownloadsRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetV3DownloadsHeaders)
     ], GetV3DownloadsRequest.prototype, "headers", void 0);
     return GetV3DownloadsRequest;
@@ -94,15 +94,15 @@ var GetV3DownloadsResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetV3DownloadsResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.GetDownloadsResponse)
     ], GetV3DownloadsResponse.prototype, "getDownloadsResponse", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetV3DownloadsResponse.prototype, "statusCode", void 0);
     return GetV3DownloadsResponse;

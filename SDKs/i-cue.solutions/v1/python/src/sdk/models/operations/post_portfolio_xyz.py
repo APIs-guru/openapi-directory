@@ -17,14 +17,14 @@ class PostPortfolioXyzRequests:
 
 @dataclass
 class PostPortfolioXyzRequest:
-    headers: PostPortfolioXyzHeaders = field(default=None)
+    headers: PostPortfolioXyzHeaders = field()
     request: Optional[PostPortfolioXyzRequests] = field(default=None)
     
 
 @dataclass
 class PostPortfolioXyzResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     portfolio_xyz_models: Optional[List[shared.PortfolioXyzModel]] = field(default=None)
-    status_code: int = field(default=None)
     

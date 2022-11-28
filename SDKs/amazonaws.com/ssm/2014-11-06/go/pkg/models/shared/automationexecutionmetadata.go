@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// AutomationExecutionMetadata
+// Details about a specific Automation execution.
 type AutomationExecutionMetadata struct {
 	AssociationID               *string                        `json:"AssociationId,omitempty"`
 	AutomationExecutionID       *string                        `json:"AutomationExecutionId,omitempty"`

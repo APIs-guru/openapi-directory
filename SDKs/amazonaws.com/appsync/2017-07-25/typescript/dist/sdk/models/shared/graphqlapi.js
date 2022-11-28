@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { AdditionalAuthenticationProvider } from "./additionalauthenticationprovider";
 import { AuthenticationTypeEnum } from "./authenticationtypeenum";
 import { LambdaAuthorizerConfig } from "./lambdaauthorizerconfig";
 import { LogConfig } from "./logconfig";
@@ -39,55 +39,55 @@ var GraphqlApi = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=additionalAuthenticationProviders", elemType: shared.AdditionalAuthenticationProvider }),
+        SpeakeasyMetadata({ data: "json, name=additionalAuthenticationProviders", elemType: AdditionalAuthenticationProvider }),
         __metadata("design:type", Array)
     ], GraphqlApi.prototype, "additionalAuthenticationProviders", void 0);
     __decorate([
-        Metadata({ data: "json, name=apiId" }),
+        SpeakeasyMetadata({ data: "json, name=apiId" }),
         __metadata("design:type", String)
     ], GraphqlApi.prototype, "apiId", void 0);
     __decorate([
-        Metadata({ data: "json, name=arn" }),
+        SpeakeasyMetadata({ data: "json, name=arn" }),
         __metadata("design:type", String)
     ], GraphqlApi.prototype, "arn", void 0);
     __decorate([
-        Metadata({ data: "json, name=authenticationType" }),
+        SpeakeasyMetadata({ data: "json, name=authenticationType" }),
         __metadata("design:type", String)
     ], GraphqlApi.prototype, "authenticationType", void 0);
     __decorate([
-        Metadata({ data: "json, name=lambdaAuthorizerConfig" }),
+        SpeakeasyMetadata({ data: "json, name=lambdaAuthorizerConfig" }),
         __metadata("design:type", LambdaAuthorizerConfig)
     ], GraphqlApi.prototype, "lambdaAuthorizerConfig", void 0);
     __decorate([
-        Metadata({ data: "json, name=logConfig" }),
+        SpeakeasyMetadata({ data: "json, name=logConfig" }),
         __metadata("design:type", LogConfig)
     ], GraphqlApi.prototype, "logConfig", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], GraphqlApi.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=openIDConnectConfig" }),
+        SpeakeasyMetadata({ data: "json, name=openIDConnectConfig" }),
         __metadata("design:type", OpenIdConnectConfig)
     ], GraphqlApi.prototype, "openIdConnectConfig", void 0);
     __decorate([
-        Metadata({ data: "json, name=tags" }),
+        SpeakeasyMetadata({ data: "json, name=tags" }),
         __metadata("design:type", Map)
     ], GraphqlApi.prototype, "tags", void 0);
     __decorate([
-        Metadata({ data: "json, name=uris" }),
+        SpeakeasyMetadata({ data: "json, name=uris" }),
         __metadata("design:type", Map)
     ], GraphqlApi.prototype, "uris", void 0);
     __decorate([
-        Metadata({ data: "json, name=userPoolConfig" }),
+        SpeakeasyMetadata({ data: "json, name=userPoolConfig" }),
         __metadata("design:type", UserPoolConfig)
     ], GraphqlApi.prototype, "userPoolConfig", void 0);
     __decorate([
-        Metadata({ data: "json, name=wafWebAclArn" }),
+        SpeakeasyMetadata({ data: "json, name=wafWebAclArn" }),
         __metadata("design:type", String)
     ], GraphqlApi.prototype, "wafWebAclArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=xrayEnabled" }),
+        SpeakeasyMetadata({ data: "json, name=xrayEnabled" }),
         __metadata("design:type", Boolean)
     ], GraphqlApi.prototype, "xrayEnabled", void 0);
     return GraphqlApi;

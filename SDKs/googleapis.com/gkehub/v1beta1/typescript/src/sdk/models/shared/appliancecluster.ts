@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ApplianceCluster
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * ApplianceCluster contains information specific to GDC Edge Appliance Clusters.
 **/
 export class ApplianceCluster extends SpeakeasyBase {
-  @Metadata({ data: "json, name=resourceLink" })
+  @SpeakeasyMetadata({ data: "json, name=resourceLink" })
   resourceLink?: string;
 }

@@ -1,44 +1,45 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ReleaseEventApiPostReportPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=eventId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=eventId" })
   eventId: number;
 }
 
 export enum ReleaseEventApiPostReportReportTypeEnum {
-    InvalidInfo = "InvalidInfo"
-,    Duplicate = "Duplicate"
-,    Inappropriate = "Inappropriate"
-,    Other = "Other"
+    InvalidInfo = "InvalidInfo",
+    Duplicate = "Duplicate",
+    Inappropriate = "Inappropriate",
+    Other = "Other"
 }
 
 
 export class ReleaseEventApiPostReportQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=notes" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=notes" })
   notes: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=reportType" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=reportType" })
   reportType: ReleaseEventApiPostReportReportTypeEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=versionNumber" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=versionNumber" })
   versionNumber: number;
 }
 
 
 export class ReleaseEventApiPostReportRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: ReleaseEventApiPostReportPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: ReleaseEventApiPostReportQueryParams;
 }
 
 
 export class ReleaseEventApiPostReportResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

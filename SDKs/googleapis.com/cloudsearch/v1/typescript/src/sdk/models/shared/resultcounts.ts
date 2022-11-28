@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SourceResultCount } from "./sourceresultcount";
+
 
 
 // ResultCounts
@@ -8,6 +8,6 @@ import { SourceResultCount } from "./sourceresultcount";
  * Result count information
 **/
 export class ResultCounts extends SpeakeasyBase {
-  @Metadata({ data: "json, name=sourceResultCounts", elemType: shared.SourceResultCount })
+  @SpeakeasyMetadata({ data: "json, name=sourceResultCounts", elemType: SourceResultCount })
   sourceResultCounts?: SourceResultCount[];
 }

@@ -54,6 +54,8 @@ const (
 	LivingAreaLayoutStairsExceptionEnumDependentOnDayOfWeek LivingAreaLayoutStairsExceptionEnum = "DEPENDENT_ON_DAY_OF_WEEK"
 )
 
+// LivingAreaLayout
+// Information about the layout of the living area.
 type LivingAreaLayout struct {
 	Balcony                     *bool                                            `json:"balcony,omitempty"`
 	BalconyException            *LivingAreaLayoutBalconyExceptionEnum            `json:"balconyException,omitempty"`

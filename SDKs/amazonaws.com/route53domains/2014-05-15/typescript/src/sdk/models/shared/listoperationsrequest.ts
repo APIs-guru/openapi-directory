@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ListOperationsRequest
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The ListOperations request includes the following elements.
 **/
 export class ListOperationsRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Marker" })
+  @SpeakeasyMetadata({ data: "json, name=Marker" })
   marker?: string;
 
-  @Metadata({ data: "json, name=MaxItems" })
+  @SpeakeasyMetadata({ data: "json, name=MaxItems" })
   maxItems?: number;
 
-  @Metadata({ data: "json, name=SubmittedSince" })
+  @SpeakeasyMetadata({ data: "json, name=SubmittedSince" })
   submittedSince?: Date;
 }

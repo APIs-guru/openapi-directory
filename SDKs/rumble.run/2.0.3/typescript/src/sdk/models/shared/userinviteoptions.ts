@@ -1,28 +1,29 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class UserInviteOptions extends SpeakeasyBase {
-  @Metadata({ data: "json, name=client_admin" })
+  @SpeakeasyMetadata({ data: "json, name=client_admin" })
   clientAdmin?: boolean;
 
-  @Metadata({ data: "json, name=email" })
+  @SpeakeasyMetadata({ data: "json, name=email" })
   email?: string;
 
-  @Metadata({ data: "json, name=first_name" })
+  @SpeakeasyMetadata({ data: "json, name=first_name" })
   firstName?: string;
 
-  @Metadata({ data: "json, name=last_name" })
+  @SpeakeasyMetadata({ data: "json, name=last_name" })
   lastName?: string;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 
-  @Metadata({ data: "json, name=org_default_role" })
+  @SpeakeasyMetadata({ data: "json, name=org_default_role" })
   orgDefaultRole?: string;
 
-  @Metadata({ data: "json, name=org_roles" })
+  @SpeakeasyMetadata({ data: "json, name=org_roles" })
   orgRoles?: Map<string, any>;
 
-  @Metadata({ data: "json, name=subject" })
+  @SpeakeasyMetadata({ data: "json, name=subject" })
   subject?: string;
 }

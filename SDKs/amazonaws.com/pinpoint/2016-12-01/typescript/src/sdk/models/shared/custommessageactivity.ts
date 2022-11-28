@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { EndpointTypesElementEnum } from "./endpointtypeselementenum";
 import { JourneyCustomMessage } from "./journeycustommessage";
+
 
 
 // CustomMessageActivity
@@ -8,21 +9,21 @@ import { JourneyCustomMessage } from "./journeycustommessage";
  * The settings for a custom message activity. This type of activity calls an AWS Lambda function or web hook that sends messages to participants.
 **/
 export class CustomMessageActivity extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DeliveryUri" })
+  @SpeakeasyMetadata({ data: "json, name=DeliveryUri" })
   deliveryUri?: string;
 
-  @Metadata({ data: "json, name=EndpointTypes" })
+  @SpeakeasyMetadata({ data: "json, name=EndpointTypes" })
   endpointTypes?: EndpointTypesElementEnum[];
 
-  @Metadata({ data: "json, name=MessageConfig" })
+  @SpeakeasyMetadata({ data: "json, name=MessageConfig" })
   messageConfig?: JourneyCustomMessage;
 
-  @Metadata({ data: "json, name=NextActivity" })
+  @SpeakeasyMetadata({ data: "json, name=NextActivity" })
   nextActivity?: string;
 
-  @Metadata({ data: "json, name=TemplateName" })
+  @SpeakeasyMetadata({ data: "json, name=TemplateName" })
   templateName?: string;
 
-  @Metadata({ data: "json, name=TemplateVersion" })
+  @SpeakeasyMetadata({ data: "json, name=TemplateVersion" })
   templateVersion?: string;
 }

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // PolicyVersionIdentifier
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Information about the version of the policy associated with the resource.
 **/
 export class PolicyVersionIdentifier extends SpeakeasyBase {
-  @Metadata({ data: "json, name=policyName" })
+  @SpeakeasyMetadata({ data: "json, name=policyName" })
   policyName?: string;
 
-  @Metadata({ data: "json, name=policyVersionId" })
+  @SpeakeasyMetadata({ data: "json, name=policyVersionId" })
   policyVersionId?: string;
 }

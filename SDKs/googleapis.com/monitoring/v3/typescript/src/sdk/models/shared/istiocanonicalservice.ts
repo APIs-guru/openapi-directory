@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // IstioCanonicalService
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Canonical service scoped to an Istio mesh. Anthos clusters running ASM >= 1.6.8 will have their services ingested as this type.
 **/
 export class IstioCanonicalService extends SpeakeasyBase {
-  @Metadata({ data: "json, name=canonicalService" })
+  @SpeakeasyMetadata({ data: "json, name=canonicalService" })
   canonicalService?: string;
 
-  @Metadata({ data: "json, name=canonicalServiceNamespace" })
+  @SpeakeasyMetadata({ data: "json, name=canonicalServiceNamespace" })
   canonicalServiceNamespace?: string;
 
-  @Metadata({ data: "json, name=meshUid" })
+  @SpeakeasyMetadata({ data: "json, name=meshUid" })
   meshUid?: string;
 }

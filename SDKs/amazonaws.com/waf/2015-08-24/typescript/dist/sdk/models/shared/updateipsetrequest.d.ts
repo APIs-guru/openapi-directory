@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { IpSetUpdate } from "./ipsetupdate";
 export declare class UpdateIpSetRequest extends SpeakeasyBase {
     changeToken: string;

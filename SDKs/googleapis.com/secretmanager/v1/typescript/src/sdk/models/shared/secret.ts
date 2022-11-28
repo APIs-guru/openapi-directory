@@ -1,8 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Replication } from "./replication";
 import { Rotation } from "./rotation";
 import { Topic } from "./topic";
+
 
 
 // Secret
@@ -10,36 +10,70 @@ import { Topic } from "./topic";
  * A Secret is a logical secret whose value and versions can be accessed. A Secret is made up of zero or more SecretVersions that represent the secret data.
 **/
 export class Secret extends SpeakeasyBase {
-  @Metadata({ data: "json, name=annotations" })
+  @SpeakeasyMetadata({ data: "json, name=annotations" })
   annotations?: Map<string, string>;
 
-  @Metadata({ data: "json, name=createTime" })
+  @SpeakeasyMetadata({ data: "json, name=createTime" })
   createTime?: string;
 
-  @Metadata({ data: "json, name=etag" })
+  @SpeakeasyMetadata({ data: "json, name=etag" })
   etag?: string;
 
-  @Metadata({ data: "json, name=expireTime" })
+  @SpeakeasyMetadata({ data: "json, name=expireTime" })
   expireTime?: string;
 
-  @Metadata({ data: "json, name=labels" })
+  @SpeakeasyMetadata({ data: "json, name=labels" })
   labels?: Map<string, string>;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=replication" })
+  @SpeakeasyMetadata({ data: "json, name=replication" })
   replication?: Replication;
 
-  @Metadata({ data: "json, name=rotation" })
+  @SpeakeasyMetadata({ data: "json, name=rotation" })
   rotation?: Rotation;
 
-  @Metadata({ data: "json, name=topics", elemType: shared.Topic })
+  @SpeakeasyMetadata({ data: "json, name=topics", elemType: Topic })
   topics?: Topic[];
 
-  @Metadata({ data: "json, name=ttl" })
+  @SpeakeasyMetadata({ data: "json, name=ttl" })
   ttl?: string;
 
-  @Metadata({ data: "json, name=versionAliases" })
+  @SpeakeasyMetadata({ data: "json, name=versionAliases" })
+  versionAliases?: Map<string, string>;
+}
+
+
+// SecretInput
+/** 
+ * A Secret is a logical secret whose value and versions can be accessed. A Secret is made up of zero or more SecretVersions that represent the secret data.
+**/
+export class SecretInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=annotations" })
+  annotations?: Map<string, string>;
+
+  @SpeakeasyMetadata({ data: "json, name=etag" })
+  etag?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=expireTime" })
+  expireTime?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=labels" })
+  labels?: Map<string, string>;
+
+  @SpeakeasyMetadata({ data: "json, name=replication" })
+  replication?: Replication;
+
+  @SpeakeasyMetadata({ data: "json, name=rotation" })
+  rotation?: Rotation;
+
+  @SpeakeasyMetadata({ data: "json, name=topics", elemType: Topic })
+  topics?: Topic[];
+
+  @SpeakeasyMetadata({ data: "json, name=ttl" })
+  ttl?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=versionAliases" })
   versionAliases?: Map<string, string>;
 }

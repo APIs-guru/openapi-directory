@@ -30,7 +30,7 @@ type DocumentaiProjectsLocationsProcessorsCreateSecurity struct {
 type DocumentaiProjectsLocationsProcessorsCreateRequest struct {
 	PathParams  DocumentaiProjectsLocationsProcessorsCreatePathParams
 	QueryParams DocumentaiProjectsLocationsProcessorsCreateQueryParams
-	Request     *shared.GoogleCloudDocumentaiV1beta3Processor `request:"mediaType=application/json"`
+	Request     *shared.GoogleCloudDocumentaiV1beta3ProcessorInput `request:"mediaType=application/json"`
 	Security    DocumentaiProjectsLocationsProcessorsCreateSecurity
 }
 

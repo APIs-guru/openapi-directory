@@ -1,12 +1,26 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum MembershipStateCodeEnum {
-    CodeUnspecified = "CODE_UNSPECIFIED"
-,    Creating = "CREATING"
-,    Ready = "READY"
-,    Deleting = "DELETING"
-,    Updating = "UPDATING"
-,    ServiceUpdating = "SERVICE_UPDATING"
+    CodeUnspecified = "CODE_UNSPECIFIED",
+    Creating = "CREATING",
+    Ready = "READY",
+    Deleting = "DELETING",
+    Updating = "UPDATING",
+    ServiceUpdating = "SERVICE_UPDATING"
+}
+
+
+// MembershipStateInput
+/** 
+ * State of the Membership resource.
+**/
+export class MembershipStateInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=description" })
+  description?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=updateTime" })
+  updateTime?: string;
 }
 
 
@@ -15,12 +29,12 @@ export enum MembershipStateCodeEnum {
  * State of the Membership resource.
 **/
 export class MembershipState extends SpeakeasyBase {
-  @Metadata({ data: "json, name=code" })
+  @SpeakeasyMetadata({ data: "json, name=code" })
   code?: MembershipStateCodeEnum;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=updateTime" })
+  @SpeakeasyMetadata({ data: "json, name=updateTime" })
   updateTime?: string;
 }

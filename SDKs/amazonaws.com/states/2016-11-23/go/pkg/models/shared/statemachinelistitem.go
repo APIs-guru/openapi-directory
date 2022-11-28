@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// StateMachineListItem
+// Contains details about the state machine.
 type StateMachineListItem struct {
 	CreationDate    time.Time            `json:"creationDate"`
 	Name            string               `json:"name"`

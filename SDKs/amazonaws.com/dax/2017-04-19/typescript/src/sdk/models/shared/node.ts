@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Endpoint } from "./endpoint";
+
 
 
 // Node
@@ -7,21 +8,21 @@ import { Endpoint } from "./endpoint";
  * Represents an individual node within a DAX cluster.
 **/
 export class Node extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AvailabilityZone" })
+  @SpeakeasyMetadata({ data: "json, name=AvailabilityZone" })
   availabilityZone?: string;
 
-  @Metadata({ data: "json, name=Endpoint" })
+  @SpeakeasyMetadata({ data: "json, name=Endpoint" })
   endpoint?: Endpoint;
 
-  @Metadata({ data: "json, name=NodeCreateTime" })
+  @SpeakeasyMetadata({ data: "json, name=NodeCreateTime" })
   nodeCreateTime?: Date;
 
-  @Metadata({ data: "json, name=NodeId" })
+  @SpeakeasyMetadata({ data: "json, name=NodeId" })
   nodeId?: string;
 
-  @Metadata({ data: "json, name=NodeStatus" })
+  @SpeakeasyMetadata({ data: "json, name=NodeStatus" })
   nodeStatus?: string;
 
-  @Metadata({ data: "json, name=ParameterGroupStatus" })
+  @SpeakeasyMetadata({ data: "json, name=ParameterGroupStatus" })
   parameterGroupStatus?: string;
 }

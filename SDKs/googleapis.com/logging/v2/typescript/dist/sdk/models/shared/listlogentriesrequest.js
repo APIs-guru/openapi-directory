@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // ListLogEntriesRequest
 /**
  * The parameters to ListLogEntries.
@@ -33,27 +33,27 @@ var ListLogEntriesRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=filter" }),
+        SpeakeasyMetadata({ data: "json, name=filter" }),
         __metadata("design:type", String)
     ], ListLogEntriesRequest.prototype, "filter", void 0);
     __decorate([
-        Metadata({ data: "json, name=orderBy" }),
+        SpeakeasyMetadata({ data: "json, name=orderBy" }),
         __metadata("design:type", String)
     ], ListLogEntriesRequest.prototype, "orderBy", void 0);
     __decorate([
-        Metadata({ data: "json, name=pageSize" }),
+        SpeakeasyMetadata({ data: "json, name=pageSize" }),
         __metadata("design:type", Number)
     ], ListLogEntriesRequest.prototype, "pageSize", void 0);
     __decorate([
-        Metadata({ data: "json, name=pageToken" }),
+        SpeakeasyMetadata({ data: "json, name=pageToken" }),
         __metadata("design:type", String)
     ], ListLogEntriesRequest.prototype, "pageToken", void 0);
     __decorate([
-        Metadata({ data: "json, name=projectIds" }),
+        SpeakeasyMetadata({ data: "json, name=projectIds" }),
         __metadata("design:type", Array)
     ], ListLogEntriesRequest.prototype, "projectIds", void 0);
     __decorate([
-        Metadata({ data: "json, name=resourceNames" }),
+        SpeakeasyMetadata({ data: "json, name=resourceNames" }),
         __metadata("design:type", Array)
     ], ListLogEntriesRequest.prototype, "resourceNames", void 0);
     return ListLogEntriesRequest;

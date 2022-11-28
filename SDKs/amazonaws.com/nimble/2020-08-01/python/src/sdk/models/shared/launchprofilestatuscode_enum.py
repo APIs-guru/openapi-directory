@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class LaunchProfileStatusCodeEnum(str, Enum):
     LAUNCH_PROFILE_CREATED = "LAUNCH_PROFILE_CREATED"

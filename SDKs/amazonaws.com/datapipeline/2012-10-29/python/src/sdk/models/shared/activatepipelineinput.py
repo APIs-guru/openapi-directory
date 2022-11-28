@@ -1,16 +1,21 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import parametervalue
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ActivatePipelineInput:
-    parameter_values: Optional[List[parametervalue.ParameterValue]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'parameterValues' }})
-    pipeline_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'pipelineId' }})
-    start_timestamp: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'startTimestamp', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    r"""ActivatePipelineInput
+    Contains the parameters for ActivatePipeline.
+    """
+    
+    pipeline_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('pipelineId') }})
+    parameter_values: Optional[List[ParameterValue]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('parameterValues') }})
+    start_timestamp: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('startTimestamp'), 'encoder': utils.datetimeisoformat(True), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
     

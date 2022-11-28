@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // AcknowledgeAlarmActionRequest
 /**
  * Information needed to acknowledge the alarm.
@@ -33,19 +33,19 @@ var AcknowledgeAlarmActionRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=alarmModelName" }),
+        SpeakeasyMetadata({ data: "json, name=alarmModelName" }),
         __metadata("design:type", String)
     ], AcknowledgeAlarmActionRequest.prototype, "alarmModelName", void 0);
     __decorate([
-        Metadata({ data: "json, name=keyValue" }),
+        SpeakeasyMetadata({ data: "json, name=keyValue" }),
         __metadata("design:type", String)
     ], AcknowledgeAlarmActionRequest.prototype, "keyValue", void 0);
     __decorate([
-        Metadata({ data: "json, name=note" }),
+        SpeakeasyMetadata({ data: "json, name=note" }),
         __metadata("design:type", String)
     ], AcknowledgeAlarmActionRequest.prototype, "note", void 0);
     __decorate([
-        Metadata({ data: "json, name=requestId" }),
+        SpeakeasyMetadata({ data: "json, name=requestId" }),
         __metadata("design:type", String)
     ], AcknowledgeAlarmActionRequest.prototype, "requestId", void 0);
     return AcknowledgeAlarmActionRequest;

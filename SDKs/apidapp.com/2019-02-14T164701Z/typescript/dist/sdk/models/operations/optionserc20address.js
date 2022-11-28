@@ -22,14 +22,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var OptionsErc20AddressPathParams = /** @class */ (function (_super) {
     __extends(OptionsErc20AddressPathParams, _super);
     function OptionsErc20AddressPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=address" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=address" }),
         __metadata("design:type", String)
     ], OptionsErc20AddressPathParams.prototype, "address", void 0);
     return OptionsErc20AddressPathParams;
@@ -41,7 +41,7 @@ var OptionsErc20AddressRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", OptionsErc20AddressPathParams)
     ], OptionsErc20AddressRequest.prototype, "pathParams", void 0);
     return OptionsErc20AddressRequest;
@@ -53,19 +53,19 @@ var OptionsErc20AddressResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], OptionsErc20AddressResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Map)
     ], OptionsErc20AddressResponse.prototype, "empty", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Map)
     ], OptionsErc20AddressResponse.prototype, "headers", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], OptionsErc20AddressResponse.prototype, "statusCode", void 0);
     return OptionsErc20AddressResponse;

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { S3ContentBaseLocationUpdate } from "./s3contentbaselocationupdate";
 // DeployAsApplicationConfigurationUpdate
 /**
@@ -34,7 +34,7 @@ var DeployAsApplicationConfigurationUpdate = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=S3ContentLocationUpdate" }),
+        SpeakeasyMetadata({ data: "json, name=S3ContentLocationUpdate" }),
         __metadata("design:type", S3ContentBaseLocationUpdate)
     ], DeployAsApplicationConfigurationUpdate.prototype, "s3ContentLocationUpdate", void 0);
     return DeployAsApplicationConfigurationUpdate;

@@ -1,11 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CidrAuthorizationContext } from "./cidrauthorizationcontext";
 
 
+
 export class ProvisionByoipCidrRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Cidr" })
+  @SpeakeasyMetadata({ data: "json, name=Cidr" })
   cidr: string;
 
-  @Metadata({ data: "json, name=CidrAuthorizationContext" })
+  @SpeakeasyMetadata({ data: "json, name=CidrAuthorizationContext" })
   cidrAuthorizationContext: CidrAuthorizationContext;
 }

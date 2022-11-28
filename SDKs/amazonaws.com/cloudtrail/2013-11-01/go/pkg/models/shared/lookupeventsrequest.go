@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// LookupEventsRequest
+// Contains a request for LookupEvents.
 type LookupEventsRequest struct {
 	EndTime          *time.Time         `json:"EndTime,omitempty"`
 	EventCategory    *EventCategoryEnum `json:"EventCategory,omitempty"`

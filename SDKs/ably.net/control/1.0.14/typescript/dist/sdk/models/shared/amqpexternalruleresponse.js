@@ -22,8 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RuleSource } from "./rulesource";
 export var AmqpExternalRuleResponseRequestModeEnum;
 (function (AmqpExternalRuleResponseRequestModeEnum) {
@@ -44,11 +43,11 @@ var AmqpExternalRuleResponseTargetHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], AmqpExternalRuleResponseTargetHeaders.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=value" }),
+        SpeakeasyMetadata({ data: "json, name=value" }),
         __metadata("design:type", String)
     ], AmqpExternalRuleResponseTargetHeaders.prototype, "value", void 0);
     return AmqpExternalRuleResponseTargetHeaders;
@@ -60,35 +59,35 @@ var AmqpExternalRuleResponseTarget = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=enveloped" }),
+        SpeakeasyMetadata({ data: "json, name=enveloped" }),
         __metadata("design:type", Boolean)
     ], AmqpExternalRuleResponseTarget.prototype, "enveloped", void 0);
     __decorate([
-        Metadata({ data: "json, name=format" }),
+        SpeakeasyMetadata({ data: "json, name=format" }),
         __metadata("design:type", String)
     ], AmqpExternalRuleResponseTarget.prototype, "format", void 0);
     __decorate([
-        Metadata({ data: "json, name=headers", elemType: shared.AmqpExternalRuleResponseTargetHeaders }),
+        SpeakeasyMetadata({ data: "json, name=headers", elemType: AmqpExternalRuleResponseTargetHeaders }),
         __metadata("design:type", Array)
     ], AmqpExternalRuleResponseTarget.prototype, "headers", void 0);
     __decorate([
-        Metadata({ data: "json, name=mandatoryRoute" }),
+        SpeakeasyMetadata({ data: "json, name=mandatoryRoute" }),
         __metadata("design:type", Boolean)
     ], AmqpExternalRuleResponseTarget.prototype, "mandatoryRoute", void 0);
     __decorate([
-        Metadata({ data: "json, name=messageTtl" }),
+        SpeakeasyMetadata({ data: "json, name=messageTtl" }),
         __metadata("design:type", Number)
     ], AmqpExternalRuleResponseTarget.prototype, "messageTtl", void 0);
     __decorate([
-        Metadata({ data: "json, name=persistentMessages" }),
+        SpeakeasyMetadata({ data: "json, name=persistentMessages" }),
         __metadata("design:type", Boolean)
     ], AmqpExternalRuleResponseTarget.prototype, "persistentMessages", void 0);
     __decorate([
-        Metadata({ data: "json, name=routingKey" }),
+        SpeakeasyMetadata({ data: "json, name=routingKey" }),
         __metadata("design:type", String)
     ], AmqpExternalRuleResponseTarget.prototype, "routingKey", void 0);
     __decorate([
-        Metadata({ data: "json, name=url" }),
+        SpeakeasyMetadata({ data: "json, name=url" }),
         __metadata("design:type", String)
     ], AmqpExternalRuleResponseTarget.prototype, "url", void 0);
     return AmqpExternalRuleResponseTarget;
@@ -100,47 +99,47 @@ var AmqpExternalRuleResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=_links" }),
+        SpeakeasyMetadata({ data: "json, name=_links" }),
         __metadata("design:type", Map)
     ], AmqpExternalRuleResponse.prototype, "links", void 0);
     __decorate([
-        Metadata({ data: "json, name=appId" }),
+        SpeakeasyMetadata({ data: "json, name=appId" }),
         __metadata("design:type", String)
     ], AmqpExternalRuleResponse.prototype, "appId", void 0);
     __decorate([
-        Metadata({ data: "json, name=created" }),
+        SpeakeasyMetadata({ data: "json, name=created" }),
         __metadata("design:type", Number)
     ], AmqpExternalRuleResponse.prototype, "created", void 0);
     __decorate([
-        Metadata({ data: "json, name=id" }),
+        SpeakeasyMetadata({ data: "json, name=id" }),
         __metadata("design:type", String)
     ], AmqpExternalRuleResponse.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "json, name=modified" }),
+        SpeakeasyMetadata({ data: "json, name=modified" }),
         __metadata("design:type", Number)
     ], AmqpExternalRuleResponse.prototype, "modified", void 0);
     __decorate([
-        Metadata({ data: "json, name=requestMode" }),
+        SpeakeasyMetadata({ data: "json, name=requestMode" }),
         __metadata("design:type", String)
     ], AmqpExternalRuleResponse.prototype, "requestMode", void 0);
     __decorate([
-        Metadata({ data: "json, name=ruleType" }),
+        SpeakeasyMetadata({ data: "json, name=ruleType" }),
         __metadata("design:type", String)
     ], AmqpExternalRuleResponse.prototype, "ruleType", void 0);
     __decorate([
-        Metadata({ data: "json, name=source" }),
+        SpeakeasyMetadata({ data: "json, name=source" }),
         __metadata("design:type", RuleSource)
     ], AmqpExternalRuleResponse.prototype, "source", void 0);
     __decorate([
-        Metadata({ data: "json, name=status" }),
+        SpeakeasyMetadata({ data: "json, name=status" }),
         __metadata("design:type", String)
     ], AmqpExternalRuleResponse.prototype, "status", void 0);
     __decorate([
-        Metadata({ data: "json, name=target" }),
+        SpeakeasyMetadata({ data: "json, name=target" }),
         __metadata("design:type", AmqpExternalRuleResponseTarget)
     ], AmqpExternalRuleResponse.prototype, "target", void 0);
     __decorate([
-        Metadata({ data: "json, name=version" }),
+        SpeakeasyMetadata({ data: "json, name=version" }),
         __metadata("design:type", String)
     ], AmqpExternalRuleResponse.prototype, "version", void 0);
     return AmqpExternalRuleResponse;

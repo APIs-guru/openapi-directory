@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetModifyEbsDefaultKmsKeyIDActionEnum(str, Enum):
     MODIFY_EBS_DEFAULT_KMS_KEY_ID = "ModifyEbsDefaultKmsKeyId"
@@ -10,10 +14,10 @@ class GetModifyEbsDefaultKmsKeyIDVersionEnum(str, Enum):
 
 @dataclass
 class GetModifyEbsDefaultKmsKeyIDQueryParams:
-    action: GetModifyEbsDefaultKmsKeyIDActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetModifyEbsDefaultKmsKeyIDActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    kms_key_id: str = field(metadata={'query_param': { 'field_name': 'KmsKeyId', 'style': 'form', 'explode': True }})
+    version: GetModifyEbsDefaultKmsKeyIDVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     dry_run: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'DryRun', 'style': 'form', 'explode': True }})
-    kms_key_id: str = field(default=None, metadata={'query_param': { 'field_name': 'KmsKeyId', 'style': 'form', 'explode': True }})
-    version: GetModifyEbsDefaultKmsKeyIDVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -29,13 +33,13 @@ class GetModifyEbsDefaultKmsKeyIDHeaders:
 
 @dataclass
 class GetModifyEbsDefaultKmsKeyIDRequest:
-    query_params: GetModifyEbsDefaultKmsKeyIDQueryParams = field(default=None)
-    headers: GetModifyEbsDefaultKmsKeyIDHeaders = field(default=None)
+    headers: GetModifyEbsDefaultKmsKeyIDHeaders = field()
+    query_params: GetModifyEbsDefaultKmsKeyIDQueryParams = field()
     
 
 @dataclass
 class GetModifyEbsDefaultKmsKeyIDResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// UserType
+// The user type.
 type UserType struct {
 	Attributes           []AttributeType     `json:"Attributes,omitempty"`
 	Enabled              *bool               `json:"Enabled,omitempty"`

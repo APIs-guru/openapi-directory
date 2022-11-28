@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class RegisterOrganizationAdminAccountResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=adminAccountId" })
+  @SpeakeasyMetadata({ data: "json, name=adminAccountId" })
   adminAccountId?: string;
 
-  @Metadata({ data: "json, name=organizationId" })
+  @SpeakeasyMetadata({ data: "json, name=organizationId" })
   organizationId?: string;
 }

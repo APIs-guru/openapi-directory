@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { Alarms } from "./alarms";
 import { AuthModeEnum } from "./authmodeenum";
 import { ImageLocation } from "./imagelocation";

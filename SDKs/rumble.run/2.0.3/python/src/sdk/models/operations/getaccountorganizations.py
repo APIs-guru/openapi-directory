@@ -10,18 +10,18 @@ class GetAccountOrganizationsQueryParams:
 
 @dataclass
 class GetAccountOrganizationsSecurity:
-    bearer_auth: shared.SchemeBearerAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer' }})
+    bearer_auth: shared.SchemeBearerAuth = field(metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer' }})
     
 
 @dataclass
 class GetAccountOrganizationsRequest:
-    query_params: GetAccountOrganizationsQueryParams = field(default=None)
-    security: GetAccountOrganizationsSecurity = field(default=None)
+    query_params: GetAccountOrganizationsQueryParams = field()
+    security: GetAccountOrganizationsSecurity = field()
     
 
 @dataclass
 class GetAccountOrganizationsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     organizations: Optional[List[shared.Organization]] = field(default=None)
-    status_code: int = field(default=None)
     

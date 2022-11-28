@@ -16,6 +16,8 @@ const (
 	AchievementConfigurationInitialStateEnumRevealed                AchievementConfigurationInitialStateEnum = "REVEALED"
 )
 
+// AchievementConfiguration
+// An achievement configuration resource.
 type AchievementConfiguration struct {
 	AchievementType *AchievementConfigurationAchievementTypeEnum `json:"achievementType,omitempty"`
 	Draft           *AchievementConfigurationDetail              `json:"draft,omitempty"`

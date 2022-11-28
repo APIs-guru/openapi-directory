@@ -19,6 +19,8 @@ const (
 	OrderBySortOrderEnumDescending           OrderBySortOrderEnum = "DESCENDING"
 )
 
+// OrderBy
+// Specifies the sorting options.
 type OrderBy struct {
 	FieldName *string               `json:"fieldName,omitempty"`
 	OrderType *OrderByOrderTypeEnum `json:"orderType,omitempty"`

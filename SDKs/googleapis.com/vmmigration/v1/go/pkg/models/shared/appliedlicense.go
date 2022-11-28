@@ -9,6 +9,8 @@ const (
 	AppliedLicenseTypeEnumByol            AppliedLicenseTypeEnum = "BYOL"
 )
 
+// AppliedLicense
+// AppliedLicense holds the license data returned by adaptation module report.
 type AppliedLicense struct {
 	OsLicense *string                 `json:"osLicense,omitempty"`
 	Type      *AppliedLicenseTypeEnum `json:"type,omitempty"`

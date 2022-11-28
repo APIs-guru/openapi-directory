@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class AdvancedSecurityOverridesCommonCriteriaModeEnum(str, Enum):
     COMMON_CRITERIA_MODE_UNSPECIFIED = "COMMON_CRITERIA_MODE_UNSPECIFIED"
@@ -27,9 +29,13 @@ class AdvancedSecurityOverridesUntrustedAppsPolicyEnum(str, Enum):
 @dataclass_json
 @dataclass
 class AdvancedSecurityOverrides:
-    common_criteria_mode: Optional[AdvancedSecurityOverridesCommonCriteriaModeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'commonCriteriaMode' }})
-    developer_settings: Optional[AdvancedSecurityOverridesDeveloperSettingsEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'developerSettings' }})
-    google_play_protect_verify_apps: Optional[AdvancedSecurityOverridesGooglePlayProtectVerifyAppsEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'googlePlayProtectVerifyApps' }})
-    personal_apps_that_can_read_work_notifications: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'personalAppsThatCanReadWorkNotifications' }})
-    untrusted_apps_policy: Optional[AdvancedSecurityOverridesUntrustedAppsPolicyEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'untrustedAppsPolicy' }})
+    r"""AdvancedSecurityOverrides
+    Security policies set to secure values by default. To maintain the security posture of a device, we don't recommend overriding any of the default values.
+    """
+    
+    common_criteria_mode: Optional[AdvancedSecurityOverridesCommonCriteriaModeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('commonCriteriaMode') }})
+    developer_settings: Optional[AdvancedSecurityOverridesDeveloperSettingsEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('developerSettings') }})
+    google_play_protect_verify_apps: Optional[AdvancedSecurityOverridesGooglePlayProtectVerifyAppsEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('googlePlayProtectVerifyApps') }})
+    personal_apps_that_can_read_work_notifications: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('personalAppsThatCanReadWorkNotifications') }})
+    untrusted_apps_policy: Optional[AdvancedSecurityOverridesUntrustedAppsPolicyEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('untrustedAppsPolicy') }})
     

@@ -11,6 +11,8 @@ type OrgHookConfig struct {
 	URL         *string `json:"url,omitempty"`
 }
 
+// OrgHook
+// Org Hook
 type OrgHook struct {
 	Active    bool          `json:"active"`
 	Config    OrgHookConfig `json:"config"`

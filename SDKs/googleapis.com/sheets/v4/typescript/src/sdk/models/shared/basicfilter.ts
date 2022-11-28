@@ -1,9 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { FilterCriteria } from "./filtercriteria";
 import { FilterSpec } from "./filterspec";
 import { GridRange } from "./gridrange";
 import { SortSpec } from "./sortspec";
+
 
 
 // BasicFilter
@@ -11,15 +11,15 @@ import { SortSpec } from "./sortspec";
  * The default filter associated with a sheet.
 **/
 export class BasicFilter extends SpeakeasyBase {
-  @Metadata({ data: "json, name=criteria", elemType: shared.FilterCriteria })
+  @SpeakeasyMetadata({ data: "json, name=criteria", elemType: FilterCriteria })
   criteria?: Map<string, FilterCriteria>;
 
-  @Metadata({ data: "json, name=filterSpecs", elemType: shared.FilterSpec })
+  @SpeakeasyMetadata({ data: "json, name=filterSpecs", elemType: FilterSpec })
   filterSpecs?: FilterSpec[];
 
-  @Metadata({ data: "json, name=range" })
+  @SpeakeasyMetadata({ data: "json, name=range" })
   range?: GridRange;
 
-  @Metadata({ data: "json, name=sortSpecs", elemType: shared.SortSpec })
+  @SpeakeasyMetadata({ data: "json, name=sortSpecs", elemType: SortSpec })
   sortSpecs?: SortSpec[];
 }

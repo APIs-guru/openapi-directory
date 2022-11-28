@@ -15,6 +15,8 @@ const (
 	APIKeyEntityPermissionSetEnumMobileApp         APIKeyEntityPermissionSetEnum = "mobile_app"
 )
 
+// APIKeyEntity
+// List Api Keys
 type APIKeyEntity struct {
 	CreatedAt        *time.Time                     `json:"created_at,omitempty"`
 	DescriptiveLabel *string                        `json:"descriptive_label,omitempty"`

@@ -20,7 +20,6 @@ export * from "./listplaybackkeypairsresponse";
 export * from "./listrecordingconfigurationsresponse";
 export * from "./liststreamkeysresponse";
 export * from "./liststreamsresponse";
-export * from "./listtagsforresourceresponse";
 export * from "./playbackkeypair";
 export * from "./playbackkeypairsummary";
 export * from "./recordingconfiguration";

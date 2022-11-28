@@ -1,5 +1,7 @@
 package shared
 
+// AwsLambdaFunctionDetails
+// Details about a function's configuration.
 type AwsLambdaFunctionDetails struct {
 	Code             *AwsLambdaFunctionCode             `json:"Code,omitempty"`
 	CodeSha256       *string                            `json:"CodeSha256,omitempty"`

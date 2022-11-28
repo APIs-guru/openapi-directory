@@ -1,37 +1,38 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ProductItemApiModel extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Cost" })
+  @SpeakeasyMetadata({ data: "json, name=Cost" })
   cost?: number;
 
-  @Metadata({ data: "json, name=Description" })
+  @SpeakeasyMetadata({ data: "json, name=Description" })
   description?: string;
 
-  @Metadata({ data: "json, name=Id" })
+  @SpeakeasyMetadata({ data: "json, name=Id" })
   id?: number;
 
-  @Metadata({ data: "json, name=MinimumQuantity" })
+  @SpeakeasyMetadata({ data: "json, name=MinimumQuantity" })
   minimumQuantity?: number;
 
-  @Metadata({ data: "json, name=ReferenceId" })
+  @SpeakeasyMetadata({ data: "json, name=ReferenceId" })
   referenceId?: string;
 
-  @Metadata({ data: "json, name=SubTotalAmount" })
+  @SpeakeasyMetadata({ data: "json, name=SubTotalAmount" })
   subTotalAmount?: number;
 
-  @Metadata({ data: "json, name=TaxAmount" })
+  @SpeakeasyMetadata({ data: "json, name=TaxAmount" })
   taxAmount?: number;
 
-  @Metadata({ data: "json, name=TaxId" })
+  @SpeakeasyMetadata({ data: "json, name=TaxId" })
   taxId?: number;
 
-  @Metadata({ data: "json, name=TaxPercentage" })
+  @SpeakeasyMetadata({ data: "json, name=TaxPercentage" })
   taxPercentage?: number;
 
-  @Metadata({ data: "json, name=TotalAmount" })
+  @SpeakeasyMetadata({ data: "json, name=TotalAmount" })
   totalAmount?: number;
 
-  @Metadata({ data: "json, name=WorkTypeId" })
+  @SpeakeasyMetadata({ data: "json, name=WorkTypeId" })
   workTypeId?: number;
 }

@@ -5,18 +5,18 @@ from sdk.models import shared
 
 @dataclass
 class DeploymentsGetPathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class DeploymentsGetRequest:
-    path_params: DeploymentsGetPathParams = field(default=None)
+    path_params: DeploymentsGetPathParams = field()
     
 
 @dataclass
 class DeploymentsGetResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     deployment: Optional[shared.Deployment] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetBuildSuggestersActionEnum(str, Enum):
     BUILD_SUGGESTERS = "BuildSuggesters"
@@ -10,9 +14,9 @@ class GetBuildSuggestersVersionEnum(str, Enum):
 
 @dataclass
 class GetBuildSuggestersQueryParams:
-    action: GetBuildSuggestersActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    domain_name: str = field(default=None, metadata={'query_param': { 'field_name': 'DomainName', 'style': 'form', 'explode': True }})
-    version: GetBuildSuggestersVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: GetBuildSuggestersActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    domain_name: str = field(metadata={'query_param': { 'field_name': 'DomainName', 'style': 'form', 'explode': True }})
+    version: GetBuildSuggestersVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -28,13 +32,13 @@ class GetBuildSuggestersHeaders:
 
 @dataclass
 class GetBuildSuggestersRequest:
-    query_params: GetBuildSuggestersQueryParams = field(default=None)
-    headers: GetBuildSuggestersHeaders = field(default=None)
+    headers: GetBuildSuggestersHeaders = field()
+    query_params: GetBuildSuggestersQueryParams = field()
     
 
 @dataclass
 class GetBuildSuggestersResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

@@ -1,8 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TranslateTextGlossaryConfig } from "./translatetextglossaryconfig";
 import { BatchDocumentInputConfig } from "./batchdocumentinputconfig";
 import { BatchDocumentOutputConfig } from "./batchdocumentoutputconfig";
+
 
 
 // BatchTranslateDocumentRequest
@@ -10,24 +10,24 @@ import { BatchDocumentOutputConfig } from "./batchdocumentoutputconfig";
  * The BatchTranslateDocument request.
 **/
 export class BatchTranslateDocumentRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=formatConversions" })
+  @SpeakeasyMetadata({ data: "json, name=formatConversions" })
   formatConversions?: Map<string, string>;
 
-  @Metadata({ data: "json, name=glossaries", elemType: shared.TranslateTextGlossaryConfig })
+  @SpeakeasyMetadata({ data: "json, name=glossaries", elemType: TranslateTextGlossaryConfig })
   glossaries?: Map<string, TranslateTextGlossaryConfig>;
 
-  @Metadata({ data: "json, name=inputConfigs", elemType: shared.BatchDocumentInputConfig })
+  @SpeakeasyMetadata({ data: "json, name=inputConfigs", elemType: BatchDocumentInputConfig })
   inputConfigs?: BatchDocumentInputConfig[];
 
-  @Metadata({ data: "json, name=models" })
+  @SpeakeasyMetadata({ data: "json, name=models" })
   models?: Map<string, string>;
 
-  @Metadata({ data: "json, name=outputConfig" })
+  @SpeakeasyMetadata({ data: "json, name=outputConfig" })
   outputConfig?: BatchDocumentOutputConfig;
 
-  @Metadata({ data: "json, name=sourceLanguageCode" })
+  @SpeakeasyMetadata({ data: "json, name=sourceLanguageCode" })
   sourceLanguageCode?: string;
 
-  @Metadata({ data: "json, name=targetLanguageCodes" })
+  @SpeakeasyMetadata({ data: "json, name=targetLanguageCodes" })
   targetLanguageCodes?: string[];
 }

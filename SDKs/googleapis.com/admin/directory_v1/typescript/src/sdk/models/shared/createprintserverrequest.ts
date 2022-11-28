@@ -1,15 +1,16 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import { PrintServer } from "./printserver";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { PrintServerInput } from "./printserver";
 
 
-// CreatePrintServerRequest
+
+// CreatePrintServerRequestInput
 /** 
  * Request for adding a new print server.
 **/
-export class CreatePrintServerRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=parent" })
+export class CreatePrintServerRequestInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=parent" })
   parent?: string;
 
-  @Metadata({ data: "json, name=printServer" })
-  printServer?: PrintServer;
+  @SpeakeasyMetadata({ data: "json, name=printServer" })
+  printServer?: PrintServerInput;
 }

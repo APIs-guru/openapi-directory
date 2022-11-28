@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class PolicyControllerMonitoringConfigBackendsEnum(str, Enum):
     MONITORING_BACKEND_UNSPECIFIED = "MONITORING_BACKEND_UNSPECIFIED"
@@ -11,5 +13,9 @@ class PolicyControllerMonitoringConfigBackendsEnum(str, Enum):
 @dataclass_json
 @dataclass
 class PolicyControllerMonitoringConfig:
-    backends: Optional[List[PolicyControllerMonitoringConfigBackendsEnum]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'backends' }})
+    r"""PolicyControllerMonitoringConfig
+    MonitoringConfig specifies the backends Policy Controller should export metrics to. For example, to specify metrics should be exported to Cloud Monitoring and Prometheus, specify backends: [\"cloudmonitoring\", \"prometheus\"]
+    """
+    
+    backends: Optional[List[PolicyControllerMonitoringConfigBackendsEnum]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('backends') }})
     

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class AppengineAppsPatchPathParams extends SpeakeasyBase {
     appsId: string;
@@ -24,7 +24,7 @@ export declare class AppengineAppsPatchSecurity extends SpeakeasyBase {
 export declare class AppengineAppsPatchRequest extends SpeakeasyBase {
     pathParams: AppengineAppsPatchPathParams;
     queryParams: AppengineAppsPatchQueryParams;
-    request?: shared.Application;
+    request?: shared.ApplicationInput;
     security: AppengineAppsPatchSecurity;
 }
 export declare class AppengineAppsPatchResponse extends SpeakeasyBase {

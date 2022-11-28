@@ -1,5 +1,7 @@
 package shared
 
+// AwsRdsDbInstanceDetails
+// Contains the details of an Amazon RDS DB instance.
 type AwsRdsDbInstanceDetails struct {
 	AllocatedStorage                      *int64                             `json:"AllocatedStorage,omitempty"`
 	AssociatedRoles                       []AwsRdsDbInstanceAssociatedRole   `json:"AssociatedRoles,omitempty"`

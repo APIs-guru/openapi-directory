@@ -7,6 +7,8 @@ type SolutionUnassigned struct {
 	Shipments []string `json:"shipments,omitempty"`
 }
 
+// Solution
+// Only available if status field indicates `finished`.
 type Solution struct {
 	CompletionTime   *int64              `json:"completion_time,omitempty"`
 	Costs            *int32              `json:"costs,omitempty"`

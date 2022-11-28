@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // StopFleetActionsOutput
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Represents the input for a request operation.
 **/
 export class StopFleetActionsOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=FleetArn" })
+  @SpeakeasyMetadata({ data: "json, name=FleetArn" })
   fleetArn?: string;
 
-  @Metadata({ data: "json, name=FleetId" })
+  @SpeakeasyMetadata({ data: "json, name=FleetId" })
   fleetId?: string;
 }

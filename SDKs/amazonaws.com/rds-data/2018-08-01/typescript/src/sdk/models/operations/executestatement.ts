@@ -1,27 +1,28 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class ExecuteStatementHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
@@ -31,75 +32,75 @@ export class ExecuteStatementHeaders extends SpeakeasyBase {
  * Options that control how the result set is returned.
 **/
 export class ExecuteStatementRequestBodyResultSetOptions extends SpeakeasyBase {
-  @Metadata({ data: "json, name=decimalReturnType" })
+  @SpeakeasyMetadata({ data: "json, name=decimalReturnType" })
   decimalReturnType?: shared.DecimalReturnTypeEnum;
 }
 
 
 export class ExecuteStatementRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=continueAfterTimeout" })
+  @SpeakeasyMetadata({ data: "json, name=continueAfterTimeout" })
   continueAfterTimeout?: boolean;
 
-  @Metadata({ data: "json, name=database" })
+  @SpeakeasyMetadata({ data: "json, name=database" })
   database?: string;
 
-  @Metadata({ data: "json, name=includeResultMetadata" })
+  @SpeakeasyMetadata({ data: "json, name=includeResultMetadata" })
   includeResultMetadata?: boolean;
 
-  @Metadata({ data: "json, name=parameters", elemType: shared.SqlParameter })
+  @SpeakeasyMetadata({ data: "json, name=parameters", elemType: shared.SqlParameter })
   parameters?: shared.SqlParameter[];
 
-  @Metadata({ data: "json, name=resourceArn" })
+  @SpeakeasyMetadata({ data: "json, name=resourceArn" })
   resourceArn: string;
 
-  @Metadata({ data: "json, name=resultSetOptions" })
+  @SpeakeasyMetadata({ data: "json, name=resultSetOptions" })
   resultSetOptions?: ExecuteStatementRequestBodyResultSetOptions;
 
-  @Metadata({ data: "json, name=schema" })
+  @SpeakeasyMetadata({ data: "json, name=schema" })
   schema?: string;
 
-  @Metadata({ data: "json, name=secretArn" })
+  @SpeakeasyMetadata({ data: "json, name=secretArn" })
   secretArn: string;
 
-  @Metadata({ data: "json, name=sql" })
+  @SpeakeasyMetadata({ data: "json, name=sql" })
   sql: string;
 
-  @Metadata({ data: "json, name=transactionId" })
+  @SpeakeasyMetadata({ data: "json, name=transactionId" })
   transactionId?: string;
 }
 
 
 export class ExecuteStatementRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: ExecuteStatementHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: ExecuteStatementRequestBody;
 }
 
 
 export class ExecuteStatementResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   badRequestException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   executeStatementResponse?: shared.ExecuteStatementResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   forbiddenException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   internalServerErrorException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   serviceUnavailableError?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statementTimeoutException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

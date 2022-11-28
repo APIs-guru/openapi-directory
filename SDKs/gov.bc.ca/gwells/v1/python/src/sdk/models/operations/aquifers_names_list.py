@@ -10,12 +10,12 @@ class AquifersNamesListQueryParams:
 
 @dataclass
 class AquifersNamesListRequest:
-    query_params: AquifersNamesListQueryParams = field(default=None)
+    query_params: AquifersNamesListQueryParams = field()
     
 
 @dataclass
 class AquifersNamesListResponse:
+    content_type: str = field()
+    status_code: int = field()
     aquifer_serializer_basics: Optional[List[shared.AquiferSerializerBasic]] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,5 +1,7 @@
 package shared
 
+// GalleryReference
+// Represents the link between a custom template and an entry on the Community Template Gallery site.
 type GalleryReference struct {
 	Host       *string `json:"host,omitempty"`
 	IsModified *bool   `json:"isModified,omitempty"`

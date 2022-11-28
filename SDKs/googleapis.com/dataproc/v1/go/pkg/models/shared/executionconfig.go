@@ -1,5 +1,7 @@
 package shared
 
+// ExecutionConfig
+// Execution configuration for a workload.
 type ExecutionConfig struct {
 	IdleTTL        *string  `json:"idleTtl,omitempty"`
 	KmsKey         *string  `json:"kmsKey,omitempty"`

@@ -22,22 +22,22 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var ProtocolSnmpv3SetConfigPathParams = /** @class */ (function (_super) {
     __extends(ProtocolSnmpv3SetConfigPathParams, _super);
     function ProtocolSnmpv3SetConfigPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=agentNum" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=agentNum" }),
         __metadata("design:type", Number)
     ], ProtocolSnmpv3SetConfigPathParams.prototype, "agentNum", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=parameter" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=parameter" }),
         __metadata("design:type", String)
     ], ProtocolSnmpv3SetConfigPathParams.prototype, "parameter", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=value" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=value" }),
         __metadata("design:type", String)
     ], ProtocolSnmpv3SetConfigPathParams.prototype, "value", void 0);
     return ProtocolSnmpv3SetConfigPathParams;
@@ -49,7 +49,7 @@ var ProtocolSnmpv3SetConfigRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ProtocolSnmpv3SetConfigPathParams)
     ], ProtocolSnmpv3SetConfigRequest.prototype, "pathParams", void 0);
     return ProtocolSnmpv3SetConfigRequest;
@@ -61,15 +61,15 @@ var ProtocolSnmpv3SetConfigResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], ProtocolSnmpv3SetConfigResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], ProtocolSnmpv3SetConfigResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], ProtocolSnmpv3SetConfigResponse.prototype, "protocolSnmpv3SetConfig200ApplicationJsonString", void 0);
     return ProtocolSnmpv3SetConfigResponse;

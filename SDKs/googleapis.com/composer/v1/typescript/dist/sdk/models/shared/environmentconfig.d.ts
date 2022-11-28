@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { DatabaseConfig } from "./databaseconfig";
 import { EncryptionConfig } from "./encryptionconfig";
 import { MaintenanceWindow } from "./maintenancewindow";
@@ -9,6 +9,7 @@ import { SoftwareConfig } from "./softwareconfig";
 import { WebServerConfig } from "./webserverconfig";
 import { WebServerNetworkAccessControl } from "./webservernetworkaccesscontrol";
 import { WorkloadsConfig } from "./workloadsconfig";
+import { PrivateEnvironmentConfigInput } from "./privateenvironmentconfig";
 export declare enum EnvironmentConfigEnvironmentSizeEnum {
     EnvironmentSizeUnspecified = "ENVIRONMENT_SIZE_UNSPECIFIED",
     EnvironmentSizeSmall = "ENVIRONMENT_SIZE_SMALL",
@@ -30,6 +31,26 @@ export declare class EnvironmentConfig extends SpeakeasyBase {
     nodeConfig?: NodeConfig;
     nodeCount?: number;
     privateEnvironmentConfig?: PrivateEnvironmentConfig;
+    softwareConfig?: SoftwareConfig;
+    webServerConfig?: WebServerConfig;
+    webServerNetworkAccessControl?: WebServerNetworkAccessControl;
+    workloadsConfig?: WorkloadsConfig;
+}
+/**
+ * Configuration information for an environment.
+**/
+export declare class EnvironmentConfigInput extends SpeakeasyBase {
+    airflowUri?: string;
+    dagGcsPrefix?: string;
+    databaseConfig?: DatabaseConfig;
+    encryptionConfig?: EncryptionConfig;
+    environmentSize?: EnvironmentConfigEnvironmentSizeEnum;
+    gkeCluster?: string;
+    maintenanceWindow?: MaintenanceWindow;
+    masterAuthorizedNetworksConfig?: MasterAuthorizedNetworksConfig;
+    nodeConfig?: NodeConfig;
+    nodeCount?: number;
+    privateEnvironmentConfig?: PrivateEnvironmentConfigInput;
     softwareConfig?: SoftwareConfig;
     webServerConfig?: WebServerConfig;
     webServerNetworkAccessControl?: WebServerNetworkAccessControl;

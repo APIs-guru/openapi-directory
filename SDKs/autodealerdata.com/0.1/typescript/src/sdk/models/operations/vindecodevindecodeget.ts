@@ -1,38 +1,39 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class VinDecodeVinDecodeGetQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=includeRecall" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=includeRecall" })
   includeRecall?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=jwt" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=jwt" })
   jwt: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=passEmpty" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=passEmpty" })
   passEmpty?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=vin" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=vin" })
   vin: string;
 }
 
 
 export class VinDecodeVinDecodeGetRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: VinDecodeVinDecodeGetQueryParams;
 }
 
 
 export class VinDecodeVinDecodeGetResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   genericResponse?: shared.GenericResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   httpValidationError?: shared.HttpValidationError;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

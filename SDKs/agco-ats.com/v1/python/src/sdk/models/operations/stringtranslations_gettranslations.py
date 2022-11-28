@@ -11,14 +11,14 @@ class StringTranslationsGetTranslationsQueryParams:
 
 @dataclass
 class StringTranslationsGetTranslationsRequest:
-    query_params: StringTranslationsGetTranslationsQueryParams = field(default=None)
+    query_params: StringTranslationsGetTranslationsQueryParams = field()
     
 
 @dataclass
 class StringTranslationsGetTranslationsResponse:
+    content_type: str = field()
+    status_code: int = field()
     api_i_paged_response_global_resources_shared_models_string_translation_: Optional[shared.APIIPagedResponseGlobalResourcesSharedModelsStringTranslation] = field(default=None)
     api_models_api_error: Optional[shared.APIModelsAPIError] = field(default=None)
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    body: Optional[bytes] = field(default=None)
     

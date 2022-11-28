@@ -9,11 +9,8 @@ type PostVolumesIDActionsAttachAttachVolumeRequest struct {
 	Server    int64 `json:"server"`
 }
 
-type PostVolumesIDActionsAttachRequest struct {
-	PathParams PostVolumesIDActionsAttachPathParams
-	Request    *PostVolumesIDActionsAttachAttachVolumeRequest `request:"mediaType=application/json"`
-}
-
+// PostVolumesIDActionsAttachActionResponseActionError
+// Error message for the Action if error occurred, otherwise null
 type PostVolumesIDActionsAttachActionResponseActionError struct {
 	Code    string `json:"code"`
 	Message string `json:"message"`
@@ -45,6 +42,11 @@ type PostVolumesIDActionsAttachActionResponseAction struct {
 
 type PostVolumesIDActionsAttachActionResponse struct {
 	Action PostVolumesIDActionsAttachActionResponseAction `json:"action"`
+}
+
+type PostVolumesIDActionsAttachRequest struct {
+	PathParams PostVolumesIDActionsAttachPathParams
+	Request    *PostVolumesIDActionsAttachAttachVolumeRequest `request:"mediaType=application/json"`
 }
 
 type PostVolumesIDActionsAttachResponse struct {

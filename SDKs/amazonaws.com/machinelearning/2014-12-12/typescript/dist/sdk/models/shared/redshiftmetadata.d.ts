@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { RedshiftDatabase } from "./redshiftdatabase";
 /**
  * Describes the <code>DataSource</code> details specific to Amazon Redshift.

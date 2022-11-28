@@ -10,6 +10,8 @@ const (
 	PerfMetricsSummaryPerfMetricsEnumGraphics                  PerfMetricsSummaryPerfMetricsEnum = "graphics"
 )
 
+// PerfMetricsSummary
+// A summary of perf metrics collected and performance environment info
 type PerfMetricsSummary struct {
 	AppStartTime    *AppStartTime                       `json:"appStartTime,omitempty"`
 	ExecutionID     *string                             `json:"executionId,omitempty"`

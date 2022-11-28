@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DateRangeUnitEnum } from "./daterangeunitenum";
+
 
 
 // DateRange
@@ -7,9 +8,9 @@ import { DateRangeUnitEnum } from "./daterangeunitenum";
  * A date range for the date filter.
 **/
 export class DateRange extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Unit" })
+  @SpeakeasyMetadata({ data: "json, name=Unit" })
   unit?: DateRangeUnitEnum;
 
-  @Metadata({ data: "json, name=Value" })
+  @SpeakeasyMetadata({ data: "json, name=Value" })
   value?: number;
 }

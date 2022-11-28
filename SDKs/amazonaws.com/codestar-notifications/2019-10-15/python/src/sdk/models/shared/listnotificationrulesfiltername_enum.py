@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum,List
+from enum import Enum
 
 class ListNotificationRulesFilterNameEnum(str, Enum):
     EVENT_TYPE_ID = "EVENT_TYPE_ID"

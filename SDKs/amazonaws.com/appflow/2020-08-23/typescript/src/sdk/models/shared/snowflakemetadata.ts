@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // SnowflakeMetadata
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  *  The connector metadata specific to Snowflake. 
 **/
 export class SnowflakeMetadata extends SpeakeasyBase {
-  @Metadata({ data: "json, name=supportedRegions" })
+  @SpeakeasyMetadata({ data: "json, name=supportedRegions" })
   supportedRegions?: string[];
 }

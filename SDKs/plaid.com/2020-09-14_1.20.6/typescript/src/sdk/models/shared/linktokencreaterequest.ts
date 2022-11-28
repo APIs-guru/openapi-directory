@@ -1,4 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { LinkTokenCreateRequestAuth } from "./linktokencreaterequestauth";
 import { CountryCodeEnum } from "./countrycodeenum";
 import { LinkTokenCreateRequestDepositSwitch } from "./linktokencreaterequestdepositswitch";
@@ -9,65 +9,66 @@ import { ProductsEnum } from "./productsenum";
 import { LinkTokenCreateRequestUser } from "./linktokencreaterequestuser";
 
 
+
 // LinkTokenCreateRequest
 /** 
  * LinkTokenCreateRequest defines the request schema for `/link/token/create`
 **/
 export class LinkTokenCreateRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=access_token" })
+  @SpeakeasyMetadata({ data: "json, name=access_token" })
   accessToken?: string;
 
-  @Metadata({ data: "json, name=account_filters" })
+  @SpeakeasyMetadata({ data: "json, name=account_filters" })
   accountFilters?: Map<string, any>;
 
-  @Metadata({ data: "json, name=android_package_name" })
+  @SpeakeasyMetadata({ data: "json, name=android_package_name" })
   androidPackageName?: string;
 
-  @Metadata({ data: "json, name=auth" })
+  @SpeakeasyMetadata({ data: "json, name=auth" })
   auth?: LinkTokenCreateRequestAuth;
 
-  @Metadata({ data: "json, name=client_id" })
+  @SpeakeasyMetadata({ data: "json, name=client_id" })
   clientId?: string;
 
-  @Metadata({ data: "json, name=client_name" })
+  @SpeakeasyMetadata({ data: "json, name=client_name" })
   clientName: string;
 
-  @Metadata({ data: "json, name=country_codes" })
+  @SpeakeasyMetadata({ data: "json, name=country_codes" })
   countryCodes: CountryCodeEnum[];
 
-  @Metadata({ data: "json, name=deposit_switch" })
+  @SpeakeasyMetadata({ data: "json, name=deposit_switch" })
   depositSwitch?: LinkTokenCreateRequestDepositSwitch;
 
-  @Metadata({ data: "json, name=eu_config" })
+  @SpeakeasyMetadata({ data: "json, name=eu_config" })
   euConfig?: LinkTokenEuConfig;
 
-  @Metadata({ data: "json, name=income_verification" })
+  @SpeakeasyMetadata({ data: "json, name=income_verification" })
   incomeVerification?: LinkTokenCreateRequestIncomeVerification;
 
-  @Metadata({ data: "json, name=institution_id" })
+  @SpeakeasyMetadata({ data: "json, name=institution_id" })
   institutionId?: string;
 
-  @Metadata({ data: "json, name=language" })
+  @SpeakeasyMetadata({ data: "json, name=language" })
   language: string;
 
-  @Metadata({ data: "json, name=link_customization_name" })
+  @SpeakeasyMetadata({ data: "json, name=link_customization_name" })
   linkCustomizationName?: string;
 
-  @Metadata({ data: "json, name=payment_initiation" })
+  @SpeakeasyMetadata({ data: "json, name=payment_initiation" })
   paymentInitiation?: LinkTokenCreateRequestPaymentInitiation;
 
-  @Metadata({ data: "json, name=products" })
+  @SpeakeasyMetadata({ data: "json, name=products" })
   products?: ProductsEnum[];
 
-  @Metadata({ data: "json, name=redirect_uri" })
+  @SpeakeasyMetadata({ data: "json, name=redirect_uri" })
   redirectUri?: string;
 
-  @Metadata({ data: "json, name=secret" })
+  @SpeakeasyMetadata({ data: "json, name=secret" })
   secret?: string;
 
-  @Metadata({ data: "json, name=user" })
+  @SpeakeasyMetadata({ data: "json, name=user" })
   user: LinkTokenCreateRequestUser;
 
-  @Metadata({ data: "json, name=webhook" })
+  @SpeakeasyMetadata({ data: "json, name=webhook" })
   webhook?: string;
 }

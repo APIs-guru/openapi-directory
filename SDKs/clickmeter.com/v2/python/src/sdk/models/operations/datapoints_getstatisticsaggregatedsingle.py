@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 class DataPointsGetStatisticsAggregatedSingleStatusEnum(str, Enum):
@@ -32,24 +33,24 @@ class DataPointsGetStatisticsAggregatedSingleTypeEnum(str, Enum):
 
 @dataclass
 class DataPointsGetStatisticsAggregatedSingleQueryParams:
+    time_frame: DataPointsGetStatisticsAggregatedSingleTimeFrameEnum = field(metadata={'query_param': { 'field_name': 'timeFrame', 'style': 'form', 'explode': True }})
     favourite: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'favourite', 'style': 'form', 'explode': True }})
     from_day: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'fromDay', 'style': 'form', 'explode': True }})
     hourly: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'hourly', 'style': 'form', 'explode': True }})
     status: Optional[DataPointsGetStatisticsAggregatedSingleStatusEnum] = field(default=None, metadata={'query_param': { 'field_name': 'status', 'style': 'form', 'explode': True }})
     tag: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'tag', 'style': 'form', 'explode': True }})
-    time_frame: DataPointsGetStatisticsAggregatedSingleTimeFrameEnum = field(default=None, metadata={'query_param': { 'field_name': 'timeFrame', 'style': 'form', 'explode': True }})
     to_day: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'toDay', 'style': 'form', 'explode': True }})
     type: Optional[DataPointsGetStatisticsAggregatedSingleTypeEnum] = field(default=None, metadata={'query_param': { 'field_name': 'type', 'style': 'form', 'explode': True }})
     
 
 @dataclass
 class DataPointsGetStatisticsAggregatedSingleRequest:
-    query_params: DataPointsGetStatisticsAggregatedSingleQueryParams = field(default=None)
+    query_params: DataPointsGetStatisticsAggregatedSingleQueryParams = field()
     
 
 @dataclass
 class DataPointsGetStatisticsAggregatedSingleResponse:
+    content_type: str = field()
+    status_code: int = field()
     api_core_dto_aggregated_aggregated_result: Optional[shared.APICoreDtoAggregatedAggregatedResult] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

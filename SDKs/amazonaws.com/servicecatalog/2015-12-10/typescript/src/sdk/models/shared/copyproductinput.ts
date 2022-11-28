@@ -1,26 +1,27 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CopyOptionEnum } from "./copyoptionenum";
 
 
+
 export class CopyProductInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AcceptLanguage" })
+  @SpeakeasyMetadata({ data: "json, name=AcceptLanguage" })
   acceptLanguage?: string;
 
-  @Metadata({ data: "json, name=CopyOptions" })
+  @SpeakeasyMetadata({ data: "json, name=CopyOptions" })
   copyOptions?: CopyOptionEnum[];
 
-  @Metadata({ data: "json, name=IdempotencyToken" })
+  @SpeakeasyMetadata({ data: "json, name=IdempotencyToken" })
   idempotencyToken: string;
 
-  @Metadata({ data: "json, name=SourceProductArn" })
+  @SpeakeasyMetadata({ data: "json, name=SourceProductArn" })
   sourceProductArn: string;
 
-  @Metadata({ data: "json, name=SourceProvisioningArtifactIdentifiers" })
+  @SpeakeasyMetadata({ data: "json, name=SourceProvisioningArtifactIdentifiers" })
   sourceProvisioningArtifactIdentifiers?: Map<string, string>[];
 
-  @Metadata({ data: "json, name=TargetProductId" })
+  @SpeakeasyMetadata({ data: "json, name=TargetProductId" })
   targetProductId?: string;
 
-  @Metadata({ data: "json, name=TargetProductName" })
+  @SpeakeasyMetadata({ data: "json, name=TargetProductName" })
   targetProductName?: string;
 }

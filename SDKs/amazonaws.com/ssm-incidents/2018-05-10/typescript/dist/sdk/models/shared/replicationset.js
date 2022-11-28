@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { RegionInfo } from "./regioninfo";
 import { ReplicationSetStatusEnum } from "./replicationsetstatusenum";
 // ReplicationSet
 /**
@@ -35,35 +35,35 @@ var ReplicationSet = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=arn" }),
+        SpeakeasyMetadata({ data: "json, name=arn" }),
         __metadata("design:type", String)
     ], ReplicationSet.prototype, "arn", void 0);
     __decorate([
-        Metadata({ data: "json, name=createdBy" }),
+        SpeakeasyMetadata({ data: "json, name=createdBy" }),
         __metadata("design:type", String)
     ], ReplicationSet.prototype, "createdBy", void 0);
     __decorate([
-        Metadata({ data: "json, name=createdTime" }),
+        SpeakeasyMetadata({ data: "json, name=createdTime" }),
         __metadata("design:type", Date)
     ], ReplicationSet.prototype, "createdTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=deletionProtected" }),
+        SpeakeasyMetadata({ data: "json, name=deletionProtected" }),
         __metadata("design:type", Boolean)
     ], ReplicationSet.prototype, "deletionProtected", void 0);
     __decorate([
-        Metadata({ data: "json, name=lastModifiedBy" }),
+        SpeakeasyMetadata({ data: "json, name=lastModifiedBy" }),
         __metadata("design:type", String)
     ], ReplicationSet.prototype, "lastModifiedBy", void 0);
     __decorate([
-        Metadata({ data: "json, name=lastModifiedTime" }),
+        SpeakeasyMetadata({ data: "json, name=lastModifiedTime" }),
         __metadata("design:type", Date)
     ], ReplicationSet.prototype, "lastModifiedTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=regionMap", elemType: shared.RegionInfo }),
+        SpeakeasyMetadata({ data: "json, name=regionMap", elemType: RegionInfo }),
         __metadata("design:type", Map)
     ], ReplicationSet.prototype, "regionMap", void 0);
     __decorate([
-        Metadata({ data: "json, name=status" }),
+        SpeakeasyMetadata({ data: "json, name=status" }),
         __metadata("design:type", String)
     ], ReplicationSet.prototype, "status", void 0);
     return ReplicationSet;

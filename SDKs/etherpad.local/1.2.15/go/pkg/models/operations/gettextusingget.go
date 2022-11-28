@@ -5,10 +5,6 @@ type GetTextUsingGetQueryParams struct {
 	Rev   *string `queryParam:"style=form,explode=true,name=rev"`
 }
 
-type GetTextUsingGetRequest struct {
-	QueryParams GetTextUsingGetQueryParams
-}
-
 type GetTextUsingGet200ApplicationJSONData struct {
 	Text *string `json:"text,omitempty"`
 }
@@ -35,6 +31,10 @@ type GetTextUsingGet500ApplicationJSON struct {
 	Code    *int64                 `json:"code,omitempty"`
 	Data    map[string]interface{} `json:"data,omitempty"`
 	Message *string                `json:"message,omitempty"`
+}
+
+type GetTextUsingGetRequest struct {
+	QueryParams GetTextUsingGetQueryParams
 }
 
 type GetTextUsingGetResponse struct {

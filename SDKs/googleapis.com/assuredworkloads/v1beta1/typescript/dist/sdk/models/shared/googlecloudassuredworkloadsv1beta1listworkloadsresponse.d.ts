@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudAssuredworkloadsV1beta1Workload } from "./googlecloudassuredworkloadsv1beta1workload";
 /**
  * Response of ListWorkloads endpoint.

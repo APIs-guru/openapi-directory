@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class MonitoringProjectsTimeSeriesCreateServicePathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,20 +26,20 @@ class MonitoringProjectsTimeSeriesCreateServiceQueryParams:
 
 @dataclass
 class MonitoringProjectsTimeSeriesCreateServiceSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class MonitoringProjectsTimeSeriesCreateServiceSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class MonitoringProjectsTimeSeriesCreateServiceSecurityOption3:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -50,15 +51,15 @@ class MonitoringProjectsTimeSeriesCreateServiceSecurity:
 
 @dataclass
 class MonitoringProjectsTimeSeriesCreateServiceRequest:
-    path_params: MonitoringProjectsTimeSeriesCreateServicePathParams = field(default=None)
-    query_params: MonitoringProjectsTimeSeriesCreateServiceQueryParams = field(default=None)
+    path_params: MonitoringProjectsTimeSeriesCreateServicePathParams = field()
+    query_params: MonitoringProjectsTimeSeriesCreateServiceQueryParams = field()
+    security: MonitoringProjectsTimeSeriesCreateServiceSecurity = field()
     request: Optional[shared.CreateTimeSeriesRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: MonitoringProjectsTimeSeriesCreateServiceSecurity = field(default=None)
     
 
 @dataclass
 class MonitoringProjectsTimeSeriesCreateServiceResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     empty: Optional[dict[str, Any]] = field(default=None)
-    status_code: int = field(default=None)
     

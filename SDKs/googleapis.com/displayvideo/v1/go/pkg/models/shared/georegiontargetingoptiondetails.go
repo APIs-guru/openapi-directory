@@ -34,6 +34,8 @@ const (
 	GeoRegionTargetingOptionDetailsGeoRegionTypeEnumGeoRegionTypeDistrict              GeoRegionTargetingOptionDetailsGeoRegionTypeEnum = "GEO_REGION_TYPE_DISTRICT"
 )
 
+// GeoRegionTargetingOptionDetails
+// Represents a targetable geographic region. This will be populated in the geo_region_details field when targeting_type is `TARGETING_TYPE_GEO_REGION`.
 type GeoRegionTargetingOptionDetails struct {
 	DisplayName   *string                                           `json:"displayName,omitempty"`
 	GeoRegionType *GeoRegionTargetingOptionDetailsGeoRegionTypeEnum `json:"geoRegionType,omitempty"`

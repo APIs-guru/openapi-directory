@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // EngineVersion
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The Athena engine version for running queries.
 **/
 export class EngineVersion extends SpeakeasyBase {
-  @Metadata({ data: "json, name=EffectiveEngineVersion" })
+  @SpeakeasyMetadata({ data: "json, name=EffectiveEngineVersion" })
   effectiveEngineVersion?: string;
 
-  @Metadata({ data: "json, name=SelectedEngineVersion" })
+  @SpeakeasyMetadata({ data: "json, name=SelectedEngineVersion" })
   selectedEngineVersion?: string;
 }

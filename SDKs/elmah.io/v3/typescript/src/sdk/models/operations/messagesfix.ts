@@ -1,34 +1,35 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class MessagesFixPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" })
   id: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=logId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=logId" })
   logId: string;
 }
 
 
 export class MessagesFixQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=markAllAsFixed" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=markAllAsFixed" })
   markAllAsFixed?: boolean;
 }
 
 
 export class MessagesFixRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: MessagesFixPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: MessagesFixQueryParams;
 }
 
 
 export class MessagesFixResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

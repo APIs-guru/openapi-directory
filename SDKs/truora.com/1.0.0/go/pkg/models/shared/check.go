@@ -310,6 +310,8 @@ const (
 	CheckStatusEnumDelayed    CheckStatusEnum = "delayed"
 )
 
+// Check
+// Represents a background check
 type Check struct {
 	BirthCertificate   *string                 `json:"birth_certificate,omitempty"`
 	CheckID            string                  `json:"check_id"`

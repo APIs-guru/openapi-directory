@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var FunctionsCreateRequestBody = /** @class */ (function (_super) {
     __extends(FunctionsCreateRequestBody, _super);
@@ -30,31 +30,31 @@ var FunctionsCreateRequestBody = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=events" }),
+        SpeakeasyMetadata({ data: "json, name=events" }),
         __metadata("design:type", Array)
     ], FunctionsCreateRequestBody.prototype, "events", void 0);
     __decorate([
-        Metadata({ data: "json, name=execute" }),
+        SpeakeasyMetadata({ data: "json, name=execute" }),
         __metadata("design:type", Array)
     ], FunctionsCreateRequestBody.prototype, "execute", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], FunctionsCreateRequestBody.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=runtime" }),
+        SpeakeasyMetadata({ data: "json, name=runtime" }),
         __metadata("design:type", String)
     ], FunctionsCreateRequestBody.prototype, "runtime", void 0);
     __decorate([
-        Metadata({ data: "json, name=schedule" }),
+        SpeakeasyMetadata({ data: "json, name=schedule" }),
         __metadata("design:type", String)
     ], FunctionsCreateRequestBody.prototype, "schedule", void 0);
     __decorate([
-        Metadata({ data: "json, name=timeout" }),
+        SpeakeasyMetadata({ data: "json, name=timeout" }),
         __metadata("design:type", Number)
     ], FunctionsCreateRequestBody.prototype, "timeout", void 0);
     __decorate([
-        Metadata({ data: "json, name=vars" }),
+        SpeakeasyMetadata({ data: "json, name=vars" }),
         __metadata("design:type", Map)
     ], FunctionsCreateRequestBody.prototype, "vars", void 0);
     return FunctionsCreateRequestBody;
@@ -66,11 +66,11 @@ var FunctionsCreateSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeKey)
     ], FunctionsCreateSecurity.prototype, "key", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeProject)
     ], FunctionsCreateSecurity.prototype, "project", void 0);
     return FunctionsCreateSecurity;
@@ -82,11 +82,11 @@ var FunctionsCreateRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", FunctionsCreateRequestBody)
     ], FunctionsCreateRequest.prototype, "request", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", FunctionsCreateSecurity)
     ], FunctionsCreateRequest.prototype, "security", void 0);
     return FunctionsCreateRequest;
@@ -98,15 +98,15 @@ var FunctionsCreateResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], FunctionsCreateResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], FunctionsCreateResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.Function)
     ], FunctionsCreateResponse.prototype, "function", void 0);
     return FunctionsCreateResponse;

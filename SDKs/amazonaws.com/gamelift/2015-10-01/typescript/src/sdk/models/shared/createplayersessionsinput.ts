@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // CreatePlayerSessionsInput
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Represents the input for a request operation.
 **/
 export class CreatePlayerSessionsInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=GameSessionId" })
+  @SpeakeasyMetadata({ data: "json, name=GameSessionId" })
   gameSessionId: string;
 
-  @Metadata({ data: "json, name=PlayerDataMap" })
+  @SpeakeasyMetadata({ data: "json, name=PlayerDataMap" })
   playerDataMap?: Map<string, string>;
 
-  @Metadata({ data: "json, name=PlayerIds" })
+  @SpeakeasyMetadata({ data: "json, name=PlayerIds" })
   playerIds: string[];
 }

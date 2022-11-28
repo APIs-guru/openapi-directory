@@ -1,41 +1,42 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class EstimationApiUriQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=id" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=id" })
   id: number;
 }
 
 
 export class EstimationApiUriHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=x-auth-key" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=x-auth-key" })
   xAuthKey: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=x-auth-secret" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=x-auth-secret" })
   xAuthSecret: string;
 }
 
 
 export class EstimationApiUriRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: EstimationApiUriQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: EstimationApiUriHeaders;
 }
 
 
 export class EstimationApiUriResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   estimationUriApiModel?: shared.EstimationUriApiModel;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

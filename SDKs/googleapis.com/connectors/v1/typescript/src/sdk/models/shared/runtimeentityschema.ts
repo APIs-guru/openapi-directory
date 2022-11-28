@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Field } from "./field";
+
 
 
 // RuntimeEntitySchema
@@ -8,9 +8,9 @@ import { Field } from "./field";
  * Schema of a runtime entity.
 **/
 export class RuntimeEntitySchema extends SpeakeasyBase {
-  @Metadata({ data: "json, name=entity" })
+  @SpeakeasyMetadata({ data: "json, name=entity" })
   entity?: string;
 
-  @Metadata({ data: "json, name=fields", elemType: shared.Field })
+  @SpeakeasyMetadata({ data: "json, name=fields", elemType: Field })
   fields?: Field[];
 }

@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 class GetElectionsSearchOfficeEnum(str, Enum):
@@ -10,7 +11,7 @@ class GetElectionsSearchOfficeEnum(str, Enum):
 
 @dataclass
 class GetElectionsSearchQueryParams:
-    api_key: str = field(default=None, metadata={'query_param': { 'field_name': 'api_key', 'style': 'form', 'explode': True }})
+    api_key: str = field(metadata={'query_param': { 'field_name': 'api_key', 'style': 'form', 'explode': True }})
     cycle: Optional[List[int]] = field(default=None, metadata={'query_param': { 'field_name': 'cycle', 'style': 'form', 'explode': True }})
     district: Optional[List[str]] = field(default=None, metadata={'query_param': { 'field_name': 'district', 'style': 'form', 'explode': True }})
     office: Optional[List[GetElectionsSearchOfficeEnum]] = field(default=None, metadata={'query_param': { 'field_name': 'office', 'style': 'form', 'explode': True }})
@@ -26,12 +27,12 @@ class GetElectionsSearchQueryParams:
 
 @dataclass
 class GetElectionsSearchRequest:
-    query_params: GetElectionsSearchQueryParams = field(default=None)
+    query_params: GetElectionsSearchQueryParams = field()
     
 
 @dataclass
 class GetElectionsSearchResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     elections_list_page: Optional[shared.ElectionsListPage] = field(default=None)
-    status_code: int = field(default=None)
     

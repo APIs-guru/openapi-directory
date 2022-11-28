@@ -1,33 +1,34 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class PutEmailIdentityDkimSigningAttributesPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=EmailIdentity" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=EmailIdentity" })
   emailIdentity: string;
 }
 
 
 export class PutEmailIdentityDkimSigningAttributesHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
@@ -37,56 +38,56 @@ export class PutEmailIdentityDkimSigningAttributesHeaders extends SpeakeasyBase 
  * An object that contains information about the tokens used for setting up Bring Your Own DKIM (BYODKIM).
 **/
 export class PutEmailIdentityDkimSigningAttributesRequestBodySigningAttributes extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DomainSigningPrivateKey" })
+  @SpeakeasyMetadata({ data: "json, name=DomainSigningPrivateKey" })
   domainSigningPrivateKey?: string;
 
-  @Metadata({ data: "json, name=DomainSigningSelector" })
+  @SpeakeasyMetadata({ data: "json, name=DomainSigningSelector" })
   domainSigningSelector?: string;
 }
 
 export enum PutEmailIdentityDkimSigningAttributesRequestBodySigningAttributesOriginEnum {
-    AwsSes = "AWS_SES"
-,    External = "EXTERNAL"
+    AwsSes = "AWS_SES",
+    External = "EXTERNAL"
 }
 
 
 export class PutEmailIdentityDkimSigningAttributesRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=SigningAttributes" })
+  @SpeakeasyMetadata({ data: "json, name=SigningAttributes" })
   signingAttributes?: PutEmailIdentityDkimSigningAttributesRequestBodySigningAttributes;
 
-  @Metadata({ data: "json, name=SigningAttributesOrigin" })
+  @SpeakeasyMetadata({ data: "json, name=SigningAttributesOrigin" })
   signingAttributesOrigin: PutEmailIdentityDkimSigningAttributesRequestBodySigningAttributesOriginEnum;
 }
 
 
 export class PutEmailIdentityDkimSigningAttributesRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: PutEmailIdentityDkimSigningAttributesPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: PutEmailIdentityDkimSigningAttributesHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: PutEmailIdentityDkimSigningAttributesRequestBody;
 }
 
 
 export class PutEmailIdentityDkimSigningAttributesResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   badRequestException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   notFoundException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   putEmailIdentityDkimSigningAttributesResponse?: shared.PutEmailIdentityDkimSigningAttributesResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   tooManyRequestsException?: any;
 }

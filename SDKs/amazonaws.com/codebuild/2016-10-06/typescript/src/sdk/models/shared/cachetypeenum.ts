@@ -1,7 +1,8 @@
 
 
+
 export enum CacheTypeEnum {
-    NoCache = "NO_CACHE"
-,    S3 = "S3"
-,    Local = "LOCAL"
+    NoCache = "NO_CACHE",
+    S3 = "S3",
+    Local = "LOCAL"
 }

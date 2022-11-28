@@ -1,56 +1,57 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class CreateTagForWorkspacePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=workspace_gid" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=workspace_gid" })
   workspaceGid: string;
 }
 
 
 export class CreateTagForWorkspaceQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=false;name=opt_fields" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=opt_fields" })
   optFields?: string[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=opt_pretty" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=opt_pretty" })
   optPretty?: boolean;
 }
 
 
-export class CreateTagForWorkspaceRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=data" })
+export class CreateTagForWorkspaceRequestBodyInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=data" })
+  data?: shared.TagResponseInput;
+}
+
+
+export class CreateTagForWorkspace201ApplicationJson extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data?: shared.TagResponse;
 }
 
 
 export class CreateTagForWorkspaceRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: CreateTagForWorkspacePathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: CreateTagForWorkspaceQueryParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
-  request: CreateTagForWorkspaceRequestBody;
-}
-
-
-export class CreateTagForWorkspace201ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=data" })
-  data?: shared.TagResponse;
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request: CreateTagForWorkspaceRequestBodyInput;
 }
 
 
 export class CreateTagForWorkspaceResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   errorResponse?: shared.ErrorResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   createTagForWorkspace201ApplicationJsonObject?: CreateTagForWorkspace201ApplicationJson;
 }

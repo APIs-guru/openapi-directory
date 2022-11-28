@@ -22,14 +22,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var FilmographyTypeSearchReadPathParams = /** @class */ (function (_super) {
     __extends(FilmographyTypeSearchReadPathParams, _super);
     function FilmographyTypeSearchReadPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=filmography_description" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=filmography_description" }),
         __metadata("design:type", String)
     ], FilmographyTypeSearchReadPathParams.prototype, "filmographyDescription", void 0);
     return FilmographyTypeSearchReadPathParams;
@@ -41,7 +41,7 @@ var FilmographyTypeSearchReadRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", FilmographyTypeSearchReadPathParams)
     ], FilmographyTypeSearchReadRequest.prototype, "pathParams", void 0);
     return FilmographyTypeSearchReadRequest;
@@ -53,11 +53,11 @@ var FilmographyTypeSearchReadResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], FilmographyTypeSearchReadResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], FilmographyTypeSearchReadResponse.prototype, "statusCode", void 0);
     return FilmographyTypeSearchReadResponse;

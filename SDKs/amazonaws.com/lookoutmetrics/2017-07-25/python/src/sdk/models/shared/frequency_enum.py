@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class FrequencyEnum(str, Enum):
     P1_D = "P1D"

@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DocTypeResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=documents" })
+  @SpeakeasyMetadata({ data: "json, name=documents" })
   documents: any[];
 }

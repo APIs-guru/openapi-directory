@@ -10,6 +10,8 @@ const (
 	AdSizeSizeTypeEnumFluid               AdSizeSizeTypeEnum = "FLUID"
 )
 
+// AdSize
+// Represents size of a single ad slot, or a creative.
 type AdSize struct {
 	Height   *string             `json:"height,omitempty"`
 	SizeType *AdSizeSizeTypeEnum `json:"sizeType,omitempty"`

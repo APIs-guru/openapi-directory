@@ -1,75 +1,75 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class UserRoles extends SpeakeasyBase {
-  @Metadata({ data: "json, name=code" })
+  @SpeakeasyMetadata({ data: "json, name=code" })
   code?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 }
 
 export enum UserStatusEnum {
-    Pending = "PENDING"
-,    Active = "ACTIVE"
-,    Deleted = "DELETED"
-,    Archived = "ARCHIVED"
+    Pending = "PENDING",
+    Active = "ACTIVE",
+    Deleted = "DELETED",
+    Archived = "ARCHIVED"
 }
 
 
 export class UserUcisHealth extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: string;
 }
 
 
 export class UserUcis extends SpeakeasyBase {
-  @Metadata({ data: "json, name=health" })
+  @SpeakeasyMetadata({ data: "json, name=health" })
   health?: UserUcisHealth;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: number;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: string;
 
-  @Metadata({ data: "json, name=ucpLabel" })
+  @SpeakeasyMetadata({ data: "json, name=ucpLabel" })
   ucpLabel?: string;
 }
 
 
 export class User extends SpeakeasyBase {
-  @Metadata({ data: "json, name=accountId" })
+  @SpeakeasyMetadata({ data: "json, name=accountId" })
   accountId?: number;
 
-  @Metadata({ data: "json, name=acountLabel" })
+  @SpeakeasyMetadata({ data: "json, name=acountLabel" })
   acountLabel?: string;
 
-  @Metadata({ data: "json, name=contactNumber" })
+  @SpeakeasyMetadata({ data: "json, name=contactNumber" })
   contactNumber?: string;
 
-  @Metadata({ data: "json, name=emailAddress" })
+  @SpeakeasyMetadata({ data: "json, name=emailAddress" })
   emailAddress?: string;
 
-  @Metadata({ data: "json, name=firstName" })
+  @SpeakeasyMetadata({ data: "json, name=firstName" })
   firstName?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: number;
 
-  @Metadata({ data: "json, name=lastName" })
+  @SpeakeasyMetadata({ data: "json, name=lastName" })
   lastName?: string;
 
-  @Metadata({ data: "json, name=roles", elemType: shared.UserRoles })
+  @SpeakeasyMetadata({ data: "json, name=roles", elemType: UserRoles })
   roles?: UserRoles[];
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: UserStatusEnum;
 
-  @Metadata({ data: "json, name=ucis", elemType: shared.UserUcis })
+  @SpeakeasyMetadata({ data: "json, name=ucis", elemType: UserUcis })
   ucis?: UserUcis[];
 }

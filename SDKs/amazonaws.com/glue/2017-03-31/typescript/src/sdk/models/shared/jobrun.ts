@@ -1,9 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { JobRunStateEnum } from "./jobrunstateenum";
 import { NotificationProperty } from "./notificationproperty";
 import { Predecessor } from "./predecessor";
 import { WorkerTypeEnum } from "./workertypeenum";
+
 
 
 // JobRun
@@ -11,69 +11,69 @@ import { WorkerTypeEnum } from "./workertypeenum";
  * Contains information about a job run.
 **/
 export class JobRun extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AllocatedCapacity" })
+  @SpeakeasyMetadata({ data: "json, name=AllocatedCapacity" })
   allocatedCapacity?: number;
 
-  @Metadata({ data: "json, name=Arguments" })
+  @SpeakeasyMetadata({ data: "json, name=Arguments" })
   arguments?: Map<string, string>;
 
-  @Metadata({ data: "json, name=Attempt" })
+  @SpeakeasyMetadata({ data: "json, name=Attempt" })
   attempt?: number;
 
-  @Metadata({ data: "json, name=CompletedOn" })
+  @SpeakeasyMetadata({ data: "json, name=CompletedOn" })
   completedOn?: Date;
 
-  @Metadata({ data: "json, name=ErrorMessage" })
+  @SpeakeasyMetadata({ data: "json, name=ErrorMessage" })
   errorMessage?: string;
 
-  @Metadata({ data: "json, name=ExecutionTime" })
+  @SpeakeasyMetadata({ data: "json, name=ExecutionTime" })
   executionTime?: number;
 
-  @Metadata({ data: "json, name=GlueVersion" })
+  @SpeakeasyMetadata({ data: "json, name=GlueVersion" })
   glueVersion?: string;
 
-  @Metadata({ data: "json, name=Id" })
+  @SpeakeasyMetadata({ data: "json, name=Id" })
   id?: string;
 
-  @Metadata({ data: "json, name=JobName" })
+  @SpeakeasyMetadata({ data: "json, name=JobName" })
   jobName?: string;
 
-  @Metadata({ data: "json, name=JobRunState" })
+  @SpeakeasyMetadata({ data: "json, name=JobRunState" })
   jobRunState?: JobRunStateEnum;
 
-  @Metadata({ data: "json, name=LastModifiedOn" })
+  @SpeakeasyMetadata({ data: "json, name=LastModifiedOn" })
   lastModifiedOn?: Date;
 
-  @Metadata({ data: "json, name=LogGroupName" })
+  @SpeakeasyMetadata({ data: "json, name=LogGroupName" })
   logGroupName?: string;
 
-  @Metadata({ data: "json, name=MaxCapacity" })
+  @SpeakeasyMetadata({ data: "json, name=MaxCapacity" })
   maxCapacity?: number;
 
-  @Metadata({ data: "json, name=NotificationProperty" })
+  @SpeakeasyMetadata({ data: "json, name=NotificationProperty" })
   notificationProperty?: NotificationProperty;
 
-  @Metadata({ data: "json, name=NumberOfWorkers" })
+  @SpeakeasyMetadata({ data: "json, name=NumberOfWorkers" })
   numberOfWorkers?: number;
 
-  @Metadata({ data: "json, name=PredecessorRuns", elemType: shared.Predecessor })
+  @SpeakeasyMetadata({ data: "json, name=PredecessorRuns", elemType: Predecessor })
   predecessorRuns?: Predecessor[];
 
-  @Metadata({ data: "json, name=PreviousRunId" })
+  @SpeakeasyMetadata({ data: "json, name=PreviousRunId" })
   previousRunId?: string;
 
-  @Metadata({ data: "json, name=SecurityConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=SecurityConfiguration" })
   securityConfiguration?: string;
 
-  @Metadata({ data: "json, name=StartedOn" })
+  @SpeakeasyMetadata({ data: "json, name=StartedOn" })
   startedOn?: Date;
 
-  @Metadata({ data: "json, name=Timeout" })
+  @SpeakeasyMetadata({ data: "json, name=Timeout" })
   timeout?: number;
 
-  @Metadata({ data: "json, name=TriggerName" })
+  @SpeakeasyMetadata({ data: "json, name=TriggerName" })
   triggerName?: string;
 
-  @Metadata({ data: "json, name=WorkerType" })
+  @SpeakeasyMetadata({ data: "json, name=WorkerType" })
   workerType?: WorkerTypeEnum;
 }

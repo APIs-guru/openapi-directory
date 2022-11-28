@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudIntegrationsV1alphaCreateAppsScriptProjectRequest
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Request for CreateAppsScriptProject rpc call.
 **/
 export class GoogleCloudIntegrationsV1alphaCreateAppsScriptProjectRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=appsScriptProject" })
+  @SpeakeasyMetadata({ data: "json, name=appsScriptProject" })
   appsScriptProject?: string;
 
-  @Metadata({ data: "json, name=authConfigId" })
+  @SpeakeasyMetadata({ data: "json, name=authConfigId" })
   authConfigId?: string;
 }

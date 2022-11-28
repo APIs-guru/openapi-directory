@@ -16,13 +16,6 @@ type PutDatasetPkSecurity struct {
 	Jwt shared.SchemeJwt `security:"scheme,type=http,subtype=bearer"`
 }
 
-type PutDatasetPkRequest struct {
-	PathParams  PutDatasetPkPathParams
-	QueryParams PutDatasetPkQueryParams
-	Request     shared.DatasetRestAPIPut `request:"mediaType=application/json"`
-	Security    PutDatasetPkSecurity
-}
-
 type PutDatasetPk200ApplicationJSON struct {
 	ID     *float64                  `json:"id,omitempty"`
 	Result *shared.DatasetRestAPIPut `json:"result,omitempty"`
@@ -50,6 +43,13 @@ type PutDatasetPk422ApplicationJSON struct {
 
 type PutDatasetPk500ApplicationJSON struct {
 	Message *string `json:"message,omitempty"`
+}
+
+type PutDatasetPkRequest struct {
+	PathParams  PutDatasetPkPathParams
+	QueryParams PutDatasetPkQueryParams
+	Request     shared.DatasetRestAPIPut `request:"mediaType=application/json"`
+	Security    PutDatasetPkSecurity
 }
 
 type PutDatasetPkResponse struct {

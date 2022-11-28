@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CancelStepsInfo } from "./cancelstepsinfo";
+
 
 
 // CancelStepsOutput
@@ -8,6 +8,6 @@ import { CancelStepsInfo } from "./cancelstepsinfo";
  *  The output for the <a>CancelSteps</a> operation. 
 **/
 export class CancelStepsOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CancelStepsInfoList", elemType: shared.CancelStepsInfo })
+  @SpeakeasyMetadata({ data: "json, name=CancelStepsInfoList", elemType: CancelStepsInfo })
   cancelStepsInfoList?: CancelStepsInfo[];
 }

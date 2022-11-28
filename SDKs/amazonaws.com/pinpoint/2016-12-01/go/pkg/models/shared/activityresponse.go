@@ -1,5 +1,7 @@
 package shared
 
+// ActivityResponse
+// Provides information about an activity that was performed by a campaign.
 type ActivityResponse struct {
 	ApplicationID           string  `json:"ApplicationId"`
 	CampaignID              string  `json:"CampaignId"`

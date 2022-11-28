@@ -1,7 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import fieldviolation
+from sdk import utils
+from . import *
 
 class ProcessingErrorCodeEnum(str, Enum):
     PROCESSING_ERROR_CODE_UNSPECIFIED = "PROCESSING_ERROR_CODE_UNSPECIFIED"
@@ -14,7 +16,7 @@ class ProcessingErrorCodeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class ProcessingError:
-    code: Optional[ProcessingErrorCodeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'code' }})
-    error_message: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'errorMessage' }})
-    field_violations: Optional[List[fieldviolation.FieldViolation]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'fieldViolations' }})
+    code: Optional[ProcessingErrorCodeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('code') }})
+    error_message: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('errorMessage') }})
+    field_violations: Optional[List[FieldViolation]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('fieldViolations') }})
     

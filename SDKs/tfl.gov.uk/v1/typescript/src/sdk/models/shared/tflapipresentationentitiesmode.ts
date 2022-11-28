@@ -1,16 +1,17 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class TflApiPresentationEntitiesMode extends SpeakeasyBase {
-  @Metadata({ data: "json, name=isFarePaying" })
+  @SpeakeasyMetadata({ data: "json, name=isFarePaying" })
   isFarePaying?: boolean;
 
-  @Metadata({ data: "json, name=isScheduledService" })
+  @SpeakeasyMetadata({ data: "json, name=isScheduledService" })
   isScheduledService?: boolean;
 
-  @Metadata({ data: "json, name=isTflService" })
+  @SpeakeasyMetadata({ data: "json, name=isTflService" })
   isTflService?: boolean;
 
-  @Metadata({ data: "json, name=modeName" })
+  @SpeakeasyMetadata({ data: "json, name=modeName" })
   modeName?: string;
 }

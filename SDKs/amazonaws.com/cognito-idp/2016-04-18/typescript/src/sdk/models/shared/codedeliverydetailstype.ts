@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DeliveryMediumTypeEnum } from "./deliverymediumtypeenum";
+
 
 
 // CodeDeliveryDetailsType
@@ -7,12 +8,12 @@ import { DeliveryMediumTypeEnum } from "./deliverymediumtypeenum";
  * The code delivery details being returned from the server.
 **/
 export class CodeDeliveryDetailsType extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AttributeName" })
+  @SpeakeasyMetadata({ data: "json, name=AttributeName" })
   attributeName?: string;
 
-  @Metadata({ data: "json, name=DeliveryMedium" })
+  @SpeakeasyMetadata({ data: "json, name=DeliveryMedium" })
   deliveryMedium?: DeliveryMediumTypeEnum;
 
-  @Metadata({ data: "json, name=Destination" })
+  @SpeakeasyMetadata({ data: "json, name=Destination" })
   destination?: string;
 }

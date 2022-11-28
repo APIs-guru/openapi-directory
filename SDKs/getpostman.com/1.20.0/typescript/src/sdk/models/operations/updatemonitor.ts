@@ -1,70 +1,71 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class UpdateMonitorPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=monitor_uid" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=monitor_uid" })
   monitorUid: string;
 }
 
 
 export class UpdateMonitorRequestBodyMonitorSchedule extends SpeakeasyBase {
-  @Metadata({ data: "json, name=cron" })
+  @SpeakeasyMetadata({ data: "json, name=cron" })
   cron?: string;
 
-  @Metadata({ data: "json, name=timezone" })
+  @SpeakeasyMetadata({ data: "json, name=timezone" })
   timezone?: string;
 }
 
 
 export class UpdateMonitorRequestBodyMonitor extends SpeakeasyBase {
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=schedule" })
+  @SpeakeasyMetadata({ data: "json, name=schedule" })
   schedule?: UpdateMonitorRequestBodyMonitorSchedule;
 }
 
 
 export class UpdateMonitorRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=monitor" })
+  @SpeakeasyMetadata({ data: "json, name=monitor" })
   monitor?: UpdateMonitorRequestBodyMonitor;
 }
 
 
-export class UpdateMonitorRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: UpdateMonitorPathParams;
-
-  @Metadata({ data: "request, media_type=application/json" })
-  request?: UpdateMonitorRequestBody;
-}
-
-
 export class UpdateMonitor200ApplicationJsonMonitor extends SpeakeasyBase {
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=uid" })
+  @SpeakeasyMetadata({ data: "json, name=uid" })
   uid?: string;
 }
 
 
 export class UpdateMonitor200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=monitor" })
+  @SpeakeasyMetadata({ data: "json, name=monitor" })
   monitor?: UpdateMonitor200ApplicationJsonMonitor;
 }
 
 
+export class UpdateMonitorRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: UpdateMonitorPathParams;
+
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request?: UpdateMonitorRequestBody;
+}
+
+
 export class UpdateMonitorResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   updateMonitor200ApplicationJsonObject?: UpdateMonitor200ApplicationJson;
 }

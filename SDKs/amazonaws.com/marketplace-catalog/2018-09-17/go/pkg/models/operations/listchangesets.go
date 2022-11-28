@@ -19,6 +19,8 @@ type ListChangeSetsHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// ListChangeSetsRequestBodySort
+// An object that contains two attributes, <code>SortBy</code> and <code>SortOrder</code>.
 type ListChangeSetsRequestBodySort struct {
 	SortBy    *string               `json:"SortBy,omitempty"`
 	SortOrder *shared.SortOrderEnum `json:"SortOrder,omitempty"`

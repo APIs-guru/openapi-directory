@@ -1,15 +1,17 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import pullrequeststatusenum_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ListPullRequestsInput:
-    author_arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'authorArn' }})
-    max_results: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'maxResults' }})
-    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'nextToken' }})
-    pull_request_status: Optional[pullrequeststatusenum_enum.PullRequestStatusEnumEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'pullRequestStatus' }})
-    repository_name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'repositoryName' }})
+    repository_name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('repositoryName') }})
+    author_arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('authorArn') }})
+    max_results: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('maxResults') }})
+    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('nextToken') }})
+    pull_request_status: Optional[PullRequestStatusEnumEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('pullRequestStatus') }})
     

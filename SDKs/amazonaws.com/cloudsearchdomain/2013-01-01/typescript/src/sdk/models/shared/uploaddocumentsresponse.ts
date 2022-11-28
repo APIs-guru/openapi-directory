@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DocumentServiceWarning } from "./documentservicewarning";
+
 
 
 // UploadDocumentsResponse
@@ -8,15 +8,15 @@ import { DocumentServiceWarning } from "./documentservicewarning";
  * Contains the response to an <code>UploadDocuments</code> request.
 **/
 export class UploadDocumentsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=adds" })
+  @SpeakeasyMetadata({ data: "json, name=adds" })
   adds?: number;
 
-  @Metadata({ data: "json, name=deletes" })
+  @SpeakeasyMetadata({ data: "json, name=deletes" })
   deletes?: number;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: string;
 
-  @Metadata({ data: "json, name=warnings", elemType: shared.DocumentServiceWarning })
+  @SpeakeasyMetadata({ data: "json, name=warnings", elemType: DocumentServiceWarning })
   warnings?: DocumentServiceWarning[];
 }

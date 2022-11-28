@@ -1,5 +1,7 @@
 package shared
 
+// ReportTask
+// This type defines the fields in a report task.
 type ReportTask struct {
 	CampaignIds                      []string             `json:"campaignIds,omitempty"`
 	DateFrom                         *string              `json:"dateFrom,omitempty"`

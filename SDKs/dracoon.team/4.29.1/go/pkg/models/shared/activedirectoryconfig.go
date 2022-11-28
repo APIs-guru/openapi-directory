@@ -1,5 +1,7 @@
 package shared
 
+// ActiveDirectoryConfig
+// Active Directory configuration
 type ActiveDirectoryConfig struct {
 	AdExportGroup    string  `json:"adExportGroup"`
 	Alias            string  `json:"alias"`

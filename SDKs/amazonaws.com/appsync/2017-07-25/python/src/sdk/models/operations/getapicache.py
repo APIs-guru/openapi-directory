@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class GetAPICachePathParams:
-    api_id: str = field(default=None, metadata={'path_param': { 'field_name': 'apiId', 'style': 'simple', 'explode': False }})
+    api_id: str = field(metadata={'path_param': { 'field_name': 'apiId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -21,18 +24,18 @@ class GetAPICacheHeaders:
 
 @dataclass
 class GetAPICacheRequest:
-    path_params: GetAPICachePathParams = field(default=None)
-    headers: GetAPICacheHeaders = field(default=None)
+    headers: GetAPICacheHeaders = field()
+    path_params: GetAPICachePathParams = field()
     
 
 @dataclass
 class GetAPICacheResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
     concurrent_modification_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     get_api_cache_response: Optional[shared.GetAPICacheResponse] = field(default=None)
     internal_failure_exception: Optional[Any] = field(default=None)
     not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     unauthorized_exception: Optional[Any] = field(default=None)
     

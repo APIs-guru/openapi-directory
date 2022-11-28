@@ -1,29 +1,30 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class DcimConnectedDeviceListQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=peer_device" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=peer_device" })
   peerDevice: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=peer_interface" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=peer_interface" })
   peerInterface: string;
 }
 
 
 export class DcimConnectedDeviceListRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: DcimConnectedDeviceListQueryParams;
 }
 
 
 export class DcimConnectedDeviceListResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   device?: shared.Device;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

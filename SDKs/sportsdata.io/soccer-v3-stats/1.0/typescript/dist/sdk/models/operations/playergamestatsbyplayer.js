@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var PlayerGameStatsByPlayerFormatEnum;
 (function (PlayerGameStatsByPlayerFormatEnum) {
     PlayerGameStatsByPlayerFormatEnum["Xml"] = "xml";
@@ -34,15 +34,15 @@ var PlayerGameStatsByPlayerPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=date" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=date" }),
         __metadata("design:type", String)
     ], PlayerGameStatsByPlayerPathParams.prototype, "date", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=format" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=format" }),
         __metadata("design:type", String)
     ], PlayerGameStatsByPlayerPathParams.prototype, "format", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=playerid" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=playerid" }),
         __metadata("design:type", String)
     ], PlayerGameStatsByPlayerPathParams.prototype, "playerid", void 0);
     return PlayerGameStatsByPlayerPathParams;
@@ -54,7 +54,7 @@ var PlayerGameStatsByPlayerRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PlayerGameStatsByPlayerPathParams)
     ], PlayerGameStatsByPlayerRequest.prototype, "pathParams", void 0);
     return PlayerGameStatsByPlayerRequest;
@@ -66,15 +66,15 @@ var PlayerGameStatsByPlayerResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], PlayerGameStatsByPlayerResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Array)
     ], PlayerGameStatsByPlayerResponse.prototype, "playerGames", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], PlayerGameStatsByPlayerResponse.prototype, "statusCode", void 0);
     return PlayerGameStatsByPlayerResponse;

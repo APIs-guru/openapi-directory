@@ -5,6 +5,8 @@ type BranchShortCommit struct {
 	URL string `json:"url"`
 }
 
+// BranchShort
+// Branch Short
 type BranchShort struct {
 	Commit    BranchShortCommit `json:"commit"`
 	Name      string            `json:"name"`

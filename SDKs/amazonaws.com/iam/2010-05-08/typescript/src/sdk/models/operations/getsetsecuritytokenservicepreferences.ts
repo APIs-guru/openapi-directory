@@ -1,12 +1,13 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum GetSetSecurityTokenServicePreferencesActionEnum {
     SetSecurityTokenServicePreferences = "SetSecurityTokenServicePreferences"
 }
 
 export enum GetSetSecurityTokenServicePreferencesGlobalEndpointTokenVersionEnum {
-    V1Token = "v1Token"
-,    V2Token = "v2Token"
+    V1Token = "v1Token",
+    V2Token = "v2Token"
 }
 
 export enum GetSetSecurityTokenServicePreferencesVersionEnum {
@@ -15,57 +16,57 @@ export enum GetSetSecurityTokenServicePreferencesVersionEnum {
 
 
 export class GetSetSecurityTokenServicePreferencesQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Action" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Action" })
   action: GetSetSecurityTokenServicePreferencesActionEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=GlobalEndpointTokenVersion" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=GlobalEndpointTokenVersion" })
   globalEndpointTokenVersion: GetSetSecurityTokenServicePreferencesGlobalEndpointTokenVersionEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Version" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Version" })
   version: GetSetSecurityTokenServicePreferencesVersionEnum;
 }
 
 
 export class GetSetSecurityTokenServicePreferencesHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
 
 export class GetSetSecurityTokenServicePreferencesRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetSetSecurityTokenServicePreferencesQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: GetSetSecurityTokenServicePreferencesHeaders;
 }
 
 
 export class GetSetSecurityTokenServicePreferencesResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

@@ -1,13 +1,20 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import date
-from . import querycountbystatus
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class SearchApplicationQueryStats:
-    date: Optional[date.Date] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'date' }})
-    query_count_by_status: Optional[List[querycountbystatus.QueryCountByStatus]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'queryCountByStatus' }})
+    r"""SearchApplicationQueryStats
+    Search application level query stats per date
+    """
+    
+    date_: Optional[Date] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('date') }})
+    query_count_by_status: Optional[List[QueryCountByStatus]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('queryCountByStatus') }})
     

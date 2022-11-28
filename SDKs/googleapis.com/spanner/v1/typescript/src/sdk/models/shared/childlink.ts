@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ChildLink
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Metadata associated with a parent-child relationship appearing in a PlanNode.
 **/
 export class ChildLink extends SpeakeasyBase {
-  @Metadata({ data: "json, name=childIndex" })
+  @SpeakeasyMetadata({ data: "json, name=childIndex" })
   childIndex?: number;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: string;
 
-  @Metadata({ data: "json, name=variable" })
+  @SpeakeasyMetadata({ data: "json, name=variable" })
   variable?: string;
 }

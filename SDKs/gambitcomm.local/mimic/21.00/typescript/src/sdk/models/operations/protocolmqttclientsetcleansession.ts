@@ -1,28 +1,29 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ProtocolMqttClientSetCleansessionPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=agentNum" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=agentNum" })
   agentNum: number;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=cleanOrNot" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=cleanOrNot" })
   cleanOrNot: number;
 }
 
 
 export class ProtocolMqttClientSetCleansessionRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: ProtocolMqttClientSetCleansessionPathParams;
 }
 
 
 export class ProtocolMqttClientSetCleansessionResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   protocolMqttClientSetCleansession200ApplicationJsonInt32Integers?: number[];
 }

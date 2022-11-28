@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetPlayerUsageQueryParams = /** @class */ (function (_super) {
     __extends(GetPlayerUsageQueryParams, _super);
@@ -30,27 +30,27 @@ var GetPlayerUsageQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=conference" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=conference" }),
         __metadata("design:type", String)
     ], GetPlayerUsageQueryParams.prototype, "conference", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=excludeGarbageTime" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=excludeGarbageTime" }),
         __metadata("design:type", Boolean)
     ], GetPlayerUsageQueryParams.prototype, "excludeGarbageTime", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=playerId" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=playerId" }),
         __metadata("design:type", Number)
     ], GetPlayerUsageQueryParams.prototype, "playerId", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=position" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=position" }),
         __metadata("design:type", String)
     ], GetPlayerUsageQueryParams.prototype, "position", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=team" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=team" }),
         __metadata("design:type", String)
     ], GetPlayerUsageQueryParams.prototype, "team", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=year" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=year" }),
         __metadata("design:type", Number)
     ], GetPlayerUsageQueryParams.prototype, "year", void 0);
     return GetPlayerUsageQueryParams;
@@ -62,7 +62,7 @@ var GetPlayerUsageRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetPlayerUsageQueryParams)
     ], GetPlayerUsageRequest.prototype, "queryParams", void 0);
     return GetPlayerUsageRequest;
@@ -74,15 +74,15 @@ var GetPlayerUsageResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetPlayerUsageResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata({ elemType: shared.PlayerUsage }),
+        SpeakeasyMetadata({ elemType: shared.PlayerUsage }),
         __metadata("design:type", Array)
     ], GetPlayerUsageResponse.prototype, "playerUsages", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetPlayerUsageResponse.prototype, "statusCode", void 0);
     return GetPlayerUsageResponse;

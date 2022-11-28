@@ -14,6 +14,8 @@ const (
 	GoogleCloudEssentialcontactsV1SendTestMessageRequestNotificationCategoryEnumTechnicalIncidents              GoogleCloudEssentialcontactsV1SendTestMessageRequestNotificationCategoryEnum = "TECHNICAL_INCIDENTS"
 )
 
+// GoogleCloudEssentialcontactsV1SendTestMessageRequest
+// Request message for the SendTestMessage method.
 type GoogleCloudEssentialcontactsV1SendTestMessageRequest struct {
 	Contacts             []string                                                                      `json:"contacts,omitempty"`
 	NotificationCategory *GoogleCloudEssentialcontactsV1SendTestMessageRequestNotificationCategoryEnum `json:"notificationCategory,omitempty"`

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var OrderServiceOfferingPathParams = /** @class */ (function (_super) {
     __extends(OrderServiceOfferingPathParams, _super);
@@ -30,55 +30,55 @@ var OrderServiceOfferingPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=id" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" }),
         __metadata("design:type", String)
     ], OrderServiceOfferingPathParams.prototype, "id", void 0);
     return OrderServiceOfferingPathParams;
 }(SpeakeasyBase));
 export { OrderServiceOfferingPathParams };
-var OrderServiceOfferingRequest = /** @class */ (function (_super) {
-    __extends(OrderServiceOfferingRequest, _super);
-    function OrderServiceOfferingRequest() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    __decorate([
-        Metadata(),
-        __metadata("design:type", OrderServiceOfferingPathParams)
-    ], OrderServiceOfferingRequest.prototype, "pathParams", void 0);
-    __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
-        __metadata("design:type", shared.OrderParametersServiceOffering)
-    ], OrderServiceOfferingRequest.prototype, "request", void 0);
-    return OrderServiceOfferingRequest;
-}(SpeakeasyBase));
-export { OrderServiceOfferingRequest };
 var OrderServiceOffering200ApplicationJson = /** @class */ (function (_super) {
     __extends(OrderServiceOffering200ApplicationJson, _super);
     function OrderServiceOffering200ApplicationJson() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=task_id" }),
+        SpeakeasyMetadata({ data: "json, name=task_id" }),
         __metadata("design:type", String)
     ], OrderServiceOffering200ApplicationJson.prototype, "taskId", void 0);
     return OrderServiceOffering200ApplicationJson;
 }(SpeakeasyBase));
 export { OrderServiceOffering200ApplicationJson };
+var OrderServiceOfferingRequest = /** @class */ (function (_super) {
+    __extends(OrderServiceOfferingRequest, _super);
+    function OrderServiceOfferingRequest() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", OrderServiceOfferingPathParams)
+    ], OrderServiceOfferingRequest.prototype, "pathParams", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
+        __metadata("design:type", shared.OrderParametersServiceOfferingInput)
+    ], OrderServiceOfferingRequest.prototype, "request", void 0);
+    return OrderServiceOfferingRequest;
+}(SpeakeasyBase));
+export { OrderServiceOfferingRequest };
 var OrderServiceOfferingResponse = /** @class */ (function (_super) {
     __extends(OrderServiceOfferingResponse, _super);
     function OrderServiceOfferingResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], OrderServiceOfferingResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], OrderServiceOfferingResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", OrderServiceOffering200ApplicationJson)
     ], OrderServiceOfferingResponse.prototype, "orderServiceOffering200ApplicationJsonObject", void 0);
     return OrderServiceOfferingResponse;

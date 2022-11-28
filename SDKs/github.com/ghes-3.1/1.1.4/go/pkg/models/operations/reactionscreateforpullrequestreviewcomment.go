@@ -27,14 +27,14 @@ type ReactionsCreateForPullRequestReviewCommentRequestBody struct {
 	Content ReactionsCreateForPullRequestReviewCommentRequestBodyContentEnum `json:"content"`
 }
 
-type ReactionsCreateForPullRequestReviewCommentRequest struct {
-	PathParams ReactionsCreateForPullRequestReviewCommentPathParams
-	Request    *ReactionsCreateForPullRequestReviewCommentRequestBody `request:"mediaType=application/json"`
-}
-
 type ReactionsCreateForPullRequestReviewComment415ApplicationJSON struct {
 	DocumentationURL string `json:"documentation_url"`
 	Message          string `json:"message"`
+}
+
+type ReactionsCreateForPullRequestReviewCommentRequest struct {
+	PathParams ReactionsCreateForPullRequestReviewCommentPathParams
+	Request    *ReactionsCreateForPullRequestReviewCommentRequestBody `request:"mediaType=application/json"`
 }
 
 type ReactionsCreateForPullRequestReviewCommentResponse struct {

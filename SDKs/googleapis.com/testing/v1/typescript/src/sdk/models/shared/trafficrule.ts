@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // TrafficRule
@@ -6,18 +7,18 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Network emulation parameters.
 **/
 export class TrafficRule extends SpeakeasyBase {
-  @Metadata({ data: "json, name=bandwidth" })
+  @SpeakeasyMetadata({ data: "json, name=bandwidth" })
   bandwidth?: number;
 
-  @Metadata({ data: "json, name=burst" })
+  @SpeakeasyMetadata({ data: "json, name=burst" })
   burst?: number;
 
-  @Metadata({ data: "json, name=delay" })
+  @SpeakeasyMetadata({ data: "json, name=delay" })
   delay?: string;
 
-  @Metadata({ data: "json, name=packetDuplicationRatio" })
+  @SpeakeasyMetadata({ data: "json, name=packetDuplicationRatio" })
   packetDuplicationRatio?: number;
 
-  @Metadata({ data: "json, name=packetLossRatio" })
+  @SpeakeasyMetadata({ data: "json, name=packetLossRatio" })
   packetLossRatio?: number;
 }

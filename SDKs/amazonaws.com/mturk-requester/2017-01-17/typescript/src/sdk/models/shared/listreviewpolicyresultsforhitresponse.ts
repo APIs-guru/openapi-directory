@@ -1,26 +1,25 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ReviewPolicy } from "./reviewpolicy";
 import { ReviewReport } from "./reviewreport";
-import { ReviewPolicy } from "./reviewpolicy";
-import { ReviewReport } from "./reviewreport";
+
 
 
 export class ListReviewPolicyResultsForHitResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AssignmentReviewPolicy" })
+  @SpeakeasyMetadata({ data: "json, name=AssignmentReviewPolicy" })
   assignmentReviewPolicy?: ReviewPolicy;
 
-  @Metadata({ data: "json, name=AssignmentReviewReport" })
+  @SpeakeasyMetadata({ data: "json, name=AssignmentReviewReport" })
   assignmentReviewReport?: ReviewReport;
 
-  @Metadata({ data: "json, name=HITId" })
+  @SpeakeasyMetadata({ data: "json, name=HITId" })
   hitId?: string;
 
-  @Metadata({ data: "json, name=HITReviewPolicy" })
+  @SpeakeasyMetadata({ data: "json, name=HITReviewPolicy" })
   hitReviewPolicy?: ReviewPolicy;
 
-  @Metadata({ data: "json, name=HITReviewReport" })
+  @SpeakeasyMetadata({ data: "json, name=HITReviewReport" })
   hitReviewReport?: ReviewReport;
 
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 }

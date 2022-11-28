@@ -43,6 +43,8 @@ const (
 	ProductProductPricingEnumPaid                  ProductProductPricingEnum = "paid"
 )
 
+// Product
+// A Products resource represents an app in the Google Play store that is available to at least some users in the enterprise. (Some apps are restricted to a single enterprise, and no information about them is made available outside that enterprise.) The information provided for each product (localized name, icon, link to the full Google Play details page) is intended to allow a basic representation of the product within an EMM user interface.
 type Product struct {
 	AppRestrictionsSchema      *AppRestrictionsSchema          `json:"appRestrictionsSchema,omitempty"`
 	AppTracks                  []TrackInfo                     `json:"appTracks,omitempty"`

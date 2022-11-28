@@ -1,15 +1,16 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import profileconditiontype_enum
-from . import profileconditionvalue_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ProfileCondition:
-    condition: Optional[profileconditiontype_enum.ProfileConditionTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Condition' }})
-    is_required: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'IsRequired' }})
-    property: Optional[profileconditionvalue_enum.ProfileConditionValueEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Property' }})
-    value: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Value' }})
+    condition: Optional[ProfileConditionTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Condition') }})
+    is_required: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('IsRequired') }})
+    property: Optional[ProfileConditionValueEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Property') }})
+    value: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Value') }})
     

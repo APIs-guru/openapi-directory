@@ -42,6 +42,8 @@ const (
 	LandmarkTypeEnumRightCheekCenter          LandmarkTypeEnum = "RIGHT_CHEEK_CENTER"
 )
 
+// Landmark
+// A face-specific landmark (for example, a face feature).
 type Landmark struct {
 	Position *Position         `json:"position,omitempty"`
 	Type     *LandmarkTypeEnum `json:"type,omitempty"`

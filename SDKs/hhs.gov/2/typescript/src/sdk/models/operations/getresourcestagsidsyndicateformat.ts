@@ -1,37 +1,38 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetResourcesTagsIdSyndicateFormatPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=format" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=format" })
   format: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" })
   id: number;
 }
 
 
 export class GetResourcesTagsIdSyndicateFormatQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=false;name=displayMethod" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=displayMethod" })
   displayMethod?: string;
 }
 
 
 export class GetResourcesTagsIdSyndicateFormatRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetResourcesTagsIdSyndicateFormatPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetResourcesTagsIdSyndicateFormatQueryParams;
 }
 
 
 export class GetResourcesTagsIdSyndicateFormatResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getResourcesTagsIdSyndicateFormat200ApplicationJsonString?: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

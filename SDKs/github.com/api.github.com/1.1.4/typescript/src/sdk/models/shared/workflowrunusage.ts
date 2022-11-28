@@ -1,41 +1,42 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class WorkflowRunUsageBillableMacos extends SpeakeasyBase {
-  @Metadata({ data: "json, name=jobs" })
+  @SpeakeasyMetadata({ data: "json, name=jobs" })
   jobs: number;
 
-  @Metadata({ data: "json, name=total_ms" })
+  @SpeakeasyMetadata({ data: "json, name=total_ms" })
   totalMs: number;
 }
 
 
 export class WorkflowRunUsageBillableUbuntu extends SpeakeasyBase {
-  @Metadata({ data: "json, name=jobs" })
+  @SpeakeasyMetadata({ data: "json, name=jobs" })
   jobs: number;
 
-  @Metadata({ data: "json, name=total_ms" })
+  @SpeakeasyMetadata({ data: "json, name=total_ms" })
   totalMs: number;
 }
 
 
 export class WorkflowRunUsageBillableWindows extends SpeakeasyBase {
-  @Metadata({ data: "json, name=jobs" })
+  @SpeakeasyMetadata({ data: "json, name=jobs" })
   jobs: number;
 
-  @Metadata({ data: "json, name=total_ms" })
+  @SpeakeasyMetadata({ data: "json, name=total_ms" })
   totalMs: number;
 }
 
 
 export class WorkflowRunUsageBillable extends SpeakeasyBase {
-  @Metadata({ data: "json, name=MACOS" })
+  @SpeakeasyMetadata({ data: "json, name=MACOS" })
   macos?: WorkflowRunUsageBillableMacos;
 
-  @Metadata({ data: "json, name=UBUNTU" })
+  @SpeakeasyMetadata({ data: "json, name=UBUNTU" })
   ubuntu?: WorkflowRunUsageBillableUbuntu;
 
-  @Metadata({ data: "json, name=WINDOWS" })
+  @SpeakeasyMetadata({ data: "json, name=WINDOWS" })
   windows?: WorkflowRunUsageBillableWindows;
 }
 
@@ -45,9 +46,9 @@ export class WorkflowRunUsageBillable extends SpeakeasyBase {
  * Workflow Run Usage
 **/
 export class WorkflowRunUsage extends SpeakeasyBase {
-  @Metadata({ data: "json, name=billable" })
+  @SpeakeasyMetadata({ data: "json, name=billable" })
   billable: WorkflowRunUsageBillable;
 
-  @Metadata({ data: "json, name=run_duration_ms" })
+  @SpeakeasyMetadata({ data: "json, name=run_duration_ms" })
   runDurationMs: number;
 }

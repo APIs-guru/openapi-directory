@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Tag
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A Compute Engine Instance tag, identical to the tags on the corresponding Compute Engine Instance resource.
 **/
 export class Tag extends SpeakeasyBase {
-  @Metadata({ data: "json, name=fingerPrint" })
+  @SpeakeasyMetadata({ data: "json, name=fingerPrint" })
   fingerPrint?: string;
 
-  @Metadata({ data: "json, name=items" })
+  @SpeakeasyMetadata({ data: "json, name=items" })
   items?: string[];
 }

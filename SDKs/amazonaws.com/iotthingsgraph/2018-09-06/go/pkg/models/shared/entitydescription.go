@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// EntityDescription
+// Describes the properties of an entity.
 type EntityDescription struct {
 	Arn        *string             `json:"arn,omitempty"`
 	CreatedAt  *time.Time          `json:"createdAt,omitempty"`

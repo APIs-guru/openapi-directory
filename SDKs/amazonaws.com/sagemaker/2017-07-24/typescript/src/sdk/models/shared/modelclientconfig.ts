@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ModelClientConfig
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Configures the timeout and maximum number of retries for processing a transform job invocation.
 **/
 export class ModelClientConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=InvocationsMaxRetries" })
+  @SpeakeasyMetadata({ data: "json, name=InvocationsMaxRetries" })
   invocationsMaxRetries?: number;
 
-  @Metadata({ data: "json, name=InvocationsTimeoutInSeconds" })
+  @SpeakeasyMetadata({ data: "json, name=InvocationsTimeoutInSeconds" })
   invocationsTimeoutInSeconds?: number;
 }

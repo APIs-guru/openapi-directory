@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // IosVersion
@@ -6,18 +7,18 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * An iOS version.
 **/
 export class IosVersion extends SpeakeasyBase {
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=majorVersion" })
+  @SpeakeasyMetadata({ data: "json, name=majorVersion" })
   majorVersion?: number;
 
-  @Metadata({ data: "json, name=minorVersion" })
+  @SpeakeasyMetadata({ data: "json, name=minorVersion" })
   minorVersion?: number;
 
-  @Metadata({ data: "json, name=supportedXcodeVersionIds" })
+  @SpeakeasyMetadata({ data: "json, name=supportedXcodeVersionIds" })
   supportedXcodeVersionIds?: string[];
 
-  @Metadata({ data: "json, name=tags" })
+  @SpeakeasyMetadata({ data: "json, name=tags" })
   tags?: string[];
 }

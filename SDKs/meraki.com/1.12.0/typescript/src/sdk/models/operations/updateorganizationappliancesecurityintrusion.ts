@@ -1,43 +1,44 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class UpdateOrganizationApplianceSecurityIntrusionPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=organizationId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=organizationId" })
   organizationId: string;
 }
 
 
 export class UpdateOrganizationApplianceSecurityIntrusionRequestBodyAllowedRules extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 
-  @Metadata({ data: "json, name=ruleId" })
+  @SpeakeasyMetadata({ data: "json, name=ruleId" })
   ruleId: string;
 }
 
 
 export class UpdateOrganizationApplianceSecurityIntrusionRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=allowedRules", elemType: operations.UpdateOrganizationApplianceSecurityIntrusionRequestBodyAllowedRules })
+  @SpeakeasyMetadata({ data: "json, name=allowedRules", elemType: UpdateOrganizationApplianceSecurityIntrusionRequestBodyAllowedRules })
   allowedRules: UpdateOrganizationApplianceSecurityIntrusionRequestBodyAllowedRules[];
 }
 
 
 export class UpdateOrganizationApplianceSecurityIntrusionRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: UpdateOrganizationApplianceSecurityIntrusionPathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: UpdateOrganizationApplianceSecurityIntrusionRequestBody;
 }
 
 
 export class UpdateOrganizationApplianceSecurityIntrusionResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   updateOrganizationApplianceSecurityIntrusion200ApplicationJsonObject?: Map<string, any>;
 }

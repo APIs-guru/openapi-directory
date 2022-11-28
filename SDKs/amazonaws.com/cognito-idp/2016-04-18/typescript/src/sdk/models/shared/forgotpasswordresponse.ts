@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CodeDeliveryDetailsType } from "./codedeliverydetailstype";
+
 
 
 // ForgotPasswordResponse
@@ -7,6 +8,6 @@ import { CodeDeliveryDetailsType } from "./codedeliverydetailstype";
  * Respresents the response from the server regarding the request to reset a password.
 **/
 export class ForgotPasswordResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CodeDeliveryDetails" })
+  @SpeakeasyMetadata({ data: "json, name=CodeDeliveryDetails" })
   codeDeliveryDetails?: CodeDeliveryDetailsType;
 }

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ReconfigureTrustRequest
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Request message for ReconfigureTrust
 **/
 export class ReconfigureTrustRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=targetDnsIpAddresses" })
+  @SpeakeasyMetadata({ data: "json, name=targetDnsIpAddresses" })
   targetDnsIpAddresses?: string[];
 
-  @Metadata({ data: "json, name=targetDomainName" })
+  @SpeakeasyMetadata({ data: "json, name=targetDomainName" })
   targetDomainName?: string;
 }

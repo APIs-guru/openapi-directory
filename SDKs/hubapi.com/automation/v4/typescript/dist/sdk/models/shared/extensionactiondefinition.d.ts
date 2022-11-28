@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ActionFunctionIdentifier } from "./actionfunctionidentifier";
 import { InputFieldDefinition } from "./inputfielddefinition";
 import { ActionLabels } from "./actionlabels";

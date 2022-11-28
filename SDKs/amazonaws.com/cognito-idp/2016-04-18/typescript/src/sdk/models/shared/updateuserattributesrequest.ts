@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AttributeType } from "./attributetype";
+
 
 
 // UpdateUserAttributesRequest
@@ -8,12 +8,12 @@ import { AttributeType } from "./attributetype";
  * Represents the request to update user attributes.
 **/
 export class UpdateUserAttributesRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AccessToken" })
+  @SpeakeasyMetadata({ data: "json, name=AccessToken" })
   accessToken: string;
 
-  @Metadata({ data: "json, name=ClientMetadata" })
+  @SpeakeasyMetadata({ data: "json, name=ClientMetadata" })
   clientMetadata?: Map<string, string>;
 
-  @Metadata({ data: "json, name=UserAttributes", elemType: shared.AttributeType })
+  @SpeakeasyMetadata({ data: "json, name=UserAttributes", elemType: AttributeType })
   userAttributes: AttributeType[];
 }

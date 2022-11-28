@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Segment } from "./segment";
+
 
 
 // Trace
@@ -8,15 +8,15 @@ import { Segment } from "./segment";
  * A collection of segment documents with matching trace IDs.
 **/
 export class Trace extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Duration" })
+  @SpeakeasyMetadata({ data: "json, name=Duration" })
   duration?: number;
 
-  @Metadata({ data: "json, name=Id" })
+  @SpeakeasyMetadata({ data: "json, name=Id" })
   id?: string;
 
-  @Metadata({ data: "json, name=LimitExceeded" })
+  @SpeakeasyMetadata({ data: "json, name=LimitExceeded" })
   limitExceeded?: boolean;
 
-  @Metadata({ data: "json, name=Segments", elemType: shared.Segment })
+  @SpeakeasyMetadata({ data: "json, name=Segments", elemType: Segment })
   segments?: Segment[];
 }

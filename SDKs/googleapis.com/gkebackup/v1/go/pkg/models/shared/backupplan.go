@@ -1,5 +1,19 @@
 package shared
 
+// BackupPlanInput
+// Defines the configuration and scheduling for a "line" of Backups.
+type BackupPlanInput struct {
+	BackupConfig    *BackupConfig     `json:"backupConfig,omitempty"`
+	BackupSchedule  *Schedule         `json:"backupSchedule,omitempty"`
+	Cluster         *string           `json:"cluster,omitempty"`
+	Deactivated     *bool             `json:"deactivated,omitempty"`
+	Description     *string           `json:"description,omitempty"`
+	Labels          map[string]string `json:"labels,omitempty"`
+	RetentionPolicy *RetentionPolicy  `json:"retentionPolicy,omitempty"`
+}
+
+// BackupPlan
+// Defines the configuration and scheduling for a "line" of Backups.
 type BackupPlan struct {
 	BackupConfig      *BackupConfig     `json:"backupConfig,omitempty"`
 	BackupSchedule    *Schedule         `json:"backupSchedule,omitempty"`

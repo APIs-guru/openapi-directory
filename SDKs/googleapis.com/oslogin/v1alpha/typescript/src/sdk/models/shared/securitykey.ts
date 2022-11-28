@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { UniversalTwoFactor } from "./universaltwofactor";
 import { WebAuthn } from "./webauthn";
+
 
 
 // SecurityKey
@@ -8,15 +9,15 @@ import { WebAuthn } from "./webauthn";
  * The credential information for a Google registered security key.
 **/
 export class SecurityKey extends SpeakeasyBase {
-  @Metadata({ data: "json, name=privateKey" })
+  @SpeakeasyMetadata({ data: "json, name=privateKey" })
   privateKey?: string;
 
-  @Metadata({ data: "json, name=publicKey" })
+  @SpeakeasyMetadata({ data: "json, name=publicKey" })
   publicKey?: string;
 
-  @Metadata({ data: "json, name=universalTwoFactor" })
+  @SpeakeasyMetadata({ data: "json, name=universalTwoFactor" })
   universalTwoFactor?: UniversalTwoFactor;
 
-  @Metadata({ data: "json, name=webAuthn" })
+  @SpeakeasyMetadata({ data: "json, name=webAuthn" })
   webAuthn?: WebAuthn;
 }

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var CreateDatastoreHeaders = /** @class */ (function (_super) {
     __extends(CreateDatastoreHeaders, _super);
@@ -30,31 +30,31 @@ var CreateDatastoreHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
         __metadata("design:type", String)
     ], CreateDatastoreHeaders.prototype, "xAmzAlgorithm", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
         __metadata("design:type", String)
     ], CreateDatastoreHeaders.prototype, "xAmzContentSha256", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
         __metadata("design:type", String)
     ], CreateDatastoreHeaders.prototype, "xAmzCredential", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
         __metadata("design:type", String)
     ], CreateDatastoreHeaders.prototype, "xAmzDate", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
         __metadata("design:type", String)
     ], CreateDatastoreHeaders.prototype, "xAmzSecurityToken", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
         __metadata("design:type", String)
     ], CreateDatastoreHeaders.prototype, "xAmzSignature", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
         __metadata("design:type", String)
     ], CreateDatastoreHeaders.prototype, "xAmzSignedHeaders", void 0);
     return CreateDatastoreHeaders;
@@ -70,7 +70,7 @@ var CreateDatastoreRequestBodyDatastorePartitions = /** @class */ (function (_su
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=partitions", elemType: shared.DatastorePartition }),
+        SpeakeasyMetadata({ data: "json, name=partitions", elemType: shared.DatastorePartition }),
         __metadata("design:type", Array)
     ], CreateDatastoreRequestBodyDatastorePartitions.prototype, "partitions", void 0);
     return CreateDatastoreRequestBodyDatastorePartitions;
@@ -86,15 +86,15 @@ var CreateDatastoreRequestBodyDatastoreStorage = /** @class */ (function (_super
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=customerManagedS3" }),
+        SpeakeasyMetadata({ data: "json, name=customerManagedS3" }),
         __metadata("design:type", shared.CustomerManagedDatastoreS3Storage)
     ], CreateDatastoreRequestBodyDatastoreStorage.prototype, "customerManagedS3", void 0);
     __decorate([
-        Metadata({ data: "json, name=iotSiteWiseMultiLayerStorage" }),
+        SpeakeasyMetadata({ data: "json, name=iotSiteWiseMultiLayerStorage" }),
         __metadata("design:type", shared.DatastoreIotSiteWiseMultiLayerStorage)
     ], CreateDatastoreRequestBodyDatastoreStorage.prototype, "iotSiteWiseMultiLayerStorage", void 0);
     __decorate([
-        Metadata({ data: "json, name=serviceManagedS3" }),
+        SpeakeasyMetadata({ data: "json, name=serviceManagedS3" }),
         __metadata("design:type", Map)
     ], CreateDatastoreRequestBodyDatastoreStorage.prototype, "serviceManagedS3", void 0);
     return CreateDatastoreRequestBodyDatastoreStorage;
@@ -110,11 +110,11 @@ var CreateDatastoreRequestBodyFileFormatConfiguration = /** @class */ (function 
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=jsonConfiguration" }),
+        SpeakeasyMetadata({ data: "json, name=jsonConfiguration" }),
         __metadata("design:type", Map)
     ], CreateDatastoreRequestBodyFileFormatConfiguration.prototype, "jsonConfiguration", void 0);
     __decorate([
-        Metadata({ data: "json, name=parquetConfiguration" }),
+        SpeakeasyMetadata({ data: "json, name=parquetConfiguration" }),
         __metadata("design:type", shared.ParquetConfiguration)
     ], CreateDatastoreRequestBodyFileFormatConfiguration.prototype, "parquetConfiguration", void 0);
     return CreateDatastoreRequestBodyFileFormatConfiguration;
@@ -130,11 +130,11 @@ var CreateDatastoreRequestBodyRetentionPeriod = /** @class */ (function (_super)
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=numberOfDays" }),
+        SpeakeasyMetadata({ data: "json, name=numberOfDays" }),
         __metadata("design:type", Number)
     ], CreateDatastoreRequestBodyRetentionPeriod.prototype, "numberOfDays", void 0);
     __decorate([
-        Metadata({ data: "json, name=unlimited" }),
+        SpeakeasyMetadata({ data: "json, name=unlimited" }),
         __metadata("design:type", Boolean)
     ], CreateDatastoreRequestBodyRetentionPeriod.prototype, "unlimited", void 0);
     return CreateDatastoreRequestBodyRetentionPeriod;
@@ -146,27 +146,27 @@ var CreateDatastoreRequestBody = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=datastoreName" }),
+        SpeakeasyMetadata({ data: "json, name=datastoreName" }),
         __metadata("design:type", String)
     ], CreateDatastoreRequestBody.prototype, "datastoreName", void 0);
     __decorate([
-        Metadata({ data: "json, name=datastorePartitions" }),
+        SpeakeasyMetadata({ data: "json, name=datastorePartitions" }),
         __metadata("design:type", CreateDatastoreRequestBodyDatastorePartitions)
     ], CreateDatastoreRequestBody.prototype, "datastorePartitions", void 0);
     __decorate([
-        Metadata({ data: "json, name=datastoreStorage" }),
+        SpeakeasyMetadata({ data: "json, name=datastoreStorage" }),
         __metadata("design:type", CreateDatastoreRequestBodyDatastoreStorage)
     ], CreateDatastoreRequestBody.prototype, "datastoreStorage", void 0);
     __decorate([
-        Metadata({ data: "json, name=fileFormatConfiguration" }),
+        SpeakeasyMetadata({ data: "json, name=fileFormatConfiguration" }),
         __metadata("design:type", CreateDatastoreRequestBodyFileFormatConfiguration)
     ], CreateDatastoreRequestBody.prototype, "fileFormatConfiguration", void 0);
     __decorate([
-        Metadata({ data: "json, name=retentionPeriod" }),
+        SpeakeasyMetadata({ data: "json, name=retentionPeriod" }),
         __metadata("design:type", CreateDatastoreRequestBodyRetentionPeriod)
     ], CreateDatastoreRequestBody.prototype, "retentionPeriod", void 0);
     __decorate([
-        Metadata({ data: "json, name=tags", elemType: shared.Tag }),
+        SpeakeasyMetadata({ data: "json, name=tags", elemType: shared.Tag }),
         __metadata("design:type", Array)
     ], CreateDatastoreRequestBody.prototype, "tags", void 0);
     return CreateDatastoreRequestBody;
@@ -178,11 +178,11 @@ var CreateDatastoreRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", CreateDatastoreHeaders)
     ], CreateDatastoreRequest.prototype, "headers", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", CreateDatastoreRequestBody)
     ], CreateDatastoreRequest.prototype, "request", void 0);
     return CreateDatastoreRequest;
@@ -194,39 +194,39 @@ var CreateDatastoreResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], CreateDatastoreResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.CreateDatastoreResponse)
     ], CreateDatastoreResponse.prototype, "createDatastoreResponse", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], CreateDatastoreResponse.prototype, "internalFailureException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], CreateDatastoreResponse.prototype, "invalidRequestException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], CreateDatastoreResponse.prototype, "limitExceededException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], CreateDatastoreResponse.prototype, "resourceAlreadyExistsException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], CreateDatastoreResponse.prototype, "serviceUnavailableException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], CreateDatastoreResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], CreateDatastoreResponse.prototype, "throttlingException", void 0);
     return CreateDatastoreResponse;

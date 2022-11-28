@@ -1,10 +1,11 @@
 
 
+
 export enum ObInterestRateType1Code0Enum {
-    Inbb = "INBB"
-,    Infr = "INFR"
-,    Ingr = "INGR"
-,    Inlr = "INLR"
-,    Inne = "INNE"
-,    Inot = "INOT"
+    Inbb = "INBB",
+    Infr = "INFR",
+    Ingr = "INGR",
+    Inlr = "INLR",
+    Inne = "INNE",
+    Inot = "INOT"
 }

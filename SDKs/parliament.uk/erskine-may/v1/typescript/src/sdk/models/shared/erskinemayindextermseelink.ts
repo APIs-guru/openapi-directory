@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ErskineMayIndexTermSeeLink extends SpeakeasyBase {
-  @Metadata({ data: "json, name=indexTermId" })
+  @SpeakeasyMetadata({ data: "json, name=indexTermId" })
   indexTermId?: number;
 
-  @Metadata({ data: "json, name=seeType" })
+  @SpeakeasyMetadata({ data: "json, name=seeType" })
   seeType?: string;
 
-  @Metadata({ data: "json, name=seeValue" })
+  @SpeakeasyMetadata({ data: "json, name=seeValue" })
   seeValue?: string;
 }

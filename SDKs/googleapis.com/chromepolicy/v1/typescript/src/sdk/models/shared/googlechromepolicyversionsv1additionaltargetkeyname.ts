@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleChromePolicyVersionsV1AdditionalTargetKeyName
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Additional key names that will be used to identify the target of the policy value.
 **/
 export class GoogleChromePolicyVersionsV1AdditionalTargetKeyName extends SpeakeasyBase {
-  @Metadata({ data: "json, name=key" })
+  @SpeakeasyMetadata({ data: "json, name=key" })
   key?: string;
 
-  @Metadata({ data: "json, name=keyDescription" })
+  @SpeakeasyMetadata({ data: "json, name=keyDescription" })
   keyDescription?: string;
 }

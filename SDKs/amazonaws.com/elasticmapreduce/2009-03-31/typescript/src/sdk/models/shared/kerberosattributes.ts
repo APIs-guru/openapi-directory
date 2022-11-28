@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // KerberosAttributes
@@ -6,18 +7,18 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Attributes for Kerberos configuration when Kerberos authentication is enabled using a security configuration. For more information see <a href="https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-kerberos.html">Use Kerberos Authentication</a> in the <i>Amazon EMR Management Guide</i>.
 **/
 export class KerberosAttributes extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ADDomainJoinPassword" })
+  @SpeakeasyMetadata({ data: "json, name=ADDomainJoinPassword" })
   adDomainJoinPassword?: string;
 
-  @Metadata({ data: "json, name=ADDomainJoinUser" })
+  @SpeakeasyMetadata({ data: "json, name=ADDomainJoinUser" })
   adDomainJoinUser?: string;
 
-  @Metadata({ data: "json, name=CrossRealmTrustPrincipalPassword" })
+  @SpeakeasyMetadata({ data: "json, name=CrossRealmTrustPrincipalPassword" })
   crossRealmTrustPrincipalPassword?: string;
 
-  @Metadata({ data: "json, name=KdcAdminPassword" })
+  @SpeakeasyMetadata({ data: "json, name=KdcAdminPassword" })
   kdcAdminPassword: string;
 
-  @Metadata({ data: "json, name=Realm" })
+  @SpeakeasyMetadata({ data: "json, name=Realm" })
   realm: string;
 }

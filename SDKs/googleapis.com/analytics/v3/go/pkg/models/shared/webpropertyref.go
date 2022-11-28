@@ -1,5 +1,7 @@
 package shared
 
+// WebPropertyRef
+// JSON template for a web property reference.
 type WebPropertyRef struct {
 	AccountID             *string `json:"accountId,omitempty"`
 	Href                  *string `json:"href,omitempty"`

@@ -1,25 +1,20 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetTrackQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=trackingNumber" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=trackingNumber" })
   trackingNumber?: string;
 }
 
-
-export class GetTrackRequest extends SpeakeasyBase {
-  @Metadata()
-  queryParams: GetTrackQueryParams;
-}
-
 export enum GetTrackTrackingResponseFeatureGeometryTypeEnum {
-    Point = "Point"
-,    LineString = "LineString"
-,    Polygon = "Polygon"
-,    MultiPoint = "MultiPoint"
-,    MultiLineString = "MultiLineString"
-,    MultiPolygon = "MultiPolygon"
+    Point = "Point",
+    LineString = "LineString",
+    Polygon = "Polygon",
+    MultiPoint = "MultiPoint",
+    MultiLineString = "MultiLineString",
+    MultiPolygon = "MultiPolygon"
 }
 
 
@@ -29,16 +24,16 @@ export enum GetTrackTrackingResponseFeatureGeometryTypeEnum {
  * http://geojson.org/geojson-spec.html#geometry-objects
 **/
 export class GetTrackTrackingResponseFeatureGeometry extends SpeakeasyBase {
-  @Metadata({ data: "json, name=coordinates" })
+  @SpeakeasyMetadata({ data: "json, name=coordinates" })
   coordinates: any;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type: GetTrackTrackingResponseFeatureGeometryTypeEnum;
 }
 
 
 export class GetTrackTrackingResponseFeatureProperties extends SpeakeasyBase {
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 }
 
@@ -53,122 +48,128 @@ export enum GetTrackTrackingResponseFeatureTypeEnum {
  * https://tools.ietf.org/html/rfc7946#section-3.2
 **/
 export class GetTrackTrackingResponseFeature extends SpeakeasyBase {
-  @Metadata({ data: "json, name=bbox" })
+  @SpeakeasyMetadata({ data: "json, name=bbox" })
   bbox?: any[];
 
-  @Metadata({ data: "json, name=centerline" })
+  @SpeakeasyMetadata({ data: "json, name=centerline" })
   centerline?: shared.OnetrackGetResponses200ContentApplication1jsonSchemaPropertiesOriginPropertiesGeometry;
 
-  @Metadata({ data: "json, name=geometry" })
+  @SpeakeasyMetadata({ data: "json, name=geometry" })
   geometry: GetTrackTrackingResponseFeatureGeometry;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: number;
 
-  @Metadata({ data: "json, name=properties" })
+  @SpeakeasyMetadata({ data: "json, name=properties" })
   properties: GetTrackTrackingResponseFeatureProperties;
 
-  @Metadata({ data: "json, name=title" })
+  @SpeakeasyMetadata({ data: "json, name=title" })
   title?: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type: GetTrackTrackingResponseFeatureTypeEnum;
 }
 
 export enum GetTrackTrackingResponseTrackingEventV2EventSourceEnum {
-    Carrier = "carrier"
-,    Internal = "internal"
+    Carrier = "carrier",
+    Internal = "internal"
 }
 
 
 export class GetTrackTrackingResponseTrackingEventV2 extends SpeakeasyBase {
-  @Metadata({ data: "json, name=eventCategory" })
+  @SpeakeasyMetadata({ data: "json, name=eventCategory" })
   eventCategory?: string;
 
-  @Metadata({ data: "json, name=eventCategoryCode" })
+  @SpeakeasyMetadata({ data: "json, name=eventCategoryCode" })
   eventCategoryCode?: number;
 
-  @Metadata({ data: "json, name=eventDateTime" })
+  @SpeakeasyMetadata({ data: "json, name=eventDateTime" })
   eventDateTime?: Date;
 
-  @Metadata({ data: "json, name=eventLocation" })
+  @SpeakeasyMetadata({ data: "json, name=eventLocation" })
   eventLocation?: shared.OnetrackGetResponses200ContentApplication1jsonSchemaPropertiesOrigin;
 
-  @Metadata({ data: "json, name=eventSource" })
+  @SpeakeasyMetadata({ data: "json, name=eventSource" })
   eventSource?: GetTrackTrackingResponseTrackingEventV2EventSourceEnum;
 
-  @Metadata({ data: "json, name=eventStatus" })
+  @SpeakeasyMetadata({ data: "json, name=eventStatus" })
   eventStatus?: string;
 }
 
 
 export class GetTrackTrackingResponseTrackingNumberV2CarrierSimpleV2 extends SpeakeasyBase {
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: number;
 }
 
 
 export class GetTrackTrackingResponseTrackingNumberV2 extends SpeakeasyBase {
-  @Metadata({ data: "json, name=barcodeScanValue" })
+  @SpeakeasyMetadata({ data: "json, name=barcodeScanValue" })
   barcodeScanValue?: string;
 
-  @Metadata({ data: "json, name=carrier" })
+  @SpeakeasyMetadata({ data: "json, name=carrier" })
   carrier?: GetTrackTrackingResponseTrackingNumberV2CarrierSimpleV2;
 
-  @Metadata({ data: "json, name=value" })
+  @SpeakeasyMetadata({ data: "json, name=value" })
   value?: string;
 }
 
 
 export class GetTrackTrackingResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=destination" })
+  @SpeakeasyMetadata({ data: "json, name=destination" })
   destination?: shared.OnetrackGetResponses200ContentApplication1jsonSchemaPropertiesOrigin;
 
-  @Metadata({ data: "json, name=fdcOrderId" })
+  @SpeakeasyMetadata({ data: "json, name=fdcOrderId" })
   fdcOrderId?: number;
 
-  @Metadata({ data: "json, name=firstCheckedDateTime" })
+  @SpeakeasyMetadata({ data: "json, name=firstCheckedDateTime" })
   firstCheckedDateTime?: Date;
 
-  @Metadata({ data: "json, name=firstTransitEvent" })
+  @SpeakeasyMetadata({ data: "json, name=firstTransitEvent" })
   firstTransitEvent?: Date;
 
-  @Metadata({ data: "json, name=lastCheckedDateTime" })
+  @SpeakeasyMetadata({ data: "json, name=lastCheckedDateTime" })
   lastCheckedDateTime?: Date;
 
-  @Metadata({ data: "json, name=lastUpdatedDateTime" })
+  @SpeakeasyMetadata({ data: "json, name=lastUpdatedDateTime" })
   lastUpdatedDateTime?: Date;
 
-  @Metadata({ data: "json, name=origin" })
+  @SpeakeasyMetadata({ data: "json, name=origin" })
   origin?: GetTrackTrackingResponseFeature;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: string;
 
-  @Metadata({ data: "json, name=statusCategoryCode" })
+  @SpeakeasyMetadata({ data: "json, name=statusCategoryCode" })
   statusCategoryCode?: number;
 
-  @Metadata({ data: "json, name=statusDateTime" })
+  @SpeakeasyMetadata({ data: "json, name=statusDateTime" })
   statusDateTime?: Date;
 
-  @Metadata({ data: "json, name=statusMessage" })
+  @SpeakeasyMetadata({ data: "json, name=statusMessage" })
   statusMessage?: string;
 
-  @Metadata({ data: "json, name=trackedEvents", elemType: operations.GetTrackTrackingResponseTrackingEventV2 })
+  @SpeakeasyMetadata({ data: "json, name=trackedEvents", elemType: GetTrackTrackingResponseTrackingEventV2 })
   trackedEvents?: GetTrackTrackingResponseTrackingEventV2[];
 
-  @Metadata({ data: "json, name=trackingNumber" })
+  @SpeakeasyMetadata({ data: "json, name=trackingNumber" })
   trackingNumber?: GetTrackTrackingResponseTrackingNumberV2;
 }
 
 
+export class GetTrackRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  queryParams: GetTrackQueryParams;
+}
+
+
 export class GetTrackResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   trackingResponse?: GetTrackTrackingResponse;
 }

@@ -1,6 +1,7 @@
 
 
+
 export enum AutoMlJobObjectiveTypeEnum {
-    Maximize = "Maximize"
-,    Minimize = "Minimize"
+    Maximize = "Maximize",
+    Minimize = "Minimize"
 }

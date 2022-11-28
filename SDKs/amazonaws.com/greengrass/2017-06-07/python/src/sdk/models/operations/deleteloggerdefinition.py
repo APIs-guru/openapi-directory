@@ -1,10 +1,13 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 
 
 @dataclass
 class DeleteLoggerDefinitionPathParams:
-    logger_definition_id: str = field(default=None, metadata={'path_param': { 'field_name': 'LoggerDefinitionId', 'style': 'simple', 'explode': False }})
+    logger_definition_id: str = field(metadata={'path_param': { 'field_name': 'LoggerDefinitionId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -20,14 +23,14 @@ class DeleteLoggerDefinitionHeaders:
 
 @dataclass
 class DeleteLoggerDefinitionRequest:
-    path_params: DeleteLoggerDefinitionPathParams = field(default=None)
-    headers: DeleteLoggerDefinitionHeaders = field(default=None)
+    headers: DeleteLoggerDefinitionHeaders = field()
+    path_params: DeleteLoggerDefinitionPathParams = field()
     
 
 @dataclass
 class DeleteLoggerDefinitionResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     delete_logger_definition_response: Optional[dict[str, Any]] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,5 +1,7 @@
 package shared
 
+// GdataBlobstore2Info
+// gdata
 type GdataBlobstore2Info struct {
 	BlobGeneration          *string `json:"blobGeneration,omitempty"`
 	BlobID                  *string `json:"blobId,omitempty"`

@@ -12,6 +12,8 @@ const (
 	WmxSitemapTypeEnumOceanfront     WmxSitemapTypeEnum = "OCEANFRONT"
 )
 
+// WmxSitemap
+// Contains detailed information about a specific URL submitted as a [sitemap](https://support.google.com/webmasters/answer/156184).
 type WmxSitemap struct {
 	Contents        []WmxSitemapContent `json:"contents,omitempty"`
 	Errors          *string             `json:"errors,omitempty"`

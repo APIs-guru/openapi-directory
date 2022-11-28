@@ -1,8 +1,11 @@
-import warnings
+
+
 import requests
 from typing import Optional
-from sdk.models import operations, shared
+from sdk.models import shared, operations
 from . import utils
+
+
 
 
 SERVERS = [
@@ -12,35 +15,54 @@ SERVERS = [
 
 
 class SDK:
-    client = requests.Session()
-    server_url = SERVERS[0]
+    
+
+    _client: requests.Session
+    _security_client: requests.Session
+    
+    _server_url: str = SERVERS[0]
+    _language: str = "python"
+    _sdk_version: str = "0.0.1"
+    _gen_version: str = "internal"
+
+    def __init__(self) -> None:
+        self._client = requests.Session()
+        self._security_client = requests.Session()
+        
+
 
     def config_server_url(self, server_url: str, params: dict[str, str]):
-        if not params is None:
-            self.server_url = utils.replace_parameters(server_url, params)
+        if params is not None:
+            self._server_url = utils.replace_parameters(server_url, params)
         else:
-            self.server_url = server_url
-            
+            self._server_url = server_url
+
+        
     
 
+    def config_client(self, client: requests.Session):
+        self._client = client
+        
+    
+    
     
     def create_funds_confirmation_consents(self, request: operations.CreateFundsConfirmationConsentsRequest) -> operations.CreateFundsConfirmationConsentsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Create Funds Confirmation Consent
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/funds-confirmation-consents"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -90,22 +112,22 @@ class SDK:
 
     
     def create_funds_confirmations(self, request: operations.CreateFundsConfirmationsRequest) -> operations.CreateFundsConfirmationsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Create Funds Confirmation
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/funds-confirmations"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -155,15 +177,17 @@ class SDK:
 
     
     def delete_funds_confirmation_consents_consent_id(self, request: operations.DeleteFundsConfirmationConsentsConsentIDRequest) -> operations.DeleteFundsConfirmationConsentsConsentIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Delete Funds Confirmation Consent
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/funds-confirmation-consents/{ConsentId}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("DELETE", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -207,15 +231,17 @@ class SDK:
 
     
     def get_funds_confirmation_consents_consent_id(self, request: operations.GetFundsConfirmationConsentsConsentIDRequest) -> operations.GetFundsConfirmationConsentsConsentIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get Funds Confirmation Consent
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/funds-confirmation-consents/{ConsentId}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 

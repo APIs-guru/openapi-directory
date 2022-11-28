@@ -1,50 +1,51 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetSuperfundProductsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=ABN" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=ABN" })
   abn?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=USI" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=USI" })
   usi?: string;
 }
 
 
 export class GetSuperfundProductsHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=Xero-Tenant-Id" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Xero-Tenant-Id" })
   xeroTenantId: string;
 }
 
 
 export class GetSuperfundProductsSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   oAuth2: shared.SchemeOAuth2;
 }
 
 
 export class GetSuperfundProductsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetSuperfundProductsQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: GetSuperfundProductsHeaders;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: GetSuperfundProductsSecurity;
 }
 
 
 export class GetSuperfundProductsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   apiException?: shared.ApiException;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   superFundProducts?: shared.SuperFundProducts;
 }

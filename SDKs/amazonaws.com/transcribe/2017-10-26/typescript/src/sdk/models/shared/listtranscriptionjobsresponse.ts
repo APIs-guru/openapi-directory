@@ -1,16 +1,16 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TranscriptionJobStatusEnum } from "./transcriptionjobstatusenum";
 import { TranscriptionJobSummary } from "./transcriptionjobsummary";
 
 
+
 export class ListTranscriptionJobsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=Status" })
+  @SpeakeasyMetadata({ data: "json, name=Status" })
   status?: TranscriptionJobStatusEnum;
 
-  @Metadata({ data: "json, name=TranscriptionJobSummaries", elemType: shared.TranscriptionJobSummary })
+  @SpeakeasyMetadata({ data: "json, name=TranscriptionJobSummaries", elemType: TranscriptionJobSummary })
   transcriptionJobSummaries?: TranscriptionJobSummary[];
 }

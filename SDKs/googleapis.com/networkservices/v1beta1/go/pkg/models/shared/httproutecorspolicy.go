@@ -1,5 +1,7 @@
 package shared
 
+// HTTPRouteCorsPolicy
+// The Specification for allowing client side cross-origin requests.
 type HTTPRouteCorsPolicy struct {
 	AllowCredentials   *bool    `json:"allowCredentials,omitempty"`
 	AllowHeaders       []string `json:"allowHeaders,omitempty"`

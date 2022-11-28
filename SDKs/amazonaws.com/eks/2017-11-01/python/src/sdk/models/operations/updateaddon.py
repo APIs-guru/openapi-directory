@@ -1,13 +1,18 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
 @dataclass
 class UpdateAddonPathParams:
-    addon_name: str = field(default=None, metadata={'path_param': { 'field_name': 'addonName', 'style': 'simple', 'explode': False }})
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    addon_name: str = field(metadata={'path_param': { 'field_name': 'addonName', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -28,28 +33,28 @@ class UpdateAddonRequestBodyResolveConflictsEnum(str, Enum):
 @dataclass_json
 @dataclass
 class UpdateAddonRequestBody:
-    addon_version: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'addonVersion' }})
-    client_request_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'clientRequestToken' }})
-    resolve_conflicts: Optional[UpdateAddonRequestBodyResolveConflictsEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'resolveConflicts' }})
-    service_account_role_arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'serviceAccountRoleArn' }})
+    addon_version: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('addonVersion') }})
+    client_request_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('clientRequestToken') }})
+    resolve_conflicts: Optional[UpdateAddonRequestBodyResolveConflictsEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('resolveConflicts') }})
+    service_account_role_arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('serviceAccountRoleArn') }})
     
 
 @dataclass
 class UpdateAddonRequest:
-    path_params: UpdateAddonPathParams = field(default=None)
-    headers: UpdateAddonHeaders = field(default=None)
-    request: UpdateAddonRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: UpdateAddonHeaders = field()
+    path_params: UpdateAddonPathParams = field()
+    request: UpdateAddonRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class UpdateAddonResponse:
+    content_type: str = field()
+    status_code: int = field()
     client_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     invalid_parameter_exception: Optional[Any] = field(default=None)
     invalid_request_exception: Optional[Any] = field(default=None)
     resource_in_use_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
     server_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     update_addon_response: Optional[shared.UpdateAddonResponse] = field(default=None)
     

@@ -1,5 +1,7 @@
 package shared
 
+// AwsCloudFrontDistributionDetails
+// A distribution configuration.
 type AwsCloudFrontDistributionDetails struct {
 	CacheBehaviors       *AwsCloudFrontDistributionCacheBehaviors       `json:"CacheBehaviors,omitempty"`
 	DefaultCacheBehavior *AwsCloudFrontDistributionDefaultCacheBehavior `json:"DefaultCacheBehavior,omitempty"`

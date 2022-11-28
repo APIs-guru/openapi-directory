@@ -10,8 +10,8 @@ class UploadAvatarAsMultipartHeaders:
 
 @dataclass
 class UploadAvatarAsMultipartRequestBodyFile:
-    content: bytes = field(default=None, metadata={'multipart_form': { 'content': True }})
-    file: str = field(default=None, metadata={'multipart_form': { 'field_name': 'file' }})
+    content: bytes = field(metadata={'multipart_form': { 'content': True }})
+    file: str = field(metadata={'multipart_form': { 'field_name': 'file' }})
     
 
 @dataclass
@@ -21,14 +21,14 @@ class UploadAvatarAsMultipartRequestBody:
 
 @dataclass
 class UploadAvatarAsMultipartRequest:
-    headers: UploadAvatarAsMultipartHeaders = field(default=None)
-    request: UploadAvatarAsMultipartRequestBody = field(default=None, metadata={'request': { 'media_type': 'multipart/form-data' }})
+    headers: UploadAvatarAsMultipartHeaders = field()
+    request: UploadAvatarAsMultipartRequestBody = field(metadata={'request': { 'media_type': 'multipart/form-data' }})
     
 
 @dataclass
 class UploadAvatarAsMultipartResponse:
+    content_type: str = field()
+    status_code: int = field()
     avatar: Optional[shared.Avatar] = field(default=None)
-    content_type: str = field(default=None)
     error_response: Optional[shared.ErrorResponse] = field(default=None)
-    status_code: int = field(default=None)
     

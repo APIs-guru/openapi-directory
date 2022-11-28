@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TunnelDestGroup } from "./tunneldestgroup";
+
 
 
 // ListTunnelDestGroupsResponse
@@ -8,9 +8,9 @@ import { TunnelDestGroup } from "./tunneldestgroup";
  * The response from ListTunnelDestGroups.
 **/
 export class ListTunnelDestGroupsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 
-  @Metadata({ data: "json, name=tunnelDestGroups", elemType: shared.TunnelDestGroup })
+  @SpeakeasyMetadata({ data: "json, name=tunnelDestGroups", elemType: TunnelDestGroup })
   tunnelDestGroups?: TunnelDestGroup[];
 }

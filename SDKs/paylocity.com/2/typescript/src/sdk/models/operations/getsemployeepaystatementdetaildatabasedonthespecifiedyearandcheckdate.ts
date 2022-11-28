@@ -1,65 +1,66 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetsEmployeePayStatementDetailDataBasedOnTheSpecifiedYearAndCheckDatePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=checkDate" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=checkDate" })
   checkDate: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=companyId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=companyId" })
   companyId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=employeeId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=employeeId" })
   employeeId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=year" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=year" })
   year: string;
 }
 
 
 export class GetsEmployeePayStatementDetailDataBasedOnTheSpecifiedYearAndCheckDateQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=dettypes" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=dettypes" })
   dettypes?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=includetotalcount" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=includetotalcount" })
   includetotalcount?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=pagenumber" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=pagenumber" })
   pagenumber?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=pagesize" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=pagesize" })
   pagesize?: number;
 }
 
 
 export class GetsEmployeePayStatementDetailDataBasedOnTheSpecifiedYearAndCheckDateSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   paylocityAuth: shared.SchemePaylocityAuth;
 }
 
 
 export class GetsEmployeePayStatementDetailDataBasedOnTheSpecifiedYearAndCheckDateRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetsEmployeePayStatementDetailDataBasedOnTheSpecifiedYearAndCheckDatePathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetsEmployeePayStatementDetailDataBasedOnTheSpecifiedYearAndCheckDateQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: GetsEmployeePayStatementDetailDataBasedOnTheSpecifiedYearAndCheckDateSecurity;
 }
 
 
 export class GetsEmployeePayStatementDetailDataBasedOnTheSpecifiedYearAndCheckDateResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata({ elemType: shared.Error })
+  @SpeakeasyMetadata({ elemType: shared.Error })
   errors?: shared.Error[];
 
-  @Metadata({ elemType: shared.PayStatementDetails })
+  @SpeakeasyMetadata({ elemType: shared.PayStatementDetails })
   payStatementDetails?: shared.PayStatementDetails[];
 }

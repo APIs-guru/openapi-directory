@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { RuleTypeEnum } from "./ruletypeenum";
 export declare class Rule extends SpeakeasyBase {
     config: string;

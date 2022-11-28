@@ -12,11 +12,15 @@ type GoalEventDetailsEventConditions struct {
 	Type            *string `json:"type,omitempty"`
 }
 
+// GoalEventDetails
+// Details for the goal of the type EVENT.
 type GoalEventDetails struct {
 	EventConditions []GoalEventDetailsEventConditions `json:"eventConditions,omitempty"`
 	UseEventValue   *bool                             `json:"useEventValue,omitempty"`
 }
 
+// GoalParentLink
+// Parent link for a goal. Points to the view (profile) to which this goal belongs.
 type GoalParentLink struct {
 	Href *string `json:"href,omitempty"`
 	Type *string `json:"type,omitempty"`
@@ -28,6 +32,8 @@ type GoalURLDestinationDetailsSteps struct {
 	URL    *string `json:"url,omitempty"`
 }
 
+// GoalURLDestinationDetails
+// Details for the goal of the type URL_DESTINATION.
 type GoalURLDestinationDetails struct {
 	CaseSensitive     *bool                            `json:"caseSensitive,omitempty"`
 	FirstStepRequired *bool                            `json:"firstStepRequired,omitempty"`
@@ -36,16 +42,22 @@ type GoalURLDestinationDetails struct {
 	URL               *string                          `json:"url,omitempty"`
 }
 
+// GoalVisitNumPagesDetails
+// Details for the goal of the type VISIT_NUM_PAGES.
 type GoalVisitNumPagesDetails struct {
 	ComparisonType  *string `json:"comparisonType,omitempty"`
 	ComparisonValue *string `json:"comparisonValue,omitempty"`
 }
 
+// GoalVisitTimeOnSiteDetails
+// Details for the goal of the type VISIT_TIME_ON_SITE.
 type GoalVisitTimeOnSiteDetails struct {
 	ComparisonType  *string `json:"comparisonType,omitempty"`
 	ComparisonValue *string `json:"comparisonValue,omitempty"`
 }
 
+// Goal
+// JSON template for Analytics goal resource.
 type Goal struct {
 	AccountID              *string                     `json:"accountId,omitempty"`
 	Active                 *bool                       `json:"active,omitempty"`

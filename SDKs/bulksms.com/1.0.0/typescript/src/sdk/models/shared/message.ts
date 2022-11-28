@@ -1,25 +1,26 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum MessageEncodingEnum {
-    Text = "TEXT"
-,    Unicode = "UNICODE"
-,    Binary = "BINARY"
+    Text = "TEXT",
+    Unicode = "UNICODE",
+    Binary = "BINARY"
 }
 
 export enum MessageStatusSubtypeEnum {
-    Expired = "EXPIRED"
-,    HandsetError = "HANDSET_ERROR"
-,    Blocked = "BLOCKED"
-,    NotSent = "NOT_SENT"
+    Expired = "EXPIRED",
+    HandsetError = "HANDSET_ERROR",
+    Blocked = "BLOCKED",
+    NotSent = "NOT_SENT"
 }
 
 export enum MessageStatusTypeEnum {
-    Accepted = "ACCEPTED"
-,    Scheduled = "SCHEDULED"
-,    Sent = "SENT"
-,    Delivered = "DELIVERED"
-,    Unknown = "UNKNOWN"
-,    Failed = "FAILED"
+    Accepted = "ACCEPTED",
+    Scheduled = "SCHEDULED",
+    Sent = "SENT",
+    Delivered = "DELIVERED",
+    Unknown = "UNKNOWN",
+    Failed = "FAILED"
 }
 
 
@@ -28,13 +29,13 @@ export enum MessageStatusTypeEnum {
  * The status of the message
 **/
 export class MessageStatus extends SpeakeasyBase {
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: string;
 
-  @Metadata({ data: "json, name=subtype" })
+  @SpeakeasyMetadata({ data: "json, name=subtype" })
   subtype?: MessageStatusSubtypeEnum;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type: MessageStatusTypeEnum;
 }
 
@@ -45,59 +46,59 @@ export class MessageStatus extends SpeakeasyBase {
  * 
 **/
 export class MessageSubmission extends SpeakeasyBase {
-  @Metadata({ data: "json, name=date" })
+  @SpeakeasyMetadata({ data: "json, name=date" })
   date: Date;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: string;
 }
 
 export enum MessageTypeEnum {
-    Sent = "SENT"
-,    Received = "RECEIVED"
+    Sent = "SENT",
+    Received = "RECEIVED"
 }
 
 
 export class Message extends SpeakeasyBase {
-  @Metadata({ data: "json, name=body" })
+  @SpeakeasyMetadata({ data: "json, name=body" })
   body: any;
 
-  @Metadata({ data: "json, name=creditCost" })
+  @SpeakeasyMetadata({ data: "json, name=creditCost" })
   creditCost?: number;
 
-  @Metadata({ data: "json, name=encoding" })
+  @SpeakeasyMetadata({ data: "json, name=encoding" })
   encoding?: MessageEncodingEnum;
 
-  @Metadata({ data: "json, name=from" })
+  @SpeakeasyMetadata({ data: "json, name=from" })
   from?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: string;
 
-  @Metadata({ data: "json, name=messageClass" })
+  @SpeakeasyMetadata({ data: "json, name=messageClass" })
   messageClass?: number;
 
-  @Metadata({ data: "json, name=numberOfParts" })
+  @SpeakeasyMetadata({ data: "json, name=numberOfParts" })
   numberOfParts?: number;
 
-  @Metadata({ data: "json, name=protocolId" })
+  @SpeakeasyMetadata({ data: "json, name=protocolId" })
   protocolId?: number;
 
-  @Metadata({ data: "json, name=relatedSentMessageId" })
+  @SpeakeasyMetadata({ data: "json, name=relatedSentMessageId" })
   relatedSentMessageId?: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status: MessageStatus;
 
-  @Metadata({ data: "json, name=submission" })
+  @SpeakeasyMetadata({ data: "json, name=submission" })
   submission?: MessageSubmission;
 
-  @Metadata({ data: "json, name=to" })
+  @SpeakeasyMetadata({ data: "json, name=to" })
   to: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type: MessageTypeEnum;
 
-  @Metadata({ data: "json, name=userSuppliedId" })
+  @SpeakeasyMetadata({ data: "json, name=userSuppliedId" })
   userSuppliedId?: string;
 }

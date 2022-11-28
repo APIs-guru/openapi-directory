@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ImageIdentifier } from "./imageidentifier";
 import { ImageScanStatus } from "./imagescanstatus";
 export declare class StartImageScanResponse extends SpeakeasyBase {

@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DeviceRememberedStatusTypeEnum } from "./devicerememberedstatustypeenum";
+
 
 
 // AdminUpdateDeviceStatusRequest
@@ -7,15 +8,15 @@ import { DeviceRememberedStatusTypeEnum } from "./devicerememberedstatustypeenum
  * The request to update the device status, as an administrator.
 **/
 export class AdminUpdateDeviceStatusRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DeviceKey" })
+  @SpeakeasyMetadata({ data: "json, name=DeviceKey" })
   deviceKey: string;
 
-  @Metadata({ data: "json, name=DeviceRememberedStatus" })
+  @SpeakeasyMetadata({ data: "json, name=DeviceRememberedStatus" })
   deviceRememberedStatus?: DeviceRememberedStatusTypeEnum;
 
-  @Metadata({ data: "json, name=UserPoolId" })
+  @SpeakeasyMetadata({ data: "json, name=UserPoolId" })
   userPoolId: string;
 
-  @Metadata({ data: "json, name=Username" })
+  @SpeakeasyMetadata({ data: "json, name=Username" })
   username: string;
 }

@@ -1,14 +1,20 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import assemblytype_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class TransformOutput:
-    accept: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Accept' }})
-    assemble_with: Optional[assemblytype_enum.AssemblyTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AssembleWith' }})
-    kms_key_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'KmsKeyId' }})
-    s3_output_path: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'S3OutputPath' }})
+    r"""TransformOutput
+    Describes the results of a transform job.
+    """
+    
+    s3_output_path: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('S3OutputPath') }})
+    accept: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Accept') }})
+    assemble_with: Optional[AssemblyTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('AssembleWith') }})
+    kms_key_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('KmsKeyId') }})
     

@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class StopEdgePackagingJobRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=EdgePackagingJobName" })
+  @SpeakeasyMetadata({ data: "json, name=EdgePackagingJobName" })
   edgePackagingJobName: string;
 }

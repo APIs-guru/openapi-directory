@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// EnvironmentTemplateSummary
+// The environment template data.
 type EnvironmentTemplateSummary struct {
 	Arn                string            `json:"arn"`
 	CreatedAt          time.Time         `json:"createdAt"`

@@ -1,8 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import lunrange
-from . import nfsexport
+from sdk import utils
+from . import *
 
 class VolumeConfigPerformanceTierEnum(str, Enum):
     VOLUME_PERFORMANCE_TIER_UNSPECIFIED = "VOLUME_PERFORMANCE_TIER_UNSPECIFIED"
@@ -24,16 +25,40 @@ class VolumeConfigTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class VolumeConfig:
-    gcp_service: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'gcpService' }})
-    id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
-    lun_ranges: Optional[List[lunrange.LunRange]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'lunRanges' }})
-    machine_ids: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'machineIds' }})
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    nfs_exports: Optional[List[nfsexport.NfsExport]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'nfsExports' }})
-    performance_tier: Optional[VolumeConfigPerformanceTierEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'performanceTier' }})
-    protocol: Optional[VolumeConfigProtocolEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'protocol' }})
-    size_gb: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'sizeGb' }})
-    snapshots_enabled: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'snapshotsEnabled' }})
-    type: Optional[VolumeConfigTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
-    user_note: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'userNote' }})
+    r"""VolumeConfig
+    Configuration parameters for a new volume.
+    """
+    
+    gcp_service: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('gcpService') }})
+    id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('id') }})
+    lun_ranges: Optional[List[LunRange]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('lunRanges') }})
+    machine_ids: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('machineIds') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    nfs_exports: Optional[List[NfsExport]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('nfsExports') }})
+    performance_tier: Optional[VolumeConfigPerformanceTierEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('performanceTier') }})
+    protocol: Optional[VolumeConfigProtocolEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('protocol') }})
+    size_gb: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('sizeGb') }})
+    snapshots_enabled: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('snapshotsEnabled') }})
+    type: Optional[VolumeConfigTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('type') }})
+    user_note: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('userNote') }})
+    
+
+@dataclass_json
+@dataclass
+class VolumeConfigInput:
+    r"""VolumeConfigInput
+    Configuration parameters for a new volume.
+    """
+    
+    gcp_service: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('gcpService') }})
+    id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('id') }})
+    lun_ranges: Optional[List[LunRange]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('lunRanges') }})
+    machine_ids: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('machineIds') }})
+    nfs_exports: Optional[List[NfsExport]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('nfsExports') }})
+    performance_tier: Optional[VolumeConfigPerformanceTierEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('performanceTier') }})
+    protocol: Optional[VolumeConfigProtocolEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('protocol') }})
+    size_gb: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('sizeGb') }})
+    snapshots_enabled: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('snapshotsEnabled') }})
+    type: Optional[VolumeConfigTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('type') }})
+    user_note: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('userNote') }})
     

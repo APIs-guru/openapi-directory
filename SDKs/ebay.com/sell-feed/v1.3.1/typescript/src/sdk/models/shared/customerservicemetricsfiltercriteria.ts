@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // CustomerServiceMetricsFilterCriteria
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A complex data type that filters data for report creation. See CustomerServiceMetricsFilterCriteria for fields and descriptions.
 **/
 export class CustomerServiceMetricsFilterCriteria extends SpeakeasyBase {
-  @Metadata({ data: "json, name=customerServiceMetricType" })
+  @SpeakeasyMetadata({ data: "json, name=customerServiceMetricType" })
   customerServiceMetricType?: string;
 
-  @Metadata({ data: "json, name=evaluationMarketplaceId" })
+  @SpeakeasyMetadata({ data: "json, name=evaluationMarketplaceId" })
   evaluationMarketplaceId?: string;
 
-  @Metadata({ data: "json, name=listingCategories" })
+  @SpeakeasyMetadata({ data: "json, name=listingCategories" })
   listingCategories?: string[];
 
-  @Metadata({ data: "json, name=shippingRegions" })
+  @SpeakeasyMetadata({ data: "json, name=shippingRegions" })
   shippingRegions?: string[];
 }

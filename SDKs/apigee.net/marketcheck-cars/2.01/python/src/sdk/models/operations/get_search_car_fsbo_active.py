@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
@@ -95,13 +96,13 @@ class GetSearchCarFsboActiveQueryParams:
 
 @dataclass
 class GetSearchCarFsboActiveRequest:
-    query_params: GetSearchCarFsboActiveQueryParams = field(default=None)
+    query_params: GetSearchCarFsboActiveQueryParams = field()
     
 
 @dataclass
 class GetSearchCarFsboActiveResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error: Optional[shared.Error] = field(default=None)
     search_response: Optional[shared.SearchResponse] = field(default=None)
-    status_code: int = field(default=None)
     

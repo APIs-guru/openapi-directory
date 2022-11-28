@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // LambdaExecutorConfiguration
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Details about the configuration for the <code>Lambda</code> action engine, or executor.
 **/
 export class LambdaExecutorConfiguration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=lambdaFunctionArn" })
+  @SpeakeasyMetadata({ data: "json, name=lambdaFunctionArn" })
   lambdaFunctionArn: string;
 }

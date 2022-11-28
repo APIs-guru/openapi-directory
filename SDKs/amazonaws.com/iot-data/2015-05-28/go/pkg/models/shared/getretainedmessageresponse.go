@@ -1,5 +1,7 @@
 package shared
 
+// GetRetainedMessageResponse
+// The output from the GetRetainedMessage operation.
 type GetRetainedMessageResponse struct {
 	LastModifiedTime *int64  `json:"lastModifiedTime,omitempty"`
 	Payload          *string `json:"payload,omitempty"`

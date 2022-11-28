@@ -1,8 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import paragraphstylesuggestionstate
-from . import textstylesuggestionstate
+from sdk import utils
+from . import *
 
 class NamedStyleSuggestionStateNamedStyleTypeEnum(str, Enum):
     NAMED_STYLE_TYPE_UNSPECIFIED = "NAMED_STYLE_TYPE_UNSPECIFIED"
@@ -20,7 +21,11 @@ class NamedStyleSuggestionStateNamedStyleTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class NamedStyleSuggestionState:
-    named_style_type: Optional[NamedStyleSuggestionStateNamedStyleTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'namedStyleType' }})
-    paragraph_style_suggestion_state: Optional[paragraphstylesuggestionstate.ParagraphStyleSuggestionState] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'paragraphStyleSuggestionState' }})
-    text_style_suggestion_state: Optional[textstylesuggestionstate.TextStyleSuggestionState] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'textStyleSuggestionState' }})
+    r"""NamedStyleSuggestionState
+    A suggestion state of a NamedStyle message.
+    """
+    
+    named_style_type: Optional[NamedStyleSuggestionStateNamedStyleTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('namedStyleType') }})
+    paragraph_style_suggestion_state: Optional[ParagraphStyleSuggestionState] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('paragraphStyleSuggestionState') }})
+    text_style_suggestion_state: Optional[TextStyleSuggestionState] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('textStyleSuggestionState') }})
     

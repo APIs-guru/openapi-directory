@@ -9,6 +9,15 @@ const (
 	OpenInfoStatusEnumClosedTemporarily          OpenInfoStatusEnum = "CLOSED_TEMPORARILY"
 )
 
+// OpenInfoInput
+// Information related to the opening state of the business.
+type OpenInfoInput struct {
+	OpeningDate *Date               `json:"openingDate,omitempty"`
+	Status      *OpenInfoStatusEnum `json:"status,omitempty"`
+}
+
+// OpenInfo
+// Information related to the opening state of the business.
 type OpenInfo struct {
 	CanReopen   *bool               `json:"canReopen,omitempty"`
 	OpeningDate *Date               `json:"openingDate,omitempty"`

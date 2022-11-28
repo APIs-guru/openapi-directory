@@ -1,5 +1,7 @@
 package shared
 
+// Statistics
+// Provides statistics for each data field imported into to an Amazon Forecast dataset with the <a>CreateDatasetImportJob</a> operation.
 type Statistics struct {
 	Avg               *float64 `json:"Avg,omitempty"`
 	Count             *int64   `json:"Count,omitempty"`

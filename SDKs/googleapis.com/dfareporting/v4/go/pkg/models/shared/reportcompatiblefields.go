@@ -1,5 +1,7 @@
 package shared
 
+// ReportCompatibleFields
+// Represents fields that are compatible to be selected for a report of type "STANDARD".
 type ReportCompatibleFields struct {
 	DimensionFilters       []Dimension `json:"dimensionFilters,omitempty"`
 	Dimensions             []Dimension `json:"dimensions,omitempty"`

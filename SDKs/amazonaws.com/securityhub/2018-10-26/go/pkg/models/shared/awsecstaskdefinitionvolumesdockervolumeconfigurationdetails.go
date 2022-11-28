@@ -1,5 +1,7 @@
 package shared
 
+// AwsEcsTaskDefinitionVolumesDockerVolumeConfigurationDetails
+// Information about a Docker volume.
 type AwsEcsTaskDefinitionVolumesDockerVolumeConfigurationDetails struct {
 	Autoprovision *bool             `json:"Autoprovision,omitempty"`
 	Driver        *string           `json:"Driver,omitempty"`

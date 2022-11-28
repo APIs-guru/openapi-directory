@@ -1,5 +1,7 @@
 package shared
 
+// TranscriptFilter
+// Matches the output of the transcription to either the specific phrases that you specify, or the intent of the phrases that you specify.
 type TranscriptFilter struct {
 	AbsoluteTimeRange    *AbsoluteTimeRange       `json:"AbsoluteTimeRange,omitempty"`
 	Negate               *bool                    `json:"Negate,omitempty"`

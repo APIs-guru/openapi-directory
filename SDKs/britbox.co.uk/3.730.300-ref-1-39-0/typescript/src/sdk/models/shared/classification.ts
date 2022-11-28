@@ -1,22 +1,23 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class Classification extends SpeakeasyBase {
-  @Metadata({ data: "json, name=advisoryText" })
+  @SpeakeasyMetadata({ data: "json, name=advisoryText" })
   advisoryText?: string;
 
-  @Metadata({ data: "json, name=code" })
+  @SpeakeasyMetadata({ data: "json, name=code" })
   code: string;
 
-  @Metadata({ data: "json, name=images" })
+  @SpeakeasyMetadata({ data: "json, name=images" })
   images: Map<string, string>;
 
-  @Metadata({ data: "json, name=level" })
+  @SpeakeasyMetadata({ data: "json, name=level" })
   level: number;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 
-  @Metadata({ data: "json, name=system" })
+  @SpeakeasyMetadata({ data: "json, name=system" })
   system: string;
 }

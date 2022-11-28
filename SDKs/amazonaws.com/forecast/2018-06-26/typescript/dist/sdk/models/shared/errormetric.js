@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // ErrorMetric
 /**
  *  Provides detailed error metrics to evaluate the performance of a predictor. This object is part of the <a>Metrics</a> object.
@@ -33,23 +33,23 @@ var ErrorMetric = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=ForecastType" }),
+        SpeakeasyMetadata({ data: "json, name=ForecastType" }),
         __metadata("design:type", String)
     ], ErrorMetric.prototype, "forecastType", void 0);
     __decorate([
-        Metadata({ data: "json, name=MAPE" }),
+        SpeakeasyMetadata({ data: "json, name=MAPE" }),
         __metadata("design:type", Number)
     ], ErrorMetric.prototype, "mape", void 0);
     __decorate([
-        Metadata({ data: "json, name=MASE" }),
+        SpeakeasyMetadata({ data: "json, name=MASE" }),
         __metadata("design:type", Number)
     ], ErrorMetric.prototype, "mase", void 0);
     __decorate([
-        Metadata({ data: "json, name=RMSE" }),
+        SpeakeasyMetadata({ data: "json, name=RMSE" }),
         __metadata("design:type", Number)
     ], ErrorMetric.prototype, "rmse", void 0);
     __decorate([
-        Metadata({ data: "json, name=WAPE" }),
+        SpeakeasyMetadata({ data: "json, name=WAPE" }),
         __metadata("design:type", Number)
     ], ErrorMetric.prototype, "wape", void 0);
     return ErrorMetric;

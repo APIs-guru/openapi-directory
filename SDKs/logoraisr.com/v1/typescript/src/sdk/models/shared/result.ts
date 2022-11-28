@@ -1,18 +1,18 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Color } from "./color";
 
 
+
 export class Result extends SpeakeasyBase {
-  @Metadata({ data: "json, name=colors", elemType: shared.Color })
+  @SpeakeasyMetadata({ data: "json, name=colors", elemType: Color })
   colors?: Color[];
 
-  @Metadata({ data: "json, name=height" })
+  @SpeakeasyMetadata({ data: "json, name=height" })
   height?: number;
 
-  @Metadata({ data: "json, name=number_of_pixel_in_image" })
+  @SpeakeasyMetadata({ data: "json, name=number_of_pixel_in_image" })
   numberOfPixelInImage?: number;
 
-  @Metadata({ data: "json, name=width" })
+  @SpeakeasyMetadata({ data: "json, name=width" })
   width?: number;
 }

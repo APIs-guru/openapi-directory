@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // UnlinkDeveloperIdentityInput
 /**
  * Input to the <code>UnlinkDeveloperIdentity</code> action.
@@ -33,19 +33,19 @@ var UnlinkDeveloperIdentityInput = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=DeveloperProviderName" }),
+        SpeakeasyMetadata({ data: "json, name=DeveloperProviderName" }),
         __metadata("design:type", String)
     ], UnlinkDeveloperIdentityInput.prototype, "developerProviderName", void 0);
     __decorate([
-        Metadata({ data: "json, name=DeveloperUserIdentifier" }),
+        SpeakeasyMetadata({ data: "json, name=DeveloperUserIdentifier" }),
         __metadata("design:type", String)
     ], UnlinkDeveloperIdentityInput.prototype, "developerUserIdentifier", void 0);
     __decorate([
-        Metadata({ data: "json, name=IdentityId" }),
+        SpeakeasyMetadata({ data: "json, name=IdentityId" }),
         __metadata("design:type", String)
     ], UnlinkDeveloperIdentityInput.prototype, "identityId", void 0);
     __decorate([
-        Metadata({ data: "json, name=IdentityPoolId" }),
+        SpeakeasyMetadata({ data: "json, name=IdentityPoolId" }),
         __metadata("design:type", String)
     ], UnlinkDeveloperIdentityInput.prototype, "identityPoolId", void 0);
     return UnlinkDeveloperIdentityInput;

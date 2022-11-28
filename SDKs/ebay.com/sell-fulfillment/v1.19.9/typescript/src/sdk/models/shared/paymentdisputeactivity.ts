@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // PaymentDisputeActivity
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * This type is used by each recorded activity on a payment dispute, from creation to resolution.
 **/
 export class PaymentDisputeActivity extends SpeakeasyBase {
-  @Metadata({ data: "json, name=activityDate" })
+  @SpeakeasyMetadata({ data: "json, name=activityDate" })
   activityDate?: string;
 
-  @Metadata({ data: "json, name=activityType" })
+  @SpeakeasyMetadata({ data: "json, name=activityType" })
   activityType?: string;
 
-  @Metadata({ data: "json, name=actor" })
+  @SpeakeasyMetadata({ data: "json, name=actor" })
   actor?: string;
 }

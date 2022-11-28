@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { PushConfig } from "./pushconfig";
 /**
  * Request for the ModifyPushConfig method.

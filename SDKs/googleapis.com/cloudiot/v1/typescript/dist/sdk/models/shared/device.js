@@ -22,9 +22,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DeviceConfig } from "./deviceconfig";
+import { DeviceCredential } from "./devicecredential";
 import { GatewayConfig } from "./gatewayconfig";
 import { Status } from "./status";
 import { DeviceState } from "./devicestate";
@@ -46,71 +46,71 @@ var Device = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=blocked" }),
+        SpeakeasyMetadata({ data: "json, name=blocked" }),
         __metadata("design:type", Boolean)
     ], Device.prototype, "blocked", void 0);
     __decorate([
-        Metadata({ data: "json, name=config" }),
+        SpeakeasyMetadata({ data: "json, name=config" }),
         __metadata("design:type", DeviceConfig)
     ], Device.prototype, "config", void 0);
     __decorate([
-        Metadata({ data: "json, name=credentials", elemType: shared.DeviceCredential }),
+        SpeakeasyMetadata({ data: "json, name=credentials", elemType: DeviceCredential }),
         __metadata("design:type", Array)
     ], Device.prototype, "credentials", void 0);
     __decorate([
-        Metadata({ data: "json, name=gatewayConfig" }),
+        SpeakeasyMetadata({ data: "json, name=gatewayConfig" }),
         __metadata("design:type", GatewayConfig)
     ], Device.prototype, "gatewayConfig", void 0);
     __decorate([
-        Metadata({ data: "json, name=id" }),
+        SpeakeasyMetadata({ data: "json, name=id" }),
         __metadata("design:type", String)
     ], Device.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "json, name=lastConfigAckTime" }),
+        SpeakeasyMetadata({ data: "json, name=lastConfigAckTime" }),
         __metadata("design:type", String)
     ], Device.prototype, "lastConfigAckTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=lastConfigSendTime" }),
+        SpeakeasyMetadata({ data: "json, name=lastConfigSendTime" }),
         __metadata("design:type", String)
     ], Device.prototype, "lastConfigSendTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=lastErrorStatus" }),
+        SpeakeasyMetadata({ data: "json, name=lastErrorStatus" }),
         __metadata("design:type", Status)
     ], Device.prototype, "lastErrorStatus", void 0);
     __decorate([
-        Metadata({ data: "json, name=lastErrorTime" }),
+        SpeakeasyMetadata({ data: "json, name=lastErrorTime" }),
         __metadata("design:type", String)
     ], Device.prototype, "lastErrorTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=lastEventTime" }),
+        SpeakeasyMetadata({ data: "json, name=lastEventTime" }),
         __metadata("design:type", String)
     ], Device.prototype, "lastEventTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=lastHeartbeatTime" }),
+        SpeakeasyMetadata({ data: "json, name=lastHeartbeatTime" }),
         __metadata("design:type", String)
     ], Device.prototype, "lastHeartbeatTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=lastStateTime" }),
+        SpeakeasyMetadata({ data: "json, name=lastStateTime" }),
         __metadata("design:type", String)
     ], Device.prototype, "lastStateTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=logLevel" }),
+        SpeakeasyMetadata({ data: "json, name=logLevel" }),
         __metadata("design:type", String)
     ], Device.prototype, "logLevel", void 0);
     __decorate([
-        Metadata({ data: "json, name=metadata" }),
+        SpeakeasyMetadata({ data: "json, name=metadata" }),
         __metadata("design:type", Map)
     ], Device.prototype, "metadata", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], Device.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=numId" }),
+        SpeakeasyMetadata({ data: "json, name=numId" }),
         __metadata("design:type", String)
     ], Device.prototype, "numId", void 0);
     __decorate([
-        Metadata({ data: "json, name=state" }),
+        SpeakeasyMetadata({ data: "json, name=state" }),
         __metadata("design:type", DeviceState)
     ], Device.prototype, "state", void 0);
     return Device;

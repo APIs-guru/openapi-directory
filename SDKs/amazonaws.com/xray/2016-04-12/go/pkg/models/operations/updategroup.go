@@ -14,6 +14,8 @@ type UpdateGroupHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// UpdateGroupRequestBodyInsightsConfiguration
+// The structure containing configurations related to insights.
 type UpdateGroupRequestBodyInsightsConfiguration struct {
 	InsightsEnabled      *bool `json:"InsightsEnabled,omitempty"`
 	NotificationsEnabled *bool `json:"NotificationsEnabled,omitempty"`

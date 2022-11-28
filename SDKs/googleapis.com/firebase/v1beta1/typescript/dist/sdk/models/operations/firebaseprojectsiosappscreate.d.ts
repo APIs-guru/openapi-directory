@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class FirebaseProjectsIosAppsCreatePathParams extends SpeakeasyBase {
     parent: string;
@@ -31,7 +31,7 @@ export declare class FirebaseProjectsIosAppsCreateSecurity extends SpeakeasyBase
 export declare class FirebaseProjectsIosAppsCreateRequest extends SpeakeasyBase {
     pathParams: FirebaseProjectsIosAppsCreatePathParams;
     queryParams: FirebaseProjectsIosAppsCreateQueryParams;
-    request?: shared.IosApp;
+    request?: shared.IosAppInput;
     security: FirebaseProjectsIosAppsCreateSecurity;
 }
 export declare class FirebaseProjectsIosAppsCreateResponse extends SpeakeasyBase {

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetBenefitsDocumentUploadStatusReportSecurity = /** @class */ (function (_super) {
     __extends(GetBenefitsDocumentUploadStatusReportSecurity, _super);
@@ -30,35 +30,19 @@ var GetBenefitsDocumentUploadStatusReportSecurity = /** @class */ (function (_su
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeApikey)
     ], GetBenefitsDocumentUploadStatusReportSecurity.prototype, "apikey", void 0);
     return GetBenefitsDocumentUploadStatusReportSecurity;
 }(SpeakeasyBase));
 export { GetBenefitsDocumentUploadStatusReportSecurity };
-var GetBenefitsDocumentUploadStatusReportRequest = /** @class */ (function (_super) {
-    __extends(GetBenefitsDocumentUploadStatusReportRequest, _super);
-    function GetBenefitsDocumentUploadStatusReportRequest() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
-        __metadata("design:type", shared.DocumentUploadStatusGuidList)
-    ], GetBenefitsDocumentUploadStatusReportRequest.prototype, "request", void 0);
-    __decorate([
-        Metadata(),
-        __metadata("design:type", GetBenefitsDocumentUploadStatusReportSecurity)
-    ], GetBenefitsDocumentUploadStatusReportRequest.prototype, "security", void 0);
-    return GetBenefitsDocumentUploadStatusReportRequest;
-}(SpeakeasyBase));
-export { GetBenefitsDocumentUploadStatusReportRequest };
 var GetBenefitsDocumentUploadStatusReport200ApplicationJson = /** @class */ (function (_super) {
     __extends(GetBenefitsDocumentUploadStatusReport200ApplicationJson, _super);
     function GetBenefitsDocumentUploadStatusReport200ApplicationJson() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=data" }),
+        SpeakeasyMetadata({ data: "json, name=data" }),
         __metadata("design:type", Array)
     ], GetBenefitsDocumentUploadStatusReport200ApplicationJson.prototype, "data", void 0);
     return GetBenefitsDocumentUploadStatusReport200ApplicationJson;
@@ -70,7 +54,7 @@ var GetBenefitsDocumentUploadStatusReport401ApplicationJson = /** @class */ (fun
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Message" }),
+        SpeakeasyMetadata({ data: "json, name=Message" }),
         __metadata("design:type", String)
     ], GetBenefitsDocumentUploadStatusReport401ApplicationJson.prototype, "message", void 0);
     return GetBenefitsDocumentUploadStatusReport401ApplicationJson;
@@ -82,7 +66,7 @@ var GetBenefitsDocumentUploadStatusReport403ApplicationJson = /** @class */ (fun
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Message" }),
+        SpeakeasyMetadata({ data: "json, name=Message" }),
         __metadata("design:type", String)
     ], GetBenefitsDocumentUploadStatusReport403ApplicationJson.prototype, "message", void 0);
     return GetBenefitsDocumentUploadStatusReport403ApplicationJson;
@@ -94,7 +78,7 @@ var GetBenefitsDocumentUploadStatusReport422ApplicationJson = /** @class */ (fun
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=errors" }),
+        SpeakeasyMetadata({ data: "json, name=errors" }),
         __metadata("design:type", Array)
     ], GetBenefitsDocumentUploadStatusReport422ApplicationJson.prototype, "errors", void 0);
     return GetBenefitsDocumentUploadStatusReport422ApplicationJson;
@@ -106,7 +90,7 @@ var GetBenefitsDocumentUploadStatusReport429ApplicationJson = /** @class */ (fun
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Message" }),
+        SpeakeasyMetadata({ data: "json, name=Message" }),
         __metadata("design:type", String)
     ], GetBenefitsDocumentUploadStatusReport429ApplicationJson.prototype, "message", void 0);
     return GetBenefitsDocumentUploadStatusReport429ApplicationJson;
@@ -118,59 +102,75 @@ var GetBenefitsDocumentUploadStatusReport500ApplicationJson = /** @class */ (fun
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=code" }),
+        SpeakeasyMetadata({ data: "json, name=code" }),
         __metadata("design:type", String)
     ], GetBenefitsDocumentUploadStatusReport500ApplicationJson.prototype, "code", void 0);
     __decorate([
-        Metadata({ data: "json, name=detail" }),
+        SpeakeasyMetadata({ data: "json, name=detail" }),
         __metadata("design:type", String)
     ], GetBenefitsDocumentUploadStatusReport500ApplicationJson.prototype, "detail", void 0);
     __decorate([
-        Metadata({ data: "json, name=status" }),
+        SpeakeasyMetadata({ data: "json, name=status" }),
         __metadata("design:type", String)
     ], GetBenefitsDocumentUploadStatusReport500ApplicationJson.prototype, "status", void 0);
     __decorate([
-        Metadata({ data: "json, name=title" }),
+        SpeakeasyMetadata({ data: "json, name=title" }),
         __metadata("design:type", String)
     ], GetBenefitsDocumentUploadStatusReport500ApplicationJson.prototype, "title", void 0);
     return GetBenefitsDocumentUploadStatusReport500ApplicationJson;
 }(SpeakeasyBase));
 export { GetBenefitsDocumentUploadStatusReport500ApplicationJson };
+var GetBenefitsDocumentUploadStatusReportRequest = /** @class */ (function (_super) {
+    __extends(GetBenefitsDocumentUploadStatusReportRequest, _super);
+    function GetBenefitsDocumentUploadStatusReportRequest() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
+        __metadata("design:type", shared.DocumentUploadStatusGuidList)
+    ], GetBenefitsDocumentUploadStatusReportRequest.prototype, "request", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", GetBenefitsDocumentUploadStatusReportSecurity)
+    ], GetBenefitsDocumentUploadStatusReportRequest.prototype, "security", void 0);
+    return GetBenefitsDocumentUploadStatusReportRequest;
+}(SpeakeasyBase));
+export { GetBenefitsDocumentUploadStatusReportRequest };
 var GetBenefitsDocumentUploadStatusReportResponse = /** @class */ (function (_super) {
     __extends(GetBenefitsDocumentUploadStatusReportResponse, _super);
     function GetBenefitsDocumentUploadStatusReportResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetBenefitsDocumentUploadStatusReportResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetBenefitsDocumentUploadStatusReportResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetBenefitsDocumentUploadStatusReport200ApplicationJson)
     ], GetBenefitsDocumentUploadStatusReportResponse.prototype, "getBenefitsDocumentUploadStatusReport200ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetBenefitsDocumentUploadStatusReport401ApplicationJson)
     ], GetBenefitsDocumentUploadStatusReportResponse.prototype, "getBenefitsDocumentUploadStatusReport401ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetBenefitsDocumentUploadStatusReport403ApplicationJson)
     ], GetBenefitsDocumentUploadStatusReportResponse.prototype, "getBenefitsDocumentUploadStatusReport403ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetBenefitsDocumentUploadStatusReport422ApplicationJson)
     ], GetBenefitsDocumentUploadStatusReportResponse.prototype, "getBenefitsDocumentUploadStatusReport422ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetBenefitsDocumentUploadStatusReport429ApplicationJson)
     ], GetBenefitsDocumentUploadStatusReportResponse.prototype, "getBenefitsDocumentUploadStatusReport429ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetBenefitsDocumentUploadStatusReport500ApplicationJson)
     ], GetBenefitsDocumentUploadStatusReportResponse.prototype, "getBenefitsDocumentUploadStatusReport500ApplicationJsonObject", void 0);
     return GetBenefitsDocumentUploadStatusReportResponse;

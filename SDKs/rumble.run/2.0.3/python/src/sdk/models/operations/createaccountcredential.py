@@ -5,18 +5,18 @@ from sdk.models import shared
 
 @dataclass
 class CreateAccountCredentialSecurity:
-    bearer_auth: shared.SchemeBearerAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer' }})
+    bearer_auth: shared.SchemeBearerAuth = field(metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer' }})
     
 
 @dataclass
 class CreateAccountCredentialRequest:
-    request: shared.CredentialOptions = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: CreateAccountCredentialSecurity = field(default=None)
+    request: shared.CredentialOptions = field(metadata={'request': { 'media_type': 'application/json' }})
+    security: CreateAccountCredentialSecurity = field()
     
 
 @dataclass
 class CreateAccountCredentialResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     credential: Optional[shared.Credential] = field(default=None)
-    status_code: int = field(default=None)
     

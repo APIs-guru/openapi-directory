@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
 from typing import Optional
@@ -39,7 +39,7 @@ class PostHistoryExportsRequest:
 
 @dataclass
 class PostHistoryExportsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     history_export_entity: Optional[shared.HistoryExportEntity] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -22,14 +22,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var GetChromosomesByAssemblyUsingGetPathParams = /** @class */ (function (_super) {
     __extends(GetChromosomesByAssemblyUsingGetPathParams, _super);
     function GetChromosomesByAssemblyUsingGetPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=mapKey" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=mapKey" }),
         __metadata("design:type", Number)
     ], GetChromosomesByAssemblyUsingGetPathParams.prototype, "mapKey", void 0);
     return GetChromosomesByAssemblyUsingGetPathParams;
@@ -41,7 +41,7 @@ var GetChromosomesByAssemblyUsingGetRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetChromosomesByAssemblyUsingGetPathParams)
     ], GetChromosomesByAssemblyUsingGetRequest.prototype, "pathParams", void 0);
     return GetChromosomesByAssemblyUsingGetRequest;
@@ -53,15 +53,15 @@ var GetChromosomesByAssemblyUsingGetResponse = /** @class */ (function (_super) 
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], GetChromosomesByAssemblyUsingGetResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetChromosomesByAssemblyUsingGetResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetChromosomesByAssemblyUsingGetResponse.prototype, "statusCode", void 0);
     return GetChromosomesByAssemblyUsingGetResponse;

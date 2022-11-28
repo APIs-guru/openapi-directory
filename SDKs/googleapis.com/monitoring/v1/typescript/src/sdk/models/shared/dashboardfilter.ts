@@ -1,12 +1,13 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum DashboardFilterFilterTypeEnum {
-    FilterTypeUnspecified = "FILTER_TYPE_UNSPECIFIED"
-,    ResourceLabel = "RESOURCE_LABEL"
-,    MetricLabel = "METRIC_LABEL"
-,    UserMetadataLabel = "USER_METADATA_LABEL"
-,    SystemMetadataLabel = "SYSTEM_METADATA_LABEL"
-,    Group = "GROUP"
+    FilterTypeUnspecified = "FILTER_TYPE_UNSPECIFIED",
+    ResourceLabel = "RESOURCE_LABEL",
+    MetricLabel = "METRIC_LABEL",
+    UserMetadataLabel = "USER_METADATA_LABEL",
+    SystemMetadataLabel = "SYSTEM_METADATA_LABEL",
+    Group = "GROUP"
 }
 
 
@@ -15,15 +16,15 @@ export enum DashboardFilterFilterTypeEnum {
  * A filter to reduce the amount of data charted in relevant widgets.
 **/
 export class DashboardFilter extends SpeakeasyBase {
-  @Metadata({ data: "json, name=filterType" })
+  @SpeakeasyMetadata({ data: "json, name=filterType" })
   filterType?: DashboardFilterFilterTypeEnum;
 
-  @Metadata({ data: "json, name=labelKey" })
+  @SpeakeasyMetadata({ data: "json, name=labelKey" })
   labelKey?: string;
 
-  @Metadata({ data: "json, name=stringValue" })
+  @SpeakeasyMetadata({ data: "json, name=stringValue" })
   stringValue?: string;
 
-  @Metadata({ data: "json, name=templateVariable" })
+  @SpeakeasyMetadata({ data: "json, name=templateVariable" })
   templateVariable?: string;
 }

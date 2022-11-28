@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class MonitoringProjectsMetricDescriptorsCreatePathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,20 +26,20 @@ class MonitoringProjectsMetricDescriptorsCreateQueryParams:
 
 @dataclass
 class MonitoringProjectsMetricDescriptorsCreateSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class MonitoringProjectsMetricDescriptorsCreateSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class MonitoringProjectsMetricDescriptorsCreateSecurityOption3:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -50,15 +51,15 @@ class MonitoringProjectsMetricDescriptorsCreateSecurity:
 
 @dataclass
 class MonitoringProjectsMetricDescriptorsCreateRequest:
-    path_params: MonitoringProjectsMetricDescriptorsCreatePathParams = field(default=None)
-    query_params: MonitoringProjectsMetricDescriptorsCreateQueryParams = field(default=None)
+    path_params: MonitoringProjectsMetricDescriptorsCreatePathParams = field()
+    query_params: MonitoringProjectsMetricDescriptorsCreateQueryParams = field()
+    security: MonitoringProjectsMetricDescriptorsCreateSecurity = field()
     request: Optional[shared.MetricDescriptor] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: MonitoringProjectsMetricDescriptorsCreateSecurity = field(default=None)
     
 
 @dataclass
 class MonitoringProjectsMetricDescriptorsCreateResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     metric_descriptor: Optional[shared.MetricDescriptor] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -12,12 +12,12 @@ class GetResourcesMediaFeaturedJSONQueryParams:
 
 @dataclass
 class GetResourcesMediaFeaturedJSONRequest:
-    query_params: GetResourcesMediaFeaturedJSONQueryParams = field(default=None)
+    query_params: GetResourcesMediaFeaturedJSONQueryParams = field()
     
 
 @dataclass
 class GetResourcesMediaFeaturedJSONResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     media_items: Optional[List[shared.MediaItem]] = field(default=None)
-    status_code: int = field(default=None)
     

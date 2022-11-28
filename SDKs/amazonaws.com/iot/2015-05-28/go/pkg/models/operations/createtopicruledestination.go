@@ -14,6 +14,8 @@ type CreateTopicRuleDestinationHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// CreateTopicRuleDestinationRequestBodyDestinationConfiguration
+// Configuration of the topic rule destination.
 type CreateTopicRuleDestinationRequestBodyDestinationConfiguration struct {
 	HTTPURLConfiguration *shared.HTTPURLDestinationConfiguration `json:"httpUrlConfiguration,omitempty"`
 	VpcConfiguration     *shared.VpcDestinationConfiguration     `json:"vpcConfiguration,omitempty"`

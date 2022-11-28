@@ -1,7 +1,8 @@
 
 
+
 export enum EarningsRateCalculationTypeEnum {
-    Useearningsrate = "USEEARNINGSRATE"
-,    Enterearningsrate = "ENTEREARNINGSRATE"
-,    Annualsalary = "ANNUALSALARY"
+    Useearningsrate = "USEEARNINGSRATE",
+    Enterearningsrate = "ENTEREARNINGSRATE",
+    Annualsalary = "ANNUALSALARY"
 }

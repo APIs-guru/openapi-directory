@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { AnimationEnd } from "./animationend";
 import { AnimationFade } from "./animationfade";
 import { AnimationStatic } from "./animationstatic";

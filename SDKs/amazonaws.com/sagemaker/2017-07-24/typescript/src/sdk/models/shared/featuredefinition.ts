@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { FeatureTypeEnum } from "./featuretypeenum";
+
 
 
 // FeatureDefinition
@@ -7,9 +8,9 @@ import { FeatureTypeEnum } from "./featuretypeenum";
  * A list of features. You must include <code>FeatureName</code> and <code>FeatureType</code>. Valid feature <code>FeatureType</code>s are <code>Integral</code>, <code>Fractional</code> and <code>String</code>. 
 **/
 export class FeatureDefinition extends SpeakeasyBase {
-  @Metadata({ data: "json, name=FeatureName" })
+  @SpeakeasyMetadata({ data: "json, name=FeatureName" })
   featureName?: string;
 
-  @Metadata({ data: "json, name=FeatureType" })
+  @SpeakeasyMetadata({ data: "json, name=FeatureType" })
   featureType?: FeatureTypeEnum;
 }

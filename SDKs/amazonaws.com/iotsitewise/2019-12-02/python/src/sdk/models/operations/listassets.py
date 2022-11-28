@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 class ListAssetsFilterEnum(str, Enum):
@@ -28,17 +32,17 @@ class ListAssetsHeaders:
 
 @dataclass
 class ListAssetsRequest:
-    query_params: ListAssetsQueryParams = field(default=None)
-    headers: ListAssetsHeaders = field(default=None)
+    headers: ListAssetsHeaders = field()
+    query_params: ListAssetsQueryParams = field()
     
 
 @dataclass
 class ListAssetsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     internal_failure_exception: Optional[Any] = field(default=None)
     invalid_request_exception: Optional[Any] = field(default=None)
     list_assets_response: Optional[shared.ListAssetsResponse] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     

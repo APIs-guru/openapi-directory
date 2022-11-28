@@ -1,5 +1,7 @@
 package shared
 
+// GoogleAdsHomeservicesLocalservicesV1AccountReport
+// An Account Report of a GLS account identified by their account id containing aggregate data gathered from a particular date range. Next ID: 18
 type GoogleAdsHomeservicesLocalservicesV1AccountReport struct {
 	AccountID                         *string                                             `json:"accountId,omitempty"`
 	AggregatorInfo                    *GoogleAdsHomeservicesLocalservicesV1AggregatorInfo `json:"aggregatorInfo,omitempty"`

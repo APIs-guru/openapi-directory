@@ -5,6 +5,8 @@ type NetworkUnblockResponseInvalidDurationInvalidParameters struct {
 	Reason *string `json:"reason,omitempty"`
 }
 
+// NetworkUnblockResponseInvalidDuration
+// Invalid Duration
 type NetworkUnblockResponseInvalidDuration struct {
 	Detail            *string                                                  `json:"detail,omitempty"`
 	Instance          *string                                                  `json:"instance,omitempty"`

@@ -1,19 +1,20 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class HeadItemImage2PathParams:
-    format: shared.ImageFormatEnum = field(default=None, metadata={'path_param': { 'field_name': 'format', 'style': 'simple', 'explode': False }})
-    image_index: int = field(default=None, metadata={'path_param': { 'field_name': 'imageIndex', 'style': 'simple', 'explode': False }})
-    image_type: shared.ImageTypeEnum = field(default=None, metadata={'path_param': { 'field_name': 'imageType', 'style': 'simple', 'explode': False }})
-    item_id: str = field(default=None, metadata={'path_param': { 'field_name': 'itemId', 'style': 'simple', 'explode': False }})
-    max_height: int = field(default=None, metadata={'path_param': { 'field_name': 'maxHeight', 'style': 'simple', 'explode': False }})
-    max_width: int = field(default=None, metadata={'path_param': { 'field_name': 'maxWidth', 'style': 'simple', 'explode': False }})
-    percent_played: float = field(default=None, metadata={'path_param': { 'field_name': 'percentPlayed', 'style': 'simple', 'explode': False }})
-    tag: str = field(default=None, metadata={'path_param': { 'field_name': 'tag', 'style': 'simple', 'explode': False }})
-    unplayed_count: int = field(default=None, metadata={'path_param': { 'field_name': 'unplayedCount', 'style': 'simple', 'explode': False }})
+    format: shared.ImageFormatEnum = field(metadata={'path_param': { 'field_name': 'format', 'style': 'simple', 'explode': False }})
+    image_index: int = field(metadata={'path_param': { 'field_name': 'imageIndex', 'style': 'simple', 'explode': False }})
+    image_type: shared.ImageTypeEnum = field(metadata={'path_param': { 'field_name': 'imageType', 'style': 'simple', 'explode': False }})
+    item_id: str = field(metadata={'path_param': { 'field_name': 'itemId', 'style': 'simple', 'explode': False }})
+    max_height: int = field(metadata={'path_param': { 'field_name': 'maxHeight', 'style': 'simple', 'explode': False }})
+    max_width: int = field(metadata={'path_param': { 'field_name': 'maxWidth', 'style': 'simple', 'explode': False }})
+    percent_played: float = field(metadata={'path_param': { 'field_name': 'percentPlayed', 'style': 'simple', 'explode': False }})
+    tag: str = field(metadata={'path_param': { 'field_name': 'tag', 'style': 'simple', 'explode': False }})
+    unplayed_count: int = field(metadata={'path_param': { 'field_name': 'unplayedCount', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -30,14 +31,14 @@ class HeadItemImage2QueryParams:
 
 @dataclass
 class HeadItemImage2Request:
-    path_params: HeadItemImage2PathParams = field(default=None)
-    query_params: HeadItemImage2QueryParams = field(default=None)
+    path_params: HeadItemImage2PathParams = field()
+    query_params: HeadItemImage2QueryParams = field()
     
 
 @dataclass
 class HeadItemImage2Response:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     head_item_image2_200_image_wildcard_binary_string: Optional[bytes] = field(default=None)
     problem_details: Optional[dict[str, Any]] = field(default=None)
-    status_code: int = field(default=None)
     

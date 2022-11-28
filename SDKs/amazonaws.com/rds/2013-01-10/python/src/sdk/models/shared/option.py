@@ -1,0 +1,13 @@
+from dataclasses import dataclass, field
+from typing import List,Optional
+from . import *
+
+
+@dataclass
+class Option:
+    db_security_group_memberships: Optional[List[DbSecurityGroupMembership]] = field(default=None)
+    option_description: Optional[str] = field(default=None)
+    option_name: Optional[str] = field(default=None)
+    port: Optional[int] = field(default=None)
+    vpc_security_group_memberships: Optional[List[VpcSecurityGroupMembership]] = field(default=None)
+    

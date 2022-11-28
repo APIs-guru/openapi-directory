@@ -1,14 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { FirewallDomainUpdateOperationEnum } from "./firewalldomainupdateoperationenum";
 
 
+
 export class UpdateFirewallDomainsRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Domains" })
+  @SpeakeasyMetadata({ data: "json, name=Domains" })
   domains: string[];
 
-  @Metadata({ data: "json, name=FirewallDomainListId" })
+  @SpeakeasyMetadata({ data: "json, name=FirewallDomainListId" })
   firewallDomainListId: string;
 
-  @Metadata({ data: "json, name=Operation" })
+  @SpeakeasyMetadata({ data: "json, name=Operation" })
   operation: FirewallDomainUpdateOperationEnum;
 }

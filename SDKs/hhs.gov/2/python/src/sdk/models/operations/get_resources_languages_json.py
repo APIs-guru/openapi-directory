@@ -12,12 +12,12 @@ class GetResourcesLanguagesJSONQueryParams:
 
 @dataclass
 class GetResourcesLanguagesJSONRequest:
-    query_params: GetResourcesLanguagesJSONQueryParams = field(default=None)
+    query_params: GetResourcesLanguagesJSONQueryParams = field()
     
 
 @dataclass
 class GetResourcesLanguagesJSONResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     language_wrappeds: Optional[List[shared.LanguageWrapped]] = field(default=None)
-    status_code: int = field(default=None)
     

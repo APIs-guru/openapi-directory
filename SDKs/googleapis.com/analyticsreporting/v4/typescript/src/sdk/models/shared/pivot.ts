@@ -1,8 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DimensionFilterClause } from "./dimensionfilterclause";
 import { Dimension } from "./dimension";
 import { Metric } from "./metric";
+
 
 
 // Pivot
@@ -10,18 +10,18 @@ import { Metric } from "./metric";
  * The Pivot describes the pivot section in the request. The Pivot helps rearrange the information in the table for certain reports by pivoting your data on a second dimension.
 **/
 export class Pivot extends SpeakeasyBase {
-  @Metadata({ data: "json, name=dimensionFilterClauses", elemType: shared.DimensionFilterClause })
+  @SpeakeasyMetadata({ data: "json, name=dimensionFilterClauses", elemType: DimensionFilterClause })
   dimensionFilterClauses?: DimensionFilterClause[];
 
-  @Metadata({ data: "json, name=dimensions", elemType: shared.Dimension })
+  @SpeakeasyMetadata({ data: "json, name=dimensions", elemType: Dimension })
   dimensions?: Dimension[];
 
-  @Metadata({ data: "json, name=maxGroupCount" })
+  @SpeakeasyMetadata({ data: "json, name=maxGroupCount" })
   maxGroupCount?: number;
 
-  @Metadata({ data: "json, name=metrics", elemType: shared.Metric })
+  @SpeakeasyMetadata({ data: "json, name=metrics", elemType: Metric })
   metrics?: Metric[];
 
-  @Metadata({ data: "json, name=startGroup" })
+  @SpeakeasyMetadata({ data: "json, name=startGroup" })
   startGroup?: number;
 }

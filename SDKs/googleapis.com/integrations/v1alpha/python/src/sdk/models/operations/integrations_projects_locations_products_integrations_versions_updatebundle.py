@@ -1,11 +1,15 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class IntegrationsProjectsLocationsProductsIntegrationsVersionsUpdateBundlePathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,21 +29,21 @@ class IntegrationsProjectsLocationsProductsIntegrationsVersionsUpdateBundleQuery
 
 @dataclass
 class IntegrationsProjectsLocationsProductsIntegrationsVersionsUpdateBundleSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class IntegrationsProjectsLocationsProductsIntegrationsVersionsUpdateBundleRequest:
-    path_params: IntegrationsProjectsLocationsProductsIntegrationsVersionsUpdateBundlePathParams = field(default=None)
-    query_params: IntegrationsProjectsLocationsProductsIntegrationsVersionsUpdateBundleQueryParams = field(default=None)
-    request: Optional[shared.GoogleCloudIntegrationsV1alphaUpdateBundleRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: IntegrationsProjectsLocationsProductsIntegrationsVersionsUpdateBundleSecurity = field(default=None)
+    path_params: IntegrationsProjectsLocationsProductsIntegrationsVersionsUpdateBundlePathParams = field()
+    query_params: IntegrationsProjectsLocationsProductsIntegrationsVersionsUpdateBundleQueryParams = field()
+    security: IntegrationsProjectsLocationsProductsIntegrationsVersionsUpdateBundleSecurity = field()
+    request: Optional[shared.GoogleCloudIntegrationsV1alphaUpdateBundleRequestInput] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class IntegrationsProjectsLocationsProductsIntegrationsVersionsUpdateBundleResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_cloud_integrations_v1alpha_update_bundle_response: Optional[shared.GoogleCloudIntegrationsV1alphaUpdateBundleResponse] = field(default=None)
-    status_code: int = field(default=None)
     

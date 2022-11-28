@@ -1,7 +1,8 @@
 
 
+
 export enum UsersSortEnum {
-    MinusId = "-id"
-,    MinusUsername = "-username"
-,    MinusCreatedAt = "-createdAt"
+    MinusId = "-id",
+    MinusUsername = "-username",
+    MinusCreatedAt = "-createdAt"
 }

@@ -8,6 +8,8 @@ const (
 	SchemaSettingsEncodingEnumBinary              SchemaSettingsEncodingEnum = "BINARY"
 )
 
+// SchemaSettings
+// Settings for validating messages published against a schema.
 type SchemaSettings struct {
 	Encoding        *SchemaSettingsEncodingEnum `json:"encoding,omitempty"`
 	FirstRevisionID *string                     `json:"firstRevisionId,omitempty"`

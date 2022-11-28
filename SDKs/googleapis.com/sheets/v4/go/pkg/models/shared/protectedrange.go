@@ -1,5 +1,7 @@
 package shared
 
+// ProtectedRange
+// A protected range.
 type ProtectedRange struct {
 	Description           *string     `json:"description,omitempty"`
 	Editors               *Editors    `json:"editors,omitempty"`

@@ -4,7 +4,7 @@ from typing import Optional
 
 @dataclass
 class TagAPIDeletePathParams:
-    id: int = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: int = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -15,12 +15,12 @@ class TagAPIDeleteQueryParams:
 
 @dataclass
 class TagAPIDeleteRequest:
-    path_params: TagAPIDeletePathParams = field(default=None)
-    query_params: TagAPIDeleteQueryParams = field(default=None)
+    path_params: TagAPIDeletePathParams = field()
+    query_params: TagAPIDeleteQueryParams = field()
     
 
 @dataclass
 class TagAPIDeleteResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

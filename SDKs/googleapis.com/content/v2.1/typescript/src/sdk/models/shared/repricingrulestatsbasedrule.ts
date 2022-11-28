@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // RepricingRuleStatsBasedRule
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Definition of stats based rule.
 **/
 export class RepricingRuleStatsBasedRule extends SpeakeasyBase {
-  @Metadata({ data: "json, name=percentageDelta" })
+  @SpeakeasyMetadata({ data: "json, name=percentageDelta" })
   percentageDelta?: number;
 
-  @Metadata({ data: "json, name=priceDelta" })
+  @SpeakeasyMetadata({ data: "json, name=priceDelta" })
   priceDelta?: string;
 }

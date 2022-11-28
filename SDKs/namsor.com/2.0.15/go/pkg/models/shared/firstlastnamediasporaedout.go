@@ -1,5 +1,7 @@
 package shared
 
+// FirstLastNameDiasporaedOut
+// Represents the output of inferring the LIKELY ethnicity from a personal name, given an country of residence.
 type FirstLastNameDiasporaedOut struct {
 	CountryIso2    *string  `json:"countryIso2,omitempty"`
 	EthnicitiesTop []string `json:"ethnicitiesTop,omitempty"`

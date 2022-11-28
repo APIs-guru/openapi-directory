@@ -1,53 +1,54 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetV3DownloadsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=company_downloads" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=company_downloads" })
   companyDownloads?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=date_from" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=date_from" })
   dateFrom?: Date;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=date_to" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=date_to" })
   dateTo?: Date;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=page" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page" })
   page?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=page_size" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page_size" })
   pageSize?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=product_type" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=product_type" })
   productType?: shared.ProductTypeRequestEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=use_time" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=use_time" })
   useTime?: boolean;
 }
 
 
 export class GetV3DownloadsHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=Accept-Language" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Accept-Language" })
   acceptLanguage?: string;
 }
 
 
 export class GetV3DownloadsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetV3DownloadsQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: GetV3DownloadsHeaders;
 }
 
 
 export class GetV3DownloadsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getDownloadsResponse?: shared.GetDownloadsResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

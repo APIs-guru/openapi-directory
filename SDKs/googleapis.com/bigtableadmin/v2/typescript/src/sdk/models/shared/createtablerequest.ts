@@ -1,20 +1,20 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Split } from "./split";
-import { Table } from "./table";
+import { TableInput } from "./table";
 
 
-// CreateTableRequest
+
+// CreateTableRequestInput
 /** 
  * Request message for google.bigtable.admin.v2.BigtableTableAdmin.CreateTable
 **/
-export class CreateTableRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=initialSplits", elemType: shared.Split })
+export class CreateTableRequestInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=initialSplits", elemType: Split })
   initialSplits?: Split[];
 
-  @Metadata({ data: "json, name=table" })
-  table?: Table;
+  @SpeakeasyMetadata({ data: "json, name=table" })
+  table?: TableInput;
 
-  @Metadata({ data: "json, name=tableId" })
+  @SpeakeasyMetadata({ data: "json, name=tableId" })
   tableId?: string;
 }

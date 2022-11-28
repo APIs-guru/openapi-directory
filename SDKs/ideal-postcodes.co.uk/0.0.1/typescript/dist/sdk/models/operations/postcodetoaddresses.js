@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var PostcodeToAddressesPathParams = /** @class */ (function (_super) {
     __extends(PostcodeToAddressesPathParams, _super);
@@ -30,7 +30,7 @@ var PostcodeToAddressesPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=postcode" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=postcode" }),
         __metadata("design:type", String)
     ], PostcodeToAddressesPathParams.prototype, "postcode", void 0);
     return PostcodeToAddressesPathParams;
@@ -42,15 +42,15 @@ var PostcodeToAddressesQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=filter" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=filter" }),
         __metadata("design:type", String)
     ], PostcodeToAddressesQueryParams.prototype, "filter", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=licensee" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=licensee" }),
         __metadata("design:type", String)
     ], PostcodeToAddressesQueryParams.prototype, "licensee", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=page" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page" }),
         __metadata("design:type", Number)
     ], PostcodeToAddressesQueryParams.prototype, "page", void 0);
     return PostcodeToAddressesQueryParams;
@@ -62,11 +62,11 @@ var PostcodeToAddressesSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=query" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=query" }),
         __metadata("design:type", shared.SchemeApiKey)
     ], PostcodeToAddressesSecurity.prototype, "apiKey", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=query" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=query" }),
         __metadata("design:type", shared.SchemeUserToken)
     ], PostcodeToAddressesSecurity.prototype, "userToken", void 0);
     return PostcodeToAddressesSecurity;
@@ -78,15 +78,15 @@ var PostcodeToAddressesRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PostcodeToAddressesPathParams)
     ], PostcodeToAddressesRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PostcodeToAddressesQueryParams)
     ], PostcodeToAddressesRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PostcodeToAddressesSecurity)
     ], PostcodeToAddressesRequest.prototype, "security", void 0);
     return PostcodeToAddressesRequest;
@@ -98,23 +98,23 @@ var PostcodeToAddressesResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.AddressLookupResponseSchema)
     ], PostcodeToAddressesResponse.prototype, "addressLookupResponseSchema", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], PostcodeToAddressesResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.ErrorResponseSchema)
     ], PostcodeToAddressesResponse.prototype, "errorResponseSchema", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.PostcodeToAddressResponseSchema)
     ], PostcodeToAddressesResponse.prototype, "postcodeToAddressResponseSchema", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], PostcodeToAddressesResponse.prototype, "statusCode", void 0);
     return PostcodeToAddressesResponse;

@@ -1,9 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Attribute } from "./attribute";
 import { TimestampRange } from "./timestamprange";
 import { SeverityEnum } from "./severityenum";
-import { Attribute } from "./attribute";
+
 
 
 // FindingFilter
@@ -11,27 +10,27 @@ import { Attribute } from "./attribute";
  * This data type is used as a request parameter in the <a>ListFindings</a> action.
 **/
 export class FindingFilter extends SpeakeasyBase {
-  @Metadata({ data: "json, name=agentIds" })
+  @SpeakeasyMetadata({ data: "json, name=agentIds" })
   agentIds?: string[];
 
-  @Metadata({ data: "json, name=attributes", elemType: shared.Attribute })
+  @SpeakeasyMetadata({ data: "json, name=attributes", elemType: Attribute })
   attributes?: Attribute[];
 
-  @Metadata({ data: "json, name=autoScalingGroups" })
+  @SpeakeasyMetadata({ data: "json, name=autoScalingGroups" })
   autoScalingGroups?: string[];
 
-  @Metadata({ data: "json, name=creationTimeRange" })
+  @SpeakeasyMetadata({ data: "json, name=creationTimeRange" })
   creationTimeRange?: TimestampRange;
 
-  @Metadata({ data: "json, name=ruleNames" })
+  @SpeakeasyMetadata({ data: "json, name=ruleNames" })
   ruleNames?: string[];
 
-  @Metadata({ data: "json, name=rulesPackageArns" })
+  @SpeakeasyMetadata({ data: "json, name=rulesPackageArns" })
   rulesPackageArns?: string[];
 
-  @Metadata({ data: "json, name=severities" })
+  @SpeakeasyMetadata({ data: "json, name=severities" })
   severities?: SeverityEnum[];
 
-  @Metadata({ data: "json, name=userAttributes", elemType: shared.Attribute })
+  @SpeakeasyMetadata({ data: "json, name=userAttributes", elemType: Attribute })
   userAttributes?: Attribute[];
 }

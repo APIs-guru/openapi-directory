@@ -1,44 +1,45 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class PostForecastFullDetailHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Token" })
   token?: string;
 }
 
 
 export class PostForecastFullDetailRequests extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/*+json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/*+json" })
   planningLevelRequest?: shared.PlanningLevelRequest;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   planningLevelRequest1?: shared.PlanningLevelRequest;
 
-  @Metadata({ data: "request, media_type=text/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=text/json" })
   planningLevelRequest2?: shared.PlanningLevelRequest;
 }
 
 
 export class PostForecastFullDetailRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: PostForecastFullDetailHeaders;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   request?: PostForecastFullDetailRequests;
 }
 
 
 export class PostForecastFullDetailResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   fullDetailsForecastResponse?: shared.FullDetailsForecastResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

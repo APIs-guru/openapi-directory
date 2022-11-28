@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // DimensionNameValue
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A dimension name and value.
 **/
 export class DimensionNameValue extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DimensionName" })
+  @SpeakeasyMetadata({ data: "json, name=DimensionName" })
   dimensionName: string;
 
-  @Metadata({ data: "json, name=DimensionValue" })
+  @SpeakeasyMetadata({ data: "json, name=DimensionValue" })
   dimensionValue: string;
 }

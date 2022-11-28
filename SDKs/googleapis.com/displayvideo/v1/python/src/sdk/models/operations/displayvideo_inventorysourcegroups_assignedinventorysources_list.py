@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DisplayvideoInventorySourceGroupsAssignedInventorySourcesListPathParams:
-    inventory_source_group_id: str = field(default=None, metadata={'path_param': { 'field_name': 'inventorySourceGroupId', 'style': 'simple', 'explode': False }})
+    inventory_source_group_id: str = field(metadata={'path_param': { 'field_name': 'inventorySourceGroupId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -31,20 +32,20 @@ class DisplayvideoInventorySourceGroupsAssignedInventorySourcesListQueryParams:
 
 @dataclass
 class DisplayvideoInventorySourceGroupsAssignedInventorySourcesListSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DisplayvideoInventorySourceGroupsAssignedInventorySourcesListRequest:
-    path_params: DisplayvideoInventorySourceGroupsAssignedInventorySourcesListPathParams = field(default=None)
-    query_params: DisplayvideoInventorySourceGroupsAssignedInventorySourcesListQueryParams = field(default=None)
-    security: DisplayvideoInventorySourceGroupsAssignedInventorySourcesListSecurity = field(default=None)
+    path_params: DisplayvideoInventorySourceGroupsAssignedInventorySourcesListPathParams = field()
+    query_params: DisplayvideoInventorySourceGroupsAssignedInventorySourcesListQueryParams = field()
+    security: DisplayvideoInventorySourceGroupsAssignedInventorySourcesListSecurity = field()
     
 
 @dataclass
 class DisplayvideoInventorySourceGroupsAssignedInventorySourcesListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     list_assigned_inventory_sources_response: Optional[shared.ListAssignedInventorySourcesResponse] = field(default=None)
-    status_code: int = field(default=None)
     

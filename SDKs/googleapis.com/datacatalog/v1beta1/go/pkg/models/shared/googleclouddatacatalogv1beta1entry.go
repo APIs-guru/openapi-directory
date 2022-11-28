@@ -18,6 +18,23 @@ const (
 	GoogleCloudDatacatalogV1beta1EntryTypeEnumFileset              GoogleCloudDatacatalogV1beta1EntryTypeEnum = "FILESET"
 )
 
+// GoogleCloudDatacatalogV1beta1EntryInput
+// Entry Metadata. A Data Catalog Entry resource represents another resource in Google Cloud Platform (such as a BigQuery dataset or a Pub/Sub topic), or outside of Google Cloud Platform. Clients can use the `linked_resource` field in the Entry resource to refer to the original resource ID of the source system. An Entry resource contains resource details, such as its schema. An Entry can also be used to attach flexible metadata, such as a Tag.
+type GoogleCloudDatacatalogV1beta1EntryInput struct {
+	Description            *string                                             `json:"description,omitempty"`
+	DisplayName            *string                                             `json:"displayName,omitempty"`
+	GcsFilesetSpec         *GoogleCloudDatacatalogV1beta1GcsFilesetSpecInput   `json:"gcsFilesetSpec,omitempty"`
+	LinkedResource         *string                                             `json:"linkedResource,omitempty"`
+	Schema                 *GoogleCloudDatacatalogV1beta1Schema                `json:"schema,omitempty"`
+	SourceSystemTimestamps *GoogleCloudDatacatalogV1beta1SystemTimestampsInput `json:"sourceSystemTimestamps,omitempty"`
+	Type                   *GoogleCloudDatacatalogV1beta1EntryTypeEnum         `json:"type,omitempty"`
+	UsageSignal            *GoogleCloudDatacatalogV1beta1UsageSignal           `json:"usageSignal,omitempty"`
+	UserSpecifiedSystem    *string                                             `json:"userSpecifiedSystem,omitempty"`
+	UserSpecifiedType      *string                                             `json:"userSpecifiedType,omitempty"`
+}
+
+// GoogleCloudDatacatalogV1beta1Entry
+// Entry Metadata. A Data Catalog Entry resource represents another resource in Google Cloud Platform (such as a BigQuery dataset or a Pub/Sub topic), or outside of Google Cloud Platform. Clients can use the `linked_resource` field in the Entry resource to refer to the original resource ID of the source system. An Entry resource contains resource details, such as its schema. An Entry can also be used to attach flexible metadata, such as a Tag.
 type GoogleCloudDatacatalogV1beta1Entry struct {
 	BigqueryDateShardedSpec *GoogleCloudDatacatalogV1beta1BigQueryDateShardedSpec   `json:"bigqueryDateShardedSpec,omitempty"`
 	BigqueryTableSpec       *GoogleCloudDatacatalogV1beta1BigQueryTableSpec         `json:"bigqueryTableSpec,omitempty"`

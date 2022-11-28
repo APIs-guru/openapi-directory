@@ -10,7 +10,7 @@ import (
 	"strings"
 )
 
-var Servers = []string{
+var ServerList = []string{
 	"http://botschaft.local",
 }
 
@@ -19,9 +19,13 @@ type HTTPClient interface {
 }
 
 type SDK struct {
-	defaultClient  HTTPClient
-	securityClient HTTPClient
-	serverURL      string
+	_defaultClient  HTTPClient
+	_securityClient HTTPClient
+
+	_serverURL  string
+	_language   string
+	_sdkVersion string
+	_genVersion string
 }
 
 type SDKOption func(*SDK)
@@ -32,27 +36,45 @@ func WithServerURL(serverURL string, params map[string]string) SDKOption {
 			serverURL = utils.ReplaceParameters(serverURL, params)
 		}
 
-		sdk.serverURL = serverURL
+		sdk._serverURL = serverURL
+	}
+}
+
+func WithClient(client HTTPClient) SDKOption {
+	return func(sdk *SDK) {
+		sdk._defaultClient = client
 	}
 }
 
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
-		defaultClient:  http.DefaultClient,
-		securityClient: http.DefaultClient,
+		_language:   "go",
+		_sdkVersion: "",
+		_genVersion: "internal",
 	}
 	for _, opt := range opts {
 		opt(sdk)
 	}
-	if sdk.serverURL == "" {
-		sdk.serverURL = Servers[0]
+
+	if sdk._defaultClient == nil {
+		sdk._defaultClient = http.DefaultClient
+	}
+	if sdk._securityClient == nil {
+
+		sdk._securityClient = sdk._defaultClient
+
+	}
+
+	if sdk._serverURL == "" {
+		sdk._serverURL = ServerList[0]
 	}
 
 	return sdk
 }
 
+// ConfigConfigGet - Config
 func (s *SDK) ConfigConfigGet(ctx context.Context, request operations.ConfigConfigGetRequest) (*operations.ConfigConfigGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/config"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -62,7 +84,7 @@ func (s *SDK) ConfigConfigGet(ctx context.Context, request operations.ConfigConf
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -102,8 +124,9 @@ func (s *SDK) ConfigConfigGet(ctx context.Context, request operations.ConfigConf
 	return res, nil
 }
 
+// DiscordGetDiscordGet - Discord Get
 func (s *SDK) DiscordGetDiscordGet(ctx context.Context, request operations.DiscordGetDiscordGetRequest) (*operations.DiscordGetDiscordGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/discord"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -115,7 +138,7 @@ func (s *SDK) DiscordGetDiscordGet(ctx context.Context, request operations.Disco
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -155,8 +178,9 @@ func (s *SDK) DiscordGetDiscordGet(ctx context.Context, request operations.Disco
 	return res, nil
 }
 
+// DiscordPostDiscordPost - Discord Post
 func (s *SDK) DiscordPostDiscordPost(ctx context.Context, request operations.DiscordPostDiscordPostRequest) (*operations.DiscordPostDiscordPostResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/discord"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -176,7 +200,7 @@ func (s *SDK) DiscordPostDiscordPost(ctx context.Context, request operations.Dis
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -216,8 +240,9 @@ func (s *SDK) DiscordPostDiscordPost(ctx context.Context, request operations.Dis
 	return res, nil
 }
 
+// SlackGetSlackGet - Slack Get
 func (s *SDK) SlackGetSlackGet(ctx context.Context, request operations.SlackGetSlackGetRequest) (*operations.SlackGetSlackGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/slack"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -229,7 +254,7 @@ func (s *SDK) SlackGetSlackGet(ctx context.Context, request operations.SlackGetS
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -269,8 +294,9 @@ func (s *SDK) SlackGetSlackGet(ctx context.Context, request operations.SlackGetS
 	return res, nil
 }
 
+// SlackPostSlackPost - Slack Post
 func (s *SDK) SlackPostSlackPost(ctx context.Context, request operations.SlackPostSlackPostRequest) (*operations.SlackPostSlackPostResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/slack"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -290,7 +316,7 @@ func (s *SDK) SlackPostSlackPost(ctx context.Context, request operations.SlackPo
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -330,8 +356,9 @@ func (s *SDK) SlackPostSlackPost(ctx context.Context, request operations.SlackPo
 	return res, nil
 }
 
+// SnsGetSnsGet - Sns Get
 func (s *SDK) SnsGetSnsGet(ctx context.Context, request operations.SnsGetSnsGetRequest) (*operations.SnsGetSnsGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/sns"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -343,7 +370,7 @@ func (s *SDK) SnsGetSnsGet(ctx context.Context, request operations.SnsGetSnsGetR
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -383,8 +410,9 @@ func (s *SDK) SnsGetSnsGet(ctx context.Context, request operations.SnsGetSnsGetR
 	return res, nil
 }
 
+// SnsPostSnsPost - Sns Post
 func (s *SDK) SnsPostSnsPost(ctx context.Context, request operations.SnsPostSnsPostRequest) (*operations.SnsPostSnsPostResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/sns"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -404,7 +432,7 @@ func (s *SDK) SnsPostSnsPost(ctx context.Context, request operations.SnsPostSnsP
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -444,8 +472,9 @@ func (s *SDK) SnsPostSnsPost(ctx context.Context, request operations.SnsPostSnsP
 	return res, nil
 }
 
+// TopicTopicTopicNameGet - Topic
 func (s *SDK) TopicTopicTopicNameGet(ctx context.Context, request operations.TopicTopicTopicNameGetRequest) (*operations.TopicTopicTopicNameGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/topic/{topic_name}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -457,7 +486,7 @@ func (s *SDK) TopicTopicTopicNameGet(ctx context.Context, request operations.Top
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -497,8 +526,9 @@ func (s *SDK) TopicTopicTopicNameGet(ctx context.Context, request operations.Top
 	return res, nil
 }
 
+// TwilioMessageGetTwilioGet - Twilio Message Get
 func (s *SDK) TwilioMessageGetTwilioGet(ctx context.Context, request operations.TwilioMessageGetTwilioGetRequest) (*operations.TwilioMessageGetTwilioGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/twilio"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -510,7 +540,7 @@ func (s *SDK) TwilioMessageGetTwilioGet(ctx context.Context, request operations.
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -550,8 +580,9 @@ func (s *SDK) TwilioMessageGetTwilioGet(ctx context.Context, request operations.
 	return res, nil
 }
 
+// TwilioMessagePostTwilioPost - Twilio Message Post
 func (s *SDK) TwilioMessagePostTwilioPost(ctx context.Context, request operations.TwilioMessagePostTwilioPostRequest) (*operations.TwilioMessagePostTwilioPostResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/twilio"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -571,7 +602,7 @@ func (s *SDK) TwilioMessagePostTwilioPost(ctx context.Context, request operation
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {

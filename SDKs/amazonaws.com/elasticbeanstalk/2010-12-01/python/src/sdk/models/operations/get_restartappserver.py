@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetRestartAppServerActionEnum(str, Enum):
     RESTART_APP_SERVER = "RestartAppServer"
@@ -10,10 +14,10 @@ class GetRestartAppServerVersionEnum(str, Enum):
 
 @dataclass
 class GetRestartAppServerQueryParams:
-    action: GetRestartAppServerActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetRestartAppServerActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: GetRestartAppServerVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     environment_id: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'EnvironmentId', 'style': 'form', 'explode': True }})
     environment_name: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'EnvironmentName', 'style': 'form', 'explode': True }})
-    version: GetRestartAppServerVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -29,12 +33,12 @@ class GetRestartAppServerHeaders:
 
 @dataclass
 class GetRestartAppServerRequest:
-    query_params: GetRestartAppServerQueryParams = field(default=None)
-    headers: GetRestartAppServerHeaders = field(default=None)
+    headers: GetRestartAppServerHeaders = field()
+    query_params: GetRestartAppServerQueryParams = field()
     
 
 @dataclass
 class GetRestartAppServerResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

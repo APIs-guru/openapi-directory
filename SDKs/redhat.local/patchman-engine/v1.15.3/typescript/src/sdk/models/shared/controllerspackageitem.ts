@@ -1,16 +1,17 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ControllersPackageItem extends SpeakeasyBase {
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=summary" })
+  @SpeakeasyMetadata({ data: "json, name=summary" })
   summary?: string;
 
-  @Metadata({ data: "json, name=systems_installed" })
+  @SpeakeasyMetadata({ data: "json, name=systems_installed" })
   systemsInstalled?: number;
 
-  @Metadata({ data: "json, name=systems_updatable" })
+  @SpeakeasyMetadata({ data: "json, name=systems_updatable" })
   systemsUpdatable?: number;
 }

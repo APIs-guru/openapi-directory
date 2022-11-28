@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import selection
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class SelectionList:
-    values: Optional[List[selection.Selection]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'values' }})
+    r"""SelectionList
+    Wrapper for SelectionList Field value.
+    """
+    
+    values: Optional[List[Selection]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('values') }})
     

@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class OrgsGetAuditLogPathParams:
-    org: str = field(default=None, metadata={'path_param': { 'field_name': 'org', 'style': 'simple', 'explode': False }})
+    org: str = field(metadata={'path_param': { 'field_name': 'org', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -21,13 +22,13 @@ class OrgsGetAuditLogQueryParams:
 
 @dataclass
 class OrgsGetAuditLogRequest:
-    path_params: OrgsGetAuditLogPathParams = field(default=None)
-    query_params: OrgsGetAuditLogQueryParams = field(default=None)
+    path_params: OrgsGetAuditLogPathParams = field()
+    query_params: OrgsGetAuditLogQueryParams = field()
     
 
 @dataclass
 class OrgsGetAuditLogResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     audit_log_events: Optional[List[shared.AuditLogEvent]] = field(default=None)
     

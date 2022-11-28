@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { AssetStatusEnum } from "./assetstatusenum";
 export declare class Asset extends SpeakeasyBase {
     accountingBookValue?: number;

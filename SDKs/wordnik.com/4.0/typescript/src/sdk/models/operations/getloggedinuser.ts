@@ -1,25 +1,26 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetLoggedInUserHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=auth_token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=auth_token" })
   authToken: string;
 }
 
 
 export class GetLoggedInUserRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: GetLoggedInUserHeaders;
 }
 
 
 export class GetLoggedInUserResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

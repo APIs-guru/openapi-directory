@@ -1,5 +1,7 @@
 package shared
 
-type GoogleAnalyticsAdminV1alphaBatchUpdateUserLinksRequest struct {
-	Requests []GoogleAnalyticsAdminV1alphaUpdateUserLinkRequest `json:"requests,omitempty"`
+// GoogleAnalyticsAdminV1alphaBatchUpdateUserLinksRequestInput
+// Request message for BatchUpdateUserLinks RPC.
+type GoogleAnalyticsAdminV1alphaBatchUpdateUserLinksRequestInput struct {
+	Requests []GoogleAnalyticsAdminV1alphaUpdateUserLinkRequestInput `json:"requests,omitempty"`
 }

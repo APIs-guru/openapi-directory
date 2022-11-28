@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { FeatureValue } from "./featurevalue";
 // BatchGetRecordResultDetail
 /**
  * The output of Records that have been retrieved in a batch.
@@ -34,15 +34,15 @@ var BatchGetRecordResultDetail = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=FeatureGroupName" }),
+        SpeakeasyMetadata({ data: "json, name=FeatureGroupName" }),
         __metadata("design:type", String)
     ], BatchGetRecordResultDetail.prototype, "featureGroupName", void 0);
     __decorate([
-        Metadata({ data: "json, name=Record", elemType: shared.FeatureValue }),
+        SpeakeasyMetadata({ data: "json, name=Record", elemType: FeatureValue }),
         __metadata("design:type", Array)
     ], BatchGetRecordResultDetail.prototype, "record", void 0);
     __decorate([
-        Metadata({ data: "json, name=RecordIdentifierValueAsString" }),
+        SpeakeasyMetadata({ data: "json, name=RecordIdentifierValueAsString" }),
         __metadata("design:type", String)
     ], BatchGetRecordResultDetail.prototype, "recordIdentifierValueAsString", void 0);
     return BatchGetRecordResultDetail;

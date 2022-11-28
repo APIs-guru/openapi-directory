@@ -22,34 +22,34 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var DescribeMetricFiltersRequest = /** @class */ (function (_super) {
     __extends(DescribeMetricFiltersRequest, _super);
     function DescribeMetricFiltersRequest() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=filterNamePrefix" }),
+        SpeakeasyMetadata({ data: "json, name=filterNamePrefix" }),
         __metadata("design:type", String)
     ], DescribeMetricFiltersRequest.prototype, "filterNamePrefix", void 0);
     __decorate([
-        Metadata({ data: "json, name=limit" }),
+        SpeakeasyMetadata({ data: "json, name=limit" }),
         __metadata("design:type", Number)
     ], DescribeMetricFiltersRequest.prototype, "limit", void 0);
     __decorate([
-        Metadata({ data: "json, name=logGroupName" }),
+        SpeakeasyMetadata({ data: "json, name=logGroupName" }),
         __metadata("design:type", String)
     ], DescribeMetricFiltersRequest.prototype, "logGroupName", void 0);
     __decorate([
-        Metadata({ data: "json, name=metricName" }),
+        SpeakeasyMetadata({ data: "json, name=metricName" }),
         __metadata("design:type", String)
     ], DescribeMetricFiltersRequest.prototype, "metricName", void 0);
     __decorate([
-        Metadata({ data: "json, name=metricNamespace" }),
+        SpeakeasyMetadata({ data: "json, name=metricNamespace" }),
         __metadata("design:type", String)
     ], DescribeMetricFiltersRequest.prototype, "metricNamespace", void 0);
     __decorate([
-        Metadata({ data: "json, name=nextToken" }),
+        SpeakeasyMetadata({ data: "json, name=nextToken" }),
         __metadata("design:type", String)
     ], DescribeMetricFiltersRequest.prototype, "nextToken", void 0);
     return DescribeMetricFiltersRequest;

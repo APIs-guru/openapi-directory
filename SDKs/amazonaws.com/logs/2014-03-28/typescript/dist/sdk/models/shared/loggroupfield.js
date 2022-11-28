@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // LogGroupField
 /**
  * The fields contained in log events found by a <code>GetLogGroupFields</code> operation, along with the percentage of queried log events in which each field appears.
@@ -33,11 +33,11 @@ var LogGroupField = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], LogGroupField.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=percent" }),
+        SpeakeasyMetadata({ data: "json, name=percent" }),
         __metadata("design:type", Number)
     ], LogGroupField.prototype, "percent", void 0);
     return LogGroupField;

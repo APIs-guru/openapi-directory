@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // MissionProfileListItem
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Item in a list of mission profiles.
 **/
 export class MissionProfileListItem extends SpeakeasyBase {
-  @Metadata({ data: "json, name=missionProfileArn" })
+  @SpeakeasyMetadata({ data: "json, name=missionProfileArn" })
   missionProfileArn?: string;
 
-  @Metadata({ data: "json, name=missionProfileId" })
+  @SpeakeasyMetadata({ data: "json, name=missionProfileId" })
   missionProfileId?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=region" })
+  @SpeakeasyMetadata({ data: "json, name=region" })
   region?: string;
 }

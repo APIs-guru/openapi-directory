@@ -1,6 +1,7 @@
 
 
+
 export enum PermissionNameEnum {
-    Builder = "builder"
-,    Manager = "manager"
+    Builder = "builder",
+    Manager = "manager"
 }

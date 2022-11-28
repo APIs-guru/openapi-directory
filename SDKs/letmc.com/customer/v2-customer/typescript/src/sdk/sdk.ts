@@ -1,15 +1,13 @@
-import axios, { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
-import { MatchContentType } from "../internal/utils/contenttype";
+import axios, { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse, ParamsSerializerOptions } from "axios";
 import * as operations from "./models/operations";
-import { ParamsSerializerOptions } from "axios";
-import { GetQueryParamSerializer } from "../internal/utils/queryparams";
-import { CreateSecurityClient } from "../internal/utils/security";
-import * as utils from "../internal/utils/utils";
+import * as utils from "../internal/utils";
+
+
 
 type OptsFunc = (sdk: SDK) => void;
 
-const Servers = [
-  "https://live-api.letmc.com",
+export const ServerList = [
+	"https://live-api.letmc.com",
 ] as const;
 
 export function WithServerURL(
@@ -20,47 +18,47 @@ export function WithServerURL(
     if (params != null) {
       serverURL = utils.ReplaceParameters(serverURL, params);
     }
-    sdk.serverURL = serverURL;
+    sdk._serverURL = serverURL;
   };
 }
 
 export function WithClient(client: AxiosInstance): OptsFunc {
   return (sdk: SDK) => {
-    sdk.defaultClient = client;
+    sdk._defaultClient = client;
   };
 }
 
 
 export class SDK {
-  defaultClient?: AxiosInstance;
-  securityClient?: AxiosInstance;
-  security?: any;
-  serverURL: string;
+
+  public _defaultClient: AxiosInstance;
+  public _securityClient: AxiosInstance;
+  
+  public _serverURL: string;
+  private _language = "typescript";
+  private _sdkVersion = "0.0.1";
+  private _genVersion = "internal";
 
   constructor(...opts: OptsFunc[]) {
     opts.forEach((o) => o(this));
-    if (this.serverURL == "") {
-      this.serverURL = Servers[0];
+    if (this._serverURL == "") {
+      this._serverURL = ServerList[0];
     }
 
-    if (!this.defaultClient) {
-      this.defaultClient = axios.create({ baseURL: this.serverURL });
+    if (!this._defaultClient) {
+      this._defaultClient = axios.create({ baseURL: this._serverURL });
     }
 
-    if (!this.securityClient) {
-      if (this.security) {
-        this.securityClient = CreateSecurityClient(
-          this.defaultClient,
-          this.security
-        );
-      } else {
-        this.securityClient = this.defaultClient;
-      }
+    if (!this._securityClient) {
+      this._securityClient = this._defaultClient;
     }
+    
   }
   
-  // BranchControllerGetBranches - All branches defined for a company
-  BranchControllerGetBranches(
+  /**
+   * branchControllerGetBranches - All branches defined for a company
+  **/
+  branchControllerGetBranches(
     req: operations.BranchControllerGetBranchesRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.BranchControllerGetBranchesResponse> {
@@ -68,12 +66,11 @@ export class SDK {
       req = new operations.BranchControllerGetBranchesRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/v2/customer/{shortName}/branch/branches", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -82,29 +79,30 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.BranchControllerGetBranchesResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.BranchControllerGetBranchesResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.branchModelResults = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.branchModelResults = httpRes?.data;
             }
-            if (MatchContentType(contentType, `application/xml`)) {
+            if (utils.MatchContentType(contentType, `application/xml`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `text/xml`)) {
+            if (utils.MatchContentType(contentType, `text/xml`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
@@ -119,8 +117,10 @@ export class SDK {
   }
 
   
-  // GetV2CustomerShortNameBranchBranchesBranchId - Get a specific branch given its unique Object ID (OID)
-  GetV2CustomerShortNameBranchBranchesBranchId(
+  /**
+   * getV2CustomerShortNameBranchBranchesBranchId - Get a specific branch given its unique Object ID (OID)
+  **/
+  getV2CustomerShortNameBranchBranchesBranchId(
     req: operations.GetV2CustomerShortNameBranchBranchesBranchIdRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetV2CustomerShortNameBranchBranchesBranchIdResponse> {
@@ -128,35 +128,35 @@ export class SDK {
       req = new operations.GetV2CustomerShortNameBranchBranchesBranchIdRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/v2/customer/{shortName}/branch/branches/{branchID}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetV2CustomerShortNameBranchBranchesBranchIdResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetV2CustomerShortNameBranchBranchesBranchIdResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.branchModel = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.branchModel = httpRes?.data;
             }
-            if (MatchContentType(contentType, `application/xml`)) {
+            if (utils.MatchContentType(contentType, `application/xml`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `text/xml`)) {
+            if (utils.MatchContentType(contentType, `text/xml`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
@@ -171,8 +171,10 @@ export class SDK {
   }
 
   
-  // LandlordControllerCreateMaintenancePreference - Post tenancy maintenance preferences:-
-  LandlordControllerCreateMaintenancePreference(
+  /**
+   * landlordControllerCreateMaintenancePreference - Post tenancy maintenance preferences:-
+  **/
+  landlordControllerCreateMaintenancePreference(
     req: operations.LandlordControllerCreateMaintenancePreferenceRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.LandlordControllerCreateMaintenancePreferenceResponse> {
@@ -180,12 +182,11 @@ export class SDK {
       req = new operations.LandlordControllerCreateMaintenancePreferenceRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/v2/customer/{shortName}/landlord/tenancy/maintenance/preference", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -194,26 +195,27 @@ export class SDK {
     };
     
     return client
-      .post(url, {
+      .request({
+        url: url,
+        method: "post",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.LandlordControllerCreateMaintenancePreferenceResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.LandlordControllerCreateMaintenancePreferenceResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.landlordControllerCreateMaintenancePreference200ApplicationJsonString = JSON.stringify(httpRes?.data);
             }
-            if (MatchContentType(contentType, `application/xml`)) {
+            if (utils.MatchContentType(contentType, `application/xml`)) {
                 res.landlordControllerCreateMaintenancePreference200ApplicationXmlString = JSON.stringify(httpRes?.data);
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.landlordControllerCreateMaintenancePreference200TextJsonString = JSON.stringify(httpRes?.data);
             }
-            if (MatchContentType(contentType, `text/xml`)) {
+            if (utils.MatchContentType(contentType, `text/xml`)) {
                 res.landlordControllerCreateMaintenancePreference200TextXmlString = JSON.stringify(httpRes?.data);
             }
             break;
@@ -225,8 +227,10 @@ export class SDK {
   }
 
   
-  // LandlordControllerGetAccounts - Get the accounting details for the landlord.
-  LandlordControllerGetAccounts(
+  /**
+   * landlordControllerGetAccounts - Get the accounting details for the landlord.
+  **/
+  landlordControllerGetAccounts(
     req: operations.LandlordControllerGetAccountsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.LandlordControllerGetAccountsResponse> {
@@ -234,12 +238,11 @@ export class SDK {
       req = new operations.LandlordControllerGetAccountsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/v2/customer/{shortName}/landlord/accounting", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -248,20 +251,21 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.LandlordControllerGetAccountsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.LandlordControllerGetAccountsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.landlordAccountingModel = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.landlordAccountingModel = httpRes?.data;
             }
             break;
@@ -273,8 +277,10 @@ export class SDK {
   }
 
   
-  // LandlordControllerGetDocument - Download a Document
-  LandlordControllerGetDocument(
+  /**
+   * landlordControllerGetDocument - Download a Document
+  **/
+  landlordControllerGetDocument(
     req: operations.LandlordControllerGetDocumentRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.LandlordControllerGetDocumentResponse> {
@@ -282,12 +288,11 @@ export class SDK {
       req = new operations.LandlordControllerGetDocumentRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/v2/customer/{shortName}/landlord/document", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -296,29 +301,30 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.LandlordControllerGetDocumentResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.LandlordControllerGetDocumentResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.object = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.object = httpRes?.data;
             }
-            if (MatchContentType(contentType, `application/xml`)) {
+            if (utils.MatchContentType(contentType, `application/xml`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `text/xml`)) {
+            if (utils.MatchContentType(contentType, `text/xml`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
@@ -333,8 +339,10 @@ export class SDK {
   }
 
   
-  // LandlordControllerGetInvetoryReport - Generate a Inventory PDF for a tenancy
-  LandlordControllerGetInvetoryReport(
+  /**
+   * landlordControllerGetInvetoryReport - Generate a Inventory PDF for a tenancy
+  **/
+  landlordControllerGetInvetoryReport(
     req: operations.LandlordControllerGetInvetoryReportRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.LandlordControllerGetInvetoryReportResponse> {
@@ -342,12 +350,11 @@ export class SDK {
       req = new operations.LandlordControllerGetInvetoryReportRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/v2/customer/{shortName}/landlord/inventory", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -356,29 +363,30 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.LandlordControllerGetInvetoryReportResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.LandlordControllerGetInvetoryReportResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.object = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.object = httpRes?.data;
             }
-            if (MatchContentType(contentType, `application/xml`)) {
+            if (utils.MatchContentType(contentType, `application/xml`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `text/xml`)) {
+            if (utils.MatchContentType(contentType, `text/xml`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
@@ -393,8 +401,10 @@ export class SDK {
   }
 
   
-  // LandlordControllerGetInvoice - Get an invoice pdf belonging to the landlord.
-  LandlordControllerGetInvoice(
+  /**
+   * landlordControllerGetInvoice - Get an invoice pdf belonging to the landlord.
+  **/
+  landlordControllerGetInvoice(
     req: operations.LandlordControllerGetInvoiceRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.LandlordControllerGetInvoiceResponse> {
@@ -402,12 +412,11 @@ export class SDK {
       req = new operations.LandlordControllerGetInvoiceRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/v2/customer/{shortName}/landlord/invoice", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -416,29 +425,30 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.LandlordControllerGetInvoiceResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.LandlordControllerGetInvoiceResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.object = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.object = httpRes?.data;
             }
-            if (MatchContentType(contentType, `application/xml`)) {
+            if (utils.MatchContentType(contentType, `application/xml`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `text/xml`)) {
+            if (utils.MatchContentType(contentType, `text/xml`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
@@ -453,8 +463,10 @@ export class SDK {
   }
 
   
-  // LandlordControllerGetLandlordCrmEntries - Retrieve landlord's CRM ID
-  LandlordControllerGetLandlordCrmEntries(
+  /**
+   * landlordControllerGetLandlordCrmEntries - Retrieve landlord's CRM ID
+  **/
+  landlordControllerGetLandlordCrmEntries(
     req: operations.LandlordControllerGetLandlordCrmEntriesRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.LandlordControllerGetLandlordCrmEntriesResponse> {
@@ -462,12 +474,11 @@ export class SDK {
       req = new operations.LandlordControllerGetLandlordCrmEntriesRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/v2/customer/{shortName}/landlord/landlordcrmentries", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -476,29 +487,30 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.LandlordControllerGetLandlordCrmEntriesResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.LandlordControllerGetLandlordCrmEntriesResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.landlordCrmEntries = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.landlordCrmEntries = httpRes?.data;
             }
-            if (MatchContentType(contentType, `application/xml`)) {
+            if (utils.MatchContentType(contentType, `application/xml`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `text/xml`)) {
+            if (utils.MatchContentType(contentType, `text/xml`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
@@ -513,8 +525,10 @@ export class SDK {
   }
 
   
-  // LandlordControllerGetMaintenanceJobs - Get Active maintenance jobs.
-  LandlordControllerGetMaintenanceJobs(
+  /**
+   * landlordControllerGetMaintenanceJobs - Get Active maintenance jobs.
+  **/
+  landlordControllerGetMaintenanceJobs(
     req: operations.LandlordControllerGetMaintenanceJobsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.LandlordControllerGetMaintenanceJobsResponse> {
@@ -522,12 +536,11 @@ export class SDK {
       req = new operations.LandlordControllerGetMaintenanceJobsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/v2/customer/{shortName}/landlord/maintenance", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -536,20 +549,21 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.LandlordControllerGetMaintenanceJobsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.LandlordControllerGetMaintenanceJobsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.landlordMaintenanceModel = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.landlordMaintenanceModel = httpRes?.data;
             }
             break;
@@ -561,8 +575,10 @@ export class SDK {
   }
 
   
-  // LandlordControllerGetProfitLossReport - Generate a Profit and Loss Report
-  LandlordControllerGetProfitLossReport(
+  /**
+   * landlordControllerGetProfitLossReport - Generate a Profit and Loss Report
+  **/
+  landlordControllerGetProfitLossReport(
     req: operations.LandlordControllerGetProfitLossReportRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.LandlordControllerGetProfitLossReportResponse> {
@@ -570,12 +586,11 @@ export class SDK {
       req = new operations.LandlordControllerGetProfitLossReportRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/v2/customer/{shortName}/landlord/profitloss", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -584,20 +599,21 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.LandlordControllerGetProfitLossReportResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.LandlordControllerGetProfitLossReportResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.landlordProfitLossModel = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.landlordProfitLossModel = httpRes?.data;
             }
             break;
@@ -609,8 +625,10 @@ export class SDK {
   }
 
   
-  // LandlordControllerGetRentArrears - Rent Arrears
-  LandlordControllerGetRentArrears(
+  /**
+   * landlordControllerGetRentArrears - Rent Arrears
+  **/
+  landlordControllerGetRentArrears(
     req: operations.LandlordControllerGetRentArrearsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.LandlordControllerGetRentArrearsResponse> {
@@ -618,12 +636,11 @@ export class SDK {
       req = new operations.LandlordControllerGetRentArrearsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/v2/customer/{shortName}/landlord/rentarrears", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -632,20 +649,21 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.LandlordControllerGetRentArrearsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.LandlordControllerGetRentArrearsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.landlordRentArrearsModel = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.landlordRentArrearsModel = httpRes?.data;
             }
             break;
@@ -657,8 +675,10 @@ export class SDK {
   }
 
   
-  // LandlordControllerGetSasReport - Generate a Self Assessment Tax Report
-  LandlordControllerGetSasReport(
+  /**
+   * landlordControllerGetSasReport - Generate a Self Assessment Tax Report
+  **/
+  landlordControllerGetSasReport(
     req: operations.LandlordControllerGetSasReportRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.LandlordControllerGetSasReportResponse> {
@@ -666,12 +686,11 @@ export class SDK {
       req = new operations.LandlordControllerGetSasReportRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/v2/customer/{shortName}/landlord/sas", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -680,29 +699,30 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.LandlordControllerGetSasReportResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.LandlordControllerGetSasReportResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.object = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.object = httpRes?.data;
             }
-            if (MatchContentType(contentType, `application/xml`)) {
+            if (utils.MatchContentType(contentType, `application/xml`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `text/xml`)) {
+            if (utils.MatchContentType(contentType, `text/xml`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
@@ -717,8 +737,10 @@ export class SDK {
   }
 
   
-  // LandlordControllerGetSettings - Get contact details of all linked landlords.
-  LandlordControllerGetSettings(
+  /**
+   * landlordControllerGetSettings - Get contact details of all linked landlords.
+  **/
+  landlordControllerGetSettings(
     req: operations.LandlordControllerGetSettingsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.LandlordControllerGetSettingsResponse> {
@@ -726,12 +748,11 @@ export class SDK {
       req = new operations.LandlordControllerGetSettingsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/v2/customer/{shortName}/landlord/settings", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -740,20 +761,21 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.LandlordControllerGetSettingsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.LandlordControllerGetSettingsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.landlordSettingsModel = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.landlordSettingsModel = httpRes?.data;
             }
             break;
@@ -765,8 +787,10 @@ export class SDK {
   }
 
   
-  // LandlordControllerGetSummaryDetails - Get the summary details for the landlord.
-  LandlordControllerGetSummaryDetails(
+  /**
+   * landlordControllerGetSummaryDetails - Get the summary details for the landlord.
+  **/
+  landlordControllerGetSummaryDetails(
     req: operations.LandlordControllerGetSummaryDetailsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.LandlordControllerGetSummaryDetailsResponse> {
@@ -774,12 +798,11 @@ export class SDK {
       req = new operations.LandlordControllerGetSummaryDetailsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/v2/customer/{shortName}/landlord/summary", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -788,20 +811,21 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.LandlordControllerGetSummaryDetailsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.LandlordControllerGetSummaryDetailsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.landlordSummaryModel = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.landlordSummaryModel = httpRes?.data;
             }
             break;
@@ -813,8 +837,10 @@ export class SDK {
   }
 
   
-  // LandlordControllerGetTenancy - Get tenancy details.
-  LandlordControllerGetTenancy(
+  /**
+   * landlordControllerGetTenancy - Get tenancy details.
+  **/
+  landlordControllerGetTenancy(
     req: operations.LandlordControllerGetTenancyRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.LandlordControllerGetTenancyResponse> {
@@ -822,12 +848,11 @@ export class SDK {
       req = new operations.LandlordControllerGetTenancyRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/v2/customer/{shortName}/landlord/tenancy", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -836,20 +861,21 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.LandlordControllerGetTenancyResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.LandlordControllerGetTenancyResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.landlordTenancyModel = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.landlordTenancyModel = httpRes?.data;
             }
             break;
@@ -861,8 +887,10 @@ export class SDK {
   }
 
   
-  // LandlordControllerGetTenancyAgreementReport - Generate a Tenancy Agreement Copy (PDF)
-  LandlordControllerGetTenancyAgreementReport(
+  /**
+   * landlordControllerGetTenancyAgreementReport - Generate a Tenancy Agreement Copy (PDF)
+  **/
+  landlordControllerGetTenancyAgreementReport(
     req: operations.LandlordControllerGetTenancyAgreementReportRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.LandlordControllerGetTenancyAgreementReportResponse> {
@@ -870,12 +898,11 @@ export class SDK {
       req = new operations.LandlordControllerGetTenancyAgreementReportRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/v2/customer/{shortName}/landlord/tenancyagreement", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -884,29 +911,30 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.LandlordControllerGetTenancyAgreementReportResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.LandlordControllerGetTenancyAgreementReportResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.object = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.object = httpRes?.data;
             }
-            if (MatchContentType(contentType, `application/xml`)) {
+            if (utils.MatchContentType(contentType, `application/xml`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `text/xml`)) {
+            if (utils.MatchContentType(contentType, `text/xml`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
@@ -921,8 +949,10 @@ export class SDK {
   }
 
   
-  // PhotoControllerGetPhotoDownload - Downloads the photo of a property given the photo ID.
-  PhotoControllerGetPhotoDownload(
+  /**
+   * photoControllerGetPhotoDownload - Downloads the photo of a property given the photo ID.
+  **/
+  photoControllerGetPhotoDownload(
     req: operations.PhotoControllerGetPhotoDownloadRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PhotoControllerGetPhotoDownloadResponse> {
@@ -930,12 +960,11 @@ export class SDK {
       req = new operations.PhotoControllerGetPhotoDownloadRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/v2/customer/{shortName}/photo/download", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -944,29 +973,30 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PhotoControllerGetPhotoDownloadResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.PhotoControllerGetPhotoDownloadResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.object = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.object = httpRes?.data;
             }
-            if (MatchContentType(contentType, `application/xml`)) {
+            if (utils.MatchContentType(contentType, `application/xml`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `text/xml`)) {
+            if (utils.MatchContentType(contentType, `text/xml`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
@@ -981,8 +1011,10 @@ export class SDK {
   }
 
   
-  // PropertyControllerGetPropertiesPhotos - A collection showing all the photos linked to a specific block, property or room
-  PropertyControllerGetPropertiesPhotos(
+  /**
+   * propertyControllerGetPropertiesPhotos - A collection showing all the photos linked to a specific block, property or room
+  **/
+  propertyControllerGetPropertiesPhotos(
     req: operations.PropertyControllerGetPropertiesPhotosRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PropertyControllerGetPropertiesPhotosResponse> {
@@ -990,12 +1022,11 @@ export class SDK {
       req = new operations.PropertyControllerGetPropertiesPhotosRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/v2/customer/{shortName}/property/{propertyID}/photos", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -1004,29 +1035,30 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PropertyControllerGetPropertiesPhotosResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.PropertyControllerGetPropertiesPhotosResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.landlordPhotoModelResults = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.landlordPhotoModelResults = httpRes?.data;
             }
-            if (MatchContentType(contentType, `application/xml`)) {
+            if (utils.MatchContentType(contentType, `application/xml`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `text/xml`)) {
+            if (utils.MatchContentType(contentType, `text/xml`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
@@ -1041,8 +1073,10 @@ export class SDK {
   }
 
   
-  // SessionControllerChangePassword - Change the password of a customer given their existing and new password.
-  SessionControllerChangePassword(
+  /**
+   * sessionControllerChangePassword - Change the password of a customer given their existing and new password.
+  **/
+  sessionControllerChangePassword(
     req: operations.SessionControllerChangePasswordRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.SessionControllerChangePasswordResponse> {
@@ -1050,12 +1084,11 @@ export class SDK {
       req = new operations.SessionControllerChangePasswordRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/v2/customer/{shortName}/session/password", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -1064,16 +1097,17 @@ export class SDK {
     };
     
     return client
-      .put(url, {
+      .request({
+        url: url,
+        method: "put",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.SessionControllerChangePasswordResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 204:
+        const res: operations.SessionControllerChangePasswordResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 204:
             break;
         }
 
@@ -1083,8 +1117,10 @@ export class SDK {
   }
 
   
-  // SessionControllerCreateLandlordLogin - Send a request to the in-tray to create a landlord login.
-  SessionControllerCreateLandlordLogin(
+  /**
+   * sessionControllerCreateLandlordLogin - Send a request to the in-tray to create a landlord login.
+  **/
+  sessionControllerCreateLandlordLogin(
     req: operations.SessionControllerCreateLandlordLoginRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.SessionControllerCreateLandlordLoginResponse> {
@@ -1092,12 +1128,11 @@ export class SDK {
       req = new operations.SessionControllerCreateLandlordLoginRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/v2/customer/{shortName}/session/createlandlordlogin", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -1106,16 +1141,17 @@ export class SDK {
     };
     
     return client
-      .post(url, {
+      .request({
+        url: url,
+        method: "post",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.SessionControllerCreateLandlordLoginResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 204:
+        const res: operations.SessionControllerCreateLandlordLoginResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 204:
             break;
         }
 
@@ -1125,8 +1161,10 @@ export class SDK {
   }
 
   
-  // SessionControllerGetSessionInfo - Gets information about the currently logged on customer.
-  SessionControllerGetSessionInfo(
+  /**
+   * sessionControllerGetSessionInfo - Gets information about the currently logged on customer.
+  **/
+  sessionControllerGetSessionInfo(
     req: operations.SessionControllerGetSessionInfoRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.SessionControllerGetSessionInfoResponse> {
@@ -1134,12 +1172,11 @@ export class SDK {
       req = new operations.SessionControllerGetSessionInfoRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/v2/customer/{shortName}/session", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -1148,26 +1185,27 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.SessionControllerGetSessionInfoResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.SessionControllerGetSessionInfoResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.sessionControllerGetSessionInfo200ApplicationJsonString = JSON.stringify(httpRes?.data);
             }
-            if (MatchContentType(contentType, `application/xml`)) {
+            if (utils.MatchContentType(contentType, `application/xml`)) {
                 res.sessionControllerGetSessionInfo200ApplicationXmlString = JSON.stringify(httpRes?.data);
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.sessionControllerGetSessionInfo200TextJsonString = JSON.stringify(httpRes?.data);
             }
-            if (MatchContentType(contentType, `text/xml`)) {
+            if (utils.MatchContentType(contentType, `text/xml`)) {
                 res.sessionControllerGetSessionInfo200TextXmlString = JSON.stringify(httpRes?.data);
             }
             break;
@@ -1179,8 +1217,10 @@ export class SDK {
   }
 
   
-  // SessionControllerLogin - Login as a customer given their username and password.
-  SessionControllerLogin(
+  /**
+   * sessionControllerLogin - Login as a customer given their username and password.
+  **/
+  sessionControllerLogin(
     req: operations.SessionControllerLoginRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.SessionControllerLoginResponse> {
@@ -1188,12 +1228,11 @@ export class SDK {
       req = new operations.SessionControllerLoginRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/v2/customer/{shortName}/session", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -1202,26 +1241,27 @@ export class SDK {
     };
     
     return client
-      .post(url, {
+      .request({
+        url: url,
+        method: "post",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.SessionControllerLoginResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.SessionControllerLoginResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.sessionControllerLogin200ApplicationJsonString = JSON.stringify(httpRes?.data);
             }
-            if (MatchContentType(contentType, `application/xml`)) {
+            if (utils.MatchContentType(contentType, `application/xml`)) {
                 res.sessionControllerLogin200ApplicationXmlString = JSON.stringify(httpRes?.data);
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.sessionControllerLogin200TextJsonString = JSON.stringify(httpRes?.data);
             }
-            if (MatchContentType(contentType, `text/xml`)) {
+            if (utils.MatchContentType(contentType, `text/xml`)) {
                 res.sessionControllerLogin200TextXmlString = JSON.stringify(httpRes?.data);
             }
             break;
@@ -1233,8 +1273,10 @@ export class SDK {
   }
 
   
-  // SessionControllerLogout - Logout a customer previously logged in via the Login endpoint.
-  SessionControllerLogout(
+  /**
+   * sessionControllerLogout - Logout a customer previously logged in via the Login endpoint.
+  **/
+  sessionControllerLogout(
     req: operations.SessionControllerLogoutRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.SessionControllerLogoutResponse> {
@@ -1242,12 +1284,11 @@ export class SDK {
       req = new operations.SessionControllerLogoutRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/v2/customer/{shortName}/session", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -1256,16 +1297,17 @@ export class SDK {
     };
     
     return client
-      .delete(url, {
+      .request({
+        url: url,
+        method: "delete",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.SessionControllerLogoutResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 204:
+        const res: operations.SessionControllerLogoutResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 204:
             break;
         }
 
@@ -1275,8 +1317,10 @@ export class SDK {
   }
 
   
-  // SessionControllerResetPassword - Reset the customer's password. An email will be sent out to reset.
-  SessionControllerResetPassword(
+  /**
+   * sessionControllerResetPassword - Reset the customer's password. An email will be sent out to reset.
+  **/
+  sessionControllerResetPassword(
     req: operations.SessionControllerResetPasswordRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.SessionControllerResetPasswordResponse> {
@@ -1284,12 +1328,11 @@ export class SDK {
       req = new operations.SessionControllerResetPasswordRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/v2/customer/{shortName}/session/resetpassword", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -1298,16 +1341,17 @@ export class SDK {
     };
     
     return client
-      .post(url, {
+      .request({
+        url: url,
+        method: "post",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.SessionControllerResetPasswordResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 204:
+        const res: operations.SessionControllerResetPasswordResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 204:
             break;
         }
 

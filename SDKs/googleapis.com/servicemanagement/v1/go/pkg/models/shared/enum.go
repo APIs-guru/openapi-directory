@@ -7,6 +7,8 @@ const (
 	EnumSyntaxEnumSyntaxProto3 EnumSyntaxEnum = "SYNTAX_PROTO3"
 )
 
+// Enum
+// Enum type definition.
 type Enum struct {
 	Enumvalue     []EnumValue     `json:"enumvalue,omitempty"`
 	Name          *string         `json:"name,omitempty"`

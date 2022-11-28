@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudRecaptchaenterpriseV1IosKeySettings
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Settings specific to keys that can be used by iOS apps.
 **/
 export class GoogleCloudRecaptchaenterpriseV1IosKeySettings extends SpeakeasyBase {
-  @Metadata({ data: "json, name=allowAllBundleIds" })
+  @SpeakeasyMetadata({ data: "json, name=allowAllBundleIds" })
   allowAllBundleIds?: boolean;
 
-  @Metadata({ data: "json, name=allowedBundleIds" })
+  @SpeakeasyMetadata({ data: "json, name=allowedBundleIds" })
   allowedBundleIds?: string[];
 }

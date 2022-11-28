@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // CreateLunaClientRequest
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Contains the inputs for the <a>CreateLunaClient</a> action.
 **/
 export class CreateLunaClientRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Certificate" })
+  @SpeakeasyMetadata({ data: "json, name=Certificate" })
   certificate: string;
 
-  @Metadata({ data: "json, name=Label" })
+  @SpeakeasyMetadata({ data: "json, name=Label" })
   label?: string;
 }

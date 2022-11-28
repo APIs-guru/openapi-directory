@@ -1,5 +1,7 @@
 package shared
 
+// RemoteImageResult
+// Class RemoteImageResult.
 type RemoteImageResult struct {
 	Images           []RemoteImageInfo `json:"Images,omitempty"`
 	Providers        []string          `json:"Providers,omitempty"`

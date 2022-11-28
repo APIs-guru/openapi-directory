@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PlatformEnum } from "./platformenum";
 import { ImageTypeEnum } from "./imagetypeenum";
 // ImageVersion
@@ -35,35 +35,35 @@ var ImageVersion = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=arn" }),
+        SpeakeasyMetadata({ data: "json, name=arn" }),
         __metadata("design:type", String)
     ], ImageVersion.prototype, "arn", void 0);
     __decorate([
-        Metadata({ data: "json, name=dateCreated" }),
+        SpeakeasyMetadata({ data: "json, name=dateCreated" }),
         __metadata("design:type", String)
     ], ImageVersion.prototype, "dateCreated", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], ImageVersion.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=osVersion" }),
+        SpeakeasyMetadata({ data: "json, name=osVersion" }),
         __metadata("design:type", String)
     ], ImageVersion.prototype, "osVersion", void 0);
     __decorate([
-        Metadata({ data: "json, name=owner" }),
+        SpeakeasyMetadata({ data: "json, name=owner" }),
         __metadata("design:type", String)
     ], ImageVersion.prototype, "owner", void 0);
     __decorate([
-        Metadata({ data: "json, name=platform" }),
+        SpeakeasyMetadata({ data: "json, name=platform" }),
         __metadata("design:type", String)
     ], ImageVersion.prototype, "platform", void 0);
     __decorate([
-        Metadata({ data: "json, name=type" }),
+        SpeakeasyMetadata({ data: "json, name=type" }),
         __metadata("design:type", String)
     ], ImageVersion.prototype, "type", void 0);
     __decorate([
-        Metadata({ data: "json, name=version" }),
+        SpeakeasyMetadata({ data: "json, name=version" }),
         __metadata("design:type", String)
     ], ImageVersion.prototype, "version", void 0);
     return ImageVersion;

@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { JourneyEmailMessage } from "./journeyemailmessage";
+
 
 
 // EmailMessageActivity
@@ -7,15 +8,15 @@ import { JourneyEmailMessage } from "./journeyemailmessage";
  * Specifies the settings for an email activity in a journey. This type of activity sends an email message to participants.
 **/
 export class EmailMessageActivity extends SpeakeasyBase {
-  @Metadata({ data: "json, name=MessageConfig" })
+  @SpeakeasyMetadata({ data: "json, name=MessageConfig" })
   messageConfig?: JourneyEmailMessage;
 
-  @Metadata({ data: "json, name=NextActivity" })
+  @SpeakeasyMetadata({ data: "json, name=NextActivity" })
   nextActivity?: string;
 
-  @Metadata({ data: "json, name=TemplateName" })
+  @SpeakeasyMetadata({ data: "json, name=TemplateName" })
   templateName?: string;
 
-  @Metadata({ data: "json, name=TemplateVersion" })
+  @SpeakeasyMetadata({ data: "json, name=TemplateVersion" })
   templateVersion?: string;
 }

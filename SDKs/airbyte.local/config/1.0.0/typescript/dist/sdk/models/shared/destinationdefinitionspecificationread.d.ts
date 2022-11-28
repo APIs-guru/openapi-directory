@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { SynchronousJobRead } from "./synchronousjobread";
 import { DestinationSyncModeEnum } from "./destinationsyncmodeenum";
 export declare class DestinationDefinitionSpecificationRead extends SpeakeasyBase {

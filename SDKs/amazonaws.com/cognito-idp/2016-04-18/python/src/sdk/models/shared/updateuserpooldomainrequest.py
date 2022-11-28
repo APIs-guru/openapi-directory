@@ -1,12 +1,20 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from dataclasses_json import dataclass_json
-from . import customdomainconfigtype
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class UpdateUserPoolDomainRequest:
-    custom_domain_config: customdomainconfigtype.CustomDomainConfigType = field(default=None, metadata={'dataclasses_json': { 'field_name': 'CustomDomainConfig' }})
-    domain: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Domain' }})
-    user_pool_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'UserPoolId' }})
+    r"""UpdateUserPoolDomainRequest
+    The UpdateUserPoolDomain request input.
+    """
+    
+    custom_domain_config: CustomDomainConfigType = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('CustomDomainConfig') }})
+    domain: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Domain') }})
+    user_pool_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('UserPoolId') }})
     

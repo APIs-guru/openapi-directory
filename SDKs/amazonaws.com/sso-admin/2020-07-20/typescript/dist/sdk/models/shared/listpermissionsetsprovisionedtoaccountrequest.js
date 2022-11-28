@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ProvisioningStatusEnum } from "./provisioningstatusenum";
 var ListPermissionSetsProvisionedToAccountRequest = /** @class */ (function (_super) {
     __extends(ListPermissionSetsProvisionedToAccountRequest, _super);
@@ -30,23 +30,23 @@ var ListPermissionSetsProvisionedToAccountRequest = /** @class */ (function (_su
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=AccountId" }),
+        SpeakeasyMetadata({ data: "json, name=AccountId" }),
         __metadata("design:type", String)
     ], ListPermissionSetsProvisionedToAccountRequest.prototype, "accountId", void 0);
     __decorate([
-        Metadata({ data: "json, name=InstanceArn" }),
+        SpeakeasyMetadata({ data: "json, name=InstanceArn" }),
         __metadata("design:type", String)
     ], ListPermissionSetsProvisionedToAccountRequest.prototype, "instanceArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=MaxResults" }),
+        SpeakeasyMetadata({ data: "json, name=MaxResults" }),
         __metadata("design:type", Number)
     ], ListPermissionSetsProvisionedToAccountRequest.prototype, "maxResults", void 0);
     __decorate([
-        Metadata({ data: "json, name=NextToken" }),
+        SpeakeasyMetadata({ data: "json, name=NextToken" }),
         __metadata("design:type", String)
     ], ListPermissionSetsProvisionedToAccountRequest.prototype, "nextToken", void 0);
     __decorate([
-        Metadata({ data: "json, name=ProvisioningStatus" }),
+        SpeakeasyMetadata({ data: "json, name=ProvisioningStatus" }),
         __metadata("design:type", String)
     ], ListPermissionSetsProvisionedToAccountRequest.prototype, "provisioningStatus", void 0);
     return ListPermissionSetsProvisionedToAccountRequest;

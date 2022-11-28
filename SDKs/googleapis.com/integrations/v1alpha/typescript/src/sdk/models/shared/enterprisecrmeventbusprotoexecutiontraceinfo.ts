@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // EnterpriseCrmEventbusProtoExecutionTraceInfo
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Message that helps aggregate all sub-executions triggered by one execution and keeps track of child-parent relationships.
 **/
 export class EnterpriseCrmEventbusProtoExecutionTraceInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=parentEventExecutionInfoId" })
+  @SpeakeasyMetadata({ data: "json, name=parentEventExecutionInfoId" })
   parentEventExecutionInfoId?: string;
 
-  @Metadata({ data: "json, name=traceId" })
+  @SpeakeasyMetadata({ data: "json, name=traceId" })
   traceId?: string;
 }

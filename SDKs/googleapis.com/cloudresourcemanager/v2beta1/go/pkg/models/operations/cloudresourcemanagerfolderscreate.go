@@ -26,7 +26,7 @@ type CloudresourcemanagerFoldersCreateSecurity struct {
 
 type CloudresourcemanagerFoldersCreateRequest struct {
 	QueryParams CloudresourcemanagerFoldersCreateQueryParams
-	Request     *shared.Folder `request:"mediaType=application/json"`
+	Request     *shared.FolderInput `request:"mediaType=application/json"`
 	Security    CloudresourcemanagerFoldersCreateSecurity
 }
 

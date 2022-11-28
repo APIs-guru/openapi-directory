@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// Resource
+// Describes a resource associated with a resource share.
 type Resource struct {
 	Arn              *string             `json:"arn,omitempty"`
 	CreationTime     *time.Time          `json:"creationTime,omitempty"`

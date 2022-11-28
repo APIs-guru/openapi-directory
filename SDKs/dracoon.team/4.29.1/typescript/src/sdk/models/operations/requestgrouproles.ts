@@ -1,38 +1,39 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class RequestGroupRolesPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=group_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=group_id" })
   groupId: number;
 }
 
 
 export class RequestGroupRolesHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Sds-Auth-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Sds-Auth-Token" })
   xSdsAuthToken?: string;
 }
 
 
 export class RequestGroupRolesRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: RequestGroupRolesPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: RequestGroupRolesHeaders;
 }
 
 
 export class RequestGroupRolesResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   errorResponse?: shared.ErrorResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   roleList?: shared.RoleList;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

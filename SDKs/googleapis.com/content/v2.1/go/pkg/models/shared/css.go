@@ -1,5 +1,7 @@
 package shared
 
+// CSS
+// Information about CSS domain.
 type CSS struct {
 	CSSDomainID *string  `json:"cssDomainId,omitempty"`
 	CSSGroupID  *string  `json:"cssGroupId,omitempty"`

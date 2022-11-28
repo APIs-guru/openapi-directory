@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { StatusValuesEnum } from "./statusvaluesenum";
 /**
  * A structure that is used to provide the status of the provisioning operation for a specified permission set.

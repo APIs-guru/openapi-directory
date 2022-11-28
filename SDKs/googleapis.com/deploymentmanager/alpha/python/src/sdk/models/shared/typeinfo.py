@@ -1,17 +1,22 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import typeinfoschemainfo
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class TypeInfo:
-    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
-    documentation_link: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'documentationLink' }})
-    kind: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'kind' }})
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    schema: Optional[typeinfoschemainfo.TypeInfoSchemaInfo] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'schema' }})
-    self_link: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'selfLink' }})
-    title: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'title' }})
+    r"""TypeInfo
+    Type Information. Contains detailed information about a composite type, base type, or base type with specific collection.
+    """
+    
+    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('description') }})
+    documentation_link: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('documentationLink') }})
+    kind: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('kind') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    schema: Optional[TypeInfoSchemaInfo] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('schema') }})
+    self_link: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('selfLink') }})
+    title: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('title') }})
     

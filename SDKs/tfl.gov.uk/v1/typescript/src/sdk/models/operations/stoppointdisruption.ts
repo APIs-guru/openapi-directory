@@ -1,44 +1,45 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class StopPointDisruptionPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=ids" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=ids" })
   ids: string[];
 }
 
 
 export class StopPointDisruptionQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=flattenResponse" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=flattenResponse" })
   flattenResponse?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=getFamily" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=getFamily" })
   getFamily?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=includeRouteBlockedStops" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=includeRouteBlockedStops" })
   includeRouteBlockedStops?: boolean;
 }
 
 
 export class StopPointDisruptionRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: StopPointDisruptionPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: StopPointDisruptionQueryParams;
 }
 
 
 export class StopPointDisruptionResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata({ elemType: shared.TflApiPresentationEntitiesDisruptedPoint })
+  @SpeakeasyMetadata({ elemType: shared.TflApiPresentationEntitiesDisruptedPoint })
   tflApiPresentationEntitiesDisruptedPoints?: shared.TflApiPresentationEntitiesDisruptedPoint[];
 }

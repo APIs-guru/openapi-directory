@@ -1,13 +1,18 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import advertiser
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class AdvertisersListResponse:
-    advertisers: Optional[List[advertiser.Advertiser]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'advertisers' }})
-    kind: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'kind' }})
-    next_page_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'nextPageToken' }})
+    r"""AdvertisersListResponse
+    Advertiser List Response
+    """
+    
+    advertisers: Optional[List[Advertiser]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('advertisers') }})
+    kind: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('kind') }})
+    next_page_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('nextPageToken') }})
     

@@ -1,8 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ActiveContext } from "./activecontext";
 import { DialogAction } from "./dialogaction";
 import { Intent } from "./intent";
+
 
 
 // SessionState
@@ -10,18 +10,18 @@ import { Intent } from "./intent";
  * The state of the user's session with Amazon Lex V2.
 **/
 export class SessionState extends SpeakeasyBase {
-  @Metadata({ data: "json, name=activeContexts", elemType: shared.ActiveContext })
+  @SpeakeasyMetadata({ data: "json, name=activeContexts", elemType: ActiveContext })
   activeContexts?: ActiveContext[];
 
-  @Metadata({ data: "json, name=dialogAction" })
+  @SpeakeasyMetadata({ data: "json, name=dialogAction" })
   dialogAction?: DialogAction;
 
-  @Metadata({ data: "json, name=intent" })
+  @SpeakeasyMetadata({ data: "json, name=intent" })
   intent?: Intent;
 
-  @Metadata({ data: "json, name=originatingRequestId" })
+  @SpeakeasyMetadata({ data: "json, name=originatingRequestId" })
   originatingRequestId?: string;
 
-  @Metadata({ data: "json, name=sessionAttributes" })
+  @SpeakeasyMetadata({ data: "json, name=sessionAttributes" })
   sessionAttributes?: Map<string, string>;
 }

@@ -1,20 +1,20 @@
 from dataclasses import dataclass, field
-
+from typing import Optional
 
 
 @dataclass
 class AuthorizationCategoriesDeletePathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class AuthorizationCategoriesDeleteRequest:
-    path_params: AuthorizationCategoriesDeletePathParams = field(default=None)
+    path_params: AuthorizationCategoriesDeletePathParams = field()
     
 
 @dataclass
 class AuthorizationCategoriesDeleteResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

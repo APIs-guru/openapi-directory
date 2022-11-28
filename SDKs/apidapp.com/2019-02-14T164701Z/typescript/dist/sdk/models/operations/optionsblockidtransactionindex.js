@@ -22,18 +22,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var OptionsBlockIdTransactionIndexPathParams = /** @class */ (function (_super) {
     __extends(OptionsBlockIdTransactionIndexPathParams, _super);
     function OptionsBlockIdTransactionIndexPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=id" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" }),
         __metadata("design:type", String)
     ], OptionsBlockIdTransactionIndexPathParams.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=index" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=index" }),
         __metadata("design:type", String)
     ], OptionsBlockIdTransactionIndexPathParams.prototype, "index", void 0);
     return OptionsBlockIdTransactionIndexPathParams;
@@ -45,7 +45,7 @@ var OptionsBlockIdTransactionIndexRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", OptionsBlockIdTransactionIndexPathParams)
     ], OptionsBlockIdTransactionIndexRequest.prototype, "pathParams", void 0);
     return OptionsBlockIdTransactionIndexRequest;
@@ -57,19 +57,19 @@ var OptionsBlockIdTransactionIndexResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], OptionsBlockIdTransactionIndexResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Map)
     ], OptionsBlockIdTransactionIndexResponse.prototype, "empty", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Map)
     ], OptionsBlockIdTransactionIndexResponse.prototype, "headers", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], OptionsBlockIdTransactionIndexResponse.prototype, "statusCode", void 0);
     return OptionsBlockIdTransactionIndexResponse;

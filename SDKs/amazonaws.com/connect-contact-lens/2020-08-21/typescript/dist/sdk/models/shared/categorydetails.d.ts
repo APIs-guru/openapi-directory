@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { PointOfInterest } from "./pointofinterest";
 /**
  * Provides information about the category rule that was matched.

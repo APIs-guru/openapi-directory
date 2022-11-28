@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // PlacementSummary
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * An object providing summary information for a particular placement.
 **/
 export class PlacementSummary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=createdDate" })
+  @SpeakeasyMetadata({ data: "json, name=createdDate" })
   createdDate: Date;
 
-  @Metadata({ data: "json, name=placementName" })
+  @SpeakeasyMetadata({ data: "json, name=placementName" })
   placementName: string;
 
-  @Metadata({ data: "json, name=projectName" })
+  @SpeakeasyMetadata({ data: "json, name=projectName" })
   projectName: string;
 
-  @Metadata({ data: "json, name=updatedDate" })
+  @SpeakeasyMetadata({ data: "json, name=updatedDate" })
   updatedDate: Date;
 }

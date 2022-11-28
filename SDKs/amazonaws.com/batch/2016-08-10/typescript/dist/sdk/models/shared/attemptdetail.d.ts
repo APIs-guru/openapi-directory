@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { AttemptContainerDetail } from "./attemptcontainerdetail";
 /**
  * An object representing a job attempt.

@@ -1,77 +1,78 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class PushUriToAccountIdSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   oauthsecurity: shared.SchemeOauthsecurity;
 }
 
 
-export class PushUriToAccountIdRequest extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=multipart/form-data" })
-  request?: any;
-
-  @Metadata()
-  security: PushUriToAccountIdSecurity;
-}
-
-
 export class PushUriToAccountId400ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=error" })
+  @SpeakeasyMetadata({ data: "json, name=error" })
   error?: string;
 
-  @Metadata({ data: "json, name=error_description" })
+  @SpeakeasyMetadata({ data: "json, name=error_description" })
   errorDescription?: string;
 }
 
 
 export class PushUriToAccountId401ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=error" })
+  @SpeakeasyMetadata({ data: "json, name=error" })
   error?: string;
 
-  @Metadata({ data: "json, name=error_description" })
+  @SpeakeasyMetadata({ data: "json, name=error_description" })
   errorDescription?: string;
 }
 
 
 export class PushUriToAccountId404ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=error" })
+  @SpeakeasyMetadata({ data: "json, name=error" })
   error?: string;
 
-  @Metadata({ data: "json, name=error_description" })
+  @SpeakeasyMetadata({ data: "json, name=error_description" })
   errorDescription?: string;
 }
 
 
 export class PushUriToAccountId500ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=error" })
+  @SpeakeasyMetadata({ data: "json, name=error" })
   error?: string;
 
-  @Metadata({ data: "json, name=error_description" })
+  @SpeakeasyMetadata({ data: "json, name=error_description" })
   errorDescription?: string;
 }
 
 
+export class PushUriToAccountIdRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "request, media_type=multipart/form-data" })
+  request?: any;
+
+  @SpeakeasyMetadata()
+  security: PushUriToAccountIdSecurity;
+}
+
+
 export class PushUriToAccountIdResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   pushUriToAccountId400ApplicationJsonObject?: PushUriToAccountId400ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   pushUriToAccountId401ApplicationJsonObject?: PushUriToAccountId401ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   pushUriToAccountId404ApplicationJsonObject?: PushUriToAccountId404ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   pushUriToAccountId500ApplicationJsonObject?: PushUriToAccountId500ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   sample?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

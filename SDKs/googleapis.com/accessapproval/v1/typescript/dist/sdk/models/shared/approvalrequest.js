@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ApproveDecision } from "./approvedecision";
 import { DismissDecision } from "./dismissdecision";
 import { AccessLocations } from "./accesslocations";
@@ -38,39 +38,39 @@ var ApprovalRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=approve" }),
+        SpeakeasyMetadata({ data: "json, name=approve" }),
         __metadata("design:type", ApproveDecision)
     ], ApprovalRequest.prototype, "approve", void 0);
     __decorate([
-        Metadata({ data: "json, name=dismiss" }),
+        SpeakeasyMetadata({ data: "json, name=dismiss" }),
         __metadata("design:type", DismissDecision)
     ], ApprovalRequest.prototype, "dismiss", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], ApprovalRequest.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=requestTime" }),
+        SpeakeasyMetadata({ data: "json, name=requestTime" }),
         __metadata("design:type", String)
     ], ApprovalRequest.prototype, "requestTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=requestedExpiration" }),
+        SpeakeasyMetadata({ data: "json, name=requestedExpiration" }),
         __metadata("design:type", String)
     ], ApprovalRequest.prototype, "requestedExpiration", void 0);
     __decorate([
-        Metadata({ data: "json, name=requestedLocations" }),
+        SpeakeasyMetadata({ data: "json, name=requestedLocations" }),
         __metadata("design:type", AccessLocations)
     ], ApprovalRequest.prototype, "requestedLocations", void 0);
     __decorate([
-        Metadata({ data: "json, name=requestedReason" }),
+        SpeakeasyMetadata({ data: "json, name=requestedReason" }),
         __metadata("design:type", AccessReason)
     ], ApprovalRequest.prototype, "requestedReason", void 0);
     __decorate([
-        Metadata({ data: "json, name=requestedResourceName" }),
+        SpeakeasyMetadata({ data: "json, name=requestedResourceName" }),
         __metadata("design:type", String)
     ], ApprovalRequest.prototype, "requestedResourceName", void 0);
     __decorate([
-        Metadata({ data: "json, name=requestedResourceProperties" }),
+        SpeakeasyMetadata({ data: "json, name=requestedResourceProperties" }),
         __metadata("design:type", ResourceProperties)
     ], ApprovalRequest.prototype, "requestedResourceProperties", void 0);
     return ApprovalRequest;

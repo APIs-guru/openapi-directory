@@ -1,5 +1,7 @@
 package shared
 
+// IterationPerformance
+// Represents the detailed performance data for a trained iteration
 type IterationPerformance struct {
 	PerTagPerformance     []TagPerformance `json:"PerTagPerformance,omitempty"`
 	Precision             *float64         `json:"Precision,omitempty"`

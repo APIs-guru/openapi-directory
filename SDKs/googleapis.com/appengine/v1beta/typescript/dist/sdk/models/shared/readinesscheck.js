@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // ReadinessCheck
 /**
  * Readiness checking configuration for VM instances. Unhealthy instances are removed from traffic rotation.
@@ -33,31 +33,31 @@ var ReadinessCheck = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=appStartTimeout" }),
+        SpeakeasyMetadata({ data: "json, name=appStartTimeout" }),
         __metadata("design:type", String)
     ], ReadinessCheck.prototype, "appStartTimeout", void 0);
     __decorate([
-        Metadata({ data: "json, name=checkInterval" }),
+        SpeakeasyMetadata({ data: "json, name=checkInterval" }),
         __metadata("design:type", String)
     ], ReadinessCheck.prototype, "checkInterval", void 0);
     __decorate([
-        Metadata({ data: "json, name=failureThreshold" }),
+        SpeakeasyMetadata({ data: "json, name=failureThreshold" }),
         __metadata("design:type", Number)
     ], ReadinessCheck.prototype, "failureThreshold", void 0);
     __decorate([
-        Metadata({ data: "json, name=host" }),
+        SpeakeasyMetadata({ data: "json, name=host" }),
         __metadata("design:type", String)
     ], ReadinessCheck.prototype, "host", void 0);
     __decorate([
-        Metadata({ data: "json, name=path" }),
+        SpeakeasyMetadata({ data: "json, name=path" }),
         __metadata("design:type", String)
     ], ReadinessCheck.prototype, "path", void 0);
     __decorate([
-        Metadata({ data: "json, name=successThreshold" }),
+        SpeakeasyMetadata({ data: "json, name=successThreshold" }),
         __metadata("design:type", Number)
     ], ReadinessCheck.prototype, "successThreshold", void 0);
     __decorate([
-        Metadata({ data: "json, name=timeout" }),
+        SpeakeasyMetadata({ data: "json, name=timeout" }),
         __metadata("design:type", String)
     ], ReadinessCheck.prototype, "timeout", void 0);
     return ReadinessCheck;

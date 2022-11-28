@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ScalableDimensionEnum } from "./scalabledimensionenum";
 import { ScalableTargetAction } from "./scalabletargetaction";
 import { ServiceNamespaceEnum } from "./servicenamespaceenum";
@@ -32,39 +32,39 @@ var PutScheduledActionRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=EndTime" }),
+        SpeakeasyMetadata({ data: "json, name=EndTime" }),
         __metadata("design:type", Date)
     ], PutScheduledActionRequest.prototype, "endTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=ResourceId" }),
+        SpeakeasyMetadata({ data: "json, name=ResourceId" }),
         __metadata("design:type", String)
     ], PutScheduledActionRequest.prototype, "resourceId", void 0);
     __decorate([
-        Metadata({ data: "json, name=ScalableDimension" }),
+        SpeakeasyMetadata({ data: "json, name=ScalableDimension" }),
         __metadata("design:type", String)
     ], PutScheduledActionRequest.prototype, "scalableDimension", void 0);
     __decorate([
-        Metadata({ data: "json, name=ScalableTargetAction" }),
+        SpeakeasyMetadata({ data: "json, name=ScalableTargetAction" }),
         __metadata("design:type", ScalableTargetAction)
     ], PutScheduledActionRequest.prototype, "scalableTargetAction", void 0);
     __decorate([
-        Metadata({ data: "json, name=Schedule" }),
+        SpeakeasyMetadata({ data: "json, name=Schedule" }),
         __metadata("design:type", String)
     ], PutScheduledActionRequest.prototype, "schedule", void 0);
     __decorate([
-        Metadata({ data: "json, name=ScheduledActionName" }),
+        SpeakeasyMetadata({ data: "json, name=ScheduledActionName" }),
         __metadata("design:type", String)
     ], PutScheduledActionRequest.prototype, "scheduledActionName", void 0);
     __decorate([
-        Metadata({ data: "json, name=ServiceNamespace" }),
+        SpeakeasyMetadata({ data: "json, name=ServiceNamespace" }),
         __metadata("design:type", String)
     ], PutScheduledActionRequest.prototype, "serviceNamespace", void 0);
     __decorate([
-        Metadata({ data: "json, name=StartTime" }),
+        SpeakeasyMetadata({ data: "json, name=StartTime" }),
         __metadata("design:type", Date)
     ], PutScheduledActionRequest.prototype, "startTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=Timezone" }),
+        SpeakeasyMetadata({ data: "json, name=Timezone" }),
         __metadata("design:type", String)
     ], PutScheduledActionRequest.prototype, "timezone", void 0);
     return PutScheduledActionRequest;

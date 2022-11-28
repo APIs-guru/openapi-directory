@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class ChangeServerLifeCycleStateSourceServerLifecycleStateEnum(str, Enum):
     READY_FOR_TEST = "READY_FOR_TEST"

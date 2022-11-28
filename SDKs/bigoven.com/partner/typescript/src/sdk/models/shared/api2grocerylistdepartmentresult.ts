@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class Api2GroceryListDepartmentResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=dept" })
+  @SpeakeasyMetadata({ data: "json, name=dept" })
   dept?: string;
 
-  @Metadata({ data: "json, name=item" })
+  @SpeakeasyMetadata({ data: "json, name=item" })
   item?: string;
 }

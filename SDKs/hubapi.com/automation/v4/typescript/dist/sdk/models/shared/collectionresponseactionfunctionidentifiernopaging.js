@@ -22,15 +22,15 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { ActionFunctionIdentifier } from "./actionfunctionidentifier";
 var CollectionResponseActionFunctionIdentifierNoPaging = /** @class */ (function (_super) {
     __extends(CollectionResponseActionFunctionIdentifierNoPaging, _super);
     function CollectionResponseActionFunctionIdentifierNoPaging() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=results", elemType: shared.ActionFunctionIdentifier }),
+        SpeakeasyMetadata({ data: "json, name=results", elemType: ActionFunctionIdentifier }),
         __metadata("design:type", Array)
     ], CollectionResponseActionFunctionIdentifierNoPaging.prototype, "results", void 0);
     return CollectionResponseActionFunctionIdentifierNoPaging;

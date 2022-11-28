@@ -22,26 +22,26 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var UnsubscribeFromDatasetPathParams = /** @class */ (function (_super) {
     __extends(UnsubscribeFromDatasetPathParams, _super);
     function UnsubscribeFromDatasetPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=DatasetName" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=DatasetName" }),
         __metadata("design:type", String)
     ], UnsubscribeFromDatasetPathParams.prototype, "datasetName", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=DeviceId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=DeviceId" }),
         __metadata("design:type", String)
     ], UnsubscribeFromDatasetPathParams.prototype, "deviceId", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=IdentityId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=IdentityId" }),
         __metadata("design:type", String)
     ], UnsubscribeFromDatasetPathParams.prototype, "identityId", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=IdentityPoolId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=IdentityPoolId" }),
         __metadata("design:type", String)
     ], UnsubscribeFromDatasetPathParams.prototype, "identityPoolId", void 0);
     return UnsubscribeFromDatasetPathParams;
@@ -53,31 +53,31 @@ var UnsubscribeFromDatasetHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
         __metadata("design:type", String)
     ], UnsubscribeFromDatasetHeaders.prototype, "xAmzAlgorithm", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
         __metadata("design:type", String)
     ], UnsubscribeFromDatasetHeaders.prototype, "xAmzContentSha256", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
         __metadata("design:type", String)
     ], UnsubscribeFromDatasetHeaders.prototype, "xAmzCredential", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
         __metadata("design:type", String)
     ], UnsubscribeFromDatasetHeaders.prototype, "xAmzDate", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
         __metadata("design:type", String)
     ], UnsubscribeFromDatasetHeaders.prototype, "xAmzSecurityToken", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
         __metadata("design:type", String)
     ], UnsubscribeFromDatasetHeaders.prototype, "xAmzSignature", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
         __metadata("design:type", String)
     ], UnsubscribeFromDatasetHeaders.prototype, "xAmzSignedHeaders", void 0);
     return UnsubscribeFromDatasetHeaders;
@@ -89,11 +89,11 @@ var UnsubscribeFromDatasetRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", UnsubscribeFromDatasetPathParams)
     ], UnsubscribeFromDatasetRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", UnsubscribeFromDatasetHeaders)
     ], UnsubscribeFromDatasetRequest.prototype, "headers", void 0);
     return UnsubscribeFromDatasetRequest;
@@ -105,39 +105,39 @@ var UnsubscribeFromDatasetResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], UnsubscribeFromDatasetResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], UnsubscribeFromDatasetResponse.prototype, "internalErrorException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], UnsubscribeFromDatasetResponse.prototype, "invalidConfigurationException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], UnsubscribeFromDatasetResponse.prototype, "invalidParameterException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], UnsubscribeFromDatasetResponse.prototype, "notAuthorizedException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], UnsubscribeFromDatasetResponse.prototype, "resourceNotFoundException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], UnsubscribeFromDatasetResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], UnsubscribeFromDatasetResponse.prototype, "tooManyRequestsException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Map)
     ], UnsubscribeFromDatasetResponse.prototype, "unsubscribeFromDatasetResponse", void 0);
     return UnsubscribeFromDatasetResponse;

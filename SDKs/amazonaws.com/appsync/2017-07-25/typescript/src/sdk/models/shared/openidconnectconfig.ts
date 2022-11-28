@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // OpenIdConnectConfig
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Describes an OpenID Connect configuration.
 **/
 export class OpenIdConnectConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=authTTL" })
+  @SpeakeasyMetadata({ data: "json, name=authTTL" })
   authTtl?: number;
 
-  @Metadata({ data: "json, name=clientId" })
+  @SpeakeasyMetadata({ data: "json, name=clientId" })
   clientId?: string;
 
-  @Metadata({ data: "json, name=iatTTL" })
+  @SpeakeasyMetadata({ data: "json, name=iatTTL" })
   iatTtl?: number;
 
-  @Metadata({ data: "json, name=issuer" })
+  @SpeakeasyMetadata({ data: "json, name=issuer" })
   issuer: string;
 }

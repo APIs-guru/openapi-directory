@@ -1,4 +1,7 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
@@ -25,18 +28,18 @@ class DescribeMountTargetsHeaders:
 
 @dataclass
 class DescribeMountTargetsRequest:
-    query_params: DescribeMountTargetsQueryParams = field(default=None)
-    headers: DescribeMountTargetsHeaders = field(default=None)
+    headers: DescribeMountTargetsHeaders = field()
+    query_params: DescribeMountTargetsQueryParams = field()
     
 
 @dataclass
 class DescribeMountTargetsResponse:
+    content_type: str = field()
+    status_code: int = field()
     access_point_not_found: Optional[Any] = field(default=None)
     bad_request: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     describe_mount_targets_response: Optional[shared.DescribeMountTargetsResponse] = field(default=None)
     file_system_not_found: Optional[Any] = field(default=None)
     internal_server_error: Optional[Any] = field(default=None)
     mount_target_not_found: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

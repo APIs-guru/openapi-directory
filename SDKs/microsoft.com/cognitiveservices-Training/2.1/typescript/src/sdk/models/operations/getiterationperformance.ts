@@ -1,53 +1,54 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetIterationPerformancePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=iterationId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=iterationId" })
   iterationId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=projectId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=projectId" })
   projectId: string;
 }
 
 
 export class GetIterationPerformanceQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=overlapThreshold" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=overlapThreshold" })
   overlapThreshold?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=threshold" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=threshold" })
   threshold?: number;
 }
 
 
 export class GetIterationPerformanceHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=Training-Key" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Training-Key" })
   trainingKey: string;
 }
 
 
 export class GetIterationPerformanceRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetIterationPerformancePathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetIterationPerformanceQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: GetIterationPerformanceHeaders;
 }
 
 
 export class GetIterationPerformanceResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   iterationPerformance?: shared.IterationPerformance;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

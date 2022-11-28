@@ -1,5 +1,19 @@
 package shared
 
+// WorkflowTemplateInput
+// A Dataproc workflow template resource.
+type WorkflowTemplateInput struct {
+	DagTimeout *string                         `json:"dagTimeout,omitempty"`
+	ID         *string                         `json:"id,omitempty"`
+	Jobs       []OrderedJob                    `json:"jobs,omitempty"`
+	Labels     map[string]string               `json:"labels,omitempty"`
+	Parameters []TemplateParameter             `json:"parameters,omitempty"`
+	Placement  *WorkflowTemplatePlacementInput `json:"placement,omitempty"`
+	Version    *int32                          `json:"version,omitempty"`
+}
+
+// WorkflowTemplate
+// A Dataproc workflow template resource.
 type WorkflowTemplate struct {
 	CreateTime *string                    `json:"createTime,omitempty"`
 	DagTimeout *string                    `json:"dagTimeout,omitempty"`

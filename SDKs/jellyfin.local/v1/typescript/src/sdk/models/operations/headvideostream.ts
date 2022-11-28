@@ -1,176 +1,177 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class HeadVideoStreamPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=itemId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=itemId" })
   itemId: string;
 }
 
 
 export class HeadVideoStreamQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=allowAudioStreamCopy" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=allowAudioStreamCopy" })
   allowAudioStreamCopy?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=allowVideoStreamCopy" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=allowVideoStreamCopy" })
   allowVideoStreamCopy?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=audioBitRate" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=audioBitRate" })
   audioBitRate?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=audioChannels" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=audioChannels" })
   audioChannels?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=audioCodec" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=audioCodec" })
   audioCodec?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=audioSampleRate" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=audioSampleRate" })
   audioSampleRate?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=audioStreamIndex" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=audioStreamIndex" })
   audioStreamIndex?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=breakOnNonKeyFrames" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=breakOnNonKeyFrames" })
   breakOnNonKeyFrames?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=container" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=container" })
   container?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=context" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=context" })
   context?: shared.EncodingContextEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=copyTimestamps" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=copyTimestamps" })
   copyTimestamps?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=cpuCoreLimit" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=cpuCoreLimit" })
   cpuCoreLimit?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=deInterlace" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=deInterlace" })
   deInterlace?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=deviceId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=deviceId" })
   deviceId?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=deviceProfileId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=deviceProfileId" })
   deviceProfileId?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=enableAutoStreamCopy" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=enableAutoStreamCopy" })
   enableAutoStreamCopy?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=enableMpegtsM2TsMode" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=enableMpegtsM2TsMode" })
   enableMpegtsM2TsMode?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=framerate" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=framerate" })
   framerate?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=height" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=height" })
   height?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=level" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=level" })
   level?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=liveStreamId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=liveStreamId" })
   liveStreamId?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=maxAudioBitDepth" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=maxAudioBitDepth" })
   maxAudioBitDepth?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=maxAudioChannels" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=maxAudioChannels" })
   maxAudioChannels?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=maxFramerate" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=maxFramerate" })
   maxFramerate?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=maxRefFrames" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=maxRefFrames" })
   maxRefFrames?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=maxVideoBitDepth" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=maxVideoBitDepth" })
   maxVideoBitDepth?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=mediaSourceId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=mediaSourceId" })
   mediaSourceId?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=minSegments" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=minSegments" })
   minSegments?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=params" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=params" })
   params?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=playSessionId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=playSessionId" })
   playSessionId?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=profile" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=profile" })
   profile?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=requireAvc" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=requireAvc" })
   requireAvc?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=requireNonAnamorphic" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=requireNonAnamorphic" })
   requireNonAnamorphic?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=segmentContainer" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=segmentContainer" })
   segmentContainer?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=segmentLength" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=segmentLength" })
   segmentLength?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=startTimeTicks" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=startTimeTicks" })
   startTimeTicks?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=static" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=static" })
   static?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=streamOptions" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=streamOptions" })
   streamOptions?: Map<string, string>;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=subtitleCodec" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=subtitleCodec" })
   subtitleCodec?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=subtitleMethod" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=subtitleMethod" })
   subtitleMethod?: shared.SubtitleDeliveryMethodEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=subtitleStreamIndex" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=subtitleStreamIndex" })
   subtitleStreamIndex?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=tag" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=tag" })
   tag?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=transcodeReasons" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=transcodeReasons" })
   transcodeReasons?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=transcodingMaxAudioChannels" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=transcodingMaxAudioChannels" })
   transcodingMaxAudioChannels?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=videoBitRate" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=videoBitRate" })
   videoBitRate?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=videoCodec" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=videoCodec" })
   videoCodec?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=videoStreamIndex" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=videoStreamIndex" })
   videoStreamIndex?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=width" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=width" })
   width?: number;
 }
 
 
 export class HeadVideoStreamRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: HeadVideoStreamPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: HeadVideoStreamQueryParams;
 }
 
 
 export class HeadVideoStreamResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headVideoStream200VideoWildcardBinaryString?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

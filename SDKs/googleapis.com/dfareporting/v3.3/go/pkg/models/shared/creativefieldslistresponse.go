@@ -1,5 +1,7 @@
 package shared
 
+// CreativeFieldsListResponse
+// Creative Field List Response
 type CreativeFieldsListResponse struct {
 	CreativeFields []CreativeField `json:"creativeFields,omitempty"`
 	Kind           *string         `json:"kind,omitempty"`

@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 class CloudidentityDevicesListViewEnum(str, Enum):
@@ -31,14 +32,14 @@ class CloudidentityDevicesListQueryParams:
 
 @dataclass
 class CloudidentityDevicesListSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class CloudidentityDevicesListSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -49,13 +50,13 @@ class CloudidentityDevicesListSecurity:
 
 @dataclass
 class CloudidentityDevicesListRequest:
-    query_params: CloudidentityDevicesListQueryParams = field(default=None)
-    security: CloudidentityDevicesListSecurity = field(default=None)
+    query_params: CloudidentityDevicesListQueryParams = field()
+    security: CloudidentityDevicesListSecurity = field()
     
 
 @dataclass
 class CloudidentityDevicesListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_apps_cloudidentity_devices_v1_list_devices_response: Optional[shared.GoogleAppsCloudidentityDevicesV1ListDevicesResponse] = field(default=None)
-    status_code: int = field(default=None)
     

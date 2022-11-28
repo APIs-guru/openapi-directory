@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Counters
@@ -6,24 +7,24 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Represents entity counters.
 **/
 export class Counters extends SpeakeasyBase {
-  @Metadata({ data: "json, name=errored" })
+  @SpeakeasyMetadata({ data: "json, name=errored" })
   errored?: number;
 
-  @Metadata({ data: "json, name=failed" })
+  @SpeakeasyMetadata({ data: "json, name=failed" })
   failed?: number;
 
-  @Metadata({ data: "json, name=passed" })
+  @SpeakeasyMetadata({ data: "json, name=passed" })
   passed?: number;
 
-  @Metadata({ data: "json, name=skipped" })
+  @SpeakeasyMetadata({ data: "json, name=skipped" })
   skipped?: number;
 
-  @Metadata({ data: "json, name=stopped" })
+  @SpeakeasyMetadata({ data: "json, name=stopped" })
   stopped?: number;
 
-  @Metadata({ data: "json, name=total" })
+  @SpeakeasyMetadata({ data: "json, name=total" })
   total?: number;
 
-  @Metadata({ data: "json, name=warned" })
+  @SpeakeasyMetadata({ data: "json, name=warned" })
   warned?: number;
 }

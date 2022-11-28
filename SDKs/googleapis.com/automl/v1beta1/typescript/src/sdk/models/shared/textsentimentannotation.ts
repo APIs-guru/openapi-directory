@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // TextSentimentAnnotation
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Contains annotation details specific to text sentiment.
 **/
 export class TextSentimentAnnotation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=sentiment" })
+  @SpeakeasyMetadata({ data: "json, name=sentiment" })
   sentiment?: number;
 }

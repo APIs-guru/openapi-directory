@@ -1,12 +1,15 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class DescribeIdentityUsagePathParams:
-    identity_id: str = field(default=None, metadata={'path_param': { 'field_name': 'IdentityId', 'style': 'simple', 'explode': False }})
-    identity_pool_id: str = field(default=None, metadata={'path_param': { 'field_name': 'IdentityPoolId', 'style': 'simple', 'explode': False }})
+    identity_id: str = field(metadata={'path_param': { 'field_name': 'IdentityId', 'style': 'simple', 'explode': False }})
+    identity_pool_id: str = field(metadata={'path_param': { 'field_name': 'IdentityPoolId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -22,18 +25,18 @@ class DescribeIdentityUsageHeaders:
 
 @dataclass
 class DescribeIdentityUsageRequest:
-    path_params: DescribeIdentityUsagePathParams = field(default=None)
-    headers: DescribeIdentityUsageHeaders = field(default=None)
+    headers: DescribeIdentityUsageHeaders = field()
+    path_params: DescribeIdentityUsagePathParams = field()
     
 
 @dataclass
 class DescribeIdentityUsageResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     describe_identity_usage_response: Optional[shared.DescribeIdentityUsageResponse] = field(default=None)
     internal_error_exception: Optional[Any] = field(default=None)
     invalid_parameter_exception: Optional[Any] = field(default=None)
     not_authorized_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     too_many_requests_exception: Optional[Any] = field(default=None)
     

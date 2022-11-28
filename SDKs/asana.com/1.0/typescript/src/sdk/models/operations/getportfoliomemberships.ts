@@ -1,53 +1,54 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetPortfolioMembershipsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=limit" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=limit" })
   limit?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=offset" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=offset" })
   offset?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=false;name=opt_fields" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=opt_fields" })
   optFields?: string[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=opt_pretty" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=opt_pretty" })
   optPretty?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=portfolio" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=portfolio" })
   portfolio?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=user" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=user" })
   user?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=workspace" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=workspace" })
   workspace?: string;
 }
 
 
-export class GetPortfolioMembershipsRequest extends SpeakeasyBase {
-  @Metadata()
-  queryParams: GetPortfolioMembershipsQueryParams;
-}
-
-
 export class GetPortfolioMemberships200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=data", elemType: shared.PortfolioMembershipCompact })
+  @SpeakeasyMetadata({ data: "json, name=data", elemType: shared.PortfolioMembershipCompact })
   data?: shared.PortfolioMembershipCompact[];
 }
 
 
+export class GetPortfolioMembershipsRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  queryParams: GetPortfolioMembershipsQueryParams;
+}
+
+
 export class GetPortfolioMembershipsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   errorResponse?: shared.ErrorResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getPortfolioMemberships200ApplicationJsonObject?: GetPortfolioMemberships200ApplicationJson;
 }

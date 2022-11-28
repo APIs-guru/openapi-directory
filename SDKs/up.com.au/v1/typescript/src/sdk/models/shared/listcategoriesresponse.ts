@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CategoryResource } from "./categoryresource";
+
 
 
 // ListCategoriesResponse
@@ -10,6 +10,6 @@ import { CategoryResource } from "./categoryresource";
  * 
 **/
 export class ListCategoriesResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=data", elemType: shared.CategoryResource })
+  @SpeakeasyMetadata({ data: "json, name=data", elemType: CategoryResource })
   data: CategoryResource[];
 }

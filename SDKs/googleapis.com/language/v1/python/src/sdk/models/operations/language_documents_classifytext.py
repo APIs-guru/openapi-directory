@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
@@ -20,14 +21,14 @@ class LanguageDocumentsClassifyTextQueryParams:
 
 @dataclass
 class LanguageDocumentsClassifyTextSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class LanguageDocumentsClassifyTextSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -38,14 +39,14 @@ class LanguageDocumentsClassifyTextSecurity:
 
 @dataclass
 class LanguageDocumentsClassifyTextRequest:
-    query_params: LanguageDocumentsClassifyTextQueryParams = field(default=None)
+    query_params: LanguageDocumentsClassifyTextQueryParams = field()
+    security: LanguageDocumentsClassifyTextSecurity = field()
     request: Optional[shared.ClassifyTextRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: LanguageDocumentsClassifyTextSecurity = field(default=None)
     
 
 @dataclass
 class LanguageDocumentsClassifyTextResponse:
+    content_type: str = field()
+    status_code: int = field()
     classify_text_response: Optional[shared.ClassifyTextResponse] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

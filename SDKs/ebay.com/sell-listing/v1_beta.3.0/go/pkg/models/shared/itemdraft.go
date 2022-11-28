@@ -1,5 +1,7 @@
 package shared
 
+// ItemDraft
+// The type that defines the fields for the listing details.
 type ItemDraft struct {
 	CategoryID     *string         `json:"categoryId,omitempty"`
 	Charity        *Charity        `json:"charity,omitempty"`

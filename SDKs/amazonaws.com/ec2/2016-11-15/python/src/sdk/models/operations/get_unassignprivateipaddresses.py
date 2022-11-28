@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 
 class GetUnassignPrivateIPAddressesActionEnum(str, Enum):
     UNASSIGN_PRIVATE_IP_ADDRESSES = "UnassignPrivateIpAddresses"
@@ -10,11 +14,11 @@ class GetUnassignPrivateIPAddressesVersionEnum(str, Enum):
 
 @dataclass
 class GetUnassignPrivateIPAddressesQueryParams:
-    action: GetUnassignPrivateIPAddressesActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetUnassignPrivateIPAddressesActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    network_interface_id: str = field(metadata={'query_param': { 'field_name': 'NetworkInterfaceId', 'style': 'form', 'explode': True }})
+    version: GetUnassignPrivateIPAddressesVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     ipv4_prefix: Optional[List[str]] = field(default=None, metadata={'query_param': { 'field_name': 'Ipv4Prefix', 'style': 'form', 'explode': True }})
-    network_interface_id: str = field(default=None, metadata={'query_param': { 'field_name': 'NetworkInterfaceId', 'style': 'form', 'explode': True }})
     private_ip_address: Optional[List[str]] = field(default=None, metadata={'query_param': { 'field_name': 'PrivateIpAddress', 'style': 'form', 'explode': True }})
-    version: GetUnassignPrivateIPAddressesVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -30,12 +34,12 @@ class GetUnassignPrivateIPAddressesHeaders:
 
 @dataclass
 class GetUnassignPrivateIPAddressesRequest:
-    query_params: GetUnassignPrivateIPAddressesQueryParams = field(default=None)
-    headers: GetUnassignPrivateIPAddressesHeaders = field(default=None)
+    headers: GetUnassignPrivateIPAddressesHeaders = field()
+    query_params: GetUnassignPrivateIPAddressesQueryParams = field()
     
 
 @dataclass
 class GetUnassignPrivateIPAddressesResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

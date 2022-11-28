@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // ChatChannel
 /**
  * The AWS Chatbot chat channel used for collaboration during an incident.
@@ -33,11 +33,11 @@ var ChatChannel = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=chatbotSns" }),
+        SpeakeasyMetadata({ data: "json, name=chatbotSns" }),
         __metadata("design:type", Array)
     ], ChatChannel.prototype, "chatbotSns", void 0);
     __decorate([
-        Metadata({ data: "json, name=empty" }),
+        SpeakeasyMetadata({ data: "json, name=empty" }),
         __metadata("design:type", Map)
     ], ChatChannel.prototype, "empty", void 0);
     return ChatChannel;

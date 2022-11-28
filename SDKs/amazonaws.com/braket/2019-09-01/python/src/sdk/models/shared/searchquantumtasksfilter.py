@@ -1,13 +1,19 @@
 from dataclasses import dataclass, field
-from typing import Enum,List
+from typing import List
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import searchquantumtasksfilteroperator_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class SearchQuantumTasksFilter:
-    name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    operator: searchquantumtasksfilteroperator_enum.SearchQuantumTasksFilterOperatorEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'operator' }})
-    values: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'values' }})
+    r"""SearchQuantumTasksFilter
+    A filter to use to search for tasks.
+    """
+    
+    name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    operator: SearchQuantumTasksFilterOperatorEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('operator') }})
+    values: List[str] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('values') }})
     

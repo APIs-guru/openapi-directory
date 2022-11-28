@@ -1,22 +1,23 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class UpdateUserProfileResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=createdTimestamp" })
+  @SpeakeasyMetadata({ data: "json, name=createdTimestamp" })
   createdTimestamp?: Date;
 
-  @Metadata({ data: "json, name=displayName" })
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
   displayName?: string;
 
-  @Metadata({ data: "json, name=emailAddress" })
+  @SpeakeasyMetadata({ data: "json, name=emailAddress" })
   emailAddress?: string;
 
-  @Metadata({ data: "json, name=lastModifiedTimestamp" })
+  @SpeakeasyMetadata({ data: "json, name=lastModifiedTimestamp" })
   lastModifiedTimestamp?: Date;
 
-  @Metadata({ data: "json, name=sshPublicKey" })
+  @SpeakeasyMetadata({ data: "json, name=sshPublicKey" })
   sshPublicKey?: string;
 
-  @Metadata({ data: "json, name=userArn" })
+  @SpeakeasyMetadata({ data: "json, name=userArn" })
   userArn: string;
 }

@@ -1,7 +1,8 @@
 
 
+
 export enum TransportStreamTimestampEnum {
-    None = "None"
-,    Zero = "Zero"
-,    Valid = "Valid"
+    None = "None",
+    Zero = "Zero",
+    Valid = "Valid"
 }

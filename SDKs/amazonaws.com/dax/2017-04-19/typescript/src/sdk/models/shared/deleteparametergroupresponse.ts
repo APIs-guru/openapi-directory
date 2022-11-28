@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DeleteParameterGroupResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DeletionMessage" })
+  @SpeakeasyMetadata({ data: "json, name=DeletionMessage" })
   deletionMessage?: string;
 }

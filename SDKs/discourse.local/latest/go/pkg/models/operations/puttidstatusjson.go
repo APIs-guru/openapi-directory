@@ -32,15 +32,15 @@ type PutTIDStatusJSONRequestBody struct {
 	Until   *string                                `json:"until,omitempty"`
 }
 
+type PutTIDStatusJSON200ApplicationJSON struct {
+	Success           *string `json:"success,omitempty"`
+	TopicStatusUpdate *string `json:"topic_status_update,omitempty"`
+}
+
 type PutTIDStatusJSONRequest struct {
 	PathParams PutTIDStatusJSONPathParams
 	Headers    PutTIDStatusJSONHeaders
 	Request    *PutTIDStatusJSONRequestBody `request:"mediaType=application/json"`
-}
-
-type PutTIDStatusJSON200ApplicationJSON struct {
-	Success           *string `json:"success,omitempty"`
-	TopicStatusUpdate *string `json:"topic_status_update,omitempty"`
 }
 
 type PutTIDStatusJSONResponse struct {

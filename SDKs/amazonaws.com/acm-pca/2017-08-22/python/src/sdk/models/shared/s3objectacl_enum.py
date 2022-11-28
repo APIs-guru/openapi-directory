@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class S3ObjectACLEnum(str, Enum):
     PUBLIC_READ = "PUBLIC_READ"

@@ -1,7 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import ospolicyresourcefile
+from sdk import utils
+from . import *
 
 class OsPolicyResourceFileResourceStateEnum(str, Enum):
     DESIRED_STATE_UNSPECIFIED = "DESIRED_STATE_UNSPECIFIED"
@@ -13,9 +15,13 @@ class OsPolicyResourceFileResourceStateEnum(str, Enum):
 @dataclass_json
 @dataclass
 class OsPolicyResourceFileResource:
-    content: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'content' }})
-    file: Optional[ospolicyresourcefile.OsPolicyResourceFile] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'file' }})
-    path: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'path' }})
-    permissions: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'permissions' }})
-    state: Optional[OsPolicyResourceFileResourceStateEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'state' }})
+    r"""OsPolicyResourceFileResource
+    A resource that manages the state of a file.
+    """
+    
+    content: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('content') }})
+    file: Optional[OsPolicyResourceFile] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('file') }})
+    path: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('path') }})
+    permissions: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('permissions') }})
+    state: Optional[OsPolicyResourceFileResourceStateEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('state') }})
     

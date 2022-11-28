@@ -22,6 +22,8 @@ const (
 	NestingLevelGlyphTypeEnumRoman                NestingLevelGlyphTypeEnum = "ROMAN"
 )
 
+// NestingLevel
+// Contains properties describing the look and feel of a list bullet at a given level of nesting.
 type NestingLevel struct {
 	BulletAlignment *NestingLevelBulletAlignmentEnum `json:"bulletAlignment,omitempty"`
 	GlyphFormat     *string                          `json:"glyphFormat,omitempty"`

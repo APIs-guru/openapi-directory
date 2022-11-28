@@ -1,30 +1,31 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass
 class PostServersIDActionsRemoveFromPlacementGroupPathParams:
-    id: int = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
-    
-
-@dataclass
-class PostServersIDActionsRemoveFromPlacementGroupRequest:
-    path_params: PostServersIDActionsRemoveFromPlacementGroupPathParams = field(default=None)
+    id: int = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass_json
 @dataclass
 class PostServersIDActionsRemoveFromPlacementGroupActionResponseActionError:
-    code: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'code' }})
-    message: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'message' }})
+    r"""PostServersIDActionsRemoveFromPlacementGroupActionResponseActionError
+    Error message for the Action if error occurred, otherwise null
+    """
+    
+    code: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('code') }})
+    message: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('message') }})
     
 
 @dataclass_json
 @dataclass
 class PostServersIDActionsRemoveFromPlacementGroupActionResponseActionResources:
-    id: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
-    type: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    id: int = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('id') }})
+    type: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('type') }})
     
 class PostServersIDActionsRemoveFromPlacementGroupActionResponseActionStatusEnum(str, Enum):
     SUCCESS = "success"
@@ -35,25 +36,30 @@ class PostServersIDActionsRemoveFromPlacementGroupActionResponseActionStatusEnum
 @dataclass_json
 @dataclass
 class PostServersIDActionsRemoveFromPlacementGroupActionResponseAction:
-    command: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'command' }})
-    error: PostServersIDActionsRemoveFromPlacementGroupActionResponseActionError = field(default=None, metadata={'dataclasses_json': { 'field_name': 'error' }})
-    finished: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'finished' }})
-    id: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
-    progress: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'progress' }})
-    resources: List[PostServersIDActionsRemoveFromPlacementGroupActionResponseActionResources] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'resources' }})
-    started: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'started' }})
-    status: PostServersIDActionsRemoveFromPlacementGroupActionResponseActionStatusEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+    command: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('command') }})
+    error: PostServersIDActionsRemoveFromPlacementGroupActionResponseActionError = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('error') }})
+    finished: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('finished') }})
+    id: int = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('id') }})
+    progress: float = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('progress') }})
+    resources: List[PostServersIDActionsRemoveFromPlacementGroupActionResponseActionResources] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('resources') }})
+    started: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('started') }})
+    status: PostServersIDActionsRemoveFromPlacementGroupActionResponseActionStatusEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('status') }})
     
 
 @dataclass_json
 @dataclass
 class PostServersIDActionsRemoveFromPlacementGroupActionResponse:
-    action: PostServersIDActionsRemoveFromPlacementGroupActionResponseAction = field(default=None, metadata={'dataclasses_json': { 'field_name': 'action' }})
+    action: PostServersIDActionsRemoveFromPlacementGroupActionResponseAction = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('action') }})
+    
+
+@dataclass
+class PostServersIDActionsRemoveFromPlacementGroupRequest:
+    path_params: PostServersIDActionsRemoveFromPlacementGroupPathParams = field()
     
 
 @dataclass
 class PostServersIDActionsRemoveFromPlacementGroupResponse:
+    content_type: str = field()
+    status_code: int = field()
     action_response: Optional[PostServersIDActionsRemoveFromPlacementGroupActionResponse] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

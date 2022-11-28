@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { Place } from "./place";
 /**
  * Contains relevant Places returned by calling <code>SearchPlaceIndexForText</code>.

@@ -15,11 +15,11 @@ class CanvasDataAnalyticsSummaryQueryParams:
 
 @dataclass
 class CanvasDataAnalyticsSummaryRequest:
-    query_params: CanvasDataAnalyticsSummaryQueryParams = field(default=None)
+    query_params: CanvasDataAnalyticsSummaryQueryParams = field()
     
 
 @dataclass
 class CanvasDataAnalyticsSummaryResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

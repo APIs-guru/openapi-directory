@@ -1,0 +1,48 @@
+package operations
+
+import (
+	"openapi/pkg/models/shared"
+)
+
+var ListIPCommandServerList = []string{
+	"https://supersim.twilio.com",
+}
+
+type ListIPCommandQueryParams struct {
+	Direction *shared.IPCommandEnumDirectionEnum `queryParam:"style=form,explode=true,name=Direction"`
+	PageSize  *int64                             `queryParam:"style=form,explode=true,name=PageSize"`
+	Sim       *string                            `queryParam:"style=form,explode=true,name=Sim"`
+	SimIccid  *string                            `queryParam:"style=form,explode=true,name=SimIccid"`
+	Status    *shared.IPCommandEnumStatusEnum    `queryParam:"style=form,explode=true,name=Status"`
+}
+
+type ListIPCommandSecurity struct {
+	AccountSidAuthToken shared.SchemeAccountSidAuthToken `security:"scheme,type=http,subtype=basic"`
+}
+
+type ListIPCommandListIPCommandResponseMeta struct {
+	FirstPageURL    *string `json:"first_page_url,omitempty"`
+	Key             *string `json:"key,omitempty"`
+	NextPageURL     *string `json:"next_page_url,omitempty"`
+	Page            *int64  `json:"page,omitempty"`
+	PageSize        *int64  `json:"page_size,omitempty"`
+	PreviousPageURL *string `json:"previous_page_url,omitempty"`
+	URL             *string `json:"url,omitempty"`
+}
+
+type ListIPCommandListIPCommandResponse struct {
+	IPCommands []shared.SupersimV1IPCommand            `json:"ip_commands,omitempty"`
+	Meta       *ListIPCommandListIPCommandResponseMeta `json:"meta,omitempty"`
+}
+
+type ListIPCommandRequest struct {
+	ServerURL   *string
+	QueryParams ListIPCommandQueryParams
+	Security    ListIPCommandSecurity
+}
+
+type ListIPCommandResponse struct {
+	ContentType           string
+	ListIPCommandResponse *ListIPCommandListIPCommandResponse
+	StatusCode            int64
+}

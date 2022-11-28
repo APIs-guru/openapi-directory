@@ -10,19 +10,19 @@ class AssignMsisdnQueryParams:
 
 @dataclass
 class AssignMsisdnSecurity:
-    account_auth: shared.SchemeAccountAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    account_auth: shared.SchemeAccountAuth = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class AssignMsisdnRequest:
-    query_params: AssignMsisdnQueryParams = field(default=None)
-    request: shared.ItvAssignMsisdnRequest = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: AssignMsisdnSecurity = field(default=None)
+    query_params: AssignMsisdnQueryParams = field()
+    request: shared.ItvAssignMsisdnRequest = field(metadata={'request': { 'media_type': 'application/json' }})
+    security: AssignMsisdnSecurity = field()
     
 
 @dataclass
 class AssignMsisdnResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     service_error: Optional[shared.ServiceError] = field(default=None)
-    status_code: int = field(default=None)
     

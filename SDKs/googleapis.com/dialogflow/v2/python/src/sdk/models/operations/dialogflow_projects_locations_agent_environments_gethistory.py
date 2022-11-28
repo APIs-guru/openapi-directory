@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DialogflowProjectsLocationsAgentEnvironmentsGetHistoryPathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -27,14 +28,14 @@ class DialogflowProjectsLocationsAgentEnvironmentsGetHistoryQueryParams:
 
 @dataclass
 class DialogflowProjectsLocationsAgentEnvironmentsGetHistorySecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DialogflowProjectsLocationsAgentEnvironmentsGetHistorySecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -45,14 +46,14 @@ class DialogflowProjectsLocationsAgentEnvironmentsGetHistorySecurity:
 
 @dataclass
 class DialogflowProjectsLocationsAgentEnvironmentsGetHistoryRequest:
-    path_params: DialogflowProjectsLocationsAgentEnvironmentsGetHistoryPathParams = field(default=None)
-    query_params: DialogflowProjectsLocationsAgentEnvironmentsGetHistoryQueryParams = field(default=None)
-    security: DialogflowProjectsLocationsAgentEnvironmentsGetHistorySecurity = field(default=None)
+    path_params: DialogflowProjectsLocationsAgentEnvironmentsGetHistoryPathParams = field()
+    query_params: DialogflowProjectsLocationsAgentEnvironmentsGetHistoryQueryParams = field()
+    security: DialogflowProjectsLocationsAgentEnvironmentsGetHistorySecurity = field()
     
 
 @dataclass
 class DialogflowProjectsLocationsAgentEnvironmentsGetHistoryResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_cloud_dialogflow_v2_environment_history: Optional[shared.GoogleCloudDialogflowV2EnvironmentHistory] = field(default=None)
-    status_code: int = field(default=None)
     

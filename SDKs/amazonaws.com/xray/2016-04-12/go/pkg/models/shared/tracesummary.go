@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// TraceSummary
+// Metadata generated from the segment documents in a trace.
 type TraceSummary struct {
 	Annotations            map[string][]ValueWithServiceIds `json:"Annotations,omitempty"`
 	AvailabilityZones      []AvailabilityZoneDetail         `json:"AvailabilityZones,omitempty"`

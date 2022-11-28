@@ -5,7 +5,7 @@ import (
 )
 
 type DcimRackGroupsCreateRequest struct {
-	Request shared.WritableRackGroup `request:"mediaType=application/json"`
+	Request shared.WritableRackGroupInput `request:"mediaType=application/json"`
 }
 
 type DcimRackGroupsCreateResponse struct {

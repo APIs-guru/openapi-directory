@@ -41,7 +41,7 @@ type LoggingUpdateSettingsSecurity struct {
 type LoggingUpdateSettingsRequest struct {
 	PathParams  LoggingUpdateSettingsPathParams
 	QueryParams LoggingUpdateSettingsQueryParams
-	Request     *shared.Settings `request:"mediaType=application/json"`
+	Request     *shared.SettingsInput `request:"mediaType=application/json"`
 	Security    LoggingUpdateSettingsSecurity
 }
 

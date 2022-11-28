@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // LinkedInterconnectAttachments
 /**
  * A collection of VLAN attachment resources. These resources should be redundant attachments that all advertise the same prefixes to Google Cloud. Alternatively, in active/passive configurations, all attachments should be capable of advertising the same prefixes.
@@ -33,13 +33,37 @@ var LinkedInterconnectAttachments = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=siteToSiteDataTransfer" }),
+        SpeakeasyMetadata({ data: "json, name=siteToSiteDataTransfer" }),
         __metadata("design:type", Boolean)
     ], LinkedInterconnectAttachments.prototype, "siteToSiteDataTransfer", void 0);
     __decorate([
-        Metadata({ data: "json, name=uris" }),
+        SpeakeasyMetadata({ data: "json, name=uris" }),
         __metadata("design:type", Array)
     ], LinkedInterconnectAttachments.prototype, "uris", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=vpcNetwork" }),
+        __metadata("design:type", String)
+    ], LinkedInterconnectAttachments.prototype, "vpcNetwork", void 0);
     return LinkedInterconnectAttachments;
 }(SpeakeasyBase));
 export { LinkedInterconnectAttachments };
+// LinkedInterconnectAttachmentsInput
+/**
+ * A collection of VLAN attachment resources. These resources should be redundant attachments that all advertise the same prefixes to Google Cloud. Alternatively, in active/passive configurations, all attachments should be capable of advertising the same prefixes.
+**/
+var LinkedInterconnectAttachmentsInput = /** @class */ (function (_super) {
+    __extends(LinkedInterconnectAttachmentsInput, _super);
+    function LinkedInterconnectAttachmentsInput() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=siteToSiteDataTransfer" }),
+        __metadata("design:type", Boolean)
+    ], LinkedInterconnectAttachmentsInput.prototype, "siteToSiteDataTransfer", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=uris" }),
+        __metadata("design:type", Array)
+    ], LinkedInterconnectAttachmentsInput.prototype, "uris", void 0);
+    return LinkedInterconnectAttachmentsInput;
+}(SpeakeasyBase));
+export { LinkedInterconnectAttachmentsInput };

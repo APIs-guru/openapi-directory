@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var PostWorkerCmdEqualCheckconstraintsQueryParams = /** @class */ (function (_super) {
     __extends(PostWorkerCmdEqualCheckconstraintsQueryParams, _super);
@@ -30,19 +30,19 @@ var PostWorkerCmdEqualCheckconstraintsQueryParams = /** @class */ (function (_su
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=arch" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=arch" }),
         __metadata("design:type", String)
     ], PostWorkerCmdEqualCheckconstraintsQueryParams.prototype, "arch", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=package" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=package" }),
         __metadata("design:type", String)
     ], PostWorkerCmdEqualCheckconstraintsQueryParams.prototype, "package", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=project" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=project" }),
         __metadata("design:type", String)
     ], PostWorkerCmdEqualCheckconstraintsQueryParams.prototype, "project", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=repository" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=repository" }),
         __metadata("design:type", String)
     ], PostWorkerCmdEqualCheckconstraintsQueryParams.prototype, "repository", void 0);
     return PostWorkerCmdEqualCheckconstraintsQueryParams;
@@ -54,7 +54,7 @@ var PostWorkerCmdEqualCheckconstraintsSecurity = /** @class */ (function (_super
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=http;subtype=basic" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=basic" }),
         __metadata("design:type", shared.SchemeBasicAuthentication)
     ], PostWorkerCmdEqualCheckconstraintsSecurity.prototype, "basicAuthentication", void 0);
     return PostWorkerCmdEqualCheckconstraintsSecurity;
@@ -66,15 +66,15 @@ var PostWorkerCmdEqualCheckconstraintsRequest = /** @class */ (function (_super)
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PostWorkerCmdEqualCheckconstraintsQueryParams)
     ], PostWorkerCmdEqualCheckconstraintsRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/xml" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/xml" }),
         __metadata("design:type", Uint8Array)
     ], PostWorkerCmdEqualCheckconstraintsRequest.prototype, "request", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PostWorkerCmdEqualCheckconstraintsSecurity)
     ], PostWorkerCmdEqualCheckconstraintsRequest.prototype, "security", void 0);
     return PostWorkerCmdEqualCheckconstraintsRequest;
@@ -86,15 +86,15 @@ var PostWorkerCmdEqualCheckconstraintsResponse = /** @class */ (function (_super
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], PostWorkerCmdEqualCheckconstraintsResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], PostWorkerCmdEqualCheckconstraintsResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], PostWorkerCmdEqualCheckconstraintsResponse.prototype, "statusCode", void 0);
     return PostWorkerCmdEqualCheckconstraintsResponse;

@@ -1,22 +1,23 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class OrdersData extends SpeakeasyBase {
-  @Metadata({ data: "json, name=average" })
+  @SpeakeasyMetadata({ data: "json, name=average" })
   average?: number;
 
-  @Metadata({ data: "json, name=count" })
+  @SpeakeasyMetadata({ data: "json, name=count" })
   count?: number;
 
-  @Metadata({ data: "json, name=date" })
+  @SpeakeasyMetadata({ data: "json, name=date" })
   date?: string;
 
-  @Metadata({ data: "json, name=paid" })
+  @SpeakeasyMetadata({ data: "json, name=paid" })
   paid?: number;
 
-  @Metadata({ data: "json, name=pending" })
+  @SpeakeasyMetadata({ data: "json, name=pending" })
   pending?: number;
 
-  @Metadata({ data: "json, name=total" })
+  @SpeakeasyMetadata({ data: "json, name=total" })
   total?: number;
 }

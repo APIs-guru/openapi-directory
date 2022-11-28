@@ -32,7 +32,7 @@ type MetastoreProjectsLocationsServicesMetadataImportsPatchSecurity struct {
 type MetastoreProjectsLocationsServicesMetadataImportsPatchRequest struct {
 	PathParams  MetastoreProjectsLocationsServicesMetadataImportsPatchPathParams
 	QueryParams MetastoreProjectsLocationsServicesMetadataImportsPatchQueryParams
-	Request     *shared.MetadataImport `request:"mediaType=application/json"`
+	Request     *shared.MetadataImportInput `request:"mediaType=application/json"`
 	Security    MetastoreProjectsLocationsServicesMetadataImportsPatchSecurity
 }
 

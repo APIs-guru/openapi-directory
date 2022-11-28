@@ -1,5 +1,7 @@
 package shared
 
+// AwsS3CompatibleData
+// An AwsS3CompatibleData resource.
 type AwsS3CompatibleData struct {
 	BucketName *string               `json:"bucketName,omitempty"`
 	Endpoint   *string               `json:"endpoint,omitempty"`

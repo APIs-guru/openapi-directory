@@ -1,5 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DialogCodeHookSettings } from "./dialogcodehooksettings";
 import { FulfillmentCodeHookSettings } from "./fulfillmentcodehooksettings";
 import { InputContext } from "./inputcontext";
@@ -11,58 +10,59 @@ import { SampleUtterance } from "./sampleutterance";
 import { SlotPriority } from "./slotpriority";
 
 
+
 export class DescribeIntentResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=botId" })
+  @SpeakeasyMetadata({ data: "json, name=botId" })
   botId?: string;
 
-  @Metadata({ data: "json, name=botVersion" })
+  @SpeakeasyMetadata({ data: "json, name=botVersion" })
   botVersion?: string;
 
-  @Metadata({ data: "json, name=creationDateTime" })
+  @SpeakeasyMetadata({ data: "json, name=creationDateTime" })
   creationDateTime?: Date;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=dialogCodeHook" })
+  @SpeakeasyMetadata({ data: "json, name=dialogCodeHook" })
   dialogCodeHook?: DialogCodeHookSettings;
 
-  @Metadata({ data: "json, name=fulfillmentCodeHook" })
+  @SpeakeasyMetadata({ data: "json, name=fulfillmentCodeHook" })
   fulfillmentCodeHook?: FulfillmentCodeHookSettings;
 
-  @Metadata({ data: "json, name=inputContexts", elemType: shared.InputContext })
+  @SpeakeasyMetadata({ data: "json, name=inputContexts", elemType: InputContext })
   inputContexts?: InputContext[];
 
-  @Metadata({ data: "json, name=intentClosingSetting" })
+  @SpeakeasyMetadata({ data: "json, name=intentClosingSetting" })
   intentClosingSetting?: IntentClosingSetting;
 
-  @Metadata({ data: "json, name=intentConfirmationSetting" })
+  @SpeakeasyMetadata({ data: "json, name=intentConfirmationSetting" })
   intentConfirmationSetting?: IntentConfirmationSetting;
 
-  @Metadata({ data: "json, name=intentId" })
+  @SpeakeasyMetadata({ data: "json, name=intentId" })
   intentId?: string;
 
-  @Metadata({ data: "json, name=intentName" })
+  @SpeakeasyMetadata({ data: "json, name=intentName" })
   intentName?: string;
 
-  @Metadata({ data: "json, name=kendraConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=kendraConfiguration" })
   kendraConfiguration?: KendraConfiguration;
 
-  @Metadata({ data: "json, name=lastUpdatedDateTime" })
+  @SpeakeasyMetadata({ data: "json, name=lastUpdatedDateTime" })
   lastUpdatedDateTime?: Date;
 
-  @Metadata({ data: "json, name=localeId" })
+  @SpeakeasyMetadata({ data: "json, name=localeId" })
   localeId?: string;
 
-  @Metadata({ data: "json, name=outputContexts", elemType: shared.OutputContext })
+  @SpeakeasyMetadata({ data: "json, name=outputContexts", elemType: OutputContext })
   outputContexts?: OutputContext[];
 
-  @Metadata({ data: "json, name=parentIntentSignature" })
+  @SpeakeasyMetadata({ data: "json, name=parentIntentSignature" })
   parentIntentSignature?: string;
 
-  @Metadata({ data: "json, name=sampleUtterances", elemType: shared.SampleUtterance })
+  @SpeakeasyMetadata({ data: "json, name=sampleUtterances", elemType: SampleUtterance })
   sampleUtterances?: SampleUtterance[];
 
-  @Metadata({ data: "json, name=slotPriorities", elemType: shared.SlotPriority })
+  @SpeakeasyMetadata({ data: "json, name=slotPriorities", elemType: SlotPriority })
   slotPriorities?: SlotPriority[];
 }

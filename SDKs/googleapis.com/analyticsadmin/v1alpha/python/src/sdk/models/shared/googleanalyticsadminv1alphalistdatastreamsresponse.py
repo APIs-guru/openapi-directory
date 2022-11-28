@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import googleanalyticsadminv1alphadatastream
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class GoogleAnalyticsAdminV1alphaListDataStreamsResponse:
-    data_streams: Optional[List[googleanalyticsadminv1alphadatastream.GoogleAnalyticsAdminV1alphaDataStream]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'dataStreams' }})
-    next_page_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'nextPageToken' }})
+    r"""GoogleAnalyticsAdminV1alphaListDataStreamsResponse
+    Response message for ListDataStreams RPC.
+    """
+    
+    data_streams: Optional[List[GoogleAnalyticsAdminV1alphaDataStream]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('dataStreams') }})
+    next_page_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('nextPageToken') }})
     

@@ -1,5 +1,7 @@
 package shared
 
+// GoogleCloudContactcenterinsightsV1CallAnnotation
+// A piece of metadata that applies to a window of a call.
 type GoogleCloudContactcenterinsightsV1CallAnnotation struct {
 	AnnotationEndBoundary   *GoogleCloudContactcenterinsightsV1AnnotationBoundary `json:"annotationEndBoundary,omitempty"`
 	AnnotationStartBoundary *GoogleCloudContactcenterinsightsV1AnnotationBoundary `json:"annotationStartBoundary,omitempty"`
@@ -8,6 +10,7 @@ type GoogleCloudContactcenterinsightsV1CallAnnotation struct {
 	HoldData                map[string]interface{}                                `json:"holdData,omitempty"`
 	IntentMatchData         *GoogleCloudContactcenterinsightsV1IntentMatchData    `json:"intentMatchData,omitempty"`
 	InterruptionData        map[string]interface{}                                `json:"interruptionData,omitempty"`
+	IssueMatchData          *GoogleCloudContactcenterinsightsV1IssueMatchData     `json:"issueMatchData,omitempty"`
 	PhraseMatchData         *GoogleCloudContactcenterinsightsV1PhraseMatchData    `json:"phraseMatchData,omitempty"`
 	SentimentData           *GoogleCloudContactcenterinsightsV1SentimentData      `json:"sentimentData,omitempty"`
 	SilenceData             map[string]interface{}                                `json:"silenceData,omitempty"`

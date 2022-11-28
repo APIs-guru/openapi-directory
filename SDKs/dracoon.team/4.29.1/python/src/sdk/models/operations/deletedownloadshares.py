@@ -10,13 +10,13 @@ class DeleteDownloadSharesHeaders:
 
 @dataclass
 class DeleteDownloadSharesRequest:
-    headers: DeleteDownloadSharesHeaders = field(default=None)
-    request: shared.DeleteDownloadSharesRequest = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: DeleteDownloadSharesHeaders = field()
+    request: shared.DeleteDownloadSharesRequest = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class DeleteDownloadSharesResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error_response: Optional[shared.ErrorResponse] = field(default=None)
-    status_code: int = field(default=None)
     

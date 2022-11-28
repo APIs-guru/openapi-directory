@@ -1,5 +1,7 @@
 package shared
 
+// InventoryResultItem
+// The inventory result item.
 type InventoryResultItem struct {
 	CaptureTime   *string             `json:"CaptureTime,omitempty"`
 	Content       []map[string]string `json:"Content"`

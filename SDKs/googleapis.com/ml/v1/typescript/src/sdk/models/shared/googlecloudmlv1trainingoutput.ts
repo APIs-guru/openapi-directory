@@ -1,7 +1,35 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudMlV1BuiltInAlgorithmOutput } from "./googlecloudmlv1builtinalgorithmoutput";
 import { GoogleCloudMlV1HyperparameterOutput } from "./googlecloudmlv1hyperparameteroutput";
+
+
+
+// GoogleCloudMlV1TrainingOutputInput
+/** 
+ * Represents results of a training job. Output only.
+**/
+export class GoogleCloudMlV1TrainingOutputInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=builtInAlgorithmOutput" })
+  builtInAlgorithmOutput?: GoogleCloudMlV1BuiltInAlgorithmOutput;
+
+  @SpeakeasyMetadata({ data: "json, name=completedTrialCount" })
+  completedTrialCount?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=consumedMLUnits" })
+  consumedMlUnits?: number;
+
+  @SpeakeasyMetadata({ data: "json, name=hyperparameterMetricTag" })
+  hyperparameterMetricTag?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=isBuiltInAlgorithmJob" })
+  isBuiltInAlgorithmJob?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=isHyperparameterTuningJob" })
+  isHyperparameterTuningJob?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=trials", elemType: GoogleCloudMlV1HyperparameterOutput })
+  trials?: GoogleCloudMlV1HyperparameterOutput[];
+}
 
 
 // GoogleCloudMlV1TrainingOutput
@@ -9,27 +37,27 @@ import { GoogleCloudMlV1HyperparameterOutput } from "./googlecloudmlv1hyperparam
  * Represents results of a training job. Output only.
 **/
 export class GoogleCloudMlV1TrainingOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=builtInAlgorithmOutput" })
+  @SpeakeasyMetadata({ data: "json, name=builtInAlgorithmOutput" })
   builtInAlgorithmOutput?: GoogleCloudMlV1BuiltInAlgorithmOutput;
 
-  @Metadata({ data: "json, name=completedTrialCount" })
+  @SpeakeasyMetadata({ data: "json, name=completedTrialCount" })
   completedTrialCount?: string;
 
-  @Metadata({ data: "json, name=consumedMLUnits" })
+  @SpeakeasyMetadata({ data: "json, name=consumedMLUnits" })
   consumedMlUnits?: number;
 
-  @Metadata({ data: "json, name=hyperparameterMetricTag" })
+  @SpeakeasyMetadata({ data: "json, name=hyperparameterMetricTag" })
   hyperparameterMetricTag?: string;
 
-  @Metadata({ data: "json, name=isBuiltInAlgorithmJob" })
+  @SpeakeasyMetadata({ data: "json, name=isBuiltInAlgorithmJob" })
   isBuiltInAlgorithmJob?: boolean;
 
-  @Metadata({ data: "json, name=isHyperparameterTuningJob" })
+  @SpeakeasyMetadata({ data: "json, name=isHyperparameterTuningJob" })
   isHyperparameterTuningJob?: boolean;
 
-  @Metadata({ data: "json, name=trials", elemType: shared.GoogleCloudMlV1HyperparameterOutput })
+  @SpeakeasyMetadata({ data: "json, name=trials", elemType: GoogleCloudMlV1HyperparameterOutput })
   trials?: GoogleCloudMlV1HyperparameterOutput[];
 
-  @Metadata({ data: "json, name=webAccessUris" })
+  @SpeakeasyMetadata({ data: "json, name=webAccessUris" })
   webAccessUris?: Map<string, string>;
 }

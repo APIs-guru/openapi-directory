@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class Getcurrentstate extends SpeakeasyBase {
-  @Metadata({ data: "json, name=notifications_enabled" })
+  @SpeakeasyMetadata({ data: "json, name=notifications_enabled" })
   notificationsEnabled: boolean;
 }

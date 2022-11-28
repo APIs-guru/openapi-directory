@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudDialogflowV2EvaluationConfigSmartComposeConfig
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Smart compose specific configuration for evaluation job.
 **/
 export class GoogleCloudDialogflowV2EvaluationConfigSmartComposeConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=allowlistDocument" })
+  @SpeakeasyMetadata({ data: "json, name=allowlistDocument" })
   allowlistDocument?: string;
 
-  @Metadata({ data: "json, name=maxResultCount" })
+  @SpeakeasyMetadata({ data: "json, name=maxResultCount" })
   maxResultCount?: number;
 }

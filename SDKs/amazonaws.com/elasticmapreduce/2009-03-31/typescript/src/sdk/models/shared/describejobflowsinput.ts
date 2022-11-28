@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { JobFlowExecutionStateEnum } from "./jobflowexecutionstateenum";
+
 
 
 // DescribeJobFlowsInput
@@ -7,15 +8,15 @@ import { JobFlowExecutionStateEnum } from "./jobflowexecutionstateenum";
  *  The input for the <a>DescribeJobFlows</a> operation. 
 **/
 export class DescribeJobFlowsInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CreatedAfter" })
+  @SpeakeasyMetadata({ data: "json, name=CreatedAfter" })
   createdAfter?: Date;
 
-  @Metadata({ data: "json, name=CreatedBefore" })
+  @SpeakeasyMetadata({ data: "json, name=CreatedBefore" })
   createdBefore?: Date;
 
-  @Metadata({ data: "json, name=JobFlowIds" })
+  @SpeakeasyMetadata({ data: "json, name=JobFlowIds" })
   jobFlowIds?: string[];
 
-  @Metadata({ data: "json, name=JobFlowStates" })
+  @SpeakeasyMetadata({ data: "json, name=JobFlowStates" })
   jobFlowStates?: JobFlowExecutionStateEnum[];
 }

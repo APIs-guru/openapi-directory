@@ -1,8 +1,9 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
-from typing import Any,Enum,Optional
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 class GetPayoutsForPayorV4StatusEnum(str, Enum):
@@ -26,20 +27,20 @@ class GetPayoutsForPayorV4QueryParams:
     payout_memo: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'payoutMemo', 'style': 'form', 'explode': True }})
     sort: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'sort', 'style': 'form', 'explode': True }})
     status: Optional[GetPayoutsForPayorV4StatusEnum] = field(default=None, metadata={'query_param': { 'field_name': 'status', 'style': 'form', 'explode': True }})
-    submitted_date_from: Optional[datetime] = field(default=None, metadata={'query_param': { 'field_name': 'submittedDateFrom', 'style': 'form', 'explode': True }})
-    submitted_date_to: Optional[datetime] = field(default=None, metadata={'query_param': { 'field_name': 'submittedDateTo', 'style': 'form', 'explode': True }})
+    submitted_date_from: Optional[date] = field(default=None, metadata={'query_param': { 'field_name': 'submittedDateFrom', 'style': 'form', 'explode': True }})
+    submitted_date_to: Optional[date] = field(default=None, metadata={'query_param': { 'field_name': 'submittedDateTo', 'style': 'form', 'explode': True }})
     
 
 @dataclass
 class GetPayoutsForPayorV4Request:
-    query_params: GetPayoutsForPayorV4QueryParams = field(default=None)
+    query_params: GetPayoutsForPayorV4QueryParams = field()
     
 
 @dataclass
 class GetPayoutsForPayorV4Response:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     get_payouts_response: Optional[shared.GetPayoutsResponse] = field(default=None)
-    status_code: int = field(default=None)
     inline_response_400: Optional[Any] = field(default=None)
     inline_response_401: Optional[Any] = field(default=None)
     inline_response_403: Optional[Any] = field(default=None)

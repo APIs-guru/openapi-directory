@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // SheetsChartReference
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A reference to a linked chart embedded from Google Sheets.
 **/
 export class SheetsChartReference extends SpeakeasyBase {
-  @Metadata({ data: "json, name=chartId" })
+  @SpeakeasyMetadata({ data: "json, name=chartId" })
   chartId?: number;
 
-  @Metadata({ data: "json, name=spreadsheetId" })
+  @SpeakeasyMetadata({ data: "json, name=spreadsheetId" })
   spreadsheetId?: string;
 }

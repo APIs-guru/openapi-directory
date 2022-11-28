@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Optional
 from sdk.models import shared
 
 
 @dataclass
 class ReplaceSettingValueBySdkkeyPathParams:
-    setting_key_or_id: str = field(default=None, metadata={'path_param': { 'field_name': 'settingKeyOrId', 'style': 'simple', 'explode': False }})
+    setting_key_or_id: str = field(metadata={'path_param': { 'field_name': 'settingKeyOrId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -15,7 +18,7 @@ class ReplaceSettingValueBySdkkeyQueryParams:
 
 @dataclass
 class ReplaceSettingValueBySdkkeyHeaders:
-    x_configcat_sdkkey: str = field(default=None, metadata={'header': { 'field_name': 'X-CONFIGCAT-SDKKEY', 'style': 'simple', 'explode': False }})
+    x_configcat_sdkkey: str = field(metadata={'header': { 'field_name': 'X-CONFIGCAT-SDKKEY', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -27,16 +30,16 @@ class ReplaceSettingValueBySdkkeyRequests:
 
 @dataclass
 class ReplaceSettingValueBySdkkeyRequest:
-    path_params: ReplaceSettingValueBySdkkeyPathParams = field(default=None)
-    query_params: ReplaceSettingValueBySdkkeyQueryParams = field(default=None)
-    headers: ReplaceSettingValueBySdkkeyHeaders = field(default=None)
-    request: ReplaceSettingValueBySdkkeyRequests = field(default=None)
+    headers: ReplaceSettingValueBySdkkeyHeaders = field()
+    path_params: ReplaceSettingValueBySdkkeyPathParams = field()
+    query_params: ReplaceSettingValueBySdkkeyQueryParams = field()
+    request: ReplaceSettingValueBySdkkeyRequests = field()
     
 
 @dataclass
 class ReplaceSettingValueBySdkkeyResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     setting_value_model: Optional[shared.SettingValueModel] = field(default=None)
     setting_value_model_haljson: Optional[shared.SettingValueModelHaljson] = field(default=None)
-    status_code: int = field(default=None)
     

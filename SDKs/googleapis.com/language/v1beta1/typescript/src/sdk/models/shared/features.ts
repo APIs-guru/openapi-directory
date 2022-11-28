@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Features
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * All available features for sentiment, syntax, and semantic analysis. Setting each one to true will enable that specific analysis for the input.
 **/
 export class Features extends SpeakeasyBase {
-  @Metadata({ data: "json, name=extractDocumentSentiment" })
+  @SpeakeasyMetadata({ data: "json, name=extractDocumentSentiment" })
   extractDocumentSentiment?: boolean;
 
-  @Metadata({ data: "json, name=extractEntities" })
+  @SpeakeasyMetadata({ data: "json, name=extractEntities" })
   extractEntities?: boolean;
 
-  @Metadata({ data: "json, name=extractSyntax" })
+  @SpeakeasyMetadata({ data: "json, name=extractSyntax" })
   extractSyntax?: boolean;
 }

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // OpenXJsonSerDe
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The OpenX SerDe. Used by Kinesis Data Firehose for deserializing data, which means converting it from the JSON format in preparation for serializing it to the Parquet or ORC format. This is one of two deserializers you can choose, depending on which one offers the functionality you need. The other option is the native Hive / HCatalog JsonSerDe.
 **/
 export class OpenXJsonSerDe extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CaseInsensitive" })
+  @SpeakeasyMetadata({ data: "json, name=CaseInsensitive" })
   caseInsensitive?: boolean;
 
-  @Metadata({ data: "json, name=ColumnToJsonKeyMappings" })
+  @SpeakeasyMetadata({ data: "json, name=ColumnToJsonKeyMappings" })
   columnToJsonKeyMappings?: Map<string, string>;
 
-  @Metadata({ data: "json, name=ConvertDotsInJsonKeysToUnderscores" })
+  @SpeakeasyMetadata({ data: "json, name=ConvertDotsInJsonKeysToUnderscores" })
   convertDotsInJsonKeysToUnderscores?: boolean;
 }

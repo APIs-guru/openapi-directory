@@ -1,45 +1,46 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum PaginationOptionsItemTypeEnum {
-    Movie = "movie"
-,    Show = "show"
-,    Season = "season"
-,    Episode = "episode"
-,    Program = "program"
-,    Link = "link"
-,    Trailer = "trailer"
-,    Channel = "channel"
-,    CustomAsset = "customAsset"
+    Movie = "movie",
+    Show = "show",
+    Season = "season",
+    Episode = "episode",
+    Program = "program",
+    Link = "link",
+    Trailer = "trailer",
+    Channel = "channel",
+    CustomAsset = "customAsset"
 }
 
 export enum PaginationOptionsOrderEnum {
-    Asc = "asc"
-,    Desc = "desc"
+    Asc = "asc",
+    Desc = "desc"
 }
 
 export enum PaginationOptionsOrderByEnum {
-    AZ = "a-z"
-,    ReleaseYear = "release-year"
-,    DateAdded = "date-added"
+    AZ = "a-z",
+    ReleaseYear = "release-year",
+    DateAdded = "date-added"
 }
 
 
 export class PaginationOptions extends SpeakeasyBase {
-  @Metadata({ data: "json, name=completed" })
+  @SpeakeasyMetadata({ data: "json, name=completed" })
   completed?: boolean;
 
-  @Metadata({ data: "json, name=itemType" })
+  @SpeakeasyMetadata({ data: "json, name=itemType" })
   itemType?: PaginationOptionsItemTypeEnum;
 
-  @Metadata({ data: "json, name=maxRating" })
+  @SpeakeasyMetadata({ data: "json, name=maxRating" })
   maxRating?: string;
 
-  @Metadata({ data: "json, name=order" })
+  @SpeakeasyMetadata({ data: "json, name=order" })
   order?: PaginationOptionsOrderEnum;
 
-  @Metadata({ data: "json, name=orderBy" })
+  @SpeakeasyMetadata({ data: "json, name=orderBy" })
   orderBy?: PaginationOptionsOrderByEnum;
 
-  @Metadata({ data: "json, name=pageSize" })
+  @SpeakeasyMetadata({ data: "json, name=pageSize" })
   pageSize?: number;
 }

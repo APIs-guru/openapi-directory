@@ -1,9 +1,10 @@
 from dataclasses import dataclass, field
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass_json
 @dataclass
 class DeleteCapacityProviderRequest:
-    capacity_provider: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'capacityProvider' }})
+    capacity_provider: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('capacityProvider') }})
     

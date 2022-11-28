@@ -26,6 +26,8 @@ type StargazerSimpleUser struct {
 	URL               string  `json:"url"`
 }
 
+// Stargazer
+// Stargazer
 type Stargazer struct {
 	StarredAt time.Time           `json:"starred_at"`
 	User      StargazerSimpleUser `json:"user"`

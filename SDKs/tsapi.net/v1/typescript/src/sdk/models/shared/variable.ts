@@ -1,62 +1,61 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AltLabel } from "./altlabel";
-import { Variable } from "./variable";
 import { Value } from "./value";
 
 
+
 export class VariableLabel extends SpeakeasyBase {
-  @Metadata({ data: "json, name=altLabels", elemType: shared.AltLabel })
+  @SpeakeasyMetadata({ data: "json, name=altLabels", elemType: AltLabel })
   altLabels?: AltLabel[];
 
-  @Metadata({ data: "json, name=text" })
+  @SpeakeasyMetadata({ data: "json, name=text" })
   text?: string;
 }
 
 
 export class VariableVariableValuesRange extends SpeakeasyBase {
-  @Metadata({ data: "json, name=from" })
+  @SpeakeasyMetadata({ data: "json, name=from" })
   from?: string;
 
-  @Metadata({ data: "json, name=to" })
+  @SpeakeasyMetadata({ data: "json, name=to" })
   to?: string;
 }
 
 
 export class VariableVariableValues extends SpeakeasyBase {
-  @Metadata({ data: "json, name=range" })
+  @SpeakeasyMetadata({ data: "json, name=range" })
   range?: VariableVariableValuesRange;
 
-  @Metadata({ data: "json, name=values", elemType: shared.Value })
+  @SpeakeasyMetadata({ data: "json, name=values", elemType: Value })
   values?: Value[];
 }
 
 
 export class Variable extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ident" })
+  @SpeakeasyMetadata({ data: "json, name=ident" })
   ident?: string;
 
-  @Metadata({ data: "json, name=label" })
+  @SpeakeasyMetadata({ data: "json, name=label" })
   label?: VariableLabel;
 
-  @Metadata({ data: "json, name=maxResponses" })
+  @SpeakeasyMetadata({ data: "json, name=maxResponses" })
   maxResponses?: number;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=parentType" })
+  @SpeakeasyMetadata({ data: "json, name=parentType" })
   parentType?: number;
 
-  @Metadata({ data: "json, name=questions", elemType: shared.Variable })
+  @SpeakeasyMetadata({ data: "json, name=questions", elemType: Variable })
   questions?: Variable[];
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: number;
 
-  @Metadata({ data: "json, name=use" })
+  @SpeakeasyMetadata({ data: "json, name=use" })
   use?: number;
 
-  @Metadata({ data: "json, name=variableValues" })
+  @SpeakeasyMetadata({ data: "json, name=variableValues" })
   variableValues?: VariableVariableValues;
 }

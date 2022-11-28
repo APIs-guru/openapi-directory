@@ -1,21 +1,26 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum GoogleAppsCardV1IconImageTypeEnum {
-    Square = "SQUARE"
-,    Circle = "CIRCLE"
+    Square = "SQUARE",
+    Circle = "CIRCLE"
 }
 
 
+// GoogleAppsCardV1Icon
+/** 
+ * An icon displayed in a widget on a card. Supports [standard](https://developers.google.com/chat/api/guides/message-formats/cards) and [custom](https://developers.google.com/chat/api/guides/message-formats/cards#customicons) icons.
+**/
 export class GoogleAppsCardV1Icon extends SpeakeasyBase {
-  @Metadata({ data: "json, name=altText" })
+  @SpeakeasyMetadata({ data: "json, name=altText" })
   altText?: string;
 
-  @Metadata({ data: "json, name=iconUrl" })
+  @SpeakeasyMetadata({ data: "json, name=iconUrl" })
   iconUrl?: string;
 
-  @Metadata({ data: "json, name=imageType" })
+  @SpeakeasyMetadata({ data: "json, name=imageType" })
   imageType?: GoogleAppsCardV1IconImageTypeEnum;
 
-  @Metadata({ data: "json, name=knownIcon" })
+  @SpeakeasyMetadata({ data: "json, name=knownIcon" })
   knownIcon?: string;
 }

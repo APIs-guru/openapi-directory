@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudChannelV1ProvisionedService
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Service provisioned for an entitlement.
 **/
 export class GoogleCloudChannelV1ProvisionedService extends SpeakeasyBase {
-  @Metadata({ data: "json, name=productId" })
+  @SpeakeasyMetadata({ data: "json, name=productId" })
   productId?: string;
 
-  @Metadata({ data: "json, name=provisioningId" })
+  @SpeakeasyMetadata({ data: "json, name=provisioningId" })
   provisioningId?: string;
 
-  @Metadata({ data: "json, name=skuId" })
+  @SpeakeasyMetadata({ data: "json, name=skuId" })
   skuId?: string;
 }

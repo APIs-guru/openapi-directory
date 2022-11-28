@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
 from typing import List,Optional
@@ -8,8 +8,8 @@ from sdk.models import shared
 
 @dataclass
 class ActivityListRepoNotificationsForAuthenticatedUserPathParams:
-    owner: str = field(default=None, metadata={'path_param': { 'field_name': 'owner', 'style': 'simple', 'explode': False }})
-    repo: str = field(default=None, metadata={'path_param': { 'field_name': 'repo', 'style': 'simple', 'explode': False }})
+    owner: str = field(metadata={'path_param': { 'field_name': 'owner', 'style': 'simple', 'explode': False }})
+    repo: str = field(metadata={'path_param': { 'field_name': 'repo', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -24,14 +24,14 @@ class ActivityListRepoNotificationsForAuthenticatedUserQueryParams:
 
 @dataclass
 class ActivityListRepoNotificationsForAuthenticatedUserRequest:
-    path_params: ActivityListRepoNotificationsForAuthenticatedUserPathParams = field(default=None)
-    query_params: ActivityListRepoNotificationsForAuthenticatedUserQueryParams = field(default=None)
+    path_params: ActivityListRepoNotificationsForAuthenticatedUserPathParams = field()
+    query_params: ActivityListRepoNotificationsForAuthenticatedUserQueryParams = field()
     
 
 @dataclass
 class ActivityListRepoNotificationsForAuthenticatedUserResponse:
-    content_type: str = field(default=None)
-    headers: dict[str, List[str]] = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    headers: dict[str, List[str]] = field()
+    status_code: int = field()
     threads: Optional[List[shared.Thread]] = field(default=None)
     

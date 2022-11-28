@@ -1,5 +1,7 @@
 package shared
 
+// SendTokenRequestFlags
+// Object representing flags that potentialy modify this transaction
 type SendTokenRequestFlags struct {
 	SplitChange *bool `json:"splitChange,omitempty"`
 }
@@ -11,6 +13,8 @@ type SendTokenRequestMetadataEncryptions struct {
 	Type   *string `json:"type,omitempty"`
 }
 
+// SendTokenRequestMetadataRulesExpiration
+// Object describing expiration rules of the token
 type SendTokenRequestMetadataRulesExpiration struct {
 	Locked     *bool    `json:"locked,omitempty"`
 	ValidUntil *float64 `json:"validUntil,omitempty"`
@@ -32,6 +36,8 @@ type SendTokenRequestMetadataRulesHolders struct {
 	Locked  *bool   `json:"locked,omitempty"`
 }
 
+// SendTokenRequestMetadataRules
+// Object describing token rules
 type SendTokenRequestMetadataRules struct {
 	Expiration *SendTokenRequestMetadataRulesExpiration `json:"expiration,omitempty"`
 	Fees       *SendTokenRequestMetadataRulesFees       `json:"fees,omitempty"`
@@ -50,10 +56,14 @@ type SendTokenRequestMetadataUserDataMeta struct {
 	Value *string `json:"value,omitempty"`
 }
 
+// SendTokenRequestMetadataUserData
+// Metadata set by user on token
 type SendTokenRequestMetadataUserData struct {
 	Meta []SendTokenRequestMetadataUserDataMeta `json:"meta,omitempty"`
 }
 
+// SendTokenRequestMetadata
+// Object representing all metadata at token issuance
 type SendTokenRequestMetadata struct {
 	Description *string                               `json:"description,omitempty"`
 	Encryptions []SendTokenRequestMetadataEncryptions `json:"encryptions,omitempty"`

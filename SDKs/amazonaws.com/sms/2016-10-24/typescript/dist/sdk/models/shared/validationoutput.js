@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AppValidationOutput } from "./appvalidationoutput";
 import { ServerValidationOutput } from "./servervalidationoutput";
 import { ValidationStatusEnum } from "./validationstatusenum";
@@ -36,31 +36,31 @@ var ValidationOutput = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=appValidationOutput" }),
+        SpeakeasyMetadata({ data: "json, name=appValidationOutput" }),
         __metadata("design:type", AppValidationOutput)
     ], ValidationOutput.prototype, "appValidationOutput", void 0);
     __decorate([
-        Metadata({ data: "json, name=latestValidationTime" }),
+        SpeakeasyMetadata({ data: "json, name=latestValidationTime" }),
         __metadata("design:type", Date)
     ], ValidationOutput.prototype, "latestValidationTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], ValidationOutput.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=serverValidationOutput" }),
+        SpeakeasyMetadata({ data: "json, name=serverValidationOutput" }),
         __metadata("design:type", ServerValidationOutput)
     ], ValidationOutput.prototype, "serverValidationOutput", void 0);
     __decorate([
-        Metadata({ data: "json, name=status" }),
+        SpeakeasyMetadata({ data: "json, name=status" }),
         __metadata("design:type", String)
     ], ValidationOutput.prototype, "status", void 0);
     __decorate([
-        Metadata({ data: "json, name=statusMessage" }),
+        SpeakeasyMetadata({ data: "json, name=statusMessage" }),
         __metadata("design:type", String)
     ], ValidationOutput.prototype, "statusMessage", void 0);
     __decorate([
-        Metadata({ data: "json, name=validationId" }),
+        SpeakeasyMetadata({ data: "json, name=validationId" }),
         __metadata("design:type", String)
     ], ValidationOutput.prototype, "validationId", void 0);
     return ValidationOutput;

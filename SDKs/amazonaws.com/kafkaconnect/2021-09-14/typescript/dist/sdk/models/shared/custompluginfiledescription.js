@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // CustomPluginFileDescription
 /**
  * Details about a custom plugin file.
@@ -33,11 +33,11 @@ var CustomPluginFileDescription = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=fileMd5" }),
+        SpeakeasyMetadata({ data: "json, name=fileMd5" }),
         __metadata("design:type", String)
     ], CustomPluginFileDescription.prototype, "fileMd5", void 0);
     __decorate([
-        Metadata({ data: "json, name=fileSize" }),
+        SpeakeasyMetadata({ data: "json, name=fileSize" }),
         __metadata("design:type", Number)
     ], CustomPluginFileDescription.prototype, "fileSize", void 0);
     return CustomPluginFileDescription;

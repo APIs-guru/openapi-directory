@@ -1,16 +1,17 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ServiceDescription extends SpeakeasyBase {
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=import_source_uri" })
+  @SpeakeasyMetadata({ data: "json, name=import_source_uri" })
   importSourceUri: string;
 
-  @Metadata({ data: "json, name=service_id" })
+  @SpeakeasyMetadata({ data: "json, name=service_id" })
   serviceId: string;
 
-  @Metadata({ data: "json, name=service_name" })
+  @SpeakeasyMetadata({ data: "json, name=service_name" })
   serviceName: string;
 }

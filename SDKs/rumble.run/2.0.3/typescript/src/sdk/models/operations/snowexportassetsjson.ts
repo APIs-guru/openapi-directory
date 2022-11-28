@@ -1,26 +1,27 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class SnowExportAssetsJsonSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=bearer" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" })
   bearerAuth: shared.SchemeBearerAuth;
 }
 
 
 export class SnowExportAssetsJsonRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   security: SnowExportAssetsJsonSecurity;
 }
 
 
 export class SnowExportAssetsJsonResponse extends SpeakeasyBase {
-  @Metadata({ elemType: shared.AssetServiceNow })
+  @SpeakeasyMetadata({ elemType: shared.AssetServiceNow })
   assetServiceNows?: shared.AssetServiceNow[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

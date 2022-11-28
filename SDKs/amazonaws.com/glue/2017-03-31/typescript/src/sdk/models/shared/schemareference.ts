@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SchemaId } from "./schemaid";
+
 
 
 // SchemaReference
@@ -7,12 +8,12 @@ import { SchemaId } from "./schemaid";
  * An object that references a schema stored in the Glue Schema Registry.
 **/
 export class SchemaReference extends SpeakeasyBase {
-  @Metadata({ data: "json, name=SchemaId" })
+  @SpeakeasyMetadata({ data: "json, name=SchemaId" })
   schemaId?: SchemaId;
 
-  @Metadata({ data: "json, name=SchemaVersionId" })
+  @SpeakeasyMetadata({ data: "json, name=SchemaVersionId" })
   schemaVersionId?: string;
 
-  @Metadata({ data: "json, name=SchemaVersionNumber" })
+  @SpeakeasyMetadata({ data: "json, name=SchemaVersionNumber" })
   schemaVersionNumber?: number;
 }

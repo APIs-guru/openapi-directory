@@ -1,46 +1,47 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CountryEnum } from "./countryenum";
 
+
 export enum LegalEntityDocumentTypeEnum {
-    Invoice = "invoice"
-,    InvoiceResponse = "invoice_response"
+    Invoice = "invoice",
+    InvoiceResponse = "invoice_response"
 }
 
 
 export class LegalEntity extends SpeakeasyBase {
-  @Metadata({ data: "json, name=advertisements" })
+  @SpeakeasyMetadata({ data: "json, name=advertisements" })
   advertisements?: LegalEntityDocumentTypeEnum[];
 
-  @Metadata({ data: "json, name=city" })
+  @SpeakeasyMetadata({ data: "json, name=city" })
   city?: string;
 
-  @Metadata({ data: "json, name=country" })
+  @SpeakeasyMetadata({ data: "json, name=country" })
   country?: CountryEnum;
 
-  @Metadata({ data: "json, name=county" })
+  @SpeakeasyMetadata({ data: "json, name=county" })
   county?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: number;
 
-  @Metadata({ data: "json, name=line1" })
+  @SpeakeasyMetadata({ data: "json, name=line1" })
   line1?: string;
 
-  @Metadata({ data: "json, name=line2" })
+  @SpeakeasyMetadata({ data: "json, name=line2" })
   line2?: string;
 
-  @Metadata({ data: "json, name=party_name" })
+  @SpeakeasyMetadata({ data: "json, name=party_name" })
   partyName?: string;
 
-  @Metadata({ data: "json, name=peppol_identifiers" })
+  @SpeakeasyMetadata({ data: "json, name=peppol_identifiers" })
   peppolIdentifiers?: any[];
 
-  @Metadata({ data: "json, name=public" })
+  @SpeakeasyMetadata({ data: "json, name=public" })
   public?: boolean;
 
-  @Metadata({ data: "json, name=tenant_id" })
+  @SpeakeasyMetadata({ data: "json, name=tenant_id" })
   tenantId?: string;
 
-  @Metadata({ data: "json, name=zip" })
+  @SpeakeasyMetadata({ data: "json, name=zip" })
   zip?: string;
 }

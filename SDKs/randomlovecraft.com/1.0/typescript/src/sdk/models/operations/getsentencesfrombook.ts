@@ -1,41 +1,42 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetSentencesFromBookPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" })
   id: string;
 }
 
 
 export class GetSentencesFromBookQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=limit" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=limit" })
   limit?: number;
 }
 
 
-export class GetSentencesFromBookRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: GetSentencesFromBookPathParams;
-
-  @Metadata()
-  queryParams: GetSentencesFromBookQueryParams;
-}
-
-
 export class GetSentencesFromBook200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=data", elemType: shared.Sentence })
+  @SpeakeasyMetadata({ data: "json, name=data", elemType: shared.Sentence })
   data?: shared.Sentence[];
 }
 
 
+export class GetSentencesFromBookRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: GetSentencesFromBookPathParams;
+
+  @SpeakeasyMetadata()
+  queryParams: GetSentencesFromBookQueryParams;
+}
+
+
 export class GetSentencesFromBookResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getSentencesFromBook200ApplicationJsonObject?: GetSentencesFromBook200ApplicationJson;
 }

@@ -1,0 +1,8 @@
+package shared
+
+type ClientCertificateRevocationListStatusCodeEnum string
+
+const (
+	ClientCertificateRevocationListStatusCodeEnumPending ClientCertificateRevocationListStatusCodeEnum = "pending"
+	ClientCertificateRevocationListStatusCodeEnumActive  ClientCertificateRevocationListStatusCodeEnum = "active"
+)

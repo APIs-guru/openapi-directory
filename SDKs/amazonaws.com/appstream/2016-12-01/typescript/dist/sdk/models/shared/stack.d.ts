@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { AccessEndpoint } from "./accessendpoint";
 import { ApplicationSettingsResponse } from "./applicationsettingsresponse";
 import { StackError } from "./stackerror";

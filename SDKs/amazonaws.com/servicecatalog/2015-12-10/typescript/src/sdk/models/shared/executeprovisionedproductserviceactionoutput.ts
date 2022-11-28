@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RecordDetail } from "./recorddetail";
 
 
+
 export class ExecuteProvisionedProductServiceActionOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=RecordDetail" })
+  @SpeakeasyMetadata({ data: "json, name=RecordDetail" })
   recordDetail?: RecordDetail;
 }

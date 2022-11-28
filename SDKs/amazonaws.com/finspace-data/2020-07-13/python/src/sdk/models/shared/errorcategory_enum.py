@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class ErrorCategoryEnum(str, Enum):
     THE_INPUTS_TO_THIS_REQUEST_ARE_INVALID = "The_inputs_to_this_request_are_invalid"

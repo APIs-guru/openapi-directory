@@ -15,22 +15,10 @@ type GetRepositoriesWorkspaceRepoSlugIssuesIssueIDChangesQueryParams struct {
 	Sort *string `queryParam:"style=form,explode=true,name=sort"`
 }
 
-type GetRepositoriesWorkspaceRepoSlugIssuesIssueIDChangesSecurityOption1 struct {
-	Oauth2 shared.SchemeOauth2 `security:"scheme,type=oauth2"`
-}
-
-type GetRepositoriesWorkspaceRepoSlugIssuesIssueIDChangesSecurityOption2 struct {
-	Basic shared.SchemeBasic `security:"scheme,type=http,subtype=basic"`
-}
-
-type GetRepositoriesWorkspaceRepoSlugIssuesIssueIDChangesSecurityOption3 struct {
-	APIKey shared.SchemeAPIKey `security:"scheme,type=apiKey,subtype=header"`
-}
-
 type GetRepositoriesWorkspaceRepoSlugIssuesIssueIDChangesSecurity struct {
-	Option1 *GetRepositoriesWorkspaceRepoSlugIssuesIssueIDChangesSecurityOption1 `security:"option"`
-	Option2 *GetRepositoriesWorkspaceRepoSlugIssuesIssueIDChangesSecurityOption2 `security:"option"`
-	Option3 *GetRepositoriesWorkspaceRepoSlugIssuesIssueIDChangesSecurityOption3 `security:"option"`
+	Oauth2 *shared.SchemeOauth2 `security:"scheme,type=oauth2"`
+	Basic  *shared.SchemeBasic  `security:"scheme,type=http,subtype=basic"`
+	APIKey *shared.SchemeAPIKey `security:"scheme,type=apiKey,subtype=header"`
 }
 
 type GetRepositoriesWorkspaceRepoSlugIssuesIssueIDChangesRequest struct {

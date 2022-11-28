@@ -14,6 +14,8 @@ const (
 	EnterpriseCrmEventbusProtoConditionOperatorEnumIsNotEmpty   EnterpriseCrmEventbusProtoConditionOperatorEnum = "IS_NOT_EMPTY"
 )
 
+// EnterpriseCrmEventbusProtoCondition
+// Condition that uses `operator` to evaluate the key against the value.
 type EnterpriseCrmEventbusProtoCondition struct {
 	EventPropertyKey *string                                          `json:"eventPropertyKey,omitempty"`
 	Operator         *EnterpriseCrmEventbusProtoConditionOperatorEnum `json:"operator,omitempty"`

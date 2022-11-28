@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { S3Location } from "./s3location";
 import { FormatEnum } from "./formatenum";
 import { ReportFrequencyEnum } from "./reportfrequencyenum";

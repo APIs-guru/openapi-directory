@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class FirebasedatabaseProjectsLocationsInstancesDeletePathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,14 +26,14 @@ class FirebasedatabaseProjectsLocationsInstancesDeleteQueryParams:
 
 @dataclass
 class FirebasedatabaseProjectsLocationsInstancesDeleteSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class FirebasedatabaseProjectsLocationsInstancesDeleteSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -43,14 +44,14 @@ class FirebasedatabaseProjectsLocationsInstancesDeleteSecurity:
 
 @dataclass
 class FirebasedatabaseProjectsLocationsInstancesDeleteRequest:
-    path_params: FirebasedatabaseProjectsLocationsInstancesDeletePathParams = field(default=None)
-    query_params: FirebasedatabaseProjectsLocationsInstancesDeleteQueryParams = field(default=None)
-    security: FirebasedatabaseProjectsLocationsInstancesDeleteSecurity = field(default=None)
+    path_params: FirebasedatabaseProjectsLocationsInstancesDeletePathParams = field()
+    query_params: FirebasedatabaseProjectsLocationsInstancesDeleteQueryParams = field()
+    security: FirebasedatabaseProjectsLocationsInstancesDeleteSecurity = field()
     
 
 @dataclass
 class FirebasedatabaseProjectsLocationsInstancesDeleteResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     database_instance: Optional[shared.DatabaseInstance] = field(default=None)
-    status_code: int = field(default=None)
     

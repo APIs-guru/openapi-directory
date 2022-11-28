@@ -1,22 +1,23 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ConnecttoWiFiNetworkRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=bssid" })
+  @SpeakeasyMetadata({ data: "json, name=bssid" })
   bssid: string;
 
-  @Metadata({ data: "json, name=enc_passwd" })
+  @SpeakeasyMetadata({ data: "json, name=enc_passwd" })
   encPasswd: string;
 
-  @Metadata({ data: "json, name=signal_level" })
+  @SpeakeasyMetadata({ data: "json, name=signal_level" })
   signalLevel: number;
 
-  @Metadata({ data: "json, name=ssid" })
+  @SpeakeasyMetadata({ data: "json, name=ssid" })
   ssid: string;
 
-  @Metadata({ data: "json, name=wpa_auth" })
+  @SpeakeasyMetadata({ data: "json, name=wpa_auth" })
   wpaAuth: number;
 
-  @Metadata({ data: "json, name=wpa_cipher" })
+  @SpeakeasyMetadata({ data: "json, name=wpa_cipher" })
   wpaCipher: number;
 }

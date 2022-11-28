@@ -1,12 +1,18 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import schedulestate_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class Schedule:
-    schedule_expression: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ScheduleExpression' }})
-    state: Optional[schedulestate_enum.ScheduleStateEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'State' }})
+    r"""Schedule
+    A scheduling object using a <code>cron</code> statement to schedule an event.
+    """
+    
+    schedule_expression: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ScheduleExpression') }})
+    state: Optional[ScheduleStateEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('State') }})
     

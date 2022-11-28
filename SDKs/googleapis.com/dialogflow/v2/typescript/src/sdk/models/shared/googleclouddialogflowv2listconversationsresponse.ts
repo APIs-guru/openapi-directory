@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudDialogflowV2Conversation } from "./googleclouddialogflowv2conversation";
+
 
 
 // GoogleCloudDialogflowV2ListConversationsResponse
@@ -8,9 +8,9 @@ import { GoogleCloudDialogflowV2Conversation } from "./googleclouddialogflowv2co
  * The response message for Conversations.ListConversations.
 **/
 export class GoogleCloudDialogflowV2ListConversationsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=conversations", elemType: shared.GoogleCloudDialogflowV2Conversation })
+  @SpeakeasyMetadata({ data: "json, name=conversations", elemType: GoogleCloudDialogflowV2Conversation })
   conversations?: GoogleCloudDialogflowV2Conversation[];
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 }

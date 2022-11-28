@@ -22,46 +22,46 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var Twitch = /** @class */ (function (_super) {
     __extends(Twitch, _super);
     function Twitch() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=created" }),
+        SpeakeasyMetadata({ data: "json, name=created" }),
         __metadata("design:type", Date)
     ], Twitch.prototype, "created", void 0);
     __decorate([
-        Metadata({ data: "json, name=description" }),
+        SpeakeasyMetadata({ data: "json, name=description" }),
         __metadata("design:type", String)
     ], Twitch.prototype, "description", void 0);
     __decorate([
-        Metadata({ data: "json, name=external_id" }),
+        SpeakeasyMetadata({ data: "json, name=external_id" }),
         __metadata("design:type", Number)
     ], Twitch.prototype, "externalId", void 0);
     __decorate([
-        Metadata({ data: "json, name=id" }),
+        SpeakeasyMetadata({ data: "json, name=id" }),
         __metadata("design:type", Number)
     ], Twitch.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "json, name=language" }),
+        SpeakeasyMetadata({ data: "json, name=language" }),
         __metadata("design:type", String)
     ], Twitch.prototype, "language", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], Twitch.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=published" }),
+        SpeakeasyMetadata({ data: "json, name=published" }),
         __metadata("design:type", Date)
     ], Twitch.prototype, "published", void 0);
     __decorate([
-        Metadata({ data: "json, name=thumbnail" }),
+        SpeakeasyMetadata({ data: "json, name=thumbnail" }),
         __metadata("design:type", String)
     ], Twitch.prototype, "thumbnail", void 0);
     __decorate([
-        Metadata({ data: "json, name=view_count" }),
+        SpeakeasyMetadata({ data: "json, name=view_count" }),
         __metadata("design:type", Number)
     ], Twitch.prototype, "viewCount", void 0);
     return Twitch;

@@ -1,14 +1,15 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class AppengineAppsServicesVersionsInstancesDebugPathParams:
-    apps_id: str = field(default=None, metadata={'path_param': { 'field_name': 'appsId', 'style': 'simple', 'explode': False }})
-    instances_id: str = field(default=None, metadata={'path_param': { 'field_name': 'instancesId', 'style': 'simple', 'explode': False }})
-    services_id: str = field(default=None, metadata={'path_param': { 'field_name': 'servicesId', 'style': 'simple', 'explode': False }})
-    versions_id: str = field(default=None, metadata={'path_param': { 'field_name': 'versionsId', 'style': 'simple', 'explode': False }})
+    apps_id: str = field(metadata={'path_param': { 'field_name': 'appsId', 'style': 'simple', 'explode': False }})
+    instances_id: str = field(metadata={'path_param': { 'field_name': 'instancesId', 'style': 'simple', 'explode': False }})
+    services_id: str = field(metadata={'path_param': { 'field_name': 'servicesId', 'style': 'simple', 'explode': False }})
+    versions_id: str = field(metadata={'path_param': { 'field_name': 'versionsId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -28,21 +29,21 @@ class AppengineAppsServicesVersionsInstancesDebugQueryParams:
 
 @dataclass
 class AppengineAppsServicesVersionsInstancesDebugSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class AppengineAppsServicesVersionsInstancesDebugRequest:
-    path_params: AppengineAppsServicesVersionsInstancesDebugPathParams = field(default=None)
-    query_params: AppengineAppsServicesVersionsInstancesDebugQueryParams = field(default=None)
+    path_params: AppengineAppsServicesVersionsInstancesDebugPathParams = field()
+    query_params: AppengineAppsServicesVersionsInstancesDebugQueryParams = field()
+    security: AppengineAppsServicesVersionsInstancesDebugSecurity = field()
     request: Optional[shared.DebugInstanceRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: AppengineAppsServicesVersionsInstancesDebugSecurity = field(default=None)
     
 
 @dataclass
 class AppengineAppsServicesVersionsInstancesDebugResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     operation: Optional[shared.Operation] = field(default=None)
-    status_code: int = field(default=None)
     

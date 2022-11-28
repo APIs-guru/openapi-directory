@@ -1,18 +1,19 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import reportcodecoveragesortbytype_enum
-from . import sortordertype_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class DescribeCodeCoveragesInput:
-    max_line_coverage_percentage: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'maxLineCoveragePercentage' }})
-    max_results: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'maxResults' }})
-    min_line_coverage_percentage: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'minLineCoveragePercentage' }})
-    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'nextToken' }})
-    report_arn: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'reportArn' }})
-    sort_by: Optional[reportcodecoveragesortbytype_enum.ReportCodeCoverageSortByTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'sortBy' }})
-    sort_order: Optional[sortordertype_enum.SortOrderTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'sortOrder' }})
+    report_arn: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('reportArn') }})
+    max_line_coverage_percentage: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('maxLineCoveragePercentage') }})
+    max_results: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('maxResults') }})
+    min_line_coverage_percentage: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('minLineCoveragePercentage') }})
+    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('nextToken') }})
+    sort_by: Optional[ReportCodeCoverageSortByTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('sortBy') }})
+    sort_order: Optional[SortOrderTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('sortOrder') }})
     

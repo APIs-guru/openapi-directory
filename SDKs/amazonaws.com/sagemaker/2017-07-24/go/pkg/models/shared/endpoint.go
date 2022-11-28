@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// Endpoint
+// A hosted endpoint for real-time inference.
 type Endpoint struct {
 	CreationTime        time.Time                  `json:"CreationTime"`
 	DataCaptureConfig   *DataCaptureConfigSummary  `json:"DataCaptureConfig,omitempty"`

@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SignedData } from "./signeddata";
-import { SignedData } from "./signeddata";
+
 
 
 // Challenge
@@ -8,9 +8,9 @@ import { SignedData } from "./signeddata";
  * Result message for VerifiedAccess.CreateChallenge.
 **/
 export class Challenge extends SpeakeasyBase {
-  @Metadata({ data: "json, name=alternativeChallenge" })
+  @SpeakeasyMetadata({ data: "json, name=alternativeChallenge" })
   alternativeChallenge?: SignedData;
 
-  @Metadata({ data: "json, name=challenge" })
+  @SpeakeasyMetadata({ data: "json, name=challenge" })
   challenge?: SignedData;
 }

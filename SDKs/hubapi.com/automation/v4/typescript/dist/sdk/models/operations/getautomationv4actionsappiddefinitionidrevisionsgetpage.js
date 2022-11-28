@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetAutomationV4ActionsAppIdDefinitionIdRevisionsGetPagePathParams = /** @class */ (function (_super) {
     __extends(GetAutomationV4ActionsAppIdDefinitionIdRevisionsGetPagePathParams, _super);
@@ -30,11 +30,11 @@ var GetAutomationV4ActionsAppIdDefinitionIdRevisionsGetPagePathParams = /** @cla
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=appId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=appId" }),
         __metadata("design:type", Number)
     ], GetAutomationV4ActionsAppIdDefinitionIdRevisionsGetPagePathParams.prototype, "appId", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=definitionId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=definitionId" }),
         __metadata("design:type", String)
     ], GetAutomationV4ActionsAppIdDefinitionIdRevisionsGetPagePathParams.prototype, "definitionId", void 0);
     return GetAutomationV4ActionsAppIdDefinitionIdRevisionsGetPagePathParams;
@@ -46,11 +46,11 @@ var GetAutomationV4ActionsAppIdDefinitionIdRevisionsGetPageQueryParams = /** @cl
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=after" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=after" }),
         __metadata("design:type", String)
     ], GetAutomationV4ActionsAppIdDefinitionIdRevisionsGetPageQueryParams.prototype, "after", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=limit" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=limit" }),
         __metadata("design:type", Number)
     ], GetAutomationV4ActionsAppIdDefinitionIdRevisionsGetPageQueryParams.prototype, "limit", void 0);
     return GetAutomationV4ActionsAppIdDefinitionIdRevisionsGetPageQueryParams;
@@ -62,7 +62,7 @@ var GetAutomationV4ActionsAppIdDefinitionIdRevisionsGetPageSecurity = /** @class
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=query" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=query" }),
         __metadata("design:type", shared.SchemeDeveloperHapikey)
     ], GetAutomationV4ActionsAppIdDefinitionIdRevisionsGetPageSecurity.prototype, "developerHapikey", void 0);
     return GetAutomationV4ActionsAppIdDefinitionIdRevisionsGetPageSecurity;
@@ -74,15 +74,15 @@ var GetAutomationV4ActionsAppIdDefinitionIdRevisionsGetPageRequest = /** @class 
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetAutomationV4ActionsAppIdDefinitionIdRevisionsGetPagePathParams)
     ], GetAutomationV4ActionsAppIdDefinitionIdRevisionsGetPageRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetAutomationV4ActionsAppIdDefinitionIdRevisionsGetPageQueryParams)
     ], GetAutomationV4ActionsAppIdDefinitionIdRevisionsGetPageRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetAutomationV4ActionsAppIdDefinitionIdRevisionsGetPageSecurity)
     ], GetAutomationV4ActionsAppIdDefinitionIdRevisionsGetPageRequest.prototype, "security", void 0);
     return GetAutomationV4ActionsAppIdDefinitionIdRevisionsGetPageRequest;
@@ -94,19 +94,19 @@ var GetAutomationV4ActionsAppIdDefinitionIdRevisionsGetPageResponse = /** @class
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], GetAutomationV4ActionsAppIdDefinitionIdRevisionsGetPageResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.CollectionResponseActionRevisionForwardPaging)
     ], GetAutomationV4ActionsAppIdDefinitionIdRevisionsGetPageResponse.prototype, "collectionResponseActionRevisionForwardPaging", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetAutomationV4ActionsAppIdDefinitionIdRevisionsGetPageResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetAutomationV4ActionsAppIdDefinitionIdRevisionsGetPageResponse.prototype, "statusCode", void 0);
     return GetAutomationV4ActionsAppIdDefinitionIdRevisionsGetPageResponse;

@@ -13,17 +13,9 @@ type GetDiscountHeaders struct {
 	IfNoneMatch *string `header:"style=simple,explode=false,name=If-None-Match"`
 }
 
-type GetDiscountSecurityOption1 struct {
-	ZettleAPIKey shared.SchemeZettleAPIKey `security:"scheme,type=apiKey,subtype=header"`
-}
-
-type GetDiscountSecurityOption2 struct {
-	ZettleOauth shared.SchemeZettleOauth `security:"scheme,type=oauth2"`
-}
-
 type GetDiscountSecurity struct {
-	Option1 *GetDiscountSecurityOption1 `security:"option"`
-	Option2 *GetDiscountSecurityOption2 `security:"option"`
+	ZettleAPIKey *shared.SchemeZettleAPIKey `security:"scheme,type=apiKey,subtype=header"`
+	ZettleOauth  *shared.SchemeZettleOauth  `security:"scheme,type=oauth2"`
 }
 
 type GetDiscountRequest struct {

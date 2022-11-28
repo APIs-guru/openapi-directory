@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetDeleteTrafficMirrorFilterRuleActionEnum(str, Enum):
     DELETE_TRAFFIC_MIRROR_FILTER_RULE = "DeleteTrafficMirrorFilterRule"
@@ -10,10 +14,10 @@ class GetDeleteTrafficMirrorFilterRuleVersionEnum(str, Enum):
 
 @dataclass
 class GetDeleteTrafficMirrorFilterRuleQueryParams:
-    action: GetDeleteTrafficMirrorFilterRuleActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetDeleteTrafficMirrorFilterRuleActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    traffic_mirror_filter_rule_id: str = field(metadata={'query_param': { 'field_name': 'TrafficMirrorFilterRuleId', 'style': 'form', 'explode': True }})
+    version: GetDeleteTrafficMirrorFilterRuleVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     dry_run: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'DryRun', 'style': 'form', 'explode': True }})
-    traffic_mirror_filter_rule_id: str = field(default=None, metadata={'query_param': { 'field_name': 'TrafficMirrorFilterRuleId', 'style': 'form', 'explode': True }})
-    version: GetDeleteTrafficMirrorFilterRuleVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -29,13 +33,13 @@ class GetDeleteTrafficMirrorFilterRuleHeaders:
 
 @dataclass
 class GetDeleteTrafficMirrorFilterRuleRequest:
-    query_params: GetDeleteTrafficMirrorFilterRuleQueryParams = field(default=None)
-    headers: GetDeleteTrafficMirrorFilterRuleHeaders = field(default=None)
+    headers: GetDeleteTrafficMirrorFilterRuleHeaders = field()
+    query_params: GetDeleteTrafficMirrorFilterRuleQueryParams = field()
     
 
 @dataclass
 class GetDeleteTrafficMirrorFilterRuleResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

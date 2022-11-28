@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostPutScheduledUpdateGroupActionActionEnum(str, Enum):
     PUT_SCHEDULED_UPDATE_GROUP_ACTION = "PutScheduledUpdateGroupAction"
@@ -10,8 +14,8 @@ class PostPutScheduledUpdateGroupActionVersionEnum(str, Enum):
 
 @dataclass
 class PostPutScheduledUpdateGroupActionQueryParams:
-    action: PostPutScheduledUpdateGroupActionActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostPutScheduledUpdateGroupActionVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostPutScheduledUpdateGroupActionActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostPutScheduledUpdateGroupActionVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostPutScheduledUpdateGroupActionHeaders:
 
 @dataclass
 class PostPutScheduledUpdateGroupActionRequest:
-    query_params: PostPutScheduledUpdateGroupActionQueryParams = field(default=None)
-    headers: PostPutScheduledUpdateGroupActionHeaders = field(default=None)
+    headers: PostPutScheduledUpdateGroupActionHeaders = field()
+    query_params: PostPutScheduledUpdateGroupActionQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostPutScheduledUpdateGroupActionResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

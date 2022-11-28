@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PathQueryOptions } from "./pathqueryoptions";
 // Options
 /**
@@ -34,11 +34,11 @@ var Options = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=includeOnlyTargetedUserLists" }),
+        SpeakeasyMetadata({ data: "json, name=includeOnlyTargetedUserLists" }),
         __metadata("design:type", Boolean)
     ], Options.prototype, "includeOnlyTargetedUserLists", void 0);
     __decorate([
-        Metadata({ data: "json, name=pathQueryOptions" }),
+        SpeakeasyMetadata({ data: "json, name=pathQueryOptions" }),
         __metadata("design:type", PathQueryOptions)
     ], Options.prototype, "pathQueryOptions", void 0);
     return Options;

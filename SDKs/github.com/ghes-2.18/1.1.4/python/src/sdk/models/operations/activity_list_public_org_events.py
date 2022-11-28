@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class ActivityListPublicOrgEventsPathParams:
-    org: str = field(default=None, metadata={'path_param': { 'field_name': 'org', 'style': 'simple', 'explode': False }})
+    org: str = field(metadata={'path_param': { 'field_name': 'org', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -16,13 +16,13 @@ class ActivityListPublicOrgEventsQueryParams:
 
 @dataclass
 class ActivityListPublicOrgEventsRequest:
-    path_params: ActivityListPublicOrgEventsPathParams = field(default=None)
-    query_params: ActivityListPublicOrgEventsQueryParams = field(default=None)
+    path_params: ActivityListPublicOrgEventsPathParams = field()
+    query_params: ActivityListPublicOrgEventsQueryParams = field()
     
 
 @dataclass
 class ActivityListPublicOrgEventsResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     events: Optional[List[shared.Event]] = field(default=None)
     

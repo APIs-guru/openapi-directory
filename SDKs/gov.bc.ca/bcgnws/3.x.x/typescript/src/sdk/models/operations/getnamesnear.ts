@@ -1,73 +1,74 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum GetNamesNearOutputFormatEnum {
-    Json = "json"
-,    Xml = "xml"
-,    Kml = "kml"
-,    Csv = "csv"
+    Json = "json",
+    Xml = "xml",
+    Kml = "kml",
+    Csv = "csv"
 }
 
 export enum GetNamesNearOutputStyleEnum {
-    Summary = "summary"
-,    Detail = "detail"
+    Summary = "summary",
+    Detail = "detail"
 }
 
 export enum GetNamesNearSortByEnum {
-    Name = "name"
-,    FeatureType = "featureType"
-,    DecisionDate = "decisionDate"
+    Name = "name",
+    FeatureType = "featureType",
+    DecisionDate = "decisionDate"
 }
 
 
 export class GetNamesNearQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=distance" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=distance" })
   distance: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=embed" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=embed" })
   embed?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=featureCategory" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=featureCategory" })
   featureCategory?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=featureClass" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=featureClass" })
   featureClass?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=featurePoint" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=featurePoint" })
   featurePoint: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=featureType" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=featureType" })
   featureType?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=itemsPerPage" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=itemsPerPage" })
   itemsPerPage?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=outputFormat" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=outputFormat" })
   outputFormat: GetNamesNearOutputFormatEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=outputSRS" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=outputSRS" })
   outputSrs?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=outputStyle" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=outputStyle" })
   outputStyle?: GetNamesNearOutputStyleEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=sortBy" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sortBy" })
   sortBy?: GetNamesNearSortByEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=startIndex" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=startIndex" })
   startIndex?: number;
 }
 
 
 export class GetNamesNearRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetNamesNearQueryParams;
 }
 
 
 export class GetNamesNearResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

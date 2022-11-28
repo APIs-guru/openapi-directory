@@ -1,11 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AddOnTypeEnum } from "./addontypeenum";
 
 
+
 export class DisableAddOnRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=addOnType" })
+  @SpeakeasyMetadata({ data: "json, name=addOnType" })
   addOnType: AddOnTypeEnum;
 
-  @Metadata({ data: "json, name=resourceName" })
+  @SpeakeasyMetadata({ data: "json, name=resourceName" })
   resourceName: string;
 }

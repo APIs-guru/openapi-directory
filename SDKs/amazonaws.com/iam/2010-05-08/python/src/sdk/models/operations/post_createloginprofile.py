@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostCreateLoginProfileActionEnum(str, Enum):
     CREATE_LOGIN_PROFILE = "CreateLoginProfile"
@@ -10,8 +14,8 @@ class PostCreateLoginProfileVersionEnum(str, Enum):
 
 @dataclass
 class PostCreateLoginProfileQueryParams:
-    action: PostCreateLoginProfileActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostCreateLoginProfileVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostCreateLoginProfileActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostCreateLoginProfileVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostCreateLoginProfileHeaders:
 
 @dataclass
 class PostCreateLoginProfileRequest:
-    query_params: PostCreateLoginProfileQueryParams = field(default=None)
-    headers: PostCreateLoginProfileHeaders = field(default=None)
+    headers: PostCreateLoginProfileHeaders = field()
+    query_params: PostCreateLoginProfileQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostCreateLoginProfileResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

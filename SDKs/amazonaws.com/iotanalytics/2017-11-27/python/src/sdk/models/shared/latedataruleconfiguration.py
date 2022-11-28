@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import deltatimesessionwindowconfiguration
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class LateDataRuleConfiguration:
-    delta_time_session_window_configuration: Optional[deltatimesessionwindowconfiguration.DeltaTimeSessionWindowConfiguration] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'deltaTimeSessionWindowConfiguration' }})
+    r"""LateDataRuleConfiguration
+    The information needed to configure a delta time session window.
+    """
+    
+    delta_time_session_window_configuration: Optional[DeltaTimeSessionWindowConfiguration] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('deltaTimeSessionWindowConfiguration') }})
     

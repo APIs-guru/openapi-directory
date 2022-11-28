@@ -1,12 +1,15 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import restrictionevaluation
+from sdk import utils
 
 
 @dataclass_json
 @dataclass
 class MemberRestriction:
-    evaluation: Optional[restrictionevaluation.RestrictionEvaluation] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'evaluation' }})
-    query: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'query' }})
+    r"""MemberRestriction
+    The definition of MemberRestriction
+    """
+    
+    query: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('query') }})
     

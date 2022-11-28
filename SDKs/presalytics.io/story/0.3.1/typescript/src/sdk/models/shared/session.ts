@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { StoryCollaborator } from "./storycollaborator";
 import { View } from "./view";
+
 
 
 // Session
@@ -9,33 +9,33 @@ import { View } from "./view";
  * A user session with an open story
 **/
 export class Session extends SpeakeasyBase {
-  @Metadata({ data: "json, name=collaborator" })
+  @SpeakeasyMetadata({ data: "json, name=collaborator" })
   collaborator?: StoryCollaborator;
 
-  @Metadata({ data: "json, name=collaborator_id" })
+  @SpeakeasyMetadata({ data: "json, name=collaborator_id" })
   collaboratorId?: string;
 
-  @Metadata({ data: "json, name=created_at" })
+  @SpeakeasyMetadata({ data: "json, name=created_at" })
   createdAt?: Date;
 
-  @Metadata({ data: "json, name=created_by" })
+  @SpeakeasyMetadata({ data: "json, name=created_by" })
   createdBy?: string;
 
-  @Metadata({ data: "json, name=host" })
+  @SpeakeasyMetadata({ data: "json, name=host" })
   host?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=outline_revision" })
+  @SpeakeasyMetadata({ data: "json, name=outline_revision" })
   outlineRevision?: number;
 
-  @Metadata({ data: "json, name=updated_at" })
+  @SpeakeasyMetadata({ data: "json, name=updated_at" })
   updatedAt?: Date;
 
-  @Metadata({ data: "json, name=updated_by" })
+  @SpeakeasyMetadata({ data: "json, name=updated_by" })
   updatedBy?: string;
 
-  @Metadata({ data: "json, name=views", elemType: shared.View })
+  @SpeakeasyMetadata({ data: "json, name=views", elemType: View })
   views?: View[];
 }

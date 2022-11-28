@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// RecommendationExportJob
+// <p>Describes a recommendation export job.</p> <p>Use the <a>DescribeRecommendationExportJobs</a> action to view your recommendation export jobs.</p> <p>Use the <a>ExportAutoScalingGroupRecommendations</a> or <a>ExportEC2InstanceRecommendations</a> actions to request an export of your recommendations.</p>
 type RecommendationExportJob struct {
 	CreationTimestamp    *time.Time         `json:"creationTimestamp,omitempty"`
 	Destination          *ExportDestination `json:"destination,omitempty"`

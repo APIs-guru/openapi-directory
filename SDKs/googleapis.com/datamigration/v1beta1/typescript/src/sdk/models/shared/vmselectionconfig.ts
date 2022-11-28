@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // VmSelectionConfig
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * VM selection configuration message
 **/
 export class VmSelectionConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=vmZone" })
+  @SpeakeasyMetadata({ data: "json, name=vmZone" })
   vmZone?: string;
 }

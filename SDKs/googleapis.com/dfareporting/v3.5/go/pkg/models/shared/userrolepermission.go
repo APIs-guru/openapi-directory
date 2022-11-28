@@ -11,6 +11,8 @@ const (
 	UserRolePermissionAvailabilityEnumUserProfileOnly               UserRolePermissionAvailabilityEnum = "USER_PROFILE_ONLY"
 )
 
+// UserRolePermission
+// Contains properties of a user role permission.
 type UserRolePermission struct {
 	Availability      *UserRolePermissionAvailabilityEnum `json:"availability,omitempty"`
 	ID                *string                             `json:"id,omitempty"`

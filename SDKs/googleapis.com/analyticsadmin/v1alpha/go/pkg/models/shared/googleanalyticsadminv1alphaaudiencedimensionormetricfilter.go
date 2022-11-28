@@ -1,5 +1,7 @@
 package shared
 
+// GoogleAnalyticsAdminV1alphaAudienceDimensionOrMetricFilter
+// A specific filter for a single dimension or metric.
 type GoogleAnalyticsAdminV1alphaAudienceDimensionOrMetricFilter struct {
 	AtAnyPointInTime *bool                                                                    `json:"atAnyPointInTime,omitempty"`
 	BetweenFilter    *GoogleAnalyticsAdminV1alphaAudienceDimensionOrMetricFilterBetweenFilter `json:"betweenFilter,omitempty"`

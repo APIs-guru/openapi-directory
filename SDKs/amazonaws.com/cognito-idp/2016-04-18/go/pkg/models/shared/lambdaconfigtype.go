@@ -1,5 +1,7 @@
 package shared
 
+// LambdaConfigType
+// Specifies the configuration for Lambda triggers.
 type LambdaConfigType struct {
 	CreateAuthChallenge         *string                             `json:"CreateAuthChallenge,omitempty"`
 	CustomEmailSender           *CustomEmailLambdaVersionConfigType `json:"CustomEmailSender,omitempty"`

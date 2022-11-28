@@ -5,26 +5,26 @@ from sdk.models import shared
 
 @dataclass
 class PostV05PatientsSmsNotifyHeaders:
-    authorization: str = field(default=None, metadata={'header': { 'field_name': 'Authorization', 'style': 'simple', 'explode': False }})
-    x_cm_id: str = field(default=None, metadata={'header': { 'field_name': 'X-CM-ID', 'style': 'simple', 'explode': False }})
+    authorization: str = field(metadata={'header': { 'field_name': 'Authorization', 'style': 'simple', 'explode': False }})
+    x_cm_id: str = field(metadata={'header': { 'field_name': 'X-CM-ID', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class PostV05PatientsSmsNotifyRequests:
-    application_xml: bytes = field(default=None, metadata={'request': { 'media_type': 'application/xml' }})
+    application_xml: bytes = field(metadata={'request': { 'media_type': 'application/xml' }})
     patient_sms_notifcation_request: Optional[shared.PatientSmsNotifcationRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class PostV05PatientsSmsNotifyRequest:
-    headers: PostV05PatientsSmsNotifyHeaders = field(default=None)
-    request: PostV05PatientsSmsNotifyRequests = field(default=None)
+    headers: PostV05PatientsSmsNotifyHeaders = field()
+    request: PostV05PatientsSmsNotifyRequests = field()
     
 
 @dataclass
 class PostV05PatientsSmsNotifyResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     error_response: Optional[shared.ErrorResponse] = field(default=None)
-    status_code: int = field(default=None)
     

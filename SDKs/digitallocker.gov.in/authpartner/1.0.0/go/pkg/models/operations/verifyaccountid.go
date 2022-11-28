@@ -8,11 +8,6 @@ type VerifyAccountIDSecurity struct {
 	Oauthsecurity shared.SchemeOauthsecurity `security:"scheme,type=oauth2"`
 }
 
-type VerifyAccountIDRequest struct {
-	Request  *interface{} `request:"mediaType=multipart/form-data"`
-	Security VerifyAccountIDSecurity
-}
-
 type VerifyAccountID400ApplicationJSON struct {
 	Error            *interface{} `json:"error,omitempty"`
 	ErrorDescription *interface{} `json:"error_description,omitempty"`
@@ -26,6 +21,11 @@ type VerifyAccountID401ApplicationJSON struct {
 type VerifyAccountID500ApplicationJSON struct {
 	Error            *interface{} `json:"error,omitempty"`
 	ErrorDescription *interface{} `json:"error_description,omitempty"`
+}
+
+type VerifyAccountIDRequest struct {
+	Request  *interface{} `request:"mediaType=multipart/form-data"`
+	Security VerifyAccountIDSecurity
 }
 
 type VerifyAccountIDResponse struct {

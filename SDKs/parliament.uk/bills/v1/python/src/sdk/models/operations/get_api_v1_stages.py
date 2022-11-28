@@ -11,14 +11,14 @@ class GetAPIV1StagesQueryParams:
 
 @dataclass
 class GetAPIV1StagesRequest:
-    query_params: GetAPIV1StagesQueryParams = field(default=None)
+    query_params: GetAPIV1StagesQueryParams = field()
     
 
 @dataclass
 class GetAPIV1StagesResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     problem_details: Optional[dict[str, Any]] = field(default=None)
     stage_reference_search_result: Optional[shared.StageReferenceSearchResult] = field(default=None)
-    status_code: int = field(default=None)
     

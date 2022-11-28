@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class GetFeedPathParams:
-    user_id: float = field(default=None, metadata={'path_param': { 'field_name': 'user_id', 'style': 'simple', 'explode': False }})
+    user_id: float = field(metadata={'path_param': { 'field_name': 'user_id', 'style': 'simple', 'explode': False }})
     
 class GetFeedTypeEnum(str, Enum):
     APPEARS = "appears"
@@ -32,19 +33,19 @@ class GetFeedQueryParams:
 
 @dataclass
 class GetFeedSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class GetFeedRequest:
-    path_params: GetFeedPathParams = field(default=None)
-    query_params: GetFeedQueryParams = field(default=None)
-    security: GetFeedSecurity = field(default=None)
+    path_params: GetFeedPathParams = field()
+    query_params: GetFeedQueryParams = field()
+    security: GetFeedSecurity = field()
     
 
 @dataclass
 class GetFeedResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     activity_3_1s: Optional[List[shared.Activity31]] = field(default=None)
     

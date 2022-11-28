@@ -1,47 +1,41 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import List,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
 @dataclass
 class UpdateManagedLinodeSettingPathParams:
-    linode_id: int = field(default=None, metadata={'path_param': { 'field_name': 'linodeId', 'style': 'simple', 'explode': False }})
-    
-
-@dataclass
-class UpdateManagedLinodeSettingSecurityOption1:
-    personal_access_token: shared.SchemePersonalAccessToken = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer' }})
-    
-
-@dataclass
-class UpdateManagedLinodeSettingSecurityOption2:
-    oauth: shared.SchemeOauth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    linode_id: int = field(metadata={'path_param': { 'field_name': 'linodeId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class UpdateManagedLinodeSettingSecurity:
-    option1: Optional[UpdateManagedLinodeSettingSecurityOption1] = field(default=None, metadata={'security': { 'option': True }})
-    option2: Optional[UpdateManagedLinodeSettingSecurityOption2] = field(default=None, metadata={'security': { 'option': True }})
-    
-
-@dataclass
-class UpdateManagedLinodeSettingRequest:
-    path_params: UpdateManagedLinodeSettingPathParams = field(default=None)
-    request: shared.ManagedLinodeSettings = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: UpdateManagedLinodeSettingSecurity = field(default=None)
+    oauth: Optional[shared.SchemeOauth] = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    personal_access_token: Optional[shared.SchemePersonalAccessToken] = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer' }})
     
 
 @dataclass_json
 @dataclass
 class UpdateManagedLinodeSettingDefaultApplicationJSON:
-    errors: Optional[List[shared.ErrorObject]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'errors' }})
+    errors: Optional[List[shared.ErrorObject]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('errors') }})
+    
+
+@dataclass
+class UpdateManagedLinodeSettingRequest:
+    path_params: UpdateManagedLinodeSettingPathParams = field()
+    request: shared.ManagedLinodeSettingsInput = field(metadata={'request': { 'media_type': 'application/json' }})
+    security: UpdateManagedLinodeSettingSecurity = field()
     
 
 @dataclass
 class UpdateManagedLinodeSettingResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     managed_linode_settings: Optional[shared.ManagedLinodeSettings] = field(default=None)
-    status_code: int = field(default=None)
     update_managed_linode_setting_default_application_json_object: Optional[UpdateManagedLinodeSettingDefaultApplicationJSON] = field(default=None)
     

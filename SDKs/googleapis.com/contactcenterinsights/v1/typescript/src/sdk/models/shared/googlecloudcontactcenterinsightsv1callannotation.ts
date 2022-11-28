@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import { GoogleCloudContactcenterinsightsV1AnnotationBoundary } from "./googlecloudcontactcenterinsightsv1annotationboundary";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudContactcenterinsightsV1AnnotationBoundary } from "./googlecloudcontactcenterinsightsv1annotationboundary";
 import { GoogleCloudContactcenterinsightsV1EntityMentionData } from "./googlecloudcontactcenterinsightsv1entitymentiondata";
 import { GoogleCloudContactcenterinsightsV1IntentMatchData } from "./googlecloudcontactcenterinsightsv1intentmatchdata";
+import { GoogleCloudContactcenterinsightsV1IssueMatchData } from "./googlecloudcontactcenterinsightsv1issuematchdata";
 import { GoogleCloudContactcenterinsightsV1PhraseMatchData } from "./googlecloudcontactcenterinsightsv1phrasematchdata";
 import { GoogleCloudContactcenterinsightsV1SentimentData } from "./googlecloudcontactcenterinsightsv1sentimentdata";
+
 
 
 // GoogleCloudContactcenterinsightsV1CallAnnotation
@@ -12,33 +13,36 @@ import { GoogleCloudContactcenterinsightsV1SentimentData } from "./googlecloudco
  * A piece of metadata that applies to a window of a call.
 **/
 export class GoogleCloudContactcenterinsightsV1CallAnnotation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=annotationEndBoundary" })
+  @SpeakeasyMetadata({ data: "json, name=annotationEndBoundary" })
   annotationEndBoundary?: GoogleCloudContactcenterinsightsV1AnnotationBoundary;
 
-  @Metadata({ data: "json, name=annotationStartBoundary" })
+  @SpeakeasyMetadata({ data: "json, name=annotationStartBoundary" })
   annotationStartBoundary?: GoogleCloudContactcenterinsightsV1AnnotationBoundary;
 
-  @Metadata({ data: "json, name=channelTag" })
+  @SpeakeasyMetadata({ data: "json, name=channelTag" })
   channelTag?: number;
 
-  @Metadata({ data: "json, name=entityMentionData" })
+  @SpeakeasyMetadata({ data: "json, name=entityMentionData" })
   entityMentionData?: GoogleCloudContactcenterinsightsV1EntityMentionData;
 
-  @Metadata({ data: "json, name=holdData" })
+  @SpeakeasyMetadata({ data: "json, name=holdData" })
   holdData?: Map<string, any>;
 
-  @Metadata({ data: "json, name=intentMatchData" })
+  @SpeakeasyMetadata({ data: "json, name=intentMatchData" })
   intentMatchData?: GoogleCloudContactcenterinsightsV1IntentMatchData;
 
-  @Metadata({ data: "json, name=interruptionData" })
+  @SpeakeasyMetadata({ data: "json, name=interruptionData" })
   interruptionData?: Map<string, any>;
 
-  @Metadata({ data: "json, name=phraseMatchData" })
+  @SpeakeasyMetadata({ data: "json, name=issueMatchData" })
+  issueMatchData?: GoogleCloudContactcenterinsightsV1IssueMatchData;
+
+  @SpeakeasyMetadata({ data: "json, name=phraseMatchData" })
   phraseMatchData?: GoogleCloudContactcenterinsightsV1PhraseMatchData;
 
-  @Metadata({ data: "json, name=sentimentData" })
+  @SpeakeasyMetadata({ data: "json, name=sentimentData" })
   sentimentData?: GoogleCloudContactcenterinsightsV1SentimentData;
 
-  @Metadata({ data: "json, name=silenceData" })
+  @SpeakeasyMetadata({ data: "json, name=silenceData" })
   silenceData?: Map<string, any>;
 }

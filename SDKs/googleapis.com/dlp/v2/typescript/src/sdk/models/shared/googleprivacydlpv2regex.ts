@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GooglePrivacyDlpV2Regex
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Message defining a custom regular expression.
 **/
 export class GooglePrivacyDlpV2Regex extends SpeakeasyBase {
-  @Metadata({ data: "json, name=groupIndexes" })
+  @SpeakeasyMetadata({ data: "json, name=groupIndexes" })
   groupIndexes?: number[];
 
-  @Metadata({ data: "json, name=pattern" })
+  @SpeakeasyMetadata({ data: "json, name=pattern" })
   pattern?: string;
 }

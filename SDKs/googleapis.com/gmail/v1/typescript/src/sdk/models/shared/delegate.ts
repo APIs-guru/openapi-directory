@@ -1,11 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum DelegateVerificationStatusEnum {
-    VerificationStatusUnspecified = "verificationStatusUnspecified"
-,    Accepted = "accepted"
-,    Pending = "pending"
-,    Rejected = "rejected"
-,    Expired = "expired"
+    VerificationStatusUnspecified = "verificationStatusUnspecified",
+    Accepted = "accepted",
+    Pending = "pending",
+    Rejected = "rejected",
+    Expired = "expired"
 }
 
 
@@ -14,9 +15,9 @@ export enum DelegateVerificationStatusEnum {
  * Settings for a delegate. Delegates can read, send, and delete messages, as well as view and add contacts, for the delegator's account. See "Set up mail delegation" for more information about delegates.
 **/
 export class Delegate extends SpeakeasyBase {
-  @Metadata({ data: "json, name=delegateEmail" })
+  @SpeakeasyMetadata({ data: "json, name=delegateEmail" })
   delegateEmail?: string;
 
-  @Metadata({ data: "json, name=verificationStatus" })
+  @SpeakeasyMetadata({ data: "json, name=verificationStatus" })
   verificationStatus?: DelegateVerificationStatusEnum;
 }

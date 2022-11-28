@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ArchitectureEnum } from "./architectureenum";
 export declare class CreateRobotResponse extends SpeakeasyBase {
     architecture?: ArchitectureEnum;

@@ -1,6 +1,10 @@
 from dataclasses import dataclass, field
-from typing import Any,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -24,39 +28,43 @@ class ListAuditSuppressionsHeaders:
 @dataclass_json
 @dataclass
 class ListAuditSuppressionsRequestBodyResourceIdentifier:
-    account: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'account' }})
-    ca_certificate_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'caCertificateId' }})
-    client_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'clientId' }})
-    cognito_identity_pool_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'cognitoIdentityPoolId' }})
-    device_certificate_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'deviceCertificateId' }})
-    iam_role_arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'iamRoleArn' }})
-    policy_version_identifier: Optional[shared.PolicyVersionIdentifier] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'policyVersionIdentifier' }})
-    role_alias_arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'roleAliasArn' }})
+    r"""ListAuditSuppressionsRequestBodyResourceIdentifier
+    Information that identifies the noncompliant resource.
+    """
+    
+    account: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('account') }})
+    ca_certificate_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('caCertificateId') }})
+    client_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('clientId') }})
+    cognito_identity_pool_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('cognitoIdentityPoolId') }})
+    device_certificate_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('deviceCertificateId') }})
+    iam_role_arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('iamRoleArn') }})
+    policy_version_identifier: Optional[shared.PolicyVersionIdentifier] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('policyVersionIdentifier') }})
+    role_alias_arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('roleAliasArn') }})
     
 
 @dataclass_json
 @dataclass
 class ListAuditSuppressionsRequestBody:
-    ascending_order: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ascendingOrder' }})
-    check_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'checkName' }})
-    max_results: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'maxResults' }})
-    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'nextToken' }})
-    resource_identifier: Optional[ListAuditSuppressionsRequestBodyResourceIdentifier] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'resourceIdentifier' }})
+    ascending_order: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ascendingOrder') }})
+    check_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('checkName') }})
+    max_results: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('maxResults') }})
+    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('nextToken') }})
+    resource_identifier: Optional[ListAuditSuppressionsRequestBodyResourceIdentifier] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('resourceIdentifier') }})
     
 
 @dataclass
 class ListAuditSuppressionsRequest:
-    query_params: ListAuditSuppressionsQueryParams = field(default=None)
-    headers: ListAuditSuppressionsHeaders = field(default=None)
-    request: ListAuditSuppressionsRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: ListAuditSuppressionsHeaders = field()
+    query_params: ListAuditSuppressionsQueryParams = field()
+    request: ListAuditSuppressionsRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class ListAuditSuppressionsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     internal_failure_exception: Optional[Any] = field(default=None)
     invalid_request_exception: Optional[Any] = field(default=None)
     list_audit_suppressions_response: Optional[shared.ListAuditSuppressionsResponse] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     

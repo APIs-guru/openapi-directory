@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DlpProjectsLocationsJobTriggersCreatePathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,21 +26,21 @@ class DlpProjectsLocationsJobTriggersCreateQueryParams:
 
 @dataclass
 class DlpProjectsLocationsJobTriggersCreateSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DlpProjectsLocationsJobTriggersCreateRequest:
-    path_params: DlpProjectsLocationsJobTriggersCreatePathParams = field(default=None)
-    query_params: DlpProjectsLocationsJobTriggersCreateQueryParams = field(default=None)
-    request: Optional[shared.GooglePrivacyDlpV2CreateJobTriggerRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: DlpProjectsLocationsJobTriggersCreateSecurity = field(default=None)
+    path_params: DlpProjectsLocationsJobTriggersCreatePathParams = field()
+    query_params: DlpProjectsLocationsJobTriggersCreateQueryParams = field()
+    security: DlpProjectsLocationsJobTriggersCreateSecurity = field()
+    request: Optional[shared.GooglePrivacyDlpV2CreateJobTriggerRequestInput] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class DlpProjectsLocationsJobTriggersCreateResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_privacy_dlp_v2_job_trigger: Optional[shared.GooglePrivacyDlpV2JobTrigger] = field(default=None)
-    status_code: int = field(default=None)
     

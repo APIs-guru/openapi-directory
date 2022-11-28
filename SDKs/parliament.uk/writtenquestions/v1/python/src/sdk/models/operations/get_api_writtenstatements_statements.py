@@ -1,8 +1,9 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
-from typing import Any,Enum,List,Optional
+from typing import Any,List,Optional
+from enum import Enum
 from sdk.models import shared
 
 
@@ -22,14 +23,14 @@ class GetAPIWrittenstatementsStatementsQueryParams:
 
 @dataclass
 class GetAPIWrittenstatementsStatementsRequest:
-    query_params: GetAPIWrittenstatementsStatementsQueryParams = field(default=None)
+    query_params: GetAPIWrittenstatementsStatementsQueryParams = field()
     
 
 @dataclass
 class GetAPIWrittenstatementsStatementsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     problem_details: Optional[dict[str, dict[str, Any]]] = field(default=None)
     statements_view_model_search_result: Optional[shared.StatementsViewModelSearchResult] = field(default=None)
-    status_code: int = field(default=None)
     

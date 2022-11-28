@@ -4,8 +4,8 @@ from typing import Optional
 
 @dataclass
 class PostNodePathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
-    path: str = field(default=None, metadata={'path_param': { 'field_name': 'path', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    path: str = field(metadata={'path_param': { 'field_name': 'path', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -16,8 +16,8 @@ class PostNodeQueryParams:
 
 @dataclass
 class PostNodeRequestBodyFile:
-    content: bytes = field(default=None, metadata={'multipart_form': { 'content': True }})
-    file: str = field(default=None, metadata={'multipart_form': { 'field_name': 'file' }})
+    content: bytes = field(metadata={'multipart_form': { 'content': True }})
+    file: str = field(metadata={'multipart_form': { 'field_name': 'file' }})
     
 
 @dataclass
@@ -27,13 +27,13 @@ class PostNodeRequestBody:
 
 @dataclass
 class PostNodeRequest:
-    path_params: PostNodePathParams = field(default=None)
-    query_params: PostNodeQueryParams = field(default=None)
+    path_params: PostNodePathParams = field()
+    query_params: PostNodeQueryParams = field()
     request: Optional[PostNodeRequestBody] = field(default=None, metadata={'request': { 'media_type': 'multipart/form-data' }})
     
 
 @dataclass
 class PostNodeResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

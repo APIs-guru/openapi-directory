@@ -1,5 +1,7 @@
 package shared
 
+// GoogleCloudDialogflowV2beta1AnalyzeContentRequest
+// The request message for Participants.AnalyzeContent.
 type GoogleCloudDialogflowV2beta1AnalyzeContentRequest struct {
 	AssistQueryParams *GoogleCloudDialogflowV2beta1AssistQueryParameters `json:"assistQueryParams,omitempty"`
 	AudioInput        *GoogleCloudDialogflowV2beta1AudioInput            `json:"audioInput,omitempty"`

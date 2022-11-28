@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TagOptionDetail } from "./tagoptiondetail";
 
 
+
 export class ListTagOptionsOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=PageToken" })
+  @SpeakeasyMetadata({ data: "json, name=PageToken" })
   pageToken?: string;
 
-  @Metadata({ data: "json, name=TagOptionDetails", elemType: shared.TagOptionDetail })
+  @SpeakeasyMetadata({ data: "json, name=TagOptionDetails", elemType: TagOptionDetail })
   tagOptionDetails?: TagOptionDetail[];
 }

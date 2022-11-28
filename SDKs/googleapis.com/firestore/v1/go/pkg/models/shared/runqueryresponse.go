@@ -1,5 +1,7 @@
 package shared
 
+// RunQueryResponse
+// The response for Firestore.RunQuery.
 type RunQueryResponse struct {
 	Document       *Document `json:"document,omitempty"`
 	Done           *bool     `json:"done,omitempty"`

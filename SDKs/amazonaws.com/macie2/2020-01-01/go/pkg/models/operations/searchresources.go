@@ -19,11 +19,15 @@ type SearchResourcesHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// SearchResourcesRequestBodyBucketCriteria
+// Specifies property- and tag-based conditions that define filter criteria for including or excluding S3 buckets from the query results. Exclude conditions take precedence over include conditions.
 type SearchResourcesRequestBodyBucketCriteria struct {
 	Excludes *shared.SearchResourcesCriteriaBlock `json:"excludes,omitempty"`
 	Includes *shared.SearchResourcesCriteriaBlock `json:"includes,omitempty"`
 }
 
+// SearchResourcesRequestBodySortCriteria
+// Specifies criteria for sorting the results of a query for information about Amazon Web Services resources that Amazon Macie monitors and analyzes.
 type SearchResourcesRequestBodySortCriteria struct {
 	AttributeName *shared.SearchResourcesSortAttributeNameEnum `json:"attributeName,omitempty"`
 	OrderBy       *shared.OrderByEnum                          `json:"orderBy,omitempty"`

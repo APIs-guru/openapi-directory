@@ -1,14 +1,15 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
-from typing import Any,Enum,List,Optional
+from typing import Any,List,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class ListManagedEndpointsPathParams:
-    virtual_cluster_id: str = field(default=None, metadata={'path_param': { 'field_name': 'virtualClusterId', 'style': 'simple', 'explode': False }})
+    virtual_cluster_id: str = field(metadata={'path_param': { 'field_name': 'virtualClusterId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -34,16 +35,16 @@ class ListManagedEndpointsHeaders:
 
 @dataclass
 class ListManagedEndpointsRequest:
-    path_params: ListManagedEndpointsPathParams = field(default=None)
-    query_params: ListManagedEndpointsQueryParams = field(default=None)
-    headers: ListManagedEndpointsHeaders = field(default=None)
+    headers: ListManagedEndpointsHeaders = field()
+    path_params: ListManagedEndpointsPathParams = field()
+    query_params: ListManagedEndpointsQueryParams = field()
     
 
 @dataclass
 class ListManagedEndpointsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     internal_server_exception: Optional[Any] = field(default=None)
     list_managed_endpoints_response: Optional[shared.ListManagedEndpointsResponse] = field(default=None)
-    status_code: int = field(default=None)
     validation_exception: Optional[Any] = field(default=None)
     

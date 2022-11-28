@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DomainsProjectsLocationsRegistrationsRetrieveImportableDomainsPathParams:
-    location: str = field(default=None, metadata={'path_param': { 'field_name': 'location', 'style': 'simple', 'explode': False }})
+    location: str = field(metadata={'path_param': { 'field_name': 'location', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -27,20 +28,20 @@ class DomainsProjectsLocationsRegistrationsRetrieveImportableDomainsQueryParams:
 
 @dataclass
 class DomainsProjectsLocationsRegistrationsRetrieveImportableDomainsSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DomainsProjectsLocationsRegistrationsRetrieveImportableDomainsRequest:
-    path_params: DomainsProjectsLocationsRegistrationsRetrieveImportableDomainsPathParams = field(default=None)
-    query_params: DomainsProjectsLocationsRegistrationsRetrieveImportableDomainsQueryParams = field(default=None)
-    security: DomainsProjectsLocationsRegistrationsRetrieveImportableDomainsSecurity = field(default=None)
+    path_params: DomainsProjectsLocationsRegistrationsRetrieveImportableDomainsPathParams = field()
+    query_params: DomainsProjectsLocationsRegistrationsRetrieveImportableDomainsQueryParams = field()
+    security: DomainsProjectsLocationsRegistrationsRetrieveImportableDomainsSecurity = field()
     
 
 @dataclass
 class DomainsProjectsLocationsRegistrationsRetrieveImportableDomainsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     retrieve_importable_domains_response: Optional[shared.RetrieveImportableDomainsResponse] = field(default=None)
-    status_code: int = field(default=None)
     

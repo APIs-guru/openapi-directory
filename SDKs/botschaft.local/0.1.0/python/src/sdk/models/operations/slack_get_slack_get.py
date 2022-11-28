@@ -5,8 +5,8 @@ from sdk.models import shared
 
 @dataclass
 class SlackGetSlackGetQueryParams:
+    channel: str = field(metadata={'query_param': { 'field_name': 'channel', 'style': 'form', 'explode': True }})
     base64_message: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'base64_message', 'style': 'form', 'explode': True }})
-    channel: str = field(default=None, metadata={'query_param': { 'field_name': 'channel', 'style': 'form', 'explode': True }})
     message: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'message', 'style': 'form', 'explode': True }})
     
 
@@ -17,14 +17,14 @@ class SlackGetSlackGetHeaders:
 
 @dataclass
 class SlackGetSlackGetRequest:
-    query_params: SlackGetSlackGetQueryParams = field(default=None)
-    headers: SlackGetSlackGetHeaders = field(default=None)
+    headers: SlackGetSlackGetHeaders = field()
+    query_params: SlackGetSlackGetQueryParams = field()
     
 
 @dataclass
 class SlackGetSlackGetResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     http_validation_error: Optional[shared.HTTPValidationError] = field(default=None)
-    status_code: int = field(default=None)
     slack_get_slack_get_200_application_json_any: Optional[Any] = field(default=None)
     

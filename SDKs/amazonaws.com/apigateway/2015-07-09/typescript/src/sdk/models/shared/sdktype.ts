@@ -1,22 +1,22 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
-import { SdkConfigurationProperty } from "./sdkconfigurationproperty";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { SDKConfigurationProperty } from "./sdkconfigurationproperty";
 
 
-// SdkType
+
+// SDKType
 /** 
  * A type of SDK that API Gateway can generate.
 **/
-export class SdkType extends SpeakeasyBase {
-  @Metadata({ data: "json, name=configurationProperties", elemType: shared.SdkConfigurationProperty })
-  configurationProperties?: SdkConfigurationProperty[];
+export class SDKType extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=configurationProperties", elemType: SDKConfigurationProperty })
+  configurationProperties?: SDKConfigurationProperty[];
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=friendlyName" })
+  @SpeakeasyMetadata({ data: "json, name=friendlyName" })
   friendlyName?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 }

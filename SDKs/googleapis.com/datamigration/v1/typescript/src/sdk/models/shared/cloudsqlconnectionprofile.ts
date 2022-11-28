@@ -1,5 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CloudSqlSettings } from "./cloudsqlsettings";
+import { CloudSqlSettingsInput } from "./cloudsqlsettings";
+
 
 
 // CloudSqlConnectionProfile
@@ -7,15 +9,28 @@ import { CloudSqlSettings } from "./cloudsqlsettings";
  * Specifies required connection parameters, and, optionally, the parameters required to create a Cloud SQL destination database instance.
 **/
 export class CloudSqlConnectionProfile extends SpeakeasyBase {
-  @Metadata({ data: "json, name=cloudSqlId" })
+  @SpeakeasyMetadata({ data: "json, name=additionalPublicIp" })
+  additionalPublicIp?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=cloudSqlId" })
   cloudSqlId?: string;
 
-  @Metadata({ data: "json, name=privateIp" })
+  @SpeakeasyMetadata({ data: "json, name=privateIp" })
   privateIp?: string;
 
-  @Metadata({ data: "json, name=publicIp" })
+  @SpeakeasyMetadata({ data: "json, name=publicIp" })
   publicIp?: string;
 
-  @Metadata({ data: "json, name=settings" })
+  @SpeakeasyMetadata({ data: "json, name=settings" })
   settings?: CloudSqlSettings;
+}
+
+
+// CloudSqlConnectionProfileInput
+/** 
+ * Specifies required connection parameters, and, optionally, the parameters required to create a Cloud SQL destination database instance.
+**/
+export class CloudSqlConnectionProfileInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=settings" })
+  settings?: CloudSqlSettingsInput;
 }

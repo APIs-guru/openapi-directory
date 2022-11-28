@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AwsEcsServiceCapacityProviderStrategyDetails
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Strategy item for the capacity provider strategy that the service uses.
 **/
 export class AwsEcsServiceCapacityProviderStrategyDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Base" })
+  @SpeakeasyMetadata({ data: "json, name=Base" })
   base?: number;
 
-  @Metadata({ data: "json, name=CapacityProvider" })
+  @SpeakeasyMetadata({ data: "json, name=CapacityProvider" })
   capacityProvider?: string;
 
-  @Metadata({ data: "json, name=Weight" })
+  @SpeakeasyMetadata({ data: "json, name=Weight" })
   weight?: number;
 }

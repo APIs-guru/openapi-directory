@@ -22,8 +22,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { NetworkConfig } from "./networkconfig";
+import { NetworkConfigInput } from "./networkconfig";
 // AuxiliaryVersionConfig
 /**
  * Configuration information for the auxiliary service versions.
@@ -34,17 +35,41 @@ var AuxiliaryVersionConfig = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=configOverrides" }),
+        SpeakeasyMetadata({ data: "json, name=configOverrides" }),
         __metadata("design:type", Map)
     ], AuxiliaryVersionConfig.prototype, "configOverrides", void 0);
     __decorate([
-        Metadata({ data: "json, name=networkConfig" }),
+        SpeakeasyMetadata({ data: "json, name=networkConfig" }),
         __metadata("design:type", NetworkConfig)
     ], AuxiliaryVersionConfig.prototype, "networkConfig", void 0);
     __decorate([
-        Metadata({ data: "json, name=version" }),
+        SpeakeasyMetadata({ data: "json, name=version" }),
         __metadata("design:type", String)
     ], AuxiliaryVersionConfig.prototype, "version", void 0);
     return AuxiliaryVersionConfig;
 }(SpeakeasyBase));
 export { AuxiliaryVersionConfig };
+// AuxiliaryVersionConfigInput
+/**
+ * Configuration information for the auxiliary service versions.
+**/
+var AuxiliaryVersionConfigInput = /** @class */ (function (_super) {
+    __extends(AuxiliaryVersionConfigInput, _super);
+    function AuxiliaryVersionConfigInput() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=configOverrides" }),
+        __metadata("design:type", Map)
+    ], AuxiliaryVersionConfigInput.prototype, "configOverrides", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=networkConfig" }),
+        __metadata("design:type", NetworkConfigInput)
+    ], AuxiliaryVersionConfigInput.prototype, "networkConfig", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=version" }),
+        __metadata("design:type", String)
+    ], AuxiliaryVersionConfigInput.prototype, "version", void 0);
+    return AuxiliaryVersionConfigInput;
+}(SpeakeasyBase));
+export { AuxiliaryVersionConfigInput };

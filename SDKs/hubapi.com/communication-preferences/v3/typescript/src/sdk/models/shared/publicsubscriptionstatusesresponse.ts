@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PublicSubscriptionStatus } from "./publicsubscriptionstatus";
+
 
 
 // PublicSubscriptionStatusesResponse
@@ -8,9 +8,9 @@ import { PublicSubscriptionStatus } from "./publicsubscriptionstatus";
  * A collection of subscription statuses for a contact.
 **/
 export class PublicSubscriptionStatusesResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=recipient" })
+  @SpeakeasyMetadata({ data: "json, name=recipient" })
   recipient: string;
 
-  @Metadata({ data: "json, name=subscriptionStatuses", elemType: shared.PublicSubscriptionStatus })
+  @SpeakeasyMetadata({ data: "json, name=subscriptionStatuses", elemType: PublicSubscriptionStatus })
   subscriptionStatuses: PublicSubscriptionStatus[];
 }

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { DatasetActionSummary } from "./datasetactionsummary";
 import { DatasetStatusEnum } from "./datasetstatusenum";
 import { DatasetTrigger } from "./datasettrigger";

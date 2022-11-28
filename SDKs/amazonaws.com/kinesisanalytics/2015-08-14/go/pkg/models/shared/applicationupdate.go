@@ -1,5 +1,7 @@
 package shared
 
+// ApplicationUpdate
+// Describes updates to apply to an existing Amazon Kinesis Analytics application.
 type ApplicationUpdate struct {
 	ApplicationCodeUpdate          *string                         `json:"ApplicationCodeUpdate,omitempty"`
 	CloudWatchLoggingOptionUpdates []CloudWatchLoggingOptionUpdate `json:"CloudWatchLoggingOptionUpdates,omitempty"`

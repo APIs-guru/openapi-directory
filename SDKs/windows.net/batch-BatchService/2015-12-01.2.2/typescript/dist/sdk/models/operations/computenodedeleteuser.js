@@ -22,22 +22,22 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var ComputeNodeDeleteUserPathParams = /** @class */ (function (_super) {
     __extends(ComputeNodeDeleteUserPathParams, _super);
     function ComputeNodeDeleteUserPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=nodeId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=nodeId" }),
         __metadata("design:type", String)
     ], ComputeNodeDeleteUserPathParams.prototype, "nodeId", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=poolId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=poolId" }),
         __metadata("design:type", String)
     ], ComputeNodeDeleteUserPathParams.prototype, "poolId", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=userName" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=userName" }),
         __metadata("design:type", String)
     ], ComputeNodeDeleteUserPathParams.prototype, "userName", void 0);
     return ComputeNodeDeleteUserPathParams;
@@ -49,11 +49,11 @@ var ComputeNodeDeleteUserQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=api-version" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=api-version" }),
         __metadata("design:type", String)
     ], ComputeNodeDeleteUserQueryParams.prototype, "apiVersion", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=timeout" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=timeout" }),
         __metadata("design:type", Number)
     ], ComputeNodeDeleteUserQueryParams.prototype, "timeout", void 0);
     return ComputeNodeDeleteUserQueryParams;
@@ -65,15 +65,15 @@ var ComputeNodeDeleteUserHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=client-request-id" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=client-request-id" }),
         __metadata("design:type", String)
     ], ComputeNodeDeleteUserHeaders.prototype, "clientRequestId", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=ocp-date" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=ocp-date" }),
         __metadata("design:type", String)
     ], ComputeNodeDeleteUserHeaders.prototype, "ocpDate", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=return-client-request-id" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=return-client-request-id" }),
         __metadata("design:type", Boolean)
     ], ComputeNodeDeleteUserHeaders.prototype, "returnClientRequestId", void 0);
     return ComputeNodeDeleteUserHeaders;
@@ -85,15 +85,15 @@ var ComputeNodeDeleteUserRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ComputeNodeDeleteUserPathParams)
     ], ComputeNodeDeleteUserRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ComputeNodeDeleteUserQueryParams)
     ], ComputeNodeDeleteUserRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ComputeNodeDeleteUserHeaders)
     ], ComputeNodeDeleteUserRequest.prototype, "headers", void 0);
     return ComputeNodeDeleteUserRequest;
@@ -105,19 +105,19 @@ var ComputeNodeDeleteUserResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], ComputeNodeDeleteUserResponse.prototype, "batchError", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], ComputeNodeDeleteUserResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Map)
     ], ComputeNodeDeleteUserResponse.prototype, "headers", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], ComputeNodeDeleteUserResponse.prototype, "statusCode", void 0);
     return ComputeNodeDeleteUserResponse;

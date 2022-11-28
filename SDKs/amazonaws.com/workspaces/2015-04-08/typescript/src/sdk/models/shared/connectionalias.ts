@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ConnectionAliasAssociation } from "./connectionaliasassociation";
 import { ConnectionAliasStateEnum } from "./connectionaliasstateenum";
+
 
 
 // ConnectionAlias
@@ -9,18 +9,18 @@ import { ConnectionAliasStateEnum } from "./connectionaliasstateenum";
  * Describes a connection alias. Connection aliases are used for cross-Region redirection. For more information, see <a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/cross-region-redirection.html"> Cross-Region Redirection for Amazon WorkSpaces</a>.
 **/
 export class ConnectionAlias extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AliasId" })
+  @SpeakeasyMetadata({ data: "json, name=AliasId" })
   aliasId?: string;
 
-  @Metadata({ data: "json, name=Associations", elemType: shared.ConnectionAliasAssociation })
+  @SpeakeasyMetadata({ data: "json, name=Associations", elemType: ConnectionAliasAssociation })
   associations?: ConnectionAliasAssociation[];
 
-  @Metadata({ data: "json, name=ConnectionString" })
+  @SpeakeasyMetadata({ data: "json, name=ConnectionString" })
   connectionString?: string;
 
-  @Metadata({ data: "json, name=OwnerAccountId" })
+  @SpeakeasyMetadata({ data: "json, name=OwnerAccountId" })
   ownerAccountId?: string;
 
-  @Metadata({ data: "json, name=State" })
+  @SpeakeasyMetadata({ data: "json, name=State" })
   state?: ConnectionAliasStateEnum;
 }

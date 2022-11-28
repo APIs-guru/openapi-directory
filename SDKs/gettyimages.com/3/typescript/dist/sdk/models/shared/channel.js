@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AssetFamilyEnum } from "./assetfamilyenum";
 import { AssetTypeEnum } from "./assettypeenum";
 var Channel = /** @class */ (function (_super) {
@@ -31,35 +31,35 @@ var Channel = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=AssetChangeType" }),
+        SpeakeasyMetadata({ data: "json, name=AssetChangeType" }),
         __metadata("design:type", String)
     ], Channel.prototype, "assetChangeType", void 0);
     __decorate([
-        Metadata({ data: "json, name=AssetFamily" }),
+        SpeakeasyMetadata({ data: "json, name=AssetFamily" }),
         __metadata("design:type", String)
     ], Channel.prototype, "assetFamily", void 0);
     __decorate([
-        Metadata({ data: "json, name=AssetType" }),
+        SpeakeasyMetadata({ data: "json, name=AssetType" }),
         __metadata("design:type", String)
     ], Channel.prototype, "assetType", void 0);
     __decorate([
-        Metadata({ data: "json, name=ChannelId" }),
+        SpeakeasyMetadata({ data: "json, name=ChannelId" }),
         __metadata("design:type", Number)
     ], Channel.prototype, "channelId", void 0);
     __decorate([
-        Metadata({ data: "json, name=CreateDateUtc" }),
+        SpeakeasyMetadata({ data: "json, name=CreateDateUtc" }),
         __metadata("design:type", Date)
     ], Channel.prototype, "createDateUtc", void 0);
     __decorate([
-        Metadata({ data: "json, name=Metadata" }),
+        SpeakeasyMetadata({ data: "json, name=Metadata" }),
         __metadata("design:type", String)
     ], Channel.prototype, "metadata", void 0);
     __decorate([
-        Metadata({ data: "json, name=NotificationCount" }),
+        SpeakeasyMetadata({ data: "json, name=NotificationCount" }),
         __metadata("design:type", Number)
     ], Channel.prototype, "notificationCount", void 0);
     __decorate([
-        Metadata({ data: "json, name=OldestChangeNotificationDateUtc" }),
+        SpeakeasyMetadata({ data: "json, name=OldestChangeNotificationDateUtc" }),
         __metadata("design:type", Date)
     ], Channel.prototype, "oldestChangeNotificationDateUtc", void 0);
     return Channel;

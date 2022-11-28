@@ -1,46 +1,47 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetNetworkSmDeviceDeviceCommandLogsPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=deviceId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=deviceId" })
   deviceId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=networkId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=networkId" })
   networkId: string;
 }
 
 
 export class GetNetworkSmDeviceDeviceCommandLogsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=endingBefore" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=endingBefore" })
   endingBefore?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=perPage" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=perPage" })
   perPage?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=startingAfter" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=startingAfter" })
   startingAfter?: string;
 }
 
 
 export class GetNetworkSmDeviceDeviceCommandLogsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetNetworkSmDeviceDeviceCommandLogsPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetNetworkSmDeviceDeviceCommandLogsQueryParams;
 }
 
 
 export class GetNetworkSmDeviceDeviceCommandLogsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: Map<string, string[]>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getNetworkSmDeviceDeviceCommandLogs200ApplicationJsonObject?: Map<string, any>;
 }

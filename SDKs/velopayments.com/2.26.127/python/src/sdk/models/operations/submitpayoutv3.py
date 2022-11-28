@@ -19,14 +19,14 @@ class SubmitPayoutV3Requests:
 
 @dataclass
 class SubmitPayoutV3Request:
-    request: SubmitPayoutV3Requests = field(default=None)
+    request: SubmitPayoutV3Requests = field()
     
 
 @dataclass
 class SubmitPayoutV3Response:
-    content_type: str = field(default=None)
-    headers: dict[str, List[str]] = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    headers: dict[str, List[str]] = field()
+    status_code: int = field()
     inline_response_400: Optional[Any] = field(default=None)
     inline_response_401: Optional[Any] = field(default=None)
     inline_response_403: Optional[Any] = field(default=None)

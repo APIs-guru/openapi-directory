@@ -22,22 +22,22 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var PostMakePdfRequestBody = /** @class */ (function (_super) {
     __extends(PostMakePdfRequestBody, _super);
     function PostMakePdfRequestBody() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=html" }),
+        SpeakeasyMetadata({ data: "json, name=html" }),
         __metadata("design:type", String)
     ], PostMakePdfRequestBody.prototype, "html", void 0);
     __decorate([
-        Metadata({ data: "json, name=key" }),
+        SpeakeasyMetadata({ data: "json, name=key" }),
         __metadata("design:type", String)
     ], PostMakePdfRequestBody.prototype, "key", void 0);
     __decorate([
-        Metadata({ data: "json, name=url" }),
+        SpeakeasyMetadata({ data: "json, name=url" }),
         __metadata("design:type", String)
     ], PostMakePdfRequestBody.prototype, "url", void 0);
     return PostMakePdfRequestBody;
@@ -49,7 +49,7 @@ var PostMakePdfRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", PostMakePdfRequestBody)
     ], PostMakePdfRequest.prototype, "request", void 0);
     return PostMakePdfRequest;
@@ -61,15 +61,15 @@ var PostMakePdfResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], PostMakePdfResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], PostMakePdfResponse.prototype, "postMakePdf200ApplicationPdfBinaryString", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], PostMakePdfResponse.prototype, "statusCode", void 0);
     return PostMakePdfResponse;

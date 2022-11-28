@@ -9,22 +9,9 @@ type GetClientsQueryParams struct {
 	PageSize *int64 `queryParam:"style=form,explode=true,name=page_size"`
 }
 
-type GetClientsSecurityOption1 struct {
-	PersonalAccessToken shared.SchemePersonalAccessToken `security:"scheme,type=http,subtype=bearer"`
-}
-
-type GetClientsSecurityOption2 struct {
-	Oauth shared.SchemeOauth `security:"scheme,type=oauth2"`
-}
-
 type GetClientsSecurity struct {
-	Option1 *GetClientsSecurityOption1 `security:"option"`
-	Option2 *GetClientsSecurityOption2 `security:"option"`
-}
-
-type GetClientsRequest struct {
-	QueryParams GetClientsQueryParams
-	Security    GetClientsSecurity
+	PersonalAccessToken *shared.SchemePersonalAccessToken `security:"scheme,type=http,subtype=bearer"`
+	Oauth               *shared.SchemeOauth               `security:"scheme,type=oauth2"`
 }
 
 type GetClients200ApplicationJSON struct {
@@ -36,6 +23,11 @@ type GetClients200ApplicationJSON struct {
 
 type GetClientsDefaultApplicationJSON struct {
 	Errors []shared.ErrorObject `json:"errors,omitempty"`
+}
+
+type GetClientsRequest struct {
+	QueryParams GetClientsQueryParams
+	Security    GetClientsSecurity
 }
 
 type GetClientsResponse struct {

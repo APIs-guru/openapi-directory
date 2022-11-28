@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // MongoDbTarget
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Specifies an Amazon DocumentDB or MongoDB data store to crawl.
 **/
 export class MongoDbTarget extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ConnectionName" })
+  @SpeakeasyMetadata({ data: "json, name=ConnectionName" })
   connectionName?: string;
 
-  @Metadata({ data: "json, name=Path" })
+  @SpeakeasyMetadata({ data: "json, name=Path" })
   path?: string;
 
-  @Metadata({ data: "json, name=ScanAll" })
+  @SpeakeasyMetadata({ data: "json, name=ScanAll" })
   scanAll?: boolean;
 }

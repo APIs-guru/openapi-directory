@@ -9,6 +9,8 @@ const (
 	GoogleCloudRecommenderV1ReliabilityProjectionRisksEnumAccessDeny          GoogleCloudRecommenderV1ReliabilityProjectionRisksEnum = "ACCESS_DENY"
 )
 
+// GoogleCloudRecommenderV1ReliabilityProjection
+// Contains information on the impact of a reliability recommendation.
 type GoogleCloudRecommenderV1ReliabilityProjection struct {
 	Details map[string]interface{}                                   `json:"details,omitempty"`
 	Risks   []GoogleCloudRecommenderV1ReliabilityProjectionRisksEnum `json:"risks,omitempty"`

@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PriceAmount } from "./priceamount";
+
 
 
 // ReturnPolicyOnlineRestockingFee
@@ -7,9 +8,9 @@ import { PriceAmount } from "./priceamount";
  * The restocking fee. This can either be a fixed fee or a micro percent.
 **/
 export class ReturnPolicyOnlineRestockingFee extends SpeakeasyBase {
-  @Metadata({ data: "json, name=fixedFee" })
+  @SpeakeasyMetadata({ data: "json, name=fixedFee" })
   fixedFee?: PriceAmount;
 
-  @Metadata({ data: "json, name=microPercent" })
+  @SpeakeasyMetadata({ data: "json, name=microPercent" })
   microPercent?: number;
 }

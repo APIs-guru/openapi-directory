@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { NonBillableWinningBidStatusRow } from "./nonbillablewinningbidstatusrow";
+
 
 
 // ListNonBillableWinningBidsResponse
@@ -8,9 +8,9 @@ import { NonBillableWinningBidStatusRow } from "./nonbillablewinningbidstatusrow
  * Response message for listing all reasons for which a buyer was not billed for a winning bid.
 **/
 export class ListNonBillableWinningBidsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 
-  @Metadata({ data: "json, name=nonBillableWinningBidStatusRows", elemType: shared.NonBillableWinningBidStatusRow })
+  @SpeakeasyMetadata({ data: "json, name=nonBillableWinningBidStatusRows", elemType: NonBillableWinningBidStatusRow })
   nonBillableWinningBidStatusRows?: NonBillableWinningBidStatusRow[];
 }

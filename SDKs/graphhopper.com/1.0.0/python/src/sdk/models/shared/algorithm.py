@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class AlgorithmObjectiveEnum(str, Enum):
     TRANSPORT_TIME = "transport_time"
@@ -14,6 +16,10 @@ class AlgorithmProblemTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class Algorithm:
-    objective: Optional[AlgorithmObjectiveEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'objective' }})
-    problem_type: Optional[AlgorithmProblemTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'problem_type' }})
+    r"""Algorithm
+    Use `objectives` instead.
+    """
+    
+    objective: Optional[AlgorithmObjectiveEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('objective') }})
+    problem_type: Optional[AlgorithmProblemTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('problem_type') }})
     

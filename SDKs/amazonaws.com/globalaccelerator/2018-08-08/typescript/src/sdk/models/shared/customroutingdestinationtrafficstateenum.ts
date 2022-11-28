@@ -1,6 +1,7 @@
 
 
+
 export enum CustomRoutingDestinationTrafficStateEnum {
-    Allow = "ALLOW"
-,    Deny = "DENY"
+    Allow = "ALLOW",
+    Deny = "DENY"
 }

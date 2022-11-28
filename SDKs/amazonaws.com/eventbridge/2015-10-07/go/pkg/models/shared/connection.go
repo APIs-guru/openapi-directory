@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// Connection
+// Contains information about a connection.
 type Connection struct {
 	AuthorizationType  *ConnectionAuthorizationTypeEnum `json:"AuthorizationType,omitempty"`
 	ConnectionArn      *string                          `json:"ConnectionArn,omitempty"`

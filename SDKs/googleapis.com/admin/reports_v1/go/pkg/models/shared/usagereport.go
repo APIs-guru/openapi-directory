@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// UsageReportEntity
+// Output only. Information about the type of the item.
 type UsageReportEntity struct {
 	CustomerID *string `json:"customerId,omitempty"`
 	EntityID   *string `json:"entityId,omitempty"`
@@ -21,6 +23,8 @@ type UsageReportParameters struct {
 	StringValue   *string                  `json:"stringValue,omitempty"`
 }
 
+// UsageReport
+// JSON template for a usage report.
 type UsageReport struct {
 	Date       *string                 `json:"date,omitempty"`
 	Entity     *UsageReportEntity      `json:"entity,omitempty"`

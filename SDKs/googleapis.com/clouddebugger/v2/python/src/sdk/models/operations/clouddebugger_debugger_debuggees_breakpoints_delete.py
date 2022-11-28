@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class ClouddebuggerDebuggerDebuggeesBreakpointsDeletePathParams:
-    breakpoint_id: str = field(default=None, metadata={'path_param': { 'field_name': 'breakpointId', 'style': 'simple', 'explode': False }})
-    debuggee_id: str = field(default=None, metadata={'path_param': { 'field_name': 'debuggeeId', 'style': 'simple', 'explode': False }})
+    breakpoint_id: str = field(metadata={'path_param': { 'field_name': 'breakpointId', 'style': 'simple', 'explode': False }})
+    debuggee_id: str = field(metadata={'path_param': { 'field_name': 'debuggeeId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -27,14 +28,14 @@ class ClouddebuggerDebuggerDebuggeesBreakpointsDeleteQueryParams:
 
 @dataclass
 class ClouddebuggerDebuggerDebuggeesBreakpointsDeleteSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class ClouddebuggerDebuggerDebuggeesBreakpointsDeleteSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -45,14 +46,14 @@ class ClouddebuggerDebuggerDebuggeesBreakpointsDeleteSecurity:
 
 @dataclass
 class ClouddebuggerDebuggerDebuggeesBreakpointsDeleteRequest:
-    path_params: ClouddebuggerDebuggerDebuggeesBreakpointsDeletePathParams = field(default=None)
-    query_params: ClouddebuggerDebuggerDebuggeesBreakpointsDeleteQueryParams = field(default=None)
-    security: ClouddebuggerDebuggerDebuggeesBreakpointsDeleteSecurity = field(default=None)
+    path_params: ClouddebuggerDebuggerDebuggeesBreakpointsDeletePathParams = field()
+    query_params: ClouddebuggerDebuggerDebuggeesBreakpointsDeleteQueryParams = field()
+    security: ClouddebuggerDebuggerDebuggeesBreakpointsDeleteSecurity = field()
     
 
 @dataclass
 class ClouddebuggerDebuggerDebuggeesBreakpointsDeleteResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     empty: Optional[dict[str, Any]] = field(default=None)
-    status_code: int = field(default=None)
     

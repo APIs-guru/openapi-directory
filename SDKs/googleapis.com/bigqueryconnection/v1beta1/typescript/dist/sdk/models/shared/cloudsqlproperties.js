@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CloudSqlCredential } from "./cloudsqlcredential";
 export var CloudSqlPropertiesTypeEnum;
 (function (CloudSqlPropertiesTypeEnum) {
@@ -40,25 +40,53 @@ var CloudSqlProperties = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=credential" }),
+        SpeakeasyMetadata({ data: "json, name=credential" }),
         __metadata("design:type", CloudSqlCredential)
     ], CloudSqlProperties.prototype, "credential", void 0);
     __decorate([
-        Metadata({ data: "json, name=database" }),
+        SpeakeasyMetadata({ data: "json, name=database" }),
         __metadata("design:type", String)
     ], CloudSqlProperties.prototype, "database", void 0);
     __decorate([
-        Metadata({ data: "json, name=instanceId" }),
+        SpeakeasyMetadata({ data: "json, name=instanceId" }),
         __metadata("design:type", String)
     ], CloudSqlProperties.prototype, "instanceId", void 0);
     __decorate([
-        Metadata({ data: "json, name=serviceAccountId" }),
+        SpeakeasyMetadata({ data: "json, name=serviceAccountId" }),
         __metadata("design:type", String)
     ], CloudSqlProperties.prototype, "serviceAccountId", void 0);
     __decorate([
-        Metadata({ data: "json, name=type" }),
+        SpeakeasyMetadata({ data: "json, name=type" }),
         __metadata("design:type", String)
     ], CloudSqlProperties.prototype, "type", void 0);
     return CloudSqlProperties;
 }(SpeakeasyBase));
 export { CloudSqlProperties };
+// CloudSqlPropertiesInput
+/**
+ * Connection properties specific to the Cloud SQL.
+**/
+var CloudSqlPropertiesInput = /** @class */ (function (_super) {
+    __extends(CloudSqlPropertiesInput, _super);
+    function CloudSqlPropertiesInput() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=credential" }),
+        __metadata("design:type", CloudSqlCredential)
+    ], CloudSqlPropertiesInput.prototype, "credential", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=database" }),
+        __metadata("design:type", String)
+    ], CloudSqlPropertiesInput.prototype, "database", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=instanceId" }),
+        __metadata("design:type", String)
+    ], CloudSqlPropertiesInput.prototype, "instanceId", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=type" }),
+        __metadata("design:type", String)
+    ], CloudSqlPropertiesInput.prototype, "type", void 0);
+    return CloudSqlPropertiesInput;
+}(SpeakeasyBase));
+export { CloudSqlPropertiesInput };

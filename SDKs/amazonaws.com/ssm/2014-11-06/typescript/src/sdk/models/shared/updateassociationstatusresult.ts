@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AssociationDescription } from "./associationdescription";
 
 
+
 export class UpdateAssociationStatusResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AssociationDescription" })
+  @SpeakeasyMetadata({ data: "json, name=AssociationDescription" })
   associationDescription?: AssociationDescription;
 }

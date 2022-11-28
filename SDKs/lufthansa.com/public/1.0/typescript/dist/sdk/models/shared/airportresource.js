@@ -22,9 +22,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Airport } from "./airport";
+import { Link } from "./link";
 // AirportResourceAirports
 /**
  * Container for airport elements.
@@ -35,7 +35,7 @@ var AirportResourceAirports = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Airport" }),
+        SpeakeasyMetadata({ data: "json, name=Airport" }),
         __metadata("design:type", Airport)
     ], AirportResourceAirports.prototype, "airport", void 0);
     return AirportResourceAirports;
@@ -51,15 +51,15 @@ var AirportResourceMeta = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=@Version" }),
+        SpeakeasyMetadata({ data: "json, name=@Version" }),
         __metadata("design:type", String)
     ], AirportResourceMeta.prototype, "atVersion", void 0);
     __decorate([
-        Metadata({ data: "json, name=Link", elemType: shared.Link }),
+        SpeakeasyMetadata({ data: "json, name=Link", elemType: Link }),
         __metadata("design:type", Array)
     ], AirportResourceMeta.prototype, "link", void 0);
     __decorate([
-        Metadata({ data: "json, name=TotalCount" }),
+        SpeakeasyMetadata({ data: "json, name=TotalCount" }),
         __metadata("design:type", Number)
     ], AirportResourceMeta.prototype, "totalCount", void 0);
     return AirportResourceMeta;
@@ -75,11 +75,11 @@ var AirportResource = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Airports" }),
+        SpeakeasyMetadata({ data: "json, name=Airports" }),
         __metadata("design:type", AirportResourceAirports)
     ], AirportResource.prototype, "airports", void 0);
     __decorate([
-        Metadata({ data: "json, name=Meta" }),
+        SpeakeasyMetadata({ data: "json, name=Meta" }),
         __metadata("design:type", AirportResourceMeta)
     ], AirportResource.prototype, "meta", void 0);
     return AirportResource;

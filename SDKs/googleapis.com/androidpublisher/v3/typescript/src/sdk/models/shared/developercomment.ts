@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Timestamp } from "./timestamp";
+
 
 
 // DeveloperComment
@@ -7,9 +8,9 @@ import { Timestamp } from "./timestamp";
  * Developer entry from conversation between user and developer.
 **/
 export class DeveloperComment extends SpeakeasyBase {
-  @Metadata({ data: "json, name=lastModified" })
+  @SpeakeasyMetadata({ data: "json, name=lastModified" })
   lastModified?: Timestamp;
 
-  @Metadata({ data: "json, name=text" })
+  @SpeakeasyMetadata({ data: "json, name=text" })
   text?: string;
 }

@@ -20,14 +20,14 @@ type PostLocationsRequestBody struct {
 	OperatorName   string                              `json:"operatorName"`
 }
 
-type PostLocationsRequest struct {
-	Request PostLocationsRequestBody `request:"mediaType=application/json"`
-}
-
 type PostLocations200ApplicationJSON struct {
 	Message *string                `json:"message,omitempty"`
 	Ok      *bool                  `json:"ok,omitempty"`
 	Result  map[string]interface{} `json:"result,omitempty"`
+}
+
+type PostLocationsRequest struct {
+	Request PostLocationsRequestBody `request:"mediaType=application/json"`
 }
 
 type PostLocationsResponse struct {

@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { NfsExportOptions } from "./nfsexportoptions";
+
 
 
 // FileShareConfig
@@ -8,15 +8,15 @@ import { NfsExportOptions } from "./nfsexportoptions";
  * File share configuration for the instance.
 **/
 export class FileShareConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=capacityGb" })
+  @SpeakeasyMetadata({ data: "json, name=capacityGb" })
   capacityGb?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=nfsExportOptions", elemType: shared.NfsExportOptions })
+  @SpeakeasyMetadata({ data: "json, name=nfsExportOptions", elemType: NfsExportOptions })
   nfsExportOptions?: NfsExportOptions[];
 
-  @Metadata({ data: "json, name=sourceBackup" })
+  @SpeakeasyMetadata({ data: "json, name=sourceBackup" })
   sourceBackup?: string;
 }

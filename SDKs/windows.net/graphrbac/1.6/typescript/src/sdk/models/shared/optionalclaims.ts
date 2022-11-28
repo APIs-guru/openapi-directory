@@ -1,8 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { OptionalClaim } from "./optionalclaim";
-import { OptionalClaim } from "./optionalclaim";
-import { OptionalClaim } from "./optionalclaim";
+
 
 
 // OptionalClaims
@@ -10,12 +8,12 @@ import { OptionalClaim } from "./optionalclaim";
  * Specifying the claims to be included in the token.
 **/
 export class OptionalClaims extends SpeakeasyBase {
-  @Metadata({ data: "json, name=accessToken", elemType: shared.OptionalClaim })
+  @SpeakeasyMetadata({ data: "json, name=accessToken", elemType: OptionalClaim })
   accessToken?: OptionalClaim[];
 
-  @Metadata({ data: "json, name=idToken", elemType: shared.OptionalClaim })
+  @SpeakeasyMetadata({ data: "json, name=idToken", elemType: OptionalClaim })
   idToken?: OptionalClaim[];
 
-  @Metadata({ data: "json, name=samlToken", elemType: shared.OptionalClaim })
+  @SpeakeasyMetadata({ data: "json, name=samlToken", elemType: OptionalClaim })
   samlToken?: OptionalClaim[];
 }

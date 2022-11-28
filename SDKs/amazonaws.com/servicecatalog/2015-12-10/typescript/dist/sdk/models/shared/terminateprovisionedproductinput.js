@@ -22,34 +22,34 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var TerminateProvisionedProductInput = /** @class */ (function (_super) {
     __extends(TerminateProvisionedProductInput, _super);
     function TerminateProvisionedProductInput() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=AcceptLanguage" }),
+        SpeakeasyMetadata({ data: "json, name=AcceptLanguage" }),
         __metadata("design:type", String)
     ], TerminateProvisionedProductInput.prototype, "acceptLanguage", void 0);
     __decorate([
-        Metadata({ data: "json, name=IgnoreErrors" }),
+        SpeakeasyMetadata({ data: "json, name=IgnoreErrors" }),
         __metadata("design:type", Boolean)
     ], TerminateProvisionedProductInput.prototype, "ignoreErrors", void 0);
     __decorate([
-        Metadata({ data: "json, name=ProvisionedProductId" }),
+        SpeakeasyMetadata({ data: "json, name=ProvisionedProductId" }),
         __metadata("design:type", String)
     ], TerminateProvisionedProductInput.prototype, "provisionedProductId", void 0);
     __decorate([
-        Metadata({ data: "json, name=ProvisionedProductName" }),
+        SpeakeasyMetadata({ data: "json, name=ProvisionedProductName" }),
         __metadata("design:type", String)
     ], TerminateProvisionedProductInput.prototype, "provisionedProductName", void 0);
     __decorate([
-        Metadata({ data: "json, name=RetainPhysicalResources" }),
+        SpeakeasyMetadata({ data: "json, name=RetainPhysicalResources" }),
         __metadata("design:type", Boolean)
     ], TerminateProvisionedProductInput.prototype, "retainPhysicalResources", void 0);
     __decorate([
-        Metadata({ data: "json, name=TerminateToken" }),
+        SpeakeasyMetadata({ data: "json, name=TerminateToken" }),
         __metadata("design:type", String)
     ], TerminateProvisionedProductInput.prototype, "terminateToken", void 0);
     return TerminateProvisionedProductInput;

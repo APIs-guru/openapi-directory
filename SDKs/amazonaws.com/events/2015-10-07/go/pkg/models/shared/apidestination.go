@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// APIDestination
+// Contains details about an API destination.
 type APIDestination struct {
 	APIDestinationArn            *string                       `json:"ApiDestinationArn,omitempty"`
 	APIDestinationState          *APIDestinationStateEnum      `json:"ApiDestinationState,omitempty"`

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // UserAuthData
@@ -6,21 +7,21 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * User Authentication Data
 **/
 export class UserAuthData extends SpeakeasyBase {
-  @Metadata({ data: "json, name=adConfigId" })
+  @SpeakeasyMetadata({ data: "json, name=adConfigId" })
   adConfigId?: number;
 
-  @Metadata({ data: "json, name=login" })
+  @SpeakeasyMetadata({ data: "json, name=login" })
   login?: string;
 
-  @Metadata({ data: "json, name=method" })
+  @SpeakeasyMetadata({ data: "json, name=method" })
   method: string;
 
-  @Metadata({ data: "json, name=mustChangePassword" })
+  @SpeakeasyMetadata({ data: "json, name=mustChangePassword" })
   mustChangePassword?: boolean;
 
-  @Metadata({ data: "json, name=oidConfigId" })
+  @SpeakeasyMetadata({ data: "json, name=oidConfigId" })
   oidConfigId?: number;
 
-  @Metadata({ data: "json, name=password" })
+  @SpeakeasyMetadata({ data: "json, name=password" })
   password?: string;
 }

@@ -5,18 +5,18 @@ from sdk.models import shared
 
 @dataclass
 class GetVideoPathParams:
-    video_id: float = field(default=None, metadata={'path_param': { 'field_name': 'video_id', 'style': 'simple', 'explode': False }})
+    video_id: float = field(metadata={'path_param': { 'field_name': 'video_id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetVideoRequest:
-    path_params: GetVideoPathParams = field(default=None)
+    path_params: GetVideoPathParams = field()
     
 
 @dataclass
 class GetVideoResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     legacy_error: Optional[shared.LegacyError] = field(default=None)
     video: Optional[shared.Video] = field(default=None)
     

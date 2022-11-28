@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TextStyleSuggestionState } from "./textstylesuggestionstate";
+
 
 
 // NestingLevelSuggestionState
@@ -7,27 +8,27 @@ import { TextStyleSuggestionState } from "./textstylesuggestionstate";
  * A mask that indicates which of the fields on the base NestingLevel have been changed in this suggestion. For any field set to true, there's a new suggested value.
 **/
 export class NestingLevelSuggestionState extends SpeakeasyBase {
-  @Metadata({ data: "json, name=bulletAlignmentSuggested" })
+  @SpeakeasyMetadata({ data: "json, name=bulletAlignmentSuggested" })
   bulletAlignmentSuggested?: boolean;
 
-  @Metadata({ data: "json, name=glyphFormatSuggested" })
+  @SpeakeasyMetadata({ data: "json, name=glyphFormatSuggested" })
   glyphFormatSuggested?: boolean;
 
-  @Metadata({ data: "json, name=glyphSymbolSuggested" })
+  @SpeakeasyMetadata({ data: "json, name=glyphSymbolSuggested" })
   glyphSymbolSuggested?: boolean;
 
-  @Metadata({ data: "json, name=glyphTypeSuggested" })
+  @SpeakeasyMetadata({ data: "json, name=glyphTypeSuggested" })
   glyphTypeSuggested?: boolean;
 
-  @Metadata({ data: "json, name=indentFirstLineSuggested" })
+  @SpeakeasyMetadata({ data: "json, name=indentFirstLineSuggested" })
   indentFirstLineSuggested?: boolean;
 
-  @Metadata({ data: "json, name=indentStartSuggested" })
+  @SpeakeasyMetadata({ data: "json, name=indentStartSuggested" })
   indentStartSuggested?: boolean;
 
-  @Metadata({ data: "json, name=startNumberSuggested" })
+  @SpeakeasyMetadata({ data: "json, name=startNumberSuggested" })
   startNumberSuggested?: boolean;
 
-  @Metadata({ data: "json, name=textStyleSuggestionState" })
+  @SpeakeasyMetadata({ data: "json, name=textStyleSuggestionState" })
   textStyleSuggestionState?: TextStyleSuggestionState;
 }

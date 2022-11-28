@@ -17,6 +17,8 @@ const (
 	FindingTypeStatsFindingTypeEnumMismatchingSecurityHeaderValues FindingTypeStatsFindingTypeEnum = "MISMATCHING_SECURITY_HEADER_VALUES"
 )
 
+// FindingTypeStats
+// A FindingTypeStats resource represents stats regarding a specific FindingType of Findings under a given ScanRun.
 type FindingTypeStats struct {
 	FindingCount *int32                           `json:"findingCount,omitempty"`
 	FindingType  *FindingTypeStatsFindingTypeEnum `json:"findingType,omitempty"`

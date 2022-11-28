@@ -10,11 +10,6 @@ type GetLatestJSONHeaders struct {
 	APIUsername string `header:"style=simple,explode=false,name=Api-Username"`
 }
 
-type GetLatestJSONRequest struct {
-	QueryParams GetLatestJSONQueryParams
-	Headers     GetLatestJSONHeaders
-}
-
 type GetLatestJSON200ApplicationJSONTopicListTopicsPosters struct {
 	Description    *string `json:"description,omitempty"`
 	Extras         *string `json:"extras,omitempty"`
@@ -78,6 +73,11 @@ type GetLatestJSON200ApplicationJSON struct {
 	PrimaryGroups []interface{}                             `json:"primary_groups,omitempty"`
 	TopicList     *GetLatestJSON200ApplicationJSONTopicList `json:"topic_list,omitempty"`
 	Users         []GetLatestJSON200ApplicationJSONUsers    `json:"users,omitempty"`
+}
+
+type GetLatestJSONRequest struct {
+	QueryParams GetLatestJSONQueryParams
+	Headers     GetLatestJSONHeaders
 }
 
 type GetLatestJSONResponse struct {

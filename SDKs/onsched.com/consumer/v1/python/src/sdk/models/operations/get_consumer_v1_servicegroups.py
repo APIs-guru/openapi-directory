@@ -11,12 +11,12 @@ class GetConsumerV1ServicegroupsQueryParams:
 
 @dataclass
 class GetConsumerV1ServicegroupsRequest:
-    query_params: GetConsumerV1ServicegroupsQueryParams = field(default=None)
+    query_params: GetConsumerV1ServicegroupsQueryParams = field()
     
 
 @dataclass
 class GetConsumerV1ServicegroupsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     service_group_list_view_model: Optional[dict[str, Any]] = field(default=None)
-    status_code: int = field(default=None)
     

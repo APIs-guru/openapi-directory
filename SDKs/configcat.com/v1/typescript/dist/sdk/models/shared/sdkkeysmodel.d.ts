@@ -1,5 +1,5 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
-export declare class SdkKeysModel extends SpeakeasyBase {
+import { SpeakeasyBase } from "../../../internal/utils";
+export declare class SDKKeysModel extends SpeakeasyBase {
     primary?: string;
     secondary?: string;
 }

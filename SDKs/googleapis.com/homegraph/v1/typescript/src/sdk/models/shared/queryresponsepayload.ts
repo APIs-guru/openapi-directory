@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // QueryResponsePayload
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Payload containing device states information.
 **/
 export class QueryResponsePayload extends SpeakeasyBase {
-  @Metadata({ data: "json, name=devices" })
+  @SpeakeasyMetadata({ data: "json, name=devices" })
   devices?: Map<string, Map<string, any>>;
 }

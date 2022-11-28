@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class QueueActivityReportEventEnum(str, Enum):
     LOCAL_PLAYING_ELAPSED = "local.playing.elapsed"

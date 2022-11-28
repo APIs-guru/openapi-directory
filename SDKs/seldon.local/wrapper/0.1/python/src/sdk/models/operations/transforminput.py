@@ -10,12 +10,12 @@ class TransformInputRequestBody:
 
 @dataclass
 class TransformInputRequest:
-    request: TransformInputRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: TransformInputRequestBody = field(metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     
 
 @dataclass
 class TransformInputResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     seldon_message: Optional[shared.SeldonMessage] = field(default=None)
-    status_code: int = field(default=None)
     

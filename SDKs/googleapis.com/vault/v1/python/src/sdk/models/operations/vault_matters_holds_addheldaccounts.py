@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class VaultMattersHoldsAddHeldAccountsPathParams:
-    hold_id: str = field(default=None, metadata={'path_param': { 'field_name': 'holdId', 'style': 'simple', 'explode': False }})
-    matter_id: str = field(default=None, metadata={'path_param': { 'field_name': 'matterId', 'style': 'simple', 'explode': False }})
+    hold_id: str = field(metadata={'path_param': { 'field_name': 'holdId', 'style': 'simple', 'explode': False }})
+    matter_id: str = field(metadata={'path_param': { 'field_name': 'matterId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,21 +27,21 @@ class VaultMattersHoldsAddHeldAccountsQueryParams:
 
 @dataclass
 class VaultMattersHoldsAddHeldAccountsSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class VaultMattersHoldsAddHeldAccountsRequest:
-    path_params: VaultMattersHoldsAddHeldAccountsPathParams = field(default=None)
-    query_params: VaultMattersHoldsAddHeldAccountsQueryParams = field(default=None)
+    path_params: VaultMattersHoldsAddHeldAccountsPathParams = field()
+    query_params: VaultMattersHoldsAddHeldAccountsQueryParams = field()
+    security: VaultMattersHoldsAddHeldAccountsSecurity = field()
     request: Optional[shared.AddHeldAccountsRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: VaultMattersHoldsAddHeldAccountsSecurity = field(default=None)
     
 
 @dataclass
 class VaultMattersHoldsAddHeldAccountsResponse:
+    content_type: str = field()
+    status_code: int = field()
     add_held_accounts_response: Optional[shared.AddHeldAccountsResponse] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

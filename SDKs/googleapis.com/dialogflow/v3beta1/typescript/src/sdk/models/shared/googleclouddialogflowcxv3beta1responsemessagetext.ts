@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudDialogflowCxV3beta1ResponseMessageText
@@ -6,9 +7,19 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The text response message.
 **/
 export class GoogleCloudDialogflowCxV3beta1ResponseMessageText extends SpeakeasyBase {
-  @Metadata({ data: "json, name=allowPlaybackInterruption" })
+  @SpeakeasyMetadata({ data: "json, name=allowPlaybackInterruption" })
   allowPlaybackInterruption?: boolean;
 
-  @Metadata({ data: "json, name=text" })
+  @SpeakeasyMetadata({ data: "json, name=text" })
+  text?: string[];
+}
+
+
+// GoogleCloudDialogflowCxV3beta1ResponseMessageTextInput
+/** 
+ * The text response message.
+**/
+export class GoogleCloudDialogflowCxV3beta1ResponseMessageTextInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=text" })
   text?: string[];
 }

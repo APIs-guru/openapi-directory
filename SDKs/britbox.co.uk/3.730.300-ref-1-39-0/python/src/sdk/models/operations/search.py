@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 class SearchIncludeEnum(str, Enum):
@@ -11,6 +12,7 @@ class SearchIncludeEnum(str, Enum):
 
 @dataclass
 class SearchQueryParams:
+    term: str = field(metadata={'query_param': { 'field_name': 'term', 'style': 'form', 'explode': True }})
     device: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'device', 'style': 'form', 'explode': True }})
     ff: Optional[List[shared.FeatureFlagsEnum]] = field(default=None, metadata={'query_param': { 'field_name': 'ff', 'style': 'form', 'explode': False }})
     group: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'group', 'style': 'form', 'explode': True }})
@@ -20,18 +22,17 @@ class SearchQueryParams:
     max_results: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'max_results', 'style': 'form', 'explode': True }})
     segments: Optional[List[str]] = field(default=None, metadata={'query_param': { 'field_name': 'segments', 'style': 'form', 'explode': False }})
     sub: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'sub', 'style': 'form', 'explode': True }})
-    term: str = field(default=None, metadata={'query_param': { 'field_name': 'term', 'style': 'form', 'explode': True }})
     
 
 @dataclass
 class SearchRequest:
-    query_params: SearchQueryParams = field(default=None)
+    query_params: SearchQueryParams = field()
     
 
 @dataclass
 class SearchResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     search_results: Optional[shared.SearchResults] = field(default=None)
     service_error: Optional[shared.ServiceError] = field(default=None)
-    status_code: int = field(default=None)
     

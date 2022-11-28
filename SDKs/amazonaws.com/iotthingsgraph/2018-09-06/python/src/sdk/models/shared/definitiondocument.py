@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import definitionlanguage_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class DefinitionDocument:
-    language: definitionlanguage_enum.DefinitionLanguageEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'language' }})
-    text: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'text' }})
+    r"""DefinitionDocument
+    A document that defines an entity. 
+    """
+    
+    language: DefinitionLanguageEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('language') }})
+    text: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('text') }})
     

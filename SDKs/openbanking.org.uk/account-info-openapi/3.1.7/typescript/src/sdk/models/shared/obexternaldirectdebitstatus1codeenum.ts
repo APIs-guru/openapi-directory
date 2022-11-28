@@ -1,6 +1,7 @@
 
 
+
 export enum ObExternalDirectDebitStatus1CodeEnum {
-    Active = "Active"
-,    Inactive = "Inactive"
+    Active = "Active",
+    Inactive = "Inactive"
 }

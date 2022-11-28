@@ -1,32 +1,33 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetaccesstokenIdRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Get access token using authorization code" })
+  @SpeakeasyMetadata({ data: "json, name=Get access token using authorization code" })
   getAccessTokenUsingAuthorizationCode?: shared.AccessToken;
 
-  @Metadata({ data: "json, name=Get access token using device code and OTP" })
+  @SpeakeasyMetadata({ data: "json, name=Get access token using device code and OTP" })
   getAccessTokenUsingDeviceCodeAndOtp?: any;
 
-  @Metadata({ data: "json, name=Get access token using refresh token" })
+  @SpeakeasyMetadata({ data: "json, name=Get access token using refresh token" })
   getAccessTokenUsingRefreshToken?: shared.RefreshToken;
 }
 
 
 export class GetaccesstokenIdRequest extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: GetaccesstokenIdRequestBody;
 }
 
 
 export class GetaccesstokenIdResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   accessResponse?: shared.AccessResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

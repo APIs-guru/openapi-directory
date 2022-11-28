@@ -1,5 +1,7 @@
 package shared
 
+// AnnotateImageResponse
+// Response to an image annotation request.
 type AnnotateImageResponse struct {
 	Context                    *ImageAnnotationContext     `json:"context,omitempty"`
 	CropHintsAnnotation        *CropHintsAnnotation        `json:"cropHintsAnnotation,omitempty"`

@@ -1,11 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Date } from "./date";
 
+
 export enum OpenInfoStatusEnum {
-    OpenForBusinessUnspecified = "OPEN_FOR_BUSINESS_UNSPECIFIED"
-,    Open = "OPEN"
-,    ClosedPermanently = "CLOSED_PERMANENTLY"
-,    ClosedTemporarily = "CLOSED_TEMPORARILY"
+    OpenForBusinessUnspecified = "OPEN_FOR_BUSINESS_UNSPECIFIED",
+    Open = "OPEN",
+    ClosedPermanently = "CLOSED_PERMANENTLY",
+    ClosedTemporarily = "CLOSED_TEMPORARILY"
 }
 
 
@@ -14,12 +15,12 @@ export enum OpenInfoStatusEnum {
  * Information related to the opening state of the business.
 **/
 export class OpenInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=canReopen" })
+  @SpeakeasyMetadata({ data: "json, name=canReopen" })
   canReopen?: boolean;
 
-  @Metadata({ data: "json, name=openingDate" })
+  @SpeakeasyMetadata({ data: "json, name=openingDate" })
   openingDate?: Date;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: OpenInfoStatusEnum;
 }

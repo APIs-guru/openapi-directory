@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TableCellStyle } from "./tablecellstyle";
 import { TableCellStyleSuggestionState } from "./tablecellstylesuggestionstate";
+
 
 
 // SuggestedTableCellStyle
@@ -8,9 +9,9 @@ import { TableCellStyleSuggestionState } from "./tablecellstylesuggestionstate";
  * A suggested change to a TableCellStyle.
 **/
 export class SuggestedTableCellStyle extends SpeakeasyBase {
-  @Metadata({ data: "json, name=tableCellStyle" })
+  @SpeakeasyMetadata({ data: "json, name=tableCellStyle" })
   tableCellStyle?: TableCellStyle;
 
-  @Metadata({ data: "json, name=tableCellStyleSuggestionState" })
+  @SpeakeasyMetadata({ data: "json, name=tableCellStyleSuggestionState" })
   tableCellStyleSuggestionState?: TableCellStyleSuggestionState;
 }

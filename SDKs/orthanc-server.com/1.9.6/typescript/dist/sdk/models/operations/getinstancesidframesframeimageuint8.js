@@ -22,18 +22,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var GetInstancesIdFramesFrameImageUint8PathParams = /** @class */ (function (_super) {
     __extends(GetInstancesIdFramesFrameImageUint8PathParams, _super);
     function GetInstancesIdFramesFrameImageUint8PathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=frame" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=frame" }),
         __metadata("design:type", Number)
     ], GetInstancesIdFramesFrameImageUint8PathParams.prototype, "frame", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=id" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" }),
         __metadata("design:type", String)
     ], GetInstancesIdFramesFrameImageUint8PathParams.prototype, "id", void 0);
     return GetInstancesIdFramesFrameImageUint8PathParams;
@@ -45,7 +45,7 @@ var GetInstancesIdFramesFrameImageUint8QueryParams = /** @class */ (function (_s
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=quality" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=quality" }),
         __metadata("design:type", Number)
     ], GetInstancesIdFramesFrameImageUint8QueryParams.prototype, "quality", void 0);
     return GetInstancesIdFramesFrameImageUint8QueryParams;
@@ -57,7 +57,7 @@ var GetInstancesIdFramesFrameImageUint8Headers = /** @class */ (function (_super
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=Accept" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Accept" }),
         __metadata("design:type", String)
     ], GetInstancesIdFramesFrameImageUint8Headers.prototype, "accept", void 0);
     return GetInstancesIdFramesFrameImageUint8Headers;
@@ -69,15 +69,15 @@ var GetInstancesIdFramesFrameImageUint8Request = /** @class */ (function (_super
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetInstancesIdFramesFrameImageUint8PathParams)
     ], GetInstancesIdFramesFrameImageUint8Request.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetInstancesIdFramesFrameImageUint8QueryParams)
     ], GetInstancesIdFramesFrameImageUint8Request.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetInstancesIdFramesFrameImageUint8Headers)
     ], GetInstancesIdFramesFrameImageUint8Request.prototype, "headers", void 0);
     return GetInstancesIdFramesFrameImageUint8Request;
@@ -89,15 +89,15 @@ var GetInstancesIdFramesFrameImageUint8Response = /** @class */ (function (_supe
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], GetInstancesIdFramesFrameImageUint8Response.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetInstancesIdFramesFrameImageUint8Response.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetInstancesIdFramesFrameImageUint8Response.prototype, "statusCode", void 0);
     return GetInstancesIdFramesFrameImageUint8Response;

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleMapsPlayablelocationsV3SampleAreaFilter
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Specifies the area to search for playable locations.
 **/
 export class GoogleMapsPlayablelocationsV3SampleAreaFilter extends SpeakeasyBase {
-  @Metadata({ data: "json, name=s2CellId" })
+  @SpeakeasyMetadata({ data: "json, name=s2CellId" })
   s2CellId?: string;
 }

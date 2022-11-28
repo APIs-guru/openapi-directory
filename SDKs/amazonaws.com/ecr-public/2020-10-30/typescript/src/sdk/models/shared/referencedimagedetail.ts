@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ReferencedImageDetail
@@ -6,18 +7,18 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * An object that describes the image tag details returned by a <a>DescribeImageTags</a> action.
 **/
 export class ReferencedImageDetail extends SpeakeasyBase {
-  @Metadata({ data: "json, name=artifactMediaType" })
+  @SpeakeasyMetadata({ data: "json, name=artifactMediaType" })
   artifactMediaType?: string;
 
-  @Metadata({ data: "json, name=imageDigest" })
+  @SpeakeasyMetadata({ data: "json, name=imageDigest" })
   imageDigest?: string;
 
-  @Metadata({ data: "json, name=imageManifestMediaType" })
+  @SpeakeasyMetadata({ data: "json, name=imageManifestMediaType" })
   imageManifestMediaType?: string;
 
-  @Metadata({ data: "json, name=imagePushedAt" })
+  @SpeakeasyMetadata({ data: "json, name=imagePushedAt" })
   imagePushedAt?: Date;
 
-  @Metadata({ data: "json, name=imageSizeInBytes" })
+  @SpeakeasyMetadata({ data: "json, name=imageSizeInBytes" })
   imageSizeInBytes?: number;
 }

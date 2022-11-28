@@ -8,6 +8,8 @@ const (
 	CloudBuildMembershipSpecSecurityPolicyEnumPrivileged                CloudBuildMembershipSpecSecurityPolicyEnum = "PRIVILEGED"
 )
 
+// CloudBuildMembershipSpec
+// **Cloud Build**: Configurations for each Cloud Build enabled cluster.
 type CloudBuildMembershipSpec struct {
 	SecurityPolicy *CloudBuildMembershipSpecSecurityPolicyEnum `json:"securityPolicy,omitempty"`
 	Version        *string                                     `json:"version,omitempty"`

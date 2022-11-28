@@ -31,7 +31,7 @@ type IamProjectsServiceAccountsPatchSecurity struct {
 type IamProjectsServiceAccountsPatchRequest struct {
 	PathParams  IamProjectsServiceAccountsPatchPathParams
 	QueryParams IamProjectsServiceAccountsPatchQueryParams
-	Request     *shared.PatchServiceAccountRequest `request:"mediaType=application/json"`
+	Request     *shared.PatchServiceAccountRequestInput `request:"mediaType=application/json"`
 	Security    IamProjectsServiceAccountsPatchSecurity
 }
 

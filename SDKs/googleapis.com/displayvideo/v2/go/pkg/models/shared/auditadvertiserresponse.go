@@ -1,5 +1,7 @@
 package shared
 
+// AuditAdvertiserResponse
+// Response message for AdvertiserService.AuditAdvertiser.
 type AuditAdvertiserResponse struct {
 	AdGroupCriteriaCount            *string `json:"adGroupCriteriaCount,omitempty"`
 	CampaignCriteriaCount           *string `json:"campaignCriteriaCount,omitempty"`

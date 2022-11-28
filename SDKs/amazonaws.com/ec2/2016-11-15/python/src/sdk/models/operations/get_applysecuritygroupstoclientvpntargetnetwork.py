@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 
 class GetApplySecurityGroupsToClientVpnTargetNetworkActionEnum(str, Enum):
     APPLY_SECURITY_GROUPS_TO_CLIENT_VPN_TARGET_NETWORK = "ApplySecurityGroupsToClientVpnTargetNetwork"
@@ -10,12 +14,12 @@ class GetApplySecurityGroupsToClientVpnTargetNetworkVersionEnum(str, Enum):
 
 @dataclass
 class GetApplySecurityGroupsToClientVpnTargetNetworkQueryParams:
-    action: GetApplySecurityGroupsToClientVpnTargetNetworkActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    client_vpn_endpoint_id: str = field(default=None, metadata={'query_param': { 'field_name': 'ClientVpnEndpointId', 'style': 'form', 'explode': True }})
+    action: GetApplySecurityGroupsToClientVpnTargetNetworkActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    client_vpn_endpoint_id: str = field(metadata={'query_param': { 'field_name': 'ClientVpnEndpointId', 'style': 'form', 'explode': True }})
+    security_group_id: List[str] = field(metadata={'query_param': { 'field_name': 'SecurityGroupId', 'style': 'form', 'explode': True }})
+    version: GetApplySecurityGroupsToClientVpnTargetNetworkVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    vpc_id: str = field(metadata={'query_param': { 'field_name': 'VpcId', 'style': 'form', 'explode': True }})
     dry_run: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'DryRun', 'style': 'form', 'explode': True }})
-    security_group_id: List[str] = field(default=None, metadata={'query_param': { 'field_name': 'SecurityGroupId', 'style': 'form', 'explode': True }})
-    version: GetApplySecurityGroupsToClientVpnTargetNetworkVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
-    vpc_id: str = field(default=None, metadata={'query_param': { 'field_name': 'VpcId', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -31,13 +35,13 @@ class GetApplySecurityGroupsToClientVpnTargetNetworkHeaders:
 
 @dataclass
 class GetApplySecurityGroupsToClientVpnTargetNetworkRequest:
-    query_params: GetApplySecurityGroupsToClientVpnTargetNetworkQueryParams = field(default=None)
-    headers: GetApplySecurityGroupsToClientVpnTargetNetworkHeaders = field(default=None)
+    headers: GetApplySecurityGroupsToClientVpnTargetNetworkHeaders = field()
+    query_params: GetApplySecurityGroupsToClientVpnTargetNetworkQueryParams = field()
     
 
 @dataclass
 class GetApplySecurityGroupsToClientVpnTargetNetworkResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

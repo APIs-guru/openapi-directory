@@ -1,32 +1,33 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetOfferingsOfferingIdAnalyticsChannelsChannelIdPostsPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=channelId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=channelId" })
   channelId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=offeringId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=offeringId" })
   offeringId: string;
 }
 
 
 export class GetOfferingsOfferingIdAnalyticsChannelsChannelIdPostsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetOfferingsOfferingIdAnalyticsChannelsChannelIdPostsPathParams;
 }
 
 
 export class GetOfferingsOfferingIdAnalyticsChannelsChannelIdPostsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   error?: shared.Error;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata({ elemType: shared.HttpPost })
+  @SpeakeasyMetadata({ elemType: shared.HttpPost })
   httpPosts?: shared.HttpPost[];
 }

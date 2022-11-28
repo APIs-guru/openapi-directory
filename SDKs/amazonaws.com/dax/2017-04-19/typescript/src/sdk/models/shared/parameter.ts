@@ -1,9 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ChangeTypeEnum } from "./changetypeenum";
 import { IsModifiableEnum } from "./ismodifiableenum";
 import { NodeTypeSpecificValue } from "./nodetypespecificvalue";
 import { ParameterTypeEnum } from "./parametertypeenum";
+
 
 
 // Parameter
@@ -11,33 +11,33 @@ import { ParameterTypeEnum } from "./parametertypeenum";
  * Describes an individual setting that controls some aspect of DAX behavior.
 **/
 export class Parameter extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AllowedValues" })
+  @SpeakeasyMetadata({ data: "json, name=AllowedValues" })
   allowedValues?: string;
 
-  @Metadata({ data: "json, name=ChangeType" })
+  @SpeakeasyMetadata({ data: "json, name=ChangeType" })
   changeType?: ChangeTypeEnum;
 
-  @Metadata({ data: "json, name=DataType" })
+  @SpeakeasyMetadata({ data: "json, name=DataType" })
   dataType?: string;
 
-  @Metadata({ data: "json, name=Description" })
+  @SpeakeasyMetadata({ data: "json, name=Description" })
   description?: string;
 
-  @Metadata({ data: "json, name=IsModifiable" })
+  @SpeakeasyMetadata({ data: "json, name=IsModifiable" })
   isModifiable?: IsModifiableEnum;
 
-  @Metadata({ data: "json, name=NodeTypeSpecificValues", elemType: shared.NodeTypeSpecificValue })
+  @SpeakeasyMetadata({ data: "json, name=NodeTypeSpecificValues", elemType: NodeTypeSpecificValue })
   nodeTypeSpecificValues?: NodeTypeSpecificValue[];
 
-  @Metadata({ data: "json, name=ParameterName" })
+  @SpeakeasyMetadata({ data: "json, name=ParameterName" })
   parameterName?: string;
 
-  @Metadata({ data: "json, name=ParameterType" })
+  @SpeakeasyMetadata({ data: "json, name=ParameterType" })
   parameterType?: ParameterTypeEnum;
 
-  @Metadata({ data: "json, name=ParameterValue" })
+  @SpeakeasyMetadata({ data: "json, name=ParameterValue" })
   parameterValue?: string;
 
-  @Metadata({ data: "json, name=Source" })
+  @SpeakeasyMetadata({ data: "json, name=Source" })
   source?: string;
 }

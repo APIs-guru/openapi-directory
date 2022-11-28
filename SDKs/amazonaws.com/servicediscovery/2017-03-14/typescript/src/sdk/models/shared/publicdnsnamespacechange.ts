@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PublicDnsNamespacePropertiesChange } from "./publicdnsnamespacepropertieschange";
+
 
 
 // PublicDnsNamespaceChange
@@ -7,9 +8,9 @@ import { PublicDnsNamespacePropertiesChange } from "./publicdnsnamespaceproperti
  * Updated properties for the public DNS namespace.
 **/
 export class PublicDnsNamespaceChange extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Description" })
+  @SpeakeasyMetadata({ data: "json, name=Description" })
   description?: string;
 
-  @Metadata({ data: "json, name=Properties" })
+  @SpeakeasyMetadata({ data: "json, name=Properties" })
   properties?: PublicDnsNamespacePropertiesChange;
 }

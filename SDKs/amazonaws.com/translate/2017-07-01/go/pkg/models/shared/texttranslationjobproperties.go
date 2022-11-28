@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// TextTranslationJobProperties
+// Provides information about a translation job.
 type TextTranslationJobProperties struct {
 	DataAccessRoleArn   *string           `json:"DataAccessRoleArn,omitempty"`
 	EndTime             *time.Time        `json:"EndTime,omitempty"`

@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CloudRunService } from "./cloudrunservice";
+
 
 
 // Destination
@@ -7,6 +8,6 @@ import { CloudRunService } from "./cloudrunservice";
  * Represents a target of an invocation over HTTP.
 **/
 export class Destination extends SpeakeasyBase {
-  @Metadata({ data: "json, name=cloudRunService" })
+  @SpeakeasyMetadata({ data: "json, name=cloudRunService" })
   cloudRunService?: CloudRunService;
 }

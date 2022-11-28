@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { TargetContainerRepository } from "./targetcontainerrepository";
 /**
  * Container distribution settings for encryption, licensing, and sharing in a specific Region.

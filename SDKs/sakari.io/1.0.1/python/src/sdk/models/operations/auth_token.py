@@ -10,7 +10,7 @@ class AuthTokenRequest:
 
 @dataclass
 class AuthTokenResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     token_response: Optional[shared.TokenResponse] = field(default=None)
     

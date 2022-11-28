@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { FileReference } from "./filereference";
+
 
 
 // IosDeviceFile
@@ -7,12 +8,12 @@ import { FileReference } from "./filereference";
  * A file or directory to install on the device before the test starts.
 **/
 export class IosDeviceFile extends SpeakeasyBase {
-  @Metadata({ data: "json, name=bundleId" })
+  @SpeakeasyMetadata({ data: "json, name=bundleId" })
   bundleId?: string;
 
-  @Metadata({ data: "json, name=content" })
+  @SpeakeasyMetadata({ data: "json, name=content" })
   content?: FileReference;
 
-  @Metadata({ data: "json, name=devicePath" })
+  @SpeakeasyMetadata({ data: "json, name=devicePath" })
   devicePath?: string;
 }

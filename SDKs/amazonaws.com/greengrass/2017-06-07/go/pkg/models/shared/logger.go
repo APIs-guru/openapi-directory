@@ -1,5 +1,7 @@
 package shared
 
+// Logger
+// Information about a logger
 type Logger struct {
 	Component LoggerComponentEnum `json:"Component"`
 	ID        string              `json:"Id"`

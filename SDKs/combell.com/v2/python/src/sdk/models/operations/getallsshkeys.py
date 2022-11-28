@@ -11,13 +11,13 @@ class GetAllSSHKeysQueryParams:
 
 @dataclass
 class GetAllSSHKeysRequest:
-    query_params: GetAllSSHKeysQueryParams = field(default=None)
+    query_params: GetAllSSHKeysQueryParams = field()
     
 
 @dataclass
 class GetAllSSHKeysResponse:
-    content_type: str = field(default=None)
-    headers: dict[str, List[str]] = field(default=None)
+    content_type: str = field()
+    headers: dict[str, List[str]] = field()
+    status_code: int = field()
     ssh_key_details: Optional[List[shared.SSHKeyDetail]] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -5,18 +5,18 @@ from sdk.models import shared
 
 @dataclass
 class ActionsListRunnerApplicationsForRepoPathParams:
-    owner: str = field(default=None, metadata={'path_param': { 'field_name': 'owner', 'style': 'simple', 'explode': False }})
-    repo: str = field(default=None, metadata={'path_param': { 'field_name': 'repo', 'style': 'simple', 'explode': False }})
+    owner: str = field(metadata={'path_param': { 'field_name': 'owner', 'style': 'simple', 'explode': False }})
+    repo: str = field(metadata={'path_param': { 'field_name': 'repo', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class ActionsListRunnerApplicationsForRepoRequest:
-    path_params: ActionsListRunnerApplicationsForRepoPathParams = field(default=None)
+    path_params: ActionsListRunnerApplicationsForRepoPathParams = field()
     
 
 @dataclass
 class ActionsListRunnerApplicationsForRepoResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     runner_applications: Optional[List[shared.RunnerApplication]] = field(default=None)
     

@@ -23,10 +23,6 @@ type GetDailyReportByCountryCodeQueryParams struct {
 	Format     *GetDailyReportByCountryCodeFormatEnum     `queryParam:"style=form,explode=true,name=format"`
 }
 
-type GetDailyReportByCountryCodeRequest struct {
-	QueryParams GetDailyReportByCountryCodeQueryParams
-}
-
 type GetDailyReportByCountryCode200ApplicationJSONProvince struct {
 	Active    *int64 `json:"active,omitempty"`
 	Confirmed *int64 `json:"confirmed,omitempty"`
@@ -40,6 +36,10 @@ type GetDailyReportByCountryCode200ApplicationJSON struct {
 	Latitude  *float32                                                `json:"latitude,omitempty"`
 	Longitude *float32                                                `json:"longitude,omitempty"`
 	Province  []GetDailyReportByCountryCode200ApplicationJSONProvince `json:"province,omitempty"`
+}
+
+type GetDailyReportByCountryCodeRequest struct {
+	QueryParams GetDailyReportByCountryCodeQueryParams
 }
 
 type GetDailyReportByCountryCodeResponse struct {

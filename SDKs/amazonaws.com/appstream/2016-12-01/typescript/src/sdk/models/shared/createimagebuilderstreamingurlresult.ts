@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class CreateImageBuilderStreamingUrlResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Expires" })
+  @SpeakeasyMetadata({ data: "json, name=Expires" })
   expires?: Date;
 
-  @Metadata({ data: "json, name=StreamingURL" })
+  @SpeakeasyMetadata({ data: "json, name=StreamingURL" })
   streamingUrl?: string;
 }

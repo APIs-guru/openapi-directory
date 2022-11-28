@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// MedicalTranscriptionJob
+// The data structure that contains the information for a medical transcription job.
 type MedicalTranscriptionJob struct {
 	CompletionTime              *time.Time                            `json:"CompletionTime,omitempty"`
 	ContentIdentificationType   *MedicalContentIdentificationTypeEnum `json:"ContentIdentificationType,omitempty"`

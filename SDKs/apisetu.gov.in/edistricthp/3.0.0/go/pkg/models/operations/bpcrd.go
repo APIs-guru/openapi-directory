@@ -26,11 +26,6 @@ type BpcrdSecurity struct {
 	ClientID shared.SchemeClientID `security:"scheme,type=apiKey,subtype=header"`
 }
 
-type BpcrdRequest struct {
-	Request  *BpcrdRequestBody `request:"mediaType=application/json"`
-	Security BpcrdSecurity
-}
-
 type Bpcrd400ApplicationJSONErrorEnum string
 
 const (
@@ -160,6 +155,11 @@ const (
 type Bpcrd504ApplicationJSON struct {
 	Error            *Bpcrd504ApplicationJSONErrorEnum            `json:"error,omitempty"`
 	ErrorDescription *Bpcrd504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
+}
+
+type BpcrdRequest struct {
+	Request  *BpcrdRequestBody `request:"mediaType=application/json"`
+	Security BpcrdSecurity
 }
 
 type BpcrdResponse struct {

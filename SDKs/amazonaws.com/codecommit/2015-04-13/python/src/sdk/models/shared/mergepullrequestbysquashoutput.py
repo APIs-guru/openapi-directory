@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import pullrequest
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class MergePullRequestBySquashOutput:
-    pull_request: Optional[pullrequest.PullRequest] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'pullRequest' }})
+    pull_request: Optional[PullRequest] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('pullRequest') }})
     

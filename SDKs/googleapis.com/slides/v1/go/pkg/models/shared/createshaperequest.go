@@ -148,6 +148,8 @@ const (
 	CreateShapeRequestShapeTypeEnumCustom                     CreateShapeRequestShapeTypeEnum = "CUSTOM"
 )
 
+// CreateShapeRequest
+// Creates a new shape.
 type CreateShapeRequest struct {
 	ElementProperties *PageElementProperties           `json:"elementProperties,omitempty"`
 	ObjectID          *string                          `json:"objectId,omitempty"`

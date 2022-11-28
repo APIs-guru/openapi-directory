@@ -1,5 +1,7 @@
 package shared
 
+// GoogleChromePolicyVersionsV1DefineNetworkRequest
+// Request object for creating a new network.
 type GoogleChromePolicyVersionsV1DefineNetworkRequest struct {
 	Name           *string                                      `json:"name,omitempty"`
 	Settings       []GoogleChromePolicyVersionsV1NetworkSetting `json:"settings,omitempty"`

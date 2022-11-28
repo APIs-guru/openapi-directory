@@ -1,41 +1,42 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class RetrieveApiSecretsPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=api_key" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=api_key" })
   apiKey: string;
 }
 
 
 export class RetrieveApiSecretsSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=basic" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=basic" })
   basicAuth: shared.SchemeBasicAuth;
 }
 
 
 export class RetrieveApiSecretsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: RetrieveApiSecretsPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: RetrieveApiSecretsSecurity;
 }
 
 
 export class RetrieveApiSecretsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   errorApiKeyNotFound?: shared.ErrorApiKeyNotFound;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   retrieveApiSecrets200ApplicationJsonAny?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   retrieveApiSecrets401ApplicationJsonAny?: any;
 }

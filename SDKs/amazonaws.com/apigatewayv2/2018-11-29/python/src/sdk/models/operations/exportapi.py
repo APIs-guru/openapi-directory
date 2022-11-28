@@ -1,19 +1,22 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class ExportAPIPathParams:
-    api_id: str = field(default=None, metadata={'path_param': { 'field_name': 'apiId', 'style': 'simple', 'explode': False }})
-    specification: str = field(default=None, metadata={'path_param': { 'field_name': 'specification', 'style': 'simple', 'explode': False }})
+    api_id: str = field(metadata={'path_param': { 'field_name': 'apiId', 'style': 'simple', 'explode': False }})
+    specification: str = field(metadata={'path_param': { 'field_name': 'specification', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class ExportAPIQueryParams:
+    output_type: str = field(metadata={'query_param': { 'field_name': 'outputType', 'style': 'form', 'explode': True }})
     export_version: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'exportVersion', 'style': 'form', 'explode': True }})
     include_extensions: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'includeExtensions', 'style': 'form', 'explode': True }})
-    output_type: str = field(default=None, metadata={'query_param': { 'field_name': 'outputType', 'style': 'form', 'explode': True }})
     stage_name: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'stageName', 'style': 'form', 'explode': True }})
     
 
@@ -30,17 +33,17 @@ class ExportAPIHeaders:
 
 @dataclass
 class ExportAPIRequest:
-    path_params: ExportAPIPathParams = field(default=None)
-    query_params: ExportAPIQueryParams = field(default=None)
-    headers: ExportAPIHeaders = field(default=None)
+    headers: ExportAPIHeaders = field()
+    path_params: ExportAPIPathParams = field()
+    query_params: ExportAPIQueryParams = field()
     
 
 @dataclass
 class ExportAPIResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     export_api_response: Optional[shared.ExportAPIResponse] = field(default=None)
     not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     too_many_requests_exception: Optional[Any] = field(default=None)
     

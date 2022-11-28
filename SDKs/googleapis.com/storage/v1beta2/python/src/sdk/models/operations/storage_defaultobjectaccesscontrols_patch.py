@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class StorageDefaultObjectAccessControlsPatchPathParams:
-    bucket: str = field(default=None, metadata={'path_param': { 'field_name': 'bucket', 'style': 'simple', 'explode': False }})
-    entity: str = field(default=None, metadata={'path_param': { 'field_name': 'entity', 'style': 'simple', 'explode': False }})
+    bucket: str = field(metadata={'path_param': { 'field_name': 'bucket', 'style': 'simple', 'explode': False }})
+    entity: str = field(metadata={'path_param': { 'field_name': 'entity', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -22,21 +23,21 @@ class StorageDefaultObjectAccessControlsPatchQueryParams:
 
 @dataclass
 class StorageDefaultObjectAccessControlsPatchSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class StorageDefaultObjectAccessControlsPatchRequest:
-    path_params: StorageDefaultObjectAccessControlsPatchPathParams = field(default=None)
-    query_params: StorageDefaultObjectAccessControlsPatchQueryParams = field(default=None)
+    path_params: StorageDefaultObjectAccessControlsPatchPathParams = field()
+    query_params: StorageDefaultObjectAccessControlsPatchQueryParams = field()
+    security: StorageDefaultObjectAccessControlsPatchSecurity = field()
     request: Optional[shared.ObjectAccessControl] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: StorageDefaultObjectAccessControlsPatchSecurity = field(default=None)
     
 
 @dataclass
 class StorageDefaultObjectAccessControlsPatchResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     object_access_control: Optional[shared.ObjectAccessControl] = field(default=None)
-    status_code: int = field(default=None)
     

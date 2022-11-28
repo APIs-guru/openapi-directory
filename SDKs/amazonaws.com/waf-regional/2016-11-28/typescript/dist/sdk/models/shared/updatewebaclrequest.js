@@ -22,28 +22,28 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { WafAction } from "./wafaction";
+import { WebAclUpdate } from "./webaclupdate";
 var UpdateWebAclRequest = /** @class */ (function (_super) {
     __extends(UpdateWebAclRequest, _super);
     function UpdateWebAclRequest() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=ChangeToken" }),
+        SpeakeasyMetadata({ data: "json, name=ChangeToken" }),
         __metadata("design:type", String)
     ], UpdateWebAclRequest.prototype, "changeToken", void 0);
     __decorate([
-        Metadata({ data: "json, name=DefaultAction" }),
+        SpeakeasyMetadata({ data: "json, name=DefaultAction" }),
         __metadata("design:type", WafAction)
     ], UpdateWebAclRequest.prototype, "defaultAction", void 0);
     __decorate([
-        Metadata({ data: "json, name=Updates", elemType: shared.WebAclUpdate }),
+        SpeakeasyMetadata({ data: "json, name=Updates", elemType: WebAclUpdate }),
         __metadata("design:type", Array)
     ], UpdateWebAclRequest.prototype, "updates", void 0);
     __decorate([
-        Metadata({ data: "json, name=WebACLId" }),
+        SpeakeasyMetadata({ data: "json, name=WebACLId" }),
         __metadata("design:type", String)
     ], UpdateWebAclRequest.prototype, "webAclId", void 0);
     return UpdateWebAclRequest;

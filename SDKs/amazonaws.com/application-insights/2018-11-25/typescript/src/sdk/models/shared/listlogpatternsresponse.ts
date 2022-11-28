@@ -1,15 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { LogPattern } from "./logpattern";
 
 
+
 export class ListLogPatternsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=LogPatterns", elemType: shared.LogPattern })
+  @SpeakeasyMetadata({ data: "json, name=LogPatterns", elemType: LogPattern })
   logPatterns?: LogPattern[];
 
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=ResourceGroupName" })
+  @SpeakeasyMetadata({ data: "json, name=ResourceGroupName" })
   resourceGroupName?: string;
 }

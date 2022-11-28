@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { EncryptionConfiguration } from "./encryptionconfiguration";
+
 
 
 // SecurityConfiguration
@@ -7,12 +8,12 @@ import { EncryptionConfiguration } from "./encryptionconfiguration";
  * Specifies a security configuration.
 **/
 export class SecurityConfiguration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CreatedTimeStamp" })
+  @SpeakeasyMetadata({ data: "json, name=CreatedTimeStamp" })
   createdTimeStamp?: Date;
 
-  @Metadata({ data: "json, name=EncryptionConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=EncryptionConfiguration" })
   encryptionConfiguration?: EncryptionConfiguration;
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name?: string;
 }

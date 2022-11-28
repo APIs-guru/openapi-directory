@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ProviderTypeEnum } from "./providertypeenum";
 export declare class ListConnectionsInput extends SpeakeasyBase {
     hostArnFilter?: string;

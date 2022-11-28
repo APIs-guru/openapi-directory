@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ReportTaskRunnerHeartbeatInput
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Contains the parameters for ReportTaskRunnerHeartbeat.
 **/
 export class ReportTaskRunnerHeartbeatInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=hostname" })
+  @SpeakeasyMetadata({ data: "json, name=hostname" })
   hostname?: string;
 
-  @Metadata({ data: "json, name=taskrunnerId" })
+  @SpeakeasyMetadata({ data: "json, name=taskrunnerId" })
   taskrunnerId: string;
 
-  @Metadata({ data: "json, name=workerGroup" })
+  @SpeakeasyMetadata({ data: "json, name=workerGroup" })
   workerGroup?: string;
 }

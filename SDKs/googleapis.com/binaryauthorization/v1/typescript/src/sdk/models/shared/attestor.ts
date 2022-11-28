@@ -1,5 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { UserOwnedGrafeasNote } from "./userownedgrafeasnote";
+import { UserOwnedGrafeasNoteInput } from "./userownedgrafeasnote";
+
 
 
 // Attestor
@@ -7,18 +9,37 @@ import { UserOwnedGrafeasNote } from "./userownedgrafeasnote";
  * An attestor that attests to container image artifacts. An existing attestor cannot be modified except where indicated.
 **/
 export class Attestor extends SpeakeasyBase {
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=etag" })
+  @SpeakeasyMetadata({ data: "json, name=etag" })
   etag?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=updateTime" })
+  @SpeakeasyMetadata({ data: "json, name=updateTime" })
   updateTime?: string;
 
-  @Metadata({ data: "json, name=userOwnedGrafeasNote" })
+  @SpeakeasyMetadata({ data: "json, name=userOwnedGrafeasNote" })
   userOwnedGrafeasNote?: UserOwnedGrafeasNote;
+}
+
+
+// AttestorInput
+/** 
+ * An attestor that attests to container image artifacts. An existing attestor cannot be modified except where indicated.
+**/
+export class AttestorInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=description" })
+  description?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=etag" })
+  etag?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=name" })
+  name?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=userOwnedGrafeasNote" })
+  userOwnedGrafeasNote?: UserOwnedGrafeasNoteInput;
 }

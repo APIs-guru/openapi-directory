@@ -1,38 +1,39 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class ActivitySetThreadSubscriptionPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=thread_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=thread_id" })
   threadId: number;
 }
 
 
 export class ActivitySetThreadSubscriptionRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ignored" })
+  @SpeakeasyMetadata({ data: "json, name=ignored" })
   ignored?: boolean;
 }
 
 
 export class ActivitySetThreadSubscriptionRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: ActivitySetThreadSubscriptionPathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request?: ActivitySetThreadSubscriptionRequestBody;
 }
 
 
 export class ActivitySetThreadSubscriptionResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   basicError?: shared.BasicError;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   threadSubscription?: shared.ThreadSubscription;
 }

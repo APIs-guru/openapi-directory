@@ -1,5 +1,7 @@
 package shared
 
+// EnterpriseCrmFrontendsEventbusProtoParameterValueType
+// To support various types of parameter values. Next available id: 14
 type EnterpriseCrmFrontendsEventbusProtoParameterValueType struct {
 	BooleanArray          *EnterpriseCrmFrontendsEventbusProtoBooleanParameterArray     `json:"booleanArray,omitempty"`
 	BooleanValue          *bool                                                         `json:"booleanValue,omitempty"`

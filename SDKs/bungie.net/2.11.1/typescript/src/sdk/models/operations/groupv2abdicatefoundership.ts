@@ -1,31 +1,32 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GroupV2AbdicateFoundershipPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=founderIdNew" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=founderIdNew" })
   founderIdNew: number;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=groupId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=groupId" })
   groupId: number;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=membershipType" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=membershipType" })
   membershipType: number;
 }
 
 
 export class GroupV2AbdicateFoundershipRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GroupV2AbdicateFoundershipPathParams;
 }
 
 
 export class GroupV2AbdicateFoundershipResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

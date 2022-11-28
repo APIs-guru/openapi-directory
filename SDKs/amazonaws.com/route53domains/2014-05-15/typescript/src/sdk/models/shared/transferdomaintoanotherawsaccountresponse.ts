@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // TransferDomainToAnotherAwsAccountResponse
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The <code>TransferDomainToAnotherAwsAccount</code> response includes the following elements.
 **/
 export class TransferDomainToAnotherAwsAccountResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=OperationId" })
+  @SpeakeasyMetadata({ data: "json, name=OperationId" })
   operationId?: string;
 
-  @Metadata({ data: "json, name=Password" })
+  @SpeakeasyMetadata({ data: "json, name=Password" })
   password?: string;
 }

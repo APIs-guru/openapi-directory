@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { EkmConnection } from "./ekmconnection";
+
 
 
 // ListEkmConnectionsResponse
@@ -8,12 +8,12 @@ import { EkmConnection } from "./ekmconnection";
  * Response message for EkmService.ListEkmConnections.
 **/
 export class ListEkmConnectionsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ekmConnections", elemType: shared.EkmConnection })
+  @SpeakeasyMetadata({ data: "json, name=ekmConnections", elemType: EkmConnection })
   ekmConnections?: EkmConnection[];
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 
-  @Metadata({ data: "json, name=totalSize" })
+  @SpeakeasyMetadata({ data: "json, name=totalSize" })
   totalSize?: number;
 }

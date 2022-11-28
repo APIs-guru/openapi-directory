@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostSendDiagnosticInterruptActionEnum(str, Enum):
     SEND_DIAGNOSTIC_INTERRUPT = "SendDiagnosticInterrupt"
@@ -10,8 +14,8 @@ class PostSendDiagnosticInterruptVersionEnum(str, Enum):
 
 @dataclass
 class PostSendDiagnosticInterruptQueryParams:
-    action: PostSendDiagnosticInterruptActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostSendDiagnosticInterruptVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostSendDiagnosticInterruptActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostSendDiagnosticInterruptVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,13 +31,13 @@ class PostSendDiagnosticInterruptHeaders:
 
 @dataclass
 class PostSendDiagnosticInterruptRequest:
-    query_params: PostSendDiagnosticInterruptQueryParams = field(default=None)
-    headers: PostSendDiagnosticInterruptHeaders = field(default=None)
+    headers: PostSendDiagnosticInterruptHeaders = field()
+    query_params: PostSendDiagnosticInterruptQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostSendDiagnosticInterruptResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

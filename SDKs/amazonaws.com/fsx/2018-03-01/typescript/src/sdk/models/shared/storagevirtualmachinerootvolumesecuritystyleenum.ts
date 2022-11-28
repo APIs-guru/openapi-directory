@@ -1,7 +1,8 @@
 
 
+
 export enum StorageVirtualMachineRootVolumeSecurityStyleEnum {
-    Unix = "UNIX"
-,    Ntfs = "NTFS"
-,    Mixed = "MIXED"
+    Unix = "UNIX",
+    Ntfs = "NTFS",
+    Mixed = "MIXED"
 }

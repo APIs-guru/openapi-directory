@@ -50,6 +50,8 @@ const (
 	GoogleSecuritySafebrowsingV4ThreatListDescriptorThreatTypeEnumSocialEngineeringLowerPrecision GoogleSecuritySafebrowsingV4ThreatListDescriptorThreatTypeEnum = "SOCIAL_ENGINEERING_LOWER_PRECISION"
 )
 
+// GoogleSecuritySafebrowsingV4ThreatListDescriptor
+// Describes an individual threat list. A list is defined by three parameters: the type of threat posed, the type of platform targeted by the threat, and the type of entries in the list.
 type GoogleSecuritySafebrowsingV4ThreatListDescriptor struct {
 	PlatformType    *GoogleSecuritySafebrowsingV4ThreatListDescriptorPlatformTypeEnum    `json:"platformType,omitempty"`
 	ThreatEntryType *GoogleSecuritySafebrowsingV4ThreatListDescriptorThreatEntryTypeEnum `json:"threatEntryType,omitempty"`

@@ -13,23 +13,9 @@ type GetLinodeConfigsQueryParams struct {
 	PageSize *int64 `queryParam:"style=form,explode=true,name=page_size"`
 }
 
-type GetLinodeConfigsSecurityOption1 struct {
-	PersonalAccessToken shared.SchemePersonalAccessToken `security:"scheme,type=http,subtype=bearer"`
-}
-
-type GetLinodeConfigsSecurityOption2 struct {
-	Oauth shared.SchemeOauth `security:"scheme,type=oauth2"`
-}
-
 type GetLinodeConfigsSecurity struct {
-	Option1 *GetLinodeConfigsSecurityOption1 `security:"option"`
-	Option2 *GetLinodeConfigsSecurityOption2 `security:"option"`
-}
-
-type GetLinodeConfigsRequest struct {
-	PathParams  GetLinodeConfigsPathParams
-	QueryParams GetLinodeConfigsQueryParams
-	Security    GetLinodeConfigsSecurity
+	PersonalAccessToken *shared.SchemePersonalAccessToken `security:"scheme,type=http,subtype=bearer"`
+	Oauth               *shared.SchemeOauth               `security:"scheme,type=oauth2"`
 }
 
 type GetLinodeConfigs200ApplicationJSON struct {
@@ -37,6 +23,12 @@ type GetLinodeConfigs200ApplicationJSON struct {
 	Page    *int64                `json:"page,omitempty"`
 	Pages   *int64                `json:"pages,omitempty"`
 	Results *int64                `json:"results,omitempty"`
+}
+
+type GetLinodeConfigsRequest struct {
+	PathParams  GetLinodeConfigsPathParams
+	QueryParams GetLinodeConfigsQueryParams
+	Security    GetLinodeConfigsSecurity
 }
 
 type GetLinodeConfigsResponse struct {

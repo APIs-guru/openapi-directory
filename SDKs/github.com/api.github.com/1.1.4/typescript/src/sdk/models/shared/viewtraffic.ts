@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Traffic } from "./traffic";
+
 
 
 // ViewTraffic
@@ -8,12 +8,12 @@ import { Traffic } from "./traffic";
  * View Traffic
 **/
 export class ViewTraffic extends SpeakeasyBase {
-  @Metadata({ data: "json, name=count" })
+  @SpeakeasyMetadata({ data: "json, name=count" })
   count: number;
 
-  @Metadata({ data: "json, name=uniques" })
+  @SpeakeasyMetadata({ data: "json, name=uniques" })
   uniques: number;
 
-  @Metadata({ data: "json, name=views", elemType: shared.Traffic })
+  @SpeakeasyMetadata({ data: "json, name=views", elemType: Traffic })
   views: Traffic[];
 }

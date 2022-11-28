@@ -20,6 +20,8 @@ const (
 	NoteKindEnumDsseAttestation      NoteKindEnum = "DSSE_ATTESTATION"
 )
 
+// Note
+// Provides a detailed description of a `Note`.
 type Note struct {
 	AttestationAuthority *AttestationAuthority `json:"attestationAuthority,omitempty"`
 	BaseImage            *Basis                `json:"baseImage,omitempty"`

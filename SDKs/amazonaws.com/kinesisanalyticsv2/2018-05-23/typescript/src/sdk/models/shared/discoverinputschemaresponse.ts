@@ -1,17 +1,18 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SourceSchema } from "./sourceschema";
 
 
+
 export class DiscoverInputSchemaResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=InputSchema" })
+  @SpeakeasyMetadata({ data: "json, name=InputSchema" })
   inputSchema?: SourceSchema;
 
-  @Metadata({ data: "json, name=ParsedInputRecords" })
+  @SpeakeasyMetadata({ data: "json, name=ParsedInputRecords" })
   parsedInputRecords?: string[][];
 
-  @Metadata({ data: "json, name=ProcessedInputRecords" })
+  @SpeakeasyMetadata({ data: "json, name=ProcessedInputRecords" })
   processedInputRecords?: string[];
 
-  @Metadata({ data: "json, name=RawInputRecords" })
+  @SpeakeasyMetadata({ data: "json, name=RawInputRecords" })
   rawInputRecords?: string[];
 }

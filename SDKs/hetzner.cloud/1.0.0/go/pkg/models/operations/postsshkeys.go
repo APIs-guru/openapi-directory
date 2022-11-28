@@ -6,10 +6,6 @@ type PostSSHKeysRequestBody struct {
 	PublicKey string                 `json:"public_key"`
 }
 
-type PostSSHKeysRequest struct {
-	Request *PostSSHKeysRequestBody `request:"mediaType=application/json"`
-}
-
 type PostSSHKeys201ApplicationJSONSSHKey struct {
 	Created     string            `json:"created"`
 	Fingerprint string            `json:"fingerprint"`
@@ -21,6 +17,10 @@ type PostSSHKeys201ApplicationJSONSSHKey struct {
 
 type PostSSHKeys201ApplicationJSON struct {
 	SSHKey PostSSHKeys201ApplicationJSONSSHKey `json:"ssh_key"`
+}
+
+type PostSSHKeysRequest struct {
+	Request *PostSSHKeysRequestBody `request:"mediaType=application/json"`
 }
 
 type PostSSHKeysResponse struct {

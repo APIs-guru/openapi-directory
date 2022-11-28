@@ -1,45 +1,46 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetWordFrequencyPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=word" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=word" })
   word: string;
 }
 
 export enum GetWordFrequencyUseCanonicalEnum {
-    False = "false"
-,    True = "true"
+    False = "false",
+    True = "true"
 }
 
 
 export class GetWordFrequencyQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=endYear" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=endYear" })
   endYear?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=startYear" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=startYear" })
   startYear?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=useCanonical" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=useCanonical" })
   useCanonical?: GetWordFrequencyUseCanonicalEnum;
 }
 
 
 export class GetWordFrequencyRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetWordFrequencyPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetWordFrequencyQueryParams;
 }
 
 
 export class GetWordFrequencyResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

@@ -1,77 +1,69 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetEventsV3EventsGetPageQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=after" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=after" })
   after?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=before" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=before" })
   before?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=eventType" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=eventType" })
   eventType?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=limit" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=limit" })
   limit?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=objectId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=objectId" })
   objectId?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=objectType" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=objectType" })
   objectType?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=occurredAfter" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=occurredAfter" })
   occurredAfter?: Date;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=occurredBefore" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=occurredBefore" })
   occurredBefore?: Date;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=sort" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sort" })
   sort?: string[];
 }
 
 
-export class GetEventsV3EventsGetPageSecurityOption1 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=query" })
-  hapikey: shared.SchemeHapikey;
-}
-
-
-export class GetEventsV3EventsGetPageSecurityOption2 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
-  oauth2Legacy: shared.SchemeOauth2Legacy;
-}
-
-
 export class GetEventsV3EventsGetPageSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, option=true" })
-  option1?: GetEventsV3EventsGetPageSecurityOption1;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=query" })
+  hapikey?: shared.SchemeHapikey;
 
-  @Metadata({ data: "security, option=true" })
-  option2?: GetEventsV3EventsGetPageSecurityOption2;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
+  oauth2Legacy?: shared.SchemeOauth2Legacy;
+
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  privateAppsLegacy?: shared.SchemePrivateAppsLegacy;
 }
 
 
 export class GetEventsV3EventsGetPageRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetEventsV3EventsGetPageQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: GetEventsV3EventsGetPageSecurity;
 }
 
 
 export class GetEventsV3EventsGetPageResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   collectionResponseExternalUnifiedEvent?: shared.CollectionResponseExternalUnifiedEvent;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

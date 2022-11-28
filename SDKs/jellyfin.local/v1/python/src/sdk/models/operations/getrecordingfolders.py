@@ -10,18 +10,18 @@ class GetRecordingFoldersQueryParams:
 
 @dataclass
 class GetRecordingFoldersSecurity:
-    custom_authentication: shared.SchemeCustomAuthentication = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    custom_authentication: shared.SchemeCustomAuthentication = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
     
 
 @dataclass
 class GetRecordingFoldersRequest:
-    query_params: GetRecordingFoldersQueryParams = field(default=None)
-    security: GetRecordingFoldersSecurity = field(default=None)
+    query_params: GetRecordingFoldersQueryParams = field()
+    security: GetRecordingFoldersSecurity = field()
     
 
 @dataclass
 class GetRecordingFoldersResponse:
+    content_type: str = field()
+    status_code: int = field()
     base_item_dto_query_result: Optional[shared.BaseItemDtoQueryResult] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

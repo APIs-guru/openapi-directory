@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // DeleteReplicationSubnetGroupMessage
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * <p/>
 **/
 export class DeleteReplicationSubnetGroupMessage extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ReplicationSubnetGroupIdentifier" })
+  @SpeakeasyMetadata({ data: "json, name=ReplicationSubnetGroupIdentifier" })
   replicationSubnetGroupIdentifier: string;
 }

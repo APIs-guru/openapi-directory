@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // UpdateAuthTokenRestrictions
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Request model for updating auth token settings
 **/
 export class UpdateAuthTokenRestrictions extends SpeakeasyBase {
-  @Metadata({ data: "json, name=accessTokenValidity" })
+  @SpeakeasyMetadata({ data: "json, name=accessTokenValidity" })
   accessTokenValidity?: number;
 
-  @Metadata({ data: "json, name=overwriteEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=overwriteEnabled" })
   overwriteEnabled: boolean;
 
-  @Metadata({ data: "json, name=refreshTokenValidity" })
+  @SpeakeasyMetadata({ data: "json, name=refreshTokenValidity" })
   refreshTokenValidity?: number;
 }

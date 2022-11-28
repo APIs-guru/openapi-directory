@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // ResolveCustomerResult
 /**
  * The result of the ResolveCustomer operation. Contains the CustomerIdentifier and product code.
@@ -33,11 +33,11 @@ var ResolveCustomerResult = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=CustomerIdentifier" }),
+        SpeakeasyMetadata({ data: "json, name=CustomerIdentifier" }),
         __metadata("design:type", String)
     ], ResolveCustomerResult.prototype, "customerIdentifier", void 0);
     __decorate([
-        Metadata({ data: "json, name=ProductCode" }),
+        SpeakeasyMetadata({ data: "json, name=ProductCode" }),
         __metadata("design:type", String)
     ], ResolveCustomerResult.prototype, "productCode", void 0);
     return ResolveCustomerResult;

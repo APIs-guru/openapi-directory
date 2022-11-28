@@ -1,40 +1,41 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class UpdateNetworkCellularGatewayDhcpPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=networkId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=networkId" })
   networkId: string;
 }
 
 
 export class UpdateNetworkCellularGatewayDhcpRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=dhcpLeaseTime" })
+  @SpeakeasyMetadata({ data: "json, name=dhcpLeaseTime" })
   dhcpLeaseTime?: string;
 
-  @Metadata({ data: "json, name=dnsCustomNameservers" })
+  @SpeakeasyMetadata({ data: "json, name=dnsCustomNameservers" })
   dnsCustomNameservers?: string[];
 
-  @Metadata({ data: "json, name=dnsNameservers" })
+  @SpeakeasyMetadata({ data: "json, name=dnsNameservers" })
   dnsNameservers?: string;
 }
 
 
 export class UpdateNetworkCellularGatewayDhcpRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: UpdateNetworkCellularGatewayDhcpPathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request?: UpdateNetworkCellularGatewayDhcpRequestBody;
 }
 
 
 export class UpdateNetworkCellularGatewayDhcpResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   updateNetworkCellularGatewayDhcp200ApplicationJsonObject?: Map<string, any>;
 }

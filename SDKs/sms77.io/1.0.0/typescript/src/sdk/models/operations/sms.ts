@@ -1,135 +1,136 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class SmsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=debug" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=debug" })
   debug?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=delay" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=delay" })
   delay?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=details" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=details" })
   details?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=flash" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=flash" })
   flash?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=foreign_id" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=foreign_id" })
   foreignId?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=from" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=from" })
   from?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=json" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=json" })
   json?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=label" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=label" })
   label?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=no_reload" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=no_reload" })
   noReload?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=performance_tracking" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=performance_tracking" })
   performanceTracking?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=return_msg_id" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=return_msg_id" })
   returnMsgId?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=text" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=text" })
   text: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=to" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=to" })
   to: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=udh" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=udh" })
   udh?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=unicode" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=unicode" })
   unicode?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=utf8" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=utf8" })
   utf8?: number;
 }
 
 
-export class SmsRequest extends SpeakeasyBase {
-  @Metadata()
-  queryParams: SmsQueryParams;
-}
-
-
 export class Sms200ApplicationJsonMessages extends SpeakeasyBase {
-  @Metadata({ data: "json, name=encoding" })
+  @SpeakeasyMetadata({ data: "json, name=encoding" })
   encoding?: string;
 
-  @Metadata({ data: "json, name=error" })
+  @SpeakeasyMetadata({ data: "json, name=error" })
   error?: string;
 
-  @Metadata({ data: "json, name=error_text" })
+  @SpeakeasyMetadata({ data: "json, name=error_text" })
   errorText?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=messages" })
+  @SpeakeasyMetadata({ data: "json, name=messages" })
   messages?: string[];
 
-  @Metadata({ data: "json, name=parts" })
+  @SpeakeasyMetadata({ data: "json, name=parts" })
   parts?: number;
 
-  @Metadata({ data: "json, name=price" })
+  @SpeakeasyMetadata({ data: "json, name=price" })
   price?: number;
 
-  @Metadata({ data: "json, name=recipient" })
+  @SpeakeasyMetadata({ data: "json, name=recipient" })
   recipient?: string;
 
-  @Metadata({ data: "json, name=sender" })
+  @SpeakeasyMetadata({ data: "json, name=sender" })
   sender?: string;
 
-  @Metadata({ data: "json, name=success" })
+  @SpeakeasyMetadata({ data: "json, name=success" })
   success?: boolean;
 
-  @Metadata({ data: "json, name=text" })
+  @SpeakeasyMetadata({ data: "json, name=text" })
   text?: string;
 }
 
 export enum Sms200ApplicationJsonSmsTypeEnum {
-    Economy = "economy"
-,    Direct = "direct"
+    Economy = "economy",
+    Direct = "direct"
 }
 
 
 export class Sms200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=balance" })
+  @SpeakeasyMetadata({ data: "json, name=balance" })
   balance?: number;
 
-  @Metadata({ data: "json, name=debug" })
+  @SpeakeasyMetadata({ data: "json, name=debug" })
   debug?: string;
 
-  @Metadata({ data: "json, name=messages", elemType: operations.Sms200ApplicationJsonMessages })
+  @SpeakeasyMetadata({ data: "json, name=messages", elemType: Sms200ApplicationJsonMessages })
   messages?: Sms200ApplicationJsonMessages[];
 
-  @Metadata({ data: "json, name=sms_type" })
+  @SpeakeasyMetadata({ data: "json, name=sms_type" })
   smsType?: Sms200ApplicationJsonSmsTypeEnum;
 
-  @Metadata({ data: "json, name=success" })
+  @SpeakeasyMetadata({ data: "json, name=success" })
   success?: string;
 
-  @Metadata({ data: "json, name=total_price" })
+  @SpeakeasyMetadata({ data: "json, name=total_price" })
   totalPrice?: number;
 }
 
 
+export class SmsRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  queryParams: SmsQueryParams;
+}
+
+
 export class SmsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   sms200ApplicationJsonObject?: Sms200ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

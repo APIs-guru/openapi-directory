@@ -1,5 +1,7 @@
 package shared
 
+// PaymentPolicyResponse
+// The response payload for payment policy requests.
 type PaymentPolicyResponse struct {
 	Href            *string         `json:"href,omitempty"`
 	Limit           *int32          `json:"limit,omitempty"`

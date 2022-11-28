@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class AddPaymentMethodRequestTypeEnum(str, Enum):
     CARD = "Card"
@@ -9,7 +11,7 @@ class AddPaymentMethodRequestTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class AddPaymentMethodRequest:
-    make_default: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'makeDefault' }})
-    token: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'token' }})
-    type: AddPaymentMethodRequestTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    token: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('token') }})
+    type: AddPaymentMethodRequestTypeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('type') }})
+    make_default: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('makeDefault') }})
     

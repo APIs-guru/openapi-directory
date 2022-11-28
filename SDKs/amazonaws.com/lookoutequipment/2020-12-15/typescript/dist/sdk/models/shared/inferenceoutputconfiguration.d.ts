@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { InferenceS3OutputConfiguration } from "./inferences3outputconfiguration";
 /**
  *  Specifies configuration information for the output results from for the inference, including KMS key ID and output S3 location.

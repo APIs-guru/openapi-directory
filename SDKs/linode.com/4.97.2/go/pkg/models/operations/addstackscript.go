@@ -2,47 +2,29 @@ package operations
 
 import (
 	"openapi/pkg/models/shared"
-	"time"
 )
 
-type AddStackScriptRequestBody struct {
-	Created           *time.Time                `json:"created,omitempty"`
-	DeploymentsActive *int64                    `json:"deployments_active,omitempty"`
-	DeploymentsTotal  *int64                    `json:"deployments_total,omitempty"`
-	Description       *string                   `json:"description,omitempty"`
-	ID                *int64                    `json:"id,omitempty"`
-	Images            []string                  `json:"images"`
-	IsPublic          *bool                     `json:"is_public,omitempty"`
-	Label             string                    `json:"label"`
-	Mine              *bool                     `json:"mine,omitempty"`
-	RevNote           *string                   `json:"rev_note,omitempty"`
-	Script            string                    `json:"script"`
-	Updated           *time.Time                `json:"updated,omitempty"`
-	UserDefinedFields []shared.UserDefinedField `json:"user_defined_fields,omitempty"`
-	UserGravatarID    *string                   `json:"user_gravatar_id,omitempty"`
-	Username          *string                   `json:"username,omitempty"`
-}
-
-type AddStackScriptSecurityOption1 struct {
-	PersonalAccessToken shared.SchemePersonalAccessToken `security:"scheme,type=http,subtype=bearer"`
-}
-
-type AddStackScriptSecurityOption2 struct {
-	Oauth shared.SchemeOauth `security:"scheme,type=oauth2"`
+type AddStackScriptRequestBodyInput struct {
+	Description *string  `json:"description,omitempty"`
+	Images      []string `json:"images"`
+	IsPublic    *bool    `json:"is_public,omitempty"`
+	Label       string   `json:"label"`
+	RevNote     *string  `json:"rev_note,omitempty"`
+	Script      string   `json:"script"`
 }
 
 type AddStackScriptSecurity struct {
-	Option1 *AddStackScriptSecurityOption1 `security:"option"`
-	Option2 *AddStackScriptSecurityOption2 `security:"option"`
-}
-
-type AddStackScriptRequest struct {
-	Request  AddStackScriptRequestBody `request:"mediaType=application/json"`
-	Security AddStackScriptSecurity
+	PersonalAccessToken *shared.SchemePersonalAccessToken `security:"scheme,type=http,subtype=bearer"`
+	Oauth               *shared.SchemeOauth               `security:"scheme,type=oauth2"`
 }
 
 type AddStackScriptDefaultApplicationJSON struct {
 	Errors []shared.ErrorObject `json:"errors,omitempty"`
+}
+
+type AddStackScriptRequest struct {
+	Request  AddStackScriptRequestBodyInput `request:"mediaType=application/json"`
+	Security AddStackScriptSecurity
 }
 
 type AddStackScriptResponse struct {

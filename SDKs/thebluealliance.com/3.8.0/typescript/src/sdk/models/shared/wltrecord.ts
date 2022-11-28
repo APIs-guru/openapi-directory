@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // WltRecord
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A Win-Loss-Tie record for a team, or an alliance.
 **/
 export class WltRecord extends SpeakeasyBase {
-  @Metadata({ data: "json, name=losses" })
+  @SpeakeasyMetadata({ data: "json, name=losses" })
   losses: number;
 
-  @Metadata({ data: "json, name=ties" })
+  @SpeakeasyMetadata({ data: "json, name=ties" })
   ties: number;
 
-  @Metadata({ data: "json, name=wins" })
+  @SpeakeasyMetadata({ data: "json, name=wins" })
   wins: number;
 }

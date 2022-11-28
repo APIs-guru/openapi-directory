@@ -1,86 +1,87 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetDatabasePkSelectStarTableNameSchemaNamePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=pk" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=pk" })
   pk: number;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=schema_name" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=schema_name" })
   schemaName: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=table_name" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=table_name" })
   tableName: string;
 }
 
 
 export class GetDatabasePkSelectStarTableNameSchemaNameSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=bearer" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" })
   jwt: shared.SchemeJwt;
 }
 
 
-export class GetDatabasePkSelectStarTableNameSchemaNameRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: GetDatabasePkSelectStarTableNameSchemaNamePathParams;
-
-  @Metadata()
-  security: GetDatabasePkSelectStarTableNameSchemaNameSecurity;
-}
-
-
 export class GetDatabasePkSelectStarTableNameSchemaName400ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class GetDatabasePkSelectStarTableNameSchemaName401ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class GetDatabasePkSelectStarTableNameSchemaName404ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class GetDatabasePkSelectStarTableNameSchemaName422ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class GetDatabasePkSelectStarTableNameSchemaName500ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
+export class GetDatabasePkSelectStarTableNameSchemaNameRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: GetDatabasePkSelectStarTableNameSchemaNamePathParams;
+
+  @SpeakeasyMetadata()
+  security: GetDatabasePkSelectStarTableNameSchemaNameSecurity;
+}
+
+
 export class GetDatabasePkSelectStarTableNameSchemaNameResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getDatabasePkSelectStarTableNameSchemaName400ApplicationJsonObject?: GetDatabasePkSelectStarTableNameSchemaName400ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getDatabasePkSelectStarTableNameSchemaName401ApplicationJsonObject?: GetDatabasePkSelectStarTableNameSchemaName401ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getDatabasePkSelectStarTableNameSchemaName404ApplicationJsonObject?: GetDatabasePkSelectStarTableNameSchemaName404ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getDatabasePkSelectStarTableNameSchemaName422ApplicationJsonObject?: GetDatabasePkSelectStarTableNameSchemaName422ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getDatabasePkSelectStarTableNameSchemaName500ApplicationJsonObject?: GetDatabasePkSelectStarTableNameSchemaName500ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   selectStarResponseSchema?: shared.SelectStarResponseSchema;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

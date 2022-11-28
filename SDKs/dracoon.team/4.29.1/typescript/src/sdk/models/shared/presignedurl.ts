@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // PresignedUrl
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Presigned URL information
 **/
 export class PresignedUrl extends SpeakeasyBase {
-  @Metadata({ data: "json, name=partNumber" })
+  @SpeakeasyMetadata({ data: "json, name=partNumber" })
   partNumber: number;
 
-  @Metadata({ data: "json, name=url" })
+  @SpeakeasyMetadata({ data: "json, name=url" })
   url: string;
 }

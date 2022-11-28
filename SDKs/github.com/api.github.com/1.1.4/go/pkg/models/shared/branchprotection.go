@@ -19,6 +19,8 @@ type BranchProtectionRequiredStatusChecks struct {
 	URL              *string  `json:"url,omitempty"`
 }
 
+// BranchProtection
+// Branch Protection
 type BranchProtection struct {
 	AllowDeletions             *BranchProtectionAllowDeletions        `json:"allow_deletions,omitempty"`
 	AllowForcePushes           *BranchProtectionAllowForcePushes      `json:"allow_force_pushes,omitempty"`

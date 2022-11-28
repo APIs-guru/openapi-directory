@@ -1,14 +1,13 @@
 from dataclasses import dataclass, field
-from datetime import datetime
-from marshmallow import fields
-import dateutil.parser
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass
 class NodesChildrenCreatePathParams:
-    node_id: str = field(default=None, metadata={'path_param': { 'field_name': 'node_id', 'style': 'simple', 'explode': False }})
+    node_id: str = field(metadata={'path_param': { 'field_name': 'node_id', 'style': 'simple', 'explode': False }})
     
 class NodesChildrenCreateNodeAttributesCategoryEnum(str, Enum):
     ANALYSIS = "analysis"
@@ -25,76 +24,35 @@ class NodesChildrenCreateNodeAttributesCategoryEnum(str, Enum):
 
 @dataclass_json
 @dataclass
-class NodesChildrenCreateNodeAttributes:
-    category: NodesChildrenCreateNodeAttributesCategoryEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'category' }})
-    collection: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'collection' }})
-    current_user_can_comment: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'current_user_can_comment' }})
-    current_user_permissions: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'current_user_permissions' }})
-    date_created: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'date_created', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    date_modified: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'date_modified', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
-    fork: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'fork' }})
-    forked_date: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'forked_date', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    node_license: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'node_license' }})
-    preprint: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'preprint' }})
-    public: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'public' }})
-    registration: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'registration' }})
-    tags: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tags' }})
-    template_from: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'template_from' }})
-    title: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'title' }})
+class NodesChildrenCreateNodeAttributesInput:
+    r"""NodesChildrenCreateNodeAttributesInput
+    The properties of the node entity.
+    """
+    
+    category: NodesChildrenCreateNodeAttributesCategoryEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('category') }})
+    title: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('title') }})
+    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('description') }})
+    node_license: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('node_license') }})
+    public: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('public') }})
+    tags: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('tags') }})
+    template_from: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('template_from') }})
     
 
 @dataclass_json
 @dataclass
-class NodesChildrenCreateNodeLinks:
-    html: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'html' }})
-    self: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'self' }})
-    
-
-@dataclass_json
-@dataclass
-class NodesChildrenCreateNodeRelationships:
-    affiliated_institutions: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'affiliated_institutions' }})
-    children: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'children' }})
-    citation: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'citation' }})
-    comments: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'comments' }})
-    contributors: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'contributors' }})
-    draft_registrations: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'draft_registrations' }})
-    files: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'files' }})
-    forked_from: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'forked_from' }})
-    forks: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'forks' }})
-    identifiers: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'identifiers' }})
-    license: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'license' }})
-    linked_nodes: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'linked_nodes' }})
-    logs: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'logs' }})
-    node_links: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'node_links' }})
-    parent: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'parent' }})
-    preprints: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'preprints' }})
-    registrations: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'registrations' }})
-    root: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'root' }})
-    template_node: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'template_node' }})
-    view_only_links: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'view_only_links' }})
-    wikis: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'wikis' }})
-    
-
-@dataclass_json
-@dataclass
-class NodesChildrenCreateNode:
-    attributes: NodesChildrenCreateNodeAttributes = field(default=None, metadata={'dataclasses_json': { 'field_name': 'attributes' }})
-    id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
-    links: Optional[NodesChildrenCreateNodeLinks] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'links' }})
-    relationships: Optional[NodesChildrenCreateNodeRelationships] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'relationships' }})
-    type: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+class NodesChildrenCreateNodeInput:
+    attributes: NodesChildrenCreateNodeAttributesInput = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('attributes') }})
+    type: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('type') }})
     
 
 @dataclass
 class NodesChildrenCreateRequest:
-    path_params: NodesChildrenCreatePathParams = field(default=None)
-    request: NodesChildrenCreateNode = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    path_params: NodesChildrenCreatePathParams = field()
+    request: NodesChildrenCreateNodeInput = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class NodesChildrenCreateResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DerivedSource } from "./derivedsource";
-import { DerivedSource } from "./derivedsource";
+
 
 
 // DynamicSourceSplit
@@ -8,9 +8,9 @@ import { DerivedSource } from "./derivedsource";
  * When a task splits using WorkItemStatus.dynamic_source_split, this message describes the two parts of the split relative to the description of the current task's input.
 **/
 export class DynamicSourceSplit extends SpeakeasyBase {
-  @Metadata({ data: "json, name=primary" })
+  @SpeakeasyMetadata({ data: "json, name=primary" })
   primary?: DerivedSource;
 
-  @Metadata({ data: "json, name=residual" })
+  @SpeakeasyMetadata({ data: "json, name=residual" })
   residual?: DerivedSource;
 }

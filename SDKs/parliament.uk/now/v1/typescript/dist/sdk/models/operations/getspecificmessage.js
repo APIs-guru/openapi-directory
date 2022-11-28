@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export var GetSpecificMessageAnnunciatorEnum;
 (function (GetSpecificMessageAnnunciatorEnum) {
@@ -36,11 +36,11 @@ var GetSpecificMessagePathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=annunciator" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=annunciator" }),
         __metadata("design:type", String)
     ], GetSpecificMessagePathParams.prototype, "annunciator", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=date" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=date" }),
         __metadata("design:type", Date)
     ], GetSpecificMessagePathParams.prototype, "date", void 0);
     return GetSpecificMessagePathParams;
@@ -52,7 +52,7 @@ var GetSpecificMessageRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetSpecificMessagePathParams)
     ], GetSpecificMessageRequest.prototype, "pathParams", void 0);
     return GetSpecificMessageRequest;
@@ -64,19 +64,19 @@ var GetSpecificMessageResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], GetSpecificMessageResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetSpecificMessageResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.MessageViewModel)
     ], GetSpecificMessageResponse.prototype, "messageViewModel", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetSpecificMessageResponse.prototype, "statusCode", void 0);
     return GetSpecificMessageResponse;

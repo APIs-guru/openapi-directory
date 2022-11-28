@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import backup
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class DescribeBackupsResponse:
-    backups: Optional[List[backup.Backup]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Backups' }})
-    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'NextToken' }})
+    r"""DescribeBackupsResponse
+    Response object for <code>DescribeBackups</code> operation.
+    """
+    
+    backups: Optional[List[Backup]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Backups') }})
+    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('NextToken') }})
     

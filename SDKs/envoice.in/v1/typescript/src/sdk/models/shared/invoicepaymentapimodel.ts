@@ -1,49 +1,50 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum InvoicePaymentApiModelTypeEnum {
-    Other = "Other"
-,    Paypal = "Paypal"
-,    Stripe = "Stripe"
-,    Payoneer = "Payoneer"
-,    Bank = "Bank"
-,    Cash = "Cash"
-,    Cheque = "Cheque"
-,    Ach = "Ach"
-,    Sepa = "Sepa"
-,    Square = "Square"
-,    KlikAndPay = "KlikAndPay"
-,    Razorpay = "Razorpay"
-,    Wepay = "Wepay"
-,    Halkbank = "Halkbank"
-,    TwoCheckout = "TwoCheckout"
-,    PaymentWall = "PaymentWall"
-,    BamboraEu = "BamboraEU"
-,    BamboraNa = "BamboraNA"
-,    Nlb = "Nlb"
-,    AuthorizeNet = "AuthorizeNet"
-,    Braintree = "Braintree"
+    Other = "Other",
+    Paypal = "Paypal",
+    Stripe = "Stripe",
+    Payoneer = "Payoneer",
+    Bank = "Bank",
+    Cash = "Cash",
+    Cheque = "Cheque",
+    Ach = "Ach",
+    Sepa = "Sepa",
+    Square = "Square",
+    KlikAndPay = "KlikAndPay",
+    Razorpay = "Razorpay",
+    Wepay = "Wepay",
+    Halkbank = "Halkbank",
+    TwoCheckout = "TwoCheckout",
+    PaymentWall = "PaymentWall",
+    BamboraEu = "BamboraEU",
+    BamboraNa = "BamboraNA",
+    Nlb = "Nlb",
+    AuthorizeNet = "AuthorizeNet",
+    Braintree = "Braintree"
 }
 
 
 export class InvoicePaymentApiModel extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Amount" })
+  @SpeakeasyMetadata({ data: "json, name=Amount" })
   amount?: number;
 
-  @Metadata({ data: "json, name=Id" })
+  @SpeakeasyMetadata({ data: "json, name=Id" })
   id?: number;
 
-  @Metadata({ data: "json, name=IsAutomatic" })
+  @SpeakeasyMetadata({ data: "json, name=IsAutomatic" })
   isAutomatic?: boolean;
 
-  @Metadata({ data: "json, name=Note" })
+  @SpeakeasyMetadata({ data: "json, name=Note" })
   note?: string;
 
-  @Metadata({ data: "json, name=PaidOn" })
+  @SpeakeasyMetadata({ data: "json, name=PaidOn" })
   paidOn?: Date;
 
-  @Metadata({ data: "json, name=ReferenceId" })
+  @SpeakeasyMetadata({ data: "json, name=ReferenceId" })
   referenceId?: string;
 
-  @Metadata({ data: "json, name=Type" })
+  @SpeakeasyMetadata({ data: "json, name=Type" })
   type?: InvoicePaymentApiModelTypeEnum;
 }

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ObActiveOrHistoricCurrencyAndAmount1
@@ -7,9 +8,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Usage: This amount has to be transported unchanged through the transaction chain.
 **/
 export class ObActiveOrHistoricCurrencyAndAmount1 extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Amount" })
+  @SpeakeasyMetadata({ data: "json, name=Amount" })
   amount: string;
 
-  @Metadata({ data: "json, name=Currency" })
+  @SpeakeasyMetadata({ data: "json, name=Currency" })
   currency: string;
 }

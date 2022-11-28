@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum NewDeviceEventManagementTypeEnum {
-    ManagedDevice = "managedDevice"
-,    ManagedProfile = "managedProfile"
+    ManagedDevice = "managedDevice",
+    ManagedProfile = "managedProfile"
 }
 
 
@@ -11,15 +12,15 @@ export enum NewDeviceEventManagementTypeEnum {
  * An event generated when a new device is ready to be managed.
 **/
 export class NewDeviceEvent extends SpeakeasyBase {
-  @Metadata({ data: "json, name=deviceId" })
+  @SpeakeasyMetadata({ data: "json, name=deviceId" })
   deviceId?: string;
 
-  @Metadata({ data: "json, name=dpcPackageName" })
+  @SpeakeasyMetadata({ data: "json, name=dpcPackageName" })
   dpcPackageName?: string;
 
-  @Metadata({ data: "json, name=managementType" })
+  @SpeakeasyMetadata({ data: "json, name=managementType" })
   managementType?: NewDeviceEventManagementTypeEnum;
 
-  @Metadata({ data: "json, name=userId" })
+  @SpeakeasyMetadata({ data: "json, name=userId" })
   userId?: string;
 }

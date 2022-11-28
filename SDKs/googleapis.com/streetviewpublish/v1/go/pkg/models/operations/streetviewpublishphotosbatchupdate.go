@@ -25,7 +25,7 @@ type StreetviewpublishPhotosBatchUpdateSecurity struct {
 
 type StreetviewpublishPhotosBatchUpdateRequest struct {
 	QueryParams StreetviewpublishPhotosBatchUpdateQueryParams
-	Request     *shared.BatchUpdatePhotosRequest `request:"mediaType=application/json"`
+	Request     *shared.BatchUpdatePhotosRequestInput `request:"mediaType=application/json"`
 	Security    StreetviewpublishPhotosBatchUpdateSecurity
 }
 

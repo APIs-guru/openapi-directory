@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // DomainConfiguration
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Contains the configuration settings of a domain.
 **/
 export class DomainConfiguration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=workflowExecutionRetentionPeriodInDays" })
+  @SpeakeasyMetadata({ data: "json, name=workflowExecutionRetentionPeriodInDays" })
   workflowExecutionRetentionPeriodInDays: string;
 }

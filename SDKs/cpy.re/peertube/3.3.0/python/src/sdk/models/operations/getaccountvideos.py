@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class GetAccountVideosPathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,13 +27,13 @@ class GetAccountVideosQueryParams:
 
 @dataclass
 class GetAccountVideosRequest:
-    path_params: GetAccountVideosPathParams = field(default=None)
-    query_params: GetAccountVideosQueryParams = field(default=None)
+    path_params: GetAccountVideosPathParams = field()
+    query_params: GetAccountVideosQueryParams = field()
     
 
 @dataclass
 class GetAccountVideosResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     video_list_response: Optional[Any] = field(default=None)
     

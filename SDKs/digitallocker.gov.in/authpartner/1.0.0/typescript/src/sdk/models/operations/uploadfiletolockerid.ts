@@ -1,95 +1,96 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class UploadFileToLockerIdHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=hmac" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=hmac" })
   hmac?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=path" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=path" })
   path?: string;
 }
 
 
 export class UploadFileToLockerIdRequests extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/octet-stream" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/octet-stream" })
   applicationOctetStream: Uint8Array;
 
-  @Metadata({ data: "request, media_type=image/jpeg" })
+  @SpeakeasyMetadata({ data: "request, media_type=image/jpeg" })
   imageJpeg: Uint8Array;
 
-  @Metadata({ data: "request, media_type=image/jpg" })
+  @SpeakeasyMetadata({ data: "request, media_type=image/jpg" })
   imageJpg: Uint8Array;
 
-  @Metadata({ data: "request, media_type=image/pdf" })
+  @SpeakeasyMetadata({ data: "request, media_type=image/pdf" })
   imagePdf: Uint8Array;
 
-  @Metadata({ data: "request, media_type=image/png" })
+  @SpeakeasyMetadata({ data: "request, media_type=image/png" })
   imagePng: Uint8Array;
 }
 
 
 export class UploadFileToLockerIdSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=bearer" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" })
   bearerAuth: shared.SchemeBearerAuth;
 }
 
 
-export class UploadFileToLockerIdRequest extends SpeakeasyBase {
-  @Metadata()
-  headers: UploadFileToLockerIdHeaders;
-
-  @Metadata()
-  request?: UploadFileToLockerIdRequests;
-
-  @Metadata()
-  security: UploadFileToLockerIdSecurity;
-}
-
-
 export class UploadFileToLockerId400ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=error" })
+  @SpeakeasyMetadata({ data: "json, name=error" })
   error?: any;
 
-  @Metadata({ data: "json, name=error_description" })
+  @SpeakeasyMetadata({ data: "json, name=error_description" })
   errorDescription?: any;
 }
 
 
 export class UploadFileToLockerId401ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=error" })
+  @SpeakeasyMetadata({ data: "json, name=error" })
   error?: string;
 
-  @Metadata({ data: "json, name=error_description" })
+  @SpeakeasyMetadata({ data: "json, name=error_description" })
   errorDescription?: string;
 }
 
 
 export class UploadFileToLockerId500ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=error" })
+  @SpeakeasyMetadata({ data: "json, name=error" })
   error?: string;
 
-  @Metadata({ data: "json, name=error_description" })
+  @SpeakeasyMetadata({ data: "json, name=error_description" })
   errorDescription?: string;
 }
 
 
+export class UploadFileToLockerIdRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  headers: UploadFileToLockerIdHeaders;
+
+  @SpeakeasyMetadata()
+  request?: UploadFileToLockerIdRequests;
+
+  @SpeakeasyMetadata()
+  security: UploadFileToLockerIdSecurity;
+}
+
+
 export class UploadFileToLockerIdResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   fileUploadResponse?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   uploadFileToLockerId400ApplicationJsonObject?: UploadFileToLockerId400ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   uploadFileToLockerId401ApplicationJsonObject?: UploadFileToLockerId401ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   uploadFileToLockerId500ApplicationJsonObject?: UploadFileToLockerId500ApplicationJson;
 }

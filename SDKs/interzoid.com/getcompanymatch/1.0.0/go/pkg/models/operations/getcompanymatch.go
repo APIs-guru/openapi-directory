@@ -5,14 +5,14 @@ type GetcompanymatchQueryParams struct {
 	License string `queryParam:"style=form,explode=true,name=license"`
 }
 
-type GetcompanymatchRequest struct {
-	QueryParams GetcompanymatchQueryParams
-}
-
 type Getcompanymatch200ApplicationJSON struct {
 	Code    *string `json:"Code,omitempty"`
 	Credits *string `json:"Credits,omitempty"`
 	Simkey  *string `json:"Simkey,omitempty"`
+}
+
+type GetcompanymatchRequest struct {
+	QueryParams GetcompanymatchQueryParams
 }
 
 type GetcompanymatchResponse struct {

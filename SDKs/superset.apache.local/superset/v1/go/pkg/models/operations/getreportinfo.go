@@ -12,11 +12,6 @@ type GetReportInfoSecurity struct {
 	Jwt shared.SchemeJwt `security:"scheme,type=http,subtype=bearer"`
 }
 
-type GetReportInfoRequest struct {
-	QueryParams GetReportInfoQueryParams
-	Security    GetReportInfoSecurity
-}
-
 type GetReportInfo200ApplicationJSONFiltersColumnName struct {
 	Name     *string `json:"name,omitempty"`
 	Operator *string `json:"operator,omitempty"`
@@ -47,6 +42,11 @@ type GetReportInfo422ApplicationJSON struct {
 
 type GetReportInfo500ApplicationJSON struct {
 	Message *string `json:"message,omitempty"`
+}
+
+type GetReportInfoRequest struct {
+	QueryParams GetReportInfoQueryParams
+	Security    GetReportInfoSecurity
 }
 
 type GetReportInfoResponse struct {

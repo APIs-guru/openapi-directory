@@ -22,45 +22,21 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
-var PostGetNotificationConfigurationListSecurityOption1 = /** @class */ (function (_super) {
-    __extends(PostGetNotificationConfigurationListSecurityOption1, _super);
-    function PostGetNotificationConfigurationListSecurityOption1() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    __decorate([
-        Metadata({ data: "security, scheme=true;type=http;subtype=basic" }),
-        __metadata("design:type", shared.SchemeBasicAuth)
-    ], PostGetNotificationConfigurationListSecurityOption1.prototype, "basicAuth", void 0);
-    return PostGetNotificationConfigurationListSecurityOption1;
-}(SpeakeasyBase));
-export { PostGetNotificationConfigurationListSecurityOption1 };
-var PostGetNotificationConfigurationListSecurityOption2 = /** @class */ (function (_super) {
-    __extends(PostGetNotificationConfigurationListSecurityOption2, _super);
-    function PostGetNotificationConfigurationListSecurityOption2() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
-        __metadata("design:type", shared.SchemeApiKeyAuth)
-    ], PostGetNotificationConfigurationListSecurityOption2.prototype, "apiKeyAuth", void 0);
-    return PostGetNotificationConfigurationListSecurityOption2;
-}(SpeakeasyBase));
-export { PostGetNotificationConfigurationListSecurityOption2 };
 var PostGetNotificationConfigurationListSecurity = /** @class */ (function (_super) {
     __extends(PostGetNotificationConfigurationListSecurity, _super);
     function PostGetNotificationConfigurationListSecurity() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, option=true" }),
-        __metadata("design:type", PostGetNotificationConfigurationListSecurityOption1)
-    ], PostGetNotificationConfigurationListSecurity.prototype, "option1", void 0);
+        SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=basic" }),
+        __metadata("design:type", shared.SchemeBasicAuth)
+    ], PostGetNotificationConfigurationListSecurity.prototype, "basicAuth", void 0);
     __decorate([
-        Metadata({ data: "security, option=true" }),
-        __metadata("design:type", PostGetNotificationConfigurationListSecurityOption2)
-    ], PostGetNotificationConfigurationListSecurity.prototype, "option2", void 0);
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        __metadata("design:type", shared.SchemeApiKeyAuth)
+    ], PostGetNotificationConfigurationListSecurity.prototype, "apiKeyAuth", void 0);
     return PostGetNotificationConfigurationListSecurity;
 }(SpeakeasyBase));
 export { PostGetNotificationConfigurationListSecurity };
@@ -70,11 +46,11 @@ var PostGetNotificationConfigurationListRequest = /** @class */ (function (_supe
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", Object)
     ], PostGetNotificationConfigurationListRequest.prototype, "request", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PostGetNotificationConfigurationListSecurity)
     ], PostGetNotificationConfigurationListRequest.prototype, "security", void 0);
     return PostGetNotificationConfigurationListRequest;
@@ -86,19 +62,19 @@ var PostGetNotificationConfigurationListResponse = /** @class */ (function (_sup
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], PostGetNotificationConfigurationListResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], PostGetNotificationConfigurationListResponse.prototype, "getNotificationConfigurationListResponse", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], PostGetNotificationConfigurationListResponse.prototype, "serviceError", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], PostGetNotificationConfigurationListResponse.prototype, "statusCode", void 0);
     return PostGetNotificationConfigurationListResponse;

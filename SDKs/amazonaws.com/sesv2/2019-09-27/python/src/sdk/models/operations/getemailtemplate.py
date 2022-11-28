@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class GetEmailTemplatePathParams:
-    template_name: str = field(default=None, metadata={'path_param': { 'field_name': 'TemplateName', 'style': 'simple', 'explode': False }})
+    template_name: str = field(metadata={'path_param': { 'field_name': 'TemplateName', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -21,16 +24,16 @@ class GetEmailTemplateHeaders:
 
 @dataclass
 class GetEmailTemplateRequest:
-    path_params: GetEmailTemplatePathParams = field(default=None)
-    headers: GetEmailTemplateHeaders = field(default=None)
+    headers: GetEmailTemplateHeaders = field()
+    path_params: GetEmailTemplatePathParams = field()
     
 
 @dataclass
 class GetEmailTemplateResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     get_email_template_response: Optional[shared.GetEmailTemplateResponse] = field(default=None)
     not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     too_many_requests_exception: Optional[Any] = field(default=None)
     

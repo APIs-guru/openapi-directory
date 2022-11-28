@@ -6,10 +6,6 @@ type GlobalpageloadQueryParams struct {
 	URL     string `queryParam:"style=form,explode=true,name=url"`
 }
 
-type GlobalpageloadRequest struct {
-	QueryParams GlobalpageloadQueryParams
-}
-
 type Globalpageload200ApplicationJSON struct {
 	Code               *string `json:"Code,omitempty"`
 	Contents           *string `json:"Contents,omitempty"`
@@ -17,6 +13,10 @@ type Globalpageload200ApplicationJSON struct {
 	Origin             *string `json:"Origin,omitempty"`
 	PageResponseStatus *string `json:"PageResponseStatus,omitempty"`
 	Seconds            *string `json:"Seconds,omitempty"`
+}
+
+type GlobalpageloadRequest struct {
+	QueryParams GlobalpageloadQueryParams
 }
 
 type GlobalpageloadResponse struct {

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 export declare enum PlatformPlatformTypeEnum {
     PlatformTypeUnspecified = "PLATFORM_TYPE_UNSPECIFIED",
     Win = "WIN",
@@ -13,7 +13,8 @@ export declare enum PlatformPlatformTypeEnum {
     Lacros = "LACROS",
     LacrosArm32 = "LACROS_ARM32",
     Chromeos = "CHROMEOS",
-    LacrosArm64 = "LACROS_ARM64"
+    LacrosArm64 = "LACROS_ARM64",
+    Fuchsia = "FUCHSIA"
 }
 /**
  * Each Platform is owned by a Product and owns a collection of channels. Available platforms are listed in Platform enum below. Not all Channels are available for every Platform (e.g. CANARY does not exist for LINUX).

@@ -1,73 +1,74 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class CreateApiApplicationNewApiApplication extends SpeakeasyBase {
-  @Metadata({ data: "json, name=applicationName" })
+  @SpeakeasyMetadata({ data: "json, name=applicationName" })
   applicationName?: string;
 
-  @Metadata({ data: "json, name=enabled" })
+  @SpeakeasyMetadata({ data: "json, name=enabled" })
   enabled?: boolean;
 
-  @Metadata({ data: "json, name=expiry" })
+  @SpeakeasyMetadata({ data: "json, name=expiry" })
   expiry?: Date;
 
-  @Metadata({ data: "json, name=ican" })
+  @SpeakeasyMetadata({ data: "json, name=ican" })
   ican?: number;
 
-  @Metadata({ data: "json, name=numberOfPayeeApprovalsRequired" })
+  @SpeakeasyMetadata({ data: "json, name=numberOfPayeeApprovalsRequired" })
   numberOfPayeeApprovalsRequired?: number;
 
-  @Metadata({ data: "json, name=numberOfPaymentApprovalsRequired" })
+  @SpeakeasyMetadata({ data: "json, name=numberOfPaymentApprovalsRequired" })
   numberOfPaymentApprovalsRequired?: number;
 
-  @Metadata({ data: "json, name=permissions" })
+  @SpeakeasyMetadata({ data: "json, name=permissions" })
   permissions?: string[];
 }
 
 
-export class CreateApiApplicationRequest extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/json" })
-  request: CreateApiApplicationNewApiApplication;
-}
-
-
 export class CreateApiApplicationApiApplication extends SpeakeasyBase {
-  @Metadata({ data: "json, name=applicationId" })
+  @SpeakeasyMetadata({ data: "json, name=applicationId" })
   applicationId?: number;
 
-  @Metadata({ data: "json, name=clientId" })
+  @SpeakeasyMetadata({ data: "json, name=clientId" })
   clientId?: string;
 
-  @Metadata({ data: "json, name=clientKey" })
+  @SpeakeasyMetadata({ data: "json, name=clientKey" })
   clientKey?: string;
 
-  @Metadata({ data: "json, name=enabled" })
+  @SpeakeasyMetadata({ data: "json, name=enabled" })
   enabled?: boolean;
 
-  @Metadata({ data: "json, name=expiry" })
+  @SpeakeasyMetadata({ data: "json, name=expiry" })
   expiry?: Date;
 
-  @Metadata({ data: "json, name=ican" })
+  @SpeakeasyMetadata({ data: "json, name=ican" })
   ican?: number;
 
-  @Metadata({ data: "json, name=numberOfPayeeApprovalsRequired" })
+  @SpeakeasyMetadata({ data: "json, name=numberOfPayeeApprovalsRequired" })
   numberOfPayeeApprovalsRequired?: number;
 
-  @Metadata({ data: "json, name=numberOfPaymentApprovalsRequired" })
+  @SpeakeasyMetadata({ data: "json, name=numberOfPaymentApprovalsRequired" })
   numberOfPaymentApprovalsRequired?: number;
 
-  @Metadata({ data: "json, name=refreshToken" })
+  @SpeakeasyMetadata({ data: "json, name=refreshToken" })
   refreshToken?: string;
 }
 
 
+export class CreateApiApplicationRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request: CreateApiApplicationNewApiApplication;
+}
+
+
 export class CreateApiApplicationResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   apiApplication?: CreateApiApplicationApiApplication;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

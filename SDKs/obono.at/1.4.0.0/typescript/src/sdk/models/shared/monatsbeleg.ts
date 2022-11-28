@@ -1,19 +1,20 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class Monatsbeleg extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Beleg-UUID" })
+  @SpeakeasyMetadata({ data: "json, name=Beleg-UUID" })
   belegUuid?: string;
 
-  @Metadata({ data: "json, name=FON-Geprueft-Datum-Uhrzeit" })
+  @SpeakeasyMetadata({ data: "json, name=FON-Geprueft-Datum-Uhrzeit" })
   fonGeprueftDatumUhrzeit?: string;
 
-  @Metadata({ data: "json, name=FON-Geprueft-Erfolgreich" })
+  @SpeakeasyMetadata({ data: "json, name=FON-Geprueft-Erfolgreich" })
   fonGeprueftErfolgreich?: boolean;
 
-  @Metadata({ data: "json, name=Jahr" })
+  @SpeakeasyMetadata({ data: "json, name=Jahr" })
   jahr?: number;
 
-  @Metadata({ data: "json, name=Monat" })
+  @SpeakeasyMetadata({ data: "json, name=Monat" })
   monat?: number;
 }

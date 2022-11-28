@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ApplicationRestoreTypeEnum } from "./applicationrestoretypeenum";
 // ApplicationRestoreConfiguration
 /**
@@ -34,11 +34,11 @@ var ApplicationRestoreConfiguration = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=ApplicationRestoreType" }),
+        SpeakeasyMetadata({ data: "json, name=ApplicationRestoreType" }),
         __metadata("design:type", String)
     ], ApplicationRestoreConfiguration.prototype, "applicationRestoreType", void 0);
     __decorate([
-        Metadata({ data: "json, name=SnapshotName" }),
+        SpeakeasyMetadata({ data: "json, name=SnapshotName" }),
         __metadata("design:type", String)
     ], ApplicationRestoreConfiguration.prototype, "snapshotName", void 0);
     return ApplicationRestoreConfiguration;

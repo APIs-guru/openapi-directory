@@ -1,7 +1,8 @@
 
 
+
 export enum RightsEnum {
-    Mobile = "mobile"
-,    Tv = "tv"
-,    Web = "web"
+    Mobile = "mobile",
+    Tv = "tv",
+    Web = "web"
 }

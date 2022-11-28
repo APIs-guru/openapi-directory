@@ -27,6 +27,8 @@ const (
 	ProvisionNetworkClientsRequestBodyPoliciesBySecurityApplianceDevicePolicyEnumNormal  ProvisionNetworkClientsRequestBodyPoliciesBySecurityApplianceDevicePolicyEnum = "Normal"
 )
 
+// ProvisionNetworkClientsRequestBodyPoliciesBySecurityAppliance
+// An object, describing what the policy-connection association is for the security appliance. (Only relevant if the security appliance is actually within the network)
 type ProvisionNetworkClientsRequestBodyPoliciesBySecurityAppliance struct {
 	DevicePolicy *ProvisionNetworkClientsRequestBodyPoliciesBySecurityApplianceDevicePolicyEnum `json:"devicePolicy,omitempty"`
 }
@@ -40,6 +42,8 @@ const (
 	ProvisionNetworkClientsRequestBodyPoliciesBySsid0DevicePolicyEnumGroupPolicy ProvisionNetworkClientsRequestBodyPoliciesBySsid0DevicePolicyEnum = "Group policy"
 )
 
+// ProvisionNetworkClientsRequestBodyPoliciesBySsid0
+// The number for the SSID
 type ProvisionNetworkClientsRequestBodyPoliciesBySsid0 struct {
 	DevicePolicy  ProvisionNetworkClientsRequestBodyPoliciesBySsid0DevicePolicyEnum `json:"devicePolicy"`
 	GroupPolicyID *string                                                           `json:"groupPolicyId,omitempty"`
@@ -54,6 +58,8 @@ const (
 	ProvisionNetworkClientsRequestBodyPoliciesBySsid1DevicePolicyEnumGroupPolicy ProvisionNetworkClientsRequestBodyPoliciesBySsid1DevicePolicyEnum = "Group policy"
 )
 
+// ProvisionNetworkClientsRequestBodyPoliciesBySsid1
+// The number for the SSID
 type ProvisionNetworkClientsRequestBodyPoliciesBySsid1 struct {
 	DevicePolicy  ProvisionNetworkClientsRequestBodyPoliciesBySsid1DevicePolicyEnum `json:"devicePolicy"`
 	GroupPolicyID *string                                                           `json:"groupPolicyId,omitempty"`
@@ -68,6 +74,8 @@ const (
 	ProvisionNetworkClientsRequestBodyPoliciesBySsid10DevicePolicyEnumGroupPolicy ProvisionNetworkClientsRequestBodyPoliciesBySsid10DevicePolicyEnum = "Group policy"
 )
 
+// ProvisionNetworkClientsRequestBodyPoliciesBySsid10
+// The number for the SSID
 type ProvisionNetworkClientsRequestBodyPoliciesBySsid10 struct {
 	DevicePolicy  ProvisionNetworkClientsRequestBodyPoliciesBySsid10DevicePolicyEnum `json:"devicePolicy"`
 	GroupPolicyID *string                                                            `json:"groupPolicyId,omitempty"`
@@ -82,6 +90,8 @@ const (
 	ProvisionNetworkClientsRequestBodyPoliciesBySsid11DevicePolicyEnumGroupPolicy ProvisionNetworkClientsRequestBodyPoliciesBySsid11DevicePolicyEnum = "Group policy"
 )
 
+// ProvisionNetworkClientsRequestBodyPoliciesBySsid11
+// The number for the SSID
 type ProvisionNetworkClientsRequestBodyPoliciesBySsid11 struct {
 	DevicePolicy  ProvisionNetworkClientsRequestBodyPoliciesBySsid11DevicePolicyEnum `json:"devicePolicy"`
 	GroupPolicyID *string                                                            `json:"groupPolicyId,omitempty"`
@@ -96,6 +106,8 @@ const (
 	ProvisionNetworkClientsRequestBodyPoliciesBySsid12DevicePolicyEnumGroupPolicy ProvisionNetworkClientsRequestBodyPoliciesBySsid12DevicePolicyEnum = "Group policy"
 )
 
+// ProvisionNetworkClientsRequestBodyPoliciesBySsid12
+// The number for the SSID
 type ProvisionNetworkClientsRequestBodyPoliciesBySsid12 struct {
 	DevicePolicy  ProvisionNetworkClientsRequestBodyPoliciesBySsid12DevicePolicyEnum `json:"devicePolicy"`
 	GroupPolicyID *string                                                            `json:"groupPolicyId,omitempty"`
@@ -110,6 +122,8 @@ const (
 	ProvisionNetworkClientsRequestBodyPoliciesBySsid13DevicePolicyEnumGroupPolicy ProvisionNetworkClientsRequestBodyPoliciesBySsid13DevicePolicyEnum = "Group policy"
 )
 
+// ProvisionNetworkClientsRequestBodyPoliciesBySsid13
+// The number for the SSID
 type ProvisionNetworkClientsRequestBodyPoliciesBySsid13 struct {
 	DevicePolicy  ProvisionNetworkClientsRequestBodyPoliciesBySsid13DevicePolicyEnum `json:"devicePolicy"`
 	GroupPolicyID *string                                                            `json:"groupPolicyId,omitempty"`
@@ -124,6 +138,8 @@ const (
 	ProvisionNetworkClientsRequestBodyPoliciesBySsid14DevicePolicyEnumGroupPolicy ProvisionNetworkClientsRequestBodyPoliciesBySsid14DevicePolicyEnum = "Group policy"
 )
 
+// ProvisionNetworkClientsRequestBodyPoliciesBySsid14
+// The number for the SSID
 type ProvisionNetworkClientsRequestBodyPoliciesBySsid14 struct {
 	DevicePolicy  ProvisionNetworkClientsRequestBodyPoliciesBySsid14DevicePolicyEnum `json:"devicePolicy"`
 	GroupPolicyID *string                                                            `json:"groupPolicyId,omitempty"`
@@ -138,6 +154,8 @@ const (
 	ProvisionNetworkClientsRequestBodyPoliciesBySsid2DevicePolicyEnumGroupPolicy ProvisionNetworkClientsRequestBodyPoliciesBySsid2DevicePolicyEnum = "Group policy"
 )
 
+// ProvisionNetworkClientsRequestBodyPoliciesBySsid2
+// The number for the SSID
 type ProvisionNetworkClientsRequestBodyPoliciesBySsid2 struct {
 	DevicePolicy  ProvisionNetworkClientsRequestBodyPoliciesBySsid2DevicePolicyEnum `json:"devicePolicy"`
 	GroupPolicyID *string                                                           `json:"groupPolicyId,omitempty"`
@@ -152,6 +170,8 @@ const (
 	ProvisionNetworkClientsRequestBodyPoliciesBySsid3DevicePolicyEnumGroupPolicy ProvisionNetworkClientsRequestBodyPoliciesBySsid3DevicePolicyEnum = "Group policy"
 )
 
+// ProvisionNetworkClientsRequestBodyPoliciesBySsid3
+// The number for the SSID
 type ProvisionNetworkClientsRequestBodyPoliciesBySsid3 struct {
 	DevicePolicy  ProvisionNetworkClientsRequestBodyPoliciesBySsid3DevicePolicyEnum `json:"devicePolicy"`
 	GroupPolicyID *string                                                           `json:"groupPolicyId,omitempty"`
@@ -166,6 +186,8 @@ const (
 	ProvisionNetworkClientsRequestBodyPoliciesBySsid4DevicePolicyEnumGroupPolicy ProvisionNetworkClientsRequestBodyPoliciesBySsid4DevicePolicyEnum = "Group policy"
 )
 
+// ProvisionNetworkClientsRequestBodyPoliciesBySsid4
+// The number for the SSID
 type ProvisionNetworkClientsRequestBodyPoliciesBySsid4 struct {
 	DevicePolicy  ProvisionNetworkClientsRequestBodyPoliciesBySsid4DevicePolicyEnum `json:"devicePolicy"`
 	GroupPolicyID *string                                                           `json:"groupPolicyId,omitempty"`
@@ -180,6 +202,8 @@ const (
 	ProvisionNetworkClientsRequestBodyPoliciesBySsid5DevicePolicyEnumGroupPolicy ProvisionNetworkClientsRequestBodyPoliciesBySsid5DevicePolicyEnum = "Group policy"
 )
 
+// ProvisionNetworkClientsRequestBodyPoliciesBySsid5
+// The number for the SSID
 type ProvisionNetworkClientsRequestBodyPoliciesBySsid5 struct {
 	DevicePolicy  ProvisionNetworkClientsRequestBodyPoliciesBySsid5DevicePolicyEnum `json:"devicePolicy"`
 	GroupPolicyID *string                                                           `json:"groupPolicyId,omitempty"`
@@ -194,6 +218,8 @@ const (
 	ProvisionNetworkClientsRequestBodyPoliciesBySsid6DevicePolicyEnumGroupPolicy ProvisionNetworkClientsRequestBodyPoliciesBySsid6DevicePolicyEnum = "Group policy"
 )
 
+// ProvisionNetworkClientsRequestBodyPoliciesBySsid6
+// The number for the SSID
 type ProvisionNetworkClientsRequestBodyPoliciesBySsid6 struct {
 	DevicePolicy  ProvisionNetworkClientsRequestBodyPoliciesBySsid6DevicePolicyEnum `json:"devicePolicy"`
 	GroupPolicyID *string                                                           `json:"groupPolicyId,omitempty"`
@@ -208,6 +234,8 @@ const (
 	ProvisionNetworkClientsRequestBodyPoliciesBySsid7DevicePolicyEnumGroupPolicy ProvisionNetworkClientsRequestBodyPoliciesBySsid7DevicePolicyEnum = "Group policy"
 )
 
+// ProvisionNetworkClientsRequestBodyPoliciesBySsid7
+// The number for the SSID
 type ProvisionNetworkClientsRequestBodyPoliciesBySsid7 struct {
 	DevicePolicy  ProvisionNetworkClientsRequestBodyPoliciesBySsid7DevicePolicyEnum `json:"devicePolicy"`
 	GroupPolicyID *string                                                           `json:"groupPolicyId,omitempty"`
@@ -222,6 +250,8 @@ const (
 	ProvisionNetworkClientsRequestBodyPoliciesBySsid8DevicePolicyEnumGroupPolicy ProvisionNetworkClientsRequestBodyPoliciesBySsid8DevicePolicyEnum = "Group policy"
 )
 
+// ProvisionNetworkClientsRequestBodyPoliciesBySsid8
+// The number for the SSID
 type ProvisionNetworkClientsRequestBodyPoliciesBySsid8 struct {
 	DevicePolicy  ProvisionNetworkClientsRequestBodyPoliciesBySsid8DevicePolicyEnum `json:"devicePolicy"`
 	GroupPolicyID *string                                                           `json:"groupPolicyId,omitempty"`
@@ -236,11 +266,15 @@ const (
 	ProvisionNetworkClientsRequestBodyPoliciesBySsid9DevicePolicyEnumGroupPolicy ProvisionNetworkClientsRequestBodyPoliciesBySsid9DevicePolicyEnum = "Group policy"
 )
 
+// ProvisionNetworkClientsRequestBodyPoliciesBySsid9
+// The number for the SSID
 type ProvisionNetworkClientsRequestBodyPoliciesBySsid9 struct {
 	DevicePolicy  ProvisionNetworkClientsRequestBodyPoliciesBySsid9DevicePolicyEnum `json:"devicePolicy"`
 	GroupPolicyID *string                                                           `json:"groupPolicyId,omitempty"`
 }
 
+// ProvisionNetworkClientsRequestBodyPoliciesBySsid
+// An object, describing the policy-connection associations for each active SSID within the network. Keys should be the number of enabled SSIDs, mapping to an object describing the client's policy
 type ProvisionNetworkClientsRequestBodyPoliciesBySsid struct {
 	Zero     *ProvisionNetworkClientsRequestBodyPoliciesBySsid0  `json:"0,omitempty"`
 	One      *ProvisionNetworkClientsRequestBodyPoliciesBySsid1  `json:"1,omitempty"`

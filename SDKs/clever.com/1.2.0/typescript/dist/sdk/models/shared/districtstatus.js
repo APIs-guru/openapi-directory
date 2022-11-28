@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var DistrictStatusStateEnum;
 (function (DistrictStatusStateEnum) {
     DistrictStatusStateEnum["Running"] = "running";
@@ -36,39 +36,39 @@ var DistrictStatus = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], DistrictStatus.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=id" }),
+        SpeakeasyMetadata({ data: "json, name=id" }),
         __metadata("design:type", String)
     ], DistrictStatus.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "json, name=instant_login" }),
+        SpeakeasyMetadata({ data: "json, name=instant_login" }),
         __metadata("design:type", Boolean)
     ], DistrictStatus.prototype, "instantLogin", void 0);
     __decorate([
-        Metadata({ data: "json, name=last_sync" }),
+        SpeakeasyMetadata({ data: "json, name=last_sync" }),
         __metadata("design:type", String)
     ], DistrictStatus.prototype, "lastSync", void 0);
     __decorate([
-        Metadata({ data: "json, name=launch_date" }),
+        SpeakeasyMetadata({ data: "json, name=launch_date" }),
         __metadata("design:type", String)
     ], DistrictStatus.prototype, "launchDate", void 0);
     __decorate([
-        Metadata({ data: "json, name=pause_end" }),
+        SpeakeasyMetadata({ data: "json, name=pause_end" }),
         __metadata("design:type", String)
     ], DistrictStatus.prototype, "pauseEnd", void 0);
     __decorate([
-        Metadata({ data: "json, name=pause_start" }),
+        SpeakeasyMetadata({ data: "json, name=pause_start" }),
         __metadata("design:type", String)
     ], DistrictStatus.prototype, "pauseStart", void 0);
     __decorate([
-        Metadata({ data: "json, name=sis_type" }),
+        SpeakeasyMetadata({ data: "json, name=sis_type" }),
         __metadata("design:type", String)
     ], DistrictStatus.prototype, "sisType", void 0);
     __decorate([
-        Metadata({ data: "json, name=state" }),
+        SpeakeasyMetadata({ data: "json, name=state" }),
         __metadata("design:type", String)
     ], DistrictStatus.prototype, "state", void 0);
     return DistrictStatus;

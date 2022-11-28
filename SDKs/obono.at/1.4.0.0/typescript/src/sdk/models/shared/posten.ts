@@ -1,36 +1,37 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum PostenSatzEnum {
-    Normal = "NORMAL"
-,    Ermaessigt1 = "ERMAESSIGT1"
-,    Ermaessigt2 = "ERMAESSIGT2"
-,    Besonders = "BESONDERS"
-,    Null = "NULL"
+    Normal = "NORMAL",
+    Ermaessigt1 = "ERMAESSIGT1",
+    Ermaessigt2 = "ERMAESSIGT2",
+    Besonders = "BESONDERS",
+    Null = "NULL"
 }
 
 
 export class Posten extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Bezeichnung" })
+  @SpeakeasyMetadata({ data: "json, name=Bezeichnung" })
   bezeichnung: string;
 
-  @Metadata({ data: "json, name=BruttoBetrag" })
+  @SpeakeasyMetadata({ data: "json, name=BruttoBetrag" })
   bruttoBetrag: number;
 
-  @Metadata({ data: "json, name=Externer-Beleg-Belegkreis" })
+  @SpeakeasyMetadata({ data: "json, name=Externer-Beleg-Belegkreis" })
   externerBelegBelegkreis?: string;
 
-  @Metadata({ data: "json, name=Externer-Beleg-Bezeichnung" })
+  @SpeakeasyMetadata({ data: "json, name=Externer-Beleg-Bezeichnung" })
   externerBelegBezeichnung?: string;
 
-  @Metadata({ data: "json, name=Externer-Beleg-Referenz" })
+  @SpeakeasyMetadata({ data: "json, name=Externer-Beleg-Referenz" })
   externerBelegReferenz?: string;
 
-  @Metadata({ data: "json, name=Menge" })
+  @SpeakeasyMetadata({ data: "json, name=Menge" })
   menge: number;
 
-  @Metadata({ data: "json, name=NettoBetrag" })
+  @SpeakeasyMetadata({ data: "json, name=NettoBetrag" })
   nettoBetrag: number;
 
-  @Metadata({ data: "json, name=Satz" })
+  @SpeakeasyMetadata({ data: "json, name=Satz" })
   satz: PostenSatzEnum;
 }

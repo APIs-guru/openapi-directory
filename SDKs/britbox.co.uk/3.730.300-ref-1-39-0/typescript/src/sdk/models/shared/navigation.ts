@@ -1,27 +1,24 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { NavEntry } from "./naventry";
-import { NavEntry } from "./naventry";
-import { NavEntry } from "./naventry";
-import { NavEntry } from "./naventry";
+
 
 
 export class Navigation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=account" })
+  @SpeakeasyMetadata({ data: "json, name=account" })
   account?: NavEntry;
 
-  @Metadata({ data: "json, name=copyright" })
+  @SpeakeasyMetadata({ data: "json, name=copyright" })
   copyright?: string;
 
-  @Metadata({ data: "json, name=customFields" })
+  @SpeakeasyMetadata({ data: "json, name=customFields" })
   customFields?: Map<string, any>;
 
-  @Metadata({ data: "json, name=footer" })
+  @SpeakeasyMetadata({ data: "json, name=footer" })
   footer?: NavEntry;
 
-  @Metadata({ data: "json, name=header", elemType: shared.NavEntry })
+  @SpeakeasyMetadata({ data: "json, name=header", elemType: NavEntry })
   header: NavEntry[];
 
-  @Metadata({ data: "json, name=mobile" })
+  @SpeakeasyMetadata({ data: "json, name=mobile" })
   mobile?: NavEntry;
 }

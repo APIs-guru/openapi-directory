@@ -1,5 +1,7 @@
 package shared
 
+// Parameter
+// Describes an individual setting that controls some aspect of DAX behavior.
 type Parameter struct {
 	AllowedValues          *string                 `json:"AllowedValues,omitempty"`
 	ChangeType             *ChangeTypeEnum         `json:"ChangeType,omitempty"`

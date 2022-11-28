@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudDatalabelingV1beta1VideoThumbnail
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Container of information of a video thumbnail.
 **/
 export class GoogleCloudDatalabelingV1beta1VideoThumbnail extends SpeakeasyBase {
-  @Metadata({ data: "json, name=thumbnail" })
+  @SpeakeasyMetadata({ data: "json, name=thumbnail" })
   thumbnail?: string;
 
-  @Metadata({ data: "json, name=timeOffset" })
+  @SpeakeasyMetadata({ data: "json, name=timeOffset" })
   timeOffset?: string;
 }

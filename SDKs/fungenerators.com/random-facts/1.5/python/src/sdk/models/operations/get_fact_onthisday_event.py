@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
 from typing import Optional
+from sdk.models import shared
 
 
 @dataclass
@@ -10,17 +11,17 @@ class GetFactOnthisdayEventQueryParams:
 
 @dataclass
 class GetFactOnthisdayEventSecurity:
-    x_fungenerators_api_secret: shared.SchemeXFungeneratorsAPISecret = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    x_fungenerators_api_secret: shared.SchemeXFungeneratorsAPISecret = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
     
 
 @dataclass
 class GetFactOnthisdayEventRequest:
-    query_params: GetFactOnthisdayEventQueryParams = field(default=None)
-    security: GetFactOnthisdayEventSecurity = field(default=None)
+    query_params: GetFactOnthisdayEventQueryParams = field()
+    security: GetFactOnthisdayEventSecurity = field()
     
 
 @dataclass
 class GetFactOnthisdayEventResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

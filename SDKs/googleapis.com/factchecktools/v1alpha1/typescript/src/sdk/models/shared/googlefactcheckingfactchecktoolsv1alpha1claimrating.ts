@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleFactcheckingFactchecktoolsV1alpha1ClaimRating
@@ -6,21 +7,21 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Information about the claim rating.
 **/
 export class GoogleFactcheckingFactchecktoolsV1alpha1ClaimRating extends SpeakeasyBase {
-  @Metadata({ data: "json, name=bestRating" })
+  @SpeakeasyMetadata({ data: "json, name=bestRating" })
   bestRating?: number;
 
-  @Metadata({ data: "json, name=imageUrl" })
+  @SpeakeasyMetadata({ data: "json, name=imageUrl" })
   imageUrl?: string;
 
-  @Metadata({ data: "json, name=ratingExplanation" })
+  @SpeakeasyMetadata({ data: "json, name=ratingExplanation" })
   ratingExplanation?: string;
 
-  @Metadata({ data: "json, name=ratingValue" })
+  @SpeakeasyMetadata({ data: "json, name=ratingValue" })
   ratingValue?: number;
 
-  @Metadata({ data: "json, name=textualRating" })
+  @SpeakeasyMetadata({ data: "json, name=textualRating" })
   textualRating?: string;
 
-  @Metadata({ data: "json, name=worstRating" })
+  @SpeakeasyMetadata({ data: "json, name=worstRating" })
   worstRating?: number;
 }

@@ -1,28 +1,29 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DescribeDashboardResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=dashboardArn" })
+  @SpeakeasyMetadata({ data: "json, name=dashboardArn" })
   dashboardArn: string;
 
-  @Metadata({ data: "json, name=dashboardCreationDate" })
+  @SpeakeasyMetadata({ data: "json, name=dashboardCreationDate" })
   dashboardCreationDate: Date;
 
-  @Metadata({ data: "json, name=dashboardDefinition" })
+  @SpeakeasyMetadata({ data: "json, name=dashboardDefinition" })
   dashboardDefinition: string;
 
-  @Metadata({ data: "json, name=dashboardDescription" })
+  @SpeakeasyMetadata({ data: "json, name=dashboardDescription" })
   dashboardDescription?: string;
 
-  @Metadata({ data: "json, name=dashboardId" })
+  @SpeakeasyMetadata({ data: "json, name=dashboardId" })
   dashboardId: string;
 
-  @Metadata({ data: "json, name=dashboardLastUpdateDate" })
+  @SpeakeasyMetadata({ data: "json, name=dashboardLastUpdateDate" })
   dashboardLastUpdateDate: Date;
 
-  @Metadata({ data: "json, name=dashboardName" })
+  @SpeakeasyMetadata({ data: "json, name=dashboardName" })
   dashboardName: string;
 
-  @Metadata({ data: "json, name=projectId" })
+  @SpeakeasyMetadata({ data: "json, name=projectId" })
   projectId: string;
 }

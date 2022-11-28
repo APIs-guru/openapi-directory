@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // DescribeApplicableIndividualAssessmentsResponse
 /**
  * <p/>
@@ -33,11 +33,11 @@ var DescribeApplicableIndividualAssessmentsResponse = /** @class */ (function (_
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=IndividualAssessmentNames" }),
+        SpeakeasyMetadata({ data: "json, name=IndividualAssessmentNames" }),
         __metadata("design:type", Array)
     ], DescribeApplicableIndividualAssessmentsResponse.prototype, "individualAssessmentNames", void 0);
     __decorate([
-        Metadata({ data: "json, name=Marker" }),
+        SpeakeasyMetadata({ data: "json, name=Marker" }),
         __metadata("design:type", String)
     ], DescribeApplicableIndividualAssessmentsResponse.prototype, "marker", void 0);
     return DescribeApplicableIndividualAssessmentsResponse;

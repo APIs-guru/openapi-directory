@@ -6,11 +6,15 @@ const (
 	GetCreateNetworkACLEntryActionEnumCreateNetworkACLEntry GetCreateNetworkACLEntryActionEnum = "CreateNetworkAclEntry"
 )
 
+// GetCreateNetworkACLEntryIcmp
+// Describes the ICMP type and code.
 type GetCreateNetworkACLEntryIcmp struct {
 	Code *int64 `queryParam:"name=Code"`
 	Type *int64 `queryParam:"name=Type"`
 }
 
+// GetCreateNetworkACLEntryPortRange
+// Describes a range of ports.
 type GetCreateNetworkACLEntryPortRange struct {
 	From *int64 `queryParam:"name=From"`
 	To   *int64 `queryParam:"name=To"`

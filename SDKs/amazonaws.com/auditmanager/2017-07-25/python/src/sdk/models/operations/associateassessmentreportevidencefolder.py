@@ -1,11 +1,15 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass
 class AssociateAssessmentReportEvidenceFolderPathParams:
-    assessment_id: str = field(default=None, metadata={'path_param': { 'field_name': 'assessmentId', 'style': 'simple', 'explode': False }})
+    assessment_id: str = field(metadata={'path_param': { 'field_name': 'assessmentId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -22,23 +26,23 @@ class AssociateAssessmentReportEvidenceFolderHeaders:
 @dataclass_json
 @dataclass
 class AssociateAssessmentReportEvidenceFolderRequestBody:
-    evidence_folder_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'evidenceFolderId' }})
+    evidence_folder_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('evidenceFolderId') }})
     
 
 @dataclass
 class AssociateAssessmentReportEvidenceFolderRequest:
-    path_params: AssociateAssessmentReportEvidenceFolderPathParams = field(default=None)
-    headers: AssociateAssessmentReportEvidenceFolderHeaders = field(default=None)
-    request: AssociateAssessmentReportEvidenceFolderRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: AssociateAssessmentReportEvidenceFolderHeaders = field()
+    path_params: AssociateAssessmentReportEvidenceFolderPathParams = field()
+    request: AssociateAssessmentReportEvidenceFolderRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class AssociateAssessmentReportEvidenceFolderResponse:
+    content_type: str = field()
+    status_code: int = field()
     access_denied_exception: Optional[Any] = field(default=None)
     associate_assessment_report_evidence_folder_response: Optional[dict[str, Any]] = field(default=None)
-    content_type: str = field(default=None)
     internal_server_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     validation_exception: Optional[Any] = field(default=None)
     

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Aws } from "./aws";
 import { Oidc } from "./oidc";
 import { Saml } from "./saml";
@@ -32,6 +32,50 @@ export var WorkloadIdentityPoolProviderStateEnum;
     WorkloadIdentityPoolProviderStateEnum["Active"] = "ACTIVE";
     WorkloadIdentityPoolProviderStateEnum["Deleted"] = "DELETED";
 })(WorkloadIdentityPoolProviderStateEnum || (WorkloadIdentityPoolProviderStateEnum = {}));
+// WorkloadIdentityPoolProviderInput
+/**
+ * A configuration for an external identity provider.
+**/
+var WorkloadIdentityPoolProviderInput = /** @class */ (function (_super) {
+    __extends(WorkloadIdentityPoolProviderInput, _super);
+    function WorkloadIdentityPoolProviderInput() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=attributeCondition" }),
+        __metadata("design:type", String)
+    ], WorkloadIdentityPoolProviderInput.prototype, "attributeCondition", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=attributeMapping" }),
+        __metadata("design:type", Map)
+    ], WorkloadIdentityPoolProviderInput.prototype, "attributeMapping", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=aws" }),
+        __metadata("design:type", Aws)
+    ], WorkloadIdentityPoolProviderInput.prototype, "aws", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=description" }),
+        __metadata("design:type", String)
+    ], WorkloadIdentityPoolProviderInput.prototype, "description", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=disabled" }),
+        __metadata("design:type", Boolean)
+    ], WorkloadIdentityPoolProviderInput.prototype, "disabled", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=displayName" }),
+        __metadata("design:type", String)
+    ], WorkloadIdentityPoolProviderInput.prototype, "displayName", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=oidc" }),
+        __metadata("design:type", Oidc)
+    ], WorkloadIdentityPoolProviderInput.prototype, "oidc", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=saml" }),
+        __metadata("design:type", Saml)
+    ], WorkloadIdentityPoolProviderInput.prototype, "saml", void 0);
+    return WorkloadIdentityPoolProviderInput;
+}(SpeakeasyBase));
+export { WorkloadIdentityPoolProviderInput };
 // WorkloadIdentityPoolProvider
 /**
  * A configuration for an external identity provider.
@@ -42,43 +86,43 @@ var WorkloadIdentityPoolProvider = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=attributeCondition" }),
+        SpeakeasyMetadata({ data: "json, name=attributeCondition" }),
         __metadata("design:type", String)
     ], WorkloadIdentityPoolProvider.prototype, "attributeCondition", void 0);
     __decorate([
-        Metadata({ data: "json, name=attributeMapping" }),
+        SpeakeasyMetadata({ data: "json, name=attributeMapping" }),
         __metadata("design:type", Map)
     ], WorkloadIdentityPoolProvider.prototype, "attributeMapping", void 0);
     __decorate([
-        Metadata({ data: "json, name=aws" }),
+        SpeakeasyMetadata({ data: "json, name=aws" }),
         __metadata("design:type", Aws)
     ], WorkloadIdentityPoolProvider.prototype, "aws", void 0);
     __decorate([
-        Metadata({ data: "json, name=description" }),
+        SpeakeasyMetadata({ data: "json, name=description" }),
         __metadata("design:type", String)
     ], WorkloadIdentityPoolProvider.prototype, "description", void 0);
     __decorate([
-        Metadata({ data: "json, name=disabled" }),
+        SpeakeasyMetadata({ data: "json, name=disabled" }),
         __metadata("design:type", Boolean)
     ], WorkloadIdentityPoolProvider.prototype, "disabled", void 0);
     __decorate([
-        Metadata({ data: "json, name=displayName" }),
+        SpeakeasyMetadata({ data: "json, name=displayName" }),
         __metadata("design:type", String)
     ], WorkloadIdentityPoolProvider.prototype, "displayName", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], WorkloadIdentityPoolProvider.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=oidc" }),
+        SpeakeasyMetadata({ data: "json, name=oidc" }),
         __metadata("design:type", Oidc)
     ], WorkloadIdentityPoolProvider.prototype, "oidc", void 0);
     __decorate([
-        Metadata({ data: "json, name=saml" }),
+        SpeakeasyMetadata({ data: "json, name=saml" }),
         __metadata("design:type", Saml)
     ], WorkloadIdentityPoolProvider.prototype, "saml", void 0);
     __decorate([
-        Metadata({ data: "json, name=state" }),
+        SpeakeasyMetadata({ data: "json, name=state" }),
         __metadata("design:type", String)
     ], WorkloadIdentityPoolProvider.prototype, "state", void 0);
     return WorkloadIdentityPoolProvider;

@@ -1,9 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AttributeNameAndValue } from "./attributenameandvalue";
 import { ObjectReference } from "./objectreference";
-import { ObjectReference } from "./objectreference";
 import { TypedLinkSchemaAndFacetName } from "./typedlinkschemaandfacetname";
+
 
 
 // BatchAttachTypedLink
@@ -11,15 +10,15 @@ import { TypedLinkSchemaAndFacetName } from "./typedlinkschemaandfacetname";
  * Attaches a typed link to a specified source and target object inside a <a>BatchRead</a> operation. For more information, see <a>AttachTypedLink</a> and <a>BatchReadRequest$Operations</a>.
 **/
 export class BatchAttachTypedLink extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Attributes", elemType: shared.AttributeNameAndValue })
+  @SpeakeasyMetadata({ data: "json, name=Attributes", elemType: AttributeNameAndValue })
   attributes: AttributeNameAndValue[];
 
-  @Metadata({ data: "json, name=SourceObjectReference" })
+  @SpeakeasyMetadata({ data: "json, name=SourceObjectReference" })
   sourceObjectReference: ObjectReference;
 
-  @Metadata({ data: "json, name=TargetObjectReference" })
+  @SpeakeasyMetadata({ data: "json, name=TargetObjectReference" })
   targetObjectReference: ObjectReference;
 
-  @Metadata({ data: "json, name=TypedLinkFacet" })
+  @SpeakeasyMetadata({ data: "json, name=TypedLinkFacet" })
   typedLinkFacet: TypedLinkSchemaAndFacetName;
 }

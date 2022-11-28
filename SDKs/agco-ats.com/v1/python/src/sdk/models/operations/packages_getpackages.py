@@ -1,4 +1,7 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Optional
 from sdk.models import shared
 
@@ -11,13 +14,13 @@ class PackagesGetPackagesQueryParams:
 
 @dataclass
 class PackagesGetPackagesRequest:
-    query_params: PackagesGetPackagesQueryParams = field(default=None)
+    query_params: PackagesGetPackagesQueryParams = field()
     
 
 @dataclass
 class PackagesGetPackagesResponse:
+    content_type: str = field()
+    status_code: int = field()
     api_models_api_error: Optional[shared.APIModelsAPIError] = field(default=None)
     api_paged_response_update_system_models_package_: Optional[shared.APIPagedResponseUpdateSystemModelsPackage] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

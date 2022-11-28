@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // LatLng
 /**
  * An object that represents a latitude/longitude pair. This is expressed as a pair of doubles to represent degrees latitude and degrees longitude. Unless specified otherwise, this must conform to the WGS84 standard. Values must be within normalized ranges.
@@ -33,11 +33,11 @@ var LatLng = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=latitude" }),
+        SpeakeasyMetadata({ data: "json, name=latitude" }),
         __metadata("design:type", Number)
     ], LatLng.prototype, "latitude", void 0);
     __decorate([
-        Metadata({ data: "json, name=longitude" }),
+        SpeakeasyMetadata({ data: "json, name=longitude" }),
         __metadata("design:type", Number)
     ], LatLng.prototype, "longitude", void 0);
     return LatLng;

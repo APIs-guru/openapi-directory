@@ -9,6 +9,8 @@ const (
 	TypePrimitiveEnumUnescapedString      TypePrimitiveEnum = "UNESCAPED_STRING"
 )
 
+// Type
+// A type definition for some HL7v2 type (incl. Segments and Datatypes).
 type Type struct {
 	Fields    []Field            `json:"fields,omitempty"`
 	Name      *string            `json:"name,omitempty"`

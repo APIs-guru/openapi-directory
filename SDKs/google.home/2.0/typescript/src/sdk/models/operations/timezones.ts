@@ -1,14 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class TimezonesResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata({ elemType: shared.Example14 })
+  @SpeakeasyMetadata({ elemType: shared.Example14 })
   example14s?: shared.Example14[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

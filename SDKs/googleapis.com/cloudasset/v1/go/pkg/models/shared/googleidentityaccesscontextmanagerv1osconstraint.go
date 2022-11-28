@@ -12,6 +12,8 @@ const (
 	GoogleIdentityAccesscontextmanagerV1OsConstraintOsTypeEnumIos             GoogleIdentityAccesscontextmanagerV1OsConstraintOsTypeEnum = "IOS"
 )
 
+// GoogleIdentityAccesscontextmanagerV1OsConstraint
+// A restriction on the OS type and version of devices making requests.
 type GoogleIdentityAccesscontextmanagerV1OsConstraint struct {
 	MinimumVersion          *string                                                     `json:"minimumVersion,omitempty"`
 	OsType                  *GoogleIdentityAccesscontextmanagerV1OsConstraintOsTypeEnum `json:"osType,omitempty"`

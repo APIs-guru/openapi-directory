@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Finding } from "./finding";
+
 
 
 // Detail
@@ -8,6 +8,6 @@ import { Finding } from "./finding";
  * Contains multiple sensitive information findings for each resource slice.
 **/
 export class Detail extends SpeakeasyBase {
-  @Metadata({ data: "json, name=findings", elemType: shared.Finding })
+  @SpeakeasyMetadata({ data: "json, name=findings", elemType: Finding })
   findings?: Finding[];
 }

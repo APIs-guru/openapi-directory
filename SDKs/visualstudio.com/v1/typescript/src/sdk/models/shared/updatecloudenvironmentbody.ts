@@ -1,19 +1,20 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class UpdateCloudEnvironmentBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=autoShutdownDelayMinutes" })
+  @SpeakeasyMetadata({ data: "json, name=autoShutdownDelayMinutes" })
   autoShutdownDelayMinutes?: number;
 
-  @Metadata({ data: "json, name=friendlyName" })
+  @SpeakeasyMetadata({ data: "json, name=friendlyName" })
   friendlyName?: string;
 
-  @Metadata({ data: "json, name=planAccessToken" })
+  @SpeakeasyMetadata({ data: "json, name=planAccessToken" })
   planAccessToken?: string;
 
-  @Metadata({ data: "json, name=planId" })
+  @SpeakeasyMetadata({ data: "json, name=planId" })
   planId?: string;
 
-  @Metadata({ data: "json, name=skuName" })
+  @SpeakeasyMetadata({ data: "json, name=skuName" })
   skuName?: string;
 }

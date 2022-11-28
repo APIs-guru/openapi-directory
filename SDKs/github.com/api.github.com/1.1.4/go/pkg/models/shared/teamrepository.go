@@ -282,6 +282,8 @@ type TeamRepositoryRepository struct {
 	WatchersCount       int64                                       `json:"watchers_count"`
 }
 
+// TeamRepository
+// A team's access to a repository.
 type TeamRepository struct {
 	AllowMergeCommit    *bool                       `json:"allow_merge_commit,omitempty"`
 	AllowRebaseMerge    *bool                       `json:"allow_rebase_merge,omitempty"`

@@ -1,0 +1,36 @@
+import { SpeakeasyBase } from "../../../internal/utils";
+import { ConferenceParticipantEnumCallDirectionEnum } from "./conferenceparticipantenumcalldirectionenum";
+import { ConferenceParticipantEnumCallStatusEnum } from "./conferenceparticipantenumcallstatusenum";
+import { ConferenceParticipantEnumCallTypeEnum } from "./conferenceparticipantenumcalltypeenum";
+import { ConferenceParticipantEnumRegionEnum } from "./conferenceparticipantenumregionenum";
+import { ConferenceParticipantEnumJitterBufferSizeEnum } from "./conferenceparticipantenumjitterbuffersizeenum";
+import { ConferenceParticipantEnumProcessingStateEnum } from "./conferenceparticipantenumprocessingstateenum";
+export declare class InsightsV1ConferenceConferenceParticipant extends SpeakeasyBase {
+    accountSid?: string;
+    callDirection?: ConferenceParticipantEnumCallDirectionEnum;
+    callSid?: string;
+    callStatus?: ConferenceParticipantEnumCallStatusEnum;
+    callType?: ConferenceParticipantEnumCallTypeEnum;
+    coachedParticipants?: string[];
+    conferenceRegion?: ConferenceParticipantEnumRegionEnum;
+    conferenceSid?: string;
+    countryCode?: string;
+    durationSeconds?: number;
+    events?: any;
+    from?: string;
+    isCoach?: boolean;
+    isModerator?: boolean;
+    jitterBufferSize?: ConferenceParticipantEnumJitterBufferSizeEnum;
+    joinTime?: Date;
+    label?: string;
+    leaveTime?: Date;
+    metrics?: any;
+    outboundQueueLength?: number;
+    outboundTimeInQueue?: number;
+    participantRegion?: ConferenceParticipantEnumRegionEnum;
+    participantSid?: string;
+    processingState?: ConferenceParticipantEnumProcessingStateEnum;
+    properties?: any;
+    to?: string;
+    url?: string;
+}

@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Target } from "./target";
+
 
 
 // Stage
@@ -8,9 +8,9 @@ import { Target } from "./target";
  * A set amount of time that an escalation plan or engagement plan engages the specified contacts or contact methods.
 **/
 export class Stage extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DurationInMinutes" })
+  @SpeakeasyMetadata({ data: "json, name=DurationInMinutes" })
   durationInMinutes: number;
 
-  @Metadata({ data: "json, name=Targets", elemType: shared.Target })
+  @SpeakeasyMetadata({ data: "json, name=Targets", elemType: Target })
   targets: Target[];
 }

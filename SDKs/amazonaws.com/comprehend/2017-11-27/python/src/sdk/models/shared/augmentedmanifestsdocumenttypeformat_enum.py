@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class AugmentedManifestsDocumentTypeFormatEnum(str, Enum):
     PLAIN_TEXT_DOCUMENT = "PLAIN_TEXT_DOCUMENT"

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var TinVerificationBasicCheckQueryParams = /** @class */ (function (_super) {
     __extends(TinVerificationBasicCheckQueryParams, _super);
@@ -30,11 +30,11 @@ var TinVerificationBasicCheckQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=name" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=name" }),
         __metadata("design:type", String)
     ], TinVerificationBasicCheckQueryParams.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=tin" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=tin" }),
         __metadata("design:type", String)
     ], TinVerificationBasicCheckQueryParams.prototype, "tin", void 0);
     return TinVerificationBasicCheckQueryParams;
@@ -46,7 +46,7 @@ var TinVerificationBasicCheckSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeUserKey)
     ], TinVerificationBasicCheckSecurity.prototype, "userKey", void 0);
     return TinVerificationBasicCheckSecurity;
@@ -58,11 +58,11 @@ var TinVerificationBasicCheckRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", TinVerificationBasicCheckQueryParams)
     ], TinVerificationBasicCheckRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", TinVerificationBasicCheckSecurity)
     ], TinVerificationBasicCheckRequest.prototype, "security", void 0);
     return TinVerificationBasicCheckRequest;
@@ -74,19 +74,19 @@ var TinVerificationBasicCheckResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], TinVerificationBasicCheckResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], TinVerificationBasicCheckResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], TinVerificationBasicCheckResponse.prototype, "tinVerificationBasicCheck200ApplicationJsonAny", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], TinVerificationBasicCheckResponse.prototype, "tinVerificationBasicCheckDefaultApplicationJsonAny", void 0);
     return TinVerificationBasicCheckResponse;

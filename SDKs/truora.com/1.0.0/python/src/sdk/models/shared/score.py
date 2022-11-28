@@ -1,8 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from typing import Any,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import scoredetail
-from . import scoredetail
+from sdk import utils
+from . import *
 
 class ScoreDataSetEnum(str, Enum):
     AFFILIATIONS_AND_INSURANCES = "affiliations_and_insurances"
@@ -32,10 +33,14 @@ class ScoreResultEnum(str, Enum):
 @dataclass_json
 @dataclass
 class Score:
-    by_id: scoredetail.ScoreDetail = field(default=None, metadata={'dataclasses_json': { 'field_name': 'by_id' }})
-    by_name: scoredetail.ScoreDetail = field(default=None, metadata={'dataclasses_json': { 'field_name': 'by_name' }})
-    data_set: ScoreDataSetEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'data_set' }})
-    result: Optional[ScoreResultEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'result' }})
-    score: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'score' }})
-    severity: Any = field(default=None, metadata={'dataclasses_json': { 'field_name': 'severity' }})
+    r"""Score
+    Represents dataset scores. A score is a number between 0 and 1 that indicates how trustworthy the person, vehicle, or company is accordig to the result of the background check. Severity represents the risk associated with each dataset according to the background check. Keep in mind that you should use either the score or the severity but not both
+    """
+    
+    by_id: ScoreDetail = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('by_id') }})
+    by_name: ScoreDetail = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('by_name') }})
+    data_set: ScoreDataSetEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('data_set') }})
+    score: float = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('score') }})
+    severity: Any = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('severity') }})
+    result: Optional[ScoreResultEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('result') }})
     

@@ -8,6 +8,8 @@ const (
 	AppendDimensionRequestDimensionEnumColumns              AppendDimensionRequestDimensionEnum = "COLUMNS"
 )
 
+// AppendDimensionRequest
+// Appends rows or columns to the end of a sheet.
 type AppendDimensionRequest struct {
 	Dimension *AppendDimensionRequestDimensionEnum `json:"dimension,omitempty"`
 	Length    *int32                               `json:"length,omitempty"`

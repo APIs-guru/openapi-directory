@@ -1,22 +1,23 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class UpdateSystemModelsPagedClientStatusMetadata extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Limit" })
+  @SpeakeasyMetadata({ data: "json, name=Limit" })
   limit: number;
 
-  @Metadata({ data: "json, name=Offset" })
+  @SpeakeasyMetadata({ data: "json, name=Offset" })
   offset: number;
 
-  @Metadata({ data: "json, name=ReportResultExpected" })
+  @SpeakeasyMetadata({ data: "json, name=ReportResultExpected" })
   reportResultExpected: string;
 
-  @Metadata({ data: "json, name=ReportResultLabel" })
+  @SpeakeasyMetadata({ data: "json, name=ReportResultLabel" })
   reportResultLabel: string;
 
-  @Metadata({ data: "json, name=ReportValueLabel" })
+  @SpeakeasyMetadata({ data: "json, name=ReportValueLabel" })
   reportValueLabel: string;
 
-  @Metadata({ data: "json, name=TotalCount" })
+  @SpeakeasyMetadata({ data: "json, name=TotalCount" })
   totalCount: number;
 }

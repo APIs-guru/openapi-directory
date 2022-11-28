@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ValidationErrorsEntry } from "./validationerrorsentry";
 
 
+
 export class ValidateResourcePolicyResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=PolicyValidationPassed" })
+  @SpeakeasyMetadata({ data: "json, name=PolicyValidationPassed" })
   policyValidationPassed?: boolean;
 
-  @Metadata({ data: "json, name=ValidationErrors", elemType: shared.ValidationErrorsEntry })
+  @SpeakeasyMetadata({ data: "json, name=ValidationErrors", elemType: ValidationErrorsEntry })
   validationErrors?: ValidationErrorsEntry[];
 }

@@ -10,7 +10,7 @@ import (
 	"strings"
 )
 
-var Servers = []string{
+var ServerList = []string{
 	"http://macie2.{region}.amazonaws.com",
 	"https://macie2.{region}.amazonaws.com",
 	"http://macie2.{region}.amazonaws.com.cn",
@@ -21,10 +21,15 @@ type HTTPClient interface {
 	Do(req *http.Request) (*http.Response, error)
 }
 
+// SDK Documentation: https://docs.aws.amazon.com/macie2/ - Amazon Web Services documentation
 type SDK struct {
-	defaultClient  HTTPClient
-	securityClient HTTPClient
-	serverURL      string
+	_defaultClient  HTTPClient
+	_securityClient HTTPClient
+	_security       *shared.Security
+	_serverURL      string
+	_language       string
+	_sdkVersion     string
+	_genVersion     string
 }
 
 type SDKOption func(*SDK)
@@ -35,33 +40,55 @@ func WithServerURL(serverURL string, params map[string]string) SDKOption {
 			serverURL = utils.ReplaceParameters(serverURL, params)
 		}
 
-		sdk.serverURL = serverURL
+		sdk._serverURL = serverURL
+	}
+}
+
+func WithClient(client HTTPClient) SDKOption {
+	return func(sdk *SDK) {
+		sdk._defaultClient = client
 	}
 }
 
 func WithSecurity(security shared.Security) SDKOption {
 	return func(sdk *SDK) {
-		sdk.securityClient = utils.CreateSecurityClient(security)
+		sdk._security = &security
 	}
 }
 
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
-		defaultClient:  http.DefaultClient,
-		securityClient: http.DefaultClient,
+		_language:   "go",
+		_sdkVersion: "",
+		_genVersion: "internal",
 	}
 	for _, opt := range opts {
 		opt(sdk)
 	}
-	if sdk.serverURL == "" {
-		sdk.serverURL = Servers[0]
+
+	if sdk._defaultClient == nil {
+		sdk._defaultClient = http.DefaultClient
+	}
+	if sdk._securityClient == nil {
+
+		if sdk._security != nil {
+			sdk._securityClient = utils.ConfigureSecurityClient(sdk._defaultClient, sdk._security)
+		} else {
+			sdk._securityClient = sdk._defaultClient
+		}
+
+	}
+
+	if sdk._serverURL == "" {
+		sdk._serverURL = ServerList[0]
 	}
 
 	return sdk
 }
 
+// AcceptInvitation - Accepts an Amazon Macie membership invitation that was received from a specific account.
 func (s *SDK) AcceptInvitation(ctx context.Context, request operations.AcceptInvitationRequest) (*operations.AcceptInvitationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/invitations/accept"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -81,7 +108,7 @@ func (s *SDK) AcceptInvitation(ctx context.Context, request operations.AcceptInv
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -181,8 +208,9 @@ func (s *SDK) AcceptInvitation(ctx context.Context, request operations.AcceptInv
 	return res, nil
 }
 
+// BatchGetCustomDataIdentifiers - Retrieves information about one or more custom data identifiers.
 func (s *SDK) BatchGetCustomDataIdentifiers(ctx context.Context, request operations.BatchGetCustomDataIdentifiersRequest) (*operations.BatchGetCustomDataIdentifiersResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/custom-data-identifiers/get"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -202,7 +230,7 @@ func (s *SDK) BatchGetCustomDataIdentifiers(ctx context.Context, request operati
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -302,8 +330,9 @@ func (s *SDK) BatchGetCustomDataIdentifiers(ctx context.Context, request operati
 	return res, nil
 }
 
+// CreateClassificationJob -  <p>Creates and defines the settings for a classification job.</p>
 func (s *SDK) CreateClassificationJob(ctx context.Context, request operations.CreateClassificationJobRequest) (*operations.CreateClassificationJobResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/jobs"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -323,7 +352,7 @@ func (s *SDK) CreateClassificationJob(ctx context.Context, request operations.Cr
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -423,8 +452,9 @@ func (s *SDK) CreateClassificationJob(ctx context.Context, request operations.Cr
 	return res, nil
 }
 
+// CreateCustomDataIdentifier - Creates and defines the criteria and other settings for a custom data identifier.
 func (s *SDK) CreateCustomDataIdentifier(ctx context.Context, request operations.CreateCustomDataIdentifierRequest) (*operations.CreateCustomDataIdentifierResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/custom-data-identifiers"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -444,7 +474,7 @@ func (s *SDK) CreateCustomDataIdentifier(ctx context.Context, request operations
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -544,8 +574,9 @@ func (s *SDK) CreateCustomDataIdentifier(ctx context.Context, request operations
 	return res, nil
 }
 
+// CreateFindingsFilter - Creates and defines the criteria and other settings for a findings filter.
 func (s *SDK) CreateFindingsFilter(ctx context.Context, request operations.CreateFindingsFilterRequest) (*operations.CreateFindingsFilterResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/findingsfilters"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -565,7 +596,7 @@ func (s *SDK) CreateFindingsFilter(ctx context.Context, request operations.Creat
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -665,8 +696,9 @@ func (s *SDK) CreateFindingsFilter(ctx context.Context, request operations.Creat
 	return res, nil
 }
 
+// CreateInvitations - Sends an Amazon Macie membership invitation to one or more accounts.
 func (s *SDK) CreateInvitations(ctx context.Context, request operations.CreateInvitationsRequest) (*operations.CreateInvitationsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/invitations"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -686,7 +718,7 @@ func (s *SDK) CreateInvitations(ctx context.Context, request operations.CreateIn
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -786,8 +818,9 @@ func (s *SDK) CreateInvitations(ctx context.Context, request operations.CreateIn
 	return res, nil
 }
 
+// CreateMember - Associates an account with an Amazon Macie administrator account.
 func (s *SDK) CreateMember(ctx context.Context, request operations.CreateMemberRequest) (*operations.CreateMemberResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/members"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -807,7 +840,7 @@ func (s *SDK) CreateMember(ctx context.Context, request operations.CreateMemberR
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -907,8 +940,9 @@ func (s *SDK) CreateMember(ctx context.Context, request operations.CreateMemberR
 	return res, nil
 }
 
+// CreateSampleFindings - Creates sample findings.
 func (s *SDK) CreateSampleFindings(ctx context.Context, request operations.CreateSampleFindingsRequest) (*operations.CreateSampleFindingsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/findings/sample"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -928,7 +962,7 @@ func (s *SDK) CreateSampleFindings(ctx context.Context, request operations.Creat
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1028,8 +1062,9 @@ func (s *SDK) CreateSampleFindings(ctx context.Context, request operations.Creat
 	return res, nil
 }
 
+// DeclineInvitations - Declines Amazon Macie membership invitations that were received from specific accounts.
 func (s *SDK) DeclineInvitations(ctx context.Context, request operations.DeclineInvitationsRequest) (*operations.DeclineInvitationsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/invitations/decline"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1049,7 +1084,7 @@ func (s *SDK) DeclineInvitations(ctx context.Context, request operations.Decline
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1149,8 +1184,9 @@ func (s *SDK) DeclineInvitations(ctx context.Context, request operations.Decline
 	return res, nil
 }
 
+// DeleteCustomDataIdentifier - Soft deletes a custom data identifier.
 func (s *SDK) DeleteCustomDataIdentifier(ctx context.Context, request operations.DeleteCustomDataIdentifierRequest) (*operations.DeleteCustomDataIdentifierResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/custom-data-identifiers/{id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -1160,7 +1196,7 @@ func (s *SDK) DeleteCustomDataIdentifier(ctx context.Context, request operations
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1260,8 +1296,9 @@ func (s *SDK) DeleteCustomDataIdentifier(ctx context.Context, request operations
 	return res, nil
 }
 
+// DeleteFindingsFilter - Deletes a findings filter.
 func (s *SDK) DeleteFindingsFilter(ctx context.Context, request operations.DeleteFindingsFilterRequest) (*operations.DeleteFindingsFilterResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/findingsfilters/{id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -1271,7 +1308,7 @@ func (s *SDK) DeleteFindingsFilter(ctx context.Context, request operations.Delet
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1371,8 +1408,9 @@ func (s *SDK) DeleteFindingsFilter(ctx context.Context, request operations.Delet
 	return res, nil
 }
 
+// DeleteInvitations - Deletes Amazon Macie membership invitations that were received from specific accounts.
 func (s *SDK) DeleteInvitations(ctx context.Context, request operations.DeleteInvitationsRequest) (*operations.DeleteInvitationsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/invitations/delete"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1392,7 +1430,7 @@ func (s *SDK) DeleteInvitations(ctx context.Context, request operations.DeleteIn
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1492,8 +1530,9 @@ func (s *SDK) DeleteInvitations(ctx context.Context, request operations.DeleteIn
 	return res, nil
 }
 
+// DeleteMember - Deletes the association between an Amazon Macie administrator account and an account.
 func (s *SDK) DeleteMember(ctx context.Context, request operations.DeleteMemberRequest) (*operations.DeleteMemberResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/members/{id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -1503,7 +1542,7 @@ func (s *SDK) DeleteMember(ctx context.Context, request operations.DeleteMemberR
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1603,8 +1642,9 @@ func (s *SDK) DeleteMember(ctx context.Context, request operations.DeleteMemberR
 	return res, nil
 }
 
+// DescribeBuckets -  <p>Retrieves (queries) statistical data and other information about one or more S3 buckets that Amazon Macie monitors and analyzes.</p>
 func (s *SDK) DescribeBuckets(ctx context.Context, request operations.DescribeBucketsRequest) (*operations.DescribeBucketsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/datasources/s3"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1626,7 +1666,7 @@ func (s *SDK) DescribeBuckets(ctx context.Context, request operations.DescribeBu
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1726,8 +1766,9 @@ func (s *SDK) DescribeBuckets(ctx context.Context, request operations.DescribeBu
 	return res, nil
 }
 
+// DescribeClassificationJob - Retrieves the status and settings for a classification job.
 func (s *SDK) DescribeClassificationJob(ctx context.Context, request operations.DescribeClassificationJobRequest) (*operations.DescribeClassificationJobResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/jobs/{jobId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1737,7 +1778,7 @@ func (s *SDK) DescribeClassificationJob(ctx context.Context, request operations.
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1837,8 +1878,9 @@ func (s *SDK) DescribeClassificationJob(ctx context.Context, request operations.
 	return res, nil
 }
 
+// DescribeOrganizationConfiguration - Retrieves the Amazon Macie configuration settings for an Amazon Web Services organization.
 func (s *SDK) DescribeOrganizationConfiguration(ctx context.Context, request operations.DescribeOrganizationConfigurationRequest) (*operations.DescribeOrganizationConfigurationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/admin/configuration"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1848,7 +1890,7 @@ func (s *SDK) DescribeOrganizationConfiguration(ctx context.Context, request ope
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1948,8 +1990,9 @@ func (s *SDK) DescribeOrganizationConfiguration(ctx context.Context, request ope
 	return res, nil
 }
 
+// DisableMacie - Disables an Amazon Macie account and deletes Macie resources for the account.
 func (s *SDK) DisableMacie(ctx context.Context, request operations.DisableMacieRequest) (*operations.DisableMacieResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/macie"
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -1959,7 +2002,7 @@ func (s *SDK) DisableMacie(ctx context.Context, request operations.DisableMacieR
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2059,8 +2102,9 @@ func (s *SDK) DisableMacie(ctx context.Context, request operations.DisableMacieR
 	return res, nil
 }
 
+// DisableOrganizationAdminAccount - Disables an account as the delegated Amazon Macie administrator account for an Amazon Web Services organization.
 func (s *SDK) DisableOrganizationAdminAccount(ctx context.Context, request operations.DisableOrganizationAdminAccountRequest) (*operations.DisableOrganizationAdminAccountResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/admin#adminAccountId"
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -2072,7 +2116,7 @@ func (s *SDK) DisableOrganizationAdminAccount(ctx context.Context, request opera
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2172,8 +2216,9 @@ func (s *SDK) DisableOrganizationAdminAccount(ctx context.Context, request opera
 	return res, nil
 }
 
+// DisassociateFromAdministratorAccount - Disassociates a member account from its Amazon Macie administrator account.
 func (s *SDK) DisassociateFromAdministratorAccount(ctx context.Context, request operations.DisassociateFromAdministratorAccountRequest) (*operations.DisassociateFromAdministratorAccountResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/administrator/disassociate"
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -2183,7 +2228,7 @@ func (s *SDK) DisassociateFromAdministratorAccount(ctx context.Context, request 
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2283,8 +2328,9 @@ func (s *SDK) DisassociateFromAdministratorAccount(ctx context.Context, request 
 	return res, nil
 }
 
+// DisassociateFromMasterAccount - (Deprecated) Disassociates a member account from its Amazon Macie administrator account. This operation has been replaced by the <link  linkend="DisassociateFromAdministratorAccount">DisassociateFromAdministratorAccount</link> operation.
 func (s *SDK) DisassociateFromMasterAccount(ctx context.Context, request operations.DisassociateFromMasterAccountRequest) (*operations.DisassociateFromMasterAccountResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/master/disassociate"
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -2294,7 +2340,7 @@ func (s *SDK) DisassociateFromMasterAccount(ctx context.Context, request operati
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2394,8 +2440,9 @@ func (s *SDK) DisassociateFromMasterAccount(ctx context.Context, request operati
 	return res, nil
 }
 
+// DisassociateMember - Disassociates an Amazon Macie administrator account from a member account.
 func (s *SDK) DisassociateMember(ctx context.Context, request operations.DisassociateMemberRequest) (*operations.DisassociateMemberResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/members/disassociate/{id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -2405,7 +2452,7 @@ func (s *SDK) DisassociateMember(ctx context.Context, request operations.Disasso
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2505,8 +2552,9 @@ func (s *SDK) DisassociateMember(ctx context.Context, request operations.Disasso
 	return res, nil
 }
 
+// EnableMacie - Enables Amazon Macie and specifies the configuration settings for a Macie account.
 func (s *SDK) EnableMacie(ctx context.Context, request operations.EnableMacieRequest) (*operations.EnableMacieResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/macie"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2526,7 +2574,7 @@ func (s *SDK) EnableMacie(ctx context.Context, request operations.EnableMacieReq
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2626,8 +2674,9 @@ func (s *SDK) EnableMacie(ctx context.Context, request operations.EnableMacieReq
 	return res, nil
 }
 
+// EnableOrganizationAdminAccount - Designates an account as the delegated Amazon Macie administrator account for an Amazon Web Services organization.
 func (s *SDK) EnableOrganizationAdminAccount(ctx context.Context, request operations.EnableOrganizationAdminAccountRequest) (*operations.EnableOrganizationAdminAccountResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/admin"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2647,7 +2696,7 @@ func (s *SDK) EnableOrganizationAdminAccount(ctx context.Context, request operat
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2747,8 +2796,9 @@ func (s *SDK) EnableOrganizationAdminAccount(ctx context.Context, request operat
 	return res, nil
 }
 
+// GetAdministratorAccount - Retrieves information about the Amazon Macie administrator account for an account.
 func (s *SDK) GetAdministratorAccount(ctx context.Context, request operations.GetAdministratorAccountRequest) (*operations.GetAdministratorAccountResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/administrator"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2758,7 +2808,7 @@ func (s *SDK) GetAdministratorAccount(ctx context.Context, request operations.Ge
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2858,8 +2908,9 @@ func (s *SDK) GetAdministratorAccount(ctx context.Context, request operations.Ge
 	return res, nil
 }
 
+// GetBucketStatistics -  <p>Retrieves (queries) aggregated statistical data for all the S3 buckets that Amazon Macie monitors and analyzes.</p>
 func (s *SDK) GetBucketStatistics(ctx context.Context, request operations.GetBucketStatisticsRequest) (*operations.GetBucketStatisticsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/datasources/s3/statistics"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2879,7 +2930,7 @@ func (s *SDK) GetBucketStatistics(ctx context.Context, request operations.GetBuc
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2979,8 +3030,9 @@ func (s *SDK) GetBucketStatistics(ctx context.Context, request operations.GetBuc
 	return res, nil
 }
 
+// GetClassificationExportConfiguration - Retrieves the configuration settings for storing data classification results.
 func (s *SDK) GetClassificationExportConfiguration(ctx context.Context, request operations.GetClassificationExportConfigurationRequest) (*operations.GetClassificationExportConfigurationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/classification-export-configuration"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2990,7 +3042,7 @@ func (s *SDK) GetClassificationExportConfiguration(ctx context.Context, request 
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3090,8 +3142,9 @@ func (s *SDK) GetClassificationExportConfiguration(ctx context.Context, request 
 	return res, nil
 }
 
+// GetCustomDataIdentifier - Retrieves the criteria and other settings for a custom data identifier.
 func (s *SDK) GetCustomDataIdentifier(ctx context.Context, request operations.GetCustomDataIdentifierRequest) (*operations.GetCustomDataIdentifierResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/custom-data-identifiers/{id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3101,7 +3154,7 @@ func (s *SDK) GetCustomDataIdentifier(ctx context.Context, request operations.Ge
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3201,8 +3254,9 @@ func (s *SDK) GetCustomDataIdentifier(ctx context.Context, request operations.Ge
 	return res, nil
 }
 
+// GetFindingStatistics -  <p>Retrieves (queries) aggregated statistical data about findings.</p>
 func (s *SDK) GetFindingStatistics(ctx context.Context, request operations.GetFindingStatisticsRequest) (*operations.GetFindingStatisticsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/findings/statistics"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3222,7 +3276,7 @@ func (s *SDK) GetFindingStatistics(ctx context.Context, request operations.GetFi
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3322,8 +3376,9 @@ func (s *SDK) GetFindingStatistics(ctx context.Context, request operations.GetFi
 	return res, nil
 }
 
+// GetFindings - Retrieves the details of one or more findings.
 func (s *SDK) GetFindings(ctx context.Context, request operations.GetFindingsRequest) (*operations.GetFindingsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/findings/describe"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3343,7 +3398,7 @@ func (s *SDK) GetFindings(ctx context.Context, request operations.GetFindingsReq
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3443,8 +3498,9 @@ func (s *SDK) GetFindings(ctx context.Context, request operations.GetFindingsReq
 	return res, nil
 }
 
+// GetFindingsFilter - Retrieves the criteria and other settings for a findings filter.
 func (s *SDK) GetFindingsFilter(ctx context.Context, request operations.GetFindingsFilterRequest) (*operations.GetFindingsFilterResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/findingsfilters/{id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3454,7 +3510,7 @@ func (s *SDK) GetFindingsFilter(ctx context.Context, request operations.GetFindi
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3554,8 +3610,9 @@ func (s *SDK) GetFindingsFilter(ctx context.Context, request operations.GetFindi
 	return res, nil
 }
 
+// GetFindingsPublicationConfiguration - Retrieves the configuration settings for publishing findings to Security Hub.
 func (s *SDK) GetFindingsPublicationConfiguration(ctx context.Context, request operations.GetFindingsPublicationConfigurationRequest) (*operations.GetFindingsPublicationConfigurationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/findings-publication-configuration"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3565,7 +3622,7 @@ func (s *SDK) GetFindingsPublicationConfiguration(ctx context.Context, request o
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3665,8 +3722,9 @@ func (s *SDK) GetFindingsPublicationConfiguration(ctx context.Context, request o
 	return res, nil
 }
 
+// GetInvitationsCount - Retrieves the count of Amazon Macie membership invitations that were received by an account.
 func (s *SDK) GetInvitationsCount(ctx context.Context, request operations.GetInvitationsCountRequest) (*operations.GetInvitationsCountResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/invitations/count"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3676,7 +3734,7 @@ func (s *SDK) GetInvitationsCount(ctx context.Context, request operations.GetInv
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3776,8 +3834,9 @@ func (s *SDK) GetInvitationsCount(ctx context.Context, request operations.GetInv
 	return res, nil
 }
 
+// GetMacieSession - Retrieves the current status and configuration settings for an Amazon Macie account.
 func (s *SDK) GetMacieSession(ctx context.Context, request operations.GetMacieSessionRequest) (*operations.GetMacieSessionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/macie"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3787,7 +3846,7 @@ func (s *SDK) GetMacieSession(ctx context.Context, request operations.GetMacieSe
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3887,8 +3946,9 @@ func (s *SDK) GetMacieSession(ctx context.Context, request operations.GetMacieSe
 	return res, nil
 }
 
+// GetMasterAccount - (Deprecated) Retrieves information about the Amazon Macie administrator account for an account. This operation has been replaced by the <link  linkend="GetAdministratorAccount">GetAdministratorAccount</link> operation.
 func (s *SDK) GetMasterAccount(ctx context.Context, request operations.GetMasterAccountRequest) (*operations.GetMasterAccountResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/master"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3898,7 +3958,7 @@ func (s *SDK) GetMasterAccount(ctx context.Context, request operations.GetMaster
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3998,8 +4058,9 @@ func (s *SDK) GetMasterAccount(ctx context.Context, request operations.GetMaster
 	return res, nil
 }
 
+// GetMember - Retrieves information about an account that's associated with an Amazon Macie administrator account.
 func (s *SDK) GetMember(ctx context.Context, request operations.GetMemberRequest) (*operations.GetMemberResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/members/{id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -4009,7 +4070,7 @@ func (s *SDK) GetMember(ctx context.Context, request operations.GetMemberRequest
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4109,8 +4170,9 @@ func (s *SDK) GetMember(ctx context.Context, request operations.GetMemberRequest
 	return res, nil
 }
 
+// GetUsageStatistics - Retrieves (queries) quotas and aggregated usage data for one or more accounts.
 func (s *SDK) GetUsageStatistics(ctx context.Context, request operations.GetUsageStatisticsRequest) (*operations.GetUsageStatisticsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/usage/statistics"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -4132,7 +4194,7 @@ func (s *SDK) GetUsageStatistics(ctx context.Context, request operations.GetUsag
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4232,8 +4294,9 @@ func (s *SDK) GetUsageStatistics(ctx context.Context, request operations.GetUsag
 	return res, nil
 }
 
+// GetUsageTotals - Retrieves (queries) aggregated usage data for an account.
 func (s *SDK) GetUsageTotals(ctx context.Context, request operations.GetUsageTotalsRequest) (*operations.GetUsageTotalsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/usage"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -4245,7 +4308,7 @@ func (s *SDK) GetUsageTotals(ctx context.Context, request operations.GetUsageTot
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4345,8 +4408,9 @@ func (s *SDK) GetUsageTotals(ctx context.Context, request operations.GetUsageTot
 	return res, nil
 }
 
+// ListClassificationJobs - Retrieves a subset of information about one or more classification jobs.
 func (s *SDK) ListClassificationJobs(ctx context.Context, request operations.ListClassificationJobsRequest) (*operations.ListClassificationJobsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/jobs/list"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -4368,7 +4432,7 @@ func (s *SDK) ListClassificationJobs(ctx context.Context, request operations.Lis
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4468,8 +4532,9 @@ func (s *SDK) ListClassificationJobs(ctx context.Context, request operations.Lis
 	return res, nil
 }
 
+// ListCustomDataIdentifiers - Retrieves a subset of information about all the custom data identifiers for an account.
 func (s *SDK) ListCustomDataIdentifiers(ctx context.Context, request operations.ListCustomDataIdentifiersRequest) (*operations.ListCustomDataIdentifiersResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/custom-data-identifiers/list"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -4491,7 +4556,7 @@ func (s *SDK) ListCustomDataIdentifiers(ctx context.Context, request operations.
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4591,8 +4656,9 @@ func (s *SDK) ListCustomDataIdentifiers(ctx context.Context, request operations.
 	return res, nil
 }
 
+// ListFindings - Retrieves a subset of information about one or more findings.
 func (s *SDK) ListFindings(ctx context.Context, request operations.ListFindingsRequest) (*operations.ListFindingsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/findings"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -4614,7 +4680,7 @@ func (s *SDK) ListFindings(ctx context.Context, request operations.ListFindingsR
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4714,8 +4780,9 @@ func (s *SDK) ListFindings(ctx context.Context, request operations.ListFindingsR
 	return res, nil
 }
 
+// ListFindingsFilters - Retrieves a subset of information about all the findings filters for an account.
 func (s *SDK) ListFindingsFilters(ctx context.Context, request operations.ListFindingsFiltersRequest) (*operations.ListFindingsFiltersResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/findingsfilters"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -4727,7 +4794,7 @@ func (s *SDK) ListFindingsFilters(ctx context.Context, request operations.ListFi
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4827,8 +4894,9 @@ func (s *SDK) ListFindingsFilters(ctx context.Context, request operations.ListFi
 	return res, nil
 }
 
+// ListInvitations - Retrieves information about the Amazon Macie membership invitations that were received by an account.
 func (s *SDK) ListInvitations(ctx context.Context, request operations.ListInvitationsRequest) (*operations.ListInvitationsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/invitations"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -4840,7 +4908,7 @@ func (s *SDK) ListInvitations(ctx context.Context, request operations.ListInvita
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4940,8 +5008,9 @@ func (s *SDK) ListInvitations(ctx context.Context, request operations.ListInvita
 	return res, nil
 }
 
+// ListManagedDataIdentifiers - Retrieves information about all the managed data identifiers that Amazon Macie currently provides.
 func (s *SDK) ListManagedDataIdentifiers(ctx context.Context, request operations.ListManagedDataIdentifiersRequest) (*operations.ListManagedDataIdentifiersResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/managed-data-identifiers/list"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -4961,7 +5030,7 @@ func (s *SDK) ListManagedDataIdentifiers(ctx context.Context, request operations
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4991,8 +5060,9 @@ func (s *SDK) ListManagedDataIdentifiers(ctx context.Context, request operations
 	return res, nil
 }
 
+// ListMembers - Retrieves information about the accounts that are associated with an Amazon Macie administrator account.
 func (s *SDK) ListMembers(ctx context.Context, request operations.ListMembersRequest) (*operations.ListMembersResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/members"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -5004,7 +5074,7 @@ func (s *SDK) ListMembers(ctx context.Context, request operations.ListMembersReq
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5104,8 +5174,9 @@ func (s *SDK) ListMembers(ctx context.Context, request operations.ListMembersReq
 	return res, nil
 }
 
+// ListOrganizationAdminAccounts - Retrieves information about the delegated Amazon Macie administrator account for an Amazon Web Services organization.
 func (s *SDK) ListOrganizationAdminAccounts(ctx context.Context, request operations.ListOrganizationAdminAccountsRequest) (*operations.ListOrganizationAdminAccountsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/admin"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -5117,7 +5188,7 @@ func (s *SDK) ListOrganizationAdminAccounts(ctx context.Context, request operati
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5217,8 +5288,9 @@ func (s *SDK) ListOrganizationAdminAccounts(ctx context.Context, request operati
 	return res, nil
 }
 
+// ListTagsForResource - Retrieves the tags (keys and values) that are associated with a classification job, custom data identifier, findings filter, or member account.
 func (s *SDK) ListTagsForResource(ctx context.Context, request operations.ListTagsForResourceRequest) (*operations.ListTagsForResourceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/tags/{resourceArn}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -5228,7 +5300,7 @@ func (s *SDK) ListTagsForResource(ctx context.Context, request operations.ListTa
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5258,8 +5330,9 @@ func (s *SDK) ListTagsForResource(ctx context.Context, request operations.ListTa
 	return res, nil
 }
 
+// PutClassificationExportConfiguration - Creates or updates the configuration settings for storing data classification results.
 func (s *SDK) PutClassificationExportConfiguration(ctx context.Context, request operations.PutClassificationExportConfigurationRequest) (*operations.PutClassificationExportConfigurationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/classification-export-configuration"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -5279,7 +5352,7 @@ func (s *SDK) PutClassificationExportConfiguration(ctx context.Context, request 
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5379,8 +5452,9 @@ func (s *SDK) PutClassificationExportConfiguration(ctx context.Context, request 
 	return res, nil
 }
 
+// PutFindingsPublicationConfiguration - Updates the configuration settings for publishing findings to Security Hub.
 func (s *SDK) PutFindingsPublicationConfiguration(ctx context.Context, request operations.PutFindingsPublicationConfigurationRequest) (*operations.PutFindingsPublicationConfigurationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/findings-publication-configuration"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -5400,7 +5474,7 @@ func (s *SDK) PutFindingsPublicationConfiguration(ctx context.Context, request o
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5500,8 +5574,9 @@ func (s *SDK) PutFindingsPublicationConfiguration(ctx context.Context, request o
 	return res, nil
 }
 
+// SearchResources - Retrieves (queries) statistical data and other information about Amazon Web Services resources that Amazon Macie monitors and analyzes.
 func (s *SDK) SearchResources(ctx context.Context, request operations.SearchResourcesRequest) (*operations.SearchResourcesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/datasources/search-resources"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -5523,7 +5598,7 @@ func (s *SDK) SearchResources(ctx context.Context, request operations.SearchReso
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5623,8 +5698,9 @@ func (s *SDK) SearchResources(ctx context.Context, request operations.SearchReso
 	return res, nil
 }
 
+// TagResource - Adds or updates one or more tags (keys and values) that are associated with a classification job, custom data identifier, findings filter, or member account.
 func (s *SDK) TagResource(ctx context.Context, request operations.TagResourceRequest) (*operations.TagResourceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/tags/{resourceArn}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -5644,7 +5720,7 @@ func (s *SDK) TagResource(ctx context.Context, request operations.TagResourceReq
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5674,8 +5750,9 @@ func (s *SDK) TagResource(ctx context.Context, request operations.TagResourceReq
 	return res, nil
 }
 
+// TestCustomDataIdentifier - Tests a custom data identifier.
 func (s *SDK) TestCustomDataIdentifier(ctx context.Context, request operations.TestCustomDataIdentifierRequest) (*operations.TestCustomDataIdentifierResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/custom-data-identifiers/test"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -5695,7 +5772,7 @@ func (s *SDK) TestCustomDataIdentifier(ctx context.Context, request operations.T
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5795,8 +5872,9 @@ func (s *SDK) TestCustomDataIdentifier(ctx context.Context, request operations.T
 	return res, nil
 }
 
+// UntagResource - Removes one or more tags (keys and values) from a classification job, custom data identifier, findings filter, or member account.
 func (s *SDK) UntagResource(ctx context.Context, request operations.UntagResourceRequest) (*operations.UntagResourceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/tags/{resourceArn}#tagKeys", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -5808,7 +5886,7 @@ func (s *SDK) UntagResource(ctx context.Context, request operations.UntagResourc
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5838,8 +5916,9 @@ func (s *SDK) UntagResource(ctx context.Context, request operations.UntagResourc
 	return res, nil
 }
 
+// UpdateClassificationJob - Changes the status of a classification job.
 func (s *SDK) UpdateClassificationJob(ctx context.Context, request operations.UpdateClassificationJobRequest) (*operations.UpdateClassificationJobResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/jobs/{jobId}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -5859,7 +5938,7 @@ func (s *SDK) UpdateClassificationJob(ctx context.Context, request operations.Up
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5959,8 +6038,9 @@ func (s *SDK) UpdateClassificationJob(ctx context.Context, request operations.Up
 	return res, nil
 }
 
+// UpdateFindingsFilter - Updates the criteria and other settings for a findings filter.
 func (s *SDK) UpdateFindingsFilter(ctx context.Context, request operations.UpdateFindingsFilterRequest) (*operations.UpdateFindingsFilterResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/findingsfilters/{id}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -5980,7 +6060,7 @@ func (s *SDK) UpdateFindingsFilter(ctx context.Context, request operations.Updat
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6080,8 +6160,9 @@ func (s *SDK) UpdateFindingsFilter(ctx context.Context, request operations.Updat
 	return res, nil
 }
 
+// UpdateMacieSession - Suspends or re-enables an Amazon Macie account, or updates the configuration settings for a Macie account.
 func (s *SDK) UpdateMacieSession(ctx context.Context, request operations.UpdateMacieSessionRequest) (*operations.UpdateMacieSessionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/macie"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -6101,7 +6182,7 @@ func (s *SDK) UpdateMacieSession(ctx context.Context, request operations.UpdateM
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6201,8 +6282,9 @@ func (s *SDK) UpdateMacieSession(ctx context.Context, request operations.UpdateM
 	return res, nil
 }
 
+// UpdateMemberSession - Enables an Amazon Macie administrator to suspend or re-enable a member account.
 func (s *SDK) UpdateMemberSession(ctx context.Context, request operations.UpdateMemberSessionRequest) (*operations.UpdateMemberSessionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/macie/members/{id}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -6222,7 +6304,7 @@ func (s *SDK) UpdateMemberSession(ctx context.Context, request operations.Update
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6322,8 +6404,9 @@ func (s *SDK) UpdateMemberSession(ctx context.Context, request operations.Update
 	return res, nil
 }
 
+// UpdateOrganizationConfiguration - Updates the Amazon Macie configuration settings for an Amazon Web Services organization.
 func (s *SDK) UpdateOrganizationConfiguration(ctx context.Context, request operations.UpdateOrganizationConfigurationRequest) (*operations.UpdateOrganizationConfigurationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/admin/configuration"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -6343,7 +6426,7 @@ func (s *SDK) UpdateOrganizationConfiguration(ctx context.Context, request opera
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {

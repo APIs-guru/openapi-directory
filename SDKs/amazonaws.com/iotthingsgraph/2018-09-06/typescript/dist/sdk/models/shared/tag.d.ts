@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 /**
  * Metadata assigned to an AWS IoT Things Graph resource consisting of a key-value pair.
 **/

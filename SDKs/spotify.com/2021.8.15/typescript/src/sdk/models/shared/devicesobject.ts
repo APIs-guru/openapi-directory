@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DeviceObject } from "./deviceobject";
+
 
 
 // DevicesObject
@@ -8,6 +8,6 @@ import { DeviceObject } from "./deviceobject";
  * https://developer.spotify.com/documentation/web-api/reference/#object-devicesobject - Find more info on the official Spotify Web API Reference
 **/
 export class DevicesObject extends SpeakeasyBase {
-  @Metadata({ data: "json, name=devices", elemType: shared.DeviceObject })
+  @SpeakeasyMetadata({ data: "json, name=devices", elemType: DeviceObject })
   devices?: DeviceObject[];
 }

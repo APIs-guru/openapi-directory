@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Segment
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Defines a non-overlapping region of a table's partitions, allowing multiple requests to be run in parallel.
 **/
 export class Segment extends SpeakeasyBase {
-  @Metadata({ data: "json, name=SegmentNumber" })
+  @SpeakeasyMetadata({ data: "json, name=SegmentNumber" })
   segmentNumber: number;
 
-  @Metadata({ data: "json, name=TotalSegments" })
+  @SpeakeasyMetadata({ data: "json, name=TotalSegments" })
   totalSegments: number;
 }

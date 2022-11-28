@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var ReverseDictionaryExcludeSourceDictionariesEnum;
 (function (ReverseDictionaryExcludeSourceDictionariesEnum) {
     ReverseDictionaryExcludeSourceDictionariesEnum["Ahd"] = "ahd";
@@ -64,67 +64,67 @@ var ReverseDictionaryQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=excludePartOfSpeech" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=excludePartOfSpeech" }),
         __metadata("design:type", String)
     ], ReverseDictionaryQueryParams.prototype, "excludePartOfSpeech", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=excludeSourceDictionaries" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=excludeSourceDictionaries" }),
         __metadata("design:type", String)
     ], ReverseDictionaryQueryParams.prototype, "excludeSourceDictionaries", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=expandTerms" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=expandTerms" }),
         __metadata("design:type", String)
     ], ReverseDictionaryQueryParams.prototype, "expandTerms", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=findSenseForWord" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=findSenseForWord" }),
         __metadata("design:type", String)
     ], ReverseDictionaryQueryParams.prototype, "findSenseForWord", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=includePartOfSpeech" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=includePartOfSpeech" }),
         __metadata("design:type", String)
     ], ReverseDictionaryQueryParams.prototype, "includePartOfSpeech", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=includeSourceDictionaries" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=includeSourceDictionaries" }),
         __metadata("design:type", String)
     ], ReverseDictionaryQueryParams.prototype, "includeSourceDictionaries", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=includeTags" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=includeTags" }),
         __metadata("design:type", String)
     ], ReverseDictionaryQueryParams.prototype, "includeTags", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=limit" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=limit" }),
         __metadata("design:type", Number)
     ], ReverseDictionaryQueryParams.prototype, "limit", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=maxCorpusCount" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=maxCorpusCount" }),
         __metadata("design:type", Number)
     ], ReverseDictionaryQueryParams.prototype, "maxCorpusCount", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=maxLength" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=maxLength" }),
         __metadata("design:type", Number)
     ], ReverseDictionaryQueryParams.prototype, "maxLength", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=minCorpusCount" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=minCorpusCount" }),
         __metadata("design:type", Number)
     ], ReverseDictionaryQueryParams.prototype, "minCorpusCount", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=minLength" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=minLength" }),
         __metadata("design:type", Number)
     ], ReverseDictionaryQueryParams.prototype, "minLength", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=query" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=query" }),
         __metadata("design:type", String)
     ], ReverseDictionaryQueryParams.prototype, "query", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=skip" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=skip" }),
         __metadata("design:type", String)
     ], ReverseDictionaryQueryParams.prototype, "skip", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=sortBy" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sortBy" }),
         __metadata("design:type", String)
     ], ReverseDictionaryQueryParams.prototype, "sortBy", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=sortOrder" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sortOrder" }),
         __metadata("design:type", String)
     ], ReverseDictionaryQueryParams.prototype, "sortOrder", void 0);
     return ReverseDictionaryQueryParams;
@@ -136,7 +136,7 @@ var ReverseDictionaryRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ReverseDictionaryQueryParams)
     ], ReverseDictionaryRequest.prototype, "queryParams", void 0);
     return ReverseDictionaryRequest;
@@ -148,15 +148,15 @@ var ReverseDictionaryResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], ReverseDictionaryResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], ReverseDictionaryResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], ReverseDictionaryResponse.prototype, "statusCode", void 0);
     return ReverseDictionaryResponse;

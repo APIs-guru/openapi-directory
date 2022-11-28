@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class FirstAndThirdPartyAudienceTargetingSettingRecencyEnum(str, Enum):
     RECENCY_NO_LIMIT = "RECENCY_NO_LIMIT"
@@ -38,6 +40,10 @@ class FirstAndThirdPartyAudienceTargetingSettingRecencyEnum(str, Enum):
 @dataclass_json
 @dataclass
 class FirstAndThirdPartyAudienceTargetingSetting:
-    first_and_third_party_audience_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'firstAndThirdPartyAudienceId' }})
-    recency: Optional[FirstAndThirdPartyAudienceTargetingSettingRecencyEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'recency' }})
+    r"""FirstAndThirdPartyAudienceTargetingSetting
+    Details of first and third party audience targeting setting.
+    """
+    
+    first_and_third_party_audience_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('firstAndThirdPartyAudienceId') }})
+    recency: Optional[FirstAndThirdPartyAudienceTargetingSettingRecencyEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('recency') }})
     

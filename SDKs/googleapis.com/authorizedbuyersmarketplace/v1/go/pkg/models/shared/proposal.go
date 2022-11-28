@@ -36,6 +36,8 @@ const (
 	ProposalStateEnumTerminated               ProposalStateEnum = "TERMINATED"
 )
 
+// Proposal
+// Represents a proposal in the Marketplace. A proposal is the unit of negotiation between a seller and a buyer.
 type Proposal struct {
 	BilledBuyer                *string                                 `json:"billedBuyer,omitempty"`
 	Buyer                      *string                                 `json:"buyer,omitempty"`

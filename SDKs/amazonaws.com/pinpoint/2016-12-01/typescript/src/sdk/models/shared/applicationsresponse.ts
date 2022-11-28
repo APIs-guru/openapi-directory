@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ApplicationResponse } from "./applicationresponse";
+
 
 
 // ApplicationsResponse
@@ -8,9 +8,9 @@ import { ApplicationResponse } from "./applicationresponse";
  * Provides information about all of your applications.
 **/
 export class ApplicationsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Item", elemType: shared.ApplicationResponse })
+  @SpeakeasyMetadata({ data: "json, name=Item", elemType: ApplicationResponse })
   item?: ApplicationResponse[];
 
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 }

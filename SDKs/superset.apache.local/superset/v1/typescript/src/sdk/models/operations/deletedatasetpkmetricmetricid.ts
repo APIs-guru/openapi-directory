@@ -1,89 +1,90 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class DeleteDatasetPkMetricMetricIdPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=metric_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=metric_id" })
   metricId: number;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=pk" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=pk" })
   pk: number;
 }
 
 
 export class DeleteDatasetPkMetricMetricIdSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=bearer" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" })
   jwt: shared.SchemeJwt;
 }
 
 
-export class DeleteDatasetPkMetricMetricIdRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: DeleteDatasetPkMetricMetricIdPathParams;
-
-  @Metadata()
-  security: DeleteDatasetPkMetricMetricIdSecurity;
-}
-
-
 export class DeleteDatasetPkMetricMetricId200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class DeleteDatasetPkMetricMetricId401ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class DeleteDatasetPkMetricMetricId403ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class DeleteDatasetPkMetricMetricId404ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class DeleteDatasetPkMetricMetricId422ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class DeleteDatasetPkMetricMetricId500ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
+export class DeleteDatasetPkMetricMetricIdRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: DeleteDatasetPkMetricMetricIdPathParams;
+
+  @SpeakeasyMetadata()
+  security: DeleteDatasetPkMetricMetricIdSecurity;
+}
+
+
 export class DeleteDatasetPkMetricMetricIdResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   deleteDatasetPkMetricMetricId200ApplicationJsonObject?: DeleteDatasetPkMetricMetricId200ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   deleteDatasetPkMetricMetricId401ApplicationJsonObject?: DeleteDatasetPkMetricMetricId401ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   deleteDatasetPkMetricMetricId403ApplicationJsonObject?: DeleteDatasetPkMetricMetricId403ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   deleteDatasetPkMetricMetricId404ApplicationJsonObject?: DeleteDatasetPkMetricMetricId404ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   deleteDatasetPkMetricMetricId422ApplicationJsonObject?: DeleteDatasetPkMetricMetricId422ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   deleteDatasetPkMetricMetricId500ApplicationJsonObject?: DeleteDatasetPkMetricMetricId500ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

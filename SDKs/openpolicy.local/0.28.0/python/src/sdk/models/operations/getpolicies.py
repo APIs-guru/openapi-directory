@@ -10,13 +10,13 @@ class GetPoliciesQueryParams:
 
 @dataclass
 class GetPoliciesRequest:
-    query_params: GetPoliciesQueryParams = field(default=None)
+    query_params: GetPoliciesQueryParams = field()
     
 
 @dataclass
 class GetPoliciesResponse:
+    content_type: str = field()
+    status_code: int = field()
     two_hundred_result: Optional[shared.TwoHundredResult] = field(default=None)
     four_hundred: Optional[shared.FourHundred] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

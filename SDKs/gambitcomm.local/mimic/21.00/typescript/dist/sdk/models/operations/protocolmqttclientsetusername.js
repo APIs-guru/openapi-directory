@@ -22,18 +22,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var ProtocolMqttClientSetUsernamePathParams = /** @class */ (function (_super) {
     __extends(ProtocolMqttClientSetUsernamePathParams, _super);
     function ProtocolMqttClientSetUsernamePathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=agentNum" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=agentNum" }),
         __metadata("design:type", Number)
     ], ProtocolMqttClientSetUsernamePathParams.prototype, "agentNum", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=username" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=username" }),
         __metadata("design:type", String)
     ], ProtocolMqttClientSetUsernamePathParams.prototype, "username", void 0);
     return ProtocolMqttClientSetUsernamePathParams;
@@ -45,7 +45,7 @@ var ProtocolMqttClientSetUsernameRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ProtocolMqttClientSetUsernamePathParams)
     ], ProtocolMqttClientSetUsernameRequest.prototype, "pathParams", void 0);
     return ProtocolMqttClientSetUsernameRequest;
@@ -57,15 +57,15 @@ var ProtocolMqttClientSetUsernameResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], ProtocolMqttClientSetUsernameResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], ProtocolMqttClientSetUsernameResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Array)
     ], ProtocolMqttClientSetUsernameResponse.prototype, "protocolMqttClientSetUsername200ApplicationJsonInt32Integers", void 0);
     return ProtocolMqttClientSetUsernameResponse;

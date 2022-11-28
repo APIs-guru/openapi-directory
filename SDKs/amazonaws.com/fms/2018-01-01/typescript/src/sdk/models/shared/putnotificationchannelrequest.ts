@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class PutNotificationChannelRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=SnsRoleName" })
+  @SpeakeasyMetadata({ data: "json, name=SnsRoleName" })
   snsRoleName: string;
 
-  @Metadata({ data: "json, name=SnsTopicArn" })
+  @SpeakeasyMetadata({ data: "json, name=SnsTopicArn" })
   snsTopicArn: string;
 }

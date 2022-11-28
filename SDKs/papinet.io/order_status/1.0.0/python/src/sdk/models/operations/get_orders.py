@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 class GetOrdersOrderStatusEnum(str, Enum):
@@ -17,12 +18,12 @@ class GetOrdersQueryParams:
 
 @dataclass
 class GetOrdersRequest:
-    query_params: GetOrdersQueryParams = field(default=None)
+    query_params: GetOrdersQueryParams = field()
     
 
 @dataclass
 class GetOrdersResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     list_of_orders: Optional[shared.ListOfOrders] = field(default=None)
-    status_code: int = field(default=None)
     

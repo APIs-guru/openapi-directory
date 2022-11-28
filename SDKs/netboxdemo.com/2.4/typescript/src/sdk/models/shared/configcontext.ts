@@ -1,5 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { NestedPlatform } from "./nestedplatform";
 import { NestedRegion } from "./nestedregion";
 import { NestedDeviceRole } from "./nesteddevicerole";
@@ -8,40 +7,41 @@ import { NestedTenantGroup } from "./nestedtenantgroup";
 import { NestedTenant } from "./nestedtenant";
 
 
+
 export class ConfigContext extends SpeakeasyBase {
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data: string;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: number;
 
-  @Metadata({ data: "json, name=is_active" })
+  @SpeakeasyMetadata({ data: "json, name=is_active" })
   isActive?: boolean;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 
-  @Metadata({ data: "json, name=platforms", elemType: shared.NestedPlatform })
+  @SpeakeasyMetadata({ data: "json, name=platforms", elemType: NestedPlatform })
   platforms?: NestedPlatform[];
 
-  @Metadata({ data: "json, name=regions", elemType: shared.NestedRegion })
+  @SpeakeasyMetadata({ data: "json, name=regions", elemType: NestedRegion })
   regions?: NestedRegion[];
 
-  @Metadata({ data: "json, name=roles", elemType: shared.NestedDeviceRole })
+  @SpeakeasyMetadata({ data: "json, name=roles", elemType: NestedDeviceRole })
   roles?: NestedDeviceRole[];
 
-  @Metadata({ data: "json, name=sites", elemType: shared.NestedSite })
+  @SpeakeasyMetadata({ data: "json, name=sites", elemType: NestedSite })
   sites?: NestedSite[];
 
-  @Metadata({ data: "json, name=tenant_groups", elemType: shared.NestedTenantGroup })
+  @SpeakeasyMetadata({ data: "json, name=tenant_groups", elemType: NestedTenantGroup })
   tenantGroups?: NestedTenantGroup[];
 
-  @Metadata({ data: "json, name=tenants", elemType: shared.NestedTenant })
+  @SpeakeasyMetadata({ data: "json, name=tenants", elemType: NestedTenant })
   tenants?: NestedTenant[];
 
-  @Metadata({ data: "json, name=weight" })
+  @SpeakeasyMetadata({ data: "json, name=weight" })
   weight?: number;
 }

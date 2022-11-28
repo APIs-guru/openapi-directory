@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { JobWorkerExecutorConfiguration } from "./jobworkerexecutorconfiguration";
 import { LambdaExecutorConfiguration } from "./lambdaexecutorconfiguration";
+
 
 
 // ExecutorConfiguration
@@ -8,9 +9,9 @@ import { LambdaExecutorConfiguration } from "./lambdaexecutorconfiguration";
  * The action engine, or executor, related to the supported integration model used to create and update the action type. The available executor types are <code>Lambda</code> and <code>JobWorker</code>.
 **/
 export class ExecutorConfiguration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=jobWorkerExecutorConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=jobWorkerExecutorConfiguration" })
   jobWorkerExecutorConfiguration?: JobWorkerExecutorConfiguration;
 
-  @Metadata({ data: "json, name=lambdaExecutorConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=lambdaExecutorConfiguration" })
   lambdaExecutorConfiguration?: LambdaExecutorConfiguration;
 }

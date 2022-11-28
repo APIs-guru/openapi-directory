@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 /**
  * Point location in 2D in an image, where 0, 0 represents the top/left corner of the image
 **/

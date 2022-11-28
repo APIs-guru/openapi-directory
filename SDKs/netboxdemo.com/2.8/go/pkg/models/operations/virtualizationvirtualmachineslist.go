@@ -101,15 +101,15 @@ type VirtualizationVirtualMachinesListQueryParams struct {
 	VcpusN           *string `queryParam:"style=form,explode=true,name=vcpus__n"`
 }
 
-type VirtualizationVirtualMachinesListRequest struct {
-	QueryParams VirtualizationVirtualMachinesListQueryParams
-}
-
 type VirtualizationVirtualMachinesList200ApplicationJSON struct {
 	Count    int64                                    `json:"count"`
 	Next     *string                                  `json:"next,omitempty"`
 	Previous *string                                  `json:"previous,omitempty"`
 	Results  []shared.VirtualMachineWithConfigContext `json:"results"`
+}
+
+type VirtualizationVirtualMachinesListRequest struct {
+	QueryParams VirtualizationVirtualMachinesListQueryParams
 }
 
 type VirtualizationVirtualMachinesListResponse struct {

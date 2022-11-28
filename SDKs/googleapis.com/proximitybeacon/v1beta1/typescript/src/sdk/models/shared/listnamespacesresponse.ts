@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Namespace } from "./namespace";
+
 
 
 // ListNamespacesResponse
@@ -8,6 +8,6 @@ import { Namespace } from "./namespace";
  * Response to ListNamespacesRequest that contains all the project's namespaces.
 **/
 export class ListNamespacesResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=namespaces", elemType: shared.Namespace })
+  @SpeakeasyMetadata({ data: "json, name=namespaces", elemType: Namespace })
   namespaces?: Namespace[];
 }

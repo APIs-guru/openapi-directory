@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Recipe
@@ -6,18 +7,18 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Steps taken to build the artifact. For a TaskRun, typically each container corresponds to one step in the recipe.
 **/
 export class Recipe extends SpeakeasyBase {
-  @Metadata({ data: "json, name=arguments" })
+  @SpeakeasyMetadata({ data: "json, name=arguments" })
   arguments?: Map<string, any>[];
 
-  @Metadata({ data: "json, name=definedInMaterial" })
+  @SpeakeasyMetadata({ data: "json, name=definedInMaterial" })
   definedInMaterial?: string;
 
-  @Metadata({ data: "json, name=entryPoint" })
+  @SpeakeasyMetadata({ data: "json, name=entryPoint" })
   entryPoint?: string;
 
-  @Metadata({ data: "json, name=environment" })
+  @SpeakeasyMetadata({ data: "json, name=environment" })
   environment?: Map<string, any>[];
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: string;
 }

@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
 from typing import List
 from dataclasses_json import dataclass_json
-from . import framemetric
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class FrameMetricDatum:
-    frame_metric: framemetric.FrameMetric = field(default=None, metadata={'dataclasses_json': { 'field_name': 'frameMetric' }})
-    values: List[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'values' }})
+    r"""FrameMetricDatum
+     Information about a frame metric and its values. 
+    """
+    
+    frame_metric: FrameMetric = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('frameMetric') }})
+    values: List[float] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('values') }})
     

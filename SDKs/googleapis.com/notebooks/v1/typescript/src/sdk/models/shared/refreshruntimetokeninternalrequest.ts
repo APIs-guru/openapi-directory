@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // RefreshRuntimeTokenInternalRequest
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Request for getting a new access token.
 **/
 export class RefreshRuntimeTokenInternalRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=vmId" })
+  @SpeakeasyMetadata({ data: "json, name=vmId" })
   vmId?: string;
 }

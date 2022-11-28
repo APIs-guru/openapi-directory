@@ -54,6 +54,8 @@ const (
 	AmpInspectionResultVerdictEnumNeutral            AmpInspectionResultVerdictEnum = "NEUTRAL"
 )
 
+// AmpInspectionResult
+// AMP inspection result of the live page or the current information from Google's index, depending on whether you requested a live inspection or not.
 type AmpInspectionResult struct {
 	AmpIndexStatusVerdict *AmpInspectionResultAmpIndexStatusVerdictEnum `json:"ampIndexStatusVerdict,omitempty"`
 	AmpURL                *string                                       `json:"ampUrl,omitempty"`

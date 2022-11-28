@@ -1,5 +1,7 @@
 package shared
 
+// GooglePrivacyDlpV2Container
+// Represents a container that may contain DLP findings. Examples of a container include a file, table, or database record.
 type GooglePrivacyDlpV2Container struct {
 	FullPath     *string `json:"fullPath,omitempty"`
 	ProjectID    *string `json:"projectId,omitempty"`

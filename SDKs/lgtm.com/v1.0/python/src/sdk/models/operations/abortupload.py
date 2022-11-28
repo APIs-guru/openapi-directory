@@ -5,23 +5,23 @@ from sdk.models import shared
 
 @dataclass
 class AbortUploadPathParams:
-    session_id: str = field(default=None, metadata={'path_param': { 'field_name': 'session-id', 'style': 'simple', 'explode': False }})
+    session_id: str = field(metadata={'path_param': { 'field_name': 'session-id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class AbortUploadSecurity:
-    access_token: shared.SchemeAccessToken = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer' }})
+    access_token: shared.SchemeAccessToken = field(metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer' }})
     
 
 @dataclass
 class AbortUploadRequest:
-    path_params: AbortUploadPathParams = field(default=None)
-    security: AbortUploadSecurity = field(default=None)
+    path_params: AbortUploadPathParams = field()
+    security: AbortUploadSecurity = field()
     
 
 @dataclass
 class AbortUploadResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     operation: Optional[shared.Operation] = field(default=None)
     

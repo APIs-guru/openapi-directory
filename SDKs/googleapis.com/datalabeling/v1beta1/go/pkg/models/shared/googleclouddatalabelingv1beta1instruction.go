@@ -10,6 +10,8 @@ const (
 	GoogleCloudDatalabelingV1beta1InstructionDataTypeEnumGeneralData         GoogleCloudDatalabelingV1beta1InstructionDataTypeEnum = "GENERAL_DATA"
 )
 
+// GoogleCloudDatalabelingV1beta1Instruction
+// Instruction of how to perform the labeling task for human operators. Currently only PDF instruction is supported.
 type GoogleCloudDatalabelingV1beta1Instruction struct {
 	BlockingResources []string                                               `json:"blockingResources,omitempty"`
 	CreateTime        *string                                                `json:"createTime,omitempty"`

@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// SourceTableDetails
+// Contains the details of the table when the backup was created.
 type SourceTableDetails struct {
 	BillingMode           *BillingModeEnum      `json:"BillingMode,omitempty"`
 	ItemCount             *int64                `json:"ItemCount,omitempty"`

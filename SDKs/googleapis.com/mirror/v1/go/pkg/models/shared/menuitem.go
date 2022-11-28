@@ -1,5 +1,7 @@
 package shared
 
+// MenuItem
+// A custom menu item that can be presented to the user by a timeline item.
 type MenuItem struct {
 	Action             *string     `json:"action,omitempty"`
 	ContextualCommand  *string     `json:"contextual_command,omitempty"`

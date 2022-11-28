@@ -1,5 +1,7 @@
 package shared
 
+// Dv3Ids
+// DV360 IDs related to the custom event.
 type Dv3Ids struct {
 	DvCampaignID       *string `json:"dvCampaignId,omitempty"`
 	DvCreativeID       *string `json:"dvCreativeId,omitempty"`

@@ -1,29 +1,30 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class PostAuthQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=client_id" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=client_id" })
   clientId: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=client_secret" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=client_secret" })
   clientSecret: string;
 }
 
 
 export class PostAuthRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: PostAuthQueryParams;
 }
 
 
 export class PostAuthResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   authenticationTokenResponse?: shared.AuthenticationTokenResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

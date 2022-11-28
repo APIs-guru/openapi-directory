@@ -1,34 +1,35 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class CfgLoadPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=cfgFile" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=cfgFile" })
   cfgFile: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=firstAgentNum" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=firstAgentNum" })
   firstAgentNum: number;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=lastAgentNum" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=lastAgentNum" })
   lastAgentNum: number;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=startAgentNum" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=startAgentNum" })
   startAgentNum: number;
 }
 
 
 export class CfgLoadRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: CfgLoadPathParams;
 }
 
 
 export class CfgLoadResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   cfgLoad200ApplicationJsonObject?: Map<string, number>;
 }

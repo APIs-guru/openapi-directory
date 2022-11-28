@@ -1,61 +1,62 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetEvidenceFilterQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=data source" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=data source" })
   dataSource?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=datastructure" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=datastructure" })
   datastructure?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=datatype" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=datatype" })
   datatype?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=disease" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=disease" })
   disease?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=fields" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=fields" })
   fields?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=format" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=format" })
   format?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=from" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=from" })
   from?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=pathway" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=pathway" })
   pathway?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=scorevalue_max" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=scorevalue_max" })
   scorevalueMax?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=scorevalue_min" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=scorevalue_min" })
   scorevalueMin?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=size" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=size" })
   size?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=sort" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sort" })
   sort?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=target" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=target" })
   target?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=uniprotkw" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=uniprotkw" })
   uniprotkw?: string;
 }
 
 
 export class GetEvidenceFilterRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetEvidenceFilterQueryParams;
 }
 
 
 export class GetEvidenceFilterResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

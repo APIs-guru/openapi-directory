@@ -11,6 +11,8 @@ const (
 	EnterpriseEnabledNotificationTypesEnumUsageLogs                   EnterpriseEnabledNotificationTypesEnum = "USAGE_LOGS"
 )
 
+// Enterprise
+// The configuration applied to an enterprise.
 type Enterprise struct {
 	AppAutoApprovalEnabled   *bool                                    `json:"appAutoApprovalEnabled,omitempty"`
 	ContactInfo              *ContactInfo                             `json:"contactInfo,omitempty"`

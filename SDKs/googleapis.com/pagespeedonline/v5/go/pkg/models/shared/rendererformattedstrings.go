@@ -1,5 +1,7 @@
 package shared
 
+// RendererFormattedStrings
+// Message holding the formatted strings used in the renderer.
 type RendererFormattedStrings struct {
 	AuditGroupExpandTooltip          *string `json:"auditGroupExpandTooltip,omitempty"`
 	CalculatorLink                   *string `json:"calculatorLink,omitempty"`

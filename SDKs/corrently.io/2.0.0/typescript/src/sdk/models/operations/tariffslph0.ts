@@ -1,26 +1,27 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class TariffSlph0QueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=zipcode" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=zipcode" })
   zipcode?: string;
 }
 
 
 export class TariffSlph0Request extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: TariffSlph0QueryParams;
 }
 
 
 export class TariffSlph0Response extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata({ elemType: shared.Tariffh0 })
+  @SpeakeasyMetadata({ elemType: shared.Tariffh0 })
   tariffh0s?: shared.Tariffh0[];
 }

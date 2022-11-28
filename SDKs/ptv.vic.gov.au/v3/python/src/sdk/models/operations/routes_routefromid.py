@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
 from typing import Optional
@@ -8,7 +8,7 @@ from sdk.models import shared
 
 @dataclass
 class RoutesRouteFromIDPathParams:
-    route_id: int = field(default=None, metadata={'path_param': { 'field_name': 'route_id', 'style': 'simple', 'explode': False }})
+    route_id: int = field(metadata={'path_param': { 'field_name': 'route_id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -22,15 +22,15 @@ class RoutesRouteFromIDQueryParams:
 
 @dataclass
 class RoutesRouteFromIDRequest:
-    path_params: RoutesRouteFromIDPathParams = field(default=None)
-    query_params: RoutesRouteFromIDQueryParams = field(default=None)
+    path_params: RoutesRouteFromIDPathParams = field()
+    query_params: RoutesRouteFromIDQueryParams = field()
     
 
 @dataclass
 class RoutesRouteFromIDResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     v3_error_response: Optional[shared.V3ErrorResponse] = field(default=None)
     v3_route_response: Optional[shared.V3RouteResponse] = field(default=None)
     

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // CohortReportSettings
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Optional settings of a cohort report.
 **/
 export class CohortReportSettings extends SpeakeasyBase {
-  @Metadata({ data: "json, name=accumulate" })
+  @SpeakeasyMetadata({ data: "json, name=accumulate" })
   accumulate?: boolean;
 }

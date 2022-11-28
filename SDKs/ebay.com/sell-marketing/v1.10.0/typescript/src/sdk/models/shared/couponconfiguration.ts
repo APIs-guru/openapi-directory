@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // CouponConfiguration
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * This container defines a coded coupon promotion. It is required if the promotion type is CODED_COUPON.
 **/
 export class CouponConfiguration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=couponCode" })
+  @SpeakeasyMetadata({ data: "json, name=couponCode" })
   couponCode?: string;
 
-  @Metadata({ data: "json, name=couponType" })
+  @SpeakeasyMetadata({ data: "json, name=couponType" })
   couponType?: string;
 
-  @Metadata({ data: "json, name=maxCouponRedemptionPerUser" })
+  @SpeakeasyMetadata({ data: "json, name=maxCouponRedemptionPerUser" })
   maxCouponRedemptionPerUser?: number;
 }

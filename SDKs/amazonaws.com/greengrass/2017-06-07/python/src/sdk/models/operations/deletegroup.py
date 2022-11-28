@@ -1,10 +1,13 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 
 
 @dataclass
 class DeleteGroupPathParams:
-    group_id: str = field(default=None, metadata={'path_param': { 'field_name': 'GroupId', 'style': 'simple', 'explode': False }})
+    group_id: str = field(metadata={'path_param': { 'field_name': 'GroupId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -20,14 +23,14 @@ class DeleteGroupHeaders:
 
 @dataclass
 class DeleteGroupRequest:
-    path_params: DeleteGroupPathParams = field(default=None)
-    headers: DeleteGroupHeaders = field(default=None)
+    headers: DeleteGroupHeaders = field()
+    path_params: DeleteGroupPathParams = field()
     
 
 @dataclass
 class DeleteGroupResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     delete_group_response: Optional[dict[str, Any]] = field(default=None)
-    status_code: int = field(default=None)
     

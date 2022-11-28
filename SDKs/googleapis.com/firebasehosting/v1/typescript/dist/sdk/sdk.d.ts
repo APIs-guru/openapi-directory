@@ -1,16 +1,17 @@
-import { AxiosInstance, AxiosRequestConfig } from "axios";
-import * as operations from "./models/operations";
-declare type OptsFunc = (sdk: SDK) => void;
+import { AxiosInstance } from "axios";
+import { Operations } from "./operations";
+type OptsFunc = (sdk: SDK) => void;
+export declare const ServerList: readonly ["https://firebasehosting.googleapis.com/"];
 export declare function WithServerURL(serverURL: string, params?: Map<string, string>): OptsFunc;
 export declare function WithClient(client: AxiosInstance): OptsFunc;
 export declare class SDK {
-    defaultClient?: AxiosInstance;
-    securityClient?: AxiosInstance;
-    security?: any;
-    serverURL: string;
+    operations: Operations;
+    _defaultClient: AxiosInstance;
+    _securityClient: AxiosInstance;
+    _serverURL: string;
+    private _language;
+    private _sdkVersion;
+    private _genVersion;
     constructor(...opts: OptsFunc[]);
-    FirebasehostingOperationsCancel(req: operations.FirebasehostingOperationsCancelRequest, config?: AxiosRequestConfig): Promise<operations.FirebasehostingOperationsCancelResponse>;
-    FirebasehostingOperationsDelete(req: operations.FirebasehostingOperationsDeleteRequest, config?: AxiosRequestConfig): Promise<operations.FirebasehostingOperationsDeleteResponse>;
-    FirebasehostingOperationsList(req: operations.FirebasehostingOperationsListRequest, config?: AxiosRequestConfig): Promise<operations.FirebasehostingOperationsListResponse>;
 }
 export {};

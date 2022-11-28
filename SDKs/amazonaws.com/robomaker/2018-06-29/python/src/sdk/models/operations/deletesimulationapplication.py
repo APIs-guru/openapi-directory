@@ -1,6 +1,10 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass
@@ -17,22 +21,22 @@ class DeleteSimulationApplicationHeaders:
 @dataclass_json
 @dataclass
 class DeleteSimulationApplicationRequestBody:
-    application: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'application' }})
-    application_version: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'applicationVersion' }})
+    application: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('application') }})
+    application_version: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('applicationVersion') }})
     
 
 @dataclass
 class DeleteSimulationApplicationRequest:
-    headers: DeleteSimulationApplicationHeaders = field(default=None)
-    request: DeleteSimulationApplicationRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: DeleteSimulationApplicationHeaders = field()
+    request: DeleteSimulationApplicationRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class DeleteSimulationApplicationResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     delete_simulation_application_response: Optional[dict[str, Any]] = field(default=None)
     internal_server_exception: Optional[Any] = field(default=None)
     invalid_parameter_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     

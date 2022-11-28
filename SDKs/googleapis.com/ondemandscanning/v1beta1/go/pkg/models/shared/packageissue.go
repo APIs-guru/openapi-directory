@@ -11,6 +11,8 @@ const (
 	PackageIssueEffectiveSeverityEnumCritical            PackageIssueEffectiveSeverityEnum = "CRITICAL"
 )
 
+// PackageIssue
+// A detail for a distro and package this vulnerability occurrence was found in and its associated fix (if one is available).
 type PackageIssue struct {
 	AffectedCpeURI    *string                            `json:"affectedCpeUri,omitempty"`
 	AffectedPackage   *string                            `json:"affectedPackage,omitempty"`

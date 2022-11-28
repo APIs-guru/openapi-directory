@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleFirebaseAppcheckV1betaRecaptchaConfig } from "./googlefirebaseappcheckv1betarecaptchaconfig";
+
 
 
 // GoogleFirebaseAppcheckV1betaBatchGetRecaptchaConfigsResponse
@@ -8,6 +8,6 @@ import { GoogleFirebaseAppcheckV1betaRecaptchaConfig } from "./googlefirebaseapp
  * Response message for the BatchGetRecaptchaConfigs method.
 **/
 export class GoogleFirebaseAppcheckV1betaBatchGetRecaptchaConfigsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=configs", elemType: shared.GoogleFirebaseAppcheckV1betaRecaptchaConfig })
+  @SpeakeasyMetadata({ data: "json, name=configs", elemType: GoogleFirebaseAppcheckV1betaRecaptchaConfig })
   configs?: GoogleFirebaseAppcheckV1betaRecaptchaConfig[];
 }

@@ -1,0 +1,34 @@
+import { SpeakeasyBase } from "../../../internal/utils";
+export declare class V3StopStaffing extends SpeakeasyBase {
+    friAmFrom?: string;
+    friAmTo?: string;
+    friPmFrom?: string;
+    friPmTo?: string;
+    monAmFrom?: string;
+    monAmTo?: string;
+    monPmFrom?: string;
+    monPmTo?: string;
+    phAdditionalText?: string;
+    phFrom?: string;
+    phTo?: string;
+    satAmFrom?: string;
+    satAmTo?: string;
+    satPmFrom?: string;
+    satPmTo?: string;
+    sunAmFrom?: string;
+    sunAmTo?: string;
+    sunPmFrom?: string;
+    sunPmTo?: string;
+    thuAmFrom?: string;
+    thuAmTo?: string;
+    thuPmFrom?: string;
+    thuPmTo?: string;
+    tueAmFrom?: string;
+    tueAmTo?: string;
+    tuePmFrom?: string;
+    tuePmTo?: string;
+    wedAmFrom?: string;
+    wedAmTo?: string;
+    wedPmTo?: string;
+    wedPmFrom?: string;
+}

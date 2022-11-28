@@ -22,30 +22,30 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var ProtocolNetflowChangeAttrPathParams = /** @class */ (function (_super) {
     __extends(ProtocolNetflowChangeAttrPathParams, _super);
     function ProtocolNetflowChangeAttrPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=agentNum" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=agentNum" }),
         __metadata("design:type", Number)
     ], ProtocolNetflowChangeAttrPathParams.prototype, "agentNum", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=attr" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=attr" }),
         __metadata("design:type", String)
     ], ProtocolNetflowChangeAttrPathParams.prototype, "attr", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=field-num" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=field-num" }),
         __metadata("design:type", Number)
     ], ProtocolNetflowChangeAttrPathParams.prototype, "fieldNum", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=flowset-uid" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=flowset-uid" }),
         __metadata("design:type", Number)
     ], ProtocolNetflowChangeAttrPathParams.prototype, "flowsetUid", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=value" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=value" }),
         __metadata("design:type", String)
     ], ProtocolNetflowChangeAttrPathParams.prototype, "value", void 0);
     return ProtocolNetflowChangeAttrPathParams;
@@ -57,7 +57,7 @@ var ProtocolNetflowChangeAttrRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ProtocolNetflowChangeAttrPathParams)
     ], ProtocolNetflowChangeAttrRequest.prototype, "pathParams", void 0);
     return ProtocolNetflowChangeAttrRequest;
@@ -69,15 +69,15 @@ var ProtocolNetflowChangeAttrResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], ProtocolNetflowChangeAttrResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], ProtocolNetflowChangeAttrResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], ProtocolNetflowChangeAttrResponse.prototype, "protocolNetflowChangeAttr200ApplicationJsonString", void 0);
     return ProtocolNetflowChangeAttrResponse;

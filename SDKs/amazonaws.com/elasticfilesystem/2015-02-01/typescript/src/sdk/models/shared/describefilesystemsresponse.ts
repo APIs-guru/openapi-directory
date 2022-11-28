@@ -1,15 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { FileSystemDescription } from "./filesystemdescription";
 
 
+
 export class DescribeFileSystemsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=FileSystems", elemType: shared.FileSystemDescription })
+  @SpeakeasyMetadata({ data: "json, name=FileSystems", elemType: FileSystemDescription })
   fileSystems?: FileSystemDescription[];
 
-  @Metadata({ data: "json, name=Marker" })
+  @SpeakeasyMetadata({ data: "json, name=Marker" })
   marker?: string;
 
-  @Metadata({ data: "json, name=NextMarker" })
+  @SpeakeasyMetadata({ data: "json, name=NextMarker" })
   nextMarker?: string;
 }

@@ -13,12 +13,12 @@ type GetUsersQueryParams struct {
 	Workspace *string  `queryParam:"style=form,explode=true,name=workspace"`
 }
 
-type GetUsersRequest struct {
-	QueryParams GetUsersQueryParams
-}
-
 type GetUsers200ApplicationJSON struct {
 	Data []shared.UserCompact `json:"data,omitempty"`
+}
+
+type GetUsersRequest struct {
+	QueryParams GetUsersQueryParams
 }
 
 type GetUsersResponse struct {

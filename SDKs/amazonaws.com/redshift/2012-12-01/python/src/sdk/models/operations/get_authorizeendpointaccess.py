@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 
 class GetAuthorizeEndpointAccessActionEnum(str, Enum):
     AUTHORIZE_ENDPOINT_ACCESS = "AuthorizeEndpointAccess"
@@ -10,10 +14,10 @@ class GetAuthorizeEndpointAccessVersionEnum(str, Enum):
 
 @dataclass
 class GetAuthorizeEndpointAccessQueryParams:
-    account: str = field(default=None, metadata={'query_param': { 'field_name': 'Account', 'style': 'form', 'explode': True }})
-    action: GetAuthorizeEndpointAccessActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    account: str = field(metadata={'query_param': { 'field_name': 'Account', 'style': 'form', 'explode': True }})
+    action: GetAuthorizeEndpointAccessActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: GetAuthorizeEndpointAccessVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     cluster_identifier: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'ClusterIdentifier', 'style': 'form', 'explode': True }})
-    version: GetAuthorizeEndpointAccessVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     vpc_ids: Optional[List[str]] = field(default=None, metadata={'query_param': { 'field_name': 'VpcIds', 'style': 'form', 'explode': True }})
     
 
@@ -30,13 +34,13 @@ class GetAuthorizeEndpointAccessHeaders:
 
 @dataclass
 class GetAuthorizeEndpointAccessRequest:
-    query_params: GetAuthorizeEndpointAccessQueryParams = field(default=None)
-    headers: GetAuthorizeEndpointAccessHeaders = field(default=None)
+    headers: GetAuthorizeEndpointAccessHeaders = field()
+    query_params: GetAuthorizeEndpointAccessQueryParams = field()
     
 
 @dataclass
 class GetAuthorizeEndpointAccessResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

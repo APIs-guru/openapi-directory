@@ -31,7 +31,7 @@ type ManagedidentitiesProjectsLocationsGlobalDomainsBackupsCreateSecurity struct
 type ManagedidentitiesProjectsLocationsGlobalDomainsBackupsCreateRequest struct {
 	PathParams  ManagedidentitiesProjectsLocationsGlobalDomainsBackupsCreatePathParams
 	QueryParams ManagedidentitiesProjectsLocationsGlobalDomainsBackupsCreateQueryParams
-	Request     *shared.Backup `request:"mediaType=application/json"`
+	Request     *shared.BackupInput `request:"mediaType=application/json"`
 	Security    ManagedidentitiesProjectsLocationsGlobalDomainsBackupsCreateSecurity
 }
 

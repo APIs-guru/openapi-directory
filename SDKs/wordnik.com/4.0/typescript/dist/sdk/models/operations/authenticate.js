@@ -22,14 +22,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var AuthenticatePathParams = /** @class */ (function (_super) {
     __extends(AuthenticatePathParams, _super);
     function AuthenticatePathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=username" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=username" }),
         __metadata("design:type", String)
     ], AuthenticatePathParams.prototype, "username", void 0);
     return AuthenticatePathParams;
@@ -41,7 +41,7 @@ var AuthenticateQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=password" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=password" }),
         __metadata("design:type", String)
     ], AuthenticateQueryParams.prototype, "password", void 0);
     return AuthenticateQueryParams;
@@ -53,11 +53,11 @@ var AuthenticateRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", AuthenticatePathParams)
     ], AuthenticateRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", AuthenticateQueryParams)
     ], AuthenticateRequest.prototype, "queryParams", void 0);
     return AuthenticateRequest;
@@ -69,15 +69,15 @@ var AuthenticateResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], AuthenticateResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], AuthenticateResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], AuthenticateResponse.prototype, "statusCode", void 0);
     return AuthenticateResponse;

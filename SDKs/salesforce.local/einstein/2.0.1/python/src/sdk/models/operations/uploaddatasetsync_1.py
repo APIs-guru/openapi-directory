@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 class UploadDatasetSync1RequestBodyTypeEnum(str, Enum):
@@ -18,18 +19,18 @@ class UploadDatasetSync1RequestBody:
 
 @dataclass
 class UploadDatasetSync1Security:
-    bearer_token: shared.SchemeBearerToken = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer' }})
+    bearer_token: shared.SchemeBearerToken = field(metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer' }})
     
 
 @dataclass
 class UploadDatasetSync1Request:
+    security: UploadDatasetSync1Security = field()
     request: Optional[UploadDatasetSync1RequestBody] = field(default=None, metadata={'request': { 'media_type': 'multipart/form-data' }})
-    security: UploadDatasetSync1Security = field(default=None)
     
 
 @dataclass
 class UploadDatasetSync1Response:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     dataset: Optional[shared.Dataset] = field(default=None)
-    status_code: int = field(default=None)
     

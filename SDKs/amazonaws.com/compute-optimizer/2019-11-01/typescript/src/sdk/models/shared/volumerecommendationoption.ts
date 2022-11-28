@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { VolumeConfiguration } from "./volumeconfiguration";
+
 
 
 // VolumeRecommendationOption
@@ -7,12 +8,12 @@ import { VolumeConfiguration } from "./volumeconfiguration";
  * Describes a recommendation option for an Amazon Elastic Block Store (Amazon EBS) instance.
 **/
 export class VolumeRecommendationOption extends SpeakeasyBase {
-  @Metadata({ data: "json, name=configuration" })
+  @SpeakeasyMetadata({ data: "json, name=configuration" })
   configuration?: VolumeConfiguration;
 
-  @Metadata({ data: "json, name=performanceRisk" })
+  @SpeakeasyMetadata({ data: "json, name=performanceRisk" })
   performanceRisk?: number;
 
-  @Metadata({ data: "json, name=rank" })
+  @SpeakeasyMetadata({ data: "json, name=rank" })
   rank?: number;
 }

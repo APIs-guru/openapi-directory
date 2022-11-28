@@ -1,6 +1,7 @@
 
 
+
 export enum AssessmentStatusEnum {
-    Active = "ACTIVE"
-,    Inactive = "INACTIVE"
+    Active = "ACTIVE",
+    Inactive = "INACTIVE"
 }

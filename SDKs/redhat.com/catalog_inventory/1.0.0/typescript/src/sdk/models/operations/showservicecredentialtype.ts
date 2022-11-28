@@ -1,29 +1,30 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class ShowServiceCredentialTypePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" })
   id: string;
 }
 
 
 export class ShowServiceCredentialTypeRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: ShowServiceCredentialTypePathParams;
 }
 
 
 export class ShowServiceCredentialTypeResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   errorNotFound?: shared.ErrorNotFound;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   serviceCredentialType?: shared.ServiceCredentialType;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

@@ -1,27 +1,36 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import picture
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class OnDemandSeasonMetadataConnectionsVideos:
-    options: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'options' }})
-    total: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'total' }})
-    uri: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'uri' }})
+    r"""OnDemandSeasonMetadataConnectionsVideos
+    The Videos connection.
+    """
+    
+    options: List[str] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('options') }})
+    total: float = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('total') }})
+    uri: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('uri') }})
     
 
 @dataclass_json
 @dataclass
 class OnDemandSeasonMetadataConnections:
-    videos: OnDemandSeasonMetadataConnectionsVideos = field(default=None, metadata={'dataclasses_json': { 'field_name': 'videos' }})
+    videos: OnDemandSeasonMetadataConnectionsVideos = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('videos') }})
     
 
 @dataclass_json
 @dataclass
 class OnDemandSeasonMetadata:
-    connections: OnDemandSeasonMetadataConnections = field(default=None, metadata={'dataclasses_json': { 'field_name': 'connections' }})
+    connections: OnDemandSeasonMetadataConnections = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('connections') }})
     
 class OnDemandSeasonUserAccountEnum(str, Enum):
     BASIC = "basic"
@@ -38,233 +47,333 @@ class OnDemandSeasonUserAccountEnum(str, Enum):
 @dataclass_json
 @dataclass
 class OnDemandSeasonUserMetadataConnectionsAlbums:
-    options: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'options' }})
-    total: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'total' }})
-    uri: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'uri' }})
+    r"""OnDemandSeasonUserMetadataConnectionsAlbums
+    Information about the albums created by this user.
+    """
+    
+    options: List[str] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('options') }})
+    total: float = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('total') }})
+    uri: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('uri') }})
     
 
 @dataclass_json
 @dataclass
 class OnDemandSeasonUserMetadataConnectionsAppearances:
-    options: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'options' }})
-    total: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'total' }})
-    uri: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'uri' }})
+    r"""OnDemandSeasonUserMetadataConnectionsAppearances
+    Information about the appearances of this user in other videos.
+    """
+    
+    options: List[str] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('options') }})
+    total: float = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('total') }})
+    uri: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('uri') }})
     
 
 @dataclass_json
 @dataclass
 class OnDemandSeasonUserMetadataConnectionsBlock:
-    options: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'options' }})
-    total: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'total' }})
-    uri: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'uri' }})
+    r"""OnDemandSeasonUserMetadataConnectionsBlock
+    Information on the users that the current user has blocked. This data requires a bearer token with the `private` scope.
+    """
+    
+    options: List[str] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('options') }})
+    total: float = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('total') }})
+    uri: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('uri') }})
     
 
 @dataclass_json
 @dataclass
 class OnDemandSeasonUserMetadataConnectionsCategories:
-    options: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'options' }})
-    total: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'total' }})
-    uri: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'uri' }})
+    r"""OnDemandSeasonUserMetadataConnectionsCategories
+    Information about this user's followed categories.
+    """
+    
+    options: List[str] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('options') }})
+    total: float = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('total') }})
+    uri: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('uri') }})
     
 
 @dataclass_json
 @dataclass
 class OnDemandSeasonUserMetadataConnectionsChannels:
-    options: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'options' }})
-    total: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'total' }})
-    uri: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'uri' }})
+    r"""OnDemandSeasonUserMetadataConnectionsChannels
+    Information about this user's subscribed channels.
+    """
+    
+    options: List[str] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('options') }})
+    total: float = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('total') }})
+    uri: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('uri') }})
     
 
 @dataclass_json
 @dataclass
 class OnDemandSeasonUserMetadataConnectionsFeed:
-    options: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'options' }})
-    uri: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'uri' }})
+    r"""OnDemandSeasonUserMetadataConnectionsFeed
+    Information about this user's feed.
+    """
+    
+    options: List[str] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('options') }})
+    uri: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('uri') }})
     
 
 @dataclass_json
 @dataclass
 class OnDemandSeasonUserMetadataConnectionsFolders:
-    options: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'options' }})
-    total: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'total' }})
-    uri: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'uri' }})
+    r"""OnDemandSeasonUserMetadataConnectionsFolders
+    Information about this user's folders.
+    """
+    
+    options: List[str] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('options') }})
+    total: float = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('total') }})
+    uri: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('uri') }})
     
 
 @dataclass_json
 @dataclass
 class OnDemandSeasonUserMetadataConnectionsFollowers:
-    options: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'options' }})
-    total: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'total' }})
-    uri: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'uri' }})
+    r"""OnDemandSeasonUserMetadataConnectionsFollowers
+    Information about the user's followers.
+    """
+    
+    options: List[str] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('options') }})
+    total: float = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('total') }})
+    uri: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('uri') }})
     
 
 @dataclass_json
 @dataclass
 class OnDemandSeasonUserMetadataConnectionsFollowing:
-    options: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'options' }})
-    total: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'total' }})
-    uri: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'uri' }})
+    r"""OnDemandSeasonUserMetadataConnectionsFollowing
+    Information about the users that the current user is following.
+    """
+    
+    options: List[str] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('options') }})
+    total: float = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('total') }})
+    uri: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('uri') }})
     
 
 @dataclass_json
 @dataclass
 class OnDemandSeasonUserMetadataConnectionsGroups:
-    options: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'options' }})
-    total: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'total' }})
-    uri: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'uri' }})
+    r"""OnDemandSeasonUserMetadataConnectionsGroups
+    Information about the groups created by this user.
+    """
+    
+    options: List[str] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('options') }})
+    total: float = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('total') }})
+    uri: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('uri') }})
     
 
 @dataclass_json
 @dataclass
 class OnDemandSeasonUserMetadataConnectionsLikes:
-    options: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'options' }})
-    total: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'total' }})
-    uri: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'uri' }})
+    r"""OnDemandSeasonUserMetadataConnectionsLikes
+    Information about the videos that this user has liked.
+    """
+    
+    options: List[str] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('options') }})
+    total: float = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('total') }})
+    uri: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('uri') }})
     
 
 @dataclass_json
 @dataclass
 class OnDemandSeasonUserMetadataConnectionsModeratedChannels:
-    options: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'options' }})
-    total: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'total' }})
-    uri: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'uri' }})
+    r"""OnDemandSeasonUserMetadataConnectionsModeratedChannels
+    Information about the channels that this user moderates.
+    """
+    
+    options: List[str] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('options') }})
+    total: float = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('total') }})
+    uri: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('uri') }})
     
 
 @dataclass_json
 @dataclass
 class OnDemandSeasonUserMetadataConnectionsPictures:
-    options: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'options' }})
-    total: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'total' }})
-    uri: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'uri' }})
+    r"""OnDemandSeasonUserMetadataConnectionsPictures
+    Information about this user's portraits.
+    """
+    
+    options: List[str] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('options') }})
+    total: float = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('total') }})
+    uri: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('uri') }})
     
 
 @dataclass_json
 @dataclass
 class OnDemandSeasonUserMetadataConnectionsPortfolios:
-    options: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'options' }})
-    total: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'total' }})
-    uri: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'uri' }})
+    r"""OnDemandSeasonUserMetadataConnectionsPortfolios
+    Information about this user's portfolios.
+    """
+    
+    options: List[str] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('options') }})
+    total: float = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('total') }})
+    uri: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('uri') }})
     
 
 @dataclass_json
 @dataclass
 class OnDemandSeasonUserMetadataConnectionsRecommendedChannels:
-    options: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'options' }})
-    total: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'total' }})
-    uri: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'uri' }})
+    r"""OnDemandSeasonUserMetadataConnectionsRecommendedChannels
+    A collection of recommended channels for the current user to follow. This data requires a bearer token with the `private` scope.
+    """
+    
+    options: List[str] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('options') }})
+    total: float = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('total') }})
+    uri: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('uri') }})
     
 
 @dataclass_json
 @dataclass
 class OnDemandSeasonUserMetadataConnectionsRecommendedUsers:
-    options: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'options' }})
-    total: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'total' }})
-    uri: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'uri' }})
+    r"""OnDemandSeasonUserMetadataConnectionsRecommendedUsers
+    A Collection of recommended users for the current user to follow. This data requires a bearer token with the `private` scope.
+    """
+    
+    options: List[str] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('options') }})
+    total: float = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('total') }})
+    uri: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('uri') }})
     
 
 @dataclass_json
 @dataclass
 class OnDemandSeasonUserMetadataConnectionsShared:
-    options: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'options' }})
-    total: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'total' }})
-    uri: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'uri' }})
+    r"""OnDemandSeasonUserMetadataConnectionsShared
+    Information about the videos that have been shared with this user.
+    """
+    
+    options: List[str] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('options') }})
+    total: float = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('total') }})
+    uri: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('uri') }})
     
 
 @dataclass_json
 @dataclass
 class OnDemandSeasonUserMetadataConnectionsVideos:
-    options: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'options' }})
-    total: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'total' }})
-    uri: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'uri' }})
+    r"""OnDemandSeasonUserMetadataConnectionsVideos
+    Information about the videos uploaded by this user.
+    """
+    
+    options: List[str] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('options') }})
+    total: float = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('total') }})
+    uri: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('uri') }})
     
 
 @dataclass_json
 @dataclass
 class OnDemandSeasonUserMetadataConnectionsWatchedVideos:
-    options: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'options' }})
-    total: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'total' }})
-    uri: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'uri' }})
+    r"""OnDemandSeasonUserMetadataConnectionsWatchedVideos
+    Information about the videos that this user has watched.
+    """
+    
+    options: List[str] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('options') }})
+    total: float = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('total') }})
+    uri: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('uri') }})
     
 
 @dataclass_json
 @dataclass
 class OnDemandSeasonUserMetadataConnectionsWatchlater:
-    options: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'options' }})
-    total: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'total' }})
-    uri: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'uri' }})
+    r"""OnDemandSeasonUserMetadataConnectionsWatchlater
+    Information about the videos that this user wants to watch later.
+    """
+    
+    options: List[str] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('options') }})
+    total: float = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('total') }})
+    uri: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('uri') }})
     
 
 @dataclass_json
 @dataclass
 class OnDemandSeasonUserMetadataConnections:
-    albums: OnDemandSeasonUserMetadataConnectionsAlbums = field(default=None, metadata={'dataclasses_json': { 'field_name': 'albums' }})
-    appearances: OnDemandSeasonUserMetadataConnectionsAppearances = field(default=None, metadata={'dataclasses_json': { 'field_name': 'appearances' }})
-    block: OnDemandSeasonUserMetadataConnectionsBlock = field(default=None, metadata={'dataclasses_json': { 'field_name': 'block' }})
-    categories: OnDemandSeasonUserMetadataConnectionsCategories = field(default=None, metadata={'dataclasses_json': { 'field_name': 'categories' }})
-    channels: OnDemandSeasonUserMetadataConnectionsChannels = field(default=None, metadata={'dataclasses_json': { 'field_name': 'channels' }})
-    feed: OnDemandSeasonUserMetadataConnectionsFeed = field(default=None, metadata={'dataclasses_json': { 'field_name': 'feed' }})
-    folders: OnDemandSeasonUserMetadataConnectionsFolders = field(default=None, metadata={'dataclasses_json': { 'field_name': 'folders' }})
-    followers: OnDemandSeasonUserMetadataConnectionsFollowers = field(default=None, metadata={'dataclasses_json': { 'field_name': 'followers' }})
-    following: OnDemandSeasonUserMetadataConnectionsFollowing = field(default=None, metadata={'dataclasses_json': { 'field_name': 'following' }})
-    groups: OnDemandSeasonUserMetadataConnectionsGroups = field(default=None, metadata={'dataclasses_json': { 'field_name': 'groups' }})
-    likes: OnDemandSeasonUserMetadataConnectionsLikes = field(default=None, metadata={'dataclasses_json': { 'field_name': 'likes' }})
-    moderated_channels: OnDemandSeasonUserMetadataConnectionsModeratedChannels = field(default=None, metadata={'dataclasses_json': { 'field_name': 'moderated_channels' }})
-    pictures: OnDemandSeasonUserMetadataConnectionsPictures = field(default=None, metadata={'dataclasses_json': { 'field_name': 'pictures' }})
-    portfolios: OnDemandSeasonUserMetadataConnectionsPortfolios = field(default=None, metadata={'dataclasses_json': { 'field_name': 'portfolios' }})
-    recommended_channels: OnDemandSeasonUserMetadataConnectionsRecommendedChannels = field(default=None, metadata={'dataclasses_json': { 'field_name': 'recommended_channels' }})
-    recommended_users: OnDemandSeasonUserMetadataConnectionsRecommendedUsers = field(default=None, metadata={'dataclasses_json': { 'field_name': 'recommended_users' }})
-    shared: OnDemandSeasonUserMetadataConnectionsShared = field(default=None, metadata={'dataclasses_json': { 'field_name': 'shared' }})
-    videos: OnDemandSeasonUserMetadataConnectionsVideos = field(default=None, metadata={'dataclasses_json': { 'field_name': 'videos' }})
-    watched_videos: OnDemandSeasonUserMetadataConnectionsWatchedVideos = field(default=None, metadata={'dataclasses_json': { 'field_name': 'watched_videos' }})
-    watchlater: OnDemandSeasonUserMetadataConnectionsWatchlater = field(default=None, metadata={'dataclasses_json': { 'field_name': 'watchlater' }})
+    r"""OnDemandSeasonUserMetadataConnections
+    The list of resource URIs related to the user.
+    """
+    
+    albums: OnDemandSeasonUserMetadataConnectionsAlbums = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('albums') }})
+    appearances: OnDemandSeasonUserMetadataConnectionsAppearances = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('appearances') }})
+    block: OnDemandSeasonUserMetadataConnectionsBlock = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('block') }})
+    categories: OnDemandSeasonUserMetadataConnectionsCategories = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('categories') }})
+    channels: OnDemandSeasonUserMetadataConnectionsChannels = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('channels') }})
+    feed: OnDemandSeasonUserMetadataConnectionsFeed = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('feed') }})
+    folders: OnDemandSeasonUserMetadataConnectionsFolders = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('folders') }})
+    followers: OnDemandSeasonUserMetadataConnectionsFollowers = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('followers') }})
+    following: OnDemandSeasonUserMetadataConnectionsFollowing = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('following') }})
+    groups: OnDemandSeasonUserMetadataConnectionsGroups = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('groups') }})
+    likes: OnDemandSeasonUserMetadataConnectionsLikes = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('likes') }})
+    moderated_channels: OnDemandSeasonUserMetadataConnectionsModeratedChannels = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('moderated_channels') }})
+    pictures: OnDemandSeasonUserMetadataConnectionsPictures = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('pictures') }})
+    portfolios: OnDemandSeasonUserMetadataConnectionsPortfolios = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('portfolios') }})
+    recommended_channels: OnDemandSeasonUserMetadataConnectionsRecommendedChannels = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('recommended_channels') }})
+    recommended_users: OnDemandSeasonUserMetadataConnectionsRecommendedUsers = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('recommended_users') }})
+    shared: OnDemandSeasonUserMetadataConnectionsShared = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('shared') }})
+    videos: OnDemandSeasonUserMetadataConnectionsVideos = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('videos') }})
+    watched_videos: OnDemandSeasonUserMetadataConnectionsWatchedVideos = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('watched_videos') }})
+    watchlater: OnDemandSeasonUserMetadataConnectionsWatchlater = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('watchlater') }})
     
 
 @dataclass_json
 @dataclass
 class OnDemandSeasonUserMetadataInteractionsAddPrivacyUser:
-    options: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'options' }})
-    uri: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'uri' }})
+    options: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('options') }})
+    uri: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('uri') }})
     
 
 @dataclass_json
 @dataclass
 class OnDemandSeasonUserMetadataInteractionsBlock:
-    added: bool = field(default=None, metadata={'dataclasses_json': { 'field_name': 'added' }})
-    added_time: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'added_time' }})
-    options: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'options' }})
-    uri: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'uri' }})
+    r"""OnDemandSeasonUserMetadataInteractionsBlock
+    Information related to the block status of this user.
+    """
+    
+    added: bool = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('added') }})
+    added_time: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('added_time') }})
+    options: List[str] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('options') }})
+    uri: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('uri') }})
     
 
 @dataclass_json
 @dataclass
 class OnDemandSeasonUserMetadataInteractionsFollow:
-    added: bool = field(default=None, metadata={'dataclasses_json': { 'field_name': 'added' }})
-    options: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'options' }})
-    uri: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'uri' }})
+    r"""OnDemandSeasonUserMetadataInteractionsFollow
+    Information related to the followed status of this user.
+    """
+    
+    added: bool = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('added') }})
+    options: List[str] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('options') }})
+    uri: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('uri') }})
     
 
 @dataclass_json
 @dataclass
 class OnDemandSeasonUserMetadataInteractionsReport:
-    options: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'options' }})
-    reason: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'reason' }})
-    uri: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'uri' }})
+    r"""OnDemandSeasonUserMetadataInteractionsReport
+    Information regarding where and how to report a user.
+    """
+    
+    options: List[str] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('options') }})
+    reason: List[str] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('reason') }})
+    uri: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('uri') }})
     
 
 @dataclass_json
 @dataclass
 class OnDemandSeasonUserMetadataInteractions:
-    add_privacy_user: Optional[OnDemandSeasonUserMetadataInteractionsAddPrivacyUser] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'add_privacy_user' }})
-    block: OnDemandSeasonUserMetadataInteractionsBlock = field(default=None, metadata={'dataclasses_json': { 'field_name': 'block' }})
-    follow: OnDemandSeasonUserMetadataInteractionsFollow = field(default=None, metadata={'dataclasses_json': { 'field_name': 'follow' }})
-    report: OnDemandSeasonUserMetadataInteractionsReport = field(default=None, metadata={'dataclasses_json': { 'field_name': 'report' }})
+    block: OnDemandSeasonUserMetadataInteractionsBlock = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('block') }})
+    follow: OnDemandSeasonUserMetadataInteractionsFollow = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('follow') }})
+    report: OnDemandSeasonUserMetadataInteractionsReport = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('report') }})
+    add_privacy_user: Optional[OnDemandSeasonUserMetadataInteractionsAddPrivacyUser] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('add_privacy_user') }})
     
 
 @dataclass_json
 @dataclass
 class OnDemandSeasonUserMetadata:
-    connections: OnDemandSeasonUserMetadataConnections = field(default=None, metadata={'dataclasses_json': { 'field_name': 'connections' }})
-    interactions: OnDemandSeasonUserMetadataInteractions = field(default=None, metadata={'dataclasses_json': { 'field_name': 'interactions' }})
+    r"""OnDemandSeasonUserMetadata
+    The user's metadata.
+    """
+    
+    connections: OnDemandSeasonUserMetadataConnections = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('connections') }})
+    interactions: OnDemandSeasonUserMetadataInteractions = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('interactions') }})
     
 class OnDemandSeasonUserPreferencesVideosPrivacyCommentsEnum(str, Enum):
     ANYBODY = "anybody"
@@ -289,40 +398,48 @@ class OnDemandSeasonUserPreferencesVideosPrivacyViewEnum(str, Enum):
 @dataclass_json
 @dataclass
 class OnDemandSeasonUserPreferencesVideosPrivacy:
-    add: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'add' }})
-    comments: Optional[OnDemandSeasonUserPreferencesVideosPrivacyCommentsEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'comments' }})
-    download: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'download' }})
-    embed: Optional[OnDemandSeasonUserPreferencesVideosPrivacyEmbedEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'embed' }})
-    view: Optional[OnDemandSeasonUserPreferencesVideosPrivacyViewEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'view' }})
+    add: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('add') }})
+    comments: Optional[OnDemandSeasonUserPreferencesVideosPrivacyCommentsEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('comments') }})
+    download: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('download') }})
+    embed: Optional[OnDemandSeasonUserPreferencesVideosPrivacyEmbedEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('embed') }})
+    view: Optional[OnDemandSeasonUserPreferencesVideosPrivacyViewEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('view') }})
     
 
 @dataclass_json
 @dataclass
 class OnDemandSeasonUserPreferencesVideos:
-    privacy: Optional[OnDemandSeasonUserPreferencesVideosPrivacy] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'privacy' }})
+    privacy: Optional[OnDemandSeasonUserPreferencesVideosPrivacy] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('privacy') }})
     
 
 @dataclass_json
 @dataclass
 class OnDemandSeasonUserPreferences:
-    videos: Optional[OnDemandSeasonUserPreferencesVideos] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'videos' }})
+    videos: Optional[OnDemandSeasonUserPreferencesVideos] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('videos') }})
     
 
 @dataclass_json
 @dataclass
 class OnDemandSeasonUserUploadQuotaLifetime:
-    free: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'free' }})
-    max: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'max' }})
-    used: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'used' }})
+    r"""OnDemandSeasonUserUploadQuotaLifetime
+    Information about the user's lifetime upload usage.
+    """
+    
+    free: float = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('free') }})
+    max: float = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('max') }})
+    used: float = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('used') }})
     
 
 @dataclass_json
 @dataclass
 class OnDemandSeasonUserUploadQuotaPeriodic:
-    free: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'free' }})
-    max: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'max' }})
-    reset_date: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'reset_date' }})
-    used: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'used' }})
+    r"""OnDemandSeasonUserUploadQuotaPeriodic
+    Information about the user's usage for the current period.
+    """
+    
+    free: float = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('free') }})
+    max: float = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('max') }})
+    reset_date: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('reset_date') }})
+    used: float = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('used') }})
     
 class OnDemandSeasonUserUploadQuotaSpaceShowingEnum(str, Enum):
     LIFETIME = "lifetime"
@@ -332,57 +449,69 @@ class OnDemandSeasonUserUploadQuotaSpaceShowingEnum(str, Enum):
 @dataclass_json
 @dataclass
 class OnDemandSeasonUserUploadQuotaSpace:
-    free: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'free' }})
-    max: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'max' }})
-    showing: OnDemandSeasonUserUploadQuotaSpaceShowingEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'showing' }})
-    used: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'used' }})
+    r"""OnDemandSeasonUserUploadQuotaSpace
+    Information about the user's upload space remaining for the current period.
+    """
+    
+    free: float = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('free') }})
+    max: float = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('max') }})
+    showing: OnDemandSeasonUserUploadQuotaSpaceShowingEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('showing') }})
+    used: float = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('used') }})
     
 
 @dataclass_json
 @dataclass
 class OnDemandSeasonUserUploadQuota:
-    lifetime: OnDemandSeasonUserUploadQuotaLifetime = field(default=None, metadata={'dataclasses_json': { 'field_name': 'lifetime' }})
-    periodic: OnDemandSeasonUserUploadQuotaPeriodic = field(default=None, metadata={'dataclasses_json': { 'field_name': 'periodic' }})
-    space: OnDemandSeasonUserUploadQuotaSpace = field(default=None, metadata={'dataclasses_json': { 'field_name': 'space' }})
+    r"""OnDemandSeasonUserUploadQuota
+    Appears only when the user has upload access and is looking at their own user record.
+    """
+    
+    lifetime: OnDemandSeasonUserUploadQuotaLifetime = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('lifetime') }})
+    periodic: OnDemandSeasonUserUploadQuotaPeriodic = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('periodic') }})
+    space: OnDemandSeasonUserUploadQuotaSpace = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('space') }})
     
 
 @dataclass_json
 @dataclass
 class OnDemandSeasonUserWebsites:
-    description: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
-    link: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'link' }})
-    name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
+    description: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('description') }})
+    link: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('link') }})
+    name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
     
 
 @dataclass_json
 @dataclass
 class OnDemandSeasonUser:
-    account: OnDemandSeasonUserAccountEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'account' }})
-    bio: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'bio' }})
-    content_filter: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'content_filter' }})
-    created_time: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'created_time' }})
-    email: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'email' }})
-    link: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'link' }})
-    location: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'location' }})
-    metadata: OnDemandSeasonUserMetadata = field(default=None, metadata={'dataclasses_json': { 'field_name': 'metadata' }})
-    name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    pictures: picture.Picture = field(default=None, metadata={'dataclasses_json': { 'field_name': 'pictures' }})
-    preferences: Optional[OnDemandSeasonUserPreferences] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'preferences' }})
-    resource_key: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'resource_key' }})
-    upload_quota: OnDemandSeasonUserUploadQuota = field(default=None, metadata={'dataclasses_json': { 'field_name': 'upload_quota' }})
-    uri: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'uri' }})
-    websites: List[OnDemandSeasonUserWebsites] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'websites' }})
+    r"""OnDemandSeasonUser
+    The creator of this On Demand page.
+    """
+    
+    account: OnDemandSeasonUserAccountEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('account') }})
+    bio: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('bio') }})
+    created_time: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('created_time') }})
+    link: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('link') }})
+    location: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('location') }})
+    metadata: OnDemandSeasonUserMetadata = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('metadata') }})
+    name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    pictures: Picture = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('pictures') }})
+    resource_key: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('resource_key') }})
+    upload_quota: OnDemandSeasonUserUploadQuota = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('upload_quota') }})
+    uri: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('uri') }})
+    websites: List[OnDemandSeasonUserWebsites] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('websites') }})
+    content_filter: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('content_filter') }})
+    email: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('email') }})
+    preferences: Optional[OnDemandSeasonUserPreferences] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('preferences') }})
     
 
 @dataclass_json
 @dataclass
 class OnDemandSeason:
-    description: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
-    metadata: OnDemandSeasonMetadata = field(default=None, metadata={'dataclasses_json': { 'field_name': 'metadata' }})
-    name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    position: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'position' }})
-    resource_key: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'resource_key' }})
-    type: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
-    uri: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'uri' }})
-    user: OnDemandSeasonUser = field(default=None, metadata={'dataclasses_json': { 'field_name': 'user' }})
+    description: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('description') }})
+    metadata: OnDemandSeasonMetadata = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('metadata') }})
+    name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    position: float = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('position') }})
+    resource_key: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('resource_key') }})
+    type: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('type') }})
+    uri: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('uri') }})
+    user: OnDemandSeasonUser = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('user') }})
     

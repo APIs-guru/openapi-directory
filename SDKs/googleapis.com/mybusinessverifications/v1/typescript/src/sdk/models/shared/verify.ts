@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Verify
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Indicates that the location requires verification. Contains information about the current verification actions performed on the location.
 **/
 export class Verify extends SpeakeasyBase {
-  @Metadata({ data: "json, name=hasPendingVerification" })
+  @SpeakeasyMetadata({ data: "json, name=hasPendingVerification" })
   hasPendingVerification?: boolean;
 }

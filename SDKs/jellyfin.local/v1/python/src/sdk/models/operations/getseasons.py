@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from typing import Any,List,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class GetSeasonsPathParams:
-    series_id: str = field(default=None, metadata={'path_param': { 'field_name': 'seriesId', 'style': 'simple', 'explode': False }})
+    series_id: str = field(metadata={'path_param': { 'field_name': 'seriesId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -23,20 +24,20 @@ class GetSeasonsQueryParams:
 
 @dataclass
 class GetSeasonsSecurity:
-    custom_authentication: shared.SchemeCustomAuthentication = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    custom_authentication: shared.SchemeCustomAuthentication = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
     
 
 @dataclass
 class GetSeasonsRequest:
-    path_params: GetSeasonsPathParams = field(default=None)
-    query_params: GetSeasonsQueryParams = field(default=None)
-    security: GetSeasonsSecurity = field(default=None)
+    path_params: GetSeasonsPathParams = field()
+    query_params: GetSeasonsQueryParams = field()
+    security: GetSeasonsSecurity = field()
     
 
 @dataclass
 class GetSeasonsResponse:
+    content_type: str = field()
+    status_code: int = field()
     base_item_dto_query_result: Optional[shared.BaseItemDtoQueryResult] = field(default=None)
-    content_type: str = field(default=None)
     problem_details: Optional[dict[str, Any]] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Position } from "./position";
 // StackTraceElement
 /**
@@ -34,15 +34,15 @@ var StackTraceElement = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=position" }),
+        SpeakeasyMetadata({ data: "json, name=position" }),
         __metadata("design:type", Position)
     ], StackTraceElement.prototype, "position", void 0);
     __decorate([
-        Metadata({ data: "json, name=routine" }),
+        SpeakeasyMetadata({ data: "json, name=routine" }),
         __metadata("design:type", String)
     ], StackTraceElement.prototype, "routine", void 0);
     __decorate([
-        Metadata({ data: "json, name=step" }),
+        SpeakeasyMetadata({ data: "json, name=step" }),
         __metadata("design:type", String)
     ], StackTraceElement.prototype, "step", void 0);
     return StackTraceElement;

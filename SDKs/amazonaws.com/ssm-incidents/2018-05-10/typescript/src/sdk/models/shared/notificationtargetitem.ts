@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // NotificationTargetItem
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The SNS targets that are notified when updates are made to an incident.
 **/
 export class NotificationTargetItem extends SpeakeasyBase {
-  @Metadata({ data: "json, name=snsTopicArn" })
+  @SpeakeasyMetadata({ data: "json, name=snsTopicArn" })
   snsTopicArn?: string;
 }

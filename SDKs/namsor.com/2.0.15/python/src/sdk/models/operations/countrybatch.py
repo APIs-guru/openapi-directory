@@ -5,18 +5,18 @@ from sdk.models import shared
 
 @dataclass
 class CountryBatchSecurity:
-    api_key: shared.SchemeAPIKey = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    api_key: shared.SchemeAPIKey = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
     
 
 @dataclass
 class CountryBatchRequest:
+    security: CountryBatchSecurity = field()
     request: Optional[shared.BatchPersonalNameIn] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: CountryBatchSecurity = field(default=None)
     
 
 @dataclass
 class CountryBatchResponse:
+    content_type: str = field()
+    status_code: int = field()
     batch_personal_name_geo_out: Optional[shared.BatchPersonalNameGeoOut] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

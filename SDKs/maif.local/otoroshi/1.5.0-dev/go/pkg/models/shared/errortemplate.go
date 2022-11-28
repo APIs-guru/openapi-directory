@@ -1,5 +1,7 @@
 package shared
 
+// ErrorTemplate
+// Error templates for a service descriptor
 type ErrorTemplate struct {
 	Messages            map[string]string `json:"messages"`
 	ServiceID           string            `json:"serviceId"`

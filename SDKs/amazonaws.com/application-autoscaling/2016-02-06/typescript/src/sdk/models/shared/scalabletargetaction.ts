@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ScalableTargetAction
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Represents the minimum and maximum capacity for a scheduled action.
 **/
 export class ScalableTargetAction extends SpeakeasyBase {
-  @Metadata({ data: "json, name=MaxCapacity" })
+  @SpeakeasyMetadata({ data: "json, name=MaxCapacity" })
   maxCapacity?: number;
 
-  @Metadata({ data: "json, name=MinCapacity" })
+  @SpeakeasyMetadata({ data: "json, name=MinCapacity" })
   minCapacity?: number;
 }

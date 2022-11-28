@@ -1,104 +1,105 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class RegisterCertificateQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=setAsActive" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=setAsActive" })
   setAsActive?: boolean;
 }
 
 
 export class RegisterCertificateHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
 export enum RegisterCertificateRequestBodyStatusEnum {
-    Active = "ACTIVE"
-,    Inactive = "INACTIVE"
-,    Revoked = "REVOKED"
-,    PendingTransfer = "PENDING_TRANSFER"
-,    RegisterInactive = "REGISTER_INACTIVE"
-,    PendingActivation = "PENDING_ACTIVATION"
+    Active = "ACTIVE",
+    Inactive = "INACTIVE",
+    Revoked = "REVOKED",
+    PendingTransfer = "PENDING_TRANSFER",
+    RegisterInactive = "REGISTER_INACTIVE",
+    PendingActivation = "PENDING_ACTIVATION"
 }
 
 
 export class RegisterCertificateRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=caCertificatePem" })
+  @SpeakeasyMetadata({ data: "json, name=caCertificatePem" })
   caCertificatePem?: string;
 
-  @Metadata({ data: "json, name=certificatePem" })
+  @SpeakeasyMetadata({ data: "json, name=certificatePem" })
   certificatePem: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: RegisterCertificateRequestBodyStatusEnum;
 }
 
 
 export class RegisterCertificateRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: RegisterCertificateQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: RegisterCertificateHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: RegisterCertificateRequestBody;
 }
 
 
 export class RegisterCertificateResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   certificateConflictException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   certificateStateException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   certificateValidationException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   internalFailureException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidRequestException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   registerCertificateResponse?: shared.RegisterCertificateResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   resourceAlreadyExistsException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   serviceUnavailableException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   throttlingException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   unauthorizedException?: any;
 }

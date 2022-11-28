@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleIamV1GetPolicyOptions } from "./googleiamv1getpolicyoptions";
+
 
 
 // GoogleIamV1GetIamPolicyRequest
@@ -7,6 +8,6 @@ import { GoogleIamV1GetPolicyOptions } from "./googleiamv1getpolicyoptions";
  * Request message for `GetIamPolicy` method.
 **/
 export class GoogleIamV1GetIamPolicyRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=options" })
+  @SpeakeasyMetadata({ data: "json, name=options" })
   options?: GoogleIamV1GetPolicyOptions;
 }

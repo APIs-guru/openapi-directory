@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GlobalResourcesSharedModelsLanguage
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A language used for string translations.
 **/
 export class GlobalResourcesSharedModelsLanguage extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Description, form, name=Description;" })
+  @SpeakeasyMetadata({ data: "json, name=Description, form, name=Description;" })
   description: string;
 
-  @Metadata({ data: "json, name=IsDeleted, form, name=IsDeleted;" })
+  @SpeakeasyMetadata({ data: "json, name=IsDeleted, form, name=IsDeleted;" })
   isDeleted?: boolean;
 
-  @Metadata({ data: "json, name=LocaleId, form, name=LocaleId;" })
+  @SpeakeasyMetadata({ data: "json, name=LocaleId, form, name=LocaleId;" })
   localeId: number;
 }

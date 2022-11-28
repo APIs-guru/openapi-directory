@@ -1,11 +1,15 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import List
 from dataclasses_json import dataclass_json
-from . import fullproductupdaterequest
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class BulkImportRequest:
-    products: List[fullproductupdaterequest.FullProductUpdateRequest] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'products' }})
+    products: List[FullProductUpdateRequest] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('products') }})
     

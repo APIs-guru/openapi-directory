@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var UpdateMetricSetHeaders = /** @class */ (function (_super) {
     __extends(UpdateMetricSetHeaders, _super);
@@ -30,31 +30,31 @@ var UpdateMetricSetHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
         __metadata("design:type", String)
     ], UpdateMetricSetHeaders.prototype, "xAmzAlgorithm", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
         __metadata("design:type", String)
     ], UpdateMetricSetHeaders.prototype, "xAmzContentSha256", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
         __metadata("design:type", String)
     ], UpdateMetricSetHeaders.prototype, "xAmzCredential", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
         __metadata("design:type", String)
     ], UpdateMetricSetHeaders.prototype, "xAmzDate", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
         __metadata("design:type", String)
     ], UpdateMetricSetHeaders.prototype, "xAmzSecurityToken", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
         __metadata("design:type", String)
     ], UpdateMetricSetHeaders.prototype, "xAmzSignature", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
         __metadata("design:type", String)
     ], UpdateMetricSetHeaders.prototype, "xAmzSignedHeaders", void 0);
     return UpdateMetricSetHeaders;
@@ -77,23 +77,23 @@ var UpdateMetricSetRequestBodyMetricSource = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=AppFlowConfig" }),
+        SpeakeasyMetadata({ data: "json, name=AppFlowConfig" }),
         __metadata("design:type", shared.AppFlowConfig)
     ], UpdateMetricSetRequestBodyMetricSource.prototype, "appFlowConfig", void 0);
     __decorate([
-        Metadata({ data: "json, name=CloudWatchConfig" }),
+        SpeakeasyMetadata({ data: "json, name=CloudWatchConfig" }),
         __metadata("design:type", shared.CloudWatchConfig)
     ], UpdateMetricSetRequestBodyMetricSource.prototype, "cloudWatchConfig", void 0);
     __decorate([
-        Metadata({ data: "json, name=RDSSourceConfig" }),
+        SpeakeasyMetadata({ data: "json, name=RDSSourceConfig" }),
         __metadata("design:type", shared.RdsSourceConfig)
     ], UpdateMetricSetRequestBodyMetricSource.prototype, "rdsSourceConfig", void 0);
     __decorate([
-        Metadata({ data: "json, name=RedshiftSourceConfig" }),
+        SpeakeasyMetadata({ data: "json, name=RedshiftSourceConfig" }),
         __metadata("design:type", shared.RedshiftSourceConfig)
     ], UpdateMetricSetRequestBodyMetricSource.prototype, "redshiftSourceConfig", void 0);
     __decorate([
-        Metadata({ data: "json, name=S3SourceConfig" }),
+        SpeakeasyMetadata({ data: "json, name=S3SourceConfig" }),
         __metadata("design:type", shared.S3SourceConfig)
     ], UpdateMetricSetRequestBodyMetricSource.prototype, "s3SourceConfig", void 0);
     return UpdateMetricSetRequestBodyMetricSource;
@@ -109,11 +109,11 @@ var UpdateMetricSetRequestBodyTimestampColumn = /** @class */ (function (_super)
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=ColumnFormat" }),
+        SpeakeasyMetadata({ data: "json, name=ColumnFormat" }),
         __metadata("design:type", String)
     ], UpdateMetricSetRequestBodyTimestampColumn.prototype, "columnFormat", void 0);
     __decorate([
-        Metadata({ data: "json, name=ColumnName" }),
+        SpeakeasyMetadata({ data: "json, name=ColumnName" }),
         __metadata("design:type", String)
     ], UpdateMetricSetRequestBodyTimestampColumn.prototype, "columnName", void 0);
     return UpdateMetricSetRequestBodyTimestampColumn;
@@ -125,35 +125,35 @@ var UpdateMetricSetRequestBody = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=DimensionList" }),
+        SpeakeasyMetadata({ data: "json, name=DimensionList" }),
         __metadata("design:type", Array)
     ], UpdateMetricSetRequestBody.prototype, "dimensionList", void 0);
     __decorate([
-        Metadata({ data: "json, name=MetricList", elemType: shared.Metric }),
+        SpeakeasyMetadata({ data: "json, name=MetricList", elemType: shared.Metric }),
         __metadata("design:type", Array)
     ], UpdateMetricSetRequestBody.prototype, "metricList", void 0);
     __decorate([
-        Metadata({ data: "json, name=MetricSetArn" }),
+        SpeakeasyMetadata({ data: "json, name=MetricSetArn" }),
         __metadata("design:type", String)
     ], UpdateMetricSetRequestBody.prototype, "metricSetArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=MetricSetDescription" }),
+        SpeakeasyMetadata({ data: "json, name=MetricSetDescription" }),
         __metadata("design:type", String)
     ], UpdateMetricSetRequestBody.prototype, "metricSetDescription", void 0);
     __decorate([
-        Metadata({ data: "json, name=MetricSetFrequency" }),
+        SpeakeasyMetadata({ data: "json, name=MetricSetFrequency" }),
         __metadata("design:type", String)
     ], UpdateMetricSetRequestBody.prototype, "metricSetFrequency", void 0);
     __decorate([
-        Metadata({ data: "json, name=MetricSource" }),
+        SpeakeasyMetadata({ data: "json, name=MetricSource" }),
         __metadata("design:type", UpdateMetricSetRequestBodyMetricSource)
     ], UpdateMetricSetRequestBody.prototype, "metricSource", void 0);
     __decorate([
-        Metadata({ data: "json, name=Offset" }),
+        SpeakeasyMetadata({ data: "json, name=Offset" }),
         __metadata("design:type", Number)
     ], UpdateMetricSetRequestBody.prototype, "offset", void 0);
     __decorate([
-        Metadata({ data: "json, name=TimestampColumn" }),
+        SpeakeasyMetadata({ data: "json, name=TimestampColumn" }),
         __metadata("design:type", UpdateMetricSetRequestBodyTimestampColumn)
     ], UpdateMetricSetRequestBody.prototype, "timestampColumn", void 0);
     return UpdateMetricSetRequestBody;
@@ -165,11 +165,11 @@ var UpdateMetricSetRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", UpdateMetricSetHeaders)
     ], UpdateMetricSetRequest.prototype, "headers", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", UpdateMetricSetRequestBody)
     ], UpdateMetricSetRequest.prototype, "request", void 0);
     return UpdateMetricSetRequest;
@@ -181,35 +181,35 @@ var UpdateMetricSetResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], UpdateMetricSetResponse.prototype, "accessDeniedException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], UpdateMetricSetResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], UpdateMetricSetResponse.prototype, "internalServerException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], UpdateMetricSetResponse.prototype, "resourceNotFoundException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], UpdateMetricSetResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], UpdateMetricSetResponse.prototype, "tooManyRequestsException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.UpdateMetricSetResponse)
     ], UpdateMetricSetResponse.prototype, "updateMetricSetResponse", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], UpdateMetricSetResponse.prototype, "validationException", void 0);
     return UpdateMetricSetResponse;

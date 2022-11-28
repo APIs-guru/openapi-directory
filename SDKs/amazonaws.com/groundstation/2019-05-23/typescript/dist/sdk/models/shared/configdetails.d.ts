@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { AntennaDemodDecodeDetails } from "./antennademoddecodedetails";
 import { EndpointDetails } from "./endpointdetails";
 import { S3RecordingDetails } from "./s3recordingdetails";

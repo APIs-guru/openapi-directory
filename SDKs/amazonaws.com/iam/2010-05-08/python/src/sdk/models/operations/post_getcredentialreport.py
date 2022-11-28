@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostGetCredentialReportActionEnum(str, Enum):
     GET_CREDENTIAL_REPORT = "GetCredentialReport"
@@ -10,8 +14,8 @@ class PostGetCredentialReportVersionEnum(str, Enum):
 
 @dataclass
 class PostGetCredentialReportQueryParams:
-    action: PostGetCredentialReportActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostGetCredentialReportVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostGetCredentialReportActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostGetCredentialReportVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,13 +31,13 @@ class PostGetCredentialReportHeaders:
 
 @dataclass
 class PostGetCredentialReportRequest:
-    query_params: PostGetCredentialReportQueryParams = field(default=None)
-    headers: PostGetCredentialReportHeaders = field(default=None)
+    headers: PostGetCredentialReportHeaders = field()
+    query_params: PostGetCredentialReportQueryParams = field()
     
 
 @dataclass
 class PostGetCredentialReportResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

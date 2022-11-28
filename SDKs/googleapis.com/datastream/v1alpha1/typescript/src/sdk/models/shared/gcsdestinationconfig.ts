@@ -1,9 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { JsonFileFormat } from "./jsonfileformat";
 
+
 export enum GcsDestinationConfigGcsFileFormatEnum {
-    GcsFileFormatUnspecified = "GCS_FILE_FORMAT_UNSPECIFIED"
-,    Avro = "AVRO"
+    GcsFileFormatUnspecified = "GCS_FILE_FORMAT_UNSPECIFIED",
+    Avro = "AVRO"
 }
 
 
@@ -12,21 +13,21 @@ export enum GcsDestinationConfigGcsFileFormatEnum {
  * Google Cloud Storage destination configuration
 **/
 export class GcsDestinationConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=avroFileFormat" })
+  @SpeakeasyMetadata({ data: "json, name=avroFileFormat" })
   avroFileFormat?: Map<string, any>;
 
-  @Metadata({ data: "json, name=fileRotationInterval" })
+  @SpeakeasyMetadata({ data: "json, name=fileRotationInterval" })
   fileRotationInterval?: string;
 
-  @Metadata({ data: "json, name=fileRotationMb" })
+  @SpeakeasyMetadata({ data: "json, name=fileRotationMb" })
   fileRotationMb?: number;
 
-  @Metadata({ data: "json, name=gcsFileFormat" })
+  @SpeakeasyMetadata({ data: "json, name=gcsFileFormat" })
   gcsFileFormat?: GcsDestinationConfigGcsFileFormatEnum;
 
-  @Metadata({ data: "json, name=jsonFileFormat" })
+  @SpeakeasyMetadata({ data: "json, name=jsonFileFormat" })
   jsonFileFormat?: JsonFileFormat;
 
-  @Metadata({ data: "json, name=path" })
+  @SpeakeasyMetadata({ data: "json, name=path" })
   path?: string;
 }

@@ -16,6 +16,18 @@ const (
 	BackupStateEnumReady            BackupStateEnum = "READY"
 )
 
+// BackupInput
+// A backup of a Cloud Spanner database.
+type BackupInput struct {
+	Database       *string              `json:"database,omitempty"`
+	EncryptionInfo *EncryptionInfoInput `json:"encryptionInfo,omitempty"`
+	ExpireTime     *string              `json:"expireTime,omitempty"`
+	Name           *string              `json:"name,omitempty"`
+	VersionTime    *string              `json:"versionTime,omitempty"`
+}
+
+// Backup
+// A backup of a Cloud Spanner database.
 type Backup struct {
 	CreateTime           *string                    `json:"createTime,omitempty"`
 	Database             *string                    `json:"database,omitempty"`

@@ -1,35 +1,36 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetMonthCategoryByIdPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=budget_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=budget_id" })
   budgetId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=category_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=category_id" })
   categoryId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=month" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=month" })
   month: Date;
 }
 
 
 export class GetMonthCategoryByIdRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetMonthCategoryByIdPathParams;
 }
 
 
 export class GetMonthCategoryByIdResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   categoryResponse?: shared.CategoryResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   errorResponse?: shared.ErrorResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

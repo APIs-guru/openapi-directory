@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { GoogleFirebaseAppcheckV1DebugToken } from "./googlefirebaseappcheckv1debugtoken";
 /**
  * Response message for the ListDebugTokens method.

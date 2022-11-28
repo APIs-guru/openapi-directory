@@ -1,9 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RemediationConfiguration } from "./remediationconfiguration";
 
 
+
 export class DescribeRemediationConfigurationsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=RemediationConfigurations", elemType: shared.RemediationConfiguration })
+  @SpeakeasyMetadata({ data: "json, name=RemediationConfigurations", elemType: RemediationConfiguration })
   remediationConfigurations?: RemediationConfiguration[];
 }

@@ -12,12 +12,12 @@ class GetContactsQueryParams:
 
 @dataclass
 class GetContactsRequest:
-    query_params: GetContactsQueryParams = field(default=None)
+    query_params: GetContactsQueryParams = field()
     
 
 @dataclass
 class GetContactsResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     student_contacts_response: Optional[shared.StudentContactsResponse] = field(default=None)
     

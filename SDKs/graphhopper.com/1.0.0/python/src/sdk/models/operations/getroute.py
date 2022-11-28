@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 class GetRouteAlgorithmEnum(str, Enum):
@@ -14,6 +15,7 @@ class GetRouteCurbsideEnum(str, Enum):
 
 @dataclass
 class GetRouteQueryParams:
+    point: List[str] = field(metadata={'query_param': { 'field_name': 'point', 'style': 'form', 'explode': True }})
     algorithm: Optional[GetRouteAlgorithmEnum] = field(default=None, metadata={'query_param': { 'field_name': 'algorithm', 'style': 'form', 'explode': True }})
     alternative_route_max_paths: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'alternative_route.max_paths', 'style': 'form', 'explode': True }})
     alternative_route_max_share_factor: Optional[float] = field(default=None, metadata={'query_param': { 'field_name': 'alternative_route.max_share_factor', 'style': 'form', 'explode': True }})
@@ -32,7 +34,6 @@ class GetRouteQueryParams:
     locale: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'locale', 'style': 'form', 'explode': True }})
     optimize: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'optimize', 'style': 'form', 'explode': True }})
     pass_through: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'pass_through', 'style': 'form', 'explode': True }})
-    point: List[str] = field(default=None, metadata={'query_param': { 'field_name': 'point', 'style': 'form', 'explode': True }})
     point_hint: Optional[List[str]] = field(default=None, metadata={'query_param': { 'field_name': 'point_hint', 'style': 'form', 'explode': True }})
     points_encoded: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'points_encoded', 'style': 'form', 'explode': True }})
     round_trip_distance: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'round_trip.distance', 'style': 'form', 'explode': True }})
@@ -45,14 +46,14 @@ class GetRouteQueryParams:
 
 @dataclass
 class GetRouteRequest:
-    query_params: GetRouteQueryParams = field(default=None)
+    query_params: GetRouteQueryParams = field()
     
 
 @dataclass
 class GetRouteResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    headers: dict[str, List[str]] = field()
+    status_code: int = field()
     gh_error: Optional[shared.GhError] = field(default=None)
-    headers: dict[str, List[str]] = field(default=None)
     route_response: Optional[shared.RouteResponse] = field(default=None)
-    status_code: int = field(default=None)
     

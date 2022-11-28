@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ProvisionedThroughputDescription
@@ -6,18 +7,18 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Represents the provisioned throughput settings for the table, consisting of read and write capacity units, along with data about increases and decreases.
 **/
 export class ProvisionedThroughputDescription extends SpeakeasyBase {
-  @Metadata({ data: "json, name=LastDecreaseDateTime" })
+  @SpeakeasyMetadata({ data: "json, name=LastDecreaseDateTime" })
   lastDecreaseDateTime?: Date;
 
-  @Metadata({ data: "json, name=LastIncreaseDateTime" })
+  @SpeakeasyMetadata({ data: "json, name=LastIncreaseDateTime" })
   lastIncreaseDateTime?: Date;
 
-  @Metadata({ data: "json, name=NumberOfDecreasesToday" })
+  @SpeakeasyMetadata({ data: "json, name=NumberOfDecreasesToday" })
   numberOfDecreasesToday?: number;
 
-  @Metadata({ data: "json, name=ReadCapacityUnits" })
+  @SpeakeasyMetadata({ data: "json, name=ReadCapacityUnits" })
   readCapacityUnits?: number;
 
-  @Metadata({ data: "json, name=WriteCapacityUnits" })
+  @SpeakeasyMetadata({ data: "json, name=WriteCapacityUnits" })
   writeCapacityUnits?: number;
 }

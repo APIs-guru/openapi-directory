@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // PeeredVpc
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The peered VPC owned by the consumer project.
 **/
 export class PeeredVpc extends SpeakeasyBase {
-  @Metadata({ data: "json, name=networkVpc" })
+  @SpeakeasyMetadata({ data: "json, name=networkVpc" })
   networkVpc?: string;
 }

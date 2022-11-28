@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { StreamHealthEnum } from "./streamhealthenum";
 import { StreamStateEnum } from "./streamstateenum";
+
 
 
 // StreamSummary
@@ -8,18 +9,18 @@ import { StreamStateEnum } from "./streamstateenum";
  * Summary information about a stream.
 **/
 export class StreamSummary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=channelArn" })
+  @SpeakeasyMetadata({ data: "json, name=channelArn" })
   channelArn?: string;
 
-  @Metadata({ data: "json, name=health" })
+  @SpeakeasyMetadata({ data: "json, name=health" })
   health?: StreamHealthEnum;
 
-  @Metadata({ data: "json, name=startTime" })
+  @SpeakeasyMetadata({ data: "json, name=startTime" })
   startTime?: Date;
 
-  @Metadata({ data: "json, name=state" })
+  @SpeakeasyMetadata({ data: "json, name=state" })
   state?: StreamStateEnum;
 
-  @Metadata({ data: "json, name=viewerCount" })
+  @SpeakeasyMetadata({ data: "json, name=viewerCount" })
   viewerCount?: number;
 }

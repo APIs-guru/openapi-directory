@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ErrorResponse } from "./errorresponse";
+
 
 
 // S3ShareUploadStatus
@@ -7,15 +8,15 @@ import { ErrorResponse } from "./errorresponse";
  * S3 file upload status information
 **/
 export class S3ShareUploadStatus extends SpeakeasyBase {
-  @Metadata({ data: "json, name=errorDetails" })
+  @SpeakeasyMetadata({ data: "json, name=errorDetails" })
   errorDetails?: ErrorResponse;
 
-  @Metadata({ data: "json, name=fileName" })
+  @SpeakeasyMetadata({ data: "json, name=fileName" })
   fileName: string;
 
-  @Metadata({ data: "json, name=size" })
+  @SpeakeasyMetadata({ data: "json, name=size" })
   size?: number;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status: string;
 }

@@ -12,11 +12,6 @@ type DeletePolicyModuleQueryParams struct {
 	Pretty *bool `queryParam:"style=form,explode=true,name=pretty"`
 }
 
-type DeletePolicyModuleRequest struct {
-	PathParams  DeletePolicyModulePathParams
-	QueryParams DeletePolicyModuleQueryParams
-}
-
 type DeletePolicyModule200ApplicationJSONExplanationLocalsKey struct {
 	Type  *string `json:"type,omitempty"`
 	Value *string `json:"value,omitempty"`
@@ -37,6 +32,9 @@ type DeletePolicyModule200ApplicationJSONExplanationNodeTerms struct {
 	Value *string `json:"value,omitempty"`
 }
 
+// DeletePolicyModule200ApplicationJSONExplanationNode
+// The AST element associated with the evaluation step.
+// https://godoc.org/github.com/open-policy-agent/opa/ast - AST
 type DeletePolicyModule200ApplicationJSONExplanationNode struct {
 	Index *float64                                                   `json:"index,omitempty"`
 	Terms []DeletePolicyModule200ApplicationJSONExplanationNodeTerms `json:"terms,omitempty"`
@@ -106,6 +104,11 @@ type DeletePolicyModule200ApplicationJSON struct {
 	Metrics     *DeletePolicyModule200ApplicationJSONMetrics      `json:"metrics,omitempty"`
 	Provenance  *DeletePolicyModule200ApplicationJSONProvenance   `json:"provenance,omitempty"`
 	Result      []interface{}                                     `json:"result,omitempty"`
+}
+
+type DeletePolicyModuleRequest struct {
+	PathParams  DeletePolicyModulePathParams
+	QueryParams DeletePolicyModuleQueryParams
 }
 
 type DeletePolicyModuleResponse struct {

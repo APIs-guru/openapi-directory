@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ExportTaskExecutionInfo } from "./exporttaskexecutioninfo";
 import { ExportTaskStatus } from "./exporttaskstatus";
 // ExportTask
@@ -35,39 +35,39 @@ var ExportTask = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=destination" }),
+        SpeakeasyMetadata({ data: "json, name=destination" }),
         __metadata("design:type", String)
     ], ExportTask.prototype, "destination", void 0);
     __decorate([
-        Metadata({ data: "json, name=destinationPrefix" }),
+        SpeakeasyMetadata({ data: "json, name=destinationPrefix" }),
         __metadata("design:type", String)
     ], ExportTask.prototype, "destinationPrefix", void 0);
     __decorate([
-        Metadata({ data: "json, name=executionInfo" }),
+        SpeakeasyMetadata({ data: "json, name=executionInfo" }),
         __metadata("design:type", ExportTaskExecutionInfo)
     ], ExportTask.prototype, "executionInfo", void 0);
     __decorate([
-        Metadata({ data: "json, name=from" }),
+        SpeakeasyMetadata({ data: "json, name=from" }),
         __metadata("design:type", Number)
     ], ExportTask.prototype, "from", void 0);
     __decorate([
-        Metadata({ data: "json, name=logGroupName" }),
+        SpeakeasyMetadata({ data: "json, name=logGroupName" }),
         __metadata("design:type", String)
     ], ExportTask.prototype, "logGroupName", void 0);
     __decorate([
-        Metadata({ data: "json, name=status" }),
+        SpeakeasyMetadata({ data: "json, name=status" }),
         __metadata("design:type", ExportTaskStatus)
     ], ExportTask.prototype, "status", void 0);
     __decorate([
-        Metadata({ data: "json, name=taskId" }),
+        SpeakeasyMetadata({ data: "json, name=taskId" }),
         __metadata("design:type", String)
     ], ExportTask.prototype, "taskId", void 0);
     __decorate([
-        Metadata({ data: "json, name=taskName" }),
+        SpeakeasyMetadata({ data: "json, name=taskName" }),
         __metadata("design:type", String)
     ], ExportTask.prototype, "taskName", void 0);
     __decorate([
-        Metadata({ data: "json, name=to" }),
+        SpeakeasyMetadata({ data: "json, name=to" }),
         __metadata("design:type", Number)
     ], ExportTask.prototype, "to", void 0);
     return ExportTask;

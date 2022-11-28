@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ReportStatusTypeEnum } from "./reportstatustypeenum";
+
 
 
 // ReportFilter
@@ -7,6 +8,6 @@ import { ReportStatusTypeEnum } from "./reportstatustypeenum";
  *  A filter used to return reports with the status specified by the input <code>status</code> parameter. 
 **/
 export class ReportFilter extends SpeakeasyBase {
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: ReportStatusTypeEnum;
 }

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // LabelingJobS3DataSource
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The Amazon S3 location of the input data objects.
 **/
 export class LabelingJobS3DataSource extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ManifestS3Uri" })
+  @SpeakeasyMetadata({ data: "json, name=ManifestS3Uri" })
   manifestS3Uri: string;
 }

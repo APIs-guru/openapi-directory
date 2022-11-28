@@ -1,19 +1,20 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class TagBaseContract extends SpeakeasyBase {
-  @Metadata({ data: "json, name=additionalNames, form, name=additionalNames;" })
+  @SpeakeasyMetadata({ data: "json, name=additionalNames, form, name=additionalNames;" })
   additionalNames?: string;
 
-  @Metadata({ data: "json, name=categoryName, form, name=categoryName;" })
+  @SpeakeasyMetadata({ data: "json, name=categoryName, form, name=categoryName;" })
   categoryName?: string;
 
-  @Metadata({ data: "json, name=id, form, name=id;" })
+  @SpeakeasyMetadata({ data: "json, name=id, form, name=id;" })
   id?: number;
 
-  @Metadata({ data: "json, name=name, form, name=name;" })
+  @SpeakeasyMetadata({ data: "json, name=name, form, name=name;" })
   name?: string;
 
-  @Metadata({ data: "json, name=urlSlug, form, name=urlSlug;" })
+  @SpeakeasyMetadata({ data: "json, name=urlSlug, form, name=urlSlug;" })
   urlSlug?: string;
 }

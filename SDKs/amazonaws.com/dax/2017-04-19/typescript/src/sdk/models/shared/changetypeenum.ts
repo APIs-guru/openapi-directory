@@ -1,6 +1,7 @@
 
 
+
 export enum ChangeTypeEnum {
-    Immediate = "IMMEDIATE"
-,    RequiresReboot = "REQUIRES_REBOOT"
+    Immediate = "IMMEDIATE",
+    RequiresReboot = "REQUIRES_REBOOT"
 }

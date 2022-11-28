@@ -1,5 +1,7 @@
 package shared
 
+// UpdateUserPoolClientRequest
+// Represents the request to update the user pool client.
 type UpdateUserPoolClientRequest struct {
 	AccessTokenValidity             *int64                              `json:"AccessTokenValidity,omitempty"`
 	AllowedOAuthFlows               []OAuthFlowTypeEnum                 `json:"AllowedOAuthFlows,omitempty"`

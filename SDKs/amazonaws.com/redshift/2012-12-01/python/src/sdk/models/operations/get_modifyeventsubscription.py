@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 
 class GetModifyEventSubscriptionActionEnum(str, Enum):
     MODIFY_EVENT_SUBSCRIPTION = "ModifyEventSubscription"
@@ -10,15 +14,15 @@ class GetModifyEventSubscriptionVersionEnum(str, Enum):
 
 @dataclass
 class GetModifyEventSubscriptionQueryParams:
-    action: GetModifyEventSubscriptionActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetModifyEventSubscriptionActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    subscription_name: str = field(metadata={'query_param': { 'field_name': 'SubscriptionName', 'style': 'form', 'explode': True }})
+    version: GetModifyEventSubscriptionVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     enabled: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'Enabled', 'style': 'form', 'explode': True }})
     event_categories: Optional[List[str]] = field(default=None, metadata={'query_param': { 'field_name': 'EventCategories', 'style': 'form', 'explode': True }})
     severity: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'Severity', 'style': 'form', 'explode': True }})
     sns_topic_arn: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'SnsTopicArn', 'style': 'form', 'explode': True }})
     source_ids: Optional[List[str]] = field(default=None, metadata={'query_param': { 'field_name': 'SourceIds', 'style': 'form', 'explode': True }})
     source_type: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'SourceType', 'style': 'form', 'explode': True }})
-    subscription_name: str = field(default=None, metadata={'query_param': { 'field_name': 'SubscriptionName', 'style': 'form', 'explode': True }})
-    version: GetModifyEventSubscriptionVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -34,13 +38,13 @@ class GetModifyEventSubscriptionHeaders:
 
 @dataclass
 class GetModifyEventSubscriptionRequest:
-    query_params: GetModifyEventSubscriptionQueryParams = field(default=None)
-    headers: GetModifyEventSubscriptionHeaders = field(default=None)
+    headers: GetModifyEventSubscriptionHeaders = field()
+    query_params: GetModifyEventSubscriptionQueryParams = field()
     
 
 @dataclass
 class GetModifyEventSubscriptionResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

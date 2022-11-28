@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ControlSet } from "./controlset";
 import { FrameworkTypeEnum } from "./frameworktypeenum";
+
 
 
 // Framework
@@ -9,45 +9,45 @@ import { FrameworkTypeEnum } from "./frameworktypeenum";
  *  The file used to structure and automate Audit Manager assessments for a given compliance standard. 
 **/
 export class Framework extends SpeakeasyBase {
-  @Metadata({ data: "json, name=arn" })
+  @SpeakeasyMetadata({ data: "json, name=arn" })
   arn?: string;
 
-  @Metadata({ data: "json, name=complianceType" })
+  @SpeakeasyMetadata({ data: "json, name=complianceType" })
   complianceType?: string;
 
-  @Metadata({ data: "json, name=controlSets", elemType: shared.ControlSet })
+  @SpeakeasyMetadata({ data: "json, name=controlSets", elemType: ControlSet })
   controlSets?: ControlSet[];
 
-  @Metadata({ data: "json, name=controlSources" })
+  @SpeakeasyMetadata({ data: "json, name=controlSources" })
   controlSources?: string;
 
-  @Metadata({ data: "json, name=createdAt" })
+  @SpeakeasyMetadata({ data: "json, name=createdAt" })
   createdAt?: Date;
 
-  @Metadata({ data: "json, name=createdBy" })
+  @SpeakeasyMetadata({ data: "json, name=createdBy" })
   createdBy?: string;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=lastUpdatedAt" })
+  @SpeakeasyMetadata({ data: "json, name=lastUpdatedAt" })
   lastUpdatedAt?: Date;
 
-  @Metadata({ data: "json, name=lastUpdatedBy" })
+  @SpeakeasyMetadata({ data: "json, name=lastUpdatedBy" })
   lastUpdatedBy?: string;
 
-  @Metadata({ data: "json, name=logo" })
+  @SpeakeasyMetadata({ data: "json, name=logo" })
   logo?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=tags" })
+  @SpeakeasyMetadata({ data: "json, name=tags" })
   tags?: Map<string, string>;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: FrameworkTypeEnum;
 }

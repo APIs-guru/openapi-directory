@@ -1,16 +1,21 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import metricdimension
-from . import metricstatistic_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class CustomizedScalingMetricSpecification:
-    dimensions: Optional[List[metricdimension.MetricDimension]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Dimensions' }})
-    metric_name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'MetricName' }})
-    namespace: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Namespace' }})
-    statistic: metricstatistic_enum.MetricStatisticEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Statistic' }})
-    unit: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Unit' }})
+    r"""CustomizedScalingMetricSpecification
+    <p>Represents a CloudWatch metric of your choosing that can be used for dynamic scaling as part of a target tracking scaling policy. </p> <p>To create your customized scaling metric specification:</p> <ul> <li> <p>Add values for each required parameter from CloudWatch. You can use an existing metric, or a new metric that you create. To use your own metric, you must first publish the metric to CloudWatch. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/publishingMetrics.html\">Publish Custom Metrics</a> in the <i>Amazon CloudWatch User Guide</i>.</p> </li> <li> <p>Choose a metric that changes proportionally with capacity. The value of the metric should increase or decrease in inverse proportion to the number of capacity units. That is, the value of the metric should decrease when capacity increases. </p> </li> </ul> <p>For information about terminology, available metrics, or how to publish new metrics, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html\">Amazon CloudWatch Concepts</a> in the <i>Amazon CloudWatch User Guide</i>. </p>
+    """
+    
+    metric_name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('MetricName') }})
+    namespace: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Namespace') }})
+    statistic: MetricStatisticEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Statistic') }})
+    dimensions: Optional[List[MetricDimension]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Dimensions') }})
+    unit: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Unit') }})
     

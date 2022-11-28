@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class MemoryEventEventTypeEnum(str, Enum):
     MEMORY_EVENT_TYPE_UNSPECIFIED = "MEMORY_EVENT_TYPE_UNSPECIFIED"
@@ -14,7 +16,11 @@ class MemoryEventEventTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class MemoryEvent:
-    byte_count: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'byteCount' }})
-    create_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'createTime' }})
-    event_type: Optional[MemoryEventEventTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'eventType' }})
+    r"""MemoryEvent
+    An event related to memory and storage measurements.
+    """
+    
+    byte_count: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('byteCount') }})
+    create_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('createTime') }})
+    event_type: Optional[MemoryEventEventTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('eventType') }})
     

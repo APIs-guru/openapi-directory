@@ -1,9 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Assignment } from "./assignment";
 import { PackageRepository } from "./packagerepository";
 import { Package } from "./package";
 import { SoftwareRecipe } from "./softwarerecipe";
+
 
 
 // GuestPolicy
@@ -11,30 +11,58 @@ import { SoftwareRecipe } from "./softwarerecipe";
  * An OS Config resource representing a guest configuration policy. These policies represent the desired state for VM instance guest environments including packages to install or remove, package repository configurations, and software to install.
 **/
 export class GuestPolicy extends SpeakeasyBase {
-  @Metadata({ data: "json, name=assignment" })
+  @SpeakeasyMetadata({ data: "json, name=assignment" })
   assignment?: Assignment;
 
-  @Metadata({ data: "json, name=createTime" })
+  @SpeakeasyMetadata({ data: "json, name=createTime" })
   createTime?: string;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=etag" })
+  @SpeakeasyMetadata({ data: "json, name=etag" })
   etag?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=packageRepositories", elemType: shared.PackageRepository })
+  @SpeakeasyMetadata({ data: "json, name=packageRepositories", elemType: PackageRepository })
   packageRepositories?: PackageRepository[];
 
-  @Metadata({ data: "json, name=packages", elemType: shared.Package })
+  @SpeakeasyMetadata({ data: "json, name=packages", elemType: Package })
   packages?: Package[];
 
-  @Metadata({ data: "json, name=recipes", elemType: shared.SoftwareRecipe })
+  @SpeakeasyMetadata({ data: "json, name=recipes", elemType: SoftwareRecipe })
   recipes?: SoftwareRecipe[];
 
-  @Metadata({ data: "json, name=updateTime" })
+  @SpeakeasyMetadata({ data: "json, name=updateTime" })
   updateTime?: string;
+}
+
+
+// GuestPolicyInput
+/** 
+ * An OS Config resource representing a guest configuration policy. These policies represent the desired state for VM instance guest environments including packages to install or remove, package repository configurations, and software to install.
+**/
+export class GuestPolicyInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=assignment" })
+  assignment?: Assignment;
+
+  @SpeakeasyMetadata({ data: "json, name=description" })
+  description?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=etag" })
+  etag?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=name" })
+  name?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=packageRepositories", elemType: PackageRepository })
+  packageRepositories?: PackageRepository[];
+
+  @SpeakeasyMetadata({ data: "json, name=packages", elemType: Package })
+  packages?: Package[];
+
+  @SpeakeasyMetadata({ data: "json, name=recipes", elemType: SoftwareRecipe })
+  recipes?: SoftwareRecipe[];
 }

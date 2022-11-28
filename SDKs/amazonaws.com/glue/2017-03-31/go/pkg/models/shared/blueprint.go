@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// Blueprint
+// The details of a blueprint.
 type Blueprint struct {
 	BlueprintLocation        *string               `json:"BlueprintLocation,omitempty"`
 	BlueprintServiceLocation *string               `json:"BlueprintServiceLocation,omitempty"`

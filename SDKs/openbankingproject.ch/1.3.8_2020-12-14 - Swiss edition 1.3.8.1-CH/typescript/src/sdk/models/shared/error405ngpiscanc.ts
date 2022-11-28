@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { HrefType } from "./hreftype";
 import { TppMessage405PisCanc } from "./tppmessage405piscanc";
+
 
 
 // Error405NgPisCanc
@@ -10,9 +10,9 @@ import { TppMessage405PisCanc } from "./tppmessage405piscanc";
  * 
 **/
 export class Error405NgPisCanc extends SpeakeasyBase {
-  @Metadata({ data: "json, name=_links", elemType: shared.HrefType })
+  @SpeakeasyMetadata({ data: "json, name=_links", elemType: HrefType })
   links?: Map<string, HrefType>;
 
-  @Metadata({ data: "json, name=tppMessages", elemType: shared.TppMessage405PisCanc })
+  @SpeakeasyMetadata({ data: "json, name=tppMessages", elemType: TppMessage405PisCanc })
   tppMessages?: TppMessage405PisCanc[];
 }

@@ -49,6 +49,8 @@ type AuthorizationSimpleUser struct {
 	URL               string  `json:"url"`
 }
 
+// Authorization
+// The authorization for an OAuth app, GitHub App, or a Personal Access Token.
 type Authorization struct {
 	App            AuthorizationApp                 `json:"app"`
 	CreatedAt      time.Time                        `json:"created_at"`

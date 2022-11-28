@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ImageEntity } from "./imageentity";
-import { ImageEntity } from "./imageentity";
+
 
 
 // StyleEntity
@@ -8,15 +8,15 @@ import { ImageEntity } from "./imageentity";
  * Show Style
 **/
 export class StyleEntity extends SpeakeasyBase {
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: number;
 
-  @Metadata({ data: "json, name=logo" })
+  @SpeakeasyMetadata({ data: "json, name=logo" })
   logo?: ImageEntity;
 
-  @Metadata({ data: "json, name=path" })
+  @SpeakeasyMetadata({ data: "json, name=path" })
   path?: string;
 
-  @Metadata({ data: "json, name=thumbnail" })
+  @SpeakeasyMetadata({ data: "json, name=thumbnail" })
   thumbnail?: ImageEntity;
 }

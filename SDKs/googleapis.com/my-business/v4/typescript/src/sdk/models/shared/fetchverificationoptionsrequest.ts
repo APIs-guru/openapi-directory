@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ServiceBusinessContext } from "./servicebusinesscontext";
+
 
 
 // FetchVerificationOptionsRequest
@@ -7,9 +8,9 @@ import { ServiceBusinessContext } from "./servicebusinesscontext";
  * Request message for Verifications.FetchVerificationOptions.
 **/
 export class FetchVerificationOptionsRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=context" })
+  @SpeakeasyMetadata({ data: "json, name=context" })
   context?: ServiceBusinessContext;
 
-  @Metadata({ data: "json, name=languageCode" })
+  @SpeakeasyMetadata({ data: "json, name=languageCode" })
   languageCode?: string;
 }

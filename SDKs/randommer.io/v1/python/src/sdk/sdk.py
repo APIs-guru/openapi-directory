@@ -1,7 +1,10 @@
-import warnings
+
+
 import requests
 from sdk.models import operations
 from . import utils
+
+
 
 
 SERVERS = [
@@ -10,30 +13,50 @@ SERVERS = [
 
 
 class SDK:
-    client = requests.Session()
-    server_url = SERVERS[0]
+    
+
+    _client: requests.Session
+    _security_client: requests.Session
+    
+    _server_url: str = SERVERS[0]
+    _language: str = "python"
+    _sdk_version: str = "0.0.1"
+    _gen_version: str = "internal"
+
+    def __init__(self) -> None:
+        self._client = requests.Session()
+        self._security_client = requests.Session()
+        
+
 
     def config_server_url(self, server_url: str, params: dict[str, str]):
-        if not params is None:
-            self.server_url = utils.replace_parameters(server_url, params)
+        if params is not None:
+            self._server_url = utils.replace_parameters(server_url, params)
         else:
-            self.server_url = server_url
-            
+            self._server_url = server_url
+
+        
     
 
+    def config_client(self, client: requests.Session):
+        self._client = client
+        
+    
+    
     
     def get_api_card(self, request: operations.GetAPICardRequest) -> operations.GetAPICardResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get Card
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/Card"
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -46,15 +69,17 @@ class SDK:
 
     
     def get_api_card_types(self, request: operations.GetAPICardTypesRequest) -> operations.GetAPICardTypesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get available card types
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/Card/Types"
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -67,15 +92,14 @@ class SDK:
 
     
     def get_api_misc_cultures(self, request: operations.GetAPIMiscCulturesRequest) -> operations.GetAPIMiscCulturesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/Misc/Cultures"
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -88,17 +112,15 @@ class SDK:
 
     
     def get_api_misc_random_address(self, request: operations.GetAPIMiscRandomAddressRequest) -> operations.GetAPIMiscRandomAddressResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/Misc/Random-Address"
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -111,17 +133,18 @@ class SDK:
 
     
     def get_api_name(self, request: operations.GetAPINameRequest) -> operations.GetAPINameResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get name
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/Name"
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -134,17 +157,18 @@ class SDK:
 
     
     def get_api_name_suggestions(self, request: operations.GetAPINameSuggestionsRequest) -> operations.GetAPINameSuggestionsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get business name suggestions
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/Name/Suggestions"
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -157,15 +181,17 @@ class SDK:
 
     
     def get_api_phone_countries(self, request: operations.GetAPIPhoneCountriesRequest) -> operations.GetAPIPhoneCountriesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get available countries
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/Phone/Countries"
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -178,17 +204,18 @@ class SDK:
 
     
     def get_api_phone_generate(self, request: operations.GetAPIPhoneGenerateRequest) -> operations.GetAPIPhoneGenerateResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get bulk telephone numbers for a country
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/Phone/Generate"
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -201,17 +228,18 @@ class SDK:
 
     
     def get_api_phone_validate(self, request: operations.GetAPIPhoneValidateRequest) -> operations.GetAPIPhoneValidateResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Validate a phone number
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/Phone/Validate"
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -224,15 +252,17 @@ class SDK:
 
     
     def get_api_social_number(self, request: operations.GetAPISocialNumberRequest) -> operations.GetAPISocialNumberResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Generate a social security number
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/SocialNumber"
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -245,17 +275,18 @@ class SDK:
 
     
     def get_api_text_lorem_ipsum(self, request: operations.GetAPITextLoremIpsumRequest) -> operations.GetAPITextLoremIpsumResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Generate lorem ipsum
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/Text/LoremIpsum"
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -268,17 +299,18 @@ class SDK:
 
     
     def get_api_text_password(self, request: operations.GetAPITextPasswordRequest) -> operations.GetAPITextPasswordResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Generate password
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/Text/Password"
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -291,24 +323,23 @@ class SDK:
 
     
     def post_api_social_number(self, request: operations.PostAPISocialNumberRequest) -> operations.PostAPISocialNumberResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Validate VAT/identity numbers
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/SocialNumber"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -321,22 +352,22 @@ class SDK:
 
     
     def post_api_text_humanize(self, request: operations.PostAPITextHumanizeRequest) -> operations.PostAPITextHumanizeResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Humanize text
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/Text/Humanize"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -349,24 +380,23 @@ class SDK:
 
     
     def post_api_text_transform(self, request: operations.PostAPITextTransformRequest) -> operations.PostAPITextTransformResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Transform text
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/Text/Transform"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 

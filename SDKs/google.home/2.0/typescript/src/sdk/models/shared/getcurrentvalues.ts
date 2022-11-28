@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class Getcurrentvalues extends SpeakeasyBase {
-  @Metadata({ data: "json, name=endpoint_enabled" })
+  @SpeakeasyMetadata({ data: "json, name=endpoint_enabled" })
   endpointEnabled: boolean;
 
-  @Metadata({ data: "json, name=hotword_enabled" })
+  @SpeakeasyMetadata({ data: "json, name=hotword_enabled" })
   hotwordEnabled: boolean;
 }

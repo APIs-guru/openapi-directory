@@ -1,12 +1,18 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import offlinestorestatusvalue_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class OfflineStoreStatus:
-    blocked_reason: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'BlockedReason' }})
-    status: offlinestorestatusvalue_enum.OfflineStoreStatusValueEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Status' }})
+    r"""OfflineStoreStatus
+    The status of <code>OfflineStore</code>.
+    """
+    
+    status: OfflineStoreStatusValueEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Status') }})
+    blocked_reason: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('BlockedReason') }})
     

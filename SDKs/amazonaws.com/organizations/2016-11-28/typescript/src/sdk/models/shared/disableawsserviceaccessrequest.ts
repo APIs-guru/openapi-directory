@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DisableAwsServiceAccessRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ServicePrincipal" })
+  @SpeakeasyMetadata({ data: "json, name=ServicePrincipal" })
   servicePrincipal: string;
 }

@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum FirewallRuleConfigActionEnum {
-    Accept = "ACCEPT"
-,    Drop = "DROP"
+    Accept = "ACCEPT",
+    Drop = "DROP"
 }
 
 
@@ -12,17 +13,17 @@ export enum FirewallRuleConfigActionEnum {
  * 
 **/
 export class FirewallRuleConfigAddresses extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ipv4" })
+  @SpeakeasyMetadata({ data: "json, name=ipv4" })
   ipv4?: string[];
 
-  @Metadata({ data: "json, name=ipv6" })
+  @SpeakeasyMetadata({ data: "json, name=ipv6" })
   ipv6?: string[];
 }
 
 export enum FirewallRuleConfigProtocolEnum {
-    Tcp = "TCP"
-,    Udp = "UDP"
-,    Icmp = "ICMP"
+    Tcp = "TCP",
+    Udp = "UDP",
+    Icmp = "ICMP"
 }
 
 
@@ -32,21 +33,21 @@ export enum FirewallRuleConfigProtocolEnum {
  * 
 **/
 export class FirewallRuleConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=action" })
+  @SpeakeasyMetadata({ data: "json, name=action" })
   action?: FirewallRuleConfigActionEnum;
 
-  @Metadata({ data: "json, name=addresses" })
+  @SpeakeasyMetadata({ data: "json, name=addresses" })
   addresses?: FirewallRuleConfigAddresses;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=label" })
+  @SpeakeasyMetadata({ data: "json, name=label" })
   label?: string;
 
-  @Metadata({ data: "json, name=ports" })
+  @SpeakeasyMetadata({ data: "json, name=ports" })
   ports?: string;
 
-  @Metadata({ data: "json, name=protocol" })
+  @SpeakeasyMetadata({ data: "json, name=protocol" })
   protocol: FirewallRuleConfigProtocolEnum;
 }

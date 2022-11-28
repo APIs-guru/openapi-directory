@@ -1,47 +1,48 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class UpdateTimerPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=timerId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=timerId" })
   timerId: string;
 }
 
 
-export class UpdateTimerRequests extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/*+json" })
-  timerInfoDto?: shared.TimerInfoDto;
+export class UpdateTimerRequestsInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "request, media_type=application/*+json" })
+  timerInfoDto?: shared.TimerInfoDtoInput;
 
-  @Metadata({ data: "request, media_type=application/json" })
-  timerInfoDto1?: shared.TimerInfoDto;
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  timerInfoDto1?: shared.TimerInfoDtoInput;
 
-  @Metadata({ data: "request, media_type=text/json" })
-  timerInfoDto2?: shared.TimerInfoDto;
+  @SpeakeasyMetadata({ data: "request, media_type=text/json" })
+  timerInfoDto2?: shared.TimerInfoDtoInput;
 }
 
 
 export class UpdateTimerSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
   customAuthentication: shared.SchemeCustomAuthentication;
 }
 
 
 export class UpdateTimerRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: UpdateTimerPathParams;
 
-  @Metadata()
-  request?: UpdateTimerRequests;
+  @SpeakeasyMetadata()
+  request?: UpdateTimerRequestsInput;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: UpdateTimerSecurity;
 }
 
 
 export class UpdateTimerResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

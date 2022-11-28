@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AwsVpcConfiguration } from "./awsvpcconfiguration";
+
 
 
 // NetworkConfiguration
@@ -7,6 +8,6 @@ import { AwsVpcConfiguration } from "./awsvpcconfiguration";
  * This structure specifies the network configuration for an ECS task.
 **/
 export class NetworkConfiguration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=awsvpcConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=awsvpcConfiguration" })
   awsvpcConfiguration?: AwsVpcConfiguration;
 }

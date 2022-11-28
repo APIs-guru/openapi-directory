@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SearchedArtifact } from "./searchedartifact";
+
 
 
 // ArtifactSearchResults
@@ -8,9 +8,9 @@ import { SearchedArtifact } from "./searchedartifact";
  * Describes the response received when searching for artifacts.
 **/
 export class ArtifactSearchResults extends SpeakeasyBase {
-  @Metadata({ data: "json, name=artifacts", elemType: shared.SearchedArtifact })
+  @SpeakeasyMetadata({ data: "json, name=artifacts", elemType: SearchedArtifact })
   artifacts: SearchedArtifact[];
 
-  @Metadata({ data: "json, name=count" })
+  @SpeakeasyMetadata({ data: "json, name=count" })
   count: number;
 }

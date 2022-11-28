@@ -1,14 +1,19 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import documentreaderconfig
-from . import inputformat_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class InputDataConfig:
-    document_reader_config: Optional[documentreaderconfig.DocumentReaderConfig] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'DocumentReaderConfig' }})
-    input_format: Optional[inputformat_enum.InputFormatEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'InputFormat' }})
-    s3_uri: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'S3Uri' }})
+    r"""InputDataConfig
+    The input properties for an inference job.
+    """
+    
+    s3_uri: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('S3Uri') }})
+    document_reader_config: Optional[DocumentReaderConfig] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('DocumentReaderConfig') }})
+    input_format: Optional[InputFormatEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('InputFormat') }})
     

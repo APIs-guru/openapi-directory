@@ -1,18 +1,19 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum GoogleCloudDataplexV1JobServiceEnum {
-    ServiceUnspecified = "SERVICE_UNSPECIFIED"
-,    Dataproc = "DATAPROC"
+    ServiceUnspecified = "SERVICE_UNSPECIFIED",
+    Dataproc = "DATAPROC"
 }
 
 export enum GoogleCloudDataplexV1JobStateEnum {
-    StateUnspecified = "STATE_UNSPECIFIED"
-,    Running = "RUNNING"
-,    Cancelling = "CANCELLING"
-,    Cancelled = "CANCELLED"
-,    Succeeded = "SUCCEEDED"
-,    Failed = "FAILED"
-,    Aborted = "ABORTED"
+    StateUnspecified = "STATE_UNSPECIFIED",
+    Running = "RUNNING",
+    Cancelling = "CANCELLING",
+    Cancelled = "CANCELLED",
+    Succeeded = "SUCCEEDED",
+    Failed = "FAILED",
+    Aborted = "ABORTED"
 }
 
 
@@ -21,30 +22,30 @@ export enum GoogleCloudDataplexV1JobStateEnum {
  * A job represents an instance of a task.
 **/
 export class GoogleCloudDataplexV1Job extends SpeakeasyBase {
-  @Metadata({ data: "json, name=endTime" })
+  @SpeakeasyMetadata({ data: "json, name=endTime" })
   endTime?: string;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=retryCount" })
+  @SpeakeasyMetadata({ data: "json, name=retryCount" })
   retryCount?: number;
 
-  @Metadata({ data: "json, name=service" })
+  @SpeakeasyMetadata({ data: "json, name=service" })
   service?: GoogleCloudDataplexV1JobServiceEnum;
 
-  @Metadata({ data: "json, name=serviceJob" })
+  @SpeakeasyMetadata({ data: "json, name=serviceJob" })
   serviceJob?: string;
 
-  @Metadata({ data: "json, name=startTime" })
+  @SpeakeasyMetadata({ data: "json, name=startTime" })
   startTime?: string;
 
-  @Metadata({ data: "json, name=state" })
+  @SpeakeasyMetadata({ data: "json, name=state" })
   state?: GoogleCloudDataplexV1JobStateEnum;
 
-  @Metadata({ data: "json, name=uid" })
+  @SpeakeasyMetadata({ data: "json, name=uid" })
   uid?: string;
 }

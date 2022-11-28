@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 export declare class GetCapabilitiesPathParams extends SpeakeasyBase {
     versionNumber: number;
 }

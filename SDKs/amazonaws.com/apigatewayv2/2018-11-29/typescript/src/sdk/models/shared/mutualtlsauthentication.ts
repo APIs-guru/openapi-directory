@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class MutualTlsAuthentication extends SpeakeasyBase {
-  @Metadata({ data: "json, name=TruststoreUri" })
+  @SpeakeasyMetadata({ data: "json, name=TruststoreUri" })
   truststoreUri?: string;
 
-  @Metadata({ data: "json, name=TruststoreVersion" })
+  @SpeakeasyMetadata({ data: "json, name=TruststoreVersion" })
   truststoreVersion?: string;
 
-  @Metadata({ data: "json, name=TruststoreWarnings" })
+  @SpeakeasyMetadata({ data: "json, name=TruststoreWarnings" })
   truststoreWarnings?: string[];
 }

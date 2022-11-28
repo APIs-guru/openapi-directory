@@ -13,6 +13,8 @@ const (
 	AssignmentSubtypeEnumReassigned         AssignmentSubtypeEnum = "REASSIGNED"
 )
 
+// Assignment
+// A comment with an assignment.
 type Assignment struct {
 	AssignedUser *User                  `json:"assignedUser,omitempty"`
 	Subtype      *AssignmentSubtypeEnum `json:"subtype,omitempty"`

@@ -10,6 +10,8 @@ const (
 	GoogleCloudRecommendationengineV1beta1ProductDetailStockStateEnumBackorder             GoogleCloudRecommendationengineV1beta1ProductDetailStockStateEnum = "BACKORDER"
 )
 
+// GoogleCloudRecommendationengineV1beta1ProductDetail
+// Detailed product information associated with a user event.
 type GoogleCloudRecommendationengineV1beta1ProductDetail struct {
 	AvailableQuantity *int32                                                             `json:"availableQuantity,omitempty"`
 	CurrencyCode      *string                                                            `json:"currencyCode,omitempty"`

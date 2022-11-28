@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetsEmployeePayStatementSummaryDataBasedOnTheSpecifiedYearAndCheckDatePathParams = /** @class */ (function (_super) {
     __extends(GetsEmployeePayStatementSummaryDataBasedOnTheSpecifiedYearAndCheckDatePathParams, _super);
@@ -30,19 +30,19 @@ var GetsEmployeePayStatementSummaryDataBasedOnTheSpecifiedYearAndCheckDatePathPa
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=checkDate" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=checkDate" }),
         __metadata("design:type", String)
     ], GetsEmployeePayStatementSummaryDataBasedOnTheSpecifiedYearAndCheckDatePathParams.prototype, "checkDate", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=companyId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=companyId" }),
         __metadata("design:type", String)
     ], GetsEmployeePayStatementSummaryDataBasedOnTheSpecifiedYearAndCheckDatePathParams.prototype, "companyId", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=employeeId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=employeeId" }),
         __metadata("design:type", String)
     ], GetsEmployeePayStatementSummaryDataBasedOnTheSpecifiedYearAndCheckDatePathParams.prototype, "employeeId", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=year" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=year" }),
         __metadata("design:type", String)
     ], GetsEmployeePayStatementSummaryDataBasedOnTheSpecifiedYearAndCheckDatePathParams.prototype, "year", void 0);
     return GetsEmployeePayStatementSummaryDataBasedOnTheSpecifiedYearAndCheckDatePathParams;
@@ -54,19 +54,19 @@ var GetsEmployeePayStatementSummaryDataBasedOnTheSpecifiedYearAndCheckDateQueryP
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=dettypes" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=dettypes" }),
         __metadata("design:type", String)
     ], GetsEmployeePayStatementSummaryDataBasedOnTheSpecifiedYearAndCheckDateQueryParams.prototype, "dettypes", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=includetotalcount" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=includetotalcount" }),
         __metadata("design:type", Boolean)
     ], GetsEmployeePayStatementSummaryDataBasedOnTheSpecifiedYearAndCheckDateQueryParams.prototype, "includetotalcount", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=pagenumber" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=pagenumber" }),
         __metadata("design:type", Number)
     ], GetsEmployeePayStatementSummaryDataBasedOnTheSpecifiedYearAndCheckDateQueryParams.prototype, "pagenumber", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=pagesize" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=pagesize" }),
         __metadata("design:type", Number)
     ], GetsEmployeePayStatementSummaryDataBasedOnTheSpecifiedYearAndCheckDateQueryParams.prototype, "pagesize", void 0);
     return GetsEmployeePayStatementSummaryDataBasedOnTheSpecifiedYearAndCheckDateQueryParams;
@@ -78,7 +78,7 @@ var GetsEmployeePayStatementSummaryDataBasedOnTheSpecifiedYearAndCheckDateSecuri
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemePaylocityAuth)
     ], GetsEmployeePayStatementSummaryDataBasedOnTheSpecifiedYearAndCheckDateSecurity.prototype, "paylocityAuth", void 0);
     return GetsEmployeePayStatementSummaryDataBasedOnTheSpecifiedYearAndCheckDateSecurity;
@@ -90,15 +90,15 @@ var GetsEmployeePayStatementSummaryDataBasedOnTheSpecifiedYearAndCheckDateReques
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetsEmployeePayStatementSummaryDataBasedOnTheSpecifiedYearAndCheckDatePathParams)
     ], GetsEmployeePayStatementSummaryDataBasedOnTheSpecifiedYearAndCheckDateRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetsEmployeePayStatementSummaryDataBasedOnTheSpecifiedYearAndCheckDateQueryParams)
     ], GetsEmployeePayStatementSummaryDataBasedOnTheSpecifiedYearAndCheckDateRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetsEmployeePayStatementSummaryDataBasedOnTheSpecifiedYearAndCheckDateSecurity)
     ], GetsEmployeePayStatementSummaryDataBasedOnTheSpecifiedYearAndCheckDateRequest.prototype, "security", void 0);
     return GetsEmployeePayStatementSummaryDataBasedOnTheSpecifiedYearAndCheckDateRequest;
@@ -110,19 +110,19 @@ var GetsEmployeePayStatementSummaryDataBasedOnTheSpecifiedYearAndCheckDateRespon
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetsEmployeePayStatementSummaryDataBasedOnTheSpecifiedYearAndCheckDateResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetsEmployeePayStatementSummaryDataBasedOnTheSpecifiedYearAndCheckDateResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata({ elemType: shared.Error }),
+        SpeakeasyMetadata({ elemType: shared.Error }),
         __metadata("design:type", Array)
     ], GetsEmployeePayStatementSummaryDataBasedOnTheSpecifiedYearAndCheckDateResponse.prototype, "errors", void 0);
     __decorate([
-        Metadata({ elemType: shared.PayStatementSummary }),
+        SpeakeasyMetadata({ elemType: shared.PayStatementSummary }),
         __metadata("design:type", Array)
     ], GetsEmployeePayStatementSummaryDataBasedOnTheSpecifiedYearAndCheckDateResponse.prototype, "payStatementSummaries", void 0);
     return GetsEmployeePayStatementSummaryDataBasedOnTheSpecifiedYearAndCheckDateResponse;

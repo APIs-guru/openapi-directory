@@ -1,6 +1,7 @@
 
 
+
 export enum AltEnum {
-    Csv = "csv"
-,    Json = "json"
+    Csv = "csv",
+    Json = "json"
 }

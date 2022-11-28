@@ -1,86 +1,87 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetFileFromUriIdPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=uri" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=uri" })
   uri: string;
 }
 
 
 export class GetFileFromUriIdSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=bearer" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" })
   bearerAuth: shared.SchemeBearerAuth;
 }
 
 
-export class GetFileFromUriIdRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: GetFileFromUriIdPathParams;
-
-  @Metadata()
-  security: GetFileFromUriIdSecurity;
-}
-
-
 export class GetFileFromUriId400ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=error" })
+  @SpeakeasyMetadata({ data: "json, name=error" })
   error?: string;
 
-  @Metadata({ data: "json, name=error_description" })
+  @SpeakeasyMetadata({ data: "json, name=error_description" })
   errorDescription?: string;
 }
 
 
 export class GetFileFromUriId401ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=error" })
+  @SpeakeasyMetadata({ data: "json, name=error" })
   error?: string;
 
-  @Metadata({ data: "json, name=error_description" })
+  @SpeakeasyMetadata({ data: "json, name=error_description" })
   errorDescription?: string;
 }
 
 
 export class GetFileFromUriId404ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=error" })
+  @SpeakeasyMetadata({ data: "json, name=error" })
   error?: string;
 
-  @Metadata({ data: "json, name=error_description" })
+  @SpeakeasyMetadata({ data: "json, name=error_description" })
   errorDescription?: string;
 }
 
 
+export class GetFileFromUriIdRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: GetFileFromUriIdPathParams;
+
+  @SpeakeasyMetadata()
+  security: GetFileFromUriIdSecurity;
+}
+
+
 export class GetFileFromUriIdResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getFileFromUriId200ApplicationPdfString?: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getFileFromUriId200ImageJpegString?: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getFileFromUriId200ImageJpgString?: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getFileFromUriId200ImagePngString?: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getFileFromUriId400ApplicationJsonObject?: GetFileFromUriId400ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getFileFromUriId401ApplicationJsonObject?: GetFileFromUriId401ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getFileFromUriId404ApplicationJsonObject?: GetFileFromUriId404ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getFileFromUriId500ApplicationJsonOneOf?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getFileFromUriId503ApplicationJsonOneOf?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

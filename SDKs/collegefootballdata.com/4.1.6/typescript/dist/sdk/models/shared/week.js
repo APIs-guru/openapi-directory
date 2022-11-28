@@ -22,30 +22,30 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var Week = /** @class */ (function (_super) {
     __extends(Week, _super);
     function Week() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=firstGameStart" }),
+        SpeakeasyMetadata({ data: "json, name=firstGameStart" }),
         __metadata("design:type", String)
     ], Week.prototype, "firstGameStart", void 0);
     __decorate([
-        Metadata({ data: "json, name=lastGameStart" }),
+        SpeakeasyMetadata({ data: "json, name=lastGameStart" }),
         __metadata("design:type", String)
     ], Week.prototype, "lastGameStart", void 0);
     __decorate([
-        Metadata({ data: "json, name=season" }),
+        SpeakeasyMetadata({ data: "json, name=season" }),
         __metadata("design:type", Number)
     ], Week.prototype, "season", void 0);
     __decorate([
-        Metadata({ data: "json, name=seasonType" }),
+        SpeakeasyMetadata({ data: "json, name=seasonType" }),
         __metadata("design:type", String)
     ], Week.prototype, "seasonType", void 0);
     __decorate([
-        Metadata({ data: "json, name=week" }),
+        SpeakeasyMetadata({ data: "json, name=week" }),
         __metadata("design:type", Number)
     ], Week.prototype, "week", void 0);
     return Week;

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // TflApiPresentationEntitiesBikePointOccupancy
@@ -6,18 +7,18 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Bike point occupancy
 **/
 export class TflApiPresentationEntitiesBikePointOccupancy extends SpeakeasyBase {
-  @Metadata({ data: "json, name=bikesCount" })
+  @SpeakeasyMetadata({ data: "json, name=bikesCount" })
   bikesCount?: number;
 
-  @Metadata({ data: "json, name=emptyDocks" })
+  @SpeakeasyMetadata({ data: "json, name=emptyDocks" })
   emptyDocks?: number;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=totalDocks" })
+  @SpeakeasyMetadata({ data: "json, name=totalDocks" })
   totalDocks?: number;
 }

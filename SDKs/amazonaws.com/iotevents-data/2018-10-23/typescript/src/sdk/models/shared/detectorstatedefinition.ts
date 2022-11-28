@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TimerDefinition } from "./timerdefinition";
 import { VariableDefinition } from "./variabledefinition";
+
 
 
 // DetectorStateDefinition
@@ -9,12 +9,12 @@ import { VariableDefinition } from "./variabledefinition";
  * The new state, variable values, and timer settings of the detector (instance).
 **/
 export class DetectorStateDefinition extends SpeakeasyBase {
-  @Metadata({ data: "json, name=stateName" })
+  @SpeakeasyMetadata({ data: "json, name=stateName" })
   stateName: string;
 
-  @Metadata({ data: "json, name=timers", elemType: shared.TimerDefinition })
+  @SpeakeasyMetadata({ data: "json, name=timers", elemType: TimerDefinition })
   timers: TimerDefinition[];
 
-  @Metadata({ data: "json, name=variables", elemType: shared.VariableDefinition })
+  @SpeakeasyMetadata({ data: "json, name=variables", elemType: VariableDefinition })
   variables: VariableDefinition[];
 }

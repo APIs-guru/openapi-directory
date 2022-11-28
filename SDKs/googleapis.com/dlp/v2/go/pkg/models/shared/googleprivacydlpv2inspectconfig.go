@@ -19,6 +19,8 @@ const (
 	GooglePrivacyDlpV2InspectConfigMinLikelihoodEnumVeryLikely            GooglePrivacyDlpV2InspectConfigMinLikelihoodEnum = "VERY_LIKELY"
 )
 
+// GooglePrivacyDlpV2InspectConfig
+// Configuration description of the scanning process. When used with redactContent only info_types and min_likelihood are currently used.
 type GooglePrivacyDlpV2InspectConfig struct {
 	ContentOptions   []GooglePrivacyDlpV2InspectConfigContentOptionsEnum `json:"contentOptions,omitempty"`
 	CustomInfoTypes  []GooglePrivacyDlpV2CustomInfoType                  `json:"customInfoTypes,omitempty"`

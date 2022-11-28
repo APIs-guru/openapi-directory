@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { TrustedAdvisorCheckDescription } from "./trustedadvisorcheckdescription";
 // DescribeTrustedAdvisorChecksResponse
 /**
  * Information about the Trusted Advisor checks returned by the <a>DescribeTrustedAdvisorChecks</a> operation.
@@ -34,7 +34,7 @@ var DescribeTrustedAdvisorChecksResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=checks", elemType: shared.TrustedAdvisorCheckDescription }),
+        SpeakeasyMetadata({ data: "json, name=checks", elemType: TrustedAdvisorCheckDescription }),
         __metadata("design:type", Array)
     ], DescribeTrustedAdvisorChecksResponse.prototype, "checks", void 0);
     return DescribeTrustedAdvisorChecksResponse;

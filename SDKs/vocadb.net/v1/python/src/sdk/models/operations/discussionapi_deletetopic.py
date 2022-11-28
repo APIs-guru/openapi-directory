@@ -4,16 +4,16 @@ from dataclasses import dataclass, field
 
 @dataclass
 class DiscussionAPIDeleteTopicPathParams:
-    topic_id: int = field(default=None, metadata={'path_param': { 'field_name': 'topicId', 'style': 'simple', 'explode': False }})
+    topic_id: int = field(metadata={'path_param': { 'field_name': 'topicId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class DiscussionAPIDeleteTopicRequest:
-    path_params: DiscussionAPIDeleteTopicPathParams = field(default=None)
+    path_params: DiscussionAPIDeleteTopicPathParams = field()
     
 
 @dataclass
 class DiscussionAPIDeleteTopicResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

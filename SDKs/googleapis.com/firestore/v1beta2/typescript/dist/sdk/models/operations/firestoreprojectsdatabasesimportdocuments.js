@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var FirestoreProjectsDatabasesImportDocumentsPathParams = /** @class */ (function (_super) {
     __extends(FirestoreProjectsDatabasesImportDocumentsPathParams, _super);
@@ -30,7 +30,7 @@ var FirestoreProjectsDatabasesImportDocumentsPathParams = /** @class */ (functio
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=name" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=name" }),
         __metadata("design:type", String)
     ], FirestoreProjectsDatabasesImportDocumentsPathParams.prototype, "name", void 0);
     return FirestoreProjectsDatabasesImportDocumentsPathParams;
@@ -42,47 +42,47 @@ var FirestoreProjectsDatabasesImportDocumentsQueryParams = /** @class */ (functi
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=$.xgafv" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=$.xgafv" }),
         __metadata("design:type", String)
     ], FirestoreProjectsDatabasesImportDocumentsQueryParams.prototype, "dollarXgafv", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=access_token" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=access_token" }),
         __metadata("design:type", String)
     ], FirestoreProjectsDatabasesImportDocumentsQueryParams.prototype, "accessToken", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=alt" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=alt" }),
         __metadata("design:type", String)
     ], FirestoreProjectsDatabasesImportDocumentsQueryParams.prototype, "alt", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=callback" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=callback" }),
         __metadata("design:type", String)
     ], FirestoreProjectsDatabasesImportDocumentsQueryParams.prototype, "callback", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=fields" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=fields" }),
         __metadata("design:type", String)
     ], FirestoreProjectsDatabasesImportDocumentsQueryParams.prototype, "fields", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=key" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=key" }),
         __metadata("design:type", String)
     ], FirestoreProjectsDatabasesImportDocumentsQueryParams.prototype, "key", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=oauth_token" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=oauth_token" }),
         __metadata("design:type", String)
     ], FirestoreProjectsDatabasesImportDocumentsQueryParams.prototype, "oauthToken", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=prettyPrint" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=prettyPrint" }),
         __metadata("design:type", Boolean)
     ], FirestoreProjectsDatabasesImportDocumentsQueryParams.prototype, "prettyPrint", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=quotaUser" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=quotaUser" }),
         __metadata("design:type", String)
     ], FirestoreProjectsDatabasesImportDocumentsQueryParams.prototype, "quotaUser", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=uploadType" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=uploadType" }),
         __metadata("design:type", String)
     ], FirestoreProjectsDatabasesImportDocumentsQueryParams.prototype, "uploadType", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=upload_protocol" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=upload_protocol" }),
         __metadata("design:type", String)
     ], FirestoreProjectsDatabasesImportDocumentsQueryParams.prototype, "uploadProtocol", void 0);
     return FirestoreProjectsDatabasesImportDocumentsQueryParams;
@@ -94,11 +94,11 @@ var FirestoreProjectsDatabasesImportDocumentsSecurityOption1 = /** @class */ (fu
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2)
     ], FirestoreProjectsDatabasesImportDocumentsSecurityOption1.prototype, "oauth2", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2c)
     ], FirestoreProjectsDatabasesImportDocumentsSecurityOption1.prototype, "oauth2c", void 0);
     return FirestoreProjectsDatabasesImportDocumentsSecurityOption1;
@@ -110,11 +110,11 @@ var FirestoreProjectsDatabasesImportDocumentsSecurityOption2 = /** @class */ (fu
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2)
     ], FirestoreProjectsDatabasesImportDocumentsSecurityOption2.prototype, "oauth2", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2c)
     ], FirestoreProjectsDatabasesImportDocumentsSecurityOption2.prototype, "oauth2c", void 0);
     return FirestoreProjectsDatabasesImportDocumentsSecurityOption2;
@@ -126,11 +126,11 @@ var FirestoreProjectsDatabasesImportDocumentsSecurity = /** @class */ (function 
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, option=true" }),
+        SpeakeasyMetadata({ data: "security, option=true" }),
         __metadata("design:type", FirestoreProjectsDatabasesImportDocumentsSecurityOption1)
     ], FirestoreProjectsDatabasesImportDocumentsSecurity.prototype, "option1", void 0);
     __decorate([
-        Metadata({ data: "security, option=true" }),
+        SpeakeasyMetadata({ data: "security, option=true" }),
         __metadata("design:type", FirestoreProjectsDatabasesImportDocumentsSecurityOption2)
     ], FirestoreProjectsDatabasesImportDocumentsSecurity.prototype, "option2", void 0);
     return FirestoreProjectsDatabasesImportDocumentsSecurity;
@@ -142,19 +142,19 @@ var FirestoreProjectsDatabasesImportDocumentsRequest = /** @class */ (function (
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", FirestoreProjectsDatabasesImportDocumentsPathParams)
     ], FirestoreProjectsDatabasesImportDocumentsRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", FirestoreProjectsDatabasesImportDocumentsQueryParams)
     ], FirestoreProjectsDatabasesImportDocumentsRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", shared.GoogleFirestoreAdminV1beta2ImportDocumentsRequest)
     ], FirestoreProjectsDatabasesImportDocumentsRequest.prototype, "request", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", FirestoreProjectsDatabasesImportDocumentsSecurity)
     ], FirestoreProjectsDatabasesImportDocumentsRequest.prototype, "security", void 0);
     return FirestoreProjectsDatabasesImportDocumentsRequest;
@@ -166,15 +166,15 @@ var FirestoreProjectsDatabasesImportDocumentsResponse = /** @class */ (function 
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], FirestoreProjectsDatabasesImportDocumentsResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.GoogleLongrunningOperation)
     ], FirestoreProjectsDatabasesImportDocumentsResponse.prototype, "googleLongrunningOperation", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], FirestoreProjectsDatabasesImportDocumentsResponse.prototype, "statusCode", void 0);
     return FirestoreProjectsDatabasesImportDocumentsResponse;

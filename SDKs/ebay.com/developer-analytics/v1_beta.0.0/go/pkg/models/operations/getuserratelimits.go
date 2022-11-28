@@ -13,13 +13,13 @@ type GetUserRateLimitsSecurity struct {
 	APIAuth shared.SchemeAPIAuth `security:"scheme,type=oauth2"`
 }
 
+type GetUserRateLimits500ApplicationJSON struct {
+	Errors []shared.Error `json:"errors,omitempty"`
+}
+
 type GetUserRateLimitsRequest struct {
 	QueryParams GetUserRateLimitsQueryParams
 	Security    GetUserRateLimitsSecurity
-}
-
-type GetUserRateLimits500ApplicationJSON struct {
-	Errors []shared.Error `json:"errors,omitempty"`
 }
 
 type GetUserRateLimitsResponse struct {

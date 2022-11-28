@@ -1,104 +1,93 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetFilesV3FoldersSearchDoSearchQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=after" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=after" })
   after?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=before" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=before" })
   before?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=createdAt" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=createdAt" })
   createdAt?: Date;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=createdAtGte" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=createdAtGte" })
   createdAtGte?: Date;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=createdAtLte" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=createdAtLte" })
   createdAtLte?: Date;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=id" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=id" })
   id?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=limit" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=limit" })
   limit?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=name" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=name" })
   name?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=parentFolderId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=parentFolderId" })
   parentFolderId?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=path" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=path" })
   path?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=properties" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=properties" })
   properties?: string[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=sort" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sort" })
   sort?: string[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=updatedAt" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=updatedAt" })
   updatedAt?: Date;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=updatedAtGte" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=updatedAtGte" })
   updatedAtGte?: Date;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=updatedAtLte" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=updatedAtLte" })
   updatedAtLte?: Date;
 }
 
 
-export class GetFilesV3FoldersSearchDoSearchSecurityOption1 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
-  oauth2Legacy: shared.SchemeOauth2Legacy;
-}
-
-
-export class GetFilesV3FoldersSearchDoSearchSecurityOption2 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=query" })
-  hapikey: shared.SchemeHapikey;
-}
-
-
-export class GetFilesV3FoldersSearchDoSearchSecurityOption3 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
-  oauth2Legacy: shared.SchemeOauth2Legacy;
-}
-
-
 export class GetFilesV3FoldersSearchDoSearchSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, option=true" })
-  option1?: GetFilesV3FoldersSearchDoSearchSecurityOption1;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  privateAppsLegacy?: shared.SchemePrivateAppsLegacy;
 
-  @Metadata({ data: "security, option=true" })
-  option2?: GetFilesV3FoldersSearchDoSearchSecurityOption2;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
+  oauth2Legacy?: shared.SchemeOauth2Legacy;
 
-  @Metadata({ data: "security, option=true" })
-  option3?: GetFilesV3FoldersSearchDoSearchSecurityOption3;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=query" })
+  hapikey?: shared.SchemeHapikey;
+
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  privateAppsLegacy1?: shared.SchemePrivateAppsLegacy;
+
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
+  oauth2Legacy1?: shared.SchemeOauth2Legacy;
 }
 
 
 export class GetFilesV3FoldersSearchDoSearchRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetFilesV3FoldersSearchDoSearchQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: GetFilesV3FoldersSearchDoSearchSecurity;
 }
 
 
 export class GetFilesV3FoldersSearchDoSearchResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   collectionResponseFolder?: shared.CollectionResponseFolder;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

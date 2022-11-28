@@ -1,9 +1,20 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum HttpsTriggerSecurityLevelEnum {
-    SecurityLevelUnspecified = "SECURITY_LEVEL_UNSPECIFIED"
-,    SecureAlways = "SECURE_ALWAYS"
-,    SecureOptional = "SECURE_OPTIONAL"
+    SecurityLevelUnspecified = "SECURITY_LEVEL_UNSPECIFIED",
+    SecureAlways = "SECURE_ALWAYS",
+    SecureOptional = "SECURE_OPTIONAL"
+}
+
+
+// HttpsTriggerInput
+/** 
+ * Describes HttpsTrigger, could be used to connect web hooks to function.
+**/
+export class HttpsTriggerInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=securityLevel" })
+  securityLevel?: HttpsTriggerSecurityLevelEnum;
 }
 
 
@@ -12,9 +23,9 @@ export enum HttpsTriggerSecurityLevelEnum {
  * Describes HttpsTrigger, could be used to connect web hooks to function.
 **/
 export class HttpsTrigger extends SpeakeasyBase {
-  @Metadata({ data: "json, name=securityLevel" })
+  @SpeakeasyMetadata({ data: "json, name=securityLevel" })
   securityLevel?: HttpsTriggerSecurityLevelEnum;
 
-  @Metadata({ data: "json, name=url" })
+  @SpeakeasyMetadata({ data: "json, name=url" })
   url?: string;
 }

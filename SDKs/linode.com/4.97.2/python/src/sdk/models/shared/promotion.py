@@ -1,6 +1,11 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class PromotionServiceTypeEnum(str, Enum):
     ALL = "all"
@@ -21,12 +26,24 @@ class PromotionServiceTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class Promotion:
-    credit_monthly_cap: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'credit_monthly_cap' }})
-    credit_remaining: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'credit_remaining' }})
-    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
-    expire_dt: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'expire_dt' }})
-    image_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'image_url' }})
-    service_type: Optional[PromotionServiceTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'service_type' }})
-    summary: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'summary' }})
-    this_month_credit_remaining: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'this_month_credit_remaining' }})
+    r"""Promotion
+    Promotions generally
+    offer a set amount of credit that can be used toward your Linode
+    services, and the promotion expires after a specified date. As well,
+    a monthly cap on the promotional offer is set.
+    
+    Simply put, a promotion offers a certain amount of credit every
+    month, until either the expiration date is passed, or until the total
+    promotional credit is used, whichever comes first.
+    
+    """
+    
+    credit_monthly_cap: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('credit_monthly_cap') }})
+    credit_remaining: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('credit_remaining') }})
+    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('description') }})
+    expire_dt: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('expire_dt') }})
+    image_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('image_url') }})
+    service_type: Optional[PromotionServiceTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('service_type') }})
+    summary: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('summary') }})
+    this_month_credit_remaining: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('this_month_credit_remaining') }})
     

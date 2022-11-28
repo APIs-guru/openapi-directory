@@ -1,34 +1,35 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class PostStripeGatewayDeveloperDeveloperIdAccountsPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=developerId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=developerId" })
   developerId: string;
 }
 
 
 export class PostStripeGatewayDeveloperDeveloperIdAccountsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=redirectUrl" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=redirectUrl" })
   redirectUrl: string;
 }
 
 
 export class PostStripeGatewayDeveloperDeveloperIdAccountsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: PostStripeGatewayDeveloperDeveloperIdAccountsPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: PostStripeGatewayDeveloperDeveloperIdAccountsQueryParams;
 }
 
 
 export class PostStripeGatewayDeveloperDeveloperIdAccountsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

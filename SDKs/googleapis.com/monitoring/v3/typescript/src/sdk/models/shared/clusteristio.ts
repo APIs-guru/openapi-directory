@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ClusterIstio
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Istio service scoped to a single Kubernetes cluster. Learn more at https://istio.io. Clusters running OSS Istio will have their services ingested as this type.
 **/
 export class ClusterIstio extends SpeakeasyBase {
-  @Metadata({ data: "json, name=clusterName" })
+  @SpeakeasyMetadata({ data: "json, name=clusterName" })
   clusterName?: string;
 
-  @Metadata({ data: "json, name=location" })
+  @SpeakeasyMetadata({ data: "json, name=location" })
   location?: string;
 
-  @Metadata({ data: "json, name=serviceName" })
+  @SpeakeasyMetadata({ data: "json, name=serviceName" })
   serviceName?: string;
 
-  @Metadata({ data: "json, name=serviceNamespace" })
+  @SpeakeasyMetadata({ data: "json, name=serviceNamespace" })
   serviceNamespace?: string;
 }

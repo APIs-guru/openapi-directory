@@ -1,14 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { EntityTypeEnum } from "./entitytypeenum";
 
 
+
 export class EntityIdWithTime extends SpeakeasyBase {
-  @Metadata({ data: "json, name=entity_id" })
+  @SpeakeasyMetadata({ data: "json, name=entity_id" })
   entityId?: string;
 
-  @Metadata({ data: "json, name=entity_type" })
+  @SpeakeasyMetadata({ data: "json, name=entity_type" })
   entityType?: EntityTypeEnum;
 
-  @Metadata({ data: "json, name=time" })
+  @SpeakeasyMetadata({ data: "json, name=time" })
   time?: number;
 }

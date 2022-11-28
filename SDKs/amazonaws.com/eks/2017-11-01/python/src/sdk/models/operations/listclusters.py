@@ -1,4 +1,7 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,List,Optional
 from sdk.models import shared
 
@@ -23,17 +26,17 @@ class ListClustersHeaders:
 
 @dataclass
 class ListClustersRequest:
-    query_params: ListClustersQueryParams = field(default=None)
-    headers: ListClustersHeaders = field(default=None)
+    headers: ListClustersHeaders = field()
+    query_params: ListClustersQueryParams = field()
     
 
 @dataclass
 class ListClustersResponse:
+    content_type: str = field()
+    status_code: int = field()
     client_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     invalid_parameter_exception: Optional[Any] = field(default=None)
     list_clusters_response: Optional[shared.ListClustersResponse] = field(default=None)
     server_exception: Optional[Any] = field(default=None)
     service_unavailable_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

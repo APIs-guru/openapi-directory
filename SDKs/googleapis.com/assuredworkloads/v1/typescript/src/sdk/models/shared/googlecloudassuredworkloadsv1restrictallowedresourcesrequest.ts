@@ -1,9 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum GoogleCloudAssuredworkloadsV1RestrictAllowedResourcesRequestRestrictionTypeEnum {
-    RestrictionTypeUnspecified = "RESTRICTION_TYPE_UNSPECIFIED"
-,    AllowAllGcpResources = "ALLOW_ALL_GCP_RESOURCES"
-,    AllowCompliantResources = "ALLOW_COMPLIANT_RESOURCES"
+    RestrictionTypeUnspecified = "RESTRICTION_TYPE_UNSPECIFIED",
+    AllowAllGcpResources = "ALLOW_ALL_GCP_RESOURCES",
+    AllowCompliantResources = "ALLOW_COMPLIANT_RESOURCES",
+    AppendCompliantResources = "APPEND_COMPLIANT_RESOURCES"
 }
 
 
@@ -12,6 +14,6 @@ export enum GoogleCloudAssuredworkloadsV1RestrictAllowedResourcesRequestRestrict
  * Request for restricting list of available resources in Workload environment.
 **/
 export class GoogleCloudAssuredworkloadsV1RestrictAllowedResourcesRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=restrictionType" })
+  @SpeakeasyMetadata({ data: "json, name=restrictionType" })
   restrictionType?: GoogleCloudAssuredworkloadsV1RestrictAllowedResourcesRequestRestrictionTypeEnum;
 }

@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { PolicyBinding } from "./policybinding";
 // TenantProjectPolicy
 /**
  * Describes policy settings that can be applied to a newly created tenant project.
@@ -34,7 +34,7 @@ var TenantProjectPolicy = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=policyBindings", elemType: shared.PolicyBinding }),
+        SpeakeasyMetadata({ data: "json, name=policyBindings", elemType: PolicyBinding }),
         __metadata("design:type", Array)
     ], TenantProjectPolicy.prototype, "policyBindings", void 0);
     return TenantProjectPolicy;

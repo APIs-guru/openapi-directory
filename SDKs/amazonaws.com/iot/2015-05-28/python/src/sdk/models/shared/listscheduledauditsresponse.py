@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import scheduledauditmetadata
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ListScheduledAuditsResponse:
-    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'nextToken' }})
-    scheduled_audits: Optional[List[scheduledauditmetadata.ScheduledAuditMetadata]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'scheduledAudits' }})
+    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('nextToken') }})
+    scheduled_audits: Optional[List[ScheduledAuditMetadata]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('scheduledAudits') }})
     

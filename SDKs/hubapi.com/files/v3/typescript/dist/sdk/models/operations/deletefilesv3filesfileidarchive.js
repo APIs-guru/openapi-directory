@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var DeleteFilesV3FilesFileIdArchivePathParams = /** @class */ (function (_super) {
     __extends(DeleteFilesV3FilesFileIdArchivePathParams, _super);
@@ -30,49 +30,29 @@ var DeleteFilesV3FilesFileIdArchivePathParams = /** @class */ (function (_super)
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=fileId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=fileId" }),
         __metadata("design:type", String)
     ], DeleteFilesV3FilesFileIdArchivePathParams.prototype, "fileId", void 0);
     return DeleteFilesV3FilesFileIdArchivePathParams;
 }(SpeakeasyBase));
 export { DeleteFilesV3FilesFileIdArchivePathParams };
-var DeleteFilesV3FilesFileIdArchiveSecurityOption1 = /** @class */ (function (_super) {
-    __extends(DeleteFilesV3FilesFileIdArchiveSecurityOption1, _super);
-    function DeleteFilesV3FilesFileIdArchiveSecurityOption1() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=query" }),
-        __metadata("design:type", shared.SchemeHapikey)
-    ], DeleteFilesV3FilesFileIdArchiveSecurityOption1.prototype, "hapikey", void 0);
-    return DeleteFilesV3FilesFileIdArchiveSecurityOption1;
-}(SpeakeasyBase));
-export { DeleteFilesV3FilesFileIdArchiveSecurityOption1 };
-var DeleteFilesV3FilesFileIdArchiveSecurityOption2 = /** @class */ (function (_super) {
-    __extends(DeleteFilesV3FilesFileIdArchiveSecurityOption2, _super);
-    function DeleteFilesV3FilesFileIdArchiveSecurityOption2() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
-        __metadata("design:type", shared.SchemeOauth2Legacy)
-    ], DeleteFilesV3FilesFileIdArchiveSecurityOption2.prototype, "oauth2Legacy", void 0);
-    return DeleteFilesV3FilesFileIdArchiveSecurityOption2;
-}(SpeakeasyBase));
-export { DeleteFilesV3FilesFileIdArchiveSecurityOption2 };
 var DeleteFilesV3FilesFileIdArchiveSecurity = /** @class */ (function (_super) {
     __extends(DeleteFilesV3FilesFileIdArchiveSecurity, _super);
     function DeleteFilesV3FilesFileIdArchiveSecurity() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, option=true" }),
-        __metadata("design:type", DeleteFilesV3FilesFileIdArchiveSecurityOption1)
-    ], DeleteFilesV3FilesFileIdArchiveSecurity.prototype, "option1", void 0);
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=query" }),
+        __metadata("design:type", shared.SchemeHapikey)
+    ], DeleteFilesV3FilesFileIdArchiveSecurity.prototype, "hapikey", void 0);
     __decorate([
-        Metadata({ data: "security, option=true" }),
-        __metadata("design:type", DeleteFilesV3FilesFileIdArchiveSecurityOption2)
-    ], DeleteFilesV3FilesFileIdArchiveSecurity.prototype, "option2", void 0);
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        __metadata("design:type", shared.SchemePrivateAppsLegacy)
+    ], DeleteFilesV3FilesFileIdArchiveSecurity.prototype, "privateAppsLegacy", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
+        __metadata("design:type", shared.SchemeOauth2Legacy)
+    ], DeleteFilesV3FilesFileIdArchiveSecurity.prototype, "oauth2Legacy", void 0);
     return DeleteFilesV3FilesFileIdArchiveSecurity;
 }(SpeakeasyBase));
 export { DeleteFilesV3FilesFileIdArchiveSecurity };
@@ -82,11 +62,11 @@ var DeleteFilesV3FilesFileIdArchiveRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", DeleteFilesV3FilesFileIdArchivePathParams)
     ], DeleteFilesV3FilesFileIdArchiveRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", DeleteFilesV3FilesFileIdArchiveSecurity)
     ], DeleteFilesV3FilesFileIdArchiveRequest.prototype, "security", void 0);
     return DeleteFilesV3FilesFileIdArchiveRequest;
@@ -98,15 +78,15 @@ var DeleteFilesV3FilesFileIdArchiveResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], DeleteFilesV3FilesFileIdArchiveResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], DeleteFilesV3FilesFileIdArchiveResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], DeleteFilesV3FilesFileIdArchiveResponse.prototype, "statusCode", void 0);
     return DeleteFilesV3FilesFileIdArchiveResponse;

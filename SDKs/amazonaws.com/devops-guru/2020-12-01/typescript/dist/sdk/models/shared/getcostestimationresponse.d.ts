@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ServiceResourceCost } from "./serviceresourcecost";
 import { CostEstimationResourceCollectionFilter } from "./costestimationresourcecollectionfilter";
 import { CostEstimationStatusEnum } from "./costestimationstatusenum";

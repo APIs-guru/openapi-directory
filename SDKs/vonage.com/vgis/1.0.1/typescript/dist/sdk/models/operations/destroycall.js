@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var DestroyCallPathParams = /** @class */ (function (_super) {
     __extends(DestroyCallPathParams, _super);
@@ -30,7 +30,7 @@ var DestroyCallPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=id" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" }),
         __metadata("design:type", String)
     ], DestroyCallPathParams.prototype, "id", void 0);
     return DestroyCallPathParams;
@@ -42,7 +42,7 @@ var DestroyCallRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", DestroyCallPathParams)
     ], DestroyCallRequest.prototype, "pathParams", void 0);
     return DestroyCallRequest;
@@ -54,19 +54,19 @@ var DestroyCallResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ elemType: shared.Call }),
+        SpeakeasyMetadata({ elemType: shared.Call }),
         __metadata("design:type", Array)
     ], DestroyCallResponse.prototype, "calls", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], DestroyCallResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.ErrorResponse)
     ], DestroyCallResponse.prototype, "errorResponse", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], DestroyCallResponse.prototype, "statusCode", void 0);
     return DestroyCallResponse;

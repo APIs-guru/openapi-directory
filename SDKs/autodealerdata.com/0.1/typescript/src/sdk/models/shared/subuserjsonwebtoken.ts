@@ -1,22 +1,23 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class SubUserJsonWebToken extends SpeakeasyBase {
-  @Metadata({ data: "json, name=createdOn" })
+  @SpeakeasyMetadata({ data: "json, name=createdOn" })
   createdOn?: number;
 
-  @Metadata({ data: "json, name=domain" })
+  @SpeakeasyMetadata({ data: "json, name=domain" })
   domain: string;
 
-  @Metadata({ data: "json, name=endPoints" })
+  @SpeakeasyMetadata({ data: "json, name=endPoints" })
   endPoints?: string[];
 
-  @Metadata({ data: "json, name=expires" })
+  @SpeakeasyMetadata({ data: "json, name=expires" })
   expires?: number;
 
-  @Metadata({ data: "json, name=token" })
+  @SpeakeasyMetadata({ data: "json, name=token" })
   token: string;
 
-  @Metadata({ data: "json, name=uuid" })
+  @SpeakeasyMetadata({ data: "json, name=uuid" })
   uuid: string;
 }

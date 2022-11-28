@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CurrentRevision } from "./currentrevision";
 import { ExecutionDetails } from "./executiondetails";
+
 
 
 // PutThirdPartyJobSuccessResultInput
@@ -8,18 +9,18 @@ import { ExecutionDetails } from "./executiondetails";
  * Represents the input of a <code>PutThirdPartyJobSuccessResult</code> action.
 **/
 export class PutThirdPartyJobSuccessResultInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=clientToken" })
+  @SpeakeasyMetadata({ data: "json, name=clientToken" })
   clientToken: string;
 
-  @Metadata({ data: "json, name=continuationToken" })
+  @SpeakeasyMetadata({ data: "json, name=continuationToken" })
   continuationToken?: string;
 
-  @Metadata({ data: "json, name=currentRevision" })
+  @SpeakeasyMetadata({ data: "json, name=currentRevision" })
   currentRevision?: CurrentRevision;
 
-  @Metadata({ data: "json, name=executionDetails" })
+  @SpeakeasyMetadata({ data: "json, name=executionDetails" })
   executionDetails?: ExecutionDetails;
 
-  @Metadata({ data: "json, name=jobId" })
+  @SpeakeasyMetadata({ data: "json, name=jobId" })
   jobId: string;
 }

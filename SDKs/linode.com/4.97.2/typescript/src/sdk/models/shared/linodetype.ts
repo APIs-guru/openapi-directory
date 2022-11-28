@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // LinodeTypeAddonsBackupsPrice
@@ -6,10 +7,10 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Cost of enabling Backups for this Linode Type.
 **/
 export class LinodeTypeAddonsBackupsPrice extends SpeakeasyBase {
-  @Metadata({ data: "json, name=hourly" })
+  @SpeakeasyMetadata({ data: "json, name=hourly" })
   hourly?: number;
 
-  @Metadata({ data: "json, name=monthly" })
+  @SpeakeasyMetadata({ data: "json, name=monthly" })
   monthly?: number;
 }
 
@@ -20,7 +21,7 @@ export class LinodeTypeAddonsBackupsPrice extends SpeakeasyBase {
  * 
 **/
 export class LinodeTypeAddonsBackups extends SpeakeasyBase {
-  @Metadata({ data: "json, name=price" })
+  @SpeakeasyMetadata({ data: "json, name=price" })
   price?: LinodeTypeAddonsBackupsPrice;
 }
 
@@ -31,16 +32,16 @@ export class LinodeTypeAddonsBackups extends SpeakeasyBase {
  * 
 **/
 export class LinodeTypeAddons extends SpeakeasyBase {
-  @Metadata({ data: "json, name=backups" })
+  @SpeakeasyMetadata({ data: "json, name=backups" })
   backups?: LinodeTypeAddonsBackups;
 }
 
 export enum LinodeTypeClassEnum {
-    Nanode = "nanode"
-,    Standard = "standard"
-,    Dedicated = "dedicated"
-,    Gpu = "gpu"
-,    Highmem = "highmem"
+    Nanode = "nanode",
+    Standard = "standard",
+    Dedicated = "dedicated",
+    Gpu = "gpu",
+    Highmem = "highmem"
 }
 
 
@@ -50,10 +51,10 @@ export enum LinodeTypeClassEnum {
  * 
 **/
 export class LinodeTypePrice extends SpeakeasyBase {
-  @Metadata({ data: "json, name=hourly" })
+  @SpeakeasyMetadata({ data: "json, name=hourly" })
   hourly?: number;
 
-  @Metadata({ data: "json, name=monthly" })
+  @SpeakeasyMetadata({ data: "json, name=monthly" })
   monthly?: number;
 }
 
@@ -64,39 +65,39 @@ export class LinodeTypePrice extends SpeakeasyBase {
  * 
 **/
 export class LinodeType extends SpeakeasyBase {
-  @Metadata({ data: "json, name=addons" })
+  @SpeakeasyMetadata({ data: "json, name=addons" })
   addons?: LinodeTypeAddons;
 
-  @Metadata({ data: "json, name=class" })
+  @SpeakeasyMetadata({ data: "json, name=class" })
   class?: LinodeTypeClassEnum;
 
-  @Metadata({ data: "json, name=disk" })
+  @SpeakeasyMetadata({ data: "json, name=disk" })
   disk?: number;
 
-  @Metadata({ data: "json, name=gpus" })
+  @SpeakeasyMetadata({ data: "json, name=gpus" })
   gpus?: number;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=label" })
+  @SpeakeasyMetadata({ data: "json, name=label" })
   label?: string;
 
-  @Metadata({ data: "json, name=memory" })
+  @SpeakeasyMetadata({ data: "json, name=memory" })
   memory?: number;
 
-  @Metadata({ data: "json, name=network_out" })
+  @SpeakeasyMetadata({ data: "json, name=network_out" })
   networkOut?: number;
 
-  @Metadata({ data: "json, name=price" })
+  @SpeakeasyMetadata({ data: "json, name=price" })
   price?: LinodeTypePrice;
 
-  @Metadata({ data: "json, name=successor" })
+  @SpeakeasyMetadata({ data: "json, name=successor" })
   successor?: string;
 
-  @Metadata({ data: "json, name=transfer" })
+  @SpeakeasyMetadata({ data: "json, name=transfer" })
   transfer?: number;
 
-  @Metadata({ data: "json, name=vcpus" })
+  @SpeakeasyMetadata({ data: "json, name=vcpus" })
   vcpus?: number;
 }

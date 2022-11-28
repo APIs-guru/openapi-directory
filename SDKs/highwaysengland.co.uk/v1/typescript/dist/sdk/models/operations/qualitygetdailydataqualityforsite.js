@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var QualityGetDailyDataQualityForSitePathParams = /** @class */ (function (_super) {
     __extends(QualityGetDailyDataQualityForSitePathParams, _super);
@@ -30,7 +30,7 @@ var QualityGetDailyDataQualityForSitePathParams = /** @class */ (function (_supe
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=version" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=version" }),
         __metadata("design:type", String)
     ], QualityGetDailyDataQualityForSitePathParams.prototype, "version", void 0);
     return QualityGetDailyDataQualityForSitePathParams;
@@ -42,15 +42,15 @@ var QualityGetDailyDataQualityForSiteQueryParams = /** @class */ (function (_sup
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=end_date" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=end_date" }),
         __metadata("design:type", String)
     ], QualityGetDailyDataQualityForSiteQueryParams.prototype, "endDate", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=siteId" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=siteId" }),
         __metadata("design:type", String)
     ], QualityGetDailyDataQualityForSiteQueryParams.prototype, "siteId", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=start_date" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=start_date" }),
         __metadata("design:type", String)
     ], QualityGetDailyDataQualityForSiteQueryParams.prototype, "startDate", void 0);
     return QualityGetDailyDataQualityForSiteQueryParams;
@@ -62,11 +62,11 @@ var QualityGetDailyDataQualityForSiteRequest = /** @class */ (function (_super) 
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", QualityGetDailyDataQualityForSitePathParams)
     ], QualityGetDailyDataQualityForSiteRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", QualityGetDailyDataQualityForSiteQueryParams)
     ], QualityGetDailyDataQualityForSiteRequest.prototype, "queryParams", void 0);
     return QualityGetDailyDataQualityForSiteRequest;
@@ -78,15 +78,15 @@ var QualityGetDailyDataQualityForSiteResponse = /** @class */ (function (_super)
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], QualityGetDailyDataQualityForSiteResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.DailyQualityResponse)
     ], QualityGetDailyDataQualityForSiteResponse.prototype, "dailyQualityResponse", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], QualityGetDailyDataQualityForSiteResponse.prototype, "statusCode", void 0);
     return QualityGetDailyDataQualityForSiteResponse;

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // SamplingStatisticSummary
@@ -6,18 +7,18 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Aggregated request sampling data for a sampling rule across all services for a 10-second window.
 **/
 export class SamplingStatisticSummary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=BorrowCount" })
+  @SpeakeasyMetadata({ data: "json, name=BorrowCount" })
   borrowCount?: number;
 
-  @Metadata({ data: "json, name=RequestCount" })
+  @SpeakeasyMetadata({ data: "json, name=RequestCount" })
   requestCount?: number;
 
-  @Metadata({ data: "json, name=RuleName" })
+  @SpeakeasyMetadata({ data: "json, name=RuleName" })
   ruleName?: string;
 
-  @Metadata({ data: "json, name=SampledCount" })
+  @SpeakeasyMetadata({ data: "json, name=SampledCount" })
   sampledCount?: number;
 
-  @Metadata({ data: "json, name=Timestamp" })
+  @SpeakeasyMetadata({ data: "json, name=Timestamp" })
   timestamp?: Date;
 }

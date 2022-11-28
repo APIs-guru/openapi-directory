@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var PostGetAttributesActionEnum;
 (function (PostGetAttributesActionEnum) {
     PostGetAttributesActionEnum["GetAttributes"] = "GetAttributes";
@@ -37,31 +37,31 @@ var PostGetAttributesQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=AWSAccessKeyId" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=AWSAccessKeyId" }),
         __metadata("design:type", String)
     ], PostGetAttributesQueryParams.prototype, "awsAccessKeyId", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=Action" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Action" }),
         __metadata("design:type", String)
     ], PostGetAttributesQueryParams.prototype, "action", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=Signature" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Signature" }),
         __metadata("design:type", String)
     ], PostGetAttributesQueryParams.prototype, "signature", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=SignatureMethod" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=SignatureMethod" }),
         __metadata("design:type", String)
     ], PostGetAttributesQueryParams.prototype, "signatureMethod", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=SignatureVersion" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=SignatureVersion" }),
         __metadata("design:type", String)
     ], PostGetAttributesQueryParams.prototype, "signatureVersion", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=Timestamp" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Timestamp" }),
         __metadata("design:type", String)
     ], PostGetAttributesQueryParams.prototype, "timestamp", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=Version" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Version" }),
         __metadata("design:type", String)
     ], PostGetAttributesQueryParams.prototype, "version", void 0);
     return PostGetAttributesQueryParams;
@@ -73,11 +73,11 @@ var PostGetAttributesRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PostGetAttributesQueryParams)
     ], PostGetAttributesRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=text/xml" }),
+        SpeakeasyMetadata({ data: "request, media_type=text/xml" }),
         __metadata("design:type", Uint8Array)
     ], PostGetAttributesRequest.prototype, "request", void 0);
     return PostGetAttributesRequest;
@@ -89,15 +89,15 @@ var PostGetAttributesResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], PostGetAttributesResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], PostGetAttributesResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], PostGetAttributesResponse.prototype, "statusCode", void 0);
     return PostGetAttributesResponse;

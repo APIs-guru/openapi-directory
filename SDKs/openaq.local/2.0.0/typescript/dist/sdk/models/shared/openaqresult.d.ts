@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { Meta } from "./meta";
 export declare class OpenAqResult extends SpeakeasyBase {
     meta?: Meta;

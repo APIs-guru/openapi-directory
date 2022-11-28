@@ -1,44 +1,45 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { NestedTenant } from "./nestedtenant";
 
 
+
 export class Vrf extends SpeakeasyBase {
-  @Metadata({ data: "json, name=created" })
+  @SpeakeasyMetadata({ data: "json, name=created" })
   created?: Date;
 
-  @Metadata({ data: "json, name=custom_fields" })
+  @SpeakeasyMetadata({ data: "json, name=custom_fields" })
   customFields?: Map<string, any>;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=display_name" })
+  @SpeakeasyMetadata({ data: "json, name=display_name" })
   displayName?: string;
 
-  @Metadata({ data: "json, name=enforce_unique" })
+  @SpeakeasyMetadata({ data: "json, name=enforce_unique" })
   enforceUnique?: boolean;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: number;
 
-  @Metadata({ data: "json, name=ipaddress_count" })
+  @SpeakeasyMetadata({ data: "json, name=ipaddress_count" })
   ipaddressCount?: number;
 
-  @Metadata({ data: "json, name=last_updated" })
+  @SpeakeasyMetadata({ data: "json, name=last_updated" })
   lastUpdated?: Date;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 
-  @Metadata({ data: "json, name=prefix_count" })
+  @SpeakeasyMetadata({ data: "json, name=prefix_count" })
   prefixCount?: number;
 
-  @Metadata({ data: "json, name=rd" })
+  @SpeakeasyMetadata({ data: "json, name=rd" })
   rd?: string;
 
-  @Metadata({ data: "json, name=tags" })
+  @SpeakeasyMetadata({ data: "json, name=tags" })
   tags?: string[];
 
-  @Metadata({ data: "json, name=tenant" })
+  @SpeakeasyMetadata({ data: "json, name=tenant" })
   tenant?: NestedTenant;
 }

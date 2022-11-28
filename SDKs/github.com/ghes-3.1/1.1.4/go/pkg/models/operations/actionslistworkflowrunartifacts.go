@@ -15,14 +15,14 @@ type ActionsListWorkflowRunArtifactsQueryParams struct {
 	PerPage *int64 `queryParam:"style=form,explode=true,name=per_page"`
 }
 
-type ActionsListWorkflowRunArtifactsRequest struct {
-	PathParams  ActionsListWorkflowRunArtifactsPathParams
-	QueryParams ActionsListWorkflowRunArtifactsQueryParams
-}
-
 type ActionsListWorkflowRunArtifacts200ApplicationJSON struct {
 	Artifacts  []shared.Artifact `json:"artifacts"`
 	TotalCount int64             `json:"total_count"`
+}
+
+type ActionsListWorkflowRunArtifactsRequest struct {
+	PathParams  ActionsListWorkflowRunArtifactsPathParams
+	QueryParams ActionsListWorkflowRunArtifactsQueryParams
 }
 
 type ActionsListWorkflowRunArtifactsResponse struct {

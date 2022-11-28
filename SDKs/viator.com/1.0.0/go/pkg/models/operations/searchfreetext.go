@@ -26,11 +26,6 @@ type SearchFreetextRequestBody struct {
 	TopX         *string                                    `json:"topX,omitempty"`
 }
 
-type SearchFreetextRequest struct {
-	Headers SearchFreetextHeaders
-	Request *SearchFreetextRequestBody `request:"mediaType=application/json"`
-}
-
 type SearchFreetext200ApplicationJSON struct {
 	Data             []shared.SearchFreetextResponse `json:"data,omitempty"`
 	DateStamp        *string                         `json:"dateStamp,omitempty"`
@@ -45,6 +40,11 @@ type SearchFreetext200ApplicationJSON struct {
 	Success          *bool                           `json:"success,omitempty"`
 	TotalCount       *int64                          `json:"totalCount,omitempty"`
 	Vmid             *string                         `json:"vmid,omitempty"`
+}
+
+type SearchFreetextRequest struct {
+	Headers SearchFreetextHeaders
+	Request *SearchFreetextRequestBody `request:"mediaType=application/json"`
 }
 
 type SearchFreetextResponse struct {

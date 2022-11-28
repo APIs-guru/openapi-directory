@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import seldonmessage
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class SeldonMessageList:
-    seldon_messages: Optional[List[seldonmessage.SeldonMessage]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'seldonMessages' }})
+    seldon_messages: Optional[List[SeldonMessage]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('seldonMessages') }})
     

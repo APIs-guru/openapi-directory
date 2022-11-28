@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 
 class GetDeleteLaunchTemplateVersionsActionEnum(str, Enum):
     DELETE_LAUNCH_TEMPLATE_VERSIONS = "DeleteLaunchTemplateVersions"
@@ -10,12 +14,12 @@ class GetDeleteLaunchTemplateVersionsVersionEnum(str, Enum):
 
 @dataclass
 class GetDeleteLaunchTemplateVersionsQueryParams:
-    action: GetDeleteLaunchTemplateVersionsActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetDeleteLaunchTemplateVersionsActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    launch_template_version: List[str] = field(metadata={'query_param': { 'field_name': 'LaunchTemplateVersion', 'style': 'form', 'explode': True }})
+    version: GetDeleteLaunchTemplateVersionsVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     dry_run: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'DryRun', 'style': 'form', 'explode': True }})
     launch_template_id: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'LaunchTemplateId', 'style': 'form', 'explode': True }})
     launch_template_name: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'LaunchTemplateName', 'style': 'form', 'explode': True }})
-    launch_template_version: List[str] = field(default=None, metadata={'query_param': { 'field_name': 'LaunchTemplateVersion', 'style': 'form', 'explode': True }})
-    version: GetDeleteLaunchTemplateVersionsVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -31,13 +35,13 @@ class GetDeleteLaunchTemplateVersionsHeaders:
 
 @dataclass
 class GetDeleteLaunchTemplateVersionsRequest:
-    query_params: GetDeleteLaunchTemplateVersionsQueryParams = field(default=None)
-    headers: GetDeleteLaunchTemplateVersionsHeaders = field(default=None)
+    headers: GetDeleteLaunchTemplateVersionsHeaders = field()
+    query_params: GetDeleteLaunchTemplateVersionsQueryParams = field()
     
 
 @dataclass
 class GetDeleteLaunchTemplateVersionsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetUpdateStemmingOptionsActionEnum(str, Enum):
     UPDATE_STEMMING_OPTIONS = "UpdateStemmingOptions"
@@ -10,10 +14,10 @@ class GetUpdateStemmingOptionsVersionEnum(str, Enum):
 
 @dataclass
 class GetUpdateStemmingOptionsQueryParams:
-    action: GetUpdateStemmingOptionsActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    domain_name: str = field(default=None, metadata={'query_param': { 'field_name': 'DomainName', 'style': 'form', 'explode': True }})
-    stems: str = field(default=None, metadata={'query_param': { 'field_name': 'Stems', 'style': 'form', 'explode': True }})
-    version: GetUpdateStemmingOptionsVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: GetUpdateStemmingOptionsActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    domain_name: str = field(metadata={'query_param': { 'field_name': 'DomainName', 'style': 'form', 'explode': True }})
+    stems: str = field(metadata={'query_param': { 'field_name': 'Stems', 'style': 'form', 'explode': True }})
+    version: GetUpdateStemmingOptionsVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -29,13 +33,13 @@ class GetUpdateStemmingOptionsHeaders:
 
 @dataclass
 class GetUpdateStemmingOptionsRequest:
-    query_params: GetUpdateStemmingOptionsQueryParams = field(default=None)
-    headers: GetUpdateStemmingOptionsHeaders = field(default=None)
+    headers: GetUpdateStemmingOptionsHeaders = field()
+    query_params: GetUpdateStemmingOptionsQueryParams = field()
     
 
 @dataclass
 class GetUpdateStemmingOptionsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

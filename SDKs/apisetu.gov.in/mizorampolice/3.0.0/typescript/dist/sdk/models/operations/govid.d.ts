@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class GovidRequestBodyCertificateParameters extends SpeakeasyBase {
     cardNo: string;
@@ -16,10 +16,6 @@ export declare class GovidRequestBody extends SpeakeasyBase {
 export declare class GovidSecurity extends SpeakeasyBase {
     apiKey: shared.SchemeApiKey;
     clientId: shared.SchemeClientId;
-}
-export declare class GovidRequest extends SpeakeasyBase {
-    request?: GovidRequestBody;
-    security: GovidSecurity;
 }
 export declare enum Govid400ApplicationJsonErrorEnum {
     MissingParameter = "missing_parameter",
@@ -102,6 +98,10 @@ export declare enum Govid504ApplicationJsonErrorDescriptionEnum {
 export declare class Govid504ApplicationJson extends SpeakeasyBase {
     error?: Govid504ApplicationJsonErrorEnum;
     errorDescription?: Govid504ApplicationJsonErrorDescriptionEnum;
+}
+export declare class GovidRequest extends SpeakeasyBase {
+    request?: GovidRequestBody;
+    security: GovidSecurity;
 }
 export declare class GovidResponse extends SpeakeasyBase {
     contentType: string;

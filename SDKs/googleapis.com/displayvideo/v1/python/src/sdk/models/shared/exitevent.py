@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class ExitEventTypeEnum(str, Enum):
     EXIT_EVENT_TYPE_UNSPECIFIED = "EXIT_EVENT_TYPE_UNSPECIFIED"
@@ -11,8 +13,12 @@ class ExitEventTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class ExitEvent:
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    reporting_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'reportingName' }})
-    type: Optional[ExitEventTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
-    url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'url' }})
+    r"""ExitEvent
+    Exit event of the creative.
+    """
+    
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    reporting_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('reportingName') }})
+    type: Optional[ExitEventTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('type') }})
+    url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('url') }})
     

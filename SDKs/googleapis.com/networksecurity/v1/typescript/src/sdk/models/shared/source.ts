@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Source
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Specification of traffic source attributes.
 **/
 export class Source extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ipBlocks" })
+  @SpeakeasyMetadata({ data: "json, name=ipBlocks" })
   ipBlocks?: string[];
 
-  @Metadata({ data: "json, name=principals" })
+  @SpeakeasyMetadata({ data: "json, name=principals" })
   principals?: string[];
 }

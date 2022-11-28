@@ -1,54 +1,54 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
-export const REPOSUPLOADRELEASEASSET_SERVERS = [
-	"https://{origin}",
-];
 
+export const ReposUploadReleaseAssetServerList = [
+	"https://{origin}",
+] as const;
 
 
 export class ReposUploadReleaseAssetPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=owner" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=owner" })
   owner: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=release_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=release_id" })
   releaseId: number;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=repo" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=repo" })
   repo: string;
 }
 
 
 export class ReposUploadReleaseAssetQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=label" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=label" })
   label?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=name" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=name" })
   name?: string;
 }
 
 
 export class ReposUploadReleaseAssetRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   serverUrl?: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: ReposUploadReleaseAssetPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: ReposUploadReleaseAssetQueryParams;
 
-  @Metadata({ data: "request, media_type=*/*" })
+  @SpeakeasyMetadata({ data: "request, media_type=*/*" })
   request?: string;
 }
 
 
 export class ReposUploadReleaseAssetResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   releaseAsset?: shared.ReleaseAsset;
 }

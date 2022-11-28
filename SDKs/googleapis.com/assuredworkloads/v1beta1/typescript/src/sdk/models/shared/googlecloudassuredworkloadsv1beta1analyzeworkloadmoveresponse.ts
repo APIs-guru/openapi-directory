@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudAssuredworkloadsV1beta1AnalyzeWorkloadMoveResponse
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A response that includes the analysis of the hypothetical resource move.
 **/
 export class GoogleCloudAssuredworkloadsV1beta1AnalyzeWorkloadMoveResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=blockers" })
+  @SpeakeasyMetadata({ data: "json, name=blockers" })
   blockers?: string[];
 }

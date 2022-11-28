@@ -1,11 +1,19 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import apicache
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class UpdateAPICacheResponse:
-    api_cache: Optional[apicache.APICache] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'apiCache' }})
+    r"""UpdateAPICacheResponse
+    Represents the output of a <code>UpdateApiCache</code> operation.
+    """
+    
+    api_cache: Optional[APICache] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('apiCache') }})
     

@@ -1,57 +1,58 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum CvsSv3AttackComplexityEnum {
-    AttackComplexityUnspecified = "ATTACK_COMPLEXITY_UNSPECIFIED"
-,    AttackComplexityLow = "ATTACK_COMPLEXITY_LOW"
-,    AttackComplexityHigh = "ATTACK_COMPLEXITY_HIGH"
+    AttackComplexityUnspecified = "ATTACK_COMPLEXITY_UNSPECIFIED",
+    AttackComplexityLow = "ATTACK_COMPLEXITY_LOW",
+    AttackComplexityHigh = "ATTACK_COMPLEXITY_HIGH"
 }
 
 export enum CvsSv3AttackVectorEnum {
-    AttackVectorUnspecified = "ATTACK_VECTOR_UNSPECIFIED"
-,    AttackVectorNetwork = "ATTACK_VECTOR_NETWORK"
-,    AttackVectorAdjacent = "ATTACK_VECTOR_ADJACENT"
-,    AttackVectorLocal = "ATTACK_VECTOR_LOCAL"
-,    AttackVectorPhysical = "ATTACK_VECTOR_PHYSICAL"
+    AttackVectorUnspecified = "ATTACK_VECTOR_UNSPECIFIED",
+    AttackVectorNetwork = "ATTACK_VECTOR_NETWORK",
+    AttackVectorAdjacent = "ATTACK_VECTOR_ADJACENT",
+    AttackVectorLocal = "ATTACK_VECTOR_LOCAL",
+    AttackVectorPhysical = "ATTACK_VECTOR_PHYSICAL"
 }
 
 export enum CvsSv3AvailabilityImpactEnum {
-    ImpactUnspecified = "IMPACT_UNSPECIFIED"
-,    ImpactHigh = "IMPACT_HIGH"
-,    ImpactLow = "IMPACT_LOW"
-,    ImpactNone = "IMPACT_NONE"
+    ImpactUnspecified = "IMPACT_UNSPECIFIED",
+    ImpactHigh = "IMPACT_HIGH",
+    ImpactLow = "IMPACT_LOW",
+    ImpactNone = "IMPACT_NONE"
 }
 
 export enum CvsSv3ConfidentialityImpactEnum {
-    ImpactUnspecified = "IMPACT_UNSPECIFIED"
-,    ImpactHigh = "IMPACT_HIGH"
-,    ImpactLow = "IMPACT_LOW"
-,    ImpactNone = "IMPACT_NONE"
+    ImpactUnspecified = "IMPACT_UNSPECIFIED",
+    ImpactHigh = "IMPACT_HIGH",
+    ImpactLow = "IMPACT_LOW",
+    ImpactNone = "IMPACT_NONE"
 }
 
 export enum CvsSv3IntegrityImpactEnum {
-    ImpactUnspecified = "IMPACT_UNSPECIFIED"
-,    ImpactHigh = "IMPACT_HIGH"
-,    ImpactLow = "IMPACT_LOW"
-,    ImpactNone = "IMPACT_NONE"
+    ImpactUnspecified = "IMPACT_UNSPECIFIED",
+    ImpactHigh = "IMPACT_HIGH",
+    ImpactLow = "IMPACT_LOW",
+    ImpactNone = "IMPACT_NONE"
 }
 
 export enum CvsSv3PrivilegesRequiredEnum {
-    PrivilegesRequiredUnspecified = "PRIVILEGES_REQUIRED_UNSPECIFIED"
-,    PrivilegesRequiredNone = "PRIVILEGES_REQUIRED_NONE"
-,    PrivilegesRequiredLow = "PRIVILEGES_REQUIRED_LOW"
-,    PrivilegesRequiredHigh = "PRIVILEGES_REQUIRED_HIGH"
+    PrivilegesRequiredUnspecified = "PRIVILEGES_REQUIRED_UNSPECIFIED",
+    PrivilegesRequiredNone = "PRIVILEGES_REQUIRED_NONE",
+    PrivilegesRequiredLow = "PRIVILEGES_REQUIRED_LOW",
+    PrivilegesRequiredHigh = "PRIVILEGES_REQUIRED_HIGH"
 }
 
 export enum CvsSv3ScopeEnum {
-    ScopeUnspecified = "SCOPE_UNSPECIFIED"
-,    ScopeUnchanged = "SCOPE_UNCHANGED"
-,    ScopeChanged = "SCOPE_CHANGED"
+    ScopeUnspecified = "SCOPE_UNSPECIFIED",
+    ScopeUnchanged = "SCOPE_UNCHANGED",
+    ScopeChanged = "SCOPE_CHANGED"
 }
 
 export enum CvsSv3UserInteractionEnum {
-    UserInteractionUnspecified = "USER_INTERACTION_UNSPECIFIED"
-,    UserInteractionNone = "USER_INTERACTION_NONE"
-,    UserInteractionRequired = "USER_INTERACTION_REQUIRED"
+    UserInteractionUnspecified = "USER_INTERACTION_UNSPECIFIED",
+    UserInteractionNone = "USER_INTERACTION_NONE",
+    UserInteractionRequired = "USER_INTERACTION_REQUIRED"
 }
 
 
@@ -60,36 +61,36 @@ export enum CvsSv3UserInteractionEnum {
  * Deprecated. Common Vulnerability Scoring System version 3. For details, see https://www.first.org/cvss/specification-document
 **/
 export class CvsSv3 extends SpeakeasyBase {
-  @Metadata({ data: "json, name=attackComplexity" })
+  @SpeakeasyMetadata({ data: "json, name=attackComplexity" })
   attackComplexity?: CvsSv3AttackComplexityEnum;
 
-  @Metadata({ data: "json, name=attackVector" })
+  @SpeakeasyMetadata({ data: "json, name=attackVector" })
   attackVector?: CvsSv3AttackVectorEnum;
 
-  @Metadata({ data: "json, name=availabilityImpact" })
+  @SpeakeasyMetadata({ data: "json, name=availabilityImpact" })
   availabilityImpact?: CvsSv3AvailabilityImpactEnum;
 
-  @Metadata({ data: "json, name=baseScore" })
+  @SpeakeasyMetadata({ data: "json, name=baseScore" })
   baseScore?: number;
 
-  @Metadata({ data: "json, name=confidentialityImpact" })
+  @SpeakeasyMetadata({ data: "json, name=confidentialityImpact" })
   confidentialityImpact?: CvsSv3ConfidentialityImpactEnum;
 
-  @Metadata({ data: "json, name=exploitabilityScore" })
+  @SpeakeasyMetadata({ data: "json, name=exploitabilityScore" })
   exploitabilityScore?: number;
 
-  @Metadata({ data: "json, name=impactScore" })
+  @SpeakeasyMetadata({ data: "json, name=impactScore" })
   impactScore?: number;
 
-  @Metadata({ data: "json, name=integrityImpact" })
+  @SpeakeasyMetadata({ data: "json, name=integrityImpact" })
   integrityImpact?: CvsSv3IntegrityImpactEnum;
 
-  @Metadata({ data: "json, name=privilegesRequired" })
+  @SpeakeasyMetadata({ data: "json, name=privilegesRequired" })
   privilegesRequired?: CvsSv3PrivilegesRequiredEnum;
 
-  @Metadata({ data: "json, name=scope" })
+  @SpeakeasyMetadata({ data: "json, name=scope" })
   scope?: CvsSv3ScopeEnum;
 
-  @Metadata({ data: "json, name=userInteraction" })
+  @SpeakeasyMetadata({ data: "json, name=userInteraction" })
   userInteraction?: CvsSv3UserInteractionEnum;
 }

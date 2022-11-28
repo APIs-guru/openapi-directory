@@ -11,14 +11,14 @@ class GlobalImageCategoriesGetFilesQueryParams:
 
 @dataclass
 class GlobalImageCategoriesGetFilesRequest:
-    query_params: GlobalImageCategoriesGetFilesQueryParams = field(default=None)
+    query_params: GlobalImageCategoriesGetFilesQueryParams = field()
     
 
 @dataclass
 class GlobalImageCategoriesGetFilesResponse:
+    content_type: str = field()
+    status_code: int = field()
     api_i_paged_response_global_resources_shared_models_global_image_category_: Optional[shared.APIIPagedResponseGlobalResourcesSharedModelsGlobalImageCategory] = field(default=None)
     api_models_api_error: Optional[shared.APIModelsAPIError] = field(default=None)
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    body: Optional[bytes] = field(default=None)
     

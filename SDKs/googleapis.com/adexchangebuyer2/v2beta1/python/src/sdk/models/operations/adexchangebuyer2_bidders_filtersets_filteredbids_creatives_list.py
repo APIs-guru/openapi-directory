@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class Adexchangebuyer2BiddersFilterSetsFilteredBidsCreativesListPathParams:
-    creative_status_id: int = field(default=None, metadata={'path_param': { 'field_name': 'creativeStatusId', 'style': 'simple', 'explode': False }})
-    filter_set_name: str = field(default=None, metadata={'path_param': { 'field_name': 'filterSetName', 'style': 'simple', 'explode': False }})
+    creative_status_id: int = field(metadata={'path_param': { 'field_name': 'creativeStatusId', 'style': 'simple', 'explode': False }})
+    filter_set_name: str = field(metadata={'path_param': { 'field_name': 'filterSetName', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -28,20 +29,20 @@ class Adexchangebuyer2BiddersFilterSetsFilteredBidsCreativesListQueryParams:
 
 @dataclass
 class Adexchangebuyer2BiddersFilterSetsFilteredBidsCreativesListSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class Adexchangebuyer2BiddersFilterSetsFilteredBidsCreativesListRequest:
-    path_params: Adexchangebuyer2BiddersFilterSetsFilteredBidsCreativesListPathParams = field(default=None)
-    query_params: Adexchangebuyer2BiddersFilterSetsFilteredBidsCreativesListQueryParams = field(default=None)
-    security: Adexchangebuyer2BiddersFilterSetsFilteredBidsCreativesListSecurity = field(default=None)
+    path_params: Adexchangebuyer2BiddersFilterSetsFilteredBidsCreativesListPathParams = field()
+    query_params: Adexchangebuyer2BiddersFilterSetsFilteredBidsCreativesListQueryParams = field()
+    security: Adexchangebuyer2BiddersFilterSetsFilteredBidsCreativesListSecurity = field()
     
 
 @dataclass
 class Adexchangebuyer2BiddersFilterSetsFilteredBidsCreativesListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     list_creative_status_breakdown_by_creative_response: Optional[shared.ListCreativeStatusBreakdownByCreativeResponse] = field(default=None)
-    status_code: int = field(default=None)
     

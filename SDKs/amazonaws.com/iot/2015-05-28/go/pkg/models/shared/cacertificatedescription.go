@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// CaCertificateDescription
+// Describes a CA certificate.
 type CaCertificateDescription struct {
 	AutoRegistrationStatus *AutoRegistrationStatusEnum `json:"autoRegistrationStatus,omitempty"`
 	CertificateArn         *string                     `json:"certificateArn,omitempty"`

@@ -12,12 +12,6 @@ type TransferNumberSecurity struct {
 	BasicAuth shared.SchemeBasicAuth `security:"scheme,type=http,subtype=basic"`
 }
 
-type TransferNumberRequest struct {
-	PathParams TransferNumberPathParams
-	Request    shared.TransferNumberRequest `request:"mediaType=application/json"`
-	Security   TransferNumberSecurity
-}
-
 type TransferNumber401ApplicationJSON struct {
 	Detail   string `json:"detail"`
 	Instance string `json:"instance"`
@@ -43,6 +37,12 @@ type TransferNumber422ApplicationJSON struct {
 	InvalidParameters []TransferNumber422ApplicationJSONInvalidParameters `json:"invalid_parameters"`
 	Title             string                                              `json:"title"`
 	Type              string                                              `json:"type"`
+}
+
+type TransferNumberRequest struct {
+	PathParams TransferNumberPathParams
+	Request    shared.TransferNumberRequest `request:"mediaType=application/json"`
+	Security   TransferNumberSecurity
 }
 
 type TransferNumberResponse struct {

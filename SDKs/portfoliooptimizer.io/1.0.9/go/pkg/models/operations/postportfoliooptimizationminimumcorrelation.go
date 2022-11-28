@@ -6,12 +6,12 @@ type PostPortfolioOptimizationMinimumCorrelationRequestBody struct {
 	AssetsVolatilities      []float64   `json:"assetsVolatilities"`
 }
 
-type PostPortfolioOptimizationMinimumCorrelationRequest struct {
-	Request PostPortfolioOptimizationMinimumCorrelationRequestBody `request:"mediaType=application/json"`
-}
-
 type PostPortfolioOptimizationMinimumCorrelation200ApplicationJSON struct {
 	AssetsWeights []float64 `json:"assetsWeights"`
+}
+
+type PostPortfolioOptimizationMinimumCorrelationRequest struct {
+	Request PostPortfolioOptimizationMinimumCorrelationRequestBody `request:"mediaType=application/json"`
 }
 
 type PostPortfolioOptimizationMinimumCorrelationResponse struct {

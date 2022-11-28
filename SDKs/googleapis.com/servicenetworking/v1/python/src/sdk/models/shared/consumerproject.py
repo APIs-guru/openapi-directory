@@ -1,10 +1,15 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass_json
 @dataclass
 class ConsumerProject:
-    project_num: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'projectNum' }})
+    r"""ConsumerProject
+    Represents a consumer project.
+    """
+    
+    project_num: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('projectNum') }})
     

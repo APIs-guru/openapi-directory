@@ -1,37 +1,38 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DeleteWorkspacePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=workspace_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=workspace_id" })
   workspaceId: string;
 }
 
 
-export class DeleteWorkspaceRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: DeleteWorkspacePathParams;
-}
-
-
 export class DeleteWorkspace200ApplicationJsonWorkspace extends SpeakeasyBase {
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 }
 
 
 export class DeleteWorkspace200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=workspace" })
+  @SpeakeasyMetadata({ data: "json, name=workspace" })
   workspace?: DeleteWorkspace200ApplicationJsonWorkspace;
 }
 
 
+export class DeleteWorkspaceRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: DeleteWorkspacePathParams;
+}
+
+
 export class DeleteWorkspaceResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   deleteWorkspace200ApplicationJsonObject?: DeleteWorkspace200ApplicationJson;
 }

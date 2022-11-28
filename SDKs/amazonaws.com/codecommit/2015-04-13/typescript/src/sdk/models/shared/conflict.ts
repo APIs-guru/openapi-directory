@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ConflictMetadata } from "./conflictmetadata";
 import { MergeHunk } from "./mergehunk";
+
 
 
 // Conflict
@@ -9,9 +9,9 @@ import { MergeHunk } from "./mergehunk";
  * Information about conflicts in a merge operation.
 **/
 export class Conflict extends SpeakeasyBase {
-  @Metadata({ data: "json, name=conflictMetadata" })
+  @SpeakeasyMetadata({ data: "json, name=conflictMetadata" })
   conflictMetadata?: ConflictMetadata;
 
-  @Metadata({ data: "json, name=mergeHunks", elemType: shared.MergeHunk })
+  @SpeakeasyMetadata({ data: "json, name=mergeHunks", elemType: MergeHunk })
   mergeHunks?: MergeHunk[];
 }

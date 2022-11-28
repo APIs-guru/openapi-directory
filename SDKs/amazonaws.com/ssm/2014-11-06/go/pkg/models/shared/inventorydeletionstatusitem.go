@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// InventoryDeletionStatusItem
+// Status information returned by the <code>DeleteInventory</code> operation.
 type InventoryDeletionStatusItem struct {
 	DeletionID           *string                      `json:"DeletionId,omitempty"`
 	DeletionStartTime    *time.Time                   `json:"DeletionStartTime,omitempty"`

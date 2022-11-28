@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { RouterApplianceInstance } from "./routerapplianceinstance";
 // LinkedRouterApplianceInstances
 /**
  * A collection of router appliance instances. If you configure multiple router appliance instances to receive data from the same set of sites outside of Google Cloud, we recommend that you associate those instances with the same spoke.
@@ -34,13 +34,37 @@ var LinkedRouterApplianceInstances = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=instances", elemType: shared.RouterApplianceInstance }),
+        SpeakeasyMetadata({ data: "json, name=instances", elemType: RouterApplianceInstance }),
         __metadata("design:type", Array)
     ], LinkedRouterApplianceInstances.prototype, "instances", void 0);
     __decorate([
-        Metadata({ data: "json, name=siteToSiteDataTransfer" }),
+        SpeakeasyMetadata({ data: "json, name=siteToSiteDataTransfer" }),
         __metadata("design:type", Boolean)
     ], LinkedRouterApplianceInstances.prototype, "siteToSiteDataTransfer", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=vpcNetwork" }),
+        __metadata("design:type", String)
+    ], LinkedRouterApplianceInstances.prototype, "vpcNetwork", void 0);
     return LinkedRouterApplianceInstances;
 }(SpeakeasyBase));
 export { LinkedRouterApplianceInstances };
+// LinkedRouterApplianceInstancesInput
+/**
+ * A collection of router appliance instances. If you configure multiple router appliance instances to receive data from the same set of sites outside of Google Cloud, we recommend that you associate those instances with the same spoke.
+**/
+var LinkedRouterApplianceInstancesInput = /** @class */ (function (_super) {
+    __extends(LinkedRouterApplianceInstancesInput, _super);
+    function LinkedRouterApplianceInstancesInput() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=instances", elemType: RouterApplianceInstance }),
+        __metadata("design:type", Array)
+    ], LinkedRouterApplianceInstancesInput.prototype, "instances", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=siteToSiteDataTransfer" }),
+        __metadata("design:type", Boolean)
+    ], LinkedRouterApplianceInstancesInput.prototype, "siteToSiteDataTransfer", void 0);
+    return LinkedRouterApplianceInstancesInput;
+}(SpeakeasyBase));
+export { LinkedRouterApplianceInstancesInput };

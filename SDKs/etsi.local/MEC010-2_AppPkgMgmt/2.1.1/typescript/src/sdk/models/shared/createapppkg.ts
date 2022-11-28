@@ -1,23 +1,24 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Checksum } from "./checksum";
 
 
+
 export class CreateAppPkg extends SpeakeasyBase {
-  @Metadata({ data: "json, name=appPkgName" })
+  @SpeakeasyMetadata({ data: "json, name=appPkgName" })
   appPkgName: string;
 
-  @Metadata({ data: "json, name=appPkgPath" })
+  @SpeakeasyMetadata({ data: "json, name=appPkgPath" })
   appPkgPath: string;
 
-  @Metadata({ data: "json, name=appPkgVersion" })
+  @SpeakeasyMetadata({ data: "json, name=appPkgVersion" })
   appPkgVersion: string;
 
-  @Metadata({ data: "json, name=appProvider" })
+  @SpeakeasyMetadata({ data: "json, name=appProvider" })
   appProvider?: string;
 
-  @Metadata({ data: "json, name=checksum" })
+  @SpeakeasyMetadata({ data: "json, name=checksum" })
   checksum: Checksum;
 
-  @Metadata({ data: "json, name=userDefinedData" })
+  @SpeakeasyMetadata({ data: "json, name=userDefinedData" })
   userDefinedData?: Map<string, any>;
 }

@@ -1,7 +1,10 @@
-import warnings
+
+
 import requests
 from sdk.models import operations
 from . import utils
+
+
 
 
 SERVERS = [
@@ -10,26 +13,49 @@ SERVERS = [
 
 
 class SDK:
-    client = requests.Session()
-    server_url = SERVERS[0]
+    
+
+    _client: requests.Session
+    _security_client: requests.Session
+    
+    _server_url: str = SERVERS[0]
+    _language: str = "python"
+    _sdk_version: str = "0.0.1"
+    _gen_version: str = "internal"
+
+    def __init__(self) -> None:
+        self._client = requests.Session()
+        self._security_client = requests.Session()
+        
+
 
     def config_server_url(self, server_url: str, params: dict[str, str]):
-        if not params is None:
-            self.server_url = utils.replace_parameters(server_url, params)
+        if params is not None:
+            self._server_url = utils.replace_parameters(server_url, params)
         else:
-            self.server_url = server_url
-            
+            self._server_url = server_url
+
+        
     
 
+    def config_client(self, client: requests.Session):
+        self._client = client
+        
+    
+    
     
     def districts_in_a_region(self, request: operations.DistrictsInARegionRequest) -> operations.DistrictsInARegionResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns all districts in region
+        Returns a post code and all districts in a specified region
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{country}/{region}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -44,13 +70,17 @@ class SDK:
 
     
     def tanzania_regions(self, request: operations.TanzaniaRegionsRequest) -> operations.TanzaniaRegionsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns all regions present in Tanzania
+        Fetches all regions present in Tanzania and then return a response as json
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{country}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -63,13 +93,17 @@ class SDK:
 
     
     def wards_in_a_district(self, request: operations.WardsInADistrictRequest) -> operations.WardsInADistrictResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns all wards in a district
+        Returns all wards in a  specified district and district postcode
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{country}/{region}/{district}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -84,13 +118,17 @@ class SDK:
 
     
     def neighborhood_in_a_street_(self, request: operations.NeighborhoodInAStreetRequest) -> operations.NeighborhoodInAStreetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns all neighborhood in a street
+        Returns all neighborhood in a specified street
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{country}/{region}/{district}/{ward}/{street}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -105,13 +143,17 @@ class SDK:
 
     
     def streets_in_a_ward(self, request: operations.StreetsInAWardRequest) -> operations.StreetsInAWardResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns all streets in a ward
+        Returns all streets in a specified ward and ward postcode
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{country}/{region}/{district}/{ward}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 

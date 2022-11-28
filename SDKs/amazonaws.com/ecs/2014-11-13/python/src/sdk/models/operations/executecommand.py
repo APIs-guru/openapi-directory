@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 class ExecuteCommandXAmzTargetEnum(str, Enum):
@@ -8,6 +12,7 @@ class ExecuteCommandXAmzTargetEnum(str, Enum):
 
 @dataclass
 class ExecuteCommandHeaders:
+    x_amz_target: ExecuteCommandXAmzTargetEnum = field(metadata={'header': { 'field_name': 'X-Amz-Target', 'style': 'simple', 'explode': False }})
     x_amz_algorithm: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Algorithm', 'style': 'simple', 'explode': False }})
     x_amz_content_sha256: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Content-Sha256', 'style': 'simple', 'explode': False }})
     x_amz_credential: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Credential', 'style': 'simple', 'explode': False }})
@@ -15,24 +20,23 @@ class ExecuteCommandHeaders:
     x_amz_security_token: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Security-Token', 'style': 'simple', 'explode': False }})
     x_amz_signature: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Signature', 'style': 'simple', 'explode': False }})
     x_amz_signed_headers: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-SignedHeaders', 'style': 'simple', 'explode': False }})
-    x_amz_target: ExecuteCommandXAmzTargetEnum = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Target', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class ExecuteCommandRequest:
-    headers: ExecuteCommandHeaders = field(default=None)
-    request: shared.ExecuteCommandRequest = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: ExecuteCommandHeaders = field()
+    request: shared.ExecuteCommandRequest = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class ExecuteCommandResponse:
+    content_type: str = field()
+    status_code: int = field()
     access_denied_exception: Optional[Any] = field(default=None)
     client_exception: Optional[Any] = field(default=None)
     cluster_not_found_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     execute_command_response: Optional[shared.ExecuteCommandResponse] = field(default=None)
     invalid_parameter_exception: Optional[Any] = field(default=None)
     server_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     target_not_connected_exception: Optional[Any] = field(default=None)
     

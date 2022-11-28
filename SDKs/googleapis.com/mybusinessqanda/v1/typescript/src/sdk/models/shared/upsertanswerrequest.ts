@@ -1,12 +1,13 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import { Answer } from "./answer";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { AnswerInput } from "./answer";
 
 
-// UpsertAnswerRequest
+
+// UpsertAnswerRequestInput
 /** 
  * Request message for QuestionsAndAnswers.UpsertAnswer
 **/
-export class UpsertAnswerRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=answer" })
-  answer?: Answer;
+export class UpsertAnswerRequestInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=answer" })
+  answer?: AnswerInput;
 }

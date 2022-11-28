@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // GoogleCloudWebriskV1RawHashes
 /**
  * The uncompressed threat entries in hash format. Hashes can be anywhere from 4 to 32 bytes in size. A large majority are 4 bytes, but some hashes are lengthened if they collide with the hash of a popular URI. Used for sending ThreatEntryAdditons to clients that do not support compression, or when sending non-4-byte hashes to clients that do support compression.
@@ -33,11 +33,11 @@ var GoogleCloudWebriskV1RawHashes = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=prefixSize" }),
+        SpeakeasyMetadata({ data: "json, name=prefixSize" }),
         __metadata("design:type", Number)
     ], GoogleCloudWebriskV1RawHashes.prototype, "prefixSize", void 0);
     __decorate([
-        Metadata({ data: "json, name=rawHashes" }),
+        SpeakeasyMetadata({ data: "json, name=rawHashes" }),
         __metadata("design:type", String)
     ], GoogleCloudWebriskV1RawHashes.prototype, "rawHashes", void 0);
     return GoogleCloudWebriskV1RawHashes;

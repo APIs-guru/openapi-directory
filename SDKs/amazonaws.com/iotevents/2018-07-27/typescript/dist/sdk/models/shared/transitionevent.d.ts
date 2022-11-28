@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { Action } from "./action";
 /**
  * Specifies the actions performed and the next state entered when a <code>condition</code> evaluates to TRUE.

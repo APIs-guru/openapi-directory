@@ -7,6 +7,8 @@ const (
 	RestoreTypeEnumUntrash         RestoreTypeEnum = "UNTRASH"
 )
 
+// Restore
+// A deleted object was restored.
 type Restore struct {
 	Type *RestoreTypeEnum `json:"type,omitempty"`
 }

@@ -9,19 +9,19 @@ class GetContainersFloatingIpsQueryParams:
 
 @dataclass
 class GetContainersFloatingIpsHeaders:
-    x_auth_project_id: str = field(default=None, metadata={'header': { 'field_name': 'X-Auth-Project-Id', 'style': 'simple', 'explode': False }})
-    x_auth_token: str = field(default=None, metadata={'header': { 'field_name': 'X-Auth-Token', 'style': 'simple', 'explode': False }})
+    x_auth_project_id: str = field(metadata={'header': { 'field_name': 'X-Auth-Project-Id', 'style': 'simple', 'explode': False }})
+    x_auth_token: str = field(metadata={'header': { 'field_name': 'X-Auth-Token', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetContainersFloatingIpsRequest:
-    query_params: GetContainersFloatingIpsQueryParams = field(default=None)
-    headers: GetContainersFloatingIpsHeaders = field(default=None)
+    headers: GetContainersFloatingIpsHeaders = field()
+    query_params: GetContainersFloatingIpsQueryParams = field()
     
 
 @dataclass
 class GetContainersFloatingIpsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     floating_ips: Optional[List[Any]] = field(default=None)
-    status_code: int = field(default=None)
     

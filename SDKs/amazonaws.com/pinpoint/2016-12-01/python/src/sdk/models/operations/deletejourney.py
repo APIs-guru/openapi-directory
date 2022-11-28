@@ -1,12 +1,15 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class DeleteJourneyPathParams:
-    application_id: str = field(default=None, metadata={'path_param': { 'field_name': 'application-id', 'style': 'simple', 'explode': False }})
-    journey_id: str = field(default=None, metadata={'path_param': { 'field_name': 'journey-id', 'style': 'simple', 'explode': False }})
+    application_id: str = field(metadata={'path_param': { 'field_name': 'application-id', 'style': 'simple', 'explode': False }})
+    journey_id: str = field(metadata={'path_param': { 'field_name': 'journey-id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -22,20 +25,20 @@ class DeleteJourneyHeaders:
 
 @dataclass
 class DeleteJourneyRequest:
-    path_params: DeleteJourneyPathParams = field(default=None)
-    headers: DeleteJourneyHeaders = field(default=None)
+    headers: DeleteJourneyHeaders = field()
+    path_params: DeleteJourneyPathParams = field()
     
 
 @dataclass
 class DeleteJourneyResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     delete_journey_response: Optional[shared.DeleteJourneyResponse] = field(default=None)
     forbidden_exception: Optional[Any] = field(default=None)
     internal_server_error_exception: Optional[Any] = field(default=None)
     method_not_allowed_exception: Optional[Any] = field(default=None)
     not_found_exception: Optional[Any] = field(default=None)
     payload_too_large_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     too_many_requests_exception: Optional[Any] = field(default=None)
     

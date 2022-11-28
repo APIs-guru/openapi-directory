@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ActionLocalIpDetails
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Provides information about the IP address where the scanned port is located.
 **/
 export class ActionLocalIpDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=IpAddressV4" })
+  @SpeakeasyMetadata({ data: "json, name=IpAddressV4" })
   ipAddressV4?: string;
 }

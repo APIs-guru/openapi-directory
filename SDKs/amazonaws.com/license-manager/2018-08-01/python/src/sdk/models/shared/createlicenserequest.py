@@ -1,28 +1,22 @@
 from dataclasses import dataclass, field
-from datetime import datetime
-from marshmallow import fields
-import dateutil.parser
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import consumptionconfiguration
-from . import entitlement
-from . import issuer
-from . import metadata
-from . import datetimerange
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class CreateLicenseRequest:
-    beneficiary: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Beneficiary' }})
-    client_token: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ClientToken' }})
-    consumption_configuration: consumptionconfiguration.ConsumptionConfiguration = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ConsumptionConfiguration' }})
-    entitlements: List[entitlement.Entitlement] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Entitlements' }})
-    home_region: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'HomeRegion' }})
-    issuer: issuer.Issuer = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Issuer' }})
-    license_metadata: Optional[List[metadata.Metadata]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'LicenseMetadata' }})
-    license_name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'LicenseName' }})
-    product_name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ProductName' }})
-    product_sku: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ProductSKU' }})
-    validity: datetimerange.DatetimeRange = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Validity' }})
+    beneficiary: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Beneficiary') }})
+    client_token: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('ClientToken') }})
+    consumption_configuration: ConsumptionConfiguration = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('ConsumptionConfiguration') }})
+    entitlements: List[Entitlement] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Entitlements') }})
+    home_region: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('HomeRegion') }})
+    issuer: Issuer = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Issuer') }})
+    license_name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('LicenseName') }})
+    product_name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('ProductName') }})
+    product_sku: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('ProductSKU') }})
+    validity: DatetimeRange = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Validity') }})
+    license_metadata: Optional[List[Metadata]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('LicenseMetadata') }})
     

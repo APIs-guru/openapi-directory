@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetRiddleRandomQueryParams = /** @class */ (function (_super) {
     __extends(GetRiddleRandomQueryParams, _super);
@@ -30,7 +30,7 @@ var GetRiddleRandomQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=category" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=category" }),
         __metadata("design:type", String)
     ], GetRiddleRandomQueryParams.prototype, "category", void 0);
     return GetRiddleRandomQueryParams;
@@ -42,7 +42,7 @@ var GetRiddleRandomSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeXFungeneratorsApiSecret)
     ], GetRiddleRandomSecurity.prototype, "xFungeneratorsApiSecret", void 0);
     return GetRiddleRandomSecurity;
@@ -54,11 +54,11 @@ var GetRiddleRandomRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetRiddleRandomQueryParams)
     ], GetRiddleRandomRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetRiddleRandomSecurity)
     ], GetRiddleRandomRequest.prototype, "security", void 0);
     return GetRiddleRandomRequest;
@@ -70,11 +70,11 @@ var GetRiddleRandomResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetRiddleRandomResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetRiddleRandomResponse.prototype, "statusCode", void 0);
     return GetRiddleRandomResponse;

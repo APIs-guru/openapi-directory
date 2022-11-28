@@ -1,5 +1,7 @@
 package shared
 
+// GoogleAppsDriveLabelsV2betaFieldSelectionOptionsChoiceProperties
+// Basic properties of the choice.
 type GoogleAppsDriveLabelsV2betaFieldSelectionOptionsChoiceProperties struct {
 	BadgeConfig        *GoogleAppsDriveLabelsV2betaBadgeConfig `json:"badgeConfig,omitempty"`
 	Description        *string                                 `json:"description,omitempty"`

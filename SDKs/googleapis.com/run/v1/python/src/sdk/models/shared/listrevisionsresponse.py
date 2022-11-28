@@ -1,16 +1,20 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import revision
-from . import listmeta
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ListRevisionsResponse:
-    api_version: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'apiVersion' }})
-    items: Optional[List[revision.Revision]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'items' }})
-    kind: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'kind' }})
-    metadata: Optional[listmeta.ListMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'metadata' }})
-    unreachable: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'unreachable' }})
+    r"""ListRevisionsResponse
+    ListRevisionsResponse is a list of Revision resources.
+    """
+    
+    api_version: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('apiVersion') }})
+    items: Optional[List[Revision]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('items') }})
+    kind: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('kind') }})
+    metadata: Optional[ListMeta] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('metadata') }})
+    unreachable: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('unreachable') }})
     

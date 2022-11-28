@@ -23,6 +23,8 @@ const (
 	AutomationEntityTriggerEnumAction         AutomationEntityTriggerEnum = "action"
 )
 
+// AutomationEntity
+// List Automations
 type AutomationEntity struct {
 	Automation             *AutomationEntityAutomationEnum `json:"automation,omitempty"`
 	DestinationReplaceFrom *string                         `json:"destination_replace_from,omitempty"`

@@ -1,29 +1,30 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RoleRepresentationComposites } from "./rolerepresentationcomposites";
 
 
+
 export class RoleRepresentation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=attributes" })
+  @SpeakeasyMetadata({ data: "json, name=attributes" })
   attributes?: Map<string, any>;
 
-  @Metadata({ data: "json, name=clientRole" })
+  @SpeakeasyMetadata({ data: "json, name=clientRole" })
   clientRole?: boolean;
 
-  @Metadata({ data: "json, name=composite" })
+  @SpeakeasyMetadata({ data: "json, name=composite" })
   composite?: boolean;
 
-  @Metadata({ data: "json, name=composites" })
+  @SpeakeasyMetadata({ data: "json, name=composites" })
   composites?: RoleRepresentationComposites;
 
-  @Metadata({ data: "json, name=containerId" })
+  @SpeakeasyMetadata({ data: "json, name=containerId" })
   containerId?: string;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 }

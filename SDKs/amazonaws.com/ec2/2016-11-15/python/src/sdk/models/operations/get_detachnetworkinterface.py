@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetDetachNetworkInterfaceActionEnum(str, Enum):
     DETACH_NETWORK_INTERFACE = "DetachNetworkInterface"
@@ -10,11 +14,11 @@ class GetDetachNetworkInterfaceVersionEnum(str, Enum):
 
 @dataclass
 class GetDetachNetworkInterfaceQueryParams:
-    action: GetDetachNetworkInterfaceActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    attachment_id: str = field(default=None, metadata={'query_param': { 'field_name': 'AttachmentId', 'style': 'form', 'explode': True }})
+    action: GetDetachNetworkInterfaceActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    attachment_id: str = field(metadata={'query_param': { 'field_name': 'AttachmentId', 'style': 'form', 'explode': True }})
+    version: GetDetachNetworkInterfaceVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     dry_run: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'DryRun', 'style': 'form', 'explode': True }})
     force: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'Force', 'style': 'form', 'explode': True }})
-    version: GetDetachNetworkInterfaceVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -30,12 +34,12 @@ class GetDetachNetworkInterfaceHeaders:
 
 @dataclass
 class GetDetachNetworkInterfaceRequest:
-    query_params: GetDetachNetworkInterfaceQueryParams = field(default=None)
-    headers: GetDetachNetworkInterfaceHeaders = field(default=None)
+    headers: GetDetachNetworkInterfaceHeaders = field()
+    query_params: GetDetachNetworkInterfaceQueryParams = field()
     
 
 @dataclass
 class GetDetachNetworkInterfaceResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

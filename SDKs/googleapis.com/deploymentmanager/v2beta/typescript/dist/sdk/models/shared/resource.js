@@ -22,8 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ResourceAccessControl } from "./resourceaccesscontrol";
 import { ResourceUpdate } from "./resourceupdate";
 export var ResourceWarningsCodeEnum;
@@ -62,11 +61,11 @@ var ResourceWarningsData = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=key" }),
+        SpeakeasyMetadata({ data: "json, name=key" }),
         __metadata("design:type", String)
     ], ResourceWarningsData.prototype, "key", void 0);
     __decorate([
-        Metadata({ data: "json, name=value" }),
+        SpeakeasyMetadata({ data: "json, name=value" }),
         __metadata("design:type", String)
     ], ResourceWarningsData.prototype, "value", void 0);
     return ResourceWarningsData;
@@ -78,15 +77,15 @@ var ResourceWarnings = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=code" }),
+        SpeakeasyMetadata({ data: "json, name=code" }),
         __metadata("design:type", String)
     ], ResourceWarnings.prototype, "code", void 0);
     __decorate([
-        Metadata({ data: "json, name=data", elemType: shared.ResourceWarningsData }),
+        SpeakeasyMetadata({ data: "json, name=data", elemType: ResourceWarningsData }),
         __metadata("design:type", Array)
     ], ResourceWarnings.prototype, "data", void 0);
     __decorate([
-        Metadata({ data: "json, name=message" }),
+        SpeakeasyMetadata({ data: "json, name=message" }),
         __metadata("design:type", String)
     ], ResourceWarnings.prototype, "message", void 0);
     return ResourceWarnings;
@@ -98,51 +97,51 @@ var Resource = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=accessControl" }),
+        SpeakeasyMetadata({ data: "json, name=accessControl" }),
         __metadata("design:type", ResourceAccessControl)
     ], Resource.prototype, "accessControl", void 0);
     __decorate([
-        Metadata({ data: "json, name=finalProperties" }),
+        SpeakeasyMetadata({ data: "json, name=finalProperties" }),
         __metadata("design:type", String)
     ], Resource.prototype, "finalProperties", void 0);
     __decorate([
-        Metadata({ data: "json, name=id" }),
+        SpeakeasyMetadata({ data: "json, name=id" }),
         __metadata("design:type", String)
     ], Resource.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "json, name=insertTime" }),
+        SpeakeasyMetadata({ data: "json, name=insertTime" }),
         __metadata("design:type", String)
     ], Resource.prototype, "insertTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=manifest" }),
+        SpeakeasyMetadata({ data: "json, name=manifest" }),
         __metadata("design:type", String)
     ], Resource.prototype, "manifest", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], Resource.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=properties" }),
+        SpeakeasyMetadata({ data: "json, name=properties" }),
         __metadata("design:type", String)
     ], Resource.prototype, "properties", void 0);
     __decorate([
-        Metadata({ data: "json, name=type" }),
+        SpeakeasyMetadata({ data: "json, name=type" }),
         __metadata("design:type", String)
     ], Resource.prototype, "type", void 0);
     __decorate([
-        Metadata({ data: "json, name=update" }),
+        SpeakeasyMetadata({ data: "json, name=update" }),
         __metadata("design:type", ResourceUpdate)
     ], Resource.prototype, "update", void 0);
     __decorate([
-        Metadata({ data: "json, name=updateTime" }),
+        SpeakeasyMetadata({ data: "json, name=updateTime" }),
         __metadata("design:type", String)
     ], Resource.prototype, "updateTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=url" }),
+        SpeakeasyMetadata({ data: "json, name=url" }),
         __metadata("design:type", String)
     ], Resource.prototype, "url", void 0);
     __decorate([
-        Metadata({ data: "json, name=warnings", elemType: shared.ResourceWarnings }),
+        SpeakeasyMetadata({ data: "json, name=warnings", elemType: ResourceWarnings }),
         __metadata("design:type", Array)
     ], Resource.prototype, "warnings", void 0);
     return Resource;

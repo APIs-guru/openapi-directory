@@ -1,22 +1,23 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class RealmEventsConfigRepresentation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=adminEventsDetailsEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=adminEventsDetailsEnabled" })
   adminEventsDetailsEnabled?: boolean;
 
-  @Metadata({ data: "json, name=adminEventsEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=adminEventsEnabled" })
   adminEventsEnabled?: boolean;
 
-  @Metadata({ data: "json, name=enabledEventTypes" })
+  @SpeakeasyMetadata({ data: "json, name=enabledEventTypes" })
   enabledEventTypes?: string[];
 
-  @Metadata({ data: "json, name=eventsEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=eventsEnabled" })
   eventsEnabled?: boolean;
 
-  @Metadata({ data: "json, name=eventsExpiration" })
+  @SpeakeasyMetadata({ data: "json, name=eventsExpiration" })
   eventsExpiration?: number;
 
-  @Metadata({ data: "json, name=eventsListeners" })
+  @SpeakeasyMetadata({ data: "json, name=eventsListeners" })
   eventsListeners?: string[];
 }

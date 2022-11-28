@@ -1,37 +1,37 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ConfigFile } from "./configfile";
 import { ImportFile } from "./importfile";
 
 
+
 export class Manifest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=config" })
+  @SpeakeasyMetadata({ data: "json, name=config" })
   config?: ConfigFile;
 
-  @Metadata({ data: "json, name=expandedConfig" })
+  @SpeakeasyMetadata({ data: "json, name=expandedConfig" })
   expandedConfig?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=imports", elemType: shared.ImportFile })
+  @SpeakeasyMetadata({ data: "json, name=imports", elemType: ImportFile })
   imports?: ImportFile[];
 
-  @Metadata({ data: "json, name=insertTime" })
+  @SpeakeasyMetadata({ data: "json, name=insertTime" })
   insertTime?: string;
 
-  @Metadata({ data: "json, name=layout" })
+  @SpeakeasyMetadata({ data: "json, name=layout" })
   layout?: string;
 
-  @Metadata({ data: "json, name=manifestSizeBytes" })
+  @SpeakeasyMetadata({ data: "json, name=manifestSizeBytes" })
   manifestSizeBytes?: string;
 
-  @Metadata({ data: "json, name=manifestSizeLimitBytes" })
+  @SpeakeasyMetadata({ data: "json, name=manifestSizeLimitBytes" })
   manifestSizeLimitBytes?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=selfLink" })
+  @SpeakeasyMetadata({ data: "json, name=selfLink" })
   selfLink?: string;
 }

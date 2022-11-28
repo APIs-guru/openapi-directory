@@ -14,14 +14,14 @@ type ActionsListSelfHostedRunnersForRepoQueryParams struct {
 	PerPage *int64 `queryParam:"style=form,explode=true,name=per_page"`
 }
 
-type ActionsListSelfHostedRunnersForRepoRequest struct {
-	PathParams  ActionsListSelfHostedRunnersForRepoPathParams
-	QueryParams ActionsListSelfHostedRunnersForRepoQueryParams
-}
-
 type ActionsListSelfHostedRunnersForRepo200ApplicationJSON struct {
 	Runners    []shared.RunnerNoLabels `json:"runners"`
 	TotalCount float64                 `json:"total_count"`
+}
+
+type ActionsListSelfHostedRunnersForRepoRequest struct {
+	PathParams  ActionsListSelfHostedRunnersForRepoPathParams
+	QueryParams ActionsListSelfHostedRunnersForRepoQueryParams
 }
 
 type ActionsListSelfHostedRunnersForRepoResponse struct {

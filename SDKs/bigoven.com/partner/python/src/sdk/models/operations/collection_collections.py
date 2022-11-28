@@ -10,13 +10,13 @@ class CollectionCollectionsQueryParams:
 
 @dataclass
 class CollectionCollectionsRequest:
-    query_params: CollectionCollectionsQueryParams = field(default=None)
+    query_params: CollectionCollectionsQueryParams = field()
     
 
 @dataclass
 class CollectionCollectionsResponse:
+    content_type: str = field()
+    status_code: int = field()
     big_oven_model_api2_collection_infos: Optional[List[shared.BigOvenModelApi2CollectionInfo]] = field(default=None)
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    body: Optional[bytes] = field(default=None)
     

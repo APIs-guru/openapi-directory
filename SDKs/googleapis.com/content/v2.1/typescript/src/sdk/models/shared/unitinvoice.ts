@@ -1,17 +1,17 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { UnitInvoiceAdditionalCharge } from "./unitinvoiceadditionalcharge";
 import { Price } from "./price";
 import { UnitInvoiceTaxLine } from "./unitinvoicetaxline";
 
 
+
 export class UnitInvoice extends SpeakeasyBase {
-  @Metadata({ data: "json, name=additionalCharges", elemType: shared.UnitInvoiceAdditionalCharge })
+  @SpeakeasyMetadata({ data: "json, name=additionalCharges", elemType: UnitInvoiceAdditionalCharge })
   additionalCharges?: UnitInvoiceAdditionalCharge[];
 
-  @Metadata({ data: "json, name=unitPrice" })
+  @SpeakeasyMetadata({ data: "json, name=unitPrice" })
   unitPrice?: Price;
 
-  @Metadata({ data: "json, name=unitPriceTaxes", elemType: shared.UnitInvoiceTaxLine })
+  @SpeakeasyMetadata({ data: "json, name=unitPriceTaxes", elemType: UnitInvoiceTaxLine })
   unitPriceTaxes?: UnitInvoiceTaxLine[];
 }

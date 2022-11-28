@@ -1,21 +1,21 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TimeSeries } from "./timeseries";
 
 
+
 export class ListAnomalyGroupTimeSeriesResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AnomalyGroupId" })
+  @SpeakeasyMetadata({ data: "json, name=AnomalyGroupId" })
   anomalyGroupId?: string;
 
-  @Metadata({ data: "json, name=MetricName" })
+  @SpeakeasyMetadata({ data: "json, name=MetricName" })
   metricName?: string;
 
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=TimeSeriesList", elemType: shared.TimeSeries })
+  @SpeakeasyMetadata({ data: "json, name=TimeSeriesList", elemType: TimeSeries })
   timeSeriesList?: TimeSeries[];
 
-  @Metadata({ data: "json, name=TimestampList" })
+  @SpeakeasyMetadata({ data: "json, name=TimestampList" })
   timestampList?: string[];
 }

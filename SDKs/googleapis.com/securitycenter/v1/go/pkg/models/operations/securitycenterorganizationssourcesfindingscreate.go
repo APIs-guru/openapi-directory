@@ -31,7 +31,7 @@ type SecuritycenterOrganizationsSourcesFindingsCreateSecurity struct {
 type SecuritycenterOrganizationsSourcesFindingsCreateRequest struct {
 	PathParams  SecuritycenterOrganizationsSourcesFindingsCreatePathParams
 	QueryParams SecuritycenterOrganizationsSourcesFindingsCreateQueryParams
-	Request     *shared.Finding `request:"mediaType=application/json"`
+	Request     *shared.FindingInput `request:"mediaType=application/json"`
 	Security    SecuritycenterOrganizationsSourcesFindingsCreateSecurity
 }
 

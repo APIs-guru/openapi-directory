@@ -1,4 +1,30 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
+
+
+// GoogleCloudIntegrationsV1alphaSfdcInstanceInput
+/** 
+ * The SfdcInstance resource use to hold channels and connection config data.
+**/
+export class GoogleCloudIntegrationsV1alphaSfdcInstanceInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=authConfigId" })
+  authConfigId?: string[];
+
+  @SpeakeasyMetadata({ data: "json, name=description" })
+  description?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
+  displayName?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=name" })
+  name?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=serviceAuthority" })
+  serviceAuthority?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=sfdcOrgId" })
+  sfdcOrgId?: string;
+}
 
 
 // GoogleCloudIntegrationsV1alphaSfdcInstance
@@ -6,30 +32,30 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The SfdcInstance resource use to hold channels and connection config data.
 **/
 export class GoogleCloudIntegrationsV1alphaSfdcInstance extends SpeakeasyBase {
-  @Metadata({ data: "json, name=authConfigId" })
+  @SpeakeasyMetadata({ data: "json, name=authConfigId" })
   authConfigId?: string[];
 
-  @Metadata({ data: "json, name=createTime" })
+  @SpeakeasyMetadata({ data: "json, name=createTime" })
   createTime?: string;
 
-  @Metadata({ data: "json, name=deleteTime" })
+  @SpeakeasyMetadata({ data: "json, name=deleteTime" })
   deleteTime?: string;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=displayName" })
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
   displayName?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=serviceAuthority" })
+  @SpeakeasyMetadata({ data: "json, name=serviceAuthority" })
   serviceAuthority?: string;
 
-  @Metadata({ data: "json, name=sfdcOrgId" })
+  @SpeakeasyMetadata({ data: "json, name=sfdcOrgId" })
   sfdcOrgId?: string;
 
-  @Metadata({ data: "json, name=updateTime" })
+  @SpeakeasyMetadata({ data: "json, name=updateTime" })
   updateTime?: string;
 }

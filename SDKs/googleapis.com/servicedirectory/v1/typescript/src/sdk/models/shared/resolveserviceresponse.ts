@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Service } from "./service";
+
 
 
 // ResolveServiceResponse
@@ -7,6 +8,6 @@ import { Service } from "./service";
  * The response message for LookupService.ResolveService.
 **/
 export class ResolveServiceResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=service" })
+  @SpeakeasyMetadata({ data: "json, name=service" })
   service?: Service;
 }

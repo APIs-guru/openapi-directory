@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetDeleteClusterSnapshotActionEnum(str, Enum):
     DELETE_CLUSTER_SNAPSHOT = "DeleteClusterSnapshot"
@@ -10,10 +14,10 @@ class GetDeleteClusterSnapshotVersionEnum(str, Enum):
 
 @dataclass
 class GetDeleteClusterSnapshotQueryParams:
-    action: GetDeleteClusterSnapshotActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetDeleteClusterSnapshotActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    snapshot_identifier: str = field(metadata={'query_param': { 'field_name': 'SnapshotIdentifier', 'style': 'form', 'explode': True }})
+    version: GetDeleteClusterSnapshotVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     snapshot_cluster_identifier: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'SnapshotClusterIdentifier', 'style': 'form', 'explode': True }})
-    snapshot_identifier: str = field(default=None, metadata={'query_param': { 'field_name': 'SnapshotIdentifier', 'style': 'form', 'explode': True }})
-    version: GetDeleteClusterSnapshotVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -29,13 +33,13 @@ class GetDeleteClusterSnapshotHeaders:
 
 @dataclass
 class GetDeleteClusterSnapshotRequest:
-    query_params: GetDeleteClusterSnapshotQueryParams = field(default=None)
-    headers: GetDeleteClusterSnapshotHeaders = field(default=None)
+    headers: GetDeleteClusterSnapshotHeaders = field()
+    query_params: GetDeleteClusterSnapshotQueryParams = field()
     
 
 @dataclass
 class GetDeleteClusterSnapshotResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

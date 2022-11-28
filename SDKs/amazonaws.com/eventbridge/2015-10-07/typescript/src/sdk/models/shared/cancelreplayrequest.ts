@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class CancelReplayRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ReplayName" })
+  @SpeakeasyMetadata({ data: "json, name=ReplayName" })
   replayName: string;
 }

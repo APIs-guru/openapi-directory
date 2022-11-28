@@ -17,6 +17,8 @@ const (
 	ProfileMetadataUserTypesEnumGoogleAppsUser  ProfileMetadataUserTypesEnum = "GOOGLE_APPS_USER"
 )
 
+// ProfileMetadata
+// The metadata about a profile.
 type ProfileMetadata struct {
 	ObjectType *ProfileMetadataObjectTypeEnum `json:"objectType,omitempty"`
 	UserTypes  []ProfileMetadataUserTypesEnum `json:"userTypes,omitempty"`

@@ -1,15 +1,18 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import googleprivacydlpv2bigqueryfield
-from . import googleprivacydlpv2cloudstoragefileset
-from . import googleprivacydlpv2cloudstoragepath
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class GooglePrivacyDlpV2LargeCustomDictionaryConfig:
-    big_query_field: Optional[googleprivacydlpv2bigqueryfield.GooglePrivacyDlpV2BigQueryField] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'bigQueryField' }})
-    cloud_storage_file_set: Optional[googleprivacydlpv2cloudstoragefileset.GooglePrivacyDlpV2CloudStorageFileSet] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'cloudStorageFileSet' }})
-    output_path: Optional[googleprivacydlpv2cloudstoragepath.GooglePrivacyDlpV2CloudStoragePath] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'outputPath' }})
+    r"""GooglePrivacyDlpV2LargeCustomDictionaryConfig
+    Configuration for a custom dictionary created from a data source of any size up to the maximum size defined in the [limits](https://cloud.google.com/dlp/limits) page. The artifacts of dictionary creation are stored in the specified Cloud Storage location. Consider using `CustomInfoType.Dictionary` for smaller dictionaries that satisfy the size requirements.
+    """
+    
+    big_query_field: Optional[GooglePrivacyDlpV2BigQueryField] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('bigQueryField') }})
+    cloud_storage_file_set: Optional[GooglePrivacyDlpV2CloudStorageFileSet] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('cloudStorageFileSet') }})
+    output_path: Optional[GooglePrivacyDlpV2CloudStoragePath] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('outputPath') }})
     

@@ -1,11 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { ColumnSettings } from "./columnsettings";
 import { TableDataSet } from "./tabledataset";
 
+
 export enum TimeSeriesTableMetricVisualizationEnum {
-    MetricVisualizationUnspecified = "METRIC_VISUALIZATION_UNSPECIFIED"
-,    Number = "NUMBER"
-,    Bar = "BAR"
+    MetricVisualizationUnspecified = "METRIC_VISUALIZATION_UNSPECIFIED",
+    Number = "NUMBER",
+    Bar = "BAR"
 }
 
 
@@ -14,9 +15,12 @@ export enum TimeSeriesTableMetricVisualizationEnum {
  * A table that displays time series data.
 **/
 export class TimeSeriesTable extends SpeakeasyBase {
-  @Metadata({ data: "json, name=dataSets", elemType: shared.TableDataSet })
+  @SpeakeasyMetadata({ data: "json, name=columnSettings", elemType: ColumnSettings })
+  columnSettings?: ColumnSettings[];
+
+  @SpeakeasyMetadata({ data: "json, name=dataSets", elemType: TableDataSet })
   dataSets?: TableDataSet[];
 
-  @Metadata({ data: "json, name=metricVisualization" })
+  @SpeakeasyMetadata({ data: "json, name=metricVisualization" })
   metricVisualization?: TimeSeriesTableMetricVisualizationEnum;
 }

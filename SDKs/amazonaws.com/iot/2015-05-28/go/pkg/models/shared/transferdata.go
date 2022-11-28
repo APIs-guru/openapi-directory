@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// TransferData
+// Data used to transfer a certificate to an Amazon Web Services account.
 type TransferData struct {
 	AcceptDate      *time.Time `json:"acceptDate,omitempty"`
 	RejectDate      *time.Time `json:"rejectDate,omitempty"`

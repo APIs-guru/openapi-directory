@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AppProfile } from "./appprofile";
+
 
 
 // ListAppProfilesResponse
@@ -8,12 +8,12 @@ import { AppProfile } from "./appprofile";
  * Response message for BigtableInstanceAdmin.ListAppProfiles.
 **/
 export class ListAppProfilesResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=appProfiles", elemType: shared.AppProfile })
+  @SpeakeasyMetadata({ data: "json, name=appProfiles", elemType: AppProfile })
   appProfiles?: AppProfile[];
 
-  @Metadata({ data: "json, name=failedLocations" })
+  @SpeakeasyMetadata({ data: "json, name=failedLocations" })
   failedLocations?: string[];
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 }

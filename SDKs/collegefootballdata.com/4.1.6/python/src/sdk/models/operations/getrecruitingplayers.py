@@ -14,12 +14,12 @@ class GetRecruitingPlayersQueryParams:
 
 @dataclass
 class GetRecruitingPlayersRequest:
-    query_params: GetRecruitingPlayersQueryParams = field(default=None)
+    query_params: GetRecruitingPlayersQueryParams = field()
     
 
 @dataclass
 class GetRecruitingPlayersResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     recruits: Optional[List[shared.Recruit]] = field(default=None)
-    status_code: int = field(default=None)
     

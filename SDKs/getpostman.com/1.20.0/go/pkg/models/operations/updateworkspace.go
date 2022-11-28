@@ -37,11 +37,6 @@ type UpdateWorkspaceRequestBody struct {
 	Workspace *UpdateWorkspaceRequestBodyWorkspace `json:"workspace,omitempty"`
 }
 
-type UpdateWorkspaceRequest struct {
-	PathParams UpdateWorkspacePathParams
-	Request    *UpdateWorkspaceRequestBody `request:"mediaType=application/json"`
-}
-
 type UpdateWorkspace200ApplicationJSONWorkspace struct {
 	ID   *string `json:"id,omitempty"`
 	Name *string `json:"name,omitempty"`
@@ -67,6 +62,11 @@ type UpdateWorkspace404ApplicationJSONError struct {
 
 type UpdateWorkspace404ApplicationJSON struct {
 	Error *UpdateWorkspace404ApplicationJSONError `json:"error,omitempty"`
+}
+
+type UpdateWorkspaceRequest struct {
+	PathParams UpdateWorkspacePathParams
+	Request    *UpdateWorkspaceRequestBody `request:"mediaType=application/json"`
 }
 
 type UpdateWorkspaceResponse struct {

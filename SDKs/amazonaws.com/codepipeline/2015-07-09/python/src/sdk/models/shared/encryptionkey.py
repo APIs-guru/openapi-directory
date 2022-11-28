@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import encryptionkeytype_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class EncryptionKey:
-    id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
-    type: encryptionkeytype_enum.EncryptionKeyTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    r"""EncryptionKey
+    Represents information about the key used to encrypt data in the artifact store, such as an AWS Key Management Service (AWS KMS) key.
+    """
+    
+    id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('id') }})
+    type: EncryptionKeyTypeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('type') }})
     

@@ -1,32 +1,32 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RuleGroup } from "./rulegroup";
 import { Tag } from "./tag";
 import { RuleGroupTypeEnum } from "./rulegrouptypeenum";
 
 
+
 export class CreateRuleGroupRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Capacity" })
+  @SpeakeasyMetadata({ data: "json, name=Capacity" })
   capacity: number;
 
-  @Metadata({ data: "json, name=Description" })
+  @SpeakeasyMetadata({ data: "json, name=Description" })
   description?: string;
 
-  @Metadata({ data: "json, name=DryRun" })
+  @SpeakeasyMetadata({ data: "json, name=DryRun" })
   dryRun?: boolean;
 
-  @Metadata({ data: "json, name=RuleGroup" })
+  @SpeakeasyMetadata({ data: "json, name=RuleGroup" })
   ruleGroup?: RuleGroup;
 
-  @Metadata({ data: "json, name=RuleGroupName" })
+  @SpeakeasyMetadata({ data: "json, name=RuleGroupName" })
   ruleGroupName: string;
 
-  @Metadata({ data: "json, name=Rules" })
+  @SpeakeasyMetadata({ data: "json, name=Rules" })
   rules?: string;
 
-  @Metadata({ data: "json, name=Tags", elemType: shared.Tag })
+  @SpeakeasyMetadata({ data: "json, name=Tags", elemType: Tag })
   tags?: Tag[];
 
-  @Metadata({ data: "json, name=Type" })
+  @SpeakeasyMetadata({ data: "json, name=Type" })
   type: RuleGroupTypeEnum;
 }

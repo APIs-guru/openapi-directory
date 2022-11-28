@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TestWindowSummary } from "./testwindowsummary";
+
 
 
 // PredictorExecution
@@ -8,9 +8,9 @@ import { TestWindowSummary } from "./testwindowsummary";
  * The algorithm used to perform a backtest and the status of those tests.
 **/
 export class PredictorExecution extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AlgorithmArn" })
+  @SpeakeasyMetadata({ data: "json, name=AlgorithmArn" })
   algorithmArn?: string;
 
-  @Metadata({ data: "json, name=TestWindows", elemType: shared.TestWindowSummary })
+  @SpeakeasyMetadata({ data: "json, name=TestWindows", elemType: TestWindowSummary })
   testWindows?: TestWindowSummary[];
 }

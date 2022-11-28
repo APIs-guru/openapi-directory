@@ -14,12 +14,16 @@ type UpdateSafetyRuleHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// UpdateSafetyRuleRequestBodyAssertionRuleUpdate
+// An update to an assertion rule. You can update the name or the evaluation period (wait period). If you don't specify one of the items to update, the item is unchanged.
 type UpdateSafetyRuleRequestBodyAssertionRuleUpdate struct {
 	Name          *string `json:"Name,omitempty"`
 	SafetyRuleArn *string `json:"SafetyRuleArn,omitempty"`
 	WaitPeriodMs  *int64  `json:"WaitPeriodMs,omitempty"`
 }
 
+// UpdateSafetyRuleRequestBodyGatingRuleUpdate
+// Update to a gating rule. You can update the name or the evaluation period (wait period). If you don't specify one of the items to update, the item is unchanged.
 type UpdateSafetyRuleRequestBodyGatingRuleUpdate struct {
 	Name          *string `json:"Name,omitempty"`
 	SafetyRuleArn *string `json:"SafetyRuleArn,omitempty"`

@@ -1,51 +1,84 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SasPortalDeviceConfig } from "./sasportaldeviceconfig";
-import { SasPortalChannelWithScore } from "./sasportalchannelwithscore";
-import { SasPortalDeviceMetadata } from "./sasportaldevicemetadata";
+import { SasPortalDeviceMetadataInput } from "./sasportaldevicemetadata";
 import { SasPortalFrequencyRange } from "./sasportalfrequencyrange";
 import { SasPortalDeviceGrant } from "./sasportaldevicegrant";
-import { SasPortalDeviceConfig } from "./sasportaldeviceconfig";
+import { SasPortalChannelWithScore } from "./sasportalchannelwithscore";
+import { SasPortalDeviceMetadata } from "./sasportaldevicemetadata";
+
 
 export enum SasPortalDeviceStateEnum {
-    DeviceStateUnspecified = "DEVICE_STATE_UNSPECIFIED"
-,    Reserved = "RESERVED"
-,    Registered = "REGISTERED"
-,    Deregistered = "DEREGISTERED"
+    DeviceStateUnspecified = "DEVICE_STATE_UNSPECIFIED",
+    Reserved = "RESERVED",
+    Registered = "REGISTERED",
+    Deregistered = "DEREGISTERED"
+}
+
+
+export class SasPortalDeviceInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=activeConfig" })
+  activeConfig?: SasPortalDeviceConfig;
+
+  @SpeakeasyMetadata({ data: "json, name=deviceMetadata" })
+  deviceMetadata?: SasPortalDeviceMetadataInput;
+
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
+  displayName?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=fccId" })
+  fccId?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=grantRangeAllowlists", elemType: SasPortalFrequencyRange })
+  grantRangeAllowlists?: SasPortalFrequencyRange[];
+
+  @SpeakeasyMetadata({ data: "json, name=grants", elemType: SasPortalDeviceGrant })
+  grants?: SasPortalDeviceGrant[];
+
+  @SpeakeasyMetadata({ data: "json, name=name" })
+  name?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=preloadedConfig" })
+  preloadedConfig?: SasPortalDeviceConfig;
+
+  @SpeakeasyMetadata({ data: "json, name=serialNumber" })
+  serialNumber?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=state" })
+  state?: SasPortalDeviceStateEnum;
 }
 
 
 export class SasPortalDevice extends SpeakeasyBase {
-  @Metadata({ data: "json, name=activeConfig" })
+  @SpeakeasyMetadata({ data: "json, name=activeConfig" })
   activeConfig?: SasPortalDeviceConfig;
 
-  @Metadata({ data: "json, name=currentChannels", elemType: shared.SasPortalChannelWithScore })
+  @SpeakeasyMetadata({ data: "json, name=currentChannels", elemType: SasPortalChannelWithScore })
   currentChannels?: SasPortalChannelWithScore[];
 
-  @Metadata({ data: "json, name=deviceMetadata" })
+  @SpeakeasyMetadata({ data: "json, name=deviceMetadata" })
   deviceMetadata?: SasPortalDeviceMetadata;
 
-  @Metadata({ data: "json, name=displayName" })
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
   displayName?: string;
 
-  @Metadata({ data: "json, name=fccId" })
+  @SpeakeasyMetadata({ data: "json, name=fccId" })
   fccId?: string;
 
-  @Metadata({ data: "json, name=grantRangeAllowlists", elemType: shared.SasPortalFrequencyRange })
+  @SpeakeasyMetadata({ data: "json, name=grantRangeAllowlists", elemType: SasPortalFrequencyRange })
   grantRangeAllowlists?: SasPortalFrequencyRange[];
 
-  @Metadata({ data: "json, name=grants", elemType: shared.SasPortalDeviceGrant })
+  @SpeakeasyMetadata({ data: "json, name=grants", elemType: SasPortalDeviceGrant })
   grants?: SasPortalDeviceGrant[];
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=preloadedConfig" })
+  @SpeakeasyMetadata({ data: "json, name=preloadedConfig" })
   preloadedConfig?: SasPortalDeviceConfig;
 
-  @Metadata({ data: "json, name=serialNumber" })
+  @SpeakeasyMetadata({ data: "json, name=serialNumber" })
   serialNumber?: string;
 
-  @Metadata({ data: "json, name=state" })
+  @SpeakeasyMetadata({ data: "json, name=state" })
   state?: SasPortalDeviceStateEnum;
 }

@@ -1,43 +1,38 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum TagRequestColorEnum {
-    DarkPink = "dark-pink"
-,    DarkGreen = "dark-green"
-,    DarkBlue = "dark-blue"
-,    DarkRed = "dark-red"
-,    DarkTeal = "dark-teal"
-,    DarkBrown = "dark-brown"
-,    DarkOrange = "dark-orange"
-,    DarkPurple = "dark-purple"
-,    DarkWarmGray = "dark-warm-gray"
-,    LightPink = "light-pink"
-,    LightGreen = "light-green"
-,    LightBlue = "light-blue"
-,    LightRed = "light-red"
-,    LightTeal = "light-teal"
-,    LightBrown = "light-brown"
-,    LightOrange = "light-orange"
-,    LightPurple = "light-purple"
-,    LightWarmGray = "light-warm-gray"
+    DarkPink = "dark-pink",
+    DarkGreen = "dark-green",
+    DarkBlue = "dark-blue",
+    DarkRed = "dark-red",
+    DarkTeal = "dark-teal",
+    DarkBrown = "dark-brown",
+    DarkOrange = "dark-orange",
+    DarkPurple = "dark-purple",
+    DarkWarmGray = "dark-warm-gray",
+    LightPink = "light-pink",
+    LightGreen = "light-green",
+    LightBlue = "light-blue",
+    LightRed = "light-red",
+    LightTeal = "light-teal",
+    LightBrown = "light-brown",
+    LightOrange = "light-orange",
+    LightPurple = "light-purple",
+    LightWarmGray = "light-warm-gray"
 }
 
 
-export class TagRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=color" })
+export class TagRequestInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=color" })
   color?: TagRequestColorEnum;
 
-  @Metadata({ data: "json, name=followers" })
+  @SpeakeasyMetadata({ data: "json, name=followers" })
   followers?: string[];
 
-  @Metadata({ data: "json, name=gid" })
-  gid?: string;
-
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=resource_type" })
-  resourceType?: string;
-
-  @Metadata({ data: "json, name=workspace" })
+  @SpeakeasyMetadata({ data: "json, name=workspace" })
   workspace?: string;
 }

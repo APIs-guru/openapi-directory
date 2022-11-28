@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var TranscoderProjectsLocationsJobTemplatesCreatePathParams = /** @class */ (function (_super) {
     __extends(TranscoderProjectsLocationsJobTemplatesCreatePathParams, _super);
@@ -30,7 +30,7 @@ var TranscoderProjectsLocationsJobTemplatesCreatePathParams = /** @class */ (fun
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=parent" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=parent" }),
         __metadata("design:type", String)
     ], TranscoderProjectsLocationsJobTemplatesCreatePathParams.prototype, "parent", void 0);
     return TranscoderProjectsLocationsJobTemplatesCreatePathParams;
@@ -42,51 +42,51 @@ var TranscoderProjectsLocationsJobTemplatesCreateQueryParams = /** @class */ (fu
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=$.xgafv" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=$.xgafv" }),
         __metadata("design:type", String)
     ], TranscoderProjectsLocationsJobTemplatesCreateQueryParams.prototype, "dollarXgafv", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=access_token" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=access_token" }),
         __metadata("design:type", String)
     ], TranscoderProjectsLocationsJobTemplatesCreateQueryParams.prototype, "accessToken", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=alt" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=alt" }),
         __metadata("design:type", String)
     ], TranscoderProjectsLocationsJobTemplatesCreateQueryParams.prototype, "alt", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=callback" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=callback" }),
         __metadata("design:type", String)
     ], TranscoderProjectsLocationsJobTemplatesCreateQueryParams.prototype, "callback", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=fields" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=fields" }),
         __metadata("design:type", String)
     ], TranscoderProjectsLocationsJobTemplatesCreateQueryParams.prototype, "fields", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=jobTemplateId" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=jobTemplateId" }),
         __metadata("design:type", String)
     ], TranscoderProjectsLocationsJobTemplatesCreateQueryParams.prototype, "jobTemplateId", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=key" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=key" }),
         __metadata("design:type", String)
     ], TranscoderProjectsLocationsJobTemplatesCreateQueryParams.prototype, "key", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=oauth_token" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=oauth_token" }),
         __metadata("design:type", String)
     ], TranscoderProjectsLocationsJobTemplatesCreateQueryParams.prototype, "oauthToken", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=prettyPrint" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=prettyPrint" }),
         __metadata("design:type", Boolean)
     ], TranscoderProjectsLocationsJobTemplatesCreateQueryParams.prototype, "prettyPrint", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=quotaUser" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=quotaUser" }),
         __metadata("design:type", String)
     ], TranscoderProjectsLocationsJobTemplatesCreateQueryParams.prototype, "quotaUser", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=uploadType" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=uploadType" }),
         __metadata("design:type", String)
     ], TranscoderProjectsLocationsJobTemplatesCreateQueryParams.prototype, "uploadType", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=upload_protocol" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=upload_protocol" }),
         __metadata("design:type", String)
     ], TranscoderProjectsLocationsJobTemplatesCreateQueryParams.prototype, "uploadProtocol", void 0);
     return TranscoderProjectsLocationsJobTemplatesCreateQueryParams;
@@ -98,11 +98,11 @@ var TranscoderProjectsLocationsJobTemplatesCreateSecurity = /** @class */ (funct
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2)
     ], TranscoderProjectsLocationsJobTemplatesCreateSecurity.prototype, "oauth2", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2c)
     ], TranscoderProjectsLocationsJobTemplatesCreateSecurity.prototype, "oauth2c", void 0);
     return TranscoderProjectsLocationsJobTemplatesCreateSecurity;
@@ -114,19 +114,19 @@ var TranscoderProjectsLocationsJobTemplatesCreateRequest = /** @class */ (functi
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", TranscoderProjectsLocationsJobTemplatesCreatePathParams)
     ], TranscoderProjectsLocationsJobTemplatesCreateRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", TranscoderProjectsLocationsJobTemplatesCreateQueryParams)
     ], TranscoderProjectsLocationsJobTemplatesCreateRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", shared.JobTemplate)
     ], TranscoderProjectsLocationsJobTemplatesCreateRequest.prototype, "request", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", TranscoderProjectsLocationsJobTemplatesCreateSecurity)
     ], TranscoderProjectsLocationsJobTemplatesCreateRequest.prototype, "security", void 0);
     return TranscoderProjectsLocationsJobTemplatesCreateRequest;
@@ -138,15 +138,15 @@ var TranscoderProjectsLocationsJobTemplatesCreateResponse = /** @class */ (funct
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], TranscoderProjectsLocationsJobTemplatesCreateResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.JobTemplate)
     ], TranscoderProjectsLocationsJobTemplatesCreateResponse.prototype, "jobTemplate", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], TranscoderProjectsLocationsJobTemplatesCreateResponse.prototype, "statusCode", void 0);
     return TranscoderProjectsLocationsJobTemplatesCreateResponse;

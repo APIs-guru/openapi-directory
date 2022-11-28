@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { WorkerPool } from "./workerpool";
+
 
 
 // ListWorkerPoolsResponse
@@ -8,6 +8,6 @@ import { WorkerPool } from "./workerpool";
  * Response containing existing `WorkerPools`.
 **/
 export class ListWorkerPoolsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=workerPools", elemType: shared.WorkerPool })
+  @SpeakeasyMetadata({ data: "json, name=workerPools", elemType: WorkerPool })
   workerPools?: WorkerPool[];
 }

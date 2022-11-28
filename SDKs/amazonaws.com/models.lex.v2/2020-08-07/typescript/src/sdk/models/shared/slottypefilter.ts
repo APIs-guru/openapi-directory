@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SlotTypeFilterNameEnum } from "./slottypefilternameenum";
 import { SlotTypeFilterOperatorEnum } from "./slottypefilteroperatorenum";
+
 
 
 // SlotTypeFilter
@@ -8,12 +9,12 @@ import { SlotTypeFilterOperatorEnum } from "./slottypefilteroperatorenum";
  * Filters the response from the <code>ListSlotTypes</code> operation.
 **/
 export class SlotTypeFilter extends SpeakeasyBase {
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: SlotTypeFilterNameEnum;
 
-  @Metadata({ data: "json, name=operator" })
+  @SpeakeasyMetadata({ data: "json, name=operator" })
   operator: SlotTypeFilterOperatorEnum;
 
-  @Metadata({ data: "json, name=values" })
+  @SpeakeasyMetadata({ data: "json, name=values" })
   values: string[];
 }

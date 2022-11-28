@@ -1,5 +1,7 @@
 package shared
 
+// ResourceComplianceSummaryItem
+// Compliance summary information for a specific resource.
 type ResourceComplianceSummaryItem struct {
 	ComplianceType      *string                     `json:"ComplianceType,omitempty"`
 	CompliantSummary    *CompliantSummary           `json:"CompliantSummary,omitempty"`

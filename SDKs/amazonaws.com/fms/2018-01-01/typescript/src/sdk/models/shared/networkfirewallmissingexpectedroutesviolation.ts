@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ExpectedRoute } from "./expectedroute";
+
 
 
 // NetworkFirewallMissingExpectedRoutesViolation
@@ -8,12 +8,12 @@ import { ExpectedRoute } from "./expectedroute";
  * Violation detail for an expected route missing in Network Firewall.
 **/
 export class NetworkFirewallMissingExpectedRoutesViolation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ExpectedRoutes", elemType: shared.ExpectedRoute })
+  @SpeakeasyMetadata({ data: "json, name=ExpectedRoutes", elemType: ExpectedRoute })
   expectedRoutes?: ExpectedRoute[];
 
-  @Metadata({ data: "json, name=ViolationTarget" })
+  @SpeakeasyMetadata({ data: "json, name=ViolationTarget" })
   violationTarget?: string;
 
-  @Metadata({ data: "json, name=VpcId" })
+  @SpeakeasyMetadata({ data: "json, name=VpcId" })
   vpcId?: string;
 }

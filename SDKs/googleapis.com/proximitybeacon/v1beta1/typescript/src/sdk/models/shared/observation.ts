@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AdvertisedId } from "./advertisedid";
+
 
 
 // Observation
@@ -7,12 +8,12 @@ import { AdvertisedId } from "./advertisedid";
  * Represents one beacon observed once.
 **/
 export class Observation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=advertisedId" })
+  @SpeakeasyMetadata({ data: "json, name=advertisedId" })
   advertisedId?: AdvertisedId;
 
-  @Metadata({ data: "json, name=telemetry" })
+  @SpeakeasyMetadata({ data: "json, name=telemetry" })
   telemetry?: string;
 
-  @Metadata({ data: "json, name=timestampMs" })
+  @SpeakeasyMetadata({ data: "json, name=timestampMs" })
   timestampMs?: string;
 }

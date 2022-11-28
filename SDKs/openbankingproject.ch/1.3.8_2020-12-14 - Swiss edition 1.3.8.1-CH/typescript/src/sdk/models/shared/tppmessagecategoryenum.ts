@@ -1,6 +1,7 @@
 
 
+
 export enum TppMessageCategoryEnum {
-    Error = "ERROR"
-,    Warning = "WARNING"
+    Error = "ERROR",
+    Warning = "WARNING"
 }

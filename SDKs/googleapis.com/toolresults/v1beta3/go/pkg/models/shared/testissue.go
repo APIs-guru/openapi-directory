@@ -55,6 +55,8 @@ const (
 	TestIssueTypeEnumDetectedAppSplashScreen             TestIssueTypeEnum = "detectedAppSplashScreen"
 )
 
+// TestIssue
+// An issue detected occurring during a test execution.
 type TestIssue struct {
 	Category     *TestIssueCategoryEnum `json:"category,omitempty"`
 	ErrorMessage *string                `json:"errorMessage,omitempty"`

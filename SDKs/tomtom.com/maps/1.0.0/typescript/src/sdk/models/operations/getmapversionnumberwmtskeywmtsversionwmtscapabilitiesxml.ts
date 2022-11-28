@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum GetMapVersionNumberWmtsKeyWmtsVersionWmtsCapabilitiesXmlWmtsVersionEnum {
     One00 = "1.0.0"
@@ -6,27 +7,27 @@ export enum GetMapVersionNumberWmtsKeyWmtsVersionWmtsCapabilitiesXmlWmtsVersionE
 
 
 export class GetMapVersionNumberWmtsKeyWmtsVersionWmtsCapabilitiesXmlPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=key" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=key" })
   key: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=versionNumber" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=versionNumber" })
   versionNumber: number;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=wmtsVersion" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=wmtsVersion" })
   wmtsVersion: GetMapVersionNumberWmtsKeyWmtsVersionWmtsCapabilitiesXmlWmtsVersionEnum;
 }
 
 
 export class GetMapVersionNumberWmtsKeyWmtsVersionWmtsCapabilitiesXmlRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetMapVersionNumberWmtsKeyWmtsVersionWmtsCapabilitiesXmlPathParams;
 }
 
 
 export class GetMapVersionNumberWmtsKeyWmtsVersionWmtsCapabilitiesXmlResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

@@ -40,7 +40,7 @@ type SpannerProjectsInstancesDatabasesSessionsBatchCreateSecurity struct {
 type SpannerProjectsInstancesDatabasesSessionsBatchCreateRequest struct {
 	PathParams  SpannerProjectsInstancesDatabasesSessionsBatchCreatePathParams
 	QueryParams SpannerProjectsInstancesDatabasesSessionsBatchCreateQueryParams
-	Request     *shared.BatchCreateSessionsRequest `request:"mediaType=application/json"`
+	Request     *shared.BatchCreateSessionsRequestInput `request:"mediaType=application/json"`
 	Security    SpannerProjectsInstancesDatabasesSessionsBatchCreateSecurity
 }
 

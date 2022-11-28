@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
 @dataclass
 class ListContactsPathParams:
-    contact_list_name: str = field(default=None, metadata={'path_param': { 'field_name': 'ContactListName', 'style': 'simple', 'explode': False }})
+    contact_list_name: str = field(metadata={'path_param': { 'field_name': 'ContactListName', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -29,30 +34,34 @@ class ListContactsHeaders:
 @dataclass_json
 @dataclass
 class ListContactsRequestBodyFilter:
-    filtered_status: Optional[shared.SubscriptionStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FilteredStatus' }})
-    topic_filter: Optional[shared.TopicFilter] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'TopicFilter' }})
+    r"""ListContactsRequestBodyFilter
+    A filter that can be applied to a list of contacts.
+    """
+    
+    filtered_status: Optional[shared.SubscriptionStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('FilteredStatus') }})
+    topic_filter: Optional[shared.TopicFilter] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('TopicFilter') }})
     
 
 @dataclass_json
 @dataclass
 class ListContactsRequestBody:
-    filter: Optional[ListContactsRequestBodyFilter] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Filter' }})
+    filter: Optional[ListContactsRequestBodyFilter] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Filter') }})
     
 
 @dataclass
 class ListContactsRequest:
-    path_params: ListContactsPathParams = field(default=None)
-    query_params: ListContactsQueryParams = field(default=None)
-    headers: ListContactsHeaders = field(default=None)
-    request: ListContactsRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: ListContactsHeaders = field()
+    path_params: ListContactsPathParams = field()
+    query_params: ListContactsQueryParams = field()
+    request: ListContactsRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class ListContactsResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     list_contacts_response: Optional[shared.ListContactsResponse] = field(default=None)
     not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     too_many_requests_exception: Optional[Any] = field(default=None)
     

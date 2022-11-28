@@ -13,13 +13,13 @@ type GetWebhookQueryParams struct {
 	OptPretty *bool    `queryParam:"style=form,explode=true,name=opt_pretty"`
 }
 
+type GetWebhook200ApplicationJSON struct {
+	Data *shared.WebhookResponse `json:"data,omitempty"`
+}
+
 type GetWebhookRequest struct {
 	PathParams  GetWebhookPathParams
 	QueryParams GetWebhookQueryParams
-}
-
-type GetWebhook200ApplicationJSON struct {
-	Data *shared.WebhookResponse `json:"data,omitempty"`
 }
 
 type GetWebhookResponse struct {

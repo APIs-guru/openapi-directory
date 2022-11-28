@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var StartSuiteRunPathParams = /** @class */ (function (_super) {
     __extends(StartSuiteRunPathParams, _super);
@@ -30,7 +30,7 @@ var StartSuiteRunPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=suiteDefinitionId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=suiteDefinitionId" }),
         __metadata("design:type", String)
     ], StartSuiteRunPathParams.prototype, "suiteDefinitionId", void 0);
     return StartSuiteRunPathParams;
@@ -42,31 +42,31 @@ var StartSuiteRunHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
         __metadata("design:type", String)
     ], StartSuiteRunHeaders.prototype, "xAmzAlgorithm", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
         __metadata("design:type", String)
     ], StartSuiteRunHeaders.prototype, "xAmzContentSha256", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
         __metadata("design:type", String)
     ], StartSuiteRunHeaders.prototype, "xAmzCredential", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
         __metadata("design:type", String)
     ], StartSuiteRunHeaders.prototype, "xAmzDate", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
         __metadata("design:type", String)
     ], StartSuiteRunHeaders.prototype, "xAmzSecurityToken", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
         __metadata("design:type", String)
     ], StartSuiteRunHeaders.prototype, "xAmzSignature", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
         __metadata("design:type", String)
     ], StartSuiteRunHeaders.prototype, "xAmzSignedHeaders", void 0);
     return StartSuiteRunHeaders;
@@ -82,11 +82,11 @@ var StartSuiteRunRequestBodySuiteRunConfiguration = /** @class */ (function (_su
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=primaryDevice" }),
+        SpeakeasyMetadata({ data: "json, name=primaryDevice" }),
         __metadata("design:type", shared.DeviceUnderTest)
     ], StartSuiteRunRequestBodySuiteRunConfiguration.prototype, "primaryDevice", void 0);
     __decorate([
-        Metadata({ data: "json, name=selectedTestList" }),
+        SpeakeasyMetadata({ data: "json, name=selectedTestList" }),
         __metadata("design:type", Array)
     ], StartSuiteRunRequestBodySuiteRunConfiguration.prototype, "selectedTestList", void 0);
     return StartSuiteRunRequestBodySuiteRunConfiguration;
@@ -98,15 +98,15 @@ var StartSuiteRunRequestBody = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=suiteDefinitionVersion" }),
+        SpeakeasyMetadata({ data: "json, name=suiteDefinitionVersion" }),
         __metadata("design:type", String)
     ], StartSuiteRunRequestBody.prototype, "suiteDefinitionVersion", void 0);
     __decorate([
-        Metadata({ data: "json, name=suiteRunConfiguration" }),
+        SpeakeasyMetadata({ data: "json, name=suiteRunConfiguration" }),
         __metadata("design:type", StartSuiteRunRequestBodySuiteRunConfiguration)
     ], StartSuiteRunRequestBody.prototype, "suiteRunConfiguration", void 0);
     __decorate([
-        Metadata({ data: "json, name=tags" }),
+        SpeakeasyMetadata({ data: "json, name=tags" }),
         __metadata("design:type", Map)
     ], StartSuiteRunRequestBody.prototype, "tags", void 0);
     return StartSuiteRunRequestBody;
@@ -118,15 +118,15 @@ var StartSuiteRunRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", StartSuiteRunPathParams)
     ], StartSuiteRunRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", StartSuiteRunHeaders)
     ], StartSuiteRunRequest.prototype, "headers", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", StartSuiteRunRequestBody)
     ], StartSuiteRunRequest.prototype, "request", void 0);
     return StartSuiteRunRequest;
@@ -138,27 +138,27 @@ var StartSuiteRunResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], StartSuiteRunResponse.prototype, "conflictException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], StartSuiteRunResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], StartSuiteRunResponse.prototype, "internalServerException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.StartSuiteRunResponse)
     ], StartSuiteRunResponse.prototype, "startSuiteRunResponse", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], StartSuiteRunResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], StartSuiteRunResponse.prototype, "validationException", void 0);
     return StartSuiteRunResponse;

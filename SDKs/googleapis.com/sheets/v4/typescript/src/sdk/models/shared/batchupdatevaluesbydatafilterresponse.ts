@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { UpdateValuesByDataFilterResponse } from "./updatevaluesbydatafilterresponse";
+
 
 
 // BatchUpdateValuesByDataFilterResponse
@@ -8,21 +8,21 @@ import { UpdateValuesByDataFilterResponse } from "./updatevaluesbydatafilterresp
  * The response when updating a range of values in a spreadsheet.
 **/
 export class BatchUpdateValuesByDataFilterResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=responses", elemType: shared.UpdateValuesByDataFilterResponse })
+  @SpeakeasyMetadata({ data: "json, name=responses", elemType: UpdateValuesByDataFilterResponse })
   responses?: UpdateValuesByDataFilterResponse[];
 
-  @Metadata({ data: "json, name=spreadsheetId" })
+  @SpeakeasyMetadata({ data: "json, name=spreadsheetId" })
   spreadsheetId?: string;
 
-  @Metadata({ data: "json, name=totalUpdatedCells" })
+  @SpeakeasyMetadata({ data: "json, name=totalUpdatedCells" })
   totalUpdatedCells?: number;
 
-  @Metadata({ data: "json, name=totalUpdatedColumns" })
+  @SpeakeasyMetadata({ data: "json, name=totalUpdatedColumns" })
   totalUpdatedColumns?: number;
 
-  @Metadata({ data: "json, name=totalUpdatedRows" })
+  @SpeakeasyMetadata({ data: "json, name=totalUpdatedRows" })
   totalUpdatedRows?: number;
 
-  @Metadata({ data: "json, name=totalUpdatedSheets" })
+  @SpeakeasyMetadata({ data: "json, name=totalUpdatedSheets" })
   totalUpdatedSheets?: number;
 }

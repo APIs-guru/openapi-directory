@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 
 class GetBatchStopUpdateActionActionEnum(str, Enum):
     BATCH_STOP_UPDATE_ACTION = "BatchStopUpdateAction"
@@ -10,11 +14,11 @@ class GetBatchStopUpdateActionVersionEnum(str, Enum):
 
 @dataclass
 class GetBatchStopUpdateActionQueryParams:
-    action: GetBatchStopUpdateActionActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetBatchStopUpdateActionActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    service_update_name: str = field(metadata={'query_param': { 'field_name': 'ServiceUpdateName', 'style': 'form', 'explode': True }})
+    version: GetBatchStopUpdateActionVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     cache_cluster_ids: Optional[List[str]] = field(default=None, metadata={'query_param': { 'field_name': 'CacheClusterIds', 'style': 'form', 'explode': True }})
     replication_group_ids: Optional[List[str]] = field(default=None, metadata={'query_param': { 'field_name': 'ReplicationGroupIds', 'style': 'form', 'explode': True }})
-    service_update_name: str = field(default=None, metadata={'query_param': { 'field_name': 'ServiceUpdateName', 'style': 'form', 'explode': True }})
-    version: GetBatchStopUpdateActionVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -30,13 +34,13 @@ class GetBatchStopUpdateActionHeaders:
 
 @dataclass
 class GetBatchStopUpdateActionRequest:
-    query_params: GetBatchStopUpdateActionQueryParams = field(default=None)
-    headers: GetBatchStopUpdateActionHeaders = field(default=None)
+    headers: GetBatchStopUpdateActionHeaders = field()
+    query_params: GetBatchStopUpdateActionQueryParams = field()
     
 
 @dataclass
 class GetBatchStopUpdateActionResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { EventTopic } from "./eventtopic";
 // DescribeEventTopicsResult
 /**
  * The result of a DescribeEventTopic request.
@@ -34,7 +34,7 @@ var DescribeEventTopicsResult = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=EventTopics", elemType: shared.EventTopic }),
+        SpeakeasyMetadata({ data: "json, name=EventTopics", elemType: EventTopic }),
         __metadata("design:type", Array)
     ], DescribeEventTopicsResult.prototype, "eventTopics", void 0);
     return DescribeEventTopicsResult;

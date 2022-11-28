@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudBeyondcorpAppconnectionsV1ResolveAppConnectionsResponseAppConnectionDetails } from "./googlecloudbeyondcorpappconnectionsv1resolveappconnectionsresponseappconnectiondetails";
+
 
 
 // GoogleCloudBeyondcorpAppconnectionsV1ResolveAppConnectionsResponse
@@ -8,12 +8,12 @@ import { GoogleCloudBeyondcorpAppconnectionsV1ResolveAppConnectionsResponseAppCo
  * Response message for BeyondCorp.ResolveAppConnections.
 **/
 export class GoogleCloudBeyondcorpAppconnectionsV1ResolveAppConnectionsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=appConnectionDetails", elemType: shared.GoogleCloudBeyondcorpAppconnectionsV1ResolveAppConnectionsResponseAppConnectionDetails })
+  @SpeakeasyMetadata({ data: "json, name=appConnectionDetails", elemType: GoogleCloudBeyondcorpAppconnectionsV1ResolveAppConnectionsResponseAppConnectionDetails })
   appConnectionDetails?: GoogleCloudBeyondcorpAppconnectionsV1ResolveAppConnectionsResponseAppConnectionDetails[];
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 
-  @Metadata({ data: "json, name=unreachable" })
+  @SpeakeasyMetadata({ data: "json, name=unreachable" })
   unreachable?: string[];
 }

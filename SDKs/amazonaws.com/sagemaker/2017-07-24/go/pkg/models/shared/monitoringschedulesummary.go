@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// MonitoringScheduleSummary
+// Summarizes the monitoring schedule.
 type MonitoringScheduleSummary struct {
 	CreationTime                time.Time           `json:"CreationTime"`
 	EndpointName                *string             `json:"EndpointName,omitempty"`

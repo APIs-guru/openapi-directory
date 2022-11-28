@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { IamPolicyAnalysisState } from "./iampolicyanalysisstate";
+
 
 
 // GoogleCloudAssetV1Identity
@@ -7,9 +8,9 @@ import { IamPolicyAnalysisState } from "./iampolicyanalysisstate";
  * An identity under analysis.
 **/
 export class GoogleCloudAssetV1Identity extends SpeakeasyBase {
-  @Metadata({ data: "json, name=analysisState" })
+  @SpeakeasyMetadata({ data: "json, name=analysisState" })
   analysisState?: IamPolicyAnalysisState;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 }

@@ -1,16 +1,17 @@
 from dataclasses import dataclass, field
 from dataclasses_json import dataclass_json
-from . import payee
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class PayeeResponseData:
-    payee: payee.Payee = field(default=None, metadata={'dataclasses_json': { 'field_name': 'payee' }})
+    payee: Payee = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('payee') }})
     
 
 @dataclass_json
 @dataclass
 class PayeeResponse:
-    data: PayeeResponseData = field(default=None, metadata={'dataclasses_json': { 'field_name': 'data' }})
+    data: PayeeResponseData = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('data') }})
     

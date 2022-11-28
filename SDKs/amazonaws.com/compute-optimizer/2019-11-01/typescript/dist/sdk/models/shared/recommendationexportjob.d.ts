@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ExportDestination } from "./exportdestination";
 import { ResourceTypeEnum } from "./resourcetypeenum";
 import { JobStatusEnum } from "./jobstatusenum";

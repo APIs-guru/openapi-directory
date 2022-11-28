@@ -1,6 +1,7 @@
 
 
+
 export enum AgentStatusEnum {
-    Online = "ONLINE"
-,    Offline = "OFFLINE"
+    Online = "ONLINE",
+    Offline = "OFFLINE"
 }

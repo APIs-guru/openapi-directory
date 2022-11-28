@@ -1,5 +1,7 @@
 package shared
 
+// GoogleCloudDataplexV1TaskSparkTaskConfig
+// User-specified config for running a Spark task.
 type GoogleCloudDataplexV1TaskSparkTaskConfig struct {
 	ArchiveUris        []string                                     `json:"archiveUris,omitempty"`
 	FileUris           []string                                     `json:"fileUris,omitempty"`

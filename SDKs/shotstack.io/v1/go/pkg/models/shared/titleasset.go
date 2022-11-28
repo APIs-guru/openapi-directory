@@ -41,6 +41,8 @@ const (
 	TitleAssetStyleEnumSubtitle    TitleAssetStyleEnum = "subtitle"
 )
 
+// TitleAsset
+// The TitleAsset clip type lets you create video titles from a text string and apply styling and positioning.
 type TitleAsset struct {
 	Background *string                 `json:"background,omitempty"`
 	Color      *string                 `json:"color,omitempty"`

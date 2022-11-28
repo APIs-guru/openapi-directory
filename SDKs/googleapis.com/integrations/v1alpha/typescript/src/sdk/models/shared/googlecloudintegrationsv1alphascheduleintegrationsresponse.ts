@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudIntegrationsV1alphaScheduleIntegrationsResponse
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The response for executing an integration.
 **/
 export class GoogleCloudIntegrationsV1alphaScheduleIntegrationsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=executionInfoIds" })
+  @SpeakeasyMetadata({ data: "json, name=executionInfoIds" })
   executionInfoIds?: string[];
 }

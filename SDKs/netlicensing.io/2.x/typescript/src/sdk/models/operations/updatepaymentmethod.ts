@@ -1,50 +1,51 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class UpdatePaymentMethodPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=paymentMethodNumber" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=paymentMethodNumber" })
   paymentMethodNumber: string;
 }
 
 
 export class UpdatePaymentMethodRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "form, name=active;" })
+  @SpeakeasyMetadata({ data: "form, name=active;" })
   active?: boolean;
 
-  @Metadata({ data: "form, name=paypal.subject;" })
+  @SpeakeasyMetadata({ data: "form, name=paypal.subject;" })
   paypalSubject?: string;
 }
 
 
 export class UpdatePaymentMethodSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=basic" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=basic" })
   basicAuth: shared.SchemeBasicAuth;
 }
 
 
 export class UpdatePaymentMethodRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: UpdatePaymentMethodPathParams;
 
-  @Metadata({ data: "request, media_type=application/x-www-form-urlencoded" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/x-www-form-urlencoded" })
   request?: UpdatePaymentMethodRequestBody;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: UpdatePaymentMethodSecurity;
 }
 
 
 export class UpdatePaymentMethodResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   netlicensing?: any;
 }

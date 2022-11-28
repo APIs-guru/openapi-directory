@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // SimulateMaintenanceEventRequest
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Request for SimulateMaintenanceEvent.
 **/
 export class SimulateMaintenanceEventRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=workerIds" })
+  @SpeakeasyMetadata({ data: "json, name=workerIds" })
   workerIds?: string[];
 }

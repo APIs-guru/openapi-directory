@@ -23,6 +23,14 @@ const (
 	SensitiveCategoryAssignedTargetingOptionDetailsSensitiveCategoryEnumSensitiveCategoryShocking                SensitiveCategoryAssignedTargetingOptionDetailsSensitiveCategoryEnum = "SENSITIVE_CATEGORY_SHOCKING"
 )
 
+// SensitiveCategoryAssignedTargetingOptionDetailsInput
+// Targeting details for sensitive category. This will be populated in the details field of an AssignedTargetingOption when targeting_type is `TARGETING_TYPE_SENSITIVE_CATEGORY_EXCLUSION`.
+type SensitiveCategoryAssignedTargetingOptionDetailsInput struct {
+	ExcludedTargetingOptionID *string `json:"excludedTargetingOptionId,omitempty"`
+}
+
+// SensitiveCategoryAssignedTargetingOptionDetails
+// Targeting details for sensitive category. This will be populated in the details field of an AssignedTargetingOption when targeting_type is `TARGETING_TYPE_SENSITIVE_CATEGORY_EXCLUSION`.
 type SensitiveCategoryAssignedTargetingOptionDetails struct {
 	ExcludedTargetingOptionID *string                                                               `json:"excludedTargetingOptionId,omitempty"`
 	SensitiveCategory         *SensitiveCategoryAssignedTargetingOptionDetailsSensitiveCategoryEnum `json:"sensitiveCategory,omitempty"`

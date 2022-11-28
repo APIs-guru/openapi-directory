@@ -37,10 +37,8 @@ type PostAdminMappingsFindByMetadataRequestBodyXPathMatch struct {
 	ValuePattern map[string]interface{} `json:"valuePattern,omitempty"`
 }
 
-type PostAdminMappingsFindByMetadataRequest struct {
-	Request interface{} `request:"mediaType=application/json"`
-}
-
+// PostAdminMappingsFindByMetadata200ApplicationJSONMappingsRequestBasicAuthCredentials
+// Pre-emptive basic auth credentials to match against
 type PostAdminMappingsFindByMetadata200ApplicationJSONMappingsRequestBasicAuthCredentials struct {
 	Password string `json:"password"`
 	Username string `json:"username"`
@@ -107,6 +105,10 @@ type PostAdminMappingsFindByMetadata200ApplicationJSONMeta struct {
 type PostAdminMappingsFindByMetadata200ApplicationJSON struct {
 	Mappings []PostAdminMappingsFindByMetadata200ApplicationJSONMappings `json:"mappings,omitempty"`
 	Meta     *PostAdminMappingsFindByMetadata200ApplicationJSONMeta      `json:"meta,omitempty"`
+}
+
+type PostAdminMappingsFindByMetadataRequest struct {
+	Request interface{} `request:"mediaType=application/json"`
 }
 
 type PostAdminMappingsFindByMetadataResponse struct {

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var BoxScoreByScoreidVFormatEnum;
 (function (BoxScoreByScoreidVFormatEnum) {
     BoxScoreByScoreidVFormatEnum["Xml"] = "XML";
@@ -34,11 +34,11 @@ var BoxScoreByScoreidVPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=format" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=format" }),
         __metadata("design:type", String)
     ], BoxScoreByScoreidVPathParams.prototype, "format", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=scoreid" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=scoreid" }),
         __metadata("design:type", String)
     ], BoxScoreByScoreidVPathParams.prototype, "scoreid", void 0);
     return BoxScoreByScoreidVPathParams;
@@ -50,7 +50,7 @@ var BoxScoreByScoreidVRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", BoxScoreByScoreidVPathParams)
     ], BoxScoreByScoreidVRequest.prototype, "pathParams", void 0);
     return BoxScoreByScoreidVRequest;
@@ -62,15 +62,15 @@ var BoxScoreByScoreidVResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], BoxScoreByScoreidVResponse.prototype, "boxScoreV3", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], BoxScoreByScoreidVResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], BoxScoreByScoreidVResponse.prototype, "statusCode", void 0);
     return BoxScoreByScoreidVResponse;

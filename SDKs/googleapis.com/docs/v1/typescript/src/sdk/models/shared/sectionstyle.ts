@@ -1,29 +1,24 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SectionColumnProperties } from "./sectioncolumnproperties";
 import { Dimension } from "./dimension";
-import { Dimension } from "./dimension";
-import { Dimension } from "./dimension";
-import { Dimension } from "./dimension";
-import { Dimension } from "./dimension";
-import { Dimension } from "./dimension";
+
 
 export enum SectionStyleColumnSeparatorStyleEnum {
-    ColumnSeparatorStyleUnspecified = "COLUMN_SEPARATOR_STYLE_UNSPECIFIED"
-,    None = "NONE"
-,    BetweenEachColumn = "BETWEEN_EACH_COLUMN"
+    ColumnSeparatorStyleUnspecified = "COLUMN_SEPARATOR_STYLE_UNSPECIFIED",
+    None = "NONE",
+    BetweenEachColumn = "BETWEEN_EACH_COLUMN"
 }
 
 export enum SectionStyleContentDirectionEnum {
-    ContentDirectionUnspecified = "CONTENT_DIRECTION_UNSPECIFIED"
-,    LeftToRight = "LEFT_TO_RIGHT"
-,    RightToLeft = "RIGHT_TO_LEFT"
+    ContentDirectionUnspecified = "CONTENT_DIRECTION_UNSPECIFIED",
+    LeftToRight = "LEFT_TO_RIGHT",
+    RightToLeft = "RIGHT_TO_LEFT"
 }
 
 export enum SectionStyleSectionTypeEnum {
-    SectionTypeUnspecified = "SECTION_TYPE_UNSPECIFIED"
-,    Continuous = "CONTINUOUS"
-,    NextPage = "NEXT_PAGE"
+    SectionTypeUnspecified = "SECTION_TYPE_UNSPECIFIED",
+    Continuous = "CONTINUOUS",
+    NextPage = "NEXT_PAGE"
 }
 
 
@@ -32,57 +27,57 @@ export enum SectionStyleSectionTypeEnum {
  * The styling that applies to a section.
 **/
 export class SectionStyle extends SpeakeasyBase {
-  @Metadata({ data: "json, name=columnProperties", elemType: shared.SectionColumnProperties })
+  @SpeakeasyMetadata({ data: "json, name=columnProperties", elemType: SectionColumnProperties })
   columnProperties?: SectionColumnProperties[];
 
-  @Metadata({ data: "json, name=columnSeparatorStyle" })
+  @SpeakeasyMetadata({ data: "json, name=columnSeparatorStyle" })
   columnSeparatorStyle?: SectionStyleColumnSeparatorStyleEnum;
 
-  @Metadata({ data: "json, name=contentDirection" })
+  @SpeakeasyMetadata({ data: "json, name=contentDirection" })
   contentDirection?: SectionStyleContentDirectionEnum;
 
-  @Metadata({ data: "json, name=defaultFooterId" })
+  @SpeakeasyMetadata({ data: "json, name=defaultFooterId" })
   defaultFooterId?: string;
 
-  @Metadata({ data: "json, name=defaultHeaderId" })
+  @SpeakeasyMetadata({ data: "json, name=defaultHeaderId" })
   defaultHeaderId?: string;
 
-  @Metadata({ data: "json, name=evenPageFooterId" })
+  @SpeakeasyMetadata({ data: "json, name=evenPageFooterId" })
   evenPageFooterId?: string;
 
-  @Metadata({ data: "json, name=evenPageHeaderId" })
+  @SpeakeasyMetadata({ data: "json, name=evenPageHeaderId" })
   evenPageHeaderId?: string;
 
-  @Metadata({ data: "json, name=firstPageFooterId" })
+  @SpeakeasyMetadata({ data: "json, name=firstPageFooterId" })
   firstPageFooterId?: string;
 
-  @Metadata({ data: "json, name=firstPageHeaderId" })
+  @SpeakeasyMetadata({ data: "json, name=firstPageHeaderId" })
   firstPageHeaderId?: string;
 
-  @Metadata({ data: "json, name=marginBottom" })
+  @SpeakeasyMetadata({ data: "json, name=marginBottom" })
   marginBottom?: Dimension;
 
-  @Metadata({ data: "json, name=marginFooter" })
+  @SpeakeasyMetadata({ data: "json, name=marginFooter" })
   marginFooter?: Dimension;
 
-  @Metadata({ data: "json, name=marginHeader" })
+  @SpeakeasyMetadata({ data: "json, name=marginHeader" })
   marginHeader?: Dimension;
 
-  @Metadata({ data: "json, name=marginLeft" })
+  @SpeakeasyMetadata({ data: "json, name=marginLeft" })
   marginLeft?: Dimension;
 
-  @Metadata({ data: "json, name=marginRight" })
+  @SpeakeasyMetadata({ data: "json, name=marginRight" })
   marginRight?: Dimension;
 
-  @Metadata({ data: "json, name=marginTop" })
+  @SpeakeasyMetadata({ data: "json, name=marginTop" })
   marginTop?: Dimension;
 
-  @Metadata({ data: "json, name=pageNumberStart" })
+  @SpeakeasyMetadata({ data: "json, name=pageNumberStart" })
   pageNumberStart?: number;
 
-  @Metadata({ data: "json, name=sectionType" })
+  @SpeakeasyMetadata({ data: "json, name=sectionType" })
   sectionType?: SectionStyleSectionTypeEnum;
 
-  @Metadata({ data: "json, name=useFirstPageHeaderFooter" })
+  @SpeakeasyMetadata({ data: "json, name=useFirstPageHeaderFooter" })
   useFirstPageHeaderFooter?: boolean;
 }

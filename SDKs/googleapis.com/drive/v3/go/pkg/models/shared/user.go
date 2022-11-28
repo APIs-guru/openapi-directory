@@ -1,5 +1,7 @@
 package shared
 
+// User
+// Information about a Drive user.
 type User struct {
 	DisplayName  *string `json:"displayName,omitempty"`
 	EmailAddress *string `json:"emailAddress,omitempty"`

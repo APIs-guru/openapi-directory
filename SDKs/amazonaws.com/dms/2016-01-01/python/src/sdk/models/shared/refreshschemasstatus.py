@@ -1,18 +1,24 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import refreshschemasstatustypevalue_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class RefreshSchemasStatus:
-    endpoint_arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'EndpointArn' }})
-    last_failure_message: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'LastFailureMessage' }})
-    last_refresh_date: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'LastRefreshDate', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    replication_instance_arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ReplicationInstanceArn' }})
-    status: Optional[refreshschemasstatustypevalue_enum.RefreshSchemasStatusTypeValueEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Status' }})
+    r"""RefreshSchemasStatus
+    Provides information that describes status of a schema at an endpoint specified by the <code>DescribeRefreshSchemaStatus</code> operation.
+    """
+    
+    endpoint_arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('EndpointArn') }})
+    last_failure_message: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('LastFailureMessage') }})
+    last_refresh_date: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('LastRefreshDate'), 'encoder': utils.datetimeisoformat(True), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    replication_instance_arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ReplicationInstanceArn') }})
+    status: Optional[RefreshSchemasStatusTypeValueEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Status') }})
     

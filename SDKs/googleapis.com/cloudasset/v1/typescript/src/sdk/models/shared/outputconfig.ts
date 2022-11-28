@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BigQueryDestination } from "./bigquerydestination";
 import { GcsDestination } from "./gcsdestination";
+
 
 
 // OutputConfig
@@ -8,9 +9,9 @@ import { GcsDestination } from "./gcsdestination";
  * Output configuration for export assets destination.
 **/
 export class OutputConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=bigqueryDestination" })
+  @SpeakeasyMetadata({ data: "json, name=bigqueryDestination" })
   bigqueryDestination?: BigQueryDestination;
 
-  @Metadata({ data: "json, name=gcsDestination" })
+  @SpeakeasyMetadata({ data: "json, name=gcsDestination" })
   gcsDestination?: GcsDestination;
 }

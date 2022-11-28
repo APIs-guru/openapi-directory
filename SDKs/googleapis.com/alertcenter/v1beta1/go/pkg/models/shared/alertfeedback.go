@@ -9,6 +9,8 @@ const (
 	AlertFeedbackTypeEnumVeryUseful                   AlertFeedbackTypeEnum = "VERY_USEFUL"
 )
 
+// AlertFeedback
+// A customer feedback about an alert.
 type AlertFeedback struct {
 	AlertID    *string                `json:"alertId,omitempty"`
 	CreateTime *string                `json:"createTime,omitempty"`

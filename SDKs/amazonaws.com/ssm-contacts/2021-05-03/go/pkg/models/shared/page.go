@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// Page
+// Incident Manager engaging a contact's contact channel.
 type Page struct {
 	ContactArn    string     `json:"ContactArn"`
 	DeliveryTime  *time.Time `json:"DeliveryTime,omitempty"`

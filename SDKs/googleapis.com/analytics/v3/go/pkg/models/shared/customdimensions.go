@@ -1,5 +1,7 @@
 package shared
 
+// CustomDimensions
+// A custom dimension collection lists Analytics custom dimensions to which the user has access. Each resource in the collection corresponds to a single Analytics custom dimension.
 type CustomDimensions struct {
 	Items        []CustomDimension `json:"items,omitempty"`
 	ItemsPerPage *int32            `json:"itemsPerPage,omitempty"`

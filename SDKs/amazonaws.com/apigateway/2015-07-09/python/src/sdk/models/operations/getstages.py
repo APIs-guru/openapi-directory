@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class GetStagesPathParams:
-    restapi_id: str = field(default=None, metadata={'path_param': { 'field_name': 'restapi_id', 'style': 'simple', 'explode': False }})
+    restapi_id: str = field(metadata={'path_param': { 'field_name': 'restapi_id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,20 +29,20 @@ class GetStagesHeaders:
 
 @dataclass
 class GetStagesRequest:
-    path_params: GetStagesPathParams = field(default=None)
-    query_params: GetStagesQueryParams = field(default=None)
-    headers: GetStagesHeaders = field(default=None)
+    headers: GetStagesHeaders = field()
+    path_params: GetStagesPathParams = field()
+    query_params: GetStagesQueryParams = field()
     
 
 @dataclass
 class GetStagesResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
     conflict_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     limit_exceeded_exception: Optional[Any] = field(default=None)
     not_found_exception: Optional[Any] = field(default=None)
     stages: Optional[shared.Stages] = field(default=None)
-    status_code: int = field(default=None)
     too_many_requests_exception: Optional[Any] = field(default=None)
     unauthorized_exception: Optional[Any] = field(default=None)
     

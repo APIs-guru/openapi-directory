@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // CreateHeaderResponse
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The result of creating a header.
 **/
 export class CreateHeaderResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=headerId" })
+  @SpeakeasyMetadata({ data: "json, name=headerId" })
   headerId?: string;
 }

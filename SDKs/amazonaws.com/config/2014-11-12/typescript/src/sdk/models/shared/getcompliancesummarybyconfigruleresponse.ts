@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ComplianceSummary } from "./compliancesummary";
+
 
 
 // GetComplianceSummaryByConfigRuleResponse
@@ -7,6 +8,6 @@ import { ComplianceSummary } from "./compliancesummary";
  * <p/>
 **/
 export class GetComplianceSummaryByConfigRuleResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ComplianceSummary" })
+  @SpeakeasyMetadata({ data: "json, name=ComplianceSummary" })
   complianceSummary?: ComplianceSummary;
 }

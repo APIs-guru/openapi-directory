@@ -1,5 +1,7 @@
 package shared
 
+// RegionalInventory
+// Regional inventory resource. contains the regional name and all attributes which are overridden for the specified region.
 type RegionalInventory struct {
 	Availability           *string           `json:"availability,omitempty"`
 	CustomAttributes       []CustomAttribute `json:"customAttributes,omitempty"`

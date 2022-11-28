@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class CreateStreamOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=StreamARN" })
+  @SpeakeasyMetadata({ data: "json, name=StreamARN" })
   streamArn?: string;
 }

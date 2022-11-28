@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class PutResourcePolicyRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=policyDocument" })
+  @SpeakeasyMetadata({ data: "json, name=policyDocument" })
   policyDocument?: string;
 
-  @Metadata({ data: "json, name=policyName" })
+  @SpeakeasyMetadata({ data: "json, name=policyName" })
   policyName?: string;
 }

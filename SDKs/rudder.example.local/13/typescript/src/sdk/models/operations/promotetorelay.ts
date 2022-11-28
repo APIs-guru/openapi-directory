@@ -1,15 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class PromoteToRelayPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=nodeId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=nodeId" })
   nodeId: string;
-}
-
-
-export class PromoteToRelayRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: PromoteToRelayPathParams;
 }
 
 export enum PromoteToRelay200ApplicationJsonActionEnum {
@@ -17,30 +12,36 @@ export enum PromoteToRelay200ApplicationJsonActionEnum {
 }
 
 export enum PromoteToRelay200ApplicationJsonResultEnum {
-    Success = "success"
-,    Error = "error"
+    Success = "success",
+    Error = "error"
 }
 
 
 export class PromoteToRelay200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=action" })
+  @SpeakeasyMetadata({ data: "json, name=action" })
   action: PromoteToRelay200ApplicationJsonActionEnum;
 
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data: string;
 
-  @Metadata({ data: "json, name=result" })
+  @SpeakeasyMetadata({ data: "json, name=result" })
   result: PromoteToRelay200ApplicationJsonResultEnum;
 }
 
 
+export class PromoteToRelayRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: PromoteToRelayPathParams;
+}
+
+
 export class PromoteToRelayResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   promoteToRelay200ApplicationJsonObject?: PromoteToRelay200ApplicationJson;
 }

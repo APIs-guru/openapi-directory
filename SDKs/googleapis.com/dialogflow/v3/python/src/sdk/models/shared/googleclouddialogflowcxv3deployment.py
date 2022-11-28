@@ -1,7 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import googleclouddialogflowcxv3deploymentresult
+from sdk import utils
+from . import *
 
 class GoogleCloudDialogflowCxV3DeploymentStateEnum(str, Enum):
     STATE_UNSPECIFIED = "STATE_UNSPECIFIED"
@@ -13,10 +15,14 @@ class GoogleCloudDialogflowCxV3DeploymentStateEnum(str, Enum):
 @dataclass_json
 @dataclass
 class GoogleCloudDialogflowCxV3Deployment:
-    end_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'endTime' }})
-    flow_version: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'flowVersion' }})
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    result: Optional[googleclouddialogflowcxv3deploymentresult.GoogleCloudDialogflowCxV3DeploymentResult] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'result' }})
-    start_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'startTime' }})
-    state: Optional[GoogleCloudDialogflowCxV3DeploymentStateEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'state' }})
+    r"""GoogleCloudDialogflowCxV3Deployment
+    Represents an deployment in an environment. A deployment happens when a flow version configured to be active in the environment. You can configure running pre-deployment steps, e.g. running validation test cases, experiment auto-rollout, etc.
+    """
+    
+    end_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('endTime') }})
+    flow_version: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('flowVersion') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    result: Optional[GoogleCloudDialogflowCxV3DeploymentResult] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('result') }})
+    start_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('startTime') }})
+    state: Optional[GoogleCloudDialogflowCxV3DeploymentStateEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('state') }})
     

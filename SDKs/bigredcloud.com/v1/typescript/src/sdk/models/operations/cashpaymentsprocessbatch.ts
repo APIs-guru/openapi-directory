@@ -1,20 +1,21 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class CashPaymentsProcessBatchRequest extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/json", elemType: shared.BatchItemCashPaymentDto })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json", elemType: shared.BatchItemCashPaymentDto })
   request: shared.BatchItemCashPaymentDto[];
 }
 
 
 export class CashPaymentsProcessBatchResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   cashPaymentsProcessBatch200ApplicationJsonObject?: Map<string, any>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

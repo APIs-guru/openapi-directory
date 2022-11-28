@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import associationsummary
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ListAssociationsResponse:
-    association_summaries: Optional[List[associationsummary.AssociationSummary]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AssociationSummaries' }})
-    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'NextToken' }})
+    association_summaries: Optional[List[AssociationSummary]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('AssociationSummaries') }})
+    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('NextToken') }})
     

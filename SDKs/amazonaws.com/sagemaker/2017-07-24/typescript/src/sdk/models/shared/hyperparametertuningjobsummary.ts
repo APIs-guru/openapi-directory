@@ -1,4 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { HyperParameterTuningJobStatusEnum } from "./hyperparametertuningjobstatusenum";
 import { ObjectiveStatusCounters } from "./objectivestatuscounters";
 import { ResourceLimits } from "./resourcelimits";
@@ -6,38 +6,39 @@ import { HyperParameterTuningJobStrategyTypeEnum } from "./hyperparametertuningj
 import { TrainingJobStatusCounters } from "./trainingjobstatuscounters";
 
 
+
 // HyperParameterTuningJobSummary
 /** 
  * Provides summary information about a hyperparameter tuning job.
 **/
 export class HyperParameterTuningJobSummary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CreationTime" })
+  @SpeakeasyMetadata({ data: "json, name=CreationTime" })
   creationTime: Date;
 
-  @Metadata({ data: "json, name=HyperParameterTuningEndTime" })
+  @SpeakeasyMetadata({ data: "json, name=HyperParameterTuningEndTime" })
   hyperParameterTuningEndTime?: Date;
 
-  @Metadata({ data: "json, name=HyperParameterTuningJobArn" })
+  @SpeakeasyMetadata({ data: "json, name=HyperParameterTuningJobArn" })
   hyperParameterTuningJobArn: string;
 
-  @Metadata({ data: "json, name=HyperParameterTuningJobName" })
+  @SpeakeasyMetadata({ data: "json, name=HyperParameterTuningJobName" })
   hyperParameterTuningJobName: string;
 
-  @Metadata({ data: "json, name=HyperParameterTuningJobStatus" })
+  @SpeakeasyMetadata({ data: "json, name=HyperParameterTuningJobStatus" })
   hyperParameterTuningJobStatus: HyperParameterTuningJobStatusEnum;
 
-  @Metadata({ data: "json, name=LastModifiedTime" })
+  @SpeakeasyMetadata({ data: "json, name=LastModifiedTime" })
   lastModifiedTime?: Date;
 
-  @Metadata({ data: "json, name=ObjectiveStatusCounters" })
+  @SpeakeasyMetadata({ data: "json, name=ObjectiveStatusCounters" })
   objectiveStatusCounters: ObjectiveStatusCounters;
 
-  @Metadata({ data: "json, name=ResourceLimits" })
+  @SpeakeasyMetadata({ data: "json, name=ResourceLimits" })
   resourceLimits?: ResourceLimits;
 
-  @Metadata({ data: "json, name=Strategy" })
+  @SpeakeasyMetadata({ data: "json, name=Strategy" })
   strategy: HyperParameterTuningJobStrategyTypeEnum;
 
-  @Metadata({ data: "json, name=TrainingJobStatusCounters" })
+  @SpeakeasyMetadata({ data: "json, name=TrainingJobStatusCounters" })
   trainingJobStatusCounters: TrainingJobStatusCounters;
 }

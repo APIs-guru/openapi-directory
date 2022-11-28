@@ -1,13 +1,18 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import check
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ListContinuousChecksOutput:
-    continuous_checks: Optional[List[check.Check]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'continuous_checks' }})
-    next: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next' }})
-    self: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'self' }})
+    r"""ListContinuousChecksOutput
+    Represents to ListContinuousChecksOutput
+    """
+    
+    continuous_checks: Optional[List[Check]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('continuous_checks') }})
+    next: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('next') }})
+    self: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('self') }})
     

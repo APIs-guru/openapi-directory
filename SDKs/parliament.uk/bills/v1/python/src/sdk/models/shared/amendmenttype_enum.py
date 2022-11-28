@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class AmendmentTypeEnum(str, Enum):
     EDIT_LONG_TITLE = "EditLongTitle"

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum GetUpdateTemplateActionEnum {
     UpdateTemplate = "UpdateTemplate"
@@ -10,16 +11,16 @@ export enum GetUpdateTemplateActionEnum {
  * The content of the email, composed of a subject line, an HTML part, and a text-only part.
 **/
 export class GetUpdateTemplateTemplate extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, name=HtmlPart" })
+  @SpeakeasyMetadata({ data: "queryParam, name=HtmlPart" })
   htmlPart?: string;
 
-  @Metadata({ data: "queryParam, name=SubjectPart" })
+  @SpeakeasyMetadata({ data: "queryParam, name=SubjectPart" })
   subjectPart?: string;
 
-  @Metadata({ data: "queryParam, name=TemplateName" })
+  @SpeakeasyMetadata({ data: "queryParam, name=TemplateName" })
   templateName: string;
 
-  @Metadata({ data: "queryParam, name=TextPart" })
+  @SpeakeasyMetadata({ data: "queryParam, name=TextPart" })
   textPart?: string;
 }
 
@@ -29,57 +30,57 @@ export enum GetUpdateTemplateVersionEnum {
 
 
 export class GetUpdateTemplateQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Action" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Action" })
   action: GetUpdateTemplateActionEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Template" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Template" })
   template: GetUpdateTemplateTemplate;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Version" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Version" })
   version: GetUpdateTemplateVersionEnum;
 }
 
 
 export class GetUpdateTemplateHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
 
 export class GetUpdateTemplateRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetUpdateTemplateQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: GetUpdateTemplateHeaders;
 }
 
 
 export class GetUpdateTemplateResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

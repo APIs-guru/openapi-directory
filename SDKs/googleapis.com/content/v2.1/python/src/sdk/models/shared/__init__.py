@@ -1,4 +1,4 @@
-from .__xgafv_enum import *
+from ._xgafv_enum import *
 from .account import *
 from .accountaddress import *
 from .accountadslink import *
@@ -50,6 +50,8 @@ from .accountyoutubechannellink import *
 from .address import *
 from .alt_enum import *
 from .amount import *
+from .bestsellers import *
+from .brand import *
 from .businessdayconfig import *
 from .buyongoogleprogramstatus import *
 from .captureorderresponse import *
@@ -82,7 +84,7 @@ from .datafeedstatusescustombatchresponseentry import *
 from .datafeedstatuseslistresponse import *
 from .datafeedstatusexample import *
 from .datafeedtarget import *
-from .date import *
+from .date_ import *
 from .datetime import *
 from .deliveryarea import *
 from .deliveryareapostalcoderange import *
@@ -127,6 +129,7 @@ from .listaccountreturncarrierresponse import *
 from .listcollectionsresponse import *
 from .listcollectionstatusesresponse import *
 from .listcssesresponse import *
+from .listmethodquotasresponse import *
 from .listregionsresponse import *
 from .listrepricingproductreportsresponse import *
 from .listrepricingrulereportsresponse import *
@@ -142,6 +145,7 @@ from .loyaltypoints import *
 from .merchantorderreturn import *
 from .merchantorderreturnitem import *
 from .merchantrejectionreason import *
+from .methodquota import *
 from .metrics import *
 from .minimumordervaluetable import *
 from .minimumordervaluetablestorecodesetwithmov import *
@@ -261,8 +265,11 @@ from .postalcodegroup import *
 from .postalcoderange import *
 from .price import *
 from .priceamount import *
+from .pricecompetitiveness import *
+from .priceinsights import *
 from .product import *
 from .productamount import *
+from .productcluster import *
 from .productdeliverytime import *
 from .productdeliverytimeareadeliverytime import *
 from .productdeliverytimeareadeliverytimedeliverytime import *

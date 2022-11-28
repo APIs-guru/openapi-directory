@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import eventdestination
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class GetConfigurationSetEventDestinationsResponse:
-    event_destinations: Optional[List[eventdestination.EventDestination]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'EventDestinations' }})
+    r"""GetConfigurationSetEventDestinationsResponse
+    An object that contains information about an event destination.
+    """
+    
+    event_destinations: Optional[List[EventDestination]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('EventDestinations') }})
     

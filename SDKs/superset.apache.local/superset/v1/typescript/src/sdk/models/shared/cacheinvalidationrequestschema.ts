@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Datasource } from "./datasource";
 
 
+
 export class CacheInvalidationRequestSchema extends SpeakeasyBase {
-  @Metadata({ data: "json, name=datasource_uids" })
+  @SpeakeasyMetadata({ data: "json, name=datasource_uids" })
   datasourceUids?: string[];
 
-  @Metadata({ data: "json, name=datasources", elemType: shared.Datasource })
+  @SpeakeasyMetadata({ data: "json, name=datasources", elemType: Datasource })
   datasources?: Datasource[];
 }

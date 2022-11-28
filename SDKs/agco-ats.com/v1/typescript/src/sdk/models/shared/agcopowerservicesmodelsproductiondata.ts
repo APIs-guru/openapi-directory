@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AgcoPowerServicesModelsProductionData
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Production data for an AGCO Power engine.
 **/
 export class AgcoPowerServicesModelsProductionData extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DataType" })
+  @SpeakeasyMetadata({ data: "json, name=DataType" })
   dataType: string;
 
-  @Metadata({ data: "json, name=DataValues" })
+  @SpeakeasyMetadata({ data: "json, name=DataValues" })
   dataValues: string;
 }

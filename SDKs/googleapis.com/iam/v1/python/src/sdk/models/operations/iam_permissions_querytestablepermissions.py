@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
@@ -20,20 +21,20 @@ class IamPermissionsQueryTestablePermissionsQueryParams:
 
 @dataclass
 class IamPermissionsQueryTestablePermissionsSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class IamPermissionsQueryTestablePermissionsRequest:
-    query_params: IamPermissionsQueryTestablePermissionsQueryParams = field(default=None)
+    query_params: IamPermissionsQueryTestablePermissionsQueryParams = field()
+    security: IamPermissionsQueryTestablePermissionsSecurity = field()
     request: Optional[shared.QueryTestablePermissionsRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: IamPermissionsQueryTestablePermissionsSecurity = field(default=None)
     
 
 @dataclass
 class IamPermissionsQueryTestablePermissionsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     query_testable_permissions_response: Optional[shared.QueryTestablePermissionsResponse] = field(default=None)
-    status_code: int = field(default=None)
     

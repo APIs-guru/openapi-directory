@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { ServerLaunchConfiguration } from "./serverlaunchconfiguration";
 // ServerGroupLaunchConfiguration
 /**
  * Launch configuration for a server group.
@@ -34,15 +34,15 @@ var ServerGroupLaunchConfiguration = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=launchOrder" }),
+        SpeakeasyMetadata({ data: "json, name=launchOrder" }),
         __metadata("design:type", Number)
     ], ServerGroupLaunchConfiguration.prototype, "launchOrder", void 0);
     __decorate([
-        Metadata({ data: "json, name=serverGroupId" }),
+        SpeakeasyMetadata({ data: "json, name=serverGroupId" }),
         __metadata("design:type", String)
     ], ServerGroupLaunchConfiguration.prototype, "serverGroupId", void 0);
     __decorate([
-        Metadata({ data: "json, name=serverLaunchConfigurations", elemType: shared.ServerLaunchConfiguration }),
+        SpeakeasyMetadata({ data: "json, name=serverLaunchConfigurations", elemType: ServerLaunchConfiguration }),
         __metadata("design:type", Array)
     ], ServerGroupLaunchConfiguration.prototype, "serverLaunchConfigurations", void 0);
     return ServerGroupLaunchConfiguration;

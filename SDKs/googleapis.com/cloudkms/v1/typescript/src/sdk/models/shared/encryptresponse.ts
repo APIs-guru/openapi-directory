@@ -1,11 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum EncryptResponseProtectionLevelEnum {
-    ProtectionLevelUnspecified = "PROTECTION_LEVEL_UNSPECIFIED"
-,    Software = "SOFTWARE"
-,    Hsm = "HSM"
-,    External = "EXTERNAL"
-,    ExternalVpc = "EXTERNAL_VPC"
+    ProtectionLevelUnspecified = "PROTECTION_LEVEL_UNSPECIFIED",
+    Software = "SOFTWARE",
+    Hsm = "HSM",
+    External = "EXTERNAL",
+    ExternalVpc = "EXTERNAL_VPC"
 }
 
 
@@ -14,21 +15,21 @@ export enum EncryptResponseProtectionLevelEnum {
  * Response message for KeyManagementService.Encrypt.
 **/
 export class EncryptResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ciphertext" })
+  @SpeakeasyMetadata({ data: "json, name=ciphertext" })
   ciphertext?: string;
 
-  @Metadata({ data: "json, name=ciphertextCrc32c" })
+  @SpeakeasyMetadata({ data: "json, name=ciphertextCrc32c" })
   ciphertextCrc32c?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=protectionLevel" })
+  @SpeakeasyMetadata({ data: "json, name=protectionLevel" })
   protectionLevel?: EncryptResponseProtectionLevelEnum;
 
-  @Metadata({ data: "json, name=verifiedAdditionalAuthenticatedDataCrc32c" })
+  @SpeakeasyMetadata({ data: "json, name=verifiedAdditionalAuthenticatedDataCrc32c" })
   verifiedAdditionalAuthenticatedDataCrc32c?: boolean;
 
-  @Metadata({ data: "json, name=verifiedPlaintextCrc32c" })
+  @SpeakeasyMetadata({ data: "json, name=verifiedPlaintextCrc32c" })
   verifiedPlaintextCrc32c?: boolean;
 }

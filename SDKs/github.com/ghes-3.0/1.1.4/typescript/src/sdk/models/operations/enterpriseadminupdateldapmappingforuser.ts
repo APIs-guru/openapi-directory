@@ -1,35 +1,36 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class EnterpriseAdminUpdateLdapMappingForUserPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=username" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=username" })
   username: string;
 }
 
 
 export class EnterpriseAdminUpdateLdapMappingForUserRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ldap_dn" })
+  @SpeakeasyMetadata({ data: "json, name=ldap_dn" })
   ldapDn?: string;
 }
 
 
 export class EnterpriseAdminUpdateLdapMappingForUserRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: EnterpriseAdminUpdateLdapMappingForUserPathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request?: EnterpriseAdminUpdateLdapMappingForUserRequestBody;
 }
 
 
 export class EnterpriseAdminUpdateLdapMappingForUserResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   ldapMappingUser?: shared.LdapMappingUser;
 }

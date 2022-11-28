@@ -12,12 +12,6 @@ type GetDocumentWithWebHookQueryParams struct {
 	Pretty *bool `queryParam:"style=form,explode=true,name=pretty"`
 }
 
-type GetDocumentWithWebHookRequest struct {
-	PathParams  GetDocumentWithWebHookPathParams
-	QueryParams GetDocumentWithWebHookQueryParams
-	Request     []byte `request:"mediaType=application/x-yaml"`
-}
-
 type GetDocumentWithWebHook200ApplicationJSONExplanationLocalsKey struct {
 	Type  *string `json:"type,omitempty"`
 	Value *string `json:"value,omitempty"`
@@ -38,6 +32,9 @@ type GetDocumentWithWebHook200ApplicationJSONExplanationNodeTerms struct {
 	Value *string `json:"value,omitempty"`
 }
 
+// GetDocumentWithWebHook200ApplicationJSONExplanationNode
+// The AST element associated with the evaluation step.
+// https://godoc.org/github.com/open-policy-agent/opa/ast - AST
 type GetDocumentWithWebHook200ApplicationJSONExplanationNode struct {
 	Index *float64                                                       `json:"index,omitempty"`
 	Terms []GetDocumentWithWebHook200ApplicationJSONExplanationNodeTerms `json:"terms,omitempty"`
@@ -107,6 +104,12 @@ type GetDocumentWithWebHook200ApplicationJSON struct {
 	Metrics     *GetDocumentWithWebHook200ApplicationJSONMetrics      `json:"metrics,omitempty"`
 	Provenance  *GetDocumentWithWebHook200ApplicationJSONProvenance   `json:"provenance,omitempty"`
 	Result      []interface{}                                         `json:"result,omitempty"`
+}
+
+type GetDocumentWithWebHookRequest struct {
+	PathParams  GetDocumentWithWebHookPathParams
+	QueryParams GetDocumentWithWebHookQueryParams
+	Request     []byte `request:"mediaType=application/x-yaml"`
 }
 
 type GetDocumentWithWebHookResponse struct {

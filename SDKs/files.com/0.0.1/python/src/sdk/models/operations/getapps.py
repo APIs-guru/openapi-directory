@@ -18,12 +18,12 @@ class GetAppsQueryParams:
 
 @dataclass
 class GetAppsRequest:
-    query_params: GetAppsQueryParams = field(default=None)
+    query_params: GetAppsQueryParams = field()
     
 
 @dataclass
 class GetAppsResponse:
+    content_type: str = field()
+    status_code: int = field()
     app_entities: Optional[List[shared.AppEntity]] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

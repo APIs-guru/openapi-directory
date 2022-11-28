@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AccountFilter } from "./accountfilter";
 import { AccountSelectionCardinalityEnum } from "./accountselectioncardinalityenum";
 // RequestedScopes
@@ -35,19 +35,19 @@ var RequestedScopes = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=account_filters" }),
+        SpeakeasyMetadata({ data: "json, name=account_filters" }),
         __metadata("design:type", AccountFilter)
     ], RequestedScopes.prototype, "accountFilters", void 0);
     __decorate([
-        Metadata({ data: "json, name=account_selection_cardinality" }),
+        SpeakeasyMetadata({ data: "json, name=account_selection_cardinality" }),
         __metadata("design:type", String)
     ], RequestedScopes.prototype, "accountSelectionCardinality", void 0);
     __decorate([
-        Metadata({ data: "json, name=optional_product_access" }),
+        SpeakeasyMetadata({ data: "json, name=optional_product_access" }),
         __metadata("design:type", Map)
     ], RequestedScopes.prototype, "optionalProductAccess", void 0);
     __decorate([
-        Metadata({ data: "json, name=required_product_access" }),
+        SpeakeasyMetadata({ data: "json, name=required_product_access" }),
         __metadata("design:type", Map)
     ], RequestedScopes.prototype, "requiredProductAccess", void 0);
     return RequestedScopes;

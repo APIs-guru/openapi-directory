@@ -22,18 +22,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var PostFilesUrlQueryParams = /** @class */ (function (_super) {
     __extends(PostFilesUrlQueryParams, _super);
     function PostFilesUrlQueryParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=isPrivate" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=isPrivate" }),
         __metadata("design:type", Boolean)
     ], PostFilesUrlQueryParams.prototype, "isPrivate", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=url" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=url" }),
         __metadata("design:type", String)
     ], PostFilesUrlQueryParams.prototype, "url", void 0);
     return PostFilesUrlQueryParams;
@@ -45,7 +45,7 @@ var PostFilesUrlRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PostFilesUrlQueryParams)
     ], PostFilesUrlRequest.prototype, "queryParams", void 0);
     return PostFilesUrlRequest;
@@ -57,15 +57,15 @@ var PostFilesUrlResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], PostFilesUrlResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], PostFilesUrlResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], PostFilesUrlResponse.prototype, "statusCode", void 0);
     return PostFilesUrlResponse;

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // MacSecKey
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Information about the MAC Security (MACsec) secret key.
 **/
 export class MacSecKey extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ckn" })
+  @SpeakeasyMetadata({ data: "json, name=ckn" })
   ckn?: string;
 
-  @Metadata({ data: "json, name=secretARN" })
+  @SpeakeasyMetadata({ data: "json, name=secretARN" })
   secretArn?: string;
 
-  @Metadata({ data: "json, name=startOn" })
+  @SpeakeasyMetadata({ data: "json, name=startOn" })
   startOn?: string;
 
-  @Metadata({ data: "json, name=state" })
+  @SpeakeasyMetadata({ data: "json, name=state" })
   state?: string;
 }

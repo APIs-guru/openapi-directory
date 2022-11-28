@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare enum GetInstanceXAmzTargetEnum {
     Route53AutoNamingV20170314GetInstance = "Route53AutoNaming_v20170314.GetInstance"

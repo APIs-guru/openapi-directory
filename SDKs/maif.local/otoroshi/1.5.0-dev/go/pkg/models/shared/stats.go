@@ -1,5 +1,7 @@
 package shared
 
+// Stats
+// Live stats for a service or globally
 type Stats struct {
 	Calls                     int64   `json:"calls"`
 	ConcurrentHandledRequests int64   `json:"concurrentHandledRequests"`

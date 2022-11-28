@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class AccessListResponse:
+    content_type: str = field()
+    status_code: int = field()
     access_entries: Optional[List[shared.AccessEntry]] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

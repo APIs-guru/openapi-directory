@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostEnableMfaDeviceActionEnum(str, Enum):
     ENABLE_MFA_DEVICE = "EnableMFADevice"
@@ -10,8 +14,8 @@ class PostEnableMfaDeviceVersionEnum(str, Enum):
 
 @dataclass
 class PostEnableMfaDeviceQueryParams:
-    action: PostEnableMfaDeviceActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostEnableMfaDeviceVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostEnableMfaDeviceActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostEnableMfaDeviceVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostEnableMfaDeviceHeaders:
 
 @dataclass
 class PostEnableMfaDeviceRequest:
-    query_params: PostEnableMfaDeviceQueryParams = field(default=None)
-    headers: PostEnableMfaDeviceHeaders = field(default=None)
+    headers: PostEnableMfaDeviceHeaders = field()
+    query_params: PostEnableMfaDeviceQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostEnableMfaDeviceResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

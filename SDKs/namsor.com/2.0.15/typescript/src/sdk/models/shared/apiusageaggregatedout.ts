@@ -1,28 +1,29 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ApiUsageAggregatedOut extends SpeakeasyBase {
-  @Metadata({ data: "json, name=colHeaders" })
+  @SpeakeasyMetadata({ data: "json, name=colHeaders" })
   colHeaders?: string[];
 
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data?: number[][];
 
-  @Metadata({ data: "json, name=historyTruncated" })
+  @SpeakeasyMetadata({ data: "json, name=historyTruncated" })
   historyTruncated?: boolean;
 
-  @Metadata({ data: "json, name=periodEnd" })
+  @SpeakeasyMetadata({ data: "json, name=periodEnd" })
   periodEnd?: number;
 
-  @Metadata({ data: "json, name=periodStart" })
+  @SpeakeasyMetadata({ data: "json, name=periodStart" })
   periodStart?: number;
 
-  @Metadata({ data: "json, name=rowHeaders" })
+  @SpeakeasyMetadata({ data: "json, name=rowHeaders" })
   rowHeaders?: string[];
 
-  @Metadata({ data: "json, name=timeUnit" })
+  @SpeakeasyMetadata({ data: "json, name=timeUnit" })
   timeUnit?: string;
 
-  @Metadata({ data: "json, name=totalUsage" })
+  @SpeakeasyMetadata({ data: "json, name=totalUsage" })
   totalUsage?: number;
 }

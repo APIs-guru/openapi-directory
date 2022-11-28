@@ -1,5 +1,7 @@
 package shared
 
+// GooglePlayDeveloperReportingV1alpha1DimensionValue
+// Represents the value of a single dimension.
 type GooglePlayDeveloperReportingV1alpha1DimensionValue struct {
 	Dimension   *string `json:"dimension,omitempty"`
 	Int64Value  *string `json:"int64Value,omitempty"`

@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetRejectTransitGatewayPeeringAttachmentActionEnum(str, Enum):
     REJECT_TRANSIT_GATEWAY_PEERING_ATTACHMENT = "RejectTransitGatewayPeeringAttachment"
@@ -10,10 +14,10 @@ class GetRejectTransitGatewayPeeringAttachmentVersionEnum(str, Enum):
 
 @dataclass
 class GetRejectTransitGatewayPeeringAttachmentQueryParams:
-    action: GetRejectTransitGatewayPeeringAttachmentActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetRejectTransitGatewayPeeringAttachmentActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    transit_gateway_attachment_id: str = field(metadata={'query_param': { 'field_name': 'TransitGatewayAttachmentId', 'style': 'form', 'explode': True }})
+    version: GetRejectTransitGatewayPeeringAttachmentVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     dry_run: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'DryRun', 'style': 'form', 'explode': True }})
-    transit_gateway_attachment_id: str = field(default=None, metadata={'query_param': { 'field_name': 'TransitGatewayAttachmentId', 'style': 'form', 'explode': True }})
-    version: GetRejectTransitGatewayPeeringAttachmentVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -29,13 +33,13 @@ class GetRejectTransitGatewayPeeringAttachmentHeaders:
 
 @dataclass
 class GetRejectTransitGatewayPeeringAttachmentRequest:
-    query_params: GetRejectTransitGatewayPeeringAttachmentQueryParams = field(default=None)
-    headers: GetRejectTransitGatewayPeeringAttachmentHeaders = field(default=None)
+    headers: GetRejectTransitGatewayPeeringAttachmentHeaders = field()
+    query_params: GetRejectTransitGatewayPeeringAttachmentQueryParams = field()
     
 
 @dataclass
 class GetRejectTransitGatewayPeeringAttachmentResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

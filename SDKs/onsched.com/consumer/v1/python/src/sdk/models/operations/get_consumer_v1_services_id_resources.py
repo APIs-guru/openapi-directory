@@ -4,7 +4,7 @@ from typing import Any,Optional
 
 @dataclass
 class GetConsumerV1ServicesIDResourcesPathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -16,13 +16,13 @@ class GetConsumerV1ServicesIDResourcesQueryParams:
 
 @dataclass
 class GetConsumerV1ServicesIDResourcesRequest:
-    path_params: GetConsumerV1ServicesIDResourcesPathParams = field(default=None)
-    query_params: GetConsumerV1ServicesIDResourcesQueryParams = field(default=None)
+    path_params: GetConsumerV1ServicesIDResourcesPathParams = field()
+    query_params: GetConsumerV1ServicesIDResourcesQueryParams = field()
     
 
 @dataclass
 class GetConsumerV1ServicesIDResourcesResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     resource_list_view_model: Optional[dict[str, Any]] = field(default=None)
-    status_code: int = field(default=None)
     

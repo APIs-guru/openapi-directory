@@ -1,35 +1,36 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetKernelPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=kernelId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=kernelId" })
   kernelId: string;
 }
 
 
-export class GetKernelRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: GetKernelPathParams;
-}
-
-
 export class GetKernelDefaultApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=errors", elemType: shared.ErrorObject })
+  @SpeakeasyMetadata({ data: "json, name=errors", elemType: shared.ErrorObject })
   errors?: shared.ErrorObject[];
 }
 
 
+export class GetKernelRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: GetKernelPathParams;
+}
+
+
 export class GetKernelResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   kernel?: shared.Kernel;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getKernelDefaultApplicationJsonObject?: GetKernelDefaultApplicationJson;
 }

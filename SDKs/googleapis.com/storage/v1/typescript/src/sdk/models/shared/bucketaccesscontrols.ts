@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BucketAccessControl } from "./bucketaccesscontrol";
+
 
 
 // BucketAccessControls
@@ -8,9 +8,9 @@ import { BucketAccessControl } from "./bucketaccesscontrol";
  * An access-control list.
 **/
 export class BucketAccessControls extends SpeakeasyBase {
-  @Metadata({ data: "json, name=items", elemType: shared.BucketAccessControl })
+  @SpeakeasyMetadata({ data: "json, name=items", elemType: BucketAccessControl })
   items?: BucketAccessControl[];
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 }

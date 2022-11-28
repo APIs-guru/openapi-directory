@@ -1,5 +1,7 @@
 package shared
 
+// InstancePortInfo
+// Describes information about ports for an Amazon Lightsail instance.
 type InstancePortInfo struct {
 	AccessDirection *AccessDirectionEnum `json:"accessDirection,omitempty"`
 	AccessFrom      *string              `json:"accessFrom,omitempty"`

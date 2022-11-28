@@ -144,6 +144,8 @@ const (
 	LivingAreaEatingToasterExceptionEnumDependentOnDayOfWeek LivingAreaEatingToasterExceptionEnum = "DEPENDENT_ON_DAY_OF_WEEK"
 )
 
+// LivingAreaEating
+// Information about eating features in the living area.
 type LivingAreaEating struct {
 	CoffeeMaker               *bool                                          `json:"coffeeMaker,omitempty"`
 	CoffeeMakerException      *LivingAreaEatingCoffeeMakerExceptionEnum      `json:"coffeeMakerException,omitempty"`

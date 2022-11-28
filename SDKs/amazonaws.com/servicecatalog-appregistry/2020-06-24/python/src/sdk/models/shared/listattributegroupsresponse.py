@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import attributegroupsummary
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ListAttributeGroupsResponse:
-    attribute_groups: Optional[List[attributegroupsummary.AttributeGroupSummary]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'attributeGroups' }})
-    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'nextToken' }})
+    attribute_groups: Optional[List[AttributeGroupSummary]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('attributeGroups') }})
+    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('nextToken') }})
     

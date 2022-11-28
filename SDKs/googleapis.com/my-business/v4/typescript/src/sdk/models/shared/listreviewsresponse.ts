@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Review } from "./review";
+
 
 
 // ListReviewsResponse
@@ -8,15 +8,15 @@ import { Review } from "./review";
  * Response message for Reviews.ListReviews.
 **/
 export class ListReviewsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=averageRating" })
+  @SpeakeasyMetadata({ data: "json, name=averageRating" })
   averageRating?: number;
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 
-  @Metadata({ data: "json, name=reviews", elemType: shared.Review })
+  @SpeakeasyMetadata({ data: "json, name=reviews", elemType: Review })
   reviews?: Review[];
 
-  @Metadata({ data: "json, name=totalReviewCount" })
+  @SpeakeasyMetadata({ data: "json, name=totalReviewCount" })
   totalReviewCount?: number;
 }

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ScriptTypeEnum } from "./scripttypeenum";
 import { Source } from "./source";
 // UserDataValidationParameters
@@ -35,11 +35,11 @@ var UserDataValidationParameters = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=scriptType" }),
+        SpeakeasyMetadata({ data: "json, name=scriptType" }),
         __metadata("design:type", String)
     ], UserDataValidationParameters.prototype, "scriptType", void 0);
     __decorate([
-        Metadata({ data: "json, name=source" }),
+        SpeakeasyMetadata({ data: "json, name=source" }),
         __metadata("design:type", Source)
     ], UserDataValidationParameters.prototype, "source", void 0);
     return UserDataValidationParameters;

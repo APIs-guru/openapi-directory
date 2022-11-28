@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TraceSink } from "./tracesink";
+
 
 
 // ListTraceSinksResponse
@@ -8,9 +8,9 @@ import { TraceSink } from "./tracesink";
  * Result returned from `ListTraceSinks`.
 **/
 export class ListTraceSinksResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 
-  @Metadata({ data: "json, name=sinks", elemType: shared.TraceSink })
+  @SpeakeasyMetadata({ data: "json, name=sinks", elemType: TraceSink })
   sinks?: TraceSink[];
 }

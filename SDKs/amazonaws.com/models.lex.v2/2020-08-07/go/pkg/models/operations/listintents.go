@@ -25,6 +25,8 @@ type ListIntentsHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// ListIntentsRequestBodySortBy
+// Specifies attributes for sorting a list of intents.
 type ListIntentsRequestBodySortBy struct {
 	Attribute *shared.IntentSortAttributeEnum `json:"attribute,omitempty"`
 	Order     *shared.SortOrderEnum           `json:"order,omitempty"`

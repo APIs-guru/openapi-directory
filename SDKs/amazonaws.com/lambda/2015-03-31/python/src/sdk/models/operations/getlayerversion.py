@@ -1,12 +1,15 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class GetLayerVersionPathParams:
-    layer_name: str = field(default=None, metadata={'path_param': { 'field_name': 'LayerName', 'style': 'simple', 'explode': False }})
-    version_number: int = field(default=None, metadata={'path_param': { 'field_name': 'VersionNumber', 'style': 'simple', 'explode': False }})
+    layer_name: str = field(metadata={'path_param': { 'field_name': 'LayerName', 'style': 'simple', 'explode': False }})
+    version_number: int = field(metadata={'path_param': { 'field_name': 'VersionNumber', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -22,17 +25,17 @@ class GetLayerVersionHeaders:
 
 @dataclass
 class GetLayerVersionRequest:
-    path_params: GetLayerVersionPathParams = field(default=None)
-    headers: GetLayerVersionHeaders = field(default=None)
+    headers: GetLayerVersionHeaders = field()
+    path_params: GetLayerVersionPathParams = field()
     
 
 @dataclass
 class GetLayerVersionResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     get_layer_version_response: Optional[shared.GetLayerVersionResponse] = field(default=None)
     invalid_parameter_value_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
     service_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     too_many_requests_exception: Optional[Any] = field(default=None)
     

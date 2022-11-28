@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { JobSummary } from "./jobsummary";
+
 
 
 // StartJobResult
@@ -7,6 +8,6 @@ import { JobSummary } from "./jobsummary";
  *  The result structure for the run job request. 
 **/
 export class StartJobResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=jobSummary" })
+  @SpeakeasyMetadata({ data: "json, name=jobSummary" })
   jobSummary: JobSummary;
 }

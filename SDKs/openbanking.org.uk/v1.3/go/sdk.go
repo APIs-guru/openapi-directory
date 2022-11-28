@@ -1,15 +1,11 @@
 package sdk
 
 import (
-	"context"
-	"fmt"
 	"net/http"
 	"openapi/internal/utils"
-	"openapi/pkg/models/operations"
-	"strings"
 )
 
-var Servers = []string{
+var ServerList = []string{
 	"https://developer.openbanking.org.uk/reference-implementation/open-banking/v1.3",
 }
 
@@ -18,9 +14,20 @@ type HTTPClient interface {
 }
 
 type SDK struct {
-	defaultClient  HTTPClient
-	securityClient HTTPClient
-	serverURL      string
+	Atm    *Atm
+	Bca    *Bca
+	Branch *Branch
+	Ccc    *Ccc
+	Pca    *Pca
+	Sme    *Sme
+
+	_defaultClient  HTTPClient
+	_securityClient HTTPClient
+
+	_serverURL  string
+	_language   string
+	_sdkVersion string
+	_genVersion string
 }
 
 type SDKOption func(*SDK)
@@ -31,957 +38,92 @@ func WithServerURL(serverURL string, params map[string]string) SDKOption {
 			serverURL = utils.ReplaceParameters(serverURL, params)
 		}
 
-		sdk.serverURL = serverURL
+		sdk._serverURL = serverURL
+	}
+}
+
+func WithClient(client HTTPClient) SDKOption {
+	return func(sdk *SDK) {
+		sdk._defaultClient = client
 	}
 }
 
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
-		defaultClient:  http.DefaultClient,
-		securityClient: http.DefaultClient,
+		_language:   "go",
+		_sdkVersion: "",
+		_genVersion: "internal",
 	}
 	for _, opt := range opts {
 		opt(sdk)
 	}
-	if sdk.serverURL == "" {
-		sdk.serverURL = Servers[0]
+
+	if sdk._defaultClient == nil {
+		sdk._defaultClient = http.DefaultClient
 	}
+	if sdk._securityClient == nil {
+
+		sdk._securityClient = sdk._defaultClient
+
+	}
+
+	if sdk._serverURL == "" {
+		sdk._serverURL = ServerList[0]
+	}
+
+	sdk.Atm = NewAtm(
+		sdk._defaultClient,
+		sdk._securityClient,
+		sdk._serverURL,
+		sdk._language,
+		sdk._sdkVersion,
+		sdk._genVersion,
+	)
+
+	sdk.Bca = NewBca(
+		sdk._defaultClient,
+		sdk._securityClient,
+		sdk._serverURL,
+		sdk._language,
+		sdk._sdkVersion,
+		sdk._genVersion,
+	)
+
+	sdk.Branch = NewBranch(
+		sdk._defaultClient,
+		sdk._securityClient,
+		sdk._serverURL,
+		sdk._language,
+		sdk._sdkVersion,
+		sdk._genVersion,
+	)
+
+	sdk.Ccc = NewCcc(
+		sdk._defaultClient,
+		sdk._securityClient,
+		sdk._serverURL,
+		sdk._language,
+		sdk._sdkVersion,
+		sdk._genVersion,
+	)
+
+	sdk.Pca = NewPca(
+		sdk._defaultClient,
+		sdk._securityClient,
+		sdk._serverURL,
+		sdk._language,
+		sdk._sdkVersion,
+		sdk._genVersion,
+	)
+
+	sdk.Sme = NewSme(
+		sdk._defaultClient,
+		sdk._securityClient,
+		sdk._serverURL,
+		sdk._language,
+		sdk._sdkVersion,
+		sdk._genVersion,
+	)
 
 	return sdk
-}
-
-func (s *SDK) GetAtms(ctx context.Context, request operations.GetAtmsRequest) (*operations.GetAtmsResponse, error) {
-	baseURL := s.serverURL
-	url := strings.TrimSuffix(baseURL, "/") + "/atms"
-
-	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
-	if err != nil {
-		return nil, fmt.Errorf("error creating request: %w", err)
-	}
-
-	utils.PopulateHeaders(ctx, req, request.Headers)
-
-	client := s.defaultClient
-
-	httpRes, err := client.Do(req)
-	if err != nil {
-		return nil, fmt.Errorf("error sending request: %w", err)
-	}
-	defer httpRes.Body.Close()
-
-	contentType := httpRes.Header.Get("Content-Type")
-
-	res := &operations.GetAtmsResponse{
-		StatusCode:  int64(httpRes.StatusCode),
-		ContentType: contentType,
-	}
-	switch {
-	case httpRes.StatusCode == 200:
-		res.Headers = httpRes.Header
-
-		switch {
-		case utils.MatchContentType(contentType, `application/prs.openbanking.opendata.v1.3+json`):
-			var out *operations.GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSON
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
-			}
-
-			res.GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONObject = out
-		}
-	case httpRes.StatusCode == 400:
-		res.Headers = httpRes.Header
-
-		switch {
-		case utils.MatchContentType(contentType, `application/prs.openbanking.opendata.v1.3+json`):
-			var out *operations.GetAtms400ErrorObject
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
-			}
-
-			res.FourHundredErrorObject = out
-		}
-	case httpRes.StatusCode == 408:
-		res.Headers = httpRes.Header
-
-		switch {
-		case utils.MatchContentType(contentType, `application/prs.openbanking.opendata.v1.3+json`):
-			var out *operations.GetAtms408ErrorObject
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
-			}
-
-			res.FourHundredAndEightErrorObject = out
-		}
-	case httpRes.StatusCode == 429:
-		res.Headers = httpRes.Header
-
-		switch {
-		case utils.MatchContentType(contentType, `application/prs.openbanking.opendata.v1.3+json`):
-			var out *operations.GetAtms429ErrorObject
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
-			}
-
-			res.FourHundredAndTwentyNineErrorObject = out
-		}
-	case httpRes.StatusCode == 500:
-		res.Headers = httpRes.Header
-
-		switch {
-		case utils.MatchContentType(contentType, `application/prs.openbanking.opendata.v1.3+json`):
-			var out *operations.GetAtms500ErrorObject
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
-			}
-
-			res.FiveHundredErrorObject = out
-		}
-	case httpRes.StatusCode == 503:
-		res.Headers = httpRes.Header
-
-		switch {
-		case utils.MatchContentType(contentType, `application/prs.openbanking.opendata.v1.3+json`):
-			var out *operations.GetAtms503ErrorObject
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
-			}
-
-			res.FiveHundredAndThreeErrorObject = out
-		}
-	default:
-		res.Headers = httpRes.Header
-
-		switch {
-		case utils.MatchContentType(contentType, `application/prs.openbanking.opendata.v1.3+json`):
-			var out *operations.GetAtmsErrorObject
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
-			}
-
-			res.ErrorObject = out
-		}
-	}
-
-	return res, nil
-}
-
-func (s *SDK) GetBranches(ctx context.Context, request operations.GetBranchesRequest) (*operations.GetBranchesResponse, error) {
-	baseURL := s.serverURL
-	url := strings.TrimSuffix(baseURL, "/") + "/branches"
-
-	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
-	if err != nil {
-		return nil, fmt.Errorf("error creating request: %w", err)
-	}
-
-	utils.PopulateHeaders(ctx, req, request.Headers)
-
-	client := s.defaultClient
-
-	httpRes, err := client.Do(req)
-	if err != nil {
-		return nil, fmt.Errorf("error sending request: %w", err)
-	}
-	defer httpRes.Body.Close()
-
-	contentType := httpRes.Header.Get("Content-Type")
-
-	res := &operations.GetBranchesResponse{
-		StatusCode:  int64(httpRes.StatusCode),
-		ContentType: contentType,
-	}
-	switch {
-	case httpRes.StatusCode == 200:
-		res.Headers = httpRes.Header
-
-		switch {
-		case utils.MatchContentType(contentType, `application/prs.openbanking.opendata.v1.3+json`):
-			var out *operations.GetBranches200ApplicationPrsOpenbankingOpendataV13PlusJSON
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
-			}
-
-			res.GetBranches200ApplicationPrsOpenbankingOpendataV13PlusJSONObject = out
-		}
-	case httpRes.StatusCode == 400:
-		res.Headers = httpRes.Header
-
-		switch {
-		case utils.MatchContentType(contentType, `application/prs.openbanking.opendata.v1.3+json`):
-			var out *operations.GetBranches400ErrorObject
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
-			}
-
-			res.FourHundredErrorObject = out
-		}
-	case httpRes.StatusCode == 408:
-		res.Headers = httpRes.Header
-
-		switch {
-		case utils.MatchContentType(contentType, `application/prs.openbanking.opendata.v1.3+json`):
-			var out *operations.GetBranches408ErrorObject
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
-			}
-
-			res.FourHundredAndEightErrorObject = out
-		}
-	case httpRes.StatusCode == 429:
-		res.Headers = httpRes.Header
-
-		switch {
-		case utils.MatchContentType(contentType, `application/prs.openbanking.opendata.v1.3+json`):
-			var out *operations.GetBranches429ErrorObject
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
-			}
-
-			res.FourHundredAndTwentyNineErrorObject = out
-		}
-	case httpRes.StatusCode == 500:
-		res.Headers = httpRes.Header
-
-		switch {
-		case utils.MatchContentType(contentType, `application/prs.openbanking.opendata.v1.3+json`):
-			var out *operations.GetBranches500ErrorObject
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
-			}
-
-			res.FiveHundredErrorObject = out
-		}
-	case httpRes.StatusCode == 503:
-		res.Headers = httpRes.Header
-
-		switch {
-		case utils.MatchContentType(contentType, `application/prs.openbanking.opendata.v1.3+json`):
-			var out *operations.GetBranches503ErrorObject
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
-			}
-
-			res.FiveHundredAndThreeErrorObject = out
-		}
-	default:
-		res.Headers = httpRes.Header
-
-		switch {
-		case utils.MatchContentType(contentType, `application/prs.openbanking.opendata.v1.3+json`):
-			var out *operations.GetBranchesErrorObject
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
-			}
-
-			res.ErrorObject = out
-		}
-	}
-
-	return res, nil
-}
-
-func (s *SDK) GetBusinessCurrentAccounts(ctx context.Context, request operations.GetBusinessCurrentAccountsRequest) (*operations.GetBusinessCurrentAccountsResponse, error) {
-	baseURL := s.serverURL
-	url := strings.TrimSuffix(baseURL, "/") + "/business-current-accounts"
-
-	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
-	if err != nil {
-		return nil, fmt.Errorf("error creating request: %w", err)
-	}
-
-	utils.PopulateHeaders(ctx, req, request.Headers)
-
-	client := s.defaultClient
-
-	httpRes, err := client.Do(req)
-	if err != nil {
-		return nil, fmt.Errorf("error sending request: %w", err)
-	}
-	defer httpRes.Body.Close()
-
-	contentType := httpRes.Header.Get("Content-Type")
-
-	res := &operations.GetBusinessCurrentAccountsResponse{
-		StatusCode:  int64(httpRes.StatusCode),
-		ContentType: contentType,
-	}
-	switch {
-	case httpRes.StatusCode == 200:
-		res.Headers = httpRes.Header
-
-		switch {
-		case utils.MatchContentType(contentType, `application/prs.openbanking.opendata.v1.3+json`):
-			var out *operations.GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSON
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
-			}
-
-			res.GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONObject = out
-		}
-	case httpRes.StatusCode == 400:
-		res.Headers = httpRes.Header
-
-		switch {
-		case utils.MatchContentType(contentType, `application/prs.openbanking.opendata.v1.3+json`):
-			var out *operations.GetBusinessCurrentAccounts400ErrorObject
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
-			}
-
-			res.FourHundredErrorObject = out
-		}
-	case httpRes.StatusCode == 408:
-		res.Headers = httpRes.Header
-
-		switch {
-		case utils.MatchContentType(contentType, `application/prs.openbanking.opendata.v1.3+json`):
-			var out *operations.GetBusinessCurrentAccounts408ErrorObject
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
-			}
-
-			res.FourHundredAndEightErrorObject = out
-		}
-	case httpRes.StatusCode == 429:
-		res.Headers = httpRes.Header
-
-		switch {
-		case utils.MatchContentType(contentType, `application/prs.openbanking.opendata.v1.3+json`):
-			var out *operations.GetBusinessCurrentAccounts429ErrorObject
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
-			}
-
-			res.FourHundredAndTwentyNineErrorObject = out
-		}
-	case httpRes.StatusCode == 500:
-		res.Headers = httpRes.Header
-
-		switch {
-		case utils.MatchContentType(contentType, `application/prs.openbanking.opendata.v1.3+json`):
-			var out *operations.GetBusinessCurrentAccounts500ErrorObject
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
-			}
-
-			res.FiveHundredErrorObject = out
-		}
-	case httpRes.StatusCode == 503:
-		res.Headers = httpRes.Header
-
-		switch {
-		case utils.MatchContentType(contentType, `application/prs.openbanking.opendata.v1.3+json`):
-			var out *operations.GetBusinessCurrentAccounts503ErrorObject
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
-			}
-
-			res.FiveHundredAndThreeErrorObject = out
-		}
-	default:
-		res.Headers = httpRes.Header
-
-		switch {
-		case utils.MatchContentType(contentType, `application/prs.openbanking.opendata.v1.3+json`):
-			var out *operations.GetBusinessCurrentAccountsErrorObject
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
-			}
-
-			res.ErrorObject = out
-		}
-	}
-
-	return res, nil
-}
-
-func (s *SDK) GetCommercialCreditCards(ctx context.Context, request operations.GetCommercialCreditCardsRequest) (*operations.GetCommercialCreditCardsResponse, error) {
-	baseURL := s.serverURL
-	url := strings.TrimSuffix(baseURL, "/") + "/commercial-credit-cards"
-
-	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
-	if err != nil {
-		return nil, fmt.Errorf("error creating request: %w", err)
-	}
-
-	utils.PopulateHeaders(ctx, req, request.Headers)
-
-	client := s.defaultClient
-
-	httpRes, err := client.Do(req)
-	if err != nil {
-		return nil, fmt.Errorf("error sending request: %w", err)
-	}
-	defer httpRes.Body.Close()
-
-	contentType := httpRes.Header.Get("Content-Type")
-
-	res := &operations.GetCommercialCreditCardsResponse{
-		StatusCode:  int64(httpRes.StatusCode),
-		ContentType: contentType,
-	}
-	switch {
-	case httpRes.StatusCode == 200:
-		res.Headers = httpRes.Header
-
-		switch {
-		case utils.MatchContentType(contentType, `application/prs.openbanking.opendata.v1.3+json`):
-			var out *operations.GetCommercialCreditCards200ApplicationPrsOpenbankingOpendataV13PlusJSON
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
-			}
-
-			res.GetCommercialCreditCards200ApplicationPrsOpenbankingOpendataV13PlusJSONObject = out
-		}
-	case httpRes.StatusCode == 400:
-		res.Headers = httpRes.Header
-
-		switch {
-		case utils.MatchContentType(contentType, `application/prs.openbanking.opendata.v1.3+json`):
-			var out *operations.GetCommercialCreditCards400ErrorObject
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
-			}
-
-			res.FourHundredErrorObject = out
-		}
-	case httpRes.StatusCode == 408:
-		res.Headers = httpRes.Header
-
-		switch {
-		case utils.MatchContentType(contentType, `application/prs.openbanking.opendata.v1.3+json`):
-			var out *operations.GetCommercialCreditCards408ErrorObject
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
-			}
-
-			res.FourHundredAndEightErrorObject = out
-		}
-	case httpRes.StatusCode == 429:
-		res.Headers = httpRes.Header
-
-		switch {
-		case utils.MatchContentType(contentType, `application/prs.openbanking.opendata.v1.3+json`):
-			var out *operations.GetCommercialCreditCards429ErrorObject
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
-			}
-
-			res.FourHundredAndTwentyNineErrorObject = out
-		}
-	case httpRes.StatusCode == 500:
-		res.Headers = httpRes.Header
-
-		switch {
-		case utils.MatchContentType(contentType, `application/prs.openbanking.opendata.v1.3+json`):
-			var out *operations.GetCommercialCreditCards500ErrorObject
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
-			}
-
-			res.FiveHundredErrorObject = out
-		}
-	case httpRes.StatusCode == 503:
-		res.Headers = httpRes.Header
-
-		switch {
-		case utils.MatchContentType(contentType, `application/prs.openbanking.opendata.v1.3+json`):
-			var out *operations.GetCommercialCreditCards503ErrorObject
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
-			}
-
-			res.FiveHundredAndThreeErrorObject = out
-		}
-	default:
-		res.Headers = httpRes.Header
-
-		switch {
-		case utils.MatchContentType(contentType, `application/prs.openbanking.opendata.v1.3+json`):
-			var out *operations.GetCommercialCreditCardsErrorObject
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
-			}
-
-			res.ErrorObject = out
-		}
-	}
-
-	return res, nil
-}
-
-func (s *SDK) GetPersonalCurrentAccounts(ctx context.Context, request operations.GetPersonalCurrentAccountsRequest) (*operations.GetPersonalCurrentAccountsResponse, error) {
-	baseURL := s.serverURL
-	url := strings.TrimSuffix(baseURL, "/") + "/personal-current-accounts"
-
-	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
-	if err != nil {
-		return nil, fmt.Errorf("error creating request: %w", err)
-	}
-
-	utils.PopulateHeaders(ctx, req, request.Headers)
-
-	client := s.defaultClient
-
-	httpRes, err := client.Do(req)
-	if err != nil {
-		return nil, fmt.Errorf("error sending request: %w", err)
-	}
-	defer httpRes.Body.Close()
-
-	contentType := httpRes.Header.Get("Content-Type")
-
-	res := &operations.GetPersonalCurrentAccountsResponse{
-		StatusCode:  int64(httpRes.StatusCode),
-		ContentType: contentType,
-	}
-	switch {
-	case httpRes.StatusCode == 200:
-		res.Headers = httpRes.Header
-
-		switch {
-		case utils.MatchContentType(contentType, `application/prs.openbanking.opendata.v1.3+json`):
-			var out *operations.GetPersonalCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSON
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
-			}
-
-			res.GetPersonalCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONObject = out
-		}
-	case httpRes.StatusCode == 400:
-		res.Headers = httpRes.Header
-
-		switch {
-		case utils.MatchContentType(contentType, `application/prs.openbanking.opendata.v1.3+json`):
-			var out *operations.GetPersonalCurrentAccounts400ErrorObject
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
-			}
-
-			res.FourHundredErrorObject = out
-		}
-	case httpRes.StatusCode == 408:
-		res.Headers = httpRes.Header
-
-		switch {
-		case utils.MatchContentType(contentType, `application/prs.openbanking.opendata.v1.3+json`):
-			var out *operations.GetPersonalCurrentAccounts408ErrorObject
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
-			}
-
-			res.FourHundredAndEightErrorObject = out
-		}
-	case httpRes.StatusCode == 429:
-		res.Headers = httpRes.Header
-
-		switch {
-		case utils.MatchContentType(contentType, `application/prs.openbanking.opendata.v1.3+json`):
-			var out *operations.GetPersonalCurrentAccounts429ErrorObject
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
-			}
-
-			res.FourHundredAndTwentyNineErrorObject = out
-		}
-	case httpRes.StatusCode == 500:
-		res.Headers = httpRes.Header
-
-		switch {
-		case utils.MatchContentType(contentType, `application/prs.openbanking.opendata.v1.3+json`):
-			var out *operations.GetPersonalCurrentAccounts500ErrorObject
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
-			}
-
-			res.FiveHundredErrorObject = out
-		}
-	case httpRes.StatusCode == 503:
-		res.Headers = httpRes.Header
-
-		switch {
-		case utils.MatchContentType(contentType, `application/prs.openbanking.opendata.v1.3+json`):
-			var out *operations.GetPersonalCurrentAccounts503ErrorObject
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
-			}
-
-			res.FiveHundredAndThreeErrorObject = out
-		}
-	default:
-		res.Headers = httpRes.Header
-
-		switch {
-		case utils.MatchContentType(contentType, `application/prs.openbanking.opendata.v1.3+json`):
-			var out *operations.GetPersonalCurrentAccountsErrorObject
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
-			}
-
-			res.ErrorObject = out
-		}
-	}
-
-	return res, nil
-}
-
-func (s *SDK) GetUnsecuredSmeLoans(ctx context.Context, request operations.GetUnsecuredSmeLoansRequest) (*operations.GetUnsecuredSmeLoansResponse, error) {
-	baseURL := s.serverURL
-	url := strings.TrimSuffix(baseURL, "/") + "/unsecured-sme-loans"
-
-	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
-	if err != nil {
-		return nil, fmt.Errorf("error creating request: %w", err)
-	}
-
-	utils.PopulateHeaders(ctx, req, request.Headers)
-
-	client := s.defaultClient
-
-	httpRes, err := client.Do(req)
-	if err != nil {
-		return nil, fmt.Errorf("error sending request: %w", err)
-	}
-	defer httpRes.Body.Close()
-
-	contentType := httpRes.Header.Get("Content-Type")
-
-	res := &operations.GetUnsecuredSmeLoansResponse{
-		StatusCode:  int64(httpRes.StatusCode),
-		ContentType: contentType,
-	}
-	switch {
-	case httpRes.StatusCode == 200:
-		res.Headers = httpRes.Header
-
-		switch {
-		case utils.MatchContentType(contentType, `application/prs.openbanking.opendata.v1.3+json`):
-			var out *operations.GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSON
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
-			}
-
-			res.GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONObject = out
-		}
-	case httpRes.StatusCode == 400:
-		res.Headers = httpRes.Header
-
-		switch {
-		case utils.MatchContentType(contentType, `application/prs.openbanking.opendata.v1.3+json`):
-			var out *operations.GetUnsecuredSmeLoans400ErrorObject
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
-			}
-
-			res.FourHundredErrorObject = out
-		}
-	case httpRes.StatusCode == 408:
-		res.Headers = httpRes.Header
-
-		switch {
-		case utils.MatchContentType(contentType, `application/prs.openbanking.opendata.v1.3+json`):
-			var out *operations.GetUnsecuredSmeLoans408ErrorObject
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
-			}
-
-			res.FourHundredAndEightErrorObject = out
-		}
-	case httpRes.StatusCode == 429:
-		res.Headers = httpRes.Header
-
-		switch {
-		case utils.MatchContentType(contentType, `application/prs.openbanking.opendata.v1.3+json`):
-			var out *operations.GetUnsecuredSmeLoans429ErrorObject
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
-			}
-
-			res.FourHundredAndTwentyNineErrorObject = out
-		}
-	case httpRes.StatusCode == 500:
-		res.Headers = httpRes.Header
-
-		switch {
-		case utils.MatchContentType(contentType, `application/prs.openbanking.opendata.v1.3+json`):
-			var out *operations.GetUnsecuredSmeLoans500ErrorObject
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
-			}
-
-			res.FiveHundredErrorObject = out
-		}
-	case httpRes.StatusCode == 503:
-		res.Headers = httpRes.Header
-
-		switch {
-		case utils.MatchContentType(contentType, `application/prs.openbanking.opendata.v1.3+json`):
-			var out *operations.GetUnsecuredSmeLoans503ErrorObject
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
-			}
-
-			res.FiveHundredAndThreeErrorObject = out
-		}
-	default:
-		res.Headers = httpRes.Header
-
-		switch {
-		case utils.MatchContentType(contentType, `application/prs.openbanking.opendata.v1.3+json`):
-			var out *operations.GetUnsecuredSmeLoansErrorObject
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
-			}
-
-			res.ErrorObject = out
-		}
-	}
-
-	return res, nil
-}
-
-func (s *SDK) HeadAtms(ctx context.Context, request operations.HeadAtmsRequest) (*operations.HeadAtmsResponse, error) {
-	baseURL := s.serverURL
-	url := strings.TrimSuffix(baseURL, "/") + "/atms"
-
-	req, err := http.NewRequestWithContext(ctx, "HEAD", url, nil)
-	if err != nil {
-		return nil, fmt.Errorf("error creating request: %w", err)
-	}
-
-	utils.PopulateHeaders(ctx, req, request.Headers)
-
-	client := s.defaultClient
-
-	httpRes, err := client.Do(req)
-	if err != nil {
-		return nil, fmt.Errorf("error sending request: %w", err)
-	}
-	defer httpRes.Body.Close()
-
-	contentType := httpRes.Header.Get("Content-Type")
-
-	res := &operations.HeadAtmsResponse{
-		StatusCode:  int64(httpRes.StatusCode),
-		ContentType: contentType,
-	}
-	switch {
-	default:
-		switch {
-		case utils.MatchContentType(contentType, `application/prs.openbanking.opendata.v1.3+json`):
-			var out map[string]interface{}
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
-			}
-
-			res.NoResponse = out
-		}
-	}
-
-	return res, nil
-}
-
-func (s *SDK) HeadBranches(ctx context.Context, request operations.HeadBranchesRequest) (*operations.HeadBranchesResponse, error) {
-	baseURL := s.serverURL
-	url := strings.TrimSuffix(baseURL, "/") + "/branches"
-
-	req, err := http.NewRequestWithContext(ctx, "HEAD", url, nil)
-	if err != nil {
-		return nil, fmt.Errorf("error creating request: %w", err)
-	}
-
-	utils.PopulateHeaders(ctx, req, request.Headers)
-
-	client := s.defaultClient
-
-	httpRes, err := client.Do(req)
-	if err != nil {
-		return nil, fmt.Errorf("error sending request: %w", err)
-	}
-	defer httpRes.Body.Close()
-
-	contentType := httpRes.Header.Get("Content-Type")
-
-	res := &operations.HeadBranchesResponse{
-		StatusCode:  int64(httpRes.StatusCode),
-		ContentType: contentType,
-	}
-	switch {
-	default:
-		switch {
-		case utils.MatchContentType(contentType, `application/prs.openbanking.opendata.v1.3+json`):
-			var out map[string]interface{}
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
-			}
-
-			res.NoResponse = out
-		}
-	}
-
-	return res, nil
-}
-
-func (s *SDK) HeadBusinessCurrentAccounts(ctx context.Context, request operations.HeadBusinessCurrentAccountsRequest) (*operations.HeadBusinessCurrentAccountsResponse, error) {
-	baseURL := s.serverURL
-	url := strings.TrimSuffix(baseURL, "/") + "/business-current-accounts"
-
-	req, err := http.NewRequestWithContext(ctx, "HEAD", url, nil)
-	if err != nil {
-		return nil, fmt.Errorf("error creating request: %w", err)
-	}
-
-	utils.PopulateHeaders(ctx, req, request.Headers)
-
-	client := s.defaultClient
-
-	httpRes, err := client.Do(req)
-	if err != nil {
-		return nil, fmt.Errorf("error sending request: %w", err)
-	}
-	defer httpRes.Body.Close()
-
-	contentType := httpRes.Header.Get("Content-Type")
-
-	res := &operations.HeadBusinessCurrentAccountsResponse{
-		StatusCode:  int64(httpRes.StatusCode),
-		ContentType: contentType,
-	}
-	switch {
-	default:
-		switch {
-		case utils.MatchContentType(contentType, `application/prs.openbanking.opendata.v1.3+json`):
-			var out map[string]interface{}
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
-			}
-
-			res.NoResponse = out
-		}
-	}
-
-	return res, nil
-}
-
-func (s *SDK) HeadCommercialCreditCards(ctx context.Context, request operations.HeadCommercialCreditCardsRequest) (*operations.HeadCommercialCreditCardsResponse, error) {
-	baseURL := s.serverURL
-	url := strings.TrimSuffix(baseURL, "/") + "/commercial-credit-cards"
-
-	req, err := http.NewRequestWithContext(ctx, "HEAD", url, nil)
-	if err != nil {
-		return nil, fmt.Errorf("error creating request: %w", err)
-	}
-
-	utils.PopulateHeaders(ctx, req, request.Headers)
-
-	client := s.defaultClient
-
-	httpRes, err := client.Do(req)
-	if err != nil {
-		return nil, fmt.Errorf("error sending request: %w", err)
-	}
-	defer httpRes.Body.Close()
-
-	contentType := httpRes.Header.Get("Content-Type")
-
-	res := &operations.HeadCommercialCreditCardsResponse{
-		StatusCode:  int64(httpRes.StatusCode),
-		ContentType: contentType,
-	}
-	switch {
-	default:
-		switch {
-		case utils.MatchContentType(contentType, `application/prs.openbanking.opendata.v1.3+json`):
-			var out map[string]interface{}
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
-			}
-
-			res.NoResponse = out
-		}
-	}
-
-	return res, nil
-}
-
-func (s *SDK) HeadPersonalCurrentAccounts(ctx context.Context, request operations.HeadPersonalCurrentAccountsRequest) (*operations.HeadPersonalCurrentAccountsResponse, error) {
-	baseURL := s.serverURL
-	url := strings.TrimSuffix(baseURL, "/") + "/personal-current-accounts"
-
-	req, err := http.NewRequestWithContext(ctx, "HEAD", url, nil)
-	if err != nil {
-		return nil, fmt.Errorf("error creating request: %w", err)
-	}
-
-	utils.PopulateHeaders(ctx, req, request.Headers)
-
-	client := s.defaultClient
-
-	httpRes, err := client.Do(req)
-	if err != nil {
-		return nil, fmt.Errorf("error sending request: %w", err)
-	}
-	defer httpRes.Body.Close()
-
-	contentType := httpRes.Header.Get("Content-Type")
-
-	res := &operations.HeadPersonalCurrentAccountsResponse{
-		StatusCode:  int64(httpRes.StatusCode),
-		ContentType: contentType,
-	}
-	switch {
-	default:
-		switch {
-		case utils.MatchContentType(contentType, `application/prs.openbanking.opendata.v1.3+json`):
-			var out map[string]interface{}
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
-			}
-
-			res.NoResponse = out
-		}
-	}
-
-	return res, nil
-}
-
-func (s *SDK) HeadUnsecuredSmeLoans(ctx context.Context, request operations.HeadUnsecuredSmeLoansRequest) (*operations.HeadUnsecuredSmeLoansResponse, error) {
-	baseURL := s.serverURL
-	url := strings.TrimSuffix(baseURL, "/") + "/unsecured-sme-loans"
-
-	req, err := http.NewRequestWithContext(ctx, "HEAD", url, nil)
-	if err != nil {
-		return nil, fmt.Errorf("error creating request: %w", err)
-	}
-
-	utils.PopulateHeaders(ctx, req, request.Headers)
-
-	client := s.defaultClient
-
-	httpRes, err := client.Do(req)
-	if err != nil {
-		return nil, fmt.Errorf("error sending request: %w", err)
-	}
-	defer httpRes.Body.Close()
-
-	contentType := httpRes.Header.Get("Content-Type")
-
-	res := &operations.HeadUnsecuredSmeLoansResponse{
-		StatusCode:  int64(httpRes.StatusCode),
-		ContentType: contentType,
-	}
-	switch {
-	default:
-		switch {
-		case utils.MatchContentType(contentType, `application/prs.openbanking.opendata.v1.3+json`):
-			var out map[string]interface{}
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
-			}
-
-			res.NoResponse = out
-		}
-	}
-
-	return res, nil
 }

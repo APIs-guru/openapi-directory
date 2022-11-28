@@ -15,24 +15,34 @@ type CreateConfigurationSetHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// CreateConfigurationSetRequestBodyDeliveryOptions
+// Used to associate a configuration set with a dedicated IP pool.
 type CreateConfigurationSetRequestBodyDeliveryOptions struct {
 	SendingPoolName *string               `json:"SendingPoolName,omitempty"`
 	TLSPolicy       *shared.TLSPolicyEnum `json:"TlsPolicy,omitempty"`
 }
 
+// CreateConfigurationSetRequestBodyReputationOptions
+// Enable or disable collection of reputation metrics for emails that you send using this configuration set in the current AWS Region.
 type CreateConfigurationSetRequestBodyReputationOptions struct {
 	LastFreshStart           *time.Time `json:"LastFreshStart,omitempty"`
 	ReputationMetricsEnabled *bool      `json:"ReputationMetricsEnabled,omitempty"`
 }
 
+// CreateConfigurationSetRequestBodySendingOptions
+// Used to enable or disable email sending for messages that use this configuration set in the current AWS Region.
 type CreateConfigurationSetRequestBodySendingOptions struct {
 	SendingEnabled *bool `json:"SendingEnabled,omitempty"`
 }
 
+// CreateConfigurationSetRequestBodySuppressionOptions
+// An object that contains information about the suppression list preferences for your account.
 type CreateConfigurationSetRequestBodySuppressionOptions struct {
 	SuppressedReasons []shared.SuppressionListReasonEnum `json:"SuppressedReasons,omitempty"`
 }
 
+// CreateConfigurationSetRequestBodyTrackingOptions
+// <p>An object that defines the tracking options for a configuration set. When you use the Amazon SES API v2 to send an email, it contains an invisible image that's used to track when recipients open your email. If your email contains links, those links are changed slightly in order to track when recipients click them.</p> <p>These images and links include references to a domain operated by AWS. You can optionally configure the Amazon SES to use a domain that you operate for these images and links.</p>
 type CreateConfigurationSetRequestBodyTrackingOptions struct {
 	CustomRedirectDomain *string `json:"CustomRedirectDomain,omitempty"`
 }

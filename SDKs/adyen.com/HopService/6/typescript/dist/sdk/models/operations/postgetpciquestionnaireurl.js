@@ -22,45 +22,21 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
-var PostGetPciQuestionnaireUrlSecurityOption1 = /** @class */ (function (_super) {
-    __extends(PostGetPciQuestionnaireUrlSecurityOption1, _super);
-    function PostGetPciQuestionnaireUrlSecurityOption1() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    __decorate([
-        Metadata({ data: "security, scheme=true;type=http;subtype=basic" }),
-        __metadata("design:type", shared.SchemeBasicAuth)
-    ], PostGetPciQuestionnaireUrlSecurityOption1.prototype, "basicAuth", void 0);
-    return PostGetPciQuestionnaireUrlSecurityOption1;
-}(SpeakeasyBase));
-export { PostGetPciQuestionnaireUrlSecurityOption1 };
-var PostGetPciQuestionnaireUrlSecurityOption2 = /** @class */ (function (_super) {
-    __extends(PostGetPciQuestionnaireUrlSecurityOption2, _super);
-    function PostGetPciQuestionnaireUrlSecurityOption2() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
-        __metadata("design:type", shared.SchemeApiKeyAuth)
-    ], PostGetPciQuestionnaireUrlSecurityOption2.prototype, "apiKeyAuth", void 0);
-    return PostGetPciQuestionnaireUrlSecurityOption2;
-}(SpeakeasyBase));
-export { PostGetPciQuestionnaireUrlSecurityOption2 };
 var PostGetPciQuestionnaireUrlSecurity = /** @class */ (function (_super) {
     __extends(PostGetPciQuestionnaireUrlSecurity, _super);
     function PostGetPciQuestionnaireUrlSecurity() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, option=true" }),
-        __metadata("design:type", PostGetPciQuestionnaireUrlSecurityOption1)
-    ], PostGetPciQuestionnaireUrlSecurity.prototype, "option1", void 0);
+        SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=basic" }),
+        __metadata("design:type", shared.SchemeBasicAuth)
+    ], PostGetPciQuestionnaireUrlSecurity.prototype, "basicAuth", void 0);
     __decorate([
-        Metadata({ data: "security, option=true" }),
-        __metadata("design:type", PostGetPciQuestionnaireUrlSecurityOption2)
-    ], PostGetPciQuestionnaireUrlSecurity.prototype, "option2", void 0);
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        __metadata("design:type", shared.SchemeApiKeyAuth)
+    ], PostGetPciQuestionnaireUrlSecurity.prototype, "apiKeyAuth", void 0);
     return PostGetPciQuestionnaireUrlSecurity;
 }(SpeakeasyBase));
 export { PostGetPciQuestionnaireUrlSecurity };
@@ -70,11 +46,11 @@ var PostGetPciQuestionnaireUrlRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", Object)
     ], PostGetPciQuestionnaireUrlRequest.prototype, "request", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PostGetPciQuestionnaireUrlSecurity)
     ], PostGetPciQuestionnaireUrlRequest.prototype, "security", void 0);
     return PostGetPciQuestionnaireUrlRequest;
@@ -86,19 +62,19 @@ var PostGetPciQuestionnaireUrlResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], PostGetPciQuestionnaireUrlResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], PostGetPciQuestionnaireUrlResponse.prototype, "getPciUrlResponse", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], PostGetPciQuestionnaireUrlResponse.prototype, "serviceError", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], PostGetPciQuestionnaireUrlResponse.prototype, "statusCode", void 0);
     return PostGetPciQuestionnaireUrlResponse;

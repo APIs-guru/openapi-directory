@@ -1,73 +1,74 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class BigOvenModelApiNutritionInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CaloriesFromFat" })
+  @SpeakeasyMetadata({ data: "json, name=CaloriesFromFat" })
   caloriesFromFat?: number;
 
-  @Metadata({ data: "json, name=Cholesterol" })
+  @SpeakeasyMetadata({ data: "json, name=Cholesterol" })
   cholesterol?: number;
 
-  @Metadata({ data: "json, name=CholesterolPct" })
+  @SpeakeasyMetadata({ data: "json, name=CholesterolPct" })
   cholesterolPct?: number;
 
-  @Metadata({ data: "json, name=DietaryFiber" })
+  @SpeakeasyMetadata({ data: "json, name=DietaryFiber" })
   dietaryFiber?: number;
 
-  @Metadata({ data: "json, name=DietaryFiberPct" })
+  @SpeakeasyMetadata({ data: "json, name=DietaryFiberPct" })
   dietaryFiberPct?: number;
 
-  @Metadata({ data: "json, name=MonoFat" })
+  @SpeakeasyMetadata({ data: "json, name=MonoFat" })
   monoFat?: number;
 
-  @Metadata({ data: "json, name=PolyFat" })
+  @SpeakeasyMetadata({ data: "json, name=PolyFat" })
   polyFat?: number;
 
-  @Metadata({ data: "json, name=Potassium" })
+  @SpeakeasyMetadata({ data: "json, name=Potassium" })
   potassium?: number;
 
-  @Metadata({ data: "json, name=PotassiumPct" })
+  @SpeakeasyMetadata({ data: "json, name=PotassiumPct" })
   potassiumPct?: number;
 
-  @Metadata({ data: "json, name=Protein" })
+  @SpeakeasyMetadata({ data: "json, name=Protein" })
   protein?: number;
 
-  @Metadata({ data: "json, name=ProteinPct" })
+  @SpeakeasyMetadata({ data: "json, name=ProteinPct" })
   proteinPct?: number;
 
-  @Metadata({ data: "json, name=SatFat" })
+  @SpeakeasyMetadata({ data: "json, name=SatFat" })
   satFat?: number;
 
-  @Metadata({ data: "json, name=SatFatPct" })
+  @SpeakeasyMetadata({ data: "json, name=SatFatPct" })
   satFatPct?: number;
 
-  @Metadata({ data: "json, name=SingularYieldUnit" })
+  @SpeakeasyMetadata({ data: "json, name=SingularYieldUnit" })
   singularYieldUnit?: string;
 
-  @Metadata({ data: "json, name=Sodium" })
+  @SpeakeasyMetadata({ data: "json, name=Sodium" })
   sodium?: number;
 
-  @Metadata({ data: "json, name=SodiumPct" })
+  @SpeakeasyMetadata({ data: "json, name=SodiumPct" })
   sodiumPct?: number;
 
-  @Metadata({ data: "json, name=Sugar" })
+  @SpeakeasyMetadata({ data: "json, name=Sugar" })
   sugar?: number;
 
-  @Metadata({ data: "json, name=TotalCalories" })
+  @SpeakeasyMetadata({ data: "json, name=TotalCalories" })
   totalCalories?: number;
 
-  @Metadata({ data: "json, name=TotalCarbs" })
+  @SpeakeasyMetadata({ data: "json, name=TotalCarbs" })
   totalCarbs?: number;
 
-  @Metadata({ data: "json, name=TotalCarbsPct" })
+  @SpeakeasyMetadata({ data: "json, name=TotalCarbsPct" })
   totalCarbsPct?: number;
 
-  @Metadata({ data: "json, name=TotalFat" })
+  @SpeakeasyMetadata({ data: "json, name=TotalFat" })
   totalFat?: number;
 
-  @Metadata({ data: "json, name=TotalFatPct" })
+  @SpeakeasyMetadata({ data: "json, name=TotalFatPct" })
   totalFatPct?: number;
 
-  @Metadata({ data: "json, name=TransFat" })
+  @SpeakeasyMetadata({ data: "json, name=TransFat" })
   transFat?: number;
 }

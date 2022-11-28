@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class WebmastersSitemapsDeletePathParams:
-    feedpath: str = field(default=None, metadata={'path_param': { 'field_name': 'feedpath', 'style': 'simple', 'explode': False }})
-    site_url: str = field(default=None, metadata={'path_param': { 'field_name': 'siteUrl', 'style': 'simple', 'explode': False }})
+    feedpath: str = field(metadata={'path_param': { 'field_name': 'feedpath', 'style': 'simple', 'explode': False }})
+    site_url: str = field(metadata={'path_param': { 'field_name': 'siteUrl', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,19 +27,19 @@ class WebmastersSitemapsDeleteQueryParams:
 
 @dataclass
 class WebmastersSitemapsDeleteSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class WebmastersSitemapsDeleteRequest:
-    path_params: WebmastersSitemapsDeletePathParams = field(default=None)
-    query_params: WebmastersSitemapsDeleteQueryParams = field(default=None)
-    security: WebmastersSitemapsDeleteSecurity = field(default=None)
+    path_params: WebmastersSitemapsDeletePathParams = field()
+    query_params: WebmastersSitemapsDeleteQueryParams = field()
+    security: WebmastersSitemapsDeleteSecurity = field()
     
 
 @dataclass
 class WebmastersSitemapsDeleteResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

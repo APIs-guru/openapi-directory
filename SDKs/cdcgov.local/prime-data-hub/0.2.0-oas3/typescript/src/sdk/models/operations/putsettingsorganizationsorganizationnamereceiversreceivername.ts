@@ -1,41 +1,42 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class PutSettingsOrganizationsOrganizationNameReceiversReceiverNamePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=organizationName" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=organizationName" })
   organizationName: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=receiverName" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=receiverName" })
   receiverName: string;
 }
 
 
 export class PutSettingsOrganizationsOrganizationNameReceiversReceiverNameSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   oAuth2: shared.SchemeOAuth2;
 }
 
 
 export class PutSettingsOrganizationsOrganizationNameReceiversReceiverNameRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: PutSettingsOrganizationsOrganizationNameReceiversReceiverNamePathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
-  request?: shared.Receiver;
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request?: shared.ReceiverInput;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: PutSettingsOrganizationsOrganizationNameReceiversReceiverNameSecurity;
 }
 
 
 export class PutSettingsOrganizationsOrganizationNameReceiversReceiverNameResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   receiver?: shared.Receiver;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

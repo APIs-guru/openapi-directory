@@ -13,12 +13,6 @@ type GetTIDPostsJSONRequestBody struct {
 	PostIds int64 `json:"post_ids[]"`
 }
 
-type GetTIDPostsJSONRequest struct {
-	PathParams GetTIDPostsJSONPathParams
-	Headers    GetTIDPostsJSONHeaders
-	Request    *GetTIDPostsJSONRequestBody `request:"mediaType=application/json"`
-}
-
 type GetTIDPostsJSON200ApplicationJSONPostStreamPostsActionsSummary struct {
 	CanAct *bool  `json:"can_act,omitempty"`
 	ID     *int64 `json:"id,omitempty"`
@@ -81,6 +75,12 @@ type GetTIDPostsJSON200ApplicationJSONPostStream struct {
 type GetTIDPostsJSON200ApplicationJSON struct {
 	ID         *int64                                       `json:"id,omitempty"`
 	PostStream *GetTIDPostsJSON200ApplicationJSONPostStream `json:"post_stream,omitempty"`
+}
+
+type GetTIDPostsJSONRequest struct {
+	PathParams GetTIDPostsJSONPathParams
+	Headers    GetTIDPostsJSONHeaders
+	Request    *GetTIDPostsJSONRequestBody `request:"mediaType=application/json"`
 }
 
 type GetTIDPostsJSONResponse struct {

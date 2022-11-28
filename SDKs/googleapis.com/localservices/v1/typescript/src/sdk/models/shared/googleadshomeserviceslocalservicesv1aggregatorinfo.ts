@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleAdsHomeservicesLocalservicesV1AggregatorInfo
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Conatiner for aggregator specific information if lead is for an aggregator GLS account.
 **/
 export class GoogleAdsHomeservicesLocalservicesV1AggregatorInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=aggregatorProviderId" })
+  @SpeakeasyMetadata({ data: "json, name=aggregatorProviderId" })
   aggregatorProviderId?: string;
 }

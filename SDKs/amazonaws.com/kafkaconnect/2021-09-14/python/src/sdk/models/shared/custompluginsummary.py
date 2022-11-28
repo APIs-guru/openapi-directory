@@ -1,20 +1,25 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import custompluginstate_enum
-from . import custompluginrevisionsummary
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class CustomPluginSummary:
-    creation_time: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'creationTime', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    custom_plugin_arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'customPluginArn' }})
-    custom_plugin_state: Optional[custompluginstate_enum.CustomPluginStateEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'customPluginState' }})
-    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
-    latest_revision: Optional[custompluginrevisionsummary.CustomPluginRevisionSummary] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'latestRevision' }})
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
+    r"""CustomPluginSummary
+    A summary of the custom plugin.
+    """
+    
+    creation_time: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('creationTime'), 'encoder': utils.datetimeisoformat(True), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    custom_plugin_arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('customPluginArn') }})
+    custom_plugin_state: Optional[CustomPluginStateEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('customPluginState') }})
+    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('description') }})
+    latest_revision: Optional[CustomPluginRevisionSummary] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('latestRevision') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
     

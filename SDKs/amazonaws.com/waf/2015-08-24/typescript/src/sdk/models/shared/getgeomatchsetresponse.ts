@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GeoMatchSet } from "./geomatchset";
 
 
+
 export class GetGeoMatchSetResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=GeoMatchSet" })
+  @SpeakeasyMetadata({ data: "json, name=GeoMatchSet" })
   geoMatchSet?: GeoMatchSet;
 }

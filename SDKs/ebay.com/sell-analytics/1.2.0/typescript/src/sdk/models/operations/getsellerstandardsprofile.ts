@@ -1,38 +1,39 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetSellerStandardsProfilePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=cycle" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=cycle" })
   cycle: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=program" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=program" })
   program: string;
 }
 
 
 export class GetSellerStandardsProfileSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   apiAuth: shared.SchemeApiAuth;
 }
 
 
 export class GetSellerStandardsProfileRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetSellerStandardsProfilePathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: GetSellerStandardsProfileSecurity;
 }
 
 
 export class GetSellerStandardsProfileResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   standardsProfile?: shared.StandardsProfile;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

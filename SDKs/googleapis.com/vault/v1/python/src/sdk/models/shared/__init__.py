@@ -1,4 +1,4 @@
-from .__xgafv_enum import *
+from ._xgafv_enum import *
 from .accountinfo import *
 from .addheldaccountresult import *
 from .addheldaccountsrequest import *

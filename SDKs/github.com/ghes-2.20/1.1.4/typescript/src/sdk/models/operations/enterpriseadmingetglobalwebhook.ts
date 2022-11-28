@@ -1,35 +1,36 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class EnterpriseAdminGetGlobalWebhookPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=hook_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=hook_id" })
   hookId: number;
 }
 
 
 export class EnterpriseAdminGetGlobalWebhookHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=accept" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=accept" })
   accept: string;
 }
 
 
 export class EnterpriseAdminGetGlobalWebhookRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: EnterpriseAdminGetGlobalWebhookPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: EnterpriseAdminGetGlobalWebhookHeaders;
 }
 
 
 export class EnterpriseAdminGetGlobalWebhookResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   globalHook?: shared.GlobalHook;
 }

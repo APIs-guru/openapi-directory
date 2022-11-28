@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass_json
 @dataclass
 class Capacity:
-    publish_mib_per_sec: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'publishMibPerSec' }})
-    subscribe_mib_per_sec: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'subscribeMibPerSec' }})
+    r"""Capacity
+    The throughput capacity configuration for each partition.
+    """
+    
+    publish_mib_per_sec: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('publishMibPerSec') }})
+    subscribe_mib_per_sec: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('subscribeMibPerSec') }})
     

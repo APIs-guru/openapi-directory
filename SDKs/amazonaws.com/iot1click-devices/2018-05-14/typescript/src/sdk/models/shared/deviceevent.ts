@@ -1,11 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Device } from "./device";
 
 
+
 export class DeviceEvent extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Device" })
+  @SpeakeasyMetadata({ data: "json, name=Device" })
   device?: Device;
 
-  @Metadata({ data: "json, name=StdEvent" })
+  @SpeakeasyMetadata({ data: "json, name=StdEvent" })
   stdEvent?: string;
 }

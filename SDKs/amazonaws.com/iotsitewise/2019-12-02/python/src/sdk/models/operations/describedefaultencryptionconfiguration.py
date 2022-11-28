@@ -1,4 +1,7 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
@@ -16,15 +19,15 @@ class DescribeDefaultEncryptionConfigurationHeaders:
 
 @dataclass
 class DescribeDefaultEncryptionConfigurationRequest:
-    headers: DescribeDefaultEncryptionConfigurationHeaders = field(default=None)
+    headers: DescribeDefaultEncryptionConfigurationHeaders = field()
     
 
 @dataclass
 class DescribeDefaultEncryptionConfigurationResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     describe_default_encryption_configuration_response: Optional[shared.DescribeDefaultEncryptionConfigurationResponse] = field(default=None)
     internal_failure_exception: Optional[Any] = field(default=None)
     invalid_request_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     

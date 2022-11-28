@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SmtpMsa } from "./smtpmsa";
 
+
 export enum SendAsVerificationStatusEnum {
-    VerificationStatusUnspecified = "verificationStatusUnspecified"
-,    Accepted = "accepted"
-,    Pending = "pending"
+    VerificationStatusUnspecified = "verificationStatusUnspecified",
+    Accepted = "accepted",
+    Pending = "pending"
 }
 
 
@@ -13,30 +14,30 @@ export enum SendAsVerificationStatusEnum {
  * Settings associated with a send-as alias, which can be either the primary login address associated with the account or a custom "from" address. Send-as aliases correspond to the "Send Mail As" feature in the web interface.
 **/
 export class SendAs extends SpeakeasyBase {
-  @Metadata({ data: "json, name=displayName" })
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
   displayName?: string;
 
-  @Metadata({ data: "json, name=isDefault" })
+  @SpeakeasyMetadata({ data: "json, name=isDefault" })
   isDefault?: boolean;
 
-  @Metadata({ data: "json, name=isPrimary" })
+  @SpeakeasyMetadata({ data: "json, name=isPrimary" })
   isPrimary?: boolean;
 
-  @Metadata({ data: "json, name=replyToAddress" })
+  @SpeakeasyMetadata({ data: "json, name=replyToAddress" })
   replyToAddress?: string;
 
-  @Metadata({ data: "json, name=sendAsEmail" })
+  @SpeakeasyMetadata({ data: "json, name=sendAsEmail" })
   sendAsEmail?: string;
 
-  @Metadata({ data: "json, name=signature" })
+  @SpeakeasyMetadata({ data: "json, name=signature" })
   signature?: string;
 
-  @Metadata({ data: "json, name=smtpMsa" })
+  @SpeakeasyMetadata({ data: "json, name=smtpMsa" })
   smtpMsa?: SmtpMsa;
 
-  @Metadata({ data: "json, name=treatAsAlias" })
+  @SpeakeasyMetadata({ data: "json, name=treatAsAlias" })
   treatAsAlias?: boolean;
 
-  @Metadata({ data: "json, name=verificationStatus" })
+  @SpeakeasyMetadata({ data: "json, name=verificationStatus" })
   verificationStatus?: SendAsVerificationStatusEnum;
 }

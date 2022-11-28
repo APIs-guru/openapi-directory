@@ -1,16 +1,18 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
-from typing import Any,Enum,Optional
+from typing import Any,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import deployment_simple
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class CheckRunCheckSuite:
-    id: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
+    id: int = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('id') }})
     
 class CheckRunConclusionEnum(str, Enum):
     SUCCESS = "success"
@@ -25,11 +27,11 @@ class CheckRunConclusionEnum(str, Enum):
 @dataclass_json
 @dataclass
 class CheckRunOutput:
-    annotations_count: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'annotations_count' }})
-    annotations_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'annotations_url' }})
-    summary: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'summary' }})
-    text: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'text' }})
-    title: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'title' }})
+    annotations_count: int = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('annotations_count') }})
+    annotations_url: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('annotations_url') }})
+    summary: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('summary') }})
+    text: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('text') }})
+    title: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('title') }})
     
 class CheckRunStatusEnum(str, Enum):
     QUEUED = "queued"
@@ -40,21 +42,25 @@ class CheckRunStatusEnum(str, Enum):
 @dataclass_json
 @dataclass
 class CheckRun:
-    app: dict[str, Any] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'app' }})
-    check_suite: CheckRunCheckSuite = field(default=None, metadata={'dataclasses_json': { 'field_name': 'check_suite' }})
-    completed_at: datetime = field(default=None, metadata={'dataclasses_json': { 'field_name': 'completed_at', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    conclusion: CheckRunConclusionEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'conclusion' }})
-    deployment: Optional[deployment_simple.DeploymentSimple] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'deployment' }})
-    details_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'details_url' }})
-    external_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'external_id' }})
-    head_sha: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'head_sha' }})
-    html_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'html_url' }})
-    id: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
-    name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    node_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'node_id' }})
-    output: CheckRunOutput = field(default=None, metadata={'dataclasses_json': { 'field_name': 'output' }})
-    pull_requests: Any = field(default=None, metadata={'dataclasses_json': { 'field_name': 'pull_requests' }})
-    started_at: datetime = field(default=None, metadata={'dataclasses_json': { 'field_name': 'started_at', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    status: CheckRunStatusEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
-    url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'url' }})
+    r"""CheckRun
+    A check performed on the code of a given code change
+    """
+    
+    app: dict[str, Any] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('app') }})
+    check_suite: CheckRunCheckSuite = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('check_suite') }})
+    completed_at: datetime = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('completed_at'), 'encoder': utils.datetimeisoformat(False), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    conclusion: CheckRunConclusionEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('conclusion') }})
+    details_url: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('details_url') }})
+    external_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('external_id') }})
+    head_sha: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('head_sha') }})
+    html_url: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('html_url') }})
+    id: int = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('id') }})
+    name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    node_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('node_id') }})
+    output: CheckRunOutput = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('output') }})
+    pull_requests: Any = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('pull_requests') }})
+    started_at: datetime = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('started_at'), 'encoder': utils.datetimeisoformat(False), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    status: CheckRunStatusEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('status') }})
+    url: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('url') }})
+    deployment: Optional[DeploymentSimple] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('deployment') }})
     

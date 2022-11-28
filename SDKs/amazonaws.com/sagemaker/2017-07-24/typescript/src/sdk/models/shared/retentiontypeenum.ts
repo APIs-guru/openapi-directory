@@ -1,6 +1,7 @@
 
 
+
 export enum RetentionTypeEnum {
-    Retain = "Retain"
-,    Delete = "Delete"
+    Retain = "Retain",
+    Delete = "Delete"
 }

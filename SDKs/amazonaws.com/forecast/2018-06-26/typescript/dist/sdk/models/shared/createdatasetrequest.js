@@ -22,43 +22,43 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DatasetTypeEnum } from "./datasettypeenum";
 import { DomainEnum } from "./domainenum";
 import { EncryptionConfig } from "./encryptionconfig";
 import { Schema } from "./schema";
+import { Tag } from "./tag";
 var CreateDatasetRequest = /** @class */ (function (_super) {
     __extends(CreateDatasetRequest, _super);
     function CreateDatasetRequest() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=DataFrequency" }),
+        SpeakeasyMetadata({ data: "json, name=DataFrequency" }),
         __metadata("design:type", String)
     ], CreateDatasetRequest.prototype, "dataFrequency", void 0);
     __decorate([
-        Metadata({ data: "json, name=DatasetName" }),
+        SpeakeasyMetadata({ data: "json, name=DatasetName" }),
         __metadata("design:type", String)
     ], CreateDatasetRequest.prototype, "datasetName", void 0);
     __decorate([
-        Metadata({ data: "json, name=DatasetType" }),
+        SpeakeasyMetadata({ data: "json, name=DatasetType" }),
         __metadata("design:type", String)
     ], CreateDatasetRequest.prototype, "datasetType", void 0);
     __decorate([
-        Metadata({ data: "json, name=Domain" }),
+        SpeakeasyMetadata({ data: "json, name=Domain" }),
         __metadata("design:type", String)
     ], CreateDatasetRequest.prototype, "domain", void 0);
     __decorate([
-        Metadata({ data: "json, name=EncryptionConfig" }),
+        SpeakeasyMetadata({ data: "json, name=EncryptionConfig" }),
         __metadata("design:type", EncryptionConfig)
     ], CreateDatasetRequest.prototype, "encryptionConfig", void 0);
     __decorate([
-        Metadata({ data: "json, name=Schema" }),
+        SpeakeasyMetadata({ data: "json, name=Schema" }),
         __metadata("design:type", Schema)
     ], CreateDatasetRequest.prototype, "schema", void 0);
     __decorate([
-        Metadata({ data: "json, name=Tags", elemType: shared.Tag }),
+        SpeakeasyMetadata({ data: "json, name=Tags", elemType: Tag }),
         __metadata("design:type", Array)
     ], CreateDatasetRequest.prototype, "tags", void 0);
     return CreateDatasetRequest;

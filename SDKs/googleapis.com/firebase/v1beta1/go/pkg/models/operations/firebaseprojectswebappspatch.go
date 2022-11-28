@@ -41,7 +41,7 @@ type FirebaseProjectsWebAppsPatchSecurity struct {
 type FirebaseProjectsWebAppsPatchRequest struct {
 	PathParams  FirebaseProjectsWebAppsPatchPathParams
 	QueryParams FirebaseProjectsWebAppsPatchQueryParams
-	Request     *shared.WebApp `request:"mediaType=application/json"`
+	Request     *shared.WebAppInput `request:"mediaType=application/json"`
 	Security    FirebaseProjectsWebAppsPatchSecurity
 }
 

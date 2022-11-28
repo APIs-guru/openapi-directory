@@ -8,11 +8,6 @@ type UpdateTemplateQueryParams struct {
 	TemplateID int64 `queryParam:"style=form,explode=true,name=templateId"`
 }
 
-type UpdateTemplateRequest struct {
-	QueryParams UpdateTemplateQueryParams
-	Request     shared.TemplateDefinitionNew `request:"mediaType=application/json"`
-}
-
 type UpdateTemplate200ApplicationJSON struct {
 	Response *shared.TemplateDefinition `json:"response,omitempty"`
 }
@@ -78,6 +73,11 @@ type UpdateTemplate422ApplicationJSON struct {
 type UpdateTemplate500ApplicationJSON struct {
 	Error  *string `json:"error,omitempty"`
 	Status *int64  `json:"status,omitempty"`
+}
+
+type UpdateTemplateRequest struct {
+	QueryParams UpdateTemplateQueryParams
+	Request     shared.TemplateDefinitionNew `request:"mediaType=application/json"`
 }
 
 type UpdateTemplateResponse struct {

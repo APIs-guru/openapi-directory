@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Verification } from "./verification";
+
 
 
 // VerifyLocationResponse
@@ -7,6 +8,6 @@ import { Verification } from "./verification";
  * Response message for Verifications.VerifyLocation.
 **/
 export class VerifyLocationResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=verification" })
+  @SpeakeasyMetadata({ data: "json, name=verification" })
   verification?: Verification;
 }

@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ResourceGroupStateEnum } from "./resourcegroupstateenum";
+
 
 
 // ResourceGroup
@@ -7,12 +8,12 @@ import { ResourceGroupStateEnum } from "./resourcegroupstateenum";
  * The information about the resource group integration.
 **/
 export class ResourceGroup extends SpeakeasyBase {
-  @Metadata({ data: "json, name=arn" })
+  @SpeakeasyMetadata({ data: "json, name=arn" })
   arn?: string;
 
-  @Metadata({ data: "json, name=errorMessage" })
+  @SpeakeasyMetadata({ data: "json, name=errorMessage" })
   errorMessage?: string;
 
-  @Metadata({ data: "json, name=state" })
+  @SpeakeasyMetadata({ data: "json, name=state" })
   state?: ResourceGroupStateEnum;
 }

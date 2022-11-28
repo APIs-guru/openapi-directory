@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { CellInput } from "./cellinput";
 // CreateRowData
 /**
  *  Data needed to create a single row in a table as part of the BatchCreateTableRows request.
@@ -34,11 +34,11 @@ var CreateRowData = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=batchItemId" }),
+        SpeakeasyMetadata({ data: "json, name=batchItemId" }),
         __metadata("design:type", String)
     ], CreateRowData.prototype, "batchItemId", void 0);
     __decorate([
-        Metadata({ data: "json, name=cellsToCreate", elemType: shared.CellInput }),
+        SpeakeasyMetadata({ data: "json, name=cellsToCreate", elemType: CellInput }),
         __metadata("design:type", Map)
     ], CreateRowData.prototype, "cellsToCreate", void 0);
     return CreateRowData;

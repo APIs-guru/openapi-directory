@@ -1,6 +1,7 @@
 
 
+
 export enum CollectionsFilterTypeEnum {
-    Include = "include"
-,    Exclude = "exclude"
+    Include = "include",
+    Exclude = "exclude"
 }

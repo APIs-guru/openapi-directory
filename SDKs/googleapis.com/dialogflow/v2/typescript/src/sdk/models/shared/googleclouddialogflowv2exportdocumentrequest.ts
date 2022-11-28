@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudDialogflowV2GcsDestination } from "./googleclouddialogflowv2gcsdestination";
+
 
 
 // GoogleCloudDialogflowV2ExportDocumentRequest
@@ -7,12 +8,12 @@ import { GoogleCloudDialogflowV2GcsDestination } from "./googleclouddialogflowv2
  * Request message for Documents.ExportDocument.
 **/
 export class GoogleCloudDialogflowV2ExportDocumentRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=exportFullContent" })
+  @SpeakeasyMetadata({ data: "json, name=exportFullContent" })
   exportFullContent?: boolean;
 
-  @Metadata({ data: "json, name=gcsDestination" })
+  @SpeakeasyMetadata({ data: "json, name=gcsDestination" })
   gcsDestination?: GoogleCloudDialogflowV2GcsDestination;
 
-  @Metadata({ data: "json, name=smartMessagingPartialUpdate" })
+  @SpeakeasyMetadata({ data: "json, name=smartMessagingPartialUpdate" })
   smartMessagingPartialUpdate?: boolean;
 }

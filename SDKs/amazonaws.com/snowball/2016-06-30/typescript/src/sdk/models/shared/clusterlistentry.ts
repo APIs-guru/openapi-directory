@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ClusterStateEnum } from "./clusterstateenum";
+
 
 
 // ClusterListEntry
@@ -7,15 +8,15 @@ import { ClusterStateEnum } from "./clusterstateenum";
  * Contains a cluster's state, a cluster's ID, and other important information.
 **/
 export class ClusterListEntry extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ClusterId" })
+  @SpeakeasyMetadata({ data: "json, name=ClusterId" })
   clusterId?: string;
 
-  @Metadata({ data: "json, name=ClusterState" })
+  @SpeakeasyMetadata({ data: "json, name=ClusterState" })
   clusterState?: ClusterStateEnum;
 
-  @Metadata({ data: "json, name=CreationDate" })
+  @SpeakeasyMetadata({ data: "json, name=CreationDate" })
   creationDate?: Date;
 
-  @Metadata({ data: "json, name=Description" })
+  @SpeakeasyMetadata({ data: "json, name=Description" })
   description?: string;
 }

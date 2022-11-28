@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// UserItemDataDto
+// Class UserItemDataDto.
 type UserItemDataDto struct {
 	IsFavorite            *bool      `json:"IsFavorite,omitempty"`
 	ItemID                *string    `json:"ItemId,omitempty"`

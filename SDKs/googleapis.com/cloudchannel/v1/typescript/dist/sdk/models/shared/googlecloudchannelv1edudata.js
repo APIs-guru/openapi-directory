@@ -1,0 +1,66 @@
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+export var GoogleCloudChannelV1EduDataInstituteSizeEnum;
+(function (GoogleCloudChannelV1EduDataInstituteSizeEnum) {
+    GoogleCloudChannelV1EduDataInstituteSizeEnum["InstituteSizeUnspecified"] = "INSTITUTE_SIZE_UNSPECIFIED";
+    GoogleCloudChannelV1EduDataInstituteSizeEnum["Size1100"] = "SIZE_1_100";
+    GoogleCloudChannelV1EduDataInstituteSizeEnum["Size101500"] = "SIZE_101_500";
+    GoogleCloudChannelV1EduDataInstituteSizeEnum["Size5011000"] = "SIZE_501_1000";
+    GoogleCloudChannelV1EduDataInstituteSizeEnum["Size10012000"] = "SIZE_1001_2000";
+    GoogleCloudChannelV1EduDataInstituteSizeEnum["Size20015000"] = "SIZE_2001_5000";
+    GoogleCloudChannelV1EduDataInstituteSizeEnum["Size500110000"] = "SIZE_5001_10000";
+    GoogleCloudChannelV1EduDataInstituteSizeEnum["Size10001OrMore"] = "SIZE_10001_OR_MORE";
+})(GoogleCloudChannelV1EduDataInstituteSizeEnum || (GoogleCloudChannelV1EduDataInstituteSizeEnum = {}));
+export var GoogleCloudChannelV1EduDataInstituteTypeEnum;
+(function (GoogleCloudChannelV1EduDataInstituteTypeEnum) {
+    GoogleCloudChannelV1EduDataInstituteTypeEnum["InstituteTypeUnspecified"] = "INSTITUTE_TYPE_UNSPECIFIED";
+    GoogleCloudChannelV1EduDataInstituteTypeEnum["K12"] = "K12";
+    GoogleCloudChannelV1EduDataInstituteTypeEnum["University"] = "UNIVERSITY";
+})(GoogleCloudChannelV1EduDataInstituteTypeEnum || (GoogleCloudChannelV1EduDataInstituteTypeEnum = {}));
+// GoogleCloudChannelV1EduData
+/**
+ * Required Edu Attributes
+**/
+var GoogleCloudChannelV1EduData = /** @class */ (function (_super) {
+    __extends(GoogleCloudChannelV1EduData, _super);
+    function GoogleCloudChannelV1EduData() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=instituteSize" }),
+        __metadata("design:type", String)
+    ], GoogleCloudChannelV1EduData.prototype, "instituteSize", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=instituteType" }),
+        __metadata("design:type", String)
+    ], GoogleCloudChannelV1EduData.prototype, "instituteType", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=website" }),
+        __metadata("design:type", String)
+    ], GoogleCloudChannelV1EduData.prototype, "website", void 0);
+    return GoogleCloudChannelV1EduData;
+}(SpeakeasyBase));
+export { GoogleCloudChannelV1EduData };

@@ -1,51 +1,52 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Meta27 } from "./meta27";
 import { Meta26 } from "./meta26";
 
 
+
 export class QueryRestApiGetList extends SpeakeasyBase {
-  @Metadata({ data: "json, name=changed_on" })
+  @SpeakeasyMetadata({ data: "json, name=changed_on" })
   changedOn?: Date;
 
-  @Metadata({ data: "json, name=database" })
+  @SpeakeasyMetadata({ data: "json, name=database" })
   database: Meta27;
 
-  @Metadata({ data: "json, name=end_time" })
+  @SpeakeasyMetadata({ data: "json, name=end_time" })
   endTime?: number;
 
-  @Metadata({ data: "json, name=executed_sql" })
+  @SpeakeasyMetadata({ data: "json, name=executed_sql" })
   executedSql?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: number;
 
-  @Metadata({ data: "json, name=rows" })
+  @SpeakeasyMetadata({ data: "json, name=rows" })
   rows?: number;
 
-  @Metadata({ data: "json, name=schema" })
+  @SpeakeasyMetadata({ data: "json, name=schema" })
   schema?: string;
 
-  @Metadata({ data: "json, name=sql" })
+  @SpeakeasyMetadata({ data: "json, name=sql" })
   sql?: string;
 
-  @Metadata({ data: "json, name=sql_tables" })
+  @SpeakeasyMetadata({ data: "json, name=sql_tables" })
   sqlTables?: any;
 
-  @Metadata({ data: "json, name=start_time" })
+  @SpeakeasyMetadata({ data: "json, name=start_time" })
   startTime?: number;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: string;
 
-  @Metadata({ data: "json, name=tab_name" })
+  @SpeakeasyMetadata({ data: "json, name=tab_name" })
   tabName?: string;
 
-  @Metadata({ data: "json, name=tmp_table_name" })
+  @SpeakeasyMetadata({ data: "json, name=tmp_table_name" })
   tmpTableName?: string;
 
-  @Metadata({ data: "json, name=tracking_url" })
+  @SpeakeasyMetadata({ data: "json, name=tracking_url" })
   trackingUrl?: string;
 
-  @Metadata({ data: "json, name=user" })
+  @SpeakeasyMetadata({ data: "json, name=user" })
   user?: Meta26;
 }

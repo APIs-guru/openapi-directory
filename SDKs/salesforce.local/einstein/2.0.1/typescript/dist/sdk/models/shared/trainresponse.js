@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var TrainResponseStatusEnum;
 (function (TrainResponseStatusEnum) {
     TrainResponseStatusEnum["Queued"] = "QUEUED";
@@ -38,75 +38,75 @@ var TrainResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=algorithm" }),
+        SpeakeasyMetadata({ data: "json, name=algorithm" }),
         __metadata("design:type", String)
     ], TrainResponse.prototype, "algorithm", void 0);
     __decorate([
-        Metadata({ data: "json, name=createdAt" }),
+        SpeakeasyMetadata({ data: "json, name=createdAt" }),
         __metadata("design:type", Date)
     ], TrainResponse.prototype, "createdAt", void 0);
     __decorate([
-        Metadata({ data: "json, name=datasetId" }),
+        SpeakeasyMetadata({ data: "json, name=datasetId" }),
         __metadata("design:type", Number)
     ], TrainResponse.prototype, "datasetId", void 0);
     __decorate([
-        Metadata({ data: "json, name=datasetVersionId" }),
+        SpeakeasyMetadata({ data: "json, name=datasetVersionId" }),
         __metadata("design:type", Number)
     ], TrainResponse.prototype, "datasetVersionId", void 0);
     __decorate([
-        Metadata({ data: "json, name=epochs" }),
+        SpeakeasyMetadata({ data: "json, name=epochs" }),
         __metadata("design:type", Number)
     ], TrainResponse.prototype, "epochs", void 0);
     __decorate([
-        Metadata({ data: "json, name=failureMsg" }),
+        SpeakeasyMetadata({ data: "json, name=failureMsg" }),
         __metadata("design:type", String)
     ], TrainResponse.prototype, "failureMsg", void 0);
     __decorate([
-        Metadata({ data: "json, name=language" }),
+        SpeakeasyMetadata({ data: "json, name=language" }),
         __metadata("design:type", String)
     ], TrainResponse.prototype, "language", void 0);
     __decorate([
-        Metadata({ data: "json, name=learningRate" }),
+        SpeakeasyMetadata({ data: "json, name=learningRate" }),
         __metadata("design:type", Number)
     ], TrainResponse.prototype, "learningRate", void 0);
     __decorate([
-        Metadata({ data: "json, name=modelId" }),
+        SpeakeasyMetadata({ data: "json, name=modelId" }),
         __metadata("design:type", String)
     ], TrainResponse.prototype, "modelId", void 0);
     __decorate([
-        Metadata({ data: "json, name=modelType" }),
+        SpeakeasyMetadata({ data: "json, name=modelType" }),
         __metadata("design:type", String)
     ], TrainResponse.prototype, "modelType", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], TrainResponse.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=object" }),
+        SpeakeasyMetadata({ data: "json, name=object" }),
         __metadata("design:type", String)
     ], TrainResponse.prototype, "object", void 0);
     __decorate([
-        Metadata({ data: "json, name=progress" }),
+        SpeakeasyMetadata({ data: "json, name=progress" }),
         __metadata("design:type", Number)
     ], TrainResponse.prototype, "progress", void 0);
     __decorate([
-        Metadata({ data: "json, name=queuePosition" }),
+        SpeakeasyMetadata({ data: "json, name=queuePosition" }),
         __metadata("design:type", Number)
     ], TrainResponse.prototype, "queuePosition", void 0);
     __decorate([
-        Metadata({ data: "json, name=status" }),
+        SpeakeasyMetadata({ data: "json, name=status" }),
         __metadata("design:type", String)
     ], TrainResponse.prototype, "status", void 0);
     __decorate([
-        Metadata({ data: "json, name=trainParams" }),
+        SpeakeasyMetadata({ data: "json, name=trainParams" }),
         __metadata("design:type", String)
     ], TrainResponse.prototype, "trainParams", void 0);
     __decorate([
-        Metadata({ data: "json, name=trainStats" }),
+        SpeakeasyMetadata({ data: "json, name=trainStats" }),
         __metadata("design:type", String)
     ], TrainResponse.prototype, "trainStats", void 0);
     __decorate([
-        Metadata({ data: "json, name=updatedAt" }),
+        SpeakeasyMetadata({ data: "json, name=updatedAt" }),
         __metadata("design:type", Date)
     ], TrainResponse.prototype, "updatedAt", void 0);
     return TrainResponse;

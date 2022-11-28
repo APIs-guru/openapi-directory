@@ -1,5 +1,7 @@
 package shared
 
+// PlaylistsResponsePlaylists
+// A playlist
 type PlaylistsResponsePlaylists struct {
 	Description     *string                      `json:"description,omitempty"`
 	EpisodeCount    *int64                       `json:"episode_count,omitempty"`

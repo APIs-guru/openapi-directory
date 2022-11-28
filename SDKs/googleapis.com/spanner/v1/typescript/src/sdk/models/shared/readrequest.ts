@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { KeySet } from "./keyset";
 import { RequestOptions } from "./requestoptions";
 import { TransactionSelector } from "./transactionselector";
+
 
 
 // ReadRequest
@@ -9,30 +10,30 @@ import { TransactionSelector } from "./transactionselector";
  * The request for Read and StreamingRead.
 **/
 export class ReadRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=columns" })
+  @SpeakeasyMetadata({ data: "json, name=columns" })
   columns?: string[];
 
-  @Metadata({ data: "json, name=index" })
+  @SpeakeasyMetadata({ data: "json, name=index" })
   index?: string;
 
-  @Metadata({ data: "json, name=keySet" })
+  @SpeakeasyMetadata({ data: "json, name=keySet" })
   keySet?: KeySet;
 
-  @Metadata({ data: "json, name=limit" })
+  @SpeakeasyMetadata({ data: "json, name=limit" })
   limit?: string;
 
-  @Metadata({ data: "json, name=partitionToken" })
+  @SpeakeasyMetadata({ data: "json, name=partitionToken" })
   partitionToken?: string;
 
-  @Metadata({ data: "json, name=requestOptions" })
+  @SpeakeasyMetadata({ data: "json, name=requestOptions" })
   requestOptions?: RequestOptions;
 
-  @Metadata({ data: "json, name=resumeToken" })
+  @SpeakeasyMetadata({ data: "json, name=resumeToken" })
   resumeToken?: string;
 
-  @Metadata({ data: "json, name=table" })
+  @SpeakeasyMetadata({ data: "json, name=table" })
   table?: string;
 
-  @Metadata({ data: "json, name=transaction" })
+  @SpeakeasyMetadata({ data: "json, name=transaction" })
   transaction?: TransactionSelector;
 }

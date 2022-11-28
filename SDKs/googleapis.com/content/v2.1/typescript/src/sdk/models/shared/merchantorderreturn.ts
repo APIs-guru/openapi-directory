@@ -1,8 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { MerchantOrderReturnItem } from "./merchantorderreturnitem";
 import { ReturnPricingInfo } from "./returnpricinginfo";
 import { ReturnShipment } from "./returnshipment";
+
 
 
 // MerchantOrderReturn
@@ -10,24 +10,24 @@ import { ReturnShipment } from "./returnshipment";
  * Order return. Production access (all methods) requires the order manager role. Sandbox access does not.
 **/
 export class MerchantOrderReturn extends SpeakeasyBase {
-  @Metadata({ data: "json, name=creationDate" })
+  @SpeakeasyMetadata({ data: "json, name=creationDate" })
   creationDate?: string;
 
-  @Metadata({ data: "json, name=merchantOrderId" })
+  @SpeakeasyMetadata({ data: "json, name=merchantOrderId" })
   merchantOrderId?: string;
 
-  @Metadata({ data: "json, name=orderId" })
+  @SpeakeasyMetadata({ data: "json, name=orderId" })
   orderId?: string;
 
-  @Metadata({ data: "json, name=orderReturnId" })
+  @SpeakeasyMetadata({ data: "json, name=orderReturnId" })
   orderReturnId?: string;
 
-  @Metadata({ data: "json, name=returnItems", elemType: shared.MerchantOrderReturnItem })
+  @SpeakeasyMetadata({ data: "json, name=returnItems", elemType: MerchantOrderReturnItem })
   returnItems?: MerchantOrderReturnItem[];
 
-  @Metadata({ data: "json, name=returnPricingInfo" })
+  @SpeakeasyMetadata({ data: "json, name=returnPricingInfo" })
   returnPricingInfo?: ReturnPricingInfo;
 
-  @Metadata({ data: "json, name=returnShipments", elemType: shared.ReturnShipment })
+  @SpeakeasyMetadata({ data: "json, name=returnShipments", elemType: ReturnShipment })
   returnShipments?: ReturnShipment[];
 }

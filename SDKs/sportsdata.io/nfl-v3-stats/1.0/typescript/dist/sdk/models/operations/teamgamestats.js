@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var TeamGameStatsFormatEnum;
 (function (TeamGameStatsFormatEnum) {
     TeamGameStatsFormatEnum["Xml"] = "XML";
@@ -34,15 +34,15 @@ var TeamGameStatsPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=format" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=format" }),
         __metadata("design:type", String)
     ], TeamGameStatsPathParams.prototype, "format", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=season" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=season" }),
         __metadata("design:type", String)
     ], TeamGameStatsPathParams.prototype, "season", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=week" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=week" }),
         __metadata("design:type", String)
     ], TeamGameStatsPathParams.prototype, "week", void 0);
     return TeamGameStatsPathParams;
@@ -54,7 +54,7 @@ var TeamGameStatsRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", TeamGameStatsPathParams)
     ], TeamGameStatsRequest.prototype, "pathParams", void 0);
     return TeamGameStatsRequest;
@@ -66,15 +66,15 @@ var TeamGameStatsResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], TeamGameStatsResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], TeamGameStatsResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Array)
     ], TeamGameStatsResponse.prototype, "teamGames", void 0);
     return TeamGameStatsResponse;

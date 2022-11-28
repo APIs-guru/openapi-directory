@@ -14,7 +14,7 @@ type UpdateKeySecurity struct {
 
 type UpdateKeyRequest struct {
 	PathParams UpdateKeyPathParams
-	Request    shared.Key `request:"mediaType=application/json"`
+	Request    shared.KeyInput `request:"mediaType=application/json"`
 	Security   UpdateKeySecurity
 }
 

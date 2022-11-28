@@ -1,5 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Account } from "./account";
 import { Apk } from "./apk";
 import { EnvironmentVariable } from "./environmentvariable";
@@ -7,32 +6,33 @@ import { DeviceFile } from "./devicefile";
 import { SystraceSetup } from "./systracesetup";
 
 
+
 // TestSetup
 /** 
  * A description of how to set up the Android device prior to running the test.
 **/
 export class TestSetup extends SpeakeasyBase {
-  @Metadata({ data: "json, name=account" })
+  @SpeakeasyMetadata({ data: "json, name=account" })
   account?: Account;
 
-  @Metadata({ data: "json, name=additionalApks", elemType: shared.Apk })
+  @SpeakeasyMetadata({ data: "json, name=additionalApks", elemType: Apk })
   additionalApks?: Apk[];
 
-  @Metadata({ data: "json, name=directoriesToPull" })
+  @SpeakeasyMetadata({ data: "json, name=directoriesToPull" })
   directoriesToPull?: string[];
 
-  @Metadata({ data: "json, name=dontAutograntPermissions" })
+  @SpeakeasyMetadata({ data: "json, name=dontAutograntPermissions" })
   dontAutograntPermissions?: boolean;
 
-  @Metadata({ data: "json, name=environmentVariables", elemType: shared.EnvironmentVariable })
+  @SpeakeasyMetadata({ data: "json, name=environmentVariables", elemType: EnvironmentVariable })
   environmentVariables?: EnvironmentVariable[];
 
-  @Metadata({ data: "json, name=filesToPush", elemType: shared.DeviceFile })
+  @SpeakeasyMetadata({ data: "json, name=filesToPush", elemType: DeviceFile })
   filesToPush?: DeviceFile[];
 
-  @Metadata({ data: "json, name=networkProfile" })
+  @SpeakeasyMetadata({ data: "json, name=networkProfile" })
   networkProfile?: string;
 
-  @Metadata({ data: "json, name=systrace" })
+  @SpeakeasyMetadata({ data: "json, name=systrace" })
   systrace?: SystraceSetup;
 }

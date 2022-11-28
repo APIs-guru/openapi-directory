@@ -375,6 +375,8 @@ const (
 	GeocodingSummaryFeatureTypeEnumTypeUnknown                               GeocodingSummaryFeatureTypeEnum = "typeUnknown"
 )
 
+// GeocodingSummary
+// Detailed summary of the result from geocoding an address
 type GeocodingSummary struct {
 	AddressUnderstood       *bool                            `json:"addressUnderstood,omitempty"`
 	FeatureID               *FeatureIDProto                  `json:"featureId,omitempty"`

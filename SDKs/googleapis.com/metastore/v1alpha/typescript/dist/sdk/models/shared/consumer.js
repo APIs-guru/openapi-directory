@@ -22,7 +22,23 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+// ConsumerInput
+/**
+ * Contains information of the customer's network configurations.
+**/
+var ConsumerInput = /** @class */ (function (_super) {
+    __extends(ConsumerInput, _super);
+    function ConsumerInput() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=subnetwork" }),
+        __metadata("design:type", String)
+    ], ConsumerInput.prototype, "subnetwork", void 0);
+    return ConsumerInput;
+}(SpeakeasyBase));
+export { ConsumerInput };
 // Consumer
 /**
  * Contains information of the customer's network configurations.
@@ -33,11 +49,11 @@ var Consumer = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=endpointUri" }),
+        SpeakeasyMetadata({ data: "json, name=endpointUri" }),
         __metadata("design:type", String)
     ], Consumer.prototype, "endpointUri", void 0);
     __decorate([
-        Metadata({ data: "json, name=subnetwork" }),
+        SpeakeasyMetadata({ data: "json, name=subnetwork" }),
         __metadata("design:type", String)
     ], Consumer.prototype, "subnetwork", void 0);
     return Consumer;

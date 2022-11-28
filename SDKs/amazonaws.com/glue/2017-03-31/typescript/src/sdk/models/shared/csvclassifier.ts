@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CsvHeaderOptionEnum } from "./csvheaderoptionenum";
+
 
 
 // CsvClassifier
@@ -7,33 +8,33 @@ import { CsvHeaderOptionEnum } from "./csvheaderoptionenum";
  * A classifier for custom <code>CSV</code> content.
 **/
 export class CsvClassifier extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AllowSingleColumn" })
+  @SpeakeasyMetadata({ data: "json, name=AllowSingleColumn" })
   allowSingleColumn?: boolean;
 
-  @Metadata({ data: "json, name=ContainsHeader" })
+  @SpeakeasyMetadata({ data: "json, name=ContainsHeader" })
   containsHeader?: CsvHeaderOptionEnum;
 
-  @Metadata({ data: "json, name=CreationTime" })
+  @SpeakeasyMetadata({ data: "json, name=CreationTime" })
   creationTime?: Date;
 
-  @Metadata({ data: "json, name=Delimiter" })
+  @SpeakeasyMetadata({ data: "json, name=Delimiter" })
   delimiter?: string;
 
-  @Metadata({ data: "json, name=DisableValueTrimming" })
+  @SpeakeasyMetadata({ data: "json, name=DisableValueTrimming" })
   disableValueTrimming?: boolean;
 
-  @Metadata({ data: "json, name=Header" })
+  @SpeakeasyMetadata({ data: "json, name=Header" })
   header?: string[];
 
-  @Metadata({ data: "json, name=LastUpdated" })
+  @SpeakeasyMetadata({ data: "json, name=LastUpdated" })
   lastUpdated?: Date;
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name: string;
 
-  @Metadata({ data: "json, name=QuoteSymbol" })
+  @SpeakeasyMetadata({ data: "json, name=QuoteSymbol" })
   quoteSymbol?: string;
 
-  @Metadata({ data: "json, name=Version" })
+  @SpeakeasyMetadata({ data: "json, name=Version" })
   version?: number;
 }

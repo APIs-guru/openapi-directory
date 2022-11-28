@@ -9,13 +9,13 @@ type TeamsRemoveProjectLegacyPathParams struct {
 	TeamID    int64 `pathParam:"style=simple,explode=false,name=team_id"`
 }
 
-type TeamsRemoveProjectLegacyRequest struct {
-	PathParams TeamsRemoveProjectLegacyPathParams
-}
-
 type TeamsRemoveProjectLegacy415ApplicationJSON struct {
 	DocumentationURL string `json:"documentation_url"`
 	Message          string `json:"message"`
+}
+
+type TeamsRemoveProjectLegacyRequest struct {
+	PathParams TeamsRemoveProjectLegacyPathParams
 }
 
 type TeamsRemoveProjectLegacyResponse struct {

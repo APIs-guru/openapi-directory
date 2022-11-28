@@ -1,21 +1,21 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Tag } from "./tag";
 
 
+
 export class CreateApplicationRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CWEMonitorEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=CWEMonitorEnabled" })
   cweMonitorEnabled?: boolean;
 
-  @Metadata({ data: "json, name=OpsCenterEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=OpsCenterEnabled" })
   opsCenterEnabled?: boolean;
 
-  @Metadata({ data: "json, name=OpsItemSNSTopicArn" })
+  @SpeakeasyMetadata({ data: "json, name=OpsItemSNSTopicArn" })
   opsItemSnsTopicArn?: string;
 
-  @Metadata({ data: "json, name=ResourceGroupName" })
+  @SpeakeasyMetadata({ data: "json, name=ResourceGroupName" })
   resourceGroupName: string;
 
-  @Metadata({ data: "json, name=Tags", elemType: shared.Tag })
+  @SpeakeasyMetadata({ data: "json, name=Tags", elemType: Tag })
   tags?: Tag[];
 }

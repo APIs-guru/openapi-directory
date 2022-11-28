@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 
@@ -11,14 +12,14 @@ class GetItemsMediaClipFilesQueryParams:
 
 @dataclass
 class GetItemsMediaClipFilesRequest:
-    query_params: GetItemsMediaClipFilesQueryParams = field(default=None)
-    request: shared.ItemDownloadableRequest = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    query_params: GetItemsMediaClipFilesQueryParams = field()
+    request: shared.ItemDownloadableRequest = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class GetItemsMediaClipFilesResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     item_clip_files_list: Optional[shared.ItemClipFilesList] = field(default=None)
     service_error: Optional[shared.ServiceError] = field(default=None)
-    status_code: int = field(default=None)
     

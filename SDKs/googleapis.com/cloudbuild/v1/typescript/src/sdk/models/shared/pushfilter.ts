@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // PushFilter
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Push contains filter properties for matching GitHub git pushes.
 **/
 export class PushFilter extends SpeakeasyBase {
-  @Metadata({ data: "json, name=branch" })
+  @SpeakeasyMetadata({ data: "json, name=branch" })
   branch?: string;
 
-  @Metadata({ data: "json, name=invertRegex" })
+  @SpeakeasyMetadata({ data: "json, name=invertRegex" })
   invertRegex?: boolean;
 
-  @Metadata({ data: "json, name=tag" })
+  @SpeakeasyMetadata({ data: "json, name=tag" })
   tag?: string;
 }

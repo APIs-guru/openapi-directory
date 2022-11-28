@@ -22,14 +22,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var PostInstancesIdExportPathParams = /** @class */ (function (_super) {
     __extends(PostInstancesIdExportPathParams, _super);
     function PostInstancesIdExportPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=id" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" }),
         __metadata("design:type", String)
     ], PostInstancesIdExportPathParams.prototype, "id", void 0);
     return PostInstancesIdExportPathParams;
@@ -41,11 +41,11 @@ var PostInstancesIdExportRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PostInstancesIdExportPathParams)
     ], PostInstancesIdExportRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=text/plain" }),
+        SpeakeasyMetadata({ data: "request, media_type=text/plain" }),
         __metadata("design:type", Uint8Array)
     ], PostInstancesIdExportRequest.prototype, "request", void 0);
     return PostInstancesIdExportRequest;
@@ -57,11 +57,11 @@ var PostInstancesIdExportResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], PostInstancesIdExportResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], PostInstancesIdExportResponse.prototype, "statusCode", void 0);
     return PostInstancesIdExportResponse;

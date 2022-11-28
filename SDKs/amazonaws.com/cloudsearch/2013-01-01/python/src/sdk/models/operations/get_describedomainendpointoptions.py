@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetDescribeDomainEndpointOptionsActionEnum(str, Enum):
     DESCRIBE_DOMAIN_ENDPOINT_OPTIONS = "DescribeDomainEndpointOptions"
@@ -10,10 +14,10 @@ class GetDescribeDomainEndpointOptionsVersionEnum(str, Enum):
 
 @dataclass
 class GetDescribeDomainEndpointOptionsQueryParams:
-    action: GetDescribeDomainEndpointOptionsActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetDescribeDomainEndpointOptionsActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    domain_name: str = field(metadata={'query_param': { 'field_name': 'DomainName', 'style': 'form', 'explode': True }})
+    version: GetDescribeDomainEndpointOptionsVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     deployed: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'Deployed', 'style': 'form', 'explode': True }})
-    domain_name: str = field(default=None, metadata={'query_param': { 'field_name': 'DomainName', 'style': 'form', 'explode': True }})
-    version: GetDescribeDomainEndpointOptionsVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -29,13 +33,13 @@ class GetDescribeDomainEndpointOptionsHeaders:
 
 @dataclass
 class GetDescribeDomainEndpointOptionsRequest:
-    query_params: GetDescribeDomainEndpointOptionsQueryParams = field(default=None)
-    headers: GetDescribeDomainEndpointOptionsHeaders = field(default=None)
+    headers: GetDescribeDomainEndpointOptionsHeaders = field()
+    query_params: GetDescribeDomainEndpointOptionsQueryParams = field()
     
 
 @dataclass
 class GetDescribeDomainEndpointOptionsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

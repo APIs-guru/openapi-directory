@@ -1,32 +1,33 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetScriptsInventoryParsedQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=language" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=language" })
   language?: string;
 }
 
 
 export class GetScriptsInventoryParsedRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetScriptsInventoryParsedQueryParams;
 }
 
 
 export class GetScriptsInventoryParsedResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   errorResponseContent?: shared.ErrorResponseContent;
 
-  @Metadata({ elemType: shared.InventoryScriptInfo })
+  @SpeakeasyMetadata({ elemType: shared.InventoryScriptInfo })
   inventoryScriptInfos?: shared.InventoryScriptInfo[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

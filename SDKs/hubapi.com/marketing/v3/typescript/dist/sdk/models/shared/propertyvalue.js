@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var PropertyValueSourceEnum;
 (function (PropertyValueSourceEnum) {
     PropertyValueSourceEnum["Import"] = "IMPORT";
@@ -111,51 +111,51 @@ var PropertyValue = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], PropertyValue.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=requestId" }),
+        SpeakeasyMetadata({ data: "json, name=requestId" }),
         __metadata("design:type", String)
     ], PropertyValue.prototype, "requestId", void 0);
     __decorate([
-        Metadata({ data: "json, name=selectedByUser" }),
+        SpeakeasyMetadata({ data: "json, name=selectedByUser" }),
         __metadata("design:type", Boolean)
     ], PropertyValue.prototype, "selectedByUser", void 0);
     __decorate([
-        Metadata({ data: "json, name=selectedByUserTimestamp" }),
+        SpeakeasyMetadata({ data: "json, name=selectedByUserTimestamp" }),
         __metadata("design:type", Number)
     ], PropertyValue.prototype, "selectedByUserTimestamp", void 0);
     __decorate([
-        Metadata({ data: "json, name=source" }),
+        SpeakeasyMetadata({ data: "json, name=source" }),
         __metadata("design:type", String)
     ], PropertyValue.prototype, "source", void 0);
     __decorate([
-        Metadata({ data: "json, name=sourceId" }),
+        SpeakeasyMetadata({ data: "json, name=sourceId" }),
         __metadata("design:type", String)
     ], PropertyValue.prototype, "sourceId", void 0);
     __decorate([
-        Metadata({ data: "json, name=sourceLabel" }),
+        SpeakeasyMetadata({ data: "json, name=sourceLabel" }),
         __metadata("design:type", String)
     ], PropertyValue.prototype, "sourceLabel", void 0);
     __decorate([
-        Metadata({ data: "json, name=sourceMetadata" }),
+        SpeakeasyMetadata({ data: "json, name=sourceMetadata" }),
         __metadata("design:type", String)
     ], PropertyValue.prototype, "sourceMetadata", void 0);
     __decorate([
-        Metadata({ data: "json, name=sourceVid" }),
+        SpeakeasyMetadata({ data: "json, name=sourceVid" }),
         __metadata("design:type", Array)
     ], PropertyValue.prototype, "sourceVid", void 0);
     __decorate([
-        Metadata({ data: "json, name=timestamp" }),
+        SpeakeasyMetadata({ data: "json, name=timestamp" }),
         __metadata("design:type", Number)
     ], PropertyValue.prototype, "timestamp", void 0);
     __decorate([
-        Metadata({ data: "json, name=updatedByUserId" }),
+        SpeakeasyMetadata({ data: "json, name=updatedByUserId" }),
         __metadata("design:type", Number)
     ], PropertyValue.prototype, "updatedByUserId", void 0);
     __decorate([
-        Metadata({ data: "json, name=value" }),
+        SpeakeasyMetadata({ data: "json, name=value" }),
         __metadata("design:type", String)
     ], PropertyValue.prototype, "value", void 0);
     return PropertyValue;

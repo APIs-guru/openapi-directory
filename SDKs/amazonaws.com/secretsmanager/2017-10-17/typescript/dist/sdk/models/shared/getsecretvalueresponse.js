@@ -22,38 +22,38 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var GetSecretValueResponse = /** @class */ (function (_super) {
     __extends(GetSecretValueResponse, _super);
     function GetSecretValueResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=ARN" }),
+        SpeakeasyMetadata({ data: "json, name=ARN" }),
         __metadata("design:type", String)
     ], GetSecretValueResponse.prototype, "arn", void 0);
     __decorate([
-        Metadata({ data: "json, name=CreatedDate" }),
+        SpeakeasyMetadata({ data: "json, name=CreatedDate" }),
         __metadata("design:type", Date)
     ], GetSecretValueResponse.prototype, "createdDate", void 0);
     __decorate([
-        Metadata({ data: "json, name=Name" }),
+        SpeakeasyMetadata({ data: "json, name=Name" }),
         __metadata("design:type", String)
     ], GetSecretValueResponse.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=SecretBinary" }),
+        SpeakeasyMetadata({ data: "json, name=SecretBinary" }),
         __metadata("design:type", String)
     ], GetSecretValueResponse.prototype, "secretBinary", void 0);
     __decorate([
-        Metadata({ data: "json, name=SecretString" }),
+        SpeakeasyMetadata({ data: "json, name=SecretString" }),
         __metadata("design:type", String)
     ], GetSecretValueResponse.prototype, "secretString", void 0);
     __decorate([
-        Metadata({ data: "json, name=VersionId" }),
+        SpeakeasyMetadata({ data: "json, name=VersionId" }),
         __metadata("design:type", String)
     ], GetSecretValueResponse.prototype, "versionId", void 0);
     __decorate([
-        Metadata({ data: "json, name=VersionStages" }),
+        SpeakeasyMetadata({ data: "json, name=VersionStages" }),
         __metadata("design:type", Array)
     ], GetSecretValueResponse.prototype, "versionStages", void 0);
     return GetSecretValueResponse;

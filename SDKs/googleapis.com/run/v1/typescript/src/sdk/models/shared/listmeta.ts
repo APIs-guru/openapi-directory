@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ListMeta
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Metadata for synthetic resources like List. In Cloud Run, all List Resources Responses will have a ListMeta instead of ObjectMeta.
 **/
 export class ListMeta extends SpeakeasyBase {
-  @Metadata({ data: "json, name=continue" })
+  @SpeakeasyMetadata({ data: "json, name=continue" })
   continue?: string;
 
-  @Metadata({ data: "json, name=resourceVersion" })
+  @SpeakeasyMetadata({ data: "json, name=resourceVersion" })
   resourceVersion?: string;
 
-  @Metadata({ data: "json, name=selfLink" })
+  @SpeakeasyMetadata({ data: "json, name=selfLink" })
   selfLink?: string;
 }

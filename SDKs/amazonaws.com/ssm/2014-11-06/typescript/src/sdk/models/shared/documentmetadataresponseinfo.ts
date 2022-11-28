@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DocumentReviewerResponseSource } from "./documentreviewerresponsesource";
+
 
 
 // DocumentMetadataResponseInfo
@@ -8,6 +8,6 @@ import { DocumentReviewerResponseSource } from "./documentreviewerresponsesource
  * Details about the response to a document review request.
 **/
 export class DocumentMetadataResponseInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ReviewerResponse", elemType: shared.DocumentReviewerResponseSource })
+  @SpeakeasyMetadata({ data: "json, name=ReviewerResponse", elemType: DocumentReviewerResponseSource })
   reviewerResponse?: DocumentReviewerResponseSource[];
 }

@@ -1,54 +1,54 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PlacedBetLeg } from "./placedbetleg";
 
 
+
 export class PlacedBet extends SpeakeasyBase {
-  @Metadata({ data: "json, name=cashinValue" })
+  @SpeakeasyMetadata({ data: "json, name=cashinValue" })
   cashinValue?: number;
 
-  @Metadata({ data: "json, name=estimatedReturns" })
+  @SpeakeasyMetadata({ data: "json, name=estimatedReturns" })
   estimatedReturns: number;
 
-  @Metadata({ data: "json, name=freeBetValue" })
+  @SpeakeasyMetadata({ data: "json, name=freeBetValue" })
   freeBetValue?: number;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: string;
 
-  @Metadata({ data: "json, name=legs", elemType: shared.PlacedBetLeg })
+  @SpeakeasyMetadata({ data: "json, name=legs", elemType: PlacedBetLeg })
   legs?: PlacedBetLeg[];
 
-  @Metadata({ data: "json, name=numLines" })
+  @SpeakeasyMetadata({ data: "json, name=numLines" })
   numLines?: number;
 
-  @Metadata({ data: "json, name=numSelections" })
+  @SpeakeasyMetadata({ data: "json, name=numSelections" })
   numSelections?: number;
 
-  @Metadata({ data: "json, name=receipt" })
+  @SpeakeasyMetadata({ data: "json, name=receipt" })
   receipt?: string;
 
-  @Metadata({ data: "json, name=settled" })
+  @SpeakeasyMetadata({ data: "json, name=settled" })
   settled: boolean;
 
-  @Metadata({ data: "json, name=stake" })
+  @SpeakeasyMetadata({ data: "json, name=stake" })
   stake: number;
 
-  @Metadata({ data: "json, name=stakePerLine" })
+  @SpeakeasyMetadata({ data: "json, name=stakePerLine" })
   stakePerLine?: number;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status: string;
 
-  @Metadata({ data: "json, name=transDateTime" })
+  @SpeakeasyMetadata({ data: "json, name=transDateTime" })
   transDateTime: string;
 
-  @Metadata({ data: "json, name=typeCode" })
+  @SpeakeasyMetadata({ data: "json, name=typeCode" })
   typeCode: string;
 
-  @Metadata({ data: "json, name=typeName" })
+  @SpeakeasyMetadata({ data: "json, name=typeName" })
   typeName: string;
 
-  @Metadata({ data: "json, name=winnings" })
+  @SpeakeasyMetadata({ data: "json, name=winnings" })
   winnings: number;
 }

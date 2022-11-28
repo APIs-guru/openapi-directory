@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 /**
  * Readiness checking configuration for VM instances. Unhealthy instances are removed from traffic rotation.
 **/

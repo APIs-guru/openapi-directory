@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ConnectorStateEnum } from "./connectorstateenum";
 var CreateConnectorResponse = /** @class */ (function (_super) {
     __extends(CreateConnectorResponse, _super);
@@ -30,15 +30,15 @@ var CreateConnectorResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=connectorArn" }),
+        SpeakeasyMetadata({ data: "json, name=connectorArn" }),
         __metadata("design:type", String)
     ], CreateConnectorResponse.prototype, "connectorArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=connectorName" }),
+        SpeakeasyMetadata({ data: "json, name=connectorName" }),
         __metadata("design:type", String)
     ], CreateConnectorResponse.prototype, "connectorName", void 0);
     __decorate([
-        Metadata({ data: "json, name=connectorState" }),
+        SpeakeasyMetadata({ data: "json, name=connectorState" }),
         __metadata("design:type", String)
     ], CreateConnectorResponse.prototype, "connectorState", void 0);
     return CreateConnectorResponse;

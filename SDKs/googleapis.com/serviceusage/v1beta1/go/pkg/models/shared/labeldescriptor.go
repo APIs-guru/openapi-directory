@@ -8,6 +8,8 @@ const (
 	LabelDescriptorValueTypeEnumInt64  LabelDescriptorValueTypeEnum = "INT64"
 )
 
+// LabelDescriptor
+// A description of a label.
 type LabelDescriptor struct {
 	Description *string                       `json:"description,omitempty"`
 	Key         *string                       `json:"key,omitempty"`

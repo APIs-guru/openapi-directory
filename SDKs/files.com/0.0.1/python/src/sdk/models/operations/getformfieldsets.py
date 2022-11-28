@@ -12,12 +12,12 @@ class GetFormFieldSetsQueryParams:
 
 @dataclass
 class GetFormFieldSetsRequest:
-    query_params: GetFormFieldSetsQueryParams = field(default=None)
+    query_params: GetFormFieldSetsQueryParams = field()
     
 
 @dataclass
 class GetFormFieldSetsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     form_field_set_entities: Optional[List[shared.FormFieldSetEntity]] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,12 +1,16 @@
 from dataclasses import dataclass, field
 from dataclasses_json import dataclass_json
-from . import workflowtypeconfiguration
-from . import workflowtypeinfo
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class WorkflowTypeDetail:
-    configuration: workflowtypeconfiguration.WorkflowTypeConfiguration = field(default=None, metadata={'dataclasses_json': { 'field_name': 'configuration' }})
-    type_info: workflowtypeinfo.WorkflowTypeInfo = field(default=None, metadata={'dataclasses_json': { 'field_name': 'typeInfo' }})
+    r"""WorkflowTypeDetail
+    Contains details about a workflow type.
+    """
+    
+    configuration: WorkflowTypeConfiguration = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('configuration') }})
+    type_info: WorkflowTypeInfo = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('typeInfo') }})
     

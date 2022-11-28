@@ -9,26 +9,18 @@ type GetLinodeDiskPathParams struct {
 	LinodeID int64 `pathParam:"style=simple,explode=false,name=linodeId"`
 }
 
-type GetLinodeDiskSecurityOption1 struct {
-	PersonalAccessToken shared.SchemePersonalAccessToken `security:"scheme,type=http,subtype=bearer"`
-}
-
-type GetLinodeDiskSecurityOption2 struct {
-	Oauth shared.SchemeOauth `security:"scheme,type=oauth2"`
-}
-
 type GetLinodeDiskSecurity struct {
-	Option1 *GetLinodeDiskSecurityOption1 `security:"option"`
-	Option2 *GetLinodeDiskSecurityOption2 `security:"option"`
+	PersonalAccessToken *shared.SchemePersonalAccessToken `security:"scheme,type=http,subtype=bearer"`
+	Oauth               *shared.SchemeOauth               `security:"scheme,type=oauth2"`
+}
+
+type GetLinodeDiskDefaultApplicationJSON struct {
+	Errors []shared.ErrorObject `json:"errors,omitempty"`
 }
 
 type GetLinodeDiskRequest struct {
 	PathParams GetLinodeDiskPathParams
 	Security   GetLinodeDiskSecurity
-}
-
-type GetLinodeDiskDefaultApplicationJSON struct {
-	Errors []shared.ErrorObject `json:"errors,omitempty"`
 }
 
 type GetLinodeDiskResponse struct {

@@ -1,22 +1,23 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class SynchronizationResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=added" })
+  @SpeakeasyMetadata({ data: "json, name=added" })
   added?: number;
 
-  @Metadata({ data: "json, name=failed" })
+  @SpeakeasyMetadata({ data: "json, name=failed" })
   failed?: number;
 
-  @Metadata({ data: "json, name=ignored" })
+  @SpeakeasyMetadata({ data: "json, name=ignored" })
   ignored?: boolean;
 
-  @Metadata({ data: "json, name=removed" })
+  @SpeakeasyMetadata({ data: "json, name=removed" })
   removed?: number;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: string;
 
-  @Metadata({ data: "json, name=updated" })
+  @SpeakeasyMetadata({ data: "json, name=updated" })
   updated?: number;
 }

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // Rule
 /**
  * Rule
@@ -33,39 +33,39 @@ var Rule = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=$collection" }),
+        SpeakeasyMetadata({ data: "json, name=$collection" }),
         __metadata("design:type", String)
     ], Rule.prototype, "dollarCollection", void 0);
     __decorate([
-        Metadata({ data: "json, name=$id" }),
+        SpeakeasyMetadata({ data: "json, name=$id" }),
         __metadata("design:type", String)
     ], Rule.prototype, "dollarId", void 0);
     __decorate([
-        Metadata({ data: "json, name=array" }),
+        SpeakeasyMetadata({ data: "json, name=array" }),
         __metadata("design:type", Boolean)
     ], Rule.prototype, "array", void 0);
     __decorate([
-        Metadata({ data: "json, name=default" }),
+        SpeakeasyMetadata({ data: "json, name=default" }),
         __metadata("design:type", String)
     ], Rule.prototype, "default", void 0);
     __decorate([
-        Metadata({ data: "json, name=key" }),
+        SpeakeasyMetadata({ data: "json, name=key" }),
         __metadata("design:type", String)
     ], Rule.prototype, "key", void 0);
     __decorate([
-        Metadata({ data: "json, name=label" }),
+        SpeakeasyMetadata({ data: "json, name=label" }),
         __metadata("design:type", String)
     ], Rule.prototype, "label", void 0);
     __decorate([
-        Metadata({ data: "json, name=list" }),
+        SpeakeasyMetadata({ data: "json, name=list" }),
         __metadata("design:type", Array)
     ], Rule.prototype, "list", void 0);
     __decorate([
-        Metadata({ data: "json, name=required" }),
+        SpeakeasyMetadata({ data: "json, name=required" }),
         __metadata("design:type", Boolean)
     ], Rule.prototype, "required", void 0);
     __decorate([
-        Metadata({ data: "json, name=type" }),
+        SpeakeasyMetadata({ data: "json, name=type" }),
         __metadata("design:type", String)
     ], Rule.prototype, "type", void 0);
     return Rule;

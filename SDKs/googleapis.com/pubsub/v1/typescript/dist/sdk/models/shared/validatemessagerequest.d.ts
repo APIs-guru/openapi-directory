@@ -1,5 +1,5 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
-import { Schema } from "./schema";
+import { SpeakeasyBase } from "../../../internal/utils";
+import { SchemaInput } from "./schema";
 export declare enum ValidateMessageRequestEncodingEnum {
     EncodingUnspecified = "ENCODING_UNSPECIFIED",
     Json = "JSON",
@@ -8,9 +8,9 @@ export declare enum ValidateMessageRequestEncodingEnum {
 /**
  * Request for the `ValidateMessage` method.
 **/
-export declare class ValidateMessageRequest extends SpeakeasyBase {
+export declare class ValidateMessageRequestInput extends SpeakeasyBase {
     encoding?: ValidateMessageRequestEncodingEnum;
     message?: string;
     name?: string;
-    schema?: Schema;
+    schema?: SchemaInput;
 }

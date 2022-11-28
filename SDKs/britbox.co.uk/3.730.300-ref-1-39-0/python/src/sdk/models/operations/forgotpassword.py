@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 
@@ -11,13 +12,13 @@ class ForgotPasswordQueryParams:
 
 @dataclass
 class ForgotPasswordRequest:
-    query_params: ForgotPasswordQueryParams = field(default=None)
-    request: shared.PasswordResetEmailRequest = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    query_params: ForgotPasswordQueryParams = field()
+    request: shared.PasswordResetEmailRequest = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class ForgotPasswordResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     service_error: Optional[shared.ServiceError] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RegisterParameters } from "./registerparameters";
+
 
 
 // SearchDomainsResponse
@@ -8,6 +8,6 @@ import { RegisterParameters } from "./registerparameters";
  * Response for the `SearchDomains` method.
 **/
 export class SearchDomainsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=registerParameters", elemType: shared.RegisterParameters })
+  @SpeakeasyMetadata({ data: "json, name=registerParameters", elemType: RegisterParameters })
   registerParameters?: RegisterParameters[];
 }

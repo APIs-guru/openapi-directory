@@ -1,0 +1,86 @@
+# openapi
+
+<!-- Start SDK Installation -->
+## SDK Installation
+
+### NPM
+
+```bash
+npm add openapi
+```
+
+### Yarn
+
+```bash
+yarn add openapi
+```
+<!-- End SDK Installation -->
+
+<!-- Start SDK Example Usage -->
+## SDK Example Usage
+
+```typescript
+import { SDK, WithSecurity} from "openapi";
+import { AssociateAttributeGroupRequest, AssociateAttributeGroupResponse } from "openapi/src/sdk/models/operations";
+import { AxiosError } from "axios";
+
+const sdk = new SDK(WithSecurity(
+  security: {
+    hmac: {
+      apiKey: "YOUR_API_KEY_HERE",
+    },
+  }
+));
+    
+const req: AssociateAttributeGroupRequest = {
+  pathParams: {
+    application: "eligendi",
+    attributeGroup: "alias",
+  },
+  headers: {
+    xAmzAlgorithm: "deleniti",
+    xAmzContentSha256: "cupiditate",
+    xAmzCredential: "vero",
+    xAmzDate: "in",
+    xAmzSecurityToken: "libero",
+    xAmzSignature: "veniam",
+    xAmzSignedHeaders: "voluptatem",
+  },
+};
+
+sdk.sdk.associateAttributeGroup(req).then((res: AssociateAttributeGroupResponse | AxiosError) => {
+   // handle response
+});
+```
+<!-- End SDK Example Usage -->
+
+<!-- Start SDK Available Operations -->
+## SDK Available Operations
+
+### SDK SDK
+
+* `associateAttributeGroup` - Associates an attribute group with an application to augment the application's metadata with the group's attributes. This feature enables applications to be described with user-defined details that are machine-readable, such as third-party integrations.
+* `associateResource` - Associates a resource with an application. Both the resource and the application can be specified either by ID or name.
+* `createApplication` - Creates a new application that is the top-level node in a hierarchy of related cloud resource abstractions.
+* `createAttributeGroup` - Creates a new attribute group as a container for user-defined attributes. This feature enables users to have full control over their cloud application's metadata in a rich machine-readable format to facilitate integration with automated workflows and third-party tools.
+* `deleteApplication` - Deletes an application that is specified either by its application ID or name. All associated attribute groups and resources must be disassociated from it before deleting an application.
+* `deleteAttributeGroup` - Deletes an attribute group, specified either by its attribute group ID or name.
+* `disassociateAttributeGroup` - Disassociates an attribute group from an application to remove the extra attributes contained in the attribute group from the application's metadata. This operation reverts <code>AssociateAttributeGroup</code>.
+* `disassociateResource` - Disassociates a resource from application. Both the resource and the application can be specified either by ID or name.
+* `getApplication` - Retrieves metadata information about one of your applications. The application can be specified either by its unique ID or by its name (which is unique within one account in one region at a given point in time). Specify by ID in automated workflows if you want to make sure that the exact same application is returned or a <code>ResourceNotFoundException</code> is thrown, avoiding the ABA addressing problem.
+* `getAssociatedResource` - Gets the resource associated with the application.
+* `getAttributeGroup` - Retrieves an attribute group, either by its name or its ID. The attribute group can be specified either by its unique ID or by its name.
+* `listApplications` - Retrieves a list of all of your applications. Results are paginated.
+* `listAssociatedAttributeGroups` - Lists all attribute groups that are associated with specified application. Results are paginated.
+* `listAssociatedResources` - Lists all resources that are associated with specified application. Results are paginated.
+* `listAttributeGroups` - Lists all attribute groups which you have access to. Results are paginated.
+* `listTagsForResource` - Lists all of the tags on the resource.
+* `syncResource` - <p>Syncs the resource with current AppRegistry records.</p> <p>Specifically, the resource’s AppRegistry system tags sync with its associated application. We remove the resource's AppRegistry system tags if it does not associate with the application. The caller must have permissions to read and update the resource.</p>
+* `tagResource` - <p>Assigns one or more tags (key-value pairs) to the specified resource.</p> <p>Each tag consists of a key and an optional value. If a tag with the same key is already associated with the resource, this action updates its value.</p> <p>This operation returns an empty response if the call was successful.</p>
+* `untagResource` - <p>Removes tags from a resource.</p> <p>This operation returns an empty response if the call was successful.</p>
+* `updateApplication` - Updates an existing application with new attributes.
+* `updateAttributeGroup` - Updates an existing attribute group with new details. 
+
+<!-- End SDK Available Operations -->
+
+### SDK Generated by [Speakeasy](https://docs.speakeasyapi.dev/docs/using-speakeasy/client-sdks)

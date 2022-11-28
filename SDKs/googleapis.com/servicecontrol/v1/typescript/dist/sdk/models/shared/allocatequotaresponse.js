@@ -22,9 +22,10 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { QuotaError } from "./quotaerror";
 import { AllocateInfo } from "./allocateinfo";
+import { MetricValueSet } from "./metricvalueset";
 // AllocateQuotaResponse
 /**
  * Response message for the AllocateQuota method.
@@ -35,23 +36,23 @@ var AllocateQuotaResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=allocateErrors", elemType: shared.QuotaError }),
+        SpeakeasyMetadata({ data: "json, name=allocateErrors", elemType: QuotaError }),
         __metadata("design:type", Array)
     ], AllocateQuotaResponse.prototype, "allocateErrors", void 0);
     __decorate([
-        Metadata({ data: "json, name=allocateInfo" }),
+        SpeakeasyMetadata({ data: "json, name=allocateInfo" }),
         __metadata("design:type", AllocateInfo)
     ], AllocateQuotaResponse.prototype, "allocateInfo", void 0);
     __decorate([
-        Metadata({ data: "json, name=operationId" }),
+        SpeakeasyMetadata({ data: "json, name=operationId" }),
         __metadata("design:type", String)
     ], AllocateQuotaResponse.prototype, "operationId", void 0);
     __decorate([
-        Metadata({ data: "json, name=quotaMetrics", elemType: shared.MetricValueSet }),
+        SpeakeasyMetadata({ data: "json, name=quotaMetrics", elemType: MetricValueSet }),
         __metadata("design:type", Array)
     ], AllocateQuotaResponse.prototype, "quotaMetrics", void 0);
     __decorate([
-        Metadata({ data: "json, name=serviceConfigId" }),
+        SpeakeasyMetadata({ data: "json, name=serviceConfigId" }),
         __metadata("design:type", String)
     ], AllocateQuotaResponse.prototype, "serviceConfigId", void 0);
     return AllocateQuotaResponse;

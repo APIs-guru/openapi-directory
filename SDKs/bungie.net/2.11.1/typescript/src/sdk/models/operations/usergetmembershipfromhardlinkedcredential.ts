@@ -1,28 +1,29 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class UserGetMembershipFromHardLinkedCredentialPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=crType" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=crType" })
   crType: number;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=credential" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=credential" })
   credential: string;
 }
 
 
 export class UserGetMembershipFromHardLinkedCredentialRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: UserGetMembershipFromHardLinkedCredentialPathParams;
 }
 
 
 export class UserGetMembershipFromHardLinkedCredentialResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

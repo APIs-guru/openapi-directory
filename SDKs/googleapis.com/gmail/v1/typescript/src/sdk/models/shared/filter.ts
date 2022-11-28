@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { FilterAction } from "./filteraction";
 import { FilterCriteria } from "./filtercriteria";
+
 
 
 // Filter
@@ -8,12 +9,12 @@ import { FilterCriteria } from "./filtercriteria";
  * Resource definition for Gmail filters. Filters apply to specific messages instead of an entire email thread.
 **/
 export class Filter extends SpeakeasyBase {
-  @Metadata({ data: "json, name=action" })
+  @SpeakeasyMetadata({ data: "json, name=action" })
   action?: FilterAction;
 
-  @Metadata({ data: "json, name=criteria" })
+  @SpeakeasyMetadata({ data: "json, name=criteria" })
   criteria?: FilterCriteria;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 }

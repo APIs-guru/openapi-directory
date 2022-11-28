@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// LightsailDistribution
+// Describes an Amazon Lightsail content delivery network (CDN) distribution.
 type LightsailDistribution struct {
 	AbleToUpdateBundle     *bool                  `json:"ableToUpdateBundle,omitempty"`
 	AlternativeDomainNames []string               `json:"alternativeDomainNames,omitempty"`

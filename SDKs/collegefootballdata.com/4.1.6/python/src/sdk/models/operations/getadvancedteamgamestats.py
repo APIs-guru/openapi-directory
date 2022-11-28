@@ -15,12 +15,12 @@ class GetAdvancedTeamGameStatsQueryParams:
 
 @dataclass
 class GetAdvancedTeamGameStatsRequest:
-    query_params: GetAdvancedTeamGameStatsQueryParams = field(default=None)
+    query_params: GetAdvancedTeamGameStatsQueryParams = field()
     
 
 @dataclass
 class GetAdvancedTeamGameStatsResponse:
+    content_type: str = field()
+    status_code: int = field()
     advanced_game_stats: Optional[List[shared.AdvancedGameStat]] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

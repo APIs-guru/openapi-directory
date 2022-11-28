@@ -1,0 +1,60 @@
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import * as shared from "../shared";
+
+export const CreateAssistantServerList = [
+	"https://autopilot.twilio.com",
+] as const;
+
+
+export class CreateAssistantCreateAssistantRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "form, name=CallbackEvents;" })
+  callbackEvents?: string;
+
+  @SpeakeasyMetadata({ data: "form, name=CallbackUrl;" })
+  callbackUrl?: string;
+
+  @SpeakeasyMetadata({ data: "form, name=Defaults;" })
+  defaults?: any;
+
+  @SpeakeasyMetadata({ data: "form, name=FriendlyName;" })
+  friendlyName?: string;
+
+  @SpeakeasyMetadata({ data: "form, name=LogQueries;" })
+  logQueries?: boolean;
+
+  @SpeakeasyMetadata({ data: "form, name=StyleSheet;" })
+  styleSheet?: any;
+
+  @SpeakeasyMetadata({ data: "form, name=UniqueName;" })
+  uniqueName?: string;
+}
+
+
+export class CreateAssistantSecurity extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=basic" })
+  accountSidAuthToken: shared.SchemeAccountSidAuthToken;
+}
+
+
+export class CreateAssistantRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  serverUrl?: string;
+
+  @SpeakeasyMetadata({ data: "request, media_type=application/x-www-form-urlencoded" })
+  request?: CreateAssistantCreateAssistantRequest;
+
+  @SpeakeasyMetadata()
+  security: CreateAssistantSecurity;
+}
+
+
+export class CreateAssistantResponse extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  contentType: string;
+
+  @SpeakeasyMetadata()
+  statusCode: number;
+
+  @SpeakeasyMetadata()
+  autopilotV1Assistant?: shared.AutopilotV1Assistant;
+}

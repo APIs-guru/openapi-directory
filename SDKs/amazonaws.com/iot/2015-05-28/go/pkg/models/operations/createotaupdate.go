@@ -18,19 +18,27 @@ type CreateOtaUpdateHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// CreateOtaUpdateRequestBodyAwsJobAbortConfig
+// The criteria that determine when and how a job abort takes place.
 type CreateOtaUpdateRequestBodyAwsJobAbortConfig struct {
 	AbortCriteriaList []shared.AwsJobAbortCriteria `json:"abortCriteriaList,omitempty"`
 }
 
+// CreateOtaUpdateRequestBodyAwsJobExecutionsRolloutConfig
+// Configuration for the rollout of OTA updates.
 type CreateOtaUpdateRequestBodyAwsJobExecutionsRolloutConfig struct {
 	ExponentialRate  *shared.AwsJobExponentialRolloutRate `json:"exponentialRate,omitempty"`
 	MaximumPerMinute *int64                               `json:"maximumPerMinute,omitempty"`
 }
 
+// CreateOtaUpdateRequestBodyAwsJobPresignedURLConfig
+// Configuration information for pre-signed URLs. Valid when <code>protocols</code> contains HTTP.
 type CreateOtaUpdateRequestBodyAwsJobPresignedURLConfig struct {
 	ExpiresInSec *int64 `json:"expiresInSec,omitempty"`
 }
 
+// CreateOtaUpdateRequestBodyAwsJobTimeoutConfig
+// Specifies the amount of time each device has to finish its execution of the job. A timer is started when the job execution status is set to <code>IN_PROGRESS</code>. If the job execution status is not set to another terminal state before the timer expires, it will be automatically set to <code>TIMED_OUT</code>.
 type CreateOtaUpdateRequestBodyAwsJobTimeoutConfig struct {
 	InProgressTimeoutInMinutes *int64 `json:"inProgressTimeoutInMinutes,omitempty"`
 }

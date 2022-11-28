@@ -1,0 +1,37 @@
+import { SpeakeasyBase } from "../../../internal/utils";
+import { MemberViewModel } from "./memberviewmodel";
+import { AttachmentViewModel } from "./attachmentviewmodel";
+import { GroupedQuestionViewModel } from "./groupedquestionviewmodel";
+import { HouseEnumEnum } from "./houseenumenum";
+export declare class QuestionsViewModel extends SpeakeasyBase {
+    answerIsCorrection?: boolean;
+    answerIsHolding?: boolean;
+    answerText?: string;
+    answeringBodyId?: number;
+    answeringBodyName?: string;
+    answeringMember?: MemberViewModel;
+    answeringMemberId?: number;
+    askingMember?: MemberViewModel;
+    askingMemberId?: number;
+    attachmentCount?: number;
+    attachments?: AttachmentViewModel[];
+    comparableAnswerText?: string;
+    correctingMember?: MemberViewModel;
+    correctingMemberId?: number;
+    dateAnswerCorrected?: Date;
+    dateAnswered?: Date;
+    dateForAnswer?: Date;
+    dateHoldingAnswer?: Date;
+    dateTabled?: Date;
+    groupedQuestions?: string[];
+    groupedQuestionsDates?: GroupedQuestionViewModel[];
+    heading?: string;
+    house?: HouseEnumEnum;
+    id?: number;
+    isNamedDay?: boolean;
+    isWithdrawn?: boolean;
+    memberHasInterest?: boolean;
+    originalAnswerText?: string;
+    questionText?: string;
+    uin?: string;
+}

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetFoodIngredientSearchPhpQueryParams = /** @class */ (function (_super) {
     __extends(GetFoodIngredientSearchPhpQueryParams, _super);
@@ -30,11 +30,11 @@ var GetFoodIngredientSearchPhpQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=find" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=find" }),
         __metadata("design:type", String)
     ], GetFoodIngredientSearchPhpQueryParams.prototype, "find", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=limit" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=limit" }),
         __metadata("design:type", Number)
     ], GetFoodIngredientSearchPhpQueryParams.prototype, "limit", void 0);
     return GetFoodIngredientSearchPhpQueryParams;
@@ -46,7 +46,7 @@ var GetFoodIngredientSearchPhpSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=query" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=query" }),
         __metadata("design:type", shared.SchemeApiKeyAuth)
     ], GetFoodIngredientSearchPhpSecurity.prototype, "apiKeyAuth", void 0);
     return GetFoodIngredientSearchPhpSecurity;
@@ -58,11 +58,11 @@ var GetFoodIngredientSearchPhpRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetFoodIngredientSearchPhpQueryParams)
     ], GetFoodIngredientSearchPhpRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetFoodIngredientSearchPhpSecurity)
     ], GetFoodIngredientSearchPhpRequest.prototype, "security", void 0);
     return GetFoodIngredientSearchPhpRequest;
@@ -74,15 +74,15 @@ var GetFoodIngredientSearchPhpResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetFoodIngredientSearchPhpResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.IngredientObject)
     ], GetFoodIngredientSearchPhpResponse.prototype, "ingredientObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetFoodIngredientSearchPhpResponse.prototype, "statusCode", void 0);
     return GetFoodIngredientSearchPhpResponse;

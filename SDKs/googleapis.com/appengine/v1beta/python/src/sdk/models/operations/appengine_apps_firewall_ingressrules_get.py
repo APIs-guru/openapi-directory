@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class AppengineAppsFirewallIngressRulesGetPathParams:
-    apps_id: str = field(default=None, metadata={'path_param': { 'field_name': 'appsId', 'style': 'simple', 'explode': False }})
-    ingress_rules_id: str = field(default=None, metadata={'path_param': { 'field_name': 'ingressRulesId', 'style': 'simple', 'explode': False }})
+    apps_id: str = field(metadata={'path_param': { 'field_name': 'appsId', 'style': 'simple', 'explode': False }})
+    ingress_rules_id: str = field(metadata={'path_param': { 'field_name': 'ingressRulesId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,20 +27,20 @@ class AppengineAppsFirewallIngressRulesGetQueryParams:
 
 @dataclass
 class AppengineAppsFirewallIngressRulesGetSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class AppengineAppsFirewallIngressRulesGetSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class AppengineAppsFirewallIngressRulesGetSecurityOption3:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -51,14 +52,14 @@ class AppengineAppsFirewallIngressRulesGetSecurity:
 
 @dataclass
 class AppengineAppsFirewallIngressRulesGetRequest:
-    path_params: AppengineAppsFirewallIngressRulesGetPathParams = field(default=None)
-    query_params: AppengineAppsFirewallIngressRulesGetQueryParams = field(default=None)
-    security: AppengineAppsFirewallIngressRulesGetSecurity = field(default=None)
+    path_params: AppengineAppsFirewallIngressRulesGetPathParams = field()
+    query_params: AppengineAppsFirewallIngressRulesGetQueryParams = field()
+    security: AppengineAppsFirewallIngressRulesGetSecurity = field()
     
 
 @dataclass
 class AppengineAppsFirewallIngressRulesGetResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     firewall_rule: Optional[shared.FirewallRule] = field(default=None)
-    status_code: int = field(default=None)
     

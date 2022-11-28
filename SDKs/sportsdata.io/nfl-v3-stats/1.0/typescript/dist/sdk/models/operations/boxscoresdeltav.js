@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var BoxScoresDeltaVFormatEnum;
 (function (BoxScoresDeltaVFormatEnum) {
     BoxScoresDeltaVFormatEnum["Xml"] = "XML";
@@ -40,23 +40,23 @@ var BoxScoresDeltaVPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=format" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=format" }),
         __metadata("design:type", String)
     ], BoxScoresDeltaVPathParams.prototype, "format", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=minutes" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=minutes" }),
         __metadata("design:type", String)
     ], BoxScoresDeltaVPathParams.prototype, "minutes", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=playerstoinclude" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=playerstoinclude" }),
         __metadata("design:type", String)
     ], BoxScoresDeltaVPathParams.prototype, "playerstoinclude", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=season" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=season" }),
         __metadata("design:type", String)
     ], BoxScoresDeltaVPathParams.prototype, "season", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=week" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=week" }),
         __metadata("design:type", String)
     ], BoxScoresDeltaVPathParams.prototype, "week", void 0);
     return BoxScoresDeltaVPathParams;
@@ -68,7 +68,7 @@ var BoxScoresDeltaVRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", BoxScoresDeltaVPathParams)
     ], BoxScoresDeltaVRequest.prototype, "pathParams", void 0);
     return BoxScoresDeltaVRequest;
@@ -80,15 +80,15 @@ var BoxScoresDeltaVResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Array)
     ], BoxScoresDeltaVResponse.prototype, "boxScoreV3s", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], BoxScoresDeltaVResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], BoxScoresDeltaVResponse.prototype, "statusCode", void 0);
     return BoxScoresDeltaVResponse;

@@ -4,7 +4,7 @@ from typing import List,Optional
 
 @dataclass
 class DeleteV3BoardsBoardIDAssetsPathParams:
-    board_id: str = field(default=None, metadata={'path_param': { 'field_name': 'board_id', 'style': 'simple', 'explode': False }})
+    board_id: str = field(metadata={'path_param': { 'field_name': 'board_id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -14,12 +14,12 @@ class DeleteV3BoardsBoardIDAssetsQueryParams:
 
 @dataclass
 class DeleteV3BoardsBoardIDAssetsRequest:
-    path_params: DeleteV3BoardsBoardIDAssetsPathParams = field(default=None)
-    query_params: DeleteV3BoardsBoardIDAssetsQueryParams = field(default=None)
+    path_params: DeleteV3BoardsBoardIDAssetsPathParams = field()
+    query_params: DeleteV3BoardsBoardIDAssetsQueryParams = field()
     
 
 @dataclass
 class DeleteV3BoardsBoardIDAssetsResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

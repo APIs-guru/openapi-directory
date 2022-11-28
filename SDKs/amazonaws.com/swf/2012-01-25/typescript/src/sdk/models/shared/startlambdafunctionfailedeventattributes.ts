@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { StartLambdaFunctionFailedCauseEnum } from "./startlambdafunctionfailedcauseenum";
+
 
 
 // StartLambdaFunctionFailedEventAttributes
@@ -7,12 +8,12 @@ import { StartLambdaFunctionFailedCauseEnum } from "./startlambdafunctionfailedc
  * Provides the details of the <code>StartLambdaFunctionFailed</code> event. It isn't set for other event types.
 **/
 export class StartLambdaFunctionFailedEventAttributes extends SpeakeasyBase {
-  @Metadata({ data: "json, name=cause" })
+  @SpeakeasyMetadata({ data: "json, name=cause" })
   cause?: StartLambdaFunctionFailedCauseEnum;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 
-  @Metadata({ data: "json, name=scheduledEventId" })
+  @SpeakeasyMetadata({ data: "json, name=scheduledEventId" })
   scheduledEventId?: number;
 }

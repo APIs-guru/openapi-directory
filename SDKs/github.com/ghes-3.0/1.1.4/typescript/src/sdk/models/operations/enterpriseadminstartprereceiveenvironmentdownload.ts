@@ -1,50 +1,51 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class EnterpriseAdminStartPreReceiveEnvironmentDownloadPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=pre_receive_environment_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=pre_receive_environment_id" })
   preReceiveEnvironmentId: number;
 }
 
 
-export class EnterpriseAdminStartPreReceiveEnvironmentDownloadRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: EnterpriseAdminStartPreReceiveEnvironmentDownloadPathParams;
-}
-
-
 export class EnterpriseAdminStartPreReceiveEnvironmentDownload422ApplicationJsonErrors extends SpeakeasyBase {
-  @Metadata({ data: "json, name=code" })
+  @SpeakeasyMetadata({ data: "json, name=code" })
   code?: string;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 
-  @Metadata({ data: "json, name=resource" })
+  @SpeakeasyMetadata({ data: "json, name=resource" })
   resource?: string;
 }
 
 
 export class EnterpriseAdminStartPreReceiveEnvironmentDownload422ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=errors", elemType: operations.EnterpriseAdminStartPreReceiveEnvironmentDownload422ApplicationJsonErrors })
+  @SpeakeasyMetadata({ data: "json, name=errors", elemType: EnterpriseAdminStartPreReceiveEnvironmentDownload422ApplicationJsonErrors })
   errors?: EnterpriseAdminStartPreReceiveEnvironmentDownload422ApplicationJsonErrors[];
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
+export class EnterpriseAdminStartPreReceiveEnvironmentDownloadRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: EnterpriseAdminStartPreReceiveEnvironmentDownloadPathParams;
+}
+
+
 export class EnterpriseAdminStartPreReceiveEnvironmentDownloadResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   enterpriseAdminStartPreReceiveEnvironmentDownload422ApplicationJsonObject?: EnterpriseAdminStartPreReceiveEnvironmentDownload422ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   preReceiveEnvironmentDownloadStatus?: shared.PreReceiveEnvironmentDownloadStatus;
 }

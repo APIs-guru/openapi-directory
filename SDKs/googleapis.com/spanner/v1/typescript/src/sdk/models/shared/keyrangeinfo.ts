@@ -1,9 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ContextValue } from "./contextvalue";
 import { LocalizedString } from "./localizedstring";
-import { LocalizedString } from "./localizedstring";
-import { LocalizedString } from "./localizedstring";
+
 
 
 // KeyRangeInfo
@@ -11,30 +9,30 @@ import { LocalizedString } from "./localizedstring";
  * A message representing information for a key range (possibly one key).
 **/
 export class KeyRangeInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=contextValues", elemType: shared.ContextValue })
+  @SpeakeasyMetadata({ data: "json, name=contextValues", elemType: ContextValue })
   contextValues?: ContextValue[];
 
-  @Metadata({ data: "json, name=endKeyIndex" })
+  @SpeakeasyMetadata({ data: "json, name=endKeyIndex" })
   endKeyIndex?: number;
 
-  @Metadata({ data: "json, name=info" })
+  @SpeakeasyMetadata({ data: "json, name=info" })
   info?: LocalizedString;
 
-  @Metadata({ data: "json, name=keysCount" })
+  @SpeakeasyMetadata({ data: "json, name=keysCount" })
   keysCount?: string;
 
-  @Metadata({ data: "json, name=metric" })
+  @SpeakeasyMetadata({ data: "json, name=metric" })
   metric?: LocalizedString;
 
-  @Metadata({ data: "json, name=startKeyIndex" })
+  @SpeakeasyMetadata({ data: "json, name=startKeyIndex" })
   startKeyIndex?: number;
 
-  @Metadata({ data: "json, name=timeOffset" })
+  @SpeakeasyMetadata({ data: "json, name=timeOffset" })
   timeOffset?: string;
 
-  @Metadata({ data: "json, name=unit" })
+  @SpeakeasyMetadata({ data: "json, name=unit" })
   unit?: LocalizedString;
 
-  @Metadata({ data: "json, name=value" })
+  @SpeakeasyMetadata({ data: "json, name=value" })
   value?: number;
 }

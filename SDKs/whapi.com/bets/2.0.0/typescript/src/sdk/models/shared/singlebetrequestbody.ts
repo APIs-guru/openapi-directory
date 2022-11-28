@@ -1,28 +1,29 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class SingleBetRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=delayedBetId" })
+  @SpeakeasyMetadata({ data: "json, name=delayedBetId" })
   delayedBetId?: string;
 
-  @Metadata({ data: "json, name=freeBetId" })
+  @SpeakeasyMetadata({ data: "json, name=freeBetId" })
   freeBetId?: string;
 
-  @Metadata({ data: "json, name=priceDen" })
+  @SpeakeasyMetadata({ data: "json, name=priceDen" })
   priceDen?: number;
 
-  @Metadata({ data: "json, name=priceNum" })
+  @SpeakeasyMetadata({ data: "json, name=priceNum" })
   priceNum?: number;
 
-  @Metadata({ data: "json, name=priceType" })
+  @SpeakeasyMetadata({ data: "json, name=priceType" })
   priceType: string;
 
-  @Metadata({ data: "json, name=selectionId" })
+  @SpeakeasyMetadata({ data: "json, name=selectionId" })
   selectionId: string;
 
-  @Metadata({ data: "json, name=stake" })
+  @SpeakeasyMetadata({ data: "json, name=stake" })
   stake: number;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type: string;
 }

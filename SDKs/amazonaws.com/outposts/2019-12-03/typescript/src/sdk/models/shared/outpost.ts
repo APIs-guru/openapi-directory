@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Outpost
@@ -6,36 +7,36 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Information about an Outpost.
 **/
 export class Outpost extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AvailabilityZone" })
+  @SpeakeasyMetadata({ data: "json, name=AvailabilityZone" })
   availabilityZone?: string;
 
-  @Metadata({ data: "json, name=AvailabilityZoneId" })
+  @SpeakeasyMetadata({ data: "json, name=AvailabilityZoneId" })
   availabilityZoneId?: string;
 
-  @Metadata({ data: "json, name=Description" })
+  @SpeakeasyMetadata({ data: "json, name=Description" })
   description?: string;
 
-  @Metadata({ data: "json, name=LifeCycleStatus" })
+  @SpeakeasyMetadata({ data: "json, name=LifeCycleStatus" })
   lifeCycleStatus?: string;
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name?: string;
 
-  @Metadata({ data: "json, name=OutpostArn" })
+  @SpeakeasyMetadata({ data: "json, name=OutpostArn" })
   outpostArn?: string;
 
-  @Metadata({ data: "json, name=OutpostId" })
+  @SpeakeasyMetadata({ data: "json, name=OutpostId" })
   outpostId?: string;
 
-  @Metadata({ data: "json, name=OwnerId" })
+  @SpeakeasyMetadata({ data: "json, name=OwnerId" })
   ownerId?: string;
 
-  @Metadata({ data: "json, name=SiteArn" })
+  @SpeakeasyMetadata({ data: "json, name=SiteArn" })
   siteArn?: string;
 
-  @Metadata({ data: "json, name=SiteId" })
+  @SpeakeasyMetadata({ data: "json, name=SiteId" })
   siteId?: string;
 
-  @Metadata({ data: "json, name=Tags" })
+  @SpeakeasyMetadata({ data: "json, name=Tags" })
   tags?: Map<string, string>;
 }

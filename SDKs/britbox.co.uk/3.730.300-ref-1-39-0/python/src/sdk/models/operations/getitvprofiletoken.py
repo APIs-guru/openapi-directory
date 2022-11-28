@@ -10,20 +10,20 @@ class GetItvProfileTokenQueryParams:
 
 @dataclass
 class GetItvProfileTokenSecurity:
-    account_auth: shared.SchemeAccountAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    account_auth: shared.SchemeAccountAuth = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class GetItvProfileTokenRequest:
-    query_params: GetItvProfileTokenQueryParams = field(default=None)
-    request: shared.ItvProfileTokenRequest = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: GetItvProfileTokenSecurity = field(default=None)
+    query_params: GetItvProfileTokenQueryParams = field()
+    request: shared.ItvProfileTokenRequest = field(metadata={'request': { 'media_type': 'application/json' }})
+    security: GetItvProfileTokenSecurity = field()
     
 
 @dataclass
 class GetItvProfileTokenResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     itv_profile_token: Optional[shared.ItvProfileToken] = field(default=None)
     service_error: Optional[shared.ServiceError] = field(default=None)
-    status_code: int = field(default=None)
     

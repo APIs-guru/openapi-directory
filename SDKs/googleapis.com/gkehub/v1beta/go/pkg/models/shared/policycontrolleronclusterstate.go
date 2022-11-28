@@ -14,6 +14,8 @@ const (
 	PolicyControllerOnClusterStateStateEnumSuspended                 PolicyControllerOnClusterStateStateEnum = "SUSPENDED"
 )
 
+// PolicyControllerOnClusterState
+// OnClusterState represents the state of a sub-component of Policy Controller.
 type PolicyControllerOnClusterState struct {
 	Details *string                                  `json:"details,omitempty"`
 	State   *PolicyControllerOnClusterStateStateEnum `json:"state,omitempty"`

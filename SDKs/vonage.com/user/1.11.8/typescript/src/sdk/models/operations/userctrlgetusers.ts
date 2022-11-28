@@ -1,62 +1,63 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class UserCtrlGetUsersPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=account_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=account_id" })
   accountId: string;
 }
 
 
 export class UserCtrlGetUsersQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=email" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=email" })
   email?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=first_name" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=first_name" })
   firstName?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=last_name" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=last_name" })
   lastName?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=login_name" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=login_name" })
   loginName?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=page" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page" })
   page?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=page_size" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page_size" })
   pageSize?: number;
 }
 
 
 export class UserCtrlGetUsersSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=bearer" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" })
   bearerAuth: shared.SchemeBearerAuth;
 }
 
 
 export class UserCtrlGetUsersRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: UserCtrlGetUsersPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: UserCtrlGetUsersQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: UserCtrlGetUsersSecurity;
 }
 
 
 export class UserCtrlGetUsersResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   usersHalResponse?: shared.UsersHalResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   validationErrorsResponse?: shared.ValidationErrorsResponse;
 }

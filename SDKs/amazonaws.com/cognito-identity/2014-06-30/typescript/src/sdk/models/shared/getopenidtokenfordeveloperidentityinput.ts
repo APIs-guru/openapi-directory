@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GetOpenIdTokenForDeveloperIdentityInput
@@ -6,18 +7,18 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Input to the <code>GetOpenIdTokenForDeveloperIdentity</code> action.
 **/
 export class GetOpenIdTokenForDeveloperIdentityInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=IdentityId" })
+  @SpeakeasyMetadata({ data: "json, name=IdentityId" })
   identityId?: string;
 
-  @Metadata({ data: "json, name=IdentityPoolId" })
+  @SpeakeasyMetadata({ data: "json, name=IdentityPoolId" })
   identityPoolId: string;
 
-  @Metadata({ data: "json, name=Logins" })
+  @SpeakeasyMetadata({ data: "json, name=Logins" })
   logins: Map<string, string>;
 
-  @Metadata({ data: "json, name=PrincipalTags" })
+  @SpeakeasyMetadata({ data: "json, name=PrincipalTags" })
   principalTags?: Map<string, string>;
 
-  @Metadata({ data: "json, name=TokenDuration" })
+  @SpeakeasyMetadata({ data: "json, name=TokenDuration" })
   tokenDuration?: number;
 }

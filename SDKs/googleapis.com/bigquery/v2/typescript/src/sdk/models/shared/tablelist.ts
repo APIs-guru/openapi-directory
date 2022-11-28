@@ -1,9 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Clustering } from "./clustering";
 import { RangePartitioning } from "./rangepartitioning";
 import { TableReference } from "./tablereference";
 import { TimePartitioning } from "./timepartitioning";
+
 
 
 // TableListTablesView
@@ -11,63 +11,63 @@ import { TimePartitioning } from "./timepartitioning";
  * Additional details for a view.
 **/
 export class TableListTablesView extends SpeakeasyBase {
-  @Metadata({ data: "json, name=useLegacySql" })
+  @SpeakeasyMetadata({ data: "json, name=useLegacySql" })
   useLegacySql?: boolean;
 }
 
 
 export class TableListTables extends SpeakeasyBase {
-  @Metadata({ data: "json, name=clustering" })
+  @SpeakeasyMetadata({ data: "json, name=clustering" })
   clustering?: Clustering;
 
-  @Metadata({ data: "json, name=creationTime" })
+  @SpeakeasyMetadata({ data: "json, name=creationTime" })
   creationTime?: string;
 
-  @Metadata({ data: "json, name=expirationTime" })
+  @SpeakeasyMetadata({ data: "json, name=expirationTime" })
   expirationTime?: string;
 
-  @Metadata({ data: "json, name=friendlyName" })
+  @SpeakeasyMetadata({ data: "json, name=friendlyName" })
   friendlyName?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=labels" })
+  @SpeakeasyMetadata({ data: "json, name=labels" })
   labels?: Map<string, string>;
 
-  @Metadata({ data: "json, name=rangePartitioning" })
+  @SpeakeasyMetadata({ data: "json, name=rangePartitioning" })
   rangePartitioning?: RangePartitioning;
 
-  @Metadata({ data: "json, name=tableReference" })
+  @SpeakeasyMetadata({ data: "json, name=tableReference" })
   tableReference?: TableReference;
 
-  @Metadata({ data: "json, name=timePartitioning" })
+  @SpeakeasyMetadata({ data: "json, name=timePartitioning" })
   timePartitioning?: TimePartitioning;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: string;
 
-  @Metadata({ data: "json, name=view" })
+  @SpeakeasyMetadata({ data: "json, name=view" })
   view?: TableListTablesView;
 }
 
 
 export class TableList extends SpeakeasyBase {
-  @Metadata({ data: "json, name=etag" })
+  @SpeakeasyMetadata({ data: "json, name=etag" })
   etag?: string;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 
-  @Metadata({ data: "json, name=tables", elemType: shared.TableListTables })
+  @SpeakeasyMetadata({ data: "json, name=tables", elemType: TableListTables })
   tables?: TableListTables[];
 
-  @Metadata({ data: "json, name=totalItems" })
+  @SpeakeasyMetadata({ data: "json, name=totalItems" })
   totalItems?: number;
 }

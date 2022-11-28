@@ -1,5 +1,7 @@
 package shared
 
+// OsImage
+// Operation System image.
 type OsImage struct {
 	ApplicableInstanceTypes   []string                `json:"applicableInstanceTypes,omitempty"`
 	Code                      *string                 `json:"code,omitempty"`

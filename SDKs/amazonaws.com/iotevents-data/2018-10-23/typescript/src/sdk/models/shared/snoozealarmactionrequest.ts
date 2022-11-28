@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // SnoozeAlarmActionRequest
@@ -6,18 +7,18 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Information needed to snooze the alarm.
 **/
 export class SnoozeAlarmActionRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=alarmModelName" })
+  @SpeakeasyMetadata({ data: "json, name=alarmModelName" })
   alarmModelName: string;
 
-  @Metadata({ data: "json, name=keyValue" })
+  @SpeakeasyMetadata({ data: "json, name=keyValue" })
   keyValue?: string;
 
-  @Metadata({ data: "json, name=note" })
+  @SpeakeasyMetadata({ data: "json, name=note" })
   note?: string;
 
-  @Metadata({ data: "json, name=requestId" })
+  @SpeakeasyMetadata({ data: "json, name=requestId" })
   requestId: string;
 
-  @Metadata({ data: "json, name=snoozeDuration" })
+  @SpeakeasyMetadata({ data: "json, name=snoozeDuration" })
   snoozeDuration: number;
 }

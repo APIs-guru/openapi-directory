@@ -1,30 +1,30 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DeviceClaim } from "./deviceclaim";
 import { DeviceIdentifier } from "./deviceidentifier";
 import { DeviceMetadata } from "./devicemetadata";
 
 
+
 // Device
 /** 
- * An Android device registered for zero-touch enrollment.
+ * An Android or Chrome OS device registered for zero-touch enrollment.
 **/
 export class Device extends SpeakeasyBase {
-  @Metadata({ data: "json, name=claims", elemType: shared.DeviceClaim })
+  @SpeakeasyMetadata({ data: "json, name=claims", elemType: DeviceClaim })
   claims?: DeviceClaim[];
 
-  @Metadata({ data: "json, name=configuration" })
+  @SpeakeasyMetadata({ data: "json, name=configuration" })
   configuration?: string;
 
-  @Metadata({ data: "json, name=deviceId" })
+  @SpeakeasyMetadata({ data: "json, name=deviceId" })
   deviceId?: string;
 
-  @Metadata({ data: "json, name=deviceIdentifier" })
+  @SpeakeasyMetadata({ data: "json, name=deviceIdentifier" })
   deviceIdentifier?: DeviceIdentifier;
 
-  @Metadata({ data: "json, name=deviceMetadata" })
+  @SpeakeasyMetadata({ data: "json, name=deviceMetadata" })
   deviceMetadata?: DeviceMetadata;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 }

@@ -1,6 +1,6 @@
 package operations
 
-var GetVisualCrossingWebServicesRestServicesWeatherdataHistoryServers = []string{
+var GetVisualCrossingWebServicesRestServicesWeatherdataHistoryServerList = []string{
 	"https://weather.visualcrossing.com",
 }
 

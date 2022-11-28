@@ -1,8 +1,36 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DynamicGroupMetadata } from "./dynamicgroupmetadata";
 import { EntityKey } from "./entitykey";
 import { PosixGroup } from "./posixgroup";
+
+
+
+// GroupInput
+/** 
+ * A group within the Cloud Identity Groups API. A `Group` is a collection of entities, where each entity is either a user, another group, or a service account.
+**/
+export class GroupInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=description" })
+  description?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
+  displayName?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=dynamicGroupMetadata" })
+  dynamicGroupMetadata?: DynamicGroupMetadata;
+
+  @SpeakeasyMetadata({ data: "json, name=groupKey" })
+  groupKey?: EntityKey;
+
+  @SpeakeasyMetadata({ data: "json, name=labels" })
+  labels?: Map<string, string>;
+
+  @SpeakeasyMetadata({ data: "json, name=parent" })
+  parent?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=posixGroups", elemType: PosixGroup })
+  posixGroups?: PosixGroup[];
+}
 
 
 // Group
@@ -10,33 +38,33 @@ import { PosixGroup } from "./posixgroup";
  * A group within the Cloud Identity Groups API. A `Group` is a collection of entities, where each entity is either a user, another group, or a service account.
 **/
 export class Group extends SpeakeasyBase {
-  @Metadata({ data: "json, name=createTime" })
+  @SpeakeasyMetadata({ data: "json, name=createTime" })
   createTime?: string;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=displayName" })
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
   displayName?: string;
 
-  @Metadata({ data: "json, name=dynamicGroupMetadata" })
+  @SpeakeasyMetadata({ data: "json, name=dynamicGroupMetadata" })
   dynamicGroupMetadata?: DynamicGroupMetadata;
 
-  @Metadata({ data: "json, name=groupKey" })
+  @SpeakeasyMetadata({ data: "json, name=groupKey" })
   groupKey?: EntityKey;
 
-  @Metadata({ data: "json, name=labels" })
+  @SpeakeasyMetadata({ data: "json, name=labels" })
   labels?: Map<string, string>;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=parent" })
+  @SpeakeasyMetadata({ data: "json, name=parent" })
   parent?: string;
 
-  @Metadata({ data: "json, name=posixGroups", elemType: shared.PosixGroup })
+  @SpeakeasyMetadata({ data: "json, name=posixGroups", elemType: PosixGroup })
   posixGroups?: PosixGroup[];
 
-  @Metadata({ data: "json, name=updateTime" })
+  @SpeakeasyMetadata({ data: "json, name=updateTime" })
   updateTime?: string;
 }

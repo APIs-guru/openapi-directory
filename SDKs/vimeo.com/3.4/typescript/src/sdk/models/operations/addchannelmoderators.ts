@@ -1,47 +1,48 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class AddChannelModeratorsPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=channel_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=channel_id" })
   channelId: number;
 }
 
 
 export class AddChannelModeratorsRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=user_uri" })
+  @SpeakeasyMetadata({ data: "json, name=user_uri" })
   userUri: string;
 }
 
 
 export class AddChannelModeratorsSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   oauth2: shared.SchemeOauth2;
 }
 
 
 export class AddChannelModeratorsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: AddChannelModeratorsPathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: AddChannelModeratorsRequestBody;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: AddChannelModeratorsSecurity;
 }
 
 
 export class AddChannelModeratorsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   error?: shared.Error;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   legacyError?: shared.LegacyError;
 }

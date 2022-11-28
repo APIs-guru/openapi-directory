@@ -1,34 +1,35 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class EnterpriseAdminSetSelfHostedRunnersInGroupForEnterprisePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=enterprise" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=enterprise" })
   enterprise: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=runner_group_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=runner_group_id" })
   runnerGroupId: number;
 }
 
 
 export class EnterpriseAdminSetSelfHostedRunnersInGroupForEnterpriseRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=runners" })
+  @SpeakeasyMetadata({ data: "json, name=runners" })
   runners: number[];
 }
 
 
 export class EnterpriseAdminSetSelfHostedRunnersInGroupForEnterpriseRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: EnterpriseAdminSetSelfHostedRunnersInGroupForEnterprisePathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request?: EnterpriseAdminSetSelfHostedRunnersInGroupForEnterpriseRequestBody;
 }
 
 
 export class EnterpriseAdminSetSelfHostedRunnersInGroupForEnterpriseResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

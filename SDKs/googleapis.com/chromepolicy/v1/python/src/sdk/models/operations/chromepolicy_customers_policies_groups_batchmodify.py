@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class ChromepolicyCustomersPoliciesGroupsBatchModifyPathParams:
-    customer: str = field(default=None, metadata={'path_param': { 'field_name': 'customer', 'style': 'simple', 'explode': False }})
+    customer: str = field(metadata={'path_param': { 'field_name': 'customer', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,21 +26,21 @@ class ChromepolicyCustomersPoliciesGroupsBatchModifyQueryParams:
 
 @dataclass
 class ChromepolicyCustomersPoliciesGroupsBatchModifySecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class ChromepolicyCustomersPoliciesGroupsBatchModifyRequest:
-    path_params: ChromepolicyCustomersPoliciesGroupsBatchModifyPathParams = field(default=None)
-    query_params: ChromepolicyCustomersPoliciesGroupsBatchModifyQueryParams = field(default=None)
+    path_params: ChromepolicyCustomersPoliciesGroupsBatchModifyPathParams = field()
+    query_params: ChromepolicyCustomersPoliciesGroupsBatchModifyQueryParams = field()
+    security: ChromepolicyCustomersPoliciesGroupsBatchModifySecurity = field()
     request: Optional[shared.GoogleChromePolicyVersionsV1BatchModifyGroupPoliciesRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: ChromepolicyCustomersPoliciesGroupsBatchModifySecurity = field(default=None)
     
 
 @dataclass
 class ChromepolicyCustomersPoliciesGroupsBatchModifyResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_protobuf_empty: Optional[dict[str, Any]] = field(default=None)
-    status_code: int = field(default=None)
     

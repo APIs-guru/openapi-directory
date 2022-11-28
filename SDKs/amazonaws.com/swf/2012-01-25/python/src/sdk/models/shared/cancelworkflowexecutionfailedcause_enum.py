@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class CancelWorkflowExecutionFailedCauseEnum(str, Enum):
     UNHANDLED_DECISION = "UNHANDLED_DECISION"

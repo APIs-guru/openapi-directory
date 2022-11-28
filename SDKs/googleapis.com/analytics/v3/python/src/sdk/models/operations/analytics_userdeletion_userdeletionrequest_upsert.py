@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
@@ -16,20 +17,20 @@ class AnalyticsUserDeletionUserDeletionRequestUpsertQueryParams:
 
 @dataclass
 class AnalyticsUserDeletionUserDeletionRequestUpsertSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class AnalyticsUserDeletionUserDeletionRequestUpsertRequest:
-    query_params: AnalyticsUserDeletionUserDeletionRequestUpsertQueryParams = field(default=None)
-    request: Optional[shared.UserDeletionRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: AnalyticsUserDeletionUserDeletionRequestUpsertSecurity = field(default=None)
+    query_params: AnalyticsUserDeletionUserDeletionRequestUpsertQueryParams = field()
+    security: AnalyticsUserDeletionUserDeletionRequestUpsertSecurity = field()
+    request: Optional[shared.UserDeletionRequestInput] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class AnalyticsUserDeletionUserDeletionRequestUpsertResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     user_deletion_request: Optional[shared.UserDeletionRequest] = field(default=None)
     

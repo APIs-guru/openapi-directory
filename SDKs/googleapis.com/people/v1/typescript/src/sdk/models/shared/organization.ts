@@ -1,7 +1,60 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Date } from "./date";
+import { FieldMetadataInput } from "./fieldmetadata";
 import { FieldMetadata } from "./fieldmetadata";
-import { Date } from "./date";
+
+
+
+// OrganizationInput
+/** 
+ * A person's past or current organization. Overlapping date ranges are permitted.
+**/
+export class OrganizationInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=costCenter" })
+  costCenter?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=current" })
+  current?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=department" })
+  department?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=domain" })
+  domain?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=endDate" })
+  endDate?: Date;
+
+  @SpeakeasyMetadata({ data: "json, name=fullTimeEquivalentMillipercent" })
+  fullTimeEquivalentMillipercent?: number;
+
+  @SpeakeasyMetadata({ data: "json, name=jobDescription" })
+  jobDescription?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=location" })
+  location?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=metadata" })
+  metadata?: FieldMetadataInput;
+
+  @SpeakeasyMetadata({ data: "json, name=name" })
+  name?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=phoneticName" })
+  phoneticName?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=startDate" })
+  startDate?: Date;
+
+  @SpeakeasyMetadata({ data: "json, name=symbol" })
+  symbol?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=title" })
+  title?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=type" })
+  type?: string;
+}
 
 
 // Organization
@@ -9,51 +62,51 @@ import { Date } from "./date";
  * A person's past or current organization. Overlapping date ranges are permitted.
 **/
 export class Organization extends SpeakeasyBase {
-  @Metadata({ data: "json, name=costCenter" })
+  @SpeakeasyMetadata({ data: "json, name=costCenter" })
   costCenter?: string;
 
-  @Metadata({ data: "json, name=current" })
+  @SpeakeasyMetadata({ data: "json, name=current" })
   current?: boolean;
 
-  @Metadata({ data: "json, name=department" })
+  @SpeakeasyMetadata({ data: "json, name=department" })
   department?: string;
 
-  @Metadata({ data: "json, name=domain" })
+  @SpeakeasyMetadata({ data: "json, name=domain" })
   domain?: string;
 
-  @Metadata({ data: "json, name=endDate" })
+  @SpeakeasyMetadata({ data: "json, name=endDate" })
   endDate?: Date;
 
-  @Metadata({ data: "json, name=formattedType" })
+  @SpeakeasyMetadata({ data: "json, name=formattedType" })
   formattedType?: string;
 
-  @Metadata({ data: "json, name=fullTimeEquivalentMillipercent" })
+  @SpeakeasyMetadata({ data: "json, name=fullTimeEquivalentMillipercent" })
   fullTimeEquivalentMillipercent?: number;
 
-  @Metadata({ data: "json, name=jobDescription" })
+  @SpeakeasyMetadata({ data: "json, name=jobDescription" })
   jobDescription?: string;
 
-  @Metadata({ data: "json, name=location" })
+  @SpeakeasyMetadata({ data: "json, name=location" })
   location?: string;
 
-  @Metadata({ data: "json, name=metadata" })
+  @SpeakeasyMetadata({ data: "json, name=metadata" })
   metadata?: FieldMetadata;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=phoneticName" })
+  @SpeakeasyMetadata({ data: "json, name=phoneticName" })
   phoneticName?: string;
 
-  @Metadata({ data: "json, name=startDate" })
+  @SpeakeasyMetadata({ data: "json, name=startDate" })
   startDate?: Date;
 
-  @Metadata({ data: "json, name=symbol" })
+  @SpeakeasyMetadata({ data: "json, name=symbol" })
   symbol?: string;
 
-  @Metadata({ data: "json, name=title" })
+  @SpeakeasyMetadata({ data: "json, name=title" })
   title?: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: string;
 }

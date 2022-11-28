@@ -1,5 +1,7 @@
 package shared
 
+// CustomTemplate
+// Represents a Google Tag Manager Custom Template's contents.
 type CustomTemplate struct {
 	AccountID        *string           `json:"accountId,omitempty"`
 	ContainerID      *string           `json:"containerId,omitempty"`

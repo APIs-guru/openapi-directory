@@ -22,19 +22,19 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { ResourceDetail } from "./resourcedetail";
 var ListResourcesForTagOptionOutput = /** @class */ (function (_super) {
     __extends(ListResourcesForTagOptionOutput, _super);
     function ListResourcesForTagOptionOutput() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=PageToken" }),
+        SpeakeasyMetadata({ data: "json, name=PageToken" }),
         __metadata("design:type", String)
     ], ListResourcesForTagOptionOutput.prototype, "pageToken", void 0);
     __decorate([
-        Metadata({ data: "json, name=ResourceDetails", elemType: shared.ResourceDetail }),
+        SpeakeasyMetadata({ data: "json, name=ResourceDetails", elemType: ResourceDetail }),
         __metadata("design:type", Array)
     ], ListResourcesForTagOptionOutput.prototype, "resourceDetails", void 0);
     return ListResourcesForTagOptionOutput;

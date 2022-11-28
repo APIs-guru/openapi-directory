@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// RepositoryAssociation
+// Information about a repository association. The <a href="https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_DescribeRepositoryAssociation.html"> <code>DescribeRepositoryAssociation</code> </a> operation returns a <code>RepositoryAssociation</code> object.
 type RepositoryAssociation struct {
 	AssociationArn       *string                         `json:"AssociationArn,omitempty"`
 	AssociationID        *string                         `json:"AssociationId,omitempty"`

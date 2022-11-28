@@ -22,19 +22,19 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { UserStackAssociation } from "./userstackassociation";
 var DescribeUserStackAssociationsResult = /** @class */ (function (_super) {
     __extends(DescribeUserStackAssociationsResult, _super);
     function DescribeUserStackAssociationsResult() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=NextToken" }),
+        SpeakeasyMetadata({ data: "json, name=NextToken" }),
         __metadata("design:type", String)
     ], DescribeUserStackAssociationsResult.prototype, "nextToken", void 0);
     __decorate([
-        Metadata({ data: "json, name=UserStackAssociations", elemType: shared.UserStackAssociation }),
+        SpeakeasyMetadata({ data: "json, name=UserStackAssociations", elemType: UserStackAssociation }),
         __metadata("design:type", Array)
     ], DescribeUserStackAssociationsResult.prototype, "userStackAssociations", void 0);
     return DescribeUserStackAssociationsResult;

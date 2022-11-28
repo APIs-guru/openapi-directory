@@ -31,7 +31,7 @@ type DomainsProjectsLocationsRegistrationsPatchSecurity struct {
 type DomainsProjectsLocationsRegistrationsPatchRequest struct {
 	PathParams  DomainsProjectsLocationsRegistrationsPatchPathParams
 	QueryParams DomainsProjectsLocationsRegistrationsPatchQueryParams
-	Request     *shared.Registration `request:"mediaType=application/json"`
+	Request     *shared.RegistrationInput `request:"mediaType=application/json"`
 	Security    DomainsProjectsLocationsRegistrationsPatchSecurity
 }
 

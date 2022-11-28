@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// GetOperationDetailResponse
+// The GetOperationDetail response includes the following elements.
 type GetOperationDetailResponse struct {
 	DomainName    *string              `json:"DomainName,omitempty"`
 	Message       *string              `json:"Message,omitempty"`

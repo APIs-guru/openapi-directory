@@ -1,6 +1,7 @@
 
 
+
 export enum PostcodeTypeEnum {
-    S = "S"
-,    L = "L"
+    S = "S",
+    L = "L"
 }

@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DeviceState } from "./devicestate";
+
 
 
 // ListDeviceStatesResponse
@@ -8,6 +8,6 @@ import { DeviceState } from "./devicestate";
  * Response for `ListDeviceStates`.
 **/
 export class ListDeviceStatesResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=deviceStates", elemType: shared.DeviceState })
+  @SpeakeasyMetadata({ data: "json, name=deviceStates", elemType: DeviceState })
   deviceStates?: DeviceState[];
 }

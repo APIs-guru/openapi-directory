@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetDescribeReservedDbInstancesActionEnum(str, Enum):
     DESCRIBE_RESERVED_DB_INSTANCES = "DescribeReservedDBInstances"
@@ -10,7 +14,8 @@ class GetDescribeReservedDbInstancesVersionEnum(str, Enum):
 
 @dataclass
 class GetDescribeReservedDbInstancesQueryParams:
-    action: GetDescribeReservedDbInstancesActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetDescribeReservedDbInstancesActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: GetDescribeReservedDbInstancesVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     db_instance_class: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'DBInstanceClass', 'style': 'form', 'explode': True }})
     duration: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'Duration', 'style': 'form', 'explode': True }})
     marker: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'Marker', 'style': 'form', 'explode': True }})
@@ -20,7 +25,6 @@ class GetDescribeReservedDbInstancesQueryParams:
     product_description: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'ProductDescription', 'style': 'form', 'explode': True }})
     reserved_db_instance_id: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'ReservedDBInstanceId', 'style': 'form', 'explode': True }})
     reserved_db_instances_offering_id: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'ReservedDBInstancesOfferingId', 'style': 'form', 'explode': True }})
-    version: GetDescribeReservedDbInstancesVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -36,13 +40,13 @@ class GetDescribeReservedDbInstancesHeaders:
 
 @dataclass
 class GetDescribeReservedDbInstancesRequest:
-    query_params: GetDescribeReservedDbInstancesQueryParams = field(default=None)
-    headers: GetDescribeReservedDbInstancesHeaders = field(default=None)
+    headers: GetDescribeReservedDbInstancesHeaders = field()
+    query_params: GetDescribeReservedDbInstancesQueryParams = field()
     
 
 @dataclass
 class GetDescribeReservedDbInstancesResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

@@ -1,6 +1,7 @@
 
 
+
 export enum FollowStateEnum {
-    Pending = "pending"
-,    Accepted = "accepted"
+    Pending = "pending",
+    Accepted = "accepted"
 }

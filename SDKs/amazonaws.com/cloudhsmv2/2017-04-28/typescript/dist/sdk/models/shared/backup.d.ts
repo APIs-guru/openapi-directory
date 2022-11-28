@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { BackupStateEnum } from "./backupstateenum";
 import { Tag } from "./tag";
 /**

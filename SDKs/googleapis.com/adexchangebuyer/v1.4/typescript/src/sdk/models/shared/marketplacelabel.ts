@@ -1,17 +1,18 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { MarketplaceDealParty } from "./marketplacedealparty";
 
 
+
 export class MarketplaceLabel extends SpeakeasyBase {
-  @Metadata({ data: "json, name=accountId" })
+  @SpeakeasyMetadata({ data: "json, name=accountId" })
   accountId?: string;
 
-  @Metadata({ data: "json, name=createTimeMs" })
+  @SpeakeasyMetadata({ data: "json, name=createTimeMs" })
   createTimeMs?: string;
 
-  @Metadata({ data: "json, name=deprecatedMarketplaceDealParty" })
+  @SpeakeasyMetadata({ data: "json, name=deprecatedMarketplaceDealParty" })
   deprecatedMarketplaceDealParty?: MarketplaceDealParty;
 
-  @Metadata({ data: "json, name=label" })
+  @SpeakeasyMetadata({ data: "json, name=label" })
   label?: string;
 }

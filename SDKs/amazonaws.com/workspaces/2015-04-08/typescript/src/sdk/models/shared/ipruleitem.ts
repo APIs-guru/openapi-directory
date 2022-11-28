@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // IpRuleItem
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Describes a rule for an IP access control group.
 **/
 export class IpRuleItem extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ipRule" })
+  @SpeakeasyMetadata({ data: "json, name=ipRule" })
   ipRule?: string;
 
-  @Metadata({ data: "json, name=ruleDesc" })
+  @SpeakeasyMetadata({ data: "json, name=ruleDesc" })
   ruleDesc?: string;
 }

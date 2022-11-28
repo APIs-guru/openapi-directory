@@ -1,21 +1,21 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass_json
 @dataclass
-class WritableConfigContext:
-    data: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'data' }})
-    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
-    id: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
-    is_active: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'is_active' }})
-    name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    platforms: Optional[List[int]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'platforms' }})
-    regions: Optional[List[int]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'regions' }})
-    roles: Optional[List[int]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'roles' }})
-    sites: Optional[List[int]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'sites' }})
-    tenant_groups: Optional[List[int]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tenant_groups' }})
-    tenants: Optional[List[int]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tenants' }})
-    weight: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'weight' }})
+class WritableConfigContextInput:
+    data: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('data') }})
+    name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('description') }})
+    is_active: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('is_active') }})
+    platforms: Optional[List[int]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('platforms') }})
+    regions: Optional[List[int]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('regions') }})
+    roles: Optional[List[int]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('roles') }})
+    sites: Optional[List[int]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('sites') }})
+    tenant_groups: Optional[List[int]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('tenant_groups') }})
+    tenants: Optional[List[int]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('tenants') }})
+    weight: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('weight') }})
     

@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SasPortalDeployment } from "./sasportaldeployment";
+
 
 
 // SasPortalListDeploymentsResponse
@@ -8,9 +8,9 @@ import { SasPortalDeployment } from "./sasportaldeployment";
  * Response for ListDeployments.
 **/
 export class SasPortalListDeploymentsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=deployments", elemType: shared.SasPortalDeployment })
+  @SpeakeasyMetadata({ data: "json, name=deployments", elemType: SasPortalDeployment })
   deployments?: SasPortalDeployment[];
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 }

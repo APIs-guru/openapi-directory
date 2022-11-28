@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { KeyUsage } from "./keyusage";
 import { AccessDescription } from "./accessdescription";
+
 
 
 // CsrExtensions
@@ -9,9 +9,9 @@ import { AccessDescription } from "./accessdescription";
  * Describes the certificate extensions to be added to the certificate signing request (CSR).
 **/
 export class CsrExtensions extends SpeakeasyBase {
-  @Metadata({ data: "json, name=KeyUsage" })
+  @SpeakeasyMetadata({ data: "json, name=KeyUsage" })
   keyUsage?: KeyUsage;
 
-  @Metadata({ data: "json, name=SubjectInformationAccess", elemType: shared.AccessDescription })
+  @SpeakeasyMetadata({ data: "json, name=SubjectInformationAccess", elemType: AccessDescription })
   subjectInformationAccess?: AccessDescription[];
 }

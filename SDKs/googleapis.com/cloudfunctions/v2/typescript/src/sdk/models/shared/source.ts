@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RepoSource } from "./reposource";
 import { StorageSource } from "./storagesource";
+
 
 
 // Source
@@ -8,9 +9,9 @@ import { StorageSource } from "./storagesource";
  * The location of the function source code.
 **/
 export class Source extends SpeakeasyBase {
-  @Metadata({ data: "json, name=repoSource" })
+  @SpeakeasyMetadata({ data: "json, name=repoSource" })
   repoSource?: RepoSource;
 
-  @Metadata({ data: "json, name=storageSource" })
+  @SpeakeasyMetadata({ data: "json, name=storageSource" })
   storageSource?: StorageSource;
 }

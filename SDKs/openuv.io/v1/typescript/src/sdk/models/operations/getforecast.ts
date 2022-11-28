@@ -1,47 +1,48 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetForecastQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=alt" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=alt" })
   alt?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=dt" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=dt" })
   dt?: Date;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=lat" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=lat" })
   lat: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=lng" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=lng" })
   lng: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=ozone" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=ozone" })
   ozone?: number;
 }
 
 
 export class GetForecastHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=x-access-token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=x-access-token" })
   xAccessToken: string;
 }
 
 
 export class GetForecastRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetForecastQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: GetForecastHeaders;
 }
 
 
 export class GetForecastResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata({ elemType: shared.Forecast, elemDepth: 2 })
+  @SpeakeasyMetadata({ elemType: shared.Forecast, elemDepth: 2 })
   forecastResults?: shared.Forecast[][];
 }

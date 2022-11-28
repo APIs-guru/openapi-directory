@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var DeleteGroupGroupTitlePathParams = /** @class */ (function (_super) {
     __extends(DeleteGroupGroupTitlePathParams, _super);
@@ -30,7 +30,7 @@ var DeleteGroupGroupTitlePathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=group_title" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=group_title" }),
         __metadata("design:type", String)
     ], DeleteGroupGroupTitlePathParams.prototype, "groupTitle", void 0);
     return DeleteGroupGroupTitlePathParams;
@@ -42,7 +42,7 @@ var DeleteGroupGroupTitleSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=http;subtype=basic" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=basic" }),
         __metadata("design:type", shared.SchemeBasicAuthentication)
     ], DeleteGroupGroupTitleSecurity.prototype, "basicAuthentication", void 0);
     return DeleteGroupGroupTitleSecurity;
@@ -54,11 +54,11 @@ var DeleteGroupGroupTitleRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", DeleteGroupGroupTitlePathParams)
     ], DeleteGroupGroupTitleRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", DeleteGroupGroupTitleSecurity)
     ], DeleteGroupGroupTitleRequest.prototype, "security", void 0);
     return DeleteGroupGroupTitleRequest;
@@ -70,15 +70,15 @@ var DeleteGroupGroupTitleResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], DeleteGroupGroupTitleResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], DeleteGroupGroupTitleResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], DeleteGroupGroupTitleResponse.prototype, "statusCode", void 0);
     return DeleteGroupGroupTitleResponse;

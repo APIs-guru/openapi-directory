@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class TpuProjectsLocationsNodesGetGuestAttributesPathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,21 +26,21 @@ class TpuProjectsLocationsNodesGetGuestAttributesQueryParams:
 
 @dataclass
 class TpuProjectsLocationsNodesGetGuestAttributesSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class TpuProjectsLocationsNodesGetGuestAttributesRequest:
-    path_params: TpuProjectsLocationsNodesGetGuestAttributesPathParams = field(default=None)
-    query_params: TpuProjectsLocationsNodesGetGuestAttributesQueryParams = field(default=None)
+    path_params: TpuProjectsLocationsNodesGetGuestAttributesPathParams = field()
+    query_params: TpuProjectsLocationsNodesGetGuestAttributesQueryParams = field()
+    security: TpuProjectsLocationsNodesGetGuestAttributesSecurity = field()
     request: Optional[shared.GetGuestAttributesRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: TpuProjectsLocationsNodesGetGuestAttributesSecurity = field(default=None)
     
 
 @dataclass
 class TpuProjectsLocationsNodesGetGuestAttributesResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     get_guest_attributes_response: Optional[shared.GetGuestAttributesResponse] = field(default=None)
-    status_code: int = field(default=None)
     

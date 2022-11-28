@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import policy
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ExplicitDeny:
-    policies: Optional[List[policy.Policy]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'policies' }})
+    r"""ExplicitDeny
+    Information that explicitly denies authorization.
+    """
+    
+    policies: Optional[List[Policy]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('policies') }})
     

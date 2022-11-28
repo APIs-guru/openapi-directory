@@ -1,13 +1,9 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class MergeTemplatesQueryParams extends SpeakeasyBase {
     format?: shared.FormatEnum;
     name?: string;
     output?: shared.OutputEnum;
-}
-export declare class MergeTemplatesRequest extends SpeakeasyBase {
-    queryParams: MergeTemplatesQueryParams;
-    request: shared.BatchData[];
 }
 export declare class MergeTemplates200ApplicationJsonMeta extends SpeakeasyBase {
     contentType?: string;
@@ -64,6 +60,10 @@ export declare class MergeTemplates422ApplicationJson extends SpeakeasyBase {
 export declare class MergeTemplates500ApplicationJson extends SpeakeasyBase {
     error?: string;
     status?: number;
+}
+export declare class MergeTemplatesRequest extends SpeakeasyBase {
+    queryParams: MergeTemplatesQueryParams;
+    request: shared.BatchData[];
 }
 export declare class MergeTemplatesResponse extends SpeakeasyBase {
     contentType: string;

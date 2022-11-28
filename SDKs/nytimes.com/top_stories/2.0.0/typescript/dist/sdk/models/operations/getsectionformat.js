@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export var GetSectionFormatFormatEnum;
 (function (GetSectionFormatFormatEnum) {
@@ -64,11 +64,11 @@ var GetSectionFormatPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=format" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=format" }),
         __metadata("design:type", String)
     ], GetSectionFormatPathParams.prototype, "format", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=section" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=section" }),
         __metadata("design:type", String)
     ], GetSectionFormatPathParams.prototype, "section", void 0);
     return GetSectionFormatPathParams;
@@ -80,55 +80,55 @@ var GetSectionFormatQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=callback" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=callback" }),
         __metadata("design:type", String)
     ], GetSectionFormatQueryParams.prototype, "callback", void 0);
     return GetSectionFormatQueryParams;
 }(SpeakeasyBase));
 export { GetSectionFormatQueryParams };
-var GetSectionFormatRequest = /** @class */ (function (_super) {
-    __extends(GetSectionFormatRequest, _super);
-    function GetSectionFormatRequest() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    __decorate([
-        Metadata(),
-        __metadata("design:type", GetSectionFormatPathParams)
-    ], GetSectionFormatRequest.prototype, "pathParams", void 0);
-    __decorate([
-        Metadata(),
-        __metadata("design:type", GetSectionFormatQueryParams)
-    ], GetSectionFormatRequest.prototype, "queryParams", void 0);
-    return GetSectionFormatRequest;
-}(SpeakeasyBase));
-export { GetSectionFormatRequest };
 var GetSectionFormat200ApplicationJson = /** @class */ (function (_super) {
     __extends(GetSectionFormat200ApplicationJson, _super);
     function GetSectionFormat200ApplicationJson() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=results", elemType: shared.Article }),
+        SpeakeasyMetadata({ data: "json, name=results", elemType: shared.Article }),
         __metadata("design:type", Array)
     ], GetSectionFormat200ApplicationJson.prototype, "results", void 0);
     return GetSectionFormat200ApplicationJson;
 }(SpeakeasyBase));
 export { GetSectionFormat200ApplicationJson };
+var GetSectionFormatRequest = /** @class */ (function (_super) {
+    __extends(GetSectionFormatRequest, _super);
+    function GetSectionFormatRequest() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", GetSectionFormatPathParams)
+    ], GetSectionFormatRequest.prototype, "pathParams", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", GetSectionFormatQueryParams)
+    ], GetSectionFormatRequest.prototype, "queryParams", void 0);
+    return GetSectionFormatRequest;
+}(SpeakeasyBase));
+export { GetSectionFormatRequest };
 var GetSectionFormatResponse = /** @class */ (function (_super) {
     __extends(GetSectionFormatResponse, _super);
     function GetSectionFormatResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetSectionFormatResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetSectionFormat200ApplicationJson)
     ], GetSectionFormatResponse.prototype, "getSectionFormat200ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetSectionFormatResponse.prototype, "statusCode", void 0);
     return GetSectionFormatResponse;

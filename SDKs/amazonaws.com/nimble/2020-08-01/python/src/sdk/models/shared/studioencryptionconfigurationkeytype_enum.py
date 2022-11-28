@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class StudioEncryptionConfigurationKeyTypeEnum(str, Enum):
     AWS_OWNED_KEY = "AWS_OWNED_KEY"

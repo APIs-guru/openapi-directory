@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CustomAction } from "./customaction";
 import { StatelessRule } from "./statelessrule";
+
 
 
 // StatelessRulesAndCustomActions
@@ -9,9 +9,9 @@ import { StatelessRule } from "./statelessrule";
  * Stateless inspection criteria. Each stateless rule group uses exactly one of these data types to define its stateless rules. 
 **/
 export class StatelessRulesAndCustomActions extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CustomActions", elemType: shared.CustomAction })
+  @SpeakeasyMetadata({ data: "json, name=CustomActions", elemType: CustomAction })
   customActions?: CustomAction[];
 
-  @Metadata({ data: "json, name=StatelessRules", elemType: shared.StatelessRule })
+  @SpeakeasyMetadata({ data: "json, name=StatelessRules", elemType: StatelessRule })
   statelessRules: StatelessRule[];
 }

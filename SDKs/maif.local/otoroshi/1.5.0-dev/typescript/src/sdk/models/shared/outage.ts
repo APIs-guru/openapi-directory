@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Outage
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * An outage by the Snow Monkey on a service
 **/
 export class Outage extends SpeakeasyBase {
-  @Metadata({ data: "json, name=descriptorId" })
+  @SpeakeasyMetadata({ data: "json, name=descriptorId" })
   descriptorId: string;
 
-  @Metadata({ data: "json, name=descriptorName" })
+  @SpeakeasyMetadata({ data: "json, name=descriptorName" })
   descriptorName: string;
 
-  @Metadata({ data: "json, name=duration" })
+  @SpeakeasyMetadata({ data: "json, name=duration" })
   duration: number;
 
-  @Metadata({ data: "json, name=until" })
+  @SpeakeasyMetadata({ data: "json, name=until" })
   until: string;
 }

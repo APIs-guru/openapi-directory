@@ -1,5 +1,7 @@
 package shared
 
+// Listener
+// An object that represents a listener for a virtual node.
 type Listener struct {
 	ConnectionPool   *VirtualNodeConnectionPool `json:"connectionPool,omitempty"`
 	HealthCheck      *HealthCheckPolicy         `json:"healthCheck,omitempty"`

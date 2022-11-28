@@ -11,12 +11,12 @@ class PutV3AssetChangesChangeSetsQueryParams:
 
 @dataclass
 class PutV3AssetChangesChangeSetsRequest:
-    query_params: PutV3AssetChangesChangeSetsQueryParams = field(default=None)
+    query_params: PutV3AssetChangesChangeSetsQueryParams = field()
     
 
 @dataclass
 class PutV3AssetChangesChangeSetsResponse:
+    content_type: str = field()
+    status_code: int = field()
     asset_changes: Optional[shared.AssetChanges] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

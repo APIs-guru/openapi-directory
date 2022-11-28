@@ -18,6 +18,8 @@ type UpdateRecommenderConfigurationHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// UpdateRecommenderConfigurationRequestBodyUpdateRecommenderConfiguration
+// Specifies Amazon Pinpoint configuration settings for retrieving and processing recommendation data from a recommender model.
 type UpdateRecommenderConfigurationRequestBodyUpdateRecommenderConfiguration struct {
 	Attributes                    map[string]string `json:"Attributes,omitempty"`
 	Description                   *string           `json:"Description,omitempty"`

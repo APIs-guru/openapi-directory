@@ -1,5 +1,7 @@
 package shared
 
+// ScimError
+// Scim Error
 type ScimError struct {
 	Detail           *string  `json:"detail,omitempty"`
 	DocumentationURL *string  `json:"documentation_url,omitempty"`

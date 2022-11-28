@@ -1,6 +1,10 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,List,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -18,23 +22,23 @@ class CreateEmailIdentityHeaders:
 @dataclass_json
 @dataclass
 class CreateEmailIdentityRequestBody:
-    email_identity: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'EmailIdentity' }})
-    tags: Optional[List[shared.Tag]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Tags' }})
+    email_identity: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('EmailIdentity') }})
+    tags: Optional[List[shared.Tag]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Tags') }})
     
 
 @dataclass
 class CreateEmailIdentityRequest:
-    headers: CreateEmailIdentityHeaders = field(default=None)
-    request: CreateEmailIdentityRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: CreateEmailIdentityHeaders = field()
+    request: CreateEmailIdentityRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class CreateEmailIdentityResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
     concurrent_modification_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     create_email_identity_response: Optional[shared.CreateEmailIdentityResponse] = field(default=None)
     limit_exceeded_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     too_many_requests_exception: Optional[Any] = field(default=None)
     

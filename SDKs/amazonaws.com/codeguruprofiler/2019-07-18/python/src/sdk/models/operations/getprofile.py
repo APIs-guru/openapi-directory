@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
 from typing import Any,Optional
@@ -8,7 +8,7 @@ from sdk.models import shared
 
 @dataclass
 class GetProfilePathParams:
-    profiling_group_name: str = field(default=None, metadata={'path_param': { 'field_name': 'profilingGroupName', 'style': 'simple', 'explode': False }})
+    profiling_group_name: str = field(metadata={'path_param': { 'field_name': 'profilingGroupName', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -33,18 +33,18 @@ class GetProfileHeaders:
 
 @dataclass
 class GetProfileRequest:
-    path_params: GetProfilePathParams = field(default=None)
-    query_params: GetProfileQueryParams = field(default=None)
-    headers: GetProfileHeaders = field(default=None)
+    headers: GetProfileHeaders = field()
+    path_params: GetProfilePathParams = field()
+    query_params: GetProfileQueryParams = field()
     
 
 @dataclass
 class GetProfileResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     get_profile_response: Optional[shared.GetProfileResponse] = field(default=None)
     internal_server_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     validation_exception: Optional[Any] = field(default=None)
     

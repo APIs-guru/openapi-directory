@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // DeviceNames
 /**
  * Identifiers used to describe the device.
@@ -33,15 +33,15 @@ var DeviceNames = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=defaultNames" }),
+        SpeakeasyMetadata({ data: "json, name=defaultNames" }),
         __metadata("design:type", Array)
     ], DeviceNames.prototype, "defaultNames", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], DeviceNames.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=nicknames" }),
+        SpeakeasyMetadata({ data: "json, name=nicknames" }),
         __metadata("design:type", Array)
     ], DeviceNames.prototype, "nicknames", void 0);
     return DeviceNames;

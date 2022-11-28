@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ImageConfigError } from "./imageconfigerror";
 import { ImageConfig } from "./imageconfig";
+
 
 
 // ImageConfigResponse
@@ -8,9 +9,9 @@ import { ImageConfig } from "./imageconfig";
  * Response to GetFunctionConfiguration request.
 **/
 export class ImageConfigResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Error" })
+  @SpeakeasyMetadata({ data: "json, name=Error" })
   error?: ImageConfigError;
 
-  @Metadata({ data: "json, name=ImageConfig" })
+  @SpeakeasyMetadata({ data: "json, name=ImageConfig" })
   imageConfig?: ImageConfig;
 }

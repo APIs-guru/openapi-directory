@@ -1,5 +1,7 @@
 package shared
 
+// LeaseWorkItemRequest
+// Request to lease WorkItems.
 type LeaseWorkItemRequest struct {
 	CurrentWorkerTime      *string                `json:"currentWorkerTime,omitempty"`
 	Location               *string                `json:"location,omitempty"`

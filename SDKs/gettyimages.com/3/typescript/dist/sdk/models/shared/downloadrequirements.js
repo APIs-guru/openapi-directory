@@ -22,22 +22,22 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var DownloadRequirements = /** @class */ (function (_super) {
     __extends(DownloadRequirements, _super);
     function DownloadRequirements() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=is_note_required" }),
+        SpeakeasyMetadata({ data: "json, name=is_note_required" }),
         __metadata("design:type", Boolean)
     ], DownloadRequirements.prototype, "isNoteRequired", void 0);
     __decorate([
-        Metadata({ data: "json, name=is_project_code_required" }),
+        SpeakeasyMetadata({ data: "json, name=is_project_code_required" }),
         __metadata("design:type", Boolean)
     ], DownloadRequirements.prototype, "isProjectCodeRequired", void 0);
     __decorate([
-        Metadata({ data: "json, name=project_codes" }),
+        SpeakeasyMetadata({ data: "json, name=project_codes" }),
         __metadata("design:type", Array)
     ], DownloadRequirements.prototype, "projectCodes", void 0);
     return DownloadRequirements;

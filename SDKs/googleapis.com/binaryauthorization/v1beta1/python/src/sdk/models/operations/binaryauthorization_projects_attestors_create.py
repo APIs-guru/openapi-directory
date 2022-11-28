@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class BinaryauthorizationProjectsAttestorsCreatePathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,21 +27,21 @@ class BinaryauthorizationProjectsAttestorsCreateQueryParams:
 
 @dataclass
 class BinaryauthorizationProjectsAttestorsCreateSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class BinaryauthorizationProjectsAttestorsCreateRequest:
-    path_params: BinaryauthorizationProjectsAttestorsCreatePathParams = field(default=None)
-    query_params: BinaryauthorizationProjectsAttestorsCreateQueryParams = field(default=None)
-    request: Optional[shared.Attestor] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: BinaryauthorizationProjectsAttestorsCreateSecurity = field(default=None)
+    path_params: BinaryauthorizationProjectsAttestorsCreatePathParams = field()
+    query_params: BinaryauthorizationProjectsAttestorsCreateQueryParams = field()
+    security: BinaryauthorizationProjectsAttestorsCreateSecurity = field()
+    request: Optional[shared.AttestorInput] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class BinaryauthorizationProjectsAttestorsCreateResponse:
+    content_type: str = field()
+    status_code: int = field()
     attestor: Optional[shared.Attestor] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

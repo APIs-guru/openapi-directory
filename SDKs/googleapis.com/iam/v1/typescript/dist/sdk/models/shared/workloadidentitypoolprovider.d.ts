@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { Aws } from "./aws";
 import { Oidc } from "./oidc";
 import { Saml } from "./saml";
@@ -6,6 +6,19 @@ export declare enum WorkloadIdentityPoolProviderStateEnum {
     StateUnspecified = "STATE_UNSPECIFIED",
     Active = "ACTIVE",
     Deleted = "DELETED"
+}
+/**
+ * A configuration for an external identity provider.
+**/
+export declare class WorkloadIdentityPoolProviderInput extends SpeakeasyBase {
+    attributeCondition?: string;
+    attributeMapping?: Map<string, string>;
+    aws?: Aws;
+    description?: string;
+    disabled?: boolean;
+    displayName?: string;
+    oidc?: Oidc;
+    saml?: Saml;
 }
 /**
  * A configuration for an external identity provider.

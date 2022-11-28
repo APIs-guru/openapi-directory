@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // TranslateTextGlossaryConfig
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Configures which glossary should be used for a specific target language, and defines options for applying that glossary.
 **/
 export class TranslateTextGlossaryConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=glossary" })
+  @SpeakeasyMetadata({ data: "json, name=glossary" })
   glossary?: string;
 
-  @Metadata({ data: "json, name=ignoreCase" })
+  @SpeakeasyMetadata({ data: "json, name=ignoreCase" })
   ignoreCase?: boolean;
 }

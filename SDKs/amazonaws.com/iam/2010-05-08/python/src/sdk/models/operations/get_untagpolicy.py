@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 
 class GetUntagPolicyActionEnum(str, Enum):
     UNTAG_POLICY = "UntagPolicy"
@@ -10,10 +14,10 @@ class GetUntagPolicyVersionEnum(str, Enum):
 
 @dataclass
 class GetUntagPolicyQueryParams:
-    action: GetUntagPolicyActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    policy_arn: str = field(default=None, metadata={'query_param': { 'field_name': 'PolicyArn', 'style': 'form', 'explode': True }})
-    tag_keys: List[str] = field(default=None, metadata={'query_param': { 'field_name': 'TagKeys', 'style': 'form', 'explode': True }})
-    version: GetUntagPolicyVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: GetUntagPolicyActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    policy_arn: str = field(metadata={'query_param': { 'field_name': 'PolicyArn', 'style': 'form', 'explode': True }})
+    tag_keys: List[str] = field(metadata={'query_param': { 'field_name': 'TagKeys', 'style': 'form', 'explode': True }})
+    version: GetUntagPolicyVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -29,13 +33,13 @@ class GetUntagPolicyHeaders:
 
 @dataclass
 class GetUntagPolicyRequest:
-    query_params: GetUntagPolicyQueryParams = field(default=None)
-    headers: GetUntagPolicyHeaders = field(default=None)
+    headers: GetUntagPolicyHeaders = field()
+    query_params: GetUntagPolicyQueryParams = field()
     
 
 @dataclass
 class GetUntagPolicyResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

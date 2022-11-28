@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Teacher } from "./teacher";
+
 
 
 // ListTeachersResponse
@@ -8,9 +8,9 @@ import { Teacher } from "./teacher";
  * Response when listing teachers.
 **/
 export class ListTeachersResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 
-  @Metadata({ data: "json, name=teachers", elemType: shared.Teacher })
+  @SpeakeasyMetadata({ data: "json, name=teachers", elemType: Teacher })
   teachers?: Teacher[];
 }

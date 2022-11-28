@@ -1,56 +1,57 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class ToolsShareFileMultipartFormDataMedia extends SpeakeasyBase {
-  @Metadata({ data: "multipart_form, content=true" })
+  @SpeakeasyMetadata({ data: "multipart_form, content=true" })
   content: Uint8Array;
 
-  @Metadata({ data: "multipart_form, name=media" })
+  @SpeakeasyMetadata({ data: "multipart_form, name=media" })
   media: string;
 }
 
 
 export class ToolsShareFileMultipartFormData extends SpeakeasyBase {
-  @Metadata({ data: "multipart_form, file=true" })
+  @SpeakeasyMetadata({ data: "multipart_form, file=true" })
   media?: ToolsShareFileMultipartFormDataMedia;
 }
 
 
 export class ToolsShareFileRequests extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/octet-stream" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/octet-stream" })
   applicationOctetStream: Uint8Array;
 
-  @Metadata({ data: "request, media_type=multipart/form-data" })
+  @SpeakeasyMetadata({ data: "request, media_type=multipart/form-data" })
   object?: ToolsShareFileMultipartFormData;
 }
 
 
 export class ToolsShareFileSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   sakariAuth: shared.SchemeSakariAuth;
 }
 
 
 export class ToolsShareFileRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   request: ToolsShareFileRequests;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: ToolsShareFileSecurity;
 }
 
 
 export class ToolsShareFileResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   errorResponse?: shared.ErrorResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   shareFileResponse?: shared.ShareFileResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

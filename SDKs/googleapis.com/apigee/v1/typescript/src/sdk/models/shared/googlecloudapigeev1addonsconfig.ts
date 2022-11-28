@@ -1,28 +1,29 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudApigeeV1AdvancedApiOpsConfig } from "./googlecloudapigeev1advancedapiopsconfig";
-import { GoogleCloudApigeeV1ApiSecurityConfig } from "./googlecloudapigeev1apisecurityconfig";
-import { GoogleCloudApigeeV1ConnectorsPlatformConfig } from "./googlecloudapigeev1connectorsplatformconfig";
+import { GoogleCloudApigeeV1ApiSecurityConfigInput } from "./googlecloudapigeev1apisecurityconfig";
+import { GoogleCloudApigeeV1ConnectorsPlatformConfigInput } from "./googlecloudapigeev1connectorsplatformconfig";
 import { GoogleCloudApigeeV1IntegrationConfig } from "./googlecloudapigeev1integrationconfig";
 import { GoogleCloudApigeeV1MonetizationConfig } from "./googlecloudapigeev1monetizationconfig";
 
 
-// GoogleCloudApigeeV1AddonsConfig
+
+// GoogleCloudApigeeV1AddonsConfigInput
 /** 
  * Add-on configurations for the Apigee organization.
 **/
-export class GoogleCloudApigeeV1AddonsConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=advancedApiOpsConfig" })
+export class GoogleCloudApigeeV1AddonsConfigInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=advancedApiOpsConfig" })
   advancedApiOpsConfig?: GoogleCloudApigeeV1AdvancedApiOpsConfig;
 
-  @Metadata({ data: "json, name=apiSecurityConfig" })
-  apiSecurityConfig?: GoogleCloudApigeeV1ApiSecurityConfig;
+  @SpeakeasyMetadata({ data: "json, name=apiSecurityConfig" })
+  apiSecurityConfig?: GoogleCloudApigeeV1ApiSecurityConfigInput;
 
-  @Metadata({ data: "json, name=connectorsPlatformConfig" })
-  connectorsPlatformConfig?: GoogleCloudApigeeV1ConnectorsPlatformConfig;
+  @SpeakeasyMetadata({ data: "json, name=connectorsPlatformConfig" })
+  connectorsPlatformConfig?: GoogleCloudApigeeV1ConnectorsPlatformConfigInput;
 
-  @Metadata({ data: "json, name=integrationConfig" })
+  @SpeakeasyMetadata({ data: "json, name=integrationConfig" })
   integrationConfig?: GoogleCloudApigeeV1IntegrationConfig;
 
-  @Metadata({ data: "json, name=monetizationConfig" })
+  @SpeakeasyMetadata({ data: "json, name=monetizationConfig" })
   monetizationConfig?: GoogleCloudApigeeV1MonetizationConfig;
 }

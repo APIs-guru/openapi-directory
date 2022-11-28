@@ -8,11 +8,8 @@ type PostVolumesIDActionsResizeRequestBody struct {
 	Size float64 `json:"size"`
 }
 
-type PostVolumesIDActionsResizeRequest struct {
-	PathParams PostVolumesIDActionsResizePathParams
-	Request    *PostVolumesIDActionsResizeRequestBody `request:"mediaType=application/json"`
-}
-
+// PostVolumesIDActionsResizeActionResponseActionError
+// Error message for the Action if error occurred, otherwise null
 type PostVolumesIDActionsResizeActionResponseActionError struct {
 	Code    string `json:"code"`
 	Message string `json:"message"`
@@ -44,6 +41,11 @@ type PostVolumesIDActionsResizeActionResponseAction struct {
 
 type PostVolumesIDActionsResizeActionResponse struct {
 	Action PostVolumesIDActionsResizeActionResponseAction `json:"action"`
+}
+
+type PostVolumesIDActionsResizeRequest struct {
+	PathParams PostVolumesIDActionsResizePathParams
+	Request    *PostVolumesIDActionsResizeRequestBody `request:"mediaType=application/json"`
 }
 
 type PostVolumesIDActionsResizeResponse struct {

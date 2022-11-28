@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { LocationsEmbeddedObject } from "./locationsembeddedobject";
 import { Links } from "./links";
 export declare class LocationsHalResponse extends SpeakeasyBase {

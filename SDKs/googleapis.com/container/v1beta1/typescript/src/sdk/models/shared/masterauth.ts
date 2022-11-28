@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ClientCertificateConfig } from "./clientcertificateconfig";
+
 
 
 // MasterAuth
@@ -7,21 +8,21 @@ import { ClientCertificateConfig } from "./clientcertificateconfig";
  * The authentication information for accessing the master endpoint. Authentication can be done using HTTP basic auth or using client certificates.
 **/
 export class MasterAuth extends SpeakeasyBase {
-  @Metadata({ data: "json, name=clientCertificate" })
+  @SpeakeasyMetadata({ data: "json, name=clientCertificate" })
   clientCertificate?: string;
 
-  @Metadata({ data: "json, name=clientCertificateConfig" })
+  @SpeakeasyMetadata({ data: "json, name=clientCertificateConfig" })
   clientCertificateConfig?: ClientCertificateConfig;
 
-  @Metadata({ data: "json, name=clientKey" })
+  @SpeakeasyMetadata({ data: "json, name=clientKey" })
   clientKey?: string;
 
-  @Metadata({ data: "json, name=clusterCaCertificate" })
+  @SpeakeasyMetadata({ data: "json, name=clusterCaCertificate" })
   clusterCaCertificate?: string;
 
-  @Metadata({ data: "json, name=password" })
+  @SpeakeasyMetadata({ data: "json, name=password" })
   password?: string;
 
-  @Metadata({ data: "json, name=username" })
+  @SpeakeasyMetadata({ data: "json, name=username" })
   username?: string;
 }

@@ -1,5 +1,7 @@
 package shared
 
+// JobBookmarkEntry
+// Defines a point that a job can resume processing.
 type JobBookmarkEntry struct {
 	Attempt       *int64  `json:"Attempt,omitempty"`
 	JobBookmark   *string `json:"JobBookmark,omitempty"`

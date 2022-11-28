@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class StreamingImageEncryptionConfigurationKeyTypeEnum(str, Enum):
     CUSTOMER_MANAGED_KEY = "CUSTOMER_MANAGED_KEY"

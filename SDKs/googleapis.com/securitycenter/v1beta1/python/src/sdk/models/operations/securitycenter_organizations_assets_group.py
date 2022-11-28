@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class SecuritycenterOrganizationsAssetsGroupPathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,21 +26,21 @@ class SecuritycenterOrganizationsAssetsGroupQueryParams:
 
 @dataclass
 class SecuritycenterOrganizationsAssetsGroupSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class SecuritycenterOrganizationsAssetsGroupRequest:
-    path_params: SecuritycenterOrganizationsAssetsGroupPathParams = field(default=None)
-    query_params: SecuritycenterOrganizationsAssetsGroupQueryParams = field(default=None)
+    path_params: SecuritycenterOrganizationsAssetsGroupPathParams = field()
+    query_params: SecuritycenterOrganizationsAssetsGroupQueryParams = field()
+    security: SecuritycenterOrganizationsAssetsGroupSecurity = field()
     request: Optional[shared.GroupAssetsRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: SecuritycenterOrganizationsAssetsGroupSecurity = field(default=None)
     
 
 @dataclass
 class SecuritycenterOrganizationsAssetsGroupResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     group_assets_response: Optional[shared.GroupAssetsResponse] = field(default=None)
-    status_code: int = field(default=None)
     

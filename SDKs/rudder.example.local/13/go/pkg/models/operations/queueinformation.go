@@ -6,6 +6,8 @@ const (
 	QueueInformation200ApplicationJSONActionEnumQueueInformation QueueInformation200ApplicationJSONActionEnum = "queueInformation"
 )
 
+// QueueInformation200ApplicationJSONData
+// Information about the service
 type QueueInformation200ApplicationJSONData struct {
 	QueueMaxSize   int64 `json:"queueMaxSize"`
 	QueueSaturated bool  `json:"queueSaturated"`

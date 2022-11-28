@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ReadOnly
@@ -6,21 +7,21 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Message type to initiate a read-only transaction.
 **/
 export class ReadOnly extends SpeakeasyBase {
-  @Metadata({ data: "json, name=exactStaleness" })
+  @SpeakeasyMetadata({ data: "json, name=exactStaleness" })
   exactStaleness?: string;
 
-  @Metadata({ data: "json, name=maxStaleness" })
+  @SpeakeasyMetadata({ data: "json, name=maxStaleness" })
   maxStaleness?: string;
 
-  @Metadata({ data: "json, name=minReadTimestamp" })
+  @SpeakeasyMetadata({ data: "json, name=minReadTimestamp" })
   minReadTimestamp?: string;
 
-  @Metadata({ data: "json, name=readTimestamp" })
+  @SpeakeasyMetadata({ data: "json, name=readTimestamp" })
   readTimestamp?: string;
 
-  @Metadata({ data: "json, name=returnReadTimestamp" })
+  @SpeakeasyMetadata({ data: "json, name=returnReadTimestamp" })
   returnReadTimestamp?: boolean;
 
-  @Metadata({ data: "json, name=strong" })
+  @SpeakeasyMetadata({ data: "json, name=strong" })
   strong?: boolean;
 }

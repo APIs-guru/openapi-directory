@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { OrderFilterCriteria } from "./orderfiltercriteria";
+
 
 
 // CreateOrderTaskRequest
@@ -7,12 +8,12 @@ import { OrderFilterCriteria } from "./orderfiltercriteria";
  * The type that defines the fields for the createOrderTask request.
 **/
 export class CreateOrderTaskRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=feedType" })
+  @SpeakeasyMetadata({ data: "json, name=feedType" })
   feedType?: string;
 
-  @Metadata({ data: "json, name=filterCriteria" })
+  @SpeakeasyMetadata({ data: "json, name=filterCriteria" })
   filterCriteria?: OrderFilterCriteria;
 
-  @Metadata({ data: "json, name=schemaVersion" })
+  @SpeakeasyMetadata({ data: "json, name=schemaVersion" })
   schemaVersion?: string;
 }

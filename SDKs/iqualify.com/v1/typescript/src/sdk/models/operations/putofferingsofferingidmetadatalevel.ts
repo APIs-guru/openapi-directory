@@ -1,38 +1,39 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class PutOfferingsOfferingIdMetadataLevelPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=offeringId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=offeringId" })
   offeringId: string;
 }
 
 
 export class PutOfferingsOfferingIdMetadataLevelRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=level" })
+  @SpeakeasyMetadata({ data: "json, name=level" })
   level?: string;
 }
 
 
 export class PutOfferingsOfferingIdMetadataLevelRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: PutOfferingsOfferingIdMetadataLevelPathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: PutOfferingsOfferingIdMetadataLevelRequestBody;
 }
 
 
 export class PutOfferingsOfferingIdMetadataLevelResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   error?: shared.Error;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   offeringMetadataResponse?: shared.OfferingMetadataResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

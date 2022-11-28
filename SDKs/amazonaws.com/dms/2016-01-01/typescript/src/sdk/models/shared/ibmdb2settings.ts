@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // IbmDb2Settings
@@ -6,33 +7,33 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Provides information that defines an IBM Db2 LUW endpoint.
 **/
 export class IbmDb2Settings extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CurrentLsn" })
+  @SpeakeasyMetadata({ data: "json, name=CurrentLsn" })
   currentLsn?: string;
 
-  @Metadata({ data: "json, name=DatabaseName" })
+  @SpeakeasyMetadata({ data: "json, name=DatabaseName" })
   databaseName?: string;
 
-  @Metadata({ data: "json, name=MaxKBytesPerRead" })
+  @SpeakeasyMetadata({ data: "json, name=MaxKBytesPerRead" })
   maxKBytesPerRead?: number;
 
-  @Metadata({ data: "json, name=Password" })
+  @SpeakeasyMetadata({ data: "json, name=Password" })
   password?: string;
 
-  @Metadata({ data: "json, name=Port" })
+  @SpeakeasyMetadata({ data: "json, name=Port" })
   port?: number;
 
-  @Metadata({ data: "json, name=SecretsManagerAccessRoleArn" })
+  @SpeakeasyMetadata({ data: "json, name=SecretsManagerAccessRoleArn" })
   secretsManagerAccessRoleArn?: string;
 
-  @Metadata({ data: "json, name=SecretsManagerSecretId" })
+  @SpeakeasyMetadata({ data: "json, name=SecretsManagerSecretId" })
   secretsManagerSecretId?: string;
 
-  @Metadata({ data: "json, name=ServerName" })
+  @SpeakeasyMetadata({ data: "json, name=ServerName" })
   serverName?: string;
 
-  @Metadata({ data: "json, name=SetDataCaptureChanges" })
+  @SpeakeasyMetadata({ data: "json, name=SetDataCaptureChanges" })
   setDataCaptureChanges?: boolean;
 
-  @Metadata({ data: "json, name=Username" })
+  @SpeakeasyMetadata({ data: "json, name=Username" })
   username?: string;
 }

@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class ProximitybeaconBeaconsAttachmentsDeletePathParams:
-    attachment_name: str = field(default=None, metadata={'path_param': { 'field_name': 'attachmentName', 'style': 'simple', 'explode': False }})
+    attachment_name: str = field(metadata={'path_param': { 'field_name': 'attachmentName', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,20 +27,20 @@ class ProximitybeaconBeaconsAttachmentsDeleteQueryParams:
 
 @dataclass
 class ProximitybeaconBeaconsAttachmentsDeleteSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class ProximitybeaconBeaconsAttachmentsDeleteRequest:
-    path_params: ProximitybeaconBeaconsAttachmentsDeletePathParams = field(default=None)
-    query_params: ProximitybeaconBeaconsAttachmentsDeleteQueryParams = field(default=None)
-    security: ProximitybeaconBeaconsAttachmentsDeleteSecurity = field(default=None)
+    path_params: ProximitybeaconBeaconsAttachmentsDeletePathParams = field()
+    query_params: ProximitybeaconBeaconsAttachmentsDeleteQueryParams = field()
+    security: ProximitybeaconBeaconsAttachmentsDeleteSecurity = field()
     
 
 @dataclass
 class ProximitybeaconBeaconsAttachmentsDeleteResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     empty: Optional[dict[str, Any]] = field(default=None)
-    status_code: int = field(default=None)
     

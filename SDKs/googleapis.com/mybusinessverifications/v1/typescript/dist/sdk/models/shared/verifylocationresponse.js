@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Verification } from "./verification";
 // VerifyLocationResponse
 /**
@@ -34,7 +34,7 @@ var VerifyLocationResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=verification" }),
+        SpeakeasyMetadata({ data: "json, name=verification" }),
         __metadata("design:type", Verification)
     ], VerifyLocationResponse.prototype, "verification", void 0);
     return VerifyLocationResponse;

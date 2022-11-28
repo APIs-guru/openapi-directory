@@ -1,9 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum ProjectEntityGlobalAccessEnum {
-    None = "none"
-,    AnyoneWithRead = "anyone_with_read"
-,    AnyoneWithFull = "anyone_with_full"
+    None = "none",
+    AnyoneWithRead = "anyone_with_read",
+    AnyoneWithFull = "anyone_with_full"
 }
 
 
@@ -12,9 +13,9 @@ export enum ProjectEntityGlobalAccessEnum {
  * List Projects
 **/
 export class ProjectEntity extends SpeakeasyBase {
-  @Metadata({ data: "json, name=global_access" })
+  @SpeakeasyMetadata({ data: "json, name=global_access" })
   globalAccess?: ProjectEntityGlobalAccessEnum;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: number;
 }

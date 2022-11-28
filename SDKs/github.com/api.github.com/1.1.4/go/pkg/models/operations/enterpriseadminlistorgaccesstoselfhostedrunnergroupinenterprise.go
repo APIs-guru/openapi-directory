@@ -14,14 +14,14 @@ type EnterpriseAdminListOrgAccessToSelfHostedRunnerGroupInEnterpriseQueryParams 
 	PerPage *int64 `queryParam:"style=form,explode=true,name=per_page"`
 }
 
-type EnterpriseAdminListOrgAccessToSelfHostedRunnerGroupInEnterpriseRequest struct {
-	PathParams  EnterpriseAdminListOrgAccessToSelfHostedRunnerGroupInEnterprisePathParams
-	QueryParams EnterpriseAdminListOrgAccessToSelfHostedRunnerGroupInEnterpriseQueryParams
-}
-
 type EnterpriseAdminListOrgAccessToSelfHostedRunnerGroupInEnterprise200ApplicationJSON struct {
 	Organizations []shared.OrganizationSimple `json:"organizations"`
 	TotalCount    float64                     `json:"total_count"`
+}
+
+type EnterpriseAdminListOrgAccessToSelfHostedRunnerGroupInEnterpriseRequest struct {
+	PathParams  EnterpriseAdminListOrgAccessToSelfHostedRunnerGroupInEnterprisePathParams
+	QueryParams EnterpriseAdminListOrgAccessToSelfHostedRunnerGroupInEnterpriseQueryParams
 }
 
 type EnterpriseAdminListOrgAccessToSelfHostedRunnerGroupInEnterpriseResponse struct {

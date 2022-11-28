@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { Credentials } from "./credentials";
 import { Name } from "./name";
 export declare class Teacher extends SpeakeasyBase {

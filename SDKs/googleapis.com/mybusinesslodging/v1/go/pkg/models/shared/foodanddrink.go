@@ -108,6 +108,8 @@ const (
 	FoodAndDrinkVendingMachineExceptionEnumDependentOnDayOfWeek FoodAndDrinkVendingMachineExceptionEnum = "DEPENDENT_ON_DAY_OF_WEEK"
 )
 
+// FoodAndDrink
+// Meals, snacks, and beverages available at the property.
 type FoodAndDrink struct {
 	Bar                                *bool                                               `json:"bar,omitempty"`
 	BarException                       *FoodAndDrinkBarExceptionEnum                       `json:"barException,omitempty"`

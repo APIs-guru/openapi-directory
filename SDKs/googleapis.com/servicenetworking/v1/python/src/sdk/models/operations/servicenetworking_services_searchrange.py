@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class ServicenetworkingServicesSearchRangePathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,14 +26,14 @@ class ServicenetworkingServicesSearchRangeQueryParams:
 
 @dataclass
 class ServicenetworkingServicesSearchRangeSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class ServicenetworkingServicesSearchRangeSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -43,15 +44,15 @@ class ServicenetworkingServicesSearchRangeSecurity:
 
 @dataclass
 class ServicenetworkingServicesSearchRangeRequest:
-    path_params: ServicenetworkingServicesSearchRangePathParams = field(default=None)
-    query_params: ServicenetworkingServicesSearchRangeQueryParams = field(default=None)
+    path_params: ServicenetworkingServicesSearchRangePathParams = field()
+    query_params: ServicenetworkingServicesSearchRangeQueryParams = field()
+    security: ServicenetworkingServicesSearchRangeSecurity = field()
     request: Optional[shared.SearchRangeRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: ServicenetworkingServicesSearchRangeSecurity = field(default=None)
     
 
 @dataclass
 class ServicenetworkingServicesSearchRangeResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     operation: Optional[shared.Operation] = field(default=None)
-    status_code: int = field(default=None)
     

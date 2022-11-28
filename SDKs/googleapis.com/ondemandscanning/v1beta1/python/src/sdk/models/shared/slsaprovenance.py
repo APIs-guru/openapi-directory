@@ -1,17 +1,15 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import slsabuilder
-from . import material
-from . import slsametadata
-from . import slsarecipe
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class SlsaProvenance:
-    builder: Optional[slsabuilder.SlsaBuilder] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'builder' }})
-    materials: Optional[List[material.Material]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'materials' }})
-    metadata: Optional[slsametadata.SlsaMetadata] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'metadata' }})
-    recipe: Optional[slsarecipe.SlsaRecipe] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'recipe' }})
+    builder: Optional[SlsaBuilder] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('builder') }})
+    materials: Optional[List[Material]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('materials') }})
+    metadata: Optional[SlsaMetadata] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('metadata') }})
+    recipe: Optional[SlsaRecipe] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('recipe') }})
     

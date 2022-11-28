@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 
 class GetUntagMfaDeviceActionEnum(str, Enum):
     UNTAG_MFA_DEVICE = "UntagMFADevice"
@@ -10,10 +14,10 @@ class GetUntagMfaDeviceVersionEnum(str, Enum):
 
 @dataclass
 class GetUntagMfaDeviceQueryParams:
-    action: GetUntagMfaDeviceActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    serial_number: str = field(default=None, metadata={'query_param': { 'field_name': 'SerialNumber', 'style': 'form', 'explode': True }})
-    tag_keys: List[str] = field(default=None, metadata={'query_param': { 'field_name': 'TagKeys', 'style': 'form', 'explode': True }})
-    version: GetUntagMfaDeviceVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: GetUntagMfaDeviceActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    serial_number: str = field(metadata={'query_param': { 'field_name': 'SerialNumber', 'style': 'form', 'explode': True }})
+    tag_keys: List[str] = field(metadata={'query_param': { 'field_name': 'TagKeys', 'style': 'form', 'explode': True }})
+    version: GetUntagMfaDeviceVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -29,13 +33,13 @@ class GetUntagMfaDeviceHeaders:
 
 @dataclass
 class GetUntagMfaDeviceRequest:
-    query_params: GetUntagMfaDeviceQueryParams = field(default=None)
-    headers: GetUntagMfaDeviceHeaders = field(default=None)
+    headers: GetUntagMfaDeviceHeaders = field()
+    query_params: GetUntagMfaDeviceQueryParams = field()
     
 
 @dataclass
 class GetUntagMfaDeviceResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

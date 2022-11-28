@@ -9,7 +9,9 @@ from .tpu_projects_locations_nodes_simulatemaintenanceevent import *
 from .tpu_projects_locations_nodes_start import *
 from .tpu_projects_locations_nodes_stop import *
 from .tpu_projects_locations_operations_cancel import *
-from .tpu_projects_locations_operations_delete import *
 from .tpu_projects_locations_operations_list import *
+from .tpu_projects_locations_queuedresources_create import *
+from .tpu_projects_locations_queuedresources_delete import *
+from .tpu_projects_locations_queuedresources_list import *
 from .tpu_projects_locations_runtimeversions_get import *
 from .tpu_projects_locations_runtimeversions_list import *

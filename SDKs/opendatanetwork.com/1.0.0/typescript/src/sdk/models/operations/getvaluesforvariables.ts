@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum GetValuesForVariablesFormatEnum {
     Google = "google"
@@ -6,45 +7,45 @@ export enum GetValuesForVariablesFormatEnum {
 
 
 export class GetValuesForVariablesQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=app_token" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=app_token" })
   appToken?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=describe" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=describe" })
   describe?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=entity_id" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=entity_id" })
   entityId?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=forecast" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=forecast" })
   forecast?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=format" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=format" })
   format?: GetValuesForVariablesFormatEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=variable" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=variable" })
   variable: string;
 }
 
 
 export class GetValuesForVariablesHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-App-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-App-Token" })
   xAppToken?: string;
 }
 
 
 export class GetValuesForVariablesRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetValuesForVariablesQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: GetValuesForVariablesHeaders;
 }
 
 
 export class GetValuesForVariablesResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

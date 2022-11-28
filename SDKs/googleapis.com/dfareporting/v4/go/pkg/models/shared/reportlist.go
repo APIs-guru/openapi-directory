@@ -1,5 +1,7 @@
 package shared
 
+// ReportList
+// Represents the list of reports.
 type ReportList struct {
 	Etag          *string  `json:"etag,omitempty"`
 	Items         []Report `json:"items,omitempty"`

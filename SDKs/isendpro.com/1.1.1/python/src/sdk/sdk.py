@@ -1,8 +1,11 @@
-import warnings
+
+
 import requests
-from typing import List,Optional
-from sdk.models import operations, shared
+from typing import Optional
+from sdk.models import shared, operations
 from . import utils
+
+
 
 
 SERVERS = [
@@ -12,35 +15,55 @@ SERVERS = [
 
 
 class SDK:
-    client = requests.Session()
-    server_url = SERVERS[0]
+    
+
+    _client: requests.Session
+    _security_client: requests.Session
+    
+    _server_url: str = SERVERS[0]
+    _language: str = "python"
+    _sdk_version: str = "0.0.1"
+    _gen_version: str = "internal"
+
+    def __init__(self) -> None:
+        self._client = requests.Session()
+        self._security_client = requests.Session()
+        
+
 
     def config_server_url(self, server_url: str, params: dict[str, str]):
-        if not params is None:
-            self.server_url = utils.replace_parameters(server_url, params)
+        if params is not None:
+            self._server_url = utils.replace_parameters(server_url, params)
         else:
-            self.server_url = server_url
-            
+            self._server_url = server_url
+
+        
     
 
+    def config_client(self, client: requests.Session):
+        self._client = client
+        
+    
+    
     
     def add_shortlink(self, request: operations.AddShortlinkRequest) -> operations.AddShortlinkResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""add a shortlink
+        add a shortlink
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/shortlink"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -59,22 +82,23 @@ class SDK:
 
     
     def comptage(self, request: operations.ComptageRequest) -> operations.ComptageResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Compter le nombre de caractère 
+        Compte le nombre de SMS necessaire à un envoi
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/comptage"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -93,15 +117,18 @@ class SDK:
 
     
     def del_liste_noire(self, request: operations.DelListeNoireRequest) -> operations.DelListeNoireResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Ajoute un numero en liste noire
+        Supprime un numero en liste noire
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/dellistenoire"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -120,15 +147,23 @@ class SDK:
 
     
     def get_campagne(self, request: operations.GetCampagneRequest) -> operations.GetCampagneResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retourne les SMS envoyés sur une période donnée
+        Retourne les SMS envoyés sur une période donnée en fonction d'une date de début et d'une date de fin. 
+        
+        Les dates sont au format YYYY-MM-DD hh:mm. 
+        
+        Le fichier rapport de campagne est sous la forme d'un fichier zip + contenant un fichier csv contenant le détail des envois.
+        
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/campagne"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -151,15 +186,19 @@ class SDK:
 
     
     def get_credit(self, request: operations.GetCreditRequest) -> operations.GetCreditResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Interrogation credit
+        Retourne le credit existant associe au compte.
+        
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/credit"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -178,22 +217,24 @@ class SDK:
 
     
     def get_hlr(self, request: operations.GetHlrRequest) -> operations.GetHlrResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Vérifier la validité d'un numéro
+        Réalise un lookup HLR sur les numéros 
+        
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/hlr"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -212,15 +253,18 @@ class SDK:
 
     
     def get_liste_noire(self, request: operations.GetListeNoireRequest) -> operations.GetListeNoireResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retourne le liste noire
+        Retourne un fichier csv zippé contenant la liste noire
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/getlistenoire"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -239,22 +283,23 @@ class SDK:
 
     
     def repertoire(self, request: operations.RepertoireRequest) -> operations.RepertoireResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Gestion repertoire (modification)
+        Ajoute ou supprime une liste de numéros à un répertoire existant.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/repertoire"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -273,22 +318,23 @@ class SDK:
 
     
     def repertoire_crea(self, request: operations.RepertoireCreaRequest) -> operations.RepertoireCreaResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Gestion repertoire (creation)
+        Cree un nouveau répertoire et retourne son identifiant. Cet identifiant pourra être utilisé pour ajouter ou supprimer des numéros via l'API.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/repertoire"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -307,22 +353,23 @@ class SDK:
 
     
     def send_sms(self, request: operations.SendSmsRequest) -> operations.SendSmsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Envoyer un sms
+        Envoi un sms vers un unique destinataire
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/sms"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -341,22 +388,24 @@ class SDK:
 
     
     def send_sms_multi(self, request: operations.SendSmsMultiRequest) -> operations.SendSmsMultiResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Envoyer des SMS
+        Envoi de SMS vers 1 ou plusieurs destinataires
+        
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/smsmulti"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -375,15 +424,18 @@ class SDK:
 
     
     def set_liste_noire(self, request: operations.SetListeNoireRequest) -> operations.SetListeNoireResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Ajoute un numero en liste noire
+        Ajoute un numero en liste noire. Une fois ajouté, les requêtes d'envoi de SMS marketing vers ce numéro seront refusées.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/setlistenoire"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -402,22 +454,23 @@ class SDK:
 
     
     def subaccount_add(self, request: operations.SubaccountAddRequest) -> operations.SubaccountAddResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Ajoute un sous compte
+        Ajoute un sous compte
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/subaccount"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -436,22 +489,23 @@ class SDK:
 
     
     def subaccount_edit(self, request: operations.SubaccountEditRequest) -> operations.SubaccountEditResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Edit a subaccount
+        Edit a subaccount
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/subaccount"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 

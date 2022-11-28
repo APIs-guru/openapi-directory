@@ -4,7 +4,7 @@ from typing import Any,List,Optional
 
 @dataclass
 class GetOrganizationApplianceUplinkStatusesPathParams:
-    organization_id: str = field(default=None, metadata={'path_param': { 'field_name': 'organizationId', 'style': 'simple', 'explode': False }})
+    organization_id: str = field(metadata={'path_param': { 'field_name': 'organizationId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -19,14 +19,14 @@ class GetOrganizationApplianceUplinkStatusesQueryParams:
 
 @dataclass
 class GetOrganizationApplianceUplinkStatusesRequest:
-    path_params: GetOrganizationApplianceUplinkStatusesPathParams = field(default=None)
-    query_params: GetOrganizationApplianceUplinkStatusesQueryParams = field(default=None)
+    path_params: GetOrganizationApplianceUplinkStatusesPathParams = field()
+    query_params: GetOrganizationApplianceUplinkStatusesQueryParams = field()
     
 
 @dataclass
 class GetOrganizationApplianceUplinkStatusesResponse:
-    content_type: str = field(default=None)
-    headers: dict[str, List[str]] = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    headers: dict[str, List[str]] = field()
+    status_code: int = field()
     get_organization_appliance_uplink_statuses_200_application_json_object: Optional[dict[str, Any]] = field(default=None)
     

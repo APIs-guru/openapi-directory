@@ -8,6 +8,8 @@ const (
 	GoogleCloudDialogflowV2beta1IntentTrainingPhraseTypeEnumTemplate        GoogleCloudDialogflowV2beta1IntentTrainingPhraseTypeEnum = "TEMPLATE"
 )
 
+// GoogleCloudDialogflowV2beta1IntentTrainingPhrase
+// Represents an example that the agent is trained on.
 type GoogleCloudDialogflowV2beta1IntentTrainingPhrase struct {
 	Name            *string                                                   `json:"name,omitempty"`
 	Parts           []GoogleCloudDialogflowV2beta1IntentTrainingPhrasePart    `json:"parts,omitempty"`

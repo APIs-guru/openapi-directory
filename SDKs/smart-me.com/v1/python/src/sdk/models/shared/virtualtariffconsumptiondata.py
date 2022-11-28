@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class VirtualTariffConsumptionDataTariffTypeEnum(str, Enum):
     BATTERY = "Battery"
@@ -11,9 +13,13 @@ class VirtualTariffConsumptionDataTariffTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class VirtualTariffConsumptionData:
-    consumption: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Consumption' }})
-    currency: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Currency' }})
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Name' }})
-    price: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Price' }})
-    tariff_type: Optional[VirtualTariffConsumptionDataTariffTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'TariffType' }})
+    r"""VirtualTariffConsumptionData
+    Container class for the virtual tariff consumption
+    """
+    
+    consumption: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Consumption') }})
+    currency: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Currency') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Name') }})
+    price: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Price') }})
+    tariff_type: Optional[VirtualTariffConsumptionDataTariffTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('TariffType') }})
     

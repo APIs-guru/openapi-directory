@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ListCollectionsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CollectionIds" })
+  @SpeakeasyMetadata({ data: "json, name=CollectionIds" })
   collectionIds?: string[];
 
-  @Metadata({ data: "json, name=FaceModelVersions" })
+  @SpeakeasyMetadata({ data: "json, name=FaceModelVersions" })
   faceModelVersions?: string[];
 
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 }

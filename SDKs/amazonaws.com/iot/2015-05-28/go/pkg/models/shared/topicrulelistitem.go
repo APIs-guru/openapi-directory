@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// TopicRuleListItem
+// Describes a rule.
 type TopicRuleListItem struct {
 	CreatedAt    *time.Time `json:"createdAt,omitempty"`
 	RuleArn      *string    `json:"ruleArn,omitempty"`

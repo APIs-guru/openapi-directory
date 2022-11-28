@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { OcrPageResultWithLinesWithLocation } from "./ocrpageresultwithlineswithlocation";
+
 
 
 // PdfToLinesWithLocationResult
@@ -8,9 +8,9 @@ import { OcrPageResultWithLinesWithLocation } from "./ocrpageresultwithlineswith
  * Response from an OCR to lines with location operation.  Includes the confience rating and converted text result, along with the locations of the lines in the pages.
 **/
 export class PdfToLinesWithLocationResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=OcrPages", elemType: shared.OcrPageResultWithLinesWithLocation })
+  @SpeakeasyMetadata({ data: "json, name=OcrPages", elemType: OcrPageResultWithLinesWithLocation })
   ocrPages?: OcrPageResultWithLinesWithLocation[];
 
-  @Metadata({ data: "json, name=Successful" })
+  @SpeakeasyMetadata({ data: "json, name=Successful" })
   successful?: boolean;
 }

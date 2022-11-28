@@ -1,31 +1,32 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetAdministrationUserEntityIdPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=entityId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=entityId" })
   entityId: number;
 }
 
 
 export class GetAdministrationUserEntityIdHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Token" })
   token?: string;
 }
 
 
 export class GetAdministrationUserEntityIdRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetAdministrationUserEntityIdPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: GetAdministrationUserEntityIdHeaders;
 }
 
 
 export class GetAdministrationUserEntityIdResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

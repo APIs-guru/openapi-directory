@@ -1,53 +1,54 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum ChartDataResponseResultStatusEnum {
-    Stopped = "stopped"
-,    Failed = "failed"
-,    Pending = "pending"
-,    Running = "running"
-,    Scheduled = "scheduled"
-,    Success = "success"
-,    TimedOut = "timed_out"
+    Stopped = "stopped",
+    Failed = "failed",
+    Pending = "pending",
+    Running = "running",
+    Scheduled = "scheduled",
+    Success = "success",
+    TimedOut = "timed_out"
 }
 
 
 export class ChartDataResponseResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=annotation_data" })
+  @SpeakeasyMetadata({ data: "json, name=annotation_data" })
   annotationData?: Map<string, string>[];
 
-  @Metadata({ data: "json, name=applied_filters" })
+  @SpeakeasyMetadata({ data: "json, name=applied_filters" })
   appliedFilters?: Map<string, any>[];
 
-  @Metadata({ data: "json, name=cache_key" })
+  @SpeakeasyMetadata({ data: "json, name=cache_key" })
   cacheKey: string;
 
-  @Metadata({ data: "json, name=cache_timeout" })
+  @SpeakeasyMetadata({ data: "json, name=cache_timeout" })
   cacheTimeout: number;
 
-  @Metadata({ data: "json, name=cached_dttm" })
+  @SpeakeasyMetadata({ data: "json, name=cached_dttm" })
   cachedDttm: string;
 
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data?: Map<string, any>[];
 
-  @Metadata({ data: "json, name=error" })
+  @SpeakeasyMetadata({ data: "json, name=error" })
   error?: string;
 
-  @Metadata({ data: "json, name=is_cached" })
+  @SpeakeasyMetadata({ data: "json, name=is_cached" })
   isCached: boolean;
 
-  @Metadata({ data: "json, name=query" })
+  @SpeakeasyMetadata({ data: "json, name=query" })
   query: string;
 
-  @Metadata({ data: "json, name=rejected_filters" })
+  @SpeakeasyMetadata({ data: "json, name=rejected_filters" })
   rejectedFilters?: Map<string, any>[];
 
-  @Metadata({ data: "json, name=rowcount" })
+  @SpeakeasyMetadata({ data: "json, name=rowcount" })
   rowcount?: number;
 
-  @Metadata({ data: "json, name=stacktrace" })
+  @SpeakeasyMetadata({ data: "json, name=stacktrace" })
   stacktrace?: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: ChartDataResponseResultStatusEnum;
 }

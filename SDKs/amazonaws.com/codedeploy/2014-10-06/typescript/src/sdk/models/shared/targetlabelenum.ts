@@ -1,6 +1,7 @@
 
 
+
 export enum TargetLabelEnum {
-    Blue = "Blue"
-,    Green = "Green"
+    Blue = "Blue",
+    Green = "Green"
 }

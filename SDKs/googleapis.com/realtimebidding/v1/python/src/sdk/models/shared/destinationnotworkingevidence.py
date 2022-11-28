@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class DestinationNotWorkingEvidenceDNSErrorEnum(str, Enum):
     DNS_ERROR_UNSPECIFIED = "DNS_ERROR_UNSPECIFIED"
@@ -34,12 +36,16 @@ class DestinationNotWorkingEvidenceURLRejectedEnum(str, Enum):
 @dataclass_json
 @dataclass
 class DestinationNotWorkingEvidence:
-    dns_error: Optional[DestinationNotWorkingEvidenceDNSErrorEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'dnsError' }})
-    expanded_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'expandedUrl' }})
-    http_error: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'httpError' }})
-    invalid_page: Optional[DestinationNotWorkingEvidenceInvalidPageEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'invalidPage' }})
-    last_check_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'lastCheckTime' }})
-    platform: Optional[DestinationNotWorkingEvidencePlatformEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'platform' }})
-    redirection_error: Optional[DestinationNotWorkingEvidenceRedirectionErrorEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'redirectionError' }})
-    url_rejected: Optional[DestinationNotWorkingEvidenceURLRejectedEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'urlRejected' }})
+    r"""DestinationNotWorkingEvidence
+    Evidence of the creative's destination URL not functioning properly or having been incorrectly set up.
+    """
+    
+    dns_error: Optional[DestinationNotWorkingEvidenceDNSErrorEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('dnsError') }})
+    expanded_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('expandedUrl') }})
+    http_error: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('httpError') }})
+    invalid_page: Optional[DestinationNotWorkingEvidenceInvalidPageEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('invalidPage') }})
+    last_check_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('lastCheckTime') }})
+    platform: Optional[DestinationNotWorkingEvidencePlatformEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('platform') }})
+    redirection_error: Optional[DestinationNotWorkingEvidenceRedirectionErrorEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('redirectionError') }})
+    url_rejected: Optional[DestinationNotWorkingEvidenceURLRejectedEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('urlRejected') }})
     

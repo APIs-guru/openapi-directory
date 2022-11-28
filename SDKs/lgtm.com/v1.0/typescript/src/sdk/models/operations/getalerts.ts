@@ -1,53 +1,54 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetAlertsPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=analysis-id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=analysis-id" })
   analysisId: string;
 }
 
 
 export class GetAlertsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=excluded-files" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=excluded-files" })
   excludedFiles?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=sarif-version" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sarif-version" })
   sarifVersion?: string;
 }
 
 
 export class GetAlertsSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=bearer" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" })
   accessToken: shared.SchemeAccessToken;
 }
 
 
 export class GetAlertsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetAlertsPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetAlertsQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: GetAlertsSecurity;
 }
 
 
 export class GetAlertsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getAlerts200ApplicationJsonObject?: Map<string, any>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getAlerts200ApplicationSarifPlusJsonObject?: Map<string, any>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getAlerts200TextCsvString?: string;
 }

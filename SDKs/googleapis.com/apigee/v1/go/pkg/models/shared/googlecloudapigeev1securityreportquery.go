@@ -1,5 +1,7 @@
 package shared
 
+// GoogleCloudApigeeV1SecurityReportQuery
+// Body structure when user makes a request to create a security report.
 type GoogleCloudApigeeV1SecurityReportQuery struct {
 	CsvDelimiter       *string                                        `json:"csvDelimiter,omitempty"`
 	Dimensions         []string                                       `json:"dimensions,omitempty"`

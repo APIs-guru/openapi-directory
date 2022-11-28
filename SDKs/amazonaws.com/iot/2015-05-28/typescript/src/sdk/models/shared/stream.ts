@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Stream
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Describes a group of files that can be streamed.
 **/
 export class Stream extends SpeakeasyBase {
-  @Metadata({ data: "json, name=fileId" })
+  @SpeakeasyMetadata({ data: "json, name=fileId" })
   fileId?: number;
 
-  @Metadata({ data: "json, name=streamId" })
+  @SpeakeasyMetadata({ data: "json, name=streamId" })
   streamId?: string;
 }

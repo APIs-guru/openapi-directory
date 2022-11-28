@@ -11,6 +11,8 @@ const (
 	GoogleCloudContactcenterinsightsV1IssueModelStateEnumDeleting         GoogleCloudContactcenterinsightsV1IssueModelStateEnum = "DELETING"
 )
 
+// GoogleCloudContactcenterinsightsV1IssueModel
+// The issue model resource.
 type GoogleCloudContactcenterinsightsV1IssueModel struct {
 	CreateTime      *string                                                      `json:"createTime,omitempty"`
 	DisplayName     *string                                                      `json:"displayName,omitempty"`
@@ -19,4 +21,13 @@ type GoogleCloudContactcenterinsightsV1IssueModel struct {
 	State           *GoogleCloudContactcenterinsightsV1IssueModelStateEnum       `json:"state,omitempty"`
 	TrainingStats   *GoogleCloudContactcenterinsightsV1IssueModelLabelStats      `json:"trainingStats,omitempty"`
 	UpdateTime      *string                                                      `json:"updateTime,omitempty"`
+}
+
+// GoogleCloudContactcenterinsightsV1IssueModelInput
+// The issue model resource.
+type GoogleCloudContactcenterinsightsV1IssueModelInput struct {
+	DisplayName     *string                                                           `json:"displayName,omitempty"`
+	InputDataConfig *GoogleCloudContactcenterinsightsV1IssueModelInputDataConfigInput `json:"inputDataConfig,omitempty"`
+	Name            *string                                                           `json:"name,omitempty"`
+	TrainingStats   *GoogleCloudContactcenterinsightsV1IssueModelLabelStats           `json:"trainingStats,omitempty"`
 }

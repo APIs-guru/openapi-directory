@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class DataReplicationErrorStringEnum(str, Enum):
     AGENT_NOT_SEEN = "AGENT_NOT_SEEN"

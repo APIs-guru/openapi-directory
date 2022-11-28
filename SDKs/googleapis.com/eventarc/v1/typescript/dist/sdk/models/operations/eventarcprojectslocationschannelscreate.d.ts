@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class EventarcProjectsLocationsChannelsCreatePathParams extends SpeakeasyBase {
     parent: string;
@@ -25,7 +25,7 @@ export declare class EventarcProjectsLocationsChannelsCreateSecurity extends Spe
 export declare class EventarcProjectsLocationsChannelsCreateRequest extends SpeakeasyBase {
     pathParams: EventarcProjectsLocationsChannelsCreatePathParams;
     queryParams: EventarcProjectsLocationsChannelsCreateQueryParams;
-    request?: shared.Channel;
+    request?: shared.ChannelInput;
     security: EventarcProjectsLocationsChannelsCreateSecurity;
 }
 export declare class EventarcProjectsLocationsChannelsCreateResponse extends SpeakeasyBase {

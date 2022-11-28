@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Rule } from "./rule";
+
 
 
 // ChannelGrouping
@@ -8,12 +8,12 @@ import { Rule } from "./rule";
  * A channel grouping defines a set of rules that can be used to categorize events in a path report.
 **/
 export class ChannelGrouping extends SpeakeasyBase {
-  @Metadata({ data: "json, name=fallbackName" })
+  @SpeakeasyMetadata({ data: "json, name=fallbackName" })
   fallbackName?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=rules", elemType: shared.Rule })
+  @SpeakeasyMetadata({ data: "json, name=rules", elemType: Rule })
   rules?: Rule[];
 }

@@ -1,16 +1,19 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
-class GetSdkTypesQueryParams:
+class GetSDKTypesQueryParams:
     limit: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'limit', 'style': 'form', 'explode': True }})
     position: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'position', 'style': 'form', 'explode': True }})
     
 
 @dataclass
-class GetSdkTypesHeaders:
+class GetSDKTypesHeaders:
     x_amz_algorithm: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Algorithm', 'style': 'simple', 'explode': False }})
     x_amz_content_sha256: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Content-Sha256', 'style': 'simple', 'explode': False }})
     x_amz_credential: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Credential', 'style': 'simple', 'explode': False }})
@@ -21,18 +24,18 @@ class GetSdkTypesHeaders:
     
 
 @dataclass
-class GetSdkTypesRequest:
-    query_params: GetSdkTypesQueryParams = field(default=None)
-    headers: GetSdkTypesHeaders = field(default=None)
+class GetSDKTypesRequest:
+    headers: GetSDKTypesHeaders = field()
+    query_params: GetSDKTypesQueryParams = field()
     
 
 @dataclass
-class GetSdkTypesResponse:
+class GetSDKTypesResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     not_found_exception: Optional[Any] = field(default=None)
-    sdk_types: Optional[shared.SdkTypes] = field(default=None)
-    status_code: int = field(default=None)
+    sdk_types: Optional[shared.SDKTypes] = field(default=None)
     too_many_requests_exception: Optional[Any] = field(default=None)
     unauthorized_exception: Optional[Any] = field(default=None)
     

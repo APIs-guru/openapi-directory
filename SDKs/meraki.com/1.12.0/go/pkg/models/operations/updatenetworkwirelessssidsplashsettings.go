@@ -5,11 +5,15 @@ type UpdateNetworkWirelessSsidSplashSettingsPathParams struct {
 	Number    string `pathParam:"style=simple,explode=false,name=number"`
 }
 
+// UpdateNetworkWirelessSsidSplashSettingsRequestBodyBillingFreeAccess
+// Details associated with a free access plan with limits.
 type UpdateNetworkWirelessSsidSplashSettingsRequestBodyBillingFreeAccess struct {
 	DurationInMinutes *int64 `json:"durationInMinutes,omitempty"`
 	Enabled           *bool  `json:"enabled,omitempty"`
 }
 
+// UpdateNetworkWirelessSsidSplashSettingsRequestBodyBilling
+// Details associated with billing splash.
 type UpdateNetworkWirelessSsidSplashSettingsRequestBodyBilling struct {
 	FreeAccess                    *UpdateNetworkWirelessSsidSplashSettingsRequestBodyBillingFreeAccess `json:"freeAccess,omitempty"`
 	PrepaidAccessFastLoginEnabled *bool                                                                `json:"prepaidAccessFastLoginEnabled,omitempty"`
@@ -24,6 +28,8 @@ const (
 	UpdateNetworkWirelessSsidSplashSettingsRequestBodyControllerDisconnectionBehaviorEnumDefault    UpdateNetworkWirelessSsidSplashSettingsRequestBodyControllerDisconnectionBehaviorEnum = "default"
 )
 
+// UpdateNetworkWirelessSsidSplashSettingsRequestBodyGuestSponsorship
+// Details associated with guest sponsored splash.
 type UpdateNetworkWirelessSsidSplashSettingsRequestBodyGuestSponsorship struct {
 	DurationInMinutes        *int64 `json:"durationInMinutes,omitempty"`
 	GuestCanRequestTimeframe *bool  `json:"guestCanRequestTimeframe,omitempty"`
@@ -37,26 +43,36 @@ const (
 	UpdateNetworkWirelessSsidSplashSettingsRequestBodySentryEnrollmentStrengthEnumStrict       UpdateNetworkWirelessSsidSplashSettingsRequestBodySentryEnrollmentStrengthEnum = "strict"
 )
 
+// UpdateNetworkWirelessSsidSplashSettingsRequestBodySentryEnrollmentSystemsManagerNetwork
+// Systems Manager network targeted for sentry enrollment.
 type UpdateNetworkWirelessSsidSplashSettingsRequestBodySentryEnrollmentSystemsManagerNetwork struct {
 	ID string `json:"id"`
 }
 
+// UpdateNetworkWirelessSsidSplashSettingsRequestBodySentryEnrollment
+// Systems Manager sentry enrollment splash settings.
 type UpdateNetworkWirelessSsidSplashSettingsRequestBodySentryEnrollment struct {
 	EnforcedSystems       []string                                                                                 `json:"enforcedSystems,omitempty"`
 	Strength              *UpdateNetworkWirelessSsidSplashSettingsRequestBodySentryEnrollmentStrengthEnum          `json:"strength,omitempty"`
 	SystemsManagerNetwork *UpdateNetworkWirelessSsidSplashSettingsRequestBodySentryEnrollmentSystemsManagerNetwork `json:"systemsManagerNetwork,omitempty"`
 }
 
+// UpdateNetworkWirelessSsidSplashSettingsRequestBodySplashImage
+// The image used in the splash page.
 type UpdateNetworkWirelessSsidSplashSettingsRequestBodySplashImage struct {
 	Extension *string `json:"extension,omitempty"`
 	Md5       *string `json:"md5,omitempty"`
 }
 
+// UpdateNetworkWirelessSsidSplashSettingsRequestBodySplashLogo
+// The logo used in the splash page.
 type UpdateNetworkWirelessSsidSplashSettingsRequestBodySplashLogo struct {
 	Extension *string `json:"extension,omitempty"`
 	Md5       *string `json:"md5,omitempty"`
 }
 
+// UpdateNetworkWirelessSsidSplashSettingsRequestBodySplashPrepaidFront
+// The prepaid front image used in the splash page.
 type UpdateNetworkWirelessSsidSplashSettingsRequestBodySplashPrepaidFront struct {
 	Extension *string `json:"extension,omitempty"`
 	Md5       *string `json:"md5,omitempty"`

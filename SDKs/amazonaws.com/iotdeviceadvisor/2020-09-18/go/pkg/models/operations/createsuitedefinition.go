@@ -14,6 +14,8 @@ type CreateSuiteDefinitionHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// CreateSuiteDefinitionRequestBodySuiteDefinitionConfiguration
+// Gets Suite Definition Configuration.
 type CreateSuiteDefinitionRequestBodySuiteDefinitionConfiguration struct {
 	DevicePermissionRoleArn  *string                  `json:"devicePermissionRoleArn,omitempty"`
 	Devices                  []shared.DeviceUnderTest `json:"devices,omitempty"`

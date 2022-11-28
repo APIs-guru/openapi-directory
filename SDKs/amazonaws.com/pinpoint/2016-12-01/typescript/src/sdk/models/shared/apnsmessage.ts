@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ActionEnum } from "./actionenum";
+
 
 
 // ApnsMessage
@@ -7,57 +8,57 @@ import { ActionEnum } from "./actionenum";
  * Specifies the settings for a one-time message that's sent directly to an endpoint through the APNs (Apple Push Notification service) channel.
 **/
 export class ApnsMessage extends SpeakeasyBase {
-  @Metadata({ data: "json, name=APNSPushType" })
+  @SpeakeasyMetadata({ data: "json, name=APNSPushType" })
   apnsPushType?: string;
 
-  @Metadata({ data: "json, name=Action" })
+  @SpeakeasyMetadata({ data: "json, name=Action" })
   action?: ActionEnum;
 
-  @Metadata({ data: "json, name=Badge" })
+  @SpeakeasyMetadata({ data: "json, name=Badge" })
   badge?: number;
 
-  @Metadata({ data: "json, name=Body" })
+  @SpeakeasyMetadata({ data: "json, name=Body" })
   body?: string;
 
-  @Metadata({ data: "json, name=Category" })
+  @SpeakeasyMetadata({ data: "json, name=Category" })
   category?: string;
 
-  @Metadata({ data: "json, name=CollapseId" })
+  @SpeakeasyMetadata({ data: "json, name=CollapseId" })
   collapseId?: string;
 
-  @Metadata({ data: "json, name=Data" })
+  @SpeakeasyMetadata({ data: "json, name=Data" })
   data?: Map<string, string>;
 
-  @Metadata({ data: "json, name=MediaUrl" })
+  @SpeakeasyMetadata({ data: "json, name=MediaUrl" })
   mediaUrl?: string;
 
-  @Metadata({ data: "json, name=PreferredAuthenticationMethod" })
+  @SpeakeasyMetadata({ data: "json, name=PreferredAuthenticationMethod" })
   preferredAuthenticationMethod?: string;
 
-  @Metadata({ data: "json, name=Priority" })
+  @SpeakeasyMetadata({ data: "json, name=Priority" })
   priority?: string;
 
-  @Metadata({ data: "json, name=RawContent" })
+  @SpeakeasyMetadata({ data: "json, name=RawContent" })
   rawContent?: string;
 
-  @Metadata({ data: "json, name=SilentPush" })
+  @SpeakeasyMetadata({ data: "json, name=SilentPush" })
   silentPush?: boolean;
 
-  @Metadata({ data: "json, name=Sound" })
+  @SpeakeasyMetadata({ data: "json, name=Sound" })
   sound?: string;
 
-  @Metadata({ data: "json, name=Substitutions" })
+  @SpeakeasyMetadata({ data: "json, name=Substitutions" })
   substitutions?: Map<string, string[]>;
 
-  @Metadata({ data: "json, name=ThreadId" })
+  @SpeakeasyMetadata({ data: "json, name=ThreadId" })
   threadId?: string;
 
-  @Metadata({ data: "json, name=TimeToLive" })
+  @SpeakeasyMetadata({ data: "json, name=TimeToLive" })
   timeToLive?: number;
 
-  @Metadata({ data: "json, name=Title" })
+  @SpeakeasyMetadata({ data: "json, name=Title" })
   title?: string;
 
-  @Metadata({ data: "json, name=Url" })
+  @SpeakeasyMetadata({ data: "json, name=Url" })
   url?: string;
 }

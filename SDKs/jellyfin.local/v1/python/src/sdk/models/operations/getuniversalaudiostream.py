@@ -1,10 +1,11 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
+from sdk.models import shared
 
 
 @dataclass
 class GetUniversalAudioStreamPathParams:
-    item_id: str = field(default=None, metadata={'path_param': { 'field_name': 'itemId', 'style': 'simple', 'explode': False }})
+    item_id: str = field(metadata={'path_param': { 'field_name': 'itemId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -30,19 +31,19 @@ class GetUniversalAudioStreamQueryParams:
 
 @dataclass
 class GetUniversalAudioStreamSecurity:
-    custom_authentication: shared.SchemeCustomAuthentication = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    custom_authentication: shared.SchemeCustomAuthentication = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
     
 
 @dataclass
 class GetUniversalAudioStreamRequest:
-    path_params: GetUniversalAudioStreamPathParams = field(default=None)
-    query_params: GetUniversalAudioStreamQueryParams = field(default=None)
-    security: GetUniversalAudioStreamSecurity = field(default=None)
+    path_params: GetUniversalAudioStreamPathParams = field()
+    query_params: GetUniversalAudioStreamQueryParams = field()
+    security: GetUniversalAudioStreamSecurity = field()
     
 
 @dataclass
 class GetUniversalAudioStreamResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     get_universal_audio_stream_200_audio_wildcard_binary_string: Optional[bytes] = field(default=None)
-    status_code: int = field(default=None)
     

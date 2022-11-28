@@ -1,9 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import analysiscompleted
-from . import status
-from . import status
+from sdk import utils
+from . import *
 
 class DiscoveredAnalysisStatusEnum(str, Enum):
     ANALYSIS_STATUS_UNSPECIFIED = "ANALYSIS_STATUS_UNSPECIFIED"
@@ -23,10 +23,14 @@ class DiscoveredContinuousAnalysisEnum(str, Enum):
 @dataclass_json
 @dataclass
 class Discovered:
-    analysis_completed: Optional[analysiscompleted.AnalysisCompleted] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'analysisCompleted' }})
-    analysis_error: Optional[List[status.Status]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'analysisError' }})
-    analysis_status: Optional[DiscoveredAnalysisStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'analysisStatus' }})
-    analysis_status_error: Optional[status.Status] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'analysisStatusError' }})
-    continuous_analysis: Optional[DiscoveredContinuousAnalysisEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'continuousAnalysis' }})
-    last_analysis_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'lastAnalysisTime' }})
+    r"""Discovered
+    Provides information about the analysis status of a discovered resource.
+    """
+    
+    analysis_completed: Optional[AnalysisCompleted] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('analysisCompleted') }})
+    analysis_error: Optional[List[Status]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('analysisError') }})
+    analysis_status: Optional[DiscoveredAnalysisStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('analysisStatus') }})
+    analysis_status_error: Optional[Status] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('analysisStatusError') }})
+    continuous_analysis: Optional[DiscoveredContinuousAnalysisEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('continuousAnalysis') }})
+    last_analysis_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('lastAnalysisTime') }})
     

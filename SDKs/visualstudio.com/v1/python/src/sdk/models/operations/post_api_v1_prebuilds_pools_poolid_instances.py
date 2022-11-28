@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class PostAPIV1PrebuildsPoolsPoolIDInstancesPathParams:
-    pool_id: str = field(default=None, metadata={'path_param': { 'field_name': 'poolId', 'style': 'simple', 'explode': False }})
+    pool_id: str = field(metadata={'path_param': { 'field_name': 'poolId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -18,14 +18,14 @@ class PostAPIV1PrebuildsPoolsPoolIDInstancesRequests:
 
 @dataclass
 class PostAPIV1PrebuildsPoolsPoolIDInstancesRequest:
-    path_params: PostAPIV1PrebuildsPoolsPoolIDInstancesPathParams = field(default=None)
+    path_params: PostAPIV1PrebuildsPoolsPoolIDInstancesPathParams = field()
     request: Optional[PostAPIV1PrebuildsPoolsPoolIDInstancesRequests] = field(default=None)
     
 
 @dataclass
 class PostAPIV1PrebuildsPoolsPoolIDInstancesResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     problem_details: Optional[dict[str, Any]] = field(default=None)
-    status_code: int = field(default=None)
     

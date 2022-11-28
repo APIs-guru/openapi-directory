@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CloudRunMetadata } from "./cloudrunmetadata";
+
 
 
 // DeployJobRunMetadata
@@ -7,6 +8,6 @@ import { CloudRunMetadata } from "./cloudrunmetadata";
  * DeployJobRunMetadata surfaces information associated with a `DeployJobRun` to the user.
 **/
 export class DeployJobRunMetadata extends SpeakeasyBase {
-  @Metadata({ data: "json, name=cloudRun" })
+  @SpeakeasyMetadata({ data: "json, name=cloudRun" })
   cloudRun?: CloudRunMetadata;
 }

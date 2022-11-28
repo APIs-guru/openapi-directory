@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 export declare class ListStreamingDistributions20161125QueryParams extends SpeakeasyBase {
     marker?: string;
     maxItems?: string;

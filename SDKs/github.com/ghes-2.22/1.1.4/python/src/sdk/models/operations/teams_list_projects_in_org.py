@@ -5,8 +5,8 @@ from sdk.models import shared
 
 @dataclass
 class TeamsListProjectsInOrgPathParams:
-    org: str = field(default=None, metadata={'path_param': { 'field_name': 'org', 'style': 'simple', 'explode': False }})
-    team_slug: str = field(default=None, metadata={'path_param': { 'field_name': 'team_slug', 'style': 'simple', 'explode': False }})
+    org: str = field(metadata={'path_param': { 'field_name': 'org', 'style': 'simple', 'explode': False }})
+    team_slug: str = field(metadata={'path_param': { 'field_name': 'team_slug', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -17,14 +17,14 @@ class TeamsListProjectsInOrgQueryParams:
 
 @dataclass
 class TeamsListProjectsInOrgRequest:
-    path_params: TeamsListProjectsInOrgPathParams = field(default=None)
-    query_params: TeamsListProjectsInOrgQueryParams = field(default=None)
+    path_params: TeamsListProjectsInOrgPathParams = field()
+    query_params: TeamsListProjectsInOrgQueryParams = field()
     
 
 @dataclass
 class TeamsListProjectsInOrgResponse:
-    content_type: str = field(default=None)
-    headers: dict[str, List[str]] = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    headers: dict[str, List[str]] = field()
+    status_code: int = field()
     team_projects: Optional[List[shared.TeamProject]] = field(default=None)
     

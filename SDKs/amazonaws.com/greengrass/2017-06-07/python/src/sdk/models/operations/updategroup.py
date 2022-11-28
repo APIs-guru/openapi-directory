@@ -1,11 +1,15 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass
 class UpdateGroupPathParams:
-    group_id: str = field(default=None, metadata={'path_param': { 'field_name': 'GroupId', 'style': 'simple', 'explode': False }})
+    group_id: str = field(metadata={'path_param': { 'field_name': 'GroupId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -22,20 +26,20 @@ class UpdateGroupHeaders:
 @dataclass_json
 @dataclass
 class UpdateGroupRequestBody:
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Name' }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Name') }})
     
 
 @dataclass
 class UpdateGroupRequest:
-    path_params: UpdateGroupPathParams = field(default=None)
-    headers: UpdateGroupHeaders = field(default=None)
-    request: UpdateGroupRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: UpdateGroupHeaders = field()
+    path_params: UpdateGroupPathParams = field()
+    request: UpdateGroupRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class UpdateGroupResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     update_group_response: Optional[dict[str, Any]] = field(default=None)
     

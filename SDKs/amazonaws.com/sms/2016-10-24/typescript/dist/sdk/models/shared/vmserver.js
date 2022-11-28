@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { VmManagerTypeEnum } from "./vmmanagertypeenum";
 import { VmServerAddress } from "./vmserveraddress";
 // VmServer
@@ -35,23 +35,23 @@ var VmServer = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=vmManagerName" }),
+        SpeakeasyMetadata({ data: "json, name=vmManagerName" }),
         __metadata("design:type", String)
     ], VmServer.prototype, "vmManagerName", void 0);
     __decorate([
-        Metadata({ data: "json, name=vmManagerType" }),
+        SpeakeasyMetadata({ data: "json, name=vmManagerType" }),
         __metadata("design:type", String)
     ], VmServer.prototype, "vmManagerType", void 0);
     __decorate([
-        Metadata({ data: "json, name=vmName" }),
+        SpeakeasyMetadata({ data: "json, name=vmName" }),
         __metadata("design:type", String)
     ], VmServer.prototype, "vmName", void 0);
     __decorate([
-        Metadata({ data: "json, name=vmPath" }),
+        SpeakeasyMetadata({ data: "json, name=vmPath" }),
         __metadata("design:type", String)
     ], VmServer.prototype, "vmPath", void 0);
     __decorate([
-        Metadata({ data: "json, name=vmServerAddress" }),
+        SpeakeasyMetadata({ data: "json, name=vmServerAddress" }),
         __metadata("design:type", VmServerAddress)
     ], VmServer.prototype, "vmServerAddress", void 0);
     return VmServer;

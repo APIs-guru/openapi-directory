@@ -5,26 +5,26 @@ from sdk.models import shared
 
 @dataclass
 class AftermarketServicesGetEngineIqaCodesPathParams:
-    serial_number: str = field(default=None, metadata={'path_param': { 'field_name': 'serialNumber', 'style': 'simple', 'explode': False }})
+    serial_number: str = field(metadata={'path_param': { 'field_name': 'serialNumber', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class AftermarketServicesGetEngineIqaCodesQueryParams:
-    edt_instance_id: str = field(default=None, metadata={'query_param': { 'field_name': 'EDTInstanceId', 'style': 'form', 'explode': True }})
+    edt_instance_id: str = field(metadata={'query_param': { 'field_name': 'EDTInstanceId', 'style': 'form', 'explode': True }})
     
 
 @dataclass
 class AftermarketServicesGetEngineIqaCodesRequest:
-    path_params: AftermarketServicesGetEngineIqaCodesPathParams = field(default=None)
-    query_params: AftermarketServicesGetEngineIqaCodesQueryParams = field(default=None)
+    path_params: AftermarketServicesGetEngineIqaCodesPathParams = field()
+    query_params: AftermarketServicesGetEngineIqaCodesQueryParams = field()
     
 
 @dataclass
 class AftermarketServicesGetEngineIqaCodesResponse:
+    content_type: str = field()
+    status_code: int = field()
     api_models_api_error: Optional[shared.APIModelsAPIError] = field(default=None)
     aftermarket_services_get_engine_iqa_codes_200_application_json_strings: Optional[List[str]] = field(default=None)
     aftermarket_services_get_engine_iqa_codes_200_text_json_strings: Optional[List[str]] = field(default=None)
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    body: Optional[bytes] = field(default=None)
     

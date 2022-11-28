@@ -1,5 +1,7 @@
 package shared
 
+// GamesNumberAffixConfiguration
+// A number affix resource.
 type GamesNumberAffixConfiguration struct {
 	Few   *LocalizedStringBundle `json:"few,omitempty"`
 	Many  *LocalizedStringBundle `json:"many,omitempty"`

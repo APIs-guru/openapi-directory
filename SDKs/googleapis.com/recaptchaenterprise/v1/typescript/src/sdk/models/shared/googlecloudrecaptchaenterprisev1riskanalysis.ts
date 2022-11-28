@@ -1,12 +1,13 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum GoogleCloudRecaptchaenterpriseV1RiskAnalysisReasonsEnum {
-    ClassificationReasonUnspecified = "CLASSIFICATION_REASON_UNSPECIFIED"
-,    Automation = "AUTOMATION"
-,    UnexpectedEnvironment = "UNEXPECTED_ENVIRONMENT"
-,    TooMuchTraffic = "TOO_MUCH_TRAFFIC"
-,    UnexpectedUsagePatterns = "UNEXPECTED_USAGE_PATTERNS"
-,    LowConfidenceScore = "LOW_CONFIDENCE_SCORE"
+    ClassificationReasonUnspecified = "CLASSIFICATION_REASON_UNSPECIFIED",
+    Automation = "AUTOMATION",
+    UnexpectedEnvironment = "UNEXPECTED_ENVIRONMENT",
+    TooMuchTraffic = "TOO_MUCH_TRAFFIC",
+    UnexpectedUsagePatterns = "UNEXPECTED_USAGE_PATTERNS",
+    LowConfidenceScore = "LOW_CONFIDENCE_SCORE"
 }
 
 
@@ -15,9 +16,9 @@ export enum GoogleCloudRecaptchaenterpriseV1RiskAnalysisReasonsEnum {
  * Risk analysis result for an event.
 **/
 export class GoogleCloudRecaptchaenterpriseV1RiskAnalysis extends SpeakeasyBase {
-  @Metadata({ data: "json, name=reasons" })
+  @SpeakeasyMetadata({ data: "json, name=reasons" })
   reasons?: GoogleCloudRecaptchaenterpriseV1RiskAnalysisReasonsEnum[];
 
-  @Metadata({ data: "json, name=score" })
+  @SpeakeasyMetadata({ data: "json, name=score" })
   score?: number;
 }

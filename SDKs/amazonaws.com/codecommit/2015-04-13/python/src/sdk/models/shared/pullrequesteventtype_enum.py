@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class PullRequestEventTypeEnum(str, Enum):
     PULL_REQUEST_CREATED = "PULL_REQUEST_CREATED"

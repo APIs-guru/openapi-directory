@@ -9,6 +9,8 @@ const (
 	ThirdPartyLinkStatusLinkStatusEnumLinked  ThirdPartyLinkStatusLinkStatusEnum = "linked"
 )
 
+// ThirdPartyLinkStatus
+// The third-party link status object contains information about the status of the link.
 type ThirdPartyLinkStatus struct {
 	LinkStatus *ThirdPartyLinkStatusLinkStatusEnum `json:"linkStatus,omitempty"`
 }

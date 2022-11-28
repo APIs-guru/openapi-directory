@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { MessageFormatEnum } from "./messageformatenum";
+
 
 
 // SnsAction
@@ -7,12 +8,12 @@ import { MessageFormatEnum } from "./messageformatenum";
  * Describes an action to publish to an Amazon SNS topic.
 **/
 export class SnsAction extends SpeakeasyBase {
-  @Metadata({ data: "json, name=messageFormat" })
+  @SpeakeasyMetadata({ data: "json, name=messageFormat" })
   messageFormat?: MessageFormatEnum;
 
-  @Metadata({ data: "json, name=roleArn" })
+  @SpeakeasyMetadata({ data: "json, name=roleArn" })
   roleArn: string;
 
-  @Metadata({ data: "json, name=targetArn" })
+  @SpeakeasyMetadata({ data: "json, name=targetArn" })
   targetArn: string;
 }

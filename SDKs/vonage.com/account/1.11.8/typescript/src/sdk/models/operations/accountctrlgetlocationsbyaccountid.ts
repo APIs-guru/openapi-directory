@@ -1,35 +1,36 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class AccountCtrlGetLocationsByAccountIdPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=account_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=account_id" })
   accountId: number;
 }
 
 
 export class AccountCtrlGetLocationsByAccountIdSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=bearer" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" })
   bearerAuth: shared.SchemeBearerAuth;
 }
 
 
 export class AccountCtrlGetLocationsByAccountIdRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: AccountCtrlGetLocationsByAccountIdPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: AccountCtrlGetLocationsByAccountIdSecurity;
 }
 
 
 export class AccountCtrlGetLocationsByAccountIdResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   locationsHalResponse?: shared.LocationsHalResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

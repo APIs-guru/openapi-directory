@@ -30,7 +30,7 @@ type DisplayvideoAdvertisersBulkEditAdvertiserAssignedTargetingOptionsSecurity s
 type DisplayvideoAdvertisersBulkEditAdvertiserAssignedTargetingOptionsRequest struct {
 	PathParams  DisplayvideoAdvertisersBulkEditAdvertiserAssignedTargetingOptionsPathParams
 	QueryParams DisplayvideoAdvertisersBulkEditAdvertiserAssignedTargetingOptionsQueryParams
-	Request     *shared.BulkEditAdvertiserAssignedTargetingOptionsRequest `request:"mediaType=application/json"`
+	Request     *shared.BulkEditAdvertiserAssignedTargetingOptionsRequestInput `request:"mediaType=application/json"`
 	Security    DisplayvideoAdvertisersBulkEditAdvertiserAssignedTargetingOptionsSecurity
 }
 

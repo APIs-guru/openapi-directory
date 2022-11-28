@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Button } from "./button";
+
 
 
 // GenericAttachment
@@ -8,18 +8,18 @@ import { Button } from "./button";
  * Represents an option rendered to the user when a prompt is shown. It could be an image, a button, a link, or text. 
 **/
 export class GenericAttachment extends SpeakeasyBase {
-  @Metadata({ data: "json, name=attachmentLinkUrl" })
+  @SpeakeasyMetadata({ data: "json, name=attachmentLinkUrl" })
   attachmentLinkUrl?: string;
 
-  @Metadata({ data: "json, name=buttons", elemType: shared.Button })
+  @SpeakeasyMetadata({ data: "json, name=buttons", elemType: Button })
   buttons?: Button[];
 
-  @Metadata({ data: "json, name=imageUrl" })
+  @SpeakeasyMetadata({ data: "json, name=imageUrl" })
   imageUrl?: string;
 
-  @Metadata({ data: "json, name=subTitle" })
+  @SpeakeasyMetadata({ data: "json, name=subTitle" })
   subTitle?: string;
 
-  @Metadata({ data: "json, name=title" })
+  @SpeakeasyMetadata({ data: "json, name=title" })
   title?: string;
 }

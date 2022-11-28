@@ -1,6 +1,7 @@
 
 
+
 export enum CeStateEnum {
-    Enabled = "ENABLED"
-,    Disabled = "DISABLED"
+    Enabled = "ENABLED",
+    Disabled = "DISABLED"
 }

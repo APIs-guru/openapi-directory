@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class MigrationsListForOrgPathParams:
-    org: str = field(default=None, metadata={'path_param': { 'field_name': 'org', 'style': 'simple', 'explode': False }})
+    org: str = field(metadata={'path_param': { 'field_name': 'org', 'style': 'simple', 'explode': False }})
     
 class MigrationsListForOrgExcludeEnum(str, Enum):
     REPOSITORIES = "repositories"
@@ -20,14 +21,14 @@ class MigrationsListForOrgQueryParams:
 
 @dataclass
 class MigrationsListForOrgRequest:
-    path_params: MigrationsListForOrgPathParams = field(default=None)
-    query_params: MigrationsListForOrgQueryParams = field(default=None)
+    path_params: MigrationsListForOrgPathParams = field()
+    query_params: MigrationsListForOrgQueryParams = field()
     
 
 @dataclass
 class MigrationsListForOrgResponse:
-    content_type: str = field(default=None)
-    headers: dict[str, List[str]] = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    headers: dict[str, List[str]] = field()
+    status_code: int = field()
     migrations: Optional[List[shared.Migration]] = field(default=None)
     

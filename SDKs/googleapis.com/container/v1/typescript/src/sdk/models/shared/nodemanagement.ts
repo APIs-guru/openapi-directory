@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AutoUpgradeOptions } from "./autoupgradeoptions";
+
 
 
 // NodeManagement
@@ -7,12 +8,12 @@ import { AutoUpgradeOptions } from "./autoupgradeoptions";
  * NodeManagement defines the set of node management services turned on for the node pool.
 **/
 export class NodeManagement extends SpeakeasyBase {
-  @Metadata({ data: "json, name=autoRepair" })
+  @SpeakeasyMetadata({ data: "json, name=autoRepair" })
   autoRepair?: boolean;
 
-  @Metadata({ data: "json, name=autoUpgrade" })
+  @SpeakeasyMetadata({ data: "json, name=autoUpgrade" })
   autoUpgrade?: boolean;
 
-  @Metadata({ data: "json, name=upgradeOptions" })
+  @SpeakeasyMetadata({ data: "json, name=upgradeOptions" })
   upgradeOptions?: AutoUpgradeOptions;
 }

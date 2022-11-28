@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { MetricDimension } from "./metricdimension";
+
 
 
 // MetricToRetain
@@ -7,9 +8,9 @@ import { MetricDimension } from "./metricdimension";
  * The metric you want to retain. Dimensions are optional.
 **/
 export class MetricToRetain extends SpeakeasyBase {
-  @Metadata({ data: "json, name=metric" })
+  @SpeakeasyMetadata({ data: "json, name=metric" })
   metric: string;
 
-  @Metadata({ data: "json, name=metricDimension" })
+  @SpeakeasyMetadata({ data: "json, name=metricDimension" })
   metricDimension?: MetricDimension;
 }

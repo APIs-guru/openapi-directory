@@ -18,14 +18,14 @@ type SearchLabelsQueryParams struct {
 	Sort         *SearchLabelsSortEnum `queryParam:"style=form,explode=true,name=sort"`
 }
 
-type SearchLabelsRequest struct {
-	QueryParams SearchLabelsQueryParams
-}
-
 type SearchLabels200ApplicationJSON struct {
 	IncompleteResults bool                           `json:"incomplete_results"`
 	Items             []shared.LabelSearchResultItem `json:"items"`
 	TotalCount        int64                          `json:"total_count"`
+}
+
+type SearchLabelsRequest struct {
+	QueryParams SearchLabelsQueryParams
 }
 
 type SearchLabelsResponse struct {

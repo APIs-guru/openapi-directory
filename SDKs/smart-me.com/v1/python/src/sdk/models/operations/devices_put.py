@@ -4,25 +4,25 @@ from typing import Any,Optional
 
 @dataclass
 class DevicesPutPathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class DevicesPutQueryParams:
+    switch_state: bool = field(metadata={'query_param': { 'field_name': 'switchState', 'style': 'form', 'explode': True }})
     switch_number: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'switchNumber', 'style': 'form', 'explode': True }})
-    switch_state: bool = field(default=None, metadata={'query_param': { 'field_name': 'switchState', 'style': 'form', 'explode': True }})
     
 
 @dataclass
 class DevicesPutRequest:
-    path_params: DevicesPutPathParams = field(default=None)
-    query_params: DevicesPutQueryParams = field(default=None)
+    path_params: DevicesPutPathParams = field()
+    query_params: DevicesPutQueryParams = field()
     
 
 @dataclass
 class DevicesPutResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     object: Optional[dict[str, Any]] = field(default=None)
-    status_code: int = field(default=None)
     

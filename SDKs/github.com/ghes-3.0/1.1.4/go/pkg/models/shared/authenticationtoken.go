@@ -11,6 +11,8 @@ const (
 	AuthenticationTokenRepositorySelectionEnumSelected AuthenticationTokenRepositorySelectionEnum = "selected"
 )
 
+// AuthenticationToken
+// Authentication Token
 type AuthenticationToken struct {
 	ExpiresAt           time.Time                                   `json:"expires_at"`
 	Permissions         map[string]interface{}                      `json:"permissions,omitempty"`

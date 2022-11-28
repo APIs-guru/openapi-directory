@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import googlecloudassuredworkloadsv1violation
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class GoogleCloudAssuredworkloadsV1ListViolationsResponse:
-    next_page_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'nextPageToken' }})
-    violations: Optional[List[googlecloudassuredworkloadsv1violation.GoogleCloudAssuredworkloadsV1Violation]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'violations' }})
+    r"""GoogleCloudAssuredworkloadsV1ListViolationsResponse
+    Response of ListViolations endpoint.
+    """
+    
+    next_page_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('nextPageToken') }})
+    violations: Optional[List[GoogleCloudAssuredworkloadsV1Violation]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('violations') }})
     

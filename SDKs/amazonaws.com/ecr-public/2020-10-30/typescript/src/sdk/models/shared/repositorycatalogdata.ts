@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // RepositoryCatalogData
@@ -6,24 +7,24 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The catalog data for a repository. This data is publicly visible in the Amazon ECR Public Gallery.
 **/
 export class RepositoryCatalogData extends SpeakeasyBase {
-  @Metadata({ data: "json, name=aboutText" })
+  @SpeakeasyMetadata({ data: "json, name=aboutText" })
   aboutText?: string;
 
-  @Metadata({ data: "json, name=architectures" })
+  @SpeakeasyMetadata({ data: "json, name=architectures" })
   architectures?: string[];
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=logoUrl" })
+  @SpeakeasyMetadata({ data: "json, name=logoUrl" })
   logoUrl?: string;
 
-  @Metadata({ data: "json, name=marketplaceCertified" })
+  @SpeakeasyMetadata({ data: "json, name=marketplaceCertified" })
   marketplaceCertified?: boolean;
 
-  @Metadata({ data: "json, name=operatingSystems" })
+  @SpeakeasyMetadata({ data: "json, name=operatingSystems" })
   operatingSystems?: string[];
 
-  @Metadata({ data: "json, name=usageText" })
+  @SpeakeasyMetadata({ data: "json, name=usageText" })
   usageText?: string;
 }

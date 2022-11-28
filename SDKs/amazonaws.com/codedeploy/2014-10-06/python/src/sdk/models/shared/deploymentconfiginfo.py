@@ -1,21 +1,25 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import computeplatform_enum
-from . import minimumhealthyhosts
-from . import trafficroutingconfig
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class DeploymentConfigInfo:
-    compute_platform: Optional[computeplatform_enum.ComputePlatformEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'computePlatform' }})
-    create_time: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'createTime', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    deployment_config_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'deploymentConfigId' }})
-    deployment_config_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'deploymentConfigName' }})
-    minimum_healthy_hosts: Optional[minimumhealthyhosts.MinimumHealthyHosts] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'minimumHealthyHosts' }})
-    traffic_routing_config: Optional[trafficroutingconfig.TrafficRoutingConfig] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'trafficRoutingConfig' }})
+    r"""DeploymentConfigInfo
+    Information about a deployment configuration.
+    """
+    
+    compute_platform: Optional[ComputePlatformEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('computePlatform') }})
+    create_time: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('createTime'), 'encoder': utils.datetimeisoformat(True), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    deployment_config_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('deploymentConfigId') }})
+    deployment_config_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('deploymentConfigName') }})
+    minimum_healthy_hosts: Optional[MinimumHealthyHosts] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('minimumHealthyHosts') }})
+    traffic_routing_config: Optional[TrafficRoutingConfig] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('trafficRoutingConfig') }})
     

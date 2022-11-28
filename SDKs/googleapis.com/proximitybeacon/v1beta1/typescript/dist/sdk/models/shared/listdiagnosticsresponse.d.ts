@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { Diagnostics } from "./diagnostics";
 /**
  * Response that contains the requested diagnostics.

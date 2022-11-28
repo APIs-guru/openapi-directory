@@ -22,18 +22,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var DeleteMetricFilterRequest = /** @class */ (function (_super) {
     __extends(DeleteMetricFilterRequest, _super);
     function DeleteMetricFilterRequest() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=filterName" }),
+        SpeakeasyMetadata({ data: "json, name=filterName" }),
         __metadata("design:type", String)
     ], DeleteMetricFilterRequest.prototype, "filterName", void 0);
     __decorate([
-        Metadata({ data: "json, name=logGroupName" }),
+        SpeakeasyMetadata({ data: "json, name=logGroupName" }),
         __metadata("design:type", String)
     ], DeleteMetricFilterRequest.prototype, "logGroupName", void 0);
     return DeleteMetricFilterRequest;

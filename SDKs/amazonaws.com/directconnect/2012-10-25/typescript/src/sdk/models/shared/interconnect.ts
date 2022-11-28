@@ -1,8 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { HasLogicalRedundancyEnum } from "./haslogicalredundancyenum";
 import { InterconnectStateEnum } from "./interconnectstateenum";
 import { Tag } from "./tag";
+
 
 
 // Interconnect
@@ -10,48 +10,48 @@ import { Tag } from "./tag";
  * Information about an interconnect.
 **/
 export class Interconnect extends SpeakeasyBase {
-  @Metadata({ data: "json, name=awsDevice" })
+  @SpeakeasyMetadata({ data: "json, name=awsDevice" })
   awsDevice?: string;
 
-  @Metadata({ data: "json, name=awsDeviceV2" })
+  @SpeakeasyMetadata({ data: "json, name=awsDeviceV2" })
   awsDeviceV2?: string;
 
-  @Metadata({ data: "json, name=awsLogicalDeviceId" })
+  @SpeakeasyMetadata({ data: "json, name=awsLogicalDeviceId" })
   awsLogicalDeviceId?: string;
 
-  @Metadata({ data: "json, name=bandwidth" })
+  @SpeakeasyMetadata({ data: "json, name=bandwidth" })
   bandwidth?: string;
 
-  @Metadata({ data: "json, name=hasLogicalRedundancy" })
+  @SpeakeasyMetadata({ data: "json, name=hasLogicalRedundancy" })
   hasLogicalRedundancy?: HasLogicalRedundancyEnum;
 
-  @Metadata({ data: "json, name=interconnectId" })
+  @SpeakeasyMetadata({ data: "json, name=interconnectId" })
   interconnectId?: string;
 
-  @Metadata({ data: "json, name=interconnectName" })
+  @SpeakeasyMetadata({ data: "json, name=interconnectName" })
   interconnectName?: string;
 
-  @Metadata({ data: "json, name=interconnectState" })
+  @SpeakeasyMetadata({ data: "json, name=interconnectState" })
   interconnectState?: InterconnectStateEnum;
 
-  @Metadata({ data: "json, name=jumboFrameCapable" })
+  @SpeakeasyMetadata({ data: "json, name=jumboFrameCapable" })
   jumboFrameCapable?: boolean;
 
-  @Metadata({ data: "json, name=lagId" })
+  @SpeakeasyMetadata({ data: "json, name=lagId" })
   lagId?: string;
 
-  @Metadata({ data: "json, name=loaIssueTime" })
+  @SpeakeasyMetadata({ data: "json, name=loaIssueTime" })
   loaIssueTime?: Date;
 
-  @Metadata({ data: "json, name=location" })
+  @SpeakeasyMetadata({ data: "json, name=location" })
   location?: string;
 
-  @Metadata({ data: "json, name=providerName" })
+  @SpeakeasyMetadata({ data: "json, name=providerName" })
   providerName?: string;
 
-  @Metadata({ data: "json, name=region" })
+  @SpeakeasyMetadata({ data: "json, name=region" })
   region?: string;
 
-  @Metadata({ data: "json, name=tags", elemType: shared.Tag })
+  @SpeakeasyMetadata({ data: "json, name=tags", elemType: Tag })
   tags?: Tag[];
 }

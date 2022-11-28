@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// AutoMlJobSummary
+// Provides a summary about an AutoML job.
 type AutoMlJobSummary struct {
 	AutoMlJobArn             string                       `json:"AutoMLJobArn"`
 	AutoMlJobName            string                       `json:"AutoMLJobName"`

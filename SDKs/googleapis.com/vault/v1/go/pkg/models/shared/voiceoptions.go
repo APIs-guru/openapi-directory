@@ -9,6 +9,8 @@ const (
 	VoiceOptionsCoveredDataEnumCallLogs               VoiceOptionsCoveredDataEnum = "CALL_LOGS"
 )
 
+// VoiceOptions
+// Additional options for Voice search
 type VoiceOptions struct {
 	CoveredData []VoiceOptionsCoveredDataEnum `json:"coveredData,omitempty"`
 }

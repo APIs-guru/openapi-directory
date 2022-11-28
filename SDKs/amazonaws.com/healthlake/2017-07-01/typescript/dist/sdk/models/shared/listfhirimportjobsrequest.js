@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { JobStatusEnum } from "./jobstatusenum";
 var ListFhirImportJobsRequest = /** @class */ (function (_super) {
     __extends(ListFhirImportJobsRequest, _super);
@@ -30,31 +30,31 @@ var ListFhirImportJobsRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=DatastoreId" }),
+        SpeakeasyMetadata({ data: "json, name=DatastoreId" }),
         __metadata("design:type", String)
     ], ListFhirImportJobsRequest.prototype, "datastoreId", void 0);
     __decorate([
-        Metadata({ data: "json, name=JobName" }),
+        SpeakeasyMetadata({ data: "json, name=JobName" }),
         __metadata("design:type", String)
     ], ListFhirImportJobsRequest.prototype, "jobName", void 0);
     __decorate([
-        Metadata({ data: "json, name=JobStatus" }),
+        SpeakeasyMetadata({ data: "json, name=JobStatus" }),
         __metadata("design:type", String)
     ], ListFhirImportJobsRequest.prototype, "jobStatus", void 0);
     __decorate([
-        Metadata({ data: "json, name=MaxResults" }),
+        SpeakeasyMetadata({ data: "json, name=MaxResults" }),
         __metadata("design:type", Number)
     ], ListFhirImportJobsRequest.prototype, "maxResults", void 0);
     __decorate([
-        Metadata({ data: "json, name=NextToken" }),
+        SpeakeasyMetadata({ data: "json, name=NextToken" }),
         __metadata("design:type", String)
     ], ListFhirImportJobsRequest.prototype, "nextToken", void 0);
     __decorate([
-        Metadata({ data: "json, name=SubmittedAfter" }),
+        SpeakeasyMetadata({ data: "json, name=SubmittedAfter" }),
         __metadata("design:type", Date)
     ], ListFhirImportJobsRequest.prototype, "submittedAfter", void 0);
     __decorate([
-        Metadata({ data: "json, name=SubmittedBefore" }),
+        SpeakeasyMetadata({ data: "json, name=SubmittedBefore" }),
         __metadata("design:type", Date)
     ], ListFhirImportJobsRequest.prototype, "submittedBefore", void 0);
     return ListFhirImportJobsRequest;

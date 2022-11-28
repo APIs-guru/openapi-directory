@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DescribeGameServerGroupInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=GameServerGroupName" })
+  @SpeakeasyMetadata({ data: "json, name=GameServerGroupName" })
   gameServerGroupName: string;
 }

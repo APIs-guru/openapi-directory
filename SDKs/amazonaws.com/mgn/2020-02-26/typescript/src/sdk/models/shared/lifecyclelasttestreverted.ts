@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // LifeCycleLastTestReverted
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Lifecycle last Test reverted.
 **/
 export class LifeCycleLastTestReverted extends SpeakeasyBase {
-  @Metadata({ data: "json, name=apiCallDateTime" })
+  @SpeakeasyMetadata({ data: "json, name=apiCallDateTime" })
   apiCallDateTime?: string;
 }

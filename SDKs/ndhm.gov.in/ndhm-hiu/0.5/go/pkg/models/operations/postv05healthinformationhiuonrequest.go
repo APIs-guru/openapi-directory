@@ -4,7 +4,7 @@ import (
 	"openapi/pkg/models/shared"
 )
 
-var PostV05HealthInformationHiuOnRequestServers = []string{
+var PostV05HealthInformationHiuOnRequestServerList = []string{
 	"https://dev.ndhm.gov.in/hiu",
 }
 

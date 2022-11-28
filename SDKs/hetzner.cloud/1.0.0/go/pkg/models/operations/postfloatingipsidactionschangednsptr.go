@@ -9,11 +9,8 @@ type PostFloatingIpsIDActionsChangeDNSPtrChangeDnsptrRequest struct {
 	IP     string `json:"ip"`
 }
 
-type PostFloatingIpsIDActionsChangeDNSPtrRequest struct {
-	PathParams PostFloatingIpsIDActionsChangeDNSPtrPathParams
-	Request    *PostFloatingIpsIDActionsChangeDNSPtrChangeDnsptrRequest `request:"mediaType=application/json"`
-}
-
+// PostFloatingIpsIDActionsChangeDNSPtrActionResponseActionError
+// Error message for the Action if error occurred, otherwise null
 type PostFloatingIpsIDActionsChangeDNSPtrActionResponseActionError struct {
 	Code    string `json:"code"`
 	Message string `json:"message"`
@@ -45,6 +42,11 @@ type PostFloatingIpsIDActionsChangeDNSPtrActionResponseAction struct {
 
 type PostFloatingIpsIDActionsChangeDNSPtrActionResponse struct {
 	Action PostFloatingIpsIDActionsChangeDNSPtrActionResponseAction `json:"action"`
+}
+
+type PostFloatingIpsIDActionsChangeDNSPtrRequest struct {
+	PathParams PostFloatingIpsIDActionsChangeDNSPtrPathParams
+	Request    *PostFloatingIpsIDActionsChangeDNSPtrChangeDnsptrRequest `request:"mediaType=application/json"`
 }
 
 type PostFloatingIpsIDActionsChangeDNSPtrResponse struct {

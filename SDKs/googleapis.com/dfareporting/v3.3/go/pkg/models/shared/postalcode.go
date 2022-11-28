@@ -1,5 +1,7 @@
 package shared
 
+// PostalCode
+// Contains information about a postal code that can be targeted by ads.
 type PostalCode struct {
 	Code          *string `json:"code,omitempty"`
 	CountryCode   *string `json:"countryCode,omitempty"`

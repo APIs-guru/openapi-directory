@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class UpdateNetworkSwitchRoutingMulticastPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=networkId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=networkId" })
   networkId: string;
 }
 
@@ -12,57 +13,57 @@ export class UpdateNetworkSwitchRoutingMulticastPathParams extends SpeakeasyBase
  * Default multicast setting for entire network. IGMP snooping and Flood unknown multicast traffic settings are enabled by default.
 **/
 export class UpdateNetworkSwitchRoutingMulticastRequestBodyDefaultSettings extends SpeakeasyBase {
-  @Metadata({ data: "json, name=floodUnknownMulticastTrafficEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=floodUnknownMulticastTrafficEnabled" })
   floodUnknownMulticastTrafficEnabled?: boolean;
 
-  @Metadata({ data: "json, name=igmpSnoopingEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=igmpSnoopingEnabled" })
   igmpSnoopingEnabled?: boolean;
 }
 
 
 export class UpdateNetworkSwitchRoutingMulticastRequestBodyOverrides extends SpeakeasyBase {
-  @Metadata({ data: "json, name=floodUnknownMulticastTrafficEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=floodUnknownMulticastTrafficEnabled" })
   floodUnknownMulticastTrafficEnabled: boolean;
 
-  @Metadata({ data: "json, name=igmpSnoopingEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=igmpSnoopingEnabled" })
   igmpSnoopingEnabled: boolean;
 
-  @Metadata({ data: "json, name=stacks" })
+  @SpeakeasyMetadata({ data: "json, name=stacks" })
   stacks?: string[];
 
-  @Metadata({ data: "json, name=switchProfiles" })
+  @SpeakeasyMetadata({ data: "json, name=switchProfiles" })
   switchProfiles?: string[];
 
-  @Metadata({ data: "json, name=switches" })
+  @SpeakeasyMetadata({ data: "json, name=switches" })
   switches?: string[];
 }
 
 
 export class UpdateNetworkSwitchRoutingMulticastRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=defaultSettings" })
+  @SpeakeasyMetadata({ data: "json, name=defaultSettings" })
   defaultSettings?: UpdateNetworkSwitchRoutingMulticastRequestBodyDefaultSettings;
 
-  @Metadata({ data: "json, name=overrides", elemType: operations.UpdateNetworkSwitchRoutingMulticastRequestBodyOverrides })
+  @SpeakeasyMetadata({ data: "json, name=overrides", elemType: UpdateNetworkSwitchRoutingMulticastRequestBodyOverrides })
   overrides?: UpdateNetworkSwitchRoutingMulticastRequestBodyOverrides[];
 }
 
 
 export class UpdateNetworkSwitchRoutingMulticastRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: UpdateNetworkSwitchRoutingMulticastPathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request?: UpdateNetworkSwitchRoutingMulticastRequestBody;
 }
 
 
 export class UpdateNetworkSwitchRoutingMulticastResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   updateNetworkSwitchRoutingMulticast200ApplicationJsonObject?: Map<string, any>;
 }

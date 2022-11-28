@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AccountReference16Ch
@@ -10,15 +11,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * 
 **/
 export class AccountReference16Ch extends SpeakeasyBase {
-  @Metadata({ data: "json, name=cashAccountType" })
+  @SpeakeasyMetadata({ data: "json, name=cashAccountType" })
   cashAccountType?: string;
 
-  @Metadata({ data: "json, name=currency" })
+  @SpeakeasyMetadata({ data: "json, name=currency" })
   currency?: string;
 
-  @Metadata({ data: "json, name=iban" })
+  @SpeakeasyMetadata({ data: "json, name=iban" })
   iban?: string;
 
-  @Metadata({ data: "json, name=otherAccountIdentification" })
+  @SpeakeasyMetadata({ data: "json, name=otherAccountIdentification" })
   otherAccountIdentification?: string;
 }

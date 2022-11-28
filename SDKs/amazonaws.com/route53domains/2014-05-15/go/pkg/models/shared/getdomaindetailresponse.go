@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// GetDomainDetailResponse
+// The GetDomainDetail response includes the following elements.
 type GetDomainDetailResponse struct {
 	AbuseContactEmail *string       `json:"AbuseContactEmail,omitempty"`
 	AbuseContactPhone *string       `json:"AbuseContactPhone,omitempty"`

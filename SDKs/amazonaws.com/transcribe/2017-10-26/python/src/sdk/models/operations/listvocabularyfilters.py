@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 
@@ -14,6 +18,7 @@ class ListVocabularyFiltersXAmzTargetEnum(str, Enum):
 
 @dataclass
 class ListVocabularyFiltersHeaders:
+    x_amz_target: ListVocabularyFiltersXAmzTargetEnum = field(metadata={'header': { 'field_name': 'X-Amz-Target', 'style': 'simple', 'explode': False }})
     x_amz_algorithm: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Algorithm', 'style': 'simple', 'explode': False }})
     x_amz_content_sha256: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Content-Sha256', 'style': 'simple', 'explode': False }})
     x_amz_credential: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Credential', 'style': 'simple', 'explode': False }})
@@ -21,22 +26,21 @@ class ListVocabularyFiltersHeaders:
     x_amz_security_token: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Security-Token', 'style': 'simple', 'explode': False }})
     x_amz_signature: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Signature', 'style': 'simple', 'explode': False }})
     x_amz_signed_headers: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-SignedHeaders', 'style': 'simple', 'explode': False }})
-    x_amz_target: ListVocabularyFiltersXAmzTargetEnum = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Target', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class ListVocabularyFiltersRequest:
-    query_params: ListVocabularyFiltersQueryParams = field(default=None)
-    headers: ListVocabularyFiltersHeaders = field(default=None)
-    request: shared.ListVocabularyFiltersRequest = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: ListVocabularyFiltersHeaders = field()
+    query_params: ListVocabularyFiltersQueryParams = field()
+    request: shared.ListVocabularyFiltersRequest = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class ListVocabularyFiltersResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     internal_failure_exception: Optional[Any] = field(default=None)
     limit_exceeded_exception: Optional[Any] = field(default=None)
     list_vocabulary_filters_response: Optional[shared.ListVocabularyFiltersResponse] = field(default=None)
-    status_code: int = field(default=None)
     

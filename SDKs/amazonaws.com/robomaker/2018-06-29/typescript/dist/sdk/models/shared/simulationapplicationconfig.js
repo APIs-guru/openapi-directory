@@ -22,9 +22,11 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { LaunchConfig } from "./launchconfig";
+import { Tool } from "./tool";
+import { UploadConfiguration } from "./uploadconfiguration";
+import { WorldConfig } from "./worldconfig";
 // SimulationApplicationConfig
 /**
  * Information about a simulation application configuration.
@@ -35,35 +37,35 @@ var SimulationApplicationConfig = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=application" }),
+        SpeakeasyMetadata({ data: "json, name=application" }),
         __metadata("design:type", String)
     ], SimulationApplicationConfig.prototype, "application", void 0);
     __decorate([
-        Metadata({ data: "json, name=applicationVersion" }),
+        SpeakeasyMetadata({ data: "json, name=applicationVersion" }),
         __metadata("design:type", String)
     ], SimulationApplicationConfig.prototype, "applicationVersion", void 0);
     __decorate([
-        Metadata({ data: "json, name=launchConfig" }),
+        SpeakeasyMetadata({ data: "json, name=launchConfig" }),
         __metadata("design:type", LaunchConfig)
     ], SimulationApplicationConfig.prototype, "launchConfig", void 0);
     __decorate([
-        Metadata({ data: "json, name=tools", elemType: shared.Tool }),
+        SpeakeasyMetadata({ data: "json, name=tools", elemType: Tool }),
         __metadata("design:type", Array)
     ], SimulationApplicationConfig.prototype, "tools", void 0);
     __decorate([
-        Metadata({ data: "json, name=uploadConfigurations", elemType: shared.UploadConfiguration }),
+        SpeakeasyMetadata({ data: "json, name=uploadConfigurations", elemType: UploadConfiguration }),
         __metadata("design:type", Array)
     ], SimulationApplicationConfig.prototype, "uploadConfigurations", void 0);
     __decorate([
-        Metadata({ data: "json, name=useDefaultTools" }),
+        SpeakeasyMetadata({ data: "json, name=useDefaultTools" }),
         __metadata("design:type", Boolean)
     ], SimulationApplicationConfig.prototype, "useDefaultTools", void 0);
     __decorate([
-        Metadata({ data: "json, name=useDefaultUploadConfigurations" }),
+        SpeakeasyMetadata({ data: "json, name=useDefaultUploadConfigurations" }),
         __metadata("design:type", Boolean)
     ], SimulationApplicationConfig.prototype, "useDefaultUploadConfigurations", void 0);
     __decorate([
-        Metadata({ data: "json, name=worldConfigs", elemType: shared.WorldConfig }),
+        SpeakeasyMetadata({ data: "json, name=worldConfigs", elemType: WorldConfig }),
         __metadata("design:type", Array)
     ], SimulationApplicationConfig.prototype, "worldConfigs", void 0);
     return SimulationApplicationConfig;

@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class RescheduleRescheduleTypeEnum(str, Enum):
     RESCHEDULE_TYPE_UNSPECIFIED = "RESCHEDULE_TYPE_UNSPECIFIED"
@@ -12,6 +14,6 @@ class RescheduleRescheduleTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class Reschedule:
-    reschedule_type: Optional[RescheduleRescheduleTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'rescheduleType' }})
-    schedule_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'scheduleTime' }})
+    reschedule_type: Optional[RescheduleRescheduleTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('rescheduleType') }})
+    schedule_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('scheduleTime') }})
     

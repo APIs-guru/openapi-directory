@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // UsersettingsNotesExport
@@ -6,69 +7,69 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * User settings in sub-objects, each for different purposes.
 **/
 export class UsersettingsNotesExport extends SpeakeasyBase {
-  @Metadata({ data: "json, name=folderName" })
+  @SpeakeasyMetadata({ data: "json, name=folderName" })
   folderName?: string;
 
-  @Metadata({ data: "json, name=isEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=isEnabled" })
   isEnabled?: boolean;
 }
 
 
 export class UsersettingsNotificationMatchMyInterests extends SpeakeasyBase {
-  @Metadata({ data: "json, name=opted_state" })
+  @SpeakeasyMetadata({ data: "json, name=opted_state" })
   optedState?: string;
 }
 
 
 export class UsersettingsNotificationMoreFromAuthors extends SpeakeasyBase {
-  @Metadata({ data: "json, name=opted_state" })
+  @SpeakeasyMetadata({ data: "json, name=opted_state" })
   optedState?: string;
 }
 
 
 export class UsersettingsNotificationMoreFromSeries extends SpeakeasyBase {
-  @Metadata({ data: "json, name=opted_state" })
+  @SpeakeasyMetadata({ data: "json, name=opted_state" })
   optedState?: string;
 }
 
 
 export class UsersettingsNotificationPriceDrop extends SpeakeasyBase {
-  @Metadata({ data: "json, name=opted_state" })
+  @SpeakeasyMetadata({ data: "json, name=opted_state" })
   optedState?: string;
 }
 
 
 export class UsersettingsNotificationRewardExpirations extends SpeakeasyBase {
-  @Metadata({ data: "json, name=opted_state" })
+  @SpeakeasyMetadata({ data: "json, name=opted_state" })
   optedState?: string;
 }
 
 
 export class UsersettingsNotification extends SpeakeasyBase {
-  @Metadata({ data: "json, name=matchMyInterests" })
+  @SpeakeasyMetadata({ data: "json, name=matchMyInterests" })
   matchMyInterests?: UsersettingsNotificationMatchMyInterests;
 
-  @Metadata({ data: "json, name=moreFromAuthors" })
+  @SpeakeasyMetadata({ data: "json, name=moreFromAuthors" })
   moreFromAuthors?: UsersettingsNotificationMoreFromAuthors;
 
-  @Metadata({ data: "json, name=moreFromSeries" })
+  @SpeakeasyMetadata({ data: "json, name=moreFromSeries" })
   moreFromSeries?: UsersettingsNotificationMoreFromSeries;
 
-  @Metadata({ data: "json, name=priceDrop" })
+  @SpeakeasyMetadata({ data: "json, name=priceDrop" })
   priceDrop?: UsersettingsNotificationPriceDrop;
 
-  @Metadata({ data: "json, name=rewardExpirations" })
+  @SpeakeasyMetadata({ data: "json, name=rewardExpirations" })
   rewardExpirations?: UsersettingsNotificationRewardExpirations;
 }
 
 
 export class Usersettings extends SpeakeasyBase {
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=notesExport" })
+  @SpeakeasyMetadata({ data: "json, name=notesExport" })
   notesExport?: UsersettingsNotesExport;
 
-  @Metadata({ data: "json, name=notification" })
+  @SpeakeasyMetadata({ data: "json, name=notification" })
   notification?: UsersettingsNotification;
 }

@@ -37,5 +37,6 @@ type Dataset struct {
 	MaxTimeTravelHours             *string                  `json:"maxTimeTravelHours,omitempty"`
 	SatisfiesPzs                   *bool                    `json:"satisfiesPzs,omitempty"`
 	SelfLink                       *string                  `json:"selfLink,omitempty"`
+	StorageBillingModel            *string                  `json:"storageBillingModel,omitempty"`
 	Tags                           []DatasetTags            `json:"tags,omitempty"`
 }

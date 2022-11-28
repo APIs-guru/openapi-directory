@@ -1,6 +1,7 @@
 
 
+
 export enum SegmentTypeEnum {
-    TechnicalCue = "TECHNICAL_CUE"
-,    Shot = "SHOT"
+    TechnicalCue = "TECHNICAL_CUE",
+    Shot = "SHOT"
 }

@@ -1,5 +1,7 @@
 package shared
 
+// VMUtilizationMetrics
+// Utilization metrics values for a single VM.
 type VMUtilizationMetrics struct {
 	CPUAverage                   *int32  `json:"cpuAverage,omitempty"`
 	CPUAveragePercent            *int32  `json:"cpuAveragePercent,omitempty"`

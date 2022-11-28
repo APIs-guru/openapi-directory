@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 
@@ -20,18 +21,18 @@ class GetNextUpQueryParams:
 
 @dataclass
 class GetNextUpSecurity:
-    custom_authentication: shared.SchemeCustomAuthentication = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    custom_authentication: shared.SchemeCustomAuthentication = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
     
 
 @dataclass
 class GetNextUpRequest:
-    query_params: GetNextUpQueryParams = field(default=None)
-    security: GetNextUpSecurity = field(default=None)
+    query_params: GetNextUpQueryParams = field()
+    security: GetNextUpSecurity = field()
     
 
 @dataclass
 class GetNextUpResponse:
+    content_type: str = field()
+    status_code: int = field()
     base_item_dto_query_result: Optional[shared.BaseItemDtoQueryResult] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

@@ -17,14 +17,14 @@ type RemoveProjectForTaskRequestBody struct {
 	Data *shared.TaskRemoveProjectRequest `json:"data,omitempty"`
 }
 
+type RemoveProjectForTask200ApplicationJSON struct {
+	Data map[string]interface{} `json:"data,omitempty"`
+}
+
 type RemoveProjectForTaskRequest struct {
 	PathParams  RemoveProjectForTaskPathParams
 	QueryParams RemoveProjectForTaskQueryParams
 	Request     RemoveProjectForTaskRequestBody `request:"mediaType=application/json"`
-}
-
-type RemoveProjectForTask200ApplicationJSON struct {
-	Data map[string]interface{} `json:"data,omitempty"`
 }
 
 type RemoveProjectForTaskResponse struct {

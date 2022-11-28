@@ -1,50 +1,51 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class ReposGetDeploymentStatusPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=deployment_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=deployment_id" })
   deploymentId: number;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=owner" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=owner" })
   owner: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=repo" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=repo" })
   repo: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=status_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=status_id" })
   statusId: number;
 }
 
 
-export class ReposGetDeploymentStatusRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: ReposGetDeploymentStatusPathParams;
-}
-
-
 export class ReposGetDeploymentStatus415ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=documentation_url" })
+  @SpeakeasyMetadata({ data: "json, name=documentation_url" })
   documentationUrl: string;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message: string;
 }
 
 
+export class ReposGetDeploymentStatusRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: ReposGetDeploymentStatusPathParams;
+}
+
+
 export class ReposGetDeploymentStatusResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   basicError?: shared.BasicError;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   deploymentStatus?: shared.DeploymentStatus;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   reposGetDeploymentStatus415ApplicationJsonObject?: ReposGetDeploymentStatus415ApplicationJson;
 }

@@ -1,76 +1,77 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class UpdateNetworkApplianceFirewallOneToOneNatRulesPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=networkId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=networkId" })
   networkId: string;
 }
 
 export enum UpdateNetworkApplianceFirewallOneToOneNatRulesRequestBodyRulesAllowedInboundProtocolEnum {
-    Tcp = "tcp"
-,    Udp = "udp"
-,    IcmpPing = "icmp-ping"
-,    Any = "any"
+    Tcp = "tcp",
+    Udp = "udp",
+    IcmpPing = "icmp-ping",
+    Any = "any"
 }
 
 
 export class UpdateNetworkApplianceFirewallOneToOneNatRulesRequestBodyRulesAllowedInbound extends SpeakeasyBase {
-  @Metadata({ data: "json, name=allowedIps" })
+  @SpeakeasyMetadata({ data: "json, name=allowedIps" })
   allowedIps?: string[];
 
-  @Metadata({ data: "json, name=destinationPorts" })
+  @SpeakeasyMetadata({ data: "json, name=destinationPorts" })
   destinationPorts?: string[];
 
-  @Metadata({ data: "json, name=protocol" })
+  @SpeakeasyMetadata({ data: "json, name=protocol" })
   protocol?: UpdateNetworkApplianceFirewallOneToOneNatRulesRequestBodyRulesAllowedInboundProtocolEnum;
 }
 
 export enum UpdateNetworkApplianceFirewallOneToOneNatRulesRequestBodyRulesUplinkEnum {
-    Internet1 = "internet1"
-,    Internet2 = "internet2"
+    Internet1 = "internet1",
+    Internet2 = "internet2"
 }
 
 
 export class UpdateNetworkApplianceFirewallOneToOneNatRulesRequestBodyRules extends SpeakeasyBase {
-  @Metadata({ data: "json, name=allowedInbound", elemType: operations.UpdateNetworkApplianceFirewallOneToOneNatRulesRequestBodyRulesAllowedInbound })
+  @SpeakeasyMetadata({ data: "json, name=allowedInbound", elemType: UpdateNetworkApplianceFirewallOneToOneNatRulesRequestBodyRulesAllowedInbound })
   allowedInbound?: UpdateNetworkApplianceFirewallOneToOneNatRulesRequestBodyRulesAllowedInbound[];
 
-  @Metadata({ data: "json, name=lanIp" })
+  @SpeakeasyMetadata({ data: "json, name=lanIp" })
   lanIp: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=publicIp" })
+  @SpeakeasyMetadata({ data: "json, name=publicIp" })
   publicIp?: string;
 
-  @Metadata({ data: "json, name=uplink" })
+  @SpeakeasyMetadata({ data: "json, name=uplink" })
   uplink?: UpdateNetworkApplianceFirewallOneToOneNatRulesRequestBodyRulesUplinkEnum;
 }
 
 
 export class UpdateNetworkApplianceFirewallOneToOneNatRulesRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=rules", elemType: operations.UpdateNetworkApplianceFirewallOneToOneNatRulesRequestBodyRules })
+  @SpeakeasyMetadata({ data: "json, name=rules", elemType: UpdateNetworkApplianceFirewallOneToOneNatRulesRequestBodyRules })
   rules: UpdateNetworkApplianceFirewallOneToOneNatRulesRequestBodyRules[];
 }
 
 
 export class UpdateNetworkApplianceFirewallOneToOneNatRulesRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: UpdateNetworkApplianceFirewallOneToOneNatRulesPathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: UpdateNetworkApplianceFirewallOneToOneNatRulesRequestBody;
 }
 
 
 export class UpdateNetworkApplianceFirewallOneToOneNatRulesResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   updateNetworkApplianceFirewallOneToOneNatRules200ApplicationJsonObject?: Map<string, any>;
 }

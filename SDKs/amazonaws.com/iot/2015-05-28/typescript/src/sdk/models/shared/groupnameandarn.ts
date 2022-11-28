@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GroupNameAndArn
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The name and ARN of a group.
 **/
 export class GroupNameAndArn extends SpeakeasyBase {
-  @Metadata({ data: "json, name=groupArn" })
+  @SpeakeasyMetadata({ data: "json, name=groupArn" })
   groupArn?: string;
 
-  @Metadata({ data: "json, name=groupName" })
+  @SpeakeasyMetadata({ data: "json, name=groupName" })
   groupName?: string;
 }

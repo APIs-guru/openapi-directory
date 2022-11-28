@@ -22,8 +22,10 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { Posten } from "./posten";
+import { Rabatt } from "./rabatt";
+import { Zahlung } from "./zahlung";
 export var BelegdatenUnternehmenIdTypEnum;
 (function (BelegdatenUnternehmenIdTypEnum) {
     BelegdatenUnternehmenIdTypEnum["Steuernummer"] = "steuernummer";
@@ -40,87 +42,87 @@ var Belegdaten = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Externer-Beleg-Belegkreis" }),
+        SpeakeasyMetadata({ data: "json, name=Externer-Beleg-Belegkreis" }),
         __metadata("design:type", String)
     ], Belegdaten.prototype, "externerBelegBelegkreis", void 0);
     __decorate([
-        Metadata({ data: "json, name=Externer-Beleg-Bezeichnung" }),
+        SpeakeasyMetadata({ data: "json, name=Externer-Beleg-Bezeichnung" }),
         __metadata("design:type", String)
     ], Belegdaten.prototype, "externerBelegBezeichnung", void 0);
     __decorate([
-        Metadata({ data: "json, name=Externer-Beleg-Referenz" }),
+        SpeakeasyMetadata({ data: "json, name=Externer-Beleg-Referenz" }),
         __metadata("design:type", String)
     ], Belegdaten.prototype, "externerBelegReferenz", void 0);
     __decorate([
-        Metadata({ data: "json, name=Kunde" }),
+        SpeakeasyMetadata({ data: "json, name=Kunde" }),
         __metadata("design:type", String)
     ], Belegdaten.prototype, "kunde", void 0);
     __decorate([
-        Metadata({ data: "json, name=Notizen" }),
+        SpeakeasyMetadata({ data: "json, name=Notizen" }),
         __metadata("design:type", Array)
     ], Belegdaten.prototype, "notizen", void 0);
     __decorate([
-        Metadata({ data: "json, name=Posten", elemType: shared.Posten }),
+        SpeakeasyMetadata({ data: "json, name=Posten", elemType: Posten }),
         __metadata("design:type", Array)
     ], Belegdaten.prototype, "posten", void 0);
     __decorate([
-        Metadata({ data: "json, name=Rabatte", elemType: shared.Rabatt }),
+        SpeakeasyMetadata({ data: "json, name=Rabatte", elemType: Rabatt }),
         __metadata("design:type", Array)
     ], Belegdaten.prototype, "rabatte", void 0);
     __decorate([
-        Metadata({ data: "json, name=Storno" }),
+        SpeakeasyMetadata({ data: "json, name=Storno" }),
         __metadata("design:type", Boolean)
     ], Belegdaten.prototype, "storno", void 0);
     __decorate([
-        Metadata({ data: "json, name=Storno-Beleg-UUID" }),
+        SpeakeasyMetadata({ data: "json, name=Storno-Beleg-UUID" }),
         __metadata("design:type", String)
     ], Belegdaten.prototype, "stornoBelegUuid", void 0);
     __decorate([
-        Metadata({ data: "json, name=Storno-Text" }),
+        SpeakeasyMetadata({ data: "json, name=Storno-Text" }),
         __metadata("design:type", String)
     ], Belegdaten.prototype, "stornoText", void 0);
     __decorate([
-        Metadata({ data: "json, name=Training" }),
+        SpeakeasyMetadata({ data: "json, name=Training" }),
         __metadata("design:type", Boolean)
     ], Belegdaten.prototype, "training", void 0);
     __decorate([
-        Metadata({ data: "json, name=Unternehmen-Adresse1" }),
+        SpeakeasyMetadata({ data: "json, name=Unternehmen-Adresse1" }),
         __metadata("design:type", String)
     ], Belegdaten.prototype, "unternehmenAdresse1", void 0);
     __decorate([
-        Metadata({ data: "json, name=Unternehmen-Adresse2" }),
+        SpeakeasyMetadata({ data: "json, name=Unternehmen-Adresse2" }),
         __metadata("design:type", String)
     ], Belegdaten.prototype, "unternehmenAdresse2", void 0);
     __decorate([
-        Metadata({ data: "json, name=Unternehmen-Fusszeile" }),
+        SpeakeasyMetadata({ data: "json, name=Unternehmen-Fusszeile" }),
         __metadata("design:type", String)
     ], Belegdaten.prototype, "unternehmenFusszeile", void 0);
     __decorate([
-        Metadata({ data: "json, name=Unternehmen-ID" }),
+        SpeakeasyMetadata({ data: "json, name=Unternehmen-ID" }),
         __metadata("design:type", String)
     ], Belegdaten.prototype, "unternehmenId", void 0);
     __decorate([
-        Metadata({ data: "json, name=Unternehmen-ID-Typ" }),
+        SpeakeasyMetadata({ data: "json, name=Unternehmen-ID-Typ" }),
         __metadata("design:type", String)
     ], Belegdaten.prototype, "unternehmenIdTyp", void 0);
     __decorate([
-        Metadata({ data: "json, name=Unternehmen-Kopfzeile" }),
+        SpeakeasyMetadata({ data: "json, name=Unternehmen-Kopfzeile" }),
         __metadata("design:type", String)
     ], Belegdaten.prototype, "unternehmenKopfzeile", void 0);
     __decorate([
-        Metadata({ data: "json, name=Unternehmen-Name" }),
+        SpeakeasyMetadata({ data: "json, name=Unternehmen-Name" }),
         __metadata("design:type", String)
     ], Belegdaten.prototype, "unternehmenName", void 0);
     __decorate([
-        Metadata({ data: "json, name=Unternehmen-Ort" }),
+        SpeakeasyMetadata({ data: "json, name=Unternehmen-Ort" }),
         __metadata("design:type", String)
     ], Belegdaten.prototype, "unternehmenOrt", void 0);
     __decorate([
-        Metadata({ data: "json, name=Unternehmen-PLZ" }),
+        SpeakeasyMetadata({ data: "json, name=Unternehmen-PLZ" }),
         __metadata("design:type", String)
     ], Belegdaten.prototype, "unternehmenPlz", void 0);
     __decorate([
-        Metadata({ data: "json, name=Zahlungen", elemType: shared.Zahlung }),
+        SpeakeasyMetadata({ data: "json, name=Zahlungen", elemType: Zahlung }),
         __metadata("design:type", Array)
     ], Belegdaten.prototype, "zahlungen", void 0);
     return Belegdaten;

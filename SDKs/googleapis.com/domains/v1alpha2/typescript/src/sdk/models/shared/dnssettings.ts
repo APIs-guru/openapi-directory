@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CustomDns } from "./customdns";
 import { GlueRecord } from "./gluerecord";
 import { GoogleDomainsDns } from "./googledomainsdns";
+import { GoogleDomainsDnsInput } from "./googledomainsdns";
+
 
 
 // DnsSettings
@@ -10,12 +11,28 @@ import { GoogleDomainsDns } from "./googledomainsdns";
  * Defines the DNS configuration of a `Registration`, including name servers, DNSSEC, and glue records.
 **/
 export class DnsSettings extends SpeakeasyBase {
-  @Metadata({ data: "json, name=customDns" })
+  @SpeakeasyMetadata({ data: "json, name=customDns" })
   customDns?: CustomDns;
 
-  @Metadata({ data: "json, name=glueRecords", elemType: shared.GlueRecord })
+  @SpeakeasyMetadata({ data: "json, name=glueRecords", elemType: GlueRecord })
   glueRecords?: GlueRecord[];
 
-  @Metadata({ data: "json, name=googleDomainsDns" })
+  @SpeakeasyMetadata({ data: "json, name=googleDomainsDns" })
   googleDomainsDns?: GoogleDomainsDns;
+}
+
+
+// DnsSettingsInput
+/** 
+ * Defines the DNS configuration of a `Registration`, including name servers, DNSSEC, and glue records.
+**/
+export class DnsSettingsInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=customDns" })
+  customDns?: CustomDns;
+
+  @SpeakeasyMetadata({ data: "json, name=glueRecords", elemType: GlueRecord })
+  glueRecords?: GlueRecord[];
+
+  @SpeakeasyMetadata({ data: "json, name=googleDomainsDns" })
+  googleDomainsDns?: GoogleDomainsDnsInput;
 }

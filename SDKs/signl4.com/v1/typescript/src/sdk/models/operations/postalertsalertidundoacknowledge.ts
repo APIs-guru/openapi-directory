@@ -1,50 +1,51 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class PostAlertsAlertIdUndoAcknowledgePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=alertId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=alertId" })
   alertId: string;
 }
 
 
 export class PostAlertsAlertIdUndoAcknowledgeRequests extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/*+json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/*+json" })
   changeAlertStatusInfo?: shared.ChangeAlertStatusInfo;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   changeAlertStatusInfo1?: shared.ChangeAlertStatusInfo;
 
-  @Metadata({ data: "request, media_type=application/json-patch+json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json-patch+json" })
   changeAlertStatusInfo2?: shared.ChangeAlertStatusInfo;
 
-  @Metadata({ data: "request, media_type=text/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=text/json" })
   changeAlertStatusInfo3?: shared.ChangeAlertStatusInfo;
 }
 
 
 export class PostAlertsAlertIdUndoAcknowledgeRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: PostAlertsAlertIdUndoAcknowledgePathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   request?: PostAlertsAlertIdUndoAcknowledgeRequests;
 }
 
 
 export class PostAlertsAlertIdUndoAcknowledgeResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   errorResponseContent?: shared.ErrorResponseContent;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   overviewAlert?: shared.OverviewAlert;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

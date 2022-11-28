@@ -1,53 +1,54 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class PatchApiV1EnvironmentsEnvironmentIdFolderPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=environmentId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=environmentId" })
   environmentId: string;
 }
 
 
 export class PatchApiV1EnvironmentsEnvironmentIdFolderRequests extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/*+json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/*+json" })
   cloudEnvironmentFolderBody?: shared.CloudEnvironmentFolderBody;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   cloudEnvironmentFolderBody1?: shared.CloudEnvironmentFolderBody;
 
-  @Metadata({ data: "request, media_type=application/json-patch+json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json-patch+json" })
   cloudEnvironmentFolderBody2?: shared.CloudEnvironmentFolderBody;
 
-  @Metadata({ data: "request, media_type=text/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=text/json" })
   cloudEnvironmentFolderBody3?: shared.CloudEnvironmentFolderBody;
 }
 
 
 export class PatchApiV1EnvironmentsEnvironmentIdFolderRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: PatchApiV1EnvironmentsEnvironmentIdFolderPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   request?: PatchApiV1EnvironmentsEnvironmentIdFolderRequests;
 }
 
 
 export class PatchApiV1EnvironmentsEnvironmentIdFolderResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   cloudEnvironmentResult?: shared.CloudEnvironmentResult;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   messageCodes?: number[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   problemDetails?: Map<string, any>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

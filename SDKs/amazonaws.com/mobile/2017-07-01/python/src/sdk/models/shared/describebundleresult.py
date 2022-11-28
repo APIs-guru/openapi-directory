@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import bundledetails
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class DescribeBundleResult:
-    details: Optional[bundledetails.BundleDetails] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'details' }})
+    r"""DescribeBundleResult
+     Result structure contains the details of the bundle. 
+    """
+    
+    details: Optional[BundleDetails] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('details') }})
     

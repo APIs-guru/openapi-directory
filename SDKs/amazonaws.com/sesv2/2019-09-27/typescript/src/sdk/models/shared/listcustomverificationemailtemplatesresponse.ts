@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CustomVerificationEmailTemplateMetadata } from "./customverificationemailtemplatemetadata";
+
 
 
 // ListCustomVerificationEmailTemplatesResponse
@@ -8,9 +8,9 @@ import { CustomVerificationEmailTemplateMetadata } from "./customverificationema
  * The following elements are returned by the service.
 **/
 export class ListCustomVerificationEmailTemplatesResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CustomVerificationEmailTemplates", elemType: shared.CustomVerificationEmailTemplateMetadata })
+  @SpeakeasyMetadata({ data: "json, name=CustomVerificationEmailTemplates", elemType: CustomVerificationEmailTemplateMetadata })
   customVerificationEmailTemplates?: CustomVerificationEmailTemplateMetadata[];
 
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 }

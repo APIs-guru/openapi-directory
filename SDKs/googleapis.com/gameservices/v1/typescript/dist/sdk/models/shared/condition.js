@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var ConditionIamEnum;
 (function (ConditionIamEnum) {
     ConditionIamEnum["NoAttr"] = "NO_ATTR";
@@ -61,23 +61,23 @@ var Condition = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=iam" }),
+        SpeakeasyMetadata({ data: "json, name=iam" }),
         __metadata("design:type", String)
     ], Condition.prototype, "iam", void 0);
     __decorate([
-        Metadata({ data: "json, name=op" }),
+        SpeakeasyMetadata({ data: "json, name=op" }),
         __metadata("design:type", String)
     ], Condition.prototype, "op", void 0);
     __decorate([
-        Metadata({ data: "json, name=svc" }),
+        SpeakeasyMetadata({ data: "json, name=svc" }),
         __metadata("design:type", String)
     ], Condition.prototype, "svc", void 0);
     __decorate([
-        Metadata({ data: "json, name=sys" }),
+        SpeakeasyMetadata({ data: "json, name=sys" }),
         __metadata("design:type", String)
     ], Condition.prototype, "sys", void 0);
     __decorate([
-        Metadata({ data: "json, name=values" }),
+        SpeakeasyMetadata({ data: "json, name=values" }),
         __metadata("design:type", Array)
     ], Condition.prototype, "values", void 0);
     return Condition;

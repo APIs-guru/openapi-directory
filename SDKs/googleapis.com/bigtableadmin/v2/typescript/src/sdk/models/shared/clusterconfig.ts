@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ClusterAutoscalingConfig } from "./clusterautoscalingconfig";
+
 
 
 // ClusterConfig
@@ -7,6 +8,6 @@ import { ClusterAutoscalingConfig } from "./clusterautoscalingconfig";
  * Configuration for a cluster.
 **/
 export class ClusterConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=clusterAutoscalingConfig" })
+  @SpeakeasyMetadata({ data: "json, name=clusterAutoscalingConfig" })
   clusterAutoscalingConfig?: ClusterAutoscalingConfig;
 }

@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class GetSpeechSynthesisTaskPathParams:
-    task_id: str = field(default=None, metadata={'path_param': { 'field_name': 'TaskId', 'style': 'simple', 'explode': False }})
+    task_id: str = field(metadata={'path_param': { 'field_name': 'TaskId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -21,16 +24,16 @@ class GetSpeechSynthesisTaskHeaders:
 
 @dataclass
 class GetSpeechSynthesisTaskRequest:
-    path_params: GetSpeechSynthesisTaskPathParams = field(default=None)
-    headers: GetSpeechSynthesisTaskHeaders = field(default=None)
+    headers: GetSpeechSynthesisTaskHeaders = field()
+    path_params: GetSpeechSynthesisTaskPathParams = field()
     
 
 @dataclass
 class GetSpeechSynthesisTaskResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     get_speech_synthesis_task_output: Optional[shared.GetSpeechSynthesisTaskOutput] = field(default=None)
     invalid_task_id_exception: Optional[Any] = field(default=None)
     service_failure_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     synthesis_task_not_found_exception: Optional[Any] = field(default=None)
     

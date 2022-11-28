@@ -1,5 +1,8 @@
 package shared
 
+// DetectMitigationActionsTaskStatistics
+//
+//	The statistics of a mitigation action task.
 type DetectMitigationActionsTaskStatistics struct {
 	ActionsExecuted *int64 `json:"actionsExecuted,omitempty"`
 	ActionsFailed   *int64 `json:"actionsFailed,omitempty"`

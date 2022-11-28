@@ -1,5 +1,7 @@
 package shared
 
+// Padding
+// The amount of padding around the cell, in pixels. When updating padding, every field must be specified.
 type Padding struct {
 	Bottom *int32 `json:"bottom,omitempty"`
 	Left   *int32 `json:"left,omitempty"`

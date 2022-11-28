@@ -4,16 +4,16 @@ type HealthCheckHeaders struct {
 	AcceptLanguage string `header:"style=simple,explode=false,name=Accept-Language"`
 }
 
-type HealthCheckRequest struct {
-	Headers HealthCheckHeaders
-}
-
 type HealthCheck200ApplicationJSON struct {
 	AllGood     *bool   `json:"allGood,omitempty"`
 	CapiOk      *bool   `json:"capiOk,omitempty"`
 	DbOk        *bool   `json:"dbOk,omitempty"`
 	MemcachedOk *bool   `json:"memcachedOk,omitempty"`
 	Message     *string `json:"message,omitempty"`
+}
+
+type HealthCheckRequest struct {
+	Headers HealthCheckHeaders
 }
 
 type HealthCheckResponse struct {

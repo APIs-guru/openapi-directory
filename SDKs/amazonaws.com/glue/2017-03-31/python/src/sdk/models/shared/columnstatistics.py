@@ -1,16 +1,21 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
 from dataclasses_json import dataclass_json
-from . import columnstatisticsdata
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ColumnStatistics:
-    analyzed_time: datetime = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AnalyzedTime', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    column_name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ColumnName' }})
-    column_type: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ColumnType' }})
-    statistics_data: columnstatisticsdata.ColumnStatisticsData = field(default=None, metadata={'dataclasses_json': { 'field_name': 'StatisticsData' }})
+    r"""ColumnStatistics
+    Represents the generated column-level statistics for a table or partition.
+    """
+    
+    analyzed_time: datetime = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('AnalyzedTime'), 'encoder': utils.datetimeisoformat(False), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    column_name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('ColumnName') }})
+    column_type: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('ColumnType') }})
+    statistics_data: ColumnStatisticsData = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('StatisticsData') }})
     

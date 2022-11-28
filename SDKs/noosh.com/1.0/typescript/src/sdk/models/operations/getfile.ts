@@ -1,37 +1,38 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetFilePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=file_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=file_id" })
   fileId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=project_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=project_id" })
   projectId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=workgroup_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=workgroup_id" })
   workgroupId: string;
 }
 
 
 export class GetFileRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetFilePathParams;
 }
 
 
 export class GetFileResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   fileResponseVo?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   httpStatusVo?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class UntagResourceRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ResourceArn" })
+  @SpeakeasyMetadata({ data: "json, name=ResourceArn" })
   resourceArn: string;
 
-  @Metadata({ data: "json, name=TagsToRemove" })
+  @SpeakeasyMetadata({ data: "json, name=TagsToRemove" })
   tagsToRemove: string[];
 }

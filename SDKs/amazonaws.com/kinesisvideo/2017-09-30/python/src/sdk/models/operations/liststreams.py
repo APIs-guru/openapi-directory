@@ -1,6 +1,11 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -24,30 +29,34 @@ class ListStreamsHeaders:
 @dataclass_json
 @dataclass
 class ListStreamsRequestBodyStreamNameCondition:
-    comparison_operator: Optional[shared.ComparisonOperatorEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ComparisonOperator' }})
-    comparison_value: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ComparisonValue' }})
+    r"""ListStreamsRequestBodyStreamNameCondition
+    Specifies the condition that streams must satisfy to be returned when you list streams (see the <code>ListStreams</code> API). A condition has a comparison operation and a value. Currently, you can specify only the <code>BEGINS_WITH</code> operator, which finds streams whose names start with a given prefix. 
+    """
+    
+    comparison_operator: Optional[shared.ComparisonOperatorEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ComparisonOperator') }})
+    comparison_value: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ComparisonValue') }})
     
 
 @dataclass_json
 @dataclass
 class ListStreamsRequestBody:
-    max_results: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'MaxResults' }})
-    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'NextToken' }})
-    stream_name_condition: Optional[ListStreamsRequestBodyStreamNameCondition] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'StreamNameCondition' }})
+    max_results: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('MaxResults') }})
+    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('NextToken') }})
+    stream_name_condition: Optional[ListStreamsRequestBodyStreamNameCondition] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('StreamNameCondition') }})
     
 
 @dataclass
 class ListStreamsRequest:
-    query_params: ListStreamsQueryParams = field(default=None)
-    headers: ListStreamsHeaders = field(default=None)
-    request: ListStreamsRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: ListStreamsHeaders = field()
+    query_params: ListStreamsQueryParams = field()
+    request: ListStreamsRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class ListStreamsResponse:
+    content_type: str = field()
+    status_code: int = field()
     client_limit_exceeded_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     invalid_argument_exception: Optional[Any] = field(default=None)
     list_streams_output: Optional[shared.ListStreamsOutput] = field(default=None)
-    status_code: int = field(default=None)
     

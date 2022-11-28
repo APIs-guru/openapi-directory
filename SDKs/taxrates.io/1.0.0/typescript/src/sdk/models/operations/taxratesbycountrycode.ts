@@ -1,82 +1,83 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class TaxRatesByCountryCodeQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=country_code" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=country_code" })
   countryCode?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=date" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=date" })
   date?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=domain" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=domain" })
   domain?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=filter" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=filter" })
   filter?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=product_codes[]" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=product_codes[]" })
   productCodes?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=province " })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=province " })
   province?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=zip" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=zip" })
   zip?: string;
 }
 
 
-export class TaxRatesByCountryCodeRequest extends SpeakeasyBase {
-  @Metadata()
-  queryParams: TaxRatesByCountryCodeQueryParams;
-}
-
-
 export class TaxRatesByCountryCode200ApplicationJsonTaxes extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Country" })
+  @SpeakeasyMetadata({ data: "json, name=Country" })
   country?: string;
 
-  @Metadata({ data: "json, name=Type" })
+  @SpeakeasyMetadata({ data: "json, name=Type" })
   type?: string;
 
-  @Metadata({ data: "json, name=data_name" })
+  @SpeakeasyMetadata({ data: "json, name=data_name" })
   dataName?: string;
 
-  @Metadata({ data: "json, name=data_value" })
+  @SpeakeasyMetadata({ data: "json, name=data_value" })
   dataValue?: string;
 }
 
 
 export class TaxRatesByCountryCode200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=country_name" })
+  @SpeakeasyMetadata({ data: "json, name=country_name" })
   countryName?: string;
 
-  @Metadata({ data: "json, name=taxes", elemType: operations.TaxRatesByCountryCode200ApplicationJsonTaxes })
+  @SpeakeasyMetadata({ data: "json, name=taxes", elemType: TaxRatesByCountryCode200ApplicationJsonTaxes })
   taxes?: TaxRatesByCountryCode200ApplicationJsonTaxes[];
 }
 
 
 export class TaxRatesByCountryCode500ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=code" })
+  @SpeakeasyMetadata({ data: "json, name=code" })
   code?: string;
 
-  @Metadata({ data: "json, name=fields" })
+  @SpeakeasyMetadata({ data: "json, name=fields" })
   fields?: string;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
+export class TaxRatesByCountryCodeRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  queryParams: TaxRatesByCountryCodeQueryParams;
+}
+
+
 export class TaxRatesByCountryCodeResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   taxRatesByCountryCode200ApplicationJsonObject?: TaxRatesByCountryCode200ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   taxRatesByCountryCode500ApplicationJsonObject?: TaxRatesByCountryCode500ApplicationJson;
 }

@@ -1,18 +1,21 @@
 from dataclasses import dataclass, field
 from typing import Any,Optional
 from dataclasses_json import dataclass_json
-from . import googleclouddatacatalogv1physicalschemaavroschema
-from . import googleclouddatacatalogv1physicalschemaprotobufschema
-from . import googleclouddatacatalogv1physicalschemathriftschema
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class GoogleCloudDatacatalogV1PhysicalSchema:
-    avro: Optional[googleclouddatacatalogv1physicalschemaavroschema.GoogleCloudDatacatalogV1PhysicalSchemaAvroSchema] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'avro' }})
-    csv: Optional[dict[str, Any]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'csv' }})
-    orc: Optional[dict[str, Any]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'orc' }})
-    parquet: Optional[dict[str, Any]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'parquet' }})
-    protobuf: Optional[googleclouddatacatalogv1physicalschemaprotobufschema.GoogleCloudDatacatalogV1PhysicalSchemaProtobufSchema] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'protobuf' }})
-    thrift: Optional[googleclouddatacatalogv1physicalschemathriftschema.GoogleCloudDatacatalogV1PhysicalSchemaThriftSchema] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'thrift' }})
+    r"""GoogleCloudDatacatalogV1PhysicalSchema
+    Native schema used by a resource represented as an entry. Used by query engines for deserializing and parsing source data.
+    """
+    
+    avro: Optional[GoogleCloudDatacatalogV1PhysicalSchemaAvroSchema] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('avro') }})
+    csv: Optional[dict[str, Any]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('csv') }})
+    orc: Optional[dict[str, Any]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('orc') }})
+    parquet: Optional[dict[str, Any]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('parquet') }})
+    protobuf: Optional[GoogleCloudDatacatalogV1PhysicalSchemaProtobufSchema] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('protobuf') }})
+    thrift: Optional[GoogleCloudDatacatalogV1PhysicalSchemaThriftSchema] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('thrift') }})
     

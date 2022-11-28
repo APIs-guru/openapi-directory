@@ -4,8 +4,8 @@ from typing import Any,Optional
 
 @dataclass
 class AccountLoginResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     object: Optional[dict[str, Any]] = field(default=None)
-    status_code: int = field(default=None)
     

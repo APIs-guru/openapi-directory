@@ -1,90 +1,122 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { EncryptionConfiguration } from "./encryptionconfiguration";
-import { StandardSqlField } from "./standardsqlfield";
 import { HparamSearchSpaces } from "./hparamsearchspaces";
-import { HparamTuningTrial } from "./hparamtuningtrial";
-import { StandardSqlField } from "./standardsqlfield";
 import { ModelReference } from "./modelreference";
+import { TrainingRunInput } from "./trainingrun";
+import { StandardSqlField } from "./standardsqlfield";
+import { HparamTuningTrial } from "./hparamtuningtrial";
 import { TrainingRun } from "./trainingrun";
 
+
 export enum ModelModelTypeEnum {
-    ModelTypeUnspecified = "MODEL_TYPE_UNSPECIFIED"
-,    LinearRegression = "LINEAR_REGRESSION"
-,    LogisticRegression = "LOGISTIC_REGRESSION"
-,    Kmeans = "KMEANS"
-,    MatrixFactorization = "MATRIX_FACTORIZATION"
-,    DnnClassifier = "DNN_CLASSIFIER"
-,    Tensorflow = "TENSORFLOW"
-,    DnnRegressor = "DNN_REGRESSOR"
-,    BoostedTreeRegressor = "BOOSTED_TREE_REGRESSOR"
-,    BoostedTreeClassifier = "BOOSTED_TREE_CLASSIFIER"
-,    Arima = "ARIMA"
-,    AutomlRegressor = "AUTOML_REGRESSOR"
-,    AutomlClassifier = "AUTOML_CLASSIFIER"
-,    Pca = "PCA"
-,    DnnLinearCombinedClassifier = "DNN_LINEAR_COMBINED_CLASSIFIER"
-,    DnnLinearCombinedRegressor = "DNN_LINEAR_COMBINED_REGRESSOR"
-,    Autoencoder = "AUTOENCODER"
-,    ArimaPlus = "ARIMA_PLUS"
+    ModelTypeUnspecified = "MODEL_TYPE_UNSPECIFIED",
+    LinearRegression = "LINEAR_REGRESSION",
+    LogisticRegression = "LOGISTIC_REGRESSION",
+    Kmeans = "KMEANS",
+    MatrixFactorization = "MATRIX_FACTORIZATION",
+    DnnClassifier = "DNN_CLASSIFIER",
+    Tensorflow = "TENSORFLOW",
+    DnnRegressor = "DNN_REGRESSOR",
+    BoostedTreeRegressor = "BOOSTED_TREE_REGRESSOR",
+    BoostedTreeClassifier = "BOOSTED_TREE_CLASSIFIER",
+    Arima = "ARIMA",
+    AutomlRegressor = "AUTOML_REGRESSOR",
+    AutomlClassifier = "AUTOML_CLASSIFIER",
+    Pca = "PCA",
+    DnnLinearCombinedClassifier = "DNN_LINEAR_COMBINED_CLASSIFIER",
+    DnnLinearCombinedRegressor = "DNN_LINEAR_COMBINED_REGRESSOR",
+    Autoencoder = "AUTOENCODER",
+    ArimaPlus = "ARIMA_PLUS",
+    RandomForestRegressor = "RANDOM_FOREST_REGRESSOR",
+    RandomForestClassifier = "RANDOM_FOREST_CLASSIFIER"
+}
+
+
+export class ModelInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=bestTrialId" })
+  bestTrialId?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=description" })
+  description?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=encryptionConfiguration" })
+  encryptionConfiguration?: EncryptionConfiguration;
+
+  @SpeakeasyMetadata({ data: "json, name=expirationTime" })
+  expirationTime?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=friendlyName" })
+  friendlyName?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=hparamSearchSpaces" })
+  hparamSearchSpaces?: HparamSearchSpaces;
+
+  @SpeakeasyMetadata({ data: "json, name=labels" })
+  labels?: Map<string, string>;
+
+  @SpeakeasyMetadata({ data: "json, name=modelReference" })
+  modelReference?: ModelReference;
+
+  @SpeakeasyMetadata({ data: "json, name=trainingRuns", elemType: TrainingRunInput })
+  trainingRuns?: TrainingRunInput[];
 }
 
 
 export class Model extends SpeakeasyBase {
-  @Metadata({ data: "json, name=bestTrialId" })
+  @SpeakeasyMetadata({ data: "json, name=bestTrialId" })
   bestTrialId?: string;
 
-  @Metadata({ data: "json, name=creationTime" })
+  @SpeakeasyMetadata({ data: "json, name=creationTime" })
   creationTime?: string;
 
-  @Metadata({ data: "json, name=defaultTrialId" })
+  @SpeakeasyMetadata({ data: "json, name=defaultTrialId" })
   defaultTrialId?: string;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=encryptionConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=encryptionConfiguration" })
   encryptionConfiguration?: EncryptionConfiguration;
 
-  @Metadata({ data: "json, name=etag" })
+  @SpeakeasyMetadata({ data: "json, name=etag" })
   etag?: string;
 
-  @Metadata({ data: "json, name=expirationTime" })
+  @SpeakeasyMetadata({ data: "json, name=expirationTime" })
   expirationTime?: string;
 
-  @Metadata({ data: "json, name=featureColumns", elemType: shared.StandardSqlField })
+  @SpeakeasyMetadata({ data: "json, name=featureColumns", elemType: StandardSqlField })
   featureColumns?: StandardSqlField[];
 
-  @Metadata({ data: "json, name=friendlyName" })
+  @SpeakeasyMetadata({ data: "json, name=friendlyName" })
   friendlyName?: string;
 
-  @Metadata({ data: "json, name=hparamSearchSpaces" })
+  @SpeakeasyMetadata({ data: "json, name=hparamSearchSpaces" })
   hparamSearchSpaces?: HparamSearchSpaces;
 
-  @Metadata({ data: "json, name=hparamTrials", elemType: shared.HparamTuningTrial })
+  @SpeakeasyMetadata({ data: "json, name=hparamTrials", elemType: HparamTuningTrial })
   hparamTrials?: HparamTuningTrial[];
 
-  @Metadata({ data: "json, name=labelColumns", elemType: shared.StandardSqlField })
+  @SpeakeasyMetadata({ data: "json, name=labelColumns", elemType: StandardSqlField })
   labelColumns?: StandardSqlField[];
 
-  @Metadata({ data: "json, name=labels" })
+  @SpeakeasyMetadata({ data: "json, name=labels" })
   labels?: Map<string, string>;
 
-  @Metadata({ data: "json, name=lastModifiedTime" })
+  @SpeakeasyMetadata({ data: "json, name=lastModifiedTime" })
   lastModifiedTime?: string;
 
-  @Metadata({ data: "json, name=location" })
+  @SpeakeasyMetadata({ data: "json, name=location" })
   location?: string;
 
-  @Metadata({ data: "json, name=modelReference" })
+  @SpeakeasyMetadata({ data: "json, name=modelReference" })
   modelReference?: ModelReference;
 
-  @Metadata({ data: "json, name=modelType" })
+  @SpeakeasyMetadata({ data: "json, name=modelType" })
   modelType?: ModelModelTypeEnum;
 
-  @Metadata({ data: "json, name=optimalTrialIds" })
+  @SpeakeasyMetadata({ data: "json, name=optimalTrialIds" })
   optimalTrialIds?: string[];
 
-  @Metadata({ data: "json, name=trainingRuns", elemType: shared.TrainingRun })
+  @SpeakeasyMetadata({ data: "json, name=trainingRuns", elemType: TrainingRun })
   trainingRuns?: TrainingRun[];
 }

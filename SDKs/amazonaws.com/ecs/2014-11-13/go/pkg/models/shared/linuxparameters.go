@@ -1,5 +1,7 @@
 package shared
 
+// LinuxParameters
+// Linux-specific options that are applied to the container, such as Linux <a>KernelCapabilities</a>.
 type LinuxParameters struct {
 	Capabilities       *KernelCapabilities `json:"capabilities,omitempty"`
 	Devices            []Device            `json:"devices,omitempty"`

@@ -16,6 +16,8 @@ const (
 	AutoRenewingBasePlanTypeResubscribeStateEnumResubscribeStateInactive    AutoRenewingBasePlanTypeResubscribeStateEnum = "RESUBSCRIBE_STATE_INACTIVE"
 )
 
+// AutoRenewingBasePlanType
+// Represents a base plan that automatically renews at the end of its subscription period.
 type AutoRenewingBasePlanType struct {
 	BillingPeriodDuration               *string                                       `json:"billingPeriodDuration,omitempty"`
 	GracePeriodDuration                 *string                                       `json:"gracePeriodDuration,omitempty"`

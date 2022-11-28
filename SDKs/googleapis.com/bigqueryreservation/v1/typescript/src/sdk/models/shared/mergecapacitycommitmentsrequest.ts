@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // MergeCapacityCommitmentsRequest
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The request for ReservationService.MergeCapacityCommitments.
 **/
 export class MergeCapacityCommitmentsRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=capacityCommitmentIds" })
+  @SpeakeasyMetadata({ data: "json, name=capacityCommitmentIds" })
   capacityCommitmentIds?: string[];
 }

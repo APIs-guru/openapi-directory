@@ -1,21 +1,21 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BudgetDetail } from "./budgetdetail";
 import { PortfolioDetail } from "./portfoliodetail";
 import { TagOptionDetail } from "./tagoptiondetail";
 import { Tag } from "./tag";
 
 
+
 export class DescribePortfolioOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Budgets", elemType: shared.BudgetDetail })
+  @SpeakeasyMetadata({ data: "json, name=Budgets", elemType: BudgetDetail })
   budgets?: BudgetDetail[];
 
-  @Metadata({ data: "json, name=PortfolioDetail" })
+  @SpeakeasyMetadata({ data: "json, name=PortfolioDetail" })
   portfolioDetail?: PortfolioDetail;
 
-  @Metadata({ data: "json, name=TagOptions", elemType: shared.TagOptionDetail })
+  @SpeakeasyMetadata({ data: "json, name=TagOptions", elemType: TagOptionDetail })
   tagOptions?: TagOptionDetail[];
 
-  @Metadata({ data: "json, name=Tags", elemType: shared.Tag })
+  @SpeakeasyMetadata({ data: "json, name=Tags", elemType: Tag })
   tags?: Tag[];
 }

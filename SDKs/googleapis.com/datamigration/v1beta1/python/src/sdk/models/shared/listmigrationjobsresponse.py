@@ -1,13 +1,18 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import migrationjob
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ListMigrationJobsResponse:
-    migration_jobs: Optional[List[migrationjob.MigrationJob]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'migrationJobs' }})
-    next_page_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'nextPageToken' }})
-    unreachable: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'unreachable' }})
+    r"""ListMigrationJobsResponse
+    Response message for 'ListMigrationJobs' request.
+    """
+    
+    migration_jobs: Optional[List[MigrationJob]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('migrationJobs') }})
+    next_page_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('nextPageToken') }})
+    unreachable: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('unreachable') }})
     

@@ -8,6 +8,8 @@ const (
 	GoogleAppsCardV1SwitchControlControlTypeEnumCheckBox GoogleAppsCardV1SwitchControlControlTypeEnum = "CHECK_BOX"
 )
 
+// GoogleAppsCardV1SwitchControl
+// Either a toggle-style switch or a checkbox inside a `decoratedText` widget. Only supported on the `decoratedText` widget. Currently supported in [dialogs](https://developers.google.com/chat/how-tos/dialogs). Support for [card messages](https://developers.google.com/chat/api/guides/message-formats/cards) is coming soon.
 type GoogleAppsCardV1SwitchControl struct {
 	ControlType    *GoogleAppsCardV1SwitchControlControlTypeEnum `json:"controlType,omitempty"`
 	Name           *string                                       `json:"name,omitempty"`

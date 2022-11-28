@@ -103,7 +103,6 @@ from .vlan import *
 from .vlangroup import *
 from .vrf import *
 from .writableaggregate import *
-from .writableavailableip import *
 from .writablecable import *
 from .writablecircuit import *
 from .writablecircuittermination import *

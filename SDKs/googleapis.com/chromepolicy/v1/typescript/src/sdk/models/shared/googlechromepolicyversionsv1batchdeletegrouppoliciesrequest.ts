@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleChromePolicyVersionsV1DeleteGroupPolicyRequest } from "./googlechromepolicyversionsv1deletegrouppolicyrequest";
+
 
 
 // GoogleChromePolicyVersionsV1BatchDeleteGroupPoliciesRequest
@@ -8,6 +8,6 @@ import { GoogleChromePolicyVersionsV1DeleteGroupPolicyRequest } from "./googlech
  * Request message for specifying that multiple policy values will be deleted.
 **/
 export class GoogleChromePolicyVersionsV1BatchDeleteGroupPoliciesRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=requests", elemType: shared.GoogleChromePolicyVersionsV1DeleteGroupPolicyRequest })
+  @SpeakeasyMetadata({ data: "json, name=requests", elemType: GoogleChromePolicyVersionsV1DeleteGroupPolicyRequest })
   requests?: GoogleChromePolicyVersionsV1DeleteGroupPolicyRequest[];
 }

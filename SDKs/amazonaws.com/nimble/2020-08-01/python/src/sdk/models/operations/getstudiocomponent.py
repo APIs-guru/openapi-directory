@@ -1,12 +1,15 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class GetStudioComponentPathParams:
-    studio_component_id: str = field(default=None, metadata={'path_param': { 'field_name': 'studioComponentId', 'style': 'simple', 'explode': False }})
-    studio_id: str = field(default=None, metadata={'path_param': { 'field_name': 'studioId', 'style': 'simple', 'explode': False }})
+    studio_component_id: str = field(metadata={'path_param': { 'field_name': 'studioComponentId', 'style': 'simple', 'explode': False }})
+    studio_id: str = field(metadata={'path_param': { 'field_name': 'studioId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -22,20 +25,20 @@ class GetStudioComponentHeaders:
 
 @dataclass
 class GetStudioComponentRequest:
-    path_params: GetStudioComponentPathParams = field(default=None)
-    headers: GetStudioComponentHeaders = field(default=None)
+    headers: GetStudioComponentHeaders = field()
+    path_params: GetStudioComponentPathParams = field()
     
 
 @dataclass
 class GetStudioComponentResponse:
+    content_type: str = field()
+    status_code: int = field()
     access_denied_exception: Optional[Any] = field(default=None)
     conflict_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     get_studio_component_response: Optional[shared.GetStudioComponentResponse] = field(default=None)
     internal_server_error_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
     service_quota_exceeded_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     validation_exception: Optional[Any] = field(default=None)
     

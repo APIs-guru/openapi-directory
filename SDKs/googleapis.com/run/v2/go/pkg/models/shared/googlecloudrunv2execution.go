@@ -13,6 +13,8 @@ const (
 	GoogleCloudRunV2ExecutionLaunchStageEnumDeprecated             GoogleCloudRunV2ExecutionLaunchStageEnum = "DEPRECATED"
 )
 
+// GoogleCloudRunV2Execution
+// Execution represents the configuration of a single execution. A execution an immutable resource that references a container image which is run to completion.
 type GoogleCloudRunV2Execution struct {
 	Annotations        map[string]string                         `json:"annotations,omitempty"`
 	CompletionTime     *string                                   `json:"completionTime,omitempty"`

@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Organization } from "./organization";
+
 
 
 // CustomApp
@@ -8,15 +8,15 @@ import { Organization } from "./organization";
  * This resource represents a custom app.
 **/
 export class CustomApp extends SpeakeasyBase {
-  @Metadata({ data: "json, name=languageCode" })
+  @SpeakeasyMetadata({ data: "json, name=languageCode" })
   languageCode?: string;
 
-  @Metadata({ data: "json, name=organizations", elemType: shared.Organization })
+  @SpeakeasyMetadata({ data: "json, name=organizations", elemType: Organization })
   organizations?: Organization[];
 
-  @Metadata({ data: "json, name=packageName" })
+  @SpeakeasyMetadata({ data: "json, name=packageName" })
   packageName?: string;
 
-  @Metadata({ data: "json, name=title" })
+  @SpeakeasyMetadata({ data: "json, name=title" })
   title?: string;
 }

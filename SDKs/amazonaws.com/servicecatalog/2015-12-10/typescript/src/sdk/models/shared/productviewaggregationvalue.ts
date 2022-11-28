@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ProductViewAggregationValue
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A single product view aggregation value/count pair, containing metadata about each product to which the calling user has access.
 **/
 export class ProductViewAggregationValue extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ApproximateCount" })
+  @SpeakeasyMetadata({ data: "json, name=ApproximateCount" })
   approximateCount?: number;
 
-  @Metadata({ data: "json, name=Value" })
+  @SpeakeasyMetadata({ data: "json, name=Value" })
   value?: string;
 }

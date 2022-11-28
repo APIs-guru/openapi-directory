@@ -16,6 +16,8 @@ const (
 	GrantAppLevelPermissionsEnumCanManageOrders               GrantAppLevelPermissionsEnum = "CAN_MANAGE_ORDERS"
 )
 
+// Grant
+// An access grant resource.
 type Grant struct {
 	AppLevelPermissions []GrantAppLevelPermissionsEnum `json:"appLevelPermissions,omitempty"`
 	Name                *string                        `json:"name,omitempty"`

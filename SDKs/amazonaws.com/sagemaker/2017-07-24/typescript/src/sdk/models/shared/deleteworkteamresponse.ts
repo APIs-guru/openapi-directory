@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DeleteWorkteamResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Success" })
+  @SpeakeasyMetadata({ data: "json, name=Success" })
   success: boolean;
 }

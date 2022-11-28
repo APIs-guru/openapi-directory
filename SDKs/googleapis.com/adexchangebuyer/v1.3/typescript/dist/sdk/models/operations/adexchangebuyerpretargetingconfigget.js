@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var AdexchangebuyerPretargetingConfigGetPathParams = /** @class */ (function (_super) {
     __extends(AdexchangebuyerPretargetingConfigGetPathParams, _super);
@@ -30,11 +30,11 @@ var AdexchangebuyerPretargetingConfigGetPathParams = /** @class */ (function (_s
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=accountId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=accountId" }),
         __metadata("design:type", String)
     ], AdexchangebuyerPretargetingConfigGetPathParams.prototype, "accountId", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=configId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=configId" }),
         __metadata("design:type", String)
     ], AdexchangebuyerPretargetingConfigGetPathParams.prototype, "configId", void 0);
     return AdexchangebuyerPretargetingConfigGetPathParams;
@@ -46,31 +46,31 @@ var AdexchangebuyerPretargetingConfigGetQueryParams = /** @class */ (function (_
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=alt" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=alt" }),
         __metadata("design:type", String)
     ], AdexchangebuyerPretargetingConfigGetQueryParams.prototype, "alt", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=fields" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=fields" }),
         __metadata("design:type", String)
     ], AdexchangebuyerPretargetingConfigGetQueryParams.prototype, "fields", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=key" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=key" }),
         __metadata("design:type", String)
     ], AdexchangebuyerPretargetingConfigGetQueryParams.prototype, "key", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=oauth_token" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=oauth_token" }),
         __metadata("design:type", String)
     ], AdexchangebuyerPretargetingConfigGetQueryParams.prototype, "oauthToken", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=prettyPrint" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=prettyPrint" }),
         __metadata("design:type", Boolean)
     ], AdexchangebuyerPretargetingConfigGetQueryParams.prototype, "prettyPrint", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=quotaUser" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=quotaUser" }),
         __metadata("design:type", String)
     ], AdexchangebuyerPretargetingConfigGetQueryParams.prototype, "quotaUser", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=userIp" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=userIp" }),
         __metadata("design:type", String)
     ], AdexchangebuyerPretargetingConfigGetQueryParams.prototype, "userIp", void 0);
     return AdexchangebuyerPretargetingConfigGetQueryParams;
@@ -82,11 +82,11 @@ var AdexchangebuyerPretargetingConfigGetSecurity = /** @class */ (function (_sup
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2)
     ], AdexchangebuyerPretargetingConfigGetSecurity.prototype, "oauth2", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2c)
     ], AdexchangebuyerPretargetingConfigGetSecurity.prototype, "oauth2c", void 0);
     return AdexchangebuyerPretargetingConfigGetSecurity;
@@ -98,15 +98,15 @@ var AdexchangebuyerPretargetingConfigGetRequest = /** @class */ (function (_supe
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", AdexchangebuyerPretargetingConfigGetPathParams)
     ], AdexchangebuyerPretargetingConfigGetRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", AdexchangebuyerPretargetingConfigGetQueryParams)
     ], AdexchangebuyerPretargetingConfigGetRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", AdexchangebuyerPretargetingConfigGetSecurity)
     ], AdexchangebuyerPretargetingConfigGetRequest.prototype, "security", void 0);
     return AdexchangebuyerPretargetingConfigGetRequest;
@@ -118,15 +118,15 @@ var AdexchangebuyerPretargetingConfigGetResponse = /** @class */ (function (_sup
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], AdexchangebuyerPretargetingConfigGetResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.PretargetingConfig)
     ], AdexchangebuyerPretargetingConfigGetResponse.prototype, "pretargetingConfig", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], AdexchangebuyerPretargetingConfigGetResponse.prototype, "statusCode", void 0);
     return AdexchangebuyerPretargetingConfigGetResponse;

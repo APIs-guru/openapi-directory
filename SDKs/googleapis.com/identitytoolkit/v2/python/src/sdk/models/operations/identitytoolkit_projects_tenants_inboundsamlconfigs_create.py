@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class IdentitytoolkitProjectsTenantsInboundSamlConfigsCreatePathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,14 +27,14 @@ class IdentitytoolkitProjectsTenantsInboundSamlConfigsCreateQueryParams:
 
 @dataclass
 class IdentitytoolkitProjectsTenantsInboundSamlConfigsCreateSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class IdentitytoolkitProjectsTenantsInboundSamlConfigsCreateSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -44,15 +45,15 @@ class IdentitytoolkitProjectsTenantsInboundSamlConfigsCreateSecurity:
 
 @dataclass
 class IdentitytoolkitProjectsTenantsInboundSamlConfigsCreateRequest:
-    path_params: IdentitytoolkitProjectsTenantsInboundSamlConfigsCreatePathParams = field(default=None)
-    query_params: IdentitytoolkitProjectsTenantsInboundSamlConfigsCreateQueryParams = field(default=None)
-    request: Optional[shared.GoogleCloudIdentitytoolkitAdminV2InboundSamlConfig] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: IdentitytoolkitProjectsTenantsInboundSamlConfigsCreateSecurity = field(default=None)
+    path_params: IdentitytoolkitProjectsTenantsInboundSamlConfigsCreatePathParams = field()
+    query_params: IdentitytoolkitProjectsTenantsInboundSamlConfigsCreateQueryParams = field()
+    security: IdentitytoolkitProjectsTenantsInboundSamlConfigsCreateSecurity = field()
+    request: Optional[shared.GoogleCloudIdentitytoolkitAdminV2InboundSamlConfigInput] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class IdentitytoolkitProjectsTenantsInboundSamlConfigsCreateResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_cloud_identitytoolkit_admin_v2_inbound_saml_config: Optional[shared.GoogleCloudIdentitytoolkitAdminV2InboundSamlConfig] = field(default=None)
-    status_code: int = field(default=None)
     

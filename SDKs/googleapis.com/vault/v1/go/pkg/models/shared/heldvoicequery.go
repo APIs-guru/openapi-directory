@@ -9,6 +9,8 @@ const (
 	HeldVoiceQueryCoveredDataEnumCallLogs               HeldVoiceQueryCoveredDataEnum = "CALL_LOGS"
 )
 
+// HeldVoiceQuery
+// Options for Voice holds.
 type HeldVoiceQuery struct {
 	CoveredData []HeldVoiceQueryCoveredDataEnum `json:"coveredData,omitempty"`
 }

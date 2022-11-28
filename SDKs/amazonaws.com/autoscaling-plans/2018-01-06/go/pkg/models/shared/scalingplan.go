@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// ScalingPlan
+// Represents a scaling plan.
 type ScalingPlan struct {
 	ApplicationSource   ApplicationSource         `json:"ApplicationSource"`
 	CreationTime        *time.Time                `json:"CreationTime,omitempty"`

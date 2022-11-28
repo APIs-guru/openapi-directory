@@ -5,22 +5,22 @@ from sdk.models import shared
 
 @dataclass
 class GetFundingsV4QueryParams:
+    payor_id: str = field(metadata={'query_param': { 'field_name': 'payorId', 'style': 'form', 'explode': True }})
     page: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'page', 'style': 'form', 'explode': True }})
     page_size: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'pageSize', 'style': 'form', 'explode': True }})
-    payor_id: str = field(default=None, metadata={'query_param': { 'field_name': 'payorId', 'style': 'form', 'explode': True }})
     sort: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'sort', 'style': 'form', 'explode': True }})
     
 
 @dataclass
 class GetFundingsV4Request:
-    query_params: GetFundingsV4QueryParams = field(default=None)
+    query_params: GetFundingsV4QueryParams = field()
     
 
 @dataclass
 class GetFundingsV4Response:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     get_fundings_response: Optional[shared.GetFundingsResponse] = field(default=None)
-    status_code: int = field(default=None)
     inline_response_400: Optional[Any] = field(default=None)
     inline_response_401: Optional[Any] = field(default=None)
     inline_response_403: Optional[Any] = field(default=None)

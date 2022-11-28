@@ -1,14 +1,15 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class PostAPITextTransformQueryParams:
+    text_action_type: shared.TextActionTypeEnum = field(metadata={'query_param': { 'field_name': 'textActionType', 'style': 'form', 'explode': True }})
     case_type: Optional[shared.CaseTypeEnum] = field(default=None, metadata={'query_param': { 'field_name': 'caseType', 'style': 'form', 'explode': True }})
     find: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'find', 'style': 'form', 'explode': True }})
     replace: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'replace', 'style': 'form', 'explode': True }})
-    text_action_type: shared.TextActionTypeEnum = field(default=None, metadata={'query_param': { 'field_name': 'textActionType', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -26,13 +27,13 @@ class PostAPITextTransformRequests:
 
 @dataclass
 class PostAPITextTransformRequest:
-    query_params: PostAPITextTransformQueryParams = field(default=None)
-    headers: PostAPITextTransformHeaders = field(default=None)
-    request: PostAPITextTransformRequests = field(default=None)
+    headers: PostAPITextTransformHeaders = field()
+    query_params: PostAPITextTransformQueryParams = field()
+    request: PostAPITextTransformRequests = field()
     
 
 @dataclass
 class PostAPITextTransformResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

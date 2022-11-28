@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum GetCancelJobActionEnum {
     CancelJob = "CancelJob"
@@ -14,51 +15,51 @@ export enum GetCancelJobVersionEnum {
 
 
 export class GetCancelJobQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=APIVersion" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=APIVersion" })
   apiVersion?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=AWSAccessKeyId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=AWSAccessKeyId" })
   awsAccessKeyId: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Action" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Action" })
   action: GetCancelJobActionEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=JobId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=JobId" })
   jobId: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Operation" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Operation" })
   operation: GetCancelJobOperationEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Signature" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Signature" })
   signature: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=SignatureMethod" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=SignatureMethod" })
   signatureMethod: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=SignatureVersion" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=SignatureVersion" })
   signatureVersion: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Timestamp" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Timestamp" })
   timestamp: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Version" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Version" })
   version: GetCancelJobVersionEnum;
 }
 
 
 export class GetCancelJobRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetCancelJobQueryParams;
 }
 
 
 export class GetCancelJobResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

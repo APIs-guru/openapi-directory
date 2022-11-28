@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class GmailUsersMessagesModifyPathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
-    user_id: str = field(default=None, metadata={'path_param': { 'field_name': 'userId', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    user_id: str = field(metadata={'path_param': { 'field_name': 'userId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,14 +27,14 @@ class GmailUsersMessagesModifyQueryParams:
 
 @dataclass
 class GmailUsersMessagesModifySecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class GmailUsersMessagesModifySecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -44,15 +45,15 @@ class GmailUsersMessagesModifySecurity:
 
 @dataclass
 class GmailUsersMessagesModifyRequest:
-    path_params: GmailUsersMessagesModifyPathParams = field(default=None)
-    query_params: GmailUsersMessagesModifyQueryParams = field(default=None)
+    path_params: GmailUsersMessagesModifyPathParams = field()
+    query_params: GmailUsersMessagesModifyQueryParams = field()
+    security: GmailUsersMessagesModifySecurity = field()
     request: Optional[shared.ModifyMessageRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: GmailUsersMessagesModifySecurity = field(default=None)
     
 
 @dataclass
 class GmailUsersMessagesModifyResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     message: Optional[shared.Message] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -13,12 +13,12 @@ type GetPortfoliosQueryParams struct {
 	Workspace string   `queryParam:"style=form,explode=true,name=workspace"`
 }
 
-type GetPortfoliosRequest struct {
-	QueryParams GetPortfoliosQueryParams
-}
-
 type GetPortfolios200ApplicationJSON struct {
 	Data []shared.PortfolioCompact `json:"data,omitempty"`
+}
+
+type GetPortfoliosRequest struct {
+	QueryParams GetPortfoliosQueryParams
 }
 
 type GetPortfoliosResponse struct {

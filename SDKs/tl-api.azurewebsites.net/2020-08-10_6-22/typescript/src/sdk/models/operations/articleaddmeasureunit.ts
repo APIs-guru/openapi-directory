@@ -1,23 +1,24 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class ArticleAddMeasureUnitRequest extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/json", elemType: shared.MeasureUnitDto })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json", elemType: shared.MeasureUnitDto })
   request: shared.MeasureUnitDto[];
 }
 
 
 export class ArticleAddMeasureUnitResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   apiResponse?: shared.ApiResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   defaultResponseDtoOfStatusDto?: shared.DefaultResponseDtoOfStatusDto;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

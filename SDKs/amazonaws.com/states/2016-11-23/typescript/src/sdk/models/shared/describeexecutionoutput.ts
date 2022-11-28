@@ -1,40 +1,40 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import { CloudWatchEventsExecutionDataDetails } from "./cloudwatcheventsexecutiondatadetails";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CloudWatchEventsExecutionDataDetails } from "./cloudwatcheventsexecutiondatadetails";
 import { ExecutionStatusEnum } from "./executionstatusenum";
 
 
+
 export class DescribeExecutionOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=executionArn" })
+  @SpeakeasyMetadata({ data: "json, name=executionArn" })
   executionArn: string;
 
-  @Metadata({ data: "json, name=input" })
+  @SpeakeasyMetadata({ data: "json, name=input" })
   input?: string;
 
-  @Metadata({ data: "json, name=inputDetails" })
+  @SpeakeasyMetadata({ data: "json, name=inputDetails" })
   inputDetails?: CloudWatchEventsExecutionDataDetails;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=output" })
+  @SpeakeasyMetadata({ data: "json, name=output" })
   output?: string;
 
-  @Metadata({ data: "json, name=outputDetails" })
+  @SpeakeasyMetadata({ data: "json, name=outputDetails" })
   outputDetails?: CloudWatchEventsExecutionDataDetails;
 
-  @Metadata({ data: "json, name=startDate" })
+  @SpeakeasyMetadata({ data: "json, name=startDate" })
   startDate: Date;
 
-  @Metadata({ data: "json, name=stateMachineArn" })
+  @SpeakeasyMetadata({ data: "json, name=stateMachineArn" })
   stateMachineArn: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status: ExecutionStatusEnum;
 
-  @Metadata({ data: "json, name=stopDate" })
+  @SpeakeasyMetadata({ data: "json, name=stopDate" })
   stopDate?: Date;
 
-  @Metadata({ data: "json, name=traceHeader" })
+  @SpeakeasyMetadata({ data: "json, name=traceHeader" })
   traceHeader?: string;
 }

@@ -1,17 +1,23 @@
 package shared
 
+// VolumeAccessInfoEpub
+// Information about epub content. (In LITE projection.)
 type VolumeAccessInfoEpub struct {
 	AcsTokenLink *string `json:"acsTokenLink,omitempty"`
 	DownloadLink *string `json:"downloadLink,omitempty"`
 	IsAvailable  *bool   `json:"isAvailable,omitempty"`
 }
 
+// VolumeAccessInfoPdf
+// Information about pdf content. (In LITE projection.)
 type VolumeAccessInfoPdf struct {
 	AcsTokenLink *string `json:"acsTokenLink,omitempty"`
 	DownloadLink *string `json:"downloadLink,omitempty"`
 	IsAvailable  *bool   `json:"isAvailable,omitempty"`
 }
 
+// VolumeAccessInfo
+// Any information about a volume related to reading or obtaining that volume text. This information can depend on country (books may be public domain in one country but not in another, e.g.).
 type VolumeAccessInfo struct {
 	AccessViewStatus                 *string                    `json:"accessViewStatus,omitempty"`
 	Country                          *string                    `json:"country,omitempty"`
@@ -34,29 +40,41 @@ type VolumeLayerInfoLayers struct {
 	VolumeAnnotationsVersion *string `json:"volumeAnnotationsVersion,omitempty"`
 }
 
+// VolumeLayerInfo
+// What layers exist in this volume and high level information about them.
 type VolumeLayerInfo struct {
 	Layers []VolumeLayerInfoLayers `json:"layers,omitempty"`
 }
 
+// VolumeRecommendedInfo
+// Recommendation related information for this volume.
 type VolumeRecommendedInfo struct {
 	Explanation *string `json:"explanation,omitempty"`
 }
 
+// VolumeSaleInfoListPrice
+// Suggested retail price. (In LITE projection.)
 type VolumeSaleInfoListPrice struct {
 	Amount       *float64 `json:"amount,omitempty"`
 	CurrencyCode *string  `json:"currencyCode,omitempty"`
 }
 
+// VolumeSaleInfoOffersListPrice
+// Offer list (=undiscounted) price in Micros.
 type VolumeSaleInfoOffersListPrice struct {
 	AmountInMicros *float64 `json:"amountInMicros,omitempty"`
 	CurrencyCode   *string  `json:"currencyCode,omitempty"`
 }
 
+// VolumeSaleInfoOffersRentalDuration
+// The rental duration (for rental offers only).
 type VolumeSaleInfoOffersRentalDuration struct {
 	Count *float64 `json:"count,omitempty"`
 	Unit  *string  `json:"unit,omitempty"`
 }
 
+// VolumeSaleInfoOffersRetailPrice
+// Offer retail (=discounted) price in Micros
 type VolumeSaleInfoOffersRetailPrice struct {
 	AmountInMicros *float64 `json:"amountInMicros,omitempty"`
 	CurrencyCode   *string  `json:"currencyCode,omitempty"`
@@ -70,11 +88,15 @@ type VolumeSaleInfoOffers struct {
 	RetailPrice     *VolumeSaleInfoOffersRetailPrice    `json:"retailPrice,omitempty"`
 }
 
+// VolumeSaleInfoRetailPrice
+// The actual selling price of the book. This is the same as the suggested retail or list price unless there are offers or discounts on this volume. (In LITE projection.)
 type VolumeSaleInfoRetailPrice struct {
 	Amount       *float64 `json:"amount,omitempty"`
 	CurrencyCode *string  `json:"currencyCode,omitempty"`
 }
 
+// VolumeSaleInfo
+// Any information about a volume related to the eBookstore and/or purchaseability. This information can depend on the country where the request originates from (i.e. books may not be for sale in certain countries).
 type VolumeSaleInfo struct {
 	BuyLink     *string                    `json:"buyLink,omitempty"`
 	Country     *string                    `json:"country,omitempty"`
@@ -86,10 +108,14 @@ type VolumeSaleInfo struct {
 	Saleability *string                    `json:"saleability,omitempty"`
 }
 
+// VolumeSearchInfo
+// Search result information related to this volume.
 type VolumeSearchInfo struct {
 	TextSnippet *string `json:"textSnippet,omitempty"`
 }
 
+// VolumeUserInfoCopy
+// Copy/Paste accounting information.
 type VolumeUserInfoCopy struct {
 	AllowedCharacterCount   *int32  `json:"allowedCharacterCount,omitempty"`
 	LimitType               *string `json:"limitType,omitempty"`
@@ -97,12 +123,16 @@ type VolumeUserInfoCopy struct {
 	Updated                 *string `json:"updated,omitempty"`
 }
 
+// VolumeUserInfoFamilySharing
+// Information on the ability to share with the family.
 type VolumeUserInfoFamilySharing struct {
 	FamilyRole             *string `json:"familyRole,omitempty"`
 	IsSharingAllowed       *bool   `json:"isSharingAllowed,omitempty"`
 	IsSharingDisabledByFop *bool   `json:"isSharingDisabledByFop,omitempty"`
 }
 
+// VolumeUserInfoRentalPeriod
+// Period during this book is/was a valid rental.
 type VolumeUserInfoRentalPeriod struct {
 	EndUtcSec   *string `json:"endUtcSec,omitempty"`
 	StartUtcSec *string `json:"startUtcSec,omitempty"`
@@ -112,6 +142,8 @@ type VolumeUserInfoUserUploadedVolumeInfo struct {
 	ProcessingState *string `json:"processingState,omitempty"`
 }
 
+// VolumeUserInfo
+// User specific information related to this volume. (e.g. page this user last read or whether they purchased this book)
 type VolumeUserInfo struct {
 	AcquiredTime                 *string                               `json:"acquiredTime,omitempty"`
 	AcquisitionType              *int32                                `json:"acquisitionType,omitempty"`
@@ -134,12 +166,16 @@ type VolumeUserInfo struct {
 	UserUploadedVolumeInfo       *VolumeUserInfoUserUploadedVolumeInfo `json:"userUploadedVolumeInfo,omitempty"`
 }
 
+// VolumeVolumeInfoDimensions
+// Physical dimensions of this volume.
 type VolumeVolumeInfoDimensions struct {
 	Height    *string `json:"height,omitempty"`
 	Thickness *string `json:"thickness,omitempty"`
 	Width     *string `json:"width,omitempty"`
 }
 
+// VolumeVolumeInfoImageLinks
+// A list of image links for all the sizes that are available. (In LITE projection.)
 type VolumeVolumeInfoImageLinks struct {
 	ExtraLarge     *string `json:"extraLarge,omitempty"`
 	Large          *string `json:"large,omitempty"`
@@ -154,6 +190,8 @@ type VolumeVolumeInfoIndustryIdentifiers struct {
 	Type       *string `json:"type,omitempty"`
 }
 
+// VolumeVolumeInfoPanelizationSummary
+// A top-level summary of the panelization info in this volume.
 type VolumeVolumeInfoPanelizationSummary struct {
 	ContainsEpubBubbles  *bool   `json:"containsEpubBubbles,omitempty"`
 	ContainsImageBubbles *bool   `json:"containsImageBubbles,omitempty"`
@@ -161,11 +199,15 @@ type VolumeVolumeInfoPanelizationSummary struct {
 	ImageBubbleVersion   *string `json:"imageBubbleVersion,omitempty"`
 }
 
+// VolumeVolumeInfoReadingModes
+// The reading modes available for this volume.
 type VolumeVolumeInfoReadingModes struct {
 	Image *bool `json:"image,omitempty"`
 	Text  *bool `json:"text,omitempty"`
 }
 
+// VolumeVolumeInfo
+// General volume information.
 type VolumeVolumeInfo struct {
 	AllowAnonLogging    *bool                                 `json:"allowAnonLogging,omitempty"`
 	Authors             []string                              `json:"authors,omitempty"`

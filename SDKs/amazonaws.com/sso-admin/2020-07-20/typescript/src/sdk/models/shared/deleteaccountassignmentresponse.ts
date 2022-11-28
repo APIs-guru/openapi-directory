@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AccountAssignmentOperationStatus } from "./accountassignmentoperationstatus";
 
 
+
 export class DeleteAccountAssignmentResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AccountAssignmentDeletionStatus" })
+  @SpeakeasyMetadata({ data: "json, name=AccountAssignmentDeletionStatus" })
   accountAssignmentDeletionStatus?: AccountAssignmentOperationStatus;
 }

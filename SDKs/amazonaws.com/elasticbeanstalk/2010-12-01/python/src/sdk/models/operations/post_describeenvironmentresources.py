@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostDescribeEnvironmentResourcesActionEnum(str, Enum):
     DESCRIBE_ENVIRONMENT_RESOURCES = "DescribeEnvironmentResources"
@@ -10,8 +14,8 @@ class PostDescribeEnvironmentResourcesVersionEnum(str, Enum):
 
 @dataclass
 class PostDescribeEnvironmentResourcesQueryParams:
-    action: PostDescribeEnvironmentResourcesActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostDescribeEnvironmentResourcesVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostDescribeEnvironmentResourcesActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostDescribeEnvironmentResourcesVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostDescribeEnvironmentResourcesHeaders:
 
 @dataclass
 class PostDescribeEnvironmentResourcesRequest:
-    query_params: PostDescribeEnvironmentResourcesQueryParams = field(default=None)
-    headers: PostDescribeEnvironmentResourcesHeaders = field(default=None)
+    headers: PostDescribeEnvironmentResourcesHeaders = field()
+    query_params: PostDescribeEnvironmentResourcesQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostDescribeEnvironmentResourcesResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

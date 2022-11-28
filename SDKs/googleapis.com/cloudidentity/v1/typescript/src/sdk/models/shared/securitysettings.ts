@@ -1,15 +1,13 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { MemberRestriction } from "./memberrestriction";
 
 
-// SecuritySettings
+
+// SecuritySettingsInput
 /** 
  * The definition of security settings.
 **/
-export class SecuritySettings extends SpeakeasyBase {
-  @Metadata({ data: "json, name=memberRestriction" })
+export class SecuritySettingsInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=memberRestriction" })
   memberRestriction?: MemberRestriction;
-
-  @Metadata({ data: "json, name=name" })
-  name?: string;
 }

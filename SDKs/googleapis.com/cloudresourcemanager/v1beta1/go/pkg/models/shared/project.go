@@ -9,6 +9,8 @@ const (
 	ProjectLifecycleStateEnumDeleteInProgress          ProjectLifecycleStateEnum = "DELETE_IN_PROGRESS"
 )
 
+// Project
+// A Project is a high-level Google Cloud Platform entity. It is a container for ACLs, APIs, App Engine Apps, VMs, and other Google Cloud Platform resources.
 type Project struct {
 	CreateTime     *string                    `json:"createTime,omitempty"`
 	Labels         map[string]string          `json:"labels,omitempty"`

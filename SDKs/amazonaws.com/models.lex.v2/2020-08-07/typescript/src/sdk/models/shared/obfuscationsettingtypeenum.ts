@@ -1,6 +1,7 @@
 
 
+
 export enum ObfuscationSettingTypeEnum {
-    None = "None"
-,    DefaultObfuscation = "DefaultObfuscation"
+    None = "None",
+    DefaultObfuscation = "DefaultObfuscation"
 }

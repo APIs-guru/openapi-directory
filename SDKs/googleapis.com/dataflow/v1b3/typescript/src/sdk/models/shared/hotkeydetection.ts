@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // HotKeyDetection
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Proto describing a hot key detected on a given WorkItem.
 **/
 export class HotKeyDetection extends SpeakeasyBase {
-  @Metadata({ data: "json, name=hotKeyAge" })
+  @SpeakeasyMetadata({ data: "json, name=hotKeyAge" })
   hotKeyAge?: string;
 
-  @Metadata({ data: "json, name=systemName" })
+  @SpeakeasyMetadata({ data: "json, name=systemName" })
   systemName?: string;
 
-  @Metadata({ data: "json, name=userStepName" })
+  @SpeakeasyMetadata({ data: "json, name=userStepName" })
   userStepName?: string;
 }

@@ -1,12 +1,13 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Asset } from "./asset";
 
+
 export enum ListAssetsResultStateEnum {
-    StateUnspecified = "STATE_UNSPECIFIED"
-,    Unused = "UNUSED"
-,    Added = "ADDED"
-,    Removed = "REMOVED"
-,    Active = "ACTIVE"
+    StateUnspecified = "STATE_UNSPECIFIED",
+    Unused = "UNUSED",
+    Added = "ADDED",
+    Removed = "REMOVED",
+    Active = "ACTIVE"
 }
 
 
@@ -15,9 +16,9 @@ export enum ListAssetsResultStateEnum {
  * Result containing the Asset and its State.
 **/
 export class ListAssetsResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=asset" })
+  @SpeakeasyMetadata({ data: "json, name=asset" })
   asset?: Asset;
 
-  @Metadata({ data: "json, name=state" })
+  @SpeakeasyMetadata({ data: "json, name=state" })
   state?: ListAssetsResultStateEnum;
 }

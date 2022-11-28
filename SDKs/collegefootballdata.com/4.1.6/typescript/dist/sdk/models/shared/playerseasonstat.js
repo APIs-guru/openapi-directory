@@ -22,42 +22,42 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var PlayerSeasonStat = /** @class */ (function (_super) {
     __extends(PlayerSeasonStat, _super);
     function PlayerSeasonStat() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=category" }),
+        SpeakeasyMetadata({ data: "json, name=category" }),
         __metadata("design:type", String)
     ], PlayerSeasonStat.prototype, "category", void 0);
     __decorate([
-        Metadata({ data: "json, name=conference" }),
+        SpeakeasyMetadata({ data: "json, name=conference" }),
         __metadata("design:type", String)
     ], PlayerSeasonStat.prototype, "conference", void 0);
     __decorate([
-        Metadata({ data: "json, name=player" }),
+        SpeakeasyMetadata({ data: "json, name=player" }),
         __metadata("design:type", String)
     ], PlayerSeasonStat.prototype, "player", void 0);
     __decorate([
-        Metadata({ data: "json, name=playerId" }),
+        SpeakeasyMetadata({ data: "json, name=playerId" }),
         __metadata("design:type", Number)
     ], PlayerSeasonStat.prototype, "playerId", void 0);
     __decorate([
-        Metadata({ data: "json, name=season" }),
+        SpeakeasyMetadata({ data: "json, name=season" }),
         __metadata("design:type", Number)
     ], PlayerSeasonStat.prototype, "season", void 0);
     __decorate([
-        Metadata({ data: "json, name=stat" }),
+        SpeakeasyMetadata({ data: "json, name=stat" }),
         __metadata("design:type", Number)
     ], PlayerSeasonStat.prototype, "stat", void 0);
     __decorate([
-        Metadata({ data: "json, name=statType" }),
+        SpeakeasyMetadata({ data: "json, name=statType" }),
         __metadata("design:type", String)
     ], PlayerSeasonStat.prototype, "statType", void 0);
     __decorate([
-        Metadata({ data: "json, name=team" }),
+        SpeakeasyMetadata({ data: "json, name=team" }),
         __metadata("design:type", String)
     ], PlayerSeasonStat.prototype, "team", void 0);
     return PlayerSeasonStat;

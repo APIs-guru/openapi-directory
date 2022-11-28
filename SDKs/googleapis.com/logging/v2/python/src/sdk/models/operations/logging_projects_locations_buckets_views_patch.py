@@ -1,11 +1,15 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class LoggingProjectsLocationsBucketsViewsPatchPathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,14 +30,14 @@ class LoggingProjectsLocationsBucketsViewsPatchQueryParams:
 
 @dataclass
 class LoggingProjectsLocationsBucketsViewsPatchSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class LoggingProjectsLocationsBucketsViewsPatchSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -44,15 +48,15 @@ class LoggingProjectsLocationsBucketsViewsPatchSecurity:
 
 @dataclass
 class LoggingProjectsLocationsBucketsViewsPatchRequest:
-    path_params: LoggingProjectsLocationsBucketsViewsPatchPathParams = field(default=None)
-    query_params: LoggingProjectsLocationsBucketsViewsPatchQueryParams = field(default=None)
-    request: Optional[shared.LogView] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: LoggingProjectsLocationsBucketsViewsPatchSecurity = field(default=None)
+    path_params: LoggingProjectsLocationsBucketsViewsPatchPathParams = field()
+    query_params: LoggingProjectsLocationsBucketsViewsPatchQueryParams = field()
+    security: LoggingProjectsLocationsBucketsViewsPatchSecurity = field()
+    request: Optional[shared.LogViewInput] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class LoggingProjectsLocationsBucketsViewsPatchResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     log_view: Optional[shared.LogView] = field(default=None)
-    status_code: int = field(default=None)
     

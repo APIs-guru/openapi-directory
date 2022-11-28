@@ -4,7 +4,7 @@ import (
 	"openapi/pkg/models/shared"
 )
 
-var PostV05ConsentsOnFetchServers = []string{
+var PostV05ConsentsOnFetchServerList = []string{
 	"https://dev.ndhm.gov.in/hiu",
 }
 

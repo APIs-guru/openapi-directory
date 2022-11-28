@@ -18,10 +18,6 @@ type SearchCodeQueryParams struct {
 	Sort    *SearchCodeSortEnum `queryParam:"style=form,explode=true,name=sort"`
 }
 
-type SearchCodeRequest struct {
-	QueryParams SearchCodeQueryParams
-}
-
 type SearchCode200ApplicationJSON struct {
 	IncompleteResults bool                          `json:"incomplete_results"`
 	Items             []shared.CodeSearchResultItem `json:"items"`
@@ -32,6 +28,10 @@ type SearchCode503ApplicationJSON struct {
 	Code             *string `json:"code,omitempty"`
 	DocumentationURL *string `json:"documentation_url,omitempty"`
 	Message          *string `json:"message,omitempty"`
+}
+
+type SearchCodeRequest struct {
+	QueryParams SearchCodeQueryParams
 }
 
 type SearchCodeResponse struct {

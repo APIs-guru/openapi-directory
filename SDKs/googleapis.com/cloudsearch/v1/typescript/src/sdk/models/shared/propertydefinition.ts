@@ -1,4 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BooleanPropertyOptions } from "./booleanpropertyoptions";
 import { DatePropertyOptions } from "./datepropertyoptions";
 import { PropertyDisplayOptions } from "./propertydisplayoptions";
@@ -11,59 +11,60 @@ import { TextPropertyOptions } from "./textpropertyoptions";
 import { TimestampPropertyOptions } from "./timestamppropertyoptions";
 
 
+
 // PropertyDefinition
 /** 
  * The definition of a property within an object.
 **/
 export class PropertyDefinition extends SpeakeasyBase {
-  @Metadata({ data: "json, name=booleanPropertyOptions" })
+  @SpeakeasyMetadata({ data: "json, name=booleanPropertyOptions" })
   booleanPropertyOptions?: BooleanPropertyOptions;
 
-  @Metadata({ data: "json, name=datePropertyOptions" })
+  @SpeakeasyMetadata({ data: "json, name=datePropertyOptions" })
   datePropertyOptions?: DatePropertyOptions;
 
-  @Metadata({ data: "json, name=displayOptions" })
+  @SpeakeasyMetadata({ data: "json, name=displayOptions" })
   displayOptions?: PropertyDisplayOptions;
 
-  @Metadata({ data: "json, name=doublePropertyOptions" })
+  @SpeakeasyMetadata({ data: "json, name=doublePropertyOptions" })
   doublePropertyOptions?: DoublePropertyOptions;
 
-  @Metadata({ data: "json, name=enumPropertyOptions" })
+  @SpeakeasyMetadata({ data: "json, name=enumPropertyOptions" })
   enumPropertyOptions?: EnumPropertyOptions;
 
-  @Metadata({ data: "json, name=htmlPropertyOptions" })
+  @SpeakeasyMetadata({ data: "json, name=htmlPropertyOptions" })
   htmlPropertyOptions?: HtmlPropertyOptions;
 
-  @Metadata({ data: "json, name=integerPropertyOptions" })
+  @SpeakeasyMetadata({ data: "json, name=integerPropertyOptions" })
   integerPropertyOptions?: IntegerPropertyOptions;
 
-  @Metadata({ data: "json, name=isFacetable" })
+  @SpeakeasyMetadata({ data: "json, name=isFacetable" })
   isFacetable?: boolean;
 
-  @Metadata({ data: "json, name=isRepeatable" })
+  @SpeakeasyMetadata({ data: "json, name=isRepeatable" })
   isRepeatable?: boolean;
 
-  @Metadata({ data: "json, name=isReturnable" })
+  @SpeakeasyMetadata({ data: "json, name=isReturnable" })
   isReturnable?: boolean;
 
-  @Metadata({ data: "json, name=isSortable" })
+  @SpeakeasyMetadata({ data: "json, name=isSortable" })
   isSortable?: boolean;
 
-  @Metadata({ data: "json, name=isSuggestable" })
+  @SpeakeasyMetadata({ data: "json, name=isSuggestable" })
   isSuggestable?: boolean;
 
-  @Metadata({ data: "json, name=isWildcardSearchable" })
+  @SpeakeasyMetadata({ data: "json, name=isWildcardSearchable" })
   isWildcardSearchable?: boolean;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=objectPropertyOptions" })
+  @SpeakeasyMetadata({ data: "json, name=objectPropertyOptions" })
   objectPropertyOptions?: ObjectPropertyOptions;
 
-  @Metadata({ data: "json, name=textPropertyOptions" })
+  @SpeakeasyMetadata({ data: "json, name=textPropertyOptions" })
   textPropertyOptions?: TextPropertyOptions;
 
-  @Metadata({ data: "json, name=timestampPropertyOptions" })
+  @SpeakeasyMetadata({ data: "json, name=timestampPropertyOptions" })
   timestampPropertyOptions?: TimestampPropertyOptions;
 }

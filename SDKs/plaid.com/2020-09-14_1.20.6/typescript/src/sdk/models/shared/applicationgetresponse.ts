@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Application } from "./application";
+
 
 
 // ApplicationGetResponse
@@ -7,9 +8,9 @@ import { Application } from "./application";
  * The request ID associated with this call.
 **/
 export class ApplicationGetResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=application" })
+  @SpeakeasyMetadata({ data: "json, name=application" })
   application: Application;
 
-  @Metadata({ data: "json, name=request_id" })
+  @SpeakeasyMetadata({ data: "json, name=request_id" })
   requestId: string;
 }

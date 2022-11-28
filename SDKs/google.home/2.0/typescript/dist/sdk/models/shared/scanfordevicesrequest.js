@@ -22,22 +22,22 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var ScanfordevicesRequest = /** @class */ (function (_super) {
     __extends(ScanfordevicesRequest, _super);
     function ScanfordevicesRequest() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=clear_results" }),
+        SpeakeasyMetadata({ data: "json, name=clear_results" }),
         __metadata("design:type", Boolean)
     ], ScanfordevicesRequest.prototype, "clearResults", void 0);
     __decorate([
-        Metadata({ data: "json, name=enable" }),
+        SpeakeasyMetadata({ data: "json, name=enable" }),
         __metadata("design:type", Boolean)
     ], ScanfordevicesRequest.prototype, "enable", void 0);
     __decorate([
-        Metadata({ data: "json, name=timeout" }),
+        SpeakeasyMetadata({ data: "json, name=timeout" }),
         __metadata("design:type", Number)
     ], ScanfordevicesRequest.prototype, "timeout", void 0);
     return ScanfordevicesRequest;

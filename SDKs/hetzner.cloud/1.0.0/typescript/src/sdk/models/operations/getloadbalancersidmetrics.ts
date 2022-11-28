@@ -1,77 +1,78 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetLoadBalancersIdMetricsPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" })
   id: number;
 }
 
 export enum GetLoadBalancersIdMetricsTypeEnum {
-    OpenConnections = "open_connections"
-,    ConnectionsPerSecond = "connections_per_second"
-,    RequestsPerSecond = "requests_per_second"
-,    Bandwidth = "bandwidth"
+    OpenConnections = "open_connections",
+    ConnectionsPerSecond = "connections_per_second",
+    RequestsPerSecond = "requests_per_second",
+    Bandwidth = "bandwidth"
 }
 
 
 export class GetLoadBalancersIdMetricsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=end" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=end" })
   end: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=start" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=start" })
   start: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=step" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=step" })
   step?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=type" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=type" })
   type: GetLoadBalancersIdMetricsTypeEnum;
 }
 
 
-export class GetLoadBalancersIdMetricsRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: GetLoadBalancersIdMetricsPathParams;
-
-  @Metadata()
-  queryParams: GetLoadBalancersIdMetricsQueryParams;
-}
-
-
 export class GetLoadBalancersIdMetrics200ApplicationJsonMetricsTimeSeries extends SpeakeasyBase {
-  @Metadata({ data: "json, name=values" })
+  @SpeakeasyMetadata({ data: "json, name=values" })
   values: any[][];
 }
 
 
 export class GetLoadBalancersIdMetrics200ApplicationJsonMetrics extends SpeakeasyBase {
-  @Metadata({ data: "json, name=end" })
+  @SpeakeasyMetadata({ data: "json, name=end" })
   end: string;
 
-  @Metadata({ data: "json, name=start" })
+  @SpeakeasyMetadata({ data: "json, name=start" })
   start: string;
 
-  @Metadata({ data: "json, name=step" })
+  @SpeakeasyMetadata({ data: "json, name=step" })
   step: number;
 
-  @Metadata({ data: "json, name=time_series", elemType: operations.GetLoadBalancersIdMetrics200ApplicationJsonMetricsTimeSeries })
+  @SpeakeasyMetadata({ data: "json, name=time_series", elemType: GetLoadBalancersIdMetrics200ApplicationJsonMetricsTimeSeries })
   timeSeries: Map<string, GetLoadBalancersIdMetrics200ApplicationJsonMetricsTimeSeries>;
 }
 
 
 export class GetLoadBalancersIdMetrics200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=metrics" })
+  @SpeakeasyMetadata({ data: "json, name=metrics" })
   metrics: GetLoadBalancersIdMetrics200ApplicationJsonMetrics;
 }
 
 
+export class GetLoadBalancersIdMetricsRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: GetLoadBalancersIdMetricsPathParams;
+
+  @SpeakeasyMetadata()
+  queryParams: GetLoadBalancersIdMetricsQueryParams;
+}
+
+
 export class GetLoadBalancersIdMetricsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getLoadBalancersIdMetrics200ApplicationJsonObject?: GetLoadBalancersIdMetrics200ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

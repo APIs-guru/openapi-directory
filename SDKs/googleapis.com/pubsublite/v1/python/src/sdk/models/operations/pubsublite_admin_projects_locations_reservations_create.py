@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class PubsubliteAdminProjectsLocationsReservationsCreatePathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,21 +27,21 @@ class PubsubliteAdminProjectsLocationsReservationsCreateQueryParams:
 
 @dataclass
 class PubsubliteAdminProjectsLocationsReservationsCreateSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class PubsubliteAdminProjectsLocationsReservationsCreateRequest:
-    path_params: PubsubliteAdminProjectsLocationsReservationsCreatePathParams = field(default=None)
-    query_params: PubsubliteAdminProjectsLocationsReservationsCreateQueryParams = field(default=None)
+    path_params: PubsubliteAdminProjectsLocationsReservationsCreatePathParams = field()
+    query_params: PubsubliteAdminProjectsLocationsReservationsCreateQueryParams = field()
+    security: PubsubliteAdminProjectsLocationsReservationsCreateSecurity = field()
     request: Optional[shared.Reservation] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: PubsubliteAdminProjectsLocationsReservationsCreateSecurity = field(default=None)
     
 
 @dataclass
 class PubsubliteAdminProjectsLocationsReservationsCreateResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     reservation: Optional[shared.Reservation] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,38 +1,39 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
-export class UpdateConfigurationRequests extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/*+json" })
-  serverConfiguration?: shared.ServerConfiguration;
 
-  @Metadata({ data: "request, media_type=application/json" })
-  serverConfiguration1?: shared.ServerConfiguration;
+export class UpdateConfigurationRequestsInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "request, media_type=application/*+json" })
+  serverConfiguration?: shared.ServerConfigurationInput;
 
-  @Metadata({ data: "request, media_type=text/json" })
-  serverConfiguration2?: shared.ServerConfiguration;
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  serverConfiguration1?: shared.ServerConfigurationInput;
+
+  @SpeakeasyMetadata({ data: "request, media_type=text/json" })
+  serverConfiguration2?: shared.ServerConfigurationInput;
 }
 
 
 export class UpdateConfigurationSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
   customAuthentication: shared.SchemeCustomAuthentication;
 }
 
 
 export class UpdateConfigurationRequest extends SpeakeasyBase {
-  @Metadata()
-  request: UpdateConfigurationRequests;
+  @SpeakeasyMetadata()
+  request: UpdateConfigurationRequestsInput;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: UpdateConfigurationSecurity;
 }
 
 
 export class UpdateConfigurationResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

@@ -20,6 +20,8 @@ const (
 	SegmentMetricFilterScopeEnumUser             SegmentMetricFilterScopeEnum = "USER"
 )
 
+// SegmentMetricFilter
+// Metric filter to be used in a segment filter clause.
 type SegmentMetricFilter struct {
 	ComparisonValue    *string                          `json:"comparisonValue,omitempty"`
 	MaxComparisonValue *string                          `json:"maxComparisonValue,omitempty"`

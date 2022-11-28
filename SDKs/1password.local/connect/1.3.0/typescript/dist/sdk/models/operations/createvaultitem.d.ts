@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class CreateVaultItemPathParams extends SpeakeasyBase {
     vaultUuid: string;
@@ -8,7 +8,7 @@ export declare class CreateVaultItemSecurity extends SpeakeasyBase {
 }
 export declare class CreateVaultItemRequest extends SpeakeasyBase {
     pathParams: CreateVaultItemPathParams;
-    request?: shared.FullItem;
+    request?: shared.FullItemInput;
     security: CreateVaultItemSecurity;
 }
 export declare class CreateVaultItemResponse extends SpeakeasyBase {

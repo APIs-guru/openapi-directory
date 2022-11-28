@@ -22,26 +22,26 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var ListResourcesForTagOptionInput = /** @class */ (function (_super) {
     __extends(ListResourcesForTagOptionInput, _super);
     function ListResourcesForTagOptionInput() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=PageSize" }),
+        SpeakeasyMetadata({ data: "json, name=PageSize" }),
         __metadata("design:type", Number)
     ], ListResourcesForTagOptionInput.prototype, "pageSize", void 0);
     __decorate([
-        Metadata({ data: "json, name=PageToken" }),
+        SpeakeasyMetadata({ data: "json, name=PageToken" }),
         __metadata("design:type", String)
     ], ListResourcesForTagOptionInput.prototype, "pageToken", void 0);
     __decorate([
-        Metadata({ data: "json, name=ResourceType" }),
+        SpeakeasyMetadata({ data: "json, name=ResourceType" }),
         __metadata("design:type", String)
     ], ListResourcesForTagOptionInput.prototype, "resourceType", void 0);
     __decorate([
-        Metadata({ data: "json, name=TagOptionId" }),
+        SpeakeasyMetadata({ data: "json, name=TagOptionId" }),
         __metadata("design:type", String)
     ], ListResourcesForTagOptionInput.prototype, "tagOptionId", void 0);
     return ListResourcesForTagOptionInput;

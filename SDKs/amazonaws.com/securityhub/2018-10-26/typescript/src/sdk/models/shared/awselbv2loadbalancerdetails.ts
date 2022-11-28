@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AvailabilityZone } from "./availabilityzone";
 import { LoadBalancerState } from "./loadbalancerstate";
+
 
 
 // AwsElbv2LoadBalancerDetails
@@ -9,33 +9,33 @@ import { LoadBalancerState } from "./loadbalancerstate";
  * Information about a load balancer.
 **/
 export class AwsElbv2LoadBalancerDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AvailabilityZones", elemType: shared.AvailabilityZone })
+  @SpeakeasyMetadata({ data: "json, name=AvailabilityZones", elemType: AvailabilityZone })
   availabilityZones?: AvailabilityZone[];
 
-  @Metadata({ data: "json, name=CanonicalHostedZoneId" })
+  @SpeakeasyMetadata({ data: "json, name=CanonicalHostedZoneId" })
   canonicalHostedZoneId?: string;
 
-  @Metadata({ data: "json, name=CreatedTime" })
+  @SpeakeasyMetadata({ data: "json, name=CreatedTime" })
   createdTime?: string;
 
-  @Metadata({ data: "json, name=DNSName" })
+  @SpeakeasyMetadata({ data: "json, name=DNSName" })
   dnsName?: string;
 
-  @Metadata({ data: "json, name=IpAddressType" })
+  @SpeakeasyMetadata({ data: "json, name=IpAddressType" })
   ipAddressType?: string;
 
-  @Metadata({ data: "json, name=Scheme" })
+  @SpeakeasyMetadata({ data: "json, name=Scheme" })
   scheme?: string;
 
-  @Metadata({ data: "json, name=SecurityGroups" })
+  @SpeakeasyMetadata({ data: "json, name=SecurityGroups" })
   securityGroups?: string[];
 
-  @Metadata({ data: "json, name=State" })
+  @SpeakeasyMetadata({ data: "json, name=State" })
   state?: LoadBalancerState;
 
-  @Metadata({ data: "json, name=Type" })
+  @SpeakeasyMetadata({ data: "json, name=Type" })
   type?: string;
 
-  @Metadata({ data: "json, name=VpcId" })
+  @SpeakeasyMetadata({ data: "json, name=VpcId" })
   vpcId?: string;
 }

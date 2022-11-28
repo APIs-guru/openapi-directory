@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var GetDisassociateTransitGatewayRouteTableActionEnum;
 (function (GetDisassociateTransitGatewayRouteTableActionEnum) {
     GetDisassociateTransitGatewayRouteTableActionEnum["DisassociateTransitGatewayRouteTable"] = "DisassociateTransitGatewayRouteTable";
@@ -37,23 +37,23 @@ var GetDisassociateTransitGatewayRouteTableQueryParams = /** @class */ (function
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=Action" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Action" }),
         __metadata("design:type", String)
     ], GetDisassociateTransitGatewayRouteTableQueryParams.prototype, "action", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=DryRun" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=DryRun" }),
         __metadata("design:type", Boolean)
     ], GetDisassociateTransitGatewayRouteTableQueryParams.prototype, "dryRun", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=TransitGatewayAttachmentId" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=TransitGatewayAttachmentId" }),
         __metadata("design:type", String)
     ], GetDisassociateTransitGatewayRouteTableQueryParams.prototype, "transitGatewayAttachmentId", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=TransitGatewayRouteTableId" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=TransitGatewayRouteTableId" }),
         __metadata("design:type", String)
     ], GetDisassociateTransitGatewayRouteTableQueryParams.prototype, "transitGatewayRouteTableId", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=Version" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Version" }),
         __metadata("design:type", String)
     ], GetDisassociateTransitGatewayRouteTableQueryParams.prototype, "version", void 0);
     return GetDisassociateTransitGatewayRouteTableQueryParams;
@@ -65,31 +65,31 @@ var GetDisassociateTransitGatewayRouteTableHeaders = /** @class */ (function (_s
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
         __metadata("design:type", String)
     ], GetDisassociateTransitGatewayRouteTableHeaders.prototype, "xAmzAlgorithm", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
         __metadata("design:type", String)
     ], GetDisassociateTransitGatewayRouteTableHeaders.prototype, "xAmzContentSha256", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
         __metadata("design:type", String)
     ], GetDisassociateTransitGatewayRouteTableHeaders.prototype, "xAmzCredential", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
         __metadata("design:type", String)
     ], GetDisassociateTransitGatewayRouteTableHeaders.prototype, "xAmzDate", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
         __metadata("design:type", String)
     ], GetDisassociateTransitGatewayRouteTableHeaders.prototype, "xAmzSecurityToken", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
         __metadata("design:type", String)
     ], GetDisassociateTransitGatewayRouteTableHeaders.prototype, "xAmzSignature", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
         __metadata("design:type", String)
     ], GetDisassociateTransitGatewayRouteTableHeaders.prototype, "xAmzSignedHeaders", void 0);
     return GetDisassociateTransitGatewayRouteTableHeaders;
@@ -101,11 +101,11 @@ var GetDisassociateTransitGatewayRouteTableRequest = /** @class */ (function (_s
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetDisassociateTransitGatewayRouteTableQueryParams)
     ], GetDisassociateTransitGatewayRouteTableRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetDisassociateTransitGatewayRouteTableHeaders)
     ], GetDisassociateTransitGatewayRouteTableRequest.prototype, "headers", void 0);
     return GetDisassociateTransitGatewayRouteTableRequest;
@@ -117,15 +117,15 @@ var GetDisassociateTransitGatewayRouteTableResponse = /** @class */ (function (_
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], GetDisassociateTransitGatewayRouteTableResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetDisassociateTransitGatewayRouteTableResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetDisassociateTransitGatewayRouteTableResponse.prototype, "statusCode", void 0);
     return GetDisassociateTransitGatewayRouteTableResponse;

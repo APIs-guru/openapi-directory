@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ProvisionedProductStatusEnum } from "./provisionedproductstatusenum";
 import { Tag } from "./tag";
+
 
 
 // ProvisionedProductAttribute
@@ -9,60 +9,60 @@ import { Tag } from "./tag";
  * Information about a provisioned product.
 **/
 export class ProvisionedProductAttribute extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Arn" })
+  @SpeakeasyMetadata({ data: "json, name=Arn" })
   arn?: string;
 
-  @Metadata({ data: "json, name=CreatedTime" })
+  @SpeakeasyMetadata({ data: "json, name=CreatedTime" })
   createdTime?: Date;
 
-  @Metadata({ data: "json, name=Id" })
+  @SpeakeasyMetadata({ data: "json, name=Id" })
   id?: string;
 
-  @Metadata({ data: "json, name=IdempotencyToken" })
+  @SpeakeasyMetadata({ data: "json, name=IdempotencyToken" })
   idempotencyToken?: string;
 
-  @Metadata({ data: "json, name=LastProvisioningRecordId" })
+  @SpeakeasyMetadata({ data: "json, name=LastProvisioningRecordId" })
   lastProvisioningRecordId?: string;
 
-  @Metadata({ data: "json, name=LastRecordId" })
+  @SpeakeasyMetadata({ data: "json, name=LastRecordId" })
   lastRecordId?: string;
 
-  @Metadata({ data: "json, name=LastSuccessfulProvisioningRecordId" })
+  @SpeakeasyMetadata({ data: "json, name=LastSuccessfulProvisioningRecordId" })
   lastSuccessfulProvisioningRecordId?: string;
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name?: string;
 
-  @Metadata({ data: "json, name=PhysicalId" })
+  @SpeakeasyMetadata({ data: "json, name=PhysicalId" })
   physicalId?: string;
 
-  @Metadata({ data: "json, name=ProductId" })
+  @SpeakeasyMetadata({ data: "json, name=ProductId" })
   productId?: string;
 
-  @Metadata({ data: "json, name=ProductName" })
+  @SpeakeasyMetadata({ data: "json, name=ProductName" })
   productName?: string;
 
-  @Metadata({ data: "json, name=ProvisioningArtifactId" })
+  @SpeakeasyMetadata({ data: "json, name=ProvisioningArtifactId" })
   provisioningArtifactId?: string;
 
-  @Metadata({ data: "json, name=ProvisioningArtifactName" })
+  @SpeakeasyMetadata({ data: "json, name=ProvisioningArtifactName" })
   provisioningArtifactName?: string;
 
-  @Metadata({ data: "json, name=Status" })
+  @SpeakeasyMetadata({ data: "json, name=Status" })
   status?: ProvisionedProductStatusEnum;
 
-  @Metadata({ data: "json, name=StatusMessage" })
+  @SpeakeasyMetadata({ data: "json, name=StatusMessage" })
   statusMessage?: string;
 
-  @Metadata({ data: "json, name=Tags", elemType: shared.Tag })
+  @SpeakeasyMetadata({ data: "json, name=Tags", elemType: Tag })
   tags?: Tag[];
 
-  @Metadata({ data: "json, name=Type" })
+  @SpeakeasyMetadata({ data: "json, name=Type" })
   type?: string;
 
-  @Metadata({ data: "json, name=UserArn" })
+  @SpeakeasyMetadata({ data: "json, name=UserArn" })
   userArn?: string;
 
-  @Metadata({ data: "json, name=UserArnSession" })
+  @SpeakeasyMetadata({ data: "json, name=UserArnSession" })
   userArnSession?: string;
 }

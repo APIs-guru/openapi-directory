@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudIdentitytoolkitAdminV2DefaultSupportedIdpConfig } from "./googlecloudidentitytoolkitadminv2defaultsupportedidpconfig";
 /**
  * Response for DefaultSupportedIdpConfigs

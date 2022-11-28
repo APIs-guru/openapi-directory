@@ -19,6 +19,8 @@ const (
 	GoogleCloudDialogflowV2beta1ClearSuggestionFeatureConfigRequestSuggestionFeatureTypeEnumConversationSummarization GoogleCloudDialogflowV2beta1ClearSuggestionFeatureConfigRequestSuggestionFeatureTypeEnum = "CONVERSATION_SUMMARIZATION"
 )
 
+// GoogleCloudDialogflowV2beta1ClearSuggestionFeatureConfigRequest
+// The request message for ConversationProfiles.ClearFeature.
 type GoogleCloudDialogflowV2beta1ClearSuggestionFeatureConfigRequest struct {
 	ParticipantRole       *GoogleCloudDialogflowV2beta1ClearSuggestionFeatureConfigRequestParticipantRoleEnum       `json:"participantRole,omitempty"`
 	SuggestionFeatureType *GoogleCloudDialogflowV2beta1ClearSuggestionFeatureConfigRequestSuggestionFeatureTypeEnum `json:"suggestionFeatureType,omitempty"`

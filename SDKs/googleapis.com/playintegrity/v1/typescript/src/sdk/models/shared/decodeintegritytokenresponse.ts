@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TokenPayloadExternal } from "./tokenpayloadexternal";
+
 
 
 // DecodeIntegrityTokenResponse
@@ -7,6 +8,6 @@ import { TokenPayloadExternal } from "./tokenpayloadexternal";
  * Response containing the decoded integrity payload.
 **/
 export class DecodeIntegrityTokenResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=tokenPayloadExternal" })
+  @SpeakeasyMetadata({ data: "json, name=tokenPayloadExternal" })
   tokenPayloadExternal?: TokenPayloadExternal;
 }

@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class GetSchedulesScheduleAByStateQueryParams:
-    api_key: str = field(default=None, metadata={'query_param': { 'field_name': 'api_key', 'style': 'form', 'explode': True }})
+    api_key: str = field(metadata={'query_param': { 'field_name': 'api_key', 'style': 'form', 'explode': True }})
     committee_id: Optional[List[str]] = field(default=None, metadata={'query_param': { 'field_name': 'committee_id', 'style': 'form', 'explode': True }})
     cycle: Optional[List[int]] = field(default=None, metadata={'query_param': { 'field_name': 'cycle', 'style': 'form', 'explode': True }})
     hide_null: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'hide_null', 'style': 'form', 'explode': True }})
@@ -20,12 +20,12 @@ class GetSchedulesScheduleAByStateQueryParams:
 
 @dataclass
 class GetSchedulesScheduleAByStateRequest:
-    query_params: GetSchedulesScheduleAByStateQueryParams = field(default=None)
+    query_params: GetSchedulesScheduleAByStateQueryParams = field()
     
 
 @dataclass
 class GetSchedulesScheduleAByStateResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     schedule_a_by_state_page: Optional[shared.ScheduleAByStatePage] = field(default=None)
-    status_code: int = field(default=None)
     

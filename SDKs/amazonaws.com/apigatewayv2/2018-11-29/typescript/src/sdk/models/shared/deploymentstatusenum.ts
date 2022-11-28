@@ -1,7 +1,8 @@
 
 
+
 export enum DeploymentStatusEnum {
-    Pending = "PENDING"
-,    Failed = "FAILED"
-,    Deployed = "DEPLOYED"
+    Pending = "PENDING",
+    Failed = "FAILED",
+    Deployed = "DEPLOYED"
 }

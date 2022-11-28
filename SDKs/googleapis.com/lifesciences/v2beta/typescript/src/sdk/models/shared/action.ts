@@ -1,8 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
-import { Secret } from "./secret";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Secret } from "./secret";
 import { Mount } from "./mount";
+
 
 
 // Action
@@ -10,63 +9,63 @@ import { Mount } from "./mount";
  * Specifies a single action that runs a Docker container.
 **/
 export class Action extends SpeakeasyBase {
-  @Metadata({ data: "json, name=alwaysRun" })
+  @SpeakeasyMetadata({ data: "json, name=alwaysRun" })
   alwaysRun?: boolean;
 
-  @Metadata({ data: "json, name=blockExternalNetwork" })
+  @SpeakeasyMetadata({ data: "json, name=blockExternalNetwork" })
   blockExternalNetwork?: boolean;
 
-  @Metadata({ data: "json, name=commands" })
+  @SpeakeasyMetadata({ data: "json, name=commands" })
   commands?: string[];
 
-  @Metadata({ data: "json, name=containerName" })
+  @SpeakeasyMetadata({ data: "json, name=containerName" })
   containerName?: string;
 
-  @Metadata({ data: "json, name=credentials" })
+  @SpeakeasyMetadata({ data: "json, name=credentials" })
   credentials?: Secret;
 
-  @Metadata({ data: "json, name=disableImagePrefetch" })
+  @SpeakeasyMetadata({ data: "json, name=disableImagePrefetch" })
   disableImagePrefetch?: boolean;
 
-  @Metadata({ data: "json, name=disableStandardErrorCapture" })
+  @SpeakeasyMetadata({ data: "json, name=disableStandardErrorCapture" })
   disableStandardErrorCapture?: boolean;
 
-  @Metadata({ data: "json, name=enableFuse" })
+  @SpeakeasyMetadata({ data: "json, name=enableFuse" })
   enableFuse?: boolean;
 
-  @Metadata({ data: "json, name=encryptedEnvironment" })
+  @SpeakeasyMetadata({ data: "json, name=encryptedEnvironment" })
   encryptedEnvironment?: Secret;
 
-  @Metadata({ data: "json, name=entrypoint" })
+  @SpeakeasyMetadata({ data: "json, name=entrypoint" })
   entrypoint?: string;
 
-  @Metadata({ data: "json, name=environment" })
+  @SpeakeasyMetadata({ data: "json, name=environment" })
   environment?: Map<string, string>;
 
-  @Metadata({ data: "json, name=ignoreExitStatus" })
+  @SpeakeasyMetadata({ data: "json, name=ignoreExitStatus" })
   ignoreExitStatus?: boolean;
 
-  @Metadata({ data: "json, name=imageUri" })
+  @SpeakeasyMetadata({ data: "json, name=imageUri" })
   imageUri?: string;
 
-  @Metadata({ data: "json, name=labels" })
+  @SpeakeasyMetadata({ data: "json, name=labels" })
   labels?: Map<string, string>;
 
-  @Metadata({ data: "json, name=mounts", elemType: shared.Mount })
+  @SpeakeasyMetadata({ data: "json, name=mounts", elemType: Mount })
   mounts?: Mount[];
 
-  @Metadata({ data: "json, name=pidNamespace" })
+  @SpeakeasyMetadata({ data: "json, name=pidNamespace" })
   pidNamespace?: string;
 
-  @Metadata({ data: "json, name=portMappings" })
+  @SpeakeasyMetadata({ data: "json, name=portMappings" })
   portMappings?: Map<string, number>;
 
-  @Metadata({ data: "json, name=publishExposedPorts" })
+  @SpeakeasyMetadata({ data: "json, name=publishExposedPorts" })
   publishExposedPorts?: boolean;
 
-  @Metadata({ data: "json, name=runInBackground" })
+  @SpeakeasyMetadata({ data: "json, name=runInBackground" })
   runInBackground?: boolean;
 
-  @Metadata({ data: "json, name=timeout" })
+  @SpeakeasyMetadata({ data: "json, name=timeout" })
   timeout?: string;
 }

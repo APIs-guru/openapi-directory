@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ArtifactRevision } from "./artifactrevision";
 import { PipelineExecutionStatusEnum } from "./pipelineexecutionstatusenum";
+
 
 
 // PipelineExecution
@@ -9,21 +9,21 @@ import { PipelineExecutionStatusEnum } from "./pipelineexecutionstatusenum";
  * Represents information about an execution of a pipeline.
 **/
 export class PipelineExecution extends SpeakeasyBase {
-  @Metadata({ data: "json, name=artifactRevisions", elemType: shared.ArtifactRevision })
+  @SpeakeasyMetadata({ data: "json, name=artifactRevisions", elemType: ArtifactRevision })
   artifactRevisions?: ArtifactRevision[];
 
-  @Metadata({ data: "json, name=pipelineExecutionId" })
+  @SpeakeasyMetadata({ data: "json, name=pipelineExecutionId" })
   pipelineExecutionId?: string;
 
-  @Metadata({ data: "json, name=pipelineName" })
+  @SpeakeasyMetadata({ data: "json, name=pipelineName" })
   pipelineName?: string;
 
-  @Metadata({ data: "json, name=pipelineVersion" })
+  @SpeakeasyMetadata({ data: "json, name=pipelineVersion" })
   pipelineVersion?: number;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: PipelineExecutionStatusEnum;
 
-  @Metadata({ data: "json, name=statusSummary" })
+  @SpeakeasyMetadata({ data: "json, name=statusSummary" })
   statusSummary?: string;
 }

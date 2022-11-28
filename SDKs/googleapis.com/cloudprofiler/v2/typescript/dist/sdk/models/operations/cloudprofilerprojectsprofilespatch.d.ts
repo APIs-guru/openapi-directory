@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class CloudprofilerProjectsProfilesPatchPathParams extends SpeakeasyBase {
     name: string;
@@ -37,7 +37,7 @@ export declare class CloudprofilerProjectsProfilesPatchSecurity extends Speakeas
 export declare class CloudprofilerProjectsProfilesPatchRequest extends SpeakeasyBase {
     pathParams: CloudprofilerProjectsProfilesPatchPathParams;
     queryParams: CloudprofilerProjectsProfilesPatchQueryParams;
-    request?: shared.Profile;
+    request?: shared.ProfileInput;
     security: CloudprofilerProjectsProfilesPatchSecurity;
 }
 export declare class CloudprofilerProjectsProfilesPatchResponse extends SpeakeasyBase {

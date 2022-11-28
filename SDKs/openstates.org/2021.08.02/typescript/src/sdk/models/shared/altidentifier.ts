@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class AltIdentifier extends SpeakeasyBase {
-  @Metadata({ data: "json, name=identifier" })
+  @SpeakeasyMetadata({ data: "json, name=identifier" })
   identifier: string;
 
-  @Metadata({ data: "json, name=scheme" })
+  @SpeakeasyMetadata({ data: "json, name=scheme" })
   scheme: string;
 }

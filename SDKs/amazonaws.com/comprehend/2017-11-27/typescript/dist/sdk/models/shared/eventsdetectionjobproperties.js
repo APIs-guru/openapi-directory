@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { InputDataConfig } from "./inputdataconfig";
 import { JobStatusEnum } from "./jobstatusenum";
 import { LanguageCodeEnum } from "./languagecodeenum";
@@ -37,51 +37,51 @@ var EventsDetectionJobProperties = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=DataAccessRoleArn" }),
+        SpeakeasyMetadata({ data: "json, name=DataAccessRoleArn" }),
         __metadata("design:type", String)
     ], EventsDetectionJobProperties.prototype, "dataAccessRoleArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=EndTime" }),
+        SpeakeasyMetadata({ data: "json, name=EndTime" }),
         __metadata("design:type", Date)
     ], EventsDetectionJobProperties.prototype, "endTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=InputDataConfig" }),
+        SpeakeasyMetadata({ data: "json, name=InputDataConfig" }),
         __metadata("design:type", InputDataConfig)
     ], EventsDetectionJobProperties.prototype, "inputDataConfig", void 0);
     __decorate([
-        Metadata({ data: "json, name=JobArn" }),
+        SpeakeasyMetadata({ data: "json, name=JobArn" }),
         __metadata("design:type", String)
     ], EventsDetectionJobProperties.prototype, "jobArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=JobId" }),
+        SpeakeasyMetadata({ data: "json, name=JobId" }),
         __metadata("design:type", String)
     ], EventsDetectionJobProperties.prototype, "jobId", void 0);
     __decorate([
-        Metadata({ data: "json, name=JobName" }),
+        SpeakeasyMetadata({ data: "json, name=JobName" }),
         __metadata("design:type", String)
     ], EventsDetectionJobProperties.prototype, "jobName", void 0);
     __decorate([
-        Metadata({ data: "json, name=JobStatus" }),
+        SpeakeasyMetadata({ data: "json, name=JobStatus" }),
         __metadata("design:type", String)
     ], EventsDetectionJobProperties.prototype, "jobStatus", void 0);
     __decorate([
-        Metadata({ data: "json, name=LanguageCode" }),
+        SpeakeasyMetadata({ data: "json, name=LanguageCode" }),
         __metadata("design:type", String)
     ], EventsDetectionJobProperties.prototype, "languageCode", void 0);
     __decorate([
-        Metadata({ data: "json, name=Message" }),
+        SpeakeasyMetadata({ data: "json, name=Message" }),
         __metadata("design:type", String)
     ], EventsDetectionJobProperties.prototype, "message", void 0);
     __decorate([
-        Metadata({ data: "json, name=OutputDataConfig" }),
+        SpeakeasyMetadata({ data: "json, name=OutputDataConfig" }),
         __metadata("design:type", OutputDataConfig)
     ], EventsDetectionJobProperties.prototype, "outputDataConfig", void 0);
     __decorate([
-        Metadata({ data: "json, name=SubmitTime" }),
+        SpeakeasyMetadata({ data: "json, name=SubmitTime" }),
         __metadata("design:type", Date)
     ], EventsDetectionJobProperties.prototype, "submitTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=TargetEventTypes" }),
+        SpeakeasyMetadata({ data: "json, name=TargetEventTypes" }),
         __metadata("design:type", Array)
     ], EventsDetectionJobProperties.prototype, "targetEventTypes", void 0);
     return EventsDetectionJobProperties;

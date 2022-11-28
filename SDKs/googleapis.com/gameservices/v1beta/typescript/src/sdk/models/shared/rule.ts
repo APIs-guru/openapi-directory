@@ -1,15 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Condition } from "./condition";
 import { LogConfig } from "./logconfig";
 
+
 export enum RuleActionEnum {
-    NoAction = "NO_ACTION"
-,    Allow = "ALLOW"
-,    AllowWithLog = "ALLOW_WITH_LOG"
-,    Deny = "DENY"
-,    DenyWithLog = "DENY_WITH_LOG"
-,    Log = "LOG"
+    NoAction = "NO_ACTION",
+    Allow = "ALLOW",
+    AllowWithLog = "ALLOW_WITH_LOG",
+    Deny = "DENY",
+    DenyWithLog = "DENY_WITH_LOG",
+    Log = "LOG"
 }
 
 
@@ -18,24 +18,24 @@ export enum RuleActionEnum {
  * A rule to be applied in a Policy.
 **/
 export class Rule extends SpeakeasyBase {
-  @Metadata({ data: "json, name=action" })
+  @SpeakeasyMetadata({ data: "json, name=action" })
   action?: RuleActionEnum;
 
-  @Metadata({ data: "json, name=conditions", elemType: shared.Condition })
+  @SpeakeasyMetadata({ data: "json, name=conditions", elemType: Condition })
   conditions?: Condition[];
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=in" })
+  @SpeakeasyMetadata({ data: "json, name=in" })
   in?: string[];
 
-  @Metadata({ data: "json, name=logConfig", elemType: shared.LogConfig })
+  @SpeakeasyMetadata({ data: "json, name=logConfig", elemType: LogConfig })
   logConfig?: LogConfig[];
 
-  @Metadata({ data: "json, name=notIn" })
+  @SpeakeasyMetadata({ data: "json, name=notIn" })
   notIn?: string[];
 
-  @Metadata({ data: "json, name=permissions" })
+  @SpeakeasyMetadata({ data: "json, name=permissions" })
   permissions?: string[];
 }

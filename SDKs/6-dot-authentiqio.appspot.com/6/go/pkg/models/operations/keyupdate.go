@@ -4,13 +4,13 @@ type KeyUpdatePathParams struct {
 	Pk string `pathParam:"style=simple,explode=false,name=PK"`
 }
 
+type KeyUpdate200ApplicationJSON struct {
+	Status *string `json:"status,omitempty"`
+}
+
 type KeyUpdateRequest struct {
 	PathParams KeyUpdatePathParams
 	Request    []byte `request:"mediaType=application/jwt"`
-}
-
-type KeyUpdate200ApplicationJSON struct {
-	Status *string `json:"status,omitempty"`
 }
 
 type KeyUpdateResponse struct {

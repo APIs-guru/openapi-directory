@@ -1,11 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Invoice } from "./invoice";
 import { DocumentInvoiceResponse } from "./documentinvoiceresponse";
 import { RawDocumentData } from "./rawdocumentdata";
 
+
 export enum SendableDocumentDocumentTypeEnum {
-    Invoice = "invoice"
-,    InvoiceResponse = "invoice_response"
+    Invoice = "invoice",
+    InvoiceResponse = "invoice_response"
 }
 
 
@@ -14,15 +15,15 @@ export enum SendableDocumentDocumentTypeEnum {
  * The document to send.
 **/
 export class SendableDocument extends SpeakeasyBase {
-  @Metadata({ data: "json, name=documentType" })
+  @SpeakeasyMetadata({ data: "json, name=documentType" })
   documentType: SendableDocumentDocumentTypeEnum;
 
-  @Metadata({ data: "json, name=invoice" })
+  @SpeakeasyMetadata({ data: "json, name=invoice" })
   invoice?: Invoice;
 
-  @Metadata({ data: "json, name=invoiceResponse" })
+  @SpeakeasyMetadata({ data: "json, name=invoiceResponse" })
   invoiceResponse?: DocumentInvoiceResponse;
 
-  @Metadata({ data: "json, name=rawDocumentData" })
+  @SpeakeasyMetadata({ data: "json, name=rawDocumentData" })
   rawDocumentData?: RawDocumentData;
 }

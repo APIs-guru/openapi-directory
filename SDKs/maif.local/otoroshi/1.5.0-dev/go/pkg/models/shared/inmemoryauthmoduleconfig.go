@@ -1,5 +1,7 @@
 package shared
 
+// InMemoryAuthModuleConfig
+// Settings to authenticate users using the in memory user store
 type InMemoryAuthModuleConfig struct {
 	Desc          string         `json:"desc"`
 	ID            string         `json:"id"`

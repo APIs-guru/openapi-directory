@@ -1,62 +1,63 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class EndpointRemoveTracksPlaylistPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=playlist_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=playlist_id" })
   playlistId: string;
 }
 
 
 export class EndpointRemoveTracksPlaylistHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=Authorization" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Authorization" })
   authorization: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=Content-Type" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Content-Type" })
   contentType: string;
 }
 
 
 export class EndpointRemoveTracksPlaylistRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=snapshot_id" })
+  @SpeakeasyMetadata({ data: "json, name=snapshot_id" })
   snapshotId?: string;
 
-  @Metadata({ data: "json, name=tracks" })
+  @SpeakeasyMetadata({ data: "json, name=tracks" })
   tracks: string[];
 }
 
 
 export class EndpointRemoveTracksPlaylistSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   spotifyAuth: shared.SchemeSpotifyAuth;
 }
 
 
 export class EndpointRemoveTracksPlaylistRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: EndpointRemoveTracksPlaylistPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: EndpointRemoveTracksPlaylistHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: EndpointRemoveTracksPlaylistRequestBody;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: EndpointRemoveTracksPlaylistSecurity;
 }
 
 
 export class EndpointRemoveTracksPlaylistResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   errorResponseObject?: shared.ErrorResponseObject;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   snapshotIdObject?: shared.SnapshotIdObject;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

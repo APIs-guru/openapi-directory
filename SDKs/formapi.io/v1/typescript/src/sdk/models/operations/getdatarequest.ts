@@ -1,41 +1,42 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetDataRequestPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=data_request_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=data_request_id" })
   dataRequestId: string;
 }
 
 
 export class GetDataRequestSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=basic" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=basic" })
   apiTokenBasic: shared.SchemeApiTokenBasic;
 }
 
 
 export class GetDataRequestRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetDataRequestPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: GetDataRequestSecurity;
 }
 
 
 export class GetDataRequestResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   authenticationError?: shared.AuthenticationError;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   error?: shared.Error;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   submissionDataRequest?: shared.SubmissionDataRequest;
 }

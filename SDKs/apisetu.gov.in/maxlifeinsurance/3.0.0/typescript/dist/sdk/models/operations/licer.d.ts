@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class LicerRequestBodyCertificateParameters extends SpeakeasyBase {
     dob: string;
@@ -18,10 +18,6 @@ export declare class LicerRequestBody extends SpeakeasyBase {
 export declare class LicerSecurity extends SpeakeasyBase {
     apiKey: shared.SchemeApiKey;
     clientId: shared.SchemeClientId;
-}
-export declare class LicerRequest extends SpeakeasyBase {
-    request?: LicerRequestBody;
-    security: LicerSecurity;
 }
 export declare enum Licer400ApplicationJsonErrorEnum {
     MissingParameter = "missing_parameter",
@@ -104,6 +100,10 @@ export declare enum Licer504ApplicationJsonErrorDescriptionEnum {
 export declare class Licer504ApplicationJson extends SpeakeasyBase {
     error?: Licer504ApplicationJsonErrorEnum;
     errorDescription?: Licer504ApplicationJsonErrorDescriptionEnum;
+}
+export declare class LicerRequest extends SpeakeasyBase {
+    request?: LicerRequestBody;
+    security: LicerSecurity;
 }
 export declare class LicerResponse extends SpeakeasyBase {
     contentType: string;

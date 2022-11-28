@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var VerifySearchPathParams = /** @class */ (function (_super) {
     __extends(VerifySearchPathParams, _super);
@@ -30,7 +30,7 @@ var VerifySearchPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=format" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=format" }),
         __metadata("design:type", String)
     ], VerifySearchPathParams.prototype, "format", void 0);
     return VerifySearchPathParams;
@@ -42,19 +42,19 @@ var VerifySearchQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=api_key" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=api_key" }),
         __metadata("design:type", String)
     ], VerifySearchQueryParams.prototype, "apiKey", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=api_secret" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=api_secret" }),
         __metadata("design:type", String)
     ], VerifySearchQueryParams.prototype, "apiSecret", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=request_id" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=request_id" }),
         __metadata("design:type", String)
     ], VerifySearchQueryParams.prototype, "requestId", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=request_ids" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=request_ids" }),
         __metadata("design:type", Array)
     ], VerifySearchQueryParams.prototype, "requestIds", void 0);
     return VerifySearchQueryParams;
@@ -66,11 +66,11 @@ var VerifySearchRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", VerifySearchPathParams)
     ], VerifySearchRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", VerifySearchQueryParams)
     ], VerifySearchRequest.prototype, "queryParams", void 0);
     return VerifySearchRequest;
@@ -82,19 +82,19 @@ var VerifySearchResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], VerifySearchResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], VerifySearchResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], VerifySearchResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], VerifySearchResponse.prototype, "verifySearch200ApplicationJsonOneOf", void 0);
     return VerifySearchResponse;

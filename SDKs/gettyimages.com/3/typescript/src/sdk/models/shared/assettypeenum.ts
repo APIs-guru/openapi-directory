@@ -1,8 +1,9 @@
 
 
+
 export enum AssetTypeEnum {
-    NotSet = "NotSet"
-,    Image = "Image"
-,    Film = "Film"
-,    Music = "Music"
+    NotSet = "NotSet",
+    Image = "Image",
+    Film = "Film",
+    Music = "Music"
 }

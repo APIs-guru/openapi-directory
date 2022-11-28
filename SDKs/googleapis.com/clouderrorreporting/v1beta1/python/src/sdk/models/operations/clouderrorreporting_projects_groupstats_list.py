@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class ClouderrorreportingProjectsGroupStatsListPathParams:
-    project_name: str = field(default=None, metadata={'path_param': { 'field_name': 'projectName', 'style': 'simple', 'explode': False }})
+    project_name: str = field(metadata={'path_param': { 'field_name': 'projectName', 'style': 'simple', 'explode': False }})
     
 class ClouderrorreportingProjectsGroupStatsListAlignmentEnum(str, Enum):
     ERROR_COUNT_ALIGNMENT_UNSPECIFIED = "ERROR_COUNT_ALIGNMENT_UNSPECIFIED"
@@ -56,20 +57,20 @@ class ClouderrorreportingProjectsGroupStatsListQueryParams:
 
 @dataclass
 class ClouderrorreportingProjectsGroupStatsListSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class ClouderrorreportingProjectsGroupStatsListRequest:
-    path_params: ClouderrorreportingProjectsGroupStatsListPathParams = field(default=None)
-    query_params: ClouderrorreportingProjectsGroupStatsListQueryParams = field(default=None)
-    security: ClouderrorreportingProjectsGroupStatsListSecurity = field(default=None)
+    path_params: ClouderrorreportingProjectsGroupStatsListPathParams = field()
+    query_params: ClouderrorreportingProjectsGroupStatsListQueryParams = field()
+    security: ClouderrorreportingProjectsGroupStatsListSecurity = field()
     
 
 @dataclass
 class ClouderrorreportingProjectsGroupStatsListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     list_group_stats_response: Optional[shared.ListGroupStatsResponse] = field(default=None)
-    status_code: int = field(default=None)
     

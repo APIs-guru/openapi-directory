@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ReferencedImageDetail } from "./referencedimagedetail";
+
 
 
 // ImageTagDetail
@@ -7,12 +8,12 @@ import { ReferencedImageDetail } from "./referencedimagedetail";
  * An object representing the image tag details for an image.
 **/
 export class ImageTagDetail extends SpeakeasyBase {
-  @Metadata({ data: "json, name=createdAt" })
+  @SpeakeasyMetadata({ data: "json, name=createdAt" })
   createdAt?: Date;
 
-  @Metadata({ data: "json, name=imageDetail" })
+  @SpeakeasyMetadata({ data: "json, name=imageDetail" })
   imageDetail?: ReferencedImageDetail;
 
-  @Metadata({ data: "json, name=imageTag" })
+  @SpeakeasyMetadata({ data: "json, name=imageTag" })
   imageTag?: string;
 }

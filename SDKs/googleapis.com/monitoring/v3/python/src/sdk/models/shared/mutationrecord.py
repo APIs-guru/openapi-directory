@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass_json
 @dataclass
 class MutationRecord:
-    mutate_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'mutateTime' }})
-    mutated_by: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'mutatedBy' }})
+    r"""MutationRecord
+    Describes a change made to a configuration.
+    """
+    
+    mutate_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('mutateTime') }})
+    mutated_by: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('mutatedBy') }})
     

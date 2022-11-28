@@ -22,30 +22,30 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var ErrorDetail = /** @class */ (function (_super) {
     __extends(ErrorDetail, _super);
     function ErrorDetail() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=code" }),
+        SpeakeasyMetadata({ data: "json, name=code" }),
         __metadata("design:type", String)
     ], ErrorDetail.prototype, "code", void 0);
     __decorate([
-        Metadata({ data: "json, name=context" }),
+        SpeakeasyMetadata({ data: "json, name=context" }),
         __metadata("design:type", Map)
     ], ErrorDetail.prototype, "context", void 0);
     __decorate([
-        Metadata({ data: "json, name=in" }),
+        SpeakeasyMetadata({ data: "json, name=in" }),
         __metadata("design:type", String)
     ], ErrorDetail.prototype, "in", void 0);
     __decorate([
-        Metadata({ data: "json, name=message" }),
+        SpeakeasyMetadata({ data: "json, name=message" }),
         __metadata("design:type", String)
     ], ErrorDetail.prototype, "message", void 0);
     __decorate([
-        Metadata({ data: "json, name=subCategory" }),
+        SpeakeasyMetadata({ data: "json, name=subCategory" }),
         __metadata("design:type", String)
     ], ErrorDetail.prototype, "subCategory", void 0);
     return ErrorDetail;

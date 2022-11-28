@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleFirebaseAppcheckV1Service } from "./googlefirebaseappcheckv1service";
 // GoogleFirebaseAppcheckV1UpdateServiceRequest
 /**
@@ -34,11 +34,11 @@ var GoogleFirebaseAppcheckV1UpdateServiceRequest = /** @class */ (function (_sup
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=service" }),
+        SpeakeasyMetadata({ data: "json, name=service" }),
         __metadata("design:type", GoogleFirebaseAppcheckV1Service)
     ], GoogleFirebaseAppcheckV1UpdateServiceRequest.prototype, "service", void 0);
     __decorate([
-        Metadata({ data: "json, name=updateMask" }),
+        SpeakeasyMetadata({ data: "json, name=updateMask" }),
         __metadata("design:type", String)
     ], GoogleFirebaseAppcheckV1UpdateServiceRequest.prototype, "updateMask", void 0);
     return GoogleFirebaseAppcheckV1UpdateServiceRequest;

@@ -13,13 +13,13 @@ type DeleteSectionQueryParams struct {
 	OptPretty *bool    `queryParam:"style=form,explode=true,name=opt_pretty"`
 }
 
+type DeleteSection200ApplicationJSON struct {
+	Data map[string]interface{} `json:"data,omitempty"`
+}
+
 type DeleteSectionRequest struct {
 	PathParams  DeleteSectionPathParams
 	QueryParams DeleteSectionQueryParams
-}
-
-type DeleteSection200ApplicationJSON struct {
-	Data map[string]interface{} `json:"data,omitempty"`
 }
 
 type DeleteSectionResponse struct {

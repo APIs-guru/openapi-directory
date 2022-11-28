@@ -1,9 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum DomainMappingSpecCertificateModeEnum {
-    CertificateModeUnspecified = "CERTIFICATE_MODE_UNSPECIFIED"
-,    None = "NONE"
-,    Automatic = "AUTOMATIC"
+    CertificateModeUnspecified = "CERTIFICATE_MODE_UNSPECIFIED",
+    None = "NONE",
+    Automatic = "AUTOMATIC"
 }
 
 
@@ -12,12 +13,12 @@ export enum DomainMappingSpecCertificateModeEnum {
  * The desired state of the Domain Mapping.
 **/
 export class DomainMappingSpec extends SpeakeasyBase {
-  @Metadata({ data: "json, name=certificateMode" })
+  @SpeakeasyMetadata({ data: "json, name=certificateMode" })
   certificateMode?: DomainMappingSpecCertificateModeEnum;
 
-  @Metadata({ data: "json, name=forceOverride" })
+  @SpeakeasyMetadata({ data: "json, name=forceOverride" })
   forceOverride?: boolean;
 
-  @Metadata({ data: "json, name=routeName" })
+  @SpeakeasyMetadata({ data: "json, name=routeName" })
   routeName?: string;
 }

@@ -22,14 +22,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var WorkspaceIdRequestBody = /** @class */ (function (_super) {
     __extends(WorkspaceIdRequestBody, _super);
     function WorkspaceIdRequestBody() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=workspaceId" }),
+        SpeakeasyMetadata({ data: "json, name=workspaceId" }),
         __metadata("design:type", String)
     ], WorkspaceIdRequestBody.prototype, "workspaceId", void 0);
     return WorkspaceIdRequestBody;

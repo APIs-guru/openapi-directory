@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ResourceIdentifier } from "./resourceidentifier";
 import { ResourceTypeEnum } from "./resourcetypeenum";
+
 
 
 // RelatedResource
@@ -8,12 +9,12 @@ import { ResourceTypeEnum } from "./resourcetypeenum";
  * Information about a related resource.
 **/
 export class RelatedResource extends SpeakeasyBase {
-  @Metadata({ data: "json, name=additionalInfo" })
+  @SpeakeasyMetadata({ data: "json, name=additionalInfo" })
   additionalInfo?: Map<string, string>;
 
-  @Metadata({ data: "json, name=resourceIdentifier" })
+  @SpeakeasyMetadata({ data: "json, name=resourceIdentifier" })
   resourceIdentifier?: ResourceIdentifier;
 
-  @Metadata({ data: "json, name=resourceType" })
+  @SpeakeasyMetadata({ data: "json, name=resourceType" })
   resourceType?: ResourceTypeEnum;
 }

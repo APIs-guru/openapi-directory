@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DeidentifyConfig } from "./deidentifyconfig";
+
 
 
 // DeidentifiedStoreDestination
@@ -7,9 +8,9 @@ import { DeidentifyConfig } from "./deidentifyconfig";
  * Contains configuration for streaming de-identified FHIR export.
 **/
 export class DeidentifiedStoreDestination extends SpeakeasyBase {
-  @Metadata({ data: "json, name=config" })
+  @SpeakeasyMetadata({ data: "json, name=config" })
   config?: DeidentifyConfig;
 
-  @Metadata({ data: "json, name=store" })
+  @SpeakeasyMetadata({ data: "json, name=store" })
   store?: string;
 }

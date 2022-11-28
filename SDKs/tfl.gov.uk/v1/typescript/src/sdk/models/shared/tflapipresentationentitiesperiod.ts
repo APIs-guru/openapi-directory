@@ -1,26 +1,26 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TflApiPresentationEntitiesServiceFrequency } from "./tflapipresentationentitiesservicefrequency";
 import { TflApiPresentationEntitiesTwentyFourHourClockTime } from "./tflapipresentationentitiestwentyfourhourclocktime";
-import { TflApiPresentationEntitiesTwentyFourHourClockTime } from "./tflapipresentationentitiestwentyfourhourclocktime";
+
 
 export enum TflApiPresentationEntitiesPeriodTypeEnum {
-    Normal = "Normal"
-,    FrequencyHours = "FrequencyHours"
-,    FrequencyMinutes = "FrequencyMinutes"
-,    Unknown = "Unknown"
+    Normal = "Normal",
+    FrequencyHours = "FrequencyHours",
+    FrequencyMinutes = "FrequencyMinutes",
+    Unknown = "Unknown"
 }
 
 
 export class TflApiPresentationEntitiesPeriod extends SpeakeasyBase {
-  @Metadata({ data: "json, name=frequency" })
+  @SpeakeasyMetadata({ data: "json, name=frequency" })
   frequency?: TflApiPresentationEntitiesServiceFrequency;
 
-  @Metadata({ data: "json, name=fromTime" })
+  @SpeakeasyMetadata({ data: "json, name=fromTime" })
   fromTime?: TflApiPresentationEntitiesTwentyFourHourClockTime;
 
-  @Metadata({ data: "json, name=toTime" })
+  @SpeakeasyMetadata({ data: "json, name=toTime" })
   toTime?: TflApiPresentationEntitiesTwentyFourHourClockTime;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: TflApiPresentationEntitiesPeriodTypeEnum;
 }

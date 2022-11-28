@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class SurveyPageEnum(str, Enum):
     W = "w"
@@ -12,8 +14,8 @@ class SurveyPageEnum(str, Enum):
 @dataclass_json
 @dataclass
 class Survey:
-    survey_guid: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'survey_guid' }})
-    survey_introduction_text: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'survey_introduction_text' }})
-    survey_link: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'survey_link' }})
-    survey_page: Optional[SurveyPageEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'survey_page' }})
+    survey_guid: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('survey_guid') }})
+    survey_introduction_text: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('survey_introduction_text') }})
+    survey_link: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('survey_link') }})
+    survey_page: Optional[SurveyPageEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('survey_page') }})
     

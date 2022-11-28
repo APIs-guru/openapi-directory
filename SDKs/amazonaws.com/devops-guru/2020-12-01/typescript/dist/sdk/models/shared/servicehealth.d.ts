@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ServiceInsightHealth } from "./serviceinsighthealth";
 import { ServiceNameEnum } from "./servicenameenum";
 /**

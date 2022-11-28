@@ -16,6 +16,19 @@ const (
 	GoogleCloudRetailV2alphaControlSolutionTypesEnumSolutionTypeSearch         GoogleCloudRetailV2alphaControlSolutionTypesEnum = "SOLUTION_TYPE_SEARCH"
 )
 
+// GoogleCloudRetailV2alphaControlInput
+// Configures dynamic metadata that can be linked to a ServingConfig and affect search or recommendation results at serving time.
+type GoogleCloudRetailV2alphaControlInput struct {
+	DisplayName           *string                                                    `json:"displayName,omitempty"`
+	FacetSpec             *GoogleCloudRetailV2alphaSearchRequestFacetSpec            `json:"facetSpec,omitempty"`
+	Name                  *string                                                    `json:"name,omitempty"`
+	Rule                  *GoogleCloudRetailV2alphaRule                              `json:"rule,omitempty"`
+	SearchSolutionUseCase []GoogleCloudRetailV2alphaControlSearchSolutionUseCaseEnum `json:"searchSolutionUseCase,omitempty"`
+	SolutionTypes         []GoogleCloudRetailV2alphaControlSolutionTypesEnum         `json:"solutionTypes,omitempty"`
+}
+
+// GoogleCloudRetailV2alphaControl
+// Configures dynamic metadata that can be linked to a ServingConfig and affect search or recommendation results at serving time.
 type GoogleCloudRetailV2alphaControl struct {
 	AssociatedServingConfigIds []string                                                   `json:"associatedServingConfigIds,omitempty"`
 	DisplayName                *string                                                    `json:"displayName,omitempty"`

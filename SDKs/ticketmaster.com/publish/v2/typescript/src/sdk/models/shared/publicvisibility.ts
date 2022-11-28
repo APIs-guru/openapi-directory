@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // PublicVisibility
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The class defines the public visibility period on the Discovery/Publish API.
 **/
 export class PublicVisibility extends SpeakeasyBase {
-  @Metadata({ data: "json, name=endDateTime" })
+  @SpeakeasyMetadata({ data: "json, name=endDateTime" })
   endDateTime?: Date;
 
-  @Metadata({ data: "json, name=startDateTime" })
+  @SpeakeasyMetadata({ data: "json, name=startDateTime" })
   startDateTime?: Date;
 
-  @Metadata({ data: "json, name=visible" })
+  @SpeakeasyMetadata({ data: "json, name=visible" })
   visible?: boolean;
 }

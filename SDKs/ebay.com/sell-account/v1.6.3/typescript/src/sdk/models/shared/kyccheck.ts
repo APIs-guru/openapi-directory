@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // KycCheck
@@ -6,18 +7,18 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * This type is used to provide details about any KYC check that is applicable to the managed payments seller.
 **/
 export class KycCheck extends SpeakeasyBase {
-  @Metadata({ data: "json, name=alert" })
+  @SpeakeasyMetadata({ data: "json, name=alert" })
   alert?: string;
 
-  @Metadata({ data: "json, name=dataRequired" })
+  @SpeakeasyMetadata({ data: "json, name=dataRequired" })
   dataRequired?: string;
 
-  @Metadata({ data: "json, name=detailMessage" })
+  @SpeakeasyMetadata({ data: "json, name=detailMessage" })
   detailMessage?: string;
 
-  @Metadata({ data: "json, name=dueDate" })
+  @SpeakeasyMetadata({ data: "json, name=dueDate" })
   dueDate?: string;
 
-  @Metadata({ data: "json, name=remedyUrl" })
+  @SpeakeasyMetadata({ data: "json, name=remedyUrl" })
   remedyUrl?: string;
 }

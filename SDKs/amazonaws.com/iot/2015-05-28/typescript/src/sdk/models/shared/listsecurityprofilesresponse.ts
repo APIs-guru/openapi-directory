@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SecurityProfileIdentifier } from "./securityprofileidentifier";
 
 
+
 export class ListSecurityProfilesResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=nextToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=securityProfileIdentifiers", elemType: shared.SecurityProfileIdentifier })
+  @SpeakeasyMetadata({ data: "json, name=securityProfileIdentifiers", elemType: SecurityProfileIdentifier })
   securityProfileIdentifiers?: SecurityProfileIdentifier[];
 }

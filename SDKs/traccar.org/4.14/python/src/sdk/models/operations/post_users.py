@@ -5,12 +5,12 @@ from sdk.models import shared
 
 @dataclass
 class PostUsersRequest:
-    request: shared.User = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    request: shared.User = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class PostUsersResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     user: Optional[shared.User] = field(default=None)
     

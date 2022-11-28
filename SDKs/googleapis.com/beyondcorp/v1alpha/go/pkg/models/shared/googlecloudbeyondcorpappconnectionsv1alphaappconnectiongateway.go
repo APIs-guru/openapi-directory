@@ -7,10 +7,19 @@ const (
 	GoogleCloudBeyondcorpAppconnectionsV1alphaAppConnectionGatewayTypeEnumGcpRegionalMig  GoogleCloudBeyondcorpAppconnectionsV1alphaAppConnectionGatewayTypeEnum = "GCP_REGIONAL_MIG"
 )
 
+// GoogleCloudBeyondcorpAppconnectionsV1alphaAppConnectionGateway
+// Gateway represents a user facing component that serves as an entrance to enable connectivity.
 type GoogleCloudBeyondcorpAppconnectionsV1alphaAppConnectionGateway struct {
 	AppGateway  *string                                                                 `json:"appGateway,omitempty"`
 	IngressPort *int32                                                                  `json:"ingressPort,omitempty"`
 	L7psc       *string                                                                 `json:"l7psc,omitempty"`
 	Type        *GoogleCloudBeyondcorpAppconnectionsV1alphaAppConnectionGatewayTypeEnum `json:"type,omitempty"`
 	URI         *string                                                                 `json:"uri,omitempty"`
+}
+
+// GoogleCloudBeyondcorpAppconnectionsV1alphaAppConnectionGatewayInput
+// Gateway represents a user facing component that serves as an entrance to enable connectivity.
+type GoogleCloudBeyondcorpAppconnectionsV1alphaAppConnectionGatewayInput struct {
+	AppGateway *string                                                                 `json:"appGateway,omitempty"`
+	Type       *GoogleCloudBeyondcorpAppconnectionsV1alphaAppConnectionGatewayTypeEnum `json:"type,omitempty"`
 }

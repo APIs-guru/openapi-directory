@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class MergePullRequestByFastForwardInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=pullRequestId" })
+  @SpeakeasyMetadata({ data: "json, name=pullRequestId" })
   pullRequestId: string;
 
-  @Metadata({ data: "json, name=repositoryName" })
+  @SpeakeasyMetadata({ data: "json, name=repositoryName" })
   repositoryName: string;
 
-  @Metadata({ data: "json, name=sourceCommitId" })
+  @SpeakeasyMetadata({ data: "json, name=sourceCommitId" })
   sourceCommitId?: string;
 }

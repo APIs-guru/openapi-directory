@@ -10,22 +10,10 @@ type GetRepositoriesWorkspaceRepoSlugPullrequestsPullRequestIDDiffPathParams str
 	Workspace     string `pathParam:"style=simple,explode=false,name=workspace"`
 }
 
-type GetRepositoriesWorkspaceRepoSlugPullrequestsPullRequestIDDiffSecurityOption1 struct {
-	Oauth2 shared.SchemeOauth2 `security:"scheme,type=oauth2"`
-}
-
-type GetRepositoriesWorkspaceRepoSlugPullrequestsPullRequestIDDiffSecurityOption2 struct {
-	Basic shared.SchemeBasic `security:"scheme,type=http,subtype=basic"`
-}
-
-type GetRepositoriesWorkspaceRepoSlugPullrequestsPullRequestIDDiffSecurityOption3 struct {
-	APIKey shared.SchemeAPIKey `security:"scheme,type=apiKey,subtype=header"`
-}
-
 type GetRepositoriesWorkspaceRepoSlugPullrequestsPullRequestIDDiffSecurity struct {
-	Option1 *GetRepositoriesWorkspaceRepoSlugPullrequestsPullRequestIDDiffSecurityOption1 `security:"option"`
-	Option2 *GetRepositoriesWorkspaceRepoSlugPullrequestsPullRequestIDDiffSecurityOption2 `security:"option"`
-	Option3 *GetRepositoriesWorkspaceRepoSlugPullrequestsPullRequestIDDiffSecurityOption3 `security:"option"`
+	Oauth2 *shared.SchemeOauth2 `security:"scheme,type=oauth2"`
+	Basic  *shared.SchemeBasic  `security:"scheme,type=http,subtype=basic"`
+	APIKey *shared.SchemeAPIKey `security:"scheme,type=apiKey,subtype=header"`
 }
 
 type GetRepositoriesWorkspaceRepoSlugPullrequestsPullRequestIDDiffRequest struct {

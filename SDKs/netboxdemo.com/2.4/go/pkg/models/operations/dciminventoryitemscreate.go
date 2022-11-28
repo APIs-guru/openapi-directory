@@ -5,7 +5,7 @@ import (
 )
 
 type DcimInventoryItemsCreateRequest struct {
-	Request shared.WritableInventoryItem `request:"mediaType=application/json"`
+	Request shared.WritableInventoryItemInput `request:"mediaType=application/json"`
 }
 
 type DcimInventoryItemsCreateResponse struct {

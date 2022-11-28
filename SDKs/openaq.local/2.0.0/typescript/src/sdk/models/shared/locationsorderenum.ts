@@ -1,12 +1,13 @@
 
 
+
 export enum LocationsOrderEnum {
-    City = "city"
-,    Country = "country"
-,    Location = "location"
-,    SourceName = "sourceName"
-,    FirstUpdated = "firstUpdated"
-,    LastUpdated = "lastUpdated"
-,    Count = "count"
-,    Random = "random"
+    City = "city",
+    Country = "country",
+    Location = "location",
+    SourceName = "sourceName",
+    FirstUpdated = "firstUpdated",
+    LastUpdated = "lastUpdated",
+    Count = "count",
+    Random = "random"
 }

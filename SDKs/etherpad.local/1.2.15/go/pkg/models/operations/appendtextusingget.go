@@ -5,10 +5,6 @@ type AppendTextUsingGetQueryParams struct {
 	Text  *string `queryParam:"style=form,explode=true,name=text"`
 }
 
-type AppendTextUsingGetRequest struct {
-	QueryParams AppendTextUsingGetQueryParams
-}
-
 type AppendTextUsingGet200ApplicationJSON struct {
 	Code    *int64                 `json:"code,omitempty"`
 	Data    map[string]interface{} `json:"data,omitempty"`
@@ -31,6 +27,10 @@ type AppendTextUsingGet500ApplicationJSON struct {
 	Code    *int64                 `json:"code,omitempty"`
 	Data    map[string]interface{} `json:"data,omitempty"`
 	Message *string                `json:"message,omitempty"`
+}
+
+type AppendTextUsingGetRequest struct {
+	QueryParams AppendTextUsingGetQueryParams
 }
 
 type AppendTextUsingGetResponse struct {

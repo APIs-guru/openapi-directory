@@ -1,22 +1,23 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class BuildInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=build_type" })
+  @SpeakeasyMetadata({ data: "json, name=build_type" })
   buildType: number;
 
-  @Metadata({ data: "json, name=cast_build_revision" })
+  @SpeakeasyMetadata({ data: "json, name=cast_build_revision" })
   castBuildRevision: string;
 
-  @Metadata({ data: "json, name=cast_control_version" })
+  @SpeakeasyMetadata({ data: "json, name=cast_control_version" })
   castControlVersion: number;
 
-  @Metadata({ data: "json, name=preview_channel_state" })
+  @SpeakeasyMetadata({ data: "json, name=preview_channel_state" })
   previewChannelState: number;
 
-  @Metadata({ data: "json, name=release_track" })
+  @SpeakeasyMetadata({ data: "json, name=release_track" })
   releaseTrack: string;
 
-  @Metadata({ data: "json, name=system_build_number" })
+  @SpeakeasyMetadata({ data: "json, name=system_build_number" })
   systemBuildNumber: string;
 }

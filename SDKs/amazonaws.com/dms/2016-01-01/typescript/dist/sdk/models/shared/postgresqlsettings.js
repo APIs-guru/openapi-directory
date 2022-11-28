@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PluginNameValueEnum } from "./pluginnamevalueenum";
 // PostgreSqlSettings
 /**
@@ -34,75 +34,75 @@ var PostgreSqlSettings = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=AfterConnectScript" }),
+        SpeakeasyMetadata({ data: "json, name=AfterConnectScript" }),
         __metadata("design:type", String)
     ], PostgreSqlSettings.prototype, "afterConnectScript", void 0);
     __decorate([
-        Metadata({ data: "json, name=CaptureDdls" }),
+        SpeakeasyMetadata({ data: "json, name=CaptureDdls" }),
         __metadata("design:type", Boolean)
     ], PostgreSqlSettings.prototype, "captureDdls", void 0);
     __decorate([
-        Metadata({ data: "json, name=DatabaseName" }),
+        SpeakeasyMetadata({ data: "json, name=DatabaseName" }),
         __metadata("design:type", String)
     ], PostgreSqlSettings.prototype, "databaseName", void 0);
     __decorate([
-        Metadata({ data: "json, name=DdlArtifactsSchema" }),
+        SpeakeasyMetadata({ data: "json, name=DdlArtifactsSchema" }),
         __metadata("design:type", String)
     ], PostgreSqlSettings.prototype, "ddlArtifactsSchema", void 0);
     __decorate([
-        Metadata({ data: "json, name=ExecuteTimeout" }),
+        SpeakeasyMetadata({ data: "json, name=ExecuteTimeout" }),
         __metadata("design:type", Number)
     ], PostgreSqlSettings.prototype, "executeTimeout", void 0);
     __decorate([
-        Metadata({ data: "json, name=FailTasksOnLobTruncation" }),
+        SpeakeasyMetadata({ data: "json, name=FailTasksOnLobTruncation" }),
         __metadata("design:type", Boolean)
     ], PostgreSqlSettings.prototype, "failTasksOnLobTruncation", void 0);
     __decorate([
-        Metadata({ data: "json, name=HeartbeatEnable" }),
+        SpeakeasyMetadata({ data: "json, name=HeartbeatEnable" }),
         __metadata("design:type", Boolean)
     ], PostgreSqlSettings.prototype, "heartbeatEnable", void 0);
     __decorate([
-        Metadata({ data: "json, name=HeartbeatFrequency" }),
+        SpeakeasyMetadata({ data: "json, name=HeartbeatFrequency" }),
         __metadata("design:type", Number)
     ], PostgreSqlSettings.prototype, "heartbeatFrequency", void 0);
     __decorate([
-        Metadata({ data: "json, name=HeartbeatSchema" }),
+        SpeakeasyMetadata({ data: "json, name=HeartbeatSchema" }),
         __metadata("design:type", String)
     ], PostgreSqlSettings.prototype, "heartbeatSchema", void 0);
     __decorate([
-        Metadata({ data: "json, name=MaxFileSize" }),
+        SpeakeasyMetadata({ data: "json, name=MaxFileSize" }),
         __metadata("design:type", Number)
     ], PostgreSqlSettings.prototype, "maxFileSize", void 0);
     __decorate([
-        Metadata({ data: "json, name=Password" }),
+        SpeakeasyMetadata({ data: "json, name=Password" }),
         __metadata("design:type", String)
     ], PostgreSqlSettings.prototype, "password", void 0);
     __decorate([
-        Metadata({ data: "json, name=PluginName" }),
+        SpeakeasyMetadata({ data: "json, name=PluginName" }),
         __metadata("design:type", String)
     ], PostgreSqlSettings.prototype, "pluginName", void 0);
     __decorate([
-        Metadata({ data: "json, name=Port" }),
+        SpeakeasyMetadata({ data: "json, name=Port" }),
         __metadata("design:type", Number)
     ], PostgreSqlSettings.prototype, "port", void 0);
     __decorate([
-        Metadata({ data: "json, name=SecretsManagerAccessRoleArn" }),
+        SpeakeasyMetadata({ data: "json, name=SecretsManagerAccessRoleArn" }),
         __metadata("design:type", String)
     ], PostgreSqlSettings.prototype, "secretsManagerAccessRoleArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=SecretsManagerSecretId" }),
+        SpeakeasyMetadata({ data: "json, name=SecretsManagerSecretId" }),
         __metadata("design:type", String)
     ], PostgreSqlSettings.prototype, "secretsManagerSecretId", void 0);
     __decorate([
-        Metadata({ data: "json, name=ServerName" }),
+        SpeakeasyMetadata({ data: "json, name=ServerName" }),
         __metadata("design:type", String)
     ], PostgreSqlSettings.prototype, "serverName", void 0);
     __decorate([
-        Metadata({ data: "json, name=SlotName" }),
+        SpeakeasyMetadata({ data: "json, name=SlotName" }),
         __metadata("design:type", String)
     ], PostgreSqlSettings.prototype, "slotName", void 0);
     __decorate([
-        Metadata({ data: "json, name=Username" }),
+        SpeakeasyMetadata({ data: "json, name=Username" }),
         __metadata("design:type", String)
     ], PostgreSqlSettings.prototype, "username", void 0);
     return PostgreSqlSettings;

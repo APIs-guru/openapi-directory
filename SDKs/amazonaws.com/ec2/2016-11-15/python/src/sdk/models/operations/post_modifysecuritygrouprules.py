@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostModifySecurityGroupRulesActionEnum(str, Enum):
     MODIFY_SECURITY_GROUP_RULES = "ModifySecurityGroupRules"
@@ -10,8 +14,8 @@ class PostModifySecurityGroupRulesVersionEnum(str, Enum):
 
 @dataclass
 class PostModifySecurityGroupRulesQueryParams:
-    action: PostModifySecurityGroupRulesActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostModifySecurityGroupRulesVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostModifySecurityGroupRulesActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostModifySecurityGroupRulesVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostModifySecurityGroupRulesHeaders:
 
 @dataclass
 class PostModifySecurityGroupRulesRequest:
-    query_params: PostModifySecurityGroupRulesQueryParams = field(default=None)
-    headers: PostModifySecurityGroupRulesHeaders = field(default=None)
+    headers: PostModifySecurityGroupRulesHeaders = field()
+    query_params: PostModifySecurityGroupRulesQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostModifySecurityGroupRulesResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

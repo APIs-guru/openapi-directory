@@ -1,5 +1,17 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { VirtualMachineConfigInput } from "./virtualmachineconfig";
 import { VirtualMachineConfig } from "./virtualmachineconfig";
+
+
+
+// VirtualMachineInput
+/** 
+ * Runtime using Virtual Machine for computing.
+**/
+export class VirtualMachineInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=virtualMachineConfig" })
+  virtualMachineConfig?: VirtualMachineConfigInput;
+}
 
 
 // VirtualMachine
@@ -7,12 +19,12 @@ import { VirtualMachineConfig } from "./virtualmachineconfig";
  * Runtime using Virtual Machine for computing.
 **/
 export class VirtualMachine extends SpeakeasyBase {
-  @Metadata({ data: "json, name=instanceId" })
+  @SpeakeasyMetadata({ data: "json, name=instanceId" })
   instanceId?: string;
 
-  @Metadata({ data: "json, name=instanceName" })
+  @SpeakeasyMetadata({ data: "json, name=instanceName" })
   instanceName?: string;
 
-  @Metadata({ data: "json, name=virtualMachineConfig" })
+  @SpeakeasyMetadata({ data: "json, name=virtualMachineConfig" })
   virtualMachineConfig?: VirtualMachineConfig;
 }

@@ -5,10 +5,6 @@ type GetLinkedRelationsPathParams struct {
 	APIVersionID string `pathParam:"style=simple,explode=false,name=apiVersionId"`
 }
 
-type GetLinkedRelationsRequest struct {
-	PathParams GetLinkedRelationsPathParams
-}
-
 type GetLinkedRelations200ApplicationJSONRelationsContracttest2a9b8fa888b74b8683728e3f6f6e07f2 struct {
 	ID        *string `json:"id,omitempty"`
 	Name      *string `json:"name,omitempty"`
@@ -55,6 +51,10 @@ type GetLinkedRelations200ApplicationJSONRelations struct {
 
 type GetLinkedRelations200ApplicationJSON struct {
 	Relations *GetLinkedRelations200ApplicationJSONRelations `json:"relations,omitempty"`
+}
+
+type GetLinkedRelationsRequest struct {
+	PathParams GetLinkedRelationsPathParams
 }
 
 type GetLinkedRelationsResponse struct {

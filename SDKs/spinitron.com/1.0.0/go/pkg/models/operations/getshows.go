@@ -14,10 +14,6 @@ type GetShowsQueryParams struct {
 	Start  *time.Time `queryParam:"style=form,explode=true,name=start"`
 }
 
-type GetShowsRequest struct {
-	QueryParams GetShowsQueryParams
-}
-
 type GetShows200ApplicationJSONLinks struct {
 	Self *shared.Link `json:"self,omitempty"`
 }
@@ -26,6 +22,10 @@ type GetShows200ApplicationJSON struct {
 	Links *GetShows200ApplicationJSONLinks `json:"_links,omitempty"`
 	Meta  *shared.Pagination               `json:"_meta,omitempty"`
 	Items []shared.Show                    `json:"items,omitempty"`
+}
+
+type GetShowsRequest struct {
+	QueryParams GetShowsQueryParams
 }
 
 type GetShowsResponse struct {

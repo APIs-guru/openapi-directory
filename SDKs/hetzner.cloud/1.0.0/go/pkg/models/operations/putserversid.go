@@ -9,11 +9,6 @@ type PutServersIDUpdateServerRequest struct {
 	Name   *string                `json:"name,omitempty"`
 }
 
-type PutServersIDRequest struct {
-	PathParams PutServersIDPathParams
-	Request    *PutServersIDUpdateServerRequest `request:"mediaType=application/json"`
-}
-
 type PutServersID200ApplicationJSONServerDatacenterLocation struct {
 	City        string  `json:"city"`
 	Country     string  `json:"country"`
@@ -25,12 +20,16 @@ type PutServersID200ApplicationJSONServerDatacenterLocation struct {
 	NetworkZone string  `json:"network_zone"`
 }
 
+// PutServersID200ApplicationJSONServerDatacenterServerTypes
+// The Server types the Datacenter can handle
 type PutServersID200ApplicationJSONServerDatacenterServerTypes struct {
 	Available             []float64 `json:"available"`
 	AvailableForMigration []float64 `json:"available_for_migration"`
 	Supported             []float64 `json:"supported"`
 }
 
+// PutServersID200ApplicationJSONServerDatacenter
+// Datacenter this Resource is located at
 type PutServersID200ApplicationJSONServerDatacenter struct {
 	Description string                                                    `json:"description"`
 	ID          int64                                                     `json:"id"`
@@ -39,6 +38,8 @@ type PutServersID200ApplicationJSONServerDatacenter struct {
 	ServerTypes PutServersID200ApplicationJSONServerDatacenterServerTypes `json:"server_types"`
 }
 
+// PutServersID200ApplicationJSONServerImageCreatedFrom
+// Information about the Server the Image was created from
 type PutServersID200ApplicationJSONServerImageCreatedFrom struct {
 	ID   int64  `json:"id"`
 	Name string `json:"name"`
@@ -54,6 +55,8 @@ const (
 	PutServersID200ApplicationJSONServerImageOsFlavorEnumUnknown PutServersID200ApplicationJSONServerImageOsFlavorEnum = "unknown"
 )
 
+// PutServersID200ApplicationJSONServerImageProtection
+// Protection configuration for the Resource
 type PutServersID200ApplicationJSONServerImageProtection struct {
 	Delete bool `json:"delete"`
 }
@@ -104,6 +107,8 @@ const (
 	PutServersID200ApplicationJSONServerIsoTypeEnumPrivate PutServersID200ApplicationJSONServerIsoTypeEnum = "private"
 )
 
+// PutServersID200ApplicationJSONServerIso
+// ISO Image that is attached to this Server. Null if no ISO is attached.
 type PutServersID200ApplicationJSONServerIso struct {
 	Deprecated  string                                          `json:"deprecated"`
 	Description string                                          `json:"description"`
@@ -134,6 +139,8 @@ type PutServersID200ApplicationJSONServerPrivateNet struct {
 	Network    *int64   `json:"network,omitempty"`
 }
 
+// PutServersID200ApplicationJSONServerProtection
+// Protection configuration for the Server
 type PutServersID200ApplicationJSONServerProtection struct {
 	Delete  bool `json:"delete"`
 	Rebuild bool `json:"rebuild"`
@@ -151,6 +158,8 @@ type PutServersID200ApplicationJSONServerPublicNetServerPublicNetFirewall struct
 	Status *PutServersID200ApplicationJSONServerPublicNetServerPublicNetFirewallStatusEnum `json:"status,omitempty"`
 }
 
+// PutServersID200ApplicationJSONServerPublicNetIpv4
+// IP address (v4) and its reverse DNS entry of this Server
 type PutServersID200ApplicationJSONServerPublicNetIpv4 struct {
 	Blocked bool   `json:"blocked"`
 	DNSPtr  string `json:"dns_ptr"`
@@ -162,12 +171,16 @@ type PutServersID200ApplicationJSONServerPublicNetIpv6DNSPtr struct {
 	IP     string `json:"ip"`
 }
 
+// PutServersID200ApplicationJSONServerPublicNetIpv6
+// IPv6 network assigned to this Server and its reverse DNS entry
 type PutServersID200ApplicationJSONServerPublicNetIpv6 struct {
 	Blocked bool                                                      `json:"blocked"`
 	DNSPtr  []PutServersID200ApplicationJSONServerPublicNetIpv6DNSPtr `json:"dns_ptr"`
 	IP      string                                                    `json:"ip"`
 }
 
+// PutServersID200ApplicationJSONServerPublicNet
+// Public network information. The Server's IPv4 address can be found in `public_net->ipv4->ip`
 type PutServersID200ApplicationJSONServerPublicNet struct {
 	Firewalls   []PutServersID200ApplicationJSONServerPublicNetServerPublicNetFirewall `json:"firewalls,omitempty"`
 	FloatingIps []int64                                                                `json:"floating_ips"`
@@ -182,11 +195,15 @@ const (
 	PutServersID200ApplicationJSONServerServerTypeCPUTypeEnumDedicated PutServersID200ApplicationJSONServerServerTypeCPUTypeEnum = "dedicated"
 )
 
+// PutServersID200ApplicationJSONServerServerTypePricesPriceHourly
+// Hourly costs for a Server type in this Location
 type PutServersID200ApplicationJSONServerServerTypePricesPriceHourly struct {
 	Gross string `json:"gross"`
 	Net   string `json:"net"`
 }
 
+// PutServersID200ApplicationJSONServerServerTypePricesPriceMonthly
+// Monthly costs for a Server type in this Location
 type PutServersID200ApplicationJSONServerServerTypePricesPriceMonthly struct {
 	Gross string `json:"gross"`
 	Net   string `json:"net"`
@@ -205,6 +222,8 @@ const (
 	PutServersID200ApplicationJSONServerServerTypeStorageTypeEnumNetwork PutServersID200ApplicationJSONServerServerTypeStorageTypeEnum = "network"
 )
 
+// PutServersID200ApplicationJSONServerServerType
+// Type of Server - determines how much ram, disk and cpu a Server has
 type PutServersID200ApplicationJSONServerServerType struct {
 	Cores       float64                                                       `json:"cores"`
 	CPUType     PutServersID200ApplicationJSONServerServerTypeCPUTypeEnum     `json:"cpu_type"`
@@ -259,6 +278,11 @@ type PutServersID200ApplicationJSONServer struct {
 
 type PutServersID200ApplicationJSON struct {
 	Server *PutServersID200ApplicationJSONServer `json:"server,omitempty"`
+}
+
+type PutServersIDRequest struct {
+	PathParams PutServersIDPathParams
+	Request    *PutServersIDUpdateServerRequest `request:"mediaType=application/json"`
 }
 
 type PutServersIDResponse struct {

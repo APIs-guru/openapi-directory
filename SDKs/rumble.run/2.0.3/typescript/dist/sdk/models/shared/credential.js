@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var CredentialTypeEnum;
 (function (CredentialTypeEnum) {
     CredentialTypeEnum["MiradoreApiKeyV1"] = "miradore_api_key_v1";
@@ -34,51 +34,51 @@ var Credential = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=acl" }),
+        SpeakeasyMetadata({ data: "json, name=acl" }),
         __metadata("design:type", Map)
     ], Credential.prototype, "acl", void 0);
     __decorate([
-        Metadata({ data: "json, name=cidrs" }),
+        SpeakeasyMetadata({ data: "json, name=cidrs" }),
         __metadata("design:type", Array)
     ], Credential.prototype, "cidrs", void 0);
     __decorate([
-        Metadata({ data: "json, name=client_id" }),
+        SpeakeasyMetadata({ data: "json, name=client_id" }),
         __metadata("design:type", String)
     ], Credential.prototype, "clientId", void 0);
     __decorate([
-        Metadata({ data: "json, name=created_at" }),
+        SpeakeasyMetadata({ data: "json, name=created_at" }),
         __metadata("design:type", Number)
     ], Credential.prototype, "createdAt", void 0);
     __decorate([
-        Metadata({ data: "json, name=created_by_email" }),
+        SpeakeasyMetadata({ data: "json, name=created_by_email" }),
         __metadata("design:type", String)
     ], Credential.prototype, "createdByEmail", void 0);
     __decorate([
-        Metadata({ data: "json, name=created_by_id" }),
+        SpeakeasyMetadata({ data: "json, name=created_by_id" }),
         __metadata("design:type", String)
     ], Credential.prototype, "createdById", void 0);
     __decorate([
-        Metadata({ data: "json, name=global" }),
+        SpeakeasyMetadata({ data: "json, name=global" }),
         __metadata("design:type", Boolean)
     ], Credential.prototype, "global", void 0);
     __decorate([
-        Metadata({ data: "json, name=id" }),
+        SpeakeasyMetadata({ data: "json, name=id" }),
         __metadata("design:type", String)
     ], Credential.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "json, name=last_used_at" }),
+        SpeakeasyMetadata({ data: "json, name=last_used_at" }),
         __metadata("design:type", Number)
     ], Credential.prototype, "lastUsedAt", void 0);
     __decorate([
-        Metadata({ data: "json, name=last_used_by_id" }),
+        SpeakeasyMetadata({ data: "json, name=last_used_by_id" }),
         __metadata("design:type", String)
     ], Credential.prototype, "lastUsedById", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], Credential.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=type" }),
+        SpeakeasyMetadata({ data: "json, name=type" }),
         __metadata("design:type", String)
     ], Credential.prototype, "type", void 0);
     return Credential;

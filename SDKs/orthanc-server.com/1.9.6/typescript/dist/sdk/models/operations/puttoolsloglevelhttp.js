@@ -22,14 +22,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var PutToolsLogLevelHttpRequest = /** @class */ (function (_super) {
     __extends(PutToolsLogLevelHttpRequest, _super);
     function PutToolsLogLevelHttpRequest() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "request, media_type=text/plain" }),
+        SpeakeasyMetadata({ data: "request, media_type=text/plain" }),
         __metadata("design:type", Uint8Array)
     ], PutToolsLogLevelHttpRequest.prototype, "request", void 0);
     return PutToolsLogLevelHttpRequest;
@@ -41,11 +41,11 @@ var PutToolsLogLevelHttpResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], PutToolsLogLevelHttpResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], PutToolsLogLevelHttpResponse.prototype, "statusCode", void 0);
     return PutToolsLogLevelHttpResponse;

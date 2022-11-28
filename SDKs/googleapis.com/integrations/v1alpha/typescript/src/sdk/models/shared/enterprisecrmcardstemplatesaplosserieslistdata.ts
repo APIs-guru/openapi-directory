@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { EnterpriseCrmCardsTemplatesAplosSeriesListDataSeries } from "./enterprisecrmcardstemplatesaplosserieslistdataseries";
+
 
 
 // EnterpriseCrmCardsTemplatesAplosSeriesListData
@@ -8,6 +8,6 @@ import { EnterpriseCrmCardsTemplatesAplosSeriesListDataSeries } from "./enterpri
  * Data used for Aplos charts that accept multiple Series.
 **/
 export class EnterpriseCrmCardsTemplatesAplosSeriesListData extends SpeakeasyBase {
-  @Metadata({ data: "json, name=series", elemType: shared.EnterpriseCrmCardsTemplatesAplosSeriesListDataSeries })
+  @SpeakeasyMetadata({ data: "json, name=series", elemType: EnterpriseCrmCardsTemplatesAplosSeriesListDataSeries })
   series?: EnterpriseCrmCardsTemplatesAplosSeriesListDataSeries[];
 }

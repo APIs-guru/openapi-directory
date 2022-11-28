@@ -155,6 +155,8 @@ type PullRequestSimpleMilestone struct {
 	URL          string                               `json:"url"`
 }
 
+// PullRequestSimple
+// Pull Request Simple
 type PullRequestSimple struct {
 	Links              PullRequestSimpleLinks      `json:"_links"`
 	ActiveLockReason   *string                     `json:"active_lock_reason,omitempty"`

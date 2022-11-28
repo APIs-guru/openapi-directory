@@ -22,8 +22,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { AwsAccount } from "./awsaccount";
+import { AwsService } from "./awsservice";
 // Scope
 /**
  *  The wrapper that contains the accounts and services in scope for the assessment.
@@ -34,11 +35,11 @@ var Scope = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=awsAccounts", elemType: shared.AwsAccount }),
+        SpeakeasyMetadata({ data: "json, name=awsAccounts", elemType: AwsAccount }),
         __metadata("design:type", Array)
     ], Scope.prototype, "awsAccounts", void 0);
     __decorate([
-        Metadata({ data: "json, name=awsServices", elemType: shared.AwsService }),
+        SpeakeasyMetadata({ data: "json, name=awsServices", elemType: AwsService }),
         __metadata("design:type", Array)
     ], Scope.prototype, "awsServices", void 0);
     return Scope;

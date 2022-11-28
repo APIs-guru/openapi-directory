@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// SandboxTransaction
+// Transaction information
 type SandboxTransaction struct {
 	AccountingBalance *float64   `json:"accountingBalance,omitempty"`
 	Amount            *float64   `json:"amount,omitempty"`

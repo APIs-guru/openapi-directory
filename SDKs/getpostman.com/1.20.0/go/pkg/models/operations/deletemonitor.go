@@ -4,10 +4,6 @@ type DeleteMonitorPathParams struct {
 	MonitorUID string `pathParam:"style=simple,explode=false,name=monitor_uid"`
 }
 
-type DeleteMonitorRequest struct {
-	PathParams DeleteMonitorPathParams
-}
-
 type DeleteMonitor200ApplicationJSONMonitor struct {
 	ID  *string `json:"id,omitempty"`
 	UID *string `json:"uid,omitempty"`
@@ -24,6 +20,10 @@ type DeleteMonitor404ApplicationJSONError struct {
 
 type DeleteMonitor404ApplicationJSON struct {
 	Error *DeleteMonitor404ApplicationJSONError `json:"error,omitempty"`
+}
+
+type DeleteMonitorRequest struct {
+	PathParams DeleteMonitorPathParams
 }
 
 type DeleteMonitorResponse struct {

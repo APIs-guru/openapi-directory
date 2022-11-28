@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class RecrawlBehaviorEnum(str, Enum):
     CRAWL_EVERYTHING = "CRAWL_EVERYTHING"

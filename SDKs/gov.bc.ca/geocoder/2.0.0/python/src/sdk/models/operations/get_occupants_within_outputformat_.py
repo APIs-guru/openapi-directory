@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 
 class GetOccupantsWithinOutputFormatOutputFormatEnum(str, Enum):
     JSON = "json"
@@ -13,7 +14,7 @@ class GetOccupantsWithinOutputFormatOutputFormatEnum(str, Enum):
 
 @dataclass
 class GetOccupantsWithinOutputFormatPathParams:
-    output_format: GetOccupantsWithinOutputFormatOutputFormatEnum = field(default=None, metadata={'path_param': { 'field_name': 'outputFormat', 'style': 'simple', 'explode': False }})
+    output_format: GetOccupantsWithinOutputFormatOutputFormatEnum = field(metadata={'path_param': { 'field_name': 'outputFormat', 'style': 'simple', 'explode': False }})
     
 class GetOccupantsWithinOutputFormatLocationDescriptorEnum(str, Enum):
     ANY = "any"
@@ -26,7 +27,7 @@ class GetOccupantsWithinOutputFormatLocationDescriptorEnum(str, Enum):
 
 @dataclass
 class GetOccupantsWithinOutputFormatQueryParams:
-    bbox: str = field(default=None, metadata={'query_param': { 'field_name': 'bbox', 'style': 'form', 'explode': True }})
+    bbox: str = field(metadata={'query_param': { 'field_name': 'bbox', 'style': 'form', 'explode': True }})
     brief: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'brief', 'style': 'form', 'explode': True }})
     location_descriptor: Optional[GetOccupantsWithinOutputFormatLocationDescriptorEnum] = field(default=None, metadata={'query_param': { 'field_name': 'locationDescriptor', 'style': 'form', 'explode': True }})
     max_results: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'maxResults', 'style': 'form', 'explode': True }})
@@ -37,12 +38,12 @@ class GetOccupantsWithinOutputFormatQueryParams:
 
 @dataclass
 class GetOccupantsWithinOutputFormatRequest:
-    path_params: GetOccupantsWithinOutputFormatPathParams = field(default=None)
-    query_params: GetOccupantsWithinOutputFormatQueryParams = field(default=None)
+    path_params: GetOccupantsWithinOutputFormatPathParams = field()
+    query_params: GetOccupantsWithinOutputFormatQueryParams = field()
     
 
 @dataclass
 class GetOccupantsWithinOutputFormatResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

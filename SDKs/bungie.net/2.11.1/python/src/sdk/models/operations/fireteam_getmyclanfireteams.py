@@ -1,13 +1,14 @@
 from dataclasses import dataclass, field
 from typing import Optional
+from sdk.models import shared
 
 
 @dataclass
 class FireteamGetMyClanFireteamsPathParams:
-    group_id: int = field(default=None, metadata={'path_param': { 'field_name': 'groupId', 'style': 'simple', 'explode': False }})
-    include_closed: bool = field(default=None, metadata={'path_param': { 'field_name': 'includeClosed', 'style': 'simple', 'explode': False }})
-    page: int = field(default=None, metadata={'path_param': { 'field_name': 'page', 'style': 'simple', 'explode': False }})
-    platform: int = field(default=None, metadata={'path_param': { 'field_name': 'platform', 'style': 'simple', 'explode': False }})
+    group_id: int = field(metadata={'path_param': { 'field_name': 'groupId', 'style': 'simple', 'explode': False }})
+    include_closed: bool = field(metadata={'path_param': { 'field_name': 'includeClosed', 'style': 'simple', 'explode': False }})
+    page: int = field(metadata={'path_param': { 'field_name': 'page', 'style': 'simple', 'explode': False }})
+    platform: int = field(metadata={'path_param': { 'field_name': 'platform', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -18,19 +19,19 @@ class FireteamGetMyClanFireteamsQueryParams:
 
 @dataclass
 class FireteamGetMyClanFireteamsSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class FireteamGetMyClanFireteamsRequest:
-    path_params: FireteamGetMyClanFireteamsPathParams = field(default=None)
-    query_params: FireteamGetMyClanFireteamsQueryParams = field(default=None)
-    security: FireteamGetMyClanFireteamsSecurity = field(default=None)
+    path_params: FireteamGetMyClanFireteamsPathParams = field()
+    query_params: FireteamGetMyClanFireteamsQueryParams = field()
+    security: FireteamGetMyClanFireteamsSecurity = field()
     
 
 @dataclass
 class FireteamGetMyClanFireteamsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

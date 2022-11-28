@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostDeprovisionByoipCidrActionEnum(str, Enum):
     DEPROVISION_BYOIP_CIDR = "DeprovisionByoipCidr"
@@ -10,8 +14,8 @@ class PostDeprovisionByoipCidrVersionEnum(str, Enum):
 
 @dataclass
 class PostDeprovisionByoipCidrQueryParams:
-    action: PostDeprovisionByoipCidrActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostDeprovisionByoipCidrVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostDeprovisionByoipCidrActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostDeprovisionByoipCidrVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostDeprovisionByoipCidrHeaders:
 
 @dataclass
 class PostDeprovisionByoipCidrRequest:
-    query_params: PostDeprovisionByoipCidrQueryParams = field(default=None)
-    headers: PostDeprovisionByoipCidrHeaders = field(default=None)
+    headers: PostDeprovisionByoipCidrHeaders = field()
+    query_params: PostDeprovisionByoipCidrQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostDeprovisionByoipCidrResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

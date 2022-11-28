@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // LabelCounters
@@ -6,18 +7,18 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Provides a breakdown of the number of objects labeled.
 **/
 export class LabelCounters extends SpeakeasyBase {
-  @Metadata({ data: "json, name=FailedNonRetryableError" })
+  @SpeakeasyMetadata({ data: "json, name=FailedNonRetryableError" })
   failedNonRetryableError?: number;
 
-  @Metadata({ data: "json, name=HumanLabeled" })
+  @SpeakeasyMetadata({ data: "json, name=HumanLabeled" })
   humanLabeled?: number;
 
-  @Metadata({ data: "json, name=MachineLabeled" })
+  @SpeakeasyMetadata({ data: "json, name=MachineLabeled" })
   machineLabeled?: number;
 
-  @Metadata({ data: "json, name=TotalLabeled" })
+  @SpeakeasyMetadata({ data: "json, name=TotalLabeled" })
   totalLabeled?: number;
 
-  @Metadata({ data: "json, name=Unlabeled" })
+  @SpeakeasyMetadata({ data: "json, name=Unlabeled" })
   unlabeled?: number;
 }

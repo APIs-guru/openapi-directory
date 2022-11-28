@@ -7,15 +7,15 @@ type ConvertcurrencyQueryParams struct {
 	To      string `queryParam:"style=form,explode=true,name=to"`
 }
 
-type ConvertcurrencyRequest struct {
-	QueryParams ConvertcurrencyQueryParams
-}
-
 type Convertcurrency200ApplicationJSON struct {
 	Code      *string `json:"Code,omitempty"`
 	Converted *string `json:"Converted,omitempty"`
 	Credits   *string `json:"Credits,omitempty"`
 	Currency  *string `json:"Currency,omitempty"`
+}
+
+type ConvertcurrencyRequest struct {
+	QueryParams ConvertcurrencyQueryParams
 }
 
 type ConvertcurrencyResponse struct {

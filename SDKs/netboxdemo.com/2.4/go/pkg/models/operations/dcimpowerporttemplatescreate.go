@@ -5,7 +5,7 @@ import (
 )
 
 type DcimPowerPortTemplatesCreateRequest struct {
-	Request shared.WritablePowerPortTemplate `request:"mediaType=application/json"`
+	Request shared.WritablePowerPortTemplateInput `request:"mediaType=application/json"`
 }
 
 type DcimPowerPortTemplatesCreateResponse struct {

@@ -1,16 +1,17 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class UpdateTeamMemberRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=projectId" })
+  @SpeakeasyMetadata({ data: "json, name=projectId" })
   projectId: string;
 
-  @Metadata({ data: "json, name=projectRole" })
+  @SpeakeasyMetadata({ data: "json, name=projectRole" })
   projectRole?: string;
 
-  @Metadata({ data: "json, name=remoteAccessAllowed" })
+  @SpeakeasyMetadata({ data: "json, name=remoteAccessAllowed" })
   remoteAccessAllowed?: boolean;
 
-  @Metadata({ data: "json, name=userArn" })
+  @SpeakeasyMetadata({ data: "json, name=userArn" })
   userArn: string;
 }

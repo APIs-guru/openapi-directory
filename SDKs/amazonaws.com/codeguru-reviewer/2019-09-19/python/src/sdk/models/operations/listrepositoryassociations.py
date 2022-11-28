@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,List,Optional
+from enum import Enum
 from sdk.models import shared
 
 
@@ -26,16 +30,16 @@ class ListRepositoryAssociationsHeaders:
 
 @dataclass
 class ListRepositoryAssociationsRequest:
-    query_params: ListRepositoryAssociationsQueryParams = field(default=None)
-    headers: ListRepositoryAssociationsHeaders = field(default=None)
+    headers: ListRepositoryAssociationsHeaders = field()
+    query_params: ListRepositoryAssociationsQueryParams = field()
     
 
 @dataclass
 class ListRepositoryAssociationsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     internal_server_exception: Optional[Any] = field(default=None)
     list_repository_associations_response: Optional[shared.ListRepositoryAssociationsResponse] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     validation_exception: Optional[Any] = field(default=None)
     

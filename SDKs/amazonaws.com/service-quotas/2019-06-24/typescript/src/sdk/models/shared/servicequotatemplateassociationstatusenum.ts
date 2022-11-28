@@ -1,6 +1,7 @@
 
 
+
 export enum ServiceQuotaTemplateAssociationStatusEnum {
-    Associated = "ASSOCIATED"
-,    Disassociated = "DISASSOCIATED"
+    Associated = "ASSOCIATED",
+    Disassociated = "DISASSOCIATED"
 }

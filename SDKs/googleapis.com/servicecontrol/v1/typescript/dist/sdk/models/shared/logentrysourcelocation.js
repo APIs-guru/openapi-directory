@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // LogEntrySourceLocation
 /**
  * Additional information about the source code location that produced the log entry.
@@ -33,15 +33,15 @@ var LogEntrySourceLocation = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=file" }),
+        SpeakeasyMetadata({ data: "json, name=file" }),
         __metadata("design:type", String)
     ], LogEntrySourceLocation.prototype, "file", void 0);
     __decorate([
-        Metadata({ data: "json, name=function" }),
+        SpeakeasyMetadata({ data: "json, name=function" }),
         __metadata("design:type", String)
     ], LogEntrySourceLocation.prototype, "function", void 0);
     __decorate([
-        Metadata({ data: "json, name=line" }),
+        SpeakeasyMetadata({ data: "json, name=line" }),
         __metadata("design:type", String)
     ], LogEntrySourceLocation.prototype, "line", void 0);
     return LogEntrySourceLocation;

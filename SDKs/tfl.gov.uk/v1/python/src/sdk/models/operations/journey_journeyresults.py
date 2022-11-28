@@ -1,12 +1,16 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class JourneyJourneyResultsPathParams:
-    from_: str = field(default=None, metadata={'path_param': { 'field_name': 'from', 'style': 'simple', 'explode': False }})
-    to: str = field(default=None, metadata={'path_param': { 'field_name': 'to', 'style': 'simple', 'explode': False }})
+    from_: str = field(metadata={'path_param': { 'field_name': 'from', 'style': 'simple', 'explode': False }})
+    to: str = field(metadata={'path_param': { 'field_name': 'to', 'style': 'simple', 'explode': False }})
     
 class JourneyJourneyResultsAccessibilityPreferenceEnum(str, Enum):
     NO_REQUIREMENTS = "NoRequirements"
@@ -52,7 +56,7 @@ class JourneyJourneyResultsQueryParams:
     apply_html_markup: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'applyHtmlMarkup', 'style': 'form', 'explode': True }})
     bike_proficiency: Optional[List[JourneyJourneyResultsBikeProficiencyEnum]] = field(default=None, metadata={'query_param': { 'field_name': 'bikeProficiency', 'style': 'form', 'explode': True }})
     cycle_preference: Optional[JourneyJourneyResultsCyclePreferenceEnum] = field(default=None, metadata={'query_param': { 'field_name': 'cyclePreference', 'style': 'form', 'explode': True }})
-    date: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'date', 'style': 'form', 'explode': True }})
+    date_: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'date', 'style': 'form', 'explode': True }})
     from_name: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'fromName', 'style': 'form', 'explode': True }})
     journey_preference: Optional[JourneyJourneyResultsJourneyPreferenceEnum] = field(default=None, metadata={'query_param': { 'field_name': 'journeyPreference', 'style': 'form', 'explode': True }})
     max_transfer_minutes: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'maxTransferMinutes', 'style': 'form', 'explode': True }})
@@ -74,14 +78,14 @@ class JourneyJourneyResultsQueryParams:
 
 @dataclass
 class JourneyJourneyResultsRequest:
-    path_params: JourneyJourneyResultsPathParams = field(default=None)
-    query_params: JourneyJourneyResultsQueryParams = field(default=None)
+    path_params: JourneyJourneyResultsPathParams = field()
+    query_params: JourneyJourneyResultsQueryParams = field()
     
 
 @dataclass
 class JourneyJourneyResultsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     tfl_api_presentation_entities_journey_planner_itinerary_result: Optional[shared.TflAPIPresentationEntitiesJourneyPlannerItineraryResult] = field(default=None)
     

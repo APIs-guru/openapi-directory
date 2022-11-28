@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import List,Optional
+from typing import Optional
 from sdk.models import shared
 
 
@@ -10,14 +10,14 @@ class ToggleNotificationChannelsHeaders:
 
 @dataclass
 class ToggleNotificationChannelsRequest:
-    headers: ToggleNotificationChannelsHeaders = field(default=None)
-    request: shared.NotificationChannelActivationRequest = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: ToggleNotificationChannelsHeaders = field()
+    request: shared.NotificationChannelActivationRequest = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class ToggleNotificationChannelsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error_response: Optional[shared.ErrorResponse] = field(default=None)
     notification_channel_list: Optional[shared.NotificationChannelList] = field(default=None)
-    status_code: int = field(default=None)
     

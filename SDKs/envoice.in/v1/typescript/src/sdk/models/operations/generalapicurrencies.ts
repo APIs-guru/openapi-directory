@@ -1,32 +1,33 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GeneralApiCurrenciesHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=x-auth-key" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=x-auth-key" })
   xAuthKey: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=x-auth-secret" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=x-auth-secret" })
   xAuthSecret: string;
 }
 
 
 export class GeneralApiCurrenciesRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: GeneralApiCurrenciesHeaders;
 }
 
 
 export class GeneralApiCurrenciesResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata({ elemType: shared.CurrencyDetailsApiModel })
+  @SpeakeasyMetadata({ elemType: shared.CurrencyDetailsApiModel })
   currencyDetailsApiModels?: shared.CurrencyDetailsApiModel[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

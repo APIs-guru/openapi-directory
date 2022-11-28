@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetDescribeDbSecurityGroupsActionEnum(str, Enum):
     DESCRIBE_DB_SECURITY_GROUPS = "DescribeDBSecurityGroups"
@@ -10,11 +14,11 @@ class GetDescribeDbSecurityGroupsVersionEnum(str, Enum):
 
 @dataclass
 class GetDescribeDbSecurityGroupsQueryParams:
-    action: GetDescribeDbSecurityGroupsActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetDescribeDbSecurityGroupsActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: GetDescribeDbSecurityGroupsVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     db_security_group_name: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'DBSecurityGroupName', 'style': 'form', 'explode': True }})
     marker: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'Marker', 'style': 'form', 'explode': True }})
     max_records: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'MaxRecords', 'style': 'form', 'explode': True }})
-    version: GetDescribeDbSecurityGroupsVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -30,13 +34,13 @@ class GetDescribeDbSecurityGroupsHeaders:
 
 @dataclass
 class GetDescribeDbSecurityGroupsRequest:
-    query_params: GetDescribeDbSecurityGroupsQueryParams = field(default=None)
-    headers: GetDescribeDbSecurityGroupsHeaders = field(default=None)
+    headers: GetDescribeDbSecurityGroupsHeaders = field()
+    query_params: GetDescribeDbSecurityGroupsQueryParams = field()
     
 
 @dataclass
 class GetDescribeDbSecurityGroupsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

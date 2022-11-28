@@ -1,6 +1,7 @@
 
 
+
 export enum TextTypeEnum {
-    Handwriting = "HANDWRITING"
-,    Printed = "PRINTED"
+    Handwriting = "HANDWRITING",
+    Printed = "PRINTED"
 }

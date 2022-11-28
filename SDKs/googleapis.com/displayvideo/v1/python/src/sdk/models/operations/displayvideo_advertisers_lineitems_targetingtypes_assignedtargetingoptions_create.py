@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 class DisplayvideoAdvertisersLineItemsTargetingTypesAssignedTargetingOptionsCreateTargetingTypeEnum(str, Enum):
@@ -53,9 +54,9 @@ class DisplayvideoAdvertisersLineItemsTargetingTypesAssignedTargetingOptionsCrea
 
 @dataclass
 class DisplayvideoAdvertisersLineItemsTargetingTypesAssignedTargetingOptionsCreatePathParams:
-    advertiser_id: str = field(default=None, metadata={'path_param': { 'field_name': 'advertiserId', 'style': 'simple', 'explode': False }})
-    line_item_id: str = field(default=None, metadata={'path_param': { 'field_name': 'lineItemId', 'style': 'simple', 'explode': False }})
-    targeting_type: DisplayvideoAdvertisersLineItemsTargetingTypesAssignedTargetingOptionsCreateTargetingTypeEnum = field(default=None, metadata={'path_param': { 'field_name': 'targetingType', 'style': 'simple', 'explode': False }})
+    advertiser_id: str = field(metadata={'path_param': { 'field_name': 'advertiserId', 'style': 'simple', 'explode': False }})
+    line_item_id: str = field(metadata={'path_param': { 'field_name': 'lineItemId', 'style': 'simple', 'explode': False }})
+    targeting_type: DisplayvideoAdvertisersLineItemsTargetingTypesAssignedTargetingOptionsCreateTargetingTypeEnum = field(metadata={'path_param': { 'field_name': 'targetingType', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -75,21 +76,21 @@ class DisplayvideoAdvertisersLineItemsTargetingTypesAssignedTargetingOptionsCrea
 
 @dataclass
 class DisplayvideoAdvertisersLineItemsTargetingTypesAssignedTargetingOptionsCreateSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DisplayvideoAdvertisersLineItemsTargetingTypesAssignedTargetingOptionsCreateRequest:
-    path_params: DisplayvideoAdvertisersLineItemsTargetingTypesAssignedTargetingOptionsCreatePathParams = field(default=None)
-    query_params: DisplayvideoAdvertisersLineItemsTargetingTypesAssignedTargetingOptionsCreateQueryParams = field(default=None)
-    request: Optional[shared.AssignedTargetingOption] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: DisplayvideoAdvertisersLineItemsTargetingTypesAssignedTargetingOptionsCreateSecurity = field(default=None)
+    path_params: DisplayvideoAdvertisersLineItemsTargetingTypesAssignedTargetingOptionsCreatePathParams = field()
+    query_params: DisplayvideoAdvertisersLineItemsTargetingTypesAssignedTargetingOptionsCreateQueryParams = field()
+    security: DisplayvideoAdvertisersLineItemsTargetingTypesAssignedTargetingOptionsCreateSecurity = field()
+    request: Optional[shared.AssignedTargetingOptionInput] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class DisplayvideoAdvertisersLineItemsTargetingTypesAssignedTargetingOptionsCreateResponse:
+    content_type: str = field()
+    status_code: int = field()
     assigned_targeting_option: Optional[shared.AssignedTargetingOption] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

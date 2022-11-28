@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostSetSubnetsActionEnum(str, Enum):
     SET_SUBNETS = "SetSubnets"
@@ -10,8 +14,8 @@ class PostSetSubnetsVersionEnum(str, Enum):
 
 @dataclass
 class PostSetSubnetsQueryParams:
-    action: PostSetSubnetsActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostSetSubnetsVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostSetSubnetsActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostSetSubnetsVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostSetSubnetsHeaders:
 
 @dataclass
 class PostSetSubnetsRequest:
-    query_params: PostSetSubnetsQueryParams = field(default=None)
-    headers: PostSetSubnetsHeaders = field(default=None)
+    headers: PostSetSubnetsHeaders = field()
+    query_params: PostSetSubnetsQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostSetSubnetsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

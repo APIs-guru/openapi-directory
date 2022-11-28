@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AccountTakeoverRiskConfigurationType } from "./accounttakeoverriskconfigurationtype";
 import { CompromisedCredentialsRiskConfigurationType } from "./compromisedcredentialsriskconfigurationtype";
 import { RiskExceptionConfigurationType } from "./riskexceptionconfigurationtype";
+
 
 
 // RiskConfigurationType
@@ -9,21 +10,21 @@ import { RiskExceptionConfigurationType } from "./riskexceptionconfigurationtype
  * The risk configuration type.
 **/
 export class RiskConfigurationType extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AccountTakeoverRiskConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=AccountTakeoverRiskConfiguration" })
   accountTakeoverRiskConfiguration?: AccountTakeoverRiskConfigurationType;
 
-  @Metadata({ data: "json, name=ClientId" })
+  @SpeakeasyMetadata({ data: "json, name=ClientId" })
   clientId?: string;
 
-  @Metadata({ data: "json, name=CompromisedCredentialsRiskConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=CompromisedCredentialsRiskConfiguration" })
   compromisedCredentialsRiskConfiguration?: CompromisedCredentialsRiskConfigurationType;
 
-  @Metadata({ data: "json, name=LastModifiedDate" })
+  @SpeakeasyMetadata({ data: "json, name=LastModifiedDate" })
   lastModifiedDate?: Date;
 
-  @Metadata({ data: "json, name=RiskExceptionConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=RiskExceptionConfiguration" })
   riskExceptionConfiguration?: RiskExceptionConfigurationType;
 
-  @Metadata({ data: "json, name=UserPoolId" })
+  @SpeakeasyMetadata({ data: "json, name=UserPoolId" })
   userPoolId?: string;
 }

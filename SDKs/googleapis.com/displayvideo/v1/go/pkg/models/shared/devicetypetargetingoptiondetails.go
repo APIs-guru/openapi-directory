@@ -10,6 +10,8 @@ const (
 	DeviceTypeTargetingOptionDetailsDeviceTypeEnumDeviceTypeTablet      DeviceTypeTargetingOptionDetailsDeviceTypeEnum = "DEVICE_TYPE_TABLET"
 )
 
+// DeviceTypeTargetingOptionDetails
+// Represents a targetable device type. This will be populated in the device_type_details field of a TargetingOption when targeting_type is `TARGETING_TYPE_DEVICE_TYPE`.
 type DeviceTypeTargetingOptionDetails struct {
 	DeviceType *DeviceTypeTargetingOptionDetailsDeviceTypeEnum `json:"deviceType,omitempty"`
 }

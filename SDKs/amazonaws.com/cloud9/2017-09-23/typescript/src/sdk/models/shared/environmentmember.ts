@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PermissionsEnum } from "./permissionsenum";
+
 
 
 // EnvironmentMember
@@ -7,18 +8,18 @@ import { PermissionsEnum } from "./permissionsenum";
  * Information about an environment member for an Cloud9 development environment.
 **/
 export class EnvironmentMember extends SpeakeasyBase {
-  @Metadata({ data: "json, name=environmentId" })
+  @SpeakeasyMetadata({ data: "json, name=environmentId" })
   environmentId: string;
 
-  @Metadata({ data: "json, name=lastAccess" })
+  @SpeakeasyMetadata({ data: "json, name=lastAccess" })
   lastAccess?: Date;
 
-  @Metadata({ data: "json, name=permissions" })
+  @SpeakeasyMetadata({ data: "json, name=permissions" })
   permissions: PermissionsEnum;
 
-  @Metadata({ data: "json, name=userArn" })
+  @SpeakeasyMetadata({ data: "json, name=userArn" })
   userArn: string;
 
-  @Metadata({ data: "json, name=userId" })
+  @SpeakeasyMetadata({ data: "json, name=userId" })
   userId: string;
 }

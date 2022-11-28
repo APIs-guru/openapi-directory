@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import cloudwatchlogsloggroup
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class LogDestination:
-    cloud_watch_logs_log_group: Optional[cloudwatchlogsloggroup.CloudWatchLogsLogGroup] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'cloudWatchLogsLogGroup' }})
+    r"""LogDestination
+    <p/>
+    """
+    
+    cloud_watch_logs_log_group: Optional[CloudWatchLogsLogGroup] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('cloudWatchLogsLogGroup') }})
     

@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Amount } from "./amount";
+
 
 
 // LineItemRefund
@@ -7,15 +8,15 @@ import { Amount } from "./amount";
  * This type contains refund information for a line item.
 **/
 export class LineItemRefund extends SpeakeasyBase {
-  @Metadata({ data: "json, name=amount" })
+  @SpeakeasyMetadata({ data: "json, name=amount" })
   amount?: Amount;
 
-  @Metadata({ data: "json, name=refundDate" })
+  @SpeakeasyMetadata({ data: "json, name=refundDate" })
   refundDate?: string;
 
-  @Metadata({ data: "json, name=refundId" })
+  @SpeakeasyMetadata({ data: "json, name=refundId" })
   refundId?: string;
 
-  @Metadata({ data: "json, name=refundReferenceId" })
+  @SpeakeasyMetadata({ data: "json, name=refundReferenceId" })
   refundReferenceId?: string;
 }

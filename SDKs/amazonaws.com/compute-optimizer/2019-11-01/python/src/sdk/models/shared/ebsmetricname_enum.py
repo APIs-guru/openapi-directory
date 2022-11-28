@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class EbsMetricNameEnum(str, Enum):
     VOLUME_READ_OPS_PER_SECOND = "VolumeReadOpsPerSecond"

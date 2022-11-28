@@ -17,6 +17,8 @@ const (
 	InsertionOrderBudgetBudgetUnitEnumBudgetUnitImpressions InsertionOrderBudgetBudgetUnitEnum = "BUDGET_UNIT_IMPRESSIONS"
 )
 
+// InsertionOrderBudget
+// Settings that control how insertion order budget is allocated.
 type InsertionOrderBudget struct {
 	AutomationType *InsertionOrderBudgetAutomationTypeEnum `json:"automationType,omitempty"`
 	BudgetSegments []InsertionOrderBudgetSegment           `json:"budgetSegments,omitempty"`

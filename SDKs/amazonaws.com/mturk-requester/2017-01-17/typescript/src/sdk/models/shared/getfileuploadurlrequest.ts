@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetFileUploadUrlRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AssignmentId" })
+  @SpeakeasyMetadata({ data: "json, name=AssignmentId" })
   assignmentId: string;
 
-  @Metadata({ data: "json, name=QuestionIdentifier" })
+  @SpeakeasyMetadata({ data: "json, name=QuestionIdentifier" })
   questionIdentifier: string;
 }

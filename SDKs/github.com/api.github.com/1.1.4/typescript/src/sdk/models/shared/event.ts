@@ -1,55 +1,54 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
-import { Actor } from "./actor";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Actor } from "./actor";
 import { IssueComment } from "./issuecomment";
 import { IssueSimple } from "./issuesimple";
 
 
+
 export class EventPayloadPages extends SpeakeasyBase {
-  @Metadata({ data: "json, name=action" })
+  @SpeakeasyMetadata({ data: "json, name=action" })
   action?: string;
 
-  @Metadata({ data: "json, name=html_url" })
+  @SpeakeasyMetadata({ data: "json, name=html_url" })
   htmlUrl?: string;
 
-  @Metadata({ data: "json, name=page_name" })
+  @SpeakeasyMetadata({ data: "json, name=page_name" })
   pageName?: string;
 
-  @Metadata({ data: "json, name=sha" })
+  @SpeakeasyMetadata({ data: "json, name=sha" })
   sha?: string;
 
-  @Metadata({ data: "json, name=summary" })
+  @SpeakeasyMetadata({ data: "json, name=summary" })
   summary?: string;
 
-  @Metadata({ data: "json, name=title" })
+  @SpeakeasyMetadata({ data: "json, name=title" })
   title?: string;
 }
 
 
 export class EventPayload extends SpeakeasyBase {
-  @Metadata({ data: "json, name=action" })
+  @SpeakeasyMetadata({ data: "json, name=action" })
   action: string;
 
-  @Metadata({ data: "json, name=comment" })
+  @SpeakeasyMetadata({ data: "json, name=comment" })
   comment?: IssueComment;
 
-  @Metadata({ data: "json, name=issue" })
+  @SpeakeasyMetadata({ data: "json, name=issue" })
   issue?: IssueSimple;
 
-  @Metadata({ data: "json, name=pages", elemType: shared.EventPayloadPages })
+  @SpeakeasyMetadata({ data: "json, name=pages", elemType: EventPayloadPages })
   pages?: EventPayloadPages[];
 }
 
 
 export class EventRepo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: number;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 
-  @Metadata({ data: "json, name=url" })
+  @SpeakeasyMetadata({ data: "json, name=url" })
   url: string;
 }
 
@@ -59,27 +58,27 @@ export class EventRepo extends SpeakeasyBase {
  * Event
 **/
 export class Event extends SpeakeasyBase {
-  @Metadata({ data: "json, name=actor" })
+  @SpeakeasyMetadata({ data: "json, name=actor" })
   actor: Actor;
 
-  @Metadata({ data: "json, name=created_at" })
+  @SpeakeasyMetadata({ data: "json, name=created_at" })
   createdAt: Date;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: string;
 
-  @Metadata({ data: "json, name=org" })
+  @SpeakeasyMetadata({ data: "json, name=org" })
   org?: Actor;
 
-  @Metadata({ data: "json, name=payload" })
+  @SpeakeasyMetadata({ data: "json, name=payload" })
   payload: EventPayload;
 
-  @Metadata({ data: "json, name=public" })
+  @SpeakeasyMetadata({ data: "json, name=public" })
   public: boolean;
 
-  @Metadata({ data: "json, name=repo" })
+  @SpeakeasyMetadata({ data: "json, name=repo" })
   repo: EventRepo;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type: string;
 }

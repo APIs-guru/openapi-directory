@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import solidfill
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class TableBorderFill:
-    solid_fill: Optional[solidfill.SolidFill] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'solidFill' }})
+    r"""TableBorderFill
+    The fill of the border.
+    """
+    
+    solid_fill: Optional[SolidFill] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('solidFill') }})
     

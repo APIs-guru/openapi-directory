@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ResponseDebugInfo
@@ -6,9 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Debugging information about the response.
 **/
 export class ResponseDebugInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=enabledExperiments" })
-  enabledExperiments?: number[];
-
-  @Metadata({ data: "json, name=formattedDebugInfo" })
+  @SpeakeasyMetadata({ data: "json, name=formattedDebugInfo" })
   formattedDebugInfo?: string;
 }

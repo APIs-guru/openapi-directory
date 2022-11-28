@@ -1,71 +1,72 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetDatasetExportQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, serialization=json;name=q" })
+  @SpeakeasyMetadata({ data: "queryParam, serialization=json;name=q" })
   q?: number[];
 }
 
 
 export class GetDatasetExportSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=bearer" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" })
   jwt: shared.SchemeJwt;
 }
 
 
-export class GetDatasetExportRequest extends SpeakeasyBase {
-  @Metadata()
-  queryParams: GetDatasetExportQueryParams;
-
-  @Metadata()
-  security: GetDatasetExportSecurity;
-}
-
-
 export class GetDatasetExport400ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class GetDatasetExport401ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class GetDatasetExport404ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class GetDatasetExport500ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
+export class GetDatasetExportRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  queryParams: GetDatasetExportQueryParams;
+
+  @SpeakeasyMetadata()
+  security: GetDatasetExportSecurity;
+}
+
+
 export class GetDatasetExportResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getDatasetExport200TextPlainString?: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getDatasetExport400ApplicationJsonObject?: GetDatasetExport400ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getDatasetExport401ApplicationJsonObject?: GetDatasetExport401ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getDatasetExport404ApplicationJsonObject?: GetDatasetExport404ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getDatasetExport500ApplicationJsonObject?: GetDatasetExport500ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

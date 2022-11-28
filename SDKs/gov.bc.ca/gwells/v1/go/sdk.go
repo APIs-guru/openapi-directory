@@ -10,7 +10,7 @@ import (
 	"strings"
 )
 
-var Servers = []string{
+var ServerList = []string{
 	"https://apps.nrs.gov.bc.ca/gwells/api/v1/",
 }
 
@@ -19,9 +19,13 @@ type HTTPClient interface {
 }
 
 type SDK struct {
-	defaultClient  HTTPClient
-	securityClient HTTPClient
-	serverURL      string
+	_defaultClient  HTTPClient
+	_securityClient HTTPClient
+	_security       *shared.Security
+	_serverURL      string
+	_language       string
+	_sdkVersion     string
+	_genVersion     string
 }
 
 type SDKOption func(*SDK)
@@ -32,33 +36,55 @@ func WithServerURL(serverURL string, params map[string]string) SDKOption {
 			serverURL = utils.ReplaceParameters(serverURL, params)
 		}
 
-		sdk.serverURL = serverURL
+		sdk._serverURL = serverURL
+	}
+}
+
+func WithClient(client HTTPClient) SDKOption {
+	return func(sdk *SDK) {
+		sdk._defaultClient = client
 	}
 }
 
 func WithSecurity(security shared.Security) SDKOption {
 	return func(sdk *SDK) {
-		sdk.securityClient = utils.CreateSecurityClient(security)
+		sdk._security = &security
 	}
 }
 
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
-		defaultClient:  http.DefaultClient,
-		securityClient: http.DefaultClient,
+		_language:   "go",
+		_sdkVersion: "",
+		_genVersion: "internal",
 	}
 	for _, opt := range opts {
 		opt(sdk)
 	}
-	if sdk.serverURL == "" {
-		sdk.serverURL = Servers[0]
+
+	if sdk._defaultClient == nil {
+		sdk._defaultClient = http.DefaultClient
+	}
+	if sdk._securityClient == nil {
+
+		if sdk._security != nil {
+			sdk._securityClient = utils.ConfigureSecurityClient(sdk._defaultClient, sdk._security)
+		} else {
+			sdk._securityClient = sdk._defaultClient
+		}
+
+	}
+
+	if sdk._serverURL == "" {
+		sdk._serverURL = ServerList[0]
 	}
 
 	return sdk
 }
 
+// AquiferCodesDemandList - return a list of aquifer demand codes
 func (s *SDK) AquiferCodesDemandList(ctx context.Context, request operations.AquiferCodesDemandListRequest) (*operations.AquiferCodesDemandListResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/aquifer-codes/demand/"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -68,7 +94,7 @@ func (s *SDK) AquiferCodesDemandList(ctx context.Context, request operations.Aqu
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -98,8 +124,9 @@ func (s *SDK) AquiferCodesDemandList(ctx context.Context, request operations.Aqu
 	return res, nil
 }
 
+// AquiferCodesMaterialsList - return a list of aquifer material codes
 func (s *SDK) AquiferCodesMaterialsList(ctx context.Context, request operations.AquiferCodesMaterialsListRequest) (*operations.AquiferCodesMaterialsListResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/aquifer-codes/materials/"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -109,7 +136,7 @@ func (s *SDK) AquiferCodesMaterialsList(ctx context.Context, request operations.
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -139,8 +166,9 @@ func (s *SDK) AquiferCodesMaterialsList(ctx context.Context, request operations.
 	return res, nil
 }
 
+// AquiferCodesProductivityList - return a list of aquifer productivity codes
 func (s *SDK) AquiferCodesProductivityList(ctx context.Context, request operations.AquiferCodesProductivityListRequest) (*operations.AquiferCodesProductivityListResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/aquifer-codes/productivity/"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -150,7 +178,7 @@ func (s *SDK) AquiferCodesProductivityList(ctx context.Context, request operatio
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -180,8 +208,9 @@ func (s *SDK) AquiferCodesProductivityList(ctx context.Context, request operatio
 	return res, nil
 }
 
+// AquiferCodesQualityConcernsList - return a list of quality concern codes
 func (s *SDK) AquiferCodesQualityConcernsList(ctx context.Context, request operations.AquiferCodesQualityConcernsListRequest) (*operations.AquiferCodesQualityConcernsListResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/aquifer-codes/quality-concerns/"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -191,7 +220,7 @@ func (s *SDK) AquiferCodesQualityConcernsList(ctx context.Context, request opera
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -221,8 +250,9 @@ func (s *SDK) AquiferCodesQualityConcernsList(ctx context.Context, request opera
 	return res, nil
 }
 
+// AquiferCodesSubtypesList - return a list of aquifer subtype codes
 func (s *SDK) AquiferCodesSubtypesList(ctx context.Context, request operations.AquiferCodesSubtypesListRequest) (*operations.AquiferCodesSubtypesListResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/aquifer-codes/subtypes/"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -232,7 +262,7 @@ func (s *SDK) AquiferCodesSubtypesList(ctx context.Context, request operations.A
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -262,8 +292,9 @@ func (s *SDK) AquiferCodesSubtypesList(ctx context.Context, request operations.A
 	return res, nil
 }
 
+// AquiferCodesVulnerabilityList - return a list of aquifer vulnerability codes
 func (s *SDK) AquiferCodesVulnerabilityList(ctx context.Context, request operations.AquiferCodesVulnerabilityListRequest) (*operations.AquiferCodesVulnerabilityListResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/aquifer-codes/vulnerability/"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -273,7 +304,7 @@ func (s *SDK) AquiferCodesVulnerabilityList(ctx context.Context, request operati
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -303,8 +334,9 @@ func (s *SDK) AquiferCodesVulnerabilityList(ctx context.Context, request operati
 	return res, nil
 }
 
+// AquiferCodesWaterUseList - return a list of water use codes
 func (s *SDK) AquiferCodesWaterUseList(ctx context.Context, request operations.AquiferCodesWaterUseListRequest) (*operations.AquiferCodesWaterUseListResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/aquifer-codes/water-use/"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -314,7 +346,7 @@ func (s *SDK) AquiferCodesWaterUseList(ctx context.Context, request operations.A
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -344,8 +376,9 @@ func (s *SDK) AquiferCodesWaterUseList(ctx context.Context, request operations.A
 	return res, nil
 }
 
+// AquifersFilesList - list files found for the aquifer identified in the uri
 func (s *SDK) AquifersFilesList(ctx context.Context, request operations.AquifersFilesListRequest) (*operations.AquifersFilesListResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/aquifers/{aquifer_id}/files", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -353,7 +386,7 @@ func (s *SDK) AquifersFilesList(ctx context.Context, request operations.Aquifers
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -383,8 +416,9 @@ func (s *SDK) AquifersFilesList(ctx context.Context, request operations.Aquifers
 	return res, nil
 }
 
+// AquifersList - return a list of aquifers
 func (s *SDK) AquifersList(ctx context.Context, request operations.AquifersListRequest) (*operations.AquifersListResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/aquifers/"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -394,7 +428,7 @@ func (s *SDK) AquifersList(ctx context.Context, request operations.AquifersListR
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -424,8 +458,9 @@ func (s *SDK) AquifersList(ctx context.Context, request operations.AquifersListR
 	return res, nil
 }
 
+// AquifersNamesList - List all aquifers in a simplified format
 func (s *SDK) AquifersNamesList(ctx context.Context, request operations.AquifersNamesListRequest) (*operations.AquifersNamesListResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/aquifers/names/"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -435,7 +470,7 @@ func (s *SDK) AquifersNamesList(ctx context.Context, request operations.Aquifers
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -465,8 +500,9 @@ func (s *SDK) AquifersNamesList(ctx context.Context, request operations.Aquifers
 	return res, nil
 }
 
+// AquifersRead - return details of aquifers
 func (s *SDK) AquifersRead(ctx context.Context, request operations.AquifersReadRequest) (*operations.AquifersReadResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/aquifers/{aquifer_id}/", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -474,7 +510,7 @@ func (s *SDK) AquifersRead(ctx context.Context, request operations.AquifersReadR
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -504,8 +540,9 @@ func (s *SDK) AquifersRead(ctx context.Context, request operations.AquifersReadR
 	return res, nil
 }
 
+// CitiesDrillersList - returns a list of cities with a qualified, registered operator (driller or installer)
 func (s *SDK) CitiesDrillersList(ctx context.Context) (*operations.CitiesDrillersListResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/cities/drillers/"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -513,7 +550,7 @@ func (s *SDK) CitiesDrillersList(ctx context.Context) (*operations.CitiesDriller
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -543,8 +580,9 @@ func (s *SDK) CitiesDrillersList(ctx context.Context) (*operations.CitiesDriller
 	return res, nil
 }
 
+// CitiesInstallersList - returns a list of cities with a qualified, registered operator (driller or installer)
 func (s *SDK) CitiesInstallersList(ctx context.Context) (*operations.CitiesInstallersListResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/cities/installers/"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -552,7 +590,7 @@ func (s *SDK) CitiesInstallersList(ctx context.Context) (*operations.CitiesInsta
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -582,8 +620,9 @@ func (s *SDK) CitiesInstallersList(ctx context.Context) (*operations.CitiesInsta
 	return res, nil
 }
 
+// ConfigList - serves general configuration
 func (s *SDK) ConfigList(ctx context.Context) (*operations.ConfigListResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/config"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -591,7 +630,7 @@ func (s *SDK) ConfigList(ctx context.Context) (*operations.ConfigListResponse, e
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -612,8 +651,9 @@ func (s *SDK) ConfigList(ctx context.Context) (*operations.ConfigListResponse, e
 	return res, nil
 }
 
+// DrillersFilesList - list files found for the aquifer identified in the uri
 func (s *SDK) DrillersFilesList(ctx context.Context, request operations.DrillersFilesListRequest) (*operations.DrillersFilesListResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/drillers/{person_guid}/files/", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -621,7 +661,7 @@ func (s *SDK) DrillersFilesList(ctx context.Context, request operations.Drillers
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -651,8 +691,9 @@ func (s *SDK) DrillersFilesList(ctx context.Context, request operations.Drillers
 	return res, nil
 }
 
+// DrillersList - Returns a list of all person records
 func (s *SDK) DrillersList(ctx context.Context, request operations.DrillersListRequest) (*operations.DrillersListResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/drillers/"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -662,7 +703,7 @@ func (s *SDK) DrillersList(ctx context.Context, request operations.DrillersListR
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -692,8 +733,9 @@ func (s *SDK) DrillersList(ctx context.Context, request operations.DrillersListR
 	return res, nil
 }
 
+// DrillersNamesList - Search for a person in the Register
 func (s *SDK) DrillersNamesList(ctx context.Context, request operations.DrillersNamesListRequest) (*operations.DrillersNamesListResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/drillers/names/"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -703,7 +745,7 @@ func (s *SDK) DrillersNamesList(ctx context.Context, request operations.Drillers
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -733,8 +775,9 @@ func (s *SDK) DrillersNamesList(ctx context.Context, request operations.Drillers
 	return res, nil
 }
 
+// KeycloakList - serves keycloak config
 func (s *SDK) KeycloakList(ctx context.Context) (*operations.KeycloakListResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/keycloak"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -742,7 +785,7 @@ func (s *SDK) KeycloakList(ctx context.Context) (*operations.KeycloakListRespons
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -763,8 +806,9 @@ func (s *SDK) KeycloakList(ctx context.Context) (*operations.KeycloakListRespons
 	return res, nil
 }
 
+// SubmissionsOptionsList - Options required for submitting activity report forms
 func (s *SDK) SubmissionsOptionsList(ctx context.Context) (*operations.SubmissionsOptionsListResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/submissions/options/"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -772,7 +816,7 @@ func (s *SDK) SubmissionsOptionsList(ctx context.Context) (*operations.Submissio
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -793,8 +837,9 @@ func (s *SDK) SubmissionsOptionsList(ctx context.Context) (*operations.Submissio
 	return res, nil
 }
 
+// SurveysList - returns a list of active surveys
 func (s *SDK) SurveysList(ctx context.Context) (*operations.SurveysListResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/surveys/"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -802,7 +847,7 @@ func (s *SDK) SurveysList(ctx context.Context) (*operations.SurveysListResponse,
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -832,8 +877,9 @@ func (s *SDK) SurveysList(ctx context.Context) (*operations.SurveysListResponse,
 	return res, nil
 }
 
+// WellsFilesList - list files found for the well identified in the uri
 func (s *SDK) WellsFilesList(ctx context.Context, request operations.WellsFilesListRequest) (*operations.WellsFilesListResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/wells/{tag}/files", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -841,7 +887,7 @@ func (s *SDK) WellsFilesList(ctx context.Context, request operations.WellsFilesL
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -871,8 +917,9 @@ func (s *SDK) WellsFilesList(ctx context.Context, request operations.WellsFilesL
 	return res, nil
 }
 
+// WellsList - returns a list of wells
 func (s *SDK) WellsList(ctx context.Context, request operations.WellsListRequest) (*operations.WellsListResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/wells/"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -882,7 +929,7 @@ func (s *SDK) WellsList(ctx context.Context, request operations.WellsListRequest
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -912,8 +959,10 @@ func (s *SDK) WellsList(ctx context.Context, request operations.WellsListRequest
 	return res, nil
 }
 
+// WellsRead - Return well detail.
+// This view is open to all, and has no permissions.
 func (s *SDK) WellsRead(ctx context.Context, request operations.WellsReadRequest) (*operations.WellsReadResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/wells/{well_tag_number}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -921,7 +970,7 @@ func (s *SDK) WellsRead(ctx context.Context, request operations.WellsReadRequest
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -951,8 +1000,9 @@ func (s *SDK) WellsRead(ctx context.Context, request operations.WellsReadRequest
 	return res, nil
 }
 
+// WellsTagsList - seach for wells by tag or owner
 func (s *SDK) WellsTagsList(ctx context.Context, request operations.WellsTagsListRequest) (*operations.WellsTagsListResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/wells/tags/"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -962,7 +1012,7 @@ func (s *SDK) WellsTagsList(ctx context.Context, request operations.WellsTagsLis
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var FindEligibleItemsQueryParams = /** @class */ (function (_super) {
     __extends(FindEligibleItemsQueryParams, _super);
@@ -30,11 +30,11 @@ var FindEligibleItemsQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=limit" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=limit" }),
         __metadata("design:type", String)
     ], FindEligibleItemsQueryParams.prototype, "limit", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=offset" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=offset" }),
         __metadata("design:type", String)
     ], FindEligibleItemsQueryParams.prototype, "offset", void 0);
     return FindEligibleItemsQueryParams;
@@ -46,7 +46,7 @@ var FindEligibleItemsHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-EBAY-C-MARKETPLACE-ID" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-EBAY-C-MARKETPLACE-ID" }),
         __metadata("design:type", String)
     ], FindEligibleItemsHeaders.prototype, "xEbayCMarketplaceId", void 0);
     return FindEligibleItemsHeaders;
@@ -58,7 +58,7 @@ var FindEligibleItemsSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeApiAuth)
     ], FindEligibleItemsSecurity.prototype, "apiAuth", void 0);
     return FindEligibleItemsSecurity;
@@ -70,15 +70,15 @@ var FindEligibleItemsRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", FindEligibleItemsQueryParams)
     ], FindEligibleItemsRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", FindEligibleItemsHeaders)
     ], FindEligibleItemsRequest.prototype, "headers", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", FindEligibleItemsSecurity)
     ], FindEligibleItemsRequest.prototype, "security", void 0);
     return FindEligibleItemsRequest;
@@ -90,15 +90,15 @@ var FindEligibleItemsResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], FindEligibleItemsResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.PagedEligibleItemCollection)
     ], FindEligibleItemsResponse.prototype, "pagedEligibleItemCollection", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], FindEligibleItemsResponse.prototype, "statusCode", void 0);
     return FindEligibleItemsResponse;

@@ -1,6 +1,7 @@
 
 
+
 export enum ThingGroupIndexingModeEnum {
-    Off = "OFF"
-,    On = "ON"
+    Off = "OFF",
+    On = "ON"
 }

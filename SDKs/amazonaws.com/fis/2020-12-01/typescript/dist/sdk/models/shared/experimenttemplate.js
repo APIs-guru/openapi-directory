@@ -22,8 +22,10 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { ExperimentTemplateAction } from "./experimenttemplateaction";
+import { ExperimentTemplateStopCondition } from "./experimenttemplatestopcondition";
+import { ExperimentTemplateTarget } from "./experimenttemplatetarget";
 // ExperimentTemplate
 /**
  * Describes an experiment template.
@@ -34,39 +36,39 @@ var ExperimentTemplate = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=actions", elemType: shared.ExperimentTemplateAction }),
+        SpeakeasyMetadata({ data: "json, name=actions", elemType: ExperimentTemplateAction }),
         __metadata("design:type", Map)
     ], ExperimentTemplate.prototype, "actions", void 0);
     __decorate([
-        Metadata({ data: "json, name=creationTime" }),
+        SpeakeasyMetadata({ data: "json, name=creationTime" }),
         __metadata("design:type", Date)
     ], ExperimentTemplate.prototype, "creationTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=description" }),
+        SpeakeasyMetadata({ data: "json, name=description" }),
         __metadata("design:type", String)
     ], ExperimentTemplate.prototype, "description", void 0);
     __decorate([
-        Metadata({ data: "json, name=id" }),
+        SpeakeasyMetadata({ data: "json, name=id" }),
         __metadata("design:type", String)
     ], ExperimentTemplate.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "json, name=lastUpdateTime" }),
+        SpeakeasyMetadata({ data: "json, name=lastUpdateTime" }),
         __metadata("design:type", Date)
     ], ExperimentTemplate.prototype, "lastUpdateTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=roleArn" }),
+        SpeakeasyMetadata({ data: "json, name=roleArn" }),
         __metadata("design:type", String)
     ], ExperimentTemplate.prototype, "roleArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=stopConditions", elemType: shared.ExperimentTemplateStopCondition }),
+        SpeakeasyMetadata({ data: "json, name=stopConditions", elemType: ExperimentTemplateStopCondition }),
         __metadata("design:type", Array)
     ], ExperimentTemplate.prototype, "stopConditions", void 0);
     __decorate([
-        Metadata({ data: "json, name=tags" }),
+        SpeakeasyMetadata({ data: "json, name=tags" }),
         __metadata("design:type", Map)
     ], ExperimentTemplate.prototype, "tags", void 0);
     __decorate([
-        Metadata({ data: "json, name=targets", elemType: shared.ExperimentTemplateTarget }),
+        SpeakeasyMetadata({ data: "json, name=targets", elemType: ExperimentTemplateTarget }),
         __metadata("design:type", Map)
     ], ExperimentTemplate.prototype, "targets", void 0);
     return ExperimentTemplate;

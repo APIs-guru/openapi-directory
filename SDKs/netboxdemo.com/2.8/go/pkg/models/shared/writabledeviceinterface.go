@@ -85,24 +85,20 @@ const (
 	WritableDeviceInterfaceTypeEnumOther                            WritableDeviceInterfaceTypeEnum = "other"
 )
 
-type WritableDeviceInterface struct {
-	Cable                 *NestedCable                     `json:"cable,omitempty"`
-	ConnectedEndpoint     map[string]string                `json:"connected_endpoint,omitempty"`
-	ConnectedEndpointType *string                          `json:"connected_endpoint_type,omitempty"`
-	ConnectionStatus      *bool                            `json:"connection_status,omitempty"`
-	CountIpaddresses      *int64                           `json:"count_ipaddresses,omitempty"`
-	Description           *string                          `json:"description,omitempty"`
-	Device                int64                            `json:"device"`
-	Enabled               *bool                            `json:"enabled,omitempty"`
-	ID                    *int64                           `json:"id,omitempty"`
-	Lag                   *int64                           `json:"lag,omitempty"`
-	MacAddress            *string                          `json:"mac_address,omitempty"`
-	MgmtOnly              *bool                            `json:"mgmt_only,omitempty"`
-	Mode                  *WritableDeviceInterfaceModeEnum `json:"mode,omitempty"`
-	Mtu                   *int64                           `json:"mtu,omitempty"`
-	Name                  string                           `json:"name"`
-	TaggedVlans           []int64                          `json:"tagged_vlans,omitempty"`
-	Tags                  []string                         `json:"tags,omitempty"`
-	Type                  WritableDeviceInterfaceTypeEnum  `json:"type"`
-	UntaggedVlan          *int64                           `json:"untagged_vlan,omitempty"`
+type WritableDeviceInterfaceInput struct {
+	Cable            *NestedCableInput                `json:"cable,omitempty"`
+	ConnectionStatus *bool                            `json:"connection_status,omitempty"`
+	Description      *string                          `json:"description,omitempty"`
+	Device           int64                            `json:"device"`
+	Enabled          *bool                            `json:"enabled,omitempty"`
+	Lag              *int64                           `json:"lag,omitempty"`
+	MacAddress       *string                          `json:"mac_address,omitempty"`
+	MgmtOnly         *bool                            `json:"mgmt_only,omitempty"`
+	Mode             *WritableDeviceInterfaceModeEnum `json:"mode,omitempty"`
+	Mtu              *int64                           `json:"mtu,omitempty"`
+	Name             string                           `json:"name"`
+	TaggedVlans      []int64                          `json:"tagged_vlans,omitempty"`
+	Tags             []string                         `json:"tags,omitempty"`
+	Type             WritableDeviceInterfaceTypeEnum  `json:"type"`
+	UntaggedVlan     *int64                           `json:"untagged_vlan,omitempty"`
 }

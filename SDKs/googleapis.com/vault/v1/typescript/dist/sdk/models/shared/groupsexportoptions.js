@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var GroupsExportOptionsExportFormatEnum;
 (function (GroupsExportOptionsExportFormatEnum) {
     GroupsExportOptionsExportFormatEnum["ExportFormatUnspecified"] = "EXPORT_FORMAT_UNSPECIFIED";
@@ -39,7 +39,7 @@ var GroupsExportOptions = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=exportFormat" }),
+        SpeakeasyMetadata({ data: "json, name=exportFormat" }),
         __metadata("design:type", String)
     ], GroupsExportOptions.prototype, "exportFormat", void 0);
     return GroupsExportOptions;

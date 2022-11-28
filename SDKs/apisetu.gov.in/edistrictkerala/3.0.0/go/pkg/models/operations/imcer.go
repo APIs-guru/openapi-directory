@@ -28,11 +28,6 @@ type ImcerSecurity struct {
 	ClientID shared.SchemeClientID `security:"scheme,type=apiKey,subtype=header"`
 }
 
-type ImcerRequest struct {
-	Request  *ImcerRequestBody `request:"mediaType=application/json"`
-	Security ImcerSecurity
-}
-
 type Imcer400ApplicationJSONErrorEnum string
 
 const (
@@ -162,6 +157,11 @@ const (
 type Imcer504ApplicationJSON struct {
 	Error            *Imcer504ApplicationJSONErrorEnum            `json:"error,omitempty"`
 	ErrorDescription *Imcer504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
+}
+
+type ImcerRequest struct {
+	Request  *ImcerRequestBody `request:"mediaType=application/json"`
+	Security ImcerSecurity
 }
 
 type ImcerResponse struct {

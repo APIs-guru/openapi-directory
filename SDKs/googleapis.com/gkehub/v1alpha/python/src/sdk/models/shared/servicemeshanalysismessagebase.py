@@ -1,7 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import servicemeshtype
+from sdk import utils
+from . import *
 
 class ServiceMeshAnalysisMessageBaseLevelEnum(str, Enum):
     LEVEL_UNSPECIFIED = "LEVEL_UNSPECIFIED"
@@ -13,7 +15,11 @@ class ServiceMeshAnalysisMessageBaseLevelEnum(str, Enum):
 @dataclass_json
 @dataclass
 class ServiceMeshAnalysisMessageBase:
-    documentation_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'documentationUrl' }})
-    level: Optional[ServiceMeshAnalysisMessageBaseLevelEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'level' }})
-    type: Optional[servicemeshtype.ServiceMeshType] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    r"""ServiceMeshAnalysisMessageBase
+    AnalysisMessageBase describes some common information that is needed for all messages.
+    """
+    
+    documentation_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('documentationUrl') }})
+    level: Optional[ServiceMeshAnalysisMessageBaseLevelEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('level') }})
+    type: Optional[ServiceMeshType] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('type') }})
     

@@ -15,13 +15,13 @@ type GetTagsForTaskQueryParams struct {
 	OptPretty *bool    `queryParam:"style=form,explode=true,name=opt_pretty"`
 }
 
+type GetTagsForTask200ApplicationJSON struct {
+	Data []shared.TagCompact `json:"data,omitempty"`
+}
+
 type GetTagsForTaskRequest struct {
 	PathParams  GetTagsForTaskPathParams
 	QueryParams GetTagsForTaskQueryParams
-}
-
-type GetTagsForTask200ApplicationJSON struct {
-	Data []shared.TagCompact `json:"data,omitempty"`
 }
 
 type GetTagsForTaskResponse struct {

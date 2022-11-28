@@ -22,15 +22,15 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { BatchPutAssetPropertyErrorEntry } from "./batchputassetpropertyerrorentry";
 var BatchPutAssetPropertyValueResponse = /** @class */ (function (_super) {
     __extends(BatchPutAssetPropertyValueResponse, _super);
     function BatchPutAssetPropertyValueResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=errorEntries", elemType: shared.BatchPutAssetPropertyErrorEntry }),
+        SpeakeasyMetadata({ data: "json, name=errorEntries", elemType: BatchPutAssetPropertyErrorEntry }),
         __metadata("design:type", Array)
     ], BatchPutAssetPropertyValueResponse.prototype, "errorEntries", void 0);
     return BatchPutAssetPropertyValueResponse;

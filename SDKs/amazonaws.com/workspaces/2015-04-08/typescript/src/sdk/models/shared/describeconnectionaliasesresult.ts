@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ConnectionAlias } from "./connectionalias";
 
 
+
 export class DescribeConnectionAliasesResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ConnectionAliases", elemType: shared.ConnectionAlias })
+  @SpeakeasyMetadata({ data: "json, name=ConnectionAliases", elemType: ConnectionAlias })
   connectionAliases?: ConnectionAlias[];
 
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 }

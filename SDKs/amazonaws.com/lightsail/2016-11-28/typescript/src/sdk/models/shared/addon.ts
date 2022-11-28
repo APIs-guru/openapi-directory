@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AddOn
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Describes an add-on that is enabled for an Amazon Lightsail resource.
 **/
 export class AddOn extends SpeakeasyBase {
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=nextSnapshotTimeOfDay" })
+  @SpeakeasyMetadata({ data: "json, name=nextSnapshotTimeOfDay" })
   nextSnapshotTimeOfDay?: string;
 
-  @Metadata({ data: "json, name=snapshotTimeOfDay" })
+  @SpeakeasyMetadata({ data: "json, name=snapshotTimeOfDay" })
   snapshotTimeOfDay?: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: string;
 }

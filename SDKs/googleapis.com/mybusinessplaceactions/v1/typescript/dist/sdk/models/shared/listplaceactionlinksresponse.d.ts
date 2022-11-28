@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { PlaceActionLink } from "./placeactionlink";
 /**
  * Response message for PlaceActions.ListPlaceActionLinks.

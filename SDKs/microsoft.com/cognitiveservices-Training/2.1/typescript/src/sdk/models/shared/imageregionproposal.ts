@@ -1,15 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RegionProposal } from "./regionproposal";
 
 
+
 export class ImageRegionProposal extends SpeakeasyBase {
-  @Metadata({ data: "json, name=imageId" })
+  @SpeakeasyMetadata({ data: "json, name=imageId" })
   imageId?: string;
 
-  @Metadata({ data: "json, name=projectId" })
+  @SpeakeasyMetadata({ data: "json, name=projectId" })
   projectId?: string;
 
-  @Metadata({ data: "json, name=proposals", elemType: shared.RegionProposal })
+  @SpeakeasyMetadata({ data: "json, name=proposals", elemType: RegionProposal })
   proposals?: RegionProposal[];
 }

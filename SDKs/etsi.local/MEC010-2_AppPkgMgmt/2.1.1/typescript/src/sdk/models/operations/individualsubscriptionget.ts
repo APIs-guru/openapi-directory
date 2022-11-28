@@ -1,29 +1,30 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class IndividualSubscriptionGetPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=subscriptionId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=subscriptionId" })
   subscriptionId: string;
 }
 
 
 export class IndividualSubscriptionGetRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: IndividualSubscriptionGetPathParams;
 }
 
 
 export class IndividualSubscriptionGetResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   appPkgSubscriptionInfo?: shared.AppPkgSubscriptionInfo;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   problemDetails?: shared.ProblemDetails;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

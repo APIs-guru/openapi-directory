@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum FourHundredAndOneUnauthorizedCodeEnum {
     Unauthorized = "UNAUTHORIZED"
@@ -10,15 +11,15 @@ export enum FourHundredAndOneUnauthorizedMessageEnum {
 
 
 export class FourHundredAndOneUnauthorized extends SpeakeasyBase {
-  @Metadata({ data: "json, name=code" })
+  @SpeakeasyMetadata({ data: "json, name=code" })
   code?: FourHundredAndOneUnauthorizedCodeEnum;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: FourHundredAndOneUnauthorizedMessageEnum;
 
-  @Metadata({ data: "json, name=timestamp" })
+  @SpeakeasyMetadata({ data: "json, name=timestamp" })
   timestamp?: string;
 
-  @Metadata({ data: "json, name=trackingId" })
+  @SpeakeasyMetadata({ data: "json, name=trackingId" })
   trackingId?: string;
 }

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudDialogflowCxV3VersionVariantsVariant
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A single flow version with specified traffic allocation.
 **/
 export class GoogleCloudDialogflowCxV3VersionVariantsVariant extends SpeakeasyBase {
-  @Metadata({ data: "json, name=isControlGroup" })
+  @SpeakeasyMetadata({ data: "json, name=isControlGroup" })
   isControlGroup?: boolean;
 
-  @Metadata({ data: "json, name=trafficAllocation" })
+  @SpeakeasyMetadata({ data: "json, name=trafficAllocation" })
   trafficAllocation?: number;
 
-  @Metadata({ data: "json, name=version" })
+  @SpeakeasyMetadata({ data: "json, name=version" })
   version?: string;
 }

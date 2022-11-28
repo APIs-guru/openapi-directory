@@ -1,5 +1,7 @@
 package shared
 
+// Warehouse
+// A fulfillment warehouse, which stores and handles inventory.
 type Warehouse struct {
 	BusinessDayConfig *BusinessDayConfig   `json:"businessDayConfig,omitempty"`
 	CutoffTime        *WarehouseCutoffTime `json:"cutoffTime,omitempty"`

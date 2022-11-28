@@ -16,6 +16,8 @@ const (
 	NfsExportOptionsSquashModeEnumRootSquash            NfsExportOptionsSquashModeEnum = "ROOT_SQUASH"
 )
 
+// NfsExportOptions
+// NFS export options specifications.
 type NfsExportOptions struct {
 	AccessMode *NfsExportOptionsAccessModeEnum `json:"accessMode,omitempty"`
 	AnonGid    *string                         `json:"anonGid,omitempty"`

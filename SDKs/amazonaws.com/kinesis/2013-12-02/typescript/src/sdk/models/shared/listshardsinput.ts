@@ -1,23 +1,24 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ShardFilter } from "./shardfilter";
 
 
+
 export class ListShardsInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ExclusiveStartShardId" })
+  @SpeakeasyMetadata({ data: "json, name=ExclusiveStartShardId" })
   exclusiveStartShardId?: string;
 
-  @Metadata({ data: "json, name=MaxResults" })
+  @SpeakeasyMetadata({ data: "json, name=MaxResults" })
   maxResults?: number;
 
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=ShardFilter" })
+  @SpeakeasyMetadata({ data: "json, name=ShardFilter" })
   shardFilter?: ShardFilter;
 
-  @Metadata({ data: "json, name=StreamCreationTimestamp" })
+  @SpeakeasyMetadata({ data: "json, name=StreamCreationTimestamp" })
   streamCreationTimestamp?: Date;
 
-  @Metadata({ data: "json, name=StreamName" })
+  @SpeakeasyMetadata({ data: "json, name=StreamName" })
   streamName?: string;
 }

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var DeleteWebhooksV3AppIdSettingsClearPathParams = /** @class */ (function (_super) {
     __extends(DeleteWebhooksV3AppIdSettingsClearPathParams, _super);
@@ -30,7 +30,7 @@ var DeleteWebhooksV3AppIdSettingsClearPathParams = /** @class */ (function (_sup
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=appId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=appId" }),
         __metadata("design:type", Number)
     ], DeleteWebhooksV3AppIdSettingsClearPathParams.prototype, "appId", void 0);
     return DeleteWebhooksV3AppIdSettingsClearPathParams;
@@ -42,7 +42,7 @@ var DeleteWebhooksV3AppIdSettingsClearSecurity = /** @class */ (function (_super
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=query" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=query" }),
         __metadata("design:type", shared.SchemeDeveloperHapikey)
     ], DeleteWebhooksV3AppIdSettingsClearSecurity.prototype, "developerHapikey", void 0);
     return DeleteWebhooksV3AppIdSettingsClearSecurity;
@@ -54,11 +54,11 @@ var DeleteWebhooksV3AppIdSettingsClearRequest = /** @class */ (function (_super)
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", DeleteWebhooksV3AppIdSettingsClearPathParams)
     ], DeleteWebhooksV3AppIdSettingsClearRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", DeleteWebhooksV3AppIdSettingsClearSecurity)
     ], DeleteWebhooksV3AppIdSettingsClearRequest.prototype, "security", void 0);
     return DeleteWebhooksV3AppIdSettingsClearRequest;
@@ -70,15 +70,15 @@ var DeleteWebhooksV3AppIdSettingsClearResponse = /** @class */ (function (_super
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], DeleteWebhooksV3AppIdSettingsClearResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], DeleteWebhooksV3AppIdSettingsClearResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], DeleteWebhooksV3AppIdSettingsClearResponse.prototype, "statusCode", void 0);
     return DeleteWebhooksV3AppIdSettingsClearResponse;

@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { StatusEnum } from "./statusenum";
+
 
 
 // MigrationTaskSummary
@@ -7,21 +8,21 @@ import { StatusEnum } from "./statusenum";
  * MigrationTaskSummary includes <code>MigrationTaskName</code>, <code>ProgressPercent</code>, <code>ProgressUpdateStream</code>, <code>Status</code>, and <code>UpdateDateTime</code> for each task.
 **/
 export class MigrationTaskSummary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=MigrationTaskName" })
+  @SpeakeasyMetadata({ data: "json, name=MigrationTaskName" })
   migrationTaskName?: string;
 
-  @Metadata({ data: "json, name=ProgressPercent" })
+  @SpeakeasyMetadata({ data: "json, name=ProgressPercent" })
   progressPercent?: number;
 
-  @Metadata({ data: "json, name=ProgressUpdateStream" })
+  @SpeakeasyMetadata({ data: "json, name=ProgressUpdateStream" })
   progressUpdateStream?: string;
 
-  @Metadata({ data: "json, name=Status" })
+  @SpeakeasyMetadata({ data: "json, name=Status" })
   status?: StatusEnum;
 
-  @Metadata({ data: "json, name=StatusDetail" })
+  @SpeakeasyMetadata({ data: "json, name=StatusDetail" })
   statusDetail?: string;
 
-  @Metadata({ data: "json, name=UpdateDateTime" })
+  @SpeakeasyMetadata({ data: "json, name=UpdateDateTime" })
   updateDateTime?: Date;
 }

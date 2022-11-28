@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { BeaconAttachment } from "./beaconattachment";
 /**
  * Response to `ListBeaconAttachments` that contains the requested attachments.

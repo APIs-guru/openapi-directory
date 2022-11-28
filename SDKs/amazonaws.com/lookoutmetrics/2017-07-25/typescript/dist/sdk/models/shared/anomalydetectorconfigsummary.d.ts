@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { FrequencyEnum } from "./frequencyenum";
 /**
  * Contains information about a detector's configuration.

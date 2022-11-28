@@ -11,6 +11,8 @@ const (
 	OrderDocumentTypeEnumPlanningOrderTypeChangeOrder    OrderDocumentTypeEnum = "PLANNING_ORDER_TYPE_CHANGE_ORDER"
 )
 
+// OrderDocument
+// Contains properties of a Planning order document.
 type OrderDocument struct {
 	AccountID                *string                `json:"accountId,omitempty"`
 	AdvertiserID             *string                `json:"advertiserId,omitempty"`

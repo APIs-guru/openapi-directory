@@ -1,19 +1,17 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 
 
-export class WritableDeviceBay extends SpeakeasyBase {
-  @Metadata({ data: "json, name=device" })
+
+export class WritableDeviceBayInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=device" })
   device: number;
 
-  @Metadata({ data: "json, name=id" })
-  id?: number;
-
-  @Metadata({ data: "json, name=installed_device" })
+  @SpeakeasyMetadata({ data: "json, name=installed_device" })
   installedDevice?: number;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 
-  @Metadata({ data: "json, name=tags" })
+  @SpeakeasyMetadata({ data: "json, name=tags" })
   tags?: string[];
 }

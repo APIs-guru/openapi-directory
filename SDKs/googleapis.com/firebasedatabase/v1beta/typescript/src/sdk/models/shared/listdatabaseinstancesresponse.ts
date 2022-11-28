@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DatabaseInstance } from "./databaseinstance";
+
 
 
 // ListDatabaseInstancesResponse
@@ -8,9 +8,9 @@ import { DatabaseInstance } from "./databaseinstance";
  * The response from the ListDatabaseInstances method.
 **/
 export class ListDatabaseInstancesResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=instances", elemType: shared.DatabaseInstance })
+  @SpeakeasyMetadata({ data: "json, name=instances", elemType: DatabaseInstance })
   instances?: DatabaseInstance[];
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 }

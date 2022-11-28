@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { DataUploadFrequencyEnum } from "./datauploadfrequencyenum";
 import { InferenceSchedulerStatusEnum } from "./inferenceschedulerstatusenum";
 /**

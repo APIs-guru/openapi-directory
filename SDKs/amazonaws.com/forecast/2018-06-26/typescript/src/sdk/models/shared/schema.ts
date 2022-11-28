@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SchemaAttribute } from "./schemaattribute";
+
 
 
 // Schema
@@ -8,6 +8,6 @@ import { SchemaAttribute } from "./schemaattribute";
  * Defines the fields of a dataset. You specify this object in the <a>CreateDataset</a> request.
 **/
 export class Schema extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Attributes", elemType: shared.SchemaAttribute })
+  @SpeakeasyMetadata({ data: "json, name=Attributes", elemType: SchemaAttribute })
   attributes?: SchemaAttribute[];
 }

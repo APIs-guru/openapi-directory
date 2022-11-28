@@ -8,6 +8,8 @@ const (
 	AgcoPowerServicesModelsEcuStateEnumDamaged  AgcoPowerServicesModelsEcuStateEnum = "Damaged"
 )
 
+// AgcoPowerServicesModelsEcu
+// An AGCO Power ECU
 type AgcoPowerServicesModelsEcu struct {
 	ActivationCode          *string                             `json:"ActivationCode,omitempty" form:"name=ActivationCode"`
 	DamagedDescription      *string                             `json:"DamagedDescription,omitempty" form:"name=DamagedDescription"`

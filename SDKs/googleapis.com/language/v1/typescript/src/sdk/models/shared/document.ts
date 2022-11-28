@@ -1,9 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum DocumentTypeEnum {
-    TypeUnspecified = "TYPE_UNSPECIFIED"
-,    PlainText = "PLAIN_TEXT"
-,    Html = "HTML"
+    TypeUnspecified = "TYPE_UNSPECIFIED",
+    PlainText = "PLAIN_TEXT",
+    Html = "HTML"
 }
 
 
@@ -12,15 +13,15 @@ export enum DocumentTypeEnum {
  * Represents the input to API methods.
 **/
 export class Document extends SpeakeasyBase {
-  @Metadata({ data: "json, name=content" })
+  @SpeakeasyMetadata({ data: "json, name=content" })
   content?: string;
 
-  @Metadata({ data: "json, name=gcsContentUri" })
+  @SpeakeasyMetadata({ data: "json, name=gcsContentUri" })
   gcsContentUri?: string;
 
-  @Metadata({ data: "json, name=language" })
+  @SpeakeasyMetadata({ data: "json, name=language" })
   language?: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: DocumentTypeEnum;
 }

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { RuleStateEnum } from "./rulestateenum";
 /**
  * Contains information about a rule in Amazon EventBridge.

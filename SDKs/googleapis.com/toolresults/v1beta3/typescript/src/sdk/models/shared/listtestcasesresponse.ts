@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TestCase } from "./testcase";
+
 
 
 // ListTestCasesResponse
@@ -8,9 +8,9 @@ import { TestCase } from "./testcase";
  * Response message for StepService.ListTestCases.
 **/
 export class ListTestCasesResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 
-  @Metadata({ data: "json, name=testCases", elemType: shared.TestCase })
+  @SpeakeasyMetadata({ data: "json, name=testCases", elemType: TestCase })
   testCases?: TestCase[];
 }

@@ -1,16 +1,16 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import metadataproperties
-from . import tag
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class CreateTrialRequest:
-    display_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'DisplayName' }})
-    experiment_name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ExperimentName' }})
-    metadata_properties: Optional[metadataproperties.MetadataProperties] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'MetadataProperties' }})
-    tags: Optional[List[tag.Tag]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Tags' }})
-    trial_name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'TrialName' }})
+    experiment_name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('ExperimentName') }})
+    trial_name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('TrialName') }})
+    display_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('DisplayName') }})
+    metadata_properties: Optional[MetadataProperties] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('MetadataProperties') }})
+    tags: Optional[List[Tag]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Tags') }})
     

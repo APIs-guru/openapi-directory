@@ -1,68 +1,69 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class PutTransactionsIdPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" })
   id: number;
 }
 
 
 export class PutTransactionsIdQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=labels" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=labels" })
   labels?: string;
 }
 
 
 export class PutTransactionsIdRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=amount" })
+  @SpeakeasyMetadata({ data: "json, name=amount" })
   amount?: number;
 
-  @Metadata({ data: "json, name=category_id" })
+  @SpeakeasyMetadata({ data: "json, name=category_id" })
   categoryId?: number;
 
-  @Metadata({ data: "json, name=cheque_number" })
+  @SpeakeasyMetadata({ data: "json, name=cheque_number" })
   chequeNumber?: string;
 
-  @Metadata({ data: "json, name=date" })
+  @SpeakeasyMetadata({ data: "json, name=date" })
   date?: string;
 
-  @Metadata({ data: "json, name=is_transfer" })
+  @SpeakeasyMetadata({ data: "json, name=is_transfer" })
   isTransfer?: boolean;
 
-  @Metadata({ data: "json, name=memo" })
+  @SpeakeasyMetadata({ data: "json, name=memo" })
   memo?: string;
 
-  @Metadata({ data: "json, name=note" })
+  @SpeakeasyMetadata({ data: "json, name=note" })
   note?: string;
 
-  @Metadata({ data: "json, name=payee" })
+  @SpeakeasyMetadata({ data: "json, name=payee" })
   payee?: string;
 }
 
 
 export class PutTransactionsIdRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: PutTransactionsIdPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: PutTransactionsIdQueryParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request?: PutTransactionsIdRequestBody;
 }
 
 
 export class PutTransactionsIdResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   error?: shared.Error;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   transaction?: shared.Transaction;
 }

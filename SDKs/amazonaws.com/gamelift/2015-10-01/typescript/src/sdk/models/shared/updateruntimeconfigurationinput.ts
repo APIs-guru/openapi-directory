@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RuntimeConfiguration } from "./runtimeconfiguration";
+
 
 
 // UpdateRuntimeConfigurationInput
@@ -7,9 +8,9 @@ import { RuntimeConfiguration } from "./runtimeconfiguration";
  * Represents the input for a request operation.
 **/
 export class UpdateRuntimeConfigurationInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=FleetId" })
+  @SpeakeasyMetadata({ data: "json, name=FleetId" })
   fleetId: string;
 
-  @Metadata({ data: "json, name=RuntimeConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=RuntimeConfiguration" })
   runtimeConfiguration: RuntimeConfiguration;
 }

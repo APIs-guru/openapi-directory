@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // UnsubscribeClientsRequest
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Request message for UnsubscribeAuctionPackage.
 **/
 export class UnsubscribeClientsRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=clients" })
+  @SpeakeasyMetadata({ data: "json, name=clients" })
   clients?: string[];
 }

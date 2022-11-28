@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class ExtraParamNameEnum(str, Enum):
     DUNS_NUMBER = "DUNS_NUMBER"

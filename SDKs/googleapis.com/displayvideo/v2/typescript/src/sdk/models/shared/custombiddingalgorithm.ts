@@ -1,21 +1,21 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CustomBiddingModelDetails } from "./custombiddingmodeldetails";
 
+
 export enum CustomBiddingAlgorithmCustomBiddingAlgorithmTypeEnum {
-    CustomBiddingAlgorithmTypeUnspecified = "CUSTOM_BIDDING_ALGORITHM_TYPE_UNSPECIFIED"
-,    ScriptBased = "SCRIPT_BASED"
-,    AdsDataHubBased = "ADS_DATA_HUB_BASED"
-,    GoalBuilderBased = "GOAL_BUILDER_BASED"
+    CustomBiddingAlgorithmTypeUnspecified = "CUSTOM_BIDDING_ALGORITHM_TYPE_UNSPECIFIED",
+    ScriptBased = "SCRIPT_BASED",
+    AdsDataHubBased = "ADS_DATA_HUB_BASED",
+    GoalBuilderBased = "GOAL_BUILDER_BASED"
 }
 
 export enum CustomBiddingAlgorithmEntityStatusEnum {
-    EntityStatusUnspecified = "ENTITY_STATUS_UNSPECIFIED"
-,    EntityStatusActive = "ENTITY_STATUS_ACTIVE"
-,    EntityStatusArchived = "ENTITY_STATUS_ARCHIVED"
-,    EntityStatusDraft = "ENTITY_STATUS_DRAFT"
-,    EntityStatusPaused = "ENTITY_STATUS_PAUSED"
-,    EntityStatusScheduledForDeletion = "ENTITY_STATUS_SCHEDULED_FOR_DELETION"
+    EntityStatusUnspecified = "ENTITY_STATUS_UNSPECIFIED",
+    EntityStatusActive = "ENTITY_STATUS_ACTIVE",
+    EntityStatusArchived = "ENTITY_STATUS_ARCHIVED",
+    EntityStatusDraft = "ENTITY_STATUS_DRAFT",
+    EntityStatusPaused = "ENTITY_STATUS_PAUSED",
+    EntityStatusScheduledForDeletion = "ENTITY_STATUS_SCHEDULED_FOR_DELETION"
 }
 
 
@@ -24,30 +24,55 @@ export enum CustomBiddingAlgorithmEntityStatusEnum {
  * A single custom bidding algorithm.
 **/
 export class CustomBiddingAlgorithm extends SpeakeasyBase {
-  @Metadata({ data: "json, name=advertiserId" })
+  @SpeakeasyMetadata({ data: "json, name=advertiserId" })
   advertiserId?: string;
 
-  @Metadata({ data: "json, name=customBiddingAlgorithmId" })
+  @SpeakeasyMetadata({ data: "json, name=customBiddingAlgorithmId" })
   customBiddingAlgorithmId?: string;
 
-  @Metadata({ data: "json, name=customBiddingAlgorithmType" })
+  @SpeakeasyMetadata({ data: "json, name=customBiddingAlgorithmType" })
   customBiddingAlgorithmType?: CustomBiddingAlgorithmCustomBiddingAlgorithmTypeEnum;
 
-  @Metadata({ data: "json, name=displayName" })
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
   displayName?: string;
 
-  @Metadata({ data: "json, name=entityStatus" })
+  @SpeakeasyMetadata({ data: "json, name=entityStatus" })
   entityStatus?: CustomBiddingAlgorithmEntityStatusEnum;
 
-  @Metadata({ data: "json, name=modelDetails", elemType: shared.CustomBiddingModelDetails })
+  @SpeakeasyMetadata({ data: "json, name=modelDetails", elemType: CustomBiddingModelDetails })
   modelDetails?: CustomBiddingModelDetails[];
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=partnerId" })
+  @SpeakeasyMetadata({ data: "json, name=partnerId" })
   partnerId?: string;
 
-  @Metadata({ data: "json, name=sharedAdvertiserIds" })
+  @SpeakeasyMetadata({ data: "json, name=sharedAdvertiserIds" })
+  sharedAdvertiserIds?: string[];
+}
+
+
+// CustomBiddingAlgorithmInput
+/** 
+ * A single custom bidding algorithm.
+**/
+export class CustomBiddingAlgorithmInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=advertiserId" })
+  advertiserId?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=customBiddingAlgorithmType" })
+  customBiddingAlgorithmType?: CustomBiddingAlgorithmCustomBiddingAlgorithmTypeEnum;
+
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
+  displayName?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=entityStatus" })
+  entityStatus?: CustomBiddingAlgorithmEntityStatusEnum;
+
+  @SpeakeasyMetadata({ data: "json, name=partnerId" })
+  partnerId?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=sharedAdvertiserIds" })
   sharedAdvertiserIds?: string[];
 }

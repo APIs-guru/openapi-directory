@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ListEnvironmentsOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Environments" })
+  @SpeakeasyMetadata({ data: "json, name=Environments" })
   environments: string[];
 
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 }

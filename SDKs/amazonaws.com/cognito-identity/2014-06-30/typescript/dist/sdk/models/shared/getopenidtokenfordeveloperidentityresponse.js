@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // GetOpenIdTokenForDeveloperIdentityResponse
 /**
  * Returned in response to a successful <code>GetOpenIdTokenForDeveloperIdentity</code> request.
@@ -33,11 +33,11 @@ var GetOpenIdTokenForDeveloperIdentityResponse = /** @class */ (function (_super
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=IdentityId" }),
+        SpeakeasyMetadata({ data: "json, name=IdentityId" }),
         __metadata("design:type", String)
     ], GetOpenIdTokenForDeveloperIdentityResponse.prototype, "identityId", void 0);
     __decorate([
-        Metadata({ data: "json, name=Token" }),
+        SpeakeasyMetadata({ data: "json, name=Token" }),
         __metadata("design:type", String)
     ], GetOpenIdTokenForDeveloperIdentityResponse.prototype, "token", void 0);
     return GetOpenIdTokenForDeveloperIdentityResponse;

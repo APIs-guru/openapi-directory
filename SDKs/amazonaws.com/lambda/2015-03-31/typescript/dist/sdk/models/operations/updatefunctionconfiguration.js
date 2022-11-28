@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var UpdateFunctionConfigurationPathParams = /** @class */ (function (_super) {
     __extends(UpdateFunctionConfigurationPathParams, _super);
@@ -30,7 +30,7 @@ var UpdateFunctionConfigurationPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=FunctionName" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=FunctionName" }),
         __metadata("design:type", String)
     ], UpdateFunctionConfigurationPathParams.prototype, "functionName", void 0);
     return UpdateFunctionConfigurationPathParams;
@@ -42,31 +42,31 @@ var UpdateFunctionConfigurationHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
         __metadata("design:type", String)
     ], UpdateFunctionConfigurationHeaders.prototype, "xAmzAlgorithm", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
         __metadata("design:type", String)
     ], UpdateFunctionConfigurationHeaders.prototype, "xAmzContentSha256", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
         __metadata("design:type", String)
     ], UpdateFunctionConfigurationHeaders.prototype, "xAmzCredential", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
         __metadata("design:type", String)
     ], UpdateFunctionConfigurationHeaders.prototype, "xAmzDate", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
         __metadata("design:type", String)
     ], UpdateFunctionConfigurationHeaders.prototype, "xAmzSecurityToken", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
         __metadata("design:type", String)
     ], UpdateFunctionConfigurationHeaders.prototype, "xAmzSignature", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
         __metadata("design:type", String)
     ], UpdateFunctionConfigurationHeaders.prototype, "xAmzSignedHeaders", void 0);
     return UpdateFunctionConfigurationHeaders;
@@ -82,7 +82,7 @@ var UpdateFunctionConfigurationRequestBodyDeadLetterConfig = /** @class */ (func
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=TargetArn" }),
+        SpeakeasyMetadata({ data: "json, name=TargetArn" }),
         __metadata("design:type", String)
     ], UpdateFunctionConfigurationRequestBodyDeadLetterConfig.prototype, "targetArn", void 0);
     return UpdateFunctionConfigurationRequestBodyDeadLetterConfig;
@@ -98,7 +98,7 @@ var UpdateFunctionConfigurationRequestBodyEnvironment = /** @class */ (function 
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Variables" }),
+        SpeakeasyMetadata({ data: "json, name=Variables" }),
         __metadata("design:type", Map)
     ], UpdateFunctionConfigurationRequestBodyEnvironment.prototype, "variables", void 0);
     return UpdateFunctionConfigurationRequestBodyEnvironment;
@@ -114,15 +114,15 @@ var UpdateFunctionConfigurationRequestBodyImageConfig = /** @class */ (function 
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Command" }),
+        SpeakeasyMetadata({ data: "json, name=Command" }),
         __metadata("design:type", Array)
     ], UpdateFunctionConfigurationRequestBodyImageConfig.prototype, "command", void 0);
     __decorate([
-        Metadata({ data: "json, name=EntryPoint" }),
+        SpeakeasyMetadata({ data: "json, name=EntryPoint" }),
         __metadata("design:type", Array)
     ], UpdateFunctionConfigurationRequestBodyImageConfig.prototype, "entryPoint", void 0);
     __decorate([
-        Metadata({ data: "json, name=WorkingDirectory" }),
+        SpeakeasyMetadata({ data: "json, name=WorkingDirectory" }),
         __metadata("design:type", String)
     ], UpdateFunctionConfigurationRequestBodyImageConfig.prototype, "workingDirectory", void 0);
     return UpdateFunctionConfigurationRequestBodyImageConfig;
@@ -166,7 +166,7 @@ var UpdateFunctionConfigurationRequestBodyTracingConfig = /** @class */ (functio
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Mode" }),
+        SpeakeasyMetadata({ data: "json, name=Mode" }),
         __metadata("design:type", String)
     ], UpdateFunctionConfigurationRequestBodyTracingConfig.prototype, "mode", void 0);
     return UpdateFunctionConfigurationRequestBodyTracingConfig;
@@ -182,11 +182,11 @@ var UpdateFunctionConfigurationRequestBodyVpcConfig = /** @class */ (function (_
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=SecurityGroupIds" }),
+        SpeakeasyMetadata({ data: "json, name=SecurityGroupIds" }),
         __metadata("design:type", Array)
     ], UpdateFunctionConfigurationRequestBodyVpcConfig.prototype, "securityGroupIds", void 0);
     __decorate([
-        Metadata({ data: "json, name=SubnetIds" }),
+        SpeakeasyMetadata({ data: "json, name=SubnetIds" }),
         __metadata("design:type", Array)
     ], UpdateFunctionConfigurationRequestBodyVpcConfig.prototype, "subnetIds", void 0);
     return UpdateFunctionConfigurationRequestBodyVpcConfig;
@@ -198,63 +198,63 @@ var UpdateFunctionConfigurationRequestBody = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=DeadLetterConfig" }),
+        SpeakeasyMetadata({ data: "json, name=DeadLetterConfig" }),
         __metadata("design:type", UpdateFunctionConfigurationRequestBodyDeadLetterConfig)
     ], UpdateFunctionConfigurationRequestBody.prototype, "deadLetterConfig", void 0);
     __decorate([
-        Metadata({ data: "json, name=Description" }),
+        SpeakeasyMetadata({ data: "json, name=Description" }),
         __metadata("design:type", String)
     ], UpdateFunctionConfigurationRequestBody.prototype, "description", void 0);
     __decorate([
-        Metadata({ data: "json, name=Environment" }),
+        SpeakeasyMetadata({ data: "json, name=Environment" }),
         __metadata("design:type", UpdateFunctionConfigurationRequestBodyEnvironment)
     ], UpdateFunctionConfigurationRequestBody.prototype, "environment", void 0);
     __decorate([
-        Metadata({ data: "json, name=FileSystemConfigs", elemType: shared.FileSystemConfig }),
+        SpeakeasyMetadata({ data: "json, name=FileSystemConfigs", elemType: shared.FileSystemConfig }),
         __metadata("design:type", Array)
     ], UpdateFunctionConfigurationRequestBody.prototype, "fileSystemConfigs", void 0);
     __decorate([
-        Metadata({ data: "json, name=Handler" }),
+        SpeakeasyMetadata({ data: "json, name=Handler" }),
         __metadata("design:type", String)
     ], UpdateFunctionConfigurationRequestBody.prototype, "handler", void 0);
     __decorate([
-        Metadata({ data: "json, name=ImageConfig" }),
+        SpeakeasyMetadata({ data: "json, name=ImageConfig" }),
         __metadata("design:type", UpdateFunctionConfigurationRequestBodyImageConfig)
     ], UpdateFunctionConfigurationRequestBody.prototype, "imageConfig", void 0);
     __decorate([
-        Metadata({ data: "json, name=KMSKeyArn" }),
+        SpeakeasyMetadata({ data: "json, name=KMSKeyArn" }),
         __metadata("design:type", String)
     ], UpdateFunctionConfigurationRequestBody.prototype, "kmsKeyArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=Layers" }),
+        SpeakeasyMetadata({ data: "json, name=Layers" }),
         __metadata("design:type", Array)
     ], UpdateFunctionConfigurationRequestBody.prototype, "layers", void 0);
     __decorate([
-        Metadata({ data: "json, name=MemorySize" }),
+        SpeakeasyMetadata({ data: "json, name=MemorySize" }),
         __metadata("design:type", Number)
     ], UpdateFunctionConfigurationRequestBody.prototype, "memorySize", void 0);
     __decorate([
-        Metadata({ data: "json, name=RevisionId" }),
+        SpeakeasyMetadata({ data: "json, name=RevisionId" }),
         __metadata("design:type", String)
     ], UpdateFunctionConfigurationRequestBody.prototype, "revisionId", void 0);
     __decorate([
-        Metadata({ data: "json, name=Role" }),
+        SpeakeasyMetadata({ data: "json, name=Role" }),
         __metadata("design:type", String)
     ], UpdateFunctionConfigurationRequestBody.prototype, "role", void 0);
     __decorate([
-        Metadata({ data: "json, name=Runtime" }),
+        SpeakeasyMetadata({ data: "json, name=Runtime" }),
         __metadata("design:type", String)
     ], UpdateFunctionConfigurationRequestBody.prototype, "runtime", void 0);
     __decorate([
-        Metadata({ data: "json, name=Timeout" }),
+        SpeakeasyMetadata({ data: "json, name=Timeout" }),
         __metadata("design:type", Number)
     ], UpdateFunctionConfigurationRequestBody.prototype, "timeout", void 0);
     __decorate([
-        Metadata({ data: "json, name=TracingConfig" }),
+        SpeakeasyMetadata({ data: "json, name=TracingConfig" }),
         __metadata("design:type", UpdateFunctionConfigurationRequestBodyTracingConfig)
     ], UpdateFunctionConfigurationRequestBody.prototype, "tracingConfig", void 0);
     __decorate([
-        Metadata({ data: "json, name=VpcConfig" }),
+        SpeakeasyMetadata({ data: "json, name=VpcConfig" }),
         __metadata("design:type", UpdateFunctionConfigurationRequestBodyVpcConfig)
     ], UpdateFunctionConfigurationRequestBody.prototype, "vpcConfig", void 0);
     return UpdateFunctionConfigurationRequestBody;
@@ -266,15 +266,15 @@ var UpdateFunctionConfigurationRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", UpdateFunctionConfigurationPathParams)
     ], UpdateFunctionConfigurationRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", UpdateFunctionConfigurationHeaders)
     ], UpdateFunctionConfigurationRequest.prototype, "headers", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", UpdateFunctionConfigurationRequestBody)
     ], UpdateFunctionConfigurationRequest.prototype, "request", void 0);
     return UpdateFunctionConfigurationRequest;
@@ -286,51 +286,51 @@ var UpdateFunctionConfigurationResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], UpdateFunctionConfigurationResponse.prototype, "codeSigningConfigNotFoundException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], UpdateFunctionConfigurationResponse.prototype, "codeVerificationFailedException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], UpdateFunctionConfigurationResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.FunctionConfiguration)
     ], UpdateFunctionConfigurationResponse.prototype, "functionConfiguration", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], UpdateFunctionConfigurationResponse.prototype, "invalidCodeSignatureException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], UpdateFunctionConfigurationResponse.prototype, "invalidParameterValueException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], UpdateFunctionConfigurationResponse.prototype, "preconditionFailedException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], UpdateFunctionConfigurationResponse.prototype, "resourceConflictException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], UpdateFunctionConfigurationResponse.prototype, "resourceNotFoundException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], UpdateFunctionConfigurationResponse.prototype, "serviceException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], UpdateFunctionConfigurationResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], UpdateFunctionConfigurationResponse.prototype, "tooManyRequestsException", void 0);
     return UpdateFunctionConfigurationResponse;

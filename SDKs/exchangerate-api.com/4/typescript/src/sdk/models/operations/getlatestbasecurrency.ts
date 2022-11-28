@@ -1,52 +1,53 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetLatestBaseCurrencyPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=base_currency" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=base_currency" })
   baseCurrency: string;
 }
 
 
-export class GetLatestBaseCurrencyRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: GetLatestBaseCurrencyPathParams;
-}
-
-
 export class GetLatestBaseCurrency200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=base" })
+  @SpeakeasyMetadata({ data: "json, name=base" })
   base?: string;
 
-  @Metadata({ data: "json, name=date" })
+  @SpeakeasyMetadata({ data: "json, name=date" })
   date?: string;
 
-  @Metadata({ data: "json, name=rates" })
+  @SpeakeasyMetadata({ data: "json, name=rates" })
   rates?: Map<string, number>;
 
-  @Metadata({ data: "json, name=time_last_updated" })
+  @SpeakeasyMetadata({ data: "json, name=time_last_updated" })
   timeLastUpdated?: number;
 }
 
 
 export class GetLatestBaseCurrency404ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=error_type" })
+  @SpeakeasyMetadata({ data: "json, name=error_type" })
   errorType?: string;
 
-  @Metadata({ data: "json, name=result" })
+  @SpeakeasyMetadata({ data: "json, name=result" })
   result?: string;
 }
 
 
+export class GetLatestBaseCurrencyRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: GetLatestBaseCurrencyPathParams;
+}
+
+
 export class GetLatestBaseCurrencyResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getLatestBaseCurrency200ApplicationJsonObject?: GetLatestBaseCurrency200ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getLatestBaseCurrency404ApplicationJsonObject?: GetLatestBaseCurrency404ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

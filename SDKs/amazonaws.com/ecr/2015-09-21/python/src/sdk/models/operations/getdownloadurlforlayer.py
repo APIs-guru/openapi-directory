@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 class GetDownloadURLForLayerXAmzTargetEnum(str, Enum):
@@ -8,6 +12,7 @@ class GetDownloadURLForLayerXAmzTargetEnum(str, Enum):
 
 @dataclass
 class GetDownloadURLForLayerHeaders:
+    x_amz_target: GetDownloadURLForLayerXAmzTargetEnum = field(metadata={'header': { 'field_name': 'X-Amz-Target', 'style': 'simple', 'explode': False }})
     x_amz_algorithm: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Algorithm', 'style': 'simple', 'explode': False }})
     x_amz_content_sha256: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Content-Sha256', 'style': 'simple', 'explode': False }})
     x_amz_credential: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Credential', 'style': 'simple', 'explode': False }})
@@ -15,23 +20,22 @@ class GetDownloadURLForLayerHeaders:
     x_amz_security_token: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Security-Token', 'style': 'simple', 'explode': False }})
     x_amz_signature: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Signature', 'style': 'simple', 'explode': False }})
     x_amz_signed_headers: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-SignedHeaders', 'style': 'simple', 'explode': False }})
-    x_amz_target: GetDownloadURLForLayerXAmzTargetEnum = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Target', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetDownloadURLForLayerRequest:
-    headers: GetDownloadURLForLayerHeaders = field(default=None)
-    request: shared.GetDownloadURLForLayerRequest = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: GetDownloadURLForLayerHeaders = field()
+    request: shared.GetDownloadURLForLayerRequest = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class GetDownloadURLForLayerResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     get_download_url_for_layer_response: Optional[shared.GetDownloadURLForLayerResponse] = field(default=None)
     invalid_parameter_exception: Optional[Any] = field(default=None)
     layer_inaccessible_exception: Optional[Any] = field(default=None)
     layers_not_found_exception: Optional[Any] = field(default=None)
     repository_not_found_exception: Optional[Any] = field(default=None)
     server_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

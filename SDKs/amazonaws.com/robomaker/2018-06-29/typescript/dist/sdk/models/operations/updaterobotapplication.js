@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var UpdateRobotApplicationHeaders = /** @class */ (function (_super) {
     __extends(UpdateRobotApplicationHeaders, _super);
@@ -30,31 +30,31 @@ var UpdateRobotApplicationHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
         __metadata("design:type", String)
     ], UpdateRobotApplicationHeaders.prototype, "xAmzAlgorithm", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
         __metadata("design:type", String)
     ], UpdateRobotApplicationHeaders.prototype, "xAmzContentSha256", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
         __metadata("design:type", String)
     ], UpdateRobotApplicationHeaders.prototype, "xAmzCredential", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
         __metadata("design:type", String)
     ], UpdateRobotApplicationHeaders.prototype, "xAmzDate", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
         __metadata("design:type", String)
     ], UpdateRobotApplicationHeaders.prototype, "xAmzSecurityToken", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
         __metadata("design:type", String)
     ], UpdateRobotApplicationHeaders.prototype, "xAmzSignature", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
         __metadata("design:type", String)
     ], UpdateRobotApplicationHeaders.prototype, "xAmzSignedHeaders", void 0);
     return UpdateRobotApplicationHeaders;
@@ -70,7 +70,7 @@ var UpdateRobotApplicationRequestBodyEnvironment = /** @class */ (function (_sup
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=uri" }),
+        SpeakeasyMetadata({ data: "json, name=uri" }),
         __metadata("design:type", String)
     ], UpdateRobotApplicationRequestBodyEnvironment.prototype, "uri", void 0);
     return UpdateRobotApplicationRequestBodyEnvironment;
@@ -86,11 +86,11 @@ var UpdateRobotApplicationRequestBodyRobotSoftwareSuite = /** @class */ (functio
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], UpdateRobotApplicationRequestBodyRobotSoftwareSuite.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=version" }),
+        SpeakeasyMetadata({ data: "json, name=version" }),
         __metadata("design:type", String)
     ], UpdateRobotApplicationRequestBodyRobotSoftwareSuite.prototype, "version", void 0);
     return UpdateRobotApplicationRequestBodyRobotSoftwareSuite;
@@ -102,23 +102,23 @@ var UpdateRobotApplicationRequestBody = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=application" }),
+        SpeakeasyMetadata({ data: "json, name=application" }),
         __metadata("design:type", String)
     ], UpdateRobotApplicationRequestBody.prototype, "application", void 0);
     __decorate([
-        Metadata({ data: "json, name=currentRevisionId" }),
+        SpeakeasyMetadata({ data: "json, name=currentRevisionId" }),
         __metadata("design:type", String)
     ], UpdateRobotApplicationRequestBody.prototype, "currentRevisionId", void 0);
     __decorate([
-        Metadata({ data: "json, name=environment" }),
+        SpeakeasyMetadata({ data: "json, name=environment" }),
         __metadata("design:type", UpdateRobotApplicationRequestBodyEnvironment)
     ], UpdateRobotApplicationRequestBody.prototype, "environment", void 0);
     __decorate([
-        Metadata({ data: "json, name=robotSoftwareSuite" }),
+        SpeakeasyMetadata({ data: "json, name=robotSoftwareSuite" }),
         __metadata("design:type", UpdateRobotApplicationRequestBodyRobotSoftwareSuite)
     ], UpdateRobotApplicationRequestBody.prototype, "robotSoftwareSuite", void 0);
     __decorate([
-        Metadata({ data: "json, name=sources", elemType: shared.SourceConfig }),
+        SpeakeasyMetadata({ data: "json, name=sources", elemType: shared.SourceConfig }),
         __metadata("design:type", Array)
     ], UpdateRobotApplicationRequestBody.prototype, "sources", void 0);
     return UpdateRobotApplicationRequestBody;
@@ -130,11 +130,11 @@ var UpdateRobotApplicationRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", UpdateRobotApplicationHeaders)
     ], UpdateRobotApplicationRequest.prototype, "headers", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", UpdateRobotApplicationRequestBody)
     ], UpdateRobotApplicationRequest.prototype, "request", void 0);
     return UpdateRobotApplicationRequest;
@@ -146,35 +146,35 @@ var UpdateRobotApplicationResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], UpdateRobotApplicationResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], UpdateRobotApplicationResponse.prototype, "internalServerException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], UpdateRobotApplicationResponse.prototype, "invalidParameterException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], UpdateRobotApplicationResponse.prototype, "limitExceededException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], UpdateRobotApplicationResponse.prototype, "resourceNotFoundException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], UpdateRobotApplicationResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], UpdateRobotApplicationResponse.prototype, "throttlingException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.UpdateRobotApplicationResponse)
     ], UpdateRobotApplicationResponse.prototype, "updateRobotApplicationResponse", void 0);
     return UpdateRobotApplicationResponse;

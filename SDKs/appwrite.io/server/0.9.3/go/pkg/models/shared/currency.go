@@ -1,5 +1,7 @@
 package shared
 
+// Currency
+// Currency
 type Currency struct {
 	Code          string  `json:"code"`
 	DecimalDigits int32   `json:"decimalDigits"`

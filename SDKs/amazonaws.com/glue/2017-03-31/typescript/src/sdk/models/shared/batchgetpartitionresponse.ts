@@ -1,13 +1,13 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Partition } from "./partition";
 import { PartitionValueList } from "./partitionvaluelist";
 
 
+
 export class BatchGetPartitionResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Partitions", elemType: shared.Partition })
+  @SpeakeasyMetadata({ data: "json, name=Partitions", elemType: Partition })
   partitions?: Partition[];
 
-  @Metadata({ data: "json, name=UnprocessedKeys", elemType: shared.PartitionValueList })
+  @SpeakeasyMetadata({ data: "json, name=UnprocessedKeys", elemType: PartitionValueList })
   unprocessedKeys?: PartitionValueList[];
 }

@@ -1,5 +1,7 @@
 package shared
 
+// IdentitytoolkitRelyingpartySignupNewUserRequest
+// Request to signup new user, create anonymous user or anonymous user reauth.
 type IdentitytoolkitRelyingpartySignupNewUserRequest struct {
 	CaptchaChallenge    *string `json:"captchaChallenge,omitempty"`
 	CaptchaResponse     *string `json:"captchaResponse,omitempty"`

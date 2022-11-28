@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import ecscluster
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class DescribeEcsClustersResult:
-    ecs_clusters: Optional[List[ecscluster.EcsCluster]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'EcsClusters' }})
-    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'NextToken' }})
+    r"""DescribeEcsClustersResult
+    Contains the response to a <code>DescribeEcsClusters</code> request.
+    """
+    
+    ecs_clusters: Optional[List[EcsCluster]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('EcsClusters') }})
+    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('NextToken') }})
     

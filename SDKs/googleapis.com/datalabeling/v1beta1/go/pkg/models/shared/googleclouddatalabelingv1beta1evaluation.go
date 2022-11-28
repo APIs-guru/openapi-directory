@@ -19,6 +19,8 @@ const (
 	GoogleCloudDatalabelingV1beta1EvaluationAnnotationTypeEnumGeneralClassificationAnnotation    GoogleCloudDatalabelingV1beta1EvaluationAnnotationTypeEnum = "GENERAL_CLASSIFICATION_ANNOTATION"
 )
 
+// GoogleCloudDatalabelingV1beta1Evaluation
+// Describes an evaluation between a machine learning model's predictions and ground truth labels. Created when an EvaluationJob runs successfully.
 type GoogleCloudDatalabelingV1beta1Evaluation struct {
 	AnnotationType       *GoogleCloudDatalabelingV1beta1EvaluationAnnotationTypeEnum `json:"annotationType,omitempty"`
 	Config               *GoogleCloudDatalabelingV1beta1EvaluationConfig             `json:"config,omitempty"`

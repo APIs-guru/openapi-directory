@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostGetOpenIDConnectProviderActionEnum(str, Enum):
     GET_OPEN_ID_CONNECT_PROVIDER = "GetOpenIDConnectProvider"
@@ -10,8 +14,8 @@ class PostGetOpenIDConnectProviderVersionEnum(str, Enum):
 
 @dataclass
 class PostGetOpenIDConnectProviderQueryParams:
-    action: PostGetOpenIDConnectProviderActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostGetOpenIDConnectProviderVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostGetOpenIDConnectProviderActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostGetOpenIDConnectProviderVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostGetOpenIDConnectProviderHeaders:
 
 @dataclass
 class PostGetOpenIDConnectProviderRequest:
-    query_params: PostGetOpenIDConnectProviderQueryParams = field(default=None)
-    headers: PostGetOpenIDConnectProviderHeaders = field(default=None)
+    headers: PostGetOpenIDConnectProviderHeaders = field()
+    query_params: PostGetOpenIDConnectProviderQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostGetOpenIDConnectProviderResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

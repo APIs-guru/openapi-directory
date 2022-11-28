@@ -23,6 +23,8 @@ type ListContactsHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// ListContactsRequestBodyFilter
+// A filter that can be applied to a list of contacts.
 type ListContactsRequestBodyFilter struct {
 	FilteredStatus *shared.SubscriptionStatusEnum `json:"FilteredStatus,omitempty"`
 	TopicFilter    *shared.TopicFilter            `json:"TopicFilter,omitempty"`

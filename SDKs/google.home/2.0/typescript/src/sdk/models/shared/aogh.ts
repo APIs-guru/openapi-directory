@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class Aogh extends SpeakeasyBase {
-  @Metadata({ data: "json, name=aogh_api_version" })
+  @SpeakeasyMetadata({ data: "json, name=aogh_api_version" })
   aoghApiVersion: string;
 }

@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { MultiClusterRoutingUseAny } from "./multiclusterroutinguseany";
 import { SingleClusterRouting } from "./singleclusterrouting";
+
 
 
 // AppProfile
@@ -8,18 +9,18 @@ import { SingleClusterRouting } from "./singleclusterrouting";
  * A configuration object describing how Cloud Bigtable should treat traffic from a particular end user application.
 **/
 export class AppProfile extends SpeakeasyBase {
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=etag" })
+  @SpeakeasyMetadata({ data: "json, name=etag" })
   etag?: string;
 
-  @Metadata({ data: "json, name=multiClusterRoutingUseAny" })
+  @SpeakeasyMetadata({ data: "json, name=multiClusterRoutingUseAny" })
   multiClusterRoutingUseAny?: MultiClusterRoutingUseAny;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=singleClusterRouting" })
+  @SpeakeasyMetadata({ data: "json, name=singleClusterRouting" })
   singleClusterRouting?: SingleClusterRouting;
 }

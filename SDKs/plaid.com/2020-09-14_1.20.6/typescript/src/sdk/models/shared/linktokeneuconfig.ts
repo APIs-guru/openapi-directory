@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // LinkTokenEuConfig
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Configuration parameters for EU flows
 **/
 export class LinkTokenEuConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=headless" })
+  @SpeakeasyMetadata({ data: "json, name=headless" })
   headless?: boolean;
 }

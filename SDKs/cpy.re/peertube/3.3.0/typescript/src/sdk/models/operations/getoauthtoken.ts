@@ -1,37 +1,38 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 
-
-export class GetOAuthTokenRequest extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/x-www-form-urlencoded" })
-  request?: any;
-}
 
 
 export class GetOAuthToken200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=access_token" })
+  @SpeakeasyMetadata({ data: "json, name=access_token" })
   accessToken?: string;
 
-  @Metadata({ data: "json, name=expires_in" })
+  @SpeakeasyMetadata({ data: "json, name=expires_in" })
   expiresIn?: number;
 
-  @Metadata({ data: "json, name=refresh_token" })
+  @SpeakeasyMetadata({ data: "json, name=refresh_token" })
   refreshToken?: string;
 
-  @Metadata({ data: "json, name=refresh_token_expires_in" })
+  @SpeakeasyMetadata({ data: "json, name=refresh_token_expires_in" })
   refreshTokenExpiresIn?: number;
 
-  @Metadata({ data: "json, name=token_type" })
+  @SpeakeasyMetadata({ data: "json, name=token_type" })
   tokenType?: string;
 }
 
 
+export class GetOAuthTokenRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "request, media_type=application/x-www-form-urlencoded" })
+  request?: any;
+}
+
+
 export class GetOAuthTokenResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getOAuthToken200ApplicationJsonObject?: GetOAuthToken200ApplicationJson;
 }

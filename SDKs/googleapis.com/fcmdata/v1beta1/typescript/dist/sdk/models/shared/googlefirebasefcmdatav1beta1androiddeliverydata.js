@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleFirebaseFcmDataV1beta1Data } from "./googlefirebasefcmdatav1beta1data";
 import { GoogleTypeDate } from "./googletypedate";
 // GoogleFirebaseFcmDataV1beta1AndroidDeliveryData
@@ -35,19 +35,19 @@ var GoogleFirebaseFcmDataV1beta1AndroidDeliveryData = /** @class */ (function (_
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=analyticsLabel" }),
+        SpeakeasyMetadata({ data: "json, name=analyticsLabel" }),
         __metadata("design:type", String)
     ], GoogleFirebaseFcmDataV1beta1AndroidDeliveryData.prototype, "analyticsLabel", void 0);
     __decorate([
-        Metadata({ data: "json, name=appId" }),
+        SpeakeasyMetadata({ data: "json, name=appId" }),
         __metadata("design:type", String)
     ], GoogleFirebaseFcmDataV1beta1AndroidDeliveryData.prototype, "appId", void 0);
     __decorate([
-        Metadata({ data: "json, name=data" }),
+        SpeakeasyMetadata({ data: "json, name=data" }),
         __metadata("design:type", GoogleFirebaseFcmDataV1beta1Data)
     ], GoogleFirebaseFcmDataV1beta1AndroidDeliveryData.prototype, "data", void 0);
     __decorate([
-        Metadata({ data: "json, name=date" }),
+        SpeakeasyMetadata({ data: "json, name=date" }),
         __metadata("design:type", GoogleTypeDate)
     ], GoogleFirebaseFcmDataV1beta1AndroidDeliveryData.prototype, "date", void 0);
     return GoogleFirebaseFcmDataV1beta1AndroidDeliveryData;

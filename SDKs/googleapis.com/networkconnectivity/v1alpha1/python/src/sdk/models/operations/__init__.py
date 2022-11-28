@@ -1,5 +1,7 @@
 from .networkconnectivity_projects_locations_global_hubs_create import *
 from .networkconnectivity_projects_locations_global_hubs_list import *
+from .networkconnectivity_projects_locations_internalranges_create import *
+from .networkconnectivity_projects_locations_internalranges_list import *
 from .networkconnectivity_projects_locations_list import *
 from .networkconnectivity_projects_locations_operations_cancel import *
 from .networkconnectivity_projects_locations_operations_list import *

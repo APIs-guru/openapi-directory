@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// UserSearchResultItem
+// User Search Result Item
 type UserSearchResultItem struct {
 	AvatarURL         string                    `json:"avatar_url"`
 	Bio               *string                   `json:"bio,omitempty"`

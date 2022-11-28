@@ -1,28 +1,29 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class NewsFeedCardsListQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=include_archived" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=include_archived" })
   includeArchived?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=page" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page" })
   page?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=sort_direction" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sort_direction" })
   sortDirection?: string;
 }
 
 
 export class NewsFeedCardsListRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: NewsFeedCardsListQueryParams;
 }
 
 
 export class NewsFeedCardsListResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

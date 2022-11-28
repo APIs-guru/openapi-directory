@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class GetPlaylistsIDPathParams:
-    id: int = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: int = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -16,15 +16,15 @@ class GetPlaylistsIDQueryParams:
 
 @dataclass
 class GetPlaylistsIDRequest:
-    path_params: GetPlaylistsIDPathParams = field(default=None)
-    query_params: GetPlaylistsIDQueryParams = field(default=None)
+    path_params: GetPlaylistsIDPathParams = field()
+    query_params: GetPlaylistsIDQueryParams = field()
     
 
 @dataclass
 class GetPlaylistsIDResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     error: Optional[shared.Error] = field(default=None)
     playlist: Optional[shared.Playlist] = field(default=None)
-    status_code: int = field(default=None)
     

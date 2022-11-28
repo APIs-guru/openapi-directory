@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BehaviorOnMxFailureEnum } from "./behavioronmxfailureenum";
 import { MailFromDomainStatusEnum } from "./mailfromdomainstatusenum";
+
 
 
 // MailFromAttributes
@@ -8,12 +9,12 @@ import { MailFromDomainStatusEnum } from "./mailfromdomainstatusenum";
  * A list of attributes that are associated with a MAIL FROM domain.
 **/
 export class MailFromAttributes extends SpeakeasyBase {
-  @Metadata({ data: "json, name=BehaviorOnMxFailure" })
+  @SpeakeasyMetadata({ data: "json, name=BehaviorOnMxFailure" })
   behaviorOnMxFailure: BehaviorOnMxFailureEnum;
 
-  @Metadata({ data: "json, name=MailFromDomain" })
+  @SpeakeasyMetadata({ data: "json, name=MailFromDomain" })
   mailFromDomain: string;
 
-  @Metadata({ data: "json, name=MailFromDomainStatus" })
+  @SpeakeasyMetadata({ data: "json, name=MailFromDomainStatus" })
   mailFromDomainStatus: MailFromDomainStatusEnum;
 }

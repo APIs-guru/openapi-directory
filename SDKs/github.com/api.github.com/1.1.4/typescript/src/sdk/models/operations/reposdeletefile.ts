@@ -1,15 +1,16 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class ReposDeleteFilePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=owner" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=owner" })
   owner: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=path" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=path" })
   path: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=repo" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=repo" })
   repo: string;
 }
 
@@ -19,10 +20,10 @@ export class ReposDeleteFilePathParams extends SpeakeasyBase {
  * object containing information about the author.
 **/
 export class ReposDeleteFileRequestBodyAuthor extends SpeakeasyBase {
-  @Metadata({ data: "json, name=email" })
+  @SpeakeasyMetadata({ data: "json, name=email" })
   email?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 }
 
@@ -32,69 +33,69 @@ export class ReposDeleteFileRequestBodyAuthor extends SpeakeasyBase {
  * object containing information about the committer.
 **/
 export class ReposDeleteFileRequestBodyCommitter extends SpeakeasyBase {
-  @Metadata({ data: "json, name=email" })
+  @SpeakeasyMetadata({ data: "json, name=email" })
   email?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 }
 
 
 export class ReposDeleteFileRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=author" })
+  @SpeakeasyMetadata({ data: "json, name=author" })
   author?: ReposDeleteFileRequestBodyAuthor;
 
-  @Metadata({ data: "json, name=branch" })
+  @SpeakeasyMetadata({ data: "json, name=branch" })
   branch?: string;
 
-  @Metadata({ data: "json, name=committer" })
+  @SpeakeasyMetadata({ data: "json, name=committer" })
   committer?: ReposDeleteFileRequestBodyCommitter;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message: string;
 
-  @Metadata({ data: "json, name=sha" })
+  @SpeakeasyMetadata({ data: "json, name=sha" })
   sha: string;
 }
 
 
-export class ReposDeleteFileRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: ReposDeleteFilePathParams;
-
-  @Metadata({ data: "request, media_type=application/json" })
-  request?: ReposDeleteFileRequestBody;
-}
-
-
 export class ReposDeleteFile503ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=code" })
+  @SpeakeasyMetadata({ data: "json, name=code" })
   code?: string;
 
-  @Metadata({ data: "json, name=documentation_url" })
+  @SpeakeasyMetadata({ data: "json, name=documentation_url" })
   documentationUrl?: string;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
+export class ReposDeleteFileRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: ReposDeleteFilePathParams;
+
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request?: ReposDeleteFileRequestBody;
+}
+
+
 export class ReposDeleteFileResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   basicError?: shared.BasicError;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   fileCommit?: shared.FileCommit;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   reposDeleteFile503ApplicationJsonObject?: ReposDeleteFile503ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   validationError?: shared.ValidationError;
 }

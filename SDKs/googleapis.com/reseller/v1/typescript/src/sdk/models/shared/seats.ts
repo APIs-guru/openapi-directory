@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Seats
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * JSON template for subscription seats.
 **/
 export class Seats extends SpeakeasyBase {
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=licensedNumberOfSeats" })
+  @SpeakeasyMetadata({ data: "json, name=licensedNumberOfSeats" })
   licensedNumberOfSeats?: number;
 
-  @Metadata({ data: "json, name=maximumNumberOfSeats" })
+  @SpeakeasyMetadata({ data: "json, name=maximumNumberOfSeats" })
   maximumNumberOfSeats?: number;
 
-  @Metadata({ data: "json, name=numberOfSeats" })
+  @SpeakeasyMetadata({ data: "json, name=numberOfSeats" })
   numberOfSeats?: number;
 }

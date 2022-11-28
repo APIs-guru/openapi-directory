@@ -1,11 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import googleclouddatalabelingv1beta1humanannotationconfig
-from . import googleclouddatalabelingv1beta1boundingpolyconfig
-from . import googleclouddatalabelingv1beta1imageclassificationconfig
-from . import googleclouddatalabelingv1beta1polylineconfig
-from . import googleclouddatalabelingv1beta1segmentationconfig
+from sdk import utils
+from . import *
 
 class GoogleCloudDatalabelingV1beta1LabelImageRequestFeatureEnum(str, Enum):
     FEATURE_UNSPECIFIED = "FEATURE_UNSPECIFIED"
@@ -20,10 +18,14 @@ class GoogleCloudDatalabelingV1beta1LabelImageRequestFeatureEnum(str, Enum):
 @dataclass_json
 @dataclass
 class GoogleCloudDatalabelingV1beta1LabelImageRequest:
-    basic_config: Optional[googleclouddatalabelingv1beta1humanannotationconfig.GoogleCloudDatalabelingV1beta1HumanAnnotationConfig] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'basicConfig' }})
-    bounding_poly_config: Optional[googleclouddatalabelingv1beta1boundingpolyconfig.GoogleCloudDatalabelingV1beta1BoundingPolyConfig] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'boundingPolyConfig' }})
-    feature: Optional[GoogleCloudDatalabelingV1beta1LabelImageRequestFeatureEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'feature' }})
-    image_classification_config: Optional[googleclouddatalabelingv1beta1imageclassificationconfig.GoogleCloudDatalabelingV1beta1ImageClassificationConfig] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'imageClassificationConfig' }})
-    polyline_config: Optional[googleclouddatalabelingv1beta1polylineconfig.GoogleCloudDatalabelingV1beta1PolylineConfig] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'polylineConfig' }})
-    segmentation_config: Optional[googleclouddatalabelingv1beta1segmentationconfig.GoogleCloudDatalabelingV1beta1SegmentationConfig] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'segmentationConfig' }})
+    r"""GoogleCloudDatalabelingV1beta1LabelImageRequest
+    Request message for starting an image labeling task.
+    """
+    
+    basic_config: Optional[GoogleCloudDatalabelingV1beta1HumanAnnotationConfig] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('basicConfig') }})
+    bounding_poly_config: Optional[GoogleCloudDatalabelingV1beta1BoundingPolyConfig] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('boundingPolyConfig') }})
+    feature: Optional[GoogleCloudDatalabelingV1beta1LabelImageRequestFeatureEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('feature') }})
+    image_classification_config: Optional[GoogleCloudDatalabelingV1beta1ImageClassificationConfig] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('imageClassificationConfig') }})
+    polyline_config: Optional[GoogleCloudDatalabelingV1beta1PolylineConfig] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('polylineConfig') }})
+    segmentation_config: Optional[GoogleCloudDatalabelingV1beta1SegmentationConfig] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('segmentationConfig') }})
     

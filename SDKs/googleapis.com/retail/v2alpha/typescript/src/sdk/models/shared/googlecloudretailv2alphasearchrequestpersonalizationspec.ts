@@ -1,9 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum GoogleCloudRetailV2alphaSearchRequestPersonalizationSpecModeEnum {
-    ModeUnspecified = "MODE_UNSPECIFIED"
-,    Auto = "AUTO"
-,    Disabled = "DISABLED"
+    ModeUnspecified = "MODE_UNSPECIFIED",
+    Auto = "AUTO",
+    Disabled = "DISABLED"
 }
 
 
@@ -12,6 +13,6 @@ export enum GoogleCloudRetailV2alphaSearchRequestPersonalizationSpecModeEnum {
  * The specification for personalization.
 **/
 export class GoogleCloudRetailV2alphaSearchRequestPersonalizationSpec extends SpeakeasyBase {
-  @Metadata({ data: "json, name=mode" })
+  @SpeakeasyMetadata({ data: "json, name=mode" })
   mode?: GoogleCloudRetailV2alphaSearchRequestPersonalizationSpecModeEnum;
 }

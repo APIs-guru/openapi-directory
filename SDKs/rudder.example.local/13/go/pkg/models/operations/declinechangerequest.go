@@ -8,10 +8,6 @@ type DeclineChangeRequestPathParams struct {
 	ChangeRequestID int64 `pathParam:"style=simple,explode=false,name=changeRequestId"`
 }
 
-type DeclineChangeRequestRequest struct {
-	PathParams DeclineChangeRequestPathParams
-}
-
 type DeclineChangeRequest200ApplicationJSONActionEnum string
 
 const (
@@ -33,6 +29,10 @@ type DeclineChangeRequest200ApplicationJSON struct {
 	Action DeclineChangeRequest200ApplicationJSONActionEnum `json:"action"`
 	Data   DeclineChangeRequest200ApplicationJSONData       `json:"data"`
 	Result DeclineChangeRequest200ApplicationJSONResultEnum `json:"result"`
+}
+
+type DeclineChangeRequestRequest struct {
+	PathParams DeclineChangeRequestPathParams
 }
 
 type DeclineChangeRequestResponse struct {

@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetUpdateApplicationActionEnum(str, Enum):
     UPDATE_APPLICATION = "UpdateApplication"
@@ -10,10 +14,10 @@ class GetUpdateApplicationVersionEnum(str, Enum):
 
 @dataclass
 class GetUpdateApplicationQueryParams:
-    action: GetUpdateApplicationActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    application_name: str = field(default=None, metadata={'query_param': { 'field_name': 'ApplicationName', 'style': 'form', 'explode': True }})
+    action: GetUpdateApplicationActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    application_name: str = field(metadata={'query_param': { 'field_name': 'ApplicationName', 'style': 'form', 'explode': True }})
+    version: GetUpdateApplicationVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     description: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'Description', 'style': 'form', 'explode': True }})
-    version: GetUpdateApplicationVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -29,13 +33,13 @@ class GetUpdateApplicationHeaders:
 
 @dataclass
 class GetUpdateApplicationRequest:
-    query_params: GetUpdateApplicationQueryParams = field(default=None)
-    headers: GetUpdateApplicationHeaders = field(default=None)
+    headers: GetUpdateApplicationHeaders = field()
+    query_params: GetUpdateApplicationQueryParams = field()
     
 
 @dataclass
 class GetUpdateApplicationResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

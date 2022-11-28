@@ -1,9 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ConnectionStateEnum } from "./connectionstateenum";
 import { HasLogicalRedundancyEnum } from "./haslogicalredundancyenum";
 import { MacSecKey } from "./macseckey";
 import { Tag } from "./tag";
+
 
 
 // Connection
@@ -11,69 +11,69 @@ import { Tag } from "./tag";
  * Information about an Direct Connect connection.
 **/
 export class Connection extends SpeakeasyBase {
-  @Metadata({ data: "json, name=awsDevice" })
+  @SpeakeasyMetadata({ data: "json, name=awsDevice" })
   awsDevice?: string;
 
-  @Metadata({ data: "json, name=awsDeviceV2" })
+  @SpeakeasyMetadata({ data: "json, name=awsDeviceV2" })
   awsDeviceV2?: string;
 
-  @Metadata({ data: "json, name=awsLogicalDeviceId" })
+  @SpeakeasyMetadata({ data: "json, name=awsLogicalDeviceId" })
   awsLogicalDeviceId?: string;
 
-  @Metadata({ data: "json, name=bandwidth" })
+  @SpeakeasyMetadata({ data: "json, name=bandwidth" })
   bandwidth?: string;
 
-  @Metadata({ data: "json, name=connectionId" })
+  @SpeakeasyMetadata({ data: "json, name=connectionId" })
   connectionId?: string;
 
-  @Metadata({ data: "json, name=connectionName" })
+  @SpeakeasyMetadata({ data: "json, name=connectionName" })
   connectionName?: string;
 
-  @Metadata({ data: "json, name=connectionState" })
+  @SpeakeasyMetadata({ data: "json, name=connectionState" })
   connectionState?: ConnectionStateEnum;
 
-  @Metadata({ data: "json, name=encryptionMode" })
+  @SpeakeasyMetadata({ data: "json, name=encryptionMode" })
   encryptionMode?: string;
 
-  @Metadata({ data: "json, name=hasLogicalRedundancy" })
+  @SpeakeasyMetadata({ data: "json, name=hasLogicalRedundancy" })
   hasLogicalRedundancy?: HasLogicalRedundancyEnum;
 
-  @Metadata({ data: "json, name=jumboFrameCapable" })
+  @SpeakeasyMetadata({ data: "json, name=jumboFrameCapable" })
   jumboFrameCapable?: boolean;
 
-  @Metadata({ data: "json, name=lagId" })
+  @SpeakeasyMetadata({ data: "json, name=lagId" })
   lagId?: string;
 
-  @Metadata({ data: "json, name=loaIssueTime" })
+  @SpeakeasyMetadata({ data: "json, name=loaIssueTime" })
   loaIssueTime?: Date;
 
-  @Metadata({ data: "json, name=location" })
+  @SpeakeasyMetadata({ data: "json, name=location" })
   location?: string;
 
-  @Metadata({ data: "json, name=macSecCapable" })
+  @SpeakeasyMetadata({ data: "json, name=macSecCapable" })
   macSecCapable?: boolean;
 
-  @Metadata({ data: "json, name=macSecKeys", elemType: shared.MacSecKey })
+  @SpeakeasyMetadata({ data: "json, name=macSecKeys", elemType: MacSecKey })
   macSecKeys?: MacSecKey[];
 
-  @Metadata({ data: "json, name=ownerAccount" })
+  @SpeakeasyMetadata({ data: "json, name=ownerAccount" })
   ownerAccount?: string;
 
-  @Metadata({ data: "json, name=partnerName" })
+  @SpeakeasyMetadata({ data: "json, name=partnerName" })
   partnerName?: string;
 
-  @Metadata({ data: "json, name=portEncryptionStatus" })
+  @SpeakeasyMetadata({ data: "json, name=portEncryptionStatus" })
   portEncryptionStatus?: string;
 
-  @Metadata({ data: "json, name=providerName" })
+  @SpeakeasyMetadata({ data: "json, name=providerName" })
   providerName?: string;
 
-  @Metadata({ data: "json, name=region" })
+  @SpeakeasyMetadata({ data: "json, name=region" })
   region?: string;
 
-  @Metadata({ data: "json, name=tags", elemType: shared.Tag })
+  @SpeakeasyMetadata({ data: "json, name=tags", elemType: Tag })
   tags?: Tag[];
 
-  @Metadata({ data: "json, name=vlan" })
+  @SpeakeasyMetadata({ data: "json, name=vlan" })
   vlan?: number;
 }

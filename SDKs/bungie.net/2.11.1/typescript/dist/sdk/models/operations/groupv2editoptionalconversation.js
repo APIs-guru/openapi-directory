@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GroupV2EditOptionalConversationPathParams = /** @class */ (function (_super) {
     __extends(GroupV2EditOptionalConversationPathParams, _super);
@@ -30,11 +30,11 @@ var GroupV2EditOptionalConversationPathParams = /** @class */ (function (_super)
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=conversationId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=conversationId" }),
         __metadata("design:type", Number)
     ], GroupV2EditOptionalConversationPathParams.prototype, "conversationId", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=groupId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=groupId" }),
         __metadata("design:type", Number)
     ], GroupV2EditOptionalConversationPathParams.prototype, "groupId", void 0);
     return GroupV2EditOptionalConversationPathParams;
@@ -46,7 +46,7 @@ var GroupV2EditOptionalConversationSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2)
     ], GroupV2EditOptionalConversationSecurity.prototype, "oauth2", void 0);
     return GroupV2EditOptionalConversationSecurity;
@@ -58,11 +58,11 @@ var GroupV2EditOptionalConversationRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GroupV2EditOptionalConversationPathParams)
     ], GroupV2EditOptionalConversationRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GroupV2EditOptionalConversationSecurity)
     ], GroupV2EditOptionalConversationRequest.prototype, "security", void 0);
     return GroupV2EditOptionalConversationRequest;
@@ -74,15 +74,15 @@ var GroupV2EditOptionalConversationResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], GroupV2EditOptionalConversationResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GroupV2EditOptionalConversationResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GroupV2EditOptionalConversationResponse.prototype, "statusCode", void 0);
     return GroupV2EditOptionalConversationResponse;

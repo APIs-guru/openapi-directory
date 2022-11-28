@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetDeleteVpcActionEnum(str, Enum):
     DELETE_VPC = "DeleteVpc"
@@ -10,10 +14,10 @@ class GetDeleteVpcVersionEnum(str, Enum):
 
 @dataclass
 class GetDeleteVpcQueryParams:
-    action: GetDeleteVpcActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetDeleteVpcActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: GetDeleteVpcVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    vpc_id: str = field(metadata={'query_param': { 'field_name': 'VpcId', 'style': 'form', 'explode': True }})
     dry_run: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'DryRun', 'style': 'form', 'explode': True }})
-    version: GetDeleteVpcVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
-    vpc_id: str = field(default=None, metadata={'query_param': { 'field_name': 'VpcId', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -29,12 +33,12 @@ class GetDeleteVpcHeaders:
 
 @dataclass
 class GetDeleteVpcRequest:
-    query_params: GetDeleteVpcQueryParams = field(default=None)
-    headers: GetDeleteVpcHeaders = field(default=None)
+    headers: GetDeleteVpcHeaders = field()
+    query_params: GetDeleteVpcQueryParams = field()
     
 
 @dataclass
 class GetDeleteVpcResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

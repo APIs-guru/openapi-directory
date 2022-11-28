@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ImageConfiguration } from "./imageconfiguration";
 import { ImageRepositoryTypeEnum } from "./imagerepositorytypeenum";
+
 
 
 // ImageRepository
@@ -8,12 +9,12 @@ import { ImageRepositoryTypeEnum } from "./imagerepositorytypeenum";
  * Describes a source image repository.
 **/
 export class ImageRepository extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ImageConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=ImageConfiguration" })
   imageConfiguration?: ImageConfiguration;
 
-  @Metadata({ data: "json, name=ImageIdentifier" })
+  @SpeakeasyMetadata({ data: "json, name=ImageIdentifier" })
   imageIdentifier: string;
 
-  @Metadata({ data: "json, name=ImageRepositoryType" })
+  @SpeakeasyMetadata({ data: "json, name=ImageRepositoryType" })
   imageRepositoryType: ImageRepositoryTypeEnum;
 }

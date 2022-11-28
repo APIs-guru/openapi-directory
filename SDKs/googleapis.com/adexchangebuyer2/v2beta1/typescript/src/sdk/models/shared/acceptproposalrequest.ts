@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AcceptProposalRequest
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Request to accept a proposal.
 **/
 export class AcceptProposalRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=proposalRevision" })
+  @SpeakeasyMetadata({ data: "json, name=proposalRevision" })
   proposalRevision?: string;
 }

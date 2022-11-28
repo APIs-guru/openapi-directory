@@ -9,7 +9,7 @@ import (
 	"openapi/pkg/models/operations"
 )
 
-var Servers = []string{
+var ServerList = []string{
 	"https://nrel.gov/api/transportation-incentives-laws",
 }
 
@@ -18,9 +18,13 @@ type HTTPClient interface {
 }
 
 type SDK struct {
-	defaultClient  HTTPClient
-	securityClient HTTPClient
-	serverURL      string
+	_defaultClient  HTTPClient
+	_securityClient HTTPClient
+
+	_serverURL  string
+	_language   string
+	_sdkVersion string
+	_genVersion string
 }
 
 type SDKOption func(*SDK)
@@ -31,27 +35,45 @@ func WithServerURL(serverURL string, params map[string]string) SDKOption {
 			serverURL = utils.ReplaceParameters(serverURL, params)
 		}
 
-		sdk.serverURL = serverURL
+		sdk._serverURL = serverURL
+	}
+}
+
+func WithClient(client HTTPClient) SDKOption {
+	return func(sdk *SDK) {
+		sdk._defaultClient = client
 	}
 }
 
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
-		defaultClient:  http.DefaultClient,
-		securityClient: http.DefaultClient,
+		_language:   "go",
+		_sdkVersion: "",
+		_genVersion: "internal",
 	}
 	for _, opt := range opts {
 		opt(sdk)
 	}
-	if sdk.serverURL == "" {
-		sdk.serverURL = Servers[0]
+
+	if sdk._defaultClient == nil {
+		sdk._defaultClient = http.DefaultClient
+	}
+	if sdk._securityClient == nil {
+
+		sdk._securityClient = sdk._defaultClient
+
+	}
+
+	if sdk._serverURL == "" {
+		sdk._serverURL = ServerList[0]
 	}
 
 	return sdk
 }
 
+// GetV1CategoryListOutputFormat - Return the law categories for a given category type.
 func (s *SDK) GetV1CategoryListOutputFormat(ctx context.Context, request operations.GetV1CategoryListOutputFormatRequest) (*operations.GetV1CategoryListOutputFormatResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v1/category-list.{output_format}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -61,7 +83,7 @@ func (s *SDK) GetV1CategoryListOutputFormat(ctx context.Context, request operati
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -91,8 +113,9 @@ func (s *SDK) GetV1CategoryListOutputFormat(ctx context.Context, request operati
 	return res, nil
 }
 
+// GetV1IDOutputFormat - Fetch the details of a specific law given the law's ID.
 func (s *SDK) GetV1IDOutputFormat(ctx context.Context, request operations.GetV1IDOutputFormatRequest) (*operations.GetV1IDOutputFormatResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v1/{id}.{output_format}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -102,7 +125,7 @@ func (s *SDK) GetV1IDOutputFormat(ctx context.Context, request operations.GetV1I
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -132,8 +155,9 @@ func (s *SDK) GetV1IDOutputFormat(ctx context.Context, request operations.GetV1I
 	return res, nil
 }
 
+// GetV1PocsOutputFormat - Get the points of contact for a given jurisdiction.
 func (s *SDK) GetV1PocsOutputFormat(ctx context.Context, request operations.GetV1PocsOutputFormatRequest) (*operations.GetV1PocsOutputFormatResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v1/pocs.{output_format}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -143,7 +167,7 @@ func (s *SDK) GetV1PocsOutputFormat(ctx context.Context, request operations.GetV
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -173,8 +197,9 @@ func (s *SDK) GetV1PocsOutputFormat(ctx context.Context, request operations.GetV
 	return res, nil
 }
 
+// TransportationIncentivesLaws - Return a full list of laws and incentives that match your query.
 func (s *SDK) TransportationIncentivesLaws(ctx context.Context, request operations.TransportationIncentivesLawsRequest) (*operations.TransportationIncentivesLawsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v1.{output_format}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -184,7 +209,7 @@ func (s *SDK) TransportationIncentivesLaws(ctx context.Context, request operatio
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DirectionEnum } from "./directionenum";
 import { From } from "./from";
 import { To } from "./to";
@@ -32,7 +32,7 @@ var GetCallResponseLinksSelf = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=href" }),
+        SpeakeasyMetadata({ data: "json, name=href" }),
         __metadata("design:type", String)
     ], GetCallResponseLinksSelf.prototype, "href", void 0);
     return GetCallResponseLinksSelf;
@@ -44,7 +44,7 @@ var GetCallResponseLinks = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=self" }),
+        SpeakeasyMetadata({ data: "json, name=self" }),
         __metadata("design:type", GetCallResponseLinksSelf)
     ], GetCallResponseLinks.prototype, "self", void 0);
     return GetCallResponseLinks;
@@ -56,55 +56,55 @@ var GetCallResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=_links" }),
+        SpeakeasyMetadata({ data: "json, name=_links" }),
         __metadata("design:type", GetCallResponseLinks)
     ], GetCallResponse.prototype, "links", void 0);
     __decorate([
-        Metadata({ data: "json, name=conversation_uuid" }),
+        SpeakeasyMetadata({ data: "json, name=conversation_uuid" }),
         __metadata("design:type", String)
     ], GetCallResponse.prototype, "conversationUuid", void 0);
     __decorate([
-        Metadata({ data: "json, name=direction" }),
+        SpeakeasyMetadata({ data: "json, name=direction" }),
         __metadata("design:type", String)
     ], GetCallResponse.prototype, "direction", void 0);
     __decorate([
-        Metadata({ data: "json, name=duration" }),
+        SpeakeasyMetadata({ data: "json, name=duration" }),
         __metadata("design:type", String)
     ], GetCallResponse.prototype, "duration", void 0);
     __decorate([
-        Metadata({ data: "json, name=end_time" }),
+        SpeakeasyMetadata({ data: "json, name=end_time" }),
         __metadata("design:type", String)
     ], GetCallResponse.prototype, "endTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=from" }),
+        SpeakeasyMetadata({ data: "json, name=from" }),
         __metadata("design:type", From)
     ], GetCallResponse.prototype, "from", void 0);
     __decorate([
-        Metadata({ data: "json, name=network" }),
+        SpeakeasyMetadata({ data: "json, name=network" }),
         __metadata("design:type", String)
     ], GetCallResponse.prototype, "network", void 0);
     __decorate([
-        Metadata({ data: "json, name=price" }),
+        SpeakeasyMetadata({ data: "json, name=price" }),
         __metadata("design:type", String)
     ], GetCallResponse.prototype, "price", void 0);
     __decorate([
-        Metadata({ data: "json, name=rate" }),
+        SpeakeasyMetadata({ data: "json, name=rate" }),
         __metadata("design:type", String)
     ], GetCallResponse.prototype, "rate", void 0);
     __decorate([
-        Metadata({ data: "json, name=start_time" }),
+        SpeakeasyMetadata({ data: "json, name=start_time" }),
         __metadata("design:type", String)
     ], GetCallResponse.prototype, "startTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=status" }),
+        SpeakeasyMetadata({ data: "json, name=status" }),
         __metadata("design:type", String)
     ], GetCallResponse.prototype, "status", void 0);
     __decorate([
-        Metadata({ data: "json, name=to" }),
+        SpeakeasyMetadata({ data: "json, name=to" }),
         __metadata("design:type", To)
     ], GetCallResponse.prototype, "to", void 0);
     __decorate([
-        Metadata({ data: "json, name=uuid" }),
+        SpeakeasyMetadata({ data: "json, name=uuid" }),
         __metadata("design:type", String)
     ], GetCallResponse.prototype, "uuid", void 0);
     return GetCallResponse;

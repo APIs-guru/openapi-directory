@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { Rule } from "./rule";
 /**
  * A channel grouping defines a set of rules that can be used to categorize events in a path report.

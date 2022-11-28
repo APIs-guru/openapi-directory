@@ -8,6 +8,8 @@ const (
 	NodePoolAutoscalingLocationPolicyEnumAny                       NodePoolAutoscalingLocationPolicyEnum = "ANY"
 )
 
+// NodePoolAutoscaling
+// NodePoolAutoscaling contains information required by cluster autoscaler to adjust the size of the node pool to the current cluster usage.
 type NodePoolAutoscaling struct {
 	Autoprovisioned   *bool                                  `json:"autoprovisioned,omitempty"`
 	Enabled           *bool                                  `json:"enabled,omitempty"`

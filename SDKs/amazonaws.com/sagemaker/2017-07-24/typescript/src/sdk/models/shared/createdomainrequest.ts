@@ -1,36 +1,36 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AppNetworkAccessTypeEnum } from "./appnetworkaccesstypeenum";
 import { AuthModeEnum } from "./authmodeenum";
 import { UserSettings } from "./usersettings";
 import { Tag } from "./tag";
 
 
+
 export class CreateDomainRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AppNetworkAccessType" })
+  @SpeakeasyMetadata({ data: "json, name=AppNetworkAccessType" })
   appNetworkAccessType?: AppNetworkAccessTypeEnum;
 
-  @Metadata({ data: "json, name=AuthMode" })
+  @SpeakeasyMetadata({ data: "json, name=AuthMode" })
   authMode: AuthModeEnum;
 
-  @Metadata({ data: "json, name=DefaultUserSettings" })
+  @SpeakeasyMetadata({ data: "json, name=DefaultUserSettings" })
   defaultUserSettings: UserSettings;
 
-  @Metadata({ data: "json, name=DomainName" })
+  @SpeakeasyMetadata({ data: "json, name=DomainName" })
   domainName: string;
 
-  @Metadata({ data: "json, name=HomeEfsFileSystemKmsKeyId" })
+  @SpeakeasyMetadata({ data: "json, name=HomeEfsFileSystemKmsKeyId" })
   homeEfsFileSystemKmsKeyId?: string;
 
-  @Metadata({ data: "json, name=KmsKeyId" })
+  @SpeakeasyMetadata({ data: "json, name=KmsKeyId" })
   kmsKeyId?: string;
 
-  @Metadata({ data: "json, name=SubnetIds" })
+  @SpeakeasyMetadata({ data: "json, name=SubnetIds" })
   subnetIds: string[];
 
-  @Metadata({ data: "json, name=Tags", elemType: shared.Tag })
+  @SpeakeasyMetadata({ data: "json, name=Tags", elemType: Tag })
   tags?: Tag[];
 
-  @Metadata({ data: "json, name=VpcId" })
+  @SpeakeasyMetadata({ data: "json, name=VpcId" })
   vpcId: string;
 }

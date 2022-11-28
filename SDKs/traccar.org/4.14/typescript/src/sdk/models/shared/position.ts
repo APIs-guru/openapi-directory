@@ -1,55 +1,56 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class Position extends SpeakeasyBase {
-  @Metadata({ data: "json, name=accuracy" })
+  @SpeakeasyMetadata({ data: "json, name=accuracy" })
   accuracy?: number;
 
-  @Metadata({ data: "json, name=address" })
+  @SpeakeasyMetadata({ data: "json, name=address" })
   address?: string;
 
-  @Metadata({ data: "json, name=altitude" })
+  @SpeakeasyMetadata({ data: "json, name=altitude" })
   altitude?: number;
 
-  @Metadata({ data: "json, name=attributes" })
+  @SpeakeasyMetadata({ data: "json, name=attributes" })
   attributes?: Map<string, any>;
 
-  @Metadata({ data: "json, name=course" })
+  @SpeakeasyMetadata({ data: "json, name=course" })
   course?: number;
 
-  @Metadata({ data: "json, name=deviceId" })
+  @SpeakeasyMetadata({ data: "json, name=deviceId" })
   deviceId?: number;
 
-  @Metadata({ data: "json, name=deviceTime" })
+  @SpeakeasyMetadata({ data: "json, name=deviceTime" })
   deviceTime?: Date;
 
-  @Metadata({ data: "json, name=fixTime" })
+  @SpeakeasyMetadata({ data: "json, name=fixTime" })
   fixTime?: Date;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: number;
 
-  @Metadata({ data: "json, name=latitude" })
+  @SpeakeasyMetadata({ data: "json, name=latitude" })
   latitude?: number;
 
-  @Metadata({ data: "json, name=longitude" })
+  @SpeakeasyMetadata({ data: "json, name=longitude" })
   longitude?: number;
 
-  @Metadata({ data: "json, name=network" })
+  @SpeakeasyMetadata({ data: "json, name=network" })
   network?: Map<string, any>;
 
-  @Metadata({ data: "json, name=outdated" })
+  @SpeakeasyMetadata({ data: "json, name=outdated" })
   outdated?: boolean;
 
-  @Metadata({ data: "json, name=protocol" })
+  @SpeakeasyMetadata({ data: "json, name=protocol" })
   protocol?: string;
 
-  @Metadata({ data: "json, name=serverTime" })
+  @SpeakeasyMetadata({ data: "json, name=serverTime" })
   serverTime?: Date;
 
-  @Metadata({ data: "json, name=speed" })
+  @SpeakeasyMetadata({ data: "json, name=speed" })
   speed?: number;
 
-  @Metadata({ data: "json, name=valid" })
+  @SpeakeasyMetadata({ data: "json, name=valid" })
   valid?: boolean;
 }

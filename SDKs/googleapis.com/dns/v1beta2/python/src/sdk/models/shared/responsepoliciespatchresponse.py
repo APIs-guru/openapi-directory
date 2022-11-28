@@ -1,13 +1,13 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import responseheader
-from . import responsepolicy
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ResponsePoliciesPatchResponse:
-    header: Optional[responseheader.ResponseHeader] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'header' }})
-    response_policy: Optional[responsepolicy.ResponsePolicy] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'responsePolicy' }})
+    header: Optional[ResponseHeader] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('header') }})
+    response_policy: Optional[ResponsePolicy] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('responsePolicy') }})
     

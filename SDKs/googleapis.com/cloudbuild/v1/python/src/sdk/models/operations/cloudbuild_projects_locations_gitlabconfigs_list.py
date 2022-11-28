@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class CloudbuildProjectsLocationsGitLabConfigsListPathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -27,20 +28,20 @@ class CloudbuildProjectsLocationsGitLabConfigsListQueryParams:
 
 @dataclass
 class CloudbuildProjectsLocationsGitLabConfigsListSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class CloudbuildProjectsLocationsGitLabConfigsListRequest:
-    path_params: CloudbuildProjectsLocationsGitLabConfigsListPathParams = field(default=None)
-    query_params: CloudbuildProjectsLocationsGitLabConfigsListQueryParams = field(default=None)
-    security: CloudbuildProjectsLocationsGitLabConfigsListSecurity = field(default=None)
+    path_params: CloudbuildProjectsLocationsGitLabConfigsListPathParams = field()
+    query_params: CloudbuildProjectsLocationsGitLabConfigsListQueryParams = field()
+    security: CloudbuildProjectsLocationsGitLabConfigsListSecurity = field()
     
 
 @dataclass
 class CloudbuildProjectsLocationsGitLabConfigsListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     list_git_lab_configs_response: Optional[shared.ListGitLabConfigsResponse] = field(default=None)
-    status_code: int = field(default=None)
     

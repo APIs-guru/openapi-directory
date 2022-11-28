@@ -26,14 +26,14 @@ type ChecksListForRefQueryParams struct {
 	Status    *shared.StatusEnum          `queryParam:"style=form,explode=true,name=status"`
 }
 
-type ChecksListForRefRequest struct {
-	PathParams  ChecksListForRefPathParams
-	QueryParams ChecksListForRefQueryParams
-}
-
 type ChecksListForRef200ApplicationJSON struct {
 	CheckRuns  []shared.CheckRun `json:"check_runs"`
 	TotalCount int64             `json:"total_count"`
+}
+
+type ChecksListForRefRequest struct {
+	PathParams  ChecksListForRefPathParams
+	QueryParams ChecksListForRefQueryParams
 }
 
 type ChecksListForRefResponse struct {

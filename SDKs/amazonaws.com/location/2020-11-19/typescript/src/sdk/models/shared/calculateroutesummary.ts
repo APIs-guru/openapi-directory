@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DistanceUnitEnum } from "./distanceunitenum";
+
 
 
 // CalculateRouteSummary
@@ -7,18 +8,18 @@ import { DistanceUnitEnum } from "./distanceunitenum";
  * A summary of the calculated route.
 **/
 export class CalculateRouteSummary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DataSource" })
+  @SpeakeasyMetadata({ data: "json, name=DataSource" })
   dataSource: string;
 
-  @Metadata({ data: "json, name=Distance" })
+  @SpeakeasyMetadata({ data: "json, name=Distance" })
   distance: number;
 
-  @Metadata({ data: "json, name=DistanceUnit" })
+  @SpeakeasyMetadata({ data: "json, name=DistanceUnit" })
   distanceUnit: DistanceUnitEnum;
 
-  @Metadata({ data: "json, name=DurationSeconds" })
+  @SpeakeasyMetadata({ data: "json, name=DurationSeconds" })
   durationSeconds: number;
 
-  @Metadata({ data: "json, name=RouteBBox" })
+  @SpeakeasyMetadata({ data: "json, name=RouteBBox" })
   routeBBox: number[];
 }

@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { StreamingImage } from "./streamingimage";
 
 
+
 export class CreateStreamingImageResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=streamingImage" })
+  @SpeakeasyMetadata({ data: "json, name=streamingImage" })
   streamingImage?: StreamingImage;
 }

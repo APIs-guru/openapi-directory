@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import List
 from dataclasses_json import dataclass_json
-from . import stage
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class Plan:
-    stages: List[stage.Stage] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Stages' }})
+    r"""Plan
+    The stages that an escalation plan or engagement plan engages contacts and contact methods in.
+    """
+    
+    stages: List[Stage] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Stages') }})
     

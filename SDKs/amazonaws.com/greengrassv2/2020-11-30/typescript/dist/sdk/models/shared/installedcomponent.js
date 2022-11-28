@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { InstalledComponentLifecycleStateEnum } from "./installedcomponentlifecyclestateenum";
 // InstalledComponent
 /**
@@ -34,23 +34,23 @@ var InstalledComponent = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=componentName" }),
+        SpeakeasyMetadata({ data: "json, name=componentName" }),
         __metadata("design:type", String)
     ], InstalledComponent.prototype, "componentName", void 0);
     __decorate([
-        Metadata({ data: "json, name=componentVersion" }),
+        SpeakeasyMetadata({ data: "json, name=componentVersion" }),
         __metadata("design:type", String)
     ], InstalledComponent.prototype, "componentVersion", void 0);
     __decorate([
-        Metadata({ data: "json, name=isRoot" }),
+        SpeakeasyMetadata({ data: "json, name=isRoot" }),
         __metadata("design:type", Boolean)
     ], InstalledComponent.prototype, "isRoot", void 0);
     __decorate([
-        Metadata({ data: "json, name=lifecycleState" }),
+        SpeakeasyMetadata({ data: "json, name=lifecycleState" }),
         __metadata("design:type", String)
     ], InstalledComponent.prototype, "lifecycleState", void 0);
     __decorate([
-        Metadata({ data: "json, name=lifecycleStateDetails" }),
+        SpeakeasyMetadata({ data: "json, name=lifecycleStateDetails" }),
         __metadata("design:type", String)
     ], InstalledComponent.prototype, "lifecycleStateDetails", void 0);
     return InstalledComponent;

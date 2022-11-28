@@ -1,0 +1,51 @@
+import { SpeakeasyBase } from "../../../internal/utils";
+import * as shared from "../shared";
+export declare class GetSigningBasketStatusPathParams extends SpeakeasyBase {
+    basketId: string;
+}
+export declare class GetSigningBasketStatusHeaders extends SpeakeasyBase {
+    digest?: string;
+    psuAccept?: string;
+    psuAcceptCharset?: string;
+    psuAcceptEncoding?: string;
+    psuAcceptLanguage?: string;
+    psuCorporateId?: string;
+    psuCorporateIdType?: string;
+    psuDeviceId?: string;
+    psuGeoLocation?: string;
+    psuHttpMethod?: shared.PsuHttpMethodEnum;
+    psuId?: string;
+    psuIdType?: string;
+    psuIpAddress?: string;
+    psuIpPort?: string;
+    psuUserAgent?: string;
+    signature?: string;
+    tppSignatureCertificate?: string;
+    xRequestId: string;
+}
+export declare class GetSigningBasketStatusSecurity extends SpeakeasyBase {
+    bearerAuthOAuth?: shared.SchemeBearerAuthOAuth;
+}
+export declare class GetSigningBasketStatusRequest extends SpeakeasyBase {
+    pathParams: GetSigningBasketStatusPathParams;
+    headers: GetSigningBasketStatusHeaders;
+    security: GetSigningBasketStatusSecurity;
+}
+export declare class GetSigningBasketStatusResponse extends SpeakeasyBase {
+    contentType: string;
+    error400NgSbs?: shared.Error400NgSbs;
+    error400Sbs?: shared.Error400Sbs;
+    error401NgSbs?: shared.Error401NgSbs;
+    error401Sbs?: shared.Error401Sbs;
+    error403NgSbs?: shared.Error403NgSbs;
+    error403Sbs?: shared.Error403Sbs;
+    error404NgSbs?: shared.Error404NgSbs;
+    error404Sbs?: shared.Error404Sbs;
+    error405NgSbs?: shared.Error405NgSbs;
+    error405Sbs?: shared.Error405Sbs;
+    error409NgSbs?: shared.Error409NgSbs;
+    error409Sbs?: shared.Error409Sbs;
+    headers: Map<string, string[]>;
+    statusCode: number;
+    signingBasketStatusResponse200?: shared.SigningBasketStatusResponse200;
+}

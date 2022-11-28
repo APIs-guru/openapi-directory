@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // MountPoint
 /**
  * Details on a Docker volume mount point that's used in a job's container properties. This parameter maps to <code>Volumes</code> in the <a href="https://docs.docker.com/engine/reference/api/docker_remote_api_v1.19/#create-a-container">Create a container</a> section of the Docker Remote API and the <code>--volume</code> option to docker run.
@@ -33,15 +33,15 @@ var MountPoint = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=containerPath" }),
+        SpeakeasyMetadata({ data: "json, name=containerPath" }),
         __metadata("design:type", String)
     ], MountPoint.prototype, "containerPath", void 0);
     __decorate([
-        Metadata({ data: "json, name=readOnly" }),
+        SpeakeasyMetadata({ data: "json, name=readOnly" }),
         __metadata("design:type", Boolean)
     ], MountPoint.prototype, "readOnly", void 0);
     __decorate([
-        Metadata({ data: "json, name=sourceVolume" }),
+        SpeakeasyMetadata({ data: "json, name=sourceVolume" }),
         __metadata("design:type", String)
     ], MountPoint.prototype, "sourceVolume", void 0);
     return MountPoint;

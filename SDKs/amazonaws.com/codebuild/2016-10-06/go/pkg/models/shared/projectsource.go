@@ -1,5 +1,7 @@
 package shared
 
+// ProjectSource
+// Information about the build input source code for the build project.
 type ProjectSource struct {
 	Auth                *SourceAuth          `json:"auth,omitempty"`
 	BuildStatusConfig   *BuildStatusConfig   `json:"buildStatusConfig,omitempty"`

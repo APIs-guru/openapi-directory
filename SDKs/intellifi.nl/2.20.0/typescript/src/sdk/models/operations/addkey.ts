@@ -1,29 +1,30 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class AddKeySecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=cookie" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=cookie" })
   cookieSid: shared.SchemeCookieSid;
 }
 
 
 export class AddKeyRequest extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/json" })
-  request: shared.Key;
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request: shared.KeyInput;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: AddKeySecurity;
 }
 
 
 export class AddKeyResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   responseDefaultResource?: shared.ResponseDefaultResource;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var DeleteMarketingV3MarketingEventsEventsExternalEventIdArchivePathParams = /** @class */ (function (_super) {
     __extends(DeleteMarketingV3MarketingEventsEventsExternalEventIdArchivePathParams, _super);
@@ -30,7 +30,7 @@ var DeleteMarketingV3MarketingEventsEventsExternalEventIdArchivePathParams = /**
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=externalEventId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=externalEventId" }),
         __metadata("design:type", String)
     ], DeleteMarketingV3MarketingEventsEventsExternalEventIdArchivePathParams.prototype, "externalEventId", void 0);
     return DeleteMarketingV3MarketingEventsEventsExternalEventIdArchivePathParams;
@@ -42,49 +42,29 @@ var DeleteMarketingV3MarketingEventsEventsExternalEventIdArchiveQueryParams = /*
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=externalAccountId" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=externalAccountId" }),
         __metadata("design:type", String)
     ], DeleteMarketingV3MarketingEventsEventsExternalEventIdArchiveQueryParams.prototype, "externalAccountId", void 0);
     return DeleteMarketingV3MarketingEventsEventsExternalEventIdArchiveQueryParams;
 }(SpeakeasyBase));
 export { DeleteMarketingV3MarketingEventsEventsExternalEventIdArchiveQueryParams };
-var DeleteMarketingV3MarketingEventsEventsExternalEventIdArchiveSecurityOption1 = /** @class */ (function (_super) {
-    __extends(DeleteMarketingV3MarketingEventsEventsExternalEventIdArchiveSecurityOption1, _super);
-    function DeleteMarketingV3MarketingEventsEventsExternalEventIdArchiveSecurityOption1() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=query" }),
-        __metadata("design:type", shared.SchemeHapikey)
-    ], DeleteMarketingV3MarketingEventsEventsExternalEventIdArchiveSecurityOption1.prototype, "hapikey", void 0);
-    return DeleteMarketingV3MarketingEventsEventsExternalEventIdArchiveSecurityOption1;
-}(SpeakeasyBase));
-export { DeleteMarketingV3MarketingEventsEventsExternalEventIdArchiveSecurityOption1 };
-var DeleteMarketingV3MarketingEventsEventsExternalEventIdArchiveSecurityOption2 = /** @class */ (function (_super) {
-    __extends(DeleteMarketingV3MarketingEventsEventsExternalEventIdArchiveSecurityOption2, _super);
-    function DeleteMarketingV3MarketingEventsEventsExternalEventIdArchiveSecurityOption2() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
-        __metadata("design:type", shared.SchemeOauth2Legacy)
-    ], DeleteMarketingV3MarketingEventsEventsExternalEventIdArchiveSecurityOption2.prototype, "oauth2Legacy", void 0);
-    return DeleteMarketingV3MarketingEventsEventsExternalEventIdArchiveSecurityOption2;
-}(SpeakeasyBase));
-export { DeleteMarketingV3MarketingEventsEventsExternalEventIdArchiveSecurityOption2 };
 var DeleteMarketingV3MarketingEventsEventsExternalEventIdArchiveSecurity = /** @class */ (function (_super) {
     __extends(DeleteMarketingV3MarketingEventsEventsExternalEventIdArchiveSecurity, _super);
     function DeleteMarketingV3MarketingEventsEventsExternalEventIdArchiveSecurity() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, option=true" }),
-        __metadata("design:type", DeleteMarketingV3MarketingEventsEventsExternalEventIdArchiveSecurityOption1)
-    ], DeleteMarketingV3MarketingEventsEventsExternalEventIdArchiveSecurity.prototype, "option1", void 0);
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=query" }),
+        __metadata("design:type", shared.SchemeHapikey)
+    ], DeleteMarketingV3MarketingEventsEventsExternalEventIdArchiveSecurity.prototype, "hapikey", void 0);
     __decorate([
-        Metadata({ data: "security, option=true" }),
-        __metadata("design:type", DeleteMarketingV3MarketingEventsEventsExternalEventIdArchiveSecurityOption2)
-    ], DeleteMarketingV3MarketingEventsEventsExternalEventIdArchiveSecurity.prototype, "option2", void 0);
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        __metadata("design:type", shared.SchemePrivateAppsLegacy)
+    ], DeleteMarketingV3MarketingEventsEventsExternalEventIdArchiveSecurity.prototype, "privateAppsLegacy", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
+        __metadata("design:type", shared.SchemeOauth2Legacy)
+    ], DeleteMarketingV3MarketingEventsEventsExternalEventIdArchiveSecurity.prototype, "oauth2Legacy", void 0);
     return DeleteMarketingV3MarketingEventsEventsExternalEventIdArchiveSecurity;
 }(SpeakeasyBase));
 export { DeleteMarketingV3MarketingEventsEventsExternalEventIdArchiveSecurity };
@@ -94,15 +74,15 @@ var DeleteMarketingV3MarketingEventsEventsExternalEventIdArchiveRequest = /** @c
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", DeleteMarketingV3MarketingEventsEventsExternalEventIdArchivePathParams)
     ], DeleteMarketingV3MarketingEventsEventsExternalEventIdArchiveRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", DeleteMarketingV3MarketingEventsEventsExternalEventIdArchiveQueryParams)
     ], DeleteMarketingV3MarketingEventsEventsExternalEventIdArchiveRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", DeleteMarketingV3MarketingEventsEventsExternalEventIdArchiveSecurity)
     ], DeleteMarketingV3MarketingEventsEventsExternalEventIdArchiveRequest.prototype, "security", void 0);
     return DeleteMarketingV3MarketingEventsEventsExternalEventIdArchiveRequest;
@@ -114,15 +94,15 @@ var DeleteMarketingV3MarketingEventsEventsExternalEventIdArchiveResponse = /** @
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], DeleteMarketingV3MarketingEventsEventsExternalEventIdArchiveResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], DeleteMarketingV3MarketingEventsEventsExternalEventIdArchiveResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], DeleteMarketingV3MarketingEventsEventsExternalEventIdArchiveResponse.prototype, "statusCode", void 0);
     return DeleteMarketingV3MarketingEventsEventsExternalEventIdArchiveResponse;

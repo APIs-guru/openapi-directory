@@ -10,6 +10,8 @@ type UpdateSignalingChannelHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// UpdateSignalingChannelRequestBodySingleMasterConfiguration
+// A structure that contains the configuration for the <code>SINGLE_MASTER</code> channel type.
 type UpdateSignalingChannelRequestBodySingleMasterConfiguration struct {
 	MessageTTLSeconds *int64 `json:"MessageTtlSeconds,omitempty"`
 }

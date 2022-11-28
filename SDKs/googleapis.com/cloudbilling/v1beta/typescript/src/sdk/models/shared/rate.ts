@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RateTier } from "./ratetier";
+
 
 
 // Rate
@@ -8,12 +8,12 @@ import { RateTier } from "./ratetier";
  * A SKU price consisting of tiered rates.
 **/
 export class Rate extends SpeakeasyBase {
-  @Metadata({ data: "json, name=tiers", elemType: shared.RateTier })
+  @SpeakeasyMetadata({ data: "json, name=tiers", elemType: RateTier })
   tiers?: RateTier[];
 
-  @Metadata({ data: "json, name=unit" })
+  @SpeakeasyMetadata({ data: "json, name=unit" })
   unit?: string;
 
-  @Metadata({ data: "json, name=unitCount" })
+  @SpeakeasyMetadata({ data: "json, name=unitCount" })
   unitCount?: number;
 }

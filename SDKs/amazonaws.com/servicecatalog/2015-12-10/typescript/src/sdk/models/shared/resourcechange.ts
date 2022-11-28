@@ -1,9 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ChangeActionEnum } from "./changeactionenum";
 import { ResourceChangeDetail } from "./resourcechangedetail";
 import { ReplacementEnum } from "./replacementenum";
 import { ResourceAttributeEnum } from "./resourceattributeenum";
+
 
 
 // ResourceChange
@@ -11,24 +11,24 @@ import { ResourceAttributeEnum } from "./resourceattributeenum";
  * Information about a resource change that will occur when a plan is executed.
 **/
 export class ResourceChange extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Action" })
+  @SpeakeasyMetadata({ data: "json, name=Action" })
   action?: ChangeActionEnum;
 
-  @Metadata({ data: "json, name=Details", elemType: shared.ResourceChangeDetail })
+  @SpeakeasyMetadata({ data: "json, name=Details", elemType: ResourceChangeDetail })
   details?: ResourceChangeDetail[];
 
-  @Metadata({ data: "json, name=LogicalResourceId" })
+  @SpeakeasyMetadata({ data: "json, name=LogicalResourceId" })
   logicalResourceId?: string;
 
-  @Metadata({ data: "json, name=PhysicalResourceId" })
+  @SpeakeasyMetadata({ data: "json, name=PhysicalResourceId" })
   physicalResourceId?: string;
 
-  @Metadata({ data: "json, name=Replacement" })
+  @SpeakeasyMetadata({ data: "json, name=Replacement" })
   replacement?: ReplacementEnum;
 
-  @Metadata({ data: "json, name=ResourceType" })
+  @SpeakeasyMetadata({ data: "json, name=ResourceType" })
   resourceType?: string;
 
-  @Metadata({ data: "json, name=Scope" })
+  @SpeakeasyMetadata({ data: "json, name=Scope" })
   scope?: ResourceAttributeEnum[];
 }

@@ -5,18 +5,18 @@ from sdk.models import shared
 
 @dataclass
 class GetParagraphSectionIDPathParams:
-    reference: str = field(default=None, metadata={'path_param': { 'field_name': 'reference', 'style': 'simple', 'explode': False }})
+    reference: str = field(metadata={'path_param': { 'field_name': 'reference', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetParagraphSectionIDRequest:
-    path_params: GetParagraphSectionIDPathParams = field(default=None)
+    path_params: GetParagraphSectionIDPathParams = field()
     
 
 @dataclass
 class GetParagraphSectionIDResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     erskine_may_section_overview: Optional[shared.ErskineMaySectionOverview] = field(default=None)
-    status_code: int = field(default=None)
     

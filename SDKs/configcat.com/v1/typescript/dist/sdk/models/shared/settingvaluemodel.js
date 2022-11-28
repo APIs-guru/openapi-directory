@@ -22,62 +22,65 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ConfigModel } from "./configmodel";
 import { EnvironmentModel } from "./environmentmodel";
+import { IntegrationLinkModel } from "./integrationlinkmodel";
+import { RolloutPercentageItemModel } from "./rolloutpercentageitemmodel";
+import { RolloutRuleModel } from "./rolloutrulemodel";
 import { SettingDataModel } from "./settingdatamodel";
+import { SettingTagModel } from "./settingtagmodel";
 var SettingValueModel = /** @class */ (function (_super) {
     __extends(SettingValueModel, _super);
     function SettingValueModel() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=config" }),
+        SpeakeasyMetadata({ data: "json, name=config" }),
         __metadata("design:type", ConfigModel)
     ], SettingValueModel.prototype, "config", void 0);
     __decorate([
-        Metadata({ data: "json, name=environment" }),
+        SpeakeasyMetadata({ data: "json, name=environment" }),
         __metadata("design:type", EnvironmentModel)
     ], SettingValueModel.prototype, "environment", void 0);
     __decorate([
-        Metadata({ data: "json, name=integrationLinks", elemType: shared.IntegrationLinkModel }),
+        SpeakeasyMetadata({ data: "json, name=integrationLinks", elemType: IntegrationLinkModel }),
         __metadata("design:type", Array)
     ], SettingValueModel.prototype, "integrationLinks", void 0);
     __decorate([
-        Metadata({ data: "json, name=lastUpdaterUserEmail" }),
+        SpeakeasyMetadata({ data: "json, name=lastUpdaterUserEmail" }),
         __metadata("design:type", String)
     ], SettingValueModel.prototype, "lastUpdaterUserEmail", void 0);
     __decorate([
-        Metadata({ data: "json, name=lastUpdaterUserFullName" }),
+        SpeakeasyMetadata({ data: "json, name=lastUpdaterUserFullName" }),
         __metadata("design:type", String)
     ], SettingValueModel.prototype, "lastUpdaterUserFullName", void 0);
     __decorate([
-        Metadata({ data: "json, name=readOnly" }),
+        SpeakeasyMetadata({ data: "json, name=readOnly" }),
         __metadata("design:type", Boolean)
     ], SettingValueModel.prototype, "readOnly", void 0);
     __decorate([
-        Metadata({ data: "json, name=rolloutPercentageItems", elemType: shared.RolloutPercentageItemModel }),
+        SpeakeasyMetadata({ data: "json, name=rolloutPercentageItems", elemType: RolloutPercentageItemModel }),
         __metadata("design:type", Array)
     ], SettingValueModel.prototype, "rolloutPercentageItems", void 0);
     __decorate([
-        Metadata({ data: "json, name=rolloutRules", elemType: shared.RolloutRuleModel }),
+        SpeakeasyMetadata({ data: "json, name=rolloutRules", elemType: RolloutRuleModel }),
         __metadata("design:type", Array)
     ], SettingValueModel.prototype, "rolloutRules", void 0);
     __decorate([
-        Metadata({ data: "json, name=setting" }),
+        SpeakeasyMetadata({ data: "json, name=setting" }),
         __metadata("design:type", SettingDataModel)
     ], SettingValueModel.prototype, "setting", void 0);
     __decorate([
-        Metadata({ data: "json, name=settingTags", elemType: shared.SettingTagModel }),
+        SpeakeasyMetadata({ data: "json, name=settingTags", elemType: SettingTagModel }),
         __metadata("design:type", Array)
     ], SettingValueModel.prototype, "settingTags", void 0);
     __decorate([
-        Metadata({ data: "json, name=updatedAt" }),
+        SpeakeasyMetadata({ data: "json, name=updatedAt" }),
         __metadata("design:type", Date)
     ], SettingValueModel.prototype, "updatedAt", void 0);
     __decorate([
-        Metadata({ data: "json, name=value" }),
+        SpeakeasyMetadata({ data: "json, name=value" }),
         __metadata("design:type", Map)
     ], SettingValueModel.prototype, "value", void 0);
     return SettingValueModel;

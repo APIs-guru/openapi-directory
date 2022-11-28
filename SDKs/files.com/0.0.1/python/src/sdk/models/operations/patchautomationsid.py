@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from typing import Any,List,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class PatchAutomationsIDPathParams:
-    id: int = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: int = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 class PatchAutomationsIDRequestBodyAutomationEnum(str, Enum):
     CREATE_FOLDER = "create_folder"
@@ -27,7 +28,7 @@ class PatchAutomationsIDRequestBodyTriggerEnum(str, Enum):
 
 @dataclass
 class PatchAutomationsIDRequestBody:
-    automation: PatchAutomationsIDRequestBodyAutomationEnum = field(default=None, metadata={'multipart_form': { 'field_name': 'automation' }})
+    automation: PatchAutomationsIDRequestBodyAutomationEnum = field(metadata={'multipart_form': { 'field_name': 'automation' }})
     destination: Optional[str] = field(default=None, metadata={'multipart_form': { 'field_name': 'destination' }})
     destination_replace_from: Optional[str] = field(default=None, metadata={'multipart_form': { 'field_name': 'destination_replace_from' }})
     destination_replace_to: Optional[str] = field(default=None, metadata={'multipart_form': { 'field_name': 'destination_replace_to' }})
@@ -46,13 +47,13 @@ class PatchAutomationsIDRequestBody:
 
 @dataclass
 class PatchAutomationsIDRequest:
-    path_params: PatchAutomationsIDPathParams = field(default=None)
-    request: PatchAutomationsIDRequestBody = field(default=None, metadata={'request': { 'media_type': 'multipart/form-data' }})
+    path_params: PatchAutomationsIDPathParams = field()
+    request: PatchAutomationsIDRequestBody = field(metadata={'request': { 'media_type': 'multipart/form-data' }})
     
 
 @dataclass
 class PatchAutomationsIDResponse:
+    content_type: str = field()
+    status_code: int = field()
     automation_entity: Optional[shared.AutomationEntity] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,32 +1,33 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetApiV1AgentsFamilyPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=family" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=family" })
   family: string;
 }
 
 
 export class GetApiV1AgentsFamilyRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetApiV1AgentsFamilyPathParams;
 }
 
 
 export class GetApiV1AgentsFamilyResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   agentResponse?: shared.AgentResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   problemDetails?: Map<string, any>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

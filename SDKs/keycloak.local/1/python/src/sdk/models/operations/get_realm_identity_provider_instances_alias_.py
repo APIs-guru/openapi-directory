@@ -5,18 +5,18 @@ from sdk.models import shared
 
 @dataclass
 class GetRealmIdentityProviderInstancesAliasPathParams:
-    alias: str = field(default=None, metadata={'path_param': { 'field_name': 'alias', 'style': 'simple', 'explode': False }})
-    realm: str = field(default=None, metadata={'path_param': { 'field_name': 'realm', 'style': 'simple', 'explode': False }})
+    alias: str = field(metadata={'path_param': { 'field_name': 'alias', 'style': 'simple', 'explode': False }})
+    realm: str = field(metadata={'path_param': { 'field_name': 'realm', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetRealmIdentityProviderInstancesAliasRequest:
-    path_params: GetRealmIdentityProviderInstancesAliasPathParams = field(default=None)
+    path_params: GetRealmIdentityProviderInstancesAliasPathParams = field()
     
 
 @dataclass
 class GetRealmIdentityProviderInstancesAliasResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     identity_provider_representation: Optional[shared.IdentityProviderRepresentation] = field(default=None)
-    status_code: int = field(default=None)
     

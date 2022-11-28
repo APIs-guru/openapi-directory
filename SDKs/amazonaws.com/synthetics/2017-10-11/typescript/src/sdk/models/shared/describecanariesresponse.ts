@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Canary } from "./canary";
 
 
+
 export class DescribeCanariesResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Canaries", elemType: shared.Canary })
+  @SpeakeasyMetadata({ data: "json, name=Canaries", elemType: Canary })
   canaries?: Canary[];
 
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 }

@@ -9,6 +9,8 @@ const (
 	VpnTunnelInfoRoutingTypeEnumDynamic                VpnTunnelInfoRoutingTypeEnum = "DYNAMIC"
 )
 
+// VpnTunnelInfo
+// For display only. Metadata associated with a Compute Engine VPN tunnel.
 type VpnTunnelInfo struct {
 	DisplayName     *string                       `json:"displayName,omitempty"`
 	NetworkURI      *string                       `json:"networkUri,omitempty"`

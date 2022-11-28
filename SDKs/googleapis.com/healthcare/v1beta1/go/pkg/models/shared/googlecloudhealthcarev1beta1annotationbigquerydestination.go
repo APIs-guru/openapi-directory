@@ -16,6 +16,8 @@ const (
 	GoogleCloudHealthcareV1beta1AnnotationBigQueryDestinationWriteDispositionEnumWriteAppend                 GoogleCloudHealthcareV1beta1AnnotationBigQueryDestinationWriteDispositionEnum = "WRITE_APPEND"
 )
 
+// GoogleCloudHealthcareV1beta1AnnotationBigQueryDestination
+// The BigQuery table for export.
 type GoogleCloudHealthcareV1beta1AnnotationBigQueryDestination struct {
 	Force            *bool                                                                          `json:"force,omitempty"`
 	SchemaType       *GoogleCloudHealthcareV1beta1AnnotationBigQueryDestinationSchemaTypeEnum       `json:"schemaType,omitempty"`

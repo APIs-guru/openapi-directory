@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 export declare enum MultiClusterIngressFeatureSpecBillingEnum {
     BillingUnspecified = "BILLING_UNSPECIFIED",
     PayAsYouGo = "PAY_AS_YOU_GO",

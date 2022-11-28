@@ -13,6 +13,8 @@ const (
 	PowerManagementEventEventTypeEnumShutdown                            PowerManagementEventEventTypeEnum = "SHUTDOWN"
 )
 
+// PowerManagementEvent
+// A power management event.
 type PowerManagementEvent struct {
 	BatteryLevel *float32                           `json:"batteryLevel,omitempty"`
 	CreateTime   *string                            `json:"createTime,omitempty"`

@@ -1,15 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Tag } from "./tag";
 
 
+
 export class CreateInstanceSnapshotRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=instanceName" })
+  @SpeakeasyMetadata({ data: "json, name=instanceName" })
   instanceName: string;
 
-  @Metadata({ data: "json, name=instanceSnapshotName" })
+  @SpeakeasyMetadata({ data: "json, name=instanceSnapshotName" })
   instanceSnapshotName: string;
 
-  @Metadata({ data: "json, name=tags", elemType: shared.Tag })
+  @SpeakeasyMetadata({ data: "json, name=tags", elemType: Tag })
   tags?: Tag[];
 }

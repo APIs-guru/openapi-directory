@@ -1,5 +1,7 @@
 package shared
 
+// APIMapping
+// Represents an API mapping.
 type APIMapping struct {
 	APIID         string  `json:"ApiId"`
 	APIMappingID  *string `json:"ApiMappingId,omitempty"`

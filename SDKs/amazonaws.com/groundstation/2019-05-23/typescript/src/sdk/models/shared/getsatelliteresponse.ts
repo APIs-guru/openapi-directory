@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GetSatelliteResponse
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * <p/>
 **/
 export class GetSatelliteResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=groundStations" })
+  @SpeakeasyMetadata({ data: "json, name=groundStations" })
   groundStations?: string[];
 
-  @Metadata({ data: "json, name=noradSatelliteID" })
+  @SpeakeasyMetadata({ data: "json, name=noradSatelliteID" })
   noradSatelliteId?: number;
 
-  @Metadata({ data: "json, name=satelliteArn" })
+  @SpeakeasyMetadata({ data: "json, name=satelliteArn" })
   satelliteArn?: string;
 
-  @Metadata({ data: "json, name=satelliteId" })
+  @SpeakeasyMetadata({ data: "json, name=satelliteId" })
   satelliteId?: string;
 }

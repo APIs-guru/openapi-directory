@@ -1,5 +1,7 @@
 package shared
 
+// InAppMessageContent
+// The configuration for the message content.
 type InAppMessageContent struct {
 	BackgroundColor *string                   `json:"BackgroundColor,omitempty"`
 	BodyConfig      *InAppMessageBodyConfig   `json:"BodyConfig,omitempty"`

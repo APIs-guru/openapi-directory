@@ -1,17 +1,18 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ObExternalPermissions1CodeEnum } from "./obexternalpermissions1codeenum";
 
 
+
 export class ObReadData1 extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ExpirationDateTime" })
+  @SpeakeasyMetadata({ data: "json, name=ExpirationDateTime" })
   expirationDateTime?: Date;
 
-  @Metadata({ data: "json, name=Permissions" })
+  @SpeakeasyMetadata({ data: "json, name=Permissions" })
   permissions: ObExternalPermissions1CodeEnum[];
 
-  @Metadata({ data: "json, name=TransactionFromDateTime" })
+  @SpeakeasyMetadata({ data: "json, name=TransactionFromDateTime" })
   transactionFromDateTime?: Date;
 
-  @Metadata({ data: "json, name=TransactionToDateTime" })
+  @SpeakeasyMetadata({ data: "json, name=TransactionToDateTime" })
   transactionToDateTime?: Date;
 }

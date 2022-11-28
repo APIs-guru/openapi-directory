@@ -1,16 +1,17 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DeleteHsmRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ClusterId" })
+  @SpeakeasyMetadata({ data: "json, name=ClusterId" })
   clusterId: string;
 
-  @Metadata({ data: "json, name=EniId" })
+  @SpeakeasyMetadata({ data: "json, name=EniId" })
   eniId?: string;
 
-  @Metadata({ data: "json, name=EniIp" })
+  @SpeakeasyMetadata({ data: "json, name=EniIp" })
   eniIp?: string;
 
-  @Metadata({ data: "json, name=HsmId" })
+  @SpeakeasyMetadata({ data: "json, name=HsmId" })
   hsmId?: string;
 }

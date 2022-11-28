@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AwsCertificateManagerCertificateOptions
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Contains other options for the certificate.
 **/
 export class AwsCertificateManagerCertificateOptions extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CertificateTransparencyLoggingPreference" })
+  @SpeakeasyMetadata({ data: "json, name=CertificateTransparencyLoggingPreference" })
   certificateTransparencyLoggingPreference?: string;
 }

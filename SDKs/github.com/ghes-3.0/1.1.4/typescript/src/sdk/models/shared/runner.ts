@@ -1,20 +1,20 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum RunnerLabelsTypeEnum {
-    ReadOnly = "read-only"
-,    Custom = "custom"
+    ReadOnly = "read-only",
+    Custom = "custom"
 }
 
 
 export class RunnerLabels extends SpeakeasyBase {
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: number;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: RunnerLabelsTypeEnum;
 }
 
@@ -24,21 +24,21 @@ export class RunnerLabels extends SpeakeasyBase {
  * A self hosted runner
 **/
 export class Runner extends SpeakeasyBase {
-  @Metadata({ data: "json, name=busy" })
+  @SpeakeasyMetadata({ data: "json, name=busy" })
   busy: boolean;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: number;
 
-  @Metadata({ data: "json, name=labels", elemType: shared.RunnerLabels })
+  @SpeakeasyMetadata({ data: "json, name=labels", elemType: RunnerLabels })
   labels: RunnerLabels[];
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 
-  @Metadata({ data: "json, name=os" })
+  @SpeakeasyMetadata({ data: "json, name=os" })
   os: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status: string;
 }

@@ -1,14 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 
 
-// GoogleCloudApigeeV1ApiSecurityConfig
+
+// GoogleCloudApigeeV1ApiSecurityConfigInput
 /** 
  * Configurations of the API Security add-on.
 **/
-export class GoogleCloudApigeeV1ApiSecurityConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=enabled" })
+export class GoogleCloudApigeeV1ApiSecurityConfigInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=enabled" })
   enabled?: boolean;
-
-  @Metadata({ data: "json, name=expiresAt" })
-  expiresAt?: string;
 }

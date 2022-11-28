@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { LensReviewReport } from "./lensreviewreport";
+
 
 
 // GetLensReviewReportOutput
@@ -7,12 +8,12 @@ import { LensReviewReport } from "./lensreviewreport";
  * Output of a get lens review report call.
 **/
 export class GetLensReviewReportOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=LensReviewReport" })
+  @SpeakeasyMetadata({ data: "json, name=LensReviewReport" })
   lensReviewReport?: LensReviewReport;
 
-  @Metadata({ data: "json, name=MilestoneNumber" })
+  @SpeakeasyMetadata({ data: "json, name=MilestoneNumber" })
   milestoneNumber?: number;
 
-  @Metadata({ data: "json, name=WorkloadId" })
+  @SpeakeasyMetadata({ data: "json, name=WorkloadId" })
   workloadId?: string;
 }

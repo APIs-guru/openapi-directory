@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AddressFamilyEnum } from "./addressfamilyenum";
 import { Tag } from "./tag";
+
 
 
 // NewTransitVirtualInterfaceAllocation
@@ -9,30 +9,30 @@ import { Tag } from "./tag";
  * Information about a transit virtual interface to be provisioned on a connection.
 **/
 export class NewTransitVirtualInterfaceAllocation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=addressFamily" })
+  @SpeakeasyMetadata({ data: "json, name=addressFamily" })
   addressFamily?: AddressFamilyEnum;
 
-  @Metadata({ data: "json, name=amazonAddress" })
+  @SpeakeasyMetadata({ data: "json, name=amazonAddress" })
   amazonAddress?: string;
 
-  @Metadata({ data: "json, name=asn" })
+  @SpeakeasyMetadata({ data: "json, name=asn" })
   asn?: number;
 
-  @Metadata({ data: "json, name=authKey" })
+  @SpeakeasyMetadata({ data: "json, name=authKey" })
   authKey?: string;
 
-  @Metadata({ data: "json, name=customerAddress" })
+  @SpeakeasyMetadata({ data: "json, name=customerAddress" })
   customerAddress?: string;
 
-  @Metadata({ data: "json, name=mtu" })
+  @SpeakeasyMetadata({ data: "json, name=mtu" })
   mtu?: number;
 
-  @Metadata({ data: "json, name=tags", elemType: shared.Tag })
+  @SpeakeasyMetadata({ data: "json, name=tags", elemType: Tag })
   tags?: Tag[];
 
-  @Metadata({ data: "json, name=virtualInterfaceName" })
+  @SpeakeasyMetadata({ data: "json, name=virtualInterfaceName" })
   virtualInterfaceName?: string;
 
-  @Metadata({ data: "json, name=vlan" })
+  @SpeakeasyMetadata({ data: "json, name=vlan" })
   vlan?: number;
 }

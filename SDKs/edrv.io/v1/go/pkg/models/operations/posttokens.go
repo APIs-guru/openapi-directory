@@ -17,14 +17,14 @@ type PostTokensRequestBody struct {
 	Type       *string                          `json:"type,omitempty"`
 }
 
-type PostTokensRequest struct {
-	Request PostTokensRequestBody `request:"mediaType=application/json"`
-}
-
 type PostTokens201ApplicationJSON struct {
 	Message *string       `json:"message,omitempty"`
 	Ok      *bool         `json:"ok,omitempty"`
 	Result  []interface{} `json:"result,omitempty"`
+}
+
+type PostTokensRequest struct {
+	Request PostTokensRequestBody `request:"mediaType=application/json"`
 }
 
 type PostTokensResponse struct {

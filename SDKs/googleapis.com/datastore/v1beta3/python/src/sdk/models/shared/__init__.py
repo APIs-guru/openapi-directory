@@ -1,4 +1,8 @@
-from .__xgafv_enum import *
+from ._xgafv_enum import *
+from .aggregation import *
+from .aggregationquery import *
+from .aggregationresult import *
+from .aggregationresultbatch import *
 from .allocateidsrequest import *
 from .allocateidsresponse import *
 from .alt_enum import *
@@ -8,6 +12,7 @@ from .begintransactionresponse import *
 from .commitrequest import *
 from .commitresponse import *
 from .compositefilter import *
+from .count import *
 from .entity import *
 from .entityresult import *
 from .filter import *
@@ -33,6 +38,8 @@ from .readoptions import *
 from .readwrite import *
 from .reserveidsrequest import *
 from .rollbackrequest import *
+from .runaggregationqueryrequest import *
+from .runaggregationqueryresponse import *
 from .runqueryrequest import *
 from .runqueryresponse import *
 from .security import *

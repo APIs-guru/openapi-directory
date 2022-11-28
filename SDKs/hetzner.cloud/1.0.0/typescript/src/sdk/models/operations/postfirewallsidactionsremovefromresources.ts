@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class PostFirewallsIdActionsRemoveFromResourcesPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" })
   id: number;
 }
 
@@ -12,7 +13,7 @@ export class PostFirewallsIdActionsRemoveFromResourcesPathParams extends Speakea
  * Configuration for type label_selector, required if type is `label_selector`
 **/
 export class PostFirewallsIdActionsRemoveFromResourcesRemoveFromResourcesRequestFirewallRemoveFromResourcesLabelSelector extends SpeakeasyBase {
-  @Metadata({ data: "json, name=selector" })
+  @SpeakeasyMetadata({ data: "json, name=selector" })
   selector: string;
 }
 
@@ -22,40 +23,31 @@ export class PostFirewallsIdActionsRemoveFromResourcesRemoveFromResourcesRequest
  * Configuration for type server, required if type is `server`
 **/
 export class PostFirewallsIdActionsRemoveFromResourcesRemoveFromResourcesRequestFirewallRemoveFromResourcesServer extends SpeakeasyBase {
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: number;
 }
 
 export enum PostFirewallsIdActionsRemoveFromResourcesRemoveFromResourcesRequestFirewallRemoveFromResourcesTypeEnum {
-    Server = "server"
-,    LabelSelector = "label_selector"
+    Server = "server",
+    LabelSelector = "label_selector"
 }
 
 
 export class PostFirewallsIdActionsRemoveFromResourcesRemoveFromResourcesRequestFirewallRemoveFromResources extends SpeakeasyBase {
-  @Metadata({ data: "json, name=label_selector" })
+  @SpeakeasyMetadata({ data: "json, name=label_selector" })
   labelSelector?: PostFirewallsIdActionsRemoveFromResourcesRemoveFromResourcesRequestFirewallRemoveFromResourcesLabelSelector;
 
-  @Metadata({ data: "json, name=server" })
+  @SpeakeasyMetadata({ data: "json, name=server" })
   server?: PostFirewallsIdActionsRemoveFromResourcesRemoveFromResourcesRequestFirewallRemoveFromResourcesServer;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: PostFirewallsIdActionsRemoveFromResourcesRemoveFromResourcesRequestFirewallRemoveFromResourcesTypeEnum;
 }
 
 
 export class PostFirewallsIdActionsRemoveFromResourcesRemoveFromResourcesRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=remove_from", elemType: operations.PostFirewallsIdActionsRemoveFromResourcesRemoveFromResourcesRequestFirewallRemoveFromResources })
+  @SpeakeasyMetadata({ data: "json, name=remove_from", elemType: PostFirewallsIdActionsRemoveFromResourcesRemoveFromResourcesRequestFirewallRemoveFromResources })
   removeFrom: PostFirewallsIdActionsRemoveFromResourcesRemoveFromResourcesRequestFirewallRemoveFromResources[];
-}
-
-
-export class PostFirewallsIdActionsRemoveFromResourcesRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: PostFirewallsIdActionsRemoveFromResourcesPathParams;
-
-  @Metadata({ data: "request, media_type=application/json" })
-  request?: PostFirewallsIdActionsRemoveFromResourcesRemoveFromResourcesRequest;
 }
 
 
@@ -64,99 +56,108 @@ export class PostFirewallsIdActionsRemoveFromResourcesRequest extends SpeakeasyB
  * Error message for the Action if error occurred, otherwise null
 **/
 export class PostFirewallsIdActionsRemoveFromResourcesActionsResponseActionError extends SpeakeasyBase {
-  @Metadata({ data: "json, name=code" })
+  @SpeakeasyMetadata({ data: "json, name=code" })
   code: string;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message: string;
 }
 
 
 export class PostFirewallsIdActionsRemoveFromResourcesActionsResponseActionResources extends SpeakeasyBase {
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: number;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type: string;
 }
 
 export enum PostFirewallsIdActionsRemoveFromResourcesActionsResponseActionStatusEnum {
-    Success = "success"
-,    Running = "running"
-,    Error = "error"
+    Success = "success",
+    Running = "running",
+    Error = "error"
 }
 
 
 export class PostFirewallsIdActionsRemoveFromResourcesActionsResponseAction extends SpeakeasyBase {
-  @Metadata({ data: "json, name=command" })
+  @SpeakeasyMetadata({ data: "json, name=command" })
   command: string;
 
-  @Metadata({ data: "json, name=error" })
+  @SpeakeasyMetadata({ data: "json, name=error" })
   error: PostFirewallsIdActionsRemoveFromResourcesActionsResponseActionError;
 
-  @Metadata({ data: "json, name=finished" })
+  @SpeakeasyMetadata({ data: "json, name=finished" })
   finished: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: number;
 
-  @Metadata({ data: "json, name=progress" })
+  @SpeakeasyMetadata({ data: "json, name=progress" })
   progress: number;
 
-  @Metadata({ data: "json, name=resources", elemType: operations.PostFirewallsIdActionsRemoveFromResourcesActionsResponseActionResources })
+  @SpeakeasyMetadata({ data: "json, name=resources", elemType: PostFirewallsIdActionsRemoveFromResourcesActionsResponseActionResources })
   resources: PostFirewallsIdActionsRemoveFromResourcesActionsResponseActionResources[];
 
-  @Metadata({ data: "json, name=started" })
+  @SpeakeasyMetadata({ data: "json, name=started" })
   started: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status: PostFirewallsIdActionsRemoveFromResourcesActionsResponseActionStatusEnum;
 }
 
 
 export class PostFirewallsIdActionsRemoveFromResourcesActionsResponseMetaPagination extends SpeakeasyBase {
-  @Metadata({ data: "json, name=last_page" })
+  @SpeakeasyMetadata({ data: "json, name=last_page" })
   lastPage: number;
 
-  @Metadata({ data: "json, name=next_page" })
+  @SpeakeasyMetadata({ data: "json, name=next_page" })
   nextPage: number;
 
-  @Metadata({ data: "json, name=page" })
+  @SpeakeasyMetadata({ data: "json, name=page" })
   page: number;
 
-  @Metadata({ data: "json, name=per_page" })
+  @SpeakeasyMetadata({ data: "json, name=per_page" })
   perPage: number;
 
-  @Metadata({ data: "json, name=previous_page" })
+  @SpeakeasyMetadata({ data: "json, name=previous_page" })
   previousPage: number;
 
-  @Metadata({ data: "json, name=total_entries" })
+  @SpeakeasyMetadata({ data: "json, name=total_entries" })
   totalEntries: number;
 }
 
 
 export class PostFirewallsIdActionsRemoveFromResourcesActionsResponseMeta extends SpeakeasyBase {
-  @Metadata({ data: "json, name=pagination" })
+  @SpeakeasyMetadata({ data: "json, name=pagination" })
   pagination: PostFirewallsIdActionsRemoveFromResourcesActionsResponseMetaPagination;
 }
 
 
 export class PostFirewallsIdActionsRemoveFromResourcesActionsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=actions", elemType: operations.PostFirewallsIdActionsRemoveFromResourcesActionsResponseAction })
+  @SpeakeasyMetadata({ data: "json, name=actions", elemType: PostFirewallsIdActionsRemoveFromResourcesActionsResponseAction })
   actions: PostFirewallsIdActionsRemoveFromResourcesActionsResponseAction[];
 
-  @Metadata({ data: "json, name=meta" })
+  @SpeakeasyMetadata({ data: "json, name=meta" })
   meta?: PostFirewallsIdActionsRemoveFromResourcesActionsResponseMeta;
 }
 
 
+export class PostFirewallsIdActionsRemoveFromResourcesRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: PostFirewallsIdActionsRemoveFromResourcesPathParams;
+
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request?: PostFirewallsIdActionsRemoveFromResourcesRemoveFromResourcesRequest;
+}
+
+
 export class PostFirewallsIdActionsRemoveFromResourcesResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   actionsResponse?: PostFirewallsIdActionsRemoveFromResourcesActionsResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

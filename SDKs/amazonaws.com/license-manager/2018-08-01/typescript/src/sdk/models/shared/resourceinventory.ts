@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ResourceTypeEnum } from "./resourcetypeenum";
+
 
 
 // ResourceInventory
@@ -7,21 +8,21 @@ import { ResourceTypeEnum } from "./resourcetypeenum";
  * Details about a resource.
 **/
 export class ResourceInventory extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Platform" })
+  @SpeakeasyMetadata({ data: "json, name=Platform" })
   platform?: string;
 
-  @Metadata({ data: "json, name=PlatformVersion" })
+  @SpeakeasyMetadata({ data: "json, name=PlatformVersion" })
   platformVersion?: string;
 
-  @Metadata({ data: "json, name=ResourceArn" })
+  @SpeakeasyMetadata({ data: "json, name=ResourceArn" })
   resourceArn?: string;
 
-  @Metadata({ data: "json, name=ResourceId" })
+  @SpeakeasyMetadata({ data: "json, name=ResourceId" })
   resourceId?: string;
 
-  @Metadata({ data: "json, name=ResourceOwningAccountId" })
+  @SpeakeasyMetadata({ data: "json, name=ResourceOwningAccountId" })
   resourceOwningAccountId?: string;
 
-  @Metadata({ data: "json, name=ResourceType" })
+  @SpeakeasyMetadata({ data: "json, name=ResourceType" })
   resourceType?: ResourceTypeEnum;
 }

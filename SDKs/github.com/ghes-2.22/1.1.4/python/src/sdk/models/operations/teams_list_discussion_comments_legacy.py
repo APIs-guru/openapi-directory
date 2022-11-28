@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class TeamsListDiscussionCommentsLegacyPathParams:
-    discussion_number: int = field(default=None, metadata={'path_param': { 'field_name': 'discussion_number', 'style': 'simple', 'explode': False }})
-    team_id: int = field(default=None, metadata={'path_param': { 'field_name': 'team_id', 'style': 'simple', 'explode': False }})
+    discussion_number: int = field(metadata={'path_param': { 'field_name': 'discussion_number', 'style': 'simple', 'explode': False }})
+    team_id: int = field(metadata={'path_param': { 'field_name': 'team_id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -18,14 +19,14 @@ class TeamsListDiscussionCommentsLegacyQueryParams:
 
 @dataclass
 class TeamsListDiscussionCommentsLegacyRequest:
-    path_params: TeamsListDiscussionCommentsLegacyPathParams = field(default=None)
-    query_params: TeamsListDiscussionCommentsLegacyQueryParams = field(default=None)
+    path_params: TeamsListDiscussionCommentsLegacyPathParams = field()
+    query_params: TeamsListDiscussionCommentsLegacyQueryParams = field()
     
 
 @dataclass
 class TeamsListDiscussionCommentsLegacyResponse:
-    content_type: str = field(default=None)
-    headers: dict[str, List[str]] = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    headers: dict[str, List[str]] = field()
+    status_code: int = field()
     team_discussion_comments: Optional[List[shared.TeamDiscussionComment]] = field(default=None)
     

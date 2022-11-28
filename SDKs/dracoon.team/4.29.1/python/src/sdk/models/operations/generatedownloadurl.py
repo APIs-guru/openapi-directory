@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class GenerateDownloadURLPathParams:
-    file_id: int = field(default=None, metadata={'path_param': { 'field_name': 'file_id', 'style': 'simple', 'explode': False }})
+    file_id: int = field(metadata={'path_param': { 'field_name': 'file_id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -15,14 +15,14 @@ class GenerateDownloadURLHeaders:
 
 @dataclass
 class GenerateDownloadURLRequest:
-    path_params: GenerateDownloadURLPathParams = field(default=None)
-    headers: GenerateDownloadURLHeaders = field(default=None)
+    headers: GenerateDownloadURLHeaders = field()
+    path_params: GenerateDownloadURLPathParams = field()
     
 
 @dataclass
 class GenerateDownloadURLResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     download_token_generate_response: Optional[shared.DownloadTokenGenerateResponse] = field(default=None)
     error_response: Optional[shared.ErrorResponse] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,5 +1,7 @@
 package shared
 
+// AlarmState
+// Contains information about the current state of the alarm.
 type AlarmState struct {
 	CustomerAction *CustomerAction     `json:"customerAction,omitempty"`
 	RuleEvaluation *RuleEvaluation     `json:"ruleEvaluation,omitempty"`

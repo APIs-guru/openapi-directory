@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class CloudbillingBillingAccountsGetPathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,20 +26,20 @@ class CloudbillingBillingAccountsGetQueryParams:
 
 @dataclass
 class CloudbillingBillingAccountsGetSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class CloudbillingBillingAccountsGetSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class CloudbillingBillingAccountsGetSecurityOption3:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -50,14 +51,14 @@ class CloudbillingBillingAccountsGetSecurity:
 
 @dataclass
 class CloudbillingBillingAccountsGetRequest:
-    path_params: CloudbillingBillingAccountsGetPathParams = field(default=None)
-    query_params: CloudbillingBillingAccountsGetQueryParams = field(default=None)
-    security: CloudbillingBillingAccountsGetSecurity = field(default=None)
+    path_params: CloudbillingBillingAccountsGetPathParams = field()
+    query_params: CloudbillingBillingAccountsGetQueryParams = field()
+    security: CloudbillingBillingAccountsGetSecurity = field()
     
 
 @dataclass
 class CloudbillingBillingAccountsGetResponse:
+    content_type: str = field()
+    status_code: int = field()
     billing_account: Optional[shared.BillingAccount] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

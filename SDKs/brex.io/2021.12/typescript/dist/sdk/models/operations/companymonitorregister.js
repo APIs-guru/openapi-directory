@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var CompanyMonitorRegisterPathParams = /** @class */ (function (_super) {
     __extends(CompanyMonitorRegisterPathParams, _super);
@@ -30,7 +30,7 @@ var CompanyMonitorRegisterPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=id" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" }),
         __metadata("design:type", String)
     ], CompanyMonitorRegisterPathParams.prototype, "id", void 0);
     return CompanyMonitorRegisterPathParams;
@@ -42,11 +42,11 @@ var CompanyMonitorRegisterRequestBody = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "form, name=callbackUrl;" }),
+        SpeakeasyMetadata({ data: "form, name=callbackUrl;" }),
         __metadata("design:type", String)
     ], CompanyMonitorRegisterRequestBody.prototype, "callbackUrl", void 0);
     __decorate([
-        Metadata({ data: "form, name=changeType;" }),
+        SpeakeasyMetadata({ data: "form, name=changeType;" }),
         __metadata("design:type", String)
     ], CompanyMonitorRegisterRequestBody.prototype, "changeType", void 0);
     return CompanyMonitorRegisterRequestBody;
@@ -58,7 +58,7 @@ var CompanyMonitorRegisterSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeUserKey)
     ], CompanyMonitorRegisterSecurity.prototype, "userKey", void 0);
     return CompanyMonitorRegisterSecurity;
@@ -70,15 +70,15 @@ var CompanyMonitorRegisterRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", CompanyMonitorRegisterPathParams)
     ], CompanyMonitorRegisterRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/x-www-form-urlencoded" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/x-www-form-urlencoded" }),
         __metadata("design:type", CompanyMonitorRegisterRequestBody)
     ], CompanyMonitorRegisterRequest.prototype, "request", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", CompanyMonitorRegisterSecurity)
     ], CompanyMonitorRegisterRequest.prototype, "security", void 0);
     return CompanyMonitorRegisterRequest;
@@ -90,19 +90,19 @@ var CompanyMonitorRegisterResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], CompanyMonitorRegisterResponse.prototype, "companyMonitorRegister200ApplicationJsonAny", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], CompanyMonitorRegisterResponse.prototype, "companyMonitorRegisterDefaultApplicationJsonAny", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], CompanyMonitorRegisterResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], CompanyMonitorRegisterResponse.prototype, "statusCode", void 0);
     return CompanyMonitorRegisterResponse;

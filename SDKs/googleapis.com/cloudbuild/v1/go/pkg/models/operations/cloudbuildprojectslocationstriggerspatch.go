@@ -32,7 +32,7 @@ type CloudbuildProjectsLocationsTriggersPatchSecurity struct {
 type CloudbuildProjectsLocationsTriggersPatchRequest struct {
 	PathParams  CloudbuildProjectsLocationsTriggersPatchPathParams
 	QueryParams CloudbuildProjectsLocationsTriggersPatchQueryParams
-	Request     *shared.BuildTrigger `request:"mediaType=application/json"`
+	Request     *shared.BuildTriggerInput `request:"mediaType=application/json"`
 	Security    CloudbuildProjectsLocationsTriggersPatchSecurity
 }
 

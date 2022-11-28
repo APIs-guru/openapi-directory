@@ -5,18 +5,18 @@ from sdk.models import shared
 
 @dataclass
 class SongAPIGetLyricsPathParams:
-    lyrics_id: int = field(default=None, metadata={'path_param': { 'field_name': 'lyricsId', 'style': 'simple', 'explode': False }})
+    lyrics_id: int = field(metadata={'path_param': { 'field_name': 'lyricsId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class SongAPIGetLyricsRequest:
-    path_params: SongAPIGetLyricsPathParams = field(default=None)
+    path_params: SongAPIGetLyricsPathParams = field()
     
 
 @dataclass
 class SongAPIGetLyricsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     lyrics_for_song_contract: Optional[shared.LyricsForSongContract] = field(default=None)
-    status_code: int = field(default=None)
     

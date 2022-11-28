@@ -1,0 +1,31 @@
+import { SpeakeasyBase } from "../../../internal/utils";
+export declare class IntegrationSettings extends SpeakeasyBase {
+    albacrossId?: string;
+    automateEnabled?: boolean;
+    blendrEnabled?: boolean;
+    combideskEnabled?: boolean;
+    crispId?: string;
+    driftId?: string;
+    googleAnalyticsId?: string;
+    googleTagManagerId?: string;
+    heapId?: string;
+    hubspotPortalId?: string;
+    integromatEnabled?: boolean;
+    intercomAppId?: string;
+    iubendaCookiePolicyId?: string;
+    iubendaSiteId?: string;
+    journyIoDomain?: string;
+    journyIoId?: string;
+    livechatId?: string;
+    metomicId?: string;
+    microsoftFlowEnabled?: boolean;
+    microsoftFlowId?: string;
+    onetrustId?: string;
+    piesyncEnabled?: boolean;
+    segmentEnabled?: boolean;
+    segmentId?: string;
+    trayIoEnabled?: boolean;
+    zapierBetaLink?: string;
+    zapierEnabled?: boolean;
+    zapierId?: string;
+}

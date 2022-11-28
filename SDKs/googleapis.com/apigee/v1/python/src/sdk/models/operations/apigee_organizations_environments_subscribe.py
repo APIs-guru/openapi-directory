@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class ApigeeOrganizationsEnvironmentsSubscribePathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,20 +26,20 @@ class ApigeeOrganizationsEnvironmentsSubscribeQueryParams:
 
 @dataclass
 class ApigeeOrganizationsEnvironmentsSubscribeSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class ApigeeOrganizationsEnvironmentsSubscribeRequest:
-    path_params: ApigeeOrganizationsEnvironmentsSubscribePathParams = field(default=None)
-    query_params: ApigeeOrganizationsEnvironmentsSubscribeQueryParams = field(default=None)
-    security: ApigeeOrganizationsEnvironmentsSubscribeSecurity = field(default=None)
+    path_params: ApigeeOrganizationsEnvironmentsSubscribePathParams = field()
+    query_params: ApigeeOrganizationsEnvironmentsSubscribeQueryParams = field()
+    security: ApigeeOrganizationsEnvironmentsSubscribeSecurity = field()
     
 
 @dataclass
 class ApigeeOrganizationsEnvironmentsSubscribeResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_cloud_apigee_v1_subscription: Optional[shared.GoogleCloudApigeeV1Subscription] = field(default=None)
-    status_code: int = field(default=None)
     

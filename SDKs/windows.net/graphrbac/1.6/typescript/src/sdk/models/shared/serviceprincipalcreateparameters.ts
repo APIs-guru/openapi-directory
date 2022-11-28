@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ServicePrincipalCreateParameters
@@ -6,24 +7,24 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Request parameters for creating a new service principal.
 **/
 export class ServicePrincipalCreateParameters extends SpeakeasyBase {
-  @Metadata({ data: "json, name=accountEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=accountEnabled" })
   accountEnabled?: boolean;
 
-  @Metadata({ data: "json, name=appId" })
+  @SpeakeasyMetadata({ data: "json, name=appId" })
   appId: string;
 
-  @Metadata({ data: "json, name=appRoleAssignmentRequired" })
+  @SpeakeasyMetadata({ data: "json, name=appRoleAssignmentRequired" })
   appRoleAssignmentRequired?: boolean;
 
-  @Metadata({ data: "json, name=keyCredentials" })
+  @SpeakeasyMetadata({ data: "json, name=keyCredentials" })
   keyCredentials?: Map<string, Map<string, any>>[];
 
-  @Metadata({ data: "json, name=passwordCredentials" })
+  @SpeakeasyMetadata({ data: "json, name=passwordCredentials" })
   passwordCredentials?: Map<string, Map<string, any>>[];
 
-  @Metadata({ data: "json, name=servicePrincipalType" })
+  @SpeakeasyMetadata({ data: "json, name=servicePrincipalType" })
   servicePrincipalType?: string;
 
-  @Metadata({ data: "json, name=tags" })
+  @SpeakeasyMetadata({ data: "json, name=tags" })
   tags?: string[];
 }

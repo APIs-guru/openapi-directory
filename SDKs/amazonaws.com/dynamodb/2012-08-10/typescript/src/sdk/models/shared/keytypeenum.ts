@@ -1,6 +1,7 @@
 
 
+
 export enum KeyTypeEnum {
-    Hash = "HASH"
-,    Range = "RANGE"
+    Hash = "HASH",
+    Range = "RANGE"
 }

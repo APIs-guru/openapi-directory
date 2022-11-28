@@ -1,5 +1,7 @@
 package shared
 
+// CsvFormatDescriptor
+// Contains information about how a source CSV data file should be analyzed.
 type CsvFormatDescriptor struct {
 	Charset         *string                 `json:"Charset,omitempty"`
 	ContainsHeader  *bool                   `json:"ContainsHeader,omitempty"`

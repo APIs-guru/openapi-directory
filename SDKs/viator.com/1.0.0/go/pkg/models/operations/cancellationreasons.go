@@ -4,7 +4,7 @@ import (
 	"openapi/pkg/models/shared"
 )
 
-var CancellationReasonsServers = []string{
+var CancellationReasonsServerList = []string{
 	"https://api.sandbox.viator.com/partner",
 }
 

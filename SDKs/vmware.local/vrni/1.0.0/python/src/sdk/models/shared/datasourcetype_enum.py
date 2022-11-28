@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class DataSourceTypeEnum(str, Enum):
     CISCO_SWITCH_DATA_SOURCE = "CiscoSwitchDataSource"

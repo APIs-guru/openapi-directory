@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // StaticFilesHandler
 /**
  * Files served directly to the user for a given URL, such as images, CSS stylesheets, or JavaScript source files. Static file handlers describe which files in the application directory are static files, and which URLs serve them.
@@ -33,31 +33,31 @@ var StaticFilesHandler = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=applicationReadable" }),
+        SpeakeasyMetadata({ data: "json, name=applicationReadable" }),
         __metadata("design:type", Boolean)
     ], StaticFilesHandler.prototype, "applicationReadable", void 0);
     __decorate([
-        Metadata({ data: "json, name=expiration" }),
+        SpeakeasyMetadata({ data: "json, name=expiration" }),
         __metadata("design:type", String)
     ], StaticFilesHandler.prototype, "expiration", void 0);
     __decorate([
-        Metadata({ data: "json, name=httpHeaders" }),
+        SpeakeasyMetadata({ data: "json, name=httpHeaders" }),
         __metadata("design:type", Map)
     ], StaticFilesHandler.prototype, "httpHeaders", void 0);
     __decorate([
-        Metadata({ data: "json, name=mimeType" }),
+        SpeakeasyMetadata({ data: "json, name=mimeType" }),
         __metadata("design:type", String)
     ], StaticFilesHandler.prototype, "mimeType", void 0);
     __decorate([
-        Metadata({ data: "json, name=path" }),
+        SpeakeasyMetadata({ data: "json, name=path" }),
         __metadata("design:type", String)
     ], StaticFilesHandler.prototype, "path", void 0);
     __decorate([
-        Metadata({ data: "json, name=requireMatchingFile" }),
+        SpeakeasyMetadata({ data: "json, name=requireMatchingFile" }),
         __metadata("design:type", Boolean)
     ], StaticFilesHandler.prototype, "requireMatchingFile", void 0);
     __decorate([
-        Metadata({ data: "json, name=uploadPathRegex" }),
+        SpeakeasyMetadata({ data: "json, name=uploadPathRegex" }),
         __metadata("design:type", String)
     ], StaticFilesHandler.prototype, "uploadPathRegex", void 0);
     return StaticFilesHandler;

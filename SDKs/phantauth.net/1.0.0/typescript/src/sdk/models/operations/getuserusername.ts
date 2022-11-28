@@ -1,15 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetUserUsernamePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=username" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=username" })
   username: string;
-}
-
-
-export class GetUserUsernameRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: GetUserUsernamePathParams;
 }
 
 
@@ -18,111 +13,117 @@ export class GetUserUsernameRequest extends SpeakeasyBase {
  * The user's preferred postal address.
 **/
 export class GetUserUsername200ApplicationJsonAddress extends SpeakeasyBase {
-  @Metadata({ data: "json, name=country" })
+  @SpeakeasyMetadata({ data: "json, name=country" })
   country?: string;
 
-  @Metadata({ data: "json, name=formatted" })
+  @SpeakeasyMetadata({ data: "json, name=formatted" })
   formatted?: string;
 
-  @Metadata({ data: "json, name=locality" })
+  @SpeakeasyMetadata({ data: "json, name=locality" })
   locality?: string;
 
-  @Metadata({ data: "json, name=postal_code" })
+  @SpeakeasyMetadata({ data: "json, name=postal_code" })
   postalCode?: string;
 
-  @Metadata({ data: "json, name=region" })
+  @SpeakeasyMetadata({ data: "json, name=region" })
   region?: string;
 
-  @Metadata({ data: "json, name=street_address" })
+  @SpeakeasyMetadata({ data: "json, name=street_address" })
   streetAddress?: string;
 }
 
 
 export class GetUserUsername200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=@id" })
+  @SpeakeasyMetadata({ data: "json, name=@id" })
   atId?: string;
 
-  @Metadata({ data: "json, name=address" })
+  @SpeakeasyMetadata({ data: "json, name=address" })
   address?: GetUserUsername200ApplicationJsonAddress;
 
-  @Metadata({ data: "json, name=birthdate" })
+  @SpeakeasyMetadata({ data: "json, name=birthdate" })
   birthdate?: string;
 
-  @Metadata({ data: "json, name=email" })
+  @SpeakeasyMetadata({ data: "json, name=email" })
   email?: string;
 
-  @Metadata({ data: "json, name=email_verified" })
+  @SpeakeasyMetadata({ data: "json, name=email_verified" })
   emailVerified?: boolean;
 
-  @Metadata({ data: "json, name=family_name" })
+  @SpeakeasyMetadata({ data: "json, name=family_name" })
   familyName?: string;
 
-  @Metadata({ data: "json, name=gender" })
+  @SpeakeasyMetadata({ data: "json, name=gender" })
   gender?: string;
 
-  @Metadata({ data: "json, name=given_name" })
+  @SpeakeasyMetadata({ data: "json, name=given_name" })
   givenName?: string;
 
-  @Metadata({ data: "json, name=locale" })
+  @SpeakeasyMetadata({ data: "json, name=locale" })
   locale?: string;
 
-  @Metadata({ data: "json, name=me" })
+  @SpeakeasyMetadata({ data: "json, name=me" })
   me?: string;
 
-  @Metadata({ data: "json, name=middle_name" })
+  @SpeakeasyMetadata({ data: "json, name=middle_name" })
   middleName?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=nickname" })
+  @SpeakeasyMetadata({ data: "json, name=nickname" })
   nickname?: string;
 
-  @Metadata({ data: "json, name=password" })
+  @SpeakeasyMetadata({ data: "json, name=password" })
   password?: string;
 
-  @Metadata({ data: "json, name=phone_number" })
+  @SpeakeasyMetadata({ data: "json, name=phone_number" })
   phoneNumber?: string;
 
-  @Metadata({ data: "json, name=phone_number_verified" })
+  @SpeakeasyMetadata({ data: "json, name=phone_number_verified" })
   phoneNumberVerified?: boolean;
 
-  @Metadata({ data: "json, name=picture" })
+  @SpeakeasyMetadata({ data: "json, name=picture" })
   picture?: string;
 
-  @Metadata({ data: "json, name=preferred_username" })
+  @SpeakeasyMetadata({ data: "json, name=preferred_username" })
   preferredUsername?: string;
 
-  @Metadata({ data: "json, name=profile" })
+  @SpeakeasyMetadata({ data: "json, name=profile" })
   profile?: string;
 
-  @Metadata({ data: "json, name=sub" })
+  @SpeakeasyMetadata({ data: "json, name=sub" })
   sub: string;
 
-  @Metadata({ data: "json, name=uid" })
+  @SpeakeasyMetadata({ data: "json, name=uid" })
   uid?: string;
 
-  @Metadata({ data: "json, name=updated_at" })
+  @SpeakeasyMetadata({ data: "json, name=updated_at" })
   updatedAt?: number;
 
-  @Metadata({ data: "json, name=webmail" })
+  @SpeakeasyMetadata({ data: "json, name=webmail" })
   webmail?: string;
 
-  @Metadata({ data: "json, name=website" })
+  @SpeakeasyMetadata({ data: "json, name=website" })
   website?: string;
 
-  @Metadata({ data: "json, name=zoneinfo" })
+  @SpeakeasyMetadata({ data: "json, name=zoneinfo" })
   zoneinfo?: string;
 }
 
 
+export class GetUserUsernameRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: GetUserUsernamePathParams;
+}
+
+
 export class GetUserUsernameResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getUserUsername200ApplicationJsonObject?: GetUserUsername200ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

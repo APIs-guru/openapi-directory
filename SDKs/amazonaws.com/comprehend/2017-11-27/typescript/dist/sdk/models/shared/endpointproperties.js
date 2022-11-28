@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { EndpointStatusEnum } from "./endpointstatusenum";
 // EndpointProperties
 /**
@@ -34,39 +34,39 @@ var EndpointProperties = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=CreationTime" }),
+        SpeakeasyMetadata({ data: "json, name=CreationTime" }),
         __metadata("design:type", Date)
     ], EndpointProperties.prototype, "creationTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=CurrentInferenceUnits" }),
+        SpeakeasyMetadata({ data: "json, name=CurrentInferenceUnits" }),
         __metadata("design:type", Number)
     ], EndpointProperties.prototype, "currentInferenceUnits", void 0);
     __decorate([
-        Metadata({ data: "json, name=DataAccessRoleArn" }),
+        SpeakeasyMetadata({ data: "json, name=DataAccessRoleArn" }),
         __metadata("design:type", String)
     ], EndpointProperties.prototype, "dataAccessRoleArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=DesiredInferenceUnits" }),
+        SpeakeasyMetadata({ data: "json, name=DesiredInferenceUnits" }),
         __metadata("design:type", Number)
     ], EndpointProperties.prototype, "desiredInferenceUnits", void 0);
     __decorate([
-        Metadata({ data: "json, name=EndpointArn" }),
+        SpeakeasyMetadata({ data: "json, name=EndpointArn" }),
         __metadata("design:type", String)
     ], EndpointProperties.prototype, "endpointArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=LastModifiedTime" }),
+        SpeakeasyMetadata({ data: "json, name=LastModifiedTime" }),
         __metadata("design:type", Date)
     ], EndpointProperties.prototype, "lastModifiedTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=Message" }),
+        SpeakeasyMetadata({ data: "json, name=Message" }),
         __metadata("design:type", String)
     ], EndpointProperties.prototype, "message", void 0);
     __decorate([
-        Metadata({ data: "json, name=ModelArn" }),
+        SpeakeasyMetadata({ data: "json, name=ModelArn" }),
         __metadata("design:type", String)
     ], EndpointProperties.prototype, "modelArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=Status" }),
+        SpeakeasyMetadata({ data: "json, name=Status" }),
         __metadata("design:type", String)
     ], EndpointProperties.prototype, "status", void 0);
     return EndpointProperties;

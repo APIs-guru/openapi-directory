@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetBetHistoryQueryParams = /** @class */ (function (_super) {
     __extends(GetBetHistoryQueryParams, _super);
@@ -30,39 +30,39 @@ var GetBetHistoryQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=dateFrom" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=dateFrom" }),
         __metadata("design:type", String)
     ], GetBetHistoryQueryParams.prototype, "dateFrom", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=dateTo" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=dateTo" }),
         __metadata("design:type", String)
     ], GetBetHistoryQueryParams.prototype, "dateTo", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=false;name=exclude" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=exclude" }),
         __metadata("design:type", Array)
     ], GetBetHistoryQueryParams.prototype, "exclude", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=false;name=fields" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=fields" }),
         __metadata("design:type", Array)
     ], GetBetHistoryQueryParams.prototype, "fields", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=false;name=include" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=include" }),
         __metadata("design:type", Array)
     ], GetBetHistoryQueryParams.prototype, "include", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=page" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page" }),
         __metadata("design:type", Number)
     ], GetBetHistoryQueryParams.prototype, "page", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=pageSize" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=pageSize" }),
         __metadata("design:type", Number)
     ], GetBetHistoryQueryParams.prototype, "pageSize", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=settled" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=settled" }),
         __metadata("design:type", Boolean)
     ], GetBetHistoryQueryParams.prototype, "settled", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=sort" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sort" }),
         __metadata("design:type", String)
     ], GetBetHistoryQueryParams.prototype, "sort", void 0);
     return GetBetHistoryQueryParams;
@@ -74,15 +74,15 @@ var GetBetHistoryHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=apiKey" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=apiKey" }),
         __metadata("design:type", String)
     ], GetBetHistoryHeaders.prototype, "apiKey", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=apiSecret" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=apiSecret" }),
         __metadata("design:type", String)
     ], GetBetHistoryHeaders.prototype, "apiSecret", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=apiTicket" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=apiTicket" }),
         __metadata("design:type", String)
     ], GetBetHistoryHeaders.prototype, "apiTicket", void 0);
     return GetBetHistoryHeaders;
@@ -94,11 +94,11 @@ var GetBetHistoryRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetBetHistoryQueryParams)
     ], GetBetHistoryRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetBetHistoryHeaders)
     ], GetBetHistoryRequest.prototype, "headers", void 0);
     return GetBetHistoryRequest;
@@ -110,19 +110,19 @@ var GetBetHistoryResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetBetHistoryResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetBetHistoryResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.BetHistoryResponse)
     ], GetBetHistoryResponse.prototype, "betHistoryResponse", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.Errors)
     ], GetBetHistoryResponse.prototype, "errors", void 0);
     return GetBetHistoryResponse;

@@ -20,7 +20,15 @@ const (
 	ContentOutstreamPositionAssignedTargetingOptionDetailsContentOutstreamPositionEnumContentOutstreamPositionInterstitial ContentOutstreamPositionAssignedTargetingOptionDetailsContentOutstreamPositionEnum = "CONTENT_OUTSTREAM_POSITION_INTERSTITIAL"
 )
 
+// ContentOutstreamPositionAssignedTargetingOptionDetails
+// Assigned content outstream position targeting option details. This will be populated in the content_outstream_position_details field when targeting_type is `TARGETING_TYPE_CONTENT_OUTSTREAM_POSITION`.
 type ContentOutstreamPositionAssignedTargetingOptionDetails struct {
 	AdType                   *ContentOutstreamPositionAssignedTargetingOptionDetailsAdTypeEnum                   `json:"adType,omitempty"`
+	ContentOutstreamPosition *ContentOutstreamPositionAssignedTargetingOptionDetailsContentOutstreamPositionEnum `json:"contentOutstreamPosition,omitempty"`
+}
+
+// ContentOutstreamPositionAssignedTargetingOptionDetailsInput
+// Assigned content outstream position targeting option details. This will be populated in the content_outstream_position_details field when targeting_type is `TARGETING_TYPE_CONTENT_OUTSTREAM_POSITION`.
+type ContentOutstreamPositionAssignedTargetingOptionDetailsInput struct {
 	ContentOutstreamPosition *ContentOutstreamPositionAssignedTargetingOptionDetailsContentOutstreamPositionEnum `json:"contentOutstreamPosition,omitempty"`
 }

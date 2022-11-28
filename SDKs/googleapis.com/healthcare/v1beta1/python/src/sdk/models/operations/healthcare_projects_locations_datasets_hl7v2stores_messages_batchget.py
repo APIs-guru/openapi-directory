@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class HealthcareProjectsLocationsDatasetsHl7V2StoresMessagesBatchGetPathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 class HealthcareProjectsLocationsDatasetsHl7V2StoresMessagesBatchGetViewEnum(str, Enum):
     MESSAGE_VIEW_UNSPECIFIED = "MESSAGE_VIEW_UNSPECIFIED"
@@ -35,20 +36,20 @@ class HealthcareProjectsLocationsDatasetsHl7V2StoresMessagesBatchGetQueryParams:
 
 @dataclass
 class HealthcareProjectsLocationsDatasetsHl7V2StoresMessagesBatchGetSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class HealthcareProjectsLocationsDatasetsHl7V2StoresMessagesBatchGetRequest:
-    path_params: HealthcareProjectsLocationsDatasetsHl7V2StoresMessagesBatchGetPathParams = field(default=None)
-    query_params: HealthcareProjectsLocationsDatasetsHl7V2StoresMessagesBatchGetQueryParams = field(default=None)
-    security: HealthcareProjectsLocationsDatasetsHl7V2StoresMessagesBatchGetSecurity = field(default=None)
+    path_params: HealthcareProjectsLocationsDatasetsHl7V2StoresMessagesBatchGetPathParams = field()
+    query_params: HealthcareProjectsLocationsDatasetsHl7V2StoresMessagesBatchGetQueryParams = field()
+    security: HealthcareProjectsLocationsDatasetsHl7V2StoresMessagesBatchGetSecurity = field()
     
 
 @dataclass
 class HealthcareProjectsLocationsDatasetsHl7V2StoresMessagesBatchGetResponse:
+    content_type: str = field()
+    status_code: int = field()
     batch_get_messages_response: Optional[shared.BatchGetMessagesResponse] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { WmxSitemapContent } from "./wmxsitemapcontent";
 export declare enum WmxSitemapTypeEnum {
     NotSitemap = "NOT_SITEMAP",

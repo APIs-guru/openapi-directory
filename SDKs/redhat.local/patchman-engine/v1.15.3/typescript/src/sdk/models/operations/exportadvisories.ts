@@ -1,59 +1,60 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class ExportAdvisoriesQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=filter[advisory_type]" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=filter[advisory_type]" })
   filterAdvisoryType?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=filter[applicable_systems]" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=filter[applicable_systems]" })
   filterApplicableSystems?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=filter[description]" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=filter[description]" })
   filterDescription?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=filter[id]" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=filter[id]" })
   filterId?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=filter[public_date]" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=filter[public_date]" })
   filterPublicDate?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=filter[severity]" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=filter[severity]" })
   filterSeverity?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=filter[synopsis]" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=filter[synopsis]" })
   filterSynopsis?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=search" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=search" })
   search?: string;
 }
 
 
 export class ExportAdvisoriesSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
   rhIdentity: shared.SchemeRhIdentity;
 }
 
 
 export class ExportAdvisoriesRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: ExportAdvisoriesQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: ExportAdvisoriesSecurity;
 }
 
 
 export class ExportAdvisoriesResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata({ elemType: shared.ControllersAdvisoryInlineItem })
+  @SpeakeasyMetadata({ elemType: shared.ControllersAdvisoryInlineItem })
   controllersAdvisoryInlineItems?: shared.ControllersAdvisoryInlineItem[];
 }

@@ -1,74 +1,63 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class AttachVolumePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=volumeId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=volumeId" })
   volumeId: number;
 }
 
 
 export class AttachVolumeRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=config_id" })
+  @SpeakeasyMetadata({ data: "json, name=config_id" })
   configId?: number;
 
-  @Metadata({ data: "json, name=linode_id" })
+  @SpeakeasyMetadata({ data: "json, name=linode_id" })
   linodeId: number;
 
-  @Metadata({ data: "json, name=persist_across_boots" })
+  @SpeakeasyMetadata({ data: "json, name=persist_across_boots" })
   persistAcrossBoots?: boolean;
 }
 
 
-export class AttachVolumeSecurityOption1 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=bearer" })
-  personalAccessToken: shared.SchemePersonalAccessToken;
-}
-
-
-export class AttachVolumeSecurityOption2 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
-  oauth: shared.SchemeOauth;
-}
-
-
 export class AttachVolumeSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, option=true" })
-  option1?: AttachVolumeSecurityOption1;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" })
+  personalAccessToken?: shared.SchemePersonalAccessToken;
 
-  @Metadata({ data: "security, option=true" })
-  option2?: AttachVolumeSecurityOption2;
-}
-
-
-export class AttachVolumeRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: AttachVolumePathParams;
-
-  @Metadata({ data: "request, media_type=application/json" })
-  request: AttachVolumeRequestBody;
-
-  @Metadata()
-  security: AttachVolumeSecurity;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
+  oauth?: shared.SchemeOauth;
 }
 
 
 export class AttachVolumeDefaultApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=errors", elemType: shared.ErrorObject })
+  @SpeakeasyMetadata({ data: "json, name=errors", elemType: shared.ErrorObject })
   errors?: shared.ErrorObject[];
 }
 
 
+export class AttachVolumeRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: AttachVolumePathParams;
+
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request: AttachVolumeRequestBody;
+
+  @SpeakeasyMetadata()
+  security: AttachVolumeSecurity;
+}
+
+
 export class AttachVolumeResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   volume?: shared.Volume;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   attachVolumeDefaultApplicationJsonObject?: AttachVolumeDefaultApplicationJson;
 }

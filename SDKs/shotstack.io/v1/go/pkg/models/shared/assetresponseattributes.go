@@ -9,6 +9,8 @@ const (
 	AssetResponseAttributesStatusEnumDeleted   AssetResponseAttributesStatusEnum = "deleted"
 )
 
+// AssetResponseAttributes
+// The list of asset attributes and their values.
 type AssetResponseAttributes struct {
 	Created  *string                            `json:"created,omitempty"`
 	Filename *string                            `json:"filename,omitempty"`

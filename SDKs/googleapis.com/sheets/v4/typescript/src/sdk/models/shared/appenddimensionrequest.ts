@@ -1,9 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum AppendDimensionRequestDimensionEnum {
-    DimensionUnspecified = "DIMENSION_UNSPECIFIED"
-,    Rows = "ROWS"
-,    Columns = "COLUMNS"
+    DimensionUnspecified = "DIMENSION_UNSPECIFIED",
+    Rows = "ROWS",
+    Columns = "COLUMNS"
 }
 
 
@@ -12,12 +13,12 @@ export enum AppendDimensionRequestDimensionEnum {
  * Appends rows or columns to the end of a sheet.
 **/
 export class AppendDimensionRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=dimension" })
+  @SpeakeasyMetadata({ data: "json, name=dimension" })
   dimension?: AppendDimensionRequestDimensionEnum;
 
-  @Metadata({ data: "json, name=length" })
+  @SpeakeasyMetadata({ data: "json, name=length" })
   length?: number;
 
-  @Metadata({ data: "json, name=sheetId" })
+  @SpeakeasyMetadata({ data: "json, name=sheetId" })
   sheetId?: number;
 }

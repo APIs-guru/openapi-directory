@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PlatformEnum } from "./platformenum";
+
 
 
 // BundleDetails
@@ -7,21 +8,21 @@ import { PlatformEnum } from "./platformenum";
  *  The details of the bundle. 
 **/
 export class BundleDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=availablePlatforms" })
+  @SpeakeasyMetadata({ data: "json, name=availablePlatforms" })
   availablePlatforms?: PlatformEnum[];
 
-  @Metadata({ data: "json, name=bundleId" })
+  @SpeakeasyMetadata({ data: "json, name=bundleId" })
   bundleId?: string;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=iconUrl" })
+  @SpeakeasyMetadata({ data: "json, name=iconUrl" })
   iconUrl?: string;
 
-  @Metadata({ data: "json, name=title" })
+  @SpeakeasyMetadata({ data: "json, name=title" })
   title?: string;
 
-  @Metadata({ data: "json, name=version" })
+  @SpeakeasyMetadata({ data: "json, name=version" })
   version?: string;
 }

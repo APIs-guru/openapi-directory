@@ -12,6 +12,8 @@ const (
 	ScheduleStateEnumDeleting         ScheduleStateEnum = "DELETING"
 )
 
+// Schedule
+// The definition of a schedule.
 type Schedule struct {
 	CreateTime        *string            `json:"createTime,omitempty"`
 	CronSchedule      *string            `json:"cronSchedule,omitempty"`
@@ -23,4 +25,14 @@ type Schedule struct {
 	State             *ScheduleStateEnum `json:"state,omitempty"`
 	TimeZone          *string            `json:"timeZone,omitempty"`
 	UpdateTime        *string            `json:"updateTime,omitempty"`
+}
+
+// ScheduleInput
+// The definition of a schedule.
+type ScheduleInput struct {
+	CronSchedule      *string            `json:"cronSchedule,omitempty"`
+	Description       *string            `json:"description,omitempty"`
+	ExecutionTemplate *ExecutionTemplate `json:"executionTemplate,omitempty"`
+	State             *ScheduleStateEnum `json:"state,omitempty"`
+	TimeZone          *string            `json:"timeZone,omitempty"`
 }

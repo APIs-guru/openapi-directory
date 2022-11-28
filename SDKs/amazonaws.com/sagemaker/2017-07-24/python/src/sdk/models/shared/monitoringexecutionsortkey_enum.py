@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class MonitoringExecutionSortKeyEnum(str, Enum):
     CREATION_TIME = "CreationTime"

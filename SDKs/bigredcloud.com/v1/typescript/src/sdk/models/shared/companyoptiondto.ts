@@ -1,46 +1,47 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class CompanyOptionDto extends SpeakeasyBase {
-  @Metadata({ data: "json, name=allowEntryOfGrossPriceInInvoicing" })
+  @SpeakeasyMetadata({ data: "json, name=allowEntryOfGrossPriceInInvoicing" })
   allowEntryOfGrossPriceInInvoicing?: boolean;
 
-  @Metadata({ data: "json, name=creditInputForReverseChargeVAT" })
+  @SpeakeasyMetadata({ data: "json, name=creditInputForReverseChargeVAT" })
   creditInputForReverseChargeVat?: boolean;
 
-  @Metadata({ data: "json, name=creditNoteJournalAgeingName" })
+  @SpeakeasyMetadata({ data: "json, name=creditNoteJournalAgeingName" })
   creditNoteJournalAgeingName?: string;
 
-  @Metadata({ data: "json, name=creditNoteJournalAgeingValue" })
+  @SpeakeasyMetadata({ data: "json, name=creditNoteJournalAgeingValue" })
   creditNoteJournalAgeingValue?: number;
 
-  @Metadata({ data: "json, name=discrepancyAllowed" })
+  @SpeakeasyMetadata({ data: "json, name=discrepancyAllowed" })
   discrepancyAllowed?: number;
 
-  @Metadata({ data: "json, name=enableVOCRReporting" })
+  @SpeakeasyMetadata({ data: "json, name=enableVOCRReporting" })
   enableVocrReporting?: boolean;
 
-  @Metadata({ data: "json, name=marginVatScheme" })
+  @SpeakeasyMetadata({ data: "json, name=marginVatScheme" })
   marginVatScheme?: boolean;
 
-  @Metadata({ data: "json, name=printOSItemsOnly" })
+  @SpeakeasyMetadata({ data: "json, name=printOSItemsOnly" })
   printOsItemsOnly?: boolean;
 
-  @Metadata({ data: "json, name=purchasesVatAnalysisType" })
+  @SpeakeasyMetadata({ data: "json, name=purchasesVatAnalysisType" })
   purchasesVatAnalysisType?: number;
 
-  @Metadata({ data: "json, name=salesVatAnalysisType" })
+  @SpeakeasyMetadata({ data: "json, name=salesVatAnalysisType" })
   salesVatAnalysisType?: number;
 
-  @Metadata({ data: "json, name=useAllocations" })
+  @SpeakeasyMetadata({ data: "json, name=useAllocations" })
   useAllocations?: boolean;
 
-  @Metadata({ data: "json, name=useNominal" })
+  @SpeakeasyMetadata({ data: "json, name=useNominal" })
   useNominal?: boolean;
 
-  @Metadata({ data: "json, name=useNominalCode" })
+  @SpeakeasyMetadata({ data: "json, name=useNominalCode" })
   useNominalCode?: boolean;
 
-  @Metadata({ data: "json, name=vocrSettingValue" })
+  @SpeakeasyMetadata({ data: "json, name=vocrSettingValue" })
   vocrSettingValue?: boolean;
 }

@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { LayerAvailabilityEnum } from "./layeravailabilityenum";
+
 
 
 // Layer
@@ -7,15 +8,15 @@ import { LayerAvailabilityEnum } from "./layeravailabilityenum";
  * An object representing an Amazon ECR image layer.
 **/
 export class Layer extends SpeakeasyBase {
-  @Metadata({ data: "json, name=layerAvailability" })
+  @SpeakeasyMetadata({ data: "json, name=layerAvailability" })
   layerAvailability?: LayerAvailabilityEnum;
 
-  @Metadata({ data: "json, name=layerDigest" })
+  @SpeakeasyMetadata({ data: "json, name=layerDigest" })
   layerDigest?: string;
 
-  @Metadata({ data: "json, name=layerSize" })
+  @SpeakeasyMetadata({ data: "json, name=layerSize" })
   layerSize?: number;
 
-  @Metadata({ data: "json, name=mediaType" })
+  @SpeakeasyMetadata({ data: "json, name=mediaType" })
   mediaType?: string;
 }

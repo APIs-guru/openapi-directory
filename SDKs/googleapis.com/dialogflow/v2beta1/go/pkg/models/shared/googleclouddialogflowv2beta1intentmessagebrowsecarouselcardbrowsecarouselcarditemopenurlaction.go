@@ -8,6 +8,8 @@ const (
 	GoogleCloudDialogflowV2beta1IntentMessageBrowseCarouselCardBrowseCarouselCardItemOpenURLActionURLTypeHintEnumAmpContent             GoogleCloudDialogflowV2beta1IntentMessageBrowseCarouselCardBrowseCarouselCardItemOpenURLActionURLTypeHintEnum = "AMP_CONTENT"
 )
 
+// GoogleCloudDialogflowV2beta1IntentMessageBrowseCarouselCardBrowseCarouselCardItemOpenURLAction
+// Actions on Google action to open a given url.
 type GoogleCloudDialogflowV2beta1IntentMessageBrowseCarouselCardBrowseCarouselCardItemOpenURLAction struct {
 	URL         *string                                                                                                        `json:"url,omitempty"`
 	URLTypeHint *GoogleCloudDialogflowV2beta1IntentMessageBrowseCarouselCardBrowseCarouselCardItemOpenURLActionURLTypeHintEnum `json:"urlTypeHint,omitempty"`

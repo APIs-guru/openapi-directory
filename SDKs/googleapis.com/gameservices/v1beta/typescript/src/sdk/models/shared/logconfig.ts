@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CloudAuditOptions } from "./cloudauditoptions";
 import { CounterOptions } from "./counteroptions";
 import { DataAccessOptions } from "./dataaccessoptions";
+
 
 
 // LogConfig
@@ -9,12 +10,12 @@ import { DataAccessOptions } from "./dataaccessoptions";
  * Specifies what kind of log the caller must write
 **/
 export class LogConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=cloudAudit" })
+  @SpeakeasyMetadata({ data: "json, name=cloudAudit" })
   cloudAudit?: CloudAuditOptions;
 
-  @Metadata({ data: "json, name=counter" })
+  @SpeakeasyMetadata({ data: "json, name=counter" })
   counter?: CounterOptions;
 
-  @Metadata({ data: "json, name=dataAccess" })
+  @SpeakeasyMetadata({ data: "json, name=dataAccess" })
   dataAccess?: DataAccessOptions;
 }

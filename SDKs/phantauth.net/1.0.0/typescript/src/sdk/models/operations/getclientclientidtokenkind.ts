@@ -1,31 +1,32 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum GetClientClientIdTokenKindKindEnum {
-    Registration = "'registration'"
-,    Selfie = "'selfie'"
-,    Plain = "'plain'"
+    Registration = "'registration'",
+    Selfie = "'selfie'",
+    Plain = "'plain'"
 }
 
 
 export class GetClientClientIdTokenKindPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=client_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=client_id" })
   clientId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=kind" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=kind" })
   kind: GetClientClientIdTokenKindKindEnum;
 }
 
 
 export class GetClientClientIdTokenKindRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetClientClientIdTokenKindPathParams;
 }
 
 
 export class GetClientClientIdTokenKindResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

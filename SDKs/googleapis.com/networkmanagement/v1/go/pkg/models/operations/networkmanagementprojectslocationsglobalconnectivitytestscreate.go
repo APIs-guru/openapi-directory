@@ -31,7 +31,7 @@ type NetworkmanagementProjectsLocationsGlobalConnectivityTestsCreateSecurity str
 type NetworkmanagementProjectsLocationsGlobalConnectivityTestsCreateRequest struct {
 	PathParams  NetworkmanagementProjectsLocationsGlobalConnectivityTestsCreatePathParams
 	QueryParams NetworkmanagementProjectsLocationsGlobalConnectivityTestsCreateQueryParams
-	Request     *shared.ConnectivityTest `request:"mediaType=application/json"`
+	Request     *shared.ConnectivityTestInput `request:"mediaType=application/json"`
 	Security    NetworkmanagementProjectsLocationsGlobalConnectivityTestsCreateSecurity
 }
 

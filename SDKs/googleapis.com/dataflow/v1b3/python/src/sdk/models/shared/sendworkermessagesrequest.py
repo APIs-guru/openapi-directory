@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import workermessage
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class SendWorkerMessagesRequest:
-    location: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'location' }})
-    worker_messages: Optional[List[workermessage.WorkerMessage]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'workerMessages' }})
+    r"""SendWorkerMessagesRequest
+    A request for sending worker messages to the service.
+    """
+    
+    location: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('location') }})
+    worker_messages: Optional[List[WorkerMessage]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('workerMessages') }})
     

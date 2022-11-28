@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { NotificationRuleSummary } from "./notificationrulesummary";
 
 
+
 export class ListNotificationRulesResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=NotificationRules", elemType: shared.NotificationRuleSummary })
+  @SpeakeasyMetadata({ data: "json, name=NotificationRules", elemType: NotificationRuleSummary })
   notificationRules?: NotificationRuleSummary[];
 }

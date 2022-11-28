@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare enum CreateWebAclxAmzTargetEnum {
     AwswafRegional20161128CreateWebAcl = "AWSWAF_Regional_20161128.CreateWebACL"

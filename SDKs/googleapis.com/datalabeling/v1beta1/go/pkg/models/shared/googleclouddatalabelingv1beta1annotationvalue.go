@@ -1,5 +1,7 @@
 package shared
 
+// GoogleCloudDatalabelingV1beta1AnnotationValue
+// Annotation value for an example.
 type GoogleCloudDatalabelingV1beta1AnnotationValue struct {
 	ImageBoundingPolyAnnotation    *GoogleCloudDatalabelingV1beta1ImageBoundingPolyAnnotation    `json:"imageBoundingPolyAnnotation,omitempty"`
 	ImageClassificationAnnotation  *GoogleCloudDatalabelingV1beta1ImageClassificationAnnotation  `json:"imageClassificationAnnotation,omitempty"`

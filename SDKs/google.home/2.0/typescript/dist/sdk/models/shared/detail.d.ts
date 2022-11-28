@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { IconList } from "./iconlist";
 import { Locale } from "./locale";
 import { Timezone } from "./timezone";

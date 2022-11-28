@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ContinueWatchingListData } from "./continuewatchinglistdata";
+
 
 
 // ListData
@@ -9,6 +10,6 @@ import { ContinueWatchingListData } from "./continuewatchinglistdata";
  * 
 **/
 export class ListData extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ContinueWatching" })
+  @SpeakeasyMetadata({ data: "json, name=ContinueWatching" })
   continueWatching?: ContinueWatchingListData;
 }

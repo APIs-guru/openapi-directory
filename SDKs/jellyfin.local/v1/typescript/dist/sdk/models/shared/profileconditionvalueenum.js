@@ -1,0 +1,26 @@
+export var ProfileConditionValueEnum;
+(function (ProfileConditionValueEnum) {
+    ProfileConditionValueEnum["AudioChannels"] = "AudioChannels";
+    ProfileConditionValueEnum["AudioBitrate"] = "AudioBitrate";
+    ProfileConditionValueEnum["AudioProfile"] = "AudioProfile";
+    ProfileConditionValueEnum["Width"] = "Width";
+    ProfileConditionValueEnum["Height"] = "Height";
+    ProfileConditionValueEnum["Has64BitOffsets"] = "Has64BitOffsets";
+    ProfileConditionValueEnum["PacketLength"] = "PacketLength";
+    ProfileConditionValueEnum["VideoBitDepth"] = "VideoBitDepth";
+    ProfileConditionValueEnum["VideoBitrate"] = "VideoBitrate";
+    ProfileConditionValueEnum["VideoFramerate"] = "VideoFramerate";
+    ProfileConditionValueEnum["VideoLevel"] = "VideoLevel";
+    ProfileConditionValueEnum["VideoProfile"] = "VideoProfile";
+    ProfileConditionValueEnum["VideoTimestamp"] = "VideoTimestamp";
+    ProfileConditionValueEnum["IsAnamorphic"] = "IsAnamorphic";
+    ProfileConditionValueEnum["RefFrames"] = "RefFrames";
+    ProfileConditionValueEnum["NumAudioStreams"] = "NumAudioStreams";
+    ProfileConditionValueEnum["NumVideoStreams"] = "NumVideoStreams";
+    ProfileConditionValueEnum["IsSecondaryAudio"] = "IsSecondaryAudio";
+    ProfileConditionValueEnum["VideoCodecTag"] = "VideoCodecTag";
+    ProfileConditionValueEnum["IsAvc"] = "IsAvc";
+    ProfileConditionValueEnum["IsInterlaced"] = "IsInterlaced";
+    ProfileConditionValueEnum["AudioSampleRate"] = "AudioSampleRate";
+    ProfileConditionValueEnum["AudioBitDepth"] = "AudioBitDepth";
+})(ProfileConditionValueEnum || (ProfileConditionValueEnum = {}));

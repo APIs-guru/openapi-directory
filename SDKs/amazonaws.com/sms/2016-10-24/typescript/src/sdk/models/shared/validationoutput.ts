@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AppValidationOutput } from "./appvalidationoutput";
 import { ServerValidationOutput } from "./servervalidationoutput";
 import { ValidationStatusEnum } from "./validationstatusenum";
+
 
 
 // ValidationOutput
@@ -9,24 +10,24 @@ import { ValidationStatusEnum } from "./validationstatusenum";
  * Contains validation output.
 **/
 export class ValidationOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=appValidationOutput" })
+  @SpeakeasyMetadata({ data: "json, name=appValidationOutput" })
   appValidationOutput?: AppValidationOutput;
 
-  @Metadata({ data: "json, name=latestValidationTime" })
+  @SpeakeasyMetadata({ data: "json, name=latestValidationTime" })
   latestValidationTime?: Date;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=serverValidationOutput" })
+  @SpeakeasyMetadata({ data: "json, name=serverValidationOutput" })
   serverValidationOutput?: ServerValidationOutput;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: ValidationStatusEnum;
 
-  @Metadata({ data: "json, name=statusMessage" })
+  @SpeakeasyMetadata({ data: "json, name=statusMessage" })
   statusMessage?: string;
 
-  @Metadata({ data: "json, name=validationId" })
+  @SpeakeasyMetadata({ data: "json, name=validationId" })
   validationId?: string;
 }

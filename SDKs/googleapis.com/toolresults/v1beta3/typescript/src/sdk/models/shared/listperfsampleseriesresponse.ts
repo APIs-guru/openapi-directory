@@ -1,9 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PerfSampleSeries } from "./perfsampleseries";
 
 
+
 export class ListPerfSampleSeriesResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=perfSampleSeries", elemType: shared.PerfSampleSeries })
+  @SpeakeasyMetadata({ data: "json, name=perfSampleSeries", elemType: PerfSampleSeries })
   perfSampleSeries?: PerfSampleSeries[];
 }

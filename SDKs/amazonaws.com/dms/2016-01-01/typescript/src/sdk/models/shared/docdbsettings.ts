@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { NestingLevelValueEnum } from "./nestinglevelvalueenum";
+
 
 
 // DocDbSettings
@@ -7,36 +8,36 @@ import { NestingLevelValueEnum } from "./nestinglevelvalueenum";
  * Provides information that defines a DocumentDB endpoint.
 **/
 export class DocDbSettings extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DatabaseName" })
+  @SpeakeasyMetadata({ data: "json, name=DatabaseName" })
   databaseName?: string;
 
-  @Metadata({ data: "json, name=DocsToInvestigate" })
+  @SpeakeasyMetadata({ data: "json, name=DocsToInvestigate" })
   docsToInvestigate?: number;
 
-  @Metadata({ data: "json, name=ExtractDocId" })
+  @SpeakeasyMetadata({ data: "json, name=ExtractDocId" })
   extractDocId?: boolean;
 
-  @Metadata({ data: "json, name=KmsKeyId" })
+  @SpeakeasyMetadata({ data: "json, name=KmsKeyId" })
   kmsKeyId?: string;
 
-  @Metadata({ data: "json, name=NestingLevel" })
+  @SpeakeasyMetadata({ data: "json, name=NestingLevel" })
   nestingLevel?: NestingLevelValueEnum;
 
-  @Metadata({ data: "json, name=Password" })
+  @SpeakeasyMetadata({ data: "json, name=Password" })
   password?: string;
 
-  @Metadata({ data: "json, name=Port" })
+  @SpeakeasyMetadata({ data: "json, name=Port" })
   port?: number;
 
-  @Metadata({ data: "json, name=SecretsManagerAccessRoleArn" })
+  @SpeakeasyMetadata({ data: "json, name=SecretsManagerAccessRoleArn" })
   secretsManagerAccessRoleArn?: string;
 
-  @Metadata({ data: "json, name=SecretsManagerSecretId" })
+  @SpeakeasyMetadata({ data: "json, name=SecretsManagerSecretId" })
   secretsManagerSecretId?: string;
 
-  @Metadata({ data: "json, name=ServerName" })
+  @SpeakeasyMetadata({ data: "json, name=ServerName" })
   serverName?: string;
 
-  @Metadata({ data: "json, name=Username" })
+  @SpeakeasyMetadata({ data: "json, name=Username" })
   username?: string;
 }

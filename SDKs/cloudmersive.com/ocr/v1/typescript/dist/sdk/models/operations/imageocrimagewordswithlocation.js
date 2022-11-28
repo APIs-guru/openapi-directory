@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var ImageOcrImageWordsWithLocationHeaders = /** @class */ (function (_super) {
     __extends(ImageOcrImageWordsWithLocationHeaders, _super);
@@ -30,11 +30,11 @@ var ImageOcrImageWordsWithLocationHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=language" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=language" }),
         __metadata("design:type", String)
     ], ImageOcrImageWordsWithLocationHeaders.prototype, "language", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=preprocessing" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=preprocessing" }),
         __metadata("design:type", String)
     ], ImageOcrImageWordsWithLocationHeaders.prototype, "preprocessing", void 0);
     return ImageOcrImageWordsWithLocationHeaders;
@@ -46,11 +46,11 @@ var ImageOcrImageWordsWithLocationRequestBodyImageFile = /** @class */ (function
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "multipart_form, content=true" }),
+        SpeakeasyMetadata({ data: "multipart_form, content=true" }),
         __metadata("design:type", Uint8Array)
     ], ImageOcrImageWordsWithLocationRequestBodyImageFile.prototype, "content", void 0);
     __decorate([
-        Metadata({ data: "multipart_form, name=imageFile" }),
+        SpeakeasyMetadata({ data: "multipart_form, name=imageFile" }),
         __metadata("design:type", String)
     ], ImageOcrImageWordsWithLocationRequestBodyImageFile.prototype, "imageFile", void 0);
     return ImageOcrImageWordsWithLocationRequestBodyImageFile;
@@ -62,7 +62,7 @@ var ImageOcrImageWordsWithLocationRequestBody = /** @class */ (function (_super)
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "multipart_form, file=true" }),
+        SpeakeasyMetadata({ data: "multipart_form, file=true" }),
         __metadata("design:type", ImageOcrImageWordsWithLocationRequestBodyImageFile)
     ], ImageOcrImageWordsWithLocationRequestBody.prototype, "imageFile", void 0);
     return ImageOcrImageWordsWithLocationRequestBody;
@@ -74,7 +74,7 @@ var ImageOcrImageWordsWithLocationSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeApikey)
     ], ImageOcrImageWordsWithLocationSecurity.prototype, "apikey", void 0);
     return ImageOcrImageWordsWithLocationSecurity;
@@ -86,15 +86,15 @@ var ImageOcrImageWordsWithLocationRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ImageOcrImageWordsWithLocationHeaders)
     ], ImageOcrImageWordsWithLocationRequest.prototype, "headers", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=multipart/form-data" }),
+        SpeakeasyMetadata({ data: "request, media_type=multipart/form-data" }),
         __metadata("design:type", ImageOcrImageWordsWithLocationRequestBody)
     ], ImageOcrImageWordsWithLocationRequest.prototype, "request", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ImageOcrImageWordsWithLocationSecurity)
     ], ImageOcrImageWordsWithLocationRequest.prototype, "security", void 0);
     return ImageOcrImageWordsWithLocationRequest;
@@ -106,19 +106,19 @@ var ImageOcrImageWordsWithLocationResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], ImageOcrImageWordsWithLocationResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], ImageOcrImageWordsWithLocationResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.ImageToWordsWithLocationResult)
     ], ImageOcrImageWordsWithLocationResponse.prototype, "imageToWordsWithLocationResult", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], ImageOcrImageWordsWithLocationResponse.prototype, "statusCode", void 0);
     return ImageOcrImageWordsWithLocationResponse;

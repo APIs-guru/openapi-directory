@@ -16,6 +16,31 @@ const (
 	OccurrenceKindEnumDsseAttestation     OccurrenceKindEnum = "DSSE_ATTESTATION"
 )
 
+// OccurrenceInput
+// An instance of an analysis type that has been found on a resource.
+type OccurrenceInput struct {
+	Attestation     *AttestationOccurrence        `json:"attestation,omitempty"`
+	Build           *BuildOccurrence              `json:"build,omitempty"`
+	Compliance      *ComplianceOccurrence         `json:"compliance,omitempty"`
+	CreateTime      *string                       `json:"createTime,omitempty"`
+	Deployment      *DeploymentOccurrence         `json:"deployment,omitempty"`
+	Discovery       *DiscoveryOccurrenceInput     `json:"discovery,omitempty"`
+	DsseAttestation *DsseAttestationOccurrence    `json:"dsseAttestation,omitempty"`
+	Envelope        *Envelope                     `json:"envelope,omitempty"`
+	Image           *ImageOccurrence              `json:"image,omitempty"`
+	Kind            *OccurrenceKindEnum           `json:"kind,omitempty"`
+	Name            *string                       `json:"name,omitempty"`
+	NoteName        *string                       `json:"noteName,omitempty"`
+	Package         *PackageOccurrenceInput       `json:"package,omitempty"`
+	Remediation     *string                       `json:"remediation,omitempty"`
+	ResourceURI     *string                       `json:"resourceUri,omitempty"`
+	UpdateTime      *string                       `json:"updateTime,omitempty"`
+	Upgrade         *UpgradeOccurrence            `json:"upgrade,omitempty"`
+	Vulnerability   *VulnerabilityOccurrenceInput `json:"vulnerability,omitempty"`
+}
+
+// Occurrence
+// An instance of an analysis type that has been found on a resource.
 type Occurrence struct {
 	Attestation     *AttestationOccurrence     `json:"attestation,omitempty"`
 	Build           *BuildOccurrence           `json:"build,omitempty"`

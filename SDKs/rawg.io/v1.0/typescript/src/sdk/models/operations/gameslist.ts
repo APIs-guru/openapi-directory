@@ -1,107 +1,108 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GamesListQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=creators" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=creators" })
   creators?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=dates" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=dates" })
   dates?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=developers" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=developers" })
   developers?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=exclude_additions" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=exclude_additions" })
   excludeAdditions?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=exclude_collection" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=exclude_collection" })
   excludeCollection?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=exclude_game_series" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=exclude_game_series" })
   excludeGameSeries?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=exclude_parents" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=exclude_parents" })
   excludeParents?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=exclude_stores" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=exclude_stores" })
   excludeStores?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=genres" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=genres" })
   genres?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=metacritic" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=metacritic" })
   metacritic?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=ordering" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=ordering" })
   ordering?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=page" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page" })
   page?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=page_size" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page_size" })
   pageSize?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=parent_platforms" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=parent_platforms" })
   parentPlatforms?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=platforms" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=platforms" })
   platforms?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=platforms_count" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=platforms_count" })
   platformsCount?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=publishers" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=publishers" })
   publishers?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=search" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=search" })
   search?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=search_exact" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=search_exact" })
   searchExact?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=search_precise" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=search_precise" })
   searchPrecise?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=stores" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=stores" })
   stores?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=tags" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=tags" })
   tags?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=updated" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=updated" })
   updated?: string;
 }
 
 
-export class GamesListRequest extends SpeakeasyBase {
-  @Metadata()
-  queryParams: GamesListQueryParams;
-}
-
-
 export class GamesList200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=count" })
+  @SpeakeasyMetadata({ data: "json, name=count" })
   count: number;
 
-  @Metadata({ data: "json, name=next" })
+  @SpeakeasyMetadata({ data: "json, name=next" })
   next?: string;
 
-  @Metadata({ data: "json, name=previous" })
+  @SpeakeasyMetadata({ data: "json, name=previous" })
   previous?: string;
 
-  @Metadata({ data: "json, name=results", elemType: shared.Game })
+  @SpeakeasyMetadata({ data: "json, name=results", elemType: shared.Game })
   results: shared.Game[];
 }
 
 
+export class GamesListRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  queryParams: GamesListQueryParams;
+}
+
+
 export class GamesListResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   gamesList200ApplicationJsonObject?: GamesList200ApplicationJson;
 }

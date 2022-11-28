@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
@@ -25,12 +26,12 @@ class IdeahubIdeasListQueryParams:
 
 @dataclass
 class IdeahubIdeasListRequest:
-    query_params: IdeahubIdeasListQueryParams = field(default=None)
+    query_params: IdeahubIdeasListQueryParams = field()
     
 
 @dataclass
 class IdeahubIdeasListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_search_ideahub_v1alpha_list_ideas_response: Optional[shared.GoogleSearchIdeahubV1alphaListIdeasResponse] = field(default=None)
-    status_code: int = field(default=None)
     

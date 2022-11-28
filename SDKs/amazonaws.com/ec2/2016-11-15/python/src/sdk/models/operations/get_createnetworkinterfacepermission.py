@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetCreateNetworkInterfacePermissionActionEnum(str, Enum):
     CREATE_NETWORK_INTERFACE_PERMISSION = "CreateNetworkInterfacePermission"
@@ -14,13 +18,13 @@ class GetCreateNetworkInterfacePermissionVersionEnum(str, Enum):
 
 @dataclass
 class GetCreateNetworkInterfacePermissionQueryParams:
-    action: GetCreateNetworkInterfacePermissionActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetCreateNetworkInterfacePermissionActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    network_interface_id: str = field(metadata={'query_param': { 'field_name': 'NetworkInterfaceId', 'style': 'form', 'explode': True }})
+    permission: GetCreateNetworkInterfacePermissionPermissionEnum = field(metadata={'query_param': { 'field_name': 'Permission', 'style': 'form', 'explode': True }})
+    version: GetCreateNetworkInterfacePermissionVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     aws_account_id: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'AwsAccountId', 'style': 'form', 'explode': True }})
     aws_service: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'AwsService', 'style': 'form', 'explode': True }})
     dry_run: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'DryRun', 'style': 'form', 'explode': True }})
-    network_interface_id: str = field(default=None, metadata={'query_param': { 'field_name': 'NetworkInterfaceId', 'style': 'form', 'explode': True }})
-    permission: GetCreateNetworkInterfacePermissionPermissionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Permission', 'style': 'form', 'explode': True }})
-    version: GetCreateNetworkInterfacePermissionVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -36,13 +40,13 @@ class GetCreateNetworkInterfacePermissionHeaders:
 
 @dataclass
 class GetCreateNetworkInterfacePermissionRequest:
-    query_params: GetCreateNetworkInterfacePermissionQueryParams = field(default=None)
-    headers: GetCreateNetworkInterfacePermissionHeaders = field(default=None)
+    headers: GetCreateNetworkInterfacePermissionHeaders = field()
+    query_params: GetCreateNetworkInterfacePermissionQueryParams = field()
     
 
 @dataclass
 class GetCreateNetworkInterfacePermissionResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

@@ -1,5 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ActionFunction } from "./actionfunction";
 import { SingleFieldDependency } from "./singlefielddependency";
 import { ConditionalSingleFieldDependency } from "./conditionalsinglefielddependency";
@@ -8,35 +7,36 @@ import { ActionLabels } from "./actionlabels";
 import { ObjectRequestOptions } from "./objectrequestoptions";
 
 
+
 // ExtensionActionDefinitionInput
 /** 
  * State of custom workflow action to be created.
 **/
 export class ExtensionActionDefinitionInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=actionUrl" })
+  @SpeakeasyMetadata({ data: "json, name=actionUrl" })
   actionUrl: string;
 
-  @Metadata({ data: "json, name=archivedAt" })
+  @SpeakeasyMetadata({ data: "json, name=archivedAt" })
   archivedAt?: number;
 
-  @Metadata({ data: "json, name=functions", elemType: shared.ActionFunction })
+  @SpeakeasyMetadata({ data: "json, name=functions", elemType: ActionFunction })
   functions: ActionFunction[];
 
-  @Metadata({ data: "json, name=inputFieldDependencies" })
+  @SpeakeasyMetadata({ data: "json, name=inputFieldDependencies" })
   inputFieldDependencies?: any[];
 
-  @Metadata({ data: "json, name=inputFields", elemType: shared.InputFieldDefinition })
+  @SpeakeasyMetadata({ data: "json, name=inputFields", elemType: InputFieldDefinition })
   inputFields: InputFieldDefinition[];
 
-  @Metadata({ data: "json, name=labels", elemType: shared.ActionLabels })
+  @SpeakeasyMetadata({ data: "json, name=labels", elemType: ActionLabels })
   labels: Map<string, ActionLabels>;
 
-  @Metadata({ data: "json, name=objectRequestOptions" })
+  @SpeakeasyMetadata({ data: "json, name=objectRequestOptions" })
   objectRequestOptions?: ObjectRequestOptions;
 
-  @Metadata({ data: "json, name=objectTypes" })
+  @SpeakeasyMetadata({ data: "json, name=objectTypes" })
   objectTypes: string[];
 
-  @Metadata({ data: "json, name=published" })
+  @SpeakeasyMetadata({ data: "json, name=published" })
   published: boolean;
 }

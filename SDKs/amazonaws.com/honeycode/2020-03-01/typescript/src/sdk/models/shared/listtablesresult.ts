@@ -1,15 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Table } from "./table";
 
 
+
 export class ListTablesResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=nextToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=tables", elemType: shared.Table })
+  @SpeakeasyMetadata({ data: "json, name=tables", elemType: Table })
   tables: Table[];
 
-  @Metadata({ data: "json, name=workbookCursor" })
+  @SpeakeasyMetadata({ data: "json, name=workbookCursor" })
   workbookCursor?: number;
 }

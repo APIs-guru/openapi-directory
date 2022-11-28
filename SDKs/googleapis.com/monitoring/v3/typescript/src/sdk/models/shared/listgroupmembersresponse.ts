@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { MonitoredResource } from "./monitoredresource";
+
 
 
 // ListGroupMembersResponse
@@ -8,12 +8,12 @@ import { MonitoredResource } from "./monitoredresource";
  * The ListGroupMembers response.
 **/
 export class ListGroupMembersResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=members", elemType: shared.MonitoredResource })
+  @SpeakeasyMetadata({ data: "json, name=members", elemType: MonitoredResource })
   members?: MonitoredResource[];
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 
-  @Metadata({ data: "json, name=totalSize" })
+  @SpeakeasyMetadata({ data: "json, name=totalSize" })
   totalSize?: number;
 }

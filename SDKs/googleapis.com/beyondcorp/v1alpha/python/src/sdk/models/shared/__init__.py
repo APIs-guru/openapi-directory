@@ -1,4 +1,4 @@
-from .__xgafv_enum import *
+from ._xgafv_enum import *
 from .allocatedconnection import *
 from .alt_enum import *
 from .appgateway import *
@@ -31,8 +31,6 @@ from .googlecloudbeyondcorpappconnectorsv1alphanotificationconfigcloudpubsubnoti
 from .googlecloudbeyondcorpappconnectorsv1alphareportstatusrequest import *
 from .googlecloudbeyondcorpappconnectorsv1alpharesolveinstanceconfigresponse import *
 from .googlecloudbeyondcorpappconnectorsv1alpharesourceinfo import *
-from .googlecloudbeyondcorpnetconnectionsv1alphalistnetconnectionsresponse import *
-from .googlecloudbeyondcorpnetconnectionsv1alphanetconnection import *
 from .googlecloudbeyondcorpsaasplatforminsightsv1alphaappliedconfig import *
 from .googlecloudbeyondcorpsaasplatforminsightsv1alphaconfiguredinsightresponse import *
 from .googlecloudbeyondcorpsaasplatforminsightsv1alphacustomgrouping import *
@@ -42,6 +40,8 @@ from .googlecloudbeyondcorpsaasplatforminsightsv1alphainsightmetadatafield impor
 from .googlecloudbeyondcorpsaasplatforminsightsv1alphalistinsightsresponse import *
 from .googlecloudbeyondcorpsaasplatforminsightsv1alpharow import *
 from .googlecloudbeyondcorpsaasplatforminsightsv1alpharowfieldval import *
+from .googlecloudbeyondcorpsaasplatformsubscriptionsv1alphalistsubscriptionsresponse import *
+from .googlecloudbeyondcorpsaasplatformsubscriptionsv1alphasubscription import *
 from .googlecloudlocationlistlocationsresponse import *
 from .googlecloudlocationlocation import *
 from .googleiamv1auditconfig import *

@@ -10,13 +10,13 @@ type PostOauthAccessTokenRequestBody struct {
 	OauthVerifier        *string `json:"oauth_verifier,omitempty"`
 }
 
-type PostOauthAccessTokenRequest struct {
-	Request PostOauthAccessTokenRequestBody `request:"mediaType=application/json"`
-}
-
 type PostOauthAccessToken200ApplicationJSON struct {
 	OauthToken       *string `json:"oauth_token,omitempty"`
 	OauthTokenSecret *string `json:"oauth_token_secret,omitempty"`
+}
+
+type PostOauthAccessTokenRequest struct {
+	Request PostOauthAccessTokenRequestBody `request:"mediaType=application/json"`
 }
 
 type PostOauthAccessTokenResponse struct {

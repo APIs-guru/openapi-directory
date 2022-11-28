@@ -7,6 +7,8 @@ const (
 	GcsDestinationConfigGcsFileFormatEnumAvro                     GcsDestinationConfigGcsFileFormatEnum = "AVRO"
 )
 
+// GcsDestinationConfig
+// Google Cloud Storage destination configuration
 type GcsDestinationConfig struct {
 	AvroFileFormat       map[string]interface{}                 `json:"avroFileFormat,omitempty"`
 	FileRotationInterval *string                                `json:"fileRotationInterval,omitempty"`

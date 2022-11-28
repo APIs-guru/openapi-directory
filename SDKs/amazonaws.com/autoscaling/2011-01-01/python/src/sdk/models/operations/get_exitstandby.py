@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 
 class GetExitStandbyActionEnum(str, Enum):
     EXIT_STANDBY = "ExitStandby"
@@ -10,10 +14,10 @@ class GetExitStandbyVersionEnum(str, Enum):
 
 @dataclass
 class GetExitStandbyQueryParams:
-    action: GetExitStandbyActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    auto_scaling_group_name: str = field(default=None, metadata={'query_param': { 'field_name': 'AutoScalingGroupName', 'style': 'form', 'explode': True }})
+    action: GetExitStandbyActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    auto_scaling_group_name: str = field(metadata={'query_param': { 'field_name': 'AutoScalingGroupName', 'style': 'form', 'explode': True }})
+    version: GetExitStandbyVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     instance_ids: Optional[List[str]] = field(default=None, metadata={'query_param': { 'field_name': 'InstanceIds', 'style': 'form', 'explode': True }})
-    version: GetExitStandbyVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -29,13 +33,13 @@ class GetExitStandbyHeaders:
 
 @dataclass
 class GetExitStandbyRequest:
-    query_params: GetExitStandbyQueryParams = field(default=None)
-    headers: GetExitStandbyHeaders = field(default=None)
+    headers: GetExitStandbyHeaders = field()
+    query_params: GetExitStandbyQueryParams = field()
     
 
 @dataclass
 class GetExitStandbyResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

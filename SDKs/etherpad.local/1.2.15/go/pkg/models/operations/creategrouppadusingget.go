@@ -6,10 +6,6 @@ type CreateGroupPadUsingGetQueryParams struct {
 	Text    *string `queryParam:"style=form,explode=true,name=text"`
 }
 
-type CreateGroupPadUsingGetRequest struct {
-	QueryParams CreateGroupPadUsingGetQueryParams
-}
-
 type CreateGroupPadUsingGet200ApplicationJSON struct {
 	Code    *int64                 `json:"code,omitempty"`
 	Data    map[string]interface{} `json:"data,omitempty"`
@@ -32,6 +28,10 @@ type CreateGroupPadUsingGet500ApplicationJSON struct {
 	Code    *int64                 `json:"code,omitempty"`
 	Data    map[string]interface{} `json:"data,omitempty"`
 	Message *string                `json:"message,omitempty"`
+}
+
+type CreateGroupPadUsingGetRequest struct {
+	QueryParams CreateGroupPadUsingGetQueryParams
 }
 
 type CreateGroupPadUsingGetResponse struct {

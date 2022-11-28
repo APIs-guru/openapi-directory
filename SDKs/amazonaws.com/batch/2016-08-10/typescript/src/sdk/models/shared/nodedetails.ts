@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // NodeDetails
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * An object representing the details of a multi-node parallel job node.
 **/
 export class NodeDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=isMainNode" })
+  @SpeakeasyMetadata({ data: "json, name=isMainNode" })
   isMainNode?: boolean;
 
-  @Metadata({ data: "json, name=nodeIndex" })
+  @SpeakeasyMetadata({ data: "json, name=nodeIndex" })
   nodeIndex?: number;
 }

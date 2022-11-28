@@ -10,6 +10,8 @@ const (
 	GoogleInternalCloudCrmEventbusV3PostToQueueWithTriggerIDRequestPriorityEnumCriticalPlus  GoogleInternalCloudCrmEventbusV3PostToQueueWithTriggerIDRequestPriorityEnum = "CRITICAL_PLUS"
 )
 
+// GoogleInternalCloudCrmEventbusV3PostToQueueWithTriggerIDRequest
+// Use this request to post all workflows associated with a given trigger id. Next available id: 10
 type GoogleInternalCloudCrmEventbusV3PostToQueueWithTriggerIDRequest struct {
 	ClientID                      *string                                                                      `json:"clientId,omitempty"`
 	IgnoreErrorIfNoActiveWorkflow *bool                                                                        `json:"ignoreErrorIfNoActiveWorkflow,omitempty"`

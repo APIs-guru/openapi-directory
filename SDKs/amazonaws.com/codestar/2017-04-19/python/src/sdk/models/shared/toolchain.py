@@ -1,13 +1,18 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import toolchainsource
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class Toolchain:
-    role_arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'roleArn' }})
-    source: toolchainsource.ToolchainSource = field(default=None, metadata={'dataclasses_json': { 'field_name': 'source' }})
-    stack_parameters: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'stackParameters' }})
+    r"""Toolchain
+    The toolchain template file provided with the project request. AWS CodeStar uses the template to provision the toolchain stack in AWS CloudFormation.
+    """
+    
+    source: ToolchainSource = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('source') }})
+    role_arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('roleArn') }})
+    stack_parameters: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('stackParameters') }})
     

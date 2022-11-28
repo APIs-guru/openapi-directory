@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetSentencesFromBookPathParams = /** @class */ (function (_super) {
     __extends(GetSentencesFromBookPathParams, _super);
@@ -30,7 +30,7 @@ var GetSentencesFromBookPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=id" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" }),
         __metadata("design:type", String)
     ], GetSentencesFromBookPathParams.prototype, "id", void 0);
     return GetSentencesFromBookPathParams;
@@ -42,55 +42,55 @@ var GetSentencesFromBookQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=limit" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=limit" }),
         __metadata("design:type", Number)
     ], GetSentencesFromBookQueryParams.prototype, "limit", void 0);
     return GetSentencesFromBookQueryParams;
 }(SpeakeasyBase));
 export { GetSentencesFromBookQueryParams };
-var GetSentencesFromBookRequest = /** @class */ (function (_super) {
-    __extends(GetSentencesFromBookRequest, _super);
-    function GetSentencesFromBookRequest() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    __decorate([
-        Metadata(),
-        __metadata("design:type", GetSentencesFromBookPathParams)
-    ], GetSentencesFromBookRequest.prototype, "pathParams", void 0);
-    __decorate([
-        Metadata(),
-        __metadata("design:type", GetSentencesFromBookQueryParams)
-    ], GetSentencesFromBookRequest.prototype, "queryParams", void 0);
-    return GetSentencesFromBookRequest;
-}(SpeakeasyBase));
-export { GetSentencesFromBookRequest };
 var GetSentencesFromBook200ApplicationJson = /** @class */ (function (_super) {
     __extends(GetSentencesFromBook200ApplicationJson, _super);
     function GetSentencesFromBook200ApplicationJson() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=data", elemType: shared.Sentence }),
+        SpeakeasyMetadata({ data: "json, name=data", elemType: shared.Sentence }),
         __metadata("design:type", Array)
     ], GetSentencesFromBook200ApplicationJson.prototype, "data", void 0);
     return GetSentencesFromBook200ApplicationJson;
 }(SpeakeasyBase));
 export { GetSentencesFromBook200ApplicationJson };
+var GetSentencesFromBookRequest = /** @class */ (function (_super) {
+    __extends(GetSentencesFromBookRequest, _super);
+    function GetSentencesFromBookRequest() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", GetSentencesFromBookPathParams)
+    ], GetSentencesFromBookRequest.prototype, "pathParams", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", GetSentencesFromBookQueryParams)
+    ], GetSentencesFromBookRequest.prototype, "queryParams", void 0);
+    return GetSentencesFromBookRequest;
+}(SpeakeasyBase));
+export { GetSentencesFromBookRequest };
 var GetSentencesFromBookResponse = /** @class */ (function (_super) {
     __extends(GetSentencesFromBookResponse, _super);
     function GetSentencesFromBookResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetSentencesFromBookResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetSentencesFromBookResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetSentencesFromBook200ApplicationJson)
     ], GetSentencesFromBookResponse.prototype, "getSentencesFromBook200ApplicationJsonObject", void 0);
     return GetSentencesFromBookResponse;

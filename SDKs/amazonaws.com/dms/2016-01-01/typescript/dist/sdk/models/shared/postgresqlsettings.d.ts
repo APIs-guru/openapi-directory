@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { PluginNameValueEnum } from "./pluginnamevalueenum";
 /**
  * Provides information that defines a PostgreSQL endpoint.

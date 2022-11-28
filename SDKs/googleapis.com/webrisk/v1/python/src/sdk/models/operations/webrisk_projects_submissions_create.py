@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class WebriskProjectsSubmissionsCreatePathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,21 +26,21 @@ class WebriskProjectsSubmissionsCreateQueryParams:
 
 @dataclass
 class WebriskProjectsSubmissionsCreateSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class WebriskProjectsSubmissionsCreateRequest:
-    path_params: WebriskProjectsSubmissionsCreatePathParams = field(default=None)
-    query_params: WebriskProjectsSubmissionsCreateQueryParams = field(default=None)
+    path_params: WebriskProjectsSubmissionsCreatePathParams = field()
+    query_params: WebriskProjectsSubmissionsCreateQueryParams = field()
+    security: WebriskProjectsSubmissionsCreateSecurity = field()
     request: Optional[shared.GoogleCloudWebriskV1Submission] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: WebriskProjectsSubmissionsCreateSecurity = field(default=None)
     
 
 @dataclass
 class WebriskProjectsSubmissionsCreateResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_cloud_webrisk_v1_submission: Optional[shared.GoogleCloudWebriskV1Submission] = field(default=None)
-    status_code: int = field(default=None)
     

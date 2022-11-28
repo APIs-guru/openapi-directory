@@ -1,16 +1,15 @@
-import axios, { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
-import { MatchContentType } from "../internal/utils/contenttype";
-import * as operations from "./models/operations";
-import { ParamsSerializerOptions } from "axios";
-import { GetQueryParamSerializer } from "../internal/utils/queryparams";
-import { CreateSecurityClient } from "../internal/utils/security";
-import * as utils from "../internal/utils/utils";
+import axios, { AxiosInstance } from "axios";
+import * as utils from "../internal/utils";
+
+import { Generation } from "./generation";
+import { Translation } from "./translation";
+import { Works } from "./works";
 
 type OptsFunc = (sdk: SDK) => void;
 
-const Servers = [
-  "http://api.fungenerators.com",
-  "https://api.fungenerators.com",
+export const ServerList = [
+	"http://api.fungenerators.com",
+	"https://api.fungenerators.com",
 ] as const;
 
 export function WithServerURL(
@@ -21,249 +20,69 @@ export function WithServerURL(
     if (params != null) {
       serverURL = utils.ReplaceParameters(serverURL, params);
     }
-    sdk.serverURL = serverURL;
+    sdk._serverURL = serverURL;
   };
 }
 
 export function WithClient(client: AxiosInstance): OptsFunc {
   return (sdk: SDK) => {
-    sdk.defaultClient = client;
+    sdk._defaultClient = client;
   };
 }
 
 
 export class SDK {
-  defaultClient?: AxiosInstance;
-  securityClient?: AxiosInstance;
-  security?: any;
-  serverURL: string;
+  public generation: Generation;
+  public translation: Translation;
+  public works: Works;
+
+  public _defaultClient: AxiosInstance;
+  public _securityClient: AxiosInstance;
+  
+  public _serverURL: string;
+  private _language = "typescript";
+  private _sdkVersion = "0.0.1";
+  private _genVersion = "internal";
 
   constructor(...opts: OptsFunc[]) {
     opts.forEach((o) => o(this));
-    if (this.serverURL == "") {
-      this.serverURL = Servers[0];
+    if (this._serverURL == "") {
+      this._serverURL = ServerList[0];
     }
 
-    if (!this.defaultClient) {
-      this.defaultClient = axios.create({ baseURL: this.serverURL });
+    if (!this._defaultClient) {
+      this._defaultClient = axios.create({ baseURL: this._serverURL });
     }
 
-    if (!this.securityClient) {
-      if (this.security) {
-        this.securityClient = CreateSecurityClient(
-          this.defaultClient,
-          this.security
-        );
-      } else {
-        this.securityClient = this.defaultClient;
-      }
+    if (!this._securityClient) {
+      this._securityClient = this._defaultClient;
     }
+    
+    this.generation = new Generation(
+      this._defaultClient,
+      this._securityClient,
+      this._serverURL,
+      this._language,
+      this._sdkVersion,
+      this._genVersion
+    );
+    
+    this.translation = new Translation(
+      this._defaultClient,
+      this._securityClient,
+      this._serverURL,
+      this._language,
+      this._sdkVersion,
+      this._genVersion
+    );
+    
+    this.works = new Works(
+      this._defaultClient,
+      this._securityClient,
+      this._serverURL,
+      this._language,
+      this._sdkVersion,
+      this._genVersion
+    );
   }
-  
-  // GetShakespeareGenerateInsult - Generate random Shakespeare style insults.
-  GetShakespeareGenerateInsult(
-    req: operations.GetShakespeareGenerateInsultRequest,
-    config?: AxiosRequestConfig
-  ): Promise<operations.GetShakespeareGenerateInsultResponse> {
-    if (!(req instanceof utils.SpeakeasyBase)) {
-      req = new operations.GetShakespeareGenerateInsultRequest(req);
-    }
-    
-    let baseURL: string = this.serverURL;
-    const url: string = baseURL.replace(/\/$/, "") + "/shakespeare/generate/insult";
-    
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
-
-    const requestConfig: AxiosRequestConfig = {
-      ...config,
-      params: req.queryParams,
-      paramsSerializer: qpSerializer,
-    };
-    
-    return client
-      .get(url, {
-        ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
-        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
-
-        if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetShakespeareGenerateInsultResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            break;
-          case 401:
-            break;
-        }
-
-        return res;
-      })
-      .catch((error: AxiosError) => {throw error});
-  }
-
-  
-  // GetShakespeareGenerateLoremIpsum - Generate Shakespeare lorem ipsum.
-  GetShakespeareGenerateLoremIpsum(
-    req: operations.GetShakespeareGenerateLoremIpsumRequest,
-    config?: AxiosRequestConfig
-  ): Promise<operations.GetShakespeareGenerateLoremIpsumResponse> {
-    if (!(req instanceof utils.SpeakeasyBase)) {
-      req = new operations.GetShakespeareGenerateLoremIpsumRequest(req);
-    }
-    
-    let baseURL: string = this.serverURL;
-    const url: string = baseURL.replace(/\/$/, "") + "/shakespeare/generate/lorem-ipsum";
-    
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
-
-    const requestConfig: AxiosRequestConfig = {
-      ...config,
-      params: req.queryParams,
-      paramsSerializer: qpSerializer,
-    };
-    
-    return client
-      .get(url, {
-        ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
-        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
-
-        if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetShakespeareGenerateLoremIpsumResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            break;
-          case 401:
-            break;
-        }
-
-        return res;
-      })
-      .catch((error: AxiosError) => {throw error});
-  }
-
-  
-  // GetShakespeareGenerateName - Generate random Shakespearen names.
-  GetShakespeareGenerateName(
-    req: operations.GetShakespeareGenerateNameRequest,
-    config?: AxiosRequestConfig
-  ): Promise<operations.GetShakespeareGenerateNameResponse> {
-    if (!(req instanceof utils.SpeakeasyBase)) {
-      req = new operations.GetShakespeareGenerateNameRequest(req);
-    }
-    
-    let baseURL: string = this.serverURL;
-    const url: string = baseURL.replace(/\/$/, "") + "/shakespeare/generate/name";
-    
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
-
-    const requestConfig: AxiosRequestConfig = {
-      ...config,
-      params: req.queryParams,
-      paramsSerializer: qpSerializer,
-    };
-    
-    return client
-      .get(url, {
-        ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
-        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
-
-        if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetShakespeareGenerateNameResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            break;
-          case 401:
-            break;
-        }
-
-        return res;
-      })
-      .catch((error: AxiosError) => {throw error});
-  }
-
-  
-  // GetShakespeareQuote - Get a random Shakespeare quote.
-  GetShakespeareQuote(
-    req: operations.GetShakespeareQuoteRequest,
-    config?: AxiosRequestConfig
-  ): Promise<operations.GetShakespeareQuoteResponse> {
-    if (!(req instanceof utils.SpeakeasyBase)) {
-      req = new operations.GetShakespeareQuoteRequest(req);
-    }
-    
-    let baseURL: string = this.serverURL;
-    const url: string = baseURL.replace(/\/$/, "") + "/shakespeare/quote";
-    
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
-    return client
-      .get(url, {
-        ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
-        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
-
-        if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetShakespeareQuoteResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            break;
-          case 401:
-            break;
-        }
-
-        return res;
-      })
-      .catch((error: AxiosError) => {throw error});
-  }
-
-  
-  // GetShakespeareTranslate - Translate from English to Shakespeare English.
-  GetShakespeareTranslate(
-    req: operations.GetShakespeareTranslateRequest,
-    config?: AxiosRequestConfig
-  ): Promise<operations.GetShakespeareTranslateResponse> {
-    if (!(req instanceof utils.SpeakeasyBase)) {
-      req = new operations.GetShakespeareTranslateRequest(req);
-    }
-    
-    let baseURL: string = this.serverURL;
-    const url: string = baseURL.replace(/\/$/, "") + "/shakespeare/translate";
-    
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
-
-    const requestConfig: AxiosRequestConfig = {
-      ...config,
-      params: req.queryParams,
-      paramsSerializer: qpSerializer,
-    };
-    
-    return client
-      .get(url, {
-        ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
-        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
-
-        if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetShakespeareTranslateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            break;
-          case 401:
-            break;
-        }
-
-        return res;
-      })
-      .catch((error: AxiosError) => {throw error});
-  }
-
 }

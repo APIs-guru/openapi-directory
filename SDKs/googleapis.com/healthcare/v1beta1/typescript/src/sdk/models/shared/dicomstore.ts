@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { NotificationConfig } from "./notificationconfig";
 import { GoogleCloudHealthcareV1beta1DicomStreamConfig } from "./googlecloudhealthcarev1beta1dicomstreamconfig";
+
 
 
 // DicomStore
@@ -9,15 +9,15 @@ import { GoogleCloudHealthcareV1beta1DicomStreamConfig } from "./googlecloudheal
  * Represents a DICOM store.
 **/
 export class DicomStore extends SpeakeasyBase {
-  @Metadata({ data: "json, name=labels" })
+  @SpeakeasyMetadata({ data: "json, name=labels" })
   labels?: Map<string, string>;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=notificationConfig" })
+  @SpeakeasyMetadata({ data: "json, name=notificationConfig" })
   notificationConfig?: NotificationConfig;
 
-  @Metadata({ data: "json, name=streamConfigs", elemType: shared.GoogleCloudHealthcareV1beta1DicomStreamConfig })
+  @SpeakeasyMetadata({ data: "json, name=streamConfigs", elemType: GoogleCloudHealthcareV1beta1DicomStreamConfig })
   streamConfigs?: GoogleCloudHealthcareV1beta1DicomStreamConfig[];
 }

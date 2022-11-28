@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostRegisterTargetsActionEnum(str, Enum):
     REGISTER_TARGETS = "RegisterTargets"
@@ -10,8 +14,8 @@ class PostRegisterTargetsVersionEnum(str, Enum):
 
 @dataclass
 class PostRegisterTargetsQueryParams:
-    action: PostRegisterTargetsActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostRegisterTargetsVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostRegisterTargetsActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostRegisterTargetsVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostRegisterTargetsHeaders:
 
 @dataclass
 class PostRegisterTargetsRequest:
-    query_params: PostRegisterTargetsQueryParams = field(default=None)
-    headers: PostRegisterTargetsHeaders = field(default=None)
+    headers: PostRegisterTargetsHeaders = field()
+    query_params: PostRegisterTargetsQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostRegisterTargetsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

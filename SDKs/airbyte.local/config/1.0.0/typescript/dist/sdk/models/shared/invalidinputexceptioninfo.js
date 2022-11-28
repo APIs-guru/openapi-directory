@@ -22,27 +22,27 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { InvalidInputProperty } from "./invalidinputproperty";
 var InvalidInputExceptionInfo = /** @class */ (function (_super) {
     __extends(InvalidInputExceptionInfo, _super);
     function InvalidInputExceptionInfo() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=exceptionClassName" }),
+        SpeakeasyMetadata({ data: "json, name=exceptionClassName" }),
         __metadata("design:type", String)
     ], InvalidInputExceptionInfo.prototype, "exceptionClassName", void 0);
     __decorate([
-        Metadata({ data: "json, name=exceptionStack" }),
+        SpeakeasyMetadata({ data: "json, name=exceptionStack" }),
         __metadata("design:type", Array)
     ], InvalidInputExceptionInfo.prototype, "exceptionStack", void 0);
     __decorate([
-        Metadata({ data: "json, name=message" }),
+        SpeakeasyMetadata({ data: "json, name=message" }),
         __metadata("design:type", String)
     ], InvalidInputExceptionInfo.prototype, "message", void 0);
     __decorate([
-        Metadata({ data: "json, name=validationErrors", elemType: shared.InvalidInputProperty }),
+        SpeakeasyMetadata({ data: "json, name=validationErrors", elemType: InvalidInputProperty }),
         __metadata("design:type", Array)
     ], InvalidInputExceptionInfo.prototype, "validationErrors", void 0);
     return InvalidInputExceptionInfo;

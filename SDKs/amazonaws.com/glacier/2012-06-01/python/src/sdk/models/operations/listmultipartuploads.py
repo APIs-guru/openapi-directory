@@ -1,12 +1,15 @@
 from dataclasses import dataclass, field
-from typing import Any,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class ListMultipartUploadsPathParams:
-    account_id: str = field(default=None, metadata={'path_param': { 'field_name': 'accountId', 'style': 'simple', 'explode': False }})
-    vault_name: str = field(default=None, metadata={'path_param': { 'field_name': 'vaultName', 'style': 'simple', 'explode': False }})
+    account_id: str = field(metadata={'path_param': { 'field_name': 'accountId', 'style': 'simple', 'explode': False }})
+    vault_name: str = field(metadata={'path_param': { 'field_name': 'vaultName', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -28,18 +31,18 @@ class ListMultipartUploadsHeaders:
 
 @dataclass
 class ListMultipartUploadsRequest:
-    path_params: ListMultipartUploadsPathParams = field(default=None)
-    query_params: ListMultipartUploadsQueryParams = field(default=None)
-    headers: ListMultipartUploadsHeaders = field(default=None)
+    headers: ListMultipartUploadsHeaders = field()
+    path_params: ListMultipartUploadsPathParams = field()
+    query_params: ListMultipartUploadsQueryParams = field()
     
 
 @dataclass
 class ListMultipartUploadsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     invalid_parameter_value_exception: Optional[Any] = field(default=None)
     list_multipart_uploads_output: Optional[shared.ListMultipartUploadsOutput] = field(default=None)
     missing_parameter_value_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
     service_unavailable_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

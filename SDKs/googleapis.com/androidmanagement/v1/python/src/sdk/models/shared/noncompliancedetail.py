@@ -1,7 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from typing import Any,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import specificnoncompliancecontext
+from sdk import utils
+from . import *
 
 class NonComplianceDetailInstallationFailureReasonEnum(str, Enum):
     INSTALLATION_FAILURE_REASON_UNSPECIFIED = "INSTALLATION_FAILURE_REASON_UNSPECIFIED"
@@ -41,12 +43,16 @@ class NonComplianceDetailSpecificNonComplianceReasonEnum(str, Enum):
 @dataclass_json
 @dataclass
 class NonComplianceDetail:
-    current_value: Optional[Any] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'currentValue' }})
-    field_path: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'fieldPath' }})
-    installation_failure_reason: Optional[NonComplianceDetailInstallationFailureReasonEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'installationFailureReason' }})
-    non_compliance_reason: Optional[NonComplianceDetailNonComplianceReasonEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'nonComplianceReason' }})
-    package_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'packageName' }})
-    setting_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'settingName' }})
-    specific_non_compliance_context: Optional[specificnoncompliancecontext.SpecificNonComplianceContext] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'specificNonComplianceContext' }})
-    specific_non_compliance_reason: Optional[NonComplianceDetailSpecificNonComplianceReasonEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'specificNonComplianceReason' }})
+    r"""NonComplianceDetail
+    Provides detail about non-compliance with a policy setting.
+    """
+    
+    current_value: Optional[Any] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('currentValue') }})
+    field_path: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('fieldPath') }})
+    installation_failure_reason: Optional[NonComplianceDetailInstallationFailureReasonEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('installationFailureReason') }})
+    non_compliance_reason: Optional[NonComplianceDetailNonComplianceReasonEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('nonComplianceReason') }})
+    package_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('packageName') }})
+    setting_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('settingName') }})
+    specific_non_compliance_context: Optional[SpecificNonComplianceContext] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('specificNonComplianceContext') }})
+    specific_non_compliance_reason: Optional[NonComplianceDetailSpecificNonComplianceReasonEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('specificNonComplianceReason') }})
     

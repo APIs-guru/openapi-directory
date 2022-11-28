@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ClientCertAuthSettings } from "./clientcertauthsettings";
 import { CertificateTypeEnum } from "./certificatetypeenum";
 export declare class RegisterCertificateRequest extends SpeakeasyBase {

@@ -1,15 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { EnvironmentTemplateFilter } from "./environmenttemplatefilter";
 
 
+
 export class ListEnvironmentsInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=environmentTemplates", elemType: shared.EnvironmentTemplateFilter })
+  @SpeakeasyMetadata({ data: "json, name=environmentTemplates", elemType: EnvironmentTemplateFilter })
   environmentTemplates?: EnvironmentTemplateFilter[];
 
-  @Metadata({ data: "json, name=maxResults" })
+  @SpeakeasyMetadata({ data: "json, name=maxResults" })
   maxResults?: number;
 
-  @Metadata({ data: "json, name=nextToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextToken" })
   nextToken?: string;
 }

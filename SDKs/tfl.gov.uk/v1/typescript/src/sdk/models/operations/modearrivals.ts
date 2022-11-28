@@ -1,38 +1,39 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class ModeArrivalsPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=mode" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=mode" })
   mode: string;
 }
 
 
 export class ModeArrivalsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=count" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=count" })
   count?: number;
 }
 
 
 export class ModeArrivalsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: ModeArrivalsPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: ModeArrivalsQueryParams;
 }
 
 
 export class ModeArrivalsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata({ elemType: shared.TflApiPresentationEntitiesPrediction })
+  @SpeakeasyMetadata({ elemType: shared.TflApiPresentationEntitiesPrediction })
   tflApiPresentationEntitiesPredictions?: shared.TflApiPresentationEntitiesPrediction[];
 }

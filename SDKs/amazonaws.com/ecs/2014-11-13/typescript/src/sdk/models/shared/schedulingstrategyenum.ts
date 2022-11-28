@@ -1,6 +1,7 @@
 
 
+
 export enum SchedulingStrategyEnum {
-    Replica = "REPLICA"
-,    Daemon = "DAEMON"
+    Replica = "REPLICA",
+    Daemon = "DAEMON"
 }

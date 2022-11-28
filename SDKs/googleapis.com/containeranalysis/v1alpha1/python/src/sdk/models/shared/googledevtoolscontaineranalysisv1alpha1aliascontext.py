@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class GoogleDevtoolsContaineranalysisV1alpha1AliasContextKindEnum(str, Enum):
     KIND_UNSPECIFIED = "KIND_UNSPECIFIED"
@@ -12,6 +14,10 @@ class GoogleDevtoolsContaineranalysisV1alpha1AliasContextKindEnum(str, Enum):
 @dataclass_json
 @dataclass
 class GoogleDevtoolsContaineranalysisV1alpha1AliasContext:
-    kind: Optional[GoogleDevtoolsContaineranalysisV1alpha1AliasContextKindEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'kind' }})
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
+    r"""GoogleDevtoolsContaineranalysisV1alpha1AliasContext
+    An alias to a repo revision.
+    """
+    
+    kind: Optional[GoogleDevtoolsContaineranalysisV1alpha1AliasContextKindEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('kind') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
     

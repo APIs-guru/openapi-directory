@@ -1,6 +1,7 @@
 
 
+
 export enum ScalingPolicyUpdateBehaviorEnum {
-    KeepExternalPolicies = "KeepExternalPolicies"
-,    ReplaceExternalPolicies = "ReplaceExternalPolicies"
+    KeepExternalPolicies = "KeepExternalPolicies",
+    ReplaceExternalPolicies = "ReplaceExternalPolicies"
 }

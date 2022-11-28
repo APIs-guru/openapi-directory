@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum UpdateLineCategoryRequestLineCategoryEnum {
-    LineCategoryUnspecified = "LINE_CATEGORY_UNSPECIFIED"
-,    Straight = "STRAIGHT"
-,    Bent = "BENT"
-,    Curved = "CURVED"
+    LineCategoryUnspecified = "LINE_CATEGORY_UNSPECIFIED",
+    Straight = "STRAIGHT",
+    Bent = "BENT",
+    Curved = "CURVED"
 }
 
 
@@ -13,9 +14,9 @@ export enum UpdateLineCategoryRequestLineCategoryEnum {
  * Updates the category of a line.
 **/
 export class UpdateLineCategoryRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=lineCategory" })
+  @SpeakeasyMetadata({ data: "json, name=lineCategory" })
   lineCategory?: UpdateLineCategoryRequestLineCategoryEnum;
 
-  @Metadata({ data: "json, name=objectId" })
+  @SpeakeasyMetadata({ data: "json, name=objectId" })
   objectId?: string;
 }

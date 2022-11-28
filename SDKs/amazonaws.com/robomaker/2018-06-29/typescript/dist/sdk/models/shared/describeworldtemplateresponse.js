@@ -22,38 +22,38 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var DescribeWorldTemplateResponse = /** @class */ (function (_super) {
     __extends(DescribeWorldTemplateResponse, _super);
     function DescribeWorldTemplateResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=arn" }),
+        SpeakeasyMetadata({ data: "json, name=arn" }),
         __metadata("design:type", String)
     ], DescribeWorldTemplateResponse.prototype, "arn", void 0);
     __decorate([
-        Metadata({ data: "json, name=clientRequestToken" }),
+        SpeakeasyMetadata({ data: "json, name=clientRequestToken" }),
         __metadata("design:type", String)
     ], DescribeWorldTemplateResponse.prototype, "clientRequestToken", void 0);
     __decorate([
-        Metadata({ data: "json, name=createdAt" }),
+        SpeakeasyMetadata({ data: "json, name=createdAt" }),
         __metadata("design:type", Date)
     ], DescribeWorldTemplateResponse.prototype, "createdAt", void 0);
     __decorate([
-        Metadata({ data: "json, name=lastUpdatedAt" }),
+        SpeakeasyMetadata({ data: "json, name=lastUpdatedAt" }),
         __metadata("design:type", Date)
     ], DescribeWorldTemplateResponse.prototype, "lastUpdatedAt", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], DescribeWorldTemplateResponse.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=tags" }),
+        SpeakeasyMetadata({ data: "json, name=tags" }),
         __metadata("design:type", Map)
     ], DescribeWorldTemplateResponse.prototype, "tags", void 0);
     __decorate([
-        Metadata({ data: "json, name=version" }),
+        SpeakeasyMetadata({ data: "json, name=version" }),
         __metadata("design:type", String)
     ], DescribeWorldTemplateResponse.prototype, "version", void 0);
     return DescribeWorldTemplateResponse;

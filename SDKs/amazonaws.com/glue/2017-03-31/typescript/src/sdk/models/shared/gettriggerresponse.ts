@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Trigger } from "./trigger";
 
 
+
 export class GetTriggerResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Trigger" })
+  @SpeakeasyMetadata({ data: "json, name=Trigger" })
   trigger?: Trigger;
 }

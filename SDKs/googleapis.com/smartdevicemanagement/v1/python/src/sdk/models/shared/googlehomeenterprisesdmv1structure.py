@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import Any,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass_json
 @dataclass
 class GoogleHomeEnterpriseSdmV1Structure:
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    traits: Optional[dict[str, Any]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'traits' }})
+    r"""GoogleHomeEnterpriseSdmV1Structure
+    Structure resource represents an instance of enterprise managed home or hotel room.
+    """
+    
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    traits: Optional[dict[str, Any]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('traits') }})
     

@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AttributeKeyAndValue } from "./attributekeyandvalue";
+
 
 
 // IndexAttachment
@@ -8,9 +8,9 @@ import { AttributeKeyAndValue } from "./attributekeyandvalue";
  * Represents an index and an attached object.
 **/
 export class IndexAttachment extends SpeakeasyBase {
-  @Metadata({ data: "json, name=IndexedAttributes", elemType: shared.AttributeKeyAndValue })
+  @SpeakeasyMetadata({ data: "json, name=IndexedAttributes", elemType: AttributeKeyAndValue })
   indexedAttributes?: AttributeKeyAndValue[];
 
-  @Metadata({ data: "json, name=ObjectIdentifier" })
+  @SpeakeasyMetadata({ data: "json, name=ObjectIdentifier" })
   objectIdentifier?: string;
 }

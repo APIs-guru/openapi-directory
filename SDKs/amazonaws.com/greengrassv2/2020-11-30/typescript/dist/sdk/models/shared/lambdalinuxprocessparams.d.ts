@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { LambdaContainerParams } from "./lambdacontainerparams";
 import { LambdaIsolationModeEnum } from "./lambdaisolationmodeenum";
 /**

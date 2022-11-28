@@ -15,6 +15,8 @@ const (
 	ColorStyleThemeColorEnumLink                      ColorStyleThemeColorEnum = "LINK"
 )
 
+// ColorStyle
+// A color value.
 type ColorStyle struct {
 	RgbColor   *Color                    `json:"rgbColor,omitempty"`
 	ThemeColor *ColorStyleThemeColorEnum `json:"themeColor,omitempty"`

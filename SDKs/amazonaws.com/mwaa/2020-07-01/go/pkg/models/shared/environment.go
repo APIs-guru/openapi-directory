@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// Environment
+// The Amazon Managed Workflows for Apache Airflow (MWAA) environment.
 type Environment struct {
 	AirflowConfigurationOptions  map[string]string        `json:"AirflowConfigurationOptions,omitempty"`
 	AirflowVersion               *string                  `json:"AirflowVersion,omitempty"`

@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class GoogleCloudRetailV2RejoinUserEventsRequestUserEventRejoinScopeEnum(str, Enum):
     USER_EVENT_REJOIN_SCOPE_UNSPECIFIED = "USER_EVENT_REJOIN_SCOPE_UNSPECIFIED"
@@ -11,5 +13,9 @@ class GoogleCloudRetailV2RejoinUserEventsRequestUserEventRejoinScopeEnum(str, En
 @dataclass_json
 @dataclass
 class GoogleCloudRetailV2RejoinUserEventsRequest:
-    user_event_rejoin_scope: Optional[GoogleCloudRetailV2RejoinUserEventsRequestUserEventRejoinScopeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'userEventRejoinScope' }})
+    r"""GoogleCloudRetailV2RejoinUserEventsRequest
+    Request message for RejoinUserEvents method.
+    """
+    
+    user_event_rejoin_scope: Optional[GoogleCloudRetailV2RejoinUserEventsRequestUserEventRejoinScopeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('userEventRejoinScope') }})
     

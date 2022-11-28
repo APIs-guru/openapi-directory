@@ -1,13 +1,18 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import report
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ReportOutput:
-    checks: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'checks' }})
-    report: report.Report = field(default=None, metadata={'dataclasses_json': { 'field_name': 'report' }})
-    self: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'self' }})
+    r"""ReportOutput
+    Reprents the report creation result
+    """
+    
+    checks: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('checks') }})
+    report: Report = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('report') }})
+    self: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('self') }})
     

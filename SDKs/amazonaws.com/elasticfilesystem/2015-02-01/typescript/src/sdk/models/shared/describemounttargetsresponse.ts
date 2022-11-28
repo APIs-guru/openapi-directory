@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { MountTargetDescription } from "./mounttargetdescription";
+
 
 
 // DescribeMountTargetsResponse
@@ -8,12 +8,12 @@ import { MountTargetDescription } from "./mounttargetdescription";
  * <p/>
 **/
 export class DescribeMountTargetsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Marker" })
+  @SpeakeasyMetadata({ data: "json, name=Marker" })
   marker?: string;
 
-  @Metadata({ data: "json, name=MountTargets", elemType: shared.MountTargetDescription })
+  @SpeakeasyMetadata({ data: "json, name=MountTargets", elemType: MountTargetDescription })
   mountTargets?: MountTargetDescription[];
 
-  @Metadata({ data: "json, name=NextMarker" })
+  @SpeakeasyMetadata({ data: "json, name=NextMarker" })
   nextMarker?: string;
 }

@@ -1,5 +1,7 @@
 package shared
 
+// GoogleCloudVisionV1p1beta1WebDetection
+// Relevant information for the image from the Internet.
 type GoogleCloudVisionV1p1beta1WebDetection struct {
 	BestGuessLabels         []GoogleCloudVisionV1p1beta1WebDetectionWebLabel  `json:"bestGuessLabels,omitempty"`
 	FullMatchingImages      []GoogleCloudVisionV1p1beta1WebDetectionWebImage  `json:"fullMatchingImages,omitempty"`

@@ -14,6 +14,8 @@ type CreateFunctionHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// CreateFunctionRequestBodyCode
+// The code for the Lambda function. You can specify either an object in Amazon S3, upload a .zip file archive deployment package directly, or specify the URI of a container image.
 type CreateFunctionRequestBodyCode struct {
 	ImageURI        *string `json:"ImageUri,omitempty"`
 	S3Bucket        *string `json:"S3Bucket,omitempty"`
@@ -22,14 +24,20 @@ type CreateFunctionRequestBodyCode struct {
 	ZipFile         *string `json:"ZipFile,omitempty"`
 }
 
+// CreateFunctionRequestBodyDeadLetterConfig
+// The <a href="https://docs.aws.amazon.com/lambda/latest/dg/invocation-async.html#dlq">dead-letter queue</a> for failed asynchronous invocations.
 type CreateFunctionRequestBodyDeadLetterConfig struct {
 	TargetArn *string `json:"TargetArn,omitempty"`
 }
 
+// CreateFunctionRequestBodyEnvironment
+// A function's environment variable settings. You can use environment variables to adjust your function's behavior without updating code. An environment variable is a pair of strings that are stored in a function's version-specific configuration.
 type CreateFunctionRequestBodyEnvironment struct {
 	Variables map[string]string `json:"Variables,omitempty"`
 }
 
+// CreateFunctionRequestBodyImageConfig
+// Configuration values that override the container image Dockerfile settings. See <a href="https://docs.aws.amazon.com/lambda/latest/dg/images-create.html#images-parms">Container settings</a>.
 type CreateFunctionRequestBodyImageConfig struct {
 	Command          []string `json:"Command,omitempty"`
 	EntryPoint       []string `json:"EntryPoint,omitempty"`
@@ -73,10 +81,14 @@ const (
 	CreateFunctionRequestBodyRuntimeEnumProvidedAl2  CreateFunctionRequestBodyRuntimeEnum = "provided.al2"
 )
 
+// CreateFunctionRequestBodyTracingConfig
+// The function's <a href="https://docs.aws.amazon.com/lambda/latest/dg/services-xray.html">X-Ray</a> tracing configuration. To sample and record incoming requests, set <code>Mode</code> to <code>Active</code>.
 type CreateFunctionRequestBodyTracingConfig struct {
 	Mode *shared.TracingModeEnum `json:"Mode,omitempty"`
 }
 
+// CreateFunctionRequestBodyVpcConfig
+// The VPC security groups and subnets that are attached to a Lambda function. For more information, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-vpc.html">VPC Settings</a>.
 type CreateFunctionRequestBodyVpcConfig struct {
 	SecurityGroupIds []string `json:"SecurityGroupIds,omitempty"`
 	SubnetIds        []string `json:"SubnetIds,omitempty"`

@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
@@ -20,14 +21,14 @@ class CloudsearchQuerySuggestQueryParams:
 
 @dataclass
 class CloudsearchQuerySuggestSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class CloudsearchQuerySuggestSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -38,14 +39,14 @@ class CloudsearchQuerySuggestSecurity:
 
 @dataclass
 class CloudsearchQuerySuggestRequest:
-    query_params: CloudsearchQuerySuggestQueryParams = field(default=None)
+    query_params: CloudsearchQuerySuggestQueryParams = field()
+    security: CloudsearchQuerySuggestSecurity = field()
     request: Optional[shared.SuggestRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: CloudsearchQuerySuggestSecurity = field(default=None)
     
 
 @dataclass
 class CloudsearchQuerySuggestResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     suggest_response: Optional[shared.SuggestResponse] = field(default=None)
     

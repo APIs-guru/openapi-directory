@@ -1,5 +1,7 @@
 package shared
 
+// LiveBroadcast
+// A *liveBroadcast* resource represents an event that will be streamed, via live video, on YouTube.
 type LiveBroadcast struct {
 	ContentDetails *LiveBroadcastContentDetails `json:"contentDetails,omitempty"`
 	Etag           *string                      `json:"etag,omitempty"`

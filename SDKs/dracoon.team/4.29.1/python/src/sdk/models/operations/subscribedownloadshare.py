@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class SubscribeDownloadSharePathParams:
-    share_id: int = field(default=None, metadata={'path_param': { 'field_name': 'share_id', 'style': 'simple', 'explode': False }})
+    share_id: int = field(metadata={'path_param': { 'field_name': 'share_id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -15,14 +15,14 @@ class SubscribeDownloadShareHeaders:
 
 @dataclass
 class SubscribeDownloadShareRequest:
-    path_params: SubscribeDownloadSharePathParams = field(default=None)
-    headers: SubscribeDownloadShareHeaders = field(default=None)
+    headers: SubscribeDownloadShareHeaders = field()
+    path_params: SubscribeDownloadSharePathParams = field()
     
 
 @dataclass
 class SubscribeDownloadShareResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error_response: Optional[shared.ErrorResponse] = field(default=None)
-    status_code: int = field(default=None)
     subscribed_download_share: Optional[shared.SubscribedDownloadShare] = field(default=None)
     

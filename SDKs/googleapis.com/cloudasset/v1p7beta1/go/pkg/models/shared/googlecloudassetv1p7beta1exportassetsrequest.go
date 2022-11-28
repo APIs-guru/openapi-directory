@@ -11,6 +11,8 @@ const (
 	GoogleCloudAssetV1p7beta1ExportAssetsRequestContentTypeEnumRelationship           GoogleCloudAssetV1p7beta1ExportAssetsRequestContentTypeEnum = "RELATIONSHIP"
 )
 
+// GoogleCloudAssetV1p7beta1ExportAssetsRequest
+// Export asset request.
 type GoogleCloudAssetV1p7beta1ExportAssetsRequest struct {
 	AssetTypes        []string                                                     `json:"assetTypes,omitempty"`
 	ContentType       *GoogleCloudAssetV1p7beta1ExportAssetsRequestContentTypeEnum `json:"contentType,omitempty"`

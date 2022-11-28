@@ -22,18 +22,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var ConnectionState = /** @class */ (function (_super) {
     __extends(ConnectionState, _super);
     function ConnectionState() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=connectionId" }),
+        SpeakeasyMetadata({ data: "json, name=connectionId" }),
         __metadata("design:type", String)
     ], ConnectionState.prototype, "connectionId", void 0);
     __decorate([
-        Metadata({ data: "json, name=state" }),
+        SpeakeasyMetadata({ data: "json, name=state" }),
         __metadata("design:type", Map)
     ], ConnectionState.prototype, "state", void 0);
     return ConnectionState;

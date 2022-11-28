@@ -9,6 +9,8 @@ const (
 	GoogleCloudDialogflowCxV3SecuritySettingsAudioExportSettingsAudioFormatEnumOgg                    GoogleCloudDialogflowCxV3SecuritySettingsAudioExportSettingsAudioFormatEnum = "OGG"
 )
 
+// GoogleCloudDialogflowCxV3SecuritySettingsAudioExportSettings
+// Settings for exporting audio.
 type GoogleCloudDialogflowCxV3SecuritySettingsAudioExportSettings struct {
 	AudioExportPattern   *string                                                                      `json:"audioExportPattern,omitempty"`
 	AudioFormat          *GoogleCloudDialogflowCxV3SecuritySettingsAudioExportSettingsAudioFormatEnum `json:"audioFormat,omitempty"`

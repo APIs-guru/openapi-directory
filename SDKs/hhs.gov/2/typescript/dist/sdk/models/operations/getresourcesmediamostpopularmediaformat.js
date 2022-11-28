@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetResourcesMediaMostPopularMediaFormatPathParams = /** @class */ (function (_super) {
     __extends(GetResourcesMediaMostPopularMediaFormatPathParams, _super);
@@ -30,7 +30,7 @@ var GetResourcesMediaMostPopularMediaFormatPathParams = /** @class */ (function 
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=format" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=format" }),
         __metadata("design:type", String)
     ], GetResourcesMediaMostPopularMediaFormatPathParams.prototype, "format", void 0);
     return GetResourcesMediaMostPopularMediaFormatPathParams;
@@ -42,11 +42,11 @@ var GetResourcesMediaMostPopularMediaFormatQueryParams = /** @class */ (function
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=false;name=max" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=max" }),
         __metadata("design:type", Number)
     ], GetResourcesMediaMostPopularMediaFormatQueryParams.prototype, "max", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=false;name=offset" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=offset" }),
         __metadata("design:type", Number)
     ], GetResourcesMediaMostPopularMediaFormatQueryParams.prototype, "offset", void 0);
     return GetResourcesMediaMostPopularMediaFormatQueryParams;
@@ -58,11 +58,11 @@ var GetResourcesMediaMostPopularMediaFormatRequest = /** @class */ (function (_s
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetResourcesMediaMostPopularMediaFormatPathParams)
     ], GetResourcesMediaMostPopularMediaFormatRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetResourcesMediaMostPopularMediaFormatQueryParams)
     ], GetResourcesMediaMostPopularMediaFormatRequest.prototype, "queryParams", void 0);
     return GetResourcesMediaMostPopularMediaFormatRequest;
@@ -74,15 +74,15 @@ var GetResourcesMediaMostPopularMediaFormatResponse = /** @class */ (function (_
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetResourcesMediaMostPopularMediaFormatResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata({ elemType: shared.MediaItemWrapped }),
+        SpeakeasyMetadata({ elemType: shared.MediaItemWrapped }),
         __metadata("design:type", Array)
     ], GetResourcesMediaMostPopularMediaFormatResponse.prototype, "mediaItemWrappeds", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetResourcesMediaMostPopularMediaFormatResponse.prototype, "statusCode", void 0);
     return GetResourcesMediaMostPopularMediaFormatResponse;

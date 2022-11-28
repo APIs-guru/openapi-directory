@@ -19,11 +19,6 @@ type AcceptChangeRequestRequestBody struct {
 	Status *AcceptChangeRequestRequestBodyStatusEnum `json:"status,omitempty"`
 }
 
-type AcceptChangeRequestRequest struct {
-	PathParams AcceptChangeRequestPathParams
-	Request    AcceptChangeRequestRequestBody `request:"mediaType=application/json"`
-}
-
 type AcceptChangeRequest200ApplicationJSONActionEnum string
 
 const (
@@ -45,6 +40,11 @@ type AcceptChangeRequest200ApplicationJSON struct {
 	Action AcceptChangeRequest200ApplicationJSONActionEnum `json:"action"`
 	Data   AcceptChangeRequest200ApplicationJSONData       `json:"data"`
 	Result AcceptChangeRequest200ApplicationJSONResultEnum `json:"result"`
+}
+
+type AcceptChangeRequestRequest struct {
+	PathParams AcceptChangeRequestPathParams
+	Request    AcceptChangeRequestRequestBody `request:"mediaType=application/json"`
 }
 
 type AcceptChangeRequestResponse struct {

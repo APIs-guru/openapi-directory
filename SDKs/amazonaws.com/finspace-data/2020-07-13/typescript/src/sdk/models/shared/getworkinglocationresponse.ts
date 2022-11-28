@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetWorkingLocationResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=s3Bucket" })
+  @SpeakeasyMetadata({ data: "json, name=s3Bucket" })
   s3Bucket?: string;
 
-  @Metadata({ data: "json, name=s3Path" })
+  @SpeakeasyMetadata({ data: "json, name=s3Path" })
   s3Path?: string;
 
-  @Metadata({ data: "json, name=s3Uri" })
+  @SpeakeasyMetadata({ data: "json, name=s3Uri" })
   s3Uri?: string;
 }

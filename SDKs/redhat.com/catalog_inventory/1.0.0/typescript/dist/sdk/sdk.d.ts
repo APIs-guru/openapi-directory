@@ -1,164 +1,245 @@
 import { AxiosInstance, AxiosRequestConfig } from "axios";
 import * as operations from "./models/operations";
 import { Security } from "./models/shared";
-declare type OptsFunc = (sdk: SDK) => void;
+type OptsFunc = (sdk: SDK) => void;
+export declare const ServerList: readonly ["https://cloud.redhat.com/{basePath}", "http://localhost:{port}/{basePath}"];
 export declare function WithServerURL(serverURL: string, params?: Map<string, string>): OptsFunc;
 export declare function WithClient(client: AxiosInstance): OptsFunc;
 export declare function WithSecurity(security: Security): OptsFunc;
 export declare class SDK {
-    defaultClient?: AxiosInstance;
-    securityClient?: AxiosInstance;
-    security?: any;
-    serverURL: string;
+    _defaultClient: AxiosInstance;
+    _securityClient: AxiosInstance;
+    _security?: Security;
+    _serverURL: string;
+    private _language;
+    private _sdkVersion;
+    private _genVersion;
     constructor(...opts: OptsFunc[]);
     /**
+     * appliedInventoriesTagsForServiceOffering - Invokes computing of ServiceInventories tags for given ServiceOffering
+     *
      * Returns an array of inventories tags
     **/
-    AppliedInventoriesTagsForServiceOffering(req: operations.AppliedInventoriesTagsForServiceOfferingRequest, config?: AxiosRequestConfig): Promise<operations.AppliedInventoriesTagsForServiceOfferingResponse>;
-    GetDocumentation(config?: AxiosRequestConfig): Promise<operations.GetDocumentationResponse>;
+    appliedInventoriesTagsForServiceOffering(req: operations.AppliedInventoriesTagsForServiceOfferingRequest, config?: AxiosRequestConfig): Promise<operations.AppliedInventoriesTagsForServiceOfferingResponse>;
     /**
+     * getDocumentation - Return this API document in JSON format
+    **/
+    getDocumentation(config?: AxiosRequestConfig): Promise<operations.GetDocumentationResponse>;
+    /**
+     * incrementalRefreshSource - Incremental Refresh an existing Source
+     *
      * Incremental Refresh a source object
     **/
-    IncrementalRefreshSource(req: operations.IncrementalRefreshSourceRequest, config?: AxiosRequestConfig): Promise<operations.IncrementalRefreshSourceResponse>;
+    incrementalRefreshSource(req: operations.IncrementalRefreshSourceRequest, config?: AxiosRequestConfig): Promise<operations.IncrementalRefreshSourceResponse>;
     /**
+     * listServiceCredentialTypes - List ServiceCredentialTypes
+     *
      * Returns an array of ServiceCredentialType objects
     **/
-    ListServiceCredentialTypes(req: operations.ListServiceCredentialTypesRequest, config?: AxiosRequestConfig): Promise<operations.ListServiceCredentialTypesResponse>;
+    listServiceCredentialTypes(req: operations.ListServiceCredentialTypesRequest, config?: AxiosRequestConfig): Promise<operations.ListServiceCredentialTypesResponse>;
     /**
+     * listServiceCredentials - List ServiceCredentials
+     *
      * Returns an array of ServiceCredential objects
     **/
-    ListServiceCredentials(req: operations.ListServiceCredentialsRequest, config?: AxiosRequestConfig): Promise<operations.ListServiceCredentialsResponse>;
+    listServiceCredentials(req: operations.ListServiceCredentialsRequest, config?: AxiosRequestConfig): Promise<operations.ListServiceCredentialsResponse>;
     /**
+     * listServiceInstances - List ServiceInstances
+     *
      * Returns an array of ServiceInstance objects
     **/
-    ListServiceInstances(req: operations.ListServiceInstancesRequest, config?: AxiosRequestConfig): Promise<operations.ListServiceInstancesResponse>;
+    listServiceInstances(req: operations.ListServiceInstancesRequest, config?: AxiosRequestConfig): Promise<operations.ListServiceInstancesResponse>;
     /**
+     * listServiceInventories - List ServiceInventories
+     *
      * Returns an array of ServiceInventory objects
     **/
-    ListServiceInventories(req: operations.ListServiceInventoriesRequest, config?: AxiosRequestConfig): Promise<operations.ListServiceInventoriesResponse>;
+    listServiceInventories(req: operations.ListServiceInventoriesRequest, config?: AxiosRequestConfig): Promise<operations.ListServiceInventoriesResponse>;
     /**
+     * listServiceInventoryTags - List Tags for ServiceInventory
+     *
      * Returns an array of Tag objects
     **/
-    ListServiceInventoryTags(req: operations.ListServiceInventoryTagsRequest, config?: AxiosRequestConfig): Promise<operations.ListServiceInventoryTagsResponse>;
+    listServiceInventoryTags(req: operations.ListServiceInventoryTagsRequest, config?: AxiosRequestConfig): Promise<operations.ListServiceInventoryTagsResponse>;
     /**
+     * listServiceOfferingNodes - List ServiceOfferingNodes
+     *
      * Returns an array of ServiceOfferingNode objects
     **/
-    ListServiceOfferingNodes(req: operations.ListServiceOfferingNodesRequest, config?: AxiosRequestConfig): Promise<operations.ListServiceOfferingNodesResponse>;
+    listServiceOfferingNodes(req: operations.ListServiceOfferingNodesRequest, config?: AxiosRequestConfig): Promise<operations.ListServiceOfferingNodesResponse>;
     /**
+     * listServiceOfferingServiceInstances - List ServiceInstances for ServiceOffering
+     *
      * Returns an array of ServiceInstance objects
     **/
-    ListServiceOfferingServiceInstances(req: operations.ListServiceOfferingServiceInstancesRequest, config?: AxiosRequestConfig): Promise<operations.ListServiceOfferingServiceInstancesResponse>;
+    listServiceOfferingServiceInstances(req: operations.ListServiceOfferingServiceInstancesRequest, config?: AxiosRequestConfig): Promise<operations.ListServiceOfferingServiceInstancesResponse>;
     /**
+     * listServiceOfferingServiceOfferingNodes - List ServiceOfferingNodes for ServiceOffering
+     *
      * Returns an array of ServiceOfferingNode objects
     **/
-    ListServiceOfferingServiceOfferingNodes(req: operations.ListServiceOfferingServiceOfferingNodesRequest, config?: AxiosRequestConfig): Promise<operations.ListServiceOfferingServiceOfferingNodesResponse>;
+    listServiceOfferingServiceOfferingNodes(req: operations.ListServiceOfferingServiceOfferingNodesRequest, config?: AxiosRequestConfig): Promise<operations.ListServiceOfferingServiceOfferingNodesResponse>;
     /**
+     * listServiceOfferingServicePlans - List ServicePlans for ServiceOffering
+     *
      * Returns an array of ServicePlan objects
     **/
-    ListServiceOfferingServicePlans(req: operations.ListServiceOfferingServicePlansRequest, config?: AxiosRequestConfig): Promise<operations.ListServiceOfferingServicePlansResponse>;
+    listServiceOfferingServicePlans(req: operations.ListServiceOfferingServicePlansRequest, config?: AxiosRequestConfig): Promise<operations.ListServiceOfferingServicePlansResponse>;
     /**
+     * listServiceOfferings - List ServiceOfferings
+     *
      * Returns an array of ServiceOffering objects
     **/
-    ListServiceOfferings(req: operations.ListServiceOfferingsRequest, config?: AxiosRequestConfig): Promise<operations.ListServiceOfferingsResponse>;
+    listServiceOfferings(req: operations.ListServiceOfferingsRequest, config?: AxiosRequestConfig): Promise<operations.ListServiceOfferingsResponse>;
     /**
+     * listServicePlans - List ServicePlans
+     *
      * Returns an array of ServicePlan objects
     **/
-    ListServicePlans(req: operations.ListServicePlansRequest, config?: AxiosRequestConfig): Promise<operations.ListServicePlansResponse>;
+    listServicePlans(req: operations.ListServicePlansRequest, config?: AxiosRequestConfig): Promise<operations.ListServicePlansResponse>;
     /**
+     * listSourceServiceInstances - List ServiceInstances for Source
+     *
      * Returns an array of ServiceInstance objects
     **/
-    ListSourceServiceInstances(req: operations.ListSourceServiceInstancesRequest, config?: AxiosRequestConfig): Promise<operations.ListSourceServiceInstancesResponse>;
+    listSourceServiceInstances(req: operations.ListSourceServiceInstancesRequest, config?: AxiosRequestConfig): Promise<operations.ListSourceServiceInstancesResponse>;
     /**
+     * listSourceServiceInventories - List ServiceInventories for Source
+     *
      * Returns an array of ServiceInventory objects
     **/
-    ListSourceServiceInventories(req: operations.ListSourceServiceInventoriesRequest, config?: AxiosRequestConfig): Promise<operations.ListSourceServiceInventoriesResponse>;
+    listSourceServiceInventories(req: operations.ListSourceServiceInventoriesRequest, config?: AxiosRequestConfig): Promise<operations.ListSourceServiceInventoriesResponse>;
     /**
+     * listSourceServiceOfferingNodes - List ServiceOfferingNodes for Source
+     *
      * Returns an array of ServiceOfferingNode objects
     **/
-    ListSourceServiceOfferingNodes(req: operations.ListSourceServiceOfferingNodesRequest, config?: AxiosRequestConfig): Promise<operations.ListSourceServiceOfferingNodesResponse>;
+    listSourceServiceOfferingNodes(req: operations.ListSourceServiceOfferingNodesRequest, config?: AxiosRequestConfig): Promise<operations.ListSourceServiceOfferingNodesResponse>;
     /**
+     * listSourceServiceOfferings - List ServiceOfferings for Source
+     *
      * Returns an array of ServiceOffering objects
     **/
-    ListSourceServiceOfferings(req: operations.ListSourceServiceOfferingsRequest, config?: AxiosRequestConfig): Promise<operations.ListSourceServiceOfferingsResponse>;
+    listSourceServiceOfferings(req: operations.ListSourceServiceOfferingsRequest, config?: AxiosRequestConfig): Promise<operations.ListSourceServiceOfferingsResponse>;
     /**
+     * listSourceServicePlans - List ServicePlans for Source
+     *
      * Returns an array of ServicePlan objects
     **/
-    ListSourceServicePlans(req: operations.ListSourceServicePlansRequest, config?: AxiosRequestConfig): Promise<operations.ListSourceServicePlansResponse>;
+    listSourceServicePlans(req: operations.ListSourceServicePlansRequest, config?: AxiosRequestConfig): Promise<operations.ListSourceServicePlansResponse>;
     /**
+     * listSourceTasks - List Tasks for Source
+     *
      * Returns an array of Task objects
     **/
-    ListSourceTasks(req: operations.ListSourceTasksRequest, config?: AxiosRequestConfig): Promise<operations.ListSourceTasksResponse>;
+    listSourceTasks(req: operations.ListSourceTasksRequest, config?: AxiosRequestConfig): Promise<operations.ListSourceTasksResponse>;
     /**
+     * listSources - List Sources
+     *
      * Returns an array of Source objects
     **/
-    ListSources(req: operations.ListSourcesRequest, config?: AxiosRequestConfig): Promise<operations.ListSourcesResponse>;
+    listSources(req: operations.ListSourcesRequest, config?: AxiosRequestConfig): Promise<operations.ListSourcesResponse>;
     /**
+     * listTags - List Tags
+     *
      * Returns an array of Tag objects
     **/
-    ListTags(req: operations.ListTagsRequest, config?: AxiosRequestConfig): Promise<operations.ListTagsResponse>;
+    listTags(req: operations.ListTagsRequest, config?: AxiosRequestConfig): Promise<operations.ListTagsResponse>;
     /**
+     * listTasks - List Tasks
+     *
      * Returns an array of Task objects
     **/
-    ListTasks(req: operations.ListTasksRequest, config?: AxiosRequestConfig): Promise<operations.ListTasksResponse>;
+    listTasks(req: operations.ListTasksRequest, config?: AxiosRequestConfig): Promise<operations.ListTasksResponse>;
     /**
+     * orderServiceOffering - Order an existing ServiceOffering
+     *
      * Returns a Task id
     **/
-    OrderServiceOffering(req: operations.OrderServiceOfferingRequest, config?: AxiosRequestConfig): Promise<operations.OrderServiceOfferingResponse>;
+    orderServiceOffering(req: operations.OrderServiceOfferingRequest, config?: AxiosRequestConfig): Promise<operations.OrderServiceOfferingResponse>;
     /**
+     * postGraphQl - Perform a GraphQL Query
+     *
      * Performs a GraphQL Query
     **/
-    PostGraphQl(req: operations.PostGraphQlRequest, config?: AxiosRequestConfig): Promise<operations.PostGraphQlResponse>;
+    postGraphQl(req: operations.PostGraphQlRequest, config?: AxiosRequestConfig): Promise<operations.PostGraphQlResponse>;
     /**
+     * refreshSource -  Refresh an existing Source
+     *
      * Refresh a source object
     **/
-    RefreshSource(req: operations.RefreshSourceRequest, config?: AxiosRequestConfig): Promise<operations.RefreshSourceResponse>;
+    refreshSource(req: operations.RefreshSourceRequest, config?: AxiosRequestConfig): Promise<operations.RefreshSourceResponse>;
     /**
+     * showServiceCredential - Show an existing ServiceCredential
+     *
      * Returns a ServiceCredential object
     **/
-    ShowServiceCredential(req: operations.ShowServiceCredentialRequest, config?: AxiosRequestConfig): Promise<operations.ShowServiceCredentialResponse>;
+    showServiceCredential(req: operations.ShowServiceCredentialRequest, config?: AxiosRequestConfig): Promise<operations.ShowServiceCredentialResponse>;
     /**
+     * showServiceCredentialType - Show an existing ServiceCredentialType
+     *
      * Returns a ServiceCredentialType object
     **/
-    ShowServiceCredentialType(req: operations.ShowServiceCredentialTypeRequest, config?: AxiosRequestConfig): Promise<operations.ShowServiceCredentialTypeResponse>;
+    showServiceCredentialType(req: operations.ShowServiceCredentialTypeRequest, config?: AxiosRequestConfig): Promise<operations.ShowServiceCredentialTypeResponse>;
     /**
+     * showServiceInstance - Show an existing ServiceInstance
+     *
      * Returns a ServiceInstance object
     **/
-    ShowServiceInstance(req: operations.ShowServiceInstanceRequest, config?: AxiosRequestConfig): Promise<operations.ShowServiceInstanceResponse>;
+    showServiceInstance(req: operations.ShowServiceInstanceRequest, config?: AxiosRequestConfig): Promise<operations.ShowServiceInstanceResponse>;
     /**
+     * showServiceInventory - Show an existing ServiceInventory
+     *
      * Returns a ServiceInventory object
     **/
-    ShowServiceInventory(req: operations.ShowServiceInventoryRequest, config?: AxiosRequestConfig): Promise<operations.ShowServiceInventoryResponse>;
+    showServiceInventory(req: operations.ShowServiceInventoryRequest, config?: AxiosRequestConfig): Promise<operations.ShowServiceInventoryResponse>;
     /**
+     * showServiceOffering - Show an existing ServiceOffering
+     *
      * Returns a ServiceOffering object
     **/
-    ShowServiceOffering(req: operations.ShowServiceOfferingRequest, config?: AxiosRequestConfig): Promise<operations.ShowServiceOfferingResponse>;
+    showServiceOffering(req: operations.ShowServiceOfferingRequest, config?: AxiosRequestConfig): Promise<operations.ShowServiceOfferingResponse>;
     /**
+     * showServiceOfferingNode - Show an existing ServiceOfferingNode
+     *
      * Returns a ServiceOfferingNode object
     **/
-    ShowServiceOfferingNode(req: operations.ShowServiceOfferingNodeRequest, config?: AxiosRequestConfig): Promise<operations.ShowServiceOfferingNodeResponse>;
+    showServiceOfferingNode(req: operations.ShowServiceOfferingNodeRequest, config?: AxiosRequestConfig): Promise<operations.ShowServiceOfferingNodeResponse>;
     /**
+     * showServicePlan - Show an existing ServicePlan
+     *
      * Returns a ServicePlan object
     **/
-    ShowServicePlan(req: operations.ShowServicePlanRequest, config?: AxiosRequestConfig): Promise<operations.ShowServicePlanResponse>;
+    showServicePlan(req: operations.ShowServicePlanRequest, config?: AxiosRequestConfig): Promise<operations.ShowServicePlanResponse>;
     /**
+     * showSource - Show an existing Source
+     *
      * Returns a Source object
     **/
-    ShowSource(req: operations.ShowSourceRequest, config?: AxiosRequestConfig): Promise<operations.ShowSourceResponse>;
+    showSource(req: operations.ShowSourceRequest, config?: AxiosRequestConfig): Promise<operations.ShowSourceResponse>;
     /**
+     * showTask - Show an existing Task
+     *
      * Returns a Task object
     **/
-    ShowTask(req: operations.ShowTaskRequest, config?: AxiosRequestConfig): Promise<operations.ShowTaskResponse>;
+    showTask(req: operations.ShowTaskRequest, config?: AxiosRequestConfig): Promise<operations.ShowTaskResponse>;
     /**
+     * tagServiceInventory - Tag a ServiceInventory
+     *
      * Tags a ServiceInventory object
     **/
-    TagServiceInventory(req: operations.TagServiceInventoryRequest, config?: AxiosRequestConfig): Promise<operations.TagServiceInventoryResponse>;
+    tagServiceInventory(req: operations.TagServiceInventoryRequest, config?: AxiosRequestConfig): Promise<operations.TagServiceInventoryResponse>;
     /**
+     * untagServiceInventory - Untag a ServiceInventory
+     *
      * Untags a ServiceInventory object
     **/
-    UntagServiceInventory(req: operations.UntagServiceInventoryRequest, config?: AxiosRequestConfig): Promise<operations.UntagServiceInventoryResponse>;
+    untagServiceInventory(req: operations.UntagServiceInventoryRequest, config?: AxiosRequestConfig): Promise<operations.UntagServiceInventoryResponse>;
     /**
+     * updateTask - Update an existing Task
+     *
      * Updates a Task object
     **/
-    UpdateTask(req: operations.UpdateTaskRequest, config?: AxiosRequestConfig): Promise<operations.UpdateTaskResponse>;
+    updateTask(req: operations.UpdateTaskRequest, config?: AxiosRequestConfig): Promise<operations.UpdateTaskResponse>;
 }
 export {};

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 /**
  * Deployment Manager will call these methods during the events of creation/deletion/update/get/setIamPolicy
 **/

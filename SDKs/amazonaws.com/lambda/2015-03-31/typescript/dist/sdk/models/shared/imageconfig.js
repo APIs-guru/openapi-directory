@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // ImageConfig
 /**
  * Configuration values that override the container image Dockerfile settings. See <a href="https://docs.aws.amazon.com/lambda/latest/dg/images-create.html#images-parms">Container settings</a>.
@@ -33,15 +33,15 @@ var ImageConfig = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Command" }),
+        SpeakeasyMetadata({ data: "json, name=Command" }),
         __metadata("design:type", Array)
     ], ImageConfig.prototype, "command", void 0);
     __decorate([
-        Metadata({ data: "json, name=EntryPoint" }),
+        SpeakeasyMetadata({ data: "json, name=EntryPoint" }),
         __metadata("design:type", Array)
     ], ImageConfig.prototype, "entryPoint", void 0);
     __decorate([
-        Metadata({ data: "json, name=WorkingDirectory" }),
+        SpeakeasyMetadata({ data: "json, name=WorkingDirectory" }),
         __metadata("design:type", String)
     ], ImageConfig.prototype, "workingDirectory", void 0);
     return ImageConfig;

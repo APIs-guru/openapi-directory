@@ -10,13 +10,13 @@ class RemoveDeletedNodesHeaders:
 
 @dataclass
 class RemoveDeletedNodesRequest:
-    headers: RemoveDeletedNodesHeaders = field(default=None)
-    request: shared.DeleteDeletedNodesRequest = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: RemoveDeletedNodesHeaders = field()
+    request: shared.DeleteDeletedNodesRequest = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class RemoveDeletedNodesResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error_response: Optional[shared.ErrorResponse] = field(default=None)
-    status_code: int = field(default=None)
     

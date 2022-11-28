@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { InstanceOsPoliciesCompliance } from "./instanceospoliciescompliance";
+
 
 
 // ListInstanceOsPoliciesCompliancesResponse
@@ -8,9 +8,9 @@ import { InstanceOsPoliciesCompliance } from "./instanceospoliciescompliance";
  * A response message for listing OS policies compliance data for all Compute Engine VMs in the given location.
 **/
 export class ListInstanceOsPoliciesCompliancesResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=instanceOsPoliciesCompliances", elemType: shared.InstanceOsPoliciesCompliance })
+  @SpeakeasyMetadata({ data: "json, name=instanceOsPoliciesCompliances", elemType: InstanceOsPoliciesCompliance })
   instanceOsPoliciesCompliances?: InstanceOsPoliciesCompliance[];
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 }

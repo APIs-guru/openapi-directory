@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // WebAppIcon
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Icon for a web app.
 **/
 export class WebAppIcon extends SpeakeasyBase {
-  @Metadata({ data: "json, name=imageData" })
+  @SpeakeasyMetadata({ data: "json, name=imageData" })
   imageData?: string;
 }

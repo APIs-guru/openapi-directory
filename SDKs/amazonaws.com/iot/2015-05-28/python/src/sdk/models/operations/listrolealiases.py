@@ -1,5 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Any,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
 from sdk.models import shared
 
 
@@ -23,18 +26,18 @@ class ListRoleAliasesHeaders:
 
 @dataclass
 class ListRoleAliasesRequest:
-    query_params: ListRoleAliasesQueryParams = field(default=None)
-    headers: ListRoleAliasesHeaders = field(default=None)
+    headers: ListRoleAliasesHeaders = field()
+    query_params: ListRoleAliasesQueryParams = field()
     
 
 @dataclass
 class ListRoleAliasesResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     internal_failure_exception: Optional[Any] = field(default=None)
     invalid_request_exception: Optional[Any] = field(default=None)
     list_role_aliases_response: Optional[shared.ListRoleAliasesResponse] = field(default=None)
     service_unavailable_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     unauthorized_exception: Optional[Any] = field(default=None)
     

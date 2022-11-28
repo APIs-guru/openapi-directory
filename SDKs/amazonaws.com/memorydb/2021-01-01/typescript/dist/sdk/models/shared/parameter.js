@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // Parameter
 /**
  * Describes an individual setting that controls some aspect of MemoryDB behavior.
@@ -33,27 +33,27 @@ var Parameter = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=AllowedValues" }),
+        SpeakeasyMetadata({ data: "json, name=AllowedValues" }),
         __metadata("design:type", String)
     ], Parameter.prototype, "allowedValues", void 0);
     __decorate([
-        Metadata({ data: "json, name=DataType" }),
+        SpeakeasyMetadata({ data: "json, name=DataType" }),
         __metadata("design:type", String)
     ], Parameter.prototype, "dataType", void 0);
     __decorate([
-        Metadata({ data: "json, name=Description" }),
+        SpeakeasyMetadata({ data: "json, name=Description" }),
         __metadata("design:type", String)
     ], Parameter.prototype, "description", void 0);
     __decorate([
-        Metadata({ data: "json, name=MinimumEngineVersion" }),
+        SpeakeasyMetadata({ data: "json, name=MinimumEngineVersion" }),
         __metadata("design:type", String)
     ], Parameter.prototype, "minimumEngineVersion", void 0);
     __decorate([
-        Metadata({ data: "json, name=Name" }),
+        SpeakeasyMetadata({ data: "json, name=Name" }),
         __metadata("design:type", String)
     ], Parameter.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=Value" }),
+        SpeakeasyMetadata({ data: "json, name=Value" }),
         __metadata("design:type", String)
     ], Parameter.prototype, "value", void 0);
     return Parameter;

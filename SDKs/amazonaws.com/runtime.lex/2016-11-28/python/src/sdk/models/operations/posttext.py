@@ -1,14 +1,18 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,List,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
 @dataclass
 class PostTextPathParams:
-    bot_alias: str = field(default=None, metadata={'path_param': { 'field_name': 'botAlias', 'style': 'simple', 'explode': False }})
-    bot_name: str = field(default=None, metadata={'path_param': { 'field_name': 'botName', 'style': 'simple', 'explode': False }})
-    user_id: str = field(default=None, metadata={'path_param': { 'field_name': 'userId', 'style': 'simple', 'explode': False }})
+    bot_alias: str = field(metadata={'path_param': { 'field_name': 'botAlias', 'style': 'simple', 'explode': False }})
+    bot_name: str = field(metadata={'path_param': { 'field_name': 'botName', 'style': 'simple', 'explode': False }})
+    user_id: str = field(metadata={'path_param': { 'field_name': 'userId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,30 +29,30 @@ class PostTextHeaders:
 @dataclass_json
 @dataclass
 class PostTextRequestBody:
-    active_contexts: Optional[List[shared.ActiveContext]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'activeContexts' }})
-    input_text: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'inputText' }})
-    request_attributes: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'requestAttributes' }})
-    session_attributes: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'sessionAttributes' }})
+    input_text: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('inputText') }})
+    active_contexts: Optional[List[shared.ActiveContext]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('activeContexts') }})
+    request_attributes: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('requestAttributes') }})
+    session_attributes: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('sessionAttributes') }})
     
 
 @dataclass
 class PostTextRequest:
-    path_params: PostTextPathParams = field(default=None)
-    headers: PostTextHeaders = field(default=None)
-    request: PostTextRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: PostTextHeaders = field()
+    path_params: PostTextPathParams = field()
+    request: PostTextRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class PostTextResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_gateway_exception: Optional[Any] = field(default=None)
     bad_request_exception: Optional[Any] = field(default=None)
     conflict_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     dependency_failed_exception: Optional[Any] = field(default=None)
     internal_failure_exception: Optional[Any] = field(default=None)
     limit_exceeded_exception: Optional[Any] = field(default=None)
     loop_detected_exception: Optional[Any] = field(default=None)
     not_found_exception: Optional[Any] = field(default=None)
     post_text_response: Optional[shared.PostTextResponse] = field(default=None)
-    status_code: int = field(default=None)
     

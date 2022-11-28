@@ -1,5 +1,7 @@
 package shared
 
+// Resources
+// Machine resources for a version.
 type Resources struct {
 	CPU             *float64 `json:"cpu,omitempty"`
 	DiskGb          *float64 `json:"diskGb,omitempty"`

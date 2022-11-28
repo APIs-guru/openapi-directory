@@ -22,26 +22,26 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var LearningCurve = /** @class */ (function (_super) {
     __extends(LearningCurve, _super);
     function LearningCurve() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=epoch" }),
+        SpeakeasyMetadata({ data: "json, name=epoch" }),
         __metadata("design:type", Map)
     ], LearningCurve.prototype, "epoch", void 0);
     __decorate([
-        Metadata({ data: "json, name=epochResults" }),
+        SpeakeasyMetadata({ data: "json, name=epochResults" }),
         __metadata("design:type", Map)
     ], LearningCurve.prototype, "epochResults", void 0);
     __decorate([
-        Metadata({ data: "json, name=metricsData" }),
+        SpeakeasyMetadata({ data: "json, name=metricsData" }),
         __metadata("design:type", Map)
     ], LearningCurve.prototype, "metricsData", void 0);
     __decorate([
-        Metadata({ data: "json, name=object" }),
+        SpeakeasyMetadata({ data: "json, name=object" }),
         __metadata("design:type", String)
     ], LearningCurve.prototype, "object", void 0);
     return LearningCurve;

@@ -22,18 +22,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var Destiny2GetDestinyEntityDefinitionPathParams = /** @class */ (function (_super) {
     __extends(Destiny2GetDestinyEntityDefinitionPathParams, _super);
     function Destiny2GetDestinyEntityDefinitionPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=entityType" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=entityType" }),
         __metadata("design:type", String)
     ], Destiny2GetDestinyEntityDefinitionPathParams.prototype, "entityType", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=hashIdentifier" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=hashIdentifier" }),
         __metadata("design:type", Number)
     ], Destiny2GetDestinyEntityDefinitionPathParams.prototype, "hashIdentifier", void 0);
     return Destiny2GetDestinyEntityDefinitionPathParams;
@@ -45,7 +45,7 @@ var Destiny2GetDestinyEntityDefinitionRequest = /** @class */ (function (_super)
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Destiny2GetDestinyEntityDefinitionPathParams)
     ], Destiny2GetDestinyEntityDefinitionRequest.prototype, "pathParams", void 0);
     return Destiny2GetDestinyEntityDefinitionRequest;
@@ -57,15 +57,15 @@ var Destiny2GetDestinyEntityDefinitionResponse = /** @class */ (function (_super
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], Destiny2GetDestinyEntityDefinitionResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], Destiny2GetDestinyEntityDefinitionResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], Destiny2GetDestinyEntityDefinitionResponse.prototype, "statusCode", void 0);
     return Destiny2GetDestinyEntityDefinitionResponse;

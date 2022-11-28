@@ -1,62 +1,63 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetDatasetPkRelatedObjectsPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=pk" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=pk" })
   pk: number;
 }
 
 
 export class GetDatasetPkRelatedObjectsSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=bearer" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" })
   jwt: shared.SchemeJwt;
 }
 
 
-export class GetDatasetPkRelatedObjectsRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: GetDatasetPkRelatedObjectsPathParams;
-
-  @Metadata()
-  security: GetDatasetPkRelatedObjectsSecurity;
-}
-
-
 export class GetDatasetPkRelatedObjects401ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class GetDatasetPkRelatedObjects404ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class GetDatasetPkRelatedObjects500ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
+export class GetDatasetPkRelatedObjectsRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: GetDatasetPkRelatedObjectsPathParams;
+
+  @SpeakeasyMetadata()
+  security: GetDatasetPkRelatedObjectsSecurity;
+}
+
+
 export class GetDatasetPkRelatedObjectsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   datasetRelatedObjectsResponse?: shared.DatasetRelatedObjectsResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getDatasetPkRelatedObjects401ApplicationJsonObject?: GetDatasetPkRelatedObjects401ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getDatasetPkRelatedObjects404ApplicationJsonObject?: GetDatasetPkRelatedObjects404ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getDatasetPkRelatedObjects500ApplicationJsonObject?: GetDatasetPkRelatedObjects500ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

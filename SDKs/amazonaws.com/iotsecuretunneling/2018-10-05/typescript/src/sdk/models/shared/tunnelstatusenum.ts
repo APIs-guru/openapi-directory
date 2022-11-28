@@ -1,6 +1,7 @@
 
 
+
 export enum TunnelStatusEnum {
-    Open = "OPEN"
-,    Closed = "CLOSED"
+    Open = "OPEN",
+    Closed = "CLOSED"
 }

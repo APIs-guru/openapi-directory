@@ -13,11 +13,6 @@ type GetInventoryHeaders struct {
 	WmSvcName             string `header:"style=simple,explode=false,name=WM_SVC.NAME"`
 }
 
-type GetInventoryRequest struct {
-	QueryParams GetInventoryQueryParams
-	Headers     GetInventoryHeaders
-}
-
 type GetInventory200ApplicationJSONQuantityUnitEnum string
 
 const (
@@ -32,6 +27,11 @@ type GetInventory200ApplicationJSONQuantity struct {
 type GetInventory200ApplicationJSON struct {
 	Quantity GetInventory200ApplicationJSONQuantity `json:"quantity"`
 	Sku      string                                 `json:"sku"`
+}
+
+type GetInventoryRequest struct {
+	QueryParams GetInventoryQueryParams
+	Headers     GetInventoryHeaders
 }
 
 type GetInventoryResponse struct {

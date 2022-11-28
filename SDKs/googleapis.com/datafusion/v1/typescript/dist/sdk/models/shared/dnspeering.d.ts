@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 /**
  * DNS peering configuration. These configurations are used to create DNS peering with the customer Cloud DNS.
 **/

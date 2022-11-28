@@ -1,5 +1,7 @@
 package shared
 
+// ApprovalRequest
+// A request for the customer to approve access to a resource.
 type ApprovalRequest struct {
 	Approve                     *ApproveDecision    `json:"approve,omitempty"`
 	Dismiss                     *DismissDecision    `json:"dismiss,omitempty"`

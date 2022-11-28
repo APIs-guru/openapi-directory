@@ -48,15 +48,15 @@ type TenancyTenantsListQueryParams struct {
 	TagN           *string `queryParam:"style=form,explode=true,name=tag__n"`
 }
 
-type TenancyTenantsListRequest struct {
-	QueryParams TenancyTenantsListQueryParams
-}
-
 type TenancyTenantsList200ApplicationJSON struct {
 	Count    int64           `json:"count"`
 	Next     *string         `json:"next,omitempty"`
 	Previous *string         `json:"previous,omitempty"`
 	Results  []shared.Tenant `json:"results"`
+}
+
+type TenancyTenantsListRequest struct {
+	QueryParams TenancyTenantsListQueryParams
 }
 
 type TenancyTenantsListResponse struct {

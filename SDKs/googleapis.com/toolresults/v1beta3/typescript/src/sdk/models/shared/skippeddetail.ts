@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // SkippedDetail
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Details for an outcome with a SKIPPED outcome summary.
 **/
 export class SkippedDetail extends SpeakeasyBase {
-  @Metadata({ data: "json, name=incompatibleAppVersion" })
+  @SpeakeasyMetadata({ data: "json, name=incompatibleAppVersion" })
   incompatibleAppVersion?: boolean;
 
-  @Metadata({ data: "json, name=incompatibleArchitecture" })
+  @SpeakeasyMetadata({ data: "json, name=incompatibleArchitecture" })
   incompatibleArchitecture?: boolean;
 
-  @Metadata({ data: "json, name=incompatibleDevice" })
+  @SpeakeasyMetadata({ data: "json, name=incompatibleDevice" })
   incompatibleDevice?: boolean;
 }

@@ -23,6 +23,8 @@ const (
 	BatchUpdateValuesRequestValueInputOptionEnumUserEntered                 BatchUpdateValuesRequestValueInputOptionEnum = "USER_ENTERED"
 )
 
+// BatchUpdateValuesRequest
+// The request for updating more than one range of values in a spreadsheet.
 type BatchUpdateValuesRequest struct {
 	Data                         []ValueRange                                              `json:"data,omitempty"`
 	IncludeValuesInResponse      *bool                                                     `json:"includeValuesInResponse,omitempty"`

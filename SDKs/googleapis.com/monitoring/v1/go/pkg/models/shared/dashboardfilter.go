@@ -11,6 +11,8 @@ const (
 	DashboardFilterFilterTypeEnumGroup                 DashboardFilterFilterTypeEnum = "GROUP"
 )
 
+// DashboardFilter
+// A filter to reduce the amount of data charted in relevant widgets.
 type DashboardFilter struct {
 	FilterType       *DashboardFilterFilterTypeEnum `json:"filterType,omitempty"`
 	LabelKey         *string                        `json:"labelKey,omitempty"`

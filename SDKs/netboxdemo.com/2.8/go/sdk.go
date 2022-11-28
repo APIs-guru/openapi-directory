@@ -10,7 +10,7 @@ import (
 	"strings"
 )
 
-var Servers = []string{
+var ServerList = []string{
 	"https://netboxdemo.com/api",
 }
 
@@ -19,9 +19,13 @@ type HTTPClient interface {
 }
 
 type SDK struct {
-	defaultClient  HTTPClient
-	securityClient HTTPClient
-	serverURL      string
+	_defaultClient  HTTPClient
+	_securityClient HTTPClient
+	_security       *shared.Security
+	_serverURL      string
+	_language       string
+	_sdkVersion     string
+	_genVersion     string
 }
 
 type SDKOption func(*SDK)
@@ -32,33 +36,54 @@ func WithServerURL(serverURL string, params map[string]string) SDKOption {
 			serverURL = utils.ReplaceParameters(serverURL, params)
 		}
 
-		sdk.serverURL = serverURL
+		sdk._serverURL = serverURL
+	}
+}
+
+func WithClient(client HTTPClient) SDKOption {
+	return func(sdk *SDK) {
+		sdk._defaultClient = client
 	}
 }
 
 func WithSecurity(security shared.Security) SDKOption {
 	return func(sdk *SDK) {
-		sdk.securityClient = utils.CreateSecurityClient(security)
+		sdk._security = &security
 	}
 }
 
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
-		defaultClient:  http.DefaultClient,
-		securityClient: http.DefaultClient,
+		_language:   "go",
+		_sdkVersion: "",
+		_genVersion: "internal",
 	}
 	for _, opt := range opts {
 		opt(sdk)
 	}
-	if sdk.serverURL == "" {
-		sdk.serverURL = Servers[0]
+
+	if sdk._defaultClient == nil {
+		sdk._defaultClient = http.DefaultClient
+	}
+	if sdk._securityClient == nil {
+
+		if sdk._security != nil {
+			sdk._securityClient = utils.ConfigureSecurityClient(sdk._defaultClient, sdk._security)
+		} else {
+			sdk._securityClient = sdk._defaultClient
+		}
+
+	}
+
+	if sdk._serverURL == "" {
+		sdk._serverURL = ServerList[0]
 	}
 
 	return sdk
 }
 
 func (s *SDK) CircuitsCircuitTerminationsCreate(ctx context.Context, request operations.CircuitsCircuitTerminationsCreateRequest) (*operations.CircuitsCircuitTerminationsCreateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/circuits/circuit-terminations/"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -76,7 +101,7 @@ func (s *SDK) CircuitsCircuitTerminationsCreate(ctx context.Context, request ope
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -107,7 +132,7 @@ func (s *SDK) CircuitsCircuitTerminationsCreate(ctx context.Context, request ope
 }
 
 func (s *SDK) CircuitsCircuitTerminationsDelete(ctx context.Context, request operations.CircuitsCircuitTerminationsDeleteRequest) (*operations.CircuitsCircuitTerminationsDeleteResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/circuits/circuit-terminations/{id}/", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -115,7 +140,7 @@ func (s *SDK) CircuitsCircuitTerminationsDelete(ctx context.Context, request ope
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -136,8 +161,9 @@ func (s *SDK) CircuitsCircuitTerminationsDelete(ctx context.Context, request ope
 	return res, nil
 }
 
+// CircuitsCircuitTerminationsList - Call to super to allow for caching
 func (s *SDK) CircuitsCircuitTerminationsList(ctx context.Context, request operations.CircuitsCircuitTerminationsListRequest) (*operations.CircuitsCircuitTerminationsListResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/circuits/circuit-terminations/"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -147,7 +173,7 @@ func (s *SDK) CircuitsCircuitTerminationsList(ctx context.Context, request opera
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -178,7 +204,7 @@ func (s *SDK) CircuitsCircuitTerminationsList(ctx context.Context, request opera
 }
 
 func (s *SDK) CircuitsCircuitTerminationsPartialUpdate(ctx context.Context, request operations.CircuitsCircuitTerminationsPartialUpdateRequest) (*operations.CircuitsCircuitTerminationsPartialUpdateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/circuits/circuit-terminations/{id}/", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -196,7 +222,7 @@ func (s *SDK) CircuitsCircuitTerminationsPartialUpdate(ctx context.Context, requ
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -226,8 +252,9 @@ func (s *SDK) CircuitsCircuitTerminationsPartialUpdate(ctx context.Context, requ
 	return res, nil
 }
 
+// CircuitsCircuitTerminationsRead - Call to super to allow for caching
 func (s *SDK) CircuitsCircuitTerminationsRead(ctx context.Context, request operations.CircuitsCircuitTerminationsReadRequest) (*operations.CircuitsCircuitTerminationsReadResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/circuits/circuit-terminations/{id}/", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -235,7 +262,7 @@ func (s *SDK) CircuitsCircuitTerminationsRead(ctx context.Context, request opera
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -266,7 +293,7 @@ func (s *SDK) CircuitsCircuitTerminationsRead(ctx context.Context, request opera
 }
 
 func (s *SDK) CircuitsCircuitTerminationsUpdate(ctx context.Context, request operations.CircuitsCircuitTerminationsUpdateRequest) (*operations.CircuitsCircuitTerminationsUpdateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/circuits/circuit-terminations/{id}/", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -284,7 +311,7 @@ func (s *SDK) CircuitsCircuitTerminationsUpdate(ctx context.Context, request ope
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -315,7 +342,7 @@ func (s *SDK) CircuitsCircuitTerminationsUpdate(ctx context.Context, request ope
 }
 
 func (s *SDK) CircuitsCircuitTypesCreate(ctx context.Context, request operations.CircuitsCircuitTypesCreateRequest) (*operations.CircuitsCircuitTypesCreateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/circuits/circuit-types/"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -333,7 +360,7 @@ func (s *SDK) CircuitsCircuitTypesCreate(ctx context.Context, request operations
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -364,7 +391,7 @@ func (s *SDK) CircuitsCircuitTypesCreate(ctx context.Context, request operations
 }
 
 func (s *SDK) CircuitsCircuitTypesDelete(ctx context.Context, request operations.CircuitsCircuitTypesDeleteRequest) (*operations.CircuitsCircuitTypesDeleteResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/circuits/circuit-types/{id}/", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -372,7 +399,7 @@ func (s *SDK) CircuitsCircuitTypesDelete(ctx context.Context, request operations
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -393,8 +420,9 @@ func (s *SDK) CircuitsCircuitTypesDelete(ctx context.Context, request operations
 	return res, nil
 }
 
+// CircuitsCircuitTypesList - Call to super to allow for caching
 func (s *SDK) CircuitsCircuitTypesList(ctx context.Context, request operations.CircuitsCircuitTypesListRequest) (*operations.CircuitsCircuitTypesListResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/circuits/circuit-types/"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -404,7 +432,7 @@ func (s *SDK) CircuitsCircuitTypesList(ctx context.Context, request operations.C
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -435,7 +463,7 @@ func (s *SDK) CircuitsCircuitTypesList(ctx context.Context, request operations.C
 }
 
 func (s *SDK) CircuitsCircuitTypesPartialUpdate(ctx context.Context, request operations.CircuitsCircuitTypesPartialUpdateRequest) (*operations.CircuitsCircuitTypesPartialUpdateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/circuits/circuit-types/{id}/", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -453,7 +481,7 @@ func (s *SDK) CircuitsCircuitTypesPartialUpdate(ctx context.Context, request ope
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -483,8 +511,9 @@ func (s *SDK) CircuitsCircuitTypesPartialUpdate(ctx context.Context, request ope
 	return res, nil
 }
 
+// CircuitsCircuitTypesRead - Call to super to allow for caching
 func (s *SDK) CircuitsCircuitTypesRead(ctx context.Context, request operations.CircuitsCircuitTypesReadRequest) (*operations.CircuitsCircuitTypesReadResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/circuits/circuit-types/{id}/", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -492,7 +521,7 @@ func (s *SDK) CircuitsCircuitTypesRead(ctx context.Context, request operations.C
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -523,7 +552,7 @@ func (s *SDK) CircuitsCircuitTypesRead(ctx context.Context, request operations.C
 }
 
 func (s *SDK) CircuitsCircuitTypesUpdate(ctx context.Context, request operations.CircuitsCircuitTypesUpdateRequest) (*operations.CircuitsCircuitTypesUpdateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/circuits/circuit-types/{id}/", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -541,7 +570,7 @@ func (s *SDK) CircuitsCircuitTypesUpdate(ctx context.Context, request operations
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -572,7 +601,7 @@ func (s *SDK) CircuitsCircuitTypesUpdate(ctx context.Context, request operations
 }
 
 func (s *SDK) CircuitsCircuitsCreate(ctx context.Context, request operations.CircuitsCircuitsCreateRequest) (*operations.CircuitsCircuitsCreateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/circuits/circuits/"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -590,7 +619,7 @@ func (s *SDK) CircuitsCircuitsCreate(ctx context.Context, request operations.Cir
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -621,7 +650,7 @@ func (s *SDK) CircuitsCircuitsCreate(ctx context.Context, request operations.Cir
 }
 
 func (s *SDK) CircuitsCircuitsDelete(ctx context.Context, request operations.CircuitsCircuitsDeleteRequest) (*operations.CircuitsCircuitsDeleteResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/circuits/circuits/{id}/", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -629,7 +658,7 @@ func (s *SDK) CircuitsCircuitsDelete(ctx context.Context, request operations.Cir
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -650,8 +679,9 @@ func (s *SDK) CircuitsCircuitsDelete(ctx context.Context, request operations.Cir
 	return res, nil
 }
 
+// CircuitsCircuitsList - Call to super to allow for caching
 func (s *SDK) CircuitsCircuitsList(ctx context.Context, request operations.CircuitsCircuitsListRequest) (*operations.CircuitsCircuitsListResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/circuits/circuits/"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -661,7 +691,7 @@ func (s *SDK) CircuitsCircuitsList(ctx context.Context, request operations.Circu
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -692,7 +722,7 @@ func (s *SDK) CircuitsCircuitsList(ctx context.Context, request operations.Circu
 }
 
 func (s *SDK) CircuitsCircuitsPartialUpdate(ctx context.Context, request operations.CircuitsCircuitsPartialUpdateRequest) (*operations.CircuitsCircuitsPartialUpdateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/circuits/circuits/{id}/", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -710,7 +740,7 @@ func (s *SDK) CircuitsCircuitsPartialUpdate(ctx context.Context, request operati
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -740,8 +770,9 @@ func (s *SDK) CircuitsCircuitsPartialUpdate(ctx context.Context, request operati
 	return res, nil
 }
 
+// CircuitsCircuitsRead - Call to super to allow for caching
 func (s *SDK) CircuitsCircuitsRead(ctx context.Context, request operations.CircuitsCircuitsReadRequest) (*operations.CircuitsCircuitsReadResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/circuits/circuits/{id}/", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -749,7 +780,7 @@ func (s *SDK) CircuitsCircuitsRead(ctx context.Context, request operations.Circu
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -780,7 +811,7 @@ func (s *SDK) CircuitsCircuitsRead(ctx context.Context, request operations.Circu
 }
 
 func (s *SDK) CircuitsCircuitsUpdate(ctx context.Context, request operations.CircuitsCircuitsUpdateRequest) (*operations.CircuitsCircuitsUpdateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/circuits/circuits/{id}/", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -798,7 +829,7 @@ func (s *SDK) CircuitsCircuitsUpdate(ctx context.Context, request operations.Cir
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -829,7 +860,7 @@ func (s *SDK) CircuitsCircuitsUpdate(ctx context.Context, request operations.Cir
 }
 
 func (s *SDK) CircuitsProvidersCreate(ctx context.Context, request operations.CircuitsProvidersCreateRequest) (*operations.CircuitsProvidersCreateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/circuits/providers/"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -847,7 +878,7 @@ func (s *SDK) CircuitsProvidersCreate(ctx context.Context, request operations.Ci
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -878,7 +909,7 @@ func (s *SDK) CircuitsProvidersCreate(ctx context.Context, request operations.Ci
 }
 
 func (s *SDK) CircuitsProvidersDelete(ctx context.Context, request operations.CircuitsProvidersDeleteRequest) (*operations.CircuitsProvidersDeleteResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/circuits/providers/{id}/", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -886,7 +917,7 @@ func (s *SDK) CircuitsProvidersDelete(ctx context.Context, request operations.Ci
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -907,8 +938,9 @@ func (s *SDK) CircuitsProvidersDelete(ctx context.Context, request operations.Ci
 	return res, nil
 }
 
+// CircuitsProvidersGraphs - A convenience method for rendering graphs for a particular provider.
 func (s *SDK) CircuitsProvidersGraphs(ctx context.Context, request operations.CircuitsProvidersGraphsRequest) (*operations.CircuitsProvidersGraphsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/circuits/providers/{id}/graphs/", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -916,7 +948,7 @@ func (s *SDK) CircuitsProvidersGraphs(ctx context.Context, request operations.Ci
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -946,8 +978,9 @@ func (s *SDK) CircuitsProvidersGraphs(ctx context.Context, request operations.Ci
 	return res, nil
 }
 
+// CircuitsProvidersList - Call to super to allow for caching
 func (s *SDK) CircuitsProvidersList(ctx context.Context, request operations.CircuitsProvidersListRequest) (*operations.CircuitsProvidersListResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/circuits/providers/"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -957,7 +990,7 @@ func (s *SDK) CircuitsProvidersList(ctx context.Context, request operations.Circ
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -988,7 +1021,7 @@ func (s *SDK) CircuitsProvidersList(ctx context.Context, request operations.Circ
 }
 
 func (s *SDK) CircuitsProvidersPartialUpdate(ctx context.Context, request operations.CircuitsProvidersPartialUpdateRequest) (*operations.CircuitsProvidersPartialUpdateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/circuits/providers/{id}/", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1006,7 +1039,7 @@ func (s *SDK) CircuitsProvidersPartialUpdate(ctx context.Context, request operat
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1036,8 +1069,9 @@ func (s *SDK) CircuitsProvidersPartialUpdate(ctx context.Context, request operat
 	return res, nil
 }
 
+// CircuitsProvidersRead - Call to super to allow for caching
 func (s *SDK) CircuitsProvidersRead(ctx context.Context, request operations.CircuitsProvidersReadRequest) (*operations.CircuitsProvidersReadResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/circuits/providers/{id}/", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1045,7 +1079,7 @@ func (s *SDK) CircuitsProvidersRead(ctx context.Context, request operations.Circ
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1076,7 +1110,7 @@ func (s *SDK) CircuitsProvidersRead(ctx context.Context, request operations.Circ
 }
 
 func (s *SDK) CircuitsProvidersUpdate(ctx context.Context, request operations.CircuitsProvidersUpdateRequest) (*operations.CircuitsProvidersUpdateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/circuits/providers/{id}/", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1094,7 +1128,7 @@ func (s *SDK) CircuitsProvidersUpdate(ctx context.Context, request operations.Ci
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1125,7 +1159,7 @@ func (s *SDK) CircuitsProvidersUpdate(ctx context.Context, request operations.Ci
 }
 
 func (s *SDK) DcimCablesCreate(ctx context.Context, request operations.DcimCablesCreateRequest) (*operations.DcimCablesCreateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/dcim/cables/"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1143,7 +1177,7 @@ func (s *SDK) DcimCablesCreate(ctx context.Context, request operations.DcimCable
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1174,7 +1208,7 @@ func (s *SDK) DcimCablesCreate(ctx context.Context, request operations.DcimCable
 }
 
 func (s *SDK) DcimCablesDelete(ctx context.Context, request operations.DcimCablesDeleteRequest) (*operations.DcimCablesDeleteResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/dcim/cables/{id}/", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -1182,7 +1216,7 @@ func (s *SDK) DcimCablesDelete(ctx context.Context, request operations.DcimCable
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1203,8 +1237,9 @@ func (s *SDK) DcimCablesDelete(ctx context.Context, request operations.DcimCable
 	return res, nil
 }
 
+// DcimCablesList - Call to super to allow for caching
 func (s *SDK) DcimCablesList(ctx context.Context, request operations.DcimCablesListRequest) (*operations.DcimCablesListResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/dcim/cables/"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1214,7 +1249,7 @@ func (s *SDK) DcimCablesList(ctx context.Context, request operations.DcimCablesL
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1245,7 +1280,7 @@ func (s *SDK) DcimCablesList(ctx context.Context, request operations.DcimCablesL
 }
 
 func (s *SDK) DcimCablesPartialUpdate(ctx context.Context, request operations.DcimCablesPartialUpdateRequest) (*operations.DcimCablesPartialUpdateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/dcim/cables/{id}/", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1263,7 +1298,7 @@ func (s *SDK) DcimCablesPartialUpdate(ctx context.Context, request operations.Dc
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1293,8 +1328,9 @@ func (s *SDK) DcimCablesPartialUpdate(ctx context.Context, request operations.Dc
 	return res, nil
 }
 
+// DcimCablesRead - Call to super to allow for caching
 func (s *SDK) DcimCablesRead(ctx context.Context, request operations.DcimCablesReadRequest) (*operations.DcimCablesReadResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/dcim/cables/{id}/", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1302,7 +1338,7 @@ func (s *SDK) DcimCablesRead(ctx context.Context, request operations.DcimCablesR
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1333,7 +1369,7 @@ func (s *SDK) DcimCablesRead(ctx context.Context, request operations.DcimCablesR
 }
 
 func (s *SDK) DcimCablesUpdate(ctx context.Context, request operations.DcimCablesUpdateRequest) (*operations.DcimCablesUpdateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/dcim/cables/{id}/", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1351,7 +1387,7 @@ func (s *SDK) DcimCablesUpdate(ctx context.Context, request operations.DcimCable
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1381,8 +1417,14 @@ func (s *SDK) DcimCablesUpdate(ctx context.Context, request operations.DcimCable
 	return res, nil
 }
 
+// DcimConnectedDeviceList - This endpoint allows a user to determine what device (if any) is connected to a given peer device and peer
+// interface. This is useful in a situation where a device boots with no configuration, but can detect its neighbors
+// via a protocol such as LLDP. Two query parameters must be included in the request:
+//
+// * `peer_device`: The name of the peer device
+// * `peer_interface`: The name of the peer interface
 func (s *SDK) DcimConnectedDeviceList(ctx context.Context, request operations.DcimConnectedDeviceListRequest) (*operations.DcimConnectedDeviceListResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/dcim/connected-device/"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1392,7 +1434,7 @@ func (s *SDK) DcimConnectedDeviceList(ctx context.Context, request operations.Dc
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1423,7 +1465,7 @@ func (s *SDK) DcimConnectedDeviceList(ctx context.Context, request operations.Dc
 }
 
 func (s *SDK) DcimConsoleConnectionsList(ctx context.Context, request operations.DcimConsoleConnectionsListRequest) (*operations.DcimConsoleConnectionsListResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/dcim/console-connections/"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1433,7 +1475,7 @@ func (s *SDK) DcimConsoleConnectionsList(ctx context.Context, request operations
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1464,7 +1506,7 @@ func (s *SDK) DcimConsoleConnectionsList(ctx context.Context, request operations
 }
 
 func (s *SDK) DcimConsolePortTemplatesCreate(ctx context.Context, request operations.DcimConsolePortTemplatesCreateRequest) (*operations.DcimConsolePortTemplatesCreateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/dcim/console-port-templates/"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1482,7 +1524,7 @@ func (s *SDK) DcimConsolePortTemplatesCreate(ctx context.Context, request operat
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1513,7 +1555,7 @@ func (s *SDK) DcimConsolePortTemplatesCreate(ctx context.Context, request operat
 }
 
 func (s *SDK) DcimConsolePortTemplatesDelete(ctx context.Context, request operations.DcimConsolePortTemplatesDeleteRequest) (*operations.DcimConsolePortTemplatesDeleteResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/dcim/console-port-templates/{id}/", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -1521,7 +1563,7 @@ func (s *SDK) DcimConsolePortTemplatesDelete(ctx context.Context, request operat
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1542,8 +1584,9 @@ func (s *SDK) DcimConsolePortTemplatesDelete(ctx context.Context, request operat
 	return res, nil
 }
 
+// DcimConsolePortTemplatesList - Call to super to allow for caching
 func (s *SDK) DcimConsolePortTemplatesList(ctx context.Context, request operations.DcimConsolePortTemplatesListRequest) (*operations.DcimConsolePortTemplatesListResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/dcim/console-port-templates/"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1553,7 +1596,7 @@ func (s *SDK) DcimConsolePortTemplatesList(ctx context.Context, request operatio
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1584,7 +1627,7 @@ func (s *SDK) DcimConsolePortTemplatesList(ctx context.Context, request operatio
 }
 
 func (s *SDK) DcimConsolePortTemplatesPartialUpdate(ctx context.Context, request operations.DcimConsolePortTemplatesPartialUpdateRequest) (*operations.DcimConsolePortTemplatesPartialUpdateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/dcim/console-port-templates/{id}/", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1602,7 +1645,7 @@ func (s *SDK) DcimConsolePortTemplatesPartialUpdate(ctx context.Context, request
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1632,8 +1675,9 @@ func (s *SDK) DcimConsolePortTemplatesPartialUpdate(ctx context.Context, request
 	return res, nil
 }
 
+// DcimConsolePortTemplatesRead - Call to super to allow for caching
 func (s *SDK) DcimConsolePortTemplatesRead(ctx context.Context, request operations.DcimConsolePortTemplatesReadRequest) (*operations.DcimConsolePortTemplatesReadResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/dcim/console-port-templates/{id}/", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1641,7 +1685,7 @@ func (s *SDK) DcimConsolePortTemplatesRead(ctx context.Context, request operatio
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1672,7 +1716,7 @@ func (s *SDK) DcimConsolePortTemplatesRead(ctx context.Context, request operatio
 }
 
 func (s *SDK) DcimConsolePortTemplatesUpdate(ctx context.Context, request operations.DcimConsolePortTemplatesUpdateRequest) (*operations.DcimConsolePortTemplatesUpdateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/dcim/console-port-templates/{id}/", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1690,7 +1734,7 @@ func (s *SDK) DcimConsolePortTemplatesUpdate(ctx context.Context, request operat
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1721,7 +1765,7 @@ func (s *SDK) DcimConsolePortTemplatesUpdate(ctx context.Context, request operat
 }
 
 func (s *SDK) DcimConsolePortsCreate(ctx context.Context, request operations.DcimConsolePortsCreateRequest) (*operations.DcimConsolePortsCreateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/dcim/console-ports/"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1739,7 +1783,7 @@ func (s *SDK) DcimConsolePortsCreate(ctx context.Context, request operations.Dci
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1770,7 +1814,7 @@ func (s *SDK) DcimConsolePortsCreate(ctx context.Context, request operations.Dci
 }
 
 func (s *SDK) DcimConsolePortsDelete(ctx context.Context, request operations.DcimConsolePortsDeleteRequest) (*operations.DcimConsolePortsDeleteResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/dcim/console-ports/{id}/", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -1778,7 +1822,7 @@ func (s *SDK) DcimConsolePortsDelete(ctx context.Context, request operations.Dci
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1799,8 +1843,9 @@ func (s *SDK) DcimConsolePortsDelete(ctx context.Context, request operations.Dci
 	return res, nil
 }
 
+// DcimConsolePortsList - Call to super to allow for caching
 func (s *SDK) DcimConsolePortsList(ctx context.Context, request operations.DcimConsolePortsListRequest) (*operations.DcimConsolePortsListResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/dcim/console-ports/"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1810,7 +1855,7 @@ func (s *SDK) DcimConsolePortsList(ctx context.Context, request operations.DcimC
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1841,7 +1886,7 @@ func (s *SDK) DcimConsolePortsList(ctx context.Context, request operations.DcimC
 }
 
 func (s *SDK) DcimConsolePortsPartialUpdate(ctx context.Context, request operations.DcimConsolePortsPartialUpdateRequest) (*operations.DcimConsolePortsPartialUpdateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/dcim/console-ports/{id}/", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1859,7 +1904,7 @@ func (s *SDK) DcimConsolePortsPartialUpdate(ctx context.Context, request operati
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1889,8 +1934,9 @@ func (s *SDK) DcimConsolePortsPartialUpdate(ctx context.Context, request operati
 	return res, nil
 }
 
+// DcimConsolePortsRead - Call to super to allow for caching
 func (s *SDK) DcimConsolePortsRead(ctx context.Context, request operations.DcimConsolePortsReadRequest) (*operations.DcimConsolePortsReadResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/dcim/console-ports/{id}/", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1898,7 +1944,7 @@ func (s *SDK) DcimConsolePortsRead(ctx context.Context, request operations.DcimC
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1928,8 +1974,9 @@ func (s *SDK) DcimConsolePortsRead(ctx context.Context, request operations.DcimC
 	return res, nil
 }
 
+// DcimConsolePortsTrace - Trace a complete cable path and return each segment as a three-tuple of (termination, cable, termination).
 func (s *SDK) DcimConsolePortsTrace(ctx context.Context, request operations.DcimConsolePortsTraceRequest) (*operations.DcimConsolePortsTraceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/dcim/console-ports/{id}/trace/", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1937,7 +1984,7 @@ func (s *SDK) DcimConsolePortsTrace(ctx context.Context, request operations.Dcim
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1968,7 +2015,7 @@ func (s *SDK) DcimConsolePortsTrace(ctx context.Context, request operations.Dcim
 }
 
 func (s *SDK) DcimConsolePortsUpdate(ctx context.Context, request operations.DcimConsolePortsUpdateRequest) (*operations.DcimConsolePortsUpdateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/dcim/console-ports/{id}/", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1986,7 +2033,7 @@ func (s *SDK) DcimConsolePortsUpdate(ctx context.Context, request operations.Dci
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2017,7 +2064,7 @@ func (s *SDK) DcimConsolePortsUpdate(ctx context.Context, request operations.Dci
 }
 
 func (s *SDK) DcimConsoleServerPortTemplatesCreate(ctx context.Context, request operations.DcimConsoleServerPortTemplatesCreateRequest) (*operations.DcimConsoleServerPortTemplatesCreateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/dcim/console-server-port-templates/"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2035,7 +2082,7 @@ func (s *SDK) DcimConsoleServerPortTemplatesCreate(ctx context.Context, request 
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2066,7 +2113,7 @@ func (s *SDK) DcimConsoleServerPortTemplatesCreate(ctx context.Context, request 
 }
 
 func (s *SDK) DcimConsoleServerPortTemplatesDelete(ctx context.Context, request operations.DcimConsoleServerPortTemplatesDeleteRequest) (*operations.DcimConsoleServerPortTemplatesDeleteResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/dcim/console-server-port-templates/{id}/", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -2074,7 +2121,7 @@ func (s *SDK) DcimConsoleServerPortTemplatesDelete(ctx context.Context, request 
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2095,8 +2142,9 @@ func (s *SDK) DcimConsoleServerPortTemplatesDelete(ctx context.Context, request 
 	return res, nil
 }
 
+// DcimConsoleServerPortTemplatesList - Call to super to allow for caching
 func (s *SDK) DcimConsoleServerPortTemplatesList(ctx context.Context, request operations.DcimConsoleServerPortTemplatesListRequest) (*operations.DcimConsoleServerPortTemplatesListResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/dcim/console-server-port-templates/"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2106,7 +2154,7 @@ func (s *SDK) DcimConsoleServerPortTemplatesList(ctx context.Context, request op
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2137,7 +2185,7 @@ func (s *SDK) DcimConsoleServerPortTemplatesList(ctx context.Context, request op
 }
 
 func (s *SDK) DcimConsoleServerPortTemplatesPartialUpdate(ctx context.Context, request operations.DcimConsoleServerPortTemplatesPartialUpdateRequest) (*operations.DcimConsoleServerPortTemplatesPartialUpdateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/dcim/console-server-port-templates/{id}/", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2155,7 +2203,7 @@ func (s *SDK) DcimConsoleServerPortTemplatesPartialUpdate(ctx context.Context, r
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2185,8 +2233,9 @@ func (s *SDK) DcimConsoleServerPortTemplatesPartialUpdate(ctx context.Context, r
 	return res, nil
 }
 
+// DcimConsoleServerPortTemplatesRead - Call to super to allow for caching
 func (s *SDK) DcimConsoleServerPortTemplatesRead(ctx context.Context, request operations.DcimConsoleServerPortTemplatesReadRequest) (*operations.DcimConsoleServerPortTemplatesReadResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/dcim/console-server-port-templates/{id}/", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2194,7 +2243,7 @@ func (s *SDK) DcimConsoleServerPortTemplatesRead(ctx context.Context, request op
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2225,7 +2274,7 @@ func (s *SDK) DcimConsoleServerPortTemplatesRead(ctx context.Context, request op
 }
 
 func (s *SDK) DcimConsoleServerPortTemplatesUpdate(ctx context.Context, request operations.DcimConsoleServerPortTemplatesUpdateRequest) (*operations.DcimConsoleServerPortTemplatesUpdateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/dcim/console-server-port-templates/{id}/", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2243,7 +2292,7 @@ func (s *SDK) DcimConsoleServerPortTemplatesUpdate(ctx context.Context, request 
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2274,7 +2323,7 @@ func (s *SDK) DcimConsoleServerPortTemplatesUpdate(ctx context.Context, request 
 }
 
 func (s *SDK) DcimConsoleServerPortsCreate(ctx context.Context, request operations.DcimConsoleServerPortsCreateRequest) (*operations.DcimConsoleServerPortsCreateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/dcim/console-server-ports/"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2292,7 +2341,7 @@ func (s *SDK) DcimConsoleServerPortsCreate(ctx context.Context, request operatio
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2323,7 +2372,7 @@ func (s *SDK) DcimConsoleServerPortsCreate(ctx context.Context, request operatio
 }
 
 func (s *SDK) DcimConsoleServerPortsDelete(ctx context.Context, request operations.DcimConsoleServerPortsDeleteRequest) (*operations.DcimConsoleServerPortsDeleteResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/dcim/console-server-ports/{id}/", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -2331,7 +2380,7 @@ func (s *SDK) DcimConsoleServerPortsDelete(ctx context.Context, request operatio
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2352,8 +2401,9 @@ func (s *SDK) DcimConsoleServerPortsDelete(ctx context.Context, request operatio
 	return res, nil
 }
 
+// DcimConsoleServerPortsList - Call to super to allow for caching
 func (s *SDK) DcimConsoleServerPortsList(ctx context.Context, request operations.DcimConsoleServerPortsListRequest) (*operations.DcimConsoleServerPortsListResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/dcim/console-server-ports/"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2363,7 +2413,7 @@ func (s *SDK) DcimConsoleServerPortsList(ctx context.Context, request operations
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2394,7 +2444,7 @@ func (s *SDK) DcimConsoleServerPortsList(ctx context.Context, request operations
 }
 
 func (s *SDK) DcimConsoleServerPortsPartialUpdate(ctx context.Context, request operations.DcimConsoleServerPortsPartialUpdateRequest) (*operations.DcimConsoleServerPortsPartialUpdateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/dcim/console-server-ports/{id}/", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2412,7 +2462,7 @@ func (s *SDK) DcimConsoleServerPortsPartialUpdate(ctx context.Context, request o
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2442,8 +2492,9 @@ func (s *SDK) DcimConsoleServerPortsPartialUpdate(ctx context.Context, request o
 	return res, nil
 }
 
+// DcimConsoleServerPortsRead - Call to super to allow for caching
 func (s *SDK) DcimConsoleServerPortsRead(ctx context.Context, request operations.DcimConsoleServerPortsReadRequest) (*operations.DcimConsoleServerPortsReadResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/dcim/console-server-ports/{id}/", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2451,7 +2502,7 @@ func (s *SDK) DcimConsoleServerPortsRead(ctx context.Context, request operations
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2481,8 +2532,9 @@ func (s *SDK) DcimConsoleServerPortsRead(ctx context.Context, request operations
 	return res, nil
 }
 
+// DcimConsoleServerPortsTrace - Trace a complete cable path and return each segment as a three-tuple of (termination, cable, termination).
 func (s *SDK) DcimConsoleServerPortsTrace(ctx context.Context, request operations.DcimConsoleServerPortsTraceRequest) (*operations.DcimConsoleServerPortsTraceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/dcim/console-server-ports/{id}/trace/", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2490,7 +2542,7 @@ func (s *SDK) DcimConsoleServerPortsTrace(ctx context.Context, request operation
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2521,7 +2573,7 @@ func (s *SDK) DcimConsoleServerPortsTrace(ctx context.Context, request operation
 }
 
 func (s *SDK) DcimConsoleServerPortsUpdate(ctx context.Context, request operations.DcimConsoleServerPortsUpdateRequest) (*operations.DcimConsoleServerPortsUpdateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/dcim/console-server-ports/{id}/", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2539,7 +2591,7 @@ func (s *SDK) DcimConsoleServerPortsUpdate(ctx context.Context, request operatio
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2570,7 +2622,7 @@ func (s *SDK) DcimConsoleServerPortsUpdate(ctx context.Context, request operatio
 }
 
 func (s *SDK) DcimDeviceBayTemplatesCreate(ctx context.Context, request operations.DcimDeviceBayTemplatesCreateRequest) (*operations.DcimDeviceBayTemplatesCreateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/dcim/device-bay-templates/"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2588,7 +2640,7 @@ func (s *SDK) DcimDeviceBayTemplatesCreate(ctx context.Context, request operatio
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2619,7 +2671,7 @@ func (s *SDK) DcimDeviceBayTemplatesCreate(ctx context.Context, request operatio
 }
 
 func (s *SDK) DcimDeviceBayTemplatesDelete(ctx context.Context, request operations.DcimDeviceBayTemplatesDeleteRequest) (*operations.DcimDeviceBayTemplatesDeleteResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/dcim/device-bay-templates/{id}/", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -2627,7 +2679,7 @@ func (s *SDK) DcimDeviceBayTemplatesDelete(ctx context.Context, request operatio
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2648,8 +2700,9 @@ func (s *SDK) DcimDeviceBayTemplatesDelete(ctx context.Context, request operatio
 	return res, nil
 }
 
+// DcimDeviceBayTemplatesList - Call to super to allow for caching
 func (s *SDK) DcimDeviceBayTemplatesList(ctx context.Context, request operations.DcimDeviceBayTemplatesListRequest) (*operations.DcimDeviceBayTemplatesListResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/dcim/device-bay-templates/"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2659,7 +2712,7 @@ func (s *SDK) DcimDeviceBayTemplatesList(ctx context.Context, request operations
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2690,7 +2743,7 @@ func (s *SDK) DcimDeviceBayTemplatesList(ctx context.Context, request operations
 }
 
 func (s *SDK) DcimDeviceBayTemplatesPartialUpdate(ctx context.Context, request operations.DcimDeviceBayTemplatesPartialUpdateRequest) (*operations.DcimDeviceBayTemplatesPartialUpdateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/dcim/device-bay-templates/{id}/", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2708,7 +2761,7 @@ func (s *SDK) DcimDeviceBayTemplatesPartialUpdate(ctx context.Context, request o
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2738,8 +2791,9 @@ func (s *SDK) DcimDeviceBayTemplatesPartialUpdate(ctx context.Context, request o
 	return res, nil
 }
 
+// DcimDeviceBayTemplatesRead - Call to super to allow for caching
 func (s *SDK) DcimDeviceBayTemplatesRead(ctx context.Context, request operations.DcimDeviceBayTemplatesReadRequest) (*operations.DcimDeviceBayTemplatesReadResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/dcim/device-bay-templates/{id}/", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2747,7 +2801,7 @@ func (s *SDK) DcimDeviceBayTemplatesRead(ctx context.Context, request operations
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2778,7 +2832,7 @@ func (s *SDK) DcimDeviceBayTemplatesRead(ctx context.Context, request operations
 }
 
 func (s *SDK) DcimDeviceBayTemplatesUpdate(ctx context.Context, request operations.DcimDeviceBayTemplatesUpdateRequest) (*operations.DcimDeviceBayTemplatesUpdateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/dcim/device-bay-templates/{id}/", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2796,7 +2850,7 @@ func (s *SDK) DcimDeviceBayTemplatesUpdate(ctx context.Context, request operatio
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2827,7 +2881,7 @@ func (s *SDK) DcimDeviceBayTemplatesUpdate(ctx context.Context, request operatio
 }
 
 func (s *SDK) DcimDeviceBaysCreate(ctx context.Context, request operations.DcimDeviceBaysCreateRequest) (*operations.DcimDeviceBaysCreateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/dcim/device-bays/"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2845,7 +2899,7 @@ func (s *SDK) DcimDeviceBaysCreate(ctx context.Context, request operations.DcimD
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2876,7 +2930,7 @@ func (s *SDK) DcimDeviceBaysCreate(ctx context.Context, request operations.DcimD
 }
 
 func (s *SDK) DcimDeviceBaysDelete(ctx context.Context, request operations.DcimDeviceBaysDeleteRequest) (*operations.DcimDeviceBaysDeleteResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/dcim/device-bays/{id}/", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -2884,7 +2938,7 @@ func (s *SDK) DcimDeviceBaysDelete(ctx context.Context, request operations.DcimD
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2905,8 +2959,9 @@ func (s *SDK) DcimDeviceBaysDelete(ctx context.Context, request operations.DcimD
 	return res, nil
 }
 
+// DcimDeviceBaysList - Call to super to allow for caching
 func (s *SDK) DcimDeviceBaysList(ctx context.Context, request operations.DcimDeviceBaysListRequest) (*operations.DcimDeviceBaysListResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/dcim/device-bays/"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2916,7 +2971,7 @@ func (s *SDK) DcimDeviceBaysList(ctx context.Context, request operations.DcimDev
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2947,7 +3002,7 @@ func (s *SDK) DcimDeviceBaysList(ctx context.Context, request operations.DcimDev
 }
 
 func (s *SDK) DcimDeviceBaysPartialUpdate(ctx context.Context, request operations.DcimDeviceBaysPartialUpdateRequest) (*operations.DcimDeviceBaysPartialUpdateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/dcim/device-bays/{id}/", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2965,7 +3020,7 @@ func (s *SDK) DcimDeviceBaysPartialUpdate(ctx context.Context, request operation
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2995,8 +3050,9 @@ func (s *SDK) DcimDeviceBaysPartialUpdate(ctx context.Context, request operation
 	return res, nil
 }
 
+// DcimDeviceBaysRead - Call to super to allow for caching
 func (s *SDK) DcimDeviceBaysRead(ctx context.Context, request operations.DcimDeviceBaysReadRequest) (*operations.DcimDeviceBaysReadResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/dcim/device-bays/{id}/", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3004,7 +3060,7 @@ func (s *SDK) DcimDeviceBaysRead(ctx context.Context, request operations.DcimDev
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3035,7 +3091,7 @@ func (s *SDK) DcimDeviceBaysRead(ctx context.Context, request operations.DcimDev
 }
 
 func (s *SDK) DcimDeviceBaysUpdate(ctx context.Context, request operations.DcimDeviceBaysUpdateRequest) (*operations.DcimDeviceBaysUpdateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/dcim/device-bays/{id}/", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3053,7 +3109,7 @@ func (s *SDK) DcimDeviceBaysUpdate(ctx context.Context, request operations.DcimD
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3084,7 +3140,7 @@ func (s *SDK) DcimDeviceBaysUpdate(ctx context.Context, request operations.DcimD
 }
 
 func (s *SDK) DcimDeviceRolesCreate(ctx context.Context, request operations.DcimDeviceRolesCreateRequest) (*operations.DcimDeviceRolesCreateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/dcim/device-roles/"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3102,7 +3158,7 @@ func (s *SDK) DcimDeviceRolesCreate(ctx context.Context, request operations.Dcim
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3133,7 +3189,7 @@ func (s *SDK) DcimDeviceRolesCreate(ctx context.Context, request operations.Dcim
 }
 
 func (s *SDK) DcimDeviceRolesDelete(ctx context.Context, request operations.DcimDeviceRolesDeleteRequest) (*operations.DcimDeviceRolesDeleteResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/dcim/device-roles/{id}/", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -3141,7 +3197,7 @@ func (s *SDK) DcimDeviceRolesDelete(ctx context.Context, request operations.Dcim
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3162,8 +3218,9 @@ func (s *SDK) DcimDeviceRolesDelete(ctx context.Context, request operations.Dcim
 	return res, nil
 }
 
+// DcimDeviceRolesList - Call to super to allow for caching
 func (s *SDK) DcimDeviceRolesList(ctx context.Context, request operations.DcimDeviceRolesListRequest) (*operations.DcimDeviceRolesListResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/dcim/device-roles/"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3173,7 +3230,7 @@ func (s *SDK) DcimDeviceRolesList(ctx context.Context, request operations.DcimDe
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3204,7 +3261,7 @@ func (s *SDK) DcimDeviceRolesList(ctx context.Context, request operations.DcimDe
 }
 
 func (s *SDK) DcimDeviceRolesPartialUpdate(ctx context.Context, request operations.DcimDeviceRolesPartialUpdateRequest) (*operations.DcimDeviceRolesPartialUpdateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/dcim/device-roles/{id}/", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3222,7 +3279,7 @@ func (s *SDK) DcimDeviceRolesPartialUpdate(ctx context.Context, request operatio
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3252,8 +3309,9 @@ func (s *SDK) DcimDeviceRolesPartialUpdate(ctx context.Context, request operatio
 	return res, nil
 }
 
+// DcimDeviceRolesRead - Call to super to allow for caching
 func (s *SDK) DcimDeviceRolesRead(ctx context.Context, request operations.DcimDeviceRolesReadRequest) (*operations.DcimDeviceRolesReadResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/dcim/device-roles/{id}/", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3261,7 +3319,7 @@ func (s *SDK) DcimDeviceRolesRead(ctx context.Context, request operations.DcimDe
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3292,7 +3350,7 @@ func (s *SDK) DcimDeviceRolesRead(ctx context.Context, request operations.DcimDe
 }
 
 func (s *SDK) DcimDeviceRolesUpdate(ctx context.Context, request operations.DcimDeviceRolesUpdateRequest) (*operations.DcimDeviceRolesUpdateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/dcim/device-roles/{id}/", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3310,7 +3368,7 @@ func (s *SDK) DcimDeviceRolesUpdate(ctx context.Context, request operations.Dcim
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3341,7 +3399,7 @@ func (s *SDK) DcimDeviceRolesUpdate(ctx context.Context, request operations.Dcim
 }
 
 func (s *SDK) DcimDeviceTypesCreate(ctx context.Context, request operations.DcimDeviceTypesCreateRequest) (*operations.DcimDeviceTypesCreateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/dcim/device-types/"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3359,7 +3417,7 @@ func (s *SDK) DcimDeviceTypesCreate(ctx context.Context, request operations.Dcim
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3390,7 +3448,7 @@ func (s *SDK) DcimDeviceTypesCreate(ctx context.Context, request operations.Dcim
 }
 
 func (s *SDK) DcimDeviceTypesDelete(ctx context.Context, request operations.DcimDeviceTypesDeleteRequest) (*operations.DcimDeviceTypesDeleteResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/dcim/device-types/{id}/", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -3398,7 +3456,7 @@ func (s *SDK) DcimDeviceTypesDelete(ctx context.Context, request operations.Dcim
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3419,8 +3477,9 @@ func (s *SDK) DcimDeviceTypesDelete(ctx context.Context, request operations.Dcim
 	return res, nil
 }
 
+// DcimDeviceTypesList - Call to super to allow for caching
 func (s *SDK) DcimDeviceTypesList(ctx context.Context, request operations.DcimDeviceTypesListRequest) (*operations.DcimDeviceTypesListResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/dcim/device-types/"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3430,7 +3489,7 @@ func (s *SDK) DcimDeviceTypesList(ctx context.Context, request operations.DcimDe
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3461,7 +3520,7 @@ func (s *SDK) DcimDeviceTypesList(ctx context.Context, request operations.DcimDe
 }
 
 func (s *SDK) DcimDeviceTypesPartialUpdate(ctx context.Context, request operations.DcimDeviceTypesPartialUpdateRequest) (*operations.DcimDeviceTypesPartialUpdateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/dcim/device-types/{id}/", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3479,7 +3538,7 @@ func (s *SDK) DcimDeviceTypesPartialUpdate(ctx context.Context, request operatio
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3509,8 +3568,9 @@ func (s *SDK) DcimDeviceTypesPartialUpdate(ctx context.Context, request operatio
 	return res, nil
 }
 
+// DcimDeviceTypesRead - Call to super to allow for caching
 func (s *SDK) DcimDeviceTypesRead(ctx context.Context, request operations.DcimDeviceTypesReadRequest) (*operations.DcimDeviceTypesReadResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/dcim/device-types/{id}/", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3518,7 +3578,7 @@ func (s *SDK) DcimDeviceTypesRead(ctx context.Context, request operations.DcimDe
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3549,7 +3609,7 @@ func (s *SDK) DcimDeviceTypesRead(ctx context.Context, request operations.DcimDe
 }
 
 func (s *SDK) DcimDeviceTypesUpdate(ctx context.Context, request operations.DcimDeviceTypesUpdateRequest) (*operations.DcimDeviceTypesUpdateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/dcim/device-types/{id}/", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3567,7 +3627,7 @@ func (s *SDK) DcimDeviceTypesUpdate(ctx context.Context, request operations.Dcim
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3598,7 +3658,7 @@ func (s *SDK) DcimDeviceTypesUpdate(ctx context.Context, request operations.Dcim
 }
 
 func (s *SDK) DcimDevicesCreate(ctx context.Context, request operations.DcimDevicesCreateRequest) (*operations.DcimDevicesCreateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/dcim/devices/"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3616,7 +3676,7 @@ func (s *SDK) DcimDevicesCreate(ctx context.Context, request operations.DcimDevi
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3647,7 +3707,7 @@ func (s *SDK) DcimDevicesCreate(ctx context.Context, request operations.DcimDevi
 }
 
 func (s *SDK) DcimDevicesDelete(ctx context.Context, request operations.DcimDevicesDeleteRequest) (*operations.DcimDevicesDeleteResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/dcim/devices/{id}/", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -3655,7 +3715,7 @@ func (s *SDK) DcimDevicesDelete(ctx context.Context, request operations.DcimDevi
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3676,8 +3736,9 @@ func (s *SDK) DcimDevicesDelete(ctx context.Context, request operations.DcimDevi
 	return res, nil
 }
 
+// DcimDevicesGraphs - A convenience method for rendering graphs for a particular Device.
 func (s *SDK) DcimDevicesGraphs(ctx context.Context, request operations.DcimDevicesGraphsRequest) (*operations.DcimDevicesGraphsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/dcim/devices/{id}/graphs/", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3685,7 +3746,7 @@ func (s *SDK) DcimDevicesGraphs(ctx context.Context, request operations.DcimDevi
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3715,8 +3776,9 @@ func (s *SDK) DcimDevicesGraphs(ctx context.Context, request operations.DcimDevi
 	return res, nil
 }
 
+// DcimDevicesList - Call to super to allow for caching
 func (s *SDK) DcimDevicesList(ctx context.Context, request operations.DcimDevicesListRequest) (*operations.DcimDevicesListResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/dcim/devices/"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3726,7 +3788,7 @@ func (s *SDK) DcimDevicesList(ctx context.Context, request operations.DcimDevice
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3756,8 +3818,9 @@ func (s *SDK) DcimDevicesList(ctx context.Context, request operations.DcimDevice
 	return res, nil
 }
 
+// DcimDevicesNapalm - Execute a NAPALM method on a Device
 func (s *SDK) DcimDevicesNapalm(ctx context.Context, request operations.DcimDevicesNapalmRequest) (*operations.DcimDevicesNapalmResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/dcim/devices/{id}/napalm/", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3767,7 +3830,7 @@ func (s *SDK) DcimDevicesNapalm(ctx context.Context, request operations.DcimDevi
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3798,7 +3861,7 @@ func (s *SDK) DcimDevicesNapalm(ctx context.Context, request operations.DcimDevi
 }
 
 func (s *SDK) DcimDevicesPartialUpdate(ctx context.Context, request operations.DcimDevicesPartialUpdateRequest) (*operations.DcimDevicesPartialUpdateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/dcim/devices/{id}/", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3816,7 +3879,7 @@ func (s *SDK) DcimDevicesPartialUpdate(ctx context.Context, request operations.D
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3846,8 +3909,9 @@ func (s *SDK) DcimDevicesPartialUpdate(ctx context.Context, request operations.D
 	return res, nil
 }
 
+// DcimDevicesRead - Call to super to allow for caching
 func (s *SDK) DcimDevicesRead(ctx context.Context, request operations.DcimDevicesReadRequest) (*operations.DcimDevicesReadResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/dcim/devices/{id}/", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3855,7 +3919,7 @@ func (s *SDK) DcimDevicesRead(ctx context.Context, request operations.DcimDevice
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3886,7 +3950,7 @@ func (s *SDK) DcimDevicesRead(ctx context.Context, request operations.DcimDevice
 }
 
 func (s *SDK) DcimDevicesUpdate(ctx context.Context, request operations.DcimDevicesUpdateRequest) (*operations.DcimDevicesUpdateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/dcim/devices/{id}/", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3904,7 +3968,7 @@ func (s *SDK) DcimDevicesUpdate(ctx context.Context, request operations.DcimDevi
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3935,7 +3999,7 @@ func (s *SDK) DcimDevicesUpdate(ctx context.Context, request operations.DcimDevi
 }
 
 func (s *SDK) DcimFrontPortTemplatesCreate(ctx context.Context, request operations.DcimFrontPortTemplatesCreateRequest) (*operations.DcimFrontPortTemplatesCreateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/dcim/front-port-templates/"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3953,7 +4017,7 @@ func (s *SDK) DcimFrontPortTemplatesCreate(ctx context.Context, request operatio
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3984,7 +4048,7 @@ func (s *SDK) DcimFrontPortTemplatesCreate(ctx context.Context, request operatio
 }
 
 func (s *SDK) DcimFrontPortTemplatesDelete(ctx context.Context, request operations.DcimFrontPortTemplatesDeleteRequest) (*operations.DcimFrontPortTemplatesDeleteResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/dcim/front-port-templates/{id}/", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -3992,7 +4056,7 @@ func (s *SDK) DcimFrontPortTemplatesDelete(ctx context.Context, request operatio
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4013,8 +4077,9 @@ func (s *SDK) DcimFrontPortTemplatesDelete(ctx context.Context, request operatio
 	return res, nil
 }
 
+// DcimFrontPortTemplatesList - Call to super to allow for caching
 func (s *SDK) DcimFrontPortTemplatesList(ctx context.Context, request operations.DcimFrontPortTemplatesListRequest) (*operations.DcimFrontPortTemplatesListResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/dcim/front-port-templates/"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -4024,7 +4089,7 @@ func (s *SDK) DcimFrontPortTemplatesList(ctx context.Context, request operations
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4055,7 +4120,7 @@ func (s *SDK) DcimFrontPortTemplatesList(ctx context.Context, request operations
 }
 
 func (s *SDK) DcimFrontPortTemplatesPartialUpdate(ctx context.Context, request operations.DcimFrontPortTemplatesPartialUpdateRequest) (*operations.DcimFrontPortTemplatesPartialUpdateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/dcim/front-port-templates/{id}/", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -4073,7 +4138,7 @@ func (s *SDK) DcimFrontPortTemplatesPartialUpdate(ctx context.Context, request o
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4103,8 +4168,9 @@ func (s *SDK) DcimFrontPortTemplatesPartialUpdate(ctx context.Context, request o
 	return res, nil
 }
 
+// DcimFrontPortTemplatesRead - Call to super to allow for caching
 func (s *SDK) DcimFrontPortTemplatesRead(ctx context.Context, request operations.DcimFrontPortTemplatesReadRequest) (*operations.DcimFrontPortTemplatesReadResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/dcim/front-port-templates/{id}/", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -4112,7 +4178,7 @@ func (s *SDK) DcimFrontPortTemplatesRead(ctx context.Context, request operations
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4143,7 +4209,7 @@ func (s *SDK) DcimFrontPortTemplatesRead(ctx context.Context, request operations
 }
 
 func (s *SDK) DcimFrontPortTemplatesUpdate(ctx context.Context, request operations.DcimFrontPortTemplatesUpdateRequest) (*operations.DcimFrontPortTemplatesUpdateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/dcim/front-port-templates/{id}/", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -4161,7 +4227,7 @@ func (s *SDK) DcimFrontPortTemplatesUpdate(ctx context.Context, request operatio
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4192,7 +4258,7 @@ func (s *SDK) DcimFrontPortTemplatesUpdate(ctx context.Context, request operatio
 }
 
 func (s *SDK) DcimFrontPortsCreate(ctx context.Context, request operations.DcimFrontPortsCreateRequest) (*operations.DcimFrontPortsCreateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/dcim/front-ports/"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -4210,7 +4276,7 @@ func (s *SDK) DcimFrontPortsCreate(ctx context.Context, request operations.DcimF
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4241,7 +4307,7 @@ func (s *SDK) DcimFrontPortsCreate(ctx context.Context, request operations.DcimF
 }
 
 func (s *SDK) DcimFrontPortsDelete(ctx context.Context, request operations.DcimFrontPortsDeleteRequest) (*operations.DcimFrontPortsDeleteResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/dcim/front-ports/{id}/", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -4249,7 +4315,7 @@ func (s *SDK) DcimFrontPortsDelete(ctx context.Context, request operations.DcimF
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4270,8 +4336,9 @@ func (s *SDK) DcimFrontPortsDelete(ctx context.Context, request operations.DcimF
 	return res, nil
 }
 
+// DcimFrontPortsList - Call to super to allow for caching
 func (s *SDK) DcimFrontPortsList(ctx context.Context, request operations.DcimFrontPortsListRequest) (*operations.DcimFrontPortsListResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/dcim/front-ports/"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -4281,7 +4348,7 @@ func (s *SDK) DcimFrontPortsList(ctx context.Context, request operations.DcimFro
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4312,7 +4379,7 @@ func (s *SDK) DcimFrontPortsList(ctx context.Context, request operations.DcimFro
 }
 
 func (s *SDK) DcimFrontPortsPartialUpdate(ctx context.Context, request operations.DcimFrontPortsPartialUpdateRequest) (*operations.DcimFrontPortsPartialUpdateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/dcim/front-ports/{id}/", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -4330,7 +4397,7 @@ func (s *SDK) DcimFrontPortsPartialUpdate(ctx context.Context, request operation
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4360,8 +4427,9 @@ func (s *SDK) DcimFrontPortsPartialUpdate(ctx context.Context, request operation
 	return res, nil
 }
 
+// DcimFrontPortsRead - Call to super to allow for caching
 func (s *SDK) DcimFrontPortsRead(ctx context.Context, request operations.DcimFrontPortsReadRequest) (*operations.DcimFrontPortsReadResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/dcim/front-ports/{id}/", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -4369,7 +4437,7 @@ func (s *SDK) DcimFrontPortsRead(ctx context.Context, request operations.DcimFro
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4399,8 +4467,9 @@ func (s *SDK) DcimFrontPortsRead(ctx context.Context, request operations.DcimFro
 	return res, nil
 }
 
+// DcimFrontPortsTrace - Trace a complete cable path and return each segment as a three-tuple of (termination, cable, termination).
 func (s *SDK) DcimFrontPortsTrace(ctx context.Context, request operations.DcimFrontPortsTraceRequest) (*operations.DcimFrontPortsTraceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/dcim/front-ports/{id}/trace/", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -4408,7 +4477,7 @@ func (s *SDK) DcimFrontPortsTrace(ctx context.Context, request operations.DcimFr
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4439,7 +4508,7 @@ func (s *SDK) DcimFrontPortsTrace(ctx context.Context, request operations.DcimFr
 }
 
 func (s *SDK) DcimFrontPortsUpdate(ctx context.Context, request operations.DcimFrontPortsUpdateRequest) (*operations.DcimFrontPortsUpdateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/dcim/front-ports/{id}/", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -4457,7 +4526,7 @@ func (s *SDK) DcimFrontPortsUpdate(ctx context.Context, request operations.DcimF
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4488,7 +4557,7 @@ func (s *SDK) DcimFrontPortsUpdate(ctx context.Context, request operations.DcimF
 }
 
 func (s *SDK) DcimInterfaceConnectionsList(ctx context.Context, request operations.DcimInterfaceConnectionsListRequest) (*operations.DcimInterfaceConnectionsListResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/dcim/interface-connections/"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -4498,7 +4567,7 @@ func (s *SDK) DcimInterfaceConnectionsList(ctx context.Context, request operatio
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4529,7 +4598,7 @@ func (s *SDK) DcimInterfaceConnectionsList(ctx context.Context, request operatio
 }
 
 func (s *SDK) DcimInterfaceTemplatesCreate(ctx context.Context, request operations.DcimInterfaceTemplatesCreateRequest) (*operations.DcimInterfaceTemplatesCreateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/dcim/interface-templates/"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -4547,7 +4616,7 @@ func (s *SDK) DcimInterfaceTemplatesCreate(ctx context.Context, request operatio
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4578,7 +4647,7 @@ func (s *SDK) DcimInterfaceTemplatesCreate(ctx context.Context, request operatio
 }
 
 func (s *SDK) DcimInterfaceTemplatesDelete(ctx context.Context, request operations.DcimInterfaceTemplatesDeleteRequest) (*operations.DcimInterfaceTemplatesDeleteResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/dcim/interface-templates/{id}/", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -4586,7 +4655,7 @@ func (s *SDK) DcimInterfaceTemplatesDelete(ctx context.Context, request operatio
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4607,8 +4676,9 @@ func (s *SDK) DcimInterfaceTemplatesDelete(ctx context.Context, request operatio
 	return res, nil
 }
 
+// DcimInterfaceTemplatesList - Call to super to allow for caching
 func (s *SDK) DcimInterfaceTemplatesList(ctx context.Context, request operations.DcimInterfaceTemplatesListRequest) (*operations.DcimInterfaceTemplatesListResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/dcim/interface-templates/"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -4618,7 +4688,7 @@ func (s *SDK) DcimInterfaceTemplatesList(ctx context.Context, request operations
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4649,7 +4719,7 @@ func (s *SDK) DcimInterfaceTemplatesList(ctx context.Context, request operations
 }
 
 func (s *SDK) DcimInterfaceTemplatesPartialUpdate(ctx context.Context, request operations.DcimInterfaceTemplatesPartialUpdateRequest) (*operations.DcimInterfaceTemplatesPartialUpdateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/dcim/interface-templates/{id}/", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -4667,7 +4737,7 @@ func (s *SDK) DcimInterfaceTemplatesPartialUpdate(ctx context.Context, request o
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4697,8 +4767,9 @@ func (s *SDK) DcimInterfaceTemplatesPartialUpdate(ctx context.Context, request o
 	return res, nil
 }
 
+// DcimInterfaceTemplatesRead - Call to super to allow for caching
 func (s *SDK) DcimInterfaceTemplatesRead(ctx context.Context, request operations.DcimInterfaceTemplatesReadRequest) (*operations.DcimInterfaceTemplatesReadResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/dcim/interface-templates/{id}/", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -4706,7 +4777,7 @@ func (s *SDK) DcimInterfaceTemplatesRead(ctx context.Context, request operations
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4737,7 +4808,7 @@ func (s *SDK) DcimInterfaceTemplatesRead(ctx context.Context, request operations
 }
 
 func (s *SDK) DcimInterfaceTemplatesUpdate(ctx context.Context, request operations.DcimInterfaceTemplatesUpdateRequest) (*operations.DcimInterfaceTemplatesUpdateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/dcim/interface-templates/{id}/", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -4755,7 +4826,7 @@ func (s *SDK) DcimInterfaceTemplatesUpdate(ctx context.Context, request operatio
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4786,7 +4857,7 @@ func (s *SDK) DcimInterfaceTemplatesUpdate(ctx context.Context, request operatio
 }
 
 func (s *SDK) DcimInterfacesCreate(ctx context.Context, request operations.DcimInterfacesCreateRequest) (*operations.DcimInterfacesCreateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/dcim/interfaces/"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -4804,7 +4875,7 @@ func (s *SDK) DcimInterfacesCreate(ctx context.Context, request operations.DcimI
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4835,7 +4906,7 @@ func (s *SDK) DcimInterfacesCreate(ctx context.Context, request operations.DcimI
 }
 
 func (s *SDK) DcimInterfacesDelete(ctx context.Context, request operations.DcimInterfacesDeleteRequest) (*operations.DcimInterfacesDeleteResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/dcim/interfaces/{id}/", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -4843,7 +4914,7 @@ func (s *SDK) DcimInterfacesDelete(ctx context.Context, request operations.DcimI
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4864,8 +4935,9 @@ func (s *SDK) DcimInterfacesDelete(ctx context.Context, request operations.DcimI
 	return res, nil
 }
 
+// DcimInterfacesGraphs - A convenience method for rendering graphs for a particular interface.
 func (s *SDK) DcimInterfacesGraphs(ctx context.Context, request operations.DcimInterfacesGraphsRequest) (*operations.DcimInterfacesGraphsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/dcim/interfaces/{id}/graphs/", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -4873,7 +4945,7 @@ func (s *SDK) DcimInterfacesGraphs(ctx context.Context, request operations.DcimI
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4903,8 +4975,9 @@ func (s *SDK) DcimInterfacesGraphs(ctx context.Context, request operations.DcimI
 	return res, nil
 }
 
+// DcimInterfacesList - Call to super to allow for caching
 func (s *SDK) DcimInterfacesList(ctx context.Context, request operations.DcimInterfacesListRequest) (*operations.DcimInterfacesListResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/dcim/interfaces/"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -4914,7 +4987,7 @@ func (s *SDK) DcimInterfacesList(ctx context.Context, request operations.DcimInt
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4945,7 +5018,7 @@ func (s *SDK) DcimInterfacesList(ctx context.Context, request operations.DcimInt
 }
 
 func (s *SDK) DcimInterfacesPartialUpdate(ctx context.Context, request operations.DcimInterfacesPartialUpdateRequest) (*operations.DcimInterfacesPartialUpdateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/dcim/interfaces/{id}/", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -4963,7 +5036,7 @@ func (s *SDK) DcimInterfacesPartialUpdate(ctx context.Context, request operation
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4993,8 +5066,9 @@ func (s *SDK) DcimInterfacesPartialUpdate(ctx context.Context, request operation
 	return res, nil
 }
 
+// DcimInterfacesRead - Call to super to allow for caching
 func (s *SDK) DcimInterfacesRead(ctx context.Context, request operations.DcimInterfacesReadRequest) (*operations.DcimInterfacesReadResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/dcim/interfaces/{id}/", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -5002,7 +5076,7 @@ func (s *SDK) DcimInterfacesRead(ctx context.Context, request operations.DcimInt
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5032,8 +5106,9 @@ func (s *SDK) DcimInterfacesRead(ctx context.Context, request operations.DcimInt
 	return res, nil
 }
 
+// DcimInterfacesTrace - Trace a complete cable path and return each segment as a three-tuple of (termination, cable, termination).
 func (s *SDK) DcimInterfacesTrace(ctx context.Context, request operations.DcimInterfacesTraceRequest) (*operations.DcimInterfacesTraceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/dcim/interfaces/{id}/trace/", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -5041,7 +5116,7 @@ func (s *SDK) DcimInterfacesTrace(ctx context.Context, request operations.DcimIn
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5072,7 +5147,7 @@ func (s *SDK) DcimInterfacesTrace(ctx context.Context, request operations.DcimIn
 }
 
 func (s *SDK) DcimInterfacesUpdate(ctx context.Context, request operations.DcimInterfacesUpdateRequest) (*operations.DcimInterfacesUpdateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/dcim/interfaces/{id}/", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -5090,7 +5165,7 @@ func (s *SDK) DcimInterfacesUpdate(ctx context.Context, request operations.DcimI
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5121,7 +5196,7 @@ func (s *SDK) DcimInterfacesUpdate(ctx context.Context, request operations.DcimI
 }
 
 func (s *SDK) DcimInventoryItemsCreate(ctx context.Context, request operations.DcimInventoryItemsCreateRequest) (*operations.DcimInventoryItemsCreateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/dcim/inventory-items/"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -5139,7 +5214,7 @@ func (s *SDK) DcimInventoryItemsCreate(ctx context.Context, request operations.D
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5170,7 +5245,7 @@ func (s *SDK) DcimInventoryItemsCreate(ctx context.Context, request operations.D
 }
 
 func (s *SDK) DcimInventoryItemsDelete(ctx context.Context, request operations.DcimInventoryItemsDeleteRequest) (*operations.DcimInventoryItemsDeleteResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/dcim/inventory-items/{id}/", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -5178,7 +5253,7 @@ func (s *SDK) DcimInventoryItemsDelete(ctx context.Context, request operations.D
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5199,8 +5274,9 @@ func (s *SDK) DcimInventoryItemsDelete(ctx context.Context, request operations.D
 	return res, nil
 }
 
+// DcimInventoryItemsList - Call to super to allow for caching
 func (s *SDK) DcimInventoryItemsList(ctx context.Context, request operations.DcimInventoryItemsListRequest) (*operations.DcimInventoryItemsListResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/dcim/inventory-items/"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -5210,7 +5286,7 @@ func (s *SDK) DcimInventoryItemsList(ctx context.Context, request operations.Dci
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5241,7 +5317,7 @@ func (s *SDK) DcimInventoryItemsList(ctx context.Context, request operations.Dci
 }
 
 func (s *SDK) DcimInventoryItemsPartialUpdate(ctx context.Context, request operations.DcimInventoryItemsPartialUpdateRequest) (*operations.DcimInventoryItemsPartialUpdateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/dcim/inventory-items/{id}/", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -5259,7 +5335,7 @@ func (s *SDK) DcimInventoryItemsPartialUpdate(ctx context.Context, request opera
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5289,8 +5365,9 @@ func (s *SDK) DcimInventoryItemsPartialUpdate(ctx context.Context, request opera
 	return res, nil
 }
 
+// DcimInventoryItemsRead - Call to super to allow for caching
 func (s *SDK) DcimInventoryItemsRead(ctx context.Context, request operations.DcimInventoryItemsReadRequest) (*operations.DcimInventoryItemsReadResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/dcim/inventory-items/{id}/", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -5298,7 +5375,7 @@ func (s *SDK) DcimInventoryItemsRead(ctx context.Context, request operations.Dci
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5329,7 +5406,7 @@ func (s *SDK) DcimInventoryItemsRead(ctx context.Context, request operations.Dci
 }
 
 func (s *SDK) DcimInventoryItemsUpdate(ctx context.Context, request operations.DcimInventoryItemsUpdateRequest) (*operations.DcimInventoryItemsUpdateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/dcim/inventory-items/{id}/", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -5347,7 +5424,7 @@ func (s *SDK) DcimInventoryItemsUpdate(ctx context.Context, request operations.D
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5378,7 +5455,7 @@ func (s *SDK) DcimInventoryItemsUpdate(ctx context.Context, request operations.D
 }
 
 func (s *SDK) DcimManufacturersCreate(ctx context.Context, request operations.DcimManufacturersCreateRequest) (*operations.DcimManufacturersCreateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/dcim/manufacturers/"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -5396,7 +5473,7 @@ func (s *SDK) DcimManufacturersCreate(ctx context.Context, request operations.Dc
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5427,7 +5504,7 @@ func (s *SDK) DcimManufacturersCreate(ctx context.Context, request operations.Dc
 }
 
 func (s *SDK) DcimManufacturersDelete(ctx context.Context, request operations.DcimManufacturersDeleteRequest) (*operations.DcimManufacturersDeleteResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/dcim/manufacturers/{id}/", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -5435,7 +5512,7 @@ func (s *SDK) DcimManufacturersDelete(ctx context.Context, request operations.Dc
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5456,8 +5533,9 @@ func (s *SDK) DcimManufacturersDelete(ctx context.Context, request operations.Dc
 	return res, nil
 }
 
+// DcimManufacturersList - Call to super to allow for caching
 func (s *SDK) DcimManufacturersList(ctx context.Context, request operations.DcimManufacturersListRequest) (*operations.DcimManufacturersListResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/dcim/manufacturers/"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -5467,7 +5545,7 @@ func (s *SDK) DcimManufacturersList(ctx context.Context, request operations.Dcim
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5498,7 +5576,7 @@ func (s *SDK) DcimManufacturersList(ctx context.Context, request operations.Dcim
 }
 
 func (s *SDK) DcimManufacturersPartialUpdate(ctx context.Context, request operations.DcimManufacturersPartialUpdateRequest) (*operations.DcimManufacturersPartialUpdateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/dcim/manufacturers/{id}/", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -5516,7 +5594,7 @@ func (s *SDK) DcimManufacturersPartialUpdate(ctx context.Context, request operat
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5546,8 +5624,9 @@ func (s *SDK) DcimManufacturersPartialUpdate(ctx context.Context, request operat
 	return res, nil
 }
 
+// DcimManufacturersRead - Call to super to allow for caching
 func (s *SDK) DcimManufacturersRead(ctx context.Context, request operations.DcimManufacturersReadRequest) (*operations.DcimManufacturersReadResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/dcim/manufacturers/{id}/", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -5555,7 +5634,7 @@ func (s *SDK) DcimManufacturersRead(ctx context.Context, request operations.Dcim
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5586,7 +5665,7 @@ func (s *SDK) DcimManufacturersRead(ctx context.Context, request operations.Dcim
 }
 
 func (s *SDK) DcimManufacturersUpdate(ctx context.Context, request operations.DcimManufacturersUpdateRequest) (*operations.DcimManufacturersUpdateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/dcim/manufacturers/{id}/", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -5604,7 +5683,7 @@ func (s *SDK) DcimManufacturersUpdate(ctx context.Context, request operations.Dc
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5635,7 +5714,7 @@ func (s *SDK) DcimManufacturersUpdate(ctx context.Context, request operations.Dc
 }
 
 func (s *SDK) DcimPlatformsCreate(ctx context.Context, request operations.DcimPlatformsCreateRequest) (*operations.DcimPlatformsCreateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/dcim/platforms/"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -5653,7 +5732,7 @@ func (s *SDK) DcimPlatformsCreate(ctx context.Context, request operations.DcimPl
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5684,7 +5763,7 @@ func (s *SDK) DcimPlatformsCreate(ctx context.Context, request operations.DcimPl
 }
 
 func (s *SDK) DcimPlatformsDelete(ctx context.Context, request operations.DcimPlatformsDeleteRequest) (*operations.DcimPlatformsDeleteResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/dcim/platforms/{id}/", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -5692,7 +5771,7 @@ func (s *SDK) DcimPlatformsDelete(ctx context.Context, request operations.DcimPl
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5713,8 +5792,9 @@ func (s *SDK) DcimPlatformsDelete(ctx context.Context, request operations.DcimPl
 	return res, nil
 }
 
+// DcimPlatformsList - Call to super to allow for caching
 func (s *SDK) DcimPlatformsList(ctx context.Context, request operations.DcimPlatformsListRequest) (*operations.DcimPlatformsListResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/dcim/platforms/"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -5724,7 +5804,7 @@ func (s *SDK) DcimPlatformsList(ctx context.Context, request operations.DcimPlat
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5755,7 +5835,7 @@ func (s *SDK) DcimPlatformsList(ctx context.Context, request operations.DcimPlat
 }
 
 func (s *SDK) DcimPlatformsPartialUpdate(ctx context.Context, request operations.DcimPlatformsPartialUpdateRequest) (*operations.DcimPlatformsPartialUpdateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/dcim/platforms/{id}/", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -5773,7 +5853,7 @@ func (s *SDK) DcimPlatformsPartialUpdate(ctx context.Context, request operations
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5803,8 +5883,9 @@ func (s *SDK) DcimPlatformsPartialUpdate(ctx context.Context, request operations
 	return res, nil
 }
 
+// DcimPlatformsRead - Call to super to allow for caching
 func (s *SDK) DcimPlatformsRead(ctx context.Context, request operations.DcimPlatformsReadRequest) (*operations.DcimPlatformsReadResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/dcim/platforms/{id}/", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -5812,7 +5893,7 @@ func (s *SDK) DcimPlatformsRead(ctx context.Context, request operations.DcimPlat
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5843,7 +5924,7 @@ func (s *SDK) DcimPlatformsRead(ctx context.Context, request operations.DcimPlat
 }
 
 func (s *SDK) DcimPlatformsUpdate(ctx context.Context, request operations.DcimPlatformsUpdateRequest) (*operations.DcimPlatformsUpdateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/dcim/platforms/{id}/", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -5861,7 +5942,7 @@ func (s *SDK) DcimPlatformsUpdate(ctx context.Context, request operations.DcimPl
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5892,7 +5973,7 @@ func (s *SDK) DcimPlatformsUpdate(ctx context.Context, request operations.DcimPl
 }
 
 func (s *SDK) DcimPowerConnectionsList(ctx context.Context, request operations.DcimPowerConnectionsListRequest) (*operations.DcimPowerConnectionsListResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/dcim/power-connections/"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -5902,7 +5983,7 @@ func (s *SDK) DcimPowerConnectionsList(ctx context.Context, request operations.D
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5933,7 +6014,7 @@ func (s *SDK) DcimPowerConnectionsList(ctx context.Context, request operations.D
 }
 
 func (s *SDK) DcimPowerFeedsCreate(ctx context.Context, request operations.DcimPowerFeedsCreateRequest) (*operations.DcimPowerFeedsCreateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/dcim/power-feeds/"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -5951,7 +6032,7 @@ func (s *SDK) DcimPowerFeedsCreate(ctx context.Context, request operations.DcimP
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5982,7 +6063,7 @@ func (s *SDK) DcimPowerFeedsCreate(ctx context.Context, request operations.DcimP
 }
 
 func (s *SDK) DcimPowerFeedsDelete(ctx context.Context, request operations.DcimPowerFeedsDeleteRequest) (*operations.DcimPowerFeedsDeleteResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/dcim/power-feeds/{id}/", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -5990,7 +6071,7 @@ func (s *SDK) DcimPowerFeedsDelete(ctx context.Context, request operations.DcimP
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6011,8 +6092,9 @@ func (s *SDK) DcimPowerFeedsDelete(ctx context.Context, request operations.DcimP
 	return res, nil
 }
 
+// DcimPowerFeedsList - Call to super to allow for caching
 func (s *SDK) DcimPowerFeedsList(ctx context.Context, request operations.DcimPowerFeedsListRequest) (*operations.DcimPowerFeedsListResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/dcim/power-feeds/"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -6022,7 +6104,7 @@ func (s *SDK) DcimPowerFeedsList(ctx context.Context, request operations.DcimPow
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6053,7 +6135,7 @@ func (s *SDK) DcimPowerFeedsList(ctx context.Context, request operations.DcimPow
 }
 
 func (s *SDK) DcimPowerFeedsPartialUpdate(ctx context.Context, request operations.DcimPowerFeedsPartialUpdateRequest) (*operations.DcimPowerFeedsPartialUpdateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/dcim/power-feeds/{id}/", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -6071,7 +6153,7 @@ func (s *SDK) DcimPowerFeedsPartialUpdate(ctx context.Context, request operation
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6101,8 +6183,9 @@ func (s *SDK) DcimPowerFeedsPartialUpdate(ctx context.Context, request operation
 	return res, nil
 }
 
+// DcimPowerFeedsRead - Call to super to allow for caching
 func (s *SDK) DcimPowerFeedsRead(ctx context.Context, request operations.DcimPowerFeedsReadRequest) (*operations.DcimPowerFeedsReadResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/dcim/power-feeds/{id}/", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -6110,7 +6193,7 @@ func (s *SDK) DcimPowerFeedsRead(ctx context.Context, request operations.DcimPow
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6141,7 +6224,7 @@ func (s *SDK) DcimPowerFeedsRead(ctx context.Context, request operations.DcimPow
 }
 
 func (s *SDK) DcimPowerFeedsUpdate(ctx context.Context, request operations.DcimPowerFeedsUpdateRequest) (*operations.DcimPowerFeedsUpdateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/dcim/power-feeds/{id}/", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -6159,7 +6242,7 @@ func (s *SDK) DcimPowerFeedsUpdate(ctx context.Context, request operations.DcimP
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6190,7 +6273,7 @@ func (s *SDK) DcimPowerFeedsUpdate(ctx context.Context, request operations.DcimP
 }
 
 func (s *SDK) DcimPowerOutletTemplatesCreate(ctx context.Context, request operations.DcimPowerOutletTemplatesCreateRequest) (*operations.DcimPowerOutletTemplatesCreateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/dcim/power-outlet-templates/"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -6208,7 +6291,7 @@ func (s *SDK) DcimPowerOutletTemplatesCreate(ctx context.Context, request operat
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6239,7 +6322,7 @@ func (s *SDK) DcimPowerOutletTemplatesCreate(ctx context.Context, request operat
 }
 
 func (s *SDK) DcimPowerOutletTemplatesDelete(ctx context.Context, request operations.DcimPowerOutletTemplatesDeleteRequest) (*operations.DcimPowerOutletTemplatesDeleteResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/dcim/power-outlet-templates/{id}/", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -6247,7 +6330,7 @@ func (s *SDK) DcimPowerOutletTemplatesDelete(ctx context.Context, request operat
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6268,8 +6351,9 @@ func (s *SDK) DcimPowerOutletTemplatesDelete(ctx context.Context, request operat
 	return res, nil
 }
 
+// DcimPowerOutletTemplatesList - Call to super to allow for caching
 func (s *SDK) DcimPowerOutletTemplatesList(ctx context.Context, request operations.DcimPowerOutletTemplatesListRequest) (*operations.DcimPowerOutletTemplatesListResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/dcim/power-outlet-templates/"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -6279,7 +6363,7 @@ func (s *SDK) DcimPowerOutletTemplatesList(ctx context.Context, request operatio
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6310,7 +6394,7 @@ func (s *SDK) DcimPowerOutletTemplatesList(ctx context.Context, request operatio
 }
 
 func (s *SDK) DcimPowerOutletTemplatesPartialUpdate(ctx context.Context, request operations.DcimPowerOutletTemplatesPartialUpdateRequest) (*operations.DcimPowerOutletTemplatesPartialUpdateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/dcim/power-outlet-templates/{id}/", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -6328,7 +6412,7 @@ func (s *SDK) DcimPowerOutletTemplatesPartialUpdate(ctx context.Context, request
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6358,8 +6442,9 @@ func (s *SDK) DcimPowerOutletTemplatesPartialUpdate(ctx context.Context, request
 	return res, nil
 }
 
+// DcimPowerOutletTemplatesRead - Call to super to allow for caching
 func (s *SDK) DcimPowerOutletTemplatesRead(ctx context.Context, request operations.DcimPowerOutletTemplatesReadRequest) (*operations.DcimPowerOutletTemplatesReadResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/dcim/power-outlet-templates/{id}/", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -6367,7 +6452,7 @@ func (s *SDK) DcimPowerOutletTemplatesRead(ctx context.Context, request operatio
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6398,7 +6483,7 @@ func (s *SDK) DcimPowerOutletTemplatesRead(ctx context.Context, request operatio
 }
 
 func (s *SDK) DcimPowerOutletTemplatesUpdate(ctx context.Context, request operations.DcimPowerOutletTemplatesUpdateRequest) (*operations.DcimPowerOutletTemplatesUpdateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/dcim/power-outlet-templates/{id}/", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -6416,7 +6501,7 @@ func (s *SDK) DcimPowerOutletTemplatesUpdate(ctx context.Context, request operat
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6447,7 +6532,7 @@ func (s *SDK) DcimPowerOutletTemplatesUpdate(ctx context.Context, request operat
 }
 
 func (s *SDK) DcimPowerOutletsCreate(ctx context.Context, request operations.DcimPowerOutletsCreateRequest) (*operations.DcimPowerOutletsCreateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/dcim/power-outlets/"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -6465,7 +6550,7 @@ func (s *SDK) DcimPowerOutletsCreate(ctx context.Context, request operations.Dci
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6496,7 +6581,7 @@ func (s *SDK) DcimPowerOutletsCreate(ctx context.Context, request operations.Dci
 }
 
 func (s *SDK) DcimPowerOutletsDelete(ctx context.Context, request operations.DcimPowerOutletsDeleteRequest) (*operations.DcimPowerOutletsDeleteResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/dcim/power-outlets/{id}/", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -6504,7 +6589,7 @@ func (s *SDK) DcimPowerOutletsDelete(ctx context.Context, request operations.Dci
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6525,8 +6610,9 @@ func (s *SDK) DcimPowerOutletsDelete(ctx context.Context, request operations.Dci
 	return res, nil
 }
 
+// DcimPowerOutletsList - Call to super to allow for caching
 func (s *SDK) DcimPowerOutletsList(ctx context.Context, request operations.DcimPowerOutletsListRequest) (*operations.DcimPowerOutletsListResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/dcim/power-outlets/"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -6536,7 +6622,7 @@ func (s *SDK) DcimPowerOutletsList(ctx context.Context, request operations.DcimP
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6567,7 +6653,7 @@ func (s *SDK) DcimPowerOutletsList(ctx context.Context, request operations.DcimP
 }
 
 func (s *SDK) DcimPowerOutletsPartialUpdate(ctx context.Context, request operations.DcimPowerOutletsPartialUpdateRequest) (*operations.DcimPowerOutletsPartialUpdateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/dcim/power-outlets/{id}/", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -6585,7 +6671,7 @@ func (s *SDK) DcimPowerOutletsPartialUpdate(ctx context.Context, request operati
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6615,8 +6701,9 @@ func (s *SDK) DcimPowerOutletsPartialUpdate(ctx context.Context, request operati
 	return res, nil
 }
 
+// DcimPowerOutletsRead - Call to super to allow for caching
 func (s *SDK) DcimPowerOutletsRead(ctx context.Context, request operations.DcimPowerOutletsReadRequest) (*operations.DcimPowerOutletsReadResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/dcim/power-outlets/{id}/", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -6624,7 +6711,7 @@ func (s *SDK) DcimPowerOutletsRead(ctx context.Context, request operations.DcimP
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6654,8 +6741,9 @@ func (s *SDK) DcimPowerOutletsRead(ctx context.Context, request operations.DcimP
 	return res, nil
 }
 
+// DcimPowerOutletsTrace - Trace a complete cable path and return each segment as a three-tuple of (termination, cable, termination).
 func (s *SDK) DcimPowerOutletsTrace(ctx context.Context, request operations.DcimPowerOutletsTraceRequest) (*operations.DcimPowerOutletsTraceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/dcim/power-outlets/{id}/trace/", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -6663,7 +6751,7 @@ func (s *SDK) DcimPowerOutletsTrace(ctx context.Context, request operations.Dcim
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6694,7 +6782,7 @@ func (s *SDK) DcimPowerOutletsTrace(ctx context.Context, request operations.Dcim
 }
 
 func (s *SDK) DcimPowerOutletsUpdate(ctx context.Context, request operations.DcimPowerOutletsUpdateRequest) (*operations.DcimPowerOutletsUpdateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/dcim/power-outlets/{id}/", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -6712,7 +6800,7 @@ func (s *SDK) DcimPowerOutletsUpdate(ctx context.Context, request operations.Dci
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6743,7 +6831,7 @@ func (s *SDK) DcimPowerOutletsUpdate(ctx context.Context, request operations.Dci
 }
 
 func (s *SDK) DcimPowerPanelsCreate(ctx context.Context, request operations.DcimPowerPanelsCreateRequest) (*operations.DcimPowerPanelsCreateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/dcim/power-panels/"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -6761,7 +6849,7 @@ func (s *SDK) DcimPowerPanelsCreate(ctx context.Context, request operations.Dcim
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6792,7 +6880,7 @@ func (s *SDK) DcimPowerPanelsCreate(ctx context.Context, request operations.Dcim
 }
 
 func (s *SDK) DcimPowerPanelsDelete(ctx context.Context, request operations.DcimPowerPanelsDeleteRequest) (*operations.DcimPowerPanelsDeleteResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/dcim/power-panels/{id}/", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -6800,7 +6888,7 @@ func (s *SDK) DcimPowerPanelsDelete(ctx context.Context, request operations.Dcim
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6821,8 +6909,9 @@ func (s *SDK) DcimPowerPanelsDelete(ctx context.Context, request operations.Dcim
 	return res, nil
 }
 
+// DcimPowerPanelsList - Call to super to allow for caching
 func (s *SDK) DcimPowerPanelsList(ctx context.Context, request operations.DcimPowerPanelsListRequest) (*operations.DcimPowerPanelsListResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/dcim/power-panels/"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -6832,7 +6921,7 @@ func (s *SDK) DcimPowerPanelsList(ctx context.Context, request operations.DcimPo
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6863,7 +6952,7 @@ func (s *SDK) DcimPowerPanelsList(ctx context.Context, request operations.DcimPo
 }
 
 func (s *SDK) DcimPowerPanelsPartialUpdate(ctx context.Context, request operations.DcimPowerPanelsPartialUpdateRequest) (*operations.DcimPowerPanelsPartialUpdateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/dcim/power-panels/{id}/", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -6881,7 +6970,7 @@ func (s *SDK) DcimPowerPanelsPartialUpdate(ctx context.Context, request operatio
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6911,8 +7000,9 @@ func (s *SDK) DcimPowerPanelsPartialUpdate(ctx context.Context, request operatio
 	return res, nil
 }
 
+// DcimPowerPanelsRead - Call to super to allow for caching
 func (s *SDK) DcimPowerPanelsRead(ctx context.Context, request operations.DcimPowerPanelsReadRequest) (*operations.DcimPowerPanelsReadResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/dcim/power-panels/{id}/", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -6920,7 +7010,7 @@ func (s *SDK) DcimPowerPanelsRead(ctx context.Context, request operations.DcimPo
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6951,7 +7041,7 @@ func (s *SDK) DcimPowerPanelsRead(ctx context.Context, request operations.DcimPo
 }
 
 func (s *SDK) DcimPowerPanelsUpdate(ctx context.Context, request operations.DcimPowerPanelsUpdateRequest) (*operations.DcimPowerPanelsUpdateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/dcim/power-panels/{id}/", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -6969,7 +7059,7 @@ func (s *SDK) DcimPowerPanelsUpdate(ctx context.Context, request operations.Dcim
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -7000,7 +7090,7 @@ func (s *SDK) DcimPowerPanelsUpdate(ctx context.Context, request operations.Dcim
 }
 
 func (s *SDK) DcimPowerPortTemplatesCreate(ctx context.Context, request operations.DcimPowerPortTemplatesCreateRequest) (*operations.DcimPowerPortTemplatesCreateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/dcim/power-port-templates/"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -7018,7 +7108,7 @@ func (s *SDK) DcimPowerPortTemplatesCreate(ctx context.Context, request operatio
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -7049,7 +7139,7 @@ func (s *SDK) DcimPowerPortTemplatesCreate(ctx context.Context, request operatio
 }
 
 func (s *SDK) DcimPowerPortTemplatesDelete(ctx context.Context, request operations.DcimPowerPortTemplatesDeleteRequest) (*operations.DcimPowerPortTemplatesDeleteResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/dcim/power-port-templates/{id}/", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -7057,7 +7147,7 @@ func (s *SDK) DcimPowerPortTemplatesDelete(ctx context.Context, request operatio
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -7078,8 +7168,9 @@ func (s *SDK) DcimPowerPortTemplatesDelete(ctx context.Context, request operatio
 	return res, nil
 }
 
+// DcimPowerPortTemplatesList - Call to super to allow for caching
 func (s *SDK) DcimPowerPortTemplatesList(ctx context.Context, request operations.DcimPowerPortTemplatesListRequest) (*operations.DcimPowerPortTemplatesListResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/dcim/power-port-templates/"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -7089,7 +7180,7 @@ func (s *SDK) DcimPowerPortTemplatesList(ctx context.Context, request operations
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -7120,7 +7211,7 @@ func (s *SDK) DcimPowerPortTemplatesList(ctx context.Context, request operations
 }
 
 func (s *SDK) DcimPowerPortTemplatesPartialUpdate(ctx context.Context, request operations.DcimPowerPortTemplatesPartialUpdateRequest) (*operations.DcimPowerPortTemplatesPartialUpdateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/dcim/power-port-templates/{id}/", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -7138,7 +7229,7 @@ func (s *SDK) DcimPowerPortTemplatesPartialUpdate(ctx context.Context, request o
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -7168,8 +7259,9 @@ func (s *SDK) DcimPowerPortTemplatesPartialUpdate(ctx context.Context, request o
 	return res, nil
 }
 
+// DcimPowerPortTemplatesRead - Call to super to allow for caching
 func (s *SDK) DcimPowerPortTemplatesRead(ctx context.Context, request operations.DcimPowerPortTemplatesReadRequest) (*operations.DcimPowerPortTemplatesReadResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/dcim/power-port-templates/{id}/", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -7177,7 +7269,7 @@ func (s *SDK) DcimPowerPortTemplatesRead(ctx context.Context, request operations
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -7208,7 +7300,7 @@ func (s *SDK) DcimPowerPortTemplatesRead(ctx context.Context, request operations
 }
 
 func (s *SDK) DcimPowerPortTemplatesUpdate(ctx context.Context, request operations.DcimPowerPortTemplatesUpdateRequest) (*operations.DcimPowerPortTemplatesUpdateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/dcim/power-port-templates/{id}/", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -7226,7 +7318,7 @@ func (s *SDK) DcimPowerPortTemplatesUpdate(ctx context.Context, request operatio
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -7257,7 +7349,7 @@ func (s *SDK) DcimPowerPortTemplatesUpdate(ctx context.Context, request operatio
 }
 
 func (s *SDK) DcimPowerPortsCreate(ctx context.Context, request operations.DcimPowerPortsCreateRequest) (*operations.DcimPowerPortsCreateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/dcim/power-ports/"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -7275,7 +7367,7 @@ func (s *SDK) DcimPowerPortsCreate(ctx context.Context, request operations.DcimP
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -7306,7 +7398,7 @@ func (s *SDK) DcimPowerPortsCreate(ctx context.Context, request operations.DcimP
 }
 
 func (s *SDK) DcimPowerPortsDelete(ctx context.Context, request operations.DcimPowerPortsDeleteRequest) (*operations.DcimPowerPortsDeleteResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/dcim/power-ports/{id}/", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -7314,7 +7406,7 @@ func (s *SDK) DcimPowerPortsDelete(ctx context.Context, request operations.DcimP
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -7335,8 +7427,9 @@ func (s *SDK) DcimPowerPortsDelete(ctx context.Context, request operations.DcimP
 	return res, nil
 }
 
+// DcimPowerPortsList - Call to super to allow for caching
 func (s *SDK) DcimPowerPortsList(ctx context.Context, request operations.DcimPowerPortsListRequest) (*operations.DcimPowerPortsListResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/dcim/power-ports/"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -7346,7 +7439,7 @@ func (s *SDK) DcimPowerPortsList(ctx context.Context, request operations.DcimPow
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -7377,7 +7470,7 @@ func (s *SDK) DcimPowerPortsList(ctx context.Context, request operations.DcimPow
 }
 
 func (s *SDK) DcimPowerPortsPartialUpdate(ctx context.Context, request operations.DcimPowerPortsPartialUpdateRequest) (*operations.DcimPowerPortsPartialUpdateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/dcim/power-ports/{id}/", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -7395,7 +7488,7 @@ func (s *SDK) DcimPowerPortsPartialUpdate(ctx context.Context, request operation
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -7425,8 +7518,9 @@ func (s *SDK) DcimPowerPortsPartialUpdate(ctx context.Context, request operation
 	return res, nil
 }
 
+// DcimPowerPortsRead - Call to super to allow for caching
 func (s *SDK) DcimPowerPortsRead(ctx context.Context, request operations.DcimPowerPortsReadRequest) (*operations.DcimPowerPortsReadResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/dcim/power-ports/{id}/", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -7434,7 +7528,7 @@ func (s *SDK) DcimPowerPortsRead(ctx context.Context, request operations.DcimPow
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -7464,8 +7558,9 @@ func (s *SDK) DcimPowerPortsRead(ctx context.Context, request operations.DcimPow
 	return res, nil
 }
 
+// DcimPowerPortsTrace - Trace a complete cable path and return each segment as a three-tuple of (termination, cable, termination).
 func (s *SDK) DcimPowerPortsTrace(ctx context.Context, request operations.DcimPowerPortsTraceRequest) (*operations.DcimPowerPortsTraceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/dcim/power-ports/{id}/trace/", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -7473,7 +7568,7 @@ func (s *SDK) DcimPowerPortsTrace(ctx context.Context, request operations.DcimPo
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -7504,7 +7599,7 @@ func (s *SDK) DcimPowerPortsTrace(ctx context.Context, request operations.DcimPo
 }
 
 func (s *SDK) DcimPowerPortsUpdate(ctx context.Context, request operations.DcimPowerPortsUpdateRequest) (*operations.DcimPowerPortsUpdateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/dcim/power-ports/{id}/", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -7522,7 +7617,7 @@ func (s *SDK) DcimPowerPortsUpdate(ctx context.Context, request operations.DcimP
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -7553,7 +7648,7 @@ func (s *SDK) DcimPowerPortsUpdate(ctx context.Context, request operations.DcimP
 }
 
 func (s *SDK) DcimRackGroupsCreate(ctx context.Context, request operations.DcimRackGroupsCreateRequest) (*operations.DcimRackGroupsCreateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/dcim/rack-groups/"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -7571,7 +7666,7 @@ func (s *SDK) DcimRackGroupsCreate(ctx context.Context, request operations.DcimR
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -7602,7 +7697,7 @@ func (s *SDK) DcimRackGroupsCreate(ctx context.Context, request operations.DcimR
 }
 
 func (s *SDK) DcimRackGroupsDelete(ctx context.Context, request operations.DcimRackGroupsDeleteRequest) (*operations.DcimRackGroupsDeleteResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/dcim/rack-groups/{id}/", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -7610,7 +7705,7 @@ func (s *SDK) DcimRackGroupsDelete(ctx context.Context, request operations.DcimR
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -7631,8 +7726,9 @@ func (s *SDK) DcimRackGroupsDelete(ctx context.Context, request operations.DcimR
 	return res, nil
 }
 
+// DcimRackGroupsList - Call to super to allow for caching
 func (s *SDK) DcimRackGroupsList(ctx context.Context, request operations.DcimRackGroupsListRequest) (*operations.DcimRackGroupsListResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/dcim/rack-groups/"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -7642,7 +7738,7 @@ func (s *SDK) DcimRackGroupsList(ctx context.Context, request operations.DcimRac
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -7673,7 +7769,7 @@ func (s *SDK) DcimRackGroupsList(ctx context.Context, request operations.DcimRac
 }
 
 func (s *SDK) DcimRackGroupsPartialUpdate(ctx context.Context, request operations.DcimRackGroupsPartialUpdateRequest) (*operations.DcimRackGroupsPartialUpdateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/dcim/rack-groups/{id}/", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -7691,7 +7787,7 @@ func (s *SDK) DcimRackGroupsPartialUpdate(ctx context.Context, request operation
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -7721,8 +7817,9 @@ func (s *SDK) DcimRackGroupsPartialUpdate(ctx context.Context, request operation
 	return res, nil
 }
 
+// DcimRackGroupsRead - Call to super to allow for caching
 func (s *SDK) DcimRackGroupsRead(ctx context.Context, request operations.DcimRackGroupsReadRequest) (*operations.DcimRackGroupsReadResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/dcim/rack-groups/{id}/", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -7730,7 +7827,7 @@ func (s *SDK) DcimRackGroupsRead(ctx context.Context, request operations.DcimRac
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -7761,7 +7858,7 @@ func (s *SDK) DcimRackGroupsRead(ctx context.Context, request operations.DcimRac
 }
 
 func (s *SDK) DcimRackGroupsUpdate(ctx context.Context, request operations.DcimRackGroupsUpdateRequest) (*operations.DcimRackGroupsUpdateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/dcim/rack-groups/{id}/", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -7779,7 +7876,7 @@ func (s *SDK) DcimRackGroupsUpdate(ctx context.Context, request operations.DcimR
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -7810,7 +7907,7 @@ func (s *SDK) DcimRackGroupsUpdate(ctx context.Context, request operations.DcimR
 }
 
 func (s *SDK) DcimRackReservationsCreate(ctx context.Context, request operations.DcimRackReservationsCreateRequest) (*operations.DcimRackReservationsCreateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/dcim/rack-reservations/"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -7828,7 +7925,7 @@ func (s *SDK) DcimRackReservationsCreate(ctx context.Context, request operations
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -7859,7 +7956,7 @@ func (s *SDK) DcimRackReservationsCreate(ctx context.Context, request operations
 }
 
 func (s *SDK) DcimRackReservationsDelete(ctx context.Context, request operations.DcimRackReservationsDeleteRequest) (*operations.DcimRackReservationsDeleteResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/dcim/rack-reservations/{id}/", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -7867,7 +7964,7 @@ func (s *SDK) DcimRackReservationsDelete(ctx context.Context, request operations
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -7888,8 +7985,9 @@ func (s *SDK) DcimRackReservationsDelete(ctx context.Context, request operations
 	return res, nil
 }
 
+// DcimRackReservationsList - Call to super to allow for caching
 func (s *SDK) DcimRackReservationsList(ctx context.Context, request operations.DcimRackReservationsListRequest) (*operations.DcimRackReservationsListResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/dcim/rack-reservations/"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -7899,7 +7997,7 @@ func (s *SDK) DcimRackReservationsList(ctx context.Context, request operations.D
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -7930,7 +8028,7 @@ func (s *SDK) DcimRackReservationsList(ctx context.Context, request operations.D
 }
 
 func (s *SDK) DcimRackReservationsPartialUpdate(ctx context.Context, request operations.DcimRackReservationsPartialUpdateRequest) (*operations.DcimRackReservationsPartialUpdateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/dcim/rack-reservations/{id}/", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -7948,7 +8046,7 @@ func (s *SDK) DcimRackReservationsPartialUpdate(ctx context.Context, request ope
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -7978,8 +8076,9 @@ func (s *SDK) DcimRackReservationsPartialUpdate(ctx context.Context, request ope
 	return res, nil
 }
 
+// DcimRackReservationsRead - Call to super to allow for caching
 func (s *SDK) DcimRackReservationsRead(ctx context.Context, request operations.DcimRackReservationsReadRequest) (*operations.DcimRackReservationsReadResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/dcim/rack-reservations/{id}/", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -7987,7 +8086,7 @@ func (s *SDK) DcimRackReservationsRead(ctx context.Context, request operations.D
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -8018,7 +8117,7 @@ func (s *SDK) DcimRackReservationsRead(ctx context.Context, request operations.D
 }
 
 func (s *SDK) DcimRackReservationsUpdate(ctx context.Context, request operations.DcimRackReservationsUpdateRequest) (*operations.DcimRackReservationsUpdateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/dcim/rack-reservations/{id}/", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -8036,7 +8135,7 @@ func (s *SDK) DcimRackReservationsUpdate(ctx context.Context, request operations
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -8067,7 +8166,7 @@ func (s *SDK) DcimRackReservationsUpdate(ctx context.Context, request operations
 }
 
 func (s *SDK) DcimRackRolesCreate(ctx context.Context, request operations.DcimRackRolesCreateRequest) (*operations.DcimRackRolesCreateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/dcim/rack-roles/"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -8085,7 +8184,7 @@ func (s *SDK) DcimRackRolesCreate(ctx context.Context, request operations.DcimRa
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -8116,7 +8215,7 @@ func (s *SDK) DcimRackRolesCreate(ctx context.Context, request operations.DcimRa
 }
 
 func (s *SDK) DcimRackRolesDelete(ctx context.Context, request operations.DcimRackRolesDeleteRequest) (*operations.DcimRackRolesDeleteResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/dcim/rack-roles/{id}/", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -8124,7 +8223,7 @@ func (s *SDK) DcimRackRolesDelete(ctx context.Context, request operations.DcimRa
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -8145,8 +8244,9 @@ func (s *SDK) DcimRackRolesDelete(ctx context.Context, request operations.DcimRa
 	return res, nil
 }
 
+// DcimRackRolesList - Call to super to allow for caching
 func (s *SDK) DcimRackRolesList(ctx context.Context, request operations.DcimRackRolesListRequest) (*operations.DcimRackRolesListResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/dcim/rack-roles/"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -8156,7 +8256,7 @@ func (s *SDK) DcimRackRolesList(ctx context.Context, request operations.DcimRack
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -8187,7 +8287,7 @@ func (s *SDK) DcimRackRolesList(ctx context.Context, request operations.DcimRack
 }
 
 func (s *SDK) DcimRackRolesPartialUpdate(ctx context.Context, request operations.DcimRackRolesPartialUpdateRequest) (*operations.DcimRackRolesPartialUpdateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/dcim/rack-roles/{id}/", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -8205,7 +8305,7 @@ func (s *SDK) DcimRackRolesPartialUpdate(ctx context.Context, request operations
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -8235,8 +8335,9 @@ func (s *SDK) DcimRackRolesPartialUpdate(ctx context.Context, request operations
 	return res, nil
 }
 
+// DcimRackRolesRead - Call to super to allow for caching
 func (s *SDK) DcimRackRolesRead(ctx context.Context, request operations.DcimRackRolesReadRequest) (*operations.DcimRackRolesReadResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/dcim/rack-roles/{id}/", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -8244,7 +8345,7 @@ func (s *SDK) DcimRackRolesRead(ctx context.Context, request operations.DcimRack
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -8275,7 +8376,7 @@ func (s *SDK) DcimRackRolesRead(ctx context.Context, request operations.DcimRack
 }
 
 func (s *SDK) DcimRackRolesUpdate(ctx context.Context, request operations.DcimRackRolesUpdateRequest) (*operations.DcimRackRolesUpdateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/dcim/rack-roles/{id}/", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -8293,7 +8394,7 @@ func (s *SDK) DcimRackRolesUpdate(ctx context.Context, request operations.DcimRa
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -8324,7 +8425,7 @@ func (s *SDK) DcimRackRolesUpdate(ctx context.Context, request operations.DcimRa
 }
 
 func (s *SDK) DcimRacksCreate(ctx context.Context, request operations.DcimRacksCreateRequest) (*operations.DcimRacksCreateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/dcim/racks/"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -8342,7 +8443,7 @@ func (s *SDK) DcimRacksCreate(ctx context.Context, request operations.DcimRacksC
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -8373,7 +8474,7 @@ func (s *SDK) DcimRacksCreate(ctx context.Context, request operations.DcimRacksC
 }
 
 func (s *SDK) DcimRacksDelete(ctx context.Context, request operations.DcimRacksDeleteRequest) (*operations.DcimRacksDeleteResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/dcim/racks/{id}/", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -8381,7 +8482,7 @@ func (s *SDK) DcimRacksDelete(ctx context.Context, request operations.DcimRacksD
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -8402,8 +8503,9 @@ func (s *SDK) DcimRacksDelete(ctx context.Context, request operations.DcimRacksD
 	return res, nil
 }
 
+// DcimRacksElevation - Rack elevation representing the list of rack units. Also supports rendering the elevation as an SVG.
 func (s *SDK) DcimRacksElevation(ctx context.Context, request operations.DcimRacksElevationRequest) (*operations.DcimRacksElevationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/dcim/racks/{id}/elevation/", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -8413,7 +8515,7 @@ func (s *SDK) DcimRacksElevation(ctx context.Context, request operations.DcimRac
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -8443,8 +8545,9 @@ func (s *SDK) DcimRacksElevation(ctx context.Context, request operations.DcimRac
 	return res, nil
 }
 
+// DcimRacksList - Call to super to allow for caching
 func (s *SDK) DcimRacksList(ctx context.Context, request operations.DcimRacksListRequest) (*operations.DcimRacksListResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/dcim/racks/"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -8454,7 +8557,7 @@ func (s *SDK) DcimRacksList(ctx context.Context, request operations.DcimRacksLis
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -8485,7 +8588,7 @@ func (s *SDK) DcimRacksList(ctx context.Context, request operations.DcimRacksLis
 }
 
 func (s *SDK) DcimRacksPartialUpdate(ctx context.Context, request operations.DcimRacksPartialUpdateRequest) (*operations.DcimRacksPartialUpdateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/dcim/racks/{id}/", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -8503,7 +8606,7 @@ func (s *SDK) DcimRacksPartialUpdate(ctx context.Context, request operations.Dci
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -8533,8 +8636,9 @@ func (s *SDK) DcimRacksPartialUpdate(ctx context.Context, request operations.Dci
 	return res, nil
 }
 
+// DcimRacksRead - Call to super to allow for caching
 func (s *SDK) DcimRacksRead(ctx context.Context, request operations.DcimRacksReadRequest) (*operations.DcimRacksReadResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/dcim/racks/{id}/", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -8542,7 +8646,7 @@ func (s *SDK) DcimRacksRead(ctx context.Context, request operations.DcimRacksRea
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -8573,7 +8677,7 @@ func (s *SDK) DcimRacksRead(ctx context.Context, request operations.DcimRacksRea
 }
 
 func (s *SDK) DcimRacksUpdate(ctx context.Context, request operations.DcimRacksUpdateRequest) (*operations.DcimRacksUpdateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/dcim/racks/{id}/", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -8591,7 +8695,7 @@ func (s *SDK) DcimRacksUpdate(ctx context.Context, request operations.DcimRacksU
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -8622,7 +8726,7 @@ func (s *SDK) DcimRacksUpdate(ctx context.Context, request operations.DcimRacksU
 }
 
 func (s *SDK) DcimRearPortTemplatesCreate(ctx context.Context, request operations.DcimRearPortTemplatesCreateRequest) (*operations.DcimRearPortTemplatesCreateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/dcim/rear-port-templates/"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -8640,7 +8744,7 @@ func (s *SDK) DcimRearPortTemplatesCreate(ctx context.Context, request operation
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -8671,7 +8775,7 @@ func (s *SDK) DcimRearPortTemplatesCreate(ctx context.Context, request operation
 }
 
 func (s *SDK) DcimRearPortTemplatesDelete(ctx context.Context, request operations.DcimRearPortTemplatesDeleteRequest) (*operations.DcimRearPortTemplatesDeleteResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/dcim/rear-port-templates/{id}/", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -8679,7 +8783,7 @@ func (s *SDK) DcimRearPortTemplatesDelete(ctx context.Context, request operation
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -8700,8 +8804,9 @@ func (s *SDK) DcimRearPortTemplatesDelete(ctx context.Context, request operation
 	return res, nil
 }
 
+// DcimRearPortTemplatesList - Call to super to allow for caching
 func (s *SDK) DcimRearPortTemplatesList(ctx context.Context, request operations.DcimRearPortTemplatesListRequest) (*operations.DcimRearPortTemplatesListResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/dcim/rear-port-templates/"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -8711,7 +8816,7 @@ func (s *SDK) DcimRearPortTemplatesList(ctx context.Context, request operations.
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -8742,7 +8847,7 @@ func (s *SDK) DcimRearPortTemplatesList(ctx context.Context, request operations.
 }
 
 func (s *SDK) DcimRearPortTemplatesPartialUpdate(ctx context.Context, request operations.DcimRearPortTemplatesPartialUpdateRequest) (*operations.DcimRearPortTemplatesPartialUpdateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/dcim/rear-port-templates/{id}/", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -8760,7 +8865,7 @@ func (s *SDK) DcimRearPortTemplatesPartialUpdate(ctx context.Context, request op
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -8790,8 +8895,9 @@ func (s *SDK) DcimRearPortTemplatesPartialUpdate(ctx context.Context, request op
 	return res, nil
 }
 
+// DcimRearPortTemplatesRead - Call to super to allow for caching
 func (s *SDK) DcimRearPortTemplatesRead(ctx context.Context, request operations.DcimRearPortTemplatesReadRequest) (*operations.DcimRearPortTemplatesReadResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/dcim/rear-port-templates/{id}/", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -8799,7 +8905,7 @@ func (s *SDK) DcimRearPortTemplatesRead(ctx context.Context, request operations.
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -8830,7 +8936,7 @@ func (s *SDK) DcimRearPortTemplatesRead(ctx context.Context, request operations.
 }
 
 func (s *SDK) DcimRearPortTemplatesUpdate(ctx context.Context, request operations.DcimRearPortTemplatesUpdateRequest) (*operations.DcimRearPortTemplatesUpdateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/dcim/rear-port-templates/{id}/", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -8848,7 +8954,7 @@ func (s *SDK) DcimRearPortTemplatesUpdate(ctx context.Context, request operation
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -8879,7 +8985,7 @@ func (s *SDK) DcimRearPortTemplatesUpdate(ctx context.Context, request operation
 }
 
 func (s *SDK) DcimRearPortsCreate(ctx context.Context, request operations.DcimRearPortsCreateRequest) (*operations.DcimRearPortsCreateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/dcim/rear-ports/"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -8897,7 +9003,7 @@ func (s *SDK) DcimRearPortsCreate(ctx context.Context, request operations.DcimRe
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -8928,7 +9034,7 @@ func (s *SDK) DcimRearPortsCreate(ctx context.Context, request operations.DcimRe
 }
 
 func (s *SDK) DcimRearPortsDelete(ctx context.Context, request operations.DcimRearPortsDeleteRequest) (*operations.DcimRearPortsDeleteResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/dcim/rear-ports/{id}/", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -8936,7 +9042,7 @@ func (s *SDK) DcimRearPortsDelete(ctx context.Context, request operations.DcimRe
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -8957,8 +9063,9 @@ func (s *SDK) DcimRearPortsDelete(ctx context.Context, request operations.DcimRe
 	return res, nil
 }
 
+// DcimRearPortsList - Call to super to allow for caching
 func (s *SDK) DcimRearPortsList(ctx context.Context, request operations.DcimRearPortsListRequest) (*operations.DcimRearPortsListResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/dcim/rear-ports/"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -8968,7 +9075,7 @@ func (s *SDK) DcimRearPortsList(ctx context.Context, request operations.DcimRear
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -8999,7 +9106,7 @@ func (s *SDK) DcimRearPortsList(ctx context.Context, request operations.DcimRear
 }
 
 func (s *SDK) DcimRearPortsPartialUpdate(ctx context.Context, request operations.DcimRearPortsPartialUpdateRequest) (*operations.DcimRearPortsPartialUpdateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/dcim/rear-ports/{id}/", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -9017,7 +9124,7 @@ func (s *SDK) DcimRearPortsPartialUpdate(ctx context.Context, request operations
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -9047,8 +9154,9 @@ func (s *SDK) DcimRearPortsPartialUpdate(ctx context.Context, request operations
 	return res, nil
 }
 
+// DcimRearPortsRead - Call to super to allow for caching
 func (s *SDK) DcimRearPortsRead(ctx context.Context, request operations.DcimRearPortsReadRequest) (*operations.DcimRearPortsReadResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/dcim/rear-ports/{id}/", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -9056,7 +9164,7 @@ func (s *SDK) DcimRearPortsRead(ctx context.Context, request operations.DcimRear
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -9086,8 +9194,9 @@ func (s *SDK) DcimRearPortsRead(ctx context.Context, request operations.DcimRear
 	return res, nil
 }
 
+// DcimRearPortsTrace - Trace a complete cable path and return each segment as a three-tuple of (termination, cable, termination).
 func (s *SDK) DcimRearPortsTrace(ctx context.Context, request operations.DcimRearPortsTraceRequest) (*operations.DcimRearPortsTraceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/dcim/rear-ports/{id}/trace/", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -9095,7 +9204,7 @@ func (s *SDK) DcimRearPortsTrace(ctx context.Context, request operations.DcimRea
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -9126,7 +9235,7 @@ func (s *SDK) DcimRearPortsTrace(ctx context.Context, request operations.DcimRea
 }
 
 func (s *SDK) DcimRearPortsUpdate(ctx context.Context, request operations.DcimRearPortsUpdateRequest) (*operations.DcimRearPortsUpdateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/dcim/rear-ports/{id}/", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -9144,7 +9253,7 @@ func (s *SDK) DcimRearPortsUpdate(ctx context.Context, request operations.DcimRe
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -9175,7 +9284,7 @@ func (s *SDK) DcimRearPortsUpdate(ctx context.Context, request operations.DcimRe
 }
 
 func (s *SDK) DcimRegionsCreate(ctx context.Context, request operations.DcimRegionsCreateRequest) (*operations.DcimRegionsCreateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/dcim/regions/"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -9193,7 +9302,7 @@ func (s *SDK) DcimRegionsCreate(ctx context.Context, request operations.DcimRegi
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -9224,7 +9333,7 @@ func (s *SDK) DcimRegionsCreate(ctx context.Context, request operations.DcimRegi
 }
 
 func (s *SDK) DcimRegionsDelete(ctx context.Context, request operations.DcimRegionsDeleteRequest) (*operations.DcimRegionsDeleteResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/dcim/regions/{id}/", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -9232,7 +9341,7 @@ func (s *SDK) DcimRegionsDelete(ctx context.Context, request operations.DcimRegi
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -9253,8 +9362,9 @@ func (s *SDK) DcimRegionsDelete(ctx context.Context, request operations.DcimRegi
 	return res, nil
 }
 
+// DcimRegionsList - Call to super to allow for caching
 func (s *SDK) DcimRegionsList(ctx context.Context, request operations.DcimRegionsListRequest) (*operations.DcimRegionsListResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/dcim/regions/"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -9264,7 +9374,7 @@ func (s *SDK) DcimRegionsList(ctx context.Context, request operations.DcimRegion
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -9295,7 +9405,7 @@ func (s *SDK) DcimRegionsList(ctx context.Context, request operations.DcimRegion
 }
 
 func (s *SDK) DcimRegionsPartialUpdate(ctx context.Context, request operations.DcimRegionsPartialUpdateRequest) (*operations.DcimRegionsPartialUpdateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/dcim/regions/{id}/", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -9313,7 +9423,7 @@ func (s *SDK) DcimRegionsPartialUpdate(ctx context.Context, request operations.D
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -9343,8 +9453,9 @@ func (s *SDK) DcimRegionsPartialUpdate(ctx context.Context, request operations.D
 	return res, nil
 }
 
+// DcimRegionsRead - Call to super to allow for caching
 func (s *SDK) DcimRegionsRead(ctx context.Context, request operations.DcimRegionsReadRequest) (*operations.DcimRegionsReadResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/dcim/regions/{id}/", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -9352,7 +9463,7 @@ func (s *SDK) DcimRegionsRead(ctx context.Context, request operations.DcimRegion
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -9383,7 +9494,7 @@ func (s *SDK) DcimRegionsRead(ctx context.Context, request operations.DcimRegion
 }
 
 func (s *SDK) DcimRegionsUpdate(ctx context.Context, request operations.DcimRegionsUpdateRequest) (*operations.DcimRegionsUpdateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/dcim/regions/{id}/", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -9401,7 +9512,7 @@ func (s *SDK) DcimRegionsUpdate(ctx context.Context, request operations.DcimRegi
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -9432,7 +9543,7 @@ func (s *SDK) DcimRegionsUpdate(ctx context.Context, request operations.DcimRegi
 }
 
 func (s *SDK) DcimSitesCreate(ctx context.Context, request operations.DcimSitesCreateRequest) (*operations.DcimSitesCreateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/dcim/sites/"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -9450,7 +9561,7 @@ func (s *SDK) DcimSitesCreate(ctx context.Context, request operations.DcimSitesC
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -9481,7 +9592,7 @@ func (s *SDK) DcimSitesCreate(ctx context.Context, request operations.DcimSitesC
 }
 
 func (s *SDK) DcimSitesDelete(ctx context.Context, request operations.DcimSitesDeleteRequest) (*operations.DcimSitesDeleteResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/dcim/sites/{id}/", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -9489,7 +9600,7 @@ func (s *SDK) DcimSitesDelete(ctx context.Context, request operations.DcimSitesD
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -9510,8 +9621,9 @@ func (s *SDK) DcimSitesDelete(ctx context.Context, request operations.DcimSitesD
 	return res, nil
 }
 
+// DcimSitesGraphs - A convenience method for rendering graphs for a particular site.
 func (s *SDK) DcimSitesGraphs(ctx context.Context, request operations.DcimSitesGraphsRequest) (*operations.DcimSitesGraphsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/dcim/sites/{id}/graphs/", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -9519,7 +9631,7 @@ func (s *SDK) DcimSitesGraphs(ctx context.Context, request operations.DcimSitesG
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -9549,8 +9661,9 @@ func (s *SDK) DcimSitesGraphs(ctx context.Context, request operations.DcimSitesG
 	return res, nil
 }
 
+// DcimSitesList - Call to super to allow for caching
 func (s *SDK) DcimSitesList(ctx context.Context, request operations.DcimSitesListRequest) (*operations.DcimSitesListResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/dcim/sites/"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -9560,7 +9673,7 @@ func (s *SDK) DcimSitesList(ctx context.Context, request operations.DcimSitesLis
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -9591,7 +9704,7 @@ func (s *SDK) DcimSitesList(ctx context.Context, request operations.DcimSitesLis
 }
 
 func (s *SDK) DcimSitesPartialUpdate(ctx context.Context, request operations.DcimSitesPartialUpdateRequest) (*operations.DcimSitesPartialUpdateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/dcim/sites/{id}/", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -9609,7 +9722,7 @@ func (s *SDK) DcimSitesPartialUpdate(ctx context.Context, request operations.Dci
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -9639,8 +9752,9 @@ func (s *SDK) DcimSitesPartialUpdate(ctx context.Context, request operations.Dci
 	return res, nil
 }
 
+// DcimSitesRead - Call to super to allow for caching
 func (s *SDK) DcimSitesRead(ctx context.Context, request operations.DcimSitesReadRequest) (*operations.DcimSitesReadResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/dcim/sites/{id}/", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -9648,7 +9762,7 @@ func (s *SDK) DcimSitesRead(ctx context.Context, request operations.DcimSitesRea
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -9679,7 +9793,7 @@ func (s *SDK) DcimSitesRead(ctx context.Context, request operations.DcimSitesRea
 }
 
 func (s *SDK) DcimSitesUpdate(ctx context.Context, request operations.DcimSitesUpdateRequest) (*operations.DcimSitesUpdateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/dcim/sites/{id}/", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -9697,7 +9811,7 @@ func (s *SDK) DcimSitesUpdate(ctx context.Context, request operations.DcimSitesU
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -9728,7 +9842,7 @@ func (s *SDK) DcimSitesUpdate(ctx context.Context, request operations.DcimSitesU
 }
 
 func (s *SDK) DcimVirtualChassisCreate(ctx context.Context, request operations.DcimVirtualChassisCreateRequest) (*operations.DcimVirtualChassisCreateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/dcim/virtual-chassis/"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -9746,7 +9860,7 @@ func (s *SDK) DcimVirtualChassisCreate(ctx context.Context, request operations.D
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -9777,7 +9891,7 @@ func (s *SDK) DcimVirtualChassisCreate(ctx context.Context, request operations.D
 }
 
 func (s *SDK) DcimVirtualChassisDelete(ctx context.Context, request operations.DcimVirtualChassisDeleteRequest) (*operations.DcimVirtualChassisDeleteResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/dcim/virtual-chassis/{id}/", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -9785,7 +9899,7 @@ func (s *SDK) DcimVirtualChassisDelete(ctx context.Context, request operations.D
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -9806,8 +9920,9 @@ func (s *SDK) DcimVirtualChassisDelete(ctx context.Context, request operations.D
 	return res, nil
 }
 
+// DcimVirtualChassisList - Call to super to allow for caching
 func (s *SDK) DcimVirtualChassisList(ctx context.Context, request operations.DcimVirtualChassisListRequest) (*operations.DcimVirtualChassisListResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/dcim/virtual-chassis/"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -9817,7 +9932,7 @@ func (s *SDK) DcimVirtualChassisList(ctx context.Context, request operations.Dci
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -9848,7 +9963,7 @@ func (s *SDK) DcimVirtualChassisList(ctx context.Context, request operations.Dci
 }
 
 func (s *SDK) DcimVirtualChassisPartialUpdate(ctx context.Context, request operations.DcimVirtualChassisPartialUpdateRequest) (*operations.DcimVirtualChassisPartialUpdateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/dcim/virtual-chassis/{id}/", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -9866,7 +9981,7 @@ func (s *SDK) DcimVirtualChassisPartialUpdate(ctx context.Context, request opera
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -9896,8 +10011,9 @@ func (s *SDK) DcimVirtualChassisPartialUpdate(ctx context.Context, request opera
 	return res, nil
 }
 
+// DcimVirtualChassisRead - Call to super to allow for caching
 func (s *SDK) DcimVirtualChassisRead(ctx context.Context, request operations.DcimVirtualChassisReadRequest) (*operations.DcimVirtualChassisReadResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/dcim/virtual-chassis/{id}/", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -9905,7 +10021,7 @@ func (s *SDK) DcimVirtualChassisRead(ctx context.Context, request operations.Dci
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -9936,7 +10052,7 @@ func (s *SDK) DcimVirtualChassisRead(ctx context.Context, request operations.Dci
 }
 
 func (s *SDK) DcimVirtualChassisUpdate(ctx context.Context, request operations.DcimVirtualChassisUpdateRequest) (*operations.DcimVirtualChassisUpdateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/dcim/virtual-chassis/{id}/", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -9954,7 +10070,7 @@ func (s *SDK) DcimVirtualChassisUpdate(ctx context.Context, request operations.D
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -9985,7 +10101,7 @@ func (s *SDK) DcimVirtualChassisUpdate(ctx context.Context, request operations.D
 }
 
 func (s *SDK) ExtrasCustomFieldChoicesList(ctx context.Context) (*operations.ExtrasCustomFieldChoicesListResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/extras/_custom_field_choices/"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -9993,7 +10109,7 @@ func (s *SDK) ExtrasCustomFieldChoicesList(ctx context.Context) (*operations.Ext
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -10015,7 +10131,7 @@ func (s *SDK) ExtrasCustomFieldChoicesList(ctx context.Context) (*operations.Ext
 }
 
 func (s *SDK) ExtrasCustomFieldChoicesRead(ctx context.Context, request operations.ExtrasCustomFieldChoicesReadRequest) (*operations.ExtrasCustomFieldChoicesReadResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/extras/_custom_field_choices/{id}/", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -10023,7 +10139,7 @@ func (s *SDK) ExtrasCustomFieldChoicesRead(ctx context.Context, request operatio
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -10045,7 +10161,7 @@ func (s *SDK) ExtrasCustomFieldChoicesRead(ctx context.Context, request operatio
 }
 
 func (s *SDK) ExtrasConfigContextsCreate(ctx context.Context, request operations.ExtrasConfigContextsCreateRequest) (*operations.ExtrasConfigContextsCreateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/extras/config-contexts/"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -10063,7 +10179,7 @@ func (s *SDK) ExtrasConfigContextsCreate(ctx context.Context, request operations
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -10094,7 +10210,7 @@ func (s *SDK) ExtrasConfigContextsCreate(ctx context.Context, request operations
 }
 
 func (s *SDK) ExtrasConfigContextsDelete(ctx context.Context, request operations.ExtrasConfigContextsDeleteRequest) (*operations.ExtrasConfigContextsDeleteResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/extras/config-contexts/{id}/", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -10102,7 +10218,7 @@ func (s *SDK) ExtrasConfigContextsDelete(ctx context.Context, request operations
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -10123,8 +10239,9 @@ func (s *SDK) ExtrasConfigContextsDelete(ctx context.Context, request operations
 	return res, nil
 }
 
+// ExtrasConfigContextsList - Call to super to allow for caching
 func (s *SDK) ExtrasConfigContextsList(ctx context.Context, request operations.ExtrasConfigContextsListRequest) (*operations.ExtrasConfigContextsListResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/extras/config-contexts/"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -10134,7 +10251,7 @@ func (s *SDK) ExtrasConfigContextsList(ctx context.Context, request operations.E
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -10165,7 +10282,7 @@ func (s *SDK) ExtrasConfigContextsList(ctx context.Context, request operations.E
 }
 
 func (s *SDK) ExtrasConfigContextsPartialUpdate(ctx context.Context, request operations.ExtrasConfigContextsPartialUpdateRequest) (*operations.ExtrasConfigContextsPartialUpdateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/extras/config-contexts/{id}/", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -10183,7 +10300,7 @@ func (s *SDK) ExtrasConfigContextsPartialUpdate(ctx context.Context, request ope
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -10213,8 +10330,9 @@ func (s *SDK) ExtrasConfigContextsPartialUpdate(ctx context.Context, request ope
 	return res, nil
 }
 
+// ExtrasConfigContextsRead - Call to super to allow for caching
 func (s *SDK) ExtrasConfigContextsRead(ctx context.Context, request operations.ExtrasConfigContextsReadRequest) (*operations.ExtrasConfigContextsReadResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/extras/config-contexts/{id}/", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -10222,7 +10340,7 @@ func (s *SDK) ExtrasConfigContextsRead(ctx context.Context, request operations.E
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -10253,7 +10371,7 @@ func (s *SDK) ExtrasConfigContextsRead(ctx context.Context, request operations.E
 }
 
 func (s *SDK) ExtrasConfigContextsUpdate(ctx context.Context, request operations.ExtrasConfigContextsUpdateRequest) (*operations.ExtrasConfigContextsUpdateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/extras/config-contexts/{id}/", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -10271,7 +10389,7 @@ func (s *SDK) ExtrasConfigContextsUpdate(ctx context.Context, request operations
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -10302,7 +10420,7 @@ func (s *SDK) ExtrasConfigContextsUpdate(ctx context.Context, request operations
 }
 
 func (s *SDK) ExtrasExportTemplatesCreate(ctx context.Context, request operations.ExtrasExportTemplatesCreateRequest) (*operations.ExtrasExportTemplatesCreateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/extras/export-templates/"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -10320,7 +10438,7 @@ func (s *SDK) ExtrasExportTemplatesCreate(ctx context.Context, request operation
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -10351,7 +10469,7 @@ func (s *SDK) ExtrasExportTemplatesCreate(ctx context.Context, request operation
 }
 
 func (s *SDK) ExtrasExportTemplatesDelete(ctx context.Context, request operations.ExtrasExportTemplatesDeleteRequest) (*operations.ExtrasExportTemplatesDeleteResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/extras/export-templates/{id}/", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -10359,7 +10477,7 @@ func (s *SDK) ExtrasExportTemplatesDelete(ctx context.Context, request operation
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -10380,8 +10498,9 @@ func (s *SDK) ExtrasExportTemplatesDelete(ctx context.Context, request operation
 	return res, nil
 }
 
+// ExtrasExportTemplatesList - Call to super to allow for caching
 func (s *SDK) ExtrasExportTemplatesList(ctx context.Context, request operations.ExtrasExportTemplatesListRequest) (*operations.ExtrasExportTemplatesListResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/extras/export-templates/"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -10391,7 +10510,7 @@ func (s *SDK) ExtrasExportTemplatesList(ctx context.Context, request operations.
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -10422,7 +10541,7 @@ func (s *SDK) ExtrasExportTemplatesList(ctx context.Context, request operations.
 }
 
 func (s *SDK) ExtrasExportTemplatesPartialUpdate(ctx context.Context, request operations.ExtrasExportTemplatesPartialUpdateRequest) (*operations.ExtrasExportTemplatesPartialUpdateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/extras/export-templates/{id}/", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -10440,7 +10559,7 @@ func (s *SDK) ExtrasExportTemplatesPartialUpdate(ctx context.Context, request op
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -10470,8 +10589,9 @@ func (s *SDK) ExtrasExportTemplatesPartialUpdate(ctx context.Context, request op
 	return res, nil
 }
 
+// ExtrasExportTemplatesRead - Call to super to allow for caching
 func (s *SDK) ExtrasExportTemplatesRead(ctx context.Context, request operations.ExtrasExportTemplatesReadRequest) (*operations.ExtrasExportTemplatesReadResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/extras/export-templates/{id}/", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -10479,7 +10599,7 @@ func (s *SDK) ExtrasExportTemplatesRead(ctx context.Context, request operations.
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -10510,7 +10630,7 @@ func (s *SDK) ExtrasExportTemplatesRead(ctx context.Context, request operations.
 }
 
 func (s *SDK) ExtrasExportTemplatesUpdate(ctx context.Context, request operations.ExtrasExportTemplatesUpdateRequest) (*operations.ExtrasExportTemplatesUpdateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/extras/export-templates/{id}/", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -10528,7 +10648,7 @@ func (s *SDK) ExtrasExportTemplatesUpdate(ctx context.Context, request operation
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -10559,7 +10679,7 @@ func (s *SDK) ExtrasExportTemplatesUpdate(ctx context.Context, request operation
 }
 
 func (s *SDK) ExtrasGraphsCreate(ctx context.Context, request operations.ExtrasGraphsCreateRequest) (*operations.ExtrasGraphsCreateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/extras/graphs/"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -10577,7 +10697,7 @@ func (s *SDK) ExtrasGraphsCreate(ctx context.Context, request operations.ExtrasG
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -10608,7 +10728,7 @@ func (s *SDK) ExtrasGraphsCreate(ctx context.Context, request operations.ExtrasG
 }
 
 func (s *SDK) ExtrasGraphsDelete(ctx context.Context, request operations.ExtrasGraphsDeleteRequest) (*operations.ExtrasGraphsDeleteResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/extras/graphs/{id}/", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -10616,7 +10736,7 @@ func (s *SDK) ExtrasGraphsDelete(ctx context.Context, request operations.ExtrasG
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -10637,8 +10757,9 @@ func (s *SDK) ExtrasGraphsDelete(ctx context.Context, request operations.ExtrasG
 	return res, nil
 }
 
+// ExtrasGraphsList - Call to super to allow for caching
 func (s *SDK) ExtrasGraphsList(ctx context.Context, request operations.ExtrasGraphsListRequest) (*operations.ExtrasGraphsListResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/extras/graphs/"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -10648,7 +10769,7 @@ func (s *SDK) ExtrasGraphsList(ctx context.Context, request operations.ExtrasGra
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -10679,7 +10800,7 @@ func (s *SDK) ExtrasGraphsList(ctx context.Context, request operations.ExtrasGra
 }
 
 func (s *SDK) ExtrasGraphsPartialUpdate(ctx context.Context, request operations.ExtrasGraphsPartialUpdateRequest) (*operations.ExtrasGraphsPartialUpdateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/extras/graphs/{id}/", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -10697,7 +10818,7 @@ func (s *SDK) ExtrasGraphsPartialUpdate(ctx context.Context, request operations.
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -10727,8 +10848,9 @@ func (s *SDK) ExtrasGraphsPartialUpdate(ctx context.Context, request operations.
 	return res, nil
 }
 
+// ExtrasGraphsRead - Call to super to allow for caching
 func (s *SDK) ExtrasGraphsRead(ctx context.Context, request operations.ExtrasGraphsReadRequest) (*operations.ExtrasGraphsReadResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/extras/graphs/{id}/", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -10736,7 +10858,7 @@ func (s *SDK) ExtrasGraphsRead(ctx context.Context, request operations.ExtrasGra
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -10767,7 +10889,7 @@ func (s *SDK) ExtrasGraphsRead(ctx context.Context, request operations.ExtrasGra
 }
 
 func (s *SDK) ExtrasGraphsUpdate(ctx context.Context, request operations.ExtrasGraphsUpdateRequest) (*operations.ExtrasGraphsUpdateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/extras/graphs/{id}/", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -10785,7 +10907,7 @@ func (s *SDK) ExtrasGraphsUpdate(ctx context.Context, request operations.ExtrasG
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -10816,7 +10938,7 @@ func (s *SDK) ExtrasGraphsUpdate(ctx context.Context, request operations.ExtrasG
 }
 
 func (s *SDK) ExtrasImageAttachmentsCreate(ctx context.Context, request operations.ExtrasImageAttachmentsCreateRequest) (*operations.ExtrasImageAttachmentsCreateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/extras/image-attachments/"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -10834,7 +10956,7 @@ func (s *SDK) ExtrasImageAttachmentsCreate(ctx context.Context, request operatio
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -10865,7 +10987,7 @@ func (s *SDK) ExtrasImageAttachmentsCreate(ctx context.Context, request operatio
 }
 
 func (s *SDK) ExtrasImageAttachmentsDelete(ctx context.Context, request operations.ExtrasImageAttachmentsDeleteRequest) (*operations.ExtrasImageAttachmentsDeleteResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/extras/image-attachments/{id}/", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -10873,7 +10995,7 @@ func (s *SDK) ExtrasImageAttachmentsDelete(ctx context.Context, request operatio
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -10894,8 +11016,9 @@ func (s *SDK) ExtrasImageAttachmentsDelete(ctx context.Context, request operatio
 	return res, nil
 }
 
+// ExtrasImageAttachmentsList - Call to super to allow for caching
 func (s *SDK) ExtrasImageAttachmentsList(ctx context.Context, request operations.ExtrasImageAttachmentsListRequest) (*operations.ExtrasImageAttachmentsListResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/extras/image-attachments/"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -10905,7 +11028,7 @@ func (s *SDK) ExtrasImageAttachmentsList(ctx context.Context, request operations
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -10936,7 +11059,7 @@ func (s *SDK) ExtrasImageAttachmentsList(ctx context.Context, request operations
 }
 
 func (s *SDK) ExtrasImageAttachmentsPartialUpdate(ctx context.Context, request operations.ExtrasImageAttachmentsPartialUpdateRequest) (*operations.ExtrasImageAttachmentsPartialUpdateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/extras/image-attachments/{id}/", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -10954,7 +11077,7 @@ func (s *SDK) ExtrasImageAttachmentsPartialUpdate(ctx context.Context, request o
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -10984,8 +11107,9 @@ func (s *SDK) ExtrasImageAttachmentsPartialUpdate(ctx context.Context, request o
 	return res, nil
 }
 
+// ExtrasImageAttachmentsRead - Call to super to allow for caching
 func (s *SDK) ExtrasImageAttachmentsRead(ctx context.Context, request operations.ExtrasImageAttachmentsReadRequest) (*operations.ExtrasImageAttachmentsReadResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/extras/image-attachments/{id}/", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -10993,7 +11117,7 @@ func (s *SDK) ExtrasImageAttachmentsRead(ctx context.Context, request operations
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -11024,7 +11148,7 @@ func (s *SDK) ExtrasImageAttachmentsRead(ctx context.Context, request operations
 }
 
 func (s *SDK) ExtrasImageAttachmentsUpdate(ctx context.Context, request operations.ExtrasImageAttachmentsUpdateRequest) (*operations.ExtrasImageAttachmentsUpdateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/extras/image-attachments/{id}/", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -11042,7 +11166,7 @@ func (s *SDK) ExtrasImageAttachmentsUpdate(ctx context.Context, request operatio
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -11072,8 +11196,9 @@ func (s *SDK) ExtrasImageAttachmentsUpdate(ctx context.Context, request operatio
 	return res, nil
 }
 
+// ExtrasObjectChangesList - Retrieve a list of recent changes.
 func (s *SDK) ExtrasObjectChangesList(ctx context.Context, request operations.ExtrasObjectChangesListRequest) (*operations.ExtrasObjectChangesListResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/extras/object-changes/"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -11083,7 +11208,7 @@ func (s *SDK) ExtrasObjectChangesList(ctx context.Context, request operations.Ex
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -11113,8 +11238,9 @@ func (s *SDK) ExtrasObjectChangesList(ctx context.Context, request operations.Ex
 	return res, nil
 }
 
+// ExtrasObjectChangesRead - Retrieve a list of recent changes.
 func (s *SDK) ExtrasObjectChangesRead(ctx context.Context, request operations.ExtrasObjectChangesReadRequest) (*operations.ExtrasObjectChangesReadResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/extras/object-changes/{id}/", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -11122,7 +11248,7 @@ func (s *SDK) ExtrasObjectChangesRead(ctx context.Context, request operations.Ex
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -11152,8 +11278,9 @@ func (s *SDK) ExtrasObjectChangesRead(ctx context.Context, request operations.Ex
 	return res, nil
 }
 
+// ExtrasReportsList - Compile all reports and their related results (if any). Result data is deferred in the list view.
 func (s *SDK) ExtrasReportsList(ctx context.Context) (*operations.ExtrasReportsListResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/extras/reports/"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -11161,7 +11288,7 @@ func (s *SDK) ExtrasReportsList(ctx context.Context) (*operations.ExtrasReportsL
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -11182,8 +11309,9 @@ func (s *SDK) ExtrasReportsList(ctx context.Context) (*operations.ExtrasReportsL
 	return res, nil
 }
 
+// ExtrasReportsRead - Retrieve a single Report identified as "<module>.<report>".
 func (s *SDK) ExtrasReportsRead(ctx context.Context, request operations.ExtrasReportsReadRequest) (*operations.ExtrasReportsReadResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/extras/reports/{id}/", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -11191,7 +11319,7 @@ func (s *SDK) ExtrasReportsRead(ctx context.Context, request operations.ExtrasRe
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -11212,8 +11340,9 @@ func (s *SDK) ExtrasReportsRead(ctx context.Context, request operations.ExtrasRe
 	return res, nil
 }
 
+// ExtrasReportsRun - Run a Report and create a new ReportResult, overwriting any previous result for the Report.
 func (s *SDK) ExtrasReportsRun(ctx context.Context, request operations.ExtrasReportsRunRequest) (*operations.ExtrasReportsRunResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/extras/reports/{id}/run/", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -11221,7 +11350,7 @@ func (s *SDK) ExtrasReportsRun(ctx context.Context, request operations.ExtrasRep
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -11243,7 +11372,7 @@ func (s *SDK) ExtrasReportsRun(ctx context.Context, request operations.ExtrasRep
 }
 
 func (s *SDK) ExtrasScriptsList(ctx context.Context) (*operations.ExtrasScriptsListResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/extras/scripts/"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -11251,7 +11380,7 @@ func (s *SDK) ExtrasScriptsList(ctx context.Context) (*operations.ExtrasScriptsL
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -11273,7 +11402,7 @@ func (s *SDK) ExtrasScriptsList(ctx context.Context) (*operations.ExtrasScriptsL
 }
 
 func (s *SDK) ExtrasScriptsRead(ctx context.Context, request operations.ExtrasScriptsReadRequest) (*operations.ExtrasScriptsReadResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/extras/scripts/{id}/", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -11281,7 +11410,7 @@ func (s *SDK) ExtrasScriptsRead(ctx context.Context, request operations.ExtrasSc
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -11303,7 +11432,7 @@ func (s *SDK) ExtrasScriptsRead(ctx context.Context, request operations.ExtrasSc
 }
 
 func (s *SDK) ExtrasTagsCreate(ctx context.Context, request operations.ExtrasTagsCreateRequest) (*operations.ExtrasTagsCreateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/extras/tags/"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -11321,7 +11450,7 @@ func (s *SDK) ExtrasTagsCreate(ctx context.Context, request operations.ExtrasTag
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -11352,7 +11481,7 @@ func (s *SDK) ExtrasTagsCreate(ctx context.Context, request operations.ExtrasTag
 }
 
 func (s *SDK) ExtrasTagsDelete(ctx context.Context, request operations.ExtrasTagsDeleteRequest) (*operations.ExtrasTagsDeleteResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/extras/tags/{id}/", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -11360,7 +11489,7 @@ func (s *SDK) ExtrasTagsDelete(ctx context.Context, request operations.ExtrasTag
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -11381,8 +11510,9 @@ func (s *SDK) ExtrasTagsDelete(ctx context.Context, request operations.ExtrasTag
 	return res, nil
 }
 
+// ExtrasTagsList - Call to super to allow for caching
 func (s *SDK) ExtrasTagsList(ctx context.Context, request operations.ExtrasTagsListRequest) (*operations.ExtrasTagsListResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/extras/tags/"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -11392,7 +11522,7 @@ func (s *SDK) ExtrasTagsList(ctx context.Context, request operations.ExtrasTagsL
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -11423,7 +11553,7 @@ func (s *SDK) ExtrasTagsList(ctx context.Context, request operations.ExtrasTagsL
 }
 
 func (s *SDK) ExtrasTagsPartialUpdate(ctx context.Context, request operations.ExtrasTagsPartialUpdateRequest) (*operations.ExtrasTagsPartialUpdateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/extras/tags/{id}/", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -11441,7 +11571,7 @@ func (s *SDK) ExtrasTagsPartialUpdate(ctx context.Context, request operations.Ex
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -11471,8 +11601,9 @@ func (s *SDK) ExtrasTagsPartialUpdate(ctx context.Context, request operations.Ex
 	return res, nil
 }
 
+// ExtrasTagsRead - Call to super to allow for caching
 func (s *SDK) ExtrasTagsRead(ctx context.Context, request operations.ExtrasTagsReadRequest) (*operations.ExtrasTagsReadResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/extras/tags/{id}/", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -11480,7 +11611,7 @@ func (s *SDK) ExtrasTagsRead(ctx context.Context, request operations.ExtrasTagsR
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -11511,7 +11642,7 @@ func (s *SDK) ExtrasTagsRead(ctx context.Context, request operations.ExtrasTagsR
 }
 
 func (s *SDK) ExtrasTagsUpdate(ctx context.Context, request operations.ExtrasTagsUpdateRequest) (*operations.ExtrasTagsUpdateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/extras/tags/{id}/", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -11529,7 +11660,7 @@ func (s *SDK) ExtrasTagsUpdate(ctx context.Context, request operations.ExtrasTag
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -11560,7 +11691,7 @@ func (s *SDK) ExtrasTagsUpdate(ctx context.Context, request operations.ExtrasTag
 }
 
 func (s *SDK) IpamAggregatesCreate(ctx context.Context, request operations.IpamAggregatesCreateRequest) (*operations.IpamAggregatesCreateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/ipam/aggregates/"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -11578,7 +11709,7 @@ func (s *SDK) IpamAggregatesCreate(ctx context.Context, request operations.IpamA
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -11609,7 +11740,7 @@ func (s *SDK) IpamAggregatesCreate(ctx context.Context, request operations.IpamA
 }
 
 func (s *SDK) IpamAggregatesDelete(ctx context.Context, request operations.IpamAggregatesDeleteRequest) (*operations.IpamAggregatesDeleteResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/ipam/aggregates/{id}/", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -11617,7 +11748,7 @@ func (s *SDK) IpamAggregatesDelete(ctx context.Context, request operations.IpamA
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -11638,8 +11769,9 @@ func (s *SDK) IpamAggregatesDelete(ctx context.Context, request operations.IpamA
 	return res, nil
 }
 
+// IpamAggregatesList - Call to super to allow for caching
 func (s *SDK) IpamAggregatesList(ctx context.Context, request operations.IpamAggregatesListRequest) (*operations.IpamAggregatesListResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/ipam/aggregates/"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -11649,7 +11781,7 @@ func (s *SDK) IpamAggregatesList(ctx context.Context, request operations.IpamAgg
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -11680,7 +11812,7 @@ func (s *SDK) IpamAggregatesList(ctx context.Context, request operations.IpamAgg
 }
 
 func (s *SDK) IpamAggregatesPartialUpdate(ctx context.Context, request operations.IpamAggregatesPartialUpdateRequest) (*operations.IpamAggregatesPartialUpdateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/ipam/aggregates/{id}/", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -11698,7 +11830,7 @@ func (s *SDK) IpamAggregatesPartialUpdate(ctx context.Context, request operation
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -11728,8 +11860,9 @@ func (s *SDK) IpamAggregatesPartialUpdate(ctx context.Context, request operation
 	return res, nil
 }
 
+// IpamAggregatesRead - Call to super to allow for caching
 func (s *SDK) IpamAggregatesRead(ctx context.Context, request operations.IpamAggregatesReadRequest) (*operations.IpamAggregatesReadResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/ipam/aggregates/{id}/", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -11737,7 +11870,7 @@ func (s *SDK) IpamAggregatesRead(ctx context.Context, request operations.IpamAgg
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -11768,7 +11901,7 @@ func (s *SDK) IpamAggregatesRead(ctx context.Context, request operations.IpamAgg
 }
 
 func (s *SDK) IpamAggregatesUpdate(ctx context.Context, request operations.IpamAggregatesUpdateRequest) (*operations.IpamAggregatesUpdateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/ipam/aggregates/{id}/", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -11786,7 +11919,7 @@ func (s *SDK) IpamAggregatesUpdate(ctx context.Context, request operations.IpamA
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -11817,7 +11950,7 @@ func (s *SDK) IpamAggregatesUpdate(ctx context.Context, request operations.IpamA
 }
 
 func (s *SDK) IpamIPAddressesCreate(ctx context.Context, request operations.IpamIPAddressesCreateRequest) (*operations.IpamIPAddressesCreateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/ipam/ip-addresses/"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -11835,7 +11968,7 @@ func (s *SDK) IpamIPAddressesCreate(ctx context.Context, request operations.Ipam
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -11866,7 +11999,7 @@ func (s *SDK) IpamIPAddressesCreate(ctx context.Context, request operations.Ipam
 }
 
 func (s *SDK) IpamIPAddressesDelete(ctx context.Context, request operations.IpamIPAddressesDeleteRequest) (*operations.IpamIPAddressesDeleteResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/ipam/ip-addresses/{id}/", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -11874,7 +12007,7 @@ func (s *SDK) IpamIPAddressesDelete(ctx context.Context, request operations.Ipam
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -11895,8 +12028,9 @@ func (s *SDK) IpamIPAddressesDelete(ctx context.Context, request operations.Ipam
 	return res, nil
 }
 
+// IpamIPAddressesList - Call to super to allow for caching
 func (s *SDK) IpamIPAddressesList(ctx context.Context, request operations.IpamIPAddressesListRequest) (*operations.IpamIPAddressesListResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/ipam/ip-addresses/"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -11906,7 +12040,7 @@ func (s *SDK) IpamIPAddressesList(ctx context.Context, request operations.IpamIP
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -11937,7 +12071,7 @@ func (s *SDK) IpamIPAddressesList(ctx context.Context, request operations.IpamIP
 }
 
 func (s *SDK) IpamIPAddressesPartialUpdate(ctx context.Context, request operations.IpamIPAddressesPartialUpdateRequest) (*operations.IpamIPAddressesPartialUpdateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/ipam/ip-addresses/{id}/", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -11955,7 +12089,7 @@ func (s *SDK) IpamIPAddressesPartialUpdate(ctx context.Context, request operatio
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -11985,8 +12119,9 @@ func (s *SDK) IpamIPAddressesPartialUpdate(ctx context.Context, request operatio
 	return res, nil
 }
 
+// IpamIPAddressesRead - Call to super to allow for caching
 func (s *SDK) IpamIPAddressesRead(ctx context.Context, request operations.IpamIPAddressesReadRequest) (*operations.IpamIPAddressesReadResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/ipam/ip-addresses/{id}/", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -11994,7 +12129,7 @@ func (s *SDK) IpamIPAddressesRead(ctx context.Context, request operations.IpamIP
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -12025,7 +12160,7 @@ func (s *SDK) IpamIPAddressesRead(ctx context.Context, request operations.IpamIP
 }
 
 func (s *SDK) IpamIPAddressesUpdate(ctx context.Context, request operations.IpamIPAddressesUpdateRequest) (*operations.IpamIPAddressesUpdateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/ipam/ip-addresses/{id}/", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -12043,7 +12178,7 @@ func (s *SDK) IpamIPAddressesUpdate(ctx context.Context, request operations.Ipam
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -12073,26 +12208,22 @@ func (s *SDK) IpamIPAddressesUpdate(ctx context.Context, request operations.Ipam
 	return res, nil
 }
 
+// IpamPrefixesAvailableIpsCreate - A convenience method for returning available IP addresses within a prefix. By default, the number of IPs
+// returned will be equivalent to PAGINATE_COUNT. An arbitrary limit (up to MAX_PAGE_SIZE, if set) may be passed,
+// however results will not be paginated.
+//
+// The advisory lock decorator uses a PostgreSQL advisory lock to prevent this API from being
+// invoked in parallel, which results in a race condition where multiple insertions can occur.
 func (s *SDK) IpamPrefixesAvailableIpsCreate(ctx context.Context, request operations.IpamPrefixesAvailableIpsCreateRequest) (*operations.IpamPrefixesAvailableIpsCreateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/ipam/prefixes/{id}/available-ips/", request.PathParams)
 
-	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
-	if err != nil {
-		return nil, fmt.Errorf("error serializing request body: %w", err)
-	}
-	if bodyReader == nil {
-		return nil, fmt.Errorf("request body is required")
-	}
-
-	req, err := http.NewRequestWithContext(ctx, "POST", url, bodyReader)
+	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	req.Header.Set("Content-Type", reqContentType)
-
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -12122,8 +12253,14 @@ func (s *SDK) IpamPrefixesAvailableIpsCreate(ctx context.Context, request operat
 	return res, nil
 }
 
+// IpamPrefixesAvailableIpsRead - A convenience method for returning available IP addresses within a prefix. By default, the number of IPs
+// returned will be equivalent to PAGINATE_COUNT. An arbitrary limit (up to MAX_PAGE_SIZE, if set) may be passed,
+// however results will not be paginated.
+//
+// The advisory lock decorator uses a PostgreSQL advisory lock to prevent this API from being
+// invoked in parallel, which results in a race condition where multiple insertions can occur.
 func (s *SDK) IpamPrefixesAvailableIpsRead(ctx context.Context, request operations.IpamPrefixesAvailableIpsReadRequest) (*operations.IpamPrefixesAvailableIpsReadResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/ipam/prefixes/{id}/available-ips/", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -12131,7 +12268,7 @@ func (s *SDK) IpamPrefixesAvailableIpsRead(ctx context.Context, request operatio
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -12161,8 +12298,11 @@ func (s *SDK) IpamPrefixesAvailableIpsRead(ctx context.Context, request operatio
 	return res, nil
 }
 
+// IpamPrefixesAvailablePrefixesCreate - A convenience method for returning available child prefixes within a parent.
+// The advisory lock decorator uses a PostgreSQL advisory lock to prevent this API from being
+// invoked in parallel, which results in a race condition where multiple insertions can occur.
 func (s *SDK) IpamPrefixesAvailablePrefixesCreate(ctx context.Context, request operations.IpamPrefixesAvailablePrefixesCreateRequest) (*operations.IpamPrefixesAvailablePrefixesCreateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/ipam/prefixes/{id}/available-prefixes/", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -12180,7 +12320,7 @@ func (s *SDK) IpamPrefixesAvailablePrefixesCreate(ctx context.Context, request o
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -12210,8 +12350,11 @@ func (s *SDK) IpamPrefixesAvailablePrefixesCreate(ctx context.Context, request o
 	return res, nil
 }
 
+// IpamPrefixesAvailablePrefixesRead - A convenience method for returning available child prefixes within a parent.
+// The advisory lock decorator uses a PostgreSQL advisory lock to prevent this API from being
+// invoked in parallel, which results in a race condition where multiple insertions can occur.
 func (s *SDK) IpamPrefixesAvailablePrefixesRead(ctx context.Context, request operations.IpamPrefixesAvailablePrefixesReadRequest) (*operations.IpamPrefixesAvailablePrefixesReadResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/ipam/prefixes/{id}/available-prefixes/", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -12219,7 +12362,7 @@ func (s *SDK) IpamPrefixesAvailablePrefixesRead(ctx context.Context, request ope
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -12250,7 +12393,7 @@ func (s *SDK) IpamPrefixesAvailablePrefixesRead(ctx context.Context, request ope
 }
 
 func (s *SDK) IpamPrefixesCreate(ctx context.Context, request operations.IpamPrefixesCreateRequest) (*operations.IpamPrefixesCreateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/ipam/prefixes/"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -12268,7 +12411,7 @@ func (s *SDK) IpamPrefixesCreate(ctx context.Context, request operations.IpamPre
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -12299,7 +12442,7 @@ func (s *SDK) IpamPrefixesCreate(ctx context.Context, request operations.IpamPre
 }
 
 func (s *SDK) IpamPrefixesDelete(ctx context.Context, request operations.IpamPrefixesDeleteRequest) (*operations.IpamPrefixesDeleteResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/ipam/prefixes/{id}/", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -12307,7 +12450,7 @@ func (s *SDK) IpamPrefixesDelete(ctx context.Context, request operations.IpamPre
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -12328,8 +12471,9 @@ func (s *SDK) IpamPrefixesDelete(ctx context.Context, request operations.IpamPre
 	return res, nil
 }
 
+// IpamPrefixesList - Call to super to allow for caching
 func (s *SDK) IpamPrefixesList(ctx context.Context, request operations.IpamPrefixesListRequest) (*operations.IpamPrefixesListResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/ipam/prefixes/"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -12339,7 +12483,7 @@ func (s *SDK) IpamPrefixesList(ctx context.Context, request operations.IpamPrefi
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -12370,7 +12514,7 @@ func (s *SDK) IpamPrefixesList(ctx context.Context, request operations.IpamPrefi
 }
 
 func (s *SDK) IpamPrefixesPartialUpdate(ctx context.Context, request operations.IpamPrefixesPartialUpdateRequest) (*operations.IpamPrefixesPartialUpdateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/ipam/prefixes/{id}/", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -12388,7 +12532,7 @@ func (s *SDK) IpamPrefixesPartialUpdate(ctx context.Context, request operations.
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -12418,8 +12562,9 @@ func (s *SDK) IpamPrefixesPartialUpdate(ctx context.Context, request operations.
 	return res, nil
 }
 
+// IpamPrefixesRead - Call to super to allow for caching
 func (s *SDK) IpamPrefixesRead(ctx context.Context, request operations.IpamPrefixesReadRequest) (*operations.IpamPrefixesReadResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/ipam/prefixes/{id}/", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -12427,7 +12572,7 @@ func (s *SDK) IpamPrefixesRead(ctx context.Context, request operations.IpamPrefi
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -12458,7 +12603,7 @@ func (s *SDK) IpamPrefixesRead(ctx context.Context, request operations.IpamPrefi
 }
 
 func (s *SDK) IpamPrefixesUpdate(ctx context.Context, request operations.IpamPrefixesUpdateRequest) (*operations.IpamPrefixesUpdateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/ipam/prefixes/{id}/", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -12476,7 +12621,7 @@ func (s *SDK) IpamPrefixesUpdate(ctx context.Context, request operations.IpamPre
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -12507,7 +12652,7 @@ func (s *SDK) IpamPrefixesUpdate(ctx context.Context, request operations.IpamPre
 }
 
 func (s *SDK) IpamRirsCreate(ctx context.Context, request operations.IpamRirsCreateRequest) (*operations.IpamRirsCreateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/ipam/rirs/"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -12525,7 +12670,7 @@ func (s *SDK) IpamRirsCreate(ctx context.Context, request operations.IpamRirsCre
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -12556,7 +12701,7 @@ func (s *SDK) IpamRirsCreate(ctx context.Context, request operations.IpamRirsCre
 }
 
 func (s *SDK) IpamRirsDelete(ctx context.Context, request operations.IpamRirsDeleteRequest) (*operations.IpamRirsDeleteResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/ipam/rirs/{id}/", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -12564,7 +12709,7 @@ func (s *SDK) IpamRirsDelete(ctx context.Context, request operations.IpamRirsDel
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -12585,8 +12730,9 @@ func (s *SDK) IpamRirsDelete(ctx context.Context, request operations.IpamRirsDel
 	return res, nil
 }
 
+// IpamRirsList - Call to super to allow for caching
 func (s *SDK) IpamRirsList(ctx context.Context, request operations.IpamRirsListRequest) (*operations.IpamRirsListResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/ipam/rirs/"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -12596,7 +12742,7 @@ func (s *SDK) IpamRirsList(ctx context.Context, request operations.IpamRirsListR
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -12627,7 +12773,7 @@ func (s *SDK) IpamRirsList(ctx context.Context, request operations.IpamRirsListR
 }
 
 func (s *SDK) IpamRirsPartialUpdate(ctx context.Context, request operations.IpamRirsPartialUpdateRequest) (*operations.IpamRirsPartialUpdateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/ipam/rirs/{id}/", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -12645,7 +12791,7 @@ func (s *SDK) IpamRirsPartialUpdate(ctx context.Context, request operations.Ipam
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -12675,8 +12821,9 @@ func (s *SDK) IpamRirsPartialUpdate(ctx context.Context, request operations.Ipam
 	return res, nil
 }
 
+// IpamRirsRead - Call to super to allow for caching
 func (s *SDK) IpamRirsRead(ctx context.Context, request operations.IpamRirsReadRequest) (*operations.IpamRirsReadResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/ipam/rirs/{id}/", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -12684,7 +12831,7 @@ func (s *SDK) IpamRirsRead(ctx context.Context, request operations.IpamRirsReadR
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -12715,7 +12862,7 @@ func (s *SDK) IpamRirsRead(ctx context.Context, request operations.IpamRirsReadR
 }
 
 func (s *SDK) IpamRirsUpdate(ctx context.Context, request operations.IpamRirsUpdateRequest) (*operations.IpamRirsUpdateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/ipam/rirs/{id}/", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -12733,7 +12880,7 @@ func (s *SDK) IpamRirsUpdate(ctx context.Context, request operations.IpamRirsUpd
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -12764,7 +12911,7 @@ func (s *SDK) IpamRirsUpdate(ctx context.Context, request operations.IpamRirsUpd
 }
 
 func (s *SDK) IpamRolesCreate(ctx context.Context, request operations.IpamRolesCreateRequest) (*operations.IpamRolesCreateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/ipam/roles/"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -12782,7 +12929,7 @@ func (s *SDK) IpamRolesCreate(ctx context.Context, request operations.IpamRolesC
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -12813,7 +12960,7 @@ func (s *SDK) IpamRolesCreate(ctx context.Context, request operations.IpamRolesC
 }
 
 func (s *SDK) IpamRolesDelete(ctx context.Context, request operations.IpamRolesDeleteRequest) (*operations.IpamRolesDeleteResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/ipam/roles/{id}/", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -12821,7 +12968,7 @@ func (s *SDK) IpamRolesDelete(ctx context.Context, request operations.IpamRolesD
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -12842,8 +12989,9 @@ func (s *SDK) IpamRolesDelete(ctx context.Context, request operations.IpamRolesD
 	return res, nil
 }
 
+// IpamRolesList - Call to super to allow for caching
 func (s *SDK) IpamRolesList(ctx context.Context, request operations.IpamRolesListRequest) (*operations.IpamRolesListResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/ipam/roles/"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -12853,7 +13001,7 @@ func (s *SDK) IpamRolesList(ctx context.Context, request operations.IpamRolesLis
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -12884,7 +13032,7 @@ func (s *SDK) IpamRolesList(ctx context.Context, request operations.IpamRolesLis
 }
 
 func (s *SDK) IpamRolesPartialUpdate(ctx context.Context, request operations.IpamRolesPartialUpdateRequest) (*operations.IpamRolesPartialUpdateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/ipam/roles/{id}/", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -12902,7 +13050,7 @@ func (s *SDK) IpamRolesPartialUpdate(ctx context.Context, request operations.Ipa
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -12932,8 +13080,9 @@ func (s *SDK) IpamRolesPartialUpdate(ctx context.Context, request operations.Ipa
 	return res, nil
 }
 
+// IpamRolesRead - Call to super to allow for caching
 func (s *SDK) IpamRolesRead(ctx context.Context, request operations.IpamRolesReadRequest) (*operations.IpamRolesReadResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/ipam/roles/{id}/", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -12941,7 +13090,7 @@ func (s *SDK) IpamRolesRead(ctx context.Context, request operations.IpamRolesRea
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -12972,7 +13121,7 @@ func (s *SDK) IpamRolesRead(ctx context.Context, request operations.IpamRolesRea
 }
 
 func (s *SDK) IpamRolesUpdate(ctx context.Context, request operations.IpamRolesUpdateRequest) (*operations.IpamRolesUpdateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/ipam/roles/{id}/", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -12990,7 +13139,7 @@ func (s *SDK) IpamRolesUpdate(ctx context.Context, request operations.IpamRolesU
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -13021,7 +13170,7 @@ func (s *SDK) IpamRolesUpdate(ctx context.Context, request operations.IpamRolesU
 }
 
 func (s *SDK) IpamServicesCreate(ctx context.Context, request operations.IpamServicesCreateRequest) (*operations.IpamServicesCreateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/ipam/services/"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -13039,7 +13188,7 @@ func (s *SDK) IpamServicesCreate(ctx context.Context, request operations.IpamSer
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -13070,7 +13219,7 @@ func (s *SDK) IpamServicesCreate(ctx context.Context, request operations.IpamSer
 }
 
 func (s *SDK) IpamServicesDelete(ctx context.Context, request operations.IpamServicesDeleteRequest) (*operations.IpamServicesDeleteResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/ipam/services/{id}/", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -13078,7 +13227,7 @@ func (s *SDK) IpamServicesDelete(ctx context.Context, request operations.IpamSer
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -13099,8 +13248,9 @@ func (s *SDK) IpamServicesDelete(ctx context.Context, request operations.IpamSer
 	return res, nil
 }
 
+// IpamServicesList - Call to super to allow for caching
 func (s *SDK) IpamServicesList(ctx context.Context, request operations.IpamServicesListRequest) (*operations.IpamServicesListResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/ipam/services/"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -13110,7 +13260,7 @@ func (s *SDK) IpamServicesList(ctx context.Context, request operations.IpamServi
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -13141,7 +13291,7 @@ func (s *SDK) IpamServicesList(ctx context.Context, request operations.IpamServi
 }
 
 func (s *SDK) IpamServicesPartialUpdate(ctx context.Context, request operations.IpamServicesPartialUpdateRequest) (*operations.IpamServicesPartialUpdateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/ipam/services/{id}/", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -13159,7 +13309,7 @@ func (s *SDK) IpamServicesPartialUpdate(ctx context.Context, request operations.
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -13189,8 +13339,9 @@ func (s *SDK) IpamServicesPartialUpdate(ctx context.Context, request operations.
 	return res, nil
 }
 
+// IpamServicesRead - Call to super to allow for caching
 func (s *SDK) IpamServicesRead(ctx context.Context, request operations.IpamServicesReadRequest) (*operations.IpamServicesReadResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/ipam/services/{id}/", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -13198,7 +13349,7 @@ func (s *SDK) IpamServicesRead(ctx context.Context, request operations.IpamServi
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -13229,7 +13380,7 @@ func (s *SDK) IpamServicesRead(ctx context.Context, request operations.IpamServi
 }
 
 func (s *SDK) IpamServicesUpdate(ctx context.Context, request operations.IpamServicesUpdateRequest) (*operations.IpamServicesUpdateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/ipam/services/{id}/", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -13247,7 +13398,7 @@ func (s *SDK) IpamServicesUpdate(ctx context.Context, request operations.IpamSer
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -13278,7 +13429,7 @@ func (s *SDK) IpamServicesUpdate(ctx context.Context, request operations.IpamSer
 }
 
 func (s *SDK) IpamVlanGroupsCreate(ctx context.Context, request operations.IpamVlanGroupsCreateRequest) (*operations.IpamVlanGroupsCreateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/ipam/vlan-groups/"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -13296,7 +13447,7 @@ func (s *SDK) IpamVlanGroupsCreate(ctx context.Context, request operations.IpamV
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -13327,7 +13478,7 @@ func (s *SDK) IpamVlanGroupsCreate(ctx context.Context, request operations.IpamV
 }
 
 func (s *SDK) IpamVlanGroupsDelete(ctx context.Context, request operations.IpamVlanGroupsDeleteRequest) (*operations.IpamVlanGroupsDeleteResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/ipam/vlan-groups/{id}/", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -13335,7 +13486,7 @@ func (s *SDK) IpamVlanGroupsDelete(ctx context.Context, request operations.IpamV
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -13356,8 +13507,9 @@ func (s *SDK) IpamVlanGroupsDelete(ctx context.Context, request operations.IpamV
 	return res, nil
 }
 
+// IpamVlanGroupsList - Call to super to allow for caching
 func (s *SDK) IpamVlanGroupsList(ctx context.Context, request operations.IpamVlanGroupsListRequest) (*operations.IpamVlanGroupsListResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/ipam/vlan-groups/"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -13367,7 +13519,7 @@ func (s *SDK) IpamVlanGroupsList(ctx context.Context, request operations.IpamVla
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -13398,7 +13550,7 @@ func (s *SDK) IpamVlanGroupsList(ctx context.Context, request operations.IpamVla
 }
 
 func (s *SDK) IpamVlanGroupsPartialUpdate(ctx context.Context, request operations.IpamVlanGroupsPartialUpdateRequest) (*operations.IpamVlanGroupsPartialUpdateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/ipam/vlan-groups/{id}/", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -13416,7 +13568,7 @@ func (s *SDK) IpamVlanGroupsPartialUpdate(ctx context.Context, request operation
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -13446,8 +13598,9 @@ func (s *SDK) IpamVlanGroupsPartialUpdate(ctx context.Context, request operation
 	return res, nil
 }
 
+// IpamVlanGroupsRead - Call to super to allow for caching
 func (s *SDK) IpamVlanGroupsRead(ctx context.Context, request operations.IpamVlanGroupsReadRequest) (*operations.IpamVlanGroupsReadResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/ipam/vlan-groups/{id}/", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -13455,7 +13608,7 @@ func (s *SDK) IpamVlanGroupsRead(ctx context.Context, request operations.IpamVla
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -13486,7 +13639,7 @@ func (s *SDK) IpamVlanGroupsRead(ctx context.Context, request operations.IpamVla
 }
 
 func (s *SDK) IpamVlanGroupsUpdate(ctx context.Context, request operations.IpamVlanGroupsUpdateRequest) (*operations.IpamVlanGroupsUpdateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/ipam/vlan-groups/{id}/", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -13504,7 +13657,7 @@ func (s *SDK) IpamVlanGroupsUpdate(ctx context.Context, request operations.IpamV
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -13535,7 +13688,7 @@ func (s *SDK) IpamVlanGroupsUpdate(ctx context.Context, request operations.IpamV
 }
 
 func (s *SDK) IpamVlansCreate(ctx context.Context, request operations.IpamVlansCreateRequest) (*operations.IpamVlansCreateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/ipam/vlans/"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -13553,7 +13706,7 @@ func (s *SDK) IpamVlansCreate(ctx context.Context, request operations.IpamVlansC
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -13584,7 +13737,7 @@ func (s *SDK) IpamVlansCreate(ctx context.Context, request operations.IpamVlansC
 }
 
 func (s *SDK) IpamVlansDelete(ctx context.Context, request operations.IpamVlansDeleteRequest) (*operations.IpamVlansDeleteResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/ipam/vlans/{id}/", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -13592,7 +13745,7 @@ func (s *SDK) IpamVlansDelete(ctx context.Context, request operations.IpamVlansD
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -13613,8 +13766,9 @@ func (s *SDK) IpamVlansDelete(ctx context.Context, request operations.IpamVlansD
 	return res, nil
 }
 
+// IpamVlansList - Call to super to allow for caching
 func (s *SDK) IpamVlansList(ctx context.Context, request operations.IpamVlansListRequest) (*operations.IpamVlansListResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/ipam/vlans/"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -13624,7 +13778,7 @@ func (s *SDK) IpamVlansList(ctx context.Context, request operations.IpamVlansLis
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -13655,7 +13809,7 @@ func (s *SDK) IpamVlansList(ctx context.Context, request operations.IpamVlansLis
 }
 
 func (s *SDK) IpamVlansPartialUpdate(ctx context.Context, request operations.IpamVlansPartialUpdateRequest) (*operations.IpamVlansPartialUpdateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/ipam/vlans/{id}/", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -13673,7 +13827,7 @@ func (s *SDK) IpamVlansPartialUpdate(ctx context.Context, request operations.Ipa
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -13703,8 +13857,9 @@ func (s *SDK) IpamVlansPartialUpdate(ctx context.Context, request operations.Ipa
 	return res, nil
 }
 
+// IpamVlansRead - Call to super to allow for caching
 func (s *SDK) IpamVlansRead(ctx context.Context, request operations.IpamVlansReadRequest) (*operations.IpamVlansReadResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/ipam/vlans/{id}/", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -13712,7 +13867,7 @@ func (s *SDK) IpamVlansRead(ctx context.Context, request operations.IpamVlansRea
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -13743,7 +13898,7 @@ func (s *SDK) IpamVlansRead(ctx context.Context, request operations.IpamVlansRea
 }
 
 func (s *SDK) IpamVlansUpdate(ctx context.Context, request operations.IpamVlansUpdateRequest) (*operations.IpamVlansUpdateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/ipam/vlans/{id}/", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -13761,7 +13916,7 @@ func (s *SDK) IpamVlansUpdate(ctx context.Context, request operations.IpamVlansU
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -13792,7 +13947,7 @@ func (s *SDK) IpamVlansUpdate(ctx context.Context, request operations.IpamVlansU
 }
 
 func (s *SDK) IpamVrfsCreate(ctx context.Context, request operations.IpamVrfsCreateRequest) (*operations.IpamVrfsCreateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/ipam/vrfs/"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -13810,7 +13965,7 @@ func (s *SDK) IpamVrfsCreate(ctx context.Context, request operations.IpamVrfsCre
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -13841,7 +13996,7 @@ func (s *SDK) IpamVrfsCreate(ctx context.Context, request operations.IpamVrfsCre
 }
 
 func (s *SDK) IpamVrfsDelete(ctx context.Context, request operations.IpamVrfsDeleteRequest) (*operations.IpamVrfsDeleteResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/ipam/vrfs/{id}/", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -13849,7 +14004,7 @@ func (s *SDK) IpamVrfsDelete(ctx context.Context, request operations.IpamVrfsDel
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -13870,8 +14025,9 @@ func (s *SDK) IpamVrfsDelete(ctx context.Context, request operations.IpamVrfsDel
 	return res, nil
 }
 
+// IpamVrfsList - Call to super to allow for caching
 func (s *SDK) IpamVrfsList(ctx context.Context, request operations.IpamVrfsListRequest) (*operations.IpamVrfsListResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/ipam/vrfs/"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -13881,7 +14037,7 @@ func (s *SDK) IpamVrfsList(ctx context.Context, request operations.IpamVrfsListR
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -13912,7 +14068,7 @@ func (s *SDK) IpamVrfsList(ctx context.Context, request operations.IpamVrfsListR
 }
 
 func (s *SDK) IpamVrfsPartialUpdate(ctx context.Context, request operations.IpamVrfsPartialUpdateRequest) (*operations.IpamVrfsPartialUpdateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/ipam/vrfs/{id}/", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -13930,7 +14086,7 @@ func (s *SDK) IpamVrfsPartialUpdate(ctx context.Context, request operations.Ipam
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -13960,8 +14116,9 @@ func (s *SDK) IpamVrfsPartialUpdate(ctx context.Context, request operations.Ipam
 	return res, nil
 }
 
+// IpamVrfsRead - Call to super to allow for caching
 func (s *SDK) IpamVrfsRead(ctx context.Context, request operations.IpamVrfsReadRequest) (*operations.IpamVrfsReadResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/ipam/vrfs/{id}/", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -13969,7 +14126,7 @@ func (s *SDK) IpamVrfsRead(ctx context.Context, request operations.IpamVrfsReadR
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -14000,7 +14157,7 @@ func (s *SDK) IpamVrfsRead(ctx context.Context, request operations.IpamVrfsReadR
 }
 
 func (s *SDK) IpamVrfsUpdate(ctx context.Context, request operations.IpamVrfsUpdateRequest) (*operations.IpamVrfsUpdateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/ipam/vrfs/{id}/", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -14018,7 +14175,7 @@ func (s *SDK) IpamVrfsUpdate(ctx context.Context, request operations.IpamVrfsUpd
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -14048,8 +14205,14 @@ func (s *SDK) IpamVrfsUpdate(ctx context.Context, request operations.IpamVrfsUpd
 	return res, nil
 }
 
+// SecretsGenerateRsaKeyPairList - This endpoint can be used to generate a new RSA key pair. The keys are returned in PEM format.
+//
+//	{
+//	        "public_key": "<public key>",
+//	        "private_key": "<private key>"
+//	    }
 func (s *SDK) SecretsGenerateRsaKeyPairList(ctx context.Context) (*operations.SecretsGenerateRsaKeyPairListResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/secrets/generate-rsa-key-pair/"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -14057,7 +14220,7 @@ func (s *SDK) SecretsGenerateRsaKeyPairList(ctx context.Context) (*operations.Se
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -14078,8 +14241,22 @@ func (s *SDK) SecretsGenerateRsaKeyPairList(ctx context.Context) (*operations.Se
 	return res, nil
 }
 
+// SecretsGetSessionKeyCreate - Retrieve a temporary session key to use for encrypting and decrypting secrets via the API. The user's private RSA
+// key is POSTed with the name `private_key`. An example:
+//
+//	curl -v -X POST -H "Authorization: Token <token>" -H "Accept: application/json; indent=4" \
+//	--data-urlencode "private_key@<filename>" https://netbox/api/secrets/get-session-key/
+//
+// This request will yield a base64-encoded session key to be included in an `X-Session-Key` header in future requests:
+//
+//	{
+//	    "session_key": "+8t4SI6XikgVmB5+/urhozx9O5qCQANyOk1MNe6taRf="
+//	}
+//
+// This endpoint accepts one optional parameter: `preserve_key`. If True and a session key exists, the existing session
+// key will be returned instead of a new one.
 func (s *SDK) SecretsGetSessionKeyCreate(ctx context.Context) (*operations.SecretsGetSessionKeyCreateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/secrets/get-session-key/"
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -14087,7 +14264,7 @@ func (s *SDK) SecretsGetSessionKeyCreate(ctx context.Context) (*operations.Secre
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -14109,7 +14286,7 @@ func (s *SDK) SecretsGetSessionKeyCreate(ctx context.Context) (*operations.Secre
 }
 
 func (s *SDK) SecretsSecretRolesCreate(ctx context.Context, request operations.SecretsSecretRolesCreateRequest) (*operations.SecretsSecretRolesCreateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/secrets/secret-roles/"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -14127,7 +14304,7 @@ func (s *SDK) SecretsSecretRolesCreate(ctx context.Context, request operations.S
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -14158,7 +14335,7 @@ func (s *SDK) SecretsSecretRolesCreate(ctx context.Context, request operations.S
 }
 
 func (s *SDK) SecretsSecretRolesDelete(ctx context.Context, request operations.SecretsSecretRolesDeleteRequest) (*operations.SecretsSecretRolesDeleteResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/secrets/secret-roles/{id}/", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -14166,7 +14343,7 @@ func (s *SDK) SecretsSecretRolesDelete(ctx context.Context, request operations.S
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -14187,8 +14364,9 @@ func (s *SDK) SecretsSecretRolesDelete(ctx context.Context, request operations.S
 	return res, nil
 }
 
+// SecretsSecretRolesList - Call to super to allow for caching
 func (s *SDK) SecretsSecretRolesList(ctx context.Context, request operations.SecretsSecretRolesListRequest) (*operations.SecretsSecretRolesListResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/secrets/secret-roles/"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -14198,7 +14376,7 @@ func (s *SDK) SecretsSecretRolesList(ctx context.Context, request operations.Sec
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -14229,7 +14407,7 @@ func (s *SDK) SecretsSecretRolesList(ctx context.Context, request operations.Sec
 }
 
 func (s *SDK) SecretsSecretRolesPartialUpdate(ctx context.Context, request operations.SecretsSecretRolesPartialUpdateRequest) (*operations.SecretsSecretRolesPartialUpdateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/secrets/secret-roles/{id}/", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -14247,7 +14425,7 @@ func (s *SDK) SecretsSecretRolesPartialUpdate(ctx context.Context, request opera
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -14277,8 +14455,9 @@ func (s *SDK) SecretsSecretRolesPartialUpdate(ctx context.Context, request opera
 	return res, nil
 }
 
+// SecretsSecretRolesRead - Call to super to allow for caching
 func (s *SDK) SecretsSecretRolesRead(ctx context.Context, request operations.SecretsSecretRolesReadRequest) (*operations.SecretsSecretRolesReadResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/secrets/secret-roles/{id}/", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -14286,7 +14465,7 @@ func (s *SDK) SecretsSecretRolesRead(ctx context.Context, request operations.Sec
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -14317,7 +14496,7 @@ func (s *SDK) SecretsSecretRolesRead(ctx context.Context, request operations.Sec
 }
 
 func (s *SDK) SecretsSecretRolesUpdate(ctx context.Context, request operations.SecretsSecretRolesUpdateRequest) (*operations.SecretsSecretRolesUpdateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/secrets/secret-roles/{id}/", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -14335,7 +14514,7 @@ func (s *SDK) SecretsSecretRolesUpdate(ctx context.Context, request operations.S
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -14366,7 +14545,7 @@ func (s *SDK) SecretsSecretRolesUpdate(ctx context.Context, request operations.S
 }
 
 func (s *SDK) SecretsSecretsCreate(ctx context.Context, request operations.SecretsSecretsCreateRequest) (*operations.SecretsSecretsCreateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/secrets/secrets/"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -14384,7 +14563,7 @@ func (s *SDK) SecretsSecretsCreate(ctx context.Context, request operations.Secre
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -14415,7 +14594,7 @@ func (s *SDK) SecretsSecretsCreate(ctx context.Context, request operations.Secre
 }
 
 func (s *SDK) SecretsSecretsDelete(ctx context.Context, request operations.SecretsSecretsDeleteRequest) (*operations.SecretsSecretsDeleteResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/secrets/secrets/{id}/", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -14423,7 +14602,7 @@ func (s *SDK) SecretsSecretsDelete(ctx context.Context, request operations.Secre
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -14445,7 +14624,7 @@ func (s *SDK) SecretsSecretsDelete(ctx context.Context, request operations.Secre
 }
 
 func (s *SDK) SecretsSecretsList(ctx context.Context, request operations.SecretsSecretsListRequest) (*operations.SecretsSecretsListResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/secrets/secrets/"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -14455,7 +14634,7 @@ func (s *SDK) SecretsSecretsList(ctx context.Context, request operations.Secrets
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -14486,7 +14665,7 @@ func (s *SDK) SecretsSecretsList(ctx context.Context, request operations.Secrets
 }
 
 func (s *SDK) SecretsSecretsPartialUpdate(ctx context.Context, request operations.SecretsSecretsPartialUpdateRequest) (*operations.SecretsSecretsPartialUpdateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/secrets/secrets/{id}/", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -14504,7 +14683,7 @@ func (s *SDK) SecretsSecretsPartialUpdate(ctx context.Context, request operation
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -14535,7 +14714,7 @@ func (s *SDK) SecretsSecretsPartialUpdate(ctx context.Context, request operation
 }
 
 func (s *SDK) SecretsSecretsRead(ctx context.Context, request operations.SecretsSecretsReadRequest) (*operations.SecretsSecretsReadResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/secrets/secrets/{id}/", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -14543,7 +14722,7 @@ func (s *SDK) SecretsSecretsRead(ctx context.Context, request operations.Secrets
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -14574,7 +14753,7 @@ func (s *SDK) SecretsSecretsRead(ctx context.Context, request operations.Secrets
 }
 
 func (s *SDK) SecretsSecretsUpdate(ctx context.Context, request operations.SecretsSecretsUpdateRequest) (*operations.SecretsSecretsUpdateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/secrets/secrets/{id}/", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -14592,7 +14771,7 @@ func (s *SDK) SecretsSecretsUpdate(ctx context.Context, request operations.Secre
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -14623,7 +14802,7 @@ func (s *SDK) SecretsSecretsUpdate(ctx context.Context, request operations.Secre
 }
 
 func (s *SDK) TenancyTenantGroupsCreate(ctx context.Context, request operations.TenancyTenantGroupsCreateRequest) (*operations.TenancyTenantGroupsCreateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/tenancy/tenant-groups/"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -14641,7 +14820,7 @@ func (s *SDK) TenancyTenantGroupsCreate(ctx context.Context, request operations.
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -14672,7 +14851,7 @@ func (s *SDK) TenancyTenantGroupsCreate(ctx context.Context, request operations.
 }
 
 func (s *SDK) TenancyTenantGroupsDelete(ctx context.Context, request operations.TenancyTenantGroupsDeleteRequest) (*operations.TenancyTenantGroupsDeleteResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/tenancy/tenant-groups/{id}/", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -14680,7 +14859,7 @@ func (s *SDK) TenancyTenantGroupsDelete(ctx context.Context, request operations.
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -14701,8 +14880,9 @@ func (s *SDK) TenancyTenantGroupsDelete(ctx context.Context, request operations.
 	return res, nil
 }
 
+// TenancyTenantGroupsList - Call to super to allow for caching
 func (s *SDK) TenancyTenantGroupsList(ctx context.Context, request operations.TenancyTenantGroupsListRequest) (*operations.TenancyTenantGroupsListResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/tenancy/tenant-groups/"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -14712,7 +14892,7 @@ func (s *SDK) TenancyTenantGroupsList(ctx context.Context, request operations.Te
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -14743,7 +14923,7 @@ func (s *SDK) TenancyTenantGroupsList(ctx context.Context, request operations.Te
 }
 
 func (s *SDK) TenancyTenantGroupsPartialUpdate(ctx context.Context, request operations.TenancyTenantGroupsPartialUpdateRequest) (*operations.TenancyTenantGroupsPartialUpdateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/tenancy/tenant-groups/{id}/", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -14761,7 +14941,7 @@ func (s *SDK) TenancyTenantGroupsPartialUpdate(ctx context.Context, request oper
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -14791,8 +14971,9 @@ func (s *SDK) TenancyTenantGroupsPartialUpdate(ctx context.Context, request oper
 	return res, nil
 }
 
+// TenancyTenantGroupsRead - Call to super to allow for caching
 func (s *SDK) TenancyTenantGroupsRead(ctx context.Context, request operations.TenancyTenantGroupsReadRequest) (*operations.TenancyTenantGroupsReadResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/tenancy/tenant-groups/{id}/", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -14800,7 +14981,7 @@ func (s *SDK) TenancyTenantGroupsRead(ctx context.Context, request operations.Te
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -14831,7 +15012,7 @@ func (s *SDK) TenancyTenantGroupsRead(ctx context.Context, request operations.Te
 }
 
 func (s *SDK) TenancyTenantGroupsUpdate(ctx context.Context, request operations.TenancyTenantGroupsUpdateRequest) (*operations.TenancyTenantGroupsUpdateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/tenancy/tenant-groups/{id}/", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -14849,7 +15030,7 @@ func (s *SDK) TenancyTenantGroupsUpdate(ctx context.Context, request operations.
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -14880,7 +15061,7 @@ func (s *SDK) TenancyTenantGroupsUpdate(ctx context.Context, request operations.
 }
 
 func (s *SDK) TenancyTenantsCreate(ctx context.Context, request operations.TenancyTenantsCreateRequest) (*operations.TenancyTenantsCreateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/tenancy/tenants/"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -14898,7 +15079,7 @@ func (s *SDK) TenancyTenantsCreate(ctx context.Context, request operations.Tenan
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -14929,7 +15110,7 @@ func (s *SDK) TenancyTenantsCreate(ctx context.Context, request operations.Tenan
 }
 
 func (s *SDK) TenancyTenantsDelete(ctx context.Context, request operations.TenancyTenantsDeleteRequest) (*operations.TenancyTenantsDeleteResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/tenancy/tenants/{id}/", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -14937,7 +15118,7 @@ func (s *SDK) TenancyTenantsDelete(ctx context.Context, request operations.Tenan
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -14958,8 +15139,9 @@ func (s *SDK) TenancyTenantsDelete(ctx context.Context, request operations.Tenan
 	return res, nil
 }
 
+// TenancyTenantsList - Call to super to allow for caching
 func (s *SDK) TenancyTenantsList(ctx context.Context, request operations.TenancyTenantsListRequest) (*operations.TenancyTenantsListResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/tenancy/tenants/"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -14969,7 +15151,7 @@ func (s *SDK) TenancyTenantsList(ctx context.Context, request operations.Tenancy
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -15000,7 +15182,7 @@ func (s *SDK) TenancyTenantsList(ctx context.Context, request operations.Tenancy
 }
 
 func (s *SDK) TenancyTenantsPartialUpdate(ctx context.Context, request operations.TenancyTenantsPartialUpdateRequest) (*operations.TenancyTenantsPartialUpdateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/tenancy/tenants/{id}/", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -15018,7 +15200,7 @@ func (s *SDK) TenancyTenantsPartialUpdate(ctx context.Context, request operation
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -15048,8 +15230,9 @@ func (s *SDK) TenancyTenantsPartialUpdate(ctx context.Context, request operation
 	return res, nil
 }
 
+// TenancyTenantsRead - Call to super to allow for caching
 func (s *SDK) TenancyTenantsRead(ctx context.Context, request operations.TenancyTenantsReadRequest) (*operations.TenancyTenantsReadResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/tenancy/tenants/{id}/", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -15057,7 +15240,7 @@ func (s *SDK) TenancyTenantsRead(ctx context.Context, request operations.Tenancy
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -15088,7 +15271,7 @@ func (s *SDK) TenancyTenantsRead(ctx context.Context, request operations.Tenancy
 }
 
 func (s *SDK) TenancyTenantsUpdate(ctx context.Context, request operations.TenancyTenantsUpdateRequest) (*operations.TenancyTenantsUpdateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/tenancy/tenants/{id}/", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -15106,7 +15289,7 @@ func (s *SDK) TenancyTenantsUpdate(ctx context.Context, request operations.Tenan
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -15137,7 +15320,7 @@ func (s *SDK) TenancyTenantsUpdate(ctx context.Context, request operations.Tenan
 }
 
 func (s *SDK) VirtualizationClusterGroupsCreate(ctx context.Context, request operations.VirtualizationClusterGroupsCreateRequest) (*operations.VirtualizationClusterGroupsCreateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/virtualization/cluster-groups/"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -15155,7 +15338,7 @@ func (s *SDK) VirtualizationClusterGroupsCreate(ctx context.Context, request ope
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -15186,7 +15369,7 @@ func (s *SDK) VirtualizationClusterGroupsCreate(ctx context.Context, request ope
 }
 
 func (s *SDK) VirtualizationClusterGroupsDelete(ctx context.Context, request operations.VirtualizationClusterGroupsDeleteRequest) (*operations.VirtualizationClusterGroupsDeleteResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/virtualization/cluster-groups/{id}/", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -15194,7 +15377,7 @@ func (s *SDK) VirtualizationClusterGroupsDelete(ctx context.Context, request ope
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -15215,8 +15398,9 @@ func (s *SDK) VirtualizationClusterGroupsDelete(ctx context.Context, request ope
 	return res, nil
 }
 
+// VirtualizationClusterGroupsList - Call to super to allow for caching
 func (s *SDK) VirtualizationClusterGroupsList(ctx context.Context, request operations.VirtualizationClusterGroupsListRequest) (*operations.VirtualizationClusterGroupsListResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/virtualization/cluster-groups/"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -15226,7 +15410,7 @@ func (s *SDK) VirtualizationClusterGroupsList(ctx context.Context, request opera
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -15257,7 +15441,7 @@ func (s *SDK) VirtualizationClusterGroupsList(ctx context.Context, request opera
 }
 
 func (s *SDK) VirtualizationClusterGroupsPartialUpdate(ctx context.Context, request operations.VirtualizationClusterGroupsPartialUpdateRequest) (*operations.VirtualizationClusterGroupsPartialUpdateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/virtualization/cluster-groups/{id}/", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -15275,7 +15459,7 @@ func (s *SDK) VirtualizationClusterGroupsPartialUpdate(ctx context.Context, requ
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -15305,8 +15489,9 @@ func (s *SDK) VirtualizationClusterGroupsPartialUpdate(ctx context.Context, requ
 	return res, nil
 }
 
+// VirtualizationClusterGroupsRead - Call to super to allow for caching
 func (s *SDK) VirtualizationClusterGroupsRead(ctx context.Context, request operations.VirtualizationClusterGroupsReadRequest) (*operations.VirtualizationClusterGroupsReadResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/virtualization/cluster-groups/{id}/", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -15314,7 +15499,7 @@ func (s *SDK) VirtualizationClusterGroupsRead(ctx context.Context, request opera
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -15345,7 +15530,7 @@ func (s *SDK) VirtualizationClusterGroupsRead(ctx context.Context, request opera
 }
 
 func (s *SDK) VirtualizationClusterGroupsUpdate(ctx context.Context, request operations.VirtualizationClusterGroupsUpdateRequest) (*operations.VirtualizationClusterGroupsUpdateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/virtualization/cluster-groups/{id}/", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -15363,7 +15548,7 @@ func (s *SDK) VirtualizationClusterGroupsUpdate(ctx context.Context, request ope
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -15394,7 +15579,7 @@ func (s *SDK) VirtualizationClusterGroupsUpdate(ctx context.Context, request ope
 }
 
 func (s *SDK) VirtualizationClusterTypesCreate(ctx context.Context, request operations.VirtualizationClusterTypesCreateRequest) (*operations.VirtualizationClusterTypesCreateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/virtualization/cluster-types/"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -15412,7 +15597,7 @@ func (s *SDK) VirtualizationClusterTypesCreate(ctx context.Context, request oper
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -15443,7 +15628,7 @@ func (s *SDK) VirtualizationClusterTypesCreate(ctx context.Context, request oper
 }
 
 func (s *SDK) VirtualizationClusterTypesDelete(ctx context.Context, request operations.VirtualizationClusterTypesDeleteRequest) (*operations.VirtualizationClusterTypesDeleteResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/virtualization/cluster-types/{id}/", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -15451,7 +15636,7 @@ func (s *SDK) VirtualizationClusterTypesDelete(ctx context.Context, request oper
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -15472,8 +15657,9 @@ func (s *SDK) VirtualizationClusterTypesDelete(ctx context.Context, request oper
 	return res, nil
 }
 
+// VirtualizationClusterTypesList - Call to super to allow for caching
 func (s *SDK) VirtualizationClusterTypesList(ctx context.Context, request operations.VirtualizationClusterTypesListRequest) (*operations.VirtualizationClusterTypesListResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/virtualization/cluster-types/"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -15483,7 +15669,7 @@ func (s *SDK) VirtualizationClusterTypesList(ctx context.Context, request operat
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -15514,7 +15700,7 @@ func (s *SDK) VirtualizationClusterTypesList(ctx context.Context, request operat
 }
 
 func (s *SDK) VirtualizationClusterTypesPartialUpdate(ctx context.Context, request operations.VirtualizationClusterTypesPartialUpdateRequest) (*operations.VirtualizationClusterTypesPartialUpdateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/virtualization/cluster-types/{id}/", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -15532,7 +15718,7 @@ func (s *SDK) VirtualizationClusterTypesPartialUpdate(ctx context.Context, reque
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -15562,8 +15748,9 @@ func (s *SDK) VirtualizationClusterTypesPartialUpdate(ctx context.Context, reque
 	return res, nil
 }
 
+// VirtualizationClusterTypesRead - Call to super to allow for caching
 func (s *SDK) VirtualizationClusterTypesRead(ctx context.Context, request operations.VirtualizationClusterTypesReadRequest) (*operations.VirtualizationClusterTypesReadResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/virtualization/cluster-types/{id}/", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -15571,7 +15758,7 @@ func (s *SDK) VirtualizationClusterTypesRead(ctx context.Context, request operat
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -15602,7 +15789,7 @@ func (s *SDK) VirtualizationClusterTypesRead(ctx context.Context, request operat
 }
 
 func (s *SDK) VirtualizationClusterTypesUpdate(ctx context.Context, request operations.VirtualizationClusterTypesUpdateRequest) (*operations.VirtualizationClusterTypesUpdateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/virtualization/cluster-types/{id}/", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -15620,7 +15807,7 @@ func (s *SDK) VirtualizationClusterTypesUpdate(ctx context.Context, request oper
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -15651,7 +15838,7 @@ func (s *SDK) VirtualizationClusterTypesUpdate(ctx context.Context, request oper
 }
 
 func (s *SDK) VirtualizationClustersCreate(ctx context.Context, request operations.VirtualizationClustersCreateRequest) (*operations.VirtualizationClustersCreateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/virtualization/clusters/"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -15669,7 +15856,7 @@ func (s *SDK) VirtualizationClustersCreate(ctx context.Context, request operatio
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -15700,7 +15887,7 @@ func (s *SDK) VirtualizationClustersCreate(ctx context.Context, request operatio
 }
 
 func (s *SDK) VirtualizationClustersDelete(ctx context.Context, request operations.VirtualizationClustersDeleteRequest) (*operations.VirtualizationClustersDeleteResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/virtualization/clusters/{id}/", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -15708,7 +15895,7 @@ func (s *SDK) VirtualizationClustersDelete(ctx context.Context, request operatio
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -15729,8 +15916,9 @@ func (s *SDK) VirtualizationClustersDelete(ctx context.Context, request operatio
 	return res, nil
 }
 
+// VirtualizationClustersList - Call to super to allow for caching
 func (s *SDK) VirtualizationClustersList(ctx context.Context, request operations.VirtualizationClustersListRequest) (*operations.VirtualizationClustersListResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/virtualization/clusters/"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -15740,7 +15928,7 @@ func (s *SDK) VirtualizationClustersList(ctx context.Context, request operations
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -15771,7 +15959,7 @@ func (s *SDK) VirtualizationClustersList(ctx context.Context, request operations
 }
 
 func (s *SDK) VirtualizationClustersPartialUpdate(ctx context.Context, request operations.VirtualizationClustersPartialUpdateRequest) (*operations.VirtualizationClustersPartialUpdateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/virtualization/clusters/{id}/", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -15789,7 +15977,7 @@ func (s *SDK) VirtualizationClustersPartialUpdate(ctx context.Context, request o
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -15819,8 +16007,9 @@ func (s *SDK) VirtualizationClustersPartialUpdate(ctx context.Context, request o
 	return res, nil
 }
 
+// VirtualizationClustersRead - Call to super to allow for caching
 func (s *SDK) VirtualizationClustersRead(ctx context.Context, request operations.VirtualizationClustersReadRequest) (*operations.VirtualizationClustersReadResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/virtualization/clusters/{id}/", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -15828,7 +16017,7 @@ func (s *SDK) VirtualizationClustersRead(ctx context.Context, request operations
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -15859,7 +16048,7 @@ func (s *SDK) VirtualizationClustersRead(ctx context.Context, request operations
 }
 
 func (s *SDK) VirtualizationClustersUpdate(ctx context.Context, request operations.VirtualizationClustersUpdateRequest) (*operations.VirtualizationClustersUpdateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/virtualization/clusters/{id}/", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -15877,7 +16066,7 @@ func (s *SDK) VirtualizationClustersUpdate(ctx context.Context, request operatio
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -15908,7 +16097,7 @@ func (s *SDK) VirtualizationClustersUpdate(ctx context.Context, request operatio
 }
 
 func (s *SDK) VirtualizationInterfacesCreate(ctx context.Context, request operations.VirtualizationInterfacesCreateRequest) (*operations.VirtualizationInterfacesCreateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/virtualization/interfaces/"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -15926,7 +16115,7 @@ func (s *SDK) VirtualizationInterfacesCreate(ctx context.Context, request operat
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -15957,7 +16146,7 @@ func (s *SDK) VirtualizationInterfacesCreate(ctx context.Context, request operat
 }
 
 func (s *SDK) VirtualizationInterfacesDelete(ctx context.Context, request operations.VirtualizationInterfacesDeleteRequest) (*operations.VirtualizationInterfacesDeleteResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/virtualization/interfaces/{id}/", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -15965,7 +16154,7 @@ func (s *SDK) VirtualizationInterfacesDelete(ctx context.Context, request operat
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -15986,8 +16175,9 @@ func (s *SDK) VirtualizationInterfacesDelete(ctx context.Context, request operat
 	return res, nil
 }
 
+// VirtualizationInterfacesList - Call to super to allow for caching
 func (s *SDK) VirtualizationInterfacesList(ctx context.Context, request operations.VirtualizationInterfacesListRequest) (*operations.VirtualizationInterfacesListResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/virtualization/interfaces/"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -15997,7 +16187,7 @@ func (s *SDK) VirtualizationInterfacesList(ctx context.Context, request operatio
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -16028,7 +16218,7 @@ func (s *SDK) VirtualizationInterfacesList(ctx context.Context, request operatio
 }
 
 func (s *SDK) VirtualizationInterfacesPartialUpdate(ctx context.Context, request operations.VirtualizationInterfacesPartialUpdateRequest) (*operations.VirtualizationInterfacesPartialUpdateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/virtualization/interfaces/{id}/", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -16046,7 +16236,7 @@ func (s *SDK) VirtualizationInterfacesPartialUpdate(ctx context.Context, request
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -16076,8 +16266,9 @@ func (s *SDK) VirtualizationInterfacesPartialUpdate(ctx context.Context, request
 	return res, nil
 }
 
+// VirtualizationInterfacesRead - Call to super to allow for caching
 func (s *SDK) VirtualizationInterfacesRead(ctx context.Context, request operations.VirtualizationInterfacesReadRequest) (*operations.VirtualizationInterfacesReadResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/virtualization/interfaces/{id}/", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -16085,7 +16276,7 @@ func (s *SDK) VirtualizationInterfacesRead(ctx context.Context, request operatio
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -16116,7 +16307,7 @@ func (s *SDK) VirtualizationInterfacesRead(ctx context.Context, request operatio
 }
 
 func (s *SDK) VirtualizationInterfacesUpdate(ctx context.Context, request operations.VirtualizationInterfacesUpdateRequest) (*operations.VirtualizationInterfacesUpdateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/virtualization/interfaces/{id}/", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -16134,7 +16325,7 @@ func (s *SDK) VirtualizationInterfacesUpdate(ctx context.Context, request operat
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -16165,7 +16356,7 @@ func (s *SDK) VirtualizationInterfacesUpdate(ctx context.Context, request operat
 }
 
 func (s *SDK) VirtualizationVirtualMachinesCreate(ctx context.Context, request operations.VirtualizationVirtualMachinesCreateRequest) (*operations.VirtualizationVirtualMachinesCreateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/virtualization/virtual-machines/"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -16183,7 +16374,7 @@ func (s *SDK) VirtualizationVirtualMachinesCreate(ctx context.Context, request o
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -16214,7 +16405,7 @@ func (s *SDK) VirtualizationVirtualMachinesCreate(ctx context.Context, request o
 }
 
 func (s *SDK) VirtualizationVirtualMachinesDelete(ctx context.Context, request operations.VirtualizationVirtualMachinesDeleteRequest) (*operations.VirtualizationVirtualMachinesDeleteResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/virtualization/virtual-machines/{id}/", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -16222,7 +16413,7 @@ func (s *SDK) VirtualizationVirtualMachinesDelete(ctx context.Context, request o
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -16243,8 +16434,9 @@ func (s *SDK) VirtualizationVirtualMachinesDelete(ctx context.Context, request o
 	return res, nil
 }
 
+// VirtualizationVirtualMachinesList - Call to super to allow for caching
 func (s *SDK) VirtualizationVirtualMachinesList(ctx context.Context, request operations.VirtualizationVirtualMachinesListRequest) (*operations.VirtualizationVirtualMachinesListResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/virtualization/virtual-machines/"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -16254,7 +16446,7 @@ func (s *SDK) VirtualizationVirtualMachinesList(ctx context.Context, request ope
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -16285,7 +16477,7 @@ func (s *SDK) VirtualizationVirtualMachinesList(ctx context.Context, request ope
 }
 
 func (s *SDK) VirtualizationVirtualMachinesPartialUpdate(ctx context.Context, request operations.VirtualizationVirtualMachinesPartialUpdateRequest) (*operations.VirtualizationVirtualMachinesPartialUpdateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/virtualization/virtual-machines/{id}/", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -16303,7 +16495,7 @@ func (s *SDK) VirtualizationVirtualMachinesPartialUpdate(ctx context.Context, re
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -16333,8 +16525,9 @@ func (s *SDK) VirtualizationVirtualMachinesPartialUpdate(ctx context.Context, re
 	return res, nil
 }
 
+// VirtualizationVirtualMachinesRead - Call to super to allow for caching
 func (s *SDK) VirtualizationVirtualMachinesRead(ctx context.Context, request operations.VirtualizationVirtualMachinesReadRequest) (*operations.VirtualizationVirtualMachinesReadResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/virtualization/virtual-machines/{id}/", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -16342,7 +16535,7 @@ func (s *SDK) VirtualizationVirtualMachinesRead(ctx context.Context, request ope
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -16373,7 +16566,7 @@ func (s *SDK) VirtualizationVirtualMachinesRead(ctx context.Context, request ope
 }
 
 func (s *SDK) VirtualizationVirtualMachinesUpdate(ctx context.Context, request operations.VirtualizationVirtualMachinesUpdateRequest) (*operations.VirtualizationVirtualMachinesUpdateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/virtualization/virtual-machines/{id}/", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -16391,7 +16584,7 @@ func (s *SDK) VirtualizationVirtualMachinesUpdate(ctx context.Context, request o
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {

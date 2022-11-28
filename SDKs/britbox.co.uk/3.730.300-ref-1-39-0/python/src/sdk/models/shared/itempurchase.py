@@ -1,6 +1,7 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class ItemPurchaseOwnershipEnum(str, Enum):
     SUBSCRIPTION = "Subscription"
@@ -32,9 +33,9 @@ class ItemPurchaseTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class ItemPurchase:
-    id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
-    ownership: ItemPurchaseOwnershipEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ownership' }})
-    resolution: ItemPurchaseResolutionEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'resolution' }})
-    title: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'title' }})
-    type: ItemPurchaseTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('id') }})
+    ownership: ItemPurchaseOwnershipEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('ownership') }})
+    resolution: ItemPurchaseResolutionEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('resolution') }})
+    title: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('title') }})
+    type: ItemPurchaseTypeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('type') }})
     

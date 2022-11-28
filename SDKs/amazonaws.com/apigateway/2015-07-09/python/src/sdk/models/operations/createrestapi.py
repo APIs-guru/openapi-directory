@@ -1,6 +1,11 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -22,40 +27,44 @@ class CreateRestAPIRequestBodyAPIKeySourceEnum(str, Enum):
 @dataclass_json
 @dataclass
 class CreateRestAPIRequestBodyEndpointConfiguration:
-    types: Optional[List[shared.EndpointTypeEnum]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'types' }})
-    vpc_endpoint_ids: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'vpcEndpointIds' }})
+    r"""CreateRestAPIRequestBodyEndpointConfiguration
+    The endpoint configuration to indicate the types of endpoints an API (<a>RestApi</a>) or its custom domain name (<a>DomainName</a>) has. 
+    """
+    
+    types: Optional[List[shared.EndpointTypeEnum]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('types') }})
+    vpc_endpoint_ids: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('vpcEndpointIds') }})
     
 
 @dataclass_json
 @dataclass
 class CreateRestAPIRequestBody:
-    api_key_source: Optional[CreateRestAPIRequestBodyAPIKeySourceEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'apiKeySource' }})
-    binary_media_types: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'binaryMediaTypes' }})
-    clone_from: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'cloneFrom' }})
-    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
-    disable_execute_api_endpoint: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'disableExecuteApiEndpoint' }})
-    endpoint_configuration: Optional[CreateRestAPIRequestBodyEndpointConfiguration] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'endpointConfiguration' }})
-    minimum_compression_size: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'minimumCompressionSize' }})
-    name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    policy: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'policy' }})
-    tags: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tags' }})
-    version: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'version' }})
+    name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    api_key_source: Optional[CreateRestAPIRequestBodyAPIKeySourceEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('apiKeySource') }})
+    binary_media_types: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('binaryMediaTypes') }})
+    clone_from: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('cloneFrom') }})
+    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('description') }})
+    disable_execute_api_endpoint: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('disableExecuteApiEndpoint') }})
+    endpoint_configuration: Optional[CreateRestAPIRequestBodyEndpointConfiguration] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('endpointConfiguration') }})
+    minimum_compression_size: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('minimumCompressionSize') }})
+    policy: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('policy') }})
+    tags: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('tags') }})
+    version: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('version') }})
     
 
 @dataclass
 class CreateRestAPIRequest:
-    headers: CreateRestAPIHeaders = field(default=None)
-    request: CreateRestAPIRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: CreateRestAPIHeaders = field()
+    request: CreateRestAPIRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class CreateRestAPIResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
     conflict_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     limit_exceeded_exception: Optional[Any] = field(default=None)
     rest_api: Optional[shared.RestAPI] = field(default=None)
-    status_code: int = field(default=None)
     too_many_requests_exception: Optional[Any] = field(default=None)
     unauthorized_exception: Optional[Any] = field(default=None)
     

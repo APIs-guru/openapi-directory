@@ -1,5 +1,7 @@
 package shared
 
+// CreateUserRequest
+// Request model for creating an user
 type CreateUserRequest struct {
 	AuthData              *UserAuthData     `json:"authData,omitempty"`
 	AuthMethods           []UserAuthMethod  `json:"authMethods,omitempty"`

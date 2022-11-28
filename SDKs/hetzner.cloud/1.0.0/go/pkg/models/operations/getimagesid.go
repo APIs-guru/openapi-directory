@@ -4,10 +4,8 @@ type GetImagesIDPathParams struct {
 	ID int64 `pathParam:"style=simple,explode=false,name=id"`
 }
 
-type GetImagesIDRequest struct {
-	PathParams GetImagesIDPathParams
-}
-
+// GetImagesID200ApplicationJSONImageCreatedFrom
+// Information about the Server the Image was created from
 type GetImagesID200ApplicationJSONImageCreatedFrom struct {
 	ID   int64  `json:"id"`
 	Name string `json:"name"`
@@ -23,6 +21,8 @@ const (
 	GetImagesID200ApplicationJSONImageOsFlavorEnumUnknown GetImagesID200ApplicationJSONImageOsFlavorEnum = "unknown"
 )
 
+// GetImagesID200ApplicationJSONImageProtection
+// Protection configuration for the Resource
 type GetImagesID200ApplicationJSONImageProtection struct {
 	Delete bool `json:"delete"`
 }
@@ -68,6 +68,10 @@ type GetImagesID200ApplicationJSONImage struct {
 
 type GetImagesID200ApplicationJSON struct {
 	Image *GetImagesID200ApplicationJSONImage `json:"image,omitempty"`
+}
+
+type GetImagesIDRequest struct {
+	PathParams GetImagesIDPathParams
 }
 
 type GetImagesIDResponse struct {

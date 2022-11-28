@@ -33,16 +33,16 @@ type GetTransactionsQueryParams struct {
 	UpdatedAtDollarLte   *time.Time                 `queryParam:"style=form,explode=true,name=updatedAt[$lte]"`
 }
 
-type GetTransactionsRequest struct {
-	QueryParams GetTransactionsQueryParams
-}
-
 type GetTransactions200ApplicationJSON struct {
 	HasNext     *bool         `json:"hasNext,omitempty"`
 	HasPrevious *bool         `json:"hasPrevious,omitempty"`
 	Message     *string       `json:"message,omitempty"`
 	Ok          *bool         `json:"ok,omitempty"`
 	Result      []interface{} `json:"result,omitempty"`
+}
+
+type GetTransactionsRequest struct {
+	QueryParams GetTransactionsQueryParams
 }
 
 type GetTransactionsResponse struct {

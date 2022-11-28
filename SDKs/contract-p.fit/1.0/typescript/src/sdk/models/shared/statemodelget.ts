@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class StateModelGet extends SpeakeasyBase {
-  @Metadata({ data: "json, name=by" })
+  @SpeakeasyMetadata({ data: "json, name=by" })
   by?: string;
 
-  @Metadata({ data: "json, name=since" })
+  @SpeakeasyMetadata({ data: "json, name=since" })
   since?: Date;
 
-  @Metadata({ data: "json, name=value" })
+  @SpeakeasyMetadata({ data: "json, name=value" })
   value?: boolean;
 }

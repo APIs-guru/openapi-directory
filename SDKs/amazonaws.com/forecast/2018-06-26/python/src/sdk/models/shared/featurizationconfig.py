@@ -1,13 +1,18 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import featurization
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class FeaturizationConfig:
-    featurizations: Optional[List[featurization.Featurization]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Featurizations' }})
-    forecast_dimensions: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ForecastDimensions' }})
-    forecast_frequency: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ForecastFrequency' }})
+    r"""FeaturizationConfig
+    <p>In a <a>CreatePredictor</a> operation, the specified algorithm trains a model using the specified dataset group. You can optionally tell the operation to modify data fields prior to training a model. These modifications are referred to as <i>featurization</i>.</p> <p>You define featurization using the <code>FeaturizationConfig</code> object. You specify an array of transformations, one for each field that you want to featurize. You then include the <code>FeaturizationConfig</code> object in your <code>CreatePredictor</code> request. Amazon Forecast applies the featurization to the <code>TARGET_TIME_SERIES</code> and <code>RELATED_TIME_SERIES</code> datasets before model training.</p> <p>You can create multiple featurization configurations. For example, you might call the <code>CreatePredictor</code> operation twice by specifying different featurization configurations.</p>
+    """
+    
+    forecast_frequency: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('ForecastFrequency') }})
+    featurizations: Optional[List[Featurization]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Featurizations') }})
+    forecast_dimensions: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ForecastDimensions') }})
     

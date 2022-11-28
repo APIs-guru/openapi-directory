@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CustomerQueryStats } from "./customerquerystats";
 
 
+
 export class GetCustomerQueryStatsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=stats", elemType: shared.CustomerQueryStats })
+  @SpeakeasyMetadata({ data: "json, name=stats", elemType: CustomerQueryStats })
   stats?: CustomerQueryStats[];
 
-  @Metadata({ data: "json, name=totalQueryCount" })
+  @SpeakeasyMetadata({ data: "json, name=totalQueryCount" })
   totalQueryCount?: string;
 }

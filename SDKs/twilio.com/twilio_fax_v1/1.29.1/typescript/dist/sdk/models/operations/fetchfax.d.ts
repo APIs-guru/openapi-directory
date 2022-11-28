@@ -1,6 +1,6 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
-export declare const FETCHFAX_SERVERS: string[];
+export declare const FetchFaxServerList: readonly ["https://fax.twilio.com"];
 export declare class FetchFaxPathParams extends SpeakeasyBase {
     sid: string;
 }

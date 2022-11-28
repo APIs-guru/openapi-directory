@@ -1,11 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TflApiPresentationEntitiesLineServiceTypeInfo } from "./tflapipresentationentitieslineservicetypeinfo";
 
 
+
 export class TflApiPresentationEntitiesLineSpecificServiceType extends SpeakeasyBase {
-  @Metadata({ data: "json, name=serviceType" })
+  @SpeakeasyMetadata({ data: "json, name=serviceType" })
   serviceType?: TflApiPresentationEntitiesLineServiceTypeInfo;
 
-  @Metadata({ data: "json, name=stopServesServiceType" })
+  @SpeakeasyMetadata({ data: "json, name=stopServesServiceType" })
   stopServesServiceType?: boolean;
 }

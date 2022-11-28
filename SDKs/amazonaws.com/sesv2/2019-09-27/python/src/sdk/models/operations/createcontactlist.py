@@ -1,6 +1,10 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,List,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -18,25 +22,25 @@ class CreateContactListHeaders:
 @dataclass_json
 @dataclass
 class CreateContactListRequestBody:
-    contact_list_name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ContactListName' }})
-    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Description' }})
-    tags: Optional[List[shared.Tag]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Tags' }})
-    topics: Optional[List[shared.Topic]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Topics' }})
+    contact_list_name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('ContactListName') }})
+    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Description') }})
+    tags: Optional[List[shared.Tag]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Tags') }})
+    topics: Optional[List[shared.Topic]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Topics') }})
     
 
 @dataclass
 class CreateContactListRequest:
-    headers: CreateContactListHeaders = field(default=None)
-    request: CreateContactListRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: CreateContactListHeaders = field()
+    request: CreateContactListRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class CreateContactListResponse:
+    content_type: str = field()
+    status_code: int = field()
     already_exists_exception: Optional[Any] = field(default=None)
     bad_request_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     create_contact_list_response: Optional[dict[str, Any]] = field(default=None)
     limit_exceeded_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     too_many_requests_exception: Optional[Any] = field(default=None)
     

@@ -4,10 +4,11 @@ from dataclasses import dataclass, field
 
 @dataclass
 class SchemeBasicScheme:
-    authorization: str = field(default=None, metadata={'security': { 'field_name': 'Authorization' }})
+    password: str = field(metadata={'security': { 'field_name': 'password' }})
+    username: str = field(metadata={'security': { 'field_name': 'username' }})
     
 
 @dataclass
 class Security:
-    basic_scheme: SchemeBasicScheme = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'basic' }})
+    basic_scheme: SchemeBasicScheme = field(metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'basic' }})
     

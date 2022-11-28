@@ -13,6 +13,8 @@ const (
 	AgeRangeTargetingOptionDetailsAgeRangeEnumAgeRangeUnknown     AgeRangeTargetingOptionDetailsAgeRangeEnum = "AGE_RANGE_UNKNOWN"
 )
 
+// AgeRangeTargetingOptionDetails
+// Represents a targetable age range. This will be populated in the age_range_details field when targeting_type is `TARGETING_TYPE_AGE_RANGE`.
 type AgeRangeTargetingOptionDetails struct {
 	AgeRange *AgeRangeTargetingOptionDetailsAgeRangeEnum `json:"ageRange,omitempty"`
 }

@@ -1,13 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AttributeValueUpdate } from "./attributevalueupdate";
 import { ConditionalOperatorEnum } from "./conditionaloperatorenum";
 import { ExpectedAttributeValue } from "./expectedattributevalue";
 import { AttributeValue } from "./attributevalue";
-import { AttributeValue } from "./attributevalue";
 import { ReturnConsumedCapacityEnum } from "./returnconsumedcapacityenum";
 import { ReturnItemCollectionMetricsEnum } from "./returnitemcollectionmetricsenum";
 import { ReturnValueEnum } from "./returnvalueenum";
+
 
 
 // UpdateItemInput
@@ -15,39 +14,39 @@ import { ReturnValueEnum } from "./returnvalueenum";
  * Represents the input of an <code>UpdateItem</code> operation.
 **/
 export class UpdateItemInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AttributeUpdates", elemType: shared.AttributeValueUpdate })
+  @SpeakeasyMetadata({ data: "json, name=AttributeUpdates", elemType: AttributeValueUpdate })
   attributeUpdates?: Map<string, AttributeValueUpdate>;
 
-  @Metadata({ data: "json, name=ConditionExpression" })
+  @SpeakeasyMetadata({ data: "json, name=ConditionExpression" })
   conditionExpression?: string;
 
-  @Metadata({ data: "json, name=ConditionalOperator" })
+  @SpeakeasyMetadata({ data: "json, name=ConditionalOperator" })
   conditionalOperator?: ConditionalOperatorEnum;
 
-  @Metadata({ data: "json, name=Expected", elemType: shared.ExpectedAttributeValue })
+  @SpeakeasyMetadata({ data: "json, name=Expected", elemType: ExpectedAttributeValue })
   expected?: Map<string, ExpectedAttributeValue>;
 
-  @Metadata({ data: "json, name=ExpressionAttributeNames" })
+  @SpeakeasyMetadata({ data: "json, name=ExpressionAttributeNames" })
   expressionAttributeNames?: Map<string, string>;
 
-  @Metadata({ data: "json, name=ExpressionAttributeValues", elemType: shared.AttributeValue })
+  @SpeakeasyMetadata({ data: "json, name=ExpressionAttributeValues", elemType: AttributeValue })
   expressionAttributeValues?: Map<string, AttributeValue>;
 
-  @Metadata({ data: "json, name=Key", elemType: shared.AttributeValue })
+  @SpeakeasyMetadata({ data: "json, name=Key", elemType: AttributeValue })
   key: Map<string, AttributeValue>;
 
-  @Metadata({ data: "json, name=ReturnConsumedCapacity" })
+  @SpeakeasyMetadata({ data: "json, name=ReturnConsumedCapacity" })
   returnConsumedCapacity?: ReturnConsumedCapacityEnum;
 
-  @Metadata({ data: "json, name=ReturnItemCollectionMetrics" })
+  @SpeakeasyMetadata({ data: "json, name=ReturnItemCollectionMetrics" })
   returnItemCollectionMetrics?: ReturnItemCollectionMetricsEnum;
 
-  @Metadata({ data: "json, name=ReturnValues" })
+  @SpeakeasyMetadata({ data: "json, name=ReturnValues" })
   returnValues?: ReturnValueEnum;
 
-  @Metadata({ data: "json, name=TableName" })
+  @SpeakeasyMetadata({ data: "json, name=TableName" })
   tableName: string;
 
-  @Metadata({ data: "json, name=UpdateExpression" })
+  @SpeakeasyMetadata({ data: "json, name=UpdateExpression" })
   updateExpression?: string;
 }

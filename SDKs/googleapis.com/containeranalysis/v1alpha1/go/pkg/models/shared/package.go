@@ -8,6 +8,8 @@ const (
 	PackageArchitectureEnumX64                     PackageArchitectureEnum = "X64"
 )
 
+// Package
+// This represents a particular package that is distributed over various channels. e.g. glibc (aka libc6) is distributed by many, at various versions.
 type Package struct {
 	Architecture *PackageArchitectureEnum `json:"architecture,omitempty"`
 	CpeURI       *string                  `json:"cpeUri,omitempty"`

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetRegistrierkassePathParams = /** @class */ (function (_super) {
     __extends(GetRegistrierkassePathParams, _super);
@@ -30,7 +30,7 @@ var GetRegistrierkassePathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=registrierkasseUuid" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=registrierkasseUuid" }),
         __metadata("design:type", String)
     ], GetRegistrierkassePathParams.prototype, "registrierkasseUuid", void 0);
     return GetRegistrierkassePathParams;
@@ -42,7 +42,7 @@ var GetRegistrierkasseRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetRegistrierkassePathParams)
     ], GetRegistrierkasseRequest.prototype, "pathParams", void 0);
     return GetRegistrierkasseRequest;
@@ -54,15 +54,15 @@ var GetRegistrierkasseResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetRegistrierkasseResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.Registrierkasse)
     ], GetRegistrierkasseResponse.prototype, "registrierkasse", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetRegistrierkasseResponse.prototype, "statusCode", void 0);
     return GetRegistrierkasseResponse;

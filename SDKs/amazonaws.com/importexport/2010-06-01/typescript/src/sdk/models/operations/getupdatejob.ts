@@ -1,12 +1,13 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum GetUpdateJobActionEnum {
     UpdateJob = "UpdateJob"
 }
 
 export enum GetUpdateJobJobTypeEnum {
-    Import = "Import"
-,    Export = "Export"
+    Import = "Import",
+    Export = "Export"
 }
 
 export enum GetUpdateJobOperationEnum {
@@ -19,60 +20,60 @@ export enum GetUpdateJobVersionEnum {
 
 
 export class GetUpdateJobQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=APIVersion" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=APIVersion" })
   apiVersion?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=AWSAccessKeyId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=AWSAccessKeyId" })
   awsAccessKeyId: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Action" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Action" })
   action: GetUpdateJobActionEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=JobId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=JobId" })
   jobId: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=JobType" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=JobType" })
   jobType: GetUpdateJobJobTypeEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Manifest" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Manifest" })
   manifest: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Operation" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Operation" })
   operation: GetUpdateJobOperationEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Signature" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Signature" })
   signature: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=SignatureMethod" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=SignatureMethod" })
   signatureMethod: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=SignatureVersion" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=SignatureVersion" })
   signatureVersion: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Timestamp" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Timestamp" })
   timestamp: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=ValidateOnly" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=ValidateOnly" })
   validateOnly: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Version" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Version" })
   version: GetUpdateJobVersionEnum;
 }
 
 
 export class GetUpdateJobRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetUpdateJobQueryParams;
 }
 
 
 export class GetUpdateJobResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

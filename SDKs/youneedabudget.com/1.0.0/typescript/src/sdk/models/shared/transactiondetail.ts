@@ -1,78 +1,78 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SubTransaction } from "./subtransaction";
 
+
 export enum TransactionDetailClearedEnum {
-    Cleared = "cleared"
-,    Uncleared = "uncleared"
-,    Reconciled = "reconciled"
+    Cleared = "cleared",
+    Uncleared = "uncleared",
+    Reconciled = "reconciled"
 }
 
 export enum TransactionDetailFlagColorEnum {
-    Red = "red"
-,    Orange = "orange"
-,    Yellow = "yellow"
-,    Green = "green"
-,    Blue = "blue"
-,    Purple = "purple"
+    Red = "red",
+    Orange = "orange",
+    Yellow = "yellow",
+    Green = "green",
+    Blue = "blue",
+    Purple = "purple"
 }
 
 
 export class TransactionDetail extends SpeakeasyBase {
-  @Metadata({ data: "json, name=account_id" })
+  @SpeakeasyMetadata({ data: "json, name=account_id" })
   accountId: string;
 
-  @Metadata({ data: "json, name=account_name" })
+  @SpeakeasyMetadata({ data: "json, name=account_name" })
   accountName: string;
 
-  @Metadata({ data: "json, name=amount" })
+  @SpeakeasyMetadata({ data: "json, name=amount" })
   amount: number;
 
-  @Metadata({ data: "json, name=approved" })
+  @SpeakeasyMetadata({ data: "json, name=approved" })
   approved: boolean;
 
-  @Metadata({ data: "json, name=category_id" })
+  @SpeakeasyMetadata({ data: "json, name=category_id" })
   categoryId?: string;
 
-  @Metadata({ data: "json, name=category_name" })
+  @SpeakeasyMetadata({ data: "json, name=category_name" })
   categoryName?: string;
 
-  @Metadata({ data: "json, name=cleared" })
+  @SpeakeasyMetadata({ data: "json, name=cleared" })
   cleared: TransactionDetailClearedEnum;
 
-  @Metadata({ data: "json, name=date" })
+  @SpeakeasyMetadata({ data: "json, name=date" })
   date: Date;
 
-  @Metadata({ data: "json, name=deleted" })
+  @SpeakeasyMetadata({ data: "json, name=deleted" })
   deleted: boolean;
 
-  @Metadata({ data: "json, name=flag_color" })
+  @SpeakeasyMetadata({ data: "json, name=flag_color" })
   flagColor?: TransactionDetailFlagColorEnum;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: string;
 
-  @Metadata({ data: "json, name=import_id" })
+  @SpeakeasyMetadata({ data: "json, name=import_id" })
   importId?: string;
 
-  @Metadata({ data: "json, name=matched_transaction_id" })
+  @SpeakeasyMetadata({ data: "json, name=matched_transaction_id" })
   matchedTransactionId?: string;
 
-  @Metadata({ data: "json, name=memo" })
+  @SpeakeasyMetadata({ data: "json, name=memo" })
   memo?: string;
 
-  @Metadata({ data: "json, name=payee_id" })
+  @SpeakeasyMetadata({ data: "json, name=payee_id" })
   payeeId?: string;
 
-  @Metadata({ data: "json, name=payee_name" })
+  @SpeakeasyMetadata({ data: "json, name=payee_name" })
   payeeName?: string;
 
-  @Metadata({ data: "json, name=subtransactions", elemType: shared.SubTransaction })
+  @SpeakeasyMetadata({ data: "json, name=subtransactions", elemType: SubTransaction })
   subtransactions: SubTransaction[];
 
-  @Metadata({ data: "json, name=transfer_account_id" })
+  @SpeakeasyMetadata({ data: "json, name=transfer_account_id" })
   transferAccountId?: string;
 
-  @Metadata({ data: "json, name=transfer_transaction_id" })
+  @SpeakeasyMetadata({ data: "json, name=transfer_transaction_id" })
   transferTransactionId?: string;
 }

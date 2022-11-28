@@ -1,23 +1,18 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetFloatingIpsIdPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" })
   id: number;
 }
 
 
-export class GetFloatingIpsIdRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: GetFloatingIpsIdPathParams;
-}
-
-
 export class GetFloatingIpsId200ApplicationJsonFloatingIpDnsPtr extends SpeakeasyBase {
-  @Metadata({ data: "json, name=dns_ptr" })
+  @SpeakeasyMetadata({ data: "json, name=dns_ptr" })
   dnsPtr: string;
 
-  @Metadata({ data: "json, name=ip" })
+  @SpeakeasyMetadata({ data: "json, name=ip" })
   ip: string;
 }
 
@@ -27,28 +22,28 @@ export class GetFloatingIpsId200ApplicationJsonFloatingIpDnsPtr extends Speakeas
  * Location the Floating IP was created in. Routing is optimized for this Location.
 **/
 export class GetFloatingIpsId200ApplicationJsonFloatingIpHomeLocation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=city" })
+  @SpeakeasyMetadata({ data: "json, name=city" })
   city: string;
 
-  @Metadata({ data: "json, name=country" })
+  @SpeakeasyMetadata({ data: "json, name=country" })
   country: string;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: number;
 
-  @Metadata({ data: "json, name=latitude" })
+  @SpeakeasyMetadata({ data: "json, name=latitude" })
   latitude: number;
 
-  @Metadata({ data: "json, name=longitude" })
+  @SpeakeasyMetadata({ data: "json, name=longitude" })
   longitude: number;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 
-  @Metadata({ data: "json, name=network_zone" })
+  @SpeakeasyMetadata({ data: "json, name=network_zone" })
   networkZone: string;
 }
 
@@ -58,68 +53,74 @@ export class GetFloatingIpsId200ApplicationJsonFloatingIpHomeLocation extends Sp
  * Protection configuration for the Resource
 **/
 export class GetFloatingIpsId200ApplicationJsonFloatingIpProtection extends SpeakeasyBase {
-  @Metadata({ data: "json, name=delete" })
+  @SpeakeasyMetadata({ data: "json, name=delete" })
   delete: boolean;
 }
 
 export enum GetFloatingIpsId200ApplicationJsonFloatingIpTypeEnum {
-    Ipv4 = "ipv4"
-,    Ipv6 = "ipv6"
+    Ipv4 = "ipv4",
+    Ipv6 = "ipv6"
 }
 
 
 export class GetFloatingIpsId200ApplicationJsonFloatingIp extends SpeakeasyBase {
-  @Metadata({ data: "json, name=blocked" })
+  @SpeakeasyMetadata({ data: "json, name=blocked" })
   blocked: boolean;
 
-  @Metadata({ data: "json, name=created" })
+  @SpeakeasyMetadata({ data: "json, name=created" })
   created: string;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description: string;
 
-  @Metadata({ data: "json, name=dns_ptr", elemType: operations.GetFloatingIpsId200ApplicationJsonFloatingIpDnsPtr })
+  @SpeakeasyMetadata({ data: "json, name=dns_ptr", elemType: GetFloatingIpsId200ApplicationJsonFloatingIpDnsPtr })
   dnsPtr: GetFloatingIpsId200ApplicationJsonFloatingIpDnsPtr[];
 
-  @Metadata({ data: "json, name=home_location" })
+  @SpeakeasyMetadata({ data: "json, name=home_location" })
   homeLocation: GetFloatingIpsId200ApplicationJsonFloatingIpHomeLocation;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: number;
 
-  @Metadata({ data: "json, name=ip" })
+  @SpeakeasyMetadata({ data: "json, name=ip" })
   ip: string;
 
-  @Metadata({ data: "json, name=labels" })
+  @SpeakeasyMetadata({ data: "json, name=labels" })
   labels: Map<string, string>;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 
-  @Metadata({ data: "json, name=protection" })
+  @SpeakeasyMetadata({ data: "json, name=protection" })
   protection: GetFloatingIpsId200ApplicationJsonFloatingIpProtection;
 
-  @Metadata({ data: "json, name=server" })
+  @SpeakeasyMetadata({ data: "json, name=server" })
   server: number;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type: GetFloatingIpsId200ApplicationJsonFloatingIpTypeEnum;
 }
 
 
 export class GetFloatingIpsId200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=floating_ip" })
+  @SpeakeasyMetadata({ data: "json, name=floating_ip" })
   floatingIp: GetFloatingIpsId200ApplicationJsonFloatingIp;
 }
 
 
+export class GetFloatingIpsIdRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: GetFloatingIpsIdPathParams;
+}
+
+
 export class GetFloatingIpsIdResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getFloatingIpsId200ApplicationJsonObject?: GetFloatingIpsId200ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

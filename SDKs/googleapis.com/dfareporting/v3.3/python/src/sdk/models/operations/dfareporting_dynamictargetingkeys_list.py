@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DfareportingDynamicTargetingKeysListPathParams:
-    profile_id: str = field(default=None, metadata={'path_param': { 'field_name': 'profileId', 'style': 'simple', 'explode': False }})
+    profile_id: str = field(metadata={'path_param': { 'field_name': 'profileId', 'style': 'simple', 'explode': False }})
     
 class DfareportingDynamicTargetingKeysListObjectTypeEnum(str, Enum):
     OBJECT_ADVERTISER = "OBJECT_ADVERTISER"
@@ -35,20 +36,20 @@ class DfareportingDynamicTargetingKeysListQueryParams:
 
 @dataclass
 class DfareportingDynamicTargetingKeysListSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DfareportingDynamicTargetingKeysListRequest:
-    path_params: DfareportingDynamicTargetingKeysListPathParams = field(default=None)
-    query_params: DfareportingDynamicTargetingKeysListQueryParams = field(default=None)
-    security: DfareportingDynamicTargetingKeysListSecurity = field(default=None)
+    path_params: DfareportingDynamicTargetingKeysListPathParams = field()
+    query_params: DfareportingDynamicTargetingKeysListQueryParams = field()
+    security: DfareportingDynamicTargetingKeysListSecurity = field()
     
 
 @dataclass
 class DfareportingDynamicTargetingKeysListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     dynamic_targeting_keys_list_response: Optional[shared.DynamicTargetingKeysListResponse] = field(default=None)
-    status_code: int = field(default=None)
     

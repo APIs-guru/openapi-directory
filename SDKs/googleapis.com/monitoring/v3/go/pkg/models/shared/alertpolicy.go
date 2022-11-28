@@ -9,6 +9,8 @@ const (
 	AlertPolicyCombinerEnumAndWithMatchingResource AlertPolicyCombinerEnum = "AND_WITH_MATCHING_RESOURCE"
 )
 
+// AlertPolicy
+// A description of the conditions under which some aspect of your system is considered to be "unhealthy" and the ways to notify people or services about this state. For an overview of alert policies, see Introduction to Alerting (https://cloud.google.com/monitoring/alerts/).
 type AlertPolicy struct {
 	AlertStrategy        *AlertStrategy           `json:"alertStrategy,omitempty"`
 	Combiner             *AlertPolicyCombinerEnum `json:"combiner,omitempty"`

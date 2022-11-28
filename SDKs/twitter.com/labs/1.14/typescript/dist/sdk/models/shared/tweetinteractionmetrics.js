@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // TweetInteractionMetrics
 /**
  * Interaction metrics for a Tweet.
@@ -33,23 +33,23 @@ var TweetInteractionMetrics = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=impression_count" }),
+        SpeakeasyMetadata({ data: "json, name=impression_count" }),
         __metadata("design:type", Number)
     ], TweetInteractionMetrics.prototype, "impressionCount", void 0);
     __decorate([
-        Metadata({ data: "json, name=like_count" }),
+        SpeakeasyMetadata({ data: "json, name=like_count" }),
         __metadata("design:type", Number)
     ], TweetInteractionMetrics.prototype, "likeCount", void 0);
     __decorate([
-        Metadata({ data: "json, name=quote_count" }),
+        SpeakeasyMetadata({ data: "json, name=quote_count" }),
         __metadata("design:type", Number)
     ], TweetInteractionMetrics.prototype, "quoteCount", void 0);
     __decorate([
-        Metadata({ data: "json, name=reply_count" }),
+        SpeakeasyMetadata({ data: "json, name=reply_count" }),
         __metadata("design:type", Number)
     ], TweetInteractionMetrics.prototype, "replyCount", void 0);
     __decorate([
-        Metadata({ data: "json, name=retweet_count" }),
+        SpeakeasyMetadata({ data: "json, name=retweet_count" }),
         __metadata("design:type", Number)
     ], TweetInteractionMetrics.prototype, "retweetCount", void 0);
     return TweetInteractionMetrics;

@@ -1,16 +1,21 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import googleidentityaccesscontextmanagerv1devicepolicy
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class GoogleIdentityAccesscontextmanagerV1Condition:
-    device_policy: Optional[googleidentityaccesscontextmanagerv1devicepolicy.GoogleIdentityAccesscontextmanagerV1DevicePolicy] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'devicePolicy' }})
-    ip_subnetworks: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ipSubnetworks' }})
-    members: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'members' }})
-    negate: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'negate' }})
-    regions: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'regions' }})
-    required_access_levels: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'requiredAccessLevels' }})
+    r"""GoogleIdentityAccesscontextmanagerV1Condition
+    A condition necessary for an `AccessLevel` to be granted. The Condition is an AND over its fields. So a Condition is true if: 1) the request IP is from one of the listed subnetworks AND 2) the originating device complies with the listed device policy AND 3) all listed access levels are granted AND 4) the request was sent at a time allowed by the DateTimeRestriction.
+    """
+    
+    device_policy: Optional[GoogleIdentityAccesscontextmanagerV1DevicePolicy] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('devicePolicy') }})
+    ip_subnetworks: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ipSubnetworks') }})
+    members: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('members') }})
+    negate: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('negate') }})
+    regions: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('regions') }})
+    required_access_levels: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('requiredAccessLevels') }})
     

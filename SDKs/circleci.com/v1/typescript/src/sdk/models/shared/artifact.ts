@@ -1,16 +1,17 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class Artifact extends SpeakeasyBase {
-  @Metadata({ data: "json, name=node_index" })
+  @SpeakeasyMetadata({ data: "json, name=node_index" })
   nodeIndex?: number;
 
-  @Metadata({ data: "json, name=path" })
+  @SpeakeasyMetadata({ data: "json, name=path" })
   path?: string;
 
-  @Metadata({ data: "json, name=pretty_path" })
+  @SpeakeasyMetadata({ data: "json, name=pretty_path" })
   prettyPath?: string;
 
-  @Metadata({ data: "json, name=url" })
+  @SpeakeasyMetadata({ data: "json, name=url" })
   url?: string;
 }

@@ -1,5 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AlgorithmSpecification } from "./algorithmspecification";
 import { CheckpointConfig } from "./checkpointconfig";
 import { DebugHookConfig } from "./debughookconfig";
@@ -24,124 +23,125 @@ import { TrainingJobStatusEnum } from "./trainingjobstatusenum";
 import { VpcConfig } from "./vpcconfig";
 
 
+
 export class DescribeTrainingJobResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AlgorithmSpecification" })
+  @SpeakeasyMetadata({ data: "json, name=AlgorithmSpecification" })
   algorithmSpecification: AlgorithmSpecification;
 
-  @Metadata({ data: "json, name=AutoMLJobArn" })
+  @SpeakeasyMetadata({ data: "json, name=AutoMLJobArn" })
   autoMlJobArn?: string;
 
-  @Metadata({ data: "json, name=BillableTimeInSeconds" })
+  @SpeakeasyMetadata({ data: "json, name=BillableTimeInSeconds" })
   billableTimeInSeconds?: number;
 
-  @Metadata({ data: "json, name=CheckpointConfig" })
+  @SpeakeasyMetadata({ data: "json, name=CheckpointConfig" })
   checkpointConfig?: CheckpointConfig;
 
-  @Metadata({ data: "json, name=CreationTime" })
+  @SpeakeasyMetadata({ data: "json, name=CreationTime" })
   creationTime: Date;
 
-  @Metadata({ data: "json, name=DebugHookConfig" })
+  @SpeakeasyMetadata({ data: "json, name=DebugHookConfig" })
   debugHookConfig?: DebugHookConfig;
 
-  @Metadata({ data: "json, name=DebugRuleConfigurations", elemType: shared.DebugRuleConfiguration })
+  @SpeakeasyMetadata({ data: "json, name=DebugRuleConfigurations", elemType: DebugRuleConfiguration })
   debugRuleConfigurations?: DebugRuleConfiguration[];
 
-  @Metadata({ data: "json, name=DebugRuleEvaluationStatuses", elemType: shared.DebugRuleEvaluationStatus })
+  @SpeakeasyMetadata({ data: "json, name=DebugRuleEvaluationStatuses", elemType: DebugRuleEvaluationStatus })
   debugRuleEvaluationStatuses?: DebugRuleEvaluationStatus[];
 
-  @Metadata({ data: "json, name=EnableInterContainerTrafficEncryption" })
+  @SpeakeasyMetadata({ data: "json, name=EnableInterContainerTrafficEncryption" })
   enableInterContainerTrafficEncryption?: boolean;
 
-  @Metadata({ data: "json, name=EnableManagedSpotTraining" })
+  @SpeakeasyMetadata({ data: "json, name=EnableManagedSpotTraining" })
   enableManagedSpotTraining?: boolean;
 
-  @Metadata({ data: "json, name=EnableNetworkIsolation" })
+  @SpeakeasyMetadata({ data: "json, name=EnableNetworkIsolation" })
   enableNetworkIsolation?: boolean;
 
-  @Metadata({ data: "json, name=Environment" })
+  @SpeakeasyMetadata({ data: "json, name=Environment" })
   environment?: Map<string, string>;
 
-  @Metadata({ data: "json, name=ExperimentConfig" })
+  @SpeakeasyMetadata({ data: "json, name=ExperimentConfig" })
   experimentConfig?: ExperimentConfig;
 
-  @Metadata({ data: "json, name=FailureReason" })
+  @SpeakeasyMetadata({ data: "json, name=FailureReason" })
   failureReason?: string;
 
-  @Metadata({ data: "json, name=FinalMetricDataList", elemType: shared.MetricData })
+  @SpeakeasyMetadata({ data: "json, name=FinalMetricDataList", elemType: MetricData })
   finalMetricDataList?: MetricData[];
 
-  @Metadata({ data: "json, name=HyperParameters" })
+  @SpeakeasyMetadata({ data: "json, name=HyperParameters" })
   hyperParameters?: Map<string, string>;
 
-  @Metadata({ data: "json, name=InputDataConfig", elemType: shared.Channel })
+  @SpeakeasyMetadata({ data: "json, name=InputDataConfig", elemType: Channel })
   inputDataConfig?: Channel[];
 
-  @Metadata({ data: "json, name=LabelingJobArn" })
+  @SpeakeasyMetadata({ data: "json, name=LabelingJobArn" })
   labelingJobArn?: string;
 
-  @Metadata({ data: "json, name=LastModifiedTime" })
+  @SpeakeasyMetadata({ data: "json, name=LastModifiedTime" })
   lastModifiedTime?: Date;
 
-  @Metadata({ data: "json, name=ModelArtifacts" })
+  @SpeakeasyMetadata({ data: "json, name=ModelArtifacts" })
   modelArtifacts: ModelArtifacts;
 
-  @Metadata({ data: "json, name=OutputDataConfig" })
+  @SpeakeasyMetadata({ data: "json, name=OutputDataConfig" })
   outputDataConfig?: OutputDataConfig;
 
-  @Metadata({ data: "json, name=ProfilerConfig" })
+  @SpeakeasyMetadata({ data: "json, name=ProfilerConfig" })
   profilerConfig?: ProfilerConfig;
 
-  @Metadata({ data: "json, name=ProfilerRuleConfigurations", elemType: shared.ProfilerRuleConfiguration })
+  @SpeakeasyMetadata({ data: "json, name=ProfilerRuleConfigurations", elemType: ProfilerRuleConfiguration })
   profilerRuleConfigurations?: ProfilerRuleConfiguration[];
 
-  @Metadata({ data: "json, name=ProfilerRuleEvaluationStatuses", elemType: shared.ProfilerRuleEvaluationStatus })
+  @SpeakeasyMetadata({ data: "json, name=ProfilerRuleEvaluationStatuses", elemType: ProfilerRuleEvaluationStatus })
   profilerRuleEvaluationStatuses?: ProfilerRuleEvaluationStatus[];
 
-  @Metadata({ data: "json, name=ProfilingStatus" })
+  @SpeakeasyMetadata({ data: "json, name=ProfilingStatus" })
   profilingStatus?: ProfilingStatusEnum;
 
-  @Metadata({ data: "json, name=ResourceConfig" })
+  @SpeakeasyMetadata({ data: "json, name=ResourceConfig" })
   resourceConfig: ResourceConfig;
 
-  @Metadata({ data: "json, name=RetryStrategy" })
+  @SpeakeasyMetadata({ data: "json, name=RetryStrategy" })
   retryStrategy?: RetryStrategy;
 
-  @Metadata({ data: "json, name=RoleArn" })
+  @SpeakeasyMetadata({ data: "json, name=RoleArn" })
   roleArn?: string;
 
-  @Metadata({ data: "json, name=SecondaryStatus" })
+  @SpeakeasyMetadata({ data: "json, name=SecondaryStatus" })
   secondaryStatus: SecondaryStatusEnum;
 
-  @Metadata({ data: "json, name=SecondaryStatusTransitions", elemType: shared.SecondaryStatusTransition })
+  @SpeakeasyMetadata({ data: "json, name=SecondaryStatusTransitions", elemType: SecondaryStatusTransition })
   secondaryStatusTransitions?: SecondaryStatusTransition[];
 
-  @Metadata({ data: "json, name=StoppingCondition" })
+  @SpeakeasyMetadata({ data: "json, name=StoppingCondition" })
   stoppingCondition: StoppingCondition;
 
-  @Metadata({ data: "json, name=TensorBoardOutputConfig" })
+  @SpeakeasyMetadata({ data: "json, name=TensorBoardOutputConfig" })
   tensorBoardOutputConfig?: TensorBoardOutputConfig;
 
-  @Metadata({ data: "json, name=TrainingEndTime" })
+  @SpeakeasyMetadata({ data: "json, name=TrainingEndTime" })
   trainingEndTime?: Date;
 
-  @Metadata({ data: "json, name=TrainingJobArn" })
+  @SpeakeasyMetadata({ data: "json, name=TrainingJobArn" })
   trainingJobArn: string;
 
-  @Metadata({ data: "json, name=TrainingJobName" })
+  @SpeakeasyMetadata({ data: "json, name=TrainingJobName" })
   trainingJobName: string;
 
-  @Metadata({ data: "json, name=TrainingJobStatus" })
+  @SpeakeasyMetadata({ data: "json, name=TrainingJobStatus" })
   trainingJobStatus: TrainingJobStatusEnum;
 
-  @Metadata({ data: "json, name=TrainingStartTime" })
+  @SpeakeasyMetadata({ data: "json, name=TrainingStartTime" })
   trainingStartTime?: Date;
 
-  @Metadata({ data: "json, name=TrainingTimeInSeconds" })
+  @SpeakeasyMetadata({ data: "json, name=TrainingTimeInSeconds" })
   trainingTimeInSeconds?: number;
 
-  @Metadata({ data: "json, name=TuningJobArn" })
+  @SpeakeasyMetadata({ data: "json, name=TuningJobArn" })
   tuningJobArn?: string;
 
-  @Metadata({ data: "json, name=VpcConfig" })
+  @SpeakeasyMetadata({ data: "json, name=VpcConfig" })
   vpcConfig?: VpcConfig;
 }

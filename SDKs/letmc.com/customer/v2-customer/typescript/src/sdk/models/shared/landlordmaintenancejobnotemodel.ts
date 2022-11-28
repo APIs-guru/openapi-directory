@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // LandlordMaintenanceJobNoteModel
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Maintenance Job Note Helper Model:-
 **/
 export class LandlordMaintenanceJobNoteModel extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CreatedAt" })
+  @SpeakeasyMetadata({ data: "json, name=CreatedAt" })
   createdAt?: Date;
 
-  @Metadata({ data: "json, name=NoteContents" })
+  @SpeakeasyMetadata({ data: "json, name=NoteContents" })
   noteContents?: string;
 
-  @Metadata({ data: "json, name=OID" })
+  @SpeakeasyMetadata({ data: "json, name=OID" })
   oid?: string;
 }

@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// WorkloadSummary
+// A workload summary return object.
 type WorkloadSummary struct {
 	ImprovementStatus *WorkloadImprovementStatusEnum `json:"ImprovementStatus,omitempty"`
 	Lenses            []string                       `json:"Lenses,omitempty"`

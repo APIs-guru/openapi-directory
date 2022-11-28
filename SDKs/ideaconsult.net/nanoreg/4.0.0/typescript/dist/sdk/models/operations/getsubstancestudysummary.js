@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetSubstanceStudySummaryPathParams = /** @class */ (function (_super) {
     __extends(GetSubstanceStudySummaryPathParams, _super);
@@ -30,11 +30,11 @@ var GetSubstanceStudySummaryPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=db" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=db" }),
         __metadata("design:type", String)
     ], GetSubstanceStudySummaryPathParams.prototype, "db", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=uuid" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=uuid" }),
         __metadata("design:type", String)
     ], GetSubstanceStudySummaryPathParams.prototype, "uuid", void 0);
     return GetSubstanceStudySummaryPathParams;
@@ -54,31 +54,31 @@ var GetSubstanceStudySummaryQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=category" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=category" }),
         __metadata("design:type", String)
     ], GetSubstanceStudySummaryQueryParams.prototype, "category", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=page" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page" }),
         __metadata("design:type", Number)
     ], GetSubstanceStudySummaryQueryParams.prototype, "page", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=pagesize" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=pagesize" }),
         __metadata("design:type", Number)
     ], GetSubstanceStudySummaryQueryParams.prototype, "pagesize", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=property" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=property" }),
         __metadata("design:type", String)
     ], GetSubstanceStudySummaryQueryParams.prototype, "property", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=property_uri" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=property_uri" }),
         __metadata("design:type", String)
     ], GetSubstanceStudySummaryQueryParams.prototype, "propertyUri", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=result" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=result" }),
         __metadata("design:type", Boolean)
     ], GetSubstanceStudySummaryQueryParams.prototype, "result", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=top" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=top" }),
         __metadata("design:type", String)
     ], GetSubstanceStudySummaryQueryParams.prototype, "top", void 0);
     return GetSubstanceStudySummaryQueryParams;
@@ -90,11 +90,11 @@ var GetSubstanceStudySummaryRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetSubstanceStudySummaryPathParams)
     ], GetSubstanceStudySummaryRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetSubstanceStudySummaryQueryParams)
     ], GetSubstanceStudySummaryRequest.prototype, "queryParams", void 0);
     return GetSubstanceStudySummaryRequest;
@@ -106,15 +106,15 @@ var GetSubstanceStudySummaryResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetSubstanceStudySummaryResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetSubstanceStudySummaryResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.SubstanceStudySummary)
     ], GetSubstanceStudySummaryResponse.prototype, "substanceStudySummary", void 0);
     return GetSubstanceStudySummaryResponse;

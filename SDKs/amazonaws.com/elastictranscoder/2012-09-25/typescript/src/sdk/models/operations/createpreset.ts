@@ -1,27 +1,28 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class CreatePresetHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
@@ -31,22 +32,22 @@ export class CreatePresetHeaders extends SpeakeasyBase {
  * Parameters required for transcoding audio.
 **/
 export class CreatePresetRequestBodyAudio extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AudioPackingMode" })
+  @SpeakeasyMetadata({ data: "json, name=AudioPackingMode" })
   audioPackingMode?: string;
 
-  @Metadata({ data: "json, name=BitRate" })
+  @SpeakeasyMetadata({ data: "json, name=BitRate" })
   bitRate?: string;
 
-  @Metadata({ data: "json, name=Channels" })
+  @SpeakeasyMetadata({ data: "json, name=Channels" })
   channels?: string;
 
-  @Metadata({ data: "json, name=Codec" })
+  @SpeakeasyMetadata({ data: "json, name=Codec" })
   codec?: string;
 
-  @Metadata({ data: "json, name=CodecOptions" })
+  @SpeakeasyMetadata({ data: "json, name=CodecOptions" })
   codecOptions?: shared.AudioCodecOptions;
 
-  @Metadata({ data: "json, name=SampleRate" })
+  @SpeakeasyMetadata({ data: "json, name=SampleRate" })
   sampleRate?: string;
 }
 
@@ -56,28 +57,28 @@ export class CreatePresetRequestBodyAudio extends SpeakeasyBase {
  * Thumbnails for videos.
 **/
 export class CreatePresetRequestBodyThumbnails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AspectRatio" })
+  @SpeakeasyMetadata({ data: "json, name=AspectRatio" })
   aspectRatio?: string;
 
-  @Metadata({ data: "json, name=Format" })
+  @SpeakeasyMetadata({ data: "json, name=Format" })
   format?: string;
 
-  @Metadata({ data: "json, name=Interval" })
+  @SpeakeasyMetadata({ data: "json, name=Interval" })
   interval?: string;
 
-  @Metadata({ data: "json, name=MaxHeight" })
+  @SpeakeasyMetadata({ data: "json, name=MaxHeight" })
   maxHeight?: string;
 
-  @Metadata({ data: "json, name=MaxWidth" })
+  @SpeakeasyMetadata({ data: "json, name=MaxWidth" })
   maxWidth?: string;
 
-  @Metadata({ data: "json, name=PaddingPolicy" })
+  @SpeakeasyMetadata({ data: "json, name=PaddingPolicy" })
   paddingPolicy?: string;
 
-  @Metadata({ data: "json, name=Resolution" })
+  @SpeakeasyMetadata({ data: "json, name=Resolution" })
   resolution?: string;
 
-  @Metadata({ data: "json, name=SizingPolicy" })
+  @SpeakeasyMetadata({ data: "json, name=SizingPolicy" })
   sizingPolicy?: string;
 }
 
@@ -87,105 +88,105 @@ export class CreatePresetRequestBodyThumbnails extends SpeakeasyBase {
  * The <code>VideoParameters</code> structure.
 **/
 export class CreatePresetRequestBodyVideo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AspectRatio" })
+  @SpeakeasyMetadata({ data: "json, name=AspectRatio" })
   aspectRatio?: string;
 
-  @Metadata({ data: "json, name=BitRate" })
+  @SpeakeasyMetadata({ data: "json, name=BitRate" })
   bitRate?: string;
 
-  @Metadata({ data: "json, name=Codec" })
+  @SpeakeasyMetadata({ data: "json, name=Codec" })
   codec?: string;
 
-  @Metadata({ data: "json, name=CodecOptions" })
+  @SpeakeasyMetadata({ data: "json, name=CodecOptions" })
   codecOptions?: Map<string, string>;
 
-  @Metadata({ data: "json, name=DisplayAspectRatio" })
+  @SpeakeasyMetadata({ data: "json, name=DisplayAspectRatio" })
   displayAspectRatio?: string;
 
-  @Metadata({ data: "json, name=FixedGOP" })
+  @SpeakeasyMetadata({ data: "json, name=FixedGOP" })
   fixedGop?: string;
 
-  @Metadata({ data: "json, name=FrameRate" })
+  @SpeakeasyMetadata({ data: "json, name=FrameRate" })
   frameRate?: string;
 
-  @Metadata({ data: "json, name=KeyframesMaxDist" })
+  @SpeakeasyMetadata({ data: "json, name=KeyframesMaxDist" })
   keyframesMaxDist?: string;
 
-  @Metadata({ data: "json, name=MaxFrameRate" })
+  @SpeakeasyMetadata({ data: "json, name=MaxFrameRate" })
   maxFrameRate?: string;
 
-  @Metadata({ data: "json, name=MaxHeight" })
+  @SpeakeasyMetadata({ data: "json, name=MaxHeight" })
   maxHeight?: string;
 
-  @Metadata({ data: "json, name=MaxWidth" })
+  @SpeakeasyMetadata({ data: "json, name=MaxWidth" })
   maxWidth?: string;
 
-  @Metadata({ data: "json, name=PaddingPolicy" })
+  @SpeakeasyMetadata({ data: "json, name=PaddingPolicy" })
   paddingPolicy?: string;
 
-  @Metadata({ data: "json, name=Resolution" })
+  @SpeakeasyMetadata({ data: "json, name=Resolution" })
   resolution?: string;
 
-  @Metadata({ data: "json, name=SizingPolicy" })
+  @SpeakeasyMetadata({ data: "json, name=SizingPolicy" })
   sizingPolicy?: string;
 
-  @Metadata({ data: "json, name=Watermarks", elemType: shared.PresetWatermark })
+  @SpeakeasyMetadata({ data: "json, name=Watermarks", elemType: shared.PresetWatermark })
   watermarks?: shared.PresetWatermark[];
 }
 
 
 export class CreatePresetRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Audio" })
+  @SpeakeasyMetadata({ data: "json, name=Audio" })
   audio?: CreatePresetRequestBodyAudio;
 
-  @Metadata({ data: "json, name=Container" })
+  @SpeakeasyMetadata({ data: "json, name=Container" })
   container: string;
 
-  @Metadata({ data: "json, name=Description" })
+  @SpeakeasyMetadata({ data: "json, name=Description" })
   description?: string;
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name: string;
 
-  @Metadata({ data: "json, name=Thumbnails" })
+  @SpeakeasyMetadata({ data: "json, name=Thumbnails" })
   thumbnails?: CreatePresetRequestBodyThumbnails;
 
-  @Metadata({ data: "json, name=Video" })
+  @SpeakeasyMetadata({ data: "json, name=Video" })
   video?: CreatePresetRequestBodyVideo;
 }
 
 
 export class CreatePresetRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: CreatePresetHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: CreatePresetRequestBody;
 }
 
 
 export class CreatePresetResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   accessDeniedException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   createPresetResponse?: shared.CreatePresetResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   incompatibleVersionException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   internalServiceException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   limitExceededException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   validationException?: any;
 }

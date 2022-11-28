@@ -1,6 +1,7 @@
 
 
+
 export enum ReactionEnum {
-    ThumbsUp = "ThumbsUp"
-,    ThumbsDown = "ThumbsDown"
+    ThumbsUp = "ThumbsUp",
+    ThumbsDown = "ThumbsDown"
 }

@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum PlayerAchievementAchievementStateEnum {
-    StateUnspecified = "STATE_UNSPECIFIED"
-,    Hidden = "HIDDEN"
-,    Revealed = "REVEALED"
-,    Unlocked = "UNLOCKED"
+    StateUnspecified = "STATE_UNSPECIFIED",
+    Hidden = "HIDDEN",
+    Revealed = "REVEALED",
+    Unlocked = "UNLOCKED"
 }
 
 
@@ -13,24 +14,24 @@ export enum PlayerAchievementAchievementStateEnum {
  * An achievement object.
 **/
 export class PlayerAchievement extends SpeakeasyBase {
-  @Metadata({ data: "json, name=achievementState" })
+  @SpeakeasyMetadata({ data: "json, name=achievementState" })
   achievementState?: PlayerAchievementAchievementStateEnum;
 
-  @Metadata({ data: "json, name=currentSteps" })
+  @SpeakeasyMetadata({ data: "json, name=currentSteps" })
   currentSteps?: number;
 
-  @Metadata({ data: "json, name=experiencePoints" })
+  @SpeakeasyMetadata({ data: "json, name=experiencePoints" })
   experiencePoints?: string;
 
-  @Metadata({ data: "json, name=formattedCurrentStepsString" })
+  @SpeakeasyMetadata({ data: "json, name=formattedCurrentStepsString" })
   formattedCurrentStepsString?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=lastUpdatedTimestamp" })
+  @SpeakeasyMetadata({ data: "json, name=lastUpdatedTimestamp" })
   lastUpdatedTimestamp?: string;
 }

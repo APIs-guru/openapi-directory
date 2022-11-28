@@ -1,59 +1,48 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetTrustedDevicePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=deviceId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=deviceId" })
   deviceId: number;
 }
 
 
-export class GetTrustedDeviceSecurityOption1 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=bearer" })
-  personalAccessToken: shared.SchemePersonalAccessToken;
-}
-
-
-export class GetTrustedDeviceSecurityOption2 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
-  oauth: shared.SchemeOauth;
-}
-
-
 export class GetTrustedDeviceSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, option=true" })
-  option1?: GetTrustedDeviceSecurityOption1;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" })
+  personalAccessToken?: shared.SchemePersonalAccessToken;
 
-  @Metadata({ data: "security, option=true" })
-  option2?: GetTrustedDeviceSecurityOption2;
-}
-
-
-export class GetTrustedDeviceRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: GetTrustedDevicePathParams;
-
-  @Metadata()
-  security: GetTrustedDeviceSecurity;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
+  oauth?: shared.SchemeOauth;
 }
 
 
 export class GetTrustedDeviceDefaultApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=errors", elemType: shared.ErrorObject })
+  @SpeakeasyMetadata({ data: "json, name=errors", elemType: shared.ErrorObject })
   errors?: shared.ErrorObject[];
 }
 
 
+export class GetTrustedDeviceRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: GetTrustedDevicePathParams;
+
+  @SpeakeasyMetadata()
+  security: GetTrustedDeviceSecurity;
+}
+
+
 export class GetTrustedDeviceResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   trustedDevice?: shared.TrustedDevice;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getTrustedDeviceDefaultApplicationJsonObject?: GetTrustedDeviceDefaultApplicationJson;
 }

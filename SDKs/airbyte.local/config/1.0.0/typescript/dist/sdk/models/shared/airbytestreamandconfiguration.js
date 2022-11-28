@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AirbyteStreamConfiguration } from "./airbytestreamconfiguration";
 import { AirbyteStream } from "./airbytestream";
 // AirbyteStreamAndConfiguration
@@ -35,11 +35,11 @@ var AirbyteStreamAndConfiguration = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=config" }),
+        SpeakeasyMetadata({ data: "json, name=config" }),
         __metadata("design:type", AirbyteStreamConfiguration)
     ], AirbyteStreamAndConfiguration.prototype, "config", void 0);
     __decorate([
-        Metadata({ data: "json, name=stream" }),
+        SpeakeasyMetadata({ data: "json, name=stream" }),
         __metadata("design:type", AirbyteStream)
     ], AirbyteStreamAndConfiguration.prototype, "stream", void 0);
     return AirbyteStreamAndConfiguration;

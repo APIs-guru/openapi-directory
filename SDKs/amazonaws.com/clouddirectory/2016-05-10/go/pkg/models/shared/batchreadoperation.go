@@ -1,5 +1,7 @@
 package shared
 
+// BatchReadOperation
+// Represents the output of a <code>BatchRead</code> operation.
 type BatchReadOperation struct {
 	GetLinkAttributes      *BatchGetLinkAttributes      `json:"GetLinkAttributes,omitempty"`
 	GetObjectAttributes    *BatchGetObjectAttributes    `json:"GetObjectAttributes,omitempty"`

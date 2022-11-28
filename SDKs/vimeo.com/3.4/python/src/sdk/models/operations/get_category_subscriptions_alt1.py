@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 class GetCategorySubscriptionsAlt1DirectionEnum(str, Enum):
@@ -22,19 +26,19 @@ class GetCategorySubscriptionsAlt1QueryParams:
 
 @dataclass
 class GetCategorySubscriptionsAlt1Security:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class GetCategorySubscriptionsAlt1Request:
-    query_params: GetCategorySubscriptionsAlt1QueryParams = field(default=None)
-    security: GetCategorySubscriptionsAlt1Security = field(default=None)
+    query_params: GetCategorySubscriptionsAlt1QueryParams = field()
+    security: GetCategorySubscriptionsAlt1Security = field()
     
 
 @dataclass
 class GetCategorySubscriptionsAlt1Response:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     categories: Optional[List[shared.Category]] = field(default=None)
     error: Optional[shared.Error] = field(default=None)
     

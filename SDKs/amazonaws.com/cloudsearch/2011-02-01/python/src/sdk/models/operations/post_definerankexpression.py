@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostDefineRankExpressionActionEnum(str, Enum):
     DEFINE_RANK_EXPRESSION = "DefineRankExpression"
@@ -10,8 +14,8 @@ class PostDefineRankExpressionVersionEnum(str, Enum):
 
 @dataclass
 class PostDefineRankExpressionQueryParams:
-    action: PostDefineRankExpressionActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostDefineRankExpressionVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostDefineRankExpressionActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostDefineRankExpressionVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostDefineRankExpressionHeaders:
 
 @dataclass
 class PostDefineRankExpressionRequest:
-    query_params: PostDefineRankExpressionQueryParams = field(default=None)
-    headers: PostDefineRankExpressionHeaders = field(default=None)
+    headers: PostDefineRankExpressionHeaders = field()
+    query_params: PostDefineRankExpressionQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostDefineRankExpressionResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

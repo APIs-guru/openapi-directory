@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 /**
  * Contains a composite model definition in an asset model. This composite model definition is applied to all assets created from the asset model.
 **/

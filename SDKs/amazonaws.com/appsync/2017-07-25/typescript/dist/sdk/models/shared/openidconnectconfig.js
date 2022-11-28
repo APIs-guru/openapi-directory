@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // OpenIdConnectConfig
 /**
  * Describes an OpenID Connect configuration.
@@ -33,19 +33,19 @@ var OpenIdConnectConfig = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=authTTL" }),
+        SpeakeasyMetadata({ data: "json, name=authTTL" }),
         __metadata("design:type", Number)
     ], OpenIdConnectConfig.prototype, "authTtl", void 0);
     __decorate([
-        Metadata({ data: "json, name=clientId" }),
+        SpeakeasyMetadata({ data: "json, name=clientId" }),
         __metadata("design:type", String)
     ], OpenIdConnectConfig.prototype, "clientId", void 0);
     __decorate([
-        Metadata({ data: "json, name=iatTTL" }),
+        SpeakeasyMetadata({ data: "json, name=iatTTL" }),
         __metadata("design:type", Number)
     ], OpenIdConnectConfig.prototype, "iatTtl", void 0);
     __decorate([
-        Metadata({ data: "json, name=issuer" }),
+        SpeakeasyMetadata({ data: "json, name=issuer" }),
         __metadata("design:type", String)
     ], OpenIdConnectConfig.prototype, "issuer", void 0);
     return OpenIdConnectConfig;

@@ -1,5 +1,8 @@
 package shared
 
+// DescribeSubscribersForNotificationRequest
+//
+//	Request of DescribeSubscribersForNotification
 type DescribeSubscribersForNotificationRequest struct {
 	AccountID    string       `json:"AccountId"`
 	BudgetName   string       `json:"BudgetName"`

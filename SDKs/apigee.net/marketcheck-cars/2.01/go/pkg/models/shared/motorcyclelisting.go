@@ -1,5 +1,7 @@
 package shared
 
+// MotorcycleListing
+// Represents a full list of attributes available with Marketcheck for a car
 type MotorcycleListing struct {
 	Build           *MotorcycleBuild            `json:"build,omitempty"`
 	Color           *string                     `json:"color,omitempty"`

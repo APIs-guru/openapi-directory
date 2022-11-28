@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass_json
 @dataclass
 class ApproveAssignmentRequest:
-    assignment_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AssignmentId' }})
-    override_rejection: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'OverrideRejection' }})
-    requester_feedback: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'RequesterFeedback' }})
+    assignment_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('AssignmentId') }})
+    override_rejection: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('OverrideRejection') }})
+    requester_feedback: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('RequesterFeedback') }})
     

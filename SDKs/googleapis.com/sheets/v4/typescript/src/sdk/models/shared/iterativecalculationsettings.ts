@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // IterativeCalculationSettings
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Settings to control how circular dependencies are resolved with iterative calculation.
 **/
 export class IterativeCalculationSettings extends SpeakeasyBase {
-  @Metadata({ data: "json, name=convergenceThreshold" })
+  @SpeakeasyMetadata({ data: "json, name=convergenceThreshold" })
   convergenceThreshold?: number;
 
-  @Metadata({ data: "json, name=maxIterations" })
+  @SpeakeasyMetadata({ data: "json, name=maxIterations" })
   maxIterations?: number;
 }

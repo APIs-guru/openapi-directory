@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DatasetTypeEnum } from "./datasettypeenum";
 import { DomainEnum } from "./domainenum";
 // DatasetSummary
@@ -35,27 +35,27 @@ var DatasetSummary = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=CreationTime" }),
+        SpeakeasyMetadata({ data: "json, name=CreationTime" }),
         __metadata("design:type", Date)
     ], DatasetSummary.prototype, "creationTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=DatasetArn" }),
+        SpeakeasyMetadata({ data: "json, name=DatasetArn" }),
         __metadata("design:type", String)
     ], DatasetSummary.prototype, "datasetArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=DatasetName" }),
+        SpeakeasyMetadata({ data: "json, name=DatasetName" }),
         __metadata("design:type", String)
     ], DatasetSummary.prototype, "datasetName", void 0);
     __decorate([
-        Metadata({ data: "json, name=DatasetType" }),
+        SpeakeasyMetadata({ data: "json, name=DatasetType" }),
         __metadata("design:type", String)
     ], DatasetSummary.prototype, "datasetType", void 0);
     __decorate([
-        Metadata({ data: "json, name=Domain" }),
+        SpeakeasyMetadata({ data: "json, name=Domain" }),
         __metadata("design:type", String)
     ], DatasetSummary.prototype, "domain", void 0);
     __decorate([
-        Metadata({ data: "json, name=LastModificationTime" }),
+        SpeakeasyMetadata({ data: "json, name=LastModificationTime" }),
         __metadata("design:type", Date)
     ], DatasetSummary.prototype, "lastModificationTime", void 0);
     return DatasetSummary;

@@ -1,5 +1,7 @@
 package shared
 
+// PaginatedPipelineKnownHosts
+// A paged list of known hosts.
 type PaginatedPipelineKnownHosts struct {
 	Next     *string                  `json:"next,omitempty"`
 	Page     *int64                   `json:"page,omitempty"`

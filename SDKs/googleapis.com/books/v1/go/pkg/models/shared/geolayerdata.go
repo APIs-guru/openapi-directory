@@ -18,6 +18,8 @@ type GeolayerdataGeoViewportLo struct {
 	Longitude *float64 `json:"longitude,omitempty"`
 }
 
+// GeolayerdataGeoViewport
+// The viewport for showing this location. This is a latitude, longitude rectangle.
 type GeolayerdataGeoViewport struct {
 	Hi *GeolayerdataGeoViewportHi `json:"hi,omitempty"`
 	Lo *GeolayerdataGeoViewportLo `json:"lo,omitempty"`

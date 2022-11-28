@@ -24,11 +24,6 @@ type ProductHeaders struct {
 	AcceptLanguage string `header:"style=simple,explode=false,name=Accept-Language"`
 }
 
-type ProductRequest struct {
-	QueryParams ProductQueryParams
-	Headers     ProductHeaders
-}
-
 type Product200ApplicationJSONDataAgeBands struct {
 	Adult             *bool   `json:"adult,omitempty"`
 	AgeFrom           *int64  `json:"ageFrom,omitempty"`
@@ -98,6 +93,8 @@ type Product200ApplicationJSONDataTourGrades struct {
 	SortOrder                     *int64            `json:"sortOrder,omitempty"`
 }
 
+// Product200ApplicationJSONData
+// **object** containing product details
 type Product200ApplicationJSONData struct {
 	AdditionalInfo                []string                                                 `json:"additionalInfo,omitempty"`
 	Admission                     *string                                                  `json:"admission,omitempty"`
@@ -195,6 +192,11 @@ type Product200ApplicationJSON struct {
 	Success          *bool                          `json:"success,omitempty"`
 	TotalCount       *int64                         `json:"totalCount,omitempty"`
 	Vmid             *string                        `json:"vmid,omitempty"`
+}
+
+type ProductRequest struct {
+	QueryParams ProductQueryParams
+	Headers     ProductHeaders
 }
 
 type ProductResponse struct {

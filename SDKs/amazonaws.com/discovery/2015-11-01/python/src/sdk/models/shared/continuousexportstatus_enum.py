@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class ContinuousExportStatusEnum(str, Enum):
     START_IN_PROGRESS = "START_IN_PROGRESS"

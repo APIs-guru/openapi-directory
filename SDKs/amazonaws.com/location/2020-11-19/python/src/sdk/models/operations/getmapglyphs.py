@@ -1,13 +1,16 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class GetMapGlyphsPathParams:
-    font_stack: str = field(default=None, metadata={'path_param': { 'field_name': 'FontStack', 'style': 'simple', 'explode': False }})
-    font_unicode_range: str = field(default=None, metadata={'path_param': { 'field_name': 'FontUnicodeRange', 'style': 'simple', 'explode': False }})
-    map_name: str = field(default=None, metadata={'path_param': { 'field_name': 'MapName', 'style': 'simple', 'explode': False }})
+    font_stack: str = field(metadata={'path_param': { 'field_name': 'FontStack', 'style': 'simple', 'explode': False }})
+    font_unicode_range: str = field(metadata={'path_param': { 'field_name': 'FontUnicodeRange', 'style': 'simple', 'explode': False }})
+    map_name: str = field(metadata={'path_param': { 'field_name': 'MapName', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -23,18 +26,18 @@ class GetMapGlyphsHeaders:
 
 @dataclass
 class GetMapGlyphsRequest:
-    path_params: GetMapGlyphsPathParams = field(default=None)
-    headers: GetMapGlyphsHeaders = field(default=None)
+    headers: GetMapGlyphsHeaders = field()
+    path_params: GetMapGlyphsPathParams = field()
     
 
 @dataclass
 class GetMapGlyphsResponse:
+    content_type: str = field()
+    status_code: int = field()
     access_denied_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     get_map_glyphs_response: Optional[shared.GetMapGlyphsResponse] = field(default=None)
     internal_server_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     validation_exception: Optional[Any] = field(default=None)
     

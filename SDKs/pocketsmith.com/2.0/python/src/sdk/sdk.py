@@ -1,8 +1,11 @@
-import warnings
+
+
 import requests
 from typing import List,Optional
-from sdk.models import operations, shared
+from sdk.models import shared, operations
 from . import utils
+
+
 
 
 SERVERS = [
@@ -11,28 +14,58 @@ SERVERS = [
 
 
 class SDK:
-    client = requests.Session()
-    server_url = SERVERS[0]
+    
+
+    _client: requests.Session
+    _security_client: requests.Session
+    _security: shared.Security
+    _server_url: str = SERVERS[0]
+    _language: str = "python"
+    _sdk_version: str = "0.0.1"
+    _gen_version: str = "internal"
+
+    def __init__(self) -> None:
+        self._client = requests.Session()
+        self._security_client = requests.Session()
+        
+
 
     def config_server_url(self, server_url: str, params: dict[str, str]):
-        if not params is None:
-            self.server_url = utils.replace_parameters(server_url, params)
+        if params is not None:
+            self._server_url = utils.replace_parameters(server_url, params)
         else:
-            self.server_url = server_url
-            
-    
-    def config_security(self, security: shared.Security):
-        self.client = utils.configure_security_client(security)
+            self._server_url = server_url
 
+        
+    
+
+    def config_client(self, client: requests.Session):
+        self._client = client
+        
+        if self._security is not None:
+            self._security_client = utils.configure_security_client(self._client, self._security)
+        
+    
+
+    def config_security(self, security: shared.Security):
+        self._security = security
+        self._security_client = utils.configure_security_client(self._client, security)
+        
+    
+    
     
     def delete_accounts_id_(self, request: operations.DeleteAccountsIDRequest) -> operations.DeleteAccountsIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Delete account
+        Deletes an account and all its data by ID, optionally merge scenarios into another account.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/accounts/{id}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
@@ -57,13 +90,17 @@ class SDK:
 
     
     def delete_attachments_id_(self, request: operations.DeleteAttachmentsIDRequest) -> operations.DeleteAttachmentsIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Delete attachment
+        Deletes a particular attachment by its ID.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/attachments/{id}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
@@ -84,13 +121,17 @@ class SDK:
 
     
     def delete_categories_id_(self, request: operations.DeleteCategoriesIDRequest) -> operations.DeleteCategoriesIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Delete category
+        Deletes a particular category by its ID. This will delete all budgets within the category, and uncategorize all transactions assigned to the category.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/categories/{id}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
@@ -111,13 +152,17 @@ class SDK:
 
     
     def delete_institutions_id_(self, request: operations.DeleteInstitutionsIDRequest) -> operations.DeleteInstitutionsIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Delete institution
+        Deletes an institution and all data within. Alternatively, another institution can be provided to merge the data into to avoid losing it.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/institutions/{id}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
@@ -142,13 +187,17 @@ class SDK:
 
     
     def delete_transactions_transaction_id_attachments_attachment_id_(self, request: operations.DeleteTransactionsTransactionIDAttachmentsAttachmentIDRequest) -> operations.DeleteTransactionsTransactionIDAttachmentsAttachmentIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Unassigns attachment in transaction
+        Unassigns a particular attachment by its ID from the transaction ID. This does not delete the attachment, it only removes its association from the transaction.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/transactions/{transaction_id}/attachments/{attachment_id}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
@@ -169,13 +218,17 @@ class SDK:
 
     
     def get_accounts_id_(self, request: operations.GetAccountsIDRequest) -> operations.GetAccountsIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get account
+        Gets an account by its ID.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/accounts/{id}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -198,15 +251,18 @@ class SDK:
 
     
     def get_accounts_id_transactions(self, request: operations.GetAccountsIDTransactionsRequest) -> operations.GetAccountsIDTransactionsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""List transactions in account
+        Lists transactions belonging to an account by its ID.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/accounts/{id}/transactions", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -233,13 +289,17 @@ class SDK:
 
     
     def get_attachments_id_(self, request: operations.GetAttachmentsIDRequest) -> operations.GetAttachmentsIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get attachment
+        Gets a particular attachment by its ID.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/attachments/{id}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -262,13 +322,17 @@ class SDK:
 
     
     def get_categories_id_(self, request: operations.GetCategoriesIDRequest) -> operations.GetCategoriesIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get category
+        Gets a particular category by its ID.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/categories/{id}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -291,13 +355,17 @@ class SDK:
 
     
     def get_institutions_id_(self, request: operations.GetInstitutionsIDRequest) -> operations.GetInstitutionsIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get institution
+        Gets an institution by its ID.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/institutions/{id}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -320,13 +388,17 @@ class SDK:
 
     
     def get_institutions_id_accounts(self, request: operations.GetInstitutionsIDAccountsRequest) -> operations.GetInstitutionsIDAccountsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""List accounts in institution
+        Lists accounts belonging to an institution by its ID.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/institutions/{id}/accounts", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -349,13 +421,17 @@ class SDK:
 
     
     def get_me(self) -> operations.GetMeResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get the authorised user
+        Gets the user that corresponds to the access token used in the request.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/me"
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -370,13 +446,17 @@ class SDK:
 
     
     def get_transaction_accounts_id_(self, request: operations.GetTransactionAccountsIDRequest) -> operations.GetTransactionAccountsIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get transaction account
+        Gets a transaction account by its ID.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/transaction_accounts/{id}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -399,15 +479,18 @@ class SDK:
 
     
     def get_transaction_accounts_id_transactions(self, request: operations.GetTransactionAccountsIDTransactionsRequest) -> operations.GetTransactionAccountsIDTransactionsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""List transactions in transaction account
+        Lists transactions belonging to a transaction account by its ID.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/transaction_accounts/{id}/transactions", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -434,13 +517,17 @@ class SDK:
 
     
     def get_transactions_id_(self, request: operations.GetTransactionsIDRequest) -> operations.GetTransactionsIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get a transaction
+        Gets a transaction by its ID.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/transactions/{id}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -463,13 +550,17 @@ class SDK:
 
     
     def get_transactions_id_attachments(self, request: operations.GetTransactionsIDAttachmentsRequest) -> operations.GetTransactionsIDAttachmentsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""List attachments in transaction
+        Lists attachments belonging to a transaction by their ID.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/transactions/{id}/attachments", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -492,13 +583,17 @@ class SDK:
 
     
     def get_users_id_(self, request: operations.GetUsersIDRequest) -> operations.GetUsersIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get user
+        Gets a user by ID. You must be authorised as the target user in order to make this request.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/users/{id}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -517,13 +612,17 @@ class SDK:
 
     
     def get_users_id_accounts(self, request: operations.GetUsersIDAccountsRequest) -> operations.GetUsersIDAccountsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""List accounts in user
+        Lists all accounts belonging to the user by their ID.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/users/{id}/accounts", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -546,15 +645,18 @@ class SDK:
 
     
     def get_users_id_attachments(self, request: operations.GetUsersIDAttachmentsRequest) -> operations.GetUsersIDAttachmentsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Lists attachments in user
+        Lists attachments belonging to a user by their ID.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/users/{id}/attachments", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -577,15 +679,18 @@ class SDK:
 
     
     def get_users_id_budget(self, request: operations.GetUsersIDBudgetRequest) -> operations.GetUsersIDBudgetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""List budget for user
+        Lists the user's budget, consisting of one or more budget analysis packages, one per category. Akin to the list on the Budget page in PocketSmith.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/users/{id}/budget", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -600,15 +705,18 @@ class SDK:
 
     
     def get_users_id_budget_summary(self, request: operations.GetUsersIDBudgetSummaryRequest) -> operations.GetUsersIDBudgetSummaryResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get budget summary for user
+        Get the user's budget summary, containing an expense and income analysis for all categories (excluding transfer categories) for the given period and date range. Akin to the overall budget shown on the Budget page in PocketSmith.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/users/{id}/budget_summary", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -623,13 +731,17 @@ class SDK:
 
     
     def get_users_id_categories(self, request: operations.GetUsersIDCategoriesRequest) -> operations.GetUsersIDCategoriesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""List categories in user
+        Lists all categories belonging to a user by their ID.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/users/{id}/categories", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -652,13 +764,17 @@ class SDK:
 
     
     def get_users_id_category_rules(self, request: operations.GetUsersIDCategoryRulesRequest) -> operations.GetUsersIDCategoryRulesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""List category rules in user
+        Lists all category rules belonging to a user by their ID.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/users/{id}/category_rules", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -681,13 +797,17 @@ class SDK:
 
     
     def get_users_id_institutions(self, request: operations.GetUsersIDInstitutionsRequest) -> operations.GetUsersIDInstitutionsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""List institutions in user
+        Lists all the institutions belonging to the user.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/users/{id}/institutions", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -710,13 +830,17 @@ class SDK:
 
     
     def get_users_id_transaction_accounts(self, request: operations.GetUsersIDTransactionAccountsRequest) -> operations.GetUsersIDTransactionAccountsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""List transaction accounts in user
+        List all transaction accounts belonging to a user.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/users/{id}/transaction_accounts", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -739,15 +863,18 @@ class SDK:
 
     
     def get_users_id_transactions(self, request: operations.GetUsersIDTransactionsRequest) -> operations.GetUsersIDTransactionsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""List transactions in user
+        Lists transactions belonging to a user by their ID.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/users/{id}/transactions", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -774,15 +901,18 @@ class SDK:
 
     
     def get_users_id_trend_analysis(self, request: operations.GetUsersIDTrendAnalysisRequest) -> operations.GetUsersIDTrendAnalysisResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get trend analysis for user
+        Get an income and/or expense budget analysis for the given date range and period across any number of categories and scenarios. Akin to the Trends page in PocketSmith.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/users/{id}/trend_analysis", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -797,19 +927,21 @@ class SDK:
 
     
     def post_categories_id_category_rules(self, request: operations.PostCategoriesIDCategoryRulesRequest) -> operations.PostCategoriesIDCategoryRulesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Create category rule in category
+        Creates a rule to allocate a category to transactions.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/categories/{id}/category_rules", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -836,19 +968,21 @@ class SDK:
 
     
     def post_transaction_accounts_id_transactions(self, request: operations.PostTransactionAccountsIDTransactionsRequest) -> operations.PostTransactionAccountsIDTransactionsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Create a transaction in transaction account
+        Creates a transaction in a transaction account by its ID.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/transaction_accounts/{id}/transactions", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -875,19 +1009,21 @@ class SDK:
 
     
     def post_transactions_id_attachments(self, request: operations.PostTransactionsIDAttachmentsRequest) -> operations.PostTransactionsIDAttachmentsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Assigns attachment to transaction
+        Assigns an attachment to the transaction by their ID.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/transactions/{id}/attachments", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -914,19 +1050,21 @@ class SDK:
 
     
     def post_users_id_accounts(self, request: operations.PostUsersIDAccountsRequest) -> operations.PostUsersIDAccountsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Create an account in user
+        Creates and returns an account belonging to the user by their ID.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/users/{id}/accounts", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -949,19 +1087,21 @@ class SDK:
 
     
     def post_users_id_attachments(self, request: operations.PostUsersIDAttachmentsRequest) -> operations.PostUsersIDAttachmentsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Create attachment in user
+        Creates an attachment belonging to the user by their ID.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/users/{id}/attachments", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -988,19 +1128,21 @@ class SDK:
 
     
     def post_users_id_categories(self, request: operations.PostUsersIDCategoriesRequest) -> operations.PostUsersIDCategoriesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Create category in user
+        Creates a category belonging to the user by their ID.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/users/{id}/categories", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1027,19 +1169,21 @@ class SDK:
 
     
     def post_users_id_institutions(self, request: operations.PostUsersIDInstitutionsRequest) -> operations.PostUsersIDInstitutionsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Create institution in user
+        Creates an institution belonging to a user.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/users/{id}/institutions", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1066,19 +1210,21 @@ class SDK:
 
     
     def put_accounts_id_(self, request: operations.PutAccountsIDRequest) -> operations.PutAccountsIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Update account
+        Updates and returns an account by its ID.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/accounts/{id}", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1105,19 +1251,21 @@ class SDK:
 
     
     def put_attachments_id_(self, request: operations.PutAttachmentsIDRequest) -> operations.PutAttachmentsIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Update attachment
+        Updates the title of the attachment.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/attachments/{id}", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1140,19 +1288,21 @@ class SDK:
 
     
     def put_categories_id_(self, request: operations.PutCategoriesIDRequest) -> operations.PutCategoriesIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Update category
+        Updates the title, colour or parent of the category.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/categories/{id}", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1179,19 +1329,21 @@ class SDK:
 
     
     def put_institutions_id_(self, request: operations.PutInstitutionsIDRequest) -> operations.PutInstitutionsIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Update institution
+        Updates the title and currency code for an institution.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/institutions/{id}", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1218,19 +1370,21 @@ class SDK:
 
     
     def put_transaction_accounts_id_(self, request: operations.PutTransactionAccountsIDRequest) -> operations.PutTransactionAccountsIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Update transaction account
+        Change which institution the transaction account belongs to.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/transaction_accounts/{id}", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1253,21 +1407,22 @@ class SDK:
 
     
     def put_transactions_id_(self, request: operations.PutTransactionsIDRequest) -> operations.PutTransactionsIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Update a transaction
+        Updates a transaction by its ID.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/transactions/{id}", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1294,19 +1449,21 @@ class SDK:
 
     
     def put_users_id_(self, request: operations.PutUsersIDRequest) -> operations.PutUsersIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Update user
+        Updates the user by their ID. You must be authorised as the target user in order to make this request.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/users/{id}", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1333,19 +1490,21 @@ class SDK:
 
     
     def put_users_id_accounts(self, request: operations.PutUsersIDAccountsRequest) -> operations.PutUsersIDAccountsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Update the display order of accounts in user
+        Updates the display order of accounts belonging to the user, by accepting an array of accounts in their new display order.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/users/{id}/accounts", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 

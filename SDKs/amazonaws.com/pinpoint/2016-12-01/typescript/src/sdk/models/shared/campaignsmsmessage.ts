@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { MessageTypeEnum } from "./messagetypeenum";
+
 
 
 // CampaignSmsMessage
@@ -7,21 +8,21 @@ import { MessageTypeEnum } from "./messagetypeenum";
  * Specifies the content and settings for an SMS message that's sent to recipients of a campaign.
 **/
 export class CampaignSmsMessage extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Body" })
+  @SpeakeasyMetadata({ data: "json, name=Body" })
   body?: string;
 
-  @Metadata({ data: "json, name=EntityId" })
+  @SpeakeasyMetadata({ data: "json, name=EntityId" })
   entityId?: string;
 
-  @Metadata({ data: "json, name=MessageType" })
+  @SpeakeasyMetadata({ data: "json, name=MessageType" })
   messageType?: MessageTypeEnum;
 
-  @Metadata({ data: "json, name=OriginationNumber" })
+  @SpeakeasyMetadata({ data: "json, name=OriginationNumber" })
   originationNumber?: string;
 
-  @Metadata({ data: "json, name=SenderId" })
+  @SpeakeasyMetadata({ data: "json, name=SenderId" })
   senderId?: string;
 
-  @Metadata({ data: "json, name=TemplateId" })
+  @SpeakeasyMetadata({ data: "json, name=TemplateId" })
   templateId?: string;
 }

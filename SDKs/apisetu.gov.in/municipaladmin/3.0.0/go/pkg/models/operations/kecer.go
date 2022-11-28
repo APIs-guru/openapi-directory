@@ -26,11 +26,6 @@ type KecerSecurity struct {
 	ClientID shared.SchemeClientID `security:"scheme,type=apiKey,subtype=header"`
 }
 
-type KecerRequest struct {
-	Request  *KecerRequestBody `request:"mediaType=application/json"`
-	Security KecerSecurity
-}
-
 type Kecer400ApplicationJSONErrorEnum string
 
 const (
@@ -160,6 +155,11 @@ const (
 type Kecer504ApplicationJSON struct {
 	Error            *Kecer504ApplicationJSONErrorEnum            `json:"error,omitempty"`
 	ErrorDescription *Kecer504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
+}
+
+type KecerRequest struct {
+	Request  *KecerRequestBody `request:"mediaType=application/json"`
+	Security KecerSecurity
 }
 
 type KecerResponse struct {

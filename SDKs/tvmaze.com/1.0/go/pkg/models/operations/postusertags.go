@@ -5,7 +5,7 @@ import (
 )
 
 type PostUserTagsRequest struct {
-	Request *shared.Tag `request:"mediaType=application/json"`
+	Request *shared.TagInput `request:"mediaType=application/json"`
 }
 
 type PostUserTagsResponse struct {

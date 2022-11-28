@@ -5,23 +5,23 @@ from sdk.models import shared
 
 @dataclass
 class StopTalkPathParams:
-    uuid: str = field(default=None, metadata={'path_param': { 'field_name': 'uuid', 'style': 'simple', 'explode': False }})
+    uuid: str = field(metadata={'path_param': { 'field_name': 'uuid', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class StopTalkSecurity:
-    bearer_auth: shared.SchemeBearerAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer' }})
+    bearer_auth: shared.SchemeBearerAuth = field(metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer' }})
     
 
 @dataclass
 class StopTalkRequest:
-    path_params: StopTalkPathParams = field(default=None)
-    security: StopTalkSecurity = field(default=None)
+    path_params: StopTalkPathParams = field()
+    security: StopTalkSecurity = field()
     
 
 @dataclass
 class StopTalkResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     stop_talk_response: Optional[shared.StopTalkResponse] = field(default=None)
     

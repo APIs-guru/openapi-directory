@@ -1,4 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BillingMethodEnum } from "./billingmethodenum";
 import { Counters } from "./counters";
 import { CustomerArtifactPaths } from "./customerartifactpaths";
@@ -14,101 +14,102 @@ import { ExecutionStatusEnum } from "./executionstatusenum";
 import { TestTypeEnum } from "./testtypeenum";
 
 
+
 // Run
 /** 
  * Represents a test run on a set of devices with a given app package, test parameters, and so on.
 **/
 export class Run extends SpeakeasyBase {
-  @Metadata({ data: "json, name=appUpload" })
+  @SpeakeasyMetadata({ data: "json, name=appUpload" })
   appUpload?: string;
 
-  @Metadata({ data: "json, name=arn" })
+  @SpeakeasyMetadata({ data: "json, name=arn" })
   arn?: string;
 
-  @Metadata({ data: "json, name=billingMethod" })
+  @SpeakeasyMetadata({ data: "json, name=billingMethod" })
   billingMethod?: BillingMethodEnum;
 
-  @Metadata({ data: "json, name=completedJobs" })
+  @SpeakeasyMetadata({ data: "json, name=completedJobs" })
   completedJobs?: number;
 
-  @Metadata({ data: "json, name=counters" })
+  @SpeakeasyMetadata({ data: "json, name=counters" })
   counters?: Counters;
 
-  @Metadata({ data: "json, name=created" })
+  @SpeakeasyMetadata({ data: "json, name=created" })
   created?: Date;
 
-  @Metadata({ data: "json, name=customerArtifactPaths" })
+  @SpeakeasyMetadata({ data: "json, name=customerArtifactPaths" })
   customerArtifactPaths?: CustomerArtifactPaths;
 
-  @Metadata({ data: "json, name=deviceMinutes" })
+  @SpeakeasyMetadata({ data: "json, name=deviceMinutes" })
   deviceMinutes?: DeviceMinutes;
 
-  @Metadata({ data: "json, name=devicePoolArn" })
+  @SpeakeasyMetadata({ data: "json, name=devicePoolArn" })
   devicePoolArn?: string;
 
-  @Metadata({ data: "json, name=deviceSelectionResult" })
+  @SpeakeasyMetadata({ data: "json, name=deviceSelectionResult" })
   deviceSelectionResult?: DeviceSelectionResult;
 
-  @Metadata({ data: "json, name=eventCount" })
+  @SpeakeasyMetadata({ data: "json, name=eventCount" })
   eventCount?: number;
 
-  @Metadata({ data: "json, name=jobTimeoutMinutes" })
+  @SpeakeasyMetadata({ data: "json, name=jobTimeoutMinutes" })
   jobTimeoutMinutes?: number;
 
-  @Metadata({ data: "json, name=locale" })
+  @SpeakeasyMetadata({ data: "json, name=locale" })
   locale?: string;
 
-  @Metadata({ data: "json, name=location" })
+  @SpeakeasyMetadata({ data: "json, name=location" })
   location?: Location;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=networkProfile" })
+  @SpeakeasyMetadata({ data: "json, name=networkProfile" })
   networkProfile?: NetworkProfile;
 
-  @Metadata({ data: "json, name=parsingResultUrl" })
+  @SpeakeasyMetadata({ data: "json, name=parsingResultUrl" })
   parsingResultUrl?: string;
 
-  @Metadata({ data: "json, name=platform" })
+  @SpeakeasyMetadata({ data: "json, name=platform" })
   platform?: DevicePlatformEnum;
 
-  @Metadata({ data: "json, name=radios" })
+  @SpeakeasyMetadata({ data: "json, name=radios" })
   radios?: Radios;
 
-  @Metadata({ data: "json, name=result" })
+  @SpeakeasyMetadata({ data: "json, name=result" })
   result?: ExecutionResultEnum;
 
-  @Metadata({ data: "json, name=resultCode" })
+  @SpeakeasyMetadata({ data: "json, name=resultCode" })
   resultCode?: ExecutionResultCodeEnum;
 
-  @Metadata({ data: "json, name=seed" })
+  @SpeakeasyMetadata({ data: "json, name=seed" })
   seed?: number;
 
-  @Metadata({ data: "json, name=skipAppResign" })
+  @SpeakeasyMetadata({ data: "json, name=skipAppResign" })
   skipAppResign?: boolean;
 
-  @Metadata({ data: "json, name=started" })
+  @SpeakeasyMetadata({ data: "json, name=started" })
   started?: Date;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: ExecutionStatusEnum;
 
-  @Metadata({ data: "json, name=stopped" })
+  @SpeakeasyMetadata({ data: "json, name=stopped" })
   stopped?: Date;
 
-  @Metadata({ data: "json, name=testSpecArn" })
+  @SpeakeasyMetadata({ data: "json, name=testSpecArn" })
   testSpecArn?: string;
 
-  @Metadata({ data: "json, name=totalJobs" })
+  @SpeakeasyMetadata({ data: "json, name=totalJobs" })
   totalJobs?: number;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: TestTypeEnum;
 
-  @Metadata({ data: "json, name=webUrl" })
+  @SpeakeasyMetadata({ data: "json, name=webUrl" })
   webUrl?: string;
 }

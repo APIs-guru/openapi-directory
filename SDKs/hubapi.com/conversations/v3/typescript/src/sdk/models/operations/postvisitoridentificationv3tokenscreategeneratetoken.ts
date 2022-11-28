@@ -1,47 +1,39 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
-export class PostVisitorIdentificationV3TokensCreateGenerateTokenSecurityOption1 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=query" })
-  hapikey: shared.SchemeHapikey;
-}
-
-
-export class PostVisitorIdentificationV3TokensCreateGenerateTokenSecurityOption2 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
-  oauth2Legacy: shared.SchemeOauth2Legacy;
-}
-
 
 export class PostVisitorIdentificationV3TokensCreateGenerateTokenSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, option=true" })
-  option1?: PostVisitorIdentificationV3TokensCreateGenerateTokenSecurityOption1;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=query" })
+  hapikey?: shared.SchemeHapikey;
 
-  @Metadata({ data: "security, option=true" })
-  option2?: PostVisitorIdentificationV3TokensCreateGenerateTokenSecurityOption2;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
+  oauth2Legacy?: shared.SchemeOauth2Legacy;
+
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  privateAppsLegacy?: shared.SchemePrivateAppsLegacy;
 }
 
 
 export class PostVisitorIdentificationV3TokensCreateGenerateTokenRequest extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: shared.IdentificationTokenGenerationRequest;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: PostVisitorIdentificationV3TokensCreateGenerateTokenSecurity;
 }
 
 
 export class PostVisitorIdentificationV3TokensCreateGenerateTokenResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   identificationTokenResponse?: shared.IdentificationTokenResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

@@ -1,38 +1,39 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetAccountsAccountIdAppsPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=account_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=account_id" })
   accountId: string;
 }
 
 
 export class GetAccountsAccountIdAppsSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=bearer" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" })
   bearerAuth: shared.SchemeBearerAuth;
 }
 
 
 export class GetAccountsAccountIdAppsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetAccountsAccountIdAppsPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: GetAccountsAccountIdAppsSecurity;
 }
 
 
 export class GetAccountsAccountIdAppsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata({ elemType: shared.AppResponse })
+  @SpeakeasyMetadata({ elemType: shared.AppResponse })
   appResponses?: shared.AppResponse[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   error?: shared.Error;
 }

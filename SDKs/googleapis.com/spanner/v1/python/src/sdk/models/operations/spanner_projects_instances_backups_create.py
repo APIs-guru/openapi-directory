@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class SpannerProjectsInstancesBackupsCreatePathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 class SpannerProjectsInstancesBackupsCreateEncryptionConfigEncryptionTypeEnum(str, Enum):
     ENCRYPTION_TYPE_UNSPECIFIED = "ENCRYPTION_TYPE_UNSPECIFIED"
@@ -34,14 +35,14 @@ class SpannerProjectsInstancesBackupsCreateQueryParams:
 
 @dataclass
 class SpannerProjectsInstancesBackupsCreateSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class SpannerProjectsInstancesBackupsCreateSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -52,15 +53,15 @@ class SpannerProjectsInstancesBackupsCreateSecurity:
 
 @dataclass
 class SpannerProjectsInstancesBackupsCreateRequest:
-    path_params: SpannerProjectsInstancesBackupsCreatePathParams = field(default=None)
-    query_params: SpannerProjectsInstancesBackupsCreateQueryParams = field(default=None)
-    request: Optional[shared.Backup] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: SpannerProjectsInstancesBackupsCreateSecurity = field(default=None)
+    path_params: SpannerProjectsInstancesBackupsCreatePathParams = field()
+    query_params: SpannerProjectsInstancesBackupsCreateQueryParams = field()
+    security: SpannerProjectsInstancesBackupsCreateSecurity = field()
+    request: Optional[shared.BackupInput] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class SpannerProjectsInstancesBackupsCreateResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     operation: Optional[shared.Operation] = field(default=None)
-    status_code: int = field(default=None)
     

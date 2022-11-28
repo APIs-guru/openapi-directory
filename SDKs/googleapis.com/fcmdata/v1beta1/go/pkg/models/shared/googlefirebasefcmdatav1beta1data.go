@@ -1,5 +1,7 @@
 package shared
 
+// GoogleFirebaseFcmDataV1beta1Data
+// Data detailing messaging delivery
 type GoogleFirebaseFcmDataV1beta1Data struct {
 	CountMessagesAccepted       *string                                                  `json:"countMessagesAccepted,omitempty"`
 	DeliveryPerformancePercents *GoogleFirebaseFcmDataV1beta1DeliveryPerformancePercents `json:"deliveryPerformancePercents,omitempty"`

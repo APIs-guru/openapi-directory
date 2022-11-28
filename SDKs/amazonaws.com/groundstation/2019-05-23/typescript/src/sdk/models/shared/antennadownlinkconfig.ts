@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SpectrumConfig } from "./spectrumconfig";
+
 
 
 // AntennaDownlinkConfig
@@ -7,6 +8,6 @@ import { SpectrumConfig } from "./spectrumconfig";
  * Information about how AWS Ground Station should configure an antenna for downlink during a contact.
 **/
 export class AntennaDownlinkConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=spectrumConfig" })
+  @SpeakeasyMetadata({ data: "json, name=spectrumConfig" })
   spectrumConfig: SpectrumConfig;
 }

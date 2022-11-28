@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // FunctionRunAsConfig
 /**
  * Specifies the user and group whose permissions are used when running the Lambda function. You can specify one or both values to override the default values. We recommend that you avoid running as root unless absolutely necessary to minimize the risk of unintended changes or malicious attacks. To run as root, you must set ''IsolationMode'' to ''NoContainer'' and update config.json in ''greengrass-root/config'' to set ''allowFunctionsToRunAsRoot'' to ''yes''.
@@ -33,11 +33,11 @@ var FunctionRunAsConfig = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Gid" }),
+        SpeakeasyMetadata({ data: "json, name=Gid" }),
         __metadata("design:type", Number)
     ], FunctionRunAsConfig.prototype, "gid", void 0);
     __decorate([
-        Metadata({ data: "json, name=Uid" }),
+        SpeakeasyMetadata({ data: "json, name=Uid" }),
         __metadata("design:type", Number)
     ], FunctionRunAsConfig.prototype, "uid", void 0);
     return FunctionRunAsConfig;

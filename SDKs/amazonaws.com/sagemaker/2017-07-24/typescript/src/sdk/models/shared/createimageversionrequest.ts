@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class CreateImageVersionRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=BaseImage" })
+  @SpeakeasyMetadata({ data: "json, name=BaseImage" })
   baseImage: string;
 
-  @Metadata({ data: "json, name=ClientToken" })
+  @SpeakeasyMetadata({ data: "json, name=ClientToken" })
   clientToken: string;
 
-  @Metadata({ data: "json, name=ImageName" })
+  @SpeakeasyMetadata({ data: "json, name=ImageName" })
   imageName: string;
 }

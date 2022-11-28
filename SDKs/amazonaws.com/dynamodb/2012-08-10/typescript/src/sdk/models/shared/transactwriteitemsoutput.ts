@@ -1,13 +1,13 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ConsumedCapacity } from "./consumedcapacity";
 import { ItemCollectionMetrics } from "./itemcollectionmetrics";
 
 
+
 export class TransactWriteItemsOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ConsumedCapacity", elemType: shared.ConsumedCapacity })
+  @SpeakeasyMetadata({ data: "json, name=ConsumedCapacity", elemType: ConsumedCapacity })
   consumedCapacity?: ConsumedCapacity[];
 
-  @Metadata({ data: "json, name=ItemCollectionMetrics", elemType: shared.ItemCollectionMetrics, elemDepth: 2 })
+  @SpeakeasyMetadata({ data: "json, name=ItemCollectionMetrics", elemType: ItemCollectionMetrics, elemDepth: 2 })
   itemCollectionMetrics?: Map<string, ItemCollectionMetrics[]>;
 }

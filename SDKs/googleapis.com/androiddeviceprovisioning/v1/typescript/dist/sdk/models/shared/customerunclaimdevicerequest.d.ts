@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { DeviceReference } from "./devicereference";
 /**
  * Request message for customer to unclaim a device.

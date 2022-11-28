@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudPaymentsResellerSubscriptionV1Amount } from "./googlecloudpaymentsresellersubscriptionv1amount";
 // GoogleCloudPaymentsResellerSubscriptionV1ProductPriceConfig
 /**
@@ -34,11 +34,11 @@ var GoogleCloudPaymentsResellerSubscriptionV1ProductPriceConfig = /** @class */ 
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=amount" }),
+        SpeakeasyMetadata({ data: "json, name=amount" }),
         __metadata("design:type", GoogleCloudPaymentsResellerSubscriptionV1Amount)
     ], GoogleCloudPaymentsResellerSubscriptionV1ProductPriceConfig.prototype, "amount", void 0);
     __decorate([
-        Metadata({ data: "json, name=regionCode" }),
+        SpeakeasyMetadata({ data: "json, name=regionCode" }),
         __metadata("design:type", String)
     ], GoogleCloudPaymentsResellerSubscriptionV1ProductPriceConfig.prototype, "regionCode", void 0);
     return GoogleCloudPaymentsResellerSubscriptionV1ProductPriceConfig;

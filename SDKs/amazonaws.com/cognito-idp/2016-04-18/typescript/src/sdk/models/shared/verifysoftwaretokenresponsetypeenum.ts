@@ -1,6 +1,7 @@
 
 
+
 export enum VerifySoftwareTokenResponseTypeEnum {
-    Success = "SUCCESS"
-,    Error = "ERROR"
+    Success = "SUCCESS",
+    Error = "ERROR"
 }

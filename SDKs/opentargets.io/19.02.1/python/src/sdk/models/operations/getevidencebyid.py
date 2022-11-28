@@ -4,16 +4,16 @@ from dataclasses import dataclass, field
 
 @dataclass
 class GetEvidenceByIDQueryParams:
-    id: str = field(default=None, metadata={'query_param': { 'field_name': 'id', 'style': 'form', 'explode': True }})
+    id: str = field(metadata={'query_param': { 'field_name': 'id', 'style': 'form', 'explode': True }})
     
 
 @dataclass
 class GetEvidenceByIDRequest:
-    query_params: GetEvidenceByIDQueryParams = field(default=None)
+    query_params: GetEvidenceByIDQueryParams = field()
     
 
 @dataclass
 class GetEvidenceByIDResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

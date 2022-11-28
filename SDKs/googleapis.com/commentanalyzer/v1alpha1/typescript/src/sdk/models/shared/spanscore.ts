@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Score } from "./score";
+
 
 
 // SpanScore
@@ -7,12 +8,12 @@ import { Score } from "./score";
  * This is a single score for a given span of text.
 **/
 export class SpanScore extends SpeakeasyBase {
-  @Metadata({ data: "json, name=begin" })
+  @SpeakeasyMetadata({ data: "json, name=begin" })
   begin?: number;
 
-  @Metadata({ data: "json, name=end" })
+  @SpeakeasyMetadata({ data: "json, name=end" })
   end?: number;
 
-  @Metadata({ data: "json, name=score" })
+  @SpeakeasyMetadata({ data: "json, name=score" })
   score?: Score;
 }

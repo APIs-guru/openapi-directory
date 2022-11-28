@@ -23,10 +23,14 @@ type GetObjectAttributesHeaders struct {
 	XAmzDataPartition    string                                       `header:"style=simple,explode=false,name=x-amz-data-partition"`
 }
 
+// GetObjectAttributesRequestBodyObjectReference
+// The reference that identifies an object.
 type GetObjectAttributesRequestBodyObjectReference struct {
 	Selector *string `json:"Selector,omitempty"`
 }
 
+// GetObjectAttributesRequestBodySchemaFacet
+// A facet.
 type GetObjectAttributesRequestBodySchemaFacet struct {
 	FacetName *string `json:"FacetName,omitempty"`
 	SchemaArn *string `json:"SchemaArn,omitempty"`

@@ -1,14 +1,15 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import obactiveorhistoriccurrencyandamount
-from . import obexternallimittype1code_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ObCreditLine1:
-    amount: Optional[obactiveorhistoriccurrencyandamount.ObActiveOrHistoricCurrencyAndAmount] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Amount' }})
-    included: bool = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Included' }})
-    type: Optional[obexternallimittype1code_enum.ObExternalLimitType1CodeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Type' }})
+    included: bool = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Included') }})
+    amount: Optional[ObActiveOrHistoricCurrencyAndAmount] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Amount') }})
+    type: Optional[ObExternalLimitType1CodeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Type') }})
     

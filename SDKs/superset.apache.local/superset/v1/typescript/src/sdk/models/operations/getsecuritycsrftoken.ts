@@ -1,50 +1,51 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetSecurityCsrfTokenSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=bearer" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" })
   jwt: shared.SchemeJwt;
 }
 
 
-export class GetSecurityCsrfTokenRequest extends SpeakeasyBase {
-  @Metadata()
-  security: GetSecurityCsrfTokenSecurity;
-}
-
-
 export class GetSecurityCsrfToken200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=result" })
+  @SpeakeasyMetadata({ data: "json, name=result" })
   result?: string;
 }
 
 
 export class GetSecurityCsrfToken401ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class GetSecurityCsrfToken500ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
+export class GetSecurityCsrfTokenRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  security: GetSecurityCsrfTokenSecurity;
+}
+
+
 export class GetSecurityCsrfTokenResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getSecurityCsrfToken200ApplicationJsonObject?: GetSecurityCsrfToken200ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getSecurityCsrfToken401ApplicationJsonObject?: GetSecurityCsrfToken401ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getSecurityCsrfToken500ApplicationJsonObject?: GetSecurityCsrfToken500ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

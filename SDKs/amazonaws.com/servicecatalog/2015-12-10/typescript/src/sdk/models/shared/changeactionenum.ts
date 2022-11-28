@@ -1,7 +1,8 @@
 
 
+
 export enum ChangeActionEnum {
-    Add = "ADD"
-,    Modify = "MODIFY"
-,    Remove = "REMOVE"
+    Add = "ADD",
+    Modify = "MODIFY",
+    Remove = "REMOVE"
 }

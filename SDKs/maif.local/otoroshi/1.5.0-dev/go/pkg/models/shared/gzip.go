@@ -1,5 +1,7 @@
 package shared
 
+// Gzip
+// Configuration for gzip of service responses
 type Gzip struct {
 	BlackList        []string `json:"blackList"`
 	BufferSize       int64    `json:"bufferSize"`

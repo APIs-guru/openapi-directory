@@ -1,5 +1,5 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
-export declare const GETHEARTBEAT_SERVERS: string[];
+import { SpeakeasyBase } from "../../../internal/utils";
+export declare const GetHeartbeatServerList: readonly ["http://localhost:8080"];
 export declare class GetHeartbeatRequest extends SpeakeasyBase {
     serverUrl?: string;
 }
